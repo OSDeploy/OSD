@@ -1,17 +1,13 @@
-function Start-OSDWinPE {
+function Get-OSDWinPE {
     [CmdletBinding()]
     Param (
-        [Parameter(Position = 0)]
-        [ValidateSet(`
-            'DisableFirewall',`
-            'EnableFirewall',`
-            'InitializeNetwork',`
-            'InitializeNetwork NoWait',`
-            'Reboot',`
-            'Shutdown',`
-            'UpdateBootInfo'`
-        )]
-        [string]$Action
+        [switch]$DisableFirewall,
+        [switch]$EnableFirewall,
+        [switch]$InitializeNetwork,
+        [switch]$InitializeNetworkNoWait,
+        [switch]$Reboot,
+        [switch]$Shutdown,
+        [switch]$UpdateBootInfo
     )
 
     if ($env:SystemDrive -eq 'X:') {
@@ -20,47 +16,40 @@ function Start-OSDWinPE {
         Write-Warning 'OSDWinPE: This function requires WinPE'
         Break
     }
-
-    if ($Action -eq 'DisableFirewall') {
-        Write-Verbose 'wpeutil DisableFirewall'
+    if ($UpdateBootInfo.IsPresent) {
+        Write-Verbose 'wpeutil UpdateBootInfo'
         Write-Verbose 'https://docs.microsoft.com/en-us/windows-hardware/manufacture/desktop/wpeutil-command-line-options'
-        Start-Process -WindowStyle Hidden -FilePath wpeutil -ArgumentList 'DisableFirewall' -Wait
+        Start-Process -WindowStyle Hidden -FilePath wpeutil -ArgumentList 'UpdateBootInfo'
     }
-
-    if ($Action -eq 'EnableFirewall') {
-        Write-Verbose 'wpeutil EnableFirewall'
-        Write-Verbose 'https://docs.microsoft.com/en-us/windows-hardware/manufacture/desktop/wpeutil-command-line-options'
-        Start-Process -WindowStyle Hidden -FilePath wpeutil -ArgumentList 'DisableFirewall' -Wait
-    }
-
-    if ($Action -eq 'InitializeNetwork') {
+    if ($InitializeNetwork.IsPresent) {
         Write-Verbose 'wpeinit InitializeNetwork'
         Write-Verbose 'https://docs.microsoft.com/en-us/windows-hardware/manufacture/desktop/wpeutil-command-line-options'
         Start-Process -WindowStyle Hidden -FilePath wpeinit -ArgumentList 'InitializeNetwork' -Wait
         Start-Sleep -Seconds 10
     }
-
-    if ($Action -eq 'InitializeNetwork NoWait') {
+    if ($InitializeNetworkNoWait.IsPresent) {
         Write-Verbose 'wpeutil InitializeNetwork /NoWait'
         Write-Verbose 'https://docs.microsoft.com/en-us/windows-hardware/manufacture/desktop/wpeutil-command-line-options'
         Start-Process -WindowStyle Hidden -FilePath wpeinit -ArgumentList ('InitializeNetwork','/NoWait')
     }
-
-    if ($Action -eq 'Reboot') {
+    if ($DisableFirewall.IsPresent) {
+        Write-Verbose 'wpeutil DisableFirewall'
+        Write-Verbose 'https://docs.microsoft.com/en-us/windows-hardware/manufacture/desktop/wpeutil-command-line-options'
+        Start-Process -WindowStyle Hidden -FilePath wpeutil -ArgumentList 'DisableFirewall' -Wait
+    }
+    if ($EnableFirewall.IsPresent) {
+        Write-Verbose 'wpeutil EnableFirewall'
+        Write-Verbose 'https://docs.microsoft.com/en-us/windows-hardware/manufacture/desktop/wpeutil-command-line-options'
+        Start-Process -WindowStyle Hidden -FilePath wpeutil -ArgumentList 'DisableFirewall' -Wait
+    }
+    if ($Reboot.IsPresent) {
         Write-Verbose 'wpeutil Reboot'
         Write-Verbose 'https://docs.microsoft.com/en-us/windows-hardware/manufacture/desktop/wpeutil-command-line-options'
         Start-Process -WindowStyle Hidden -FilePath wpeutil -ArgumentList 'Reboot'
     }
-
-    if ($Action -eq 'Shutdown') {
+    if ($Shutdown.IsPresent) {
         Write-Verbose 'wpeutil Shutdown'
         Write-Verbose 'https://docs.microsoft.com/en-us/windows-hardware/manufacture/desktop/wpeutil-command-line-options'
         Start-Process -WindowStyle Hidden -FilePath wpeutil -ArgumentList 'Shutdown'
-    }
-
-    if ($Action -eq 'UpdateBootInfo') {
-        Write-Verbose 'wpeutil UpdateBootInfo'
-        Write-Verbose 'https://docs.microsoft.com/en-us/windows-hardware/manufacture/desktop/wpeutil-command-line-options'
-        Start-Process -WindowStyle Hidden -FilePath wpeutil -ArgumentList 'UpdateBootInfo'
     }
 }

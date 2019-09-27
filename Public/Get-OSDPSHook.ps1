@@ -1,4 +1,4 @@
-function Invoke-OSDPSHook {
+function Get-OSDPSHook {
     [CmdletBinding()]
     Param (
         [string]$FileName = 'OSDPSHook.ps1',

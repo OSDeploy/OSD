@@ -1,27 +1,10 @@
 function Get-OSD {
     [CmdletBinding()]
-    Param (
-        [switch]$Gather,
-        [switch]$HighPerformance
-    )
+    Param ()
     #==================================================
     #   Defaults
     #==================================================
     $Info = $true
-    #==================================================
-    #   Gather
-    #==================================================
-    if ($Gather.IsPresent) {
-        Get-OSDGather -Verbose
-        $Info = $false
-    }
-    #==================================================
-    #   HighPerformance
-    #==================================================
-    if ($HighPerformance.IsPresent) {
-        Set-OSDPower -Property High -Verbose
-        $Info = $false
-    }
     #==================================================
     #   Info
     #==================================================
