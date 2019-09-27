@@ -29,7 +29,7 @@ Description = @'
 https://osd.osdeploy.com/
 OSD PowerShell Module is a collection of OSD shared functions.  It is currently under development and is for Testing only
 
-OSD Contributors
+OSD Module Collaborators
 Andrew Jimenez | @AndrewJimenez_
 Ben Whitmore | @byteben
 Jerome Bezet-Torres | @JM2K69

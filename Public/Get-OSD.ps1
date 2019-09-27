@@ -34,7 +34,7 @@ function Get-OSD {
         Write-Host 'PowerShell Gallery Update to the latest version:' -ForegroundColor Green
         Write-Host 'Update-Module OSD -Force'
         Write-Host ""
-        Write-Host "#OSDModule Contributors:" -ForegroundColor Green
+        Write-Host "#OSDModule Collaborators:" -ForegroundColor Green
         Write-Host "Andrew Jimenez | " -NoNewline
         Write-Host "@AndrewJimenez_" -ForegroundColor Cyan
     
