@@ -3,11 +3,11 @@ function Get-OSDGather {
     Param ()
 
     if ($VerbosePreference -eq 'Continue') {$VerboseParam = $true}
-    #======================================================================================
+    #==================================================
     #	OSDPhase
-    #======================================================================================
+    #==================================================
     if (Test-Path 'HKLM:\SYSTEM\Setup') {
-        Write-Verbose "======================================================================================"
+        Write-Verbose "=================================================="
         $HKLMSystemSetup = Get-ItemProperty -Path 'HKLM:\SYSTEM\Setup'
 
         [int]$Global:SetupPhase = $HKLMSystemSetup.SetupPhase
@@ -39,38 +39,38 @@ function Get-OSDGather {
         if ($Global:OOBEInProgress -eq 1) {$Global:OSDPhase = 'OOBE'}
         Write-Verbose "Property OSDPhase: $Global:OSDPhase"
     }
-    #======================================================================================
+    #==================================================
     #   IsAdmin
-    #======================================================================================
-    Write-Verbose "======================================================================================"
+    #==================================================
+    Write-Verbose "=================================================="
     $Global:IsAdmin = ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] 'Administrator')
     Write-Verbose "Property IsAdmin: $Global:IsAdmin"
-    #======================================================================================
+    #==================================================
     #   IsWinPE
-    #======================================================================================
+    #==================================================
     $Global:IsWinPE = $env:SystemDrive -eq 'X:'
     Write-Verbose "Property IsWinPE: $Global:IsWinPE"
-    #======================================================================================
+    #==================================================
     #   IsWinSE
-    #======================================================================================
+    #==================================================
     if (($Global:IsWinPE -eq $true) -and (Test-Path 'X:\Setup.exe')) {
         $Global:IsWinSE = $true
     } else {
         $Global:IsWinSE = $false
     }
     Write-Verbose "Property IsWinSE: $Global:IsWinSE"
-    #======================================================================================
+    #==================================================
     #   IsWinOS
-    #======================================================================================
+    #==================================================
     if ($Global:IsWinPE -eq $true) {
         $Global:IsWinOS = $false
     } else {
         $Global:IsWinOS = $true
     }
     Write-Verbose "Property IsWinOS: $Global:IsWinOS"
-    #======================================================================================
+    #==================================================
     #	IsUEFI
-    #======================================================================================
+    #==================================================
     if ($Global:IsWinPE) {
         $Global:IsUEFI = (Get-ItemProperty -Path HKLM:\System\CurrentControlSet\Control).PEFirmwareType -eq 2
         Write-Verbose "Property IsUEFI: $Global:IsUEFI"
@@ -78,10 +78,10 @@ function Get-OSDGather {
         $Global:IsUEFI = $false
         Write-Verbose "Property IsUEFI: $Global:IsUEFI"
     }
-    #======================================================================================
+    #==================================================
     #   IsLaptop IsDesktop
-    #======================================================================================
-    Write-Verbose "======================================================================================"
+    #==================================================
+    Write-Verbose "=================================================="
     $VerbosePreference = 'SilentlyContinue'
     $ChassisTypes = (Get-CimInstance -ClassName Win32_SystemEnclosure).ChassisTypes
     if ($VerboseParam -eq $true) {$VerbosePreference = 'Continue'}
@@ -97,9 +97,9 @@ function Get-OSDGather {
         $Global:IsLaptop = $false
         Write-Verbose "Property IsLaptop: $Global:IsLaptop"
     }
-    #======================================================================================
+    #==================================================
     #	Customize: Increase the Console Screen Buffer size
-    #======================================================================================
+    #==================================================
     if (!(Test-Path "HKCU:\Console")) {
         #Write-Host "Increase Console Screen Buffer" -ForegroundColor Gray
         New-Item -Path "HKCU:\Console" -Force | Out-Null
