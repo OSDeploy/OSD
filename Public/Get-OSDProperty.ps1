@@ -7,7 +7,7 @@ function Get-OSDProperty {
         'BuildNumber',`
         'Caption',`
         'ChassisSKUNumber',`
-        'ComputerName',`
+        'Name',`
         'InstallDate',`
         'Locale',`
         'Make',`
@@ -31,10 +31,10 @@ function Get-OSDProperty {
     #===================================================================================================
     #   Win32_ComputerSystem
     #===================================================================================================
-    $Win32ComputerSystem = Get-OSDWMI -Property ComputerSystem
+    $Win32ComputerSystem = (Get-CimInstance -ClassName Win32_ComputerSystem | Select-Object -Property *)
 
     if ($Property -eq 'ChassisSKUNumber') {$Win32ComputerSystem.ChassisSKUNumber}
-    if ($Property -eq 'ComputerName') {$Win32ComputerSystem.ComputerName}
+    if ($Property -eq 'Name') {$Win32ComputerSystem.Name}
     if ($Property -eq 'Make') {$Win32ComputerSystem.Manufacturer}
     if ($Property -eq 'Manufacturer') {$Win32ComputerSystem.Manufacturer}
     if ($Property -eq 'Model') {$Win32ComputerSystem.Model}
@@ -43,7 +43,7 @@ function Get-OSDProperty {
     #===================================================================================================
     #   Win32_OperatingSystem
     #===================================================================================================
-    $Win32OperatingSystem = Get-OSDWMI -Property OperatingSystem
+    $Win32OperatingSystem = (Get-CimInstance -ClassName Win32_OperatingSystem | Select-Object -Property *)
 
     if ($Property -eq 'BootDevice') {$Win32OperatingSystem.BootDevice}
     if ($Property -eq 'BuildNumber') {$Win32OperatingSystem.BuildNumber}
@@ -78,7 +78,7 @@ function Get-OSDProperty {
     }
 
     if ($Property -eq 'WindowsUbr') {
-        Write-Verbose "Get-OSDWindowsUbr: What is the Windows UBR?"
+        Write-Verbose "WindowsUbr: What is the Windows UBR?"
         Write-Verbose "(Get-ItemProperty -Path 'HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion').UBR"
     
         $Value = (Get-ItemProperty -Path 'HKLM:\Software\Microsoft\Windows NT\CurrentVersion').UBR

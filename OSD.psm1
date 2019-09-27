@@ -12,3 +12,11 @@ foreach ($Import in @($OSDPublicFunctions + $OSDPrivateFunctions)) {
 
 Export-ModuleMember -Function $OSDPublicFunctions.BaseName
 #===================================================================================================
+#   Start-OSDWinPE
+#===================================================================================================
+try {New-Alias -Name WinPE -Value Start-OSDWinPE -Force -ErrorAction SilentlyContinue}
+catch {}
+#===================================================================================================
+#   Export-ModuleMember
+#===================================================================================================
+Export-ModuleMember -Function * -Alias *
