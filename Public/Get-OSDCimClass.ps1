@@ -18,7 +18,6 @@ function Get-OSDCimClass {
         'MemoryDevice',`
         'NetworkAdapter',`
         'NetworkAdapterConfiguration',`
-        'NetworkConnection',`
         'OperatingSystem',`
         'OSRecoveryConfiguration',`
         'PhysicalMedia',`
@@ -35,7 +34,6 @@ function Get-OSDCimClass {
         'SystemDesktop',`
         'SystemPartitions',`
         'UserDesktop',`
-        'VideoConfiguration',`
         'VideoController',`
         'VideoSettings',`
         'Volume'`
