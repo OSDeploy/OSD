@@ -5,25 +5,70 @@ function Get-OSDValue {
         [ValidateSet(`
             'IsAdmin',`
             'IsWinOS',`
-            'IsWinPE',`
-            'IsDesktop','IsLaptop','IsServer','IsSFF','IsTablet'
+            'IsWinPE','IsWinSE',`
+            'IsDesktop','IsLaptop','IsServer','IsSFF','IsTablet',`
+            'IsUEFI','IsServerOS','IsServerCoreOS'
         )]
         [string]$Property
     )
     #======================================================================================================
     #   IsAdmin
     #======================================================================================================
-    if ($Property -eq 'IsAdmin') {
-        Return ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] 'Administrator')
+    $IsAdmin = ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] 'Administrator')
+    if ($Property -eq 'IsAdmin') {Return $IsAdmin}
+    #======================================================================================================
+    #   IsWinPE IsWinSE
+    #======================================================================================================
+    $IsWinPE = $env:SystemDrive -eq 'X:'
+    $IsWinSE = ($IsWinPE -and (Test-Path 'X:\Setup.exe'))
+
+    if ($Property -eq 'IsWinPE') {Return $IsWinPE}
+    if ($Property -eq 'IsWinSE') {Return $IsWinSE}
+    #======================================================================================================
+    #   IsUEFI
+    #======================================================================================================
+    if ($Property -eq 'IsUEFI') {
+        if ($IsWinPE) {
+            if ((Get-ItemProperty -Path HKLM:\System\CurrentControlSet\Control).PEFirmwareType -eq 2) {
+                $IsUEFI = $true
+            } else {
+                $IsUEFI = $false
+            }
+        } else {
+            if ((Get-ItemProperty HKLM:\System\CurrentControlSet\control\SecureBoot\State -ErrorAction SilentlyContinue) -eq $null ) {
+                $IsUEFI = $false
+            } else {
+                $IsUEFI = $true
+            }
+        }
+        Return $IsUEFI
     }
     #======================================================================================================
-    #   IsWinOS
+    #   IsServerCoreOS
     #======================================================================================================
-    if ($Property -eq 'IsWinOS') { Return $env:SystemDrive -ne 'X:' }
-    #======================================================================================================
-    #   IsWinPE
-    #======================================================================================================
-    if ($Property -eq 'IsWinPE') { Return $env:SystemDrive -eq 'X:' }
+    if ($Property -eq 'IsWinOS' -or$Property -eq 'IsServerOS' -or $Property -eq 'IsServerCoreOS') {
+        $IsWinOS = $true
+        $IsServerOS = $false
+        $IsServerCoreOS = $false
+
+        if (!($env:SystemDrive -ne 'X:')) {
+            if (!(Test-Path "$env:windir\explorer.exe")) {
+                $IsWinOS = $false
+                $IsServerCoreOS = $true
+            }
+
+            if (Test-Path HKLM:\System\CurrentControlSet\Control\ProductOptions\ProductType) {
+                $productType = Get-Item HKLM:System\CurrentControlSet\Control\ProductOptions\ProductType
+                if ($productType -eq "ServerNT" -or $productType -eq "LanmanNT") {
+                    $IsWinOS = $false
+                    $IsServerOS = $true
+                }
+            }
+        }
+        if ($Property -eq 'IsWinOS') {Return $IsWinOS}
+        if ($Property -eq 'IsServerOS') {Return $IsServerOS}
+        if ($Property -eq 'IsServerCoreOS') {Return $IsServerCoreOS}
+    }
     #======================================================================================================
     #   Win32_SystemEnclosure
     #   Credit FriendsOfMDT         https://github.com/FriendsOfMDT/PSD
@@ -51,7 +96,7 @@ function Get-OSDValue {
 
 
 
-
+    
 
 
 
@@ -68,8 +113,8 @@ function Get-OSDValue {
 
 
         # Look up OS details
-        $IsServerCoreOS = $false
-        $IsServerOS = $false
+        
+        
     
         Get-CimInstance -ClassName Win32_OperatingSystem | ForEach-Object { $OSCurrentVersion = $_.Version; $OSCurrentBuild = $_.BuildNumber }
 
@@ -167,7 +212,7 @@ function Get-OSDValue {
     #	IsUEFI
     #======================================================================================================
     if ($Property -eq 'IsUEFI') {
-        if ($env:SystemDrive -eq 'X:') {
+        if ($IsWinPE) {
             $Value = (Get-ItemProperty -Path HKLM:\System\CurrentControlSet\Control).PEFirmwareType -eq 2
             $Global:IsUEFI = $PSDefaultParameterValues
             Return $Value
