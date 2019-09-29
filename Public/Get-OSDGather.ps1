@@ -4,37 +4,9 @@ function Get-OSDGather {
         [switch]$Full
     )
     #===================================================================================================
-    #	System Setup
-    #===================================================================================================
-<#     if (Test-Path 'HKLM:\SYSTEM\Setup') {
-        $HKLMSystemSetup = Get-ItemProperty -Path 'HKLM:\SYSTEM\Setup'
-
-        [int]$SetupPhase = $HKLMSystemSetup.SetupPhase
-        if ($null -eq $SetupPhase) {$SetupPhase = 0}
-
-        [int]$SetupType = $HKLMSystemSetup.SetupType
-        if ($null -eq $SetupType) {$SetupType = 0}
-
-        [int]$SystemSetupInProgress = $HKLMSystemSetup.SystemSetupInProgress
-        if ($null -eq $SetupPhase) {$SetupPhase = 0}
-
-        [int]$FactoryPreInstallInProgress = $HKLMSystemSetup.FactoryPreInstallInProgress
-        if ($null -eq $FactoryPreInstallInProgress) {$FactoryPreInstallInProgress = 0}
-
-        [int]$OOBEInProgress = $HKLMSystemSetup.OOBEInProgress
-        if ($null -eq $OOBEInProgress) {$OOBEInProgress = 0}
-
-        #$WorkingDirectory = $HKLMSystemSetup.WorkingDirectory
-        #Write-Verbose "Property WorkingDirectory: $WorkingDirectory"
-
-        if ($SystemSetupInProgress -eq 0) {$OSDPhase = 'Windows'}
-        if ($FactoryPreInstallInProgress -eq 1) {$OSDPhase = 'WinXE'}
-        if ($SetupPhase -eq 4) {$OSDPhase = 'Specialize'}
-        if ($OOBEInProgress -eq 1) {$OSDPhase = 'OOBE'}
-    } #>
-    #===================================================================================================
     #   Get-CimInstance
     #===================================================================================================
+    $Win32Battery = (Get-CimInstance -ClassName Win32_Battery| Select-Object -Property *)
     $Win32BIOS = (Get-CimInstance -ClassName Win32_BIOS | Select-Object -Property *)
     $Win32BaseBoard = (Get-CimInstance -ClassName Win32_BaseBoard | Select-Object -Property *)
     $Win32ComputerSystem = (Get-CimInstance -ClassName Win32_ComputerSystem | Select-Object -Property *)
@@ -43,6 +15,14 @@ function Get-OSDGather {
     $Win32NetworkAdapterConfiguration = (Get-CimInstance -ClassName Win32_NetworkAdapterConfiguration | Select-Object -Property *)
     $Win32Processor = (Get-CimInstance -ClassName Win32_Processor | Select-Object -Property *)
     $Win32SystemEnclosure = (Get-CimInstance -ClassName Win32_SystemEnclosure | Select-Object -Property *)
+    #===================================================================================================
+    #   Registry
+    #===================================================================================================
+    $RegCurrentVersion = Get-ItemProperty -Path 'HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion'
+    $RegCurrentVersion.DigitalProductId = $null
+    $RegCurrentVersion.DigitalProductId4 = $null
+    $RegSystemControl = Get-ItemProperty -Path 'HKLM:\SYSTEM\ControlSet001\Control'
+    $RegSystemSetup = Get-ItemProperty -Path 'HKLM:\SYSTEM\Setup'
     #===================================================================================================
     #   Architecture
     #===================================================================================================
@@ -66,7 +46,7 @@ function Get-OSDGather {
     $ipList = @()
     $macList = @()
     $gwList = @()
-    Get-WmiObject -Class Win32_NetworkAdapterConfiguration -Filter "IPEnabled = 1" | ForEach-Object {
+    $Win32NetworkAdapterConfiguration | Where-Object {$_.IpEnabled -eq $true} | ForEach-Object {
         $_.IPAddress | ForEach-Object {$ipList += $_ }
         $_.MacAddress | ForEach-Object {$macList += $_ }
         if ($_.DefaultGateway) {$_.DefaultGateway | ForEach-Object {$gwList += $_ }}
@@ -74,25 +54,6 @@ function Get-OSDGather {
     $IPAddress = $ipList
     $MacAddress = $macList
     $DefaultGateway = $gwList
-    #===================================================================================================
-    #   IsOnBattery
-    #   Credit FriendsOfMDT         https://github.com/FriendsOfMDT/PSD
-    #===================================================================================================
-<#     $bFoundAC = $false
-    $bOnBattery = $false
-	$bFoundBattery = $false
-    foreach($Battery in (Get-WmiObject -Class Win32_Battery))
-    {
-        $bFoundBattery = $true
-        if ($Battery.BatteryStatus -eq "2")
-        {
-            $bFoundAC = $true
-        }
-    }
-    If ($bFoundBattery -and !$bFoundAC)
-    {
-        $tsenv.IsOnBattery = $true
-    } #>
     #===================================================================================================
     #   IsUEFI
     #   Credit FriendsOfMDT         https://github.com/FriendsOfMDT/PSD
@@ -106,134 +67,110 @@ function Get-OSDGather {
     {
         $tsenv:IsUEFI = "False"
     } #>
-
-
+    #===================================================================================================
+    #   IsVM
+    #===================================================================================================
+    $IsVM = ($Win32ComputerSystem.Model -match 'Virtual') -or ($Win32ComputerSystem.Model -match 'VMware')
+    #===================================================================================================
     if (!($Full.IsPresent)) {
         $OSDGather = [ordered]@{
+            #===================================================================================================
+            #   Is
+            #===================================================================================================
             IsAdmin = Get-OSDValue -Property IsAdmin
-
-            IsLaptop = Get-OSDValue -Property IsLaptop
             IsDesktop = Get-OSDValue -Property IsDesktop
-            IsServer = Get-OSDValue -Property IsServer
+            IsLaptop = Get-OSDValue -Property IsLaptop
+            IsOnBattery = $Win32Battery.BatteryStatus -eq 2
             IsSFF = Get-OSDValue -Property IsSFF
-            IsTablet = Get-OSDValue -Property IsTablet
-
-            IsUEFI = Get-OSDValue -Property IsUEFI
-            #===================================================================================================
-            #   Operating System
-            #===================================================================================================
-            IsWinPE = Get-OSDValue -Property IsWinPE
-            IsWinSE = Get-OSDValue -Property IsWinSE
-            IsWinOS = Get-OSDValue -Property IsWinOS
-            IsServerOS = Get-OSDValue -Property IsServerOS
+            IsServer = Get-OSDValue -Property IsServer
             IsServerCoreOS = Get-OSDValue -Property IsServerCoreOS
-
+            IsServerOS = Get-OSDValue -Property IsServerOS
+            IsTablet = Get-OSDValue -Property IsTablet
+            IsUEFI = Get-OSDValue -Property IsUEFI
+            IsVM = ($Win32ComputerSystem.Model -match 'Virtual') -or ($Win32ComputerSystem.Model -match 'VMware')
+            IsWinOS = $env:SystemDrive -ne 'X:'
+            IsWinPE = $env:SystemDrive -eq 'X:'
+            IsWinSE = Get-OSDValue -Property IsWinSE
+            #===================================================================================================
+            #   Not Is
+            #===================================================================================================
             Architecture = $Architecture
-            
-            #===================================================================================================
-            #   BaseBoard
-            #===================================================================================================
-            Product = $Win32BaseBoard.Product
-            #===================================================================================================
-            #   ComputerSystem
-            #===================================================================================================
-            Make = $Win32ComputerSystem.Manufacturer
-            Manufacturer = $Win32ComputerSystem.Manufacturer
-            Model = $Win32ComputerSystem.Model
+            AssetTag = $Win32SystemEnclosure.SMBIOSAssetTag.Trim()
+            ChassisTypes = $Win32SystemEnclosure.ChassisTypes
+            Make = $Win32ComputerSystem.Manufacturer.Trim()
+            Manufacturer = $Win32ComputerSystem.Manufacturer.Trim()
             Memory = [int] ($Win32ComputerSystem.TotalPhysicalMemory / 1024 / 1024)
-            #===================================================================================================
-            #   ComputerSystemProduct
-            #===================================================================================================
-            UUID = $Win32ComputerSystemProduct.UUID
-            #===================================================================================================
-            #   System
-            #===================================================================================================
-            SerialNumber = $Win32BIOS.SerialNumber.Trim()
-            #===================================================================================================
-            #   Processor
-            #===================================================================================================
+            Model = $Win32ComputerSystem.Model.Trim()
+            OSCurrentBuild = $Win32OperatingSystem.BuildNumber
+            OSCurrentVersion = $Win32OperatingSystem.Version
             ProcessorSpeed = $Win32Processor.MaxClockSpeed
+            Product = $Win32BaseBoard.Product
+            SerialNumber = $Win32BIOS.SerialNumber.Trim()
             SupportsSLAT = $Win32Processor.SecondLevelAddressTranslationExtensions
+            UUID = $Win32ComputerSystemProduct.UUID
             #===================================================================================================
             #   Network
             #===================================================================================================
+            DefaultGateway = $DefaultGateway
             IPAddress = $IPAddress
             MacAddress = $MacAddress
-            DefaultGateway = $DefaultGateway
-            #===================================================================================================
-            #   SystemSetup
-            #===================================================================================================
-<#             OSDPhase = $OSDPhase
-            SetupPhase = $SetupPhase
-            SetupType = $SetupType
-            SystemSetupInProgress = $SystemSetupInProgress
-            FactoryPreInstallInProgress = $FactoryPreInstallInProgress
-            OOBEInProgress = $OOBEInProgress #>
-            #===================================================================================================
-            #   Win32_OperatingSystem
-            #===================================================================================================
-            OSCurrentVersion = $Win32OperatingSystem.Version
-            OSCurrentBuild = $Win32OperatingSystem.BuildNumber
-            #===================================================================================================
-            #   Win32_SystemEnclosure
-            #===================================================================================================
-            AssetTag = $Win32SystemEnclosure.SMBIOSAssetTag.Trim()
-            ChassisTypes = $Win32SystemEnclosure.ChassisTypes
             #===================================================================================================
             #   Registry
             #===================================================================================================
-            RegCurrentVersion = Get-ItemProperty -Path 'HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion'
-            RegSystemControl = Get-ItemProperty -Path 'HKLM:\SYSTEM\ControlSet001\Control'
-            RegSystemSetup = Get-ItemProperty -Path 'HKLM:\SYSTEM\Setup'
+            RegCurrentVersion = $RegCurrentVersion
+            RegSystemControl = $RegSystemControl
+            RegSystemSetup = $RegSystemSetup
         }
     }
 
     if ($Full.IsPresent) {
         $OSDGather = [ordered]@{
+            #===================================================================================================
+            #   Is
+            #===================================================================================================
             IsAdmin = Get-OSDValue -Property IsAdmin
-
-            IsLaptop = Get-OSDValue -Property IsLaptop
             IsDesktop = Get-OSDValue -Property IsDesktop
-            IsServer = Get-OSDValue -Property IsServer
+            IsLaptop = Get-OSDValue -Property IsLaptop
+            IsOnBattery = ($Win32Battery.BatteryStatus -eq 2)
             IsSFF = Get-OSDValue -Property IsSFF
+            IsServer = Get-OSDValue -Property IsServer
+            IsServerCoreOS = Get-OSDValue -Property IsServerCoreOS
+            IsServerOS = Get-OSDValue -Property IsServerOS
             IsTablet = Get-OSDValue -Property IsTablet
-
             IsUEFI = Get-OSDValue -Property IsUEFI
-
+            IsVM = $IsVM
+            IsWinOS = Get-OSDValue -Property IsWinOS
             IsWinPE = Get-OSDValue -Property IsWinPE
             IsWinSE = Get-OSDValue -Property IsWinSE
-            IsWinOS = Get-OSDValue -Property IsWinOS
-            IsServerOS = Get-OSDValue -Property IsServerOS
-            IsServerCoreOS = Get-OSDValue -Property IsServerCoreOS
             #===================================================================================================
-            #   SystemSetup
+            #   Not Is
             #===================================================================================================
-<#             OSDPhase = $OSDPhase
-            SetupPhase = $SetupPhase
-            SetupType = $SetupType
-            SystemSetupInProgress = $SystemSetupInProgress
-            FactoryPreInstallInProgress = $FactoryPreInstallInProgress
-            OOBEInProgress = $OOBEInProgress #>
-            #===================================================================================================
-            #   Win32_ComputerSystem
-            #===================================================================================================
-
-            #===================================================================================================
-            #   Win32_OperatingSystem
-            #===================================================================================================
-            OSCurrentVersion = $Win32OperatingSystem.Version
-            OSCurrentBuild = $Win32OperatingSystem.BuildNumber
-            #===================================================================================================
-            #   Win32_SystemEnclosure
-            #===================================================================================================
+            Architecture = $Architecture
             AssetTag = $Win32SystemEnclosure.SMBIOSAssetTag.Trim()
             ChassisTypes = $Win32SystemEnclosure.ChassisTypes
+            Make = $Win32ComputerSystem.Manufacturer.Trim()
+            Manufacturer = $Win32ComputerSystem.Manufacturer.Trim()
+            Memory = [int] ($Win32ComputerSystem.TotalPhysicalMemory / 1024 / 1024)
+            Model = $Win32ComputerSystem.Model.Trim()
+            OSCurrentBuild = $Win32OperatingSystem.BuildNumber
+            OSCurrentVersion = $Win32OperatingSystem.Version
+            ProcessorSpeed = $Win32Processor.MaxClockSpeed
+            Product = $Win32BaseBoard.Product
+            SerialNumber = $Win32BIOS.SerialNumber.Trim()
+            SupportsSLAT = $Win32Processor.SecondLevelAddressTranslationExtensions
+            UUID = $Win32ComputerSystemProduct.UUID
+            #===================================================================================================
+            #   Network
+            #===================================================================================================
+            DefaultGateway = $DefaultGateway
+            IPAddress = $IPAddress
+            MacAddress = $MacAddress
             #===================================================================================================
             #   Registry
             #===================================================================================================
-            RegCurrentVersion = Get-ItemProperty -Path 'HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion'
-            RegSystemControl = Get-ItemProperty -Path 'HKLM:\SYSTEM\ControlSet001\Control'
-            RegSystemSetup = Get-ItemProperty -Path 'HKLM:\SYSTEM\Setup'
+            RegCurrentVersion = $RegCurrentVersion
+            RegSystemControl = $RegSystemControl
+            RegSystemSetup = $RegSystemSetup
             #===================================================================================================
             #   CimInstance
             #===================================================================================================

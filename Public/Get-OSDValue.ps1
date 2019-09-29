@@ -4,71 +4,62 @@ function Get-OSDValue {
         [Parameter(Mandatory = $true, Position = 0)]
         [ValidateSet(`
             'IsAdmin',`
-            'IsWinOS',`
             'IsWinPE','IsWinSE',`
+            'IsClientOS','IsServerOS','IsServerCoreOS',`
             'IsDesktop','IsLaptop','IsServer','IsSFF','IsTablet',`
-            'IsUEFI','IsServerOS','IsServerCoreOS'
+            'IsUEFI','IsVM'`
         )]
         [string]$Property
     )
     #======================================================================================================
-    #   IsAdmin
+    #   Get Values
     #======================================================================================================
     $IsAdmin = ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] 'Administrator')
-    if ($Property -eq 'IsAdmin') {Return $IsAdmin}
-    #======================================================================================================
-    #   IsWinPE IsWinSE
-    #======================================================================================================
     $IsWinPE = $env:SystemDrive -eq 'X:'
-    $IsWinSE = ($IsWinPE -and (Test-Path 'X:\Setup.exe'))
+    $IsWinSE = (($env:SystemDrive -eq 'X:') -and (Test-Path 'X:\Setup.exe'))
 
-    if ($Property -eq 'IsWinPE') {Return $IsWinPE}
-    if ($Property -eq 'IsWinSE') {Return $IsWinSE}
+    $IsClientOS = $false
+    $IsServerOS = $false
+    $IsServerCoreOS = $false
+    if ($IsWinPE -eq $false) {
+        if (Test-Path HKLM:\System\CurrentControlSet\Control\ProductOptions\ProductType) {
+            $productType = Get-Item HKLM:System\CurrentControlSet\Control\ProductOptions\ProductType
+            if ($productType -eq "ServerNT" -or $productType -eq "LanmanNT") {
+                $IsClientOS = $false
+                $IsServerOS = $true
+            } else {
+                $IsClientOS = $true
+                $IsServerOS = $false
+            }
+        }
+        if (!(Test-Path "$env:windir\explorer.exe")) {
+            $IsClientOS = $false
+            $IsServerOS = $false
+            $IsServerCoreOS = $true
+        }
+    }
     #======================================================================================================
     #   IsUEFI
     #======================================================================================================
-    if ($Property -eq 'IsUEFI') {
-        if ($IsWinPE) {
-            if ((Get-ItemProperty -Path HKLM:\System\CurrentControlSet\Control).PEFirmwareType -eq 2) {
-                $IsUEFI = $true
-            } else {
-                $IsUEFI = $false
-            }
+    if ($IsWinPE) {
+        $IsUEFI = (Get-ItemProperty -Path HKLM:\System\CurrentControlSet\Control).PEFirmwareType -eq 2
+    } else {
+        if ($null -eq (Get-ItemProperty HKLM:\System\CurrentControlSet\Control\SecureBoot\State -ErrorAction SilentlyContinue)) {
+            $IsUEFI = $false
         } else {
-            if ((Get-ItemProperty HKLM:\System\CurrentControlSet\control\SecureBoot\State -ErrorAction SilentlyContinue) -eq $null ) {
-                $IsUEFI = $false
-            } else {
-                $IsUEFI = $true
-            }
+            $IsUEFI = $true
         }
-        Return $IsUEFI
     }
     #======================================================================================================
-    #   IsServerCoreOS
+    #   Return Values
     #======================================================================================================
-    if ($Property -eq 'IsWinOS' -or$Property -eq 'IsServerOS' -or $Property -eq 'IsServerCoreOS') {
-        $IsWinOS = $true
-        $IsServerOS = $false
-        $IsServerCoreOS = $false
-
-        if (!($env:SystemDrive -ne 'X:')) {
-            if (!(Test-Path "$env:windir\explorer.exe")) {
-                $IsWinOS = $false
-                $IsServerCoreOS = $true
-            }
-
-            if (Test-Path HKLM:\System\CurrentControlSet\Control\ProductOptions\ProductType) {
-                $productType = Get-Item HKLM:System\CurrentControlSet\Control\ProductOptions\ProductType
-                if ($productType -eq "ServerNT" -or $productType -eq "LanmanNT") {
-                    $IsWinOS = $false
-                    $IsServerOS = $true
-                }
-            }
-        }
-        if ($Property -eq 'IsWinOS') {Return $IsWinOS}
-        if ($Property -eq 'IsServerOS') {Return $IsServerOS}
-        if ($Property -eq 'IsServerCoreOS') {Return $IsServerCoreOS}
-    }
+    if ($Property -eq 'IsAdmin') {Return $IsAdmin}
+    if ($Property -eq 'IsWinPE') {Return $IsWinPE}
+    if ($Property -eq 'IsWinSE') {Return $IsWinSE}
+    if ($Property -eq 'IsClientOS') {Return $IsClientOS}
+    if ($Property -eq 'IsServerOS') {Return $IsServerOS}
+    if ($Property -eq 'IsServerCoreOS') {Return $IsServerCoreOS}
+    if ($Property -eq 'IsUEFI') {Return $IsUEFI}
     #======================================================================================================
     #   Win32_SystemEnclosure
     #   Credit FriendsOfMDT         https://github.com/FriendsOfMDT/PSD
@@ -93,131 +84,4 @@ function Get-OSDValue {
     if ($Property -eq 'IsServer') {Return $IsServer}
     if ($Property -eq 'IsSFF') {Return $IsSFF}
     if ($Property -eq 'IsTablet') {Return $IsTablet}
-
-
-
-    
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        # Look up OS details
-        
-        
-    
-        Get-CimInstance -ClassName Win32_OperatingSystem | ForEach-Object { $OSCurrentVersion = $_.Version; $OSCurrentBuild = $_.BuildNumber }
-
-<#         if (Test-Path HKLM:System\CurrentControlSet\Control\MiniNT) {
-            $OSVersion = "WinPE"
-          }
-          else
-          {
-            $OSVersion = "Other"
-            if (Test-Path "$env:WINDIR\Explorer.exe") {
-              $IsServerCoreOS = $true
-            }
-            if (Test-Path HKLM:\System\CurrentControlSet\Control\ProductOptions\ProductType)
-            {
-              $productType = Get-Item HKLM:System\CurrentControlSet\Control\ProductOptions\ProductType
-              if ($productType -eq "ServerNT" -or $productType -eq "LanmanNT") {
-                $IsServerOS = $true
-              }
-            }
-          } #>
-
-
-
-    #======================================================================================================
-    #   Defaults
-    #======================================================================================================
-    $Value = $false
-    #======================================================================================================
-    #   Win32_SystemEnclosure
-    #   Credit Johan Schrewelius
-    #======================================================================================================
-    if (($Property -eq 'IsDesktop') -or ($Property -eq 'IsLaptop') -or ($Property -eq 'IsServer') -or ($Property -eq 'ChassisType') -or ($Property -eq 'ChassisTypeName')) {
-
-        $ChassisType = (Get-CimInstance -ClassName Win32_SystemEnclosure).ChassisTypes[0]
-        if ($Property -eq 'ChassisType') {Return $ChassisType}
-
-        $ChassisTypeName = switch ( $ChassisType ) {
-            3 { 'Desktop' }
-            4 { 'Desktop' }
-            5 { 'Desktop' }
-            6 { 'Desktop' }
-            7 { 'Desktop' }
-            13 { 'Desktop' }
-            15 { 'Desktop' }
-            16 { 'Desktop' }
-            35 { 'Desktop' }
-            36 { 'Desktop' }
-
-            8 { 'Laptop' }
-            9 { 'Laptop' }
-            10 { 'Laptop' }
-            11 { 'Laptop' }
-            12 { 'Laptop' }
-            14 { 'Laptop' }
-            18 { 'Laptop' }
-            21 { 'Laptop' }
-            30 { 'Laptop' }
-            31 { 'Laptop' }
-            32 { 'Laptop' }
-
-            23 { 'Server' }
-            28 { 'Server' }
-
-            default { 'Unknown' }
-        }
-
-        if ($Property -eq 'ChassisTypeName') {Return $ChassisTypeName}
-
-        if ($ChassisTypeName -eq 'Laptop') {
-            $IsLaptop = $true
-            $IsDesktop = $false
-            $IsServer = $false
-        }
-        if ($ChassisTypeName -eq 'Desktop') {
-            $IsLaptop = $false
-            $IsDesktop = $true
-            $IsServer = $false
-        }
-        if ($ChassisTypeName -eq 'Server') {
-            $IsLaptop = $false
-            $IsDesktop = $false
-            $IsServer = $true
-        }
-        if ($ChassisTypeName -eq 'Unknown') {
-            $IsLaptop = $false
-            $IsDesktop = $false
-            $IsServer = $false
-        }
-
-        if ($Property -eq 'IsLaptop') {Return $IsLaptop}
-        if ($Property -eq 'IsDesktop') {Return $IsDesktop}
-        if ($Property -eq 'IsServer') {Return $IsServer}
-    }
-    #======================================================================================================
-    #	IsUEFI
-    #======================================================================================================
-    if ($Property -eq 'IsUEFI') {
-        if ($IsWinPE) {
-            $Value = (Get-ItemProperty -Path HKLM:\System\CurrentControlSet\Control).PEFirmwareType -eq 2
-            $Global:IsUEFI = $PSDefaultParameterValues
-            Return $Value
-        } else {
-            Write-Warning 'IsUEFI must be run in WinPE'
-        }
-    }
 }
