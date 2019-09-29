@@ -7,7 +7,7 @@ function Get-OSDValue {
             'IsWinPE','IsWinSE',`
             'IsClientOS','IsServerOS','IsServerCoreOS',`
             'IsDesktop','IsLaptop','IsServer','IsSFF','IsTablet',`
-            'IsUEFI','IsVM'`
+            'IsUEFI','IsVM','IsOnBattery'`
         )]
         [string]$Property
     )
@@ -60,6 +60,16 @@ function Get-OSDValue {
     if ($Property -eq 'IsServerOS') {Return $IsServerOS}
     if ($Property -eq 'IsServerCoreOS') {Return $IsServerCoreOS}
     if ($Property -eq 'IsUEFI') {Return $IsUEFI}
+
+    if ($Property -eq 'IsOnBattery') {
+        $IsOnBattery = ((Get-CimInstance -ClassName Win32_Battery -ErrorAction SilentlyContinue).BatteryStatus -eq 1)
+        Return $IsOnBattery
+    }
+    if ($Property -eq 'IsVM') {
+        $ComputerModel = ((Get-CimInstance -ClassName Win32_ComputerSystem).Model)
+        $IsVM = ($ComputerModel -match 'Virtual') -or ($ComputerModel-match 'VMware')
+        Return $IsVM
+    }
     #======================================================================================================
     #   Win32_SystemEnclosure
     #   Credit FriendsOfMDT         https://github.com/FriendsOfMDT/PSD

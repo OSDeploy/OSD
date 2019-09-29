@@ -1,54 +1,106 @@
+<#
+.SYNOPSIS
+Common WinPE Commands
+
+.DESCRIPTION
+Common WinPE Commands using wpeinit wpeutil and Microsoft DaRT RemoteRecovery
+
+.PARAMETER PolicyBypass
+Set-ExecutionPolicy Bypass
+
+.PARAMETER InitializeNetwork
+wpeutil InitializeNetwork
+
+.PARAMETER InitializeNetworkNoWait
+wpeutil InitializeNetwork /NoWait
+
+.PARAMETER DisableFirewall
+wpeutil DisableFirewall
+
+.PARAMETER UpdateBootInfo
+wpeutil UpdateBootInfo
+
+.PARAMETER DartRemote
+Requires Microsoft DaRT RemoteRecovery.exe
+
+.PARAMETER Reboot
+wpeutil Reboot
+
+.PARAMETER Shutdown
+wpeutil Shutdown
+
+.EXAMPLE
+OSDWinPE PolicyBypass; OSDWinPE InitializeNetwork; OSDWinPE DisableFirewall; OSDWinPE UpdateBootInfo; OSDWinPE DartRemote
+
+.LINK
+https://osd.osdeploy.com/module/functions/get-osdwinpe
+
+.NOTES
+19.9.29 Contributed by David Segura @SeguraOSD
+#>
 function Get-OSDWinPE {
     [CmdletBinding()]
     Param (
-        [switch]$DisableFirewall,
-        [switch]$EnableFirewall,
+        [switch]$PolicyBypass,
         [switch]$InitializeNetwork,
         [switch]$InitializeNetworkNoWait,
+        [switch]$DisableFirewall,
+        [switch]$UpdateBootInfo,
+        [switch]$DartRemote,
         [switch]$Reboot,
-        [switch]$Shutdown,
-        [switch]$UpdateBootInfo
+        [switch]$Shutdown
     )
 
-    if ($env:SystemDrive -eq 'X:') {
+    if (Get-OSDValue -Property IsWinPE) {
         Write-Verbose 'OSDWinPE: WinPE is running'
     } else {
         Write-Warning 'OSDWinPE: This function requires WinPE'
         Break
     }
-    if ($UpdateBootInfo.IsPresent) {
-        Write-Verbose 'wpeutil UpdateBootInfo'
-        Write-Verbose 'https://docs.microsoft.com/en-us/windows-hardware/manufacture/desktop/wpeutil-command-line-options'
-        Start-Process -WindowStyle Hidden -FilePath wpeutil -ArgumentList 'UpdateBootInfo'
+    #======================================================================================================
+    #	Customize: Increase the Console Screen Buffer size
+    #======================================================================================================
+    if (!(Test-Path "HKCU:\Console")) {
+        Write-Host "OSDWinPE: Increase Console Screen Buffer" -ForegroundColor Gray
+        New-Item -Path "HKCU:\Console" -Force | Out-Null
+        New-ItemProperty -Path HKCU:\Console ScreenBufferSize -Value 589889656 -PropertyType DWORD -Force | Out-Null
+    }
+    if ($PolicyBypass.IsPresent) {
+        Write-Verbose 'OSDWinPE: Set-ExecutionPolicy Bypass'
+        PowerShell -Command "Set-ExecutionPolicy Bypass"
     }
     if ($InitializeNetwork.IsPresent) {
-        Write-Verbose 'wpeinit InitializeNetwork'
+        Write-Verbose 'OSDWinPE: wpeutil InitializeNetwork'
         Write-Verbose 'https://docs.microsoft.com/en-us/windows-hardware/manufacture/desktop/wpeutil-command-line-options'
-        Start-Process -WindowStyle Hidden -FilePath wpeinit -ArgumentList 'InitializeNetwork' -Wait
+        Start-Process -WindowStyle Hidden -FilePath wpeutil -ArgumentList 'InitializeNetwork' -Wait
         Start-Sleep -Seconds 10
     }
     if ($InitializeNetworkNoWait.IsPresent) {
-        Write-Verbose 'wpeutil InitializeNetwork /NoWait'
+        Write-Verbose 'OSDWinPE: wpeutil InitializeNetwork /NoWait'
         Write-Verbose 'https://docs.microsoft.com/en-us/windows-hardware/manufacture/desktop/wpeutil-command-line-options'
-        Start-Process -WindowStyle Hidden -FilePath wpeinit -ArgumentList ('InitializeNetwork','/NoWait')
+        Start-Process -WindowStyle Hidden -FilePath wpeutil -ArgumentList ('InitializeNetwork','/NoWait')
     }
     if ($DisableFirewall.IsPresent) {
-        Write-Verbose 'wpeutil DisableFirewall'
+        Write-Verbose 'OSDWinPE: wpeutil DisableFirewall'
         Write-Verbose 'https://docs.microsoft.com/en-us/windows-hardware/manufacture/desktop/wpeutil-command-line-options'
         Start-Process -WindowStyle Hidden -FilePath wpeutil -ArgumentList 'DisableFirewall' -Wait
     }
-    if ($EnableFirewall.IsPresent) {
-        Write-Verbose 'wpeutil EnableFirewall'
+    if ($UpdateBootInfo.IsPresent) {
+        Write-Verbose 'OSDWinPE: wpeutil UpdateBootInfo'
         Write-Verbose 'https://docs.microsoft.com/en-us/windows-hardware/manufacture/desktop/wpeutil-command-line-options'
-        Start-Process -WindowStyle Hidden -FilePath wpeutil -ArgumentList 'DisableFirewall' -Wait
+        Start-Process -WindowStyle Hidden -FilePath wpeutil -ArgumentList 'UpdateBootInfo'
+    }
+    if (($DartRemote.IsPresent) -and (Test-Path "$env:windir\System32\RemoteRecovery.exe")) {
+        Write-Verbose 'OSDWinPE: Microsoft DaRT Remote Recovery'
+        Start-Process -WindowStyle Minimized -FilePath RemoteRecovery.exe -ArgumentList '-nomessage'
     }
     if ($Reboot.IsPresent) {
-        Write-Verbose 'wpeutil Reboot'
+        Write-Verbose 'OSDWinPE: wpeutil Reboot'
         Write-Verbose 'https://docs.microsoft.com/en-us/windows-hardware/manufacture/desktop/wpeutil-command-line-options'
         Start-Process -WindowStyle Hidden -FilePath wpeutil -ArgumentList 'Reboot'
     }
     if ($Shutdown.IsPresent) {
-        Write-Verbose 'wpeutil Shutdown'
+        Write-Verbose 'OSDWinPE: wpeutil Shutdown'
         Write-Verbose 'https://docs.microsoft.com/en-us/windows-hardware/manufacture/desktop/wpeutil-command-line-options'
         Start-Process -WindowStyle Hidden -FilePath wpeutil -ArgumentList 'Shutdown'
     }

@@ -6,7 +6,7 @@ function Get-OSDGather {
     #===================================================================================================
     #   Get-CimInstance
     #===================================================================================================
-    $Win32Battery = (Get-CimInstance -ClassName Win32_Battery| Select-Object -Property *)
+    $Win32Battery = (Get-CimInstance -ClassName Win32_Battery | Select-Object -Property *)
     $Win32BIOS = (Get-CimInstance -ClassName Win32_BIOS | Select-Object -Property *)
     $Win32BaseBoard = (Get-CimInstance -ClassName Win32_BaseBoard | Select-Object -Property *)
     $Win32ComputerSystem = (Get-CimInstance -ClassName Win32_ComputerSystem | Select-Object -Property *)
@@ -19,8 +19,11 @@ function Get-OSDGather {
     #   Registry
     #===================================================================================================
     $RegCurrentVersion = Get-ItemProperty -Path 'HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion'
-    $RegCurrentVersion.DigitalProductId = $null
-    $RegCurrentVersion.DigitalProductId4 = $null
+    try {
+        $RegCurrentVersion.DigitalProductId = $null
+        $RegCurrentVersion.DigitalProductId4 = $null
+    }
+    catch {}
     $RegSystemControl = Get-ItemProperty -Path 'HKLM:\SYSTEM\ControlSet001\Control'
     $RegSystemSetup = Get-ItemProperty -Path 'HKLM:\SYSTEM\Setup'
     #===================================================================================================
@@ -58,19 +61,11 @@ function Get-OSDGather {
     #   IsUEFI
     #   Credit FriendsOfMDT         https://github.com/FriendsOfMDT/PSD
     #===================================================================================================
-<#     try
-    {
+<#     try {
         Get-SecureBootUEFI -Name SetupMode | Out-Null
-        $tsenv:IsUEFI = "True"
+        $IsUEFI = $true
     }
-    catch
-    {
-        $tsenv:IsUEFI = "False"
-    } #>
-    #===================================================================================================
-    #   IsVM
-    #===================================================================================================
-    $IsVM = ($Win32ComputerSystem.Model -match 'Virtual') -or ($Win32ComputerSystem.Model -match 'VMware')
+    catch {$IsUEFI = $false} #>
     #===================================================================================================
     if (!($Full.IsPresent)) {
         $OSDGather = [ordered]@{
@@ -80,7 +75,7 @@ function Get-OSDGather {
             IsAdmin = Get-OSDValue -Property IsAdmin
             IsDesktop = Get-OSDValue -Property IsDesktop
             IsLaptop = Get-OSDValue -Property IsLaptop
-            IsOnBattery = $Win32Battery.BatteryStatus -eq 2
+            IsOnBattery = ($Win32Battery.BatteryStatus -eq 1)
             IsSFF = Get-OSDValue -Property IsSFF
             IsServer = Get-OSDValue -Property IsServer
             IsServerCoreOS = Get-OSDValue -Property IsServerCoreOS
@@ -131,16 +126,16 @@ function Get-OSDGather {
             IsAdmin = Get-OSDValue -Property IsAdmin
             IsDesktop = Get-OSDValue -Property IsDesktop
             IsLaptop = Get-OSDValue -Property IsLaptop
-            IsOnBattery = ($Win32Battery.BatteryStatus -eq 2)
+            IsOnBattery = ($Win32Battery.BatteryStatus -eq 1)
             IsSFF = Get-OSDValue -Property IsSFF
             IsServer = Get-OSDValue -Property IsServer
             IsServerCoreOS = Get-OSDValue -Property IsServerCoreOS
             IsServerOS = Get-OSDValue -Property IsServerOS
             IsTablet = Get-OSDValue -Property IsTablet
             IsUEFI = Get-OSDValue -Property IsUEFI
-            IsVM = $IsVM
-            IsWinOS = Get-OSDValue -Property IsWinOS
-            IsWinPE = Get-OSDValue -Property IsWinPE
+            IsVM = ($Win32ComputerSystem.Model -match 'Virtual') -or ($Win32ComputerSystem.Model -match 'VMware')
+            IsWinOS = $env:SystemDrive -ne 'X:'
+            IsWinPE = $env:SystemDrive -eq 'X:'
             IsWinSE = Get-OSDValue -Property IsWinSE
             #===================================================================================================
             #   Not Is
