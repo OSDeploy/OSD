@@ -1,12 +1,9 @@
 <#
 .SYNOPSIS
-Common WinPE Commands
+Common WinPE Commands using wpeutil and Microsoft DaRT RemoteRecovery
 
 .DESCRIPTION
-Common WinPE Commands using wpeinit wpeutil and Microsoft DaRT RemoteRecovery
-
-.PARAMETER PolicyBypass
-Set-ExecutionPolicy Bypass
+Common WinPE Commands using wpeutil and Microsoft DaRT RemoteRecovery
 
 .PARAMETER InitializeNetwork
 wpeutil InitializeNetwork
@@ -41,7 +38,6 @@ https://osd.osdeploy.com/module/functions/get-osdwinpe
 function Get-OSDWinPE {
     [CmdletBinding()]
     Param (
-        [switch]$PolicyBypass,
         [switch]$InitializeNetwork,
         [switch]$InitializeNetworkNoWait,
         [switch]$DisableFirewall,
@@ -64,10 +60,6 @@ function Get-OSDWinPE {
         Write-Host "OSDWinPE: Increase Console Screen Buffer" -ForegroundColor Gray
         New-Item -Path "HKCU:\Console" -Force | Out-Null
         New-ItemProperty -Path HKCU:\Console ScreenBufferSize -Value 589889656 -PropertyType DWORD -Force | Out-Null
-    }
-    if ($PolicyBypass.IsPresent) {
-        Write-Verbose 'OSDWinPE: Set-ExecutionPolicy Bypass'
-        PowerShell -Command "Set-ExecutionPolicy Bypass"
     }
     if ($InitializeNetwork.IsPresent) {
         Write-Verbose 'OSDWinPE: wpeutil InitializeNetwork'
