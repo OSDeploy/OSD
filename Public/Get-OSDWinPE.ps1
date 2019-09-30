@@ -20,7 +20,7 @@ wpeutil DisableFirewall
 .PARAMETER UpdateBootInfo
 wpeutil UpdateBootInfo
 
-.PARAMETER DartRemote
+.PARAMETER RemoteRecovery
 Requires Microsoft DaRT RemoteRecovery.exe
 
 .PARAMETER Reboot
@@ -37,7 +37,7 @@ https://osd.osdeploy.com/module/functions/get-osdwinpe
 
 .NOTES
 Version:
-19.9.29 David Segura @SeguraOSD
+19.9.30 David Segura @SeguraOSD
 
 Reference:
 https://docs.microsoft.com/en-us/windows-hardware/manufacture/desktop/wpeutil-command-line-options
@@ -45,12 +45,20 @@ https://docs.microsoft.com/en-us/windows-hardware/manufacture/desktop/wpeutil-co
 function Get-OSDWinPE {
     [CmdletBinding()]
     Param (
-        [switch]$ImportModules,
+        [switch]$Modules,
+
+        [Alias('Network')]
         [switch]$InitializeNetwork,
+        
+        [Alias('NetworkNoWait')]
         [switch]$InitializeNetworkNoWait,
         [switch]$DisableFirewall,
+        
+        [Alias('Update')]
         [switch]$UpdateBootInfo,
-        [switch]$DartRemote,
+        
+        [Alias('Remote')]
+        [switch]$RemoteRecovery,
         [switch]$Reboot,
         [switch]$Shutdown
     )
@@ -72,16 +80,16 @@ function Get-OSDWinPE {
     #======================================================================================================
     #	Import Root Modules
     #======================================================================================================
-    if ($ImportModules.IsPresent) {
+    if ($Modules.IsPresent) {
         $OSDSearchDrives = Get-PSDrive -PSProvider 'FileSystem'
         foreach ($OSDSearchDrive in $OSDSearchDrives) {
             $OSDSearchPath = "$($OSDSearchDrive.Root)Modules"
             if (Test-Path "$OSDSearchPath") {
-                Write-Verbose "OSDSearchPath: $OSDSearchPath" -Verbose
+                Write-Verbose "Module Search Path: $OSDSearchPath" -Verbose
                 Get-ChildItem "$OSDSearchPath" | `
                 Where-Object {$_.PSIsContainer} | `
                 ForEach-Object {
-                    Write-Verbose "ImportModules: $($_.FullName)"
+                    Write-Verbose "Add Module: $($_.FullName)"
                     Copy-Item -Path "$($_.FullName)" -Destination "$env:SystemDrive\Windows\System32\WindowsPowerShell\v1.0\Modules" -Recurse -Force -ErrorAction SilentlyContinue
                 }
             }
@@ -118,7 +126,7 @@ function Get-OSDWinPE {
     #======================================================================================================
     #	Microsoft DaRT
     #======================================================================================================
-    if (($DartRemote.IsPresent) -and (Test-Path "$env:windir\System32\RemoteRecovery.exe")) {
+    if (($RemoteRecovery.IsPresent) -and (Test-Path "$env:windir\System32\RemoteRecovery.exe")) {
         Write-Verbose 'OSDWinPE: Microsoft DaRT Remote Recovery'
         Start-Process -WindowStyle Minimized -FilePath RemoteRecovery.exe -ArgumentList '-nomessage'
     }
