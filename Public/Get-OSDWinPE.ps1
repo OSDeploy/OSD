@@ -5,6 +5,9 @@ Common WinPE Commands using wpeutil and Microsoft DaRT RemoteRecovery
 .DESCRIPTION
 Common WinPE Commands using wpeutil and Microsoft DaRT RemoteRecovery
 
+.PARAMETER ImportModules
+Copies PowerShell Modules found in <drive>:\Modules to System32 Modules
+
 .PARAMETER InitializeNetwork
 wpeutil InitializeNetwork
 
@@ -33,11 +36,16 @@ OSDWinPE PolicyBypass; OSDWinPE InitializeNetwork; OSDWinPE DisableFirewall; OSD
 https://osd.osdeploy.com/module/functions/get-osdwinpe
 
 .NOTES
-19.9.29 Contributed by David Segura @SeguraOSD
+Version:
+19.9.29 David Segura @SeguraOSD
+
+Reference:
+https://docs.microsoft.com/en-us/windows-hardware/manufacture/desktop/wpeutil-command-line-options
 #>
 function Get-OSDWinPE {
     [CmdletBinding()]
     Param (
+        [switch]$ImportModules,
         [switch]$InitializeNetwork,
         [switch]$InitializeNetworkNoWait,
         [switch]$DisableFirewall,
@@ -57,43 +65,61 @@ function Get-OSDWinPE {
     #	Customize: Increase the Console Screen Buffer size
     #======================================================================================================
     if (!(Test-Path "HKCU:\Console")) {
-        Write-Host "OSDWinPE: Increase Console Screen Buffer" -ForegroundColor Gray
+        Write-Verbose "OSDWinPE: Increase Console Screen Buffer"
         New-Item -Path "HKCU:\Console" -Force | Out-Null
         New-ItemProperty -Path HKCU:\Console ScreenBufferSize -Value 589889656 -PropertyType DWORD -Force | Out-Null
     }
+    #======================================================================================================
+    #	Import Root Modules
+    #======================================================================================================
+    if ($ImportModules.IsPresent) {
+        $OSDSearchDrives = Get-PSDrive -PSProvider 'FileSystem'
+        foreach ($OSDSearchDrive in $OSDSearchDrives) {
+            $OSDSearchPath = "$($OSDSearchDrive.Root)Modules"
+            if (Test-Path "$OSDSearchPath") {
+                Write-Verbose "OSDSearchPath: $OSDSearchPath" -Verbose
+                Get-ChildItem "$OSDSearchPath" | `
+                Where-Object {$_.PSIsContainer} | `
+                ForEach-Object {
+                    Write-Verbose "ImportModules: $($_.FullName)"
+                    Copy-Item -Path "$($_.FullName)" -Destination "$env:SystemDrive\Windows\System32\WindowsPowerShell\v1.0\Modules" -Recurse -Force -ErrorAction SilentlyContinue
+                }
+            }
+        }
+    }
+    #======================================================================================================
+    #	wpeutil
+    #======================================================================================================
     if ($InitializeNetwork.IsPresent) {
         Write-Verbose 'OSDWinPE: wpeutil InitializeNetwork'
-        Write-Verbose 'https://docs.microsoft.com/en-us/windows-hardware/manufacture/desktop/wpeutil-command-line-options'
         Start-Process -WindowStyle Hidden -FilePath wpeutil -ArgumentList 'InitializeNetwork' -Wait
         Start-Sleep -Seconds 10
     }
     if ($InitializeNetworkNoWait.IsPresent) {
         Write-Verbose 'OSDWinPE: wpeutil InitializeNetwork /NoWait'
-        Write-Verbose 'https://docs.microsoft.com/en-us/windows-hardware/manufacture/desktop/wpeutil-command-line-options'
         Start-Process -WindowStyle Hidden -FilePath wpeutil -ArgumentList ('InitializeNetwork','/NoWait')
     }
     if ($DisableFirewall.IsPresent) {
         Write-Verbose 'OSDWinPE: wpeutil DisableFirewall'
-        Write-Verbose 'https://docs.microsoft.com/en-us/windows-hardware/manufacture/desktop/wpeutil-command-line-options'
         Start-Process -WindowStyle Hidden -FilePath wpeutil -ArgumentList 'DisableFirewall' -Wait
     }
     if ($UpdateBootInfo.IsPresent) {
         Write-Verbose 'OSDWinPE: wpeutil UpdateBootInfo'
-        Write-Verbose 'https://docs.microsoft.com/en-us/windows-hardware/manufacture/desktop/wpeutil-command-line-options'
         Start-Process -WindowStyle Hidden -FilePath wpeutil -ArgumentList 'UpdateBootInfo'
-    }
-    if (($DartRemote.IsPresent) -and (Test-Path "$env:windir\System32\RemoteRecovery.exe")) {
-        Write-Verbose 'OSDWinPE: Microsoft DaRT Remote Recovery'
-        Start-Process -WindowStyle Minimized -FilePath RemoteRecovery.exe -ArgumentList '-nomessage'
     }
     if ($Reboot.IsPresent) {
         Write-Verbose 'OSDWinPE: wpeutil Reboot'
-        Write-Verbose 'https://docs.microsoft.com/en-us/windows-hardware/manufacture/desktop/wpeutil-command-line-options'
         Start-Process -WindowStyle Hidden -FilePath wpeutil -ArgumentList 'Reboot'
     }
     if ($Shutdown.IsPresent) {
         Write-Verbose 'OSDWinPE: wpeutil Shutdown'
-        Write-Verbose 'https://docs.microsoft.com/en-us/windows-hardware/manufacture/desktop/wpeutil-command-line-options'
         Start-Process -WindowStyle Hidden -FilePath wpeutil -ArgumentList 'Shutdown'
+    }
+    #======================================================================================================
+    #	Microsoft DaRT
+    #======================================================================================================
+    if (($DartRemote.IsPresent) -and (Test-Path "$env:windir\System32\RemoteRecovery.exe")) {
+        Write-Verbose 'OSDWinPE: Microsoft DaRT Remote Recovery'
+        Start-Process -WindowStyle Minimized -FilePath RemoteRecovery.exe -ArgumentList '-nomessage'
     }
 }

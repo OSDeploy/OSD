@@ -28,7 +28,11 @@ Option 2: Get-OSDPower -Property High
 https://osd.osdeploy.com/module/functions/get-osdpower
 
 .NOTES
-19.9.29 Contributed by David Segura @SeguraOSD
+Version:
+19.9.29 David Segura @SeguraOSD
+
+Reference:
+https://docs.microsoft.com/en-us/windows-hardware/design/device-experiences/powercfg-command-line-options
 #>
 function Get-OSDPower {
     [CmdletBinding()]
@@ -37,8 +41,6 @@ function Get-OSDPower {
         [ValidateSet('Low','Balanced','High','LIST','QUERY')]
         [string]$Property = 'LIST'
     )
-
-    Write-Verbose 'https://docs.microsoft.com/en-us/windows-hardware/design/device-experiences/powercfg-command-line-options'
 
     if ($Property -eq 'Low') {
         Write-Verbose 'OSDPower: Enable Power Saver Power Plan'
