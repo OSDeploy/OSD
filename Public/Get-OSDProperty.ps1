@@ -1,3 +1,37 @@
+<#
+.SYNOPSIS
+Displays Computer and Operating System information using Win32_ComputerSystem and Win32_OperatingSystem class
+
+.DESCRIPTION
+Displays Computer and Operating System information using Win32_ComputerSystem and Win32_OperatingSystem class
+
+.PARAMETER Property
+Type: String
+Position: 0
+Values: BootDevice,BuildNumber,Caption,ChassisSKUNumber,Name,InstallDate,Locale,Make,Manufacturer,Model,OSArchitecture,OperatingSystemSKU,ProductType,SystemDevice,SystemDirectory,SystemDrive,SystemFamily,SystemSKUNumber,Version,WindowsBuild,WindowsDirectory,WindowsReleaseId,WindowsUbr
+Default: None (Requires Value/Parameter)
+
+.EXAMPLE
+OSDProperty Model
+Returns Computer Model using (Get-CimInstance -ClassName Win32_ComputerSystem).Model 
+Option 1: OSDProperty Model
+Option 2: Get-OSDProperty Model
+Option 3: Get-OSDProperty -Property Model
+
+.EXAMPLE
+OSDProperty SystemDrive
+Returns Computer System Drive using (Get-CimInstance -ClassName Win32_OperatingSystem).SystemDrive 
+Option 1: OSDProperty SystemDrive
+Option 2: Get-OSDProperty SystemDrive
+Option 3: Get-OSDProperty -Property SystemDrive
+
+.LINK
+https://osd.osdeploy.com/module/functions/get-osdproperty
+
+.NOTES
+19.9.29.1 Contributed by Ben Whitmore @byteben
+19.9.29 Contributed by David Segura @SeguraOSD
+#>
 function Get-OSDProperty {
     [CmdletBinding()]
     Param (
