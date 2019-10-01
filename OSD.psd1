@@ -7,7 +7,7 @@
 RootModule = 'OSD.psm1'
 
 # Version number of his module.
-ModuleVersion = '19.10.1.1'
+ModuleVersion = '19.10.1.2'
 
 # Supported PSEditions
 # CompatiblePSEditions = @()
@@ -77,7 +77,7 @@ PowerShellVersion = '5.0'
 # NestedModules = @()
 
 # Functions to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no functions to export.
-FunctionsToExport = 'Get-OSD','Get-OSDBool','Get-OSDCimClass','Get-OSDGather','Get-OSDProperty','Get-OSDPower','Get-OSDWinPE'
+FunctionsToExport = 'Get-OSD','Get-OSDCimClass','Get-OSDGather','Get-OSDProperty','Get-OSDPower','Get-OSDWinPE'
 
 # Cmdlets to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no cmdlets to export.
 CmdletsToExport = @()

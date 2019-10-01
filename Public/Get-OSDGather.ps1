@@ -90,20 +90,20 @@ function Get-OSDGather {
             #===================================================================================================
             #   Bool
             #===================================================================================================
-            IsAdmin = Get-OSDBool -Property IsAdmin
-            IsClientOS = Get-OSDBool -Property IsClientOS
-            IsDesktop = Get-OSDBool -Property IsDesktop
-            IsLaptop = Get-OSDBool -Property IsLaptop
+            IsAdmin = Get-OSDProperty -Property IsAdmin
+            IsClientOS = Get-OSDProperty -Property IsClientOS
+            IsDesktop = Get-OSDProperty -Property IsDesktop
+            IsLaptop = Get-OSDProperty -Property IsLaptop
             IsOnBattery = ($Win32Battery.BatteryStatus -eq 1)
-            IsSFF = Get-OSDBool -Property IsSFF
-            IsServer = Get-OSDBool -Property IsServer
-            IsServerCoreOS = Get-OSDBool -Property IsServerCoreOS
-            IsServerOS = Get-OSDBool -Property IsServerOS
-            IsTablet = Get-OSDBool -Property IsTablet
-            IsUEFI = Get-OSDBool -Property IsUEFI
+            IsSFF = Get-OSDProperty -Property IsSFF
+            IsServer = Get-OSDProperty -Property IsServer
+            IsServerCoreOS = Get-OSDProperty -Property IsServerCoreOS
+            IsServerOS = Get-OSDProperty -Property IsServerOS
+            IsTablet = Get-OSDProperty -Property IsTablet
+            IsUEFI = Get-OSDProperty -Property IsUEFI
             IsVM = ($Win32ComputerSystem.Model -match 'Virtual') -or ($Win32ComputerSystem.Model -match 'VMware')
             IsWinPE = $env:SystemDrive -eq 'X:'
-            IsInWinSE = Get-OSDBool -Property IsInWinSE
+            IsInWinSE = Get-OSDProperty -Property IsInWinSE
             #===================================================================================================
             #   Value
             #===================================================================================================
@@ -141,20 +141,20 @@ function Get-OSDGather {
             #===================================================================================================
             #   Bool
             #===================================================================================================
-            IsAdmin = Get-OSDBool -Property IsAdmin
-            IsClientOS = Get-OSDBool -Property IsClientOS
-            IsDesktop = Get-OSDBool -Property IsDesktop
-            IsLaptop = Get-OSDBool -Property IsLaptop
+            IsAdmin = Get-OSDProperty -Property IsAdmin
+            IsClientOS = Get-OSDProperty -Property IsClientOS
+            IsDesktop = Get-OSDProperty -Property IsDesktop
+            IsLaptop = Get-OSDProperty -Property IsLaptop
             IsOnBattery = ($Win32Battery.BatteryStatus -eq 1)
-            IsSFF = Get-OSDBool -Property IsSFF
-            IsServer = Get-OSDBool -Property IsServer
-            IsServerCoreOS = Get-OSDBool -Property IsServerCoreOS
-            IsServerOS = Get-OSDBool -Property IsServerOS
-            IsTablet = Get-OSDBool -Property IsTablet
-            IsUEFI = Get-OSDBool -Property IsUEFI
+            IsSFF = Get-OSDProperty -Property IsSFF
+            IsServer = Get-OSDProperty -Property IsServer
+            IsServerCoreOS = Get-OSDProperty -Property IsServerCoreOS
+            IsServerOS = Get-OSDProperty -Property IsServerOS
+            IsTablet = Get-OSDProperty -Property IsTablet
+            IsUEFI = Get-OSDProperty -Property IsUEFI
             IsVM = ($Win32ComputerSystem.Model -match 'Virtual') -or ($Win32ComputerSystem.Model -match 'VMware')
             IsWinPE = $env:SystemDrive -eq 'X:'
-            IsInWinSE = Get-OSDBool -Property IsInWinSE
+            IsInWinSE = Get-OSDProperty -Property IsInWinSE
             #===================================================================================================
             #   Value
             #===================================================================================================
