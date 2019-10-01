@@ -14,7 +14,21 @@ https://osd.osdeploy.com/module/functions/get-osdbool
 function Get-OSDBool {
     [CmdletBinding()]
     Param (
-        #Selected Property is returned as a Boolean value ($true or $false)
+        #Property is returned as a Boolean value ($true or $false)
+        #IsAdmin
+        #IsClientOS
+        #IsDesktop
+        #IsLaptop
+        #IsOnBattery
+        #IsSFF
+        #IsServer
+        #IsServerCoreOS
+        #IsServerOS
+        #IsTablet
+        #IsUEFI
+        #IsVM
+        #IsWinPE
+        #IsInWinSE
         [Parameter(Mandatory = $true, Position = 0)]
         [ValidateSet(
             'IsAdmin',
@@ -30,7 +44,7 @@ function Get-OSDBool {
             'IsUEFI',
             'IsVM',
             'IsWinPE',
-            'IsWinSE'
+            'IsInWinSE'
         )]
         [string]$Property
     )
@@ -39,22 +53,24 @@ function Get-OSDBool {
     #======================================================================================================
     $IsAdmin = ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] 'Administrator')
     $IsWinPE = $env:SystemDrive -eq 'X:'
-    $IsWinSE = (($env:SystemDrive -eq 'X:') -and (Test-Path 'X:\Setup.exe'))
+    $IsInWinSE = (($env:SystemDrive -eq 'X:') -and (Test-Path 'X:\Setup.exe'))
 
     $IsClientOS = $false
     $IsServerOS = $false
     $IsServerCoreOS = $false
+
+    $Win32ComputerSystem = (Get-CimInstance -ClassName Win32_ComputerSystem | Select-Object -Property *)
+
+
     if ($IsWinPE -eq $false) {
-        if (Test-Path HKLM:\System\CurrentControlSet\Control\ProductOptions\ProductType) {
-            $productType = Get-Item HKLM:System\CurrentControlSet\Control\ProductOptions\ProductType
-            if ($productType -eq "ServerNT" -or $productType -eq "LanmanNT") {
-                $IsClientOS = $false
-                $IsServerOS = $true
-            } else {
-                $IsClientOS = $true
-                $IsServerOS = $false
-            }
+        if ($Win32ComputerSystem.Roles -match 'Server_NT' -or $Win32ComputerSystem.Roles -match 'LanmanNT') {
+            $IsClientOS = $false
+            $IsServerOS = $true
+        } else {
+            $IsClientOS = $true
+            $IsServerOS = $false
         }
+
         if (!(Test-Path "$env:windir\explorer.exe")) {
             $IsClientOS = $false
             $IsServerOS = $false
@@ -78,7 +94,7 @@ function Get-OSDBool {
     #======================================================================================================
     if ($Property -eq 'IsAdmin') {Return $IsAdmin}
     if ($Property -eq 'IsWinPE') {Return $IsWinPE}
-    if ($Property -eq 'IsWinSE') {Return $IsWinSE}
+    if ($Property -eq 'IsInWinSE') {Return $IsInWinSE}
     if ($Property -eq 'IsClientOS') {Return $IsClientOS}
     if ($Property -eq 'IsServerOS') {Return $IsServerOS}
     if ($Property -eq 'IsServerCoreOS') {Return $IsServerCoreOS}

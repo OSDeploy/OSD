@@ -22,6 +22,40 @@ function Get-OSDCimClass {
     [CmdletBinding()]
     Param (
         #CimInstance Class Name
+        #Battery
+        #BaseBoard
+        #BIOS
+        #BootConfiguration
+        #ComputerSystem [DEFAULT]
+        #Desktop
+        #DiskPartition
+        #DisplayConfiguration
+        #Environment
+        #LogicalDisk
+        #LogicalDiskRootDirectory
+        #MemoryArray
+        #MemoryDevice
+        #NetworkAdapter
+        #NetworkAdapterConfiguration
+        #OperatingSystem
+        #OSRecoveryConfiguration
+        #PhysicalMedia
+        #PhysicalMemory
+        #PnpDevice
+        #PnPEntity
+        #PortableBattery
+        #Processor
+        #SCSIController
+        #SCSIControllerDevice
+        #SMBIOSMemory
+        #SystemBIOS
+        #SystemEnclosure
+        #SystemDesktop
+        #SystemPartitions
+        #UserDesktop
+        #VideoController
+        #VideoSettings
+        #Volume
         [ValidateSet(
             'Battery',
             'BaseBoard',

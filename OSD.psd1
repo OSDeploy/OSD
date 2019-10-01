@@ -7,7 +7,7 @@
 RootModule = 'OSD.psm1'
 
 # Version number of his module.
-ModuleVersion = '19.10.1.0'
+ModuleVersion = '19.10.1.1'
 
 # Supported PSEditions
 # CompatiblePSEditions = @()
@@ -26,10 +26,11 @@ Copyright = '(c) 2019 David Segura osdeploy.com. All rights reserved.'
 
 # Description of the functionality provided by this module
 Description = @'
+OSD PowerShell Module
 https://osd.osdeploy.com/
 OSD PowerShell Module is a collection of OSD shared functions.  It is currently under development and is for Testing only
 
-OSD Module Collaborators
+#OSDdevteam
 Andrew Jimenez      @AndrewJimenez_
 Ben Whitmore        @byteben
 David Segura        @SeguraOSD #MMSJazz

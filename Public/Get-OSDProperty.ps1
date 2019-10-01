@@ -30,6 +30,30 @@ https://osd.osdeploy.com/module/functions/get-osdproperty
 function Get-OSDProperty {
     [CmdletBinding()]
     Param (
+        #Valid Properties for Return Value
+        #BootDevice
+        #BuildNumber
+        #Caption
+        #ChassisSKUNumber
+        #Name
+        #InstallDate
+        #Locale
+        #Make
+        #Manufacturer
+        #Model
+        #OSArchitecture
+        #OperatingSystemSKU
+        #ProductType
+        #SystemDevice
+        #SystemDirectory
+        #SystemDrive
+        #SystemFamily
+        #SystemSKUNumber
+        #Version
+        #WindowsBuild
+        #WindowsDirectory
+        #WindowsReleaseId
+        #WindowsUbr
         [Parameter(Mandatory = $true, Position = 0)]
         [ValidateSet(
             'BootDevice',

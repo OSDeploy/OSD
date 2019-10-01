@@ -103,7 +103,7 @@ function Get-OSDGather {
             IsUEFI = Get-OSDBool -Property IsUEFI
             IsVM = ($Win32ComputerSystem.Model -match 'Virtual') -or ($Win32ComputerSystem.Model -match 'VMware')
             IsWinPE = $env:SystemDrive -eq 'X:'
-            IsWinSE = Get-OSDBool -Property IsWinSE
+            IsInWinSE = Get-OSDBool -Property IsInWinSE
             #===================================================================================================
             #   Value
             #===================================================================================================
@@ -154,7 +154,7 @@ function Get-OSDGather {
             IsUEFI = Get-OSDBool -Property IsUEFI
             IsVM = ($Win32ComputerSystem.Model -match 'Virtual') -or ($Win32ComputerSystem.Model -match 'VMware')
             IsWinPE = $env:SystemDrive -eq 'X:'
-            IsWinSE = Get-OSDBool -Property IsWinSE
+            IsInWinSE = Get-OSDBool -Property IsInWinSE
             #===================================================================================================
             #   Value
             #===================================================================================================
@@ -187,7 +187,7 @@ function Get-OSDGather {
             #===================================================================================================
             #   CimInstance
             #===================================================================================================
-            Win32_Battery = (Get-CimInstance -ClassName Win32_Battery | Select-Object -Property *)
+            Win32_Battery = $Win32Battery
             Win32_BaseBoard = $Win32BaseBoard
             Win32_BIOS = $Win32BIOS
             Win32_BootConfiguration = (Get-CimInstance -ClassName Win32_BootConfiguration | Select-Object -Property *)
