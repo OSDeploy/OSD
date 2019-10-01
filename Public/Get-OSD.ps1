@@ -44,7 +44,6 @@ function Get-OSD {
         Write-Host
         Write-Host 'Functions' -ForegroundColor Green
         Write-Host 'Get-OSD'
-        Write-Host 'Get-OSDBool'
         Write-Host 'Get-OSDCimClass'
         Write-Host 'Get-OSDGather'
         Write-Host 'Get-OSDPower'
