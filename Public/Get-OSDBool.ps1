@@ -1,13 +1,36 @@
-function Get-OSDValue {
+<#
+.SYNOPSIS
+Evaluates an OSD Property and returns a Boolean value ($true or $false)
+
+.DESCRIPTION
+Evaluates an OSD Property and returns a Boolean value ($true or $false)
+
+.LINK
+https://osd.osdeploy.com/module/functions/get-osdbool
+
+.NOTES
+19.10.1     David Segura @SeguraOSD
+#>
+function Get-OSDBool {
     [CmdletBinding()]
     Param (
+        #Selected Property is returned as a Boolean value ($true or $false)
         [Parameter(Mandatory = $true, Position = 0)]
-        [ValidateSet(`
-            'IsAdmin',`
-            'IsWinPE','IsWinSE',`
-            'IsClientOS','IsServerOS','IsServerCoreOS',`
-            'IsDesktop','IsLaptop','IsServer','IsSFF','IsTablet',`
-            'IsUEFI','IsVM','IsOnBattery'`
+        [ValidateSet(
+            'IsAdmin',
+            'IsClientOS',
+            'IsDesktop',
+            'IsLaptop',
+            'IsOnBattery',
+            'IsSFF',
+            'IsServer',
+            'IsServerCoreOS',
+            'IsServerOS',
+            'IsTablet',
+            'IsUEFI',
+            'IsVM',
+            'IsWinPE',
+            'IsWinSE'
         )]
         [string]$Property
     )

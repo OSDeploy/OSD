@@ -1,6 +1,24 @@
+<#
+.SYNOPSIS
+Returns common OSD information as an ordered hash table
+
+.DESCRIPTION
+Returns common OSD information as an ordered hash table
+
+.EXAMPLE
+$OSDGather = Get-OSDGather
+$OSDGather.Model
+
+.LINK
+https://osd.osdeploy.com/module/functions/get-osdgather
+
+.NOTES
+19.10.1     David Segura @SeguraOSD
+#>
 function Get-OSDGather {
     [CmdletBinding()]
     Param (
+        #Optionally include CimInstance
         [switch]$Full
     )
     #===================================================================================================
@@ -70,24 +88,24 @@ function Get-OSDGather {
     if (!($Full.IsPresent)) {
         $OSDGather = [ordered]@{
             #===================================================================================================
-            #   Is
+            #   Bool
             #===================================================================================================
-            IsAdmin = Get-OSDValue -Property IsAdmin
-            IsDesktop = Get-OSDValue -Property IsDesktop
-            IsLaptop = Get-OSDValue -Property IsLaptop
+            IsAdmin = Get-OSDBool -Property IsAdmin
+            IsClientOS = Get-OSDBool -Property IsClientOS
+            IsDesktop = Get-OSDBool -Property IsDesktop
+            IsLaptop = Get-OSDBool -Property IsLaptop
             IsOnBattery = ($Win32Battery.BatteryStatus -eq 1)
-            IsSFF = Get-OSDValue -Property IsSFF
-            IsServer = Get-OSDValue -Property IsServer
-            IsServerCoreOS = Get-OSDValue -Property IsServerCoreOS
-            IsServerOS = Get-OSDValue -Property IsServerOS
-            IsTablet = Get-OSDValue -Property IsTablet
-            IsUEFI = Get-OSDValue -Property IsUEFI
+            IsSFF = Get-OSDBool -Property IsSFF
+            IsServer = Get-OSDBool -Property IsServer
+            IsServerCoreOS = Get-OSDBool -Property IsServerCoreOS
+            IsServerOS = Get-OSDBool -Property IsServerOS
+            IsTablet = Get-OSDBool -Property IsTablet
+            IsUEFI = Get-OSDBool -Property IsUEFI
             IsVM = ($Win32ComputerSystem.Model -match 'Virtual') -or ($Win32ComputerSystem.Model -match 'VMware')
-            IsWinOS = $env:SystemDrive -ne 'X:'
             IsWinPE = $env:SystemDrive -eq 'X:'
-            IsWinSE = Get-OSDValue -Property IsWinSE
+            IsWinSE = Get-OSDBool -Property IsWinSE
             #===================================================================================================
-            #   Not Is
+            #   Value
             #===================================================================================================
             Architecture = $Architecture
             AssetTag = $Win32SystemEnclosure.SMBIOSAssetTag.Trim()
@@ -121,24 +139,24 @@ function Get-OSDGather {
     if ($Full.IsPresent) {
         $OSDGather = [ordered]@{
             #===================================================================================================
-            #   Is
+            #   Bool
             #===================================================================================================
-            IsAdmin = Get-OSDValue -Property IsAdmin
-            IsDesktop = Get-OSDValue -Property IsDesktop
-            IsLaptop = Get-OSDValue -Property IsLaptop
+            IsAdmin = Get-OSDBool -Property IsAdmin
+            IsClientOS = Get-OSDBool -Property IsClientOS
+            IsDesktop = Get-OSDBool -Property IsDesktop
+            IsLaptop = Get-OSDBool -Property IsLaptop
             IsOnBattery = ($Win32Battery.BatteryStatus -eq 1)
-            IsSFF = Get-OSDValue -Property IsSFF
-            IsServer = Get-OSDValue -Property IsServer
-            IsServerCoreOS = Get-OSDValue -Property IsServerCoreOS
-            IsServerOS = Get-OSDValue -Property IsServerOS
-            IsTablet = Get-OSDValue -Property IsTablet
-            IsUEFI = Get-OSDValue -Property IsUEFI
+            IsSFF = Get-OSDBool -Property IsSFF
+            IsServer = Get-OSDBool -Property IsServer
+            IsServerCoreOS = Get-OSDBool -Property IsServerCoreOS
+            IsServerOS = Get-OSDBool -Property IsServerOS
+            IsTablet = Get-OSDBool -Property IsTablet
+            IsUEFI = Get-OSDBool -Property IsUEFI
             IsVM = ($Win32ComputerSystem.Model -match 'Virtual') -or ($Win32ComputerSystem.Model -match 'VMware')
-            IsWinOS = $env:SystemDrive -ne 'X:'
             IsWinPE = $env:SystemDrive -eq 'X:'
-            IsWinSE = Get-OSDValue -Property IsWinSE
+            IsWinSE = Get-OSDBool -Property IsWinSE
             #===================================================================================================
-            #   Not Is
+            #   Value
             #===================================================================================================
             Architecture = $Architecture
             AssetTag = $Win32SystemEnclosure.SMBIOSAssetTag.Trim()

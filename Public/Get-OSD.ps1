@@ -5,18 +5,11 @@ Displays information about the OSD Module
 .DESCRIPTION
 Displays information about the OSD Module
 
-.EXAMPLE
-OSD
-Displays OSD Module information
-Option 1: Get-OSD
-Option 2: Get-OSDCimClass ComputerSystem
-Option 3: Get-OSDCimClass -Class ComputerSystem
-
 .LINK
 https://osd.osdeploy.com/module/functions/get-osd
 
 .NOTES
-19.9.29 Contributed by David Segura @SeguraOSD
+19.10.1     David Segura @SeguraOSD
 #>
 function Get-OSD {
     [CmdletBinding()]
@@ -67,8 +60,5 @@ function Get-OSD {
     
         Write-Host "Nathan Bridges      " -NoNewline
         Write-Host "@nathanjbridges" -ForegroundColor Cyan
-    
-        Write-Host "Sune Thomsen        " -NoNewline
-        Write-Host "@SuneThomsenDK" -ForegroundColor Cyan
     }
 }

@@ -1,15 +1,9 @@
 <#
 .SYNOPSIS
-Displays Computer and Operating System information using Win32_ComputerSystem and Win32_OperatingSystem class
+Returns the value of an OSD Property
 
 .DESCRIPTION
-Displays Computer and Operating System information using Win32_ComputerSystem and Win32_OperatingSystem class
-
-.PARAMETER Property
-Type: String
-Position: 0
-Values: BootDevice,BuildNumber,Caption,ChassisSKUNumber,Name,InstallDate,Locale,Make,Manufacturer,Model,OSArchitecture,OperatingSystemSKU,ProductType,SystemDevice,SystemDirectory,SystemDrive,SystemFamily,SystemSKUNumber,Version,WindowsBuild,WindowsDirectory,WindowsReleaseId,WindowsUbr
-Default: None (Requires Value/Parameter)
+Returns the value of an OSD Property
 
 .EXAMPLE
 OSDProperty Model
@@ -29,38 +23,40 @@ Option 3: Get-OSDProperty -Property SystemDrive
 https://osd.osdeploy.com/module/functions/get-osdproperty
 
 .NOTES
-19.9.29.1 Contributed by Ben Whitmore @byteben
-19.9.29 Contributed by David Segura @SeguraOSD
+19.10.1     David Segura @SeguraOSD
+19.9.29.1   Ben Whitmore @byteben
+19.9.29     David Segura @SeguraOSD
 #>
 function Get-OSDProperty {
     [CmdletBinding()]
     Param (
         [Parameter(Mandatory = $true, Position = 0)]
-        [ValidateSet(`
-        'BootDevice',`
-        'BuildNumber',`
-        'Caption',`
-        'ChassisSKUNumber',`
-        'Name',`
-        'InstallDate',`
-        'Locale',`
-        'Make',`
-        'Manufacturer',`
-        'Model',`
-        'OSArchitecture',`
-        'OperatingSystemSKU',`
-        'ProductType',`
-        'SystemDevice',`
-        'SystemDirectory',`
-        'SystemDrive',`
-        'SystemFamily',`
-        'SystemSKUNumber',`
-        'Version',`
-        'WindowsBuild',`
-        'WindowsDirectory',`
-        'WindowsReleaseId',`
-        'WindowsUbr'`
-        )][string]$Property
+        [ValidateSet(
+            'BootDevice',
+            'BuildNumber',
+            'Caption',
+            'ChassisSKUNumber',
+            'Name',
+            'InstallDate',
+            'Locale',
+            'Make',
+            'Manufacturer',
+            'Model',
+            'OSArchitecture',
+            'OperatingSystemSKU',
+            'ProductType',
+            'SystemDevice',
+            'SystemDirectory',
+            'SystemDrive',
+            'SystemFamily',
+            'SystemSKUNumber',
+            'Version',
+            'WindowsBuild',
+            'WindowsDirectory',
+            'WindowsReleaseId',
+            'WindowsUbr'
+        )]
+        [string]$Property
     )
     #===================================================================================================
     #   Win32_ComputerSystem

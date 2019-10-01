@@ -7,7 +7,7 @@
 RootModule = 'OSD.psm1'
 
 # Version number of his module.
-ModuleVersion = '19.9.30.0'
+ModuleVersion = '19.10.1.0'
 
 # Supported PSEditions
 # CompatiblePSEditions = @()
@@ -30,12 +30,13 @@ https://osd.osdeploy.com/
 OSD PowerShell Module is a collection of OSD shared functions.  It is currently under development and is for Testing only
 
 OSD Module Collaborators
-Andrew Jimenez | @AndrewJimenez_
-Ben Whitmore | @byteben
-Jerome Bezet-Torres | @JM2K69
-Nathan Bridges | @nathanjbridges
-Manel Rodero | @manelrodero
-Sune Thomsen | @SuneThomsenDK
+Andrew Jimenez      @AndrewJimenez_
+Ben Whitmore        @byteben
+David Segura        @SeguraOSD #MMSJazz
+Donna Ryan          @TheNotoriousDRR #MMSJazz
+Jerome Bezet-Torres @JM2K69
+Nathan Bridges      @nathanjbridges
+Manel Rodero        @manelrodero
 '@
 
 # Minimum version of the Windows PowerShell engine required by this module
@@ -75,7 +76,7 @@ PowerShellVersion = '5.0'
 # NestedModules = @()
 
 # Functions to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no functions to export.
-FunctionsToExport = 'Get-OSD','Get-OSDCimClass','Get-OSDGather','Get-OSDProperty','Get-OSDPower','Get-OSDValue','Get-OSDPSHook','Get-OSDWinPE'
+FunctionsToExport = 'Get-OSD','Get-OSDBool','Get-OSDCimClass','Get-OSDGather','Get-OSDProperty','Get-OSDPower','Get-OSDWinPE'
 
 # Cmdlets to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no cmdlets to export.
 CmdletsToExport = @()

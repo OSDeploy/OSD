@@ -5,12 +5,6 @@ Displays Power Plan information using powercfg /LIST
 .DESCRIPTION
 Displays Power Plan information using powercfg /LIST.  Optionally Set an Active Power Plan
 
-.PARAMETER Property
-Type: String
-Position: 0
-Values: Low, Balanced, High, LIST, QUERY
-Default: LIST
-
 .EXAMPLE
 OSDPower
 Returns Power Plan information using powercfg /LIST
@@ -28,15 +22,13 @@ Option 2: Get-OSDPower -Property High
 https://osd.osdeploy.com/module/functions/get-osdpower
 
 .NOTES
-Version:
-19.9.29 David Segura @SeguraOSD
-
-Reference:
-https://docs.microsoft.com/en-us/windows-hardware/design/device-experiences/powercfg-command-line-options
+19.10.1     David Segura @SeguraOSD
 #>
 function Get-OSDPower {
     [CmdletBinding()]
     Param (
+        #Powercfg option (Low, Balanced, High, LIST, QUERY)
+        #Default is LIST
         [Parameter(Position = 0)]
         [ValidateSet('Low','Balanced','High','LIST','QUERY')]
         [string]$Property = 'LIST'
