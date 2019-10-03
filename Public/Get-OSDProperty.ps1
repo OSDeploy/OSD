@@ -32,6 +32,7 @@ function Get-OSDProperty {
     Param (
         #Return Boolean ($true or $false)
         #IsAdmin
+        #IsBDE
         #IsClientOS
         #IsDesktop
         #IsLaptop
@@ -47,18 +48,23 @@ function Get-OSDProperty {
         #IsInWinSE
         #
         #Return Value
+        #Architecture
+        #AssetTag
         #BootDevice
         #BuildNumber
         #Caption
         #ChassisSKUNumber
-        #Name
+        #HostName
         #InstallDate
         #Locale
         #Make
         #Manufacturer
         #Model
-        #OSArchitecture
+        #Name
         #OperatingSystemSKU
+        #OSCurrentBuild
+        #OSCurrentReleaseId
+        #OSCurrentUbr
         #ProductType
         #SystemDevice
         #SystemDirectory
@@ -66,13 +72,11 @@ function Get-OSDProperty {
         #SystemFamily
         #SystemSKUNumber
         #Version
-        #WindowsBuild
         #WindowsDirectory
-        #WindowsReleaseId
-        #WindowsUbr
         [Parameter(Mandatory = $true, Position = 0)]
         [ValidateSet(
         'IsAdmin',
+        'IsBDE',
         'IsClientOS',
         'IsDesktop',
         'IsLaptop',
@@ -86,18 +90,23 @@ function Get-OSDProperty {
         'IsVM',
         'IsWinPE',
         'IsInWinSE',
+        'Architecture',
+        'AssetTag',
         'BootDevice',
         'BuildNumber',
         'Caption',
         'ChassisSKUNumber',
-        'Name',
+        'HostName',
         'InstallDate',
         'Locale',
         'Make',
         'Manufacturer',
         'Model',
-        'OSArchitecture',
+        'Name',
         'OperatingSystemSKU',
+        'OSCurrentBuild',
+        'OSCurrentReleaseId',
+        'OSCurrentUbr',
         'ProductType',
         'SystemDevice',
         'SystemDirectory',
@@ -105,10 +114,7 @@ function Get-OSDProperty {
         'SystemFamily',
         'SystemSKUNumber',
         'Version',
-        'WindowsBuild',
-        'WindowsDirectory',
-        'WindowsReleaseId',
-        'WindowsUbr'
+        'WindowsDirectory'
         )]
         [string]$Property
     )
@@ -116,13 +122,17 @@ function Get-OSDProperty {
     #   Basic
     #======================================================================================================
     $IsAdmin = ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] 'Administrator')
-    if ($Property -eq 'IsAdmin') {Return $IsAdmin}
-    
-    $IsWinPE = $env:SystemDrive -eq 'X:'
-    if ($Property -eq 'IsWinPE') {Return $IsWinPE}
-
     $IsInWinSE = (($env:SystemDrive -eq 'X:') -and (Test-Path 'X:\Setup.exe'))
-    if ($Property -eq 'IsInWinSE') {Return $IsInWinSE}
+    $IsWinPE = $env:SystemDrive -eq 'X:'
+
+
+    if ($Property -eq 'IsAdmin') {Return $IsAdmin}
+    if ($Property -eq 'IsInWinSE') {$IsInWinSE}
+    if ($Property -eq 'IsWinPE') {$IsWinPE}
+    if ($Property -eq 'HostName') {[System.Environment]::HostName}
+    if ($Property -eq 'OSCurrentBuild') {[System.Environment]::OSVersion.Version.Build}
+    if ($Property -eq 'OSCurrentReleaseId') {(Get-ItemProperty -Path 'HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion').ReleaseId}
+    if ($Property -eq 'OSCurrentUbr') {(Get-ItemProperty -Path 'HKLM:\Software\Microsoft\Windows NT\CurrentVersion').UBR}
     #======================================================================================================
     #   IsUEFI
     #======================================================================================================
@@ -136,6 +146,49 @@ function Get-OSDProperty {
         }
     }
     if ($Property -eq 'IsUEFI') {Return $IsUEFI}
+    #===================================================================================================
+    #   Architecture
+    #===================================================================================================
+    if ($env:PROCESSOR_ARCHITEW6432) {
+        if ($env:PROCESSOR_ARCHITEW6432 -eq "AMD64") {
+            $Architecture = "x64"
+        } else {
+            $Architecture = $env:PROCESSOR_ARCHITEW6432.ToUpper()
+        }
+    } else {
+        if ($env:PROCESSOR_ARCHITECTURE -eq "AMD64") {
+            $Architecture = "x64"
+        } else {
+            $Architecture = $env:PROCESSOR_ARCHITECTURE.ToUpper()
+        }
+    }
+    #======================================================================================================
+    #   IsBDE
+    #   Credit Johan Schrewelius    https://gallery.technet.microsoft.com/PowerShell-script-that-a8a7bdd8
+    #======================================================================================================
+    if ($Property -eq 'IsBDE') {
+        $IsBDE = $false
+        $Global:BitlockerEncryptionType = $null
+        $Global:BitlockerEncryptionMethod = $null
+    
+        $EncVols = Get-WmiObject -Namespace 'ROOT\cimv2\Security\MicrosoftVolumeEncryption' -Query "Select * from Win32_EncryptableVolume" -EA SilentlyContinue
+        if ($EncVols) {
+            foreach ($EncVol in $EncVols) {
+                if($EncVol.ProtectionStatus -ne 0) {
+                    $EncMethod = [int]$EncVol.GetEncryptionMethod().EncryptionMethod
+                    if ($EncryptionMethods.ContainsKey($EncMethod)) {$Global:BitlockerEncryptionMethod = $EncryptionMethods[$EncMethod]}
+                    $Status = $EncVol.GetConversionStatus(0)
+                    if ($Status.ReturnValue -eq 0) {
+                        if ($Status.EncryptionFlags -eq 0x00000001) {$Global:BitlockerEncryptionType = "Used Space Only Encrypted"}
+                        else {$Global:BitlockerEncryptionType = "Full Disk Encryption"}
+                    } else {$Global:BitlockerEncryptionType = "Unknown"}
+    
+                    $IsBDE = $true
+                }
+            }
+        }
+        Return $IsBDE
+    }
     #======================================================================================================
     #   IsOnBattery
     #======================================================================================================
@@ -215,13 +268,12 @@ function Get-OSDProperty {
     #   Win32_OperatingSystem
     #===================================================================================================
     $Win32OperatingSystem = (Get-CimInstance -ClassName Win32_OperatingSystem | Select-Object -Property *)
-
+    if ($Property -eq 'Architecture') {$Win32OperatingSystem.OSArchitecture}
     if ($Property -eq 'BootDevice') {$Win32OperatingSystem.BootDevice}
     if ($Property -eq 'BuildNumber') {$Win32OperatingSystem.BuildNumber}
     if ($Property -eq 'Caption') {$Win32OperatingSystem.Caption}
     if ($Property -eq 'InstallDate') {$Win32OperatingSystem.InstallDate}
     if ($Property -eq 'Locale') {$Win32OperatingSystem.Locale}
-    if ($Property -eq 'OSArchitecture') {$Win32OperatingSystem.OSArchitecture}
     if ($Property -eq 'OperatingSystemSKU') {$Win32OperatingSystem.OperatingSystemSKU}
     if ($Property -eq 'ProductType') {$Win32OperatingSystem.ProductType}
     if ($Property -eq 'SystemDevice') {$Win32OperatingSystem.SystemDevice}
@@ -229,30 +281,4 @@ function Get-OSDProperty {
     if ($Property -eq 'SystemDrive') {$Win32OperatingSystem.SystemDrive}
     if ($Property -eq 'Version') {$Win32OperatingSystem.Version}
     if ($Property -eq 'WindowsDirectory') {$Win32OperatingSystem.WindowsDirectory}
-
-
-    if ($Property -eq 'WindowsBuild') {
-        Write-Verbose "WindowsBuild: What is the Windows Build?"
-        Write-Verbose 'System.Environment]::OSVersion.Version.Build'
-    
-        $Value = [System.Environment]::OSVersion.Version.Build
-        #$Value = $Win32OperatingSystem.BuildNumber
-        Return $Value
-    }
-
-    if ($Property -eq 'WindowsReleaseId') {
-        Write-Verbose "WindowsReleaseId: What is the Windows Release ID?"
-        Write-Verbose "(Get-ItemProperty -Path 'HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion').ReleaseId"
-    
-        $Value = (Get-ItemProperty -Path 'HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion').ReleaseId
-        Return $Value
-    }
-
-    if ($Property -eq 'WindowsUbr') {
-        Write-Verbose "WindowsUbr: What is the Windows UBR?"
-        Write-Verbose "(Get-ItemProperty -Path 'HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion').UBR"
-    
-        $Value = (Get-ItemProperty -Path 'HKLM:\Software\Microsoft\Windows NT\CurrentVersion').UBR
-        Return $Value
-    }
 }
