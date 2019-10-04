@@ -94,7 +94,7 @@ function Get-OSDWinPE {
     #======================================================================================================
     #	IsWinPE
     #======================================================================================================
-    if (Get-OSDBool -Property IsWinPE) {Write-Verbose 'OSDWinPE: WinPE is running'}
+    if (Get-OSDGather -Property IsWinPE) {Write-Verbose 'OSDWinPE: WinPE is running'}
     else {Write-Warning 'OSDWinPE: This function requires WinPE'; Break}
     #======================================================================================================
     #	Increase the Console Screen Buffer size

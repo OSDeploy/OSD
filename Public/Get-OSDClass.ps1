@@ -6,19 +6,19 @@ Returns CimInstance information from common OSD Classes
 Returns CimInstance information from common OSD Classes
 
 .EXAMPLE
-OSDCimClass
+OSDClass
 Returns CimInstance Win32_ComputerSystem properties
-Option 1: Get-OSDCimClass
-Option 2: Get-OSDCimClass ComputerSystem
-Option 3: Get-OSDCimClass -Class ComputerSystem
+Option 1: Get-OSDClass
+Option 2: Get-OSDClass ComputerSystem
+Option 3: Get-OSDClass -Class ComputerSystem
 
 .LINK
-https://osd.osdeploy.com/module/functions/get-osdcimclass
+https://osd.osdeploy.com/module/functions/get-osdclass
 
 .NOTES
 19.10.1     David Segura @SeguraOSD
 #>
-function Get-OSDCimClass {
+function Get-OSDClass {
     [CmdletBinding()]
     Param (
         #CimInstance Class Name
