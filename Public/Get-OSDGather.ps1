@@ -36,6 +36,7 @@ function Get-OSDGather {
             'IsOnBattery',
             'IsSFF',
             'IsServer',
+            'IsServerChassis',
             'IsServerCoreOS',
             'IsServerOS',
             'IsTablet',
@@ -154,18 +155,23 @@ function Get-OSDGather {
     $IsDesktop = $false
     $IsLaptop = $false
     $IsServer = $false
+    $IsServerChassis = $false
     $IsSFF = $false
     $IsTablet = $false
     $Win32SystemEnclosure | ForEach-Object {
         if ($_.ChassisTypes[0] -in "8", "9", "10", "11", "12", "14", "18", "21") { $IsLaptop = $true }
         if ($_.ChassisTypes[0] -in "3", "4", "5", "6", "7", "15", "16") { $IsDesktop = $true }
-        if ($_.ChassisTypes[0] -in "23") { $IsServer = $true }
+        if ($_.ChassisTypes[0] -in "23") {
+            $IsServer = $true
+            $IsServerChassis = $true
+        }
         if ($_.ChassisTypes[0] -in "34", "35", "36") { $IsSFF = $true }
         if ($_.ChassisTypes[0] -in "13", "31", "32", "30") { $IsTablet = $true } 
     }
     if ($Property -eq 'IsDesktop') {Return $IsDesktop}
     if ($Property -eq 'IsLaptop') {Return $IsLaptop}
     if ($Property -eq 'IsServer') {Return $IsServer}
+    if ($Property -eq 'IsServerChassis') {Return $IsServerChassis}
     if ($Property -eq 'IsSFF') {Return $IsSFF}
     if ($Property -eq 'IsTablet') {Return $IsTablet}
     #======================================================================================================
@@ -197,6 +203,7 @@ function Get-OSDGather {
     #   Win32NetworkAdapterConfiguration
     #   Credit FriendsOfMDT         https://github.com/FriendsOfMDT/PSD
     #===================================================================================================
+    $Win32NetworkAdapterConfiguration = (Get-CimInstance -ClassName Win32_NetworkAdapterConfiguration | Select-Object -Property *)
     $ipList = @()
     $macList = @()
     $gwList = @()
@@ -236,10 +243,6 @@ function Get-OSDGather {
 
     try {$GetPhysicalDisk = Get-PhysicalDisk}
     catch {$GetPhysicalDisk = $null}
-
-
-
-
     #===================================================================================================
     #   Get CimInstance
     #===================================================================================================
@@ -253,7 +256,7 @@ function Get-OSDGather {
     $Win32Environment = (Get-CimInstance -ClassName Win32_Environment | Select-Object -Property *)
     $Win32LogicalDisk = (Get-CimInstance -ClassName Win32_LogicalDisk | Select-Object -Property *)
     $Win32NetworkAdapter = (Get-CimInstance -ClassName Win32_NetworkAdapter | Select-Object -Property *)
-    $Win32NetworkAdapterConfiguration = (Get-CimInstance -ClassName Win32_NetworkAdapterConfiguration | Select-Object -Property *)
+    #$Win32NetworkAdapterConfiguration = (Get-CimInstance -ClassName Win32_NetworkAdapterConfiguration | Select-Object -Property *)
     $Win32OperatingSystem = (Get-CimInstance -ClassName Win32_OperatingSystem | Select-Object -Property *)
     $Win32PnPEntity = (Get-CimInstance -ClassName Win32_PnPEntity | Select-Object -Property *)
     #$Win32PortableBattery = (Get-CimInstance -ClassName Win32_PortableBattery | Select-Object -Property *)
@@ -266,12 +269,9 @@ function Get-OSDGather {
     $Win32Volume = (Get-CimInstance -ClassName Win32_Volume | Select-Object -Property *)
     $CimVideoControllerResolution = (Get-CimInstance -ClassName CIM_VideoControllerResolution | Select-Object -Property *)
 
-
     $SupportsNX = $Win32OperatingSystem.DataExecutionPrevention_Available -eq $true
     $Supports32Bit = $Win32Processor.DataWidth -match 32
     $Supports64Bit = $Win32Processor.DataWidth -match 64
-
-
     #======================================================================================================
     #   MDT
     #======================================================================================================
@@ -284,7 +284,7 @@ function Get-OSDGather {
         #CapableArchitecture = AMD64 X64 X86
         #DEBUG = FALSE
         #DefaultGateway =
-        #HalName = #acpiapic
+        #HalName = acpiapic
         HostName = $Win32ComputerSystem.DNSHostName
         IPAddress = $IPAddress
         #LOGPATH = C:\MININT\SMSOSD\OSDLOGS
@@ -297,13 +297,13 @@ function Get-OSDGather {
         OriginalWindir = $Win32OperatingSystem.WindowsDirectory
         OsCurrentBuild = $Win32OperatingSystem.BuildNumber
         OsCurrentVersion = $Win32OperatingSystem.Version
-        ###OsSku = $GetComputerInfo.WindowsEditionId
+        #OsSku = Enterprise
         OsVersion = $Win32OperatingSystem.Version
         ProcessorSpeed = $Win32Processor.MaxClockSpeed
         Product = $Win32BaseBoard.Product
         SerialNumber = $Win32BIOS.SerialNumber
-        SupportsHyperVRole = $SupportsNX
-        SupportsSLAT = $Win32Processor.SecondLevelAddressTranslationExtensions
+        #SupportsHyperVRole = $SupportsNX
+        #SupportsSLAT = $Win32Processor.SecondLevelAddressTranslationExtensions
         SupportsX64 = $Supports64Bit
         SupportsX86 = $Supports32Bit
         UUID = $Win32ComputerSystemProduct.UUID
