@@ -155,23 +155,18 @@ function Get-OSDGather {
     $IsDesktop = $false
     $IsLaptop = $false
     $IsServer = $false
-    $IsServerChassis = $false
     $IsSFF = $false
     $IsTablet = $false
     $Win32SystemEnclosure | ForEach-Object {
         if ($_.ChassisTypes[0] -in "8", "9", "10", "11", "12", "14", "18", "21") { $IsLaptop = $true }
         if ($_.ChassisTypes[0] -in "3", "4", "5", "6", "7", "15", "16") { $IsDesktop = $true }
-        if ($_.ChassisTypes[0] -in "23") {
-            $IsServer = $true
-            $IsServerChassis = $true
-        }
+        if ($_.ChassisTypes[0] -in "23") {$IsServer = $true}
         if ($_.ChassisTypes[0] -in "34", "35", "36") { $IsSFF = $true }
         if ($_.ChassisTypes[0] -in "13", "31", "32", "30") { $IsTablet = $true } 
     }
     if ($Property -eq 'IsDesktop') {Return $IsDesktop}
     if ($Property -eq 'IsLaptop') {Return $IsLaptop}
-    if ($Property -eq 'IsServer') {Return $IsServer}
-    if ($Property -eq 'IsServerChassis') {Return $IsServerChassis}
+    if ($Property -eq 'IsServer' -or $Property -eq 'IsServerChassis') {Return $IsServer}
     if ($Property -eq 'IsSFF') {Return $IsSFF}
     if ($Property -eq 'IsTablet') {Return $IsTablet}
     #======================================================================================================
@@ -323,6 +318,7 @@ function Get-OSDGather {
         IsOnBattery = $IsOnBattery
         IsSFF = $IsSFF
         IsServer = $IsServer
+        IsServerChassis = $IsServer
         IsServerCoreOS = $IsServerCoreOS
         IsServerOS = $IsServerOS
         IsTablet = $IsTablet
