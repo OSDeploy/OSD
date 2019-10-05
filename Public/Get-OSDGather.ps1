@@ -175,7 +175,16 @@ function Get-OSDGather {
     #======================================================================================================
     #   IsOnBattery
     #======================================================================================================
-    $IsOnBattery = ($Win32Battery.BatteryStatus -eq 1)
+    if ($Win32Battery.Count -ge 2){
+        # Get the info for the battery status isn't null, if multiple are in use, just return the first one
+        $Win32Battery = ($Win32Battery | Where-Object -Property BatteryStatus -ne $null | Select-Object -First 1)
+        
+        # If none of the batteries returns a status, get the info from the first battery listed
+        if ([System.String]::IsNullOrEmpty($Win32Battery)){
+            $Win32Battery = (Get-CimInstance -ClassName Win32_Battery -ErrorAction SilentlyContinue | Select-Object -Property * | Select-Object -First 1)
+        }
+    }
+    $IsOnBattery = [System.Convert]::ToBoolean($Win32Battery.BatteryStatus)
     if ($Property -eq 'IsOnBattery') {Return $IsOnBattery}
     #===================================================================================================
     #   Architecture
