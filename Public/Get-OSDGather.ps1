@@ -180,7 +180,7 @@ function Get-OSDGather {
     #===================================================================================================
     #   Architecture
     #===================================================================================================
-<#     if ($env:PROCESSOR_ARCHITEW6432) {
+    if ($env:PROCESSOR_ARCHITEW6432) {
         if ($env:PROCESSOR_ARCHITEW6432 -eq "AMD64") {
             $Architecture = "x64"
         } else {
@@ -192,12 +192,12 @@ function Get-OSDGather {
         } else {
             $Architecture = $env:PROCESSOR_ARCHITECTURE.ToUpper()
         }
-    } #>
+    }
     #===================================================================================================
     #   Win32NetworkAdapterConfiguration
     #   Credit FriendsOfMDT         https://github.com/FriendsOfMDT/PSD
     #===================================================================================================
-<#     $ipList = @()
+    $ipList = @()
     $macList = @()
     $gwList = @()
     $Win32NetworkAdapterConfiguration | Where-Object {$_.IpEnabled -eq $true} | ForEach-Object {
@@ -207,7 +207,7 @@ function Get-OSDGather {
     }
     $IPAddress = $ipList
     $MacAddress = $macList
-    $DefaultGateway = $gwList #>
+    $DefaultGateway = $gwList
     #===================================================================================================
     #   Get-ComputerInfo
     #===================================================================================================
@@ -228,6 +228,18 @@ function Get-OSDGather {
         $RegVersion.DigitalProductId4 = $null
     }
     catch {}
+    #===================================================================================================
+    #   Get CimInstance
+    #===================================================================================================
+    try {$GetBitlockerVolume = Get-BitlockerVolume}
+    catch {$GetBitlockerVolume = $null}
+
+    try {$GetPhysicalDisk = Get-PhysicalDisk}
+    catch {$GetPhysicalDisk = $null}
+
+
+
+
     #===================================================================================================
     #   Get CimInstance
     #===================================================================================================
@@ -253,6 +265,49 @@ function Get-OSDGather {
     $Win32VideoController = (Get-CimInstance -ClassName Win32_VideoController | Select-Object -Property *)
     $Win32Volume = (Get-CimInstance -ClassName Win32_Volume | Select-Object -Property *)
     $CimVideoControllerResolution = (Get-CimInstance -ClassName CIM_VideoControllerResolution | Select-Object -Property *)
+
+
+    $SupportsNX = $Win32OperatingSystem.DataExecutionPrevention_Available -eq $true
+    $Supports32Bit = $Win32Processor.DataWidth -match 32
+    $Supports64Bit = $Win32Processor.DataWidth -match 64
+
+
+    #======================================================================================================
+    #   MDT
+    #======================================================================================================
+    $GetOSDGatherMDT = [ordered]@{
+        #===================================================================================================
+        #   MDT Variables
+        #===================================================================================================
+        Architecture = $Architecture
+        AssetTag = $Win32SystemEnclosure.SMBIOSAssetTag.Trim()
+        #CapableArchitecture = AMD64 X64 X86
+        #DEBUG = FALSE
+        #DefaultGateway =
+        #HalName = #acpiapic
+        HostName = $Win32ComputerSystem.DNSHostName
+        IPAddress = $IPAddress
+        #LOGPATH = C:\MININT\SMSOSD\OSDLOGS
+        MacAddress = $MacAddress
+        Make = $Win32ComputerSystem.Manufacturer
+        Memory = [int] ($Win32ComputerSystem.TotalPhysicalMemory / 1024 / 1024)
+        Model = $Win32ComputerSystem.Model
+        #ORIGINALARCHITECTURE = X64
+        #ORIGINALPARTITIONIDENTIFIER = SELECT * FROM Win32_LogicalDisk WHERE Size = '498731053056' and VolumeName = 'OSDisk' and VolumeSerialNumber = '5AC885B9'
+        OriginalWindir = $Win32OperatingSystem.WindowsDirectory
+        OsCurrentBuild = $Win32OperatingSystem.BuildNumber
+        OsCurrentVersion = $Win32OperatingSystem.Version
+        ###OsSku = $GetComputerInfo.WindowsEditionId
+        OsVersion = $Win32OperatingSystem.Version
+        ProcessorSpeed = $Win32Processor.MaxClockSpeed
+        Product = $Win32BaseBoard.Product
+        SerialNumber = $Win32BIOS.SerialNumber
+        SupportsHyperVRole = $SupportsNX
+        SupportsSLAT = $Win32Processor.SecondLevelAddressTranslationExtensions
+        SupportsX64 = $Supports64Bit
+        SupportsX86 = $Supports32Bit
+        UUID = $Win32ComputerSystemProduct.UUID
+    }
     #======================================================================================================
     #   Hashtable
     #======================================================================================================
@@ -276,36 +331,9 @@ function Get-OSDGather {
         IsWinPE = $IsWinPE
         IsInWinSE = $IsInWinSE
         #===================================================================================================
-        #   MDT Variables
+        #   MDT
         #===================================================================================================
-        ###Architecture = $Architecture
-        ###AssetTag = Get-OSDProperty -Property AssetTag
-        #CapableArchitecture = $null    #AMD64 X64 X86
-        #DEBUG = FALSE
-        #ToDoDefaultGateway = $null
-        #ToDoHalName = $null #acpiapic
-        ###HostName = $GetComputerInfo.CsDNSHostName
-        ###IPAddress = $IPAddress
-        #LOGPATH = C:\MININT\SMSOSD\OSDLOGS
-        ###MacAddress = $MacAddress
-        ###Make = $GetComputerInfo.CsManufacturer
-        ###Memory = [int] ($GetComputerInfo.CsTotalPhysicalMemory / 1024 / 1024)
-        ###Model = $GetComputerInfo.CsModel
-        #ORIGINALARCHITECTURE = X64
-        #ORIGINALPARTITIONIDENTIFIER = SELECT * FROM Win32_LogicalDisk WHERE Size = '498731053056' and VolumeName = 'OSDisk' and VolumeSerialNumber = '5AC885B9'
-        #OriginalWindir = $GetComputerInfo.OsWindowsDirectory
-        ###OsCurrentBuild = $GetComputerInfo.OsBuildNumber
-        ###OsCurrentVersion = $GetComputerInfo.OsVersion
-        ###OsSku = $GetComputerInfo.WindowsEditionId
-        #OsVersion = $GetComputerInfo.WindowsVersion
-        ###ProcessorSpeed = $Win32Processor.MaxClockSpeed
-        ###Product = $Win32BaseBoard.Product
-        ###SerialNumber = $GetComputerInfo.BiosSeralNumber
-        #SupportsHyperVRole = True
-        ###SupportsSLAT = $Win32Processor.SecondLevelAddressTranslationExtensions
-        #SupportsX64 = True
-        #SupportsX86 = True
-        ###UUID = $Win32ComputerSystemProduct.UUID
+        MDT = $GetOSDGatherMDT
         #===================================================================================================
         #   ComputerInfo
         #===================================================================================================
@@ -316,6 +344,11 @@ function Get-OSDGather {
         RegControl = $RegControl
         RegSetup = $RegSetup
         RegVersion = $RegVersion
+        #===================================================================================================
+        #   Get
+        #===================================================================================================
+        GetBitlockerVolume = $GetBitlockerVolume
+        GetPhysicalDisk = $GetPhysicalDisk
         #===================================================================================================
         #   CimInstance
         #===================================================================================================
