@@ -176,7 +176,7 @@ function Get-OSDGather {
     #======================================================================================================
     #   IsOnBattery
     #======================================================================================================
-    $IsOnBattery = ($Win32Battery.BatteryStatus -eq 1)
+    $IsOnBattery = ($Win32Battery.BatteryStatus -contains 1)
     if ($Property -eq 'IsOnBattery') {Return $IsOnBattery}
     #===================================================================================================
     #   Architecture
