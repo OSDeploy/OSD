@@ -171,11 +171,11 @@ function Get-OSDGather {
     #======================================================================================================
     #   Get-CimInstance Win32_Battery
     #======================================================================================================
-    $Win32Battery = (Get-CimInstance -ClassName Win32_Battery -ErrorAction SilentlyContinue | Select-Object -Property * | Sort-Object -Property BatteryStatus -Descending | Select-Object -First 1)
+    $Win32Battery = (Get-CimInstance -ClassName Win32_Battery -ErrorAction SilentlyContinue | Select-Object -Property *)
     #======================================================================================================
     #   IsOnBattery
     #======================================================================================================
-    $IsOnBattery = ($Win32Battery.BatteryStatus -eq 1)
+    $IsOnBattery = ($Win32Battery.BatteryStatus -contains 1)
     if ($Property -eq 'IsOnBattery') {Return $IsOnBattery}
     #===================================================================================================
     #   Architecture
