@@ -45,7 +45,8 @@ function Get-OSDGather {
             'IsWinPE',
             'IsInWinSE'
             )]
-        [string]$Property
+        [string]$Property,
+        [switch]$Full
     )
     #======================================================================================================
     #   IsAdmin
@@ -91,6 +92,15 @@ function Get-OSDGather {
     $IsBDE = $false
     $BitlockerEncryptionType = $null
     $BitlockerEncryptionMethod = $null
+
+    $EncryptionMethods = @{ 0 = "UNSPECIFIED";
+                        1 = 'AES_128_WITH_DIFFUSER';
+                        2 = "AES_256_WITH_DIFFUSER";
+                        3 = 'AES_128';
+                        4 = "AES_256";
+                        5 = 'HARDWARE_ENCRYPTION';
+                        6 = "AES_256";
+                        7 = "XTS_AES_256" }
 
     $EncVols = Get-WmiObject -Namespace 'ROOT\cimv2\Security\MicrosoftVolumeEncryption' -Query "Select * from Win32_EncryptableVolume" -EA SilentlyContinue
     if ($EncVols) {
@@ -211,15 +221,6 @@ function Get-OSDGather {
     $MacAddress = $macList
     $DefaultGateway = $gwList
     #===================================================================================================
-    #   Get-ComputerInfo
-    #===================================================================================================
-    #https://docs.microsoft.com/en-us/dotnet/api/microsoft.powershell.commands.computerinfo?view=powershellsdk-1.1.0
-    $GetComputerInfo = @{}
-    try {
-        $GetComputerInfo = Get-ComputerInfo -ErrorAction SilentlyContinue
-    }
-    catch {}
-    #===================================================================================================
     #   Get Registry
     #===================================================================================================
     $RegControl = Get-ItemProperty -Path 'HKLM:\SYSTEM\ControlSet001\Control'
@@ -231,7 +232,15 @@ function Get-OSDGather {
     }
     catch {}
     #===================================================================================================
-    #   Get CimInstance
+    #   MDT Get CimInstance
+    #===================================================================================================
+    $Win32BIOS = (Get-CimInstance -ClassName Win32_BIOS | Select-Object -Property *)
+    $Win32BaseBoard = (Get-CimInstance -ClassName Win32_BaseBoard | Select-Object -Property *)
+    $Win32ComputerSystemProduct = (Get-CimInstance -ClassName Win32_ComputerSystemProduct | Select-Object -Property *)
+    $Win32OperatingSystem = (Get-CimInstance -ClassName Win32_OperatingSystem | Select-Object -Property *)
+    $Win32Processor = (Get-CimInstance -ClassName Win32_Processor | Select-Object -Property *)
+    #===================================================================================================
+    #   Bitlocker
     #===================================================================================================
     try {$GetBitlockerVolume = Get-BitlockerVolume}
     catch {$GetBitlockerVolume = $null}
@@ -239,41 +248,15 @@ function Get-OSDGather {
     try {$GetPhysicalDisk = Get-PhysicalDisk}
     catch {$GetPhysicalDisk = $null}
     #===================================================================================================
-    #   Get CimInstance
+    #   Supports
     #===================================================================================================
-    $Win32BIOS = (Get-CimInstance -ClassName Win32_BIOS | Select-Object -Property *)
-    $Win32BaseBoard = (Get-CimInstance -ClassName Win32_BaseBoard | Select-Object -Property *)
-    #$Win32Battery = (Get-CimInstance -ClassName Win32_Battery | Select-Object -Property *)
-    #$Win32ComputerSystem = (Get-CimInstance -ClassName Win32_ComputerSystem | Select-Object -Property *)
-    $Win32ComputerSystemProduct = (Get-CimInstance -ClassName Win32_ComputerSystemProduct | Select-Object -Property *)
-    $Win32DiskPartition = (Get-CimInstance -ClassName Win32_DiskPartition | Select-Object -Property *)
-    $Win32DisplayConfiguration = (Get-CimInstance -ClassName Win32_DisplayConfiguration | Select-Object -Property *)
-    $Win32Environment = (Get-CimInstance -ClassName Win32_Environment | Select-Object -Property *)
-    $Win32LogicalDisk = (Get-CimInstance -ClassName Win32_LogicalDisk | Select-Object -Property *)
-    $Win32NetworkAdapter = (Get-CimInstance -ClassName Win32_NetworkAdapter | Select-Object -Property *)
-    #$Win32NetworkAdapterConfiguration = (Get-CimInstance -ClassName Win32_NetworkAdapterConfiguration | Select-Object -Property *)
-    $Win32OperatingSystem = (Get-CimInstance -ClassName Win32_OperatingSystem | Select-Object -Property *)
-    $Win32PnPEntity = (Get-CimInstance -ClassName Win32_PnPEntity | Select-Object -Property *)
-    #$Win32PortableBattery = (Get-CimInstance -ClassName Win32_PortableBattery | Select-Object -Property *)
-    $Win32Processor = (Get-CimInstance -ClassName Win32_Processor | Select-Object -Property *)
-    $Win32SCSIController = (Get-CimInstance -ClassName Win32_SCSIController | Select-Object -Property *)
-    $Win32SystemDesktop = (Get-CimInstance -ClassName Win32_SystemDesktop | Select-Object -Property *)
-    #$Win32SystemEnclosure = (Get-CimInstance -ClassName Win32_SystemEnclosure | Select-Object -Property *)
-    $Win32UserDesktop = (Get-CimInstance -ClassName Win32_UserDesktop | Select-Object -Property *)
-    $Win32VideoController = (Get-CimInstance -ClassName Win32_VideoController | Select-Object -Property *)
-    $Win32Volume = (Get-CimInstance -ClassName Win32_Volume | Select-Object -Property *)
-    $CimVideoControllerResolution = (Get-CimInstance -ClassName CIM_VideoControllerResolution | Select-Object -Property *)
-
     $SupportsNX = $Win32OperatingSystem.DataExecutionPrevention_Available -eq $true
     $Supports32Bit = $Win32Processor.DataWidth -match 32
     $Supports64Bit = $Win32Processor.DataWidth -match 64
     #======================================================================================================
-    #   MDT
+    #   MDT Variables
     #======================================================================================================
     $GetOSDGatherMDT = [ordered]@{
-        #===================================================================================================
-        #   MDT Variables
-        #===================================================================================================
         Architecture = $Architecture
         AssetTag = $Win32SystemEnclosure.SMBIOSAssetTag.Trim()
         #CapableArchitecture = AMD64 X64 X86
@@ -304,7 +287,7 @@ function Get-OSDGather {
         UUID = $Win32ComputerSystemProduct.UUID
     }
     #======================================================================================================
-    #   Hashtable
+    #   GetOSDGather
     #======================================================================================================
     $GetOSDGather = [ordered]@{
         #===================================================================================================
@@ -331,45 +314,69 @@ function Get-OSDGather {
         #===================================================================================================
         MDT = $GetOSDGatherMDT
         #===================================================================================================
-        #   ComputerInfo
-        #===================================================================================================
-        ComputerInfo = $GetComputerInfo
-        #===================================================================================================
         #   Registry
         #===================================================================================================
         RegControl = $RegControl
         RegSetup = $RegSetup
         RegVersion = $RegVersion
+    }
+    #===================================================================================================
+    #   Full
+    #===================================================================================================
+    if ($Full.IsPresent) {
         #===================================================================================================
-        #   Get
+        #   Get-ComputerInfo
         #===================================================================================================
-        GetBitlockerVolume = $GetBitlockerVolume
-        GetPhysicalDisk = $GetPhysicalDisk
+        #https://docs.microsoft.com/en-us/dotnet/api/microsoft.powershell.commands.computerinfo?view=powershellsdk-1.1.0
+        $GetComputerInfo = @{}
+        try {
+            $GetComputerInfo = Get-ComputerInfo -ErrorAction SilentlyContinue
+        }
+        catch {}
         #===================================================================================================
-        #   CimInstance
+        #   Get-CimInstance
         #===================================================================================================
-        BIOS = $Win32BIOS
-        BaseBoard = $Win32BaseBoard
-        Battery = $Win32Battery
-        ComputerSystem = $Win32ComputerSystem
-        ComputerSystemProduct = $Win32ComputerSystemProduct
-        DiskPartition = $Win32DiskPartition
-        DisplayConfiguration = $Win32DisplayConfiguration
-        Environment = $Win32Environment
-        LogicalDisk = $Win32LogicalDisk
-        NetworkAdapter = $Win32NetworkAdapter
-        NetworkAdapterConfiguration = $Win32NetworkAdapterConfiguration
-        OperatingSystem = $Win32OperatingSystem
-        PnPEntity = $Win32PnPEntity
-        #####PortableBattery = $Win32PortableBattery
-        Processor = $Win32Processor
-        SCSIController = $Win32SCSIController
-        SystemDesktop = $Win32SystemDesktop
-        SystemEnclosure = $Win32SystemEnclosure
-        UserDesktop = $Win32UserDesktop
-        VideoController = $Win32VideoController
-        VideoControllerResolution = $CIMVideoControllerResolution
-        Volume = $Win32Volume
+        $Win32DiskPartition = (Get-CimInstance -ClassName Win32_DiskPartition | Select-Object -Property *)
+        $Win32DisplayConfiguration = (Get-CimInstance -ClassName Win32_DisplayConfiguration | Select-Object -Property *)
+        $Win32Environment = (Get-CimInstance -ClassName Win32_Environment | Select-Object -Property *)
+        $Win32LogicalDisk = (Get-CimInstance -ClassName Win32_LogicalDisk | Select-Object -Property *)
+        $Win32NetworkAdapter = (Get-CimInstance -ClassName Win32_NetworkAdapter | Select-Object -Property *)
+        $Win32PnPEntity = (Get-CimInstance -ClassName Win32_PnPEntity | Select-Object -Property *)
+        $Win32SCSIController = (Get-CimInstance -ClassName Win32_SCSIController | Select-Object -Property *)
+        $Win32SystemDesktop = (Get-CimInstance -ClassName Win32_SystemDesktop | Select-Object -Property *)
+        $Win32UserDesktop = (Get-CimInstance -ClassName Win32_UserDesktop | Select-Object -Property *)
+        $Win32VideoController = (Get-CimInstance -ClassName Win32_VideoController | Select-Object -Property *)
+        $Win32Volume = (Get-CimInstance -ClassName Win32_Volume | Select-Object -Property *)
+        $CimVideoControllerResolution = (Get-CimInstance -ClassName CIM_VideoControllerResolution | Select-Object -Property *)
+        #===================================================================================================
+        #   Full
+        #===================================================================================================
+        $GetOSDGather.GetBitlockerVolume = $GetBitlockerVolume
+        $GetOSDGather.GetPhysicalDisk = $GetPhysicalDisk
+        
+        $GetOSDGather.BIOS = $Win32BIOS
+        $GetOSDGather.BaseBoard = $Win32BaseBoard
+        $GetOSDGather.Battery = $Win32Battery
+        $GetOSDGather.ComputerSystem = $Win32ComputerSystem
+        $GetOSDGather.ComputerSystemProduct = $Win32ComputerSystemProduct
+        $GetOSDGather.DiskPartition = $Win32DiskPartition
+        $GetOSDGather.DisplayConfiguration = $Win32DisplayConfiguration
+        $GetOSDGather.Environment = $Win32Environment
+        $GetOSDGather.LogicalDisk = $Win32LogicalDisk
+        $GetOSDGather.NetworkAdapter = $Win32NetworkAdapter
+        $GetOSDGather.NetworkAdapterConfiguration = $Win32NetworkAdapterConfiguration
+        $GetOSDGather.OperatingSystem = $Win32OperatingSystem
+        $GetOSDGather.PnPEntity = $Win32PnPEntity
+        $GetOSDGather.Processor = $Win32Processor
+        $GetOSDGather.SCSIController = $Win32SCSIController
+        $GetOSDGather.SystemDesktop = $Win32SystemDesktop
+        $GetOSDGather.SystemEnclosure = $Win32SystemEnclosure
+        $GetOSDGather.UserDesktop = $Win32UserDesktop
+        $GetOSDGather.VideoController = $Win32VideoController
+        $GetOSDGather.VideoControllerResolution = $CIMVideoControllerResolution
+        $GetOSDGather.Volume = $Win32Volume
+        
+        $GetOSDGather.ComputerInfo = $GetComputerInfo
     }
     Return $GetOSDGather
 }
