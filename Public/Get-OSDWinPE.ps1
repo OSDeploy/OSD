@@ -139,7 +139,7 @@ function Get-OSDWinPE {
                 Where-Object {$_.PSIsContainer} | `
                 ForEach-Object {
                     Write-Verbose "Add Module: $($_.FullName)"
-                    Copy-Item -Path "$($_.FullName)" -Destination "$env:SystemDrive\Windows\System32\WindowsPowerShell\v1.0\Modules" -Recurse -Force -ErrorAction SilentlyContinue
+                    Copy-Item -Path "$($_.FullName)" -Destination "$PSHome\Modules" -Recurse -Force -ErrorAction SilentlyContinue
                 }
             }
         }

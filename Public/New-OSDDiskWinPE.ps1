@@ -100,7 +100,7 @@ function New-OSDDiskWinPE {
         Write-Host "Disk $($Disk.Number)    $($Disk.FriendlyName) ($([math]::Round($Disk.Size / 1000000000))GB $($Disk.PartitionStyle)) BusType=$($Disk.BusType) Partitions=$($Disk.NumberOfPartitions) BootDisk=$($Disk.BootFromDisk)" -ForegroundColor Yellow 
     }
     Write-Host "=======================================================================================" -ForegroundColor Yellow
-    [void](Read-Host 'Press Enter to Continue with Clear-Disk')
+    [void](Read-Host "Press Enter to Continue with $Title")
     foreach ($FixedDisk in $FixedDisks) {$FixedDisk | Clear-Disk -RemoveOEM -RemoveData -Confirm:$true -PassThru -ErrorAction SilentlyContinue | Out-Null}
     Write-Host
     #======================================================================================================
