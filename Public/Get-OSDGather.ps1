@@ -46,6 +46,7 @@ function Get-OSDGather {
             'IsInWinSE'
             )]
         [string]$Property,
+        #Returns additional CimInstance results
         [switch]$Full
     )
     #======================================================================================================
@@ -208,7 +209,7 @@ function Get-OSDGather {
     #   Win32NetworkAdapterConfiguration
     #   Credit FriendsOfMDT         https://github.com/FriendsOfMDT/PSD
     #===================================================================================================
-    $Win32NetworkAdapterConfiguration = (Get-CimInstance -ClassName Win32_NetworkAdapterConfiguration | Select-Object -Property *)
+    $Win32NetworkAdapterConfiguration = (Get-CimInstance -ClassName Win32_NetworkAdapterConfiguration -ErrorAction SilentlyContinue | Select-Object -Property *)
     $ipList = @()
     $macList = @()
     $gwList = @()
@@ -234,11 +235,11 @@ function Get-OSDGather {
     #===================================================================================================
     #   MDT Get CimInstance
     #===================================================================================================
-    $Win32BIOS = (Get-CimInstance -ClassName Win32_BIOS | Select-Object -Property *)
-    $Win32BaseBoard = (Get-CimInstance -ClassName Win32_BaseBoard | Select-Object -Property *)
-    $Win32ComputerSystemProduct = (Get-CimInstance -ClassName Win32_ComputerSystemProduct | Select-Object -Property *)
-    $Win32OperatingSystem = (Get-CimInstance -ClassName Win32_OperatingSystem | Select-Object -Property *)
-    $Win32Processor = (Get-CimInstance -ClassName Win32_Processor | Select-Object -Property *)
+    $Win32BIOS = (Get-CimInstance -ClassName Win32_BIOS -ErrorAction SilentlyContinue | Select-Object -Property *)
+    $Win32BaseBoard = (Get-CimInstance -ClassName Win32_BaseBoard -ErrorAction SilentlyContinue | Select-Object -Property *)
+    $Win32ComputerSystemProduct = (Get-CimInstance -ClassName Win32_ComputerSystemProduct -ErrorAction SilentlyContinue | Select-Object -Property *)
+    $Win32OperatingSystem = (Get-CimInstance -ClassName Win32_OperatingSystem -ErrorAction SilentlyContinue | Select-Object -Property *)
+    $Win32Processor = (Get-CimInstance -ClassName Win32_Processor -ErrorAction SilentlyContinue | Select-Object -Property *)
     #===================================================================================================
     #   Bitlocker
     #===================================================================================================
@@ -324,33 +325,6 @@ function Get-OSDGather {
     #   Full
     #===================================================================================================
     if ($Full.IsPresent) {
-        #===================================================================================================
-        #   Get-ComputerInfo
-        #===================================================================================================
-        #https://docs.microsoft.com/en-us/dotnet/api/microsoft.powershell.commands.computerinfo?view=powershellsdk-1.1.0
-        $GetComputerInfo = @{}
-        try {
-            $GetComputerInfo = Get-ComputerInfo -ErrorAction SilentlyContinue
-        }
-        catch {}
-        #===================================================================================================
-        #   Get-CimInstance
-        #===================================================================================================
-        $Win32DiskPartition = (Get-CimInstance -ClassName Win32_DiskPartition | Select-Object -Property *)
-        $Win32DisplayConfiguration = (Get-CimInstance -ClassName Win32_DisplayConfiguration | Select-Object -Property *)
-        $Win32Environment = (Get-CimInstance -ClassName Win32_Environment | Select-Object -Property *)
-        $Win32LogicalDisk = (Get-CimInstance -ClassName Win32_LogicalDisk | Select-Object -Property *)
-        $Win32NetworkAdapter = (Get-CimInstance -ClassName Win32_NetworkAdapter | Select-Object -Property *)
-        $Win32PnPEntity = (Get-CimInstance -ClassName Win32_PnPEntity | Select-Object -Property *)
-        $Win32SCSIController = (Get-CimInstance -ClassName Win32_SCSIController | Select-Object -Property *)
-        $Win32SystemDesktop = (Get-CimInstance -ClassName Win32_SystemDesktop | Select-Object -Property *)
-        $Win32UserDesktop = (Get-CimInstance -ClassName Win32_UserDesktop | Select-Object -Property *)
-        $Win32VideoController = (Get-CimInstance -ClassName Win32_VideoController | Select-Object -Property *)
-        $Win32Volume = (Get-CimInstance -ClassName Win32_Volume | Select-Object -Property *)
-        $CimVideoControllerResolution = (Get-CimInstance -ClassName CIM_VideoControllerResolution | Select-Object -Property *)
-        #===================================================================================================
-        #   Full
-        #===================================================================================================
         $GetOSDGather.GetBitlockerVolume = $GetBitlockerVolume
         $GetOSDGather.GetPhysicalDisk = $GetPhysicalDisk
         
@@ -359,24 +333,24 @@ function Get-OSDGather {
         $GetOSDGather.Battery = $Win32Battery
         $GetOSDGather.ComputerSystem = $Win32ComputerSystem
         $GetOSDGather.ComputerSystemProduct = $Win32ComputerSystemProduct
-        $GetOSDGather.DiskPartition = $Win32DiskPartition
-        $GetOSDGather.DisplayConfiguration = $Win32DisplayConfiguration
-        $GetOSDGather.Environment = $Win32Environment
-        $GetOSDGather.LogicalDisk = $Win32LogicalDisk
-        $GetOSDGather.NetworkAdapter = $Win32NetworkAdapter
+        $GetOSDGather.DiskPartition = (Get-CimInstance -ClassName Win32_DiskPartition -ErrorAction SilentlyContinue | Select-Object -Property *)
+        $GetOSDGather.DisplayConfiguration = (Get-CimInstance -ClassName Win32_DisplayConfiguration -ErrorAction SilentlyContinue | Select-Object -Property *)
+        $GetOSDGather.Environment = (Get-CimInstance -ClassName Win32_Environment -ErrorAction SilentlyContinue | Select-Object -Property *)
+        $GetOSDGather.LogicalDisk = (Get-CimInstance -ClassName Win32_LogicalDisk -ErrorAction SilentlyContinue | Select-Object -Property *)
+        $GetOSDGather.NetworkAdapter = (Get-CimInstance -ClassName Win32_NetworkAdapter -ErrorAction SilentlyContinue | Select-Object -Property *)
         $GetOSDGather.NetworkAdapterConfiguration = $Win32NetworkAdapterConfiguration
         $GetOSDGather.OperatingSystem = $Win32OperatingSystem
-        $GetOSDGather.PnPEntity = $Win32PnPEntity
+        $GetOSDGather.PnPEntity = (Get-CimInstance -ClassName Win32_PnPEntity -ErrorAction SilentlyContinue | Select-Object -Property *)
         $GetOSDGather.Processor = $Win32Processor
-        $GetOSDGather.SCSIController = $Win32SCSIController
-        $GetOSDGather.SystemDesktop = $Win32SystemDesktop
+        $GetOSDGather.SCSIController = (Get-CimInstance -ClassName Win32_SCSIController -ErrorAction SilentlyContinue | Select-Object -Property *)
+        $GetOSDGather.SystemDesktop = (Get-CimInstance -ClassName Win32_SystemDesktop -ErrorAction SilentlyContinue | Select-Object -Property *)
         $GetOSDGather.SystemEnclosure = $Win32SystemEnclosure
-        $GetOSDGather.UserDesktop = $Win32UserDesktop
-        $GetOSDGather.VideoController = $Win32VideoController
-        $GetOSDGather.VideoControllerResolution = $CIMVideoControllerResolution
-        $GetOSDGather.Volume = $Win32Volume
+        $GetOSDGather.UserDesktop = (Get-CimInstance -ClassName Win32_UserDesktop -ErrorAction SilentlyContinue | Select-Object -Property *)
+        $GetOSDGather.VideoController = (Get-CimInstance -ClassName Win32_VideoController -ErrorAction SilentlyContinue | Select-Object -Property *)
+        $GetOSDGather.VideoControllerResolution = (Get-CimInstance -ClassName CIM_VideoControllerResolution -ErrorAction SilentlyContinue | Select-Object -Property *)
+        $GetOSDGather.Volume = (Get-CimInstance -ClassName Win32_Volume -ErrorAction SilentlyContinue | Select-Object -Property *)
         
-        $GetOSDGather.ComputerInfo = $GetComputerInfo
+        $GetOSDGather.ComputerInfo = Get-ComputerInfo -ErrorAction SilentlyContinue
     }
     Return $GetOSDGather
 }
