@@ -25,6 +25,7 @@ function New-OSDDisk {
         #Confirm overrides this 
         #Alias = Clear
         [Alias('Clear')]
+        [ValidateSet('All','OSDDisk')]
         [string]$ClearDisk = 'All',
 
         #Title displayed during script execution
@@ -88,45 +89,88 @@ function New-OSDDisk {
         [ValidateRange(499MB,40000MB)]
         [uint64]$SizeRecovery = 984MB,
 
+        #Allows the selection of the OSDDisk if multiple Fixed Disks are present
+        #Supersedes the DiskNumber parameter
+        [switch]$MultiSelect,
+
+        #Confirm before Clear-Disk and Initialize-Disk
+        [switch]$Confirm,
+
         #This is a very destructive Function
         #Use the Force parameter for full automation
-        [switch]$Force,
-
-        [switch]$Execute
+        [switch]$Force
     )
     #======================================================================================================
     #	Get-Disk
     #======================================================================================================
-    $FixedDisks = Get-Disk | Where-Object {($_.BusType -ne 'USB') -and ($_.BusType -notmatch 'Virtual')} | Sort-Object Number
-    $RawDisks = $FixedDisks | Where-Object {$_.PartitionStyle -eq 'RAW'} | Sort-Object Number
-    $ClearDisks = $FixedDisks | Where-Object {$_.PartitionStyle -ne 'RAW'} | Sort-Object Number
-    $OSDDisk = $FixedDisks | Where-Object {$_.DiskNumber -eq $DiskNumber}
+    $FixedDisks = Get-Disk | Where-Object {($_.BusType -ne 'USB') -and ($_.BusType -notmatch 'Virtual') -and ($_.Size -gt 15GB)} | Sort-Object Number
+    $DirtyFixedDisks = $FixedDisks | Where-Object {$_.PartitionStyle -ne 'RAW'}
+    $DirtyOSDDisk = $FixedDisks | Where-Object {($_.DiskNumber -eq $DiskNumber) -and ($_.PartitionStyle -ne 'RAW')}
+    #======================================================================================================
+    #	No Fixed Disks
+    #======================================================================================================
+    if ($null -eq $FixedDisks) {
+        Write-Warning "$Title could not find any Fixed Disks"
+        Break
+    }
+    #======================================================================================================
+    #	MultiSelect
+    #======================================================================================================
+    Write-Host "=================================================================================================" -ForegroundColor Cyan
+    foreach ($FixedDisk in $FixedDisks) {
+        Write-Host "Disk $($FixedDisk.Number)    $($FixedDisk.FriendlyName) ($([math]::Round($FixedDisk.Size / 1000000000))GB $($FixedDisk.PartitionStyle)) BusType=$($FixedDisk.BusType) Partitions=$($FixedDisk.NumberOfPartitions) BootDisk=$($FixedDisk.BootFromDisk)" -ForegroundColor Cyan
+    }
+    Write-Host "=================================================================================================" -ForegroundColor Cyan
+
+    if ($MultiSelect -and $FixedDisks.Count -gt 1) {
+        #======================================================================================================
+        #	Wizard Select Disk
+        #======================================================================================================
+        do {
+            $Selected = Read-Host "Type the Number of the Disk to Partition or press X to quit (and press Enter)"
+        } until (($FixedDisks.Number -Contains $Selected) -or $Selected -eq 'X')
+        if ($Selected -eq 'X') {Break}
+        $OSDDisk = $FixedDisks | Where-Object {$_.Number -eq $Selected}
+    } else {
+        $OSDDisk = $FixedDisks | Where-Object {$_.Number -eq $DiskNumber}
+    }  
     #======================================================================================================
     #	Simulate
     #======================================================================================================
-    if (!($Execute.IsPresent)) {
+    if (!($Force.IsPresent)) {
         $VerbosePreference = 'Continue'
-        if (Get-OSDGather -Property IsAdmin) {
-            Write-Verbose "Session has Administrative Rights"
-        } else {
-            Write-Warning "Session does not have Administrative Rights"
-        }
         if (Get-OSDGather -Property IsWinPE) {
             Write-Verbose "Session is in WinPE"
         } else {
             Write-Warning "Session is not in WinPE"
+        }
+        if (Get-OSDGather -Property IsAdmin) {
+            Write-Verbose "Session has Administrative Rights"
+        } else {
+            Write-Warning "Session does not have Administrative Rights"
         }
         if (Get-OSDGather -Property IsUEFI) {
             Write-Verbose "Disk will be Initialized as GPT (UEFI)"
         } else {
             Write-Warning "Disk will be Initialized as MBR (BIOS)"
         }
-        foreach ($FixedDisk in $FixedDisks) {
-            <# if ($FixedDisk.PartitionStyle -eq 'RAW') {
-                Write-Verbose "$($FixedDisk.Number) $($FixedDisk.FriendlyName) ($([math]::Round($FixedDisk.Size / 1000000000))GB $($FixedDisk.PartitionStyle)) BusType=$($FixedDisk.BusType) Partitions=$($FixedDisk.NumberOfPartitions)"
-            } #>
-            if ($FixedDisk.PartitionStyle -ne 'RAW') {
-                Write-Warning "Clear Disk $($FixedDisk.Number) $($FixedDisk.FriendlyName) ($([math]::Round($FixedDisk.Size / 1000000000))GB $($FixedDisk.PartitionStyle)) BusType=$($FixedDisk.BusType) Partitions=$($FixedDisk.NumberOfPartitions)"
+        if ($ClearDisk -eq 'All') {
+            foreach ($FixedDisk in $FixedDisks) {
+                if ($FixedDisk.PartitionStyle -ne 'RAW') {
+                    Write-Warning "Clear Disk $($FixedDisk.Number) $($FixedDisk.FriendlyName) ($([math]::Round($FixedDisk.Size / 1000000000))GB $($FixedDisk.PartitionStyle)) BusType=$($FixedDisk.BusType) Partitions=$($FixedDisk.NumberOfPartitions)"
+                }
+            }
+        }
+<#         if ($ClearDisk -eq 'Confirm') {
+            foreach ($FixedDisk in $FixedDisks) {
+                if ($FixedDisk.PartitionStyle -ne 'RAW') {
+                    Write-Warning "Confirm Clear Disk $($FixedDisk.Number) $($FixedDisk.FriendlyName) ($([math]::Round($FixedDisk.Size / 1000000000))GB $($FixedDisk.PartitionStyle)) BusType=$($FixedDisk.BusType) Partitions=$($FixedDisk.NumberOfPartitions)"
+                }
+            }
+        } #>
+        if ($ClearDisk -eq 'OSDDisk') {
+            if ($null -ne $OSDDisk -and $OSDDisk.PartitionStyle -ne 'RAW') {
+                Write-Warning "Clear Disk $($OSDDisk.Number) $($OSDDisk.FriendlyName) ($([math]::Round($OSDDisk.Size / 1000000000))GB $($OSDDisk.PartitionStyle)) BusType=$($OSDDisk.BusType) Partitions=$($OSDDisk.NumberOfPartitions)"
             }
         }
         if (Get-OSDGather -Property IsUEFI) {
@@ -161,118 +205,65 @@ function New-OSDDisk {
             }
         }
         Write-Host
-        Write-Verbose "Use the Execute parameter to bypass $Title validation"
-        
+        Write-Verbose "Force parameter is required to bypass $Title validation"
         Break
-    }
-
-
-
-
-
-
-
-
-
-
-
-
-
-    $RawDisks = Get-Disk | Where-Object {(($_.BusType -ne 'USB') -and ($_.Size -gt 10GB))} | Sort-Object Number
-
-
-
-
-
-    Break
-
-
-    Write-Verbose 
-
-    $FixedDisks = Get-Disk | Where-Object {(($_.BusType -ne 'USB') -and ($_.Size -gt 10GB))} | Sort-Object Number
-
-
-
-
-
-
-
-
-
-
-
-
-    if ($Execute.IsPresent) {Write-Host "Execute"}
-    else {Write-Host "Do Nothing"}
-
-    Break
-    #======================================================================================================
-    #	Force
-    #======================================================================================================
-    if (!$Force.IsPresent) {
-        $VerbosePreference -eq 'Continue'
-        #Write-Warning "$Title : This is a very destructive function"
-        #Write-Warning "$Title : Use the -Confirm parameter to step through $Title"
-        #Write-Warning "$Title : Use the -Force parameter to ignore this warning and continue with $Title"
-        #Break
     }
     #======================================================================================================
     #	IsWinPE
     #======================================================================================================
-    if (!(Get-OSDGather -Property IsWinPE)) {Write-Warning "$Title : This function requires WinPE.  Exiting";Break}
+    if (!(Get-OSDGather -Property IsWinPE)) {Write-Warning "$Title requires WinPE.  Exiting";Break}
     #======================================================================================================
-    #	Get All Fixed Disks
+    #	IsAdmin
     #======================================================================================================
-    if (($NoCleanAll.IsPresent) -or ($VerbosePreference -eq 'Continue')) {
-        $FixedDisks = Get-Disk | Where-Object {(($_.BusType -ne 'USB') -and ($_.Size -gt 10GB))} | Sort-Object Number
-    } else {
-        $FixedDisks = Get-Disk -Number $DiskNumber
-    }
-    #======================================================================================================
-    #	No Fixed Disks
-    #======================================================================================================
-    if ($null -eq $FixedDisks) {
-        Write-Warning "$Title : Could not find a Hard Drive to prepare"
-        Break
-    }
+    if (!(Get-OSDGather -Property IsAdmin)) {Write-Warning "$Title requires Admin Rights.  Exiting";Break}
     #======================================================================================================
     #	Clear-Disk
     #======================================================================================================
-    Write-Verbose "All Fixed Disks must be cleared before Windows can be installed"
-    Write-Verbose "All existing Data and Partitions will be destroyed from the following Drives"
-    Write-Verbose "======================================================================================="
-    foreach ($FixedDisk in $FixedDisks) {
-        Write-Verbose "Disk $($FixedDisk.Number)    $($FixedDisk.FriendlyName) ($([math]::Round($FixedDisk.Size / 1000000000))GB $($FixedDisk.PartitionStyle)) BusType=$($FixedDisk.BusType) Partitions=$($FixedDisk.NumberOfPartitions) BootDisk=$($FixedDisk.BootFromDisk)"
-    }
-    Write-Verbose "======================================================================================="
-    if ($VerbosePreference -eq 'Continue') {
-        [void](Read-Host "Press Enter to Continue with $Title")
-        foreach ($FixedDisk in $FixedDisks) {$FixedDisk | Clear-Disk -RemoveOEM -RemoveData -Confirm:$true -PassThru -ErrorAction SilentlyContinue | Out-Null}
+    if ($ClearDisk -eq 'OSDDisk') {
+        if ($Confirm.IsPresent) {
+            $DirtyOSDDisk | Clear-Disk -RemoveOEM -RemoveData -Confirm:$true -PassThru -ErrorAction Stop
+        } else {
+            $DirtyOSDDisk | Clear-Disk -RemoveOEM -RemoveData -Confirm:$false -PassThru -ErrorAction Stop
+        }
     } else {
-        foreach ($FixedDisk in $FixedDisks) {$FixedDisk | Clear-Disk -RemoveOEM -RemoveData -Confirm:$false -PassThru -ErrorAction SilentlyContinue | Out-Null}
+        if ($null -ne $DirtyFixedDisks) {
+            Write-Verbose "Fixed Disks should be cleared before $Title can partition"
+            Write-Verbose "All existing Data and Partitions will be destroyed from the following Drives"
+            Write-Verbose "======================================================================================="
+            foreach ($DirtyFixedDisk in $DirtyFixedDisks) {
+                Write-Verbose "Disk $($DirtyFixedDisk.Number)    $($DirtyFixedDisk.FriendlyName) ($([math]::Round($DirtyFixedDisk.Size / 1000000000))GB $($DirtyFixedDisk.PartitionStyle)) BusType=$($DirtyFixedDisk.BusType) Partitions=$($DirtyFixedDisk.NumberOfPartitions) BootDisk=$($DirtyFixedDisk.BootFromDisk)"
+            }
+            Write-Verbose "======================================================================================="
+            if ($Confirm.IsPresent) {
+                foreach ($DirtyFixedDisk in $DirtyFixedDisks) {$DirtyFixedDisk | Clear-Disk -RemoveOEM -RemoveData -Confirm:$true -PassThru -ErrorAction Stop}
+            } else {
+                foreach ($DirtyFixedDisk in $DirtyFixedDisks) {$DirtyFixedDisk | Clear-Disk -RemoveOEM -RemoveData -Confirm:$false -PassThru -ErrorAction Stop}
+            }
+        }
     }
     #======================================================================================================
     #	Get OSDDisks
     #======================================================================================================
-    if ($VerbosePreference -eq 'Continue') {
-        $OSDDisks = Get-Disk | Where-Object {($_.BusType -ne 'USB') -and ($_.Size -gt 10GB) -and ($_.PartitionStyle -eq 'RAW')} | Sort-Object Number
-    } else {
-        $OSDDisks = Get-Disk -Number $DiskNumber
-    }
-    Write-Verbose "======================================================================================="
-    foreach ($OSDDisk in $OSDDisks) {
-        Write-Verbose "Disk $($OSDDisk.Number)    $($OSDDisk.FriendlyName) ($([math]::Round($OSDDisk.Size / 1000000000))GB $($OSDDisk.PartitionStyle)) BusType=$($OSDDisk.BusType) Partitions=$($OSDDisk.NumberOfPartitions) BootDisk=$($OSDDisk.BootFromDisk)"
-    }
-    Write-Verbose "To quit this script without Partitioning, type X (and press Enter)"
-    Write-Verbose "======================================================================================="
+    $OSDDisk = Get-Disk -Number $OSDDisk.Number
     #======================================================================================================
-    #	Wizard Select Partition
+    #	RAW
     #======================================================================================================
-    do {
-        $Selected = Read-Host "Type the Number of the Disk to Partition for Windows (and press Enter)"
-    } until (($OSDDisks.Number -Contains $Selected) -or $Selected -eq 'X')
-    if ($Selected -eq 'X') {Break}
-    $OSDDisk = $OSDDisks | Where-Object {$_.Number -eq $Selected}
+    if ($OSDDisk.PartitionStyle -ne 'RAW') {
+        Write-Warning "OSDDisk does not have RAW PartitionStyle.  $Title cannot create additional Partitions.  Exiting"
+        Break
+    }
+    #======================================================================================================
+    #	Display OSDDisk
+    #======================================================================================================
+    Write-Host "=================================================================================================" -ForegroundColor Cyan
+    Write-Host "OSDDisk: Disk $($OSDDisk.Number)    $($OSDDisk.FriendlyName) ($([math]::Round($OSDDisk.Size / 1000000000))GB $($OSDDisk.PartitionStyle)) BusType=$($OSDDisk.BusType)" -ForegroundColor Cyan
+    Write-Host "=================================================================================================" -ForegroundColor Cyan
+    if ($Confirm.IsPresent) {
+        do {
+            $ConfirmInit = Read-Host "Press C to continue or X to quit (and press Enter)"
+        } until ($ConfirmInit -eq 'C' -or $ConfirmInit -eq 'X')
+        if ($ConfirmInit -eq 'X') {Break}
+    }
     #======================================================================================================
     #	Initialize-OSDDisk
     #======================================================================================================
@@ -280,11 +271,11 @@ function New-OSDDisk {
     #======================================================================================================
     #	New-OSDPartitionSystem
     #======================================================================================================
-    New-OSDPartitionSystem -Number $($OSDDisk.Number) -SizeSystemMbr $SizeSystemMbr -SizeSystemGpt $SizeSystemGpt -LabelSystem $LabelSystem -SizeMSR $SizeMSR -Verbose
+    New-OSDPartitionSystem -Number $($OSDDisk.Number) -SizeSystemMbr $SizeSystemMbr -SizeSystemGpt $SizeSystemGpt -LabelSystem $LabelSystem -SizeMSR $SizeMSR
     
     if ($NoRecovery.IsPresent) {
-        New-OSDPartitionWindows -Number $($OSDDisk.Number) -LabelWindows $LabelWindows -NoRecovery -Verbose
+        New-OSDPartitionWindows -Number $($OSDDisk.Number) -LabelWindows $LabelWindows -NoRecovery
     } else {
-        New-OSDPartitionWindows -Number $($OSDDisk.Number) -LabelWindows $LabelWindows -LabelRecovery $LabelRecovery -SizeRecovery $SizeRecovery -Verbose
+        New-OSDPartitionWindows -Number $($OSDDisk.Number) -LabelWindows $LabelWindows -LabelRecovery $LabelRecovery -SizeRecovery $SizeRecovery
     }
 }
