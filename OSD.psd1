@@ -7,7 +7,7 @@
 RootModule = 'OSD.psm1'
 
 # Version number of his module.
-ModuleVersion = '19.10.10.0'
+ModuleVersion = '19.10.10.1'
 
 # Supported PSEditions
 # CompatiblePSEditions = @()
@@ -107,10 +107,10 @@ PrivateData = @{
         Tags = @('OSD','OSDeploy')
 
         # A URL to the license for this module.
-        # LicenseUri = ''
+        LicenseUri = 'https://github.com/OSDeploy/OSD/blob/master/LICENSE'
 
         # A URL to the main website for this project.
-        ProjectUri = 'https://osd.osdeploy.com/'
+        ProjectUri = 'https://github.com/OSDeploy/OSD'
 
         # A URL to an icon representing this module.
         # IconUri = ''

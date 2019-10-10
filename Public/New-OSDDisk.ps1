@@ -9,95 +9,94 @@ Creates System | OS | Recovery Partitions for MBR or UEFI Drives
 https://osd.osdeploy.com/module/functions/new-osddisk
 
 .NOTES
-19.10.9     Created by David Segura @SeguraOSD
+19.10.10     Created by David Segura @SeguraOSD
 #>
 function New-OSDDisk {
     [CmdletBinding()]
     param (
-        #Number of the Disk to prepare
-        #Use Verbose to select a Disk
+        #Title displayed during script execution
+        #Default = New-OSDDisk
+        #Alias = T
+        [Alias('T')]
+        [string]$Title = 'New-OSDDisk',
+
+        #Fixed Disk Number
+        #For multiple Fixed Disks, use the SelectDisk parameter
         #Default = 0
-        #Alias = Disk Number
+        #Alias = Disk, Number
         [Alias('Disk','Number')]
         [int]$DiskNumber = 0,
 
-        #Prevents the cleaning of additional Disks
-        #Confirm overrides this 
+        #Clear-Disk Scope
+        #All will Clear all non-RAW Fixed Disks
+        #OSDDisk will Clear only the DiskNumber or SelectDisk
+        #Default = All
         #Alias = Clear
         [Alias('Clear')]
         [ValidateSet('All','OSDDisk')]
         [string]$ClearDisk = 'All',
 
-        #Title displayed during script execution
-        #Default = New-OSDDiskWinPE
-        #Alias = T
-        [Alias('T')]
-        [string]$Title = 'New-OSDDisk',
-
         #Drive Label of the System Partition
         #Default = System
-        #Alias = LS
-        [Alias('LS')]
+        #Alias = LS, LabelS
+        [Alias('LS','LabelS')]
         [string]$LabelSystem = 'System',
+        
+        #Drive Label of the Windows Partition
+        #Default = OS
+        #Alias = LW, LabelW
+        [Alias('LW','LabelW')]
+        [string]$LabelWindows = 'OS',
+        
+        #Drive Label of the Recovery Partition
+        #Default = Recovery
+        #Alias = LR, LabelR
+        [Alias('LR','LabelR')]
+        [string]$LabelRecovery = 'Recovery',
 
-        #Size of the System Partition for BIOS based Computers
-        #Default = 999MB
-        #Range = 100MB - 1999MB
-        #Alias = SzSM Mbr SystemBios
-        [Alias('SzSM','Mbr','SystemMbr')]
-        [ValidateRange(100MB,1999MB)]
+        #System Partition size for BIOS MBR based Computers
+        #Default = 260MB
+        #Range = 100MB - 3000MB (3GB)
+        #Alias = SSM, Mbr, SystemM
+        [Alias('SSM','Mbr','SystemM')]
+        [ValidateRange(100MB,3000MB)]
         [uint64]$SizeSystemMbr = 260MB,
 
-        #Size of the System Partition for UEFI based Computers
+        #System Partition size for UEFI GPT based Computers
         #Default = 260MB
-        #Range = 100MB - 1999MB
-        #Alias = SzSG Efi SystemGpt
-        [Alias('SzSG','Efi','SystemGpt')]
-        [ValidateRange(100MB,1999MB)]
+        #Range = 100MB - 3000MB (3GB)
+        #Alias = SSG, Efi, SystemG
+        [Alias('SSG','Efi','SystemG')]
+        [ValidateRange(100MB,3000MB)]
         [uint64]$SizeSystemGpt = 260MB,
 
-        #Size of the MSR Partition
+        #MSR Partition size
         #Default = 16MB
         #Range = 16MB - 128MB
         #Alias = MSR
         [Alias('MSR')]
         [ValidateRange(16MB,128MB)]
         [uint64]$SizeMSR = 16MB,
-        
-        #Drive Label of the Windows Partition
-        #Default = OS
-        #Alias = LW
-        [Alias('LW')]
-        [string]$LabelWindows = 'OS',
-
-        #Skips the creation of the Recovery Partition
-        #Alias = NoR
-        [Alias('NoR')]
-        [switch]$NoRecovery,
-        
-        #Drive Label of the Recovery Partition
-        #Default = Recovery
-        #Alias = LR
-        [Alias('LR')]
-        [string]$LabelRecovery = 'Recovery',
 
         #Size of the Recovery Partition
-        #Default = 984MB
-        #Range = 499MB - 40000MB
-        #Alias = SR Recovery Tools
-        [Alias('SR','Recovery','Tools')]
-        [ValidateRange(499MB,40000MB)]
-        [uint64]$SizeRecovery = 984MB,
+        #Default = 990MB
+        #Range = 350MB - 80000MB (80GB)
+        #Alias = SR, Recovery
+        [Alias('SR','Recovery')]
+        [ValidateRange(350MB,80000MB)]
+        [uint64]$SizeRecovery = 990MB,
 
-        #Allows the selection of the OSDDisk if multiple Fixed Disks are present
+        #Select OSDDisk if multiple Fixed Disks are present
         #Supersedes the DiskNumber parameter
-        [switch]$MultiSelect,
+        [switch]$SelectDisk,
+
+        #Skips the creation of the Recovery Partition
+        [switch]$SkipRecoveryPartition,
 
         #Confirm before Clear-Disk and Initialize-Disk
         [switch]$Confirm,
 
-        #This is a very destructive Function
-        #Use the Force parameter for full automation
+        #Required for execution as a safety precaution
         [switch]$Force
     )
     #======================================================================================================
@@ -114,15 +113,15 @@ function New-OSDDisk {
         Break
     }
     #======================================================================================================
-    #	MultiSelect
+    #	SelectDisk
     #======================================================================================================
     Write-Host "=================================================================================================" -ForegroundColor Cyan
     foreach ($FixedDisk in $FixedDisks) {
-        Write-Host "Disk $($FixedDisk.Number)    $($FixedDisk.FriendlyName) ($([math]::Round($FixedDisk.Size / 1000000000))GB $($FixedDisk.PartitionStyle)) BusType=$($FixedDisk.BusType) Partitions=$($FixedDisk.NumberOfPartitions) BootDisk=$($FixedDisk.BootFromDisk)" -ForegroundColor Cyan
+        Write-Host "Disk $($FixedDisk.Number)    $($FixedDisk.FriendlyName) ($([math]::Round($FixedDisk.Size / 1000000000))GB $($FixedDisk.PartitionStyle)) BusType=$($FixedDisk.BusType) Partitions=$($FixedDisk.NumberOfPartitions) IsBoot=$($FixedDisk.BootFromDisk)" -ForegroundColor Cyan
     }
     Write-Host "=================================================================================================" -ForegroundColor Cyan
 
-    if ($MultiSelect -and $FixedDisks.Count -gt 1) {
+    if ($SelectDisk -and $FixedDisks.Count -gt 1) {
         #======================================================================================================
         #	Wizard Select Disk
         #======================================================================================================
@@ -135,7 +134,7 @@ function New-OSDDisk {
         $OSDDisk = $FixedDisks | Where-Object {$_.Number -eq $DiskNumber}
     }  
     #======================================================================================================
-    #	Simulate
+    #	Simulation
     #======================================================================================================
     if (!($Force.IsPresent)) {
         $VerbosePreference = 'Continue'
@@ -161,13 +160,6 @@ function New-OSDDisk {
                 }
             }
         }
-<#         if ($ClearDisk -eq 'Confirm') {
-            foreach ($FixedDisk in $FixedDisks) {
-                if ($FixedDisk.PartitionStyle -ne 'RAW') {
-                    Write-Warning "Confirm Clear Disk $($FixedDisk.Number) $($FixedDisk.FriendlyName) ($([math]::Round($FixedDisk.Size / 1000000000))GB $($FixedDisk.PartitionStyle)) BusType=$($FixedDisk.BusType) Partitions=$($FixedDisk.NumberOfPartitions)"
-                }
-            }
-        } #>
         if ($ClearDisk -eq 'OSDDisk') {
             if ($null -ne $OSDDisk -and $OSDDisk.PartitionStyle -ne 'RAW') {
                 Write-Warning "Clear Disk $($OSDDisk.Number) $($OSDDisk.FriendlyName) ($([math]::Round($OSDDisk.Size / 1000000000))GB $($OSDDisk.PartitionStyle)) BusType=$($OSDDisk.BusType) Partitions=$($OSDDisk.NumberOfPartitions)"
@@ -178,7 +170,7 @@ function New-OSDDisk {
             Write-Verbose "Initialize Disk $($OSDDisk.Number) $($OSDDisk.FriendlyName) ($([math]::Round($OSDDisk.Size / 1000000000))GB) $PartitionStyle"
             Write-Verbose "Disk $($OSDDisk.Number) System Partition $($SizeSystemGpt / 1MB)MB FAT32 $LabelSystem"
             Write-Verbose "Disk $($OSDDisk.Number) MSR Partition $($SizeMSR / 1MB)MB"
-            if ($NoRecovery.IsPresent) {
+            if ($SkipRecoveryPartition.IsPresent) {
                 $SizeWindows = $($OSDDisk.Size) - $SizeSystemGpt - $SizeMSR
                 $SizeWindowsGB = [math]::Round($SizeWindows / 1GB,1)
                 Write-Verbose "Disk $($OSDDisk.Number) Windows Partition $($SizeWindowsGB)GB NTFS $LabelWindows"
@@ -193,7 +185,7 @@ function New-OSDDisk {
             $PartitionStyle = 'MBR'
             Write-Verbose "Initialize Disk $($OSDDisk.Number) $($OSDDisk.FriendlyName) ($([math]::Round($OSDDisk.Size / 1000000000))GB) $PartitionStyle"
             Write-Verbose "Disk $($OSDDisk.Number) System Partition $($SizeSystemMbr / 1MB)MB FAT32 $LabelSystem"
-            if ($NoRecovery.IsPresent) {
+            if ($SkipRecoveryPartition.IsPresent) {
                 $SizeWindows = $($OSDDisk.Size) - $SizeSystemMbr - $SizeMSR
                 $SizeWindowsGB = [math]::Round($SizeWindows / 1GB,1)
                 Write-Verbose "Disk $($OSDDisk.Number) Windows Partition $($SizeWindowsGB)GB NTFS $LabelWindows"
@@ -231,7 +223,7 @@ function New-OSDDisk {
             Write-Verbose "All existing Data and Partitions will be destroyed from the following Drives"
             Write-Verbose "======================================================================================="
             foreach ($DirtyFixedDisk in $DirtyFixedDisks) {
-                Write-Verbose "Disk $($DirtyFixedDisk.Number)    $($DirtyFixedDisk.FriendlyName) ($([math]::Round($DirtyFixedDisk.Size / 1000000000))GB $($DirtyFixedDisk.PartitionStyle)) BusType=$($DirtyFixedDisk.BusType) Partitions=$($DirtyFixedDisk.NumberOfPartitions) BootDisk=$($DirtyFixedDisk.BootFromDisk)"
+                Write-Verbose "Disk $($DirtyFixedDisk.Number)    $($DirtyFixedDisk.FriendlyName) ($([math]::Round($DirtyFixedDisk.Size / 1000000000))GB $($DirtyFixedDisk.PartitionStyle)) BusType=$($DirtyFixedDisk.BusType) Partitions=$($DirtyFixedDisk.NumberOfPartitions) IsBoot=$($DirtyFixedDisk.BootFromDisk)"
             }
             Write-Verbose "======================================================================================="
             if ($Confirm.IsPresent) {
@@ -260,22 +252,22 @@ function New-OSDDisk {
     Write-Host "=================================================================================================" -ForegroundColor Cyan
     if ($Confirm.IsPresent) {
         do {
-            $ConfirmInit = Read-Host "Press C to continue or X to quit (and press Enter)"
-        } until ($ConfirmInit -eq 'C' -or $ConfirmInit -eq 'X')
+            $ConfirmInit = Read-Host "Press P to Partition this OSDDisk, or X to quit (and press Enter)"
+        } until ($ConfirmInit -eq 'P' -or $ConfirmInit -eq 'X')
         if ($ConfirmInit -eq 'X') {Break}
     }
     #======================================================================================================
     #	Initialize-OSDDisk
     #======================================================================================================
-    Initialize-OSDDisk -Number $($OSDDisk.Number)
+    Initialize-OSDDisk -DiskNumber $($OSDDisk.Number)
     #======================================================================================================
     #	New-OSDPartitionSystem
     #======================================================================================================
-    New-OSDPartitionSystem -Number $($OSDDisk.Number) -SizeSystemMbr $SizeSystemMbr -SizeSystemGpt $SizeSystemGpt -LabelSystem $LabelSystem -SizeMSR $SizeMSR
+    New-OSDPartitionSystem -DiskNumber $($OSDDisk.Number) -SizeSystemMbr $SizeSystemMbr -SizeSystemGpt $SizeSystemGpt -LabelSystem $LabelSystem -SizeMSR $SizeMSR
     
-    if ($NoRecovery.IsPresent) {
-        New-OSDPartitionWindows -Number $($OSDDisk.Number) -LabelWindows $LabelWindows -NoRecovery
+    if ($SkipRecoveryPartition.IsPresent) {
+        New-OSDPartitionWindows -DiskNumber $($OSDDisk.Number) -LabelWindows $LabelWindows -SkipRecoveryPartition
     } else {
-        New-OSDPartitionWindows -Number $($OSDDisk.Number) -LabelWindows $LabelWindows -LabelRecovery $LabelRecovery -SizeRecovery $SizeRecovery
+        New-OSDPartitionWindows -DiskNumber $($OSDDisk.Number) -LabelWindows $LabelWindows -LabelRecovery $LabelRecovery -SizeRecovery $SizeRecovery
     }
 }
