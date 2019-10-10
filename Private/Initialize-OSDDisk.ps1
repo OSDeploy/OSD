@@ -23,9 +23,9 @@ function Initialize-OSDDisk {
     #======================================================================================================
     if (Get-OSDGather IsUEFI) {
         Write-Verbose "Initialize-Disk Number $DiskNumber PartitionStyle GPT"
-        Initialize-Disk -Number $DiskNumber -PartitionStyle GPT -ErrorAction SilentlyContinue
+        Initialize-Disk -Number $DiskNumber -PartitionStyle GPT -ErrorAction SilentlyContinue | Out-Null
     } else {
         Write-Verbose "Initialize-Disk Number $DiskNumber PartitionStyle MBR"
-        Initialize-Disk -Number $DiskNumber -PartitionStyle MBR -ErrorAction SilentlyContinue
+        Initialize-Disk -Number $DiskNumber -PartitionStyle MBR -ErrorAction SilentlyContinue | Out-Null
     }
 }
