@@ -88,6 +88,7 @@ function New-OSDDisk {
 
         #Select OSDDisk if multiple Fixed Disks are present
         #Supersedes the DiskNumber parameter
+        #Ignored if only one Fixed Disk is present
         [switch]$SelectDisk,
 
         #Skips the creation of the Recovery Partition
@@ -99,11 +100,13 @@ function New-OSDDisk {
         #Required for execution as a safety precaution
         [switch]$Force
     )
+    
+    $OSDVersion = $($MyInvocation.MyCommand.Module.Version)
     #======================================================================================================
     #	Force Validation
     #======================================================================================================
     if (!($Force.IsPresent)) {
-        Write-Warning "Running in Information Mode only.  Use the Force parameter to execute this function"
+        Write-Warning "OSD $OSDVersion $Title is running in Sandbox.  Use the Force parameter for execution"
     }
     #======================================================================================================
     #	Get-Disk
