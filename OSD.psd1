@@ -38,6 +38,9 @@ Donna Ryan - @TheNotoriousDRR #MMSJazz
 Jerome Bezet-Torres - @JM2K69
 Nathan Bridges - @nathanjbridges
 Manel Rodero - @manelrodero
+
+19.10.14    Add Get-OSDSessions
+19.10.13    Initial Public Release with OSDBuilder
 '@
 
 # Minimum version of the Windows PowerShell engine required by this module
