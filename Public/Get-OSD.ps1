@@ -27,28 +27,29 @@ function Get-OSD {
         Write-Host "http://osd.osdeploy.com/release" -ForegroundColor Cyan
         Write-Host
         Write-Host "#OSDdevteam" -ForegroundColor Green
-        Write-Host "Andrew Jimenez      " -NoNewline
+        Write-Host "Andrew Jimenez " -NoNewline
         Write-Host "@AndrewJimenez_" -ForegroundColor Cyan
-        Write-Host "Ben Whitmore        " -NoNewline
+        Write-Host "Ben Whitmore " -NoNewline
         Write-Host "@byteben" -ForegroundColor Cyan
-        Write-Host "David Segura        " -NoNewline
-        Write-Host "@SeguraOSD          #MMSJazz" -ForegroundColor Cyan
-        Write-Host "Donna Ryan          " -NoNewline
-        Write-Host "@TheNotoriousDRR    #MMSJazz" -ForegroundColor Cyan
+        Write-Host "David Segura " -NoNewline
+        Write-Host "@SeguraOSD #MMSJazz" -ForegroundColor Cyan
+        Write-Host "Donna Ryan " -NoNewline
+        Write-Host "@TheNotoriousDRR #MMSJazz" -ForegroundColor Cyan
         Write-Host "Jerome Bezet-Torres " -NoNewline
         Write-Host "@JM2K69" -ForegroundColor Cyan
-        Write-Host "Manel Rodero        " -NoNewline
+        Write-Host "Manel Rodero " -NoNewline
         Write-Host "@manelrodero" -ForegroundColor Cyan
-        Write-Host "Nathan Bridges      " -NoNewline
+        Write-Host "Nathan Bridges " -NoNewline
         Write-Host "@nathanjbridges" -ForegroundColor Cyan
         Write-Host
         Write-Host 'Functions' -ForegroundColor Green
-        Write-Host 'Get-OSD'
-        Write-Host 'Get-OSDCimClass'
-        Write-Host 'Get-OSDGather'
-        Write-Host 'Get-OSDPower'
-        Write-Host 'Get-OSDProperty'
-        Write-Host 'Get-OSDWinPE'
+        Write-Host 'Get-OSD - This information'
+        Write-Host 'Get-OSDClass - Returns CimInstance information from common OSD Classes'
+        Write-Host 'Get-OSDGather - Returns common OSD information as an ordered hash table'
+        Write-Host 'Get-OSDPower - Displays Power Plan information using powercfg /LIST'
+        Write-Host 'Get-OSDSessions - Returns the Session.xml Updates that have been applied to an Operating System'
+        Write-Host 'Get-OSDWinPE - Common WinPE Commands using wpeutil and Microsoft DaRT RemoteRecovery'
+        Write-Host 'New-OSDDisk - Creates System | OS | Recovery Partitions for MBR or UEFI Drives in WinPE'
         Write-Host
         Write-Host 'Update' -ForegroundColor Green
         Write-Host 'Update-Module OSD -Force'

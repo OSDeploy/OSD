@@ -1,9 +1,9 @@
 <#
 .SYNOPSIS
-Creates System | OS | Recovery Partitions for MBR or UEFI Drives
+Creates System | OS | Recovery Partitions for MBR or UEFI Drives in WinPE
 
 .DESCRIPTION
-Creates System | OS | Recovery Partitions for MBR or UEFI Drives
+Creates System | OS | Recovery Partitions for MBR or UEFI Drives in WinPE
 
 .LINK
 https://osd.osdeploy.com/module/functions/new-osddisk

@@ -7,7 +7,7 @@
 RootModule = 'OSD.psm1'
 
 # Version number of his module.
-ModuleVersion = '19.10.14.0'
+ModuleVersion = '19.10.17.0'
 
 # Supported PSEditions
 # CompatiblePSEditions = @()
@@ -39,6 +39,7 @@ Jerome Bezet-Torres - @JM2K69
 Nathan Bridges - @nathanjbridges
 Manel Rodero - @manelrodero
 
+19.10.17    Addded Admin Elevation requirement for Bitlocker results
 19.10.14    Add Get-OSDSessions
 19.10.13    Initial Public Release with OSDBuilder
 '@

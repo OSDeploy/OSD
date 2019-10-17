@@ -90,32 +90,37 @@ function Get-OSDGather {
     #   IsBDE
     #   Credit Johan Schrewelius    https://gallery.technet.microsoft.com/PowerShell-script-that-a8a7bdd8
     #======================================================================================================
-    $IsBDE = $false
-    $BitlockerEncryptionType = $null
-    $BitlockerEncryptionMethod = $null
-
-    $EncryptionMethods = @{ 0 = "UNSPECIFIED";
-                        1 = 'AES_128_WITH_DIFFUSER';
-                        2 = "AES_256_WITH_DIFFUSER";
-                        3 = 'AES_128';
-                        4 = "AES_256";
-                        5 = 'HARDWARE_ENCRYPTION';
-                        6 = "AES_256";
-                        7 = "XTS_AES_256" }
-
-    $EncVols = Get-WmiObject -Namespace 'ROOT\cimv2\Security\MicrosoftVolumeEncryption' -Query "Select * from Win32_EncryptableVolume" -EA SilentlyContinue
-    if ($EncVols) {
-        foreach ($EncVol in $EncVols) {
-            if($EncVol.ProtectionStatus -ne 0) {
-                $EncMethod = [int]$EncVol.GetEncryptionMethod().EncryptionMethod
-                if ($EncryptionMethods.ContainsKey($EncMethod)) {$BitlockerEncryptionMethod = $EncryptionMethods[$EncMethod]}
-                $Status = $EncVol.GetConversionStatus(0)
-                if ($Status.ReturnValue -eq 0) {
-                    if ($Status.EncryptionFlags -eq 0x00000001) {$BitlockerEncryptionType = "Used Space Only Encrypted"}
-                    else {$BitlockerEncryptionType = "Full Disk Encryption"}
-                } else {$BitlockerEncryptionType = "Unknown"}
-
-                $IsBDE = $true
+    if (! $IsAdmin) {
+        Write-Warning "IsBDE property requires Admin Elevation"
+        $IsBDE = $null
+    } else {
+        $IsBDE = $false
+        $BitlockerEncryptionType = $null
+        $BitlockerEncryptionMethod = $null
+    
+        $EncryptionMethods = @{ 0 = "UNSPECIFIED";
+                            1 = 'AES_128_WITH_DIFFUSER';
+                            2 = "AES_256_WITH_DIFFUSER";
+                            3 = 'AES_128';
+                            4 = "AES_256";
+                            5 = 'HARDWARE_ENCRYPTION';
+                            6 = "AES_256";
+                            7 = "XTS_AES_256" }
+    
+        $EncVols = Get-WmiObject -Namespace 'ROOT\cimv2\Security\MicrosoftVolumeEncryption' -Query "Select * from Win32_EncryptableVolume" -EA SilentlyContinue
+        if ($EncVols) {
+            foreach ($EncVol in $EncVols) {
+                if($EncVol.ProtectionStatus -ne 0) {
+                    $EncMethod = [int]$EncVol.GetEncryptionMethod().EncryptionMethod
+                    if ($EncryptionMethods.ContainsKey($EncMethod)) {$BitlockerEncryptionMethod = $EncryptionMethods[$EncMethod]}
+                    $Status = $EncVol.GetConversionStatus(0)
+                    if ($Status.ReturnValue -eq 0) {
+                        if ($Status.EncryptionFlags -eq 0x00000001) {$BitlockerEncryptionType = "Used Space Only Encrypted"}
+                        else {$BitlockerEncryptionType = "Full Disk Encryption"}
+                    } else {$BitlockerEncryptionType = "Unknown"}
+    
+                    $IsBDE = $true
+                }
             }
         }
     }
@@ -243,9 +248,17 @@ function Get-OSDGather {
     #===================================================================================================
     #   Bitlocker
     #===================================================================================================
-    try {$GetBitlockerVolume = Get-BitlockerVolume}
-    catch {$GetBitlockerVolume = $null}
-
+    if ($Full.IsPresent) {
+        if ($IsAdmin) {
+            try {$GetBitlockerVolume = Get-BitlockerVolume -ErrorAction SilentlyContinue}
+            catch {$GetBitlockerVolume = $null}
+        } else {
+            Write-Warning "GetBitlockerVolume requires Admin Elevation"
+        }
+    }
+    #===================================================================================================
+    #   PhysicalDisk
+    #===================================================================================================
     try {$GetPhysicalDisk = Get-PhysicalDisk}
     catch {$GetPhysicalDisk = $null}
     #===================================================================================================
