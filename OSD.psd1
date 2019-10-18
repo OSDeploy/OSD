@@ -7,7 +7,7 @@
 RootModule = 'OSD.psm1'
 
 # Version number of his module.
-ModuleVersion = '19.10.17.1'
+ModuleVersion = '19.10.18.0'
 
 # Supported PSEditions
 # CompatiblePSEditions = @()
@@ -39,6 +39,7 @@ Jerome Bezet-Torres - @JM2K69
 Nathan Bridges - @nathanjbridges
 Manel Rodero - @manelrodero
 
+19.10.18    OSDGather change from .PSMDT to .MDTPS.  It just looks better
 19.10.17.1  OSDGather now adds variables from .MDT to .PSMDT
 19.10.17    Addded Admin Elevation requirement for Bitlocker results
 19.10.14    Add Get-OSDSessions
