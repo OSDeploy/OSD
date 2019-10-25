@@ -68,6 +68,7 @@ function Get-OSDGather {
     #   IsUEFI
     #======================================================================================================
     if ($IsWinPE) {
+        Start-Process -WindowStyle Hidden -FilePath wpeutil.exe -ArgumentList ('updatebootinfo') -Wait
         $IsUEFI = (Get-ItemProperty -Path HKLM:\System\CurrentControlSet\Control).PEFirmwareType -eq 2
     } else {
         if ($null -eq (Get-ItemProperty HKLM:\System\CurrentControlSet\Control\SecureBoot\State -ErrorAction SilentlyContinue)) {
@@ -92,6 +93,9 @@ function Get-OSDGather {
     #======================================================================================================
     if (! $IsAdmin) {
         Write-Warning "IsBDE property requires Admin Elevation"
+        $IsBDE = $null
+    } elseif ($IsWinPE) {
+        Write-Warning "IsBDE property cannot run in WinPE"
         $IsBDE = $null
     } else {
         $IsBDE = $false

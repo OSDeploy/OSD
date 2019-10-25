@@ -57,7 +57,13 @@ function New-OSDPartitionSystem {
         $PartitionSystem = New-Partition -DiskNumber $DiskNumber -Size $SizeSystemGpt -GptType '{ebd0a0a2-b9e5-4433-87c0-68b6b72699c7}'
 
         Write-Verbose "Format-Volume FileSystem FAT32 NewFileSystemLabel $LabelSystem"
-        Format-Volume -Partition $PartitionSystem -FileSystem FAT32 -NewFileSystemLabel "$LabelSystem" -Force -Confirm:$false | Out-Null
+        #Format-Volume -ObjectId $PartitionSystem.ObjectId -FileSystem FAT32 -NewFileSystemLabel "$LabelSystem" -Force -Confirm:$false
+$null = @"
+select disk $DiskNumber
+select partition $($PartitionSystem.PartitionNumber)
+format fs=fat32 quick label="$LabelSystem"
+exit 
+"@ | diskpart.exe
 
         Write-Verbose "Set-Partition GptType {c12a7328-f81f-11d2-ba4b-00a0c93ec93b}"
         $PartitionSystem | Set-Partition -GptType '{c12a7328-f81f-11d2-ba4b-00a0c93ec93b}'
@@ -65,7 +71,7 @@ function New-OSDPartitionSystem {
         #	GPT MSR
         #======================================================================================================
         Write-Verbose "New-Partition GptType {e3c9e316-0b5c-4db8-817d-f92df00215ae} Size $($SizeMSR / 1MB)MB"
-        New-Partition -DiskNumber $DiskNumber -Size $SizeMSR -GptType '{e3c9e316-0b5c-4db8-817d-f92df00215ae}' | Out-Null
+        $null = New-Partition -DiskNumber $DiskNumber -Size $SizeMSR -GptType '{e3c9e316-0b5c-4db8-817d-f92df00215ae}'
     } else {
         #======================================================================================================
         #	MBR
@@ -74,6 +80,12 @@ function New-OSDPartitionSystem {
         $PartitionSystem = New-Partition -DiskNumber $DiskNumber -Size $SizeSystemMbr -IsActive
 
         Write-Verbose "Format-Volume FileSystem NTFS NewFileSystemLabel $LabelSystem"
-        Format-Volume -Partition $PartitionSystem -FileSystem NTFS -NewFileSystemLabel "$LabelSystem" -Force -Confirm:$false | Out-Null
+        #Format-Volume -ObjectId $PartitionSystem.ObjectId -FileSystem NTFS -NewFileSystemLabel "$LabelSystem" -Force -Confirm:$false
+$null = @"
+select disk $DiskNumber
+select partition $($PartitionSystem.PartitionNumber)
+format fs=ntfs quick label="$LabelSystem"
+exit 
+"@ | diskpart.exe
     }
 }

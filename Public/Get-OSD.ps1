@@ -50,6 +50,7 @@ function Get-OSD {
         Write-Host 'Get-OSDSessions - Returns the Session.xml Updates that have been applied to an Operating System'
         Write-Host 'Get-OSDWinPE - Common WinPE Commands using wpeutil and Microsoft DaRT RemoteRecovery'
         Write-Host 'New-OSDDisk - Creates System | OS | Recovery Partitions for MBR or UEFI Drives in WinPE'
+        Write-Host 'Save-OSDDownload - Downloads a file by URL to a destionation folder'
         Write-Host
         Write-Host 'Update' -ForegroundColor Green
         Write-Host 'Update-Module OSD -Force'

@@ -94,7 +94,7 @@ function New-OSDDisk {
         #Skips the creation of the Recovery Partition
         [switch]$SkipRecoveryPartition,
 
-        #Confirm before Clear-Disk and Initialize-Disk
+        #Confirm before Initialize-Disk
         [switch]$Confirm,
 
         #Required for execution as a safety precaution
@@ -102,6 +102,7 @@ function New-OSDDisk {
     )
     
     $OSDVersion = $($MyInvocation.MyCommand.Module.Version)
+    Write-Verbose "OSDVersion: $OSDVersion"
     #======================================================================================================
     #	Force Validation
     #======================================================================================================
@@ -222,11 +223,16 @@ function New-OSDDisk {
     #	Clear-Disk
     #======================================================================================================
     if ($ClearDisk -eq 'OSDDisk') {
-        if ($Confirm.IsPresent) {
+        $null = @"
+select disk $($DirtyOSDDisk.Number)
+clean
+exit 
+"@ | diskpart.exe
+<#         if ($Confirm.IsPresent) {
             $DirtyOSDDisk | Clear-Disk -RemoveOEM -RemoveData -Confirm:$true -PassThru -ErrorAction SilentlyContinue | Out-Null
         } else {
             $DirtyOSDDisk | Clear-Disk -RemoveOEM -RemoveData -Confirm:$false -PassThru -ErrorAction SilentlyContinue | Out-Null
-        }
+        } #>
     } else {
         if ($null -ne $DirtyFixedDisks) {
             Write-Verbose "======================================================================================="
@@ -235,11 +241,18 @@ function New-OSDDisk {
                 Write-Verbose "Disk $($DirtyFixedDisk.Number)    $($DirtyFixedDisk.FriendlyName) ($([math]::Round($DirtyFixedDisk.Size / 1000000000))GB $($DirtyFixedDisk.PartitionStyle)) BusType=$($DirtyFixedDisk.BusType) Partitions=$($DirtyFixedDisk.NumberOfPartitions) IsBoot=$($DirtyFixedDisk.BootFromDisk)"
             }
             Write-Verbose "======================================================================================="
-            if ($Confirm.IsPresent) {
-                foreach ($DirtyFixedDisk in $DirtyFixedDisks) {$DirtyFixedDisk | Clear-Disk -RemoveOEM -RemoveData -Confirm:$true -PassThru -ErrorAction SilentlyContinue | Out-Null}
-            } else {
-                foreach ($DirtyFixedDisk in $DirtyFixedDisks) {$DirtyFixedDisk | Clear-Disk -RemoveOEM -RemoveData -Confirm:$false -PassThru -ErrorAction SilentlyContinue | Out-Null}
-            }
+            #if ($Confirm.IsPresent) {
+            #    foreach ($DirtyFixedDisk in $DirtyFixedDisks) {$DirtyFixedDisk | Clear-Disk -RemoveOEM -RemoveData -Confirm:$true -PassThru -ErrorAction SilentlyContinue | Out-Null}
+            #} else {
+                foreach ($DirtyFixedDisk in $DirtyFixedDisks) {
+                    #$DirtyFixedDisk | Clear-Disk -RemoveOEM -RemoveData -Confirm:$false -PassThru -ErrorAction SilentlyContinue | Out-Null
+                    $null = @"
+select disk $($DirtyFixedDisk.Number)
+clean
+exit 
+"@ | diskpart.exe
+                }
+            #}
         }
     }
     #======================================================================================================

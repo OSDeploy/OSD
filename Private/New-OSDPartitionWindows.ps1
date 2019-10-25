@@ -51,7 +51,13 @@ function New-OSDPartitionWindows {
             $PartitionWindows = New-Partition -DiskNumber $DiskNumber -UseMaximumSize -GptType '{ebd0a0a2-b9e5-4433-87c0-68b6b72699c7}' -DriveLetter W
     
             Write-Verbose "Format-Volume FileSystem NTFS NewFileSystemLabel $LabelWindows"
-            $null = Format-Volume -Partition $PartitionWindows -NewFileSystemLabel "$LabelWindows" -FileSystem NTFS -Force -Confirm:$false
+            #$null = Format-Volume -Partition $PartitionWindows -NewFileSystemLabel "$LabelWindows" -FileSystem NTFS -Force -Confirm:$false
+$null = @"
+select disk $DiskNumber
+select partition $($PartitionWindows.PartitionNumber)
+format fs=ntfs quick label="$LabelWindows"
+exit 
+"@ | diskpart.exe
         } else {
             $OSDDisk = Get-Disk -Number $DiskNumber
             $SizeWindows = $($OSDDisk.LargestFreeExtent) - $SizeRecovery
@@ -61,7 +67,13 @@ function New-OSDPartitionWindows {
             $PartitionWindows = New-Partition -DiskNumber $DiskNumber -Size $SizeWindows -GptType '{ebd0a0a2-b9e5-4433-87c0-68b6b72699c7}' -DriveLetter W
     
             Write-Verbose "Format-Volume FileSystem NTFS NewFileSystemLabel $LabelWindows"
-            $null = Format-Volume -Partition $PartitionWindows -NewFileSystemLabel "$LabelWindows" -FileSystem NTFS -Force -Confirm:$false
+            #$null = Format-Volume -Partition $PartitionWindows -NewFileSystemLabel "$LabelWindows" -FileSystem NTFS -Force -Confirm:$false
+$null = @"
+select disk $DiskNumber
+select partition $($PartitionWindows.PartitionNumber)
+format fs=ntfs quick label="$LabelWindows"
+exit 
+"@ | diskpart.exe
             #======================================================================================================
             #	Recovery Partition
             #======================================================================================================
@@ -70,16 +82,21 @@ function New-OSDPartitionWindows {
             $PartitionRecovery = New-Partition -DiskNumber $DiskNumber -GptType '{de94bba4-06d1-4d40-a16a-bfd50179d6ac}' -UseMaximumSize
     
             Write-Verbose "Format-Volume FileSystem NTFS NewFileSystemLabel $LabelRecovery"
-            $null = Format-Volume -Partition $PartitionRecovery -NewFileSystemLabel "$LabelRecovery" -FileSystem NTFS -Confirm:$false
+            #$null = Format-Volume -Partition $PartitionRecovery -NewFileSystemLabel "$LabelRecovery" -FileSystem NTFS -Confirm:$false
+$null = @"
+select disk $DiskNumber
+select partition $($PartitionRecovery.PartitionNumber)
+format fs=ntfs quick label="$LabelRecovery"
+exit 
+"@ | diskpart.exe
     
             Write-Verbose "Set-Partition Attributes 0x8000000000000001"
-            $null = @"
+$null = @"
 select disk $DiskNumber
 select partition $($PartitionRecovery.PartitionNumber)
 gpt attributes=0x8000000000000001 
 exit 
-"@ |
-            diskpart.exe
+"@ | diskpart.exe
         }
     } else {
         #======================================================================================================
@@ -90,7 +107,13 @@ exit
             $PartitionWindows = New-Partition -DiskNumber $DiskNumber -UseMaximumSize -MbrType IFS -DriveLetter W
     
             Write-Verbose "Format-Volume FileSystem NTFS NewFileSystemLabel $LabelWindows"
-            $null = Format-Volume -Partition $PartitionWindows -NewFileSystemLabel "$LabelWindows" -FileSystem NTFS -Force -Confirm:$false
+            #$null = Format-Volume -Partition $PartitionWindows -NewFileSystemLabel "$LabelWindows" -FileSystem NTFS -Force -Confirm:$false
+$null = @"
+select disk $DiskNumber
+select partition $($PartitionWindows.PartitionNumber)
+format fs=ntfs quick label="$LabelWindows"
+exit 
+"@ | diskpart.exe
         } else {
             $OSDDisk = Get-Disk -Number $DiskNumber
             $SizeWindows = $($OSDDisk.LargestFreeExtent) - $SizeRecovery
@@ -100,7 +123,13 @@ exit
             $PartitionWindows = New-Partition -DiskNumber $DiskNumber -Size $SizeWindows -MbrType IFS -DriveLetter W
     
             Write-Verbose "Format-Volume FileSystem NTFS NewFileSystemLabel $LabelWindows"
-            $null = Format-Volume -Partition $PartitionWindows -NewFileSystemLabel "$LabelWindows" -FileSystem NTFS -Force -Confirm:$false
+            #$null = Format-Volume -Partition $PartitionWindows -NewFileSystemLabel "$LabelWindows" -FileSystem NTFS -Force -Confirm:$false
+$null = @"
+select disk $DiskNumber
+select partition $($PartitionWindows.PartitionNumber)
+format fs=ntfs quick label="$LabelWindows"
+exit 
+"@ | diskpart.exe
             #======================================================================================================
             #	Recovery Partition
             #======================================================================================================
@@ -109,16 +138,21 @@ exit
             $PartitionRecovery = New-Partition -DiskNumber $DiskNumber -UseMaximumSize
     
             Write-Verbose "Format-Volume FileSystem NTFS NewFileSystemLabel $LabelRecovery"
-            $null = Format-Volume -Partition $PartitionRecovery -NewFileSystemLabel "$LabelRecovery" -FileSystem NTFS -Confirm:$false
-    
+            #$null = Format-Volume -Partition $PartitionRecovery -NewFileSystemLabel "$LabelRecovery" -FileSystem NTFS -Confirm:$false
+$null = @"
+select disk $DiskNumber
+select partition $($PartitionRecovery.PartitionNumber)
+format fs=ntfs quick label="$LabelRecovery"
+exit 
+"@ | diskpart.exe
+
             Write-Verbose "Set-Partition id 27"
             $null = @"
 select disk $DiskNumber
 select partition $($PartitionRecovery.PartitionNumber)
 set id=27
 exit 
-"@ |
-        diskpart.exe
+"@ | diskpart.exe
         }
     }
 }

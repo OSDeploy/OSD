@@ -7,7 +7,7 @@
 RootModule = 'OSD.psm1'
 
 # Version number of his module.
-ModuleVersion = '19.10.18.0'
+ModuleVersion = '19.10.25.0'
 
 # Supported PSEditions
 # CompatiblePSEditions = @()
@@ -39,6 +39,9 @@ Jerome Bezet-Torres - @JM2K69
 Nathan Bridges - @nathanjbridges
 Manel Rodero - @manelrodero
 
+19.10.25    Resolved issue with Clear-Disk on VM
+19.10.25    Save-OSDDownload
+19.10.23    Resolved issue with PEFirmwareType
 19.10.18    OSDGather change from .PSMDT to .MDTPS.  It just looks better
 19.10.17.1  OSDGather now adds variables from .MDT to .PSMDT
 19.10.17    Addded Admin Elevation requirement for Bitlocker results
@@ -84,7 +87,7 @@ PowerShellVersion = '5.0'
 
 # Functions to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no functions to export.
 FunctionsToExport = 'Get-OSD','Get-OSDClass','Get-OSDGather','Get-OSDPower','Get-OSDSessions','Get-OSDWinPE',
-                    'New-OSDDisk'
+                    'New-OSDDisk','Save-OSDDownload'
 
 # Cmdlets to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no cmdlets to export.
 CmdletsToExport = @()
