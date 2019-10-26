@@ -7,7 +7,7 @@
 RootModule = 'OSD.psm1'
 
 # Version number of his module.
-ModuleVersion = '19.10.25.0'
+ModuleVersion = '19.10.26.0'
 
 # Supported PSEditions
 # CompatiblePSEditions = @()
@@ -28,7 +28,8 @@ Copyright = '(c) 2019 David Segura osdeploy.com. All rights reserved.'
 Description = @'
 OSD PowerShell Module
 https://osd.osdeploy.com/
-OSD PowerShell Module is a collection of OSD shared functions.  It is currently under development and is for Testing only
+
+OSD PowerShell Module is a collection of OSD shared functions
 
 #OSDdevteam
 Andrew Jimenez - @AndrewJimenez_
@@ -38,15 +39,6 @@ Donna Ryan - @TheNotoriousDRR #MMSJazz
 Jerome Bezet-Torres - @JM2K69
 Nathan Bridges - @nathanjbridges
 Manel Rodero - @manelrodero
-
-19.10.25    Resolved issue with Clear-Disk on VM
-19.10.25    Save-OSDDownload
-19.10.23    Resolved issue with PEFirmwareType
-19.10.18    OSDGather change from .PSMDT to .MDTPS.  It just looks better
-19.10.17.1  OSDGather now adds variables from .MDT to .PSMDT
-19.10.17    Addded Admin Elevation requirement for Bitlocker results
-19.10.14    Add Get-OSDSessions
-19.10.13    Initial Public Release with OSDBuilder
 '@
 
 # Minimum version of the Windows PowerShell engine required by this module
@@ -122,7 +114,7 @@ PrivateData = @{
         ProjectUri = 'https://github.com/OSDeploy/OSD'
 
         # A URL to an icon representing this module.
-        # IconUri = ''
+        IconUri = 'https://raw.githubusercontent.com/OSDeploy/OSD/master/OSD.png'
 
         # ReleaseNotes of this module
         ReleaseNotes = 'https://osd.osdeploy.com/release'
