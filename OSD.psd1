@@ -7,7 +7,7 @@
 RootModule = 'OSD.psm1'
 
 # Version number of his module.
-ModuleVersion = '19.10.26.0'
+ModuleVersion = '19.10.29.0'
 
 # Supported PSEditions
 # CompatiblePSEditions = @()
@@ -16,7 +16,7 @@ ModuleVersion = '19.10.26.0'
 GUID = '9fe5b9b6-0224-4d87-9018-a8978529f6f5'
 
 # Author of this module
-Author = 'David Segura'
+Author = 'David Segura @SeguraOSD'
 
 # Company or vendor of this module
 CompanyName = 'osdeploy.com'
@@ -26,9 +26,7 @@ Copyright = '(c) 2019 David Segura osdeploy.com. All rights reserved.'
 
 # Description of the functionality provided by this module
 Description = @'
-OSD PowerShell Module
-https://osd.osdeploy.com/
-
+https://osd.osdeploy.com
 OSD PowerShell Module is a collection of OSD shared functions
 
 #OSDdevteam
@@ -105,7 +103,7 @@ PrivateData = @{
     PSData = @{
 
         # Tags applied to this module. These help with module discovery in online galleries.
-        Tags = @('OSD','OSDeploy')
+        Tags = @('OSD','OSDeploy','OSDBuilder')
 
         # A URL to the license for this module.
         LicenseUri = 'https://github.com/OSDeploy/OSD/blob/master/LICENSE'

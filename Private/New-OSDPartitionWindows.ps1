@@ -94,7 +94,7 @@ exit
 $null = @"
 select disk $DiskNumber
 select partition $($PartitionRecovery.PartitionNumber)
-gpt attributes=0x8000000000000001 
+gpt attributes=0x8000000000000001
 exit 
 "@ | diskpart.exe
         }
