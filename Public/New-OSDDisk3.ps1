@@ -105,6 +105,12 @@ function New-OSDDisk {
     $global:OSDDisk = $null
     $GetDisksFixed = $null
     $GetDisksDirty = $null
+    $OSDDiskSingle = $false
+    $OSDDiskMulti = $true
+    $OSDDiskRaw = $false
+    $OSDDiskAuto = $false
+
+
     $global:MultipleDisks = $false
     $global:OSDDiskSandbox = $false
     $global:SelectOSDDisk = $false
@@ -127,8 +133,57 @@ function New-OSDDisk {
     #======================================================================================================
     if ($null -eq $GetDisksFixed) {Write-Warning "$Title could not find any Fixed Disks"; Break}
     #======================================================================================================
-    #	If there is only one Fixed Disk, then it is the OSDDisk
+    #	Single Disk
     #======================================================================================================
+    if (($GetDisksFixed | Measure-Object).Count -eq 1) {
+        $OSDDisk = $GetDisksFixed
+        $OSDDiskSingle = $true
+        $OSDDiskMulti = $false
+        if ($OSDDisk.PartitionStyle -eq 'RAW') {
+            $OSDDiskRaw = $true
+            $OSDDiskAuto = $true
+        }
+    } else {
+        $OSDDiskSingle = $false
+        $OSDDiskMulti = $true
+    }
+
+    if ($DiskNumber -and ($GetDisksFixed | Where-Object {$_.DiskNumber -eq $DiskNumber})) {
+        $OSDDisk = $GetDisksFixed | Where-Object {$_.DiskNumber -eq $DiskNumber}
+        if ($OSDDisk.PartitionStyle -eq 'RAW') {
+            $OSDDiskRaw = $true
+            $OSDDiskAuto = $true
+        }
+    }
+    #======================================================================================================
+    #	Sandbox
+    #======================================================================================================
+    if (! $Force.IsPresent) {
+        if (($OSDDiskSingle -eq $true) -and ($OSDDiskRaw -eq $false)) {
+            $global:OSDDiskSandbox = $true
+            Write-Warning "$Title is running Sandbox Mode due to existing Partitions or Data"
+            Write-Warning "Use the -Force parameter to bypass Sandbox Mode"
+        } elseif ($OSDDiskSingle -eq $false) {
+            $global:OSDDiskSandbox = $true
+            Write-Warning "$Title is running Sandbox Mode due to multiple Fixed Disks"
+            Write-Warning "Use the -Force parameter to bypass Sandbox Mode"
+        } else {
+            $global:OSDDiskSandbox = $true
+            Write-Warning "$Title is running Sandbox Mode"
+            Write-Warning "Use the -Force parameter to bypass Sandbox Mode"
+        }
+    }
+
+
+
+
+
+
+
+
+
+
+
     if (($GetDisksFixed | Measure-Object).Count -eq 1) {
         $OSDDisk = $GetDisksFixed
         if ($OSDDisk.PartitionStyle -ne 'RAW') {
@@ -139,7 +194,14 @@ function New-OSDDisk {
             }
         }
         if ($OSDDisk.PartitionStyle -eq 'RAW') {$OSDDiskSkipDisplay = $true}
-    } else {
+    }
+
+
+
+
+
+
+    if (($GetDisksFixed | Measure-Object).Count -gt 1) {
         if (! $Force.IsPresent) {
             $global:OSDDiskSandbox = $true
             Write-Warning "$Title is running in Sandbox Mode due to multiple Fixed Disks"
@@ -181,13 +243,21 @@ function New-OSDDisk {
         Write-Warning "$Title requires Administrative Rights"
         if ($global:OSDDiskSandbox -eq $false) {Break}
     }
+
+
+
+
+
+
+
+
     #======================================================================================================
     #	DisplayGetDisksFixed
     #======================================================================================================
     if ($OSDDiskSkipDisplay -eq $false) {
-        Write-Host "=================================================================================================" -ForegroundColor Cyan
+        Write-Host "============================================================================================" -ForegroundColor Cyan
         foreach ($item in $GetDisksFixed) {Write-Host "Disk $($item.Number) - $($item.FriendlyName) ($([math]::Round($item.Size / 1000000000))GB $($item.PartitionStyle)) BusType=$($item.BusType) Partitions=$($item.NumberOfPartitions) IsBoot=$($item.BootFromDisk)" -ForegroundColor Cyan}
-        Write-Host "=================================================================================================" -ForegroundColor Cyan
+        Write-Host "============================================================================================" -ForegroundColor Cyan
     }
     #======================================================================================================
     #	SelectOSDDisk
@@ -306,9 +376,9 @@ exit
     #	Display OSDDisk
     #   Show the current information about this Disk.  At this point, it should be RAW
     #======================================================================================================
-    Write-Host "=================================================================================================" -ForegroundColor Cyan
+    Write-Host "============================================================================================" -ForegroundColor Cyan
     Write-Host "Disk $($OSDDisk.Number) - $($OSDDisk.FriendlyName) ($([math]::Round($OSDDisk.Size / 1000000000))GB $($OSDDisk.PartitionStyle)) BusType=$($OSDDisk.BusType)" -ForegroundColor Cyan
-    Write-Host "=================================================================================================" -ForegroundColor Cyan
+    Write-Host "============================================================================================" -ForegroundColor Cyan
     #======================================================================================================
     #	AskPartition
     #   Ask if it is ok to Partition the Drive
@@ -340,9 +410,9 @@ exit
     #	Parameters
     #======================================================================================================
     if (-not ($Force.IsPresent)) {
-        Write-Host "=================================================================================================" -ForegroundColor Cyan
+        Write-Host "============================================================================================" -ForegroundColor Cyan
         Write-Host "Parameters" -ForegroundColor Cyan
-        Write-Host "=================================================================================================" -ForegroundColor Cyan
+        Write-Host "============================================================================================" -ForegroundColor Cyan
         Write-Host "-Title: $Title" -ForegroundColor Cyan
         Write-Host "-DiskNumber: $DiskNumber" -ForegroundColor Cyan
         Write-Host "-LabelSystem: $LabelSystem" -ForegroundColor Cyan
