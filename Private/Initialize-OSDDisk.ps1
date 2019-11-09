@@ -19,13 +19,28 @@ function Initialize-OSDDisk {
         [int]$DiskNumber = 0
     )
     #======================================================================================================
-    #	Initialize-OSDDisk
+    #	UEFI GPT
     #======================================================================================================
-    if (Get-OSDGather IsUEFI) {
-        Write-Verbose "Initialize-Disk Number $DiskNumber PartitionStyle GPT"
-        Initialize-Disk -Number $DiskNumber -PartitionStyle GPT -ErrorAction SilentlyContinue | Out-Null
-    } else {
-        Write-Verbose "Initialize-Disk Number $DiskNumber PartitionStyle MBR"
-        Initialize-Disk -Number $DiskNumber -PartitionStyle MBR -ErrorAction SilentlyContinue | Out-Null
+    if (Get-OSDGather -Property IsUEFI) {
+        if ($global:OSDDiskSandbox -eq $true) {
+            Write-Host "SANDBOX: Initialize-Disk -Number $DiskNumber -PartitionStyle GPT" -ForegroundColor DarkGray
+        }
+        if ($global:OSDDiskSandbox -eq $false) {
+            Write-Warning "Initialize-Disk -Number $DiskNumber -PartitionStyle GPT"
+            Initialize-Disk -Number $DiskNumber -PartitionStyle GPT -ErrorAction SilentlyContinue | Out-Null
+        }
+    }
+    #======================================================================================================
+    #	BIOS MBR
+    #======================================================================================================
+    if (! (Get-OSDGather -Property IsUEFI)) {
+        if ($global:OSDDiskSandbox -eq $true) {
+            Write-Host "SANDBOX: Initialize-Disk -Number $DiskNumber -PartitionStyle MBR" -ForegroundColor DarkGray
+        }
+
+        if ($global:OSDDiskSandbox -eq $false) {
+            Write-Warning "Initialize-Disk -Number $DiskNumber -PartitionStyle MBR"
+            Initialize-Disk -Number $DiskNumber -PartitionStyle MBR -ErrorAction SilentlyContinue | Out-Null
+        }
     }
 }

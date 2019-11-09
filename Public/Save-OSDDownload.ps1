@@ -14,38 +14,66 @@ https://osd.osdeploy.com/module/functions/save-osddownload
 function Save-OSDDownload {
     [CmdletBinding()]
     Param (
-        #Download the file using BITS-Transfer
-        #Interactive Login required
-        [switch]$BitsTransfer,
+        #URL of the file to download
+        [Parameter(Mandatory)]
+        [string]$SourceUrl,
 
         #Destination Folder
         [string]$DownloadFolder = $env:TEMP,
 
-        #URL of the file to download
-        [Parameter(Mandatory)]
-        [string]$SourceUrl
-    )
+        #Overwrite the file if it exists already
+        #The default action is to skip the download
+        [switch]$Overwrite,
 
+        #Download the file using BITS-Transfer
+        #Interactive Login required
+        [switch]$BitsTransfer
+    )
+    
+    $global:OSDDownload = [ordered]@{
+        Name = $null
+        FullName = $null
+        DownloadFolder = $DownloadFolder
+        SourceUrl = $SourceUrl
+        BitsTransfer = $BitsTransfer
+        Download = $true
+        IsDownloaded = $false
+    }
+
+
+    $global:OSDDownload.Name = Split-Path -Path $OSDDownload.SourceUrl -Leaf
+    Write-Verbose "OSDDownload Name: $($OSDDownload.Name)"
+
+    $global:OSDDownload.FullName = Join-Path $DownloadFolder $OSDDownload.Name
+    Write-Verbose "OSDDownload FullName: $($OSDDownload.FullName)"
+
+    #======================================================================================================
+    #	DownloadFolder
+    #   Make sure DownloadFolder can be created
+    #======================================================================================================
     if (! (Test-Path "$DownloadFolder")) {
         Write-Verbose "New-Item -Path $DownloadFolder"
-        New-Item -Path "$DownloadFolder" -ItemType Directory -Force -ErrorAction Stop | Out-Null
+        New-Item -Path "$DownloadFolder" -ItemType Directory -Force | Out-Null
+        if (!(Test-Path $DownloadFolder)) {
+            Return $global:OSDDownload
+        }
     }
 
-    $DownloadFile = Split-Path -Path $SourceUrl -Leaf
-    Write-Verbose "DownloadFile: $DownloadFile"
+    if (!($Overwrite.IsPresent)) {
+        if (Test-Path $OSDDownload.FullName) {
+            $global:OSDDownload.IsDownloaded = $true
+            Return $global:OSDDownload
+        }
+    }
 
-    $DownloadFullName = Join-Path $DownloadFolder $DownloadFile
-    Write-Verbose "DownloadFullName: $DownloadFullName"
-
-    if ($BitsTransfer.IsPresent) {
-        Start-BitsTransfer -Source "$SourceUrl" -Destination "$DownloadFullName"
-    } else {
+    if ($BitsTransfer.IsPresent) {Start-BitsTransfer -Source $SourceUrl -Destination $OSDDownload.FullName}
+    else {
         $WebClient = New-Object System.Net.WebClient
-        $WebClient.DownloadFile("$SourceUrl","$DownloadFullName")
+        $WebClient.OSDDownload.Name($SourceUrl,$OSDDownload.FullName)
     }
-    if (Test-Path "$DownloadFullName") {
-        Return (Get-Item $DownloadFullName).FullName
-    } else {
-        Return
+
+    if (Test-Path $OSDDownload.FullName) {
+        $global:OSDDownload.IsDownloaded = $true
     }
+    Return $global:OSDDownload
 }

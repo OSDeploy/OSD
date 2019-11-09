@@ -41,56 +41,85 @@ function New-OSDPartitionWindows {
         [ValidateRange(350MB,80000MB)]
         [uint64]$SizeRecovery = 990MB
     )
-    Write-Verbose "Prepare Windows Partition"
-    if (Get-OSDGather -Property IsUEFI) {
-        #======================================================================================================
-        #	GPT
-        #======================================================================================================
-        if ($SkipRecoveryPartition.IsPresent) {
-            Write-Verbose "New-Partition GptType {ebd0a0a2-b9e5-4433-87c0-68b6b72699c7} DriveLetter W"
+
+    #======================================================================================================
+    #	GPT WINDOWS
+    #======================================================================================================
+    if ((Get-OSDGather -Property IsUEFI) -and ($SkipRecoveryPartition.IsPresent)) {
+        $OSDDisk = Get-Disk -Number $DiskNumber
+        if ($global:OSDDiskSandbox -eq $true) {
+            $SizeWindows = $($OSDDisk.Size) - $SizeSystemGpt - $SizeMSR
+            $SizeWindowsGB = [math]::Round($SizeWindows / 1GB,1)
+
+            Write-Host "SANDBOX: New-Partition -DiskNumber $DiskNumber -UseMaximumSize -GptType {ebd0a0a2-b9e5-4433-87c0-68b6b72699c7} DriveLetter W" -ForegroundColor DarkGray
+            Write-Host "SANDBOX: Format-Volume -DriveLetter W -FileSystem NTFS -NewFileSystemLabel $LabelWindows" -ForegroundColor DarkGray
+
+
+
+        }
+        if ($global:OSDDiskSandbox -eq $false) {
+            Write-Warning "New-Partition -DiskNumber $DiskNumber -UseMaximumSize -GptType {ebd0a0a2-b9e5-4433-87c0-68b6b72699c7} DriveLetter W"
             $PartitionWindows = New-Partition -DiskNumber $DiskNumber -UseMaximumSize -GptType '{ebd0a0a2-b9e5-4433-87c0-68b6b72699c7}' -DriveLetter W
-    
-            Write-Verbose "Format-Volume FileSystem NTFS NewFileSystemLabel $LabelWindows"
+
+            Write-Warning "Format-Volume -DriveLetter W -FileSystem NTFS -NewFileSystemLabel $LabelWindows"
             #$null = Format-Volume -Partition $PartitionWindows -NewFileSystemLabel "$LabelWindows" -FileSystem NTFS -Force -Confirm:$false
+
 $null = @"
 select disk $DiskNumber
 select partition $($PartitionWindows.PartitionNumber)
 format fs=ntfs quick label="$LabelWindows"
 exit 
 "@ | diskpart.exe
-        } else {
-            $OSDDisk = Get-Disk -Number $DiskNumber
+
+        }
+    }
+
+    #======================================================================================================
+    #	GPT WINDOWS + RECOVERY
+    #======================================================================================================
+    if ((Get-OSDGather -Property IsUEFI) -and (! $SkipRecoveryPartition.IsPresent)) {
+        $OSDDisk = Get-Disk -Number $DiskNumber
+        if ($global:OSDDiskSandbox -eq $true) {
+            $SizeWindows = $($OSDDisk.Size) - $SizeSystemGpt - $SizeMSR - $SizeRecovery
+            $SizeWindowsGB = [math]::Round($SizeWindows / 1GB,1)
+
+            Write-Host "SANDBOX: New-Partition GptType {ebd0a0a2-b9e5-4433-87c0-68b6b72699c7} Size $($SizeWindowsGB)GB DriveLetter W" -ForegroundColor DarkGray
+            Write-Host "SANDBOX: Format-Volume -DriveLetter W -FileSystem NTFS -NewFileSystemLabel $LabelWindows" -ForegroundColor DarkGray
+            Write-Host "SANDBOX: New-Partition GptType {de94bba4-06d1-4d40-a16a-bfd50179d6ac} UseMaximumSize" -ForegroundColor DarkGray
+            Write-Host "SANDBOX: Format-Volume FileSystem NTFS NewFileSystemLabel $LabelRecovery" -ForegroundColor DarkGray
+            Write-Host "SANDBOX: Set-Partition Attributes 0x8000000000000001" -ForegroundColor DarkGray
+        }
+        if ($global:OSDDiskSandbox -eq $false) {
             $SizeWindows = $($OSDDisk.LargestFreeExtent) - $SizeRecovery
             $SizeWindowsGB = [math]::Round($SizeWindows / 1GB,1)
-    
-            Write-Verbose "New-Partition GptType {ebd0a0a2-b9e5-4433-87c0-68b6b72699c7} Size $($SizeWindowsGB)GB DriveLetter W"
+
+            Write-Warning "New-Partition GptType {ebd0a0a2-b9e5-4433-87c0-68b6b72699c7} Size $($SizeWindowsGB)GB DriveLetter W"
             $PartitionWindows = New-Partition -DiskNumber $DiskNumber -Size $SizeWindows -GptType '{ebd0a0a2-b9e5-4433-87c0-68b6b72699c7}' -DriveLetter W
-    
-            Write-Verbose "Format-Volume FileSystem NTFS NewFileSystemLabel $LabelWindows"
+
+            Write-Warning "Format-Volume -DriveLetter W -FileSystem NTFS -NewFileSystemLabel $LabelWindows"
             #$null = Format-Volume -Partition $PartitionWindows -NewFileSystemLabel "$LabelWindows" -FileSystem NTFS -Force -Confirm:$false
+
 $null = @"
 select disk $DiskNumber
 select partition $($PartitionWindows.PartitionNumber)
 format fs=ntfs quick label="$LabelWindows"
 exit 
 "@ | diskpart.exe
-            #======================================================================================================
-            #	Recovery Partition
-            #======================================================================================================
-            Write-Verbose "Prepare $LabelRecovery Partition"
-            Write-Verbose "New-Partition GptType {de94bba4-06d1-4d40-a16a-bfd50179d6ac} UseMaximumSize"
+
+            Write-Warning "New-Partition GptType {de94bba4-06d1-4d40-a16a-bfd50179d6ac} UseMaximumSize"
             $PartitionRecovery = New-Partition -DiskNumber $DiskNumber -GptType '{de94bba4-06d1-4d40-a16a-bfd50179d6ac}' -UseMaximumSize
-    
-            Write-Verbose "Format-Volume FileSystem NTFS NewFileSystemLabel $LabelRecovery"
+
+            Write-Warning "Format-Volume FileSystem NTFS NewFileSystemLabel $LabelRecovery"
             #$null = Format-Volume -Partition $PartitionRecovery -NewFileSystemLabel "$LabelRecovery" -FileSystem NTFS -Confirm:$false
+
 $null = @"
 select disk $DiskNumber
 select partition $($PartitionRecovery.PartitionNumber)
 format fs=ntfs quick label="$LabelRecovery"
 exit 
 "@ | diskpart.exe
-    
-            Write-Verbose "Set-Partition Attributes 0x8000000000000001"
+
+            Write-Warning "Set-Partition Attributes 0x8000000000000001"
 $null = @"
 select disk $DiskNumber
 select partition $($PartitionRecovery.PartitionNumber)
@@ -98,15 +127,23 @@ gpt attributes=0x8000000000000001
 exit 
 "@ | diskpart.exe
         }
-    } else {
-        #======================================================================================================
-        #	MBR
-        #======================================================================================================
-        if ($SkipRecoveryPartition.IsPresent) {
-            Write-Verbose "New-Partition MbrType IFS DriveLetter W"
+    }
+
+    #======================================================================================================
+    #	MBR WINDOWS
+    #======================================================================================================
+    if ((! (Get-OSDGather -Property IsUEFI)) -and ($SkipRecoveryPartition.IsPresent)) {
+        if ($global:OSDDiskSandbox -eq $true) {
+            $SizeWindows = $($OSDDisk.Size) - $SizeSystemMbr
+            $SizeWindowsGB = [math]::Round($SizeWindows / 1GB,1)
+            Write-Host "SANDBOX: New-Partition -DiskNumber $DiskNumber -UseMaximumSize -MbrType IFS -DriveLetter W" -ForegroundColor DarkGray
+            Write-Host "SANDBOX: Format-Volume -DriveLetter W -FileSystem NTFS -NewFileSystemLabel $LabelWindows" -ForegroundColor DarkGray
+        }
+        if ($global:OSDDiskSandbox -eq $false) {
+            Write-Warning "New-Partition -DiskNumber $DiskNumber -UseMaximumSize -MbrType IFS -DriveLetter W"
             $PartitionWindows = New-Partition -DiskNumber $DiskNumber -UseMaximumSize -MbrType IFS -DriveLetter W
     
-            Write-Verbose "Format-Volume FileSystem NTFS NewFileSystemLabel $LabelWindows"
+            Write-Warning "Format-Volume -DriveLetter W -FileSystem NTFS -NewFileSystemLabel $LabelWindows"
             #$null = Format-Volume -Partition $PartitionWindows -NewFileSystemLabel "$LabelWindows" -FileSystem NTFS -Force -Confirm:$false
 $null = @"
 select disk $DiskNumber
@@ -114,15 +151,33 @@ select partition $($PartitionWindows.PartitionNumber)
 format fs=ntfs quick label="$LabelWindows"
 exit 
 "@ | diskpart.exe
-        } else {
+        }
+    }
+
+    #======================================================================================================
+    #	MBR WINDOWS + RECOVERY
+    #======================================================================================================
+    if ((! (Get-OSDGather -Property IsUEFI)) -and (! $SkipRecoveryPartition.IsPresent)) {
+
+        if ($global:OSDDiskSandbox -eq $true) {
+            $SizeWindows = $($OSDDisk.Size) - $SizeSystemMbr - $SizeRecovery
+            $SizeWindowsGB = [math]::Round($SizeWindows / 1GB,1)
+
+            Write-Host "SANDBOX: New-Partition -DiskNumber $DiskNumber -Size $SizeWindows -MbrType IFS -DriveLetter W" -ForegroundColor DarkGray
+            Write-Host "SANDBOX: Format-Volume FileSystem NTFS NewFileSystemLabel $LabelWindows" -ForegroundColor DarkGray
+            Write-Host "SANDBOX: New-Partition -DiskNumber $DiskNumber -UseMaximumSize" -ForegroundColor DarkGray
+            Write-Host "SANDBOX: Format-Volume -FileSystem NTFS -NewFileSystemLabel $LabelRecovery" -ForegroundColor DarkGray
+            Write-Host "SANDBOX: Set-Partition id 27" -ForegroundColor DarkGray
+        }
+        if ($global:OSDDiskSandbox -eq $false) {
             $OSDDisk = Get-Disk -Number $DiskNumber
             $SizeWindows = $($OSDDisk.LargestFreeExtent) - $SizeRecovery
             $SizeWindowsGB = [math]::Round($SizeWindows / 1GB,1)
     
-            Write-Verbose "New-Partition Size $($SizeWindowsGB)GB MbrType IFS DriveLetter W"
+            Write-Warning "New-Partition -DiskNumber $DiskNumber -Size $SizeWindows -MbrType IFS -DriveLetter W"
             $PartitionWindows = New-Partition -DiskNumber $DiskNumber -Size $SizeWindows -MbrType IFS -DriveLetter W
     
-            Write-Verbose "Format-Volume FileSystem NTFS NewFileSystemLabel $LabelWindows"
+            Write-Warning "Format-Volume FileSystem NTFS NewFileSystemLabel $LabelWindows"
             #$null = Format-Volume -Partition $PartitionWindows -NewFileSystemLabel "$LabelWindows" -FileSystem NTFS -Force -Confirm:$false
 $null = @"
 select disk $DiskNumber
@@ -130,14 +185,11 @@ select partition $($PartitionWindows.PartitionNumber)
 format fs=ntfs quick label="$LabelWindows"
 exit 
 "@ | diskpart.exe
-            #======================================================================================================
-            #	Recovery Partition
-            #======================================================================================================
-            Write-Verbose "Prepare $LabelRecovery Partition"
-            Write-Verbose "New-Partition UseMaximumSize"
+
+            Write-Warning "New-Partition -DiskNumber $DiskNumber -UseMaximumSize"
             $PartitionRecovery = New-Partition -DiskNumber $DiskNumber -UseMaximumSize
     
-            Write-Verbose "Format-Volume FileSystem NTFS NewFileSystemLabel $LabelRecovery"
+            Write-Warning "Format-Volume -FileSystem NTFS -NewFileSystemLabel $LabelRecovery"
             #$null = Format-Volume -Partition $PartitionRecovery -NewFileSystemLabel "$LabelRecovery" -FileSystem NTFS -Confirm:$false
 $null = @"
 select disk $DiskNumber
@@ -146,8 +198,8 @@ format fs=ntfs quick label="$LabelRecovery"
 exit 
 "@ | diskpart.exe
 
-            Write-Verbose "Set-Partition id 27"
-            $null = @"
+            Write-Warning "Set-Partition id 27"
+$null = @"
 select disk $DiskNumber
 select partition $($PartitionRecovery.PartitionNumber)
 set id=27

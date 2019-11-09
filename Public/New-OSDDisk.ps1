@@ -103,11 +103,10 @@ function New-OSDDisk {
     #	Set Defaults
     #======================================================================================================
     $global:OSDDisk = $null
-    $GetDisksFixed = $null
-    $GetDisksDirty = $null
-    $global:MultipleDisks = $false
+    $global:OSDFixedDisks = $null
+    $global:OSDDirtyDisks = $null
     $global:OSDDiskSandbox = $false
-    $global:SelectOSDDisk = $false
+    $global:OSDDiskSelect = $false
     $OSDDiskSkipDisplay = $false
     #======================================================================================================
     #	OSD Module Information
@@ -117,20 +116,20 @@ function New-OSDDisk {
     #======================================================================================================
     #	Get all Fixed Disks
     #======================================================================================================
-    $GetDisksFixed = Get-Disk | Where-Object {($_.BusType -ne 'USB') -and ($_.BusType -notmatch 'Virtual') -and ($_.Size -gt 15GB)} | Sort-Object Number
+    $global:OSDFixedDisks = Get-Disk | Where-Object {($_.BusType -ne 'USB') -and ($_.BusType -notmatch 'Virtual') -and ($_.Size -gt 15GB)} | Sort-Object Number
     #======================================================================================================
     #	Get all Fixed Disks that are Dirty
     #======================================================================================================
-    $GetDisksDirty = $GetDisksFixed | Where-Object {$_.PartitionStyle -ne 'RAW'}
+    $global:OSDDirtyDisks = $global:OSDFixedDisks | Where-Object {$_.PartitionStyle -ne 'RAW'}
     #======================================================================================================
     #	Failure: No Fixed Disks are present
     #======================================================================================================
-    if ($null -eq $GetDisksFixed) {Write-Warning "$Title could not find any Fixed Disks"; Break}
+    if ($null -eq $global:OSDFixedDisks) {Write-Warning "$Title could not find any Fixed Disks"; Break}
     #======================================================================================================
     #	If there is only one Fixed Disk, then it is the OSDDisk
     #======================================================================================================
-    if (($GetDisksFixed | Measure-Object).Count -eq 1) {
-        $OSDDisk = $GetDisksFixed
+    if (($global:OSDFixedDisks | Measure-Object).Count -eq 1) {
+        $OSDDisk = $global:OSDFixedDisks
         if ($OSDDisk.PartitionStyle -ne 'RAW') {
             if (! $Force.IsPresent) {
                 $global:OSDDiskSandbox = $true
@@ -147,16 +146,12 @@ function New-OSDDisk {
         }
         if ($DiskNumber) {
             #OSDDisk was specified
-            $OSDDisk = $GetDisksFixed | Where-Object {$_.DiskNumber -eq $DiskNumber}
+            $OSDDisk = $global:OSDFixedDisks | Where-Object {$_.DiskNumber -eq $DiskNumber}
         } else {
             #More than one Fixed Disk
-            $global:SelectOSDDisk = $true
+            $global:OSDDiskSelect = $true
         }
     }
-    #======================================================================================================
-    #	Multiple Fixed Disks
-    #======================================================================================================
-    if (($GetDisksFixed | Measure-Object).Count -gt 1) {$global:MultipleDisks = $true}
     #======================================================================================================
     #	Force Validation
     #======================================================================================================
@@ -182,21 +177,21 @@ function New-OSDDisk {
         if ($global:OSDDiskSandbox -eq $false) {Break}
     }
     #======================================================================================================
-    #	DisplayGetDisksFixed
+    #	DisplayOSDFixedDisks
     #======================================================================================================
     if ($OSDDiskSkipDisplay -eq $false) {
         Write-Host "=================================================================================================" -ForegroundColor Cyan
-        foreach ($item in $GetDisksFixed) {Write-Host "Disk $($item.Number) - $($item.FriendlyName) ($([math]::Round($item.Size / 1000000000))GB $($item.PartitionStyle)) BusType=$($item.BusType) Partitions=$($item.NumberOfPartitions) IsBoot=$($item.BootFromDisk)" -ForegroundColor Cyan}
+        foreach ($item in $global:OSDFixedDisks) {Write-Host "Disk $($item.Number) - $($item.FriendlyName) ($([math]::Round($item.Size / 1000000000))GB $($item.PartitionStyle)) BusType=$($item.BusType) Partitions=$($item.NumberOfPartitions) IsBoot=$($item.BootFromDisk)" -ForegroundColor Cyan}
         Write-Host "=================================================================================================" -ForegroundColor Cyan
     }
     #======================================================================================================
-    #	SelectOSDDisk
+    #	OSDDiskSelect
     #======================================================================================================
-    if ($global:SelectOSDDisk -eq $true) {
+    if ($global:OSDDiskSelect -eq $true) {
         do {$ConfirmOSDDisk = Read-Host "Multiple Disks: Type the DiskNumber to use as the OSDDisk, or press X to EXIT (and press Enter)"}
-        until (($GetDisksFixed.Number -Contains $ConfirmOSDDisk) -or $ConfirmOSDDisk -eq 'X')
+        until (($global:OSDFixedDisks.Number -Contains $ConfirmOSDDisk) -or $ConfirmOSDDisk -eq 'X')
         if ($Selected -eq 'X') {Break}
-        $OSDDisk = $GetDisksFixed | Where-Object {$_.Number -eq $ConfirmOSDDisk}
+        $OSDDisk = $global:OSDFixedDisks | Where-Object {$_.Number -eq $ConfirmOSDDisk}
     }
     #======================================================================================================
     #	No GetOSDDisk
@@ -233,9 +228,9 @@ exit
     #======================================================================================================
     #	Clear additional Dirty Disks
     #======================================================================================================
-    $GetDisksDirty = $GetDisksDirty | Where-Object {$_.Number -ne $OSDDisk.Number}
+    $global:OSDDirtyDisks = $global:OSDDirtyDisks | Where-Object {$_.Number -ne $OSDDisk.Number}
 
-    foreach ($item in $GetDisksDirty) {
+    foreach ($item in $global:OSDDirtyDisks) {
         Write-Host "Secondary Disk: Clear Disk $($item.Number) $($item.FriendlyName) ($([math]::Round($item.Size / 1000000000))GB $($item.PartitionStyle)) BusType=$($item.BusType) Partitions=$($item.NumberOfPartitions)" -ForegroundColor Yellow
 
         if ($global:OSDDiskSandbox -eq $false) {
