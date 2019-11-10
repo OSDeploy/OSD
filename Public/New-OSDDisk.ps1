@@ -105,7 +105,7 @@ function New-OSDDisk {
     $global:OSDDisk = $null
     $global:OSDFixedDisks = $null
     $global:OSDDirtyDisks = $null
-    $global:OSDDiskSandbox = $false
+    $global:OSDDiskSandbox = $true
     $global:OSDDiskSelect = $false
     $OSDDiskSkipDisplay = $false
     #======================================================================================================
@@ -126,23 +126,30 @@ function New-OSDDisk {
     #======================================================================================================
     if ($null -eq $global:OSDFixedDisks) {Write-Warning "$Title could not find any Fixed Disks"; Break}
     #======================================================================================================
+    #	Force Validation
+    #======================================================================================================
+    if ($Force.IsPresent) {$global:OSDDiskSandbox = $false}
+    #======================================================================================================
+    #	Sandbox
+    #======================================================================================================
+    if ($global:OSDDiskSandbox = $true) {
+        Write-Warning "$Title is running in Sandbox Mode (non-desctructive)"
+        Write-Warning "Use the -Force parameter to bypass Sandbox Mode"
+    }
+    #======================================================================================================
     #	If there is only one Fixed Disk, then it is the OSDDisk
     #======================================================================================================
     if (($global:OSDFixedDisks | Measure-Object).Count -eq 1) {
         $OSDDisk = $global:OSDFixedDisks
         if ($OSDDisk.PartitionStyle -ne 'RAW') {
-            if (! $Force.IsPresent) {
-                $global:OSDDiskSandbox = $true
-                Write-Warning "$Title is running in Sandbox Mode due to existing Partitions or Data"
-                Write-Warning "Use the -Force parameter to bypass Sandbox Mode"
+            if (-not $Force.IsPresent) {
+                Write-Warning "Existing Partitions must be cleared"
             }
         }
         if ($OSDDisk.PartitionStyle -eq 'RAW') {$OSDDiskSkipDisplay = $true}
     } else {
-        if (! $Force.IsPresent) {
-            $global:OSDDiskSandbox = $true
-            Write-Warning "$Title is running in Sandbox Mode due to multiple Fixed Disks"
-            Write-Warning "Use the -Force parameter to bypass Sandbox Mode"
+        if (-not $Force.IsPresent) {
+            Write-Warning "Multiple Fixed Disks are present"
         }
         if ($DiskNumber) {
             #OSDDisk was specified
@@ -152,10 +159,6 @@ function New-OSDDisk {
             $global:OSDDiskSelect = $true
         }
     }
-    #======================================================================================================
-    #	Force Validation
-    #======================================================================================================
-    if ($Force.IsPresent) {$global:OSDDiskSandbox = $false}
     #======================================================================================================
     #	Enable Sandbox
     #======================================================================================================

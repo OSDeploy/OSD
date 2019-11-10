@@ -1,0 +1,65 @@
+<#
+.SYNOPSIS
+Returns the Registry Key values from HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion
+
+.DESCRIPTION
+Returns the Registry Key values from HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion for Online and Offline Windows Images
+
+.LINK
+https://osd.osdeploy.com/module/functions/get-regkeywincurver
+
+.NOTES
+19.11.9     David Segura @SeguraOSD
+#>
+function Get-RegKeyWinCurVer {
+    [CmdletBinding()]
+    Param (
+        #Specifies the full path to the root directory of the offline Windows image that you will service.
+        [Parameter(ValueFromPipelineByPropertyName)]
+        [string]$Path,
+
+        [ValidateSet(
+            'BaseBuildRevisionNumber',
+            'BuildBranch',
+            'BuildGUID',
+            'BuildLab',
+            'BuildLabEx',
+            'CompositionEditionID',
+            'CurrentBuild',
+            'CurrentBuildNumber',
+            'CurrentMajorVersionNumber',
+            'CurrentMinorVersionNumber',
+            'CurrentType',
+            'CurrentVersion',
+            'EditionID',
+            'InstallationType',
+            'ProductId',
+            'ProductName',
+            'ReleaseId',
+            'UBR'
+            )]
+        [string]$Property
+    )
+
+    $Global:GetRegKeyWinCurVer = $null
+
+    if ($Path) {
+        if (-not (Test-Path $Path -ErrorAction SilentlyContinue)) {Write-Warning "Unable to locate Mounted WindowsImage at $Path"; Break}
+    
+        $RegHive = "$Path\Windows\System32\Config\SOFTWARE"
+        if (-not (Test-Path $RegHive)) {Write-Warning "Unable to locate RegHive at $RegHive"; Break}
+    
+        reg LOAD 'HKLM\OSD' "$Path\Windows\System32\Config\SOFTWARE" | Out-Null
+        $Global:GetRegKeyWinCurVer = Get-ItemProperty -Path 'HKLM:\OSD\Microsoft\Windows NT\CurrentVersion'
+        reg UNLOAD 'HKLM\OSD' | Out-Null
+        Start-Sleep -Seconds 1
+    } else {
+        $Global:GetRegKeyWinCurVer = Get-ItemProperty -Path 'HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion'
+    }
+
+    if ($Property) {
+        Return ($Global:GetRegKeyWinCurVer).$Property
+    } else {
+        Return $Global:GetRegKeyWinCurVer
+    }
+}

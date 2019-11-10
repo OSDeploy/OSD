@@ -26,6 +26,20 @@ function Get-OSD {
         Write-Host "#OSDmodule PowerShell Library $OSDModuleVersion" -ForegroundColor Green
         Write-Host "http://osd.osdeploy.com/release" -ForegroundColor Cyan
         Write-Host
+        Write-Host 'Functions' -ForegroundColor Green
+        Write-Host 'Get-OSD - This information'
+        Write-Host 'Get-OSDClass - Returns CimInstance information from common OSD Classes'
+        Write-Host 'Get-OSDGather - Returns common OSD information as an ordered hash table'
+        Write-Host 'Get-OSDPower - Displays Power Plan information using powercfg /LIST'
+        Write-Host 'Get-OSDSessions - Returns the Session.xml Updates that have been applied to an Operating System'
+        Write-Host 'Get-OSDWinPE - Common WinPE Commands using wpeutil and Microsoft DaRT RemoteRecovery'
+        Write-Host 'Get-RegKeyWinCurVer - Returns the Registry Key values from HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion'
+        Write-Host 'New-OSDDisk - Creates System | OS | Recovery Partitions for MBR or UEFI Drives in WinPE'
+        Write-Host 'Save-OSDDownload - Downloads a file by URL to a destionation folder'
+        Write-Host
+        Write-Host 'Update' -ForegroundColor Green
+        Write-Host 'Update-Module OSD -Force'
+        Write-Host
         Write-Host "#OSDdevteam" -ForegroundColor Green
         Write-Host "Andrew Jimenez " -NoNewline
         Write-Host "@AndrewJimenez_" -ForegroundColor Cyan
@@ -41,18 +55,5 @@ function Get-OSD {
         Write-Host "@manelrodero" -ForegroundColor Cyan
         Write-Host "Nathan Bridges " -NoNewline
         Write-Host "@nathanjbridges" -ForegroundColor Cyan
-        Write-Host
-        Write-Host 'Functions' -ForegroundColor Green
-        Write-Host 'Get-OSD - This information'
-        Write-Host 'Get-OSDClass - Returns CimInstance information from common OSD Classes'
-        Write-Host 'Get-OSDGather - Returns common OSD information as an ordered hash table'
-        Write-Host 'Get-OSDPower - Displays Power Plan information using powercfg /LIST'
-        Write-Host 'Get-OSDSessions - Returns the Session.xml Updates that have been applied to an Operating System'
-        Write-Host 'Get-OSDWinPE - Common WinPE Commands using wpeutil and Microsoft DaRT RemoteRecovery'
-        Write-Host 'New-OSDDisk - Creates System | OS | Recovery Partitions for MBR or UEFI Drives in WinPE'
-        Write-Host 'Save-OSDDownload - Downloads a file by URL to a destionation folder'
-        Write-Host
-        Write-Host 'Update' -ForegroundColor Green
-        Write-Host 'Update-Module OSD -Force'
     }
 }
