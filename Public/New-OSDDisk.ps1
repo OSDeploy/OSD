@@ -21,20 +21,9 @@ function New-OSDDisk {
         [string]$Title = 'New-OSDDisk',
 
         #Fixed Disk Number
-        #For multiple Fixed Disks, use the SelectDisk parameter
-        #Default = 0
         #Alias = Disk, Number
         [Alias('Disk','Number')]
         [int]$DiskNumber,
-
-        #Clear-Disk Scope
-        #All will Clear all non-RAW Fixed Disks
-        #OSDDisk will Clear only the DiskNumber or SelectDisk
-        #Default = All
-        #Alias = Clear
-        #[Alias('Clear')]
-        #[ValidateSet('All','OSDDisk')]
-        #[string]$ClearDisk = 'All',
 
         #Drive Label of the System Partition
         #Default = System
@@ -86,11 +75,6 @@ function New-OSDDisk {
         [ValidateRange(350MB,80000MB)]
         [uint64]$SizeRecovery = 990MB,
 
-        #Select OSDDisk if multiple Fixed Disks are present
-        #Supersedes the DiskNumber parameter
-        #Ignored if only one Fixed Disk is present
-        #[switch]$SelectDisk,
-
         #Skips the creation of the Recovery Partition
         [Alias('SkipRecovery')]
         [switch]$SkipRecoveryPartition,
@@ -132,7 +116,7 @@ function New-OSDDisk {
     #======================================================================================================
     #	Sandbox
     #======================================================================================================
-    if ($global:OSDDiskSandbox = $true) {
+    if ($global:OSDDiskSandbox -eq $true) {
         Write-Warning "$Title is running in Sandbox Mode (non-desctructive)"
         Write-Warning "Use the -Force parameter to bypass Sandbox Mode"
     }
