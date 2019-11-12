@@ -49,6 +49,8 @@ function Get-OSD {
         Write-Host "@SeguraOSD #MMSJazz" -ForegroundColor Cyan
         Write-Host "Donna Ryan " -NoNewline
         Write-Host "@TheNotoriousDRR #MMSJazz" -ForegroundColor Cyan
+        Write-Host "Gary Blok " -NoNewline
+        Write-Host "@gwblok #MMSJazz" -ForegroundColor Cyan
         Write-Host "Jerome Bezet-Torres " -NoNewline
         Write-Host "@JM2K69" -ForegroundColor Cyan
         Write-Host "Manel Rodero " -NoNewline
