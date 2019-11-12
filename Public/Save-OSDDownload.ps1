@@ -19,7 +19,7 @@ function Save-OSDDownload {
         [string]$SourceUrl,
 
         #Destination Folder
-        [string]$DownloadFolder = $env:TEMP,
+        [string]$DownloadFolder = "$env:TEMP\OSD",
 
         #Overwrite the file if it exists already
         #The default action is to skip the download
