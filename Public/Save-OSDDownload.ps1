@@ -69,7 +69,7 @@ function Save-OSDDownload {
     if ($BitsTransfer.IsPresent) {Start-BitsTransfer -Source $SourceUrl -Destination $OSDDownload.FullName}
     else {
         $WebClient = New-Object System.Net.WebClient
-        $WebClient.OSDDownload.Name($SourceUrl,$OSDDownload.FullName)
+        $WebClient.DownloadFile($SourceUrl,$OSDDownload.FullName)
     }
 
     if (Test-Path $OSDDownload.FullName) {
