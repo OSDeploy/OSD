@@ -34,6 +34,7 @@ Andrew Jimenez - @AndrewJimenez_
 Ben Whitmore - @byteben
 David Segura - @SeguraOSD #MMSJazz
 Donna Ryan - @TheNotoriousDRR #MMSJazz
+Gary Blok - @gwblok #MMSJazz
 Jerome Bezet-Torres - @JM2K69
 Nathan Bridges - @nathanjbridges
 Manel Rodero - @manelrodero
