@@ -15,7 +15,7 @@ function Save-OSDDownload {
     [CmdletBinding()]
     Param (
         #URL of the file to download
-        [Parameter(Mandatory)]
+        [Parameter(Position = 0,Mandatory = $true)]
         [string]$SourceUrl,
 
         #Destination Folder
