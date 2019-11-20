@@ -1,3 +1,16 @@
+<#
+.SYNOPSIS
+Updates a mounted WIM
+
+.DESCRIPTION
+Updates a mounted WIM files.  Requires OSDSUS Catalog
+
+.LINK
+https://osd.osdeploy.com/module/functions/update-osdwindowsimage
+
+.NOTES
+19.11.19 David Segura @SeguraOSD
+#>
 function Update-OSDWindowsImage {
     [CmdletBinding()]
     Param (
@@ -90,7 +103,7 @@ function Update-OSDWindowsImage {
         #===================================================================================================
         #   Get-OSDSessions
         #===================================================================================================
-        $global:GetOSDSessions = Get-OSDSessions -Path "$Path\Windows\Servicing\Sessions\Sessions.xml" | Where-Object {$_.targetState -eq 'Installed'} | Sort-Object id
+        $global:GetOSDSessions = Get-OSDSessions -Path "$Path" | Where-Object {$_.targetState -eq 'Installed'} | Sort-Object id
         #===================================================================================================
         #   Apply Update
         #===================================================================================================

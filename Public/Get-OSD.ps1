@@ -36,6 +36,7 @@ function Get-OSD {
         Write-Host 'Get-RegKeyWinCurVer - Returns the Registry Key values from HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion'
         Write-Host 'New-OSDDisk - Creates System | OS | Recovery Partitions for MBR or UEFI Drives in WinPE'
         Write-Host 'Save-OSDDownload - Downloads a file by URL to a destionation folder'
+        Write-Host 'Update-OSDWindowsImage - Identify, Download, and Apply Updates to a Mounted Windows Image'
         Write-Host
         Write-Host 'Update' -ForegroundColor Green
         Write-Host 'Update-Module OSD -Force'

@@ -9,7 +9,8 @@ Returns the Registry Key values from HKLM:\SOFTWARE\Microsoft\Windows NT\Current
 https://osd.osdeploy.com/module/functions/get-regkeywincurver
 
 .NOTES
-19.11.9     David Segura @SeguraOSD
+19.11.20    Added Pipeline Support
+19.11.9     David Segura @SeguraOSD Initial Release
 #>
 function Get-RegKeyWinCurVer {
     [CmdletBinding()]
@@ -40,26 +41,30 @@ function Get-RegKeyWinCurVer {
             )]
         [string]$Property
     )
+    Begin {}
+    Process {
+        $Global:GetRegKeyWinCurVer = $null
 
-    $Global:GetRegKeyWinCurVer = $null
+        if ($Path) {
+            if (-not (Test-Path $Path -ErrorAction SilentlyContinue)) {Write-Warning "Unable to locate Mounted WindowsImage at $Path"; Break}
+            Write-Verbose $Path
+        
+            $RegHive = "$Path\Windows\System32\Config\SOFTWARE"
+            if (-not (Test-Path $RegHive)) {Write-Warning "Unable to locate RegHive at $RegHive"; Break}
+        
+            reg LOAD 'HKLM\OSD' "$Path\Windows\System32\Config\SOFTWARE" | Out-Null
+            $Global:GetRegKeyWinCurVer = Get-ItemProperty -Path 'HKLM:\OSD\Microsoft\Windows NT\CurrentVersion'
+            reg UNLOAD 'HKLM\OSD' | Out-Null
+            Start-Sleep -Seconds 1
+        } else {
+            $Global:GetRegKeyWinCurVer = Get-ItemProperty -Path 'HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion'
+        }
 
-    if ($Path) {
-        if (-not (Test-Path $Path -ErrorAction SilentlyContinue)) {Write-Warning "Unable to locate Mounted WindowsImage at $Path"; Break}
-    
-        $RegHive = "$Path\Windows\System32\Config\SOFTWARE"
-        if (-not (Test-Path $RegHive)) {Write-Warning "Unable to locate RegHive at $RegHive"; Break}
-    
-        reg LOAD 'HKLM\OSD' "$Path\Windows\System32\Config\SOFTWARE" | Out-Null
-        $Global:GetRegKeyWinCurVer = Get-ItemProperty -Path 'HKLM:\OSD\Microsoft\Windows NT\CurrentVersion'
-        reg UNLOAD 'HKLM\OSD' | Out-Null
-        Start-Sleep -Seconds 1
-    } else {
-        $Global:GetRegKeyWinCurVer = Get-ItemProperty -Path 'HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion'
+        if ($Property) {
+            Return ($Global:GetRegKeyWinCurVer).$Property
+        } else {
+            Return $Global:GetRegKeyWinCurVer
+        }
     }
-
-    if ($Property) {
-        Return ($Global:GetRegKeyWinCurVer).$Property
-    } else {
-        Return $Global:GetRegKeyWinCurVer
-    }
+    End {}
 }
