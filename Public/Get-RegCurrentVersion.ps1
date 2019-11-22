@@ -6,13 +6,13 @@ Returns the Registry Key values from HKLM:\SOFTWARE\Microsoft\Windows NT\Current
 Returns the Registry Key values from HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion for Online and Offline Windows Images
 
 .LINK
-https://osd.osdeploy.com/module/functions/get-regkeywincurver
+https://osd.osdeploy.com/module/functions/get-regcurrentversion
 
 .NOTES
 19.11.20    Added Pipeline Support
 19.11.9     David Segura @SeguraOSD Initial Release
 #>
-function Get-RegKeyWinCurVer {
+function Get-RegCurrentVersion {
     [CmdletBinding()]
     Param (
         #Specifies the full path to the root directory of the offline Windows image that you will service.
@@ -43,7 +43,7 @@ function Get-RegKeyWinCurVer {
     )
     Begin {}
     Process {
-        $Global:GetRegKeyWinCurVer = $null
+        $Global:GetRegCurrentVersion = $null
 
         if ($Path) {
             if (-not (Test-Path $Path -ErrorAction SilentlyContinue)) {Write-Warning "Unable to locate Mounted WindowsImage at $Path"; Break}
@@ -53,17 +53,17 @@ function Get-RegKeyWinCurVer {
             if (-not (Test-Path $RegHive)) {Write-Warning "Unable to locate RegHive at $RegHive"; Break}
         
             reg LOAD 'HKLM\OSD' "$Path\Windows\System32\Config\SOFTWARE" | Out-Null
-            $Global:GetRegKeyWinCurVer = Get-ItemProperty -Path 'HKLM:\OSD\Microsoft\Windows NT\CurrentVersion'
+            $Global:GetRegCurrentVersion = Get-ItemProperty -Path 'HKLM:\OSD\Microsoft\Windows NT\CurrentVersion'
             reg UNLOAD 'HKLM\OSD' | Out-Null
             Start-Sleep -Seconds 1
         } else {
-            $Global:GetRegKeyWinCurVer = Get-ItemProperty -Path 'HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion'
+            $Global:GetRegCurrentVersion = Get-ItemProperty -Path 'HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion'
         }
 
         if ($Property) {
-            Return ($Global:GetRegKeyWinCurVer).$Property
+            Return ($Global:GetRegCurrentVersion).$Property
         } else {
-            Return $Global:GetRegKeyWinCurVer
+            Return $Global:GetRegCurrentVersion
         }
     }
     End {}

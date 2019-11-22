@@ -33,9 +33,12 @@ function Get-OSD {
         Write-Host 'Get-OSDPower - Displays Power Plan information using powercfg /LIST'
         Write-Host 'Get-OSDSessions - Returns the Session.xml Updates that have been applied to an Operating System'
         Write-Host 'Get-OSDWinPE - Common WinPE Commands using wpeutil and Microsoft DaRT RemoteRecovery'
-        Write-Host 'Get-RegKeyWinCurVer - Returns the Registry Key values from HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion'
+        Write-Host 'Get-RegCurrentVersion - Returns the Registry Key values from HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion'
         Write-Host 'New-OSDDisk - Creates System | OS | Recovery Partitions for MBR or UEFI Drives in WinPE'
         Write-Host 'Save-OSDDownload - Downloads a file by URL to a destionation folder'
+        Write-Host
+        Write-Host 'Windows Image Functions' -ForegroundColor Green
+        Write-Host 'Mount-OSDWindowsImage - Give it a WIM, let it do the rest'
         Write-Host 'Update-OSDWindowsImage - Identify, Download, and Apply Updates to a Mounted Windows Image'
         Write-Host
         Write-Host 'Update' -ForegroundColor Green
