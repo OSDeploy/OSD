@@ -19,6 +19,13 @@ function Update-OSDWindowsImage {
         [string[]]$Path,
 
         #Check or Install the specified Update Group
+        #Check = Validate installed Updates
+        #All = Install all required Updates
+        #AdobeSU = Adobe Security Update
+        #DotNet = DotNet Update
+        #DotNetCU = DotNet Cumulative Update
+        #LCU = Latest Cumulative Update
+        #SSU = Servicing Stack Update
         [ValidateSet('Check','All','AdobeSU','DotNet','DotNetCU','LCU','SSU')]
         [string]$Update = 'Check',
 
@@ -35,14 +42,14 @@ function Update-OSDWindowsImage {
         #   Require Admin Rights
         #===================================================================================================
         if ((Get-OSDGather -Property IsAdmin) -eq $false) {
-            Write-Warning 'Update-WindowsImage: This function requires Admin Rights ELEVATED'
+            Write-Warning 'Update-OSDWindowsImage: This function requires Admin Rights ELEVATED'
             Break
         }
         #===================================================================================================
         #   Require OSDSUS Module
         #===================================================================================================
         if (-not (Get-Module -ListAvailable -Name OSDSUS)) {
-            Write-Warning "Update-WindowsImage: PowerShell Module OSDSUS is required"
+            Write-Warning "Update-OSDWindowsImage: PowerShell Module OSDSUS is required"
             Break
         }
         #===================================================================================================
@@ -63,7 +70,7 @@ function Update-OSDWindowsImage {
             #   Validate Mount Path
             #===================================================================================================
             if (-not (Test-Path $Input -ErrorAction SilentlyContinue)) {
-                Write-Warning "Update-WindowsImage: Unable to locate Mounted WindowsImage at $Input"
+                Write-Warning "Update-OSDWindowsImage: Unable to locate Mounted WindowsImage at $Input"
                 Break
             }
             #===================================================================================================
@@ -74,7 +81,7 @@ function Update-OSDWindowsImage {
             #   Require OSMajorVersion 10
             #===================================================================================================
             if ($global:GetRegCurrentVersion.CurrentMajorVersionNumber -ne 10) {
-                Write-Warning "Update-WindowsImage: OS MajorVersion 10 is required"
+                Write-Warning "Update-OSDWindowsImage: OS MajorVersion 10 is required"
                 Break
             }
             #===================================================================================================
@@ -146,7 +153,7 @@ function Update-OSDWindowsImage {
                     }
                     Catch {
                         if ($_.Exception.Message -match '0x800f081e') {
-                        Write-Verbose "Update-WindowsImage: 0x800f081e The package is not applicable to this image" -Verbose}
+                        Write-Verbose "Update-OSDWindowsImage: 0x800f081e The package is not applicable to this image" -Verbose}
                         Write-Verbose $CurrentLog -Verbose
                     }
                 } else {

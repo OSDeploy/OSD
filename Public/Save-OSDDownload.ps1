@@ -15,8 +15,12 @@ function Save-OSDDownload {
     [CmdletBinding()]
     Param (
         #URL of the file to download
-        [Parameter(Position = 0,Mandatory = $true)]
-        [string]$SourceUrl,
+        [Parameter(Position = 0,Mandatory = $true, ValueFromPipelineByPropertyName)]
+        [Alias('DriverUrl')]
+        [string[]]$SourceUrl,
+
+        #Destination File
+        #[string]$DestinationName,
 
         #Destination Folder
         [string]$DownloadFolder = "$env:TEMP\OSD",
@@ -29,51 +33,69 @@ function Save-OSDDownload {
         #Interactive Login required
         [switch]$BitsTransfer
     )
+
+    Begin {
+
+    }
+    Process {
+        foreach ($Input in $SourceUrl) {
+            #======================================================================================================
+            #	Create Global Variable
+            #======================================================================================================
+            $global:OSDDownload = [ordered]@{
+                Name = $null
+                Parent = $DownloadFolder
+                FullName = $null
+                SourceUrl = $SourceUrl[0]
+                BitsTransfer = $BitsTransfer
+                Download = $true
+                IsDownloaded = $false
+            }
+            #======================================================================================================
+            #	Set Name
+            #======================================================================================================
+            #if (! $DestinationName) {
+                Write-Verbose "Setting DestinationName"
+                $global:OSDDownload.Name = Split-Path -Path $OSDDownload.SourceUrl -Leaf
+            #}
+            #======================================================================================================
+            #	DownloadFolder
+            #   Make sure DownloadFolder can be created
+            #======================================================================================================
+            if (! (Test-Path "$DownloadFolder")) {
+                Write-Verbose "OSDDownload.DownloadFolder: Create $DownloadFolder"
+                New-Item -Path "$DownloadFolder" -ItemType Directory -Force | Out-Null
+                if (! (Test-Path $DownloadFolder)) {
+                    Write-Warning "Unable to create $DownloadFolder"
+                    Return
+                }
+            }
     
-    $global:OSDDownload = [ordered]@{
-        Name = $null
-        FullName = $null
-        DownloadFolder = $DownloadFolder
-        SourceUrl = $SourceUrl
-        BitsTransfer = $BitsTransfer
-        Download = $true
-        IsDownloaded = $false
-    }
-
-
-    $global:OSDDownload.Name = Split-Path -Path $OSDDownload.SourceUrl -Leaf
-    Write-Verbose "OSDDownload Name: $($OSDDownload.Name)"
-
-    $global:OSDDownload.FullName = Join-Path $DownloadFolder $OSDDownload.Name
-    Write-Verbose "OSDDownload FullName: $($OSDDownload.FullName)"
-
-    #======================================================================================================
-    #	DownloadFolder
-    #   Make sure DownloadFolder can be created
-    #======================================================================================================
-    if (! (Test-Path "$DownloadFolder")) {
-        Write-Verbose "New-Item -Path $DownloadFolder"
-        New-Item -Path "$DownloadFolder" -ItemType Directory -Force | Out-Null
-        if (!(Test-Path $DownloadFolder)) {
+            $global:OSDDownload.DownloadFolder = (Get-Item $DownloadFolder).FullName
+            $global:OSDDownload.FullName = Join-Path $global:OSDDownload.DownloadFolder $OSDDownload.Name
+            Write-Verbose "OSDDownload FullName: $($OSDDownload.FullName)"
+    
+            if (!($Overwrite.IsPresent)) {
+                if (Test-Path $global:OSDDownload.FullName) {
+                    $global:OSDDownload.IsDownloaded = $true
+                    Return $global:OSDDownload
+                }
+            }
+        
+            if ($BitsTransfer.IsPresent) {Start-BitsTransfer -Source $global:OSDDownload.SourceUrl -Destination $global:OSDDownload.FullName}
+            else {
+                $WebClient = New-Object System.Net.WebClient
+                $WebClient.DownloadFile($global:OSDDownload.SourceUrl, $global:OSDDownload.FullName)
+            }
+        
+            if (Test-Path $global:OSDDownload.FullName) {
+                $global:OSDDownload.IsDownloaded = $true
+            }
+            #===================================================================================================
+            #   Return for PassThru
+            #===================================================================================================
             Return $global:OSDDownload
         }
     }
-
-    if (!($Overwrite.IsPresent)) {
-        if (Test-Path $OSDDownload.FullName) {
-            $global:OSDDownload.IsDownloaded = $true
-            Return $global:OSDDownload
-        }
-    }
-
-    if ($BitsTransfer.IsPresent) {Start-BitsTransfer -Source $SourceUrl -Destination $OSDDownload.FullName}
-    else {
-        $WebClient = New-Object System.Net.WebClient
-        $WebClient.DownloadFile($SourceUrl,$OSDDownload.FullName)
-    }
-
-    if (Test-Path $OSDDownload.FullName) {
-        $global:OSDDownload.IsDownloaded = $true
-    }
-    Return $global:OSDDownload
+    End {}
 }
