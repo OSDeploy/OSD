@@ -17,15 +17,15 @@ function Get-OSDDriverWmiQ {
         [Parameter(ValueFromPipeline = $true)]
         [Object[]]$InputObject,
 
-        #Select a Computer Manufacturer
-        [Parameter(Mandatory)]
-        [ValidateSet ('Dell','HP')]
-        [string]$Make = 'Dell',
+        #Select a Computer Manufacturer OSDGroup
+        #Default is DellModel
+        [ValidateSet ('DellModel','HpModel')]
+        [string]$OSDGroup,
 
         #Select whether the Query is based off Model or SystemId SystemSku Product
-        [Parameter(Mandatory)]
+        #Default is Model
         [ValidateSet ('Model','SystemId')]
-        [string]$Result,
+        [string]$Result = 'Model',
 
         #Open a Text File with the WMI Query after completion
         [switch]$ShowTextFile
@@ -53,8 +53,7 @@ function Get-OSDDriverWmiQ {
             }
         } else {
             $OSDModelPacks = @()
-            if ($Make -eq 'Dell'){$OSDModelPacks = Get-OSDDriver DellModel | Sort-Object Model -Unique}
-            if ($Make -eq 'Hp'){$OSDModelPacks = Get-OSDDriver HpModel | Sort-Object Model -Unique}
+            $OSDModelPacks = Get-OSDDriver $OSDGroup | Sort-Object Model -Unique
             $OSDModelPacks = $OSDModelPacks | Select-Object Make, Model, Generation, SystemSku | Out-GridView -PassThru -Title 'Select Computer Models to Generate a WMI Query'
         }
     }
@@ -90,7 +89,7 @@ function Get-OSDDriverWmiQ {
         #===================================================================================================
         #   Dell SystemId
         #===================================================================================================
-        if ($Result -eq 'SystemId' -and $Make -eq 'Dell') {
+        if ($Result -eq 'SystemId' -and $OSDGroup -eq 'DellModel') {
             foreach ($Item in $OSDModelPacks.SystemSku) {$Items += $Item}
             $Items = $Items | Sort-Object -Unique
             $WmiQueryFullName = Join-Path -Path $env:TEMP -ChildPath "WmiQuery.txt"
@@ -115,8 +114,7 @@ function Get-OSDDriverWmiQ {
         #===================================================================================================
         #   HP SystemId
         #===================================================================================================
-        if ($Result -eq 'SystemId' -and $Make -eq 'HP') {
-            Write-Verbose "HP SystemId" -Verbose
+        if ($Result -eq 'SystemId' -and $OSDGroup -eq 'HpModel') {
             foreach ($Item in $OSDModelPacks.SystemSku) {$Items += $Item}
 
             $Items = $Items | Sort-Object -Unique
