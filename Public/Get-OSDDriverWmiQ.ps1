@@ -19,6 +19,7 @@ function Get-OSDDriverWmiQ {
 
         #Select a Computer Manufacturer OSDGroup
         #Default is DellModel
+        [Parameter(ValueFromPipelineByPropertyName)]
         [ValidateSet ('DellModel','HpModel')]
         [string]$OSDGroup,
 
