@@ -29,13 +29,14 @@ Description = @'
 https://osd.osdeploy.com
 OSD PowerShell Module is a collection of OSD shared functions
 
-#OSDdevteam
+Collaborators
 Andrew Jimenez - @AndrewJimenez_
 Ben Whitmore - @byteben
-David Segura - @SeguraOSD #MMSJazz
-Donna Ryan - @TheNotoriousDRR #MMSJazz
-Gary Blok - @gwblok #MMSJazz
+David Segura - @SeguraOSD
+Donna Ryan - @TheNotoriousDRR
+Gary Blok - @gwblok
 Jerome Bezet-Torres - @JM2K69
+Jordan Benzing - @JordanTheITguy
 Nathan Bridges - @nathanjbridges
 Manel Rodero - @manelrodero
 '@
