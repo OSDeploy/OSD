@@ -29,6 +29,7 @@ function Get-OSD {
         Write-Host 'Functions' -ForegroundColor Green
         Write-Host 'Get-OSD - This information'
         Write-Host 'Get-OSDClass - Returns CimInstance information from common OSD Classes'
+        Write-Host 'Get-OSDDrivers - Returns Driver download links for Amd Dell Hp Intel and Nvidia'
         Write-Host 'Get-OSDGather - Returns common OSD information as an ordered hash table'
         Write-Host 'Get-OSDPower - Displays Power Plan information using powercfg /LIST'
         Write-Host 'Get-OSDSessions - Returns the Session.xml Updates that have been applied to an Operating System'

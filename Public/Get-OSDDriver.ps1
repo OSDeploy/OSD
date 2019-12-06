@@ -15,11 +15,11 @@ https://osd.osdeploy.com/module/functions/get-osddriver
 function Get-OSDDriver {
     [CmdletBinding()]
     Param (
-        #Limits the results to the specified DriverGroup
+        #Limits the results to the specified OSDGroup
         [ValidateSet('AmdDisplay','DellFamily','DellModel','HpModel','IntelDisplay','IntelWireless','NvidiaDisplay')]
         [Parameter(Position = 0, Mandatory = $true, ValueFromPipelineByPropertyName)]
-        [Alias('Group','OSDGroup')]
-        [string]$DriverGroup,
+        [Alias('Group')]
+        [string]$OSDGroup,
 
         #Select results in GridView with PassThru
         [switch]$GridView
@@ -32,32 +32,32 @@ function Get-OSDDriver {
     #======================================================================================================
     #	Execute Private Function
     #======================================================================================================
-    if ($DriverGroup -eq 'AmdDisplay') {
-        Write-Verbose "OSD: $DriverGroup Drivers are generated from OSD Local Catalogs and may not always have the latest versions" -Verbose
+    if ($OSDGroup -eq 'AmdDisplay') {
+        Write-Verbose "OSD: $OSDGroup Drivers are generated from OSD Local Catalogs and may not always have the latest versions" -Verbose
         $global:GetOSDDriver = Get-OSDDriverAmdDisplay
     }
-    if ($DriverGroup -eq 'DellFamily') {
-        Write-Verbose "OSD: $DriverGroup Drivers are pulled in real time from the vendor's website and should always have the latest versions" -Verbose
+    if ($OSDGroup -eq 'DellFamily') {
+        Write-Verbose "OSD: $OSDGroup Drivers are pulled in real time from the vendor's website and should always have the latest versions" -Verbose
         $global:GetOSDDriver = Get-OSDDriverDellFamily
     }
-    if ($DriverGroup -eq 'DellModel') {
-        Write-Verbose "OSD: $DriverGroup Drivers are pulled in real time from the vendor's Catalogs and should always have the latest versions" -Verbose
+    if ($OSDGroup -eq 'DellModel') {
+        Write-Verbose "OSD: $OSDGroup Drivers are pulled in real time from the vendor's Catalogs and should always have the latest versions" -Verbose
         $global:GetOSDDriver = Get-OSDDriverDellModel
     }
-    if ($DriverGroup -eq 'HpModel') {
-        Write-Verbose "OSD: $DriverGroup Drivers are pulled in real time from the vendor's Catalogs and should always have the latest versions" -Verbose
+    if ($OSDGroup -eq 'HpModel') {
+        Write-Verbose "OSD: $OSDGroup Drivers are pulled in real time from the vendor's Catalogs and should always have the latest versions" -Verbose
         $global:GetOSDDriver = Get-OSDDriverHpModel
     }
-    if ($DriverGroup -eq 'IntelDisplay') {
-        Write-Verbose "OSD: $DriverGroup Drivers are pulled in real time from the vendor's website and should always have the latest versions" -Verbose
+    if ($OSDGroup -eq 'IntelDisplay') {
+        Write-Verbose "OSD: $OSDGroup Drivers are pulled in real time from the vendor's website and should always have the latest versions" -Verbose
         $global:GetOSDDriver = Get-OSDDriverIntelDisplay
     }
-    if ($DriverGroup -eq 'IntelWireless') {
-        Write-Verbose "OSD: $DriverGroup Drivers are pulled in real time from the vendor's website and should always have the latest versions" -Verbose
+    if ($OSDGroup -eq 'IntelWireless') {
+        Write-Verbose "OSD: $OSDGroup Drivers are pulled in real time from the vendor's website and should always have the latest versions" -Verbose
         $global:GetOSDDriver = Get-OSDDriverIntelWireless
     }
-    if ($DriverGroup -eq 'NvidiaDisplay') {
-        Write-Verbose "OSD: $DriverGroup Drivers are generated from OSD Local Catalogs and may not always have the latest versions" -Verbose
+    if ($OSDGroup -eq 'NvidiaDisplay') {
+        Write-Verbose "OSD: $OSDGroup Drivers are generated from OSD Local Catalogs and may not always have the latest versions" -Verbose
         $global:GetOSDDriver = Get-OSDDriverNvidiaDisplay
     }
     #======================================================================================================
