@@ -10,7 +10,7 @@ Value is returned as Global Variable $GetOSDDriver
 https://osd.osdeploy.com/module/functions/get-osddriver
 
 .NOTES
-19.12.5     David Segura @SeguraOSD
+19.12.6     David Segura @SeguraOSD
 #>
 function Get-OSDDriver {
     [CmdletBinding()]
@@ -25,16 +25,41 @@ function Get-OSDDriver {
         [switch]$GridView
     )
     #======================================================================================================
+    #	Information
+    #======================================================================================================
+    Write-Verbose 'OSD: Results are saved in the Global Variable $GetOSDDriver for this PowerShell session' -Verbose
+    $global:GetOSDDriver = @()
+    #======================================================================================================
     #	Execute Private Function
     #======================================================================================================
-    $global:GetOSDDriver = @()
-    if ($DriverGroup -eq 'AmdDisplay')      {$global:GetOSDDriver = Get-OSDDriverAmdDisplay}
-    if ($DriverGroup -eq 'DellFamily')      {$global:GetOSDDriver = Get-OSDDriverDellFamily}
-    if ($DriverGroup -eq 'DellModel')       {$global:GetOSDDriver = Get-OSDDriverDellModel}
-    if ($DriverGroup -eq 'HpModel')         {$global:GetOSDDriver = Get-OSDDriverHpModel}
-    if ($DriverGroup -eq 'IntelDisplay')    {$global:GetOSDDriver = Get-OSDDriverIntelDisplay}
-    if ($DriverGroup -eq 'IntelWireless')   {$global:GetOSDDriver = Get-OSDDriverIntelWireless}
-    if ($DriverGroup -eq 'NvidiaDisplay')   {$global:GetOSDDriver = Get-OSDDriverNvidiaDisplay}
+    if ($DriverGroup -eq 'AmdDisplay') {
+        Write-Verbose "OSD: $DriverGroup Drivers are generated from OSD Local Catalogs and may not always have the latest versions" -Verbose
+        $global:GetOSDDriver = Get-OSDDriverAmdDisplay
+    }
+    if ($DriverGroup -eq 'DellFamily') {
+        Write-Verbose "OSD: $DriverGroup Drivers are pulled in real time from the vendor's website and should always have the latest versions" -Verbose
+        $global:GetOSDDriver = Get-OSDDriverDellFamily
+    }
+    if ($DriverGroup -eq 'DellModel') {
+        Write-Verbose "OSD: $DriverGroup Drivers are pulled in real time from the vendor's Catalogs and should always have the latest versions" -Verbose
+        $global:GetOSDDriver = Get-OSDDriverDellModel
+    }
+    if ($DriverGroup -eq 'HpModel') {
+        Write-Verbose "OSD: $DriverGroup Drivers are pulled in real time from the vendor's Catalogs and should always have the latest versions" -Verbose
+        $global:GetOSDDriver = Get-OSDDriverHpModel
+    }
+    if ($DriverGroup -eq 'IntelDisplay') {
+        Write-Verbose "OSD: $DriverGroup Drivers are pulled in real time from the vendor's website and should always have the latest versions" -Verbose
+        $global:GetOSDDriver = Get-OSDDriverIntelDisplay
+    }
+    if ($DriverGroup -eq 'IntelWireless') {
+        Write-Verbose "OSD: $DriverGroup Drivers are pulled in real time from the vendor's website and should always have the latest versions" -Verbose
+        $global:GetOSDDriver = Get-OSDDriverIntelWireless
+    }
+    if ($DriverGroup -eq 'NvidiaDisplay') {
+        Write-Verbose "OSD: $DriverGroup Drivers are generated from OSD Local Catalogs and may not always have the latest versions" -Verbose
+        $global:GetOSDDriver = Get-OSDDriverNvidiaDisplay
+    }
     #======================================================================================================
     #	GridView
     #======================================================================================================

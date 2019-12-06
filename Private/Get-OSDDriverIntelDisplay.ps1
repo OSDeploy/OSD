@@ -21,8 +21,7 @@ function Get-OSDDriverIntelDisplay {
     #   DriverWebContentRaw
     #===================================================================================================
     $DriverWebContentRaw = @()
-    Write-Host ""
-    Write-Verbose "Connecting to $Uri" -Verbose
+    Write-Verbose "OSD: Get Latest Driver Versions $Uri" -Verbose
     try {
         $DriverWebContentRaw = (Invoke-WebRequest $Uri).Links
     }
@@ -77,10 +76,8 @@ function Get-OSDDriverIntelDisplay {
     $DriverResults = @()
     $DriverResults = foreach ($DriverLink in $DriverWebContent) {
         $DriverResultsName = $($DriverLink.innerText)
-        Write-Host "$DriverResultsName " -ForegroundColor Cyan -NoNewline
-
         $DriverInfo = $($DriverLink.href)
-        Write-Host "$DriverInfo" -ForegroundColor Gray
+        Write-Verbose "OSD: $DriverResultsName $DriverInfo" -Verbose
         #===================================================================================================
         #   Intel WebRequest
         #===================================================================================================

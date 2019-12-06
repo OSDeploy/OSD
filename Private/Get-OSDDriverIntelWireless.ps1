@@ -9,13 +9,12 @@ function Get-OSDDriverIntelWireless {
     #   DriverWebContentRaw
     #===================================================================================================
     $DriverWebContentRaw = @()
-    Write-Host ""
-    Write-Verbose "Connecting to $Uri" -Verbose
+    Write-Verbose "OSD: Get Latest Driver Versions $Uri" -Verbose
     try {
         $DriverWebContentRaw = (Invoke-WebRequest $Uri).Links
     }
     catch {
-        Write-Error "OSDDrivers uses Internet Explorer to parse the HTML data.  Make sure you can open the URL in Internet Explorer and that you dismiss any first run wizards" -ErrorAction Stop
+        Write-Error "OSD: Internet Explorer is used to parse the HTML data.  Make sure you can open the URL in Internet Explorer and that you dismiss any first run wizards" -ErrorAction Stop
     }
     #===================================================================================================
     #   DriverWebContent
@@ -35,10 +34,8 @@ function Get-OSDDriverIntelWireless {
     $DriverResults = @()
     $DriverResults = foreach ($DriverLink in $DriverWebContent) {
         $DriverResultsName = $($DriverLink.innerText)
-        Write-Host "Intel PROSet Wireless Software and Drivers for IT Admins $DriverResultsName " -ForegroundColor Cyan
-
         $DriverInfo = $($DriverLink.href)
-        Write-Host "$DriverInfo" -ForegroundColor Gray
+        Write-Verbose "OSD: Intel Wireless $DriverResultsName $DriverInfo" -Verbose
         #===================================================================================================
         #   Intel WebRequest
         #===================================================================================================

@@ -21,8 +21,7 @@ function Get-OSDDriverDellFamily {
     #===================================================================================================
     #   DriverWebContentRaw
     #===================================================================================================
-    Write-Host ""
-    Write-Verbose "Connecting to $Uri" -Verbose
+    Write-Verbose "OSD: Get Latest Driver Versions $Uri" -Verbose
     $DriverWebContentRaw = @()
     try {
         $DriverWebContentRaw = (Invoke-WebRequest $Uri).RawContent
