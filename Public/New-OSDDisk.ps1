@@ -304,10 +304,14 @@ exit
         if ($AskPartition -eq 'X') {Break}
     }
     #======================================================================================================
-    #	Initialize-OSDDisk
+    #	Initialize-DiskOSD
     #   OSDDisk is RAW so it needs to be Initialized
     #======================================================================================================
-    Initialize-OSDDisk -DiskNumber $($OSDDisk.Number)
+    if ($global:OSDDiskSandbox -eq $true) {
+        Initialize-DiskOSD -Number $($OSDDisk.Number) -WhatIf
+    } else {
+        Initialize-DiskOSD -Number $($OSDDisk.Number)
+    }
     #======================================================================================================
     #	New-OSDPartitionSystem
     #======================================================================================================

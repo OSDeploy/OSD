@@ -83,7 +83,7 @@ FunctionsToExport = 'Get-OSD',
                     'Get-OSDDriver','Get-OSDDriverWmiQ',
                     'Get-RegCurrentVersion',
                     'Mount-OSDWindowsImage','Update-OSDWindowsImage',
-                    'New-OSDDisk',
+                    'Initialize-DiskOSD','New-OSDDisk',
                     'Save-OSDDownload'
 
 # Cmdlets to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no cmdlets to export.
