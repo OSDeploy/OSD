@@ -15,6 +15,7 @@ function Initialize-OSDDisk {
         #For multiple Fixed Disks, use the SelectDisk parameter
         #Default = 0
         #Alias = Disk, Number
+        [Parameter(ValueFromPipelineByPropertyName)]
         [Alias('Disk','Number')]
         [int]$DiskNumber = 0
     )

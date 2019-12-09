@@ -144,6 +144,8 @@ function Get-OSDDriverDellModel {
         $ModelRtsDate       = [datetime] $($item.SupportedSystems.Brand.Model.rtsdate.Trim() | Select-Object -Unique)
         $SystemSku          = $item.SupportedSystems.Brand.Model.systemID.Trim() | Select-Object -Unique
         $ModelPrefix        = $item.SupportedSystems.Brand.Prefix.Trim() | Select-Object -Unique
+
+        if ($null -eq $Model) {Continue}
         #===================================================================================================
         #   DriverFamily
         #===================================================================================================
@@ -171,6 +173,7 @@ function Get-OSDDriverDellModel {
         #===================================================================================================
         #   Corrections
         #===================================================================================================
+        if ($Model -eq 'Latitude E6420' -and $SystemSku -eq '04E4') {$Model = 'Latitude E6420 XFR'}
         if ($Model -eq 'Precision M4600') {$Generation = 'X3'}
         if ($Model -eq 'Precision M3800') {$Model = 'Dell Precision M3800'}
         #===================================================================================================
