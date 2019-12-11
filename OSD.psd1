@@ -7,7 +7,7 @@
 RootModule = 'OSD.psm1'
 
 # Version number of his module.
-ModuleVersion = '19.12.9.0'
+ModuleVersion = '19.12.11.0'
 
 # Supported PSEditions
 # CompatiblePSEditions = @()
@@ -84,6 +84,7 @@ FunctionsToExport = 'Get-OSD',
                     'Get-RegCurrentVersion',
                     'Mount-OSDWindowsImage','Update-OSDWindowsImage',
                     'Initialize-DiskOSD','New-OSDDisk',
+                    'New-PartitionOSDSystem','New-PartitionOSDRecovery','New-PartitionOSDWindows',
                     'Save-OSDDownload'
 
 # Cmdlets to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no cmdlets to export.

@@ -29,7 +29,7 @@ function Initialize-DiskOSD {
     } else {
         Write-Warning 'Initialize-DiskOSD requires Administrative Rights'
         if ($WhatIfPreference) {
-            Write-Warning 'Initialize-DiskOSD Break'
+            Write-Warning 'Initialize-DiskOSD will Break'
         } else {
             Break
         }
@@ -60,8 +60,8 @@ function Initialize-DiskOSD {
     #	Initialize-Disk
     #======================================================================================================
     foreach ($item in $GetFixedDisks) {
-        if ($PSCmdlet.ShouldProcess("Disk $($item.Number)","Initialize-Disk $PartitionStyle")){
-            Initialize-Disk -Number $item.Number -PartitionStyle $PartitionStyle
+        if ($PSCmdlet.ShouldProcess("Disk $($item.DiskNumber)","Initialize-Disk $PartitionStyle")){
+            Initialize-Disk -Number $item.DiskNumber -PartitionStyle $PartitionStyle
         }
     }
     #======================================================================================================
