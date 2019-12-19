@@ -6,21 +6,24 @@ Returns the Session.xml Updates that have been applied to an Operating System
 Returns the Session.xml Updates that have been applied to an Operating System
 
 .LINK
-https://osd.osdeploy.com/module/functions/get-osdsessions
+https://osd.osdeploy.com/module/functions/get-sessionsxml
 
 .NOTES
 19.11.20    Added Pipeline Support
 19.11.20    Path now supports Mounted WIM Path
 19.10.14    David Segura @SeguraOSD Initial Release
 #>
-function Get-OSDSessions {
+function Get-SessionsXml {
     [CmdletBinding()]
     Param (
         [Parameter(ValueFromPipelineByPropertyName = $true)]
         #Specifies the full path to the root directory of the offline Windows image that you will service
         #Or Path of the Sessions.xml file
         #If this value is not set, the running OS Sessions.xml will be processed
-        [string]$Path = "$env:SystemRoot\Servicing\Sessions\Sessions.xml"
+        [string]$Path = "$env:SystemRoot\Servicing\Sessions\Sessions.xml",
+
+        #Returns the KBNumber
+        [string]$KBNumber
     )
     Begin {}
     Process {
@@ -42,7 +45,7 @@ function Get-OSDSessions {
         #===================================================================================================
         [xml]$XmlDocument = Get-Content -Path "$SessionsXml"
     
-        $OSDSessions = $XmlDocument.SelectNodes('Sessions/Session') | ForEach-Object {
+        $SessionsXml = $XmlDocument.SelectNodes('Sessions/Session') | ForEach-Object {
             New-Object -Type PSObject -Property @{
                 Complete = $_.Complete
                 KBNumber = $_.Tasks.Phase.package.name
@@ -53,13 +56,17 @@ function Get-OSDSessions {
             }
         }
     
-        $OSDSessions = $OSDSessions | Where-Object {$_.Id -like "Package*"}
-        $OSDSessions = $OSDSessions | Select-Object -Property Complete, KBNumber, TargetState, Id, Client, Status | Sort-Object Complete
+        $SessionsXml = $SessionsXml | Where-Object {$_.Id -like "Package*"}
+        $SessionsXml = $SessionsXml | Select-Object -Property Complete, KBNumber, TargetState, Id, Client, Status | Sort-Object Complete
         #===================================================================================================
-        #   Return $OSDSessions
+        #   KBNumber
         #===================================================================================================
-        #if ($GridView.IsPresent) {$OSDSessions = $OSDSessions | Select-Object -Property * | Out-GridView -PassThru -Title 'Select Updates'}
-        Return $OSDSessions
+        if ($KBNumber) {$SessionsXml = $SessionsXml | Where-Object {$_.KBNumber -match $KBNumber}}
+        #===================================================================================================
+        #   Return $SessionsXml
+        #===================================================================================================
+        #if ($GridView.IsPresent) {$SessionsXml = $SessionsXml | Select-Object -Property * | Out-GridView -PassThru -Title 'Select Updates'}
+        Return $SessionsXml
     }
     End {}
 }
