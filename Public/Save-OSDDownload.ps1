@@ -55,7 +55,7 @@ function Save-OSDDownload {
             #	Set Name
             #======================================================================================================
             #if (! $DestinationName) {
-                Write-Verbose "Setting DestinationName"
+                #Write-Verbose "Setting DestinationName"
                 $global:OSDDownload.Name = Split-Path -Path $OSDDownload.SourceUrl -Leaf
             #}
             #======================================================================================================

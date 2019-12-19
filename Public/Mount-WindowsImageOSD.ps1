@@ -6,12 +6,12 @@ Mounts a WIM file
 Mounts a WIM file automatically selecting the Path and the Index
 
 .LINK
-https://osd.osdeploy.com/module/functions/mount-osdwindowsimage
+https://osd.osdeploy.com/module/functions/mount-windowsimageosd
 
 .NOTES
 19.11.21 David Segura @SeguraOSD
 #>
-function Mount-OSDWindowsImage {
+function Mount-WindowsImageOSD {
     [CmdletBinding()]
     Param ( 
         #Specifies the full path to the root directory of the offline Windows image that you will service.
@@ -36,7 +36,7 @@ function Mount-OSDWindowsImage {
         #   Require Admin Rights
         #===================================================================================================
         if ((Get-OSDGather -Property IsAdmin) -eq $false) {
-            Write-Warning 'Mount-WindowsImage: This function requires Admin Rights ELEVATED'
+            Write-Warning 'Mount-WindowsImageOSD: This function requires Admin Rights ELEVATED'
             Break
         }
     }
@@ -51,19 +51,19 @@ function Mount-OSDWindowsImage {
             #   Validate File
             #===================================================================================================
             if (-not (Test-Path $Input -ErrorAction SilentlyContinue)) {
-                Write-Warning "Mount-WindowsImage: Unable to locate WindowsImage at $Input"
+                Write-Warning "Mount-WindowsImageOSD: Unable to locate WindowsImage at $Input"
                 Break
             }
             #===================================================================================================
             #   Get-Item
             #===================================================================================================
-            $OSDWindowsImage = Get-Item $Input
-            if ($OSDWindowsImage.Extension -ne '.wim') {
-                Write-Warning "Mount-WindowsImage: WindowsImage does not have a .wim extension"
+            $WindowsImageOSD = Get-Item $Input
+            if ($WindowsImageOSD.Extension -ne '.wim') {
+                Write-Warning "Mount-WindowsImageOSD: WindowsImage does not have a .wim extension"
                 Break
             }
-            if ($OSDWindowsImage.IsReadOnly -eq $true) {
-                Write-Warning "Mount-WindowsImage: WindowsImage is Read Only"
+            if ($WindowsImageOSD.IsReadOnly -eq $true) {
+                Write-Warning "Mount-WindowsImageOSD: WindowsImage is Read Only"
                 Break
             }
             #===================================================================================================

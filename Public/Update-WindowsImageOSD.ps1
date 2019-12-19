@@ -6,12 +6,12 @@ Updates a mounted WIM
 Updates a mounted WIM files.  Requires OSDSUS Catalog
 
 .LINK
-https://osd.osdeploy.com/module/functions/update-osdwindowsimage
+https://osd.osdeploy.com/module/functions/update-windowsimageosd
 
 .NOTES
 19.11.19 David Segura @SeguraOSD
 #>
-function Update-OSDWindowsImage {
+function Update-WindowsImageOSD {
     [CmdletBinding()]
     Param (
         #Specifies the full path to the root directory of the offline Windows image that you will service.
@@ -42,14 +42,14 @@ function Update-OSDWindowsImage {
         #   Require Admin Rights
         #===================================================================================================
         if ((Get-OSDGather -Property IsAdmin) -eq $false) {
-            Write-Warning 'Update-OSDWindowsImage: This function requires Admin Rights ELEVATED'
+            Write-Warning 'Update-WindowsImageOSD: This function requires Admin Rights ELEVATED'
             Break
         }
         #===================================================================================================
         #   Require OSDSUS Module
         #===================================================================================================
         if (-not (Get-Module -ListAvailable -Name OSDSUS)) {
-            Write-Warning "Update-OSDWindowsImage: PowerShell Module OSDSUS is required"
+            Write-Warning "Update-WindowsImageOSD: PowerShell Module OSDSUS is required"
             Break
         }
         #===================================================================================================
@@ -70,7 +70,7 @@ function Update-OSDWindowsImage {
             #   Validate Mount Path
             #===================================================================================================
             if (-not (Test-Path $Input -ErrorAction SilentlyContinue)) {
-                Write-Warning "Update-OSDWindowsImage: Unable to locate Mounted WindowsImage at $Input"
+                Write-Warning "Update-WindowsImageOSD: Unable to locate Mounted WindowsImage at $Input"
                 Break
             }
             #===================================================================================================
@@ -81,7 +81,7 @@ function Update-OSDWindowsImage {
             #   Require OSMajorVersion 10
             #===================================================================================================
             if ($global:GetRegCurrentVersion.CurrentMajorVersionNumber -ne 10) {
-                Write-Warning "Update-OSDWindowsImage: OS MajorVersion 10 is required"
+                Write-Warning "Update-WindowsImageOSD: OS MajorVersion 10 is required"
                 Break
             }
             #===================================================================================================
@@ -117,15 +117,15 @@ function Update-OSDWindowsImage {
                 $global:GetOSDSUS = $global:GetOSDSUS | Where-Object {$_.UpdateGroup -match $Update}
             }
             #===================================================================================================
-            #   Get-OSDSessions
+            #   Get-SessionsXml
             #===================================================================================================
-            $global:GetOSDSessions = Get-OSDSessions -Path "$Input" | Where-Object {$_.targetState -eq 'Installed'} | Sort-Object id
+            $global:GetSessionsXml = Get-SessionsXml -Path "$Input" | Where-Object {$_.targetState -eq 'Installed'} | Sort-Object id
             #===================================================================================================
             #   Apply Update
             #===================================================================================================
             foreach ($item in $global:GetOSDSUS) {
                 if (! ($Force.IsPresent)) {
-                    if ($global:GetOSDSessions | Where-Object {$_.KBNumber -match "$($item.FileKBNumber)"}) {
+                    if ($global:GetSessionsXml | Where-Object {$_.KBNumber -match "$($item.FileKBNumber)"}) {
                         Write-Verbose "Installed: $($item.Title) $($item.FileName)" -Verbose
                         Continue
                     } else {
@@ -141,7 +141,7 @@ function Update-OSDWindowsImage {
                 } else {
                     $UpdateFile = Save-OSDDownload -SourceUrl $item.OriginUri -Verbose
                 }
-                $CurrentLog = "$env:TEMP\OSD\$((Get-Date).ToString('yyyy-MM-dd-HHmmss'))-Update-OSDWindowsImage.log"
+                $CurrentLog = "$env:TEMP\OSD\$((Get-Date).ToString('yyyy-MM-dd-HHmmss'))-Update-WindowsImageOSD.log"
 
                 if (! (Test-Path "$env:TEMP\OSD")) {New-Item -Path "$env:TEMP\OSD" -Force | Out-Null}
 
@@ -153,7 +153,7 @@ function Update-OSDWindowsImage {
                     }
                     Catch {
                         if ($_.Exception.Message -match '0x800f081e') {
-                        Write-Verbose "Update-OSDWindowsImage: 0x800f081e The package is not applicable to this image" -Verbose}
+                        Write-Verbose "Update-WindowsImageOSD: 0x800f081e The package is not applicable to this image" -Verbose}
                         Write-Verbose $CurrentLog -Verbose
                     }
                 } else {
