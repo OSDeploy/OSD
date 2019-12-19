@@ -20,6 +20,7 @@ function Edit-WindowsImageOSD {
         [string[]]$Path,
 
         #Dism Actions
+        #Analyze cannot be used for PassThru
         [Parameter(ParameterSetName = 'Offline')]
         [ValidateSet('Analyze','Cleanup','CleanupResetBase')]
         [string]$CleanupImage,
@@ -144,7 +145,8 @@ function Edit-WindowsImageOSD {
                 #   GridRemoveAppxPP
                 #===================================================================================================
                 if ($GridRemoveAppxPP.IsPresent) {
-                    Get-AppxProvisionedPackage -Path $Input | Select-Object DisplayName, PackageName | Out-GridView -PassThru -Title "Select Appx Provisioned Packages to Remove from $Input" | Remove-AppProvisionedPackage -Path $Input
+                    $CurrentLog = "$env:TEMP\OSD\$((Get-Date).ToString('yyyy-MM-dd-HHmmss'))-Edit-WindowsImageOSD.log"
+                    Get-AppxProvisionedPackage -Path $Input | Select-Object DisplayName, PackageName | Out-GridView -PassThru -Title "Select Appx Provisioned Packages to Remove from $Input" | Remove-AppProvisionedPackage -Path $Input -LogPath $CurrentLog
                 }
                 #===================================================================================================
                 #   RemoveAppxPP
@@ -153,8 +155,9 @@ function Edit-WindowsImageOSD {
                     foreach ($Item in $RemoveAppxPP) {
                         Write-Verbose "RemoveAppxPP: $Item"
                         Get-AppxProvisionedPackage -Path $Input | Where-Object {$_.DisplayName -Match $Item} | ForEach-Object {
+                            $DismLog = "$env:TEMP\OSD\$((Get-Date).ToString('yyyy-MM-dd-HHmmss'))-Edit-WindowsImageOSD.log"
                             Write-Verbose "$($_.DisplayName): Removing Appx Provisioned Package $($_.PackageName)" -Verbose
-                            Remove-AppxProvisionedPackage -Path $_.Path -PackageName $_.PackageName | Out-Null
+                            Remove-AppxProvisionedPackage -Path $_.Path -PackageName $_.PackageName -LogPath $DismLog | Out-Null
                         } 
                     }
                 }
@@ -162,16 +165,27 @@ function Edit-WindowsImageOSD {
                 #   Cleanup
                 #===================================================================================================
                 if ($CleanupImage -eq 'Analyze') {
+                    $DismLog = "$env:TEMP\OSD\$((Get-Date).ToString('yyyy-MM-dd-HHmmss'))-Cleanup-Image-Analyze-Dism.log"
+                    $ConsoleLog = "$env:TEMP\OSD\$((Get-Date).ToString('yyyy-MM-dd-HHmmss'))-Cleanup-Image-Analyze-Console.log"
                     Write-Verbose "DISM /Image:$Input /Cleanup-Image /AnalyzeComponentStore" -Verbose
-                    DISM /Image:"$Input" /Cleanup-Image /AnalyzeComponentStore
+                    Write-Warning "Console Output is being redirected to $ConsoleLog"
+                    DISM /Image:"$Input" /Cleanup-Image /AnalyzeComponentStore /LogPath:"$DismLog" *> $ConsoleLog
                 }
                 if ($CleanupImage -eq 'Cleanup') {
+                    $DismLog = "$env:TEMP\OSD\$((Get-Date).ToString('yyyy-MM-dd-HHmmss'))-Cleanup-Image-Cleanup-Dism.log"
+                    $ConsoleLog = "$env:TEMP\OSD\$((Get-Date).ToString('yyyy-MM-dd-HHmmss'))-Cleanup-Image-Cleanup-Console.log"
                     Write-Verbose "DISM /Image:$Input /Cleanup-Image /StartComponentCleanup" -Verbose
-                    DISM /Image:"$Input" /Cleanup-Image /StartComponentCleanup
+                    Write-Warning "This process will take between 1 - 200 minutes to complete, depending on the number of Updates"
+                    Write-Warning "Console Output is being redirected to $ConsoleLog"
+                    DISM /Image:"$Input" /Cleanup-Image /StartComponentCleanup /LogPath:"$DismLog" *> $ConsoleLog
                 }
                 if ($CleanupImage -eq 'CleanupResetBase') {
+                    $DismLog = "$env:TEMP\OSD\$((Get-Date).ToString('yyyy-MM-dd-HHmmss'))-Cleanup-Image-CleanupResetBase-Dism.log"
+                    $ConsoleLog = "$env:TEMP\OSD\$((Get-Date).ToString('yyyy-MM-dd-HHmmss'))-Cleanup-Image-CleanupResetBase-Console.log"
                     Write-Verbose "DISM /Image:$Input /Cleanup-Image /StartComponentCleanup /ResetBase" -Verbose
-                    DISM /Image:"$Input" /Cleanup-Image /StartComponentCleanup /ResetBase
+                    Write-Warning "This process will take between 1 - 200 minutes to complete, depending on the number of Updates"
+                    Write-Warning "Console Output is being redirected to $ConsoleLog"
+                    DISM /Image:"$Input" /Cleanup-Image /StartComponentCleanup /ResetBase /LogPath:"$DismLog" *> $ConsoleLog
 
                 }
 
