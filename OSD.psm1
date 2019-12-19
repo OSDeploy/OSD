@@ -12,3 +12,22 @@ foreach ($Import in @($OSDPublicFunctions + $OSDPrivateFunctions)) {
 
 Export-ModuleMember -Function $OSDPublicFunctions.BaseName
 #===================================================================================================
+#   Get-SessionsXml
+#===================================================================================================
+try {New-Alias -Name Get-OSDSessions -Value Get-SessionsXml -Force -ErrorAction SilentlyContinue}
+catch {}
+#===================================================================================================
+#   Mount-WindowsImageOSD
+#===================================================================================================
+try {New-Alias -Name Mount-OSDWindowsImage -Value Mount-WindowsImageOSD -Force -ErrorAction SilentlyContinue}
+catch {}
+#===================================================================================================
+#   Update-WindowsImageOSD
+#===================================================================================================
+try {New-Alias -Name Update-OSDWindowsImage -Value Update-WindowsImageOSD -Force -ErrorAction SilentlyContinue}
+catch {}
+#===================================================================================================
+#   Export-ModuleMember
+#===================================================================================================
+Export-ModuleMember -Function * -Alias *
+#===================================================================================================

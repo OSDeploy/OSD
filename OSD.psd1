@@ -7,7 +7,7 @@
 RootModule = 'OSD.psm1'
 
 # Version number of his module.
-ModuleVersion = '19.12.11.0'
+ModuleVersion = '19.12.19.0'
 
 # Supported PSEditions
 # CompatiblePSEditions = @()
@@ -79,10 +79,12 @@ PowerShellVersion = '5.0'
 
 # Functions to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no functions to export.
 FunctionsToExport = 'Get-OSD',
-                    'Get-OSDClass','Get-OSDGather','Get-OSDPower','Get-OSDSessions','Get-OSDWinPE',
+                    'Get-OSDClass','Get-OSDGather','Get-OSDPower','Get-OSDWinPE',
                     'Get-OSDDriver','Get-OSDDriverWmiQ',
                     'Get-RegCurrentVersion',
-                    'Mount-OSDWindowsImage','Update-OSDWindowsImage',
+                    'Get-SessionsXml',
+                    'Get-OSDDisk',
+                    'Dismount-WindowsImageOSD','Edit-WindowsImageOSD','Mount-WindowsImageOSD','Update-WindowsImageOSD',
                     'Initialize-DiskOSD','New-OSDDisk',
                     'New-PartitionOSDSystem','New-PartitionOSDRecovery','New-PartitionOSDWindows',
                     'Save-OSDDownload'
