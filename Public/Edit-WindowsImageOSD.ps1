@@ -1,0 +1,186 @@
+<#
+.SYNOPSIS
+Edits a Windows Image
+
+.DESCRIPTION
+Edits a Windows Image.  Remove-AppxProvisionedPackage
+
+.LINK
+https://osd.osdeploy.com/module/functions/edit-windowsimage
+
+.NOTES
+19.11.22 David Segura @SeguraOSD
+#>
+function Edit-WindowsImageOSD {
+    [CmdletBinding(DefaultParameterSetName = 'Offline')]
+    Param (
+        #Specifies the full path to the root directory of the offline Windows image that you will service.
+        #If the directory named Windows is not a subdirectory of the root directory, -WindowsDirectory must be specified.
+        [Parameter(ParameterSetName = 'Offline', ValueFromPipelineByPropertyName)]
+        [string[]]$Path,
+
+        #Dism Actions
+        [Parameter(ParameterSetName = 'Offline')]
+        [ValidateSet('Analyze','Cleanup','CleanupResetBase')]
+        [string]$CleanupImage,
+
+        #Specifies that the action is to be taken on the operating system that is currently running on the local computer.
+        [Parameter(ParameterSetName = 'Online', Mandatory = $true)]
+        [switch]$Online,
+
+        #Appx Packages selected in GridView will be removed from the Windows Image
+        [Parameter(ParameterSetName = 'Online')]
+        [switch]$GridRemoveAppx,
+
+        #Appx Provisioned Packages selected in GridView will be removed from the Windows Image
+        [switch]$GridRemoveAppxPP,
+
+        #Appx Packages matching the string will be removed
+        [Parameter(ParameterSetName = 'Online')]
+        [string[]]$RemoveAppx,
+
+        #Appx Provisioned Packages matching the string will be removed
+        [string[]]$RemoveAppxPP
+    )
+
+    Begin {
+        #===================================================================================================
+        #   Require Admin Rights
+        #===================================================================================================
+        if ((Get-OSDGather -Property IsAdmin) -eq $false) {
+            Write-Warning 'Edit-WindowsImageOSD: This function requires ELEVATED Admin Rights'
+            Break
+        }
+    }
+    Process {
+        if ($PSCmdlet.ParameterSetName -eq 'Online') {
+            #===================================================================================================
+            #   Get Registry Information
+            #===================================================================================================
+            $GetRegCurrentVersion = Get-RegCurrentVersion
+            #===================================================================================================
+            #   Require OSMajorVersion 10
+            #===================================================================================================
+            if ($GetRegCurrentVersion.CurrentMajorVersionNumber -ne 10) {
+                Write-Warning "Edit-WindowsImageOSD: OS MajorVersion 10 is required"
+                Break
+            }
+            #===================================================================================================
+            #   GridRemoveAppx
+            #===================================================================================================
+            if ($GridRemoveAppx.IsPresent) {
+                Get-AppxPackage | Select-Object * | Where-Object {$_.NonRemovable -ne $true} | Out-GridView -PassThru -Title "Select Appx Packages to Remove from Online Windows Image" | ForEach-Object {
+                    Remove-AppPackage -AllUsers -Package $_.PackageFullName -Verbose
+                }
+            }
+            #===================================================================================================
+            #   GridRemoveAppxPP
+            #===================================================================================================
+            if ($GridRemoveAppxPP.IsPresent) {
+                Get-AppxProvisionedPackage -Online | Select-Object DisplayName, PackageName | Out-GridView -PassThru -Title "Select Appx Provisioned Packages to Remove from Online Windows Image" | Remove-AppProvisionedPackage -Online -AllUsers
+            }
+            #===================================================================================================
+            #   RemoveAppx
+            #===================================================================================================
+            if ($RemoveAppx) {
+                foreach ($Item in $RemoveAppx) {
+                    Get-AppxPackage | Where-Object {$_.Name -Match $Item} | ForEach-Object {
+                        Write-Verbose "$($_.Name): Removing Appx Package $($_.PackageFullName)" -Verbose
+                        Try {Remove-AppxPackage -AllUsers -Package $_.PackageFullName | Out-Null}
+                        Catch {Write-Warning "$($_.Name): Removing Appx Package $($_.PackageFullName) did not complete successfully"}
+                    } 
+                }
+            }
+            #===================================================================================================
+            #   RemoveAppxPP
+            #===================================================================================================
+            if ($RemoveAppxPP) {
+                foreach ($Item in $RemoveAppxPP) {
+                    Get-AppxProvisionedPackage -Online | Where-Object {$_.DisplayName -Match $Item} | ForEach-Object {
+                        Write-Verbose "$($_.DisplayName): Removing Appx Provisioned Package $($_.PackageName)" -Verbose
+                        Try {Remove-AppxProvisionedPackage -Online -AllUsers -PackageName $_.PackageName | Out-Null}
+                        Catch {Write-Warning "$($_.DisplayName): Removing Appx Provisioned Package $($_.PackageName) did not complete successfully"}
+                    } 
+                }
+            }
+            #===================================================================================================
+            #   Continue for PassThru
+            #===================================================================================================
+            Continue
+
+        }
+        if ($PSCmdlet.ParameterSetName -eq 'Offline') {
+            #===================================================================================================
+            #   Get-WindowsImage Mounted
+            #===================================================================================================
+            if ($null -eq $Path) {
+                $Path = (Get-WindowsImage -Mounted | Select-Object -Property Path).Path
+            }
+            foreach ($Input in $Path) {
+                #===================================================================================================
+                #   Path
+                #===================================================================================================
+                $MountPath = (Get-Item -Path $Input | Select-Object FullName).FullName
+                Write-Verbose "Path: $MountPath" -Verbose
+                #===================================================================================================
+                #   Validate Mount Path
+                #===================================================================================================
+                if (-not (Test-Path $Input -ErrorAction SilentlyContinue)) {
+                    Write-Warning "Edit-WindowsImageOSD: Unable to locate Mounted WindowsImage at $Input"
+                    Break
+                }
+                #===================================================================================================
+                #   Get Registry Information
+                #===================================================================================================
+                $GetRegCurrentVersion = Get-RegCurrentVersion -Path $Input
+                #===================================================================================================
+                #   Require OSMajorVersion 10
+                #===================================================================================================
+                if ($GetRegCurrentVersion.CurrentMajorVersionNumber -ne 10) {
+                    Write-Warning "Edit-WindowsImageOSD: OS MajorVersion 10 is required"
+                    Break
+                }
+                #===================================================================================================
+                #   GridRemoveAppxPP
+                #===================================================================================================
+                if ($GridRemoveAppxPP.IsPresent) {
+                    Get-AppxProvisionedPackage -Path $Input | Select-Object DisplayName, PackageName | Out-GridView -PassThru -Title "Select Appx Provisioned Packages to Remove from $Input" | Remove-AppProvisionedPackage -Path $Input
+                }
+                #===================================================================================================
+                #   RemoveAppxPP
+                #===================================================================================================
+                if ($RemoveAppxPP) {
+                    foreach ($Item in $RemoveAppxPP) {
+                        Write-Verbose "RemoveAppxPP: $Item"
+                        Get-AppxProvisionedPackage -Path $Input | Where-Object {$_.DisplayName -Match $Item} | ForEach-Object {
+                            Write-Verbose "$($_.DisplayName): Removing Appx Provisioned Package $($_.PackageName)" -Verbose
+                            Remove-AppxProvisionedPackage -Path $_.Path -PackageName $_.PackageName | Out-Null
+                        } 
+                    }
+                }
+                #===================================================================================================
+                #   Cleanup
+                #===================================================================================================
+                if ($CleanupImage -eq 'Analyze') {
+                    Write-Verbose "DISM /Image:"$Input" /Cleanup-Image /AnalyzeComponentStore" -Verbose
+                    DISM /Image:"$Input" /Cleanup-Image /AnalyzeComponentStore
+                }
+                if ($CleanupImage -eq 'Cleanup') {
+                    Write-Verbose "DISM /Image:"$Input" /Cleanup-Image /StartComponentCleanup" -Verbose
+                    DISM /Image:"$Input" /Cleanup-Image /StartComponentCleanup
+                }
+                if ($CleanupImage -eq 'CleanupResetBase') {
+                    Write-Verbose "DISM /Image:"$Input" /Cleanup-Image /StartComponentCleanup /ResetBase" -Verbose
+                    DISM /Image:"$Input" /Cleanup-Image /StartComponentCleanup /ResetBase
+
+                }
+
+                #===================================================================================================
+                #   Return for PassThru
+                #===================================================================================================
+                Get-WindowsImage -Mounted | Where-Object {$_.Path -eq $MountPath}
+            }
+        }
+    }
+    End {}
+}

@@ -35,7 +35,7 @@ function Get-OSD {
         Write-Host 'Returns common OSD information as an ordered hash table' -ForegroundColor Gray
         Write-Host 'Get-OSDPower ' -ForegroundColor Cyan -NoNewline
         Write-Host 'Displays Power Plan information using powercfg /LIST' -ForegroundColor Gray
-        Write-Host 'Get-OSDSessions ' -ForegroundColor Cyan -NoNewline
+        Write-Host 'Get-SessionsXml ' -ForegroundColor Cyan -NoNewline
         Write-Host 'Returns the Session.xml Updates that have been applied to an Operating System' -ForegroundColor Gray
         Write-Host 'Get-OSDWinPE ' -ForegroundColor Cyan -NoNewline
         Write-Host 'Common WinPE Commands using wpeutil and Microsoft DaRT RemoteRecovery' -ForegroundColor Gray
@@ -54,11 +54,15 @@ function Get-OSD {
         Write-Host 'New-OSDDisk ' -ForegroundColor Cyan -NoNewline
         Write-Host 'Creates System | OS | Recovery Partitions for MBR or UEFI Drives in WinPE' -ForegroundColor Gray
         Write-Host
-        Write-Host 'Windows Image Functions'
-        Write-Host 'Mount-OSDWindowsImage ' -ForegroundColor Cyan -NoNewline
-        Write-Host 'Give it a WIM, let it do the rest' -ForegroundColor Gray
-        Write-Host 'Update-OSDWindowsImage ' -ForegroundColor Cyan -NoNewline
+        Write-Host 'WindowsImage Functions'
+        Write-Host 'Mount-WindowsImageOSD ' -ForegroundColor Cyan -NoNewline
+        Write-Host 'Give it a WIM, let it mount it' -ForegroundColor Gray
+        Write-Host 'Edit-WindowsImageOSD ' -ForegroundColor Cyan -NoNewline
+        Write-Host 'Modify an Online or Offline Windows Image with Cleanup and Appx Stuff' -ForegroundColor Gray
+        Write-Host 'Update-WindowsImageOSD ' -ForegroundColor Cyan -NoNewline
         Write-Host 'Identify, Download, and Apply Updates to a Mounted Windows Image' -ForegroundColor Gray
+        Write-Host 'Dismount-WindowsImageOSD ' -ForegroundColor Cyan -NoNewline
+        Write-Host 'Dismounts WIM by Mounted Path, or all WIMs if no Path is specified' -ForegroundColor Gray
         Write-Host
         Write-Host 'Update the OSD Module'
         Write-Host 'Update-Module OSD -Force' -ForegroundColor Cyan
