@@ -162,15 +162,15 @@ function Edit-WindowsImageOSD {
                 #   Cleanup
                 #===================================================================================================
                 if ($CleanupImage -eq 'Analyze') {
-                    Write-Verbose "DISM /Image:"$Input" /Cleanup-Image /AnalyzeComponentStore" -Verbose
+                    Write-Verbose "DISM /Image:$Input /Cleanup-Image /AnalyzeComponentStore" -Verbose
                     DISM /Image:"$Input" /Cleanup-Image /AnalyzeComponentStore
                 }
                 if ($CleanupImage -eq 'Cleanup') {
-                    Write-Verbose "DISM /Image:"$Input" /Cleanup-Image /StartComponentCleanup" -Verbose
+                    Write-Verbose "DISM /Image:$Input /Cleanup-Image /StartComponentCleanup" -Verbose
                     DISM /Image:"$Input" /Cleanup-Image /StartComponentCleanup
                 }
                 if ($CleanupImage -eq 'CleanupResetBase') {
-                    Write-Verbose "DISM /Image:"$Input" /Cleanup-Image /StartComponentCleanup /ResetBase" -Verbose
+                    Write-Verbose "DISM /Image:$Input /Cleanup-Image /StartComponentCleanup /ResetBase" -Verbose
                     DISM /Image:"$Input" /Cleanup-Image /StartComponentCleanup /ResetBase
 
                 }
@@ -178,7 +178,7 @@ function Edit-WindowsImageOSD {
                 #===================================================================================================
                 #   Return for PassThru
                 #===================================================================================================
-                Get-WindowsImage -Mounted | Where-Object {$_.Path -eq $MountPath}
+                Return Get-WindowsImage -Mounted | Where-Object {$_.Path -eq $MountPath}
             }
         }
     }
