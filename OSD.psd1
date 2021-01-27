@@ -7,7 +7,7 @@
 RootModule = 'OSD.psm1'
 
 # Version number of his module.
-ModuleVersion = '20.8.19.1'
+ModuleVersion = '21.1.27.1'
 
 # Supported PSEditions
 # CompatiblePSEditions = @()
@@ -22,23 +22,11 @@ Author = 'David Segura @SeguraOSD'
 CompanyName = 'osdeploy.com'
 
 # Copyright statement for this module
-Copyright = '(c) 2020 David Segura osdeploy.com. All rights reserved.'
+Copyright = '(c) 2021 David Segura osdeploy.com. All rights reserved.'
 
 # Description of the functionality provided by this module
 Description = @'
-https://osd.osdeploy.com
-OSD PowerShell Module is a collection of OSD shared functions
-
-Collaborators
-Andrew Jimenez - @AndrewJimenez_
-Ben Whitmore - @byteben
-David Segura - @SeguraOSD
-Donna Ryan - @TheNotoriousDRR
-Gary Blok - @gwblok
-Jerome Bezet-Torres - @JM2K69
-Jordan Benzing - @JordanTheITguy
-Nathan Bridges - @nathanjbridges
-Manel Rodero - @manelrodero
+OSD PowerShell Module is a collection of OSD shared functions that can be used WinPE and Windows 10
 '@
 
 # Minimum version of the Windows PowerShell engine required by this module
@@ -83,6 +71,7 @@ FunctionsToExport = 'Get-OSD',
                     'Get-OSDDriver','Get-OSDDriverWmiQ',
                     'Get-RegCurrentVersion',
                     'Get-SessionsXml',
+                    'New-EZWindowsImageFFU',
                     'Dismount-WindowsImageOSD','Edit-WindowsImageOSD','Mount-WindowsImageOSD','Update-WindowsImageOSD',
                     'Initialize-DiskOSD','New-OSDDisk',
                     'New-PartitionOSDSystem','New-PartitionOSDRecovery','New-PartitionOSDWindows',

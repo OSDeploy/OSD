@@ -1,15 +1,15 @@
 <#
-.SYNOPSIS
-Removes Appx Packages and Appx Provisioned Packages for All Users
+    .SYNOPSIS
+    Removes Appx Packages and Appx Provisioned Packages for All Users
 
-.DESCRIPTION
-Removes Appx Packages and Appx Provisioned Packages for All Users
+    .Description
+    Removes Appx Packages and Appx Provisioned Packages for All Users
 
-.LINK
-https://osd.osdeploy.com/module/functions/edit-windowsimage
+    .LINK
+    https://osd.osdeploy.com/module/functions/remove-appxonline
 
-.NOTES
-19.12.20 David Segura @SeguraOSD
+    .NOTES
+    19.12.20 David Segura @SeguraOSD
 #>
 function Remove-AppxOnline {
     [CmdletBinding()]
