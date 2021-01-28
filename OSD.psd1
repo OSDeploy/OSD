@@ -7,7 +7,7 @@
 RootModule = 'OSD.psm1'
 
 # Version number of his module.
-ModuleVersion = '21.1.27.1'
+ModuleVersion = '21.1.28.1'
 
 # Supported PSEditions
 # CompatiblePSEditions = @()
@@ -71,7 +71,7 @@ FunctionsToExport = 'Get-OSD',
                     'Get-OSDDriver','Get-OSDDriverWmiQ',
                     'Get-RegCurrentVersion',
                     'Get-SessionsXml',
-                    'New-EZWindowsImageFFU',
+                    'New-EZWindowsImageFFU','Get-EZComputerManufacturer','Get-EZComputerModel','Get-EZComputerSerialNumber',
                     'Dismount-WindowsImageOSD','Edit-WindowsImageOSD','Mount-WindowsImageOSD','Update-WindowsImageOSD',
                     'Initialize-DiskOSD','New-OSDDisk',
                     'New-PartitionOSDSystem','New-PartitionOSDRecovery','New-PartitionOSDWindows',
