@@ -80,6 +80,16 @@ function Get-OSD {
     Write-Host -ForegroundColor White       'Dismount-WindowsImageOSD   ' -NoNewline
     Write-Host -ForegroundColor Gray        'Dismounts WIM by Mounted Path, or all WIMs if no Path is specified'
     Write-Host -ForegroundColor DarkCyan    '================================================================================================================='
+    Write-Host -ForegroundColor Cyan        'EZ Functions'
+    Write-Host -ForegroundColor Yellow      'New-EZWindowsImageFFU      ' -NoNewline
+    Write-Host -ForegroundColor Gray        'Captures a Windows Image FFU to a secondary drive for backup'
+    Write-Host -ForegroundColor Yellow      'Get-EZComputerManufacturer ' -NoNewline
+    Write-Host -ForegroundColor Gray        'Returns a simple Computer Manufacturer'
+    Write-Host -ForegroundColor Yellow      'Get-EZComputerModel        ' -NoNewline
+    Write-Host -ForegroundColor Gray        'Returns a Computer Model'
+    Write-Host -ForegroundColor Yellow      'Get-EZComputerSerialNumber ' -NoNewline
+    Write-Host -ForegroundColor Gray        'Returns the Computer Serial Number'
+    Write-Host -ForegroundColor DarkCyan    '================================================================================================================='
     Write-Host -ForegroundColor Cyan        'Module Functions'
     Write-Host -ForegroundColor White       'Update-Module OSD -Force   ' -NoNewline
     Write-Host -ForegroundColor Gray        'Updates the OSD Module'
