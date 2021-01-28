@@ -69,17 +69,19 @@ function New-EZWindowsImageFFU {
     Write-Host -ForegroundColor DarkCyan    $GetCommandHelpUri
     Write-Host -ForegroundColor Gray        '======================================================================================================'
     Write-Host -ForegroundColor Cyan        'Parameters'
-    Write-Host -ForegroundColor White       '-ImageFile     ' -NoNewline
+    Write-Host -ForegroundColor White       '-DestinationDriveLetter    ' -NoNewline
+    Write-Host -ForegroundColor Gray        "Drive Letter of a Drive meeting the requirements | Values: $(Get-AvailableBackupDriveLetters)"
+    Write-Host -ForegroundColor White       '-ImageFile                 ' -NoNewline
     Write-Host -ForegroundColor Gray        'Full path of the Windows Image FFU'
-    Write-Host -ForegroundColor White       '-DiskNumber    ' -NoNewline
+    Write-Host -ForegroundColor White       '-DiskNumber                ' -NoNewline
     Write-Host -ForegroundColor Gray        'Disk Number of the Drive to capture.  Use Get-Disk to get the DiskNumber Property'
-    Write-Host -ForegroundColor White       '-Name          ' -NoNewline
+    Write-Host -ForegroundColor White       '-Name                      ' -NoNewline
     Write-Host -ForegroundColor Gray        'Windows Image Property: Specifies the name of an image'
-    Write-Host -ForegroundColor White       '-Description   ' -NoNewline
+    Write-Host -ForegroundColor White       '-Description               ' -NoNewline
     Write-Host -ForegroundColor Gray        'Windows Image Property: Specifies the description of the image'
-    Write-Host -ForegroundColor White       '-Compress      ' -NoNewline
-    Write-Host -ForegroundColor Gray        'Compression level.  Default or None'
-    Write-Host -ForegroundColor White       '-Force         ' -NoNewline
+    Write-Host -ForegroundColor White       '-Compress                  ' -NoNewline
+    Write-Host -ForegroundColor Gray        'Compression level | Values: Default None'
+    Write-Host -ForegroundColor White       '-Force                     ' -NoNewline
     Write-Host -ForegroundColor Gray        'Executes the capture'
     Write-Host -ForegroundColor Gray        '======================================================================================================'
     Write-Host -ForegroundColor Cyan        'Command Prompt Syntax:'
