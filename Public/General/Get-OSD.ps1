@@ -64,11 +64,17 @@ function Get-OSD {
     Write-Host -ForegroundColor White       'New-OSDDisk                ' -NoNewline
     Write-Host -ForegroundColor Gray        'Creates System | OS | Recovery Partitions for MBR or UEFI Drives in WinPE'
     Write-Host -ForegroundColor White       'Initialize-DiskOSD         ' -NoNewline
-    Write-Host -ForegroundColor Gray        ''
+    Write-Host -ForegroundColor Gray        'Initializes a Disk'
     Write-Host -ForegroundColor White       'New-PartitionOSDSystem     ' -NoNewline
     Write-Host -ForegroundColor Gray        'Creates a SYSTEM Partition'
     Write-Host -ForegroundColor White       'New-PartitionOSDWindows    ' -NoNewline
     Write-Host -ForegroundColor Gray        'Creates a WINDOWS Partition'
+    Write-Host -ForegroundColor Yellow      'Get-DiskIsBoot             ' -NoNewline
+    Write-Host -ForegroundColor Gray        'Gets the Disk containing the BOOT partition'
+    Write-Host -ForegroundColor Yellow      'Get-DiskIsSystem           ' -NoNewline
+    Write-Host -ForegroundColor Gray        'Gets the Disk containing the SYSTEM partition'
+    Write-Host -ForegroundColor Yellow      'Get-DiskToBackup           ' -NoNewline
+    Write-Host -ForegroundColor Gray        'Gets Disks that can be backed up'
     Write-Host -ForegroundColor DarkCyan    '================================================================================================================='
     Write-Host -ForegroundColor Cyan        'WindowsImage Functions'
     Write-Host -ForegroundColor White       'Mount-WindowsImageOSD      ' -NoNewline
@@ -81,8 +87,6 @@ function Get-OSD {
     Write-Host -ForegroundColor Gray        'Dismounts WIM by Mounted Path, or all WIMs if no Path is specified'
     Write-Host -ForegroundColor DarkCyan    '================================================================================================================='
     Write-Host -ForegroundColor Cyan        'EZ Functions'
-    Write-Host -ForegroundColor Yellow      'New-EZWindowsImageFFU      ' -NoNewline
-    Write-Host -ForegroundColor Gray        'Captures a Windows Image FFU to a secondary drive for backup'
     Write-Host -ForegroundColor Yellow      'Get-EZComputerManufacturer ' -NoNewline
     Write-Host -ForegroundColor Gray        'Returns a simple Computer Manufacturer'
     Write-Host -ForegroundColor Yellow      'Get-EZComputerModel        ' -NoNewline
@@ -90,9 +94,12 @@ function Get-OSD {
     Write-Host -ForegroundColor Yellow      'Get-EZComputerSerialNumber ' -NoNewline
     Write-Host -ForegroundColor Gray        'Returns the Computer Serial Number'
     Write-Host -ForegroundColor DarkCyan    '================================================================================================================='
-    Write-Host -ForegroundColor Cyan        'Module Functions'
-    Write-Host -ForegroundColor White       'Update-Module OSD -Force   ' -NoNewline
-    Write-Host -ForegroundColor Gray        'Updates the OSD Module'
+    Write-Host -ForegroundColor Cyan        'Backup Functions'
+    Write-Host -ForegroundColor Yellow      'Backup-DiskToFFU           ' -NoNewline
+    Write-Host -ForegroundColor Gray        'Captures a Windows Image FFU to a secondary drive'
+    Write-Host -ForegroundColor DarkCyan    '================================================================================================================='
+    Write-Host -ForegroundColor Yellow      'Update-Module OSD -Force   ' -NoNewline
+    Write-Host -ForegroundColor Cyan        'Update the OSD Module'
     Write-Host -ForegroundColor DarkCyan    '================================================================================================================='
     #======================================================================================================
 }

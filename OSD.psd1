@@ -7,7 +7,7 @@
 RootModule = 'OSD.psm1'
 
 # Version number of his module.
-ModuleVersion = '21.1.28.2'
+ModuleVersion = '21.1.29.1'
 
 # Supported PSEditions
 # CompatiblePSEditions = @()
@@ -66,17 +66,22 @@ PowerShellVersion = '5.0'
 # NestedModules = @()
 
 # Functions to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no functions to export.
-FunctionsToExport = 'Get-OSD',
-                    'Get-OSDClass','Get-OSDGather','Get-OSDPower','Get-OSDWinPE',
-                    'Get-OSDDriver','Get-OSDDriverWmiQ',
+FunctionsToExport = 'Backup-DiskToFFU',
+                    'Dismount-WindowsImageOSD','Edit-WindowsImageOSD',
+                    'Get-DiskIsBoot','Get-DiskIsSystem','Get-DiskToBackup',
+                    'Get-EZComputerManufacturer','Get-EZComputerModel','Get-EZComputerSerialNumber',
+                    'Get-OSD','Get-OSDClass','Get-OSDDriver','Get-OSDDriverWmiQ','Get-OSDGather','Get-OSDPower','Get-OSDWinPE',
                     'Get-RegCurrentVersion',
                     'Get-SessionsXml',
-                    'New-EZWindowsImageFFU','Get-EZComputerManufacturer','Get-EZComputerModel','Get-EZComputerSerialNumber',
-                    'Dismount-WindowsImageOSD','Edit-WindowsImageOSD','Mount-WindowsImageOSD','Update-WindowsImageOSD',
-                    'Initialize-DiskOSD','New-OSDDisk',
-                    'New-PartitionOSDSystem','New-PartitionOSDRecovery','New-PartitionOSDWindows',
+                    'Initialize-DiskOSD',
+                    'Mount-WindowsImageOSD',
+                    'New-OSDDisk',
+                    'New-PartitionOSDSystem',
+                    'New-PartitionOSDRecovery',
+                    'New-PartitionOSDWindows',
                     'Remove-AppxOnline',
-                    'Save-OSDDownload'
+                    'Save-OSDDownload',
+                    'Update-WindowsImageOSD'
 
 # Cmdlets to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no cmdlets to export.
 CmdletsToExport = @()
