@@ -7,7 +7,7 @@
 RootModule = 'OSD.psm1'
 
 # Version number of his module.
-ModuleVersion = '21.1.30.2'
+ModuleVersion = '21.1.30.3'
 
 # Supported PSEditions
 # CompatiblePSEditions = @()
@@ -75,21 +75,6 @@ FunctionsToExport =     #Appx
                         'Edit-WindowsImageOSD',
                         'Mount-WindowsImageOSD',
                         'Update-WindowsImageOSD',
-                        #PowerShellGet
-                        'Copy-Module',
-                        #Storage
-                        'Get-DiskIsBoot',
-                        'Get-DiskIsSystem',
-                        'Get-DiskToBackup',
-                        'Initialize-DiskOSD',
-                        'New-OSDDisk',
-                        'New-PartitionOSDSystem',
-                        'New-PartitionOSDRecovery',
-                        'New-PartitionOSDWindows',
-                        #SystemInformation
-                        'Get-EZComputerManufacturer',
-                        'Get-EZComputerModel',
-                        'Get-EZComputerSerialNumber',
                         #Other
                         'Get-OSD',
                         'Get-OSDClass',
@@ -100,7 +85,21 @@ FunctionsToExport =     #Appx
                         'Get-OSDWinPE',
                         'Get-RegCurrentVersion',
                         'Get-SessionsXml',
-                        'Save-OSDDownload'
+                        'Save-OSDDownload',
+                        #PowerShellGet
+                        'Copy-Module',
+                        #Storage
+                        'Get-DiskIsBoot',
+                        'Get-DiskIsSystem',
+                        'Get-DiskToBackup',
+                        'Initialize-DiskOSD',
+                        'New-OSDDisk',
+                        'New-PartitionOSDSystem',
+                        'New-PartitionOSDWindows',
+                        #SystemInformation
+                        'Get-EZComputerManufacturer',
+                        'Get-EZComputerModel',
+                        'Get-EZComputerSerialNumber'
 
 # Cmdlets to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no cmdlets to export.
 CmdletsToExport = @()

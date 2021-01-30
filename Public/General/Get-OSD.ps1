@@ -54,29 +54,17 @@ function Get-OSD {
     Write-Host -ForegroundColor White       'Remove-AppxOnline          ' -NoNewline
     Write-Host -ForegroundColor Gray        'Removes Appx Packages and Appx Provisioned Packages for All Users'
     Write-Host -ForegroundColor DarkCyan    '================================================================================================================='
+    Write-Host -ForegroundColor Cyan        'Backup Functions'
+    Write-Host -ForegroundColor Yellow      'Backup-DiskToFFU           ' -NoNewline
+    Write-Host -ForegroundColor Gray        'Captures a Windows Image FFU to a secondary drive'
+    Write-Host -ForegroundColor DarkCyan    '================================================================================================================='
     Write-Host -ForegroundColor Cyan        'Driver Functions'
     Write-Host -ForegroundColor White       'Get-OSDDriver              ' -NoNewline
     Write-Host -ForegroundColor Gray        'Returns Driver download links for Amd Dell Hp Intel and Nvidia'
     Write-Host -ForegroundColor White       'Get-OSDDriverWmiQ          ' -NoNewline
     Write-Host -ForegroundColor Gray        'Select multiple Dell or HP Computer Models to generate a proper Task Sequence WMI Query'
     Write-Host -ForegroundColor DarkCyan    '================================================================================================================='
-    Write-Host -ForegroundColor Cyan        'Disk Functions'
-    Write-Host -ForegroundColor White       'New-OSDDisk                ' -NoNewline
-    Write-Host -ForegroundColor Gray        'Creates System | OS | Recovery Partitions for MBR or UEFI Drives in WinPE'
-    Write-Host -ForegroundColor White       'Initialize-DiskOSD         ' -NoNewline
-    Write-Host -ForegroundColor Gray        'Initializes a Disk'
-    Write-Host -ForegroundColor White       'New-PartitionOSDSystem     ' -NoNewline
-    Write-Host -ForegroundColor Gray        'Creates a SYSTEM Partition'
-    Write-Host -ForegroundColor White       'New-PartitionOSDWindows    ' -NoNewline
-    Write-Host -ForegroundColor Gray        'Creates a WINDOWS Partition'
-    Write-Host -ForegroundColor Yellow      'Get-DiskIsBoot             ' -NoNewline
-    Write-Host -ForegroundColor Gray        'Gets the Disk containing the BOOT partition'
-    Write-Host -ForegroundColor Yellow      'Get-DiskIsSystem           ' -NoNewline
-    Write-Host -ForegroundColor Gray        'Gets the Disk containing the SYSTEM partition'
-    Write-Host -ForegroundColor Yellow      'Get-DiskToBackup           ' -NoNewline
-    Write-Host -ForegroundColor Gray        'Gets Disks that can be backed up'
-    Write-Host -ForegroundColor DarkCyan    '================================================================================================================='
-    Write-Host -ForegroundColor Cyan        'WindowsImage Functions'
+    Write-Host -ForegroundColor Cyan        'Dism Functions'
     Write-Host -ForegroundColor White       'Mount-WindowsImageOSD      ' -NoNewline
     Write-Host -ForegroundColor Gray        'Give it a WIM, let it mount it'
     Write-Host -ForegroundColor White       'Edit-WindowsImageOSD       ' -NoNewline
@@ -86,17 +74,33 @@ function Get-OSD {
     Write-Host -ForegroundColor White       'Dismount-WindowsImageOSD   ' -NoNewline
     Write-Host -ForegroundColor Gray        'Dismounts WIM by Mounted Path, or all WIMs if no Path is specified'
     Write-Host -ForegroundColor DarkCyan    '================================================================================================================='
-    Write-Host -ForegroundColor Cyan        'EZ Functions'
+    Write-Host -ForegroundColor Cyan        'PowerShellGet Functions'
+    Write-Host -ForegroundColor Yellow      'Copy-Module                ' -NoNewline
+    Write-Host -ForegroundColor Gray        'Copies a PowerShell Module to a specified Destination'
+    Write-Host -ForegroundColor DarkCyan    '================================================================================================================='
+    Write-Host -ForegroundColor Cyan        'Storage Functions'
+    Write-Host -ForegroundColor Yellow      'Get-DiskIsBoot             ' -NoNewline
+    Write-Host -ForegroundColor Gray        'Gets the Disk containing the BOOT partition'
+    Write-Host -ForegroundColor Yellow      'Get-DiskIsSystem           ' -NoNewline
+    Write-Host -ForegroundColor Gray        'Gets the Disk containing the SYSTEM partition'
+    Write-Host -ForegroundColor Yellow      'Get-DiskToBackup           ' -NoNewline
+    Write-Host -ForegroundColor Gray        'Gets Disks that can be backed up'
+    Write-Host -ForegroundColor White       'Initialize-DiskOSD         ' -NoNewline
+    Write-Host -ForegroundColor Gray        'Initializes a Disk'
+    Write-Host -ForegroundColor White       'New-OSDDisk                ' -NoNewline
+    Write-Host -ForegroundColor Gray        'Creates System | OS | Recovery Partitions for MBR or UEFI Drives in WinPE'
+    Write-Host -ForegroundColor White       'New-PartitionOSDSystem     ' -NoNewline
+    Write-Host -ForegroundColor Gray        'Creates a SYSTEM Partition'
+    Write-Host -ForegroundColor White       'New-PartitionOSDWindows    ' -NoNewline
+    Write-Host -ForegroundColor Gray        'Creates a WINDOWS Partition'
+    Write-Host -ForegroundColor DarkCyan    '================================================================================================================='
+    Write-Host -ForegroundColor Cyan        'SystemInformation Functions'
     Write-Host -ForegroundColor Yellow      'Get-EZComputerManufacturer ' -NoNewline
     Write-Host -ForegroundColor Gray        'Returns a simple Computer Manufacturer'
     Write-Host -ForegroundColor Yellow      'Get-EZComputerModel        ' -NoNewline
     Write-Host -ForegroundColor Gray        'Returns a Computer Model'
     Write-Host -ForegroundColor Yellow      'Get-EZComputerSerialNumber ' -NoNewline
     Write-Host -ForegroundColor Gray        'Returns the Computer Serial Number'
-    Write-Host -ForegroundColor DarkCyan    '================================================================================================================='
-    Write-Host -ForegroundColor Cyan        'Backup Functions'
-    Write-Host -ForegroundColor Yellow      'Backup-DiskToFFU           ' -NoNewline
-    Write-Host -ForegroundColor Gray        'Captures a Windows Image FFU to a secondary drive'
     Write-Host -ForegroundColor DarkCyan    '================================================================================================================='
     Write-Host -ForegroundColor Yellow      'Update-Module OSD -Force   ' -NoNewline
     Write-Host -ForegroundColor Cyan        'Update the OSD Module'

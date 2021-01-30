@@ -1,9 +1,9 @@
 <#
 .SYNOPSIS
-Get-Module and copy the ModuleBase to a new PSModulePath
+Get-Module and copy the ModuleBase to a new Destination\ModuleBase
 
 .DESCRIPTION
-Get-Module and copy the ModuleBase to a new PSModulePath
+Get-Module and copy the ModuleBase to a new Destination\ModuleBase
 
 .LINK
 https://osd.osdeploy.com/module/functions/powershellget/copy-module
@@ -11,34 +11,39 @@ https://osd.osdeploy.com/module/functions/powershellget/copy-module
 .NOTES
 21.1.30.1   Initial Release
 21.1.30.2   Added WinPE Parameter
-#>function Copy-Module {
+21.1.30.3   Renamed PSModulePath Parameter to Destination, Added RemoveOldVersions
+#>
+function Copy-Module {
     [CmdletBinding()]
     Param (
-        #Name of the Module to Copy
+        #Name of the PowerShell Module to Copy
         [Parameter(
-            Mandatory = $true,
-            Position = 0,
-            ValueFromPipelineByPropertyName = $true
+            Position=0,
+            Mandatory=$true,
+            ValueFromPipelineByPropertyName=$true
         )]
         [SupportsWildcards()]
         [String[]]$Name,
 
-        #Destination PSModule root directory
-        #Module directory is copied as a Child
+        #Destination PSModule directory
+        #Copied Module is a Child of Destination
         [Parameter(
-            Mandatory = $true,
-            Position = 1,
-            ValueFromPipelineByPropertyName = $true
+            Position=1,
+            Mandatory=$true,
+            ValueFromPipelineByPropertyName=$true
         )]
-        [String]$PSModulePath,
+        [String]$Destination,
+
+        #Removes older Module Versions from the Destination
+        [switch]$RemoveOldVersions=$false,
 
         #Removes destination Version from copied directories
-        #Compatible with WinPE
-        [switch]$WinPE
+        #for compatibility with WinPE
+        [switch]$WinPE=$false
     )
 
     begin {
-        Write-Verbose "PSModulePath: $PSModulePath"
+        Write-Verbose "Destination: $Destination"
     }
     process {
         foreach ($Item in $Name) {
@@ -59,27 +64,38 @@ https://osd.osdeploy.com/module/functions/powershellget/copy-module
                 Write-Verbose "Module ModuleBase: $($Module.ModuleBase)"
 
                 #Get the Path to the Destination Module
-                $Destination = Join-Path -Path $PSModulePath -ChildPath $Module.Name
+                $DestinationModule = Join-Path -Path $Destination -ChildPath $Module.Name
 
-                if ($WinPE) {
-                    if (Test-Path $Destination) {
-                        Write-Warning "Destination exists at '$Destination'.  Content will be overwritten"
-                        Write-Warning "Removing $Destination"
-                        Remove-Item -Path $Destination -Recurse -Force -ErrorAction Stop
+                #If WinPE or RemoveOldVersions
+                if (($WinPE -eq $true) -or ($RemoveOldVersions -eq $true)) {
+                    if (Test-Path $DestinationModule) {
+                        Write-Warning "Destination Module exists at '$DestinationModule'.  Content will be replaced"
+                        Write-Warning "Removing $DestinationModule"
+                        Remove-Item -Path $DestinationModule -Recurse -Force -ErrorAction Stop
                     }
-                } else {
-                    if (Test-Path "$Destination\*.psd1") {
-                        Write-Warning "Destination contains a Manifest in '$Destination'.  Content will be overwritten"
-                        Write-Warning "Removing $Destination"
-                        Remove-Item -Path $Destination -Recurse -Force -ErrorAction Stop
+                }
+
+                if ($WinPE -eq $false) {
+                    #Destination is in the WinPE Format
+                    if (Test-Path "$DestinationModule\*.psd1") {
+                        Write-Warning "Destination Module contains a Manifest in '$DestinationModule'.  Content will be replaced"
+                        Write-Warning "Removing $DestinationModule"
+                        Remove-Item -Path $DestinationModule -Recurse -Force -ErrorAction Stop
                     }
-                    $Destination = Join-Path -Path $PSModulePath -ChildPath (Join-Path -Path $Module.Name -ChildPath $Module.Version)
+                    
+                    #Destination is set to the Windows Format with Version in the Destination
+                    $DestinationModule = Join-Path -Path $DestinationModule -ChildPath $Module.Version
+                    if (Test-Path $DestinationModule) {
+                        Write-Warning "Destination Module exists at '$DestinationModule'.  Content will be replaced"
+                        Write-Warning "Removing $DestinationModule"
+                        Remove-Item -Path $DestinationModule -Recurse -Force -ErrorAction Stop
+                    }
                 }
 
                 #Copy to the Destination
-                Write-Verbose "Copying '$($Module.ModuleBase)' to $Destination"
-                Copy-Item -Path $Module.ModuleBase -Destination $Destination -Recurse -Force -ErrorAction Stop
-                Get-Module -ListAvailable -FullyQualifiedName $Destination
+                Write-Verbose "Copying '$($Module.ModuleBase)' to $DestinationModule"
+                Copy-Item -Path $Module.ModuleBase -Destination $DestinationModule -Recurse -Force -ErrorAction Stop
+                Get-Module -ListAvailable -FullyQualifiedName $DestinationModule
             }
         }
     }
