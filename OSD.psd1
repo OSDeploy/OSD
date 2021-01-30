@@ -7,7 +7,7 @@
 RootModule = 'OSD.psm1'
 
 # Version number of his module.
-ModuleVersion = '21.1.29.1'
+ModuleVersion = '21.1.30.1'
 
 # Supported PSEditions
 # CompatiblePSEditions = @()
@@ -66,22 +66,41 @@ PowerShellVersion = '5.0'
 # NestedModules = @()
 
 # Functions to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no functions to export.
-FunctionsToExport = 'Backup-DiskToFFU',
-                    'Dismount-WindowsImageOSD','Edit-WindowsImageOSD',
-                    'Get-DiskIsBoot','Get-DiskIsSystem','Get-DiskToBackup',
-                    'Get-EZComputerManufacturer','Get-EZComputerModel','Get-EZComputerSerialNumber',
-                    'Get-OSD','Get-OSDClass','Get-OSDDriver','Get-OSDDriverWmiQ','Get-OSDGather','Get-OSDPower','Get-OSDWinPE',
-                    'Get-RegCurrentVersion',
-                    'Get-SessionsXml',
-                    'Initialize-DiskOSD',
-                    'Mount-WindowsImageOSD',
-                    'New-OSDDisk',
-                    'New-PartitionOSDSystem',
-                    'New-PartitionOSDRecovery',
-                    'New-PartitionOSDWindows',
-                    'Remove-AppxOnline',
-                    'Save-OSDDownload',
-                    'Update-WindowsImageOSD'
+FunctionsToExport =     #Appx
+                        'Remove-AppxOnline',
+                        #Backup
+                        'Backup-DiskToFFU',
+                        #Dism
+                        'Dismount-WindowsImageOSD',
+                        'Edit-WindowsImageOSD',
+                        'Mount-WindowsImageOSD',
+                        'Update-WindowsImageOSD',
+                        #PowerShellGet
+                        'Copy-Module',
+                        #Storage
+                        'Get-DiskIsBoot',
+                        'Get-DiskIsSystem',
+                        'Get-DiskToBackup',
+                        'Initialize-DiskOSD',
+                        'New-OSDDisk',
+                        'New-PartitionOSDSystem',
+                        'New-PartitionOSDRecovery',
+                        'New-PartitionOSDWindows',
+                        #SystemInformation
+                        'Get-EZComputerManufacturer',
+                        'Get-EZComputerModel',
+                        'Get-EZComputerSerialNumber',
+                        #Other
+                        'Get-OSD',
+                        'Get-OSDClass',
+                        'Get-OSDDriver',
+                        'Get-OSDDriverWmiQ',
+                        'Get-OSDGather',
+                        'Get-OSDPower',
+                        'Get-OSDWinPE',
+                        'Get-RegCurrentVersion',
+                        'Get-SessionsXml',
+                        'Save-OSDDownload'
 
 # Cmdlets to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no cmdlets to export.
 CmdletsToExport = @()
