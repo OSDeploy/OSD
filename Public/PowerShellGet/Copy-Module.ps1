@@ -9,7 +9,8 @@ Get-Module and copy the ModuleBase to a new PSModulePath
 https://osd.osdeploy.com/module/functions/powershellget/copy-module
 
 .NOTES
-21.1.30    Initial Release
+21.1.30.1   Initial Release
+21.1.30.2   Added WinPE Parameter
 #>function Copy-Module {
     [CmdletBinding()]
     Param (
@@ -23,12 +24,17 @@ https://osd.osdeploy.com/module/functions/powershellget/copy-module
         [String[]]$Name,
 
         #Destination PSModule root directory
+        #Module directory is copied as a Child
         [Parameter(
             Mandatory = $true,
             Position = 1,
             ValueFromPipelineByPropertyName = $true
         )]
-        [String]$PSModulePath
+        [String]$PSModulePath,
+
+        #Removes destination Version from copied directories
+        #Compatible with WinPE
+        [switch]$WinPE
     )
 
     begin {
@@ -55,12 +61,19 @@ https://osd.osdeploy.com/module/functions/powershellget/copy-module
                 #Get the Path to the Destination Module
                 $Destination = Join-Path -Path $PSModulePath -ChildPath $Module.Name
 
-                if (Test-Path $Destination) {
-                    Write-Warning "Destination exists at '$Destination'.  Content will be overwritten"
-                    Write-Warning "Removing $Destination"
-                    Remove-Item -Path $Destination -Recurse -Force -ErrorAction Stop
+                if ($WinPE) {
+                    if (Test-Path $Destination) {
+                        Write-Warning "Destination exists at '$Destination'.  Content will be overwritten"
+                        Write-Warning "Removing $Destination"
+                        Remove-Item -Path $Destination -Recurse -Force -ErrorAction Stop
+                    }
                 } else {
-                    Write-Verbose "CopyModuleBase: $Destination"
+                    if (Test-Path "$Destination\*.psd1") {
+                        Write-Warning "Destination contains a Manifest in '$Destination'.  Content will be overwritten"
+                        Write-Warning "Removing $Destination"
+                        Remove-Item -Path $Destination -Recurse -Force -ErrorAction Stop
+                    }
+                    $Destination = Join-Path -Path $PSModulePath -ChildPath (Join-Path -Path $Module.Name -ChildPath $Module.Version)
                 }
 
                 #Copy to the Destination
