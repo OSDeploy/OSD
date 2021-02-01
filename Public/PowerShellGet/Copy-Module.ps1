@@ -12,6 +12,7 @@ https://osd.osdeploy.com/module/functions/powershellget/copy-module
 21.1.30.1   Initial Release
 21.1.30.2   Added WinPE Parameter
 21.1.30.3   Renamed PSModulePath Parameter to Destination, Added RemoveOldVersions
+21.1.31.1   Removed WinPE Parameter
 #>
 function Copy-Module {
     [CmdletBinding()]
@@ -35,11 +36,7 @@ function Copy-Module {
         [String]$Destination,
 
         #Removes older Module Versions from the Destination
-        [switch]$RemoveOldVersions=$false,
-
-        #Removes destination Version from copied directories
-        #for compatibility with WinPE
-        [switch]$WinPE=$false
+        [switch]$RemoveOldVersions=$false
     )
 
     begin {
@@ -66,36 +63,33 @@ function Copy-Module {
                 #Get the Path to the Destination Module
                 $DestinationModule = Join-Path -Path $Destination -ChildPath $Module.Name
 
-                #If WinPE or RemoveOldVersions
-                if (($WinPE -eq $true) -or ($RemoveOldVersions -eq $true)) {
+                #If RemoveOldVersions
+                if ($RemoveOldVersions -eq $true) {
                     if (Test-Path $DestinationModule) {
-                        Write-Warning "Destination Module exists at '$DestinationModule'.  Content will be replaced"
                         Write-Warning "Removing $DestinationModule"
                         Remove-Item -Path $DestinationModule -Recurse -Force -ErrorAction Stop
                     }
                 }
 
-                if ($WinPE -eq $false) {
-                    #Destination is in the WinPE Format
-                    if (Test-Path "$DestinationModule\*.psd1") {
-                        Write-Warning "Destination Module contains a Manifest in '$DestinationModule'.  Content will be replaced"
-                        Write-Warning "Removing $DestinationModule"
-                        Remove-Item -Path $DestinationModule -Recurse -Force -ErrorAction Stop
-                    }
-                    
-                    #Destination is set to the Windows Format with Version in the Destination
-                    $DestinationModule = Join-Path -Path $DestinationModule -ChildPath $Module.Version
-                    if (Test-Path $DestinationModule) {
-                        Write-Warning "Destination Module exists at '$DestinationModule'.  Content will be replaced"
-                        Write-Warning "Removing $DestinationModule"
-                        Remove-Item -Path $DestinationModule -Recurse -Force -ErrorAction Stop
-                    }
+                #Remove Module if PSD1 is not in a Version subdirectory
+                if (Test-Path "$DestinationModule\*.psd1") {
+                    Write-Warning "Destination Module contains a Manifest in '$DestinationModule'.  Content will be replaced"
+                    Write-Warning "Removing $DestinationModule"
+                    Remove-Item -Path $DestinationModule -Recurse -Force -ErrorAction Stop
+                }
+                
+                #Destination is set to the Windows Format with Version in the Destination
+                $DestinationModuleVersion = Join-Path -Path $DestinationModule -ChildPath $Module.Version
+                if (Test-Path $DestinationModuleVersion) {
+                    Write-Warning "Destination Module exists at '$DestinationModuleVersion'.  Content will be replaced"
+                    Write-Warning "Removing $DestinationModuleVersion"
+                    Remove-Item -Path $DestinationModuleVersion -Recurse -Force -ErrorAction Stop
                 }
 
                 #Copy to the Destination
-                Write-Verbose "Copying '$($Module.ModuleBase)' to $DestinationModule"
-                Copy-Item -Path $Module.ModuleBase -Destination $DestinationModule -Recurse -Force -ErrorAction Stop
-                Get-Module -ListAvailable -FullyQualifiedName $DestinationModule
+                Write-Verbose "Copying '$($Module.ModuleBase)' to $DestinationModuleVersion"
+                Copy-Item -Path $Module.ModuleBase -Destination $DestinationModuleVersion -Recurse -Force -ErrorAction Stop
+                Get-Module -ListAvailable -FullyQualifiedName $DestinationModuleVersion
             }
         }
     }

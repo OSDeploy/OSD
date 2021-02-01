@@ -1,0 +1,29 @@
+;==================================================================================================
+;   David Segura
+;   https://www.osdeploy.com
+;==================================================================================================
+;   Send LM & NTLM - use NTLMv2 session security if negotiated
+;   Default is Send NTLMv2 responses only
+;   https://docs.microsoft.com/en-us/windows/security/threat-protection/security-policy-settings/network-security-lan-manager-authentication-level
+;==================================================================================================
+;   Compatibility: WinPE 10 x86 and x64
+;==================================================================================================
+[Version]
+Signature   = "$WINDOWS NT$"
+Class       = System
+ClassGuid   = {4D36E97d-E325-11CE-BFC1-08002BE10318}
+Provider    = OSDeploy
+DriverVer   = 10/19/2018,2018.10.19.0
+
+[DefaultInstall] 
+AddReg      = AddReg 
+
+[AddReg]
+;rootkey,[subkey],[value],[flags],[data]
+;0x00000    REG_SZ
+;0x00001    REG_BINARY
+;0x10000    REG_MULTI_SZ
+;0x20000    REG_EXPAND_SZ
+;0x10001    REG_DWORD
+;0x20001    REG_NONE
+HKLM,SYSTEM\CurrentControlSet\Control\Lsa,LmCompatibilityLevel,0x10001,1
