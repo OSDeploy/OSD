@@ -1,3 +1,16 @@
+<#
+.SYNOPSIS
+Gets the Disk containing the SYSTEM partition
+
+.DESCRIPTION
+Gets the Disk containing the SYSTEM partition
+
+.LINK
+https://osd.osdeploy.com/module/functions/storage/get-diskissystem
+
+.NOTES
+19.12.9    Created by David Segura @SeguraOSD
+#>
 function Get-DiskIsSystem {
     [CmdletBinding()]
     Param ()

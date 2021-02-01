@@ -6,7 +6,7 @@ Initializes any RAW Disks.  Automatically selects GPT or MBR
 Initializes any RAW Disks.  Automatically selects GPT or MBR
 
 .LINK
-https://osd.osdeploy.com/module/functions/initialize-diskosd
+https://osd.osdeploy.com/module/functions/storage/initialize-diskosd
 
 .NOTES
 19.12.9    Created by David Segura @SeguraOSD

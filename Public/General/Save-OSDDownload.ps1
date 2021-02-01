@@ -6,7 +6,7 @@ Downloads a file from the internet
 Downloads a file from the internet.  Success returns $true
 
 .LINK
-https://osd.osdeploy.com/module/functions/save-osddownload
+https://osd.osdeploy.com/module/functions/general/save-osddownload
 
 .NOTES
 19.10.25 David Segura @SeguraOSD

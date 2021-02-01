@@ -6,7 +6,7 @@ Returns the Computer SerialNumber
 Returns the Computer SerialNumber
 
 .LINK
-https://osd.osdeploy.com/module/functions/get-ezcomputerserialnumber
+https://osd.osdeploy.com/module/functions/system-information/get-ezcomputerserialnumber
 
 .NOTES
 21.1.28    Initial Release

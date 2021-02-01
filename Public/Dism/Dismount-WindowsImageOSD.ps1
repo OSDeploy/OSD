@@ -6,7 +6,7 @@ Dismounts a Windows image from the directory it is mapped to.
 The Dismount-WindowsImage cmdlet either saves or discards the changes to a Windows image and then dismounts the image.
 
 .LINK
-https://osd.osdeploy.com/module/functions/dismount-windowsimageosd
+https://osd.osdeploy.com/module/functions/dism/dismount-windowsimageosd
 
 .NOTES
 19.11.21 David Segura @SeguraOSD
@@ -48,7 +48,7 @@ function Dismount-WindowsImageOSD {
             #   Path
             #===================================================================================================
             $MountPath = (Get-Item -Path $Input | Select-Object FullName).FullName
-            Write-Verbose "Path: $MountPath" -Verbose
+            Write-Verbose "Path: $MountPath"
             #===================================================================================================
             #   Validate Mount Path
             #===================================================================================================

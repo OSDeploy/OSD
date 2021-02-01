@@ -1,3 +1,16 @@
+<#
+.SYNOPSIS
+Gets Disks that can be backed up
+
+.DESCRIPTION
+Gets Disks that can be backed up
+
+.LINK
+https://osd.osdeploy.com/module/functions/storage/get-disktobackup
+
+.NOTES
+19.12.9    Created by David Segura @SeguraOSD
+#>
 function Get-DiskToBackup {
     [CmdletBinding()]
     Param ()

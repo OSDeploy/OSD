@@ -6,7 +6,7 @@ Edits a mounted Windows Image
 Edits a mounted Windows Image
 
 .LINK
-https://osd.osdeploy.com/module/functions/edit-windowsimage
+https://osd.osdeploy.com/module/functions/dism/edit-windowsimageosd
 
 .NOTES
 19.11.22 David Segura @SeguraOSD

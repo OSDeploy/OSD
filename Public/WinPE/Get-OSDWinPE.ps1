@@ -6,7 +6,7 @@ Common WinPE Commands using wpeutil and Microsoft DaRT RemoteRecovery
 Common WinPE Commands using wpeutil and Microsoft DaRT RemoteRecovery
 
 .LINK
-https://osd.osdeploy.com/module/functions/get-osdwinpe
+https://osd.osdeploy.com/module/functions/winpe/get-osdwinpe
 
 .NOTES
 19.10.1     David Segura @SeguraOSD

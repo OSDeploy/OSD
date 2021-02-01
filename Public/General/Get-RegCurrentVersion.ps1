@@ -6,7 +6,7 @@ Returns the Registry Key values from HKLM:\SOFTWARE\Microsoft\Windows NT\Current
 Returns the Registry Key values from HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion for Online and Offline Windows Images
 
 .LINK
-https://osd.osdeploy.com/module/functions/get-regcurrentversion
+https://osd.osdeploy.com/module/functions/general/get-regcurrentversion
 
 .NOTES
 19.11.20    Added Pipeline Support

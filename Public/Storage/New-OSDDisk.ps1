@@ -6,7 +6,7 @@ Creates System | OS | Recovery Partitions for MBR or UEFI Drives in WinPE
 Creates System | OS | Recovery Partitions for MBR or UEFI Drives in WinPE
 
 .LINK
-https://osd.osdeploy.com/module/functions/new-osddisk
+https://osd.osdeploy.com/module/functions/storage/new-osddisk
 
 .NOTES
 19.10.10     Created by David Segura @SeguraOSD

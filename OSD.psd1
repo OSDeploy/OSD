@@ -7,7 +7,7 @@
 RootModule = 'OSD.psm1'
 
 # Version number of his module.
-ModuleVersion = '21.1.31.1'
+ModuleVersion = '21.2.1.1'
 
 # Supported PSEditions
 # CompatiblePSEditions = @()
@@ -74,6 +74,8 @@ FunctionsToExport =     #Appx
                         'Dismount-WindowsImageOSD',
                         'Edit-WindowsImageOSD',
                         'Mount-WindowsImageOSD',
+                        "Set-WIMExecutionPolicy",
+                        "Set-WindowsImageExecutionPolicy",
                         'Update-WindowsImageOSD',
                         #DisRes
                         'Get-VidConRes',

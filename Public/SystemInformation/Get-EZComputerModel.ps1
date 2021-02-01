@@ -6,7 +6,7 @@ Returns the Computer Model
 Returns the Computer Model
 
 .LINK
-https://osd.osdeploy.com/module/functions/get-ezcomputermodel
+https://osd.osdeploy.com/module/functions/system-information/get-ezcomputermodel
 
 .NOTES
 21.1.28    Initial Release

@@ -1,3 +1,16 @@
+<#
+.SYNOPSIS
+Gets the Disk containing the BOOT partition
+
+.DESCRIPTION
+Gets the Disk containing the BOOT partition
+
+.LINK
+https://osd.osdeploy.com/module/functions/storage/get-diskisboot
+
+.NOTES
+19.12.9    Created by David Segura @SeguraOSD
+#>
 function Get-DiskIsBoot {
     [CmdletBinding()]
     Param ()

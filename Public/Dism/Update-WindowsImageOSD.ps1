@@ -6,7 +6,7 @@ Updates a mounted WIM
 Updates a mounted WIM files.  Requires OSDSUS Catalog
 
 .LINK
-https://osd.osdeploy.com/module/functions/update-windowsimageosd
+https://osd.osdeploy.com/module/functions/dism/update-windowsimageosd
 
 .NOTES
 19.11.19 David Segura @SeguraOSD

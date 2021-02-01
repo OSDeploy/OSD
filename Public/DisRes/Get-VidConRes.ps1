@@ -1,3 +1,16 @@
+<#
+.SYNOPSIS
+Returns the CIM_VideoControllerResolution Properties
+
+.DESCRIPTION
+Returns the CIM_VideoControllerResolution Properties
+
+.LINK
+https://osd.osdeploy.com/module/functions/disres/get-vidconres
+
+.NOTES
+21.2.1  Initial Release
+#>
 function Get-VidConRes {
     [CmdletBinding()]
     Param (

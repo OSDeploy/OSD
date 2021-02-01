@@ -13,7 +13,7 @@ Option 2: Get-OSDClass ComputerSystem
 Option 3: Get-OSDClass -Class ComputerSystem
 
 .LINK
-https://osd.osdeploy.com/module/functions/get-osdclass
+https://osd.osdeploy.com/module/functions/general/get-osdclass
 
 .NOTES
 19.10.1     David Segura @SeguraOSD

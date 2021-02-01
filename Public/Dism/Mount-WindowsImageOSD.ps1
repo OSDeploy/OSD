@@ -6,28 +6,38 @@ Mounts a WIM file
 Mounts a WIM file automatically selecting the Path and the Index
 
 .LINK
-https://osd.osdeploy.com/module/functions/mount-windowsimageosd
+https://osd.osdeploy.com/module/functions/dism/mount-windowsimageosd
 
 .NOTES
 19.11.21 David Segura @SeguraOSD
 #>
 function Mount-WindowsImageOSD {
     [CmdletBinding()]
-    Param ( 
-        #Specifies the full path to the root directory of the offline Windows image that you will service.
-        [Parameter(Position = 0, Mandatory = $true, ValueFromPipelineByPropertyName)]
+    Param (
+        #Specifies the location of the WIM or VHD file containing the Windows image you want to mount.
+        [Parameter(
+            Position = 0,
+            Mandatory = $true,
+            ValueFromPipelineByPropertyName
+        )]
         [string[]]$ImagePath,
 
         #Index of the WIM to Mount
-        [Parameter(ValueFromPipelineByPropertyName)]
+        [Parameter(
+            ValueFromPipelineByPropertyName
+        )]
         [UInt32]$Index = 1,
 
         #Mount the WIM as Read Only
-        [Parameter(ValueFromPipelineByPropertyName)]
+        [Parameter(
+            ValueFromPipelineByPropertyName
+        )]
         [switch]$ReadOnly,
 
         #Opens the Path in Windows Explorer
-        [Parameter(ValueFromPipelineByPropertyName)]
+        [Parameter(
+            ValueFromPipelineByPropertyName
+        )]
         [switch]$Explorer
     )
 
@@ -36,7 +46,7 @@ function Mount-WindowsImageOSD {
         #   Require Admin Rights
         #===================================================================================================
         if ((Get-OSDGather -Property IsAdmin) -eq $false) {
-            Write-Warning 'Mount-WindowsImageOSD: This function requires Admin Rights ELEVATED'
+            Write-Warning 'This function requires Admin Rights ELEVATED'
             Break
         }
     }
@@ -45,13 +55,13 @@ function Mount-WindowsImageOSD {
             #===================================================================================================
             #   ImagePath
             #===================================================================================================
-            Write-Verbose "ImagePath: $Input" -Verbose
-            Write-Verbose "Index: $Index" -Verbose
+            Write-Verbose "ImagePath: $Input"
+            Write-Verbose "Index: $Index"
             #===================================================================================================
             #   Validate File
             #===================================================================================================
             if (-not (Test-Path $Input -ErrorAction SilentlyContinue)) {
-                Write-Warning "Mount-WindowsImageOSD: Unable to locate WindowsImage at $Input"
+                Write-Warning "Unable to locate WindowsImage at $Input"
                 Break
             }
             #===================================================================================================
@@ -59,18 +69,20 @@ function Mount-WindowsImageOSD {
             #===================================================================================================
             $WindowsImageOSD = Get-Item $Input
             if ($WindowsImageOSD.Extension -ne '.wim') {
-                Write-Warning "Mount-WindowsImageOSD: WindowsImage does not have a .wim extension"
+                Write-Warning "WindowsImage does not have a .wim extension"
                 Break
             }
             if ($WindowsImageOSD.IsReadOnly -eq $true) {
-                Write-Warning "Mount-WindowsImageOSD: WindowsImage is Read Only"
+                Write-Warning "WindowsImage is Read Only"
                 Break
             }
             #===================================================================================================
             #   Set Mount Path
             #===================================================================================================
             $OSDMountPath = $env:Temp + '\OSD' + (Get-Random)
-            if (! (Test-Path $OSDMountPath)) {New-Item $OSDMountPath -ItemType Directory -Force | Out-Null}
+            if (! (Test-Path $OSDMountPath)) {
+                New-Item $OSDMountPath -ItemType Directory -Force | Out-Null
+            }
             $Path = (Get-Item $OSDMountPath).FullName
             #===================================================================================================
             #   Mount-WindowsImage

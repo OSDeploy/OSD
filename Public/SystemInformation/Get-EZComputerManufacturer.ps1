@@ -6,7 +6,7 @@ Returns the Computer Manufacturer
 Returns the Computer Manufacturer
 
 .LINK
-https://osd.osdeploy.com/module/functions/get-ezcomputermanufacturer
+https://osd.osdeploy.com/module/functions/system-information/get-ezcomputermanufacturer
 
 .NOTES
 21.1.28    Initial Release
