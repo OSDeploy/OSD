@@ -214,9 +214,9 @@ function Get-ScreenPNG {
                 }
 
                 if ($Device.Primary -eq $true) {
-                    $GetDisplayPrimaryPhysical = Get-DisplayPrimaryPhysical
-                    #Write-Verbose "Width: $($GetDisplayPrimaryPhysical.Width)" -Verbose
-                    #Write-Verbose "Height: $($GetDisplayPrimaryPhysical.Height)" -Verbose
+                    $GetDisplayPrimaryBitmapSize = Get-DisplayPrimaryBitmapSize
+                    #Write-Verbose "Width: $($GetDisplayPrimaryBitmapSize.Width)" -Verbose
+                    #Write-Verbose "Height: $($GetDisplayPrimaryBitmapSize.Height)" -Verbose
                     $ScreenShotBitmap = New-SystemDrawingBitmapPrimary
                     $ScreenShotGraphics = New-SSGraphics
                     #Write-Verbose "X: $($GetDisplayVirtualScreen.X)" -Verbose

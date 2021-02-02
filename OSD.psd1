@@ -78,12 +78,12 @@ FunctionsToExport =     #Appx
                         "Set-WindowsImageExecutionPolicy",
                         'Update-WindowsImageOSD',
                         #Display
+                        'Get-CIMVideoControllerResolution',
                         'Get-DisplayAllScreens',
                         'Get-DisplayPrimaryMonitorSize',
-                        'Get-DisplayPrimaryPhysical',
+                        'Get-DisplayPrimaryBitmapSize',
                         'Get-DisplayPrimaryScaling',
                         'Get-DisplayVirtualScreen',
-                        'Get-VideoControllerResololution',
                         'Set-DisRes',
                         #General
                         'Get-OSD',
@@ -97,7 +97,7 @@ FunctionsToExport =     #Appx
                         'Get-SessionsXml',
                         'Save-OSDDownload',
                         #PowerShellGet
-                        'Copy-Module',
+                        'Copy-ModuleOSD',
                         #SS
                         'Get-ScreenPNG',
                         'Save-ClipboardImage',

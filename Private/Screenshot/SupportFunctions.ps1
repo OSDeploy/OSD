@@ -2,7 +2,7 @@ function New-SystemDrawingBitmapPrimary {
     [CmdletBinding()]
     Param ()
     
-    Return New-Object System.Drawing.Bitmap $GetDisplayPrimaryPhysical.Width, $GetDisplayPrimaryPhysical.Height
+    Return New-Object System.Drawing.Bitmap $GetDisplayPrimaryBitmapSize.Width, $GetDisplayPrimaryBitmapSize.Height
 }
 function New-SystemDrawingBitmap {
   [CmdletBinding()]

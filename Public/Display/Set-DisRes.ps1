@@ -134,14 +134,26 @@ namespace Resolution
 "@ 
     Add-Type $Code -ErrorAction SilentlyContinue
 
-    
+    #Check if we need to Restore the previous settings
+    if ($Width -eq 'Restore')  {
+        if ($null -eq $Global:SetDisRes) {
+            Write-Warning "Unable to Restore previous Display Settings"
+            Break
+        } else {
+            $Width = $Global:SetDisRes.Width;
+            $Height = $Global:SetDisRes.Height;
+        }
+    } else {
+        #Set a Restore only for this PowerShell session
+        $Global:SetDisRes = Get-DisplayPrimaryBitmapSize
+    }
     
     if ($Width -and $Height) {
         #Do Nothing
     } elseif ($Width) {
-        if ($Width -eq '720p')  {$Width = 1280;$Height = 720}
-        if ($Width -eq '1080p') {$Width = 1920;$Height = 1080}
-        if ($Width -eq '4k')    {$Width = 3840;$Height = 2160}
+        if ($Width -eq '720p')  {[int]$Width = 1280;[int]$Height = 720}
+        if ($Width -eq '1080p') {[int]$Width = 1920;$Height = 1080}
+        if ($Width -eq '4k')    {[int]$Width = 3840;$Height = 2160}
 
         if ($Width -eq 1280) {$Height = 600}    #2.13333333333333
         if ($Width -eq 1280) {$Height = 768}    #1.66666666666667
@@ -154,6 +166,7 @@ namespace Resolution
         if ($Width -eq 1920) {$Height = 1200}   #1.6
         if ($Width -eq 2560) {$Height = 1600}   #1.6
         if ($Width -eq 2560) {$Height = 2048}   #1.25
+        if ($Width -eq 5120) {$Height = 1440}   #3.55555555555555
 
         #4:3
         if ($Width -eq 800)  {$Height = 600}    #4:3
@@ -185,10 +198,13 @@ namespace Resolution
         [int]$Height = 1080
     }
 
-    Write-Verbose "Width: $Width"
-    Write-Verbose "Height: $Height"
+    [int]$IntWidth = $Width
+    [int]$IntHeight = $Height
 
-    $Result = [Resolution.PrmaryScreenResolution]::ChangeResolution([int]$Width,[int]$Height) 
+    Write-Verbose "Width: $IntWidth"
+    Write-Verbose "Height: $IntHeight"
+
+    $Result = [Resolution.PrmaryScreenResolution]::ChangeResolution([int]$IntWidth,[int]$IntHeight) 
     
     if ($Result -eq 'DisRes successfully changed the Display Resolution') {
         #Do Nothing

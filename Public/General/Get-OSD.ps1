@@ -14,6 +14,7 @@ https://osd.osdeploy.com/module/functions/general/get-osd
 function Get-OSD {
     [CmdletBinding()]
     Param ()
+    
     #======================================================================================================
     #	Gather
     #======================================================================================================
@@ -33,67 +34,83 @@ function Get-OSD {
     Write-Host -ForegroundColor DarkCyan    "Module Path: $GetModulePath"
     Write-Host -ForegroundColor DarkCyan    '================================================================================================================'
     Write-Host -ForegroundColor Cyan        'General Functions'
+
     Write-Host -ForegroundColor White       'Get-OSD                            ' -NoNewline
     Write-Host -ForegroundColor Gray        'This information'
+
     Write-Host -ForegroundColor White       'Get-OSDClass                       ' -NoNewline
     Write-Host -ForegroundColor Gray        'Returns CimInstance information from common OSD Classes'
+
     Write-Host -ForegroundColor White       'Get-OSDGather                      ' -NoNewline
     Write-Host -ForegroundColor Gray        'Returns common OSD information as an ordered hash table'
+
     Write-Host -ForegroundColor White       'Get-OSDPower                       ' -NoNewline
     Write-Host -ForegroundColor Gray        'Displays Power Plan information using powercfg /LIST'
+
     Write-Host -ForegroundColor White       'Get-RegCurrentVersion              ' -NoNewline
     Write-Host -ForegroundColor Gray        'Returns the Registry Key values from'
+
     Write-Host -ForegroundColor Yellow      '                                   ' -NoNewline
     Write-Host -ForegroundColor Gray        'HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion'
+
     Write-Host -ForegroundColor White       'Get-SessionsXml                    ' -NoNewline
     Write-Host -ForegroundColor Gray        'Returns the Session.xml Updates that have been applied to an Operating System'
+
     Write-Host -ForegroundColor White       'Save-OSDDownload                   ' -NoNewline
     Write-Host -ForegroundColor Gray        'Downloads a file by URL to a destination folder'
     Write-Host -ForegroundColor DarkCyan    '================================================================================================================'
     Write-Host -ForegroundColor Cyan        'Appx Functions'
+
     Write-Host -ForegroundColor White       'Remove-AppxOnline                  ' -NoNewline
     Write-Host -ForegroundColor Gray        'Removes Appx Packages and Appx Provisioned Packages for All Users'
     Write-Host -ForegroundColor DarkCyan    '================================================================================================================'
     Write-Host -ForegroundColor Cyan        'Backup Functions'
+
     Write-Host -ForegroundColor Yellow      'Backup-DiskToFFU                   ' -NoNewline
     Write-Host -ForegroundColor Gray        'Captures a Windows Image FFU to a secondary drive'
     Write-Host -ForegroundColor DarkCyan    '================================================================================================================'
     Write-Host -ForegroundColor Cyan        'Dism Functions'
+
     Write-Host -ForegroundColor White       'Dismount-WindowsImageOSD           ' -NoNewline
     Write-Host -ForegroundColor Gray        'Dismounts WIM by Mounted Path, or all WIMs if no Path is specified'
+
     Write-Host -ForegroundColor White       'Edit-WindowsImageOSD               ' -NoNewline
     Write-Host -ForegroundColor Gray        'Modify an Online or Offline Windows Image with Cleanup and Appx Stuff'
+
     Write-Host -ForegroundColor White       'Mount-WindowsImageOSD              ' -NoNewline
     Write-Host -ForegroundColor Gray        'Give it a WIM, let it mount it'
+
     Write-Host -ForegroundColor Yellow      'Set-WIMExecutionPolicy             ' -NoNewline
     Write-Host -ForegroundColor Gray        'Sets the PowerShell Execution Policy of a .wim File'
+
     Write-Host -ForegroundColor Yellow      'Set-WindowsImageExecutionPolicy    ' -NoNewline
     Write-Host -ForegroundColor Gray        'Sets the PowerShell Execution Policy of a Mounted Windows Image'
+
     Write-Host -ForegroundColor White       'Update-WindowsImageOSD             ' -NoNewline
     Write-Host -ForegroundColor Gray        'Identify, Download, and Apply Updates to a Mounted Windows Image'
     Write-Host -ForegroundColor DarkCyan    '================================================================================================================'
     Write-Host -ForegroundColor Cyan        'Display Functions'
 
-    Write-Host -ForegroundColor Yellow      'Get-DisplayAllScreens                  ' -NoNewline
+    Write-Host -ForegroundColor Yellow      'Get-CIMVideoControllerResolution   ' -NoNewline
+    Write-Host -ForegroundColor Gray        'Returns the CIM_VideoControllerResolution Properties for the Primary Screen'
+    
+    Write-Host -ForegroundColor Yellow      'Get-DisplayAllScreens              ' -NoNewline
     Write-Host -ForegroundColor Gray        'Returns [System.Windows.Forms.Screen]::AllScreens'
+    
+    Write-Host -ForegroundColor Yellow      'Get-DisplayPrimaryBitmapSize       ' -NoNewline
+    Write-Host -ForegroundColor Gray        'Calulates the Bitmap Screen Size (PrimaryMonitorSize x ScreenScaling)'
 
-    Write-Host -ForegroundColor Yellow      'Get-VideoControllerResolution     ' -NoNewline
-    Write-Host -ForegroundColor Gray        ''
+    Write-Host -ForegroundColor Yellow      'Get-DisplayPrimaryMonitorSize      ' -NoNewline
+    Write-Host -ForegroundColor Gray        'Returns [System.Windows.Forms.SystemInformation]::PrimaryMonitorSize'
     
-    Write-Host -ForegroundColor Yellow      'Get-DisplayPrimaryScaling        ' -NoNewline
-    Write-Host -ForegroundColor Gray        ''
+    Write-Host -ForegroundColor Yellow      'Get-DisplayPrimaryScaling          ' -NoNewline
+    Write-Host -ForegroundColor Gray        'Returns the Primary Screen Scaling in Percent'
     
-    Write-Host -ForegroundColor Yellow      'Get-DisplayPrimaryPhysical   ' -NoNewline
-    Write-Host -ForegroundColor Gray        ''
-    
-    Write-Host -ForegroundColor Yellow      'Get-DisplayPrimaryMonitorSize    ' -NoNewline
-    Write-Host -ForegroundColor Gray        ''
-    
-    Write-Host -ForegroundColor Yellow      'Get-DisplayVirtualScreen               ' -NoNewline
+    Write-Host -ForegroundColor Yellow      'Get-DisplayVirtualScreen           ' -NoNewline
     Write-Host -ForegroundColor Gray        'Returns [System.Windows.Forms.SystemInformation]::VirtualScreen'
     
-    Write-Host -ForegroundColor Yellow      'Set-DisRes                             ' -NoNewline
-    Write-Host -ForegroundColor Gray        ''
+    Write-Host -ForegroundColor Yellow      'Set-DisRes                         ' -NoNewline
+    Write-Host -ForegroundColor Gray        'Sets the Primary Display Screen Resolution'
     Write-Host -ForegroundColor DarkCyan    '================================================================================================================'
     Write-Host -ForegroundColor Cyan        'Driver Functions'
     Write-Host -ForegroundColor White       'Get-OSDDriver                      ' -NoNewline
@@ -102,7 +119,7 @@ function Get-OSD {
     Write-Host -ForegroundColor Gray        'Select multiple Dell or HP Computer Models to generate WMI Query'
     Write-Host -ForegroundColor DarkCyan    '================================================================================================================'
     Write-Host -ForegroundColor Cyan        'PowerShellGet Functions'
-    Write-Host -ForegroundColor Yellow      'Copy-Module                        ' -NoNewline
+    Write-Host -ForegroundColor Yellow      'Copy-ModuleOSD                     ' -NoNewline
     Write-Host -ForegroundColor Gray        'Copies a PowerShell Module to a specified Destination'
     Write-Host -ForegroundColor DarkCyan    '================================================================================================================'
     Write-Host -ForegroundColor Cyan        'Storage Functions'

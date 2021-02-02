@@ -27,10 +27,10 @@ function Set-ScreenshotToClipboard {
     #======================================================================================================
     #	Display Number
     #======================================================================================================
-    $GetDisplayPrimaryPhysical = Get-DisplayPrimaryPhysical
-    #Write-Verbose "Width: $($GetDisplayPrimaryPhysical.Width)" -Verbose
-    #Write-Verbose "Height: $($GetDisplayPrimaryPhysical.Height)" -Verbose
-    $ScreenShotBitmap = New-Object System.Drawing.Bitmap $GetDisplayPrimaryPhysical.Width, $GetDisplayPrimaryPhysical.Height
+    $GetDisplayPrimaryBitmapSize = Get-DisplayPrimaryBitmapSize
+    #Write-Verbose "Width: $($GetDisplayPrimaryBitmapSize.Width)" -Verbose
+    #Write-Verbose "Height: $($GetDisplayPrimaryBitmapSize.Height)" -Verbose
+    $ScreenShotBitmap = New-Object System.Drawing.Bitmap $GetDisplayPrimaryBitmapSize.Width, $GetDisplayPrimaryBitmapSize.Height
     $ScreenShotGraphics = [System.Drawing.Graphics]::FromImage($ScreenShotBitmap)
     #Write-Verbose "X: $($GetDisplayVirtualScreen.X)" -Verbose
     #Write-Verbose "Y: $($GetDisplayVirtualScreen.Y)" -Verbose

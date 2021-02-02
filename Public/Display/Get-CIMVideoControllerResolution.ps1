@@ -6,12 +6,12 @@ Returns the CIM_VideoControllerResolution Properties for the Primary Screen
 Returns the CIM_VideoControllerResolution Properties for the Primary Screen
 
 .LINK
-https://osd.osdeploy.com/module/functions/display/get-videocontrollerresolution
+https://osd.osdeploy.com/module/functions/display/get-cimvideocontrollerresolution
 
 .NOTES
 21.2.1  Initial Release
 #>
-function Get-VideoControllerResolution {
+function Get-CIMVideoControllerResolution {
     [CmdletBinding()]
     Param (
 
