@@ -97,11 +97,11 @@ FunctionsToExport =     #Appx
                         'Get-SessionsXml',
                         'Save-OSDDownload',
                         #PowerShellGet
-                        'Copy-ModuleOSD',
+                        'Copy-ModuleToFolder',
                         #SS
                         'Get-ScreenPNG',
                         'Save-ClipboardImage',
-                        'Set-ScreenshotToClipboard',
+                        'Set-ClipboardScreenshot',
                         #Storage
                         'Get-DiskIsBoot',
                         'Get-DiskIsSystem',

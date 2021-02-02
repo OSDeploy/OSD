@@ -6,12 +6,12 @@ Sets a Screenshot of the Primary Screen on the Clipboard.  Use Save-ClipboardIma
 Sets a Screenshot of the Primary Screen on the Clipboard.  Use Save-ClipboardImage to save the PNG
 
 .LINK
-https://osd.osdeploy.com/module/functions/general/set-screenshottoclipboard
+https://osd.osdeploy.com/module/functions/general/Set-ClipboardScreenshot
 
 .NOTES
 21.2.1  Initial Release
 #>
-function Set-ScreenshotToClipboard {
+function Set-ClipboardScreenshot {
     [CmdletBinding()]
     Param ()
 

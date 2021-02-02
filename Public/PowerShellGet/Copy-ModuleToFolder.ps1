@@ -6,16 +6,16 @@ Get-Module and copy the ModuleBase to a new Destination\ModuleBase
 Get-Module and copy the ModuleBase to a new Destination\ModuleBase
 
 .LINK
-https://osd.osdeploy.com/module/functions/powershellget/copy-moduleosd
+https://osd.osdeploy.com/module/functions/powershellget/copy-moduletofolder
 
 .NOTES
 21.1.30.1   Initial Release
 21.1.30.2   Added WinPE Parameter
 21.1.30.3   Renamed PSModulePath Parameter to Destination, Added RemoveOldVersions
 21.1.31.1   Removed WinPE Parameter
-21.2.2.1	Renamed to Copy-ModuleOSD so I don't mess with PowerShellGet
+21.2.2.1	Renamed to Copy-ModuleToFolder so I don't mess with PowerShellGet
 #>
-function Copy-ModuleOSD {
+function Copy-ModuleToFolder {
     [CmdletBinding()]
     Param (
         #Name of the PowerShell Module to Copy
@@ -34,6 +34,7 @@ function Copy-ModuleOSD {
             Mandatory=$true,
             ValueFromPipelineByPropertyName=$true
         )]
+        [Alias('Folder')]
         [String]$Destination,
 
         #Removes older Module Versions from the Destination

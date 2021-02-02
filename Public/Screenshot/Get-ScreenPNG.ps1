@@ -15,23 +15,23 @@ https://osd.osdeploy.com/module/functions/general/get-screenpng
 function Get-ScreenPNG {
     [CmdletBinding()]
     Param (
-        #Directory where the screenshots will be saved
-        #Default = $Env:TEMP\ScreenShots
+        #Directory where the Screenshots will be saved
+        #Default = $Env:TEMP\Screenshots
         [string]$Directory = $null,
 
-        #Saved files will have a ScreenShot prefix in the filename
+        #Saved files will have a Screenshot prefix in the filename
         [string]$Prefix = $null,
 
-        #Delay before taking a ScreenShot in seconds
+        #Delay before taking a Screenshot in seconds
         #Default: 0 (1 Count)
         #Default: 1 (>1 Count)
         [uint32]$Delay = 0,
 
-        #Total number of screenshots to capture
+        #Total number of Screenshots to capture
         #Default = 1
         [uint32]$Count = 1,
 
-        #Additionally copies the ScreenShot to the Clipboard
+        #Additionally copies the Screenshot to the Clipboard
         [switch]$Clipboard = $false,
 
         #Screenshot of the Primary Display only
@@ -74,15 +74,15 @@ function Get-ScreenPNG {
         #======================================================================================================
         if ($Directory -eq '') {
             if ($IsTaskSequence -and (Test-Path $LogPath)) {
-                $AutoPath = Join-Path -Path $LogPath -ChildPath "ScreenShots"
+                $AutoPath = Join-Path -Path $LogPath -ChildPath "Screenshots"
             } elseif ($IsTaskSequence -and (Test-Path $SMSTSLogPath)) {
-                $AutoPath = Join-Path -Path $SMSTSLogPath -ChildPath "ScreenShots"
+                $AutoPath = Join-Path -Path $SMSTSLogPath -ChildPath "Screenshots"
             } elseif ($env:SystemDrive -eq 'X:') {
-                $AutoPath = 'X:\ScreenShots'
+                $AutoPath = 'X:\Screenshots'
             } elseif (Test-Path $MyPictures) {
-                $AutoPath = Join-Path -Path $MyPictures -ChildPath "ScreenShots"
+                $AutoPath = Join-Path -Path $MyPictures -ChildPath "Screenshots"
             } else {
-                $AutoPath = "$Env:TEMP\ScreenShots"
+                $AutoPath = "$Env:TEMP\Screenshots"
             }
         } else {
             $AutoPath = $Directory
@@ -97,28 +97,28 @@ function Get-ScreenPNG {
         Write-Verbose '======================================================================================================'
         Write-Verbose 'Get-ScreenPNG [[-Directory] <String>] [[-Prefix] <String>] [[-Delay] <UInt32>] [[-Count] <UInt32>] [-Clipboard] [-Primary]'
         Write-Verbose ''
-        Write-Verbose '-Directory   Directory where the screenshots will be saved'
+        Write-Verbose '-Directory   Directory where the Screenshots will be saved'
         Write-Verbose '             If this value is not set, Path will be automatically set between the following:'
-        Write-Verbose '             Defaults = [LogPath\ScreenShots] [_SMSTSLogPath\ScreenShots] [My Pictures\ScreenShots] [$Env:TEMP\ScreenShots]'
+        Write-Verbose '             Defaults = [LogPath\Screenshots] [_SMSTSLogPath\Screenshots] [My Pictures\Screenshots] [$Env:TEMP\Screenshots]'
         Write-Verbose "             Value = $AutoPath"
         Write-Verbose ''
         $DateString = (Get-Date).ToString('yyyyMMdd_HHmmss')
         Write-Verbose "-Prefix      Pattern in the file name $($Prefix)_$($DateString).png"
-        Write-Verbose "             Default = ScreenShot"
+        Write-Verbose "             Default = Screenshot"
         Write-Verbose "             Value = $Prefix"
         Write-Verbose ''
-        Write-Verbose '-Count       Total number of screenshots to capture'
+        Write-Verbose '-Count       Total number of Screenshots to capture'
         Write-Verbose '             Default = 1'
         Write-Verbose "             Value = $Count"
         Write-Verbose ''
-        Write-Verbose '-Delay       Delay before capturing the screenshots in seconds'
+        Write-Verbose '-Delay       Delay before capturing the Screenshots in seconds'
         Write-Verbose '             Default = 0 (Count = 1) | Default = 1 (Count > 1)'
         Write-Verbose "             Value = $Delay"
         Write-Verbose ''
-        Write-Verbose '-Clipboard   Additionally copies the screenshot to the Clipboard'
+        Write-Verbose '-Clipboard   Additionally copies the Screenshot to the Clipboard'
         Write-Verbose "             Value = $Clipboard"
         Write-Verbose ''
-        Write-Verbose '-Primary     Captures screenshot from the Primary Display only for Multiple Displays'
+        Write-Verbose '-Primary     Captures Screenshot from the Primary Display only for Multiple Displays'
         Write-Verbose "             Value = $Primary"
         Write-Verbose '======================================================================================================'
         #======================================================================================================
@@ -152,15 +152,15 @@ function Get-ScreenPNG {
             $AutoPathBackup = $AutoPath
             if ($Directory -eq '') {
                 if ($IsTaskSequence -and (Test-Path $LogPath)) {
-                    $AutoPath = Join-Path -Path $LogPath -ChildPath "ScreenShots"
+                    $AutoPath = Join-Path -Path $LogPath -ChildPath "Screenshots"
                 } elseif ($IsTaskSequence -and (Test-Path $SMSTSLogPath)) {
-                    $AutoPath = Join-Path -Path $SMSTSLogPath -ChildPath "ScreenShots"
+                    $AutoPath = Join-Path -Path $SMSTSLogPath -ChildPath "Screenshots"
                 } elseif ($env:SystemDrive -eq 'X:') {
-                    $AutoPath = 'X:\ScreenShots'
+                    $AutoPath = 'X:\Screenshots'
                 } elseif (Test-Path $MyPictures) {
-                    $AutoPath = Join-Path -Path $MyPictures -ChildPath "ScreenShots"
+                    $AutoPath = Join-Path -Path $MyPictures -ChildPath "Screenshots"
                 } else {
-                    $AutoPath = "$Env:TEMP\ScreenShots"
+                    $AutoPath = "$Env:TEMP\Screenshots"
                 }
             } else {
                 $AutoPath = $Directory
@@ -176,7 +176,7 @@ function Get-ScreenPNG {
             #	Determine AutoPath
             #======================================================================================================
             if (!(Test-Path "$AutoPath")) {
-                Write-Verbose "Creating snaScreenShot directory at $AutoPath"
+                Write-Verbose "Creating snaScreenshot directory at $AutoPath"
                 New-Item -Path "$AutoPath" -ItemType Directory -Force -ErrorAction Stop | Out-Null
             }
             #======================================================================================================
@@ -217,52 +217,52 @@ function Get-ScreenPNG {
                     $GetDisplayPrimaryBitmapSize = Get-DisplayPrimaryBitmapSize
                     #Write-Verbose "Width: $($GetDisplayPrimaryBitmapSize.Width)" -Verbose
                     #Write-Verbose "Height: $($GetDisplayPrimaryBitmapSize.Height)" -Verbose
-                    $ScreenShotBitmap = New-SystemDrawingBitmapPrimary
-                    $ScreenShotGraphics = New-SSGraphics
+                    $ScreenshotBitmap = New-Object System.Drawing.Bitmap $GetDisplayPrimaryBitmapSize.Width, $GetDisplayPrimaryBitmapSize.Height
+                    $ScreenshotGraphics = [System.Drawing.Graphics]::FromImage($ScreenShotBitmap)
                     #Write-Verbose "X: $($GetDisplayVirtualScreen.X)" -Verbose
                     #Write-Verbose "Y: $($GetDisplayVirtualScreen.Y)" -Verbose
                     #Write-Verbose "Size: $($GetDisplayVirtualScreen.Size)" -Verbose
-                    $ScreenShotGraphics.CopyFromScreen($GetDisplayVirtualScreen.X, $GetDisplayVirtualScreen.Y, $GetDisplayVirtualScreen.X, $GetDisplayVirtualScreen.Y, $GetDisplayVirtualScreen.Size)
-                    Write-Verbose "Saving Primary ScreenShot $i of $Count to to $AutoPath\$FileName"
+                    $ScreenshotGraphics.CopyFromScreen($GetDisplayVirtualScreen.X, $GetDisplayVirtualScreen.Y, $GetDisplayVirtualScreen.X, $GetDisplayVirtualScreen.Y, $GetDisplayVirtualScreen.Size)
+                    Write-Verbose "Saving Primary Screenshot $i of $Count to to $AutoPath\$FileName"
                 }
                 
                 if ($Device.Primary -eq $false) {
                     if ($Primary -eq $true) {Continue}
                     #Write-Verbose "Width: $($Device.Bounds.Width)" -Verbose
                     #Write-Verbose "Height: $($Device.Bounds.Height)" -Verbose
-                    $ScreenShotBitmap = New-SystemDrawingBitmap
-                    $ScreenShotGraphics = New-SSGraphics
+                    $ScreenshotBitmap = New-Object System.Drawing.Bitmap $Device.Bounds.Width, $Device.Bounds.Height
+                    $ScreenshotGraphics = [System.Drawing.Graphics]::FromImage($ScreenShotBitmap)
                     #Write-Verbose "X: $($Device.Bounds.X)" -Verbose
                     #Write-Verbose "Y: $($Device.Bounds.Y)" -Verbose
                     #Write-Verbose "Size: $($GetDisplayVirtualScreen.Size)" -Verbose
-                    $ScreenShotGraphics.CopyFromScreen($Device.Bounds.X, $Device.Bounds.Y, 0, 0, $GetDisplayVirtualScreen.Size)
-                    Write-Verbose "Saving Secondary ScreenShot $i of $Count to to $AutoPath\$FileName"
+                    $ScreenshotGraphics.CopyFromScreen($Device.Bounds.X, $Device.Bounds.Y, 0, 0, $GetDisplayVirtualScreen.Size)
+                    Write-Verbose "Saving Secondary Screenshot $i of $Count to to $AutoPath\$FileName"
                 }
 
                 #======================================================================================================
-                #	Save the ScreenShot to File
+                #	Save the Screenshot to File
                 #   https://docs.microsoft.com/en-us/dotnet/api/system.drawing.image.tag?view=dotnet-plat-ext-5.0
                 #======================================================================================================
-                $ScreenShotBitmap.Save("$AutoPath\$FileName")
+                $ScreenshotBitmap.Save("$AutoPath\$FileName")
 
                 #======================================================================================================
-                #	Copy the ScreenShot to the Clipboard
+                #	Copy the Screenshot to the Clipboard
                 #   https://docs.microsoft.com/en-us/dotnet/api/system.windows.forms.clipboard.setimage?view=net-5.0
                 #======================================================================================================
                 if ($Device.Primary -eq $true) {
                     if ($Clipboard) {
-                        Write-Verbose "Copying ScreenShot to the Clipboard"
+                        Write-Verbose "Copying Screenshot to the Clipboard"
                         #Add-Type -Assembly System.Drawing
                         #Add-Type -Assembly System.Windows.Forms
-                        [System.Windows.Forms.Clipboard]::SetImage($ScreenShotBitmap)
+                        [System.Windows.Forms.Clipboard]::SetImage($ScreenshotBitmap)
                     }
                 }
             }
             #======================================================================================================
             #	Close
             #======================================================================================================
-            $ScreenShotGraphics.Dispose()
-            $ScreenShotBitmap.Dispose()
+            $ScreenshotGraphics.Dispose()
+            $ScreenshotBitmap.Dispose()
             #======================================================================================================
             #	Return Get-Item
             #======================================================================================================

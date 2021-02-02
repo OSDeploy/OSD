@@ -119,7 +119,7 @@ function Get-OSD {
     Write-Host -ForegroundColor Gray        'Select multiple Dell or HP Computer Models to generate WMI Query'
     Write-Host -ForegroundColor DarkCyan    '================================================================================================================'
     Write-Host -ForegroundColor Cyan        'PowerShellGet Functions'
-    Write-Host -ForegroundColor Yellow      'Copy-ModuleOSD                     ' -NoNewline
+    Write-Host -ForegroundColor Yellow      'Copy-ModuleToFolder                ' -NoNewline
     Write-Host -ForegroundColor Gray        'Copies a PowerShell Module to a specified Destination'
     Write-Host -ForegroundColor DarkCyan    '================================================================================================================'
     Write-Host -ForegroundColor Cyan        'Storage Functions'
@@ -143,7 +143,7 @@ function Get-OSD {
     Write-Host -ForegroundColor Yellow      'Get-ScreenPNG                      ' -NoNewline
     Write-Host -ForegroundColor Gray        'Takes a screeshot'
 
-    Write-Host -ForegroundColor Yellow      'Set-ScreenshotToClipboard          ' -NoNewline
+    Write-Host -ForegroundColor Yellow      'Set-ClipboardScreenshot            ' -NoNewline
     Write-Host -ForegroundColor Gray        'Sets a Screenshot of the Primary Screen on the Clipboard'
     Write-Host -ForegroundColor Yellow      '                                   ' -NoNewline
     Write-Host -ForegroundColor Gray        'Use Save-ClipboardImage to save the PNG'
