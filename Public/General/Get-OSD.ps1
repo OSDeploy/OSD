@@ -27,11 +27,11 @@ function Get-OSD {
     #======================================================================================================
     #	Usage
     #======================================================================================================
-    Write-Host -ForegroundColor DarkCyan    '=========================================================================================================================='
+    Write-Host -ForegroundColor DarkCyan    '================================================================================================================'
     Write-Host -ForegroundColor Cyan        "$GetCommandNoun $GetCommandVersion http://osd.osdeploy.com"
     Write-Host -ForegroundColor DarkCyan    $GetModuleDescription
     Write-Host -ForegroundColor DarkCyan    "Module Path: $GetModulePath"
-    Write-Host -ForegroundColor DarkCyan    '=========================================================================================================================='
+    Write-Host -ForegroundColor DarkCyan    '================================================================================================================'
     Write-Host -ForegroundColor Cyan        'General Functions'
     Write-Host -ForegroundColor White       'Get-OSD                            ' -NoNewline
     Write-Host -ForegroundColor Gray        'This information'
@@ -42,20 +42,22 @@ function Get-OSD {
     Write-Host -ForegroundColor White       'Get-OSDPower                       ' -NoNewline
     Write-Host -ForegroundColor Gray        'Displays Power Plan information using powercfg /LIST'
     Write-Host -ForegroundColor White       'Get-RegCurrentVersion              ' -NoNewline
-    Write-Host -ForegroundColor Gray        'Returns the Registry Key values from HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion'
+    Write-Host -ForegroundColor Gray        'Returns the Registry Key values from'
+    Write-Host -ForegroundColor Yellow      '                                   ' -NoNewline
+    Write-Host -ForegroundColor Gray        'HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion'
     Write-Host -ForegroundColor White       'Get-SessionsXml                    ' -NoNewline
     Write-Host -ForegroundColor Gray        'Returns the Session.xml Updates that have been applied to an Operating System'
     Write-Host -ForegroundColor White       'Save-OSDDownload                   ' -NoNewline
     Write-Host -ForegroundColor Gray        'Downloads a file by URL to a destination folder'
-    Write-Host -ForegroundColor DarkCyan    '=========================================================================================================================='
+    Write-Host -ForegroundColor DarkCyan    '================================================================================================================'
     Write-Host -ForegroundColor Cyan        'Appx Functions'
     Write-Host -ForegroundColor White       'Remove-AppxOnline                  ' -NoNewline
     Write-Host -ForegroundColor Gray        'Removes Appx Packages and Appx Provisioned Packages for All Users'
-    Write-Host -ForegroundColor DarkCyan    '=========================================================================================================================='
+    Write-Host -ForegroundColor DarkCyan    '================================================================================================================'
     Write-Host -ForegroundColor Cyan        'Backup Functions'
     Write-Host -ForegroundColor Yellow      'Backup-DiskToFFU                   ' -NoNewline
     Write-Host -ForegroundColor Gray        'Captures a Windows Image FFU to a secondary drive'
-    Write-Host -ForegroundColor DarkCyan    '=========================================================================================================================='
+    Write-Host -ForegroundColor DarkCyan    '================================================================================================================'
     Write-Host -ForegroundColor Cyan        'Dism Functions'
     Write-Host -ForegroundColor White       'Dismount-WindowsImageOSD           ' -NoNewline
     Write-Host -ForegroundColor Gray        'Dismounts WIM by Mounted Path, or all WIMs if no Path is specified'
@@ -69,21 +71,26 @@ function Get-OSD {
     Write-Host -ForegroundColor Gray        'Sets the PowerShell Execution Policy of a Mounted Windows Image'
     Write-Host -ForegroundColor White       'Update-WindowsImageOSD             ' -NoNewline
     Write-Host -ForegroundColor Gray        'Identify, Download, and Apply Updates to a Mounted Windows Image'
-    Write-Host -ForegroundColor DarkCyan    '=========================================================================================================================='
-    Write-Host -ForegroundColor Cyan        'DisRes Functions'
-    Write-Host -ForegroundColor Yellow      'Get-VidConRes                      ' -NoNewline
-    Write-Host -ForegroundColor Gray        'Returns the CIM_VideoControllerResolution Properties'
-    Write-Host -ForegroundColor DarkCyan    '=========================================================================================================================='
+    Write-Host -ForegroundColor DarkCyan    '================================================================================================================'
+    Write-Host -ForegroundColor Cyan        'Display Functions'
+    Write-Host -ForegroundColor Yellow      'Get-AllScreens                     '
+    Write-Host -ForegroundColor Yellow      'Get-PrimaryScreenResolution        '
+    Write-Host -ForegroundColor Yellow      'Get-PrimaryScreenScaling           '
+    Write-Host -ForegroundColor Yellow      'Get-PrimaryScreenSizePhysical      '
+    Write-Host -ForegroundColor Yellow      'Get-PrimaryScreenSizeVirtual       '
+    Write-Host -ForegroundColor Yellow      'Get-VirtualScreen                  '
+    Write-Host -ForegroundColor Yellow      'Set-DisRes                         '
+    Write-Host -ForegroundColor DarkCyan    '================================================================================================================'
     Write-Host -ForegroundColor Cyan        'Driver Functions'
     Write-Host -ForegroundColor White       'Get-OSDDriver                      ' -NoNewline
     Write-Host -ForegroundColor Gray        'Returns Driver download links for Amd Dell Hp Intel and Nvidia'
     Write-Host -ForegroundColor White       'Get-OSDDriverWmiQ                  ' -NoNewline
-    Write-Host -ForegroundColor Gray        'Select multiple Dell or HP Computer Models to generate a proper Task Sequence WMI Query'
-    Write-Host -ForegroundColor DarkCyan    '=========================================================================================================================='
+    Write-Host -ForegroundColor Gray        'Select multiple Dell or HP Computer Models to generate WMI Query'
+    Write-Host -ForegroundColor DarkCyan    '================================================================================================================'
     Write-Host -ForegroundColor Cyan        'PowerShellGet Functions'
     Write-Host -ForegroundColor Yellow      'Copy-Module                        ' -NoNewline
     Write-Host -ForegroundColor Gray        'Copies a PowerShell Module to a specified Destination'
-    Write-Host -ForegroundColor DarkCyan    '=========================================================================================================================='
+    Write-Host -ForegroundColor DarkCyan    '================================================================================================================'
     Write-Host -ForegroundColor Cyan        'Storage Functions'
     Write-Host -ForegroundColor Yellow      'Get-DiskIsBoot                     ' -NoNewline
     Write-Host -ForegroundColor Gray        'Gets the Disk containing the BOOT partition'
@@ -99,7 +106,17 @@ function Get-OSD {
     Write-Host -ForegroundColor Gray        'Creates a SYSTEM Partition'
     Write-Host -ForegroundColor White       'New-PartitionOSDWindows            ' -NoNewline
     Write-Host -ForegroundColor Gray        'Creates a WINDOWS Partition'
-    Write-Host -ForegroundColor DarkCyan    '=========================================================================================================================='
+    Write-Host -ForegroundColor DarkCyan    '================================================================================================================'
+    Write-Host -ForegroundColor Cyan        'Screenshot Functions'
+    Write-Host -ForegroundColor Yellow      'Get-Screenshot                     ' -NoNewline
+    Write-Host -ForegroundColor Gray        'Takes a screeshot'
+    Write-Host -ForegroundColor Yellow      'Set-ClipboardImage                 ' -NoNewline
+    Write-Host -ForegroundColor Gray        'Sets a Screenshot of the Primary Screen on the Clipboard'
+    Write-Host -ForegroundColor Yellow      '                                   ' -NoNewline
+    Write-Host -ForegroundColor Gray        'Use Save-ClipboardImage to save the PNG'
+    Write-Host -ForegroundColor Yellow      'Save-ClipboardImage                ' -NoNewline
+    Write-Host -ForegroundColor Gray        'Saves the Clipboard Image as a file.  PNG extension is recommended'
+    Write-Host -ForegroundColor DarkCyan    '================================================================================================================'
     Write-Host -ForegroundColor Cyan        'SystemInformation Functions'
     Write-Host -ForegroundColor Yellow      'Get-EZComputerManufacturer         ' -NoNewline
     Write-Host -ForegroundColor Gray        'Returns a simple Computer Manufacturer'
@@ -107,13 +124,13 @@ function Get-OSD {
     Write-Host -ForegroundColor Gray        'Returns a Computer Model'
     Write-Host -ForegroundColor Yellow      'Get-EZComputerSerialNumber         ' -NoNewline
     Write-Host -ForegroundColor Gray        'Returns the Computer Serial Number'
-    Write-Host -ForegroundColor DarkCyan    '=========================================================================================================================='
+    Write-Host -ForegroundColor DarkCyan    '================================================================================================================'
     Write-Host -ForegroundColor Cyan        'WinPE Functions'
     Write-Host -ForegroundColor White       'Get-OSDWinPE                       ' -NoNewline
     Write-Host -ForegroundColor Gray        'Common WinPE Commands using wpeutil and Microsoft DaRT RemoteRecovery'
-    Write-Host -ForegroundColor DarkCyan    '=========================================================================================================================='
+    Write-Host -ForegroundColor DarkCyan    '================================================================================================================'
     Write-Host -ForegroundColor Yellow      'Update-Module OSD -Force           ' -NoNewline
     Write-Host -ForegroundColor Cyan        'Update the OSD Module'
-    Write-Host -ForegroundColor DarkCyan    '=========================================================================================================================='
+    Write-Host -ForegroundColor DarkCyan    '================================================================================================================'
     #======================================================================================================
 }

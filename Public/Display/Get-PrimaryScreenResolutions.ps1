@@ -1,17 +1,17 @@
 <#
 .SYNOPSIS
-Returns the CIM_VideoControllerResolution Properties
+Returns the CIM_VideoControllerResolution Properties for the Primary Screen
 
 .DESCRIPTION
-Returns the CIM_VideoControllerResolution Properties
+Returns the CIM_VideoControllerResolution Properties for the Primary Screen
 
 .LINK
-https://osd.osdeploy.com/module/functions/disres/get-vidconres
+https://osd.osdeploy.com/module/functions/disres/get-primaryscreenresolutions
 
 .NOTES
 21.2.1  Initial Release
 #>
-function Get-VidConRes {
+function Get-PrimaryScreenResolutions {
     [CmdletBinding()]
     Param (
 
