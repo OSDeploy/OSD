@@ -6,12 +6,12 @@ Sets a Screenshot of the Primary Screen on the Clipboard.  Use Save-ClipboardIma
 Sets a Screenshot of the Primary Screen on the Clipboard.  Use Save-ClipboardImage to save the PNG
 
 .LINK
-https://osd.osdeploy.com/module/functions/general/set-clipboardimage
+https://osd.osdeploy.com/module/functions/general/set-screenshottoclipboard
 
 .NOTES
 21.2.1  Initial Release
 #>
-function Set-ClipboardImage {
+function Set-ScreenshotToClipboard {
     [CmdletBinding()]
     Param ()
 
@@ -23,19 +23,19 @@ function Set-ClipboardImage {
     #======================================================================================================
     #	Display Information
     #======================================================================================================
-    $GetVirtualScreen = Get-VirtualScreen
+    $GetDisplayVirtualScreen = Get-DisplayVirtualScreen
     #======================================================================================================
     #	Display Number
     #======================================================================================================
-    $GetPrimaryScreenSizePhysical = Get-PrimaryScreenSizePhysical
-    #Write-Verbose "Width: $($GetPrimaryScreenSizePhysical.Width)" -Verbose
-    #Write-Verbose "Height: $($GetPrimaryScreenSizePhysical.Height)" -Verbose
-    $ScreenShotBitmap = New-Object System.Drawing.Bitmap $GetPrimaryScreenSizePhysical.Width, $GetPrimaryScreenSizePhysical.Height
+    $GetDisplayPrimaryPhysical = Get-DisplayPrimaryPhysical
+    #Write-Verbose "Width: $($GetDisplayPrimaryPhysical.Width)" -Verbose
+    #Write-Verbose "Height: $($GetDisplayPrimaryPhysical.Height)" -Verbose
+    $ScreenShotBitmap = New-Object System.Drawing.Bitmap $GetDisplayPrimaryPhysical.Width, $GetDisplayPrimaryPhysical.Height
     $ScreenShotGraphics = [System.Drawing.Graphics]::FromImage($ScreenShotBitmap)
-    #Write-Verbose "X: $($GetVirtualScreen.X)" -Verbose
-    #Write-Verbose "Y: $($GetVirtualScreen.Y)" -Verbose
-    #Write-Verbose "Size: $($GetVirtualScreen.Size)" -Verbose
-    $ScreenShotGraphics.CopyFromScreen($GetVirtualScreen.X, $GetVirtualScreen.Y, $GetVirtualScreen.X, $GetVirtualScreen.Y, $GetVirtualScreen.Size)
+    #Write-Verbose "X: $($GetDisplayVirtualScreen.X)" -Verbose
+    #Write-Verbose "Y: $($GetDisplayVirtualScreen.Y)" -Verbose
+    #Write-Verbose "Size: $($GetDisplayVirtualScreen.Size)" -Verbose
+    $ScreenShotGraphics.CopyFromScreen($GetDisplayVirtualScreen.X, $GetDisplayVirtualScreen.Y, $GetDisplayVirtualScreen.X, $GetDisplayVirtualScreen.Y, $GetDisplayVirtualScreen.Size)
     #======================================================================================================
     #	Copy the ScreenShot to the Clipboard
     #   https://docs.microsoft.com/en-us/dotnet/api/system.windows.forms.clipboard.setimage?view=net-5.0

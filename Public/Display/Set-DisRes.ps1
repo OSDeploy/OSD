@@ -6,7 +6,7 @@ Sets the Primary Display Screen Resolution
 Sets the Primary Display Screen Resolution
 
 .LINK
-https://www.osdeploy.com/modules/disres/usage
+https://osd.osdeploy.com/module/functions/display/set-disres
 
 .NOTES
 21.2.1 Initial Release
@@ -14,16 +14,14 @@ https://www.osdeploy.com/modules/disres/usage
 #>
 function Set-DisRes {
     [CmdletBinding()]
-    Param ( 
-        [Parameter(
-            Position = 0
-        )] 
-        [int] $Width,
+    Param (
+        [Parameter(Position = 0)]
+        [Alias('Horizontal')]
+        [string]$Width,
 
-        [Parameter(
-            Position = 1
-        )] 
-        [int] $Height 
+        [Parameter(Position = 1)]
+        [Alias('Vertical')]
+        [string]$Height
     )
 
 $Code = @" 
@@ -105,15 +103,15 @@ namespace Resolution
                     { 
                         case User_32.DISP_CHANGE_SUCCESSFUL: 
                             { 
-                                return "Success"; 
+                                return "DisRes successfully changed the Display Resolution"; 
                             } 
                         case User_32.DISP_CHANGE_RESTART: 
                             { 
-                                return "You Need To Reboot For The Change To Happen.\n If You Feel Any Problem After Rebooting Your Machine\nThen Try To Change Resolution In Safe Mode."; 
+                                return "DisRes needs to restart to change the Display Resolution"; 
                             } 
                         default: 
                             { 
-                                return "Failed To Change The Resolution"; 
+                                return "DisRes failed to change the Display Resolution"; 
                             } 
                     } 
                 } 
@@ -134,6 +132,67 @@ namespace Resolution
     } 
 } 
 "@ 
-    Add-Type $Code -ErrorAction SilentlyContinue 
-    [Resolution.PrmaryScreenResolution]::ChangeResolution($Width,$Height) 
+    Add-Type $Code -ErrorAction SilentlyContinue
+
+    
+    
+    if ($Width -and $Height) {
+        #Do Nothing
+    } elseif ($Width) {
+        if ($Width -eq '720p')  {$Width = 1280;$Height = 720}
+        if ($Width -eq '1080p') {$Width = 1920;$Height = 1080}
+        if ($Width -eq '4k')    {$Width = 3840;$Height = 2160}
+
+        if ($Width -eq 1280) {$Height = 600}    #2.13333333333333
+        if ($Width -eq 1280) {$Height = 768}    #1.66666666666667
+        if ($Width -eq 1280) {$Height = 800}    #1.6
+        if ($Width -eq 1280) {$Height = 1024}   #1.25
+        if ($Width -eq 1360) {$Height = 768}    #1.77083333333333
+        if ($Width -eq 1366) {$Height = 768}    #1.77864583333333
+        if ($Width -eq 1440) {$Height = 900}    #1.6
+        if ($Width -eq 1680) {$Height = 1050}   #1.6
+        if ($Width -eq 1920) {$Height = 1200}   #1.6
+        if ($Width -eq 2560) {$Height = 1600}   #1.6
+        if ($Width -eq 2560) {$Height = 2048}   #1.25
+
+        #4:3
+        if ($Width -eq 800)  {$Height = 600}    #4:3
+        if ($Width -eq 1024) {$Height = 768}    #4:3
+        if ($Width -eq 1152) {$Height = 864}    #4:3
+        if ($Width -eq 1280) {$Height = 960}    #4:3
+        if ($Width -eq 1400) {$Height = 1050}   #4:3
+        if ($Width -eq 1600) {$Height = 1200}   #4:3
+        if ($Width -eq 1792) {$Height = 1344}   #4:3
+        if ($Width -eq 1856) {$Height = 1392}   #4:3
+        if ($Width -eq 1920) {$Height = 1440}   #4:3
+        if ($Width -eq 2048) {$Height = 1536}   #4:3
+        if ($Width -eq 2560) {$Height = 1920}   #4:3
+
+        #16:9
+        if ($Width -eq 1280) {$Height = 720}    #16:9
+        if ($Width -eq 1600) {$Height = 900}    #16:9
+        if ($Width -eq 1920) {$Height = 1080}   #16:9
+        if ($Width -eq 2048) {$Height = 1152}   #16:9
+        if ($Width -eq 3840) {$Height = 2160}   #16:9
+
+        Write-Verbose "Height (Vertical Resolution) was automatically set to $Height"
+    } elseif ($Height) {
+        Write-Warning "Height (Vertical Resolution) was not set"
+        Break
+    } else {
+        #Set Defauts
+        [int]$Width = 1920
+        [int]$Height = 1080
+    }
+
+    Write-Verbose "Width: $Width"
+    Write-Verbose "Height: $Height"
+
+    $Result = [Resolution.PrmaryScreenResolution]::ChangeResolution([int]$Width,[int]$Height) 
+    
+    if ($Result -eq 'DisRes successfully changed the Display Resolution') {
+        #Do Nothing
+    } else {
+        Write-Warning "$Result"
+    }
 }

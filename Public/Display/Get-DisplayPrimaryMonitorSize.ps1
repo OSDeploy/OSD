@@ -6,12 +6,12 @@ Returns [System.Windows.Forms.SystemInformation]::PrimaryMonitorSize
 Returns [System.Windows.Forms.SystemInformation]::PrimaryMonitorSize
 
 .LINK
-https://osd.osdeploy.com/module/functions/disres/get-primaryscreensizevirtual
+https://osd.osdeploy.com/module/functions/display/get-displayprimarymonitorsize
 
 .NOTES
 21.2.1  Initial Release
 #>
-function Get-PrimaryScreenSizeVirtual {
+function Get-DisplayPrimaryMonitorSize {
     [CmdletBinding()]
     Param ()
   

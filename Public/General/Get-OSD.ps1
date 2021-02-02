@@ -73,13 +73,27 @@ function Get-OSD {
     Write-Host -ForegroundColor Gray        'Identify, Download, and Apply Updates to a Mounted Windows Image'
     Write-Host -ForegroundColor DarkCyan    '================================================================================================================'
     Write-Host -ForegroundColor Cyan        'Display Functions'
-    Write-Host -ForegroundColor Yellow      'Get-AllScreens                     '
-    Write-Host -ForegroundColor Yellow      'Get-PrimaryScreenResolution        '
-    Write-Host -ForegroundColor Yellow      'Get-PrimaryScreenScaling           '
-    Write-Host -ForegroundColor Yellow      'Get-PrimaryScreenSizePhysical      '
-    Write-Host -ForegroundColor Yellow      'Get-PrimaryScreenSizeVirtual       '
-    Write-Host -ForegroundColor Yellow      'Get-VirtualScreen                  '
-    Write-Host -ForegroundColor Yellow      'Set-DisRes                         '
+
+    Write-Host -ForegroundColor Yellow      'Get-DisplayAllScreens                  ' -NoNewline
+    Write-Host -ForegroundColor Gray        'Returns [System.Windows.Forms.Screen]::AllScreens'
+
+    Write-Host -ForegroundColor Yellow      'Get-VideoControllerResolution     ' -NoNewline
+    Write-Host -ForegroundColor Gray        ''
+    
+    Write-Host -ForegroundColor Yellow      'Get-DisplayPrimaryScaling        ' -NoNewline
+    Write-Host -ForegroundColor Gray        ''
+    
+    Write-Host -ForegroundColor Yellow      'Get-DisplayPrimaryPhysical   ' -NoNewline
+    Write-Host -ForegroundColor Gray        ''
+    
+    Write-Host -ForegroundColor Yellow      'Get-DisplayPrimaryMonitorSize    ' -NoNewline
+    Write-Host -ForegroundColor Gray        ''
+    
+    Write-Host -ForegroundColor Yellow      'Get-DisplayVirtualScreen               ' -NoNewline
+    Write-Host -ForegroundColor Gray        'Returns [System.Windows.Forms.SystemInformation]::VirtualScreen'
+    
+    Write-Host -ForegroundColor Yellow      'Set-DisRes                             ' -NoNewline
+    Write-Host -ForegroundColor Gray        ''
     Write-Host -ForegroundColor DarkCyan    '================================================================================================================'
     Write-Host -ForegroundColor Cyan        'Driver Functions'
     Write-Host -ForegroundColor White       'Get-OSDDriver                      ' -NoNewline
@@ -108,12 +122,15 @@ function Get-OSD {
     Write-Host -ForegroundColor Gray        'Creates a WINDOWS Partition'
     Write-Host -ForegroundColor DarkCyan    '================================================================================================================'
     Write-Host -ForegroundColor Cyan        'Screenshot Functions'
-    Write-Host -ForegroundColor Yellow      'Get-Screenshot                     ' -NoNewline
+
+    Write-Host -ForegroundColor Yellow      'Get-ScreenPNG                      ' -NoNewline
     Write-Host -ForegroundColor Gray        'Takes a screeshot'
-    Write-Host -ForegroundColor Yellow      'Set-ClipboardImage                 ' -NoNewline
+
+    Write-Host -ForegroundColor Yellow      'Set-ScreenshotToClipboard          ' -NoNewline
     Write-Host -ForegroundColor Gray        'Sets a Screenshot of the Primary Screen on the Clipboard'
     Write-Host -ForegroundColor Yellow      '                                   ' -NoNewline
     Write-Host -ForegroundColor Gray        'Use Save-ClipboardImage to save the PNG'
+    
     Write-Host -ForegroundColor Yellow      'Save-ClipboardImage                ' -NoNewline
     Write-Host -ForegroundColor Gray        'Saves the Clipboard Image as a file.  PNG extension is recommended'
     Write-Host -ForegroundColor DarkCyan    '================================================================================================================'

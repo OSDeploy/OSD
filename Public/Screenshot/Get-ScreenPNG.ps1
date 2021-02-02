@@ -6,13 +6,13 @@ Captures a PowerShell Screenshot
 Captures a PowerShell Screenshot and saves the image in the -Directory $Env:TEMP\Screenshot by default
 
 .LINK
-https://osd.osdeploy.com/module/functions/general/get-screenshot
+https://osd.osdeploy.com/module/functions/general/get-screenpng
 
 .NOTES
 21.1.23 Initial Release
 
 #>
-function Get-Screenshot {
+function Get-ScreenPNG {
     [CmdletBinding()]
     Param (
         #Directory where the screenshots will be saved
@@ -41,10 +41,10 @@ function Get-Screenshot {
         #======================================================================================================
         #	Gather
         #======================================================================================================
-        $GetCommandNoun = Get-Command -Name Get-ScreenShot | Select-Object -ExpandProperty Noun
-        $GetCommandVersion = Get-Command -Name Get-ScreenShot | Select-Object -ExpandProperty Version
-        $GetCommandHelpUri = Get-Command -Name Get-ScreenShot | Select-Object -ExpandProperty HelpUri
-        $GetCommandModule = Get-Command -Name Get-ScreenShot | Select-Object -ExpandProperty Module
+        $GetCommandNoun = Get-Command -Name Get-ScreenPNG | Select-Object -ExpandProperty Noun
+        $GetCommandVersion = Get-Command -Name Get-ScreenPNG | Select-Object -ExpandProperty Version
+        $GetCommandHelpUri = Get-Command -Name Get-ScreenPNG | Select-Object -ExpandProperty HelpUri
+        $GetCommandModule = Get-Command -Name Get-ScreenPNG | Select-Object -ExpandProperty Module
         $GetModuleDescription = Get-Module -Name $GetCommandModule | Select-Object -ExpandProperty Description
         $GetModuleProjectUri = Get-Module -Name $GetCommandModule | Select-Object -ExpandProperty ProjectUri
         $GetModulePath = Get-Module -Name $GetCommandModule | Select-Object -ExpandProperty Path
@@ -95,7 +95,7 @@ function Get-Screenshot {
         Write-Verbose $GetModuleDescription
         Write-Verbose "Module Path: $GetModulePath"
         Write-Verbose '======================================================================================================'
-        Write-Verbose 'Get-ScreenShot [[-Directory] <String>] [[-Prefix] <String>] [[-Delay] <UInt32>] [[-Count] <UInt32>] [-Clipboard] [-Primary]'
+        Write-Verbose 'Get-ScreenPNG [[-Directory] <String>] [[-Prefix] <String>] [[-Delay] <UInt32>] [[-Count] <UInt32>] [-Clipboard] [-Primary]'
         Write-Verbose ''
         Write-Verbose '-Directory   Directory where the screenshots will be saved'
         Write-Verbose '             If this value is not set, Path will be automatically set between the following:'
@@ -187,12 +187,12 @@ function Get-Screenshot {
             #======================================================================================================
             #	Display Information
             #======================================================================================================
-            $GetAllScreens = @(Get-AllScreens)
-            $GetVirtualScreen = Get-VirtualScreen
+            $GetDisplayAllScreens = @(Get-DisplayAllScreens)
+            $GetDisplayVirtualScreen = Get-DisplayVirtualScreen
             #======================================================================================================
             #	Display Number
             #======================================================================================================
-            foreach ($Device in $GetAllScreens) {
+            foreach ($Device in $GetDisplayAllScreens) {
                 #DateString
                 $DateString = (Get-Date).ToString('yyyyMMdd_HHmmss')
                 
@@ -207,22 +207,22 @@ function Get-Screenshot {
                     $FileName = "$($DateString)"
                 }
 
-                if ($GetAllScreens.Count -eq 1) {
+                if ($GetDisplayAllScreens.Count -eq 1) {
                     $FileName = "$($FileName).png"
                 } else {
                     $FileName = "$($FileName)_$($DisplayNumber).png"
                 }
 
                 if ($Device.Primary -eq $true) {
-                    $GetPrimaryScreenSizePhysical = Get-PrimaryScreenSizePhysical
-                    #Write-Verbose "Width: $($GetPrimaryScreenSizePhysical.Width)" -Verbose
-                    #Write-Verbose "Height: $($GetPrimaryScreenSizePhysical.Height)" -Verbose
-                    $ScreenShotBitmap = New-Object System.Drawing.Bitmap $GetPrimaryScreenSizePhysical.Width, $GetPrimaryScreenSizePhysical.Height
-                    $ScreenShotGraphics = [System.Drawing.Graphics]::FromImage($ScreenShotBitmap)
-                    #Write-Verbose "X: $($GetVirtualScreen.X)" -Verbose
-                    #Write-Verbose "Y: $($GetVirtualScreen.Y)" -Verbose
-                    #Write-Verbose "Size: $($GetVirtualScreen.Size)" -Verbose
-                    $ScreenShotGraphics.CopyFromScreen($GetVirtualScreen.X, $GetVirtualScreen.Y, $GetVirtualScreen.X, $GetVirtualScreen.Y, $GetVirtualScreen.Size)
+                    $GetDisplayPrimaryPhysical = Get-DisplayPrimaryPhysical
+                    #Write-Verbose "Width: $($GetDisplayPrimaryPhysical.Width)" -Verbose
+                    #Write-Verbose "Height: $($GetDisplayPrimaryPhysical.Height)" -Verbose
+                    $ScreenShotBitmap = New-SystemDrawingBitmapPrimary
+                    $ScreenShotGraphics = New-SSGraphics
+                    #Write-Verbose "X: $($GetDisplayVirtualScreen.X)" -Verbose
+                    #Write-Verbose "Y: $($GetDisplayVirtualScreen.Y)" -Verbose
+                    #Write-Verbose "Size: $($GetDisplayVirtualScreen.Size)" -Verbose
+                    $ScreenShotGraphics.CopyFromScreen($GetDisplayVirtualScreen.X, $GetDisplayVirtualScreen.Y, $GetDisplayVirtualScreen.X, $GetDisplayVirtualScreen.Y, $GetDisplayVirtualScreen.Size)
                     Write-Verbose "Saving Primary ScreenShot $i of $Count to to $AutoPath\$FileName"
                 }
                 
@@ -230,12 +230,12 @@ function Get-Screenshot {
                     if ($Primary -eq $true) {Continue}
                     #Write-Verbose "Width: $($Device.Bounds.Width)" -Verbose
                     #Write-Verbose "Height: $($Device.Bounds.Height)" -Verbose
-                    $ScreenShotBitmap = New-Object System.Drawing.Bitmap $Device.Bounds.Width, $Device.Bounds.Height
-                    $ScreenShotGraphics = [System.Drawing.Graphics]::FromImage($ScreenShotBitmap)
+                    $ScreenShotBitmap = New-SystemDrawingBitmap
+                    $ScreenShotGraphics = New-SSGraphics
                     #Write-Verbose "X: $($Device.Bounds.X)" -Verbose
                     #Write-Verbose "Y: $($Device.Bounds.Y)" -Verbose
-                    #Write-Verbose "Size: $($GetVirtualScreen.Size)" -Verbose
-                    $ScreenShotGraphics.CopyFromScreen($Device.Bounds.X, $Device.Bounds.Y, 0, 0, $GetVirtualScreen.Size)
+                    #Write-Verbose "Size: $($GetDisplayVirtualScreen.Size)" -Verbose
+                    $ScreenShotGraphics.CopyFromScreen($Device.Bounds.X, $Device.Bounds.Y, 0, 0, $GetDisplayVirtualScreen.Size)
                     Write-Verbose "Saving Secondary ScreenShot $i of $Count to to $AutoPath\$FileName"
                 }
 
@@ -252,8 +252,8 @@ function Get-Screenshot {
                 if ($Device.Primary -eq $true) {
                     if ($Clipboard) {
                         Write-Verbose "Copying ScreenShot to the Clipboard"
-                        Add-Type -Assembly System.Drawing
-                        Add-Type -Assembly System.Windows.Forms
+                        #Add-Type -Assembly System.Drawing
+                        #Add-Type -Assembly System.Windows.Forms
                         [System.Windows.Forms.Clipboard]::SetImage($ScreenShotBitmap)
                     }
                 }

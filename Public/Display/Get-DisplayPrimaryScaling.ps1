@@ -6,12 +6,12 @@ Returns the Primary Screen Scaling in Percent
 Returns the Primary Screen Scaling in Percent
 
 .LINK
-https://osd.osdeploy.com/module/functions/disres/get-primaryscreenscaling
+https://osd.osdeploy.com/module/functions/display/get-displayPrimaryScaling
 
 .NOTES
 21.2.1  Initial Release
 #>
-function Get-PrimaryScreenScaling {
+function Get-DisplayPrimaryScaling {
     [CmdletBinding()]
     Param ()
   

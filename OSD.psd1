@@ -7,7 +7,7 @@
 RootModule = 'OSD.psm1'
 
 # Version number of his module.
-ModuleVersion = '21.2.1.1'
+ModuleVersion = '21.2.2.1'
 
 # Supported PSEditions
 # CompatiblePSEditions = @()
@@ -77,13 +77,13 @@ FunctionsToExport =     #Appx
                         "Set-WIMExecutionPolicy",
                         "Set-WindowsImageExecutionPolicy",
                         'Update-WindowsImageOSD',
-                        #DisRes
-                        'Get-AllScreens',
-                        'Get-PrimaryScreenResolutions',
-                        'Get-PrimaryScreenScaling',
-                        'Get-PrimaryScreenSizePhysical',
-                        'Get-PrimaryScreenSizeVirtual',
-                        'Get-VirtualScreen',
+                        #Display
+                        'Get-DisplayAllScreens',
+                        'Get-DisplayPrimaryMonitorSize',
+                        'Get-DisplayPrimaryPhysical',
+                        'Get-DisplayPrimaryScaling',
+                        'Get-DisplayVirtualScreen',
+                        'Get-VideoControllerResololution',
                         'Set-DisRes',
                         #General
                         'Get-OSD',
@@ -98,10 +98,10 @@ FunctionsToExport =     #Appx
                         'Save-OSDDownload',
                         #PowerShellGet
                         'Copy-Module',
-                        #ScreenShot
-                        'Get-ScreenShot',
+                        #SS
+                        'Get-ScreenPNG',
                         'Save-ClipboardImage',
-                        'Set-ClipboardImage',
+                        'Set-ScreenshotToClipboard',
                         #Storage
                         'Get-DiskIsBoot',
                         'Get-DiskIsSystem',

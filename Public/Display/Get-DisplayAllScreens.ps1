@@ -6,12 +6,12 @@ Returns [System.Windows.Forms.Screen]::AllScreens
 Returns [System.Windows.Forms.Screen]::AllScreens
 
 .LINK
-https://osd.osdeploy.com/module/functions/disres/get-allscreens
+https://osd.osdeploy.com/module/functions/display/get-displayallscreens
 
 .NOTES
 21.2.1  Initial Release
 #>
-function Get-AllScreens {
+function Get-DisplayAllScreens {
     [CmdletBinding()]
     Param ()
   
