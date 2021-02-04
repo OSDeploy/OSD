@@ -7,7 +7,7 @@
 RootModule = 'OSD.psm1'
 
 # Version number of his module.
-ModuleVersion = '21.2.2.2'
+ModuleVersion = '21.2.3.1'
 
 # Supported PSEditions
 # CompatiblePSEditions = @()
@@ -70,6 +70,13 @@ FunctionsToExport =     #Appx
                         'Remove-AppxOnline',
                         #Backup
                         'Backup-DiskToFFU',
+                        #Cim
+                        'Get-CimVideoControllerResolution',
+                        #ComObj
+                        'Get-ComObjects',
+                        'Get-ComObjMicrosoftUpdateAutoUpdate',
+                        'Get-ComObjMicrosoftUpdateInstaller',
+                        'Get-ComObjMicrosoftUpdateServiceManager',
                         #Dism
                         'Dismount-WindowsImageOSD',
                         'Edit-WindowsImageOSD',
@@ -100,7 +107,7 @@ FunctionsToExport =     #Appx
                         'Get-MyBiosVersion',
                         'Get-MyComputerManufacturer',
                         'Get-MyComputerModel',
-                        'Get-MyVideoControllerResolution',
+                        'Get-MyDefaultAUService',
                         #PowerShellGet
                         'Copy-ModuleToFolder',
                         #SS

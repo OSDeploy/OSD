@@ -6,7 +6,7 @@ Returns the Computer Model
 Returns the Computer Model
 
 .LINK
-https://osd.osdeploy.com/module/functions/getcim
+https://osd.osdeploy.com/module/functions/getmy
 
 .NOTES
 21.2.2     Initial Release
