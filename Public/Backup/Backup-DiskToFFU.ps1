@@ -29,10 +29,10 @@ function Backup-DiskToFFU {
 
         #Full path to save the Windows Image
         [Alias('ImagePath')]
-        [string] $ImageFile = "$($DestinationDriveLetter):\BackupFFU\$(Get-EZComputerManufacturer)\$(Get-EZComputerModel)\$(Get-EZComputerSerialNumber)_$Name.ffu",
+        [string] $ImageFile = "$($DestinationDriveLetter):\BackupFFU\$(Get-MyComputerManufacturer -Brief)\$(Get-MyComputerModel -Brief)\$(Get-MyBiosSerialNumber -Brief)_$Name.ffu",
 
         #Windows Image Property: Specifies the description of the image
-        [string] $Description = "$(Get-EZComputerManufacturer) $(Get-EZComputerModel) $(Get-EZComputerSerialNumber)",
+        [string] $Description = "$(Get-MyComputerManufacturer -Brief) $(Get-MyComputerModel -Brief) $(Get-MyBiosSerialNumber -Brief)",
 
         #Compression level.  Default or None
         [ValidateSet('Default','None')]
@@ -114,7 +114,7 @@ function Backup-DiskToFFU {
     }
     Write-Host -ForegroundColor DarkGray    '======================================================================================================'
     Write-Host -ForegroundColor Cyan        "-ImageFile  $ImageFile"
-    Write-Host -ForegroundColor White       'This path is generated automatically by combining the DestinationDriveLetter, ComputerManufacturer,'
+    Write-Host -ForegroundColor White       'This path is generated automatically by combining the DestinationDriveLetter, CimComputerManufacturer,'
     Write-Host -ForegroundColor White       'ComputerModel SerialNumber and DiskNumber.  You can fully modify this path to override the'
     Write-Host -ForegroundColor White       'DestinationDriveLetter or to save to a Network share'
     $ParentDirectory = Split-Path $ImageFile -Parent

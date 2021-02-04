@@ -91,7 +91,7 @@ function Get-OSD {
     Write-Host -ForegroundColor DarkCyan    '================================================================================================================'
     Write-Host -ForegroundColor Cyan        'Display Functions'
 
-    Write-Host -ForegroundColor Yellow      'Get-CIMVideoControllerResolution   ' -NoNewline
+    Write-Host -ForegroundColor Yellow      'Get-MyVideoControllerResolution    ' -NoNewline
     Write-Host -ForegroundColor Gray        'Returns the CIM_VideoControllerResolution Properties for the Primary Screen'
     
     Write-Host -ForegroundColor Yellow      'Get-DisplayAllScreens              ' -NoNewline
@@ -113,28 +113,49 @@ function Get-OSD {
     Write-Host -ForegroundColor Gray        'Sets the Primary Display Screen Resolution'
     Write-Host -ForegroundColor DarkCyan    '================================================================================================================'
     Write-Host -ForegroundColor Cyan        'Driver Functions'
+
     Write-Host -ForegroundColor White       'Get-OSDDriver                      ' -NoNewline
     Write-Host -ForegroundColor Gray        'Returns Driver download links for Amd Dell Hp Intel and Nvidia'
+
     Write-Host -ForegroundColor White       'Get-OSDDriverWmiQ                  ' -NoNewline
     Write-Host -ForegroundColor Gray        'Select multiple Dell or HP Computer Models to generate WMI Query'
     Write-Host -ForegroundColor DarkCyan    '================================================================================================================'
+    Write-Host -ForegroundColor Cyan        'GetCim'
+
+    Write-Host -ForegroundColor Yellow      'Get-MyComputerManufacturer        ' -NoNewline
+    Write-Host -ForegroundColor Gray        'Returns the Computer Manufacturer'
+
+    Write-Host -ForegroundColor Yellow      'Get-MyComputerModel               ' -NoNewline
+    Write-Host -ForegroundColor Gray        'Returns the Computer Model'
+
+    Write-Host -ForegroundColor Yellow      'Get-MyBiosSerialNumber            ' -NoNewline
+    Write-Host -ForegroundColor Gray        'Returns the Computer Serial Number'
+    Write-Host -ForegroundColor DarkCyan    '================================================================================================================'
     Write-Host -ForegroundColor Cyan        'PowerShellGet Functions'
+
     Write-Host -ForegroundColor Yellow      'Copy-ModuleToFolder                ' -NoNewline
     Write-Host -ForegroundColor Gray        'Copies a PowerShell Module to a specified Destination'
     Write-Host -ForegroundColor DarkCyan    '================================================================================================================'
     Write-Host -ForegroundColor Cyan        'Storage Functions'
+
     Write-Host -ForegroundColor Yellow      'Get-DiskIsBoot                     ' -NoNewline
     Write-Host -ForegroundColor Gray        'Gets the Disk containing the BOOT partition'
+
     Write-Host -ForegroundColor Yellow      'Get-DiskIsSystem                   ' -NoNewline
     Write-Host -ForegroundColor Gray        'Gets the Disk containing the SYSTEM partition'
+
     Write-Host -ForegroundColor Yellow      'Get-DiskToBackup                   ' -NoNewline
     Write-Host -ForegroundColor Gray        'Gets Disks that can be backed up'
+
     Write-Host -ForegroundColor White       'Initialize-DiskOSD                 ' -NoNewline
     Write-Host -ForegroundColor Gray        'Initializes a Disk'
+
     Write-Host -ForegroundColor White       'New-OSDDisk                        ' -NoNewline
     Write-Host -ForegroundColor Gray        'Creates System | OS | Recovery Partitions for MBR or UEFI Drives in WinPE'
+
     Write-Host -ForegroundColor White       'New-PartitionOSDSystem             ' -NoNewline
     Write-Host -ForegroundColor Gray        'Creates a SYSTEM Partition'
+
     Write-Host -ForegroundColor White       'New-PartitionOSDWindows            ' -NoNewline
     Write-Host -ForegroundColor Gray        'Creates a WINDOWS Partition'
     Write-Host -ForegroundColor DarkCyan    '================================================================================================================'
@@ -145,21 +166,15 @@ function Get-OSD {
 
     Write-Host -ForegroundColor Yellow      'Set-ClipboardScreenshot            ' -NoNewline
     Write-Host -ForegroundColor Gray        'Sets a Screenshot of the Primary Screen on the Clipboard'
+
     Write-Host -ForegroundColor Yellow      '                                   ' -NoNewline
     Write-Host -ForegroundColor Gray        'Use Save-ClipboardImage to save the PNG'
     
     Write-Host -ForegroundColor Yellow      'Save-ClipboardImage                ' -NoNewline
     Write-Host -ForegroundColor Gray        'Saves the Clipboard Image as a file.  PNG extension is recommended'
     Write-Host -ForegroundColor DarkCyan    '================================================================================================================'
-    Write-Host -ForegroundColor Cyan        'SystemInformation Functions'
-    Write-Host -ForegroundColor Yellow      'Get-EZComputerManufacturer         ' -NoNewline
-    Write-Host -ForegroundColor Gray        'Returns a simple Computer Manufacturer'
-    Write-Host -ForegroundColor Yellow      'Get-EZComputerModel                ' -NoNewline
-    Write-Host -ForegroundColor Gray        'Returns a Computer Model'
-    Write-Host -ForegroundColor Yellow      'Get-EZComputerSerialNumber         ' -NoNewline
-    Write-Host -ForegroundColor Gray        'Returns the Computer Serial Number'
-    Write-Host -ForegroundColor DarkCyan    '================================================================================================================'
     Write-Host -ForegroundColor Cyan        'WinPE Functions'
+    
     Write-Host -ForegroundColor White       'Get-OSDWinPE                       ' -NoNewline
     Write-Host -ForegroundColor Gray        'Common WinPE Commands using wpeutil and Microsoft DaRT RemoteRecovery'
     Write-Host -ForegroundColor DarkCyan    '================================================================================================================'

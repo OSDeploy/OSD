@@ -7,7 +7,7 @@
 RootModule = 'OSD.psm1'
 
 # Version number of his module.
-ModuleVersion = '21.2.2.1'
+ModuleVersion = '21.2.2.2'
 
 # Supported PSEditions
 # CompatiblePSEditions = @()
@@ -78,7 +78,6 @@ FunctionsToExport =     #Appx
                         "Set-WindowsImageExecutionPolicy",
                         'Update-WindowsImageOSD',
                         #Display
-                        'Get-CIMVideoControllerResolution',
                         'Get-DisplayAllScreens',
                         'Get-DisplayPrimaryMonitorSize',
                         'Get-DisplayPrimaryBitmapSize',
@@ -96,6 +95,12 @@ FunctionsToExport =     #Appx
                         'Get-RegCurrentVersion',
                         'Get-SessionsXml',
                         'Save-OSDDownload',
+                        #GetMy
+                        'Get-MyBiosSerialNumber',
+                        'Get-MyBiosVersion',
+                        'Get-MyComputerManufacturer',
+                        'Get-MyComputerModel',
+                        'Get-MyVideoControllerResolution',
                         #PowerShellGet
                         'Copy-ModuleToFolder',
                         #SS
@@ -109,11 +114,7 @@ FunctionsToExport =     #Appx
                         'Initialize-DiskOSD',
                         'New-OSDDisk',
                         'New-PartitionOSDSystem',
-                        'New-PartitionOSDWindows',
-                        #SystemInformation
-                        'Get-EZComputerManufacturer',
-                        'Get-EZComputerModel',
-                        'Get-EZComputerSerialNumber'
+                        'New-PartitionOSDWindows'
 
 # Cmdlets to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no cmdlets to export.
 CmdletsToExport = @()

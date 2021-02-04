@@ -228,13 +228,13 @@ function Get-ScreenPNG {
                 
                 if ($Device.Primary -eq $false) {
                     if ($Primary -eq $true) {Continue}
-                    #Write-Verbose "Width: $($Device.Bounds.Width)" -Verbose
-                    #Write-Verbose "Height: $($Device.Bounds.Height)" -Verbose
+                    Write-Verbose "Width: $($Device.Bounds.Width)" -Verbose
+                    Write-Verbose "Height: $($Device.Bounds.Height)" -Verbose
                     $ScreenshotBitmap = New-Object System.Drawing.Bitmap $Device.Bounds.Width, $Device.Bounds.Height
                     $ScreenshotGraphics = [System.Drawing.Graphics]::FromImage($ScreenShotBitmap)
-                    #Write-Verbose "X: $($Device.Bounds.X)" -Verbose
-                    #Write-Verbose "Y: $($Device.Bounds.Y)" -Verbose
-                    #Write-Verbose "Size: $($GetDisplayVirtualScreen.Size)" -Verbose
+                    Write-Verbose "X: $($Device.Bounds.X)" -Verbose
+                    Write-Verbose "Y: $($Device.Bounds.Y)" -Verbose
+                    Write-Verbose "Size: $($GetDisplayVirtualScreen.Size)" -Verbose
                     $ScreenshotGraphics.CopyFromScreen($Device.Bounds.X, $Device.Bounds.Y, 0, 0, $GetDisplayVirtualScreen.Size)
                     Write-Verbose "Saving Secondary Screenshot $i of $Count to to $AutoPath\$FileName"
                 }

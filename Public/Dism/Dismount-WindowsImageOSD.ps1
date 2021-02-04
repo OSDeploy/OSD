@@ -12,7 +12,10 @@ https://osd.osdeploy.com/module/functions/dism/dismount-windowsimageosd
 19.11.21 David Segura @SeguraOSD
 #>
 function Dismount-WindowsImageOSD {
-    [CmdletBinding(DefaultParameterSetName = 'DismountDiscard')]
+    [CmdletBinding(
+        SupportsShouldProcess,
+        DefaultParameterSetName = 'DismountDiscard'
+    )]
     Param ( 
         #Specifies the full path to the root directory of the offline Windows image that you will service.
         [Parameter(ValueFromPipelineByPropertyName)]
@@ -59,8 +62,16 @@ function Dismount-WindowsImageOSD {
             #===================================================================================================
             #   Dismount-WindowsImage
             #===================================================================================================
-            if ($Discard.IsPresent) {Dismount-WindowsImage -Path $Input -Discard | Out-Null}
-            if ($Save.IsPresent) {Dismount-WindowsImage -Path $Input -Save | Out-Null}
+            if ($Discard.IsPresent) {
+                if ($PSCmdlet.ShouldProcess($Input, "Dismount-WindowsImageOSD -Discard")) {
+                    Dismount-WindowsImage -Path $Input -Discard | Out-Null
+                }
+            }
+            if ($Save.IsPresent) {
+                if ($PSCmdlet.ShouldProcess($Input, "Dismount-WindowsImageOSD -Save")) {
+                    Dismount-WindowsImage -Path $Input -Save | Out-Null
+                }
+            }
         }
     }
     End {}
