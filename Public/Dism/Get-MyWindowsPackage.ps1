@@ -34,7 +34,7 @@ function Get-MyWindowsPackage {
         [string[]]$Like,
         [string[]]$Match,
 
-        [switch]$FullDetails
+        [switch]$Detailed
     )
     #===================================================================================================
     #   Get-WindowsPackage
@@ -116,7 +116,7 @@ function Get-MyWindowsPackage {
     #===================================================================================================
     #   Create Object
     #===================================================================================================
-    if ($FullDetails -eq $true) {
+    if ($Detailed -eq $true) {
         #Build Object
         $Results = foreach ($Item in $FilteredItems) {
             $ItemBaseName        = ($Item.PackageName -split ',*~')[0]

@@ -34,6 +34,12 @@ function Get-OSD {
 
 
     Write-Host -ForegroundColor DarkCyan    '=================================' -NoNewline
+    Write-Host -ForegroundColor Cyan        '21.2.8'
+    Write-Host -ForegroundColor Yellow      'Get-MyWindowsCapability                ' -NoNewline
+    Write-Host -ForegroundColor Gray        'Detailed version of Get-WindowsCapability'
+    Write-Host -ForegroundColor Yellow      'Get-MyWindowsPackage                   ' -NoNewline
+    Write-Host -ForegroundColor Gray        'Detailed version of Get-WindowsPackage'
+    Write-Host -ForegroundColor DarkCyan    '=================================' -NoNewline
     Write-Host -ForegroundColor Cyan        '21.2.3'
     Write-Host -ForegroundColor Yellow      'Get-ComObjects                         ' -NoNewline
     Write-Host -ForegroundColor Gray        'List of (mostly all) of the system ComObjects'

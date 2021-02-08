@@ -31,7 +31,7 @@ function Get-MyWindowsCapability {
         [string[]]$Like,
         [string[]]$Match,
 
-        [switch]$FullDetails
+        [switch]$Detailed
 
         #[Parameter(Mandatory = $false, ParameterSetName = "Online", ValueFromPipeline = $false, ValueFromPipelineByPropertyName = $true)]
         #[switch]$Install
@@ -98,7 +98,7 @@ function Get-MyWindowsCapability {
     #===================================================================================================
     #   Create Object
     #===================================================================================================
-    if ($FullDetails -eq $true) {
+    if ($Detailed -eq $true) {
         $Results = foreach ($Item in $FilteredItems) {
             $ItemBaseName        = ($Item.Name -split ',*~')[0]
             $ItemLanguage        = ($Item.Name -split ',*~')[3]
