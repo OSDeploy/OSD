@@ -80,6 +80,8 @@ FunctionsToExport =     #Appx
                         #Dism
                         'Dismount-WindowsImageOSD',
                         'Edit-WindowsImageOSD',
+                        'Get-MyWindowsCapability',
+                        'Get-MyWindowsPackage',
                         'Mount-WindowsImageOSD',
                         "Set-WIMExecutionPolicy",
                         "Set-WindowsImageExecutionPolicy",
