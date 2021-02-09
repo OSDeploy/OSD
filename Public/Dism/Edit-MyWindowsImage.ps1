@@ -49,9 +49,10 @@ function Edit-MyWindowsImage {
         #   Require Admin Rights
         #===================================================================================================
         if ((Get-OSDGather -Property IsAdmin) -eq $false) {
-            Write-Warning 'Edit-MyWindowsImage requires ELEVATED Admin Rights'
+            Write-Warning "$($MyInvocation.MyCommand) requires Admin Rights ELEVATED"
             Break
         }
+        #===================================================================================================
     }
     process {
         if ($PSCmdlet.ParameterSetName -eq 'Online') {

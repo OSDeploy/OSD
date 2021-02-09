@@ -42,14 +42,14 @@ function Update-MyWindowsImage {
         #   Require Admin Rights
         #===================================================================================================
         if ((Get-OSDGather -Property IsAdmin) -eq $false) {
-            Write-Warning 'Update-MyWindowsImage requires Admin Rights ELEVATED'
+            Write-Warning "$($MyInvocation.MyCommand) requires Admin Rights ELEVATED"
             Break
         }
         #===================================================================================================
         #   Require OSDSUS Module
         #===================================================================================================
         if (-not (Get-Module -ListAvailable -Name OSDSUS)) {
-            Write-Warning "Update-MyWindowsImage: PowerShell Module OSDSUS is required"
+            Write-Warning "$($MyInvocation.MyCommand) requires PowerShell Module OSDSUS"
             Break
         }
         #===================================================================================================

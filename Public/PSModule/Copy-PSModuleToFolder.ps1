@@ -5,8 +5,18 @@ Get-Module and copy the ModuleBase to a new Destination\ModuleBase
 .DESCRIPTION
 Get-Module and copy the ModuleBase to a new Destination\ModuleBase
 
+.PARAMETER Name
+Name of the PowerShell Module to Copy
+
+.PARAMETER Destination
+Destination PSModule directory
+Copied Module is a Child of Destination
+
+.PARAMETER RemoveOldVersions
+Removes older Module Versions from the Destination
+
 .LINK
-https://osd.osdeploy.com/module/functions/powershellget/copy-moduletofolder
+https://osd.osdeploy.com/module/functions/psmodule/copy-psmoduletofolder
 
 .NOTES
 21.1.30.1   Initial Release
@@ -16,30 +26,18 @@ https://osd.osdeploy.com/module/functions/powershellget/copy-moduletofolder
 21.2.2.1	Renamed to Copy-ModuleToFolder so I don't mess with PowerShellGet
 21.2.9.1	Renamed to Copy-PSModuleToFolder to standardize
 #>
-function Copy-PSModuleToWindowsImage {
+function Copy-PSModuleToFolder {
     [CmdletBinding()]
     param (
-        #Name of the PowerShell Module to Copy
-        [Parameter(
-            Position=0,
-            Mandatory=$true,
-            ValueFromPipelineByPropertyName=$true
-        )]
+        [Parameter(Position = 0, Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
         [SupportsWildcards()]
         [String[]]$Name,
 
-        #Destination PSModule directory
-        #Copied Module is a Child of Destination
-        [Parameter(
-            Position=1,
-            Mandatory=$true,
-            ValueFromPipelineByPropertyName=$true
-        )]
+        [Parameter(Position = 1, Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
         [Alias('Folder')]
         [String]$Destination,
 
-        #Removes older Module Versions from the Destination
-        [switch]$RemoveOldVersions=$false
+        [switch]$RemoveOldVersions
     )
 
     begin {

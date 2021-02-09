@@ -7,6 +7,7 @@ The Get-MyWindowsPackage cmdlet gets information about all packages in a Windows
 
 .PARAMETER Path
 Specifies the full path to the root directory of the offline Windows image that you will service.
+Get-MyWindowsPackage -Path C:\Temp\MountedWim
 
 .PARAMETER PackageState
 Installation state of the Windows Package
@@ -105,7 +106,7 @@ function Get-MyWindowsPackage {
     #   Require Admin Rights
     #===================================================================================================
     if ((Get-OSDGather -Property IsAdmin) -eq $false) {
-        Write-Warning 'Get-MyWindowsPackage requires Admin Rights ELEVATED'
+        Write-Warning "$($MyInvocation.MyCommand) requires Admin Rights ELEVATED"
         Break
     }
     #===================================================================================================

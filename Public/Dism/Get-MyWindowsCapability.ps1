@@ -100,7 +100,7 @@ function Get-MyWindowsCapability {
         #   Require Admin Rights
         #===================================================================================================
         if ((Get-OSDGather -Property IsAdmin) -eq $false) {
-            Write-Warning 'Get-MyWindowsCapability requires Admin Rights ELEVATED'
+            Write-Warning "$($MyInvocation.MyCommand) requires Admin Rights ELEVATED"
             Break
         }
         #===================================================================================================

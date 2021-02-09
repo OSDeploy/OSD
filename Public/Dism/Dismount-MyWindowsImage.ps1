@@ -35,7 +35,7 @@ function Dismount-MyWindowsImage {
         #   Require Admin Rights
         #===================================================================================================
         if ((Get-OSDGather -Property IsAdmin) -eq $false) {
-            Write-Warning 'Dismount-MyWindowsImage requires Admin Rights ELEVATED'
+            Write-Warning "$($MyInvocation.MyCommand) requires Admin Rights ELEVATED"
             Break
         }
         #===================================================================================================
