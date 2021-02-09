@@ -70,6 +70,8 @@ FunctionsToExport =     #Appx
                         'Remove-AppxOnline',
                         #Backup
                         'Backup-DiskToFFU',
+                        #Bitlocker
+                        'Get-BitlockerRecoveryPassword',
                         #Cim
                         'Get-CimVideoControllerResolution',
                         #ComObj

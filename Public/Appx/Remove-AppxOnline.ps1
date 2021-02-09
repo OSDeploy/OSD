@@ -29,9 +29,10 @@ function Remove-AppxOnline {
         #   Require Admin Rights
         #===================================================================================================
         if ((Get-OSDGather -Property IsAdmin) -eq $false) {
-            Write-Warning 'Remove-AppxOnline requires ELEVATED Admin Rights'
+            Write-Warning "$($MyInvocation.MyCommand) requires Admin Rights ELEVATED"
             Break
         }
+        #===================================================================================================
     }
     process {
         #===================================================================================================

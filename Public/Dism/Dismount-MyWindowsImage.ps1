@@ -5,27 +5,46 @@ Dismounts a Windows image from the directory it is mapped to.
 .DESCRIPTION
 The Dismount-WindowsImage cmdlet either saves or discards the changes to a Windows image and then dismounts the image.
 
+.PARAMETER Path
+Specifies the full path to the root directory of the offline Windows image that you will service.
+
+.PARAMETER Discard
+Discards the changes to a Windows image.
+
+.PARAMETER Save
+Saves the changes to a Windows image.
+
 .LINK
 https://osd.osdeploy.com/module/functions/dism/dismount-mywindowsimage
 
+.INPUTS
+System.String[]
+
+.INPUTS
+Microsoft.Dism.Commands.ImageObject
+
+.INPUTS
+Microsoft.Dism.Commands.MountedImageInfoObject
+
+.INPUTS
+Microsoft.Dism.Commands.ImageInfoObject
+
+.OUTPUTS
+Microsoft.Dism.Commands.BaseDismObject
+
 .NOTES
-19.11.21 David Segura @SeguraOSD
+19.11.21    Initial Release
+21.2.9      Renamed from Dismount-WindowsImageOSD
 #>
 function Dismount-MyWindowsImage {
-    [CmdletBinding(
-        SupportsShouldProcess,
-        DefaultParameterSetName = 'DismountDiscard'
-    )]
-    param ( 
-        #Specifies the full path to the root directory of the offline Windows image that you will service.
+    [CmdletBinding(SupportsShouldProcess, DefaultParameterSetName = 'DismountDiscard')]
+    param (
         [Parameter(ValueFromPipelineByPropertyName)]
         [string[]]$Path,
 
-        #Discard Changes to the Mounted Windows Image
         [Parameter(ParameterSetName = 'DismountDiscard', Mandatory = $true)]
         [switch]$Discard,
 
-        #Save Changes to the Mounted Windows Image
         [Parameter(ParameterSetName = 'DismountSave', Mandatory = $true)]
         [switch]$Save
     )
@@ -44,6 +63,7 @@ function Dismount-MyWindowsImage {
         if ($null -eq $Path) {
             $Path = (Get-WindowsImage -Mounted | Select-Object -Property Path).Path
         }
+        #===================================================================================================
     }
     process {
         foreach ($Input in $Path) {
