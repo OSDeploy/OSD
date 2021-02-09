@@ -14,7 +14,7 @@ Credit Ben Whitmore | byteben.com | @byteben
 #>
 function Get-MyDefaultAUService {
     [CmdletBinding()]
-    Param (
+    param (
         #Normalize the Return
         [switch]$Brief
     )

@@ -14,7 +14,7 @@ https://osd.osdeploy.com/module/functions/driver/get-osddriver
 #>
 function Get-OSDDriver {
     [CmdletBinding()]
-    Param (
+    param (
         #Limits the results to the specified OSDGroup
         [ValidateSet('AmdDisplay','DellFamily','DellModel','HpModel','IntelDisplay','IntelWireless','NvidiaDisplay')]
         [Parameter(Position = 0, Mandatory = $true, ValueFromPipelineByPropertyName)]

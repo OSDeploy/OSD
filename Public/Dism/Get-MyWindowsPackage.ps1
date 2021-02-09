@@ -81,7 +81,7 @@ Remove-WindowsPackage
 #>
 function Get-MyWindowsPackage {
     [CmdletBinding(DefaultParameterSetName = 'Online')]
-    Param (
+    param (
         [Parameter(Mandatory = $true, ParameterSetName = "Offline", ValueFromPipeline = $false, ValueFromPipelineByPropertyName = $true)]
         [string]$Path,
 
@@ -105,7 +105,7 @@ function Get-MyWindowsPackage {
     #   Require Admin Rights
     #===================================================================================================
     if ((Get-OSDGather -Property IsAdmin) -eq $false) {
-        Write-Warning 'This function requires Admin Rights ELEVATED'
+        Write-Warning 'Get-MyWindowsPackage requires Admin Rights ELEVATED'
         Break
     }
     #===================================================================================================
@@ -114,7 +114,7 @@ function Get-MyWindowsPackage {
     if (Get-Command -Name Get-WindowsPackage -ErrorAction SilentlyContinue) {
         Write-Verbose 'Verified command Get-WindowsPackage'
     } else {
-        Write-Warning 'This function requires Get-WindowsPackage which is not present'
+        Write-Warning 'Get-MyWindowsPackage requires Get-WindowsPackage which is not present'
         Break
     }
     #===================================================================================================

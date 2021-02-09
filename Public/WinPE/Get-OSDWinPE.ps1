@@ -13,7 +13,7 @@ https://osd.osdeploy.com/module/functions/winpe/get-osdwinpe
 #>
 function Get-OSDWinPE {
     [CmdletBinding()]
-    Param (
+    param (
         #PowerShell Module Parameter
         #Searches all Drives for <drive>:\Modules directory
         #Copies Modules content to System32 $PSModulesPath
@@ -95,7 +95,7 @@ function Get-OSDWinPE {
     #	IsWinPE
     #======================================================================================================
     if (Get-OSDGather -Property IsWinPE) {Write-Verbose 'OSDWinPE: WinPE is running'}
-    else {Write-Warning 'OSDWinPE: This function requires WinPE'; Break}
+    else {Write-Warning 'Get-OSDWinPE function requires WinPE'; Break}
     #======================================================================================================
     #	Increase the Console Screen Buffer size
     #======================================================================================================

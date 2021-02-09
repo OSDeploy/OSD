@@ -12,7 +12,7 @@ https://osddrivers.osdeploy.com/functions/get-driverinteldisplay
 #>
 function Get-OSDDriverIntelDisplay {
     [CmdletBinding()]
-    Param ()
+    param ()
     #===================================================================================================
     #   Uri
     #===================================================================================================

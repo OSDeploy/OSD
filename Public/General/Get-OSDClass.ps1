@@ -20,7 +20,7 @@ https://osd.osdeploy.com/module/functions/general/get-osdclass
 #>
 function Get-OSDClass {
     [CmdletBinding()]
-    Param (
+    param (
         #CimInstance Class Name
         #Battery
         #BaseBoard

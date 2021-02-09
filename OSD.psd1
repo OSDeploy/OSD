@@ -7,7 +7,7 @@
 RootModule = 'OSD.psm1'
 
 # Version number of his module.
-ModuleVersion = '21.2.9.1'
+ModuleVersion = '21.2.9.2'
 
 # Supported PSEditions
 # CompatiblePSEditions = @()
@@ -78,14 +78,14 @@ FunctionsToExport =     #Appx
                         'Get-ComObjMicrosoftUpdateInstaller',
                         'Get-ComObjMicrosoftUpdateServiceManager',
                         #Dism
-                        'Dismount-WindowsImageOSD',
-                        'Edit-WindowsImageOSD',
+                        'Dismount-MyWindowsImage',
+                        'Edit-MyWindowsImage',
                         'Get-MyWindowsCapability',
                         'Get-MyWindowsPackage',
-                        'Mount-WindowsImageOSD',
-                        "Set-WIMExecutionPolicy",
+                        'Mount-MyWindowsImage',
+                        "Set-WimExecutionPolicy",
                         "Set-WindowsImageExecutionPolicy",
-                        'Update-WindowsImageOSD',
+                        'Update-MyWindowsImage',
                         #Display
                         'Get-DisplayAllScreens',
                         'Get-DisplayPrimaryMonitorSize',
@@ -111,7 +111,9 @@ FunctionsToExport =     #Appx
                         'Get-MyComputerModel',
                         'Get-MyDefaultAUService',
                         #PowerShellGet
-                        'Copy-ModuleToFolder',
+                        'Copy-PSModuleToFolder',
+                        'Copy-PSModuleToWim',
+                        'Copy-PSModuleToWindowsImage',
                         #SS
                         'Get-ScreenPNG',
                         'Save-ClipboardImage',
@@ -132,7 +134,15 @@ CmdletsToExport = @()
 VariablesToExport = @()
 
 # Aliases to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no aliases to export.
-AliasesToExport = @()
+AliasesToExport = @(
+                    'Dismount-WindowsImageOSD',
+                    'Edit-WindowsImageOSD',
+                    'Get-OSDSessions',
+                    'Mount-OSDWindowsImage',
+                    'Mount-WindowsImageOSD',
+                    'Update-OSDWindowsImage',
+                    'Update-WindowsImageOSD'
+                    )
 
 # DSC resources to export from this module
 # DscResourcesToExport = @()

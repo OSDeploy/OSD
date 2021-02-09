@@ -14,7 +14,7 @@ Credit Ben Whitmore | byteben.com | @byteben
 #>
 function Get-ComObjMicrosoftUpdateInstaller {
     [CmdletBinding()]
-    Param ()
+    param ()
 
     Return New-Object -ComObject Microsoft.Update.Installer
 }

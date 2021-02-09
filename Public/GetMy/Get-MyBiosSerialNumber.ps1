@@ -13,7 +13,7 @@ https://osd.osdeploy.com/module/functions/getmy
 #>
 function Get-MyBiosSerialNumber {
     [CmdletBinding()]
-    Param (
+    param (
         #Normalize the Return
         [switch]$Brief
     )

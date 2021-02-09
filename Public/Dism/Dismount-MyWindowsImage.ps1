@@ -6,17 +6,17 @@ Dismounts a Windows image from the directory it is mapped to.
 The Dismount-WindowsImage cmdlet either saves or discards the changes to a Windows image and then dismounts the image.
 
 .LINK
-https://osd.osdeploy.com/module/functions/dism/dismount-windowsimageosd
+https://osd.osdeploy.com/module/functions/dism/dismount-mywindowsimage
 
 .NOTES
 19.11.21 David Segura @SeguraOSD
 #>
-function Dismount-WindowsImageOSD {
+function Dismount-MyWindowsImage {
     [CmdletBinding(
         SupportsShouldProcess,
         DefaultParameterSetName = 'DismountDiscard'
     )]
-    Param ( 
+    param ( 
         #Specifies the full path to the root directory of the offline Windows image that you will service.
         [Parameter(ValueFromPipelineByPropertyName)]
         [string[]]$Path,
@@ -30,12 +30,12 @@ function Dismount-WindowsImageOSD {
         [switch]$Save
     )
 
-    Begin {
+    begin {
         #===================================================================================================
         #   Require Admin Rights
         #===================================================================================================
         if ((Get-OSDGather -Property IsAdmin) -eq $false) {
-            Write-Warning 'Dismount-WindowsImageOSD: This function requires Admin Rights ELEVATED'
+            Write-Warning 'Dismount-MyWindowsImage requires Admin Rights ELEVATED'
             Break
         }
         #===================================================================================================
@@ -45,7 +45,7 @@ function Dismount-WindowsImageOSD {
             $Path = (Get-WindowsImage -Mounted | Select-Object -Property Path).Path
         }
     }
-    Process {
+    process {
         foreach ($Input in $Path) {
             #===================================================================================================
             #   Path
@@ -56,23 +56,23 @@ function Dismount-WindowsImageOSD {
             #   Validate Mount Path
             #===================================================================================================
             if (-not (Test-Path $Input -ErrorAction SilentlyContinue)) {
-                Write-Warning "Update-WindowsImageOSD: Unable to locate Mounted WindowsImage at $Input"
+                Write-Warning "Dismount-MyWindowsImage: Unable to locate Mounted WindowsImage at $Input"
                 Break
             }
             #===================================================================================================
             #   Dismount-WindowsImage
             #===================================================================================================
             if ($Discard.IsPresent) {
-                if ($PSCmdlet.ShouldProcess($Input, "Dismount-WindowsImageOSD -Discard")) {
+                if ($PSCmdlet.ShouldProcess($Input, "Dismount-MyWindowsImage -Discard")) {
                     Dismount-WindowsImage -Path $Input -Discard | Out-Null
                 }
             }
             if ($Save.IsPresent) {
-                if ($PSCmdlet.ShouldProcess($Input, "Dismount-WindowsImageOSD -Save")) {
+                if ($PSCmdlet.ShouldProcess($Input, "Dismount-MyWindowsImage -Save")) {
                     Dismount-WindowsImage -Path $Input -Save | Out-Null
                 }
             }
         }
     }
-    End {}
+    end {}
 }

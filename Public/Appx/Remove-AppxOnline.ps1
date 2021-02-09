@@ -13,7 +13,7 @@ https://osd.osdeploy.com/module/functions/appx/remove-appxonline
 #>
 function Remove-AppxOnline {
     [CmdletBinding()]
-    Param (
+    param (
         #Appx Packages selected in GridView will be removed from the Windows Image
         [switch]$GridRemoveAppx,
 
@@ -24,16 +24,16 @@ function Remove-AppxOnline {
         [string[]]$Name
     )
 
-    Begin {
+    begin {
         #===================================================================================================
         #   Require Admin Rights
         #===================================================================================================
         if ((Get-OSDGather -Property IsAdmin) -eq $false) {
-            Write-Warning 'Remove-AppxOnline: This function requires ELEVATED Admin Rights'
+            Write-Warning 'Remove-AppxOnline requires ELEVATED Admin Rights'
             Break
         }
     }
-    Process {
+    process {
         #===================================================================================================
         #   Get Registry Information
         #===================================================================================================
@@ -113,5 +113,5 @@ function Remove-AppxOnline {
             }
         }
     }
-    End {}
+    end {}
 }

@@ -15,7 +15,7 @@ https://osd.osdeploy.com/module/functions/general/get-osdsessions
 #>
 function Get-SessionsXml {
     [CmdletBinding()]
-    Param (
+    param (
         [Parameter(ValueFromPipelineByPropertyName = $true)]
         #Specifies the full path to the root directory of the offline Windows image that you will service
         #Or Path of the Sessions.xml file
@@ -25,8 +25,8 @@ function Get-SessionsXml {
         #Returns the KBNumber
         [string]$KBNumber
     )
-    Begin {}
-    Process {
+    begin {}
+    process {
         #===================================================================================================
         #   Set Sessions.xml
         #===================================================================================================
@@ -68,5 +68,5 @@ function Get-SessionsXml {
         #if ($GridView.IsPresent) {$SessionsXml = $SessionsXml | Select-Object -Property * | Out-GridView -PassThru -Title 'Select Updates'}
         Return $SessionsXml
     }
-    End {}
+    end {}
 }

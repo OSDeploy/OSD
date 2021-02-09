@@ -13,7 +13,7 @@ https://osd.osdeploy.com/module/functions/display/get-displayprimarybitmapsize
 #>
 function Get-DisplayPrimaryBitmapSize {
     [CmdletBinding()]
-    Param ()
+    param ()
   
     $GetDisplayPrimaryMonitorSize = Get-DisplayPrimaryMonitorSize
     $GetDisplayPrimaryScaling = Get-DisplayPrimaryScaling

@@ -14,7 +14,7 @@ https://docs.microsoft.com/en-us/windows-hardware/manufacture/desktop/deploy-win
 #>
 function Backup-DiskToFFU {
     [CmdletBinding()]
-    Param (
+    param (
         #Disk Number of the Drive to capture
         #Use Get-Disk to get the DiskNumber Property
         [Alias('Number')]

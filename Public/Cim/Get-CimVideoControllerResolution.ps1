@@ -13,7 +13,7 @@ https://osd.osdeploy.com/module/functions/cim
 #>
 function Get-CimVideoControllerResolution {
     [CmdletBinding()]
-    Param (
+    param (
 
         #Returns Interlaced resolutions
         [switch]$Interlaced=$false

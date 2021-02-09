@@ -1,6 +1,6 @@
 function Get-DiskBootWithPartitions {
     [CmdletBinding()]
-    Param ()
+    param ()
 
     begin {}
     process {}

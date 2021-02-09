@@ -13,7 +13,7 @@ https://osd.osdeploy.com/module/functions/general/save-osddownload
 #>
 function Save-OSDDownload {
     [CmdletBinding()]
-    Param (
+    param (
         #URL of the file to download
         [Parameter(Position = 0,Mandatory = $true, ValueFromPipelineByPropertyName)]
         [Alias('DriverUrl')]
@@ -34,10 +34,10 @@ function Save-OSDDownload {
         [switch]$BitsTransfer
     )
 
-    Begin {
+    begin {
 
     }
-    Process {
+    process {
         foreach ($Input in $SourceUrl) {
             #======================================================================================================
             #	Create Global Variable
@@ -97,5 +97,5 @@ function Save-OSDDownload {
             Return $global:OSDDownload
         }
     }
-    End {}
+    end {}
 }

@@ -6,14 +6,14 @@ Edits a mounted Windows Image
 Edits a mounted Windows Image
 
 .LINK
-https://osd.osdeploy.com/module/functions/dism/edit-windowsimageosd
+https://osd.osdeploy.com/module/functions/dism/edit-mywindowsimage
 
 .NOTES
 19.11.22 David Segura @SeguraOSD
 #>
-function Edit-WindowsImageOSD {
+function Edit-MyWindowsImage {
     [CmdletBinding(DefaultParameterSetName = 'Offline')]
-    Param (
+    param (
         #Specifies the full path to the root directory of the offline Windows image that you will service.
         #If the directory named Windows is not a subdirectory of the root directory, -WindowsDirectory must be specified.
         [Parameter(ParameterSetName = 'Offline', ValueFromPipelineByPropertyName)]
@@ -44,16 +44,16 @@ function Edit-WindowsImageOSD {
         [string[]]$RemoveAppxPP
     )
 
-    Begin {
+    begin {
         #===================================================================================================
         #   Require Admin Rights
         #===================================================================================================
         if ((Get-OSDGather -Property IsAdmin) -eq $false) {
-            Write-Warning 'Edit-WindowsImageOSD: This function requires ELEVATED Admin Rights'
+            Write-Warning 'Edit-MyWindowsImage requires ELEVATED Admin Rights'
             Break
         }
     }
-    Process {
+    process {
         if ($PSCmdlet.ParameterSetName -eq 'Online') {
             #===================================================================================================
             #   Get Registry Information
@@ -63,7 +63,7 @@ function Edit-WindowsImageOSD {
             #   Require OSMajorVersion 10
             #===================================================================================================
             if ($GetRegCurrentVersion.CurrentMajorVersionNumber -ne 10) {
-                Write-Warning "Edit-WindowsImageOSD: OS MajorVersion 10 is required"
+                Write-Warning "Edit-MyWindowsImage: OS MajorVersion 10 is required"
                 Break
             }
             #===================================================================================================
@@ -127,7 +127,7 @@ function Edit-WindowsImageOSD {
                 #   Validate Mount Path
                 #===================================================================================================
                 if (-not (Test-Path $Input -ErrorAction SilentlyContinue)) {
-                    Write-Warning "Edit-WindowsImageOSD: Unable to locate Mounted WindowsImage at $Input"
+                    Write-Warning "Edit-MyWindowsImage: Unable to locate Mounted WindowsImage at $Input"
                     Break
                 }
                 #===================================================================================================
@@ -138,14 +138,14 @@ function Edit-WindowsImageOSD {
                 #   Require OSMajorVersion 10
                 #===================================================================================================
                 if ($GetRegCurrentVersion.CurrentMajorVersionNumber -ne 10) {
-                    Write-Warning "Edit-WindowsImageOSD: OS MajorVersion 10 is required"
+                    Write-Warning "Edit-MyWindowsImage: OS MajorVersion 10 is required"
                     Break
                 }
                 #===================================================================================================
                 #   GridRemoveAppxPP
                 #===================================================================================================
                 if ($GridRemoveAppxPP.IsPresent) {
-                    $CurrentLog = "$env:TEMP\OSD\$((Get-Date).ToString('yyyy-MM-dd-HHmmss'))-Edit-WindowsImageOSD.log"
+                    $CurrentLog = "$env:TEMP\OSD\$((Get-Date).ToString('yyyy-MM-dd-HHmmss'))-Edit-MyWindowsImage.log"
                     Get-AppxProvisionedPackage -Path $Input | Select-Object DisplayName, PackageName | Out-GridView -PassThru -Title "Select Appx Provisioned Packages to Remove from $Input" | Remove-AppProvisionedPackage -Path $Input -LogPath $CurrentLog
                 }
                 #===================================================================================================
@@ -155,7 +155,7 @@ function Edit-WindowsImageOSD {
                     foreach ($Item in $RemoveAppxPP) {
                         Write-Verbose "RemoveAppxPP: $Item"
                         Get-AppxProvisionedPackage -Path $Input | Where-Object {$_.DisplayName -Match $Item} | ForEach-Object {
-                            $DismLog = "$env:TEMP\OSD\$((Get-Date).ToString('yyyy-MM-dd-HHmmss'))-Edit-WindowsImageOSD.log"
+                            $DismLog = "$env:TEMP\OSD\$((Get-Date).ToString('yyyy-MM-dd-HHmmss'))-Edit-MyWindowsImage.log"
                             Write-Verbose "$($_.DisplayName): Removing Appx Provisioned Package $($_.PackageName)" -Verbose
                             Remove-AppxProvisionedPackage -Path $_.Path -PackageName $_.PackageName -LogPath $DismLog | Out-Null
                         } 
@@ -196,5 +196,5 @@ function Edit-WindowsImageOSD {
             }
         }
     }
-    End {}
+    end {}
 }

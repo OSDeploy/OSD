@@ -14,7 +14,7 @@ https://osd.osdeploy.com/module/functions/display/set-disres
 #>
 function Set-DisRes {
     [CmdletBinding()]
-    Param (
+    param (
         [Parameter(Position = 0)]
         [Alias('Horizontal')]
         [string]$Width,

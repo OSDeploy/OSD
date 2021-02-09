@@ -11,7 +11,7 @@ https://osddrivers.osdeploy.com/functions/get-dellfamilypack
 #>
 function Get-OSDDriverDellFamily {
     [CmdletBinding()]
-    Param ()
+    param ()
 
     #===================================================================================================
     #   Uri

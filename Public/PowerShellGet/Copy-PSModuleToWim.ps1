@@ -6,14 +6,23 @@ Sets the PowerShell Execution Policy of a .wim File
 Sets the PowerShell Execution Policy of a .wim File
 
 .LINK
-https://osd.osdeploy.com/module/functions/dism/set-wimexecutionpolicy
+https://osd.osdeploy.com/module/functions/PowerShellGet
 
 .NOTES
 21.2.1  Initial Release
 #>
-function Set-WimExecutionPolicy {
+function Copy-PSModuleToWim {
     [CmdletBinding()]
     param (
+        #Name of the PowerShell Module to Copy
+        [Parameter(
+            Position=0,
+            Mandatory=$true,
+            ValueFromPipelineByPropertyName=$true
+        )]
+        [SupportsWildcards()]
+        [String[]]$Name,
+
         #Specifies the location of the WIM or VHD file containing the Windows image you want to mount.
         [Parameter(
             Mandatory = $true,
@@ -26,15 +35,7 @@ function Set-WimExecutionPolicy {
         [Parameter(
             ValueFromPipelineByPropertyName
         )]
-        [UInt32]$Index = 1,
-
-        #PowerShell Execution Policy setting
-        [Parameter(
-            Mandatory=$true,
-            ValueFromPipelineByPropertyName = $true
-        )]
-        [ValidateSet('AllSigned', 'Bypass', 'Default', 'RemoteSigned', 'Restricted', 'Undefined', 'Unrestricted')]
-        [string]$ExecutionPolicy
+        [UInt32]$Index = 1
     )
 
     begin {
@@ -42,7 +43,7 @@ function Set-WimExecutionPolicy {
         #   Require Admin Rights
         #===================================================================================================
         if ((Get-OSDGather -Property IsAdmin) -eq $false) {
-            Write-Warning 'Set-WimExecutionPolicy requires Admin Rights ELEVATED'
+            Write-Warning "$($MyInvocation.MyCommand) requires Admin Rights ELEVATED"
             Break
         }
         #===================================================================================================
@@ -51,8 +52,8 @@ function Set-WimExecutionPolicy {
         foreach ($Input in $ImagePath) {
             #===============================================================================================
             $MountWindowsImageOSD = Mount-MyWindowsImage -ImagePath $Input -Index $Index
-            $MountWindowsImageOSD | Set-WindowsImageExecutionPolicy -ExecutionPolicy $ExecutionPolicy
-            $MountWindowsImageOSD | Dismount-MyWindowsImage -Save
+            Copy-PSModuleToFolder -Name $Name -Destination "$($MountWindowsImageOSD.Path)\Program Files\WindowsPowerShell\Modules" -RemoveOldVersions
+            #$MountWindowsImageOSD | Dismount-MyWindowsImage -Save
             #===============================================================================================
         }
     }

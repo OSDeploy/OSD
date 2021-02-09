@@ -14,7 +14,7 @@ Credit Ben Whitmore | byteben.com | @byteben
 #>
 function Get-ComObjMicrosoftUpdateServiceManager{
     [CmdletBinding()]
-    Param ()
+    param ()
 
     Return (New-Object -ComObject Microsoft.Update.ServiceManager).Services
 }

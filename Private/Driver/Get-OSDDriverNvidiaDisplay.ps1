@@ -1,6 +1,6 @@
 function Get-OSDDriverNvidiaDisplay {
     [CmdletBinding()]
-    Param ()
+    param ()
 
     $ModuleNvidiaDisplay = @()
     $ModuleNvidiaDisplay = Get-ChildItem "$($MyInvocation.MyCommand.Module.ModuleBase)\GetOSDDriver\NvidiaDisplay" *.drvpack -Recurse | Select-Object FullName

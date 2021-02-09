@@ -14,7 +14,7 @@ https://osd.osdeploy.com/module/functions/general/get-screenpng
 #>
 function Get-ScreenPNG {
     [CmdletBinding()]
-    Param (
+    param (
         #Directory where the Screenshots will be saved
         #Default = $Env:TEMP\Screenshots
         [string]$Directory = $null,
@@ -270,5 +270,5 @@ function Get-ScreenPNG {
             #======================================================================================================
         }
     }
-    End {}
+    end {}
 }

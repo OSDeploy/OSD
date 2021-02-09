@@ -13,7 +13,7 @@ https://osd.osdeploy.com/module/functions/display/get-displayPrimaryScaling
 #>
 function Get-DisplayPrimaryScaling {
     [CmdletBinding()]
-    Param ()
+    param ()
   
     #Add-Type -Assembly System.Drawing
       # Get DPI Scaling

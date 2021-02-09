@@ -13,7 +13,7 @@ https://osd.osdeploy.com/module/functions/driver/get-osddriverwmiq
 #>
 function Get-OSDDriverWmiQ {
     [CmdletBinding()]
-    Param (
+    param (
         [Parameter(ValueFromPipeline = $true)]
         [Object[]]$InputObject,
 
@@ -32,7 +32,7 @@ function Get-OSDDriverWmiQ {
         [switch]$ShowTextFile
     )
 
-    Begin {
+    begin {
         #======================================================================================================
         #	Information
         #======================================================================================================
@@ -41,7 +41,7 @@ function Get-OSDDriverWmiQ {
         $OSDModelPacks = @()
     }
 
-    PROCESS {
+    process {
         if ($InputObject) {
             $OSDModelPacks += $InputObject
             $OSDComputerModels = foreach ($ModelPack in $OSDModelPacks) {
@@ -59,7 +59,7 @@ function Get-OSDDriverWmiQ {
         }
     }
 
-    END {
+    end {
         $Items = @()
         #===================================================================================================
         #   Model

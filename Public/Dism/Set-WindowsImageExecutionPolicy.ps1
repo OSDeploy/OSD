@@ -13,7 +13,7 @@ https://osd.osdeploy.com/module/functions/dism/set-windowsimageexecutionpolicy
 #>
 function Set-WindowsImageExecutionPolicy {
     [CmdletBinding()]
-    Param (
+    param (
         #PowerShell Execution Policy setting
         [Parameter(
             Position = 0,
@@ -32,12 +32,12 @@ function Set-WindowsImageExecutionPolicy {
 
     )
 
-    Begin {
+    begin {
         #===================================================================================================
         #   Require Admin Rights
         #===================================================================================================
         if ((Get-OSDGather -Property IsAdmin) -eq $false) {
-            Write-Warning 'This function requires Admin Rights ELEVATED'
+            Write-Warning 'Set-WindowsImageExecutionPolicy requires Admin Rights ELEVATED'
             Break
         }
         #===================================================================================================
@@ -73,7 +73,7 @@ HKLM,SOFTWARE\Microsoft\PowerShell\1\ShellIds\Microsoft.PowerShell,ExecutionPoli
 "@
         #===================================================================================================
     }
-    Process {
+    process {
         foreach ($Input in $Path) {
             #===================================================================================================
             #   Path
@@ -105,5 +105,5 @@ HKLM,SOFTWARE\Microsoft\PowerShell\1\ShellIds\Microsoft.PowerShell,ExecutionPoli
             #===================================================================================================
         }
     }
-    End {}
+    end {}
 }

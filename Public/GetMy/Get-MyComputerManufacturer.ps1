@@ -16,7 +16,7 @@ https://osd.osdeploy.com/module/functions/getmy
 #>
 function Get-MyComputerManufacturer {
     [CmdletBinding()]
-    Param (
+    param (
         #Normalize the Return
         [switch]$Brief
     )

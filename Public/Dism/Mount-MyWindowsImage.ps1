@@ -6,14 +6,14 @@ Mounts a WIM file
 Mounts a WIM file automatically selecting the Path and the Index
 
 .LINK
-https://osd.osdeploy.com/module/functions/dism/mount-windowsimageosd
+https://osd.osdeploy.com/module/functions/dism/mount-mywindowsimage
 
 .NOTES
 19.11.21 David Segura @SeguraOSD
 #>
-function Mount-WindowsImageOSD {
+function Mount-MyWindowsImage {
     [CmdletBinding()]
-    Param (
+    param (
         #Specifies the location of the WIM or VHD file containing the Windows image you want to mount.
         [Parameter(
             Position = 0,
@@ -41,16 +41,16 @@ function Mount-WindowsImageOSD {
         [switch]$Explorer
     )
 
-    Begin {
+    begin {
         #===================================================================================================
         #   Require Admin Rights
         #===================================================================================================
         if ((Get-OSDGather -Property IsAdmin) -eq $false) {
-            Write-Warning 'This function requires Admin Rights ELEVATED'
+            Write-Warning 'Mount-MyWindowsImage requires Admin Rights ELEVATED'
             Break
         }
     }
-    Process {
+    process {
         foreach ($Input in $ImagePath) {
             #===================================================================================================
             #   ImagePath
@@ -103,5 +103,5 @@ function Mount-WindowsImageOSD {
 
         }
     }
-    End {}
+    end {}
 }

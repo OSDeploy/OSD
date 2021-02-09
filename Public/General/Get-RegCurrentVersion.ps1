@@ -14,7 +14,7 @@ https://osd.osdeploy.com/module/functions/general/get-regcurrentversion
 #>
 function Get-RegCurrentVersion {
     [CmdletBinding()]
-    Param (
+    param (
         #Specifies the full path to the root directory of the offline Windows image that you will service.
         [Parameter(ValueFromPipelineByPropertyName)]
         [string]$Path,
@@ -41,8 +41,8 @@ function Get-RegCurrentVersion {
             )]
         [string]$Property
     )
-    Begin {}
-    Process {
+    begin {}
+    process {
         $Global:GetRegCurrentVersion = $null
 
         if ($Path) {
@@ -66,5 +66,5 @@ function Get-RegCurrentVersion {
             Return $Global:GetRegCurrentVersion
         }
     }
-    End {}
+    end {}
 }

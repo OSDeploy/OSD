@@ -13,7 +13,7 @@ https://osd.osdeploy.com/module/functions/general/Set-ClipboardScreenshot
 #>
 function Set-ClipboardScreenshot {
     [CmdletBinding()]
-    Param ()
+    param ()
 
     #======================================================================================================
     #	Load Assemblies

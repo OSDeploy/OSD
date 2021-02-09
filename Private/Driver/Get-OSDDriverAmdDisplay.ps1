@@ -1,6 +1,6 @@
 function Get-OSDDriverAmdDisplay {
     [CmdletBinding()]
-    Param ()
+    param ()
 
     $ModuleAmdDisplay = @()
     $ModuleAmdDisplay = Get-ChildItem "$($MyInvocation.MyCommand.Module.ModuleBase)\GetOSDDriver\AmdDisplay" *.drvpack -Recurse | Select-Object FullName

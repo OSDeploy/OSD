@@ -1,6 +1,6 @@
 function Get-DiskNonBootWithPartitions {
     [CmdletBinding()]
-    Param ()
+    param ()
 
     begin {}
     process {}

@@ -13,7 +13,7 @@ https://osd.osdeploy.com/module/functions/storage/get-diskisboot
 #>
 function Get-DiskIsBoot {
     [CmdletBinding()]
-    Param ()
+    param ()
 
     #Get all Disks
     $GetDisk = $(Get-Disk | Select-Object -Property * | Sort-Object DiskNumber)

@@ -12,7 +12,7 @@ https://osddrivers.osdeploy.com/functions/get-drivernvidia
 #>
 function Get-DriverNvidia {
     [CmdletBinding()]
-    Param (
+    param (
         [Parameter(Mandatory)]
         [ValidateSet ('Win10 x64','Win10 x86','Win7 x64','Win7 x86')]
         [string]$OperatingSystem = 'Win10 x64'

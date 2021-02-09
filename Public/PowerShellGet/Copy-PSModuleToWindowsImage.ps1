@@ -14,10 +14,11 @@ https://osd.osdeploy.com/module/functions/powershellget/copy-moduletofolder
 21.1.30.3   Renamed PSModulePath Parameter to Destination, Added RemoveOldVersions
 21.1.31.1   Removed WinPE Parameter
 21.2.2.1	Renamed to Copy-ModuleToFolder so I don't mess with PowerShellGet
+21.2.9.1	Renamed to Copy-PSModuleToFolder to standardize
 #>
-function Copy-ModuleToFolder {
+function Copy-PSModuleToWindowsImage {
     [CmdletBinding()]
-    Param (
+    param (
         #Name of the PowerShell Module to Copy
         [Parameter(
             Position=0,

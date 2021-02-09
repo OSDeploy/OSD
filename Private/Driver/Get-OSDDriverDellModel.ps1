@@ -10,7 +10,7 @@ https://osd.osdeploy.com/functions/get-osddriverdellmodel
 #>
 function Get-OSDDriverDellModel {
     [CmdletBinding()]
-    Param ()
+    param ()
     #===================================================================================================
     #   Variables
     #===================================================================================================

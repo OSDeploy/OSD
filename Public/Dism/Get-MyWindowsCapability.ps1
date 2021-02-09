@@ -75,7 +75,7 @@ Remove-WindowsCapability
 #>
 function Get-MyWindowsCapability {
     [CmdletBinding(DefaultParameterSetName = 'Online')]
-    Param (
+    param (
         [Parameter(Mandatory = $true, ParameterSetName = "Offline", ValueFromPipeline = $false, ValueFromPipelineByPropertyName = $true)]
         [string]$Path,
 
@@ -95,12 +95,12 @@ function Get-MyWindowsCapability {
         [Parameter(ParameterSetName = "Online")]
         [switch]$DisableWSUS
     )
-    Begin {
+    begin {
         #===================================================================================================
         #   Require Admin Rights
         #===================================================================================================
         if ((Get-OSDGather -Property IsAdmin) -eq $false) {
-            Write-Warning 'This function requires Admin Rights ELEVATED'
+            Write-Warning 'Get-MyWindowsCapability requires Admin Rights ELEVATED'
             Break
         }
         #===================================================================================================
@@ -109,7 +109,7 @@ function Get-MyWindowsCapability {
         if (Get-Command -Name Get-WindowsCapability -ErrorAction SilentlyContinue) {
             Write-Verbose 'Verified command Get-WindowsCapability'
         } else {
-            Write-Warning 'This function requires Get-WindowsCapability which is not present'
+            Write-Warning 'Get-MyWindowsCapability requires Get-WindowsCapability which is not present'
             Break
         }
         #===================================================================================================
@@ -119,7 +119,7 @@ function Get-MyWindowsCapability {
         $CurrentBuildNumber = (Get-CimInstance -Class Win32_OperatingSystem).BuildNumber
         if ($MinimumBuildNumber -gt $CurrentBuildNumber) {
             Write-Warning "The current Windows BuildNumber is $CurrentBuildNumber"
-            Write-Warning "This function requires Windows BuildNumber greater than $MinimumBuildNumber"
+            Write-Warning "Get-MyWindowsCapability requires Windows BuildNumber greater than $MinimumBuildNumber"
             Break
         }
         #===================================================================================================
@@ -150,7 +150,7 @@ function Get-MyWindowsCapability {
         $GetModuleBase = Get-Module -Name OSD | Select-Object -ExpandProperty ModuleBase -First 1
         #===================================================================================================
     }
-    Process {
+    process {
         #===================================================================================================
         #   Get-WindowsCapability
         #===================================================================================================
@@ -308,7 +308,7 @@ function Get-MyWindowsCapability {
         }
         #===================================================================================================
     }
-    End {
+    end {
         if (($DisableWSUS -eq $true) -and ($UseWUServer -eq 1)) {
             Set-ItemProperty -Path "HKLM:\Software\Policies\Microsoft\Windows\WindowsUpdate\AU" -Name "UseWuServer" -Value $UseWUServer
             Restart-Service wuauserv

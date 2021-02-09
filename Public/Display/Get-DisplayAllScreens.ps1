@@ -13,7 +13,7 @@ https://osd.osdeploy.com/module/functions/display/get-displayallscreens
 #>
 function Get-DisplayAllScreens {
     [CmdletBinding()]
-    Param ()
+    param ()
   
     Add-Type -Assembly System.Windows.Forms
     Return ([System.Windows.Forms.Screen]::AllScreens | Select-Object * | Sort-Object DeviceName)

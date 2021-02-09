@@ -13,7 +13,7 @@ https://osd.osdeploy.com/module/functions/general/get-osd
 #>
 function Get-OSD {
     [CmdletBinding()]
-    Param ()
+    param ()
     
     #======================================================================================================
     #	Gather
@@ -32,13 +32,13 @@ function Get-OSD {
     Write-Host -ForegroundColor DarkCyan    "osd.osdeploy.com"
     Write-Host -ForegroundColor DarkCyan    "Module Path: $GetModulePath"
 
-
     Write-Host -ForegroundColor DarkCyan    '=================================' -NoNewline
     Write-Host -ForegroundColor Cyan        '21.2.8'
     Write-Host -ForegroundColor Yellow      'Get-MyWindowsCapability                ' -NoNewline
     Write-Host -ForegroundColor Gray        'Detailed version of Get-WindowsCapability'
     Write-Host -ForegroundColor Yellow      'Get-MyWindowsPackage                   ' -NoNewline
     Write-Host -ForegroundColor Gray        'Detailed version of Get-WindowsPackage'
+
     Write-Host -ForegroundColor DarkCyan    '=================================' -NoNewline
     Write-Host -ForegroundColor Cyan        '21.2.3'
     Write-Host -ForegroundColor Yellow      'Get-ComObjects                         ' -NoNewline
@@ -57,6 +57,7 @@ function Get-OSD {
     Write-Host -ForegroundColor Gray        'Returns the Computer Serial Number'
     Write-Host -ForegroundColor Yellow      'Get-MyDefaultAUService                 ' -NoNewline
     Write-Host -ForegroundColor Gray        'Returns the default AutoUpdate repo, thanks Ben Whitmore!'
+
     Write-Host -ForegroundColor DarkCyan    '=================================' -NoNewline
     Write-Host -ForegroundColor Cyan        '21.2.2'
     Write-Host -ForegroundColor White       'Get-DisplayAllScreens                  ' -NoNewline
@@ -73,7 +74,7 @@ function Get-OSD {
     Write-Host -ForegroundColor Gray        'Returns the CIM_VideoControllerResolution Properties for the Primary Screen'
     Write-Host -ForegroundColor Yellow      'Set-DisRes                             ' -NoNewline
     Write-Host -ForegroundColor Gray        'Sets the Primary Display Screen Resolution'
-    Write-Host -ForegroundColor Yellow      'Copy-ModuleToFolder                    ' -NoNewline
+    Write-Host -ForegroundColor Yellow      'Copy-PSModuleToFolder                    ' -NoNewline
     Write-Host -ForegroundColor Gray        'Copies a PowerShell Module to a specified Destination'
     Write-Host -ForegroundColor Yellow      'Get-ScreenPNG                          ' -NoNewline
     Write-Host -ForegroundColor Gray        'Takes a screeshot'
@@ -81,12 +82,14 @@ function Get-OSD {
     Write-Host -ForegroundColor Gray        'Sets a Screenshot of the Primary Screen on the Clipboard'
     Write-Host -ForegroundColor White      'Save-ClipboardImage                    ' -NoNewline
     Write-Host -ForegroundColor Gray        'Saves the Clipboard Image as a file.  PNG extension is recommended'
+
     Write-Host -ForegroundColor DarkCyan    '=================================' -NoNewline
     Write-Host -ForegroundColor Cyan        '21.2.1'
-    Write-Host -ForegroundColor Yellow      'Set-WIMExecutionPolicy                 ' -NoNewline
+    Write-Host -ForegroundColor Yellow      'Set-WimExecutionPolicy                 ' -NoNewline
     Write-Host -ForegroundColor Gray        'Sets the PowerShell Execution Policy of a .wim File'
     Write-Host -ForegroundColor Yellow      'Set-WindowsImageExecutionPolicy        ' -NoNewline
     Write-Host -ForegroundColor Gray        'Sets the PowerShell Execution Policy of a Mounted Windows Image'
+
     Write-Host -ForegroundColor DarkCyan    '================================' -NoNewline
     Write-Host -ForegroundColor Cyan        '21.1.29'
     Write-Host -ForegroundColor Yellow      'Backup-DiskToFFU                       ' -NoNewline
@@ -97,12 +100,12 @@ function Get-OSD {
     Write-Host -ForegroundColor Gray        'Gets the Disk containing the SYSTEM partition'
     Write-Host -ForegroundColor White       'Get-DiskToBackup                       ' -NoNewline
     Write-Host -ForegroundColor Gray        'Gets Disks that can be backed up'
-    
+
     Write-Host -ForegroundColor DarkCyan    '==================================' -NoNewline
     Write-Host -ForegroundColor Cyan        'OLDER'
-    Write-Host -ForegroundColor White       'Dismount-WindowsImageOSD               ' -NoNewline
+    Write-Host -ForegroundColor White       'Dismount-MyWindowsImage               ' -NoNewline
     Write-Host -ForegroundColor Gray        'Dismounts WIM by Mounted Path, or all WIMs if no Path is specified'
-    Write-Host -ForegroundColor White       'Edit-WindowsImageOSD                   ' -NoNewline
+    Write-Host -ForegroundColor White       'Edit-MyWindowsImage                   ' -NoNewline
     Write-Host -ForegroundColor Gray        'Modify an Online or Offline Windows Image with Cleanup and Appx Stuff'
     Write-Host -ForegroundColor White       'Get-OSDDriver                          ' -NoNewline
     Write-Host -ForegroundColor Gray        'Returns Driver download links for Amd Dell Hp Intel and Nvidia'
@@ -112,7 +115,7 @@ function Get-OSD {
     Write-Host -ForegroundColor Gray        'Common WinPE Commands using wpeutil and Microsoft DaRT RemoteRecovery'
     Write-Host -ForegroundColor White       'Initialize-DiskOSD                     ' -NoNewline
     Write-Host -ForegroundColor Gray        'Initializes a Disk'
-    Write-Host -ForegroundColor White       'Mount-WindowsImageOSD                  ' -NoNewline
+    Write-Host -ForegroundColor White       'Mount-MyWindowsImage                  ' -NoNewline
     Write-Host -ForegroundColor Gray        'Give it a WIM, let it mount it'
     Write-Host -ForegroundColor White       'New-OSDDisk                            ' -NoNewline
     Write-Host -ForegroundColor Gray        'Creates System | OS | Recovery Partitions for MBR or UEFI Drives in WinPE'
@@ -120,7 +123,7 @@ function Get-OSD {
     Write-Host -ForegroundColor Gray        'Creates a SYSTEM Partition'
     Write-Host -ForegroundColor White       'New-PartitionOSDWindows                ' -NoNewline
     Write-Host -ForegroundColor Gray        'Creates a WINDOWS Partition'
-    Write-Host -ForegroundColor White       'Update-WindowsImageOSD                 ' -NoNewline
+    Write-Host -ForegroundColor White       'Update-MyWindowsImage                 ' -NoNewline
     Write-Host -ForegroundColor Gray        'Identify, Download, and Apply Updates to a Mounted Windows Image'
     Write-Host -ForegroundColor DarkCyan    '======================' -NoNewline
     Write-Host -ForegroundColor Cyan        'UPDATE THE MODULE'

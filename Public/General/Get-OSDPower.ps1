@@ -26,7 +26,7 @@ https://osd.osdeploy.com/module/functions/general/get-osdpower
 #>
 function Get-OSDPower {
     [CmdletBinding()]
-    Param (
+    param (
         #Powercfg option (Low, Balanced, High, LIST, QUERY)
         #Default is LIST
         [Parameter(Position = 0)]

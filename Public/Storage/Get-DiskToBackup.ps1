@@ -13,7 +13,7 @@ https://osd.osdeploy.com/module/functions/storage/get-disktobackup
 #>
 function Get-DiskToBackup {
     [CmdletBinding()]
-    Param ()
+    param ()
 
     #Get all Disks
     $GetDisk = $(Get-Disk | Select-Object -Property * | Sort-Object DiskNumber)

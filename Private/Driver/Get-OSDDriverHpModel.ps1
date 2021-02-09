@@ -10,7 +10,7 @@ https://osd.osdeploy.com/functions/get-osddriverhpmodel
 #>
 function Get-OSDDriverHpModel {
     [CmdletBinding()]
-    Param ()
+    param ()
     #===================================================================================================
     #   Variables
     #===================================================================================================

@@ -1,18 +1,18 @@
 function New-SystemDrawingBitmapPrimary {
     [CmdletBinding()]
-    Param ()
+    param ()
     
     Return New-Object System.Drawing.Bitmap $GetDisplayPrimaryBitmapSize.Width, $GetDisplayPrimaryBitmapSize.Height
 }
 function New-SystemDrawingBitmap {
   [CmdletBinding()]
-  Param ()
+  param ()
   
   Return New-Object System.Drawing.Bitmap $Device.Bounds.Width, $Device.Bounds.Height
 }
 function New-SSGraphics {
   [CmdletBinding()]
-  Param ()
+  param ()
   
   Return [System.Drawing.Graphics]::FromImage($ScreenShotBitmap)
 }

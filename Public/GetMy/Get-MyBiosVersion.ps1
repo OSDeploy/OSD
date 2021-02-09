@@ -13,7 +13,7 @@ https://osd.osdeploy.com/module/functions/getmy
 #>
 function Get-MyBiosVersion {
     [CmdletBinding()]
-    Param ()
+    param ()
 
     Return ((Get-CimInstance -ClassName Win32_BIOS).SMBIOSBIOSVersion).Trim()
 }

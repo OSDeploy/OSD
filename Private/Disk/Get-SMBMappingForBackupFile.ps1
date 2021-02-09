@@ -1,6 +1,6 @@
 function Get-SMBMappingForBackupFile {
     [CmdletBinding()]
-    Param (
+    param (
         [int] $IgnoreDisk = 0
     )
         #===================================================================================================
