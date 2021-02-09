@@ -77,6 +77,7 @@ Remove-WindowsPackage
             Added validation for Get-WindowsPackage
             Resolved issue if multiple OSD modules are installed
             Renamed Language parameter to Culture
+21.2.9.1    Resolved issue with Like and Match parameters not working as expected
 #>
 function Get-MyWindowsPackage {
     [CmdletBinding(DefaultParameterSetName = 'Online')]
@@ -133,13 +134,13 @@ function Get-MyWindowsPackage {
     #   Like
     #===================================================================================================
     foreach ($Item in $Like) {
-        $GetAllItems = $GetAllItems | Where-Object {$_.PackageName -like "$Like"}
+        $GetAllItems = $GetAllItems | Where-Object {$_.PackageName -like "$Item"}
     }
     #===================================================================================================
     #   Match
     #===================================================================================================
     foreach ($Item in $Match) {
-        $GetAllItems = $GetAllItems | Where-Object {$_.PackageName -match "$Match"}
+        $GetAllItems = $GetAllItems | Where-Object {$_.PackageName -match "$Item"}
     }
     #===================================================================================================
     #   PackageState
