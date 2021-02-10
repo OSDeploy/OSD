@@ -33,6 +33,17 @@ function Get-OSD {
     Write-Host -ForegroundColor DarkCyan    "Module Path: $GetModulePath"
 
     Write-Host -ForegroundColor DarkCyan    '=================================' -NoNewline
+    Write-Host -ForegroundColor Cyan        '21.2.10'
+    Write-Host -ForegroundColor Yellow      'Get-BitLockerKeyProtectors             ' -NoNewline
+    Write-Host -ForegroundColor Gray        'Object of BitLocker KeyProtectors and RecoveryPasswords'
+    Write-Host -ForegroundColor Yellow      'Save-BitLockerExternalKey              ' -NoNewline
+    Write-Host -ForegroundColor Gray        'Saves ExternalKey BEK files to a Path'
+    Write-Host -ForegroundColor Yellow      'Save-BitLockerKeyPackage               ' -NoNewline
+    Write-Host -ForegroundColor Gray        'Saves a key package for a drive for corrupt recovery'
+    Write-Host -ForegroundColor Yellow      'Save-BitLockerRecoveryPassword         ' -NoNewline
+    Write-Host -ForegroundColor Gray        'Saves RecoveryPassword TXT files to a Path'
+
+    Write-Host -ForegroundColor DarkCyan    '=================================' -NoNewline
     Write-Host -ForegroundColor Cyan        '21.2.9'
     Write-Host -ForegroundColor Yellow      'Copy-PSModuleToWim                     ' -NoNewline
     Write-Host -ForegroundColor Gray        'Copies a PowerShell Module to a Windows Image .wim file'

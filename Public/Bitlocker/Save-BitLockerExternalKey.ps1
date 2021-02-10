@@ -13,6 +13,6 @@ function Save-BitLockerExternalKey {
     $Results = Get-BitLockerKeyProtectors | Sort-Object -Property MountPoint | Where-Object {$_.KeyProtectorType -eq 'ExternalKey'}
 
     foreach ($Item in $Results) {
-        manage-bde -protectors -get $Item.MountPoint -Type ExternalKey -SaveExternalKey $Path
+        manage-bde.exe -protectors -get $Item.MountPoint -Type ExternalKey -SaveExternalKey $Path
     }
 }
