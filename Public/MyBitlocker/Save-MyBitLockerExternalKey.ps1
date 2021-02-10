@@ -1,22 +1,22 @@
 <#
 .SYNOPSIS
-Saves all BitLocker ExternalKeys (BEK), KeyPackages (KPG), and RecoveryPasswords (TXT)
+Saves all BitLocker ExternalKeys (BEK)
 
 .DESCRIPTION
-Saves all BitLocker ExternalKeys (BEK), KeyPackages (KPG), and RecoveryPasswords (TXT) to a Directory (Path)
+Saves all BitLocker ExternalKeys (BEK) to a Directory (Path)
 
 .PARAMETER Path
 Directory to save the BitLocker Keys.  This directory will be created if it does not exist
 
 .LINK
-https://osd.osdeploy.com/module/functions/bitlocker/backup-mybitlockerkeys
+https://osd.osdeploy.com/module/mybitlocker/save-mybitlockerexternalkey
 
 .NOTES
 Requires Administrative Rights
 Requires BitLocker Module | Get-BitLockerVolume
 21.2.10  Initial Release
 #>
-function Backup-MyBitLockerKeys {
+function Save-MyBitLockerExternalKey {
     [CmdletBinding()]
     param (
         [Parameter(Position = 0, Mandatory = $true, ValueFromPipelineByPropertyName)]
@@ -38,11 +38,25 @@ function Backup-MyBitLockerKeys {
             Break
         }
         #===================================================================================================
+        #   Test-Path
+        #===================================================================================================
+        foreach ($Item in $Path) {
+            if (-NOT (Test-Path $Item)) {
+                New-Item $Item -ItemType Directory -Force -ErrorAction Stop | Out-Null
+            }
+        }
+        #===================================================================================================
+        #   Get-BitLockerKeyProtectors
+        #===================================================================================================
+        $BitLockerKeyProtectors = Get-MyBitLockerKeyProtectors | Sort-Object -Property MountPoint | Where-Object {$_.LockStatus -eq 'Unlocked'} | Where-Object {$_.KeyProtectorType -eq 'ExternalKey'}
+        #===================================================================================================
     }
     process {
-        Save-MyBitLockerExternalKey -Path $Path
-        Save-MyBitLockerKeyPackage -Path $Path
-        Save-MyBitLockerRecoveryPassword -Path $Path
+        foreach ($BitLockerKeyProtector in $BitLockerKeyProtectors) {
+            foreach ($Item in $Path) {
+                manage-bde.exe -protectors -get $BitLockerKeyProtector.MountPoint -Type ExternalKey -SaveExternalKey $Item
+            }
+        }
     }
     end {}
 }

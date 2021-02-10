@@ -9,7 +9,7 @@ Saves all BitLocker KeyPackages (KPG) to a Directory (Path). The key package can
 Directory to save the BitLocker Keys.  This directory will be created if it does not exist
 
 .LINK
-https://osd.osdeploy.com/module/functions/bitlocker/save-mybitlockerkeypackage
+https://osd.osdeploy.com/module/mybitlocker/save-mybitlockerkeypackage
 
 .LINK
 https://docs.microsoft.com/en-us/windows-server/administration/windows-commands/manage-bde-keypackage

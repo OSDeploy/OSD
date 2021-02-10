@@ -12,7 +12,7 @@ Directory containing BitLocker ExternalKeys (BEK)
 Searches the Path for BitLocker ExternalKeys (BEK) in subdirectories
 
 .LINK
-https://osd.osdeploy.com/module/functions/bitlocker/unlock-mybitlockerexternalkey
+https://osd.osdeploy.com/module/mybitlocker/unlock-mybitlockerexternalkey
 
 .NOTES
 Requires Administrative Rights

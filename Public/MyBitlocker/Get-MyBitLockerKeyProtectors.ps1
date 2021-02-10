@@ -9,7 +9,7 @@ Creates an Object with all the BitLocker KeyProtector information
 Shows the Recovery Password in plain text
 
 .LINK
-https://osd.osdeploy.com/module/functions/bitlocker/get-mybitlockerkeyprotectors
+https://osd.osdeploy.com/module/mybitlocker/get-mybitlockerkeyprotectors
 
 .NOTES
 Requires Administrative Rights
