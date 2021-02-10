@@ -41,7 +41,7 @@ function Save-BitLockerKeyPackage {
         #===================================================================================================
         #   Get-BitLockerKeyProtectors
         #===================================================================================================
-        $Results = Get-BitLockerKeyProtectors -ShowRecoveryPassword | Sort-Object -Property MountPoint
+        $Results = Get-BitLockerKeyProtectors -ShowRecoveryPassword | Sort-Object -Property MountPoint | Where-Object {$_.KeyProtectorType -ne 'Tpm'}
         #===================================================================================================
     }
     process {
