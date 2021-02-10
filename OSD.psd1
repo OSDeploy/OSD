@@ -71,6 +71,7 @@ FunctionsToExport =     #Appx
                         #Backup
                         'Backup-DiskToFFU',
                         #Bitlocker
+                        'Backup-BitLocker',
                         'Get-BitLockerKeyProtectors',
                         'Save-BitLockerExternalKey',
                         'Save-BitLockerKeyPackage',
