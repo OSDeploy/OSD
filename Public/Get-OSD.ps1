@@ -28,20 +28,24 @@ function Get-OSD {
     #======================================================================================================
     #	Usage
     #======================================================================================================
-    Write-Host -ForegroundColor Cyan        "$GetCommandNoun $GetCommandVersion "
+    Write-Host -ForegroundColor Cyan        "$GetCommandNoun $GetCommandVersion"
     Write-Host -ForegroundColor DarkCyan    "osd.osdeploy.com"
     Write-Host -ForegroundColor DarkCyan    "Module Path: $GetModulePath"
 
     Write-Host -ForegroundColor DarkCyan    '=================================' -NoNewline
     Write-Host -ForegroundColor Cyan        '21.2.10'
-    Write-Host -ForegroundColor Yellow      'Get-BitLockerKeyProtectors             ' -NoNewline
+    Write-Host -ForegroundColor Yellow      'Backup-MyBitLockerKeys                 ' -NoNewline
+    Write-Host -ForegroundColor Gray        'Saves all BitLocker ExternalKeys (BEK), KeyPackages (KPG), and RecoveryPasswords (TXT)'
+    Write-Host -ForegroundColor Yellow      'Get-MyBitLockerKeyProtectors           ' -NoNewline
     Write-Host -ForegroundColor Gray        'Object of BitLocker KeyProtectors and RecoveryPasswords'
-    Write-Host -ForegroundColor Yellow      'Save-BitLockerExternalKey              ' -NoNewline
+    Write-Host -ForegroundColor Yellow      'Save-MyBitLockerExternalKey            ' -NoNewline
     Write-Host -ForegroundColor Gray        'Saves ExternalKey BEK files to a Path'
-    Write-Host -ForegroundColor Yellow      'Save-BitLockerKeyPackage               ' -NoNewline
+    Write-Host -ForegroundColor Yellow      'Save-MyBitLockerKeyPackage             ' -NoNewline
     Write-Host -ForegroundColor Gray        'Saves a key package for a drive for corrupt recovery'
-    Write-Host -ForegroundColor Yellow      'Save-BitLockerRecoveryPassword         ' -NoNewline
+    Write-Host -ForegroundColor Yellow      'Save-MyBitLockerRecoveryPassword       ' -NoNewline
     Write-Host -ForegroundColor Gray        'Saves RecoveryPassword TXT files to a Path'
+    Write-Host -ForegroundColor Yellow      'Unlock-MyBitLockerExternalKey          ' -NoNewline
+    Write-Host -ForegroundColor Gray        'Unlocks all BitLocker Locked Volumes given a Directory containing ExternalKeys (BEK)'
 
     Write-Host -ForegroundColor DarkCyan    '=================================' -NoNewline
     Write-Host -ForegroundColor Cyan        '21.2.9'
