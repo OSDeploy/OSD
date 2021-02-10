@@ -71,7 +71,9 @@ FunctionsToExport =     #Appx
                         #Backup
                         'Backup-DiskToFFU',
                         #Bitlocker
-                        'Get-BitlockerRecoveryPassword',
+                        'Get-BitLockerKeyProtectors',
+                        'Save-BitLockerExternalKey',
+                        'Save-BitLockerRecoveryPassword',
                         #Cim
                         'Get-CimVideoControllerResolution',
                         #ComObj
