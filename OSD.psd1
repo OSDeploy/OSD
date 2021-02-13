@@ -66,7 +66,10 @@ PowerShellVersion = '5.0'
 # NestedModules = @()
 
 # Functions to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no functions to export.
-FunctionsToExport =     #Appx
+FunctionsToExport =     #ADK
+                        'New-MyAdkCopyPE',
+                        'Get-MyAdk',
+                        #Appx
                         'Remove-AppxOnline',
                         #Backup
                         'Backup-DiskToFFU',
@@ -132,7 +135,11 @@ FunctionsToExport =     #Appx
                         'Initialize-DiskOSD',
                         'New-OSDDisk',
                         'New-PartitionOSDSystem',
-                        'New-PartitionOSDWindows'
+                        'New-PartitionOSDWindows',
+                        'Get-MyDisk',
+                        'Select-MyDisk',
+                        'Get-OSDDisk',
+                        'Clear-WinPELocalDisks'
 
 # Cmdlets to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no cmdlets to export.
 CmdletsToExport = @()
