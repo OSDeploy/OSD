@@ -18,8 +18,8 @@ function Backup-DiskToFFU {
         #Disk Number of the Drive to capture
         #Use Get-Disk to get the DiskNumber Property
         [Alias('Number')]
-        [ValidateScript({$_ -in (Get-DiskToBackup | Select-Object -ExpandProperty DiskNumber)})]
-        [int] $DiskNumber = (Get-DiskToBackup | Select-Object -ExpandProperty DiskNumber -First 1),
+        [ValidateScript({$_ -in (Get-Disk-Backup-DiskToFFU | Select-Object -ExpandProperty DiskNumber)})]
+        [int] $DiskNumber = (Get-Disk-Backup-DiskToFFU | Select-Object -ExpandProperty DiskNumber -First 1),
 
         [ValidateScript({$_ -in (Get-DriveForBackupFile | Where-Object {$_.DiskNumber -ne $DiskNumber} | Select-Object -ExpandProperty DriveLetter)})]
         [string] $DestinationDriveLetter = "$(Get-DriveForBackupFile | Where-Object {$_.DiskNumber -ne $DiskNumber} | Select-Object -ExpandProperty DriveLetter -First 1)",
@@ -64,8 +64,8 @@ function Backup-DiskToFFU {
     $GetModulePath = Get-Module -Name $GetCommandModule | Select-Object -ExpandProperty Path
 
     $GetDriveForBackupFile = $(Get-DriveForBackupFile)
-    $DiskIsBoot = $(Get-DiskIsBoot)
-    $DiskToBackup = $(Get-DiskToBackup)
+    $DiskIsBoot = $(Get-DiskWithBootPartition)
+    $DiskToBackup = $(Get-Disk-Backup-DiskToFFU)
     $Volumes = $(Get-Volume)
     #===================================================================================================
     #	Validate

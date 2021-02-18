@@ -6,7 +6,7 @@ New-OSDDisk Private Function
 New-OSDDisk Private Function
 
 .LINK
-https://osd.osdeploy.com/module/functions/storage/new-partitionosdwindows
+https://osd.osdeploy.com/module/functions/storage/new-osdpartitionwindows
 
 .NOTES
 19.10.10     Created by David Segura @SeguraOSD

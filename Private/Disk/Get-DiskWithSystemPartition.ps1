@@ -6,12 +6,12 @@ Gets the Disk containing the SYSTEM partition
 Gets the Disk containing the SYSTEM partition
 
 .LINK
-https://osd.osdeploy.com/module/functions/storage/get-diskissystem
+https://osd.osdeploy.com/module/functions/storage/Get-DiskWithSystemPartition
 
 .NOTES
 19.12.9    Created by David Segura @SeguraOSD
 #>
-function Get-DiskIsSystem {
+function Get-DiskWithSystemPartition {
     [CmdletBinding()]
     param ()
 

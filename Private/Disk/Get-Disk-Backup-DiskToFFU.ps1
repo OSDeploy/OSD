@@ -6,12 +6,12 @@ Gets Disks that can be backed up
 Gets Disks that can be backed up
 
 .LINK
-https://osd.osdeploy.com/module/functions/storage/get-disktobackup
+https://osd.osdeploy.com/module/functions/storage/Get-Disk-Backup-DiskToFFU
 
 .NOTES
 19.12.9    Created by David Segura @SeguraOSD
 #>
-function Get-DiskToBackup {
+function Get-Disk-Backup-DiskToFFU {
     [CmdletBinding()]
     param ()
 

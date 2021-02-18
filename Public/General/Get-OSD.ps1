@@ -116,12 +116,8 @@ function Get-OSD {
     Write-Host -ForegroundColor Cyan        '21.1.29'
     Write-Host -ForegroundColor Yellow      'Backup-DiskToFFU                       ' -NoNewline
     Write-Host -ForegroundColor Gray        'Captures a Windows Image FFU to a secondary drive'
-    Write-Host -ForegroundColor White       'Get-DiskIsBoot                         ' -NoNewline
-    Write-Host -ForegroundColor Gray        'Gets the Disk containing the BOOT partition'
-    Write-Host -ForegroundColor White       'Get-DiskIsSystem                       ' -NoNewline
+    Write-Host -ForegroundColor White       'Get-DiskWithSystemPartition                       ' -NoNewline
     Write-Host -ForegroundColor Gray        'Gets the Disk containing the SYSTEM partition'
-    Write-Host -ForegroundColor White       'Get-DiskToBackup                       ' -NoNewline
-    Write-Host -ForegroundColor Gray        'Gets Disks that can be backed up'
 
     Write-Host -ForegroundColor DarkCyan    '==================================' -NoNewline
     Write-Host -ForegroundColor Cyan        'OLDER'

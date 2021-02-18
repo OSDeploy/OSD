@@ -120,6 +120,13 @@ FunctionsToExport =     #ADK
                         'Get-MyComputerManufacturer',
                         'Get-MyComputerModel',
                         'Get-MyDefaultAUService',
+                        #OSDDisk
+                        'Clear-OSDDisk',
+                        'Get-OSDDisk',
+                        'Initialize-OSDDisk',
+                        'New-OSDDisk',
+                        'New-OSDPartitionSystem',
+                        'New-OSDPartitionWindows',
                         #PowerShellGet
                         'Copy-PSModuleToFolder',
                         'Copy-PSModuleToWim',
@@ -127,19 +134,8 @@ FunctionsToExport =     #ADK
                         #SS
                         'Get-ScreenPNG',
                         'Save-ClipboardImage',
-                        'Set-ClipboardScreenshot',
+                        'Set-ClipboardScreenshot'
                         #Storage
-                        'Get-DiskIsBoot',
-                        'Get-DiskIsSystem',
-                        'Get-DiskToBackup',
-                        'Initialize-DiskOSD',
-                        'New-OSDDisk',
-                        'New-PartitionOSDSystem',
-                        'New-PartitionOSDWindows',
-                        'Get-MyDisk',
-                        'Select-MyDisk',
-                        'Get-OSDDisk',
-                        'Clear-WinPELocalDisks'
 
 # Cmdlets to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no cmdlets to export.
 CmdletsToExport = @()

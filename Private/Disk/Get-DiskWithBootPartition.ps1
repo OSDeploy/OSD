@@ -6,12 +6,12 @@ Gets the Disk containing the BOOT partition
 Gets the Disk containing the BOOT partition
 
 .LINK
-https://osd.osdeploy.com/module/functions/storage/get-diskisboot
+https://osd.osdeploy.com/module/functions/storage/Get-DiskWithBootPartition
 
 .NOTES
 19.12.9    Created by David Segura @SeguraOSD
 #>
-function Get-DiskIsBoot {
+function Get-DiskWithBootPartition {
     [CmdletBinding()]
     param ()
 

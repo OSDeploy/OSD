@@ -1,4 +1,4 @@
-function Diskpart-Clean {
+function Diskpart-FormatPartition {
     [CmdletBinding()]
     param (
         [Parameter(Position = 0, Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
