@@ -67,8 +67,8 @@ PowerShellVersion = '5.0'
 
 # Functions to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no functions to export.
 FunctionsToExport =     #ADK
-                        'New-MyAdkCopyPE',
-                        'Get-MyAdk',
+                        #'New-MyAdkCopyPE',
+                        #'Get-MyAdk',
                         #Appx
                         'Remove-AppxOnline',
                         #Backup
@@ -121,12 +121,8 @@ FunctionsToExport =     #ADK
                         'Get-MyComputerModel',
                         'Get-MyDefaultAUService',
                         #OSDDisk
-                        'Clear-OSDDisk',
                         'Get-OSDDisk',
-                        'Initialize-OSDDisk',
                         'New-OSDDisk',
-                        'New-OSDPartitionSystem',
-                        'New-OSDPartitionWindows',
                         #PowerShellGet
                         'Copy-PSModuleToFolder',
                         'Copy-PSModuleToWim',

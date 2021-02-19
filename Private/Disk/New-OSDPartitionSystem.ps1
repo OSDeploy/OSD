@@ -63,24 +63,26 @@ function New-OSDPartitionSystem {
     #	GPT
     #======================================================================================================
     if ($PartitionStyle -eq 'GPT') {
-        Write-Verbose "New-Partition -GptType '{ebd0a0a2-b9e5-4433-87c0-68b6b72699c7}' -DiskNumber $DiskNumber -Size $($SizeSystemGpt / 1MB)MB"
+        Write-Host -ForegroundColor Green -BackgroundColor Black "Creating GPT System Partition"
         $PartitionSystem = New-Partition -GptType '{ebd0a0a2-b9e5-4433-87c0-68b6b72699c7}' -DiskNumber $DiskNumber -Size $SizeSystemGpt
 
+        Write-Host -ForegroundColor Green -BackgroundColor Black "Formatting GPT System Partition FAT32 with Label $LabelSystem on Drive Letter S"
         Diskpart-FormatSystemPartition -DiskNumber $DiskNumber -PartitionNumber $PartitionSystem.PartitionNumber -FileSystem 'fat32' -LabelSystem $LabelSystem
 
-        Write-Verbose "Set-Partition -GptType {c12a7328-f81f-11d2-ba4b-00a0c93ec93b}"
+        Write-Host -ForegroundColor Green -BackgroundColor Black "Setting GPT System Partition GptType {c12a7328-f81f-11d2-ba4b-00a0c93ec93b}"
         $PartitionSystem | Set-Partition -GptType '{c12a7328-f81f-11d2-ba4b-00a0c93ec93b}'
         
-        Write-Verbose "New-Partition GptType {e3c9e316-0b5c-4db8-817d-f92df00215ae} Size $($SizeMSR / 1MB)MB"
+        Write-Host -ForegroundColor Green -BackgroundColor Black "Creating MSR Partition GptType {e3c9e316-0b5c-4db8-817d-f92df00215ae}"
         $null = New-Partition -DiskNumber $DiskNumber -Size $SizeMSR -GptType '{e3c9e316-0b5c-4db8-817d-f92df00215ae}'
     }
     #======================================================================================================
     #	MBR
     #======================================================================================================
     if ($PartitionStyle -eq 'MBR') {
-        Write-Verbose "New-Partition Size $($SizeSystemMbr / 1MB)MB IsActive"
+        Write-Host -ForegroundColor Green -BackgroundColor Black "Creating MBR System Partition as Active"
         $PartitionSystem = New-Partition -DiskNumber $DiskNumber -Size $SizeSystemMbr -IsActive
         
+        Write-Host -ForegroundColor Green -BackgroundColor Black "Formatting MBR System Partition NTFS with Label $LabelSystem on Drive Letter S"
         Diskpart-FormatSystemPartition -DiskNumber $DiskNumber -PartitionNumber $PartitionSystem.PartitionNumber -FileSystem 'ntfs' -LabelSystem $LabelSystem
     }
 }

@@ -306,10 +306,10 @@ function New-OSDDisk {
             do {$ConfirmClearDisk = Read-Host "Press C to CLEAR this Disk, S to Skip, or X to Exit"}
             until (($ConfirmClearDisk -eq 'C') -or ($ConfirmClearDisk -eq 'S') -or ($ConfirmClearDisk -eq 'X'))
             if ($ConfirmClearDisk -eq 'C') {
-                Write-Host -ForegroundColor Green -BackgroundColor Black "Cleaning Disk $($OSDDisk.Number)"
+                Write-Host -ForegroundColor Green -BackgroundColor Black "Cleaning Disk $($Item.Number)"
                 Diskpart-Clean -DiskNumber $Item.Number
 
-                Write-Host -ForegroundColor Green -BackgroundColor Black "Initializing Disk $($OSDDisk.Number) as $PartitionStyle"
+                Write-Host -ForegroundColor Green -BackgroundColor Black "Initializing Disk $($Item.Number) as $PartitionStyle"
                 $Item | Initialize-Disk -PartitionStyle $PartitionStyle
             }
             if ($ConfirmClearDisk -eq 'S') {

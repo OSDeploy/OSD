@@ -76,16 +76,17 @@ function New-OSDPartitionWindows {
     #	GPT WINDOWS
     #======================================================================================================
     if ($PartitionStyle -eq 'GPT' -and $NoRecoveryPartition -eq $true) {
-            Write-Verbose "New-Partition -DiskNumber $DiskNumber -UseMaximumSize -GptType {ebd0a0a2-b9e5-4433-87c0-68b6b72699c7} DriveLetter C"
-            $PartitionWindows = New-Partition -DiskNumber $DiskNumber -UseMaximumSize -GptType '{ebd0a0a2-b9e5-4433-87c0-68b6b72699c7}' -DriveLetter C
+        Write-Host -ForegroundColor Green -BackgroundColor Black "Creating GPT Windows Partition"
+        $PartitionWindows = New-Partition -DiskNumber $DiskNumber -UseMaximumSize -GptType '{ebd0a0a2-b9e5-4433-87c0-68b6b72699c7}' -DriveLetter C
 
-            #$null = Format-Volume -Partition $PartitionWindows -NewFileSystemLabel "$LabelWindows" -FileSystem NTFS -Force -Confirm:$false
-            Write-Verbose "DISKPART> select disk $DiskNumber"
-            Write-Verbose "DISKPART> select partition $($PartitionWindows.PartitionNumber)"
-            Write-Verbose "DISKPART> format fs=$FileSystem quick label='$LabelWindows'"
-            Write-Verbose "DISKPART> assign letter C"
-            Write-Verbose "DISKPART> exit"
-
+        #$null = Format-Volume -Partition $PartitionWindows -NewFileSystemLabel "$LabelWindows" -FileSystem NTFS -Force -Confirm:$false
+        Write-Verbose "DISKPART> select disk $DiskNumber"
+        Write-Verbose "DISKPART> select partition $($PartitionWindows.PartitionNumber)"
+        Write-Verbose "DISKPART> format fs=$FileSystem quick label='$LabelWindows'"
+        Write-Verbose "DISKPART> assign letter C"
+        Write-Verbose "DISKPART> exit"
+        Write-Host -ForegroundColor Green -BackgroundColor Black "Formatting GPT Windows Partition NTFS with Label $LabelWindows on Drive Letter C"
+        
 $null = @"
 select disk $DiskNumber
 select partition $($PartitionWindows.PartitionNumber)
@@ -102,10 +103,10 @@ exit
         $SizeWindows = $($GetOSDDisk.LargestFreeExtent) - $SizeRecovery
         $SizeWindowsGB = [math]::Round($SizeWindows / 1GB,1)
 
-        Write-Verbose "New-Partition GptType {ebd0a0a2-b9e5-4433-87c0-68b6b72699c7} Size $($SizeWindowsGB)GB DriveLetter C"
+        Write-Host -ForegroundColor Green -BackgroundColor Black "Creating GPT Windows Partition"
         $PartitionWindows = New-Partition -DiskNumber $DiskNumber -Size $SizeWindows -GptType '{ebd0a0a2-b9e5-4433-87c0-68b6b72699c7}' -DriveLetter C
 
-        Write-Verbose "Format-Volume -DriveLetter C -FileSystem NTFS -NewFileSystemLabel $LabelWindows"
+        Write-Host -ForegroundColor Green -BackgroundColor Black "Formatting GPT Windows Partition NTFS with Label $LabelWindows on Drive Letter C"
         #$null = Format-Volume -Partition $PartitionWindows -NewFileSystemLabel "$LabelWindows" -FileSystem NTFS -Force -Confirm:$false
 
 $null = @"
@@ -116,14 +117,12 @@ assign letter C
 exit 
 "@ | diskpart.exe
 
-
-
-
-        Write-Verbose "New-Partition GptType {de94bba4-06d1-4d40-a16a-bfd50179d6ac} UseMaximumSize"
+        Write-Host -ForegroundColor Green -BackgroundColor Black "Creating GPT Recovery Partition"
         $PartitionRecovery = New-Partition -DiskNumber $DiskNumber -GptType '{de94bba4-06d1-4d40-a16a-bfd50179d6ac}' -UseMaximumSize
 
         Write-Verbose "Format-Volume FileSystem NTFS NewFileSystemLabel $LabelRecovery"
         #$null = Format-Volume -Partition $PartitionRecovery -NewFileSystemLabel "$LabelRecovery" -FileSystem NTFS -Confirm:$false
+        Write-Host -ForegroundColor Green -BackgroundColor Black "Formatting GPT Recovery Partition NTFS with Label $LabelRecovery on Drive Letter R"
 
 $null = @"
 select disk $DiskNumber
@@ -145,11 +144,12 @@ exit
     #	MBR WINDOWS
     #======================================================================================================
     if ($PartitionStyle -eq 'MBR' -and $NoRecoveryPartition -eq $true) {
-            Write-Verbose "New-Partition -DiskNumber $DiskNumber -UseMaximumSize -MbrType IFS -DriveLetter C"
-            $PartitionWindows = New-Partition -DiskNumber $DiskNumber -UseMaximumSize -MbrType IFS -DriveLetter C
+        Write-Host -ForegroundColor Green -BackgroundColor Black "Creating MBR Windows Partition"
+        $PartitionWindows = New-Partition -DiskNumber $DiskNumber -UseMaximumSize -MbrType IFS -DriveLetter C
     
-            Write-Verbose "Format-Volume -DriveLetter C -FileSystem NTFS -NewFileSystemLabel $LabelWindows"
-            #$null = Format-Volume -Partition $PartitionWindows -NewFileSystemLabel "$LabelWindows" -FileSystem NTFS -Force -Confirm:$false
+        Write-Verbose "Format-Volume -DriveLetter C -FileSystem NTFS -NewFileSystemLabel $LabelWindows"
+        #$null = Format-Volume -Partition $PartitionWindows -NewFileSystemLabel "$LabelWindows" -FileSystem NTFS -Force -Confirm:$false
+        Write-Host -ForegroundColor Green -BackgroundColor Black "Formatting MBR Recovery Partition NTFS with Label $LabelRecovery on Drive Letter R"
 $null = @"
 select disk $DiskNumber
 select partition $($PartitionWindows.PartitionNumber)
@@ -167,11 +167,12 @@ exit
         $SizeWindows = $($OSDDisk.LargestFreeExtent) - $SizeRecovery
         $SizeWindowsGB = [math]::Round($SizeWindows / 1GB,1)
 
-        Write-Verbose "New-Partition -DiskNumber $DiskNumber -Size $SizeWindows -MbrType IFS -DriveLetter c"
+        Write-Host -ForegroundColor Green -BackgroundColor Black "Creating MBR Windows Partition"
         $PartitionWindows = New-Partition -DiskNumber $DiskNumber -Size $SizeWindows -MbrType IFS -DriveLetter c
 
         Write-Verbose "Format-Volume FileSystem NTFS NewFileSystemLabel $LabelWindows"
         #$null = Format-Volume -Partition $PartitionWindows -NewFileSystemLabel "$LabelWindows" -FileSystem NTFS -Force -Confirm:$false
+        Write-Host -ForegroundColor Green -BackgroundColor Black "Formatting MBR Recovery Partition NTFS with Label $LabelRecovery on Drive Letter R"
 
 $null = @"
 select disk $DiskNumber

@@ -33,6 +33,13 @@ function Get-OSD {
     Write-Host -ForegroundColor DarkCyan    "Module Path: $GetModulePath"
 
     Write-Host -ForegroundColor DarkCyan    '=================================' -NoNewline
+    Write-Host -ForegroundColor Cyan        '21.2.19'
+    Write-Host -ForegroundColor White       'Get-OSDDisk                            ' -NoNewline
+    Write-Host -ForegroundColor Gray        'Modified version of Get-Disk with some neat filters'
+    Write-Host -ForegroundColor White       'New-OSDDisk (Updated)                  ' -NoNewline
+    Write-Host -ForegroundColor Gray        'Creates System | OS | Recovery Partitions for GPT and MBR Drives in WinPE'
+
+    Write-Host -ForegroundColor DarkCyan    '=================================' -NoNewline
     Write-Host -ForegroundColor Cyan        '21.2.10'
     Write-Host -ForegroundColor Yellow      'Backup-MyBitLockerKeys                 ' -NoNewline
     Write-Host -ForegroundColor Gray        'Saves all BitLocker ExternalKeys (BEK), KeyPackages (KPG), and RecoveryPasswords (TXT)'
@@ -131,16 +138,14 @@ function Get-OSD {
     Write-Host -ForegroundColor Gray        'Select multiple Dell or HP Computer Models to generate WMI Query'
     Write-Host -ForegroundColor White       'Get-OSDWinPE                           ' -NoNewline
     Write-Host -ForegroundColor Gray        'Common WinPE Commands using wpeutil and Microsoft DaRT RemoteRecovery'
-    Write-Host -ForegroundColor White       'Initialize-DiskOSD                     ' -NoNewline
-    Write-Host -ForegroundColor Gray        'Initializes a Disk'
+<#     Write-Host -ForegroundColor White       'Initialize-DiskOSD                     ' -NoNewline
+    Write-Host -ForegroundColor Gray        'Initializes a Disk' #>
     Write-Host -ForegroundColor White       'Mount-MyWindowsImage                   ' -NoNewline
     Write-Host -ForegroundColor Gray        'Give it a WIM, let it mount it'
-    Write-Host -ForegroundColor White       'New-OSDDisk                            ' -NoNewline
-    Write-Host -ForegroundColor Gray        'Creates System | OS | Recovery Partitions for MBR or UEFI Drives in WinPE'
-    Write-Host -ForegroundColor White       'New-PartitionOSDSystem                 ' -NoNewline
+<#     Write-Host -ForegroundColor White       'New-PartitionOSDSystem                 ' -NoNewline
     Write-Host -ForegroundColor Gray        'Creates a SYSTEM Partition'
     Write-Host -ForegroundColor White       'New-PartitionOSDWindows                ' -NoNewline
-    Write-Host -ForegroundColor Gray        'Creates a WINDOWS Partition'
+    Write-Host -ForegroundColor Gray        'Creates a WINDOWS Partition' #>
     Write-Host -ForegroundColor White       'Update-MyWindowsImage                  ' -NoNewline
     Write-Host -ForegroundColor Gray        'Identify, Download, and Apply Updates to a Mounted Windows Image'
     Write-Host -ForegroundColor DarkCyan    '======================' -NoNewline
