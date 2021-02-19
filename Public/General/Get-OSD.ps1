@@ -34,9 +34,9 @@ function Get-OSD {
 
     Write-Host -ForegroundColor DarkCyan    '=================================' -NoNewline
     Write-Host -ForegroundColor Cyan        '21.2.19'
-    Write-Host -ForegroundColor White       'Get-OSDDisk                            ' -NoNewline
+    Write-Host -ForegroundColor Yellow      'Get-OSDDisk                            ' -NoNewline
     Write-Host -ForegroundColor Gray        'Modified version of Get-Disk with some neat filters'
-    Write-Host -ForegroundColor White       'New-OSDDisk (Updated)                  ' -NoNewline
+    Write-Host -ForegroundColor Yellow      'New-OSDDisk (Updated)                  ' -NoNewline
     Write-Host -ForegroundColor Gray        'Creates System | OS | Recovery Partitions for GPT and MBR Drives in WinPE'
 
     Write-Host -ForegroundColor DarkCyan    '=================================' -NoNewline
