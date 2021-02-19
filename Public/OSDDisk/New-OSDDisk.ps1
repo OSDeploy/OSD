@@ -5,343 +5,321 @@ Creates System | OS | Recovery Partitions for MBR or UEFI Drives in WinPE
 .DESCRIPTION
 Creates System | OS | Recovery Partitions for MBR or UEFI Drives in WinPE
 
+.PARAMETER DiskNumber
+Specifies the disk number for which to get the associated Disk object
+Alias = Disk, Number
+
+.PARAMETER LabelRecovery
+Drive Label of the Recovery Partition
+Default = Recovery
+Alias = LR, LabelR
+
+.PARAMETER LabelSystem
+Drive Label of the System Partition
+Default = System
+Alias = LS, LabelS
+
+.PARAMETER LabelWindows
+Drive Label of the Windows Partition
+Default = OS
+Alias = LW, LabelW
+
+.PARAMETER NoRecoveryPartition
+Alias = SkipRecovery, SkipRecoveryPartition
+Skips the creation of the Recovery Partition
+
+.PARAMETER PartitionStyle
+Partition Style of the new partitions
+EFI Default = GPT
+BIOS Default = MBR
+Alias = PS
+
+.PARAMETER SizeMSR
+MSR Partition size
+Default = 16MB
+Range = 16MB - 128MB
+Alias = MSR
+
+.PARAMETER SizeRecovery
+Size of the Recovery Partition
+Default = 990MB
+Range = 350MB - 80000MB (80GB)
+Alias = SR, Recovery
+
+.PARAMETER SizeSystemGpt
+System Partition size for UEFI GPT based Computers
+Default = 260MB
+Range = 100MB - 3000MB (3GB)
+Alias = SSG, Efi, SystemG
+
+.PARAMETER SizeSystemMbr
+System Partition size for BIOS MBR based Computers
+Default = 260MB
+Range = 100MB - 3000MB (3GB)
+Alias = SSM, Mbr, SystemM
+
 .LINK
-https://osd.osdeploy.com/module/functions/storage/new-osddisk
+https://osd.osdeploy.com/module/osddisk/new-osddisk
 
 .NOTES
-19.10.10     Created by David Segura @SeguraOSD
+19.10.10    Created by David Segura @SeguraOSD
+21.2.19     Complete redesign
 #>
 function New-OSDDisk {
     [CmdletBinding()]
     param (
-        #Title displayed during script execution
-        #Default = New-OSDDisk
-        #Alias = T
-        [Alias('T')]
-        [string]$Title = 'New-OSDDisk',
-
-        #Fixed Disk Number
-        #Alias = Disk, Number
         [Alias('Disk','Number')]
-        [int]$DiskNumber,
+        [uint32]$DiskNumber,
 
-        #Drive Label of the System Partition
-        #Default = System
-        #Alias = LS, LabelS
+        [Alias('PS')]
+        [ValidateSet('GPT','MBR')]
+        [string]$PartitionStyle,
+
         [Alias('LS','LabelS')]
         [string]$LabelSystem = 'System',
-        
-        #Drive Label of the Windows Partition
-        #Default = OS
-        #Alias = LW, LabelW
-        [Alias('LW','LabelW')]
-        [string]$LabelWindows = 'OS',
-        
-        #Drive Label of the Recovery Partition
-        #Default = Recovery
-        #Alias = LR, LabelR
-        [Alias('LR','LabelR')]
-        [string]$LabelRecovery = 'Recovery',
 
-        #System Partition size for BIOS MBR based Computers
-        #Default = 260MB
-        #Range = 100MB - 3000MB (3GB)
-        #Alias = SSM, Mbr, SystemM
-        [Alias('SSM','Mbr','SystemM')]
-        [ValidateRange(100MB,3000MB)]
-        [uint64]$SizeSystemMbr = 260MB,
-
-        #System Partition size for UEFI GPT based Computers
-        #Default = 260MB
-        #Range = 100MB - 3000MB (3GB)
-        #Alias = SSG, Efi, SystemG
         [Alias('SSG','Efi','SystemG')]
         [ValidateRange(100MB,3000MB)]
         [uint64]$SizeSystemGpt = 260MB,
 
-        #MSR Partition size
-        #Default = 16MB
-        #Range = 16MB - 128MB
-        #Alias = MSR
+        [Alias('SSM','Mbr','SystemM')]
+        [ValidateRange(100MB,3000MB)]
+        [uint64]$SizeSystemMbr = 260MB,
+
         [Alias('MSR')]
         [ValidateRange(16MB,128MB)]
         [uint64]$SizeMSR = 16MB,
 
-        #Size of the Recovery Partition
-        #Default = 990MB
-        #Range = 350MB - 80000MB (80GB)
-        #Alias = SR, Recovery
+        [Alias('LW','LabelW')]
+        [string]$LabelWindows = 'OS',
+
+        [Alias('SkipRecovery','SkipRecoveryPartition')]
+        [switch]$NoRecoveryPartition,
+
+        [Alias('LR','LabelR')]
+        [string]$LabelRecovery = 'Recovery',
+
         [Alias('SR','Recovery')]
         [ValidateRange(350MB,80000MB)]
-        [uint64]$SizeRecovery = 990MB,
-
-        #Skips the creation of the Recovery Partition
-        [Alias('SkipRecovery')]
-        [switch]$SkipRecoveryPartition,
-
-        #Required for execution as a safety precaution
-        [switch]$Force
+        [uint64]$SizeRecovery = 990MB
     )
     
-    #======================================================================================================
-    #	Set Defaults
-    #======================================================================================================
-    $global:OSDDisk = $null
-    $global:OSDFixedDisks = $null
-    $global:OSDDirtyDisks = $null
-    $global:OSDDiskSandbox = $true
-    $global:OSDDiskSelect = $false
-    $OSDDiskSkipDisplay = $false
     #======================================================================================================
     #	OSD Module Information
     #======================================================================================================
     $OSDVersion = $($MyInvocation.MyCommand.Module.Version)
-    Write-Host "OSD $OSDVersion $Title" -ForegroundColor Cyan
-    #======================================================================================================
-    #	Get all Fixed Disks
-    #======================================================================================================
-    $global:OSDFixedDisks = Get-Disk | Where-Object {($_.BusType -ne 'USB') -and ($_.BusType -notmatch 'Virtual') -and ($_.Size -gt 15GB)} | Sort-Object Number
-    #======================================================================================================
-    #	Get all Fixed Disks that are Dirty
-    #======================================================================================================
-    $global:OSDDirtyDisks = $global:OSDFixedDisks | Where-Object {$_.PartitionStyle -ne 'RAW'}
-    #======================================================================================================
-    #	Failure: No Fixed Disks are present
-    #======================================================================================================
-    if ($null -eq $global:OSDFixedDisks) {Write-Warning "$Title could not find any Fixed Disks"; Break}
-    #======================================================================================================
-    #	Force Validation
-    #======================================================================================================
-    if ($Force.IsPresent) {$global:OSDDiskSandbox = $false}
-    #======================================================================================================
-    #	Sandbox
-    #======================================================================================================
-    if ($global:OSDDiskSandbox -eq $true) {
-        Write-Warning "$Title is running in Sandbox Mode (non-desctructive)"
-        Write-Warning "Use the -Force parameter to bypass Sandbox Mode"
-    }
-    #======================================================================================================
-    #	If there is only one Fixed Disk, then it is the OSDDisk
-    #======================================================================================================
-    if (($global:OSDFixedDisks | Measure-Object).Count -eq 1) {
-        $OSDDisk = $global:OSDFixedDisks
-        if ($OSDDisk.PartitionStyle -ne 'RAW') {
-            if (-not $Force.IsPresent) {
-                Write-Warning "Existing Partitions must be cleared"
-            }
-        }
-        if ($OSDDisk.PartitionStyle -eq 'RAW') {$OSDDiskSkipDisplay = $true}
-    } else {
-        if (-not $Force.IsPresent) {
-            Write-Warning "Multiple Fixed Disks are present"
-        }
-        if ($DiskNumber) {
-            #OSDDisk was specified
-            $OSDDisk = $global:OSDFixedDisks | Where-Object {$_.DiskNumber -eq $DiskNumber}
-        } else {
-            #More than one Fixed Disk
-            $global:OSDDiskSelect = $true
-        }
-    }
-    #======================================================================================================
-    #	Enable Sandbox
-    #======================================================================================================
-    #if ($global:OSDDiskSandbox -eq $true) {Write-Verbose "$Title is running in Sandbox.  Use the Force parameter for execution" -Verbose}
+    Write-Verbose "OSD $OSDVersion $($MyInvocation.MyCommand.Name)"
     #======================================================================================================
     #	IsWinPE
     #======================================================================================================
-    if (Get-OSDGather -Property IsWinPE) {Write-Host "$Title is running in WinPE" -ForegroundColor DarkGray}
-    else {
-        Write-Warning "$Title requires WinPE"
-        if ($global:OSDDiskSandbox -eq $false) {Break}
+    if (-NOT (Get-OSDGather -Property IsWinPE)) {
+        Write-Warning "WinPE is required for execution"
+        Break
     }
     #======================================================================================================
     #	IsAdmin
     #======================================================================================================
-    if (Get-OSDGather -Property IsAdmin) {Write-Host "$Title is running with Administrative Rights" -ForegroundColor DarkGray}
-    else {
-        Write-Warning "$Title requires Administrative Rights"
-        if ($global:OSDDiskSandbox -eq $false) {Break}
+    if (-NOT (Get-OSDGather -Property IsAdmin)) {
+        Write-Warning "Administrative Rights are required for execution"
+        Break
     }
     #======================================================================================================
-    #	DisplayOSDFixedDisks
+    #	Set Defaults
     #======================================================================================================
-    if ($OSDDiskSkipDisplay -eq $false) {
-        Write-Host "=================================================================================================" -ForegroundColor Cyan
-        foreach ($item in $global:OSDFixedDisks) {Write-Host "Disk $($item.Number) - $($item.FriendlyName) ($([math]::Round($item.Size / 1000000000))GB $($item.PartitionStyle)) BusType=$($item.BusType) Partitions=$($item.NumberOfPartitions) IsBoot=$($item.BootFromDisk)" -ForegroundColor Cyan}
-        Write-Host "=================================================================================================" -ForegroundColor Cyan
-    }
+    $OSDDisk = $null
+    $DataDisks = $null
     #======================================================================================================
-    #	OSDDiskSelect
+    #	PartitionStyle
     #======================================================================================================
-    if ($global:OSDDiskSelect -eq $true) {
-        do {$ConfirmOSDDisk = Read-Host "Multiple Disks: Type the DiskNumber to use as the OSDDisk, or press X to EXIT (and press Enter)"}
-        until (($global:OSDFixedDisks.Number -Contains $ConfirmOSDDisk) -or $ConfirmOSDDisk -eq 'X')
-        if ($Selected -eq 'X') {Break}
-        $OSDDisk = $global:OSDFixedDisks | Where-Object {$_.Number -eq $ConfirmOSDDisk}
-    }
-    #======================================================================================================
-    #	No GetOSDDisk
-    #======================================================================================================
-    if ($null -eq $OSDDisk) {Write-Warning "$Title is unable to find a suitable Disk"; Break}
-    #======================================================================================================
-    #	Clear GetOSDDisk
-    #======================================================================================================
-    if ($OSDDisk.PartitionStyle -ne 'RAW') {
-        #Write-Host "Clear Disk $($OSDDisk.Number) $($OSDDisk.FriendlyName) ($([math]::Round($OSDDisk.Size / 1000000000))GB $($OSDDisk.PartitionStyle)) BusType=$($OSDDisk.BusType) Partitions=$($OSDDisk.NumberOfPartitions)" -ForegroundColor Yellow
-        
-        if ($global:OSDDiskSandbox -eq $true) {
-            Write-Host "SANDBOX: DISKPART select disk $($OSDDisk.Number)" -ForegroundColor DarkGray
-            Write-Host "SANDBOX: DISKPART clean" -ForegroundColor DarkGray
-        }
-
-        if ($global:OSDDiskSandbox -eq $false) {
-            do {$ConfirmInit = Read-Host "Press C to CLEAR this Disk, or X to EXIT (and press Enter)"}
-            until ($ConfirmInit -eq 'C' -or $ConfirmInit -eq 'X')
-            if ($ConfirmInit -eq 'X') {Break}
-            #Virtual Machines have issues using PowerShell for Clear-Disk
-            #$OSDDisk | Clear-Disk -RemoveOEM -RemoveData -Confirm:$true -PassThru -ErrorAction SilentlyContinue | Out-Null
-            Write-Warning "DISKPART select disk $($OSDDisk.Number)"
-            Write-Warning "DISKPART clean"
-            
-$null = @"
-select disk $($OSDDisk.Number)
-clean
-exit 
-"@ | diskpart.exe
-        }
-    }
-
-    #======================================================================================================
-    #	Clear additional Dirty Disks
-    #======================================================================================================
-    $global:OSDDirtyDisks = $global:OSDDirtyDisks | Where-Object {$_.Number -ne $OSDDisk.Number}
-
-    foreach ($item in $global:OSDDirtyDisks) {
-        Write-Host "Secondary Disk: Clear Disk $($item.Number) $($item.FriendlyName) ($([math]::Round($item.Size / 1000000000))GB $($item.PartitionStyle)) BusType=$($item.BusType) Partitions=$($item.NumberOfPartitions)" -ForegroundColor Yellow
-
-        if ($global:OSDDiskSandbox -eq $false) {
-            $null = $ConfirmClearDisk
-            do {$ConfirmClearDisk = Read-Host "Press C to CLEAR this disk, or S to SKIP (and press Enter)"}
-            until ($ConfirmClearDisk -eq 'C' -or $ConfirmClearDisk -eq 'S')
-
-            #$DirtyFixedDisk | Clear-Disk -RemoveOEM -RemoveData -Confirm:$false -PassThru -ErrorAction SilentlyContinue | Out-Null
-
-$null = @"
-select disk $($item.Number)
-clean
-exit 
-"@ | diskpart.exe
-        }
-    }
-
-
-
-
-<#     #======================================================================================================
-    #	Simulation
-    #======================================================================================================
-    if (Get-OSDGather -Property IsUEFI) {
-        Write-Verbose "Disk $($OSDDisk.Number) will be Initialized as GPT (UEFI)" -Verbose
-        $PartitionStyle = 'GPT'
-        Write-Verbose "Initialize Disk $($OSDDisk.Number) $($OSDDisk.FriendlyName) ($([math]::Round($OSDDisk.Size / 1000000000))GB) $PartitionStyle" -Verbose
-        Write-Verbose "Disk $($OSDDisk.Number) System Partition $($SizeSystemGpt / 1MB)MB FAT32 $LabelSystem" -Verbose
-        Write-Verbose "Disk $($OSDDisk.Number) MSR Partition $($SizeMSR / 1MB)MB" -Verbose
-        if ($SkipRecoveryPartition.IsPresent) {
-            $SizeWindows = $($OSDDisk.Size) - $SizeSystemGpt - $SizeMSR
-            $SizeWindowsGB = [math]::Round($SizeWindows / 1GB,1)
-            Write-Verbose "Disk $($OSDDisk.Number) Windows Partition $($SizeWindowsGB)GB NTFS $LabelWindows" -Verbose
-        } else {
-            $SizeWindows = $($OSDDisk.Size) - $SizeSystemGpt - $SizeMSR - $SizeRecovery
-            $SizeWindowsGB = [math]::Round($SizeWindows / 1GB,1)
-            Write-Verbose "Disk $($OSDDisk.Number) Windows Partition $($SizeWindowsGB)GB NTFS $LabelWindows" -Verbose
-            Write-Verbose "Disk $($OSDDisk.Number) Recovery Partition $($SizeRecovery / 1MB)MB NTFS $LabelRecovery" -Verbose
-        }
-    } else {
-        Write-Verbose "Disk will be Initialized as MBR (BIOS)" -Verbose
-        $PartitionStyle = 'MBR'
-        Write-Verbose "Initialize Disk $($OSDDisk.Number) $($OSDDisk.FriendlyName) ($([math]::Round($OSDDisk.Size / 1000000000))GB) $PartitionStyle" -Verbose
-        Write-Verbose "Disk $($OSDDisk.Number) System Partition $($SizeSystemMbr / 1MB)MB FAT32 $LabelSystem" -Verbose
-        if ($SkipRecoveryPartition.IsPresent) {
-            $SizeWindows = $($OSDDisk.Size) - $SizeSystemMbr - $SizeMSR
-            $SizeWindowsGB = [math]::Round($SizeWindows / 1GB,1)
-            Write-Verbose "Disk $($OSDDisk.Number) Windows Partition $($SizeWindowsGB)GB NTFS $LabelWindows" -Verbose
-        } else {
-            $SizeWindows = $($OSDDisk.Size) - $SizeSystemMbr - $SizeRecovery
-            $SizeWindowsGB = [math]::Round($SizeWindows / 1GB,1)
-            Write-Verbose "Disk $($OSDDisk.Number) Windows Partition $($SizeWindowsGB)GB NTFS $LabelWindows" -Verbose
-            Write-Verbose "Disk $($OSDDisk.Number) Recovery Partition $($SizeRecovery / 1MB)MB NTFS $LabelRecovery" -Verbose
-        }
-    } #>
-    #======================================================================================================
-    #	Get OSDDisks
-    #   Update the OSDDisk information
-    #======================================================================================================
-    $OSDDisk = Get-Disk -Number $OSDDisk.Number
-    #======================================================================================================
-    #	RAW
-    #   Force: Make sure that the OSDDisk is RAW, if not we need to exit
-    #   Simulation: No need to evaluate
-    #======================================================================================================
-    if (($global:OSDDiskSandbox -eq $false) -and ($OSDDisk.PartitionStyle -ne 'RAW')) {Write-Warning "OSDDisk does not have RAW PartitionStyle.  $Title cannot create additional Partitions.  Exiting"; Break}
-    #======================================================================================================
-    #	Display OSDDisk
-    #   Show the current information about this Disk.  At this point, it should be RAW
-    #======================================================================================================
-    Write-Host "=================================================================================================" -ForegroundColor Cyan
-    Write-Host "Disk $($OSDDisk.Number) - $($OSDDisk.FriendlyName) ($([math]::Round($OSDDisk.Size / 1000000000))GB $($OSDDisk.PartitionStyle)) BusType=$($OSDDisk.BusType)" -ForegroundColor Cyan
-    Write-Host "=================================================================================================" -ForegroundColor Cyan
-    #======================================================================================================
-    #	AskPartition
-    #   Ask if it is ok to Partition the Drive
-    #   Simulation: No need to evaluate
-    #   P to Partition
-    #   X to exit
-    #======================================================================================================
-    if ($global:OSDDiskSandbox -eq $false) {
-        do {$AskPartition = Read-Host "Press P to Partition this Disk, or X to quit (and press Enter)"}
-        until ($AskPartition -eq 'P' -or $AskPartition -eq 'X')
-        if ($AskPartition -eq 'X') {Break}
-    }
-    #======================================================================================================
-    #	Initialize-DiskOSD
-    #   OSDDisk is RAW so it needs to be Initialized
-    #======================================================================================================
-    if ($global:OSDDiskSandbox -eq $true) {
-        Initialize-DiskOSD -Number $($OSDDisk.Number) -WhatIf
-    } else {
-        Initialize-DiskOSD -Number $($OSDDisk.Number)
-    }
-    #======================================================================================================
-    #	New-OSDPartitionSystem
-    #======================================================================================================
-    New-OSDPartitionSystem -DiskNumber $($OSDDisk.Number) -SizeSystemMbr $SizeSystemMbr -SizeSystemGpt $SizeSystemGpt -LabelSystem $LabelSystem -SizeMSR $SizeMSR
-
-    if ($SkipRecoveryPartition.IsPresent) {
-        New-OSDPartitionWindows -DiskNumber $($OSDDisk.Number) -LabelWindows $LabelWindows -SkipRecoveryPartition
-    } else {
-        New-OSDPartitionWindows -DiskNumber $($OSDDisk.Number) -LabelWindows $LabelWindows -LabelRecovery $LabelRecovery -SizeRecovery $SizeRecovery
-    }
-    #======================================================================================================
-    #	Parameters
-    #======================================================================================================
-    if (-not ($Force.IsPresent)) {
-        Write-Host "=================================================================================================" -ForegroundColor Cyan
-        Write-Host "Parameters" -ForegroundColor Cyan
-        Write-Host "=================================================================================================" -ForegroundColor Cyan
-        Write-Host "-Title: $Title" -ForegroundColor Cyan
-        Write-Host "-DiskNumber: $DiskNumber" -ForegroundColor Cyan
-        Write-Host "-LabelSystem: $LabelSystem" -ForegroundColor Cyan
-        Write-Host "-LabelWindows: $LabelWindows" -ForegroundColor Cyan
+    if (-NOT ($PartitionStyle)) {
         if (Get-OSDGather -Property IsUEFI) {
-            Write-Host "-LabelRecovery (GPT): $LabelRecovery" -ForegroundColor Cyan
-            Write-Host "-SizeSystemGpt (GPT): $($SizeSystemGpt/ 1MB)MB" -ForegroundColor Cyan
-            Write-Host "-SizeMSR (GPT): $($SizeMSR / 1MB)MB" -ForegroundColor Cyan
-            Write-Host "-SizeRecovery (GPT): $($SizeRecovery/ 1MB)MB" -ForegroundColor Cyan
-            Write-Host "-SkipRecoveryPartition (GPT): $SkipRecoveryPartition" -ForegroundColor Cyan
+            $PartitionStyle = 'GPT'
         } else {
-            Write-Host "-SizeSystemMbr (MBR): $($SizeSystemMbr/ 1MB)MB" -ForegroundColor Cyan
+            $PartitionStyle = 'MBR'
         }
-        Write-Host "-Force: $Force" -ForegroundColor Cyan
+    }
+    Write-Verbose "PartitionStyle is set to $PartitionStyle"
+    #======================================================================================================
+    #	Get-OSDDisk
+    #======================================================================================================
+    if ($DiskNumber) {
+        $GetOSDDisk = Get-OSDDisk -Number $DiskNumber
+    } else {
+        $GetOSDDisk = Get-OSDDisk -BusTypeNot USB,Virtual | `
+        Where-Object {($_.Size -gt 15GB)} | `
+        Sort-Object Number
+    }
+    #======================================================================================================
+    #	Failure: No Fixed Disks are present
+    #======================================================================================================
+    if ($null -eq $GetOSDDisk) {
+        Write-Warning "No Fixed Disks were found"
+        Break
+    }
+    #======================================================================================================
+    #	Identify OSDDisk
+    #======================================================================================================
+    Write-Host ""
+    if (($GetOSDDisk | Measure-Object).Count -eq 1) {
+        $OSDDisk = $GetOSDDisk
+    } else {
+        foreach ($Item in $GetOSDDisk) {
+            Write-Host "[$($Item.Number)]" -ForegroundColor Green -BackgroundColor Black -NoNewline
+            Write-Host " $($Item.BusType) $($Item.MediaType) $($Item.FriendlyName) [$($Item.NumberOfPartitions) $($Item.PartitionStyle) Partitions]"
+        }
+        Write-Host "[X]" -ForegroundColor Green -BackgroundColor Black  -NoNewline
+        Write-Host " Exit"
+
+        do {
+            $SelectOSDDisk = Read-Host -Prompt "Type the Disk Number to use as the OSDDisk, or X to Exit"
+        }
+        until (
+            ((($SelectOSDDisk -ge 0) -and ($SelectOSDDisk -in $GetOSDDisk.Number)) -or ($SelectOSDDisk -eq 'X')) 
+        )
+        if ($SelectOSDDisk -eq 'X') {
+            Write-Warning "Exit"
+            Break
+        }
+        $OSDDisk = $GetOSDDisk | Where-Object {$_.Number -eq $SelectOSDDisk}
+        $DataDisks = $GetOSDDisk | Where-Object {$_.Number -ne $OSDDisk.Number}
+    }
+    Write-Host ""
+    #======================================================================================================
+    #	Make sure there is only one OSDDisk
+    #======================================================================================================
+    if (($OSDDisk | Measure-Object).Count -gt 1) {
+        Write-Warning "Something went wrong"
+        Break
+    }
+    #======================================================================================================
+    #   Create OSDDisk
+    #======================================================================================================
+    #Create from RAW Disk
+    if (($OSDDisk.NumberOfPartitions -eq 0) -and ($OSDDisk.PartitionStyle -eq 'RAW')) {
+        Write-Host -ForegroundColor Green -BackgroundColor Black "Initializing Disk $($OSDDisk.Number) as $PartitionStyle"
+        $OSDDisk | Initialize-Disk -PartitionStyle $PartitionStyle
+
+    }
+    #Create from unpartitioned Disk
+    elseif (($OSDDisk.NumberOfPartitions -eq 0) -and ($OSDDisk.PartitionStyle -ne $PartitionStyle)) {
+        Write-Host -ForegroundColor Green -BackgroundColor Black "Cleaning Disk $($OSDDisk.Number)"
+        Diskpart-Clean -DiskNumber $OSDDisk.Number
+
+        Write-Host -ForegroundColor Green -BackgroundColor Black "Initializing Disk $($OSDDisk.Number) as $PartitionStyle"
+        $OSDDisk | Initialize-Disk -PartitionStyle $PartitionStyle
+    }
+    #Prompt for confirmation to clear the existing disk
+    else {
+        Write-Host "[C]"  -ForegroundColor Green -BackgroundColor Black -NoNewline
+        Write-Host " Disk $($OSDDisk.Number) $($OSDDisk.BusType) $($OSDDisk.MediaType) $($OSDDisk.FriendlyName) [$($OSDDisk.NumberOfPartitions) $($OSDDisk.PartitionStyle) Partitions]"
+        Write-Host "[X]" -ForegroundColor Green -BackgroundColor Black  -NoNewline
+        Write-Host " Exit"
+
+        do {$ConfirmClearDisk = Read-Host "Press C to create OSDDisk from the specified Disk, or X to Exit"}
+        until (($ConfirmClearDisk -eq 'C') -or ($ConfirmClearDisk -eq 'X'))
+
+        #Clear and Initialize Disk
+        if ($ConfirmClearDisk -eq 'C') {
+            Write-Host -ForegroundColor Green -BackgroundColor Black "Cleaning Disk $($OSDDisk.Number)"
+            Diskpart-Clean -DiskNumber $OSDDisk.Number
+            Write-Host -ForegroundColor Green -BackgroundColor Black "Initializing Disk $($OSDDisk.Number) as $PartitionStyle"
+            $OSDDisk | Initialize-Disk -PartitionStyle $PartitionStyle
+        }
+
+        #Exit
+        if ($ConfirmClearDisk -eq 'X') {
+            Write-Warning "Exit"
+            Break
+        }
+    }
+    #======================================================================================================
+    #	Reassign Volume S
+    #======================================================================================================
+    $GetVolume = Get-Volume | Where-Object {$_.DriveLetter -eq 'S'}
+
+    if ($GetVolume) {
+        Write-Host -ForegroundColor Green -BackgroundColor Black "Reassigning Drive Letter S"
+        Get-Partition -DriveLetter 'S' | Set-Partition -NewDriveLetter (Get-LastAvailableDriveLetter)
+    }
+    #======================================================================================================
+    #	System Partition
+    #======================================================================================================
+    $SystemPartition = @{
+        DiskNumber          = $OSDDisk.Number
+        Label               = $LabelSystem
+        PartitionStyle      = $PartitionStyle
+        SizeSystemMbr       = $SizeSystemMbr
+        SizeSystemGpt       = $SizeSystemGpt
+        SizeMSR             = $SizeMSR
+    }
+    New-OSDPartitionSystem @SystemPartition
+    #======================================================================================================
+    #	Reassign Volume C
+    #======================================================================================================
+    $GetVolume = Get-Volume | Where-Object {$_.DriveLetter -eq 'C'}
+
+    if ($GetVolume) {
+        Write-Host -ForegroundColor Green -BackgroundColor Black "Reassigning Drive Letter C"
+        Get-Partition -DriveLetter 'C' | Set-Partition -NewDriveLetter (Get-LastAvailableDriveLetter)
+    }
+    #======================================================================================================
+    #	Reassign Volume R
+    #======================================================================================================
+    $GetVolume = Get-Volume | Where-Object {$_.DriveLetter -eq 'R'}
+
+    if ($GetVolume) {
+        Write-Host -ForegroundColor Green -BackgroundColor Black "Reassigning Drive Letter R"
+        Get-Partition -DriveLetter 'R' | Set-Partition -NewDriveLetter (Get-LastAvailableDriveLetter)
+    }
+    #======================================================================================================
+    #	Windows Partition
+    #======================================================================================================
+    $WindowsPartition = @{
+        DiskNumber              = $OSDDisk.Number
+        LabelRecovery           = $LabelRecovery
+        LabelWindows            = $LabelWindows
+        PartitionStyle          = $PartitionStyle
+        SizeRecovery            = $SizeRecovery
+        NoRecoveryPartition   = $NoRecoveryPartition
+    }
+    New-OSDPartitionWindows @WindowsPartition
+    #======================================================================================================
+    #	DataDisks
+    #======================================================================================================
+    if ($DataDisks) {
+        Write-Host ""
+<#         foreach ($Item in $DataDisks) {
+            Write-Host "[$($Item.Number)]" -ForegroundColor Green -BackgroundColor Black -NoNewline
+            Write-Host " $($Item.BusType) $($Item.MediaType) $($Item.FriendlyName) [$($Item.NumberOfPartitions) $($Item.PartitionStyle) Partitions]"
+        }
+        Write-Host "" #>
+
+        foreach ($Item in $DataDisks) {
+            Write-Host "[C]"  -ForegroundColor Green -BackgroundColor Black -NoNewline
+            Write-Host " Disk $($Item.Number) $($Item.BusType) $($Item.MediaType) $($Item.FriendlyName) [$($Item.NumberOfPartitions) $($Item.PartitionStyle) Partitions]"
+            Write-Host "[S]" -ForegroundColor Green -BackgroundColor Black  -NoNewline
+            Write-Host " Skip this Disk"
+            Write-Host "[X]" -ForegroundColor Green -BackgroundColor Black  -NoNewline
+            Write-Host " Exit"
+            Write-Host "This drive is a DATA disk and it should be cleaned and initialized"
+
+            do {$ConfirmClearDisk = Read-Host "Press C to CLEAR this Disk, S to Skip, or X to Exit"}
+            until (($ConfirmClearDisk -eq 'C') -or ($ConfirmClearDisk -eq 'S') -or ($ConfirmClearDisk -eq 'X'))
+            if ($ConfirmClearDisk -eq 'C') {
+                Write-Host -ForegroundColor Green -BackgroundColor Black "Cleaning Disk $($OSDDisk.Number)"
+                Diskpart-Clean -DiskNumber $Item.Number
+
+                Write-Host -ForegroundColor Green -BackgroundColor Black "Initializing Disk $($OSDDisk.Number) as $PartitionStyle"
+                $Item | Initialize-Disk -PartitionStyle $PartitionStyle
+            }
+            if ($ConfirmClearDisk -eq 'S') {
+                Write-Warning "Skip DiskNumber $($Item.Number) "
+            }
+            if ($ConfirmClearDisk -eq 'X') {
+                Write-Warning "Exit"
+                Break
+            }
+            Write-Host ""
+        }
     }
 }
