@@ -142,7 +142,7 @@ function New-OSDDisk {
     #======================================================================================================
     #	Get-OSDDisk
     #======================================================================================================
-    if ($DiskNumber) {
+    if ($PSBoundParameters.ContainsKey('DiskNumber')) {
         $GetOSDDisk = Get-OSDDisk -Number $DiskNumber
     } else {
         $GetOSDDisk = Get-OSDDisk -BusTypeNot USB,Virtual | `
@@ -159,10 +159,10 @@ function New-OSDDisk {
     #======================================================================================================
     #	Identify OSDDisk
     #======================================================================================================
-    Write-Host ""
     if (($GetOSDDisk | Measure-Object).Count -eq 1) {
         $OSDDisk = $GetOSDDisk
     } else {
+        Write-Host ""
         foreach ($Item in $GetOSDDisk) {
             Write-Host "[$($Item.Number)]" -ForegroundColor Green -BackgroundColor Black -NoNewline
             Write-Host " $($Item.BusType) $($Item.MediaType) $($Item.FriendlyName) [$($Item.NumberOfPartitions) $($Item.PartitionStyle) Partitions]"
@@ -239,18 +239,19 @@ function New-OSDDisk {
 
     if ($GetVolume) {
         Write-Host -ForegroundColor Green -BackgroundColor Black "Reassigning Drive Letter S"
-        Get-Partition -DriveLetter 'S' | Set-Partition -NewDriveLetter (Get-LastAvailableDriveLetter)
+        #Get-Partition -DriveLetter 'S' | Set-Partition -NewDriveLetter (Get-LastAvailableDriveLetter)
+        Get-Volume -DriveLetter S | Get-Partition | Remove-PartitionAccessPath -AccessPath 'S:\' -ErrorAction SilentlyContinue
     }
     #======================================================================================================
     #	System Partition
     #======================================================================================================
     $SystemPartition = @{
         DiskNumber          = $OSDDisk.Number
-        Label               = $LabelSystem
+        LabelSystem         = $LabelSystem
         PartitionStyle      = $PartitionStyle
+        SizeMSR             = $SizeMSR
         SizeSystemMbr       = $SizeSystemMbr
         SizeSystemGpt       = $SizeSystemGpt
-        SizeMSR             = $SizeMSR
     }
     New-OSDPartitionSystem @SystemPartition
     #======================================================================================================
@@ -269,7 +270,8 @@ function New-OSDDisk {
 
     if ($GetVolume) {
         Write-Host -ForegroundColor Green -BackgroundColor Black "Reassigning Drive Letter R"
-        Get-Partition -DriveLetter 'R' | Set-Partition -NewDriveLetter (Get-LastAvailableDriveLetter)
+        #Get-Partition -DriveLetter 'R' | Set-Partition -NewDriveLetter (Get-LastAvailableDriveLetter)
+        Get-Volume -DriveLetter R | Get-Partition | Remove-PartitionAccessPath -AccessPath 'R:\' -ErrorAction SilentlyContinue
     }
     #======================================================================================================
     #	Windows Partition
@@ -301,7 +303,7 @@ function New-OSDDisk {
             Write-Host " Skip this Disk"
             Write-Host "[X]" -ForegroundColor Green -BackgroundColor Black  -NoNewline
             Write-Host " Exit"
-            Write-Host "This drive is a DATA disk and it should be cleaned and initialized"
+            Write-Host "This drive is a DATA disk and it should be cleaned"
 
             do {$ConfirmClearDisk = Read-Host "Press C to CLEAR this Disk, S to Skip, or X to Exit"}
             until (($ConfirmClearDisk -eq 'C') -or ($ConfirmClearDisk -eq 'S') -or ($ConfirmClearDisk -eq 'X'))
