@@ -7,7 +7,7 @@
 RootModule = 'OSD.psm1'
 
 # Version number of his module.
-ModuleVersion = '21.2.19.2'
+ModuleVersion = '21.2.20.1'
 
 # Supported PSEditions
 # CompatiblePSEditions = @()
@@ -66,72 +66,25 @@ PowerShellVersion = '5.0'
 # NestedModules = @()
 
 # Functions to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no functions to export.
-FunctionsToExport =     #ADK
-                        #'New-MyAdkCopyPE',
-                        #'Get-MyAdk',
-                        #Appx
-                        'Remove-AppxOnline',
-                        #Backup
-                        'Backup-DiskToFFU',
-                        #Bitlocker
-                        'Backup-MyBitLockerKeys',
-                        'Get-MyBitLockerKeyProtectors',
-                        'Save-MyBitLockerExternalKey',
-                        'Save-MyBitLockerKeyPackage',
-                        'Save-MyBitLockerRecoveryPassword',
-                        'Unlock-MyBitLockerExternalKey',
-                        #Cim
-                        'Get-CimVideoControllerResolution',
-                        #ComObj
-                        'Get-ComObjects',
-                        'Get-ComObjMicrosoftUpdateAutoUpdate',
-                        'Get-ComObjMicrosoftUpdateInstaller',
-                        'Get-ComObjMicrosoftUpdateServiceManager',
-                        #Dism
-                        'Dismount-MyWindowsImage',
-                        'Edit-MyWindowsImage',
-                        'Get-MyWindowsCapability',
-                        'Get-MyWindowsPackage',
-                        'Mount-MyWindowsImage',
-                        "Set-WimExecutionPolicy",
-                        "Set-WindowsImageExecutionPolicy",
-                        'Update-MyWindowsImage',
-                        #Display
-                        'Get-DisplayAllScreens',
-                        'Get-DisplayPrimaryMonitorSize',
-                        'Get-DisplayPrimaryBitmapSize',
-                        'Get-DisplayPrimaryScaling',
-                        'Get-DisplayVirtualScreen',
-                        'Set-DisRes',
-                        #General
-                        'Get-OSD',
-                        'Get-OSDClass',
-                        'Get-OSDDriver',
-                        'Get-OSDDriverWmiQ',
-                        'Get-OSDGather',
-                        'Get-OSDPower',
-                        'Get-OSDWinPE',
-                        'Get-RegCurrentVersion',
-                        'Get-SessionsXml',
-                        'Save-OSDDownload',
-                        #GetMy
-                        'Get-MyBiosSerialNumber',
-                        'Get-MyBiosVersion',
-                        'Get-MyComputerManufacturer',
-                        'Get-MyComputerModel',
-                        'Get-MyDefaultAUService',
-                        #OSDDisk
-                        'Get-OSDDisk',
-                        'New-OSDDisk',
-                        #PowerShellGet
-                        'Copy-PSModuleToFolder',
-                        'Copy-PSModuleToWim',
-                        'Copy-PSModuleToWindowsImage',
-                        #SS
-                        'Get-ScreenPNG',
-                        'Save-ClipboardImage',
-                        'Set-ClipboardScreenshot'
-                        #Storage
+FunctionsToExport = 'Test-Alpha',
+                    #'Get-MyAdk','New-MyAdkCopyPE',#ADK
+                    'Remove-AppxOnline',#Appx
+                    'Backup-DiskToFFU',#Backup
+                    'Get-CimVideoControllerResolution',#Cim
+                    'Save-ClipboardImage','Set-ClipboardScreenshot',#Clipboard
+                    'Get-ComObjects','Get-ComObjMicrosoftUpdateAutoUpdate','Get-ComObjMicrosoftUpdateInstaller','Get-ComObjMicrosoftUpdateServiceManager',#ComObj
+                    'Get-DisplayAllScreens','Get-DisplayPrimaryBitmapSize','Get-DisplayPrimaryMonitorSize','Get-DisplayPrimaryScaling','Get-DisplayVirtualScreen','Set-DisRes',#Display
+                    "Set-WimExecutionPolicy","Set-WindowsImageExecutionPolicy",#ExecutionPolicy
+                    'Get-MyBiosSerialNumber','Get-MyBiosVersion','Get-MyComputerManufacturer','Get-MyComputerModel','Get-MyDefaultAUService',#GetMy
+                    'Backup-MyBitLockerKeys','Get-MyBitLockerKeyProtectors','Save-MyBitLockerExternalKey','Save-MyBitLockerKeyPackage','Save-MyBitLockerRecoveryPassword','Unlock-MyBitLockerExternalKey',#MyBitlocker
+                    'Get-MyWindowsCapability','Get-MyWindowsPackage',#MyWindows
+                    'Dismount-MyWindowsImage','Edit-MyWindowsImage','Mount-MyWindowsImage','Update-MyWindowsImage',#MyWindowsImage
+                    'Get-OSD','Get-OSDClass','Get-OSDGather','Get-OSDPower','Get-RegCurrentVersion','Get-SessionsXml','Save-OSDDownload',#OSD
+                    'Clear-OSDDisk','Get-OSDDisk','New-OSDDisk',#OSDDisk
+                    'Get-OSDDriver','Get-OSDDriverWmiQ',#OSDDriver
+                    'Copy-PSModuleToFolder','Copy-PSModuleToWim','Copy-PSModuleToWindowsImage',#PSModule
+                    'Get-ScreenPNG', #ScreenPNG
+                    'Get-OSDWinPE' #WinPE
 
 # Cmdlets to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no cmdlets to export.
 CmdletsToExport = @()

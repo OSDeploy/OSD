@@ -1,71 +1,337 @@
-<#
-.SYNOPSIS
-Creates System | OS | Recovery Partitions for MBR or UEFI Drives in WinPE
+function Clear-OSDDisk {
+    <#
+    .SYNOPSIS
+    Clears Local Disks (non-USB) for OS Deployment.  Disks are Initialized in MBR or GPT PartitionStyle
 
-.DESCRIPTION
-Creates System | OS | Recovery Partitions for MBR or UEFI Drives in WinPE
+    .DESCRIPTION
+    Clears all Local Disks for OS Deployment
+    Before deploying an Operating System, it is important to clear all local disks
+    If this function is running from Windows, it will ALWAYS be in Sandbox mode, regardless of the -Force parameter\
 
-.PARAMETER DiskNumber
-Specifies the disk number for which to get the associated Disk object
-Alias = Disk, Number
+    .PARAMETER Confirm
+    Required to confirm Clear-Disk
 
-.PARAMETER LabelRecovery
-Drive Label of the Recovery Partition
-Default = Recovery
-Alias = LR, LabelR
+    .PARAMETER Force
+    Sandbox mode is enabled by default to be non-destructive
+    This parameter will bypass Sandbox mode
+    Alias = F
 
-.PARAMETER LabelSystem
-Drive Label of the System Partition
-Default = System
-Alias = LS, LabelS
+    .EXAMPLE
+    PS> Clear-OSDDisk
+    Displays Get-Help Clear-OSDDisk -Examples
 
-.PARAMETER LabelWindows
-Drive Label of the Windows Partition
-Default = OS
-Alias = LW, LabelW
+    .EXAMPLE
+    Clear-OSDDisk -Force
+    Prompted to Confirm Clear-Disk for each Local Disk.  Interactive
 
-.PARAMETER NoRecoveryPartition
-Alias = SkipRecovery, SkipRecoveryPartition
-Skips the creation of the Recovery Partition
+    .EXAMPLE
+    Clear-OSDDisk -Force -Confirm:$false
+    Clears all Local Disks without being prompted to Confirm.  Non-interactive
 
-.PARAMETER PartitionStyle
-Partition Style of the new partitions
-EFI Default = GPT
-BIOS Default = MBR
-Alias = PS
+    .LINK
+    https://osd.osdeploy.com/module/osddisk/clear-osddisk
 
-.PARAMETER SizeMSR
-MSR Partition size
-Default = 16MB
-Range = 16MB - 128MB
-Alias = MSR
+    .NOTES
+    21.2.14     Initial Release
+    21.2.21     Updated
+    #>
+    [CmdletBinding(ConfirmImpact = 'High')]
+    #[CmdletBinding(SupportsShouldProcess = $true)]
+    #[CmdletBinding(SupportsShouldProcess = $true,ConfirmImpact = 'High')]
+    param (
+        [Parameter(ValueFromPipeline = $true)]
+        [Object[]]$InputObject,
 
-.PARAMETER SizeRecovery
-Size of the Recovery Partition
-Default = 990MB
-Range = 350MB - 80000MB (80GB)
-Alias = SR, Recovery
+        #[Parameter(ValueFromPipelineByPropertyName = $true)]
+        #[Alias('I')]
+        #[switch]$Initialize,
 
-.PARAMETER SizeSystemGpt
-System Partition size for UEFI GPT based Computers
-Default = 260MB
-Range = 100MB - 3000MB (3GB)
-Alias = SSG, Efi, SystemG
+        [Parameter(ValueFromPipelineByPropertyName = $true)]
+        [Alias('F')]
+        [switch]$Force
+    )
+    #======================================================================================================
+    #	PSBoundParameters
+    #======================================================================================================
+    $IsConfirmPresent   = $PSBoundParameters.ContainsKey('Confirm')
+    $IsForcePresent     = $PSBoundParameters.ContainsKey('Force')
+    $IsVerbosePresent   = $PSBoundParameters.ContainsKey('Verbose')
+    if ($IsForcePresent -eq $false) {
+        $VerbosePreference = 'Continue'
+    }
+    #======================================================================================================
+    #	OSD Module Information
+    #======================================================================================================
+    $OSDVersion = $($MyInvocation.MyCommand.Module.Version)
+    Write-Verbose "OSD $OSDVersion $($MyInvocation.MyCommand.Name)"
+    #======================================================================================================
+    #	Get-OSDDisk
+    #======================================================================================================
+    $GetOSDDisk = $null
+    if ($InputObject) {
+        $GetOSDDisk = $InputObject
+    } else {
+        $GetOSDDisk = Get-OSDDisk -BusTypeNot USB,Virtual | `
+        #Where-Object {($_.Size -gt 15GB)} | `
+        Sort-Object Number
+    }
+    #======================================================================================================
+    #	PartitionStyle
+    #======================================================================================================
+    if (Get-OSDGather -Property IsUEFI) {
+        Write-Verbose "IsUEFI = $true"
+        $PartitionStyle = 'GPT'
+    } else {
+        Write-Verbose "IsUEFI = $false"
+        $PartitionStyle = 'MBR'
+    }
+    Write-Verbose "PartitionStyle = $PartitionStyle"
+    #======================================================================================================
+    #	Get-Help
+    #======================================================================================================
+    if ($IsForcePresent -eq $false) {
+        Get-Help $($MyInvocation.MyCommand.Name) -Examples
+    }
+    #======================================================================================================
+    #	Display Disk Information
+    #======================================================================================================
+    $GetOSDDisk | Select-Object -Property Number, BusType, MediaType, FriendlyName, PartitionStyle, NumberOfPartitions | Format-Table
+    
+    if ($IsForcePresent -eq $false) {
+        Break
+    }
+    #======================================================================================================
+    #	IsWinPE
+    #======================================================================================================
+    if (-NOT (Get-OSDGather -Property IsWinPE)) {
+        Write-Warning "WinPE is required for execution"
+        Break
+    }
+    #======================================================================================================
+    #	IsAdmin
+    #======================================================================================================
+    if (-NOT (Get-OSDGather -Property IsAdmin)) {
+        Write-Warning "Administrative Rights are required for execution"
+        Break
+    }
+    #======================================================================================================
+    #	Clear-Disk
+    #======================================================================================================
+    $ClearOSDDisk = @()
+    foreach ($Item in $GetOSDDisk) {
+        if ($PSCmdlet.ShouldProcess(
+            "Disk $($Item.Number) $($Item.BusType) $($Item.MediaType) $($Item.FriendlyName) [$($Item.NumberOfPartitions) $($Item.PartitionStyle) Partitions]",
+            "Clear-Disk"
+            )){
+            $ClearOSDDisk += Get-OSDDisk -Number $Item.Number
+            Write-Warning "Cleaning Disk $($Item.Number) $($Item.BusType) $($Item.MediaType) $($Item.FriendlyName) [$($Item.NumberOfPartitions) $($Item.PartitionStyle) Partitions]"
+            Diskpart-Clean -DiskNumber $Item.Number
+            Write-Warning "Initializing $PartitionStyle Disk $($Item.Number) $($Item.BusType) $($Item.MediaType) $($Item.FriendlyName)"
+            $Item | Initialize-Disk -PartitionStyle $PartitionStyle
+            
+            if ($Initialize -eq $true) {
+            }
+        }
+    }
+    $ClearOSDDisk | Select-Object -Property Number, BusType, MediaType, FriendlyName, PartitionStyle, NumberOfPartitions | Format-Table
+    #======================================================================================================
+}
+function Get-OSDDisk {
+    <#
+    .SYNOPSIS
+    Similar to Get-Disk, but includes the MediaType
 
-.PARAMETER SizeSystemMbr
-System Partition size for BIOS MBR based Computers
-Default = 260MB
-Range = 100MB - 3000MB (3GB)
-Alias = SSM, Mbr, SystemM
+    .DESCRIPTION
+    Similar to Get-Disk, but includes the MediaType
 
-.LINK
-https://osd.osdeploy.com/module/osddisk/new-osddisk
+    .PARAMETER Number
+    Specifies the disk number for which to get the associated Disk object
+    Alias = Disk, DiskNumber
 
-.NOTES
-19.10.10    Created by David Segura @SeguraOSD
-21.2.19     Complete redesign
-#>
+    .PARAMETER BootFromDisk
+    Returns Disk results based BootFromDisk property
+    PS> Get-OSDDisk -BootFromDisk:$true
+    PS> Get-OSDDisk -BootFromDisk:$false
+
+    .PARAMETER IsBoot
+    Returns Disk results based IsBoot property
+    PS> Get-OSDDisk -IsBoot:$true
+    PS> Get-OSDDisk -IsBoot:$false
+
+    .PARAMETER IsReadOnly
+    Returns Disk results based IsReadOnly property
+    PS> Get-OSDDisk -IsReadOnly:$true
+    PS> Get-OSDDisk -IsReadOnly:$false
+
+    .PARAMETER IsSystem
+    Returns Disk results based IsSystem property
+    PS> Get-OSDDisk -IsSystem:$true
+    PS> Get-OSDDisk -IsSystem:$false
+
+    .PARAMETER BusType
+    Returns Disk results in BusType values
+    Values = 'ATA','NVMe','SAS','SCSI','USB','Virtual'
+    PS> Get-OSDDisk -BusType NVMe
+    PS> Get-OSDDisk -BusType NVMe,SAS
+
+    .PARAMETER BusTypeNot
+    Returns Disk results notin BusType values
+    Values = 'ATA','NVMe','SAS','SCSI','USB','Virtual'
+    PS> Get-OSDDisk -BusTypeNot USB
+    PS> Get-OSDDisk -BusTypeNot USB,Virtual
+
+    .PARAMETER MediaType
+    Returns Disk results in MediaType values
+    Values = 'HDD','SSD','Unspecified'
+    PS> Get-OSDDisk -MediaType SSD
+
+    .PARAMETER MediaTypeNot
+    Returns Disk results notin MediaType values
+    Values = 'HDD','SSD','Unspecified'
+    PS> Get-OSDDisk -MediaTypeNot HDD
+
+    .PARAMETER PartitionStyle
+    Returns Disk results in PartitionStyle values
+    Values = 'GPT','MBR','RAW')
+    PS> Get-OSDDisk -PartitionStyle GPT
+
+    .PARAMETER PartitionStyleNot
+    Returns Disk results notin PartitionStyle values
+    Values = 'GPT','MBR','RAW')
+    PS> Get-OSDDisk -PartitionStyleNot RAW
+
+    .LINK
+    https://osd.osdeploy.com/module/osddisk/get-osddisk
+
+    .NOTES
+    19.10.10    Created by David Segura @SeguraOSD
+    21.2.19     Complete redesign
+    #>
+    [CmdletBinding()]
+    param (
+        [Alias('Disk','DiskNumber')]
+        [uint32]$Number,
+
+        [bool]$BootFromDisk,
+        [bool]$IsBoot,
+        [bool]$IsReadOnly,
+        [bool]$IsSystem,
+
+        [ValidateSet('ATA','NVMe','SAS','SCSI','USB','Virtual')]
+        [string[]]$BusType,
+        [ValidateSet('ATA','NVMe','SAS','SCSI','USB','Virtual')]
+        [string[]]$BusTypeNot,
+        
+        [ValidateSet('HDD','SSD','Unspecified')]
+        [string[]]$MediaType,
+        [ValidateSet('HDD','SSD','Unspecified')]
+        [string[]]$MediaTypeNot,
+
+        [ValidateSet('GPT','MBR','RAW')]
+        [string[]]$PartitionStyle,
+        [ValidateSet('GPT','MBR','RAW')]
+        [string[]]$PartitionStyleNot
+    )
+
+    $GetDisk = Get-Disk | Sort-Object DiskNumber | Select-Object -Property *
+    $GetPhysicalDisk = Get-PhysicalDisk | Sort-Object DeviceId
+
+    if ($PSBoundParameters.ContainsKey('Number')) {
+        $GetDisk = $GetDisk | Where-Object {$_.DiskNumber -eq $Number}
+    }
+
+    foreach ($Disk in $GetDisk) {
+        foreach ($PhysicalDisk in $GetPhysicalDisk | Where-Object {$_.DeviceId -eq $Disk.Number}) {
+            $Disk | Add-Member -NotePropertyName 'MediaType' -NotePropertyValue $PhysicalDisk.MediaType
+        }
+    }
+<#     if ($GetDisk) {
+        Write-Verbose "The following Disks are present"
+        foreach ($item in $GetDisk) {
+            Write-Verbose "Disk $($item.Number) $($item.BusType) $($item.MediaType) $($item.FriendlyName) [$($item.PartitionStyle) $($item.NumberOfPartitions) Partitions]"
+        }
+    } #>
+
+    if ($BootFromDisk)          {$GetDisk = $GetDisk | Where-Object {$_.BootFromDisk -in $BootFromDisk}}
+    if ($BusType)               {$GetDisk = $GetDisk | Where-Object {$_.BusType -in $BusType}}
+    if ($BusTypeNot)            {$GetDisk = $GetDisk | Where-Object {$_.BusType -notin $BusTypeNot}}
+    if ($IsBoot)                {$GetDisk = $GetDisk | Where-Object {$_.IsBoot -in $IsBoot}}
+    if ($IsReadOnly)            {$GetDisk = $GetDisk | Where-Object {$_.IsReadOnly -in $IsReadOnly}}
+    if ($IsSystem)              {$GetDisk = $GetDisk | Where-Object {$_.IsSystem -in $IsSystem}}
+    if ($MediaType)             {$GetDisk = $GetDisk | Where-Object {$_.MediaType -in $MediaType}}
+    if ($MediaTypeNot)          {$GetDisk = $GetDisk | Where-Object {$_.MediaType -notin $MediaTypeNot}}
+    if ($PartitionStyle)        {$GetDisk = $GetDisk | Where-Object {$_.PartitionStyle -in $PartitionStyle}}
+    if ($PartitionStyleNot)     {$GetDisk = $GetDisk | Where-Object {$_.PartitionStyle -notin $PartitionStyleNot}}
+    Return $GetDisk
+}
 function New-OSDDisk {
+    <#
+    .SYNOPSIS
+    Creates System | OS | Recovery Partitions for MBR or UEFI Drives in WinPE
+
+    .DESCRIPTION
+    Creates System | OS | Recovery Partitions for MBR or UEFI Drives in WinPE
+
+    .PARAMETER DiskNumber
+    Specifies the disk number for which to get the associated Disk object
+    Alias = Disk, Number
+
+    .PARAMETER LabelRecovery
+    Drive Label of the Recovery Partition
+    Default = Recovery
+    Alias = LR, LabelR
+
+    .PARAMETER LabelSystem
+    Drive Label of the System Partition
+    Default = System
+    Alias = LS, LabelS
+
+    .PARAMETER LabelWindows
+    Drive Label of the Windows Partition
+    Default = OS
+    Alias = LW, LabelW
+
+    .PARAMETER NoRecoveryPartition
+    Alias = SkipRecovery, SkipRecoveryPartition
+    Skips the creation of the Recovery Partition
+
+    .PARAMETER PartitionStyle
+    Partition Style of the new partitions
+    EFI Default = GPT
+    BIOS Default = MBR
+    Alias = PS
+
+    .PARAMETER SizeMSR
+    MSR Partition size
+    Default = 16MB
+    Range = 16MB - 128MB
+    Alias = MSR
+
+    .PARAMETER SizeRecovery
+    Size of the Recovery Partition
+    Default = 990MB
+    Range = 350MB - 80000MB (80GB)
+    Alias = SR, Recovery
+
+    .PARAMETER SizeSystemGpt
+    System Partition size for UEFI GPT based Computers
+    Default = 260MB
+    Range = 100MB - 3000MB (3GB)
+    Alias = SSG, Efi, SystemG
+
+    .PARAMETER SizeSystemMbr
+    System Partition size for BIOS MBR based Computers
+    Default = 260MB
+    Range = 100MB - 3000MB (3GB)
+    Alias = SSM, Mbr, SystemM
+
+    .LINK
+    https://osd.osdeploy.com/module/osddisk/new-osddisk
+
+    .NOTES
+    19.10.10    Created by David Segura @SeguraOSD
+    21.2.19     Complete redesign
+    #>
     [CmdletBinding()]
     param (
         [Alias('Disk','Number')]
