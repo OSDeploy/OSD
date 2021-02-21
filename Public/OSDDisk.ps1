@@ -1,50 +1,43 @@
 function Clear-OSDDisk {
     <#
     .SYNOPSIS
-    Clears Local Disks (non-USB) for OS Deployment.  Disks are Initialized in MBR or GPT PartitionStyle
+    Clears Local Disks (non-USB) for OS Deployment in WinPE
+    Disks are Initialized in MBR or GPT PartitionStyle
 
     .DESCRIPTION
-    Clears all Local Disks for OS Deployment
-    Before deploying an Operating System, it is important to clear all local disks
-    If this function is running from Windows, it will ALWAYS be in Sandbox mode, regardless of the -Force parameter\
+    Clears Local Disks (non-USB) for OS Deployment in WinPE
+    Disks are Initialized in MBR or GPT PartitionStyle
 
-    .PARAMETER Confirm
-    Required to confirm Clear-Disk
+    .PARAMETER InputObject
+    Get-OSDDisk Object
 
     .PARAMETER Force
-    Sandbox mode is enabled by default to be non-destructive
-    This parameter will bypass Sandbox mode
+    Required for execution
     Alias = F
 
     .EXAMPLE
-    PS> Clear-OSDDisk
+    Clear-OSDDisk
     Displays Get-Help Clear-OSDDisk -Examples
 
     .EXAMPLE
     Clear-OSDDisk -Force
-    Prompted to Confirm Clear-Disk for each Local Disk.  Interactive
+    Interactive.  Prompted to Confirm Clear-Disk for each Local Disk
 
     .EXAMPLE
     Clear-OSDDisk -Force -Confirm:$false
-    Clears all Local Disks without being prompted to Confirm.  Non-interactive
+    Non-Interactive. Clears all Local Disks without being prompted to Confirm
 
     .LINK
     https://osd.osdeploy.com/module/osddisk/clear-osddisk
 
     .NOTES
     21.2.14     Initial Release
-    21.2.21     Updated
+    21.2.21     Modified parameters to include -Confirm
     #>
-    [CmdletBinding(ConfirmImpact = 'High')]
-    #[CmdletBinding(SupportsShouldProcess = $true)]
-    #[CmdletBinding(SupportsShouldProcess = $true,ConfirmImpact = 'High')]
+    [CmdletBinding(SupportsShouldProcess = $true, ConfirmImpact = 'High')]
     param (
         [Parameter(ValueFromPipeline = $true)]
         [Object[]]$InputObject,
-
-        #[Parameter(ValueFromPipelineByPropertyName = $true)]
-        #[Alias('I')]
-        #[switch]$Initialize,
 
         [Parameter(ValueFromPipelineByPropertyName = $true)]
         [Alias('F')]
@@ -60,7 +53,7 @@ function Clear-OSDDisk {
         $VerbosePreference = 'Continue'
     }
     #======================================================================================================
-    #	OSD Module Information
+    #	OSD Module and Command Information
     #======================================================================================================
     $OSDVersion = $($MyInvocation.MyCommand.Module.Version)
     Write-Verbose "OSD $OSDVersion $($MyInvocation.MyCommand.Name)"
@@ -120,11 +113,11 @@ function Clear-OSDDisk {
     $ClearOSDDisk = @()
     foreach ($Item in $GetOSDDisk) {
         if ($PSCmdlet.ShouldProcess(
-            "Disk $($Item.Number) $($Item.BusType) $($Item.MediaType) $($Item.FriendlyName) [$($Item.NumberOfPartitions) $($Item.PartitionStyle) Partitions]",
+            "Disk $($Item.Number) $($Item.BusType) $($Item.MediaType) $($Item.FriendlyName) [$($Item.PartitionStyle) $($Item.NumberOfPartitions) Partitions]",
             "Clear-Disk"
             )){
             $ClearOSDDisk += Get-OSDDisk -Number $Item.Number
-            Write-Warning "Cleaning Disk $($Item.Number) $($Item.BusType) $($Item.MediaType) $($Item.FriendlyName) [$($Item.NumberOfPartitions) $($Item.PartitionStyle) Partitions]"
+            Write-Warning "Cleaning Disk $($Item.Number) $($Item.BusType) $($Item.MediaType) $($Item.FriendlyName) [$($Item.PartitionStyle) $($Item.NumberOfPartitions) Partitions]"
             Diskpart-Clean -DiskNumber $Item.Number
             Write-Warning "Initializing $PartitionStyle Disk $($Item.Number) $($Item.BusType) $($Item.MediaType) $($Item.FriendlyName)"
             $Item | Initialize-Disk -PartitionStyle $PartitionStyle
@@ -232,19 +225,34 @@ function Get-OSDDisk {
         [ValidateSet('GPT','MBR','RAW')]
         [string[]]$PartitionStyleNot
     )
-
+    #======================================================================================================
+    #	OSD Module and Command Information
+    #======================================================================================================
+    $OSDVersion = $($MyInvocation.MyCommand.Module.Version)
+    Write-Verbose "OSD $OSDVersion $($MyInvocation.MyCommand.Name)"
+    #======================================================================================================
+    #	PSBoundParameters
+    #======================================================================================================
     $GetDisk = Get-Disk | Sort-Object DiskNumber | Select-Object -Property *
     $GetPhysicalDisk = Get-PhysicalDisk | Sort-Object DeviceId
-
+    #======================================================================================================
+    #	PSBoundParameters
+    #======================================================================================================
+    $IsConfirmPresent   = $PSBoundParameters.ContainsKey('Confirm')
+    $IsForcePresent     = $PSBoundParameters.ContainsKey('Force')
+    $IsVerbosePresent   = $PSBoundParameters.ContainsKey('Verbose')
     if ($PSBoundParameters.ContainsKey('Number')) {
         $GetDisk = $GetDisk | Where-Object {$_.DiskNumber -eq $Number}
     }
-
+    #======================================================================================================
+    #	Add MediaType
+    #======================================================================================================
     foreach ($Disk in $GetDisk) {
         foreach ($PhysicalDisk in $GetPhysicalDisk | Where-Object {$_.DeviceId -eq $Disk.Number}) {
             $Disk | Add-Member -NotePropertyName 'MediaType' -NotePropertyValue $PhysicalDisk.MediaType
         }
     }
+
 <#     if ($GetDisk) {
         Write-Verbose "The following Disks are present"
         foreach ($item in $GetDisk) {
@@ -332,7 +340,7 @@ function New-OSDDisk {
     19.10.10    Created by David Segura @SeguraOSD
     21.2.19     Complete redesign
     #>
-    [CmdletBinding()]
+    [CmdletBinding(SupportsShouldProcess = $true, ConfirmImpact = 'High')]
     param (
         [Alias('Disk','Number')]
         [uint32]$DiskNumber,
@@ -367,11 +375,23 @@ function New-OSDDisk {
 
         [Alias('SR','Recovery')]
         [ValidateRange(350MB,80000MB)]
-        [uint64]$SizeRecovery = 990MB
+        [uint64]$SizeRecovery = 990MB,
+
+        [Parameter(ValueFromPipelineByPropertyName = $true)]
+        [Alias('F')]
+        [switch]$Force
     )
-    
     #======================================================================================================
-    #	OSD Module Information
+    #	PSBoundParameters
+    #======================================================================================================
+    $IsConfirmPresent   = $PSBoundParameters.ContainsKey('Confirm')
+    $IsForcePresent     = $PSBoundParameters.ContainsKey('Force')
+    $IsVerbosePresent   = $PSBoundParameters.ContainsKey('Verbose')
+    if ($IsForcePresent -eq $false) {
+        $VerbosePreference = 'Continue'
+    }
+    #======================================================================================================
+    #	OSD Module and Command Information
     #======================================================================================================
     $OSDVersion = $($MyInvocation.MyCommand.Module.Version)
     Write-Verbose "OSD $OSDVersion $($MyInvocation.MyCommand.Name)"

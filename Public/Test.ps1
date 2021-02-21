@@ -34,9 +34,9 @@ function Test-Alpha {
     .NOTES
     21.2.14     Initial Release
     #>
-    [CmdletBinding(ConfirmImpact = 'High')]
+    #[CmdletBinding(ConfirmImpact = 'High')]
     #[CmdletBinding(SupportsShouldProcess = $true)]
-    #[CmdletBinding(SupportsShouldProcess = $true,ConfirmImpact = 'High')]
+    [CmdletBinding(SupportsShouldProcess = $true,ConfirmImpact = 'High')]
 
     param (
         [Parameter(ValueFromPipeline = $true)]
@@ -83,6 +83,7 @@ function Test-Alpha {
         $PartitionStyle = 'MBR'
     }
     Write-Verbose "PartitionStyle = $PartitionStyle"
+    Write-Host "Do yo uwant to con"  -InformationAction Inquire
     #======================================================================================================
     #	Get-Help
     #======================================================================================================
