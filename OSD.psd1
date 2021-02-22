@@ -7,7 +7,7 @@
 RootModule = 'OSD.psm1'
 
 # Version number of his module.
-ModuleVersion = '21.2.20.1'
+ModuleVersion = '21.2.22.1'
 
 # Supported PSEditions
 # CompatiblePSEditions = @()
@@ -80,7 +80,7 @@ FunctionsToExport = 'Test-Alpha',
                     'Get-MyWindowsCapability','Get-MyWindowsPackage',#MyWindows
                     'Dismount-MyWindowsImage','Edit-MyWindowsImage','Mount-MyWindowsImage','Update-MyWindowsImage',#MyWindowsImage
                     'Get-OSD','Get-OSDClass','Get-OSDGather','Get-OSDPower','Get-RegCurrentVersion','Get-SessionsXml','Save-OSDDownload',#OSD
-                    'Clear-OSDDisk','Get-OSDDisk','New-OSDDisk',#OSDDisk
+                    'Clear-LocalDisk','Clear-USBDisk','Get-LocalDisk','Get-OSDDisk','Get-USBDisk','New-OSDisk',#OSDDisk
                     'Get-OSDDriver','Get-OSDDriverWmiQ',#OSDDriver
                     'Copy-PSModuleToFolder','Copy-PSModuleToWim','Copy-PSModuleToWindowsImage',#PSModule
                     'Get-ScreenPNG', #ScreenPNG

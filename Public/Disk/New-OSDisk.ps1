@@ -1,309 +1,4 @@
-function Clear-OSDDisk {
-    <#
-    .SYNOPSIS
-    Clears Local Disks (non-USB) for OS Deployment in WinPE
-    Disks are Initialized in MBR or GPT PartitionStyle
-
-    .DESCRIPTION
-    Clears Local Disks (non-USB) for OS Deployment in WinPE
-    Disks are Initialized in MBR or GPT PartitionStyle
-
-    .PARAMETER InputObject
-    Get-OSDDisk Object
-
-    .PARAMETER DiskNumber
-    Specifies the disk number for which to get the associated Disk object
-    Alias = Disk, Number
-
-    .PARAMETER Force
-    Required for execution
-    Alias = F
-
-    .PARAMETER PartitionStyle
-    Override the automatic Partition Style of the Initialized Disk
-    EFI Default = GPT
-    BIOS Default = MBR
-    Alias = PS
-
-    .EXAMPLE
-    Clear-OSDDisk
-    Displays Get-Help Clear-OSDDisk -Examples
-
-    .EXAMPLE
-    Clear-OSDDisk -Force
-    Interactive.  Prompted to Confirm Clear-Disk for each Local Disk
-
-    .EXAMPLE
-    Clear-OSDDisk -Force -Confirm:$false
-    Non-Interactive. Clears all Local Disks without being prompted to Confirm
-
-    .LINK
-    https://osd.osdeploy.com/module/osddisk/clear-osddisk
-
-    .NOTES
-    21.2.14     Initial Release
-    21.2.21     Modified parameters to include -Confirm
-    #>
-    [CmdletBinding(SupportsShouldProcess = $true, ConfirmImpact = 'High')]
-    param (
-        [Parameter(ValueFromPipeline = $true)]
-        [Object[]]$InputObject,
-
-        [Alias('Disk','Number')]
-        [uint32]$DiskNumber,
-
-        [Alias('PS')]
-        [ValidateSet('GPT','MBR')]
-        [string]$PartitionStyle,
-
-        [Parameter(ValueFromPipelineByPropertyName = $true)]
-        [Alias('F')]
-        [switch]$Force
-    )
-    #======================================================================================================
-    #	PSBoundParameters
-    #======================================================================================================
-    $IsConfirmPresent   = $PSBoundParameters.ContainsKey('Confirm')
-    $IsForcePresent     = $PSBoundParameters.ContainsKey('Force')
-    $IsVerbosePresent   = $PSBoundParameters.ContainsKey('Verbose')
-    #======================================================================================================
-    #	Enable Verbose if Force parameter is not $true
-    #======================================================================================================
-    if ($IsForcePresent -eq $false) {
-        $VerbosePreference = 'Continue'
-    }
-    #======================================================================================================
-    #	OSD Module and Command Information
-    #======================================================================================================
-    $OSDVersion = $($MyInvocation.MyCommand.Module.Version)
-    Write-Verbose "OSD $OSDVersion $($MyInvocation.MyCommand.Name)"
-    #======================================================================================================
-    #	Get Local Disks (not USB and not Virtual)
-    #======================================================================================================
-    $GetOSDDisk = $null
-    if ($InputObject) {
-        $GetOSDDisk = $InputObject
-    } else {
-        $GetOSDDisk = Get-OSDDisk -BusTypeNot USB,Virtual | `
-        Sort-Object Number
-    }
-    #======================================================================================================
-    #	Get DiskNumber
-    #======================================================================================================
-    if ($PSBoundParameters.ContainsKey('DiskNumber')) {
-        $GetOSDDisk = $GetOSDDisk | Where-Object {$_.DiskNumber -eq $DiskNumber}
-    }
-    #======================================================================================================
-    #	OSDisks must be large enough for a Windows installation
-    #======================================================================================================
-    <# $GetOSDDisk = $GetOSDDisk | Where-Object {$_.Size -gt 15GB} #>
-    #======================================================================================================
-    #	Determine PartitionStyle
-    #======================================================================================================
-    if (-NOT ($PartitionStyle)) {
-        if (Get-OSDGather -Property IsUEFI) {
-            Write-Verbose "IsUEFI = $true"
-            $PartitionStyle = 'GPT'
-        } else {
-            Write-Verbose "IsUEFI = $false"
-            $PartitionStyle = 'MBR'
-        }
-    }
-    Write-Verbose "PartitionStyle = $PartitionStyle"
-    #======================================================================================================
-    #	Get-Help
-    #======================================================================================================
-    if ($IsForcePresent -eq $false) {
-        Get-Help $($MyInvocation.MyCommand.Name) -Examples
-    }
-    #======================================================================================================
-    #	Display Disk Information
-    #======================================================================================================
-    $GetOSDDisk | Select-Object -Property Number, BusType, MediaType, FriendlyName, PartitionStyle, NumberOfPartitions | Format-Table
-    
-    if ($IsForcePresent -eq $false) {
-        Break
-    }
-    #======================================================================================================
-    #	IsWinPE
-    #======================================================================================================
-    if (-NOT (Get-OSDGather -Property IsWinPE)) {
-        Write-Warning "WinPE is required for execution"
-        Break
-    }
-    #======================================================================================================
-    #	IsAdmin
-    #======================================================================================================
-    if (-NOT (Get-OSDGather -Property IsAdmin)) {
-        Write-Warning "Administrative Rights are required for execution"
-        Break
-    }
-    #======================================================================================================
-    #	Clear-Disk
-    #======================================================================================================
-    $ClearOSDDisk = @()
-    foreach ($Item in $GetOSDDisk) {
-        if ($PSCmdlet.ShouldProcess(
-            "Disk $($Item.Number) $($Item.BusType) $($Item.MediaType) $($Item.FriendlyName) [$($Item.PartitionStyle) $($Item.NumberOfPartitions) Partitions]",
-            "Clear-Disk"
-            )){
-            $ClearOSDDisk += Get-OSDDisk -Number $Item.Number
-            Write-Warning "Cleaning Disk $($Item.Number) $($Item.BusType) $($Item.MediaType) $($Item.FriendlyName) [$($Item.PartitionStyle) $($Item.NumberOfPartitions) Partitions]"
-            Diskpart-Clean -DiskNumber $Item.Number
-            Write-Warning "Initializing $PartitionStyle Disk $($Item.Number) $($Item.BusType) $($Item.MediaType) $($Item.FriendlyName)"
-            $Item | Initialize-Disk -PartitionStyle $PartitionStyle
-            
-            if ($Initialize -eq $true) {
-            }
-        }
-    }
-    $ClearOSDDisk | Select-Object -Property Number, BusType, MediaType, FriendlyName, PartitionStyle, NumberOfPartitions | Format-Table
-    #======================================================================================================
-}
-function Get-OSDDisk {
-    <#
-    .SYNOPSIS
-    Similar to Get-Disk, but includes the MediaType
-
-    .DESCRIPTION
-    Similar to Get-Disk, but includes the MediaType
-
-    .PARAMETER Number
-    Specifies the disk number for which to get the associated Disk object
-    Alias = Disk, DiskNumber
-
-    .PARAMETER BootFromDisk
-    Returns Disk results based BootFromDisk property
-    PS> Get-OSDDisk -BootFromDisk:$true
-    PS> Get-OSDDisk -BootFromDisk:$false
-
-    .PARAMETER IsBoot
-    Returns Disk results based IsBoot property
-    PS> Get-OSDDisk -IsBoot:$true
-    PS> Get-OSDDisk -IsBoot:$false
-
-    .PARAMETER IsReadOnly
-    Returns Disk results based IsReadOnly property
-    PS> Get-OSDDisk -IsReadOnly:$true
-    PS> Get-OSDDisk -IsReadOnly:$false
-
-    .PARAMETER IsSystem
-    Returns Disk results based IsSystem property
-    PS> Get-OSDDisk -IsSystem:$true
-    PS> Get-OSDDisk -IsSystem:$false
-
-    .PARAMETER BusType
-    Returns Disk results in BusType values
-    Values = 'ATA','NVMe','SAS','SCSI','USB','Virtual'
-    PS> Get-OSDDisk -BusType NVMe
-    PS> Get-OSDDisk -BusType NVMe,SAS
-
-    .PARAMETER BusTypeNot
-    Returns Disk results notin BusType values
-    Values = 'ATA','NVMe','SAS','SCSI','USB','Virtual'
-    PS> Get-OSDDisk -BusTypeNot USB
-    PS> Get-OSDDisk -BusTypeNot USB,Virtual
-
-    .PARAMETER MediaType
-    Returns Disk results in MediaType values
-    Values = 'HDD','SSD','Unspecified'
-    PS> Get-OSDDisk -MediaType SSD
-
-    .PARAMETER MediaTypeNot
-    Returns Disk results notin MediaType values
-    Values = 'HDD','SSD','Unspecified'
-    PS> Get-OSDDisk -MediaTypeNot HDD
-
-    .PARAMETER PartitionStyle
-    Returns Disk results in PartitionStyle values
-    Values = 'GPT','MBR','RAW')
-    PS> Get-OSDDisk -PartitionStyle GPT
-
-    .PARAMETER PartitionStyleNot
-    Returns Disk results notin PartitionStyle values
-    Values = 'GPT','MBR','RAW')
-    PS> Get-OSDDisk -PartitionStyleNot RAW
-
-    .LINK
-    https://osd.osdeploy.com/module/osddisk/get-osddisk
-
-    .NOTES
-    19.10.10    Created by David Segura @SeguraOSD
-    21.2.19     Complete redesign
-    #>
-    [CmdletBinding()]
-    param (
-        [Alias('Disk','DiskNumber')]
-        [uint32]$Number,
-
-        [bool]$BootFromDisk,
-        [bool]$IsBoot,
-        [bool]$IsReadOnly,
-        [bool]$IsSystem,
-
-        [ValidateSet('ATA','NVMe','SAS','SCSI','USB','Virtual')]
-        [string[]]$BusType,
-        [ValidateSet('ATA','NVMe','SAS','SCSI','USB','Virtual')]
-        [string[]]$BusTypeNot,
-        
-        [ValidateSet('HDD','SSD','Unspecified')]
-        [string[]]$MediaType,
-        [ValidateSet('HDD','SSD','Unspecified')]
-        [string[]]$MediaTypeNot,
-
-        [ValidateSet('GPT','MBR','RAW')]
-        [string[]]$PartitionStyle,
-        [ValidateSet('GPT','MBR','RAW')]
-        [string[]]$PartitionStyleNot
-    )
-    #======================================================================================================
-    #	OSD Module and Command Information
-    #======================================================================================================
-    $OSDVersion = $($MyInvocation.MyCommand.Module.Version)
-    Write-Verbose "OSD $OSDVersion $($MyInvocation.MyCommand.Name)"
-    #======================================================================================================
-    #	PSBoundParameters
-    #======================================================================================================
-    $GetDisk = Get-Disk | Sort-Object DiskNumber | Select-Object -Property *
-    $GetPhysicalDisk = Get-PhysicalDisk | Sort-Object DeviceId
-    #======================================================================================================
-    #	PSBoundParameters
-    #======================================================================================================
-    $IsConfirmPresent   = $PSBoundParameters.ContainsKey('Confirm')
-    $IsForcePresent     = $PSBoundParameters.ContainsKey('Force')
-    $IsVerbosePresent   = $PSBoundParameters.ContainsKey('Verbose')
-    if ($PSBoundParameters.ContainsKey('Number')) {
-        $GetDisk = $GetDisk | Where-Object {$_.DiskNumber -eq $Number}
-    }
-    #======================================================================================================
-    #	Add MediaType
-    #======================================================================================================
-    foreach ($Disk in $GetDisk) {
-        foreach ($PhysicalDisk in $GetPhysicalDisk | Where-Object {$_.DeviceId -eq $Disk.Number}) {
-            $Disk | Add-Member -NotePropertyName 'MediaType' -NotePropertyValue $PhysicalDisk.MediaType
-        }
-    }
-
-<#     if ($GetDisk) {
-        Write-Verbose "The following Disks are present"
-        foreach ($item in $GetDisk) {
-            Write-Verbose "Disk $($item.Number) $($item.BusType) $($item.MediaType) $($item.FriendlyName) [$($item.PartitionStyle) $($item.NumberOfPartitions) Partitions]"
-        }
-    } #>
-
-    if ($BootFromDisk)          {$GetDisk = $GetDisk | Where-Object {$_.BootFromDisk -in $BootFromDisk}}
-    if ($BusType)               {$GetDisk = $GetDisk | Where-Object {$_.BusType -in $BusType}}
-    if ($BusTypeNot)            {$GetDisk = $GetDisk | Where-Object {$_.BusType -notin $BusTypeNot}}
-    if ($IsBoot)                {$GetDisk = $GetDisk | Where-Object {$_.IsBoot -in $IsBoot}}
-    if ($IsReadOnly)            {$GetDisk = $GetDisk | Where-Object {$_.IsReadOnly -in $IsReadOnly}}
-    if ($IsSystem)              {$GetDisk = $GetDisk | Where-Object {$_.IsSystem -in $IsSystem}}
-    if ($MediaType)             {$GetDisk = $GetDisk | Where-Object {$_.MediaType -in $MediaType}}
-    if ($MediaTypeNot)          {$GetDisk = $GetDisk | Where-Object {$_.MediaType -notin $MediaTypeNot}}
-    if ($PartitionStyle)        {$GetDisk = $GetDisk | Where-Object {$_.PartitionStyle -in $PartitionStyle}}
-    if ($PartitionStyleNot)     {$GetDisk = $GetDisk | Where-Object {$_.PartitionStyle -notin $PartitionStyleNot}}
-    Return $GetDisk
-}
-function New-OSDDisk {
+function New-OSDisk {
     <#
     .SYNOPSIS
     Creates System | OS | Recovery Partitions for MBR or UEFI Drives in WinPE
@@ -444,27 +139,26 @@ function New-OSDDisk {
     #======================================================================================================
     #	Get Local Disks (not USB and not Virtual)
     #======================================================================================================
-    $GetOSDDisk = $null
+    $GetLocalDisk = $null
     if ($InputObject) {
-        $GetOSDDisk = $InputObject
+        $GetLocalDisk = $InputObject
     } else {
-        $GetOSDDisk = Get-OSDDisk -BusTypeNot USB,Virtual | `
-        Sort-Object Number
+        $GetLocalDisk = Get-LocalDisk | Sort-Object Number
     }
     #======================================================================================================
     #	Get DiskNumber
     #======================================================================================================
     if ($PSBoundParameters.ContainsKey('DiskNumber')) {
-        $GetOSDDisk = $GetOSDDisk | Where-Object {$_.DiskNumber -eq $DiskNumber}
+        $GetLocalDisk = $GetLocalDisk | Where-Object {$_.DiskNumber -eq $DiskNumber}
     }
     #======================================================================================================
     #	OSDisks must be large enough for a Windows installation
     #======================================================================================================
-    $GetOSDDisk = $GetOSDDisk | Where-Object {$_.Size -gt 15GB}
+    $GetLocalDisk = $GetLocalDisk | Where-Object {$_.Size -gt 15GB}
     #======================================================================================================
-    #	Determine PartitionStyle
+    #	-PartitionStyle
     #======================================================================================================
-    if (-NOT ($PartitionStyle)) {
+    if (-NOT ($PSBoundParameters.ContainsKey('PartitionStyle'))) {
         if (Get-OSDGather -Property IsUEFI) {
             Write-Verbose "IsUEFI = $true"
             $PartitionStyle = 'GPT'
@@ -483,7 +177,7 @@ function New-OSDDisk {
     #======================================================================================================
     #	Display Disk Information
     #======================================================================================================
-    $GetOSDDisk | Select-Object -Property Number, BusType, MediaType, FriendlyName, PartitionStyle, NumberOfPartitions | Format-Table
+    $GetLocalDisk | Select-Object -Property Number, BusType, MediaType, FriendlyName, PartitionStyle, NumberOfPartitions | Format-Table
     
     if ($IsForcePresent -eq $false) {
         Break
@@ -505,7 +199,7 @@ function New-OSDDisk {
     #======================================================================================================
     #	Failure: No Fixed Disks are present
     #======================================================================================================
-    if ($null -eq $GetOSDDisk) {
+    if ($null -eq $GetLocalDisk) {
         Write-Warning "No Fixed Disks were found"
         Break
     }
@@ -517,11 +211,11 @@ function New-OSDDisk {
     #======================================================================================================
     #	Identify OSDDisk
     #======================================================================================================
-    if (($GetOSDDisk | Measure-Object).Count -eq 1) {
-        $OSDDisk = $GetOSDDisk
+    if (($GetLocalDisk | Measure-Object).Count -eq 1) {
+        $OSDDisk = $GetLocalDisk
     } else {
         Write-Host ""
-        foreach ($Item in $GetOSDDisk) {
+        foreach ($Item in $GetLocalDisk) {
             Write-Host "[$($Item.Number)]" -ForegroundColor Green -BackgroundColor Black -NoNewline
             Write-Host " $($Item.BusType) $($Item.MediaType) $($Item.FriendlyName) [$($Item.NumberOfPartitions) $($Item.PartitionStyle) Partitions]"
         }
@@ -532,14 +226,14 @@ function New-OSDDisk {
             $SelectOSDDisk = Read-Host -Prompt "Type the Disk Number to use as the OSDDisk, or X to Exit"
         }
         until (
-            ((($SelectOSDDisk -ge 0) -and ($SelectOSDDisk -in $GetOSDDisk.Number)) -or ($SelectOSDDisk -eq 'X')) 
+            ((($SelectOSDDisk -ge 0) -and ($SelectOSDDisk -in $GetLocalDisk.Number)) -or ($SelectOSDDisk -eq 'X')) 
         )
         if ($SelectOSDDisk -eq 'X') {
             Write-Warning "Exit"
             Break
         }
-        $OSDDisk = $GetOSDDisk | Where-Object {$_.Number -eq $SelectOSDDisk}
-        $DataDisks = $GetOSDDisk | Where-Object {$_.Number -ne $OSDDisk.Number}
+        $OSDDisk = $GetLocalDisk | Where-Object {$_.Number -eq $SelectOSDDisk}
+        $DataDisks = $GetLocalDisk | Where-Object {$_.Number -ne $OSDDisk.Number}
     }
     Write-Host ""
     #======================================================================================================
@@ -646,14 +340,8 @@ function New-OSDDisk {
     #======================================================================================================
     #	DataDisks
     #======================================================================================================
-    if ($DataDisks) {
+<#     if ($DataDisks) {
         Write-Host ""
-<#         foreach ($Item in $DataDisks) {
-            Write-Host "[$($Item.Number)]" -ForegroundColor Green -BackgroundColor Black -NoNewline
-            Write-Host " $($Item.BusType) $($Item.MediaType) $($Item.FriendlyName) [$($Item.NumberOfPartitions) $($Item.PartitionStyle) Partitions]"
-        }
-        Write-Host "" #>
-
         foreach ($Item in $DataDisks) {
             Write-Host "[C]"  -ForegroundColor Green -BackgroundColor Black -NoNewline
             Write-Host " Disk $($Item.Number) $($Item.BusType) $($Item.MediaType) $($Item.FriendlyName) [$($Item.NumberOfPartitions) $($Item.PartitionStyle) Partitions]"
@@ -681,6 +369,6 @@ function New-OSDDisk {
             }
             Write-Host ""
         }
-    }
+    } #>
     Get-OSDDisk | Select-Object -Property Number, BusType, MediaType, FriendlyName, PartitionStyle, NumberOfPartitions | Format-Table
 }

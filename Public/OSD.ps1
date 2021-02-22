@@ -33,14 +33,18 @@ function Get-OSD {
     Write-Host -ForegroundColor DarkCyan    "Module Path: $GetModulePath"
 
     Write-Host -ForegroundColor DarkCyan    '=================================' -NoNewline
-    Write-Host -ForegroundColor Cyan        '21.2.20'
-    Write-Host -ForegroundColor Yellow      'Clear-OSDDisk                          ' -NoNewline
-
-    Write-Host -ForegroundColor DarkCyan    '=================================' -NoNewline
-    Write-Host -ForegroundColor Cyan        '21.2.19'
+    Write-Host -ForegroundColor Cyan        '21.2.22'
+    Write-Host -ForegroundColor Yellow      'Clear-LocalDisk                        ' -NoNewline
+    Write-Host -ForegroundColor Gray        'Allows you to Clear and Initialize multiple Local Disks, now with -Confirm'
+    Write-Host -ForegroundColor Yellow      'Clear-USBDisk                          ' -NoNewline
+    Write-Host -ForegroundColor Gray        'Allows you to Clear and Initialize multiple USB Disks, now with -Confirm'
+    Write-Host -ForegroundColor Yellow      'Get-LocalDisk                          ' -NoNewline
+    Write-Host -ForegroundColor Gray        'Get-OSDDisk -BusTypeNot USB,Virtual'
     Write-Host -ForegroundColor Yellow      'Get-OSDDisk                            ' -NoNewline
-    Write-Host -ForegroundColor Gray        'Modified version of Get-Disk with some neat filters'
-    Write-Host -ForegroundColor Yellow      'New-OSDDisk (Updated)                  ' -NoNewline
+    Write-Host -ForegroundColor Gray        'OSD version of Get-Disk with some easy filters'
+    Write-Host -ForegroundColor Yellow      'Get-USBDisk                            ' -NoNewline
+    Write-Host -ForegroundColor Gray        'Get-OSDDisk -BusType USB'
+    Write-Host -ForegroundColor Yellow      'New-OSDisk                             ' -NoNewline
     Write-Host -ForegroundColor Gray        'Creates System | OS | Recovery Partitions for GPT and MBR Drives in WinPE'
 
     Write-Host -ForegroundColor DarkCyan    '=================================' -NoNewline
@@ -64,6 +68,14 @@ function Get-OSD {
     Write-Host -ForegroundColor Gray        'Copies a PowerShell Module to a Windows Image .wim file'
     Write-Host -ForegroundColor Yellow      'Copy-PSModuleToWindowsImage            ' -NoNewline
     Write-Host -ForegroundColor Gray        'Copies a PowerShell Module to a mounted Windows Image'
+    Write-Host -ForegroundColor Yellow      'Dismount-MyWindowsImage (Renamed)      ' -NoNewline
+    Write-Host -ForegroundColor Gray        'Dismounts WIM by Mounted Path, or all WIMs if no Path is specified'
+    Write-Host -ForegroundColor Yellow      'Edit-MyWindowsImage (Renamed)          ' -NoNewline
+    Write-Host -ForegroundColor Gray        'Modify an Online or Offline Windows Image with Cleanup and Appx Stuff'
+    Write-Host -ForegroundColor Yellow      'Mount-MyWindowsImage (Renamed)         ' -NoNewline
+    Write-Host -ForegroundColor Gray        'Give it a WIM, let it mount it'
+    Write-Host -ForegroundColor Yellow      'Update-MyWindowsImage (Renamed)        ' -NoNewline
+    Write-Host -ForegroundColor Gray        'Identify, Download, and Apply Updates to a Mounted Windows Image'
 
     Write-Host -ForegroundColor DarkCyan    '=================================' -NoNewline
     Write-Host -ForegroundColor Cyan        '21.2.8'
@@ -132,10 +144,6 @@ function Get-OSD {
 
     Write-Host -ForegroundColor DarkCyan    '==================================' -NoNewline
     Write-Host -ForegroundColor Cyan        'OLDER'
-    Write-Host -ForegroundColor White       'Dismount-MyWindowsImage                ' -NoNewline
-    Write-Host -ForegroundColor Gray        'Dismounts WIM by Mounted Path, or all WIMs if no Path is specified'
-    Write-Host -ForegroundColor White       'Edit-MyWindowsImage                    ' -NoNewline
-    Write-Host -ForegroundColor Gray        'Modify an Online or Offline Windows Image with Cleanup and Appx Stuff'
     Write-Host -ForegroundColor White       'Get-OSDDriver                          ' -NoNewline
     Write-Host -ForegroundColor Gray        'Returns Driver download links for Amd Dell Hp Intel and Nvidia'
     Write-Host -ForegroundColor White       'Get-OSDDriverWmiQ                      ' -NoNewline
@@ -144,14 +152,10 @@ function Get-OSD {
     Write-Host -ForegroundColor Gray        'Common WinPE Commands using wpeutil and Microsoft DaRT RemoteRecovery'
 <#     Write-Host -ForegroundColor White       'Initialize-DiskOSD                     ' -NoNewline
     Write-Host -ForegroundColor Gray        'Initializes a Disk' #>
-    Write-Host -ForegroundColor White       'Mount-MyWindowsImage                   ' -NoNewline
-    Write-Host -ForegroundColor Gray        'Give it a WIM, let it mount it'
 <#     Write-Host -ForegroundColor White       'New-PartitionOSDSystem                 ' -NoNewline
     Write-Host -ForegroundColor Gray        'Creates a SYSTEM Partition'
     Write-Host -ForegroundColor White       'New-PartitionOSDWindows                ' -NoNewline
     Write-Host -ForegroundColor Gray        'Creates a WINDOWS Partition' #>
-    Write-Host -ForegroundColor White       'Update-MyWindowsImage                  ' -NoNewline
-    Write-Host -ForegroundColor Gray        'Identify, Download, and Apply Updates to a Mounted Windows Image'
     Write-Host -ForegroundColor DarkCyan    '======================' -NoNewline
     Write-Host -ForegroundColor Cyan        'UPDATE THE MODULE'
     Write-Host -ForegroundColor Yellow      'Update-Module OSD -Force'
