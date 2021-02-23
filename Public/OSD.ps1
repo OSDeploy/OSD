@@ -9,31 +9,35 @@ Displays information about the OSD Module
 https://osd.osdeploy.com/module/functions/general/get-osd
 
 .NOTES
-19.10.1     David Segura @SeguraOSD
 #>
 function Get-OSD {
     [CmdletBinding()]
     param ()
-    
     #======================================================================================================
-    #	Gather
+    #	PSBoundParameters
     #======================================================================================================
-    $GetCommandNoun = Get-Command -Name Get-OSD | Select-Object -ExpandProperty Noun
-    $GetCommandVersion = Get-Command -Name Get-OSD | Select-Object -ExpandProperty Version
-    $GetCommandHelpUri = Get-Command -Name Get-OSD | Select-Object -ExpandProperty HelpUri
-    $GetCommandModule = Get-Command -Name Get-OSD | Select-Object -ExpandProperty Module
-    $GetModuleDescription = Get-Module -Name $GetCommandModule | Select-Object -ExpandProperty Description
-    $GetModuleProjectUri = Get-Module -Name $GetCommandModule | Select-Object -ExpandProperty ProjectUri
-    $GetModulePath = Get-Module -Name $GetCommandModule | Select-Object -ExpandProperty Path
+    $IsConfirmPresent   = $PSBoundParameters.ContainsKey('Confirm')
+    $IsForcePresent     = $PSBoundParameters.ContainsKey('Force')
+    $IsVerbosePresent   = $PSBoundParameters.ContainsKey('Verbose')
     #======================================================================================================
-    #	Usage
+    #	Module and Command Information
     #======================================================================================================
-    Write-Host -ForegroundColor Cyan        "$GetCommandNoun $GetCommandVersion"
-    Write-Host -ForegroundColor DarkCyan    "osd.osdeploy.com"
-    Write-Host -ForegroundColor DarkCyan    "Module Path: $GetModulePath"
+    $GetCommandName = $MyInvocation.MyCommand | Select-Object -ExpandProperty Name
+    $GetModuleBase = $MyInvocation.MyCommand.Module | Select-Object -ExpandProperty ModuleBase
+    $GetModulePath = $MyInvocation.MyCommand.Module | Select-Object -ExpandProperty Path
+    $GetModuleVersion = $MyInvocation.MyCommand.Module | Select-Object -ExpandProperty Version
+    $GetCommandHelpUri = Get-Command -Name $GetCommandName | Select-Object -ExpandProperty HelpUri
 
+    Write-Host "$GetCommandName" -ForegroundColor Cyan -NoNewline
+    Write-Host " $GetModuleVersion at $GetModuleBase" -ForegroundColor Gray
+    Write-Host "http://osd.osdeploy.com" -ForegroundColor Gray
+    #======================================================================================================
+    #	Function Information
+    #======================================================================================================
     Write-Host -ForegroundColor DarkCyan    '=================================' -NoNewline
-    Write-Host -ForegroundColor Cyan        '21.2.22'
+    Write-Host -ForegroundColor Cyan        '21.2.23'
+    Write-Host -ForegroundColor Yellow      'Backup-DiskToFFU (Updated)             ' -NoNewline
+    Write-Host -ForegroundColor Gray        'Captures a Windows Image FFU to a secondary or network drive'
     Write-Host -ForegroundColor Yellow      'Clear-LocalDisk                        ' -NoNewline
     Write-Host -ForegroundColor Gray        'Allows you to Clear and Initialize multiple Local Disks, now with -Confirm'
     Write-Host -ForegroundColor Yellow      'Clear-USBDisk                          ' -NoNewline
@@ -134,13 +138,6 @@ function Get-OSD {
     Write-Host -ForegroundColor Gray        'Sets the PowerShell Execution Policy of a .wim File'
     Write-Host -ForegroundColor Yellow      'Set-WindowsImageExecutionPolicy        ' -NoNewline
     Write-Host -ForegroundColor Gray        'Sets the PowerShell Execution Policy of a Mounted Windows Image'
-
-    Write-Host -ForegroundColor DarkCyan    '================================' -NoNewline
-    Write-Host -ForegroundColor Cyan        '21.1.29'
-    Write-Host -ForegroundColor Yellow      'Backup-DiskToFFU                       ' -NoNewline
-    Write-Host -ForegroundColor Gray        'Captures a Windows Image FFU to a secondary drive'
-    Write-Host -ForegroundColor White       'Get-DiskWithSystemPartition                       ' -NoNewline
-    Write-Host -ForegroundColor Gray        'Gets the Disk containing the SYSTEM partition'
 
     Write-Host -ForegroundColor DarkCyan    '==================================' -NoNewline
     Write-Host -ForegroundColor Cyan        'OLDER'
