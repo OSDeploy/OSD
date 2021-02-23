@@ -64,15 +64,15 @@ function New-OSDisk {
     Alias = SSM, Mbr, SystemM
 
     .EXAMPLE
-    New-OSDDisk
-    Displays Get-Help New-OSDDisk -Examples
+    New-OSDisk
+    Displays Get-Help New-OSDisk
 
     .EXAMPLE
-    New-OSDDisk -Force
+    New-OSDisk -Force
     Interactive.  Prompted to Confirm Clear-Disk for each Local Disk
 
     .LINK
-    https://osd.osdeploy.com/module/osddisk/new-osddisk
+    https://osd.osdeploy.com/module/osddisk/new-osdisk
 
     .NOTES
     19.10.10    Created by David Segura @SeguraOSD
@@ -172,7 +172,7 @@ function New-OSDisk {
     #	Get-Help
     #======================================================================================================
     if ($IsForcePresent -eq $false) {
-        Get-Help $($MyInvocation.MyCommand.Name) -Examples
+        Get-Help $($MyInvocation.MyCommand.Name)
     }
     #======================================================================================================
     #	Display Disk Information
@@ -206,13 +206,13 @@ function New-OSDisk {
     #======================================================================================================
     #	Set Defaults
     #======================================================================================================
-    $OSDDisk = $null
+    $OSDisk = $null
     $DataDisks = $null
     #======================================================================================================
-    #	Identify OSDDisk
+    #	Identify OSDisk
     #======================================================================================================
     if (($GetLocalDisk | Measure-Object).Count -eq 1) {
-        $OSDDisk = $GetLocalDisk
+        $OSDisk = $GetLocalDisk
     } else {
         Write-Host ""
         foreach ($Item in $GetLocalDisk) {
@@ -223,59 +223,59 @@ function New-OSDisk {
         Write-Host " Exit"
 
         do {
-            $SelectOSDDisk = Read-Host -Prompt "Type the Disk Number to use as the OSDDisk, or X to Exit"
+            $SelectOSDisk = Read-Host -Prompt "Type the Disk Number to use as the OSDisk, or X to Exit"
         }
         until (
-            ((($SelectOSDDisk -ge 0) -and ($SelectOSDDisk -in $GetLocalDisk.Number)) -or ($SelectOSDDisk -eq 'X')) 
+            ((($SelectOSDisk -ge 0) -and ($SelectOSDisk -in $GetLocalDisk.Number)) -or ($SelectOSDisk -eq 'X')) 
         )
-        if ($SelectOSDDisk -eq 'X') {
+        if ($SelectOSDisk -eq 'X') {
             Write-Warning "Exit"
             Break
         }
-        $OSDDisk = $GetLocalDisk | Where-Object {$_.Number -eq $SelectOSDDisk}
-        $DataDisks = $GetLocalDisk | Where-Object {$_.Number -ne $OSDDisk.Number}
+        $OSDisk = $GetLocalDisk | Where-Object {$_.Number -eq $SelectOSDisk}
+        $DataDisks = $GetLocalDisk | Where-Object {$_.Number -ne $OSDisk.Number}
     }
     Write-Host ""
     #======================================================================================================
-    #	Make sure there is only one OSDDisk
+    #	Make sure there is only one OSDisk
     #======================================================================================================
-    if (($OSDDisk | Measure-Object).Count -gt 1) {
+    if (($OSDisk | Measure-Object).Count -gt 1) {
         Write-Warning "Something went wrong"
         Break
     }
     #======================================================================================================
-    #   Create OSDDisk
+    #   Create OSDisk
     #======================================================================================================
     #Create from RAW Disk
-    if (($OSDDisk.NumberOfPartitions -eq 0) -and ($OSDDisk.PartitionStyle -eq 'RAW')) {
-        Write-Host -ForegroundColor Green -BackgroundColor Black "Initializing Disk $($OSDDisk.Number) as $PartitionStyle"
-        $OSDDisk | Initialize-Disk -PartitionStyle $PartitionStyle
+    if (($OSDisk.NumberOfPartitions -eq 0) -and ($OSDisk.PartitionStyle -eq 'RAW')) {
+        Write-Host -ForegroundColor Green -BackgroundColor Black "Initializing Disk $($OSDisk.Number) as $PartitionStyle"
+        $OSDisk | Initialize-Disk -PartitionStyle $PartitionStyle
 
     }
     #Create from unpartitioned Disk
-    elseif (($OSDDisk.NumberOfPartitions -eq 0) -and ($OSDDisk.PartitionStyle -ne $PartitionStyle)) {
-        Write-Host -ForegroundColor Green -BackgroundColor Black "Cleaning Disk $($OSDDisk.Number)"
-        Diskpart-Clean -DiskNumber $OSDDisk.Number
+    elseif (($OSDisk.NumberOfPartitions -eq 0) -and ($OSDisk.PartitionStyle -ne $PartitionStyle)) {
+        Write-Host -ForegroundColor Green -BackgroundColor Black "Cleaning Disk $($OSDisk.Number)"
+        Diskpart-Clean -DiskNumber $OSDisk.Number
 
-        Write-Host -ForegroundColor Green -BackgroundColor Black "Initializing Disk $($OSDDisk.Number) as $PartitionStyle"
-        $OSDDisk | Initialize-Disk -PartitionStyle $PartitionStyle
+        Write-Host -ForegroundColor Green -BackgroundColor Black "Initializing Disk $($OSDisk.Number) as $PartitionStyle"
+        $OSDisk | Initialize-Disk -PartitionStyle $PartitionStyle
     }
     #Prompt for confirmation to clear the existing disk
     else {
         Write-Host "[C]"  -ForegroundColor Green -BackgroundColor Black -NoNewline
-        Write-Host " Disk $($OSDDisk.Number) $($OSDDisk.BusType) $($OSDDisk.MediaType) $($OSDDisk.FriendlyName) [$($OSDDisk.NumberOfPartitions) $($OSDDisk.PartitionStyle) Partitions]"
+        Write-Host " Disk $($OSDisk.Number) $($OSDisk.BusType) $($OSDisk.MediaType) $($OSDisk.FriendlyName) [$($OSDisk.NumberOfPartitions) $($OSDisk.PartitionStyle) Partitions]"
         Write-Host "[X]" -ForegroundColor Green -BackgroundColor Black  -NoNewline
         Write-Host " Exit"
 
-        do {$ConfirmClearDisk = Read-Host "Press C to create OSDDisk from the specified Disk, or X to Exit"}
+        do {$ConfirmClearDisk = Read-Host "Press C to create OSDisk from the specified Disk, or X to Exit"}
         until (($ConfirmClearDisk -eq 'C') -or ($ConfirmClearDisk -eq 'X'))
 
         #Clear and Initialize Disk
         if ($ConfirmClearDisk -eq 'C') {
-            Write-Host -ForegroundColor Green -BackgroundColor Black "Cleaning Disk $($OSDDisk.Number)"
-            Diskpart-Clean -DiskNumber $OSDDisk.Number
-            Write-Host -ForegroundColor Green -BackgroundColor Black "Initializing Disk $($OSDDisk.Number) as $PartitionStyle"
-            $OSDDisk | Initialize-Disk -PartitionStyle $PartitionStyle
+            Write-Host -ForegroundColor Green -BackgroundColor Black "Cleaning Disk $($OSDisk.Number)"
+            Diskpart-Clean -DiskNumber $OSDisk.Number
+            Write-Host -ForegroundColor Green -BackgroundColor Black "Initializing Disk $($OSDisk.Number) as $PartitionStyle"
+            $OSDisk | Initialize-Disk -PartitionStyle $PartitionStyle
         }
 
         #Exit
@@ -298,7 +298,7 @@ function New-OSDisk {
     #	System Partition
     #======================================================================================================
     $SystemPartition = @{
-        DiskNumber          = $OSDDisk.Number
+        DiskNumber          = $OSDisk.Number
         LabelSystem         = $LabelSystem
         PartitionStyle      = $PartitionStyle
         SizeMSR             = $SizeMSR
@@ -329,7 +329,7 @@ function New-OSDisk {
     #	Windows Partition
     #======================================================================================================
     $WindowsPartition = @{
-        DiskNumber              = $OSDDisk.Number
+        DiskNumber              = $OSDisk.Number
         LabelRecovery           = $LabelRecovery
         LabelWindows            = $LabelWindows
         PartitionStyle          = $PartitionStyle

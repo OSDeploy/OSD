@@ -63,7 +63,7 @@ function Get-LocalDisk {
     PS> Get-OSDDisk -PartitionStyleNot RAW
 
     .LINK
-    https://osd.osdeploy.com/module/disk/get-localdisk
+    https://osd.osdeploy.com/module/osddisk/get-localdisk
 
     .NOTES
     21.2.22     Initial Release

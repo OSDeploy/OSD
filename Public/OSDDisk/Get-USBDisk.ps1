@@ -11,7 +11,7 @@ function Get-USBDisk {
     Alias = Disk, DiskNumber
 
     .LINK
-    https://osd.osdeploy.com/module/disk/get-usbdisk
+    https://osd.osdeploy.com/module/osddisk/get-usbdisk
 
     .NOTES
     21.2.22     Initial Release

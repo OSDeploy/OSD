@@ -18,11 +18,11 @@ function Backup-DiskToFFU {
         #Disk Number of the Drive to capture
         #Use Get-Disk to get the DiskNumber Property
         [Alias('Number')]
-        [ValidateScript({$_ -in (Get-Disk-Backup-DiskToFFU | Select-Object -ExpandProperty DiskNumber)})]
-        [int] $DiskNumber = (Get-Disk-Backup-DiskToFFU | Select-Object -ExpandProperty DiskNumber -First 1),
+        [ValidateScript({$_ -in (Get-FFUSourceDisks | Select-Object -ExpandProperty DiskNumber)})]
+        [int] $DiskNumber = (Get-FFUSourceDisks | Select-Object -ExpandProperty DiskNumber -First 1),
 
-        [ValidateScript({$_ -in (Get-DriveForBackupFile | Where-Object {$_.DiskNumber -ne $DiskNumber} | Select-Object -ExpandProperty DriveLetter)})]
-        [string] $DestinationDriveLetter = "$(Get-DriveForBackupFile | Where-Object {$_.DiskNumber -ne $DiskNumber} | Select-Object -ExpandProperty DriveLetter -First 1)",
+        [ValidateScript({$_ -in (Get-FFUDestinationDisks | Where-Object {$_.DiskNumber -ne $DiskNumber} | Select-Object -ExpandProperty DriveLetter)})]
+        [string] $DestinationDriveLetter = "$(Get-FFUDestinationDisks | Where-Object {$_.DiskNumber -ne $DiskNumber} | Select-Object -ExpandProperty DriveLetter -First 1)",
         
         #Windows Image Property: Specifies the name of an image
         [string] $Name = "disk$DiskNumber",
@@ -41,31 +41,37 @@ function Backup-DiskToFFU {
         #Executes the capture
         [switch] $Force
     )
-    #===================================================================================================
-    #   Require Admin Rights
-    #===================================================================================================
-    if ((Get-OSDGather -Property IsAdmin) -eq $false) {
-        Write-Warning "$($MyInvocation.MyCommand) requires Admin Rights ELEVATED"
+    #======================================================================================================
+    #	PSBoundParameters
+    #======================================================================================================
+    $IsConfirmPresent   = $PSBoundParameters.ContainsKey('Confirm')
+    $IsForcePresent     = $PSBoundParameters.ContainsKey('Force')
+    $IsVerbosePresent   = $PSBoundParameters.ContainsKey('Verbose')
+    #======================================================================================================
+    #	Module and Command Information
+    #======================================================================================================
+    $GetCommandName = $MyInvocation.MyCommand | Select-Object -ExpandProperty Name
+    $GetModuleBase = $MyInvocation.MyCommand.Module | Select-Object -ExpandProperty ModuleBase
+    $GetModulePath = $MyInvocation.MyCommand.Module | Select-Object -ExpandProperty Path
+    $GetModuleVersion = $MyInvocation.MyCommand.Module | Select-Object -ExpandProperty Version
+    $GetCommandHelpUri = Get-Command -Name $GetCommandName | Select-Object -ExpandProperty HelpUri
+    Write-Host "$GetCommandName" -NoNewline
+    Write-Host " $GetModuleVersion $GetModuleBase" -ForegroundColor Cyan
+    Write-Host "$GetCommandHelpUri" -ForegroundColor Cyan
+    #======================================================================================================
+    #	IsAdmin
+    #======================================================================================================
+    if (-NOT (Get-OSDGather -Property IsAdmin)) {
+        Write-Warning "Administrative Rights are required for execution"
         Break
     }
     #===================================================================================================
-    #	Enable Verbose
-    #===================================================================================================
-    if ($Force -eq $false) {$VerbosePreference = 'Continue'}
-    #===================================================================================================
     #	Gather
     #===================================================================================================
-    $GetCommandNoun = Get-Command -Name Backup-DiskToFFU | Select-Object -ExpandProperty Noun
-    $GetCommandVersion = Get-Command -Name Backup-DiskToFFU | Select-Object -ExpandProperty Version
-    $GetCommandHelpUri = Get-Command -Name Backup-DiskToFFU | Select-Object -ExpandProperty HelpUri
-    $GetCommandModule = Get-Command -Name Backup-DiskToFFU | Select-Object -ExpandProperty Module
-    $GetModuleDescription = Get-Module -Name $GetCommandModule | Select-Object -ExpandProperty Description
-    $GetModuleProjectUri = Get-Module -Name $GetCommandModule | Select-Object -ExpandProperty ProjectUri
-    $GetModulePath = Get-Module -Name $GetCommandModule | Select-Object -ExpandProperty Path
-
-    $GetDriveForBackupFile = $(Get-DriveForBackupFile)
-    $DiskIsBoot = $(Get-DiskWithBootPartition)
-    $DiskToBackup = $(Get-Disk-Backup-DiskToFFU)
+    $GetLocalDisk = Get-LocalDisk | Where-Object {$_.NumberOfPartitions -ge '1'} | Where-Object {$_.OperationalStatus -eq 'Online'} | Where-Object {$_.Size -gt 0} | Where-Object {$_.IsOffline -eq $false}
+    $BootDisks = $GetLocalDisk | Where-Object {$_.IsBoot -eq $true}
+    $SourceDisks = $GetLocalDisk | Where-Object {$_.IsBoot -eq $false}
+    $DestinationDisks = $(Get-FFUDestinationDisks)
     $Volumes = $(Get-Volume)
     #===================================================================================================
     #	Validate
@@ -74,46 +80,52 @@ function Backup-DiskToFFU {
         $ImageFile = "C$ImageFile"
     }
     #===================================================================================================
-    #	Usage
+    #	Source
     #===================================================================================================
-    Write-Host -ForegroundColor DarkGray    '======================================================================================================'
-    Write-Host -ForegroundColor White       "Backup-DiskToFFU " -NoNewline
-    Write-Host -ForegroundColor Cyan        "$GetCommandVersion $GetModulePath"
-    Write-Host -ForegroundColor DarkCyan    $GetCommandHelpUri
-    Write-Host -ForegroundColor DarkGray    '======================================================================================================'
-    Write-Host -ForegroundColor Yellow       "The following Partitions will be saved in the FFU:"
-    foreach ($item in (Get-Partition | Where-Object {$_.DiskNumber -eq $DiskNumber})) {
-        Write-Host -ForegroundColor White "DiskNumber:$($item.DiskNumber) Partition:$($item.PartitionNumber) DriveLetter:$($item.DriveLetter) Type:$($item.Type) $([math]::round($item.Size / 1000000000, 0)) GB"
-    }
-    
-    if ($DiskToBackup -or $DiskIsBoot) {
+    if ($SourceDisks -or $BootDisks) {
         Write-Host -ForegroundColor DarkGray    '======================================================================================================'
-        Write-Host -ForegroundColor Cyan        "-DiskNumber $DiskNumber"
-        Write-Host -ForegroundColor White       "The Disk Number of the Disk to capture as an FFU. The default is the first available Disk"
-        foreach ($item in $DiskToBackup) {
+        Write-Host -ForegroundColor Cyan        "-DiskNumber $DiskNumber" -NoNewline
+        Write-Host -ForegroundColor Yellow       " [Disk to capture in the FFU. Default is the first available Disk]"
+        foreach ($item in $SourceDisks) {
             Write-Host -ForegroundColor Cyan    "$($item.DiskNumber) " -NoNewline
-            Write-Host -ForegroundColor Gray    "$($item.PartitionStyle) Partitions:$($item.NumberOfPartitions) $($item.FriendlyName) $($item.BusType) [$([math]::round($item.Size / 1000000000, 0))GB]"
+            Write-Host -ForegroundColor White    "$($item.PartitionStyle) Partitions:$($item.NumberOfPartitions) $($item.FriendlyName) $($item.BusType) [$([math]::round($item.Size / 1000000000, 0))GB]"
         }
-        if ($DiskIsBoot) {
-            Write-Warning "Disks from a running OS cannot be selected"
-            foreach ($item in $DiskIsBoot) {
-                Write-Host -ForegroundColor Red "$($item.DiskNumber) $($item.PartitionStyle) Partitions:$($item.NumberOfPartitions) $($item.FriendlyName) $($item.BusType) [$([math]::round($item.Size / 1000000000, 0))GB]"
+        if (Get-Partition | Where-Object {$_.DiskNumber -eq $DiskNumber}) {
+            Write-Host ""
+            Write-Host -ForegroundColor Yellow       "The following Partitions will be saved in the FFU:"
+            foreach ($item in (Get-Partition | Where-Object {$_.DiskNumber -eq $DiskNumber})) {
+                Write-Host -ForegroundColor White "Partition:$($item.PartitionNumber) DriveLetter:$($item.DriveLetter) Type:$($item.Type) $([math]::round($item.Size / 1000000000, 0)) GB"
             }
         }
-    }
-
-    Write-Host -ForegroundColor DarkGray    '======================================================================================================'
-    Write-Host -ForegroundColor Cyan        "-DestinationDriveLetter $DestinationDriveLetter"
-
-    if ($GetDriveForBackupFile | Where-Object {$_.DiskNumber -ne $DiskNumber}) {
-        Write-Host -ForegroundColor White   "Verify that the Drive you select below has plenty of space for your image"
-        foreach ($item in ($GetDriveForBackupFile | Where-Object {$_.DiskNumber -ne $DiskNumber})) {
-            Write-Host -ForegroundColor Cyan    "$($item.DriveLetter) " -NoNewline
-            Write-Host -ForegroundColor Gray    "$($item.FileSystem) $($item.FileSystemLabel) [$($item.DriveType) TotalSize:$([math]::round($item.Size / 1000000000, 0))GB SizeRemaining:$([math]::round($item.SizeRemaining / 1000000000, 0))GB]"
+        if ($BootDisks) {
+            Write-Host ""
+            Write-Warning "Disks from a running OS cannot be selected"
+            foreach ($item in $BootDisks) {
+                Write-Host -ForegroundColor Gray "$($item.DiskNumber) $($item.PartitionStyle) Partitions:$($item.NumberOfPartitions) $($item.FriendlyName) $($item.BusType) [$([math]::round($item.Size / 1000000000, 0))GB]"
+            }
         }
-        foreach ($item in ($GetDriveForBackupFile | Where-Object {$_.DiskNumber -eq $DiskNumber})) {
-            Write-Warning "Volumes that are being captured cannot be used as a Destination Drive"
-            Write-Host -ForegroundColor Red    "$($item.DriveLetter) $($item.FileSystem) $($item.FileSystemLabel) [$($item.DriveType) TotalSize:$([math]::round($item.Size / 1000000000, 0))GB SizeRemaining:$([math]::round($item.SizeRemaining / 1000000000, 0))GB]"
+    } else {
+        Write-Warning "Unable to find a Source Disk to backup"
+        Break
+    }
+    #===================================================================================================
+    #	Destination
+    #===================================================================================================
+    Write-Host -ForegroundColor DarkGray    '======================================================================================================'
+    Write-Host -ForegroundColor Cyan        "-DestinationDriveLetter $DestinationDriveLetter" -NoNewline
+    Write-Host -ForegroundColor Yellow       " [Verify that the Volume selected has enough free space for the FFU]"
+
+    if ($DestinationDisks | Where-Object {$_.DiskNumber -ne $DiskNumber}) {
+        foreach ($item in ($DestinationDisks | Where-Object {$_.DiskNumber -ne $DiskNumber})) {
+            Write-Host -ForegroundColor Cyan    "$($item.DriveLetter) " -NoNewline
+            Write-Host -ForegroundColor White    "$($item.FileSystem) $($item.FileSystemLabel) [$($item.DriveType) TotalSize:$([math]::round($item.Size / 1000000000, 0))GB SizeRemaining:$([math]::round($item.SizeRemaining / 1000000000, 0))GB]"
+        }
+        if ($DestinationDisks | Where-Object {$_.DiskNumber -eq $DiskNumber}) {
+            Write-Host ""
+            foreach ($item in ($DestinationDisks | Where-Object {$_.DiskNumber -eq $DiskNumber})) {
+                Write-Warning "Volumes that are being captured cannot be used as a Destination Drive"
+                Write-Host -ForegroundColor Gray    "$($item.DriveLetter) $($item.FileSystem) $($item.FileSystemLabel) [$($item.DriveType) TotalSize:$([math]::round($item.Size / 1000000000, 0))GB SizeRemaining:$([math]::round($item.SizeRemaining / 1000000000, 0))GB]"
+            }
         }
     } else {
         Write-Warning "Could not find any drives that you can backup to"
@@ -121,12 +133,13 @@ function Backup-DiskToFFU {
     }
     Write-Host -ForegroundColor DarkGray    '======================================================================================================'
     Write-Host -ForegroundColor Cyan        "-ImageFile  $ImageFile"
-    Write-Host -ForegroundColor White       'This path is generated automatically by combining the DestinationDriveLetter, CimComputerManufacturer,'
-    Write-Host -ForegroundColor White       'ComputerModel SerialNumber and DiskNumber.  You can fully modify this path to override the'
-    Write-Host -ForegroundColor White       'DestinationDriveLetter or to save to a Network share'
+    Write-Host ""
+    Write-Host -ForegroundColor Yellow       'This path is generated automatically by combining the DestinationDriveLetter, CimComputerManufacturer,'
+    Write-Host -ForegroundColor Yellow       'ComputerModel SerialNumber and DiskNumber.  You can fully modify this path to override the'
+    Write-Host -ForegroundColor Yellow       'DestinationDriveLetter or to save to a Network share'
     $ParentDirectory = Split-Path $ImageFile -Parent
     if (!(Test-Path "$ParentDirectory")) {
-        Write-Host -ForegroundColor Yellow "Directory '$ParentDirectory' does not exist and will be created automatically"
+        Write-Warning "Directory '$ParentDirectory' does not exist and will be created automatically"
     }
 
     Write-Host -ForegroundColor DarkGray    '======================================================================================================'
@@ -175,7 +188,8 @@ function Backup-DiskToFFU {
 
     if ($Force) {
         if (!(Test-Path "$ParentDirectory")) {
-            New-Item -Path $ParentDirectory -ItemType Directory -Force -ErrorAction Stop | Out-Null
+            Try {New-Item -Path $ParentDirectory -ItemType Directory -Force -ErrorAction Stop}
+            Catch {Write-Warning "Destination appears to be Read Only.  Try another Destination Drive";Break}
         }
         DISM.exe /Capture-FFU /ImageFile="$ImageFile" /CaptureDrive=\\.\PhysicalDrive$DiskNumber /Name:"$Name" /Description:"$Description" /Compress:$Compress
         #Return Get-WindowsImage -ImagePath $ImageFile
@@ -186,7 +200,7 @@ function Backup-DiskToFFU {
 
 $ScriptBlock = {
     param($CommandName,$ParameterName,$stringMatch)
-    Get-DriveForBackupFile | Select-Object -ExpandProperty DriveLetter 
+    Get-FFUDestinationDisks | Select-Object -ExpandProperty DriveLetter 
 }
 
 Register-ArgumentCompleter -CommandName Backup-DiskToFFU -ParameterName DestinationDriveLetter -ScriptBlock $ScriptBlock
