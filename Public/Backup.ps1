@@ -194,7 +194,7 @@ function Backup-DiskToFFU {
         DISM.exe /Capture-FFU /ImageFile="$ImageFile" /CaptureDrive=\\.\PhysicalDrive$DiskNumber /Name:"$Name" /Description:"$Description" /Compress:$Compress
         #Return Get-WindowsImage -ImagePath $ImageFile
     } else {
-        Write-Warning "If everything looks good, add the -Force parameter to capture the FFU"
+        Write-Warning "If everything looks good, add the -Force parameter e.g. Backup-DiskToFFU -Force"
     }
 }
 

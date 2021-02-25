@@ -7,7 +7,7 @@
 RootModule = 'OSD.psm1'
 
 # Version number of his module.
-ModuleVersion = '21.2.23.1'
+ModuleVersion = '21.2.24.1'
 
 # Supported PSEditions
 # CompatiblePSEditions = @()
@@ -66,8 +66,7 @@ PowerShellVersion = '5.0'
 # NestedModules = @()
 
 # Functions to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no functions to export.
-FunctionsToExport = 'Test-Alpha',
-                    #'Get-MyAdk','New-MyAdkCopyPE',#ADK
+FunctionsToExport = #'Get-MyAdk','New-MyAdkCopyPE',#ADK
                     'Remove-AppxOnline',#Appx
                     'Backup-DiskToFFU',#Backup
                     'Get-CimVideoControllerResolution',#Cim
@@ -80,7 +79,8 @@ FunctionsToExport = 'Test-Alpha',
                     'Get-MyWindowsCapability','Get-MyWindowsPackage',#MyWindows
                     'Dismount-MyWindowsImage','Edit-MyWindowsImage','Mount-MyWindowsImage','Update-MyWindowsImage',#MyWindowsImage
                     'Get-OSD','Get-OSDClass','Get-OSDGather','Get-OSDPower','Get-RegCurrentVersion','Get-SessionsXml','Save-OSDDownload',#OSD
-                    'Clear-LocalDisk','Clear-USBDisk','Get-LocalDisk','Get-OSDDisk','Get-USBDisk','New-OSDisk',#OSDDisk
+                    'Clear-LocalDisk','Get-LocalDisk','Get-OSDDisk','New-OSDisk',#OSDDisk
+                    'Clear-USBDisk','Get-USBDisk','Get-USBVolume',
                     'Get-OSDDriver','Get-OSDDriverWmiQ',#OSDDriver
                     'Copy-PSModuleToFolder','Copy-PSModuleToWim','Copy-PSModuleToWindowsImage',#PSModule
                     'Get-ScreenPNG', #ScreenPNG

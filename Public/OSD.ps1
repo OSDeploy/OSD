@@ -35,6 +35,11 @@ function Get-OSD {
     #	Function Information
     #======================================================================================================
     Write-Host -ForegroundColor DarkCyan    '=================================' -NoNewline
+    Write-Host -ForegroundColor Cyan        '21.2.25'
+    Write-Host -ForegroundColor Yellow      'Get-USBVolume                          ' -NoNewline
+    Write-Host -ForegroundColor Gray        'Returns attached USB Volumes'
+
+    Write-Host -ForegroundColor DarkCyan    '=================================' -NoNewline
     Write-Host -ForegroundColor Cyan        '21.2.23'
     Write-Host -ForegroundColor Yellow      'Backup-DiskToFFU (Updated)             ' -NoNewline
     Write-Host -ForegroundColor Gray        'Captures a Windows Image FFU to a secondary or network drive'
