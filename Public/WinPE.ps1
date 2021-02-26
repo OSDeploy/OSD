@@ -14,23 +14,19 @@ https://osd.osdeploy.com/module/functions/winpe/get-osdwinpe
 function Get-OSDWinPE {
     [CmdletBinding()]
     param (
-        #PowerShell Module Parameter
-        #Searches all Drives for <drive>:\Modules directory
-        #Copies Modules content to System32 $PSModulesPath
-        [Alias('Modules')]
-        [switch]$AddModules,
+        #Find and Copy PowerShell Modules to WinPE
+        #Searches all PSDrives for <drive>:\Modules directory
+        #Searches all PSDrives for <drive>:\WinPE\Modules directory
+        #Copies Modules to X:\Program Files\WindowsPowerShell\Modules
+        [Alias('Modules','AddModules')]
+        [switch]$GetModules,
 
-        #PowerShell Module Parameter
-        #Imports a PowerShell Module by Name
-        #PowerShell Module must exist in $PSModulePath
-        [Alias('Import')]
-        [string[]]$ImportModule,
-
-        #PowerShell Script Parameter
-        #Searches all Drives for <drive>:\$ImportModule file
-        #Calls <drive>:\$ImportModule in the current PS Session
-        [Alias('Script')]
-        [string]$CallScript,
+        #Find and Run PowerShell Scripts
+        #Searches all PSDrives for <drive>:\<$GetScript>
+        #Searches all PSDrives for <drive>:\WinPE\Scripts\<$GetScript>
+        #Calls found scripts in the current PS Session
+        [Alias('Script','CallScript')]
+        [string[]]$GetScripts,
 
         #wpeutil InitializeNetwork
         #Initializes network components and drivers and sets the computer name to a randomly-chosen value
@@ -105,51 +101,46 @@ function Get-OSDWinPE {
         New-ItemProperty -Path HKCU:\Console ScreenBufferSize -Value 589889656 -PropertyType DWORD -Force | Out-Null
     }
     #======================================================================================================
-    #	CallScript
+    #	GetModules
     #======================================================================================================
-    if ($CallScript) {
-        $OSDCallScripts = @()
-
-        #Get all available Drives
-        $OSDSearchDrives = Get-PSDrive -PSProvider 'FileSystem'
-
-        foreach ($OSDSearchDrive in $OSDSearchDrives) {
-            $FoundCallScript = "$($OSDSearchDrive.Root)$CallScript"
-
-            Write-Verbose "Found PowerShell Script: $FoundCallScript"
-            if (Test-Path $FoundCallScript) {$OSDCallScripts += Get-Item $FoundCallScript | Select-Object -Property FullName}
-        }
-
-        #Call found scripts
-        foreach ($OSDCallScript in $OSDCallScripts) {
-            Write-Verbose "Call: $($OSDCallScript.FullName)"
-            & "$($OSDCallScript.FullName)" -ErrorAction SilentlyContinue
-        }
-    }
-    #======================================================================================================
-    #	AddModules
-    #======================================================================================================
-    if ($AddModules.IsPresent) {
+    if ($GetModules.IsPresent) {
         $OSDSearchDrives = Get-PSDrive -PSProvider 'FileSystem'
         foreach ($OSDSearchDrive in $OSDSearchDrives) {
-            $OSDSearchPath = "$($OSDSearchDrive.Root)Modules"
-            if (Test-Path "$OSDSearchPath") {
-                Write-Verbose "Module Search Path: $OSDSearchPath"
-                Get-ChildItem "$OSDSearchPath" | `
-                Where-Object {$_.PSIsContainer} | `
-                ForEach-Object {
-                    Write-Verbose "Add Module: $($_.FullName)"
-                    Copy-Item -Path "$($_.FullName)" -Destination "$PSHome\Modules" -Recurse -Force -ErrorAction SilentlyContinue
+            $OSDSearchPath = @("$($OSDSearchDrive.Root)Modules","$($OSDSearchDrive.Root)WinPE\Modules")
+            foreach ($Item in $OSDSearchPath) {
+                if (Test-Path "$Item") {
+                    Write-Verbose "Module Search Path: $Item"
+                    Get-ChildItem "$Item" | `
+                    Where-Object {$_.PSIsContainer} | `
+                    ForEach-Object {
+                        Write-Verbose "Add Module: $($_.FullName)"
+                        Copy-Item -Path "$($_.FullName)" -Destination "X:\Program Files\WindowsPowerShell\Modules" -Recurse -Force -ErrorAction SilentlyContinue
+                    }
                 }
             }
         }
     }
     #======================================================================================================
-    #	ImportModule
+    #	GetScripts
     #======================================================================================================
-    foreach ($item in $ImportModule) {
-        try {Import-Module -Name "$Item" -Force}
-        catch {Write-Warning "Unable to Import Module $Item"}
+    if ($GetScripts) {
+        #Get all available Drives
+        $OSDSearchDrives = Get-PSDrive -PSProvider 'FileSystem'
+
+        foreach ($Item in $GetScripts) {
+            $OSDGetScripts = @()
+            foreach ($OSDSearchDrive in $OSDSearchDrives) {
+                $ScriptFullName = @("$($OSDSearchDrive.Root)$Item","$($OSDSearchDrive.Root)WinPE\Scripts\$Item")
+
+                foreach ($ScriptName in $ScriptFullName) {
+                    if (Test-Path $ScriptName) {
+                        $FoundScript = Get-Item $ScriptName | Select-Object -Property FullName
+                        Write-Verbose "Calling PowerShell Script: $FoundScript"
+                        & "$($FoundScript.FullName)" -ErrorAction SilentlyContinue
+                    }
+                }
+            }
+        }
     }
     #======================================================================================================
     #	wpeutil
