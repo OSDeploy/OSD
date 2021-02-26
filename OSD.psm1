@@ -2,7 +2,11 @@
 #   Import Functions
 #   https://github.com/RamblingCookieMonster/PSStackExchange/blob/master/PSStackExchange/PSStackExchange.psm1
 #===================================================================================================
-$OSDPublicFunctions  = @( Get-ChildItem -Path $PSScriptRoot\Public\*.ps1 -Recurse -ErrorAction SilentlyContinue )
+if ($env:SystemDrive -eq 'X:') {
+    $OSDPublicFunctions  = @( Get-ChildItem -Path ("$PSScriptRoot\Public\*.ps1","$PSScriptRoot\PublicPE\*.ps1") -Recurse -ErrorAction SilentlyContinue )
+} else {
+    $OSDPublicFunctions  = @( Get-ChildItem -Path ("$PSScriptRoot\Public\*.ps1","$PSScriptRoot\PublicOS\*.ps1") -Recurse -ErrorAction SilentlyContinue )
+}
 $OSDPrivateFunctions = @( Get-ChildItem -Path $PSScriptRoot\Private\*.ps1 -Recurse -ErrorAction SilentlyContinue )
 
 foreach ($Import in @($OSDPublicFunctions + $OSDPrivateFunctions)) {

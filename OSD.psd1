@@ -7,7 +7,7 @@
 RootModule = 'OSD.psm1'
 
 # Version number of his module.
-ModuleVersion = '21.2.25.1'
+ModuleVersion = '21.2.26.1'
 
 # Supported PSEditions
 # CompatiblePSEditions = @()
@@ -84,7 +84,7 @@ FunctionsToExport = #'Get-MyAdk','New-MyAdkCopyPE',#ADK
                     'Get-OSDDriver','Get-OSDDriverWmiQ',#OSDDriver
                     'Copy-PSModuleToFolder','Copy-PSModuleToWim','Copy-PSModuleToWindowsImage',#PSModule
                     'Get-ScreenPNG', #ScreenPNG
-                    'Get-OSDWinPE' #WinPE
+                    'Get-OSDWinPE','Use-WinPEContent' #WinPE
 
 # Cmdlets to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no cmdlets to export.
 CmdletsToExport = @()
