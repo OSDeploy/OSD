@@ -9,7 +9,7 @@ Saves all BitLocker ExternalKeys (BEK), KeyPackages (KPG), and RecoveryPasswords
 Directory to save the BitLocker Keys.  This directory will be created if it does not exist
 
 .LINK
-https://osd.osdeploy.com/module/mybitlocker/backup-mybitlockerkeys
+https://osd.osdeploy.com/module/functions/mybitlocker/backup-mybitlockerkeys
 
 .NOTES
 Requires Administrative Rights
@@ -57,7 +57,7 @@ Creates an Object with all the BitLocker KeyProtector information
 Shows the Recovery Password in plain text
 
 .LINK
-https://osd.osdeploy.com/module/mybitlocker/get-mybitlockerkeyprotectors
+https://osd.osdeploy.com/module/functions/mybitlocker/get-mybitlockerkeyprotectors
 
 .NOTES
 Requires Administrative Rights
@@ -158,7 +158,7 @@ Saves all BitLocker ExternalKeys (BEK) to a Directory (Path)
 Directory to save the BitLocker Keys.  This directory will be created if it does not exist
 
 .LINK
-https://osd.osdeploy.com/module/mybitlocker/save-mybitlockerexternalkey
+https://osd.osdeploy.com/module/functions/mybitlocker/save-mybitlockerexternalkey
 
 .NOTES
 Requires Administrative Rights
@@ -220,7 +220,7 @@ Saves all BitLocker KeyPackages (KPG) to a Directory (Path). The key package can
 Directory to save the BitLocker Keys.  This directory will be created if it does not exist
 
 .LINK
-https://osd.osdeploy.com/module/mybitlocker/save-mybitlockerkeypackage
+https://osd.osdeploy.com/module/functions/mybitlocker/save-mybitlockerkeypackage
 
 .LINK
 https://docs.microsoft.com/en-us/windows-server/administration/windows-commands/manage-bde-keypackage
@@ -283,7 +283,7 @@ Saves all BitLocker RecoveryPasswords (TXT) to a Directory (Path)
 Directory to save the BitLocker Keys.  This directory will be created if it does not exist
 
 .LINK
-https://osd.osdeploy.com/module/mybitlocker/save-mybitlockerrecoverypassword
+https://osd.osdeploy.com/module/functions/mybitlocker/save-mybitlockerrecoverypassword
 
 .NOTES
 Requires Administrative Rights
@@ -373,7 +373,7 @@ Directory containing BitLocker ExternalKeys (BEK)
 Searches the Path for BitLocker ExternalKeys (BEK) in subdirectories
 
 .LINK
-https://osd.osdeploy.com/module/mybitlocker/unlock-mybitlockerexternalkey
+https://osd.osdeploy.com/module/functions/mybitlocker/unlock-mybitlockerexternalkey
 
 .NOTES
 Requires Administrative Rights

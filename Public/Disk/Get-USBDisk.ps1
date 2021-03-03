@@ -1,21 +1,21 @@
+<#
+.SYNOPSIS
+Returns Get-Disk + MediaType with BusType USB
+
+.DESCRIPTION
+Returns Get-Disk + MediaType with BusType USB
+
+.PARAMETER Number
+Specifies the disk number for which to get the associated Disk object
+Alias = Disk, DiskNumber
+
+.LINK
+https://osd.osdeploy.com/module/functions/disk/get-usbdisk
+
+.NOTES
+21.2.22     Initial Release
+#>
 function Get-USBDisk {
-    <#
-    .SYNOPSIS
-    Returns Get-Disk + MediaType with BusType USB
-
-    .DESCRIPTION
-    Returns Get-Disk + MediaType with BusType USB
-
-    .PARAMETER Number
-    Specifies the disk number for which to get the associated Disk object
-    Alias = Disk, DiskNumber
-
-    .LINK
-    https://osd.osdeploy.com/module/osddisk/get-usbdisk
-
-    .NOTES
-    21.2.22     Initial Release
-    #>
     [CmdletBinding()]
     param (
         [Alias('Disk','DiskNumber')]

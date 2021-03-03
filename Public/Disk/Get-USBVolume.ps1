@@ -1,17 +1,18 @@
+<#
+.SYNOPSIS
+Returns Get-Volume for USB Devices
+
+.DESCRIPTION
+Returns Get-Volume for USB Devices
+
+.LINK
+https://osd.osdeploy.com/module/functions/disk/get-usbvolume
+
+.NOTES
+21.3.3      Added SizeGB and SizeRemainingMB
+21.2.25     Initial Release
+#>
 function Get-USBVolume {
-    <#
-    .SYNOPSIS
-    Returns Get-Volume for USB Devices
-
-    .DESCRIPTION
-    Returns Get-Volume for USB Devices
-
-    .LINK
-    https://osd.osdeploy.com/module/osddisk/get-usbvolume
-
-    .NOTES
-    21.2.25     Initial Release
-    #>
     [CmdletBinding()]
     param ()
     #======================================================================================================
@@ -29,7 +30,10 @@ function Get-USBVolume {
     #	Get-OSDDisk
     #======================================================================================================
     $GetUSBVolume = Get-Volume | Where-Object {$_.DriveType -eq 'Removable'} | `
-                    Select-Object -Property DriveType, DriveLetter, FileSystemLabel, FileSystem, Size, SizeRemaining, OperationalStatus, HealthStatus
+                    Select-Object -Property DriveType, DriveLetter, FileSystemLabel, FileSystem, `
+                    @{Name='SizeGB';Expression={[int]($_.Size / 1000000000)}}, `
+                    @{Name='SizeRemainingMB';Expression={[int]($_.SizeRemaining / 1000000)}}, `
+                    OperationalStatus, HealthStatus
     #======================================================================================================
     #	Return
     #======================================================================================================
