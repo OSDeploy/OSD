@@ -7,7 +7,7 @@
 RootModule = 'OSD.psm1'
 
 # Version number of his module.
-ModuleVersion = '21.3.3.1'
+ModuleVersion = '21.3.3.2'
 
 # Supported PSEditions
 # CompatiblePSEditions = @()
@@ -73,6 +73,8 @@ FunctionsToExport = #'Get-MyAdk','New-MyAdkCopyPE',#ADK
                     'Save-ClipboardImage','Set-ClipboardScreenshot',#Clipboard
                     'Get-ComObjects','Get-ComObjMicrosoftUpdateAutoUpdate','Get-ComObjMicrosoftUpdateInstaller','Get-ComObjMicrosoftUpdateServiceManager',#ComObj
                     'Get-DisplayAllScreens','Get-DisplayPrimaryBitmapSize','Get-DisplayPrimaryMonitorSize','Get-DisplayPrimaryScaling','Get-DisplayVirtualScreen','Set-DisRes',#Display
+                    'Get-DellCatalogPC','Get-MyDellBios','Update-MyDellBios','Get-MyDellDriverCab','Save-MyDellDriverCab',
+                    'Get-OSDDriver','Get-OSDDriverWmiQ',#Driver
                     "Set-WimExecutionPolicy","Set-WindowsImageExecutionPolicy",#ExecutionPolicy
                     'Get-MyBiosSerialNumber','Get-MyBiosVersion','Get-MyComputerManufacturer','Get-MyComputerModel','Get-MyDefaultAUService',#GetMy
                     'Backup-MyBitLockerKeys','Get-MyBitLockerKeyProtectors','Save-MyBitLockerExternalKey','Save-MyBitLockerKeyPackage','Save-MyBitLockerRecoveryPassword','Unlock-MyBitLockerExternalKey',#MyBitlocker
@@ -81,7 +83,6 @@ FunctionsToExport = #'Get-MyAdk','New-MyAdkCopyPE',#ADK
                     'Get-OSD','Get-OSDClass','Get-OSDGather','Get-OSDPower','Get-RegCurrentVersion','Get-SessionsXml','Save-OSDDownload',#OSD
                     'Clear-LocalDisk','Get-LocalDisk','Get-OSDDisk','New-OSDisk',#OSDDisk
                     'Clear-USBDisk','Get-USBDisk','Get-USBVolume',
-                    'Get-OSDDriver','Get-OSDDriverWmiQ',#OSDDriver
                     'Copy-PSModuleToFolder','Copy-PSModuleToWim','Copy-PSModuleToWindowsImage',#PSModule
                     'Get-ScreenPNG', #ScreenPNG
                     'Get-OSDWinPE','Use-WinPEContent' #WinPE
