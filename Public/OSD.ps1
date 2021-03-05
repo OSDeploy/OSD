@@ -35,86 +35,99 @@ function Get-OSD {
     #	Function Information
     #======================================================================================================
     Write-Host -ForegroundColor DarkCyan    '=================================' -NoNewline
+    Write-Host -ForegroundColor Cyan        '21.3.4'
+    Write-Host -ForegroundColor Yellow      'Get-DellCatalogPC                      ' -NoNewline
+    Write-Host -ForegroundColor Gray        'Downloads the Dell CatalogPC.xml and converts to an PSObject'
+    Write-Host -ForegroundColor Yellow      'Get-MyDellBios                         ' -NoNewline
+    Write-Host -ForegroundColor Gray        'Gets you information about the latest BIOS Update for your Dell computer'
+    Write-Host -ForegroundColor Yellow      'Get-MyDellDriverCab                    ' -NoNewline
+    Write-Host -ForegroundColor Gray        'In development'
+    Write-Host -ForegroundColor Yellow      'Save-MyDellDriverCab                   ' -NoNewline
+    Write-Host -ForegroundColor Gray        'In development'
+    Write-Host -ForegroundColor Yellow      'Update-MyDellBios                      ' -NoNewline
+    Write-Host -ForegroundColor Gray        'Downloads and Installs the lastest Dell BIOS Update for your Dell computer'
+
+    Write-Host -ForegroundColor DarkCyan    '=================================' -NoNewline
     Write-Host -ForegroundColor Cyan        '21.2.26'
-    Write-Host -ForegroundColor White      '[WinPE] Use-WinPEContent               ' -NoNewline
-    Write-Host -ForegroundColor Gray        'Coming soon'
+    Write-Host -ForegroundColor White       '[WinPE] Use-WinPEContent               ' -NoNewline
+    Write-Host -ForegroundColor Gray        'In development'
 
     Write-Host -ForegroundColor DarkCyan    '=================================' -NoNewline
     Write-Host -ForegroundColor Cyan        '21.2.25'
-    Write-Host -ForegroundColor White      'Get-USBVolume                          ' -NoNewline
+    Write-Host -ForegroundColor White       'Get-USBVolume                          ' -NoNewline
     Write-Host -ForegroundColor Gray        'Returns attached USB Volumes'
 
     Write-Host -ForegroundColor DarkCyan    '=================================' -NoNewline
     Write-Host -ForegroundColor Cyan        '21.2.23'
-    Write-Host -ForegroundColor White      'Backup-DiskToFFU (Updated)             ' -NoNewline
+    Write-Host -ForegroundColor White       'Backup-DiskToFFU (Updated)             ' -NoNewline
     Write-Host -ForegroundColor Gray        'Captures a Windows Image FFU to a secondary or network drive'
-    Write-Host -ForegroundColor White      'Clear-LocalDisk                        ' -NoNewline
+    Write-Host -ForegroundColor White       'Clear-LocalDisk                        ' -NoNewline
     Write-Host -ForegroundColor Gray        'Allows you to Clear and Initialize multiple Local Disks, now with -Confirm'
-    Write-Host -ForegroundColor White      'Clear-USBDisk                          ' -NoNewline
+    Write-Host -ForegroundColor White       'Clear-USBDisk                          ' -NoNewline
     Write-Host -ForegroundColor Gray        'Allows you to Clear and Initialize multiple USB Disks, now with -Confirm'
-    Write-Host -ForegroundColor White      'Get-LocalDisk                          ' -NoNewline
+    Write-Host -ForegroundColor White       'Get-LocalDisk                          ' -NoNewline
     Write-Host -ForegroundColor Gray        'Get-OSDDisk -BusTypeNot USB,Virtual'
-    Write-Host -ForegroundColor White      'Get-OSDDisk                            ' -NoNewline
+    Write-Host -ForegroundColor White       'Get-OSDDisk                            ' -NoNewline
     Write-Host -ForegroundColor Gray        'OSD version of Get-Disk with some easy filters'
-    Write-Host -ForegroundColor White      'Get-USBDisk                            ' -NoNewline
+    Write-Host -ForegroundColor White       'Get-USBDisk                            ' -NoNewline
     Write-Host -ForegroundColor Gray        'Get-OSDDisk -BusType USB'
-    Write-Host -ForegroundColor White      '[WinPE] New-OSDisk                     ' -NoNewline
+    Write-Host -ForegroundColor White       '[WinPE] New-OSDisk                     ' -NoNewline
     Write-Host -ForegroundColor Gray        'Creates System | OS | Recovery Partitions for GPT and MBR Drives in WinPE'
 
     Write-Host -ForegroundColor DarkCyan    '=================================' -NoNewline
     Write-Host -ForegroundColor Cyan        '21.2.10'
-    Write-Host -ForegroundColor White      'Backup-MyBitLockerKeys                 ' -NoNewline
+    Write-Host -ForegroundColor White       'Backup-MyBitLockerKeys                 ' -NoNewline
     Write-Host -ForegroundColor Gray        'Saves all BitLocker ExternalKeys (BEK), KeyPackages (KPG), and RecoveryPasswords (TXT)'
-    Write-Host -ForegroundColor White      'Get-MyBitLockerKeyProtectors           ' -NoNewline
+    Write-Host -ForegroundColor White       'Get-MyBitLockerKeyProtectors           ' -NoNewline
     Write-Host -ForegroundColor Gray        'Object of BitLocker KeyProtectors and RecoveryPasswords'
-    Write-Host -ForegroundColor White      'Save-MyBitLockerExternalKey            ' -NoNewline
+    Write-Host -ForegroundColor White       'Save-MyBitLockerExternalKey            ' -NoNewline
     Write-Host -ForegroundColor Gray        'Saves ExternalKey BEK files to a Path'
-    Write-Host -ForegroundColor White      'Save-MyBitLockerKeyPackage             ' -NoNewline
+    Write-Host -ForegroundColor White       'Save-MyBitLockerKeyPackage             ' -NoNewline
     Write-Host -ForegroundColor Gray        'Saves a key package for a drive for corrupt recovery'
-    Write-Host -ForegroundColor White      'Save-MyBitLockerRecoveryPassword       ' -NoNewline
+    Write-Host -ForegroundColor White       'Save-MyBitLockerRecoveryPassword       ' -NoNewline
     Write-Host -ForegroundColor Gray        'Saves RecoveryPassword TXT files to a Path'
-    Write-Host -ForegroundColor White      'Unlock-MyBitLockerExternalKey          ' -NoNewline
+    Write-Host -ForegroundColor White       'Unlock-MyBitLockerExternalKey          ' -NoNewline
     Write-Host -ForegroundColor Gray        'Unlocks all BitLocker Locked Volumes given a Directory containing ExternalKeys (BEK)'
 
     Write-Host -ForegroundColor DarkCyan    '=================================' -NoNewline
     Write-Host -ForegroundColor Cyan        '21.2.9'
-    Write-Host -ForegroundColor White      'Copy-PSModuleToWim                     ' -NoNewline
+    Write-Host -ForegroundColor White       'Copy-PSModuleToWim                     ' -NoNewline
     Write-Host -ForegroundColor Gray        'Copies a PowerShell Module to a Windows Image .wim file'
-    Write-Host -ForegroundColor White      'Copy-PSModuleToWindowsImage            ' -NoNewline
+    Write-Host -ForegroundColor White       'Copy-PSModuleToWindowsImage            ' -NoNewline
     Write-Host -ForegroundColor Gray        'Copies a PowerShell Module to a mounted Windows Image'
-    Write-Host -ForegroundColor White      'Dismount-MyWindowsImage (Renamed)      ' -NoNewline
+    Write-Host -ForegroundColor White       'Dismount-MyWindowsImage (Renamed)      ' -NoNewline
     Write-Host -ForegroundColor Gray        'Dismounts WIM by Mounted Path, or all WIMs if no Path is specified'
-    Write-Host -ForegroundColor White      'Edit-MyWindowsImage (Renamed)          ' -NoNewline
+    Write-Host -ForegroundColor White       'Edit-MyWindowsImage (Renamed)          ' -NoNewline
     Write-Host -ForegroundColor Gray        'Modify an Online or Offline Windows Image with Cleanup and Appx Stuff'
-    Write-Host -ForegroundColor White      'Mount-MyWindowsImage (Renamed)         ' -NoNewline
+    Write-Host -ForegroundColor White       'Mount-MyWindowsImage (Renamed)         ' -NoNewline
     Write-Host -ForegroundColor Gray        'Give it a WIM, let it mount it'
-    Write-Host -ForegroundColor White      'Update-MyWindowsImage (Renamed)        ' -NoNewline
+    Write-Host -ForegroundColor White       'Update-MyWindowsImage (Renamed)        ' -NoNewline
     Write-Host -ForegroundColor Gray        'Identify, Download, and Apply Updates to a Mounted Windows Image'
 
     Write-Host -ForegroundColor DarkCyan    '=================================' -NoNewline
     Write-Host -ForegroundColor Cyan        '21.2.8'
-    Write-Host -ForegroundColor White      'Get-MyWindowsCapability                ' -NoNewline
+    Write-Host -ForegroundColor White       'Get-MyWindowsCapability                ' -NoNewline
     Write-Host -ForegroundColor Gray        'Detailed version of Get-WindowsCapability'
-    Write-Host -ForegroundColor White      'Get-MyWindowsPackage                   ' -NoNewline
+    Write-Host -ForegroundColor White       'Get-MyWindowsPackage                   ' -NoNewline
     Write-Host -ForegroundColor Gray        'Detailed version of Get-WindowsPackage'
 
     Write-Host -ForegroundColor DarkCyan    '=================================' -NoNewline
     Write-Host -ForegroundColor Cyan        '21.2.3'
-    Write-Host -ForegroundColor White      'Get-ComObjects                         ' -NoNewline
+    Write-Host -ForegroundColor White       'Get-ComObjects                         ' -NoNewline
     Write-Host -ForegroundColor Gray        'List of (mostly all) of the system ComObjects'
-    Write-Host -ForegroundColor White      'Get-ComObjMicrosoftUpdateAutoUpdate    ' -NoNewline
+    Write-Host -ForegroundColor White       'Get-ComObjMicrosoftUpdateAutoUpdate    ' -NoNewline
     Write-Host -ForegroundColor Gray        '(New-Object -ComObject Microsoft.Update.AutoUpdate).Settings'
-    Write-Host -ForegroundColor White      'Get-ComObjMicrosoftUpdateInstaller     ' -NoNewline
+    Write-Host -ForegroundColor White       'Get-ComObjMicrosoftUpdateInstaller     ' -NoNewline
     Write-Host -ForegroundColor Gray        'New-Object -ComObject Microsoft.Update.Installer'
-    Write-Host -ForegroundColor White      'Get-ComObjMicrosoftUpdateServiceManager' -NoNewline
+    Write-Host -ForegroundColor White       'Get-ComObjMicrosoftUpdateServiceManager' -NoNewline
     Write-Host -ForegroundColor Gray        '(New-Object -ComObject Microsoft.Update.ServiceManager).Services'
-    Write-Host -ForegroundColor White      'Get-MyComputerManufacturer             ' -NoNewline
+    Write-Host -ForegroundColor White       'Get-MyComputerManufacturer             ' -NoNewline
     Write-Host -ForegroundColor Gray        'Returns the Computer Manufacturer'
-    Write-Host -ForegroundColor White      'Get-MyComputerModel                    ' -NoNewline
+    Write-Host -ForegroundColor White       'Get-MyComputerModel                    ' -NoNewline
     Write-Host -ForegroundColor Gray        'Returns the Computer Model'
-    Write-Host -ForegroundColor White      'Get-MyBiosSerialNumber                 ' -NoNewline
+    Write-Host -ForegroundColor White       'Get-MyBiosSerialNumber                 ' -NoNewline
     Write-Host -ForegroundColor Gray        'Returns the Computer Serial Number'
-    Write-Host -ForegroundColor White      'Get-MyDefaultAUService                 ' -NoNewline
+    Write-Host -ForegroundColor White       'Get-MyDefaultAUService                 ' -NoNewline
     Write-Host -ForegroundColor Gray        'Returns the default AutoUpdate repo, thanks Ben Whitmore!'
 
     Write-Host -ForegroundColor DarkCyan    '=================================' -NoNewline
@@ -131,11 +144,11 @@ function Get-OSD {
     Write-Host -ForegroundColor Gray        'Returns [System.Windows.Forms.SystemInformation]::VirtualScreen'
     Write-Host -ForegroundColor White       'Get-CimVideoControllerResolution       ' -NoNewline
     Write-Host -ForegroundColor Gray        'Returns the CIM_VideoControllerResolution Properties for the Primary Screen'
-    Write-Host -ForegroundColor White      'Set-DisRes                             ' -NoNewline
+    Write-Host -ForegroundColor White       'Set-DisRes                             ' -NoNewline
     Write-Host -ForegroundColor Gray        'Sets the Primary Display Screen Resolution'
-    Write-Host -ForegroundColor White      'Copy-PSModuleToFolder                  ' -NoNewline
+    Write-Host -ForegroundColor White       'Copy-PSModuleToFolder                  ' -NoNewline
     Write-Host -ForegroundColor Gray        'Copies a PowerShell Module to a specified Destination'
-    Write-Host -ForegroundColor White      'Get-ScreenPNG                          ' -NoNewline
+    Write-Host -ForegroundColor White       'Get-ScreenPNG                          ' -NoNewline
     Write-Host -ForegroundColor Gray        'Takes a screeshot'
     Write-Host -ForegroundColor White       'Set-ClipboardScreenshot                ' -NoNewline
     Write-Host -ForegroundColor Gray        'Sets a Screenshot of the Primary Screen on the Clipboard'
@@ -144,9 +157,9 @@ function Get-OSD {
 
     Write-Host -ForegroundColor DarkCyan    '=================================' -NoNewline
     Write-Host -ForegroundColor Cyan        '21.2.1'
-    Write-Host -ForegroundColor White      'Set-WimExecutionPolicy                 ' -NoNewline
+    Write-Host -ForegroundColor White       'Set-WimExecutionPolicy                 ' -NoNewline
     Write-Host -ForegroundColor Gray        'Sets the PowerShell Execution Policy of a .wim File'
-    Write-Host -ForegroundColor White      'Set-WindowsImageExecutionPolicy        ' -NoNewline
+    Write-Host -ForegroundColor White       'Set-WindowsImageExecutionPolicy        ' -NoNewline
     Write-Host -ForegroundColor Gray        'Sets the PowerShell Execution Policy of a Mounted Windows Image'
 
     Write-Host -ForegroundColor DarkCyan    '==================================' -NoNewline
@@ -165,7 +178,7 @@ function Get-OSD {
     Write-Host -ForegroundColor Gray        'Creates a WINDOWS Partition' #>
     Write-Host -ForegroundColor DarkCyan    '======================' -NoNewline
     Write-Host -ForegroundColor Cyan        'UPDATE THE MODULE'
-    Write-Host -ForegroundColor White      'Update-Module OSD -Force'
+    Write-Host -ForegroundColor Yellow      'Update-Module OSD -Force'
     #======================================================================================================
 }
 <#

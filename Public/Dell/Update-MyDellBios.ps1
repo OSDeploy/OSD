@@ -1,3 +1,30 @@
+<#
+.SYNOPSIS
+Downloads and installed a compatible BIOS Update for your Dell system
+
+.DESCRIPTION
+Downloads and installed a compatible BIOS Update for your Dell system
+BitLocker friendly, but you need Admin Rights
+Logs to $env:TEMP\Update-MyDellBios.log
+
+.EXAMPLE
+Update-MyDellBios
+Downloads and launches the Dell BIOS Update.  Does not automatically install the BIOS Update
+
+.EXAMPLE
+Update-MyDellBios -Silent
+Yes, this will update your BIOS silently, and NOT reboot when its done
+
+.EXAMPLE
+Update-MyDellBios -Silent -Reboot
+Yes, this will update your BIOS silently, AND reboot when its done
+
+.LINK
+https://osd.osdeploy.com/module/functions/dell/update-mydellbios
+
+.NOTES
+21.3.4     Initial Release
+#>
 function Update-MyDellBios {
     [CmdletBinding()]
     param (

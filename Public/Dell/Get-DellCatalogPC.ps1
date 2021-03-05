@@ -1,3 +1,43 @@
+<#
+.SYNOPSIS
+Converts the Dell Catalog PC to a PowerShell Object
+
+.DESCRIPTION
+Converts the Dell Catalog PC to a PowerShell Object
+Requires Internet Access to download Dell CatalogPC.cab
+
+.PARAMETER Component
+Filter the results based on these Components:
+Application
+BIOS
+Driver
+Firmware
+
+.PARAMETER Compatible
+If you have a Dell System, this will filter the results based on your
+ComputerSystem SystemSKUNumber
+
+.EXAMPLE
+Get-DellCatalogPC
+Don't do this, you will get an almost endless list
+
+.EXAMPLE
+$DellCatalogPC = Get-DellCatalogPC
+Yes do this.  Save it in a Variable
+
+.EXAMPLE
+Get-DellCatalogPC -Component BIOS | Out-GridView
+Displays all the Dell BIOS Updates in GridView
+
+.LINK
+https://osd.osdeploy.com/module/functions/dell/get-dellcatalogpc
+
+.LINK
+http://downloads.dell.com/catalog/CatalogPC.cab
+
+.NOTES
+21.3.4     Initial Release
+#>
 function Get-DellCatalogPC {
     [CmdletBinding()]
     param (
@@ -5,81 +45,80 @@ function Get-DellCatalogPC {
         [string]$Component,
 		[switch]$Compatible
     )
+    $VerbosePreference = "Continue"
     #===================================================================================================
     #   Compatibility
     #===================================================================================================
     $SystemSKU = $((Get-WmiObject -Class Win32_ComputerSystem).SystemSKUNumber).Trim()
 	$BIOSVersion = $((Get-WmiObject -Class Win32_BIOS).SMBIOSBIOSVersion).Trim()
+    #===================================================================================================
+    #   Variables
+    #===================================================================================================
+    $DellDownloadsUrl 			= "http://downloads.dell.com/"
+	$CatalogPcUrl	        	= "http://downloads.dell.com/catalog/CatalogPC.cab"
 
-    $VerbosePreference = "Continue"
-
-    $DownloadPath               = "$env:TEMP\OSD"
-	$DellCatalogPCUrl	        = "http://downloads.dell.com/catalog/CatalogPC.cab"
-	$DellCatalogPCFileName      = [string]($DellCatalogPCUrl | Split-Path -Leaf)
-	$DellCatalogPCXmlName       = "CatalogPC.xml"
-    $DownloadFileFullName       = Join-Path $DownloadPath $DellCatalogPCFileName
-    $DellCatalogPCXmlFullName   = Join-Path $DownloadPath $DellCatalogPCXmlName
-    $DellDownloadsURLBase 		= "http://downloads.dell.com/"
-
-	$OfflineCatalog				= "$env:TEMP\Get-DellCatalogPC.xml"
-
-	if (-NOT (Test-Path $DownloadPath)) {
-		New-Item -Path $DownloadPath -ItemType Directory -Force | Out-Null
-	}
-
-    if (Test-Path $OfflineCatalog) {
-        $ExistingFile = Get-Item $OfflineCatalog
+    $DownloadPath               = $env:TEMP
+	$OfflineCatalogPcFullName  	= Join-Path $env:TEMP "Get-DellCatalogPC.xml"
+	$CatalogPcCabName 			= [string]($CatalogPcUrl | Split-Path -Leaf)
+    $CatalogPcCabFullName       = Join-Path $DownloadPath $CatalogPcCabName
+	$CatalogPcXmlName       	= "CatalogPC.xml"
+    $CatalogPCXmlFullName   	= Join-Path $DownloadPath $CatalogPcXmlName
+    #===================================================================================================
+    #   Offline Catalog
+    #===================================================================================================
+    if (Test-Path $OfflineCatalogPcFullName) {
+        $ExistingFile = Get-Item $OfflineCatalogPcFullName
 
         if (((Get-Date) - $ExistingFile.CreationTime).TotalDays -gt 1) {
             Write-Verbose "Removing previous Offline Catalog"
-            Remove-Item -Path $OfflineCatalog -Force -ErrorAction SilentlyContinue
+            Remove-Item -Path $OfflineCatalogPcFullName -Force -ErrorAction SilentlyContinue
         }
     }
 
-	if (Test-Path $OfflineCatalog) {
-		Write-Verbose "Importing Offline Catalog at $OfflineCatalog"
-		$DellUpdateList = Import-Clixml -Path $OfflineCatalog
+	if (Test-Path $OfflineCatalogPcFullName) {
+		Write-Verbose "Importing Offline Catalog at $OfflineCatalogPcFullName"
+		$DellCatalogPc = Import-Clixml -Path $OfflineCatalogPcFullName
 	} else {
-		if (Test-Path $DownloadFileFullName) {
-			$ExistingFile = Get-Item $DownloadFileFullName
+		if (Test-Path $CatalogPcCabFullName) {
+			$ExistingFile = Get-Item $CatalogPcCabFullName
 	
 			if (((Get-Date) - $ExistingFile.CreationTime).TotalDays -gt 1) {
-				Write-Verbose "Removing previously downloaded $DellCatalogPCFileName"
-				Remove-Item -Path $DownloadFileFullName -Force -ErrorAction SilentlyContinue
+				Write-Verbose "Removing previously downloaded $CatalogPcCabName"
+				Remove-Item -Path $CatalogPcCabFullName -Force -ErrorAction SilentlyContinue
 			}
 		}
 	
-		if (-NOT (Test-Path $DownloadFileFullName)) {
-			Write-Verbose "Downloading the Dell Update Catalog from $DellCatalogPCUrl"
-			Write-Verbose "Saving to $DownloadFileFullName"
-			(New-Object System.Net.WebClient).DownloadFile($DellCatalogPCUrl, "$DownloadFileFullName")
+		if (-NOT (Test-Path $CatalogPcCabFullName)) {
+			Write-Verbose "Downloading the Dell Update Catalog from $CatalogPcUrl"
+			Write-Verbose "Saving to $CatalogPcCabFullName"
+			(New-Object System.Net.WebClient).DownloadFile($CatalogPcUrl, "$CatalogPcCabFullName")
 		}
 	
-		if (-NOT (Test-Path $DownloadFileFullName)) {
+		if (-NOT (Test-Path $CatalogPcCabFullName)) {
 			Write-Warning "Could not download the Dell CatalogPC.cab"
 			Break
 		}
 	
 		Write-Verbose "Expanding the Dell Update Catalog"
-		Expand "$DownloadFileFullName" "$DellCatalogPCXmlFullName" | Out-Null
+		Expand "$CatalogPcCabFullName" "$CatalogPCXmlFullName" | Out-Null
 	
-		if (-NOT (Test-Path $DellCatalogPCXmlFullName)) {
-			Write-Warning "Could not expand the Dell $DellCatalogPCXmlName"
+		if (-NOT (Test-Path $CatalogPCXmlFullName)) {
+			Write-Warning "Could not expand the Dell CatalogPC.xml"
 			Break
 		}
 	
-		Write-Verbose "Reading the Dell Update Catalog at $DellCatalogPCXmlFullName"
-		[xml]$XMLDellCatalogPCUrl = Get-Content "$DellCatalogPCXmlFullName" -ErrorAction Stop
+		Write-Verbose "Reading the Dell Update Catalog at $CatalogPCXmlFullName"
+		[xml]$XMLCatalogPcUrl = Get-Content "$CatalogPCXmlFullName" -ErrorAction Stop
 		Write-Verbose "Loading the Dell Update XML Nodes"
-		$DellUpdateList = $XMLDellCatalogPCUrl.Manifest.SoftwareComponent
+		$DellCatalogPc = $XMLCatalogPcUrl.Manifest.SoftwareComponent
 	
-		$DellUpdateList = $DellUpdateList | `
+		$DellCatalogPc = $DellCatalogPc | `
 		Select-Object @{Label="Component";Expression={($_.ComponentType.Display.'#cdata-section'.Trim())};},
 		@{Label="ReleaseDate";Expression = {[datetime] ($_.dateTime)};},
 		@{Label="Name";Expression={($_.Name.Display.'#cdata-section'.Trim())};},
 		#@{Label="Description";Expression={($_.Description.Display.'#cdata-section'.Trim())};},
 		@{Label="DellVersion";Expression={$_.dellVersion};},
-		@{Label="Url";Expression={-join ($DellDownloadsURLBase, $_.path)};},
+		@{Label="Url";Expression={-join ($DellDownloadsUrl, $_.path)};},
 		@{Label="VendorVersion";Expression={$_.vendorVersion};},
 		@{Label="Criticality";Expression={($_.Criticality.Display.'#cdata-section'.Trim())};},
 		@{Label="FileName";Expression = {(split-path -leaf $_.path)};},
@@ -96,23 +135,23 @@ function Get-DellCatalogPC {
 		@{Label="SupportedArchitecture";Expression={($_.SupportedOperatingSystems.OperatingSystem.osArch)};},
 		@{Label="HashMD5";Expression={$_.HashMD5};}
 	
-		Write-Verbose "Exporting Offline Catalog to $OfflineCatalog"
-		$DellUpdateList = $DellUpdateList | Sort-Object ReleaseDate -Descending
-		$DellUpdateList | Export-Clixml -Path $OfflineCatalog
+		Write-Verbose "Exporting Offline Catalog to $OfflineCatalogPcFullName"
+		$DellCatalogPc = $DellCatalogPc | Sort-Object ReleaseDate -Descending
+		$DellCatalogPc | Export-Clixml -Path $OfflineCatalogPcFullName
 	}
     #===================================================================================================
-    #   Compatible
+    #   Filter Compatible
     #===================================================================================================
 	if ($Compatible) {
 		Write-Verbose "Filtering XML for items compatible with SystemSKU $SystemSKU"
-		$DellUpdateList = $DellUpdateList | Where-Object {$_.SupportedSystemID -contains $SystemSKU}
+		$DellCatalogPc = $DellCatalogPc | Where-Object {$_.SupportedSystemID -contains $SystemSKU}
 	}
     #===================================================================================================
-    #   Component
+    #   Filter Component
     #===================================================================================================
 	if ($Component) {
 		Write-Verbose "Filtering XML for $Component"
-		$DellUpdateList = $DellUpdateList | Where-Object {$_.Component -eq $Component}
+		$DellCatalogPc = $DellCatalogPc | Where-Object {$_.Component -eq $Component}
 	}
-    Return $DellUpdateList | Sort-Object -Property ReleaseDate -Descending
+    Return $DellCatalogPc | Sort-Object -Property ReleaseDate -Descending
 }

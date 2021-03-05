@@ -1,3 +1,17 @@
+<#
+.SYNOPSIS
+This will return the latest compatible BIOS Update for your system as a PowerShell Object
+
+.DESCRIPTION
+This will return the latest compatible BIOS Update for your system as a PowerShell Object
+Shortcut for Get-DellCatalogPC -Component BIOS -Compatible
+
+.LINK
+https://osd.osdeploy.com/module/functions/dell/get-mydellbios
+
+.NOTES
+21.3.4     Initial Release
+#>
 function Get-MyDellBios {
     [CmdletBinding()]
     param ()
