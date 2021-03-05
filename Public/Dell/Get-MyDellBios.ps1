@@ -10,7 +10,8 @@ Shortcut for Get-DellCatalogPC -Component BIOS -Compatible
 https://osd.osdeploy.com/module/functions/dell/get-mydellbios
 
 .NOTES
-21.3.4     Initial Release
+21.3.5  Resolved issue with multiple objects
+21.3.4  Initial Release
 #>
 function Get-MyDellBios {
     [CmdletBinding()]
@@ -24,7 +25,7 @@ function Get-MyDellBios {
     #   Get-DellCatalogPC
     #===================================================================================================
 
-    $GetMyDellBios = Get-DellCatalogPC -Component BIOS -Compatible
+    $GetMyDellBios = Get-DellCatalogPC -Component BIOS -Compatible | Sort-Object ReleaseDate -Descending | Select-Object -First 1
 
     Write-Verbose "You are currently running BIOS version $BIOSVersion" -Verbose
 

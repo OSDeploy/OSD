@@ -23,7 +23,8 @@ Yes, this will update your BIOS silently, AND reboot when its done
 https://osd.osdeploy.com/module/functions/dell/update-mydellbios
 
 .NOTES
-21.3.4     Initial Release
+21.3.5  Resolved issue with multiple objects
+21.3.4  Initial Release
 #>
 function Update-MyDellBios {
     [CmdletBinding()]
@@ -39,7 +40,7 @@ function Update-MyDellBios {
         Break
     }
     #===================================================================================================
-    $GetMyDellBios = Get-MyDellBios
+    $GetMyDellBios = Get-MyDellBios | Sort-Object ReleaseDate -Descending | Select-Object -First 1
 
     $SourceUrl = $GetMyDellBios.Url
     $DestinationFile = $GetMyDellBios.FileName
