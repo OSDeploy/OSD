@@ -1,18 +1,17 @@
 <#
 .SYNOPSIS
-Returns Get-Volume for USB Devices
+Returns Get-OSDPartition without USB Drives
 
 .DESCRIPTION
-Returns Get-Volume for USB Devices
+Returns Get-OSDPartition without USB Drives
 
 .LINK
-https://osd.osdeploy.com/module/functions/disk/get-usbvolume
+https://osd.osdeploy.com/module/functions/disk/get-localpartition
 
 .NOTES
-21.3.3      Added SizeGB and SizeRemainingMB
-21.2.25     Initial Release
+21.3.5     Initial Release
 #>
-function Get-USBVolume {
+function Get-LocalPartition {
     [CmdletBinding()]
     param ()
     #======================================================================================================
@@ -27,19 +26,12 @@ function Get-USBVolume {
     $OSDVersion = $($MyInvocation.MyCommand.Module.Version)
     Write-Verbose "OSD $OSDVersion $($MyInvocation.MyCommand.Name)"
     #======================================================================================================
-    #	Get-OSDDisk
+    #	Get-OSDPartition
     #======================================================================================================
-    $GetUSBDisk = Get-USBDisk | Select-Object Number, Path
-    $GetUSBPartition = Get-Partition | Where-Object {$_.DiskNumber -in $($GetUSBDisk).Number}
-
-    $GetUSBVolume = Get-Volume | Where-Object {$_.Path -in $($GetUSBPartition).AccessPaths} | `
-                    Select-Object -Property DriveType, DriveLetter, FileSystemLabel, FileSystem, `
-                    @{Name='SizeGB';Expression={[int]($_.Size / 1000000000)}}, `
-                    @{Name='SizeRemainingMB';Expression={[int]($_.SizeRemaining / 1000000)}}, `
-                    OperationalStatus, HealthStatus
+    $GetLocalPartition = Get-OSDPartition | Where-Object {$_.IsUSB -eq $false}
     #======================================================================================================
     #	Return
     #======================================================================================================
-    Return $GetUSBVolume
+    Return $GetLocalPartition
     #======================================================================================================
 }

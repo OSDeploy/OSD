@@ -31,13 +31,13 @@ PS> Get-OSDDisk -IsSystem:$false
 
 .PARAMETER BusType
 Returns Disk results in BusType values
-Values = 'ATA','NVMe','SAS','SCSI','USB','Virtual'
+Values = '1394','ATA','ATAPI','Fibre Channel','File Backed Virtual','iSCSI','MMC','MAX','Microsoft Reserved','NVMe','RAID','SAS','SATA','SCSI','SD','SSA','Storage Spaces','USB','Virtual'
 PS> Get-OSDDisk -BusType NVMe
 PS> Get-OSDDisk -BusType NVMe,SAS
 
 .PARAMETER BusTypeNot
 Returns Disk results notin BusType values
-Values = 'ATA','NVMe','SAS','SCSI','USB','Virtual'
+Values = '1394','ATA','ATAPI','Fibre Channel','File Backed Virtual','iSCSI','MMC','MAX','Microsoft Reserved','NVMe','RAID','SAS','SATA','SCSI','SD','SSA','Storage Spaces','USB','Virtual'
 PS> Get-OSDDisk -BusTypeNot USB
 PS> Get-OSDDisk -BusTypeNot USB,Virtual
 
@@ -65,7 +65,8 @@ PS> Get-OSDDisk -PartitionStyleNot RAW
 https://osd.osdeploy.com/module/functions/disk/get-localdisk
 
 .NOTES
-21.2.22     Initial Release
+21.3.5  Added more BusTypes
+21.2.22 Initial Release
 #>
 function Get-LocalDisk {
     [CmdletBinding()]
@@ -78,9 +79,9 @@ function Get-LocalDisk {
         [bool]$IsReadOnly,
         [bool]$IsSystem,
 
-        [ValidateSet('ATA','NVMe','SAS','SCSI','USB','Virtual')]
+        [ValidateSet('1394','ATA','ATAPI','Fibre Channel','File Backed Virtual','iSCSI','MMC','MAX','Microsoft Reserved','NVMe','RAID','SAS','SATA','SCSI','SD','SSA','Storage Spaces','USB','Virtual')]
         [string[]]$BusType,
-        [ValidateSet('ATA','NVMe','SAS','SCSI','USB','Virtual')]
+        [ValidateSet('1394','ATA','ATAPI','Fibre Channel','File Backed Virtual','iSCSI','MMC','MAX','Microsoft Reserved','NVMe','RAID','SAS','SATA','SCSI','SD','SSA','Storage Spaces','USB','Virtual')]
         [string[]]$BusTypeNot,
         
         [ValidateSet('SSD','HDD','SCM','Unspecified')]
@@ -107,7 +108,7 @@ function Get-LocalDisk {
     #======================================================================================================
     #	Get-OSDDisk
     #======================================================================================================
-    $GetLocalDisk = Get-OSDDisk -BusTypeNot USB,Virtual
+    $GetLocalDisk = Get-OSDDisk -BusTypeNot 'File Backed Virtual',MAX,'Microsoft Reserved',SD,USB,Virtual
     #======================================================================================================
     #	-Number
     #======================================================================================================

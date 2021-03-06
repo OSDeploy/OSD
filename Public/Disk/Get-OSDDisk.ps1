@@ -31,13 +31,13 @@ PS> Get-OSDDisk -IsSystem:$false
 
 .PARAMETER BusType
 Returns Disk results in BusType values
-Values = 'ATA','NVMe','SAS','SCSI','USB','Virtual'
+Values = '1394','ATA','ATAPI','Fibre Channel','File Backed Virtual','iSCSI','MMC','MAX','Microsoft Reserved','NVMe','RAID','SAS','SATA','SCSI','SD','SSA','Storage Spaces','USB','Virtual'
 PS> Get-OSDDisk -BusType NVMe
 PS> Get-OSDDisk -BusType NVMe,SAS
 
 .PARAMETER BusTypeNot
 Returns Disk results notin BusType values
-Values = 'ATA','NVMe','SAS','SCSI','USB','Virtual'
+Values = '1394','ATA','ATAPI','Fibre Channel','File Backed Virtual','iSCSI','MMC','MAX','Microsoft Reserved','NVMe','RAID','SAS','SATA','SCSI','SD','SSA','Storage Spaces','USB','Virtual'
 PS> Get-OSDDisk -BusTypeNot USB
 PS> Get-OSDDisk -BusTypeNot USB,Virtual
 
@@ -53,20 +53,21 @@ PS> Get-OSDDisk -MediaTypeNot HDD
 
 .PARAMETER PartitionStyle
 Returns Disk results in PartitionStyle values
-Values = 'GPT','MBR','RAW')
+Values = 'GPT','MBR','RAW'
 PS> Get-OSDDisk -PartitionStyle GPT
 
 .PARAMETER PartitionStyleNot
 Returns Disk results notin PartitionStyle values
-Values = 'GPT','MBR','RAW')
+Values = 'GPT','MBR','RAW'
 PS> Get-OSDDisk -PartitionStyleNot RAW
 
 .LINK
 https://osd.osdeploy.com/module/functions/disk/get-osddisk
 
 .NOTES
-19.10.10    Created by David Segura @SeguraOSD
+21.3.5      Added more BusTypes
 21.2.19     Complete redesign
+19.10.10    Created by David Segura @SeguraOSD
 #>
 function Get-OSDDisk {
     [CmdletBinding()]
@@ -79,9 +80,9 @@ function Get-OSDDisk {
         [bool]$IsReadOnly,
         [bool]$IsSystem,
 
-        [ValidateSet('ATA','NVMe','SAS','SCSI','USB','Virtual')]
+        [ValidateSet('1394','ATA','ATAPI','Fibre Channel','File Backed Virtual','iSCSI','MMC','MAX','Microsoft Reserved','NVMe','RAID','SAS','SATA','SCSI','SD','SSA','Storage Spaces','USB','Virtual')]
         [string[]]$BusType,
-        [ValidateSet('ATA','NVMe','SAS','SCSI','USB','Virtual')]
+        [ValidateSet('1394','ATA','ATAPI','Fibre Channel','File Backed Virtual','iSCSI','MMC','MAX','Microsoft Reserved','NVMe','RAID','SAS','SATA','SCSI','SD','SSA','Storage Spaces','USB','Virtual')]
         [string[]]$BusTypeNot,
         
         [ValidateSet('SSD','HDD','SCM','Unspecified')]
@@ -106,7 +107,7 @@ function Get-OSDDisk {
     $OSDVersion = $($MyInvocation.MyCommand.Module.Version)
     Write-Verbose "OSD $OSDVersion $($MyInvocation.MyCommand.Name)"
     #======================================================================================================
-    #	PSBoundParameters
+    #	Get Variables
     #======================================================================================================
     $GetDisk = Get-Disk | Sort-Object DiskNumber | Select-Object -Property *
     $GetPhysicalDisk = Get-PhysicalDisk | Sort-Object DeviceId
@@ -117,7 +118,7 @@ function Get-OSDDisk {
         $GetDisk = $GetDisk | Where-Object {$_.DiskNumber -eq $Number}
     }
     #======================================================================================================
-    #	Add MediaType
+    #	Add Property MediaType
     #======================================================================================================
     foreach ($Disk in $GetDisk) {
         foreach ($PhysicalDisk in $GetPhysicalDisk | Where-Object {$_.DeviceId -eq $Disk.Number}) {

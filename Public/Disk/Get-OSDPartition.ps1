@@ -1,18 +1,17 @@
 <#
 .SYNOPSIS
-Returns Get-Volume for USB Devices
+Similar to Get-Partition, but adds IsUSB Property
 
 .DESCRIPTION
-Returns Get-Volume for USB Devices
+Similar to Get-Partition, but adds IsUSB Property
 
 .LINK
-https://osd.osdeploy.com/module/functions/disk/get-usbvolume
+https://osd.osdeploy.com/module/functions/disk/get-osdpartition
 
 .NOTES
-21.3.3      Added SizeGB and SizeRemainingMB
-21.2.25     Initial Release
+21.3.5      Initial Release
 #>
-function Get-USBVolume {
+function Get-OSDPartition {
     [CmdletBinding()]
     param ()
     #======================================================================================================
@@ -27,19 +26,24 @@ function Get-USBVolume {
     $OSDVersion = $($MyInvocation.MyCommand.Module.Version)
     Write-Verbose "OSD $OSDVersion $($MyInvocation.MyCommand.Name)"
     #======================================================================================================
-    #	Get-OSDDisk
+    #	Get Variables
     #======================================================================================================
-    $GetUSBDisk = Get-USBDisk | Select-Object Number, Path
-    $GetUSBPartition = Get-Partition | Where-Object {$_.DiskNumber -in $($GetUSBDisk).Number}
-
-    $GetUSBVolume = Get-Volume | Where-Object {$_.Path -in $($GetUSBPartition).AccessPaths} | `
-                    Select-Object -Property DriveType, DriveLetter, FileSystemLabel, FileSystem, `
-                    @{Name='SizeGB';Expression={[int]($_.Size / 1000000000)}}, `
-                    @{Name='SizeRemainingMB';Expression={[int]($_.SizeRemaining / 1000000)}}, `
-                    OperationalStatus, HealthStatus
+    $GetUSBDisk = Get-USBDisk
+    $GetPartition = Get-Partition | Sort-Object DiskNumber, PartitionNumber
+    #======================================================================================================
+    #	Add Property IsUSB
+    #======================================================================================================
+    foreach ($Partition in $GetPartition) {
+        if ($Partition.DiskNumber -in $($GetUSBDisk).DiskNumber) {
+            $Partition | Add-Member -NotePropertyName 'IsUSB' -NotePropertyValue $true -Force
+        } else {
+            $Partition | Add-Member -NotePropertyName 'IsUSB' -NotePropertyValue $false -Force
+        }
+    }
     #======================================================================================================
     #	Return
     #======================================================================================================
-    Return $GetUSBVolume
+    Return $GetPartition
     #======================================================================================================
 }
+

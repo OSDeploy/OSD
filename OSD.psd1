@@ -7,7 +7,7 @@
 RootModule = 'OSD.psm1'
 
 # Version number of his module.
-ModuleVersion = '21.3.5.1'
+ModuleVersion = '21.3.5.2'
 
 # Supported PSEditions
 # CompatiblePSEditions = @()
@@ -68,10 +68,17 @@ PowerShellVersion = '5.0'
 # Functions to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no functions to export.
 FunctionsToExport = #'Get-MyAdk','New-MyAdkCopyPE',#ADK
                     'Remove-AppxOnline',#Appx
-                    'Backup-DiskToFFU',#Backup
                     'Get-CimVideoControllerResolution',#Cim
                     'Save-ClipboardImage','Set-ClipboardScreenshot',#Clipboard
                     'Get-ComObjects','Get-ComObjMicrosoftUpdateAutoUpdate','Get-ComObjMicrosoftUpdateInstaller','Get-ComObjMicrosoftUpdateServiceManager',#ComObj
+                    'Backup-DiskToFFU',#Backup
+                    'Clear-LocalDisk','Get-LocalDisk','Get-LocalPartition',
+                    'Clear-USBDisk','Get-USBDisk',
+                    'Get-OSDDisk',
+                    'Get-OSDDrive',
+                    'Get-OSDPartition','Get-USBPartition',
+                    'Get-OSDVolume','Get-USBVolume',
+                    'New-OSDisk',
                     'Get-DisplayAllScreens','Get-DisplayPrimaryBitmapSize','Get-DisplayPrimaryMonitorSize','Get-DisplayPrimaryScaling','Get-DisplayVirtualScreen','Set-DisRes',#Display
                     'Get-DellCatalogPC','Get-MyDellBios','Update-MyDellBios','Get-MyDellDriverCab','Save-MyDellDriverCab',
                     'Get-OSDDriver','Get-OSDDriverWmiQ',#Driver
@@ -81,8 +88,6 @@ FunctionsToExport = #'Get-MyAdk','New-MyAdkCopyPE',#ADK
                     'Get-MyWindowsCapability','Get-MyWindowsPackage',#MyWindows
                     'Dismount-MyWindowsImage','Edit-MyWindowsImage','Mount-MyWindowsImage','Update-MyWindowsImage',#MyWindowsImage
                     'Get-OSD','Get-OSDClass','Get-OSDGather','Get-OSDPower','Get-RegCurrentVersion','Get-SessionsXml','Save-OSDDownload',#OSD
-                    'Clear-LocalDisk','Get-LocalDisk','Get-OSDDisk','New-OSDisk',#OSDDisk
-                    'Clear-USBDisk','Get-USBDisk','Get-USBVolume',
                     'Copy-PSModuleToFolder','Copy-PSModuleToWim','Copy-PSModuleToWindowsImage',#PSModule
                     'Get-ScreenPNG', #ScreenPNG
                     'Get-OSDWinPE','Use-WinPEContent' #WinPE
