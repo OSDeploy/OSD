@@ -35,16 +35,27 @@ function Get-OSD {
     #	Function Information
     #======================================================================================================
     Write-Host -ForegroundColor DarkCyan    '=================================' -NoNewline
+    Write-Host -ForegroundColor Cyan        '21.3.8'
+    Write-Host -ForegroundColor Yellow      'Enable-PEWimPSGallery                  ' -NoNewline
+    Write-Host -ForegroundColor Gray        '[DEV] Get PowerShell Gallery working in WinPE'
+    Write-Host -ForegroundColor Yellow      'Get-LocalPartition                     ' -NoNewline
+    Write-Host -ForegroundColor Gray        'Returns Partitions on Local Disks'
+    Write-Host -ForegroundColor Yellow      'Get-USBPartition                       ' -NoNewline
+    Write-Host -ForegroundColor Gray        'Returns Partitions on USB Drives'
+    Write-Host -ForegroundColor Yellow      'Invoke-UrlExpression                   ' -NoNewline
+    Write-Host -ForegroundColor Gray        '[DEV] Run a RAW PowerShell script from the Cloud'
+
+    Write-Host -ForegroundColor DarkCyan    '=================================' -NoNewline
     Write-Host -ForegroundColor Cyan        '21.3.4'
-    Write-Host -ForegroundColor Yellow      'Get-DellCatalogPC                      ' -NoNewline
+    Write-Host -ForegroundColor White       'Get-DellCatalogPC                      ' -NoNewline
     Write-Host -ForegroundColor Gray        'Downloads the Dell CatalogPC.xml and converts to an PSObject'
-    Write-Host -ForegroundColor Yellow      'Get-MyDellBios                         ' -NoNewline
+    Write-Host -ForegroundColor White       'Get-MyDellBios                         ' -NoNewline
     Write-Host -ForegroundColor Gray        'Gets you information about the latest BIOS Update for your Dell computer'
-    Write-Host -ForegroundColor Yellow      'Get-MyDellDriverCab                    ' -NoNewline
+    Write-Host -ForegroundColor White       'Get-MyDellDriverCab                    ' -NoNewline
     Write-Host -ForegroundColor Gray        'In development'
-    Write-Host -ForegroundColor Yellow      'Save-MyDellDriverCab                   ' -NoNewline
+    Write-Host -ForegroundColor White       'Save-MyDellDriverCab                   ' -NoNewline
     Write-Host -ForegroundColor Gray        'In development'
-    Write-Host -ForegroundColor Yellow      'Update-MyDellBios                      ' -NoNewline
+    Write-Host -ForegroundColor White       'Update-MyDellBios                      ' -NoNewline
     Write-Host -ForegroundColor Gray        'Downloads and Installs the lastest Dell BIOS Update for your Dell computer'
 
     Write-Host -ForegroundColor DarkCyan    '=================================' -NoNewline
