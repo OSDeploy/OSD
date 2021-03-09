@@ -129,7 +129,7 @@ function Get-OSDDisk {
     #======================================================================================================
     #	Exclude Empty Disks or Card Readers
     #======================================================================================================
-    $GetDisk = $GetDisk | Where-Object {$_.AllocatedSize -gt 0}
+    $GetDisk = $GetDisk | Where-Object {$_.Size -gt 0}
     $GetDisk = $GetDisk | Where-Object {$_.IsOffline -eq $false}
     $GetDisk = $GetDisk | Where-Object {$_.OperationalStatus -ne 'No Media'}
     #======================================================================================================
