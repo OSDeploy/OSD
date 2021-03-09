@@ -65,6 +65,7 @@ PS> Get-OSDDisk -PartitionStyleNot RAW
 https://osd.osdeploy.com/module/functions/disk/get-osddisk
 
 .NOTES
+21.3.9      Removed Offline Drives
 21.3.5      Added more BusTypes
 21.2.19     Complete redesign
 19.10.10    Created by David Segura @SeguraOSD
@@ -125,6 +126,12 @@ function Get-OSDDisk {
             $Disk | Add-Member -NotePropertyName 'MediaType' -NotePropertyValue $PhysicalDisk.MediaType
         }
     }
+    #======================================================================================================
+    #	Exclude Empty Disks or Card Readers
+    #======================================================================================================
+    $GetDisk = $GetDisk | Where-Object {$_.AllocatedSize -gt 0}
+    $GetDisk = $GetDisk | Where-Object {$_.IsOffline -eq $false}
+    $GetDisk = $GetDisk | Where-Object {$_.OperationalStatus -ne 'No Media'}
     #======================================================================================================
     #	Filters
     #======================================================================================================
