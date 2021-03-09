@@ -43,7 +43,7 @@ function Update-MyDellBios {
     #===================================================================================================
     #   Require Dell Computer
     #===================================================================================================
-    if (Get-MyComputerManufacturer -Brief -ne 'Dell') {
+    if ((Get-MyComputerManufacturer -Brief) -ne 'Dell') {
         Write-Warning "Dell computer is required for this function"
         Break
     }
@@ -81,6 +81,12 @@ function Update-MyDellBios {
         } else {
             Write-Verbose "BitLocker was not enabled" -Verbose
         }
+    } else {
+        Write-Verbose "Downloading Flash64W using WebClient https://downloads.dell.com/FOLDER04165397M/1/Flash64W.zip" -Verbose
+        Save-OSDDownload -SourceUrl 'https://downloads.dell.com/FOLDER04165397M/1/Flash64W.zip' -DownloadFolder $env:TEMP -ErrorAction SilentlyContinue | Out-Null
+        if (Test-Path "$env:TEMP\Flash64W.zip") {
+            Expand-Archive -Path "$env:TEMP\Flash64W.zip" -DestinationPath $env:TEMP -Force
+        }
     }
 
     $BiosLog = Join-Path $env:TEMP 'Update-MyDellBios.log'
@@ -93,6 +99,16 @@ function Update-MyDellBios {
     }
 
     Write-Verbose "Starting BIOS Update" -Verbose 
-    Write-Verbose "$OutFile $Arguments" -Verbose
-    Start-Process -FilePath $OutFile -ArgumentList $Arguments -Wait
+    if (($env:SystemDrive -eq 'X:') -and ($env:PROCESSOR_ARCHITECTURE -match '64')) {
+        if (-NOT (Test-Path "$env:TEMP\Flash64W.EXE")) {
+            Write-Warning "Unable to locate $env:TEMP\Flash64W.exe"
+            Break
+        } else {
+            Start-Process -FilePath "$env:TEMP\Flash64W.exe" -ArgumentList "/b=$DestinationFile $Arguments" -Wait
+        }
+    } else {
+
+        Write-Verbose "$OutFile $Arguments" -Verbose
+        Start-Process -FilePath $OutFile -ArgumentList $Arguments -Wait
+    }
 }

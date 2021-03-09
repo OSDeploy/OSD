@@ -64,7 +64,8 @@ Returns a brief Computer Manufacturer
 https://osd.osdeploy.com/module/functions/getmy
 
 .NOTES
-21.2.2     Initial Release
+21.3.9  Updated Microsoft
+21.2.2  Initial Release
 #>
 function Get-MyComputerManufacturer {
     [CmdletBinding()]
@@ -81,6 +82,7 @@ function Get-MyComputerManufacturer {
         elseif ($GetMyComputerManufacturer -match 'Lenovo') {$GetMyComputerManufacturer = 'Lenovo'}
         elseif ($GetMyComputerManufacturer -match 'Hewlett Packard') {$GetMyComputerManufacturer = 'HP'}
         elseif ($GetMyComputerManufacturer -match 'HP') {$GetMyComputerManufacturer = 'HP'}
+        elseif ($GetMyComputerManufacturer -match 'Microsoft') {$GetMyComputerManufacturer = 'Microsoft'}
         elseif ($GetMyComputerManufacturer -match 'to be filled') {$GetMyComputerManufacturer = 'Generic'}
     }
 

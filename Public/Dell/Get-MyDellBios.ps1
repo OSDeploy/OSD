@@ -19,7 +19,7 @@ function Get-MyDellBios {
     #===================================================================================================
     #   Require Dell Computer
     #===================================================================================================
-    if (Get-MyComputerManufacturer -Brief -ne 'Dell') {
+    if ((Get-MyComputerManufacturer -Brief) -ne 'Dell') {
         Write-Warning "Dell computer is required for this function"
         Break
     }
