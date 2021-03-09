@@ -35,16 +35,16 @@ function Enable-PEWimPSGallery {
     process {
         foreach ($Input in $ImagePath) {
             #===============================================================================================
-            $MountWindowsImageOSD = Mount-MyWindowsImage -ImagePath $Input -Index $Index
-            $MountWindowsImageOSD | Set-WindowsImageWinPEEnvironment
+            $WindowsImageDescription = (Get-WindowsImage -ImagePath $Input).ImageDescription
+            Write-Verbose "WindowsImageDescription: $WindowsImageDescription"
 
-            Write-Verbose "Saving PackageManagement to $($MountWindowsImageOSD.Path)\Program Files\WindowsPowerShell\Modules"
-            Save-Module -Name PackageManagement "$($MountWindowsImageOSD.Path)\Program Files\WindowsPowerShell\Modules" -Force
-
-            Write-Verbose "Saving PowerShellGet to $($MountWindowsImageOSD.Path)\Program Files\WindowsPowerShell\Modules"
-            Save-Module -Name PowerShellGet "$($MountWindowsImageOSD.Path)\Program Files\WindowsPowerShell\Modules" -Force
-
-            $MountWindowsImageOSD | Dismount-MyWindowsImage -Save
+            if (($WindowsImageDescription -match 'PE') -or ($WindowsImageDescription -match 'Recovery') -or ($WindowsImageDescription -match 'Setup')) {
+                $MountMyWindowsImage = Mount-MyWindowsImage -ImagePath $Input -Index $Index
+                $MountMyWindowsImage | Enable-PEWindowsImagePSGallery
+                $MountMyWindowsImage | Dismount-MyWindowsImage -Save
+            } else {
+                Write-Warning "Windows Image does not appear to be WinPE, WinRE, or WinSE"
+            }
             #===============================================================================================
         }
     }

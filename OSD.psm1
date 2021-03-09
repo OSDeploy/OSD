@@ -2,11 +2,29 @@
 #   Import Functions
 #   https://github.com/RamblingCookieMonster/PSStackExchange/blob/master/PSStackExchange/PSStackExchange.psm1
 #===================================================================================================
-if ($env:SystemDrive -eq 'X:') {
-    $OSDPublicFunctions  = @( Get-ChildItem -Path ("$PSScriptRoot\Public\*.ps1","$PSScriptRoot\PublicPE\*.ps1") -Recurse -ErrorAction SilentlyContinue )
-} else {
+
+if ($env:SystemDrive -ne 'X:') {
     $OSDPublicFunctions  = @( Get-ChildItem -Path ("$PSScriptRoot\Public\*.ps1","$PSScriptRoot\PublicOS\*.ps1") -Recurse -ErrorAction SilentlyContinue )
 }
+
+if ($env:SystemDrive -eq 'X:') {
+    $OSDPublicFunctions  = @( Get-ChildItem -Path ("$PSScriptRoot\Public\*.ps1","$PSScriptRoot\PublicPE\*.ps1") -Recurse -ErrorAction SilentlyContinue )
+
+    [System.Environment]::SetEnvironmentVariable('APPDATA', (Join-Path $env:USERPROFILE 'AppData\Roaming'),[System.EnvironmentVariableTarget]::Machine)
+    [System.Environment]::SetEnvironmentVariable('HOMEDRIVE', $env:SystemDrive,[System.EnvironmentVariableTarget]::Machine)
+    [System.Environment]::SetEnvironmentVariable('HOMEPATH', (($env:USERPROFILE) -split ":")[1],[System.EnvironmentVariableTarget]::Machine)
+    [System.Environment]::SetEnvironmentVariable('LOCALAPPDATA', (Join-Path $env:USERPROFILE 'AppData\Local'),[System.EnvironmentVariableTarget]::Machine)
+
+    $Path = "HKCU:\Volatile Environment"
+    if (-NOT (Test-Path -Path $Path)) {
+        New-Item -Path $Path -Force
+        New-ItemProperty -Path $Path -Name "APPDATA" -Value (Join-Path $env:USERPROFILE 'AppData\Roaming') -Force
+        New-ItemProperty -Path $Path -Name "HOMEDRIVE" -Value $env:SystemDrive -Force
+        New-ItemProperty -Path $Path -Name "HOMEPATH" -Value (($env:USERPROFILE) -split ":")[1] -Force
+        New-ItemProperty -Path $Path -Name "LOCALAPPDATA" -Value (Join-Path $env:USERPROFILE 'AppData\Local') -Force
+    }
+}
+
 $OSDPrivateFunctions = @( Get-ChildItem -Path $PSScriptRoot\Private\*.ps1 -Recurse -ErrorAction SilentlyContinue )
 
 foreach ($Import in @($OSDPublicFunctions + $OSDPrivateFunctions)) {

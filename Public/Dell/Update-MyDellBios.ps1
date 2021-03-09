@@ -23,6 +23,7 @@ Yes, this will update your BIOS silently, AND reboot when its done
 https://osd.osdeploy.com/module/functions/dell/update-mydellbios
 
 .NOTES
+21.3.9  Started adding logic for WinPE
 21.3.5  Resolved issue with multiple objects
 21.3.4  Initial Release
 #>
@@ -37,6 +38,13 @@ function Update-MyDellBios {
     #===================================================================================================
     if ((Get-OSDGather -Property IsAdmin) -eq $false) {
         Write-Warning "$($MyInvocation.MyCommand) requires Admin Rights ELEVATED"
+        Break
+    }
+    #===================================================================================================
+    #   Require Dell Computer
+    #===================================================================================================
+    if (Get-MyComputerManufacturer -Brief -ne 'Dell') {
+        Write-Warning "Dell computer is required for this function"
         Break
     }
     #===================================================================================================
@@ -58,28 +66,30 @@ function Update-MyDellBios {
 
     if (-NOT (Test-Path $OutFile)) {Write-Warning "Unable to download $SourceUrl"; Break}
 
-    Write-Verbose "Checking for BitLocker" -Verbose
-    #http://www.dptechjournal.net/2017/01/powershell-script-to-deploy-dell.html
-    #https://github.com/dptechjournal/Dell-Firmware-Updates/blob/master/Install_Dell_Bios_upgrade.ps1
-    $GetBitLockerVolume = Get-BitLockerVolume | Where-Object { $_.ProtectionStatus -eq "On" -and $_.VolumeType -eq "OperatingSystem" }
-    if ($GetBitLockerVolume) {
-        Write-Verbose "Suspending BitLocker for 1 Reboot"
-        Suspend-BitLocker -Mountpoint $GetBitLockerVolume -RebootCount 1
-        if (Get-BitLockerVolume -MountPoint $GetBitLockerVolume | Where-Object ProtectionStatus -eq "On") {
-            Write-Warning "Couldn't suspend Bitlocker"
-            Break
+    if ($env:SystemDrive -ne 'X:') {
+        Write-Verbose "Checking for BitLocker" -Verbose
+        #http://www.dptechjournal.net/2017/01/powershell-script-to-deploy-dell.html
+        #https://github.com/dptechjournal/Dell-Firmware-Updates/blob/master/Install_Dell_Bios_upgrade.ps1
+        $GetBitLockerVolume = Get-BitLockerVolume | Where-Object { $_.ProtectionStatus -eq "On" -and $_.VolumeType -eq "OperatingSystem" }
+        if ($GetBitLockerVolume) {
+            Write-Verbose "Suspending BitLocker for 1 Reboot"
+            Suspend-BitLocker -Mountpoint $GetBitLockerVolume -RebootCount 1
+            if (Get-BitLockerVolume -MountPoint $GetBitLockerVolume | Where-Object ProtectionStatus -eq "On") {
+                Write-Warning "Couldn't suspend Bitlocker"
+                Break
+            }
+        } else {
+            Write-Verbose "BitLocker was not enabled" -Verbose
         }
-    } else {
-        Write-Verbose "BitLocker was not enabled" -Verbose
     }
 
     $BiosLog = Join-Path $env:TEMP 'Update-MyDellBios.log'
+    
     $Arguments = "/l=`"$BiosLog`""
-    if ($Silent) {
-        $Arguments = $Arguments + " /s"
-    }
     if ($Reboot) {
-        $Arguments = $Arguments + " /r"
+        $Arguments = $Arguments + " /r /s"
+    } elseif ($Silent) {
+        $Arguments = $Arguments + " /s"
     }
 
     Write-Verbose "Starting BIOS Update" -Verbose 

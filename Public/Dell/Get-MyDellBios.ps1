@@ -17,6 +17,13 @@ function Get-MyDellBios {
     [CmdletBinding()]
     param ()
     #===================================================================================================
+    #   Require Dell Computer
+    #===================================================================================================
+    if (Get-MyComputerManufacturer -Brief -ne 'Dell') {
+        Write-Warning "Dell computer is required for this function"
+        Break
+    }
+    #===================================================================================================
     #   Current System Information
     #===================================================================================================
     $SystemSKU = $((Get-WmiObject -Class Win32_ComputerSystem).SystemSKUNumber).Trim()

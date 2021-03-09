@@ -54,9 +54,9 @@ function Set-WimExecutionPolicy {
     process {
         foreach ($Input in $ImagePath) {
             #===============================================================================================
-            $MountWindowsImageOSD = Mount-MyWindowsImage -ImagePath $Input -Index $Index
-            $MountWindowsImageOSD | Set-WindowsImageExecutionPolicy -ExecutionPolicy $ExecutionPolicy
-            $MountWindowsImageOSD | Dismount-MyWindowsImage -Save
+            $MountMyWindowsImage = Mount-MyWindowsImage -ImagePath $Input -Index $Index
+            $MountMyWindowsImage | Set-WindowsImageExecutionPolicy -ExecutionPolicy $ExecutionPolicy
+            $MountMyWindowsImage | Dismount-MyWindowsImage -Save
             #===============================================================================================
         }
     }

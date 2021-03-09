@@ -1,6 +1,13 @@
 function Save-MyDellDriverCab {
     [CmdletBinding()]
     param ()
+    #===================================================================================================
+    #   Require Dell Computer
+    #===================================================================================================
+    if (Get-MyComputerManufacturer -Brief -ne 'Dell') {
+        Write-Warning "Dell computer is required for this function"
+        Break
+    }
 
     Write-Verbose "Save-MyDellDriverCab: This function is currently in development" -Verbose
 

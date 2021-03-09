@@ -1,6 +1,13 @@
 function Get-MyDellDriverCab {
     [CmdletBinding()]
     param ()
+    #===================================================================================================
+    #   Require Dell Computer
+    #===================================================================================================
+    if (Get-MyComputerManufacturer -Brief -ne 'Dell') {
+        Write-Warning "Dell computer is required for this function"
+        Break
+    }
 
     Write-Verbose "Get-MyDellDriverCab: This function is currently in development"
     Write-Verbose "Get-MyDellDriverCab: Results are for Windows 10 x64 only"
