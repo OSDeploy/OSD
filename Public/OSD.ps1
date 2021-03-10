@@ -35,12 +35,19 @@ function Get-OSD {
     #	Function Information
     #======================================================================================================
     Write-Host -ForegroundColor DarkCyan    '=================================' -NoNewline
+    Write-Host -ForegroundColor Cyan        '21.3.10'
+    Write-Host -ForegroundColor Yellow      'Get-MyADK                              ' -NoNewline
+    Write-Host -ForegroundColor Gray        'Just a simple helper function to get ADK Variables'
+    Write-Host -ForegroundColor Yellow      'New-OSDCloudWinPE                      ' -NoNewline
+    Write-Host -ForegroundColor Gray        '[DEV] Creates an OSDCloud ready WinPE from the Windows ADK'
+
+    Write-Host -ForegroundColor DarkCyan    '=================================' -NoNewline
     Write-Host -ForegroundColor Cyan        '21.3.8'
     Write-Host -ForegroundColor Yellow      'Enable-PEWimPSGallery                  ' -NoNewline
     Write-Host -ForegroundColor Gray        '[DEV] Get PowerShell Gallery working in WinPE'
-    Write-Host -ForegroundColor Yellow      'Get-LocalPartition                     ' -NoNewline
+    Write-Host -ForegroundColor White       'Get-LocalPartition                     ' -NoNewline
     Write-Host -ForegroundColor Gray        'Returns Partitions on Local Disks'
-    Write-Host -ForegroundColor Yellow      'Get-USBPartition                       ' -NoNewline
+    Write-Host -ForegroundColor White       'Get-USBPartition                       ' -NoNewline
     Write-Host -ForegroundColor Gray        'Returns Partitions on USB Drives'
     Write-Host -ForegroundColor Yellow      'Invoke-UrlExpression                   ' -NoNewline
     Write-Host -ForegroundColor Gray        '[DEV] Run a RAW PowerShell script from the Cloud'

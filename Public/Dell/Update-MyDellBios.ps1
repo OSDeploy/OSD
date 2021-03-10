@@ -45,7 +45,7 @@ function Update-MyDellBios {
     #===================================================================================================
     if ((Get-MyComputerManufacturer -Brief) -ne 'Dell') {
         Write-Warning "Dell computer is required for this function"
-        Break
+        Return $null
     }
     #===================================================================================================
     $GetMyDellBios = Get-MyDellBios | Sort-Object ReleaseDate -Descending | Select-Object -First 1

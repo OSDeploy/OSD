@@ -7,7 +7,7 @@
 RootModule = 'OSD.psm1'
 
 # Version number of his module.
-ModuleVersion = '21.3.9.5'
+ModuleVersion = '21.3.10.1'
 
 # Supported PSEditions
 # CompatiblePSEditions = @()
@@ -66,7 +66,7 @@ PowerShellVersion = '5.0'
 # NestedModules = @()
 
 # Functions to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no functions to export.
-FunctionsToExport = #'Get-MyAdk','New-MyAdkCopyPE',#ADK
+FunctionsToExport = 'Get-MyAdk','New-MyAdkCopyPE','New-OSDCloudWinPE',#ADK
                     'Remove-AppxOnline',#Appx
                     'Get-CimVideoControllerResolution',#Cim
                     'Save-ClipboardImage','Set-ClipboardScreenshot',#Clipboard
