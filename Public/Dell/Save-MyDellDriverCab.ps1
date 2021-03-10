@@ -11,21 +11,15 @@ function Save-MyDellDriverCab {
     #===================================================================================================
     #   Get-MyDellDriverCab
     #===================================================================================================
-    $GetMyDellDriverCab = Get-MyDellDriverCab
+    $GetMyDellDriverCab = Get-MyDellDriverCab | Select-Object LastUpdate,DriverName,Make,Generation,Model,SystemSku,DriverVersion,DriverReleaseId,OSVersion,OSArch,DownloadFile,SizeMB,DriverUrl,DriverInfo,Hash
 
     if ($GetMyDellDriverCab) {
-
         $GetMyDellDriverCab
 
         $DriverName = $GetMyDellDriverCab.DriverName
-        $DriverVersion = $GetMyDellDriverCab.DriverVersion
-        $DriverReleaseId = $GetMyDellDriverCab.DriverReleaseId
-        $OsVersion = $GetMyDellDriverCab.OsVersion
-        $OsArch = $GetMyDellDriverCab.OsArch
         $DownloadFile = $GetMyDellDriverCab.DownloadFile
         $SizeMB = $GetMyDellDriverCab.SizeMB
         $DriverUrl = $GetMyDellDriverCab.DriverUrl
-        $DriverInfo = $GetMyDellDriverCab.DriverInfo
         $Hash = $GetMyDellDriverCab.Hash
 
         $Source = $DriverUrl
@@ -46,8 +40,7 @@ function Save-MyDellDriverCab {
         if (Get-Command 'curl.exe') {
             if (-NOT (Test-Path $OutFile)) {
                 Write-Host "Downloading using cURL" -ForegroundColor Cyan
-
-                curl.exe -L -o "$OutFile" $Source 2>&1 | ForEach-Object{ "$_" }
+                & curl.exe --location --output "$OutFile" --progress-bar --url $Source
             }
         } else {
             Write-Warning "If you had cURL, this download would be much faster ..."
