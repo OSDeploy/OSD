@@ -4,8 +4,8 @@ function Get-MyDellDriverCab {
     #===================================================================================================
     #   Require Dell Computer
     #===================================================================================================
-    if (Get-MyComputerManufacturer -Brief -ne 'Dell') {
-        Write-Warning "Dell computer is required for this function"
+    if ((Get-MyComputerManufacturer -Brief) -ne 'Dell') {
+        Write-PrefixTime; Write-Warning "Dell computer is required for this function"
         Break
     }
 

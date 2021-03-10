@@ -4,14 +4,13 @@ function Save-MyDellDriverCab {
     #===================================================================================================
     #   Require Dell Computer
     #===================================================================================================
-    if (Get-MyComputerManufacturer -Brief -ne 'Dell') {
+    if ((Get-MyComputerManufacturer -Brief) -ne 'Dell') {
         Write-Warning "Dell computer is required for this function"
         Break
     }
-
-    Write-Verbose "Save-MyDellDriverCab: This function is currently in development" -Verbose
-
-    Write-Verbose "Save-MyDellDriverCab: Gathering information from Dell ... please wait" -Verbose
+    #===================================================================================================
+    #   Get-MyDellDriverCab
+    #===================================================================================================
     $GetMyDellDriverCab = Get-MyDellDriverCab
 
     if ($GetMyDellDriverCab) {
@@ -29,31 +28,54 @@ function Save-MyDellDriverCab {
         $DriverInfo = $GetMyDellDriverCab.DriverInfo
         $Hash = $GetMyDellDriverCab.Hash
 
-        $OutFile = Join-Path 'C:\Drivers' $DownloadFile
+        $Source = $DriverUrl
+        $Destination = 'C:\Drivers'
+        $OutFile = Join-Path $Destination $DownloadFile
 
-        #Download the Driver
-        if (-NOT (Test-Path $OutFile)) {
-            Write-Verbose "Downloading using BITS $DriverUrl" -Verbose
-            Write-Verbose "This will take a while to download this $SizeMB MB file" -Verbose
-            Save-OSDDownload -BitsTransfer -SourceUrl $DriverUrl -DownloadFolder 'C:\Drivers' -ErrorAction SilentlyContinue | Out-Null
+        if (-NOT (Test-Path "$Destination")) {
+            New-Item $Destination -ItemType Directory -Force -ErrorAction Stop | Out-Null
+        }
+
+        Write-Host "Source: $Source" -ForegroundColor Cyan
+        Write-Host "Destination: $Destination" -ForegroundColor Cyan
+        Write-Host "OutFile: $OutFile" -ForegroundColor Cyan
+        Write-Host "Be patient ... this is a $SizeMB MB file" -ForegroundColor Cyan
+        #===================================================================================================
+        #   Download Driver CAB
+        #===================================================================================================
+        if (Get-Command 'curl.exe') {
+            if (-NOT (Test-Path $OutFile)) {
+                Write-Host "Downloading using cURL" -ForegroundColor Cyan
+
+                curl.exe -L -o "$OutFile" $Source 2>&1 | ForEach-Object{ "$_" }
+            }
+        } else {
+            Write-Warning "If you had cURL, this download would be much faster ..."
         }
         if (-NOT (Test-Path $OutFile)) {
-            Write-Verbose "BITS didn't work ..."
-            Write-Verbose "Downloading using WebClient $DriverUrl" -Verbose
-            Write-Verbose "This will take a while to download this $SizeMB MB file" -Verbose
-            Save-OSDDownload -SourceUrl $DriverUrl -DownloadFolder 'C:\Drivers' -ErrorAction SilentlyContinue | Out-Null
+            Write-Host "Downloading using BITS" -ForegroundColor Cyan
+            Save-OSDDownload -BitsTransfer -SourceUrl $Source -DownloadFolder $Destination -ErrorAction SilentlyContinue | Out-Null
+        }
+        if (-NOT (Test-Path $OutFile)) {
+            Write-Host "Downloading using WebClient" -ForegroundColor Cyan
+            Save-OSDDownload -SourceUrl $Source -DownloadFolder $Destination -ErrorAction SilentlyContinue | Out-Null
+        }
+        
+        if (Test-Path $OutFile) {
+            $MyDellDriverFile = Get-Item $OutFile
+            $ExpandPath = Join-Path $Destination $DriverName
+
+            if (-NOT (Test-Path "$ExpandPath")) {
+                New-Item $ExpandPath -ItemType Directory -Force -ErrorAction Stop | Out-Null
+            }
+    
+            Write-Host "Expanding $DownloadFile to $ExpandPath" -ForegroundColor Cyan
+            Expand -R "$($MyDellDriverFile.FullName)" -F:* "$ExpandPath" | Out-Null
+            Return (Get-Item $ExpandPath).FullName
+        } else {
+            Write-Warning "Unable to download the Driver Cab"
+            Return $null
         }
 
-        if (-NOT (Test-Path $OutFile)) {Write-Warning "Unable to download the Driver Cab"; Break}
-
-        $MyDellDriverFile = Get-Item $OutFile
-        $ExpandPath = Join-Path 'C:\Drivers' $DriverName
-        if (-not (Test-Path "$ExpandPath")) {
-            New-Item $ExpandPath -ItemType Directory -Force -ErrorAction Stop | Out-Null
-        }
-
-        Write-Verbose "Expanding $DownloadFile to $ExpandPath ... please wait" -Verbose
-        Expand -R "$($MyDellDriverFile.FullName)" -F:* "$ExpandPath" | Out-Null
-        Return (Get-Item $ExpandPath).FullName
     }
 }
