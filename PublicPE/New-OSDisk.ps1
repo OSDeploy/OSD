@@ -248,16 +248,16 @@ function New-OSDisk {
     #======================================================================================================
     #Create from RAW Disk
     if (($OSDisk.NumberOfPartitions -eq 0) -and ($OSDisk.PartitionStyle -eq 'RAW')) {
-        Write-Host -ForegroundColor Green -BackgroundColor Black "Initializing Disk $($OSDisk.Number) as $PartitionStyle"
+        Write-Verbose "Initializing Disk $($OSDisk.Number) as $PartitionStyle"
         $OSDisk | Initialize-Disk -PartitionStyle $PartitionStyle
 
     }
     #Create from unpartitioned Disk
     elseif (($OSDisk.NumberOfPartitions -eq 0) -and ($OSDisk.PartitionStyle -ne $PartitionStyle)) {
-        Write-Host -ForegroundColor Green -BackgroundColor Black "Cleaning Disk $($OSDisk.Number)"
+        Write-Verbose "Cleaning Disk $($OSDisk.Number)"
         Diskpart-Clean -DiskNumber $OSDisk.Number
 
-        Write-Host -ForegroundColor Green -BackgroundColor Black "Initializing Disk $($OSDisk.Number) as $PartitionStyle"
+        Write-Verbose "Initializing Disk $($OSDisk.Number) as $PartitionStyle"
         $OSDisk | Initialize-Disk -PartitionStyle $PartitionStyle
     }
     #Prompt for confirmation to clear the existing disk
@@ -272,9 +272,9 @@ function New-OSDisk {
 
         #Clear and Initialize Disk
         if ($ConfirmClearDisk -eq 'C') {
-            Write-Host -ForegroundColor Green -BackgroundColor Black "Cleaning Disk $($OSDisk.Number)"
+            Write-Verbose "Cleaning Disk $($OSDisk.Number)"
             Diskpart-Clean -DiskNumber $OSDisk.Number
-            Write-Host -ForegroundColor Green -BackgroundColor Black "Initializing Disk $($OSDisk.Number) as $PartitionStyle"
+            Write-Verbose "Initializing Disk $($OSDisk.Number) as $PartitionStyle"
             $OSDisk | Initialize-Disk -PartitionStyle $PartitionStyle
         }
 
@@ -290,7 +290,7 @@ function New-OSDisk {
     $GetVolume = Get-Volume | Where-Object {$_.DriveLetter -eq 'S'}
 
     if ($GetVolume) {
-        Write-Host -ForegroundColor Green -BackgroundColor Black "Reassigning Drive Letter S"
+        Write-Verbose "Reassigning Drive Letter S"
         #Get-Partition -DriveLetter 'S' | Set-Partition -NewDriveLetter (Get-LastAvailableDriveLetter)
         Get-Volume -DriveLetter S | Get-Partition | Remove-PartitionAccessPath -AccessPath 'S:\' -ErrorAction SilentlyContinue
     }
@@ -312,7 +312,7 @@ function New-OSDisk {
     $GetVolume = Get-Volume | Where-Object {$_.DriveLetter -eq 'C'}
 
     if ($GetVolume) {
-        Write-Host -ForegroundColor Green -BackgroundColor Black "Reassigning Drive Letter C"
+        Write-Verbose "Reassigning Drive Letter C"
         Get-Partition -DriveLetter 'C' | Set-Partition -NewDriveLetter (Get-LastAvailableDriveLetter)
     }
     #======================================================================================================
@@ -321,7 +321,7 @@ function New-OSDisk {
     $GetVolume = Get-Volume | Where-Object {$_.DriveLetter -eq 'R'}
 
     if ($GetVolume) {
-        Write-Host -ForegroundColor Green -BackgroundColor Black "Reassigning Drive Letter R"
+        Write-Verbose "Reassigning Drive Letter R"
         #Get-Partition -DriveLetter 'R' | Set-Partition -NewDriveLetter (Get-LastAvailableDriveLetter)
         Get-Volume -DriveLetter R | Get-Partition | Remove-PartitionAccessPath -AccessPath 'R:\' -ErrorAction SilentlyContinue
     }
@@ -354,10 +354,10 @@ function New-OSDisk {
             do {$ConfirmClearDisk = Read-Host "Press C to CLEAR this Disk, S to Skip, or X to Exit"}
             until (($ConfirmClearDisk -eq 'C') -or ($ConfirmClearDisk -eq 'S') -or ($ConfirmClearDisk -eq 'X'))
             if ($ConfirmClearDisk -eq 'C') {
-                Write-Host -ForegroundColor Green -BackgroundColor Black "Cleaning Disk $($Item.Number)"
+                Write-Verbose "Cleaning Disk $($Item.Number)"
                 Diskpart-Clean -DiskNumber $Item.Number
 
-                Write-Host -ForegroundColor Green -BackgroundColor Black "Initializing Disk $($Item.Number) as $PartitionStyle"
+                Write-Verbose "Initializing Disk $($Item.Number) as $PartitionStyle"
                 $Item | Initialize-Disk -PartitionStyle $PartitionStyle
             }
             if ($ConfirmClearDisk -eq 'S') {

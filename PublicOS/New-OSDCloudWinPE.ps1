@@ -2,19 +2,26 @@ function New-OSDCloudWinPE {
     [CmdletBinding()]
     param (
         [Parameter(ValueFromPipelineByPropertyName = $true)]
-        [string]$Path = (Join-Path $env:TEMP (Get-Random)),
+        [string]$BuildPath = (Join-Path $env:TEMP (Get-Random)),
 
         [Parameter(ValueFromPipelineByPropertyName = $true)]
         [ValidateSet('amd64','x86')]
         [string]$WinPEArch = 'amd64'
     )
     begin {
-        $ErrorActionPreference = 'Stop'
         #===================================================================================================
         #   Require Admin Rights
         #===================================================================================================
         if ((Get-OSDGather -Property IsAdmin) -eq $false) {
             Write-Warning "$($MyInvocation.MyCommand) requires Admin Rights ELEVATED"
+            Break
+        }
+        #===================================================================================================
+        #   Require cURL
+        #===================================================================================================
+        if (-NOT (Test-Path "$env:SystemRoot\System32\curl.exe")) {
+            Write-Warning "$($MyInvocation.MyCommand) could not find $env:SystemRoot\System32\curl.exe"
+            Write-Warning "Get a newer Windows version!"
             Break
         }
         #===================================================================================================
@@ -36,7 +43,7 @@ function New-OSDCloudWinPE {
         }
 
         $ADKMedia = $GetMyAdk.PathWinPEMedia
-        $DestinationMedia = Join-Path $Path 'Media'
+        $DestinationMedia = Join-Path $BuildPath 'Media'
         Write-Verbose "Copying ADK Media to $DestinationMedia" -Verbose
         robocopy "$ADKMedia" "$DestinationMedia" *.* /e /ndl /xj /ndl /np /nfl /njh /njs
 
@@ -114,7 +121,7 @@ function New-OSDCloudWinPE {
 
         $ISOLabel = '-l"{0}"' -f "OSDCloud"
 
-        $ISOFile = Join-Path $Path 'OSDCloud.iso'
+        $ISOFile = Join-Path $BuildPath 'OSDCloud.iso'
         Write-Verbose "ISOFile: $ISOFile"
 
         $OSCDIMG = $GetMyAdk.PathOscdimg
@@ -137,7 +144,7 @@ function New-OSDCloudWinPE {
 
         Write-Verbose "Creating ISO at $ISOFile" -Verbose
         Start-Process $OSCDIMGexe -args @("-m","-o","-u2","-bootdata:$data",'-u2','-udfver102',$ISOLabel,"`"$DestinationMedia`"", "`"$ISOFile`"") -Wait
-        explorer $Path
+        explorer $BuildPath
     }
     end {}
 }
