@@ -1,24 +1,76 @@
 <#
 .SYNOPSIS
-Launches a script in a GitHub Repo
+Executes a PowerShell Script in a GitHub Repository
 
 .DESCRIPTION
-Executes Invoke-UrlExpression with the following Url that is set by using Parameters
-https://raw.githubusercontent.com/$GitHubUser/$Repository/main/$Script
+Executes a PowerShell Script in a GitHub Repository
+Parameters build the Url that will be Invoked
+https://raw.githubusercontent.com/$User/$Repository/$Branch/$Script
+
+.PARAMETER User
+Default = OSDeploy
+
+.PARAMETER Repository
+Default = OSDCloud
+
+.PARAMETER Branch
+Default = main
+
+.PARAMETER Script
+Default = Start-OSDCloud.ps1
+
+.PARAMETER Token
+Default = ''
+Used to access a GitHub Private Repository
 
 .LINK
-https://osd.osdeploy.com/module/functions/general/start-osdcloud
+https://osdcloud.osdeploy.com/functions/start-osdcloud
 
 .NOTES
+21.3.10 Added additional parameters
 21.3.9  Initial Release
 #>
 function Start-OSDCloud {
     [CmdletBinding()]
     param (
-        [string]$GitHubUser = 'OSDeploy',
-        [string]$Repository = 'OSDCloud',
-        [string]$Script = 'Start-OSDCloud.ps1'
-    )
+        [Alias('U','GitHubUser')]
+        [string]$User = 'OSDeploy',
 
-    Invoke-UrlExpression -Url "https://raw.githubusercontent.com/$GitHubUser/$Repository/main/$Script"
+        [Alias('R','GitHubRepository')]
+        [string]$Repository = 'OSDCloud',
+
+        [Alias('B','GitHubBranch')]
+        [string]$Branch = 'main',
+
+        [Alias('S','GitHubScript')]
+        [string]$Script = 'Start-OSDCloud.ps1',
+
+        [Alias('T','GitHubToken')]
+        [string]$Token = ''
+    )
+    #======================================================================================================
+    #	Set Global Variables
+    #======================================================================================================
+
+    if ($PSBoundParameters['Token']) {
+        $Global:Url = "https://raw.githubusercontent.com/$User/$Repository/$Branch/$Script`?token=$Token"
+    } else {
+        $Global:Url = "https://raw.githubusercontent.com/$User/$Repository/$Branch/$Script"
+    }
+
+    $Global:GitHubUser = $User
+    $Global:GitHubRepository = $Repository
+    $Global:GitHubBranch = $Branch
+    $Global:GitHubScript = $Script
+    $Global:GitHubToken = $Token
+
+    Write-Verbose "Url: $Global:Url"
+    
+    Try {
+        Invoke-UrlExpression -Url $Global:Url -ErrorAction Stop
+    }
+    Catch {
+        Write-Warning "Could not connect to OSDCloud"
+        Write-Warning $Global:Url
+    }
 }
