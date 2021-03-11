@@ -68,7 +68,10 @@ function Clear-LocalDisk {
 
         [Parameter(ValueFromPipelineByPropertyName = $true)]
         [Alias('F')]
-        [switch]$Force
+        [switch]$Force,
+
+        [Alias('W','Warn','Warning')]
+        [switch]$ShowWarning
     )
     #======================================================================================================
     #	PSBoundParameters
@@ -124,6 +127,13 @@ function Clear-LocalDisk {
     #======================================================================================================
     if ($IsForcePresent -eq $false) {
         Get-Help $($MyInvocation.MyCommand.Name)
+    }
+    #======================================================================================================
+    #	Display Warning
+    #======================================================================================================
+    if ($PSBoundParameters.ContainsKey('ShowWarning')) {
+        Write-Warning "All Local Hard Drives will be cleared and all data will be lost"
+        pause
     }
     #======================================================================================================
     #	Display Disk Information

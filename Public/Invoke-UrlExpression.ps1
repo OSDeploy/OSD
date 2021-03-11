@@ -25,8 +25,6 @@ function Invoke-UrlExpression {
     $WebClient = New-Object System.Net.WebClient
     $Global:UrlExpression = $WebClient.DownloadString("$Url")
     $WebClient.Dispose()
-
-    Write-Verbose "Url: $Global:UrlExpression"
     
     Try {
         Invoke-Expression -Command $Global:UrlExpression -ErrorAction Stop

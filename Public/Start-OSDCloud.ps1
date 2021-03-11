@@ -51,11 +51,12 @@ function Start-OSDCloud {
     #======================================================================================================
     #	Set Global Variables
     #======================================================================================================
+    $Global:GitHubBase = 'https://raw.githubusercontent.com'
 
     if ($PSBoundParameters['Token']) {
-        $Global:Url = "https://raw.githubusercontent.com/$User/$Repository/$Branch/$Script`?token=$Token"
+        $Global:GitHubUrl = "$Global:GitHubBase/$User/$Repository/$Branch/$Script`?token=$Token"
     } else {
-        $Global:Url = "https://raw.githubusercontent.com/$User/$Repository/$Branch/$Script"
+        $Global:GitHubUrl = "$Global:GitHubBase/$User/$Repository/$Branch/$Script"
     }
 
     $Global:GitHubUser = $User
@@ -64,13 +65,13 @@ function Start-OSDCloud {
     $Global:GitHubScript = $Script
     $Global:GitHubToken = $Token
 
-    Write-Verbose "Url: $Global:Url"
+    Write-Verbose "Url: $Global:GitHubUrl"
     
     Try {
-        Invoke-UrlExpression -Url $Global:Url -ErrorAction Stop
+        Invoke-UrlExpression -Url $Global:GitHubUrl -ErrorAction Stop
     }
     Catch {
         Write-Warning "Could not connect to OSDCloud"
-        Write-Warning $Global:Url
+        Write-Warning $Global:GitHubUrl
     }
 }
