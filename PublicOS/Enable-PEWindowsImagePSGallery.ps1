@@ -76,10 +76,10 @@ HKLM,"SYSTEM\ControlSet001\Control\Session Manager\Environment",LOCALAPPDATA,0x0
             #   Save Modules
             #===================================================================================================
             Write-Verbose "Saving PackageManagement to $MountPath\Program Files\WindowsPowerShell\Modules"
-            Save-Module -Name PackageManagement "$MountPath\Program Files\WindowsPowerShell\Modules" -Force
+            Save-Module -Name PackageManagement -Path "$MountPath\Program Files\WindowsPowerShell\Modules" -Force
 
             Write-Verbose "Saving PowerShellGet to $MountPath\Program Files\WindowsPowerShell\Modules"
-            Save-Module -Name PowerShellGet "$MountPath\Program Files\WindowsPowerShell\Modules" -Force
+            Save-Module -Name PowerShellGet -Path "$MountPath\Program Files\WindowsPowerShell\Modules" -Force
             #===================================================================================================
             #   Return for PassThru
             #===================================================================================================
