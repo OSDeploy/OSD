@@ -46,7 +46,21 @@ function Start-OSDCloud {
         [string]$Script = 'Start-OSDCloud.ps1',
 
         [Alias('T','GitHubToken')]
-        [string]$Token = ''
+        [string]$Token = '',
+
+        [ValidateSet('Education','Enterprise','Pro')]
+        [string]$OSEdition = 'Enterprise',
+
+        [ValidateSet (
+            'ar-sa','bg-bg','cs-cz','da-dk','de-de','el-gr',
+            'en-gb','en-us','es-es','es-mx','et-ee','fi-fi',
+            'fr-ca','fr-fr','he-il','hr-hr','hu-hu','it-it',
+            'ja-jp','ko-kr','lt-lt','lv-lv','nb-no','nl-nl',
+            'pl-pl','pt-br','pt-pt','ro-ro','ru-ru','sk-sk',
+            'sl-si','sr-latn-rs','sv-se','th-th','tr-tr',
+            'uk-ua','zh-cn','zh-tw'
+        )]
+        [string]$OSCulture = 'en-us'
     )
     #======================================================================================================
     #	Set Global Variables
@@ -64,6 +78,8 @@ function Start-OSDCloud {
     $Global:GitHubBranch = $Branch
     $Global:GitHubScript = $Script
     $Global:GitHubToken = $Token
+    $Global:OSEdition = $OSEdition
+    $Global:OSCulture = $OSCulture
 
     Write-Verbose "Url: $Global:GitHubUrl"
     

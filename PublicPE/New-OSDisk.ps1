@@ -177,7 +177,7 @@ function New-OSDisk {
     #======================================================================================================
     #	Display Disk Information
     #======================================================================================================
-    $GetLocalDisk | Select-Object -Property Number, BusType, MediaType, FriendlyName, PartitionStyle, NumberOfPartitions | Format-Table
+    $GetLocalDisk | Select-Object -Property Number, BusType, MediaType, FriendlyName, PartitionStyle, NumberOfPartitions, @{Name='SizeGB';Expression={[int]($_.Size / 1000000000)}} | Format-Table
     
     if ($IsForcePresent -eq $false) {
         Break
@@ -370,5 +370,5 @@ function New-OSDisk {
             Write-Host ""
         }
     } #>
-    Get-OSDDisk | Select-Object -Property Number, BusType, MediaType, FriendlyName, PartitionStyle, NumberOfPartitions | Format-Table
+    Get-OSDDisk | Select-Object -Property Number, BusType, MediaType, FriendlyName, PartitionStyle, NumberOfPartitions, @{Name='SizeGB';Expression={[int]($_.Size / 1000000000)}} | Format-Table
 }
