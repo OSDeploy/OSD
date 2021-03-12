@@ -203,8 +203,8 @@ function Get-MyWindowsCapability {
         #===================================================================================================
         #   Dictionary
         #===================================================================================================
-        if (Test-Path "$GetModuleBase\Dictionary\Get-MyWindowsCapability.json") {
-            $GetAllItemsDictionary = Get-Content "$GetModuleBase\Dictionary\Get-MyWindowsCapability.json" | ConvertFrom-Json
+        if (Test-Path "$GetModuleBase\Files\Dictionary\Get-MyWindowsCapability.json") {
+            $GetAllItemsDictionary = Get-Content "$GetModuleBase\Files\Dictionary\Get-MyWindowsCapability.json" | ConvertFrom-Json
         }
         #===================================================================================================
         #   Create Object
@@ -509,8 +509,8 @@ function Get-MyWindowsPackage {
     #===================================================================================================
     #   Dictionary
     #===================================================================================================
-    if (Test-Path "$GetModuleBase\Dictionary\Get-MyWindowsPackage.json") {
-        $GetAllItemsDictionary = Get-Content "$GetModuleBase\Dictionary\Get-MyWindowsPackage.json" | ConvertFrom-Json
+    if (Test-Path "$GetModuleBase\Files\Dictionary\Get-MyWindowsPackage.json") {
+        $GetAllItemsDictionary = Get-Content "$GetModuleBase\Files\Dictionary\Get-MyWindowsPackage.json" | ConvertFrom-Json
     }
     #===================================================================================================
     #   Create Object

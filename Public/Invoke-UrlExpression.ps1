@@ -24,13 +24,12 @@ function Invoke-UrlExpression {
     [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
     $WebClient = New-Object System.Net.WebClient
     $Global:UrlExpression = $WebClient.DownloadString("$Url")
-    $WebClient.Dispose()
-    
     Try {
         Invoke-Expression -Command $Global:UrlExpression -ErrorAction Stop
     }
     Catch {
         Write-Warning "Could not connect to Url"
-        Write-Warning $Global:UrlExpression
+        Write-Warning $Url
     }
+    $WebClient.Dispose()
 }

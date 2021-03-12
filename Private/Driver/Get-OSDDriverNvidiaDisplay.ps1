@@ -3,7 +3,7 @@ function Get-OSDDriverNvidiaDisplay {
     param ()
 
     $ModuleNvidiaDisplay = @()
-    $ModuleNvidiaDisplay = Get-ChildItem "$($MyInvocation.MyCommand.Module.ModuleBase)\GetOSDDriver\NvidiaDisplay" *.drvpack -Recurse | Select-Object FullName
+    $ModuleNvidiaDisplay = Get-ChildItem "$($MyInvocation.MyCommand.Module.ModuleBase)\Files\OSDDriver\NvidiaDisplay" *.drvpack -Recurse | Select-Object FullName
 
     $NvidiaDisplay = @()
     $NvidiaDisplay = foreach ($item in $ModuleNvidiaDisplay) {

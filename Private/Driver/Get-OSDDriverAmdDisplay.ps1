@@ -3,7 +3,7 @@ function Get-OSDDriverAmdDisplay {
     param ()
 
     $ModuleAmdDisplay = @()
-    $ModuleAmdDisplay = Get-ChildItem "$($MyInvocation.MyCommand.Module.ModuleBase)\GetOSDDriver\AmdDisplay" *.drvpack -Recurse | Select-Object FullName
+    $ModuleAmdDisplay = Get-ChildItem "$($MyInvocation.MyCommand.Module.ModuleBase)\Files\OSDDriver\AmdDisplay" *.drvpack -Recurse | Select-Object FullName
 
     $AmdDisplay = @()
     $AmdDisplay = foreach ($item in $ModuleAmdDisplay) {
