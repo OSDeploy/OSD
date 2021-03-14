@@ -7,7 +7,7 @@
 RootModule = 'OSD.psm1'
 
 # Version number of his module.
-ModuleVersion = '21.3.11.5'
+ModuleVersion = '21.3.11.6'
 
 # Supported PSEditions
 # CompatiblePSEditions = @()
@@ -66,7 +66,7 @@ PowerShellVersion = '5.0'
 # NestedModules = @()
 
 # Functions to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no functions to export.
-FunctionsToExport = 'Get-MyAdk','New-MyAdkCopyPE','New-OSDCloudWinPE',#ADK
+FunctionsToExport = 'Get-MyAdk','New-MyAdkCopyPE','New-OSDCloudWinPE','Update-OSDCloudISO',#ADK
                     'Remove-AppxOnline',#Appx
                     'Get-CimVideoControllerResolution',#Cim
                     'Save-ClipboardImage','Set-ClipboardScreenshot',#Clipboard
@@ -92,7 +92,27 @@ FunctionsToExport = 'Get-MyAdk','New-MyAdkCopyPE','New-OSDCloudWinPE',#ADK
                     'Copy-PSModuleToFolder','Copy-PSModuleToWim','Copy-PSModuleToWindowsImage',#PSModule
                     'Get-ScreenPNG', #ScreenPNG
                     'Get-OSDWinPE','Use-WinPEContent', #WinPE
-                    'Invoke-UrlExpression','Start-OSDCloud','Select-AutoPilotJson'
+                    'Convert-XmlDellCatalogPC',
+                    'Convert-XmlDellDriverPackCatalog',
+                    'Edit-MyWinPE',
+                    'Get-FeatureUpdate',
+                    'Get-OSDCloudAutoPilotProfiles',
+                    'Get-OSDCloudOfflineFile',
+                    'Invoke-WebPSScript',
+                    'Save-OSDCloud',
+                    'Select-AutoPilotJson',
+                    'Select-USBVolume',
+                    'Start-OSDCloud',
+                    'Start-ScreenPNGProcess',
+                    'Stop-ScreenPNGProcess',
+                    'Test-WebConnection'
+                    #Private
+                    #'Test-CommandCurlExe',
+                    #'Test-MyDellBiosWebConnection',
+                    #'Test-MyDellDriverCabWebConnection',
+                    #'Test-WindowsImage',
+                    #'Test-WindowsImageMounted',
+                    #'Test-WindowsImageMountPath',
 
 # Cmdlets to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no cmdlets to export.
 CmdletsToExport = @()

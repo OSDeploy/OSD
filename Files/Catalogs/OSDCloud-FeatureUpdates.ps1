@@ -1,0 +1,1 @@
+﻿Get-OSDSUS -Catalog FeatureUpdate | Sort-Object -Property CreationDate -Descending | Select-Object -Property CreationDate,KBNumber,Title,UpdateOS,UpdateBuild,UpdateArch,FileName,Size,FileUri,Hash,AdditionalHash | Export-Clixml "$PSScriptRoot\OSDCloud-FeatureUpdates.xml"

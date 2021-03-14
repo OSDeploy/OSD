@@ -1,27 +1,27 @@
 #===================================================================================================
-#   Import Functions
-#   https://github.com/RamblingCookieMonster/PSStackExchange/blob/master/PSStackExchange/PSStackExchange.psm1
+#   Windows
 #===================================================================================================
-
 if ($env:SystemDrive -ne 'X:') {
-    $OSDPublicFunctions  = @( Get-ChildItem -Path ("$PSScriptRoot\Public\*.ps1","$PSScriptRoot\PublicOS\*.ps1") -Recurse -ErrorAction SilentlyContinue )
+    $OSDPublicFunctions  = @( Get-ChildItem -Path ("$PSScriptRoot\Public\*.ps1","$PSScriptRoot\WinOS\*.ps1") -Recurse -ErrorAction SilentlyContinue )
 }
-
+#===================================================================================================
+#   WinPE
+#===================================================================================================
 if ($env:SystemDrive -eq 'X:') {
-    $OSDPublicFunctions  = @( Get-ChildItem -Path ("$PSScriptRoot\Public\*.ps1","$PSScriptRoot\PublicPE\*.ps1") -Recurse -ErrorAction SilentlyContinue )
+    $OSDPublicFunctions  = @( Get-ChildItem -Path ("$PSScriptRoot\Public\*.ps1","$PSScriptRoot\WinPE\*.ps1") -Recurse -ErrorAction SilentlyContinue )
 
     [System.Environment]::SetEnvironmentVariable('APPDATA', (Join-Path $env:USERPROFILE 'AppData\Roaming'),[System.EnvironmentVariableTarget]::Machine)
     [System.Environment]::SetEnvironmentVariable('HOMEDRIVE', $env:SystemDrive,[System.EnvironmentVariableTarget]::Machine)
     [System.Environment]::SetEnvironmentVariable('HOMEPATH', (($env:USERPROFILE) -split ":")[1],[System.EnvironmentVariableTarget]::Machine)
     [System.Environment]::SetEnvironmentVariable('LOCALAPPDATA', (Join-Path $env:USERPROFILE 'AppData\Local'),[System.EnvironmentVariableTarget]::Machine)
 
-    $Path = "HKCU:\Volatile Environment"
-    if (-NOT (Test-Path -Path $Path)) {
-        New-Item -Path $Path -Force
-        New-ItemProperty -Path $Path -Name "APPDATA" -Value (Join-Path $env:USERPROFILE 'AppData\Roaming') -Force
-        New-ItemProperty -Path $Path -Name "HOMEDRIVE" -Value $env:SystemDrive -Force
-        New-ItemProperty -Path $Path -Name "HOMEPATH" -Value (($env:USERPROFILE) -split ":")[1] -Force
-        New-ItemProperty -Path $Path -Name "LOCALAPPDATA" -Value (Join-Path $env:USERPROFILE 'AppData\Local') -Force
+    $VolatileEnvironment = "HKCU:\Volatile Environment"
+    if (-NOT (Test-Path -Path $VolatileEnvironment)) {
+        New-Item -Path $VolatileEnvironment -Force
+        New-ItemProperty -Path $VolatileEnvironment -Name "APPDATA" -Value (Join-Path $env:USERPROFILE 'AppData\Roaming') -Force
+        New-ItemProperty -Path $VolatileEnvironment -Name "HOMEDRIVE" -Value $env:SystemDrive -Force
+        New-ItemProperty -Path $VolatileEnvironment -Name "HOMEPATH" -Value (($env:USERPROFILE) -split ":")[1] -Force
+        New-ItemProperty -Path $VolatileEnvironment -Name "LOCALAPPDATA" -Value (Join-Path $env:USERPROFILE 'AppData\Local') -Force
     }
 }
 
@@ -33,44 +33,24 @@ foreach ($Import in @($OSDPublicFunctions + $OSDPrivateFunctions)) {
 }
 
 Export-ModuleMember -Function $OSDPublicFunctions.BaseName
+
 #===================================================================================================
-#   Copy-ModuleToFolder
+#   Alias
 #===================================================================================================
 try {New-Alias -Name Copy-ModuleToFolder -Value Copy-PSModuleToFolder -Force -ErrorAction SilentlyContinue}
 catch {}
-#===================================================================================================
-#   Dismount-WindowsImageOSD
-#===================================================================================================
 try {New-Alias -Name Dismount-WindowsImageOSD -Value Dismount-MyWindowsImage -Force -ErrorAction SilentlyContinue}
 catch {}
-#===================================================================================================
-#   Edit-WindowsImageOSD
-#===================================================================================================
 try {New-Alias -Name Edit-WindowsImageOSD -Value Edit-MyWindowsImage -Force -ErrorAction SilentlyContinue}
 catch {}
-#===================================================================================================
-#   Get-SessionsXml
-#===================================================================================================
 try {New-Alias -Name Get-OSDSessions -Value Get-SessionsXml -Force -ErrorAction SilentlyContinue}
 catch {}
-#===================================================================================================
-#   Mount-OSDWindowsImage
-#===================================================================================================
 try {New-Alias -Name Mount-OSDWindowsImage -Value Mount-MyWindowsImage -Force -ErrorAction SilentlyContinue}
 catch {}
-#===================================================================================================
-#   Mount-WindowsImageOSD
-#===================================================================================================
 try {New-Alias -Name Mount-WindowsImageOSD -Value Mount-MyWindowsImage -Force -ErrorAction SilentlyContinue}
 catch {}
-#===================================================================================================
-#   Update-OSDWindowsImage
-#===================================================================================================
 try {New-Alias -Name Update-OSDWindowsImage -Value Update-MyWindowsImage -Force -ErrorAction SilentlyContinue}
 catch {}
-#===================================================================================================
-#   Update-WindowsImageOSD
-#===================================================================================================
 try {New-Alias -Name Update-WindowsImageOSD -Value Update-MyWindowsImage -Force -ErrorAction SilentlyContinue}
 catch {}
 #===================================================================================================
