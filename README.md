@@ -1,2 +1,2 @@
 # OSD
- OSD Shared Functions
+https://osd.osdeploy.com/
