@@ -10,12 +10,15 @@ Shortcut for Get-DellCatalogPC -Component BIOS -Compatible
 https://osd.osdeploy.com/module/functions/dell/get-mydellbios
 
 .NOTES
+21.3.11 Pulling data from Local due to issues with the Dell site being down
 21.3.5  Resolved issue with multiple objects
 21.3.4  Initial Release
 #>
 function Get-MyDellBios {
     [CmdletBinding()]
     param ()
+
+    $ErrorActionPreference = 'SilentlyContinue'
     #===================================================================================================
     #   Require Dell Computer
     #===================================================================================================
@@ -31,10 +34,21 @@ function Get-MyDellBios {
     #===================================================================================================
     #   Get-DellCatalogPC
     #===================================================================================================
-
-    $GetMyDellBios = Get-DellCatalogPC -Component BIOS -Compatible | Sort-Object ReleaseDate -Descending | Select-Object -First 1
-
-    Write-Verbose "You are currently running BIOS version $BIOSVersion" -Verbose
-
+    #$GetMyDellBios = Get-DellCatalogPC -Component BIOS -Compatible | Sort-Object ReleaseDate -Descending | Select-Object -First 1
+    $GetMyDellBIOS = Import-Clixml "$($MyInvocation.MyCommand.Module.ModuleBase)\Files\Catalogs\OSD-Dell-CatalogPC-BIOS.xml" | Sort-Object ReleaseDate -Descending
+    #===================================================================================================
+    #   Filter Compatible
+    #===================================================================================================
+    Write-Verbose "Filtering XML for items compatible with SystemSKU $SystemSKU"
+    $GetMyDellBIOS = $GetMyDellBIOS | `
+        Where-Object {$_.SupportedSystemID -contains $SystemSKU}
+    #===================================================================================================
+    #   Pick and Sort
+    #===================================================================================================
+    $GetMyDellBios = $GetMyDellBios | Sort-Object ReleaseDate -Descending | Select-Object -First 1
+    Write-Verbose "You are currently running Dell Bios version $BIOSVersion" -Verbose
+    #===================================================================================================
+    #   Return
+    #===================================================================================================
     Return $GetMyDellBios
 }

@@ -52,7 +52,7 @@ function Get-OSDDriverDellModel {
         Remove-Item -Path "$DriverPackCatalogCabFullName" -Force | Out-Null
     } else {
         Write-Warning "Unable to download $UrlCabDriverPackCatalog"
-        Break
+        Return $null
     }
     #===================================================================================================
     #   Dell Catalog
