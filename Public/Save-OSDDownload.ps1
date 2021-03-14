@@ -81,8 +81,21 @@ function Save-OSDDownload {
                     Return $global:OSDDownload
                 }
             }
-        
-            if ($BitsTransfer.IsPresent) {Start-BitsTransfer -Source $global:OSDDownload.SourceUrl -Destination $global:OSDDownload.FullName}
+            
+            if (Get-Command 'curl.exe') {
+                Write-Host "cURL: $($global:OSDDownload.SourceUrl)" -ForegroundColor Cyan
+
+                if ($host.name -match 'ConsoleHost') {
+                    Invoke-Expression "& curl.exe --location --output `"$($global:OSDDownload.FullName)`" --url $($global:OSDDownload.SourceUrl)"
+                }
+                else {
+                    #PowerShell ISE will display a NativeCommandError, so progress will not be displayed
+                    $Quiet = Invoke-Expression "& curl.exe --location --output `"$($global:OSDDownload.FullName)`" --url $($global:OSDDownload.SourceUrl) 2>&1"
+                }
+            }
+            elseif ($BitsTransfer.IsPresent) {
+                Start-BitsTransfer -Source $global:OSDDownload.SourceUrl -Destination $global:OSDDownload.FullName
+            }
             else {
                 $WebClient = New-Object System.Net.WebClient
                 $WebClient.DownloadFile($global:OSDDownload.SourceUrl, $global:OSDDownload.FullName)
@@ -90,11 +103,11 @@ function Save-OSDDownload {
         
             if (Test-Path $global:OSDDownload.FullName) {
                 $global:OSDDownload.IsDownloaded = $true
+                Return $global:OSDDownload
             }
-            #===================================================================================================
-            #   Return for PassThru
-            #===================================================================================================
-            Return $global:OSDDownload
+            else {
+                Write-Warning "Could not download $($global:OSDDownload.FullName)"
+            }
         }
     }
     end {}

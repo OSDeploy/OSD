@@ -35,6 +35,29 @@ function Get-OSD {
     #	Function Information
     #======================================================================================================
     Write-Host -ForegroundColor DarkCyan    '=================================' -NoNewline
+    Write-Host -ForegroundColor Cyan        '21.3.12'
+    Write-Host -ForegroundColor Yellow      'Edit-MyWinPE                           ' -NoNewline
+    Write-Host -ForegroundColor Gray        'Performs many tasks on a WinPE.wim file.  Not good for an OS wim'
+    
+    Write-Host -ForegroundColor Yellow      'Invoke-WebPSScript                     ' -NoNewline
+    Write-Host -ForegroundColor Gray        'Replaces Invoke-UrlExpression'
+
+    Write-Host -ForegroundColor Yellow      'Select-AutoPilotJson                   ' -NoNewline
+    Write-Host -ForegroundColor Gray        'Searches for AutoPilot Jsons and allows you to select one'
+
+    Write-Host -ForegroundColor Yellow      'Test-WebConnection                     ' -NoNewline
+    Write-Host -ForegroundColor Gray        'Tests if a url is is good'
+
+    Write-Host -ForegroundColor Yellow      'Test-WindowsImage                      ' -NoNewline
+    Write-Host -ForegroundColor Gray        'Returns True if ImagePath is a Windows Image'
+
+    Write-Host -ForegroundColor Yellow      'Test-WindowsImageMounted               ' -NoNewline
+    Write-Host -ForegroundColor Gray        'Returns True if ImagePath is Mounted'
+
+    Write-Host -ForegroundColor Yellow      'Test-WindowsImageMountPath             ' -NoNewline
+    Write-Host -ForegroundColor Gray        'Returns True if Path is a Windows Image mount directory'
+
+    Write-Host -ForegroundColor DarkCyan    '=================================' -NoNewline
     Write-Host -ForegroundColor Cyan        '21.3.10'
     Write-Host -ForegroundColor Yellow      'Get-MyADK                              ' -NoNewline
     Write-Host -ForegroundColor Gray        'Just a simple helper function to get ADK Variables'
@@ -49,8 +72,6 @@ function Get-OSD {
     Write-Host -ForegroundColor Gray        'Returns Partitions on Local Disks'
     Write-Host -ForegroundColor White       'Get-USBPartition                       ' -NoNewline
     Write-Host -ForegroundColor Gray        'Returns Partitions on USB Drives'
-    Write-Host -ForegroundColor Yellow      'Invoke-UrlExpression                   ' -NoNewline
-    Write-Host -ForegroundColor Gray        '[DEV] Run a RAW PowerShell script from the Cloud'
 
     Write-Host -ForegroundColor DarkCyan    '=================================' -NoNewline
     Write-Host -ForegroundColor Cyan        '21.3.4'

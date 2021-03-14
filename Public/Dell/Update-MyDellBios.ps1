@@ -48,7 +48,17 @@ function Update-MyDellBios {
         Return $null
     }
     #===================================================================================================
+    #   Current System Information
+    #===================================================================================================
+    $SystemSKU = $((Get-WmiObject -Class Win32_ComputerSystem).SystemSKUNumber).Trim()
+	$BIOSVersion = $((Get-WmiObject -Class Win32_BIOS).SMBIOSBIOSVersion).Trim()
+    #===================================================================================================
     $GetMyDellBios = Get-MyDellBios | Sort-Object ReleaseDate -Descending | Select-Object -First 1
+
+    if ($GetMyDellBios.DellVersion -eq $BIOSVersion) {
+        Write-Verbose "BIOS version is already at latest"
+        #Continue
+    }
 
     $SourceUrl = $GetMyDellBios.Url
     $DestinationFile = $GetMyDellBios.FileName
@@ -64,7 +74,7 @@ function Update-MyDellBios {
         Save-OSDDownload -SourceUrl $SourceUrl -DownloadFolder $env:TEMP -ErrorAction SilentlyContinue | Out-Null
     }
 
-    if (-NOT (Test-Path $OutFile)) {Write-Warning "Unable to download $SourceUrl"; Break}
+    if (-NOT (Test-Path $OutFile)) {Write-Warning "Unable to download $SourceUrl"; Continue}
 
     if ($env:SystemDrive -ne 'X:') {
         Write-Verbose "Checking for BitLocker" -Verbose
@@ -76,16 +86,20 @@ function Update-MyDellBios {
             Suspend-BitLocker -Mountpoint $GetBitLockerVolume -RebootCount 1
             if (Get-BitLockerVolume -MountPoint $GetBitLockerVolume | Where-Object ProtectionStatus -eq "On") {
                 Write-Warning "Couldn't suspend Bitlocker"
-                Break
+                Return $null
             }
         } else {
             Write-Verbose "BitLocker was not enabled" -Verbose
         }
     } else {
-        Write-Verbose "Downloading Flash64W using WebClient https://downloads.dell.com/FOLDER04165397M/1/Flash64W.zip" -Verbose
-        Save-OSDDownload -SourceUrl 'https://downloads.dell.com/FOLDER04165397M/1/Flash64W.zip' -DownloadFolder $env:TEMP -ErrorAction SilentlyContinue | Out-Null
-        if (Test-Path "$env:TEMP\Flash64W.zip") {
-            Expand-Archive -Path "$env:TEMP\Flash64W.zip" -DestinationPath $env:TEMP -Force
+        Write-Verbose "Downloading Flash64W using WebClient https://github.com/OSDeploy/OSDCloud/raw/main/Dell/Flash64W/Flash64W_Ver3.3.8.zip" -Verbose
+        Save-OSDDownload -SourceUrl 'https://github.com/OSDeploy/OSDCloud/raw/main/Dell/Flash64W/Flash64W_Ver3.3.8.zip' -DownloadFolder $env:TEMP -ErrorAction SilentlyContinue | Out-Null
+        if (Test-Path "$env:TEMP\Flash64W_Ver3.3.8.zip") {
+            Expand-Archive -Path "$env:TEMP\Flash64W_Ver3.3.8.zip" -DestinationPath $env:TEMP -Force
+        } else {
+            Write-Warning "Unable to download Flash64W.exe"
+            Write-Warning "BIOS Update will not continue"
+            Continue
         }
     }
 
@@ -98,17 +112,13 @@ function Update-MyDellBios {
         $Arguments = $Arguments + " /s"
     }
 
-    Write-Verbose "Starting BIOS Update" -Verbose 
+    Write-Verbose "Starting BIOS Update" -Verbose
     if (($env:SystemDrive -eq 'X:') -and ($env:PROCESSOR_ARCHITECTURE -match '64')) {
-        if (-NOT (Test-Path "$env:TEMP\Flash64W.EXE")) {
-            Write-Warning "Unable to locate $env:TEMP\Flash64W.exe"
-            Break
-        } else {
-            Start-Process -FilePath "$env:TEMP\Flash64W.exe" -ArgumentList "/b=$DestinationFile $Arguments" -Wait
-        }
+        $Arguments = "/b=`"$OutFile`" " + $Arguments
+        Write-Verbose "CommandLine: Flash64W.exe $Arguments"
+        Start-Process -WorkingDirectory "$env:TEMP" -FilePath "Flash64W.exe" -ArgumentList $Arguments -Wait -ErrorAction Suspend
     } else {
-
         Write-Verbose "$OutFile $Arguments" -Verbose
-        Start-Process -FilePath $OutFile -ArgumentList $Arguments -Wait
+        Start-Process -FilePath $OutFile -ArgumentList $Arguments -Wait -ErrorAction Suspend
     }
 }
