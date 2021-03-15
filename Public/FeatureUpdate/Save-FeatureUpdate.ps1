@@ -35,7 +35,9 @@ function Save-FeatureUpdate {
         elseif (Test-WebConnection -Uri "$($GetFeatureUpdate.FileUri)") {
             $SaveFeatureUpdate = Save-OSDDownload -SourceUrl $GetFeatureUpdate.FileUri -DownloadFolder "$DownloadPath"
             if (Test-Path $SaveFeatureUpdate.FullName) {
-                Rename-Item -Path $SaveFeatureUpdate.FullName -NewName $GetFeatureUpdate.FileName -Force
+                Write-Host "Rename: $($SaveFeatureUpdate.FullName)"
+                Write-Host "NewName: $($GetFeatureUpdate.FileName)"
+                Rename-Item -Path "$($SaveFeatureUpdate.FullName)" -NewName "$($GetFeatureUpdate.FileName)" -Force
             }
             if (Test-Path "$DownloadPath\$($GetFeatureUpdate.FileName)") {
                 Get-Item "$DownloadPath\$($GetFeatureUpdate.FileName)"

@@ -12,5 +12,6 @@ function Start-ScreenPNGProcess {
     $StartInfo = new-object System.Diagnostics.ProcessStartInfo
     $StartInfo.FileName = 'powershell.exe'
     $StartInfo.Arguments = "-NoExit -WindowStyle Hidden -Command Get-ScreenPNG -Directory $Directory -Count $Count -Delay $Delay"
+    $Global:ScreenPNGPath = $Directory
     $Global:ScreenPNGProcess = ([System.Diagnostics.Process]::Start($StartInfo)).Id
 }

@@ -36,6 +36,12 @@ function Get-OSD {
     #======================================================================================================
     Write-Host -ForegroundColor DarkCyan    '=================================' -NoNewline
     Write-Host -ForegroundColor Cyan        '21.3.12'
+    Write-Host -ForegroundColor Yellow      '92 Total Functions                     ' -NoNewline
+    Write-Host -ForegroundColor Gray        'There is really too many to list now.  Try: Get-Command -Module OSD'
+
+
+    Write-Host -ForegroundColor DarkCyan    '=================================' -NoNewline
+    Write-Host -ForegroundColor Cyan        '21.3.12'
     Write-Host -ForegroundColor Yellow      'Edit-MyWinPE                           ' -NoNewline
     Write-Host -ForegroundColor Gray        'Performs many tasks on a WinPE.wim file.  Not good for an OS wim'
     

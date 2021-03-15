@@ -264,7 +264,7 @@ if ((Get-MyComputerManufacturer -Brief) -eq 'Dell') {
         }
         else {
             Write-Warning "Could not verify an Internet connection for the Dell Driver Pack"
-            Write-Warning "OSDCloud will continue, but there may be issues"
+            Write-Warning "OSDCloud will continue, but there may be issues as Drivers will not be applied"
         }
     }
     else {

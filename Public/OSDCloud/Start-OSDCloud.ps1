@@ -131,7 +131,8 @@ function Start-OSDCloud {
     Write-Host -ForegroundColor DarkGray        "========================================================================="
     Write-Host -ForegroundColor Yellow          "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) $($MyInvocation.MyCommand.Name) " -NoNewline
     Write-Host -ForegroundColor Cyan            "AutoPilot Profiles"
-
+    
+    $GetOSDCloudOfflineAutoPilotProfiles = $null
     $GetOSDCloudOfflineAutoPilotProfiles = Get-OSDCloudOfflineAutoPilotProfiles
 
     if ($GetOSDCloudOfflineAutoPilotProfiles) {
