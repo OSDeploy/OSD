@@ -29,11 +29,11 @@ function Get-CimVideoControllerResolution {
     if ($Interlaced -eq $true) {
         #Interlaced
         $GetMyVideoControllerResolution = $GetMyVideoControllerResolution | Where-Object {$_.ScanMode -eq 5}
-    } else {
+    }
+    else {
         $Progressive
         $GetMyVideoControllerResolution = $GetMyVideoControllerResolution | Where-Object {$_.ScanMode -eq 4}
     }
-
 
     Return $GetMyVideoControllerResolution
 }
