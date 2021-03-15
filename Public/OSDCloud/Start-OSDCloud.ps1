@@ -90,7 +90,7 @@ function Start-OSDCloud {
 
         [Parameter(ParameterSetName = 'GitHub')]
         [Alias('S','Script')]
-        [string]$GitHubScript = 'Start-OSDCloud.ps1',
+        [string]$GitHubScript = 'Deploy-OSDCloud.ps1',
 
         [Parameter(ParameterSetName = 'GitHub')]
         [Alias('T','Token')]
