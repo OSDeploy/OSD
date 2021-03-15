@@ -2,7 +2,8 @@ function New-OSDCloudWinPE {
     [CmdletBinding()]
     param (
         [Parameter(ValueFromPipelineByPropertyName = $true)]
-        [string]$BuildDirectory = (Join-Path $env:TEMP (Get-Random))
+        [string]$BuildDirectory = (Join-Path $env:TEMP (Get-Random)),
+        [string[]]$DriverPath
     )
     begin {
         #======================================================================================================
@@ -119,6 +120,12 @@ function New-OSDCloudWinPE {
 
         Write-Verbose "Adding PowerShell.exe to Startnet.cmd" -Verbose
         Add-Content -Path "$MountPath\Windows\System32\Startnet.cmd" -Value 'start powershell.exe' -Force
+        #===============================================================================================
+        #   DriverPath
+        #===============================================================================================
+        foreach ($Driver in $DriverPath) {
+            Add-WindowsDriver -Path "$($MountMyWindowsImage.Path)" -Driver "$Driver" -Recurse -ForceUnsigned
+        }
 
         Write-Verbose "Saving Boot.wim" -Verbose
         $MountMyWindowsImage | Dismount-MyWindowsImage -Save
