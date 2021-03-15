@@ -141,7 +141,7 @@ function Start-OSDCloud {
     }
 
     if ($Global:OSDCloudAutoPilotProfile) {
-        $Global:OSDCloudAutoPilotProfile | Format-List
+        #$Global:OSDCloudAutoPilotProfile | Format-List
     }
     #===================================================================================================
     #	PSGallery Modules
