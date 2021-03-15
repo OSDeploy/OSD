@@ -1,9 +1,9 @@
 <#
 .SYNOPSIS
-Copies the latest installed named PowerShell Module to a Windows Image .wim file (Mount | Copy | Dismount -Save)
+Sets the PowerShell Execution Policy of a Windows Image .wim file (Mount | Set | Dismount -Save)
 
 .DESCRIPTION
-Copies the latest installed named PowerShell Module to a Windows Image .wim file (Mount | Copy | Dismount -Save)
+Sets the PowerShell Execution Policy of a Windows Image .wim file (Mount | Set | Dismount -Save)
 
 .PARAMETER ExecutionPolicy
 Specifies the new execution policy. The acceptable values for this parameter are:
@@ -21,34 +21,34 @@ Specifies the location of the WIM or VHD file containing the Windows image you w
 Index of the WIM to Mount
 Default is 1
 
-.PARAMETER Name
-Name of the PowerShell Module to Copy
-
 .LINK
-https://osd.osdeploy.com/module/functions/psmodule/copy-psmoduletowim
+https://osd.osdeploy.com/module/functions/dism/set-wimexecutionpolicy
 
 .NOTES
-21.2.9  Initial Release
+21.2.1  Initial Release
 #>
-function Copy-PSModuleToWim {
+function Set-WimExecutionPolicy {
     [CmdletBinding()]
     param (
-        [Parameter(ValueFromPipelineByPropertyName = $true)]
+        [Parameter(Position = 0, Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
         [ValidateSet('Restricted','AllSigned','RemoteSigned','Unrestricted','Bypass','Undefined')]
         [string]$ExecutionPolicy,
 
-        [Parameter(Mandatory = $true,ValueFromPipelineByPropertyName)]
+        [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName)]
         [string[]]$ImagePath,
 
         [Parameter(ValueFromPipelineByPropertyName)]
-        [UInt32]$Index = 1,
-
-        [Parameter(Mandatory=$true,ValueFromPipelineByPropertyName=$true)]
-        [SupportsWildcards()]
-        [String[]]$Name
+        [UInt32]$Index = 1
     )
 
     begin {
+        #======================================================================================================
+        #	Require WinOS
+        #======================================================================================================
+        if ((Get-OSDGather -Property IsWinPE)) {
+            Write-Warning "$($MyInvocation.MyCommand) cannot be run from WinPE"
+            Break
+        }
         #===================================================================================================
         #   Require Admin Rights
         #===================================================================================================
@@ -61,22 +61,8 @@ function Copy-PSModuleToWim {
     process {
         foreach ($Input in $ImagePath) {
             #===============================================================================================
-            #   Mount-MyWindowsImage
-            #===============================================================================================
             $MountMyWindowsImage = Mount-MyWindowsImage -ImagePath $Input -Index $Index
-            #===============================================================================================
-            #   Copy-PSModuleToFolder
-            #===============================================================================================
-            Copy-PSModuleToFolder -Name $Name -Destination "$($MountMyWindowsImage.Path)\Program Files\WindowsPowerShell\Modules" -RemoveOldVersions
-            #===============================================================================================
-            #   Set-WindowsImageExecutionPolicy
-            #===============================================================================================
-            if ($ExecutionPolicy) {
-                Set-WindowsImageExecutionPolicy -ExecutionPolicy $ExecutionPolicy -Path $MountMyWindowsImage.Path
-            }
-            #===============================================================================================
-            #   Dismount-MyWindowsImage
-            #===============================================================================================
+            $MountMyWindowsImage | Set-WindowsImageExecutionPolicy -ExecutionPolicy $ExecutionPolicy
             $MountMyWindowsImage | Dismount-MyWindowsImage -Save
             #===============================================================================================
         }

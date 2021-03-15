@@ -1,12 +1,17 @@
 #===================================================================================================
-#   Windows
-#===================================================================================================
-if ($env:SystemDrive -ne 'X:') {
-    $OSDPublicFunctions  = @( Get-ChildItem -Path ("$PSScriptRoot\Public\*.ps1","$PSScriptRoot\WinOS\*.ps1") -Recurse -ErrorAction SilentlyContinue )
+#Export Functions
+$OSDPublicFunctions  = @( Get-ChildItem -Path ("$PSScriptRoot\Public\*.ps1") -Recurse -ErrorAction SilentlyContinue )
+$OSDPrivateFunctions = @( Get-ChildItem -Path $PSScriptRoot\Private\*.ps1 -Recurse -ErrorAction SilentlyContinue )
+
+foreach ($Import in @($OSDPublicFunctions + $OSDPrivateFunctions)) {
+    Try {. $Import.FullName}
+    Catch {Write-Error -Message "Failed to import function $($Import.FullName): $_"}
 }
+
+Export-ModuleMember -Function $OSDPublicFunctions.BaseName
+
 #===================================================================================================
-#   WinPE
-#===================================================================================================
+#WinPE
 if ($env:SystemDrive -eq 'X:') {
     $OSDPublicFunctions  = @( Get-ChildItem -Path ("$PSScriptRoot\Public\*.ps1","$PSScriptRoot\WinPE\*.ps1") -Recurse -ErrorAction SilentlyContinue )
 
@@ -25,18 +30,8 @@ if ($env:SystemDrive -eq 'X:') {
     }
 }
 
-$OSDPrivateFunctions = @( Get-ChildItem -Path $PSScriptRoot\Private\*.ps1 -Recurse -ErrorAction SilentlyContinue )
-
-foreach ($Import in @($OSDPublicFunctions + $OSDPrivateFunctions)) {
-    Try {. $Import.FullName}
-    Catch {Write-Error -Message "Failed to import function $($Import.FullName): $_"}
-}
-
-Export-ModuleMember -Function $OSDPublicFunctions.BaseName
-
 #===================================================================================================
-#   Alias
-#===================================================================================================
+#Alias
 try {New-Alias -Name Copy-ModuleToFolder -Value Copy-PSModuleToFolder -Force -ErrorAction SilentlyContinue}
 catch {}
 try {New-Alias -Name Dismount-WindowsImageOSD -Value Dismount-MyWindowsImage -Force -ErrorAction SilentlyContinue}
@@ -53,8 +48,7 @@ try {New-Alias -Name Update-OSDWindowsImage -Value Update-MyWindowsImage -Force 
 catch {}
 try {New-Alias -Name Update-WindowsImageOSD -Value Update-MyWindowsImage -Force -ErrorAction SilentlyContinue}
 catch {}
+
 #===================================================================================================
-#   Export-ModuleMember
-#===================================================================================================
+#Export-ModuleMember
 Export-ModuleMember -Function * -Alias *
-#===================================================================================================

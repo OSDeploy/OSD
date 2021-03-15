@@ -5,7 +5,7 @@ function Get-OSDCloudOfflineFile {
     )
     $OSDCloudOfflineFile = @()
     $OSDCloudOfflineFile = Get-PSDrive -PSProvider FileSystem | ForEach-Object {
-        Get-ChildItem "$($_.Name):\OSDCloud\" -Include "$Name" -File -Recurse -ErrorAction Ignore
+        Get-ChildItem "$($_.Name):\OSDCloud\" -Include "$Name" -File -Recurse -Force -ErrorAction Ignore
     }
     $OSDCloudOfflineFile
 }

@@ -355,7 +355,7 @@ function Start-OSDCloud {
     #   Module
     #===================================================================================================
     if ($PSCmdlet.ParameterSetName -eq 'Module') {
-        & "$($MyInvocation.MyCommand.Module.ModuleBase)\Build-OSDCloud.ps1"
+        & "$($MyInvocation.MyCommand.Module.ModuleBase)\Deploy-OSDCloud.ps1"
     }
     #===================================================================================================
     #   GitHub

@@ -1,228 +1,155 @@
 <#
 .SYNOPSIS
-Finds Disks that are suitable for OSD.  Returns the Get-Disk Object
+Similar to Get-Disk, but includes the MediaType
 
 .DESCRIPTION
-Finds Disks that are suitable for OSD.  Returns the Get-Disk Object
-BusType -ne 'USB'
-BusType -ne 'File Backed Virtual'
-FriendlyName -notmatch 'Reader'
-IsReadOnly -eq $false
-ProvisioningType -eq 'Fixed'
-Size -gt 15GB
+Similar to Get-Disk, but includes the MediaType
+
+.PARAMETER Number
+Specifies the disk number for which to get the associated Disk object
+Alias = Disk, DiskNumber
+
+.PARAMETER BootFromDisk
+Returns Disk results based BootFromDisk property
+PS> Get-OSDDisk -BootFromDisk:$true
+PS> Get-OSDDisk -BootFromDisk:$false
+
+.PARAMETER IsBoot
+Returns Disk results based IsBoot property
+PS> Get-OSDDisk -IsBoot:$true
+PS> Get-OSDDisk -IsBoot:$false
+
+.PARAMETER IsReadOnly
+Returns Disk results based IsReadOnly property
+PS> Get-OSDDisk -IsReadOnly:$true
+PS> Get-OSDDisk -IsReadOnly:$false
+
+.PARAMETER IsSystem
+Returns Disk results based IsSystem property
+PS> Get-OSDDisk -IsSystem:$true
+PS> Get-OSDDisk -IsSystem:$false
+
+.PARAMETER BusType
+Returns Disk results in BusType values
+Values = '1394','ATA','ATAPI','Fibre Channel','File Backed Virtual','iSCSI','MMC','MAX','Microsoft Reserved','NVMe','RAID','SAS','SATA','SCSI','SD','SSA','Storage Spaces','USB','Virtual'
+PS> Get-OSDDisk -BusType NVMe
+PS> Get-OSDDisk -BusType NVMe,SAS
+
+.PARAMETER BusTypeNot
+Returns Disk results notin BusType values
+Values = '1394','ATA','ATAPI','Fibre Channel','File Backed Virtual','iSCSI','MMC','MAX','Microsoft Reserved','NVMe','RAID','SAS','SATA','SCSI','SD','SSA','Storage Spaces','USB','Virtual'
+PS> Get-OSDDisk -BusTypeNot USB
+PS> Get-OSDDisk -BusTypeNot USB,Virtual
+
+.PARAMETER MediaType
+Returns Disk results in MediaType values
+Values = 'SSD','HDD','SCM','Unspecified'
+PS> Get-OSDDisk -MediaType SSD
+
+.PARAMETER MediaTypeNot
+Returns Disk results notin MediaType values
+Values = 'SSD','HDD','SCM','Unspecified'
+PS> Get-OSDDisk -MediaTypeNot HDD
+
+.PARAMETER PartitionStyle
+Returns Disk results in PartitionStyle values
+Values = 'GPT','MBR','RAW'
+PS> Get-OSDDisk -PartitionStyle GPT
+
+.PARAMETER PartitionStyleNot
+Returns Disk results notin PartitionStyle values
+Values = 'GPT','MBR','RAW'
+PS> Get-OSDDisk -PartitionStyleNot RAW
 
 .LINK
-https://osd.osdeploy.com/module/functions/get-osddisk
+https://osd.osdeploy.com/module/functions/disk/get-osddisk
 
 .NOTES
-19.12.12    Created by David Segura @SeguraOSD
+21.3.9      Removed Offline Drives
+21.3.5      Added more BusTypes
+21.2.19     Complete redesign
+19.10.10    Created by David Segura @SeguraOSD
 #>
 function Get-OSDDisk {
-    [CmdletBinding(DefaultParameterSetName = 'OSDDisk')]
+    [CmdletBinding()]
     param (
-        #Fixed Disk Number
-        [Parameter(Position = 0, ValueFromPipelineByPropertyName, ParameterSetName = 'OSDDisk')]
-        [ValidateSet('DiskNumber','Smallest','Largest')]
-        [string]$SortOrder = 'DiskNumber',
+        [Alias('Disk','DiskNumber')]
+        [uint32]$Number,
 
-        #Disk NVMe Preference
-        [Parameter(ParameterSetName = 'OSDDisk')]
-        [ValidateSet('Prefer','Require','Exclude')]
-        [string]$IsNvme,
+        [bool]$BootFromDisk,
+        [bool]$IsBoot,
+        [bool]$IsReadOnly,
+        [bool]$IsSystem,
 
-        #System Drive Preference
-        [Parameter(ParameterSetName = 'OSDDisk')]
-        [ValidateSet('Prefer','Require','Exclude')]
-        [string]$IsSystem,
+        [ValidateSet('1394','ATA','ATAPI','Fibre Channel','File Backed Virtual','iSCSI','MMC','MAX','Microsoft Reserved','NVMe','RAID','SAS','SATA','SCSI','SD','SSA','Storage Spaces','USB','Virtual')]
+        [string[]]$BusType,
+        [ValidateSet('1394','ATA','ATAPI','Fibre Channel','File Backed Virtual','iSCSI','MMC','MAX','Microsoft Reserved','NVMe','RAID','SAS','SATA','SCSI','SD','SSA','Storage Spaces','USB','Virtual')]
+        [string[]]$BusTypeNot,
+        
+        [ValidateSet('SSD','HDD','SCM','Unspecified')]
+        [string[]]$MediaType,
+        [ValidateSet('SSD','HDD','SCM','Unspecified')]
+        [string[]]$MediaTypeNot,
 
-        #Return System Disks, which will include IsSystem
-        [Parameter(ParameterSetName = 'SystemDisk', Mandatory = $true)]
-        [switch]$SystemDisk,
-
-        #Return non System Disks, which will exclude IsSystem
-        [Parameter(ParameterSetName = 'NonSystemDisk', Mandatory = $true)]
-        [switch]$NonSystemDisk,
-
-        #Display a GridView with PassThru
-        [switch]$GridView
-
+        [ValidateSet('GPT','MBR','RAW')]
+        [string[]]$PartitionStyle,
+        [ValidateSet('GPT','MBR','RAW')]
+        [string[]]$PartitionStyleNot
     )
     #======================================================================================================
-    #	Get-Disk
+    #	PSBoundParameters
     #======================================================================================================
-    $global:GetOSDDisk = Get-Disk | Select-Object -Property * | Sort-Object -Property DiskNumber
+    $IsConfirmPresent   = $PSBoundParameters.ContainsKey('Confirm')
+    $IsForcePresent     = $PSBoundParameters.ContainsKey('Force')
+    $IsVerbosePresent   = $PSBoundParameters.ContainsKey('Verbose')
     #======================================================================================================
-    #	ProvisioningType -eq Fixed
+    #	OSD Module and Command Information
     #======================================================================================================
-<#     $global:GetOSDDisk | Where-Object {$_.ProvisioningType -ne 'Fixed'} | ForEach-Object {
-        Write-Verbose "DiskNumber $($_.DiskNumber) $($_.FriendlyName) - ProvisioningType is not Fixed (exclude)"
+    $OSDVersion = $($MyInvocation.MyCommand.Module.Version)
+    Write-Verbose "OSD $OSDVersion $($MyInvocation.MyCommand.Name)"
+    #======================================================================================================
+    #	Get Variables
+    #======================================================================================================
+    $GetDisk = Get-Disk | Sort-Object DiskNumber | Select-Object -Property *
+    $GetPhysicalDisk = Get-PhysicalDisk | Sort-Object DeviceId
+    #======================================================================================================
+    #	-Number
+    #======================================================================================================
+    if ($PSBoundParameters.ContainsKey('Number')) {
+        $GetDisk = $GetDisk | Where-Object {$_.DiskNumber -eq $Number}
     }
-    $global:GetOSDDisk = $global:GetOSDDisk | Where-Object {$_.ProvisioningType -eq 'Fixed'} #>
     #======================================================================================================
-    #	BusType -ne USB
+    #	Add Property MediaType
     #======================================================================================================
-    $global:GetOSDDisk | Where-Object {$_.BusType -eq 'USB'} | ForEach-Object {
-        Write-Verbose "DiskNumber $($_.DiskNumber) $($_.FriendlyName) - BusType is USB (exclude)"
-    }
-    $global:GetOSDDisk = $global:GetOSDDisk | Where-Object {$_.BusType -ne 'USB'}
-    #======================================================================================================
-    #	BusType -ne File Backed Virtual
-    #======================================================================================================
-<#     $global:GetOSDDisk | Where-Object {$_.BusType -eq 'File Backed Virtual'} | ForEach-Object {
-        Write-Verbose "DiskNumber $($_.DiskNumber) $($_.FriendlyName) - BusType File Backed Virtual (exclude)"
-    }
-    $global:GetOSDDisk = $global:GetOSDDisk | Where-Object {$_.BusType -ne 'File Backed Virtual'} #>
-    #======================================================================================================
-    #	IsReadOnly -eq $false
-    #======================================================================================================
-<#     $global:GetOSDDisk | Where-Object {$_.IsReadOnly -eq $true} | ForEach-Object {
-        Write-Verbose "DiskNumber $($_.DiskNumber) $($_.FriendlyName) - IsReadOnly (exclude)"
-    }
-    $global:GetOSDDisk = $global:GetOSDDisk | Where-Object {$_.IsReadOnly -eq $false} #>
-    #======================================================================================================
-    #	LargestFreeExtent  -le 100TB
-    #======================================================================================================
-    $global:GetOSDDisk | Where-Object {$_.LargestFreeExtent -gt 100TB} | ForEach-Object {
-        Write-Verbose "DiskNumber $($_.DiskNumber) $($_.FriendlyName) - LargestFreeExtent is $([math]::Round(($($_.LargestFreeExtent) / 1TB))) TB (exclude because it's probably a Reader)"
-    }
-    $global:GetOSDDisk = $global:GetOSDDisk | Where-Object {$_.LargestFreeExtent -le 100TB}
-    #======================================================================================================
-    #	Exclude Drives Smaller than 15GB
-    #======================================================================================================
-<#     $global:GetOSDDisk | Where-Object {$_.Size -lt 16GB} | ForEach-Object {
-        Write-Verbose "DiskNumber $($_.DiskNumber) $($_.FriendlyName) - Size is $([math]::Round(($($_.Size) / 1GB))) GB (exclude because its too small)"
-    }
-    $global:GetOSDDisk = $global:GetOSDDisk | Where-Object {$_.Size -ge 16GB} #>
-    #======================================================================================================
-    #	Reader
-    #======================================================================================================
-<#     $global:GetOSDDisk | Where-Object {$_.FriendlyName -match 'Reader'} | ForEach-Object {
-        Write-Verbose "DiskNumber $($_.DiskNumber) $($_.FriendlyName) - FriendlyName match Reader (exclude)"
-    }
-    $global:GetOSDDisk = $global:GetOSDDisk | Where-Object {$_.FriendlyName -notmatch 'Reader'} #>
-    #===================================================================================================
-    #   NonSystemDisk
-    #===================================================================================================
-    if ($PSCmdlet.ParameterSetName -eq 'SystemDisk') {
-        $global:SystemDisks = $global:GetOSDDisk | Where-Object {$_.IsSystem -eq $true}
-        if ($GridView.IsPresent) {
-            $global:SystemDisks = $global:SystemDisks | Out-GridView -PassThru -Title "Select Disks for PassThru"
+    foreach ($Disk in $GetDisk) {
+        foreach ($PhysicalDisk in $GetPhysicalDisk | Where-Object {$_.DeviceId -eq $Disk.Number}) {
+            $Disk | Add-Member -NotePropertyName 'MediaType' -NotePropertyValue $PhysicalDisk.MediaType
         }
-        Return $global:SystemDisks
-    }
-    #===================================================================================================
-    #   NonSystemDisk
-    #===================================================================================================
-    if ($PSCmdlet.ParameterSetName -eq 'NonSystemDisk') {
-        $global:NonSystemDisks = $global:GetOSDDisk | Where-Object {$_.IsSystem -eq $false}
-        if ($GridView.IsPresent) {
-            $global:NonSystemDisks = $global:NonSystemDisks | Out-GridView -PassThru -Title "Select Disks for PassThru"
-        }
-        Return $global:NonSystemDisks
     }
     #======================================================================================================
-    #	IsNvme -eq 'Require'
+    #	Exclude Empty Disks or Card Readers
     #======================================================================================================
-    if ($IsNvme -eq 'Require') {
-        $global:GetOSDDisk | Where-Object {$_.BusType -ne 'NVMe'} | ForEach-Object {
-            Write-Verbose "DiskNumber $($_.DiskNumber) $($_.FriendlyName) - NVMe False (Required)"
-        }
-        $global:GetOSDDisk = $global:GetOSDDisk | Where-Object {$_.BusType -eq 'NVMe'}
-    }
+    #$GetDisk = $GetDisk | Where-Object {$_.Size -gt 0}
+    $GetDisk = $GetDisk | Where-Object {$_.IsOffline -eq $false}
+    $GetDisk = $GetDisk | Where-Object {$_.OperationalStatus -ne 'No Media'}
     #======================================================================================================
-    #	IsNvme -eq 'Exclude'
+    #	Filters
     #======================================================================================================
-    if ($IsNvme -eq 'Exclude') {
-        $global:GetOSDDisk | Where-Object {$_.BusType -eq 'NVMe'} | ForEach-Object {
-            Write-Verbose "DiskNumber $($_.DiskNumber) $($_.FriendlyName) - NVMe True (Exclude)"
-        }
-        $global:GetOSDDisk = $global:GetOSDDisk | Where-Object {$_.BusType -ne 'NVMe'}
-    }
-    #======================================================================================================
-    #	IsSystem -eq 'Require'
-    #======================================================================================================
-    if ($IsSystem -eq 'Require') {
-        $global:GetOSDDisk | Where-Object {$_.IsSystem -eq $false} | ForEach-Object {
-            Write-Verbose "DiskNumber $($_.DiskNumber) $($_.FriendlyName) - IsSystem False (Required)"
-        }
-        $global:GetOSDDisk = $global:GetOSDDisk | Where-Object {$_.IsSystem -eq $true}
-    }
-    #======================================================================================================
-    #	IsSystem -eq 'Exclude'
-    #======================================================================================================
-    if ($IsSystem -eq 'Exclude') {
-        $global:GetOSDDisk | Where-Object {$_.IsSystem -eq $true} | ForEach-Object {
-            Write-Verbose "DiskNumber $($_.DiskNumber) $($_.FriendlyName) - IsSystem True (Exclude)"
-        }
-        $global:GetOSDDisk = $global:GetOSDDisk | Where-Object {$_.IsSystem -eq $false}
-    }
-    #======================================================================================================
-    #	Return for 0 or 1 Disk
-    #======================================================================================================
-    if (($global:GetOSDDisk).Count -eq 0) {Return}
-    
-    if (($global:GetOSDDisk).Count -eq 1) {
-        if ($GridView.IsPresent) {
-            $global:GetOSDDisk = $global:GetOSDDisk | Out-GridView -PassThru -Title "Select Disks for PassThru"
-        }
-        Return $global:GetOSDDisk
-    }
+    if ($PSBoundParameters.ContainsKey('BootFromDisk')) {$GetDisk = $GetDisk | Where-Object {$_.BootFromDisk -eq $BootFromDisk}}
+    if ($PSBoundParameters.ContainsKey('IsBoot')) {$GetDisk = $GetDisk | Where-Object {$_.IsBoot -eq $IsBoot}}
+    if ($PSBoundParameters.ContainsKey('IsReadOnly')) {$GetDisk = $GetDisk | Where-Object {$_.IsReadOnly -eq $IsReadOnly}}
+    if ($PSBoundParameters.ContainsKey('IsSystem')) {$GetDisk = $GetDisk | Where-Object {$_.IsSystem -eq $IsSystem}}
 
-
+    if ($BusType)               {$GetDisk = $GetDisk | Where-Object {$_.BusType -in $BusType}}
+    if ($BusTypeNot)            {$GetDisk = $GetDisk | Where-Object {$_.BusType -notin $BusTypeNot}}
+    if ($MediaType)             {$GetDisk = $GetDisk | Where-Object {$_.MediaType -in $MediaType}}
+    if ($MediaTypeNot)          {$GetDisk = $GetDisk | Where-Object {$_.MediaType -notin $MediaTypeNot}}
+    if ($PartitionStyle)        {$GetDisk = $GetDisk | Where-Object {$_.PartitionStyle -in $PartitionStyle}}
+    if ($PartitionStyleNot)     {$GetDisk = $GetDisk | Where-Object {$_.PartitionStyle -notin $PartitionStyleNot}}
     #======================================================================================================
-    #	Return Existing System Drive
+    #	Return
     #======================================================================================================
-    if ($IsSystem -eq $true) {
-        Write-Verbose "Returning Existing System Disk"
-        Return $global:GetOSDDisk = $global:GetOSDDisk | Where-Object {$_.IsSystem -eq $true}
-        foreach ($item in $global:GetOSDDisk) {
-            if ($item.IsSystem -eq $true) {Return $item}
-            if ($item.BootFromDisk -eq $true) {Return $item}
-            if ($item.IsBoot -eq $true) {Return $item}
-        }
-    }
+    Return $GetDisk
     #======================================================================================================
-    #	Return First Priority
-    #======================================================================================================
-    if ($SortOrder -eq 'DiskNumber') {
-
-        if ($IsNvme -eq 'Prefer') {
-            Write-Verbose "Selecting Priority First NVMe"
-            foreach ($item in $global:GetOSDDisk) {if ($item.BusType -eq 'NVMe') {Return $item}}
-        }
-        
-        Write-Verbose "Selecting Priority First"
-        $global:GetOSDDisk = $global:GetOSDDisk
-        Return $global:GetOSDDisk
-    }
-    #======================================================================================================
-    #	Return Smallest Priority
-    #======================================================================================================
-    if ($SortOrder -eq 'Smallest') {
-        $global:GetOSDDisk = $global:GetOSDDisk | Sort-Object -Property Size | Group-Object -Property Size | ForEach-Object {$_.Group | Sort-Object -Property DiskNumber}
-
-        if ($IsNvme -eq 'Prefer') {
-            Write-Verbose "Selecting Priority Smallest NVMe"
-            foreach ($item in $global:GetOSDDisk) {if ($item.BusType -eq 'NVMe') {Return $item}}
-        }
-
-        Write-Verbose "Selecting Priority Smallest"
-        $global:GetOSDDisk = $global:GetOSDDisk
-        Return $global:GetOSDDisk
-    }
-    #======================================================================================================
-    #	Return Largest Priority
-    #======================================================================================================
-    if ($SortOrder -eq 'Largest') {
-        $global:GetOSDDisk = $global:GetOSDDisk | Sort-Object -Property Size -Descending | Group-Object -Property Size | ForEach-Object {$_.Group | Sort-Object -Property DiskNumber}
-    }
-    
-    if ($IsNvme -eq 'Prefer') {
-        Write-Verbose "Selecting Priority Largest NVMe"
-        foreach ($item in $global:GetOSDDisk) {if ($item.BusType -eq 'NVMe') {Return $item}}
-    }
-
-    Write-Verbose "Selecting Priority Largest"
-    $global:GetOSDDisk = $global:GetOSDDisk
-    Return $global:GetOSDDisk
 }
+

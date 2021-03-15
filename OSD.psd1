@@ -66,55 +66,95 @@ PowerShellVersion = '5.0'
 # NestedModules = @()
 
 # Functions to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no functions to export.
-FunctionsToExport = 'Get-MyAdk','New-MyAdkCopyPE','New-OSDCloudWinPE','Update-OSDCloudISO',#ADK
-                    'Remove-AppxOnline',#Appx
-                    'Get-CimVideoControllerResolution',#Cim
-                    'Save-ClipboardImage','Set-ClipboardScreenshot',#Clipboard
-                    'Get-ComObjects','Get-ComObjMicrosoftUpdateAutoUpdate','Get-ComObjMicrosoftUpdateInstaller','Get-ComObjMicrosoftUpdateServiceManager',#ComObj
-                    'Backup-DiskToFFU',#Backup
-                    'Clear-LocalDisk','Get-LocalDisk','Get-LocalPartition',
-                    'Clear-USBDisk','Get-USBDisk',
-                    'Get-OSDDisk',
-                    'Get-OSDDrive',
-                    'Get-OSDPartition','Get-USBPartition',
-                    'Get-OSDVolume','Get-USBVolume',
-                    'New-OSDisk',
-                    'Get-DisplayAllScreens','Get-DisplayPrimaryBitmapSize','Get-DisplayPrimaryMonitorSize','Get-DisplayPrimaryScaling','Get-DisplayVirtualScreen','Set-DisRes',#Display
-                    'Get-DellCatalogPC','Get-MyDellBios','Update-MyDellBios','Get-MyDellDriverCab','Save-MyDellDriverCab',
-                    'Get-OSDDriver','Get-OSDDriverWmiQ',#Driver
-                    "Set-WimExecutionPolicy","Set-WindowsImageExecutionPolicy",#ExecutionPolicy
-                    'Get-MyBiosSerialNumber','Get-MyBiosVersion','Get-MyComputerManufacturer','Get-MyComputerModel','Get-MyDefaultAUService',#GetMy
-                    'Backup-MyBitLockerKeys','Get-MyBitLockerKeyProtectors','Save-MyBitLockerExternalKey','Save-MyBitLockerKeyPackage','Save-MyBitLockerRecoveryPassword','Unlock-MyBitLockerExternalKey',#MyBitlocker
-                    'Get-MyWindowsCapability','Get-MyWindowsPackage',#MyWindows
-                    'Dismount-MyWindowsImage','Edit-MyWindowsImage','Mount-MyWindowsImage','Update-MyWindowsImage',#MyWindowsImage
-                    'Get-OSD','Get-OSDClass','Get-OSDGather','Get-OSDPower','Get-RegCurrentVersion','Get-SessionsXml','Save-OSDDownload',#OSD
-                    'Enable-PEWimPSGallery','Enable-PEWindowsImagePSGallery', #PSGallery
-                    'Copy-PSModuleToFolder','Copy-PSModuleToWim','Copy-PSModuleToWindowsImage',#PSModule
-                    'Get-ScreenPNG', #ScreenPNG
-                    'Get-OSDWinPE','Use-WinPEContent', #WinPE
-                    'Convert-XmlDellCatalogPC',
-                    'Convert-XmlDellDriverPackCatalog',
-                    'Edit-MyWinPE',
-                    'Get-FeatureUpdate',
-                    'Get-OSDCloudAutoPilotProfiles',
-                    'Get-OSDCloudOfflineFile',
-                    'Invoke-WebPSScript',
-                    'Save-MyDellBios',
-                    'Save-MyDellBiosFlash64W',
-                    'Save-OSDCloud',
-                    'Select-AutoPilotJson',
-                    'Select-USBVolume',
-                    'Start-OSDCloud',
-                    'Start-ScreenPNGProcess',
-                    'Stop-ScreenPNGProcess',
-                    'Test-WebConnection'
-                    #Private
-                    #'Test-CommandCurlExe',
-                    #'Test-MyDellBiosWebConnection',
-                    #'Test-MyDellDriverCabWebConnection',
-                    #'Test-WindowsImage',
-                    #'Test-WindowsImageMounted',
-                    #'Test-WindowsImageMountPath',
+FunctionsToExport = 
+'Get-MyAdk',#ADK
+'New-MyAdkCopyPE',
+'Remove-AppxOnline',#APPX
+'Backup-MyBitLockerKeys',#BITLOCKER
+'Get-MyBitLockerKeyProtectors',
+'Save-MyBitLockerExternalKey',
+'Save-MyBitLockerKeyPackage',
+'Save-MyBitLockerRecoveryPassword',
+'Unlock-MyBitLockerExternalKey',
+'Get-CimVideoControllerResolution',#CIM
+'Save-ClipboardImage',#CLIPBOARD
+'Set-ClipboardScreenshot',
+'Get-ComObjects',#COM
+'Get-ComObjMicrosoftUpdateAutoUpdate',
+'Get-ComObjMicrosoftUpdateInstaller',
+'Get-ComObjMicrosoftUpdateServiceManager',
+'Get-MyDefaultAUService',
+'Get-MyDellBios',#DELL BIOS
+'Save-MyDellBios',
+'Save-MyDellBiosFlash64W',
+'Update-MyDellBios',
+'Get-DellCatalogPC',#DELL DRIVERS
+'Get-MyDellDriverCab',
+'Save-MyDellDriverCab',
+'Backup-DiskToFFU',#DISK
+'Clear-LocalDisk',
+'Clear-USBDisk',
+'Get-LocalDisk',
+'Get-LocalPartition',
+'Get-OSDPartition',
+'Get-OSDVolume',
+'Get-USBDisk',
+'Get-USBPartition',
+'Get-USBVolume',
+'New-OSDisk',
+'Select-USBVolume',
+'Dismount-MyWindowsImage',#DISM
+'Edit-MyWindowsImage',
+'Edit-MyWinPE',
+'Get-MyWindowsCapability',
+'Get-MyWindowsPackage',
+'Mount-MyWindowsImage',
+'Set-WimExecutionPolicy',
+'Set-WindowsImageExecutionPolicy',
+'Test-WindowsImage',
+'Test-WindowsImageMounted',
+'Test-WindowsImageMountPath',
+'Update-MyWindowsImage',
+'Get-DisplayAllScreens',#DISPLAY
+'Get-DisplayPrimaryBitmapSize',
+'Get-DisplayPrimaryMonitorSize',
+'Get-DisplayPrimaryScaling',
+'Get-DisplayVirtualScreen',
+'Set-DisRes',
+'Get-OSDDriver',#DRIVER
+'Get-OSDDriverWmiQ',
+'Get-OSD',#GENERAL
+'Get-OSDClass',
+'Get-OSDGather',
+'Get-RegCurrentVersion',
+'Get-SessionsXml',
+'Get-MyBiosSerialNumber',#HARDWARE
+'Get-MyBiosVersion',
+'Get-MyComputerManufacturer',
+'Get-MyComputerModel',
+'Get-OSDCloudAutoPilotProfiles',#OSDCLOUD
+'Get-OSDCloudOfflineFile',
+'New-OSDCloudWinPE',
+'Save-OSDCloud',
+'Select-AutoPilotJson',
+'Start-OSDCloud',
+'Update-OSDCloudISO',
+'Get-OSDPower',#POWER
+'Enable-PEWimPSGallery',#PSGALLERY
+'Enable-PEWindowsImagePSGallery',
+'Copy-PSModuleToFolder',#PSMODULE
+'Copy-PSModuleToWim',
+'Copy-PSModuleToWindowsImage',
+'Save-OSDDownload',#RETIREPENDING
+'Get-ScreenPNG',#SCREENPNG
+'Start-ScreenPNGProcess',
+'Stop-ScreenPNGProcess',
+'Get-FeatureUpdate',#UPDATES
+'Invoke-WebPSScript',#WEB
+'Save-WebFile',
+'Test-WebConnection',
+'Get-OSDWinPE',#WINPE
+'Use-WinPEContent'
 
 # Cmdlets to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no cmdlets to export.
 CmdletsToExport = @()
@@ -124,14 +164,14 @@ VariablesToExport = @()
 
 # Aliases to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no aliases to export.
 AliasesToExport = @(
-                    'Dismount-WindowsImageOSD',
-                    'Edit-WindowsImageOSD',
-                    'Get-OSDSessions',
-                    'Mount-OSDWindowsImage',
-                    'Mount-WindowsImageOSD',
-                    'Update-OSDWindowsImage',
-                    'Update-WindowsImageOSD'
-                    )
+'Dismount-WindowsImageOSD',
+'Edit-WindowsImageOSD',
+'Get-OSDSessions',
+'Mount-OSDWindowsImage',
+'Mount-WindowsImageOSD',
+'Update-OSDWindowsImage',
+'Update-WindowsImageOSD'
+)
 
 # DSC resources to export from this module
 # DscResourcesToExport = @()

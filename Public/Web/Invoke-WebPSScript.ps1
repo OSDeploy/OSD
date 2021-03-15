@@ -19,7 +19,7 @@ function Invoke-WebPSScript {
     [CmdletBinding()]
     param(
         [Parameter(Mandatory = $true, ValueFromPipeline = $True)]
-        $WebPSScript
+        [string]$WebPSScript
     )
 
     if (-NOT (Test-WebConnection $WebPSScript)) {
