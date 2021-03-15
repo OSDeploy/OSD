@@ -30,6 +30,10 @@ https://osd.osdeploy.com/module/functions/dell/update-mydellbios
 function Update-MyDellBios {
     [CmdletBinding()]
     param (
+        [Parameter(ValueFromPipeline = $true)]
+        [Alias ('DownloadFolder','Path')]
+        [string]$DownloadPath = $env:TEMP,
+
         [switch]$Silent,
         [switch]$Reboot
     )
@@ -53,29 +57,30 @@ function Update-MyDellBios {
     $SystemSKU = $((Get-WmiObject -Class Win32_ComputerSystem).SystemSKUNumber).Trim()
 	$BIOSVersion = $((Get-WmiObject -Class Win32_BIOS).SMBIOSBIOSVersion).Trim()
     #===================================================================================================
+    #   Compare
+    #===================================================================================================
     $GetMyDellBios = Get-MyDellBios | Sort-Object ReleaseDate -Descending | Select-Object -First 1
 
     if ($GetMyDellBios.DellVersion -eq $BIOSVersion) {
-        Write-Verbose "BIOS version is already at latest"
+        Write-Warning "BIOS version is already at latest"
         #Continue
     }
+    #===================================================================================================
+    #   Download
+    #===================================================================================================
+    $SaveMyDellBios = Save-MyDellBios -DownloadPath $DownloadPath
+    if (-NOT ($SaveMyDellBios)) {Return $null}
+    if (-NOT (Test-Path $SaveMyDellBios.FullName)) {Return $null}
 
-    $SourceUrl = $GetMyDellBios.Url
-    $DestinationFile = $GetMyDellBios.FileName
-    $OutFile = Join-Path $env:TEMP $DestinationFile
-
-    if (-NOT (Test-Path $OutFile)) {
-        Write-Verbose "Downloading using BITS $SourceUrl" -Verbose
-        Save-OSDDownload -BitsTransfer -SourceUrl $SourceUrl -DownloadFolder $env:TEMP -ErrorAction SilentlyContinue | Out-Null
+    if (($env:SystemDrive -eq 'X:') -and ($env:PROCESSOR_ARCHITECTURE -match '64')) {
+        $SaveMyDellBiosFlash64W = Save-MyDellBiosFlash64W -DownloadPath $DownloadPath
+        if (-NOT ($SaveMyDellBiosFlash64W)) {Return $null}
+        if (-NOT (Test-Path $SaveMyDellBiosFlash64W.FullName)) {Return $null}
     }
-    if (-NOT (Test-Path $OutFile)) {
-        Write-Verbose "BITS didn't work ..."
-        Write-Verbose "Downloading using WebClient $SourceUrl" -Verbose
-        Save-OSDDownload -SourceUrl $SourceUrl -DownloadFolder $env:TEMP -ErrorAction SilentlyContinue | Out-Null
-    }
-
-    if (-NOT (Test-Path $OutFile)) {Write-Warning "Unable to download $SourceUrl"; Continue}
-
+    $SaveMyDellBiosFlash64W = Save-MyDellBiosFlash64W -DownloadPath $DownloadPath
+    #===================================================================================================
+    #   BitLocker
+    #===================================================================================================
     if ($env:SystemDrive -ne 'X:') {
         Write-Verbose "Checking for BitLocker" -Verbose
         #http://www.dptechjournal.net/2017/01/powershell-script-to-deploy-dell.html
@@ -91,34 +96,28 @@ function Update-MyDellBios {
         } else {
             Write-Verbose "BitLocker was not enabled" -Verbose
         }
-    } else {
-        Write-Verbose "Downloading Flash64W using WebClient https://github.com/OSDeploy/OSDCloud/raw/main/Dell/Flash64W/Flash64W_Ver3.3.8.zip" -Verbose
-        Save-OSDDownload -SourceUrl 'https://github.com/OSDeploy/OSDCloud/raw/main/Dell/Flash64W/Flash64W_Ver3.3.8.zip' -DownloadFolder $env:TEMP -ErrorAction SilentlyContinue | Out-Null
-        if (Test-Path "$env:TEMP\Flash64W_Ver3.3.8.zip") {
-            Expand-Archive -Path "$env:TEMP\Flash64W_Ver3.3.8.zip" -DestinationPath $env:TEMP -Force
-        } else {
-            Write-Warning "Unable to download Flash64W.exe"
-            Write-Warning "BIOS Update will not continue"
-            Continue
-        }
     }
-
+    #===================================================================================================
+    #   Arguments
+    #===================================================================================================
     $BiosLog = Join-Path $env:TEMP 'Update-MyDellBios.log'
-    
+
     $Arguments = "/l=`"$BiosLog`""
     if ($Reboot) {
         $Arguments = $Arguments + " /r /s"
     } elseif ($Silent) {
         $Arguments = $Arguments + " /s"
     }
-
-    Write-Verbose "Starting BIOS Update" -Verbose
+    #===================================================================================================
+    #   Execution
+    #===================================================================================================
     if (($env:SystemDrive -eq 'X:') -and ($env:PROCESSOR_ARCHITECTURE -match '64')) {
-        $Arguments = "/b=`"$OutFile`" " + $Arguments
-        Write-Verbose "CommandLine: Flash64W.exe $Arguments"
-        Start-Process -WorkingDirectory "$env:TEMP" -FilePath "Flash64W.exe" -ArgumentList $Arguments -Wait -ErrorAction Suspend
-    } else {
-        Write-Verbose "$OutFile $Arguments" -Verbose
-        Start-Process -FilePath $OutFile -ArgumentList $Arguments -Wait -ErrorAction Suspend
+        $Arguments = "/b=`"$($SaveMyDellBios.FullName)`" " + $Arguments
+        Write-Verbose "Start-Process -WorkingDirectory `"$($SaveMyDellBios.Directory)`" -FilePath `"$($SaveMyDellBiosFlash64W.FullName)`" -ArgumentList $Arguments -Wait" -Verbose
+        Start-Process -WorkingDirectory "$($SaveMyDellBios.Directory)" -FilePath "$($SaveMyDellBiosFlash64W.FullName)" -ArgumentList $Arguments -Wait -ErrorAction Inquire
+    }
+    else {
+        Write-Verbose "Start-Process -FilePath `"$($SaveMyDellBios.FullName)`" -ArgumentList $Arguments -Wait" -Verbose
+        Start-Process -FilePath "$($SaveMyDellBios.FullName)" -ArgumentList $Arguments -Wait -ErrorAction Inquire
     }
 }

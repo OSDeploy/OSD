@@ -17,27 +17,29 @@ function Select-USBVolume {
     #======================================================================================================
     #	Identify OSDisk
     #======================================================================================================
-    if (($GetUSBVolume | Measure-Object).Count -eq 1) {
-        $USBVolume = $GetUSBVolume
-    } else {
+    if ($GetUSBVolume) {
         Write-Host ""
         foreach ($Item in $GetUSBVolume) {
             Write-Host "[$($Item.DriveLetter)]" -ForegroundColor Green -BackgroundColor Black -NoNewline
             Write-Host " $($Item.FileSystemLabel) [$($Item.FileSystem) $($Item.DriveType) Total: $($Item.SizeGB) RemainingMB: $($Item.SizeRemainingMB)MB]"
         }
-        #Write-Host "[SKIP]" -ForegroundColor Green -BackgroundColor Black  -NoNewline
-        #Write-Host " Skip"
-
-        do {
-            $SelectReadHost = Read-Host -Prompt "Select a USB Volume by Drive Letter"
+        if (($GetUSBVolume | Measure-Object).Count -eq 1) {
+            $USBVolume = $GetUSBVolume
         }
-        until (
-            ((($SelectReadHost -ge 0) -and ($SelectReadHost -in $GetUSBVolume.DriveLetter))) 
-        )
-        if ($SelectReadHost -eq 'S') {
-            Continue
+        else {
+            #Write-Host "[SKIP]" -ForegroundColor Green -BackgroundColor Black  -NoNewline
+            #Write-Host " Skip"
+    
+            do {
+                $SelectReadHost = Read-Host -Prompt "Select a USB Volume by Drive Letter"
+            }
+            until (((($SelectReadHost -ge 0) -and ($SelectReadHost -in $GetUSBVolume.DriveLetter))))
+            
+            if ($SelectReadHost -eq 'S') {
+                Continue
+            }
+            $USBVolume = $GetUSBVolume | Where-Object {$_.DriveLetter -eq $SelectReadHost}
         }
-        $USBVolume = $GetUSBVolume | Where-Object {$_.DriveLetter -eq $SelectReadHost}
     }
     Return $USBVolume
 }

@@ -99,6 +99,8 @@ FunctionsToExport = 'Get-MyAdk','New-MyAdkCopyPE','New-OSDCloudWinPE','Update-OS
                     'Get-OSDCloudAutoPilotProfiles',
                     'Get-OSDCloudOfflineFile',
                     'Invoke-WebPSScript',
+                    'Save-MyDellBios',
+                    'Save-MyDellBiosFlash64W',
                     'Save-OSDCloud',
                     'Select-AutoPilotJson',
                     'Select-USBVolume',

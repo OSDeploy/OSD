@@ -1,9 +1,9 @@
 <#
 .SYNOPSIS
-Starts the OSDCloud Windows 10 Build Process from the OSD Module or a GitHub Repository
+Saves OSDCloud to an NTFS Partition on a USB Drive
 
 .DESCRIPTION
-Starts the OSDCloud Windows 10 Build Process from the OSD Module or a GitHub Repository
+Saves OSDCloud to an NTFS Partition on a USB Drive
 
 .PARAMETER OSEdition
 Edition of the Windows installation
@@ -11,42 +11,14 @@ Edition of the Windows installation
 .PARAMETER OSCulture
 Culture of the Windows installation
 
-.PARAMETER Screenshot
-Captures screenshots during OSDCloud
-
-.PARAMETER GitHub
-Starts OSDCloud from GitHub
-GitHub Variable Url: $GitHubBaseUrl/$GitHubUser/$GitHubRepository/$GitHubBranch/$GitHubScript
-GitHub Resolved Url: https://raw.githubusercontent.com/OSDeploy/OSDCloud/main/Start-OSDCloud.ps1
-
-.PARAMETER GitHubBaseUrl
-The GitHub Base URL
-
-.PARAMETER GitHubUser
-GitHub Repository User
-
-.PARAMETER GitHubRepository
-OSDCloud Repository
-
-.PARAMETER GitHubBranch
-Branch of the Repository
-
-.PARAMETER GitHubScript
-Script to execute
-
-.PARAMETER GitHubToken
-Used to access a GitHub Private Repository
-
 .LINK
 https://osdcloud.osdeploy.com/
 
 .NOTES
-21.3.12 Module vs GitHub options added
-21.3.10 Added additional parameters
-21.3.9  Initial Release
+21.3.13 Initial Release
 #>
-function Start-OSDCloud {
-    [CmdletBinding(DefaultParameterSetName = 'Module')]
+function Save-OSDCloud {
+    [CmdletBinding()]
     param (
         [ValidateSet('2009','2004','1909','1903','1809')]
         [Alias('Build')]
@@ -66,35 +38,7 @@ function Start-OSDCloud {
             'uk-ua','zh-cn','zh-tw'
         )]
         [Alias('Culture')]
-        [string]$OSCulture = 'en-us',
-
-        [switch]$Screenshot,
-
-        [Parameter(ParameterSetName = 'GitHub')]
-        [switch]$GitHub,
-
-        [Parameter(ParameterSetName = 'GitHub')]
-        [string]$GitHubBaseUrl = 'https://raw.githubusercontent.com',
-        
-        [Parameter(ParameterSetName = 'GitHub')]
-        [Alias('U','User')]
-        [string]$GitHubUser = 'OSDeploy',
-
-        [Parameter(ParameterSetName = 'GitHub')]
-        [Alias('R','Repository')]
-        [string]$GitHubRepository = 'OSDCloud',
-
-        [Parameter(ParameterSetName = 'GitHub')]
-        [Alias('B','Branch')]
-        [string]$GitHubBranch = 'main',
-
-        [Parameter(ParameterSetName = 'GitHub')]
-        [Alias('S','Script')]
-        [string]$GitHubScript = 'Start-OSDCloud.ps1',
-
-        [Parameter(ParameterSetName = 'GitHub')]
-        [Alias('T','Token')]
-        [string]$GitHubToken = ''
+        [string]$OSCulture = 'en-us'
     )
 
     $Global:OSDCloudStartTime = Get-Date
@@ -303,61 +247,38 @@ function Start-OSDCloud {
         Write-Host -ForegroundColor DarkGray "========================================================================="
         Write-Host -ForegroundColor Cyan "Dell BIOS Update"
 
-        $GetMyDellBIOS = Get-MyDellBIOS
-        if ($GetMyDellBIOS) {
-            Write-Host -ForegroundColor White "ReleaseDate: $($GetMyDellBIOS.ReleaseDate)"
-            Write-Host -ForegroundColor White "Name: $($GetMyDellBIOS.Name)"
-            Write-Host -ForegroundColor White "DellVersion: $($GetMyDellBIOS.DellVersion)"
-            Write-Host -ForegroundColor White "Url: $($GetMyDellBIOS.Url)"
-            Write-Host -ForegroundColor White "Criticality: $($GetMyDellBIOS.Criticality)"
-            Write-Host -ForegroundColor White "FileName: $($GetMyDellBIOS.FileName)"
-            Write-Host -ForegroundColor White "SizeMB: $($GetMyDellBIOS.SizeMB)"
-            Write-Host -ForegroundColor White "PackageID: $($GetMyDellBIOS.PackageID)"
-            Write-Host -ForegroundColor White "SupportedModel: $($GetMyDellBIOS.SupportedModel)"
-            Write-Host -ForegroundColor White "SupportedSystemID: $($GetMyDellBIOS.SupportedSystemID)"
+        $GetMyDellBios = Get-MyDellBios
+        if ($GetMyDellBios) {
+            Write-Host -ForegroundColor White "ReleaseDate: $($GetMyDellBios.ReleaseDate)"
+            Write-Host -ForegroundColor White "Name: $($GetMyDellBios.Name)"
+            Write-Host -ForegroundColor White "DellVersion: $($GetMyDellBios.DellVersion)"
+            Write-Host -ForegroundColor White "Url: $($GetMyDellBios.Url)"
+            Write-Host -ForegroundColor White "Criticality: $($GetMyDellBios.Criticality)"
+            Write-Host -ForegroundColor White "FileName: $($GetMyDellBios.FileName)"
+            Write-Host -ForegroundColor White "SizeMB: $($GetMyDellBios.SizeMB)"
+            Write-Host -ForegroundColor White "PackageID: $($GetMyDellBios.PackageID)"
+            Write-Host -ForegroundColor White "SupportedModel: $($GetMyDellBios.SupportedModel)"
+            Write-Host -ForegroundColor White "SupportedSystemID: $($GetMyDellBios.SupportedSystemID)"
+            Write-Host -ForegroundColor White "Flash64W: $($GetMyDellBios.Flash64W)"
 
-            $GetOSDCloudOfflineFile = Get-OSDCloudOfflineFile -Name $GetMyDellBIOS.FileName | Select-Object -First 1
-        
+            $GetOSDCloudOfflineFile = Get-OSDCloudOfflineFile -Name $GetMyDellBios.FileName | Select-Object -First 1
             if ($GetOSDCloudOfflineFile) {
                 Write-Host -ForegroundColor Cyan "Offline: $($GetOSDCloudOfflineFile.FullName)"
             }
-            elseif (Test-MyDellBiosWebConnection) {
-                if ($MyInvocation.MyCommand.Name -eq 'Save-OSDCloud') {
-                    Save-OSDDownload -SourceUrl $GetMyDellBIOS.Url -DownloadFolder "$OSDCloudOffline\BIOS" | Out-Null
-                }
+            else {
+                Save-MyDellBios -DownloadPath "$OSDCloudOffline\BIOS"
+            }
+
+            $GetOSDCloudOfflineFile = Get-OSDCloudOfflineFile -Name 'Flash64W.exe' | Select-Object -First 1
+            if ($GetOSDCloudOfflineFile) {
+                Write-Host -ForegroundColor Cyan "Offline: $($GetOSDCloudOfflineFile.FullName)"
             }
             else {
-                Write-Warning "Could not verify an Internet connection for the Dell Bios"
-                Write-Warning "OSDCloud will continue, but there may be issues"
+                Save-MyDellBiosFlash64W -DownloadPath "$OSDCloudOffline\BIOS"
             }
         }
         else {
             Write-Warning "Unable to determine a suitable BIOS update for this Computer Model"
-        }
-    }
-    #===================================================================================================
-    #	Dell Flash64W
-    #===================================================================================================
-    if ((Get-MyComputerManufacturer -Brief) -eq 'Dell') {
-        Write-Host -ForegroundColor DarkGray "========================================================================="
-        Write-Host -ForegroundColor Cyan "Dell BIOS Flash64W"
-        Write-Host -ForegroundColor White "Dell Flash64W 3.3.8"
-        Write-Host -ForegroundColor White "FileName: Flash64W_Ver3.3.8.zip"
-        Write-Host -ForegroundColor White "Destination: $OSDCloudOffline\BIOS\Flash64W_Ver3.3.8.zip"
-
-        $GetOSDCloudOfflineFile = Get-OSDCloudOfflineFile -Name 'Flash64W_Ver3.3.8.zip' | Select-Object -First 1
-    
-        if ($GetOSDCloudOfflineFile) {
-            Write-Host -ForegroundColor Cyan "Offline: $($GetOSDCloudOfflineFile.FullName)"
-        }
-        elseif (Test-WebConnection -Uri 'https://github.com/OSDeploy/OSDCloud/raw/main/Dell/Flash64W/Flash64W_Ver3.3.8.zip') {
-            if ($MyInvocation.MyCommand.Name -eq 'Save-OSDCloud') {
-                Save-OSDDownload -SourceUrl 'https://github.com/OSDeploy/OSDCloud/raw/main/Dell/Flash64W/Flash64W_Ver3.3.8.zip' -DownloadFolder "$OSDCloudOffline\BIOS" | Out-Null
-            }
-        }
-        else {
-            Write-Warning "Could not verify an Internet connection for Dell BIOS Flash64W"
-            Write-Warning "OSDCloud will continue, but there may be issues"
         }
     }
     #===================================================================================================
@@ -370,49 +291,6 @@ function Start-OSDCloud {
         Write-Host -ForegroundColor Cyan "Save-OSDCloud completed in $($Global:OSDCloudTimeSpan.ToString("mm' minutes 'ss' seconds'"))!"
         explorer $OSDCloudOffline
         Write-Host -ForegroundColor DarkGray "========================================================================="
-    }
-    #===================================================================================================
-
-
-    #===================================================================================================
-    #   Module
-    #===================================================================================================
-    if ($PSCmdlet.ParameterSetName -eq 'Module') {
-        & "$($MyInvocation.MyCommand.Module.ModuleBase)\Build-OSDCloud.ps1"
-    }
-    #===================================================================================================
-    #   GitHub
-    #===================================================================================================
-    if ($PSCmdlet.ParameterSetName -eq 'GitHub') {
-
-        if (-NOT (Test-WebConnection $GitHubBaseUrl)) {
-            Write-Warning "Could not verify an Internet connection to $Global:GitHubUrl"
-            Write-Warning "OSDCloud -GitHub cannot continue"
-            Write-Warning "Verify you have an Internet connection or remove the -GitHub parameter"
-            Break
-        }
-
-        if ($PSBoundParameters['Token']) {
-            $Global:GitHubUrl = "$GitHubBaseUrl/$GitHubUser/$GitHubRepository/$GitHubBranch/$GitHubScript`?token=$GitHubToken"
-        } else {
-            $Global:GitHubUrl = "$GitHubBaseUrl/$GitHubUser/$GitHubRepository/$GitHubBranch/$GitHubScript"
-        }
-
-        if (-NOT (Test-WebConnection $Global:GitHubUrl)) {
-            Write-Warning "Could not verify an Internet connection to $Global:GitHubUrl"
-            Write-Warning "OSDCloud -GitHub cannot continue"
-            Write-Warning "Verify you have an Internet connection or remove the -GitHub parameter"
-            Break
-        }
-
-        $Global:GitHubBaseUrl = $GitHubBaseUrl
-        $Global:GitHubUser = $GitHubUser
-        $Global:GitHubRepository = $GitHubRepository
-        $Global:GitHubBranch = $GitHubBranch
-        $Global:GitHubScript = $GitHubScript
-        $Global:GitHubToken = $GitHubToken
-
-        Invoke-WebPSScript -WebPSScript $Global:GitHubUrl
     }
     #===================================================================================================
 }

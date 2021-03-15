@@ -1,6 +1,8 @@
 function Save-MyDellDriverCab {
     [CmdletBinding()]
     param (
+        [Parameter(Mandatory=$true,ValueFromPipeline=$true)]
+        [ValidateNotNullOrEmpty()]
         [string]$DownloadPath,
         [string]$Expand
     )
