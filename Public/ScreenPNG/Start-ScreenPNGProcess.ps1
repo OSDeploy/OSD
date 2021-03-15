@@ -4,7 +4,7 @@ function Start-ScreenPNGProcess {
         [Parameter(Mandatory = $true)]
         [string]$Directory,
 
-        [uint32]$Delay = 3,
+        [uint32]$Delay = 2,
 
         [uint32]$Count = 9999
     )

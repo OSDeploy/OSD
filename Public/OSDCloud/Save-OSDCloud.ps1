@@ -38,13 +38,22 @@ function Save-OSDCloud {
             'uk-ua','zh-cn','zh-tw'
         )]
         [Alias('Culture')]
-        [string]$OSCulture = 'en-us'
+        [string]$OSCulture = 'en-us',
+
+        [switch]$Screenshot
     )
 
     #===================================================================================================
     #	Start the Clock
     #===================================================================================================
     $Global:OSDCloudStartTime = Get-Date
+    #===================================================================================================
+    #   Screenshot
+    #===================================================================================================
+    if ($PSBoundParameters.ContainsKey('Screenshot')) {
+        $Global:OSDCloudScreenshot = "$env:TEMP\ScreenPNG"
+        Start-ScreenPNGProcess -Directory "$env:TEMP\ScreenPNG"
+    }
     #===================================================================================================
     #	Global Variables
     #===================================================================================================
@@ -296,5 +305,11 @@ function Save-OSDCloud {
     Write-Host -ForegroundColor Yellow      "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) $($MyInvocation.MyCommand.Name) " -NoNewline
     Write-Host -ForegroundColor Cyan        "Completed in $($Global:OSDCloudTimeSpan.ToString("mm' minutes 'ss' seconds'"))!"
     explorer $OSDCloudOfflineFullName
+    #===================================================================================================
+    if ($Global:OSDCloudScreenshot) {
+        Start-Sleep 5
+        Stop-ScreenPNGProcess
+        Write-Host -ForegroundColor Cyan    "Screenshots: $Global:OSDCloudScreenshot"
+    }
     #===================================================================================================
 }

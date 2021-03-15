@@ -115,6 +115,17 @@ if (-NOT (Get-PSDrive -Name 'C')) {
     Break
 }
 #===================================================================================================
+#   Screenshot
+#===================================================================================================
+if ($Global:OSDCloudScreenshot) {
+    Stop-ScreenPNGProcess
+    
+    robocopy "$Global:OSDCloudScreenshot" C:\OSDCloud\ScreenPNG *.* /e /ndl /nfl /njh /njs
+    
+    Start-ScreenPNGProcess -Directory 'C:\OSDCloud\ScreenPNG'
+    $Global:OSDCloudScreenshot = 'C:\OSDCloud\ScreenPNG'
+}
+#===================================================================================================
 #   Start Transcript
 #===================================================================================================
 Write-Host -ForegroundColor DarkGray    "========================================================================="
@@ -135,14 +146,6 @@ if ($GetUSBDisk) {
     pause
     #Give some time for the drive to be initialized
     Start-Sleep -Seconds 10
-}
-#===================================================================================================
-#   Screenshots
-#===================================================================================================
-if ($Global:Screenshots) {
-    Stop-ScreenPNGProcess
-    robocopy "$env:TEMP\ScreenPNG" C:\OSDCloud\ScreenPNG *.* /e /ndl /nfl /njh /njs
-    Start-ScreenPNGProcess -Directory "C:\OSDCloud\ScreenPNG"
 }
 #===================================================================================================
 #	Get-FeatureUpdate
@@ -430,4 +433,10 @@ Write-Host -ForegroundColor DarkGray    "=======================================
 Write-Host -ForegroundColor Yellow      "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) $($MyInvocation.MyCommand.Name) " -NoNewline
 Write-Host -ForegroundColor Cyan        "Completed in $($Global:OSDCloudTimeSpan.ToString("mm' minutes 'ss' seconds'"))!"
 Write-Host -ForegroundColor DarkGray    "========================================================================="
+#===================================================================================================
+if ($Global:OSDCloudScreenshot) {
+    Start-Sleep 5
+    Stop-ScreenPNGProcess
+    Write-Host -ForegroundColor Cyan    "Screenshots: $Global:OSDCloudScreenshot"
+}
 #===================================================================================================

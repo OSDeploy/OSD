@@ -102,6 +102,13 @@ function Start-OSDCloud {
     #===================================================================================================
     $Global:OSDCloudStartTime = Get-Date
     #===================================================================================================
+    #   Screenshot
+    #===================================================================================================
+    if ($PSBoundParameters.ContainsKey('Screenshot')) {
+        $Global:OSDCloudScreenshot = "$env:TEMP\ScreenPNG"
+        Start-ScreenPNGProcess -Directory "$env:TEMP\ScreenPNG"
+    }
+    #===================================================================================================
     #	Global Variables
     #===================================================================================================
     $Global:OSDCloudOSEdition = $OSEdition
@@ -117,12 +124,6 @@ function Start-OSDCloud {
         Write-Warning                           "OSDCloud Failed!"
         Start-Sleep -Seconds 5
         Break
-    }
-    #===================================================================================================
-    #   Screenshots
-    #===================================================================================================
-    if ($PSBoundParameters.ContainsKey('Screenshots')) {
-        Start-ScreenPNGProcess -Directory "$env:TEMP\ScreenPNG"
     }
     #===================================================================================================
     #	AutoPilot Profiles
