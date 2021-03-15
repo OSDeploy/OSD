@@ -60,28 +60,18 @@ function Save-OSDCloud {
             Break
         }
 
-        $GetUSBVolume | Select-Object -Property DriveType, DriveLetter, FileSystemLabel, SizeGB, SizeRemainingMB | Format-Table
         Write-Warning "USB Free Space is not verified before downloading yet, so this is on you!"
         Write-Host -ForegroundColor DarkGray "========================================================================="
-        Write-Host -ForegroundColor White "Starting in 5 " -NoNewline
-        Start-Sleep -Seconds 1
-        Write-Host -ForegroundColor White "4 " -NoNewline
-        Start-Sleep -Seconds 1
-        Write-Host -ForegroundColor White "3 " -NoNewline
-        Start-Sleep -Seconds 1
-        Write-Host -ForegroundColor White "2 " -NoNewline
-        Start-Sleep -Seconds 1
-        Write-Host -ForegroundColor White "1 "
-        Start-Sleep -Seconds 1
     }
     #===================================================================================================
     #	Get-USBVolume
     #===================================================================================================
     if ($MyInvocation.MyCommand.Name -eq 'Save-OSDCloud') {
         if (Get-USBVolume) {
+            #$GetUSBVolume | Select-Object -Property DriveLetter, FileSystemLabel, SizeGB, SizeRemainingMB, DriveType | Format-Table
             $SelectUSBVolume = Select-USBVolume -MinimumSizeGB 8 -FileSystem 'NTFS'
             $OSDCloudOffline = "$($SelectUSBVolume.DriveLetter):\OSDCloud"
-            Write-Host -ForegroundColor White "Downloading OSDCloud content to $OSDCloudOffline"
+            Write-Host -ForegroundColor White "OSDCloud content will be saved to $OSDCloudOffline"
         } else {
             Write-Warning "Save-OSDCloud USB Requirements:"
             Write-Warning "8 GB Minimum"

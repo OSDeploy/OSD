@@ -96,6 +96,7 @@ FunctionsToExport =
 'Clear-USBDisk',
 'Get-LocalDisk',
 'Get-LocalPartition',
+'Get-OSDDisk',
 'Get-OSDPartition',
 'Get-OSDVolume',
 'Get-USBDisk',

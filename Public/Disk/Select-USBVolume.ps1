@@ -18,11 +18,13 @@ function Select-USBVolume {
     #	Identify OSDisk
     #======================================================================================================
     if ($GetUSBVolume) {
-        Write-Host ""
-        foreach ($Item in $GetUSBVolume) {
+        $GetUSBVolume | Select-Object -Property DriveLetter, FileSystemLabel, SizeGB, SizeRemainingMB, DriveType | Format-Table | Out-Host
+
+        <# foreach ($Item in $GetUSBVolume) {
             Write-Host "[$($Item.DriveLetter)]" -ForegroundColor Green -BackgroundColor Black -NoNewline
             Write-Host " $($Item.FileSystemLabel) [$($Item.FileSystem) $($Item.DriveType) Total: $($Item.SizeGB) RemainingMB: $($Item.SizeRemainingMB)MB]"
-        }
+        } #>
+
         if (($GetUSBVolume | Measure-Object).Count -eq 1) {
             $USBVolume = $GetUSBVolume
         }
