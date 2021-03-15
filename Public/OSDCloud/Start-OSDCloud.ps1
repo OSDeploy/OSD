@@ -97,43 +97,26 @@ function Start-OSDCloud {
         [string]$GitHubToken = ''
     )
 
+    #===================================================================================================
+    #	Start the Clock
+    #===================================================================================================
     $Global:OSDCloudStartTime = Get-Date
     #===================================================================================================
-    #	About Save
+    #	Global Variables
     #===================================================================================================
-    if ($MyInvocation.MyCommand.Name -eq 'Save-OSDCloud') {
-        $GetUSBVolume = Get-USBVolume | Where-Object {$_.FileSystem -eq 'NTFS'} | Where-Object {$_.SizeGB -ge 8} | Sort-Object DriveLetter -Descending
-
-        Write-Host -ForegroundColor DarkGray "========================================================================="
-        Write-Host -ForegroundColor Cyan "Save-OSDCloud will save all required content to an 8GB+ NTFS USB Volume"
-        Write-Host -ForegroundColor White "Windows 10 will require about 4GB"
-        Write-Host -ForegroundColor White "Hardware Drivers will require between 1-2GB for Dell Systems"
-
-        if (-NOT ($GetUSBVolume)) {
-            Write-Warning "Unfortunately, I don't see any USB Volumes that will work"
-            Write-Warning "Save-OSDCloud has left the building"
-            Write-Host -ForegroundColor DarkGray "========================================================================="
-            Break
-        }
-
-        Write-Warning "USB Free Space is not verified before downloading yet, so this is on you!"
-        Write-Host -ForegroundColor DarkGray "========================================================================="
-    }
+    $Global:OSDCloudOSEdition = $OSEdition
+    $Global:OSDCloudOSCulture = $OSCulture
     #===================================================================================================
-    #	Get-USBVolume
+    #   Require cURL
+    #   Without cURL, we can't download the ESD, so if it's not present, then we need to exit
     #===================================================================================================
-    if ($MyInvocation.MyCommand.Name -eq 'Save-OSDCloud') {
-        if (Get-USBVolume) {
-            #$GetUSBVolume | Select-Object -Property DriveLetter, FileSystemLabel, SizeGB, SizeRemainingMB, DriveType | Format-Table
-            $SelectUSBVolume = Select-USBVolume -MinimumSizeGB 8 -FileSystem 'NTFS'
-            $OSDCloudOffline = "$($SelectUSBVolume.DriveLetter):\OSDCloud"
-            Write-Host -ForegroundColor White "OSDCloud content will be saved to $OSDCloudOffline"
-        } else {
-            Write-Warning "Save-OSDCloud USB Requirements:"
-            Write-Warning "8 GB Minimum"
-            Write-Warning "NTFS File System"
-            Break
-        }
+    if (-NOT (Test-CommandCurlExe)) {
+        Write-Host -ForegroundColor DarkGray    "========================================================================="
+        Write-Host -ForegroundColor Yellow      "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) $($MyInvocation.MyCommand.Name) " -NoNewline
+        Write-Warning                           "cURL is required for this process to work"
+        Write-Warning                           "OSDCloud Failed!"
+        Start-Sleep -Seconds 5
+        Break
     }
     #===================================================================================================
     #   Screenshots
@@ -142,102 +125,61 @@ function Start-OSDCloud {
         Start-ScreenPNGProcess -Directory "$env:TEMP\ScreenPNG"
     }
     #===================================================================================================
-    #	Global Variables
-    #===================================================================================================
-    $Global:OSEdition = $OSEdition
-    $Global:OSCulture = $OSCulture
-    #===================================================================================================
     #	AutoPilot Profiles
     #===================================================================================================
-    Write-Host -ForegroundColor DarkGray "========================================================================="
-    Write-Host -ForegroundColor Cyan "AutoPilot Profiles"
-    if ($MyInvocation.MyCommand.Name -eq 'Save-OSDCloud') {
-        if (-NOT (Test-Path "$OSDCloudOffline\AutoPilot\Profiles")) {
-            New-Item -Path "$OSDCloudOffline\AutoPilot\Profiles" -ItemType Directory -Force | Out-Null
-        }
-    }
+    Write-Host -ForegroundColor DarkGray        "========================================================================="
+    Write-Host -ForegroundColor Yellow          "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) $($MyInvocation.MyCommand.Name) " -NoNewline
+    Write-Host -ForegroundColor Cyan            "AutoPilot Profiles"
 
-    $GetOSDCloudAutoPilotProfiles = Get-OSDCloudAutoPilotProfiles
+    $GetOSDCloudOfflineAutoPilotProfiles = Get-OSDCloudOfflineAutoPilotProfiles
 
-    if ($GetOSDCloudAutoPilotProfiles) {
-        foreach ($Item in $GetOSDCloudAutoPilotProfiles) {
-            Write-Host -ForegroundColor Yellow "$($Item.FullName)"
-        }
+    if ($GetOSDCloudOfflineAutoPilotProfiles) {
+        $Global:OSDCloudAutoPilotProfile = Select-OSDCloudOfflineAutoPilotProfiles
     } else {
         Write-Warning "No AutoPilot Profiles were found in any PSDrive"
         Write-Warning "AutoPilot Profiles must be located in a <PSDrive>:\OSDCloud\AutoPilot\Profiles direcory"
     }
+
+    if ($Global:OSDCloudAutoPilotProfile) {
+        $Global:OSDCloudAutoPilotProfile | Format-List
+    }
     #===================================================================================================
     #	PSGallery Modules
     #===================================================================================================
-    Write-Host -ForegroundColor DarkGray "========================================================================="
-    Write-Host -ForegroundColor Cyan "PowerShell Modules and Scripts"
-    if (Test-WebConnection -Uri "https://www.powershellgallery.com") {
-        if ($MyInvocation.MyCommand.Name -eq 'Save-OSDCloud') {
-            if (-NOT (Test-Path "$OSDCloudOffline\PowerShell\Modules")) {
-                New-Item -Path "$OSDCloudOffline\PowerShell\Modules" -ItemType Directory -Force | Out-Null
-            }
-            Write-Host -ForegroundColor DarkGray "Save-Module OSD"
-            Save-Module -Name OSD -Path "$OSDCloudOffline\PowerShell\Modules"
+    Write-Host -ForegroundColor DarkGray    "========================================================================="
+    Write-Host -ForegroundColor Yellow      "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) $($MyInvocation.MyCommand.Name) " -NoNewline
+    Write-Host -ForegroundColor Cyan        "PowerShell Modules and Scripts"
 
-            Write-Host -ForegroundColor DarkGray "Save-Module WindowsAutoPilotIntune"
-            Save-Module -Name WindowsAutoPilotIntune -Path "$OSDCloudOffline\PowerShell\Modules"
-            Write-Host -ForegroundColor DarkGray "Save-Module AzureAD"
-            Write-Host -ForegroundColor DarkGray "Save-Module Microsoft.Graph.Intune"
-
-            if (-NOT (Test-Path "$OSDCloudOffline\PowerShell\Scripts")) {
-                New-Item -Path "$OSDCloudOffline\PowerShell\Scripts" -ItemType Directory -Force | Out-Null
-            }
-            Write-Host -ForegroundColor DarkGray "Save-Script Get-WindowsAutoPilotInfo"
-            Save-Script -Name Get-WindowsAutoPilotInfo -Path "$OSDCloudOffline\PowerShell\Scripts"
-        }
-    }
-    else {
-        Write-Warning "Could not verify an Internet connection to the PowerShell Gallery"
-        if ($MyInvocation.MyCommand.Name -eq 'Save-OSDCloud') {
-            Write-Warning "OSDCloud will continue, but there may be issues"
-        }
-        
-        if ($MyInvocation.MyCommand.Name -eq 'Start-OSDCloud') {
-            Write-Warning "OSDCloud will continue, but there may be issues"
-        }
+    if (-NOT (Test-WebConnection -Uri "https://www.powershellgallery.com")) {
+        Write-Warning "Could not validate an Internet connection to the PowerShell Gallery"
+        Write-Warning "OSDCloud will continue, but there may be issues if this can't be resolved"
     }
     #===================================================================================================
-    #	Windows 10
+    #	Get-FeatureUpdate
     #===================================================================================================
-    Write-Host -ForegroundColor DarkGray "========================================================================="
-    Write-Host -ForegroundColor Cyan "Windows 10 x64"
-    Write-Host -ForegroundColor White "OSBuild: $OSBuild"
-    Write-Host -ForegroundColor White "OSCulture: $OSCulture"
-    
+    Write-Host -ForegroundColor DarkGray    "========================================================================="
+    Write-Host -ForegroundColor Yellow      "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) $($MyInvocation.MyCommand.Name) " -NoNewline
+    Write-Host -ForegroundColor Cyan        "Get-FeatureUpdate Windows 10 $Global:OSDCloudOSEdition x64 $OSBuild $OSCulture"
+
     $GetFeatureUpdate = Get-FeatureUpdate -OSBuild $OSBuild -OSCulture $OSCulture
 
-    if ($GetFeatureUpdate) {
-        $GetFeatureUpdate = $GetFeatureUpdate | Select-Object -Property CreationDate,KBNumber,Title,UpdateOS,UpdateBuild,UpdateArch,FileName, @{Name='SizeMB';Expression={[int]($_.Size /1024/1024)}},FileUri,Hash,AdditionalHash
-    }
-    else {
+    if (-NOT ($GetFeatureUpdate)) {
         Write-Warning "Unable to locate a Windows 10 Feature Update"
+        Write-Warning "OSDCloud cannot continue"
         Break
     }
-    Write-Host -ForegroundColor White "CreationDate: $($GetFeatureUpdate.CreationDate)"
-    Write-Host -ForegroundColor White "KBNumber: $($GetFeatureUpdate.KBNumber)"
-    Write-Host -ForegroundColor White "Title: $($GetFeatureUpdate.Title)"
-    Write-Host -ForegroundColor White "FileName: $($GetFeatureUpdate.FileName)"
-    Write-Host -ForegroundColor White "SizeMB: $($GetFeatureUpdate.SizeMB)"
-    Write-Host -ForegroundColor White "FileUri: $($GetFeatureUpdate.FileUri)"
+    $GetFeatureUpdate = $GetFeatureUpdate | Select-Object -Property CreationDate,KBNumber,Title,UpdateOS,UpdateBuild,UpdateArch,FileName, @{Name='SizeMB';Expression={[int]($_.Size /1024/1024)}},FileUri,Hash,AdditionalHash
+    #===================================================================================================
+    #	Offline OS
+    #===================================================================================================
+    $OSDCloudOfflineOS = Get-OSDCloudOfflineFile -Name $GetFeatureUpdate.FileName | Select-Object -First 1
 
-    $GetOSDCloudOfflineFile = Get-OSDCloudOfflineFile -Name $GetFeatureUpdate.FileName | Select-Object -First 1
-
-    if ($GetOSDCloudOfflineFile) {
-        Write-Host -ForegroundColor Cyan "Offline: $($GetOSDCloudOfflineFile.FullName)"
+    if ($OSDCloudOfflineOS) {
+        $OSDCloudOfflineOSFullName = $OSDCloudOfflineOS.FullName
+        Write-Host -ForegroundColor Cyan "Offline: $OSDCloudOfflineOSFullName"
     }
     elseif (Test-WebConnection -Uri $GetFeatureUpdate.FileUri) {
-        if ($MyInvocation.MyCommand.Name -eq 'Save-OSDCloud') {
-            Save-OSDDownload -SourceUrl $GetFeatureUpdate.FileUri -DownloadFolder "$OSDCloudOffline\OS" | Out-Null
-            if (Test-Path $Global:OSDDownload.FullName) {
-                Rename-Item -Path $Global:OSDDownload.FullName -NewName $GetFeatureUpdate.FileName -Force
-            }
-        }
+        #Download during Deployment
     }
     else {
         Write-Warning "Could not verify an Internet connection for Windows 10 Feature Update"
@@ -245,27 +187,15 @@ function Start-OSDCloud {
         Break
     }
     #===================================================================================================
-    #	Dell Driver Pack
+    #	Start-OSDCloud Get-MyDellDriverCab
     #===================================================================================================
     if ((Get-MyComputerManufacturer -Brief) -eq 'Dell') {
-        Write-Host -ForegroundColor DarkGray "========================================================================="
-        Write-Host -ForegroundColor Cyan "Dell Driver Pack"
+        Write-Host -ForegroundColor DarkGray    "========================================================================="
+        Write-Host -ForegroundColor Yellow      "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) $($MyInvocation.MyCommand.Name) " -NoNewline
+        Write-Host -ForegroundColor Cyan        "Get-MyDellDriverCab"
         
         $GetMyDellDriverCab = Get-MyDellDriverCab
         if ($GetMyDellDriverCab) {
-            Write-Host -ForegroundColor White "LastUpdate: $($GetMyDellDriverCab.LastUpdate)"
-            Write-Host -ForegroundColor White "DriverName: $($GetMyDellDriverCab.DriverName)"
-            Write-Host -ForegroundColor White "Generation: $($GetMyDellDriverCab.Generation)"
-            Write-Host -ForegroundColor White "Model: $($GetMyDellDriverCab.Model)"
-            Write-Host -ForegroundColor White "SystemSku: $($GetMyDellDriverCab.SystemSku)"
-            Write-Host -ForegroundColor White "DriverVersion: $($GetMyDellDriverCab.DriverVersion)"
-            Write-Host -ForegroundColor White "DriverReleaseId: $($GetMyDellDriverCab.DriverReleaseId)"
-            Write-Host -ForegroundColor White "OsVersion: $($GetMyDellDriverCab.OsVersion)"
-            Write-Host -ForegroundColor White "OsArch: $($GetMyDellDriverCab.OsArch)"
-            Write-Host -ForegroundColor White "DownloadFile: $($GetMyDellDriverCab.DownloadFile)"
-            Write-Host -ForegroundColor White "SizeMB: $($GetMyDellDriverCab.SizeMB)"
-            Write-Host -ForegroundColor White "DriverUrl: $($GetMyDellDriverCab.DriverUrl)"
-            Write-Host -ForegroundColor White "DriverInfo: $($GetMyDellDriverCab.DriverInfo)"
 
             $GetOSDCloudOfflineFile = Get-OSDCloudOfflineFile -Name $GetMyDellDriverCab.DownloadFile | Select-Object -First 1
         
@@ -273,9 +203,7 @@ function Start-OSDCloud {
                 Write-Host -ForegroundColor Cyan "Offline: $($GetOSDCloudOfflineFile.FullName)"
             }
             elseif (Test-MyDellDriverCabWebConnection) {
-                if ($MyInvocation.MyCommand.Name -eq 'Save-OSDCloud') {
-                    Save-OSDDownload -SourceUrl $GetMyDellDriverCab.DriverUrl -DownloadFolder "$OSDCloudOffline\DriverPacks" | Out-Null
-                }
+                #OK to Download
             }
             else {
                 Write-Warning "Could not verify an Internet connection for the Dell Driver Pack"
@@ -287,65 +215,56 @@ function Start-OSDCloud {
         }
     }
     #===================================================================================================
-    #	Dell BIOS Update
+    #	Get Dell BIOS Update
     #===================================================================================================
     if ((Get-MyComputerManufacturer -Brief) -eq 'Dell') {
-        Write-Host -ForegroundColor DarkGray "========================================================================="
-        Write-Host -ForegroundColor Cyan "Dell BIOS Update"
+        Write-Host -ForegroundColor DarkGray    "========================================================================="
+        Write-Host -ForegroundColor Yellow      "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) $($MyInvocation.MyCommand.Name) " -NoNewline
+        Write-Host -ForegroundColor Cyan        "Get-MyDellBios"
 
         $GetMyDellBios = Get-MyDellBios
         if ($GetMyDellBios) {
-            Write-Host -ForegroundColor White "ReleaseDate: $($GetMyDellBios.ReleaseDate)"
-            Write-Host -ForegroundColor White "Name: $($GetMyDellBios.Name)"
-            Write-Host -ForegroundColor White "DellVersion: $($GetMyDellBios.DellVersion)"
-            Write-Host -ForegroundColor White "Url: $($GetMyDellBios.Url)"
-            Write-Host -ForegroundColor White "Criticality: $($GetMyDellBios.Criticality)"
-            Write-Host -ForegroundColor White "FileName: $($GetMyDellBios.FileName)"
-            Write-Host -ForegroundColor White "SizeMB: $($GetMyDellBios.SizeMB)"
-            Write-Host -ForegroundColor White "PackageID: $($GetMyDellBios.PackageID)"
-            Write-Host -ForegroundColor White "SupportedModel: $($GetMyDellBios.SupportedModel)"
-            Write-Host -ForegroundColor White "SupportedSystemID: $($GetMyDellBios.SupportedSystemID)"
-            Write-Host -ForegroundColor White "Flash64W: $($GetMyDellBios.Flash64W)"
-
             $GetOSDCloudOfflineFile = Get-OSDCloudOfflineFile -Name $GetMyDellBios.FileName | Select-Object -First 1
-            if ($GetOSDCloudOfflineFile) {
-                Write-Host -ForegroundColor Cyan "Offline: $($GetOSDCloudOfflineFile.FullName)"
+
+            if ($OSDCloudOfflineBios) {
+                Write-Host -ForegroundColor Cyan "Offline: $($OSDCloudOfflineBios.FullName)"
+            }
+            elseif (Test-MyDellBiosWebConnection) {
+                #OK to Download
             }
             else {
-                Save-MyDellBios -DownloadPath "$OSDCloudOffline\BIOS"
+                Write-Warning "Could not verify an Internet connection for the Dell Bios Update"
+                Write-Warning "OSDCloud will continue, but there may be issues"
             }
 
-            $GetOSDCloudOfflineFile = Get-OSDCloudOfflineFile -Name 'Flash64W.exe' | Select-Object -First 1
-            if ($GetOSDCloudOfflineFile) {
-                Write-Host -ForegroundColor Cyan "Offline: $($GetOSDCloudOfflineFile.FullName)"
+            $OSDCloudOfflineFlash64W = Get-OSDCloudOfflineFile -Name 'Flash64W.exe' | Select-Object -First 1
+            if ($OSDCloudOfflineFlash64W) {
+                Write-Host -ForegroundColor Cyan "Offline: $($OSDCloudOfflineFlash64W.FullName)"
+            }
+            elseif (Test-MyDellBiosWebConnection) {
+                #OK to Download
             }
             else {
-                Save-MyDellBiosFlash64W -DownloadPath "$OSDCloudOffline\BIOS"
+                Write-Warning "Could not verify an Internet connection for the Dell Flash64W"
+                Write-Warning "OSDCloud will continue, but there may be issues"
             }
         }
         else {
             Write-Warning "Unable to determine a suitable BIOS update for this Computer Model"
+            Write-Warning "OSDCloud will continue, but there may be issues"
         }
     }
-    #===================================================================================================
-    #	Save-OSDCloud Complete
-    #===================================================================================================
-    if ($MyInvocation.MyCommand.Name -eq 'Save-OSDCloud') {
-		$Global:OSDCloudEndTime = Get-Date
-		$Global:OSDCloudTimeSpan = New-TimeSpan -Start $Global:OSDCloudStartTime -End $Global:OSDCloudEndTime
-        Write-Host -ForegroundColor DarkGray "========================================================================="
-        Write-Host -ForegroundColor Cyan "Save-OSDCloud completed in $($Global:OSDCloudTimeSpan.ToString("mm' minutes 'ss' seconds'"))!"
-        explorer $OSDCloudOffline
-        Write-Host -ForegroundColor DarkGray "========================================================================="
-    }
-    #===================================================================================================
-
-
     #===================================================================================================
     #   Module
     #===================================================================================================
     if ($PSCmdlet.ParameterSetName -eq 'Module') {
-        & "$($MyInvocation.MyCommand.Module.ModuleBase)\Deploy-OSDCloud.ps1"
+        $GetDeployOSDCloud = Get-OSDCloudOfflineFile -Name 'Deploy-MyOSDCloud.ps1' | Select-Object -First 1
+        if ($GetDeployOSDCloud) {
+            & "$($GetDeployOSDCloud.FullName)"
+        }
+        else {
+            & "$($MyInvocation.MyCommand.Module.ModuleBase)\OSDCloud\Deploy-OSDCloud.ps1"
+        }
     }
     #===================================================================================================
     #   GitHub

@@ -7,7 +7,7 @@
 RootModule = 'OSD.psm1'
 
 # Version number of his module.
-ModuleVersion = '21.3.11.6'
+ModuleVersion = '21.3.15.1'
 
 # Supported PSEditions
 # CompatiblePSEditions = @()
@@ -124,6 +124,8 @@ FunctionsToExport =
 'Set-DisRes',
 'Get-OSDDriver',#DRIVER
 'Get-OSDDriverWmiQ',
+'Get-FeatureUpdate',#FEATUREUPDATE
+'Save-FeatureUpdate',
 'Get-OSD',#GENERAL
 'Get-OSDClass',
 'Get-OSDGather',
@@ -133,11 +135,13 @@ FunctionsToExport =
 'Get-MyBiosVersion',
 'Get-MyComputerManufacturer',
 'Get-MyComputerModel',
-'Get-OSDCloudAutoPilotProfiles',#OSDCLOUD
+'Get-OSDCloudOfflineAutoPilotProfiles',#OSDCLOUD
 'Get-OSDCloudOfflineFile',
+'Get-OSDCloudOfflinePath',
 'New-OSDCloudWinPE',
 'Save-OSDCloud',
 'Select-AutoPilotJson',
+'Select-OSDCloudOfflineAutoPilotProfiles',
 'Start-OSDCloud',
 'Update-OSDCloudISO',
 'Get-OSDPower',#POWER
@@ -150,7 +154,6 @@ FunctionsToExport =
 'Get-ScreenPNG',#SCREENPNG
 'Start-ScreenPNGProcess',
 'Stop-ScreenPNGProcess',
-'Get-FeatureUpdate',#UPDATES
 'Invoke-WebPSScript',#WEB
 'Save-WebFile',
 'Test-WebConnection',
