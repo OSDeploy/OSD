@@ -5,8 +5,8 @@ Creates an .iso file from a bootable media directory.  ADK is required
 .Description
 Creates a .iso file from a bootable media directory.  ADK is required
 
-.PARAMETER isoDirectory
-Source Directory containing bootable media
+.PARAMETER MediaPath
+Directory containing the bootable media files
 
 .PARAMETER isoFileName
 File Name of the ISO
@@ -33,7 +33,7 @@ function New-ADK.iso {
     [CmdletBinding()]
     param (
         [Parameter(Mandatory = $true)]
-        [string]$isoDirectory,
+        [string]$MediaPath,
 
         [Parameter(Mandatory = $true)]
         [string]$isoFileName,
@@ -61,6 +61,11 @@ function New-ADK.iso {
         Break
     }
     #===================================================================================================
+    #	Set VerbosePreference
+    #===================================================================================================
+    $CurrentVerbosePreference = $VerbosePreference
+    $VerbosePreference = 'Continue'
+    #===================================================================================================
     #   Get Adk Paths
     #===================================================================================================
     $AdkPaths = Get-AdkPaths
@@ -70,25 +75,25 @@ function New-ADK.iso {
         Break
     }
     #===================================================================================================
-    $IsoParent = (Get-Item -Path $isoDirectory -ErrorAction Stop).Parent.FullName
-    $IsoFullName = Join-Path $IsoParent $isoFileName
+    $WorkspacePath = (Get-Item -Path $MediaPath -ErrorAction Stop).Parent.FullName
+    $IsoFullName = Join-Path $WorkspacePath $isoFileName
     $PathOscdimg = $AdkPaths.PathOscdimg
     $oscdimgexe = $AdkPaths.oscdimgexe
 
-    Write-Verbose "IsoParent: $IsoParent"
+    Write-Verbose "WorkspacePath: $WorkspacePath"
     Write-Verbose "IsoFullName: $IsoFullName"
     Write-Verbose "PathOscdimg: $PathOscdimg"
     Write-Verbose "oscdimgexe: $oscdimgexe"
     #===================================================================================================
     #   Test Paths
     #===================================================================================================
-    $DestinationBoot = Join-Path $isoDirectory 'boot'
+    $DestinationBoot = Join-Path $MediaPath 'boot'
     if (-NOT (Test-Path $DestinationBoot)) {
         Write-Warning "Cannot locate $DestinationBoot"
         Write-Warning "This does not appear to be a valid bootable ISO"
         Break
     }
-    $DestinationEfiBoot = Join-Path $isoDirectory 'efi\microsoft\boot'
+    $DestinationEfiBoot = Join-Path $MediaPath 'efi\microsoft\boot'
     if (-NOT (Test-Path $DestinationEfiBoot)) {
         Write-Warning "Cannot locate $DestinationEfiBoot"
         Write-Warning "This does not appear to be a valid bootable ISO"
@@ -125,24 +130,39 @@ function New-ADK.iso {
     Write-Verbose "isoLabelString: $isoLabelString"
     Write-Verbose "BootDataString: $BootDataString"
 
-    $Process = Start-Process $oscdimgexe -args @("-m","-o","-u2","-bootdata:$BootDataString",'-u2','-udfver102',$isoLabelString,"`"$isoDirectory`"", "`"$IsoFullName`"") -PassThru -Wait -NoNewWindow
+    $Process = Start-Process $oscdimgexe -args @("-m","-o","-u2","-bootdata:$BootDataString",'-u2','-udfver102',$isoLabelString,"`"$MediaPath`"", "`"$IsoFullName`"") -PassThru -Wait -NoNewWindow
 
     if (-NOT (Test-Path $IsoFullName)) {
         Write-Error "Something didn't work"
         Break
     }
+    #===============================================================================================
+    #   Restore VerbosePreference
+    #===============================================================================================
+    $VerbosePreference = $CurrentVerbosePreference
+    #===============================================================================================
+    #   OpenExplorer
+    #===============================================================================================
     if ($PSBoundParameters.ContainsKey('OpenExplorer')) {
-        explorer $IsoParent
+        explorer $WorkspacePath
     }
+    #===============================================================================================
+    #   Mount
+    #===============================================================================================
     if ($PSBoundParameters.ContainsKey('Mount')) {
         explorer $IsoFullName
     }
+    #===============================================================================================
+    #   Return Get-Item
+    #===============================================================================================
+    Return Get-Item -Path $IsoFullName
 
-    $Results += [pscustomobject]@{
+<#     $Results += [pscustomobject]@{
         FullName            = $IsoFullName
         Name                = $isoFileName
         Label               = $isoLabel
-        isoDirectory     = $isoDirectory
+        isoDirectory     = $MediaPath
     }
-    Return $results
+    Return $Results #>
+    #===============================================================================================
 }

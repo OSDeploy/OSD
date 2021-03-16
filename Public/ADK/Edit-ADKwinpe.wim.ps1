@@ -42,6 +42,11 @@ function Edit-ADKwinpe.wim {
         Break
     }
     #===================================================================================================
+    #	Set VerbosePreference
+    #===================================================================================================
+    $CurrentVerbosePreference = $VerbosePreference
+    $VerbosePreference = 'Continue'
+    #===================================================================================================
     #   Get ADK
     #===================================================================================================
     $WinPEArch = 'amd64'
@@ -64,12 +69,12 @@ function Edit-ADKwinpe.wim {
     #   Create Backup
     #===================================================================================================
     if (-NOT (Test-Path "$($WimSourceItem.Directory)\winpe.bak")) {
-        $WimSourceItem | Copy-Item -Destination "$($WimSourceItem.Directory)\winpe.bak" -Force -ErrorAction Stop -Verbose
+        $WimSourceItem | Copy-Item -Destination "$($WimSourceItem.Directory)\winpe.bak" -Force -ErrorAction Stop
     }
     #===================================================================================================
     #   Mount-MyWindowsImage
     #===================================================================================================
-    $MountMyWindowsImage = Mount-MyWindowsImage $WimSourceItem -Verbose
+    $MountMyWindowsImage = Mount-MyWindowsImage $WimSourceItem
     $MountPath = $MountMyWindowsImage.Path
     #===================================================================================================
     #   Add Packages
@@ -77,43 +82,43 @@ function Edit-ADKwinpe.wim {
     $ErrorActionPreference = 'Ignore'
     $WinPEOCs = $AdkPaths.WinPEOCs
 
-    Add-WindowsPackage -Verbose -Path $MountPath -PackagePath "$WinPEOCs\WinPE-WMI.cab"
-    Add-WindowsPackage -Verbose -Path $MountPath -PackagePath "$WinPEOCs\en-us\WinPE-WMI_en-us.cab"
-    Add-WindowsPackage -Verbose -Path $MountPath -PackagePath "$WinPEOCs\WinPE-HTA.cab"
-    Add-WindowsPackage -Verbose -Path $MountPath -PackagePath "$WinPEOCs\en-us\WinPE-HTA_en-us.cab"
-    Add-WindowsPackage -Verbose -Path $MountPath -PackagePath "$WinPEOCs\WinPE-NetFx.cab"
-    Add-WindowsPackage -Verbose -Path $MountPath -PackagePath "$WinPEOCs\en-us\WinPE-NetFx_en-us.cab"
-    Add-WindowsPackage -Verbose -Path $MountPath -PackagePath "$WinPEOCs\WinPE-Scripting.cab"
-    Add-WindowsPackage -Verbose -Path $MountPath -PackagePath "$WinPEOCs\en-us\WinPE-Scripting_en-us.cab"
-    Add-WindowsPackage -Verbose -Path $MountPath -PackagePath "$WinPEOCs\WinPE-PowerShell.cab"
-    Add-WindowsPackage -Verbose -Path $MountPath -PackagePath "$WinPEOCs\en-us\WinPE-PowerShell_en-us.cab"
-    Add-WindowsPackage -Verbose -Path $MountPath -PackagePath "$WinPEOCs\WinPE-SecureStartup.cab"
-    Add-WindowsPackage -Verbose -Path $MountPath -PackagePath "$WinPEOCs\en-us\WinPE-SecureStartup_en-us.cab"
+    Add-WindowsPackage -Path $MountPath -PackagePath "$WinPEOCs\WinPE-WMI.cab"
+    Add-WindowsPackage -Path $MountPath -PackagePath "$WinPEOCs\en-us\WinPE-WMI_en-us.cab"
+    Add-WindowsPackage -Path $MountPath -PackagePath "$WinPEOCs\WinPE-HTA.cab"
+    Add-WindowsPackage -Path $MountPath -PackagePath "$WinPEOCs\en-us\WinPE-HTA_en-us.cab"
+    Add-WindowsPackage -Path $MountPath -PackagePath "$WinPEOCs\WinPE-NetFx.cab"
+    Add-WindowsPackage -Path $MountPath -PackagePath "$WinPEOCs\en-us\WinPE-NetFx_en-us.cab"
+    Add-WindowsPackage -Path $MountPath -PackagePath "$WinPEOCs\WinPE-Scripting.cab"
+    Add-WindowsPackage -Path $MountPath -PackagePath "$WinPEOCs\en-us\WinPE-Scripting_en-us.cab"
+    Add-WindowsPackage -Path $MountPath -PackagePath "$WinPEOCs\WinPE-PowerShell.cab"
+    Add-WindowsPackage -Path $MountPath -PackagePath "$WinPEOCs\en-us\WinPE-PowerShell_en-us.cab"
+    Add-WindowsPackage -Path $MountPath -PackagePath "$WinPEOCs\WinPE-SecureStartup.cab"
+    Add-WindowsPackage -Path $MountPath -PackagePath "$WinPEOCs\en-us\WinPE-SecureStartup_en-us.cab"
 
-    Add-WindowsPackage -Verbose -Path $MountPath -PackagePath "$WinPEOCs\WinPE-DismCmdlets.cab"
-    Add-WindowsPackage -Verbose -Path $MountPath -PackagePath "$WinPEOCs\en-us\WinPE-DismCmdlets_en-us.cab"
-    Add-WindowsPackage -Verbose -Path $MountPath -PackagePath "$WinPEOCs\WinPE-Dot3Svc.cab"
-    Add-WindowsPackage -Verbose -Path $MountPath -PackagePath "$WinPEOCs\en-us\WinPE-Dot3Svc_en-us.cab"
-    Add-WindowsPackage -Verbose -Path $MountPath -PackagePath "$WinPEOCs\WinPE-EnhancedStorage.cab"
-    Add-WindowsPackage -Verbose -Path $MountPath -PackagePath "$WinPEOCs\en-us\WinPE-EnhancedStorage_en-us.cab"
-    Add-WindowsPackage -Verbose -Path $MountPath -PackagePath "$WinPEOCs\WinPE-FMAPI.cab"
-    Add-WindowsPackage -Verbose -Path $MountPath -PackagePath "$WinPEOCs\WinPE-GamingPeripherals.cab"
-    Add-WindowsPackage -Verbose -Path $MountPath -PackagePath "$WinPEOCs\WinPE-PPPoE.cab"
-    Add-WindowsPackage -Verbose -Path $MountPath -PackagePath "$WinPEOCs\en-us\WinPE-PPPoE_en-us.cab"
-    Add-WindowsPackage -Verbose -Path $MountPath -PackagePath "$WinPEOCs\WinPE-PlatformId.cab"
-    Add-WindowsPackage -Verbose -Path $MountPath -PackagePath "$WinPEOCs\WinPE-PmemCmdlets.cab"
-    Add-WindowsPackage -Verbose -Path $MountPath -PackagePath "$WinPEOCs\en-us\WinPE-PmemCmdlets_en-us.cab"
-    Add-WindowsPackage -Verbose -Path $MountPath -PackagePath "$WinPEOCs\WinPE-RNDIS.cab"
-    Add-WindowsPackage -Verbose -Path $MountPath -PackagePath "$WinPEOCs\en-us\WinPE-RNDIS_en-us.cab"
-    Add-WindowsPackage -Verbose -Path $MountPath -PackagePath "$WinPEOCs\WinPE-SecureBootCmdlets.cab"
-    Add-WindowsPackage -Verbose -Path $MountPath -PackagePath "$WinPEOCs\WinPE-StorageWMI.cab"
-    Add-WindowsPackage -Verbose -Path $MountPath -PackagePath "$WinPEOCs\en-us\WinPE-StorageWMI_en-us.cab"
-    Add-WindowsPackage -Verbose -Path $MountPath -PackagePath "$WinPEOCs\WinPE-WDS-Tools.cab"
-    Add-WindowsPackage -Verbose -Path $MountPath -PackagePath "$WinPEOCs\en-us\WinPE-WDS-Tools_en-us.cab"
+    Add-WindowsPackage -Path $MountPath -PackagePath "$WinPEOCs\WinPE-DismCmdlets.cab"
+    Add-WindowsPackage -Path $MountPath -PackagePath "$WinPEOCs\en-us\WinPE-DismCmdlets_en-us.cab"
+    Add-WindowsPackage -Path $MountPath -PackagePath "$WinPEOCs\WinPE-Dot3Svc.cab"
+    Add-WindowsPackage -Path $MountPath -PackagePath "$WinPEOCs\en-us\WinPE-Dot3Svc_en-us.cab"
+    Add-WindowsPackage -Path $MountPath -PackagePath "$WinPEOCs\WinPE-EnhancedStorage.cab"
+    Add-WindowsPackage -Path $MountPath -PackagePath "$WinPEOCs\en-us\WinPE-EnhancedStorage_en-us.cab"
+    Add-WindowsPackage -Path $MountPath -PackagePath "$WinPEOCs\WinPE-FMAPI.cab"
+    Add-WindowsPackage -Path $MountPath -PackagePath "$WinPEOCs\WinPE-GamingPeripherals.cab"
+    Add-WindowsPackage -Path $MountPath -PackagePath "$WinPEOCs\WinPE-PPPoE.cab"
+    Add-WindowsPackage -Path $MountPath -PackagePath "$WinPEOCs\en-us\WinPE-PPPoE_en-us.cab"
+    Add-WindowsPackage -Path $MountPath -PackagePath "$WinPEOCs\WinPE-PlatformId.cab"
+    Add-WindowsPackage -Path $MountPath -PackagePath "$WinPEOCs\WinPE-PmemCmdlets.cab"
+    Add-WindowsPackage -Path $MountPath -PackagePath "$WinPEOCs\en-us\WinPE-PmemCmdlets_en-us.cab"
+    Add-WindowsPackage -Path $MountPath -PackagePath "$WinPEOCs\WinPE-RNDIS.cab"
+    Add-WindowsPackage -Path $MountPath -PackagePath "$WinPEOCs\en-us\WinPE-RNDIS_en-us.cab"
+    Add-WindowsPackage -Path $MountPath -PackagePath "$WinPEOCs\WinPE-SecureBootCmdlets.cab"
+    Add-WindowsPackage -Path $MountPath -PackagePath "$WinPEOCs\WinPE-StorageWMI.cab"
+    Add-WindowsPackage -Path $MountPath -PackagePath "$WinPEOCs\en-us\WinPE-StorageWMI_en-us.cab"
+    Add-WindowsPackage -Path $MountPath -PackagePath "$WinPEOCs\WinPE-WDS-Tools.cab"
+    Add-WindowsPackage -Path $MountPath -PackagePath "$WinPEOCs\en-us\WinPE-WDS-Tools_en-us.cab"
     #===================================================================================================
     #	cURL
     #===================================================================================================
-    Write-Verbose "Adding curl.exe to $MountPath" -Verbose
+    Write-Verbose "Adding curl.exe to $MountPath"
     if (Test-Path "$env:SystemRoot\System32\curl.exe") {
         robocopy "$env:SystemRoot\System32" "$MountPath\Windows\System32" curl.exe /ndl /nfl /njh /njs /b
     } else {
@@ -123,21 +128,21 @@ function Edit-ADKwinpe.wim {
     #===================================================================================================
     #	PowerShell Execution Policy
     #===================================================================================================
-    Write-Verbose "Setting PowerShell ExecutionPolicy to Bypass in $MountPath" -Verbose
-    Set-WindowsImageExecutionPolicy -Path $MountPath -ExecutionPolicy Bypass -Verbose
+    Write-Verbose "Setting PowerShell ExecutionPolicy to Bypass in $MountPath"
+    Set-WindowsImageExecutionPolicy -Path $MountPath -ExecutionPolicy Bypass
     #===================================================================================================
     #   Enable PowerShell Gallery
     #===================================================================================================
-    Write-Verbose "Enabling PowerShell Gallery support in $MountPath" -Verbose
-    Enable-PEWindowsImagePSGallery -Path $MountPath -Verbose
+    Write-Verbose "Enabling PowerShell Gallery support in $MountPath"
+    Enable-PEWindowsImagePSGallery -Path $MountPath
 
-    #Write-Verbose "Saving OSD to $MountPath\Program Files\WindowsPowerShell\Modules" -Verbose
-    #Save-Module -Name OSD -Path "$MountPath\Program Files\WindowsPowerShell\Modules" -Force -Verbose
+    #Write-Verbose "Saving OSD to $MountPath\Program Files\WindowsPowerShell\Modules"
+    #Save-Module -Name OSD -Path "$MountPath\Program Files\WindowsPowerShell\Modules" -Force
     #===================================================================================================
     #   Startnet
     #===================================================================================================
-    #Write-Verbose "Adding PowerShell.exe to Startnet.cmd" -Verbose
-    #Add-Content -Path "$MountPath\Windows\System32\Startnet.cmd" -Value 'start powershell.exe' -Force -Verbose
+    #Write-Verbose "Adding PowerShell.exe to Startnet.cmd"
+    #Add-Content -Path "$MountPath\Windows\System32\Startnet.cmd" -Value 'start powershell.exe' -Force
     #===============================================================================================
     #   DriverPath
     #===============================================================================================
@@ -147,7 +152,11 @@ function Edit-ADKwinpe.wim {
     #===============================================================================================
     #   Save WIM
     #===============================================================================================
-    $MountMyWindowsImage | Dismount-MyWindowsImage -Save -Verbose
+    $MountMyWindowsImage | Dismount-MyWindowsImage -Save
+    #===============================================================================================
+    #   Restore VerbosePreference
+    #===============================================================================================
+    $VerbosePreference = $CurrentVerbosePreference
     #===================================================================================================
     #	Complete
     #===================================================================================================

@@ -5,8 +5,9 @@ Creates an .iso file from a bootable media directory.  ADK is required
 .Description
 Creates a .iso file from a bootable media directory.  ADK is required
 
-.PARAMETER SourceDirectory
-Source Directory containing bootable media
+.PARAMETER WorkspacePath
+Directory for the Workspace.  This will contain the Media directory and the .iso file
+If not given, one will be created in $env:TEMP
 
 .PARAMETER isoFileName
 File Name of the ISO
@@ -15,7 +16,7 @@ File Name of the ISO
 Lable of the ISO.  Limited to 16 characters
 
 .PARAMETER CloudDriver
-Download and install in WinPE drivers from Dell, Nutanix, and VMware
+Download and install in WinPE drivers from Dell,Nutanix,VMware
 
 .PARAMETER NoPrompt
 Removes the 'Press any key to boot from CD or DVD......' prompt
@@ -30,7 +31,7 @@ function New-OSDCloud.iso {
     [CmdletBinding()]
     param (
         [Parameter(ValueFromPipelineByPropertyName = $true)]
-        [string]$isoDirectory = (Join-Path $env:TEMP (Get-Random)),
+        [string]$WorkspacePath = (Join-Path $env:TEMP (Get-Random)),
 
         [string]$isoFileName = 'OSDCloud.iso',
 
@@ -71,6 +72,11 @@ function New-OSDCloud.iso {
         Break
     }
     #===================================================================================================
+    #	Set VerbosePreference
+    #===================================================================================================
+    $CurrentVerbosePreference = $VerbosePreference
+    $VerbosePreference = 'Continue'
+    #===================================================================================================
     #   Get Adk Paths
     #===================================================================================================
     $AdkPaths = Get-AdkPaths
@@ -88,8 +94,8 @@ function New-OSDCloud.iso {
         Break
     }
     $PathWinPEMedia = $AdkPaths.PathWinPEMedia
-    $DestinationMedia = Join-Path $isoDirectory 'Media'
-    Write-Verbose "Copying ADK Media to $DestinationMedia" -Verbose
+    $DestinationMedia = Join-Path $WorkspacePath 'Media'
+    Write-Verbose "Copying ADK Media to $DestinationMedia"
     robocopy "$PathWinPEMedia" "$DestinationMedia" *.* /e /ndl /xj /ndl /np /nfl /njh /njs
 
     $DestinationSources = Join-Path $DestinationMedia 'sources'
@@ -98,7 +104,7 @@ function New-OSDCloud.iso {
     }
 
     $BootWim = Join-Path $DestinationSources 'boot.wim'
-    Write-Verbose "Copying ADK Boot.wim to $BootWim" -Verbose
+    Write-Verbose "Copying ADK Boot.wim to $BootWim"
     Copy-Item -Path $WimSourcePath -Destination $BootWim -Force
     #===================================================================================================
     #   Mount-MyWindowsImage
@@ -111,43 +117,43 @@ function New-OSDCloud.iso {
     $ErrorActionPreference = 'Ignore'
     $WinPEOCs = $AdkPaths.WinPEOCs
 
-    Add-WindowsPackage -Verbose -Path $MountPath -PackagePath "$WinPEOCs\WinPE-WMI.cab"
-    Add-WindowsPackage -Verbose -Path $MountPath -PackagePath "$WinPEOCs\en-us\WinPE-WMI_en-us.cab"
-    Add-WindowsPackage -Verbose -Path $MountPath -PackagePath "$WinPEOCs\WinPE-HTA.cab"
-    Add-WindowsPackage -Verbose -Path $MountPath -PackagePath "$WinPEOCs\en-us\WinPE-HTA_en-us.cab"
-    Add-WindowsPackage -Verbose -Path $MountPath -PackagePath "$WinPEOCs\WinPE-NetFx.cab"
-    Add-WindowsPackage -Verbose -Path $MountPath -PackagePath "$WinPEOCs\en-us\WinPE-NetFx_en-us.cab"
-    Add-WindowsPackage -Verbose -Path $MountPath -PackagePath "$WinPEOCs\WinPE-Scripting.cab"
-    Add-WindowsPackage -Verbose -Path $MountPath -PackagePath "$WinPEOCs\en-us\WinPE-Scripting_en-us.cab"
-    Add-WindowsPackage -Verbose -Path $MountPath -PackagePath "$WinPEOCs\WinPE-PowerShell.cab"
-    Add-WindowsPackage -Verbose -Path $MountPath -PackagePath "$WinPEOCs\en-us\WinPE-PowerShell_en-us.cab"
-    Add-WindowsPackage -Verbose -Path $MountPath -PackagePath "$WinPEOCs\WinPE-SecureStartup.cab"
-    Add-WindowsPackage -Verbose -Path $MountPath -PackagePath "$WinPEOCs\en-us\WinPE-SecureStartup_en-us.cab"
+    Add-WindowsPackage -Path $MountPath -PackagePath "$WinPEOCs\WinPE-WMI.cab"
+    Add-WindowsPackage -Path $MountPath -PackagePath "$WinPEOCs\en-us\WinPE-WMI_en-us.cab"
+    Add-WindowsPackage -Path $MountPath -PackagePath "$WinPEOCs\WinPE-HTA.cab"
+    Add-WindowsPackage -Path $MountPath -PackagePath "$WinPEOCs\en-us\WinPE-HTA_en-us.cab"
+    Add-WindowsPackage -Path $MountPath -PackagePath "$WinPEOCs\WinPE-NetFx.cab"
+    Add-WindowsPackage -Path $MountPath -PackagePath "$WinPEOCs\en-us\WinPE-NetFx_en-us.cab"
+    Add-WindowsPackage -Path $MountPath -PackagePath "$WinPEOCs\WinPE-Scripting.cab"
+    Add-WindowsPackage -Path $MountPath -PackagePath "$WinPEOCs\en-us\WinPE-Scripting_en-us.cab"
+    Add-WindowsPackage -Path $MountPath -PackagePath "$WinPEOCs\WinPE-PowerShell.cab"
+    Add-WindowsPackage -Path $MountPath -PackagePath "$WinPEOCs\en-us\WinPE-PowerShell_en-us.cab"
+    Add-WindowsPackage -Path $MountPath -PackagePath "$WinPEOCs\WinPE-SecureStartup.cab"
+    Add-WindowsPackage -Path $MountPath -PackagePath "$WinPEOCs\en-us\WinPE-SecureStartup_en-us.cab"
 
-    Add-WindowsPackage -Verbose -Path $MountPath -PackagePath "$WinPEOCs\WinPE-DismCmdlets.cab"
-    Add-WindowsPackage -Verbose -Path $MountPath -PackagePath "$WinPEOCs\en-us\WinPE-DismCmdlets_en-us.cab"
-    Add-WindowsPackage -Verbose -Path $MountPath -PackagePath "$WinPEOCs\WinPE-Dot3Svc.cab"
-    Add-WindowsPackage -Verbose -Path $MountPath -PackagePath "$WinPEOCs\en-us\WinPE-Dot3Svc_en-us.cab"
-    Add-WindowsPackage -Verbose -Path $MountPath -PackagePath "$WinPEOCs\WinPE-EnhancedStorage.cab"
-    Add-WindowsPackage -Verbose -Path $MountPath -PackagePath "$WinPEOCs\en-us\WinPE-EnhancedStorage_en-us.cab"
-    Add-WindowsPackage -Verbose -Path $MountPath -PackagePath "$WinPEOCs\WinPE-FMAPI.cab"
-    Add-WindowsPackage -Verbose -Path $MountPath -PackagePath "$WinPEOCs\WinPE-GamingPeripherals.cab"
-    Add-WindowsPackage -Verbose -Path $MountPath -PackagePath "$WinPEOCs\WinPE-PPPoE.cab"
-    Add-WindowsPackage -Verbose -Path $MountPath -PackagePath "$WinPEOCs\en-us\WinPE-PPPoE_en-us.cab"
-    Add-WindowsPackage -Verbose -Path $MountPath -PackagePath "$WinPEOCs\WinPE-PlatformId.cab"
-    Add-WindowsPackage -Verbose -Path $MountPath -PackagePath "$WinPEOCs\WinPE-PmemCmdlets.cab"
-    Add-WindowsPackage -Verbose -Path $MountPath -PackagePath "$WinPEOCs\en-us\WinPE-PmemCmdlets_en-us.cab"
-    Add-WindowsPackage -Verbose -Path $MountPath -PackagePath "$WinPEOCs\WinPE-RNDIS.cab"
-    Add-WindowsPackage -Verbose -Path $MountPath -PackagePath "$WinPEOCs\en-us\WinPE-RNDIS_en-us.cab"
-    Add-WindowsPackage -Verbose -Path $MountPath -PackagePath "$WinPEOCs\WinPE-SecureBootCmdlets.cab"
-    Add-WindowsPackage -Verbose -Path $MountPath -PackagePath "$WinPEOCs\WinPE-StorageWMI.cab"
-    Add-WindowsPackage -Verbose -Path $MountPath -PackagePath "$WinPEOCs\en-us\WinPE-StorageWMI_en-us.cab"
-    Add-WindowsPackage -Verbose -Path $MountPath -PackagePath "$WinPEOCs\WinPE-WDS-Tools.cab"
-    Add-WindowsPackage -Verbose -Path $MountPath -PackagePath "$WinPEOCs\en-us\WinPE-WDS-Tools_en-us.cab"
+    Add-WindowsPackage -Path $MountPath -PackagePath "$WinPEOCs\WinPE-DismCmdlets.cab"
+    Add-WindowsPackage -Path $MountPath -PackagePath "$WinPEOCs\en-us\WinPE-DismCmdlets_en-us.cab"
+    Add-WindowsPackage -Path $MountPath -PackagePath "$WinPEOCs\WinPE-Dot3Svc.cab"
+    Add-WindowsPackage -Path $MountPath -PackagePath "$WinPEOCs\en-us\WinPE-Dot3Svc_en-us.cab"
+    Add-WindowsPackage -Path $MountPath -PackagePath "$WinPEOCs\WinPE-EnhancedStorage.cab"
+    Add-WindowsPackage -Path $MountPath -PackagePath "$WinPEOCs\en-us\WinPE-EnhancedStorage_en-us.cab"
+    Add-WindowsPackage -Path $MountPath -PackagePath "$WinPEOCs\WinPE-FMAPI.cab"
+    Add-WindowsPackage -Path $MountPath -PackagePath "$WinPEOCs\WinPE-GamingPeripherals.cab"
+    Add-WindowsPackage -Path $MountPath -PackagePath "$WinPEOCs\WinPE-PPPoE.cab"
+    Add-WindowsPackage -Path $MountPath -PackagePath "$WinPEOCs\en-us\WinPE-PPPoE_en-us.cab"
+    Add-WindowsPackage -Path $MountPath -PackagePath "$WinPEOCs\WinPE-PlatformId.cab"
+    Add-WindowsPackage -Path $MountPath -PackagePath "$WinPEOCs\WinPE-PmemCmdlets.cab"
+    Add-WindowsPackage -Path $MountPath -PackagePath "$WinPEOCs\en-us\WinPE-PmemCmdlets_en-us.cab"
+    Add-WindowsPackage -Path $MountPath -PackagePath "$WinPEOCs\WinPE-RNDIS.cab"
+    Add-WindowsPackage -Path $MountPath -PackagePath "$WinPEOCs\en-us\WinPE-RNDIS_en-us.cab"
+    Add-WindowsPackage -Path $MountPath -PackagePath "$WinPEOCs\WinPE-SecureBootCmdlets.cab"
+    Add-WindowsPackage -Path $MountPath -PackagePath "$WinPEOCs\WinPE-StorageWMI.cab"
+    Add-WindowsPackage -Path $MountPath -PackagePath "$WinPEOCs\en-us\WinPE-StorageWMI_en-us.cab"
+    Add-WindowsPackage -Path $MountPath -PackagePath "$WinPEOCs\WinPE-WDS-Tools.cab"
+    Add-WindowsPackage -Path $MountPath -PackagePath "$WinPEOCs\en-us\WinPE-WDS-Tools_en-us.cab"
     #===================================================================================================
     #	cURL
     #===================================================================================================
-    Write-Verbose "Adding curl.exe to $MountPath" -Verbose
+    Write-Verbose "Adding curl.exe to $MountPath"
     if (Test-Path "$env:SystemRoot\System32\curl.exe") {
         robocopy "$env:SystemRoot\System32" "$MountPath\Windows\System32" curl.exe /ndl /nfl /njh /njs /b
     } else {
@@ -157,21 +163,21 @@ function New-OSDCloud.iso {
     #===================================================================================================
     #	PowerShell Execution Policy
     #===================================================================================================
-    Write-Verbose "Setting PowerShell ExecutionPolicy to Bypass in $MountPath" -Verbose
+    Write-Verbose "Setting PowerShell ExecutionPolicy to Bypass in $MountPath"
     Set-WindowsImageExecutionPolicy -Path $MountPath -ExecutionPolicy Bypass
     #===================================================================================================
     #   Enable PowerShell Gallery
     #===================================================================================================
-    Write-Verbose "Enabling PowerShell Gallery support in $MountPath" -Verbose
-    Enable-PEWindowsImagePSGallery -Path $MountPath -Verbose
+    Write-Verbose "Enabling PowerShell Gallery support in $MountPath"
+    Enable-PEWindowsImagePSGallery -Path $MountPath
 
-    Write-Verbose "Saving OSD to $MountPath\Program Files\WindowsPowerShell\Modules" -Verbose
-    Save-Module -Name OSD -Path "$MountPath\Program Files\WindowsPowerShell\Modules" -Force -Verbose
+    Write-Verbose "Saving OSD to $MountPath\Program Files\WindowsPowerShell\Modules"
+    Save-Module -Name OSD -Path "$MountPath\Program Files\WindowsPowerShell\Modules" -Force
     #===================================================================================================
     #   Startnet
     #===================================================================================================
-    Write-Verbose "Adding PowerShell.exe to Startnet.cmd" -Verbose
-    Add-Content -Path "$MountPath\Windows\System32\Startnet.cmd" -Value 'start powershell.exe' -Force -Verbose
+    Write-Verbose "Adding PowerShell.exe to Startnet.cmd"
+    Add-Content -Path "$MountPath\Windows\System32\Startnet.cmd" -Value 'start powershell.exe' -Force
     #===============================================================================================
     #   DriverPath
     #===============================================================================================
@@ -180,7 +186,7 @@ function New-OSDCloud.iso {
     }
     foreach ($Driver in $CloudDriver) {
         if ($Driver -eq 'Dell'){
-            Write-Verbose "Adding $Driver CloudDriver" -Verbose
+            Write-Verbose "Adding $Driver CloudDriver"
             if (Test-WebConnection -Uri 'http://downloads.dell.com/FOLDER07062618M/1/WINPE10.0-DRIVERS-A23-PR4K0.CAB') {
                 $SaveWebFile = Save-WebFile -SourceUrl 'http://downloads.dell.com/FOLDER07062618M/1/WINPE10.0-DRIVERS-A23-PR4K0.CAB'
                 if (Test-Path $SaveWebFile.FullName) {
@@ -191,12 +197,12 @@ function New-OSDCloud.iso {
                         New-Item -Path $ExpandPath -ItemType Directory -Force | Out-Null
                     }
                     Expand -R "$($DriverCab.FullName)" -F:* "$ExpandPath" | Out-Null
-                    Add-WindowsDriver -Path "$($MountMyWindowsImage.Path)" -Driver "$ExpandPath" -Recurse -ForceUnsigned -Verbose
+                    Add-WindowsDriver -Path "$($MountMyWindowsImage.Path)" -Driver "$ExpandPath" -Recurse -ForceUnsigned
                 }
             }
         }
         if ($Driver -eq 'Nutanix'){
-            Write-Verbose "Adding $Driver CloudDriver" -Verbose
+            Write-Verbose "Adding $Driver CloudDriver"
             if (Test-WebConnection -Uri 'https://github.com/OSDeploy/OSDCloud/raw/main/Drivers/WinPE/Nutanix.cab') {
                 $SaveWebFile = Save-WebFile -SourceUrl 'https://github.com/OSDeploy/OSDCloud/raw/main/Drivers/WinPE/Nutanix.cab'
                 if (Test-Path $SaveWebFile.FullName) {
@@ -207,12 +213,12 @@ function New-OSDCloud.iso {
                         New-Item -Path $ExpandPath -ItemType Directory -Force | Out-Null
                     }
                     Expand -R "$($DriverCab.FullName)" -F:* "$ExpandPath" | Out-Null
-                    Add-WindowsDriver -Path "$($MountMyWindowsImage.Path)" -Driver "$ExpandPath" -Recurse -ForceUnsigned -Verbose
+                    Add-WindowsDriver -Path "$($MountMyWindowsImage.Path)" -Driver "$ExpandPath" -Recurse -ForceUnsigned
                 }
             }
         }
         if ($Driver -eq 'VMware'){
-            Write-Verbose "Adding $Driver CloudDriver" -Verbose
+            Write-Verbose "Adding $Driver CloudDriver"
             if (Test-WebConnection -Uri 'https://github.com/OSDeploy/OSDCloud/raw/main/Drivers/WinPE/VMware.cab') {
                 $SaveWebFile = Save-WebFile -SourceUrl 'https://github.com/OSDeploy/OSDCloud/raw/main/Drivers/WinPE/VMware.cab'
                 if (Test-Path $SaveWebFile.FullName) {
@@ -223,7 +229,7 @@ function New-OSDCloud.iso {
                         New-Item -Path $ExpandPath -ItemType Directory -Force | Out-Null
                     }
                     Expand -R "$($DriverCab.FullName)" -F:* "$ExpandPath" | Out-Null
-                    Add-WindowsDriver -Path "$($MountMyWindowsImage.Path)" -Driver "$ExpandPath" -Recurse -ForceUnsigned -Verbose
+                    Add-WindowsDriver -Path "$($MountMyWindowsImage.Path)" -Driver "$ExpandPath" -Recurse -ForceUnsigned
                 }
             }
         }
@@ -231,16 +237,20 @@ function New-OSDCloud.iso {
     #===============================================================================================
     #   Save WIM
     #===============================================================================================
-    $MountMyWindowsImage | Dismount-MyWindowsImage -Save -Verbose
+    $MountMyWindowsImage | Dismount-MyWindowsImage -Save
     #===============================================================================================
     #   Create ISO
     #===============================================================================================
     if ($PSBoundParameters.ContainsKey('NoPrompt')) {
-        New-ADK.iso -isoDirectory $DestinationMedia -isoFileName $isoFileName -isoLabel $isoLabel -NoPrompt -OpenExplorer
+        $NewADKiso = New-ADK.iso -MediaPath $DestinationMedia -isoFileName $isoFileName -isoLabel $isoLabel -OpenExplorer -NoPrompt
     }
     else {
-        New-ADK.iso -isoDirectory $DestinationMedia -isoFileName $isoFileName -isoLabel $isoLabel -OpenExplorer
+        $NewADKiso = New-ADK.iso -MediaPath $DestinationMedia -isoFileName $isoFileName -isoLabel $isoLabel -OpenExplorer
     }
+    #===============================================================================================
+    #   Restore VerbosePreference
+    #===============================================================================================
+    $VerbosePreference = $CurrentVerbosePreference
     #===================================================================================================
     #	Complete
     #===================================================================================================
@@ -249,5 +259,7 @@ function New-OSDCloud.iso {
     Write-Host -ForegroundColor DarkGray    "========================================================================="
     Write-Host -ForegroundColor Yellow      "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) $($MyInvocation.MyCommand.Name) " -NoNewline
     Write-Host -ForegroundColor Cyan        "Completed in $($TimeSpan.ToString("mm' minutes 'ss' seconds'"))"
+    
+    Return $NewADKiso
     #===================================================================================================
 }
