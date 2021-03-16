@@ -7,7 +7,7 @@
 RootModule = 'OSD.psm1'
 
 # Version number of his module.
-ModuleVersion = '21.3.15.1'
+ModuleVersion = '21.3.15.2'
 
 # Supported PSEditions
 # CompatiblePSEditions = @()
@@ -66,9 +66,11 @@ PowerShellVersion = '5.0'
 # NestedModules = @()
 
 # Functions to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no functions to export.
-FunctionsToExport = 
-'Get-MyAdk',#ADK
-'New-MyAdkCopyPE',
+FunctionsToExport =
+'Edit-ADKwinpe.wim',#ADK
+'Get-ADKpaths',
+'New-ADKcopype',
+'New-ADK.iso',
 'Remove-AppxOnline',#APPX
 'Backup-MyBitLockerKeys',#BITLOCKER
 'Get-MyBitLockerKeyProtectors',
@@ -138,12 +140,11 @@ FunctionsToExport =
 'Get-OSDCloudOfflineAutoPilotProfiles',#OSDCLOUD
 'Get-OSDCloudOfflineFile',
 'Get-OSDCloudOfflinePath',
-'New-OSDCloudWinPE',
+'New-OSDCloud.iso',
 'Save-OSDCloud',
 'Select-AutoPilotJson',
 'Select-OSDCloudOfflineAutoPilotProfiles',
 'Start-OSDCloud',
-'Update-OSDCloudISO',
 'Get-OSDPower',#POWER
 'Enable-PEWimPSGallery',#PSGALLERY
 'Enable-PEWindowsImagePSGallery',

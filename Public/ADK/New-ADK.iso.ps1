@@ -1,0 +1,148 @@
+<#
+.SYNOPSIS
+Creates an .iso file from a bootable media directory.  ADK is required
+
+.Description
+Creates a .iso file from a bootable media directory.  ADK is required
+
+.PARAMETER isoDirectory
+Source Directory containing bootable media
+
+.PARAMETER isoFileName
+File Name of the ISO
+
+.PARAMETER isoLabel
+Lable of the ISO.  Limited to 16 characters
+
+.PARAMETER NoPrompt
+Removes the 'Press any key to boot from CD or DVD......' prompt
+
+.PARAMETER Mount
+Mounts the ISO in Windows Explorer
+
+.PARAMETER OpenExplorer
+Opens Windows Explorer to the parent directory of the ISO File
+
+.LINK
+https://osd.osdeploy.com/module/functions/adk
+
+.NOTES
+21.3.16     Initial Release
+#>
+function New-ADK.iso {
+    [CmdletBinding()]
+    param (
+        [Parameter(Mandatory = $true)]
+        [string]$isoDirectory,
+
+        [Parameter(Mandatory = $true)]
+        [string]$isoFileName,
+
+        [Parameter(Mandatory = $true)]
+        [ValidateLength(1,16)]
+        [string]$isoLabel,
+
+        [switch]$NoPrompt,
+        [switch]$Mount,
+        [switch]$OpenExplorer
+    )
+    #======================================================================================================
+    #	Require WinOS
+    #======================================================================================================
+    if ((Get-OSDGather -Property IsWinPE)) {
+        Write-Warning "$($MyInvocation.MyCommand) cannot be run from WinPE"
+        Break
+    }
+    #===================================================================================================
+    #   Require Admin Rights
+    #===================================================================================================
+    if ((Get-OSDGather -Property IsAdmin) -eq $false) {
+        Write-Warning "$($MyInvocation.MyCommand) requires Admin Rights ELEVATED"
+        Break
+    }
+    #===================================================================================================
+    #   Get Adk Paths
+    #===================================================================================================
+    $AdkPaths = Get-AdkPaths
+
+    if ($null -eq $AdkPaths) {
+        Write-Warning "Could not get ADK going, sorry"
+        Break
+    }
+    #===================================================================================================
+    $IsoParent = (Get-Item -Path $isoDirectory -ErrorAction Stop).Parent.FullName
+    $IsoFullName = Join-Path $IsoParent $isoFileName
+    $PathOscdimg = $AdkPaths.PathOscdimg
+    $oscdimgexe = $AdkPaths.oscdimgexe
+
+    Write-Verbose "IsoParent: $IsoParent"
+    Write-Verbose "IsoFullName: $IsoFullName"
+    Write-Verbose "PathOscdimg: $PathOscdimg"
+    Write-Verbose "oscdimgexe: $oscdimgexe"
+    #===================================================================================================
+    #   Test Paths
+    #===================================================================================================
+    $DestinationBoot = Join-Path $isoDirectory 'boot'
+    if (-NOT (Test-Path $DestinationBoot)) {
+        Write-Warning "Cannot locate $DestinationBoot"
+        Write-Warning "This does not appear to be a valid bootable ISO"
+        Break
+    }
+    $DestinationEfiBoot = Join-Path $isoDirectory 'efi\microsoft\boot'
+    if (-NOT (Test-Path $DestinationEfiBoot)) {
+        Write-Warning "Cannot locate $DestinationEfiBoot"
+        Write-Warning "This does not appear to be a valid bootable ISO"
+        Break
+    }
+    #===================================================================================================
+    #   Copy Items
+    #===================================================================================================
+    $etfsbootcom = $AdkPaths.etfsbootcom
+    Copy-Item -Path $etfsbootcom -Destination $DestinationBoot -Force -ErrorAction Stop
+    $Destinationetfsbootcom = Join-Path $DestinationBoot 'etfsboot.com'
+
+    if ($PSBoundParameters.ContainsKey('NoPrompt')) {
+        $efisysbin = $AdkPaths.efisysnopromptbin
+        Copy-Item -Path $efisysbin -Destination $DestinationEfiBoot -Force -ErrorAction Stop
+        $Destinationefisysbin = Join-Path $DestinationEfiBoot 'efisys_noprompt.bin'
+    } else {
+        $efisysbin = $AdkPaths.efisysbin
+        Copy-Item -Path $efisysbin -Destination $DestinationEfiBoot -Force -ErrorAction Stop
+        $Destinationefisysbin = Join-Path $DestinationEfiBoot 'efisys.bin'
+    }
+    Write-Verbose "DestinationBoot: $DestinationBoot"
+    Write-Verbose "etfsbootcom: $etfsbootcom"
+    Write-Verbose "Destinationetfsbootcom: $Destinationetfsbootcom"
+
+    Write-Verbose "DestinationEfiBoot: $DestinationEfiBoot"
+    Write-Verbose "efisysbin: $efisysbin"
+    Write-Verbose "Destinationefisysbin: $Destinationefisysbin"
+    #===================================================================================================
+    #   Strings
+    #===================================================================================================
+    $isoLabelString = '-l"{0}"' -f "$isoLabel"
+    $BootDataString = '2#p0,e,b"{0}"#pEF,e,b"{1}"' -f "$Destinationetfsbootcom", "$Destinationefisysbin"
+    Write-Verbose "isoLabelString: $isoLabelString"
+    Write-Verbose "BootDataString: $BootDataString"
+
+    $Process = Start-Process $oscdimgexe -args @("-m","-o","-u2","-bootdata:$BootDataString",'-u2','-udfver102',$isoLabelString,"`"$isoDirectory`"", "`"$IsoFullName`"") -PassThru -Wait -NoNewWindow
+
+    if (-NOT (Test-Path $IsoFullName)) {
+        Write-Error "Something didn't work"
+        Break
+    }
+    if ($PSBoundParameters.ContainsKey('OpenExplorer')) {
+        explorer $IsoParent
+    }
+    if ($PSBoundParameters.ContainsKey('Mount')) {
+        explorer $IsoFullName
+    }
+
+    $Results += [pscustomobject]@{
+        FullName            = $IsoFullName
+        Name                = $isoFileName
+        Label               = $isoLabel
+        isoDirectory     = $isoDirectory
+    }
+    Return $results
+}

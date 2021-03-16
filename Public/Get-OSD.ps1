@@ -65,7 +65,7 @@ function Get-OSD {
 
     Write-Host -ForegroundColor DarkCyan    '=================================' -NoNewline
     Write-Host -ForegroundColor Cyan        '21.3.10'
-    Write-Host -ForegroundColor Yellow      'Get-MyADK                              ' -NoNewline
+    Write-Host -ForegroundColor Yellow      'Get-AdkPaths                              ' -NoNewline
     Write-Host -ForegroundColor Gray        'Just a simple helper function to get ADK Variables'
     Write-Host -ForegroundColor Yellow      'New-OSDCloudWinPE                      ' -NoNewline
     Write-Host -ForegroundColor Gray        '[DEV] Creates an OSDCloud ready WinPE from the Windows ADK'
