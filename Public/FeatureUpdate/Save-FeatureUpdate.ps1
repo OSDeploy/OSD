@@ -22,28 +22,21 @@ function Save-FeatureUpdate {
         [string]$OSCulture = 'en-us'
     )
     #===================================================================================================
-    #   Get
+    #   Get-FeatureUpdate
     #===================================================================================================
     $GetFeatureUpdate = Get-FeatureUpdate -OSBuild $OSBuild -OSCulture $OSCulture
     #===================================================================================================
-    #   Save
+    #   SaveWebFile
     #===================================================================================================
     if ($GetFeatureUpdate) {
         if (Test-Path "$DownloadPath\$($GetFeatureUpdate.FileName)") {
             Get-Item "$DownloadPath\$($GetFeatureUpdate.FileName)"
         }
         elseif (Test-WebConnection -Uri "$($GetFeatureUpdate.FileUri)") {
-            $SaveFeatureUpdate = Save-WebFile -SourceUrl $GetFeatureUpdate.FileUri -DownloadFolder "$DownloadPath"
-            if (Test-Path $SaveFeatureUpdate.FullName) {
-                Write-Host "Rename: $($SaveFeatureUpdate.FullName)"
-                Write-Host "NewName: $($GetFeatureUpdate.FileName)"
-                Rename-Item -Path "$($SaveFeatureUpdate.FullName)" -NewName "$($GetFeatureUpdate.FileName)" -Force
-            }
-            if (Test-Path "$DownloadPath\$($GetFeatureUpdate.FileName)") {
-                Get-Item "$DownloadPath\$($GetFeatureUpdate.FileName)"
-            }
-            elseif (Test-Path "$($SaveFeatureUpdate.FullName)") {
-                Get-Item "$($SaveFeatureUpdate.FullName)"
+            $SaveWebFile = Save-WebFile -SourceUrl $GetFeatureUpdate.FileUri -DestinationDirectory "$DownloadPath" -DestinationName $GetFeatureUpdate.FileName
+
+            if (Test-Path $SaveWebFile.FullName) {
+                Return Get-Item $SaveWebFile.FullName
             }
             else {
                 Write-Warning "Could not download the Feature Update"

@@ -178,13 +178,10 @@ if ($OSDCloudOfflineOS) {
     Write-Host -ForegroundColor Cyan "Offline: $OSDCloudOfflineOSFullName"
 }
 elseif (Test-WebConnection -Uri $GetFeatureUpdate.FileUri) {
-    $SaveFeatureUpdate = Save-FeatureUpdate -OSBuild $OSBuild -OSCulture $OSCulture -DownloadPath 'C:\OSDCloud\OS' | Out-Null
-
-    if (Test-Path $SaveFeatureUpdate.FullName) {
+    $SaveFeatureUpdate = Save-FeatureUpdate -OSBuild $OSBuild -OSCulture $OSCulture -DownloadPath 'C:\OSDCloud\OS'
+    $Global:SaveFeatureUpdate = $SaveFeatureUpdate
+    if (Test-Path $($SaveFeatureUpdate.FullName)) {
         $OSDCloudOfflineOSFullName = $SaveFeatureUpdate.FullName
-    }
-    elseif (Test-Path "C:\OSDCloud\OS\$($GetFeatureUpdate.FileName)") {
-        $OSDCloudOfflineOSFullName = "C:\OSDCloud\OS\$($GetFeatureUpdate.FileName)"
     }
     else {
         Write-Warning "Something went wrong trying to get the Windows Feature Update"
