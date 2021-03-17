@@ -138,7 +138,9 @@ FunctionsToExport =
 'Get-MyBiosVersion',
 'Get-MyComputerManufacturer',
 'Get-MyComputerModel',
-'Get-OSDCloudOfflineAutoPilotProfiles',#OSDCLOUD
+'Get-OSDCloud.workspace',#OSDCLOUD
+'Get-OSDCloud.template',
+'Get-OSDCloudOfflineAutoPilotProfiles',
 'Get-OSDCloudOfflineFile',
 'Get-OSDCloudOfflinePath',
 'New-OSDCloud.iso',
@@ -147,6 +149,7 @@ FunctionsToExport =
 'Save-OSDCloud',
 'Select-AutoPilotJson',
 'Select-OSDCloudOfflineAutoPilotProfiles',
+'Set-OSDCloud.workspace',
 'Start-OSDCloud',
 'Test-OSDCloud.template',
 'Get-OSDPower',#POWER

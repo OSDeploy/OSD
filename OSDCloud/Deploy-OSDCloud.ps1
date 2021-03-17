@@ -9,7 +9,7 @@
 #   In WinPE, the latest version will be installed automatically
 #   In Windows, this script is stopped and you will need to update manually
 #===================================================================================================
-[Version]$OSDVersionMin = '21.3.16.2'
+[Version]$OSDVersionMin = '21.3.17.1'
 
 if ((Get-Module -Name OSD -ListAvailable | `Sort-Object Version -Descending | Select-Object -First 1).Version -lt $OSDVersionMin) {
     Write-Warning "OSDCloud requires OSD $OSDVersionMin or newer"
@@ -390,8 +390,10 @@ if (-NOT (Test-Path "$PowerShellSavePath\Scripts")) {
 }
 
 if (Test-WebConnection -Uri "https://www.powershellgallery.com") {
-    Save-Module -Name WindowsAutoPilotIntune -Path "$PowerShellSavePath\Modules"
-    Save-Script -Name Get-WindowsAutoPilotInfo -Path "$PowerShellSavePath\Scripts"
+    Save-Module -Name PackageManagement -Path "$PowerShellSavePath\Modules" -Force
+    Save-Module -Name PowerShellGet -Path "$PowerShellSavePath\Modules" -Force
+    Save-Module -Name WindowsAutoPilotIntune -Path "$PowerShellSavePath\Modules" -Force
+    Save-Script -Name Get-WindowsAutoPilotInfo -Path "$PowerShellSavePath\Scripts" -Force
 }
 else {
     $OSDCloudOfflinePath = Get-OSDCloudOfflinePath

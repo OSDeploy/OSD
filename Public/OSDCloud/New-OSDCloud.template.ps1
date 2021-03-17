@@ -144,7 +144,10 @@ function New-OSDCloud.template {
     #   Startnet
     #===============================================================================================
     Write-Verbose "Adding PowerShell.exe to Startnet.cmd"
-    Add-Content -Path "$MountPath\Windows\System32\Startnet.cmd" -Value 'start powershell.exe' -Force
+    $Startnet = Get-Content -Path "$MountPath\Windows\System32\Startnet.cmd"
+    if ($Startnet -notmatch "start powershell") {
+        Add-Content -Path "$MountPath\Windows\System32\Startnet.cmd" -Value 'start powershell.exe' -Force
+    }
     #===============================================================================================
     #   Save WIM
     #===============================================================================================
@@ -170,9 +173,8 @@ function New-OSDCloud.template {
     #===============================================================================================
     #	Return
     #===============================================================================================
-    $Global:OSDCloudTemplate = (Get-Item -Path $TemplatePath | Select-Object -Property *)
-    Write-Host -ForegroundColor Cyan        "OSDCloud Workspace created at $($Global:OSDCloudTemplate.FullName)"
-    Write-Host -ForegroundColor Cyan        "OSDCloud Workspace Get-Item is saved in the Global Variable OSDCloudTemplate"
-    Return $Global:OSDCloudTemplate
+    Write-Host -ForegroundColor Cyan        "OSDCloud Template created at $TemplatePath"
+    Write-Host -ForegroundColor Cyan        "Get-OSDCloud.template will return $TemplatePath"
+    #Return $TemplatePath
     #===============================================================================================
 }

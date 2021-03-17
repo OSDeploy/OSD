@@ -53,21 +53,31 @@ function New-OSDCloud.workspace {
     #$CurrentVerbosePreference = $VerbosePreference
     #$VerbosePreference = 'Continue'
     #===============================================================================================
-    #	Global:OSDCloudTemplate
+    #	Get-OSDCloud.template
     #===============================================================================================
-    if (Test-OSDCloud.template) {
-        $Global:OSDCloudTemplate = (Get-Item -Path "$env:ProgramData\OSDCloud" | Select-Object -Property *)
-    }
-    else {
+    if (-NOT (Get-OSDCloud.template)) {
+        Write-Warning "Setting up a new OSDCloud.template"
         New-OSDCloud.template -Verbose
     }
+
+    $OSDCloudTemplate = Get-OSDCloud.template
+    if (-NOT ($OSDCloudTemplate)) {
+        Write-Warning "Something bad happened.  I have to go"
+        Break
+    }
     #===============================================================================================
-    #	Workspace
+    #	Set WorkspacePath
+    #===============================================================================================
+    if ($PSBoundParameters.ContainsKey('WorkspacePath')) {
+        Set-OSDCloud.workspace -WorkspacePath $WorkspacePath -ErrorAction Stop | Out-Null
+    }
+    #===============================================================================================
+    #	Setup Workspace
     #===============================================================================================
     if (-NOT (Test-Path $WorkspacePath)) {
         New-Item -Path $WorkspacePath -ItemType Directory -Force -ErrorAction Stop | Out-Null
     }
-    robocopy "$($OSDCloudTemplate.FullName)" "$WorkspacePath" *.* /e /ndl /xj /ndl /np /nfl /njh /njs
+    robocopy "$OSDCloudTemplate" "$WorkspacePath" *.* /e /ndl /xj /ndl /np /nfl /njh /njs /xf workspace.json
     #===============================================================================================
     #   Restore VerbosePreference
     #===============================================================================================
@@ -83,11 +93,10 @@ function New-OSDCloud.workspace {
     #===============================================================================================
     #	Return
     #===============================================================================================
-    $Global:OSDCloudWorkspace = (Get-Item -Path $WorkspacePath | Select-Object -Property *)
-    Write-Host -ForegroundColor Cyan        "OSDCloud Workspace created at $($Global:OSDCloudWorkspace.FullName)"
-    Write-Host -ForegroundColor Cyan        "OSDCloud Workspace Get-Item is saved in the Global Variable OSDCloudWorkspace"
+    Write-Host -ForegroundColor Cyan        "OSDCloud Workspace created at $WorkspacePath"
+    Write-Host -ForegroundColor Cyan        "Get-OSDCloud.workspace will return your last used WorkspacePath"
 
     #explorer $WorkspacePath
-    Return $Global:OSDCloudWorkspace
+    #Return $WorkspacePath
     #===============================================================================================
 }
