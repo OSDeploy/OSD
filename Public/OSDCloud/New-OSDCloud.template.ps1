@@ -169,7 +169,7 @@ function New-OSDCloud.template {
     $TemplateTimeSpan = New-TimeSpan -Start $TemplateStartTime -End $TemplateEndTime
     Write-Host -ForegroundColor DarkGray    "========================================================================="
     Write-Host -ForegroundColor Yellow      "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) $($MyInvocation.MyCommand.Name) " -NoNewline
-    Write-Host -ForegroundColor Cyan        "Completed in $($Template.ToString("mm' minutes 'ss' seconds'"))"
+    Write-Host -ForegroundColor Cyan        "Completed in $($TemplateTimeSpan.ToString("mm' minutes 'ss' seconds'"))"
     #===============================================================================================
     #	Return
     #===============================================================================================
