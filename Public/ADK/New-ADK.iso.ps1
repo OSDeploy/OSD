@@ -6,19 +6,13 @@ Creates an .iso file from a bootable media directory.  ADK is required
 Creates a .iso file from a bootable media directory.  ADK is required
 
 .PARAMETER MediaPath
-Directory containing the bootable media files
+Directory containing the bootable media
 
 .PARAMETER isoFileName
 File Name of the ISO
 
 .PARAMETER isoLabel
-Lable of the ISO.  Limited to 16 characters
-
-.PARAMETER NoPrompt
-Removes the 'Press any key to boot from CD or DVD......' prompt
-
-.PARAMETER Mount
-Mounts the ISO in Windows Explorer
+Label of the ISO.  Limited to 16 characters
 
 .PARAMETER OpenExplorer
 Opens Windows Explorer to the parent directory of the ISO File
@@ -42,8 +36,8 @@ function New-ADK.iso {
         [ValidateLength(1,16)]
         [string]$isoLabel,
 
-        [switch]$NoPrompt,
-        [switch]$Mount,
+        #[switch]$NoPrompt,
+        #[switch]$Mount,
         [switch]$OpenExplorer
     )
     #======================================================================================================
@@ -100,13 +94,23 @@ function New-ADK.iso {
         Break
     }
     #===================================================================================================
-    #   Copy Items
+    #   etfsboot.com
     #===================================================================================================
     $etfsbootcom = $AdkPaths.etfsbootcom
     Copy-Item -Path $etfsbootcom -Destination $DestinationBoot -Force -ErrorAction Stop
     $Destinationetfsbootcom = Join-Path $DestinationBoot 'etfsboot.com'
+    #===================================================================================================
+    #   efisys.bin and efisys_noprompt.bin
+    #===================================================================================================
+    $efisysbin = $AdkPaths.efisysbin
+    Copy-Item -Path $efisysbin -Destination $DestinationEfiBoot -Force -ErrorAction Stop
+    $Destinationefisysbin = Join-Path $DestinationEfiBoot 'efisys.bin'
 
-    if ($PSBoundParameters.ContainsKey('NoPrompt')) {
+    $efisysnopromptbin = $AdkPaths.efisysnopromptbin
+    Copy-Item -Path $efisysnopromptbin -Destination $DestinationEfiBoot -Force -ErrorAction Stop
+    $Destinationefisysnopromptbin = Join-Path $DestinationEfiBoot 'efisys_noprompt.bin'
+
+<#     if ($PSBoundParameters.ContainsKey('NoPrompt')) {
         $efisysbin = $AdkPaths.efisysnopromptbin
         Copy-Item -Path $efisysbin -Destination $DestinationEfiBoot -Force -ErrorAction Stop
         $Destinationefisysbin = Join-Path $DestinationEfiBoot 'efisys_noprompt.bin'
@@ -114,7 +118,8 @@ function New-ADK.iso {
         $efisysbin = $AdkPaths.efisysbin
         Copy-Item -Path $efisysbin -Destination $DestinationEfiBoot -Force -ErrorAction Stop
         $Destinationefisysbin = Join-Path $DestinationEfiBoot 'efisys.bin'
-    }
+    } #>
+
     Write-Verbose "DestinationBoot: $DestinationBoot"
     Write-Verbose "etfsbootcom: $etfsbootcom"
     Write-Verbose "Destinationetfsbootcom: $Destinationetfsbootcom"
@@ -122,12 +127,31 @@ function New-ADK.iso {
     Write-Verbose "DestinationEfiBoot: $DestinationEfiBoot"
     Write-Verbose "efisysbin: $efisysbin"
     Write-Verbose "Destinationefisysbin: $Destinationefisysbin"
+    Write-Verbose "efisysnopromptbin: $efisysnopromptbin"
+    Write-Verbose "Destinationefisysnopromptbin: $Destinationefisysnopromptbin"
     #===================================================================================================
     #   Strings
     #===================================================================================================
     $isoLabelString = '-l"{0}"' -f "$isoLabel"
-    $BootDataString = '2#p0,e,b"{0}"#pEF,e,b"{1}"' -f "$Destinationetfsbootcom", "$Destinationefisysbin"
     Write-Verbose "isoLabelString: $isoLabelString"
+    #===================================================================================================
+    #   Prompt
+    #===================================================================================================
+    $BootDataString = '2#p0,e,b"{0}"#pEF,e,b"{1}"' -f "$Destinationetfsbootcom", "$Destinationefisysbin"
+    Write-Verbose "BootDataString: $BootDataString"
+
+    $Process = Start-Process $oscdimgexe -args @("-m","-o","-u2","-bootdata:$BootDataString",'-u2','-udfver102',$isoLabelString,"`"$MediaPath`"", "`"$IsoFullName`"") -PassThru -Wait -NoNewWindow
+
+    if (-NOT (Test-Path $IsoFullName)) {
+        Write-Error "Something didn't work"
+        Break
+    }
+    $PromptIso = Get-Item -Path $IsoFullName
+    #===================================================================================================
+    #   NoPrompt
+    #===================================================================================================
+    $IsoFullName = "$($PromptIso.Directory)\$($PromptIso.BaseName)_NoPrompt.iso"
+    $BootDataString = '2#p0,e,b"{0}"#pEF,e,b"{1}"' -f "$Destinationetfsbootcom", "$Destinationefisysnopromptbin"
     Write-Verbose "BootDataString: $BootDataString"
 
     $Process = Start-Process $oscdimgexe -args @("-m","-o","-u2","-bootdata:$BootDataString",'-u2','-udfver102',$isoLabelString,"`"$MediaPath`"", "`"$IsoFullName`"") -PassThru -Wait -NoNewWindow
@@ -155,7 +179,7 @@ function New-ADK.iso {
     #===============================================================================================
     #   Return Get-Item
     #===============================================================================================
-    Return Get-Item -Path $IsoFullName
+    Return $PromptIso
 
 <#     $Results += [pscustomobject]@{
         FullName            = $IsoFullName

@@ -7,7 +7,7 @@
 RootModule = 'OSD.psm1'
 
 # Version number of his module.
-ModuleVersion = '21.3.16.2'
+ModuleVersion = '21.3.17.1'
 
 # Supported PSEditions
 # CompatiblePSEditions = @()
@@ -105,6 +105,7 @@ FunctionsToExport =
 'Get-USBPartition',
 'Get-USBVolume',
 'New-OSDisk',
+'Select-USBDisk',
 'Select-USBVolume',
 'Dismount-MyWindowsImage',#DISM
 'Edit-MyWindowsImage',
@@ -141,10 +142,13 @@ FunctionsToExport =
 'Get-OSDCloudOfflineFile',
 'Get-OSDCloudOfflinePath',
 'New-OSDCloud.iso',
+'New-OSDCloud.template',
+'New-OSDCloud.workspace',
 'Save-OSDCloud',
 'Select-AutoPilotJson',
 'Select-OSDCloudOfflineAutoPilotProfiles',
 'Start-OSDCloud',
+'Test-OSDCloud.template',
 'Get-OSDPower',#POWER
 'Enable-PEWimPSGallery',#PSGALLERY
 'Enable-PEWindowsImagePSGallery',
@@ -159,7 +163,9 @@ FunctionsToExport =
 'Save-WebFile',
 'Test-WebConnection',
 'Get-OSDWinPE',#WINPE
-'Use-WinPEContent'
+'Use-WinPEContent',
+'Test-AuditModeAutoPilot',
+'Test-UseWindowsUnattend'
 
 # Cmdlets to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no cmdlets to export.
 CmdletsToExport = @()
