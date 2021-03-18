@@ -1,14 +1,17 @@
 function Select-USBDisk {
     [CmdletBinding()]
     param (
-        [int]$MinimumSizeGB = 1,
+        [Alias('Min','MinGB','MinSize')]
+        [int]$MinimumSizeGB = 8,
+
+        [Alias('Max','MaxGB','MaxSize')]
+        [int]$MaximumSizeGB = 1800,
 
         [switch]$Skip,
-        
         [switch]$SelectOne
     )
     #Get the USB Disk and add the MinimumSizeGB filter
-    $GetUSBDisk = Get-USBDisk | Sort-Object -Property DiskNumber | Where-Object {$_.Size -gt ($MinimumSizeGB * 8GB)}
+    $GetUSBDisk = Get-USBDisk | Sort-Object -Property DiskNumber | Where-Object {($_.Size -gt ($MinimumSizeGB * 1GB)) -and ($_.Size -lt ($MaximumSizeGB * 1GB))}
 
     #Let's bounce if there is nothing to do
     if (-NOT ($GetUSBDisk)) {Return $false}
@@ -31,17 +34,13 @@ function Select-USBDisk {
 
     #Allow a Skip option
     if ($PSBoundParameters.ContainsKey('Skip')) {
-        do {
-            $Selection = Read-Host -Prompt "Select a USB Disk by DiskNumber, or press S to SKIP"
-        }
+        do {$Selection = Read-Host -Prompt "Select a USB Disk by DiskNumber, or press S to SKIP"}
         until (($Selection -ge 0) -and ($Selection -in $GetUSBDisk.DiskNumber) -or ($Selection -eq 'S'))
         
         if ($Selection -eq 'S') {Return $false}
     }
     else {
-        do {
-            $Selection = Read-Host -Prompt "Select a USB Disk by DiskNumber"
-        }
+        do {$Selection = Read-Host -Prompt "Select a USB Disk by DiskNumber"}
         until (($Selection -ge 0) -and ($Selection -in $GetUSBDisk.DiskNumber))
     }
 

@@ -1,13 +1,12 @@
 <#
 .SYNOPSIS
-Creates an .iso file from a bootable media directory.  ADK is required
+Creates an .iso file in the OSDCloud Workspace.  ADK is required
 
 .Description
-Creates a .iso file from a bootable media directory.  ADK is required
+Creates an .iso file in the OSDCloud Workspace.  ADK is required
 
 .PARAMETER WorkspacePath
-Directory for the Workspace.  This will contain the Media directory and the .iso file
-If not given, one will be created in $env:TEMP\OSDCloud
+Directory for the Workspace.  Contains the Media directory
 
 .PARAMETER isoFileName
 File Name of the ISO
@@ -40,45 +39,26 @@ function New-OSDCloud.iso {
         [ValidateSet('Dell','Nutanix','VMware')]
         [string[]]$CloudDriver
     )
-    #===============================================================================================
+    #=======================================================================
     #	Start the Clock
-    #===============================================================================================
+    #=======================================================================
     $IsoStartTime = Get-Date
-    #===============================================================================================
-    #	Set Defaults
-    #===============================================================================================
+    #=======================================================================
+    #	Block
+    #=======================================================================
+    Block-WinPE
+    Block-NonAdmin
+    Block-WindowsMajorLt10
+    Block-PowerShellVersionLt5
+    Block-NonCurl
+    #=======================================================================
+    #	Set Variables
+    #=======================================================================
     $isoFileName = 'OSDCloud.iso'
     $isoLabel = 'OSDCloud'
-    #==================================================================================================
-    #	Require WinOS
-    #==================================================================================================
-    if ((Get-OSDGather -Property IsWinPE)) {
-        Write-Warning "$($MyInvocation.MyCommand) cannot be run from WinPE"
-        Break
-    }
-    #===============================================================================================
-    #   Require Admin Rights
-    #===============================================================================================
-    if ((Get-OSDGather -Property IsAdmin) -eq $false) {
-        Write-Warning "$($MyInvocation.MyCommand) requires Admin Rights ELEVATED"
-        Break
-    }
-    #===============================================================================================
-    #   Require cURL
-    #===============================================================================================
-    if (-NOT (Test-Path "$env:SystemRoot\System32\curl.exe")) {
-        Write-Warning "$($MyInvocation.MyCommand) could not find $env:SystemRoot\System32\curl.exe"
-        Write-Warning "Get a newer Windows version!"
-        Break
-    }
-    #===============================================================================================
-    #	Set VerbosePreference
-    #===============================================================================================
-    #$CurrentVerbosePreference = $VerbosePreference
-    #$VerbosePreference = 'Continue'
-    #===============================================================================================
+    #=======================================================================
     #	Get-OSDCloud.template
-    #===============================================================================================
+    #=======================================================================
     if (-NOT (Get-OSDCloud.template)) {
         Write-Warning "Setting up a new OSDCloud.template"
         New-OSDCloud.template -Verbose
@@ -89,16 +69,16 @@ function New-OSDCloud.iso {
         Write-Warning "Something bad happened.  I have to go"
         Break
     }
-    #===============================================================================================
+    #=======================================================================
     #	Set WorkspacePath
-    #===============================================================================================
+    #=======================================================================
     if ($PSBoundParameters.ContainsKey('WorkspacePath')) {
         Set-OSDCloud.workspace -WorkspacePath $WorkspacePath -ErrorAction Stop | Out-Null
     }
     $WorkspacePath = Get-OSDCloud.workspace -ErrorAction Stop
-    #===============================================================================================
+    #=======================================================================
     #	Setup Workspace
-    #===============================================================================================
+    #=======================================================================
     if (-NOT ($WorkspacePath)) {
         Write-Warning "You need to provide a path to your Workspace with one of the following examples"
         Write-Warning "New-OSDCloud.iso -WorkspacePath C:\OSDCloud"
@@ -118,18 +98,18 @@ function New-OSDCloud.iso {
         Write-Warning "Nothing is going well for you today my friend"
         Break
     }
-    #===============================================================================================
+    #=======================================================================
     #   Mount-MyWindowsImage
-    #===============================================================================================
+    #=======================================================================
     $MountMyWindowsImage = Mount-MyWindowsImage -ImagePath "$WorkspacePath\Media\Sources\boot.wim"
     $MountPath = $MountMyWindowsImage.Path
-    #===============================================================================================
+    #=======================================================================
     #   Add AutoPilot Profiles
-    #===============================================================================================
+    #=======================================================================
     robocopy "$WorkspacePath\AutoPilot" "$MountPath\OSDCloud\AutoPilot" *.* /e /ndl /njh /njs /b
-    #===============================================================================================
+    #=======================================================================
     #   DriverPath
-    #===============================================================================================
+    #=======================================================================
     foreach ($Driver in $DriverPath) {
         Add-WindowsDriver -Path "$($MountMyWindowsImage.Path)" -Driver "$Driver" -Recurse -ForceUnsigned
     }
@@ -183,39 +163,39 @@ function New-OSDCloud.iso {
             }
         }
     }
-    #===============================================================================================
+    #=======================================================================
     #   Install OSD Module
-    #===============================================================================================
+    #=======================================================================
     #Write-Verbose "Saving OSD to $MountPath\Program Files\WindowsPowerShell\Modules"
     #Save-Module -Name OSD -Path "$MountPath\Program Files\WindowsPowerShell\Modules" -Force
-    #===============================================================================================
+    #=======================================================================
     #   Save WIM
-    #===============================================================================================
+    #=======================================================================
     $MountMyWindowsImage | Dismount-MyWindowsImage -Save
-    #===============================================================================================
+    #=======================================================================
     #   Create ISO
-    #===============================================================================================
-    $NewADKiso = New-ADK.iso -MediaPath "$WorkspacePath\Media" -isoFileName $isoFileName -isoLabel $isoLabel -OpenExplorer
-    #===============================================================================================
+    #=======================================================================
+    $NewADKiso = New-ADK.iso -MediaPath "$WorkspacePath\Media" -isoFileName $isoFileName -isoLabel $isoLabel
+    #=======================================================================
     #   Restore VerbosePreference
-    #===============================================================================================
+    #=======================================================================
     $VerbosePreference = $CurrentVerbosePreference
-    #===============================================================================================
+    #=======================================================================
     #	Complete
-    #===============================================================================================
+    #=======================================================================
     $IsoEndTime = Get-Date
     $IsoTimeSpan = New-TimeSpan -Start $IsoStartTime -End $IsoEndTime
     Write-Host -ForegroundColor DarkGray    "========================================================================="
     Write-Host -ForegroundColor Yellow      "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) $($MyInvocation.MyCommand.Name) " -NoNewline
     Write-Host -ForegroundColor Cyan        "Completed in $($IsoTimeSpan.ToString("mm' minutes 'ss' seconds'"))"
-    #===============================================================================================
+    #=======================================================================
     #	Return
-    #===============================================================================================
+    #=======================================================================
     Write-Host -ForegroundColor Cyan        "OSDCloud ISO created at $($NewADKiso.FullName)"
     #Write-Host -ForegroundColor Cyan        "OSDCloud ISO Get-Item is saved in the Global Variable OSDCloudISO"
 
     explorer $WorkspacePath
     #Return (Get-Item -Path $NewADKiso.FullName | Select-Object -Property *)
     #Return $NewADKiso.FullName
-    #===============================================================================================
+    #=======================================================================
 }
