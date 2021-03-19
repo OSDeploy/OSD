@@ -1,9 +1,9 @@
 function Get-MyDellDrivers {
     [CmdletBinding()]
     param ()
-    #===================================================================================================
+    #=======================================================================
     #   Current System Information
-    #===================================================================================================
+    #=======================================================================
     $SystemSKU = $((Get-WmiObject -Class Win32_ComputerSystem).SystemSKUNumber).Trim()
 	$BIOSVersion = $((Get-WmiObject -Class Win32_BIOS).SMBIOSBIOSVersion).Trim()
 

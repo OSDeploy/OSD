@@ -37,37 +37,37 @@ function Update-MyDellBios {
         [switch]$Silent,
         [switch]$Reboot
     )
-    #===================================================================================================
+    #=======================================================================
     #   Require Admin Rights
-    #===================================================================================================
+    #=======================================================================
     if ((Get-OSDGather -Property IsAdmin) -eq $false) {
         Write-Warning "$($MyInvocation.MyCommand) requires Admin Rights ELEVATED"
         Break
     }
-    #===================================================================================================
+    #=======================================================================
     #   Require Dell Computer
-    #===================================================================================================
+    #=======================================================================
     if ((Get-MyComputerManufacturer -Brief) -ne 'Dell') {
         Write-Warning "Dell computer is required for this function"
         Return $null
     }
-    #===================================================================================================
+    #=======================================================================
     #   Current System Information
-    #===================================================================================================
+    #=======================================================================
     $SystemSKU = $((Get-WmiObject -Class Win32_ComputerSystem).SystemSKUNumber).Trim()
 	$BIOSVersion = $((Get-WmiObject -Class Win32_BIOS).SMBIOSBIOSVersion).Trim()
-    #===================================================================================================
+    #=======================================================================
     #   Compare
-    #===================================================================================================
+    #=======================================================================
     $GetMyDellBios = Get-MyDellBios | Sort-Object ReleaseDate -Descending | Select-Object -First 1
 
     if ($GetMyDellBios.DellVersion -eq $BIOSVersion) {
         Write-Warning "BIOS version is already at latest"
         #Continue
     }
-    #===================================================================================================
+    #=======================================================================
     #   Download
-    #===================================================================================================
+    #=======================================================================
     $SaveMyDellBios = Save-MyDellBios -DownloadPath $DownloadPath
     if (-NOT ($SaveMyDellBios)) {Return $null}
     if (-NOT (Test-Path $SaveMyDellBios.FullName)) {Return $null}
@@ -78,9 +78,9 @@ function Update-MyDellBios {
         if (-NOT (Test-Path $SaveMyDellBiosFlash64W.FullName)) {Return $null}
     }
     $SaveMyDellBiosFlash64W = Save-MyDellBiosFlash64W -DownloadPath $DownloadPath
-    #===================================================================================================
+    #=======================================================================
     #   BitLocker
-    #===================================================================================================
+    #=======================================================================
     if ($env:SystemDrive -ne 'X:') {
         Write-Verbose "Checking for BitLocker" -Verbose
         #http://www.dptechjournal.net/2017/01/powershell-script-to-deploy-dell.html
@@ -97,9 +97,9 @@ function Update-MyDellBios {
             Write-Verbose "BitLocker was not enabled" -Verbose
         }
     }
-    #===================================================================================================
+    #=======================================================================
     #   Arguments
-    #===================================================================================================
+    #=======================================================================
     $BiosLog = Join-Path $env:TEMP 'Update-MyDellBios.log'
 
     $Arguments = "/l=`"$BiosLog`""
@@ -108,9 +108,9 @@ function Update-MyDellBios {
     } elseif ($Silent) {
         $Arguments = $Arguments + " /s"
     }
-    #===================================================================================================
+    #=======================================================================
     #   Execution
-    #===================================================================================================
+    #=======================================================================
     if (($env:SystemDrive -eq 'X:') -and ($env:PROCESSOR_ARCHITECTURE -match '64')) {
         $Arguments = "/b=`"$($SaveMyDellBios.FullName)`" " + $Arguments
         Write-Verbose "Start-Process -WorkingDirectory `"$($SaveMyDellBios.Directory)`" -FilePath `"$($SaveMyDellBiosFlash64W.FullName)`" -ArgumentList $Arguments -Wait" -Verbose

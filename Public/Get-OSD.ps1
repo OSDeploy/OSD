@@ -13,15 +13,15 @@ https://osd.osdeploy.com/module/functions/general/get-osd
 function Get-OSD {
     [CmdletBinding()]
     param ()
-    #======================================================================================================
+    #=======================================================================
     #	PSBoundParameters
-    #======================================================================================================
+    #=======================================================================
     $IsConfirmPresent   = $PSBoundParameters.ContainsKey('Confirm')
     $IsForcePresent     = $PSBoundParameters.ContainsKey('Force')
     $IsVerbosePresent   = $PSBoundParameters.ContainsKey('Verbose')
-    #======================================================================================================
+    #=======================================================================
     #	Module and Command Information
-    #======================================================================================================
+    #=======================================================================
     $GetCommandName = $MyInvocation.MyCommand | Select-Object -ExpandProperty Name
     $GetModuleBase = $MyInvocation.MyCommand.Module | Select-Object -ExpandProperty ModuleBase
     $GetModulePath = $MyInvocation.MyCommand.Module | Select-Object -ExpandProperty Path
@@ -31,9 +31,9 @@ function Get-OSD {
     Write-Host "$GetCommandName" -ForegroundColor Cyan -NoNewline
     Write-Host " $GetModuleVersion at $GetModuleBase" -ForegroundColor Gray
     Write-Host "http://osd.osdeploy.com" -ForegroundColor Gray
-    #======================================================================================================
+    #=======================================================================
     #	Function Information
-    #======================================================================================================
+    #=======================================================================
     Write-Host -ForegroundColor DarkCyan    '=================================' -NoNewline
     Write-Host -ForegroundColor Cyan        '21.3.12'
     Write-Host -ForegroundColor Yellow      '92 Total Functions                     ' -NoNewline
@@ -74,9 +74,9 @@ function Get-OSD {
     Write-Host -ForegroundColor Cyan        '21.3.8'
     Write-Host -ForegroundColor Yellow      'Enable-PEWimPSGallery                  ' -NoNewline
     Write-Host -ForegroundColor Gray        '[DEV] Get PowerShell Gallery working in WinPE'
-    Write-Host -ForegroundColor White       'Get-LocalPartition                     ' -NoNewline
+    Write-Host -ForegroundColor White       'Get-Partition.fixed                     ' -NoNewline
     Write-Host -ForegroundColor Gray        'Returns Partitions on Local Disks'
-    Write-Host -ForegroundColor White       'Get-USBPartition                       ' -NoNewline
+    Write-Host -ForegroundColor White       'Get-Partition.usb                       ' -NoNewline
     Write-Host -ForegroundColor Gray        'Returns Partitions on USB Drives'
 
     Write-Host -ForegroundColor DarkCyan    '=================================' -NoNewline
@@ -99,23 +99,23 @@ function Get-OSD {
 
     Write-Host -ForegroundColor DarkCyan    '=================================' -NoNewline
     Write-Host -ForegroundColor Cyan        '21.2.25'
-    Write-Host -ForegroundColor White       'Get-USBVolume                          ' -NoNewline
+    Write-Host -ForegroundColor White       'Get-Volume.usb                          ' -NoNewline
     Write-Host -ForegroundColor Gray        'Returns attached USB Volumes'
 
     Write-Host -ForegroundColor DarkCyan    '=================================' -NoNewline
     Write-Host -ForegroundColor Cyan        '21.2.23'
     Write-Host -ForegroundColor White       'Backup-DiskToFFU (Updated)             ' -NoNewline
     Write-Host -ForegroundColor Gray        'Captures a Windows Image FFU to a secondary or network drive'
-    Write-Host -ForegroundColor White       'Clear-LocalDisk                        ' -NoNewline
+    Write-Host -ForegroundColor White       'Clear-Disk.fixed                        ' -NoNewline
     Write-Host -ForegroundColor Gray        'Allows you to Clear and Initialize multiple Local Disks, now with -Confirm'
-    Write-Host -ForegroundColor White       'Clear-USBDisk                          ' -NoNewline
+    Write-Host -ForegroundColor White       'Clear-Disk.usb                          ' -NoNewline
     Write-Host -ForegroundColor Gray        'Allows you to Clear and Initialize multiple USB Disks, now with -Confirm'
-    Write-Host -ForegroundColor White       'Get-LocalDisk                          ' -NoNewline
-    Write-Host -ForegroundColor Gray        'Get-OSDDisk -BusTypeNot USB,Virtual'
-    Write-Host -ForegroundColor White       'Get-OSDDisk                            ' -NoNewline
+    Write-Host -ForegroundColor White       'Get-Disk.fixed                          ' -NoNewline
+    Write-Host -ForegroundColor Gray        'Get-Disk.osd -BusTypeNot USB,Virtual'
+    Write-Host -ForegroundColor White       'Get-Disk.osd                            ' -NoNewline
     Write-Host -ForegroundColor Gray        'OSD version of Get-Disk with some easy filters'
-    Write-Host -ForegroundColor White       'Get-USBDisk                            ' -NoNewline
-    Write-Host -ForegroundColor Gray        'Get-OSDDisk -BusType USB'
+    Write-Host -ForegroundColor White       'Get-Disk.usb                            ' -NoNewline
+    Write-Host -ForegroundColor Gray        'Get-Disk.osd -BusType USB'
     Write-Host -ForegroundColor White       '[WinPE] New-OSDisk                     ' -NoNewline
     Write-Host -ForegroundColor Gray        'Creates System | OS | Recovery Partitions for GPT and MBR Drives in WinPE'
 
@@ -224,5 +224,5 @@ function Get-OSD {
     Write-Host -ForegroundColor DarkCyan    '======================' -NoNewline
     Write-Host -ForegroundColor Cyan        'UPDATE THE MODULE'
     Write-Host -ForegroundColor Yellow      'Update-Module OSD -Force'
-    #======================================================================================================
+    #=======================================================================
 }

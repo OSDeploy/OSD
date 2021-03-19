@@ -41,15 +41,15 @@ function Backup-DiskToFFU {
         #Executes the capture
         [switch] $Force
     )
-    #======================================================================================================
+    #=======================================================================
     #	PSBoundParameters
-    #======================================================================================================
+    #=======================================================================
     $IsConfirmPresent   = $PSBoundParameters.ContainsKey('Confirm')
     $IsForcePresent     = $PSBoundParameters.ContainsKey('Force')
     $IsVerbosePresent   = $PSBoundParameters.ContainsKey('Verbose')
-    #======================================================================================================
+    #=======================================================================
     #	Module and Command Information
-    #======================================================================================================
+    #=======================================================================
     $GetCommandName = $MyInvocation.MyCommand | Select-Object -ExpandProperty Name
     $GetModuleBase = $MyInvocation.MyCommand.Module | Select-Object -ExpandProperty ModuleBase
     $GetModulePath = $MyInvocation.MyCommand.Module | Select-Object -ExpandProperty Path
@@ -58,30 +58,30 @@ function Backup-DiskToFFU {
     Write-Host "$GetCommandName" -NoNewline
     Write-Host " $GetModuleVersion $GetModuleBase" -ForegroundColor Cyan
     Write-Host "$GetCommandHelpUri" -ForegroundColor Cyan
-    #======================================================================================================
+    #=======================================================================
     #	IsAdmin
-    #======================================================================================================
+    #=======================================================================
     if (-NOT (Get-OSDGather -Property IsAdmin)) {
         Write-Warning "Administrative Rights are required for execution"
         Break
     }
-    #===================================================================================================
+    #=======================================================================
     #	Gather
-    #===================================================================================================
-    $GetLocalDisk = Get-LocalDisk | Where-Object {$_.NumberOfPartitions -ge '1'} | Where-Object {$_.OperationalStatus -eq 'Online'} | Where-Object {$_.Size -gt 0} | Where-Object {$_.IsOffline -eq $false}
+    #=======================================================================
+    $GetLocalDisk = Get-Disk.fixed | Where-Object {$_.NumberOfPartitions -ge '1'} | Where-Object {$_.OperationalStatus -eq 'Online'} | Where-Object {$_.Size -gt 0} | Where-Object {$_.IsOffline -eq $false}
     $BootDisks = $GetLocalDisk | Where-Object {$_.IsBoot -eq $true}
     $SourceDisks = $GetLocalDisk | Where-Object {$_.IsBoot -eq $false}
     $DestinationDisks = $(Get-FFUDestinationDisks)
     $Volumes = $(Get-Volume)
-    #===================================================================================================
+    #=======================================================================
     #	Validate
-    #===================================================================================================
+    #=======================================================================
     if ($ImageFile -like ":*") {
         $ImageFile = "C$ImageFile"
     }
-    #===================================================================================================
+    #=======================================================================
     #	Source
-    #===================================================================================================
+    #=======================================================================
     if ($SourceDisks -or $BootDisks) {
         Write-Host -ForegroundColor DarkGray    '======================================================================================================'
         Write-Host -ForegroundColor Cyan        "-DiskNumber $DiskNumber" -NoNewline
@@ -108,9 +108,9 @@ function Backup-DiskToFFU {
         Write-Warning "Unable to find a Source Disk to backup"
         Break
     }
-    #===================================================================================================
+    #=======================================================================
     #	Destination
-    #===================================================================================================
+    #=======================================================================
     Write-Host -ForegroundColor DarkGray    '======================================================================================================'
     Write-Host -ForegroundColor Cyan        "-DestinationDriveLetter $DestinationDriveLetter" -NoNewline
     Write-Host -ForegroundColor Yellow       " [Verify that the Volume selected has enough free space for the FFU]"

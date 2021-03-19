@@ -1,11 +1,11 @@
-function New-OSDBoot.usb {
+function New-Bootable.usb {
     [CmdletBinding()]
     param (
         [ValidateLength(0,11)]
-        [string]$BootLabel = 'USBBoot',
+        [string]$BootLabel = 'USB Boot',
 
         [ValidateLength(0,32)]
-        [string]$DataLabel = 'USBData'
+        [string]$DataLabel = 'USB Data'
     )
 
     #=======================================================================
@@ -21,7 +21,7 @@ function New-OSDBoot.usb {
     #=======================================================================
     #	Block
     #=======================================================================
-    Block-NonAdmin
+    Block-StandardUser
     Block-WindowsMajorLt10
     Block-PowerShellVersionLt5
     Block-WindowsReleaseIdLt1703
@@ -30,25 +30,25 @@ function New-OSDBoot.usb {
     #=======================================================================
     Set-ItemProperty 'HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\Explorer' -Name NoDriveTypeAutorun -Type DWord -Value 0xFF -ErrorAction SilentlyContinue
     #=======================================================================
-    #	Select-USBDisk
+    #	Select-Disk.usb
     #   Select a USB Disk
     #=======================================================================
-    $SelectUSBDisk = Select-USBDisk -MinimumSizeGB $MinimumSizeGB -MaximumSizeGB $MaximumSizeGB
+    $SelectDisk = Select-Disk.usb -MinimumSizeGB $MinimumSizeGB -MaximumSizeGB $MaximumSizeGB
     #=======================================================================
-    #	Select-USBDisk
+    #	Select-Disk.usb
     #   Select a USB Disk
     #=======================================================================
-    if (-NOT ($SelectUSBDisk)) {
+    if (-NOT ($SelectDisk)) {
         Write-Warning "No USB Drives that met the required criteria were detected"
         Write-Warning "MinimumSizeGB: $MinimumSizeGB"
         Write-Warning "MaximumSizeGB: $MaximumSizeGB"
         Break
     }
     #=======================================================================
-    #	Get-USBDisk
+    #	Get-Disk.osd -BusType USB
     #   At this point I have the Disk object in $GetUSBDisk
     #=======================================================================
-    $GetUSBDisk = Get-USBDisk -Number $SelectUSBDisk.Number
+    $GetUSBDisk = Get-Disk.osd -BusType USB -Number $SelectDisk.Number
     #=======================================================================
     #	Clear-Disk
     #   Prompt for Confirmation
@@ -61,10 +61,10 @@ function New-OSDBoot.usb {
         $GetUSBDisk | Clear-Disk -RemoveData -RemoveOEM -Confirm:$true
     }
     #=======================================================================
-    #	Get-USBDisk
+    #	Get-Disk.osd -BusType USB
     #	Run another Get-Disk to make sure that things are ok
     #=======================================================================
-    $GetUSBDisk = Get-USBDisk -Number $SelectUSBDisk.Number | Where-Object {($_.NumberOfPartitions -eq 0) -and ($_.PartitionStyle -eq 'RAW')}
+    $GetUSBDisk = Get-Disk.osd -BusType USB -Number $SelectDisk.Number | Where-Object {($_.NumberOfPartitions -eq 0) -and ($_.PartitionStyle -eq 'RAW')}
 
     if (-NOT ($GetUSBDisk)) {
         Write-Warning "Something went very very wrong in this process"
@@ -106,6 +106,6 @@ function New-OSDBoot.usb {
     #=======================================================================
     #	Return
     #=======================================================================
-    Return (Get-USBDisk -Number $SelectUSBDisk.Number)
+    Return (Get-Disk.osd -BusType USB -Number $SelectDisk.Number)
     #=======================================================================
 }

@@ -46,14 +46,14 @@ function Get-DellCatalogPC {
 		[switch]$Compatible
     )
     $VerbosePreference = "Continue"
-    #===================================================================================================
+    #=======================================================================
     #   Compatibility
-    #===================================================================================================
+    #=======================================================================
     $SystemSKU = $((Get-WmiObject -Class Win32_ComputerSystem).SystemSKUNumber).Trim()
 	$BIOSVersion = $((Get-WmiObject -Class Win32_BIOS).SMBIOSBIOSVersion).Trim()
-    #===================================================================================================
+    #=======================================================================
     #   Variables
-    #===================================================================================================
+    #=======================================================================
     $DellDownloadsUrl 			= "http://downloads.dell.com/"
 	$CatalogPcUrl	        	= "http://downloads.dell.com/catalog/CatalogPC.cab"
 
@@ -63,9 +63,9 @@ function Get-DellCatalogPC {
     $CatalogPcCabFullName       = Join-Path $DownloadPath $CatalogPcCabName
 	$CatalogPcXmlName       	= "CatalogPC.xml"
     $CatalogPCXmlFullName   	= Join-Path $DownloadPath $CatalogPcXmlName
-    #===================================================================================================
+    #=======================================================================
     #   Offline Catalog
-    #===================================================================================================
+    #=======================================================================
     if (Test-Path $OfflineCatalogPcFullName) {
         $ExistingFile = Get-Item $OfflineCatalogPcFullName
 
@@ -139,16 +139,16 @@ function Get-DellCatalogPC {
 		$DellCatalogPc = $DellCatalogPc | Sort-Object ReleaseDate -Descending
 		$DellCatalogPc | Export-Clixml -Path $OfflineCatalogPcFullName
 	}
-    #===================================================================================================
+    #=======================================================================
     #   Filter Compatible
-    #===================================================================================================
+    #=======================================================================
 	if ($Compatible) {
 		Write-Verbose "Filtering XML for items compatible with SystemSKU $SystemSKU"
 		$DellCatalogPc = $DellCatalogPc | Where-Object {$_.SupportedSystemID -contains $SystemSKU}
 	}
-    #===================================================================================================
+    #=======================================================================
     #   Filter Component
-    #===================================================================================================
+    #=======================================================================
 	if ($Component) {
 		Write-Verbose "Filtering XML for $Component"
 		$DellCatalogPc = $DellCatalogPc | Where-Object {$_.Component -eq $Component}

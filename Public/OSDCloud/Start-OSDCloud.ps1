@@ -97,26 +97,26 @@ function Start-OSDCloud {
         [string]$GitHubToken = ''
     )
 
-    #===================================================================================================
+    #=======================================================================
     #	Start the Clock
-    #===================================================================================================
+    #=======================================================================
     $Global:OSDCloudStartTime = Get-Date
-    #===================================================================================================
+    #=======================================================================
     #   Screenshot
-    #===================================================================================================
+    #=======================================================================
     if ($PSBoundParameters.ContainsKey('Screenshot')) {
         $Global:OSDCloudScreenshot = "$env:TEMP\ScreenPNG"
         Start-ScreenPNGProcess -Directory "$env:TEMP\ScreenPNG"
     }
-    #===================================================================================================
+    #=======================================================================
     #	Global Variables
-    #===================================================================================================
+    #=======================================================================
     $Global:OSDCloudOSEdition = $OSEdition
     $Global:OSDCloudOSCulture = $OSCulture
-    #===================================================================================================
+    #=======================================================================
     #   Require cURL
     #   Without cURL, we can't download the ESD, so if it's not present, then we need to exit
-    #===================================================================================================
+    #=======================================================================
     if (-NOT (Test-CommandCurlExe)) {
         Write-Host -ForegroundColor DarkGray    "========================================================================="
         Write-Host -ForegroundColor Yellow      "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) $($MyInvocation.MyCommand.Name) " -NoNewline
@@ -125,9 +125,9 @@ function Start-OSDCloud {
         Start-Sleep -Seconds 5
         Break
     }
-    #===================================================================================================
+    #=======================================================================
     #	AutoPilot Profiles
-    #===================================================================================================
+    #=======================================================================
     Write-Host -ForegroundColor DarkGray        "========================================================================="
     Write-Host -ForegroundColor Yellow          "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) $($MyInvocation.MyCommand.Name) " -NoNewline
     Write-Host -ForegroundColor Cyan            "AutoPilot Profiles"
@@ -145,9 +145,9 @@ function Start-OSDCloud {
     if ($Global:OSDCloudAutoPilotProfile) {
         #$Global:OSDCloudAutoPilotProfile | Format-List
     }
-    #===================================================================================================
+    #=======================================================================
     #	PSGallery Modules
-    #===================================================================================================
+    #=======================================================================
     Write-Host -ForegroundColor DarkGray    "========================================================================="
     Write-Host -ForegroundColor Yellow      "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) $($MyInvocation.MyCommand.Name) " -NoNewline
     Write-Host -ForegroundColor Cyan        "PowerShell Modules and Scripts"
@@ -156,9 +156,9 @@ function Start-OSDCloud {
         Write-Warning "Could not validate an Internet connection to the PowerShell Gallery"
         Write-Warning "OSDCloud will continue, but there may be issues if this can't be resolved"
     }
-    #===================================================================================================
+    #=======================================================================
     #	Get-FeatureUpdate
-    #===================================================================================================
+    #=======================================================================
     Write-Host -ForegroundColor DarkGray    "========================================================================="
     Write-Host -ForegroundColor Yellow      "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) $($MyInvocation.MyCommand.Name) " -NoNewline
     Write-Host -ForegroundColor Cyan        "Get-FeatureUpdate Windows 10 $Global:OSDCloudOSEdition x64 $OSBuild $OSCulture"
@@ -171,9 +171,9 @@ function Start-OSDCloud {
         Break
     }
     $GetFeatureUpdate = $GetFeatureUpdate | Select-Object -Property CreationDate,KBNumber,Title,UpdateOS,UpdateBuild,UpdateArch,FileName, @{Name='SizeMB';Expression={[int]($_.Size /1024/1024)}},FileUri,Hash,AdditionalHash
-    #===================================================================================================
+    #=======================================================================
     #	Offline OS
-    #===================================================================================================
+    #=======================================================================
     $OSDCloudOfflineOS = Get-OSDCloudOfflineFile -Name $GetFeatureUpdate.FileName | Select-Object -First 1
 
     if ($OSDCloudOfflineOS) {
@@ -188,9 +188,9 @@ function Start-OSDCloud {
         Write-Warning "OSDCloud cannot continue"
         Break
     }
-    #===================================================================================================
+    #=======================================================================
     #	Start-OSDCloud Get-MyDellDriverCab
-    #===================================================================================================
+    #=======================================================================
     if ((Get-MyComputerManufacturer -Brief) -eq 'Dell') {
         Write-Host -ForegroundColor DarkGray    "========================================================================="
         Write-Host -ForegroundColor Yellow      "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) $($MyInvocation.MyCommand.Name) " -NoNewline
@@ -216,9 +216,9 @@ function Start-OSDCloud {
             Write-Warning "Unable to determine a suitable Driver Pack for this Computer Model"
         }
     }
-    #===================================================================================================
+    #=======================================================================
     #	Get Dell BIOS Update
-    #===================================================================================================
+    #=======================================================================
     if ((Get-MyComputerManufacturer -Brief) -eq 'Dell') {
         Write-Host -ForegroundColor DarkGray    "========================================================================="
         Write-Host -ForegroundColor Yellow      "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) $($MyInvocation.MyCommand.Name) " -NoNewline
@@ -256,9 +256,9 @@ function Start-OSDCloud {
             Write-Warning "OSDCloud will continue, but there may be issues"
         }
     }
-    #===================================================================================================
+    #=======================================================================
     #   Module
-    #===================================================================================================
+    #=======================================================================
     if ($PSCmdlet.ParameterSetName -eq 'Module') {
         $GetDeployOSDCloud = Get-OSDCloudOfflineFile -Name 'Deploy-MyOSDCloud.ps1' | Select-Object -First 1
         if ($GetDeployOSDCloud) {
@@ -268,9 +268,9 @@ function Start-OSDCloud {
             & "$($MyInvocation.MyCommand.Module.ModuleBase)\OSDCloud\Deploy-OSDCloud.ps1"
         }
     }
-    #===================================================================================================
+    #=======================================================================
     #   GitHub
-    #===================================================================================================
+    #=======================================================================
     if ($PSCmdlet.ParameterSetName -eq 'GitHub') {
 
         if (-NOT (Test-WebConnection $GitHubBaseUrl)) {
@@ -302,5 +302,5 @@ function Start-OSDCloud {
 
         Invoke-WebPSScript -WebPSScript $Global:GitHubUrl
     }
-    #===================================================================================================
+    #=======================================================================
 }

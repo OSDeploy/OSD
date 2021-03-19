@@ -11,58 +11,58 @@ Alias = Disk, DiskNumber
 
 .PARAMETER BootFromDisk
 Returns Disk results based BootFromDisk property
-PS> Get-OSDDisk -BootFromDisk:$true
-PS> Get-OSDDisk -BootFromDisk:$false
+PS> Get-Disk.osd -BootFromDisk:$true
+PS> Get-Disk.osd -BootFromDisk:$false
 
 .PARAMETER IsBoot
 Returns Disk results based IsBoot property
-PS> Get-OSDDisk -IsBoot:$true
-PS> Get-OSDDisk -IsBoot:$false
+PS> Get-Disk.osd -IsBoot:$true
+PS> Get-Disk.osd -IsBoot:$false
 
 .PARAMETER IsReadOnly
 Returns Disk results based IsReadOnly property
-PS> Get-OSDDisk -IsReadOnly:$true
-PS> Get-OSDDisk -IsReadOnly:$false
+PS> Get-Disk.osd -IsReadOnly:$true
+PS> Get-Disk.osd -IsReadOnly:$false
 
 .PARAMETER IsSystem
 Returns Disk results based IsSystem property
-PS> Get-OSDDisk -IsSystem:$true
-PS> Get-OSDDisk -IsSystem:$false
+PS> Get-Disk.osd -IsSystem:$true
+PS> Get-Disk.osd -IsSystem:$false
 
 .PARAMETER BusType
 Returns Disk results in BusType values
 Values = '1394','ATA','ATAPI','Fibre Channel','File Backed Virtual','iSCSI','MMC','MAX','Microsoft Reserved','NVMe','RAID','SAS','SATA','SCSI','SD','SSA','Storage Spaces','USB','Virtual'
-PS> Get-OSDDisk -BusType NVMe
-PS> Get-OSDDisk -BusType NVMe,SAS
+PS> Get-Disk.osd -BusType NVMe
+PS> Get-Disk.osd -BusType NVMe,SAS
 
 .PARAMETER BusTypeNot
 Returns Disk results notin BusType values
 Values = '1394','ATA','ATAPI','Fibre Channel','File Backed Virtual','iSCSI','MMC','MAX','Microsoft Reserved','NVMe','RAID','SAS','SATA','SCSI','SD','SSA','Storage Spaces','USB','Virtual'
-PS> Get-OSDDisk -BusTypeNot USB
-PS> Get-OSDDisk -BusTypeNot USB,Virtual
+PS> Get-Disk.osd -BusTypeNot USB
+PS> Get-Disk.osd -BusTypeNot USB,Virtual
 
 .PARAMETER MediaType
 Returns Disk results in MediaType values
 Values = 'SSD','HDD','SCM','Unspecified'
-PS> Get-OSDDisk -MediaType SSD
+PS> Get-Disk.osd -MediaType SSD
 
 .PARAMETER MediaTypeNot
 Returns Disk results notin MediaType values
 Values = 'SSD','HDD','SCM','Unspecified'
-PS> Get-OSDDisk -MediaTypeNot HDD
+PS> Get-Disk.osd -MediaTypeNot HDD
 
 .PARAMETER PartitionStyle
 Returns Disk results in PartitionStyle values
 Values = 'GPT','MBR','RAW'
-PS> Get-OSDDisk -PartitionStyle GPT
+PS> Get-Disk.osd -PartitionStyle GPT
 
 .PARAMETER PartitionStyleNot
 Returns Disk results notin PartitionStyle values
 Values = 'GPT','MBR','RAW'
-PS> Get-OSDDisk -PartitionStyleNot RAW
+PS> Get-Disk.osd -PartitionStyleNot RAW
 
 .LINK
-https://osd.osdeploy.com/module/functions/disk/get-osddisk
+https://osd.osdeploy.com/module/functions/disk/get-disk
 
 .NOTES
 21.3.9      Removed Offline Drives
@@ -70,7 +70,7 @@ https://osd.osdeploy.com/module/functions/disk/get-osddisk
 21.2.19     Complete redesign
 19.10.10    Created by David Segura @SeguraOSD
 #>
-function Get-OSDDisk {
+function Get-Disk.osd {
     [CmdletBinding()]
     param (
         [Alias('Disk','DiskNumber')]
@@ -96,45 +96,39 @@ function Get-OSDDisk {
         [ValidateSet('GPT','MBR','RAW')]
         [string[]]$PartitionStyleNot
     )
-    #======================================================================================================
+    #=======================================================================
     #	PSBoundParameters
-    #======================================================================================================
+    #=======================================================================
     $IsConfirmPresent   = $PSBoundParameters.ContainsKey('Confirm')
     $IsForcePresent     = $PSBoundParameters.ContainsKey('Force')
     $IsVerbosePresent   = $PSBoundParameters.ContainsKey('Verbose')
-    #======================================================================================================
-    #	OSD Module and Command Information
-    #======================================================================================================
-    $OSDVersion = $($MyInvocation.MyCommand.Module.Version)
-    Write-Verbose "OSD $OSDVersion $($MyInvocation.MyCommand.Name)"
-    #======================================================================================================
+    #=======================================================================
     #	Get Variables
-    #======================================================================================================
+    #=======================================================================
     $GetDisk = Get-Disk | Sort-Object DiskNumber | Select-Object -Property *
     $GetPhysicalDisk = Get-PhysicalDisk | Sort-Object DeviceId
-    #======================================================================================================
-    #	-Number
-    #======================================================================================================
-    if ($PSBoundParameters.ContainsKey('Number')) {
-        $GetDisk = $GetDisk | Where-Object {$_.DiskNumber -eq $Number}
-    }
-    #======================================================================================================
+    #=======================================================================
     #	Add Property MediaType
-    #======================================================================================================
+    #=======================================================================
     foreach ($Disk in $GetDisk) {
         foreach ($PhysicalDisk in $GetPhysicalDisk | Where-Object {$_.DeviceId -eq $Disk.Number}) {
             $Disk | Add-Member -NotePropertyName 'MediaType' -NotePropertyValue $PhysicalDisk.MediaType
         }
     }
-    #======================================================================================================
+    #=======================================================================
     #	Exclude Empty Disks or Card Readers
-    #======================================================================================================
-    #$GetDisk = $GetDisk | Where-Object {$_.Size -gt 0}
+    #=======================================================================
     $GetDisk = $GetDisk | Where-Object {$_.IsOffline -eq $false}
     $GetDisk = $GetDisk | Where-Object {$_.OperationalStatus -ne 'No Media'}
-    #======================================================================================================
+    #=======================================================================
+    #	-Number
+    #=======================================================================
+    if ($PSBoundParameters.ContainsKey('Number')) {
+        $GetDisk = $GetDisk | Where-Object {$_.DiskNumber -eq $Number}
+    }
+    #=======================================================================
     #	Filters
-    #======================================================================================================
+    #=======================================================================
     if ($PSBoundParameters.ContainsKey('BootFromDisk')) {$GetDisk = $GetDisk | Where-Object {$_.BootFromDisk -eq $BootFromDisk}}
     if ($PSBoundParameters.ContainsKey('IsBoot')) {$GetDisk = $GetDisk | Where-Object {$_.IsBoot -eq $IsBoot}}
     if ($PSBoundParameters.ContainsKey('IsReadOnly')) {$GetDisk = $GetDisk | Where-Object {$_.IsReadOnly -eq $IsReadOnly}}
@@ -146,10 +140,10 @@ function Get-OSDDisk {
     if ($MediaTypeNot)          {$GetDisk = $GetDisk | Where-Object {$_.MediaType -notin $MediaTypeNot}}
     if ($PartitionStyle)        {$GetDisk = $GetDisk | Where-Object {$_.PartitionStyle -in $PartitionStyle}}
     if ($PartitionStyleNot)     {$GetDisk = $GetDisk | Where-Object {$_.PartitionStyle -notin $PartitionStyleNot}}
-    #======================================================================================================
+    #=======================================================================
     #	Return
-    #======================================================================================================
+    #=======================================================================
     Return $GetDisk
-    #======================================================================================================
+    #=======================================================================
 }
 

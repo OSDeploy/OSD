@@ -43,26 +43,26 @@ function Save-OSDCloud {
         [switch]$Screenshot
     )
 
-    #===================================================================================================
+    #=======================================================================
     #	Start the Clock
-    #===================================================================================================
+    #=======================================================================
     $Global:OSDCloudStartTime = Get-Date
-    #===================================================================================================
+    #=======================================================================
     #   Screenshot
-    #===================================================================================================
+    #=======================================================================
     if ($PSBoundParameters.ContainsKey('Screenshot')) {
         $Global:OSDCloudScreenshot = "$env:TEMP\ScreenPNG"
         Start-ScreenPNGProcess -Directory "$env:TEMP\ScreenPNG"
     }
-    #===================================================================================================
+    #=======================================================================
     #	Global Variables
-    #===================================================================================================
+    #=======================================================================
     $Global:OSDCloudOSEdition = $OSEdition
     $Global:OSDCloudOSCulture = $OSCulture
-    #===================================================================================================
+    #=======================================================================
     #   Require cURL
     #   Without cURL, we can't download the ESD, so if it's not present, then we need to exit
-    #===================================================================================================
+    #=======================================================================
     if (-NOT (Test-CommandCurlExe)) {
         Write-Host -ForegroundColor DarkGray    "========================================================================="
         Write-Host -ForegroundColor Yellow      "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) $($MyInvocation.MyCommand.Name) " -NoNewline
@@ -71,16 +71,16 @@ function Save-OSDCloud {
         Start-Sleep -Seconds 5
         Break
     }
-    #===================================================================================================
+    #=======================================================================
     #	Save-OSDCloud USB
-    #===================================================================================================
+    #=======================================================================
     Write-Host -ForegroundColor DarkGray        "========================================================================="
     Write-Host -ForegroundColor Yellow          "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) $($MyInvocation.MyCommand.Name) " -NoNewline
     Write-Host -ForegroundColor Cyan            "OSDCloud content can be saved to an 8GB+ NTFS USB Volume"
     Write-Host -ForegroundColor White           "Windows 10 will require about 4GB"
     Write-Host -ForegroundColor White           "Hardware Drivers will require between 1-2GB for Dell Systems"
 
-    $GetUSBVolume = Get-USBVolume | Where-Object {$_.FileSystem -eq 'NTFS'} | Where-Object {$_.SizeGB -ge 8} | Sort-Object DriveLetter -Descending
+    $GetUSBVolume = Get-Volume.usb | Where-Object {$_.FileSystem -eq 'NTFS'} | Where-Object {$_.SizeGB -ge 8} | Sort-Object DriveLetter -Descending
     if (-NOT ($GetUSBVolume)) {
         Write-Warning                           "Unfortunately, I don't see any USB Volumes that will work"
         Write-Warning                           "OSDCloud Failed!"
@@ -92,7 +92,7 @@ function Save-OSDCloud {
     Write-Host -ForegroundColor DarkGray        "========================================================================="
     if ($GetUSBVolume) {
         #$GetUSBVolume | Select-Object -Property DriveLetter, FileSystemLabel, SizeGB, SizeRemainingMB, DriveType | Format-Table
-        $SelectUSBVolume = Select-USBVolume -MinimumSizeGB 8 -FileSystem 'NTFS'
+        $SelectUSBVolume = Select-Volume.usb -MinimumSizeGB 8 -FileSystem 'NTFS'
         $Global:OSDCloudOfflineFullName = "$($SelectUSBVolume.DriveLetter):\OSDCloud"
         Write-Host -ForegroundColor White       "OSDCloud content will be saved to $OSDCloudOfflineFullName"
     } else {
@@ -101,9 +101,9 @@ function Save-OSDCloud {
         Write-Warning                           "NTFS File System"
         Break
     }
-    #===================================================================================================
+    #=======================================================================
     #	AutoPilot Profiles
-    #===================================================================================================
+    #=======================================================================
     Write-Host -ForegroundColor DarkGray        "========================================================================="
     Write-Host -ForegroundColor Yellow          "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) $($MyInvocation.MyCommand.Name) " -NoNewline
     Write-Host -ForegroundColor Cyan            "AutoPilot Profiles"
@@ -123,9 +123,9 @@ function Save-OSDCloud {
         Write-Warning "No AutoPilot Profiles were found in any <PSDrive>:\OSDCloud\AutoPilot\Profiles"
         Write-Warning "AutoPilot Profiles must be located in a $OSDCloudOfflineFullName\AutoPilot\Profiles direcory"
     }
-    #===================================================================================================
+    #=======================================================================
     #	Get-FeatureUpdate
-    #===================================================================================================
+    #=======================================================================
     Write-Host -ForegroundColor DarkGray    "========================================================================="
     Write-Host -ForegroundColor Yellow      "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) $($MyInvocation.MyCommand.Name) " -NoNewline
     Write-Host -ForegroundColor Cyan        "Get-FeatureUpdate Windows 10 $Global:OSDCloudOSEdition x64 $OSBuild $OSCulture"
@@ -145,9 +145,9 @@ function Save-OSDCloud {
     Write-Host -ForegroundColor White "FileName: $($GetFeatureUpdate.FileName)"
     Write-Host -ForegroundColor White "SizeMB: $($GetFeatureUpdate.SizeMB)"
     Write-Host -ForegroundColor White "FileUri: $($GetFeatureUpdate.FileUri)"
-    #===================================================================================================
+    #=======================================================================
     #	Offline OS
-    #===================================================================================================
+    #=======================================================================
     $OSDCloudOfflineOS = Get-OSDCloudOfflineFile -Name $GetFeatureUpdate.FileName | Select-Object -First 1
 
     if ($OSDCloudOfflineOS) {
@@ -162,9 +162,9 @@ function Save-OSDCloud {
         Write-Warning "OSDCloud cannot continue"
         Break
     }
-    #===================================================================================================
+    #=======================================================================
     #	Get Dell Driver Pack
-    #===================================================================================================
+    #=======================================================================
     if ((Get-MyComputerManufacturer -Brief) -eq 'Dell') {
         Write-Host -ForegroundColor DarkGray    "========================================================================="
         Write-Host -ForegroundColor Yellow      "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) $($MyInvocation.MyCommand.Name) " -NoNewline
@@ -207,9 +207,9 @@ function Save-OSDCloud {
             Write-Warning "OSDCloud will continue, but there may be issues"
         }
     }
-    #===================================================================================================
+    #=======================================================================
     #	Get Dell BIOS Update
-    #===================================================================================================
+    #=======================================================================
     if ((Get-MyComputerManufacturer -Brief) -eq 'Dell') {
         Write-Host -ForegroundColor DarkGray    "========================================================================="
         Write-Host -ForegroundColor Yellow      "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) $($MyInvocation.MyCommand.Name) " -NoNewline
@@ -250,9 +250,9 @@ function Save-OSDCloud {
             Write-Warning "OSDCloud will continue, but there may be issues"
         }
     }
-    #===================================================================================================
+    #=======================================================================
     #	PSGallery Modules
-    #===================================================================================================
+    #=======================================================================
     Write-Host -ForegroundColor DarkGray    "========================================================================="
     Write-Host -ForegroundColor Yellow      "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) $($MyInvocation.MyCommand.Name) " -NoNewline
     Write-Host -ForegroundColor Cyan        "PowerShell Modules and Scripts"
@@ -296,20 +296,20 @@ function Save-OSDCloud {
         Write-Warning "OSDCloud cannot continue"
         Break
     }
-    #===================================================================================================
+    #=======================================================================
     #	Save-OSDCloud Complete
-    #===================================================================================================
+    #=======================================================================
     $Global:OSDCloudEndTime = Get-Date
     $Global:OSDCloudTimeSpan = New-TimeSpan -Start $Global:OSDCloudStartTime -End $Global:OSDCloudEndTime
     Write-Host -ForegroundColor DarkGray    "========================================================================="
     Write-Host -ForegroundColor Yellow      "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) $($MyInvocation.MyCommand.Name) " -NoNewline
     Write-Host -ForegroundColor Cyan        "Completed in $($Global:OSDCloudTimeSpan.ToString("mm' minutes 'ss' seconds'"))!"
     explorer $OSDCloudOfflineFullName
-    #===================================================================================================
+    #=======================================================================
     if ($Global:OSDCloudScreenshot) {
         Start-Sleep 5
         Stop-ScreenPNGProcess
         Write-Host -ForegroundColor Cyan    "Screenshots: $Global:OSDCloudScreenshot"
     }
-    #===================================================================================================
+    #=======================================================================
 }

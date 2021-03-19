@@ -8,7 +8,7 @@ function Block-Admin {
         Write-Warning $Message; Break
     }
 }
-function Block-NonAdmin {
+function Block-StandardUser {
     [CmdletBinding()]
     param ()
     $FirstParty = (Get-PSCallStack)[1].InvocationInfo.Line
@@ -24,7 +24,7 @@ function Block-WinOS {
     $FirstParty = (Get-PSCallStack)[1].InvocationInfo.Line
     $Message = "[$((Get-Date).ToString('yyyy-MM-dd-HHmmss'))] $FirstParty requires WinPE"
         
-    if ((Get-OSDGather -Property IsWinPE)) {
+    if (-NOT (Get-OSDGather -Property IsWinPE)) {
         Write-Warning $Message; Break
     }
 }

@@ -24,14 +24,14 @@ function Get-OSDDriver {
         #Select results in GridView with PassThru
         [switch]$GridView
     )
-    #======================================================================================================
+    #=======================================================================
     #	Information
-    #======================================================================================================
+    #=======================================================================
     Write-Verbose 'Get-OSDDriver: Results are saved in the Global Variable $GetOSDDriver for this PowerShell session'
     $global:GetOSDDriver = @()
-    #======================================================================================================
+    #=======================================================================
     #	Execute Private Function
-    #======================================================================================================
+    #=======================================================================
     if ($OSDGroup -eq 'AmdDisplay') {
         Write-Verbose "Get-OSDDriver: $OSDGroup Drivers are generated from OSD Local Catalogs and may not always have the latest versions"
         $global:GetOSDDriver = Get-OSDDriverAmdDisplay
@@ -60,14 +60,14 @@ function Get-OSDDriver {
         Write-Verbose "Get-OSDDriver: $OSDGroup Drivers are generated from OSD Local Catalogs and may not always have the latest versions"
         $global:GetOSDDriver = Get-OSDDriverNvidiaDisplay
     }
-    #======================================================================================================
+    #=======================================================================
     #	GridView
-    #======================================================================================================
+    #=======================================================================
     if ($GridView.IsPresent) {
         $global:GetOSDDriver = $global:GetOSDDriver | Out-GridView -PassThru -Title 'Select Results with PassThru'
     }
-    #======================================================================================================
+    #=======================================================================
     #	Return
-    #======================================================================================================
+    #=======================================================================
     Return $global:GetOSDDriver
 }

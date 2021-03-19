@@ -7,9 +7,9 @@ function Test-AuditModeAutoPilot {
         [Parameter(Mandatory = $true)]
         [string]$GroupTag
     )
-#===================================================================================================
+#=======================================================================
 #   Unattend.xml for Audit Mode
-#===================================================================================================
+#=======================================================================
 $UnattendAuditModeAutoPilot = @"
 <?xml version="1.0" encoding="utf-8"?>
 <unattend xmlns="urn:schemas-microsoft-com:unattend">
@@ -48,9 +48,9 @@ $UnattendAuditModeAutoPilot = @"
     </settings>
 </unattend>
 "@
-#===================================================================================================
+#=======================================================================
 #   Do the Work
-#===================================================================================================
+#=======================================================================
     $PathPanther = 'C:\Windows\Panther'
     if (-NOT (Test-Path $PathPanther)) {
         New-Item -Path $PathPanther -ItemType Directory -Force | Out-Null
@@ -62,9 +62,9 @@ $UnattendAuditModeAutoPilot = @"
 
     Write-Host -ForegroundColor Cyan "Applying Use-WindowsUnattend $UnattendPath ... this may take a while!"
     Use-WindowsUnattend -Path 'C:\' -UnattendPath $UnattendPath
-#===================================================================================================
+#=======================================================================
 #   Cross Fingers
-#===================================================================================================
+#=======================================================================
 }
 function Test-UseWindowsUnattend {
     [CmdletBinding()]

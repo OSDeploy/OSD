@@ -6,16 +6,16 @@ function Save-MyDellDriverCab {
         [string]$DownloadPath,
         [string]$Expand
     )
-    #===================================================================================================
+    #=======================================================================
     #   Require Dell Computer
-    #===================================================================================================
+    #=======================================================================
     if ((Get-MyComputerManufacturer -Brief) -ne 'Dell') {
         Write-Warning "Dell computer is required for this function"
         Break
     }
-    #===================================================================================================
+    #=======================================================================
     #   Get-MyDellDriverCab
-    #===================================================================================================
+    #=======================================================================
     $GetMyDellDriverCab = Get-MyDellDriverCab | Select-Object LastUpdate,DriverName,Make,Generation,Model,SystemSku,DriverVersion,DriverReleaseId,OSVersion,OSArch,DownloadFile,SizeMB,DriverUrl,DriverInfo,Hash
 
     if ($GetMyDellDriverCab) {
@@ -39,9 +39,9 @@ function Save-MyDellDriverCab {
         Write-Host "Destination: $Destination" -ForegroundColor Cyan
         Write-Host "OutFile: $OutFile" -ForegroundColor Cyan
         Write-Host "Be patient ... this is a $SizeMB MB file" -ForegroundColor Cyan
-        #===================================================================================================
+        #=======================================================================
         #   Download Driver CAB
-        #===================================================================================================
+        #=======================================================================
         if (Get-Command 'curl.exe') {
             if (-NOT (Test-Path $OutFile)) {
                 Write-Host "Downloading using cURL" -ForegroundColor Cyan

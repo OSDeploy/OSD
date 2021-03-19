@@ -1,4 +1,4 @@
-#===================================================================================================
+#=======================================================================
 #   VERSIONING
 #   Scripts/Test-OSDModule.ps1
 #   OSD Module Minimum Version
@@ -8,7 +8,7 @@
 #   controlled in a similar method
 #   In WinPE, the latest version will be installed automatically
 #   In Windows, this script is stopped and you will need to update manually
-#===================================================================================================
+#=======================================================================
 [Version]$OSDVersionMin = '21.3.18.1'
 
 if ((Get-Module -Name OSD -ListAvailable | `Sort-Object Version -Descending | Select-Object -First 1).Version -lt $OSDVersionMin) {
@@ -29,7 +29,7 @@ if ((Get-Module -Name OSD -ListAvailable | Sort-Object Version -Descending | Sel
     Write-Warning "OSDCloud requires OSD $OSDVersionMin or newer"
     Break
 }
-#===================================================================================================
+#=======================================================================
 #   VARIABLES
 #   These are set automatically by the OSD Module 21.3.11+ when executing Start-OSDCloud
 #   $Global:GitHubBase = 'https://raw.githubusercontent.com'
@@ -42,19 +42,19 @@ if ((Get-Module -Name OSD -ListAvailable | Sort-Object Version -Descending | Sel
 #   $Global:OSDCloudOSEdition = $OSEdition
 #   $Global:OSDCloudOSCulture = $OSCulture
 #   As a backup, $Global:OSDCloudVariables is created with Get-Variable
-#===================================================================================================
+#=======================================================================
 $Global:OSDCloudVariables = Get-Variable
 $BuildName = 'OSDCloud'
-#===================================================================================================
+#=======================================================================
 #   HEADER
-#===================================================================================================
+#=======================================================================
 Write-Host -ForegroundColor DarkGray    "========================================================================="
 Write-Host -ForegroundColor Yellow      "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) $($MyInvocation.MyCommand.Name) " -NoNewline
 Write-Warning                           "THIS IS CURRENTLY IN DEVELOPMENT FOR TESTING ONLY"
-#===================================================================================================
+#=======================================================================
 #	AutoPilot Profiles
 #   This should have been selected by Start-OSDCloud
-#===================================================================================================
+#=======================================================================
 Write-Host -ForegroundColor DarkGray    "========================================================================="
 Write-Host -ForegroundColor Yellow      "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) $($MyInvocation.MyCommand.Name) " -NoNewline
 Write-Host -ForegroundColor Cyan        "AutoPilot Profiles"
@@ -65,11 +65,11 @@ if ($Global:OSDCloudAutoPilotProfile) {
 } else {
     Write-Warning "AutoPilotConfigurationFile.json will not be configured for this deployment"
 }
-#===================================================================================================
+#=======================================================================
 #   Require WinPE
 #   OSDCloud won't continue past this point unless you are in WinPE
 #   The reason for the late failure is so you can test the Menu
-#===================================================================================================
+#=======================================================================
 if ((Get-OSDGather -Property IsWinPE) -eq $false) {
     Write-Host -ForegroundColor DarkGray    "========================================================================="
     Write-Host -ForegroundColor Yellow      "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) $($MyInvocation.MyCommand.Name) " -NoNewline
@@ -78,45 +78,45 @@ if ((Get-OSDGather -Property IsWinPE) -eq $false) {
     Start-Sleep -Seconds 5
     Break
 }
-#===================================================================================================
+#=======================================================================
 #   Set the Power Plan to High Performance
-#===================================================================================================
+#=======================================================================
 Write-Host -ForegroundColor DarkGray    "========================================================================="
 Write-Host -ForegroundColor Yellow      "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) $($MyInvocation.MyCommand.Name) " -NoNewline
 Write-Host -ForegroundColor Cyan        "Enabling High Performance Power Plan"
 Write-Host -ForegroundColor Gray        "Get-OSDPower -Property High"
 Get-OSDPower -Property High
-#===================================================================================================
+#=======================================================================
 #   Remove USB Drives
-#===================================================================================================
-$GetUSBDisk = Get-USBDisk
-if (Get-USBDisk) {
+#=======================================================================
+$GetUSBDisk = Get-Disk.usb
+if (Get-Disk.usb) {
     Write-Host -ForegroundColor DarkGray    "========================================================================="
     Write-Host -ForegroundColor Yellow      "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) $($MyInvocation.MyCommand.Name) " -NoNewline
     do {
         Write-Warning "Remove all attached USB Drives until OSDisk has been prepared"
         pause
     }
-    while (Get-USBDisk)
+    while (Get-Disk.usb)
 }
-#===================================================================================================
+#=======================================================================
 #   Prepare OSDisk
 #   Don't allow USB Drives at this time so there is no worry about Drive Letters
-#===================================================================================================
+#=======================================================================
 Write-Host -ForegroundColor DarkGray    "========================================================================="
 Write-Host -ForegroundColor Yellow      "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) $($MyInvocation.MyCommand.Name) " -NoNewline
 Write-Host -ForegroundColor Cyan        "Prepare OSDisk"
 
-Clear-LocalDisk -Force
+Clear-Disk.fixed -Force
 New-OSDisk -Force
 Start-Sleep -Seconds 3
 if (-NOT (Get-PSDrive -Name 'C')) {
     Write-Warning "Disk does not seem to be ready.  Can't continue"
     Break
 }
-#===================================================================================================
+#=======================================================================
 #   Screenshot
-#===================================================================================================
+#=======================================================================
 if ($Global:OSDCloudScreenshot) {
     Stop-ScreenPNGProcess
     
@@ -125,9 +125,9 @@ if ($Global:OSDCloudScreenshot) {
     Start-ScreenPNGProcess -Directory 'C:\OSDCloud\ScreenPNG'
     $Global:OSDCloudScreenshot = 'C:\OSDCloud\ScreenPNG'
 }
-#===================================================================================================
+#=======================================================================
 #   Start Transcript
-#===================================================================================================
+#=======================================================================
 Write-Host -ForegroundColor DarkGray    "========================================================================="
 Write-Host -ForegroundColor Yellow      "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) $($MyInvocation.MyCommand.Name) " -NoNewline
 Write-Host -ForegroundColor Cyan        "Start-Transcript"
@@ -136,9 +136,9 @@ if (-NOT (Test-Path 'C:\OSDCloud\Logs')) {
     New-Item -Path 'C:\OSDCloud\Logs' -ItemType Directory -Force -ErrorAction Stop | Out-Null
 }
 Start-Transcript -Path 'C:\OSDCloud\Logs'
-#===================================================================================================
+#=======================================================================
 #   Reattach USB Drives
-#===================================================================================================
+#=======================================================================
 if ($GetUSBDisk) {
     Write-Host -ForegroundColor DarkGray    "========================================================================="
     Write-Host -ForegroundColor Yellow      "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) $($MyInvocation.MyCommand.Name) " -NoNewline
@@ -147,9 +147,9 @@ if ($GetUSBDisk) {
     #Give some time for the drive to be initialized
     Start-Sleep -Seconds 10
 }
-#===================================================================================================
+#=======================================================================
 #	Get-FeatureUpdate
-#===================================================================================================
+#=======================================================================
 Write-Host -ForegroundColor DarkGray    "========================================================================="
 Write-Host -ForegroundColor Yellow      "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) $($MyInvocation.MyCommand.Name) " -NoNewline
 Write-Host -ForegroundColor Cyan        "Get-FeatureUpdate Windows 10 $Global:OSDCloudOSEdition x64 $OSBuild $OSCulture"
@@ -168,9 +168,9 @@ Write-Host -ForegroundColor White "Title: $($GetFeatureUpdate.Title)"
 Write-Host -ForegroundColor White "FileName: $($GetFeatureUpdate.FileName)"
 Write-Host -ForegroundColor White "SizeMB: $($GetFeatureUpdate.SizeMB)"
 Write-Host -ForegroundColor White "FileUri: $($GetFeatureUpdate.FileUri)"
-#===================================================================================================
+#=======================================================================
 #	Get OS
-#===================================================================================================
+#=======================================================================
 $OSDCloudOfflineOS = Get-OSDCloudOfflineFile -Name $GetFeatureUpdate.FileName | Select-Object -First 1
 
 if ($OSDCloudOfflineOS) {
@@ -194,9 +194,9 @@ else {
     Write-Warning "OSDCloud cannot continue"
     Break
 }
-#===================================================================================================
+#=======================================================================
 #	Expand OS
-#===================================================================================================
+#=======================================================================
 Write-Host -ForegroundColor DarkGray    "========================================================================="
 Write-Host -ForegroundColor Yellow      "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) $($MyInvocation.MyCommand.Name) " -NoNewline
 Write-Host -ForegroundColor Cyan        "Expand OS to C:\"
@@ -223,9 +223,9 @@ else {
     Write-Warning "OSDCloud cannot continue"
     Break
 }
-#===================================================================================================
+#=======================================================================
 #	Get Dell Driver Pack
-#===================================================================================================
+#=======================================================================
 if ((Get-MyComputerManufacturer -Brief) -eq 'Dell') {
     Write-Host -ForegroundColor DarkGray    "========================================================================="
     Write-Host -ForegroundColor Yellow      "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) $($MyInvocation.MyCommand.Name) " -NoNewline
@@ -268,9 +268,9 @@ if ((Get-MyComputerManufacturer -Brief) -eq 'Dell') {
         Write-Warning "Unable to determine a suitable Driver Pack for this Computer Model"
     }
 }
-#===================================================================================================
+#=======================================================================
 #	Deploy-OSDCloud Expand MyDellDriverCab
-#===================================================================================================
+#=======================================================================
 if ((Get-MyComputerManufacturer -Brief) -eq 'Dell') {
     Write-Host -ForegroundColor DarkGray    "========================================================================="
     Write-Host -ForegroundColor Yellow      "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) $($MyInvocation.MyCommand.Name) " -NoNewline
@@ -284,9 +284,9 @@ if ((Get-MyComputerManufacturer -Brief) -eq 'Dell') {
         Expand -R "$OSDCloudOfflineDriverPackFullName" -F:* "$ExpandPath" | Out-Null
     }
 }
-#===================================================================================================
+#=======================================================================
 #	Dell BIOS Update
-#===================================================================================================
+#=======================================================================
 if ((Get-MyComputerManufacturer -Brief) -eq 'Dell') {
     Write-Host -ForegroundColor DarkGray    "========================================================================="
     Write-Host -ForegroundColor Yellow      "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) $($MyInvocation.MyCommand.Name) " -NoNewline
@@ -326,19 +326,19 @@ if ((Get-MyComputerManufacturer -Brief) -eq 'Dell') {
         Write-Warning "Unable to determine a suitable BIOS update for this Computer Model"
     }
 }
-#===================================================================================================
+#=======================================================================
 #   Update-MyDellBios
 #   This step is not fully tested, so commenting out
-#===================================================================================================
+#=======================================================================
 <# if ((Get-MyComputerManufacturer -Brief) -eq 'Dell') {
     Write-Host -ForegroundColor DarkGray    "================================================================="
     Write-Host -ForegroundColor Yellow      "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) $($MyInvocation.MyCommand.Name) " -NoNewline
     Write-Host -ForegroundColor Green       "Update-MyDellBios"
     Update-MyDellBIOS
 } #>
-#===================================================================================================
+#=======================================================================
 #   Apply Drivers with Use-WindowsUnattend
-#===================================================================================================
+#=======================================================================
 Write-Host -ForegroundColor DarkGray    "========================================================================="
 Write-Host -ForegroundColor Yellow      "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) $($MyInvocation.MyCommand.Name) " -NoNewline
 Write-Host -ForegroundColor Cyan        "Apply Drivers with Use-WindowsUnattend"
@@ -348,30 +348,11 @@ if (-NOT (Test-Path $PathPanther)) {
     New-Item -Path $PathPanther -ItemType Directory -Force | Out-Null
 }
 
-$UnattendDrivers = @'
-<?xml version="1.0" encoding="utf-8"?>
-<unattend xmlns="urn:schemas-microsoft-com:unattend">
-    <settings pass="offlineServicing">
-        <component name="Microsoft-Windows-PnpCustomizationsNonWinPE" processorArchitecture="amd64" publicKeyToken="31bf3856ad364e35" language="neutral" versionScope="nonSxS" xmlns:wcm="http://schemas.microsoft.com/WMIConfig/2002/State" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-            <DriverPaths>
-                <PathAndCredentials wcm:keyValue="1" wcm:action="add">
-                    <Path>C:\Drivers</Path>
-                </PathAndCredentials>
-            </DriverPaths>
-        </component>
-    </settings>
-</unattend>
-'@
-
-$UnattendPath = Join-Path $PathPanther 'Unattend.xml'
-Write-Host -ForegroundColor Cyan "Setting Driver $UnattendPath"
-$UnattendDrivers | Out-File -FilePath $UnattendPath -Encoding utf8
-
 Write-Host -ForegroundColor Cyan "Applying Use-WindowsUnattend $UnattendPath ... this may take a while!"
-Use-WindowsUnattend -Path 'C:\' -UnattendPath $UnattendPath
-#===================================================================================================
+Use-WindowsUnattend.drivers -Verbose
+#=======================================================================
 #   PSGallery Modules
-#===================================================================================================
+#=======================================================================
 Write-Host -ForegroundColor DarkGray    "================================================================="
 Write-Host -ForegroundColor Yellow      "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) $($MyInvocation.MyCommand.Name) " -NoNewline
 Write-Host -ForegroundColor Cyan        "PowerShell Modules and Scripts"
@@ -403,9 +384,9 @@ else {
         robocopy "$($Item.FullName)\PowerShell\Required" "$PowerShellSavePath" *.* /e /ndl /njh /njs
     }
 }
-#===================================================================================================
+#=======================================================================
 #   AutoPilotConfigurationFile.json
-#===================================================================================================
+#=======================================================================
 Write-Host -ForegroundColor DarkGray    "================================================================="
 Write-Host -ForegroundColor Yellow      "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) $($MyInvocation.MyCommand.Name) " -NoNewline
 Write-Host -ForegroundColor Cyan        "AutoPilotConfigurationFile.json"
@@ -423,19 +404,19 @@ if ($Global:OSDCloudAutoPilotProfile) {
 } else {
     Write-Warning "AutoPilotConfigurationFile.json will not be configured for this deployment"
 }
-#===================================================================================================
+#=======================================================================
 #	Deploy-OSDCloud Complete
-#===================================================================================================
+#=======================================================================
 $Global:OSDCloudEndTime = Get-Date
 $Global:OSDCloudTimeSpan = New-TimeSpan -Start $Global:OSDCloudStartTime -End $Global:OSDCloudEndTime
 Write-Host -ForegroundColor DarkGray    "========================================================================="
 Write-Host -ForegroundColor Yellow      "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) $($MyInvocation.MyCommand.Name) " -NoNewline
 Write-Host -ForegroundColor Cyan        "Completed in $($Global:OSDCloudTimeSpan.ToString("mm' minutes 'ss' seconds'"))!"
 Write-Host -ForegroundColor DarkGray    "========================================================================="
-#===================================================================================================
+#=======================================================================
 if ($Global:OSDCloudScreenshot) {
     Start-Sleep 5
     Stop-ScreenPNGProcess
     Write-Host -ForegroundColor Cyan    "Screenshots: $Global:OSDCloudScreenshot"
 }
-#===================================================================================================
+#=======================================================================

@@ -27,7 +27,7 @@ function New-OSDCloud.usb {
     #=======================================================================
     #	Block
     #=======================================================================
-    Block-NonAdmin
+    Block-StandardUser
     Block-WindowsMajorLt10
     Block-PowerShellVersionLt5
     Block-WindowsReleaseIdLt1703
@@ -67,18 +67,18 @@ function New-OSDCloud.usb {
         Break
     }
     #=======================================================================
-    #	New-OSDBoot.usb
+    #	New-Bootable.usb
     #=======================================================================
-    $NewOSDBootUSB = New-OSDBoot.usb -DataLabel 'OSDCloud'
+    $NewOSDBootUSB = New-Bootable.usb -DataLabel 'OSDCloud'
     #=======================================================================
-    #	Get-USBPartition
+    #	Get-Partition.usb
     #=======================================================================
-    $GetUSBBootPartition = Get-USBPartition | Where-Object {($_.DiskNumber -eq $NewOSDBootUSB.DiskNumber) -and ($_.PartitionNumber -eq 2)}
+    $GetUSBBootPartition = Get-Partition.usb | Where-Object {($_.DiskNumber -eq $NewOSDBootUSB.DiskNumber) -and ($_.PartitionNumber -eq 2)}
     if (-NOT ($GetUSBBootPartition)) {
         Write-Warning "Something went very very wrong in this process"
         Break
     }
-    $GetUSBDataPartition = Get-USBPartition | Where-Object {($_.DiskNumber -eq $NewOSDBootUSB.DiskNumber) -and ($_.PartitionNumber -eq 1)}
+    $GetUSBDataPartition = Get-Partition.usb | Where-Object {($_.DiskNumber -eq $NewOSDBootUSB.DiskNumber) -and ($_.PartitionNumber -eq 1)}
     if (-NOT ($GetUSBDataPartition)) {
         Write-Warning "Something went very very wrong in this process"
         Break

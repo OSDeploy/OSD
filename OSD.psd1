@@ -93,21 +93,30 @@ FunctionsToExport =
 'Get-DellCatalogPC',#DELL DRIVERS
 'Get-MyDellDriverCab',
 'Save-MyDellDriverCab',
-'Backup-DiskToFFU',#DISK
-'Clear-LocalDisk',
-'Clear-USBDisk',
-'Get-LocalDisk',
-'Get-LocalPartition',
-'Get-OSDDisk',
-'Get-OSDPartition',
-'Get-OSDVolume',
-'Get-USBDisk',
-'Get-USBPartition',
-'Get-USBVolume',
-'New-OSDBoot.usb',
+'Backup-Disk.ffu',#DISK
+'Backup-DiskToFFU',
+'Clear-Disk.fixed',
+'Clear-Disk.usb',
+'Get-DataStore',
+'Get-Disk.osd',
+'Get-Disk.fixed',
+'Get-Disk.usb',
+'Get-Partition.osd',
+'Get-Partition.fixed',
+'Get-Partition.usb',
+'Get-Volume.osd',
+'Get-Volume.fixed',
+'Get-Volume.usb',
+'New-Bootable.usb',
 'New-OSDisk',
-'Select-USBDisk',
-'Select-USBVolume',
+'Select-DataStore',
+'Select-Disk.osd',
+'Select-Disk.fixed',
+'Select-Disk.ffu',
+'Select-Disk.usb',
+'Select-Volume.osd',
+'Select-Volume.fixed',
+'Select-Volume.usb',
 'Dismount-MyWindowsImage',#DISM
 'Edit-MyWindowsImage',
 'Edit-MyWinPE',
@@ -169,6 +178,8 @@ FunctionsToExport =
 'Test-WebConnection',
 'Get-OSDWinPE',#WINPE
 'Use-WinPEContent',
+'Use-WindowsUnattend.auditmodeautopilot',
+'Use-WindowsUnattend.drivers',
 'Test-AuditModeAutoPilot',
 'Test-UseWindowsUnattend'
 
@@ -179,15 +190,7 @@ CmdletsToExport = @()
 VariablesToExport = @()
 
 # Aliases to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no aliases to export.
-AliasesToExport = @(
-'Dismount-WindowsImageOSD',
-'Edit-WindowsImageOSD',
-'Get-OSDSessions',
-'Mount-OSDWindowsImage',
-'Mount-WindowsImageOSD',
-'Update-OSDWindowsImage',
-'Update-WindowsImageOSD'
-)
+AliasesToExport = '*'
 
 # DSC resources to export from this module
 # DscResourcesToExport = @()

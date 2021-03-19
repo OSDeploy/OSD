@@ -3,9 +3,9 @@ function Get-SMBMappingForBackupFile {
     param (
         [int] $IgnoreDisk = 0
     )
-        #===================================================================================================
+        #=======================================================================
         #   Get-Partition Information
-        #===================================================================================================
+        #=======================================================================
         $GetPartition = Get-Partition | `
         Where-Object {$_.DiskNumber -ne $IgnoreDisk} | `
         Where-Object {$_.DriveLetter -gt 0} | `
@@ -14,15 +14,15 @@ function Get-SMBMappingForBackupFile {
         Where-Object {$_.Size -gt 10000000000} | `
         Sort-Object -Property DriveLetter | `
         Select-Object -Property DriveLetter
-        #===================================================================================================
+        #=======================================================================
         #   Get-Volume Information
-        #===================================================================================================
+        #=======================================================================
         $GetVolume = $(Get-Volume | `
         Sort-Object -Property DriveLetter | `
         Select-Object -Property DriveLetter,FileSystem,OperationalStatus,DriveType,FileSystemLabel,Size,SizeRemaining)
-        #===================================================================================================
+        #=======================================================================
         #   Create Object
-        #===================================================================================================
+        #=======================================================================
         $Results = foreach ($Item in $GetPartition) {
             $GetVolumeProperties = $GetVolume | Where-Object {$_.DriveLetter -eq $Item.DriveLetter}
             $ObjectProperties = @{
@@ -37,9 +37,9 @@ function Get-SMBMappingForBackupFile {
             }
             New-Object -TypeName PSObject -Property $ObjectProperties
         }
-        #===================================================================================================
+        #=======================================================================
         #   Return Results
-        #===================================================================================================
+        #=======================================================================
         $Results = $Results | Sort-Object -Property DriveLetter
         $Results = $Results | Where-Object {$_.FileSystem -eq 'NTFS'}
         Return $Results
