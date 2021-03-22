@@ -7,7 +7,7 @@
 RootModule = 'OSD.psm1'
 
 # Version number of his module.
-ModuleVersion = '21.3.18.1'
+ModuleVersion = '21.3.22.1'
 
 # Supported PSEditions
 # CompatiblePSEditions = @()
@@ -156,21 +156,25 @@ FunctionsToExport =
 'Get-MyBiosVersion',
 'Get-MyComputerManufacturer',
 'Get-MyComputerModel',
-'Get-OSDCloud.workspace',#OSDCLOUD
+'Start-OOBE.autopilot',#OOBE
+'Start-OOBE.settings',
+'Start-OOBE.wifi',
+'Edit-OSDCloud.winpe',#OSDCLOUD
+'Get-OSDCloud.workspace',
 'Get-OSDCloud.template',
-'Get-OSDCloudOfflineAutoPilotProfiles',
-'Get-OSDCloudOfflineFile',
-'Get-OSDCloudOfflinePath',
+'Get-OSDCloud.offline.autopilotprofiles',
+'Get-OSDCloud.offline.file',
+'Get-OSDCloud.offline.path',
 'New-OSDCloud.iso',
 'New-OSDCloud.template',
 'New-OSDCloud.usb',
 'New-OSDCloud.workspace',
 'Save-OSDCloud',
+'Save-OSDCloud.offlineos.modules',
 'Select-AutoPilotJson',
-'Select-OSDCloudOfflineAutoPilotProfiles',
+'Select-OSDCloud.offline.autopilotprofiles',
 'Set-OSDCloud.workspace',
 'Start-OSDCloud',
-'Start-OSDCloud.oobe',
 'Test-OSDCloud.template',
 'Get-OSDPower',#POWER
 'Enable-PEWimPSGallery',#PSGALLERY
@@ -188,8 +192,8 @@ FunctionsToExport =
 'Wait-WebConnection',
 'Get-OSDWinPE',#WINPE
 'Use-WinPEContent',
-'Use-WindowsUnattend.autopilot.audit',
-'Use-WindowsUnattend.autopilot.oobe',
+'Use-WindowsUnattend.audit',
+'Use-WindowsUnattend.audit.autopilot',
 'Use-WindowsUnattend.drivers'
 
 # Cmdlets to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no cmdlets to export.

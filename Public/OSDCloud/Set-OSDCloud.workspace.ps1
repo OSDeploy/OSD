@@ -4,7 +4,15 @@ function Set-OSDCloud.workspace {
         [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
         [string]$WorkspacePath
     )
-
+    #=======================================================================
+    #	Block
+    #=======================================================================
+    Block-StandardUser
+    Block-PowerShellVersionLt5
+    Block-WinPE
+    #=======================================================================
+    #	Set-OSDCloud.workspace
+    #=======================================================================
     $WorkspaceSettings = [PSCustomObject]@{
         WorkspacePath = $WorkspacePath
     }
@@ -12,4 +20,5 @@ function Set-OSDCloud.workspace {
     $WorkspaceSettings | ConvertTo-Json | Out-File "$env:ProgramData\OSDCloud\workspace.json" -Encoding ASCII
 
     Return $WorkspacePath
+    #=======================================================================
 }

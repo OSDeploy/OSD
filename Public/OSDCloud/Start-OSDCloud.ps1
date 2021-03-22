@@ -133,10 +133,10 @@ function Start-OSDCloud {
     Write-Host -ForegroundColor Cyan            "AutoPilot Profiles"
     
     $GetOSDCloudOfflineAutoPilotProfiles = $null
-    $GetOSDCloudOfflineAutoPilotProfiles = Get-OSDCloudOfflineAutoPilotProfiles
+    $GetOSDCloudOfflineAutoPilotProfiles = Get-OSDCloud.offline.autopilotprofiles
 
     if ($GetOSDCloudOfflineAutoPilotProfiles) {
-        $Global:OSDCloudAutoPilotProfile = Select-OSDCloudOfflineAutoPilotProfiles
+        $Global:OSDCloudAutoPilotProfile = Select-OSDCloud.offline.autopilotprofiles
     } else {
         Write-Warning "No AutoPilot Profiles were found in any PSDrive"
         Write-Warning "AutoPilot Profiles must be located in a <PSDrive>:\OSDCloud\AutoPilot\Profiles direcory"
@@ -174,7 +174,7 @@ function Start-OSDCloud {
     #=======================================================================
     #	Offline OS
     #=======================================================================
-    $OSDCloudOfflineOS = Get-OSDCloudOfflineFile -Name $GetFeatureUpdate.FileName | Select-Object -First 1
+    $OSDCloudOfflineOS = Get-OSDCloud.offline.file -Name $GetFeatureUpdate.FileName | Select-Object -First 1
 
     if ($OSDCloudOfflineOS) {
         $OSDCloudOfflineOSFullName = $OSDCloudOfflineOS.FullName
@@ -199,7 +199,7 @@ function Start-OSDCloud {
         $GetMyDellDriverCab = Get-MyDellDriverCab
         if ($GetMyDellDriverCab) {
 
-            $GetOSDCloudOfflineFile = Get-OSDCloudOfflineFile -Name $GetMyDellDriverCab.DownloadFile | Select-Object -First 1
+            $GetOSDCloudOfflineFile = Get-OSDCloud.offline.file -Name $GetMyDellDriverCab.DownloadFile | Select-Object -First 1
         
             if ($GetOSDCloudOfflineFile) {
                 Write-Host -ForegroundColor Cyan "Offline: $($GetOSDCloudOfflineFile.FullName)"
@@ -226,7 +226,7 @@ function Start-OSDCloud {
 
         $GetMyDellBios = Get-MyDellBios
         if ($GetMyDellBios) {
-            $GetOSDCloudOfflineFile = Get-OSDCloudOfflineFile -Name $GetMyDellBios.FileName | Select-Object -First 1
+            $GetOSDCloudOfflineFile = Get-OSDCloud.offline.file -Name $GetMyDellBios.FileName | Select-Object -First 1
 
             if ($OSDCloudOfflineBios) {
                 Write-Host -ForegroundColor Cyan "Offline: $($OSDCloudOfflineBios.FullName)"
@@ -239,7 +239,7 @@ function Start-OSDCloud {
                 Write-Warning "OSDCloud will continue, but there may be issues"
             }
 
-            $OSDCloudOfflineFlash64W = Get-OSDCloudOfflineFile -Name 'Flash64W.exe' | Select-Object -First 1
+            $OSDCloudOfflineFlash64W = Get-OSDCloud.offline.file -Name 'Flash64W.exe' | Select-Object -First 1
             if ($OSDCloudOfflineFlash64W) {
                 Write-Host -ForegroundColor Cyan "Offline: $($OSDCloudOfflineFlash64W.FullName)"
             }
@@ -260,7 +260,7 @@ function Start-OSDCloud {
     #   Module
     #=======================================================================
     if ($PSCmdlet.ParameterSetName -eq 'Module') {
-        $GetDeployOSDCloud = Get-OSDCloudOfflineFile -Name 'Deploy-MyOSDCloud.ps1' | Select-Object -First 1
+        $GetDeployOSDCloud = Get-OSDCloud.offline.file -Name 'Deploy-MyOSDCloud.ps1' | Select-Object -First 1
         if ($GetDeployOSDCloud) {
             & "$($GetDeployOSDCloud.FullName)"
         }

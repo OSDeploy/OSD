@@ -1,61 +1,12 @@
-function Use-WindowsUnattend.autopilot.audit {
+function Use-WindowsUnattend.audit.autopilot {
     [CmdletBinding()]
     param (
         [string]$AutoPilotSwitches
     )
-$Notes = @'
-<RunSynchronousCommand wcm:action="add">
-<Order>2</Order>
-<Description>Start PowerShell</Description>
-<Path>Start PowerShell.exe</Path>
-</RunSynchronousCommand>
-
-<RunSynchronousCommand wcm:action="add">
-<Order>3</Order>
-<Description>Configure AutoPilot</Description>
-<Path>PowerShell.exe -File "C:\Program Files\WindowsPowerShell\Scripts\Get-WindowsAutoPilotInfo.ps1" -Online -TenantId someone.onmicrosoft.com -GroupTag Enterprise</Path>
-</RunSynchronousCommand>
-
-<RunSynchronousCommand wcm:action="add">
-<Order>4</Order>
-<Description>Save Get-WindowsAutoPilotInfo</Description>
-<Path>PowerShell -Command "Install-Script -Name Get-WindowsAutoPilotInfo -Verbose -Force"</Path>
-</RunSynchronousCommand>
-
-<RunSynchronousCommand wcm:action="add">
-<Order>5</Order>
-<Description>Start PowerShell Wait</Description>
-<Path>Start /WAIT PowerShell.exe</Path>
-</RunSynchronousCommand>
-
-<RunSynchronousCommand wcm:action="add">
-<Order>6</Order>
-<Description>Set ExecutionPolicy RemoteSigned</Description>
-<Path>PowerShell -WindowStyle Hidden -Command "Set-ExecutionPolicy RemoteSigned -Force"</Path>
-</RunSynchronousCommand>
-
-<RunSynchronousCommand wcm:action="add">
-<Order>7</Order>
-<Description>Sysprep OOBE Reboot</Description>
-<Path>%SystemRoot%\System32\Sysprep\Sysprep.exe /OOBE /Reboot</Path>
-</RunSynchronousCommand>
-'@
 
 $UnattendXml = @'
 <?xml version="1.0" encoding="utf-8"?>
 <unattend xmlns="urn:schemas-microsoft-com:unattend">
-    <settings pass="generalize">
-        <component name="Microsoft-Windows-PnpSysprep" processorArchitecture="amd64" publicKeyToken="31bf3856ad364e35" language="neutral" versionScope="nonSxS" xmlns:wcm="http://schemas.microsoft.com/WMIConfig/2002/State" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-            <PersistAllDeviceInstalls>true</PersistAllDeviceInstalls>
-        </component>
-    </settings>
-    <settings pass="specialize">
-        <component name="Microsoft-Windows-Shell-Setup" processorArchitecture="amd64" publicKeyToken="31bf3856ad364e35" language="neutral" versionScope="nonSxS" xmlns:wcm="http://schemas.microsoft.com/WMIConfig/2002/State" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-            <!-- Random ComputerName, will be replaced by specialize script -->
-            <ComputerName></ComputerName>
-            <TimeZone>Central Standard Time</TimeZone>
-        </component>
-    </settings>
     <settings pass="oobeSystem">
         <component name="Microsoft-Windows-Deployment" processorArchitecture="amd64" publicKeyToken="31bf3856ad364e35" language="neutral" versionScope="nonSxS" xmlns:wcm="http://schemas.microsoft.com/WMIConfig/2002/State" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
             <Reseal>

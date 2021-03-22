@@ -9,7 +9,7 @@
 #   In WinPE, the latest version will be installed automatically
 #   In Windows, this script is stopped and you will need to update manually
 #=======================================================================
-[Version]$OSDVersionMin = '21.3.18.1'
+[Version]$OSDVersionMin = '21.3.22.1'
 
 if ((Get-Module -Name OSD -ListAvailable | `Sort-Object Version -Descending | Select-Object -First 1).Version -lt $OSDVersionMin) {
     Write-Warning "OSDCloud requires OSD $OSDVersionMin or newer"
@@ -171,7 +171,7 @@ Write-Host -ForegroundColor White "FileUri: $($GetFeatureUpdate.FileUri)"
 #=======================================================================
 #	Get OS
 #=======================================================================
-$OSDCloudOfflineOS = Get-OSDCloudOfflineFile -Name $GetFeatureUpdate.FileName | Select-Object -First 1
+$OSDCloudOfflineOS = Get-OSDCloud.offline.file -Name $GetFeatureUpdate.FileName | Select-Object -First 1
 
 if ($OSDCloudOfflineOS) {
     $OSDCloudOfflineOSFullName = $OSDCloudOfflineOS.FullName
@@ -248,7 +248,7 @@ if ((Get-MyComputerManufacturer -Brief) -eq 'Dell') {
         Write-Host -ForegroundColor White "DriverUrl: $($GetMyDellDriverCab.DriverUrl)"
         Write-Host -ForegroundColor White "DriverInfo: $($GetMyDellDriverCab.DriverInfo)"
 
-        $OSDCloudOfflineDriverPack = Get-OSDCloudOfflineFile -Name $GetMyDellDriverCab.DownloadFile | Select-Object -First 1
+        $OSDCloudOfflineDriverPack = Get-OSDCloud.offline.file -Name $GetMyDellDriverCab.DownloadFile | Select-Object -First 1
     
         if ($OSDCloudOfflineDriverPack) {
             Write-Host -ForegroundColor Cyan "Offline: $($OSDCloudOfflineDriverPack.FullName)"
@@ -306,7 +306,7 @@ if ((Get-MyComputerManufacturer -Brief) -eq 'Dell') {
         Write-Host -ForegroundColor White "SupportedSystemID: $($GetMyDellBios.SupportedSystemID)"
         Write-Host -ForegroundColor White "Flash64W: $($GetMyDellBios.Flash64W)"
 
-        $OSDCloudOfflineBios = Get-OSDCloudOfflineFile -Name $GetMyDellBios.FileName | Select-Object -First 1
+        $OSDCloudOfflineBios = Get-OSDCloud.offline.file -Name $GetMyDellBios.FileName | Select-Object -First 1
         if ($OSDCloudOfflineBios) {
             Write-Host -ForegroundColor Cyan "Offline: $($OSDCloudOfflineBios.FullName)"
         }
@@ -314,7 +314,7 @@ if ((Get-MyComputerManufacturer -Brief) -eq 'Dell') {
             Save-MyDellBios -DownloadPath 'C:\OSDCloud\BIOS'
         }
 
-        $OSDCloudOfflineFlash64W = Get-OSDCloudOfflineFile -Name 'Flash64W.exe' | Select-Object -First 1
+        $OSDCloudOfflineFlash64W = Get-OSDCloud.offline.file -Name 'Flash64W.exe' | Select-Object -First 1
         if ($OSDCloudOfflineFlash64W) {
             Write-Host -ForegroundColor Cyan "Offline: $($OSDCloudOfflineFlash64W.FullName)"
         }
@@ -330,60 +330,28 @@ if ((Get-MyComputerManufacturer -Brief) -eq 'Dell') {
 #   Update-MyDellBios
 #   This step is not fully tested, so commenting out
 #=======================================================================
-<# if ((Get-MyComputerManufacturer -Brief) -eq 'Dell') {
+if ((Get-MyComputerManufacturer -Brief) -eq 'Dell') {
     Write-Host -ForegroundColor DarkGray    "================================================================="
     Write-Host -ForegroundColor Yellow      "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) $($MyInvocation.MyCommand.Name) " -NoNewline
     Write-Host -ForegroundColor Green       "Update-MyDellBios"
-    Update-MyDellBIOS
-} #>
+    Update-MyDellBIOS -DownloadPath 'C:\OSDCloud\BIOS'
+}
 #=======================================================================
-#   Apply Drivers with Use-WindowsUnattend
+#   Use-WindowsUnattend.drivers
 #=======================================================================
 Write-Host -ForegroundColor DarkGray    "========================================================================="
 Write-Host -ForegroundColor Yellow      "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) $($MyInvocation.MyCommand.Name) " -NoNewline
 Write-Host -ForegroundColor Cyan        "Apply Drivers with Use-WindowsUnattend"
-
-$PathPanther = 'C:\Windows\Panther'
-if (-NOT (Test-Path $PathPanther)) {
-    New-Item -Path $PathPanther -ItemType Directory -Force | Out-Null
-}
-
-Write-Host -ForegroundColor Cyan "Applying Use-WindowsUnattend $UnattendPath ... this may take a while!"
+Write-Host -ForegroundColor Cyan        "Use-WindowsUnattend.drivers"
 Use-WindowsUnattend.drivers -Verbose
 #=======================================================================
-#   PSGallery Modules
+#   Save-OSDCloud.offlineos.modules
 #=======================================================================
 Write-Host -ForegroundColor DarkGray    "================================================================="
 Write-Host -ForegroundColor Yellow      "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) $($MyInvocation.MyCommand.Name) " -NoNewline
 Write-Host -ForegroundColor Cyan        "PowerShell Modules and Scripts"
-
-$PowerShellSavePath = 'C:\Program Files\WindowsPowerShell'
-
-
-if (-NOT (Test-Path "$PowerShellSavePath\Configuration")) {
-    New-Item -Path "$PowerShellSavePath\Configuration" -ItemType Directory -Force | Out-Null
-}
-if (-NOT (Test-Path "$PowerShellSavePath\Modules")) {
-    New-Item -Path "$PowerShellSavePath\Modules" -ItemType Directory -Force | Out-Null
-}
-if (-NOT (Test-Path "$PowerShellSavePath\Scripts")) {
-    New-Item -Path "$PowerShellSavePath\Scripts" -ItemType Directory -Force | Out-Null
-}
-
-if (Test-WebConnection -Uri "https://www.powershellgallery.com") {
-    Save-Module -Name PackageManagement -Path "$PowerShellSavePath\Modules" -Force
-    Save-Module -Name PowerShellGet -Path "$PowerShellSavePath\Modules" -Force
-    Save-Module -Name WindowsAutoPilotIntune -Path "$PowerShellSavePath\Modules" -Force
-    Save-Script -Name Get-WindowsAutoPilotInfo -Path "$PowerShellSavePath\Scripts" -Force
-}
-else {
-    $OSDCloudOfflinePath = Get-OSDCloudOfflinePath
-
-    foreach ($Item in $OSDCloudOfflinePath) {
-        Write-Host -ForegroundColor Cyan "Applying PowerShell Modules and Scripts in $($Item.FullName)\PowerShell\Required"
-        robocopy "$($Item.FullName)\PowerShell\Required" "$PowerShellSavePath" *.* /e /ndl /njh /njs
-    }
-}
+Write-Host -ForegroundColor Cyan        "Save-OSDCloud.offlineos.modules"
+Save-OSDCloud.offlineos.modules
 #=======================================================================
 #   AutoPilotConfigurationFile.json
 #=======================================================================

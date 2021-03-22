@@ -5,39 +5,18 @@ Creates an .iso file in the OSDCloud Workspace.  ADK is required
 .Description
 Creates an .iso file in the OSDCloud Workspace.  ADK is required
 
-.PARAMETER WorkspacePath
-Directory for the Workspace.  Contains the Media directory
-
-.PARAMETER isoFileName
-File Name of the ISO
-
-.PARAMETER isoLabel
-Lable of the ISO.  Limited to 16 characters
-
-.PARAMETER CloudDriver
-Download and install in WinPE drivers from Dell,Nutanix,VMware
-
 .LINK
 https://osdcloud.osdeploy.com
 
 .NOTES
+21.3.22     Function changed to creating ISO only, no editing of the WIM
 21.3.16     Initial Release
 #>
 function New-OSDCloud.iso {
     [CmdletBinding()]
     param (
         [Parameter(ValueFromPipelineByPropertyName = $true)]
-        [string]$WorkspacePath,
-
-        #[string]$isoFileName = 'OSDCloud.iso',
-
-        #[ValidateLength(1,16)]
-        #[string]$isoLabel = 'OSDCloud',
-
-        [string[]]$DriverPath,
-
-        [ValidateSet('Dell','Nutanix','VMware')]
-        [string[]]$CloudDriver
+        [string]$WorkspacePath
     )
     #=======================================================================
     #	Start the Clock
@@ -70,7 +49,7 @@ function New-OSDCloud.iso {
         Break
     }
     #=======================================================================
-    #	Set WorkspacePath
+    #	Get-OSDCloud.workspace
     #=======================================================================
     if ($PSBoundParameters.ContainsKey('WorkspacePath')) {
         Set-OSDCloud.workspace -WorkspacePath $WorkspacePath -ErrorAction Stop | Out-Null
@@ -99,80 +78,6 @@ function New-OSDCloud.iso {
         Break
     }
     #=======================================================================
-    #   Mount-MyWindowsImage
-    #=======================================================================
-    $MountMyWindowsImage = Mount-MyWindowsImage -ImagePath "$WorkspacePath\Media\Sources\boot.wim"
-    $MountPath = $MountMyWindowsImage.Path
-    #=======================================================================
-    #   Add AutoPilot Profiles
-    #=======================================================================
-    robocopy "$WorkspacePath\AutoPilot" "$MountPath\OSDCloud\AutoPilot" *.* /e /ndl /njh /njs /b
-    #=======================================================================
-    #   DriverPath
-    #=======================================================================
-    foreach ($Driver in $DriverPath) {
-        Add-WindowsDriver -Path "$($MountMyWindowsImage.Path)" -Driver "$Driver" -Recurse -ForceUnsigned
-    }
-    foreach ($Driver in $CloudDriver) {
-        if ($Driver -eq 'Dell'){
-            Write-Verbose "Adding $Driver CloudDriver"
-            if (Test-WebConnection -Uri 'http://downloads.dell.com/FOLDER07062618M/1/WINPE10.0-DRIVERS-A23-PR4K0.CAB') {
-                $SaveWebFile = Save-WebFile -SourceUrl 'http://downloads.dell.com/FOLDER07062618M/1/WINPE10.0-DRIVERS-A23-PR4K0.CAB'
-                if (Test-Path $SaveWebFile.FullName) {
-                    $DriverCab = Get-Item -Path $SaveWebFile.FullName
-                    $ExpandPath = Join-Path $DriverCab.Directory $DriverCab.BaseName
-            
-                    if (-NOT (Test-Path $ExpandPath)) {
-                        New-Item -Path $ExpandPath -ItemType Directory -Force | Out-Null
-                    }
-                    Expand -R "$($DriverCab.FullName)" -F:* "$ExpandPath" | Out-Null
-                    Add-WindowsDriver -Path "$($MountMyWindowsImage.Path)" -Driver "$ExpandPath" -Recurse -ForceUnsigned
-                }
-            }
-        }
-        if ($Driver -eq 'Nutanix'){
-            Write-Verbose "Adding $Driver CloudDriver"
-            if (Test-WebConnection -Uri 'https://github.com/OSDeploy/OSDCloud/raw/main/Drivers/WinPE/Nutanix.cab') {
-                $SaveWebFile = Save-WebFile -SourceUrl 'https://github.com/OSDeploy/OSDCloud/raw/main/Drivers/WinPE/Nutanix.cab'
-                if (Test-Path $SaveWebFile.FullName) {
-                    $DriverCab = Get-Item -Path $SaveWebFile.FullName
-                    $ExpandPath = Join-Path $DriverCab.Directory $DriverCab.BaseName
-            
-                    if (-NOT (Test-Path $ExpandPath)) {
-                        New-Item -Path $ExpandPath -ItemType Directory -Force | Out-Null
-                    }
-                    Expand -R "$($DriverCab.FullName)" -F:* "$ExpandPath" | Out-Null
-                    Add-WindowsDriver -Path "$($MountMyWindowsImage.Path)" -Driver "$ExpandPath" -Recurse -ForceUnsigned
-                }
-            }
-        }
-        if ($Driver -eq 'VMware'){
-            Write-Verbose "Adding $Driver CloudDriver"
-            if (Test-WebConnection -Uri 'https://github.com/OSDeploy/OSDCloud/raw/main/Drivers/WinPE/VMware.cab') {
-                $SaveWebFile = Save-WebFile -SourceUrl 'https://github.com/OSDeploy/OSDCloud/raw/main/Drivers/WinPE/VMware.cab'
-                if (Test-Path $SaveWebFile.FullName) {
-                    $DriverCab = Get-Item -Path $SaveWebFile.FullName
-                    $ExpandPath = Join-Path $DriverCab.Directory $DriverCab.BaseName
-            
-                    if (-NOT (Test-Path $ExpandPath)) {
-                        New-Item -Path $ExpandPath -ItemType Directory -Force | Out-Null
-                    }
-                    Expand -R "$($DriverCab.FullName)" -F:* "$ExpandPath" | Out-Null
-                    Add-WindowsDriver -Path "$($MountMyWindowsImage.Path)" -Driver "$ExpandPath" -Recurse -ForceUnsigned
-                }
-            }
-        }
-    }
-    #=======================================================================
-    #   Install OSD Module
-    #=======================================================================
-    #Write-Verbose "Saving OSD to $MountPath\Program Files\WindowsPowerShell\Modules"
-    #Save-Module -Name OSD -Path "$MountPath\Program Files\WindowsPowerShell\Modules" -Force
-    #=======================================================================
-    #   Save WIM
-    #=======================================================================
-    $MountMyWindowsImage | Dismount-MyWindowsImage -Save
-    #=======================================================================
     #   Create ISO
     #=======================================================================
     $NewADKiso = New-ADK.iso -MediaPath "$WorkspacePath\Media" -isoFileName $isoFileName -isoLabel $isoLabel
@@ -194,8 +99,10 @@ function New-OSDCloud.iso {
     Write-Host -ForegroundColor Cyan        "OSDCloud ISO created at $($NewADKiso.FullName)"
     #Write-Host -ForegroundColor Cyan        "OSDCloud ISO Get-Item is saved in the Global Variable OSDCloudISO"
 
-    explorer $WorkspacePath
+    #explorer $WorkspacePath
     #Return (Get-Item -Path $NewADKiso.FullName | Select-Object -Property *)
     #Return $NewADKiso.FullName
     #=======================================================================
+
+
 }

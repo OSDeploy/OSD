@@ -1,4 +1,4 @@
-function Get-OSDCloudOfflinePath {
+function Get-OSDCloud.offline.path {
     [CmdletBinding()]
     param ()
     $OSDCloudOfflinePath = @()

@@ -11,11 +11,11 @@ https://osd.osdeploy.com/module/functions/autopilotjson
 .NOTES
 21.3.12  Initial Release
 #>
-function Select-OSDCloudOfflineAutoPilotProfiles {
+function Select-OSDCloud.offline.autopilotprofiles {
     [CmdletBinding()]
     param ()
 
-    $GetOSDCloudOfflineAutoPilotProfiles = Get-OSDCloudOfflineAutoPilotProfiles
+    $GetOSDCloudOfflineAutoPilotProfiles = Get-OSDCloud.offline.autopilotprofiles
 
     if ($GetOSDCloudOfflineAutoPilotProfiles) {
         $AutoPilotProfiles = foreach ($Item in $GetOSDCloudOfflineAutoPilotProfiles) {
