@@ -83,7 +83,7 @@ function Clear-Disk.fixed {
     #	Block
     #=======================================================================
     Block-StandardUser
-    Block-WindowsMajorLt10
+    Block-WindowsVersionNe10
     #=======================================================================
     #	Enable Verbose if Force parameter is not $true
     #=======================================================================

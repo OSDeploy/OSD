@@ -28,7 +28,7 @@ $UnattendXml = @"
     #	Block
     #=======================================================================
     Block-WinOS
-    Block-WindowsMajorLt10
+    Block-WindowsVersionNe10
     Block-PowerShellVersionLt5    
     #=======================================================================
     #	Use-WindowsUnattend

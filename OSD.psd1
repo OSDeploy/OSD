@@ -78,6 +78,14 @@ FunctionsToExport =
 'Save-MyBitLockerKeyPackage',
 'Save-MyBitLockerRecoveryPassword',
 'Unlock-MyBitLockerExternalKey',
+'Block-AdminUser',#Block
+'Block-NoCurl',
+'Block-PowerShellVersionLt5',
+'Block-StandardUser',
+'Block-WindowsReleaseIdLt1703',
+'Block-WindowsVersionNe10',
+'Block-WinOS',
+'Block-WinPE',
 'Get-CimVideoControllerResolution',#CIM
 'Save-ClipboardImage',#CLIPBOARD
 'Set-ClipboardScreenshot',
@@ -162,6 +170,7 @@ FunctionsToExport =
 'Select-OSDCloudOfflineAutoPilotProfiles',
 'Set-OSDCloud.workspace',
 'Start-OSDCloud',
+'Start-OSDCloud.oobe',
 'Test-OSDCloud.template',
 'Get-OSDPower',#POWER
 'Enable-PEWimPSGallery',#PSGALLERY
@@ -176,12 +185,12 @@ FunctionsToExport =
 'Invoke-WebPSScript',#WEB
 'Save-WebFile',
 'Test-WebConnection',
+'Wait-WebConnection',
 'Get-OSDWinPE',#WINPE
 'Use-WinPEContent',
-'Use-WindowsUnattend.auditmodeautopilot',
-'Use-WindowsUnattend.drivers',
-'Test-AuditModeAutoPilot',
-'Test-UseWindowsUnattend'
+'Use-WindowsUnattend.autopilot.audit',
+'Use-WindowsUnattend.autopilot.oobe',
+'Use-WindowsUnattend.drivers'
 
 # Cmdlets to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no cmdlets to export.
 CmdletsToExport = @()

@@ -32,7 +32,7 @@ function Backup-Disk.ffu {
     #	Block
     #=======================================================================
     Block-StandardUser
-    Block-WindowsMajorLt10
+    Block-WindowsVersionNe10
     Block-PowerShellVersionLt5
     #=======================================================================
     #	Module and Command Information

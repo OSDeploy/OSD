@@ -48,9 +48,9 @@ function New-OSDCloud.iso {
     #=======================================================================
     Block-WinPE
     Block-StandardUser
-    Block-WindowsMajorLt10
+    Block-WindowsVersionNe10
     Block-PowerShellVersionLt5
-    Block-NonCurl
+    Block-NoCurl
     #=======================================================================
     #	Set Variables
     #=======================================================================

@@ -132,7 +132,7 @@ function New-OSDisk {
     #	Block
     #=======================================================================
     Block-StandardUser
-    Block-WindowsMajorLt10
+    Block-WindowsVersionNe10
     Block-WinOS
     #=======================================================================
     #	Enable Verbose if Force parameter is not $true

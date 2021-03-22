@@ -22,7 +22,7 @@ function New-Bootable.usb {
     #	Block
     #=======================================================================
     Block-StandardUser
-    Block-WindowsMajorLt10
+    Block-WindowsVersionNe10
     Block-PowerShellVersionLt5
     Block-WindowsReleaseIdLt1703
     #=======================================================================

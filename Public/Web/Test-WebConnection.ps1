@@ -34,11 +34,11 @@ function Test-WebConnection {
         try {
             Write-Verbose "Test-WebConnection OK: $Uri"
             Invoke-WebRequest @Params | Out-Null
-            Return $true
+            $true
         }
         catch {
-            Write-Warning "Test-WebConnection FAIL: $Uri"
-            Return $false
+            Write-Verbose "Test-WebConnection FAIL: $Uri"
+            $false
         }
         finally {
             $Error.Clear()

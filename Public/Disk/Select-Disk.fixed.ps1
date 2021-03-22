@@ -12,8 +12,7 @@ function Select-Disk.fixed {
     if ($Input) {
         $GetDisk = $Input
     } else {
-        $GetDisk = Get-Disk.fixed | Sort-Object -Property DiskNumber | `
-        Where-Object {($_.Size -gt ($MinimumSizeGB * 1GB)) -and ($_.Size -lt ($MaximumSizeGB * 1GB))}
+        $GetDisk = Get-Disk.fixed | Sort-Object -Property DiskNumber
     }
     #=======================================================================
     #	Let's bounce if there are no results
