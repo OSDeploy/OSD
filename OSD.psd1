@@ -7,7 +7,7 @@
 RootModule = 'OSD.psm1'
 
 # Version number of his module.
-ModuleVersion = '21.3.22.1'
+ModuleVersion = '21.3.22.2'
 
 # Supported PSEditions
 # CompatiblePSEditions = @()
@@ -102,7 +102,6 @@ FunctionsToExport =
 'Get-MyDellDriverCab',
 'Save-MyDellDriverCab',
 'Backup-Disk.ffu',#DISK
-'Backup-DiskToFFU',
 'Clear-Disk.fixed',
 'Clear-Disk.usb',
 'Get-DataStore',

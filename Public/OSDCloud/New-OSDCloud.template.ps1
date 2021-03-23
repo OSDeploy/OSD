@@ -18,7 +18,7 @@ function New-OSDCloud.template {
 $RegistryAdditions = @'
 Windows Registry Editor Version 5.00
 
-[HKEY_CURRENT_USER\Console]
+[HKEY_LOCAL_MACHINE\Default\Console]
 "ColorTable00"=dword:000c0c0c
 "ColorTable01"=dword:00da3700
 "ColorTable02"=dword:000ea113
@@ -68,7 +68,7 @@ Windows Registry Editor Version 5.00
 "WindowSize"=dword:001e0078
 "WordDelimiters"=dword:00000000
 
-[HKEY_CURRENT_USER\Console\%SystemRoot%_System32_WindowsPowerShell_v1.0_powershell.exe]
+[HKEY_LOCAL_MACHINE\Default\Console\%SystemRoot%_System32_WindowsPowerShell_v1.0_powershell.exe]
 "ColorTable05"=dword:00562401
 "ColorTable06"=dword:00f0edee
 "FaceName"="Consolas"
@@ -85,7 +85,7 @@ Windows Registry Editor Version 5.00
 "WindowPosition"=dword:00050005
 "WindowSize"=dword:0023006e
 
-[HKEY_CURRENT_USER\Console\%SystemRoot%_SysWOW64_WindowsPowerShell_v1.0_powershell.exe]
+[HKEY_LOCAL_MACHINE\Default\Console\%SystemRoot%_SysWOW64_WindowsPowerShell_v1.0_powershell.exe]
 "ColorTable05"=dword:00562401
 "ColorTable06"=dword:00f0edee
 "FaceName"="Consolas"
@@ -242,7 +242,11 @@ Windows Registry Editor Version 5.00
     #   Registry Fix
     #=======================================================================
     $RegistryAdditions | Out-File -FilePath "$env:TEMP\RegistryAdditions.reg" -Encoding ascii -Force
+
+    #Mount Registry
+    reg load HKLM\Default "$MountPath\Windows\System32\Config\DEFAULT"
     reg import "$env:TEMP\RegistryAdditions.reg" | Out-Null
+    reg unload HKLM\Default
     #=======================================================================
     #   Save WIM
     #=======================================================================
