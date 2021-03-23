@@ -155,10 +155,17 @@ function Edit-OSDCloud.winpe {
     #   Startnet
     #=======================================================================
     Write-Verbose "Adding PowerShell.exe to Startnet.cmd"
-    $Startnet = Get-Content -Path "$MountPath\Windows\System32\Startnet.cmd"
+$Startnet = @'
+wpeinit
+start powershell.exe
+'@
+
+    $Startnet | Out-File -FilePath "$MountPath\Windows\System32\Startnet.cmd" -Force -Encoding ascii
+
+<#     $Startnet = Get-Content -Path "$MountPath\Windows\System32\Startnet.cmd"
     if ($Startnet -notmatch "start powershell") {
         Add-Content -Path "$MountPath\Windows\System32\Startnet.cmd" -Value 'start powershell.exe' -Force
-    }
+    } #>
     #=======================================================================
     #   Install OSD Module
     #=======================================================================
