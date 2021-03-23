@@ -193,7 +193,9 @@ FunctionsToExport =
 'Use-WinPEContent',
 'Use-WindowsUnattend.audit',
 'Use-WindowsUnattend.audit.autopilot',
-'Use-WindowsUnattend.drivers'
+'Use-WindowsUnattend.drivers',
+'Get-DriverCatalogLenovo',
+'Get-DriverCatalogLenovoXml'
 
 # Cmdlets to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no cmdlets to export.
 CmdletsToExport = @()
