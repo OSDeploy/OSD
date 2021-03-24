@@ -14,7 +14,7 @@ function Get-Disk.fixed {
     #=======================================================================
     #	Get-Disk.osd
     #=======================================================================
-    $GetDisk = Get-Disk.osd -BusTypeNot 'File Backed Virtual',MAX,'Microsoft Reserved',SD,USB,Virtual
+    $GetDisk = Get-Disk.osd -BusTypeNot 'File Backed Virtual',MAX,'Microsoft Reserved',USB,Virtual
     #=======================================================================
     #	Return
     #=======================================================================

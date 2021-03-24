@@ -330,12 +330,12 @@ if ((Get-MyComputerManufacturer -Brief) -eq 'Dell') {
 #   Update-MyDellBios
 #   This step is not fully tested, so commenting out
 #=======================================================================
-if ((Get-MyComputerManufacturer -Brief) -eq 'Dell') {
+<# if ((Get-MyComputerManufacturer -Brief) -eq 'Dell') {
     Write-Host -ForegroundColor DarkGray    "================================================================="
     Write-Host -ForegroundColor Yellow      "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) $($MyInvocation.MyCommand.Name) " -NoNewline
     Write-Host -ForegroundColor Green       "Update-MyDellBios"
     Update-MyDellBIOS -DownloadPath 'C:\OSDCloud\BIOS'
-}
+} #>
 #=======================================================================
 #   Use-WindowsUnattend.drivers
 #=======================================================================
