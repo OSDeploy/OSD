@@ -30,5 +30,5 @@ function Get-MyComputerModel {
         elseif ($GetMyComputerModel -match 'to be filled') {$GetMyComputerModel = 'Generic'}
     }
 
-    Return $GetMyComputerModel
+    $GetMyComputerModel
 }

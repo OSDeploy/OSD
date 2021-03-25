@@ -189,9 +189,37 @@ function Start-OSDCloud {
         Break
     }
     #=======================================================================
+    #	Start-OSDCloud Get-MyDriverPack
+    #=======================================================================
+    Write-Host -ForegroundColor DarkGray    "========================================================================="
+    Write-Host -ForegroundColor Yellow      "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) $($MyInvocation.MyCommand.Name) " -NoNewline
+    Write-Host -ForegroundColor Cyan        "Get-MyDriverPack"
+    
+    $GetMyDriverPack = Get-MyDriverPack
+
+    if ($GetMyDriverPack) {
+        $GetMyDriverPack | Format-List
+
+        $GetOSDCloudOfflineFile = Get-OSDCloud.offline.file -Name $GetMyDriverPack.FileName | Select-Object -First 1
+    
+        if ($GetOSDCloudOfflineFile) {
+            Write-Host -ForegroundColor Cyan "Offline: $($GetOSDCloudOfflineFile.FullName)"
+        }
+        elseif (Test-WebConnection -Uri $GetMyDriverPack.DriverPackUrl) {
+            #OK to Download
+        }
+        else {
+            Write-Warning "Could not verify an Internet connection for the Dell Driver Pack"
+            Write-Warning "OSDCloud will continue, but there may be issues"
+        }
+    }
+    else {
+        Write-Warning "Unable to determine a suitable Driver Pack for this Computer Model"
+    }
+    #=======================================================================
     #	Start-OSDCloud Get-MyDellDriverCab
     #=======================================================================
-    if ((Get-MyComputerManufacturer -Brief) -eq 'Dell') {
+<#     if ((Get-MyComputerManufacturer -Brief) -eq 'Dell') {
         Write-Host -ForegroundColor DarkGray    "========================================================================="
         Write-Host -ForegroundColor Yellow      "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) $($MyInvocation.MyCommand.Name) " -NoNewline
         Write-Host -ForegroundColor Cyan        "Get-MyDellDriverCab"
@@ -215,7 +243,7 @@ function Start-OSDCloud {
         else {
             Write-Warning "Unable to determine a suitable Driver Pack for this Computer Model"
         }
-    }
+    } #>
     #=======================================================================
     #	Get Dell BIOS Update
     #=======================================================================
@@ -273,7 +301,7 @@ function Start-OSDCloud {
     #=======================================================================
     if ($PSCmdlet.ParameterSetName -eq 'GitHub') {
 
-        if (-NOT (Test-WebConnection $GitHubBaseUrl)) {
+        if (-NOT (Test-WebConnection -Uri $GitHubBaseUrl)) {
             Write-Warning "Could not verify an Internet connection to $Global:GitHubUrl"
             Write-Warning "OSDCloud -GitHub cannot continue"
             Write-Warning "Verify you have an Internet connection or remove the -GitHub parameter"
@@ -286,7 +314,7 @@ function Start-OSDCloud {
             $Global:GitHubUrl = "$GitHubBaseUrl/$GitHubUser/$GitHubRepository/$GitHubBranch/$GitHubScript"
         }
 
-        if (-NOT (Test-WebConnection $Global:GitHubUrl)) {
+        if (-NOT (Test-WebConnection -Uri $Global:GitHubUrl)) {
             Write-Warning "Could not verify an Internet connection to $Global:GitHubUrl"
             Write-Warning "OSDCloud -GitHub cannot continue"
             Write-Warning "Verify you have an Internet connection or remove the -GitHub parameter"

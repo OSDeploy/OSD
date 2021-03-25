@@ -29,5 +29,5 @@ function Get-MyBiosSerialNumber {
         $GetMyBiosSerialNumber = $GetMyBiosSerialNumber -replace '\W'
     }
 
-    Return $GetMyBiosSerialNumber
+    $GetMyBiosSerialNumber
 }

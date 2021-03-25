@@ -9,7 +9,7 @@
 #   In WinPE, the latest version will be installed automatically
 #   In Windows, this script is stopped and you will need to update manually
 #=======================================================================
-[Version]$OSDVersionMin = '21.3.22.2'
+[Version]$OSDVersionMin = '21.3.24.1'
 
 if ((Get-Module -Name OSD -ListAvailable | `Sort-Object Version -Descending | Select-Object -First 1).Version -lt $OSDVersionMin) {
     Write-Warning "OSDCloud requires OSD $OSDVersionMin or newer"
@@ -79,14 +79,6 @@ if ((Get-OSDGather -Property IsWinPE) -eq $false) {
     Break
 }
 #=======================================================================
-#   Set the Power Plan to High Performance
-#=======================================================================
-Write-Host -ForegroundColor DarkGray    "========================================================================="
-Write-Host -ForegroundColor Yellow      "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) $($MyInvocation.MyCommand.Name) " -NoNewline
-Write-Host -ForegroundColor Cyan        "Enabling High Performance Power Plan"
-Write-Host -ForegroundColor Gray        "Get-OSDPower -Property High"
-Get-OSDPower -Property High
-#=======================================================================
 #   Remove USB Drives
 #=======================================================================
 $GetUSBDisk = Get-Disk.usb
@@ -115,6 +107,25 @@ if (-NOT (Get-PSDrive -Name 'C')) {
     Break
 }
 #=======================================================================
+#   Reattach USB Drives
+#=======================================================================
+if ($GetUSBDisk) {
+    Write-Host -ForegroundColor DarkGray    "========================================================================="
+    Write-Host -ForegroundColor Yellow      "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) $($MyInvocation.MyCommand.Name) " -NoNewline
+    Write-Host -ForegroundColor Cyan        "Reattach any necessary USB Drives at this time"
+    pause
+    #Give some time for the drive to be initialized
+    Start-Sleep -Seconds 10
+}
+#=======================================================================
+#   Set the Power Plan to High Performance
+#=======================================================================
+Write-Host -ForegroundColor DarkGray    "========================================================================="
+Write-Host -ForegroundColor Yellow      "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) $($MyInvocation.MyCommand.Name) " -NoNewline
+Write-Host -ForegroundColor Cyan        "Enabling High Performance Power Plan"
+Write-Host -ForegroundColor Gray        "Get-OSDPower -Property High"
+Get-OSDPower -Property High
+#=======================================================================
 #   Screenshot
 #=======================================================================
 if ($Global:OSDCloudScreenshot) {
@@ -136,17 +147,6 @@ if (-NOT (Test-Path 'C:\OSDCloud\Logs')) {
     New-Item -Path 'C:\OSDCloud\Logs' -ItemType Directory -Force -ErrorAction Stop | Out-Null
 }
 Start-Transcript -Path 'C:\OSDCloud\Logs'
-#=======================================================================
-#   Reattach USB Drives
-#=======================================================================
-if ($GetUSBDisk) {
-    Write-Host -ForegroundColor DarkGray    "========================================================================="
-    Write-Host -ForegroundColor Yellow      "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) $($MyInvocation.MyCommand.Name) " -NoNewline
-    Write-Host -ForegroundColor Cyan        "Reattach any necessary USB Drives at this time"
-    pause
-    #Give some time for the drive to be initialized
-    Start-Sleep -Seconds 10
-}
 #=======================================================================
 #	Get-FeatureUpdate
 #=======================================================================
@@ -224,9 +224,89 @@ else {
     Break
 }
 #=======================================================================
+#	Set-DriverUnattend
+#=======================================================================
+#https://docs.microsoft.com/en-us/windows-hardware/customize/desktop/unattend/microsoft-windows-deployment-runsynchronous
+#https://docs.microsoft.com/en-us/windows-hardware/customize/desktop/unattend/microsoft-windows-pnpcustomizationsnonwinpe-driverpaths-pathandcredentials
+$DriverUnattend = @'
+<?xml version="1.0" encoding="utf-8"?>
+<unattend xmlns="urn:schemas-microsoft-com:unattend">
+    <settings pass="specialize">
+        <component name="Microsoft-Windows-Deployment" processorArchitecture="amd64" publicKeyToken="31bf3856ad364e35" language="neutral" versionScope="nonSxS" xmlns:wcm="http://schemas.microsoft.com/WMIConfig/2002/State" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+            <RunSynchronous>
+                <RunSynchronousCommand wcm:action="add">
+                    <Order>1</Order>
+                    <Description>OSDCloud Drivers</Description>
+                    <Path>C:\Windows\Setup\Scripts\Drivers.cmd</Path>
+                </RunSynchronousCommand>
+            </RunSynchronous>
+        </component>
+    </settings>
+</unattend>
+'@
+#=======================================================================
+#	Required Directories
+#=======================================================================
+if (-NOT (Test-Path 'C:\Drivers')) {
+    New-Item -Path 'C:\Drivers' -ItemType Directory -Force -ErrorAction Stop | Out-Null
+}
+if (-NOT (Test-Path 'C:\Windows\Panther')) {
+    New-Item -Path 'C:\Windows\Panther'-ItemType Directory -Force -ErrorAction Stop | Out-Null
+}
+if (-NOT (Test-Path 'C:\Windows\Provisioning\AutoPilot')) {
+    New-Item -Path 'C:\Windows\Provisioning\AutoPilot'-ItemType Directory -Force -ErrorAction Stop | Out-Null
+}
+if (-NOT (Test-Path 'C:\Windows\Setup\Scripts')) {
+    New-Item -Path 'C:\Windows\Setup\Scripts' -ItemType Directory -Force -ErrorAction Stop | Out-Null
+}
+#=======================================================================
+#	Set-DriverUnattend
+#=======================================================================
+New-Item -Path 'C:\Windows\Setup\Scripts\Drivers.cmd' -Force
+Add-Content -Path 'C:\Windows\Setup\Scripts\Drivers.cmd' -Value "@echo off" -Encoding ascii -Force
+Add-Content -Path 'C:\Windows\Setup\Scripts\Drivers.cmd' -Value "echo OSDCloud C:\Windows\Setup\Scripts\Drivers.cmd" -Encoding ascii -Force
+Add-Content -Path 'C:\Windows\Setup\Scripts\Drivers.cmd' -Value "@echo on" -Encoding ascii -Force
+#https://docs.microsoft.com/en-us/windows-server/administration/windows-commands/pnpunattend
+Add-Content -Path 'C:\Windows\Setup\Scripts\Drivers.cmd' -Value "reg add `"HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\UnattendSettings\PnPUnattend\DriverPaths\1`" /v Path /t REG_SZ /d `"C:\Drivers`"" -Encoding ascii -Force
+Add-Content -Path 'C:\Windows\Setup\Scripts\Drivers.cmd' -Value "C:\Windows\System32\pnpunattend.exe AuditSystem /L" -Encoding ascii -Force
+Add-Content -Path 'C:\Windows\Setup\Scripts\Drivers.cmd' -Value "exit 0" -Encoding ascii -Force
+
+Write-Verbose -Verbose "Setting Driver Unattend at C:\Windows\Panther\Unattend.xml"
+$DriverUnattend | Out-File -FilePath 'C:\Windows\Panther\Unattend.xml' -Encoding utf8
+#=======================================================================
+#	Save-MyDriverPack
+#=======================================================================
+Write-Host -ForegroundColor DarkGray    "========================================================================="
+Write-Host -ForegroundColor Yellow      "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) $($MyInvocation.MyCommand.Name) " -NoNewline
+Write-Host -ForegroundColor Cyan        "Get-MyDriverPack"
+
+$GetMyDriverPack = Get-MyDriverPack
+
+if ($GetMyDriverPack) {
+    $GetMyDriverPack | Format-List
+    
+    $GetOSDCloudOfflineFile = Get-OSDCloud.offline.file -Name $GetMyDriverPack.FileName | Select-Object -First 1
+
+    if ($GetOSDCloudOfflineFile) {
+        Write-Host -ForegroundColor Cyan "Offline: $($GetOSDCloudOfflineFile.FullName)"
+        Copy-Item -Path $GetOSDCloudOfflineFile.FullName -Destination 'C:\Drivers' -Force
+        $SaveMyDriverPack = Save-MyDriverPack -DownloadPath "C:\Drivers" -Expand
+    }
+    elseif (Test-WebConnection -Uri $GetMyDriverPack.DriverPackUrl) {
+        $SaveMyDriverPack = Save-MyDriverPack -DownloadPath "C:\Drivers" -Expand
+    }
+    else {
+        Write-Warning "Could not verify an Internet connection for the Dell Driver Pack"
+        Write-Warning "OSDCloud will continue, but there may be issues as Drivers will not be applied"
+    }
+}
+else {
+    Write-Warning "Unable to determine a suitable Driver Pack for this Computer Model"
+}
+#=======================================================================
 #	Get Dell Driver Pack
 #=======================================================================
-if ((Get-MyComputerManufacturer -Brief) -eq 'Dell') {
+<# if ((Get-MyComputerManufacturer -Brief) -eq 'Dell') {
     Write-Host -ForegroundColor DarkGray    "========================================================================="
     Write-Host -ForegroundColor Yellow      "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) $($MyInvocation.MyCommand.Name) " -NoNewline
     Write-Host -ForegroundColor Cyan        "Get-MyDellDriverCab"
@@ -267,11 +347,11 @@ if ((Get-MyComputerManufacturer -Brief) -eq 'Dell') {
     else {
         Write-Warning "Unable to determine a suitable Driver Pack for this Computer Model"
     }
-}
+} #>
 #=======================================================================
 #	Deploy-OSDCloud Expand MyDellDriverCab
 #=======================================================================
-if ((Get-MyComputerManufacturer -Brief) -eq 'Dell') {
+<# if ((Get-MyComputerManufacturer -Brief) -eq 'Dell') {
     Write-Host -ForegroundColor DarkGray    "========================================================================="
     Write-Host -ForegroundColor Yellow      "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) $($MyInvocation.MyCommand.Name) " -NoNewline
     Write-Host -ForegroundColor Cyan        "Expand MyDellDriverCab"
@@ -283,7 +363,7 @@ if ((Get-MyComputerManufacturer -Brief) -eq 'Dell') {
         }
         Expand -R "$OSDCloudOfflineDriverPackFullName" -F:* "$ExpandPath" | Out-Null
     }
-}
+} #>
 #=======================================================================
 #	Dell BIOS Update
 #=======================================================================
@@ -339,11 +419,11 @@ if ((Get-MyComputerManufacturer -Brief) -eq 'Dell') {
 #=======================================================================
 #   Use-WindowsUnattend.drivers
 #=======================================================================
-Write-Host -ForegroundColor DarkGray    "========================================================================="
+<# Write-Host -ForegroundColor DarkGray    "========================================================================="
 Write-Host -ForegroundColor Yellow      "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) $($MyInvocation.MyCommand.Name) " -NoNewline
 Write-Host -ForegroundColor Cyan        "Apply Drivers with Use-WindowsUnattend"
 Write-Host -ForegroundColor Cyan        "Use-WindowsUnattend.drivers"
-Use-WindowsUnattend.drivers -Verbose
+Use-WindowsUnattend.drivers -Verbose #>
 #=======================================================================
 #   Save-OSDCloud.offlineos.modules
 #=======================================================================
@@ -360,9 +440,6 @@ Write-Host -ForegroundColor Yellow      "$((Get-Date).ToString('yyyy-MM-dd-HHmms
 Write-Host -ForegroundColor Cyan        "AutoPilotConfigurationFile.json"
 
 $PathAutoPilot = 'C:\Windows\Provisioning\AutoPilot'
-if (-NOT (Test-Path $PathAutoPilot)) {
-    New-Item -Path $PathAutoPilot -ItemType Directory -Force | Out-Null
-}
 
 $AutoPilotConfigurationFile = Join-Path $PathAutoPilot 'AutoPilotConfigurationFile.json'
 

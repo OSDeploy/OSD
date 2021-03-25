@@ -7,7 +7,7 @@
 RootModule = 'OSD.psm1'
 
 # Version number of his module.
-ModuleVersion = '21.3.22.2'
+ModuleVersion = '21.3.24.1'
 
 # Supported PSEditions
 # CompatiblePSEditions = @()
@@ -79,6 +79,7 @@ FunctionsToExport =
 'Save-MyBitLockerRecoveryPassword',
 'Unlock-MyBitLockerExternalKey',
 'Block-AdminUser',#Block
+'Block-ManufacturerNeLenovo',
 'Block-NoCurl',
 'Block-PowerShellVersionLt5',
 'Block-StandardUser',
@@ -155,6 +156,7 @@ FunctionsToExport =
 'Get-MyBiosVersion',
 'Get-MyComputerManufacturer',
 'Get-MyComputerModel',
+'Get-MyComputerProduct',
 'Start-OOBE.autopilot',#OOBE
 'Start-OOBE.settings',
 'Start-OOBE.wifi',
@@ -168,7 +170,7 @@ FunctionsToExport =
 'New-OSDCloud.template',
 'New-OSDCloud.usb',
 'New-OSDCloud.workspace',
-'Save-OSDCloud',
+'Save-OSDCloud.usb',
 'Save-OSDCloud.offlineos.modules',
 'Select-AutoPilotJson',
 'Select-OSDCloud.offline.autopilotprofiles',
@@ -194,8 +196,13 @@ FunctionsToExport =
 'Use-WindowsUnattend.audit',
 'Use-WindowsUnattend.audit.autopilot',
 'Use-WindowsUnattend.drivers',
-'Get-DriverCatalogLenovo',
-'Get-DriverCatalogLenovoXml'
+'Use-WindowsUnattend.specialize',
+'Use-WindowsUnattend.specializeregistry',
+'Get-DellDriverPack',
+'Get-HpDriverPack',
+'Get-LenovoDriverPack',
+'Get-MyDriverPack',
+'Save-MyDriverPack'
 
 # Cmdlets to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no cmdlets to export.
 CmdletsToExport = @()

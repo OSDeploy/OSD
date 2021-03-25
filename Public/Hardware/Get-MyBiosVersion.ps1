@@ -15,5 +15,5 @@ function Get-MyBiosVersion {
     [CmdletBinding()]
     param ()
 
-    Return ((Get-CimInstance -ClassName Win32_BIOS).SMBIOSBIOSVersion).Trim()
+    ((Get-CimInstance -ClassName Win32_BIOS).SMBIOSBIOSVersion).Trim()
 }

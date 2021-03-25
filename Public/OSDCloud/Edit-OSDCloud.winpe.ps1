@@ -30,7 +30,9 @@ function Edit-OSDCloud.winpe {
         [string[]]$DriverPath,
 
         [ValidateSet('Dell','Nutanix','VMware')]
-        [string[]]$CloudDriver
+        [string[]]$CloudDriver,
+
+        [switch]$CustomOSD
     )
     #=======================================================================
     #	Start the Clock
@@ -169,8 +171,14 @@ start powershell.exe
     #=======================================================================
     #   Install OSD Module
     #=======================================================================
-    Write-Verbose "Saving OSD to $MountPath\Program Files\WindowsPowerShell\Modules"
-    Save-Module -Name OSD -Path "$MountPath\Program Files\WindowsPowerShell\Modules" -Force
+    if ($PSBoundParameters.ContainsKey('CustomOSD')) {
+        Write-Verbose -Verbose "Copy-PSModuleToWindowsImage -Name OSD -Path $MountPath"
+        Copy-PSModuleToWindowsImage -Name OSD -Path $MountPath
+    }
+    else {
+        Write-Verbose -Verbose "Saving OSD to $MountPath\Program Files\WindowsPowerShell\Modules"
+        Save-Module -Name OSD -Path "$MountPath\Program Files\WindowsPowerShell\Modules" -Force
+    }
     #=======================================================================
     #   Save WIM
     #=======================================================================

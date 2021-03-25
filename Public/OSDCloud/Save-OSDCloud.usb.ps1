@@ -17,7 +17,7 @@ https://osdcloud.osdeploy.com/
 .NOTES
 21.3.13 Initial Release
 #>
-function Save-OSDCloud {
+function Save-OSDCloud.usb {
     [CmdletBinding()]
     param (
         [ValidateSet('2009','2004','1909','1903','1809')]
@@ -40,7 +40,11 @@ function Save-OSDCloud {
         [Alias('Culture')]
         [string]$OSCulture = 'en-us',
 
-        [switch]$Screenshot
+        [switch]$Screenshot,
+
+        [ValidateSet('Dell','HP','Lenovo')]
+        [string]$Manufacturer = (Get-MyComputerManufacturer -Brief),
+        [string]$Product = (Get-MyComputerProduct)
     )
 
     #=======================================================================
@@ -72,7 +76,7 @@ function Save-OSDCloud {
         Break
     }
     #=======================================================================
-    #	Save-OSDCloud USB
+    #	Save-OSDCloud.usb
     #=======================================================================
     Write-Host -ForegroundColor DarkGray        "========================================================================="
     Write-Host -ForegroundColor Yellow          "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) $($MyInvocation.MyCommand.Name) " -NoNewline
@@ -96,7 +100,7 @@ function Save-OSDCloud {
         $Global:OSDCloudOfflineFullName = "$($SelectUSBVolume.DriveLetter):\OSDCloud"
         Write-Host -ForegroundColor White       "OSDCloud content will be saved to $OSDCloudOfflineFullName"
     } else {
-        Write-Warning                           "Save-OSDCloud USB Requirements:"
+        Write-Warning                           "Save-OSDCloud.usb Requirements:"
         Write-Warning                           "8 GB Minimum"
         Write-Warning                           "NTFS File System"
         Break
@@ -163,50 +167,13 @@ function Save-OSDCloud {
         Break
     }
     #=======================================================================
-    #	Get Dell Driver Pack
+    #	Save-MyDriverPack
     #=======================================================================
-    if ((Get-MyComputerManufacturer -Brief) -eq 'Dell') {
-        Write-Host -ForegroundColor DarkGray    "========================================================================="
-        Write-Host -ForegroundColor Yellow      "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) $($MyInvocation.MyCommand.Name) " -NoNewline
-        Write-Host -ForegroundColor Cyan        "Get-MyDellDriverCab"
-        
-        $GetMyDellDriverCab = Get-MyDellDriverCab
+    Write-Host -ForegroundColor DarkGray    "========================================================================="
+    Write-Host -ForegroundColor Yellow      "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) $($MyInvocation.MyCommand.Name) " -NoNewline
+    Write-Host -ForegroundColor Cyan        "Save-MyDriverPack"
 
-        if ($GetMyDellDriverCab) {
-            Write-Host -ForegroundColor White "LastUpdate: $($GetMyDellDriverCab.LastUpdate)"
-            Write-Host -ForegroundColor White "DriverName: $($GetMyDellDriverCab.DriverName)"
-            Write-Host -ForegroundColor White "Generation: $($GetMyDellDriverCab.Generation)"
-            Write-Host -ForegroundColor White "Model: $($GetMyDellDriverCab.Model)"
-            Write-Host -ForegroundColor White "SystemSku: $($GetMyDellDriverCab.SystemSku)"
-            Write-Host -ForegroundColor White "DriverVersion: $($GetMyDellDriverCab.DriverVersion)"
-            Write-Host -ForegroundColor White "DriverReleaseId: $($GetMyDellDriverCab.DriverReleaseId)"
-            Write-Host -ForegroundColor White "OsVersion: $($GetMyDellDriverCab.OsVersion)"
-            Write-Host -ForegroundColor White "OsArch: $($GetMyDellDriverCab.OsArch)"
-            Write-Host -ForegroundColor White "DownloadFile: $($GetMyDellDriverCab.DownloadFile)"
-            Write-Host -ForegroundColor White "SizeMB: $($GetMyDellDriverCab.SizeMB)"
-            Write-Host -ForegroundColor White "DriverUrl: $($GetMyDellDriverCab.DriverUrl)"
-            Write-Host -ForegroundColor White "DriverInfo: $($GetMyDellDriverCab.DriverInfo)"
-
-            $OSDCloudOfflineDriverPack = Get-OSDCloud.offline.file -Name $GetMyDellDriverCab.DownloadFile | Select-Object -First 1
-        
-            if ($OSDCloudOfflineDriverPack) {
-                Write-Host -ForegroundColor Cyan "Offline: $($OSDCloudOfflineDriverPack.FullName)"
-            }
-            elseif (Test-MyDellDriverCabWebConnection) {
-                if ($MyInvocation.MyCommand.Name -eq 'Save-OSDCloud') {
-                    Save-OSDDownload -SourceUrl $GetMyDellDriverCab.DriverUrl -DownloadFolder "$OSDCloudOfflineFullName\DriverPacks" | Out-Null
-                }
-            }
-            else {
-                Write-Warning "Could not verify an Internet connection for the Dell Driver Pack"
-                Write-Warning "OSDCloud will continue, but there may be issues"
-            }
-        }
-        else {
-            Write-Warning "Unable to determine a suitable Driver Pack for this Computer Model"
-            Write-Warning "OSDCloud will continue, but there may be issues"
-        }
-    }
+    Save-MyDriverPack -DownloadPath "$OSDCloudOfflineFullName\DriverPacks\$Manufacturer" -Manufacturer $Manufacturer -Product $Product
     #=======================================================================
     #	Get Dell BIOS Update
     #=======================================================================
@@ -297,7 +264,7 @@ function Save-OSDCloud {
         Break
     }
     #=======================================================================
-    #	Save-OSDCloud Complete
+    #	Save-OSDCloud.usb Complete
     #=======================================================================
     $Global:OSDCloudEndTime = Get-Date
     $Global:OSDCloudTimeSpan = New-TimeSpan -Start $Global:OSDCloudStartTime -End $Global:OSDCloudEndTime

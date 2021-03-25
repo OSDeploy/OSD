@@ -34,5 +34,5 @@ function Get-MyComputerManufacturer {
         elseif ($GetMyComputerManufacturer -match 'to be filled') {$GetMyComputerManufacturer = 'Generic'}
     }
 
-    Return $GetMyComputerManufacturer
+    $GetMyComputerManufacturer
 }

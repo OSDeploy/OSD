@@ -20,10 +20,45 @@ function Block-AdminUser {
         [switch]$Warn,
         [switch]$Pause
     )
-    $FirstParty = (Get-PSCallStack)[1].InvocationInfo.Line
-    $Message = "[$((Get-Date).ToString('yyyy-MM-dd-HHmmss'))] $FirstParty requires non-Admin Rights"
+    $CallingFunction = (Get-PSCallStack)[1].InvocationInfo.Line
+    $Message = "[$((Get-Date).ToString('yyyy-MM-dd-HHmmss'))] $CallingFunction requires non-Admin Rights"
 
     if ((Get-OSDGather -Property IsAdmin) -eq $true) {
+        Write-Warning $Message
+        if ($PSBoundParameters.ContainsKey('Pause')) {
+            [void]('Press Enter to Continue')
+        }
+        if (-NOT ($PSBoundParameters.ContainsKey('Warn'))) {
+            Break
+        }
+    }
+}
+<#
+.SYNOPSIS
+Break the running script if the computer is not a Lenovo
+
+.DESCRIPTION
+Break the running script if the computer is not a Lenovo
+
+.PARAMETER Warn
+Warning Message without a Break
+
+.PARAMETER Pause
+Adds a 'Press Enter to Continue'
+
+.LINK
+https://osd.osdeploy.com/module/functions/block
+#>
+function Block-ManufacturerNeLenovo {
+    [CmdletBinding()]
+    param (
+        [switch]$Warn,
+        [switch]$Pause
+    )
+    $CallingFunction = (Get-PSCallStack)[1].InvocationInfo.Line
+    $Message = "[$((Get-Date).ToString('yyyy-MM-dd-HHmmss'))] $CallingFunction requires a Lenovo computer"
+        
+    if ((Get-MyComputerManufacturer -Brief) -ne 'Lenovo') {
         Write-Warning $Message
         if ($PSBoundParameters.ContainsKey('Pause')) {
             [void]('Press Enter to Continue')
@@ -55,8 +90,8 @@ function Block-NoCurl {
         [switch]$Warn,
         [switch]$Pause
     )
-    $FirstParty = (Get-PSCallStack)[1].InvocationInfo.Line
-    $Message = "[$((Get-Date).ToString('yyyy-MM-dd-HHmmss'))] $FirstParty requires curl.exe"
+    $CallingFunction = (Get-PSCallStack)[1].InvocationInfo.Line
+    $Message = "[$((Get-Date).ToString('yyyy-MM-dd-HHmmss'))] $CallingFunction requires curl.exe"
         
     if (-NOT (Test-Path "$env:SystemRoot\System32\curl.exe")) {
         Write-Warning $Message
@@ -90,8 +125,8 @@ function Block-PowerShellVersionLt5 {
         [switch]$Warn,
         [switch]$Pause
     )
-    $FirstParty = (Get-PSCallStack)[1].InvocationInfo.Line
-    $Message = "[$((Get-Date).ToString('yyyy-MM-dd-HHmmss'))] $FirstParty requires PowerShell version 5 or greater"
+    $CallingFunction = (Get-PSCallStack)[1].InvocationInfo.Line
+    $Message = "[$((Get-Date).ToString('yyyy-MM-dd-HHmmss'))] $CallingFunction requires PowerShell version 5 or greater"
         
     if ($PSVersionTable.PSVersion.Major -lt 5) {
         Write-Warning $Message
@@ -125,8 +160,8 @@ function Block-StandardUser {
         [switch]$Warn,
         [switch]$Pause
     )
-    $FirstParty = (Get-PSCallStack)[1].InvocationInfo.Line
-    $Message = "[$((Get-Date).ToString('yyyy-MM-dd-HHmmss'))] $FirstParty requires Admin Rights"
+    $CallingFunction = (Get-PSCallStack)[1].InvocationInfo.Line
+    $Message = "[$((Get-Date).ToString('yyyy-MM-dd-HHmmss'))] $CallingFunction requires Admin Rights"
 
     if ((Get-OSDGather -Property IsAdmin) -eq $false) {
         Write-Warning $Message
@@ -160,8 +195,8 @@ function Block-WindowsReleaseIdLt1703 {
         [switch]$Warn,
         [switch]$Pause
     )
-    $FirstParty = (Get-PSCallStack)[1].InvocationInfo.Line
-    $Message = "[$((Get-Date).ToString('yyyy-MM-dd-HHmmss'))] $FirstParty requires Windows ReleaseId of 1703 or greater"
+    $CallingFunction = (Get-PSCallStack)[1].InvocationInfo.Line
+    $Message = "[$((Get-Date).ToString('yyyy-MM-dd-HHmmss'))] $CallingFunction requires Windows ReleaseId of 1703 or greater"
         
     if ((Get-ItemProperty -Path 'HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion').ReleaseId -lt 1703) {
         Write-Warning $Message
@@ -195,8 +230,8 @@ function Block-WindowsVersionNe10 {
         [switch]$Warn,
         [switch]$Pause
     )
-    $FirstParty = (Get-PSCallStack)[1].InvocationInfo.Line
-    $Message = "[$((Get-Date).ToString('yyyy-MM-dd-HHmmss'))] $FirstParty requires Windows with a Major version 10 or greater"
+    $CallingFunction = (Get-PSCallStack)[1].InvocationInfo.Line
+    $Message = "[$((Get-Date).ToString('yyyy-MM-dd-HHmmss'))] $CallingFunction requires Windows with a Major version 10 or greater"
         
     if ([System.Environment]::OSVersion.Version.Major -ne 10) {
         Write-Warning $Message
@@ -230,8 +265,8 @@ function Block-WinOS {
         [switch]$Warn,
         [switch]$Pause
     )
-    $FirstParty = (Get-PSCallStack)[1].InvocationInfo.Line
-    $Message = "[$((Get-Date).ToString('yyyy-MM-dd-HHmmss'))] $FirstParty requires WinPE"
+    $CallingFunction = (Get-PSCallStack)[1].InvocationInfo.Line
+    $Message = "[$((Get-Date).ToString('yyyy-MM-dd-HHmmss'))] $CallingFunction requires WinPE"
         
     if (-NOT (Get-OSDGather -Property IsWinPE)) {
         Write-Warning $Message
@@ -265,8 +300,8 @@ function Block-WinPE {
         [switch]$Warn,
         [switch]$Pause
     )
-    $FirstParty = (Get-PSCallStack)[1].InvocationInfo.Line
-    $Message = "[$((Get-Date).ToString('yyyy-MM-dd-HHmmss'))] $FirstParty cannot be run from WinPE"
+    $CallingFunction = (Get-PSCallStack)[1].InvocationInfo.Line
+    $Message = "[$((Get-Date).ToString('yyyy-MM-dd-HHmmss'))] $CallingFunction cannot be run from WinPE"
         
     if ((Get-OSDGather -Property IsWinPE)) {
         Write-Warning $Message

@@ -212,6 +212,17 @@ Windows Registry Editor Version 5.00
         Write-Warning "You must be using an old version of Windows"
     }
     #=======================================================================
+    #	21.3.24 Setx
+    #   Required for Chocolatey support
+    #=======================================================================
+    Write-Verbose "Adding setx.exe to $MountPath"
+    if (Test-Path "$env:SystemRoot\System32\setx.exe") {
+        robocopy "$env:SystemRoot\System32" "$MountPath\Windows\System32" setx.exe /ndl /nfl /njh /njs /b
+    } else {
+        Write-Warning "Could not find $env:SystemRoot\System32\setx.exe"
+        Write-Warning "You must be using an old version of Windows"
+    }
+    #=======================================================================
     #	PowerShell Execution Policy
     #=======================================================================
     Write-Verbose "Setting PowerShell ExecutionPolicy to Bypass in $MountPath"
@@ -257,10 +268,28 @@ Windows Registry Editor Version 5.00
     if (-NOT (Test-Path "$TemplatePath\AutoPilot\Profiles")) {
         New-Item -Path "$TemplatePath\AutoPilot\Profiles" -ItemType Directory -Force | Out-Null
     }
+    if (-NOT (Test-Path "$TemplatePath\DriverPacks\Dell")) {
+        New-Item -Path "$TemplatePath\DriverPacks\Dell" -ItemType Directory -Force | Out-Null
+    }
+    if (-NOT (Test-Path "$TemplatePath\DriverPacks\HP")) {
+        New-Item -Path "$TemplatePath\DriverPacks\HP" -ItemType Directory -Force | Out-Null
+    }
+    if (-NOT (Test-Path "$TemplatePath\DriverPacks\Lenovo")) {
+        New-Item -Path "$TemplatePath\DriverPacks\Lenovo" -ItemType Directory -Force | Out-Null
+    }
     #=======================================================================
     #   Restore VerbosePreference
     #=======================================================================
     #$VerbosePreference = $CurrentVerbosePreference
+    #=======================================================================
+    #	OSDCloud Template Version
+    #=======================================================================
+    $WinPE = [PSCustomObject]@{
+        BuildDate = (Get-Date).ToString('yyyy.MM.dd.HHmmss')
+        Version = [Version](Get-Module -Name OSD -ListAvailable | Sort-Object Version -Descending | Select-Object -First 1).Version
+    }
+
+    $WinPE | ConvertTo-Json | Out-File "$env:ProgramData\OSDCloud\winpe.json" -Encoding ASCII
     #=======================================================================
     #	Complete
     #=======================================================================
@@ -269,11 +298,7 @@ Windows Registry Editor Version 5.00
     Write-Host -ForegroundColor DarkGray    "========================================================================="
     Write-Host -ForegroundColor Yellow      "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) $($MyInvocation.MyCommand.Name) " -NoNewline
     Write-Host -ForegroundColor Cyan        "Completed in $($TemplateTimeSpan.ToString("mm' minutes 'ss' seconds'"))"
-    #=======================================================================
-    #	Return
-    #=======================================================================
     Write-Host -ForegroundColor Cyan        "OSDCloud Template created at $TemplatePath"
     Write-Host -ForegroundColor Cyan        "Get-OSDCloud.template will return $TemplatePath"
-    #Return $TemplatePath
     #=======================================================================
 }
