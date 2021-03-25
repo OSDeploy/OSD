@@ -7,7 +7,7 @@
 RootModule = 'OSD.psm1'
 
 # Version number of his module.
-ModuleVersion = '21.3.24.1'
+ModuleVersion = '21.3.25.1'
 
 # Supported PSEditions
 # CompatiblePSEditions = @()
@@ -196,8 +196,6 @@ FunctionsToExport =
 'Use-WindowsUnattend.audit',
 'Use-WindowsUnattend.audit.autopilot',
 'Use-WindowsUnattend.drivers',
-'Use-WindowsUnattend.specialize',
-'Use-WindowsUnattend.specializeregistry',
 'Get-DellDriverPack',
 'Get-HpDriverPack',
 'Get-LenovoDriverPack',
