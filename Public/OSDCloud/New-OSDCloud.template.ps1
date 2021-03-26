@@ -5,11 +5,19 @@ Creates an OSDCloud Template in $env:ProgramData\OSDCloud
 .Description
 Creates an OSDCloud Template in $env:ProgramData\OSDCloud
 
+.PARAMETER Language
+Adds additional language ADK Packages
+
+.PARAMETER SetAllIntl
+Sets all International settings in WinPE to the specified setting
+
+.PARAMETER SetInputLocale
+Sets the default InputLocale in WinPE to the specified Input Locale
+
 .LINK
 https://osdcloud.osdeploy.com
 
 .NOTES
-21.3.17     Initial Release
 #>
 function New-OSDCloud.template {
     [CmdletBinding()]
