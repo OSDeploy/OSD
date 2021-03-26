@@ -13,9 +13,23 @@ https://osdcloud.osdeploy.com
 #>
 function New-OSDCloud.template {
     [CmdletBinding()]
-    param ()
+    param (
+        [ValidateSet (
+            '*','ar-sa','bg-bg','cs-cz','da-dk','de-de','el-gr',
+            'en-gb','es-es','es-mx','et-ee','fi-fi',
+            'fr-ca','fr-fr','he-il','hr-hr','hu-hu','it-it',
+            'ja-jp','ko-kr','lt-lt','lv-lv','nb-no','nl-nl',
+            'pl-pl','pt-br','pt-pt','ro-ro','ru-ru','sk-sk',
+            'sl-si','sr-latn-rs','sv-se','th-th','tr-tr',
+            'uk-ua','zh-cn','zh-tw'
+        )]
+        [string[]]$Language,
 
-$RegistryAdditions = @'
+        [string]$SetAllIntl,
+        [string]$SetInputLocale
+    )
+
+$RegistryConsole = @'
 Windows Registry Editor Version 5.00
 
 [HKEY_LOCAL_MACHINE\Default\Console]
@@ -152,10 +166,10 @@ Windows Registry Editor Version 5.00
     #=======================================================================
     if (Test-WebConnection -Uri 'https://github.com/OSDeploy/OSDCloud/raw/main/Media/boot/fonts/wgl4_boot.ttf') {
         Write-Verbose "Repairing bad WinPE resolution by replacing wgl4_boot.ttf"
-        Save-WebFile -SourceUrl 'https://github.com/OSDeploy/OSDCloud/raw/main/Media/boot/fonts/wgl4_boot.ttf' -DestinationDirectory "$DestinationMedia\boot\fonts" -Overwrite
+        Save-WebFile -SourceUrl 'https://github.com/OSDeploy/OSDCloud/raw/main/Media/boot/fonts/wgl4_boot.ttf' -DestinationDirectory "$DestinationMedia\boot\fonts" -Overwrite | Out-Null
     }
     if (Test-WebConnection -Uri 'https://github.com/OSDeploy/OSDCloud/raw/main/Media/efi/microsoft/boot/fonts/wgl4_boot.ttf') {
-        Save-WebFile -SourceUrl 'https://github.com/OSDeploy/OSDCloud/raw/main/Media/efi/microsoft/boot/fonts/wgl4_boot.ttf' -DestinationDirectory "$DestinationMedia\efi\microsoft\boot\fonts" -Overwrite
+        Save-WebFile -SourceUrl 'https://github.com/OSDeploy/OSDCloud/raw/main/Media/efi/microsoft/boot/fonts/wgl4_boot.ttf' -DestinationDirectory "$DestinationMedia\efi\microsoft\boot\fonts" -Overwrite | Out-Null
     }
     #=======================================================================
     #   Mount-MyWindowsImage
@@ -163,44 +177,96 @@ Windows Registry Editor Version 5.00
     $MountMyWindowsImage = Mount-MyWindowsImage $BootWim
     $MountPath = $MountMyWindowsImage.Path
     #=======================================================================
-    #   Add Packages
+    #   Packages
     #=======================================================================
     $ErrorActionPreference = 'Ignore'
     $WinPEOCs = $AdkPaths.WinPEOCs
 
-    Add-WindowsPackage -Path $MountPath -PackagePath "$WinPEOCs\WinPE-WMI.cab"
-    Add-WindowsPackage -Path $MountPath -PackagePath "$WinPEOCs\en-us\WinPE-WMI_en-us.cab"
-    Add-WindowsPackage -Path $MountPath -PackagePath "$WinPEOCs\WinPE-HTA.cab"
-    Add-WindowsPackage -Path $MountPath -PackagePath "$WinPEOCs\en-us\WinPE-HTA_en-us.cab"
-    Add-WindowsPackage -Path $MountPath -PackagePath "$WinPEOCs\WinPE-NetFx.cab"
-    Add-WindowsPackage -Path $MountPath -PackagePath "$WinPEOCs\en-us\WinPE-NetFx_en-us.cab"
-    Add-WindowsPackage -Path $MountPath -PackagePath "$WinPEOCs\WinPE-Scripting.cab"
-    Add-WindowsPackage -Path $MountPath -PackagePath "$WinPEOCs\en-us\WinPE-Scripting_en-us.cab"
-    Add-WindowsPackage -Path $MountPath -PackagePath "$WinPEOCs\WinPE-PowerShell.cab"
-    Add-WindowsPackage -Path $MountPath -PackagePath "$WinPEOCs\en-us\WinPE-PowerShell_en-us.cab"
-    Add-WindowsPackage -Path $MountPath -PackagePath "$WinPEOCs\WinPE-SecureStartup.cab"
-    Add-WindowsPackage -Path $MountPath -PackagePath "$WinPEOCs\en-us\WinPE-SecureStartup_en-us.cab"
+    $OCPackages = @(
+        'WMI'
+        'HTA'
+        'NetFx'
+        'Scripting'
+        'PowerShell'
+        'SecureStartup'
+        'DismCmdlets'
+        'Dot3Svc'
+        'EnhancedStorage'
+        'FMAPI'
+        'GamingPeripherals'
+        'PPPoE'
+        'PlatformId'
+        'PmemCmdlets'
+        'RNDIS'
+        'SecureBootCmdlets'
+        'StorageWMI'
+        'WDS-Tools'
+    )
+    #=======================================================================
+    #   Install Default en-us Language
+    #=======================================================================
+    $Lang = 'en-us'
 
-    Add-WindowsPackage -Path $MountPath -PackagePath "$WinPEOCs\WinPE-DismCmdlets.cab"
-    Add-WindowsPackage -Path $MountPath -PackagePath "$WinPEOCs\en-us\WinPE-DismCmdlets_en-us.cab"
-    Add-WindowsPackage -Path $MountPath -PackagePath "$WinPEOCs\WinPE-Dot3Svc.cab"
-    Add-WindowsPackage -Path $MountPath -PackagePath "$WinPEOCs\en-us\WinPE-Dot3Svc_en-us.cab"
-    Add-WindowsPackage -Path $MountPath -PackagePath "$WinPEOCs\WinPE-EnhancedStorage.cab"
-    Add-WindowsPackage -Path $MountPath -PackagePath "$WinPEOCs\en-us\WinPE-EnhancedStorage_en-us.cab"
-    Add-WindowsPackage -Path $MountPath -PackagePath "$WinPEOCs\WinPE-FMAPI.cab"
-    Add-WindowsPackage -Path $MountPath -PackagePath "$WinPEOCs\WinPE-GamingPeripherals.cab"
-    Add-WindowsPackage -Path $MountPath -PackagePath "$WinPEOCs\WinPE-PPPoE.cab"
-    Add-WindowsPackage -Path $MountPath -PackagePath "$WinPEOCs\en-us\WinPE-PPPoE_en-us.cab"
-    Add-WindowsPackage -Path $MountPath -PackagePath "$WinPEOCs\WinPE-PlatformId.cab"
-    Add-WindowsPackage -Path $MountPath -PackagePath "$WinPEOCs\WinPE-PmemCmdlets.cab"
-    Add-WindowsPackage -Path $MountPath -PackagePath "$WinPEOCs\en-us\WinPE-PmemCmdlets_en-us.cab"
-    Add-WindowsPackage -Path $MountPath -PackagePath "$WinPEOCs\WinPE-RNDIS.cab"
-    Add-WindowsPackage -Path $MountPath -PackagePath "$WinPEOCs\en-us\WinPE-RNDIS_en-us.cab"
-    Add-WindowsPackage -Path $MountPath -PackagePath "$WinPEOCs\WinPE-SecureBootCmdlets.cab"
-    Add-WindowsPackage -Path $MountPath -PackagePath "$WinPEOCs\WinPE-StorageWMI.cab"
-    Add-WindowsPackage -Path $MountPath -PackagePath "$WinPEOCs\en-us\WinPE-StorageWMI_en-us.cab"
-    Add-WindowsPackage -Path $MountPath -PackagePath "$WinPEOCs\WinPE-WDS-Tools.cab"
-    Add-WindowsPackage -Path $MountPath -PackagePath "$WinPEOCs\en-us\WinPE-WDS-Tools_en-us.cab"
+    if (Test-Path "$WinPEOCs\$Lang\lp.cab") {
+        Write-Verbose -Verbose "$WinPEOCs\$Lang\lp.cab"
+        Add-WindowsPackage -Path $MountPath -PackagePath "$WinPEOCs\$Lang\lp.cab" -Verbose
+    }
+
+    foreach ($Package in $OCPackages) {
+        if (Test-Path "$WinPEOCs\WinPE-$Package.cab") {
+            Write-Verbose -Verbose "$WinPEOCs\WinPE-$Package.cab"
+            Add-WindowsPackage -Path $MountPath -PackagePath "$WinPEOCs\WinPE-$Package.cab" -Verbose
+        }
+
+        if (Test-Path "$WinPEOCs\$Lang\WinPE-$Package`_$Lang.cab") {
+            Write-Verbose -Verbose "$WinPEOCs\$Lang\WinPE-$Package`_$Lang.cab"
+            Add-WindowsPackage -Path $MountPath -PackagePath "$WinPEOCs\$Lang\WinPE-$Package`_$Lang.cab" -Verbose
+        }
+    }
+    #=======================================================================
+    #   Install Selected Language
+    #=======================================================================
+    if ($Language -contains '*') {
+        Write-Verbose -Verbose "Installing all available ADK Languages"
+        $Language = Get-ChildItem $WinPEOCs -Directory | Where-Object {$_.Name -ne 'en-us'} | Select-Object -ExpandProperty Name
+    }
+
+    foreach ($Lang in $Language) {
+        if (Test-Path "$WinPEOCs\$Lang\lp.cab") {
+            Write-Verbose -Verbose "$WinPEOCs\$Lang\lp.cab"
+            Add-WindowsPackage -Path $MountPath -PackagePath "$WinPEOCs\$Lang\lp.cab" -Verbose
+        }
+
+        foreach ($Package in $OCPackages) {
+            if (Test-Path "$WinPEOCs\$Lang\WinPE-$Package`_$Lang.cab") {
+                Write-Verbose -Verbose "$WinPEOCs\$Lang\WinPE-$Package`_$Lang.cab"
+                Add-WindowsPackage -Path $MountPath -PackagePath "$WinPEOCs\$Lang\WinPE-$Package`_$Lang.cab" -Verbose
+            }
+        }
+        Save-WindowsImage -Path $MountPath
+    }
+    #=======================================================================
+    #   International Settings
+    #=======================================================================
+    if ($SetAllIntl -or $SetInputLocale) {
+        Write-Verbose -Verbose "Current Get-Intl Settings"
+        Dism /image:"$MountPath" /Get-Intl
+    }
+
+    if ($SetAllIntl) {
+        Write-Verbose -Verbose "Applying Set-AllIntl"
+        Dism /image:"$MountPath" /Set-AllIntl:$SetAllIntl
+    }
+
+    if ($SetInputLocale) {
+        Write-Verbose -Verbose "Applying Set-InputLocale"
+        Dism /image:"$MountPath" /Set-InputLocale:$SetInputLocale
+    }
+
+    if ($SetAllIntl -or $SetInputLocale) {
+        Write-Verbose -Verbose "Updated Get-Intl Settings"
+        Dism /image:"$MountPath" /Get-Intl
+    }
     #=======================================================================
     #	cURL
     #=======================================================================
@@ -222,6 +288,34 @@ Windows Registry Editor Version 5.00
         Write-Warning "Could not find $env:SystemRoot\System32\setx.exe"
         Write-Warning "You must be using an old version of Windows"
     }
+    #=======================================================================
+    #	OSK 21.3.25.2
+    #=======================================================================
+    Write-Verbose "Adding On Screen Keyboard support to $MountPath"
+    if (Test-Path "$env:SystemRoot\System32\osk.exe") {
+        robocopy "$env:SystemRoot\System32" "$MountPath\Windows\System32" osk.exe /ndl /nfl /njh /njs /b
+    } else {
+        Write-Warning "Could not find $env:SystemRoot\System32\osk.exe"
+    }
+    if (Test-Path "$env:SystemRoot\System32\osksupport.dll") {
+        robocopy "$env:SystemRoot\System32" "$MountPath\Windows\System32" osksupport.dll /ndl /nfl /njh /njs /b
+    } else {
+        Write-Warning "Could not find $env:SystemRoot\System32\osksupport.dll"
+    }
+    #=======================================================================
+    #	Wireless
+    #=======================================================================
+<#     Write-Verbose "Adding Wireless support to $MountPath"
+    if (Test-Path "$env:SystemRoot\System32\mdmregistration.dll") {
+        robocopy "$env:SystemRoot\System32" "$MountPath\Windows\System32" mdmregistration.dll /ndl /nfl /njh /njs /b
+    } else {
+        Write-Warning "Could not find $env:SystemRoot\System32\mdmregistration.dll"
+    }
+    if (Test-Path "$env:SystemRoot\System32\dmcmnutils.dll") {
+        robocopy "$env:SystemRoot\System32" "$MountPath\Windows\System32" dmcmnutils.dll /ndl /nfl /njh /njs /b
+    } else {
+        Write-Warning "Could not find $env:SystemRoot\System32\dmcmnutils.dll"
+    } #>
     #=======================================================================
     #	PowerShell Execution Policy
     #=======================================================================
@@ -250,13 +344,21 @@ Windows Registry Editor Version 5.00
         }
     }
     #=======================================================================
-    #   Registry Fix
+    #   Registry Fixes
     #=======================================================================
-    $RegistryAdditions | Out-File -FilePath "$env:TEMP\RegistryAdditions.reg" -Encoding ascii -Force
+    $RegistryConsole | Out-File -FilePath "$env:TEMP\RegistryConsole.reg" -Encoding ascii -Force
 
     #Mount Registry
     reg load HKLM\Default "$MountPath\Windows\System32\Config\DEFAULT"
-    reg import "$env:TEMP\RegistryAdditions.reg" | Out-Null
+    reg import "$env:TEMP\RegistryConsole.reg" | Out-Null
+
+    #Scaling
+<#     reg add "HKLM\Default\Software\Microsoft\Windows NT\CurrentVersion\AppCompatFlags\Layers" /t REG_SZ /v "X:\Windows\System32\WirelessConnect.exe" /d "~ HIGHDPIAWARE" /f
+    reg add "HKLM\Default\Control Panel\Desktop" /t REG_DWORD /v LogPixels /d 96 /f
+    reg add "HKLM\Default\Control Panel\Desktop" /v Win8DpiScaling /t REG_DWORD /d 0x00000001 /f
+    reg add "HKLM\Default\Control Panel\Desktop" /v DpiScalingVer /t REG_DWORD /d 0x00001018 /f #>
+
+    #Unload Registry
     reg unload HKLM\Default
     #=======================================================================
     #   Save WIM
