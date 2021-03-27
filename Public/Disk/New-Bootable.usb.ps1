@@ -16,7 +16,7 @@ function New-Bootable.usb {
     #	Set Variables
     #=======================================================================
     $ErrorActionPreference = 'Stop'
-    $MinimumSizeGB = 8
+    $MinimumSizeGB = 7
     $MaximumSizeGB = 1800
     #=======================================================================
     #	Block
