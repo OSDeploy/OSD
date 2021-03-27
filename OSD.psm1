@@ -1,9 +1,20 @@
 #===================================================================================================
 #Export Functions
-$OSDPublicFunctions  = @( Get-ChildItem -Path ("$PSScriptRoot\Public\*.ps1") -Recurse -ErrorAction SilentlyContinue )
-$OSDPrivateFunctions = @( Get-ChildItem -Path $PSScriptRoot\Private\*.ps1 -Recurse -ErrorAction SilentlyContinue )
+
+$ImageState = (Get-ItemProperty -Path 'HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Setup\State' -ErrorAction Ignore).ImageState
+
+#Can't load these functions in Specialize
+if ($ImageState -eq 'IMAGE_STATE_SPECIALIZE_RESEAL_TO_OOBE') {
+    $OSDPublicFunctions  = @( Get-ChildItem -Path $PSScriptRoot\Public\*.ps1 -Recurse -ErrorAction SilentlyContinue | Where-Object {$_.Name -notmatch 'ScreenPNG'} | Where-Object {$_.Name -notmatch 'Clipboard'})
+    $OSDPrivateFunctions = @( Get-ChildItem -Path $PSScriptRoot\Private\*.ps1 -Recurse -ErrorAction SilentlyContinue )
+}
+else {
+    $OSDPublicFunctions  = @( Get-ChildItem -Path $PSScriptRoot\Public\*.ps1 -Recurse -ErrorAction SilentlyContinue )
+    $OSDPrivateFunctions = @( Get-ChildItem -Path $PSScriptRoot\Private\*.ps1 -Recurse -ErrorAction SilentlyContinue )
+}
 
 foreach ($Import in @($OSDPublicFunctions + $OSDPrivateFunctions)) {
+    Write-Verbose "$($Import.FullName)" -Verbose
     Try {. $Import.FullName}
     Catch {Write-Error -Message "Failed to import function $($Import.FullName): $_"}
 }
