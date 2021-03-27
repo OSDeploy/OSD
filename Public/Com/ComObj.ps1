@@ -89,7 +89,7 @@ https://twitter.com/byteben/status/1356893619811155968
 .NOTES
 Credit Ben Whitmore | byteben.com | @byteben
 #>
-function Get-ComObjMicrosoftUpdateServiceManager{
+function Get-ComObjMicrosoftUpdateServiceManager {
     [CmdletBinding()]
     param ()
 
