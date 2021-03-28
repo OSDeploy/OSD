@@ -117,7 +117,7 @@ function Save-OSDCloud.usb {
         Write-Host "AutoPilot Profiles can be saved to $OSDCloudOfflineFullName\AutoPilot\Profiles"
     }
 
-    $GetOSDCloudOfflineAutoPilotProfiles = Get-OSDCloud.offline.autopilotprofiles
+    $GetOSDCloudOfflineAutoPilotProfiles = Get-OSDCloud.autopilotprofiles
 
     if ($GetOSDCloudOfflineAutoPilotProfiles) {
         foreach ($Item in $GetOSDCloudOfflineAutoPilotProfiles) {

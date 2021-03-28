@@ -11,11 +11,11 @@ https://osd.osdeploy.com/module/functions/autopilotjson
 .NOTES
 21.3.12  Initial Release
 #>
-function Select-OSDCloud.offline.autopilotprofiles {
+function Select-OSDCloud.autopilotprofiles {
     [CmdletBinding()]
     param ()
 
-    $GetOSDCloudOfflineAutoPilotProfiles = Get-OSDCloud.offline.autopilotprofiles
+    $GetOSDCloudOfflineAutoPilotProfiles = Get-OSDCloud.autopilotprofiles
 
     if ($GetOSDCloudOfflineAutoPilotProfiles) {
         $AutoPilotProfiles = foreach ($Item in $GetOSDCloudOfflineAutoPilotProfiles) {
@@ -34,7 +34,7 @@ function Select-OSDCloud.offline.autopilotprofiles {
             New-Object -TypeName PSObject -Property $ObjectProperties
         }
 
-        $AutoPilotProfiles | Select-Object -Property Selection, Tenant, Profile, FullName | Format-Table | Out-Host
+        $AutoPilotProfiles | Select-Object -Property Selection, Profile, FullName | Format-Table | Out-Host
 
         do {
             $SelectReadHost = Read-Host -Prompt "Enter the Selection of the AutoPilot Profile to apply, or press S to Skip"

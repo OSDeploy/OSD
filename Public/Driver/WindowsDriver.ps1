@@ -1,4 +1,4 @@
-function Use-WindowsUnattend.drivers {
+function Add-WindowsDriver.offlineservicing {
     [CmdletBinding()]
     param (
         [string]$Path = 'C:\Drivers'

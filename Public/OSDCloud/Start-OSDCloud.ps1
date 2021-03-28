@@ -9,7 +9,8 @@ Starts the OSDCloud Windows 10 Build Process from the OSD Module or a GitHub Rep
 Edition of the Windows installation
 
 .PARAMETER OSCulture
-Culture of the Windows installation
+Language of the Windows installation
+Alias = Culture, Language
 
 .PARAMETER Screenshot
 Captures screenshots during OSDCloud
@@ -65,7 +66,7 @@ function Start-OSDCloud {
             'sl-si','sr-latn-rs','sv-se','th-th','tr-tr',
             'uk-ua','zh-cn','zh-tw'
         )]
-        [Alias('Culture')]
+        [Alias('Culture','Language')]
         [string]$OSCulture = 'en-us',
 
         [switch]$Screenshot,
@@ -94,9 +95,11 @@ function Start-OSDCloud {
 
         [Parameter(ParameterSetName = 'GitHub')]
         [Alias('T','Token')]
-        [string]$GitHubToken = ''
-    )
+        [string]$GitHubToken = '',
 
+        [string]$Manufacturer = (Get-MyComputerManufacturer -Brief),
+        [string]$Product = (Get-MyComputerProduct)
+    )
     #=======================================================================
     #	Start the Clock
     #=======================================================================
@@ -113,75 +116,66 @@ function Start-OSDCloud {
     #=======================================================================
     $Global:OSDCloudOSEdition = $OSEdition
     $Global:OSDCloudOSCulture = $OSCulture
+    $Global:OSDCloudManufacturer = $Manufacturer
+    $Global:OSDCloudProduct = $Product
     #=======================================================================
-    #   Require cURL
-    #   Without cURL, we can't download the ESD, so if it's not present, then we need to exit
+    #	Block
     #=======================================================================
-    if (-NOT (Test-CommandCurlExe)) {
-        Write-Host -ForegroundColor DarkGray    "========================================================================="
-        Write-Host -ForegroundColor Yellow      "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) $($MyInvocation.MyCommand.Name) " -NoNewline
-        Write-Warning                           "cURL is required for this process to work"
-        Write-Warning                           "OSDCloud Failed!"
-        Start-Sleep -Seconds 5
-        Break
-    }
+    Block-PowerShellVersionLt5
+    Block-NoCurl
     #=======================================================================
-    #	AutoPilot Profiles
+    #   Header
     #=======================================================================
-    Write-Host -ForegroundColor DarkGray        "========================================================================="
-    Write-Host -ForegroundColor Yellow          "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) $($MyInvocation.MyCommand.Name) " -NoNewline
-    Write-Host -ForegroundColor Cyan            "AutoPilot Profiles"
-    
-    $GetOSDCloudOfflineAutoPilotProfiles = $null
-    $GetOSDCloudOfflineAutoPilotProfiles = Get-OSDCloud.offline.autopilotprofiles
+    Write-Host -ForegroundColor DarkGray "========================================================================="
+    Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) $($MyInvocation.MyCommand.Name)"
+    Write-Warning "OSDCLOUD IS CURRENTLY IN DEVELOPMENT FOR TESTING ONLY"
+    #=======================================================================
+    #	Test PowerShell Gallery Connectivity
+    #=======================================================================
+    Write-Host -ForegroundColor DarkGray "========================================================================="
+    Write-Host -ForegroundColor Cyan "Test-WebConnection"
+    Write-Host -ForegroundColor DarkGray "powershellgallery.com"
 
-    if ($GetOSDCloudOfflineAutoPilotProfiles) {
-        $Global:OSDCloudAutoPilotProfile = Select-OSDCloud.offline.autopilotprofiles
-    } else {
-        Write-Warning "No AutoPilot Profiles were found in any PSDrive"
-        Write-Warning "AutoPilot Profiles must be located in a <PSDrive>:\OSDCloud\AutoPilot\Profiles direcory"
+    if (Test-WebConnection -Uri "powershellgallery.com") {
+        Write-Host -ForegroundColor Green "OK"
     }
-
-    if ($Global:OSDCloudAutoPilotProfile) {
-        #$Global:OSDCloudAutoPilotProfile | Format-List
-    }
-    #=======================================================================
-    #	PSGallery Modules
-    #=======================================================================
-    Write-Host -ForegroundColor DarkGray    "========================================================================="
-    Write-Host -ForegroundColor Yellow      "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) $($MyInvocation.MyCommand.Name) " -NoNewline
-    Write-Host -ForegroundColor Cyan        "PowerShell Modules and Scripts"
-
-    if (-NOT (Test-WebConnection -Uri "https://www.powershellgallery.com")) {
+    else {
+        Write-Host -ForegroundColor Red " FAILED"
         Write-Warning "Could not validate an Internet connection to the PowerShell Gallery"
         Write-Warning "OSDCloud will continue, but there may be issues if this can't be resolved"
     }
     #=======================================================================
     #	Get-FeatureUpdate
     #=======================================================================
-    Write-Host -ForegroundColor DarkGray    "========================================================================="
-    Write-Host -ForegroundColor Yellow      "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) $($MyInvocation.MyCommand.Name) " -NoNewline
-    Write-Host -ForegroundColor Cyan        "Get-FeatureUpdate Windows 10 $Global:OSDCloudOSEdition x64 $OSBuild $OSCulture"
+    Write-Host -ForegroundColor DarkGray "========================================================================="
+    Write-Host -ForegroundColor Cyan "Get-FeatureUpdate"
+    Write-Host -ForegroundColor DarkGray "Windows 10 x64 | OSBuild: $OSBuild | OSEdition: $Global:OSDCloudOSEdition | OSCulture: $OSCulture"
 
     $GetFeatureUpdate = Get-FeatureUpdate -OSBuild $OSBuild -OSCulture $OSCulture
 
-    if (-NOT ($GetFeatureUpdate)) {
+    if ($GetFeatureUpdate) {
+        $GetFeatureUpdate = $GetFeatureUpdate | Select-Object -Property CreationDate,KBNumber,Title,UpdateOS,UpdateBuild,UpdateArch,FileName, @{Name='SizeMB';Expression={[int]($_.Size /1024/1024)}},FileUri,Hash,AdditionalHash
+    }
+    else {
         Write-Warning "Unable to locate a Windows 10 Feature Update"
         Write-Warning "OSDCloud cannot continue"
         Break
     }
-    $GetFeatureUpdate = $GetFeatureUpdate | Select-Object -Property CreationDate,KBNumber,Title,UpdateOS,UpdateBuild,UpdateArch,FileName, @{Name='SizeMB';Expression={[int]($_.Size /1024/1024)}},FileUri,Hash,AdditionalHash
     #=======================================================================
-    #	Offline OS
+    #	Get-FeatureUpdate Source
     #=======================================================================
     $OSDCloudOfflineOS = Get-OSDCloud.offline.file -Name $GetFeatureUpdate.FileName | Select-Object -First 1
 
     if ($OSDCloudOfflineOS) {
         $OSDCloudOfflineOSFullName = $OSDCloudOfflineOS.FullName
-        Write-Host -ForegroundColor Cyan "Offline: $OSDCloudOfflineOSFullName"
+        Write-Host -ForegroundColor Green "OK"
+        Write-Host -ForegroundColor DarkGray "$($GetFeatureUpdate.Title)"
+        Write-Host -ForegroundColor DarkGray "$OSDCloudOfflineOSFullName"
     }
     elseif (Test-WebConnection -Uri $GetFeatureUpdate.FileUri) {
-        #Download during Deployment
+        Write-Host -ForegroundColor Yellow "Download"
+        Write-Host -ForegroundColor Yellow "$($GetFeatureUpdate.Title)"
+        Write-Host -ForegroundColor Yellow "$($GetFeatureUpdate.FileUri)"
     }
     else {
         Write-Warning "Could not verify an Internet connection for Windows 10 Feature Update"
@@ -191,22 +185,28 @@ function Start-OSDCloud {
     #=======================================================================
     #	Start-OSDCloud Get-MyDriverPack
     #=======================================================================
-    Write-Host -ForegroundColor DarkGray    "========================================================================="
-    Write-Host -ForegroundColor Yellow      "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) $($MyInvocation.MyCommand.Name) " -NoNewline
-    Write-Host -ForegroundColor Cyan        "Get-MyDriverPack"
+    Write-Host -ForegroundColor DarkGray "========================================================================="
+    Write-Host -ForegroundColor Cyan "Get-MyDriverPack"
     
-    $GetMyDriverPack = Get-MyDriverPack
+    if ($PSBoundParameters.ContainsKey('Manufacturer')) {
+        $GetMyDriverPack = Get-MyDriverPack -Manufacturer $Global:OSDCloudManufacturer -Product $Global:OSDCloudProduct
+    }
+    else {
+        $GetMyDriverPack = Get-MyDriverPack -Product $Global:OSDCloudProduct
+    }
 
     if ($GetMyDriverPack) {
-        $GetMyDriverPack | Format-List
+        Write-Host -ForegroundColor DarkGray "Name: $($GetMyDriverPack.Name)"
+        Write-Host -ForegroundColor DarkGray "Product: $($GetMyDriverPack.Product)"
 
         $GetOSDCloudOfflineFile = Get-OSDCloud.offline.file -Name $GetMyDriverPack.FileName | Select-Object -First 1
-    
         if ($GetOSDCloudOfflineFile) {
-            Write-Host -ForegroundColor Cyan "Offline: $($GetOSDCloudOfflineFile.FullName)"
+            Write-Host -ForegroundColor Green "OK"
+            Write-Host -ForegroundColor DarkGray "$($GetOSDCloudOfflineFile.FullName)"
         }
         elseif (Test-WebConnection -Uri $GetMyDriverPack.DriverPackUrl) {
-            #OK to Download
+            Write-Host -ForegroundColor Yellow "Download"
+            Write-Host -ForegroundColor Yellow "$($GetMyDriverPack.DriverPackUrl)"
         }
         else {
             Write-Warning "Could not verify an Internet connection for the Dell Driver Pack"
@@ -217,50 +217,26 @@ function Start-OSDCloud {
         Write-Warning "Unable to determine a suitable Driver Pack for this Computer Model"
     }
     #=======================================================================
-    #	Start-OSDCloud Get-MyDellDriverCab
+    #	Get-MyDellBios
     #=======================================================================
-<#     if ((Get-MyComputerManufacturer -Brief) -eq 'Dell') {
-        Write-Host -ForegroundColor DarkGray    "========================================================================="
-        Write-Host -ForegroundColor Yellow      "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) $($MyInvocation.MyCommand.Name) " -NoNewline
-        Write-Host -ForegroundColor Cyan        "Get-MyDellDriverCab"
-        
-        $GetMyDellDriverCab = Get-MyDellDriverCab
-        if ($GetMyDellDriverCab) {
-
-            $GetOSDCloudOfflineFile = Get-OSDCloud.offline.file -Name $GetMyDellDriverCab.DownloadFile | Select-Object -First 1
-        
-            if ($GetOSDCloudOfflineFile) {
-                Write-Host -ForegroundColor Cyan "Offline: $($GetOSDCloudOfflineFile.FullName)"
-            }
-            elseif (Test-MyDellDriverCabWebConnection) {
-                #OK to Download
-            }
-            else {
-                Write-Warning "Could not verify an Internet connection for the Dell Driver Pack"
-                Write-Warning "OSDCloud will continue, but there may be issues"
-            }
-        }
-        else {
-            Write-Warning "Unable to determine a suitable Driver Pack for this Computer Model"
-        }
-    } #>
-    #=======================================================================
-    #	Get Dell BIOS Update
-    #=======================================================================
-    if ((Get-MyComputerManufacturer -Brief) -eq 'Dell') {
-        Write-Host -ForegroundColor DarkGray    "========================================================================="
-        Write-Host -ForegroundColor Yellow      "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) $($MyInvocation.MyCommand.Name) " -NoNewline
-        Write-Host -ForegroundColor Cyan        "Get-MyDellBios"
+    if ($Global:OSDCloudManufacturer -eq 'Dell') {
+        Write-Host -ForegroundColor DarkGray "========================================================================="
+        Write-Host -ForegroundColor Cyan "Get-MyDellBios"
 
         $GetMyDellBios = Get-MyDellBios
         if ($GetMyDellBios) {
+            Write-Host -ForegroundColor DarkGray "$($GetMyDellBios.Name)"
+            Write-Host -ForegroundColor DarkGray "$($GetMyDellBios.ReleaseDate)"
+
             $GetOSDCloudOfflineFile = Get-OSDCloud.offline.file -Name $GetMyDellBios.FileName | Select-Object -First 1
 
             if ($OSDCloudOfflineBios) {
-                Write-Host -ForegroundColor Cyan "Offline: $($OSDCloudOfflineBios.FullName)"
+                Write-Host -ForegroundColor Green "OK"
+                Write-Host -ForegroundColor DarkGray "$($OSDCloudOfflineBios.FullName)"
             }
             elseif (Test-MyDellBiosWebConnection) {
-                #OK to Download
+                Write-Host -ForegroundColor Yellow "Download"
+                Write-Host -ForegroundColor Yellow "$($GetMyDellBios.Url)"
             }
             else {
                 Write-Warning "Could not verify an Internet connection for the Dell Bios Update"
@@ -269,10 +245,10 @@ function Start-OSDCloud {
 
             $OSDCloudOfflineFlash64W = Get-OSDCloud.offline.file -Name 'Flash64W.exe' | Select-Object -First 1
             if ($OSDCloudOfflineFlash64W) {
-                Write-Host -ForegroundColor Cyan "Offline: $($OSDCloudOfflineFlash64W.FullName)"
+                Write-Host -ForegroundColor DarkGray "$($OSDCloudOfflineFlash64W.FullName)"
             }
             elseif (Test-MyDellBiosWebConnection) {
-                #OK to Download
+                Write-Host -ForegroundColor Yellow "$($GetMyDellBios.Flash64W)"
             }
             else {
                 Write-Warning "Could not verify an Internet connection for the Dell Flash64W"
@@ -283,6 +259,24 @@ function Start-OSDCloud {
             Write-Warning "Unable to determine a suitable BIOS update for this Computer Model"
             Write-Warning "OSDCloud will continue, but there may be issues"
         }
+    }
+    #=======================================================================
+    #	AutoPilot Profiles
+    #=======================================================================
+    Write-Host -ForegroundColor DarkGray "========================================================================="
+    Write-Host -ForegroundColor Cyan "Get-OSDCloud.autopilotprofiles"
+
+    $GetOSDCloudautopilotprofiles = Get-OSDCloud.autopilotprofiles
+
+    if ($GetOSDCloudautopilotprofiles) {
+        Write-Host -ForegroundColor Green "OK"
+
+        foreach ($Item in $GetOSDCloudautopilotprofiles) {
+            Write-Host -ForegroundColor DarkGray "$($Item.FullName)"
+        }
+    } else {
+        Write-Warning "No AutoPilot Profiles were found in any PSDrive"
+        Write-Warning "AutoPilot Profiles must be located in a <PSDrive>:\OSDCloud\AutoPilot\Profiles directory"
     }
     #=======================================================================
     #   Module
@@ -300,7 +294,6 @@ function Start-OSDCloud {
     #   GitHub
     #=======================================================================
     if ($PSCmdlet.ParameterSetName -eq 'GitHub') {
-
         if (-NOT (Test-WebConnection -Uri $GitHubBaseUrl)) {
             Write-Warning "Could not verify an Internet connection to $Global:GitHubUrl"
             Write-Warning "OSDCloud -GitHub cannot continue"
@@ -328,6 +321,8 @@ function Start-OSDCloud {
         $Global:GitHubScript = $GitHubScript
         $Global:GitHubToken = $GitHubToken
 
+        Write-Host -ForegroundColor Cyan "Starting $($Global:GitHubUrl)"
+        Start-Sleep -Seconds 5
         Invoke-WebPSScript -WebPSScript $Global:GitHubUrl
     }
     #=======================================================================

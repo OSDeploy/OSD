@@ -7,7 +7,7 @@
 RootModule = 'OSD.psm1'
 
 # Version number of his module.
-ModuleVersion = '21.3.26.1'
+ModuleVersion = '21.3.27.1'
 
 # Supported PSEditions
 # CompatiblePSEditions = @()
@@ -163,7 +163,7 @@ FunctionsToExport =
 'Edit-OSDCloud.winpe',#OSDCLOUD
 'Get-OSDCloud.workspace',
 'Get-OSDCloud.template',
-'Get-OSDCloud.offline.autopilotprofiles',
+'Get-OSDCloud.autopilotprofiles',
 'Get-OSDCloud.offline.file',
 'Get-OSDCloud.offline.path',
 'New-OSDCloud.iso',
@@ -173,7 +173,7 @@ FunctionsToExport =
 'Save-OSDCloud.usb',
 'Save-OSDCloud.offlineos.modules',
 'Select-AutoPilotJson',
-'Select-OSDCloud.offline.autopilotprofiles',
+'Select-OSDCloud.autopilotprofiles',
 'Set-OSDCloud.workspace',
 'Start-OSDCloud',
 'Test-OSDCloud.template',
@@ -195,12 +195,14 @@ FunctionsToExport =
 'Use-WinPEContent',
 'Use-WindowsUnattend.audit',
 'Use-WindowsUnattend.audit.autopilot',
-'Use-WindowsUnattend.drivers',
+'Add-WindowsDriver.offlineservicing',
 'Get-DellDriverPack',
 'Get-HpDriverPack',
 'Get-LenovoDriverPack',
 'Get-MyDriverPack',
-'Save-MyDriverPack'
+'Save-MyDriverPack',
+'Expand-StagedDriverPack',
+'Add-StagedDriverPack.specialize'
 
 # Cmdlets to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no cmdlets to export.
 CmdletsToExport = @()

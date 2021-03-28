@@ -58,7 +58,7 @@ function New-Bootable.usb {
         #Cannot clear a Disk that has not been Initialized
     }
     else {
-        $GetUSBDisk | Clear-Disk -RemoveData -RemoveOEM -Confirm:$true
+        $GetUSBDisk | Clear-Disk -RemoveData -RemoveOEM -Confirm:$true -ErrorAction Stop
     }
     #=======================================================================
     #	Get-Disk.osd -BusType USB
@@ -74,13 +74,13 @@ function New-Bootable.usb {
     #	-lt 2TB
     #=======================================================================
     if ($GetUSBDisk.SizeGB -lt 1800) {
-        $GetUSBDisk | Initialize-Disk -PartitionStyle MBR
+        $GetUSBDisk | Initialize-Disk -PartitionStyle MBR -ErrorAction Stop
 
         $DataDisk = $GetUSBDisk | New-Partition -Size ($GetUSBDisk.Size - 2GB) -AssignDriveLetter | `
-        Format-Volume -FileSystem NTFS -NewFileSystemLabel $DataLabel
+        Format-Volume -FileSystem NTFS -NewFileSystemLabel $DataLabel -ErrorAction Stop
         
         $BootDisk = $GetUSBDisk | New-Partition -UseMaximumSize -IsActive -AssignDriveLetter | `
-        Format-Volume -FileSystem FAT32 -NewFileSystemLabel $BootLabel
+        Format-Volume -FileSystem FAT32 -NewFileSystemLabel $BootLabel -ErrorAction Stop
     }
     #=======================================================================
     #	-ge 2TB

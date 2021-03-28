@@ -15,6 +15,7 @@ function Save-OSDCloud.offlineos.modules {
     }
     
     if (Test-WebConnection -Uri "https://www.powershellgallery.com") {
+        Copy-PSModuleToFolder -Name OSD -Destination "$PowerShellSavePath\Modules"
         Save-Module -Name OSD -Path "$PowerShellSavePath\Modules" -Force
         Save-Module -Name PackageManagement -Path "$PowerShellSavePath\Modules" -Force
         Save-Module -Name PowerShellGet -Path "$PowerShellSavePath\Modules" -Force

@@ -14,7 +14,6 @@ else {
 }
 
 foreach ($Import in @($OSDPublicFunctions + $OSDPrivateFunctions)) {
-    Write-Verbose "$($Import.FullName)" -Verbose
     Try {. $Import.FullName}
     Catch {Write-Error -Message "Failed to import function $($Import.FullName): $_"}
 }

@@ -1,4 +1,4 @@
-function Get-OSDCloud.offline.autopilotprofiles {
+function Get-OSDCloud.autopilotprofiles {
     [CmdletBinding()]
     param (
         [string]$Name
