@@ -7,7 +7,7 @@
 RootModule = 'OSD.psm1'
 
 # Version number of his module.
-ModuleVersion = '21.3.29.1'
+ModuleVersion = '21.3.29.2'
 
 # Supported PSEditions
 # CompatiblePSEditions = @()
@@ -201,8 +201,9 @@ FunctionsToExport =
 'Get-LenovoDriverPack',
 'Get-MyDriverPack',
 'Save-MyDriverPack',
+'Expand-ZTIDriverPack',
+'Save-ZTIDriverPack',
 'Expand-StagedDriverPack',
-'Copy-MDTDriverPack',
 'Add-StagedDriverPack.specialize'
 
 # Cmdlets to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no cmdlets to export.
