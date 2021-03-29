@@ -344,7 +344,7 @@ if ($Global:OSDCloudManufacturer -eq 'Dell') {
 #=======================================================================
 #   Add-WindowsDriver.offlineservicing
 #=======================================================================
-Write-Host -ForegroundColor DarkGray "========================================================================="
+Write-Host -ForegroundColor DarkGray "================================================================="
 Write-Host -ForegroundColor Cyan "Add-WindowsDriver.offlineservicing"
 Write-Host -ForegroundColor DarkGray "Apply Drivers with Use-WindowsUnattend"
 Add-WindowsDriver.offlineservicing
@@ -352,7 +352,7 @@ Add-WindowsDriver.offlineservicing
 #   Add-StagedDriverPack.specialize
 #=======================================================================
 if ($Global:OSDCloudManufacturer -in ('HP','Lenovo')) {
-    Write-Host -ForegroundColor DarkGray "========================================================================="
+    Write-Host -ForegroundColor DarkGray "================================================================="
     Write-Host -ForegroundColor Cyan "Add-StagedDriverPack.specialize"
     Write-Host -ForegroundColor DarkGray "Required for HP and Lenovo devices"
     Add-StagedDriverPack.specialize

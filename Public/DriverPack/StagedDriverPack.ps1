@@ -9,7 +9,7 @@ $UnattendXml = @'
             <RunSynchronous>
                 <RunSynchronousCommand wcm:action="add">
                     <Order>1</Order>
-                    <Description>Expand-WindowsDriver.pack</Description>
+                    <Description>Expand-StagedDriverPack</Description>
                     <Path>Powershell -ExecutionPolicy Bypass -Command Expand-StagedDriverPack</Path>
                 </RunSynchronousCommand>
             </RunSynchronous>
@@ -50,6 +50,7 @@ function Expand-StagedDriverPack {
     $ImageState = (Get-ItemProperty -Path 'HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Setup\State' -ErrorAction Ignore).ImageState
     if ($ImageState -eq 'IMAGE_STATE_SPECIALIZE_RESEAL_TO_OOBE') {
         $Apply = $true
+        reg delete HKLM\System\Setup /v UnattendFile /f
     }
     #=======================================================================
     #   Specialize
@@ -156,7 +157,6 @@ function Expand-StagedDriverPack {
             Write-Warning "Unable to expand $ExpandFile"
             Write-Verbose -Verbose ""
             #=======================================================================
-            reg delete HKLM\System\Setup /v UnattendFile
         }
     }
 }
