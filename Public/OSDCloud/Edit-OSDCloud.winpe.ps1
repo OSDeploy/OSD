@@ -13,7 +13,7 @@ This is optional as the OSDCloud.workspace is returned by Get-OSDCloud.workspace
 Path to additional Drivers you want to install
 
 .PARAMETER CloudDriver
-Download and install in WinPE drivers from Dell,Nutanix,VMware
+Download and install in WinPE drivers from Dell,HP,Nutanix,VMware
 
 .LINK
 https://osdcloud.osdeploy.com
@@ -29,7 +29,7 @@ function Edit-OSDCloud.winpe {
 
         [string[]]$DriverPath,
 
-        [ValidateSet('Dell','Nutanix','VMware')]
+        [ValidateSet('Dell','HP','Nutanix','VMware')]
         [string[]]$CloudDriver,
 
         [switch]$CustomOSD
@@ -103,6 +103,9 @@ function Edit-OSDCloud.winpe {
     foreach ($Driver in $DriverPath) {
         Add-WindowsDriver -Path "$($MountMyWindowsImage.Path)" -Driver "$Driver" -Recurse -ForceUnsigned
     }
+    #=======================================================================
+    #   CloudDriver
+    #=======================================================================
     foreach ($Driver in $CloudDriver) {
         if ($Driver -eq 'Dell'){
             Write-Verbose "Adding $Driver CloudDriver"
@@ -116,7 +119,22 @@ function Edit-OSDCloud.winpe {
                         New-Item -Path $ExpandPath -ItemType Directory -Force | Out-Null
                     }
                     Expand -R "$($DriverCab.FullName)" -F:* "$ExpandPath" | Out-Null
-                    Add-WindowsDriver -Path "$($MountMyWindowsImage.Path)" -Driver "$ExpandPath" -Recurse -ForceUnsigned
+                    Add-WindowsDriver -Path "$($MountMyWindowsImage.Path)" -Driver "$ExpandPath" -Recurse -ForceUnsigned -Verbose
+                }
+            }
+        }
+        if ($Driver -eq 'HP'){
+            Write-Verbose "Adding $Driver CloudDriver"
+            if (Test-WebConnection -Uri 'https://ftp.hp.com/pub/softpaq/sp110001-110500/sp110326.exe') {
+                $SaveWebFile = Save-WebFile -SourceUrl 'https://ftp.hp.com/pub/softpaq/sp110001-110500/sp110326.exe'
+                if (Test-Path $SaveWebFile.FullName) {
+                    $DriverCab = Get-Item -Path $SaveWebFile.FullName
+                    $ExpandPath = Join-Path $DriverCab.Directory $DriverCab.BaseName
+
+
+                    Write-Verbose -Verbose "Expanding HP Client Windows PE Driver Pack to $ExpandPath"
+                    Start-Process -FilePath $DriverCab -ArgumentList "/s /e /f `"$ExpandPath`"" -Wait
+                    Add-WindowsDriver -Path "$($MountMyWindowsImage.Path)" -Driver "$ExpandPath" -Recurse -ForceUnsigned -Verbose
                 }
             }
         }
@@ -132,7 +150,7 @@ function Edit-OSDCloud.winpe {
                         New-Item -Path $ExpandPath -ItemType Directory -Force | Out-Null
                     }
                     Expand -R "$($DriverCab.FullName)" -F:* "$ExpandPath" | Out-Null
-                    Add-WindowsDriver -Path "$($MountMyWindowsImage.Path)" -Driver "$ExpandPath" -Recurse -ForceUnsigned
+                    Add-WindowsDriver -Path "$($MountMyWindowsImage.Path)" -Driver "$ExpandPath" -Recurse -ForceUnsigned -Verbose
                 }
             }
         }
@@ -148,7 +166,7 @@ function Edit-OSDCloud.winpe {
                         New-Item -Path $ExpandPath -ItemType Directory -Force | Out-Null
                     }
                     Expand -R "$($DriverCab.FullName)" -F:* "$ExpandPath" | Out-Null
-                    Add-WindowsDriver -Path "$($MountMyWindowsImage.Path)" -Driver "$ExpandPath" -Recurse -ForceUnsigned
+                    Add-WindowsDriver -Path "$($MountMyWindowsImage.Path)" -Driver "$ExpandPath" -Recurse -ForceUnsigned -Verbose
                 }
             }
         }

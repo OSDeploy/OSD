@@ -30,17 +30,20 @@ function Edit-MyWinPE {
 
         [string[]]$DriverPath,
 
+        [ValidateSet('Dell','HP','Nutanix','VMware')]
+        [string[]]$CloudDriver,
+
         [switch]$DismountSave
     )
 
     begin {
         #=======================================================================
-        #   Require Admin Rights
+        #	Block
         #=======================================================================
-        if ((Get-OSDGather -Property IsAdmin) -eq $false) {
-            Write-Warning "$($MyInvocation.MyCommand) requires Admin Rights ELEVATED"
-            Break
-        }
+        Block-WinPE
+        Block-StandardUser
+        Block-WindowsVersionNe10
+        Block-PowerShellVersionLt5
         #=======================================================================
         #   Get Registry Information
         #=======================================================================
@@ -129,6 +132,74 @@ function Edit-MyWinPE {
             #=======================================================================
             foreach ($Driver in $DriverPath) {
                 Add-WindowsDriver -Path "$($MountMyWindowsImage.Path)" -Driver "$Driver" -Recurse -ForceUnsigned
+            }
+            #=======================================================================
+            #   CloudDriver
+            #=======================================================================
+            foreach ($Driver in $CloudDriver) {
+                if ($Driver -eq 'Dell'){
+                    Write-Verbose "Adding $Driver CloudDriver"
+                    if (Test-WebConnection -Uri 'http://downloads.dell.com/FOLDER07062618M/1/WINPE10.0-DRIVERS-A23-PR4K0.CAB') {
+                        $SaveWebFile = Save-WebFile -SourceUrl 'http://downloads.dell.com/FOLDER07062618M/1/WINPE10.0-DRIVERS-A23-PR4K0.CAB'
+                        if (Test-Path $SaveWebFile.FullName) {
+                            $DriverCab = Get-Item -Path $SaveWebFile.FullName
+                            $ExpandPath = Join-Path $DriverCab.Directory $DriverCab.BaseName
+                    
+                            if (-NOT (Test-Path $ExpandPath)) {
+                                New-Item -Path $ExpandPath -ItemType Directory -Force | Out-Null
+                            }
+                            Expand -R "$($DriverCab.FullName)" -F:* "$ExpandPath" | Out-Null
+                            Add-WindowsDriver -Path "$($MountMyWindowsImage.Path)" -Driver "$ExpandPath" -Recurse -ForceUnsigned -Verbose
+                        }
+                    }
+                }
+                if ($Driver -eq 'HP'){
+                    Write-Verbose "Adding $Driver CloudDriver"
+                    if (Test-WebConnection -Uri 'https://ftp.hp.com/pub/softpaq/sp110001-110500/sp110326.exe') {
+                        $SaveWebFile = Save-WebFile -SourceUrl 'https://ftp.hp.com/pub/softpaq/sp110001-110500/sp110326.exe'
+                        if (Test-Path $SaveWebFile.FullName) {
+                            $DriverCab = Get-Item -Path $SaveWebFile.FullName
+                            $ExpandPath = Join-Path $DriverCab.Directory $DriverCab.BaseName
+        
+        
+                            Write-Verbose -Verbose "Expanding HP Client Windows PE Driver Pack to $ExpandPath"
+                            Start-Process -FilePath $DriverCab -ArgumentList "/s /e /f `"$ExpandPath`"" -Wait
+                            Add-WindowsDriver -Path "$($MountMyWindowsImage.Path)" -Driver "$ExpandPath" -Recurse -ForceUnsigned -Verbose
+                        }
+                    }
+                }
+                if ($Driver -eq 'Nutanix'){
+                    Write-Verbose "Adding $Driver CloudDriver"
+                    if (Test-WebConnection -Uri 'https://github.com/OSDeploy/OSDCloud/raw/main/Drivers/WinPE/Nutanix.cab') {
+                        $SaveWebFile = Save-WebFile -SourceUrl 'https://github.com/OSDeploy/OSDCloud/raw/main/Drivers/WinPE/Nutanix.cab'
+                        if (Test-Path $SaveWebFile.FullName) {
+                            $DriverCab = Get-Item -Path $SaveWebFile.FullName
+                            $ExpandPath = Join-Path $DriverCab.Directory $DriverCab.BaseName
+                    
+                            if (-NOT (Test-Path $ExpandPath)) {
+                                New-Item -Path $ExpandPath -ItemType Directory -Force | Out-Null
+                            }
+                            Expand -R "$($DriverCab.FullName)" -F:* "$ExpandPath" | Out-Null
+                            Add-WindowsDriver -Path "$($MountMyWindowsImage.Path)" -Driver "$ExpandPath" -Recurse -ForceUnsigned -Verbose
+                        }
+                    }
+                }
+                if ($Driver -eq 'VMware'){
+                    Write-Verbose "Adding $Driver CloudDriver"
+                    if (Test-WebConnection -Uri 'https://github.com/OSDeploy/OSDCloud/raw/main/Drivers/WinPE/VMware.cab') {
+                        $SaveWebFile = Save-WebFile -SourceUrl 'https://github.com/OSDeploy/OSDCloud/raw/main/Drivers/WinPE/VMware.cab'
+                        if (Test-Path $SaveWebFile.FullName) {
+                            $DriverCab = Get-Item -Path $SaveWebFile.FullName
+                            $ExpandPath = Join-Path $DriverCab.Directory $DriverCab.BaseName
+                    
+                            if (-NOT (Test-Path $ExpandPath)) {
+                                New-Item -Path $ExpandPath -ItemType Directory -Force | Out-Null
+                            }
+                            Expand -R "$($DriverCab.FullName)" -F:* "$ExpandPath" | Out-Null
+                            Add-WindowsDriver -Path "$($MountMyWindowsImage.Path)" -Driver "$ExpandPath" -Recurse -ForceUnsigned -Verbose
+                        }
+                    }
+                }
             }
             #=======================================================================
             #   Dismount-MyWindowsImage
