@@ -94,7 +94,6 @@ function Save-MyDriverPack {
                     Write-Verbose -Verbose "Expanding CAB Driver Pack to $DestinationPath"
                     Expand -R "$ExpandFile" -F:* "$DestinationPath" | Out-Null
                 }
-                Continue
             }
             #=======================================================================
             #   HP
@@ -112,7 +111,6 @@ function Save-MyDriverPack {
                         Write-Verbose -Verbose "Expanding HP Driver Pack to $DestinationPath"
                         Start-Process -FilePath $ExpandFile -ArgumentList "/s /e /f `"$DestinationPath`"" -Wait
                     }
-                    Continue
                 }
             }
             #=======================================================================
@@ -129,7 +127,6 @@ function Save-MyDriverPack {
                         Write-Verbose -Verbose "Expanding Lenovo Driver Pack to $DestinationPath"
                         Start-Process -FilePath $ExpandFile -ArgumentList "/SILENT /SUPPRESSMSGBOXES" -Wait
                     }
-                    Continue
                 }
             }
             #=======================================================================
@@ -142,7 +139,6 @@ function Save-MyDriverPack {
                     Write-Verbose -Verbose "Expanding ZIP Driver Pack to $DestinationPath"
                     Expand-Archive -Path $ExpandFile -DestinationPath $DestinationPath -Force
                 }
-                Continue
             }
             #=======================================================================
             #   Everything Else

@@ -55,42 +55,40 @@ function Save-WebFile {
     #=======================================================================
     #	OverWrite
     #=======================================================================
-    if ($PSBoundParameters['Overwrite']) {
+    if ((-NOT ($PSBoundParameters['Overwrite'])) -and (Test-Path $DestinationFullName)) {
+        Write-Verbose "DestinationFullName already exists"
+        Get-Item $DestinationFullName
     }
     else {
-        if (Test-Path $DestinationFullName) {
-            Write-Verbose "DestinationFullName already exists"
-            Return Get-Item $DestinationFullName
-        }
-    }
-    #=======================================================================
-    #	Download
-    #=======================================================================
-    if (Get-Command 'curl.exe') {
-        Write-Verbose "cURL: $SourceUrl"
-
-        if ($host.name -match 'ConsoleHost') {
-            Invoke-Expression "& curl.exe --location --output `"$DestinationFullName`" --url $SourceUrl"
+        #=======================================================================
+        #	Download
+        #=======================================================================
+        if (Get-Command 'curl.exe') {
+            Write-Verbose "cURL: $SourceUrl"
+    
+            if ($host.name -match 'ConsoleHost') {
+                Invoke-Expression "& curl.exe --location --output `"$DestinationFullName`" --url $SourceUrl"
+            }
+            else {
+                #PowerShell ISE will display a NativeCommandError, so progress will not be displayed
+                $Quiet = Invoke-Expression "& curl.exe --location --output `"$DestinationFullName`" --url $SourceUrl 2>&1"
+            }
         }
         else {
-            #PowerShell ISE will display a NativeCommandError, so progress will not be displayed
-            $Quiet = Invoke-Expression "& curl.exe --location --output `"$DestinationFullName`" --url $SourceUrl 2>&1"
+            [Net.ServicePointManager]::SecurityProtocol = [Net.ServicePointManager]::SecurityProtocol -bor [Net.SecurityProtocolType]::Tls1
+            $WebClient = New-Object System.Net.WebClient
+            $WebClient.DownloadFile($SourceUrl, $DestinationFullName)
         }
+        #=======================================================================
+        #	Return
+        #=======================================================================
+        if (Test-Path $DestinationFullName) {
+            Get-Item $DestinationFullName
+        }
+        else {
+            Write-Warning "Could not download $DestinationFullName"
+            $null
+        }
+        #=======================================================================
     }
-    else {
-        [Net.ServicePointManager]::SecurityProtocol = [Net.ServicePointManager]::SecurityProtocol -bor [Net.SecurityProtocolType]::Tls1
-        $WebClient = New-Object System.Net.WebClient
-        $WebClient.DownloadFile($SourceUrl, $DestinationFullName)
-    }
-    #=======================================================================
-    #	Return
-    #=======================================================================
-    if (Test-Path $DestinationFullName) {
-        Return Get-Item $DestinationFullName
-    }
-    else {
-        Write-Warning "Could not download $DestinationFullName"
-        Return $null
-    }
-    #=======================================================================
 }
