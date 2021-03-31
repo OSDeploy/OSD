@@ -9,7 +9,7 @@
 #   In WinPE, the latest version will be installed automatically
 #   In Windows, this script is stopped and you will need to update manually
 #=======================================================================
-[Version]$OSDVersionMin = '21.3.29.3'
+[Version]$OSDVersionMin = '21.3.30.2'
 
 if ((Get-Module -Name OSD -ListAvailable | `Sort-Object Version -Descending | Select-Object -First 1).Version -lt $OSDVersionMin) {
     Write-Warning "OSDCloud requires OSD $OSDVersionMin or newer"
@@ -39,8 +39,7 @@ if ((Get-Module -Name OSD -ListAvailable | Sort-Object Version -Descending | Sel
 #   $Global:GitHubScript = $Script
 #   $Global:GitHubToken = $Token
 #   $Global:GitHubUrl
-#   $Global:OSDCloudOSEdition = $OSEdition
-#   $Global:OSDCloudOSCulture = $OSCulture
+#   $Global:OSDCloudOSLanguage = $OSLanguage
 #   As a backup, $Global:OSDCloudVariables is created with Get-Variable
 #=======================================================================
 $Global:OSDCloudVariables = Get-Variable
@@ -67,7 +66,7 @@ $GetOSDCloudautopilotprofiles = Get-OSDCloud.autopilotprofiles
 
 if ($GetOSDCloudautopilotprofiles) {
     Write-Host -ForegroundColor DarkGray "========================================================================="
-    Write-Host -ForegroundColor Cyan "Select-OSDCloud.autopilotprofiles"
+    Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Select-OSDCloud.autopilotprofiles"
 
     $Global:OSDCloudAutoPilotProfile = Select-OSDCloud.autopilotprofiles
     if ($Global:OSDCloudAutoPilotProfile) {
@@ -106,13 +105,13 @@ if (Get-Disk.usb) {
 #   Clear-Disk.fixed
 #=======================================================================
 Write-Host -ForegroundColor DarkGray "========================================================================="
-Write-Host -ForegroundColor Cyan "Clear-Disk.fixed -Force"
+Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Clear-Disk.fixed -Force"
 Clear-Disk.fixed -Force -ErrorAction Stop
 #=======================================================================
 #   New-OSDisk
 #=======================================================================
 Write-Host -ForegroundColor DarkGray "========================================================================="
-Write-Host -ForegroundColor Cyan "New-OSDisk -Force"
+Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) New-OSDisk -Force"
 New-OSDisk -Force -ErrorAction Stop
 Start-Sleep -Seconds 5
 if (-NOT (Get-PSDrive -Name 'C')) {
@@ -124,7 +123,7 @@ if (-NOT (Get-PSDrive -Name 'C')) {
 #=======================================================================
 if ($GetUSBDisk) {
     Write-Host -ForegroundColor DarkGray "========================================================================="
-    Write-Host -ForegroundColor Cyan "Reattach any necessary USB Drives at this time"
+    Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Reattach any necessary USB Drives at this time"
     pause
     #Give some time for the drive to be initialized
     Start-Sleep -Seconds 10
@@ -133,7 +132,7 @@ if ($GetUSBDisk) {
 #   Set the Power Plan to High Performance
 #=======================================================================
 Write-Host -ForegroundColor DarkGray "========================================================================="
-Write-Host -ForegroundColor Cyan "Get-OSDPower -Property High"
+Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Get-OSDPower -Property High"
 Write-Host -ForegroundColor DarkGray "Enable High Performance Power Plan"
 Get-OSDPower -Property High
 #=======================================================================
@@ -149,7 +148,7 @@ if ($Global:OSDCloudScreenshot) {
 #   Start Transcript
 #=======================================================================
 Write-Host -ForegroundColor DarkGray "========================================================================="
-Write-Host -ForegroundColor Cyan "Start-Transcript"
+Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Start-Transcript"
 
 if (-NOT (Test-Path 'C:\OSDCloud\Logs')) {
     New-Item -Path 'C:\OSDCloud\Logs' -ItemType Directory -Force -ErrorAction Stop | Out-Null
@@ -159,9 +158,9 @@ Start-Transcript -Path 'C:\OSDCloud\Logs' -ErrorAction Ignore
 #	Get-FeatureUpdate
 #=======================================================================
 Write-Host -ForegroundColor DarkGray "========================================================================="
-Write-Host -ForegroundColor Cyan "Save-FeatureUpdate"
+Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Save-FeatureUpdate"
 
-$GetFeatureUpdate = Get-FeatureUpdate -OSBuild $OSBuild -OSCulture $OSCulture
+$GetFeatureUpdate = Get-FeatureUpdate -OSLicense $OSLicense -OSBuild $OSBuild -OSLanguage $OSLanguage
 
 if (-NOT ($GetFeatureUpdate)) {
     Write-Warning "Unable to locate a Windows 10 Feature Update"
@@ -185,7 +184,7 @@ if ($OSDCloudOfflineOS) {
     Write-Host -ForegroundColor DarkGray "$OSDCloudOfflineOSFullName"
 }
 elseif (Test-WebConnection -Uri $GetFeatureUpdate.FileUri) {
-    $SaveFeatureUpdate = Save-FeatureUpdate -OSBuild $OSBuild -OSCulture $OSCulture -DownloadPath 'C:\OSDCloud\OS' -ErrorAction Stop
+    $SaveFeatureUpdate = Save-FeatureUpdate -OSLicense $OSLicense -OSBuild $OSBuild -OSLanguage $OSLanguage -DownloadPath 'C:\OSDCloud\OS' -ErrorAction Stop
     $Global:SaveFeatureUpdate = $SaveFeatureUpdate
     if (Test-Path $($SaveFeatureUpdate.FullName)) {
         $OSDCloudOfflineOSFullName = $SaveFeatureUpdate.FullName
@@ -205,16 +204,14 @@ else {
 #	Expand OS
 #=======================================================================
 Write-Host -ForegroundColor DarkGray "========================================================================="
-Write-Host -ForegroundColor Cyan "Expand-WindowsImage"
+Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Expand-WindowsImage"
 
 if (-NOT (Test-Path 'C:\OSDCloud\Temp')) {
     New-Item 'C:\OSDCloud\Temp' -ItemType Directory -Force | Out-Null
 }
 
 if ($OSDCloudOfflineOSFullName) {
-    if ($Global:OSDCloudOSEdition -eq 'Education') {Expand-WindowsImage -ApplyPath 'C:\' -ImagePath "$OSDCloudOfflineOSFullName" -Index 4 -ScratchDirectory 'C:\OSDCloud\Temp' -ErrorAction Stop}
-    elseif ($Global:OSDCloudOSEdition -eq 'Pro') {Expand-WindowsImage -ApplyPath 'C:\' -ImagePath "$OSDCloudOfflineOSFullName" -Index 8 -ScratchDirectory 'C:\OSDCloud\Temp' -ErrorAction Stop}
-    else {Expand-WindowsImage -ApplyPath 'C:\' -ImagePath "$OSDCloudOfflineOSFullName" -Index 6 -ScratchDirectory 'C:\OSDCloud\Temp' -ErrorAction Stop}
+    Expand-WindowsImage -ApplyPath 'C:\' -ImagePath "$OSDCloudOfflineOSFullName" -Index $Global:OSDCloudOSImageIndex -ScratchDirectory 'C:\OSDCloud\Temp' -ErrorAction Stop
     
     $SystemDrive = Get-Partition | Where-Object {$_.Type -eq 'System'} | Select-Object -First 1
     if (-NOT (Get-PSDrive -Name S)) {
@@ -248,7 +245,7 @@ if (-NOT (Test-Path 'C:\Windows\Setup\Scripts')) {
 #	Get-MyDriverPack
 #=======================================================================
 Write-Host -ForegroundColor DarkGray "========================================================================="
-Write-Host -ForegroundColor Cyan "Save-MyDriverPack"
+Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Save-MyDriverPack"
 
 if ($Global:OSDCloudManufacturer -in ('Dell','HP','Lenovo')) {
     $GetMyDriverPack = Get-MyDriverPack -Manufacturer $Global:OSDCloudManufacturer -Product $Global:OSDCloudProduct
@@ -260,8 +257,8 @@ else {
 if ($GetMyDriverPack) {
     Write-Host -ForegroundColor DarkGray "Name: $($GetMyDriverPack.Name)"
     Write-Host -ForegroundColor DarkGray "Product: $($GetMyDriverPack.Product)"
-    Write-Host -ForegroundColor DarkGray "FileName: $($GetMyDriverPack.Product)"
-    Write-Host -ForegroundColor DarkGray "DriverPackUrl: $($GetMyDriverPack.Product)"
+    Write-Host -ForegroundColor DarkGray "FileName: $($GetMyDriverPack.FileName)"
+    Write-Host -ForegroundColor DarkGray "DriverPackUrl: $($GetMyDriverPack.DriverPackUrl)"
 
     $GetOSDCloudOfflineFile = Get-OSDCloud.offline.file -Name $GetMyDriverPack.FileName | Select-Object -First 1
     if ($GetOSDCloudOfflineFile) {
@@ -296,7 +293,8 @@ else {
 #=======================================================================
 if ($Global:OSDCloudManufacturer -eq 'Dell') {
     Write-Host -ForegroundColor DarkGray "========================================================================="
-    Write-Host -ForegroundColor Cyan "Save-MyDellBios"
+    Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Save-MyDellBios"
+    Write-Warning "This step is currently under development"
 
     $GetMyDellBios = Get-MyDellBios
     if ($GetMyDellBios) {
@@ -345,7 +343,7 @@ if ($Global:OSDCloudManufacturer -eq 'Dell') {
 #   Add-WindowsDriver.offlineservicing
 #=======================================================================
 Write-Host -ForegroundColor DarkGray "================================================================="
-Write-Host -ForegroundColor Cyan "Add-WindowsDriver.offlineservicing"
+Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Add-WindowsDriver.offlineservicing"
 Write-Host -ForegroundColor DarkGray "Apply Drivers with Use-WindowsUnattend"
 Add-WindowsDriver.offlineservicing
 #=======================================================================
@@ -353,7 +351,7 @@ Add-WindowsDriver.offlineservicing
 #=======================================================================
 if ($Global:OSDCloudManufacturer -in ('HP','Lenovo')) {
     Write-Host -ForegroundColor DarkGray "================================================================="
-    Write-Host -ForegroundColor Cyan "Add-StagedDriverPack.specialize"
+    Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Add-StagedDriverPack.specialize"
     Write-Host -ForegroundColor DarkGray "Required for HP and Lenovo devices"
     Add-StagedDriverPack.specialize
 }
@@ -361,7 +359,7 @@ if ($Global:OSDCloudManufacturer -in ('HP','Lenovo')) {
 #   Save-OSDCloud.offlineos.modules
 #=======================================================================
 Write-Host -ForegroundColor DarkGray "================================================================="
-Write-Host -ForegroundColor Cyan "Save-OSDCloud.offlineos.modules"
+Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Save-OSDCloud.offlineos.modules"
 Write-Host -ForegroundColor DarkGray "PowerShell Modules and Scripts"
 Save-OSDCloud.offlineos.modules
 #=======================================================================
@@ -369,7 +367,7 @@ Save-OSDCloud.offlineos.modules
 #=======================================================================
 if ($Global:OSDCloudAutoPilotProfile) {
     Write-Host -ForegroundColor DarkGray "================================================================="
-    Write-Host -ForegroundColor Cyan "AutoPilotConfigurationFile.json"
+    Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) AutoPilotConfigurationFile.json"
 
     $PathAutoPilot = 'C:\Windows\Provisioning\AutoPilot'
 

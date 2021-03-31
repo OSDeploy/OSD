@@ -24,7 +24,6 @@ https://osdcloud.osdeploy.com
 function Edit-OSDCloud.winpe {
     [CmdletBinding()]
     param (
-        [Parameter(ValueFromPipelineByPropertyName = $true)]
         [string]$WorkspacePath,
 
         [string[]]$DriverPath,

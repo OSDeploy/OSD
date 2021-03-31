@@ -15,6 +15,7 @@ function Select-OSDCloud.autopilotprofiles {
     [CmdletBinding()]
     param ()
 
+    $i = $null
     $GetOSDCloudOfflineAutoPilotProfiles = Get-OSDCloud.autopilotprofiles
 
     if ($GetOSDCloudOfflineAutoPilotProfiles) {

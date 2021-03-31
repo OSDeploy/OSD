@@ -2,6 +2,10 @@
 function Get-FeatureUpdate {
     [CmdletBinding()]
     param (
+        [ValidateSet('Retail','Volume')]
+        [Alias('License')]
+        [string]$OSLicense = 'Volume',
+
         [ValidateSet('2009','2004','1909','1903','1809')]
         [Alias('Build')]
         [string]$OSBuild = '2009',
@@ -15,8 +19,8 @@ function Get-FeatureUpdate {
             'sl-si','sr-latn-rs','sv-se','th-th','tr-tr',
             'uk-ua','zh-cn','zh-tw'
         )]
-        [Alias('Culture')]
-        [string]$OSCulture = 'en-us'
+        [Alias('Culture','OSCulture')]
+        [string]$OSLanguage = 'en-us'
     )
     #=======================================================================
     #   Import Local FeatureUpdates
@@ -29,8 +33,16 @@ function Get-FeatureUpdate {
         Where-Object {$_.UpdateOS -eq 'Windows 10'} | `
         Where-Object {$_.UpdateBuild -eq $OSBuild} | `
         Where-Object {$_.UpdateArch -eq 'x64'} | `
-        Where-Object {$_.Title -match 'business'} | `
-        Where-Object {$_.Title -match $OSCulture}
+        Where-Object {$_.Title -match $OSLanguage}
+    #=======================================================================
+    #   $OSLicense
+    #=======================================================================
+    if ($OSLicense -eq 'Retail') {
+        $GetFeatureUpdate = $GetFeatureUpdate | Where-Object {$_.Title -match 'consumer'}
+    }
+    else {
+        $GetFeatureUpdate = $GetFeatureUpdate | Where-Object {$_.Title -match 'business'}
+    }
     #=======================================================================
     #   Pick and Sort
     #=======================================================================

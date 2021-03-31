@@ -17,7 +17,7 @@ https://osdcloud.osdeploy.com
 function New-OSDCloud.workspace {
     [CmdletBinding()]
     param (
-        [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
+        [Parameter(Mandatory = $true)]
         [string]$WorkspacePath
     )
 

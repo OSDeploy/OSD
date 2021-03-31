@@ -1,9 +1,9 @@
 function Save-FeatureUpdate {
     [CmdletBinding()]
     param (
-        [Parameter(ValueFromPipeline = $true)]
-        [Alias ('DownloadFolder','Path')]
-        [string]$DownloadPath = 'C:\OSDCloud\OS',
+        [ValidateSet('Retail','Volume')]
+        [Alias('License')]
+        [string]$OSLicense = 'Volume',
 
         [ValidateSet('2009','2004','1909','1903','1809')]
         [Alias('Build')]
@@ -18,13 +18,17 @@ function Save-FeatureUpdate {
             'sl-si','sr-latn-rs','sv-se','th-th','tr-tr',
             'uk-ua','zh-cn','zh-tw'
         )]
-        [Alias('Culture')]
-        [string]$OSCulture = 'en-us'
+        [Alias('Culture','OSCulture')]
+        [string]$OSLanguage = 'en-us',
+        
+        [Parameter(ValueFromPipeline = $true)]
+        [Alias ('DownloadFolder','Path')]
+        [string]$DownloadPath = 'C:\OSDCloud\OS'
     )
     #=======================================================================
     #   Get-FeatureUpdate
     #=======================================================================
-    $GetFeatureUpdate = Get-FeatureUpdate -OSBuild $OSBuild -OSCulture $OSCulture
+    $GetFeatureUpdate = Get-FeatureUpdate -OSLicense $OSLicense -OSBuild $OSBuild -OSLanguage $OSLanguage
     #=======================================================================
     #   SaveWebFile
     #=======================================================================
