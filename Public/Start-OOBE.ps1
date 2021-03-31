@@ -1,3 +1,15 @@
+<#
+.SYNOPSIS
+When used in OOBE, this function will download all the required AutoPilot Modules
+
+.Description
+When used in OOBE, this function will download all the required AutoPilot Modules
+
+.LINK
+https://osd.osdeploy.com/module/functions/oobe
+
+.NOTES
+#>
 function Start-OOBE.autopilot {
     [CmdletBinding()]
     param ()
@@ -56,4 +68,58 @@ function Start-OOBE.autopilot {
     Set-ExecutionPolicy RemoteSigned -Force
     Start-Process Sysprep.exe -WorkingDirectory "$env:SystemRoot\System32\Sysprep" -ArgumentList "/oobe /reboot"
     $Error.Clear()
+}
+<#
+.SYNOPSIS
+When used in OOBE, this function will open the URI Shortcut to Settings
+
+.Description
+When used in OOBE, this function will open the URI Shortcut to Settings
+
+.LINK
+https://osd.osdeploy.com/module/functions/oobe
+
+.NOTES
+#>
+function Start-OOBE.settings {
+    [CmdletBinding()]
+    param ()
+    #=======================================================================
+    #	Block
+    #=======================================================================
+    Block-StandardUser
+    Block-PowerShellVersionLt5
+    Block-WinPE
+    #=======================================================================
+    #	Start-Process
+    #=======================================================================
+    Start-Process ms-settings:
+    #=======================================================================
+}
+<#
+.SYNOPSIS
+When used in OOBE, this function will open the URI Shortcut to Wireless Networks
+
+.Description
+When used in OOBE, this function will open the URI Shortcut to Wireless Networks
+
+.LINK
+https://osd.osdeploy.com/module/functions/oobe
+
+.NOTES
+#>
+function Start-OOBE.wifi {
+    [CmdletBinding()]
+    param ()
+    #=======================================================================
+    #	Block
+    #=======================================================================
+    Block-StandardUser
+    Block-PowerShellVersionLt5
+    Block-WinPE
+    #=======================================================================
+    #	Start-Process
+    #=======================================================================
+    Start-Process ms-availablenetworks:
+    #=======================================================================
 }
