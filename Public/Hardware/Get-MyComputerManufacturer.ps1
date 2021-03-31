@@ -12,13 +12,13 @@ Returns a brief Computer Manufacturer
 https://osd.osdeploy.com/module/functions/getmy
 
 .NOTES
+21.3.31 Added Panasonic
 21.3.9  Updated Microsoft
 21.2.2  Initial Release
 #>
 function Get-MyComputerManufacturer {
     [CmdletBinding()]
     param (
-        #Normalize the Return
         [switch]$Brief
     )
     $GetMyComputerManufacturer = ((Get-CimInstance -ClassName CIM_ComputerSystem).Manufacturer).Trim()
@@ -31,6 +31,7 @@ function Get-MyComputerManufacturer {
         elseif ($GetMyComputerManufacturer -match 'Hewlett Packard') {$GetMyComputerManufacturer = 'HP'}
         elseif ($GetMyComputerManufacturer -match 'HP') {$GetMyComputerManufacturer = 'HP'}
         elseif ($GetMyComputerManufacturer -match 'Microsoft') {$GetMyComputerManufacturer = 'Microsoft'}
+        elseif ($GetMyComputerManufacturer -match 'Panasonic') {$GetMyComputerManufacturer = 'Panasonic'}
         elseif ($GetMyComputerManufacturer -match 'to be filled') {$GetMyComputerManufacturer = 'Generic'}
     }
 

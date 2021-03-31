@@ -1,3 +1,6 @@
+#https://pc-dl.panasonic.co.jp/itn/drivers/driver_packages.html
+#https://pc-dl.panasonic.co.jp/dl/search?dc%5B%5D=002017
+
 function Get-MyDriverPack {
     [CmdletBinding()]
     param (
@@ -12,9 +15,6 @@ function Get-MyDriverPack {
     #=======================================================================
     #   Action
     #=======================================================================
-    Write-Verbose "Get-MyLenovoDriverPack: This function is currently in development"
-    Write-Verbose "Get-MyLenovoDriverPack: Results are for Windows 10 x64 only"
-
     if ($Manufacturer -eq 'Dell') {
         $Result = Get-DellDriverPack | Where-Object {($_.Product -contains $Product)}
         $Result[0]
