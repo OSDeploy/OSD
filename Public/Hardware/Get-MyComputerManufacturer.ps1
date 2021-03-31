@@ -12,7 +12,7 @@ Returns a brief Computer Manufacturer
 https://osd.osdeploy.com/module/functions/getmy
 
 .NOTES
-21.3.31 Added Panasonic
+21.3.31 Added Panasonic information
 21.3.9  Updated Microsoft
 21.2.2  Initial Release
 #>
