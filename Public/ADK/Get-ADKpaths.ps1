@@ -25,12 +25,13 @@ function Get-ADKpaths {
     #=======================================================================
     $InstalledRoots32 = 'HKLM:\SOFTWARE\Microsoft\Windows Kits\Installed Roots'
     $InstalledRoots64 = 'HKLM:\SOFTWARE\WOW6432Node\Microsoft\Windows Kits\Installed Roots'
-
-    if (Test-Path $InstalledRoots32) {
-        $KitsRoot10 = Get-ItemPropertyValue -Path $InstalledRoots32 -Name 'KitsRoot10'
-    } elseif (Test-Path $InstalledRoots64) {
+    if (Test-Path $InstalledRoots64) {
         $KitsRoot10 = Get-ItemPropertyValue -Path $InstalledRoots64 -Name 'KitsRoot10'
-    } else {
+    }
+    elseif (Test-Path $InstalledRoots32) {
+        $KitsRoot10 = Get-ItemPropertyValue -Path $InstalledRoots64 -Name 'KitsRoot10'
+    }
+    else {
         Write-Warning "Unable to determine ADK Path"
         Break
     }

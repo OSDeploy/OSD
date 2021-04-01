@@ -205,7 +205,8 @@ FunctionsToExport =
 'Save-ZTIDriverPack',
 'Expand-StagedDriverPack',
 'Add-StagedDriverPack.specialize',
-'Test-IsVM'
+'Test-IsVM',
+'Get-ReAgentXml'
 
 # Cmdlets to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no cmdlets to export.
 CmdletsToExport = @()
