@@ -44,7 +44,7 @@ Clear-Disk.fixed -Force -Confirm:$false
 Non-Interactive. Clears all Local Disks without being prompted to Confirm
 
 .LINK
-https://osd.osdeploy.com/module/functions/disk/clear-disk
+https://osd.osdeploy.com/module/functions/disk
 
 .NOTES
 21.3.3      Added SizeGB
@@ -69,6 +69,8 @@ function Clear-Disk.fixed {
         [Parameter(ValueFromPipelineByPropertyName = $true)]
         [Alias('F')]
         [switch]$Force,
+
+        [switch]$NoResults,
 
         [Alias('W','Warn','Warning')]
         [switch]$ShowWarning
@@ -164,8 +166,13 @@ function Clear-Disk.fixed {
     #=======================================================================
     #	Return
     #=======================================================================
-    $ClearDisk | Select-Object -Property Number, BusType, MediaType,`
-    FriendlyName, PartitionStyle, NumberOfPartitions,`
-    @{Name='SizeGB';Expression={[int]($_.Size / 1000000000)}} | Format-Table
+    if ($PSBoundParameters.ContainsKey('NoResults')) {
+        #Don't return results
+    }
+    else {
+        $ClearDisk | Select-Object -Property Number, BusType, MediaType,`
+        FriendlyName, PartitionStyle, NumberOfPartitions,`
+        @{Name='SizeGB';Expression={[int]($_.Size / 1000000000)}} | Format-Table
+    }
     #=======================================================================
 }

@@ -9,7 +9,7 @@
 #   In WinPE, the latest version will be installed automatically
 #   In Windows, this script is stopped and you will need to update manually
 #=======================================================================
-[Version]$OSDVersionMin = '21.3.30.2'
+[Version]$OSDVersionMin = '21.4.1.1'
 
 if ((Get-Module -Name OSD -ListAvailable | `Sort-Object Version -Descending | Select-Object -First 1).Version -lt $OSDVersionMin) {
     Write-Warning "OSDCloud requires OSD $OSDVersionMin or newer"
@@ -106,13 +106,24 @@ if (Get-Disk.usb) {
 #=======================================================================
 Write-Host -ForegroundColor DarkGray "========================================================================="
 Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Clear-Disk.fixed -Force"
-Clear-Disk.fixed -Force -ErrorAction Stop
+Clear-Disk.fixed -Force -NoResults -ErrorAction Stop
 #=======================================================================
 #   New-OSDisk
 #=======================================================================
 Write-Host -ForegroundColor DarkGray "========================================================================="
 Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) New-OSDisk -Force"
-New-OSDisk -Force -ErrorAction Stop
+if (Test-IsVM) {
+    New-OSDisk -NoRecoveryPartition -Force -ErrorAction Stop
+    Write-Host "=========================================================================" -ForegroundColor Cyan
+    Write-Host "| SYSTEM | MSR |                    WINDOWS                             |" -ForegroundColor Cyan
+    Write-Host "=========================================================================" -ForegroundColor Cyan
+}
+else {
+    New-OSDisk -Force -ErrorAction Stop
+    Write-Host "=========================================================================" -ForegroundColor Cyan
+    Write-Host "| SYSTEM | MSR |                    WINDOWS                  | RECOVERY |" -ForegroundColor Cyan
+    Write-Host "=========================================================================" -ForegroundColor Cyan
+}
 Start-Sleep -Seconds 5
 if (-NOT (Get-PSDrive -Name 'C')) {
     Write-Warning "Disk does not seem to be ready.  Can't continue"

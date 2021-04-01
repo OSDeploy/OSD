@@ -170,7 +170,7 @@ Windows Registry Editor Version 5.00
     Copy-Item -Path $WimSourcePath -Destination $BootWim -Force
     #=======================================================================
     #   Download wgl4_boot.ttf
-    #   This is used to resolve issues with WinPE Resolutions in 2004/2009
+    #   This is used to resolve issues with WinPE Resolutions in 2004/20H2
     #=======================================================================
     if (Test-WebConnection -Uri 'https://github.com/OSDeploy/OSDCloud/raw/main/Media/boot/fonts/wgl4_boot.ttf') {
         Write-Verbose "Repairing bad WinPE resolution by replacing wgl4_boot.ttf"

@@ -46,9 +46,9 @@ https://osdcloud.osdeploy.com/
 function Start-OSDCloud {
     [CmdletBinding(DefaultParameterSetName = 'Module')]
     param (
-        [ValidateSet('2009','2004','1909','1903','1809')]
+        [ValidateSet('21H1','20H2','2004','1909','1903','1809')]
         [Alias('Build')]
-        [string]$OSBuild = '2009',
+        [string]$OSBuild,
 
         [ValidateSet('Home','Home N','Home Single Language','Education','Education N','Enterprise','Enterprise N','Pro','Pro N')]
         [Alias('Edition')]
@@ -146,7 +146,7 @@ function Start-OSDCloud {
     }
     else {
         Write-Host -ForegroundColor Cyan "Menu"
-        $OSBuildNames = @('2009','2004','1909','1903','1809')
+        $OSBuildNames = @('21H1','20H2','2004','1909','1903','1809')
         
         $i = $null
         $OSBuildMenu = foreach ($Item in $OSBuildNames) {

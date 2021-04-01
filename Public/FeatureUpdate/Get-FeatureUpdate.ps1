@@ -6,9 +6,9 @@ function Get-FeatureUpdate {
         [Alias('License')]
         [string]$OSLicense = 'Volume',
 
-        [ValidateSet('2009','2004','1909','1903','1809')]
+        [ValidateSet('21H1','20H2','2004','1909','1903','1809')]
         [Alias('Build')]
-        [string]$OSBuild = '2009',
+        [string]$OSBuild = '20H2',
 
         [ValidateSet (
             'ar-sa','bg-bg','cs-cz','da-dk','de-de','el-gr',

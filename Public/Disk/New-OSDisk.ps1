@@ -180,11 +180,11 @@ function New-OSDisk {
     #=======================================================================
     #	Display Disk Information
     #=======================================================================
-    $GetDisk | Select-Object -Property Number, BusType, MediaType, FriendlyName,`
-    PartitionStyle, NumberOfPartitions,`
-    @{Name='SizeGB';Expression={[int]($_.Size / 1000000000)}} | Format-Table
-    
     if ($IsForcePresent -eq $false) {
+        $GetDisk | Select-Object -Property Number, BusType, MediaType, FriendlyName,`
+        PartitionStyle, NumberOfPartitions,`
+        @{Name='SizeGB';Expression={[int]($_.Size / 1000000000)}} | Format-Table
+        
         Break
     }
     #=======================================================================
@@ -205,11 +205,6 @@ function New-OSDisk {
     if (($GetDisk | Measure-Object).Count -eq 1) {
         $OSDisk = $GetDisk
     } else {
-
-
-
-
-        
         Write-Host ""
         foreach ($Item in $GetDisk) {
             Write-Host "[$($Item.Number)]" -ForegroundColor Green -BackgroundColor Black -NoNewline
@@ -330,41 +325,11 @@ function New-OSDisk {
         LabelWindows            = $LabelWindows
         PartitionStyle          = $PartitionStyle
         SizeRecovery            = $SizeRecovery
-        NoRecoveryPartition   = $NoRecoveryPartition
+        NoRecoveryPartition     = $NoRecoveryPartition
     }
     New-OSDPartitionWindows @WindowsPartition
     #=======================================================================
     #	DataDisks
     #=======================================================================
-<#     if ($DataDisks) {
-        Write-Host ""
-        foreach ($Item in $DataDisks) {
-            Write-Host "[C]"  -ForegroundColor Green -BackgroundColor Black -NoNewline
-            Write-Host " Disk $($Item.Number) $($Item.BusType) $($Item.MediaType) $($Item.FriendlyName) [$($Item.NumberOfPartitions) $($Item.PartitionStyle) Partitions]"
-            Write-Host "[S]" -ForegroundColor Green -BackgroundColor Black  -NoNewline
-            Write-Host " Skip this Disk"
-            Write-Host "[X]" -ForegroundColor Green -BackgroundColor Black  -NoNewline
-            Write-Host " Exit"
-            Write-Host "This drive is a DATA disk and it should be cleaned"
-
-            do {$ConfirmClearDisk = Read-Host "Press C to CLEAR this Disk, S to Skip, or X to Exit"}
-            until (($ConfirmClearDisk -eq 'C') -or ($ConfirmClearDisk -eq 'S') -or ($ConfirmClearDisk -eq 'X'))
-            if ($ConfirmClearDisk -eq 'C') {
-                Write-Verbose "Cleaning Disk $($Item.Number)"
-                Diskpart-Clean -DiskNumber $Item.Number
-
-                Write-Verbose "Initializing Disk $($Item.Number) as $PartitionStyle"
-                $Item | Initialize-Disk -PartitionStyle $PartitionStyle
-            }
-            if ($ConfirmClearDisk -eq 'S') {
-                Write-Warning "Skip DiskNumber $($Item.Number) "
-            }
-            if ($ConfirmClearDisk -eq 'X') {
-                Write-Warning "Exit"
-                Break
-            }
-            Write-Host ""
-        }
-    } #>
     Get-Disk.osd | Select-Object -Property Number, BusType, MediaType, FriendlyName, PartitionStyle, NumberOfPartitions, @{Name='SizeGB';Expression={[int]($_.Size / 1000000000)}} | Format-Table
 }
