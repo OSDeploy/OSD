@@ -169,10 +169,10 @@ function Save-MyDriverPack {
             }
         }
         #=======================================================================
-        #   Add-StagedDriverPack.specialize
+        #   Enable-SpecializeDriverPack
         #=======================================================================
 <#         if ($env:SystemDrive -eq 'X:') {
-            Add-StagedDriverPack.specialize
+            Enable-SpecializeDriverPack
         } #>
         #=======================================================================
     }

@@ -7,7 +7,7 @@
 RootModule = 'OSD.psm1'
 
 # Version number of his module.
-ModuleVersion = '21.4.4.1'
+ModuleVersion = '21.4.5.1'
 
 # Supported PSEditions
 # CompatiblePSEditions = @()
@@ -203,7 +203,7 @@ FunctionsToExport =
 'Expand-ZTIDriverPack',
 'Save-ZTIDriverPack',
 'Expand-StagedDriverPack',
-'Add-StagedDriverPack.specialize',
+'Enable-SpecializeDriverPack',
 'Test-IsVM',
 'Get-CatalogDellApplication',
 'Get-CatalogDellBios',

@@ -1,4 +1,4 @@
-function Add-StagedDriverPack.specialize {
+function Enable-SpecializeDriverPack {
     [CmdletBinding()]
     param ()
 $UnattendXml = @'
