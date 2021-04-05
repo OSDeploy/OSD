@@ -40,7 +40,7 @@ function Save-OSDCloud.usb {
         [Alias('Culture','OSCulture')]
         [string]$OSLanguage,
 
-        [ValidateSet('Dell','HP','Lenovo')]
+        [ValidateSet('Dell','HP','Lenovo','Microsoft')]
         [string]$Manufacturer = (Get-MyComputerManufacturer -Brief),
         [string]$Product = (Get-MyComputerProduct)
     )

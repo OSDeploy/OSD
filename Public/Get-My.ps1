@@ -9,7 +9,7 @@ Returns the Bios SerialNumber
 Returns a short version removing soem non-standard characters
 
 .LINK
-https://osd.osdeploy.com/module/functions/getmy
+https://osd.osdeploy.com/module/functions
 
 .NOTES
 #>
@@ -40,7 +40,7 @@ Returns the Bios Version
 Returns the Bios Version
 
 .LINK
-https://osd.osdeploy.com/module/functions/getmy
+https://osd.osdeploy.com/module/functions
 
 .NOTES
 #>
@@ -61,7 +61,7 @@ Returns the Computer Manufacturer
 Returns a shortened Computer Manufacturer
 
 .LINK
-https://osd.osdeploy.com/module/functions/getmy
+https://osd.osdeploy.com/module/functions
 
 .NOTES
 #>
@@ -70,20 +70,23 @@ function Get-MyComputerManufacturer {
     param (
         [switch]$Brief
     )
-    $Result = ((Get-CimInstance -ClassName CIM_ComputerSystem).Manufacturer).Trim()
-    
+    #Should always opt for CIM over WMI
+    $MyComputerManufacturer = ((Get-CimInstance -ClassName CIM_ComputerSystem).Manufacturer).Trim()
+    Write-Verbose $MyComputerManufacturer
+
+    #Sometimes vendors are not always consistent, i.e. Dell or Dell Inc.
+    #So need to detmine the Brief Manufacturer to normalize results
     if ($Brief -eq $true) {
-        if ($null -eq $Result) {$Result = 'Unknown'}
-        elseif ($Result -eq '') {$Result = 'Unknown'}
-        elseif ($Result -match 'Dell') {$Result = 'Dell'}
-        elseif ($Result -match 'Lenovo') {$Result = 'Lenovo'}
-        elseif ($Result -match 'Hewlett Packard') {$Result = 'HP'}
-        elseif ($Result -match 'HP') {$Result = 'HP'}
-        elseif ($Result -match 'Microsoft') {$Result = 'Microsoft'}
-        elseif ($Result -match 'Panasonic') {$Result = 'Panasonic'}
-        elseif ($Result -match 'to be filled') {$Result = 'Generic'}
+        if ($MyComputerManufacturer -match 'Dell') {$MyComputerManufacturer = 'Dell'}
+        if ($MyComputerManufacturer -match 'Lenovo') {$MyComputerManufacturer = 'Lenovo'}
+        if ($MyComputerManufacturer -match 'Hewlett Packard') {$MyComputerManufacturer = 'HP'}
+        if ($MyComputerManufacturer -match 'HP') {$MyComputerManufacturer = 'HP'}
+        if ($MyComputerManufacturer -match 'Microsoft') {$MyComputerManufacturer = 'Microsoft'}
+        if ($MyComputerManufacturer -match 'Panasonic') {$MyComputerManufacturer = 'Panasonic'}
+        if ($MyComputerManufacturer -match 'to be filled') {$MyComputerManufacturer = 'OEM'}
+        if ($null -eq $MyComputerManufacturer) {$MyComputerManufacturer = 'OEM'}
     }
-    $Result
+    $MyComputerManufacturer
 }
 <#
 .SYNOPSIS
@@ -96,7 +99,7 @@ Returns the Computer Model
 Returns a modified Computer Model for Generic and Unknown
 
 .LINK
-https://osd.osdeploy.com/module/functions/getmy
+https://osd.osdeploy.com/module/functions
 
 .NOTES
 #>
@@ -107,18 +110,22 @@ function Get-MyComputerModel {
         [switch]$Brief
     )
 
-    if ((Get-MyComputerManufacturer -Brief) -match 'Lenovo') {
-        $Result = ((Get-CimInstance -ClassName Win32_ComputerSystemProduct).Version).Trim()
-    } else {
-        $Result = ((Get-CimInstance -ClassName CIM_ComputerSystem).Model).Trim()
+    $MyComputerManufacturer = Get-MyComputerManufacturer -Brief
+
+    if ($MyComputerManufacturer -eq 'Lenovo') {
+        $MyComputerModel = ((Get-CimInstance -ClassName Win32_ComputerSystemProduct).Version).Trim()
     }
+    else {
+        $MyComputerModel = ((Get-CimInstance -ClassName CIM_ComputerSystem).Model).Trim()
+    }
+    Write-Verbose $MyComputerModel
 
     if ($Brief -eq $true) {
-        if ($null -eq $Result) {$Result = 'Unknown'}
-        elseif ($Result -eq '') {$Result = 'Unknown'}
-        elseif ($Result -match 'to be filled') {$Result = 'Generic'}
+        if ($MyComputerModel -eq '') {$MyComputerModel = 'OEM'}
+        if ($MyComputerModel -match 'to be filled') {$MyComputerModel = 'OEM'}
+        if ($null -eq $MyComputerModel) {$MyComputerModel = 'OEM'}
     }
-    $Result
+    $MyComputerModel
 }
 <#
 .SYNOPSIS
@@ -128,7 +135,7 @@ Returns the ComputerSystem Product (SystemSku, BaseBoardProduct)
 Returns the ComputerSystem Product (SystemSku, BaseBoardProduct)
 
 .LINK
-https://osd.osdeploy.com/module/functions/getmy
+https://osd.osdeploy.com/module/functions
 
 .NOTES
 #>
@@ -136,24 +143,27 @@ function Get-MyComputerProduct {
     [CmdletBinding()]
     param ()
 
-    $Manufacturer = Get-MyComputerManufacturer -Brief
+    $MyComputerManufacturer = Get-MyComputerManufacturer -Brief
 
-    if ($Manufacturer -match 'Dell') {
-        ((Get-WmiObject -Class Win32_ComputerSystem).SystemSKUNumber).Trim()
+    if ($MyComputerManufacturer -eq 'Dell') {
+        ((Get-CimInstance -ClassName CIM_ComputerSystem).SystemSKUNumber).Trim()
     }
-    elseif ($Manufacturer -match 'HP')  {
+    elseif ($MyComputerManufacturer -eq 'HP')  {
         ((Get-WmiObject -Class Win32_BaseBoard).Product).Trim()
     }
-    elseif ($Manufacturer -match 'Lenovo')  {
+    elseif ($MyComputerManufacturer -eq 'Lenovo')  {
+        #Thanks Maurice
         ((Get-WmiObject -Class Win32_ComputerSystem | Select-Object -ExpandProperty Model).SubString(0, 4)).Trim()
     }
-    elseif ($Manufacturer -match 'Microsoft')  {
-        (Get-WmiObject -Namespace root\wmi -Class MS_SystemInformation | Select-Object -ExpandProperty SystemSKU).Replace("_", " ")
+    elseif ($MyComputerManufacturer -eq 'Microsoft')  {
+        #Surface_Book
+        #Surface_Pro_3
+        (Get-CimInstance -ClassName CIM_ComputerSystem).SystemSKUNumber
+        #Surface Book
+        #Surface Pro 3
+        #((Get-WmiObject -Class Win32_BaseBoard).Product).Trim()
     }
     else {
-        (Get-CIMInstance -ClassName MS_SystemInformation -NameSpace root\WMI).BaseBoardProduct
+        Get-MyComputerModel -Brief
     }
 }
-
-
-

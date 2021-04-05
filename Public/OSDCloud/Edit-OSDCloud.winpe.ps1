@@ -31,7 +31,9 @@ function Edit-OSDCloud.winpe {
         [ValidateSet('Dell','HP','Nutanix','VMware')]
         [string[]]$CloudDriver,
 
-        [switch]$CustomOSD
+        [string[]]$Modules,
+
+        [switch]$CopyOSDModule
     )
     #=======================================================================
     #	Start the Clock
@@ -186,9 +188,30 @@ start powershell.exe
         Add-Content -Path "$MountPath\Windows\System32\Startnet.cmd" -Value 'start powershell.exe' -Force
     } #>
     #=======================================================================
+    #   Modules
+    #=======================================================================
+    foreach ($Module in $Modules) {
+        if ($Module -eq 'DellBiosProvider') {
+            if (Test-Path "$env:SystemRoot\System32\msvcp140.dll") {
+                Write-Verbose "Copying $env:SystemRoot\System32\msvcp140.dll to WinPE"
+                Copy-Item -Path "$env:SystemRoot\System32\msvcp140.dll" -Destination "$MountPath\System32" -Force | Out-Null
+            }
+            if (Test-Path "$env:SystemRoot\System32\vcruntime140.dll") {
+                Write-Verbose "Copying $env:SystemRoot\System32\vcruntime140.dll to WinPE"
+                Copy-Item -Path "$env:SystemRoot\System32\vcruntime140.dll" -Destination "$MountPath\System32" -Force | Out-Null
+            }
+            if (Test-Path "$env:SystemRoot\System32\msvcp140.dll") {
+                Write-Verbose "Copying $env:SystemRoot\System32\vcruntime140_1.dll to WinPE"
+                Copy-Item -Path "$env:SystemRoot\System32\vcruntime140_1.dll" -Destination "$MountPath\System32" -Force | Out-Null
+            }
+        }
+        Write-Verbose -Verbose "Saving $Module to $MountPath\Program Files\WindowsPowerShell\Modules"
+        Save-Module -Name $Module -Path "$MountPath\Program Files\WindowsPowerShell\Modules" -Force
+    }
+    #=======================================================================
     #   Install OSD Module
     #=======================================================================
-    if ($PSBoundParameters.ContainsKey('CustomOSD')) {
+    if ($PSBoundParameters.ContainsKey('CopyOSDModule')) {
         Write-Verbose -Verbose "Copy-PSModuleToWindowsImage -Name OSD -Path $MountPath"
         Copy-PSModuleToWindowsImage -Name OSD -Path $MountPath
     }

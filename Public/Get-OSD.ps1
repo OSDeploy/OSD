@@ -81,7 +81,7 @@ function Get-OSD {
 
     Write-Host -ForegroundColor DarkCyan    '=================================' -NoNewline
     Write-Host -ForegroundColor Cyan        '21.3.4'
-    Write-Host -ForegroundColor White       'Get-DellCatalogPC                      ' -NoNewline
+    Write-Host -ForegroundColor White       'Get-CatalogDellSystem                      ' -NoNewline
     Write-Host -ForegroundColor Gray        'Downloads the Dell CatalogPC.xml and converts to an PSObject'
     Write-Host -ForegroundColor White       'Get-MyDellBios                         ' -NoNewline
     Write-Host -ForegroundColor Gray        'Gets you information about the latest BIOS Update for your Dell computer'

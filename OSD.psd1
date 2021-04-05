@@ -7,7 +7,7 @@
 RootModule = 'OSD.psm1'
 
 # Version number of his module.
-ModuleVersion = '21.4.1.1'
+ModuleVersion = '21.4.4.1'
 
 # Supported PSEditions
 # CompatiblePSEditions = @()
@@ -99,10 +99,9 @@ FunctionsToExport =
 'Save-MyDellBios',
 'Save-MyDellBiosFlash64W',
 'Update-MyDellBios',
-'Get-DellCatalogPC',#DELL DRIVERS
 'Get-MyDellDriverCab',
 'Save-MyDellDriverCab',
-'Backup-Disk.ffu',#DISK
+'Backup-Disk.ffu',
 'Clear-Disk.fixed',
 'Clear-Disk.usb',
 'Get-DataStore',
@@ -206,7 +205,18 @@ FunctionsToExport =
 'Expand-StagedDriverPack',
 'Add-StagedDriverPack.specialize',
 'Test-IsVM',
-'Get-ReAgentXml'
+'Get-CatalogDellApplication',
+'Get-CatalogDellBios',
+'Get-CatalogDellDriver',
+'Get-CatalogDellDriverPack',
+'Get-CatalogDellFirmware',
+'Get-CatalogDellSystem',
+'Get-CatalogHPDriverPack',
+'Get-CatalogLenovoDriverPack',
+'Get-CatalogMicrosoftDriverPack',
+'Get-ReAgentXml',
+'Get-MicrosoftDriverPack',
+'Find-InOSDModule'
 
 # Cmdlets to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no cmdlets to export.
 CmdletsToExport = @()

@@ -7,7 +7,7 @@ function Get-MyDellDrivers {
     $SystemSKU = $((Get-WmiObject -Class Win32_ComputerSystem).SystemSKUNumber).Trim()
 	$BIOSVersion = $((Get-WmiObject -Class Win32_BIOS).SMBIOSBIOSVersion).Trim()
 
-    $GetDellCatalogPC = Get-DellCatalogPC -UpdateType Driver
+    $GetDellCatalogPC = Get-CatalogDellSystem -UpdateType Driver
 
     $GetMyDellDrivers = $GetDellCatalogPC | Where-Object {$_.SupportedSystemID -contains $SystemSKU}
 

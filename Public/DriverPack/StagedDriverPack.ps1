@@ -133,6 +133,23 @@ function Expand-StagedDriverPack {
                 }
             }
             #=======================================================================
+            #   MSI
+            #=======================================================================
+            if ($Item.Extension -eq '.msi') {
+                $DateStamp = Get-Date -Format yyyyMMddTHHmmss
+                $logFile = '{0}-{1}.log' -f $ExpandFile,$DateStamp
+                $MSIArguments = @(
+                    "/i"
+                    ('"{0}"' -f $ExpandFile)
+                    "/qb"
+                    "/norestart"
+                    "/L*v"
+                    $logFile
+                )
+                Start-Process "msiexec.exe" -ArgumentList $MSIArguments -Wait -NoNewWindow
+                Continue
+            }
+            #=======================================================================
             #   Zip
             #=======================================================================
             if ($Item.Extension -eq '.zip') {

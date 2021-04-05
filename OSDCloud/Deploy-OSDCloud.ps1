@@ -9,7 +9,7 @@
 #   In WinPE, the latest version will be installed automatically
 #   In Windows, this script is stopped and you will need to update manually
 #=======================================================================
-[Version]$OSDVersionMin = '21.4.1.1'
+[Version]$OSDVersionMin = '21.4.4.1'
 
 if ((Get-Module -Name OSD -ListAvailable | `Sort-Object Version -Descending | Select-Object -First 1).Version -lt $OSDVersionMin) {
     Write-Warning "OSDCloud requires OSD $OSDVersionMin or newer"
@@ -258,7 +258,7 @@ if (-NOT (Test-Path 'C:\Windows\Setup\Scripts')) {
 Write-Host -ForegroundColor DarkGray "========================================================================="
 Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Save-MyDriverPack"
 
-if ($Global:OSDCloudManufacturer -in ('Dell','HP','Lenovo')) {
+if ($Global:OSDCloudManufacturer -in ('Dell','HP','Lenovo','Microsoft')) {
     $GetMyDriverPack = Get-MyDriverPack -Manufacturer $Global:OSDCloudManufacturer -Product $Global:OSDCloudProduct
 }
 else {
@@ -275,7 +275,7 @@ if ($GetMyDriverPack) {
     if ($GetOSDCloudOfflineFile) {
         Write-Host -ForegroundColor DarkGray "$($GetOSDCloudOfflineFile.FullName)"
         Copy-Item -Path $GetOSDCloudOfflineFile.FullName -Destination 'C:\Drivers' -Force
-        if ($Global:OSDCloudManufacturer -in ('Dell','HP','Lenovo')) {
+        if ($Global:OSDCloudManufacturer -in ('Dell','HP','Lenovo','Microsoft')) {
             $SaveMyDriverPack = Save-MyDriverPack -DownloadPath "C:\Drivers" -Expand -Manufacturer $Global:OSDCloudManufacturer -Product $Global:OSDCloudProduct
         }
         else {
@@ -284,7 +284,7 @@ if ($GetMyDriverPack) {
     }
     elseif (Test-WebConnection -Uri $GetMyDriverPack.DriverPackUrl) {
         Write-Host -ForegroundColor Yellow "$($GetMyDriverPack.DriverPackUrl)"
-        if ($Global:OSDCloudManufacturer -in ('Dell','HP','Lenovo')) {
+        if ($Global:OSDCloudManufacturer -in ('Dell','HP','Lenovo','Microsoft')) {
             $SaveMyDriverPack = Save-MyDriverPack -DownloadPath "C:\Drivers" -Expand -Manufacturer $Global:OSDCloudManufacturer -Product $Global:OSDCloudProduct
         }
         else {
@@ -360,10 +360,10 @@ Add-WindowsDriver.offlineservicing
 #=======================================================================
 #   Add-StagedDriverPack.specialize
 #=======================================================================
-if ($Global:OSDCloudManufacturer -in ('HP','Lenovo')) {
+if ($Global:OSDCloudManufacturer -in ('HP','Lenovo','Microsoft')) {
     Write-Host -ForegroundColor DarkGray "================================================================="
     Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Add-StagedDriverPack.specialize"
-    Write-Host -ForegroundColor DarkGray "Required for HP and Lenovo devices"
+    Write-Host -ForegroundColor DarkGray "Required for HP, Lenovo, and Microsoft devices"
     Add-StagedDriverPack.specialize
 }
 #=======================================================================
