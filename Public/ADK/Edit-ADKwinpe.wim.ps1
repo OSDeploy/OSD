@@ -20,27 +20,11 @@ function Edit-ADKwinpe.wim {
     #=======================================================================
     $StartTime = Get-Date
     #=======================================================================
-    #	Require WinOS
+    #	Blocks
     #=======================================================================
-    if ((Get-OSDGather -Property IsWinPE)) {
-        Write-Warning "$($MyInvocation.MyCommand) cannot be run from WinPE"
-        Break
-    }
-    #=======================================================================
-    #   Require Admin Rights
-    #=======================================================================
-    if ((Get-OSDGather -Property IsAdmin) -eq $false) {
-        Write-Warning "$($MyInvocation.MyCommand) requires Admin Rights ELEVATED"
-        Break
-    }
-    #=======================================================================
-    #   Require cURL
-    #=======================================================================
-    if (-NOT (Test-Path "$env:SystemRoot\System32\curl.exe")) {
-        Write-Warning "$($MyInvocation.MyCommand) could not find $env:SystemRoot\System32\curl.exe"
-        Write-Warning "Get a newer Windows version!"
-        Break
-    }
+    Block-WinPE
+    Block-StandardUser
+    Block-NoCurl
     #=======================================================================
     #	Set VerbosePreference
     #=======================================================================

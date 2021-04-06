@@ -88,12 +88,9 @@ function Get-OSDWinPE {
         [switch]$Shutdown
     )
     #=======================================================================
-    #	Require WinPE
+    #	Blocks
     #=======================================================================
-    if ((Get-OSDGather -Property IsWinPE) -eq $false) {
-        Write-Warning "$($MyInvocation.MyCommand) must be run in WinPE"
-        Break
-    }
+    Block-WinOS
     #=======================================================================
     #	Increase the Console Screen Buffer size
     #=======================================================================

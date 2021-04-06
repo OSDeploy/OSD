@@ -6,20 +6,12 @@ function Enable-PEWindowsImagePSGallery {
     )
 
     begin {
-        #=======================================================================
-        #	Require WinOS
-        #=======================================================================
-        if ((Get-OSDGather -Property IsWinPE)) {
-            Write-Warning "$($MyInvocation.MyCommand) cannot be run from WinPE"
-            Break
-        }
-        #=======================================================================
-        #   Require Admin Rights
-        #=======================================================================
-        if ((Get-OSDGather -Property IsAdmin) -eq $false) {
-            Write-Warning "$($MyInvocation.MyCommand) requires Admin Rights ELEVATED"
-            Break
-        }
+		#=======================================================================
+		#	Blocks
+		#=======================================================================
+		Block-WinOS
+		Block-StandardUser
+		#=======================================================================
         #=======================================================================
         #   Get-WindowsImage Mounted
         #=======================================================================
