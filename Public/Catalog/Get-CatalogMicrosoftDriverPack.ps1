@@ -365,7 +365,7 @@ $BaseCatalog = @'
         $GetItemCatalogLocalPath = Get-Item $CatalogLocalPath
 
 		#If the local is older than 1 day, delete it
-        if (((Get-Date) - $GetItemCatalogLocalPath.CreationTime).TotalDays -gt 1) {
+        if (((Get-Date) - $GetItemCatalogLocalPath.CreationTime).TotalHours -gt 12) {
             Write-Verbose "Removing previous Offline Catalog"
 		}
 		else {
