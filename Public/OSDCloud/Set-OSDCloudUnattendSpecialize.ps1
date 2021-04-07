@@ -1,6 +1,9 @@
-function Enable-OSDCloudSpecialize {
+function Set-OSDCloudUnattendSpecialize {
     [CmdletBinding()]
     param ()
+#=======================================================================
+#	UnattendXml
+#=======================================================================
 $UnattendXml = @'
 <?xml version="1.0" encoding="utf-8"?>
 <unattend xmlns="urn:schemas-microsoft-com:unattend">
@@ -22,20 +25,31 @@ $UnattendXml = @'
     #=======================================================================
     Block-WinOS
     Block-WindowsVersionNe10
-    Block-PowerShellVersionLt5  
+    Block-PowerShellVersionLt5
     #=======================================================================
-    #	Set Unattend in the Registry
+    #	Directories
+    #=======================================================================
+    if (-NOT (Test-Path 'C:\Windows\Panther')) {
+        New-Item -Path 'C:\Windows\Panther'-ItemType Directory -Force -ErrorAction Stop | Out-Null
+    }
+    #=======================================================================
+    #	Panther Unattend
+    #=======================================================================
+    $Panther = 'C:\Windows\Panther'
+    $UnattendPath = "$Panther\Start-OSDCloudSpecialize.xml"
+
+    Write-Verbose -Verbose "Setting $UnattendPath"
+    $UnattendXml | Out-File -FilePath $UnattendPath -Encoding utf8 -Force
+    #=======================================================================
+    #	Registry Unattend
     #   HKEY_LOCAL_MACHINE\System\Setup\UnattendFile
     #   Specifies a pointer in the registry to an answer file
     #   The answer file is not required to be named Unattend.xml
     #   https://docs.microsoft.com/en-us/windows-hardware/manufacture/desktop/windows-setup-automation-overview
-    #=======================================================================  
+    #=======================================================================
+    Write-Verbose -Verbose "Setting Unattend in Offline Registry"
     reg load HKLM\TempSYSTEM "C:\Windows\System32\Config\SYSTEM"
     reg add HKLM\TempSYSTEM\Setup /v UnattendFile /d "C:\Windows\Panther\Start-OSDCloudSpecialize.xml" /f
     reg unload HKLM\TempSYSTEM
-    #=======================================================================
-    #	Set Unattend
-    #=======================================================================
-    $UnattendXml | Out-File -FilePath "C:\Windows\Panther\Start-OSDCloudSpecialize.xml" -Encoding utf8 -Force
     #=======================================================================
 }

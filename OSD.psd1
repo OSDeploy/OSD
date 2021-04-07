@@ -193,8 +193,8 @@ FunctionsToExport =
 'Wait-WebConnection',
 'Get-OSDWinPE',#WINPE
 'Use-WinPEContent',
-'Use-WindowsUnattend.audit',
-'Use-WindowsUnattend.audit.autopilot',
+'Set-OSDCloudUnattendAuditMode',
+'Set-OSDCloudUnattendAuditModeAutopilot',
 'Add-WindowsDriver.offlineservicing',
 'Get-DellDriverPack',
 'Get-HpDriverPack',
@@ -217,8 +217,8 @@ FunctionsToExport =
 'Get-CatalogMicrosoftDriverPack',
 'Get-ReAgentXml',
 'Get-MicrosoftDriverPack',
-'Find-InOSDModule',
-'Enable-OSDCloudSpecialize',
+'Find-TextInModule',
+'Set-OSDCloudUnattendSpecialize',
 'Start-OSDCloudSpecialize',
 'Enable-OSDCloudODT'
 

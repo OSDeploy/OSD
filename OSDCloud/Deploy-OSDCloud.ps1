@@ -375,12 +375,12 @@ Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Ad
 Write-Host -ForegroundColor DarkGray "Apply Drivers with Use-WindowsUnattend"
 Add-WindowsDriver.offlineservicing
 #=======================================================================
-#   Enable-OSDCloudSpecialize
+#   Set-OSDCloudUnattendSpecialize
 #=======================================================================
 Write-Host -ForegroundColor DarkGray "================================================================="
-Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Enable-OSDCloudSpecialize"
+Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Set-OSDCloudUnattendSpecialize"
 Write-Host -ForegroundColor DarkGray "Enables Start-OSDCloudSpecialize"
-Enable-OSDCloudSpecialize
+Set-OSDCloudUnattendSpecialize
 #=======================================================================
 #   AutoPilotConfigurationFile.json
 #=======================================================================
