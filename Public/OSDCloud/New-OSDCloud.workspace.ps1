@@ -20,7 +20,6 @@ function New-OSDCloud.workspace {
         [Parameter(Mandatory = $true)]
         [string]$WorkspacePath
     )
-
     #=======================================================================
     #	Start the Clock
     #=======================================================================
@@ -30,22 +29,17 @@ function New-OSDCloud.workspace {
     #=======================================================================
     Block-WinPE
     Block-StandardUser
-	Block-NoCurl
-    #=======================================================================
-    #	Set VerbosePreference
-    #=======================================================================
-    #$CurrentVerbosePreference = $VerbosePreference
-    #$VerbosePreference = 'Continue'
+	  Block-NoCurl
     #=======================================================================
     #	Get-OSDCloud.template
     #=======================================================================
-    if (-NOT (Get-OSDCloud.template)) {
+    if (!(Get-OSDCloud.template)) {
         Write-Warning "Setting up a new OSDCloud.template"
         New-OSDCloud.template -Verbose
     }
 
     $OSDCloudTemplate = Get-OSDCloud.template
-    if (-NOT ($OSDCloudTemplate)) {
+    if (!($OSDCloudTemplate)) {
         Write-Warning "Something bad happened.  I have to go"
         Break
     }
@@ -58,14 +52,10 @@ function New-OSDCloud.workspace {
     #=======================================================================
     #	Setup Workspace
     #=======================================================================
-    if (-NOT (Test-Path $WorkspacePath)) {
+    if (!(Test-Path $WorkspacePath)) {
         New-Item -Path $WorkspacePath -ItemType Directory -Force -ErrorAction Stop | Out-Null
     }
     robocopy "$OSDCloudTemplate" "$WorkspacePath" *.* /e /ndl /xj /ndl /np /nfl /njh /njs /xf workspace.json
-    #=======================================================================
-    #   Restore VerbosePreference
-    #=======================================================================
-    #$VerbosePreference = $CurrentVerbosePreference
     #=======================================================================
     #	Complete
     #=======================================================================
@@ -79,8 +69,5 @@ function New-OSDCloud.workspace {
     #=======================================================================
     Write-Host -ForegroundColor Cyan        "OSDCloud Workspace created at $WorkspacePath"
     Write-Host -ForegroundColor Cyan        "Get-OSDCloud.workspace will return your last used WorkspacePath"
-
-    #explorer $WorkspacePath
-    #Return $WorkspacePath
     #=======================================================================
 }

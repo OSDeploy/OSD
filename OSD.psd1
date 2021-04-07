@@ -7,7 +7,7 @@
 RootModule = 'OSD.psm1'
 
 # Version number of his module.
-ModuleVersion = '21.4.5.1'
+ModuleVersion = '21.4.7.1'
 
 # Supported PSEditions
 # CompatiblePSEditions = @()
@@ -160,19 +160,20 @@ FunctionsToExport =
 'Start-OOBE.settings',
 'Start-OOBE.wifi',
 'Edit-OSDCloud.winpe',#OSDCLOUD
-'Get-OSDCloud.workspace',
+'Find-OSDCloudOfflineFile',
+'Find-OSDCloudOfflinePath',
 'Get-OSDCloud.template',
-'Get-OSDCloud.autopilotprofiles',
-'Get-OSDCloud.offline.file',
-'Get-OSDCloud.offline.path',
+'Get-OSDCloud.workspace',
+'Find-OSDCloudAutopilotFile',
+'Find-OSDCloudODTFile',
 'New-OSDCloud.iso',
 'New-OSDCloud.template',
 'New-OSDCloud.usb',
 'New-OSDCloud.workspace',
+'Save-OSDCloudOfflineModules',
 'Save-OSDCloud.usb',
-'Save-OSDCloud.offlineos.modules',
-'Select-AutoPilotJson',
-'Select-OSDCloud.autopilotprofiles',
+'Select-OSDCloudAutopilotFile',
+'Select-OSDCloudODTFile',
 'Set-OSDCloud.workspace',
 'Start-OSDCloud',
 'Test-OSDCloud.template',
@@ -216,7 +217,10 @@ FunctionsToExport =
 'Get-CatalogMicrosoftDriverPack',
 'Get-ReAgentXml',
 'Get-MicrosoftDriverPack',
-'Find-InOSDModule'
+'Find-InOSDModule',
+'Enable-OSDCloudSpecialize',
+'Start-OSDCloudSpecialize',
+'Enable-OSDCloudODT'
 
 # Cmdlets to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no cmdlets to export.
 CmdletsToExport = @()

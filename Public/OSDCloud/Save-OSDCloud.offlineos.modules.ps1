@@ -1,4 +1,4 @@
-function Save-OSDCloud.offlineos.modules {
+function Save-OSDCloudOfflineModules {
     [CmdletBinding()]
     param ()
 
@@ -29,7 +29,7 @@ function Save-OSDCloud.offlineos.modules {
         Copy-PSModuleToFolder -Name PowerShellGet -Destination "$PowerShellSavePath\Modules"
         Copy-PSModuleToFolder -Name WindowsAutoPilotIntune -Destination "$PowerShellSavePath\Modules"
     
-        $OSDCloudOfflinePath = Get-OSDCloud.offline.path
+        $OSDCloudOfflinePath = Find-OSDCloudOfflinePath
     
         foreach ($Item in $OSDCloudOfflinePath) {
             if (Test-Path "$($Item.FullName)\PowerShell\Required") {

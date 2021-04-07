@@ -1,4 +1,4 @@
-function Get-OSDCloud.offline.file {
+function Find-OSDCloudOfflineFile {
     [CmdletBinding()]
     param (
         [string]$Name

@@ -1,22 +1,22 @@
 <#
 .SYNOPSIS
-Searches for AutoPilot Jsons and allows you to select one
+Selects AutoPilot Profiles
 
 .DESCRIPTION
-Searches for AutoPilot Jsons and allows you to select one
+Selects AutoPilot Profiles
 
 .LINK
-https://osd.osdeploy.com/module/functions/autopilotjson
+https://osdcloud.osdeploy.com
 
 .NOTES
 21.3.12  Initial Release
 #>
-function Select-OSDCloud.autopilotprofiles {
+function Select-OSDCloudAutopilotFile {
     [CmdletBinding()]
     param ()
 
     $i = $null
-    $GetOSDCloudOfflineAutoPilotProfiles = Get-OSDCloud.autopilotprofiles
+    $GetOSDCloudOfflineAutoPilotProfiles = Find-OSDCloudAutopilotFile
 
     if ($GetOSDCloudOfflineAutoPilotProfiles) {
         $AutoPilotProfiles = foreach ($Item in $GetOSDCloudOfflineAutoPilotProfiles) {
@@ -48,18 +48,5 @@ function Select-OSDCloud.autopilotprofiles {
         $AutoPilotProfiles = $AutoPilotProfiles | Where-Object {$_.Selection -eq $SelectReadHost}
 
         Return $AutoPilotProfiles.FullContent
-        
-
-<#         do {
-            $AutoPilotJson = Read-Host -Prompt "Type the Number to select an AutoPilot Profile to apply (AutoPilotConfigurationFile.json), or S to Skip"
-        }
-        until (
-            ((($AutoPilotJson -ge 0) -and ($AutoPilotJson -in $AutoPilotJsons.Number)) -or ($AutoPilotJson -eq 'S')) 
-        )
-        if ($AutoPilotJson -ne 'S') {
-           $AutoPilotConfiguration = $AutoPilotJsons | Where-Object {$_.Number -eq $AutoPilotJson}
-           $AutoPilotConfiguration = $AutoPilotConfiguration | Select-Object -Property * -ExcludeProperty Number
-        }
-        Return $AutoPilotProfiles #>
     }
 }

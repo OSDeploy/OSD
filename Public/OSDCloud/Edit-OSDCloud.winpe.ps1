@@ -97,7 +97,16 @@ function Edit-OSDCloud.winpe {
     #=======================================================================
     #   Add AutoPilot Profiles
     #=======================================================================
-    robocopy "$WorkspacePath\AutoPilot" "$MountPath\OSDCloud\AutoPilot" *.* /e /ndl /njh /njs /b
+    if (Test-Path "$WorkspacePath\AutoPilot") {
+        robocopy "$WorkspacePath\AutoPilot" "$MountPath\OSDCloud\AutoPilot" *.* /mir /ndl /njh /njs /b /np
+    }
+    #=======================================================================
+    #   Add ODT Config
+    #=======================================================================
+    if (Test-Path "$WorkspacePath\ODT") {
+        robocopy "$WorkspacePath\ODT" "$MountPath\OSDCloud\ODT" *.xml /mir /ndl /njh /njs /b /np
+        robocopy "$WorkspacePath\ODT" "$MountPath\OSDCloud\ODT" setup.exe /mir /ndl /njh /njs /b /np
+    }
     #=======================================================================
     #   DriverPath
     #=======================================================================

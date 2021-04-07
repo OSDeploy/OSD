@@ -12,7 +12,7 @@ https://osdcloud.osdeploy.com
 21.4.6  Modified function to display Unique results
 21.4.6  Removed Name parameter as that served no purpose
 #>
-function Get-OSDCloud.autopilotprofiles {
+function Find-OSDCloudAutopilotFile {
     [CmdletBinding()]
     param ()
     #=======================================================================

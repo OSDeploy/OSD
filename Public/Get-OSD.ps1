@@ -48,9 +48,6 @@ function Get-OSD {
     Write-Host -ForegroundColor Yellow      'Invoke-WebPSScript                     ' -NoNewline
     Write-Host -ForegroundColor Gray        'Replaces Invoke-UrlExpression'
 
-    Write-Host -ForegroundColor Yellow      'Select-AutoPilotJson                   ' -NoNewline
-    Write-Host -ForegroundColor Gray        'Searches for AutoPilot Jsons and allows you to select one'
-
     Write-Host -ForegroundColor Yellow      'Test-WebConnection                     ' -NoNewline
     Write-Host -ForegroundColor Gray        'Tests if a url is is good'
 

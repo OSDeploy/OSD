@@ -103,7 +103,7 @@ function Save-OSDCloud.usb {
         Write-Host "AutoPilot Profiles can be saved to $OSDCloudOfflineFullName\AutoPilot\Profiles"
     }
 
-    $GetOSDCloudOfflineAutoPilotProfiles = Get-OSDCloud.autopilotprofiles
+    $GetOSDCloudOfflineAutoPilotProfiles = Find-OSDCloudAutopilotFile
 
     if ($GetOSDCloudOfflineAutoPilotProfiles) {
         foreach ($Item in $GetOSDCloudOfflineAutoPilotProfiles) {
@@ -332,7 +332,7 @@ function Save-OSDCloud.usb {
     #=======================================================================
     #	Offline OS
     #=======================================================================
-    $OSDCloudOfflineOS = Get-OSDCloud.offline.file -Name $GetFeatureUpdate.FileName | Select-Object -First 1
+    $OSDCloudOfflineOS = Find-OSDCloudOfflineFile -Name $GetFeatureUpdate.FileName | Select-Object -First 1
 
     if ($OSDCloudOfflineOS) {
         $OSDCloudOfflineOSFullName = $OSDCloudOfflineOS.FullName
@@ -374,7 +374,7 @@ function Save-OSDCloud.usb {
             Write-Host -ForegroundColor White "SupportedSystemID: $($GetMyDellBios.SupportedSystemID)"
             Write-Host -ForegroundColor White "Flash64W: $($GetMyDellBios.Flash64W)"
 
-            $OSDCloudOfflineBios = Get-OSDCloud.offline.file -Name $GetMyDellBios.FileName | Select-Object -First 1
+            $OSDCloudOfflineBios = Find-OSDCloudOfflineFile -Name $GetMyDellBios.FileName | Select-Object -First 1
             if ($OSDCloudOfflineBios) {
                 Write-Host -ForegroundColor Cyan "Offline: $($OSDCloudOfflineBios.FullName)"
             }
@@ -382,7 +382,7 @@ function Save-OSDCloud.usb {
                 Save-MyDellBios -DownloadPath "$OSDCloudOfflineFullName\BIOS"
             }
 
-            $OSDCloudOfflineFlash64W = Get-OSDCloud.offline.file -Name 'Flash64W.exe' | Select-Object -First 1
+            $OSDCloudOfflineFlash64W = Find-OSDCloudOfflineFile -Name 'Flash64W.exe' | Select-Object -First 1
             if ($OSDCloudOfflineFlash64W) {
                 Write-Host -ForegroundColor Cyan "Offline: $($OSDCloudOfflineFlash64W.FullName)"
             }

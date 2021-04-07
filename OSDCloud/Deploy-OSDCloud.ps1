@@ -9,7 +9,7 @@
 #   In WinPE, the latest version will be installed automatically
 #   In Windows, this script is stopped and you will need to update manually
 #=======================================================================
-[Version]$OSDVersionMin = '21.4.5.1'
+[Version]$OSDVersionMin = '21.4.7.1'
 
 if ((Get-Module -Name OSD -ListAvailable | `Sort-Object Version -Descending | Select-Object -First 1).Version -lt $OSDVersionMin) {
     Write-Warning "OSDCloud requires OSD $OSDVersionMin or newer"
@@ -60,20 +60,35 @@ Write-Host -ForegroundColor DarkGray "==========================================
 Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) $($MyInvocation.MyCommand.Source)"
 #=======================================================================
 #	AutoPilot Profiles
-#   This should have been selected by Start-OSDCloud
 #=======================================================================
-$GetOSDCloudautopilotprofiles = Get-OSDCloud.autopilotprofiles
+$GetOSDCloudAutopilotFile = Find-OSDCloudAutopilotFile
 
-if ($GetOSDCloudautopilotprofiles) {
+if ($GetOSDCloudAutopilotFile) {
     Write-Host -ForegroundColor DarkGray "========================================================================="
-    Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Select-OSDCloud.autopilotprofiles"
+    Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Select-OSDCloudAutopilotFile"
 
-    $Global:OSDCloudAutoPilotProfile = Select-OSDCloud.autopilotprofiles
+    $Global:OSDCloudAutoPilotProfile = Select-OSDCloudAutopilotFile
     if ($Global:OSDCloudAutoPilotProfile) {
         Write-Host -ForegroundColor Cyan "OSDCloud will apply the following AutoPilot Profile as AutoPilotConfigurationFile.json"
         $Global:OSDCloudAutoPilotProfile | Format-List
     } else {
         Write-Warning "AutoPilotConfigurationFile.json will not be configured for this deployment"
+    }
+}
+#=======================================================================
+#	Office Configuration 
+#=======================================================================
+$GetOSDCloudODT = Find-OSDCloudODTFile
+
+if ($GetOSDCloudODT) {
+    Write-Host -ForegroundColor DarkGray "========================================================================="
+    Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Select-OSDCloudODTFile"
+
+    $Global:OSDCloudODTConfig = Select-OSDCloudODTFile
+    if ($Global:OSDCloudODTConfig) {
+        Write-Host -ForegroundColor Cyan "Office Config: $($Global:OSDCloudODTConfig.FullName)"
+    } else {
+        Write-Warning "OSDCloud Office Config will not be configured for this deployment"
     }
 }
 #=======================================================================
@@ -188,7 +203,7 @@ Write-Host -ForegroundColor DarkGray "FileUri: $($GetFeatureUpdate.FileUri)"
 #=======================================================================
 #	Get OS
 #=======================================================================
-$OSDCloudOfflineOS = Get-OSDCloud.offline.file -Name $GetFeatureUpdate.FileName | Select-Object -First 1
+$OSDCloudOfflineOS = Find-OSDCloudOfflineFile -Name $GetFeatureUpdate.FileName | Select-Object -First 1
 
 if ($OSDCloudOfflineOS) {
     $OSDCloudOfflineOSFullName = $OSDCloudOfflineOS.FullName
@@ -255,49 +270,51 @@ if (-NOT (Test-Path 'C:\Windows\Setup\Scripts')) {
 #=======================================================================
 #	Get-MyDriverPack
 #=======================================================================
-Write-Host -ForegroundColor DarkGray "========================================================================="
-Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Save-MyDriverPack"
-
-if ($Global:OSDCloudManufacturer -in ('Dell','HP','Lenovo','Microsoft')) {
-    $GetMyDriverPack = Get-MyDriverPack -Manufacturer $Global:OSDCloudManufacturer -Product $Global:OSDCloudProduct
-}
-else {
-    $GetMyDriverPack = Get-MyDriverPack -Product $Global:OSDCloudProduct
-}
-
-if ($GetMyDriverPack) {
-    Write-Host -ForegroundColor DarkGray "Name: $($GetMyDriverPack.Name)"
-    Write-Host -ForegroundColor DarkGray "Product: $($GetMyDriverPack.Product)"
-    Write-Host -ForegroundColor DarkGray "FileName: $($GetMyDriverPack.FileName)"
-    Write-Host -ForegroundColor DarkGray "DriverPackUrl: $($GetMyDriverPack.DriverPackUrl)"
-
-    $GetOSDCloudOfflineFile = Get-OSDCloud.offline.file -Name $GetMyDriverPack.FileName | Select-Object -First 1
-    if ($GetOSDCloudOfflineFile) {
-        Write-Host -ForegroundColor DarkGray "$($GetOSDCloudOfflineFile.FullName)"
-        Copy-Item -Path $GetOSDCloudOfflineFile.FullName -Destination 'C:\Drivers' -Force
-        if ($Global:OSDCloudManufacturer -in ('Dell','HP','Lenovo','Microsoft')) {
-            $SaveMyDriverPack = Save-MyDriverPack -DownloadPath "C:\Drivers" -Expand -Manufacturer $Global:OSDCloudManufacturer -Product $Global:OSDCloudProduct
-        }
-        else {
-            $SaveMyDriverPack = Save-MyDriverPack -DownloadPath "C:\Drivers" -Expand -Product $Global:OSDCloudProduct
-        }
+if ($Global:OSDCloudProduct -ne 'None') {
+    Write-Host -ForegroundColor DarkGray "========================================================================="
+    Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Save-MyDriverPack"
+    
+    if ($Global:OSDCloudManufacturer -in ('Dell','HP','Lenovo','Microsoft')) {
+        $GetMyDriverPack = Get-MyDriverPack -Manufacturer $Global:OSDCloudManufacturer -Product $Global:OSDCloudProduct
     }
-    elseif (Test-WebConnection -Uri $GetMyDriverPack.DriverPackUrl) {
-        Write-Host -ForegroundColor Yellow "$($GetMyDriverPack.DriverPackUrl)"
-        if ($Global:OSDCloudManufacturer -in ('Dell','HP','Lenovo','Microsoft')) {
-            $SaveMyDriverPack = Save-MyDriverPack -DownloadPath "C:\Drivers" -Expand -Manufacturer $Global:OSDCloudManufacturer -Product $Global:OSDCloudProduct
+    else {
+        $GetMyDriverPack = Get-MyDriverPack -Product $Global:OSDCloudProduct
+    }
+    
+    if ($GetMyDriverPack) {
+        Write-Host -ForegroundColor DarkGray "Name: $($GetMyDriverPack.Name)"
+        Write-Host -ForegroundColor DarkGray "Product: $($GetMyDriverPack.Product)"
+        Write-Host -ForegroundColor DarkGray "FileName: $($GetMyDriverPack.FileName)"
+        Write-Host -ForegroundColor DarkGray "DriverPackUrl: $($GetMyDriverPack.DriverPackUrl)"
+    
+        $GetOSDCloudOfflineFile = Find-OSDCloudOfflineFile -Name $GetMyDriverPack.FileName | Select-Object -First 1
+        if ($GetOSDCloudOfflineFile) {
+            Write-Host -ForegroundColor DarkGray "$($GetOSDCloudOfflineFile.FullName)"
+            Copy-Item -Path $GetOSDCloudOfflineFile.FullName -Destination 'C:\Drivers' -Force
+            if ($Global:OSDCloudManufacturer -in ('Dell','HP','Lenovo','Microsoft')) {
+                $SaveMyDriverPack = Save-MyDriverPack -DownloadPath "C:\Drivers" -Expand -Manufacturer $Global:OSDCloudManufacturer -Product $Global:OSDCloudProduct
+            }
+            else {
+                $SaveMyDriverPack = Save-MyDriverPack -DownloadPath "C:\Drivers" -Expand -Product $Global:OSDCloudProduct
+            }
+        }
+        elseif (Test-WebConnection -Uri $GetMyDriverPack.DriverPackUrl) {
+            Write-Host -ForegroundColor Yellow "$($GetMyDriverPack.DriverPackUrl)"
+            if ($Global:OSDCloudManufacturer -in ('Dell','HP','Lenovo','Microsoft')) {
+                $SaveMyDriverPack = Save-MyDriverPack -DownloadPath "C:\Drivers" -Expand -Manufacturer $Global:OSDCloudManufacturer -Product $Global:OSDCloudProduct
+            }
+            else {
+                $SaveMyDriverPack = Save-MyDriverPack -DownloadPath "C:\Drivers" -Expand -Product $Global:OSDCloudProduct
+            }
         }
         else {
-            $SaveMyDriverPack = Save-MyDriverPack -DownloadPath "C:\Drivers" -Expand -Product $Global:OSDCloudProduct
+            Write-Warning "Could not verify an Internet connection for the Dell Driver Pack"
+            Write-Warning "OSDCloud will continue, but there may be issues as Drivers will not be applied"
         }
     }
     else {
-        Write-Warning "Could not verify an Internet connection for the Dell Driver Pack"
-        Write-Warning "OSDCloud will continue, but there may be issues as Drivers will not be applied"
+        Write-Warning "Unable to determine a suitable Driver Pack for this Computer Model"
     }
-}
-else {
-    Write-Warning "Unable to determine a suitable Driver Pack for this Computer Model"
 }
 #=======================================================================
 #	Dell BIOS Update
@@ -321,7 +338,7 @@ if ($Global:OSDCloudManufacturer -eq 'Dell') {
         Write-Host -ForegroundColor DarkGray "SupportedSystemID: $($GetMyDellBios.SupportedSystemID)"
         Write-Host -ForegroundColor DarkGray "Flash64W: $($GetMyDellBios.Flash64W)"
 
-        $OSDCloudOfflineBios = Get-OSDCloud.offline.file -Name $GetMyDellBios.FileName | Select-Object -First 1
+        $OSDCloudOfflineBios = Find-OSDCloudOfflineFile -Name $GetMyDellBios.FileName | Select-Object -First 1
         if ($OSDCloudOfflineBios) {
             Write-Host -ForegroundColor Cyan "Offline: $($OSDCloudOfflineBios.FullName)"
         }
@@ -329,7 +346,7 @@ if ($Global:OSDCloudManufacturer -eq 'Dell') {
             Save-MyDellBios -DownloadPath 'C:\OSDCloud\BIOS'
         }
 
-        $OSDCloudOfflineFlash64W = Get-OSDCloud.offline.file -Name 'Flash64W.exe' | Select-Object -First 1
+        $OSDCloudOfflineFlash64W = Find-OSDCloudOfflineFile -Name 'Flash64W.exe' | Select-Object -First 1
         if ($OSDCloudOfflineFlash64W) {
             Write-Host -ForegroundColor Cyan "Offline: $($OSDCloudOfflineFlash64W.FullName)"
         }
@@ -358,21 +375,12 @@ Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Ad
 Write-Host -ForegroundColor DarkGray "Apply Drivers with Use-WindowsUnattend"
 Add-WindowsDriver.offlineservicing
 #=======================================================================
-#   Enable-SpecializeDriverPack
-#=======================================================================
-if ($Global:OSDCloudManufacturer -in ('HP','Lenovo','Microsoft')) {
-    Write-Host -ForegroundColor DarkGray "================================================================="
-    Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Enable-SpecializeDriverPack"
-    Write-Host -ForegroundColor DarkGray "Required for HP, Lenovo, and Microsoft devices"
-    Enable-SpecializeDriverPack
-}
-#=======================================================================
-#   Save-OSDCloud.offlineos.modules
+#   Enable-OSDCloudSpecialize
 #=======================================================================
 Write-Host -ForegroundColor DarkGray "================================================================="
-Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Save-OSDCloud.offlineos.modules"
-Write-Host -ForegroundColor DarkGray "PowerShell Modules and Scripts"
-Save-OSDCloud.offlineos.modules
+Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Enable-OSDCloudSpecialize"
+Write-Host -ForegroundColor DarkGray "Enables Start-OSDCloudSpecialize"
+Enable-OSDCloudSpecialize
 #=======================================================================
 #   AutoPilotConfigurationFile.json
 #=======================================================================
@@ -387,6 +395,41 @@ if ($Global:OSDCloudAutoPilotProfile) {
     Write-Verbose -Verbose "Setting $AutoPilotConfigurationFile"
     $Global:OSDCloudAutoPilotProfile | ConvertTo-Json | Out-File -FilePath $AutoPilotConfigurationFile -Encoding ASCII
 }
+#=======================================================================
+#   Stage Office Config
+#=======================================================================
+if ($Global:OSDCloudODTConfig) {
+    Write-Host -ForegroundColor DarkGray "================================================================="
+    Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Stage Office Config"
+
+    if (!(Test-Path "C:\OSDCloud\ODT")) {
+        New-Item -Path "C:\OSDCloud\ODT" -ItemType Directory -Force | Out-Null
+    }
+
+    if (Test-Path $Global:OSDCloudODTConfig.FullName) {
+        Copy-Item -Path $Global:OSDCloudODTConfig.FullName -Destination "C:\OSDCloud\ODT\Config.xml" -Force
+    }
+
+    $OfficeSetup = Join-Path $Global:OSDCloudODTConfig.Directory 'setup.exe'
+    Write-Verbose -Verbose "OfficeSetup: $OfficeSetup"
+    if (Test-Path $OfficeSetup) {
+        Copy-Item -Path $OfficeSetup -Destination "C:\OSDCloud\ODT" -Force
+    }
+
+
+    $OfficeData = Join-Path $Global:OSDCloudODTConfig.Directory 'Office'
+    Write-Verbose -Verbose "OfficeData: $OfficeData"
+    if (Test-Path $OfficeData) {
+        robocopy "$OfficeData" "C:\OSDCloud\ODT\Office" *.* /e /ndl /nfl /z /b
+    }
+}
+#=======================================================================
+#   Save-OSDCloudOfflineModules
+#=======================================================================
+Write-Host -ForegroundColor DarkGray "================================================================="
+Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Save-OSDCloudOfflineModules"
+Write-Host -ForegroundColor DarkGray "PowerShell Modules and Scripts"
+Save-OSDCloudOfflineModules
 #=======================================================================
 #	Deploy-OSDCloud Complete
 #=======================================================================

@@ -354,7 +354,7 @@ function Start-OSDCloud {
     #=======================================================================
     #	Get-FeatureUpdate Source
     #=======================================================================
-    $OSDCloudOfflineOS = Get-OSDCloud.offline.file -Name $GetFeatureUpdate.FileName | Select-Object -First 1
+    $OSDCloudOfflineOS = Find-OSDCloudOfflineFile -Name $GetFeatureUpdate.FileName | Select-Object -First 1
 
     if ($OSDCloudOfflineOS) {
         $OSDCloudOfflineOSFullName = $OSDCloudOfflineOS.FullName
@@ -375,36 +375,38 @@ function Start-OSDCloud {
     #=======================================================================
     #	Start-OSDCloud Get-MyDriverPack
     #=======================================================================
-    Write-Host -ForegroundColor DarkGray "========================================================================="
-    Write-Host -ForegroundColor Cyan "Get-MyDriverPack"
-    
-    if ($PSBoundParameters.ContainsKey('Manufacturer')) {
-        $GetMyDriverPack = Get-MyDriverPack -Manufacturer $Manufacturer -Product $Product
-    }
-    else {
-        $GetMyDriverPack = Get-MyDriverPack -Product $Product
-    }
-
-    if ($GetMyDriverPack) {
-        Write-Host -ForegroundColor DarkGray "Name: $($GetMyDriverPack.Name)"
-        Write-Host -ForegroundColor DarkGray "Product: $($GetMyDriverPack.Product)"
-
-        $GetOSDCloudOfflineFile = Get-OSDCloud.offline.file -Name $GetMyDriverPack.FileName | Select-Object -First 1
-        if ($GetOSDCloudOfflineFile) {
-            Write-Host -ForegroundColor Green "OK"
-            Write-Host -ForegroundColor DarkGray "$($GetOSDCloudOfflineFile.FullName)"
-        }
-        elseif (Test-WebConnection -Uri $GetMyDriverPack.DriverPackUrl) {
-            Write-Host -ForegroundColor Yellow "Download"
-            Write-Host -ForegroundColor Yellow "$($GetMyDriverPack.DriverPackUrl)"
+    if ($Product -ne 'None') {
+        Write-Host -ForegroundColor DarkGray "========================================================================="
+        Write-Host -ForegroundColor Cyan "Get-MyDriverPack"
+        
+        if ($PSBoundParameters.ContainsKey('Manufacturer')) {
+            $GetMyDriverPack = Get-MyDriverPack -Manufacturer $Manufacturer -Product $Product
         }
         else {
-            Write-Warning "Could not verify an Internet connection for the Dell Driver Pack"
-            Write-Warning "OSDCloud will continue, but there may be issues"
+            $GetMyDriverPack = Get-MyDriverPack -Product $Product
         }
-    }
-    else {
-        Write-Warning "Unable to determine a suitable Driver Pack for this Computer Model"
+    
+        if ($GetMyDriverPack) {
+            Write-Host -ForegroundColor DarkGray "Name: $($GetMyDriverPack.Name)"
+            Write-Host -ForegroundColor DarkGray "Product: $($GetMyDriverPack.Product)"
+    
+            $GetOSDCloudOfflineFile = Find-OSDCloudOfflineFile -Name $GetMyDriverPack.FileName | Select-Object -First 1
+            if ($GetOSDCloudOfflineFile) {
+                Write-Host -ForegroundColor Green "OK"
+                Write-Host -ForegroundColor DarkGray "$($GetOSDCloudOfflineFile.FullName)"
+            }
+            elseif (Test-WebConnection -Uri $GetMyDriverPack.DriverPackUrl) {
+                Write-Host -ForegroundColor Yellow "Download"
+                Write-Host -ForegroundColor Yellow "$($GetMyDriverPack.DriverPackUrl)"
+            }
+            else {
+                Write-Warning "Could not verify an Internet connection for the Dell Driver Pack"
+                Write-Warning "OSDCloud will continue, but there may be issues"
+            }
+        }
+        else {
+            Write-Warning "Unable to determine a suitable Driver Pack for this Computer Model"
+        }
     }
     #=======================================================================
     #	Get-MyDellBios
@@ -418,7 +420,7 @@ function Start-OSDCloud {
             Write-Host -ForegroundColor DarkGray "$($GetMyDellBios.Name)"
             Write-Host -ForegroundColor DarkGray "$($GetMyDellBios.ReleaseDate)"
 
-            $GetOSDCloudOfflineFile = Get-OSDCloud.offline.file -Name $GetMyDellBios.FileName | Select-Object -First 1
+            $GetOSDCloudOfflineFile = Find-OSDCloudOfflineFile -Name $GetMyDellBios.FileName | Select-Object -First 1
 
             if ($OSDCloudOfflineBios) {
                 Write-Host -ForegroundColor Green "OK"
@@ -433,7 +435,7 @@ function Start-OSDCloud {
                 Write-Warning "OSDCloud will continue, but there may be issues"
             }
 
-            $OSDCloudOfflineFlash64W = Get-OSDCloud.offline.file -Name 'Flash64W.exe' | Select-Object -First 1
+            $OSDCloudOfflineFlash64W = Find-OSDCloudOfflineFile -Name 'Flash64W.exe' | Select-Object -First 1
             if ($OSDCloudOfflineFlash64W) {
                 Write-Host -ForegroundColor DarkGray "$($OSDCloudOfflineFlash64W.FullName)"
             }
@@ -454,14 +456,14 @@ function Start-OSDCloud {
     #	AutoPilot Profiles
     #=======================================================================
     Write-Host -ForegroundColor DarkGray "========================================================================="
-    Write-Host -ForegroundColor Cyan "Get-OSDCloud.autopilotprofiles"
+    Write-Host -ForegroundColor Cyan "Find-OSDCloudAutopilotFile"
 
-    $GetOSDCloudautopilotprofiles = Get-OSDCloud.autopilotprofiles
+    $GetOSDCloudAutopilotFile = Find-OSDCloudAutopilotFile
 
-    if ($GetOSDCloudautopilotprofiles) {
+    if ($GetOSDCloudAutopilotFile) {
         Write-Host -ForegroundColor Green "OK"
 
-        foreach ($Item in $GetOSDCloudautopilotprofiles) {
+        foreach ($Item in $GetOSDCloudAutopilotFile) {
             Write-Host -ForegroundColor DarkGray "$($Item.FullName)"
         }
     } else {
@@ -483,7 +485,7 @@ function Start-OSDCloud {
     #   Module
     #=======================================================================
     if ($PSCmdlet.ParameterSetName -eq 'Module') {
-        $GetDeployOSDCloud = Get-OSDCloud.offline.file -Name 'Deploy-MyOSDCloud.ps1' | Select-Object -First 1
+        $GetDeployOSDCloud = Find-OSDCloudOfflineFile -Name 'Deploy-MyOSDCloud.ps1' | Select-Object -First 1
         if ($GetDeployOSDCloud) {
             Write-Host -ForegroundColor DarkGray "========================================================================="
             Write-Host -ForegroundColor Green "Starting in 5 seconds..."
