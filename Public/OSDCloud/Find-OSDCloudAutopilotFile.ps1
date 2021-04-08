@@ -28,6 +28,7 @@ function Find-OSDCloudAutopilotFile {
     #=======================================================================
     #	Results
     #=======================================================================
-    $Results | Sort-Object -Property Name -Unique
+    $Results = $Results | Sort-Object -Property Name -Unique
+    $Results
     #=======================================================================
 }

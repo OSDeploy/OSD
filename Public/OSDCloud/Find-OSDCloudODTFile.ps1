@@ -26,6 +26,6 @@ function Find-OSDCloudODTFile {
     #=======================================================================
     #	Results
     #=======================================================================
-    $Results | Sort-Object -Property Name -Unique
+    $Results | Sort-Object -Property Name -Descending -Unique
     #=======================================================================
 }
