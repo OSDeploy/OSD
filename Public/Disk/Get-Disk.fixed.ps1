@@ -6,7 +6,7 @@ Get-Disk with Fixed Disk results
 Get-Disk with Fixed Disk results
 
 .LINK
-https://osd.osdeploy.com/module/functions/disk/get-disk
+https://osd.osdeploy.com/module/functions
 #>
 function Get-Disk.fixed {
     [CmdletBinding()]

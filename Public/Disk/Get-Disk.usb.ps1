@@ -6,7 +6,7 @@ Get-Disk with USB Disk results
 Get-Disk with USB Disk results
 
 .LINK
-https://osd.osdeploy.com/module/functions/disk/get-disk
+https://osd.osdeploy.com/module/functions
 #>
 function Get-Disk.usb {
     [CmdletBinding()]

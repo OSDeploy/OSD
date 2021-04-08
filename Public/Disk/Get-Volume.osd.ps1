@@ -9,8 +9,6 @@ Get-Volume with IsUSB Property
 https://osd.osdeploy.com/module/functions/disk/get-volume
 
 .NOTES
-21.3.3      Added SizeGB and SizeRemainingMB
-21.2.25     Initial Release
 #>
 function Get-Volume.osd {
     [CmdletBinding()]
@@ -41,6 +39,7 @@ function Get-Volume.osd {
     #=======================================================================
     Return $GetVolume | Sort-Object DriveLetter | Select-Object -Property DriveLetter, FileSystemLabel, FileSystem, `
                         @{Name='SizeGB';Expression={[int]($_.Size / 1000000000)}}, `
+                        @{Name='SizeRemainingGB';Expression={[int]($_.SizeRemaining / 1000000000)}}, `
                         @{Name='SizeRemainingMB';Expression={[int]($_.SizeRemaining / 1000000)}}, `
                         IsUSB, DriveType, OperationalStatus, HealthStatus
     #=======================================================================
