@@ -68,6 +68,10 @@ function Start-OSDCloud {
 
         [switch]$Screenshot,
 
+        [switch]$SkipAutoPilot,
+
+        [switch]$ZTI,
+
         [Parameter(ParameterSetName = 'GitHub')]
         [switch]$GitHub,
 
@@ -116,10 +120,49 @@ function Start-OSDCloud {
     #=======================================================================
     #   Header
     #=======================================================================
+    Write-Host -ForegroundColor DarkGray "========================================================================="
     Write-Warning "OSDCLOUD IS CURRENTLY IN DEVELOPMENT FOR TESTING ONLY"
     Write-Host -ForegroundColor DarkGray "========================================================================="
     Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) $($MyInvocation.MyCommand.Name)" -NoNewline
     Write-Host -ForegroundColor Cyan " | Manufacturer: $Manufacturer | Product: $Product"
+    #=======================================================================
+    #	Variables and Disk Warnings
+    #=======================================================================
+    if ($PSBoundParameters.ContainsKey('SkipAutoPilot')) {
+        $Global:OSDCloudSkipAutoPilot = $true
+    }
+    else {
+        $Global:OSDCloudSkipAutoPilot = $false
+    }
+    if ($PSBoundParameters.ContainsKey('ZTI')) {
+        $GetDisk = Get-Disk.fixed | Where-Object {$_.IsBoot -eq $false} | Sort-Object Number
+
+        if (($GetDisk | Measure-Object).Count -lt 2) {
+            Write-Host -ForegroundColor DarkGray "========================================================================="
+            Write-Warning "This Warning is displayed when using the -ZTI parameter"
+            Write-Warning "OSDisk will be cleaned automatically without confirmation"
+            Write-Warning "Press CTRL + C to cancel"
+            $GetDisk | Select-Object -Property Number, BusType, MediaType,`
+            FriendlyName, PartitionStyle, NumberOfPartitions,`
+            @{Name='SizeGB';Expression={[int]($_.Size / 1000000000)}} | Format-Table
+    
+            Write-Warning "OSDCloud will continue in 20 seconds"
+            Start-Sleep -Seconds 20
+        }
+        else {
+            Write-Host -ForegroundColor DarkGray "========================================================================="
+            Write-Warning "More than 1 Fixed Disk is present"
+            Write-Warning "Disks will not be cleaned automatically"
+            Start-Sleep -Seconds 5
+        }
+
+        $Global:OSDCloudZTI = $true
+        $Global:OSDCloudSkipODT = $true
+    }
+    else {
+        $Global:OSDCloudZTI = $false
+        $Global:OSDCloudSkipODT = $false
+    }
     #=======================================================================
     #	Test PowerShell Gallery Connectivity
     #=======================================================================
@@ -142,6 +185,10 @@ function Start-OSDCloud {
     Write-Host -ForegroundColor Cyan "Windows 10 OSBuild " -NoNewline
     
     if ($OSBuild) {
+        Write-Host -ForegroundColor Green $OSBuild
+    }
+    elseif ($Global:OSDCloudZTI -eq $true) {
+        $OSBuild = '20H2'
         Write-Host -ForegroundColor Green $OSBuild
     }
     else {
@@ -177,6 +224,10 @@ function Start-OSDCloud {
     Write-Host -ForegroundColor Cyan "Windows 10 OSEdition " -NoNewline
 
     if ($PSBoundParameters.ContainsKey('OSEdition')) {
+        Write-Host -ForegroundColor Green $OSEdition
+    }
+    elseif ($Global:OSDCloudZTI -eq $true) {
+        $OSEdition = 'Enterprise'
         Write-Host -ForegroundColor Green $OSEdition
     }
     else {
@@ -240,6 +291,10 @@ function Start-OSDCloud {
     Write-Host -ForegroundColor Cyan "Windows 10 OSLicense " -NoNewline
 
     if ($OSLicense) {
+        Write-Host -ForegroundColor Green $OSLicense
+    }
+    elseif ($Global:OSDCloudZTI -eq $true) {
+        $OSLicense = 'Volume'
         Write-Host -ForegroundColor Green $OSLicense
     }
     else {
@@ -306,6 +361,10 @@ function Start-OSDCloud {
     Write-Host -ForegroundColor Cyan "Windows 10 OSLanguage " -NoNewline
     
     if ($PSBoundParameters.ContainsKey('OSLanguage')) {
+        Write-Host -ForegroundColor Green $OSLanguage
+    }
+    elseif ($Global:OSDCloudZTI -eq $true) {
+        $OSLanguage = 'en-us'
         Write-Host -ForegroundColor Green $OSLanguage
     }
     else {
@@ -455,20 +514,26 @@ function Start-OSDCloud {
     #=======================================================================
     #	AutoPilot Profiles
     #=======================================================================
-    Write-Host -ForegroundColor DarkGray "========================================================================="
-    Write-Host -ForegroundColor Cyan "Find-OSDCloudAutopilotFile"
-
-    $GetOSDCloudAutopilotFile = Find-OSDCloudAutopilotFile
-
-    if ($GetOSDCloudAutopilotFile) {
-        Write-Host -ForegroundColor Green "OK"
-
-        foreach ($Item in $GetOSDCloudAutopilotFile) {
-            Write-Host -ForegroundColor DarkGray "$($Item.FullName)"
+    if ($Global:OSDCloudSkipAutoPilot -eq $false) {
+        Write-Host -ForegroundColor DarkGray "========================================================================="
+        Write-Host -ForegroundColor Cyan "Find-OSDCloudAutopilotFile"
+    
+        $GetOSDCloudAutopilotFile = Find-OSDCloudAutopilotFile
+    
+        if ($GetOSDCloudAutopilotFile) {
+            Write-Host -ForegroundColor Green "OK"
+            if ($Global:OSDCloudZTI -eq $true) {
+                Write-Warning "-SkipAutoPilot parameter can be used to skip AutoPilot Configuration"
+                Write-Warning "-ZTI automatically selects the first AutoPilot Profile listed below"
+                Write-Warning "Rename your AutoPilot Configuration Files so your default is the first Selection"
+            }
+            foreach ($Item in $GetOSDCloudAutopilotFile) {
+                Write-Host -ForegroundColor DarkGray "$($Item.FullName)"
+            }
+        } else {
+            Write-Warning "No AutoPilot Profiles were found in any PSDrive"
+            Write-Warning "AutoPilot Profiles must be located in a <PSDrive>:\OSDCloud\AutoPilot\Profiles directory"
         }
-    } else {
-        Write-Warning "No AutoPilot Profiles were found in any PSDrive"
-        Write-Warning "AutoPilot Profiles must be located in a <PSDrive>:\OSDCloud\AutoPilot\Profiles directory"
     }
     #=======================================================================
     #	Global Variables

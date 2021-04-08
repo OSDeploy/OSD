@@ -37,15 +37,20 @@ function Select-OSDCloudAutopilotFile {
 
         $AutoPilotProfiles | Select-Object -Property Selection, Profile, FullName | Format-Table | Out-Host
 
-        do {
-            $SelectReadHost = Read-Host -Prompt "Enter the Selection of the AutoPilot Profile to apply, or press S to Skip"
+        if ($Global:OSDCloudZTI -eq $true) {
+            $AutoPilotProfiles = $AutoPilotProfiles | Where-Object {$_.Selection -eq 1}
         }
-        until (((($SelectReadHost -ge 0) -and ($SelectReadHost -in $AutoPilotProfiles.Selection -or ($SelectReadHost -eq 'S')))))
-        
-        if ($SelectReadHost -eq 'S') {
-            Return $false
+        else {
+            do {
+                $SelectReadHost = Read-Host -Prompt "Enter the Selection of the AutoPilot Profile to apply, or press S to Skip"
+            }
+            until (((($SelectReadHost -ge 0) -and ($SelectReadHost -in $AutoPilotProfiles.Selection -or ($SelectReadHost -eq 'S')))))
+            
+            if ($SelectReadHost -eq 'S') {
+                Return $false
+            }
+            $AutoPilotProfiles = $AutoPilotProfiles | Where-Object {$_.Selection -eq $SelectReadHost}
         }
-        $AutoPilotProfiles = $AutoPilotProfiles | Where-Object {$_.Selection -eq $SelectReadHost}
 
         Return $AutoPilotProfiles.FullContent
     }

@@ -145,15 +145,15 @@ function Clear-Disk.usb {
     $ClearDisk = @()
     foreach ($Item in $GetDisk) {
         if ($PSCmdlet.ShouldProcess(
-            "Disk $($Item.Number) $($Item.BusType) $($Item.MediaType) $($Item.FriendlyName) [$($Item.PartitionStyle) $($Item.NumberOfPartitions) Partitions]",
+            "Disk $($Item.Number) $($Item.BusType) $($Item.SizeGB) $($Item.FriendlyName) $($Item.Model) [$($Item.PartitionStyle) $($Item.NumberOfPartitions) Partitions]",
             "Clear-Disk"
         ))
         {
-            Write-Warning "Cleaning Disk $($Item.Number) $($Item.BusType) $($Item.MediaType) $($Item.FriendlyName) [$($Item.PartitionStyle) $($Item.NumberOfPartitions) Partitions]"
+            Write-Warning "Cleaning Disk $($Item.Number) $($Item.BusType) $($Item.SizeGB) $($Item.FriendlyName) $($Item.Model) [$($Item.PartitionStyle) $($Item.NumberOfPartitions) Partitions]"
             Clear-Disk -Number $Item.Number -RemoveData -RemoveOEM -ErrorAction Stop
             
             if ($Initialize -eq $true) {
-                Write-Warning "Initializing $PartitionStyle Disk $($Item.Number) $($Item.BusType) $($Item.MediaType) $($Item.FriendlyName)"
+                Write-Warning "Initializing $PartitionStyle Disk $($Item.Number) $($Item.BusType) $($Item.SizeGB) $($Item.FriendlyName) $($Item.Model)"
                 $Item | Initialize-Disk -PartitionStyle $PartitionStyle
             }
             

@@ -128,9 +128,11 @@ function Clear-Disk.fixed {
     #=======================================================================
     #	Display Disk Information
     #=======================================================================
-    $GetDisk | Select-Object -Property Number, BusType, MediaType,`
-    FriendlyName, PartitionStyle, NumberOfPartitions,`
-    @{Name='SizeGB';Expression={[int]($_.Size / 1000000000)}} | Format-Table
+    $GetDisk | Select-Object -Property DiskNumber, BusType,`
+    @{Name='SizeGB';Expression={[int]($_.Size / 1000000000)}},`
+    FriendlyName,Model, PartitionStyle,`
+    @{Name='Partitions';Expression={$_.NumberOfPartitions}} | `
+    Format-Table | Out-Host
     
     if ($IsForcePresent -eq $false) {
         Break
@@ -148,15 +150,15 @@ function Clear-Disk.fixed {
     $ClearDisk = @()
     foreach ($Item in $GetDisk) {
         if ($PSCmdlet.ShouldProcess(
-            "Disk $($Item.Number) $($Item.BusType) $($Item.MediaType) $($Item.FriendlyName) [$($Item.PartitionStyle) $($Item.NumberOfPartitions) Partitions]",
+            "Disk $($Item.Number) $($Item.BusType) $($Item.SizeGB) $($Item.FriendlyName) $($Item.Model) [$($Item.PartitionStyle) $($Item.NumberOfPartitions) Partitions]",
             "Clear-Disk"
         ))
         {
-            Write-Warning "Cleaning Disk $($Item.Number) $($Item.BusType) $($Item.MediaType) $($Item.FriendlyName) [$($Item.PartitionStyle) $($Item.NumberOfPartitions) Partitions]"
+            Write-Warning "Cleaning Disk $($Item.Number) $($Item.BusType) $($Item.SizeGB) $($Item.FriendlyName) $($Item.Model) [$($Item.PartitionStyle) $($Item.NumberOfPartitions) Partitions]"
             Diskpart-Clean -DiskNumber $Item.Number
 
             if ($Initialize -eq $true) {
-                Write-Warning "Initializing $PartitionStyle Disk $($Item.Number) $($Item.BusType) $($Item.MediaType) $($Item.FriendlyName)"
+                Write-Warning "Initializing $PartitionStyle Disk $($Item.Number) $($Item.BusType) $($Item.SizeGB) $($Item.FriendlyName) $($Item.Model)"
                 $Item | Initialize-Disk -PartitionStyle $PartitionStyle
             }
             
@@ -170,9 +172,11 @@ function Clear-Disk.fixed {
         #Don't return results
     }
     else {
-        $ClearDisk | Select-Object -Property Number, BusType, MediaType,`
-        FriendlyName, PartitionStyle, NumberOfPartitions,`
-        @{Name='SizeGB';Expression={[int]($_.Size / 1000000000)}} | Format-Table
+        $ClearDisk | Select-Object -Property DiskNumber, BusType,`
+        @{Name='SizeGB';Expression={[int]($_.Size / 1000000000)}},`
+        FriendlyName, Model, PartitionStyle,`
+        @{Name='Partitions';Expression={$_.NumberOfPartitions}} | `
+        Format-Table | Out-Host
     }
     #=======================================================================
 }

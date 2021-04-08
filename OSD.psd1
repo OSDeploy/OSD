@@ -7,7 +7,7 @@
 RootModule = 'OSD.psm1'
 
 # Version number of his module.
-ModuleVersion = '21.4.7.2'
+ModuleVersion = '21.4.7.3'
 
 # Supported PSEditions
 # CompatiblePSEditions = @()
@@ -104,7 +104,7 @@ FunctionsToExport =
 'Backup-Disk.ffu',
 'Clear-Disk.fixed',
 'Clear-Disk.usb',
-'Get-DataStore',
+'Get-FFUDataStore',
 'Get-Disk.osd',
 'Get-Disk.fixed',
 'Get-Disk.usb',
@@ -116,7 +116,7 @@ FunctionsToExport =
 'Get-Volume.usb',
 'New-Bootable.usb',
 'New-OSDisk',
-'Select-DataStore',
+'Select-FFUDataStore',
 'Select-Disk.osd',
 'Select-Disk.fixed',
 'Select-Disk.ffu',

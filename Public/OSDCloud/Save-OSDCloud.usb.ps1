@@ -426,6 +426,7 @@ function Save-OSDCloud.usb {
     if (Test-WebConnection -Uri "https://www.powershellgallery.com") {
         Write-Host -ForegroundColor DarkGray "Save-Module OSD to $OSDCloudOfflineFullName\PowerShell\Offline\Modules"
         Save-Module -Name OSD -Path "$OSDCloudOfflineFullName\PowerShell\Offline\Modules"
+        Copy-PSModuleToFolder -Name OSD -Destination "$OSDCloudOfflineFullName\PowerShell\Offline\Modules"
 
         Write-Host -ForegroundColor DarkGray "Save-Module WindowsAutoPilotIntune to $OSDCloudOfflineFullName\PowerShell\Offline\Modules"
         Save-Module -Name WindowsAutoPilotIntune -Path "$OSDCloudOfflineFullName\PowerShell\Offline\Modules"

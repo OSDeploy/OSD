@@ -1,4 +1,4 @@
-function Select-DataStore{
+function Select-FFUDataStore {
     [CmdletBinding()]
     param (
         [int]$NotDiskNumber,
@@ -8,7 +8,7 @@ function Select-DataStore{
     #=======================================================================
     #	Get USB Disk and add the MinimumSizeGB filter
     #=======================================================================
-    $AllItems = Get-DataStore | Sort-Object -Property DriveLetter
+    $AllItems = Get-FFUDataStore | Sort-Object -Property DriveLetter
     #=======================================================================
     #	Filter NotDiskNumber
     #=======================================================================
@@ -40,13 +40,13 @@ function Select-DataStore{
     #	Select an Item
     #=======================================================================
     if ($PSBoundParameters.ContainsKey('Skip')) {
-        do {$Selection = Read-Host -Prompt "Select a DataStore by DriveLetter, or press S to SKIP"}
+        do {$Selection = Read-Host -Prompt "Select an FFUDataStore by DriveLetter, or press S to SKIP"}
         until (($Selection -ge 0) -and ($Selection -in $AllItems.DriveLetter) -or ($Selection -eq 'S'))
         
         if ($Selection -eq 'S') {Return $false}
     }
     else {
-        do {$Selection = Read-Host -Prompt "Select a DataStore by DriveLetter"}
+        do {$Selection = Read-Host -Prompt "Select an FFUDataStore by DriveLetter"}
         until (($Selection -ge 0) -and ($Selection -in $AllItems.DriveLetter))
     }
     #=======================================================================

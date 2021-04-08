@@ -1,4 +1,4 @@
-function Get-DataStore {
+function Get-FFUDataStore {
     [CmdletBinding()]
     param ()
     #=======================================================================

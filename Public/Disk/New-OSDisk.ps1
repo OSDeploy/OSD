@@ -181,9 +181,11 @@ function New-OSDisk {
     #	Display Disk Information
     #=======================================================================
     if ($IsForcePresent -eq $false) {
-        $GetDisk | Select-Object -Property Number, BusType, MediaType, FriendlyName,`
-        PartitionStyle, NumberOfPartitions,`
-        @{Name='SizeGB';Expression={[int]($_.Size / 1000000000)}} | Format-Table
+        $GetDisk | Select-Object -Property DiskNumber, BusType,`
+        @{Name='SizeGB';Expression={[int]($_.Size / 1000000000)}},`
+        FriendlyName, Model, PartitionStyle,`
+        @{Name='Partitions';Expression={$_.NumberOfPartitions}} | `
+        Format-Table | Out-Host
         
         Break
     }
@@ -205,25 +207,8 @@ function New-OSDisk {
     if (($GetDisk | Measure-Object).Count -eq 1) {
         $OSDisk = $GetDisk
     } else {
-        Write-Host ""
-        foreach ($Item in $GetDisk) {
-            Write-Host "[$($Item.Number)]" -ForegroundColor Green -BackgroundColor Black -NoNewline
-            Write-Host " $($Item.BusType) $($Item.MediaType) $($Item.FriendlyName) [$($Item.NumberOfPartitions) $($Item.PartitionStyle) Partitions]"
-        }
-        Write-Host "[X]" -ForegroundColor Green -BackgroundColor Black  -NoNewline
-        Write-Host " Exit"
 
-        do {
-            $SelectOSDisk = Read-Host -Prompt "Type the Disk Number to use as the OSDisk, or X to Exit"
-        }
-        until (
-            ((($SelectOSDisk -ge 0) -and ($SelectOSDisk -in $GetDisk.Number)) -or ($SelectOSDisk -eq 'X')) 
-        )
-        if ($SelectOSDisk -eq 'X') {
-            Write-Warning "Exit"
-            Break
-        }
-        $OSDisk = $GetDisk | Where-Object {$_.Number -eq $SelectOSDisk}
+        $OSDisk = Select-Disk.fixed -Input $GetDisk
         $DataDisks = $GetDisk | Where-Object {$_.Number -ne $OSDisk.Number}
     }
     Write-Host ""
@@ -253,26 +238,16 @@ function New-OSDisk {
     }
     #Prompt for confirmation to clear the existing disk
     else {
-        Write-Host "[C]"  -ForegroundColor Green -BackgroundColor Black -NoNewline
-        Write-Host " Disk $($OSDisk.Number) $($OSDisk.BusType) $($OSDisk.MediaType) $($OSDisk.FriendlyName) [$($OSDisk.NumberOfPartitions) $($OSDisk.PartitionStyle) Partitions]"
-        Write-Host "[X]" -ForegroundColor Green -BackgroundColor Black  -NoNewline
-        Write-Host " Exit"
-
-        do {$ConfirmClearDisk = Read-Host "Press C to create OSDisk from the specified Disk, or X to Exit"}
-        until (($ConfirmClearDisk -eq 'C') -or ($ConfirmClearDisk -eq 'X'))
-
-        #Clear and Initialize Disk
-        if ($ConfirmClearDisk -eq 'C') {
-            Write-Verbose "Cleaning Disk $($OSDisk.Number)"
+        if ($PSCmdlet.ShouldProcess(
+            "Disk $($OSDisk.Number) $($OSDisk.BusType) $($OSDisk.SizeGB) $($OSDisk.FriendlyName) $($OSDisk.Model) [$($OSDisk.PartitionStyle) $($OSDisk.NumberOfPartitions) Partitions]",
+            "Clear-Disk"
+        ))
+        {
+            Write-Warning "Cleaning Disk $($OSDisk.Number) $($OSDisk.BusType) $($OSDisk.SizeGB) $($OSDisk.FriendlyName) $($OSDisk.Model) [$($OSDisk.PartitionStyle) $($OSDisk.NumberOfPartitions) Partitions]"
             Diskpart-Clean -DiskNumber $OSDisk.Number
-            Write-Verbose "Initializing Disk $($OSDisk.Number) as $PartitionStyle"
-            $OSDisk | Initialize-Disk -PartitionStyle $PartitionStyle
-        }
 
-        #Exit
-        if ($ConfirmClearDisk -eq 'X') {
-            Write-Warning "Exit"
-            Break
+            Write-Warning "Initializing $PartitionStyle Disk $($OSDisk.Number) $($OSDisk.BusType) $($OSDisk.SizeGB) $($OSDisk.FriendlyName) $($OSDisk.Model)"
+            $OSDisk | Initialize-Disk -PartitionStyle $PartitionStyle
         }
     }
     #=======================================================================
@@ -331,5 +306,9 @@ function New-OSDisk {
     #=======================================================================
     #	DataDisks
     #=======================================================================
-    Get-Disk.osd | Select-Object -Property Number, BusType, MediaType, FriendlyName, PartitionStyle, NumberOfPartitions, @{Name='SizeGB';Expression={[int]($_.Size / 1000000000)}} | Format-Table
+    Get-Disk.osd | Select-Object -Property DiskNumber, BusType,`
+    @{Name='SizeGB';Expression={[int]($_.Size / 1000000000)}},`
+    FriendlyName, Model, PartitionStyle,`
+    @{Name='Partitions';Expression={$_.NumberOfPartitions}} | `
+    Format-Table | Out-Host
 }

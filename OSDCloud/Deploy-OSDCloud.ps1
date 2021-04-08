@@ -9,7 +9,7 @@
 #   In WinPE, the latest version will be installed automatically
 #   In Windows, this script is stopped and you will need to update manually
 #=======================================================================
-[Version]$OSDVersionMin = '21.4.7.2'
+[Version]$OSDVersionMin = '21.4.7.3'
 
 if ((Get-Module -Name OSD -ListAvailable | `Sort-Object Version -Descending | Select-Object -First 1).Version -lt $OSDVersionMin) {
     Write-Warning "OSDCloud requires OSD $OSDVersionMin or newer"
@@ -61,34 +61,38 @@ Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) $(
 #=======================================================================
 #	AutoPilot Profiles
 #=======================================================================
-$GetOSDCloudAutopilotFile = Find-OSDCloudAutopilotFile
-
-if ($GetOSDCloudAutopilotFile) {
-    Write-Host -ForegroundColor DarkGray "========================================================================="
-    Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Select-OSDCloudAutopilotFile"
-
-    $Global:OSDCloudAutoPilotProfile = Select-OSDCloudAutopilotFile
-    if ($Global:OSDCloudAutoPilotProfile) {
-        Write-Host -ForegroundColor Cyan "OSDCloud will apply the following AutoPilot Profile as AutoPilotConfigurationFile.json"
-        $Global:OSDCloudAutoPilotProfile | Format-List
-    } else {
-        Write-Warning "AutoPilotConfigurationFile.json will not be configured for this deployment"
+if ($Global:OSDCloudSkipAutoPilot -eq $false) {
+    $GetOSDCloudAutopilotFile = Find-OSDCloudAutopilotFile
+    
+    if ($GetOSDCloudAutopilotFile) {
+        Write-Host -ForegroundColor DarkGray "========================================================================="
+        Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Select-OSDCloudAutopilotFile"
+    
+        $Global:OSDCloudAutoPilotProfile = Select-OSDCloudAutopilotFile
+        if ($Global:OSDCloudAutoPilotProfile) {
+            Write-Host -ForegroundColor Cyan "OSDCloud will apply the following AutoPilot Profile as AutoPilotConfigurationFile.json"
+            $Global:OSDCloudAutoPilotProfile | Format-List
+        } else {
+            Write-Warning "AutoPilotConfigurationFile.json will not be configured for this deployment"
+        }
     }
 }
 #=======================================================================
 #	Office Configuration 
 #=======================================================================
-$GetOSDCloudODT = Find-OSDCloudODTFile
-
-if ($GetOSDCloudODT) {
-    Write-Host -ForegroundColor DarkGray "========================================================================="
-    Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Select-OSDCloudODTFile"
-
-    $Global:OSDCloudODTConfig = Select-OSDCloudODTFile
-    if ($Global:OSDCloudODTConfig) {
-        Write-Host -ForegroundColor Cyan "Office Config: $($Global:OSDCloudODTConfig.FullName)"
-    } else {
-        Write-Warning "OSDCloud Office Config will not be configured for this deployment"
+if ($Global:OSDCloudSkipODT -eq $false) {
+    $GetOSDCloudODT = Find-OSDCloudODTFile
+    
+    if ($GetOSDCloudODT) {
+        Write-Host -ForegroundColor DarkGray "========================================================================="
+        Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Select-OSDCloudODTFile"
+    
+        $Global:OSDCloudODTConfig = Select-OSDCloudODTFile
+        if ($Global:OSDCloudODTConfig) {
+            Write-Host -ForegroundColor Cyan "Office Config: $($Global:OSDCloudODTConfig.FullName)"
+        } else {
+            Write-Warning "OSDCloud Office Config will not be configured for this deployment"
+        }
     }
 }
 #=======================================================================
@@ -120,8 +124,15 @@ if (Get-Disk.usb) {
 #   Clear-Disk.fixed
 #=======================================================================
 Write-Host -ForegroundColor DarkGray "========================================================================="
-Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Clear-Disk.fixed -Force"
-Clear-Disk.fixed -Force -NoResults -ErrorAction Stop
+$GetDisk = Get-Disk.fixed | Where-Object {$_.IsBoot -eq $false} | Sort-Object Number
+if (($Global:OSDCloudZTI -eq $true) -and (($GetDisk | Measure-Object).Count -lt 2)) {
+    Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Clear-Disk.fixed -Force -NoResults -Confirm:$false"
+    Clear-Disk.fixed -Force -NoResults -Confirm:$false -ErrorAction Stop
+}
+else {
+    Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Clear-Disk.fixed -Force -NoResults"
+    Clear-Disk.fixed -Force -NoResults -ErrorAction Stop
+}
 #=======================================================================
 #   New-OSDisk
 #=======================================================================
@@ -445,4 +456,9 @@ if ($Global:OSDCloudScreenshot) {
     Stop-ScreenPNGProcess
     Write-Host -ForegroundColor Cyan    "Screenshots: $Global:OSDCloudScreenshot"
 }
+#=======================================================================
+Write-Warning "WinPE is restarting in 30 seconds"
+Write-Warning "Press CTRL + C to cancel"
+Start-Sleep 30
+wpeutil reboot
 #=======================================================================

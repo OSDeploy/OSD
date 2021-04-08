@@ -57,14 +57,14 @@ function Backup-Disk.ffu {
         Break
     }
     #=======================================================================
-    #	Select-DataStore
+    #	Select-FFUDataStore
     #=======================================================================
-    $SelectFFUDestination = Select-DataStore -NotDiskNumber $SelectFFUDisk.DiskNumber
+    $SelectFFUDestination = Select-FFUDataStore -NotDiskNumber $SelectFFUDisk.DiskNumber
     #=======================================================================
     #	Bail if there are no results
     #=======================================================================
     if (-NOT ($SelectFFUDestination)) {
-        Write-Warning "Could not find a DataStore to use for an FFU Backup"
+        Write-Warning "Could not find an FFUDataStore to use for an FFU Backup"
         Break
     }
 
