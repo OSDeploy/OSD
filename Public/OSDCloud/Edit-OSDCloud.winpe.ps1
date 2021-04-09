@@ -149,10 +149,11 @@ function Edit-OSDCloud.winpe {
         }
         if ($Driver -eq 'IntelWiFi'){
             Write-Verbose "Adding $Driver CloudDriver"
-            if (Test-WebConnection -Uri 'https://downloadcenter.intel.com/download/30280/Intel-PROSet-Wireless-Software-and-Drivers-for-IT-Admins') {
-                $IntelWiFiDownloads = (Invoke-WebRequest -Uri 'https://downloadcenter.intel.com/download/30280/Intel-PROSet-Wireless-Software-and-Drivers-for-IT-Admins' -UseBasicParsing).Links
-                $IntelWiFiDownloads = $IntelWiFiDownloads | Where-Object {$_.download -match 'Driver64_Win10.zip'} | Sort-Object Download -Unique | Select-Object Download, Title -First 1
-                $SaveWebFile = Save-WebFile -SourceUrl $IntelWiFiDownloads.download
+            if (Test-WebConnection -Uri 'https://downloadmirror.intel.com/30280/a08/WiFi_22.40.0_Driver64_Win10.zip') {
+                #$IntelWiFiDownloads = (Invoke-WebRequest -Uri 'https://downloadmirror.intel.com/30280/a08/WiFi_22.40.0_Driver64_Win10.zip' -UseBasicParsing).Links
+                #$IntelWiFiDownloads = $IntelWiFiDownloads | Where-Object {$_.download -match 'Driver64_Win10.zip'} | Sort-Object Download -Unique | Select-Object Download, Title -First 1
+                #$SaveWebFile = Save-WebFile -SourceUrl $IntelWiFiDownloads.download
+                $SaveWebFile = Save-WebFile -SourceUrl 'https://downloadmirror.intel.com/30280/a08/WiFi_22.40.0_Driver64_Win10.zip'
                 if (Test-Path $SaveWebFile.FullName) {
                     $DriverCab = Get-Item -Path $SaveWebFile.FullName
                     $ExpandPath = Join-Path $DriverCab.Directory $DriverCab.BaseName
@@ -163,7 +164,7 @@ function Edit-OSDCloud.winpe {
                 }
             }
             else {
-                Write-Warning "Unable to connect to https://downloadcenter.intel.com/download/30280/Intel-PROSet-Wireless-Software-and-Drivers-for-I1T-Admins"
+                Write-Warning "Unable to connect to https://downloadcenter.intel.com/download/30280/Intel-PROSet-Wireless-Software-and-Drivers-for-IT-Admins"
             }
         }
         if ($Driver -eq 'Nutanix'){

@@ -149,6 +149,15 @@ Windows Registry Editor Version 5.00
         Break
     }
     #=======================================================================
+    #   Test WinRE
+    #=======================================================================
+    if ($PSBoundParameters.ContainsKey('WinRE')) {
+        if ((Get-PartitionWinRE).OperationalStatus -ne 'Online') {
+            Write-Warning "You can't use WinRE because of some issue.  Sorry!"
+            Break
+        }
+    }
+    #=======================================================================
     #   Get WinPE.wim
     #=======================================================================
     $TemplatePath = "$env:ProgramData\OSDCloud"
@@ -205,14 +214,14 @@ Windows Registry Editor Version 5.00
         [System.IO.File]::WriteAllBytes("$env:TEMP\winre.jpg",$Bytes)
         [System.IO.File]::WriteAllBytes("$env:TEMP\winpe.jpg",$Bytes)
 
-        robocopy "$env:TEMP" "$MountPath\Windows\System32" winpe.jpg /ndl /njh /njs /r:0 /w:0 /b
-        robocopy "$env:TEMP" "$MountPath\Windows\System32" winre.jpg /ndl /njh /njs /r:0 /w:0 /b
+        robocopy "$env:TEMP" "$MountPath\Windows\System32" winpe.jpg /ndl /njh /njs /r:0 /w:0 /b /np
+        robocopy "$env:TEMP" "$MountPath\Windows\System32" winre.jpg /ndl /njh /njs /r:0 /w:0 /b /np
         #=======================================================================
         #	Wireless
         #=======================================================================
         Write-Verbose "Adding Wireless support to $MountPath"
         if (Test-Path "$env:SystemRoot\System32\dmcmnutils.dll") {
-            robocopy "$env:SystemRoot\System32" "$MountPath\Windows\System32" dmcmnutils.dll /ndl /njh /njs /r:0 /w:0 /b
+            robocopy "$env:SystemRoot\System32" "$MountPath\Windows\System32" dmcmnutils.dll /ndl /njh /njs /r:0 /w:0 /b /np
         } else {
             Write-Warning "Could not find $env:SystemRoot\System32\dmcmnutils.dll"
         }
@@ -224,7 +233,7 @@ Windows Registry Editor Version 5.00
         } #>
 
         if (Test-Path "$env:SystemRoot\System32\mdmregistration.dll") {
-            robocopy "$env:SystemRoot\System32" "$MountPath\Windows\System32" mdmregistration.dll /ndl /njh /njs /r:0 /w:0 /b
+            robocopy "$env:SystemRoot\System32" "$MountPath\Windows\System32" mdmregistration.dll /ndl /njh /njs /r:0 /w:0 /b /np
         } else {
             Write-Warning "Could not find $env:SystemRoot\System32\mdmregistration.dll"
         }
@@ -327,7 +336,7 @@ Windows Registry Editor Version 5.00
     #=======================================================================
     Write-Verbose "Adding curl.exe to $MountPath"
     if (Test-Path "$env:SystemRoot\System32\curl.exe") {
-        robocopy "$env:SystemRoot\System32" "$MountPath\Windows\System32" curl.exe /ndl /nfl /njh /njs /b
+        robocopy "$env:SystemRoot\System32" "$MountPath\Windows\System32" curl.exe /ndl /nfl /njh /njs /r:0 /w:0 /b /np
     } else {
         Write-Warning "Could not find $env:SystemRoot\System32\curl.exe"
         Write-Warning "You must be using an old version of Windows"
@@ -338,7 +347,7 @@ Windows Registry Editor Version 5.00
     #=======================================================================
     Write-Verbose "Adding setx.exe to $MountPath"
     if (Test-Path "$env:SystemRoot\System32\setx.exe") {
-        robocopy "$env:SystemRoot\System32" "$MountPath\Windows\System32" setx.exe /ndl /nfl /njh /njs /b
+        robocopy "$env:SystemRoot\System32" "$MountPath\Windows\System32" setx.exe /ndl /nfl /njh /njs /r:0 /w:0 /b /np
     } else {
         Write-Warning "Could not find $env:SystemRoot\System32\setx.exe"
     }
@@ -348,7 +357,7 @@ Windows Registry Editor Version 5.00
     #=======================================================================
     Write-Verbose "Adding msinfo32.exe to $MountPath"
     if (Test-Path "$env:SystemRoot\System32\msinfo32.exe") {
-        robocopy "$env:SystemRoot\System32" "$MountPath\Windows\System32" msinfo32.exe /ndl /nfl /njh /njs /b
+        robocopy "$env:SystemRoot\System32" "$MountPath\Windows\System32" msinfo32.exe /ndl /nfl /njh /njs /r:0 /w:0 /b /np
     } else {
         Write-Warning "Could not find $env:SystemRoot\System32\msinfo32.exe"
     }
@@ -357,12 +366,12 @@ Windows Registry Editor Version 5.00
     #=======================================================================
     Write-Verbose "Adding On Screen Keyboard support to $MountPath"
     if (Test-Path "$env:SystemRoot\System32\osk.exe") {
-        robocopy "$env:SystemRoot\System32" "$MountPath\Windows\System32" osk.exe /ndl /nfl /njh /njs /b
+        robocopy "$env:SystemRoot\System32" "$MountPath\Windows\System32" osk.exe /ndl /nfl /njh /njs /r:0 /w:0 /b /np
     } else {
         Write-Warning "Could not find $env:SystemRoot\System32\osk.exe"
     }
     if (Test-Path "$env:SystemRoot\System32\osksupport.dll") {
-        robocopy "$env:SystemRoot\System32" "$MountPath\Windows\System32" osksupport.dll /ndl /nfl /njh /njs /b
+        robocopy "$env:SystemRoot\System32" "$MountPath\Windows\System32" osksupport.dll /ndl /nfl /njh /njs /r:0 /w:0 /b /np
     } else {
         Write-Warning "Could not find $env:SystemRoot\System32\osksupport.dll"
     }
@@ -383,15 +392,17 @@ Windows Registry Editor Version 5.00
         Write-Verbose "Adding Microsoft DaRT"
         expand.exe "C:\Program Files\Microsoft DaRT\v10\Toolsx64.cab" -F:*.* "$MountPath" | Out-Null
 
-        if (Test-Path "$MountPath\Windows\System32\winpeshl.ini") {
-            Write-Verbose "Removing $MountPath\Windows\System32\winpeshl.ini"
-            Remove-Item -Path "$MountPath\Windows\System32\winpeshl.ini" -Force
-        }
-
         if (Test-Path "C:\Program Files\Microsoft Deployment Toolkit\Templates\DartConfig8.dat") {
             Write-Verbose "Adding Microsoft DaRT Config"
             Copy-Item -Path "C:\Program Files\Microsoft Deployment Toolkit\Templates\DartConfig8.dat" -Destination "$MountPath\Windows\System32\DartConfig.dat" -Force
         }
+    }
+    #=======================================================================
+    #   Remove winpeshl
+    #=======================================================================
+    if (Test-Path "$MountPath\Windows\System32\winpeshl.ini") {
+        Write-Verbose "Removing $MountPath\Windows\System32\winpeshl.ini"
+        Remove-Item -Path "$MountPath\Windows\System32\winpeshl.ini" -Force
     }
     #=======================================================================
     #   Registry Fixes
