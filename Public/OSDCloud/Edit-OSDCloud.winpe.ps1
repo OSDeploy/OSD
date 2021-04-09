@@ -28,7 +28,7 @@ function Edit-OSDCloud.winpe {
 
         [string[]]$DriverPath,
 
-        [ValidateSet('Dell','HP','Nutanix','VMware')]
+        [ValidateSet('Dell','HP','IntelWiFi','Nutanix','VMware')]
         [string[]]$CloudDriver,
 
         [string[]]$Modules,
@@ -141,11 +141,29 @@ function Edit-OSDCloud.winpe {
                     $DriverCab = Get-Item -Path $SaveWebFile.FullName
                     $ExpandPath = Join-Path $DriverCab.Directory $DriverCab.BaseName
 
-
                     Write-Verbose -Verbose "Expanding HP Client Windows PE Driver Pack to $ExpandPath"
                     Start-Process -FilePath $DriverCab -ArgumentList "/s /e /f `"$ExpandPath`"" -Wait
                     Add-WindowsDriver -Path "$($MountMyWindowsImage.Path)" -Driver "$ExpandPath" -Recurse -ForceUnsigned -Verbose
                 }
+            }
+        }
+        if ($Driver -eq 'IntelWiFi'){
+            Write-Verbose "Adding $Driver CloudDriver"
+            if (Test-WebConnection -Uri 'https://downloadcenter.intel.com/download/30280/Intel-PROSet-Wireless-Software-and-Drivers-for-I1T-Admins') {
+                $IntelWiFiDownloads = (Invoke-WebRequest -Uri 'https://downloadcenter.intel.com/download/30280/Intel-PROSet-Wireless-Software-and-Drivers-for-I1T-Admins' -UseBasicParsing).Links
+                $IntelWiFiDownloads = $IntelWiFiDownloads | Where-Object {$_.download -match 'Driver64_Win10.zip'} | Sort-Object Download -Unique | Select-Object Download, Title -First 1
+                $SaveWebFile = Save-WebFile -SourceUrl $IntelWiFiDownloads.download
+                if (Test-Path $SaveWebFile.FullName) {
+                    $DriverCab = Get-Item -Path $SaveWebFile.FullName
+                    $ExpandPath = Join-Path $DriverCab.Directory $DriverCab.BaseName
+                    Write-Verbose -Verbose "Expanding Intel Wireless Drivers to $ExpandPath"
+
+                    Expand-Archive -Path $DriverCab -DestinationPath $ExpandPath -Force
+                    Add-WindowsDriver -Path "$($MountMyWindowsImage.Path)" -Driver "$ExpandPath" -Recurse -ForceUnsigned -Verbose
+                }
+            }
+            else {
+                Write-Warning "Unable to connect to https://downloadcenter.intel.com/download/30280/Intel-PROSet-Wireless-Software-and-Drivers-for-I1T-Admins"
             }
         }
         if ($Driver -eq 'Nutanix'){
@@ -184,9 +202,10 @@ function Edit-OSDCloud.winpe {
     #=======================================================================
     #   Startnet
     #=======================================================================
-    Write-Verbose "Adding PowerShell.exe to Startnet.cmd"
+    Write-Verbose "Adding wlansvc and PowerShell.exe to Startnet.cmd"
 $Startnet = @'
 wpeinit
+net start wlansvc
 start powershell.exe
 '@
 

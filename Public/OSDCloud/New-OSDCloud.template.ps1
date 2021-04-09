@@ -34,7 +34,9 @@ function New-OSDCloud.template {
         [string[]]$Language,
 
         [string]$SetAllIntl,
-        [string]$SetInputLocale
+        [string]$SetInputLocale,
+
+        [switch]$WinRE
     )
 
 $RegistryConsole = @'
@@ -166,8 +168,15 @@ Windows Registry Editor Version 5.00
     }
 
     $BootWim = Join-Path $DestinationSources 'boot.wim'
-    Write-Verbose "Copying ADK Boot.wim to $BootWim"
-    Copy-Item -Path $WimSourcePath -Destination $BootWim -Force
+
+    if ($PSBoundParameters.ContainsKey('WinRE')) {
+        Write-Verbose "Copying WinRE.wim to $BootWim"
+        Copy-WinRE -DestinationDirectory $DestinationSources -DestinationFileName 'boot.wim' -Verbose
+    }
+    else {
+        Write-Verbose "Copying ADK Boot.wim to $BootWim"
+        Copy-Item -Path $WimSourcePath -Destination $BootWim -Force
+    }
     #=======================================================================
     #   Download wgl4_boot.ttf
     #   This is used to resolve issues with WinPE Resolutions in 2004/20H2
@@ -184,6 +193,44 @@ Windows Registry Editor Version 5.00
     #=======================================================================
     $MountMyWindowsImage = Mount-MyWindowsImage $BootWim
     $MountPath = $MountMyWindowsImage.Path
+    #=======================================================================
+    #   WinRE
+    #=======================================================================
+    if ($PSBoundParameters.ContainsKey('WinRE')) {
+        #=======================================================================
+        #	Wallpaper
+        #=======================================================================
+        $Wallpaper = '/9j/4AAQSkZJRgABAQEAYABgAAD/2wBDAAIBAQIBAQICAgICAgICAwUDAwMDAwYEBAMFBwYHBwcGBwcICQsJCAgKCAcHCg0KCgsMDAwMBwkODw0MDgsMDAz/2wBDAQICAgMDAwYDAwYMCAcIDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAz/wAARCAAgACADASIAAhEBAxEB/8QAHwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtRAAAgEDAwIEAwUFBAQAAAF9AQIDAAQRBRIhMUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkKFhcYGRolJicoKSo0NTY3ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqDhIWGh4iJipKTlJWWl5iZmqKjpKWmp6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uHi4+Tl5ufo6erx8vP09fb3+Pn6/8QAHwEAAwEBAQEBAQEBAQAAAAAAAAECAwQFBgcICQoL/8QAtREAAgECBAQDBAcFBAQAAQJ3AAECAxEEBSExBhJBUQdhcRMiMoEIFEKRobHBCSMzUvAVYnLRChYkNOEl8RcYGRomJygpKjU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6goOEhYaHiImKkpOUlZaXmJmaoqOkpaanqKmqsrO0tba3uLm6wsPExcbHyMnK0tPU1dbX2Nna4uPk5ebn6Onq8vP09fb3+Pn6/9oADAMBAAIRAxEAPwD5vooor+sD+KwooooAKKKKACiiigD/2Q=='
+        [byte[]]$Bytes = [convert]::FromBase64String($Wallpaper)
+        [System.IO.File]::WriteAllBytes("$env:TEMP\winre.jpg",$Bytes)
+        [System.IO.File]::WriteAllBytes("$env:TEMP\winpe.jpg",$Bytes)
+
+        robocopy "$env:TEMP" "$MountPath\Windows\System32" winpe.jpg /ndl /njh /njs /r:0 /w:0 /b
+        robocopy "$env:TEMP" "$MountPath\Windows\System32" winre.jpg /ndl /njh /njs /r:0 /w:0 /b
+        #=======================================================================
+        #	Wireless
+        #=======================================================================
+        Write-Verbose "Adding Wireless support to $MountPath"
+        if (Test-Path "$env:SystemRoot\System32\dmcmnutils.dll") {
+            robocopy "$env:SystemRoot\System32" "$MountPath\Windows\System32" dmcmnutils.dll /ndl /njh /njs /r:0 /w:0 /b
+        } else {
+            Write-Warning "Could not find $env:SystemRoot\System32\dmcmnutils.dll"
+        }
+        
+<#         if (Test-Path "$env:SystemRoot\System32\mdmpostprocessevaluator.dll") {
+            robocopy "$env:SystemRoot\System32" "$MountPath\Windows\System32" mdmpostprocessevaluator.dll /ndl /njh /njs /r:0 /w:0 /b
+        } else {
+            Write-Warning "Could not find $env:SystemRoot\System32\mdmpostprocessevaluator.dll"
+        } #>
+
+        if (Test-Path "$env:SystemRoot\System32\mdmregistration.dll") {
+            robocopy "$env:SystemRoot\System32" "$MountPath\Windows\System32" mdmregistration.dll /ndl /njh /njs /r:0 /w:0 /b
+        } else {
+            Write-Warning "Could not find $env:SystemRoot\System32\mdmregistration.dll"
+        }
+
+        Save-WebFile -SourceUrl 'https://github.com/okieselbach/Helpers/raw/master/WirelessConnect/WirelessConnect/bin/Release/WirelessConnect.exe' -DestinationDirectory "$MountPath\Windows"
+    }
     #=======================================================================
     #   Packages
     #=======================================================================
@@ -310,20 +357,6 @@ Windows Registry Editor Version 5.00
     } else {
         Write-Warning "Could not find $env:SystemRoot\System32\osksupport.dll"
     }
-    #=======================================================================
-    #	Wireless
-    #=======================================================================
-<#     Write-Verbose "Adding Wireless support to $MountPath"
-    if (Test-Path "$env:SystemRoot\System32\mdmregistration.dll") {
-        robocopy "$env:SystemRoot\System32" "$MountPath\Windows\System32" mdmregistration.dll /ndl /nfl /njh /njs /b
-    } else {
-        Write-Warning "Could not find $env:SystemRoot\System32\mdmregistration.dll"
-    }
-    if (Test-Path "$env:SystemRoot\System32\dmcmnutils.dll") {
-        robocopy "$env:SystemRoot\System32" "$MountPath\Windows\System32" dmcmnutils.dll /ndl /nfl /njh /njs /b
-    } else {
-        Write-Warning "Could not find $env:SystemRoot\System32\dmcmnutils.dll"
-    } #>
     #=======================================================================
     #	PowerShell Execution Policy
     #=======================================================================

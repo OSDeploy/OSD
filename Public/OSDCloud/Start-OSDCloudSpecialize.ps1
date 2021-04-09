@@ -130,7 +130,7 @@ function Start-OSDCloudSpecialize {
             #=======================================================================
             #   Everything Else
             #=======================================================================
-            Write-Warning "Unable to expand $ExpandFile"
+            Write-Warning "File cannot be expanded $ExpandFile"
             Write-Verbose -Verbose ""
             #=======================================================================
         }
