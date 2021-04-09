@@ -357,7 +357,7 @@ Windows Registry Editor Version 5.00
     #=======================================================================
     Write-Verbose "Adding msinfo32.exe to $MountPath"
     if (Test-Path "$env:SystemRoot\System32\msinfo32.exe") {
-        robocopy "$env:SystemRoot\System32" "$MountPath\Windows\System32" msinfo32.exe /ndl /nfl /njh /njs /r:0 /w:0 /b /np
+        robocopy "$env:SystemRoot\System32" "$MountPath\Windows\System32" msinfo32.* /e /ndl /nfl /njh /njs /r:0 /w:0 /b /np
     } else {
         Write-Warning "Could not find $env:SystemRoot\System32\msinfo32.exe"
     }
