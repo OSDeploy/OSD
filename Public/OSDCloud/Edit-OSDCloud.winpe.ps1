@@ -149,8 +149,8 @@ function Edit-OSDCloud.winpe {
         }
         if ($Driver -eq 'IntelWiFi'){
             Write-Verbose "Adding $Driver CloudDriver"
-            if (Test-WebConnection -Uri 'https://downloadcenter.intel.com/download/30280/Intel-PROSet-Wireless-Software-and-Drivers-for-I1T-Admins') {
-                $IntelWiFiDownloads = (Invoke-WebRequest -Uri 'https://downloadcenter.intel.com/download/30280/Intel-PROSet-Wireless-Software-and-Drivers-for-I1T-Admins' -UseBasicParsing).Links
+            if (Test-WebConnection -Uri 'https://downloadcenter.intel.com/download/30280/Intel-PROSet-Wireless-Software-and-Drivers-for-IT-Admins') {
+                $IntelWiFiDownloads = (Invoke-WebRequest -Uri 'https://downloadcenter.intel.com/download/30280/Intel-PROSet-Wireless-Software-and-Drivers-for-IT-Admins' -UseBasicParsing).Links
                 $IntelWiFiDownloads = $IntelWiFiDownloads | Where-Object {$_.download -match 'Driver64_Win10.zip'} | Sort-Object Download -Unique | Select-Object Download, Title -First 1
                 $SaveWebFile = Save-WebFile -SourceUrl $IntelWiFiDownloads.download
                 if (Test-Path $SaveWebFile.FullName) {
