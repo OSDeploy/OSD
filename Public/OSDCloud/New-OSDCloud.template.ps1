@@ -341,7 +341,16 @@ Windows Registry Editor Version 5.00
         robocopy "$env:SystemRoot\System32" "$MountPath\Windows\System32" setx.exe /ndl /nfl /njh /njs /b
     } else {
         Write-Warning "Could not find $env:SystemRoot\System32\setx.exe"
-        Write-Warning "You must be using an old version of Windows"
+    }
+    #=======================================================================
+    #	21.4.9
+    #   MSInfo32
+    #=======================================================================
+    Write-Verbose "Adding msinfo32.exe to $MountPath"
+    if (Test-Path "$env:SystemRoot\System32\msinfo32.exe") {
+        robocopy "$env:SystemRoot\System32" "$MountPath\Windows\System32" msinfo32.exe /ndl /nfl /njh /njs /b
+    } else {
+        Write-Warning "Could not find $env:SystemRoot\System32\msinfo32.exe"
     }
     #=======================================================================
     #	OSK 21.3.25.2
