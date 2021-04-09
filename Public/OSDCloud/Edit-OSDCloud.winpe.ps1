@@ -164,7 +164,7 @@ function Edit-OSDCloud.winpe {
                 }
             }
             else {
-                Write-Warning "Unable to connect to https://downloadcenter.intel.com/download/30280/Intel-PROSet-Wireless-Software-and-Drivers-for-IT-Admins"
+                Write-Warning "Unable to connect to https://downloadmirror.intel.com/30280/a08/WiFi_22.40.0_Driver64_Win10.zip"
             }
         }
         if ($Driver -eq 'Nutanix'){
