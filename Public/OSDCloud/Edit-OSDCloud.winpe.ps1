@@ -33,7 +33,10 @@ function Edit-OSDCloud.winpe {
 
         [string[]]$Modules,
 
-        [switch]$CopyOSDModule
+        [switch]$CopyOSDModule,
+
+        [string]$WebPSScript,
+        [string]$Wallpaper
     )
     #=======================================================================
     #	Start the Clock
@@ -207,15 +210,27 @@ function Edit-OSDCloud.winpe {
 $Startnet = @'
 wpeinit
 net start wlansvc
-start powershell.exe
 '@
 
     $Startnet | Out-File -FilePath "$MountPath\Windows\System32\Startnet.cmd" -Force -Encoding ascii
 
-<#     $Startnet = Get-Content -Path "$MountPath\Windows\System32\Startnet.cmd"
-    if ($Startnet -notmatch "start powershell") {
-        Add-Content -Path "$MountPath\Windows\System32\Startnet.cmd" -Value 'start powershell.exe' -Force
-    } #>
+    if ($WebPSScript) {
+        Write-Warning "The WebPSScript parameter is adding your Cloud PowerShell script to Startnet.cmd"
+        Write-Warning "This must be set every time you run Edit-OSDCloud.winpe as this will revert to 'start PowerShell.exe'"
+        Add-Content -Path "$MountPath\Windows\System32\Startnet.cmd" -Value "start PowerShell.exe -Command Invoke-WebPSScript -WebPSScript $WebPSScript" -Force
+    }
+    else {
+        Add-Content -Path "$MountPath\Windows\System32\Startnet.cmd" -Value 'start PowerShell.exe' -Force
+    }
+    #=======================================================================
+    #   Wallpaper
+    #=======================================================================
+    if ($Wallpaper) {
+        Copy-Item -Path $Wallpaper -Destination "$env:TEMP\winpe.jpg" -Force | Out-Null
+        Copy-Item -Path $Wallpaper -Destination "$env:TEMP\winre.jpg" -Force | Out-Null
+        robocopy "$env:TEMP" "$MountPath\Windows\System32" winpe.jpg /ndl /njh /njs /b /np /r:0 /w:0
+        robocopy "$env:TEMP" "$MountPath\Windows\System32" winre.jpg /ndl /njh /njs /b /np /r:0 /w:0
+    }
     #=======================================================================
     #   Modules
     #=======================================================================
@@ -245,7 +260,7 @@ start powershell.exe
         Copy-PSModuleToWindowsImage -Name OSD -Path $MountPath
     }
     else {
-        Write-Verbose -Verbose "Saving OSD to $MountPath\Program Files\WindowsPowerShell\Modules"
+        Write-Verbose "Saving OSD to $MountPath\Program Files\WindowsPowerShell\Modules"
         Save-Module -Name OSD -Path "$MountPath\Program Files\WindowsPowerShell\Modules" -Force
     }
     #=======================================================================
