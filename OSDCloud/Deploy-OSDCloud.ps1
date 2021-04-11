@@ -9,7 +9,7 @@
 #   In WinPE, the latest version will be installed automatically
 #   In Windows, this script is stopped and you will need to update manually
 #=======================================================================
-[Version]$OSDVersionMin = '21.4.9.4'
+[Version]$OSDVersionMin = '21.4.10.1'
 
 if ((Get-Module -Name OSD -ListAvailable | `Sort-Object Version -Descending | Select-Object -First 1).Version -lt $OSDVersionMin) {
     Write-Warning "OSDCloud requires OSD $OSDVersionMin or newer"
@@ -457,8 +457,8 @@ if ($Global:OSDCloudScreenshot) {
     Write-Host -ForegroundColor Cyan    "Screenshots: $Global:OSDCloudScreenshot"
 }
 #=======================================================================
-Write-Warning "WinPE is restarting in 30 seconds"
+<# Write-Warning "WinPE is restarting in 30 seconds"
 Write-Warning "Press CTRL + C to cancel"
 Start-Sleep 30
-wpeutil reboot
+wpeutil reboot #>
 #=======================================================================
