@@ -38,6 +38,107 @@ function Edit-OSDCloud.winpe {
         [string]$WebPSScript,
         [string]$Wallpaper
     )
+
+$RegistryConsole = @'
+Windows Registry Editor Version 5.00
+
+[HKEY_LOCAL_MACHINE\Default\Console]
+"ColorTable00"=dword:000c0c0c
+"ColorTable01"=dword:00da3700
+"ColorTable02"=dword:000ea113
+"ColorTable03"=dword:00dd963a
+"ColorTable04"=dword:001f0fc5
+"ColorTable05"=dword:00981788
+"ColorTable06"=dword:00009cc1
+"ColorTable07"=dword:00cccccc
+"ColorTable08"=dword:00767676
+"ColorTable09"=dword:00ff783b
+"ColorTable10"=dword:000cc616
+"ColorTable11"=dword:00d6d661
+"ColorTable12"=dword:005648e7
+"ColorTable13"=dword:009e00b4
+"ColorTable14"=dword:00a5f1f9
+"ColorTable15"=dword:00f2f2f2
+"CtrlKeyShortcutsDisabled"=dword:00000000
+"CursorColor"=dword:ffffffff
+"CursorSize"=dword:00000019
+"DefaultBackground"=dword:ffffffff
+"DefaultForeground"=dword:ffffffff
+"EnableColorSelection"=dword:00000000
+"ExtendedEditKey"=dword:00000001
+"ExtendedEditKeyCustom"=dword:00000000
+"FaceName"="Consolas"
+"FilterOnPaste"=dword:00000001
+"FontFamily"=dword:00000036
+"FontSize"=dword:00140000
+"FontWeight"=dword:00000000
+"ForceV2"=dword:00000000
+"FullScreen"=dword:00000000
+"HistoryBufferSize"=dword:00000032
+"HistoryNoDup"=dword:00000000
+"InsertMode"=dword:00000001
+"LineSelection"=dword:00000001
+"LineWrap"=dword:00000001
+"LoadConIme"=dword:00000001
+"NumberOfHistoryBuffers"=dword:00000004
+"PopupColors"=dword:000000f5
+"QuickEdit"=dword:00000001
+"ScreenBufferSize"=dword:23290078
+"ScreenColors"=dword:00000007
+"ScrollScale"=dword:00000001
+"TerminalScrolling"=dword:00000000
+"TrimLeadingZeros"=dword:00000000
+"WindowAlpha"=dword:000000ff
+"WindowSize"=dword:001e0078
+"WordDelimiters"=dword:00000000
+
+[HKEY_LOCAL_MACHINE\Default\Console\%SystemRoot%_System32_cmd.exe]
+"FilterOnPaste"=dword:00000000
+"FontSize"=dword:00140000
+"FontWeight"=dword:00000190
+"LineSelection"=dword:00000000
+"LineWrap"=dword:00000000
+"WindowAlpha"=dword:00000000
+"WindowPosition"=dword:00000000
+"WindowSize"=dword:0012004e
+
+[HKEY_LOCAL_MACHINE\Default\Console\%SystemRoot%_System32_WindowsPowerShell_v1.0_powershell.exe]
+"ColorTable05"=dword:00562401
+"ColorTable06"=dword:00f0edee
+"FaceName"="Consolas"
+"FilterOnPaste"=dword:00000000
+"FontFamily"=dword:00000036
+"FontSize"=dword:00140000
+"FontWeight"=dword:00000190
+"LineSelection"=dword:00000000
+"LineWrap"=dword:00000000
+"PopupColors"=dword:000000f3
+"QuickEdit"=dword:00000001
+"ScreenBufferSize"=dword:03e8012c
+"ScreenColors"=dword:00000056
+"WindowAlpha"=dword:00000000
+"WindowPosition"=dword:00060005
+"WindowSize"=dword:001d005f
+
+[HKEY_LOCAL_MACHINE\Default\Console\%SystemRoot%_SysWOW64_WindowsPowerShell_v1.0_powershell.exe]
+"ColorTable05"=dword:00562401
+"ColorTable06"=dword:00f0edee
+"FaceName"="Consolas"
+"FilterOnPaste"=dword:00000000
+"FontFamily"=dword:00000036
+"FontSize"=dword:00140000
+"FontWeight"=dword:00000190
+"LineSelection"=dword:00000000
+"LineWrap"=dword:00000000
+"PopupColors"=dword:000000f3
+"QuickEdit"=dword:00000001
+"ScreenBufferSize"=dword:03e8012c
+"ScreenColors"=dword:00000056
+"WindowAlpha"=dword:00000000
+"WindowPosition"=dword:00060005
+"WindowSize"=dword:001d005f
+'@
+
     #=======================================================================
     #	Start the Clock
     #=======================================================================
@@ -206,26 +307,36 @@ function Edit-OSDCloud.winpe {
     #=======================================================================
     #   Startnet
     #=======================================================================
-    Write-Verbose "Adding wlansvc and PowerShell.exe to Startnet.cmd"
+    Write-Verbose "Startnet.cmd: wpeinit"
 $Startnet = @'
 wpeinit
-net start wlansvc
 '@
-
     $Startnet | Out-File -FilePath "$MountPath\Windows\System32\Startnet.cmd" -Force -Encoding ascii
+
+    if (Test-Path "$MountPath\Windows\WirelessConnect.exe") {
+        Write-Verbose "Startnet.cmd: net start wlansvc"
+        Add-Content -Path "$MountPath\Windows\System32\Startnet.cmd" -Value 'net start wlansvc' -Force
+
+        Write-Verbose "Startnet.cmd: start PowerShell.exe -Command Start-OSDWireless"
+        Add-Content -Path "$MountPath\Windows\System32\Startnet.cmd" -Value "start /wait PowerShell.exe -Command Start-OSDWireless" -Force
+    }
 
     if ($WebPSScript) {
         Write-Warning "The WebPSScript parameter is adding your Cloud PowerShell script to Startnet.cmd"
         Write-Warning "This must be set every time you run Edit-OSDCloud.winpe as this will revert to 'start PowerShell.exe'"
+
+        Write-Verbose "Startnet.cmd: start PowerShell.exe -Command Invoke-WebPSScript -WebPSScript $WebPSScript"
         Add-Content -Path "$MountPath\Windows\System32\Startnet.cmd" -Value "start PowerShell.exe -Command Invoke-WebPSScript -WebPSScript $WebPSScript" -Force
     }
     else {
+        Write-Verbose "Startnet.cmd: start PowerShell.exe"
         Add-Content -Path "$MountPath\Windows\System32\Startnet.cmd" -Value 'start PowerShell.exe' -Force
     }
     #=======================================================================
     #   Wallpaper
     #=======================================================================
     if ($Wallpaper) {
+        Write-Verbose "Wallpaper: $Wallpaper"
         Copy-Item -Path $Wallpaper -Destination "$env:TEMP\winpe.jpg" -Force | Out-Null
         Copy-Item -Path $Wallpaper -Destination "$env:TEMP\winre.jpg" -Force | Out-Null
         robocopy "$env:TEMP" "$MountPath\Windows\System32" winpe.jpg /ndl /njh /njs /b /np /r:0 /w:0
@@ -263,6 +374,17 @@ net start wlansvc
         Write-Verbose "Saving OSD to $MountPath\Program Files\WindowsPowerShell\Modules"
         Save-Module -Name OSD -Path "$MountPath\Program Files\WindowsPowerShell\Modules" -Force
     }
+    #=======================================================================
+    #   Registry Fixes
+    #=======================================================================
+    $RegistryConsole | Out-File -FilePath "$env:TEMP\RegistryConsole.reg" -Encoding ascii -Force
+
+    #Mount Registry
+    reg load HKLM\Default "$MountPath\Windows\System32\Config\DEFAULT"
+    reg import "$env:TEMP\RegistryConsole.reg" | Out-Null
+
+    #Unload Registry
+    reg unload HKLM\Default
     #=======================================================================
     #   Save WIM
     #=======================================================================

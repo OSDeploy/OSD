@@ -67,10 +67,10 @@ Windows Registry Editor Version 5.00
 "EnableColorSelection"=dword:00000000
 "ExtendedEditKey"=dword:00000001
 "ExtendedEditKeyCustom"=dword:00000000
-"FaceName"="__DefaultTTFont__"
+"FaceName"="Consolas"
 "FilterOnPaste"=dword:00000001
-"FontFamily"=dword:00000000
-"FontSize"=dword:00100000
+"FontFamily"=dword:00000036
+"FontSize"=dword:00140000
 "FontWeight"=dword:00000000
 "ForceV2"=dword:00000000
 "FullScreen"=dword:00000000
@@ -92,13 +92,23 @@ Windows Registry Editor Version 5.00
 "WindowSize"=dword:001e0078
 "WordDelimiters"=dword:00000000
 
+[HKEY_LOCAL_MACHINE\Default\Console\%SystemRoot%_System32_cmd.exe]
+"FilterOnPaste"=dword:00000000
+"FontSize"=dword:00140000
+"FontWeight"=dword:00000190
+"LineSelection"=dword:00000000
+"LineWrap"=dword:00000000
+"WindowAlpha"=dword:00000000
+"WindowPosition"=dword:00000000
+"WindowSize"=dword:0012004e
+
 [HKEY_LOCAL_MACHINE\Default\Console\%SystemRoot%_System32_WindowsPowerShell_v1.0_powershell.exe]
 "ColorTable05"=dword:00562401
 "ColorTable06"=dword:00f0edee
 "FaceName"="Consolas"
 "FilterOnPaste"=dword:00000000
 "FontFamily"=dword:00000036
-"FontSize"=dword:00120008
+"FontSize"=dword:00140000
 "FontWeight"=dword:00000190
 "LineSelection"=dword:00000000
 "LineWrap"=dword:00000000
@@ -106,8 +116,9 @@ Windows Registry Editor Version 5.00
 "QuickEdit"=dword:00000001
 "ScreenBufferSize"=dword:03e8012c
 "ScreenColors"=dword:00000056
-"WindowPosition"=dword:00050005
-"WindowSize"=dword:0023006e
+"WindowAlpha"=dword:00000000
+"WindowPosition"=dword:00060005
+"WindowSize"=dword:001d005f
 
 [HKEY_LOCAL_MACHINE\Default\Console\%SystemRoot%_SysWOW64_WindowsPowerShell_v1.0_powershell.exe]
 "ColorTable05"=dword:00562401
@@ -115,7 +126,7 @@ Windows Registry Editor Version 5.00
 "FaceName"="Consolas"
 "FilterOnPaste"=dword:00000000
 "FontFamily"=dword:00000036
-"FontSize"=dword:00120008
+"FontSize"=dword:00140000
 "FontWeight"=dword:00000190
 "LineSelection"=dword:00000000
 "LineWrap"=dword:00000000
@@ -123,8 +134,9 @@ Windows Registry Editor Version 5.00
 "QuickEdit"=dword:00000001
 "ScreenBufferSize"=dword:03e8012c
 "ScreenColors"=dword:00000056
-"WindowPosition"=dword:00050005
-"WindowSize"=dword:0023006e
+"WindowAlpha"=dword:00000000
+"WindowPosition"=dword:00060005
+"WindowSize"=dword:001d005f
 '@
 
     #=======================================================================
@@ -176,13 +188,13 @@ Windows Registry Editor Version 5.00
         New-Item -Path "$DestinationSources" -ItemType Directory -Force -ErrorAction Stop | Out-Null
     }
 
-    $BootWim = Join-Path $DestinationSources 'boot.wim'
-
     if ($PSBoundParameters.ContainsKey('WinRE')) {
+        $BootWim = Join-Path $DestinationSources 'winre.wim'
         Write-Verbose "Copying WinRE.wim to $BootWim"
-        Copy-WinRE -DestinationDirectory $DestinationSources -DestinationFileName 'boot.wim' -Verbose
+        Copy-WinRE.wim -DestinationDirectory $DestinationSources -DestinationFileName 'winre.wim' -Verbose
     }
     else {
+        $BootWim = Join-Path $DestinationSources 'boot.wim'
         Write-Verbose "Copying ADK Boot.wim to $BootWim"
         Copy-Item -Path $WimSourcePath -Destination $BootWim -Force
     }
@@ -425,6 +437,17 @@ Windows Registry Editor Version 5.00
     #   Save WIM
     #=======================================================================
     $MountMyWindowsImage | Dismount-MyWindowsImage -Save
+
+    if ($PSBoundParameters.ContainsKey('WinRE')) {
+        $BootWim = Join-Path $DestinationSources 'boot.wim'
+        $WinREWim = Join-Path $DestinationSources 'winre.wim'
+
+        if (Test-Path $BootWim) {
+            Remove-Item -Path $BootWim -Force -ErrorAction Stop | Out-Null
+            Export-WindowsImage -SourceImagePath $WinREWim -SourceIndex 1 -DestinationImagePath $BootWim -DestinationName 'Microsoft Windows PE (x64)'
+            Remove-Item -Path $WinREWim -Force -ErrorAction Stop | Out-Null
+        }
+    }
     #=======================================================================
     #   Directories
     #=======================================================================

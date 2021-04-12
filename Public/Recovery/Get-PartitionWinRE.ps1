@@ -8,7 +8,7 @@ function Get-PartitionWinRE {
     $Results
 }
 
-function Copy-WinRE {
+function Copy-WinRE.wim {
     [CmdletBinding()]
     param (
         [string]$DestinationDirectory =$env:TEMP,
