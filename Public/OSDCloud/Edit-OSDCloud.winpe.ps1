@@ -13,7 +13,7 @@ This is optional as the OSDCloud.workspace is returned by Get-OSDCloud.workspace
 Path to additional Drivers you want to install
 
 .PARAMETER CloudDriver
-Download and install in WinPE drivers from Dell,HP,Nutanix,VMware
+Download and install in WinPE drivers from Dell,HP,Nutanix,VMware,WiFi
 
 .LINK
 https://osdcloud.osdeploy.com
@@ -28,7 +28,7 @@ function Edit-OSDCloud.winpe {
 
         [string[]]$DriverPath,
 
-        [ValidateSet('Dell','HP','IntelWiFi','Nutanix','VMware')]
+        [ValidateSet('Dell','HP','Nutanix','VMware','WiFi')]
         [string[]]$CloudDriver,
 
         [string[]]$Modules,
@@ -38,105 +38,6 @@ function Edit-OSDCloud.winpe {
         [string]$WebPSScript,
         [string]$Wallpaper
     )
-
-$RegistryConsole = @'
-Windows Registry Editor Version 5.00
-
-[HKEY_LOCAL_MACHINE\Default\Console]
-"ColorTable00"=dword:000c0c0c
-"ColorTable01"=dword:00da3700
-"ColorTable02"=dword:000ea113
-"ColorTable03"=dword:00dd963a
-"ColorTable04"=dword:001f0fc5
-"ColorTable05"=dword:00981788
-"ColorTable06"=dword:00009cc1
-"ColorTable07"=dword:00cccccc
-"ColorTable08"=dword:00767676
-"ColorTable09"=dword:00ff783b
-"ColorTable10"=dword:000cc616
-"ColorTable11"=dword:00d6d661
-"ColorTable12"=dword:005648e7
-"ColorTable13"=dword:009e00b4
-"ColorTable14"=dword:00a5f1f9
-"ColorTable15"=dword:00f2f2f2
-"CtrlKeyShortcutsDisabled"=dword:00000000
-"CursorColor"=dword:ffffffff
-"CursorSize"=dword:00000019
-"DefaultBackground"=dword:ffffffff
-"DefaultForeground"=dword:ffffffff
-"EnableColorSelection"=dword:00000000
-"ExtendedEditKey"=dword:00000001
-"ExtendedEditKeyCustom"=dword:00000000
-"FaceName"="Consolas"
-"FilterOnPaste"=dword:00000001
-"FontFamily"=dword:00000036
-"FontSize"=dword:00140000
-"FontWeight"=dword:00000000
-"ForceV2"=dword:00000000
-"FullScreen"=dword:00000000
-"HistoryBufferSize"=dword:00000032
-"HistoryNoDup"=dword:00000000
-"InsertMode"=dword:00000001
-"LineSelection"=dword:00000001
-"LineWrap"=dword:00000001
-"LoadConIme"=dword:00000001
-"NumberOfHistoryBuffers"=dword:00000004
-"PopupColors"=dword:000000f5
-"QuickEdit"=dword:00000001
-"ScreenBufferSize"=dword:23290078
-"ScreenColors"=dword:00000007
-"ScrollScale"=dword:00000001
-"TerminalScrolling"=dword:00000000
-"TrimLeadingZeros"=dword:00000000
-"WindowAlpha"=dword:000000ff
-"WindowSize"=dword:001e0078
-"WordDelimiters"=dword:00000000
-
-[HKEY_LOCAL_MACHINE\Default\Console\%SystemRoot%_System32_cmd.exe]
-"FilterOnPaste"=dword:00000000
-"FontSize"=dword:00140000
-"FontWeight"=dword:00000190
-"LineSelection"=dword:00000000
-"LineWrap"=dword:00000000
-"WindowAlpha"=dword:00000000
-"WindowPosition"=dword:00000000
-"WindowSize"=dword:0012004e
-
-[HKEY_LOCAL_MACHINE\Default\Console\%SystemRoot%_System32_WindowsPowerShell_v1.0_powershell.exe]
-"ColorTable05"=dword:00562401
-"ColorTable06"=dword:00f0edee
-"FaceName"="Consolas"
-"FilterOnPaste"=dword:00000000
-"FontFamily"=dword:00000036
-"FontSize"=dword:00140000
-"FontWeight"=dword:00000190
-"LineSelection"=dword:00000000
-"LineWrap"=dword:00000000
-"PopupColors"=dword:000000f3
-"QuickEdit"=dword:00000001
-"ScreenBufferSize"=dword:03e8012c
-"ScreenColors"=dword:00000056
-"WindowAlpha"=dword:00000000
-"WindowSize"=dword:0020006c
-
-[HKEY_LOCAL_MACHINE\Default\Console\%SystemRoot%_SysWOW64_WindowsPowerShell_v1.0_powershell.exe]
-"ColorTable05"=dword:00562401
-"ColorTable06"=dword:00f0edee
-"FaceName"="Consolas"
-"FilterOnPaste"=dword:00000000
-"FontFamily"=dword:00000036
-"FontSize"=dword:00140000
-"FontWeight"=dword:00000190
-"LineSelection"=dword:00000000
-"LineWrap"=dword:00000000
-"PopupColors"=dword:000000f3
-"QuickEdit"=dword:00000001
-"ScreenBufferSize"=dword:03e8012c
-"ScreenColors"=dword:00000056
-"WindowAlpha"=dword:00000000
-"WindowSize"=dword:0020006c
-'@
-
     #=======================================================================
     #	Start the Clock
     #=======================================================================
@@ -249,12 +150,12 @@ Windows Registry Editor Version 5.00
                 }
             }
         }
-        if ($Driver -eq 'IntelWiFi'){
+        if ($Driver -eq 'WiFi'){
             Write-Verbose "Adding $Driver CloudDriver"
             if (Test-WebConnection -Uri 'https://downloadmirror.intel.com/30280/a08/WiFi_22.40.0_Driver64_Win10.zip') {
-                #$IntelWiFiDownloads = (Invoke-WebRequest -Uri 'https://downloadmirror.intel.com/30280/a08/WiFi_22.40.0_Driver64_Win10.zip' -UseBasicParsing).Links
-                #$IntelWiFiDownloads = $IntelWiFiDownloads | Where-Object {$_.download -match 'Driver64_Win10.zip'} | Sort-Object Download -Unique | Select-Object Download, Title -First 1
-                #$SaveWebFile = Save-WebFile -SourceUrl $IntelWiFiDownloads.download
+                #$WiFiDownloads = (Invoke-WebRequest -Uri 'https://downloadmirror.intel.com/30280/a08/WiFi_22.40.0_Driver64_Win10.zip' -UseBasicParsing).Links
+                #$WiFiDownloads = $WiFiDownloads | Where-Object {$_.download -match 'Driver64_Win10.zip'} | Sort-Object Download -Unique | Select-Object Download, Title -First 1
+                #$SaveWebFile = Save-WebFile -SourceUrl $WiFiDownloads.download
                 $SaveWebFile = Save-WebFile -SourceUrl 'https://downloadmirror.intel.com/30280/a08/WiFi_22.40.0_Driver64_Win10.zip'
                 if (Test-Path $SaveWebFile.FullName) {
                     $DriverCab = Get-Item -Path $SaveWebFile.FullName
@@ -308,6 +209,7 @@ Windows Registry Editor Version 5.00
     Write-Verbose "Startnet.cmd: wpeinit"
 $Startnet = @'
 wpeinit
+start PowerShell -Nol -W Mi
 '@
     $Startnet | Out-File -FilePath "$MountPath\Windows\System32\Startnet.cmd" -Force -Encoding ascii
 
@@ -315,20 +217,20 @@ wpeinit
         Write-Verbose "Startnet.cmd: net start wlansvc"
         Add-Content -Path "$MountPath\Windows\System32\Startnet.cmd" -Value 'net start wlansvc' -Force
 
-        Write-Verbose "Startnet.cmd: start PowerShell.exe -Command Start-WinREWiFi"
-        Add-Content -Path "$MountPath\Windows\System32\Startnet.cmd" -Value "start /wait PowerShell.exe -Command Start-WinREWiFi" -Force
+        Write-Verbose "Startnet.cmd: start PowerShell -NoL -Command Start-WinREWiFi"
+        Add-Content -Path "$MountPath\Windows\System32\Startnet.cmd" -Value "start /wait PowerShell -NoL -Command Start-WinREWiFi" -Force
     }
 
     if ($WebPSScript) {
         Write-Warning "The WebPSScript parameter is adding your Cloud PowerShell script to Startnet.cmd"
-        Write-Warning "This must be set every time you run Edit-OSDCloud.winpe as this will revert to 'start PowerShell.exe'"
+        Write-Warning "This must be set every time you run Edit-OSDCloud.winpe as this will revert to 'start PowerShell'"
 
-        Write-Verbose "Startnet.cmd: start PowerShell.exe -Command Invoke-WebPSScript -WebPSScript $WebPSScript"
-        Add-Content -Path "$MountPath\Windows\System32\Startnet.cmd" -Value "start PowerShell.exe -Command Invoke-WebPSScript -WebPSScript $WebPSScript" -Force
+        Write-Verbose "Startnet.cmd: start PowerShell -NoL -Command Invoke-WebPSScript -WebPSScript $WebPSScript"
+        Add-Content -Path "$MountPath\Windows\System32\Startnet.cmd" -Value "start PowerShell -NoL -Command Invoke-WebPSScript -WebPSScript $WebPSScript" -Force
     }
     else {
-        Write-Verbose "Startnet.cmd: start PowerShell.exe"
-        Add-Content -Path "$MountPath\Windows\System32\Startnet.cmd" -Value 'start PowerShell.exe' -Force
+        Write-Verbose "Startnet.cmd: start PowerShell -NoL"
+        Add-Content -Path "$MountPath\Windows\System32\Startnet.cmd" -Value 'start PowerShell -NoL' -Force
     }
     #=======================================================================
     #   Wallpaper
@@ -372,17 +274,6 @@ wpeinit
         Write-Verbose "Saving OSD to $MountPath\Program Files\WindowsPowerShell\Modules"
         Save-Module -Name OSD -Path "$MountPath\Program Files\WindowsPowerShell\Modules" -Force
     }
-    #=======================================================================
-    #   Registry Fixes
-    #=======================================================================
-    $RegistryConsole | Out-File -FilePath "$env:TEMP\RegistryConsole.reg" -Encoding ascii -Force
-
-    #Mount Registry
-    reg load HKLM\Default "$MountPath\Windows\System32\Config\DEFAULT"
-    reg import "$env:TEMP\RegistryConsole.reg" | Out-Null
-
-    #Unload Registry
-    reg unload HKLM\Default
     #=======================================================================
     #   Save WIM
     #=======================================================================

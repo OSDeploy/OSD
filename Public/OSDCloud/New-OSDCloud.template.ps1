@@ -93,14 +93,15 @@ Windows Registry Editor Version 5.00
 "WordDelimiters"=dword:00000000
 
 [HKEY_LOCAL_MACHINE\Default\Console\%SystemRoot%_System32_cmd.exe]
+"FaceName"="Consolas"
 "FilterOnPaste"=dword:00000000
-"FontSize"=dword:00140000
+"FontSize"=dword:00100000
 "FontWeight"=dword:00000190
 "LineSelection"=dword:00000000
 "LineWrap"=dword:00000000
 "WindowAlpha"=dword:00000000
 "WindowPosition"=dword:00000000
-"WindowSize"=dword:0012004e
+"WindowSize"=dword:00110054
 
 [HKEY_LOCAL_MACHINE\Default\Console\%SystemRoot%_System32_WindowsPowerShell_v1.0_powershell.exe]
 "ColorTable05"=dword:00562401
@@ -437,6 +438,14 @@ Windows Registry Editor Version 5.00
 
     #Unload Registry
     reg unload HKLM\Default
+    #=======================================================================
+    #   Save DISM
+    #   WinRE may not work right without this module added
+    #=======================================================================
+    if ($PSBoundParameters.ContainsKey('WinRE')) {
+        Write-Verbose -Verbose "Copy-PSModuleToWindowsImage -Name DISM -Path $MountPath"
+        Copy-PSModuleToWindowsImage -Name DISM -Path $MountPath
+    }
     #=======================================================================
     #   Save WIM
     #=======================================================================
