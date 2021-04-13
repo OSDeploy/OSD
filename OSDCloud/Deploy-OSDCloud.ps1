@@ -9,7 +9,7 @@
 #   In WinPE, the latest version will be installed automatically
 #   In Windows, this script is stopped and you will need to update manually
 #=======================================================================
-[Version]$OSDVersionMin = '21.4.13.2'
+[Version]$OSDVersionMin = '21.4.13.3'
 
 if ((Get-Module -Name OSD -ListAvailable | `Sort-Object Version -Descending | Select-Object -First 1).Version -lt $OSDVersionMin) {
     Write-Warning "OSDCloud requires OSD $OSDVersionMin or newer"
@@ -108,17 +108,23 @@ if ((Get-OSDGather -Property IsWinPE) -eq $false) {
     Break
 }
 #=======================================================================
-#   Remove USB Drives
+#   Offline USB Drives
 #   Don't allow USB Drives at this time so there is no worry about Drive Letters
 #=======================================================================
 $GetUSBDisk = Get-Disk.usb
-if (Get-Disk.usb) {
+
+<# if (Get-Disk.usb) {
     Write-Host -ForegroundColor DarkGray "========================================================================="
     do {
         Write-Warning "Remove all attached USB Drives until OSDisk has been prepared"
         pause
     }
     while (Get-Disk.usb)
+} #>
+
+foreach ($USBDisk in $GetUSBDisk) {
+    Write-Warning "Setting USB Disk $($USBDisk.Number) - $($USBDisk.FriendlyName) Offline"
+    Set-Disk -Number $USBDisk.Number -IsOffline:$true -Verbose
 }
 #=======================================================================
 #   Clear-Disk.fixed
@@ -158,12 +164,17 @@ if (-NOT (Get-PSDrive -Name 'C')) {
 #=======================================================================
 #   Reattach USB Drives
 #=======================================================================
-if ($GetUSBDisk) {
+<# if ($GetUSBDisk) {
     Write-Host -ForegroundColor DarkGray "========================================================================="
     Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Reattach any necessary USB Drives at this time"
     pause
     #Give some time for the drive to be initialized
     Start-Sleep -Seconds 10
+} #>
+foreach ($USBDisk in $GetUSBDisk) {
+    Write-Warning "Setting USB Disk $($USBDisk.Number) - $($USBDisk.FriendlyName) Online"
+    Set-Disk -Number $USBDisk.Number -IsOffline:$false -Verbose
+    Start-Sleep -Seconds 5
 }
 #=======================================================================
 #   Set the Power Plan to High Performance

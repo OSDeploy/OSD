@@ -279,11 +279,11 @@ function Start-WinREWiFi {
             Write-Warning "Missing required $ENV:SystemRoot\System32\rastlsext.dll"
             $StartWireless = $false
         }
-        if (!(Get-NetAdapter -Name 'Wi-Fi')) {
+<#         if (!(Get-NetAdapter -Name 'Wi-Fi')) {
             Write-Warning "No wireless adapters are present"
             Write-Warning "Drivers may need to be added to WinPE"
             $StartWireless = $false
-        }
+        } #>
     }
     #=======================================================================
     #	Test Wi-Fi Adapter
