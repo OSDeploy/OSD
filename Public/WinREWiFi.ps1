@@ -237,6 +237,17 @@ function Start-WinREWiFi {
     #Block-WinOS
     Block-PowerShellVersionLt5
     #=======================================================================
+    #	Test Internet Connection
+    #=======================================================================
+    if (Test-WebConnection -Uri 'google.com') {
+        Write-Warning "You are already connected to the Internet"
+        Write-Warning "There is nothing to do here"
+        $StartWireless = $false
+    }
+    else {
+        $StartWireless = $true
+    }
+    #=======================================================================
     #   Test WinRE
     #=======================================================================
     if ($StartWireless) {
@@ -277,15 +288,17 @@ function Start-WinREWiFi {
     #=======================================================================
     #	Test Wi-Fi Adapter
     #=======================================================================
-    $WirelessNetworkAdapter = Get-WmiObject -ClassName Win32_NetworkAdapter | Where-Object {$_.NetConnectionID -eq 'Wi-Fi'}
-    #$WirelessNetworkAdapter = Get-SmbClientNetworkInterface | Where-Object {$_.FriendlyName -eq 'Wi-Fi'}
-    if ($WirelessNetworkAdapter) {
-        $StartWireless = $true
-    }
-    else {
-        Write-Warning "No Wi-Fi Adapters are installed"
-        Write-Warning "You may need to add Drivers"
-        $StartWireless = $false
+    if ($StartWireless) {
+        $WirelessNetworkAdapter = Get-WmiObject -ClassName Win32_NetworkAdapter | Where-Object {$_.NetConnectionID -eq 'Wi-Fi'}
+        #$WirelessNetworkAdapter = Get-SmbClientNetworkInterface | Where-Object {$_.FriendlyName -eq 'Wi-Fi'}
+        if ($WirelessNetworkAdapter) {
+            $StartWireless = $true
+        }
+        else {
+            Write-Warning "No Wi-Fi Adapters are installed"
+            Write-Warning "You may need to add Drivers"
+            $StartWireless = $false
+        }
     }
     #=======================================================================
     #	Test Wi-Fi Connection
