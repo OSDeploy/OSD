@@ -117,8 +117,7 @@ Windows Registry Editor Version 5.00
 "ScreenBufferSize"=dword:03e8012c
 "ScreenColors"=dword:00000056
 "WindowAlpha"=dword:00000000
-"WindowPosition"=dword:00060005
-"WindowSize"=dword:001d005f
+"WindowSize"=dword:0020006c
 
 [HKEY_LOCAL_MACHINE\Default\Console\%SystemRoot%_SysWOW64_WindowsPowerShell_v1.0_powershell.exe]
 "ColorTable05"=dword:00562401
@@ -135,8 +134,7 @@ Windows Registry Editor Version 5.00
 "ScreenBufferSize"=dword:03e8012c
 "ScreenColors"=dword:00000056
 "WindowAlpha"=dword:00000000
-"WindowPosition"=dword:00060005
-"WindowSize"=dword:001d005f
+"WindowSize"=dword:0020006c
 '@
 
     #=======================================================================
@@ -317,8 +315,8 @@ wpeinit
         Write-Verbose "Startnet.cmd: net start wlansvc"
         Add-Content -Path "$MountPath\Windows\System32\Startnet.cmd" -Value 'net start wlansvc' -Force
 
-        Write-Verbose "Startnet.cmd: start PowerShell.exe -Command Start-OSDWireless"
-        Add-Content -Path "$MountPath\Windows\System32\Startnet.cmd" -Value "start /wait PowerShell.exe -Command Start-OSDWireless" -Force
+        Write-Verbose "Startnet.cmd: start PowerShell.exe -Command Start-WinREWiFi"
+        Add-Content -Path "$MountPath\Windows\System32\Startnet.cmd" -Value "start /wait PowerShell.exe -Command Start-WinREWiFi" -Force
     }
 
     if ($WebPSScript) {

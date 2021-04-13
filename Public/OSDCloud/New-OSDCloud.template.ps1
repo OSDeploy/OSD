@@ -117,8 +117,7 @@ Windows Registry Editor Version 5.00
 "ScreenBufferSize"=dword:03e8012c
 "ScreenColors"=dword:00000056
 "WindowAlpha"=dword:00000000
-"WindowPosition"=dword:00060005
-"WindowSize"=dword:001d005f
+"WindowSize"=dword:0020006c
 
 [HKEY_LOCAL_MACHINE\Default\Console\%SystemRoot%_SysWOW64_WindowsPowerShell_v1.0_powershell.exe]
 "ColorTable05"=dword:00562401
@@ -135,8 +134,7 @@ Windows Registry Editor Version 5.00
 "ScreenBufferSize"=dword:03e8012c
 "ScreenColors"=dword:00000056
 "WindowAlpha"=dword:00000000
-"WindowPosition"=dword:00060005
-"WindowSize"=dword:001d005f
+"WindowSize"=dword:0020006c
 '@
 
     #=======================================================================
@@ -243,6 +241,12 @@ Windows Registry Editor Version 5.00
         } else {
             Write-Warning "Could not find $env:SystemRoot\System32\mdmpostprocessevaluator.dll"
         } #>
+
+        if (Test-Path "$env:SystemRoot\System32\mdmpostprocessevaluator.dll") {
+            robocopy "$env:SystemRoot\System32" "$MountPath\Windows\System32" mdmpostprocessevaluator.dll /ndl /njh /njs /r:0 /w:0 /b /np
+        } else {
+            Write-Warning "Could not find $env:SystemRoot\System32\mdmpostprocessevaluator.dll"
+        }
 
         if (Test-Path "$env:SystemRoot\System32\mdmregistration.dll") {
             robocopy "$env:SystemRoot\System32" "$MountPath\Windows\System32" mdmregistration.dll /ndl /njh /njs /r:0 /w:0 /b /np

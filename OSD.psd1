@@ -7,7 +7,7 @@
 RootModule = 'OSD.psm1'
 
 # Version number of his module.
-ModuleVersion = '21.4.10.1'
+ModuleVersion = '21.4.12.1'
 
 # Supported PSEditions
 # CompatiblePSEditions = @()
@@ -223,10 +223,10 @@ FunctionsToExport =
 'Enable-OSDCloudODT',
 'Get-PartitionWinRE',
 'Copy-WinRE.wim',
-'Get-AvailableWiFiNetwork',
-'New-WiFiNetworkProfile',
-'Connect-WiFiNetwork',
-'Start-OSDWireless'
+'Get-WinREWiFi',
+'Set-WinREWiFi',
+'Connect-WinREWiFi',
+'Start-WinREWiFi'
 
 # Cmdlets to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no cmdlets to export.
 CmdletsToExport = @()
