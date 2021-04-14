@@ -108,23 +108,15 @@ if ((Get-OSDGather -Property IsWinPE) -eq $false) {
     Break
 }
 #=======================================================================
-#   Offline USB Drives
-#   Don't allow USB Drives at this time so there is no worry about Drive Letters
+#   USB Drives Offline
+#   This is to ensure nothing is using drive letters we need C R S
 #=======================================================================
-$GetUSBDisk = Get-Disk.usb
+$GetUSBPartition = Get-Partition.usb
 
-<# if (Get-Disk.usb) {
-    Write-Host -ForegroundColor DarkGray "========================================================================="
-    do {
-        Write-Warning "Remove all attached USB Drives until OSDisk has been prepared"
-        pause
-    }
-    while (Get-Disk.usb)
-} #>
-
-foreach ($USBDisk in $GetUSBDisk) {
-    Write-Warning "Setting USB Disk $($USBDisk.Number) - $($USBDisk.FriendlyName) Offline"
-    Set-Disk -Number $USBDisk.Number -IsOffline:$true -Verbose
+foreach ($USBPartition in $GetUSBPartition) {
+    Write-Warning "Removing PartitionAccessPath USB Disk $($USBPartition.DiskNumber) Partition $($USBPartition.PartitionNumber) Drive Letter $($USBPartition.DriveLetter)"
+    Remove-PartitionAccessPath -DiskNumber $USBPartition.DiskNumber -PartitionNumber $USBPartition.PartitionNumber -AccessPath "$($USBPartition.DriveLetter):" -Verbose
+    Start-Sleep -Seconds 5
 }
 #=======================================================================
 #   Clear-Disk.fixed
@@ -162,18 +154,11 @@ if (-NOT (Get-PSDrive -Name 'C')) {
     Break
 }
 #=======================================================================
-#   Reattach USB Drives
+#   USB Drives Online
 #=======================================================================
-<# if ($GetUSBDisk) {
-    Write-Host -ForegroundColor DarkGray "========================================================================="
-    Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Reattach any necessary USB Drives at this time"
-    pause
-    #Give some time for the drive to be initialized
-    Start-Sleep -Seconds 10
-} #>
-foreach ($USBDisk in $GetUSBDisk) {
-    Write-Warning "Setting USB Disk $($USBDisk.Number) - $($USBDisk.FriendlyName) Online"
-    Set-Disk -Number $USBDisk.Number -IsOffline:$false -Verbose
+foreach ($USBPartition in $GetUSBPartition) {
+    Write-Warning "Add PartitionAccessPath USB Disk $($USBPartition.DiskNumber) Partition $($USBPartition.PartitionNumber) -AssignDriveLetter"
+    Add-PartitionAccessPath -DiskNumber $USBPartition.DiskNumber -PartitionNumber $USBPartition.PartitionNumber -AssignDriveLetter -Verbose
     Start-Sleep -Seconds 5
 }
 #=======================================================================

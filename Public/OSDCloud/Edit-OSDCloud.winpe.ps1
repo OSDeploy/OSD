@@ -217,16 +217,16 @@ start PowerShell -Nol -W Mi
         Write-Verbose "Startnet.cmd: net start wlansvc"
         Add-Content -Path "$MountPath\Windows\System32\Startnet.cmd" -Value 'net start wlansvc' -Force
 
-        Write-Verbose "Startnet.cmd: start PowerShell -NoL -Command Start-WinREWiFi"
-        Add-Content -Path "$MountPath\Windows\System32\Startnet.cmd" -Value "start /wait PowerShell -NoL -Command Start-WinREWiFi" -Force
+        Write-Verbose "Startnet.cmd: start PowerShell -NoL -C Start-WinREWiFi"
+        Add-Content -Path "$MountPath\Windows\System32\Startnet.cmd" -Value "start /wait PowerShell -NoL -C Start-WinREWiFi" -Force
     }
 
     if ($WebPSScript) {
         Write-Warning "The WebPSScript parameter is adding your Cloud PowerShell script to Startnet.cmd"
         Write-Warning "This must be set every time you run Edit-OSDCloud.winpe as this will revert to 'start PowerShell'"
 
-        Write-Verbose "Startnet.cmd: start PowerShell -NoL -Command Invoke-WebPSScript -WebPSScript $WebPSScript"
-        Add-Content -Path "$MountPath\Windows\System32\Startnet.cmd" -Value "start PowerShell -NoL -Command Invoke-WebPSScript -WebPSScript $WebPSScript" -Force
+        Write-Verbose "Startnet.cmd: start PowerShell -NoL -C Invoke-WebPSScript $WebPSScript"
+        Add-Content -Path "$MountPath\Windows\System32\Startnet.cmd" -Value "start PowerShell -NoL -C Invoke-WebPSScript $WebPSScript" -Force
     }
     else {
         Write-Verbose "Startnet.cmd: start PowerShell -NoL"

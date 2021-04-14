@@ -18,7 +18,7 @@ https://osd.osdeploy.com/module/functions/webpsscript
 function Invoke-WebPSScript {
     [CmdletBinding()]
     param(
-        [Parameter(Mandatory = $true, ValueFromPipeline = $True)]
+        [Parameter(Mandatory = $true, ValueFromPipeline = $true)]
         [string]$WebPSScript
     )
 

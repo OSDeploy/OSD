@@ -22,7 +22,7 @@ function Connect-WinREWiFi {
         [string] $SSID
     )
 
-    $network = Get-WinREWiFi | ? { $_.SSID -eq $SSID }
+    $network = Get-WinREWiFi | Where-Object { $_.SSID -eq $SSID }
 
     $password = ""
     $notWPA2 = ""
