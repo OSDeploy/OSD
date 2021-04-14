@@ -188,50 +188,73 @@ if (-NOT (Test-Path 'C:\OSDCloud\Logs')) {
 }
 Start-Transcript -Path 'C:\OSDCloud\Logs' -ErrorAction Ignore
 #=======================================================================
-#	Get-FeatureUpdate
+#	Get-CustomImage
 #=======================================================================
-Write-Host -ForegroundColor DarkGray "========================================================================="
-Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Save-FeatureUpdate"
+if ($Global:ImageHash) {
+    $OfflineImages = Find-OSDCloudOffline.wim -Name $Global:ImageName
 
-$GetFeatureUpdate = Get-FeatureUpdate -OSLicense $OSLicense -OSBuild $OSBuild -OSLanguage $OSLanguage
+    foreach ($Item in $OfflineImages) {
+        if (((Get-FileHash -Path $Item.FullName -Algorithm SHA1).Hash) -match $Global:ImageHash) {
+            $OSDCloudOfflineOSFullName = $Item.FullName
+        }
+    }
 
-if (-NOT ($GetFeatureUpdate)) {
-    Write-Warning "Unable to locate a Windows 10 Feature Update"
-    Write-Warning "OSDCloud cannot continue"
-    Break
-}
-$GetFeatureUpdate = $GetFeatureUpdate | Select-Object -Property CreationDate,KBNumber,Title,UpdateOS,UpdateBuild,UpdateArch,FileName, @{Name='SizeMB';Expression={[int]($_.Size /1024/1024)}},FileUri,Hash,AdditionalHash
-Write-Host -ForegroundColor DarkGray "CreationDate: $($GetFeatureUpdate.CreationDate)"
-Write-Host -ForegroundColor DarkGray "KBNumber: $($GetFeatureUpdate.KBNumber)"
-Write-Host -ForegroundColor DarkGray "Title: $($GetFeatureUpdate.Title)"
-Write-Host -ForegroundColor DarkGray "FileName: $($GetFeatureUpdate.FileName)"
-Write-Host -ForegroundColor DarkGray "SizeMB: $($GetFeatureUpdate.SizeMB)"
-Write-Host -ForegroundColor DarkGray "FileUri: $($GetFeatureUpdate.FileUri)"
-#=======================================================================
-#	Get OS
-#=======================================================================
-$OSDCloudOfflineOS = Find-OSDCloudOfflineFile -Name $GetFeatureUpdate.FileName | Select-Object -First 1
-
-if ($OSDCloudOfflineOS) {
-    $OSDCloudOfflineOSFullName = $OSDCloudOfflineOS.FullName
-    Write-Host -ForegroundColor DarkGray "$OSDCloudOfflineOSFullName"
-}
-elseif (Test-WebConnection -Uri $GetFeatureUpdate.FileUri) {
-    $SaveFeatureUpdate = Save-FeatureUpdate -OSLicense $OSLicense -OSBuild $OSBuild -OSLanguage $OSLanguage -DownloadPath 'C:\OSDCloud\OS' -ErrorAction Stop
-    $Global:SaveFeatureUpdate = $SaveFeatureUpdate
-    if (Test-Path $($SaveFeatureUpdate.FullName)) {
-        $OSDCloudOfflineOSFullName = $SaveFeatureUpdate.FullName
+    if ($OSDCloudOfflineOSFullName) {
+        $Global:OSDCloudOSImageIndex = 2
     }
     else {
-        Write-Warning "Something went wrong trying to get the Windows Feature Update"
+        Write-Warning "Something went wrong trying to get the Offline WIM"
         Write-Warning "OSDCloud cannot continue"
         Break
     }
 }
-else {
-    Write-Warning "Could not verify an Internet connection for the Windows Feature Update"
-    Write-Warning "OSDCloud cannot continue"
-    Break
+if (!($Global:ImageHash)) {
+    #=======================================================================
+    #	Get-FeatureUpdate
+    #=======================================================================
+    Write-Host -ForegroundColor DarkGray "========================================================================="
+    Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Save-FeatureUpdate"
+    
+    $GetFeatureUpdate = Get-FeatureUpdate -OSLicense $OSLicense -OSBuild $OSBuild -OSLanguage $OSLanguage
+    
+    if (-NOT ($GetFeatureUpdate)) {
+        Write-Warning "Unable to locate a Windows 10 Feature Update"
+        Write-Warning "OSDCloud cannot continue"
+        Break
+    }
+    $GetFeatureUpdate = $GetFeatureUpdate | Select-Object -Property CreationDate,KBNumber,Title,UpdateOS,UpdateBuild,UpdateArch,FileName, @{Name='SizeMB';Expression={[int]($_.Size /1024/1024)}},FileUri,Hash,AdditionalHash
+    Write-Host -ForegroundColor DarkGray "CreationDate: $($GetFeatureUpdate.CreationDate)"
+    Write-Host -ForegroundColor DarkGray "KBNumber: $($GetFeatureUpdate.KBNumber)"
+    Write-Host -ForegroundColor DarkGray "Title: $($GetFeatureUpdate.Title)"
+    Write-Host -ForegroundColor DarkGray "FileName: $($GetFeatureUpdate.FileName)"
+    Write-Host -ForegroundColor DarkGray "SizeMB: $($GetFeatureUpdate.SizeMB)"
+    Write-Host -ForegroundColor DarkGray "FileUri: $($GetFeatureUpdate.FileUri)"
+    #=======================================================================
+    #	Get OS
+    #=======================================================================
+    $OSDCloudOfflineOS = Find-OSDCloudOfflineFile -Name $GetFeatureUpdate.FileName | Select-Object -First 1
+    
+    if ($OSDCloudOfflineOS) {
+        $OSDCloudOfflineOSFullName = $OSDCloudOfflineOS.FullName
+        Write-Host -ForegroundColor DarkGray "$OSDCloudOfflineOSFullName"
+    }
+    elseif (Test-WebConnection -Uri $GetFeatureUpdate.FileUri) {
+        $SaveFeatureUpdate = Save-FeatureUpdate -OSLicense $OSLicense -OSBuild $OSBuild -OSLanguage $OSLanguage -DownloadPath 'C:\OSDCloud\OS' -ErrorAction Stop
+        $Global:SaveFeatureUpdate = $SaveFeatureUpdate
+        if (Test-Path $($SaveFeatureUpdate.FullName)) {
+            $OSDCloudOfflineOSFullName = $SaveFeatureUpdate.FullName
+        }
+        else {
+            Write-Warning "Something went wrong trying to get the Windows Feature Update"
+            Write-Warning "OSDCloud cannot continue"
+            Break
+        }
+    }
+    else {
+        Write-Warning "Could not verify an Internet connection for the Windows Feature Update"
+        Write-Warning "OSDCloud cannot continue"
+        Break
+    }
 }
 #=======================================================================
 #	Expand OS
@@ -244,7 +267,9 @@ if (-NOT (Test-Path 'C:\OSDCloud\Temp')) {
 }
 
 if ($OSDCloudOfflineOSFullName) {
-    Expand-WindowsImage -ApplyPath 'C:\' -ImagePath "$OSDCloudOfflineOSFullName" -Index $Global:OSDCloudOSImageIndex -ScratchDirectory 'C:\OSDCloud\Temp' -ErrorAction Stop
+    #Expand-WindowsImage -ApplyPath 'C:\' -ImagePath "$OSDCloudOfflineOSFullName" -Index $Global:OSDCloudOSImageIndex -ScratchDirectory 'C:\OSDCloud\Temp' -ErrorAction Stop
+    dism /Apply-Image /ImageFile:"$OSDCloudOfflineOSFullName" /Index:$Global:OSDCloudOSImageIndex /ApplyDir:C:\  /ScratchDir:"C:\OSDCloud\Temp"
+
     
     $SystemDrive = Get-Partition | Where-Object {$_.Type -eq 'System'} | Select-Object -First 1
     if (-NOT (Get-PSDrive -Name S)) {

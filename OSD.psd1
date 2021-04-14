@@ -162,6 +162,8 @@ FunctionsToExport =
 'Edit-OSDCloud.winpe',#OSDCLOUD
 'Find-OSDCloudOfflineFile',
 'Find-OSDCloudOfflinePath',
+'Find-OSDCloudOffline.wim',
+'Select-OSDCloudOffline.wim',
 'Get-OSDCloud.template',
 'Get-OSDCloud.workspace',
 'Find-OSDCloudAutopilotFile',
