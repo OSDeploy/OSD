@@ -190,36 +190,28 @@ function Start-OSDCloud {
         #	UsbWim
         #=======================================================================
         Write-Host -ForegroundColor DarkGray "========================================================================="
-        Write-Host -ForegroundColor Cyan "Custom WIM on USB"
-        $CustomWim = Select-OSDCloudOffline.wim
+        Write-Host -ForegroundColor Cyan "Custom Windows Image on USB"
+        $ImageFile = Select-OSDCloudFile.wim
 
-        if ($CustomWim) {
-            $Global:OSDImageName = ($CustomWim).Name
-            $Global:OSDImageDirectory = ($CustomWim).Directory
-            #$Global:OSDImageHash = (Get-FileHash -Path $CustomWim.FullName -Algorithm SHA1).Hash
+        if ($ImageFile) {
+            $Global:OSDImageName = ($ImageFile).Name
+            #$Global:OSDImageParent = Split-Path -Path ($ImageFile).Directory -Leaf
+            $Global:OSDImageFullName = ($ImageFile).FullName
+            #$Global:OSDImageHash = (Get-FileHash -Path $ImageFile.FullName -Algorithm SHA1).Hash
 
-            
-
-
-
-
-
-
-
-
-
-
-
+            $ImageIndex = Select-OSDCloudImageIndex -ImagePath $Global:OSDImageFullName
 
             Write-Host -ForegroundColor DarkGray "OSDImageName: $Global:OSDImageName"
-            Write-Host -ForegroundColor DarkGray "OSDImageIndex: $Global:OSDImageIndex"
-            Write-Host -ForegroundColor DarkGray "OSDImageDirectory: $Global:OSDImageDirectory"
+            Write-Host -ForegroundColor DarkGray "ImageIndex: $ImageIndex"
+            #Write-Host -ForegroundColor DarkGray "OSDImageParent: $Global:OSDImageParent"
+            Write-Host -ForegroundColor DarkGray "OSDImageFullName: $Global:OSDImageFullName"
         }
         else {
             $Global:OSDImageName = $null
-            $Global:OSDImageIndex = $null
-            $Global:OSDImageDirectory = $null
-            Write-Warning "Custom WIM on USB was not found"
+            $ImageIndex = $null
+            #$Global:OSDImageParent = $null
+            $Global:OSDImageFullName = $null
+            Write-Warning "Custom Windows Image on USB was not found"
             Break
         }
     }

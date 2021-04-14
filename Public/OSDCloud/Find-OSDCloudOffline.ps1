@@ -18,14 +18,15 @@ function Find-OSDCloudOfflinePath {
     }
     $OSDCloudOfflinePath
 }
-function Find-OSDCloudOffline.wim {
+function Find-OSDCloudFile {
     [CmdletBinding()]
     param (
-        [string]$Name = '*.wim'
+        [string]$Name = '*.*',
+        [string]$Path = '\OSDCloud\'
     )
     $Results = @()
     $Results = Get-PSDrive -PSProvider FileSystem | ForEach-Object {
-        Get-ChildItem "$($_.Name):\OSDCloud\WIM\" -Include "$Name" -File -Recurse -Force -ErrorAction Ignore
+        Get-ChildItem "$($_.Name):$Path" -Include "$Name" -File -Recurse -Force -ErrorAction Ignore
     }
     $Results
 }

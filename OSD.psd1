@@ -162,8 +162,8 @@ FunctionsToExport =
 'Edit-OSDCloud.winpe',#OSDCLOUD
 'Find-OSDCloudOfflineFile',
 'Find-OSDCloudOfflinePath',
-'Find-OSDCloudOffline.wim',
-'Select-OSDCloudOffline.wim',
+'Find-OSDCloudFile',
+'Select-OSDCloudFile.wim',
 'Get-OSDCloud.template',
 'Get-OSDCloud.workspace',
 'Find-OSDCloudAutopilotFile',
@@ -228,7 +228,8 @@ FunctionsToExport =
 'Connect-WinREWiFi',
 'Get-WinREWiFi',
 'Set-WinREWiFi',
-'Start-WinREWiFi'
+'Start-WinREWiFi',
+'Select-OSDCloudImageIndex'
 
 # Cmdlets to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no cmdlets to export.
 CmdletsToExport = @()

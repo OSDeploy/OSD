@@ -190,17 +190,17 @@ Start-Transcript -Path 'C:\OSDCloud\Logs' -ErrorAction Ignore
 #=======================================================================
 #	Get-CustomImage
 #=======================================================================
-if ($Global:ImageHash) {
-    $OfflineImages = Find-OSDCloudOffline.wim -Name $Global:ImageName
+if ($Global:OSDImageFullName) {
+    Write-Host -ForegroundColor DarkGray "========================================================================="
+    Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Custom Windows Image"
 
-    foreach ($Item in $OfflineImages) {
-        if (((Get-FileHash -Path $Item.FullName -Algorithm SHA1).Hash) -match $Global:ImageHash) {
-            $OSDCloudOfflineOSFullName = $Item.FullName
-        }
-    }
+    $OSDCloudOfflineOSFullName = (Find-OSDCloudFile -Name $Global:OSDImageName -Path (Split-Path -Path (Split-Path -Path $Global:OSDImageFullName -Parent) -NoQualifier) | Select-Object -First 1).FullName
 
     if ($OSDCloudOfflineOSFullName) {
-        $Global:OSDCloudOSImageIndex = 2
+        if (!($Global:OSDCloudOSImageIndex)) {
+            Write-Warning "No ImageIndex is specified, setting to ImageIndex 1"
+            $Global:OSDCloudOSImageIndex = 1
+        }
     }
     else {
         Write-Warning "Something went wrong trying to get the Offline WIM"
@@ -208,7 +208,7 @@ if ($Global:ImageHash) {
         Break
     }
 }
-if (!($Global:ImageHash)) {
+else {
     #=======================================================================
     #	Get-FeatureUpdate
     #=======================================================================
