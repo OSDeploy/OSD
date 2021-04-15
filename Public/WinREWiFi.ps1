@@ -237,84 +237,131 @@ function Start-WinREWiFi {
     #Block-WinOS
     Block-PowerShellVersionLt5
     #=======================================================================
+    #	Header
+    #=======================================================================
+    Write-Host -ForegroundColor DarkGray "========================================================================="
+    Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) $($MyInvocation.MyCommand.Name) " -NoNewline
+    Write-Host -ForegroundColor Green 'OK'
+    #=======================================================================
     #	Test Internet Connection
     #=======================================================================
+    Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Test-WebConnection google.com " -NoNewline
+
     if (Test-WebConnection -Uri 'google.com') {
-        Write-Warning "You are already connected to the Internet"
-        Write-Warning "There is nothing to do here"
-        $StartWireless = $false
+        Write-Host -ForegroundColor Green 'OK'
+        Write-Host -ForegroundColor DarkGray "You are already connected to the Internet"
+        Write-Host -ForegroundColor DarkGray "Start-WinREWiFi will not continue"
+        $StartWinREWiFi = $false
     }
     else {
-        $StartWireless = $true
+        Write-Host -ForegroundColor Red 'FAIL'
+        $StartWinREWiFi = $true
     }
     #=======================================================================
     #   Test WinRE
     #=======================================================================
-    if ($StartWireless) {
+    if ($StartWinREWiFi) {
+        Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Testing required WinRE content " -NoNewline
+
         if (!(Test-Path "$ENV:SystemRoot\System32\dmcmnutils.dll")) {
-            Write-Warning "Missing required $ENV:SystemRoot\System32\dmcmnutils.dll"
-            $StartWireless = $false
+            #Write-Warning "Missing required $ENV:SystemRoot\System32\dmcmnutils.dll"
+            $StartWinREWiFi = $false
         }
         if (!(Test-Path "$ENV:SystemRoot\System32\mdmpostprocessevaluator.dll")) {
-            Write-Warning "Missing required $ENV:SystemRoot\System32\mdmpostprocessevaluator.dll"
-            $StartWireless = $false
+            #Write-Warning "Missing required $ENV:SystemRoot\System32\mdmpostprocessevaluator.dll"
+            $StartWinREWiFi = $false
         }
         if (!(Test-Path "$ENV:SystemRoot\System32\mdmregistration.dll")) {
-            Write-Warning "Missing required $ENV:SystemRoot\System32\mdmregistration.dll"
-            $StartWireless = $false
+            #Write-Warning "Missing required $ENV:SystemRoot\System32\mdmregistration.dll"
+            $StartWinREWiFi = $false
         }
         if (!(Test-Path "$ENV:SystemRoot\System32\raschap.dll")) {
-            Write-Warning "Missing required $ENV:SystemRoot\System32\raschap.dll"
-            $StartWireless = $false
+            #Write-Warning "Missing required $ENV:SystemRoot\System32\raschap.dll"
+            $StartWinREWiFi = $false
         }
         if (!(Test-Path "$ENV:SystemRoot\System32\raschapext.dll")) {
-            Write-Warning "Missing required $ENV:SystemRoot\System32\raschapext.dll"
-            $StartWireless = $false
+            #Write-Warning "Missing required $ENV:SystemRoot\System32\raschapext.dll"
+            $StartWinREWiFi = $false
         }
         if (!(Test-Path "$ENV:SystemRoot\System32\rastls.dll")) {
-            Write-Warning "Missing required $ENV:SystemRoot\System32\rastls.dll"
-            $StartWireless = $false
+            #Write-Warning "Missing required $ENV:SystemRoot\System32\rastls.dll"
+            $StartWinREWiFi = $false
         }
         if (!(Test-Path "$ENV:SystemRoot\System32\rastlsext.dll")) {
-            Write-Warning "Missing required $ENV:SystemRoot\System32\rastlsext.dll"
-            $StartWireless = $false
+            #Write-Warning "Missing required $ENV:SystemRoot\System32\rastlsext.dll"
+            $StartWinREWiFi = $false
         }
-<#         if (!(Get-NetAdapter -Name 'Wi-Fi')) {
-            Write-Warning "No wireless adapters are present"
-            Write-Warning "Drivers may need to be added to WinPE"
-            $StartWireless = $false
-        } #>
+        if ($StartWinREWiFi) {
+            Write-Host -ForegroundColor Green 'OK'
+        }
+        else {
+            Write-Host -ForegroundColor Red 'FAIL'
+        }
     }
     #=======================================================================
     #	Test Wi-Fi Adapter
     #=======================================================================
-    if ($StartWireless) {
+    if ($StartWinREWiFi) {
+        Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Testing Wi-Fi Network Adapter " -NoNewline
         $WirelessNetworkAdapter = Get-WmiObject -ClassName Win32_NetworkAdapter | Where-Object {$_.NetConnectionID -eq 'Wi-Fi'}
         #$WirelessNetworkAdapter = Get-SmbClientNetworkInterface | Where-Object {$_.FriendlyName -eq 'Wi-Fi'}
         if ($WirelessNetworkAdapter) {
-            $StartWireless = $true
+            $StartWinREWiFi = $true
+            Write-Host -ForegroundColor Green 'OK'
+            Write-Host -ForegroundColor Gray "  Name: $($WirelessNetworkAdapter.Name)"
+            Write-Host -ForegroundColor Gray "  Description: $($WirelessNetworkAdapter.Description)"
+            #Write-Host -ForegroundColor Gray "  Speed: $($WirelessNetworkAdapter.Speed)"
+            Write-Host -ForegroundColor Gray "  AdapterType: $($WirelessNetworkAdapter.AdapterType)"
+            #Write-Host -ForegroundColor Gray "  Installed: $($WirelessNetworkAdapter.Installed)"
+            #Write-Host -ForegroundColor Gray "  InterfaceIndex: $($WirelessNetworkAdapter.InterfaceIndex)"
+            Write-Host -ForegroundColor Gray "  MACAddress: $($WirelessNetworkAdapter.MACAddress)"
+            #Write-Host -ForegroundColor Gray "  NetEnabled: $($WirelessNetworkAdapter.NetEnabled)"
+            #Write-Host -ForegroundColor Gray "  PhysicalAdapter: $($WirelessNetworkAdapter.PhysicalAdapter)"
+            Write-Host -ForegroundColor Gray "  PNPDeviceID: $($WirelessNetworkAdapter.PNPDeviceID)"
         }
         else {
-            Write-Warning "No Wi-Fi Adapters are installed"
-            Write-Warning "You may need to add Drivers"
-            $StartWireless = $false
+            $PnPEntity = Get-WmiObject -ClassName Win32_PnPEntity | Where-Object {$_.Status -eq 'Error'} |  Where-Object {$_.Name -match 'Net'}
+
+
+
+            Write-Host -ForegroundColor Red 'FAIL'
+            Write-Warning "Could not find an installed Wi-Fi Network Adapter"
+            if ($PnPEntity) {
+                Write-Warning "Drivers may need to be added to WinPE for the following hardware"
+                foreach ($Item in $PnPEntity) {
+                    Write-Warning "$($Item.Name): $($Item.DeviceID)"
+                }
+                Start-Sleep -Seconds 10
+            }
+            else {
+                Write-Warning "Drivers may need to be added to WinPE"
+            }
+            $StartWinREWiFi = $false
         }
     }
     #=======================================================================
     #	Test Wi-Fi Connection
     #=======================================================================
-    if ($StartWireless) {
+    if ($StartWinREWiFi) {
+        Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Testing Wi-Fi Network Connection " -NoNewline
         if ($WirelessNetworkAdapter.NetEnabled -eq $true) {
-            Write-Verbose -Verbose "Wireless is already connected ... Disconnecting"
+            Write-Host -ForegroundColor Green ''
+            Write-Warning "Wireless is already connected ... Disconnecting"
             (Get-WmiObject -ClassName Win32_NetworkAdapter | Where-Object {$_.NetConnectionID -eq 'Wi-Fi'}).disable() | Out-Null
             (Get-WmiObject -ClassName Win32_NetworkAdapter | Where-Object {$_.NetConnectionID -eq 'Wi-Fi'}).enable() | Out-Null
-            $StartWireless = $true
+            $StartWinREWiFi = $true
+        }
+        else {
+            Write-Host -ForegroundColor Green 'OK'
         }
     }
     #=======================================================================
     #   Connect
     #=======================================================================
-    if ($StartWireless) {
+    if ($StartWinREWiFi) {
+        Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Starting Wi-Fi Network Menu " -NoNewline
+        Write-Host -ForegroundColor Green 'OK'
+        Write-Host -ForegroundColor DarkGray "========================================================================="
         while (((Get-CimInstance -ClassName Win32_NetworkAdapter | Where-Object {$_.NetConnectionID -eq 'Wi-Fi'}).NetEnabled) -eq $false) {
             $SSIDList = Get-WinREWiFi
             if ($SSIDList) {
@@ -330,8 +377,9 @@ function Start-WinREWiFi {
                 $SSID = $SSIDList | Where-Object { $_.index -eq $SSIDIndex } | Select-Object -exp SSID
     
                 # connect to selected Wi-Fi
+                Write-Host -ForegroundColor DarkGray "========================================================================="
+                Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Establishing a connection to SSID $SSID"
                 try {
-                    "Connecting to $SSID"
                     Connect-WinREWiFi $SSID -ErrorAction Stop
                 } catch {
                     Write-Warning $_
@@ -341,11 +389,15 @@ function Start-WinREWiFi {
                 Write-Warning "No Wi-Fi network found. Move closer to AP or use ethernet cable instead."
             }
 
-            Write-Host -ForegroundColor Cyan "Waiting for a connection ..."
-            Start-Sleep -Seconds 10
+            Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Waiting for a connection to SSID $SSID"
+            Start-Sleep -Seconds 15
         
             $i = 30
-            while ((((Get-CimInstance -ClassName Win32_NetworkAdapter | Where-Object {$_.NetConnectionID -eq 'Wi-Fi'}).NetEnabled) -eq $false) -and $i -gt 0) { --$i; "Waiting for Wi-Fi Connection ($i)" ; Start-Sleep -Seconds 1 }
+            while ((((Get-CimInstance -ClassName Win32_NetworkAdapter | Where-Object {$_.NetConnectionID -eq 'Wi-Fi'}).NetEnabled) -eq $false) -and $i -gt 0) {
+                --$i
+                Write-Host -ForegroundColor DarkGray "Waiting for Wi-Fi Connection ($i)"
+                Start-Sleep -Seconds 1
+            }
 
             # connection to network can take a while
             #$i = 30

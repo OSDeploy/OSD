@@ -87,13 +87,13 @@ function New-OSDCloud.usb {
     #	Copy OSDCloud
     #=======================================================================
     if ((Test-Path -Path "$WorkspacePath\Media") -and (Test-Path -Path "$($GetOSDBootPartition.DriveLetter):\")) {
-        robocopy "$WorkspacePath\Media" "$($GetOSDBootPartition.DriveLetter):\" *.* /e /ndl /njh /njs /np /b
+        robocopy "$WorkspacePath\Media" "$($GetOSDBootPartition.DriveLetter):\" *.* /e /ndl /njh /njs /np /b /r:0 /w:0
     }
     if (Test-Path -Path "$WorkspacePath\Autopilot") {
-        robocopy "$WorkspacePath\Autopilot" "$($GetUSBDataPartition.DriveLetter):\OSDCloud\Autopilot" *.* /e /ndl /njh /njs /np /b
+        robocopy "$WorkspacePath\Autopilot" "$($GetUSBDataPartition.DriveLetter):\OSDCloud\Autopilot" *.* /e /ndl /njh /njs /np /b /r:0 /w:0
     }
     if (Test-Path -Path "$WorkspacePath\ODT") {
-        robocopy "$WorkspacePath\ODT" "$($GetUSBDataPartition.DriveLetter):\OSDCloud\ODT" *.* /e /ndl /njh /njs /np /b
+        robocopy "$WorkspacePath\ODT" "$($GetUSBDataPartition.DriveLetter):\OSDCloud\ODT" *.* /e /ndl /njh /njs /np /b /r:0 /w:0
     }
     #=======================================================================
     #	Complete
