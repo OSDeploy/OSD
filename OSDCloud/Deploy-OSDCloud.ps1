@@ -9,7 +9,7 @@
 #   In WinPE, the latest version will be installed automatically
 #   In Windows, this script is stopped and you will need to update manually
 #=======================================================================
-[Version]$OSDVersionMin = '21.4.15.3'
+[Version]$OSDVersionMin = '21.4.15.4'
 
 if ((Get-Module -Name OSD -ListAvailable | `Sort-Object Version -Descending | Select-Object -First 1).Version -lt $OSDVersionMin) {
     Write-Warning "OSDCloud requires OSD $OSDVersionMin or newer"
@@ -194,7 +194,7 @@ if ($Global:OSDCloudWimFullName) {
     Write-Host -ForegroundColor DarkGray "========================================================================="
     Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) OSDCloud Windows Image"
 
-    $Global:OSDCloudOSFullName = (Find-OSDCloudFile -Name $Global:OSDImageName -Path (Split-Path -Path (Split-Path -Path $Global:OSDCloudWimFullName -Parent) -NoQualifier) | Select-Object -First 1).FullName
+    $Global:OSDCloudOSFullName = (Find-OSDCloudFile -Name $Global:OSDCloudWimName -Path (Split-Path -Path (Split-Path -Path $Global:OSDCloudWimFullName -Parent) -NoQualifier) | Select-Object -First 1).FullName
 
     if ($Global:OSDCloudOSFullName) {
         Write-Host -ForegroundColor DarkGray "$Global:OSDCloudOSFullName"
