@@ -13,7 +13,7 @@ $UnattendXml = @'
                 <RunSynchronousCommand wcm:action="add">
                     <Order>1</Order>
                     <Description>OSDCloud Specialize</Description>
-                    <Path>Powershell -ExecutionPolicy Bypass -Command Start-OSDCloudSpecialize -Verbose</Path>
+                    <Path>Powershell -ExecutionPolicy Bypass -Command Invoke-OSDSpecialize -Verbose</Path>
                 </RunSynchronousCommand>
             </RunSynchronous>
         </component>
@@ -42,8 +42,8 @@ $UnattendXml = @'
 
                 <RunSynchronousCommand wcm:action="add">
                 <Order>3</Order>
-                <Description>Save Get-WindowsAutoPilotInfo</Description>
-                <Path>PowerShell -Command "Install-Script -Name Get-WindowsAutoPilotInfo -Verbose -Force"</Path>
+                <Description>Save Get-WindowsAutopilotInfo</Description>
+                <Path>PowerShell -Command "Install-Script -Name Get-WindowsAutopilotInfo -Verbose -Force"</Path>
                 </RunSynchronousCommand>
             </RunSynchronous>
         </component>

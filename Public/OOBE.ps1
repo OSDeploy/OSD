@@ -1,9 +1,9 @@
 <#
 .SYNOPSIS
-When used in OOBE, this function will download all the required AutoPilot Modules
+When used in OOBE, this function will download all the required Autopilot Modules
 
 .Description
-When used in OOBE, this function will download all the required AutoPilot Modules
+When used in OOBE, this function will download all the required Autopilot Modules
 
 .LINK
 https://osd.osdeploy.com/module/functions/oobe
@@ -42,23 +42,23 @@ function Start-OOBE.autopilot {
     Install-Module -Name PowerShellGet -Force
     $Error.Clear()
     
-    Write-Host "Install-Module WindowsAutoPilotIntune" -ForegroundColor Cyan
-    Install-Module -Name WindowsAutoPilotIntune -Force
+    Write-Host "Install-Module WindowsAutopilotIntune" -ForegroundColor Cyan
+    Install-Module -Name WindowsAutopilotIntune -Force
     $Error.Clear()
 
-    Write-Host "Install Get-WindowsAutoPilotInfo.ps1" -ForegroundColor Cyan
-    Install-Script -Name Get-WindowsAutoPilotInfo -Force
+    Write-Host "Install Get-WindowsAutopilotInfo.ps1" -ForegroundColor Cyan
+    Install-Script -Name Get-WindowsAutopilotInfo -Force
     $Error.Clear()
 
-<#     Write-Host "Testing Get-WindowsAutoPilotInfo.ps1" -ForegroundColor Cyan
-    & "C:\Program Files\WindowsPowerShell\Scripts\Get-WindowsAutoPilotInfo.ps1"
+<#     Write-Host "Testing Get-WindowsAutopilotInfo.ps1" -ForegroundColor Cyan
+    & "C:\Program Files\WindowsPowerShell\Scripts\Get-WindowsAutopilotInfo.ps1"
     $Error.Clear() #>
 
 <#     Write-Host "Connect-MSGraph" -ForegroundColor Cyan
     Connect-MSGraph -Verbose
     $Error.Clear() #>
 
-    Write-Host "Run Get-WindowsAutoPilotInfo -Online in the new PowerShell session" -ForegroundColor Cyan
+    Write-Host "Run Get-WindowsAutopilotInfo -Online in the new PowerShell session" -ForegroundColor Cyan
     Start-Sleep -Seconds 5
     Start-Process PowerShell.exe -Wait
     $Error.Clear()

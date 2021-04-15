@@ -1,9 +1,9 @@
 <#
 .SYNOPSIS
-Selects AutoPilot Profiles
+Selects Autopilot Profiles
 
 .DESCRIPTION
-Selects AutoPilot Profiles
+Selects Autopilot Profiles
 
 .LINK
 https://osdcloud.osdeploy.com
@@ -16,10 +16,10 @@ function Select-OSDCloudAutopilotFile {
     param ()
 
     $i = $null
-    $GetOSDCloudOfflineAutoPilotProfiles = Find-OSDCloudAutopilotFile
+    $GetOSDCloudOfflineAutopilotProfiles = Find-OSDCloudAutopilotFile
 
-    if ($GetOSDCloudOfflineAutoPilotProfiles) {
-        $AutoPilotProfiles = foreach ($Item in $GetOSDCloudOfflineAutoPilotProfiles) {
+    if ($GetOSDCloudOfflineAutopilotProfiles) {
+        $AutopilotProfiles = foreach ($Item in $GetOSDCloudOfflineAutopilotProfiles) {
             $i++
             $JsonConfiguration = Get-Content -Path $Item.FullName | ConvertFrom-Json
 
@@ -35,23 +35,23 @@ function Select-OSDCloudAutopilotFile {
             New-Object -TypeName PSObject -Property $ObjectProperties
         }
 
-        $AutoPilotProfiles | Select-Object -Property Selection, Profile, FullName | Format-Table | Out-Host
+        $AutopilotProfiles | Select-Object -Property Selection, Profile, FullName | Format-Table | Out-Host
 
         if ($Global:OSDCloudZTI -eq $true) {
-            $AutoPilotProfiles = $AutoPilotProfiles | Where-Object {$_.Selection -eq 1}
+            $AutopilotProfiles = $AutopilotProfiles | Where-Object {$_.Selection -eq 1}
         }
         else {
             do {
-                $SelectReadHost = Read-Host -Prompt "Enter the Selection of the AutoPilot Profile to apply, or press S to Skip"
+                $SelectReadHost = Read-Host -Prompt "Enter the Selection of the Autopilot Profile to apply, or press S to Skip"
             }
-            until (((($SelectReadHost -ge 0) -and ($SelectReadHost -in $AutoPilotProfiles.Selection -or ($SelectReadHost -eq 'S')))))
+            until (((($SelectReadHost -ge 0) -and ($SelectReadHost -in $AutopilotProfiles.Selection -or ($SelectReadHost -eq 'S')))))
             
             if ($SelectReadHost -eq 'S') {
                 Return $false
             }
-            $AutoPilotProfiles = $AutoPilotProfiles | Where-Object {$_.Selection -eq $SelectReadHost}
+            $AutopilotProfiles = $AutopilotProfiles | Where-Object {$_.Selection -eq $SelectReadHost}
         }
 
-        Return $AutoPilotProfiles.FullContent
+        Return $AutopilotProfiles.FullContent
     }
 }

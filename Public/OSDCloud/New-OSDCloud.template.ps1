@@ -214,6 +214,10 @@ Windows Registry Editor Version 5.00
     $MountMyWindowsImage = Mount-MyWindowsImage $BootWim
     $MountPath = $MountMyWindowsImage.Path
     #=======================================================================
+    #   Copy DISM Module
+    #=======================================================================
+    robocopy "$MountPath\Windows\System32\WindowsPowerShell\v1.0\Modules\Dism" "$MountPath\WindowsPowerShell\Modules\Dism" *.* /e /ndl /nfl /np /njh /njs /r:0 /w:0 /b
+    #=======================================================================
     #   WinRE
     #=======================================================================
     if ($PSBoundParameters.ContainsKey('WinRE')) {
@@ -304,6 +308,7 @@ Windows Registry Editor Version 5.00
             Add-WindowsPackage -Path $MountPath -PackagePath "$WinPEOCs\$Lang\WinPE-$Package`_$Lang.cab" -Verbose
         }
     }
+    Save-WindowsImage -Path $MountPath
     #=======================================================================
     #   Install Selected Language
     #=======================================================================
@@ -393,16 +398,6 @@ Windows Registry Editor Version 5.00
         Write-Warning "Could not find $env:SystemRoot\System32\osksupport.dll"
     }
     #=======================================================================
-    #	PowerShell Execution Policy
-    #=======================================================================
-    Write-Verbose "Setting PowerShell ExecutionPolicy to Bypass in $MountPath"
-    Set-WindowsImageExecutionPolicy -Path $MountPath -ExecutionPolicy Bypass
-    #=======================================================================
-    #   Enable PowerShell Gallery
-    #=======================================================================
-    Write-Verbose "Enabling PowerShell Gallery support in $MountPath"
-    Enable-PEWindowsImagePSGallery -Path $MountPath
-    #=======================================================================
     #   Adding Microsoft DaRT
     #=======================================================================
     if (Test-Path "C:\Program Files\Microsoft DaRT\v10\Toolsx64.cab") {
@@ -414,6 +409,20 @@ Windows Registry Editor Version 5.00
             Copy-Item -Path "C:\Program Files\Microsoft Deployment Toolkit\Templates\DartConfig8.dat" -Destination "$MountPath\Windows\System32\DartConfig.dat" -Force
         }
     }
+    #=======================================================================
+    #	Save-WindowsImage
+    #=======================================================================
+    Save-WindowsImage -Path $MountPath
+    #=======================================================================
+    #	PowerShell Execution Policy
+    #=======================================================================
+    Write-Verbose "Setting PowerShell ExecutionPolicy to Bypass in $MountPath"
+    Set-WindowsImageExecutionPolicy -Path $MountPath -ExecutionPolicy Bypass
+    #=======================================================================
+    #   Enable PowerShell Gallery
+    #=======================================================================
+    Write-Verbose "Enabling PowerShell Gallery support in $MountPath"
+    Enable-PEWindowsImagePSGallery -Path $MountPath
     #=======================================================================
     #   Remove winpeshl
     #=======================================================================
@@ -439,14 +448,6 @@ Windows Registry Editor Version 5.00
     #Unload Registry
     reg unload HKLM\Default
     #=======================================================================
-    #   Save DISM
-    #   WinRE may not work right without this module added
-    #=======================================================================
-    if ($PSBoundParameters.ContainsKey('WinRE')) {
-        Write-Verbose -Verbose "Copy-PSModuleToWindowsImage -Name DISM -Path $MountPath"
-        Copy-PSModuleToWindowsImage -Name DISM -Path $MountPath
-    }
-    #=======================================================================
     #   Save WIM
     #=======================================================================
     $MountMyWindowsImage | Dismount-MyWindowsImage -Save
@@ -464,8 +465,8 @@ Windows Registry Editor Version 5.00
     #=======================================================================
     #   Directories
     #=======================================================================
-    if (-NOT (Test-Path "$TemplatePath\AutoPilot\Profiles")) {
-        New-Item -Path "$TemplatePath\AutoPilot\Profiles" -ItemType Directory -Force | Out-Null
+    if (-NOT (Test-Path "$TemplatePath\Autopilot\Profiles")) {
+        New-Item -Path "$TemplatePath\Autopilot\Profiles" -ItemType Directory -Force | Out-Null
     }
     if (-NOT (Test-Path "$TemplatePath\DriverPacks\Dell")) {
         New-Item -Path "$TemplatePath\DriverPacks\Dell" -ItemType Directory -Force | Out-Null

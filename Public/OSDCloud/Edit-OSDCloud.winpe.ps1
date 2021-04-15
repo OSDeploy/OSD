@@ -98,10 +98,10 @@ function Edit-OSDCloud.winpe {
     $MountMyWindowsImage = Mount-MyWindowsImage -ImagePath "$WorkspacePath\Media\Sources\boot.wim"
     $MountPath = $MountMyWindowsImage.Path
     #=======================================================================
-    #   Add AutoPilot Profiles
+    #   Add Autopilot Profiles
     #=======================================================================
-    if (Test-Path "$WorkspacePath\AutoPilot") {
-        robocopy "$WorkspacePath\AutoPilot" "$MountPath\OSDCloud\AutoPilot" *.* /mir /ndl /njh /njs /b /np
+    if (Test-Path "$WorkspacePath\Autopilot") {
+        robocopy "$WorkspacePath\Autopilot" "$MountPath\OSDCloud\Autopilot" *.* /mir /ndl /njh /njs /b /np
     }
     #=======================================================================
     #   Add ODT Config
@@ -202,6 +202,7 @@ function Edit-OSDCloud.winpe {
                 }
             }
         }
+        Save-WindowsImage -Path $MountPath
     }
     #=======================================================================
     #   Startnet
@@ -242,6 +243,11 @@ start PowerShell -Nol -W Mi
         robocopy "$env:TEMP" "$MountPath\Windows\System32" winpe.jpg /ndl /njh /njs /b /np /r:0 /w:0
         robocopy "$env:TEMP" "$MountPath\Windows\System32" winre.jpg /ndl /njh /njs /b /np /r:0 /w:0
     }
+    #=======================================================================
+    #   Save DISM Module
+    #=======================================================================
+<#     Write-Verbose -Verbose "Copy-PSModuleToWindowsImage -Name DISM -Path $MountPath"
+    Copy-PSModuleToWindowsImage -Name DISM -Path $MountPath #>
     #=======================================================================
     #   Modules
     #=======================================================================

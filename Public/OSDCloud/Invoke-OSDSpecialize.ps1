@@ -1,4 +1,4 @@
-function Start-OSDCloudSpecialize {
+function Invoke-OSDSpecialize {
     [CmdletBinding()]
     param (
         [switch]$Apply

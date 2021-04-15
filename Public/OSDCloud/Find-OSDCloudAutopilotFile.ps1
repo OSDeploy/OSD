@@ -1,9 +1,9 @@
 <#
 .SYNOPSIS
-Searches all PSDrives for AutoPilot Profiles [PSDrive]:\OSDCloud\AutoPilot\Profiles
+Searches all PSDrives for Autopilot Profiles [PSDrive]:\OSDCloud\Autopilot\Profiles
 
 .Description
-Searches all PSDrives for AutoPilot Profiles [PSDrive]:\OSDCloud\AutoPilot\Profiles
+Searches all PSDrives for Autopilot Profiles [PSDrive]:\OSDCloud\Autopilot\Profiles
 
 .LINK
 https://osdcloud.osdeploy.com
@@ -20,10 +20,10 @@ function Find-OSDCloudAutopilotFile {
     #=======================================================================
     $Results = @()
     #=======================================================================
-    #	Search for AutoPilot Profiles
+    #	Search for Autopilot Profiles
     #=======================================================================
     $Results = Get-PSDrive -PSProvider FileSystem | ForEach-Object {
-        Get-ChildItem "$($_.Name):\OSDCloud\AutoPilot\Profiles" -Include *.json -File -Recurse -Force -ErrorAction Ignore
+        Get-ChildItem "$($_.Name):\OSDCloud\Autopilot\Profiles" -Include *.json -File -Recurse -Force -ErrorAction Ignore
     }
     #=======================================================================
     #	Results

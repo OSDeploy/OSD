@@ -1,7 +1,7 @@
 function Use-WindowsUnattend.autopilot.oobe {
     [CmdletBinding()]
     param (
-        [string]$AutoPilotSwitches
+        [string]$AutopilotSwitches
     )
 
 $UnattendXml = @'
@@ -37,7 +37,7 @@ $UnattendXml = @'
         New-Item -Path $Panther -ItemType Directory -Force | Out-Null
     }
 
-    Write-Verbose -Verbose "Setting AutoPilot Unattend.xml at $UnattendPath"
+    Write-Verbose -Verbose "Setting Autopilot Unattend.xml at $UnattendPath"
     $UnattendXml | Out-File -FilePath $UnattendPath -Encoding utf8
     #=======================================================================
     #	Use-WindowsUnattend

@@ -13,7 +13,7 @@ $UnattendXml = @'
                 <RunSynchronousCommand wcm:action="add">
                     <Order>1</Order>
                     <Description>OSDCloud Specialize</Description>
-                    <Path>Powershell -ExecutionPolicy Bypass -Command Start-OSDCloudSpecialize -Verbose</Path>
+                    <Path>Powershell -ExecutionPolicy Bypass -Command Invoke-OSDSpecialize -Verbose</Path>
                 </RunSynchronousCommand>
             </RunSynchronous>
         </component>
@@ -36,7 +36,7 @@ $UnattendXml = @'
     #	Panther Unattend
     #=======================================================================
     $Panther = 'C:\Windows\Panther'
-    $UnattendPath = "$Panther\Start-OSDCloudSpecialize.xml"
+    $UnattendPath = "$Panther\Invoke-OSDSpecialize.xml"
 
     Write-Verbose -Verbose "Setting $UnattendPath"
     $UnattendXml | Out-File -FilePath $UnattendPath -Encoding utf8 -Force
@@ -49,7 +49,7 @@ $UnattendXml = @'
     #=======================================================================
     Write-Verbose -Verbose "Setting Unattend in Offline Registry"
     reg load HKLM\TempSYSTEM "C:\Windows\System32\Config\SYSTEM"
-    reg add HKLM\TempSYSTEM\Setup /v UnattendFile /d "C:\Windows\Panther\Start-OSDCloudSpecialize.xml" /f
+    reg add HKLM\TempSYSTEM\Setup /v UnattendFile /d "C:\Windows\Panther\Invoke-OSDSpecialize.xml" /f
     reg unload HKLM\TempSYSTEM
     #=======================================================================
 }

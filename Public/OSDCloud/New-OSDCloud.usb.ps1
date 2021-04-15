@@ -35,7 +35,7 @@ function New-OSDCloud.usb {
     #	Set Variables
     #=======================================================================
     $ErrorActionPreference = 'Stop'
-    $BootLabel = 'USBBoot'
+    $BootLabel = 'OSDBoot'
     $DataLabel = 'OSDCloud'
     #=======================================================================
     #	Set WorkspacePath
@@ -73,8 +73,8 @@ function New-OSDCloud.usb {
     #=======================================================================
     #	Get-Partition.usb
     #=======================================================================
-    $GetUSBBootPartition = Get-Partition.usb | Where-Object {($_.DiskNumber -eq $NewOSDBootUSB.DiskNumber) -and ($_.PartitionNumber -eq 2)}
-    if (-NOT ($GetUSBBootPartition)) {
+    $GetOSDBootPartition = Get-Partition.usb | Where-Object {($_.DiskNumber -eq $NewOSDBootUSB.DiskNumber) -and ($_.PartitionNumber -eq 2)}
+    if (-NOT ($GetOSDBootPartition)) {
         Write-Warning "Something went very very wrong in this process"
         Break
     }
@@ -86,11 +86,11 @@ function New-OSDCloud.usb {
     #=======================================================================
     #	Copy OSDCloud
     #=======================================================================
-    if ((Test-Path -Path "$WorkspacePath\Media") -and (Test-Path -Path "$($GetUSBBootPartition.DriveLetter):\")) {
-        robocopy "$WorkspacePath\Media" "$($GetUSBBootPartition.DriveLetter):\" *.* /e /ndl /njh /njs /np /b
+    if ((Test-Path -Path "$WorkspacePath\Media") -and (Test-Path -Path "$($GetOSDBootPartition.DriveLetter):\")) {
+        robocopy "$WorkspacePath\Media" "$($GetOSDBootPartition.DriveLetter):\" *.* /e /ndl /njh /njs /np /b
     }
-    if (Test-Path -Path "$WorkspacePath\AutoPilot") {
-        robocopy "$WorkspacePath\AutoPilot" "$($GetUSBDataPartition.DriveLetter):\OSDCloud\AutoPilot" *.* /e /ndl /njh /njs /np /b
+    if (Test-Path -Path "$WorkspacePath\Autopilot") {
+        robocopy "$WorkspacePath\Autopilot" "$($GetUSBDataPartition.DriveLetter):\OSDCloud\Autopilot" *.* /e /ndl /njh /njs /np /b
     }
     if (Test-Path -Path "$WorkspacePath\ODT") {
         robocopy "$WorkspacePath\ODT" "$($GetUSBDataPartition.DriveLetter):\OSDCloud\ODT" *.* /e /ndl /njh /njs /np /b

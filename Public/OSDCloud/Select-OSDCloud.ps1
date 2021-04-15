@@ -17,7 +17,7 @@ function Select-OSDCloudFile.wim {
     $i = $null
     $Results = Find-OSDCloudFile -Name '*.wim' -Path '\OSDCloud\OS\'
 
-    $Results = $Results | Sort-Object -Property Length -Unique | Sort-Object FullName
+    $Results = $Results | Sort-Object -Property Length -Unique | Sort-Object FullName | Where-Object {$_.Length -gt 3GB}
 
     if ($Results) {
         $Results = foreach ($Item in $Results) {

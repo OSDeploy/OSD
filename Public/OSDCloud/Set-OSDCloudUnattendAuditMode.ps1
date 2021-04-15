@@ -13,7 +13,7 @@ $UnattendXml = @'
                 <RunSynchronousCommand wcm:action="add">
                     <Order>1</Order>
                     <Description>OSDCloud Specialize</Description>
-                    <Path>Powershell -ExecutionPolicy Bypass -Command Start-OSDCloudSpecialize -Verbose</Path>
+                    <Path>Powershell -ExecutionPolicy Bypass -Command Invoke-OSDSpecialize -Verbose</Path>
                 </RunSynchronousCommand>
             </RunSynchronous>
         </component>

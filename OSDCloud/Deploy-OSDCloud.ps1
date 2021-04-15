@@ -9,7 +9,7 @@
 #   In WinPE, the latest version will be installed automatically
 #   In Windows, this script is stopped and you will need to update manually
 #=======================================================================
-[Version]$OSDVersionMin = '21.4.13.3'
+[Version]$OSDVersionMin = '21.4.14.1'
 
 if ((Get-Module -Name OSD -ListAvailable | `Sort-Object Version -Descending | Select-Object -First 1).Version -lt $OSDVersionMin) {
     Write-Warning "OSDCloud requires OSD $OSDVersionMin or newer"
@@ -59,21 +59,21 @@ if (-NOT ($Global:OSDCloudProduct)) {
 Write-Host -ForegroundColor DarkGray "========================================================================="
 Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) $($MyInvocation.MyCommand.Source)"
 #=======================================================================
-#	AutoPilot Profiles
+#	Autopilot Profiles
 #=======================================================================
-if ($Global:OSDCloudSkipAutoPilot -eq $false) {
+if ($Global:OSDCloudSkipAutopilot -eq $false) {
     $GetOSDCloudAutopilotFile = Find-OSDCloudAutopilotFile
     
     if ($GetOSDCloudAutopilotFile) {
         Write-Host -ForegroundColor DarkGray "========================================================================="
         Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Select-OSDCloudAutopilotFile"
     
-        $Global:OSDCloudAutoPilotProfile = Select-OSDCloudAutopilotFile
-        if ($Global:OSDCloudAutoPilotProfile) {
-            Write-Host -ForegroundColor Cyan "OSDCloud will apply the following AutoPilot Profile as AutoPilotConfigurationFile.json"
-            $Global:OSDCloudAutoPilotProfile | Format-List
+        $Global:OSDCloudAutopilotProfile = Select-OSDCloudAutopilotFile
+        if ($Global:OSDCloudAutopilotProfile) {
+            Write-Host -ForegroundColor Cyan "OSDCloud will apply the following Autopilot Profile as AutopilotConfigurationFile.json"
+            $Global:OSDCloudAutopilotProfile | Format-List
         } else {
-            Write-Warning "AutoPilotConfigurationFile.json will not be configured for this deployment"
+            Write-Warning "AutopilotConfigurationFile.json will not be configured for this deployment"
         }
     }
 }
@@ -188,30 +188,27 @@ if (-NOT (Test-Path 'C:\OSDCloud\Logs')) {
 }
 Start-Transcript -Path 'C:\OSDCloud\Logs' -ErrorAction Ignore
 #=======================================================================
-#	Get-CustomImage
+#	Start-OSDCloudWim
 #=======================================================================
-if ($Global:OSDImageFullName) {
+if ($Global:OSDCloudWimFullName) {
     Write-Host -ForegroundColor DarkGray "========================================================================="
-    Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Custom Windows Image"
+    Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) OSDCloud Windows Image"
 
-    $OSDCloudOfflineOSFullName = (Find-OSDCloudFile -Name $Global:OSDImageName -Path (Split-Path -Path (Split-Path -Path $Global:OSDImageFullName -Parent) -NoQualifier) | Select-Object -First 1).FullName
+    $Global:OSDCloudOSFullName = (Find-OSDCloudFile -Name $Global:OSDImageName -Path (Split-Path -Path (Split-Path -Path $Global:OSDCloudWimFullName -Parent) -NoQualifier) | Select-Object -First 1).FullName
 
-    if ($OSDCloudOfflineOSFullName) {
-        if (!($Global:OSDCloudOSImageIndex)) {
-            Write-Warning "No ImageIndex is specified, setting to ImageIndex 1"
-            $Global:OSDCloudOSImageIndex = 1
-        }
+    if ($Global:OSDCloudOSFullName) {
+        Write-Host -ForegroundColor DarkGray "$Global:OSDCloudOSFullName"
     }
     else {
-        Write-Warning "Something went wrong trying to get the Offline WIM"
+        Write-Warning "Something went wrong trying to get the Windows Image"
         Write-Warning "OSDCloud cannot continue"
         Break
     }
 }
-else {
-    #=======================================================================
-    #	Get-FeatureUpdate
-    #=======================================================================
+#=======================================================================
+#	Get-FeatureUpdate | Save-FeatureUpdate
+#=======================================================================
+if (!($Global:OSDCloudWimFullName)) {
     Write-Host -ForegroundColor DarkGray "========================================================================="
     Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Save-FeatureUpdate"
     
@@ -229,20 +226,22 @@ else {
     Write-Host -ForegroundColor DarkGray "FileName: $($GetFeatureUpdate.FileName)"
     Write-Host -ForegroundColor DarkGray "SizeMB: $($GetFeatureUpdate.SizeMB)"
     Write-Host -ForegroundColor DarkGray "FileUri: $($GetFeatureUpdate.FileUri)"
-    #=======================================================================
-    #	Get OS
-    #=======================================================================
+}
+#=======================================================================
+#	Get OS
+#=======================================================================
+if (!($Global:OSDCloudWimFullName)) {
     $OSDCloudOfflineOS = Find-OSDCloudOfflineFile -Name $GetFeatureUpdate.FileName | Select-Object -First 1
     
     if ($OSDCloudOfflineOS) {
-        $OSDCloudOfflineOSFullName = $OSDCloudOfflineOS.FullName
-        Write-Host -ForegroundColor DarkGray "$OSDCloudOfflineOSFullName"
+        $Global:OSDCloudOSFullName = $OSDCloudOfflineOS.FullName
+        Write-Host -ForegroundColor DarkGray "$Global:OSDCloudOSFullName"
     }
     elseif (Test-WebConnection -Uri $GetFeatureUpdate.FileUri) {
         $SaveFeatureUpdate = Save-FeatureUpdate -OSLicense $OSLicense -OSBuild $OSBuild -OSLanguage $OSLanguage -DownloadPath 'C:\OSDCloud\OS' -ErrorAction Stop
         $Global:SaveFeatureUpdate = $SaveFeatureUpdate
         if (Test-Path $($SaveFeatureUpdate.FullName)) {
-            $OSDCloudOfflineOSFullName = $SaveFeatureUpdate.FullName
+            $Global:OSDCloudOSFullName = $SaveFeatureUpdate.FullName
         }
         else {
             Write-Warning "Something went wrong trying to get the Windows Feature Update"
@@ -266,11 +265,16 @@ if (-NOT (Test-Path 'C:\OSDCloud\Temp')) {
     New-Item 'C:\OSDCloud\Temp' -ItemType Directory -Force | Out-Null
 }
 
-if ($OSDCloudOfflineOSFullName) {
-    #Expand-WindowsImage -ApplyPath 'C:\' -ImagePath "$OSDCloudOfflineOSFullName" -Index $Global:OSDCloudOSImageIndex -ScratchDirectory 'C:\OSDCloud\Temp' -ErrorAction Stop
-    dism /Apply-Image /ImageFile:"$OSDCloudOfflineOSFullName" /Index:$Global:OSDCloudOSImageIndex /ApplyDir:C:\  /ScratchDir:"C:\OSDCloud\Temp"
+if ($Global:OSDCloudOSFullName) {
 
-    
+    if (!($Global:OSDCloudOSImageIndex)) {
+        Write-Warning "No ImageIndex is specified, setting ImageIndex = 1"
+        $Global:OSDCloudOSImageIndex = 1
+    }
+
+    #Expand-WindowsImage -ApplyPath 'C:\' -ImagePath "$Global:OSDCloudOSFullName" -Index $Global:OSDCloudOSImageIndex -ScratchDirectory 'C:\OSDCloud\Temp' -ErrorAction Stop
+    dism /Apply-Image /ImageFile:"$Global:OSDCloudOSFullName" /Index:$Global:OSDCloudOSImageIndex /ApplyDir:C:\  /ScratchDir:"C:\OSDCloud\Temp"
+
     $SystemDrive = Get-Partition | Where-Object {$_.Type -eq 'System'} | Select-Object -First 1
     if (-NOT (Get-PSDrive -Name S)) {
         $SystemDrive | Set-Partition -NewDriveLetter 'S'
@@ -293,8 +297,8 @@ if (-NOT (Test-Path 'C:\Drivers')) {
 if (-NOT (Test-Path 'C:\Windows\Panther')) {
     New-Item -Path 'C:\Windows\Panther'-ItemType Directory -Force -ErrorAction Stop | Out-Null
 }
-if (-NOT (Test-Path 'C:\Windows\Provisioning\AutoPilot')) {
-    New-Item -Path 'C:\Windows\Provisioning\AutoPilot'-ItemType Directory -Force -ErrorAction Stop | Out-Null
+if (-NOT (Test-Path 'C:\Windows\Provisioning\Autopilot')) {
+    New-Item -Path 'C:\Windows\Provisioning\Autopilot'-ItemType Directory -Force -ErrorAction Stop | Out-Null
 }
 if (-NOT (Test-Path 'C:\Windows\Setup\Scripts')) {
     New-Item -Path 'C:\Windows\Setup\Scripts' -ItemType Directory -Force -ErrorAction Stop | Out-Null
@@ -411,21 +415,21 @@ Add-WindowsDriver.offlineservicing
 #=======================================================================
 Write-Host -ForegroundColor DarkGray "================================================================="
 Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Set-OSDCloudUnattendSpecialize"
-Write-Host -ForegroundColor DarkGray "Enables Start-OSDCloudSpecialize"
+Write-Host -ForegroundColor DarkGray "Enables Invoke-OSDSpecialize"
 Set-OSDCloudUnattendSpecialize
 #=======================================================================
-#   AutoPilotConfigurationFile.json
+#   AutopilotConfigurationFile.json
 #=======================================================================
-if ($Global:OSDCloudAutoPilotProfile) {
+if ($Global:OSDCloudAutopilotProfile) {
     Write-Host -ForegroundColor DarkGray "================================================================="
-    Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) AutoPilotConfigurationFile.json"
+    Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) AutopilotConfigurationFile.json"
 
-    $PathAutoPilot = 'C:\Windows\Provisioning\AutoPilot'
+    $PathAutopilot = 'C:\Windows\Provisioning\Autopilot'
 
-    $AutoPilotConfigurationFile = Join-Path $PathAutoPilot 'AutoPilotConfigurationFile.json'
+    $AutopilotConfigurationFile = Join-Path $PathAutopilot 'AutopilotConfigurationFile.json'
 
-    Write-Verbose -Verbose "Setting $AutoPilotConfigurationFile"
-    $Global:OSDCloudAutoPilotProfile | ConvertTo-Json | Out-File -FilePath $AutoPilotConfigurationFile -Encoding ASCII
+    Write-Verbose -Verbose "Setting $AutopilotConfigurationFile"
+    $Global:OSDCloudAutopilotProfile | ConvertTo-Json | Out-File -FilePath $AutopilotConfigurationFile -Encoding ASCII
 }
 #=======================================================================
 #   Stage Office Config

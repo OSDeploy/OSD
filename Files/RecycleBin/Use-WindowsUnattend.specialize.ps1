@@ -1,7 +1,7 @@
 function Use-WindowsUnattend.specialize {
     [CmdletBinding()]
     param (
-        [string]$AutoPilotSwitches
+        [string]$AutopilotSwitches
     )
 #https://docs.microsoft.com/en-us/windows-hardware/customize/desktop/unattend/microsoft-windows-deployment-runsynchronous
 $UnattendXml = @'

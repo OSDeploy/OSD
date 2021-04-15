@@ -68,13 +68,9 @@ function Start-OSDCloud {
 
         [switch]$Screenshot,
 
-        [switch]$SkipAutoPilot,
+        [switch]$SkipAutopilot,
 
         [switch]$ZTI,
-
-        [Parameter(ParameterSetName = 'UsbWim')]
-        [switch]$UsbWim,
-
 
         [Parameter(ParameterSetName = 'GitHub')]
         [switch]$GitHub,
@@ -132,11 +128,11 @@ function Start-OSDCloud {
     #=======================================================================
     #	Variables and Disk Warnings
     #=======================================================================
-    if ($PSBoundParameters.ContainsKey('SkipAutoPilot')) {
-        $Global:OSDCloudSkipAutoPilot = $true
+    if ($PSBoundParameters.ContainsKey('SkipAutopilot')) {
+        $Global:OSDCloudSkipAutopilot = $true
     }
     else {
-        $Global:OSDCloudSkipAutoPilot = $false
+        $Global:OSDCloudSkipAutopilot = $false
     }
     if ($PSBoundParameters.ContainsKey('ZTI')) {
         $GetDisk = Get-Disk.fixed | Where-Object {$_.IsBoot -eq $false} | Sort-Object Number
@@ -183,292 +179,257 @@ function Start-OSDCloud {
         Write-Warning "OSDCloud will continue, but there may be issues if this can't be resolved"
     }
     #=======================================================================
-
-
-    if ($PSCmdlet.ParameterSetName -eq 'UsbWim') {
-        #=======================================================================
-        #	UsbWim
-        #=======================================================================
-        Write-Host -ForegroundColor DarkGray "========================================================================="
-        Write-Host -ForegroundColor Cyan "Custom Windows Image on USB"
-        $ImageFile = Select-OSDCloudFile.wim
-
-        if ($ImageFile) {
-            $Global:OSDImageName = ($ImageFile).Name
-            #$Global:OSDImageParent = Split-Path -Path ($ImageFile).Directory -Leaf
-            $Global:OSDImageFullName = ($ImageFile).FullName
-            #$Global:OSDImageHash = (Get-FileHash -Path $ImageFile.FullName -Algorithm SHA1).Hash
-
-            $ImageIndex = Select-OSDCloudImageIndex -ImagePath $Global:OSDImageFullName
-
-            Write-Host -ForegroundColor DarkGray "OSDImageName: $Global:OSDImageName"
-            Write-Host -ForegroundColor DarkGray "ImageIndex: $ImageIndex"
-            #Write-Host -ForegroundColor DarkGray "OSDImageParent: $Global:OSDImageParent"
-            Write-Host -ForegroundColor DarkGray "OSDImageFullName: $Global:OSDImageFullName"
-        }
-        else {
-            $Global:OSDImageName = $null
-            $ImageIndex = $null
-            #$Global:OSDImageParent = $null
-            $Global:OSDImageFullName = $null
-            Write-Warning "Custom Windows Image on USB was not found"
-            Break
-        }
+    #	OSBuild
+    #=======================================================================
+    Write-Host -ForegroundColor DarkGray "========================================================================="
+    Write-Host -ForegroundColor Cyan "Windows 10 OSBuild " -NoNewline
+    
+    if ($OSBuild) {
+        Write-Host -ForegroundColor Green $OSBuild
     }
-    if ($PSCmdlet.ParameterSetName -ne 'UsbWim') {
-        #=======================================================================
-        #	OSBuild
-        #=======================================================================
-        Write-Host -ForegroundColor DarkGray "========================================================================="
-        Write-Host -ForegroundColor Cyan "Windows 10 OSBuild " -NoNewline
+    elseif ($Global:OSDCloudZTI -eq $true) {
+        $OSBuild = '20H2'
+        Write-Host -ForegroundColor Green $OSBuild
+    }
+    else {
+        Write-Host -ForegroundColor Cyan "Menu"
+        $OSBuildNames = @('21H1','20H2','2004','1909','1903','1809')
         
-        if ($OSBuild) {
-            Write-Host -ForegroundColor Green $OSBuild
-        }
-        elseif ($Global:OSDCloudZTI -eq $true) {
-            $OSBuild = '20H2'
-            Write-Host -ForegroundColor Green $OSBuild
-        }
-        else {
-            Write-Host -ForegroundColor Cyan "Menu"
-            $OSBuildNames = @('21H1','20H2','2004','1909','1903','1809')
-            
-            $i = $null
-            $OSBuildMenu = foreach ($Item in $OSBuildNames) {
-                $i++
-            
-                $ObjectProperties = @{
-                    Selection   = $i
-                    Name     = $Item
-                }
-                New-Object -TypeName PSObject -Property $ObjectProperties
-            }
-            
-            $OSBuildMenu | Select-Object -Property Selection, Name | Format-Table | Out-Host
-            
-            do {
-                $SelectReadHost = Read-Host -Prompt "Enter a Selection for the Windows 10 OSBuild"
-            }
-            until (((($SelectReadHost -ge 0) -and ($SelectReadHost -in $OSBuildMenu.Selection))))
-            
-            $OSBuild = $OSBuildMenu | Where-Object {$_.Selection -eq $SelectReadHost} | Select-Object -ExpandProperty Name
-            Write-Host -ForegroundColor Cyan "OSBuild: " -NoNewline
-            Write-Host -ForegroundColor Green "$OSBuild"
-        }
-        #=======================================================================
-        #	OSEdition
-        #=======================================================================
-        Write-Host -ForegroundColor DarkGray "========================================================================="
-        Write-Host -ForegroundColor Cyan "Windows 10 OSEdition " -NoNewline
-
-        if ($PSBoundParameters.ContainsKey('OSEdition')) {
-            Write-Host -ForegroundColor Green $OSEdition
-        }
-        elseif ($Global:OSDCloudZTI -eq $true) {
-            $OSEdition = 'Enterprise'
-            Write-Host -ForegroundColor Green $OSEdition
-        }
-        else {
-            Write-Host -ForegroundColor Cyan "Menu"
-            $OSEditionNames = @('Home','Home N','Home Single Language','Education','Education N','Enterprise','Enterprise N','Pro','Pro N')
-
-            $i = $null
-            $OSEditionMenu = foreach ($Item in $OSEditionNames) {
-                $i++
-            
-                $ObjectProperties = @{
-                    Selection   = $i
-                    Name     = $Item
-                }
-                New-Object -TypeName PSObject -Property $ObjectProperties
-            }
-            
-            $OSEditionMenu | Select-Object -Property Selection, Name | Format-Table | Out-Host
-            
-            do {
-                $SelectReadHost = Read-Host -Prompt "Enter a Selection for the Windows 10 OSEdition"
-            }
-            until (((($SelectReadHost -ge 0) -and ($SelectReadHost -in $OSEditionMenu.Selection))))
-            
-            $OSEdition = $OSEditionMenu | Where-Object {$_.Selection -eq $SelectReadHost} | Select-Object -ExpandProperty Name
-            Write-Host -ForegroundColor Cyan "OSEdition: " -NoNewline
-            Write-Host -ForegroundColor Green "$OSEdition"
-        }
-        #=======================================================================
-        #	OSEditionId and OSLicense
-        #=======================================================================
-        if ($OSEdition -eq 'Home') {
-            $OSEditionId = 'Core'
-            $OSLicense = 'Retail'
-            $ImageIndex = 4
-        }
-        if ($OSEdition -eq 'Home N') {
-            $OSEditionId = 'CoreN'
-            $OSLicense = 'Retail'
-            $ImageIndex = 5
-        }
-        if ($OSEdition -eq 'Home Single Language') {
-            $OSEditionId = 'CoreSingleLanguage'
-            $OSLicense = 'Retail'
-            $ImageIndex = 6
-        }
-        if ($OSEdition -eq 'Enterprise') {
-            $OSEditionId = 'Enterprise'
-            $OSLicense = 'Volume'
-            $ImageIndex = 6
-        }
-        if ($OSEdition -eq 'Enterprise N') {
-            $OSEditionId = 'EnterpriseN'
-            $OSLicense = 'Volume'
-            $ImageIndex = 7
-        }
-        #=======================================================================
-        #	OSLicense
-        #=======================================================================
-        Write-Host -ForegroundColor DarkGray "========================================================================="
-        Write-Host -ForegroundColor Cyan "Windows 10 OSLicense " -NoNewline
-
-        if ($OSLicense) {
-            Write-Host -ForegroundColor Green $OSLicense
-        }
-        elseif ($Global:OSDCloudZTI -eq $true) {
-            $OSLicense = 'Volume'
-            Write-Host -ForegroundColor Green $OSLicense
-        }
-        else {
-            Write-Host -ForegroundColor Cyan "Menu"
-            $OSLicenseNames = @('Retail Windows 10 Consumer Editions','Volume Windows 10 Business Editions')
-            
-            $i = $null
-            $OSLicenseMenu = foreach ($Item in $OSLicenseNames) {
-                $i++
-            
-                $ObjectProperties = @{
-                    Selection           = $i
-                    Name                = $Item
-                }
-                New-Object -TypeName PSObject -Property $ObjectProperties
-            }
-            
-            $OSLicenseMenu | Select-Object -Property Selection, Name | Format-Table | Out-Host
-            
-            do {
-                $SelectReadHost = Read-Host -Prompt "Enter a Selection for the Windows 10 License"
-            }
-            until (((($SelectReadHost -ge 0) -and ($SelectReadHost -in $OSLicenseMenu.Selection))))
-            
-            $OSLicenseMenu = $OSLicenseMenu | Where-Object {$_.Selection -eq $SelectReadHost} | Select-Object -ExpandProperty Name
-
-            if ($OSLicenseMenu -match 'Retail') {
-                $OSLicense = 'Retail'
-            }
-            else {
-                $OSLicense = 'Volume'
-            }
-            Write-Host -ForegroundColor Cyan "OSLicense: " -NoNewline
-            Write-Host -ForegroundColor Green "$OSLicense"
-        }
-        if ($OSEdition -eq 'Education') {
-            $OSEditionId = 'Education'
-            if ($OSLicense -eq 'Retail') {$ImageIndex = 7}
-            if ($OSLicense -eq 'Volume') {$ImageIndex = 4}
-        }
-        if ($OSEdition -eq 'Education N') {
-            $OSEditionId = 'EducationN'
-            if ($OSLicense -eq 'Retail') {$ImageIndex = 8}
-            if ($OSLicense -eq 'Volume') {$ImageIndex = 5}
-        }
-        if ($OSEdition -eq 'Pro') {
-            $OSEditionId = 'Professional'
-            if ($OSLicense -eq 'Retail') {$ImageIndex = 9}
-            if ($OSLicense -eq 'Volume') {$ImageIndex = 8}
-        }
-        if ($OSEdition -eq 'Pro N') {
-            $OSEditionId = 'ProfessionalN'
-            if ($OSLicense -eq 'Retail') {$ImageIndex = 10}
-            if ($OSLicense -eq 'Volume') {$ImageIndex = 9}
-        }
-        Write-Host -ForegroundColor Cyan "OSEditionId: " -NoNewline
-        Write-Host -ForegroundColor Green "$OSEditionId"
-        Write-Host -ForegroundColor Cyan "ImageIndex: " -NoNewline
-        Write-Host -ForegroundColor Green "$ImageIndex"
-        #=======================================================================
-        #	OSLanguage
-        #=======================================================================
-        Write-Host -ForegroundColor DarkGray "========================================================================="
-        Write-Host -ForegroundColor Cyan "Windows 10 OSLanguage " -NoNewline
+        $i = $null
+        $OSBuildMenu = foreach ($Item in $OSBuildNames) {
+            $i++
         
-        if ($PSBoundParameters.ContainsKey('OSLanguage')) {
-            Write-Host -ForegroundColor Green $OSLanguage
-        }
-        elseif ($Global:OSDCloudZTI -eq $true) {
-            $OSLanguage = 'en-us'
-            Write-Host -ForegroundColor Green $OSLanguage
-        }
-        else {
-            Write-Host -ForegroundColor Cyan "Menu"
-            $OSLanguageNames = @('ar-sa','bg-bg','cs-cz','da-dk','de-de','el-gr','en-gb','en-us','es-es','es-mx','et-ee','fi-fi','fr-ca','fr-fr','he-il','hr-hr','hu-hu','it-it','ja-jp','ko-kr','lt-lt','lv-lv','nb-no','nl-nl','pl-pl','pt-br','pt-pt','ro-ro','ru-ru','sk-sk','sl-si','sr-latn-rs','sv-se','th-th','tr-tr','uk-ua','zh-cn','zh-tw')
-            
-            $i = $null
-            $OSLanguageMenu = foreach ($Item in $OSLanguageNames) {
-                $i++
-            
-                $ObjectProperties = @{
-                    Selection   = $i
-                    Name     = $Item
-                }
-                New-Object -TypeName PSObject -Property $ObjectProperties
+            $ObjectProperties = @{
+                Selection   = $i
+                Name     = $Item
             }
-            
-            $OSLanguageMenu | Select-Object -Property Selection, Name | Format-Table | Out-Host
-            
-            do {
-                $SelectReadHost = Read-Host -Prompt "Enter a Selection for the Windows 10 OSLanguage"
+            New-Object -TypeName PSObject -Property $ObjectProperties
+        }
+        
+        $OSBuildMenu | Select-Object -Property Selection, Name | Format-Table | Out-Host
+        
+        do {
+            $SelectReadHost = Read-Host -Prompt "Enter a Selection for the Windows 10 OSBuild"
+        }
+        until (((($SelectReadHost -ge 0) -and ($SelectReadHost -in $OSBuildMenu.Selection))))
+        
+        $OSBuild = $OSBuildMenu | Where-Object {$_.Selection -eq $SelectReadHost} | Select-Object -ExpandProperty Name
+        Write-Host -ForegroundColor Cyan "OSBuild: " -NoNewline
+        Write-Host -ForegroundColor Green "$OSBuild"
+    }
+    #=======================================================================
+    #	OSEdition
+    #=======================================================================
+    Write-Host -ForegroundColor DarkGray "========================================================================="
+    Write-Host -ForegroundColor Cyan "Windows 10 OSEdition " -NoNewline
+
+    if ($PSBoundParameters.ContainsKey('OSEdition')) {
+        Write-Host -ForegroundColor Green $OSEdition
+    }
+    elseif ($Global:OSDCloudZTI -eq $true) {
+        $OSEdition = 'Enterprise'
+        Write-Host -ForegroundColor Green $OSEdition
+    }
+    else {
+        Write-Host -ForegroundColor Cyan "Menu"
+        $OSEditionNames = @('Home','Home N','Home Single Language','Education','Education N','Enterprise','Enterprise N','Pro','Pro N')
+
+        $i = $null
+        $OSEditionMenu = foreach ($Item in $OSEditionNames) {
+            $i++
+        
+            $ObjectProperties = @{
+                Selection   = $i
+                Name     = $Item
             }
-            until (((($SelectReadHost -ge 0) -and ($SelectReadHost -in $OSLanguageMenu.Selection))))
-            
-            $OSLanguage = $OSLanguageMenu | Where-Object {$_.Selection -eq $SelectReadHost} | Select-Object -ExpandProperty Name
-            Write-Host -ForegroundColor Cyan "OSLanguage: " -NoNewline
-            Write-Host -ForegroundColor Green "$OSLanguage"
+            New-Object -TypeName PSObject -Property $ObjectProperties
         }
-        #=======================================================================
-        #	Get-FeatureUpdate
-        #=======================================================================
-        Write-Host -ForegroundColor DarkGray "========================================================================="
-        Write-Host -ForegroundColor Cyan "Get-FeatureUpdate"
-        Write-Host -ForegroundColor DarkGray "Windows 10 x64 | OSLicense: $OSLicense | OSBuild: $OSBuild | OSLanguage: $OSLanguage"
+        
+        $OSEditionMenu | Select-Object -Property Selection, Name | Format-Table | Out-Host
+        
+        do {
+            $SelectReadHost = Read-Host -Prompt "Enter a Selection for the Windows 10 OSEdition"
+        }
+        until (((($SelectReadHost -ge 0) -and ($SelectReadHost -in $OSEditionMenu.Selection))))
+        
+        $OSEdition = $OSEditionMenu | Where-Object {$_.Selection -eq $SelectReadHost} | Select-Object -ExpandProperty Name
+        Write-Host -ForegroundColor Cyan "OSEdition: " -NoNewline
+        Write-Host -ForegroundColor Green "$OSEdition"
+    }
+    #=======================================================================
+    #	OSEditionId and OSLicense
+    #=======================================================================
+    if ($OSEdition -eq 'Home') {
+        $OSEditionId = 'Core'
+        $OSLicense = 'Retail'
+        $ImageIndex = 4
+    }
+    if ($OSEdition -eq 'Home N') {
+        $OSEditionId = 'CoreN'
+        $OSLicense = 'Retail'
+        $ImageIndex = 5
+    }
+    if ($OSEdition -eq 'Home Single Language') {
+        $OSEditionId = 'CoreSingleLanguage'
+        $OSLicense = 'Retail'
+        $ImageIndex = 6
+    }
+    if ($OSEdition -eq 'Enterprise') {
+        $OSEditionId = 'Enterprise'
+        $OSLicense = 'Volume'
+        $ImageIndex = 6
+    }
+    if ($OSEdition -eq 'Enterprise N') {
+        $OSEditionId = 'EnterpriseN'
+        $OSLicense = 'Volume'
+        $ImageIndex = 7
+    }
+    #=======================================================================
+    #	OSLicense
+    #=======================================================================
+    Write-Host -ForegroundColor DarkGray "========================================================================="
+    Write-Host -ForegroundColor Cyan "Windows 10 OSLicense " -NoNewline
 
-        $GetFeatureUpdate = Get-FeatureUpdate -OSLicense $OSLicense -OSBuild $OSBuild -OSLanguage $OSLanguage
+    if ($OSLicense) {
+        Write-Host -ForegroundColor Green $OSLicense
+    }
+    elseif ($Global:OSDCloudZTI -eq $true) {
+        $OSLicense = 'Volume'
+        Write-Host -ForegroundColor Green $OSLicense
+    }
+    else {
+        Write-Host -ForegroundColor Cyan "Menu"
+        $OSLicenseNames = @('Retail Windows 10 Consumer Editions','Volume Windows 10 Business Editions')
+        
+        $i = $null
+        $OSLicenseMenu = foreach ($Item in $OSLicenseNames) {
+            $i++
+        
+            $ObjectProperties = @{
+                Selection           = $i
+                Name                = $Item
+            }
+            New-Object -TypeName PSObject -Property $ObjectProperties
+        }
+        
+        $OSLicenseMenu | Select-Object -Property Selection, Name | Format-Table | Out-Host
+        
+        do {
+            $SelectReadHost = Read-Host -Prompt "Enter a Selection for the Windows 10 License"
+        }
+        until (((($SelectReadHost -ge 0) -and ($SelectReadHost -in $OSLicenseMenu.Selection))))
+        
+        $OSLicenseMenu = $OSLicenseMenu | Where-Object {$_.Selection -eq $SelectReadHost} | Select-Object -ExpandProperty Name
 
-        if ($GetFeatureUpdate) {
-            $GetFeatureUpdate = $GetFeatureUpdate | Select-Object -Property CreationDate,KBNumber,Title,UpdateOS,UpdateBuild,UpdateArch,FileName, @{Name='SizeMB';Expression={[int]($_.Size /1024/1024)}},FileUri,Hash,AdditionalHash
+        if ($OSLicenseMenu -match 'Retail') {
+            $OSLicense = 'Retail'
         }
         else {
-            Write-Warning "Unable to locate a Windows 10 Feature Update"
-            Write-Warning "OSDCloud cannot continue"
-            Break
+            $OSLicense = 'Volume'
         }
-        #=======================================================================
-        #	Get-FeatureUpdate Source
-        #=======================================================================
-        $OSDCloudOfflineOS = Find-OSDCloudOfflineFile -Name $GetFeatureUpdate.FileName | Select-Object -First 1
+        Write-Host -ForegroundColor Cyan "OSLicense: " -NoNewline
+        Write-Host -ForegroundColor Green "$OSLicense"
+    }
+    if ($OSEdition -eq 'Education') {
+        $OSEditionId = 'Education'
+        if ($OSLicense -eq 'Retail') {$ImageIndex = 7}
+        if ($OSLicense -eq 'Volume') {$ImageIndex = 4}
+    }
+    if ($OSEdition -eq 'Education N') {
+        $OSEditionId = 'EducationN'
+        if ($OSLicense -eq 'Retail') {$ImageIndex = 8}
+        if ($OSLicense -eq 'Volume') {$ImageIndex = 5}
+    }
+    if ($OSEdition -eq 'Pro') {
+        $OSEditionId = 'Professional'
+        if ($OSLicense -eq 'Retail') {$ImageIndex = 9}
+        if ($OSLicense -eq 'Volume') {$ImageIndex = 8}
+    }
+    if ($OSEdition -eq 'Pro N') {
+        $OSEditionId = 'ProfessionalN'
+        if ($OSLicense -eq 'Retail') {$ImageIndex = 10}
+        if ($OSLicense -eq 'Volume') {$ImageIndex = 9}
+    }
+    Write-Host -ForegroundColor Cyan "OSEditionId: " -NoNewline
+    Write-Host -ForegroundColor Green "$OSEditionId"
+    Write-Host -ForegroundColor Cyan "ImageIndex: " -NoNewline
+    Write-Host -ForegroundColor Green "$ImageIndex"
+    #=======================================================================
+    #	OSLanguage
+    #=======================================================================
+    Write-Host -ForegroundColor DarkGray "========================================================================="
+    Write-Host -ForegroundColor Cyan "Windows 10 OSLanguage " -NoNewline
+    
+    if ($PSBoundParameters.ContainsKey('OSLanguage')) {
+        Write-Host -ForegroundColor Green $OSLanguage
+    }
+    elseif ($Global:OSDCloudZTI -eq $true) {
+        $OSLanguage = 'en-us'
+        Write-Host -ForegroundColor Green $OSLanguage
+    }
+    else {
+        Write-Host -ForegroundColor Cyan "Menu"
+        $OSLanguageNames = @('ar-sa','bg-bg','cs-cz','da-dk','de-de','el-gr','en-gb','en-us','es-es','es-mx','et-ee','fi-fi','fr-ca','fr-fr','he-il','hr-hr','hu-hu','it-it','ja-jp','ko-kr','lt-lt','lv-lv','nb-no','nl-nl','pl-pl','pt-br','pt-pt','ro-ro','ru-ru','sk-sk','sl-si','sr-latn-rs','sv-se','th-th','tr-tr','uk-ua','zh-cn','zh-tw')
+        
+        $i = $null
+        $OSLanguageMenu = foreach ($Item in $OSLanguageNames) {
+            $i++
+        
+            $ObjectProperties = @{
+                Selection   = $i
+                Name     = $Item
+            }
+            New-Object -TypeName PSObject -Property $ObjectProperties
+        }
+        
+        $OSLanguageMenu | Select-Object -Property Selection, Name | Format-Table | Out-Host
+        
+        do {
+            $SelectReadHost = Read-Host -Prompt "Enter a Selection for the Windows 10 OSLanguage"
+        }
+        until (((($SelectReadHost -ge 0) -and ($SelectReadHost -in $OSLanguageMenu.Selection))))
+        
+        $OSLanguage = $OSLanguageMenu | Where-Object {$_.Selection -eq $SelectReadHost} | Select-Object -ExpandProperty Name
+        Write-Host -ForegroundColor Cyan "OSLanguage: " -NoNewline
+        Write-Host -ForegroundColor Green "$OSLanguage"
+    }
+    #=======================================================================
+    #	Get-FeatureUpdate
+    #=======================================================================
+    Write-Host -ForegroundColor DarkGray "========================================================================="
+    Write-Host -ForegroundColor Cyan "Get-FeatureUpdate"
+    Write-Host -ForegroundColor DarkGray "Windows 10 x64 | OSLicense: $OSLicense | OSBuild: $OSBuild | OSLanguage: $OSLanguage"
 
-        if ($OSDCloudOfflineOS) {
-            $OSDCloudOfflineOSFullName = $OSDCloudOfflineOS.FullName
-            Write-Host -ForegroundColor Green "OK"
-            Write-Host -ForegroundColor DarkGray "$($GetFeatureUpdate.Title)"
-            Write-Host -ForegroundColor DarkGray "$OSDCloudOfflineOSFullName"
-        }
-        elseif (Test-WebConnection -Uri $GetFeatureUpdate.FileUri) {
-            Write-Host -ForegroundColor Yellow "Download"
-            Write-Host -ForegroundColor Yellow "$($GetFeatureUpdate.Title)"
-            Write-Host -ForegroundColor Yellow "$($GetFeatureUpdate.FileUri)"
-        }
-        else {
-            Write-Warning "Could not verify an Internet connection for Windows 10 Feature Update"
-            Write-Warning "OSDCloud cannot continue"
-            Break
-        }
+    $GetFeatureUpdate = Get-FeatureUpdate -OSLicense $OSLicense -OSBuild $OSBuild -OSLanguage $OSLanguage
+
+    if ($GetFeatureUpdate) {
+        $GetFeatureUpdate = $GetFeatureUpdate | Select-Object -Property CreationDate,KBNumber,Title,UpdateOS,UpdateBuild,UpdateArch,FileName, @{Name='SizeMB';Expression={[int]($_.Size /1024/1024)}},FileUri,Hash,AdditionalHash
+    }
+    else {
+        Write-Warning "Unable to locate a Windows 10 Feature Update"
+        Write-Warning "OSDCloud cannot continue"
+        Break
+    }
+    #=======================================================================
+    #	Get-FeatureUpdate Source
+    #=======================================================================
+    $OSDCloudOfflineOS = Find-OSDCloudOfflineFile -Name $GetFeatureUpdate.FileName | Select-Object -First 1
+
+    if ($OSDCloudOfflineOS) {
+        $OSDCloudOfflineOSFullName = $OSDCloudOfflineOS.FullName
+        Write-Host -ForegroundColor Green "OK"
+        Write-Host -ForegroundColor DarkGray "$($GetFeatureUpdate.Title)"
+        Write-Host -ForegroundColor DarkGray "$OSDCloudOfflineOSFullName"
+    }
+    elseif (Test-WebConnection -Uri $GetFeatureUpdate.FileUri) {
+        Write-Host -ForegroundColor Yellow "Download"
+        Write-Host -ForegroundColor Yellow "$($GetFeatureUpdate.Title)"
+        Write-Host -ForegroundColor Yellow "$($GetFeatureUpdate.FileUri)"
+    }
+    else {
+        Write-Warning "Could not verify an Internet connection for Windows 10 Feature Update"
+        Write-Warning "OSDCloud cannot continue"
+        Break
     }
     #=======================================================================
     #	Start-OSDCloud Get-MyDriverPack
@@ -551,9 +512,9 @@ function Start-OSDCloud {
         }
     }
     #=======================================================================
-    #	AutoPilot Profiles
+    #	Autopilot Profiles
     #=======================================================================
-    if ($Global:OSDCloudSkipAutoPilot -eq $false) {
+    if ($Global:OSDCloudSkipAutopilot -eq $false) {
         Write-Host -ForegroundColor DarkGray "========================================================================="
         Write-Host -ForegroundColor Cyan "Find-OSDCloudAutopilotFile"
     
@@ -562,16 +523,16 @@ function Start-OSDCloud {
         if ($GetOSDCloudAutopilotFile) {
             Write-Host -ForegroundColor Green "OK"
             if ($Global:OSDCloudZTI -eq $true) {
-                Write-Warning "-SkipAutoPilot parameter can be used to skip AutoPilot Configuration"
-                Write-Warning "-ZTI automatically selects the first AutoPilot Profile listed below"
-                Write-Warning "Rename your AutoPilot Configuration Files so your default is the first Selection"
+                Write-Warning "-SkipAutopilot parameter can be used to skip Autopilot Configuration"
+                Write-Warning "-ZTI automatically selects the first Autopilot Profile listed below"
+                Write-Warning "Rename your Autopilot Configuration Files so your default is the first Selection"
             }
             foreach ($Item in $GetOSDCloudAutopilotFile) {
                 Write-Host -ForegroundColor DarkGray "$($Item.FullName)"
             }
         } else {
-            Write-Warning "No AutoPilot Profiles were found in any PSDrive"
-            Write-Warning "AutoPilot Profiles must be located in a <PSDrive>:\OSDCloud\AutoPilot\Profiles directory"
+            Write-Warning "No Autopilot Profiles were found in any PSDrive"
+            Write-Warning "Autopilot Profiles must be located in a <PSDrive>:\OSDCloud\Autopilot\Profiles directory"
         }
     }
     #=======================================================================
@@ -588,7 +549,7 @@ function Start-OSDCloud {
     #=======================================================================
     #   Module
     #=======================================================================
-    if (($PSCmdlet.ParameterSetName -eq 'Module') -or ($PSCmdlet.ParameterSetName -eq 'UsbWim')) {
+    if ($PSCmdlet.ParameterSetName -eq 'Module') {
         $GetDeployOSDCloud = Find-OSDCloudOfflineFile -Name 'Deploy-MyOSDCloud.ps1' | Select-Object -First 1
         if ($GetDeployOSDCloud) {
             Write-Host -ForegroundColor DarkGray "========================================================================="

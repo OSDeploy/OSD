@@ -93,25 +93,25 @@ function Save-OSDCloud.usb {
         Break
     }
     #=======================================================================
-    #	AutoPilot Profiles
+    #	Autopilot Profiles
     #=======================================================================
     Write-Host -ForegroundColor DarkGray        "========================================================================="
-    Write-Host -ForegroundColor Cyan            "AutoPilot Profiles"
+    Write-Host -ForegroundColor Cyan            "Autopilot Profiles"
 
-    if (-NOT (Test-Path "$OSDCloudOfflineFullName\AutoPilot\Profiles")) {
-        New-Item -Path "$OSDCloudOfflineFullName\AutoPilot\Profiles" -ItemType Directory -Force | Out-Null
-        Write-Host "AutoPilot Profiles can be saved to $OSDCloudOfflineFullName\AutoPilot\Profiles"
+    if (-NOT (Test-Path "$OSDCloudOfflineFullName\Autopilot\Profiles")) {
+        New-Item -Path "$OSDCloudOfflineFullName\Autopilot\Profiles" -ItemType Directory -Force | Out-Null
+        Write-Host "Autopilot Profiles can be saved to $OSDCloudOfflineFullName\Autopilot\Profiles"
     }
 
-    $GetOSDCloudOfflineAutoPilotProfiles = Find-OSDCloudAutopilotFile
+    $GetOSDCloudOfflineAutopilotProfiles = Find-OSDCloudAutopilotFile
 
-    if ($GetOSDCloudOfflineAutoPilotProfiles) {
-        foreach ($Item in $GetOSDCloudOfflineAutoPilotProfiles) {
+    if ($GetOSDCloudOfflineAutopilotProfiles) {
+        foreach ($Item in $GetOSDCloudOfflineAutopilotProfiles) {
             Write-Host -ForegroundColor White "$($Item.FullName)"
         }
     } else {
-        Write-Warning "No AutoPilot Profiles were found in any <PSDrive>:\OSDCloud\AutoPilot\Profiles"
-        Write-Warning "AutoPilot Profiles must be located in a $OSDCloudOfflineFullName\AutoPilot\Profiles direcory"
+        Write-Warning "No Autopilot Profiles were found in any <PSDrive>:\OSDCloud\Autopilot\Profiles"
+        Write-Warning "Autopilot Profiles must be located in a $OSDCloudOfflineFullName\Autopilot\Profiles direcory"
     }
     #=======================================================================
     #	OSBuild
@@ -428,13 +428,13 @@ function Save-OSDCloud.usb {
         Save-Module -Name OSD -Path "$OSDCloudOfflineFullName\PowerShell\Offline\Modules"
         Copy-PSModuleToFolder -Name OSD -Destination "$OSDCloudOfflineFullName\PowerShell\Offline\Modules"
 
-        Write-Host -ForegroundColor DarkGray "Save-Module WindowsAutoPilotIntune to $OSDCloudOfflineFullName\PowerShell\Offline\Modules"
-        Save-Module -Name WindowsAutoPilotIntune -Path "$OSDCloudOfflineFullName\PowerShell\Offline\Modules"
+        Write-Host -ForegroundColor DarkGray "Save-Module WindowsAutopilotIntune to $OSDCloudOfflineFullName\PowerShell\Offline\Modules"
+        Save-Module -Name WindowsAutopilotIntune -Path "$OSDCloudOfflineFullName\PowerShell\Offline\Modules"
         Write-Host -ForegroundColor DarkGray "Save-Module AzureAD to $OSDCloudOfflineFullName\PowerShell\Offline\Modules"
         Write-Host -ForegroundColor DarkGray "Save-Module Microsoft.Graph.Intune to $OSDCloudOfflineFullName\PowerShell\Offline\Modules"
 
-        Write-Host -ForegroundColor DarkGray "Save-Script Get-WindowsAutoPilotInfo to $OSDCloudOfflineFullName\PowerShell\Offline\Scripts"
-        Save-Script -Name Get-WindowsAutoPilotInfo -Path "$OSDCloudOfflineFullName\PowerShell\Offline\Scripts"
+        Write-Host -ForegroundColor DarkGray "Save-Script Get-WindowsAutopilotInfo to $OSDCloudOfflineFullName\PowerShell\Offline\Scripts"
+        Save-Script -Name Get-WindowsAutopilotInfo -Path "$OSDCloudOfflineFullName\PowerShell\Offline\Scripts"
     }
     else {
         Write-Warning "Could not validate an Internet connection to the PowerShell Gallery"
