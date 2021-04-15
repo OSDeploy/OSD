@@ -214,10 +214,6 @@ Windows Registry Editor Version 5.00
     $MountMyWindowsImage = Mount-MyWindowsImage $BootWim
     $MountPath = $MountMyWindowsImage.Path
     #=======================================================================
-    #   Copy DISM Module
-    #=======================================================================
-    robocopy "$MountPath\Windows\System32\WindowsPowerShell\v1.0\Modules\Dism" "$MountPath\WindowsPowerShell\Modules\Dism" *.* /e /ndl /nfl /np /njh /njs /r:0 /w:0 /b
-    #=======================================================================
     #   WinRE
     #=======================================================================
     if ($PSBoundParameters.ContainsKey('WinRE')) {
@@ -308,6 +304,14 @@ Windows Registry Editor Version 5.00
             Add-WindowsPackage -Path $MountPath -PackagePath "$WinPEOCs\$Lang\WinPE-$Package`_$Lang.cab" -Verbose
         }
     }
+    
+    #=======================================================================
+    #   Copy DISM Module
+    #=======================================================================
+    robocopy "$MountPath\Windows\System32\WindowsPowerShell\v1.0\Modules\Dism" "$MountPath\Program Files\WindowsPowerShell\Modules\Dism" *.* /e /ndl /nfl /np /njh /njs /r:0 /w:0 /b
+    #=======================================================================
+    #   Save-WindowsImage
+    #=======================================================================
     Save-WindowsImage -Path $MountPath
     #=======================================================================
     #   Install Selected Language
