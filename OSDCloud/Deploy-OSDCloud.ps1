@@ -9,7 +9,7 @@
 #   In WinPE, the latest version will be installed automatically
 #   In Windows, this script is stopped and you will need to update manually
 #=======================================================================
-[Version]$OSDVersionMin = '21.4.14.1'
+[Version]$OSDVersionMin = '21.4.15.1'
 
 if ((Get-Module -Name OSD -ListAvailable | `Sort-Object Version -Descending | Select-Object -First 1).Version -lt $OSDVersionMin) {
     Write-Warning "OSDCloud requires OSD $OSDVersionMin or newer"
@@ -272,8 +272,8 @@ if ($Global:OSDCloudOSFullName) {
         $Global:OSDCloudOSImageIndex = 1
     }
 
-    #Expand-WindowsImage -ApplyPath 'C:\' -ImagePath "$Global:OSDCloudOSFullName" -Index $Global:OSDCloudOSImageIndex -ScratchDirectory 'C:\OSDCloud\Temp' -ErrorAction Stop
-    dism /Apply-Image /ImageFile:"$Global:OSDCloudOSFullName" /Index:$Global:OSDCloudOSImageIndex /ApplyDir:C:\  /ScratchDir:"C:\OSDCloud\Temp"
+    Expand-WindowsImage -ApplyPath 'C:\' -ImagePath "$Global:OSDCloudOSFullName" -Index $Global:OSDCloudOSImageIndex -ScratchDirectory 'C:\OSDCloud\Temp' -ErrorAction Stop
+    #dism /Apply-Image /ImageFile:"$Global:OSDCloudOSFullName" /Index:$Global:OSDCloudOSImageIndex /ApplyDir:C:\  /ScratchDir:"C:\OSDCloud\Temp"
 
     $SystemDrive = Get-Partition | Where-Object {$_.Type -eq 'System'} | Select-Object -First 1
     if (-NOT (Get-PSDrive -Name S)) {
