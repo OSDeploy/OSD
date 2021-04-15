@@ -304,11 +304,10 @@ Windows Registry Editor Version 5.00
             Add-WindowsPackage -Path $MountPath -PackagePath "$WinPEOCs\$Lang\WinPE-$Package`_$Lang.cab" -Verbose
         }
     }
-    
     #=======================================================================
     #   Copy DISM Module
     #=======================================================================
-    robocopy "$MountPath\Windows\System32\WindowsPowerShell\v1.0\Modules\Dism" "$MountPath\Program Files\WindowsPowerShell\Modules\Dism" *.* /e /ndl /nfl /np /njh /njs /r:0 /w:0 /b
+    #robocopy "$MountPath\Windows\System32\WindowsPowerShell\v1.0\Modules\Dism" "$MountPath\Program Files\WindowsPowerShell\Modules\Dism" *.* /e /ndl /nfl /np /njh /njs /r:0 /w:0 /b
     #=======================================================================
     #   Save-WindowsImage
     #=======================================================================
@@ -383,7 +382,9 @@ Windows Registry Editor Version 5.00
     #=======================================================================
     Write-Verbose "Adding msinfo32.exe to $MountPath"
     if (Test-Path "$env:SystemRoot\System32\msinfo32.exe") {
-        robocopy "$env:SystemRoot\System32" "$MountPath\Windows\System32" msinfo32.* /e /ndl /nfl /njh /njs /r:0 /w:0 /b /np
+        robocopy "$env:SystemRoot\System32" "$MountPath\Windows\System32" msinfo32.exe /ndl /nfl /njh /njs /r:0 /w:0 /b /np
+        robocopy "$env:SystemRoot\System32" "$MountPath\Windows\System32" msinfo32.exe.mui /s /ndl /nfl /njh /njs /r:0 /w:0 /b /np
+        
     } else {
         Write-Warning "Could not find $env:SystemRoot\System32\msinfo32.exe"
     }
