@@ -37,8 +37,8 @@ function Get-CatalogHPDriverPack {
 		#Get-Item to determine the age
         $GetItemCatalogLocalPath = Get-Item $CatalogLocalPath
 
-		#If the local is older than 1 day, delete it
-        if (((Get-Date) - $GetItemCatalogLocalPath.CreationTime).TotalHours -gt 12) {
+		#If the local is older than 12 hours, delete it
+        if (((Get-Date) - $GetItemCatalogLocalPath.LastWriteTime).TotalHours -gt 12) {
             Write-Verbose "Removing previous Offline Catalog"
 		}
 		else {
@@ -143,8 +143,33 @@ function Get-CatalogHPDriverPack {
 		}
 		$Results = $Results | Where-Object {$_.Name -match 'Windows 10'}
 		$Results = $Results | Sort-Object Name, ReleaseDate -Descending | Group-Object Name | ForEach-Object {$_.Group | Select-Object -First 1}
-		$Results = $Results | Sort-Object Name | Select-Object CatalogVersion, ReleaseDate, @{Name='Name';Expression={"$($_.Name) $($_.Version)"}}, Product, DriverPackUrl, FileName
-	
+		#$Results = $Results | Sort-Object Name | Select-Object CatalogVersion, ReleaseDate, @{Name='Name';Expression={"$($_.Name) $($_.Version)"}}, Product, DriverPackUrl, FileName
+
+		$Results = $Results | Sort-Object Name | Select-Object CatalogVersion, ReleaseDate, @{Name='Name';Expression={"$($_.Name) $($_.Version)"}}, @{
+			Name='Product';Expression={
+				$p = $_.Product
+				$pBaseType = $p.gettype().BaseType.Name
+				if ($pBaseType -eq "Array") {
+					# its array
+					$p | ForEach-Object {
+						if ($_ -match ",") {
+							($_ -split ",").trim()
+						}
+						else {
+							$_
+						}
+					}
+				}
+				elseif ($p -match ",") {
+					# its string that contains more items
+					($p -split ",").trim()
+				}
+				else {
+					# its one item
+					$p
+				}
+			}
+		}, DriverPackUrl, FileName
 		Write-Verbose "Exporting Offline Catalog to $CatalogLocalPath"
 		$Results | Export-Clixml -Path $CatalogLocalPath
 	}

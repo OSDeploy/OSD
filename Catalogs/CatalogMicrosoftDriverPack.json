@@ -1,6 +1,6 @@
 [
     {
-        "CatalogVersion":  "21.04.15",
+        "CatalogVersion":  "21.04.19",
         "Name":  "Surface 3 WiFI",
         "Model":  "Surface 3",
         "Product":  "Surface_3",
@@ -9,7 +9,7 @@
         "FileName":  "Surface3_WiFi_Win10_18362_1902003_0.msi"
     },
     {
-        "CatalogVersion":  "21.04.15",
+        "CatalogVersion":  "21.04.19",
         "Name":  "Surface 3 LTE North America",
         "Model":  "Surface 3",
         "Product":  "Surface_3_NAG",
@@ -18,7 +18,7 @@
         "FileName":  "Surface3_4GLTE-NorthAmericaUnlocked_Win10_18362_1902003_0.msi"
     },
     {
-        "CatalogVersion":  "21.04.15",
+        "CatalogVersion":  "21.04.19",
         "Name":  "Surface 3 LTE Rest of World",
         "Model":  "Surface 3",
         "Product":  "Surface_3_ROW",
@@ -27,7 +27,7 @@
         "FileName":  "Surface3_4GLTE-RestOfTheWorld_Win10_18362_1902003_0.msi"
     },
     {
-        "CatalogVersion":  "21.04.15",
+        "CatalogVersion":  "21.04.19",
         "Name":  "Surface 3 LTE ATT",
         "Model":  "Surface 3",
         "Product":  "Surface_3_US1",
@@ -36,7 +36,7 @@
         "FileName":  "Surface3_4GLTE-ATT_Win10_18362_1902003_0.msi"
     },
     {
-        "CatalogVersion":  "21.04.15",
+        "CatalogVersion":  "21.04.19",
         "Name":  "Surface 3 LTE Verizon",
         "Model":  "Surface 3",
         "Product":  "Surface_3_US2",
@@ -45,7 +45,7 @@
         "FileName":  "Surface3_4GLTE-NorthAmericaUnlocked_Win10_18362_1902003_0.msi"
     },
     {
-        "CatalogVersion":  "21.04.15",
+        "CatalogVersion":  "21.04.19",
         "Name":  "Surface Book",
         "Model":  "Surface Book",
         "Product":  "Surface_Book",
@@ -54,7 +54,7 @@
         "FileName":  "SurfaceBook_Win10_18362_20.082.25857.0.msi"
     },
     {
-        "CatalogVersion":  "21.04.15",
+        "CatalogVersion":  "21.04.19",
         "Name":  "Surface Book 2 15",
         "Model":  "Surface Book 2",
         "Product":  "Surface_Book_1793",
@@ -63,7 +63,7 @@
         "FileName":  "SurfaceBook2_Win10_18362_21.032.17273.0.msi"
     },
     {
-        "CatalogVersion":  "21.04.15",
+        "CatalogVersion":  "21.04.19",
         "Name":  "Surface Book 2 13",
         "Model":  "Surface Book 2",
         "Product":  "Surface_Book_1832",
@@ -72,7 +72,7 @@
         "FileName":  "SurfaceBook2_Win10_18362_21.032.17273.0.msi"
     },
     {
-        "CatalogVersion":  "21.04.15",
+        "CatalogVersion":  "21.04.19",
         "Name":  "Surface Book 3 15",
         "Model":  "Surface Book 3",
         "Product":  "Surface_Book_3_1899",
@@ -81,7 +81,7 @@
         "FileName":  "SurfaceBook3_Win10_18362_21.033.31545.0.msi"
     },
     {
-        "CatalogVersion":  "21.04.15",
+        "CatalogVersion":  "21.04.19",
         "Name":  "Surface Book 3 13",
         "Model":  "Surface Book 3",
         "Product":  "Surface_Book_3_1900",
@@ -90,7 +90,7 @@
         "FileName":  "SurfaceBook3_Win10_18362_21.033.31545.0.msi"
     },
     {
-        "CatalogVersion":  "21.04.15",
+        "CatalogVersion":  "21.04.19",
         "Name":  "Surface Go Commercial",
         "Model":  "Surface Go",
         "Product":  "Surface_Go_1824_Commercial",
@@ -99,7 +99,7 @@
         "FileName":  "SurfaceGo_Win10_18362_21.015.38060_WiFi_0.msi"
     },
     {
-        "CatalogVersion":  "21.04.15",
+        "CatalogVersion":  "21.04.19",
         "Name":  "Surface Go Consumer",
         "Model":  "Surface Go",
         "Product":  "Surface_Go_1824_Consumer",
@@ -108,7 +108,7 @@
         "FileName":  "SurfaceGo_Win10_18362_21.015.38060_WiFi_0.msi"
     },
     {
-        "CatalogVersion":  "21.04.15",
+        "CatalogVersion":  "21.04.19",
         "Name":  "Surface Go LTE Commercial",
         "Model":  "Surface Go",
         "Product":  "Surface_Go_1825_Commercial",
@@ -117,7 +117,7 @@
         "FileName":  "SurfaceGo_Win10_18362_21.015.38060_LTE_0.msi"
     },
     {
-        "CatalogVersion":  "21.04.15",
+        "CatalogVersion":  "21.04.19",
         "Name":  "Surface Go 2",
         "Model":  "Surface Go 2",
         "Product":  "Surface_Go_2_1927",
@@ -126,7 +126,7 @@
         "FileName":  "SurfaceGo2_Win10_18362_21.015.36615_0.msi"
     },
     {
-        "CatalogVersion":  "21.04.15",
+        "CatalogVersion":  "21.04.19",
         "Name":  "Surface Hub 2",
         "Model":  "Surface Hub 2",
         "Product":  "Surface_Hub_2",
@@ -135,7 +135,7 @@
         "FileName":  "SurfaceHub2S_Win10_18363_21.031.15809.0.msi"
     },
     {
-        "CatalogVersion":  "21.04.15",
+        "CatalogVersion":  "21.04.19",
         "Name":  "Surface Laptop",
         "Model":  "Surface Laptop",
         "Product":  "Surface_Laptop",
@@ -144,7 +144,7 @@
         "FileName":  "SurfaceLaptop_Win10_18362_21.014.41485.0.msi"
     },
     {
-        "CatalogVersion":  "21.04.15",
+        "CatalogVersion":  "21.04.19",
         "Name":  "Surface Laptop 2",
         "Model":  "Surface Laptop 2 Commercial",
         "Product":  "Surface_Laptop_2_1769_Commercial",
@@ -153,7 +153,7 @@
         "FileName":  "SurfaceLaptop2_Win10_18362_21.021.11109.0.msi"
     },
     {
-        "CatalogVersion":  "21.04.15",
+        "CatalogVersion":  "21.04.19",
         "Name":  "Surface Laptop 2",
         "Model":  "Surface Laptop 2 Consumer",
         "Product":  "Surface_Laptop_2_1769_Consumer",
@@ -162,7 +162,7 @@
         "FileName":  "SurfaceLaptop2_Win10_18362_21.021.11109.0.msi"
     },
     {
-        "CatalogVersion":  "21.04.15",
+        "CatalogVersion":  "21.04.19",
         "Name":  "Surface Laptop 3",
         "Model":  "Surface Laptop 3 13 Intel",
         "Product":  "Surface_Laptop_3_1867:1868",
@@ -171,7 +171,7 @@
         "FileName":  "SurfaceLaptop3_Win10_18362_20.121.13124.0.msi"
     },
     {
-        "CatalogVersion":  "21.04.15",
+        "CatalogVersion":  "21.04.19",
         "Name":  "Surface Laptop 3",
         "Model":  "Surface Laptop 3 15 Intel",
         "Product":  "Surface_Laptop_3_1872",
@@ -180,7 +180,7 @@
         "FileName":  "SurfaceLaptop3_Win10_18362_20.121.13124.0.msi"
     },
     {
-        "CatalogVersion":  "21.04.15",
+        "CatalogVersion":  "21.04.19",
         "Name":  "Surface Laptop 3",
         "Model":  "Surface Laptop 3 13 AMD",
         "Product":  "Surface_Laptop_3_1873",
@@ -189,7 +189,7 @@
         "FileName":  "SurfaceLaptop3_Win10_18362_20.121.11733.0.msi"
     },
     {
-        "CatalogVersion":  "21.04.15",
+        "CatalogVersion":  "21.04.19",
         "Name":  "Surface Laptop Go",
         "Model":  "Surface Laptop Go",
         "Product":  "Surface_Laptop_Go_1943",
@@ -198,7 +198,7 @@
         "FileName":  "SurfaceLaptopGo_Win10_18363_21.013.37543.0.msi"
     },
     {
-        "CatalogVersion":  "21.04.15",
+        "CatalogVersion":  "21.04.19",
         "Name":  "Surface Pro",
         "Model":  "Surface Pro",
         "Product":  "Surface_Pro",
@@ -207,7 +207,7 @@
         "FileName":  "SurfacePro_Win10_150723_0.zip"
     },
     {
-        "CatalogVersion":  "21.04.15",
+        "CatalogVersion":  "21.04.19",
         "Name":  "Surface Pro (5th Gen)",
         "Model":  "Surface Pro",
         "Product":  "Surface_Pro_1796",
@@ -216,7 +216,7 @@
         "FileName":  "SurfacePro_Win10_18362_21.012.27402.0.msi"
     },
     {
-        "CatalogVersion":  "21.04.15",
+        "CatalogVersion":  "21.04.19",
         "Name":  "Surface Pro with LTE Advanced",
         "Model":  "Surface Pro",
         "Product":  "Surface_Pro_1807",
@@ -225,7 +225,7 @@
         "FileName":  "SurfacePro_Win10_18362_21.012.27402.0.msi"
     },
     {
-        "CatalogVersion":  "21.04.15",
+        "CatalogVersion":  "21.04.19",
         "Name":  "Surface Pro 2",
         "Model":  "Surface Pro 2",
         "Product":  "Surface_Pro_2",
@@ -234,7 +234,7 @@
         "FileName":  "SurfacePro2_Win10_160501_2.zip"
     },
     {
-        "CatalogVersion":  "21.04.15",
+        "CatalogVersion":  "21.04.19",
         "Name":  "Surface Pro 3",
         "Model":  "Surface Pro 3",
         "Product":  "Surface_Pro_3",
@@ -243,7 +243,7 @@
         "FileName":  "SurfacePro3_Win10_18362_1902002_0.msi"
     },
     {
-        "CatalogVersion":  "21.04.15",
+        "CatalogVersion":  "21.04.19",
         "Name":  "Surface Pro 4",
         "Model":  "Surface Pro 4",
         "Product":  "Surface_Pro_4",
@@ -252,7 +252,7 @@
         "FileName":  "SurfacePro4_Win10_18362_20.034.43185.0.msi"
     },
     {
-        "CatalogVersion":  "21.04.15",
+        "CatalogVersion":  "21.04.19",
         "Name":  "Surface Pro 6",
         "Model":  "Surface Pro 6",
         "Product":  "Surface_Pro_6_1796_Commercial",
@@ -261,7 +261,7 @@
         "FileName":  "SurfacePro6_Win10_18362_21.012.27419.0.msi"
     },
     {
-        "CatalogVersion":  "21.04.15",
+        "CatalogVersion":  "21.04.19",
         "Name":  "Surface Pro 6",
         "Model":  "Surface Pro 6",
         "Product":  "Surface_Pro_6_1796_Consumer",
@@ -270,7 +270,7 @@
         "FileName":  "SurfacePro6_Win10_18362_21.012.27419.0.msi"
     },
     {
-        "CatalogVersion":  "21.04.15",
+        "CatalogVersion":  "21.04.19",
         "Name":  "Surface Pro 7",
         "Model":  "Surface Pro 7",
         "Product":  "Surface_Pro_7_1866",
@@ -279,7 +279,7 @@
         "FileName":  "SurfacePro7_Win10_18362_21.033.31646.0.msi"
     },
     {
-        "CatalogVersion":  "21.04.15",
+        "CatalogVersion":  "21.04.19",
         "Name":  "Surface Pro 7+",
         "Model":  "Surface Pro 7+",
         "Product":  "Surface_Pro_7+_1960",
@@ -288,7 +288,7 @@
         "FileName":  "SurfacePro7+_Win10_19041_21.020.1624.0.msi"
     },
     {
-        "CatalogVersion":  "21.04.15",
+        "CatalogVersion":  "21.04.19",
         "Name":  "Surface Pro 7+",
         "Model":  "Surface Pro 7+",
         "Product":  "Surface_Pro_7+_with_LTE_Advanced_1961",
@@ -297,7 +297,7 @@
         "FileName":  "SurfacePro7+_Win10_19041_21.020.1624.0.msi"
     },
     {
-        "CatalogVersion":  "21.04.15",
+        "CatalogVersion":  "21.04.19",
         "Name":  "Surface Studio",
         "Model":  "Surface Studio",
         "Product":  "Surface_Studio",
@@ -306,7 +306,7 @@
         "FileName":  "SurfaceStudio_Win10_18362_20.112.20492.0.msi"
     },
     {
-        "CatalogVersion":  "21.04.15",
+        "CatalogVersion":  "21.04.19",
         "Name":  "Surface Studio 2",
         "Model":  "Surface Studio 2",
         "Product":  "Surface_Studio_2",

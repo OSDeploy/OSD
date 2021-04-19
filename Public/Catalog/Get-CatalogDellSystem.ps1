@@ -60,8 +60,8 @@ function Get-CatalogDellSystem {
 		#Get-Item to determine the age
         $GetItemCatalogLocalPath = Get-Item $CatalogLocalPath
 
-		#If the local is older than 1 day, delete it
-        if (((Get-Date) - $GetItemCatalogLocalPath.CreationTime).TotalHours -gt 12) {
+		#If the local is older than 12 hours, delete it
+        if (((Get-Date) - $GetItemCatalogLocalPath.LastWriteTime).TotalHours -gt 12) {
             Write-Verbose "Removing previous Offline Catalog"
 		}
 		else {
