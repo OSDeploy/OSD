@@ -16,10 +16,12 @@ function Select-OSDCloudAutopilotFile {
     param ()
 
     $i = $null
-    $GetOSDCloudOfflineAutopilotProfiles = Find-OSDCloudAutopilotFile
+    $FindOSDCloudFile = Find-OSDCloudFile -Name "*.json" -Path '\OSDCloud\Autopilot\Profiles\' | Sort-Object FullName
+    $FindOSDCloudFile = $FindOSDCloudFile | Where-Object {$_.FullName -notlike "C*"}
 
-    if ($GetOSDCloudOfflineAutopilotProfiles) {
-        $AutopilotProfiles = foreach ($Item in $GetOSDCloudOfflineAutopilotProfiles) {
+
+    if ($FindOSDCloudFile) {
+        $AutopilotProfiles = foreach ($Item in $FindOSDCloudFile) {
             $i++
             $JsonConfiguration = Get-Content -Path $Item.FullName | ConvertFrom-Json
 
@@ -37,10 +39,10 @@ function Select-OSDCloudAutopilotFile {
 
         $AutopilotProfiles | Select-Object -Property Selection, Profile, FullName | Format-Table | Out-Host
 
-        if ($Global:OSDCloudZTI -eq $true) {
-            $AutopilotProfiles = $AutopilotProfiles | Where-Object {$_.Selection -eq 1}
-        }
-        else {
+        #if ($Global:OSDCloudZTI -eq $true) {
+        #    $AutopilotProfiles = $AutopilotProfiles | Where-Object {$_.Selection -eq 1}
+        #}
+        #else {
             do {
                 $SelectReadHost = Read-Host -Prompt "Enter the Selection of the Autopilot Profile to apply, or press S to Skip"
             }
@@ -50,7 +52,7 @@ function Select-OSDCloudAutopilotFile {
                 Return $false
             }
             $AutopilotProfiles = $AutopilotProfiles | Where-Object {$_.Selection -eq $SelectReadHost}
-        }
+        #}
 
         Return $AutopilotProfiles.FullContent
     }
