@@ -39,7 +39,21 @@ if ((Get-Module -Name OSD -ListAvailable | Sort-Object Version -Descending | Sel
 #   $Global:GitHubScript = $Script
 #   $Global:GitHubToken = $Token
 #   $Global:GitHubUrl
-#   $Global:OSDCloudOSLanguage = $OSLanguage
+#   $Global:OSDCloudImageFileHash
+#   $Global:OSDCloudImageFileName
+#   $Global:OSDCloudImageFileTitle
+#   $Global:OSDCloudImageFileUri
+#   $Global:OSDCloudOSBuild
+#   $Global:OSDCloudOSEdition
+#   $Global:OSDCloudOSEditionId
+#   $Global:OSDCloudOSImageIndex
+#   $Global:OSDCloudOSLanguage
+#   $Global:OSDCloudOSLicense
+#   $Global:OSDCloudScreenshot
+#   $Global:OSDCloudSkipAutopilot
+#   $Global:OSDCloudSkipODT
+#   $Global:OSDCloudStartTime
+#   $Global:OSDCloudZTI
 #   As a backup, $Global:OSDCloudVariables is created with Get-Variable
 #=======================================================================
 $Global:OSDCloudVariables = Get-Variable
@@ -186,11 +200,13 @@ Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) St
 if (-NOT (Test-Path 'C:\OSDCloud\Logs')) {
     New-Item -Path 'C:\OSDCloud\Logs' -ItemType Directory -Force -ErrorAction Stop | Out-Null
 }
-Start-Transcript -Path 'C:\OSDCloud\Logs' -ErrorAction Ignore
+
+$TranscriptName = "$((Get-Date).ToString('yyyy-MM-dd-HHmmss'))-Deploy-OSDCloud.log"
+Start-Transcript -Path (Join-Path 'C:\OSDCloud\Logs' $TranscriptName) -ErrorAction Ignore
 #=======================================================================
 #	Start-OSDCloudWim
 #=======================================================================
-if ($Global:OSDCloudWimFullName) {
+<# if ($Global:OSDCloudWimFullName) {
     Write-Host -ForegroundColor DarkGray "========================================================================="
     Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) OSDCloud Windows Image"
 
@@ -204,11 +220,11 @@ if ($Global:OSDCloudWimFullName) {
         Write-Warning "OSDCloud cannot continue"
         Break
     }
-}
+} #>
 #=======================================================================
-#	Get-FeatureUpdate | Save-FeatureUpdate
+#	Save-FeatureUpdate
 #=======================================================================
-if (!($Global:OSDCloudWimFullName)) {
+<# if (!($Global:OSDCloudWimFullName)) {
     Write-Host -ForegroundColor DarkGray "========================================================================="
     Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Save-FeatureUpdate"
     
@@ -226,11 +242,11 @@ if (!($Global:OSDCloudWimFullName)) {
     Write-Host -ForegroundColor DarkGray "FileName: $($GetFeatureUpdate.FileName)"
     Write-Host -ForegroundColor DarkGray "SizeMB: $($GetFeatureUpdate.SizeMB)"
     Write-Host -ForegroundColor DarkGray "FileUri: $($GetFeatureUpdate.FileUri)"
-}
+} #>
 #=======================================================================
 #	Get OS
 #=======================================================================
-if (!($Global:OSDCloudWimFullName)) {
+<# if (!($Global:OSDCloudWimFullName)) {
     $OSDCloudOfflineOS = Find-OSDCloudOfflineFile -Name $GetFeatureUpdate.FileName | Select-Object -First 1
     
     if ($OSDCloudOfflineOS) {
@@ -254,11 +270,11 @@ if (!($Global:OSDCloudWimFullName)) {
         Write-Warning "OSDCloud cannot continue"
         Break
     }
-}
+} #>
 #=======================================================================
 #	Expand OS
 #=======================================================================
-Write-Host -ForegroundColor DarkGray "========================================================================="
+<# Write-Host -ForegroundColor DarkGray "========================================================================="
 Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Expand-WindowsImage"
 
 if (-NOT (Test-Path 'C:\OSDCloud\Temp')) {
@@ -285,6 +301,105 @@ if ($Global:OSDCloudOSFullName) {
 }
 else {
     Write-Warning "Something went wrong trying to expand the OS"
+    Write-Warning "OSDCloud cannot continue"
+    Break
+} #>
+
+
+
+
+#=======================================================================
+#	Copy Local Image File
+#=======================================================================
+if ($Global:OSDCloudImageFileOffline) {
+    Write-Host -ForegroundColor DarkGray "========================================================================="
+    Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Save OSDCloudImageFile Offline"
+
+
+    
+    $Global:SourceImageFile = Find-OSDCloudFile -Name $Global:OSDCloudImageFileName -Path (Split-Path -Path (Split-Path -Path $Global:OSDCloudImageFileOffline.FullName -Parent) -NoQualifier) | Select-Object -First 1
+    
+    $Global:SourceImageFile | Format-List
+
+
+    if ($Global:SourceImageFile) {
+        if (!(Test-Path 'C:\OSDCloud\OS')) {
+            New-Item -Path 'C:\OSDCloud\OS' -ItemType Directory -Force -ErrorAction Stop | Out-Null
+        }
+        Copy-Item -Path $Global:SourceImageFile.FullName -Destination 'C:\OSDCloud\OS' -Force
+        if (Test-Path "C:\OSDCloud\OS\$($Global:SourceImageFile.Name)") {
+            $Global:TargetImageFile = Get-Item -Path "C:\OSDCloud\OS\$($Global:SourceImageFile.Name)"
+        }
+    }
+
+    $Global:TargetImageFile | Format-List
+
+    if ($Global:TargetImageFile) {
+        Write-Host -ForegroundColor DarkGray "$Global:TargetImageFile"
+        $Global:OSDCloudImageFileUri = $null
+    }
+    else {
+        Write-Warning "Something went wrong trying to get the Windows Image"
+        Write-Warning "OSDCloud cannot continue"
+        Break
+    }
+}
+#=======================================================================
+#	Download $Global:OSDCloudImageFileUri
+#=======================================================================
+if ($Global:OSDCloudImageFileUri) {
+    Write-Host -ForegroundColor DarkGray "========================================================================="
+    Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Save OSDCloudImageFile"
+    Write-Host -ForegroundColor DarkGray "$($Global:OSDCloudImageFileUri)"
+    
+    if (Test-WebConnection -Uri $Global:OSDCloudImageFileUri) {
+
+        $TargetImageFile = Save-WebFile -SourceUrl $Global:OSDCloudImageFileUri -DestinationDirectory 'C:\OSDCloud\OS' -DestinationName $Global:OSDCloudImageFileName -ErrorAction Stop
+
+        if (Test-Path $TargetImageFile.FullName) {
+            #This is good!
+        }
+        else {
+            Write-Warning "Something went wrong trying to get the Windows Feature Update"
+            Write-Warning "OSDCloud cannot continue"
+            Break
+        }
+    }
+    else {
+        Write-Warning "Could not verify an Internet connection for the Windows Feature Update"
+        Write-Warning "OSDCloud cannot continue"
+        Break
+    }
+}
+#=======================================================================
+#	Expand OS
+#=======================================================================
+Write-Host -ForegroundColor DarkGray "========================================================================="
+Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Expand-WindowsImage"
+
+if (-NOT (Test-Path 'C:\OSDCloud\Temp')) {
+    New-Item 'C:\OSDCloud\Temp' -ItemType Directory -Force | Out-Null
+}
+
+if (Test-Path $TargetImageFile.FullName) {
+
+    if (!($Global:OSDCloudOSImageIndex)) {
+        Write-Warning "No ImageIndex is specified, setting ImageIndex = 1"
+        $Global:OSDCloudOSImageIndex = 1
+    }
+
+    Expand-WindowsImage -ApplyPath 'C:\' -ImagePath $TargetImageFile.FullName -Index $Global:OSDCloudOSImageIndex -ScratchDirectory 'C:\OSDCloud\Temp' -ErrorAction Stop
+
+    $SystemDrive = Get-Partition | Where-Object {$_.Type -eq 'System'} | Select-Object -First 1
+    if (-NOT (Get-PSDrive -Name S)) {
+        $SystemDrive | Set-Partition -NewDriveLetter 'S'
+    }
+    bcdboot C:\Windows /s S: /f ALL
+    Start-Sleep -Seconds 10
+    $SystemDrive | Remove-PartitionAccessPath -AccessPath "S:\"
+}
+else {
+    Write-Warning "Something went wrong trying to get the OS ImageFile"
     Write-Warning "OSDCloud cannot continue"
     Break
 }
