@@ -103,10 +103,11 @@ function Save-OSDCloud.usb {
         Write-Host "Autopilot Profiles can be saved to $OSDCloudOfflineFullName\Autopilot\Profiles"
     }
 
-    $GetOSDCloudOfflineAutopilotProfiles = Find-OSDCloudAutopilotFile
+    $FindOSDCloudFile = Find-OSDCloudFile -Name $Global:OSDCloudAutopilotJsonName -Path '\OSDCloud\Autopilot\Profiles\' | Sort-Object FullName
+    $FindOSDCloudFile = $FindOSDCloudFile | Where-Object {$_.FullName -notlike "C*"}
 
-    if ($GetOSDCloudOfflineAutopilotProfiles) {
-        foreach ($Item in $GetOSDCloudOfflineAutopilotProfiles) {
+    if ($FindOSDCloudFile) {
+        foreach ($Item in $FindOSDCloudFile) {
             Write-Host -ForegroundColor White "$($Item.FullName)"
         }
     } else {
