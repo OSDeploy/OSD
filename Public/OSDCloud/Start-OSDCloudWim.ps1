@@ -211,22 +211,23 @@ function Start-OSDCloudWim {
         }
     }
     #=======================================================================
-    #	Autopilot Profiles
+    #	List Autopilot Profiles
     #=======================================================================
     if ($Global:OSDCloudSkipAutopilot -eq $false) {
         Write-Host -ForegroundColor DarkGray "========================================================================="
-        Write-Host -ForegroundColor Cyan "Find-OSDCloudAutopilotFile"
+        Write-Host -ForegroundColor Cyan "OSDCloud Autopilot"
+        
+        $FindOSDCloudFile = Find-OSDCloudFile -Name "*.json" -Path '\OSDCloud\Autopilot\Profiles\' | Sort-Object FullName
+        $FindOSDCloudFile = $FindOSDCloudFile | Where-Object {$_.FullName -notlike "C*"}
     
-        $GetOSDCloudAutopilotFile = Find-OSDCloudAutopilotFile
-    
-        if ($GetOSDCloudAutopilotFile) {
+        if ($FindOSDCloudFile) {
             Write-Host -ForegroundColor Green "OK"
             if ($Global:OSDCloudZTI -eq $true) {
                 Write-Warning "-SkipAutopilot parameter can be used to skip Autopilot Configuration"
                 Write-Warning "-ZTI automatically selects the first Autopilot Profile listed below"
                 Write-Warning "Rename your Autopilot Configuration Files so your default is the first Selection"
             }
-            foreach ($Item in $GetOSDCloudAutopilotFile) {
+            foreach ($Item in $FindOSDCloudFile) {
                 Write-Host -ForegroundColor DarkGray "$($Item.FullName)"
             }
         } else {
