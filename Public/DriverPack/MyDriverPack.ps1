@@ -161,7 +161,7 @@ function Save-MyDriverPack {
             #=======================================================================
             #   Everything Else
             #=======================================================================
-            Write-Warning "Unable to expand $ExpandFile"
+            #Write-Warning "Unable to expand $ExpandFile"
         }
         #=======================================================================
         #   Enable-SpecializeDriverPack

@@ -54,6 +54,6 @@ function Select-OSDCloudAutopilotFile {
             $AutopilotProfiles = $AutopilotProfiles | Where-Object {$_.Selection -eq $SelectReadHost}
         #}
 
-        Return $AutopilotProfiles.FullContent
+        Return Get-Item $AutopilotProfiles.FullName
     }
 }

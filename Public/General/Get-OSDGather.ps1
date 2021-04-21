@@ -92,10 +92,10 @@ function Get-OSDGather {
     #   Credit Johan Schrewelius    https://gallery.technet.microsoft.com/PowerShell-script-that-a8a7bdd8
     #=======================================================================
     if (! $IsAdmin) {
-        Write-Warning "IsBDE property requires Admin Elevation"
+        #Write-Warning "IsBDE property requires Admin Elevation"
         $IsBDE = $null
     } elseif ($IsWinPE) {
-        Write-Warning "IsBDE property cannot run in WinPE"
+        #Write-Warning "IsBDE property cannot run in WinPE"
         $IsBDE = $null
     } else {
         $IsBDE = $false

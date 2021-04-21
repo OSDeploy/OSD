@@ -31,9 +31,10 @@ function Edit-OSDCloud.winpe {
         [ValidateSet('Dell','HP','Nutanix','VMware','WiFi')]
         [string[]]$CloudDriver,
 
-        [string[]]$Modules,
+        [string[]]$PSModuleCopy,
 
-        [switch]$CopyOSDModule,
+        [Alias('Modules')]
+        [string[]]$PSModuleInstall,
 
         [string]$WebPSScript,
         [string]$Wallpaper
@@ -249,9 +250,9 @@ start PowerShell -Nol -W Mi
 <#     Write-Verbose -Verbose "Copy-PSModuleToWindowsImage -Name DISM -Path $MountPath"
     Copy-PSModuleToWindowsImage -Name DISM -Path $MountPath #>
     #=======================================================================
-    #   Modules
+    #   PSModuleInstall
     #=======================================================================
-    foreach ($Module in $Modules) {
+    foreach ($Module in $PSModuleInstall) {
         if ($Module -eq 'DellBiosProvider') {
             if (Test-Path "$env:SystemRoot\System32\msvcp140.dll") {
                 Write-Verbose "Copying $env:SystemRoot\System32\msvcp140.dll to WinPE"
@@ -269,16 +270,14 @@ start PowerShell -Nol -W Mi
         Write-Verbose -Verbose "Saving $Module to $MountPath\Program Files\WindowsPowerShell\Modules"
         Save-Module -Name $Module -Path "$MountPath\Program Files\WindowsPowerShell\Modules" -Force
     }
+    Write-Verbose "Saving OSD to $MountPath\Program Files\WindowsPowerShell\Modules"
+    Save-Module -Name OSD -Path "$MountPath\Program Files\WindowsPowerShell\Modules" -Force
     #=======================================================================
-    #   Install OSD Module
+    #   PSModuleCopy
     #=======================================================================
-    if ($PSBoundParameters.ContainsKey('CopyOSDModule')) {
-        Write-Verbose -Verbose "Copy-PSModuleToWindowsImage -Name OSD -Path $MountPath"
-        Copy-PSModuleToWindowsImage -Name OSD -Path $MountPath
-    }
-    else {
-        Write-Verbose "Saving OSD to $MountPath\Program Files\WindowsPowerShell\Modules"
-        Save-Module -Name OSD -Path "$MountPath\Program Files\WindowsPowerShell\Modules" -Force
+    foreach ($Module in $PSModuleCopy) {
+        Write-Verbose -Verbose "Copy-PSModuleToWindowsImage -Name $Module -Path $MountPath"
+        Copy-PSModuleToWindowsImage -Name $Module -Path $MountPath
     }
     #=======================================================================
     #   Save WIM
