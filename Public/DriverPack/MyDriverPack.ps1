@@ -161,12 +161,7 @@ function Save-MyDriverPack {
             #=======================================================================
             #   Everything Else
             #=======================================================================
-            if ($env:SystemDrive -eq 'X:') {
-                Write-Warning "Unable to expand in WinPE $ExpandFile"
-            }
-            else {
-                Write-Warning "Unable to expand $ExpandFile"
-            }
+            Write-Warning "Unable to expand $ExpandFile"
         }
         #=======================================================================
         #   Enable-SpecializeDriverPack

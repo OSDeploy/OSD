@@ -104,7 +104,7 @@ function Start-OSDCloud {
     #=======================================================================
     #	Start the Clock
     #=======================================================================
-    $Global:OSDCloudStartTime = Get-Date
+    $OSDCloudStartTime = Get-Date
     #=======================================================================
     #	Block
     #=======================================================================
@@ -112,61 +112,27 @@ function Start-OSDCloud {
     Block-PowerShellVersionLt5
     Block-NoCurl
     #=======================================================================
-    #	OSDCloud Parameters
-    #   Its important to clear out any Parameter residue to ensure things
-    #   are going to start clean
+    #	-Screenshot
     #=======================================================================
-    if ($PSBoundParameters.ContainsKey('OSBuild')) {
-        $Global:OSDCloudOSBuild = $OSBuild
-    }
-    else {
-        $Global:OSDCloudOSBuild = $null
-    }
-    if ($PSBoundParameters.ContainsKey('OSEdition')) {
-        $Global:OSDCloudOSEdition = $OSEdition
-    }
-    else {
-        $Global:OSDCloudOSEdition = $null
-    }
-    if ($PSBoundParameters.ContainsKey('OSLanguage')) {
-        $Global:OSDCloudOSLanguage = $OSLanguage
-    }
-    else {
-        $Global:OSDCloudOSLanguage = $null
-    }
     if ($PSBoundParameters.ContainsKey('Screenshot')) {
-        $Global:OSDCloudScreenshot = "$env:TEMP\ScreenPNG"
-        Start-ScreenPNGProcess -Directory "$env:TEMP\ScreenPNG"
+        $OSDCloudScreenshot = "$env:TEMP\ScreenPNG"
+        Start-ScreenPNGProcess -Directory $OSDCloudScreenshot
     }
     else {
-        $Global:OSDCloudScreenshot = $null
-    }
-    if ($PSBoundParameters.ContainsKey('SkipAutopilot')) {
-        $Global:OSDCloudSkipAutopilot = $true
-    }
-    else {
-        $Global:OSDCloudSkipAutopilot = $false
-    }
-    if ($PSBoundParameters.ContainsKey('ZTI')) {
-        $Global:OSDCloudZTI = $true
-        $Global:OSDCloudSkipODT = $true
-    }
-    else {
-        $Global:OSDCloudZTI = $false
-        $Global:OSDCloudSkipODT = $false
+        $OSDCloudScreenshot = $null
     }
     #=======================================================================
     #   Header
     #=======================================================================
     Write-Host -ForegroundColor DarkGray "========================================================================="
-    Write-Warning "OSDCLOUD IS CURRENTLY IN DEVELOPMENT FOR TESTING ONLY"
+    Write-Host -ForegroundColor Green "Start-OSDCloud"
     Write-Host -ForegroundColor DarkGray "========================================================================="
     Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) $($MyInvocation.MyCommand.Name)" -NoNewline
     Write-Host -ForegroundColor Cyan " | Manufacturer: $Manufacturer | Product: $Product"
     #=======================================================================
-    #	Warnings
+    #	-ZTI
     #=======================================================================
-    if ($Global:OSDCloudZTI -eq $true) {
+    if ($ZTI) {
         $GetDisk = Get-Disk.fixed | Where-Object {$_.IsBoot -eq $false} | Sort-Object Number
 
         if (($GetDisk | Measure-Object).Count -lt 2) {
@@ -188,22 +154,25 @@ function Start-OSDCloud {
             Start-Sleep -Seconds 5
         }
     }
+    #=======================================================================
+    #	Battery
+    #=======================================================================
     if (Get-OSDGather -Property IsOnBattery) {
         Write-Warning "This computer is currently running on Battery"
     }
     #=======================================================================
-    #	Test PowerShell Gallery Connectivity
+    #	Test Web Connection
     #=======================================================================
     Write-Host -ForegroundColor DarkGray "========================================================================="
     Write-Host -ForegroundColor Cyan "Test-WebConnection"
-    Write-Host -ForegroundColor DarkGray "powershellgallery.com"
+    Write-Host -ForegroundColor DarkGray "google.com"
 
-    if (Test-WebConnection -Uri "powershellgallery.com") {
+    if (Test-WebConnection -Uri "google.com") {
         Write-Host -ForegroundColor Green "OK"
     }
     else {
         Write-Host -ForegroundColor Red " FAILED"
-        Write-Warning "Could not validate an Internet connection to the PowerShell Gallery"
+        Write-Warning "Could not validate an Internet connection"
         Write-Warning "OSDCloud will continue, but there may be issues if this can't be resolved"
     }
     #=======================================================================
@@ -215,7 +184,7 @@ function Start-OSDCloud {
     if ($OSBuild) {
         Write-Host -ForegroundColor Green $OSBuild
     }
-    elseif ($Global:OSDCloudZTI -eq $true) {
+    elseif ($ZTI) {
         $OSBuild = '20H2'
         Write-Host -ForegroundColor Green $OSBuild
     }
@@ -254,7 +223,7 @@ function Start-OSDCloud {
     if ($PSBoundParameters.ContainsKey('OSEdition')) {
         Write-Host -ForegroundColor Green $OSEdition
     }
-    elseif ($Global:OSDCloudZTI -eq $true) {
+    elseif ($ZTI) {
         $OSEdition = 'Enterprise'
         Write-Host -ForegroundColor Green $OSEdition
     }
@@ -321,7 +290,7 @@ function Start-OSDCloud {
     if ($OSLicense) {
         Write-Host -ForegroundColor Green $OSLicense
     }
-    elseif ($Global:OSDCloudZTI -eq $true) {
+    elseif ($ZTI) {
         $OSLicense = 'Volume'
         Write-Host -ForegroundColor Green $OSLicense
     }
@@ -391,7 +360,7 @@ function Start-OSDCloud {
     if ($PSBoundParameters.ContainsKey('OSLanguage')) {
         Write-Host -ForegroundColor Green $OSLanguage
     }
-    elseif ($Global:OSDCloudZTI -eq $true) {
+    elseif ($ZTI) {
         $OSLanguage = 'en-us'
         Write-Host -ForegroundColor Green $OSLanguage
     }
@@ -426,12 +395,6 @@ function Start-OSDCloud {
     #   This is where we take the OSB OSE OSL information and get the
     #   Feature Update.  Global Variables will be set for Deploy-OSDCloud
     #=======================================================================
-    $Global:OSDCloudOSBuild = $OSBuild
-    $Global:OSDCloudOSEdition = $OSEdition
-    $Global:OSDCloudOSEditionId = $OSEditionId
-    $Global:OSDCloudOSLicense = $OSLicense
-    $Global:OSDCloudOSLanguage = $OSLanguage
-    $Global:OSDCloudOSImageIndex = $ImageIndex
     Write-Host -ForegroundColor DarkGray "========================================================================="
     Write-Host -ForegroundColor Cyan "Get-FeatureUpdate"
     Write-Host -ForegroundColor DarkGray "Windows 10 x64 | OSLicense: $OSLicense | OSBuild: $OSBuild | OSLanguage: $OSLanguage"
@@ -440,10 +403,6 @@ function Start-OSDCloud {
 
     if ($GetFeatureUpdate) {
         $GetFeatureUpdate = $GetFeatureUpdate | Select-Object -Property CreationDate,KBNumber,Title,UpdateOS,UpdateBuild,UpdateArch,FileName, @{Name='SizeMB';Expression={[int]($_.Size /1024/1024)}},FileUri,Hash,AdditionalHash
-        $Global:OSDCloudImageFileName = $GetFeatureUpdate.FileName
-        $Global:OSDCloudImageFileHash = $GetFeatureUpdate.Hash
-        $Global:OSDCloudImageFileUri = $GetFeatureUpdate.FileUri
-        $Global:OSDCloudImageFileTitle = $GetFeatureUpdate.Title
     }
     else {
         Write-Warning "Unable to locate a Windows 10 Feature Update"
@@ -455,19 +414,18 @@ function Start-OSDCloud {
     #   Determine if the OS is Offline
     #   Need to bail if the file is Online is not valid or not Offline
     #=======================================================================
-    $Global:OSDCloudImageFileOffline = Find-OSDCloudFile -Name "$Global:OSDCloudImageFileName" -Path '\OSDCloud\OS\' | Sort-Object FullName | Where-Object {$_.Length -gt 3GB}
-    $Global:OSDCloudImageFileOffline = $Global:OSDCloudImageFileOffline | Where-Object {$_.FullName -notlike "C*"} | Where-Object {$_.FullName -notlike "X*"} | Select-Object -First 1
-    #$Global:OSDCloudImageFileOffline = Find-OSDCloudOfflineFile -Name $GetFeatureUpdate.FileName | Select-Object -First 1
+    $ImageFileOffline = Find-OSDCloudFile -Name $GetFeatureUpdate.FileName -Path '\OSDCloud\OS\' | Sort-Object FullName | Where-Object {$_.Length -gt 3GB}
+    $ImageFileOffline = $ImageFileOffline | Where-Object {$_.FullName -notlike "C*"} | Where-Object {$_.FullName -notlike "X*"} | Select-Object -First 1
 
-    if ($Global:OSDCloudImageFileOffline) {
+    if ($ImageFileOffline) {
         Write-Host -ForegroundColor Green "OK"
-        Write-Host -ForegroundColor DarkGray "$Global:OSDCloudImageFileTitle"
-        Write-Host -ForegroundColor DarkGray "$($Global:OSDCloudImageFileOffline.FullName)"
+        Write-Host -ForegroundColor DarkGray "$($GetFeatureUpdate.Title)"
+        Write-Host -ForegroundColor DarkGray "$($ImageFileOffline.FullName)"
     }
-    elseif (Test-WebConnection -Uri $Global:OSDCloudImageFileUri) {
+    elseif (Test-WebConnection -Uri $GetFeatureUpdate.FileUri) {
         Write-Host -ForegroundColor Yellow "Download"
-        Write-Host -ForegroundColor Yellow "$Global:OSDCloudImageFileTitle"
-        Write-Host -ForegroundColor Yellow "$Global:OSDCloudImageFileUri"
+        Write-Host -ForegroundColor Yellow "$($GetFeatureUpdate.Title)"
+        Write-Host -ForegroundColor Yellow "$($GetFeatureUpdate.FileUri)"
     }
     else {
         Write-Warning "Could not verify an Internet connection for Windows 10 Feature Update"
@@ -492,10 +450,10 @@ function Start-OSDCloud {
             Write-Host -ForegroundColor DarkGray "Name: $($GetMyDriverPack.Name)"
             Write-Host -ForegroundColor DarkGray "Product: $($GetMyDriverPack.Product)"
     
-            $GetOSDCloudOfflineFile = Find-OSDCloudOfflineFile -Name $GetMyDriverPack.FileName | Select-Object -First 1
-            if ($GetOSDCloudOfflineFile) {
+            $DriverPackOffline = Find-OSDCloudOfflineFile -Name $GetMyDriverPack.FileName | Select-Object -First 1
+            if ($DriverPackOffline) {
                 Write-Host -ForegroundColor Green "OK"
-                Write-Host -ForegroundColor DarkGray "$($GetOSDCloudOfflineFile.FullName)"
+                Write-Host -ForegroundColor DarkGray "$($DriverPackOffline.FullName)"
             }
             elseif (Test-WebConnection -Uri $GetMyDriverPack.DriverPackUrl) {
                 Write-Host -ForegroundColor Yellow "Download"
@@ -513,7 +471,7 @@ function Start-OSDCloud {
     #=======================================================================
     #	Get-MyDellBios
     #=======================================================================
-    if ($Manufacturer -eq 'Dell') {
+<#     if ($Manufacturer -eq 'Dell') {
         Write-Host -ForegroundColor DarkGray "========================================================================="
         Write-Host -ForegroundColor Cyan "Get-MyDellBios"
 
@@ -553,11 +511,11 @@ function Start-OSDCloud {
             Write-Warning "Unable to determine a suitable BIOS update for this Computer Model"
             Write-Warning "OSDCloud will continue, but there may be issues"
         }
-    }
+    } #>
     #=======================================================================
     #	List Autopilot Profiles
     #=======================================================================
-    if ($Global:OSDCloudSkipAutopilot -eq $false) {
+<#     if (!($SkipAutopilot -eq $true)) {
         Write-Host -ForegroundColor DarkGray "========================================================================="
         Write-Host -ForegroundColor Cyan "OSDCloud Autopilot"
         
@@ -566,7 +524,7 @@ function Start-OSDCloud {
     
         if ($FindOSDCloudFile) {
             Write-Host -ForegroundColor Green "OK"
-            if ($Global:OSDCloudZTI -eq $true) {
+            if ($ZTI) {
                 Write-Warning "-SkipAutopilot parameter can be used to skip Autopilot Configuration"
                 Write-Warning "-ZTI automatically selects the first Autopilot Profile listed below"
                 Write-Warning "Rename your Autopilot Configuration Files so your default is the first Selection"
@@ -578,12 +536,46 @@ function Start-OSDCloud {
             Write-Warning "No Autopilot Profiles were found in any PSDrive"
             Write-Warning "Autopilot Profiles must be located in a <PSDrive>:\OSDCloud\Autopilot\Profiles directory"
         }
-    }
+    } #>
     #=======================================================================
     #	Global Variables
     #=======================================================================
+    #Autopilot
+    $Global:OSDCloudSkipAutopilot = $SkipAutopilot
+    #Hardware
     $Global:OSDCloudManufacturer = $Manufacturer
     $Global:OSDCloudProduct = $Product
+    #DriverPack
+    $Global:OSDCloudDriverPack = $GetMyDriverPack
+    $Global:OSDCloudDriverPackFileName = $GetMyDriverPack.FileName
+    $Global:OSDCloudDriverPackUrl = $GetMyDriverPack.DriverPackUrl
+    $Global:OSDCloudDriverPackOffline = $DriverPackOffline
+    #OS
+    $Global:OSDCloudOSBuild = $OSBuild
+    $Global:OSDCloudOSEdition = $OSEdition
+    $Global:OSDCloudOSEditionId = $OSEditionId
+    $Global:OSDCloudOSImageIndex = $ImageIndex
+    $Global:OSDCloudOSLanguage = $OSLanguage
+    $Global:OSDCloudOSLicense = $OSLicense
+    #Image
+    $Global:OSDCloudImageFileName = $GetFeatureUpdate.FileName
+    $Global:OSDCloudImageFileHash = $GetFeatureUpdate.Hash
+    $Global:OSDCloudImageFileOffline = $ImageFileOffline
+    $Global:OSDCloudImageFileTitle = $GetFeatureUpdate.Title
+    $Global:OSDCloudImageFileUri = $GetFeatureUpdate.FileUri
+    #Screenshot
+    $Global:OSDCloudScreenshot = $OSDCloudScreenshot
+    #Start Time
+    $Global:OSDCloudStartTime = $OSDCloudStartTime
+    #ZTI
+    if ($PSBoundParameters.ContainsKey('ZTI')) {
+        $Global:OSDCloudZTI = $true
+        $Global:OSDCloudSkipODT = $true
+    }
+    else {
+        $Global:OSDCloudZTI = $false
+        $Global:OSDCloudSkipODT = $false
+    }
     #=======================================================================
     #   Module
     #=======================================================================

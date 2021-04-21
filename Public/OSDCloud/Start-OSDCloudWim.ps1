@@ -28,37 +28,35 @@ function Start-OSDCloudWim {
     #=======================================================================
     #	Start the Clock
     #=======================================================================
-    $Global:OSDCloudStartTime = Get-Date
-    #=======================================================================
-    #   Screenshot
-    #=======================================================================
-    if ($PSBoundParameters.ContainsKey('Screenshot')) {
-        $Global:OSDCloudScreenshot = "$env:TEMP\ScreenPNG"
-        Start-ScreenPNGProcess -Directory "$env:TEMP\ScreenPNG"
-    }
+    $OSDCloudStartTime = Get-Date
     #=======================================================================
     #	Block
     #=======================================================================
+    Block-StandardUser
     Block-PowerShellVersionLt5
     Block-NoCurl
+    #=======================================================================
+    #	-Screenshot
+    #=======================================================================
+    if ($PSBoundParameters.ContainsKey('Screenshot')) {
+        $OSDCloudScreenshot = "$env:TEMP\ScreenPNG"
+        Start-ScreenPNGProcess -Directory $OSDCloudScreenshot
+    }
+    else {
+        $OSDCloudScreenshot = $null
+    }
     #=======================================================================
     #   Header
     #=======================================================================
     Write-Host -ForegroundColor DarkGray "========================================================================="
-    Write-Host -ForegroundColor Green "OSDCloud WIM Edition"
+    Write-Host -ForegroundColor Green "Start-OSDCloudWim"
     Write-Host -ForegroundColor DarkGray "========================================================================="
     Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) $($MyInvocation.MyCommand.Name)" -NoNewline
     Write-Host -ForegroundColor Cyan " | Manufacturer: $Manufacturer | Product: $Product"
     #=======================================================================
-    #	Variables and Disk Warnings
+    #	-ZTI
     #=======================================================================
-    if ($PSBoundParameters.ContainsKey('SkipAutopilot')) {
-        $Global:OSDCloudSkipAutopilot = $true
-    }
-    else {
-        $Global:OSDCloudSkipAutopilot = $false
-    }
-    if ($PSBoundParameters.ContainsKey('ZTI')) {
+    if ($ZTI) {
         $GetDisk = Get-Disk.fixed | Where-Object {$_.IsBoot -eq $false} | Sort-Object Number
 
         if (($GetDisk | Measure-Object).Count -lt 2) {
@@ -79,27 +77,26 @@ function Start-OSDCloudWim {
             Write-Warning "Disks will not be cleaned automatically"
             Start-Sleep -Seconds 5
         }
-
-        $Global:OSDCloudZTI = $true
-        $Global:OSDCloudSkipODT = $true
-    }
-    else {
-        $Global:OSDCloudZTI = $false
-        $Global:OSDCloudSkipODT = $false
     }
     #=======================================================================
-    #	Test PowerShell Gallery Connectivity
+    #	Battery
+    #=======================================================================
+    if (Get-OSDGather -Property IsOnBattery) {
+        Write-Warning "This computer is currently running on Battery"
+    }
+    #=======================================================================
+    #	Test Web Connection
     #=======================================================================
     Write-Host -ForegroundColor DarkGray "========================================================================="
     Write-Host -ForegroundColor Cyan "Test-WebConnection"
-    Write-Host -ForegroundColor DarkGray "powershellgallery.com"
+    Write-Host -ForegroundColor DarkGray "google.com"
 
-    if (Test-WebConnection -Uri "powershellgallery.com") {
+    if (Test-WebConnection -Uri "google.com") {
         Write-Host -ForegroundColor Green "OK"
     }
     else {
         Write-Host -ForegroundColor Red " FAILED"
-        Write-Warning "Could not validate an Internet connection to the PowerShell Gallery"
+        Write-Warning "Could not validate an Internet connection"
         Write-Warning "OSDCloud will continue, but there may be issues if this can't be resolved"
     }
     #=======================================================================
@@ -107,26 +104,26 @@ function Start-OSDCloudWim {
     #=======================================================================
     Write-Host -ForegroundColor DarkGray "========================================================================="
     Write-Host -ForegroundColor Cyan "Custom Windows Image on USB"
-    $ImageFile = Select-OSDCloudFile.wim
+    $ImageFileOffline = Select-OSDCloudFile.wim
 
-    if ($ImageFile) {
-        $Global:OSDCloudWimName = ($ImageFile).Name
+    if ($ImageFileOffline) {
+        #$OSDCloudImageFileName = ($ImageFile).Name
         #$Global:OSDImageParent = Split-Path -Path ($ImageFile).Directory -Leaf
-        $Global:OSDCloudWimFullName = ($ImageFile).FullName
+        #$ImageFileOffline = ($ImageFile).FullName
         #$Global:OSDImageHash = (Get-FileHash -Path $ImageFile.FullName -Algorithm SHA1).Hash
 
-        $ImageIndex = Select-OSDCloudImageIndex -ImagePath $Global:OSDCloudWimFullName
+        $ImageIndex = Select-OSDCloudImageIndex -ImagePath $ImageFileOffline.FullName
 
-        Write-Host -ForegroundColor DarkGray "OSDCloudWimName: $Global:OSDCloudWimName"
+        #Write-Host -ForegroundColor DarkGray "OSDCloudWimName: $Global:OSDCloudWimName"
+        Write-Host -ForegroundColor DarkGray "ImageFileOffline: $($ImageFileOffline.FullName)"
         Write-Host -ForegroundColor DarkGray "ImageIndex: $ImageIndex"
         #Write-Host -ForegroundColor DarkGray "OSDImageParent: $Global:OSDImageParent"
-        Write-Host -ForegroundColor DarkGray "OSDCloudWimFullName: $Global:OSDCloudWimFullName"
     }
     else {
-        $Global:OSDCloudWimName = $null
+        $ImageFileOffline = $null
         $ImageIndex = $null
         #$Global:OSDImageParent = $null
-        $Global:OSDCloudWimFullName = $null
+        #$Global:OSDCloudWimFullName = $null
         Write-Warning "Custom Windows Image on USB was not found"
         Break
     }
@@ -148,10 +145,10 @@ function Start-OSDCloudWim {
             Write-Host -ForegroundColor DarkGray "Name: $($GetMyDriverPack.Name)"
             Write-Host -ForegroundColor DarkGray "Product: $($GetMyDriverPack.Product)"
     
-            $GetOSDCloudOfflineFile = Find-OSDCloudOfflineFile -Name $GetMyDriverPack.FileName | Select-Object -First 1
-            if ($GetOSDCloudOfflineFile) {
+            $DriverPackOffline = Find-OSDCloudOfflineFile -Name $GetMyDriverPack.FileName | Select-Object -First 1
+            if ($DriverPackOffline) {
                 Write-Host -ForegroundColor Green "OK"
-                Write-Host -ForegroundColor DarkGray "$($GetOSDCloudOfflineFile.FullName)"
+                Write-Host -ForegroundColor DarkGray "$($DriverPackOffline.FullName)"
             }
             elseif (Test-WebConnection -Uri $GetMyDriverPack.DriverPackUrl) {
                 Write-Host -ForegroundColor Yellow "Download"
@@ -169,7 +166,7 @@ function Start-OSDCloudWim {
     #=======================================================================
     #	Get-MyDellBios
     #=======================================================================
-    if ($Manufacturer -eq 'Dell') {
+<#     if ($Manufacturer -eq 'Dell') {
         Write-Host -ForegroundColor DarkGray "========================================================================="
         Write-Host -ForegroundColor Cyan "Get-MyDellBios"
 
@@ -209,11 +206,11 @@ function Start-OSDCloudWim {
             Write-Warning "Unable to determine a suitable BIOS update for this Computer Model"
             Write-Warning "OSDCloud will continue, but there may be issues"
         }
-    }
+    } #>
     #=======================================================================
     #	List Autopilot Profiles
     #=======================================================================
-    if ($Global:OSDCloudSkipAutopilot -eq $false) {
+<#     if (!($SkipAutopilot -eq $true)) {
         Write-Host -ForegroundColor DarkGray "========================================================================="
         Write-Host -ForegroundColor Cyan "OSDCloud Autopilot"
         
@@ -222,7 +219,7 @@ function Start-OSDCloudWim {
     
         if ($FindOSDCloudFile) {
             Write-Host -ForegroundColor Green "OK"
-            if ($Global:OSDCloudZTI -eq $true) {
+            if ($ZTI) {
                 Write-Warning "-SkipAutopilot parameter can be used to skip Autopilot Configuration"
                 Write-Warning "-ZTI automatically selects the first Autopilot Profile listed below"
                 Write-Warning "Rename your Autopilot Configuration Files so your default is the first Selection"
@@ -234,18 +231,46 @@ function Start-OSDCloudWim {
             Write-Warning "No Autopilot Profiles were found in any PSDrive"
             Write-Warning "Autopilot Profiles must be located in a <PSDrive>:\OSDCloud\Autopilot\Profiles directory"
         }
-    }
+    } #>
     #=======================================================================
     #	Global Variables
     #=======================================================================
+    #Autopilot
+    $Global:OSDCloudSkipAutopilot = $SkipAutopilot
+    #Hardware
+    $Global:OSDCloudManufacturer = $Manufacturer
+    $Global:OSDCloudProduct = $Product
+    #DriverPack
+    $Global:OSDCloudDriverPack = $GetMyDriverPack
+    $Global:OSDCloudDriverPackFileName = $GetMyDriverPack.FileName
+    $Global:OSDCloudDriverPackUrl = $GetMyDriverPack.DriverPackUrl
+    $Global:OSDCloudDriverPackOffline = $DriverPackOffline
+    #OS
     $Global:OSDCloudOSBuild = $OSBuild
     $Global:OSDCloudOSEdition = $OSEdition
     $Global:OSDCloudOSEditionId = $OSEditionId
-    $Global:OSDCloudOSLicense = $OSLicense
-    $Global:OSDCloudOSLanguage = $OSLanguage
     $Global:OSDCloudOSImageIndex = $ImageIndex
-    $Global:OSDCloudManufacturer = $Manufacturer
-    $Global:OSDCloudProduct = $Product
+    $Global:OSDCloudOSLanguage = $OSLanguage
+    $Global:OSDCloudOSLicense = $OSLicense
+    #Image
+    $Global:OSDCloudImageFileName = $GetFeatureUpdate.FileName
+    $Global:OSDCloudImageFileHash = $GetFeatureUpdate.Hash
+    $Global:OSDCloudImageFileOffline = $ImageFileOffline
+    $Global:OSDCloudImageFileTitle = $GetFeatureUpdate.Title
+    $Global:OSDCloudImageFileUri = $GetFeatureUpdate.FileUri
+    #Screenshot
+    $Global:OSDCloudScreenshot = $OSDCloudScreenshot
+    #Start Time
+    $Global:OSDCloudStartTime = $OSDCloudStartTime
+    #ZTI
+    if ($PSBoundParameters.ContainsKey('ZTI')) {
+        $Global:OSDCloudZTI = $true
+        $Global:OSDCloudSkipODT = $true
+    }
+    else {
+        $Global:OSDCloudZTI = $false
+        $Global:OSDCloudSkipODT = $false
+    }
     #=======================================================================
     #   Deploy-OSDCloud.ps1
     #=======================================================================
