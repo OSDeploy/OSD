@@ -47,7 +47,6 @@ function Select-OSDCloudFile.wim {
         Return Get-Item (Join-Path $Results.Directory $Results.Name)
     }
 }
-
 function Select-OSDCloudImageIndex {
     [CmdletBinding()]
     param (

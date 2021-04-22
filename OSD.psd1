@@ -7,7 +7,7 @@
 RootModule = 'OSD.psm1'
 
 # Version number of his module.
-ModuleVersion = '21.4.20.1'
+ModuleVersion = '21.4.21.1'
 
 # Supported PSEditions
 # CompatiblePSEditions = @()
@@ -177,7 +177,6 @@ FunctionsToExport =
 'Select-OSDCloudODTFile',
 'Set-OSDCloud.workspace',
 'Start-OSDCloud',
-'Start-OSDCloudWim',
 'Test-OSDCloud.template',
 'Get-OSDPower',#POWER
 'Enable-PEWimPSGallery',#PSGALLERY

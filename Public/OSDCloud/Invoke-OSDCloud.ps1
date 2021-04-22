@@ -25,7 +25,7 @@ function Invoke-OSDCloud {
         ImageFileName = $null
         ImageFileSource = $null
         ImageFileTarget = $null
-        ImageFileUri = $null
+        ImageFileUrl = $null
         IsOnBattery = Get-OSDGather -Property IsOnBattery
         Manufacturer = Get-MyComputerManufacturer -Brief
         ODTConfigFile = 'C:\OSDCloud\ODT\Config.xml'
@@ -111,6 +111,16 @@ function Invoke-OSDCloud {
     #=======================================================================
     Write-Host -ForegroundColor DarkGray "========================================================================="
     Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) $($OSDCloud.Function)"
+    #=======================================================================
+    #	OS Check
+    #=======================================================================
+    if ((!($OSDCloud.ImageFileOffline)) -and (!($OSDCloud.ImageFileTarget)) -and (!($OSDCloud.ImageFileUrl))) {
+        Write-Warning "There was no OS specified by any Variables"
+        Write-Warning "Invoke-OSDCloud should not be run directly unless you know what you are doing"
+        Write-Warning "Try using Start-OSDCloud or OSDCloudGUI"
+        Start-Sleep -Seconds 10
+        Break
+    }
     #=======================================================================
     #	Autopilot Profiles are procesed in this order
     #   1. $OSDCloud.AutopilotJsonUrl
@@ -199,9 +209,9 @@ function Invoke-OSDCloud {
         Write-Host -ForegroundColor DarkGray    "========================================================================="
         Write-Warning "$($OSDCloud.BuildName) can only be run from WinPE"
         $OSDCloud.Test = $true
-        Write-Warning "OSDCloud.Test: $($OSDCloud.Test)"
+        Write-Warning "Test: $($OSDCloud.Test)"
         #Write-Warning "OSDCloud Failed!"
-        #Start-Sleep -Seconds 5
+        Start-Sleep -Seconds 5
         #Break
     }
     else {
@@ -314,7 +324,7 @@ function Invoke-OSDCloud {
         $OSDCloud.ImageFileSource = Find-OSDCloudFile -Name $OSDCloud.ImageFileName -Path (Split-Path -Path (Split-Path -Path $OSDCloud.ImageFileOffline.FullName -Parent) -NoQualifier) | Select-Object -First 1
         
         if ($OSDCloud.ImageFileSource) {
-            Write-Host -ForegroundColor DarkGray "OSDCloud.ImageFileSource: $($OSDCloud.ImageFileSource.FullName)"
+            Write-Host -ForegroundColor DarkGray "ImageFileSource: $($OSDCloud.ImageFileSource.FullName)"
             if (!(Test-Path 'C:\OSDCloud\OS')) {
                 New-Item -Path 'C:\OSDCloud\OS' -ItemType Directory -Force -ErrorAction Stop | Out-Null
             }
@@ -324,8 +334,8 @@ function Invoke-OSDCloud {
             }
         }
         if ($OSDCloud.ImageFileTarget) {
-            Write-Host -ForegroundColor DarkGray "OSDCloud.ImageFileTarget.FullName: $($OSDCloud.ImageFileTarget.FullName)"
-            $OSDCloud.ImageFileUri = $null
+            Write-Host -ForegroundColor DarkGray "ImageFileTarget.FullName: $($OSDCloud.ImageFileTarget.FullName)"
+            $OSDCloud.ImageFileUrl = $null
         }
         else {
             Write-Warning "Something went wrong trying to get the Windows Image"
@@ -336,23 +346,46 @@ function Invoke-OSDCloud {
     #=======================================================================
     #	Download Image File
     #=======================================================================
-    if (!($OSDCloud.ImageFileTarget) -and ($OSDCloud.ImageFileUri)) {
+    if (!($OSDCloud.ImageFileTarget) -and (!($OSDCloud.ImageFileUrl))) {
+        Write-Host -ForegroundColor DarkGray "========================================================================="
+        Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Get Windows 10 Feature Update"
+        Write-Warning "Invoke-OSDCloud was not set properly with an OS to Download"
+        Write-Warning "You should be using Start-OSDCloud"
+        Write-Warning "Invoke-OSDCloud should not be run directly unless you know what you are doing"
+        Write-Warning "Windows 10 Enterprise is being downloaded and installed out of convenience only"
+
+        if (!($OSDCloud.GetFeatureUpdate)) {
+            $OSDCloud.GetFeatureUpdate = Get-FeatureUpdate
+        }
+        if ($OSDCloud.GetFeatureUpdate) {
+            $OSDCloud.GetFeatureUpdate = $OSDCloud.GetFeatureUpdate | Select-Object -Property CreationDate,KBNumber,Title,UpdateOS,UpdateBuild,UpdateArch,FileName, @{Name='SizeMB';Expression={[int]($_.Size /1024/1024)}},FileUri,Hash,AdditionalHash
+            $OSDCloud.ImageFileName = $OSDCloud.GetFeatureUpdate.FileName
+            $OSDCloud.ImageFileUrl = $OSDCloud.GetFeatureUpdate.FileUri
+            $OSDCloud.OSImageIndex = 6
+        }
+        else {
+            Write-Warning "Unable to locate a Windows 10 Feature Update"
+            Write-Warning "OSDCloud cannot continue"
+            Break
+        }
+    }
+    #=======================================================================
+    #	Download Image File
+    #=======================================================================
+    if (!($OSDCloud.ImageFileTarget) -and ($OSDCloud.ImageFileUrl)) {
         Write-Host -ForegroundColor DarkGray "========================================================================="
         Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Download OSDCloud ImageFile"
-        Write-Host -ForegroundColor DarkGray "$($OSDCloud.ImageFileUri)"
+        Write-Host -ForegroundColor DarkGray "$($OSDCloud.ImageFileUrl)"
         
-        if (Test-WebConnection -Uri $OSDCloud.ImageFileUri) {
+        if (Test-WebConnection -Uri $OSDCloud.ImageFileUrl) {
             if ($OSDCloud.ImageFileName) {
-                $OSDCloud.ImageFileSource = Save-WebFile -SourceUrl $OSDCloud.ImageFileUri -DestinationDirectory 'C:\OSDCloud\OS' -DestinationName $OSDCloud.ImageFileName -ErrorAction Stop
+                $OSDCloud.ImageFileTarget = Save-WebFile -SourceUrl $OSDCloud.ImageFileUrl -DestinationDirectory 'C:\OSDCloud\OS' -DestinationName $OSDCloud.ImageFileName -ErrorAction Stop
             }
             else {
-                $OSDCloud.ImageFileSource = Save-WebFile -SourceUrl $OSDCloud.ImageFileUri -DestinationDirectory 'C:\OSDCloud\OS' -ErrorAction Stop
+                $OSDCloud.ImageFileTarget = Save-WebFile -SourceUrl $OSDCloud.ImageFileUrl -DestinationDirectory 'C:\OSDCloud\OS' -ErrorAction Stop
             }
 
-            if (Test-Path $OSDCloud.ImageFileSource.FullName) {
-                $OSDCloud.ImageFileTarget = Get-Item -Path "C:\OSDCloud\OS\$($OSDCloud.ImageFileSource.Name)"
-            }
-            else {
+            if (!(Test-Path $OSDCloud.ImageFileTarget.FullName)) {
                 $OSDCloud.ImageFileTarget = Get-ChildItem -Path 'C:\OSDCloud\OS\*' -Include *.wim,*.esd | Select-Object -First 1
             }
         }
@@ -363,9 +396,12 @@ function Invoke-OSDCloud {
         }
 
         if ($OSDCloud.ImageFileTarget) {
-            Write-Host -ForegroundColor DarkGray "OSDCloud.ImageFileTarget: $($OSDCloud.ImageFileTarget.FullName)"
+            Write-Host -ForegroundColor DarkGray "ImageFileTarget: $($OSDCloud.ImageFileTarget.FullName)"
         }
     }
+    #=======================================================================
+    #	FAILED
+    #=======================================================================
     if (!($OSDCloud.ImageFileTarget)) {
         Write-Warning "Something went wrong trying to get the Windows ImageFile"
         Write-Warning "OSDCloud cannot continue"
@@ -440,7 +476,7 @@ function Invoke-OSDCloud {
                 }
 
                 if ($OSDCloud.DriverPackSource) {
-                    Write-Host -ForegroundColor DarkGray "OSDCloud.DriverPackSource.FullName: $($OSDCloud.DriverPackSource.FullName)"
+                    Write-Host -ForegroundColor DarkGray "DriverPackSource.FullName: $($OSDCloud.DriverPackSource.FullName)"
                     Copy-Item -Path $OSDCloud.DriverPackSource.FullName -Destination 'C:\Drivers' -Force
                 }
 
@@ -558,13 +594,13 @@ function Invoke-OSDCloud {
         }
 
         $OSDCloud.ODTSetupFile = Join-Path $OSDCloud.ODTFile.Directory 'setup.exe'
-        Write-Verbose -Verbose "OSDCloud.ODTSetupFile: $($OSDCloud.ODTSetupFile)"
+        Write-Verbose -Verbose "ODTSetupFile: $($OSDCloud.ODTSetupFile)"
         if (Test-Path $OSDCloud.ODTSetupFile) {
             Copy-Item -Path $OSDCloud.ODTSetupFile -Destination $OSDCloud.ODTTarget -Force
         }
 
         $OSDCloud.ODTSource = Join-Path $OSDCloud.ODTFile.Directory 'Office'
-        Write-Verbose -Verbose "OSDCloud.ODTSource: $($OSDCloud.ODTSource)"
+        Write-Verbose -Verbose "ODTSource: $($OSDCloud.ODTSource)"
         if (Test-Path $OSDCloud.ODTSource) {
             robocopy "$($OSDCloud.ODTSource)" "$($OSDCloud.ODTTargetData)" *.* /e /ndl /nfl /z /b
         }

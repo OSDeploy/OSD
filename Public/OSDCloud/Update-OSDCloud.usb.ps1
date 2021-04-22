@@ -32,11 +32,11 @@ function Update-OSDCloud.usb {
             Write-Verbose -Verbose "Updating Volume OSDBoot with content from $OSDCloudWorkspace\Media"
             
             if ($PSBoundParameters.ContainsKey('Mirror')) {
-                Write-Verbose -Verbose "Mirroring $OSDCloudWorkspace\Media to $($OSDCloud):\"
+                Write-Verbose -Verbose "Mirroring $OSDCloudWorkspace\Media to $($OSDBoot):\"
                 robocopy "$OSDCloudWorkspace\Media" "$($OSDBoot):\" *.* /mir /ndl /np /njh /njs /b /r:0 /w:0 /zb /xd "$RECYCLE.BIN" "System Volume Information"
             }
             else {
-                Write-Verbose -Verbose "Copying $OSDCloudWorkspace\Media to $($OSDCloud):\"
+                Write-Verbose -Verbose "Copying $OSDCloudWorkspace\Media to $($OSDBoot):\"
                 robocopy "$OSDCloudWorkspace\Media" "$($OSDBoot):\" *.* /e /ndl /np /njh /njs /b /r:0 /w:0 /zb /xd "$RECYCLE.BIN" "System Volume Information"
             }
         }
