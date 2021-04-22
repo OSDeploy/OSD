@@ -299,6 +299,14 @@ function Start-WinREWiFi {
         }
     }
     #=======================================================================
+    #	WlanSvc
+    #=======================================================================
+    if (Get-Service -Name WlanSvc) {
+        if ((Get-Service -Name WlanSvc).Status -ne 'Running') {
+            Get-Service -Name WlanSvc | Start-Service
+        }
+    }
+    #=======================================================================
     #	Test Wi-Fi Adapter
     #=======================================================================
     if ($StartWinREWiFi) {
@@ -321,8 +329,6 @@ function Start-WinREWiFi {
         }
         else {
             $PnPEntity = Get-WmiObject -ClassName Win32_PnPEntity | Where-Object {$_.Status -eq 'Error'} |  Where-Object {$_.Name -match 'Net'}
-
-
 
             Write-Host -ForegroundColor Red 'FAIL'
             Write-Warning "Could not find an installed Wi-Fi Network Adapter"

@@ -216,8 +216,9 @@ start PowerShell -Nol -W Mi
     $Startnet | Out-File -FilePath "$MountPath\Windows\System32\Startnet.cmd" -Force -Encoding ascii
 
     if (Test-Path "$MountPath\Windows\WirelessConnect.exe") {
-        Write-Verbose "Startnet.cmd: net start wlansvc"
-        Add-Content -Path "$MountPath\Windows\System32\Startnet.cmd" -Value 'net start wlansvc' -Force
+        #Starting wlanSvc has moved to Start-WinREWiFi
+        #Write-Verbose "Startnet.cmd: net start wlansvc"
+        #Add-Content -Path "$MountPath\Windows\System32\Startnet.cmd" -Value 'net start wlansvc' -Force
 
         Write-Verbose "Startnet.cmd: start PowerShell -NoL -C Start-WinREWiFi"
         Add-Content -Path "$MountPath\Windows\System32\Startnet.cmd" -Value "start /wait PowerShell -NoL -C Start-WinREWiFi" -Force
