@@ -347,7 +347,7 @@ $BaseCatalog = @'
 	#=======================================================================
 	#   Paths
 	#=======================================================================
-	$CatalogState           = 'Online' #Online, Build, Local, Offline
+	$CatalogState           = 'Offline' #Online, Build, Local, Offline
 	$DownloadsBaseUrl 		= 'https://www.microsoft.com/en-us/download/confirmation.aspx?id='
 	$CatalogOnlinePath      = 'https://support.microsoft.com/en-us/surface/download-drivers-and-firmware-for-surface-09bb2e09-2a4b-cb69-0951-078a7739e120'
 	#$CatalogBuildPath       = Join-Path $env:TEMP 'CatalogPC.xml'
@@ -358,19 +358,21 @@ $BaseCatalog = @'
     #=======================================================================
     #   Test CatalogState Local
     #=======================================================================
-    if (Test-Path $CatalogLocalPath) {
-        Write-Verbose "Testing $CatalogLocalPath"
+	if ($CatalogState -ne 'Offline') {
+        if (Test-Path $CatalogLocalPath) {
+            Write-Verbose "Testing $CatalogLocalPath"
 
-		#Get-Item to determine the age
-        $GetItemCatalogLocalPath = Get-Item $CatalogLocalPath
+            #Get-Item to determine the age
+            $GetItemCatalogLocalPath = Get-Item $CatalogLocalPath
 
-		#If the local is older than 12 hours, delete it
-        if (((Get-Date) - $GetItemCatalogLocalPath.LastWriteTime).TotalHours -gt 12) {
-            Write-Verbose "Removing previous Offline Catalog"
-		}
-		else {
-            $CatalogState = 'Local'
-            Write-Verbose "CatalogState: $CatalogState"
+            #If the local is older than 12 hours, delete it
+            if (((Get-Date) - $GetItemCatalogLocalPath.LastWriteTime).TotalHours -gt 12) {
+                Write-Verbose "Removing previous Offline Catalog"
+            }
+            else {
+                $CatalogState = 'Local'
+                Write-Verbose "CatalogState: $CatalogState"
+            }
         }
     }
     #=======================================================================
