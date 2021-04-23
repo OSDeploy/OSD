@@ -6,7 +6,6 @@ function Invoke-OSDCloud {
     #=======================================================================
     $Global:OSDCloud = $null
     $Global:OSDCloud = [ordered]@{
-        AutopilotConfigurationFile = 'C:\Windows\Provisioning\Autopilot\AutopilotConfigurationFile.json'
         AutopilotFile = $null
         AutopilotFiles = $null
         AutopilotJsonName = $null
@@ -58,7 +57,7 @@ function Invoke-OSDCloud {
         Transcript = $null
         USBPartitions = $null
         Version = [Version](Get-Module -Name OSD -ListAvailable | Sort-Object Version -Descending | Select-Object -First 1).Version
-        VersionMin = [Version]'21.4.22.2'
+        VersionMin = [Version]'21.4.23.1'
         ZTI = [bool]$false
     }
     #=======================================================================
@@ -575,8 +574,8 @@ function Invoke-OSDCloud {
     if ($OSDCloud.AutopilotObject) {
         Write-Host -ForegroundColor DarkGray "================================================================="
         Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) AutopilotConfigurationFile.json"
-        Write-Verbose -Verbose "Setting $($OSDCloud.AutopilotConfigurationFile)"
-        $OSDCloud.AutopilotObject | ConvertTo-Json | Out-File -FilePath $OSDCloud.AutopilotConfigurationFile -Encoding ASCII
+        Write-Verbose -Verbose "Setting C:\Windows\Provisioning\Autopilot\AutopilotConfigurationFile.json"
+        $OSDCloud.AutopilotObject | ConvertTo-Json | Out-File -FilePath 'C:\Windows\Provisioning\Autopilot\AutopilotConfigurationFile.json' -Encoding ASCII
     }
     #=======================================================================
     #   Stage Office Config
