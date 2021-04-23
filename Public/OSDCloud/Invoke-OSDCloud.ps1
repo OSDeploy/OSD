@@ -58,7 +58,7 @@ function Invoke-OSDCloud {
         Transcript = $null
         USBPartitions = $null
         Version = [Version](Get-Module -Name OSD -ListAvailable | Sort-Object Version -Descending | Select-Object -First 1).Version
-        VersionMin = [Version]'21.4.22.1'
+        VersionMin = [Version]'21.4.22.2'
         ZTI = [bool]$false
     }
     #=======================================================================

@@ -55,7 +55,8 @@ function New-OSDCloud.workspace {
     if (!(Test-Path $WorkspacePath)) {
         New-Item -Path $WorkspacePath -ItemType Directory -Force -ErrorAction Stop | Out-Null
     }
-    robocopy "$OSDCloudTemplate" "$WorkspacePath" *.* /e /ndl /xj /ndl /np /nfl /njh /njs /xf workspace.json
+    robocopy "$OSDCloudTemplate" "$WorkspacePath" *.* /e /xj /np /ndl /nfl /njh /njs /r:0 /w:0 /xf workspace.json
+    robocopy "$OSDCloudTemplate\Media" "$WorkspacePath\Media" *.* /mir /xj /np /ndl /nfl /njh /njs /r:0 /w:0
     #=======================================================================
     #	Complete
     #=======================================================================

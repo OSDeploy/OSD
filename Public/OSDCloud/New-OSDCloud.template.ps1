@@ -179,8 +179,9 @@ Windows Registry Editor Version 5.00
     }
     $PathWinPEMedia = $AdkPaths.PathWinPEMedia
     $DestinationMedia = Join-Path $TemplatePath 'Media'
+
     Write-Verbose "Copying ADK Media to $DestinationMedia"
-    robocopy "$PathWinPEMedia" "$DestinationMedia" *.* /e /ndl /xj /ndl /np /nfl /njh /njs
+    robocopy "$PathWinPEMedia" "$DestinationMedia" *.* /mir /ndl /xj /ndl /np /nfl /njh /njs
 
     $DestinationSources = Join-Path $DestinationMedia 'sources'
     if (-NOT (Test-Path "$DestinationSources")) {
@@ -463,9 +464,9 @@ Windows Registry Editor Version 5.00
 
         if (Test-Path $BootWim) {
             Remove-Item -Path $BootWim -Force -ErrorAction Stop | Out-Null
-            Export-WindowsImage -SourceImagePath $WinREWim -SourceIndex 1 -DestinationImagePath $BootWim -DestinationName 'Microsoft Windows PE (x64)'
-            Remove-Item -Path $WinREWim -Force -ErrorAction Stop | Out-Null
         }
+        Export-WindowsImage -SourceImagePath $WinREWim -SourceIndex 1 -DestinationImagePath $BootWim -DestinationName 'Microsoft Windows PE (x64)'
+        Remove-Item -Path $WinREWim -Force -ErrorAction Stop | Out-Null
     }
     #=======================================================================
     #   Directories

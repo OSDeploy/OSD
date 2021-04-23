@@ -301,10 +301,16 @@ function Start-WinREWiFi {
     #=======================================================================
     #	WlanSvc
     #=======================================================================
-    if (Get-Service -Name WlanSvc) {
-        if ((Get-Service -Name WlanSvc).Status -ne 'Running') {
-            Get-Service -Name WlanSvc | Start-Service
+    if ($StartWinREWiFi) {
+        Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Starting WlanSvc Service" -NoNewline
+        if (Get-Service -Name WlanSvc) {
+            if ((Get-Service -Name WlanSvc).Status -ne 'Running') {
+                Get-Service -Name WlanSvc | Start-Service
+                Start-Sleep -Seconds 10
+    
+            }
         }
+        Write-Host -ForegroundColor Green 'OK'
     }
     #=======================================================================
     #	Test Wi-Fi Adapter
@@ -354,7 +360,9 @@ function Start-WinREWiFi {
             Write-Host -ForegroundColor Green ''
             Write-Warning "Wireless is already connected ... Disconnecting"
             (Get-WmiObject -ClassName Win32_NetworkAdapter | Where-Object {$_.NetConnectionID -eq 'Wi-Fi'}).disable() | Out-Null
+            Start-Sleep -Seconds 5
             (Get-WmiObject -ClassName Win32_NetworkAdapter | Where-Object {$_.NetConnectionID -eq 'Wi-Fi'}).enable() | Out-Null
+            Start-Sleep -Seconds 5
             $StartWinREWiFi = $true
         }
         else {
@@ -369,6 +377,7 @@ function Start-WinREWiFi {
         Write-Host -ForegroundColor Green 'OK'
         Write-Host -ForegroundColor DarkGray "========================================================================="
         while (((Get-CimInstance -ClassName Win32_NetworkAdapter | Where-Object {$_.NetConnectionID -eq 'Wi-Fi'}).NetEnabled) -eq $false) {
+            Start-Sleep -Seconds 3
             $SSIDList = Get-WinREWiFi
             if ($SSIDList) {
                 #show list of available SSID
