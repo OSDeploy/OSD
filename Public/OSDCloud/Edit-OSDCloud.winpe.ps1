@@ -229,7 +229,8 @@ start PowerShell -Nol -W Mi
         Write-Warning "This must be set every time you run Edit-OSDCloud.winpe as this will revert to 'start PowerShell'"
 
         Write-Verbose "Startnet.cmd: start PowerShell -NoL -C Invoke-WebPSScript $WebPSScript"
-        Add-Content -Path "$MountPath\Windows\System32\Startnet.cmd" -Value "start PowerShell -NoL -C Invoke-WebPSScript $WebPSScript" -Force
+        #Add Sleep Command since Invoke-WebPSScript runs before NIC is initialized on fast hardware.
+        Add-Content -Path "$MountPath\Windows\System32\Startnet.cmd" -Value "start PowerShell -NoL -C Start-Sleep 5; Invoke-WebPSScript $WebPSScript" -Force
     }
     else {
         Write-Verbose "Startnet.cmd: start PowerShell -NoL"
