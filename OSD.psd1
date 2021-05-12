@@ -214,6 +214,13 @@ FunctionsToExport =
 'Get-CatalogDellFirmware',
 'Get-CatalogDellSystem',
 'Get-CatalogHPDriverPack',
+'Get-CatalogHPPlatformList',
+'Get-CatalogHPSystem',
+'Get-CatalogHPAccessories',
+'Get-CatalogHPBios',
+'Get-CatalogHPDriver',
+'Get-CatalogHPFirmware',
+'Get-CatalogHPSoftware',
 'Get-CatalogLenovoDriverPack',
 'Get-CatalogMicrosoftDriverPack',
 'Get-ReAgentXml',
@@ -231,6 +238,7 @@ FunctionsToExport =
 'Select-OSDCloudImageIndex',
 'Update-OSDCloud.usb',
 'Invoke-OSDCloud'
+
 
 # Cmdlets to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no cmdlets to export.
 CmdletsToExport = @()
