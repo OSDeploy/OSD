@@ -224,6 +224,7 @@ FunctionsToExport =
 'Get-CatalogHPDriver',
 'Get-CatalogHPFirmware',
 'Get-CatalogHPSoftware',
+'Get-CatalogLenovoBios',
 'Get-CatalogLenovoDriverPack',
 'Get-CatalogMicrosoftDriverPack',
 'Get-ReAgentXml',
