@@ -58,6 +58,9 @@ function Start-OSDCloud {
         [Alias('Culture','OSCulture')]
         [string]$OSLanguage,
 
+        [ValidateSet('Retail','Volume')]
+        [string]$OSLicense,
+
         [Parameter(ParameterSetName = 'CustomImage')]
         [switch]$FindImageFile,
 

@@ -146,6 +146,8 @@ FunctionsToExport =
 'Get-OSDDriverWmiQ',
 'Get-FeatureUpdate',#FEATUREUPDATE
 'Save-FeatureUpdate',
+'Get-EnablementPackage',
+'Save-EnablementPackage',
 'Get-OSD',#GENERAL
 'Get-OSDClass',
 'Get-OSDGather',
@@ -177,6 +179,7 @@ FunctionsToExport =
 'Select-OSDCloudODTFile',
 'Set-OSDCloud.workspace',
 'Start-OSDCloud',
+'Start-OSDCloudGUI',
 'Test-OSDCloud.template',
 'Get-OSDPower',#POWER
 'Enable-PEWimPSGallery',#PSGALLERY

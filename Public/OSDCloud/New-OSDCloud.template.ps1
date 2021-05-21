@@ -14,10 +14,11 @@ Sets all International settings in WinPE to the specified setting
 .PARAMETER SetInputLocale
 Sets the default InputLocale in WinPE to the specified Input Locale
 
+.PARAMETER WinRE
+Uses Windows 10 WinRE.wim instead of the ADK Boot.wim
+
 .LINK
 https://osdcloud.osdeploy.com
-
-.NOTES
 #>
 function New-OSDCloud.template {
     [CmdletBinding()]
@@ -38,7 +39,6 @@ function New-OSDCloud.template {
 
         [switch]$WinRE
     )
-
 $RegistryConsole = @'
 Windows Registry Editor Version 5.00
 
@@ -143,6 +143,11 @@ Windows Registry Editor Version 5.00
     #=======================================================================
     $TemplateStartTime = Get-Date
     #=======================================================================
+    #   Header
+    #=======================================================================
+    Write-Host -ForegroundColor DarkGray "========================================================================="
+    Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) $($MyInvocation.MyCommand.Name)"
+    #=======================================================================
     #	Block
     #=======================================================================
     Block-WinPE
@@ -156,7 +161,9 @@ Windows Registry Editor Version 5.00
     $AdkPaths = Get-AdkPaths
 
     if ($null -eq $AdkPaths) {
+        Write-Host -ForegroundColor DarkGray "========================================================================="
         Write-Warning "Could not get ADK going, sorry"
+        Write-Host -ForegroundColor DarkGray "========================================================================="
         Break
     }
     #=======================================================================
@@ -164,56 +171,126 @@ Windows Registry Editor Version 5.00
     #=======================================================================
     if ($PSBoundParameters.ContainsKey('WinRE')) {
         if ((Get-PartitionWinRE).OperationalStatus -ne 'Online') {
+            Write-Host -ForegroundColor DarkGray "========================================================================="
             Write-Warning "You can't use WinRE because of some issue.  Sorry!"
+            Write-Host -ForegroundColor DarkGray "========================================================================="
             Break
         }
     }
     #=======================================================================
-    #   Get WinPE.wim
+    #   Test WimSourcePath
     #=======================================================================
-    $TemplatePath = "$env:ProgramData\OSDCloud"
     $WimSourcePath = $AdkPaths.WimSourcePath
     if (-NOT (Test-Path $WimSourcePath)) {
-        Write-Warning "Could not find $WimSourcePath, sorry"
+        Write-Host -ForegroundColor DarkGray "========================================================================="
+        Write-Warning "Could not find the ADK WimSourcePath: $WimSourcePath"
+        Write-Host -ForegroundColor DarkGray "========================================================================="
         Break
     }
+    #=======================================================================
+    #   Template
+    #=======================================================================
+    Write-Host -ForegroundColor DarkGray "========================================================================="
+    $TemplatePath = "$env:ProgramData\OSDCloud"
+    Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Creating OSDCloud Template at $TemplatePath"
+    
+    if (-NOT (Test-Path $TemplatePath)) {
+        $null = New-Item -Path $TemplatePath -ItemType Directory -Force
+    }
+    #=======================================================================
+    #   Logs
+    #=======================================================================
+    $TemplateLogs = "$TemplatePath\Logs\Template"
+    Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Creating OSDCloud Template Logs at $TemplateLogs"
+
+    if (Test-Path $TemplateLogs) {
+        $null = Remove-Item -Path "$TemplateLogs\*" -Recurse -Force -ErrorAction Ignore | Out-Null
+    }
+    if (-NOT (Test-Path $TemplateLogs)) {
+        $null = New-Item -Path $TemplateLogs -ItemType Directory -Force | Out-Null
+    }
+
+    $Transcript = "$((Get-Date).ToString('yyyy-MM-dd-HHmmss'))-New-OSDCloud.template.log"
+    Start-Transcript -Path (Join-Path $TemplateLogs $Transcript) -ErrorAction Ignore
+    #=======================================================================
+    #   Mirror ADK Media
+    #=======================================================================
+    Write-Host -ForegroundColor DarkGray "========================================================================="
+    Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Mirroring ADK Media using Robocopy"
+    Write-Host -ForegroundColor Yellow 'Mirroring will remove any previous WinPE and will force a full rebuild'
+    
     $PathWinPEMedia = $AdkPaths.PathWinPEMedia
+    Write-Host -ForegroundColor DarkGray "Source: $PathWinPEMedia"
+
     $DestinationMedia = Join-Path $TemplatePath 'Media'
+    Write-Host -ForegroundColor DarkGray "Destination: $DestinationMedia"
 
-    Write-Verbose "Copying ADK Media to $DestinationMedia"
-    robocopy "$PathWinPEMedia" "$DestinationMedia" *.* /mir /ndl /xj /ndl /np /nfl /njh /njs
-
+    $null = robocopy "$PathWinPEMedia" "$DestinationMedia" *.* /mir /b /ndl /np /r:0 /w:0 /xj /LOG+:$TemplateLogs\Robocopy.log
+    #=======================================================================
+    #   Copy Boot.wim
+    #=======================================================================
+    Write-Host -ForegroundColor DarkGray "========================================================================="
     $DestinationSources = Join-Path $DestinationMedia 'sources'
     if (-NOT (Test-Path "$DestinationSources")) {
         New-Item -Path "$DestinationSources" -ItemType Directory -Force -ErrorAction Stop | Out-Null
     }
 
     if ($PSBoundParameters.ContainsKey('WinRE')) {
+        Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Copying WinRE.wim"
+        Write-Host -ForegroundColor Yellow "OSD Function: Copy-WinRE.wim"
+
         $BootWim = Join-Path $DestinationSources 'winre.wim'
-        Write-Verbose "Copying WinRE.wim to $BootWim"
-        Copy-WinRE.wim -DestinationDirectory $DestinationSources -DestinationFileName 'winre.wim' -Verbose
+        Write-Host -ForegroundColor DarkGray "Destination: $BootWim"
+
+        Copy-WinRE.wim -DestinationDirectory $DestinationSources -DestinationFileName 'winre.wim' -ErrorAction Stop | Out-Null
     }
     else {
+        Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Copying ADK WinPE.wim"
         $BootWim = Join-Path $DestinationSources 'boot.wim'
-        Write-Verbose "Copying ADK Boot.wim to $BootWim"
-        Copy-Item -Path $WimSourcePath -Destination $BootWim -Force
+        Write-Host -ForegroundColor DarkGray "Source: $WimSourcePath"
+        Write-Host -ForegroundColor DarkGray "Destination: $BootWim"
+
+        Copy-Item -Path $WimSourcePath -Destination $BootWim -Force -ErrorAction Stop | Out-Null
+    }
+    #=======================================================================
+    #   Test BootWim
+    #=======================================================================
+    if (!(Test-Path $BootWim)) {
+        Write-Host -ForegroundColor DarkGray "========================================================================="
+        Write-Warning "I'm not sure what happened, but I can't find $BootWim"
+        Write-Host -ForegroundColor DarkGray "========================================================================="
+        Break
     }
     #=======================================================================
     #   Download wgl4_boot.ttf
     #   This is used to resolve issues with WinPE Resolutions in 2004/20H2
     #=======================================================================
-    if (Test-WebConnection -Uri 'https://github.com/OSDeploy/OSDCloud/raw/main/Media/boot/fonts/wgl4_boot.ttf') {
-        Write-Verbose "Repairing bad WinPE resolution by replacing wgl4_boot.ttf"
-        Save-WebFile -SourceUrl 'https://github.com/OSDeploy/OSDCloud/raw/main/Media/boot/fonts/wgl4_boot.ttf' -DestinationDirectory "$DestinationMedia\boot\fonts" -Overwrite | Out-Null
+    Write-Host -ForegroundColor DarkGray "========================================================================="
+    Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Replacing Boot Media font wgl4_boot.ttf"
+    Write-Host -ForegroundColor Yellow "Replacing this file resolves an issue where WinPE does not boot to the proper display resolution"
+
+    $SourceUrl = 'https://github.com/OSDeploy/OSDCloud/raw/main/Media/boot/fonts/wgl4_boot.ttf'
+    if (Test-WebConnection -Uri $SourceUrl) {
+        Write-Host -ForegroundColor DarkGray "Source: $SourceUrl"
+        Write-Host -ForegroundColor DarkGray "Destination: $DestinationMedia\boot\fonts\wgl4_boot.ttf"
+        Save-WebFile -SourceUrl $SourceUrl -DestinationDirectory "$DestinationMedia\boot\fonts" -Overwrite | Out-Null
     }
-    if (Test-WebConnection -Uri 'https://github.com/OSDeploy/OSDCloud/raw/main/Media/efi/microsoft/boot/fonts/wgl4_boot.ttf') {
-        Save-WebFile -SourceUrl 'https://github.com/OSDeploy/OSDCloud/raw/main/Media/efi/microsoft/boot/fonts/wgl4_boot.ttf' -DestinationDirectory "$DestinationMedia\efi\microsoft\boot\fonts" -Overwrite | Out-Null
+
+    $SourceUrl = 'https://github.com/OSDeploy/OSDCloud/raw/main/Media/efi/microsoft/boot/fonts/wgl4_boot.ttf'
+    if (Test-WebConnection -Uri $SourceUrl) {
+        Write-Host -ForegroundColor DarkGray "Source: $SourceUrl"
+        Write-Host -ForegroundColor DarkGray "Destination: $DestinationMedia\efi\microsoft\boot\fonts\wgl4_boot.ttf"
+        Save-WebFile -SourceUrl $SourceUrl -DestinationDirectory "$DestinationMedia\efi\microsoft\boot\fonts" -Overwrite | Out-Null
     }
     #=======================================================================
     #   Mount-MyWindowsImage
     #=======================================================================
+    Write-Host -ForegroundColor DarkGray "========================================================================="
+    Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Mount Boot.wim"
+    Write-Host -ForegroundColor Yellow "OSD Function: Mount-MyWindowsImage"
     $MountMyWindowsImage = Mount-MyWindowsImage $BootWim
     $MountPath = $MountMyWindowsImage.Path
+    Write-Host -ForegroundColor DarkGray "MountPath: $MountPath"
     #=======================================================================
     #   WinRE
     #=======================================================================
@@ -221,42 +298,58 @@ Windows Registry Editor Version 5.00
         #=======================================================================
         #	Wallpaper
         #=======================================================================
+        Write-Host -ForegroundColor DarkGray "========================================================================="
+        Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) WinRE Wallpaper"
+        Write-Host -ForegroundColor Yellow "WinRE does not use the standard winpe.jpg and uses an all black winre.jpg"
+        Write-Host -ForegroundColor Yellow "This step adds the default WinPE Wallpaper into WinRE"
+
         $Wallpaper = '/9j/4AAQSkZJRgABAQEAYABgAAD/2wBDAAIBAQIBAQICAgICAgICAwUDAwMDAwYEBAMFBwYHBwcGBwcICQsJCAgKCAcHCg0KCgsMDAwMBwkODw0MDgsMDAz/2wBDAQICAgMDAwYDAwYMCAcIDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAz/wAARCAAgACADASIAAhEBAxEB/8QAHwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtRAAAgEDAwIEAwUFBAQAAAF9AQIDAAQRBRIhMUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkKFhcYGRolJicoKSo0NTY3ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqDhIWGh4iJipKTlJWWl5iZmqKjpKWmp6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uHi4+Tl5ufo6erx8vP09fb3+Pn6/8QAHwEAAwEBAQEBAQEBAQAAAAAAAAECAwQFBgcICQoL/8QAtREAAgECBAQDBAcFBAQAAQJ3AAECAxEEBSExBhJBUQdhcRMiMoEIFEKRobHBCSMzUvAVYnLRChYkNOEl8RcYGRomJygpKjU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6goOEhYaHiImKkpOUlZaXmJmaoqOkpaanqKmqsrO0tba3uLm6wsPExcbHyMnK0tPU1dbX2Nna4uPk5ebn6Onq8vP09fb3+Pn6/9oADAMBAAIRAxEAPwD5vooor+sD+KwooooAKKKKACiiigD/2Q=='
         [byte[]]$Bytes = [convert]::FromBase64String($Wallpaper)
         [System.IO.File]::WriteAllBytes("$env:TEMP\winre.jpg",$Bytes)
         [System.IO.File]::WriteAllBytes("$env:TEMP\winpe.jpg",$Bytes)
 
-        robocopy "$env:TEMP" "$MountPath\Windows\System32" winpe.jpg /ndl /njh /njs /r:0 /w:0 /b /np
-        robocopy "$env:TEMP" "$MountPath\Windows\System32" winre.jpg /ndl /njh /njs /r:0 /w:0 /b /np
+        Write-Host -ForegroundColor DarkGray "Injecting $MountPath\Windows\System32\winpe.jpg"
+        $null = robocopy "$env:TEMP" "$MountPath\Windows\System32" winpe.jpg /b /ndl /np /r:0 /w:0 /xj /LOG+:$TemplateLogs\Robocopy.log
+
+        Write-Host -ForegroundColor DarkGray "Injecting $MountPath\Windows\System32\winre.jpg"
+        $null = robocopy "$env:TEMP" "$MountPath\Windows\System32" winre.jpg /b /ndl /np /r:0 /w:0 /xj /LOG+:$TemplateLogs\Robocopy.log
         #=======================================================================
         #	Wireless
         #=======================================================================
-        Write-Verbose "Adding Wireless support to $MountPath"
-        if (Test-Path "$env:SystemRoot\System32\dmcmnutils.dll") {
-            robocopy "$env:SystemRoot\System32" "$MountPath\Windows\System32" dmcmnutils.dll /ndl /njh /njs /r:0 /w:0 /b /np
-        } else {
-            Write-Warning "Could not find $env:SystemRoot\System32\dmcmnutils.dll"
-        }
-        
-<#         if (Test-Path "$env:SystemRoot\System32\mdmpostprocessevaluator.dll") {
-            robocopy "$env:SystemRoot\System32" "$MountPath\Windows\System32" mdmpostprocessevaluator.dll /ndl /njh /njs /r:0 /w:0 /b
-        } else {
-            Write-Warning "Could not find $env:SystemRoot\System32\mdmpostprocessevaluator.dll"
-        } #>
+        Write-Host -ForegroundColor DarkGray "========================================================================="
+        Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) WinRE Wireless"
+        Write-Host -ForegroundColor Yellow "These files need to be added to support Wireless"
 
-        if (Test-Path "$env:SystemRoot\System32\mdmpostprocessevaluator.dll") {
-            robocopy "$env:SystemRoot\System32" "$MountPath\Windows\System32" mdmpostprocessevaluator.dll /ndl /njh /njs /r:0 /w:0 /b /np
-        } else {
-            Write-Warning "Could not find $env:SystemRoot\System32\mdmpostprocessevaluator.dll"
+        $SourceFile = "$env:SystemRoot\System32\dmcmnutils.dll"
+        Write-Host -ForegroundColor DarkGray $SourceFile
+        if (Test-Path $SourceFile) {
+            Write-Host -ForegroundColor DarkGray $SourceFile
+            $null = robocopy "$env:SystemRoot\System32" "$MountPath\Windows\System32" dmcmnutils.dll /b /ndl /np /r:0 /w:0 /xj /LOG+:$TemplateLogs\Robocopy.log
+        }
+        else {
+            Write-Warning "Could not find $SourceFile"
         }
 
-        if (Test-Path "$env:SystemRoot\System32\mdmregistration.dll") {
-            robocopy "$env:SystemRoot\System32" "$MountPath\Windows\System32" mdmregistration.dll /ndl /njh /njs /r:0 /w:0 /b /np
-        } else {
-            Write-Warning "Could not find $env:SystemRoot\System32\mdmregistration.dll"
+        $SourceFile = "$env:SystemRoot\System32\mdmpostprocessevaluator.dll"
+        if (Test-Path $SourceFile) {
+            Write-Host -ForegroundColor DarkGray $SourceFile
+            $null = robocopy "$env:SystemRoot\System32" "$MountPath\Windows\System32" mdmpostprocessevaluator.dll /b /ndl /np /r:0 /w:0 /xj /LOG+:$TemplateLogs\Robocopy.log
+        }
+        else {
+            Write-Warning "Could not find $SourceFile"
         }
 
-        Save-WebFile -SourceUrl 'https://github.com/okieselbach/Helpers/raw/master/WirelessConnect/WirelessConnect/bin/Release/WirelessConnect.exe' -DestinationDirectory "$MountPath\Windows"
+        $SourceFile = "$env:SystemRoot\System32\mdmregistration.dll"
+        if (Test-Path $SourceFile) {
+            Write-Host -ForegroundColor DarkGray $SourceFile
+            $null = robocopy "$env:SystemRoot\System32" "$MountPath\Windows\System32" mdmregistration.dll /b /ndl /np /r:0 /w:0 /xj /LOG+:$TemplateLogs\Robocopy.log
+        }
+        else {
+            Write-Warning "Could not find $SourceFile"
+        }
+
+        Write-Host -ForegroundColor DarkGray "Downloading https://github.com/okieselbach/Helpers/raw/master/WirelessConnect/WirelessConnect/bin/Release/WirelessConnect.exe"
+        Save-WebFile -SourceUrl 'https://github.com/okieselbach/Helpers/raw/master/WirelessConnect/WirelessConnect/bin/Release/WirelessConnect.exe' -DestinationDirectory "$MountPath\Windows" | Out-Null
     }
     #=======================================================================
     #   Packages
@@ -287,162 +380,250 @@ Windows Registry Editor Version 5.00
     #=======================================================================
     #   Install Default en-us Language
     #=======================================================================
+    Write-Host -ForegroundColor DarkGray "========================================================================="
+    Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Adding default en-US ADK Packages"
+    Write-Host -ForegroundColor Yellow "Dism Function: Add-WindowsPackage"
     $Lang = 'en-us'
 
-    if (Test-Path "$WinPEOCs\$Lang\lp.cab") {
-        Write-Verbose -Verbose "$WinPEOCs\$Lang\lp.cab"
-        Add-WindowsPackage -Path $MountPath -PackagePath "$WinPEOCs\$Lang\lp.cab" -Verbose
+    foreach ($Package in $OCPackages) {
+        $SourceFile = "$WinPEOCs\WinPE-$Package.cab"
+        if (Test-Path $SourceFile) {
+            Write-Host -ForegroundColor DarkGray "$SourceFile"
+            $PackageName = "Add-WindowsPackage-WinPE-$Package"
+            $CurrentLog = "$TemplateLogs\$((Get-Date).ToString('yyyy-MM-dd-HHmmss'))-$PackageName.log"
+            
+            Try {Add-WindowsPackage -Path $MountPath -PackagePath $SourceFile -LogPath "$CurrentLog" | Out-Null}
+            Catch {Write-Host -ForegroundColor Red $CurrentLog}
+        }
+    }
+
+    $SourceFile = "$WinPEOCs\$Lang\lp.cab"
+    if (Test-Path $SourceFile) {
+        Write-Host -ForegroundColor DarkGray "$SourceFile"
+        $PackageName = "Add-WindowsPackage-WinPE-lp_$Lang"
+        $CurrentLog = "$TemplateLogs\$((Get-Date).ToString('yyyy-MM-dd-HHmmss'))-$PackageName.log"
+
+        Try {Add-WindowsPackage -Path $MountPath -PackagePath $SourceFile -LogPath "$CurrentLog" | Out-Null}
+        Catch {Write-Host -ForegroundColor Red $CurrentLog}
+    }
+    else {
+        Write-Warning "Could not find $SourceFile"
     }
 
     foreach ($Package in $OCPackages) {
-        if (Test-Path "$WinPEOCs\WinPE-$Package.cab") {
-            Write-Verbose -Verbose "$WinPEOCs\WinPE-$Package.cab"
-            Add-WindowsPackage -Path $MountPath -PackagePath "$WinPEOCs\WinPE-$Package.cab" -Verbose
-        }
-
-        if (Test-Path "$WinPEOCs\$Lang\WinPE-$Package`_$Lang.cab") {
-            Write-Verbose -Verbose "$WinPEOCs\$Lang\WinPE-$Package`_$Lang.cab"
-            Add-WindowsPackage -Path $MountPath -PackagePath "$WinPEOCs\$Lang\WinPE-$Package`_$Lang.cab" -Verbose
+        $SourceFile = "$WinPEOCs\$Lang\WinPE-$Package`_$Lang.cab"
+        if (Test-Path $SourceFile) {
+            Write-Host -ForegroundColor DarkGray "$SourceFile"
+            $PackageName = "Add-WindowsPackage-WinPE-$Package`_$Lang"
+            $CurrentLog = "$TemplateLogs\$((Get-Date).ToString('yyyy-MM-dd-HHmmss'))-$PackageName.log"
+            
+            Try {Add-WindowsPackage -Path $MountPath -PackagePath $SourceFile -LogPath "$CurrentLog" | Out-Null}
+            Catch {Write-Host -ForegroundColor Red $CurrentLog}
         }
     }
     #=======================================================================
-    #   Copy DISM Module
-    #=======================================================================
-    #robocopy "$MountPath\Windows\System32\WindowsPowerShell\v1.0\Modules\Dism" "$MountPath\Program Files\WindowsPowerShell\Modules\Dism" *.* /e /ndl /nfl /np /njh /njs /r:0 /w:0 /b
-    #=======================================================================
     #   Save-WindowsImage
     #=======================================================================
-    Save-WindowsImage -Path $MountPath
+    Write-Host -ForegroundColor DarkGray "========================================================================="
+    Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Save Windows Image"
+    Write-Host -ForegroundColor Yellow "Dism Function: Save-WindowsImage"
+
+    $CurrentLog = "$TemplateLogs\$((Get-Date).ToString('yyyy-MM-dd-HHmmss'))-Save-WindowsImage.log"
+    Save-WindowsImage -Path $MountPath -LogPath $CurrentLog | Out-Null
     #=======================================================================
     #   Install Selected Language
     #=======================================================================
     if ($Language -contains '*') {
-        Write-Verbose -Verbose "Installing all available ADK Languages"
         $Language = Get-ChildItem $WinPEOCs -Directory | Where-Object {$_.Name -ne 'en-us'} | Select-Object -ExpandProperty Name
     }
 
     foreach ($Lang in $Language) {
-        if (Test-Path "$WinPEOCs\$Lang\lp.cab") {
-            Write-Verbose -Verbose "$WinPEOCs\$Lang\lp.cab"
-            Add-WindowsPackage -Path $MountPath -PackagePath "$WinPEOCs\$Lang\lp.cab" -Verbose
+        Write-Host -ForegroundColor DarkGray "========================================================================="
+        Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Adding $Lang ADK Packages"
+        Write-Host -ForegroundColor Yellow "Dism Function: Add-WindowsPackage"
+
+        $SourceFile = "$WinPEOCs\$Lang\lp.cab"
+        if (Test-Path $SourceFile) {
+            Write-Host -ForegroundColor DarkGray "$SourceFile"
+            $PackageName = "Add-WindowsPackage-WinPE-lp_$Lang"
+            $CurrentLog = "$TemplateLogs\$((Get-Date).ToString('yyyy-MM-dd-HHmmss'))-$PackageName.log"
+    
+            Try {Add-WindowsPackage -Path $MountPath -PackagePath $SourceFile -LogPath "$CurrentLog" | Out-Null}
+            Catch {Write-Host -ForegroundColor Red $CurrentLog}
+        }
+        else {
+            Write-Warning "Could not find $SourceFile"
         }
 
         foreach ($Package in $OCPackages) {
-            if (Test-Path "$WinPEOCs\$Lang\WinPE-$Package`_$Lang.cab") {
-                Write-Verbose -Verbose "$WinPEOCs\$Lang\WinPE-$Package`_$Lang.cab"
-                Add-WindowsPackage -Path $MountPath -PackagePath "$WinPEOCs\$Lang\WinPE-$Package`_$Lang.cab" -Verbose
+            $SourceFile = "$WinPEOCs\$Lang\WinPE-$Package`_$Lang.cab"
+            if (Test-Path $SourceFile) {
+                Write-Host -ForegroundColor DarkGray "$SourceFile"
+                $PackageName = "Add-WindowsPackage-WinPE-$Package`_$Lang"
+                $CurrentLog = "$TemplateLogs\$((Get-Date).ToString('yyyy-MM-dd-HHmmss'))-$PackageName.log"
+                
+                Try {Add-WindowsPackage -Path $MountPath -PackagePath $SourceFile -LogPath "$CurrentLog" | Out-Null}
+                Catch {Write-Host -ForegroundColor Red $CurrentLog}
             }
         }
-        Save-WindowsImage -Path $MountPath
+        Write-Host -ForegroundColor DarkGray "========================================================================="
+        Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Save Windows Image"
+        Write-Host -ForegroundColor Yellow "Dism Function: Save-WindowsImage"
+        $CurrentLog = "$TemplateLogs\$((Get-Date).ToString('yyyy-MM-dd-HHmmss'))-Save-WindowsImage.log"
+        Save-WindowsImage -Path $MountPath -LogPath $CurrentLog | Out-Null
     }
     #=======================================================================
     #   International Settings
     #=======================================================================
     if ($SetAllIntl -or $SetInputLocale) {
-        Write-Verbose -Verbose "Current Get-Intl Settings"
+        Write-Host -ForegroundColor DarkGray "========================================================================="
+        Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Current Get-Intl Settings"
         Dism /image:"$MountPath" /Get-Intl
     }
 
     if ($SetAllIntl) {
-        Write-Verbose -Verbose "Applying Set-AllIntl"
+        Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Applying Set-AllIntl"
         Dism /image:"$MountPath" /Set-AllIntl:$SetAllIntl
     }
 
     if ($SetInputLocale) {
-        Write-Verbose -Verbose "Applying Set-InputLocale"
+        Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Applying Set-InputLocale"
         Dism /image:"$MountPath" /Set-InputLocale:$SetInputLocale
     }
 
     if ($SetAllIntl -or $SetInputLocale) {
-        Write-Verbose -Verbose "Updated Get-Intl Settings"
+        Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Updated Get-Intl Settings"
         Dism /image:"$MountPath" /Get-Intl
     }
     #=======================================================================
-    #	cURL
+    #	Additional Files
     #=======================================================================
-    Write-Verbose "Adding curl.exe to $MountPath"
-    if (Test-Path "$env:SystemRoot\System32\curl.exe") {
-        robocopy "$env:SystemRoot\System32" "$MountPath\Windows\System32" curl.exe /ndl /nfl /njh /njs /r:0 /w:0 /b /np
-    } else {
-        Write-Warning "Could not find $env:SystemRoot\System32\curl.exe"
-        Write-Warning "You must be using an old version of Windows"
+    Write-Host -ForegroundColor DarkGray "========================================================================="
+    Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) WinPE Additional Files"
+    #=======================================================================
+    #	curl.exe
+    #=======================================================================
+    Write-Host -ForegroundColor Yellow "cURL is required for downloading files in WinPE"
+    $SourceFile = "$env:SystemRoot\System32\curl.exe"
+    Write-Host -ForegroundColor DarkGray $SourceFile
+    if (Test-Path $SourceFile) {
+        $null = robocopy "$env:SystemRoot\System32" "$MountPath\Windows\System32" curl.exe /b /ndl /np /r:0 /w:0 /xj /LOG+:$TemplateLogs\Robocopy.log
+    }
+    else {
+        Write-Warning "Could not find $SourceFile"
     }
     #=======================================================================
-    #	21.3.24 Setx
-    #   Required for Chocolatey support
+    #	setx.exe
     #=======================================================================
-    Write-Verbose "Adding setx.exe to $MountPath"
-    if (Test-Path "$env:SystemRoot\System32\setx.exe") {
-        robocopy "$env:SystemRoot\System32" "$MountPath\Windows\System32" setx.exe /ndl /nfl /njh /njs /r:0 /w:0 /b /np
-    } else {
-        Write-Warning "Could not find $env:SystemRoot\System32\setx.exe"
+    Write-Host -ForegroundColor Yellow "Setx is required for setting System Variables"
+    $SourceFile = "$env:SystemRoot\System32\setx.exe"
+    if (Test-Path $SourceFile) {
+        Write-Host -ForegroundColor DarkGray $SourceFile
+        $null = robocopy "$env:SystemRoot\System32" "$MountPath\Windows\System32" setx.exe /b /ndl /np /r:0 /w:0 /xj /LOG+:$TemplateLogs\Robocopy.log
+    }
+    else {
+        Write-Warning "Could not find $SourceFile"
     }
     #=======================================================================
-    #	21.4.9
-    #   MSInfo32
+    #	msinfo32.exe
     #=======================================================================
-    Write-Verbose "Adding msinfo32.exe to $MountPath"
-    if (Test-Path "$env:SystemRoot\System32\msinfo32.exe") {
-        robocopy "$env:SystemRoot\System32" "$MountPath\Windows\System32" msinfo32.exe /ndl /nfl /njh /njs /r:0 /w:0 /b /np
-        robocopy "$env:SystemRoot\System32" "$MountPath\Windows\System32" msinfo32.exe.mui /s /ndl /nfl /njh /njs /r:0 /w:0 /b /np
-        
-    } else {
-        Write-Warning "Could not find $env:SystemRoot\System32\msinfo32.exe"
+    Write-Host -ForegroundColor Yellow "MSInfo32 is helpful for verifying Hardware in WinPE"
+    $SourceFile = "$env:SystemRoot\System32\msinfo32.exe"
+    if (Test-Path $SourceFile) {
+        Write-Host -ForegroundColor DarkGray $SourceFile
+        Write-Host -ForegroundColor DarkGray "$env:SystemRoot\System32\*\msinfo32.exe.mui"
+        $null = robocopy "$env:SystemRoot\System32" "$MountPath\Windows\System32" msinfo32.exe /b /ndl /np /r:0 /w:0 /xj /LOG+:$TemplateLogs\Robocopy.log
+        $null = robocopy "$env:SystemRoot\System32" "$MountPath\Windows\System32" msinfo32.exe.mui /s /b /ndl /np /r:0 /w:0 /xj /LOG+:$TemplateLogs\Robocopy.log
+    }
+    else {
+        Write-Warning "Could not find $SourceFile"
     }
     #=======================================================================
-    #	OSK 21.3.25.2
+    #	osk.exe
     #=======================================================================
-    Write-Verbose "Adding On Screen Keyboard support to $MountPath"
-    if (Test-Path "$env:SystemRoot\System32\osk.exe") {
-        robocopy "$env:SystemRoot\System32" "$MountPath\Windows\System32" osk.exe /ndl /nfl /njh /njs /r:0 /w:0 /b /np
-    } else {
-        Write-Warning "Could not find $env:SystemRoot\System32\osk.exe"
+    Write-Host -ForegroundColor Yellow "OSK adds WinPE On Screen Keyboard"
+    $SourceFile = "$env:SystemRoot\System32\osk.exe"
+    if (Test-Path $SourceFile) {
+        Write-Host -ForegroundColor DarkGray $SourceFile
+        $null = robocopy "$env:SystemRoot\System32" "$MountPath\Windows\System32" osk.exe /b /ndl /np /r:0 /w:0 /xj /LOG+:$TemplateLogs\Robocopy.log
+        $null = robocopy "$env:SystemRoot\System32" "$MountPath\Windows\System32" osksupport.dll /s /b /ndl /np /r:0 /w:0 /xj /LOG+:$TemplateLogs\Robocopy.log
     }
-    if (Test-Path "$env:SystemRoot\System32\osksupport.dll") {
-        robocopy "$env:SystemRoot\System32" "$MountPath\Windows\System32" osksupport.dll /ndl /nfl /njh /njs /r:0 /w:0 /b /np
-    } else {
-        Write-Warning "Could not find $env:SystemRoot\System32\osksupport.dll"
+    else {
+        Write-Warning "Could not find $SourceFile"
+    }
+    $SourceFile = "$env:SystemRoot\System32\osksupport.dll"
+    if (Test-Path $SourceFile) {
+        Write-Host -ForegroundColor DarkGray $SourceFile
+        $null = robocopy "$env:SystemRoot\System32" "$MountPath\Windows\System32" osksupport.dll /b /ndl /np /r:0 /w:0 /xj /LOG+:$TemplateLogs\Robocopy.log
+    }
+    else {
+        Write-Warning "Could not find $SourceFile"
     }
     #=======================================================================
     #   Adding Microsoft DaRT
     #=======================================================================
-    if (Test-Path "C:\Program Files\Microsoft DaRT\v10\Toolsx64.cab") {
-        Write-Verbose "Adding Microsoft DaRT"
-        expand.exe "C:\Program Files\Microsoft DaRT\v10\Toolsx64.cab" -F:*.* "$MountPath" | Out-Null
+    Write-Host -ForegroundColor DarkGray "========================================================================="
+    Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Microsoft DaRT"
+    $SourceFile = "C:\Program Files\Microsoft DaRT\v10\Toolsx64.cab"
+    if (Test-Path $SourceFile) {
+        Write-Host -ForegroundColor DarkGray $SourceFile
+        expand.exe "$SourceFile" -F:*.* "$MountPath" | Out-Null
 
-        if (Test-Path "C:\Program Files\Microsoft Deployment Toolkit\Templates\DartConfig8.dat") {
-            Write-Verbose "Adding Microsoft DaRT Config"
-            Copy-Item -Path "C:\Program Files\Microsoft Deployment Toolkit\Templates\DartConfig8.dat" -Destination "$MountPath\Windows\System32\DartConfig.dat" -Force
+        $SourceFile = "C:\Program Files\Microsoft Deployment Toolkit\Templates\DartConfig8.dat"
+        if (Test-Path $SourceFile) {
+            Write-Host -ForegroundColor DarkGray $SourceFile
+            Copy-Item -Path $SourceFile -Destination "$MountPath\Windows\System32\DartConfig.dat" -Force
         }
+        else {
+            Write-Warning "Could not find $SourceFile"
+        }
+    }
+    else {
+        Write-Warning "Could not find $SourceFile"
     }
     #=======================================================================
     #	Save-WindowsImage
     #=======================================================================
-    Save-WindowsImage -Path $MountPath
+    Write-Host -ForegroundColor DarkGray "========================================================================="
+    Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Save Windows Image"
+    Write-Host -ForegroundColor Yellow "Dism Function: Save-WindowsImage"
+
+    $CurrentLog = "$TemplateLogs\$((Get-Date).ToString('yyyy-MM-dd-HHmmss'))-Save-WindowsImage.log"
+    Save-WindowsImage -Path $MountPath -LogPath $CurrentLog | Out-Null
     #=======================================================================
     #	PowerShell Execution Policy
     #=======================================================================
-    Write-Verbose "Setting PowerShell ExecutionPolicy to Bypass in $MountPath"
-    Set-WindowsImageExecutionPolicy -Path $MountPath -ExecutionPolicy Bypass
+    Write-Host -ForegroundColor DarkGray "========================================================================="
+    Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Set WinPE PowerShell ExecutionPolicy to Bypass"
+    Write-Host -ForegroundColor Yellow "OSD Function: Set-WindowsImageExecutionPolicy"
+    Set-WindowsImageExecutionPolicy -Path $MountPath -ExecutionPolicy Bypass | Out-Null
     #=======================================================================
     #   Enable PowerShell Gallery
     #=======================================================================
-    Write-Verbose "Enabling PowerShell Gallery support in $MountPath"
-    Enable-PEWindowsImagePSGallery -Path $MountPath
+    Write-Host -ForegroundColor DarkGray "========================================================================="
+    Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Enable WinPE PowerShell Gallery"
+    Write-Host -ForegroundColor Yellow "OSD Function: Enable-PEWindowsImagePSGallery"
+    Enable-PEWindowsImagePSGallery -Path $MountPath | Out-Null
     #=======================================================================
     #   Remove winpeshl
     #=======================================================================
-    if (Test-Path "$MountPath\Windows\System32\winpeshl.ini") {
-        Write-Verbose "Removing $MountPath\Windows\System32\winpeshl.ini"
-        Remove-Item -Path "$MountPath\Windows\System32\winpeshl.ini" -Force
+    $SourceFile = "$MountPath\Windows\System32\winpeshl.ini"
+    if (Test-Path $SourceFile) {
+        Write-Host -ForegroundColor DarkGray "========================================================================="
+        Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Removing WinRE $SourceFile"
+        Write-Host -ForegroundColor Yellow "This file is present when using WinRE.wim and needs to be removed for WinPE compatibility"
+        Remove-Item -Path $SourceFile -Force
     }
     #=======================================================================
     #   Registry Fixes
     #=======================================================================
+    Write-Host -ForegroundColor DarkGray "========================================================================="
+    Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Modifying WinPE CMD and PowerShell Console settings"
+    Write-Host -ForegroundColor Yellow "This increases the buffer and sets the window metrics and default fonts"
     $RegistryConsole | Out-File -FilePath "$env:TEMP\RegistryConsole.reg" -Encoding ascii -Force
 
     #Mount Registry
-    reg load HKLM\Default "$MountPath\Windows\System32\Config\DEFAULT"
+    reg load HKLM\Default "$MountPath\Windows\System32\Config\DEFAULT" | Out-Null
     reg import "$env:TEMP\RegistryConsole.reg" | Out-Null
 
     #Scaling
@@ -452,36 +633,59 @@ Windows Registry Editor Version 5.00
     reg add "HKLM\Default\Control Panel\Desktop" /v DpiScalingVer /t REG_DWORD /d 0x00001018 /f #>
 
     #Unload Registry
-    reg unload HKLM\Default
+    reg unload HKLM\Default | Out-Null
     #=======================================================================
     #   Save WIM
     #=======================================================================
+    Write-Host -ForegroundColor DarkGray "========================================================================="
+    Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Dismounting and Saving Windows Image"
+    Write-Host -ForegroundColor Yellow "OSD Function: Dismount-MyWindowsImage"
     $MountMyWindowsImage | Dismount-MyWindowsImage -Save
-
+    #=======================================================================
+    #   Save WIM
+    #=======================================================================
     if ($PSBoundParameters.ContainsKey('WinRE')) {
+        Write-Host -ForegroundColor DarkGray "========================================================================="
+        Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Exporting WinRE Boot.wim"
         $BootWim = Join-Path $DestinationSources 'boot.wim'
         $WinREWim = Join-Path $DestinationSources 'winre.wim'
 
         if (Test-Path $BootWim) {
             Remove-Item -Path $BootWim -Force -ErrorAction Stop | Out-Null
         }
-        Export-WindowsImage -SourceImagePath $WinREWim -SourceIndex 1 -DestinationImagePath $BootWim -DestinationName 'Microsoft Windows PE (x64)'
+        Write-Host -ForegroundColor Yellow "Dism Function: Export-WindowsImage"
+        $CurrentLog = "$TemplateLogs\$((Get-Date).ToString('yyyy-MM-dd-HHmmss'))-Export-WindowsImage.log"
+        Export-WindowsImage -SourceImagePath $WinREWim -SourceIndex 1 -DestinationImagePath $BootWim -DestinationName 'Microsoft Windows PE (x64)' -LogPath $CurrentLog | Out-Null
         Remove-Item -Path $WinREWim -Force -ErrorAction Stop | Out-Null
     }
     #=======================================================================
     #   Directories
     #=======================================================================
-    if (-NOT (Test-Path "$TemplatePath\Autopilot\Profiles")) {
-        New-Item -Path "$TemplatePath\Autopilot\Profiles" -ItemType Directory -Force | Out-Null
+    Write-Host -ForegroundColor DarkGray "========================================================================="
+    Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Create Additional Directories"
+
+    $SourcePath = "$TemplatePath\Autopilot\Profiles"
+    if (-NOT (Test-Path $SourcePath)) {
+        Write-Host -ForegroundColor DarkGray $SourcePath
+        New-Item -Path $SourcePath -ItemType Directory -Force | Out-Null
     }
-    if (-NOT (Test-Path "$TemplatePath\DriverPacks\Dell")) {
-        New-Item -Path "$TemplatePath\DriverPacks\Dell" -ItemType Directory -Force | Out-Null
+
+    $SourcePath = "$TemplatePath\DriverPacks\Dell"
+    if (-NOT (Test-Path $SourcePath)) {
+        Write-Host -ForegroundColor DarkGray $SourcePath
+        New-Item -Path $SourcePath -ItemType Directory -Force | Out-Null
     }
-    if (-NOT (Test-Path "$TemplatePath\DriverPacks\HP")) {
-        New-Item -Path "$TemplatePath\DriverPacks\HP" -ItemType Directory -Force | Out-Null
+
+    $SourcePath = "$TemplatePath\DriverPacks\HP"
+    if (-NOT (Test-Path $SourcePath)) {
+        Write-Host -ForegroundColor DarkGray $SourcePath
+        New-Item -Path $SourcePath -ItemType Directory -Force | Out-Null
     }
-    if (-NOT (Test-Path "$TemplatePath\DriverPacks\Lenovo")) {
-        New-Item -Path "$TemplatePath\DriverPacks\Lenovo" -ItemType Directory -Force | Out-Null
+
+    $SourcePath = "$TemplatePath\DriverPacks\Lenovo"
+    if (-NOT (Test-Path $SourcePath)) {
+        Write-Host -ForegroundColor DarkGray $SourcePath
+        New-Item -Path $SourcePath -ItemType Directory -Force | Out-Null
     }
     #=======================================================================
     #   Restore VerbosePreference
@@ -505,6 +709,7 @@ Windows Registry Editor Version 5.00
     Write-Host -ForegroundColor Yellow      "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) $($MyInvocation.MyCommand.Name) " -NoNewline
     Write-Host -ForegroundColor Cyan        "Completed in $($TemplateTimeSpan.ToString("mm' minutes 'ss' seconds'"))"
     Write-Host -ForegroundColor Cyan        "OSDCloud Template created at $TemplatePath"
-    Write-Host -ForegroundColor Cyan        "Get-OSDCloud.template will return $TemplatePath"
+    Write-Host -ForegroundColor DarkGray    "========================================================================="
+    Stop-Transcript
     #=======================================================================
 }

@@ -1,0 +1,1 @@
+﻿Import-Clixml "$PSScriptRoot\Catalog.xml" | Select-Object -Property CreationDate,KBNumber,Title,UpdateOS,UpdateBuild,UpdateArch,FileName,Size,FileUri,Hash,AdditionalHash | Sort-Object -Property CreationDate -Descending | Export-Clixml "$PSScriptRoot\Catalogx.xml"
