@@ -160,6 +160,7 @@ FunctionsToExport =
 'Start-OOBE.settings',
 'Start-OOBE.wifi',
 'Edit-OSDCloud.winpe',#OSDCLOUD
+'Add-OSDCloudProvPackage',
 'Find-OSDCloudOfflineFile',
 'Find-OSDCloudOfflinePath',
 'Find-OSDCloudFile',
@@ -174,6 +175,7 @@ FunctionsToExport =
 'Save-OSDCloudOfflineModules',
 'Save-OSDCloud.usb',
 'Select-OSDCloudAutopilotFile',
+'Select-OSDCloudProvPackage',
 'Select-OSDCloudODTFile',
 'Set-OSDCloud.workspace',
 'Start-OSDCloud',

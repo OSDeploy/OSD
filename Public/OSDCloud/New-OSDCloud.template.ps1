@@ -474,6 +474,9 @@ Windows Registry Editor Version 5.00
     if (-NOT (Test-Path "$TemplatePath\Autopilot\Profiles")) {
         New-Item -Path "$TemplatePath\Autopilot\Profiles" -ItemType Directory -Force | Out-Null
     }
+    if (-NOT (Test-Path "$TemplatePath\PPKG")) {
+        New-Item -Path "$TemplatePath\PPKG" -ItemType Directory -Force | Out-Null
+    }
     if (-NOT (Test-Path "$TemplatePath\DriverPacks\Dell")) {
         New-Item -Path "$TemplatePath\DriverPacks\Dell" -ItemType Directory -Force | Out-Null
     }
