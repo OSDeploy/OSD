@@ -72,7 +72,7 @@ function LoadForm {
         <Grid>
             <StackPanel>
                 <Label Name="Title"
-                Content = "OSDCloud"
+                Content = "OSDCloudGUI"
                 HorizontalAlignment = "Left" Margin = "20,10,0,0" VerticalAlignment = "Top" Width = "500" FontSize = "30"/>
             </StackPanel>
 
@@ -298,6 +298,7 @@ function SetDefaultValues {
     #$NotesTextBox.IsEnabled = $false
     $ImageIndexTextBox.IsEnabled = $false
     $ModelTextBox.IsEnabled = $false
+    $PostConfigComboBox.IsEnabled = $false
 }
 SetDefaultValues
 #=======================================================================
