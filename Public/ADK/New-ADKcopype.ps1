@@ -56,15 +56,15 @@ function New-ADKcopype {
         New-Item -Path $DestinationFirmwareFiles -ItemType Directory -Force -ErrorAction Stop | Out-Null
     }
 
-    $DestinationSources = Join-Path $Destination 'sources'
+    $DestinationSources = Join-Path $Destination 'media\sources'
     if (-NOT (Test-Path $DestinationSources)) {
         New-Item -Path $DestinationSources -ItemType Directory -Force -ErrorAction Stop | Out-Null
     }
 
     xcopy /herky "$AdkPathWinPEMedia" "$DestinationMedia\"
 
-    copy "$AdkWimSourcePath" "$DestinationMedia\sources\boot.wim"
-    copy "$AdkPathOscdimg\efisys.bin" "$Destination\$DestinationFirmwareFiles"
-    copy "$AdkPathOscdimg\etfsboot.com" "$Destination\$DestinationFirmwareFiles"
+    Copy-Item "$AdkWimSourcePath" "$DestinationMedia\sources\boot.wim"
+    Copy-Item "$AdkPathOscdimg\efisys.bin" "$DestinationFirmwareFiles"
+    Copy-Item "$AdkPathOscdimg\etfsboot.com" "$DestinationFirmwareFiles"
     #=======================================================================
 }
