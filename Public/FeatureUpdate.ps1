@@ -1,4 +1,3 @@
-
 function Get-FeatureUpdate {
     [CmdletBinding()]
     param (
@@ -8,7 +7,7 @@ function Get-FeatureUpdate {
 
         [ValidateSet('21H1','20H2','2004','1909','1903','1809')]
         [Alias('Build')]
-        [string]$OSBuild = '20H2',
+        [string]$OSBuild = '21H1',
 
         [ValidateSet (
             'ar-sa','bg-bg','cs-cz','da-dk','de-de','el-gr',
@@ -25,7 +24,7 @@ function Get-FeatureUpdate {
     #=======================================================================
     #   Import Local FeatureUpdates
     #=======================================================================
-    $GetFeatureUpdate = Import-Clixml "$($MyInvocation.MyCommand.Module.ModuleBase)\Files\Catalogs\OSDCloud-FeatureUpdates.xml"
+    $GetFeatureUpdate = Import-Clixml "$($MyInvocation.MyCommand.Module.ModuleBase)\Catalogs\FeatureUpdate\Catalog.xml"
     #=======================================================================
     #   Filter Compatible
     #=======================================================================
@@ -56,13 +55,17 @@ function Get-FeatureUpdate {
 function Save-FeatureUpdate {
     [CmdletBinding()]
     param (
+        [Parameter(ValueFromPipeline = $true)]
+        [Alias ('DownloadFolder','Path')]
+        [string]$DownloadPath = 'C:\OSDCloud\OS',
+
         [ValidateSet('Retail','Volume')]
         [Alias('License')]
         [string]$OSLicense = 'Volume',
 
         [ValidateSet('21H1','20H2','2004','1909','1903','1809')]
         [Alias('Build')]
-        [string]$OSBuild = '20H2',
+        [string]$OSBuild = '21H1',
 
         [ValidateSet (
             'ar-sa','bg-bg','cs-cz','da-dk','de-de','el-gr',
@@ -74,11 +77,7 @@ function Save-FeatureUpdate {
             'uk-ua','zh-cn','zh-tw'
         )]
         [Alias('Culture','OSCulture')]
-        [string]$OSLanguage = 'en-us',
-        
-        [Parameter(ValueFromPipeline = $true)]
-        [Alias ('DownloadFolder','Path')]
-        [string]$DownloadPath = 'C:\OSDCloud\OS'
+        [string]$OSLanguage = 'en-us'
     )
     #=======================================================================
     #   Get-FeatureUpdate
@@ -95,7 +94,7 @@ function Save-FeatureUpdate {
             $SaveWebFile = Save-WebFile -SourceUrl $GetFeatureUpdate.FileUri -DestinationDirectory "$DownloadPath" -DestinationName $GetFeatureUpdate.FileName
 
             if (Test-Path $SaveWebFile.FullName) {
-                Return Get-Item $SaveWebFile.FullName
+                Get-Item $SaveWebFile.FullName
             }
             else {
                 Write-Warning "Could not download the Feature Update"

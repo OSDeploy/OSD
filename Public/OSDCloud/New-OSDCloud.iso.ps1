@@ -5,12 +5,11 @@ Creates an .iso file in the OSDCloud Workspace.  ADK is required
 .Description
 Creates an .iso file in the OSDCloud Workspace.  ADK is required
 
+.PARAMETER WorkspacePath
+Path of the OSDCloud Workspace. This is optional
+
 .LINK
 https://osdcloud.osdeploy.com
-
-.NOTES
-21.3.22     Function changed to creating ISO only, no editing of the WIM
-21.3.16     Initial Release
 #>
 function New-OSDCloud.iso {
     [CmdletBinding()]
@@ -22,6 +21,11 @@ function New-OSDCloud.iso {
     #	Start the Clock
     #=======================================================================
     $IsoStartTime = Get-Date
+    #=======================================================================
+    #   Header
+    #=======================================================================
+    Write-Host -ForegroundColor DarkGray "========================================================================="
+    Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) $($MyInvocation.MyCommand.Name)"
     #=======================================================================
     #	Block
     #=======================================================================
@@ -60,8 +64,8 @@ function New-OSDCloud.iso {
     #=======================================================================
     if (-NOT ($WorkspacePath)) {
         Write-Warning "You need to provide a path to your Workspace with one of the following examples"
-        Write-Warning "New-OSDCloud.iso -WorkspacePath C:\OSDCloud"
         Write-Warning "New-OSDCloud.workspace -WorkspacePath C:\OSDCloud"
+        Write-Warning "New-OSDCloud.iso -WorkspacePath C:\OSDCloud"
         Break
     }
 
@@ -80,11 +84,10 @@ function New-OSDCloud.iso {
     #=======================================================================
     #   Create ISO
     #=======================================================================
+    Write-Host -ForegroundColor DarkGray "========================================================================="
+    Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Creating ISO"
+    Write-Host -ForegroundColor Yellow "OSD Function: New-ADK.iso"
     $NewADKiso = New-ADK.iso -MediaPath "$WorkspacePath\Media" -isoFileName $isoFileName -isoLabel $isoLabel
-    #=======================================================================
-    #   Restore VerbosePreference
-    #=======================================================================
-    $VerbosePreference = $CurrentVerbosePreference
     #=======================================================================
     #	Complete
     #=======================================================================
@@ -93,16 +96,7 @@ function New-OSDCloud.iso {
     Write-Host -ForegroundColor DarkGray    "========================================================================="
     Write-Host -ForegroundColor Yellow      "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) $($MyInvocation.MyCommand.Name) " -NoNewline
     Write-Host -ForegroundColor Cyan        "Completed in $($IsoTimeSpan.ToString("mm' minutes 'ss' seconds'"))"
-    #=======================================================================
-    #	Return
-    #=======================================================================
     Write-Host -ForegroundColor Cyan        "OSDCloud ISO created at $($NewADKiso.FullName)"
-    #Write-Host -ForegroundColor Cyan        "OSDCloud ISO Get-Item is saved in the Global Variable OSDCloudISO"
-
-    #explorer $WorkspacePath
-    #Return (Get-Item -Path $NewADKiso.FullName | Select-Object -Property *)
-    #Return $NewADKiso.FullName
+    Write-Host -ForegroundColor DarkGray    "========================================================================="
     #=======================================================================
-
-
 }

@@ -10,9 +10,6 @@ Directory for the Workspace to contain the Media directory and the .iso file
 
 .LINK
 https://osdcloud.osdeploy.com
-
-.NOTES
-21.3.17     Initial Release
 #>
 function New-OSDCloud.workspace {
     [CmdletBinding()]
@@ -25,22 +22,34 @@ function New-OSDCloud.workspace {
     #=======================================================================
     $WorkspaceStartTime = Get-Date
     #=======================================================================
+    #   Header
+    #=======================================================================
+    Write-Host -ForegroundColor DarkGray "========================================================================="
+    Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) $($MyInvocation.MyCommand.Name)"
+    $Global:OSDRobocopyLogs = @()
+    #=======================================================================
     #	Blocks
     #=======================================================================
     Block-WinPE
     Block-StandardUser
-	  Block-NoCurl
+    Block-WindowsVersionNe10
+    Block-PowerShellVersionLt5
+    Block-NoCurl
     #=======================================================================
     #	Get-OSDCloud.template
     #=======================================================================
     if (!(Get-OSDCloud.template)) {
+        Write-Host -ForegroundColor DarkGray "========================================================================="
         Write-Warning "Setting up a new OSDCloud.template"
-        New-OSDCloud.template -Verbose
+        Write-Host -ForegroundColor DarkGray "========================================================================="
+        New-OSDCloud.template
     }
 
     $OSDCloudTemplate = Get-OSDCloud.template
     if (!($OSDCloudTemplate)) {
+        Write-Host -ForegroundColor DarkGray "========================================================================="
         Write-Warning "Something bad happened.  I have to go"
+        Write-Host -ForegroundColor DarkGray "========================================================================="
         Break
     }
     #=======================================================================
@@ -50,13 +59,47 @@ function New-OSDCloud.workspace {
         Set-OSDCloud.workspace -WorkspacePath $WorkspacePath -ErrorAction Stop | Out-Null
     }
     #=======================================================================
-    #	Setup Workspace
+    #	Create WorkspacePath
     #=======================================================================
     if (!(Test-Path $WorkspacePath)) {
         New-Item -Path $WorkspacePath -ItemType Directory -Force -ErrorAction Stop | Out-Null
     }
-    robocopy "$OSDCloudTemplate" "$WorkspacePath" *.* /e /xj /np /ndl /nfl /njh /njs /r:0 /w:0 /xf workspace.json
-    robocopy "$OSDCloudTemplate\Media" "$WorkspacePath\Media" *.* /mir /xj /np /ndl /nfl /njh /njs /r:0 /w:0
+    #=======================================================================
+    #   Logs
+    #=======================================================================
+    $WorkspaceLogs = "$WorkspacePath\Logs\Workspace"
+    Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Creating OSDCloud Workspace Logs at $WorkspaceLogs"
+
+    if (Test-Path $WorkspaceLogs) {
+        $null = Remove-Item -Path "$WorkspaceLogs\*" -Recurse -Force -ErrorAction Ignore | Out-Null
+    }
+    if (-NOT (Test-Path $WorkspaceLogs)) {
+        $null = New-Item -Path $WorkspaceLogs -ItemType Directory -Force | Out-Null
+    }
+
+    $Transcript = "$((Get-Date).ToString('yyyy-MM-dd-HHmmss'))-New-OSDCloud.workspace.log"
+    Start-Transcript -Path (Join-Path $WorkspaceLogs $Transcript) -ErrorAction Ignore
+    #=======================================================================
+    #	Copy WorkspacePath
+    #=======================================================================
+    Write-Host -ForegroundColor DarkGray "========================================================================="
+    Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Copying OSDCloud Template using Robocopy"
+    
+    Write-Host -ForegroundColor DarkGray "Source: $OSDCloudTemplate"
+    Write-Host -ForegroundColor DarkGray "Destination: $WorkspacePath"
+
+    $null = robocopy "$OSDCloudTemplate" "$WorkspacePath" *.* /e /b /ndl /np /r:0 /w:0 /xj /xf workspace.json /LOG+:$WorkspaceLogs\Robocopy.log
+    #=======================================================================
+    #	Mirror Media
+    #=======================================================================
+    Write-Host -ForegroundColor DarkGray "========================================================================="
+    Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Mirroring OSDCloud Template Media using Robocopy"
+    Write-Host -ForegroundColor Yellow 'Mirroring will replace any previous WinPE with a new Template WinPE'
+    
+    Write-Host -ForegroundColor DarkGray "Source: $OSDCloudTemplate\Media"
+    Write-Host -ForegroundColor DarkGray "Destination: $WorkspacePath\Media"
+
+    $null = robocopy "$OSDCloudTemplate\Media" "$WorkspacePath\Media" *.* /mir /b /ndl /np /r:0 /w:0 /xj /LOG+:$WorkspaceLogs\Robocopy.log
     #=======================================================================
     #	Complete
     #=======================================================================
@@ -65,10 +108,8 @@ function New-OSDCloud.workspace {
     Write-Host -ForegroundColor DarkGray    "========================================================================="
     Write-Host -ForegroundColor Yellow      "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) $($MyInvocation.MyCommand.Name) " -NoNewline
     Write-Host -ForegroundColor Cyan        "Completed in $($WorkspaceTimeSpan.ToString("mm' minutes 'ss' seconds'"))"
-    #=======================================================================
-    #	Return
-    #=======================================================================
     Write-Host -ForegroundColor Cyan        "OSDCloud Workspace created at $WorkspacePath"
-    Write-Host -ForegroundColor Cyan        "Get-OSDCloud.workspace will return your last used WorkspacePath"
+    Write-Host -ForegroundColor DarkGray    "========================================================================="
+    Stop-Transcript
     #=======================================================================
 }
