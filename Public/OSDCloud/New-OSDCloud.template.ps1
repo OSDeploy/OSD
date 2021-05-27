@@ -670,6 +670,11 @@ Windows Registry Editor Version 5.00
         New-Item -Path $SourcePath -ItemType Directory -Force | Out-Null
     }
 
+    $SourcePath = "$TemplatePath\PPKG"
+    if (-NOT (Test-Path $SourcePath)) {
+        New-Item -Path $SourcePath -ItemType Directory -Force | Out-Null
+    }
+
     $SourcePath = "$TemplatePath\DriverPacks\Dell"
     if (-NOT (Test-Path $SourcePath)) {
         Write-Host -ForegroundColor DarkGray $SourcePath

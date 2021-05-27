@@ -47,9 +47,11 @@ function Invoke-OSDCloud {
         OSLicense = $null
         OSImageIndex = 1
         Product = Get-MyComputerProduct
+        ProvPackages = $null
         Screenshot = $null
         SkipAutopilot = [bool]$false
         SkipODT = [bool]$false
+        SkipProvPackage = [bool]$false
         Test = [bool]$false
         TimeEnd = $null
         TimeSpan = $null
@@ -178,6 +180,33 @@ function Invoke-OSDCloud {
         }
         else {
             Write-Warning "AutopilotConfigurationFile.json will not be configured for this deployment"
+        }
+    }
+    #=======================================================================
+    #	Provisioning Packages
+    #=======================================================================
+    if ($OSDCloud.SkipProvPackage -ne $true) {
+        Write-Host -ForegroundColor DarkGray "========================================================================="
+        Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Provisioning Packages Configuration"
+
+        if ($OSDCloud.ProvPackages) {
+            Write-Host -ForegroundColor DarkGray "Provisioning Packages already defined by variable"
+        }
+        else {
+            if ($OSDCloud.ZTI -eq $true) {
+                Write-Host -ForegroundColor DarkGray "Skip Provisioning Packages selection in ZTI"
+            }
+            else {
+                $OSDCloud.ProvPackages = Select-OSDCloudProvPackage
+            }
+        }
+
+        if ($OSDCloud.ProvPackages) {
+            Write-Host -ForegroundColor Cyan "OSDCloud will apply the following Provisioning Packages"
+            $OSDCloud.ProvPackages | Select-Object Name,Fullname | Format-Table
+        }
+        else {
+            Write-Warning "Provisioning Packages will not be configured for this deployment"
         }
     }
     #=======================================================================

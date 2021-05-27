@@ -105,6 +105,12 @@ function Edit-OSDCloud.winpe {
         robocopy "$WorkspacePath\Autopilot" "$MountPath\OSDCloud\Autopilot" *.* /mir /ndl /njh /njs /b /np
     }
     #=======================================================================
+    #   Add Provisioning Packages
+    #=======================================================================
+    if (Test-Path "$WorkspacePath\PPKG") {
+        robocopy "$WorkspacePath\PPKG" "$MountPath\OSDCloud\PPKG" *.* /mir /ndl /njh /njs /b /np
+    }
+    #=======================================================================
     #   Add ODT Config
     #=======================================================================
     if (Test-Path "$WorkspacePath\ODT") {

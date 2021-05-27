@@ -31,6 +31,8 @@ function Start-OSDCloud {
 
         [switch]$SkipAutopilot,
 
+        [switch]$SkipProvPackage,
+
         [switch]$SkipODT,
 
         [switch]$ZTI,
@@ -104,6 +106,7 @@ function Start-OSDCloud {
         Product = $Product
         Screenshot = $null
         SkipAutopilot = $SkipAutopilot
+        SkipProvPackage = $SkipProvPackage
         SkipODT = $SkipODT
         TimeStart = Get-Date
         ZTI = $ZTI
