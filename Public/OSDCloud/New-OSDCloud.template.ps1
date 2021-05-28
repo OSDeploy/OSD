@@ -352,7 +352,7 @@ Windows Registry Editor Version 5.00
         Save-WebFile -SourceUrl 'https://github.com/okieselbach/Helpers/raw/master/WirelessConnect/WirelessConnect/bin/Release/WirelessConnect.exe' -DestinationDirectory "$MountPath\Windows" | Out-Null
     }
     #=======================================================================
-    #   Packages
+    #   ADK Packages
     #=======================================================================
     $ErrorActionPreference = 'Ignore'
     $WinPEOCs = $AdkPaths.WinPEOCs
