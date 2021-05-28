@@ -282,7 +282,7 @@ $ModelTextBox.Text = Get-MyComputerModel -Brief
 #   SetDefaultValues
 #=======================================================================
 function SetDefaultValues {
-    $OSBuildComboBox.SelectedIndex = 1      #20H2
+    $OSBuildComboBox.SelectedIndex = 0      #21H1
     $OSLanguageComboBox.SelectedIndex = 7   #en-us
     $OSEditionComboBox.SelectedIndex = 5    #Enterprise
     $OSLicenseComboBox.SelectedIndex = 1    #Volume

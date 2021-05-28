@@ -222,7 +222,7 @@ function Start-OSDCloud {
             Write-Host -ForegroundColor Green $StartOSDCloud.OSBuild
         }
         elseif ($StartOSDCloud.ZTI) {
-            $StartOSDCloud.OSBuild = '20H2'
+            $StartOSDCloud.OSBuild = '21H1'
             Write-Host -ForegroundColor Green $StartOSDCloud.OSBuild
         }
         else {
