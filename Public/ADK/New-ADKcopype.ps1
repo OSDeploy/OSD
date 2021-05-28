@@ -9,6 +9,7 @@ Creates an ADK CopyPE Working Directory
 https://osd.osdeploy.com/module/functions/adk
 
 .NOTES
+21.5.27.2   Resolved issue with paths
 21.3.15.2   Renamed to make it easier to understand what it does
 21.3.10     Initial Release
 #>
@@ -56,15 +57,15 @@ function New-ADKcopype {
         New-Item -Path $DestinationFirmwareFiles -ItemType Directory -Force -ErrorAction Stop | Out-Null
     }
 
-    $DestinationSources = Join-Path $Destination 'sources'
+    $DestinationSources = Join-Path $DestinationMedia 'sources'
     if (-NOT (Test-Path $DestinationSources)) {
         New-Item -Path $DestinationSources -ItemType Directory -Force -ErrorAction Stop | Out-Null
     }
 
     xcopy /herky "$AdkPathWinPEMedia" "$DestinationMedia\"
 
-    copy "$AdkWimSourcePath" "$DestinationMedia\sources\boot.wim"
-    copy "$AdkPathOscdimg\efisys.bin" "$Destination\$DestinationFirmwareFiles"
-    copy "$AdkPathOscdimg\etfsboot.com" "$Destination\$DestinationFirmwareFiles"
+    Copy-Item "$AdkWimSourcePath" "$DestinationSources\boot.wim"
+    Copy-Item "$AdkPathOscdimg\efisys.bin" "$DestinationFirmwareFiles"
+    Copy-Item "$AdkPathOscdimg\etfsboot.com" "$DestinationFirmwareFiles"
     #=======================================================================
 }
