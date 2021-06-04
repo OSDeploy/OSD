@@ -1,4 +1,3 @@
-
 <#
 .SYNOPSIS
 Updates a mounted WIM
@@ -6,59 +5,60 @@ Updates a mounted WIM
 .DESCRIPTION
 Updates a mounted WIM files.  Requires OSDSUS Catalog
 
+.PARAMETER Path
+Specifies the full path to the root directory of the offline Windows image that you will service
+
+.PARAMETER Update
+Check or Install the specified Update Group
+Check = Validate installed Updates
+All = Install all required Updates
+AdobeSU = Adobe Security Update
+DotNet = DotNet Update
+DotNetCU = DotNet Cumulative Update
+LCU = Latest Cumulative Update
+SSU = Servicing Stack Update
+
+.PARAMETER BitsTransfer
+#Download the file using BITS-Transfer
+#Interactive Login required
+
+.PARAMETER Force
+Updates are only installed if they are needed
+Force parameter will install the update even if it is already installed
+
 .LINK
-https://osd.osdeploy.com/module/functions/mywindowsimage
+https://osd.osdeploy.com/module/functions
 
 .NOTES
-19.11.19 David Segura @SeguraOSD
 #>
 function Update-MyWindowsImage {
     [CmdletBinding()]
     param (
-        #Specifies the full path to the root directory of the offline Windows image that you will service.
         [Parameter(ValueFromPipelineByPropertyName)]
         [string[]]$Path,
 
-        #Check or Install the specified Update Group
-        #Check = Validate installed Updates
-        #All = Install all required Updates
-        #AdobeSU = Adobe Security Update
-        #DotNet = DotNet Update
-        #DotNetCU = DotNet Cumulative Update
-        #LCU = Latest Cumulative Update
-        #SSU = Servicing Stack Update
         [ValidateSet('Check','All','AdobeSU','DotNet','DotNetCU','LCU','SSU')]
         [string]$Update = 'Check',
 
-        #Download the file using BITS-Transfer
-        #Interactive Login required
         [switch]$BitsTransfer,
 
-        #Updates are only installed if they are needed.  Force parameter will install the update even if it is already installed
         [switch]$Force
     )
 
     begin {
         #=======================================================================
-        #   Require Admin Rights
+        #   Block
         #=======================================================================
-        if ((Get-OSDGather -Property IsAdmin) -eq $false) {
-            Write-Warning "$($MyInvocation.MyCommand) requires Admin Rights ELEVATED"
-            Break
-        }
-        #=======================================================================
-        #   Require OSDSUS Module
-        #=======================================================================
-        if (-not (Get-Module -ListAvailable -Name OSDSUS)) {
-            Write-Warning "$($MyInvocation.MyCommand) requires PowerShell Module OSDSUS"
-            Break
-        }
+        Block-StandardUser
+        Block-WindowsVersionNe10
+        Block-PSModuleNotInstalled -ModuleName OSDSUS
         #=======================================================================
         #   Get-WindowsImage Mounted
         #=======================================================================
         if ($null -eq $Path) {
             $Path = (Get-WindowsImage -Mounted | Select-Object -Property Path).Path
         }
+        #=======================================================================
     }
     process {
         foreach ($Input in $Path) {
@@ -85,12 +85,20 @@ function Update-MyWindowsImage {
                 Write-Warning "Update-MyWindowsImage: OS MajorVersion 10 is required"
                 Break
             }
+
+            Write-Verbose -Verbose $global:GetRegCurrentVersion.ReleaseId
             #=======================================================================
             #   Get-OSDSUS and Filter Results
             #=======================================================================
             $global:GetOSDSUS = Get-OSDSUS -Catalog OSDBuilder | Sort-Object UpdateGroup -Descending
-            $global:GetOSDSUS = $global:GetOSDSUS | Where-Object {$_.UpdateBuild -eq $global:GetRegCurrentVersion.ReleaseId}
-            
+
+            if ($global:GetRegCurrentVersion.ReleaseId -gt 0) {
+                $global:GetOSDSUS = $global:GetOSDSUS | Where-Object {$_.UpdateBuild -eq $global:GetRegCurrentVersion.DisplayVersion}
+            }
+            else {
+                $global:GetOSDSUS = $global:GetOSDSUS | Where-Object {$_.UpdateBuild -eq $global:GetRegCurrentVersion.ReleaseId}
+            }
+
             if ($global:GetRegCurrentVersion.BuildLabEx -match 'amd64') {
                 $global:GetOSDSUS = $global:GetOSDSUS | Where-Object {$_.UpdateArch -eq 'x64'}
             } else {
@@ -165,6 +173,7 @@ function Update-MyWindowsImage {
             #   Return for PassThru
             #=======================================================================
             Get-WindowsImage -Mounted | Where-Object {$_.Path -eq $MountPath}
+            #=======================================================================
         }
     }
     end {}

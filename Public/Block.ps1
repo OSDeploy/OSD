@@ -313,3 +313,39 @@ function Block-WinPE {
         }
     }
 }
+<#
+.SYNOPSIS
+Break the running script if PowerShell Module is not installed
+
+.DESCRIPTION
+Break the running script if PowerShell Module is not installed
+
+.PARAMETER Warn
+Warning Message without a Break
+
+.PARAMETER Pause
+Adds a 'Press Enter to Continue'
+
+.LINK
+https://osd.osdeploy.com/module/functions/block
+#>
+function Block-PSModuleNotInstalled {
+    [CmdletBinding()]
+    param (
+        [string]$ModuleName = 'OSD',
+        [switch]$Warn,
+        [switch]$Pause
+    )
+    $CallingFunction = (Get-PSCallStack)[1].InvocationInfo.Line
+    $Message = "[$((Get-Date).ToString('yyyy-MM-dd-HHmmss'))] $CallingFunction requires PowerShell Modukle $ModuleName to be installed"
+        
+    if (-not (Get-Module -ListAvailable -Name $ModuleName)) {
+        Write-Warning $Message
+        if ($PSBoundParameters.ContainsKey('Pause')) {
+            [void]('Press Enter to Continue')
+        }
+        if (-NOT ($PSBoundParameters.ContainsKey('Warn'))) {
+            Break
+        }
+    }
+}
