@@ -53,6 +53,58 @@ function Connect-WinREWiFi {
 }
 <#
 .SYNOPSIS
+Connects to the selected WiFi Network using given XML profile.  Requires WinRE
+
+.Description
+Connects to the selected WiFi Network using given XML profile.  Requires WinRE
+
+.PARAMETER wifiProfile
+Path to XML WiFi profile.
+
+.LINK
+https://osdcloud.osdeploy.com
+
+.NOTES
+Author: Ondrej Sebela
+GitHub: https://github.com/ztrhgf
+#>
+function Connect-WinREWiFiByXMLProfile {
+    [CmdletBinding()]
+    param (
+        [Parameter(Mandatory = $true)]
+        [ValidateScript( {
+            if (Test-Path -Path $_) {
+                $true
+            } else {
+                throw "$_ doesn't exists"
+            }
+            if ($_ -notmatch "\.xml$") {
+                throw "$_ isn't xml file"
+            }
+            if (!(([xml](Get-Content $_ -Raw)).WLANProfile.Name) -or (([xml](Get-Content $_ -Raw)).WLANProfile.MSM.security.sharedKey.protected) -ne "false") {
+                throw "$_ isn't valid Wi-Fi XML profile (is the password correctly in plaintext?). Use command like this, to create it: netsh wlan export profile name=`"MyWifiSSID`" key=clear folder=C:\Wifi"
+            }
+        })]
+        [string] $wifiProfile
+    )
+    
+    $SSID = ([xml](Get-Content $wifiProfile)).WLANProfile.Name
+    Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Connecting to $SSID"
+
+    # just for sure
+    $null = Netsh WLAN delete profile "$SSID"
+
+    # import wifi profile
+    $null = Netsh WLAN add profile filename="$wifiProfile"
+
+    # connect to network
+    $result = Netsh WLAN connect name="$SSID"
+    if ($result -ne "Connection request was completed successfully.") {
+        throw "Connection to WIFI wasn't successful. Error was $result"
+    }
+}
+<#
+.SYNOPSIS
 Returns WiFi Network SSID's.  Requires WinRE
 
 .Description
@@ -218,6 +270,9 @@ Starts the WiFi Network Profile connection Wizard.  Requires WinRE
 .Description
 Starts the WiFi Network Profile connection Wizard.  Requires WinRE
 
+.PARAMETER wifiProfile
+Path to exported Wi-Fi xml profile 
+
 .LINK
 https://osdcloud.osdeploy.com
 
@@ -230,7 +285,9 @@ GitHub: https://github.com/OSDeploy
 #>
 function Start-WinREWiFi {
     [CmdletBinding()]
-    param ()
+    param (
+        [string] $wifiProfile
+    )
     #=======================================================================
     #	Block
     #=======================================================================
@@ -373,38 +430,68 @@ function Start-WinREWiFi {
     #   Connect
     #=======================================================================
     if ($StartWinREWiFi) {
-        Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Starting Wi-Fi Network Menu " -NoNewline
-        Write-Host -ForegroundColor Green 'OK'
-        Write-Host -ForegroundColor DarkGray "========================================================================="
+            if ($wifiProfile -and (Test-Path $wifiProfile)) {
+                Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Starting unattended Wi-Fi connection " -NoNewline
+            } else {
+                Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Starting Wi-Fi Network Menu " -NoNewline
+            }
+            Write-Host -ForegroundColor Green 'OK'
+            Write-Host -ForegroundColor DarkGray "========================================================================="
+
         while (((Get-CimInstance -ClassName Win32_NetworkAdapter | Where-Object {$_.NetConnectionID -eq 'Wi-Fi'}).NetEnabled) -eq $false) {
             Start-Sleep -Seconds 3
-            $SSIDList = Get-WinREWiFi
-            if ($SSIDList) {
-                #show list of available SSID
-                $SSIDList | Sort-Object Signal -Descending | Select-Object Signal, Index, SSID, Authentication, Encryption, NetworkType | Format-Table
+
+            $StartWinREWiFi = 0
+            # make checks on start of evert cycle because in case of failure, profile will be deleted
+            if ($wifiProfile -and (Test-Path $wifiProfile)) { ++$StartWinREWiFi }
     
-                $SSIDListIndex = $SSIDList.index
-                $SSIDIndex = ""
-                while ($SSIDIndex -notin $SSIDListIndex) {
-                    $SSIDIndex = Read-Host "Select the Index of Wi-Fi Network to connect or CTRL+C to quit"
-                }
-    
-                $SSID = $SSIDList | Where-Object { $_.index -eq $SSIDIndex } | Select-Object -exp SSID
-    
-                # connect to selected Wi-Fi
-                Write-Host -ForegroundColor DarkGray "========================================================================="
-                Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Establishing a connection to SSID $SSID"
+            if ($StartWinREWiFi) {
+                # use saved wi-fi profile to make the unattended connection
                 try {
-                    Connect-WinREWiFi $SSID -ErrorAction Stop
+                    Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Establishing a connection using $wifiProfile"
+                    Connect-WinREWiFiByXMLProfile $wifiProfile -ErrorAction Stop
                 } catch {
                     Write-Warning $_
+                    # to avoid infinite loop of tries
+                    Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Removing invalid Wi-Fi profile '$wifiProfile'"
+                    Remove-Item $wifiProfile -Force
                     continue
                 }
             } else {
-                Write-Warning "No Wi-Fi network found. Move closer to AP or use ethernet cable instead."
+                # show list of available SSID to make interactive connection
+                $SSIDList = Get-WinREWiFi
+                if ($SSIDList) {
+                    #show list of available SSID
+                    $SSIDList | Sort-Object Signal -Descending | Select-Object Signal, Index, SSID, Authentication, Encryption, NetworkType | Format-Table
+        
+                    $SSIDListIndex = $SSIDList.index
+                    $SSIDIndex = ""
+                    while ($SSIDIndex -notin $SSIDListIndex) {
+                        $SSIDIndex = Read-Host "Select the Index of Wi-Fi Network to connect or CTRL+C to quit"
+                    }
+        
+                    $SSID = $SSIDList | Where-Object { $_.index -eq $SSIDIndex } | Select-Object -exp SSID
+        
+                    # connect to selected Wi-Fi
+                    Write-Host -ForegroundColor DarkGray "========================================================================="
+                    Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Establishing a connection to SSID $SSID"
+                    try {
+                        Connect-WinREWiFi $SSID -ErrorAction Stop
+                    } catch {
+                        Write-Warning $_
+                        continue
+                    }
+                } else {
+                    Write-Warning "No Wi-Fi network found. Move closer to AP or use ethernet cable instead."
+                }
             }
 
-            Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Waiting for a connection to SSID $SSID"
+            if ($StartWinREWiFi) {
+                $text = "to Wi-Fi using $wifiProfile"
+            } else {
+                $text = "to SSID $SSID"
+            }
+            Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Waiting for a connection $text"
             Start-Sleep -Seconds 15
         
             $i = 30

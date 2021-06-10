@@ -237,6 +237,7 @@ FunctionsToExport =
 'Get-PartitionWinRE',
 'Copy-WinRE.wim',
 'Connect-WinREWiFi',
+'Connect-WinREWiFiByXMLProfile',
 'Get-WinREWiFi',
 'Set-WinREWiFi',
 'Start-WinREWiFi',
