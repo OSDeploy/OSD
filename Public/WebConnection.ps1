@@ -19,25 +19,45 @@ function Test-WebConnection {
     [CmdletBinding()]
     param (
         [Parameter(ValueFromPipeline = $True)]
-        [string]$Uri = 'google.com'
+        [string]$Uri = 'https://google.com',
+        [string]$Proxy ,
+        [ValidateSet('NTLM', 'Basic', 'Negotiate')]
+        [string]$ProxyType = "Basic",
+        [string]$ProxyUser = $null, 
+        [string]$ProxyPassword = $null
     )
     
     begin {}
     
     process {
         $Params = @{
-            Method = 'Head'
-            Uri = $Uri
+            Method          = 'Head'
+            Uri             = $Uri
             UseBasicParsing = $True
         }
 
         try {
+            if ($proxy -ne "") {
+                if (($ProxyUser -ne "") -and ($ProxyPassword -ne "")) {
+                    Write-Verbose "Add Proxy: Proxy: $proxy with User $ProxyUser"
+                    $secpasswd = ConvertTo-SecureString -String $ProxyPassword -AsPlainText -Force 
+                    [pscredential]$ProxyCredential = New-Object System.Management.Automation.PSCredential("$ProxyUser" , $secpasswd)
+                    $Params.Add("Proxy", "$proxy")
+                    $Params.Add("ProxyCredential", $ProxyCredential)
+                }
+                else {
+                    
+                    Write-Verbose "Add Proxy: $proxy without Credentials"
+                    $Params.Add("Proxy", "$proxy")
+                }
+            }
             Write-Verbose "Test-WebConnection OK: $Uri"
             Invoke-WebRequest @Params | Out-Null
             $true
         }
         catch {
             Write-Verbose "Test-WebConnection FAIL: $Uri"
+            $Error[0]
             $false
         }
         finally {

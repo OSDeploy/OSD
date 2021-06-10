@@ -27,7 +27,12 @@ function Save-WebFile {
 
         #Overwrite the file if it exists already
         #The default action is to skip the download
-        [switch]$Overwrite
+        [switch]$Overwrite,
+        [string]$Proxy = $null ,
+        [ValidateSet('NTLM', 'Basic', 'Negotiate')]
+        [string]$ProxyType = "Basic",
+        [string]$ProxyUser = $null, 
+        [string]$ProxyPassword = $null 
     )
     #=======================================================================
     #	DestinationDirectory
@@ -65,13 +70,37 @@ function Save-WebFile {
         #=======================================================================
         if (Get-Command 'curl.exe') {
             Write-Verbose "cURL: $SourceUrl"
+            $curlopt = ""
+            if($Proxy -ne $null){
+                $curlopt += " --proxy $proxy"
+                if($ProxyType){
+                    if ($ProxyType -eq "Basic") {
+                        $curlopt += " --proxy-basic"
+                    }
+                    elseif ($ProxyType -eq "NTLM") {
+                        $curlopt += " --proxy-ntlm"
+                    }
+                    elseif ($ProxyType -eq "Negotiate") {
+                        $curlopt += " --proxy-negotiate"
+                    }
+                }
+                if($ProxyUser -ne $null -and $ProxyPassword -ne $null){
+                    $curlopt += " --proxy-user $proxyUser`:$proxyPassword"
+                }elseif($ProxyUser -ne $null){
+                    $curlopt += " --proxy-user $proxyUser"
+                }
+            }                
     
             if ($host.name -match 'ConsoleHost') {
-                Invoke-Expression "& curl.exe --location --output `"$DestinationFullName`" --url `"$SourceUrl`""
+
+                Write-Host "& curl.exe --location --output `"$DestinationFullName`" --url $SourceUrl  $curlopt"
+                Invoke-Expression "& curl.exe --location --output `"$DestinationFullName`" --url $SourceUrl $curlopt"
             }
             else {
                 #PowerShell ISE will display a NativeCommandError, so progress will not be displayed
-                $Quiet = Invoke-Expression "& curl.exe --location --output `"$DestinationFullName`" --url `"$SourceUrl`" 2>&1"
+                Write-Verbose "& curl.exe --location --output `"$DestinationFullName`" --url $SourceUrl  $curlopt 2>&1"
+                $Quiet = Invoke-Expression "& curl.exe --location --output `"$DestinationFullName`" --url $SourceUrl  $curlopt 2>&1"
+                $Quiet
             }
         }
         else {

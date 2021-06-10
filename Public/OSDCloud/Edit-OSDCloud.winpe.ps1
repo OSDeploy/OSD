@@ -37,7 +37,12 @@ function Edit-OSDCloud.winpe {
         [string[]]$PSModuleInstall,
 
         [string]$WebPSScript,
-        [string]$Wallpaper
+        [string]$Wallpaper,
+        [string]$Proxy = $null,
+        [ValidateSet('NTLM','Basic','Negotiate')]
+        [string]$ProxyType = "Basic",
+        [string]$ProxyUser = $null, 
+        [string]$ProxyPassword = $null
     )
     #=======================================================================
     #	Start the Clock
@@ -123,8 +128,8 @@ function Edit-OSDCloud.winpe {
     foreach ($Driver in $CloudDriver) {
         if ($Driver -eq 'Dell'){
             Write-Verbose "Adding $Driver CloudDriver"
-            if (Test-WebConnection -Uri 'http://downloads.dell.com/FOLDER07062618M/1/WINPE10.0-DRIVERS-A23-PR4K0.CAB') {
-                $SaveWebFile = Save-WebFile -SourceUrl 'http://downloads.dell.com/FOLDER07062618M/1/WINPE10.0-DRIVERS-A23-PR4K0.CAB'
+            if (Test-WebConnection -Uri 'http://downloads.dell.com/FOLDER07062618M/1/WINPE10.0-DRIVERS-A23-PR4K0.CAB' -proxy $proxy -ProxyUser $proxyUser -ProxyPassword $ProxyPassword -ProxyType $ProxyType) {
+                $SaveWebFile = Save-WebFile -SourceUrl 'http://downloads.dell.com/FOLDER07062618M/1/WINPE10.0-DRIVERS-A23-PR4K0.CAB'  -proxy $proxy -ProxyUser $proxyUser -ProxyPassword $ProxyPassword -ProxyType $ProxyType
                 if (Test-Path $SaveWebFile.FullName) {
                     $DriverCab = Get-Item -Path $SaveWebFile.FullName
                     $ExpandPath = Join-Path $DriverCab.Directory $DriverCab.BaseName
@@ -139,8 +144,8 @@ function Edit-OSDCloud.winpe {
         }
         if ($Driver -eq 'HP'){
             Write-Verbose "Adding $Driver CloudDriver"
-            if (Test-WebConnection -Uri 'https://ftp.hp.com/pub/softpaq/sp110001-110500/sp110326.exe') {
-                $SaveWebFile = Save-WebFile -SourceUrl 'https://ftp.hp.com/pub/softpaq/sp110001-110500/sp110326.exe'
+            if (Test-WebConnection -Uri 'https://ftp.hp.com/pub/softpaq/sp110001-110500/sp110326.exe'  -proxy $proxy -ProxyUser $proxyUser -ProxyPassword $ProxyPassword -ProxyType $ProxyType) {
+                $SaveWebFile = Save-WebFile -SourceUrl 'https://ftp.hp.com/pub/softpaq/sp110001-110500/sp110326.exe'  -proxy $proxy -ProxyUser $proxyUser -ProxyPassword $ProxyPassword -ProxyType $ProxyType
                 if (Test-Path $SaveWebFile.FullName) {
                     $DriverCab = Get-Item -Path $SaveWebFile.FullName
                     $ExpandPath = Join-Path $DriverCab.Directory $DriverCab.BaseName
@@ -153,11 +158,11 @@ function Edit-OSDCloud.winpe {
         }
         if ($Driver -eq 'WiFi'){
             Write-Verbose "Adding $Driver CloudDriver"
-            if (Test-WebConnection -Uri 'https://downloadmirror.intel.com/30280/a08/WiFi_22.40.0_Driver64_Win10.zip') {
+            if (Test-WebConnection -Uri 'https://downloadmirror.intel.com/30280/a08/WiFi_22.40.0_Driver64_Win10.zip'  -proxy $proxy -ProxyUser $proxyUser -ProxyPassword $ProxyPassword -ProxyType $ProxyType) {
                 #$WiFiDownloads = (Invoke-WebRequest -Uri 'https://downloadmirror.intel.com/30280/a08/WiFi_22.40.0_Driver64_Win10.zip' -UseBasicParsing).Links
                 #$WiFiDownloads = $WiFiDownloads | Where-Object {$_.download -match 'Driver64_Win10.zip'} | Sort-Object Download -Unique | Select-Object Download, Title -First 1
                 #$SaveWebFile = Save-WebFile -SourceUrl $WiFiDownloads.download
-                $SaveWebFile = Save-WebFile -SourceUrl 'https://downloadmirror.intel.com/30280/a08/WiFi_22.40.0_Driver64_Win10.zip'
+                $SaveWebFile = Save-WebFile -SourceUrl 'https://downloadmirror.intel.com/30280/a08/WiFi_22.40.0_Driver64_Win10.zip'  -proxy $proxy -ProxyUser $proxyUser -ProxyPassword $ProxyPassword -ProxyType $ProxyType
                 if (Test-Path $SaveWebFile.FullName) {
                     $DriverCab = Get-Item -Path $SaveWebFile.FullName
                     $ExpandPath = Join-Path $DriverCab.Directory $DriverCab.BaseName
@@ -173,8 +178,8 @@ function Edit-OSDCloud.winpe {
         }
         if ($Driver -eq 'Nutanix'){
             Write-Verbose "Adding $Driver CloudDriver"
-            if (Test-WebConnection -Uri 'https://github.com/OSDeploy/OSDCloud/raw/main/Drivers/WinPE/Nutanix.cab') {
-                $SaveWebFile = Save-WebFile -SourceUrl 'https://github.com/OSDeploy/OSDCloud/raw/main/Drivers/WinPE/Nutanix.cab'
+            if (Test-WebConnection -Uri 'https://github.com/OSDeploy/OSDCloud/raw/main/Drivers/WinPE/Nutanix.cab'  -proxy $proxy -ProxyUser $proxyUser -ProxyPassword $ProxyPassword -ProxyType $ProxyType) {
+                $SaveWebFile = Save-WebFile -SourceUrl 'https://github.com/OSDeploy/OSDCloud/raw/main/Drivers/WinPE/Nutanix.cab'  -proxy $proxy -ProxyUser $proxyUser -ProxyPassword $ProxyPassword -ProxyType $ProxyType
                 if (Test-Path $SaveWebFile.FullName) {
                     $DriverCab = Get-Item -Path $SaveWebFile.FullName
                     $ExpandPath = Join-Path $DriverCab.Directory $DriverCab.BaseName
@@ -189,8 +194,8 @@ function Edit-OSDCloud.winpe {
         }
         if ($Driver -eq 'VMware'){
             Write-Verbose "Adding $Driver CloudDriver"
-            if (Test-WebConnection -Uri 'https://github.com/OSDeploy/OSDCloud/raw/main/Drivers/WinPE/VMware.cab') {
-                $SaveWebFile = Save-WebFile -SourceUrl 'https://github.com/OSDeploy/OSDCloud/raw/main/Drivers/WinPE/VMware.cab'
+            if (Test-WebConnection -Uri 'https://github.com/OSDeploy/OSDCloud/raw/main/Drivers/WinPE/VMware.cab'  -proxy $proxy -ProxyUser $proxyUser -ProxyPassword $ProxyPassword -ProxyType $ProxyType) {
+                $SaveWebFile = Save-WebFile -SourceUrl 'https://github.com/OSDeploy/OSDCloud/raw/main/Drivers/WinPE/VMware.cab'  -proxy $proxy -ProxyUser $proxyUser -ProxyPassword $ProxyPassword -ProxyType $ProxyType
                 if (Test-Path $SaveWebFile.FullName) {
                     $DriverCab = Get-Item -Path $SaveWebFile.FullName
                     $ExpandPath = Join-Path $DriverCab.Directory $DriverCab.BaseName
@@ -270,10 +275,14 @@ start PowerShell -Nol -W Mi
             }
         }
         Write-Verbose -Verbose "Saving $Module to $MountPath\Program Files\WindowsPowerShell\Modules"
-        Save-Module -Name $Module -Path "$MountPath\Program Files\WindowsPowerShell\Modules" -Force
+        $secpasswd = ConvertTo-SecureString -String $ProxyPassword -AsPlainText -Force 
+        [pscredential]$ProxyCredential = New-Object System.Management.Automation.PSCredential("$ProxyUser" , $secpasswd)
+        Save-Module -Name $Module -Path "$MountPath\Program Files\WindowsPowerShell\Modules" -Force -proxy $proxy -ProxyCredential $ProxyCredential
     }
     Write-Verbose "Saving OSD to $MountPath\Program Files\WindowsPowerShell\Modules"
-    Save-Module -Name OSD -Path "$MountPath\Program Files\WindowsPowerShell\Modules" -Force
+    $secpasswd = ConvertTo-SecureString -String $ProxyPassword -AsPlainText -Force 
+    [pscredential]$ProxyCredential = New-Object System.Management.Automation.PSCredential("$ProxyUser" , $secpasswd)
+    Save-Module -Name OSD -Path "$MountPath\Program Files\WindowsPowerShell\Modules" -Force  -proxy $proxy -ProxyCredential $ProxyCredential
     #=======================================================================
     #   PSModuleCopy
     #=======================================================================
