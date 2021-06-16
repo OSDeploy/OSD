@@ -33,9 +33,9 @@ function Update-MyDellBios {
         [Parameter(ValueFromPipeline = $true)]
         [Alias ('DownloadFolder','Path')]
         [string]$DownloadPath = $env:TEMP,
-
-        [switch]$Silent,
-        [switch]$Reboot
+        [switch]$Force,
+        [switch]$Reboot,
+        [switch]$Silent
     )
     #=======================================================================
     #   Require Admin Rights
@@ -61,63 +61,66 @@ function Update-MyDellBios {
     #=======================================================================
     $GetMyDellBios = Get-MyDellBios | Sort-Object ReleaseDate -Descending | Select-Object -First 1
 
-    if ($GetMyDellBios.DellVersion -eq $BIOSVersion) {
-        Write-Warning "BIOS version is already at latest"
-        #Continue
+    if ($GetMyDellBios.DellVersion -eq (Get-MyBiosVersion)) {
+        Write-Warning "Update-MyDellBios: Current BIOS version $(Get-MyBiosVersion) is already the latest version"
+        Start-Sleep -Seconds 5
     }
-    #=======================================================================
-    #   Download
-    #=======================================================================
-    $SaveMyDellBios = Save-MyDellBios -DownloadPath $DownloadPath
-    if (-NOT ($SaveMyDellBios)) {Return $null}
-    if (-NOT (Test-Path $SaveMyDellBios.FullName)) {Return $null}
-
-    if (($env:SystemDrive -eq 'X:') -and ($env:PROCESSOR_ARCHITECTURE -match '64')) {
-        $SaveMyDellBiosFlash64W = Save-MyDellBiosFlash64W -DownloadPath $DownloadPath
-        if (-NOT ($SaveMyDellBiosFlash64W)) {Return $null}
-        if (-NOT (Test-Path $SaveMyDellBiosFlash64W.FullName)) {Return $null}
-    }
-    $SaveMyDellBiosFlash64W = Save-MyDellBiosFlash64W -DownloadPath $DownloadPath
-    #=======================================================================
-    #   BitLocker
-    #=======================================================================
-    if ($env:SystemDrive -ne 'X:') {
-        Write-Verbose "Checking for BitLocker" -Verbose
-        #http://www.dptechjournal.net/2017/01/powershell-script-to-deploy-dell.html
-        #https://github.com/dptechjournal/Dell-Firmware-Updates/blob/master/Install_Dell_Bios_upgrade.ps1
-        $GetBitLockerVolume = Get-BitLockerVolume | Where-Object { $_.ProtectionStatus -eq "On" -and $_.VolumeType -eq "OperatingSystem" }
-        if ($GetBitLockerVolume) {
-            Write-Verbose "Suspending BitLocker for 1 Reboot"
-            Suspend-BitLocker -Mountpoint $GetBitLockerVolume -RebootCount 1
-            if (Get-BitLockerVolume -MountPoint $GetBitLockerVolume | Where-Object ProtectionStatus -eq "On") {
-                Write-Warning "Couldn't suspend Bitlocker"
-                Return $null
-            }
-        } else {
-            Write-Verbose "BitLocker was not enabled" -Verbose
+    if (($GetMyDellBios.DellVersion -lt (Get-MyBiosVersion)) -or ($Force.IsPresent) ) {
+        #=======================================================================
+        #   Download
+        #=======================================================================
+        $SaveMyDellBios = Save-MyDellBios -DownloadPath $DownloadPath
+        if (-NOT ($SaveMyDellBios)) {Return $null}
+        if (-NOT (Test-Path $SaveMyDellBios.FullName)) {Return $null}
+    
+        if (($env:SystemDrive -eq 'X:') -and ($env:PROCESSOR_ARCHITECTURE -match '64')) {
+            $SaveMyDellBiosFlash64W = Save-MyDellBiosFlash64W -DownloadPath $DownloadPath
+            if (-NOT ($SaveMyDellBiosFlash64W)) {Return $null}
+            if (-NOT (Test-Path $SaveMyDellBiosFlash64W.FullName)) {Return $null}
         }
-    }
-    #=======================================================================
-    #   Arguments
-    #=======================================================================
-    $BiosLog = Join-Path $env:TEMP 'Update-MyDellBios.log'
-
-    $Arguments = "/l=`"$BiosLog`""
-    if ($Reboot) {
-        $Arguments = $Arguments + " /r /s"
-    } elseif ($Silent) {
-        $Arguments = $Arguments + " /s"
-    }
-    #=======================================================================
-    #   Execution
-    #=======================================================================
-    if (($env:SystemDrive -eq 'X:') -and ($env:PROCESSOR_ARCHITECTURE -match '64')) {
-        $Arguments = "/b=`"$($SaveMyDellBios.FullName)`" " + $Arguments
-        Write-Verbose "Start-Process -WorkingDirectory `"$($SaveMyDellBios.Directory)`" -FilePath `"$($SaveMyDellBiosFlash64W.FullName)`" -ArgumentList $Arguments -Wait" -Verbose
-        Start-Process -WorkingDirectory "$($SaveMyDellBios.Directory)" -FilePath "$($SaveMyDellBiosFlash64W.FullName)" -ArgumentList $Arguments -Wait -ErrorAction Inquire
-    }
-    else {
-        Write-Verbose "Start-Process -FilePath `"$($SaveMyDellBios.FullName)`" -ArgumentList $Arguments -Wait" -Verbose
-        Start-Process -FilePath "$($SaveMyDellBios.FullName)" -ArgumentList $Arguments -Wait -ErrorAction Inquire
+        $SaveMyDellBiosFlash64W = Save-MyDellBiosFlash64W -DownloadPath $DownloadPath
+        #=======================================================================
+        #   BitLocker
+        #=======================================================================
+        if ($env:SystemDrive -ne 'X:') {
+            Write-Verbose "Checking for BitLocker" -Verbose
+            #http://www.dptechjournal.net/2017/01/powershell-script-to-deploy-dell.html
+            #https://github.com/dptechjournal/Dell-Firmware-Updates/blob/master/Install_Dell_Bios_upgrade.ps1
+            $GetBitLockerVolume = Get-BitLockerVolume | Where-Object { $_.ProtectionStatus -eq "On" -and $_.VolumeType -eq "OperatingSystem" }
+            if ($GetBitLockerVolume) {
+                Write-Verbose "Suspending BitLocker for 1 Reboot"
+                Suspend-BitLocker -Mountpoint $GetBitLockerVolume -RebootCount 1
+                if (Get-BitLockerVolume -MountPoint $GetBitLockerVolume | Where-Object ProtectionStatus -eq "On") {
+                    Write-Warning "Couldn't suspend Bitlocker"
+                    Return $null
+                }
+            } else {
+                Write-Verbose "BitLocker was not enabled" -Verbose
+            }
+        }
+        #=======================================================================
+        #   Arguments
+        #=======================================================================
+        $BiosLog = Join-Path $env:TEMP 'Update-MyDellBios.log'
+    
+        $Arguments = "/l=`"$BiosLog`""
+        if ($Reboot) {
+            $Arguments = $Arguments + " /r /s"
+        } elseif ($Silent) {
+            $Arguments = $Arguments + " /s"
+        }
+        #=======================================================================
+        #   Execution
+        #=======================================================================
+        if (($env:SystemDrive -eq 'X:') -and ($env:PROCESSOR_ARCHITECTURE -match '64')) {
+            $Arguments = "/b=`"$($SaveMyDellBios.FullName)`" " + $Arguments
+            Write-Verbose "Start-Process -WorkingDirectory `"$($SaveMyDellBios.Directory)`" -FilePath `"$($SaveMyDellBiosFlash64W.FullName)`" -ArgumentList $Arguments -Wait" -Verbose
+            Start-Process -WorkingDirectory "$($SaveMyDellBios.Directory)" -FilePath "$($SaveMyDellBiosFlash64W.FullName)" -ArgumentList $Arguments -Wait -ErrorAction Inquire
+        }
+        else {
+            Write-Verbose "Start-Process -FilePath `"$($SaveMyDellBios.FullName)`" -ArgumentList $Arguments -Wait" -Verbose
+            Start-Process -FilePath "$($SaveMyDellBios.FullName)" -ArgumentList $Arguments -Wait -ErrorAction Inquire
+        }
+        #=======================================================================
     }
 }
