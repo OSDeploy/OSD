@@ -107,6 +107,7 @@ function Save-OSDDownload {
                 $WebClient = New-Object System.Net.WebClient
                 $WebClient.DownloadFile($Global:OSDDownload.SourceUrl, $Global:OSDDownload.FullName)
             }
+            Start-Sleep -Seconds 2
             #=======================================================================
             #	Return
             #=======================================================================

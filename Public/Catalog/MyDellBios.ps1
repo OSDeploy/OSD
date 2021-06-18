@@ -76,6 +76,7 @@ function Save-MyDellBios {
             elseif (Test-MyDellBiosWebConnection) {
                 #Download the BIOS Update
                 $SaveMyDellBios = Save-OSDDownload -SourceUrl $GetMyDellBios.Url -DownloadFolder "$DownloadPath"
+                Start-Sleep -Seconds 1
 
                 #Make sure the BIOS Downloaded
                 if (Test-Path "$($SaveMyDellBios.FullName)") {
