@@ -1,5 +1,102 @@
 <#
 .SYNOPSIS
+This will return the latest compatible BIOS Update for your system as a PowerShell Object
+
+.DESCRIPTION
+This will return the latest compatible BIOS Update for your system as a PowerShell Object
+Shortcut for Get-CatalogDellSystem -Component BIOS -Compatible
+
+.LINK
+https://osd.osdeploy.com/module/functions/dell/get-mydellbios
+
+.NOTES
+21.3.11 Pulling data from Local due to issues with the Dell site being down
+21.3.5  Resolved issue with multiple objects
+21.3.4  Initial Release
+#>
+function Get-MyDellBios {
+    [CmdletBinding()]
+    param ()
+
+    $ErrorActionPreference = 'SilentlyContinue'
+    #=======================================================================
+    #   Require Dell Computer
+    #=======================================================================
+    if ((Get-MyComputerManufacturer -Brief) -ne 'Dell') {
+        Write-Warning "Dell computer is required for this function"
+        Return $null
+    }
+    #=======================================================================
+    #   Current System Information
+    #=======================================================================
+    $SystemSKU = $((Get-WmiObject -Class Win32_ComputerSystem).SystemSKUNumber).Trim()
+	$BIOSVersion = $((Get-WmiObject -Class Win32_BIOS).SMBIOSBIOSVersion).Trim()
+    #=======================================================================
+    #   Get-CatalogDellSystem
+    #=======================================================================
+    #$GetMyDellBios = Get-CatalogDellSystem -Component BIOS -Compatible | Sort-Object ReleaseDate -Descending | Select-Object -First 1
+    $GetMyDellBIOS = Import-Clixml "$($MyInvocation.MyCommand.Module.ModuleBase)\Files\Catalogs\OSD-Dell-CatalogPC-BIOS.xml" | Sort-Object ReleaseDate -Descending
+    $GetMyDellBIOS | Add-Member -MemberType NoteProperty -Name 'Flash64W' -Value 'https://github.com/OSDeploy/OSDCloud/raw/main/BIOS/Flash64W_Ver3.3.8.cab'
+    #=======================================================================
+    #   Filter Compatible
+    #=======================================================================
+    Write-Verbose "Filtering XML for items compatible with SystemSKU $SystemSKU"
+    $GetMyDellBIOS = $GetMyDellBIOS | `
+        Where-Object {$_.SupportedSystemID -contains $SystemSKU}
+    #=======================================================================
+    #   Pick and Sort
+    #=======================================================================
+    $GetMyDellBios = $GetMyDellBios | Sort-Object ReleaseDate -Descending | Select-Object -First 1
+    #Write-Verbose "You are currently running Dell Bios version $BIOSVersion" -Verbose
+    #=======================================================================
+    #   Return
+    #=======================================================================
+    Return $GetMyDellBios
+}
+function Save-MyDellBios {
+    [CmdletBinding()]
+    param (
+        [Parameter(ValueFromPipeline = $true)]
+        [Alias ('DownloadFolder','Path')]
+        [string]$DownloadPath = $env:TEMP
+    )
+    #Make sure Computer is a Dell
+    if ((Get-MyComputerManufacturer -Brief) -eq 'Dell') {
+        
+        #See if we can get the Dell BIOS
+        $GetMyDellBios = Get-MyDellBios
+
+        if ($GetMyDellBios) {
+
+            #See if the BIOS has already been downloaded
+            if (Test-Path "$DownloadPath\$($GetMyDellBios.FileName)") {
+                Write-Verbose -Verbose "Bios Update File: $DownloadPath\$($GetMyDellBios.FileName)"
+                Get-Item "$DownloadPath\$($GetMyDellBios.FileName)"
+            }
+            elseif (Test-MyDellBiosWebConnection) {
+                #Download the BIOS Update
+                $SaveMyDellBios = Save-OSDDownload -SourceUrl $GetMyDellBios.Url -DownloadFolder "$DownloadPath"
+
+                #Make sure the BIOS Downloaded
+                if (Test-Path "$($SaveMyDellBios.FullName)") {
+                    Write-Verbose -Verbose "Bios Update Download: $($SaveMyDellBios.FullName)"
+                    Get-Item "$($SaveMyDellBios.FullName)"
+                }
+                else {
+                    Write-Warning "Could not download the Dell BIOS Update"
+                }
+            }
+            else {
+                Write-Warning "Could not verify an Internet connection for the Dell Bios"
+            }
+        }
+        else {
+            Write-Warning "Unable to determine a suitable Bios update for this Computer Model"
+        }
+    }
+}
+<#
+.SYNOPSIS
 Downloads and installed a compatible BIOS Update for your Dell system
 
 .DESCRIPTION
@@ -38,12 +135,9 @@ function Update-MyDellBios {
         [switch]$Silent
     )
     #=======================================================================
-    #   Require Admin Rights
+    #   Block
     #=======================================================================
-    if ((Get-OSDGather -Property IsAdmin) -eq $false) {
-        Write-Warning "$($MyInvocation.MyCommand) requires Admin Rights ELEVATED"
-        Break
-    }
+    Block-StandardUser
     #=======================================================================
     #   Require Dell Computer
     #=======================================================================
@@ -122,5 +216,32 @@ function Update-MyDellBios {
             Start-Process -FilePath "$($SaveMyDellBios.FullName)" -ArgumentList $Arguments -Wait -ErrorAction Inquire
         }
         #=======================================================================
+    }
+}
+function Save-MyDellBiosFlash64W {
+    [CmdletBinding()]
+    param (
+        [Parameter(ValueFromPipeline = $true)]
+        [Alias ('DownloadFolder','Path')]
+        [string]$DownloadPath = $env:TEMP
+    )
+
+    if ((Get-MyComputerManufacturer -Brief) -eq 'Dell') {
+        $GetMyDellBios = Get-MyDellBios
+        if ($GetMyDellBios) {
+            if (Test-WebConnection -Uri $GetMyDellBios.Flash64W) {
+                $SaveMyDellBiosFlash64W = Save-OSDDownload -SourceUrl $GetMyDellBios.Flash64W -DownloadFolder "$DownloadPath"
+                Expand -R "$($SaveMyDellBiosFlash64W.FullName)" -F:* "$DownloadPath" | Out-Null
+                if (Test-Path (Join-Path $DownloadPath 'Flash64W.exe')) {
+                    Get-Item (Join-Path $DownloadPath 'Flash64W.exe')
+                }
+            }
+            else {
+                Write-Warning "Could not verify an Internet connection for the Dell Bios"
+            }
+        }
+        else {
+            Write-Warning "Unable to determine a suitable Bios update for this Computer Model"
+        }
     }
 }
