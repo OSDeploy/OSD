@@ -181,26 +181,30 @@ $GoButton.add_Click({
 
     $DismImageFile = $ImageFileComboBox.Text
     Write-Host -ForegroundColor Cyan "DismImageFile: $DismImageFile"
-    $ParentDirectory = Split-Path $DismImageFile -Parent
-
-    $DismCaptureDrive = "\\.\PhysicalDrive$($Global:DiskNumber)"
-    Write-Host -ForegroundColor Cyan "DismCaptureDrive: $DismCaptureDrive"
-
-    $DismName = "disk$($Global:DiskNumber)"
-    Write-Host -ForegroundColor Cyan "DismName: $DismName"
-
-    $DismDescription = "$Global:Manufacturer $Global:Model $Global:SerialNumber"
-    Write-Host -ForegroundColor Cyan "DismDescription: $DismDescription"
-
-    $DismCompress = 'Default'
-    Write-Host -ForegroundColor Cyan "DismCompress: $DismCompress"
-    
-    Write-Host "DISM.exe /Capture-FFU /ImageFile=`"$DismImageFile`" /CaptureDrive=$DismCaptureDrive /Name:`"$DismName`" /Description:`"$DismDescription`" /Compress:$DismCompress"
 
     if ($null -eq $DismImageFile) {
-        #Do nothing
+        Write-Warning "DismImageFile value is null"
+    }
+    elseif ($DismImageFile -eq '') {
+        Write-Warning "DismImageFile value is nothing"
     }
     else {
+        $ParentDirectory = Split-Path $DismImageFile -Parent -ErrorAction Stop
+
+        $DismCaptureDrive = "\\.\PhysicalDrive$($Global:DiskNumber)"
+        Write-Host -ForegroundColor Cyan "DismCaptureDrive: $DismCaptureDrive"
+    
+        $DismName = "disk$($Global:DiskNumber)"
+        Write-Host -ForegroundColor Cyan "DismName: $DismName"
+    
+        $DismDescription = "$Global:Manufacturer $Global:Model $Global:SerialNumber"
+        Write-Host -ForegroundColor Cyan "DismDescription: $DismDescription"
+    
+        $DismCompress = 'Default'
+        Write-Host -ForegroundColor Cyan "DismCompress: $DismCompress"
+        
+        Write-Host "DISM.exe /Capture-FFU /ImageFile=`"$DismImageFile`" /CaptureDrive=$DismCaptureDrive /Name:`"$DismName`" /Description:`"$DismDescription`" /Compress:$DismCompress"
+
         $xamGUI.Close()
         Show-Powershell
         #=======================================================================
