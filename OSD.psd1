@@ -7,7 +7,7 @@
 RootModule = 'OSD.psm1'
 
 # Version number of his module.
-ModuleVersion = '21.6.18.1'
+ModuleVersion = '21.6.19.1'
 
 # Supported PSEditions
 # CompatiblePSEditions = @()
@@ -243,7 +243,10 @@ FunctionsToExport =
 'Start-WinREWiFi',
 'Select-OSDCloudImageIndex',
 'Update-OSDCloud.usb',
-'Invoke-OSDCloud'
+'Invoke-OSDCloud',
+'Find-TextInFile',
+'New-CabDevelopment',
+'Start-CaptureFFU'
 
 # Cmdlets to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no cmdlets to export.
 CmdletsToExport = @()

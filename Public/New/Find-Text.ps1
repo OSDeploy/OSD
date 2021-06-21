@@ -1,3 +1,41 @@
+﻿<#
+.SYNOPSIS
+Simple function that searches for Text in Files
+
+.DESCRIPTION
+Simple function that searches for Text in Files.  Files selected in Out-GridView can be opened in VSCode
+
+.PARAMETER Path
+Path to Search for Files
+
+.PARAMETER Text
+String to find in the Files
+
+.PARAMETER Include
+Files to include in the search.  *.* is the default
+#>
+function Find-TextInFile {
+    [CmdletBinding()]
+    param (
+		[Parameter(Mandatory = $true)]
+		[string]$Path,
+        [Parameter(Mandatory = $true)]
+        [string]$Text,
+		[string[]]$Include = '*.txt'
+	)
+    #=======================================================================
+	$Results = Get-ChildItem $Path -Recurse -Include $Include -File | `
+	Select-String $Text | `
+	Select-Object Path, Filename, LineNumber, Line | `
+	Out-Gridview -Title 'Results' -PassThru
+
+	if (Get-Command 'code' -ErrorAction SilentlyContinue) {
+	foreach ($Item in $Results) {
+	code $($Item.Path)
+		}
+	}
+    #=======================================================================
+}
 <#
 .SYNOPSIS
 Simple function that searches for Text in a PowerShell Module
