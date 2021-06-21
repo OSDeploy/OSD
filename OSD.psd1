@@ -180,7 +180,6 @@ FunctionsToExport =
 'Set-OSDCloud.workspace',
 'Start-OSDCloud',
 'Start-OSDCloudGUI',
-'Start-AutopilotGUI',
 'Test-OSDCloud.template',
 'Get-OSDPower',#POWER
 'Enable-PEWimPSGallery',#PSGALLERY
