@@ -7,7 +7,7 @@
 RootModule = 'OSD.psm1'
 
 # Version number of his module.
-ModuleVersion = '21.6.21.3'
+ModuleVersion = '21.6.22.1'
 
 # Supported PSEditions
 # CompatiblePSEditions = @()
@@ -244,8 +244,7 @@ FunctionsToExport =
 'Update-OSDCloud.usb',
 'Invoke-OSDCloud',
 'Find-TextInFile',
-'New-CabDevelopment',
-'Start-CaptureFFU'
+'New-CabDevelopment'
 
 # Cmdlets to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no cmdlets to export.
 CmdletsToExport = @()
