@@ -1,2 +1,2 @@
 Import-Module -Name OSD -Force
-Get-CatalogLenovoDriverPack | Export-Clixml -Path $PSScriptRoot\CatalogLenovoDriverPack.xml
+Get-CatalogLenovoDriverPack -Verbose | Export-Clixml -Path $PSScriptRoot\CatalogLenovoDriverPack.xml

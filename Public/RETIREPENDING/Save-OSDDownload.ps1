@@ -90,11 +90,11 @@ function Save-OSDDownload {
                 $Global:OSDDownload.Method = 'cURL'
 
                 if ($host.name -match 'ConsoleHost') {
-                    Invoke-Expression "& curl.exe --location --output --insecure --location `"$($Global:OSDDownload.FullName)`" --url $($Global:OSDDownload.SourceUrl)"
+                    Invoke-Expression "& curl.exe --insecure --location --output `"$($Global:OSDDownload.FullName)`" --url $($Global:OSDDownload.SourceUrl)"
                 }
                 else {
                     #PowerShell ISE will display a NativeCommandError, so progress will not be displayed
-                    $Quiet = Invoke-Expression "& curl.exe --location --output --insecure --location `"$($Global:OSDDownload.FullName)`" --url $($Global:OSDDownload.SourceUrl) 2>&1"
+                    $Quiet = Invoke-Expression "& curl.exe --insecure --location --output `"$($Global:OSDDownload.FullName)`" --url $($Global:OSDDownload.SourceUrl) 2>&1"
                 }
             }
             elseif ($PSBoundParameters['BitsTransfer']) {
