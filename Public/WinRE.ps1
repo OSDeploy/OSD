@@ -1,7 +1,7 @@
 function Copy-WinRE.wim {
     [CmdletBinding()]
     param (
-        [string]$DestinationDirectory =$env:TEMP,
+        [string]$DestinationDirectory = $env:TEMP,
 
         [string]$DestinationFileName = 'winre.wim'
     )
@@ -22,29 +22,34 @@ function Copy-WinRE.wim {
         $WinreLocationPath = (Get-ReAgentXml).WinreLocationPath
         Write-Verbose "WinreLocationPath: $WinreLocationPath"
 
-        New-PSDrive -Name WinRE -PSProvider FileSystem -Root $GetPartitionWinRE.AccessPaths[0] -ErrorAction Stop | Out-Null
+        try {
+            New-PSDrive -Name WinRE -PSProvider FileSystem -Root $GetPartitionWinRE.AccessPaths[0] -ErrorAction Stop
+        }
+        catch {
+            Write-Warning "Error connecting PSDrive to WinRE.wim"
+        }
 
-        $WinreDirectory = Join-Path 'WinRE:' $WinreLocationPath
+        $WinreDirectory = Join-Path 'WinRE:' -ChildPath $WinreLocationPath
         Write-Verbose "WinreDirectory: $WinreDirectory"
 
-        if (Test-Path $WinreDirectory) {
-            $WinreSource = Join-Path $WinreDirectory 'winre.wim'
+        if (Test-Path "$WinreDirectory" -PathType Container -ErrorAction Ignore) {
+            $WinreSource = Join-Path $WinreDirectory -ChildPath 'winre.wim'
             Write-Verbose "WinreSource: $WinreSource"
 
-            if (!(Test-Path $DestinationDirectory)) {
+            if (!(Test-Path $DestinationDirectory -ErrorAction Ignore)) {
                 New-Item $DestinationDirectory -ItemType Directory -Force -ErrorAction Stop | Out-Null
             }
 
-            $WinreDestination = Join-Path $DestinationDirectory $DestinationFileName
+            $WinreDestination = Join-Path $DestinationDirectory -ChildPath $DestinationFileName
             Write-Verbose "WinreDestination: $WinreDestination"
 
 
-            $GetItemWinre = Get-Item -Path $WinreSource -Force
+            $GetItemWinre = Get-Item -Path 'WinRE:\Recovery\WindowsRE\winre.wim' -Force
             Copy-Item -Path $GetItemWinre.FullName -Destination $WinreDestination -Force
         }
-        Get-PSDrive -Name WinRE | Remove-PSDrive -Force
+        #Get-PSDrive -Name WinRE | Remove-PSDrive -Force
 
-        if (Test-Path $WinreDestination) {
+        if (Test-Path $WinreDestination -ErrorAction Ignore) {
             (Get-Item -Path $WinreDestination -Force).Attributes = 'Archive'
             Get-Item -Path $WinreDestination
         }

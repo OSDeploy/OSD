@@ -67,17 +67,18 @@ function Save-WebFile {
             Write-Verbose "cURL: $SourceUrl"
     
             if ($host.name -match 'ConsoleHost') {
-                Invoke-Expression "& curl.exe --location --output `"$DestinationFullName`" --url `"$SourceUrl`""
+                Invoke-Expression "& curl.exe --location --output --insecure --location `"$DestinationFullName`" --url `"$SourceUrl`""
             }
             else {
                 #PowerShell ISE will display a NativeCommandError, so progress will not be displayed
-                $Quiet = Invoke-Expression "& curl.exe --location --output `"$DestinationFullName`" --url `"$SourceUrl`" 2>&1"
+                $Quiet = Invoke-Expression "& curl.exe --location --output --insecure --location `"$DestinationFullName`" --url `"$SourceUrl`" 2>&1"
             }
         }
         else {
             [Net.ServicePointManager]::SecurityProtocol = [Net.ServicePointManager]::SecurityProtocol -bor [Net.SecurityProtocolType]::Tls1
             $WebClient = New-Object System.Net.WebClient
             $WebClient.DownloadFile($SourceUrl, $DestinationFullName)
+            $WebClient.Dispose()
         }
         #=======================================================================
         #	Return

@@ -1,8 +1,3 @@
-#Requires -Version 5
-#Requires -RunAsAdministrator
-
-#Version: 0.0.0.1
-
 function New-CabDevelopment
 {
 	[CmdletBinding()]

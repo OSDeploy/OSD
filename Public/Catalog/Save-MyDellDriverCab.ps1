@@ -45,7 +45,7 @@ function Save-MyDellDriverCab {
         if (Get-Command 'curl.exe') {
             if (-NOT (Test-Path $OutFile)) {
                 Write-Host "Downloading using cURL" -ForegroundColor Cyan
-                & curl.exe --location --output "$OutFile" --progress-bar --url $Source
+                & curl.exe --location --output --insecure --location "$OutFile" --progress-bar --url $Source
             }
         } else {
             Write-Warning "If you had cURL, this download would be much faster ..."
