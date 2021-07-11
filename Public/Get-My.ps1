@@ -79,7 +79,8 @@ function Get-MyComputerManufacturer {
     if ($Brief -eq $true) {
         if ($MyComputerManufacturer -match 'Dell') {$MyComputerManufacturer = 'Dell'}
         if ($MyComputerManufacturer -match 'Lenovo') {$MyComputerManufacturer = 'Lenovo'}
-        if ($MyComputerManufacturer -match 'Hewlett Packard') {$MyComputerManufacturer = 'HP'}
+        if ($MyComputerManufacturer -match 'Hewlett') {$MyComputerManufacturer = 'HP'}
+        if ($MyComputerManufacturer -match 'Packard') {$MyComputerManufacturer = 'HP'}
         if ($MyComputerManufacturer -match 'HP') {$MyComputerManufacturer = 'HP'}
         if ($MyComputerManufacturer -match 'Microsoft') {$MyComputerManufacturer = 'Microsoft'}
         if ($MyComputerManufacturer -match 'Panasonic') {$MyComputerManufacturer = 'Panasonic'}

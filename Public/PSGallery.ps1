@@ -1,15 +1,19 @@
 <#
 .SYNOPSIS
-Gets PowerShell Gallery working in WinPE
+Mount a Windows Image (WIM), enable PowerShell Gallery, and Dismount Save
 
 .DESCRIPTION
-Gets PowerShell Gallery working in WinPE
+Mount a Windows Image (WIM), enable PowerShell Gallery, and Dismount Save
+
+.PARAMETER ImagePath
+Mandatory Path to the Windows Image (WIM)
+
+.PARAMETER Index
+Index of the Windows Image (WIM) to mount.  Default is 1 (Index 1)
 
 .LINK
-https://osd.osdeploy.com/module/functions/winpe/enable-pewimpsgallery
 
 .NOTES
-21.3.8     Initial Release
 #>
 function Enable-PEWimPSGallery {
     [CmdletBinding()]
@@ -49,6 +53,20 @@ function Enable-PEWimPSGallery {
     }
     end {}
 }
+<#
+.SYNOPSIS
+Enables PowerShell Gallery in a mounted Windows Image
+
+.DESCRIPTION
+Enables PowerShell Gallery in a mounted Windows Image
+
+.PARAMETER Path
+Path to the mounted Windows Image (WIM). If no path is specified, all mounted Windows Images (WIMs) will be targeted
+
+.LINK
+
+.NOTES
+#>
 function Enable-PEWindowsImagePSGallery {
     [CmdletBinding()]
     param (
