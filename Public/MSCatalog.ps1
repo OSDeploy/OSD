@@ -108,7 +108,7 @@ function Save-SystemFirmwareUpdate {
         Write-Warning "Could not find a UEFI Firmware HardwareID"
     }
 }
-function Save-MSCUpdate {
+function Save-MsUp {
     [CmdLetBinding()]
     param (
         [ValidateSet('x64','x86')]
@@ -161,12 +161,12 @@ function Save-MSCUpdate {
     Sort-Object LastUpdated -Descending |`
     Select-Object LastUpdated,Classification,Title,Size,Guid
 
-    if ($Include -notcontains 'Preview') {
+    if ($Include -contains 'Preview') {
         Write-Host -ForegroundColor DarkGray "Include Preview Updates: True"
-        $CatalogUpdate = $CatalogUpdate | Where-Object {$_.Title -notmatch 'Preview'}
     }
     else {
         Write-Host -ForegroundColor DarkGray "Include Preview Updates: False"
+        $CatalogUpdate = $CatalogUpdate | Where-Object {$_.Title -notmatch 'Preview'}
     }
 
     $CatalogUpdate = $CatalogUpdate | Out-GridView -Title 'Select a Microsoft Update to download' -PassThru
