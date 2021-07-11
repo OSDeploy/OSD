@@ -89,15 +89,14 @@ function Save-SystemFirmwareUpdate {
         if ($SystemFirmwareUpdateFile) {
             expand.exe "$($SystemFirmwareUpdateFile.FullName)" -F:* "$DestinationDirectory"
             Remove-Item $SystemFirmwareUpdateFile.FullName | Out-Null
-            
             if ($env:SystemDrive -eq 'X:') {
-                Write-Host -ForegroundColor DarkGray "You can install the firmware by running the following command"
-                Write-Host -ForegroundColor DarkGray "Add-WindowsDriver -Path C:\ -Driver $DestinationDirectory"
+                #Write-Host -ForegroundColor DarkGray "You can install the firmware by running the following command"
+                #Write-Host -ForegroundColor DarkGray "Add-WindowsDriver -Path C:\ -Driver $DestinationDirectory"
             }
             else {
-                Write-Host -ForegroundColor DarkGray "Make sure Bitlocker is suspended first before installing the Firmware Driver"
+                #Write-Host -ForegroundColor DarkGray "Make sure Bitlocker is suspended first before installing the Firmware Driver"
                 if (Test-Path "$DestinationDirectory\firmware.inf") {
-                    Write-Host -ForegroundColor DarkGray "Right click on $DestinationDirectory\firmware.inf and Install"
+                    #Write-Host -ForegroundColor DarkGray "Right click on $DestinationDirectory\firmware.inf and Install"
                 }
             }
         }
@@ -109,7 +108,7 @@ function Save-SystemFirmwareUpdate {
         Write-Warning "Could not find a UEFI Firmware HardwareID"
     }
 }
-function Save-OSDUpdateBetaTest {
+function Save-MSCUpdate {
     [CmdLetBinding()]
     param (
         [ValidateSet('x64','x86')]
@@ -130,7 +129,7 @@ function Save-OSDUpdateBetaTest {
         [ValidateSet('Preview')]
         [string[]]$Include,
 
-        [String] $DestinationDirectory = "$env:TEMP\CatalogUpdate"
+        [String] $DestinationDirectory = "$env:TEMP\MSCUpdate"
     )
     #=======================================================================
     #	MSCatalog PowerShell Module
@@ -163,7 +162,11 @@ function Save-OSDUpdateBetaTest {
     Select-Object LastUpdated,Classification,Title,Size,Guid
 
     if ($Include -notcontains 'Preview') {
+        Write-Host -ForegroundColor DarkGray "Include Preview Updates: True"
         $CatalogUpdate = $CatalogUpdate | Where-Object {$_.Title -notmatch 'Preview'}
+    }
+    else {
+        Write-Host -ForegroundColor DarkGray "Include Preview Updates: False"
     }
 
     $CatalogUpdate = $CatalogUpdate | Out-GridView -Title 'Select a Microsoft Update to download' -PassThru

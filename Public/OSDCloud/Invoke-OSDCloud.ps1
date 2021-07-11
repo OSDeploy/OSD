@@ -461,7 +461,11 @@ function Invoke-OSDCloud {
     #	UpdateFirmware
     #=======================================================================
     if ($OSDCloud.UpdateFirmware) {
+        Write-Host -ForegroundColor DarkGray "========================================================================="
+        Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Save-SystemFirmwareUpdate"
         Save-SystemFirmwareUpdate -DestinationDirectory 'C:\Drivers\Firmware' -ErrorAction Ignore
+        Write-Host -ForegroundColor DarkGray "Firmware Updates are expanded to C:\Drivers\Firmware"
+        Write-Host -ForegroundColor DarkGray "They are validated and staged at C:\Windows\Firmware during Offline Servicing"
     }
     #=======================================================================
     #	Get-MyDriverPack

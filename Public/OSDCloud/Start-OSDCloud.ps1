@@ -514,7 +514,7 @@ function Start-OSDCloud {
     #	Update Firmware
     #=======================================================================
     Write-Host -ForegroundColor DarkGray "========================================================================="
-    Write-Host -ForegroundColor Cyan "UpdateFirmware"
+    Write-Host -ForegroundColor Cyan "System Firmware Update"
     $SystemFirmwareResource = Get-SystemFirmwareResource
     if ($SystemFirmwareResource) {
         if ($UpdateFirmware) {
