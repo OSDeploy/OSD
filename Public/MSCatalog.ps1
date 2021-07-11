@@ -6,29 +6,29 @@ function Convert-PNPDeviceIDtoGuid {
     )
 
     #$GuidPattern = '{[-0-9A-F]+?}'
-    #($DeviceID | Select-String -Pattern $GuidPattern -AllMatches | Select-Object -ExpandProperty Matches | Select-Object -ExpandProperty Value) -replace '{' -replace '}'
+    #($DeviceID | Select-String -Pattern $GuidPattern -AllMatches | Select-Object -ExpandProperty Matches | Select-Object -ExpandProperty Value)
 
     $GuidPattern = '\{?(([0-9a-f]){8}-([0-9a-f]){4}-([0-9a-f]){4}-([0-9a-f]){4}-([0-9a-f]){12})\}?'
-    ($PNPDeviceID | Select-String -Pattern $GuidPattern -AllMatches | Select-Object -ExpandProperty Matches | Select-Object -ExpandProperty Value) -replace '{' -replace '}'
+    ($PNPDeviceID | Select-String -Pattern $GuidPattern -AllMatches | Select-Object -ExpandProperty Matches | Select-Object -ExpandProperty Value)
 }
-function Get-UefiFirmwareDevice {
+function Get-SystemFirmwareDevice {
     [CmdLetBinding()]
     param ()
 
     Get-CimInstance -ClassName Win32_PnpEntity | Where-Object ClassGuid -eq '{f2e7dd72-6468-4e36-b6f1-6488f42c1b52}' | Where-Object Caption -match 'System'
 }
 
-function Get-UefiFirmwareGuid {
+function Get-SystemFirmwareResource {
     [CmdLetBinding()]
     param ()
 
-    $UefiFirmwareDevice = Get-UefiFirmwareDevice
+    $UefiFirmwareDevice = Get-SystemFirmwareDevice
 
     if ($UefiFirmwareDevice) {
         Convert-PNPDeviceIDtoGuid -PNPDeviceID $UefiFirmwareDevice.PNPDeviceID
     }
 }
-function Get-UefiFirmwareDriver {
+function Get-SystemFirmwareUpdate {
     #=======================================================================
     #	MSCatalog PowerShell Module
     #   Ryan-Jan
@@ -42,12 +42,12 @@ function Get-UefiFirmwareDriver {
 
     Block-PSModuleNotInstalled -ModuleName MSCatalog
 
-    Get-MSCatalogUpdate -Search (Get-UefiFirmwareGuid) -SortBy LastUpdated -Descending | Select-Object LastUpdated,Title,Version,Size,Guid -First 1 -ErrorAction Ignore
+    Get-MSCatalogUpdate -Search (Get-SystemFirmwareResource) -SortBy LastUpdated -Descending | Select-Object LastUpdated,Title,Version,Size,Guid -First 1 -ErrorAction Ignore
 }
-function Save-UefiFirmwareDriver {
+function Save-SystemFirmwareUpdate {
     [CmdLetBinding()]
     param (
-        [String] $DestinationDirectory = "$env:TEMP\UefiFirmwareDriver"
+        [String] $DestinationDirectory = "$env:TEMP\SystemFirmwareUpdate"
     )
     #=======================================================================
     #	MSCatalog PowerShell Module
@@ -64,31 +64,31 @@ function Save-UefiFirmwareDriver {
     #=======================================================================
     Block-PSModuleNotInstalled -ModuleName MSCatalog
     #=======================================================================
-    #	Get-UefiFirmwareDriver
+    #	Get-SystemFirmwareUpdate
 
-<#     Write-Host -ForegroundColor DarkGray "UEFI Firmware PNPDeviceID: $($UefiFirmwareDriver.PNPDeviceID)"
+<#     Write-Host -ForegroundColor DarkGray "UEFI Firmware PNPDeviceID: $($SystemFirmwareUpdate.PNPDeviceID)"
 
-    $PNPDeviceGuid = Convert-PNPDeviceIDtoGuid -PNPDeviceID $UefiFirmwareDriver.PNPDeviceID
+    $PNPDeviceGuid = Convert-PNPDeviceIDtoGuid -PNPDeviceID $SystemFirmwareUpdate.PNPDeviceID
     Write-Host -ForegroundColor DarkGray "UEFI Firmware Guid: $PNPDeviceGuid"
 
     $CatalogUpdate = Get-MSCatalogUpdate -Search $PNPDeviceGuid -SortBy LastUpdated -Descending |`
     Select-Object LastUpdated,Title,Version,Size,Guid -First 1 -ErrorAction Ignore #>
     #=======================================================================
-    $UefiFirmwareDriver = Get-UefiFirmwareDriver
+    $SystemFirmwareUpdate = Get-SystemFirmwareUpdate
 
-    if ($UefiFirmwareDriver.Guid) {
-        Write-Host -ForegroundColor DarkGray "$($UefiFirmwareDriver.Title) version $($UefiFirmwareDriver.Version)"
-        Write-Host -ForegroundColor DarkGray "Version $($UefiFirmwareDriver.Version) Size: $($UefiFirmwareDriver.Size)"
-        Write-Host -ForegroundColor DarkGray "Last Updated $($UefiFirmwareDriver.LastUpdated)"
-        Write-Host -ForegroundColor DarkGray "UpdateID: $($UefiFirmwareDriver.Guid)"
+    if ($SystemFirmwareUpdate.Guid) {
+        Write-Host -ForegroundColor DarkGray "$($SystemFirmwareUpdate.Title) version $($SystemFirmwareUpdate.Version)"
+        Write-Host -ForegroundColor DarkGray "Version $($SystemFirmwareUpdate.Version) Size: $($SystemFirmwareUpdate.Size)"
+        Write-Host -ForegroundColor DarkGray "Last Updated $($SystemFirmwareUpdate.LastUpdated)"
+        Write-Host -ForegroundColor DarkGray "UpdateID: $($SystemFirmwareUpdate.Guid)"
         Write-Host -ForegroundColor DarkGray ""
     }
 
-    if ($UefiFirmwareDriver) {
-        $UefiFirmwareDriverDriverFile = Save-UpdateCatalog -Guid $UefiFirmwareDriver.Guid -DestinationDirectory $DestinationDirectory
-        if ($UefiFirmwareDriverDriverFile) {
-            expand.exe "$($UefiFirmwareDriverDriverFile.FullName)" -F:* "$DestinationDirectory"
-            Remove-Item $UefiFirmwareDriverDriverFile.FullName | Out-Null
+    if ($SystemFirmwareUpdate) {
+        $SystemFirmwareUpdateFile = Save-UpdateCatalog -Guid $SystemFirmwareUpdate.Guid -DestinationDirectory $DestinationDirectory
+        if ($SystemFirmwareUpdateFile) {
+            expand.exe "$($SystemFirmwareUpdateFile.FullName)" -F:* "$DestinationDirectory"
+            Remove-Item $SystemFirmwareUpdateFile.FullName | Out-Null
             
             if ($env:SystemDrive -eq 'X:') {
                 Write-Host -ForegroundColor DarkGray "You can install the firmware by running the following command"

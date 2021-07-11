@@ -7,7 +7,7 @@
 RootModule = 'OSD.psm1'
 
 # Version number of his module.
-ModuleVersion = '21.7.6.1'
+ModuleVersion = '21.7.11.1'
 
 # Supported PSEditions
 # CompatiblePSEditions = @()
@@ -246,10 +246,10 @@ FunctionsToExport =
 'Find-TextInFile',
 'New-CabDevelopment',
 'Add-WindowsPackageSSU',
-'Get-UefiFirmwareDevice',
-'Get-UefiFirmwareGuid',
-'Get-UefiFirmwareDriver',
-'Save-UefiFirmwareDriver',
+'Get-SystemFirmwareDevice',
+'Get-SystemFirmwareResource',
+'Get-SystemFirmwareUpdate',
+'Save-SystemFirmwareUpdate',
 'Convert-PNPDeviceIDtoGuid',
 'Save-OSDUpdateBetaTest'
 
