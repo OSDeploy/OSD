@@ -44,7 +44,7 @@ function Invoke-OSDCloud {
         OSLanguage = $OSLanguage
         OSLanguageMenu = $null
         OSLanguageNames = $null
-        OSLicense = $null
+        OSLicense = $OSLicense
         OSImageIndex = 1
         Product = Get-MyComputerProduct
         Screenshot = $null
@@ -55,6 +55,7 @@ function Invoke-OSDCloud {
         TimeSpan = $null
         TimeStart = Get-Date
         Transcript = $null
+        UpdateFirmware = $UpdateFirmware
         USBPartitions = $null
         Version = [Version](Get-Module -Name OSD -ListAvailable | Sort-Object Version -Descending | Select-Object -First 1).Version
         VersionMin = [Version]'21.4.23.1'
@@ -455,6 +456,12 @@ function Invoke-OSDCloud {
     }
     if (-NOT (Test-Path 'C:\Windows\Setup\Scripts')) {
         New-Item -Path 'C:\Windows\Setup\Scripts' -ItemType Directory -Force -ErrorAction Stop | Out-Null
+    }
+    #=======================================================================
+    #	UpdateFirmware
+    #=======================================================================
+    if ($OSDCloud.UpdateFirmware) {
+        Save-SystemFirmwareUpdate -DestinationDirectory 'C:\Drivers\Firmware' -ErrorAction Ignore
     }
     #=======================================================================
     #	Get-MyDriverPack

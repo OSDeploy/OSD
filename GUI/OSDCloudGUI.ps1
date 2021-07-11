@@ -479,7 +479,6 @@ $OKButton.add_Click({
         Manufacturer    = $ManufacturerTextBox.Text
         Product         = $ProductTextBox.Text
     }
-
     Start-OSDCloud @Params
     Pause
 })
