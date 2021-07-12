@@ -337,7 +337,7 @@ function Block-PSModuleNotInstalled {
         [switch]$Pause
     )
     $CallingFunction = (Get-PSCallStack)[1].InvocationInfo.Line
-    $Message = "[$((Get-Date).ToString('yyyy-MM-dd-HHmmss'))] $CallingFunction requires PowerShell Modukle $ModuleName to be installed"
+    $Message = "[$((Get-Date).ToString('yyyy-MM-dd-HHmmss'))] $CallingFunction requires PowerShell Module $ModuleName to be installed"
         
     if (-not (Get-Module -ListAvailable -Name $ModuleName)) {
         Write-Warning $Message

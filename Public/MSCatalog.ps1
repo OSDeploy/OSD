@@ -57,56 +57,52 @@ function Save-SystemFirmwareUpdate {
     #   Catalog
     #=======================================================================
     if (!(Get-Module -ListAvailable -Name MSCatalog)) {
-        Install-Module MSCatalog -Force
+        Install-Module MSCatalog -Force -ErrorAction Ignore
     }
     #=======================================================================
     #	Block
     #=======================================================================
-    Block-PSModuleNotInstalled -ModuleName MSCatalog
+    #Block-PSModuleNotInstalled -ModuleName MSCatalog
     #=======================================================================
-    #	Get-SystemFirmwareUpdate
-
-<#     Write-Host -ForegroundColor DarkGray "UEFI Firmware PNPDeviceID: $($SystemFirmwareUpdate.PNPDeviceID)"
-
-    $PNPDeviceGuid = Convert-PNPDeviceIDtoGuid -PNPDeviceID $SystemFirmwareUpdate.PNPDeviceID
-    Write-Host -ForegroundColor DarkGray "UEFI Firmware Guid: $PNPDeviceGuid"
-
-    $CatalogUpdate = Get-MSCatalogUpdate -Search $PNPDeviceGuid -SortBy LastUpdated -Descending |`
-    Select-Object LastUpdated,Title,Version,Size,Guid -First 1 -ErrorAction Ignore #>
-    #=======================================================================
-    $SystemFirmwareUpdate = Get-SystemFirmwareUpdate
-
-    if ($SystemFirmwareUpdate.Guid) {
-        Write-Host -ForegroundColor DarkGray "$($SystemFirmwareUpdate.Title) version $($SystemFirmwareUpdate.Version)"
-        Write-Host -ForegroundColor DarkGray "Version $($SystemFirmwareUpdate.Version) Size: $($SystemFirmwareUpdate.Size)"
-        Write-Host -ForegroundColor DarkGray "Last Updated $($SystemFirmwareUpdate.LastUpdated)"
-        Write-Host -ForegroundColor DarkGray "UpdateID: $($SystemFirmwareUpdate.Guid)"
-        Write-Host -ForegroundColor DarkGray ""
-    }
-
-    if ($SystemFirmwareUpdate) {
-        $SystemFirmwareUpdateFile = Save-UpdateCatalog -Guid $SystemFirmwareUpdate.Guid -DestinationDirectory $DestinationDirectory
-        if ($SystemFirmwareUpdateFile) {
-            expand.exe "$($SystemFirmwareUpdateFile.FullName)" -F:* "$DestinationDirectory"
-            Remove-Item $SystemFirmwareUpdateFile.FullName | Out-Null
-            if ($env:SystemDrive -eq 'X:') {
-                #Write-Host -ForegroundColor DarkGray "You can install the firmware by running the following command"
-                #Write-Host -ForegroundColor DarkGray "Add-WindowsDriver -Path C:\ -Driver $DestinationDirectory"
+    if (Get-Module -ListAvailable -Name MSCatalog -ErrorAction Ignore) {
+        $SystemFirmwareUpdate = Get-SystemFirmwareUpdate
+    
+        if ($SystemFirmwareUpdate.Guid) {
+            Write-Host -ForegroundColor DarkGray "$($SystemFirmwareUpdate.Title) version $($SystemFirmwareUpdate.Version)"
+            Write-Host -ForegroundColor DarkGray "Version $($SystemFirmwareUpdate.Version) Size: $($SystemFirmwareUpdate.Size)"
+            Write-Host -ForegroundColor DarkGray "Last Updated $($SystemFirmwareUpdate.LastUpdated)"
+            Write-Host -ForegroundColor DarkGray "UpdateID: $($SystemFirmwareUpdate.Guid)"
+            Write-Host -ForegroundColor DarkGray ""
+        }
+    
+        if ($SystemFirmwareUpdate) {
+            $SystemFirmwareUpdateFile = Save-UpdateCatalog -Guid $SystemFirmwareUpdate.Guid -DestinationDirectory $DestinationDirectory
+            if ($SystemFirmwareUpdateFile) {
+                expand.exe "$($SystemFirmwareUpdateFile.FullName)" -F:* "$DestinationDirectory"
+                Remove-Item $SystemFirmwareUpdateFile.FullName | Out-Null
+                if ($env:SystemDrive -eq 'X:') {
+                    #Write-Host -ForegroundColor DarkGray "You can install the firmware by running the following command"
+                    #Write-Host -ForegroundColor DarkGray "Add-WindowsDriver -Path C:\ -Driver $DestinationDirectory"
+                }
+                else {
+                    #Write-Host -ForegroundColor DarkGray "Make sure Bitlocker is suspended first before installing the Firmware Driver"
+                    if (Test-Path "$DestinationDirectory\firmware.inf") {
+                        #Write-Host -ForegroundColor DarkGray "Right click on $DestinationDirectory\firmware.inf and Install"
+                    }
+                }
             }
             else {
-                #Write-Host -ForegroundColor DarkGray "Make sure Bitlocker is suspended first before installing the Firmware Driver"
-                if (Test-Path "$DestinationDirectory\firmware.inf") {
-                    #Write-Host -ForegroundColor DarkGray "Right click on $DestinationDirectory\firmware.inf and Install"
-                }
+                Write-Warning "Save-SystemFirmwareUpdate: Could not find a UEFI Firmware update for this HardwareID"
             }
         }
         else {
-            Write-Warning "Could not find a UEFI Firmware update for this HardwareID"
+            Write-Warning "Save-SystemFirmwareUpdate: Could not find a UEFI Firmware HardwareID"
         }
     }
     else {
-        Write-Warning "Could not find a UEFI Firmware HardwareID"
+        Write-Warning "Save-SystemFirmwareUpdate: Could not install required PowerShell Module MSCatalog"
     }
+    #=======================================================================
 }
 function Save-MsUp {
     [CmdLetBinding()]
