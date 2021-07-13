@@ -39,10 +39,92 @@ function Get-SystemFirmwareUpdate {
     if (!(Get-Module -ListAvailable -Name MSCatalog)) {
         Install-Module MSCatalog -Force
     }
-
-    Block-PSModuleNotInstalled -ModuleName MSCatalog
-
-    Get-MSCatalogUpdate -Search (Get-SystemFirmwareResource) -SortBy LastUpdated -Descending | Select-Object LastUpdated,Title,Version,Size,Guid -First 1 -ErrorAction Ignore
+    #=======================================================================
+    #	Make sure the Module was installed
+    #=======================================================================
+    if (Get-Module -ListAvailable -Name MSCatalog -ErrorAction Ignore) {
+        if (Test-MicrosoftCatalogWebConnection) {
+            Get-MSCatalogUpdate -Search (Get-SystemFirmwareResource) -SortBy LastUpdated -Descending | Select-Object LastUpdated,Title,Version,Size,Guid -First 1 -ErrorAction Ignore
+        }
+        else {
+            Write-Warning "Get-SystemFirmwareUpdate: Could not reach https://www.catalog.update.microsoft.com/"
+        }
+    }
+    else {
+        Write-Warning "Get-SystemFirmwareUpdate: Could not install required PowerShell Module MSCatalog"
+    }
+    #=======================================================================
+}
+function Install-SystemFirmwareUpdate {
+    [CmdLetBinding()]
+    param (
+        [String] $DestinationDirectory = "C:\Drivers\SystemFirmwareUpdate"
+    )
+    #=======================================================================
+    #	Blocks
+    #=======================================================================
+    Block-StandardUser
+    #=======================================================================
+    #	MSCatalog PowerShell Module
+    #   Ryan-Jan
+    #   https://github.com/ryan-jan/MSCatalog
+    #   This excellent work is a good way to gather information from MS
+    #   Catalog
+    #=======================================================================
+    if (!(Get-Module -ListAvailable -Name MSCatalog)) {
+        Install-Module MSCatalog -Force -ErrorAction Ignore
+    }
+    #=======================================================================
+    if (Test-Path 'C:\Windows' -PathType Container) {
+        if (Test-MicrosoftCatalogWebConnection) {
+            if (Get-Module -ListAvailable -Name MSCatalog -ErrorAction Ignore) {
+                $SystemFirmwareUpdate = Get-SystemFirmwareUpdate
+            
+                if ($SystemFirmwareUpdate.Guid) {
+                    Write-Host -ForegroundColor DarkGray "$($SystemFirmwareUpdate.Title) version $($SystemFirmwareUpdate.Version)"
+                    Write-Host -ForegroundColor DarkGray "Version $($SystemFirmwareUpdate.Version) Size: $($SystemFirmwareUpdate.Size)"
+                    Write-Host -ForegroundColor DarkGray "Last Updated $($SystemFirmwareUpdate.LastUpdated)"
+                    Write-Host -ForegroundColor DarkGray "UpdateID: $($SystemFirmwareUpdate.Guid)"
+                    Write-Host -ForegroundColor DarkGray ""
+                }
+            
+                if ($SystemFirmwareUpdate) {
+                    $SystemFirmwareUpdateFile = Save-UpdateCatalog -Guid $SystemFirmwareUpdate.Guid -DestinationDirectory $DestinationDirectory
+                    if ($SystemFirmwareUpdateFile) {
+                        expand.exe "$($SystemFirmwareUpdateFile.FullName)" -F:* "$DestinationDirectory"
+                        Remove-Item $SystemFirmwareUpdateFile.FullName | Out-Null
+                        if ($env:SystemDrive -eq 'X:') {
+                            Add-WindowsDriver -Path 'C:\' -Driver "$DestinationDirectory"
+                        }
+                        else {
+                            if (Test-Path "$DestinationDirectory" -PathType Container) {
+                                Get-ChildItem "$DestinationDirectory" -Recurse -Filter "*.inf" | ForEach-Object { PNPUtil.exe /Add-Driver $_.FullName /install }
+                            }
+                        }
+                    }
+                    else {
+                        Write-Warning "Install-SystemFirmwareUpdate: Could not find a UEFI Firmware update for this HardwareID"
+                    }
+                }
+                else {
+                    Write-Warning "Install-SystemFirmwareUpdate: Could not find a UEFI Firmware HardwareID"
+                }
+            }
+            else {
+                Write-Warning "Install-SystemFirmwareUpdate: Could not install required PowerShell Module MSCatalog"
+            }
+        }
+        else {
+            Write-Warning "Install-SystemFirmwareUpdate: Could not reach https://www.catalog.update.microsoft.com/"
+        }
+    }
+    else {
+        Write-Warning "Install-SystemFirmwareUpdate: Could not locate C:\Windows"
+        if ($env:SystemDrive -eq 'X:') {
+            Write-Warning "Make sure that Bitlocker encrypted drives are unlocked and suspended first"
+        }
+    }
+    #=======================================================================
 }
 function Save-SystemFirmwareUpdate {
     [CmdLetBinding()]
@@ -60,47 +142,48 @@ function Save-SystemFirmwareUpdate {
         Install-Module MSCatalog -Force -ErrorAction Ignore
     }
     #=======================================================================
-    #	Block
-    #=======================================================================
-    #Block-PSModuleNotInstalled -ModuleName MSCatalog
-    #=======================================================================
-    if (Get-Module -ListAvailable -Name MSCatalog -ErrorAction Ignore) {
-        $SystemFirmwareUpdate = Get-SystemFirmwareUpdate
-    
-        if ($SystemFirmwareUpdate.Guid) {
-            Write-Host -ForegroundColor DarkGray "$($SystemFirmwareUpdate.Title) version $($SystemFirmwareUpdate.Version)"
-            Write-Host -ForegroundColor DarkGray "Version $($SystemFirmwareUpdate.Version) Size: $($SystemFirmwareUpdate.Size)"
-            Write-Host -ForegroundColor DarkGray "Last Updated $($SystemFirmwareUpdate.LastUpdated)"
-            Write-Host -ForegroundColor DarkGray "UpdateID: $($SystemFirmwareUpdate.Guid)"
-            Write-Host -ForegroundColor DarkGray ""
-        }
-    
-        if ($SystemFirmwareUpdate) {
-            $SystemFirmwareUpdateFile = Save-UpdateCatalog -Guid $SystemFirmwareUpdate.Guid -DestinationDirectory $DestinationDirectory
-            if ($SystemFirmwareUpdateFile) {
-                expand.exe "$($SystemFirmwareUpdateFile.FullName)" -F:* "$DestinationDirectory"
-                Remove-Item $SystemFirmwareUpdateFile.FullName | Out-Null
-                if ($env:SystemDrive -eq 'X:') {
-                    #Write-Host -ForegroundColor DarkGray "You can install the firmware by running the following command"
-                    #Write-Host -ForegroundColor DarkGray "Add-WindowsDriver -Path C:\ -Driver $DestinationDirectory"
+    if (Test-MicrosoftCatalogWebConnection) {
+        if (Get-Module -ListAvailable -Name MSCatalog -ErrorAction Ignore) {
+            $SystemFirmwareUpdate = Get-SystemFirmwareUpdate
+        
+            if ($SystemFirmwareUpdate.Guid) {
+                Write-Host -ForegroundColor DarkGray "$($SystemFirmwareUpdate.Title) version $($SystemFirmwareUpdate.Version)"
+                Write-Host -ForegroundColor DarkGray "Version $($SystemFirmwareUpdate.Version) Size: $($SystemFirmwareUpdate.Size)"
+                Write-Host -ForegroundColor DarkGray "Last Updated $($SystemFirmwareUpdate.LastUpdated)"
+                Write-Host -ForegroundColor DarkGray "UpdateID: $($SystemFirmwareUpdate.Guid)"
+                Write-Host -ForegroundColor DarkGray ""
+            }
+        
+            if ($SystemFirmwareUpdate) {
+                $SystemFirmwareUpdateFile = Save-UpdateCatalog -Guid $SystemFirmwareUpdate.Guid -DestinationDirectory $DestinationDirectory
+                if ($SystemFirmwareUpdateFile) {
+                    expand.exe "$($SystemFirmwareUpdateFile.FullName)" -F:* "$DestinationDirectory"
+                    Remove-Item $SystemFirmwareUpdateFile.FullName | Out-Null
+                    if ($env:SystemDrive -eq 'X:') {
+                        #Write-Host -ForegroundColor DarkGray "You can install the firmware by running the following command"
+                        #Write-Host -ForegroundColor DarkGray "Add-WindowsDriver -Path C:\ -Driver $DestinationDirectory"
+                    }
+                    else {
+                        #Write-Host -ForegroundColor DarkGray "Make sure Bitlocker is suspended first before installing the Firmware Driver"
+                        if (Test-Path "$DestinationDirectory\firmware.inf") {
+                            #Write-Host -ForegroundColor DarkGray "Right click on $DestinationDirectory\firmware.inf and Install"
+                        }
+                    }
                 }
                 else {
-                    #Write-Host -ForegroundColor DarkGray "Make sure Bitlocker is suspended first before installing the Firmware Driver"
-                    if (Test-Path "$DestinationDirectory\firmware.inf") {
-                        #Write-Host -ForegroundColor DarkGray "Right click on $DestinationDirectory\firmware.inf and Install"
-                    }
+                    Write-Warning "Save-SystemFirmwareUpdate: Could not find a UEFI Firmware update for this HardwareID"
                 }
             }
             else {
-                Write-Warning "Save-SystemFirmwareUpdate: Could not find a UEFI Firmware update for this HardwareID"
+                Write-Warning "Save-SystemFirmwareUpdate: Could not find a UEFI Firmware HardwareID"
             }
         }
         else {
-            Write-Warning "Save-SystemFirmwareUpdate: Could not find a UEFI Firmware HardwareID"
+            Write-Warning "Save-SystemFirmwareUpdate: Could not install required PowerShell Module MSCatalog"
         }
     }
     else {
-        Write-Warning "Save-SystemFirmwareUpdate: Could not install required PowerShell Module MSCatalog"
+        Write-Warning "Save-SystemFirmwareUpdate: Could not reach https://www.catalog.update.microsoft.com/"
     }
     #=======================================================================
 }
@@ -139,105 +222,111 @@ function Save-MsUp {
         Install-Module MSCatalog -Force
     }
     #=======================================================================
-    #	Block
+    #	Make sure the Module was installed first
     #=======================================================================
-    Block-PSModuleNotInstalled -ModuleName MSCatalog
-    #=======================================================================
-    #	Details
-    #=======================================================================
-    Write-Host -ForegroundColor DarkGray "OperatingSystem: $OS"
-    Write-Host -ForegroundColor DarkGray "Architecture: $Arch"
-    Write-Host -ForegroundColor DarkGray "Category: $Category"
-    #=======================================================================
-    #	Category
-    #=======================================================================
-    if ($Category -eq 'LCU') {
-        $SearchString = "Cumulative Update $OS"
-    }
-    if ($Category -eq 'SSU') {
-        $SearchString = "Servicing Stack Update $OS"
-    }
-    if ($Category -eq 'DotNetCU') {
-        $SearchString = "Framework $OS"
-    }
-    if ($OS -eq 'Windows 10') {
-        Write-Host -ForegroundColor DarkGray "Build: $Build"
-        $SearchString = "$SearchString $Build $Arch"
-    }
-    elseif ($OS -eq 'Windows Server') {
-        Write-Host -ForegroundColor DarkGray "Build: $Build"
-        $SearchString = "$SearchString $Build $Arch"
-    }
-    else {
-        $SearchString = "$SearchString $Arch"
-    }
-    #=======================================================================
-    #	Go
-    #=======================================================================
-    $CatalogUpdate = Get-MSCatalogUpdate -Search $SearchString -SortBy "Title" -AllPages -Descending |`
-    Sort-Object LastUpdated -Descending |`
-    Select-Object LastUpdated,Classification,Title,Size,Products,Guid
-    #=======================================================================
-    #	Exclude
-    #=======================================================================
-    $CatalogUpdate = $CatalogUpdate | Where-Object {$_.Title -notmatch 'arm64'}
-    $CatalogUpdate = $CatalogUpdate | Where-Object {$_.Title -notmatch 'Dynamic'}
-    #=======================================================================
-    #	OperatingSystem
-    #=======================================================================
-    if ($OS -eq 'Windows 10') {
-        $CatalogUpdate = $CatalogUpdate | Where-Object {$_.Title -match 'Windows 10'}
-        $CatalogUpdate = $CatalogUpdate | Where-Object {$_.Products -notmatch 'Windows Server'}
-        if ($Category -eq 'LCU') {
-            $CatalogUpdate = $CatalogUpdate | Where-Object {$_.Title -match "Cumulative Update for Windows 10 Version $Build"}
+    if (Test-MicrosoftCatalogWebConnection) {
+        if (Get-Module -ListAvailable -Name MSCatalog -ErrorAction Ignore) {
+            #=======================================================================
+            #	Details
+            #=======================================================================
+            Write-Host -ForegroundColor DarkGray "OperatingSystem: $OS"
+            Write-Host -ForegroundColor DarkGray "Architecture: $Arch"
+            Write-Host -ForegroundColor DarkGray "Category: $Category"
+            #=======================================================================
+            #	Category
+            #=======================================================================
+            if ($Category -eq 'LCU') {
+                $SearchString = "Cumulative Update $OS"
+            }
+            if ($Category -eq 'SSU') {
+                $SearchString = "Servicing Stack Update $OS"
+            }
+            if ($Category -eq 'DotNetCU') {
+                $SearchString = "Framework $OS"
+            }
+            if ($OS -eq 'Windows 10') {
+                Write-Host -ForegroundColor DarkGray "Build: $Build"
+                $SearchString = "$SearchString $Build $Arch"
+            }
+            elseif ($OS -eq 'Windows Server') {
+                Write-Host -ForegroundColor DarkGray "Build: $Build"
+                $SearchString = "$SearchString $Build $Arch"
+            }
+            else {
+                $SearchString = "$SearchString $Arch"
+            }
+            #=======================================================================
+            #	Go
+            #=======================================================================
+            $CatalogUpdate = Get-MSCatalogUpdate -Search $SearchString -SortBy "Title" -AllPages -Descending |`
+            Sort-Object LastUpdated -Descending |`
+            Select-Object LastUpdated,Classification,Title,Size,Products,Guid
+            #=======================================================================
+            #	Exclude
+            #=======================================================================
+            $CatalogUpdate = $CatalogUpdate | Where-Object {$_.Title -notmatch 'arm64'}
+            $CatalogUpdate = $CatalogUpdate | Where-Object {$_.Title -notmatch 'Dynamic'}
+            #=======================================================================
+            #	OperatingSystem
+            #=======================================================================
+            if ($OS -eq 'Windows 10') {
+                $CatalogUpdate = $CatalogUpdate | Where-Object {$_.Title -match 'Windows 10'}
+                $CatalogUpdate = $CatalogUpdate | Where-Object {$_.Products -notmatch 'Windows Server'}
+                if ($Category -eq 'LCU') {
+                    #$CatalogUpdate = $CatalogUpdate | Where-Object {$_.Title -match "Cumulative Update for Windows 10 Version $Build"}
+                }
+                if ($Category -eq 'SSU') {
+                    #$CatalogUpdate = $CatalogUpdate | Where-Object {$_.Title -match "Servicing Stack Update for Windows 10 Version $Build"}
+                }
+            }
+            if ($OS -eq 'Windows Server') {
+                $CatalogUpdate = $CatalogUpdate | Where-Object {$_.Products -eq 'Windows Server, version 1903 and later'}
+            }
+            if ($OS -eq 'Windows Server 2016') {
+                $CatalogUpdate = $CatalogUpdate | Where-Object {$_.Products -eq 'Windows Server 2016'}
+            }
+            if ($OS -eq 'Windows Server 2019') {
+                $CatalogUpdate = $CatalogUpdate | Where-Object {$_.Products -eq 'Windows Server 2019'}
+            }
+            #=======================================================================
+            #	Category
+            #=======================================================================
+            if ($Category -eq 'LCU') {
+                $CatalogUpdate = $CatalogUpdate | Where-Object {$_.Title -notmatch '.NET'}
+            }
+            if ($Category -eq 'DotNetCU') {
+                $CatalogUpdate = $CatalogUpdate | Where-Object {$_.Title -match "Framework"}
+            }
+            if ($Include -contains 'Preview') {
+                Write-Host -ForegroundColor DarkGray "Include Preview Updates: True"
+            }
+            else {
+                Write-Host -ForegroundColor DarkGray "Include Preview Updates: False"
+                $CatalogUpdate = $CatalogUpdate | Where-Object {$_.Title -notmatch 'Preview'}
+            }
+            #=======================================================================
+            #	Select
+            #=======================================================================
+            if ($Latest.IsPresent) {
+                $CatalogUpdate = $CatalogUpdate | Select-Object -First 1
+            }
+            else {
+                $CatalogUpdate = $CatalogUpdate | Out-GridView -Title 'Select a Microsoft Update to download' -PassThru
+            }
+            #=======================================================================
+            #	Download
+            #=======================================================================
+            foreach ($Update in $CatalogUpdate) {
+                Save-UpdateCatalog -Guid $Update.Guid -DestinationDirectory $DestinationDirectory
+            }
+            #=======================================================================
         }
-        if ($Category -eq 'SSU') {
-            $CatalogUpdate = $CatalogUpdate | Where-Object {$_.Title -match "Servicing Stack Update for Windows 10 Version $Build"}
+        else {
+            Write-Warning "Save-MsUp: Could not install required PowerShell Module MSCatalog"
         }
     }
-    if ($OS -eq 'Windows Server') {
-        $CatalogUpdate = $CatalogUpdate | Where-Object {$_.Products -eq 'Windows Server, version 1903 and later'}
-    }
-    if ($OS -eq 'Windows Server 2016') {
-        $CatalogUpdate = $CatalogUpdate | Where-Object {$_.Products -eq 'Windows Server 2016'}
-    }
-    if ($OS -eq 'Windows Server 2019') {
-        $CatalogUpdate = $CatalogUpdate | Where-Object {$_.Products -eq 'Windows Server 2019'}
-    }
-    #=======================================================================
-    #	Category
-    #=======================================================================
-    if ($Category -eq 'LCU') {
-        $CatalogUpdate = $CatalogUpdate | Where-Object {$_.Title -notmatch '.NET'}
-    }
-    if ($Category -eq 'DotNetCU') {
-        $CatalogUpdate = $CatalogUpdate | Where-Object {$_.Title -match "Framework"}
-    }
-    if ($Include -contains 'Preview') {
-        Write-Host -ForegroundColor DarkGray "Include Preview Updates: True"
-    }
     else {
-        Write-Host -ForegroundColor DarkGray "Include Preview Updates: False"
-        $CatalogUpdate = $CatalogUpdate | Where-Object {$_.Title -notmatch 'Preview'}
+        Write-Warning "Save-MsUp: Could not reach https://www.catalog.update.microsoft.com/"
     }
-    #=======================================================================
-    #	Select
-    #=======================================================================
-    if ($Latest.IsPresent) {
-        $CatalogUpdate = $CatalogUpdate | Select-Object -First 1
-    }
-    else {
-        $CatalogUpdate = $CatalogUpdate | Out-GridView -Title 'Select a Microsoft Update to download' -PassThru
-    }
-    #=======================================================================
-    #	Download
-    #=======================================================================
-    foreach ($Update in $CatalogUpdate) {
-        Save-UpdateCatalog -Guid $Update.Guid -DestinationDirectory $DestinationDirectory
-    }
-    
-<#     if ($CatalogUpdate) {
-        explorer.exe $DestinationDirectory
-    } #>
     #=======================================================================
 }

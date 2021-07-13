@@ -249,6 +249,7 @@ FunctionsToExport =
 'Get-SystemFirmwareDevice',
 'Get-SystemFirmwareResource',
 'Get-SystemFirmwareUpdate',
+'Install-SystemFirmwareUpdate',
 'Save-SystemFirmwareUpdate',
 'Convert-PNPDeviceIDtoGuid',
 'Save-MsUp'
