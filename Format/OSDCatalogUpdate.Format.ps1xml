@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Configuration>
+  <ViewDefinitions>
+    <View>
+      <Name>OSDCatalogUpdate</Name>
+      <ViewSelectedBy>
+        <TypeName>OSDCatalogUpdate</TypeName>
+      </ViewSelectedBy>
+      <TableControl>
+        <TableHeaders>
+          <TableColumnHeader>
+            <Label>Title</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>Products</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>Classification</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>LastUpdated</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>Size</Label>
+          </TableColumnHeader>
+        </TableHeaders>
+        <TableRowEntries>
+          <TableRowEntry>
+            <TableColumnItems>
+              <TableColumnItem>
+                <PropertyName>Title</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>Products</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>Classification</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <ScriptBlock>Get-Date -Date $_.LastUpdated -Format "yyyy/MM/dd"</ScriptBlock>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>Size</PropertyName>
+              </TableColumnItem>
+            </TableColumnItems>
+          </TableRowEntry>
+        </TableRowEntries>
+      </TableControl>
+    </View>
+  </ViewDefinitions>
+</Configuration>

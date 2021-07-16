@@ -60,7 +60,9 @@ PowerShellVersion = '5.0'
 # TypesToProcess = @()
 
 # Format files (.ps1xml) to be loaded when importing this module
-# FormatsToProcess = @()
+FormatsToProcess = @(
+    '.\Format\OSDCatalogUpdate.Format.ps1xml'
+)
 
 # Modules to import as nested modules of the module specified in RootModule/ModuleToProcess
 # NestedModules = @()
@@ -252,7 +254,9 @@ FunctionsToExport =
 'Install-SystemFirmwareUpdate',
 'Save-SystemFirmwareUpdate',
 'Convert-PNPDeviceIDtoGuid',
-'Save-MsUp'
+'Save-MsUp',
+'Get-OSDCatalogUpdate',
+'Save-WindowsUpdateDriver'
 
 # Cmdlets to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no cmdlets to export.
 CmdletsToExport = @()
