@@ -62,9 +62,9 @@ function Invoke-CatalogRequest {
         if ($null -eq $NoResults) {
             $ErrorText = $HtmlDoc.GetElementbyId("errorPageDisplayedError")
             if ($ErrorText) {
-                throw "The catalog.microsoft.com site has encountered an error. Please try again later."
+                throw "The catalog.update.microsoft.com site has encountered an error. Please try again later."
             } else {
-                [OSDCatalogResponse]::new($HtmlDoc)
+                [MsUpCatalogResponse]::new($HtmlDoc)
             }
         } else {
             throw "$($NoResults.InnerText)$($Uri.Split("q=")[-1])"

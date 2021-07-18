@@ -1,4 +1,4 @@
-class OSDCatalogUpdate {
+class MsUpCatalog {
     [string] $Title
     [string] $Products
     [string] $Classification
@@ -9,9 +9,9 @@ class OSDCatalogUpdate {
     [string] $Guid
     [string[]] $FileNames
 
-    OSDCatalogUpdate() {}
+    MsUpCatalog() {}
 
-    OSDCatalogUpdate($Row, $IncludeFileNames) {
+    MsUpCatalog($Row, $IncludeFileNames) {
         $Cells = $Row.SelectNodes("td")
         $this.Title = $Cells[1].innerText.Trim()
         $this.Products = $Cells[2].innerText.Trim()

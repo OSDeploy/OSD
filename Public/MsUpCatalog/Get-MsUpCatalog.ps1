@@ -1,4 +1,4 @@
-function Get-OSDCatalogUpdate {
+function Get-MsUpCatalog {
     <#
         .SYNOPSIS
         Query catalog.update.micrsosoft.com for available updates.
@@ -147,7 +147,7 @@ function Get-OSDCatalogUpdate {
         if ($Rows.Count -gt 0) {
             foreach ($Row in $Rows) {
                 if ($Row.Id -ne "headerRow") {
-                    [OSDCatalogUpdate]::new($Row, $IncludeFileNames)
+                    [MsUpCatalog]::new($Row, $IncludeFileNames)
                 }
             }
         } else {

@@ -7,7 +7,7 @@
 RootModule = 'OSD.psm1'
 
 # Version number of his module.
-ModuleVersion = '21.7.13.1'
+ModuleVersion = '21.7.15.1'
 
 # Supported PSEditions
 # CompatiblePSEditions = @()
@@ -61,7 +61,7 @@ PowerShellVersion = '5.0'
 
 # Format files (.ps1xml) to be loaded when importing this module
 FormatsToProcess = @(
-    '.\Format\OSDCatalogUpdate.Format.ps1xml'
+    '.\Format\MsUpCatalog.Format.ps1xml'
 )
 
 # Modules to import as nested modules of the module specified in RootModule/ModuleToProcess
@@ -255,8 +255,8 @@ FunctionsToExport =
 'Save-SystemFirmwareUpdate',
 'Convert-PNPDeviceIDtoGuid',
 'Save-MsUp',
-'Get-OSDCatalogUpdate',
-'Save-WindowsUpdateDriver'
+'Get-MsUpCatalog',
+'Save-MsUpCatalogDriver'
 
 # Cmdlets to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no cmdlets to export.
 CmdletsToExport = @()

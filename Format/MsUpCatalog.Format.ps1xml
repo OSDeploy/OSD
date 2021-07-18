@@ -2,9 +2,9 @@
 <Configuration>
   <ViewDefinitions>
     <View>
-      <Name>OSDCatalogUpdate</Name>
+      <Name>MsUpCatalog</Name>
       <ViewSelectedBy>
-        <TypeName>OSDCatalogUpdate</TypeName>
+        <TypeName>MsUpCatalog</TypeName>
       </ViewSelectedBy>
       <TableControl>
         <TableHeaders>

@@ -55,7 +55,6 @@ function Invoke-OSDCloud {
         TimeSpan = $null
         TimeStart = Get-Date
         Transcript = $null
-        UpdateFirmware = $UpdateFirmware
         USBPartitions = $null
         Version = [Version](Get-Module -Name OSD -ListAvailable | Sort-Object Version -Descending | Select-Object -First 1).Version
         VersionMin = [Version]'21.4.23.1'
@@ -458,18 +457,9 @@ function Invoke-OSDCloud {
         New-Item -Path 'C:\Windows\Setup\Scripts' -ItemType Directory -Force -ErrorAction Stop | Out-Null
     }
     #=======================================================================
-    #	UpdateFirmware
-    #=======================================================================
-    if ($OSDCloud.UpdateFirmware) {
-        Write-Host -ForegroundColor DarkGray "========================================================================="
-        Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Save-SystemFirmwareUpdate"
-        Save-SystemFirmwareUpdate -DestinationDirectory 'C:\Drivers\Firmware' -ErrorAction Ignore
-        Write-Host -ForegroundColor DarkGray "Firmware Updates are expanded to C:\Drivers\Firmware"
-        Write-Host -ForegroundColor DarkGray "They are validated and staged at C:\Windows\Firmware during Offline Servicing"
-    }
-    #=======================================================================
     #	Get-MyDriverPack
     #=======================================================================
+    $SaveMyDriverPack = $null
     if ($OSDCloud.Product -ne 'None') {
         if ($OSDCloud.GetMyDriverPack -or $OSDCloud.DriverPackUrl -or $OSDCloud.DriverPackOffline) {
             Write-Host -ForegroundColor DarkGray "========================================================================="
@@ -511,56 +501,29 @@ function Invoke-OSDCloud {
         }
     }
     #=======================================================================
-    #	Dell BIOS Update
+    #	Save-SystemFirmwareUpdate
     #=======================================================================
-    <# if ($OSDCloud.Manufacturer -eq 'Dell') {
+    if (Test-WebConnectionMsUpCatalog) {
         Write-Host -ForegroundColor DarkGray "========================================================================="
-        Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Save-MyDellBios"
-        Write-Warning "This step is currently under development"
-
-        $GetMyDellBios = Get-MyDellBios
-        if ($GetMyDellBios) {
-            Write-Host -ForegroundColor DarkGray "ReleaseDate: $($GetMyDellBios.ReleaseDate)"
-            Write-Host -ForegroundColor DarkGray "Name: $($GetMyDellBios.Name)"
-            Write-Host -ForegroundColor DarkGray "DellVersion: $($GetMyDellBios.DellVersion)"
-            Write-Host -ForegroundColor DarkGray "Url: $($GetMyDellBios.Url)"
-            Write-Host -ForegroundColor DarkGray "Criticality: $($GetMyDellBios.Criticality)"
-            Write-Host -ForegroundColor DarkGray "FileName: $($GetMyDellBios.FileName)"
-            Write-Host -ForegroundColor DarkGray "SizeMB: $($GetMyDellBios.SizeMB)"
-            Write-Host -ForegroundColor DarkGray "PackageID: $($GetMyDellBios.PackageID)"
-            Write-Host -ForegroundColor DarkGray "SupportedModel: $($GetMyDellBios.SupportedModel)"
-            Write-Host -ForegroundColor DarkGray "SupportedSystemID: $($GetMyDellBios.SupportedSystemID)"
-            Write-Host -ForegroundColor DarkGray "Flash64W: $($GetMyDellBios.Flash64W)"
-
-            $OSDCloudOfflineBios = Find-OSDCloudOfflineFile -Name $GetMyDellBios.FileName | Select-Object -First 1
-            if ($OSDCloudOfflineBios) {
-                Write-Host -ForegroundColor Cyan "Offline: $($OSDCloudOfflineBios.FullName)"
-            }
-            else {
-                Save-MyDellBios -DownloadPath 'C:\OSDCloud\BIOS'
-            }
-
-            $OSDCloudOfflineFlash64W = Find-OSDCloudOfflineFile -Name 'Flash64W.exe' | Select-Object -First 1
-            if ($OSDCloudOfflineFlash64W) {
-                Write-Host -ForegroundColor Cyan "Offline: $($OSDCloudOfflineFlash64W.FullName)"
-            }
-            else {
-                Save-MyDellBiosFlash64W -DownloadPath 'C:\OSDCloud\BIOS'
-            }
+        Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Save-SystemFirmwareUpdate"
+        Save-SystemFirmwareUpdate -DestinationDirectory 'C:\Drivers\Firmware' -ErrorAction Ignore
+        #Write-Host -ForegroundColor DarkGray "Firmware Updates are expanded to C:\Drivers\Firmware"
+        #Write-Host -ForegroundColor DarkGray "They are validated and staged at C:\Windows\Firmware during Offline Servicing"
+    }
+    #=======================================================================
+    #	Save-MsUpCatalogDriver Net
+    #=======================================================================
+    if (Test-WebConnectionMsUpCatalog) {
+        Write-Host -ForegroundColor DarkGray "========================================================================="
+        if ($null -eq $SaveMyDriverPack) {
+            Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Save-MsUpCatalogDriver (All Devices)"
+            Save-MsUpCatalogDriver -DestinationDirectory 'C:\Drivers'
         }
         else {
-            Write-Warning "Unable to determine a suitable BIOS update for this Computer Model"
+            Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Save-MsUpCatalogDriver -PNPClass Net"
+            Save-MsUpCatalogDriver -DestinationDirectory 'C:\Drivers' -PNPClass 'Net'
         }
-    } #>
-    #=======================================================================
-    #   Update-MyDellBios
-    #   This step is not fully tested, so commenting out
-    #=======================================================================
-    <# if ($OSDCloud.Manufacturer -eq 'Dell') {
-        Write-Host -ForegroundColor DarkGray    "================================================================="
-        Write-Host -ForegroundColor Green       "Update-MyDellBios"
-        Update-MyDellBIOS -DownloadPath 'C:\OSDCloud\BIOS'
-    } #>
+    }
     #=======================================================================
     #   Add-WindowsDriver.offlineservicing
     #=======================================================================

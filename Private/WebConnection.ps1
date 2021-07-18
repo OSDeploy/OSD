@@ -20,7 +20,7 @@ function Test-MyDellDriverCabWebConnection {
         Return $false
     }
 }
-function Test-MicrosoftCatalogWebConnection {
+function Test-WebConnectionMsUpCatalog {
     [CmdletBinding()]
     param ()
 

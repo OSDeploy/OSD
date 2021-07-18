@@ -33,8 +33,6 @@ function Start-OSDCloud {
 
         [switch]$SkipODT,
 
-        [switch]$UpdateFirmware,
-
         [switch]$ZTI,
 
         [Parameter(ParameterSetName = 'Default')]
@@ -108,7 +106,6 @@ function Start-OSDCloud {
         SkipAutopilot = $SkipAutopilot
         SkipODT = $SkipODT
         TimeStart = Get-Date
-        UpdateFirmware = $UpdateFirmware
         ZTI = $ZTI
     }
     #=======================================================================
@@ -509,24 +506,6 @@ function Start-OSDCloud {
         else {
             Write-Warning "Unable to determine a suitable Driver Pack for this Computer Model"
         }
-    }
-    #=======================================================================
-    #	Update Firmware
-    #=======================================================================
-    Write-Host -ForegroundColor DarkGray "========================================================================="
-    Write-Host -ForegroundColor Cyan "System Firmware Update"
-    $SystemFirmwareResource = Get-SystemFirmwareResource
-    if ($SystemFirmwareResource) {
-        if ($UpdateFirmware) {
-            Write-Host -ForegroundColor DarkGray "Firmware will be updated for $SystemFirmwareResource"
-        }
-        else {
-            Write-Host -ForegroundColor DarkGray "Firmware will not be updated for $SystemFirmwareResource"
-        }
-    }
-    else {
-        Write-Warning "Unable to get a System Firmware Resource"
-        $UpdateFirmware = $false
     }
     #=======================================================================
     #   Invoke-OSDCloud.ps1
