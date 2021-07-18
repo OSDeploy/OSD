@@ -506,9 +506,12 @@ function Invoke-OSDCloud {
     if (Test-WebConnectionMsUpCatalog) {
         Write-Host -ForegroundColor DarkGray "========================================================================="
         Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Save-SystemFirmwareUpdate"
+        Write-Host -ForegroundColor DarkGray "Firmware Updates will be downloaded from Microsoft Update Catalog to C:\Drivers"
+        Write-Host -ForegroundColor DarkGray "If the downloaded Firmware Update is newer than the existing Firmware, it will be installed"
+        Write-Host -ForegroundColor DarkGray "This doesn't always work 100% in testing on some Dell systems"
+        Write-Host -ForegroundColor Gray "Command: Save-SystemFirmwareUpdate -DestinationDirectory 'C:\Drivers\Firmware'"
+
         Save-SystemFirmwareUpdate -DestinationDirectory 'C:\Drivers\Firmware' -ErrorAction Ignore
-        #Write-Host -ForegroundColor DarkGray "Firmware Updates are expanded to C:\Drivers\Firmware"
-        #Write-Host -ForegroundColor DarkGray "They are validated and staged at C:\Windows\Firmware during Offline Servicing"
     }
     #=======================================================================
     #	Save-MsUpCatalogDriver Net
@@ -517,10 +520,15 @@ function Invoke-OSDCloud {
         Write-Host -ForegroundColor DarkGray "========================================================================="
         if ($null -eq $SaveMyDriverPack) {
             Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Save-MsUpCatalogDriver (All Devices)"
+            Write-Host -ForegroundColor DarkGray "Drivers for all devices will be downloaded from Microsoft Update Catalog to C:\Drivers"
+            Write-Host -ForegroundColor Gray "Command: Save-MsUpCatalogDriver -DestinationDirectory 'C:\Drivers'"
+
             Save-MsUpCatalogDriver -DestinationDirectory 'C:\Drivers'
         }
         else {
-            Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Save-MsUpCatalogDriver -PNPClass Net"
+            Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Save-MsUpCatalogDriver (Network)"
+            Write-Host -ForegroundColor DarkGray "Drivers for Network devices will be downloaded from Microsoft Update Catalog to C:\Drivers"
+            Write-Host -ForegroundColor Gray "Command: Save-MsUpCatalogDriver -DestinationDirectory 'C:\Drivers' -PNPClass 'Net'"
             Save-MsUpCatalogDriver -DestinationDirectory 'C:\Drivers' -PNPClass 'Net'
         }
     }
@@ -529,7 +537,9 @@ function Invoke-OSDCloud {
     #=======================================================================
     Write-Host -ForegroundColor DarkGray "================================================================="
     Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Add-WindowsDriver.offlineservicing"
-    Write-Host -ForegroundColor DarkGray "Apply Drivers with Use-WindowsUnattend"
+    Write-Host -ForegroundColor DarkGray "Drivers in C:\Drivers are being added to the offline Windows Image"
+    Write-Host -ForegroundColor DarkGray "This process can take up to 20 minutes"
+    Write-Host -ForegroundColor Gray "Command: Add-WindowsDriver.offlineservicing"
     if ($OSDCloud.Test -ne $true) {
         Add-WindowsDriver.offlineservicing
     }
@@ -538,7 +548,9 @@ function Invoke-OSDCloud {
     #=======================================================================
     Write-Host -ForegroundColor DarkGray "================================================================="
     Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Set-OSDCloudUnattendSpecialize"
-    Write-Host -ForegroundColor DarkGray "Enables Invoke-OSDSpecialize"
+    Write-Host -ForegroundColor DarkGray "C:\Windows\Panther\Invoke-OSDSpecialize.xml is being applied as an Unattend file"
+    Write-Host -ForegroundColor DarkGray "This will enable the extraction and installation of HP and Lenovo Drivers if necessary"
+    Write-Host -ForegroundColor Gray "Command: Set-OSDCloudUnattendSpecialize"
     if ($OSDCloud.Test -ne $true) {
         Set-OSDCloudUnattendSpecialize
     }
