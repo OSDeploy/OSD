@@ -1,4 +1,4 @@
-class MsUpCatalog {
+class MsUpCat {
     [string] $Title
     [string] $Products
     [string] $Classification
@@ -9,9 +9,9 @@ class MsUpCatalog {
     [string] $Guid
     [string[]] $FileNames
 
-    MsUpCatalog() {}
+    MsUpCat() {}
 
-    MsUpCatalog($Row, $IncludeFileNames) {
+    MsUpCat($Row, $IncludeFileNames) {
         $Cells = $Row.SelectNodes("td")
         $this.Title = $Cells[1].innerText.Trim()
         $this.Products = $Cells[2].innerText.Trim()

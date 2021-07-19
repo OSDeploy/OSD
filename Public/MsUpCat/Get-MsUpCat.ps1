@@ -1,4 +1,4 @@
-function Get-MsUpCatalog {
+function Get-MsUpCat {
     <#
         .SYNOPSIS
         Query catalog.update.micrsosoft.com for available updates.
@@ -147,7 +147,7 @@ function Get-MsUpCatalog {
         if ($Rows.Count -gt 0) {
             foreach ($Row in $Rows) {
                 if ($Row.Id -ne "headerRow") {
-                    [MsUpCatalog]::new($Row, $IncludeFileNames)
+                    [MsUpCat]::new($Row, $IncludeFileNames)
                 }
             }
         } else {

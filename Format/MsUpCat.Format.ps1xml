@@ -2,9 +2,9 @@
 <Configuration>
   <ViewDefinitions>
     <View>
-      <Name>MsUpCatalog</Name>
+      <Name>MsUpCat</Name>
       <ViewSelectedBy>
-        <TypeName>MsUpCatalog</TypeName>
+        <TypeName>MsUpCat</TypeName>
       </ViewSelectedBy>
       <TableControl>
         <TableHeaders>

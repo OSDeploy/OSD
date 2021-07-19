@@ -503,7 +503,7 @@ function Invoke-OSDCloud {
     #=======================================================================
     #	Save-SystemFirmwareUpdate
     #=======================================================================
-    if (Test-WebConnectionMsUpCatalog) {
+    if (Test-WebConnectionMsUpCat) {
         Write-Host -ForegroundColor DarkGray "========================================================================="
         Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Save-SystemFirmwareUpdate"
         Write-Host -ForegroundColor DarkGray "Firmware Updates will be downloaded from Microsoft Update Catalog to C:\Drivers"
@@ -514,22 +514,22 @@ function Invoke-OSDCloud {
         Save-SystemFirmwareUpdate -DestinationDirectory 'C:\Drivers\Firmware' -ErrorAction Ignore
     }
     #=======================================================================
-    #	Save-MsUpCatalogDriver Net
+    #	Save-MsUpCatDriver Net
     #=======================================================================
-    if (Test-WebConnectionMsUpCatalog) {
+    if (Test-WebConnectionMsUpCat) {
         Write-Host -ForegroundColor DarkGray "========================================================================="
         if ($null -eq $SaveMyDriverPack) {
-            Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Save-MsUpCatalogDriver (All Devices)"
+            Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Save-MsUpCatDriver (All Devices)"
             Write-Host -ForegroundColor DarkGray "Drivers for all devices will be downloaded from Microsoft Update Catalog to C:\Drivers"
-            Write-Host -ForegroundColor Gray "Command: Save-MsUpCatalogDriver -DestinationDirectory 'C:\Drivers'"
+            Write-Host -ForegroundColor Gray "Command: Save-MsUpCatDriver -DestinationDirectory 'C:\Drivers'"
 
-            Save-MsUpCatalogDriver -DestinationDirectory 'C:\Drivers'
+            Save-MsUpCatDriver -DestinationDirectory 'C:\Drivers'
         }
         else {
-            Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Save-MsUpCatalogDriver (Network)"
+            Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Save-MsUpCatDriver (Network)"
             Write-Host -ForegroundColor DarkGray "Drivers for Network devices will be downloaded from Microsoft Update Catalog to C:\Drivers"
-            Write-Host -ForegroundColor Gray "Command: Save-MsUpCatalogDriver -DestinationDirectory 'C:\Drivers' -PNPClass 'Net'"
-            Save-MsUpCatalogDriver -DestinationDirectory 'C:\Drivers' -PNPClass 'Net'
+            Write-Host -ForegroundColor Gray "Command: Save-MsUpCatDriver -DestinationDirectory 'C:\Drivers' -PNPClass 'Net'"
+            Save-MsUpCatDriver -DestinationDirectory 'C:\Drivers' -PNPClass 'Net'
         }
     }
     #=======================================================================

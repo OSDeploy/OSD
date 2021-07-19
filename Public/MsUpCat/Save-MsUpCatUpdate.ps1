@@ -1,4 +1,4 @@
-function Save-MsUp {
+function Save-MsUpCatUpdate {
     [CmdLetBinding()]
     param (
         [ValidateSet('Windows 10','Windows Server','Windows Server 2016','Windows Server 2019')]
@@ -35,7 +35,7 @@ function Save-MsUp {
     #=======================================================================
     #	Make sure the Module was installed first
     #=======================================================================
-    if (Test-WebConnectionMsUpCatalog) {
+    if (Test-WebConnectionMsUpCat) {
         if (Get-Module -ListAvailable -Name MSCatalog -ErrorAction Ignore) {
             #=======================================================================
             #	Details
@@ -133,11 +133,11 @@ function Save-MsUp {
             #=======================================================================
         }
         else {
-            Write-Warning "Save-MsUp: Could not install required PowerShell Module MSCatalog"
+            Write-Warning "Save-MsUpCatUpdate: Could not install required PowerShell Module MSCatalog"
         }
     }
     else {
-        Write-Warning "Save-MsUp: Could not reach https://www.catalog.update.microsoft.com/"
+        Write-Warning "Save-MsUpCatUpdate: Could not reach https://www.catalog.update.microsoft.com/"
     }
     #=======================================================================
 }

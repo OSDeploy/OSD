@@ -1,4 +1,4 @@
-class MsUpCatalogResponse {
+class MsUpCatResponse {
     [HtmlAgilityPack.HtmlNodeCollection] $Rows
     [string] $EventArgument
     [string] $EventValidation
@@ -6,7 +6,7 @@ class MsUpCatalogResponse {
     [string] $ViewStateGenerator
     [string] $NextPage
 
-    MsUpCatalogResponse($HtmlDoc) {
+    MsUpCatResponse($HtmlDoc) {
         $Table = $HtmlDoc.GetElementbyId("ctl00_catalogBody_updateMatches")
         $this.Rows = $Table.SelectNodes("tr")
         $this.EventArgument = $HtmlDoc.GetElementbyId("__EVENTARGUMENT")[0].Attributes["value"].Value

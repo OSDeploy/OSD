@@ -43,7 +43,7 @@ function Get-SystemFirmwareUpdate {
     #	Make sure the Module was installed
     #=======================================================================
     if (Get-Module -ListAvailable -Name MSCatalog -ErrorAction Ignore) {
-        if (Test-WebConnectionMsUpCatalog) {
+        if (Test-WebConnectionMsUpCat) {
             Get-MSCatalogUpdate -Search (Get-SystemFirmwareResource) -SortBy LastUpdated -Descending | Select-Object LastUpdated,Title,Version,Size,Guid -First 1 -ErrorAction Ignore
         }
         else {
@@ -76,7 +76,7 @@ function Install-SystemFirmwareUpdate {
     }
     #=======================================================================
     if (Test-Path 'C:\Windows' -PathType Container) {
-        if (Test-WebConnectionMsUpCatalog) {
+        if (Test-WebConnectionMsUpCat) {
             if (Get-Module -ListAvailable -Name MSCatalog -ErrorAction Ignore) {
                 $SystemFirmwareUpdate = Get-SystemFirmwareUpdate
             
@@ -142,7 +142,7 @@ function Save-SystemFirmwareUpdate {
         Install-Module MSCatalog -Force -ErrorAction Ignore
     }
     #=======================================================================
-    if (Test-WebConnectionMsUpCatalog) {
+    if (Test-WebConnectionMsUpCat) {
         if (Get-Module -ListAvailable -Name MSCatalog -ErrorAction Ignore) {
             $SystemFirmwareUpdate = Get-SystemFirmwareUpdate
         

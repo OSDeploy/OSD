@@ -64,7 +64,7 @@ function Invoke-CatalogRequest {
             if ($ErrorText) {
                 throw "The catalog.update.microsoft.com site has encountered an error. Please try again later."
             } else {
-                [MsUpCatalogResponse]::new($HtmlDoc)
+                [MsUpCatResponse]::new($HtmlDoc)
             }
         } else {
             throw "$($NoResults.InnerText)$($Uri.Split("q=")[-1])"

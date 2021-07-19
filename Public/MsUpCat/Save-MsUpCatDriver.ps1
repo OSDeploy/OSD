@@ -1,4 +1,4 @@
-function Save-MsUpCatalogDriver {
+function Save-MsUpCatDriver {
     [CmdLetBinding()]
     param (
         [string]$DestinationDirectory,
@@ -22,7 +22,7 @@ function Save-MsUpCatalogDriver {
     #$DeviceIDPattern = 'VEN_([0-9a-f]){4}&DEV_([0-9a-f]){4}&SUBSYS_([0-9a-f]){8}'
     $DeviceIDPattern = 'v[ei][dn]_([0-9a-f]){4}&[pd][ie][dv]_([0-9a-f]){4}'
 
-    if (Test-WebConnectionMsUpCatalog) {
+    if (Test-WebConnectionMsUpCat) {
         #if (Get-Module -ListAvailable -Name MSCatalog -ErrorAction Ignore) {
         
         $Params = @{
@@ -50,7 +50,7 @@ function Save-MsUpCatalogDriver {
 
             if ($HardwareID) {
                 $SearchString = "$HardwareID".Replace('&',"`%26")
-                $WindowsUpdateDriver = Get-MsUpCatalog -Search "1903+$SearchString" -Descending | Select-Object LastUpdated,Title,Version,Size,Guid -First 1 -ErrorAction Ignore
+                $WindowsUpdateDriver = Get-MsUpCat -Search "1903+$SearchString" -Descending | Select-Object LastUpdated,Title,Version,Size,Guid -First 1 -ErrorAction Ignore
     
                 if ($WindowsUpdateDriver.Guid) {
                     if ($Item.Name -and $Item.PNPClass) {
@@ -84,7 +84,7 @@ function Save-MsUpCatalogDriver {
                             Remove-Item $WindowsUpdateDriverFile.FullName | Out-Null
                         }
                         else {
-                            Write-Warning "Save-MsUpCatalogDriver: Could not find a Driver for this DeviceID"
+                            Write-Warning "Save-MsUpCatDriver: Could not find a Driver for this DeviceID"
                         }
                     }
                 }
@@ -92,20 +92,20 @@ function Save-MsUpCatalogDriver {
                     Write-Host -ForegroundColor Gray "No Results: $($Item.Name) $HardwareID"
                     #Write-Host -ForegroundColor DarkGray "HardwareID: $HardwareID"
                     #Write-Host -ForegroundColor DarkGray "SearchString: $SearchString"
-                    #Write-Warning "Save-MsUpCatalogDriver: Could not find a Windows Update GUID"
+                    #Write-Warning "Save-MsUpCatDriver: Could not find a Windows Update GUID"
                 }
             }
             else {
-                #Write-Warning "Save-MsUpCatalogDriver: Could not build a DeviceID Match"
+                #Write-Warning "Save-MsUpCatDriver: Could not build a DeviceID Match"
             }
         }
         #}
         #else {
-            #Write-Warning "Save-MsUpCatalogDriver: Could not install required PowerShell Module MSCatalog"
+            #Write-Warning "Save-MsUpCatDriver: Could not install required PowerShell Module MSCatalog"
         #}
     }
     #else {
-        #Write-Warning "Save-MsUpCatalogDriver: Could not reach https://www.catalog.update.microsoft.com/"
+        #Write-Warning "Save-MsUpCatDriver: Could not reach https://www.catalog.update.microsoft.com/"
     #}
     #=======================================================================
 }
