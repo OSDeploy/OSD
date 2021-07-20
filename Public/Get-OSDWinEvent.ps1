@@ -29,10 +29,10 @@ function Get-OSDWinEvent {
         $Events += Get-WinEvent -FilterHashtable @{StartTime = $StartTime; LogName = 'Microsoft-Windows-User Device Registration/Admin'} -ErrorAction Ignore
     }
     elseif ($Quick -eq 'BlueScreen') {
-        $Events += Get-WinEvent -FilterHashtable @{
+        $Events = Get-WinEvent -FilterHashtable @{
             Id = 1001
             ProviderName = 'Microsoft-Windows-WER-SystemErrorReporting'
-            StartTime = $StartTime
+            #StartTime = $StartTime
         }
     }
     else {
