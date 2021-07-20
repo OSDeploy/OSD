@@ -19,6 +19,13 @@ function Edit-MyWinPE {
         [Parameter(ValueFromPipelineByPropertyName)]
         [UInt32]$Index = 1,
 
+        [ValidateSet('Dell','HP','Nutanix','VMware')]
+        [string[]]$CloudDriver,
+
+        [string[]]$DriverHWID,
+
+        [string[]]$DriverPath,
+
         [ValidateSet('Restricted','AllSigned','RemoteSigned','Unrestricted','Bypass','Undefined')]
         [string]$ExecutionPolicy,
 
@@ -27,11 +34,6 @@ function Edit-MyWinPE {
         [String[]]$PSModuleCopy,
 
         [switch]$PSGallery,
-
-        [string[]]$DriverPath,
-
-        [ValidateSet('Dell','HP','Nutanix','VMware')]
-        [string[]]$CloudDriver,
 
         [switch]$DismountSave
     )
@@ -134,13 +136,23 @@ function Edit-MyWinPE {
                 Add-WindowsDriver -Path "$($MountMyWindowsImage.Path)" -Driver "$Driver" -Recurse -ForceUnsigned
             }
             #=======================================================================
+            #   DriverHWID
+            #=======================================================================
+            if ($DriverHWID) {
+                $HardwareIDDriverPath = Join-Path $env:TEMP (Get-Random)
+                foreach ($Item in $DriverHWID) {
+                    Save-MsUpCatDriver -HardwareID $Item -DestinationDirectory $HardwareIDDriverPath
+                }
+                Add-WindowsDriver -Path "$($MountMyWindowsImage.Path)" -Driver $HardwareIDDriverPath -Recurse -ForceUnsigned
+            }
+            #=======================================================================
             #   CloudDriver
             #=======================================================================
             foreach ($Driver in $CloudDriver) {
                 if ($Driver -eq 'Dell'){
                     Write-Verbose "Adding $Driver CloudDriver"
-                    if (Test-WebConnection -Uri 'http://downloads.dell.com/FOLDER07062618M/1/WINPE10.0-DRIVERS-A23-PR4K0.CAB') {
-                        $SaveWebFile = Save-WebFile -SourceUrl 'http://downloads.dell.com/FOLDER07062618M/1/WINPE10.0-DRIVERS-A23-PR4K0.CAB'
+                    if (Test-WebConnection -Uri 'http://downloads.dell.com/FOLDER07283025M/1/WinPE10.0-Drivers-A24-45F17.CAB') {
+                        $SaveWebFile = Save-WebFile -SourceUrl 'http://downloads.dell.com/FOLDER07283025M/1/WinPE10.0-Drivers-A24-45F17.CAB'
                         if (Test-Path $SaveWebFile.FullName) {
                             $DriverCab = Get-Item -Path $SaveWebFile.FullName
                             $ExpandPath = Join-Path $DriverCab.Directory $DriverCab.BaseName

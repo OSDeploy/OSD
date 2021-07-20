@@ -7,7 +7,7 @@
 RootModule = 'OSD.psm1'
 
 # Version number of his module.
-ModuleVersion = '21.7.18.2'
+ModuleVersion = '21.7.19.1'
 
 # Supported PSEditions
 # CompatiblePSEditions = @()
@@ -256,7 +256,8 @@ FunctionsToExport =
 'Convert-PNPDeviceIDtoGuid',
 'Get-MsUpCat',
 'Save-MsUpCatDriver',
-'Save-MsUpCatUpdate'
+'Save-MsUpCatUpdate',
+'Get-OSDWinEvent'
 
 # Cmdlets to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no cmdlets to export.
 CmdletsToExport = @()

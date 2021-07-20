@@ -134,7 +134,6 @@ function Expand-ZTIDriverPack {
 function Save-ZTIDriverPack {
     [CmdletBinding()]
     param (
-        [ValidateSet('Dell','HP','Lenovo','Microsoft')]
         [string]$Manufacturer = (Get-MyComputerManufacturer -Brief),
         [string]$Product = (Get-MyComputerProduct)
     )

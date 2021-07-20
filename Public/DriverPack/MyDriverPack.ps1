@@ -1,10 +1,6 @@
-#https://pc-dl.panasonic.co.jp/itn/drivers/driver_packages.html
-#https://pc-dl.panasonic.co.jp/dl/search?dc%5B%5D=002017
-
 function Get-MyDriverPack {
     [CmdletBinding()]
     param (
-        [ValidateSet('Dell','HP','Lenovo','Microsoft')]
         [string]$Manufacturer = (Get-MyComputerManufacturer -Brief),
         [string]$Product = (Get-MyComputerProduct)
     )
@@ -42,7 +38,6 @@ function Save-MyDriverPack {
         [Parameter(ValueFromPipeline = $true)]
         [string]$DownloadPath = 'C:\Drivers',
         [switch]$Expand,
-        [ValidateSet('Dell','HP','Lenovo','Microsoft')]
         [string]$Manufacturer = (Get-MyComputerManufacturer -Brief),
         [string]$Product = (Get-MyComputerProduct)
     )
