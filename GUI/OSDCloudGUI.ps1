@@ -480,7 +480,6 @@ $OKButton.add_Click({
         Product         = $ProductTextBox.Text
     }
     Start-OSDCloud @Params
-    Pause
 })
 #=======================================================================
 #   Launch
