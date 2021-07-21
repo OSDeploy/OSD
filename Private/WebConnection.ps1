@@ -9,17 +9,6 @@ function Test-MyDellBiosWebConnection {
         Return $false
     }
 }
-function Test-MyDellDriverCabWebConnection {
-    [CmdletBinding()]
-    param ()
-    
-    $GetMyDellDriverCab = Get-MyDellDriverCab
-    if ($GetMyDellDriverCab) {
-        Test-WebConnection -Uri $GetMyDellDriverCab.DriverUrl
-    } else {
-        Return $false
-    }
-}
 function Test-WebConnectionMsUpCat {
     [CmdletBinding()]
     param ()

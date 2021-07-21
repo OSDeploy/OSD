@@ -354,48 +354,6 @@ function Save-OSDCloud.usb {
 
     Save-MyDriverPack -DownloadPath "$OSDCloudOfflineFullName\DriverPacks\$Manufacturer" -Manufacturer $Manufacturer -Product $Product
     #=======================================================================
-    #	Get Dell BIOS Update
-    #=======================================================================
-    if ((Get-MyComputerManufacturer -Brief) -eq 'Dell') {
-        Write-Host -ForegroundColor DarkGray    "========================================================================="
-        Write-Host -ForegroundColor Cyan        "Get-MyDellBios"
-
-        $GetMyDellBios = Get-MyDellBios
-        if ($GetMyDellBios) {
-            Write-Host -ForegroundColor White "ReleaseDate: $($GetMyDellBios.ReleaseDate)"
-            Write-Host -ForegroundColor White "Name: $($GetMyDellBios.Name)"
-            Write-Host -ForegroundColor White "DellVersion: $($GetMyDellBios.DellVersion)"
-            Write-Host -ForegroundColor White "Url: $($GetMyDellBios.Url)"
-            Write-Host -ForegroundColor White "Criticality: $($GetMyDellBios.Criticality)"
-            Write-Host -ForegroundColor White "FileName: $($GetMyDellBios.FileName)"
-            Write-Host -ForegroundColor White "SizeMB: $($GetMyDellBios.SizeMB)"
-            Write-Host -ForegroundColor White "PackageID: $($GetMyDellBios.PackageID)"
-            Write-Host -ForegroundColor White "SupportedModel: $($GetMyDellBios.SupportedModel)"
-            Write-Host -ForegroundColor White "SupportedSystemID: $($GetMyDellBios.SupportedSystemID)"
-            Write-Host -ForegroundColor White "Flash64W: $($GetMyDellBios.Flash64W)"
-
-            $OSDCloudOfflineBios = Find-OSDCloudOfflineFile -Name $GetMyDellBios.FileName | Select-Object -First 1
-            if ($OSDCloudOfflineBios) {
-                Write-Host -ForegroundColor Cyan "Offline: $($OSDCloudOfflineBios.FullName)"
-            }
-            else {
-                Save-MyDellBios -DownloadPath "$OSDCloudOfflineFullName\BIOS"
-            }
-
-            $OSDCloudOfflineFlash64W = Find-OSDCloudOfflineFile -Name 'Flash64W.exe' | Select-Object -First 1
-            if ($OSDCloudOfflineFlash64W) {
-                Write-Host -ForegroundColor Cyan "Offline: $($OSDCloudOfflineFlash64W.FullName)"
-            }
-            else {
-                Save-MyDellBiosFlash64W -DownloadPath "$OSDCloudOfflineFullName\BIOS"
-            }
-        }
-        else {
-            Write-Warning "Unable to determine a suitable BIOS update for this Computer Model"
-            Write-Warning "OSDCloud will continue, but there may be issues"
-        }
-    }
-    #=======================================================================
     #	PSGallery Modules
     #=======================================================================
     Write-Host -ForegroundColor DarkGray    "========================================================================="

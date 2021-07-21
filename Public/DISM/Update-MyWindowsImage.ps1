@@ -144,12 +144,12 @@ function Update-MyWindowsImage {
 
                 if ($Update -eq 'Check') {Continue}
                 
-
-                if ($BitsTransfer.IsPresent) {
+<#                 if ($BitsTransfer.IsPresent) {
                     $UpdateFile = Save-OSDDownload -SourceUrl $item.OriginUri -BitsTransfer -Verbose
                 } else {
                     $UpdateFile = Save-OSDDownload -SourceUrl $item.OriginUri -Verbose
-                }
+                } #>
+                $UpdateFile = Save-WebFile -SourceUrl $item.OriginUri
                 $CurrentLog = "$env:TEMP\OSD\$((Get-Date).ToString('yyyy-MM-dd-HHmmss'))-Update-MyWindowsImage.log"
 
                 if (! (Test-Path "$env:TEMP\OSD")) {New-Item -Path "$env:TEMP\OSD" -Force | Out-Null}

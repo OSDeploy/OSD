@@ -75,7 +75,8 @@ function Save-MyDellBios {
             }
             elseif (Test-MyDellBiosWebConnection) {
                 #Download the BIOS Update
-                $SaveMyDellBios = Save-OSDDownload -SourceUrl $GetMyDellBios.Url -DownloadFolder "$DownloadPath"
+                #$SaveMyDellBios = Save-OSDDownload -SourceUrl $GetMyDellBios.Url -DownloadFolder "$DownloadPath"
+                $SaveMyDellBios = Save-WebFile -SourceUrl $GetMyDellBios.Url -DestinationDirectory "$DownloadPath"
                 Start-Sleep -Seconds 1
 
                 #Make sure the BIOS Downloaded
@@ -231,7 +232,8 @@ function Save-MyDellBiosFlash64W {
         $GetMyDellBios = Get-MyDellBios
         if ($GetMyDellBios) {
             if (Test-WebConnection -Uri $GetMyDellBios.Flash64W) {
-                $SaveMyDellBiosFlash64W = Save-OSDDownload -SourceUrl $GetMyDellBios.Flash64W -DownloadFolder "$DownloadPath"
+                #$SaveMyDellBiosFlash64W = Save-OSDDownload -SourceUrl $GetMyDellBios.Flash64W -DownloadFolder "$DownloadPath"
+                $SaveMyDellBiosFlash64W = Save-WebFile -SourceUrl $GetMyDellBios.Flash64W -DestinationDirectory "$DownloadPath"
                 Expand -R "$($SaveMyDellBiosFlash64W.FullName)" -F:* "$DownloadPath" | Out-Null
                 if (Test-Path (Join-Path $DownloadPath 'Flash64W.exe')) {
                     Get-Item (Join-Path $DownloadPath 'Flash64W.exe')

@@ -101,8 +101,6 @@ FunctionsToExport =
 'Save-MyDellBios',
 'Save-MyDellBiosFlash64W',
 'Update-MyDellBios',
-'Get-MyDellDriverCab',
-'Save-MyDellDriverCab',
 'Backup-Disk.ffu',
 'Clear-Disk.fixed',
 'Clear-Disk.usb',
@@ -257,7 +255,8 @@ FunctionsToExport =
 'Get-MsUpCat',
 'Save-MsUpCatDriver',
 'Save-MsUpCatUpdate',
-'Get-OSDWinEvent'
+'Get-OSDWinEvent',
+'Show-MsSettings'
 
 # Cmdlets to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no cmdlets to export.
 CmdletsToExport = @()
