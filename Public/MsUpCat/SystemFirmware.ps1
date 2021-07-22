@@ -42,7 +42,7 @@ function Get-SystemFirmwareUpdate {
     #=======================================================================
     #	Make sure the Module was installed
     #=======================================================================
-    if (Get-Module -ListAvailable -Name MSCatalog -ErrorAction Ignore) {
+    if (Get-Module -ListAvailable -Name MSCatalog) {
         if (Test-WebConnectionMsUpCat) {
             Get-MSCatalogUpdate -Search (Get-SystemFirmwareResource) -SortBy LastUpdated -Descending | Select-Object LastUpdated,Title,Version,Size,Guid -First 1
         }

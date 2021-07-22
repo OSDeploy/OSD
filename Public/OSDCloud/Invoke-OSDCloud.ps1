@@ -418,11 +418,32 @@ function Invoke-OSDCloud {
 
     if (Test-Path $OSDCloud.ImageFileTarget.FullName) {
 
+        $ImageCount = (Get-WindowsImage -ImagePath $OSDCloud.ImageFileTarget.FullName).Count
+
         if (!($OSDCloud.OSImageIndex)) {
-            Write-Warning "No ImageIndex is specified, setting ImageIndex = 1"
-            $OSDCloud.OSImageIndex = 1
+            if ($ImageCount -eq 1) {
+                Write-Warning "No ImageIndex is specified, setting ImageIndex = 1"
+                $OSDCloud.OSImageIndex = 1
+            }
+            else {
+                Write-Warning "No ImageIndex is specified, setting ImageIndex = 4"
+                $OSDCloud.OSImageIndex = 4
+            }
         }
-        
+
+        if (($OSLicense -eq 'Retail') -and ($ImageCount -eq 9)) {
+            if ($OSEdition -eq 'Home Single Language') {
+                Write-Warning "This ESD does not contain a Home Single Edition Index"
+                Write-Warning "Restart OSDCloud and select a different Edition"
+                Break
+            }
+            if ($OSEdition -notmatch 'Home') {
+                Write-Warning "This ESD does not contain a Home Single Edition Index"
+                Write-Warning "Adjusting selected Image Index by -1"
+                $OSDCloud.OSImageIndex = ($OSDCloud.OSImageIndex - 1)
+            }
+        }
+
         Write-Host -ForegroundColor DarkGray "Expand-WindowsImage -ApplyPath 'C:\' -ImagePath $($OSDCloud.ImageFileTarget.FullName) -Index $($OSDCloud.OSImageIndex) -ScratchDirectory 'C:\OSDCloud\Temp'"
         if ($OSDCloud.Test -ne $true) {
             Expand-WindowsImage -ApplyPath 'C:\' -ImagePath $OSDCloud.ImageFileTarget.FullName -Index $OSDCloud.OSImageIndex -ScratchDirectory 'C:\OSDCloud\Temp' -ErrorAction Stop
@@ -508,7 +529,7 @@ function Invoke-OSDCloud {
         Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Save-SystemFirmwareUpdate"
         Write-Host -ForegroundColor DarkGray "Firmware Updates will be downloaded from Microsoft Update Catalog to C:\Drivers"
         Write-Host -ForegroundColor DarkGray "If the downloaded Firmware Update is newer than the existing Firmware, it will be installed"
-        Write-Host -ForegroundColor DarkGray "This doesn't always work 100% in testing on some Dell systems"
+        Write-Host -ForegroundColor DarkGray "This doesn't always work 100% in testing on some systems"
         Write-Host -ForegroundColor Gray "Command: Save-SystemFirmwareUpdate -DestinationDirectory 'C:\Drivers\Firmware'"
 
         Save-SystemFirmwareUpdate -DestinationDirectory 'C:\Drivers\Firmware' -ErrorAction Ignore

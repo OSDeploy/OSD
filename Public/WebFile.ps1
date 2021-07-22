@@ -63,6 +63,8 @@ function Save-WebFile {
         #=======================================================================
         #	Download
         #=======================================================================
+        $SourceUrl = [Uri]::EscapeUriString($SourceUrl)
+
         if (Get-Command 'curl.exe') {
             Write-Verbose "cURL: $SourceUrl"
     
