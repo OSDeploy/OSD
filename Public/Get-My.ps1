@@ -147,24 +147,30 @@ function Get-MyComputerProduct {
     $MyComputerManufacturer = Get-MyComputerManufacturer -Brief
 
     if ($MyComputerManufacturer -eq 'Dell') {
-        ((Get-CimInstance -ClassName CIM_ComputerSystem).SystemSKUNumber).Trim()
+        $Result = (Get-CimInstance -ClassName CIM_ComputerSystem).SystemSKUNumber
     }
     elseif ($MyComputerManufacturer -eq 'HP')  {
-        ((Get-WmiObject -Class Win32_BaseBoard).Product).Trim()
+        $Result = (Get-WmiObject -Class Win32_BaseBoard).Product
     }
     elseif ($MyComputerManufacturer -eq 'Lenovo')  {
         #Thanks Maurice
-        ((Get-WmiObject -Class Win32_ComputerSystem | Select-Object -ExpandProperty Model).SubString(0, 4)).Trim()
+        $Result = (Get-WmiObject -Class Win32_ComputerSystem | Select-Object -ExpandProperty Model).SubString(0, 4)
     }
     elseif ($MyComputerManufacturer -eq 'Microsoft')  {
         #Surface_Book
         #Surface_Pro_3
-        (Get-CimInstance -ClassName CIM_ComputerSystem).SystemSKUNumber
+        $Result = (Get-CimInstance -ClassName CIM_ComputerSystem).SystemSKUNumber
         #Surface Book
         #Surface Pro 3
         #((Get-WmiObject -Class Win32_BaseBoard).Product).Trim()
     }
     else {
-        Get-MyComputerModel -Brief
+        $Result = Get-MyComputerModel -Brief
     }
+    
+    if ($null -eq $Result) {
+        $Result = 'Unknown'
+    }
+
+    ($Result).Trim()
 }
