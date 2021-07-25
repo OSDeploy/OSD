@@ -1,13 +1,10 @@
-# Module Manifest
-#
-
 @{
 
 # Script module or binary module file associated with this manifest.
-RootModule = 'OSD.psm1'
+ModuleToProcess = 'OSD.psm1'
 
-# Version number of his module.
-ModuleVersion = '21.7.22.1'
+# Version number of this module.
+ModuleVersion = '21.7.23.1'
 
 # Supported PSEditions
 # CompatiblePSEditions = @()
@@ -27,13 +24,14 @@ Copyright = '(c) 2021 David Segura osdeploy.com. All rights reserved.'
 # Description of the functionality provided by this module
 Description = @'
 OSD PowerShell Module is a collection of OSD shared functions that can be used WinPE and Windows 10
+https://osd.osdeploy.com/
 '@
 
 # Minimum version of the Windows PowerShell engine required by this module
 PowerShellVersion = '5.0'
 
 # Name of the Windows PowerShell host required by this module
-# PowerShellHostName = 'Windows PowerShell ISE Host'
+# PowerShellHostName = ''
 
 # Minimum version of the Windows PowerShell host required by this module
 # PowerShellHostVersion = ''
@@ -254,10 +252,17 @@ FunctionsToExport =
 'Convert-PNPDeviceIDtoGuid',
 'Get-MsUpCat',
 'Save-MsUpCatDriver',
+'Get-MsUpCatUpdate',
 'Save-MsUpCatUpdate',
 'Get-OSDWinEvent',
 'Show-MsSettings',
-'Unblock-WindowsUpdate'
+'Unblock-WindowsUpdate',
+'Invoke-Exe',
+'Copy-IsoToUsb',
+'Export-OSDCertificatesAsReg',
+'Get-DownLinks',
+'New-CAB',
+'Show-RegistryXML'
 
 # Cmdlets to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no cmdlets to export.
 CmdletsToExport = @()

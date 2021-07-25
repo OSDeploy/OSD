@@ -44,7 +44,12 @@ function Get-SystemFirmwareUpdate {
     #=======================================================================
     if (Get-Module -ListAvailable -Name MSCatalog) {
         if (Test-WebConnectionMsUpCat) {
-            Get-MSCatalogUpdate -Search (Get-SystemFirmwareResource) -SortBy LastUpdated -Descending | Select-Object LastUpdated,Title,Version,Size,Guid -First 1
+            Try {
+                Get-MSCatalogUpdate -Search (Get-SystemFirmwareResource) -SortBy LastUpdated -Descending | Select-Object LastUpdated,Title,Version,Size,Guid -First 1
+            }
+            Catch {
+                #Do nothing
+            }
         }
         else {
             Write-Warning "Get-SystemFirmwareUpdate: Could not reach https://www.catalog.update.microsoft.com/"

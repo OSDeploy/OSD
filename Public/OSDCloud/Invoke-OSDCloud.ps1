@@ -293,7 +293,7 @@ function Invoke-OSDCloud {
     #=======================================================================
     if ($OSDCloud.Screenshot) {
         Stop-ScreenPNGProcess
-        robocopy "$($OSDCloud.Screenshot)" C:\OSDCloud\ScreenPNG *.* /e /ndl /nfl /njh /njs
+        Invoke-Exe robocopy "$($OSDCloud.Screenshot)" C:\OSDCloud\ScreenPNG *.* /s /ndl /nfl /njh /njs
         Start-ScreenPNGProcess -Directory 'C:\OSDCloud\ScreenPNG'
         $OSDCloud.Screenshot = 'C:\OSDCloud\ScreenPNG'
     }
@@ -608,7 +608,7 @@ function Invoke-OSDCloud {
         $OSDCloud.ODTSource = Join-Path $OSDCloud.ODTFile.Directory 'Office'
         Write-Verbose -Verbose "ODTSource: $($OSDCloud.ODTSource)"
         if (Test-Path $OSDCloud.ODTSource) {
-            robocopy "$($OSDCloud.ODTSource)" "$($OSDCloud.ODTTargetData)" *.* /e /ndl /nfl /z /b
+            Invoke-Exe robocopy "$($OSDCloud.ODTSource)" "$($OSDCloud.ODTTargetData)" *.* /s /ndl /nfl /z /b
         }
     }
     #=======================================================================
