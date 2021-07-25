@@ -26,26 +26,13 @@ function Remove-AppxOnline {
 
     begin {
         #=======================================================================
-        #   Require Admin Rights
+        #   Blocks
         #=======================================================================
-        if ((Get-OSDGather -Property IsAdmin) -eq $false) {
-            Write-Warning "$($MyInvocation.MyCommand) requires Admin Rights ELEVATED"
-            Break
-        }
+        Block-StandardUser
+        Block-WindowsVersionNe10
         #=======================================================================
     }
     process {
-        #=======================================================================
-        #   Get Registry Information
-        #=======================================================================
-        $GetRegCurrentVersion = Get-RegCurrentVersion
-        #=======================================================================
-        #   Require OSMajorVersion 10
-        #=======================================================================
-        if ($GetRegCurrentVersion.CurrentMajorVersionNumber -ne 10) {
-            Write-Warning "Remove-AppxOnline: OS MajorVersion 10 is required"
-            Break
-        }
         #=======================================================================
         #   AppxPackage
         #=======================================================================
@@ -75,40 +62,43 @@ function Remove-AppxOnline {
             if (Get-Command Get-AppxPackage) {
                 if ((Get-Command Get-AppxPackage).Parameters.ContainsKey('AllUsers')) {
                     Get-AppxPackage -AllUsers | Select-Object * | Where-Object {$_.NonRemovable -ne $true} | Where-Object {$_.Name -Match $Item} | ForEach-Object {
+                        
+                        Write-Host -ForegroundColor DarkCyan $_.Name
                         if ((Get-Command Remove-AppxPackage).Parameters.ContainsKey('AllUsers')) {
-                            Write-Verbose "$($_.Name): Remove AllUsers Appx Package $($_.PackageFullName)" -Verbose
                             Try {Remove-AppxPackage -AllUsers -Package $_.PackageFullName | Out-Null}
-                            Catch {Write-Warning "$($_.Name): Remove AllUsers Appx Package $($_.PackageFullName) did not complete successfully"}
-                        } else {
-                            Write-Verbose "$($_.Name): Remove Appx Package $($_.PackageFullName)" -Verbose
+                            Catch {Write-Warning "AllUsers Appx Package $($_.PackageFullName) did not remove successfully"}
+                        }
+                        else {
                             Try {Remove-AppxPackage -Package $_.PackageFullName | Out-Null}
-                            Catch {Write-Warning "$($_.Name): Remove Appx Package $($_.PackageFullName) did not complete successfully"}
+                            Catch {Write-Warning "Appx Package $($_.PackageFullName) did not remove successfully"}
                         }
                     }
                 } else {
                     Get-AppxPackage | Select-Object * | Where-Object {$_.NonRemovable -ne $true} | Where-Object {$_.Name -Match $Item} | ForEach-Object {
+                        
+                        Write-Host -ForegroundColor DarkCyan $_.Name
                         if ((Get-Command Remove-AppxPackage).Parameters.ContainsKey('AllUsers')) {
-                            Write-Verbose "$($_.Name): Remove AllUsers Appx Package $($_.PackageFullName)" -Verbose
                             Try {Remove-AppxPackage -AllUsers -Package $_.PackageFullName | Out-Null}
-                            Catch {Write-Warning "$($_.Name): Remove AllUsers Appx Package $($_.PackageFullName) did not complete successfully"}
-                        } else {
-                            Write-Verbose "$($_.Name): Remove Appx Package $($_.PackageFullName)" -Verbose
+                            Catch {Write-Warning "AllUsers Appx Package $($_.PackageFullName) did not remove successfully"}
+                        }
+                        else {
                             Try {Remove-AppxPackage -Package $_.PackageFullName | Out-Null}
-                            Catch {Write-Warning "$($_.Name): Remove Appx Package $($_.PackageFullName) did not complete successfully"}
+                            Catch {Write-Warning "Appx Package $($_.PackageFullName) did not remove successfully"}
                         }
                     }
                 }
             }
             if (Get-Command Get-AppxProvisionedPackage) {
                 Get-AppxProvisionedPackage -Online | Where-Object {$_.DisplayName -Match $Item} | ForEach-Object {
+
+                    Write-Host -ForegroundColor DarkCyan $_.Name
                     if ((Get-Command Remove-AppxProvisionedPackage).Parameters.ContainsKey('AllUsers')) {
-                        Write-Verbose "$($_.DisplayName): Remove AllUsers Appx Provisioned Package $($_.PackageName)" -Verbose
                         Try {Remove-AppxProvisionedPackage -Online -AllUsers -PackageName $_.PackageName | Out-Null}
-                        Catch {Write-Warning "$($_.DisplayName): Remove AllUsers Appx Provisioned Package $($_.PackageName) did not complete successfully"}
-                    } else {
-                        Write-Verbose "$($_.DisplayName): Remove Appx Provisioned Package $($_.PackageName)" -Verbose
+                        Catch {Write-Warning "AllUsers Appx Provisioned Package $($_.PackageName) did not remove successfully"}
+                    }
+                    else {
                         Try {Remove-AppxProvisionedPackage -Online -PackageName $_.PackageName | Out-Null}
-                        Catch {Write-Warning "$($_.DisplayName): Remove Appx Provisioned Package $($_.PackageName) did not complete successfully"}
+                        Catch {Write-Warning "Appx Provisioned Package $($_.PackageName) did not remove successfully"}
                     }
                 }
             }

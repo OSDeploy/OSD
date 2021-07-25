@@ -4,7 +4,7 @@
 ModuleToProcess = 'OSD.psm1'
 
 # Version number of this module.
-ModuleVersion = '21.7.23.1'
+ModuleVersion = '21.7.25.1'
 
 # Supported PSEditions
 # CompatiblePSEditions = @()
