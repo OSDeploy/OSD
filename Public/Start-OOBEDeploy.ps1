@@ -39,6 +39,29 @@ function Start-OOBEDeploy {
         Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Loading OOBEDeploy Default Profile"
     }
     #=======================================================================
+    #	ProductKey
+    #=======================================================================
+    if ($ProductKey) {
+        Write-Host -ForegroundColor DarkGray "========================================================================="
+        Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Set-WindowsEdition Enterprise (ChangePK)"
+        Invoke-Exe changepk.exe /ProductKey $ProductKey
+        Get-WindowsEdition -Online
+    }
+    #=======================================================================
+    #   Autopilot
+    #=======================================================================
+    if ($Autopilot) {
+        Write-Host -ForegroundColor DarkGray "========================================================================="
+        Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) AutopilotOOBE"
+        Install-Module AutopilotOOBE -Force
+        if ($CustomProfile) {
+            Start-Process PowerShell.exe -ArgumentList "-Command Start-AutopilotOOBE -CustomProfile $CustomProfile"
+        }
+        else {
+            Start-Process PowerShell.exe -ArgumentList "-Command Start-AutopilotOOBE"
+        }
+    }
+    #=======================================================================
     #   Profile OSD OSDeploy
     #=======================================================================
     if ($CustomProfile -in 'OSD','OSDeploy') {
@@ -50,13 +73,15 @@ function Start-OOBEDeploy {
         $ProductKey = 'NPPR9-FWDCX-D2C8J-H872K-2YT43'
     }
     #=======================================================================
-    #	ProductKey
+    #   Profile BH
     #=======================================================================
-    if ($ProductKey) {
-        Write-Host -ForegroundColor DarkGray "========================================================================="
-        Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Set-WindowsEdition Enterprise (ChangePK)"
-        Invoke-Exe changepk.exe /ProductKey $ProductKey
-        Get-WindowsEdition -Online
+    if ($CustomProfile -in 'BH') {
+        $AddRSAT = $true
+        $Autopilot = $true
+        $UpdateDrivers = $true
+        $UpdateWindows = $true
+        $RemoveAppx = @('CommunicationsApps','OfficeHub','People','Skype','Solitaire','Xbox','ZuneMusic','ZuneVideo')
+        $ProductKey = 'NPPR9-FWDCX-D2C8J-H872K-2YT43'
     }
     #=======================================================================
     #	AddRSAT
@@ -110,27 +135,7 @@ function Start-OOBEDeploy {
     #=======================================================================
     if ($UpdateWindows) {
         Write-Host -ForegroundColor DarkGray "========================================================================="
-        Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Windows Update Software"
-        if (!(Get-Module PSWindowsUpdate -ListAvailable)) {
-            try {
-                Install-Module PSWindowsUpdate -Force
-            }
-            catch {
-                Write-Warning 'Unable to install PSWindowsUpdate PowerShell Module'
-                $UpdateWindows = $false
-            }
-        }
-    }
-    if ($UpdateWindows) {
-        Write-Host -ForegroundColor DarkCyan 'Install-WindowsUpdate -UpdateType Software -AcceptAll -IgnoreReboot'
-        Install-WindowsUpdate -UpdateType Software -AcceptAll -IgnoreReboot -NotTitle 'Malicious'
-    }
-    #=======================================================================
-    #	Microsoft Update
-    #=======================================================================
-    if ($UpdateWindows) {
-        Write-Host -ForegroundColor DarkGray "========================================================================="
-        Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Microsoft Update"
+        Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Windows and Microsoft Update Software"
         if (!(Get-Module PSWindowsUpdate -ListAvailable)) {
             try {
                 Install-Module PSWindowsUpdate -Force
@@ -144,6 +149,8 @@ function Start-OOBEDeploy {
     if ($UpdateWindows) {
         Write-Host -ForegroundColor DarkCyan 'Add-WUServiceManager -MicrosoftUpdate -Confirm:$false'
         Add-WUServiceManager -MicrosoftUpdate -Confirm:$false
+        #Write-Host -ForegroundColor DarkCyan 'Install-WindowsUpdate -UpdateType Software -AcceptAll -IgnoreReboot'
+        #Install-WindowsUpdate -UpdateType Software -AcceptAll -IgnoreReboot -NotTitle 'Malicious'
         Write-Host -ForegroundColor DarkCyan 'Install-WindowsUpdate -MicrosoftUpdate -AcceptAll -IgnoreReboot'
         Install-WindowsUpdate -MicrosoftUpdate -AcceptAll -IgnoreReboot -NotTitle 'Malicious'
     }
@@ -152,14 +159,8 @@ function Start-OOBEDeploy {
     #=======================================================================
     Write-Host -ForegroundColor DarkGray "========================================================================="
     Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Stop-Transcript"
+    Write-Warning "It is recommended that you restart your computer using Restart-Computer before completing Windows Setup"
     Stop-Transcript
     Write-Host -ForegroundColor DarkGray "========================================================================="
-    #=======================================================================
-    #   Autopilot
-    #=======================================================================
-    if ($Autopilot) {
-        Install-Module AutopilotOOBE -Force
-        Start-AutopilotOOBE
-    }
     #=======================================================================
 }
