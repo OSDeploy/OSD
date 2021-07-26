@@ -3,12 +3,15 @@ function Start-OOBEDeploy {
     param (
         [Parameter(ValueFromPipeline = $true)]
         [string]$CustomProfile,
+        [switch]$AddNetFX3,
         [switch]$AddRSAT,
         [switch]$Autopilot,
         [string]$ProductKey,
         [string[]]$RemoveAppx,
         [switch]$UpdateDrivers,
-        [switch]$UpdateWindows
+        [switch]$UpdateWindows,
+        [ValidateSet('Enterprise')]
+        [string]$SetEdition
     )
     #=======================================================================
     #	Block
@@ -21,6 +24,7 @@ function Start-OOBEDeploy {
     #=======================================================================
     Write-Host -ForegroundColor DarkGray "========================================================================="
     Write-Host -ForegroundColor Green "Start-OOBEDeploy"
+    Write-Warning "This function is under heavy development and will have frequent changes"
     #=======================================================================
     #   Transcript
     #=======================================================================
@@ -58,7 +62,7 @@ function Start-OOBEDeploy {
         $UpdateDrivers = $true
         $UpdateWindows = $true
         $RemoveAppx = @('CommunicationsApps','OfficeHub','People','Skype','Solitaire','Xbox','ZuneMusic','ZuneVideo')
-        $ProductKey = 'NPPR9-FWDCX-D2C8J-H872K-2YT43'
+        $SetEdition = 'Enterprise'
     }
     #=======================================================================
     #   PSGallery
@@ -72,9 +76,10 @@ function Start-OOBEDeploy {
     #=======================================================================
     #	ProductKey
     #=======================================================================
+    if ($SetEdition -eq 'Enterprise') {$ProductKey = 'NPPR9-FWDCX-D2C8J-H872K-2YT43'}
     if ($ProductKey) {
         Write-Host -ForegroundColor DarkGray "========================================================================="
-        Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Set-WindowsEdition Enterprise (ChangePK)"
+        Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Set-WindowsEdition (ChangePK)"
         Invoke-Exe changepk.exe /ProductKey $ProductKey
         Get-WindowsEdition -Online
     }
@@ -97,9 +102,26 @@ function Start-OOBEDeploy {
     #=======================================================================
     #	AddRSAT
     #=======================================================================
+    if ($AddNetFX3) {
+        Write-Host -ForegroundColor DarkGray "========================================================================="
+        Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Add Windows Capability NetFX3"
+        $AddWindowsCapability = Get-MyWindowsCapability -Match 'NetFX' -Detail
+        foreach ($Item in $AddWindowsCapability) {
+            if ($Item.State -eq 'Installed') {
+                Write-Host -ForegroundColor DarkGray "$($Item.DisplayName)"
+            }
+            else {
+                Write-Host -ForegroundColor DarkCyan "$($Item.DisplayName)"
+                $Item | Add-WindowsCapability -Online -ErrorAction Ignore | Out-Null
+            }
+        }
+    }
+    #=======================================================================
+    #	AddRSAT
+    #=======================================================================
     if ($AddRSAT) {
         Write-Host -ForegroundColor DarkGray "========================================================================="
-        Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Windows Capability RSAT"
+        Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Add Windows Capability RSAT"
         $AddWindowsCapability = Get-MyWindowsCapability -Category Rsat -Detail
         foreach ($Item in $AddWindowsCapability) {
             if ($Item.State -eq 'Installed') {
