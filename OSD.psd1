@@ -1,10 +1,10 @@
 @{
 
 # Script module or binary module file associated with this manifest.
-ModuleToProcess = 'OSD.psm1'
+RootModule = 'OSD.psm1'
 
 # Version number of this module.
-ModuleVersion = '21.7.25.1'
+ModuleVersion = '21.7.25.2'
 
 # Supported PSEditions
 # CompatiblePSEditions = @()
@@ -262,7 +262,8 @@ FunctionsToExport =
 'Export-OSDCertificatesAsReg',
 'Get-DownLinks',
 'New-CAB',
-'Show-RegistryXML'
+'Show-RegistryXML',
+'Start-OOBEDeploy'
 
 # Cmdlets to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no cmdlets to export.
 CmdletsToExport = @()

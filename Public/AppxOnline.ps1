@@ -66,11 +66,15 @@ function Remove-AppxOnline {
                         Write-Host -ForegroundColor DarkCyan $_.Name
                         if ((Get-Command Remove-AppxPackage).Parameters.ContainsKey('AllUsers')) {
                             Try {Remove-AppxPackage -AllUsers -Package $_.PackageFullName | Out-Null}
-                            Catch {Write-Warning "AllUsers Appx Package $($_.PackageFullName) did not remove successfully"}
+                            Catch {
+                                #Write-Warning "AllUsers Appx Package $($_.PackageFullName) did not remove successfully"
+                        }
                         }
                         else {
                             Try {Remove-AppxPackage -Package $_.PackageFullName | Out-Null}
-                            Catch {Write-Warning "Appx Package $($_.PackageFullName) did not remove successfully"}
+                            Catch {
+                                #Write-Warning "Appx Package $($_.PackageFullName) did not remove successfully"
+                        }
                         }
                     }
                 } else {
@@ -79,11 +83,15 @@ function Remove-AppxOnline {
                         Write-Host -ForegroundColor DarkCyan $_.Name
                         if ((Get-Command Remove-AppxPackage).Parameters.ContainsKey('AllUsers')) {
                             Try {Remove-AppxPackage -AllUsers -Package $_.PackageFullName | Out-Null}
-                            Catch {Write-Warning "AllUsers Appx Package $($_.PackageFullName) did not remove successfully"}
+                            Catch {
+                                #Write-Warning "AllUsers Appx Package $($_.PackageFullName) did not remove successfully"
+                        }
                         }
                         else {
                             Try {Remove-AppxPackage -Package $_.PackageFullName | Out-Null}
-                            Catch {Write-Warning "Appx Package $($_.PackageFullName) did not remove successfully"}
+                            Catch {
+                                #Write-Warning "Appx Package $($_.PackageFullName) did not remove successfully"
+                            }
                         }
                     }
                 }
@@ -94,11 +102,15 @@ function Remove-AppxOnline {
                     Write-Host -ForegroundColor DarkCyan $_.Name
                     if ((Get-Command Remove-AppxProvisionedPackage).Parameters.ContainsKey('AllUsers')) {
                         Try {Remove-AppxProvisionedPackage -Online -AllUsers -PackageName $_.PackageName | Out-Null}
-                        Catch {Write-Warning "AllUsers Appx Provisioned Package $($_.PackageName) did not remove successfully"}
+                        Catch {
+                            #Write-Warning "AllUsers Appx Provisioned Package $($_.PackageName) did not remove successfully"
+                    }
                     }
                     else {
                         Try {Remove-AppxProvisionedPackage -Online -PackageName $_.PackageName | Out-Null}
-                        Catch {Write-Warning "Appx Provisioned Package $($_.PackageName) did not remove successfully"}
+                        Catch {
+                            #Write-Warning "Appx Provisioned Package $($_.PackageName) did not remove successfully"
+                    }
                     }
                 }
             }
