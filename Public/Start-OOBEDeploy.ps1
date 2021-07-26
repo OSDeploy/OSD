@@ -39,29 +39,6 @@ function Start-OOBEDeploy {
         Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Loading OOBEDeploy Default Profile"
     }
     #=======================================================================
-    #	ProductKey
-    #=======================================================================
-    if ($ProductKey) {
-        Write-Host -ForegroundColor DarkGray "========================================================================="
-        Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Set-WindowsEdition Enterprise (ChangePK)"
-        Invoke-Exe changepk.exe /ProductKey $ProductKey
-        Get-WindowsEdition -Online
-    }
-    #=======================================================================
-    #   Autopilot
-    #=======================================================================
-    if ($Autopilot) {
-        Write-Host -ForegroundColor DarkGray "========================================================================="
-        Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) AutopilotOOBE"
-        Install-Module AutopilotOOBE -Force
-        if ($CustomProfile) {
-            Start-Process PowerShell.exe -ArgumentList "-Command Start-AutopilotOOBE -CustomProfile $CustomProfile"
-        }
-        else {
-            Start-Process PowerShell.exe -ArgumentList "-Command Start-AutopilotOOBE"
-        }
-    }
-    #=======================================================================
     #   Profile OSD OSDeploy
     #=======================================================================
     if ($CustomProfile -in 'OSD','OSDeploy') {
@@ -82,6 +59,40 @@ function Start-OOBEDeploy {
         $UpdateWindows = $true
         $RemoveAppx = @('CommunicationsApps','OfficeHub','People','Skype','Solitaire','Xbox','ZuneMusic','ZuneVideo')
         $ProductKey = 'NPPR9-FWDCX-D2C8J-H872K-2YT43'
+    }
+    #=======================================================================
+    #   PSGallery
+    #=======================================================================
+    $PSGalleryIP = (Get-PSRepository -Name PSGallery).InstallationPolicy
+    if ($PSGalleryIP -eq 'Untrusted') {
+        Write-Host -ForegroundColor DarkGray "========================================================================="
+        Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Set-PSRepository -Name PSGallery -InstallationPolicy Trusted"
+        Set-PSRepository -Name PSGallery -InstallationPolicy Trusted
+    }
+    #=======================================================================
+    #	ProductKey
+    #=======================================================================
+    if ($ProductKey) {
+        Write-Host -ForegroundColor DarkGray "========================================================================="
+        Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Set-WindowsEdition Enterprise (ChangePK)"
+        Invoke-Exe changepk.exe /ProductKey $ProductKey
+        Get-WindowsEdition -Online
+    }
+    #=======================================================================
+    #   Autopilot
+    #=======================================================================
+    if ($Autopilot) {
+        Write-Host -ForegroundColor DarkGray "========================================================================="
+        Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) AutopilotOOBE"
+        Write-Host -ForegroundColor DarkCyan "Install-Module AutopilotOOBE -Force"
+        Write-Warning "AutopilotOOBE will open in a new PowerShell Window while OOBEDeploy continues in the background"
+        Install-Module AutopilotOOBE -Force
+        if ($CustomProfile) {
+            Start-Process PowerShell.exe -ArgumentList "-Command Start-AutopilotOOBE -CustomProfile $CustomProfile"
+        }
+        else {
+            Start-Process PowerShell.exe -ArgumentList "-Command Start-AutopilotOOBE"
+        }
     }
     #=======================================================================
     #	AddRSAT
