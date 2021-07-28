@@ -128,7 +128,6 @@ function LoadForm {
                 Foreground = "Black"
                 Height = "380"
                 HorizontalAlignment = "Left"
-                IsReadOnly = "True"
                 Margin = "20,120,0,0"
                 ScrollViewer.HorizontalScrollBarVisibility = "Visible"
                 ScrollViewer.VerticalScrollBarVisibility = "Visible"
@@ -176,7 +175,7 @@ LoadForm
 #   Initialize
 #=======================================================================
 if ($Global:PSScriptGui.Tasks) {
-    $Global:PSScriptGui.Tasks | Sort-Object -Property Name -Descending | ForEach-Object {
+    $Global:PSScriptGui.Tasks | Sort-Object -Property Name | ForEach-Object {
         $ComboBoxPSScriptName.Items.Add($_.Name) | Out-Null
     }
     Write-Host -ForegroundColor DarkGray "================================================================="
@@ -203,7 +202,7 @@ if ($Global:PSScriptGui.Tasks) {
 #=======================================================================
 function Set-PSScriptGuiContent {
     Write-Host -ForegroundColor DarkGray "================================================================="
-    $SelectedTask = $Global:PSScriptGui.Tasks | Where-Object {$_.Name -eq $ComboBoxPSScriptName.SelectedValue}
+    $SelectedTask = $Global:PSScriptGui.Tasks | Where-Object {$_.Name -eq $ComboBoxPSScriptName.SelectedValue} | Sort-Object Name | Select-Object -First 1
 
     if ($SelectedTask.Name) {
         Write-Host -ForegroundColor Cyan $SelectedTask.Name
@@ -224,8 +223,8 @@ function Set-PSScriptGuiContent {
     }
 
     $Global:PSScriptUri = $SelectedTask.Uri
-    $ScriptContent = (Invoke-WebRequest -Uri $Global:PSScriptUri -UseBasicParsing).Content
-    $TextBoxPSScriptContent.Text = $ScriptContent
+    $Global:ScriptContent = (Invoke-WebRequest -Uri $Global:PSScriptUri -UseBasicParsing).Content
+    $TextBoxPSScriptContent.Text = $Global:ScriptContent
 }
 #=======================================================================
 #   Main
@@ -240,14 +239,21 @@ Set-PSScriptGuiContent
 $ComboBoxPSScriptName.add_DropDownClosed({
     Set-PSScriptGuiContent
 })
+<# $TextBoxPSScriptContent.add_KeyUp({
+    $Global:ScriptContent = {$($TextBoxPSScriptContent.Text)}
+}) #>
 #=======================================================================
 #   GO
 #=======================================================================
 $GoButton.add_Click({
     Write-Host -ForegroundColor DarkGray "================================================================="
-    if (Test-WebConnection -Uri $Global:PSScriptUri) {
+    $Global:PSScriptBlock = [scriptblock]::Create($TextBoxPSScriptContent.Text)
+    $Global:PSScriptBlock | Out-File "$env:Temp\PSScriptGUIResult.ps1"
+
+    if ($Global:PSScriptBlock) {
         $xamGUI.Close()
-        Invoke-WebPSScript -WebPSScript $Global:PSScriptUri
+        #Invoke-WebPSScript -WebPSScript $Global:PSScriptUri
+        Invoke-Command $Global:PSScriptBlock
     }
     else {
         Write-Warning "Unable to connect to $Global:PSScriptUri"
