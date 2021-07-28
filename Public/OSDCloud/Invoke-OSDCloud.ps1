@@ -524,15 +524,20 @@ function Invoke-OSDCloud {
     #=======================================================================
     #	Save-SystemFirmwareUpdate
     #=======================================================================
-    if (Test-WebConnectionMsUpCat) {
-        Write-Host -ForegroundColor DarkGray "========================================================================="
-        Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Save-SystemFirmwareUpdate"
-        Write-Host -ForegroundColor DarkGray "Firmware Updates will be downloaded from Microsoft Update Catalog to C:\Drivers"
-        Write-Host -ForegroundColor DarkGray "If the downloaded Firmware Update is newer than the existing Firmware, it will be installed"
-        Write-Host -ForegroundColor DarkGray "This doesn't always work 100% in testing on some systems"
-        Write-Host -ForegroundColor Gray "Command: Save-SystemFirmwareUpdate -DestinationDirectory 'C:\Drivers\Firmware'"
-
-        Save-SystemFirmwareUpdate -DestinationDirectory 'C:\Drivers\Firmware' -ErrorAction Ignore
+    if ((Get-MyComputerModel) -match 'Virtual') {
+        #Do Nothing
+    }
+    else {
+        if (Test-WebConnectionMsUpCat) {
+            Write-Host -ForegroundColor DarkGray "========================================================================="
+            Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Save-SystemFirmwareUpdate"
+            Write-Host -ForegroundColor DarkGray "Firmware Updates will be downloaded from Microsoft Update Catalog to C:\Drivers"
+            Write-Host -ForegroundColor DarkGray "If the downloaded Firmware Update is newer than the existing Firmware, it will be installed"
+            Write-Host -ForegroundColor DarkGray "This doesn't always work 100% in testing on some systems"
+            Write-Host -ForegroundColor Gray "Command: Save-SystemFirmwareUpdate -DestinationDirectory 'C:\Drivers\Firmware'"
+    
+            Save-SystemFirmwareUpdate -DestinationDirectory 'C:\Drivers\Firmware' -ErrorAction Ignore
+        }
     }
     #=======================================================================
     #	Save-MsUpCatDriver Net
