@@ -24,7 +24,10 @@ function Start-OOBEDeploy {
     #=======================================================================
     Write-Host -ForegroundColor DarkGray "========================================================================="
     Write-Host -ForegroundColor Green "Start-OOBEDeploy"
-    Write-Warning "This function is under heavy development and will have frequent changes"
+    #=======================================================================
+    #   Variables
+    #=======================================================================
+    $JsonPath = "$env:ProgramData\OSDeploy\OSDeploy.OOBEDeploy.json"
     #=======================================================================
     #   Transcript
     #=======================================================================
@@ -32,37 +35,53 @@ function Start-OOBEDeploy {
     Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Start-Transcript"
     $Transcript = "$((Get-Date).ToString('yyyy-MM-dd-HHmmss'))-OOBEDeploy.log"
     Start-Transcript -Path (Join-Path "$env:SystemRoot\Temp" $Transcript) -ErrorAction Ignore
-    Write-Host -ForegroundColor DarkGray "========================================================================="
     #=======================================================================
-    #   Custom Profile
+    #   Custom Profile Sample Variables
     #=======================================================================
-    if ($CustomProfile) {
-        Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Loading OOBEDeploy $CustomProfile Custom Profile"
-    }
-    else {
-        Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Loading OOBEDeploy Default Profile"
-    }
-    #=======================================================================
-    #   Profile OSD OSDeploy
-    #=======================================================================
-    if ($CustomProfile -in 'OSD','OSDeploy') {
-        $AddRSAT = $true
-        $Autopilot = $true
-        $UpdateDrivers = $true
-        $UpdateWindows = $true
-        $RemoveAppx = @('CommunicationsApps','OfficeHub','People','Skype','Solitaire','Xbox','ZuneMusic','ZuneVideo')
-        $ProductKey = 'NPPR9-FWDCX-D2C8J-H872K-2YT43'
-    }
-    #=======================================================================
-    #   Profile BH
-    #=======================================================================
-    if ($CustomProfile -in 'BH') {
+    if ($CustomProfile -in 'Sample') {
+        $AddNetFX3 = $true
         $AddRSAT = $true
         $Autopilot = $true
         $UpdateDrivers = $true
         $UpdateWindows = $true
         $RemoveAppx = @('CommunicationsApps','OfficeHub','People','Skype','Solitaire','Xbox','ZuneMusic','ZuneVideo')
         $SetEdition = 'Enterprise'
+    }
+    #=======================================================================
+    #   Custom Profile
+    #=======================================================================
+    if ($CustomProfile) {
+        Write-Host -ForegroundColor DarkGray "========================================================================="
+        Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Loading OOBEDeploy Custom Profile $CustomProfile"
+
+        $CustomProfileJson = Get-ChildItem "$($MyInvocation.MyCommand.Module.ModuleBase)\CustomProfile\OOBEDeploy" *.json | Where-Object {$_.BaseName -eq $CustomProfile} | Select-Object -First 1
+
+        if ($CustomProfileJson) {
+            Write-Host -ForegroundColor DarkGray "Saving Module CustomProfile to $JsonPath"
+            if (!(Test-Path "$env:ProgramData\OSDeploy")) {New-Item "$env:ProgramData\OSDeploy" -ItemType Directory -Force | Out-Null}
+            Copy-Item -Path $CustomProfileJson.FullName -Destination $JsonPath -Force -ErrorAction Ignore
+        }
+    }
+    #=======================================================================
+    #   Import Json
+    #=======================================================================
+    if (Test-Path $JsonPath) {
+        Write-Host -ForegroundColor DarkGray "Importing Configuration $JsonPath"
+        $ImportOOBEDeploy = @()
+        $ImportOOBEDeploy = Get-Content -Raw -Path $JsonPath | ConvertFrom-Json
+    
+        $ImportOOBEDeploy.PSObject.Properties | ForEach-Object {
+            if ($_.Value -match 'IsPresent=True') {
+                $_.Value = $true
+            }
+            if ($_.Value -match 'IsPresent=False') {
+                $_.Value = $false
+            }
+            if ($null -eq $_.Value) {
+                Continue
+            }
+            Set-Variable -Name $_.Name -Value $_.Value -Force
+        }
     }
     #=======================================================================
     #   PSGallery
@@ -73,6 +92,25 @@ function Start-OOBEDeploy {
         Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Set-PSRepository -Name PSGallery -InstallationPolicy Trusted"
         Set-PSRepository -Name PSGallery -InstallationPolicy Trusted
     }
+    #=======================================================================
+    #   Initialize Global Variable
+    #=======================================================================
+    $Global:OOBEDeploy = [ordered]@{
+        AddNetFX3 = $AddNetFX3
+        AddRSAT = $AddRSAT
+        Autopilot = $Autopilot
+        CustomProfile = $CustomProfile
+        ProductKey = $ProductKey
+        RemoveAppx = $RemoveAppx
+        SetEdition = $SetEdition
+        UpdateDrivers = $UpdateDrivers
+        UpdateWindows = $UpdateWindows
+    }
+    Write-Host -ForegroundColor DarkGray "Exporting Configuration $env:Temp\OSDeploy.OOBEDeploy.json"
+    @($Global:OOBEDeploy.Keys) | ForEach-Object { 
+        if (-not $Global:OOBEDeploy[$_]) { $Global:OOBEDeploy.Remove($_) } 
+    }
+    $Global:OOBEDeploy | ConvertTo-Json | Out-File "$env:Temp\OSDeploy.OOBEDeploy.json" -Force
     #=======================================================================
     #	ProductKey
     #=======================================================================
