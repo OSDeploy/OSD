@@ -18,7 +18,7 @@ function Start-ScriptPad {
     {
         Demo        {$IndexUri = 'https://raw.githubusercontent.com/OSDeploy/ScriptPadDemo/main/ScriptPad.json'}
         OSDCloud    {$IndexUri = 'https://raw.githubusercontent.com/OSDeploy/OSDCloud/main/ScriptPad/ScriptPad.json'}
-        SeguraOSD   {$IndexUri = 'https://raw.githubusercontent.com/OSDeploy/MyScriptPad/main/Index/SeguraOSD.json'}
+        default     {$IndexUri = "https://raw.githubusercontent.com/$CustomProfile/ScriptPad/main/ScriptPad.json"}
     }
     #=======================================================================
     #	IndexUri
