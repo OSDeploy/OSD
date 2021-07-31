@@ -109,6 +109,7 @@ if ($Global:ScriptPad.Scripts) {
     if ($Global:ScriptPad.Settings.Help) {
         Write-Host -ForegroundColor DarkGray $Global:ScriptPad.Settings.Help
     }
+    Write-Host -ForegroundColor DarkGray "========================================================================="
 }
 if ($Global:ScriptPad.Settings.Title) {
     $LabelTitle.Content = $Global:ScriptPad.Settings.Title
@@ -120,8 +121,8 @@ else {
 #   Set-ScriptPadContent
 #=======================================================================
 function Set-ScriptPadContent {
-    Write-Host -ForegroundColor DarkGray "========================================================================="
     if ($ComboBoxScriptPadName.SelectedValue -eq 'BlankScript') {
+        Write-Host -ForegroundColor Cyan 'BlankScript'
         $TextBoxScriptPadContent.Text = (Get-Variable -Name BlankScript -Scope Global).Value
         $LabelScriptPadDescription.Content = 'BlankScript is the default PowerShell ScriptBlock that you can edit and Invoke-Command'
     }
@@ -146,6 +147,7 @@ function Set-ScriptPadContent {
         }
         $TextBoxScriptPadContent.Text = (Get-Variable -Name $Global:WorkingScript.Guid).Value
     }
+    Write-Host -ForegroundColor DarkGray "========================================================================="
 }
 
 Set-ScriptPadContent
@@ -155,7 +157,7 @@ Set-ScriptPadContent
 <# $ComboBoxScriptPadName.add_SelectionChanged({
     Set-ScriptPadContent
 }) #>
-$ComboBoxScriptPadName.add_DropDownClosed({
+$ComboBoxScriptPadName.add_SelectionChanged({
     Set-ScriptPadContent
 })
 $TextBoxScriptPadContent.add_TextChanged({
@@ -170,7 +172,6 @@ $TextBoxScriptPadContent.add_TextChanged({
 #   GO
 #=======================================================================
 $GoButton.add_Click({
-    Write-Host -ForegroundColor DarkGray "========================================================================="
     Write-Host -ForegroundColor Cyan "Invoke-Command"
     $Global:ScriptPadScriptBlock = [scriptblock]::Create($TextBoxScriptPadContent.Text)
 

@@ -1,21 +1,34 @@
 function Start-ScriptPad {
     [CmdletBinding()]
     param (
-        [string]$JsonUri
+        [Parameter(ValueFromPipeline = $true)]
+        [string]$CustomProfile,
+
+        [string]$IndexUri
     )
     #=======================================================================
-    #   PreFlight
+    #   Initialize
     #=======================================================================
     Write-Host -ForegroundColor DarkGray "========================================================================="
     $Global:ScriptPad = $null
-
-    if ($JsonUri) {
-        Write-Host -ForegroundColor Cyan "JsonUri: $JsonUri"
-        if (Test-WebConnection -Uri $JsonUri) {
-            $Global:ScriptPad = Invoke-RestMethod -Uri $JsonUri
+    #=======================================================================
+    #	Switch CustomProfile
+    #=======================================================================
+    switch ($CustomProfile)
+    {
+        OSDCloud    {$IndexUri = 'https://raw.githubusercontent.com/OSDeploy/OSDCloud/main/ScriptPad/ScriptPad.json'}
+        SeguraOSD   {$IndexUri = 'https://raw.githubusercontent.com/OSDeploy/MyScriptPad/main/Index/SeguraOSD.json'}
+    }
+    #=======================================================================
+    #	IndexUri
+    #=======================================================================
+    if ($IndexUri) {
+        Write-Host -ForegroundColor Cyan "IndexUri: $IndexUri"
+        if (Test-WebConnection -Uri $IndexUri) {
+            $Global:ScriptPad = Invoke-RestMethod -Uri $IndexUri
         }
         else {
-            Write-Warning "Unable to connect to ScriptPad JsonUri"
+            Write-Warning "Unable to connect to ScriptPad IndexUri"
             Write-Warning "Make sure you have an Internet connection and are not Firewall blocked"
             $Global:ScriptPad = $null
         }
@@ -29,7 +42,7 @@ function Start-ScriptPad {
         }
     }
     #=======================================================================
-    #   Flight
+    #   ScriptPad.ps1
     #=======================================================================
     & "$($MyInvocation.MyCommand.Module.ModuleBase)\GUI\ScriptPad.ps1"
     #=======================================================================
@@ -38,5 +51,5 @@ function Start-OSDCloudScriptPad {
     [CmdletBinding()]
     param ()
 
-    Start-ScriptPad -JsonUri 'https://raw.githubusercontent.com/OSDeploy/OSDCloud/main/ScriptPad/ScriptPad.json'
+    Start-ScriptPad -CustomProfile OSDCloud
 }
