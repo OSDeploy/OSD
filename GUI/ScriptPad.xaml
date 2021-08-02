@@ -6,7 +6,7 @@
     xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
     xmlns:Controls = "clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
 
-	Title = ""
+	Title = "ScriptPad"
     Width = "800"
     Height = "500"
     Background = "#F7FAFC"
@@ -146,7 +146,7 @@
             <Label
                 Name = "LabelScriptPadDescription"
                 Content = ""
-                FontSize = "16"
+                FontSize = "14"
                 Foreground = "Black"
                 VerticalAlignment = "Center"/>
         </StackPanel>
@@ -162,7 +162,7 @@
             AcceptsTab = "True"
             Background = "Gainsboro"
             FontFamily = "Consolas"
-            FontSize = "18"
+            FontSize = "14"
             Foreground = "Black"
             HorizontalAlignment = "Stretch"
             ScrollViewer.HorizontalScrollBarVisibility = "Visible"
