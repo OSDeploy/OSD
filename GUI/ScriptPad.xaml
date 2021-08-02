@@ -192,7 +192,7 @@
             VerticalAlignment = "Center">
             <Button
                 Name = "GoButton"
-                Content = "Invoke-Command"
+                Content = "Start-Process"
                 FontSize = "14"
                 Foreground = "White"
                 Height = "40"

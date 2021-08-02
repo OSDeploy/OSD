@@ -72,7 +72,7 @@ $ComboBoxScriptPadName.Items.Add('MyScript') | Out-Null
         New-Variable -Name 'MyScript' -Value '#PowerShell ScriptBlock' -Scope Global -Force -ErrorAction Stop
     }
 
-$LabelScriptPadDescription.Content = 'MyScript is the default PowerShell ScriptBlock that you can edit and Invoke-Command'
+$LabelScriptPadDescription.Content = 'MyScript is the default PowerShell ScriptBlock that you can edit and Start-Process'
 
 #   "Description": 'MyScript is the default PowerShell ScriptBlock that you can edit and Invoke-Command'
 #   "Guid": "fa4a53ea-62ca-478e-95f6-2ff07f8f468a"
@@ -98,7 +98,7 @@ function Set-ScriptPadContent {
     if ($ComboBoxScriptPadName.SelectedValue -eq 'MyScript') {
         Write-Host -ForegroundColor Cyan 'MyScript'
         $TextBoxScriptPadContent.Text = (Get-Variable -Name MyScript -Scope Global).Value
-        $LabelScriptPadDescription.Content = 'MyScript is the default PowerShell ScriptBlock that you can edit and Invoke-Command'
+        $LabelScriptPadDescription.Content = 'MyScript is the default PowerShell ScriptBlock that you can edit and Start-Process'
     }
     else {
         $Global:WorkingScript = $Global:ScriptPad | Where-Object {$_.Name -eq $ComboBoxScriptPadName.SelectedValue} | Select-Object -First 1
@@ -135,18 +135,20 @@ $TextBoxScriptPadContent.add_TextChanged({
 #   GO
 #================================================
 $GoButton.add_Click({
-    Write-Host -ForegroundColor Cyan "Invoke-Command"
+    Write-Host -ForegroundColor Cyan "Start-Process"
     $Global:ScriptPadScriptBlock = [scriptblock]::Create($TextBoxScriptPadContent.Text)
 
     if ($Global:ScriptPadScriptBlock) {
-        Write-Host -ForegroundColor DarkGray "Saving contents of `$Global:ScriptPadScriptBlock` to $env:Temp\ScriptPadScriptBlock.ps1"
-        $Global:ScriptPadScriptBlock | Out-File "$env:Temp\ScriptPadScriptBlock.ps1"
+        Write-Host -ForegroundColor DarkGray "Saving contents of `$Global:ScriptPadScriptBlock` to $env:Temp\ScriptPad.ps1"
+        $Global:ScriptPadScriptBlock | Out-File "$env:Temp\ScriptPad.ps1"
 
         #$xamGUI.Close()
         #Invoke-Command $Global:ScriptPadScriptBlock
         
-        Write-Host -ForegroundColor DarkCyan 'Start-Process PowerShell.exe -ArgumentList "-NoExit Invoke-Command -ScriptBlock {$Global:ScriptPadScriptBlock}"'
-        Start-Process PowerShell.exe -ArgumentList "-NoExit Invoke-Command -ScriptBlock {$Global:ScriptPadScriptBlock}"
+        #Start-Process PowerShell.exe -ArgumentList "-NoExit Invoke-Command -ScriptBlock {$Global:ScriptPadScriptBlock}"
+
+        Write-Host -ForegroundColor DarkCyan 'Start-Process PowerShell.exe -ArgumentList "-NoExit $env:Temp\ScriptPad.ps1"'
+        Start-Process PowerShell.exe -ArgumentList "-NoExit $env:Temp\ScriptPad.ps1"
     }
     #Write-Host -ForegroundColor DarkGray "================================================"
 })
