@@ -67,85 +67,48 @@ LoadForm -XamlPath (Join-Path $Global:MyScriptDir 'ScriptPad.xaml')
 #=======================================================================
 #   Initialize
 #=======================================================================
-$ComboBoxScriptPadName.Items.Add('BlankScript') | Out-Null
-    if (-NOT (Get-Variable -Name BlankScript -Scope Global -ErrorAction Ignore)) {
-        New-Variable -Name 'BlankScript' -Value '#PowerShell ScriptBlock' -Scope Global -Force -ErrorAction Stop
+$ComboBoxScriptPadName.Items.Add('MyScript') | Out-Null
+    if (-NOT (Get-Variable -Name MyScript -Scope Global -ErrorAction Ignore)) {
+        New-Variable -Name 'MyScript' -Value '#PowerShell ScriptBlock' -Scope Global -Force -ErrorAction Stop
     }
 
-$LabelScriptPadDescription.Content = 'BlankScript is the default PowerShell ScriptBlock that you can edit and Invoke-Command'
+$LabelScriptPadDescription.Content = 'MyScript is the default PowerShell ScriptBlock that you can edit and Invoke-Command'
 
-#   "Description": 'BlankScript is the default PowerShell ScriptBlock that you can edit and Invoke-Command'
+#   "Description": 'MyScript is the default PowerShell ScriptBlock that you can edit and Invoke-Command'
 #   "Guid": "fa4a53ea-62ca-478e-95f6-2ff07f8f468a"
 
-if ($Global:ScriptPad.Scripts) {
-    $Global:ScriptPad.Scripts | ForEach-Object {
-        Write-Host -ForegroundColor DarkGray "Script Name: $($_.Name)"
-        try {
-            $ScriptPadWebRequest = Invoke-WebRequest -Uri $_.Uri -UseBasicParsing -ErrorAction Stop
-        }
-        catch {
-            Write-Warning $_
-            $ScriptPadWebRequest = $null
-        }
-        
-        if ($ScriptPadWebRequest) {
-            $ComboBoxScriptPadName.Items.Add($_.Name) | Out-Null
-            New-Variable -Name $_.Guid -Value $ScriptPadWebRequest.Content -Force -Scope Global
-        }
+if ($Global:ScriptPad) {
+    $Global:ScriptPad | ForEach-Object {
+        #Write-Host -ForegroundColor DarkGray $_.Name
+        #Write-Host -ForegroundColor DarkGray $_.Download
+
+        $ComboBoxScriptPadName.Items.Add($_.Name) | Out-Null
+        New-Variable -Name $_.SHA -Value $($_.ContentRAW) -Force -Scope Global
     }
+    $LabelTitle.Content = "GitHub $($Global:ScriptPad.GitOwner[0]) $($Global:ScriptPad.GitRepo[0])"
     Write-Host -ForegroundColor DarkGray "========================================================================="
-    if ($Global:ScriptPad.Settings.Title) {
-        Write-Host -ForegroundColor Cyan $Global:ScriptPad.Settings.Title
-    }
-    if ($Global:ScriptPad.Settings.Version) {
-        Write-Host -ForegroundColor DarkGray $Global:ScriptPad.Settings.Version
-    }
-    if ($Global:ScriptPad.Settings.Author) {
-        Write-Host -ForegroundColor DarkGray $Global:ScriptPad.Settings.Author
-    }
-    if ($Global:ScriptPad.Settings.Company) {
-        Write-Host -ForegroundColor DarkGray $Global:ScriptPad.Settings.Company
-    }
-    if ($Global:ScriptPad.Settings.Help) {
-        Write-Host -ForegroundColor DarkGray $Global:ScriptPad.Settings.Help
-    }
-    Write-Host -ForegroundColor DarkGray "========================================================================="
-}
-if ($Global:ScriptPad.Settings.Title) {
-    $LabelTitle.Content = $Global:ScriptPad.Settings.Title
 }
 else {
-    $LabelTitle.Content = 'ScriptPad'
+    $LabelTitle.Content = 'Local'
 }
 #=======================================================================
 #   Set-ScriptPadContent
 #=======================================================================
 function Set-ScriptPadContent {
-    if ($ComboBoxScriptPadName.SelectedValue -eq 'BlankScript') {
-        Write-Host -ForegroundColor Cyan 'BlankScript'
-        $TextBoxScriptPadContent.Text = (Get-Variable -Name BlankScript -Scope Global).Value
-        $LabelScriptPadDescription.Content = 'BlankScript is the default PowerShell ScriptBlock that you can edit and Invoke-Command'
+    if ($ComboBoxScriptPadName.SelectedValue -eq 'MyScript') {
+        Write-Host -ForegroundColor Cyan 'MyScript'
+        $TextBoxScriptPadContent.Text = (Get-Variable -Name MyScript -Scope Global).Value
+        $LabelScriptPadDescription.Content = 'MyScript is the default PowerShell ScriptBlock that you can edit and Invoke-Command'
     }
     else {
-        $Global:WorkingScript = $Global:ScriptPad.Scripts | Where-Object {$_.Name -eq $ComboBoxScriptPadName.SelectedValue} | Select-Object -First 1
-        if ($Global:WorkingScript.Name) {
-            Write-Host -ForegroundColor Cyan $Global:WorkingScript.Name
-        }
-        if ($Global:WorkingScript.Version) {
-            Write-Host -ForegroundColor DarkCyan $Global:WorkingScript.Version
-        }
-        if ($Global:WorkingScript.Author) {
-            Write-Host -ForegroundColor DarkCyan $Global:WorkingScript.Author
-        }
-        if ($Global:WorkingScript.Description) {
-            Write-Host -ForegroundColor DarkCyan $Global:WorkingScript.Description
-            $LabelScriptPadDescription.Content = $Global:WorkingScript.Description
-        }
-        if ($Global:WorkingScript.Uri) {
-            Write-Host -ForegroundColor DarkCyan $Global:WorkingScript.Uri
-            #$LabelScriptPadUri.Content = $Global:WorkingScript.Uri
-        }
-        $TextBoxScriptPadContent.Text = (Get-Variable -Name $Global:WorkingScript.Guid).Value
+        $Global:WorkingScript = $Global:ScriptPad | Where-Object {$_.Name -eq $ComboBoxScriptPadName.SelectedValue} | Select-Object -First 1
+        Write-Host -ForegroundColor Cyan $Global:WorkingScript.Name
+        Write-Host -ForegroundColor DarkGray $Global:WorkingScript.Git
+        Write-Host -ForegroundColor DarkGray $Global:WorkingScript.Download
+        #Write-Host -ForegroundColor DarkCyan "Get-Variable -Name $($Global:WorkingScript.SHA)"
+
+        $LabelScriptPadDescription.Content = $Global:WorkingScript.SHA
+        $TextBoxScriptPadContent.Text = (Get-Variable -Name $Global:WorkingScript.SHA).Value
     }
     Write-Host -ForegroundColor DarkGray "========================================================================="
 }
@@ -161,11 +124,11 @@ $ComboBoxScriptPadName.add_SelectionChanged({
     Set-ScriptPadContent
 })
 $TextBoxScriptPadContent.add_TextChanged({
-    if ($ComboBoxScriptPadName.SelectedValue -eq 'BlankScript') {
-        Set-Variable -Name 'BlankScript' -Value $($TextBoxScriptPadContent.Text) -Scope Global -Force
+    if ($ComboBoxScriptPadName.SelectedValue -eq 'MyScript') {
+        Set-Variable -Name 'MyScript' -Value $($TextBoxScriptPadContent.Text) -Scope Global -Force
     }
     else {
-        Set-Variable -Name $($Global:WorkingScript.Guid) -Value $($TextBoxScriptPadContent.Text) -Scope Global -Force
+        Set-Variable -Name $($Global:WorkingScript.SHA) -Value $($TextBoxScriptPadContent.Text) -Scope Global -Force
     }
 })
 #=======================================================================
