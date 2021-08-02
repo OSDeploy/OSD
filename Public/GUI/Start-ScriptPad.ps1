@@ -61,6 +61,9 @@ function Start-ScriptPad {
     
         $Global:ScriptPad = $Results
     }
+    else {
+        $Global:ScriptPad = $null
+    }
     #=======================================================================
     #   ScriptPad.ps1
     #=======================================================================

@@ -1,6 +1,6 @@
-#=======================================================================
+#================================================
 #   PowershellWindow Functions
-#=======================================================================
+#================================================
 $Script:showWindowAsync = Add-Type -MemberDefinition @"
 [DllImport("user32.dll")]
 public static extern bool ShowWindowAsync(IntPtr hWnd, int nCmdShow);
@@ -12,9 +12,9 @@ function Hide-PowershellWindow() {
     $null = $showWindowAsync::ShowWindowAsync((Get-Process -Id $pid).MainWindowHandle, 2)
 }
 #Hide-PowershellWindow
-#=======================================================================
+#================================================
 #   MahApps.Metro
-#=======================================================================
+#================================================
 # Assign current script directory to a global variable
 $Global:MyScriptDir = [System.IO.Path]::GetDirectoryName($myInvocation.MyCommand.Definition)
 
@@ -25,15 +25,15 @@ $Global:MyScriptDir = [System.IO.Path]::GetDirectoryName($myInvocation.MyCommand
 
 # Set console size and title
 $host.ui.RawUI.WindowTitle = ""
-#=======================================================================
+#================================================
 #   Test-InWinPE
-#=======================================================================
+#================================================
 function Test-InWinPE {
     return Test-Path -Path Registry::HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlset\Control\MiniNT
 }
-#=======================================================================
+#================================================
 #   LoadForm
-#=======================================================================
+#================================================
 function LoadForm {
     [CmdletBinding()]
     param (
@@ -60,13 +60,13 @@ function LoadForm {
         Set-Variable -Name ($_.Name) -Value $xamGUI.FindName($_.Name) -Scope Global
     }
 }
-#=======================================================================
+#================================================
 #   LoadForm
-#=======================================================================
+#================================================
 LoadForm -XamlPath (Join-Path $Global:MyScriptDir 'ScriptPad.xaml')
-#=======================================================================
+#================================================
 #   Initialize
-#=======================================================================
+#================================================
 $ComboBoxScriptPadName.Items.Add('MyScript') | Out-Null
     if (-NOT (Get-Variable -Name MyScript -Scope Global -ErrorAction Ignore)) {
         New-Variable -Name 'MyScript' -Value '#PowerShell ScriptBlock' -Scope Global -Force -ErrorAction Stop
@@ -86,14 +86,14 @@ if ($Global:ScriptPad) {
         New-Variable -Name $_.SHA -Value $($_.ContentRAW) -Force -Scope Global
     }
     $LabelTitle.Content = "GitHub $($Global:ScriptPad.GitOwner[0]) $($Global:ScriptPad.GitRepo[0])"
-    Write-Host -ForegroundColor DarkGray "========================================================================="
+    Write-Host -ForegroundColor DarkGray "================================================"
 }
 else {
-    $LabelTitle.Content = 'Local'
+    $LabelTitle.Content = 'ScriptPad'
 }
-#=======================================================================
+#================================================
 #   Set-ScriptPadContent
-#=======================================================================
+#================================================
 function Set-ScriptPadContent {
     if ($ComboBoxScriptPadName.SelectedValue -eq 'MyScript') {
         Write-Host -ForegroundColor Cyan 'MyScript'
@@ -110,13 +110,13 @@ function Set-ScriptPadContent {
         $LabelScriptPadDescription.Content = $Global:WorkingScript.SHA
         $TextBoxScriptPadContent.Text = (Get-Variable -Name $Global:WorkingScript.SHA).Value
     }
-    Write-Host -ForegroundColor DarkGray "========================================================================="
+    Write-Host -ForegroundColor DarkGray "================================================"
 }
 
 Set-ScriptPadContent
-#=======================================================================
+#================================================
 #   Change Selection
-#=======================================================================
+#================================================
 <# $ComboBoxScriptPadName.add_SelectionChanged({
     Set-ScriptPadContent
 }) #>
@@ -131,9 +131,9 @@ $TextBoxScriptPadContent.add_TextChanged({
         Set-Variable -Name $($Global:WorkingScript.SHA) -Value $($TextBoxScriptPadContent.Text) -Scope Global -Force
     }
 })
-#=======================================================================
+#================================================
 #   GO
-#=======================================================================
+#================================================
 $GoButton.add_Click({
     Write-Host -ForegroundColor Cyan "Invoke-Command"
     $Global:ScriptPadScriptBlock = [scriptblock]::Create($TextBoxScriptPadContent.Text)
@@ -148,9 +148,9 @@ $GoButton.add_Click({
         Write-Host -ForegroundColor DarkCyan 'Start-Process PowerShell.exe -ArgumentList "-NoExit Invoke-Command -ScriptBlock {$Global:ScriptPadScriptBlock}"'
         Start-Process PowerShell.exe -ArgumentList "-NoExit Invoke-Command -ScriptBlock {$Global:ScriptPadScriptBlock}"
     }
-    #Write-Host -ForegroundColor DarkGray "========================================================================="
+    #Write-Host -ForegroundColor DarkGray "================================================"
 })
-#=======================================================================
+#================================================
 #   Launch XAML
-#=======================================================================
+#================================================
 $xamGUI.ShowDialog() | Out-Null

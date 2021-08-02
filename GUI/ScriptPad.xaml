@@ -179,7 +179,7 @@
             <Label
                 Name = "LabelTitle"
                 Content = ""
-                FontSize = "30"
+                FontSize = "26"
                 Foreground = "#003E92" />
         </StackPanel>
 
