@@ -7,7 +7,7 @@
     xmlns:Controls = "clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
 
 	Title = "ScriptPad"
-    Width = "800"
+    Width = "700"
     Height = "500"
     Background = "#F7FAFC"
     BorderBrush = "{DynamicResource MahApps.Brushes.Accent}"
@@ -141,8 +141,7 @@
                 Height = "30"
                 HorizontalAlignment = "Left"
                 SelectedIndex = "0"
-                VerticalAlignment = "Top"
-                Width = "500" />
+                VerticalAlignment = "Top" />
             <Label
                 Name = "LabelScriptPadDescription"
                 Content = ""
@@ -162,8 +161,8 @@
             AcceptsTab = "True"
             Background = "Gainsboro"
             FontFamily = "Consolas"
-            FontSize = "14"
-            Foreground = "Black"
+            FontSize = "15"
+            Foreground = "Blue"
             HorizontalAlignment = "Stretch"
             ScrollViewer.HorizontalScrollBarVisibility = "Visible"
             ScrollViewer.VerticalScrollBarVisibility = "Visible"
@@ -179,7 +178,7 @@
             <Label
                 Name = "LabelTitle"
                 Content = ""
-                FontSize = "26"
+                FontSize = "24"
                 Foreground = "#003E92" />
         </StackPanel>
 

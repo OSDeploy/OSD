@@ -1,17 +1,21 @@
 function Start-ScriptPad {
     [CmdletBinding(DefaultParameterSetName = 'Standalone')]
     param (
-        [Parameter(ParameterSetName = 'GitHub', Mandatory = $true)]
+        [Parameter(ParameterSetName = 'GitHub', Mandatory = $true, Position = 0)]
         [string]
         $GitOwner,
         
-        [Parameter(ParameterSetName = 'GitHub', Mandatory = $true)]
+        [Parameter(ParameterSetName = 'GitHub', Mandatory = $true, Position = 1)]
         [string]
         $GitRepo,
         
+        [Parameter(ParameterSetName = 'GitHub', Position = 2)]
+        [string]
+        $GitPath,
+        
         [Parameter(ParameterSetName = 'GitHub')]
         [string]
-        $GitPath
+        $OAuthToken
     )
     #=======================================================================
     #   GitHub
@@ -20,16 +24,42 @@ function Start-ScriptPad {
         $Uri = "https://api.github.com/repos/$GitOwner/$GitRepo/contents/$GitPath"
         Write-Host -ForegroundColor DarkCyan $Uri
 
-        #Get the Content from API
+
         if ($OAuthToken) {
-            $GitHubApiContent = Invoke-RestMethod -UseBasicParsing -Uri $Uri -Method Get -Headers @{Authorization = "Bearer $OAuthToken"}
+            $Params = @{
+                Headers = @{Authorization = "Bearer $OAuthToken"}
+                Method = 'GET'
+                Uri = $Uri
+                UseBasicParsing = $true
+            }
         }
         else {
-            $GitHubApiContent = Invoke-RestMethod -UseBasicParsing -Uri $Uri -Method Get
+            $GitHubApiRateLimit = Invoke-RestMethod -UseBasicParsing -Uri 'https://api.github.com/rate_limit' -Method Get
+            Write-Host -ForegroundColor DarkGray "You have used $($GitHubApiRateLimit.rate.used) of your $($GitHubApiRateLimit.rate.limit) GitHub API Requests"
+            Write-Host -ForegroundColor DarkGray "You can create an OAuth Token at https://github.com/settings/tokens"
+            Write-Host -ForegroundColor DarkGray 'Use the OAuthToken parameter to enable ScriptPad Child-Item support'
+            $Params = @{
+                Method = 'GET'
+                Uri = $Uri
+                UseBasicParsing = $true
+            }
         }
+
+        $GitHubApiContent = @()
+        $GitHubApiContent = Invoke-RestMethod @Params
+        
+        if ($OAuthToken) {
+            foreach ($Item in $GitHubApiContent) {
+                if ($Item.type -eq 'dir') {
+                    Write-Host -ForegroundColor DarkCyan $Item.url
+                    $GitHubApiContent += Invoke-RestMethod -UseBasicParsing -Uri $Item.url -Method Get -Headers @{Authorization = "Bearer $OAuthToken" }
+                }
+            }
+        }
+
         $GitHubApiContent = $GitHubApiContent | Where-Object {$_.type -eq 'file'} | Where-Object {$_.name -like "*.ps1"}
 
-
+        Write-Host -ForegroundColor DarkGray "================================================"
         $Results = foreach ($Item in $GitHubApiContent) {
             #$FileContent = Invoke-RestMethod -UseBasicParsing -Uri $Item.git_url
     
@@ -47,6 +77,8 @@ function Start-ScriptPad {
                 GitOwner    = $GitOwner
                 GitRepo     = $GitRepo
                 Name            = $Item.name
+                Guid            = New-Guid
+                Path            = $Item.path
                 Size            = $Item.size
                 SHA             = $Item.sha
                 Git             = $Item.git_url
@@ -72,12 +104,27 @@ function Start-ScriptPad {
 }
 function Start-OSDCloudScriptPad {
     [CmdletBinding()]
-    param ()
+    param (
+        [Parameter(ParameterSetName = 'GitHub')]
+        [string]
+        $OAuthToken
+    )
 
-    $ScriptPadParams = @{
-        GitOwner = 'OSDeploy'
-        GitRepo = 'OSDCloud'
-        GitPath = 'ScriptPad'
+
+    if ($OAuthToken) {
+        $ScriptPadParams = @{
+            GitOwner = 'OSDeploy'
+            GitRepo = 'OSDCloud'
+            GitPath = 'ScriptPad'
+            OAuthToken = $OAuthToken
+        }
+    }
+    else {
+        $ScriptPadParams = @{
+            GitOwner = 'OSDeploy'
+            GitRepo = 'OSDCloud'
+            GitPath = 'ScriptPad'
+        }
     }
 
     Start-ScriptPad @ScriptPadParams

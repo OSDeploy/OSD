@@ -68,28 +68,21 @@ LoadForm -XamlPath (Join-Path $Global:MyScriptDir 'ScriptPad.xaml')
 #   Initialize
 #================================================
 $ComboBoxScriptPadName.Items.Add('MyScript') | Out-Null
-    if (-NOT (Get-Variable -Name MyScript -Scope Global -ErrorAction Ignore)) {
-        New-Variable -Name 'MyScript' -Value '#PowerShell ScriptBlock' -Scope Global -Force -ErrorAction Stop
-    }
-
-$LabelScriptPadDescription.Content = 'MyScript is the default PowerShell ScriptBlock that you can edit and Start-Process'
-
-#   "Description": 'MyScript is the default PowerShell ScriptBlock that you can edit and Invoke-Command'
-#   "Guid": "fa4a53ea-62ca-478e-95f6-2ff07f8f468a"
+if (-NOT (Get-Variable -Name MyScript -Scope Global -ErrorAction Ignore)) {
+    New-Variable -Name 'MyScript' -Value '#Blank PowerShell Script' -Scope Global -Force -ErrorAction Stop
+}
+$LabelScriptPadDescription.Content = 'MyScript is a blank PowerShell Script that you can edit and Start-Process'
 
 if ($Global:ScriptPad) {
     $Global:ScriptPad | ForEach-Object {
-        #Write-Host -ForegroundColor DarkGray $_.Name
-        #Write-Host -ForegroundColor DarkGray $_.Download
-
-        $ComboBoxScriptPadName.Items.Add($_.Name) | Out-Null
-        New-Variable -Name $_.SHA -Value $($_.ContentRAW) -Force -Scope Global
+        $ComboBoxScriptPadName.Items.Add($_.Path) | Out-Null
+        New-Variable -Name $_.Guid -Value $($_.ContentRAW) -Force -Scope Global
     }
     $LabelTitle.Content = "GitHub $($Global:ScriptPad.GitOwner[0]) $($Global:ScriptPad.GitRepo[0])"
     Write-Host -ForegroundColor DarkGray "================================================"
 }
 else {
-    $LabelTitle.Content = 'ScriptPad'
+    $LabelTitle.Content = ''
 }
 #================================================
 #   Set-ScriptPadContent
@@ -98,17 +91,17 @@ function Set-ScriptPadContent {
     if ($ComboBoxScriptPadName.SelectedValue -eq 'MyScript') {
         Write-Host -ForegroundColor Cyan 'MyScript'
         $TextBoxScriptPadContent.Text = (Get-Variable -Name MyScript -Scope Global).Value
-        $LabelScriptPadDescription.Content = 'MyScript is the default PowerShell ScriptBlock that you can edit and Start-Process'
+        $LabelScriptPadDescription.Content = 'MyScript is a blank PowerShell Script that you can edit and Start-Process'
     }
     else {
-        $Global:WorkingScript = $Global:ScriptPad | Where-Object {$_.Name -eq $ComboBoxScriptPadName.SelectedValue} | Select-Object -First 1
-        Write-Host -ForegroundColor Cyan $Global:WorkingScript.Name
+        $Global:WorkingScript = $Global:ScriptPad | Where-Object {$_.Path -eq $ComboBoxScriptPadName.SelectedValue} | Select-Object -First 1
+        Write-Host -ForegroundColor Cyan $Global:WorkingScript.Path
         Write-Host -ForegroundColor DarkGray $Global:WorkingScript.Git
         Write-Host -ForegroundColor DarkGray $Global:WorkingScript.Download
-        #Write-Host -ForegroundColor DarkCyan "Get-Variable -Name $($Global:WorkingScript.SHA)"
+        #Write-Host -ForegroundColor DarkCyan "Get-Variable -Name $($Global:WorkingScript.Guid)"
 
-        $LabelScriptPadDescription.Content = $Global:WorkingScript.SHA
-        $TextBoxScriptPadContent.Text = (Get-Variable -Name $Global:WorkingScript.SHA).Value
+        $LabelScriptPadDescription.Content = $Global:WorkingScript.Guid
+        $TextBoxScriptPadContent.Text = (Get-Variable -Name $Global:WorkingScript.Guid).Value
     }
     Write-Host -ForegroundColor DarkGray "================================================"
 }
@@ -128,7 +121,7 @@ $TextBoxScriptPadContent.add_TextChanged({
         Set-Variable -Name 'MyScript' -Value $($TextBoxScriptPadContent.Text) -Scope Global -Force
     }
     else {
-        Set-Variable -Name $($Global:WorkingScript.SHA) -Value $($TextBoxScriptPadContent.Text) -Scope Global -Force
+        Set-Variable -Name $($Global:WorkingScript.Guid) -Value $($TextBoxScriptPadContent.Text) -Scope Global -Force
     }
 })
 #================================================
