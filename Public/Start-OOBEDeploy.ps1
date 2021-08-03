@@ -20,25 +20,33 @@ function Start-OOBEDeploy {
     Block-WindowsVersionNe10
     Block-PowerShellVersionLt5
     #=======================================================================
-    #   Header
+    #   WinPE and WinOS Start
     #=======================================================================
-    Write-Host -ForegroundColor DarkGray "========================================================================="
-    Write-Host -ForegroundColor Green "Start-OOBEDeploy"
+    if ($env:SystemDrive -eq 'X:') {
+        Write-Host -ForegroundColor DarkGray "========================================================================="
+        Write-Host -ForegroundColor Green "Start-OOBEDeploy in WinPE"
+        $ProgramDataOSDeploy = 'C:\ProgramData\OSDeploy'
+        $JsonPath = "$ProgramDataOSDeploy\OSDeploy.OOBEDeploy.json"
+    }
+    if ($env:SystemDrive -ne 'X:') {
+        Write-Host -ForegroundColor DarkGray "========================================================================="
+        Write-Host -ForegroundColor Green "Start-OOBEDeploy"
+        $ProgramDataOSDeploy = "$env:ProgramData\OSDeploy"
+        $JsonPath = "$ProgramDataOSDeploy\OSDeploy.OOBEDeploy.json"
+    }
     #=======================================================================
-    #   Variables
+    #   WinOS Transcript
     #=======================================================================
-    $JsonPath = "$env:ProgramData\OSDeploy\OSDeploy.OOBEDeploy.json"
-    #=======================================================================
-    #   Transcript
-    #=======================================================================
-    Write-Host -ForegroundColor DarkGray "========================================================================="
-    Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Start-Transcript"
-    $Transcript = "$((Get-Date).ToString('yyyy-MM-dd-HHmmss'))-OOBEDeploy.log"
-    Start-Transcript -Path (Join-Path "$env:SystemRoot\Temp" $Transcript) -ErrorAction Ignore
+    if ($env:SystemDrive -ne 'X:') {
+        Write-Host -ForegroundColor DarkGray "========================================================================="
+        Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Start-Transcript"
+        $Transcript = "$((Get-Date).ToString('yyyy-MM-dd-HHmmss'))-OOBEDeploy.log"
+        Start-Transcript -Path (Join-Path "$env:SystemRoot\Temp" $Transcript) -ErrorAction Ignore
+    }
     #=======================================================================
     #   Custom Profile Sample Variables
     #=======================================================================
-    if ($CustomProfile -in 'Sample') {
+    if ($CustomProfile -eq 'Sample') {
         $AddNetFX3 = $true
         $AddRSAT = $true
         $Autopilot = $true
@@ -58,7 +66,7 @@ function Start-OOBEDeploy {
 
         if ($CustomProfileJson) {
             Write-Host -ForegroundColor DarkGray "Saving Module CustomProfile to $JsonPath"
-            if (!(Test-Path "$env:ProgramData\OSDeploy")) {New-Item "$env:ProgramData\OSDeploy" -ItemType Directory -Force | Out-Null}
+            if (!(Test-Path "$ProgramDataOSDeploy")) {New-Item "$ProgramDataOSDeploy" -ItemType Directory -Force | Out-Null}
             Copy-Item -Path $CustomProfileJson.FullName -Destination $JsonPath -Force -ErrorAction Ignore
         }
     }
@@ -84,13 +92,15 @@ function Start-OOBEDeploy {
         }
     }
     #=======================================================================
-    #   PSGallery
+    #   WinOS PSGallery
     #=======================================================================
-    $PSGalleryIP = (Get-PSRepository -Name PSGallery).InstallationPolicy
-    if ($PSGalleryIP -eq 'Untrusted') {
-        Write-Host -ForegroundColor DarkGray "========================================================================="
-        Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Set-PSRepository -Name PSGallery -InstallationPolicy Trusted"
-        Set-PSRepository -Name PSGallery -InstallationPolicy Trusted
+    if ($env:SystemDrive -ne 'X:') {
+        $PSGalleryIP = (Get-PSRepository -Name PSGallery).InstallationPolicy
+        if ($PSGalleryIP -eq 'Untrusted') {
+            Write-Host -ForegroundColor DarkGray "========================================================================="
+            Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Set-PSRepository -Name PSGallery -InstallationPolicy Trusted"
+            Set-PSRepository -Name PSGallery -InstallationPolicy Trusted
+        }
     }
     #=======================================================================
     #   Initialize Global Variable
@@ -106,132 +116,142 @@ function Start-OOBEDeploy {
         UpdateDrivers = $UpdateDrivers
         UpdateWindows = $UpdateWindows
     }
-    Write-Host -ForegroundColor DarkGray "Exporting Configuration $env:Temp\OSDeploy.OOBEDeploy.json"
-    @($Global:OOBEDeploy.Keys) | ForEach-Object { 
-        if (-not $Global:OOBEDeploy[$_]) { $Global:OOBEDeploy.Remove($_) } 
-    }
-    $Global:OOBEDeploy | ConvertTo-Json | Out-File "$env:Temp\OSDeploy.OOBEDeploy.json" -Force
-    #=======================================================================
-    #	ProductKey
-    #=======================================================================
-    if ($SetEdition -eq 'Enterprise') {$ProductKey = 'NPPR9-FWDCX-D2C8J-H872K-2YT43'}
-    if ($ProductKey) {
-        Write-Host -ForegroundColor DarkGray "========================================================================="
-        Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Set-WindowsEdition (ChangePK)"
-        Invoke-Exe changepk.exe /ProductKey $ProductKey
-        Get-WindowsEdition -Online
-    }
-    #=======================================================================
-    #   Autopilot
-    #=======================================================================
-    if ($Autopilot) {
-        Write-Host -ForegroundColor DarkGray "========================================================================="
-        Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) AutopilotOOBE"
-        Write-Host -ForegroundColor DarkCyan "Install-Module AutopilotOOBE -Force"
-        Write-Warning "AutopilotOOBE will open in a new PowerShell Window while OOBEDeploy continues in the background"
-        Install-Module AutopilotOOBE -Force
-        if ($CustomProfile) {
-            Start-Process PowerShell.exe -ArgumentList "-Command Start-AutopilotOOBE -CustomProfile $CustomProfile"
-        }
-        else {
-            Start-Process PowerShell.exe -ArgumentList "-Command Start-AutopilotOOBE"
-        }
-    }
-    #=======================================================================
-    #	AddRSAT
-    #=======================================================================
-    if ($AddNetFX3) {
-        Write-Host -ForegroundColor DarkGray "========================================================================="
-        Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Add Windows Capability NetFX3"
-        $AddWindowsCapability = Get-MyWindowsCapability -Match 'NetFX' -Detail
-        foreach ($Item in $AddWindowsCapability) {
-            if ($Item.State -eq 'Installed') {
-                Write-Host -ForegroundColor DarkGray "$($Item.DisplayName)"
-            }
-            else {
-                Write-Host -ForegroundColor DarkCyan "$($Item.DisplayName)"
-                $Item | Add-WindowsCapability -Online -ErrorAction Ignore | Out-Null
-            }
-        }
-    }
-    #=======================================================================
-    #	AddRSAT
-    #=======================================================================
-    if ($AddRSAT) {
-        Write-Host -ForegroundColor DarkGray "========================================================================="
-        Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Add Windows Capability RSAT"
-        $AddWindowsCapability = Get-MyWindowsCapability -Category Rsat -Detail
-        foreach ($Item in $AddWindowsCapability) {
-            if ($Item.State -eq 'Installed') {
-                Write-Host -ForegroundColor DarkGray "$($Item.DisplayName)"
-            }
-            else {
-                Write-Host -ForegroundColor DarkCyan "$($Item.DisplayName)"
-                $Item | Add-WindowsCapability -Online -ErrorAction Ignore | Out-Null
-            }
-        }
-    }
-    #=======================================================================
-    #	Remove-AppxOnline
-    #=======================================================================
-    if ($RemoveAppx) {
-        Write-Host -ForegroundColor DarkGray "========================================================================="
-        Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Remove-AppxOnline"
 
-        foreach ($Item in $RemoveAppx) {
-            Remove-AppxOnline -Name $Item
+    if ($env:SystemDrive -eq 'X:') {
+        Write-Host -ForegroundColor DarkGray "Exporting Configuration $ProgramDataOSDeploy\OSDeploy.OOBEDeploy.json"
+        @($Global:OOBEDeploy.Keys) | ForEach-Object { 
+            if (-not $Global:OOBEDeploy[$_]) { $Global:OOBEDeploy.Remove($_) } 
         }
+        $Global:OOBEDeploy | ConvertTo-Json | Out-File "$ProgramDataOSDeploy\OSDeploy.OOBEDeploy.json" -Force
     }
-    #=======================================================================
-    #	UpdateDrivers
-    #=======================================================================
-    if ($UpdateDrivers) {
+    else {
+        Write-Host -ForegroundColor DarkGray "Exporting Configuration $env:Temp\OSDeploy.OOBEDeploy.json"
+        @($Global:OOBEDeploy.Keys) | ForEach-Object { 
+            if (-not $Global:OOBEDeploy[$_]) { $Global:OOBEDeploy.Remove($_) } 
+        }
+        $Global:OOBEDeploy | ConvertTo-Json | Out-File "$env:Temp\OSDeploy.OOBEDeploy.json" -Force
+        #=======================================================================
+        #	ProductKey
+        #=======================================================================
+        if ($SetEdition -eq 'Enterprise') {$ProductKey = 'NPPR9-FWDCX-D2C8J-H872K-2YT43'}
+        if ($ProductKey) {
+            Write-Host -ForegroundColor DarkGray "========================================================================="
+            Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Set-WindowsEdition (ChangePK)"
+            Invoke-Exe changepk.exe /ProductKey $ProductKey
+            Get-WindowsEdition -Online
+        }
+        #=======================================================================
+        #   Autopilot
+        #=======================================================================
+        if ($Autopilot) {
+            Write-Host -ForegroundColor DarkGray "========================================================================="
+            Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) AutopilotOOBE"
+            Write-Host -ForegroundColor DarkCyan "Install-Module AutopilotOOBE -Force"
+            Write-Warning "AutopilotOOBE will open in a new PowerShell Window while OOBEDeploy continues in the background"
+            Install-Module AutopilotOOBE -Force
+            if ($CustomProfile) {
+                Start-Process PowerShell.exe -ArgumentList "-Command Start-AutopilotOOBE -CustomProfile $CustomProfile"
+            }
+            else {
+                Start-Process PowerShell.exe -ArgumentList "-Command Start-AutopilotOOBE"
+            }
+        }
+        #=======================================================================
+        #	AddRSAT
+        #=======================================================================
+        if ($AddNetFX3) {
+            Write-Host -ForegroundColor DarkGray "========================================================================="
+            Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Add Windows Capability NetFX3"
+            $AddWindowsCapability = Get-MyWindowsCapability -Match 'NetFX' -Detail
+            foreach ($Item in $AddWindowsCapability) {
+                if ($Item.State -eq 'Installed') {
+                    Write-Host -ForegroundColor DarkGray "$($Item.DisplayName)"
+                }
+                else {
+                    Write-Host -ForegroundColor DarkCyan "$($Item.DisplayName)"
+                    $Item | Add-WindowsCapability -Online -ErrorAction Ignore | Out-Null
+                }
+            }
+        }
+        #=======================================================================
+        #	AddRSAT
+        #=======================================================================
+        if ($AddRSAT) {
+            Write-Host -ForegroundColor DarkGray "========================================================================="
+            Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Add Windows Capability RSAT"
+            $AddWindowsCapability = Get-MyWindowsCapability -Category Rsat -Detail
+            foreach ($Item in $AddWindowsCapability) {
+                if ($Item.State -eq 'Installed') {
+                    Write-Host -ForegroundColor DarkGray "$($Item.DisplayName)"
+                }
+                else {
+                    Write-Host -ForegroundColor DarkCyan "$($Item.DisplayName)"
+                    $Item | Add-WindowsCapability -Online -ErrorAction Ignore | Out-Null
+                }
+            }
+        }
+        #=======================================================================
+        #	Remove-AppxOnline
+        #=======================================================================
+        if ($RemoveAppx) {
+            Write-Host -ForegroundColor DarkGray "========================================================================="
+            Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Remove-AppxOnline"
+
+            foreach ($Item in $RemoveAppx) {
+                Remove-AppxOnline -Name $Item
+            }
+        }
+        #=======================================================================
+        #	UpdateDrivers
+        #=======================================================================
+        if ($UpdateDrivers) {
+            Write-Host -ForegroundColor DarkGray "========================================================================="
+            Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Windows Update Drivers"
+            if (!(Get-Module PSWindowsUpdate -ListAvailable)) {
+                try {
+                    Install-Module PSWindowsUpdate -Force
+                }
+                catch {
+                    Write-Warning 'Unable to install PSWindowsUpdate PowerShell Module'
+                    $UpdateDrivers = $false
+                }
+            }
+        }
+        if ($UpdateDrivers) {
+            Install-WindowsUpdate -UpdateType Driver -AcceptAll -IgnoreReboot
+        }
+        #=======================================================================
+        #	Windows Update Software
+        #=======================================================================
+        if ($UpdateWindows) {
+            Write-Host -ForegroundColor DarkGray "========================================================================="
+            Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Windows and Microsoft Update Software"
+            if (!(Get-Module PSWindowsUpdate -ListAvailable)) {
+                try {
+                    Install-Module PSWindowsUpdate -Force
+                }
+                catch {
+                    Write-Warning 'Unable to install PSWindowsUpdate PowerShell Module'
+                    $UpdateWindows = $false
+                }
+            }
+        }
+        if ($UpdateWindows) {
+            Write-Host -ForegroundColor DarkCyan 'Add-WUServiceManager -MicrosoftUpdate -Confirm:$false'
+            Add-WUServiceManager -MicrosoftUpdate -Confirm:$false
+            #Write-Host -ForegroundColor DarkCyan 'Install-WindowsUpdate -UpdateType Software -AcceptAll -IgnoreReboot'
+            #Install-WindowsUpdate -UpdateType Software -AcceptAll -IgnoreReboot -NotTitle 'Malicious'
+            Write-Host -ForegroundColor DarkCyan 'Install-WindowsUpdate -MicrosoftUpdate -AcceptAll -IgnoreReboot'
+            Install-WindowsUpdate -MicrosoftUpdate -AcceptAll -IgnoreReboot -NotTitle 'Malicious'
+        }
+        #=======================================================================
+        #	Stop-Transcript
+        #=======================================================================
         Write-Host -ForegroundColor DarkGray "========================================================================="
-        Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Windows Update Drivers"
-        if (!(Get-Module PSWindowsUpdate -ListAvailable)) {
-            try {
-                Install-Module PSWindowsUpdate -Force
-            }
-            catch {
-                Write-Warning 'Unable to install PSWindowsUpdate PowerShell Module'
-                $UpdateDrivers = $false
-            }
-        }
-    }
-    if ($UpdateDrivers) {
-        Install-WindowsUpdate -UpdateType Driver -AcceptAll -IgnoreReboot
-    }
-    #=======================================================================
-    #	Windows Update Software
-    #=======================================================================
-    if ($UpdateWindows) {
+        Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Stop-Transcript"
+        Write-Warning "It is recommended that you restart your computer using Restart-Computer before completing Windows Setup"
+        Stop-Transcript
         Write-Host -ForegroundColor DarkGray "========================================================================="
-        Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Windows and Microsoft Update Software"
-        if (!(Get-Module PSWindowsUpdate -ListAvailable)) {
-            try {
-                Install-Module PSWindowsUpdate -Force
-            }
-            catch {
-                Write-Warning 'Unable to install PSWindowsUpdate PowerShell Module'
-                $UpdateWindows = $false
-            }
-        }
+        #=======================================================================
     }
-    if ($UpdateWindows) {
-        Write-Host -ForegroundColor DarkCyan 'Add-WUServiceManager -MicrosoftUpdate -Confirm:$false'
-        Add-WUServiceManager -MicrosoftUpdate -Confirm:$false
-        #Write-Host -ForegroundColor DarkCyan 'Install-WindowsUpdate -UpdateType Software -AcceptAll -IgnoreReboot'
-        #Install-WindowsUpdate -UpdateType Software -AcceptAll -IgnoreReboot -NotTitle 'Malicious'
-        Write-Host -ForegroundColor DarkCyan 'Install-WindowsUpdate -MicrosoftUpdate -AcceptAll -IgnoreReboot'
-        Install-WindowsUpdate -MicrosoftUpdate -AcceptAll -IgnoreReboot -NotTitle 'Malicious'
-    }
-    #=======================================================================
-    #	Stop-Transcript
-    #=======================================================================
-    Write-Host -ForegroundColor DarkGray "========================================================================="
-    Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Stop-Transcript"
-    Write-Warning "It is recommended that you restart your computer using Restart-Computer before completing Windows Setup"
-    Stop-Transcript
-    Write-Host -ForegroundColor DarkGray "========================================================================="
-    #=======================================================================
 }
