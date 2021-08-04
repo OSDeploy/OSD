@@ -1,6 +1,6 @@
-#=======================================================================
+#================================================
 #   PowershellWindow Functions
-#=======================================================================
+#================================================
 $Script:showWindowAsync = Add-Type -MemberDefinition @"
 [DllImport("user32.dll")]
 public static extern bool ShowWindowAsync(IntPtr hWnd, int nCmdShow);
@@ -13,228 +13,36 @@ function Hide-PowershellWindow() {
 }
 
 Hide-PowershellWindow
-#=======================================================================
-#   MahApps.Metro
-#=======================================================================
-# Assign current script directory to a global variable
+#================================================
+#   Load Assemblies
+#================================================
 $Global:MyScriptDir = [System.IO.Path]::GetDirectoryName($myInvocation.MyCommand.Definition)
-
-# Load presentationframework and Dlls for the MahApps.Metro theme
 [System.Reflection.Assembly]::LoadWithPartialName("presentationframework") | Out-Null
 [System.Reflection.Assembly]::LoadFrom("$Global:MyScriptDir\assembly\System.Windows.Interactivity.dll") | Out-Null
 [System.Reflection.Assembly]::LoadFrom("$Global:MyScriptDir\assembly\MahApps.Metro.dll") | Out-Null
-
-# Set console size and title
+#================================================
+#   Set PowerShell Window Title
+#================================================
 $host.ui.RawUI.WindowTitle = "Start-OSDCloudGUI"
-#=======================================================================
+#================================================
 #   Test-InWinPE
-#=======================================================================
+#================================================
 function Test-InWinPE {
     return Test-Path -Path Registry::HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlset\Control\MiniNT
 }
-#=======================================================================
+#================================================
 #   LoadForm
-#=======================================================================
+#================================================
 function LoadForm {
     [CmdletBinding()]
-    Param(
-     [Parameter(Mandatory=$False,Position=1)]
-     [string]$XamlPath
+    param(
+        [Parameter(Mandatory = $false, Position = 1)]
+        [string]$XamlPath
     )
-    
+
     # Import the XAML code
-    #[xml]$Global:xmlWPF = Get-Content -Path $XamlPath
+    [xml]$Global:XamlCode = Get-Content -Path $XamlPath
 
-    [xml]$Global:xmlWPF = @"
-    <Controls:MetroWindow
-        xmlns:Controls = "clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
-        xmlns = "http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x = "http://schemas.microsoft.com/winfx/2006/xaml"
-        Title = "Start-OSDCloudGUI" Height="465" Width="705"
-        BorderBrush = "{DynamicResource AccentColorBrush}"
-        BorderThickness = "1"
-        WindowStartupLocation = "CenterScreen">
-
-        <Window.Resources>
-            <ResourceDictionary>
-                <ResourceDictionary.MergedDictionaries>
-                    <!-- MahApps.Metro resource dictionaries. Make sure that all file names are Case Sensitive! -->
-                    <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Controls.xaml" />
-                    <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Fonts.xaml" />
-                    <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Colors.xaml" />
-                    <!-- Accent and AppTheme setting -->
-                    <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/Blue.xaml" />
-                    <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/BaseLight.xaml" />
-                </ResourceDictionary.MergedDictionaries>
-            </ResourceDictionary>
-        </Window.Resources>
-
-        <Grid>
-            <StackPanel>
-                <Label Name="Title"
-                Content = "OSDCloudGUI"
-                HorizontalAlignment = "Left" Margin = "20,10,0,0" VerticalAlignment = "Top" Width = "500" FontSize = "30"/>
-            </StackPanel>
-
-            <StackPanel>
-                <Label
-                    Name = "OSBuildLabel"
-                    Content = "OSBuild"
-                    HorizontalAlignment = "Left" Margin = "20,70,0,0" VerticalAlignment = "Top" Width = "100" FontSize = "14"
-                />
-            </StackPanel>
-            <StackPanel>
-                <ComboBox
-                    Name = "OSBuildComboBox"
-                    HorizontalAlignment = "Left" Margin = "20,100,0,0" VerticalAlignment = "Top" Width = "100" FontSize = "14" Height = "30"
-                />
-            </StackPanel>
-            
-            <StackPanel>
-                <Label
-                    Name = "OSEditionLabel"
-                    Content = "OSEdition"
-                    HorizontalAlignment = "Left" Margin = "140,70,0,0" VerticalAlignment = "Top" Width = "200" FontSize = "14"
-                />
-            </StackPanel>
-            <StackPanel>    
-                <ComboBox
-                    Name = "OSEditionComboBox"
-                    HorizontalAlignment = "Left" Margin = "140,100,0,0" VerticalAlignment = "Top" Width = "200" FontSize = "14" Height = "30"
-                />
-            </StackPanel>
-
-            <StackPanel>
-                <Label
-                    Name = "OSLanguageLabel"
-                    Content = "OSLanguage"
-                    HorizontalAlignment = "Left" Margin = "360,70,0,0" VerticalAlignment = "Top" Width = "100" FontSize = "14"
-                />
-            </StackPanel>
-            <StackPanel>
-                <ComboBox
-                    Name = "OSLanguageComboBox"
-                    HorizontalAlignment = "Left" Margin = "360,100,0,0" VerticalAlignment = "Top" Width = "100" FontSize = "14" Height = "30"
-                />
-            </StackPanel>
-            
-            <StackPanel>
-                <Label
-                    Name = "OSLicenseLabel"
-                    Content = "OSLicense"
-                    HorizontalAlignment = "Left" Margin = "480,70,0,0" VerticalAlignment = "Top" Width = "200" FontSize = "14"
-                />
-            </StackPanel>
-            <StackPanel>    
-                <ComboBox
-                    Name = "OSLicenseComboBox"
-                    HorizontalAlignment = "Left" Margin = "480,100,0,0" VerticalAlignment = "Top" Width = "200" FontSize = "14" Height = "30"
-                />
-            </StackPanel>
-
-            <StackPanel>
-                <Label
-                    Name = "ImageIndexLabel"
-                    Content = "ImageIndex"
-                    HorizontalAlignment = "Left" Margin = "20,140,0,0" VerticalAlignment = "Top" Width = "250" FontSize = "14"
-                />
-            </StackPanel>
-            <StackPanel>    
-                <TextBox
-                    Name = "ImageIndexTextBox"
-                    HorizontalAlignment = "Left" Margin = "20,170,0,0" VerticalAlignment = "Top" Width = "100" FontSize = "14" Height = "30"
-                />
-            </StackPanel>
-
-            <StackPanel>
-                <Label
-                    Name = "CustomImageLabel"
-                    Content = "CustomImage"
-                    HorizontalAlignment = "Left" Margin = "140,140,0,0" VerticalAlignment = "Top" Width = "250" FontSize = "14"
-                />
-            </StackPanel>
-            <StackPanel>
-                <ComboBox
-                    Name = "CustomImageComboBox"
-                    HorizontalAlignment = "Left" Margin = "140,170,0,0" VerticalAlignment = "Top" Width = "540" FontSize = "14" Height = "30"
-                />
-            </StackPanel>
-
-            <StackPanel>
-                <Label
-                    Name = "ManufacturerLabel"
-                    Content = "Manufacturer"
-                    HorizontalAlignment = "Left" Margin = "20,210,0,0" VerticalAlignment = "Top" Width = "210" FontSize = "14"
-                />
-            </StackPanel>
-            <StackPanel>    
-                <TextBox
-                    Name = "ManufacturerTextBox"
-                    HorizontalAlignment = "Left" Margin = "20,240,0,0" VerticalAlignment = "Top" Width = "210" FontSize = "14" Height = "30"
-                />
-            </StackPanel>
-
-            <StackPanel>
-                <Label
-                    Name = "ProductLabel"
-                    Content = "Product"
-                    HorizontalAlignment = "Left" Margin = "250,210,0,0" VerticalAlignment = "Top" Width = "200" FontSize = "14"
-                />
-            </StackPanel>
-            <StackPanel>    
-                <TextBox
-                    Name = "ProductTextBox"
-                    HorizontalAlignment = "Left" Margin = "250,240,0,0" VerticalAlignment = "Top" Width = "200" FontSize = "14" Height = "30"
-                />
-            </StackPanel>
-
-            <StackPanel>
-                <Label
-                    Name = "ModelLabel"
-                    Content = "Model"
-                    HorizontalAlignment = "Left" Margin = "470,210,0,0" VerticalAlignment = "Top" Width = "210" FontSize = "14"
-                />
-            </StackPanel>
-            <StackPanel>    
-                <TextBox
-                    Name = "ModelTextBox"
-                    HorizontalAlignment = "Left" Margin = "470,240,0,0" VerticalAlignment = "Top" Width = "210" FontSize = "14" Height = "30"
-                />
-            </StackPanel>
-
-            <StackPanel>
-                <Label
-                    Name = "PostConfigLabel"
-                    Content = "OSDCloud Post Configuration and Autopilot"
-                    HorizontalAlignment = "Left" Margin = "20,280,0,0" VerticalAlignment = "Top" Width = "540" FontSize = "14"
-                />
-            </StackPanel>
-            <StackPanel>
-                <ComboBox
-                    Name = "PostConfigComboBox"
-                    HorizontalAlignment = "Left" Margin = "20,310,0,0" VerticalAlignment = "Top" Width = "540" FontSize = "14" Height = "30"
-                />
-            </StackPanel>
-
-            <StackPanel>
-                <TextBox
-                    Name = "NotesTextBox"
-                    HorizontalAlignment = "Left" Margin = "20,350,0,0" VerticalAlignment = "Top" Width = "540" FontSize = "14" Height = "60"
-                />
-            </StackPanel>
-
-            <StackPanel Orientation="Horizontal">
-                <Button
-                    Name = "OKButton"
-                    Content = "GO"
-                    HorizontalAlignment = "Right" Margin = "580,310,0,0" VerticalAlignment = "Top" Width = "100" Height = "100" FontSize = "16"
-                />
-            </StackPanel>
-        </Grid>
-    </Controls:MetroWindow>
-"@
-
-    # Add WPF and Windows Forms assemblies
     Try {
         Add-Type -AssemblyName PresentationCore,PresentationFramework,WindowsBase,system.windows.forms
     } 
@@ -243,20 +51,21 @@ function LoadForm {
     }
 
     #Create the XAML reader using a new XML node reader
-    $Global:xamGUI = [Windows.Markup.XamlReader]::Load((new-object System.Xml.XmlNodeReader $xmlWPF))
+    $Global:XamlWindow = [Windows.Markup.XamlReader]::Load((New-Object System.Xml.XmlNodeReader $Global:XamlCode))
 
     #Create hooks to each named object in the XAML
-    $xmlWPF.SelectNodes("//*[@Name]") | foreach {
-        Set-Variable -Name ($_.Name) -Value $xamGUI.FindName($_.Name) -Scope Global
+    $Global:XamlCode.SelectNodes("//*[@Name]") | ForEach-Object {
+        Set-Variable -Name ($_.Name) -Value $Global:XamlWindow.FindName($_.Name) -Scope Global
     }
 }
-#=======================================================================
+#================================================
 #   LoadForm
-#=======================================================================
-LoadForm
-#=======================================================================
+#================================================
+#LoadForm
+LoadForm -XamlPath (Join-Path $Global:MyScriptDir 'OSDCloudGUI.xaml')
+#================================================
 #   Initialize
-#=======================================================================
+#================================================
 $OSDCloudParams = (Get-Command Start-OSDCloud).Parameters
 
 $OSDCloudParams["OSBuild"].Attributes.ValidValues | ForEach-Object {
@@ -278,81 +87,101 @@ $OSDCloudParams["OSLanguage"].Attributes.ValidValues | ForEach-Object {
 $ManufacturerTextBox.Text = Get-MyComputerManufacturer -Brief
 $ProductTextBox.Text = Get-MyComputerProduct
 $ModelTextBox.Text = Get-MyComputerModel -Brief
-#=======================================================================
+#================================================
 #   SetDefaultValues
-#=======================================================================
+#================================================
 function SetDefaultValues {
     $OSBuildComboBox.SelectedIndex = 0      #21H1
     $OSLanguageComboBox.SelectedIndex = 7   #en-us
     $OSEditionComboBox.SelectedIndex = 5    #Enterprise
     $OSLicenseComboBox.SelectedIndex = 1    #Volume
     $CustomImageComboBox.SelectedIndex = 0  #Nothing
-    $PostConfigComboBox.SelectedIndex = 1    #OOBE
-    $NotesTextBox.Text = "When OSDCloud finishes, you will still be in WinPE and nothing else will happen"
+    $AutopilotComboBox.SelectedIndex = 1    #OOBE
     $ImageIndexTextBox.Text = 6             #Enterprise
 
     $OSBuildComboBox.IsEnabled = $true
     $OSLanguageComboBox.IsEnabled = $true
     $OSEditionComboBox.IsEnabled = $true
     $OSLicenseComboBox.IsEnabled = $false
-    #$NotesTextBox.IsEnabled = $false
     $ImageIndexTextBox.IsEnabled = $false
     $ModelTextBox.IsEnabled = $false
-    $PostConfigComboBox.IsEnabled = $false
+    $AutopilotComboBox.IsEnabled = $true
 }
 SetDefaultValues
-#=======================================================================
-#   PostConfigComboBox
-#=======================================================================
-$PostConfigComboBox.Items.Add('Do Nothing') | Out-Null
-$PostConfigComboBox.Items.Add('Restart to OOBE') | Out-Null
-$PostConfigComboBox.Items.Add('Restart to OOBE and run AutopilotOSD') | Out-Null
-$PostConfigComboBox.Items.Add('Restart to Audit Mode') | Out-Null
-$AutopilotFiles = Find-OSDCloudFile -Name "*.json" -Path '\OSDCloud\Autopilot\Profiles\' | Sort-Object FullName
-$AutopilotFiles = $AutopilotFiles | Where-Object {$_.FullName -notlike "C*"}
-$PostConfigComboBox.SelectedIndex = 0
-if ($AutopilotFiles) {
-    $AutopilotFiles | ForEach-Object {
-        $PostConfigComboBox.Items.Add($_) | Out-Null
-    }
-}
-$PostConfigComboBox.add_SelectionChanged({
-    if ($PostConfigComboBox.SelectedIndex -eq 0) {
-        $NotesTextBox.Text = "When OSDCloud finishes, you will still be in WinPE and nothing else will happen"
-    }
-    if ($PostConfigComboBox.SelectedIndex -eq 1) {
-        $NotesTextBox.Text = "Computer will restart and process the Specialize Phase and stop at OOBE"
-    }
-    if ($PostConfigComboBox.SelectedIndex -eq 2) {
-        $NotesTextBox.Text = "Computer will restart and process the Specialize Phase and stop at OOBE
-Press Shift + F10 to open a Command Prompt and run AutopilotOSD.cmd"
-    }
-    if ($PostConfigComboBox.SelectedIndex -eq 3) {
-        $NotesTextBox.Text = "Computer will restart and process the Specialize Phase and stop in Audit Mode"
-    }
-    if ($PostConfigComboBox.SelectedIndex -ge 4) {
-        $NotesTextBox.Text = "Computer will restart and process the Specialize Phase and stop at OOBE
-The selected AutopilotConfigurationFile.json will be processed"
-    }
-})
-#=======================================================================
+#================================================
 #   CustomImage
-#=======================================================================
+#================================================
 $CustomImageComboBox.IsEnabled = $false
-$CustomImage = Find-OSDCloudFile -Name '*.wim' -Path '\OSDCloud\OS\'
-$CustomImage = $CustomImage | Sort-Object -Property Length -Unique | Sort-Object FullName | Where-Object {$_.Length -gt 3GB}
+$CustomImageChildItem = Find-OSDCloudFile -Name '*.wim' -Path '\OSDCloud\OS\'
+$CustomImageChildItem = $CustomImageChildItem | Sort-Object -Property Length -Unique | Sort-Object FullName | Where-Object {$_.Length -gt 3GB}
         
-if ($CustomImage) {
+if ($CustomImageChildItem) {
     $CustomImageComboBox.Items.Add('') | Out-Null
     $CustomImageComboBox.IsEnabled = $true
-    $CustomImage | ForEach-Object {
+    $CustomImageChildItem | ForEach-Object {
         $CustomImageComboBox.Items.Add($_) | Out-Null
     }
     $CustomImageComboBox.SelectedIndex = 0
 }
-#=======================================================================
+else {
+    $CustomImageLabel.Visibility = "Collapsed"  
+    $CustomImageComboBox.Visibility = "Collapsed"  
+}
+#================================================
+#   AutopilotComboBox
+#================================================
+$AutopilotComboBox.IsEnabled = $false
+$AutopilotJsonChildItem = Find-OSDCloudFile -Name "*.json" -Path '\OSDCloud\Autopilot\Profiles\' | Sort-Object FullName
+$AutopilotJsonChildItem = $AutopilotJsonChildItem | Where-Object {$_.FullName -notlike "C*"}
+if ($AutopilotJsonChildItem) {
+    $AutopilotComboBox.Items.Add('') | Out-Null
+    $AutopilotComboBox.IsEnabled = $true
+    $AutopilotJsonChildItem | ForEach-Object {
+        $AutopilotComboBox.Items.Add($_) | Out-Null
+    }
+    $AutopilotComboBox.SelectedIndex = 1
+}
+else {
+    $AutopilotLabel.Visibility = "Collapsed" 
+    $AutopilotComboBox.Visibility = "Collapsed"  
+}
+#================================================
+#   OOBEDeployComboBox
+#================================================
+$OOBEDeployComboBox.IsEnabled = $false
+$OOBEDeployFiles = Find-OSDCloudFile -Name "*.json" -Path '\OSDCloud\Config\OOBEDeploy\' | Sort-Object FullName
+$OOBEDeployFiles = $OOBEDeployFiles | Where-Object {$_.FullName -notlike "C*"}
+if ($OOBEDeployFiles) {
+    $OOBEDeployComboBox.IsEnabled = $true
+    $OOBEDeployFiles | ForEach-Object {
+        $OOBEDeployComboBox.Items.Add($_) | Out-Null
+    }
+    $OOBEDeployComboBox.SelectedIndex = 0
+}
+else {
+    $OOBEDeployLabel.Visibility = "Collapsed"  
+    $OOBEDeployComboBox.Visibility = "Collapsed"  
+}
+#================================================
+#   AutopilotOOBEComboBox
+#================================================
+$AutopilotOOBEComboBox.IsEnabled = $false
+$AutopilotOOBEFiles = Find-OSDCloudFile -Name "*.json" -Path '\OSDCloud\Config\AutopilotOOBE\' | Sort-Object FullName
+$AutopilotOOBEFiles = $AutopilotOOBEFiles | Where-Object {$_.FullName -notlike "C*"}
+if ($AutopilotOOBEFiles) {
+    $AutopilotOOBEComboBox.IsEnabled = $true
+    $AutopilotOOBEFiles | ForEach-Object {
+        $AutopilotOOBEComboBox.Items.Add($_) | Out-Null
+    }
+    $AutopilotOOBEComboBox.SelectedIndex = 0
+}
+else {
+    $AutopilotOOBELabel.Visibility = "Collapsed"  
+    $AutopilotOOBEComboBox.Visibility = "Collapsed"  
+}
+#================================================
 #   OSEditionComboBox
-#=======================================================================
+#================================================
 $OSEditionComboBox.add_SelectionChanged({
     #Home
     if ($OSEditionComboBox.SelectedIndex -eq 0) {
@@ -429,9 +258,9 @@ $OSEditionComboBox.add_SelectionChanged({
         }
     }
 })
-#=======================================================================
+#================================================
 #   OSLicenseComboBox
-#=======================================================================
+#================================================
 $OSLicenseComboBox.add_SelectionChanged({
     if ($OSLicenseComboBox.SelectedIndex -eq 0) {
         if ($OSEditionComboBox.SelectedIndex -eq 3) {$ImageIndexTextBox.Text = 7}
@@ -446,9 +275,9 @@ $OSLicenseComboBox.add_SelectionChanged({
         if ($OSEditionComboBox.SelectedIndex -eq 8) {$ImageIndexTextBox.Text = 9}
     }
 })
-#=======================================================================
+#================================================
 #   CustomImageComboBox
-#=======================================================================
+#================================================
 $CustomImageComboBox.add_SelectionChanged({
     if ($CustomImageComboBox.SelectedIndex -eq 0) {
         SetDefaultValues
@@ -462,26 +291,96 @@ $CustomImageComboBox.add_SelectionChanged({
         $ImageIndexTextBox.Text = 1
     }
 })
-#=======================================================================
-#   PostConfigComboBox
-#=======================================================================
-
-# EVENT Handlers 
-$OKButton.add_Click({
-    $xamGUI.Close()
+#================================================
+#   GoButton
+#================================================
+$GoButton.add_Click({
+    $XamlWindow.Close()
     Show-PowershellWindow
-
-    $Params = @{
-        OSBuild         = $OSBuildComboBox.SelectedItem
-        OSEdition       = $OSEditionComboBox.SelectedItem
-        OSLanguage      = $OSLanguageComboBox.SelectedItem
-        OSLicense       = $OSLicenseComboBox.SelectedItem
-        Manufacturer    = $ManufacturerTextBox.Text
-        Product         = $ProductTextBox.Text
+    #================================================
+    #   Variables
+    #================================================
+    $OSImageIndex = $ImageIndexTextBox.Text
+    $OSBuild = $OSBuildComboBox.SelectedItem
+    $OSEdition = $OSEditionComboBox.SelectedItem
+    $OSLanguage = $OSLanguageComboBox.SelectedItem
+    $OSLicense = $OSLicenseComboBox.SelectedItem
+    #================================================
+    #   Autopilot
+    #================================================
+    $AutopilotJsonName = $AutopilotComboBox.SelectedValue
+    if ($AutopilotJsonName) {
+        $AutopilotJsonItem = $AutopilotJsonChildItem | Where-Object {$_.FullName -eq "$AutopilotJsonName"}
     }
-    Start-OSDCloud @Params
+    else {
+        $SkipAutopilot = $true
+        $AutopilotJsonName = $null
+        $AutopilotJsonItem = $null
+    }
+    if ($AutopilotJsonItem) {
+        $AutopilotJsonObject = Get-Content -Raw $AutopilotJsonItem.FullName | ConvertFrom-Json
+        $SkipAutopilot = $false
+    }
+    else {
+        $SkipAutopilot = $true
+        $AutopilotJsonObject = $null
+    }
+    #================================================
+    #   ImageFile
+    #================================================
+    $ImageFileFullName = $CustomImageComboBox.SelectedValue
+    if ($ImageFileFullName) {
+        $ImageFileItem = $CustomImageChildItem | Where-Object {$_.FullName -eq "$ImageFileFullName"}
+        $ImageFileName = Split-Path -Path $ImageFileItem.FullName -Leaf
+        $OSBuild = $null
+        $OSEdition = $null
+        $OSLanguage = $null
+        $OSLicense = $null
+    }
+    else {
+        $ImageFileItem = $null
+        $ImageFileFullName = $null
+        $ImageFileName = $null
+    }
+    #================================================
+    #   Global Variables
+    #================================================
+    $Global:StartOSDCloudGUI = $null
+    $Global:StartOSDCloudGUI = [ordered]@{
+        AutopilotJsonChildItem  = $AutopilotJsonChildItem
+        AutopilotJsonItem       = $AutopilotJsonItem
+        AutopilotJsonName       = $AutopilotJsonName
+        AutopilotJsonObject     = $AutopilotJsonObject
+        ImageFileItem           = $ImageFileItem
+        ImageFileFullName       = $ImageFileFullName
+        ImageFileName           = $ImageFileName
+        OSImageIndex            = $OSImageIndex
+        OSBuild                 = $OSBuild
+        OSEdition               = $OSEdition
+        OSLanguage              = $OSLanguage
+        OSLicense               = $OSLicense
+        Manufacturer            = $ManufacturerTextBox.Text
+        Product                 = $ProductTextBox.Text
+        Restart                 = $RestartCheckbox.IsChecked
+        Screenshot              = $ScreenshotCheckbox.IsChecked
+        SkipAutopilot           = $SkipAutopilot
+        SkipODT                 = $true
+        ZTI                     = $ZTICheckbox.IsChecked
+    }
+    #$Global:StartOSDCloudGUI | Out-Host
+
+    if ($ScreenshotCheckbox.IsChecked) {
+        $Params = @{
+            Screenshot = $true
+        }
+        Start-OSDCloud @Params
+    }
+    else {
+        Start-OSDCloud 
+    }
 })
-#=======================================================================
+#================================================
 #   Launch
-#=======================================================================
-$xamGUI.ShowDialog() | Out-Null
+#================================================
+$XamlWindow.ShowDialog() | Out-Null
+#================================================

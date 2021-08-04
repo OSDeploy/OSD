@@ -57,7 +57,7 @@ function Start-ScriptPad {
             }
         }
 
-        $GitHubApiContent = $GitHubApiContent | Where-Object {$_.type -eq 'file'} | Where-Object {$_.name -like "*.ps1"}
+        $GitHubApiContent = $GitHubApiContent | Where-Object {$_.type -eq 'file'} | Where-Object {($_.name -match 'README.md') -or ($_.name -like "*.ps1")}
 
         Write-Host -ForegroundColor DarkGray "================================================"
         $Results = foreach ($Item in $GitHubApiContent) {

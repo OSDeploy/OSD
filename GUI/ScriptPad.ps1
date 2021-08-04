@@ -13,17 +13,15 @@ function Hide-PowershellWindow() {
 }
 #Hide-PowershellWindow
 #================================================
-#   MahApps.Metro
+#   Load Assemblies
 #================================================
-# Assign current script directory to a global variable
 $Global:MyScriptDir = [System.IO.Path]::GetDirectoryName($myInvocation.MyCommand.Definition)
-
-# Load presentationframework and Dlls for the MahApps.Metro theme
 [System.Reflection.Assembly]::LoadWithPartialName("presentationframework") | Out-Null
-[System.Reflection.Assembly]::LoadFrom("$Global:MyScriptDir\assembly\MahApps.Metro.dll") | Out-Null
 [System.Reflection.Assembly]::LoadFrom("$Global:MyScriptDir\assembly\System.Windows.Interactivity.dll") | Out-Null
-
-# Set console size and title
+[System.Reflection.Assembly]::LoadFrom("$Global:MyScriptDir\assembly\MahApps.Metro.dll") | Out-Null
+#================================================
+#   Set PowerShell Window Title
+#================================================
 $host.ui.RawUI.WindowTitle = ""
 #================================================
 #   Test-InWinPE
@@ -37,12 +35,12 @@ function Test-InWinPE {
 function LoadForm {
     [CmdletBinding()]
     param (
-     [Parameter(Mandatory=$False,Position=1)]
-     [string]$XamlPath
+        [Parameter(Mandatory = $False, Position = 1)]
+        [string]$XamlPath
     )
     
     # Import the XAML code
-    [xml]$Global:xmlWPF = Get-Content -Path $XamlPath
+    [xml]$Global:XamlCode = Get-Content -Path $XamlPath
 
     # Add WPF and Windows Forms assemblies
     try {
@@ -53,45 +51,47 @@ function LoadForm {
     }
 
     #Create the XAML reader using a new XML node reader
-    $Global:xamGUI = [Windows.Markup.XamlReader]::Load((new-object System.Xml.XmlNodeReader $xmlWPF))
+    $Global:XamlWindow = [Windows.Markup.XamlReader]::Load((New-Object System.Xml.XmlNodeReader $Global:XamlCode))
 
     #Create hooks to each named object in the XAML
-    $xmlWPF.SelectNodes("//*[@Name]") | ForEach {
-        Set-Variable -Name ($_.Name) -Value $xamGUI.FindName($_.Name) -Scope Global
+    $Global:XamlCode.SelectNodes("//*[@Name]") | ForEach-Object {
+        Set-Variable -Name ($_.Name) -Value $XamlWindow.FindName($_.Name) -Scope Global
     }
 }
 #================================================
 #   LoadForm
 #================================================
+#LoadForm
 LoadForm -XamlPath (Join-Path $Global:MyScriptDir 'ScriptPad.xaml')
 #================================================
 #   Initialize
 #================================================
-$ComboBoxScriptPadName.Items.Add('NewPSScript.ps1') | Out-Null
-if (-NOT (Get-Variable -Name 'NewPSScript.ps1' -Scope Global -ErrorAction Ignore)) {
-    New-Variable -Name 'NewPSScript.ps1' -Value '#Blank PowerShell Script' -Scope Global -Force -ErrorAction Stop
-}
-$LabelScriptPadDescription.Content = 'NewPSScript.ps1 is a blank PowerShell Script that you can edit and Start-Process'
-
 if ($Global:ScriptPad) {
     $Global:ScriptPad | ForEach-Object {
         $ComboBoxScriptPadName.Items.Add($_.Path) | Out-Null
         New-Variable -Name $_.Guid -Value $($_.ContentRAW) -Force -Scope Global
     }
     $LabelTitle.Content = "GitHub $($Global:ScriptPad.GitOwner[0]) $($Global:ScriptPad.GitRepo[0])"
-    Write-Host -ForegroundColor DarkGray "================================================"
 }
 else {
     $LabelTitle.Content = ''
 }
+$ComboBoxScriptPadName.Items.Add('ScratchPad.ps1') | Out-Null
+if (-NOT (Get-Variable -Name 'ScratchPad.ps1' -Scope Global -ErrorAction Ignore)) {
+    New-Variable -Name 'ScratchPad.ps1' -Value '#Blank PowerShell Script' -Scope Global -Force -ErrorAction Stop
+}
+$LabelScriptPadDescription.Content = 'ScratchPad.ps1 is a blank PowerShell Script that you can edit and Start-Process'
+Write-Host -ForegroundColor DarkGray "================================================"
 #================================================
 #   Set-ScriptPadContent
 #================================================
 function Set-ScriptPadContent {
-    if ($ComboBoxScriptPadName.SelectedValue -eq 'NewPSScript.ps1') {
-        Write-Host -ForegroundColor Cyan 'NewPSScript.ps1'
-        $TextBoxScriptPadContent.Text = (Get-Variable -Name 'NewPSScript.ps1' -Scope Global).Value
-        $LabelScriptPadDescription.Content = 'NewPSScript.ps1 is a blank PowerShell Script that you can edit and Start-Process'
+    if ($ComboBoxScriptPadName.SelectedValue -eq 'ScratchPad.ps1') {
+        Write-Host -ForegroundColor Cyan 'ScratchPad.ps1'
+        $TextBoxScriptPadContent.Text = (Get-Variable -Name 'ScratchPad.ps1' -Scope Global).Value
+        $LabelScriptPadDescription.Content = 'ScratchPad.ps1 is a blank PowerShell Script that you can edit and Start-Process'
+        $TextBoxScriptPadContent.IsReadOnly = $false
+        $GoButton.Visibility = "Visible"
     }
     else {
         $Global:WorkingScript = $Global:ScriptPad | Where-Object {$_.Path -eq $ComboBoxScriptPadName.SelectedValue} | Select-Object -First 1
@@ -102,6 +102,15 @@ function Set-ScriptPadContent {
 
         $LabelScriptPadDescription.Content = $Global:WorkingScript.Guid
         $TextBoxScriptPadContent.Text = (Get-Variable -Name $Global:WorkingScript.Guid).Value
+
+        if ($Global:WorkingScript.Name -match 'README.md') {
+            $TextBoxScriptPadContent.IsReadOnly = $true
+            $GoButton.Visibility = "Collapsed"
+        }
+        else {
+            $TextBoxScriptPadContent.IsReadOnly = $false
+            $GoButton.Visibility = "Visible"
+        }
     }
     Write-Host -ForegroundColor DarkGray "================================================"
 }
@@ -117,8 +126,8 @@ $ComboBoxScriptPadName.add_SelectionChanged({
     Set-ScriptPadContent
 })
 $TextBoxScriptPadContent.add_TextChanged({
-    if ($ComboBoxScriptPadName.SelectedValue -eq 'NewPSScript.ps1') {
-        Set-Variable -Name 'NewPSScript.ps1' -Value $($TextBoxScriptPadContent.Text) -Scope Global -Force
+    if ($ComboBoxScriptPadName.SelectedValue -eq 'ScratchPad.ps1') {
+        Set-Variable -Name 'ScratchPad.ps1' -Value $($TextBoxScriptPadContent.Text) -Scope Global -Force
     }
     else {
         Set-Variable -Name $($Global:WorkingScript.Guid) -Value $($TextBoxScriptPadContent.Text) -Scope Global -Force
@@ -132,8 +141,8 @@ $GoButton.add_Click({
     $Global:ScriptPadScriptBlock = [scriptblock]::Create($TextBoxScriptPadContent.Text)
 
     if ($Global:ScriptPadScriptBlock) {
-        if ($ComboBoxScriptPadName.SelectedValue -eq 'NewPSScript.ps1') {
-            $ScriptFile = 'NewPSScript.ps1'
+        if ($ComboBoxScriptPadName.SelectedValue -eq 'ScratchPad.ps1') {
+            $ScriptFile = 'ScratchPad.ps1'
         }
         else {
             $ScriptFile = $Global:WorkingScript.Name
@@ -144,7 +153,7 @@ $GoButton.add_Click({
         Write-Host -ForegroundColor DarkGray "Saving contents of `$Global:ScriptPadScriptBlock` to $ScriptPath"
         $Global:ScriptPadScriptBlock | Out-File $ScriptPath -Encoding utf8
 
-        #$xamGUI.Close()
+        #$XamlWindow.Close()
         #Invoke-Command $Global:ScriptPadScriptBlock
         #Start-Process PowerShell.exe -ArgumentList "-NoExit Invoke-Command -ScriptBlock {$Global:ScriptPadScriptBlock}"
 
@@ -154,6 +163,7 @@ $GoButton.add_Click({
     #Write-Host -ForegroundColor DarkGray "================================================"
 })
 #================================================
-#   Launch XAML
+#   Launch
 #================================================
-$xamGUI.ShowDialog() | Out-Null
+$XamlWindow.ShowDialog() | Out-Null
+#================================================

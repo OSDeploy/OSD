@@ -90,7 +90,7 @@ https://osdcloud.osdeploy.com
 .NOTES
 21.3.12  Initial Release
 #>
-function Select-OSDCloudAutopilotFile {
+function Select-OSDCloudAutopilotJsonItem {
     [CmdletBinding()]
     param ()
 

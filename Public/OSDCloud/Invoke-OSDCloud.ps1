@@ -6,12 +6,12 @@ function Invoke-OSDCloud {
     #=======================================================================
     $Global:OSDCloud = $null
     $Global:OSDCloud = [ordered]@{
-        AutopilotFile = $null
-        AutopilotFiles = $null
+        AutopilotJsonChildItem = $null
+        AutopilotJsonItem = $null
         AutopilotJsonName = $null
         AutopilotJsonString = $null
         AutopilotJsonUrl = $null
-        AutopilotObject = $null
+        AutopilotJsonObject = $null
         BuildName = 'OSDCloud'
         DriverPackUrl = $null
         DriverPackOffline = $null
@@ -20,7 +20,7 @@ function Invoke-OSDCloud {
         GetDiskFixed = $null
         GetFeatureUpdate = $null
         GetMyDriverPack = $null
-        ImageFileOffline = $null
+        ImageFileItem = $null
         ImageFileName = $null
         ImageFileSource = $null
         ImageFileTarget = $null
@@ -47,6 +47,7 @@ function Invoke-OSDCloud {
         OSLicense = $OSLicense
         OSImageIndex = 1
         Product = Get-MyComputerProduct
+        Restart = $Restart
         Screenshot = $null
         SkipAutopilot = [bool]$false
         SkipODT = [bool]$false
@@ -63,14 +64,14 @@ function Invoke-OSDCloud {
     #=======================================================================
     #	Merge Hashtables
     #=======================================================================
-    if ($StartOSDCloud) {
-        foreach ($Key in $StartOSDCloud.Keys) {
-            $OSDCloud.$Key = $StartOSDCloud.$Key
+    if ($Global:StartOSDCloud) {
+        foreach ($Key in $Global:StartOSDCloud.Keys) {
+            $Global:OSDCloud.$Key = $Global:StartOSDCloud.$Key
         }
     }
-    if ($MyOSDCloud) {
-        foreach ($Key in $MyOSDCloud.Keys) {
-            $OSDCloud.$Key = $MyOSDCloud.$Key
+    if ($Global:MyOSDCloud) {
+        foreach ($Key in $Global:MyOSDCloud.Keys) {
+            $Global:OSDCloud.$Key = $Global:MyOSDCloud.$Key
         }
     }
     #=======================================================================
@@ -84,8 +85,8 @@ function Invoke-OSDCloud {
     #   In WinPE, the latest version will be installed automatically
     #   In Windows, this script is stopped and you will need to update manually
     #=======================================================================
-    if ($OSDCloud.Version -lt $OSDCloud.VersionMin) {
-        Write-Warning "OSDCloud requires OSD $($OSDCloud.VersionMin) or newer"
+    if ($Global:OSDCloud.Version -lt $Global:OSDCloud.VersionMin) {
+        Write-Warning "OSDCloud requires OSD $($Global:OSDCloud.VersionMin) or newer"
 
         if ($env:SystemDrive -eq 'X:') {
             Write-Warning "Updating OSD PowerShell Module, you will need to restart OSDCloud"
@@ -98,10 +99,10 @@ function Invoke-OSDCloud {
             Break
         }
     }
-    $OSDCloud.Version = [Version](Get-Module -Name OSD -ListAvailable | Sort-Object Version -Descending | Select-Object -First 1).Version
+    $Global:OSDCloud.Version = [Version](Get-Module -Name OSD -ListAvailable | Sort-Object Version -Descending | Select-Object -First 1).Version
 
-    if ($OSDCloud.Version -lt $OSDCloud.VersionMin) {
-        Write-Warning "OSDCloud requires OSD $($OSDCloud.VersionMin) or newer"
+    if ($Global:OSDCloud.Version -lt $Global:OSDCloud.VersionMin) {
+        Write-Warning "OSDCloud requires OSD $($Global:OSDCloud.VersionMin) or newer"
         Break
     }
     #=======================================================================
@@ -109,72 +110,68 @@ function Invoke-OSDCloud {
     #   Important to display the location so you know which script is executing
     #=======================================================================
     Write-Host -ForegroundColor DarkGray "========================================================================="
-    Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) $($OSDCloud.Function)"
+    Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) $($Global:OSDCloud.Function)"
     #=======================================================================
     #	OS Check
     #=======================================================================
-    if ((!($OSDCloud.ImageFileOffline)) -and (!($OSDCloud.ImageFileTarget)) -and (!($OSDCloud.ImageFileUrl))) {
+    if ((!($Global:OSDCloud.ImageFileItem)) -and (!($Global:OSDCloud.ImageFileTarget)) -and (!($Global:OSDCloud.ImageFileUrl))) {
         Write-Warning "There was no OS specified by any Variables"
         Write-Warning "Invoke-OSDCloud should not be run directly unless you know what you are doing"
-        Write-Warning "Try using Start-OSDCloud or OSDCloudGUI"
+        Write-Warning "Try using Start-OSDCloud or Start-OSDCloudGUI"
         Start-Sleep -Seconds 10
         Break
     }
     #=======================================================================
     #	Autopilot Profiles are procesed in this order
-    #   1. $OSDCloud.AutopilotJsonUrl
-    #   2. $OSDCloud.AutopilotJsonString
-    #   3. $OSDCloud.AutopilotJsonName
-    #   4. Select from Table
-    #   Results: $OSDCloud.AutopilotObject
     #=======================================================================
-    if ($OSDCloud.SkipAutopilot -ne $true) {
+    if ($Global:OSDCloud.SkipAutopilot -ne $true) {
         Write-Host -ForegroundColor DarkGray "========================================================================="
         Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Autopilot Configuration"
 
-        #Autopilot Json URL
-        if ($OSDCloud.AutopilotJsonUrl) {
-            Write-Host -ForegroundColor DarkGray "Importing Autopilot Configuration $($OSDCloud.AutopilotJsonUrl)"
-            if (Test-WebConnection -Uri $OSDCloud.AutopilotJsonUrl) {
-                $OSDCloud.AutopilotObject = (Invoke-WebRequest -Uri $OSDCloud.AutopilotJsonUrl).Content | ConvertFrom-Json
+        if ($Global:OSDCloud.AutopilotJsonObject) {
+            Write-Host -ForegroundColor DarkGray 'Importing AutopilotJsonObject'
+        }
+        elseif ($Global:OSDCloud.AutopilotJsonUrl) {
+            Write-Host -ForegroundColor DarkGray "Importing Autopilot Configuration $($Global:OSDCloud.AutopilotJsonUrl)"
+            if (Test-WebConnection -Uri $Global:OSDCloud.AutopilotJsonUrl) {
+                $Global:OSDCloud.AutopilotJsonObject = (Invoke-WebRequest -Uri $Global:OSDCloud.AutopilotJsonUrl).Content | ConvertFrom-Json
             }
         }
-        #Autopilot ConvertFrom-Json String
-        #elseif ($OSDCloud.AutopilotJsonString) {
-        #    $OSDCloud.AutopilotObject = $OSDCloud.AutopilotJsonString
-        #}
+        elseif ($Global:OSDCloud.AutopilotJsonItem) {
+            $Global:OSDCloud.AutopilotJsonChildItem = Find-OSDCloudFile -Name $Global:OSDCloud.AutopilotJsonItem.Name -Path '\OSDCloud\Autopilot\Profiles\' | Sort-Object FullName
+            $Global:OSDCloud.AutopilotJsonItem = $Global:OSDCloud.AutopilotJsonChildItem | Where-Object {$_.FullName -notlike "C*"} | Select-Object -First 1
+            if ($Global:OSDCloud.AutopilotJsonItem) {
+                $Global:OSDCloud.AutopilotJsonObject = Get-Content $Global:OSDCloud.AutopilotJsonItem.FullName | ConvertFrom-Json
+            }
+        }
+        elseif ($Global:OSDCloud.AutopilotJsonName) {
+            $Global:OSDCloud.AutopilotJsonChildItem = Find-OSDCloudFile -Name $Global:OSDCloud.AutopilotJsonName -Path '\OSDCloud\Autopilot\Profiles\' | Sort-Object FullName
+            $Global:OSDCloud.AutopilotJsonItem = $Global:OSDCloud.AutopilotJsonChildItem | Where-Object {$_.FullName -notlike "C*"} | Select-Object -First 1
+            if ($Global:OSDCloud.AutopilotJsonItem) {
+                $Global:OSDCloud.AutopilotJsonObject = Get-Content $Global:OSDCloud.AutopilotJsonItem.FullName | ConvertFrom-Json
+            }
+        }
         else {
-            #Autopilot Local Name
-            if ($OSDCloud.AutopilotJsonName) {
-                $OSDCloud.AutopilotFiles = Find-OSDCloudFile -Name $OSDCloud.AutopilotJsonName -Path '\OSDCloud\Autopilot\Profiles\' | Sort-Object FullName
-                $OSDCloud.AutopilotFile = $OSDCloud.AutopilotFiles | Where-Object {$_.FullName -notlike "C*"} | Select-Object -First 1
-                if ($OSDCloud.AutopilotFile) {
-                    $OSDCloud.AutopilotObject = Get-Content $OSDCloud.AutopilotFile.FullName | ConvertFrom-Json
+            $Global:OSDCloud.AutopilotJsonChildItem = Find-OSDCloudFile -Name "*.json" -Path '\OSDCloud\Autopilot\Profiles\' | Sort-Object FullName
+            $Global:OSDCloud.AutopilotJsonChildItem = $Global:OSDCloud.AutopilotJsonChildItem | Where-Object {$_.FullName -notlike "C*"}
+
+            if ($Global:OSDCloud.AutopilotJsonChildItem) {
+                if ($Global:OSDCloud.ZTI -eq $true) {
+                    $Global:OSDCloud.AutopilotJsonItem = $Global:OSDCloud.AutopilotJsonChildItem | Select-Object -First 1
                 }
-            }
-            #Find Autopilot Profiles
-            else {
-                $OSDCloud.AutopilotFiles = Find-OSDCloudFile -Name "*.json" -Path '\OSDCloud\Autopilot\Profiles\' | Sort-Object FullName
-                $OSDCloud.AutopilotFiles = $OSDCloud.AutopilotFiles | Where-Object {$_.FullName -notlike "C*"}
+                else {
+                    $Global:OSDCloud.AutopilotJsonItem = Select-OSDCloudAutopilotJsonItem
+                }
 
-                if ($OSDCloud.AutopilotFiles) {
-                    if ($OSDCloud.ZTI -eq $true) {
-                        $OSDCloud.AutopilotFile = $OSDCloud.AutopilotFiles | Select-Object -First 1
-                    }
-                    else {
-                        $OSDCloud.AutopilotFile = Select-OSDCloudAutopilotFile
-                    }
-
-                    if ($OSDCloud.AutopilotFile) {
-                        $OSDCloud.AutopilotObject = Get-Content $OSDCloud.AutopilotFile.FullName | ConvertFrom-Json
-                    }
+                if ($Global:OSDCloud.AutopilotJsonItem) {
+                    $Global:OSDCloud.AutopilotJsonObject = Get-Content $Global:OSDCloud.AutopilotJsonItem.FullName | ConvertFrom-Json
                 }
             }
         }
 
-        if ($OSDCloud.AutopilotObject) {
+        if ($Global:OSDCloud.AutopilotJsonObject) {
             Write-Host -ForegroundColor Cyan "OSDCloud will apply the following Autopilot Configuration as AutopilotConfigurationFile.json"
-            $OSDCloud.AutopilotObject | Format-List
+            $($Global:OSDCloud.AutopilotJsonObject) | Out-Host | Format-List
         }
         else {
             Write-Warning "AutopilotConfigurationFile.json will not be configured for this deployment"
@@ -183,16 +180,16 @@ function Invoke-OSDCloud {
     #=======================================================================
     #	Office Configuration 
     #=======================================================================
-    if ($OSDCloud.SkipODT -ne $true) {
-        $OSDCloud.ODTFiles = Find-OSDCloudODTFile
+    if ($Global:OSDCloud.SkipODT -ne $true) {
+        $Global:OSDCloud.ODTFiles = Find-OSDCloudODTFile
         
-        if ($OSDCloud.ODTFiles) {
+        if ($Global:OSDCloud.ODTFiles) {
             Write-Host -ForegroundColor DarkGray "========================================================================="
             Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Select Office Deployment Tool Configuration"
         
-            $OSDCloud.ODTFile = Select-OSDCloudODTFile
-            if ($OSDCloud.ODTFile) {
-                Write-Host -ForegroundColor Cyan "Office Config: $($OSDCloud.ODTFile.FullName)"
+            $Global:OSDCloud.ODTFile = Select-OSDCloudODTFile
+            if ($Global:OSDCloud.ODTFile) {
+                Write-Host -ForegroundColor Cyan "Office Config: $($Global:OSDCloud.ODTFile.FullName)"
             } 
             else {
                 Write-Warning "OSDCloud Office Config will not be configured for this deployment"
@@ -206,23 +203,23 @@ function Invoke-OSDCloud {
     #=======================================================================
     if ((Get-OSDGather -Property IsWinPE) -eq $false) {
         Write-Host -ForegroundColor DarkGray    "========================================================================="
-        Write-Warning "$($OSDCloud.BuildName) can only be run from WinPE"
-        $OSDCloud.Test = $true
-        Write-Warning "Test: $($OSDCloud.Test)"
+        Write-Warning "$($Global:OSDCloud.BuildName) can only be run from WinPE"
+        $Global:OSDCloud.Test = $true
+        Write-Warning "Test: $($Global:OSDCloud.Test)"
         #Write-Warning "OSDCloud Failed!"
         Start-Sleep -Seconds 5
         #Break
     }
     else {
-        $OSDCloud.Test = $false
+        $Global:OSDCloud.Test = $false
     }
     #=======================================================================
     #   USB Drives Offline
     #   This is to ensure nothing is using drive letters we need C R S
     #=======================================================================
-    $OSDCloud.USBPartitions = Get-Partition.usb
+    $Global:OSDCloud.USBPartitions = Get-Partition.usb
 
-    foreach ($USBPartition in $OSDCloud.USBPartitions) {
+    foreach ($USBPartition in $Global:OSDCloud.USBPartitions) {
         Write-Warning "Removing PartitionAccessPath USB Disk $($USBPartition.DiskNumber) Partition $($USBPartition.PartitionNumber) Drive Letter $($USBPartition.DriveLetter)"
         Remove-PartitionAccessPath -DiskNumber $USBPartition.DiskNumber -PartitionNumber $USBPartition.PartitionNumber -AccessPath "$($USBPartition.DriveLetter):" -Verbose
         Start-Sleep -Seconds 5
@@ -231,16 +228,16 @@ function Invoke-OSDCloud {
     #   Clear-Disk.fixed
     #=======================================================================
     Write-Host -ForegroundColor DarkGray "========================================================================="
-    $OSDCloud.GetDiskFixed = Get-Disk.fixed | Where-Object {$_.IsBoot -eq $false} | Sort-Object Number
-    if (($OSDCloud.ZTI -eq $true) -and (($OSDCloud.GetDiskFixed | Measure-Object).Count -lt 2)) {
+    $Global:OSDCloud.GetDiskFixed = Get-Disk.fixed | Where-Object {$_.IsBoot -eq $false} | Sort-Object Number
+    if (($Global:OSDCloud.ZTI -eq $true) -and (($Global:OSDCloud.GetDiskFixed | Measure-Object).Count -lt 2)) {
         Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Clear-Disk.fixed -Force -NoResults -Confirm:$false"
-        if ($OSDCloud.Test -ne $true) {
+        if ($Global:OSDCloud.Test -ne $true) {
             Clear-Disk.fixed -Force -NoResults -Confirm:$false -ErrorAction Stop
         }
     }
     else {
         Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Clear-Disk.fixed -Force -NoResults"
-        if ($OSDCloud.Test -ne $true) {
+        if ($Global:OSDCloud.Test -ne $true) {
             Clear-Disk.fixed -Force -NoResults -ErrorAction Stop
         }
     }
@@ -250,7 +247,7 @@ function Invoke-OSDCloud {
     Write-Host -ForegroundColor DarkGray "========================================================================="
     if (Test-IsVM) {
         Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) New-OSDisk -NoRecoveryPartition -Force -ErrorAction Stop"
-        if ($OSDCloud.Test -ne $true) {
+        if ($Global:OSDCloud.Test -ne $true) {
             New-OSDisk -NoRecoveryPartition -Force -ErrorAction Stop
         }
         Write-Host "=========================================================================" -ForegroundColor Cyan
@@ -259,7 +256,7 @@ function Invoke-OSDCloud {
     }
     else {
         Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) New-OSDisk -Force -ErrorAction Stop"
-        if ($OSDCloud.Test -ne $true) {
+        if ($Global:OSDCloud.Test -ne $true) {
             New-OSDisk -Force -ErrorAction Stop
         }
         Write-Host "=========================================================================" -ForegroundColor Cyan
@@ -274,7 +271,7 @@ function Invoke-OSDCloud {
     #=======================================================================
     #   USB Drives Online
     #=======================================================================
-    foreach ($USBPartition in $OSDCloud.USBPartitions) {
+    foreach ($USBPartition in $Global:OSDCloud.USBPartitions) {
         Write-Warning "Add PartitionAccessPath USB Disk $($USBPartition.DiskNumber) Partition $($USBPartition.PartitionNumber) -AssignDriveLetter"
         Add-PartitionAccessPath -DiskNumber $USBPartition.DiskNumber -PartitionNumber $USBPartition.PartitionNumber -AssignDriveLetter -Verbose
         Start-Sleep -Seconds 5
@@ -285,17 +282,17 @@ function Invoke-OSDCloud {
     Write-Host -ForegroundColor DarkGray "========================================================================="
     Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Get-OSDPower -Property High"
     Write-Host -ForegroundColor DarkGray "Enable High Performance Power Plan"
-    if ($OSDCloud.Test -ne $true) {
+    if ($Global:OSDCloud.Test -ne $true) {
         Get-OSDPower -Property High
     }
     #=======================================================================
     #   Screenshot
     #=======================================================================
-    if ($OSDCloud.Screenshot) {
+    if ($Global:OSDCloud.Screenshot) {
         Stop-ScreenPNGProcess
-        Invoke-Exe robocopy "$($OSDCloud.Screenshot)" C:\OSDCloud\ScreenPNG *.* /s /ndl /nfl /njh /njs
+        Invoke-Exe robocopy "$($Global:OSDCloud.Screenshot)" C:\OSDCloud\ScreenPNG *.* /s /ndl /nfl /njh /njs
         Start-ScreenPNGProcess -Directory 'C:\OSDCloud\ScreenPNG'
-        $OSDCloud.Screenshot = 'C:\OSDCloud\ScreenPNG'
+        $Global:OSDCloud.Screenshot = 'C:\OSDCloud\ScreenPNG'
     }
     #=======================================================================
     #   Start Transcript
@@ -307,34 +304,34 @@ function Invoke-OSDCloud {
         New-Item -Path 'C:\OSDCloud\Logs' -ItemType Directory -Force -ErrorAction Stop | Out-Null
     }
 
-    $OSDCloud.Transcript = "$((Get-Date).ToString('yyyy-MM-dd-HHmmss'))-Deploy-OSDCloud.log"
-    Start-Transcript -Path (Join-Path 'C:\OSDCloud\Logs' $OSDCloud.Transcript) -ErrorAction Ignore
+    $Global:OSDCloud.Transcript = "$((Get-Date).ToString('yyyy-MM-dd-HHmmss'))-Deploy-OSDCloud.log"
+    Start-Transcript -Path (Join-Path 'C:\OSDCloud\Logs' $Global:OSDCloud.Transcript) -ErrorAction Ignore
     #=======================================================================
     #	Image File Offline
     #=======================================================================
-    if ($OSDCloud.ImageFileOffline) {
+    if ($Global:OSDCloud.ImageFileItem) {
         Write-Host -ForegroundColor DarkGray "========================================================================="
         Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Copy OSDCloud ImageFile Offline"
         
-        if (!($OSDCloud.ImageFileName)) {
-            $OSDCloud.ImageFileName = Split-Path -Path $OSDCloud.ImageFileOffline.FullName -Leaf
+        if (!($Global:OSDCloud.ImageFileName)) {
+            $Global:OSDCloud.ImageFileName = Split-Path -Path $Global:OSDCloud.ImageFileItem.FullName -Leaf
         }
 
-        $OSDCloud.ImageFileSource = Find-OSDCloudFile -Name $OSDCloud.ImageFileName -Path (Split-Path -Path (Split-Path -Path $OSDCloud.ImageFileOffline.FullName -Parent) -NoQualifier) | Select-Object -First 1
+        $Global:OSDCloud.ImageFileSource = Find-OSDCloudFile -Name $Global:OSDCloud.ImageFileName -Path (Split-Path -Path (Split-Path -Path $Global:OSDCloud.ImageFileItem.FullName -Parent) -NoQualifier) | Where-Object {$_.FullName -notlike "C:*"} |Select-Object -First 1
         
-        if ($OSDCloud.ImageFileSource) {
-            Write-Host -ForegroundColor DarkGray "ImageFileSource: $($OSDCloud.ImageFileSource.FullName)"
+        if ($Global:OSDCloud.ImageFileSource) {
+            Write-Host -ForegroundColor DarkGray "ImageFileSource: $($Global:OSDCloud.ImageFileSource.FullName)"
             if (!(Test-Path 'C:\OSDCloud\OS')) {
                 New-Item -Path 'C:\OSDCloud\OS' -ItemType Directory -Force -ErrorAction Stop | Out-Null
             }
-            Copy-Item -Path $OSDCloud.ImageFileSource.FullName -Destination 'C:\OSDCloud\OS' -Force
-            if (Test-Path "C:\OSDCloud\OS\$($OSDCloud.ImageFileSource.Name)") {
-                $OSDCloud.ImageFileTarget = Get-Item -Path "C:\OSDCloud\OS\$($OSDCloud.ImageFileSource.Name)"
+            Copy-Item -Path $Global:OSDCloud.ImageFileSource.FullName -Destination 'C:\OSDCloud\OS' -Force
+            if (Test-Path "C:\OSDCloud\OS\$($Global:OSDCloud.ImageFileSource.Name)") {
+                $Global:OSDCloud.ImageFileTarget = Get-Item -Path "C:\OSDCloud\OS\$($Global:OSDCloud.ImageFileSource.Name)"
             }
         }
-        if ($OSDCloud.ImageFileTarget) {
-            Write-Host -ForegroundColor DarkGray "ImageFileTarget.FullName: $($OSDCloud.ImageFileTarget.FullName)"
-            $OSDCloud.ImageFileUrl = $null
+        if ($Global:OSDCloud.ImageFileTarget) {
+            Write-Host -ForegroundColor DarkGray "ImageFileTarget.FullName: $($Global:OSDCloud.ImageFileTarget.FullName)"
+            $Global:OSDCloud.ImageFileUrl = $null
         }
         else {
             Write-Warning "Something went wrong trying to get the Windows Image"
@@ -345,7 +342,7 @@ function Invoke-OSDCloud {
     #=======================================================================
     #	Download Image File
     #=======================================================================
-    if (!($OSDCloud.ImageFileTarget) -and (!($OSDCloud.ImageFileUrl))) {
+    if (!($Global:OSDCloud.ImageFileTarget) -and (!($Global:OSDCloud.ImageFileUrl))) {
         Write-Host -ForegroundColor DarkGray "========================================================================="
         Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Get Windows 10 Feature Update"
         Write-Warning "Invoke-OSDCloud was not set properly with an OS to Download"
@@ -353,14 +350,14 @@ function Invoke-OSDCloud {
         Write-Warning "Invoke-OSDCloud should not be run directly unless you know what you are doing"
         Write-Warning "Windows 10 Enterprise is being downloaded and installed out of convenience only"
 
-        if (!($OSDCloud.GetFeatureUpdate)) {
-            $OSDCloud.GetFeatureUpdate = Get-FeatureUpdate
+        if (!($Global:OSDCloud.GetFeatureUpdate)) {
+            $Global:OSDCloud.GetFeatureUpdate = Get-FeatureUpdate
         }
-        if ($OSDCloud.GetFeatureUpdate) {
-            $OSDCloud.GetFeatureUpdate = $OSDCloud.GetFeatureUpdate | Select-Object -Property CreationDate,KBNumber,Title,UpdateOS,UpdateBuild,UpdateArch,FileName, @{Name='SizeMB';Expression={[int]($_.Size /1024/1024)}},FileUri,Hash,AdditionalHash
-            $OSDCloud.ImageFileName = $OSDCloud.GetFeatureUpdate.FileName
-            $OSDCloud.ImageFileUrl = $OSDCloud.GetFeatureUpdate.FileUri
-            $OSDCloud.OSImageIndex = 6
+        if ($Global:OSDCloud.GetFeatureUpdate) {
+            $Global:OSDCloud.GetFeatureUpdate = $Global:OSDCloud.GetFeatureUpdate | Select-Object -Property CreationDate,KBNumber,Title,UpdateOS,UpdateBuild,UpdateArch,FileName, @{Name='SizeMB';Expression={[int]($_.Size /1024/1024)}},FileUri,Hash,AdditionalHash
+            $Global:OSDCloud.ImageFileName = $Global:OSDCloud.GetFeatureUpdate.FileName
+            $Global:OSDCloud.ImageFileUrl = $Global:OSDCloud.GetFeatureUpdate.FileUri
+            $Global:OSDCloud.OSImageIndex = 6
         }
         else {
             Write-Warning "Unable to locate a Windows 10 Feature Update"
@@ -371,21 +368,21 @@ function Invoke-OSDCloud {
     #=======================================================================
     #	Download Image File
     #=======================================================================
-    if (!($OSDCloud.ImageFileTarget) -and ($OSDCloud.ImageFileUrl)) {
+    if (!($Global:OSDCloud.ImageFileTarget) -and ($Global:OSDCloud.ImageFileUrl)) {
         Write-Host -ForegroundColor DarkGray "========================================================================="
         Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Download OSDCloud ImageFile"
-        Write-Host -ForegroundColor DarkGray "$($OSDCloud.ImageFileUrl)"
+        Write-Host -ForegroundColor DarkGray "$($Global:OSDCloud.ImageFileUrl)"
         
-        if (Test-WebConnection -Uri $OSDCloud.ImageFileUrl) {
-            if ($OSDCloud.ImageFileName) {
-                $OSDCloud.ImageFileTarget = Save-WebFile -SourceUrl $OSDCloud.ImageFileUrl -DestinationDirectory 'C:\OSDCloud\OS' -DestinationName $OSDCloud.ImageFileName -ErrorAction Stop
+        if (Test-WebConnection -Uri $Global:OSDCloud.ImageFileUrl) {
+            if ($Global:OSDCloud.ImageFileName) {
+                $Global:OSDCloud.ImageFileTarget = Save-WebFile -SourceUrl $Global:OSDCloud.ImageFileUrl -DestinationDirectory 'C:\OSDCloud\OS' -DestinationName $Global:OSDCloud.ImageFileName -ErrorAction Stop
             }
             else {
-                $OSDCloud.ImageFileTarget = Save-WebFile -SourceUrl $OSDCloud.ImageFileUrl -DestinationDirectory 'C:\OSDCloud\OS' -ErrorAction Stop
+                $Global:OSDCloud.ImageFileTarget = Save-WebFile -SourceUrl $Global:OSDCloud.ImageFileUrl -DestinationDirectory 'C:\OSDCloud\OS' -ErrorAction Stop
             }
 
-            if (!(Test-Path $OSDCloud.ImageFileTarget.FullName)) {
-                $OSDCloud.ImageFileTarget = Get-ChildItem -Path 'C:\OSDCloud\OS\*' -Include *.wim,*.esd | Select-Object -First 1
+            if (!(Test-Path $Global:OSDCloud.ImageFileTarget.FullName)) {
+                $Global:OSDCloud.ImageFileTarget = Get-ChildItem -Path 'C:\OSDCloud\OS\*' -Include *.wim,*.esd | Select-Object -First 1
             }
         }
         else {
@@ -394,14 +391,14 @@ function Invoke-OSDCloud {
             Break
         }
 
-        if ($OSDCloud.ImageFileTarget) {
-            Write-Host -ForegroundColor DarkGray "ImageFileTarget: $($OSDCloud.ImageFileTarget.FullName)"
+        if ($Global:OSDCloud.ImageFileTarget) {
+            Write-Host -ForegroundColor DarkGray "ImageFileTarget: $($Global:OSDCloud.ImageFileTarget.FullName)"
         }
     }
     #=======================================================================
     #	FAILED
     #=======================================================================
-    if (!($OSDCloud.ImageFileTarget)) {
+    if (!($Global:OSDCloud.ImageFileTarget)) {
         Write-Warning "Something went wrong trying to get the Windows ImageFile"
         Write-Warning "OSDCloud cannot continue"
         Break
@@ -416,18 +413,18 @@ function Invoke-OSDCloud {
         New-Item 'C:\OSDCloud\Temp' -ItemType Directory -Force | Out-Null
     }
 
-    if (Test-Path $OSDCloud.ImageFileTarget.FullName) {
+    if (Test-Path $Global:OSDCloud.ImageFileTarget.FullName) {
 
-        $ImageCount = (Get-WindowsImage -ImagePath $OSDCloud.ImageFileTarget.FullName).Count
+        $ImageCount = (Get-WindowsImage -ImagePath $Global:OSDCloud.ImageFileTarget.FullName).Count
 
-        if (!($OSDCloud.OSImageIndex)) {
+        if (!($Global:OSDCloud.OSImageIndex)) {
             if ($ImageCount -eq 1) {
                 Write-Warning "No ImageIndex is specified, setting ImageIndex = 1"
-                $OSDCloud.OSImageIndex = 1
+                $Global:OSDCloud.OSImageIndex = 1
             }
             else {
                 Write-Warning "No ImageIndex is specified, setting ImageIndex = 4"
-                $OSDCloud.OSImageIndex = 4
+                $Global:OSDCloud.OSImageIndex = 4
             }
         }
 
@@ -440,13 +437,13 @@ function Invoke-OSDCloud {
             if ($OSEdition -notmatch 'Home') {
                 Write-Warning "This ESD does not contain a Home Single Edition Index"
                 Write-Warning "Adjusting selected Image Index by -1"
-                $OSDCloud.OSImageIndex = ($OSDCloud.OSImageIndex - 1)
+                $Global:OSDCloud.OSImageIndex = ($Global:OSDCloud.OSImageIndex - 1)
             }
         }
 
-        Write-Host -ForegroundColor DarkGray "Expand-WindowsImage -ApplyPath 'C:\' -ImagePath $($OSDCloud.ImageFileTarget.FullName) -Index $($OSDCloud.OSImageIndex) -ScratchDirectory 'C:\OSDCloud\Temp'"
-        if ($OSDCloud.Test -ne $true) {
-            Expand-WindowsImage -ApplyPath 'C:\' -ImagePath $OSDCloud.ImageFileTarget.FullName -Index $OSDCloud.OSImageIndex -ScratchDirectory 'C:\OSDCloud\Temp' -ErrorAction Stop
+        Write-Host -ForegroundColor DarkGray "Expand-WindowsImage -ApplyPath 'C:\' -ImagePath $($Global:OSDCloud.ImageFileTarget.FullName) -Index $($Global:OSDCloud.OSImageIndex) -ScratchDirectory 'C:\OSDCloud\Temp'"
+        if ($Global:OSDCloud.Test -ne $true) {
+            Expand-WindowsImage -ApplyPath 'C:\' -ImagePath $Global:OSDCloud.ImageFileTarget.FullName -Index $Global:OSDCloud.OSImageIndex -ScratchDirectory 'C:\OSDCloud\Temp' -ErrorAction Stop
 
             $SystemDrive = Get-Partition | Where-Object {$_.Type -eq 'System'} | Select-Object -First 1
             if (-NOT (Get-PSDrive -Name S)) {
@@ -481,42 +478,42 @@ function Invoke-OSDCloud {
     #	Get-MyDriverPack
     #=======================================================================
     $SaveMyDriverPack = $null
-    if ($OSDCloud.Product -ne 'None') {
-        if ($OSDCloud.GetMyDriverPack -or $OSDCloud.DriverPackUrl -or $OSDCloud.DriverPackOffline) {
+    if ($Global:OSDCloud.Product -ne 'None') {
+        if ($Global:OSDCloud.GetMyDriverPack -or $Global:OSDCloud.DriverPackUrl -or $Global:OSDCloud.DriverPackOffline) {
             Write-Host -ForegroundColor DarkGray "========================================================================="
             Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Save-MyDriverPack"
             
-            if ($OSDCloud.GetMyDriverPack) {
-                Write-Host -ForegroundColor DarkGray "Name: $($OSDCloud.GetMyDriverPack.Name)"
-                Write-Host -ForegroundColor DarkGray "Product: $($OSDCloud.GetMyDriverPack.Product)"
-                Write-Host -ForegroundColor DarkGray "FileName: $($OSDCloud.GetMyDriverPack.FileName)"
-                Write-Host -ForegroundColor DarkGray "DriverPackUrl: $($OSDCloud.GetMyDriverPack.DriverPackUrl)"
+            if ($Global:OSDCloud.GetMyDriverPack) {
+                Write-Host -ForegroundColor DarkGray "Name: $($Global:OSDCloud.GetMyDriverPack.Name)"
+                Write-Host -ForegroundColor DarkGray "Product: $($Global:OSDCloud.GetMyDriverPack.Product)"
+                Write-Host -ForegroundColor DarkGray "FileName: $($Global:OSDCloud.GetMyDriverPack.FileName)"
+                Write-Host -ForegroundColor DarkGray "DriverPackUrl: $($Global:OSDCloud.GetMyDriverPack.DriverPackUrl)"
 
-                if ($OSDCloud.DriverPackOffline) {
-                    $OSDCloud.DriverPackSource = Find-OSDCloudFile -Name (Split-Path -Path $OSDCloud.DriverPackOffline -Leaf) -Path (Split-Path -Path (Split-Path -Path $OSDCloud.DriverPackOffline.FullName -Parent) -NoQualifier) | Select-Object -First 1
+                if ($Global:OSDCloud.DriverPackOffline) {
+                    $Global:OSDCloud.DriverPackSource = Find-OSDCloudFile -Name (Split-Path -Path $Global:OSDCloud.DriverPackOffline -Leaf) -Path (Split-Path -Path (Split-Path -Path $Global:OSDCloud.DriverPackOffline.FullName -Parent) -NoQualifier) | Select-Object -First 1
                 }
 
-                if ($OSDCloud.DriverPackSource) {
-                    Write-Host -ForegroundColor DarkGray "DriverPackSource.FullName: $($OSDCloud.DriverPackSource.FullName)"
-                    Copy-Item -Path $OSDCloud.DriverPackSource.FullName -Destination 'C:\Drivers' -Force
+                if ($Global:OSDCloud.DriverPackSource) {
+                    Write-Host -ForegroundColor DarkGray "DriverPackSource.FullName: $($Global:OSDCloud.DriverPackSource.FullName)"
+                    Copy-Item -Path $Global:OSDCloud.DriverPackSource.FullName -Destination 'C:\Drivers' -Force
                 }
 
-                if ($OSDCloud.Manufacturer -in ('Dell','HP','Lenovo','Microsoft')) {
-                    $SaveMyDriverPack = Save-MyDriverPack -DownloadPath 'C:\Drivers' -Expand -Manufacturer $OSDCloud.Manufacturer -Product $OSDCloud.Product
+                if ($Global:OSDCloud.Manufacturer -in ('Dell','HP','Lenovo','Microsoft')) {
+                    $SaveMyDriverPack = Save-MyDriverPack -DownloadPath 'C:\Drivers' -Expand -Manufacturer $Global:OSDCloud.Manufacturer -Product $Global:OSDCloud.Product
                 }
                 else {
-                    $SaveMyDriverPack = Save-MyDriverPack -DownloadPath 'C:\Drivers' -Expand -Product $OSDCloud.Product
+                    $SaveMyDriverPack = Save-MyDriverPack -DownloadPath 'C:\Drivers' -Expand -Product $Global:OSDCloud.Product
                 }
             }
-            elseif ($OSDCloud.DriverPackUrl) {
-                $SaveMyDriverPack = Save-WebFile -SourceUrl $OSDCloud.DriverPackUrl -DestinationDirectory 'C:\Drivers'
+            elseif ($Global:OSDCloud.DriverPackUrl) {
+                $SaveMyDriverPack = Save-WebFile -SourceUrl $Global:OSDCloud.DriverPackUrl -DestinationDirectory 'C:\Drivers'
             }
             else {
-                if ($OSDCloud.Manufacturer -in ('Dell','HP','Lenovo','Microsoft')) {
-                    $SaveMyDriverPack = Save-MyDriverPack -DownloadPath 'C:\Drivers' -Expand -Manufacturer $OSDCloud.Manufacturer -Product $OSDCloud.Product
+                if ($Global:OSDCloud.Manufacturer -in ('Dell','HP','Lenovo','Microsoft')) {
+                    $SaveMyDriverPack = Save-MyDriverPack -DownloadPath 'C:\Drivers' -Expand -Manufacturer $Global:OSDCloud.Manufacturer -Product $Global:OSDCloud.Product
                 }
                 else {
-                    $SaveMyDriverPack = Save-MyDriverPack -DownloadPath 'C:\Drivers' -Expand -Product $OSDCloud.Product
+                    $SaveMyDriverPack = Save-MyDriverPack -DownloadPath 'C:\Drivers' -Expand -Product $Global:OSDCloud.Product
                 }
             }
         }
@@ -536,7 +533,7 @@ function Invoke-OSDCloud {
             Write-Host -ForegroundColor DarkGray "This doesn't always work 100% in testing on some systems"
             Write-Host -ForegroundColor Gray "Command: Save-SystemFirmwareUpdate -DestinationDirectory 'C:\Drivers\Firmware'"
     
-            Save-SystemFirmwareUpdate -DestinationDirectory 'C:\Drivers\Firmware' -ErrorAction Ignore
+            Save-SystemFirmwareUpdate -DestinationDirectory 'C:\Drivers\Firmware'
         }
     }
     #=======================================================================
@@ -566,7 +563,7 @@ function Invoke-OSDCloud {
     Write-Host -ForegroundColor DarkGray "Drivers in C:\Drivers are being added to the offline Windows Image"
     Write-Host -ForegroundColor DarkGray "This process can take up to 20 minutes"
     Write-Host -ForegroundColor Gray "Command: Add-WindowsDriver.offlineservicing"
-    if ($OSDCloud.Test -ne $true) {
+    if ($Global:OSDCloud.Test -ne $true) {
         Add-WindowsDriver.offlineservicing
     }
     #=======================================================================
@@ -577,43 +574,43 @@ function Invoke-OSDCloud {
     Write-Host -ForegroundColor DarkGray "C:\Windows\Panther\Invoke-OSDSpecialize.xml is being applied as an Unattend file"
     Write-Host -ForegroundColor DarkGray "This will enable the extraction and installation of HP and Lenovo Drivers if necessary"
     Write-Host -ForegroundColor Gray "Command: Set-OSDCloudUnattendSpecialize"
-    if ($OSDCloud.Test -ne $true) {
+    if ($Global:OSDCloud.Test -ne $true) {
         Set-OSDCloudUnattendSpecialize
     }
     #=======================================================================
     #   AutopilotConfigurationFile.json
     #=======================================================================
-    if ($OSDCloud.AutopilotObject) {
+    if ($Global:OSDCloud.AutopilotJsonObject) {
         Write-Host -ForegroundColor DarkGray "================================================================="
         Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) AutopilotConfigurationFile.json"
         Write-Verbose -Verbose "Setting C:\Windows\Provisioning\Autopilot\AutopilotConfigurationFile.json"
-        $OSDCloud.AutopilotObject | ConvertTo-Json | Out-File -FilePath 'C:\Windows\Provisioning\Autopilot\AutopilotConfigurationFile.json' -Encoding ASCII
+        $Global:OSDCloud.AutopilotJsonObject | ConvertTo-Json | Out-File -FilePath 'C:\Windows\Provisioning\Autopilot\AutopilotConfigurationFile.json' -Encoding ASCII
     }
     #=======================================================================
     #   Stage Office Config
     #=======================================================================
-    if ($OSDCloud.ODTFile) {
+    if ($Global:OSDCloud.ODTFile) {
         Write-Host -ForegroundColor DarkGray "================================================================="
         Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Stage Office Config"
 
-        if (!(Test-Path $OSDCloud.ODTTarget)) {
-            New-Item -Path $OSDCloud.ODTTarget -ItemType Directory -Force | Out-Null
+        if (!(Test-Path $Global:OSDCloud.ODTTarget)) {
+            New-Item -Path $Global:OSDCloud.ODTTarget -ItemType Directory -Force | Out-Null
         }
 
-        if (Test-Path $OSDCloud.ODTFile.FullName) {
-            Copy-Item -Path $OSDCloud.ODTFile.FullName -Destination $OSDCloud.ODTConfigFile -Force
+        if (Test-Path $Global:OSDCloud.ODTFile.FullName) {
+            Copy-Item -Path $Global:OSDCloud.ODTFile.FullName -Destination $Global:OSDCloud.ODTConfigFile -Force
         }
 
-        $OSDCloud.ODTSetupFile = Join-Path $OSDCloud.ODTFile.Directory 'setup.exe'
-        Write-Verbose -Verbose "ODTSetupFile: $($OSDCloud.ODTSetupFile)"
-        if (Test-Path $OSDCloud.ODTSetupFile) {
-            Copy-Item -Path $OSDCloud.ODTSetupFile -Destination $OSDCloud.ODTTarget -Force
+        $Global:OSDCloud.ODTSetupFile = Join-Path $Global:OSDCloud.ODTFile.Directory 'setup.exe'
+        Write-Verbose -Verbose "ODTSetupFile: $($Global:OSDCloud.ODTSetupFile)"
+        if (Test-Path $Global:OSDCloud.ODTSetupFile) {
+            Copy-Item -Path $Global:OSDCloud.ODTSetupFile -Destination $Global:OSDCloud.ODTTarget -Force
         }
 
-        $OSDCloud.ODTSource = Join-Path $OSDCloud.ODTFile.Directory 'Office'
-        Write-Verbose -Verbose "ODTSource: $($OSDCloud.ODTSource)"
-        if (Test-Path $OSDCloud.ODTSource) {
-            Invoke-Exe robocopy "$($OSDCloud.ODTSource)" "$($OSDCloud.ODTTargetData)" *.* /s /ndl /nfl /z /b
+        $Global:OSDCloud.ODTSource = Join-Path $Global:OSDCloud.ODTFile.Directory 'Office'
+        Write-Verbose -Verbose "ODTSource: $($Global:OSDCloud.ODTSource)"
+        if (Test-Path $Global:OSDCloud.ODTSource) {
+            Invoke-Exe robocopy "$($Global:OSDCloud.ODTSource)" "$($Global:OSDCloud.ODTTargetData)" *.* /s /ndl /nfl /z /b
         }
     }
     #=======================================================================
@@ -622,28 +619,32 @@ function Invoke-OSDCloud {
     Write-Host -ForegroundColor DarkGray "================================================================="
     Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Save-OSDCloudOfflineModules"
     Write-Host -ForegroundColor DarkGray "PowerShell Modules and Scripts"
-    if ($OSDCloud.Test -ne $true) {
+    if ($Global:OSDCloud.Test -ne $true) {
         Save-OSDCloudOfflineModules
     }
     #=======================================================================
     #	Deploy-OSDCloud Complete
     #=======================================================================
-    $OSDCloud.TimeEnd = Get-Date
-    $OSDCloud.TimeSpan = New-TimeSpan -Start $OSDCloud.TimeStart -End $OSDCloud.TimeEnd
+    $Global:OSDCloud.TimeEnd = Get-Date
+    $Global:OSDCloud.TimeSpan = New-TimeSpan -Start $Global:OSDCloud.TimeStart -End $Global:OSDCloud.TimeEnd
     Write-Host -ForegroundColor DarkGray    "========================================================================="
     Write-Host -ForegroundColor Yellow      "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) $($MyInvocation.MyCommand.Name) " -NoNewline
-    Write-Host -ForegroundColor Cyan        "Completed in $($OSDCloud.TimeSpan.ToString("mm' minutes 'ss' seconds'"))!"
+    Write-Host -ForegroundColor Cyan        "Completed in $($Global:OSDCloud.TimeSpan.ToString("mm' minutes 'ss' seconds'"))!"
     Write-Host -ForegroundColor DarkGray    "========================================================================="
     #=======================================================================
-    if ($OSDCloud.Screenshot) {
+    if ($Global:OSDCloud.Screenshot) {
         Start-Sleep 5
         Stop-ScreenPNGProcess
-        Write-Host -ForegroundColor Cyan "Screenshots: $($OSDCloud.Screenshot)"
+        Write-Host -ForegroundColor Cyan "Screenshots: $($Global:OSDCloud.Screenshot)"
     }
     #=======================================================================
-    <# Write-Warning "WinPE is restarting in 30 seconds"
-    Write-Warning "Press CTRL + C to cancel"
-    Start-Sleep 30
-    wpeutil reboot #>
+    if ($Global:OSDCloud.Restart) {
+        Write-Warning "WinPE is restarting in 30 seconds"
+        Write-Warning "Press CTRL + C to cancel"
+        Start-Sleep -Seconds 30
+        if ($Global:OSDCloud.Test -ne $true) {
+            Restart-Computer
+        }
+    }
     #=======================================================================
 }

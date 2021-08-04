@@ -108,25 +108,25 @@
     <Grid>
         <Grid.Background>
             <LinearGradientBrush StartPoint = "0,0" EndPoint = "1,1">
-            <GradientStop Color = "White" Offset = "0.0" />
-            <GradientStop Color = "#EDF1FA" Offset = "0.3" />
-            <GradientStop Color = "#EDF3FE" Offset = "0.7" />
-            <GradientStop Color = "#F7FAFC" Offset = "1.0" />
+                <GradientStop Color = "White" Offset = "0.0" />
+                <GradientStop Color = "#EDF1FA" Offset = "0.3" />
+                <GradientStop Color = "#EDF3FE" Offset = "0.7" />
+                <GradientStop Color = "#F7FAFC" Offset = "1.0" />
             </LinearGradientBrush>
         </Grid.Background>
-		<Grid.ColumnDefinitions>
-			<ColumnDefinition Width="20"/>
-			<ColumnDefinition Width="300"/>
-			<ColumnDefinition Width="*"/>
-			<ColumnDefinition Width="20"/>
-		</Grid.ColumnDefinitions>
-		<Grid.RowDefinitions>
-			<RowDefinition Height="10"/>
-			<RowDefinition Height="70"/>
-			<RowDefinition Height="*"/>
-			<RowDefinition Height="60"/>
-			<RowDefinition Height="10"/>
-		</Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="20"/>
+            <ColumnDefinition Width="300"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="20"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="10"/>
+            <RowDefinition Height="70"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="60"/>
+            <RowDefinition Height="10"/>
+        </Grid.RowDefinitions>
 
         <!-- Script Combo -->
         <StackPanel

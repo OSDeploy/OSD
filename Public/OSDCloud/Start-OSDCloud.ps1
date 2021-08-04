@@ -27,6 +27,8 @@ function Start-OSDCloud {
 
         [string]$Product = (Get-MyComputerProduct),
 
+        [switch]$Restart,
+
         [switch]$Screenshot,
 
         [switch]$SkipAutopilot,
@@ -75,6 +77,10 @@ function Start-OSDCloud {
     #=======================================================================
     $Global:StartOSDCloud = $null
     $Global:StartOSDCloud = [ordered]@{
+        AutopilotJsonName = $null
+        AutopilotJsonChildItem = $null
+        AutopilotJsonItem = $null
+        AutopilotJsonObject = $null
         DriverPackUrl = $null
         DriverPackOffline = $null
         DriverPackSource = $null
@@ -82,7 +88,8 @@ function Start-OSDCloud {
         GetDiskFixed = $null
         GetFeatureUpdate = $null
         GetMyDriverPack = $null
-        ImageFileOffline = $null
+        ImageFileItem = $null
+        ImageFileFullName = $null
         ImageFileName = $null
         ImageFileSource = $null
         ImageFileTarget = $null
@@ -96,17 +103,23 @@ function Start-OSDCloud {
         OSEditionId = $null
         OSEditionMenu = $null
         OSEditionNames = $null
+        OSImageIndex = $ImageIndex
         OSLanguage = $OSLanguage
         OSLanguageMenu = $null
         OSLanguageNames = $null
         OSLicense = $OSLicense
-        OSImageIndex = $ImageIndex
         Product = $Product
-        Screenshot = $null
+        Restart = $Restart
+        Screenshot = $Screenshot
         SkipAutopilot = $SkipAutopilot
         SkipODT = $SkipODT
         TimeStart = Get-Date
         ZTI = $ZTI
+    }
+    if ($Global:StartOSDCloudGUI) {
+        foreach ($Key in $Global:StartOSDCloudGUI.Keys) {
+            $Global:StartOSDCloud.$Key = $Global:StartOSDCloudGUI.$Key
+        }
     }
     #=======================================================================
     #	Block
@@ -179,9 +192,15 @@ function Start-OSDCloud {
         Write-Warning "OSDCloud will continue, but there may be issues if this can't be resolved"
     }
     #=======================================================================
+    #	Custom Image
+    #=======================================================================
+    if ($ImageFileItem -and $ImageFileFullName -and $ImageFileName) {
+        #Custom Image set in OSDCloudGUI
+    }
+    #=======================================================================
     #	ParameterSet CustomImage
     #=======================================================================
-    if ($PSCmdlet.ParameterSetName -eq 'CustomImage') {
+    elseif ($PSCmdlet.ParameterSetName -eq 'CustomImage') {
         Write-Host -ForegroundColor DarkGray "========================================================================="
         Write-Host -ForegroundColor Cyan "Custom Windows Image"
 
@@ -190,16 +209,16 @@ function Start-OSDCloud {
             Write-Host -ForegroundColor DarkGray "ImageIndex: $($StartOSDCloud.OSImageIndex)"
         }
         if ($PSBoundParameters.ContainsKey('FindImageFile')) {
-            $StartOSDCloud.ImageFileOffline = Select-OSDCloudFile.wim
+            $StartOSDCloud.ImageFileItem = Select-OSDCloudFile.wim
         
-            if ($StartOSDCloud.ImageFileOffline) {
-                $StartOSDCloud.OSImageIndex = Select-OSDCloudImageIndex -ImagePath $StartOSDCloud.ImageFileOffline.FullName
+            if ($StartOSDCloud.ImageFileItem) {
+                $StartOSDCloud.OSImageIndex = Select-OSDCloudImageIndex -ImagePath $StartOSDCloud.ImageFileItem.FullName
 
-                Write-Host -ForegroundColor DarkGray "ImageFileOffline: $($StartOSDCloud.ImageFileOffline.FullName)"
+                Write-Host -ForegroundColor DarkGray "ImageFileItem: $($StartOSDCloud.ImageFileItem.FullName)"
                 Write-Host -ForegroundColor DarkGray "OSImageIndex: $($StartOSDCloud.OSImageIndex)"
             }
             else {
-                $StartOSDCloud.ImageFileOffline = $null
+                $StartOSDCloud.ImageFileItem = $null
                 $StartOSDCloud.OSImageIndex = 1
                 #$Global:OSDImageParent = $null
                 #$Global:OSDCloudWimFullName = $null
@@ -211,7 +230,7 @@ function Start-OSDCloud {
     #=======================================================================
     #	ParameterSet Default
     #=======================================================================
-    if ($PSCmdlet.ParameterSetName -eq 'Default') {
+    elseif ($PSCmdlet.ParameterSetName -eq 'Default') {
         #=======================================================================
         #	OSBuild
         #=======================================================================
@@ -394,7 +413,10 @@ function Start-OSDCloud {
         Write-Host -ForegroundColor DarkGray "========================================================================="
         Write-Host -ForegroundColor Cyan "Windows 10 OSLanguage " -NoNewline
         
-        if ($PSBoundParameters.ContainsKey('OSLanguage')) {
+        if ($StartOSDCloud.OSLanguage) {
+            Write-Host -ForegroundColor Green $StartOSDCloud.OSLanguage
+        }
+        elseif ($PSBoundParameters.ContainsKey('OSLanguage')) {
             Write-Host -ForegroundColor Green $StartOSDCloud.OSLanguage
         }
         elseif ($ZTI) {
@@ -453,13 +475,13 @@ function Start-OSDCloud {
         #   Determine if the OS is Offline
         #   Need to bail if the file is Online is not valid or not Offline
         #=======================================================================
-        $StartOSDCloud.ImageFileOffline = Find-OSDCloudFile -Name $StartOSDCloud.GetFeatureUpdate.FileName -Path '\OSDCloud\OS\' | Sort-Object FullName | Where-Object {$_.Length -gt 3GB}
-        $StartOSDCloud.ImageFileOffline = $StartOSDCloud.ImageFileOffline | Where-Object {$_.FullName -notlike "C*"} | Where-Object {$_.FullName -notlike "X*"} | Select-Object -First 1
+        $StartOSDCloud.ImageFileItem = Find-OSDCloudFile -Name $StartOSDCloud.GetFeatureUpdate.FileName -Path '\OSDCloud\OS\' | Sort-Object FullName | Where-Object {$_.Length -gt 3GB}
+        $StartOSDCloud.ImageFileItem = $StartOSDCloud.ImageFileItem | Where-Object {$_.FullName -notlike "C*"} | Where-Object {$_.FullName -notlike "X*"} | Select-Object -First 1
 
-        if ($StartOSDCloud.ImageFileOffline) {
+        if ($StartOSDCloud.ImageFileItem) {
             Write-Host -ForegroundColor Green "OK"
             Write-Host -ForegroundColor DarkGray $StartOSDCloud.GetFeatureUpdate.Title
-            Write-Host -ForegroundColor DarkGray $StartOSDCloud.ImageFileOffline.FullName
+            Write-Host -ForegroundColor DarkGray $StartOSDCloud.ImageFileItem.FullName
         }
         elseif (Test-WebConnection -Uri $StartOSDCloud.GetFeatureUpdate.FileUri) {
             Write-Host -ForegroundColor Yellow "Download"
