@@ -2,14 +2,12 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        x:Name="XamlWindow"
         Title="OSD Module"
         Width="840"
         Height="660"
         BorderThickness="0"
         ResizeMode="CanResizeWithGrip"
-        WindowStartupLocation="CenterScreen"
-        RenderTransformOrigin="0.5,0.5">
+        WindowStartupLocation="CenterScreen">
     <Window.Resources>
         <ResourceDictionary>
             <Style TargetType="{x:Type Button}">
@@ -21,6 +19,8 @@
                         Value="{DynamicResource FlatButtonFontSize}" />
                 <Setter Property="Foreground"
                         Value="{DynamicResource FlatButtonForegroundBrush}" />
+                <Setter Property="Padding"
+                        Value="5 5 5 5" />
                 <Setter Property="Template">
                     <Setter.Value>
                         <ControlTemplate TargetType="{x:Type Button}">
@@ -93,31 +93,13 @@
         </ResourceDictionary>
     </Window.Resources>
     <Window.Background>
-        <RadialGradientBrush GradientOrigin="0.2,0.2"
-                             Center="0.4,0.1"
-                             RadiusX="0.7"
-                             RadiusY="0.8">
-            <RadialGradientBrush.RelativeTransform>
-                <TransformGroup>
-                    <ScaleTransform CenterY="0.5"
-                                    CenterX="0.5" />
-                    <SkewTransform CenterY="0.5"
-                                   CenterX="0.5" />
-                    <RotateTransform Angle="-40.601"
-                                     CenterY="0.5"
-                                     CenterX="0.5" />
-                    <TranslateTransform />
-                </TransformGroup>
-            </RadialGradientBrush.RelativeTransform>
-            <GradientStop Color="White" />
-            <GradientStop Color="#FFF9FFFE"
-                          Offset="0.056" />
-            <GradientStop Color="#FFF8FEFF"
-                          Offset="0.776" />
-            <GradientStop Color="#FFF4FAFF"
-                          Offset="0.264" />
+        <RadialGradientBrush GradientOrigin=".3,.3">
             <GradientStop Color="White"
-                          Offset="0.506" />
+                          Offset=".0" />
+            <GradientStop Color="AliceBlue"
+                          Offset=".2" />
+            <GradientStop Color="White"
+                          Offset=".5" />
             <GradientStop Color="AliceBlue"
                           Offset="1" />
         </RadialGradientBrush>
@@ -142,10 +124,9 @@
             <RowDefinition Height="40" />
             <RowDefinition Height="40" />
             <!-- Post Checkboxes -->
-            <RowDefinition x:Name="Checkboxes"
-                           Height="120*" />
+            <RowDefinition Height="120" />
             <!-- AutopilotOOBE OOBEDeploy -->
-            <RowDefinition Height="211*" />
+            <RowDefinition />
             <!-- Bottom -->
             <RowDefinition x:Name="Button_Row"
                            Height="60"
@@ -301,30 +282,27 @@
                     Grid.Row="6"
                     HorizontalAlignment="Left"
                     Margin="0.5,10,0,0"
-                    VerticalAlignment="Center">
+                    VerticalAlignment="Top">
             <CheckBox Name="RestartCheckbox"
-                      BorderBrush="Black"
-                      BorderThickness="2"
-                      FontSize="15"
-                      Foreground="Black"
+                      BorderThickness="3"
+                      FontSize="16"
+                      Foreground="#003E92"
                       IsChecked="True"
                       Margin="0,10,0,5"
-                      VerticalAlignment="Center">Restart: Restart the computer after WinPE phase is complete</CheckBox>
+                      BorderBrush="#FF003E92">Restart: Restart the computer after WinPE phase is complete</CheckBox>
             <CheckBox Name="ScreenshotCheckbox"
-                      BorderBrush="Black"
-                      BorderThickness="2"
-                      FontSize="15"
-                      Foreground="Black"
-                      Margin="0,5,0,5"
-                      VerticalAlignment="Center">Screenshot: Save WinPE screenshots to C:\OSDCloud\ScreenPNG</CheckBox>
-            <CheckBox Name="ZTICheckbox"
-                      BorderBrush="Crimson"
-                      BorderThickness="2"
-                      FontSize="15"
-                      Foreground="Crimson"
-                      Margin="0,5,0,10"
+                      BorderThickness="3"
                       VerticalAlignment="Center"
-                      FontWeight="Bold">ZTI: Don't warn before wiping disks</CheckBox>
+                      FontSize="16"
+                      Foreground="#003E92"
+                      Margin="0,0,0,5"
+                      BorderBrush="#FF003E92">Screenshot: Save WinPE screenshots to C:\OSDCloud\ScreenPNG</CheckBox>
+            <CheckBox Name="ZTICheckbox"
+                      BorderThickness="3"
+                      FontSize="16"
+                      Foreground="Red"
+                      Margin="0,0,0,5"
+                      BorderBrush="Red">ZTI: Don't warn before wiping disks</CheckBox>
         </StackPanel>
         <StackPanel Grid.Column="1"
                     Grid.ColumnSpan="1"
@@ -333,7 +311,7 @@
                     Margin="0.5,0,0,0"
                     VerticalAlignment="Top"
                     Orientation="Vertical">
-            <!-- AutopilotJson -->
+            <!-- Autopilot JSON -->
             <StackPanel HorizontalAlignment="Left"
                         VerticalAlignment="Center"
                         Orientation="Horizontal">
@@ -350,7 +328,7 @@
                           Margin="0,0,0,5"
                           Width="480" />
             </StackPanel>
-            <!-- OOBEDeployJson -->
+            <!-- OOBEDeploy -->
             <StackPanel HorizontalAlignment="Left"
                         VerticalAlignment="Center"
                         Orientation="Horizontal">
@@ -367,7 +345,7 @@
                           Margin="0,0,0,5"
                           Width="480" />
             </StackPanel>
-            <!-- AutopilotOOBEJson -->
+            <!-- AutopilotOOBE -->
             <StackPanel HorizontalAlignment="Left"
                         VerticalAlignment="Center"
                         Orientation="Horizontal">
@@ -385,35 +363,35 @@
                           Width="480" />
             </StackPanel>
         </StackPanel>
-        <!-- Branding -->
+        <!-- Title -->
         <StackPanel Grid.Column="1"
                     Grid.Row="8"
                     HorizontalAlignment="Left"
                     VerticalAlignment="Center"
                     Margin="0.5,7.5,0,7.5"
                     Grid.RowSpan="2">
-            <Label Name="Branding"
-                   Content=""
+            <Label Name="LabelTitle"
+                   Content="OSDeploy"
                    FontSize="26"
                    Foreground="#003E92"
-                   Width="400" />
+                   Width="465" />
         </StackPanel>
-        <!-- GoButton -->
+        <!-- Button -->
         <StackPanel Grid.Column="1"
                     Grid.ColumnSpan="1"
                     Grid.Row="8"
                     HorizontalAlignment="Right"
                     VerticalAlignment="Center"
-                    Margin="0"
-                    Width="140">
+                    Margin="0,9.5,9.5,10.5"
+                    Width="188">
             <Button Name="GoButton"
                     Content="Start-OSDCloud"
                     FontSize="14"
                     Foreground="White"
                     Height="40"
-                    VerticalAlignment="Center"
-                    Padding="0"
-                    Margin="0,0,0,0" />
+                    Width="130"
+                    HorizontalAlignment="Right"
+                    VerticalAlignment="Center" />
         </StackPanel>
     </Grid>
 </Window>

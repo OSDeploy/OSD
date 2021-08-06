@@ -13,16 +13,19 @@ function Hide-PowershellWindow() {
 }
 #Hide-PowershellWindow
 #================================================
-#   Load Assemblies
+#   Get MyScriptDir
 #================================================
 $Global:MyScriptDir = [System.IO.Path]::GetDirectoryName($myInvocation.MyCommand.Definition)
+#================================================
+#   Load Assemblies
+#================================================
 [System.Reflection.Assembly]::LoadWithPartialName("presentationframework") | Out-Null
 [System.Reflection.Assembly]::LoadFrom("$Global:MyScriptDir\assembly\System.Windows.Interactivity.dll") | Out-Null
 [System.Reflection.Assembly]::LoadFrom("$Global:MyScriptDir\assembly\MahApps.Metro.dll") | Out-Null
 #================================================
 #   Set PowerShell Window Title
 #================================================
-$host.ui.RawUI.WindowTitle = ""
+#$host.ui.RawUI.WindowTitle = "Git2PS"
 #================================================
 #   Test-InWinPE
 #================================================
@@ -55,82 +58,82 @@ function LoadForm {
 
     #Create hooks to each named object in the XAML
     $Global:XamlCode.SelectNodes("//*[@Name]") | ForEach-Object {
-        Set-Variable -Name ($_.Name) -Value $XamlWindow.FindName($_.Name) -Scope Global
+        Set-Variable -Name ($_.Name) -Value $Global:XamlWindow.FindName($_.Name) -Scope Global
     }
 }
 #================================================
 #   LoadForm
 #================================================
 #LoadForm
-LoadForm -XamlPath (Join-Path $Global:MyScriptDir 'ScriptPad.xaml')
+LoadForm -XamlPath (Join-Path $Global:MyScriptDir 'Git2PS.xaml')
 #================================================
 #   Initialize
 #================================================
-if ($Global:ScriptPad) {
-    $Global:ScriptPad | ForEach-Object {
-        $ComboBoxScriptPadName.Items.Add($_.Path) | Out-Null
+if ($Global:Git2PS) {
+    $Global:Git2PS | ForEach-Object {
+        $ComboBoxGit2PSName.Items.Add($_.Path) | Out-Null
         New-Variable -Name $_.Guid -Value $($_.ContentRAW) -Force -Scope Global
     }
-    $LabelTitle.Content = "GitHub $($Global:ScriptPad.GitOwner[0]) $($Global:ScriptPad.GitRepo[0])"
+    $LabelTitle.Content = "Git2PS $($Global:Git2PS.GitOwner[0]) $($Global:Git2PS.GitRepo[0])"
 }
 else {
-    $LabelTitle.Content = ''
+    $LabelTitle.Content = 'Git2PS'
 }
-$ComboBoxScriptPadName.Items.Add('ScratchPad.ps1') | Out-Null
-if (-NOT (Get-Variable -Name 'ScratchPad.ps1' -Scope Global -ErrorAction Ignore)) {
-    New-Variable -Name 'ScratchPad.ps1' -Value '#Blank PowerShell Script' -Scope Global -Force -ErrorAction Stop
+$ComboBoxGit2PSName.Items.Add('NewScript.ps1') | Out-Null
+if (-NOT (Get-Variable -Name 'NewScript.ps1' -Scope Global -ErrorAction Ignore)) {
+    New-Variable -Name 'NewScript.ps1' -Value '#Blank PowerShell Script' -Scope Global -Force -ErrorAction Stop
 }
-$LabelScriptPadDescription.Content = 'ScratchPad.ps1 is a blank PowerShell Script that you can edit and Start-Process'
+$LabelGit2PSDescription.Content = 'NewScript.ps1 is a blank PowerShell Script that you can edit and Start-Process'
 Write-Host -ForegroundColor DarkGray "================================================"
 #================================================
-#   Set-ScriptPadContent
+#   Set-Git2PSContent
 #================================================
-function Set-ScriptPadContent {
-    if ($ComboBoxScriptPadName.SelectedValue -eq 'ScratchPad.ps1') {
-        Write-Host -ForegroundColor Cyan 'ScratchPad.ps1'
-        $TextBoxScriptPadContent.Text = (Get-Variable -Name 'ScratchPad.ps1' -Scope Global).Value
-        $LabelScriptPadDescription.Content = 'ScratchPad.ps1 is a blank PowerShell Script that you can edit and Start-Process'
-        $TextBoxScriptPadContent.IsReadOnly = $false
+function Set-Git2PSContent {
+    if ($ComboBoxGit2PSName.SelectedValue -eq 'NewScript.ps1') {
+        Write-Host -ForegroundColor Cyan 'NewScript.ps1'
+        $TextBoxGit2PSContent.Text = (Get-Variable -Name 'NewScript.ps1' -Scope Global).Value
+        $LabelGit2PSDescription.Content = 'NewScript.ps1 is a blank PowerShell Script that you can edit and Start-Process'
+        $TextBoxGit2PSContent.IsReadOnly = $false
         $GoButton.Visibility = "Visible"
     }
     else {
-        $Global:WorkingScript = $Global:ScriptPad | Where-Object {$_.Path -eq $ComboBoxScriptPadName.SelectedValue} | Select-Object -First 1
+        $Global:WorkingScript = $Global:Git2PS | Where-Object {$_.Path -eq $ComboBoxGit2PSName.SelectedValue} | Select-Object -First 1
         Write-Host -ForegroundColor Cyan $Global:WorkingScript.Path
         Write-Host -ForegroundColor DarkGray $Global:WorkingScript.Git
         Write-Host -ForegroundColor DarkGray $Global:WorkingScript.Download
         #Write-Host -ForegroundColor DarkCyan "Get-Variable -Name $($Global:WorkingScript.Guid)"
 
-        $LabelScriptPadDescription.Content = $Global:WorkingScript.Guid
-        $TextBoxScriptPadContent.Text = (Get-Variable -Name $Global:WorkingScript.Guid).Value
+        $LabelGit2PSDescription.Content = $Global:WorkingScript.Guid
+        $TextBoxGit2PSContent.Text = (Get-Variable -Name $Global:WorkingScript.Guid).Value
 
         if ($Global:WorkingScript.Name -match 'README.md') {
-            $TextBoxScriptPadContent.IsReadOnly = $true
+            $TextBoxGit2PSContent.IsReadOnly = $true
             $GoButton.Visibility = "Collapsed"
         }
         else {
-            $TextBoxScriptPadContent.IsReadOnly = $false
+            $TextBoxGit2PSContent.IsReadOnly = $false
             $GoButton.Visibility = "Visible"
         }
     }
     Write-Host -ForegroundColor DarkGray "================================================"
 }
 
-Set-ScriptPadContent
+Set-Git2PSContent
 #================================================
 #   Change Selection
 #================================================
-<# $ComboBoxScriptPadName.add_SelectionChanged({
-    Set-ScriptPadContent
+<# $ComboBoxGit2PSName.add_SelectionChanged({
+    Set-Git2PSContent
 }) #>
-$ComboBoxScriptPadName.add_SelectionChanged({
-    Set-ScriptPadContent
+$ComboBoxGit2PSName.add_SelectionChanged({
+    Set-Git2PSContent
 })
-$TextBoxScriptPadContent.add_TextChanged({
-    if ($ComboBoxScriptPadName.SelectedValue -eq 'ScratchPad.ps1') {
-        Set-Variable -Name 'ScratchPad.ps1' -Value $($TextBoxScriptPadContent.Text) -Scope Global -Force
+$TextBoxGit2PSContent.add_TextChanged({
+    if ($ComboBoxGit2PSName.SelectedValue -eq 'NewScript.ps1') {
+        Set-Variable -Name 'NewScript.ps1' -Value $($TextBoxGit2PSContent.Text) -Scope Global -Force
     }
     else {
-        Set-Variable -Name $($Global:WorkingScript.Guid) -Value $($TextBoxScriptPadContent.Text) -Scope Global -Force
+        Set-Variable -Name $($Global:WorkingScript.Guid) -Value $($TextBoxGit2PSContent.Text) -Scope Global -Force
     }
 })
 #================================================
@@ -138,32 +141,38 @@ $TextBoxScriptPadContent.add_TextChanged({
 #================================================
 $GoButton.add_Click({
     Write-Host -ForegroundColor Cyan "Start-Process"
-    $Global:ScriptPadScriptBlock = [scriptblock]::Create($TextBoxScriptPadContent.Text)
+    $Global:Git2PSScriptBlock = [scriptblock]::Create($TextBoxGit2PSContent.Text)
 
-    if ($Global:ScriptPadScriptBlock) {
-        if ($ComboBoxScriptPadName.SelectedValue -eq 'ScratchPad.ps1') {
-            $ScriptFile = 'ScratchPad.ps1'
+    if ($Global:Git2PSScriptBlock) {
+        if ($ComboBoxGit2PSName.SelectedValue -eq 'NewScript.ps1') {
+            $ScriptFile = 'NewScript.ps1'
         }
         else {
             $ScriptFile = $Global:WorkingScript.Name
         }
-        if (!(Test-Path "$env:Temp\ScriptPad")) {New-Item "$env:Temp\ScriptPad" -ItemType Directory}
+        if (!(Test-Path "$env:Temp\Git2PS")) {New-Item "$env:Temp\Git2PS" -ItemType Directory}
         
-        $ScriptPath = "$env:Temp\ScriptPad\$ScriptFile"
-        Write-Host -ForegroundColor DarkGray "Saving contents of `$Global:ScriptPadScriptBlock` to $ScriptPath"
-        $Global:ScriptPadScriptBlock | Out-File $ScriptPath -Encoding utf8
+        $ScriptPath = "$env:Temp\Git2PS\$ScriptFile"
+        Write-Host -ForegroundColor DarkGray "Saving contents of `$Global:Git2PSScriptBlock` to $ScriptPath"
+        $Global:Git2PSScriptBlock | Out-File $ScriptPath -Encoding utf8
 
-        #$XamlWindow.Close()
-        #Invoke-Command $Global:ScriptPadScriptBlock
-        #Start-Process PowerShell.exe -ArgumentList "-NoExit Invoke-Command -ScriptBlock {$Global:ScriptPadScriptBlock}"
+        #$Global:XamlWindow.Close()
+        #Invoke-Command $Global:Git2PSScriptBlock
+        #Start-Process PowerShell.exe -ArgumentList "-NoExit Invoke-Command -ScriptBlock {$Global:Git2PSScriptBlock}"
 
-        Write-Host -ForegroundColor DarkCyan "Start-Process -WorkingDirectory `"$env:Temp\ScriptPad`" -FilePath PowerShell.exe -ArgumentList '-NoExit',`"-File `"$ScriptFile`"`""
-        Start-Process -WorkingDirectory "$env:Temp\ScriptPad" -FilePath PowerShell.exe -ArgumentList '-NoExit',"-File `"$ScriptFile`""
+        Write-Host -ForegroundColor DarkCyan "Start-Process -WorkingDirectory `"$env:Temp\Git2PS`" -FilePath PowerShell.exe -ArgumentList '-NoExit',`"-File `"$ScriptFile`"`""
+        Start-Process -WorkingDirectory "$env:Temp\Git2PS" -FilePath PowerShell.exe -ArgumentList '-NoExit',"-File `"$ScriptFile`""
     }
     #Write-Host -ForegroundColor DarkGray "================================================"
 })
 #================================================
+#   Customizations
+#================================================
+[string]$ModuleVersion = Get-Module -Name OSD | Sort-Object -Property Version | Select-Object -ExpandProperty Version -Last 1
+$Global:XamlWindow.Title = "$ModuleVersion Start-Git2PS"
+#$Global:XamlWindow | Out-Host
+#================================================
 #   Launch
 #================================================
-$XamlWindow.ShowDialog() | Out-Null
+$Global:XamlWindow.ShowDialog() | Out-Null
 #================================================

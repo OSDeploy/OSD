@@ -9,9 +9,13 @@ function Invoke-OSDCloud {
         AutopilotJsonChildItem = $null
         AutopilotJsonItem = $null
         AutopilotJsonName = $null
+        AutopilotJsonObject = $null
         AutopilotJsonString = $null
         AutopilotJsonUrl = $null
-        AutopilotJsonObject = $null
+        AutopilotOOBEJsonChildItem = $null
+        AutopilotOOBEJsonItem = $null
+        AutopilotOOBEJsonName = $null
+        AutopilotOOBEJsonObject = $null
         BuildName = 'OSDCloud'
         DriverPackUrl = $null
         DriverPackOffline = $null
@@ -20,6 +24,7 @@ function Invoke-OSDCloud {
         GetDiskFixed = $null
         GetFeatureUpdate = $null
         GetMyDriverPack = $null
+        ImageFileFullName = $null
         ImageFileItem = $null
         ImageFileName = $null
         ImageFileSource = $null
@@ -27,6 +32,10 @@ function Invoke-OSDCloud {
         ImageFileUrl = $null
         IsOnBattery = Get-OSDGather -Property IsOnBattery
         Manufacturer = Get-MyComputerManufacturer -Brief
+        OOBEDeployJsonChildItem = $null
+        OOBEDeployJsonItem = $null
+        OOBEDeployJsonName = $null
+        OOBEDeployJsonObject = $null
         ODTConfigFile = 'C:\OSDCloud\ODT\Config.xml'
         ODTFile = $null
         ODTFiles = $null
@@ -34,23 +43,25 @@ function Invoke-OSDCloud {
         ODTSource = $null
         ODTTarget = 'C:\OSDCloud\ODT'
         ODTTargetData = 'C:\OSDCloud\ODT\Office'
-        OSBuild = $OSBuild
+        OSBuild = $null
         OSBuildMenu = $null
         OSBuildNames = $null
-        OSEdition = $OSEdition
+        OSEdition = $null
         OSEditionId = $null
         OSEditionMenu = $null
         OSEditionNames = $null
-        OSLanguage = $OSLanguage
+        OSImageIndex = 1
+        OSLanguage = $null
         OSLanguageMenu = $null
         OSLanguageNames = $null
-        OSLicense = $OSLicense
-        OSImageIndex = 1
+        OSLicense = $null
         Product = Get-MyComputerProduct
-        Restart = $Restart
+        Restart = $null
         Screenshot = $null
         SkipAutopilot = [bool]$false
+        SkipAutopilotOOBE = [bool]$false
         SkipODT = [bool]$false
+        SkipOOBEDeploy = [bool]$false
         Test = [bool]$false
         TimeEnd = $null
         TimeSpan = $null
@@ -58,7 +69,7 @@ function Invoke-OSDCloud {
         Transcript = $null
         USBPartitions = $null
         Version = [Version](Get-Module -Name OSD -ListAvailable | Sort-Object Version -Descending | Select-Object -First 1).Version
-        VersionMin = [Version]'21.4.23.1'
+        VersionMin = [Version]'21.8.3.2'
         ZTI = [bool]$false
     }
     #=======================================================================
@@ -74,6 +85,7 @@ function Invoke-OSDCloud {
             $Global:OSDCloud.$Key = $Global:MyOSDCloud.$Key
         }
     }
+    #$Global:OSDCloud | Out-Host
     #=======================================================================
     #   VERSIONING
     #   Scripts/Test-OSDModule.ps1
@@ -583,8 +595,34 @@ function Invoke-OSDCloud {
     if ($Global:OSDCloud.AutopilotJsonObject) {
         Write-Host -ForegroundColor DarkGray "================================================================="
         Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) AutopilotConfigurationFile.json"
-        Write-Verbose -Verbose "Setting C:\Windows\Provisioning\Autopilot\AutopilotConfigurationFile.json"
-        $Global:OSDCloud.AutopilotJsonObject | ConvertTo-Json | Out-File -FilePath 'C:\Windows\Provisioning\Autopilot\AutopilotConfigurationFile.json' -Encoding ASCII
+        Write-Host -ForegroundColor DarkGray 'C:\Windows\Provisioning\Autopilot\AutopilotConfigurationFile.json'
+        $Global:OSDCloud.AutopilotJsonObject | ConvertTo-Json | Out-File -FilePath 'C:\Windows\Provisioning\Autopilot\AutopilotConfigurationFile.json' -Encoding ascii -Force
+    }
+    #=======================================================================
+    #   OSDeploy.OOBEDeploy.json
+    #=======================================================================
+    if ($Global:OSDCloud.OOBEDeployJsonObject) {
+        Write-Host -ForegroundColor DarkGray "================================================================="
+        Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) OSDeploy.OOBEDeploy.json"
+        Write-Host -ForegroundColor DarkGray 'C:\ProgramData\OSDeploy\OSDeploy.OOBEDeploy.json'
+
+        If (!(Test-Path "C:\ProgramData\OSDeploy")) {
+            New-Item "C:\ProgramData\OSDeploy" -ItemType Directory -Force | Out-Null
+        }
+        $Global:OSDCloud.OOBEDeployJsonObject | ConvertTo-Json | Out-File -FilePath 'C:\ProgramData\OSDeploy\OSDeploy.OOBEDeploy.json' -Encoding ascii -Force
+    }
+    #=======================================================================
+    #   OSDeploy.AutopilotOOBE.json
+    #=======================================================================
+    if ($Global:OSDCloud.AutopilotOOBEJsonObject) {
+        Write-Host -ForegroundColor DarkGray "================================================================="
+        Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) OSDeploy.AutopilotOOBE.json"
+        Write-Host -ForegroundColor DarkGray 'C:\ProgramData\OSDeploy\OSDeploy.AutopilotOOBE.json'
+
+        If (!(Test-Path "C:\ProgramData\OSDeploy")) {
+            New-Item "C:\ProgramData\OSDeploy" -ItemType Directory -Force | Out-Null
+        }
+        $Global:OSDCloud.AutopilotOOBEJsonObject | ConvertTo-Json | Out-File -FilePath 'C:\ProgramData\OSDeploy\OSDeploy.AutopilotOOBE.json' -Encoding ascii -Force
     }
     #=======================================================================
     #   Stage Office Config
@@ -627,6 +665,8 @@ function Invoke-OSDCloud {
     #=======================================================================
     $Global:OSDCloud.TimeEnd = Get-Date
     $Global:OSDCloud.TimeSpan = New-TimeSpan -Start $Global:OSDCloud.TimeStart -End $Global:OSDCloud.TimeEnd
+    
+    $Global:OSDCloud | ConvertTo-Json | Out-File -FilePath 'C:\OSDCloud\OSDCloud.json' -Encoding ascii -Force
     Write-Host -ForegroundColor DarkGray    "========================================================================="
     Write-Host -ForegroundColor Yellow      "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) $($MyInvocation.MyCommand.Name) " -NoNewline
     Write-Host -ForegroundColor Cyan        "Completed in $($Global:OSDCloud.TimeSpan.ToString("mm' minutes 'ss' seconds'"))!"

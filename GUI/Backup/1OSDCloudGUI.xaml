@@ -333,7 +333,7 @@
                     Margin="0.5,0,0,0"
                     VerticalAlignment="Top"
                     Orientation="Vertical">
-            <!-- AutopilotJson -->
+            <!-- Autopilot JSON -->
             <StackPanel HorizontalAlignment="Left"
                         VerticalAlignment="Center"
                         Orientation="Horizontal">
@@ -350,7 +350,7 @@
                           Margin="0,0,0,5"
                           Width="480" />
             </StackPanel>
-            <!-- OOBEDeployJson -->
+            <!-- OOBEDeploy -->
             <StackPanel HorizontalAlignment="Left"
                         VerticalAlignment="Center"
                         Orientation="Horizontal">
@@ -367,7 +367,7 @@
                           Margin="0,0,0,5"
                           Width="480" />
             </StackPanel>
-            <!-- AutopilotOOBEJson -->
+            <!-- AutopilotOOBE -->
             <StackPanel HorizontalAlignment="Left"
                         VerticalAlignment="Center"
                         Orientation="Horizontal">
@@ -385,20 +385,20 @@
                           Width="480" />
             </StackPanel>
         </StackPanel>
-        <!-- Branding -->
+        <!-- Title -->
         <StackPanel Grid.Column="1"
                     Grid.Row="8"
                     HorizontalAlignment="Left"
                     VerticalAlignment="Center"
                     Margin="0.5,7.5,0,7.5"
                     Grid.RowSpan="2">
-            <Label Name="Branding"
+            <Label x:Name="Branding"
                    Content=""
                    FontSize="26"
                    Foreground="#003E92"
                    Width="400" />
         </StackPanel>
-        <!-- GoButton -->
+        <!-- Button -->
         <StackPanel Grid.Column="1"
                     Grid.ColumnSpan="1"
                     Grid.Row="8"
@@ -406,7 +406,7 @@
                     VerticalAlignment="Center"
                     Margin="0"
                     Width="140">
-            <Button Name="GoButton"
+            <Button x:Name="GoButton"
                     Content="Start-OSDCloud"
                     FontSize="14"
                     Foreground="White"

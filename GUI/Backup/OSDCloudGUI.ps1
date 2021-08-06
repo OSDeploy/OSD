@@ -149,11 +149,11 @@ else {
 #   OOBEDeployComboBox
 #================================================
 $OOBEDeployComboBox.IsEnabled = $false
-$OOBEDeployJsonChildItem = Find-OSDCloudFile -Name "*.json" -Path '\OSDCloud\Config\OOBEDeploy\' | Sort-Object FullName
-$OOBEDeployJsonChildItem = $OOBEDeployJsonChildItem | Where-Object {$_.FullName -notlike "C*"}
-if ($OOBEDeployJsonChildItem) {
+$OOBEDeployFiles = Find-OSDCloudFile -Name "*.json" -Path '\OSDCloud\Config\OOBEDeploy\' | Sort-Object FullName
+$OOBEDeployFiles = $OOBEDeployFiles | Where-Object {$_.FullName -notlike "C*"}
+if ($OOBEDeployFiles) {
     $OOBEDeployComboBox.IsEnabled = $true
-    $OOBEDeployJsonChildItem | ForEach-Object {
+    $OOBEDeployFiles | ForEach-Object {
         $OOBEDeployComboBox.Items.Add($_) | Out-Null
     }
     $OOBEDeployComboBox.SelectedIndex = 0
@@ -166,11 +166,11 @@ else {
 #   AutopilotOOBEComboBox
 #================================================
 $AutopilotOOBEComboBox.IsEnabled = $false
-$AutopilotOOBEJsonChildItem = Find-OSDCloudFile -Name "*.json" -Path '\OSDCloud\Config\AutopilotOOBE\' | Sort-Object FullName
-$AutopilotOOBEJsonChildItem = $AutopilotOOBEJsonChildItem | Where-Object {$_.FullName -notlike "C*"}
-if ($AutopilotOOBEJsonChildItem) {
+$AutopilotOOBEFiles = Find-OSDCloudFile -Name "*.json" -Path '\OSDCloud\Config\AutopilotOOBE\' | Sort-Object FullName
+$AutopilotOOBEFiles = $AutopilotOOBEFiles | Where-Object {$_.FullName -notlike "C*"}
+if ($AutopilotOOBEFiles) {
     $AutopilotOOBEComboBox.IsEnabled = $true
-    $AutopilotOOBEJsonChildItem | ForEach-Object {
+    $AutopilotOOBEFiles | ForEach-Object {
         $AutopilotOOBEComboBox.Items.Add($_) | Out-Null
     }
     $AutopilotOOBEComboBox.SelectedIndex = 0
@@ -295,7 +295,7 @@ $CustomImageComboBox.add_SelectionChanged({
 #   GoButton
 #================================================
 $GoButton.add_Click({
-    $Global:XamlWindow.Close()
+    $XamlWindow.Close()
     Show-PowershellWindow
     #================================================
     #   Variables
@@ -306,7 +306,7 @@ $GoButton.add_Click({
     $OSLanguage = $OSLanguageComboBox.SelectedItem
     $OSLicense = $OSLicenseComboBox.SelectedItem
     #================================================
-    #   AutopilotJson
+    #   Autopilot
     #================================================
     $AutopilotJsonName = $AutopilotComboBox.SelectedValue
     if ($AutopilotJsonName) {
@@ -324,46 +324,6 @@ $GoButton.add_Click({
     else {
         $SkipAutopilot = $true
         $AutopilotJsonObject = $null
-    }
-    #================================================
-    #   OOBEDeployJson
-    #================================================
-    $OOBEDeployJsonName = $OOBEDeployComboBox.SelectedValue
-    if ($OOBEDeployJsonName) {
-        $OOBEDeployJsonItem = $OOBEDeployJsonChildItem | Where-Object {$_.FullName -eq "$OOBEDeployJsonName"}
-    }
-    else {
-        $SkipOOBEDeploy = $true
-        $OOBEDeployJsonName = $null
-        $OOBEDeployJsonItem = $null
-    }
-    if ($OOBEDeployJsonItem) {
-        $OOBEDeployJsonObject = Get-Content -Raw $OOBEDeployJsonItem.FullName | ConvertFrom-Json
-        $SkipOOBEDeploy = $false
-    }
-    else {
-        $SkipOOBEDeploy = $true
-        $OOBEDeployJsonObject = $null
-    }
-    #================================================
-    #   AutopilotOOBEJson
-    #================================================
-    $AutopilotOOBEJsonName = $AutopilotOOBEComboBox.SelectedValue
-    if ($AutopilotOOBEJsonName) {
-        $AutopilotOOBEJsonItem = $AutopilotOOBEJsonChildItem | Where-Object {$_.FullName -eq "$AutopilotOOBEJsonName"}
-    }
-    else {
-        $SkipAutopilotOOBE = $true
-        $AutopilotOOBEJsonName = $null
-        $AutopilotOOBEJsonItem = $null
-    }
-    if ($AutopilotOOBEJsonItem) {
-        $AutopilotOOBEJsonObject = Get-Content -Raw $AutopilotOOBEJsonItem.FullName | ConvertFrom-Json
-        $SkipAutopilotOOBE = $false
-    }
-    else {
-        $SkipAutopilotOOBE = $true
-        $AutopilotOOBEJsonObject = $null
     }
     #================================================
     #   ImageFile
@@ -387,36 +347,28 @@ $GoButton.add_Click({
     #================================================
     $Global:StartOSDCloudGUI = $null
     $Global:StartOSDCloudGUI = [ordered]@{
-        AutopilotJsonChildItem      = $AutopilotJsonChildItem
-        AutopilotJsonItem           = $AutopilotJsonItem
-        AutopilotJsonName           = $AutopilotJsonName
-        AutopilotJsonObject         = $AutopilotJsonObject
-        AutopilotOOBEJsonChildItem  = $AutopilotOOBEJsonChildItem
-        AutopilotOOBEJsonItem       = $AutopilotOOBEJsonItem
-        AutopilotOOBEJsonName       = $AutopilotOOBEJsonName
-        AutopilotOOBEJsonObject     = $AutopilotOOBEJsonObject
-        ImageFileFullName           = $ImageFileFullName
-        ImageFileItem               = $ImageFileItem
-        ImageFileName               = $ImageFileName
-        Manufacturer                = $ManufacturerTextBox.Text
-        OOBEDeployJsonChildItem     = $OOBEDeployJsonChildItem
-        OOBEDeployJsonItem          = $OOBEDeployJsonItem
-        OOBEDeployJsonName          = $OOBEDeployJsonName
-        OOBEDeployJsonObject        = $OOBEDeployJsonObject
-        OSBuild                     = $OSBuild
-        OSEdition                   = $OSEdition
-        OSImageIndex                = $OSImageIndex
-        OSLanguage                  = $OSLanguage
-        OSLicense                   = $OSLicense
-        Product                     = $ProductTextBox.Text
-        Restart                     = $RestartCheckbox.IsChecked
-        SkipAutopilot               = $SkipAutopilot
-        SkipAutopilotOOBE           = $SkipAutopilotOOBE
-        SkipODT                     = $true
-        SkipOOBEDeploy              = $SkipOOBEDeploy
-        ZTI                         = $ZTICheckbox.IsChecked
+        AutopilotJsonChildItem  = $AutopilotJsonChildItem
+        AutopilotJsonItem       = $AutopilotJsonItem
+        AutopilotJsonName       = $AutopilotJsonName
+        AutopilotJsonObject     = $AutopilotJsonObject
+        ImageFileItem           = $ImageFileItem
+        ImageFileFullName       = $ImageFileFullName
+        ImageFileName           = $ImageFileName
+        OSImageIndex            = $OSImageIndex
+        OSBuild                 = $OSBuild
+        OSEdition               = $OSEdition
+        OSLanguage              = $OSLanguage
+        OSLicense               = $OSLicense
+        Manufacturer            = $ManufacturerTextBox.Text
+        Product                 = $ProductTextBox.Text
+        Restart                 = $RestartCheckbox.IsChecked
+        Screenshot              = $ScreenshotCheckbox.IsChecked
+        SkipAutopilot           = $SkipAutopilot
+        SkipODT                 = $true
+        ZTI                     = $ZTICheckbox.IsChecked
     }
     #$Global:StartOSDCloudGUI | Out-Host
+
     if ($ScreenshotCheckbox.IsChecked) {
         $Params = @{
             Screenshot = $true
@@ -428,13 +380,7 @@ $GoButton.add_Click({
     }
 })
 #================================================
-#   Customizations
-#================================================
-[string]$ModuleVersion = Get-Module -Name OSD | Sort-Object -Property Version | Select-Object -ExpandProperty Version -Last 1
-$Global:XamlWindow.Title = "OSD Module $ModuleVersion Start-OSDCloudGUI"
-#$Global:XamlWindow | Out-Host
-#================================================
 #   Launch
 #================================================
-$Global:XamlWindow.ShowDialog() | Out-Null
+$XamlWindow.ShowDialog() | Out-Null
 #================================================

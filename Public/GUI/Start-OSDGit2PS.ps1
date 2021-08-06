@@ -1,4 +1,4 @@
-function Start-ScriptPad {
+function Start-Git2PS {
     [CmdletBinding(DefaultParameterSetName = 'Standalone')]
     param (
         [Parameter(ParameterSetName = 'GitHub', Mandatory = $true, Position = 0)]
@@ -37,7 +37,7 @@ function Start-ScriptPad {
             $GitHubApiRateLimit = Invoke-RestMethod -UseBasicParsing -Uri 'https://api.github.com/rate_limit' -Method Get
             Write-Host -ForegroundColor DarkGray "You have used $($GitHubApiRateLimit.rate.used) of your $($GitHubApiRateLimit.rate.limit) GitHub API Requests"
             Write-Host -ForegroundColor DarkGray "You can create an OAuth Token at https://github.com/settings/tokens"
-            Write-Host -ForegroundColor DarkGray 'Use the OAuthToken parameter to enable ScriptPad Child-Item support'
+            Write-Host -ForegroundColor DarkGray 'Use the OAuthToken parameter to enable Git2PS Child-Item support'
             $Params = @{
                 Method = 'GET'
                 Uri = $Uri
@@ -91,18 +91,18 @@ function Start-ScriptPad {
             New-Object -TypeName PSObject -Property $ObjectProperties
         }
     
-        $Global:ScriptPad = $Results
+        $Global:Git2PS = $Results
     }
     else {
-        $Global:ScriptPad = $null
+        $Global:Git2PS = $null
     }
     #=======================================================================
-    #   ScriptPad.ps1
+    #   Git2PS.ps1
     #=======================================================================
-    & "$($MyInvocation.MyCommand.Module.ModuleBase)\GUI\ScriptPad.ps1"
+    & "$($MyInvocation.MyCommand.Module.ModuleBase)\GUI\Git2PS.ps1"
     #=======================================================================
 }
-function Start-OSDCloudScriptPad {
+function Start-OSDCloudGit2PS {
     [CmdletBinding()]
     param (
         [Parameter(ParameterSetName = 'GitHub')]
@@ -112,20 +112,20 @@ function Start-OSDCloudScriptPad {
 
 
     if ($OAuthToken) {
-        $ScriptPadParams = @{
+        $Git2PSParams = @{
             GitOwner = 'OSDeploy'
             GitRepo = 'OSDCloud'
-            GitPath = 'ScriptPad'
+            GitPath = 'Git2PS'
             OAuthToken = $OAuthToken
         }
     }
     else {
-        $ScriptPadParams = @{
+        $Git2PSParams = @{
             GitOwner = 'OSDeploy'
             GitRepo = 'OSDCloud'
             GitPath = 'ScriptPad'
         }
     }
 
-    Start-ScriptPad @ScriptPadParams
+    Start-Git2PS @Git2PSParams
 }
