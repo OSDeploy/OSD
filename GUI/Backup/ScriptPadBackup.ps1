@@ -62,75 +62,75 @@ function LoadForm {
 #   LoadForm
 #================================================
 #LoadForm
-LoadForm -XamlPath (Join-Path $Global:MyScriptDir 'Git2PS.xaml')
+LoadForm -XamlPath (Join-Path $Global:MyScriptDir 'ScriptRepo.xaml')
 #================================================
 #   Initialize
 #================================================
-if ($Global:Git2PS) {
-    $Global:Git2PS | ForEach-Object {
-        $ComboBoxGit2PSName.Items.Add($_.Path) | Out-Null
+if ($Global:ScriptRepo) {
+    $Global:ScriptRepo | ForEach-Object {
+        $ComboBoxScriptRepoName.Items.Add($_.Path) | Out-Null
         New-Variable -Name $_.Guid -Value $($_.ContentRAW) -Force -Scope Global
     }
-    $LabelTitle.Content = "GitHub $($Global:Git2PS.GitOwner[0]) $($Global:Git2PS.GitRepo[0])"
+    $LabelTitle.Content = "GitHub $($Global:ScriptRepo.Owner[0]) $($Global:ScriptRepo.Repo[0])"
 }
 else {
     $LabelTitle.Content = ''
 }
-$ComboBoxGit2PSName.Items.Add('NewScript.ps1') | Out-Null
+$ComboBoxScriptRepoName.Items.Add('NewScript.ps1') | Out-Null
 if (-NOT (Get-Variable -Name 'NewScript.ps1' -Scope Global -ErrorAction Ignore)) {
     New-Variable -Name 'NewScript.ps1' -Value '#Blank PowerShell Script' -Scope Global -Force -ErrorAction Stop
 }
-$LabelGit2PSDescription.Content = 'NewScript.ps1 is a blank PowerShell Script that you can edit and Start-Process'
+$LabelScriptRepoDescription.Content = 'NewScript.ps1 is a blank PowerShell Script that you can edit and Start-Process'
 Write-Host -ForegroundColor DarkGray "================================================"
 #================================================
-#   Set-Git2PSContent
+#   Set-ScriptRepoContent
 #================================================
-function Set-Git2PSContent {
-    if ($ComboBoxGit2PSName.SelectedValue -eq 'NewScript.ps1') {
+function Set-ScriptRepoContent {
+    if ($ComboBoxScriptRepoName.SelectedValue -eq 'NewScript.ps1') {
         Write-Host -ForegroundColor Cyan 'NewScript.ps1'
-        $TextBoxGit2PSContent.Text = (Get-Variable -Name 'NewScript.ps1' -Scope Global).Value
-        $LabelGit2PSDescription.Content = 'NewScript.ps1 is a blank PowerShell Script that you can edit and Start-Process'
-        $TextBoxGit2PSContent.IsReadOnly = $false
+        $TextBoxScriptRepoContent.Text = (Get-Variable -Name 'NewScript.ps1' -Scope Global).Value
+        $LabelScriptRepoDescription.Content = 'NewScript.ps1 is a blank PowerShell Script that you can edit and Start-Process'
+        $TextBoxScriptRepoContent.IsReadOnly = $false
         $GoButton.Visibility = "Visible"
     }
     else {
-        $Global:WorkingScript = $Global:Git2PS | Where-Object {$_.Path -eq $ComboBoxGit2PSName.SelectedValue} | Select-Object -First 1
+        $Global:WorkingScript = $Global:ScriptRepo | Where-Object {$_.Path -eq $ComboBoxScriptRepoName.SelectedValue} | Select-Object -First 1
         Write-Host -ForegroundColor Cyan $Global:WorkingScript.Path
         Write-Host -ForegroundColor DarkGray $Global:WorkingScript.Git
         Write-Host -ForegroundColor DarkGray $Global:WorkingScript.Download
         #Write-Host -ForegroundColor DarkCyan "Get-Variable -Name $($Global:WorkingScript.Guid)"
 
-        $LabelGit2PSDescription.Content = $Global:WorkingScript.Guid
-        $TextBoxGit2PSContent.Text = (Get-Variable -Name $Global:WorkingScript.Guid).Value
+        $LabelScriptRepoDescription.Content = $Global:WorkingScript.Guid
+        $TextBoxScriptRepoContent.Text = (Get-Variable -Name $Global:WorkingScript.Guid).Value
 
         if ($Global:WorkingScript.Name -match 'README.md') {
-            $TextBoxGit2PSContent.IsReadOnly = $true
+            $TextBoxScriptRepoContent.IsReadOnly = $true
             $GoButton.Visibility = "Collapsed"
         }
         else {
-            $TextBoxGit2PSContent.IsReadOnly = $false
+            $TextBoxScriptRepoContent.IsReadOnly = $false
             $GoButton.Visibility = "Visible"
         }
     }
     Write-Host -ForegroundColor DarkGray "================================================"
 }
 
-Set-Git2PSContent
+Set-ScriptRepoContent
 #================================================
 #   Change Selection
 #================================================
-<# $ComboBoxGit2PSName.add_SelectionChanged({
-    Set-Git2PSContent
+<# $ComboBoxScriptRepoName.add_SelectionChanged({
+    Set-ScriptRepoContent
 }) #>
-$ComboBoxGit2PSName.add_SelectionChanged({
-    Set-Git2PSContent
+$ComboBoxScriptRepoName.add_SelectionChanged({
+    Set-ScriptRepoContent
 })
-$TextBoxGit2PSContent.add_TextChanged({
-    if ($ComboBoxGit2PSName.SelectedValue -eq 'NewScript.ps1') {
-        Set-Variable -Name 'NewScript.ps1' -Value $($TextBoxGit2PSContent.Text) -Scope Global -Force
+$TextBoxScriptRepoContent.add_TextChanged({
+    if ($ComboBoxScriptRepoName.SelectedValue -eq 'NewScript.ps1') {
+        Set-Variable -Name 'NewScript.ps1' -Value $($TextBoxScriptRepoContent.Text) -Scope Global -Force
     }
     else {
-        Set-Variable -Name $($Global:WorkingScript.Guid) -Value $($TextBoxGit2PSContent.Text) -Scope Global -Force
+        Set-Variable -Name $($Global:WorkingScript.Guid) -Value $($TextBoxScriptRepoContent.Text) -Scope Global -Force
     }
 })
 #================================================
@@ -138,27 +138,27 @@ $TextBoxGit2PSContent.add_TextChanged({
 #================================================
 $GoButton.add_Click({
     Write-Host -ForegroundColor Cyan "Start-Process"
-    $Global:Git2PSScriptBlock = [scriptblock]::Create($TextBoxGit2PSContent.Text)
+    $Global:ScriptRepoScriptBlock = [scriptblock]::Create($TextBoxScriptRepoContent.Text)
 
-    if ($Global:Git2PSScriptBlock) {
-        if ($ComboBoxGit2PSName.SelectedValue -eq 'NewScript.ps1') {
+    if ($Global:ScriptRepoScriptBlock) {
+        if ($ComboBoxScriptRepoName.SelectedValue -eq 'NewScript.ps1') {
             $ScriptFile = 'NewScript.ps1'
         }
         else {
             $ScriptFile = $Global:WorkingScript.Name
         }
-        if (!(Test-Path "$env:Temp\Git2PS")) {New-Item "$env:Temp\Git2PS" -ItemType Directory}
+        if (!(Test-Path "$env:Temp\ScriptRepo")) {New-Item "$env:Temp\ScriptRepo" -ItemType Directory}
         
-        $ScriptPath = "$env:Temp\Git2PS\$ScriptFile"
-        Write-Host -ForegroundColor DarkGray "Saving contents of `$Global:Git2PSScriptBlock` to $ScriptPath"
-        $Global:Git2PSScriptBlock | Out-File $ScriptPath -Encoding utf8
+        $ScriptPath = "$env:Temp\ScriptRepo\$ScriptFile"
+        Write-Host -ForegroundColor DarkGray "Saving contents of `$Global:ScriptRepoScriptBlock` to $ScriptPath"
+        $Global:ScriptRepoScriptBlock | Out-File $ScriptPath -Encoding utf8
 
         #$XamlWindow.Close()
-        #Invoke-Command $Global:Git2PSScriptBlock
-        #Start-Process PowerShell.exe -ArgumentList "-NoExit Invoke-Command -ScriptBlock {$Global:Git2PSScriptBlock}"
+        #Invoke-Command $Global:ScriptRepoScriptBlock
+        #Start-Process PowerShell.exe -ArgumentList "-NoExit Invoke-Command -ScriptBlock {$Global:ScriptRepoScriptBlock}"
 
-        Write-Host -ForegroundColor DarkCyan "Start-Process -WorkingDirectory `"$env:Temp\Git2PS`" -FilePath PowerShell.exe -ArgumentList '-NoExit',`"-File `"$ScriptFile`"`""
-        Start-Process -WorkingDirectory "$env:Temp\Git2PS" -FilePath PowerShell.exe -ArgumentList '-NoExit',"-File `"$ScriptFile`""
+        Write-Host -ForegroundColor DarkCyan "Start-Process -WorkingDirectory `"$env:Temp\ScriptRepo`" -FilePath PowerShell.exe -ArgumentList '-NoExit',`"-File `"$ScriptFile`"`""
+        Start-Process -WorkingDirectory "$env:Temp\ScriptRepo" -FilePath PowerShell.exe -ArgumentList '-NoExit',"-File `"$ScriptFile`""
     }
     #Write-Host -ForegroundColor DarkGray "================================================"
 })

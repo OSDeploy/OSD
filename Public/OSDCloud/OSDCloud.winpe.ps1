@@ -38,6 +38,7 @@ function Edit-OSDCloud.winpe {
         [Alias('Modules')]
         [string[]]$PSModuleInstall,
 
+        [string]$Startnet,
         [string]$WebPSScript,
         [string]$Wallpaper
     )
@@ -220,39 +221,52 @@ function Edit-OSDCloud.winpe {
     #=======================================================================
     #   Startnet
     #=======================================================================
-    Write-Verbose "Startnet.cmd: wpeinit"
-$Startnet = @'
+    Write-Host -ForegroundColor DarkGray "Startnet.cmd: wpeinit"
+$StartnetCMD = @'
 wpeinit
 start PowerShell -Nol -W Mi
 '@
-    $Startnet | Out-File -FilePath "$MountPath\Windows\System32\Startnet.cmd" -Force -Encoding ascii
+    $StartnetCMD | Out-File -FilePath "$MountPath\Windows\System32\Startnet.cmd" -Force -Encoding ascii
 
     if (Test-Path "$MountPath\Windows\WirelessConnect.exe") {
         #Starting wlanSvc has moved to Start-WinREWiFi
-        #Write-Verbose "Startnet.cmd: net start wlansvc"
+        #Write-Host -ForegroundColor DarkGray "Startnet.cmd: net start wlansvc"
         #Add-Content -Path "$MountPath\Windows\System32\Startnet.cmd" -Value 'net start wlansvc' -Force
 
-        Write-Verbose "Startnet.cmd: start PowerShell -NoL -C Start-WinREWiFi"
-        Add-Content -Path "$MountPath\Windows\System32\Startnet.cmd" -Value "start /wait PowerShell -NoL -C Start-WinREWiFi" -Force
+        Write-Host -ForegroundColor DarkGray "Startnet.cmd: start PowerShell -NoL -C Start-WinREWiFi"
+        Add-Content -Path "$MountPath\Windows\System32\Startnet.cmd" -Value "start /wait PowerShell -NoL -C Start-WinREWiFi;Start-Sleep -Seconds 5" -Force
     }
 
+    if ($Startnet) {
+        Write-Warning "The Startnet string is added to Startnet.cmd"
+        Write-Warning "This must be set every time you run Edit-OSDCloud.winpe or it will revert back to defaults"
+
+        Add-Content -Path "$MountPath\Windows\System32\Startnet.cmd" -Value $Startnet -Force
+
+<#         foreach ($Item in $Startnet) {
+            Write-Host -ForegroundColor DarkGray "Startnet.cmd: $Item"
+            Add-Content -Path "$MountPath\Windows\System32\Startnet.cmd" -Value $Startnet -Force
+        } #>
+    }
     if ($WebPSScript) {
         Write-Warning "The WebPSScript parameter is adding your Cloud PowerShell script to Startnet.cmd"
-        Write-Warning "This must be set every time you run Edit-OSDCloud.winpe as this will revert to 'start PowerShell'"
+        Write-Warning "This must be set every time you run Edit-OSDCloud.winpe or it will revert back to defaults"
 
-        Write-Verbose "Startnet.cmd: start PowerShell -NoL -C Invoke-WebPSScript $WebPSScript"
-        #Add Sleep Command since Invoke-WebPSScript runs before NIC is initialized on fast hardware.
-        Add-Content -Path "$MountPath\Windows\System32\Startnet.cmd" -Value "start PowerShell -NoL -C Start-Sleep 5; Invoke-WebPSScript $WebPSScript" -Force
+        Write-Host -ForegroundColor DarkGray "Startnet.cmd: start PowerShell -NoL -C Invoke-WebPSScript $WebPSScript"
+        Add-Content -Path "$MountPath\Windows\System32\Startnet.cmd" -Value "start PowerShell -NoL -C Invoke-WebPSScript $WebPSScript" -Force
+    }
+    if ($Startnet -or $WebPSScript){
+        #Do Nothing
     }
     else {
-        Write-Verbose "Startnet.cmd: start PowerShell -NoL"
+        Write-Host -ForegroundColor DarkGray "Startnet.cmd: start PowerShell -NoL"
         Add-Content -Path "$MountPath\Windows\System32\Startnet.cmd" -Value 'start PowerShell -NoL' -Force
     }
     #=======================================================================
     #   Wallpaper
     #=======================================================================
     if ($Wallpaper) {
-        Write-Verbose "Wallpaper: $Wallpaper"
+        Write-Host -ForegroundColor DarkGray "Wallpaper: $Wallpaper"
         Copy-Item -Path $Wallpaper -Destination "$env:TEMP\winpe.jpg" -Force | Out-Null
         Copy-Item -Path $Wallpaper -Destination "$env:TEMP\winre.jpg" -Force | Out-Null
         robocopy "$env:TEMP" "$MountPath\Windows\System32" winpe.jpg /ndl /njh /njs /b /np /r:0 /w:0
@@ -269,28 +283,28 @@ start PowerShell -Nol -W Mi
     foreach ($Module in $PSModuleInstall) {
         if ($Module -eq 'DellBiosProvider') {
             if (Test-Path "$env:SystemRoot\System32\msvcp140.dll") {
-                Write-Verbose "Copying $env:SystemRoot\System32\msvcp140.dll to WinPE"
+                Write-Host -ForegroundColor DarkGray "Copying $env:SystemRoot\System32\msvcp140.dll to WinPE"
                 Copy-Item -Path "$env:SystemRoot\System32\msvcp140.dll" -Destination "$MountPath\System32" -Force | Out-Null
             }
             if (Test-Path "$env:SystemRoot\System32\vcruntime140.dll") {
-                Write-Verbose "Copying $env:SystemRoot\System32\vcruntime140.dll to WinPE"
+                Write-Host -ForegroundColor DarkGray "Copying $env:SystemRoot\System32\vcruntime140.dll to WinPE"
                 Copy-Item -Path "$env:SystemRoot\System32\vcruntime140.dll" -Destination "$MountPath\System32" -Force | Out-Null
             }
             if (Test-Path "$env:SystemRoot\System32\msvcp140.dll") {
-                Write-Verbose "Copying $env:SystemRoot\System32\vcruntime140_1.dll to WinPE"
+                Write-Host -ForegroundColor DarkGray "Copying $env:SystemRoot\System32\vcruntime140_1.dll to WinPE"
                 Copy-Item -Path "$env:SystemRoot\System32\vcruntime140_1.dll" -Destination "$MountPath\System32" -Force | Out-Null
             }
         }
-        Write-Verbose -Verbose "Saving $Module to $MountPath\Program Files\WindowsPowerShell\Modules"
+        Write-Host -ForegroundColor DarkGray "Saving $Module to $MountPath\Program Files\WindowsPowerShell\Modules"
         Save-Module -Name $Module -Path "$MountPath\Program Files\WindowsPowerShell\Modules" -Force
     }
-    Write-Verbose "Saving OSD to $MountPath\Program Files\WindowsPowerShell\Modules"
+    Write-Host -ForegroundColor DarkGray "Saving OSD to $MountPath\Program Files\WindowsPowerShell\Modules"
     Save-Module -Name OSD -Path "$MountPath\Program Files\WindowsPowerShell\Modules" -Force
     #=======================================================================
     #   PSModuleCopy
     #=======================================================================
     foreach ($Module in $PSModuleCopy) {
-        Write-Verbose -Verbose "Copy-PSModuleToWindowsImage -Name $Module -Path $MountPath"
+        Write-Host -ForegroundColor DarkGray "Copy-PSModuleToWindowsImage -Name $Module -Path $MountPath"
         Copy-PSModuleToWindowsImage -Name $Module -Path $MountPath
     }
     #=======================================================================

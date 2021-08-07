@@ -112,7 +112,7 @@ function Test-David {
             Grid.Row = "1"
             HorizontalAlignment = "Left">
             <ComboBox
-                Name = "ComboBoxGit2PSName"
+                Name = "ComboBoxScriptRepoName"
                 Background = "LightBlue"
                 FontSize = "16"
                 Height = "30"
@@ -120,7 +120,7 @@ function Test-David {
                 SelectedIndex = "0"
                 VerticalAlignment = "Top" />
             <Label
-                Name = "LabelGit2PSDescription"
+                Name = "LabelScriptRepoDescription"
                 Content = ""
                 FontSize = "14"
                 Foreground = "Black"
@@ -132,7 +132,7 @@ function Test-David {
             Grid.Column="1"
             Grid.ColumnSpan = "2"
             Grid.Row = "2"
-            Name = "TextBoxGit2PSContent"
+            Name = "TextBoxScriptRepoContent"
             Text = ""
             AcceptsReturn = "True"
             AcceptsTab = "True"

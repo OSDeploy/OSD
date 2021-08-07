@@ -1,17 +1,23 @@
 #================================================
-#   PowershellWindow Functions
+#   Window Functions
 #================================================
 $Script:showWindowAsync = Add-Type -MemberDefinition @"
 [DllImport("user32.dll")]
 public static extern bool ShowWindowAsync(IntPtr hWnd, int nCmdShow);
 "@ -Name "Win32ShowWindowAsync" -Namespace Win32Functions -PassThru
-function Show-PowershellWindow() {
-    $null = $showWindowAsync::ShowWindowAsync((Get-Process -Id $pid).MainWindowHandle, 10)
+function Hide-CMDWindow() {
+    $CMDProcess = (Get-Process -Name cmd).id
+    if ($CMDProcess) {
+        $null = $showWindowAsync::ShowWindowAsync((Get-Process -Id $CMDProcess).MainWindowHandle, 2)
+    }
 }
+Hide-CMDWindow
 function Hide-PowershellWindow() {
     $null = $showWindowAsync::ShowWindowAsync((Get-Process -Id $pid).MainWindowHandle, 2)
 }
-
+function Show-PowershellWindow() {
+    $null = $showWindowAsync::ShowWindowAsync((Get-Process -Id $pid).MainWindowHandle, 10)
+}
 Hide-PowershellWindow
 #================================================
 #   Load Assemblies
@@ -152,11 +158,12 @@ $OOBEDeployComboBox.IsEnabled = $false
 $OOBEDeployJsonChildItem = Find-OSDCloudFile -Name "*.json" -Path '\OSDCloud\Config\OOBEDeploy\' | Sort-Object FullName
 $OOBEDeployJsonChildItem = $OOBEDeployJsonChildItem | Where-Object {$_.FullName -notlike "C*"}
 if ($OOBEDeployJsonChildItem) {
+    $OOBEDeployComboBox.Items.Add('') | Out-Null
     $OOBEDeployComboBox.IsEnabled = $true
     $OOBEDeployJsonChildItem | ForEach-Object {
         $OOBEDeployComboBox.Items.Add($_) | Out-Null
     }
-    $OOBEDeployComboBox.SelectedIndex = 0
+    $OOBEDeployComboBox.SelectedIndex = 1
 }
 else {
     $OOBEDeployLabel.Visibility = "Collapsed"  
@@ -169,11 +176,12 @@ $AutopilotOOBEComboBox.IsEnabled = $false
 $AutopilotOOBEJsonChildItem = Find-OSDCloudFile -Name "*.json" -Path '\OSDCloud\Config\AutopilotOOBE\' | Sort-Object FullName
 $AutopilotOOBEJsonChildItem = $AutopilotOOBEJsonChildItem | Where-Object {$_.FullName -notlike "C*"}
 if ($AutopilotOOBEJsonChildItem) {
+    $AutopilotOOBEComboBox.Items.Add('') | Out-Null
     $AutopilotOOBEComboBox.IsEnabled = $true
     $AutopilotOOBEJsonChildItem | ForEach-Object {
         $AutopilotOOBEComboBox.Items.Add($_) | Out-Null
     }
-    $AutopilotOOBEComboBox.SelectedIndex = 0
+    $AutopilotOOBEComboBox.SelectedIndex = 1
 }
 else {
     $AutopilotOOBELabel.Visibility = "Collapsed"  
@@ -431,7 +439,7 @@ $GoButton.add_Click({
 #   Customizations
 #================================================
 [string]$ModuleVersion = Get-Module -Name OSD | Sort-Object -Property Version | Select-Object -ExpandProperty Version -Last 1
-$Global:XamlWindow.Title = "OSD Module $ModuleVersion Start-OSDCloudGUI"
+$Global:XamlWindow.Title = "$ModuleVersion Start-OSDCloudGUI"
 #$Global:XamlWindow | Out-Host
 #================================================
 #   Launch

@@ -5,13 +5,13 @@ function Test-David {
     #   GitHub
     #=======================================================================
     if ($PSCmdlet.ParameterSetName -eq 'GitHub') {
-        $Uri = "https://api.github.com/repos/$GitOwner/$GitRepo/contents/$GitPath"
+        $Uri = "https://api.github.com/repos/$Owner/$Repo/contents/$Path"
         Write-Host -ForegroundColor DarkCyan $Uri
 
 
-        if ($OAuthToken) {
+        if ($OAuth) {
             $Params = @{
-                Headers = @{Authorization = "Bearer $OAuthToken"}
+                Headers = @{Authorization = "Bearer $OAuth"}
                 Method = 'GET'
                 Uri = $Uri
                 UseBasicParsing = $true
@@ -21,7 +21,7 @@ function Test-David {
             $GitHubApiRateLimit = Invoke-RestMethod -UseBasicParsing -Uri 'https://api.github.com/rate_limit' -Method Get
             Write-Host -ForegroundColor DarkGray "You have used $($GitHubApiRateLimit.rate.used) of your $($GitHubApiRateLimit.rate.limit) GitHub API Requests"
             Write-Host -ForegroundColor DarkGray "You can create an OAuth Token at https://github.com/settings/tokens"
-            Write-Host -ForegroundColor DarkGray 'Use the OAuthToken parameter to enable Git2PS Child-Item support'
+            Write-Host -ForegroundColor DarkGray 'Use the OAuth parameter to enable ScriptRepo Child-Item support'
             $Params = @{
                 Method = 'GET'
                 Uri = $Uri
@@ -32,11 +32,11 @@ function Test-David {
         $GitHubApiContent = @()
         $GitHubApiContent = Invoke-RestMethod @Params
         
-        if ($OAuthToken) {
+        if ($OAuth) {
             foreach ($Item in $GitHubApiContent) {
                 if ($Item.type -eq 'dir') {
                     Write-Host -ForegroundColor DarkCyan $Item.url
-                    $GitHubApiContent += Invoke-RestMethod -UseBasicParsing -Uri $Item.url -Method Get -Headers @{Authorization = "Bearer $OAuthToken" }
+                    $GitHubApiContent += Invoke-RestMethod -UseBasicParsing -Uri $Item.url -Method Get -Headers @{Authorization = "Bearer $OAuth" }
                 }
             }
         }
@@ -58,8 +58,8 @@ function Test-David {
             }
     
             $ObjectProperties = @{
-                GitOwner    = $GitOwner
-                GitRepo     = $GitRepo
+                Owner    = $Owner
+                Repo     = $Repo
                 Name            = $Item.name
                 Guid            = New-Guid
                 Path            = $Item.path
@@ -75,10 +75,10 @@ function Test-David {
             New-Object -TypeName PSObject -Property $ObjectProperties
         }
     
-        $Global:Git2PS = $Results
+        $Global:ScriptRepo = $Results
     }
     else {
-        $Global:Git2PS = $null
+        $Global:ScriptRepo = $null
     }
     #================================================
     #   XamlCode
@@ -192,7 +192,7 @@ function Test-David {
             Grid.Row = "1"
             HorizontalAlignment = "Left">
             <ComboBox
-                Name = "ComboBoxGit2PSName"
+                Name = "ComboBoxScriptRepoName"
                 Background = "LightBlue"
                 FontSize = "16"
                 Height = "30"
@@ -200,7 +200,7 @@ function Test-David {
                 SelectedIndex = "0"
                 VerticalAlignment = "Top" />
             <Label
-                Name = "LabelGit2PSDescription"
+                Name = "LabelScriptRepoDescription"
                 Content = ""
                 FontSize = "14"
                 Foreground = "Black"
@@ -212,7 +212,7 @@ function Test-David {
             Grid.Column="1"
             Grid.ColumnSpan = "2"
             Grid.Row = "2"
-            Name = "TextBoxGit2PSContent"
+            Name = "TextBoxScriptRepoContent"
             Text = ""
             AcceptsReturn = "True"
             AcceptsTab = "True"

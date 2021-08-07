@@ -3,13 +3,13 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         x:Name="XamlWindow"
-        Title="OSD Module"
+        Title="OSDCloudGUI"
         Width="840"
         Height="660"
         BorderThickness="0"
+        RenderTransformOrigin="0.5,0.5"
         ResizeMode="CanResizeWithGrip"
-        WindowStartupLocation="CenterScreen"
-        RenderTransformOrigin="0.5,0.5">
+        Left="20" Top="20">
     <Window.Resources>
         <ResourceDictionary>
             <Style TargetType="{x:Type Button}">
@@ -199,7 +199,7 @@
                       FontSize="16"
                       Height="30"
                       Margin="0"
-                      Width="160" />
+                      Width="155" />
         </StackPanel>
         <!-- Labels -->
         <StackPanel Grid.Column="1"
@@ -239,7 +239,7 @@
                       FontSize="14"
                       Height="30"
                       Margin="0,0,10,0"
-                      Width="550" />
+                      Width="545" />
         </StackPanel>
         <!-- Labels -->
         <StackPanel Grid.Column="1"
@@ -293,7 +293,7 @@
                      FontSize="16"
                      Height="30"
                      Margin="0,0,10,0"
-                     Width="150" />
+                     Width="145" />
         </StackPanel>
         <!-- Post Config -->
         <StackPanel Grid.Column="1"
