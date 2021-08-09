@@ -9,7 +9,7 @@
         BorderThickness="0"
         RenderTransformOrigin="0.5,0.5"
         ResizeMode="CanResizeWithGrip"
-        Left="20" Top="20">
+        Left="10" Top="10">
     <Window.Resources>
         <ResourceDictionary>
             <Style TargetType="{x:Type Button}">
@@ -128,14 +128,14 @@
             <RowDefinition Height="*" />
             <RowDefinition Height="40" />
         </Grid.RowDefinitions>
-        <!-- ScriptComboBox -->
+        <!-- ScriptSelectionControl -->
         <ComboBox Grid.Row="0"
-                  Name="ScriptComboBox"
+                  Name="ScriptSelectionControl"
                   FontSize="16"
                   SelectedIndex="0" />
-        <!-- ScriptTextBox -->
+        <!-- ScriptTextControl -->
         <TextBox Grid.Row="1"
-                 Name="ScriptTextBox"
+                 Name="ScriptTextControl"
                  Text="#This is the OSDPad for CMD and PowerShell"
                  AcceptsReturn="True"
                  AcceptsTab="True"
@@ -148,17 +148,17 @@
                  ScrollViewer.VerticalScrollBarVisibility="Visible"
                  VerticalAlignment="Stretch"
                  Margin="0,10" />
-        <!-- Branding -->
+        <!-- BrandingTitle -->
         <Label Grid.Row="2"
-               Name="Branding"
+               Name="BrandingTitleControl"
                Content="OSDPad"
-                HorizontalAlignment="Left"
-                VerticalAlignment="Center"
                FontSize="20"
-               Foreground="#003E92" />
-        <!-- StartButton -->
+               Foreground="#01786A"
+               HorizontalAlignment="Left"
+               VerticalAlignment="Center"/>
+        <!-- StartButtonControl -->
         <Button Grid.Row="2"
-                Name="StartButton"
+                Name="StartButtonControl"
                 Content="RUN"
                 HorizontalAlignment="Right"
                 VerticalAlignment="Center"

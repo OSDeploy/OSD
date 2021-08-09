@@ -10,23 +10,31 @@ function Start-OSDPad {
         [string]$RepoName,
         
         [Parameter(ParameterSetName = 'GitHub', Position = 2)]
-        [Alias('GitPath')]
+        [Alias('GitPath','Folder')]
         [string]$RepoFolder,
         
         [Parameter(ParameterSetName = 'GitHub')]
         [Alias('OAuthToken')]
         [string]$OAuth,
 
-        [Parameter(ParameterSetName = 'Standalone')]
-        [string]$Branding = 'OSDPad',
+        [string]$BrandingTitle = 'OSDPad',
+        [string]$BrandingColor = '#01786A',
         
         [Parameter(ParameterSetName = 'Standalone')]
         [ValidateSet('Branding','TextBox')]
         [string[]]$Hide
     )
-    #=======================================================================
+    #================================================
+    #   Branding
+    #================================================
+    $Global:OSDPadBranding = $null
+    $Global:OSDPadBranding = @{
+        Title   = $BrandingTitle
+        Color   = $BrandingColor
+    }
+    #================================================
     #   GitHub
-    #=======================================================================
+    #================================================
     if ($PSCmdlet.ParameterSetName -eq 'GitHub') {
         $Uri = "https://api.github.com/repos/$RepoOwner/$RepoName/contents/$RepoFolder"
         Write-Host -ForegroundColor DarkCyan $Uri
@@ -78,7 +86,6 @@ function Start-OSDPad {
             Write-Host -ForegroundColor DarkGray $Item.download_url
             if ($Item.type -eq 'dir') {
                 $ObjectProperties = @{
-                    Branding        = $Branding
                     RepoOwner       = $RepoOwner
                     RepoName        = $RepoName
                     RepoFolder      = $RepoFolder
@@ -108,7 +115,6 @@ function Start-OSDPad {
                 }
         
                 $ObjectProperties = @{
-                    Branding        = $Branding
                     RepoOwner       = $RepoOwner
                     RepoName        = $RepoName
                     RepoFolder      = $RepoFolder
@@ -134,17 +140,24 @@ function Start-OSDPad {
     else {
         $Global:OSDPad = $null
     }
-    #=======================================================================
+    #================================================
     #   OSDPad.ps1
-    #=======================================================================
+    #================================================
     & "$($MyInvocation.MyCommand.Module.ModuleBase)\GUI\OSDPad.ps1"
-    #=======================================================================
+    #================================================
 }
-function Start-OSDCloudPad {
+function Start-OSDCloudRepo {
     [CmdletBinding()]
     param (
-        [ValidateSet('Setup','Deploy')]
-        [string]$Learn = 'Deploy',
+        [Parameter(Position = 0)]
+        [ValidateSet(
+            'OOBE',
+            'OSDCloud/Deploy',
+            'OSDCloud/EditWinPE',
+            'OSDCloud/Tasks',
+            'OSDCloud/Template'
+        )]
+        [string]$Show = 'OSDCloud/Deploy',
 
         [Alias('OAuthToken')]
         [string]$OAuth
@@ -152,19 +165,19 @@ function Start-OSDCloudPad {
 
     if ($OAuth) {
         $OSDPadParams = @{
-            Branding    = "OSDCloud $Learn Samples"
-            RepoOwner   = 'OSDeploy'
-            RepoName    = 'OSDPad'
-            RepoFolder  = "OSDCloud/$Learn"
-            OAuth       = $OAuth
+            BrandingTitle   = "OSDCloudRepo $Show"
+            RepoOwner       = 'OSDeploy'
+            RepoName        = 'OSDCloudRepo'
+            RepoFolder      = $Show
+            OAuth           = $OAuth
         }
     }
     else {
         $OSDPadParams = @{
-            Branding    = "OSDCloud $Learn Samples"
-            RepoOwner   = 'OSDeploy'
-            RepoName    = 'OSDPad'
-            RepoFolder  = "OSDCloud/$Learn"
+            BrandingTitle   = "OSDCloudRepo $Show"
+            RepoOwner       = 'OSDeploy'
+            RepoName        = 'OSDCloudRepo'
+            RepoFolder      = $Show
         }
     }
     Start-OSDPad @OSDPadParams

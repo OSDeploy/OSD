@@ -136,7 +136,7 @@
         </Grid.RowDefinitions>
         <!-- RowBranding -->
         <Label Grid.Row="0"
-               Name="TitleBranding"
+               Name="BrandingTitleControl"
                Content="OSDCloud"
                FlowDirection="RightToLeft"
                FontSize="30"

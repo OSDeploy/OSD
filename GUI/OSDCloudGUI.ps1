@@ -21,16 +21,19 @@ function Show-PowershellWindow() {
 Hide-CmdWindow
 Hide-PowershellWindow
 #================================================
-#   Load Assemblies
+#   Get MyScriptDir
 #================================================
 $Global:MyScriptDir = [System.IO.Path]::GetDirectoryName($myInvocation.MyCommand.Definition)
+#================================================
+#   Load Assemblies
+#================================================
 [System.Reflection.Assembly]::LoadWithPartialName("presentationframework") | Out-Null
 [System.Reflection.Assembly]::LoadFrom("$Global:MyScriptDir\assembly\System.Windows.Interactivity.dll") | Out-Null
 [System.Reflection.Assembly]::LoadFrom("$Global:MyScriptDir\assembly\MahApps.Metro.dll") | Out-Null
 #================================================
 #   Set PowerShell Window Title
 #================================================
-#$host.ui.RawUI.WindowTitle = "Start-OSDCloudGUI"
+#$host.ui.RawUI.WindowTitle = "OSDCloudGUI"
 #================================================
 #   Test-InWinPE
 #================================================
@@ -442,14 +445,17 @@ $StartButtonControl.add_Click({
 #   Customizations
 #================================================
 [string]$ModuleVersion = Get-Module -Name OSD | Sort-Object -Property Version | Select-Object -ExpandProperty Version -Last 1
-$Global:XamlWindow.Title = "$ModuleVersion Start-OSDCloudGUI"
+$Global:XamlWindow.Title = "$ModuleVersion OSDCloudGUI"
+#================================================
+#   Branding
+#================================================
 if ($Global:OSDCloudGuiBranding) {
-    $TitleBranding.Content = $Global:OSDCloudGuiBranding.Branding
-    $TitleBranding.Foreground = $Global:OSDCloudGuiBranding.Color
+    $BrandingTitleControl.Content = $Global:OSDCloudGuiBranding.Title
+    $BrandingTitleControl.Foreground = $Global:OSDCloudGuiBranding.Color
 }
-#$Global:XamlWindow | Out-Host
 #================================================
 #   Launch
 #================================================
+#$Global:XamlWindow | Out-Host
 $Global:XamlWindow.ShowDialog() | Out-Null
 #================================================
