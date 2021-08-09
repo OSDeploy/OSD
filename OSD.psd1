@@ -4,7 +4,7 @@
 RootModule = 'OSD.psm1'
 
 # Version number of this module.
-ModuleVersion = '21.8.6.1'
+ModuleVersion = '21.8.8.1'
 
 # Supported PSEditions
 # CompatiblePSEditions = @()
@@ -264,8 +264,8 @@ FunctionsToExport =
 'New-CAB',
 'Show-RegistryXML',
 'Start-OOBEDeploy',
-'Start-ScriptRepo',
-'Show-OSDCloudExamples'
+'Start-OSDPad',
+'Start-OSDCloudPad'
 
 # Cmdlets to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no cmdlets to export.
 CmdletsToExport = @()

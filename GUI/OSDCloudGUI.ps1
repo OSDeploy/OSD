@@ -1,23 +1,24 @@
 #================================================
 #   Window Functions
+#   Minimize Command and PowerShell Windows
 #================================================
 $Script:showWindowAsync = Add-Type -MemberDefinition @"
 [DllImport("user32.dll")]
 public static extern bool ShowWindowAsync(IntPtr hWnd, int nCmdShow);
 "@ -Name "Win32ShowWindowAsync" -Namespace Win32Functions -PassThru
-function Hide-CMDWindow() {
-    $CMDProcess = (Get-Process -Name cmd).id
-    if ($CMDProcess) {
-        $null = $showWindowAsync::ShowWindowAsync((Get-Process -Id $CMDProcess).MainWindowHandle, 2)
+function Hide-CmdWindow() {
+    $CMDProcess = Get-Process -Name cmd -ErrorAction Ignore
+    foreach ($Item in $CMDProcess) {
+        $null = $showWindowAsync::ShowWindowAsync((Get-Process -Id $Item.id).MainWindowHandle, 2)
     }
 }
-Hide-CMDWindow
 function Hide-PowershellWindow() {
     $null = $showWindowAsync::ShowWindowAsync((Get-Process -Id $pid).MainWindowHandle, 2)
 }
 function Show-PowershellWindow() {
     $null = $showWindowAsync::ShowWindowAsync((Get-Process -Id $pid).MainWindowHandle, 10)
 }
+Hide-CmdWindow
 Hide-PowershellWindow
 #================================================
 #   Load Assemblies
@@ -29,7 +30,7 @@ $Global:MyScriptDir = [System.IO.Path]::GetDirectoryName($myInvocation.MyCommand
 #================================================
 #   Set PowerShell Window Title
 #================================================
-$host.ui.RawUI.WindowTitle = "Start-OSDCloudGUI"
+#$host.ui.RawUI.WindowTitle = "Start-OSDCloudGUI"
 #================================================
 #   Test-InWinPE
 #================================================
@@ -75,248 +76,250 @@ LoadForm -XamlPath (Join-Path $Global:MyScriptDir 'OSDCloudGUI.xaml')
 $OSDCloudParams = (Get-Command Start-OSDCloud).Parameters
 
 $OSDCloudParams["OSBuild"].Attributes.ValidValues | ForEach-Object {
-    $OSBuildComboBox.Items.Add($_) | Out-Null
+    $OSBuildControl.Items.Add($_) | Out-Null
 }
 
 $OSDCloudParams["OSEdition"].Attributes.ValidValues | ForEach-Object {
-    $OSEditionComboBox.Items.Add($_) | Out-Null
+    $OSEditionControl.Items.Add($_) | Out-Null
 }
 
 $OSDCloudParams["OSLicense"].Attributes.ValidValues | ForEach-Object {
-    $OSLicenseComboBox.Items.Add($_) | Out-Null
+    $OSLicenseControl.Items.Add($_) | Out-Null
 }
 
 $OSDCloudParams["OSLanguage"].Attributes.ValidValues | ForEach-Object {
-    $OSLanguageComboBox.Items.Add($_) | Out-Null
+    $OSLanguageControl.Items.Add($_) | Out-Null
 }
 
-$ManufacturerTextBox.Text = Get-MyComputerManufacturer -Brief
-$ProductTextBox.Text = Get-MyComputerProduct
-$ModelTextBox.Text = Get-MyComputerModel -Brief
+$CSManufacturerControl.Text = Get-MyComputerManufacturer -Brief
+$CSProductControl.Text = Get-MyComputerProduct
+$CSModelControl.Text = Get-MyComputerModel -Brief
 #================================================
 #   SetDefaultValues
 #================================================
 function SetDefaultValues {
-    $OSBuildComboBox.SelectedIndex = 0      #21H1
-    $OSLanguageComboBox.SelectedIndex = 7   #en-us
-    $OSEditionComboBox.SelectedIndex = 5    #Enterprise
-    $OSLicenseComboBox.SelectedIndex = 1    #Volume
-    $CustomImageComboBox.SelectedIndex = 0  #Nothing
-    $AutopilotComboBox.SelectedIndex = 1    #OOBE
-    $ImageIndexTextBox.Text = 6             #Enterprise
+    $OSBuildControl.SelectedIndex = 0      #21H1
+    $OSLanguageControl.SelectedIndex = 7   #en-us
+    $OSEditionControl.SelectedIndex = 5    #Enterprise
+    $OSLicenseControl.SelectedIndex = 1    #Volume
+    $CustomImageControl.SelectedIndex = 0  #Nothing
+    $AutopilotJsonControl.SelectedIndex = 1    #OOBE
+    $ImageIndexControl.Text = 6             #Enterprise
 
-    $OSBuildComboBox.IsEnabled = $true
-    $OSLanguageComboBox.IsEnabled = $true
-    $OSEditionComboBox.IsEnabled = $true
-    $OSLicenseComboBox.IsEnabled = $false
-    $ImageIndexTextBox.IsEnabled = $false
-    $ModelTextBox.IsEnabled = $false
-    $AutopilotComboBox.IsEnabled = $true
+    $OSBuildControl.IsEnabled = $true
+    $OSLanguageControl.IsEnabled = $true
+    $OSEditionControl.IsEnabled = $true
+    $OSLicenseControl.IsEnabled = $false
+    $ImageIndexControl.IsEnabled = $false
+    $CSModelControl.IsEnabled = $false
+    $AutopilotJsonControl.IsEnabled = $true
 }
 SetDefaultValues
 #================================================
 #   CustomImage
 #================================================
-$CustomImageComboBox.IsEnabled = $false
+$CustomImageControl.IsEnabled = $false
 $CustomImageChildItem = Find-OSDCloudFile -Name '*.wim' -Path '\OSDCloud\OS\'
 $CustomImageChildItem = $CustomImageChildItem | Sort-Object -Property Length -Unique | Sort-Object FullName | Where-Object {$_.Length -gt 3GB}
         
 if ($CustomImageChildItem) {
-    $CustomImageComboBox.Items.Add('') | Out-Null
-    $CustomImageComboBox.IsEnabled = $true
+    $CustomImageControl.Items.Add('') | Out-Null
+    $CustomImageControl.IsEnabled = $true
     $CustomImageChildItem | ForEach-Object {
-        $CustomImageComboBox.Items.Add($_) | Out-Null
+        $CustomImageControl.Items.Add($_) | Out-Null
     }
-    $CustomImageComboBox.SelectedIndex = 0
+    $CustomImageControl.SelectedIndex = 0
 }
 else {
     $CustomImageLabel.Visibility = "Collapsed"  
-    $CustomImageComboBox.Visibility = "Collapsed"  
+    $CustomImageControl.Visibility = "Collapsed"  
 }
 #================================================
-#   AutopilotComboBox
+#   AutopilotJsonControl
 #================================================
-$AutopilotComboBox.IsEnabled = $false
-$AutopilotJsonChildItem = Find-OSDCloudFile -Name "*.json" -Path '\OSDCloud\Autopilot\Profiles\' | Sort-Object FullName
+$AutopilotJsonControl.IsEnabled = $false
+$AutopilotJsonChildItem = @()
+[array]$AutopilotJsonChildItem = Find-OSDCloudFile -Name "*.json" -Path '\OSDCloud\Autopilot\Profiles\' | Sort-Object FullName
+[array]$AutopilotJsonChildItem += Find-OSDCloudFile -Name "*.json" -Path '\OSDCloud\Config\AutopilotJSON\' | Sort-Object FullName
 $AutopilotJsonChildItem = $AutopilotJsonChildItem | Where-Object {$_.FullName -notlike "C*"}
 if ($AutopilotJsonChildItem) {
-    $AutopilotComboBox.Items.Add('') | Out-Null
-    $AutopilotComboBox.IsEnabled = $true
+    $AutopilotJsonControl.Items.Add('') | Out-Null
+    $AutopilotJsonControl.IsEnabled = $true
     $AutopilotJsonChildItem | ForEach-Object {
-        $AutopilotComboBox.Items.Add($_) | Out-Null
+        $AutopilotJsonControl.Items.Add($_) | Out-Null
     }
-    $AutopilotComboBox.SelectedIndex = 1
+    $AutopilotJsonControl.SelectedIndex = 1
 }
 else {
-    $AutopilotLabel.Visibility = "Collapsed" 
-    $AutopilotComboBox.Visibility = "Collapsed"  
+    $AutopilotJsonLabel.Visibility = "Collapsed" 
+    $AutopilotJsonControl.Visibility = "Collapsed"  
 }
 #================================================
-#   OOBEDeployComboBox
+#   OOBEDeployControl
 #================================================
-$OOBEDeployComboBox.IsEnabled = $false
+$OOBEDeployControl.IsEnabled = $false
 $OOBEDeployJsonChildItem = Find-OSDCloudFile -Name "*.json" -Path '\OSDCloud\Config\OOBEDeploy\' | Sort-Object FullName
 $OOBEDeployJsonChildItem = $OOBEDeployJsonChildItem | Where-Object {$_.FullName -notlike "C*"}
 if ($OOBEDeployJsonChildItem) {
-    $OOBEDeployComboBox.Items.Add('') | Out-Null
-    $OOBEDeployComboBox.IsEnabled = $true
+    $OOBEDeployControl.Items.Add('') | Out-Null
+    $OOBEDeployControl.IsEnabled = $true
     $OOBEDeployJsonChildItem | ForEach-Object {
-        $OOBEDeployComboBox.Items.Add($_) | Out-Null
+        $OOBEDeployControl.Items.Add($_) | Out-Null
     }
-    $OOBEDeployComboBox.SelectedIndex = 1
+    $OOBEDeployControl.SelectedIndex = 1
 }
 else {
     $OOBEDeployLabel.Visibility = "Collapsed"  
-    $OOBEDeployComboBox.Visibility = "Collapsed"  
+    $OOBEDeployControl.Visibility = "Collapsed"  
 }
 #================================================
-#   AutopilotOOBEComboBox
+#   AutopilotOOBEControl
 #================================================
-$AutopilotOOBEComboBox.IsEnabled = $false
+$AutopilotOOBEControl.IsEnabled = $false
 $AutopilotOOBEJsonChildItem = Find-OSDCloudFile -Name "*.json" -Path '\OSDCloud\Config\AutopilotOOBE\' | Sort-Object FullName
 $AutopilotOOBEJsonChildItem = $AutopilotOOBEJsonChildItem | Where-Object {$_.FullName -notlike "C*"}
 if ($AutopilotOOBEJsonChildItem) {
-    $AutopilotOOBEComboBox.Items.Add('') | Out-Null
-    $AutopilotOOBEComboBox.IsEnabled = $true
+    $AutopilotOOBEControl.Items.Add('') | Out-Null
+    $AutopilotOOBEControl.IsEnabled = $true
     $AutopilotOOBEJsonChildItem | ForEach-Object {
-        $AutopilotOOBEComboBox.Items.Add($_) | Out-Null
+        $AutopilotOOBEControl.Items.Add($_) | Out-Null
     }
-    $AutopilotOOBEComboBox.SelectedIndex = 1
+    $AutopilotOOBEControl.SelectedIndex = 1
 }
 else {
     $AutopilotOOBELabel.Visibility = "Collapsed"  
-    $AutopilotOOBEComboBox.Visibility = "Collapsed"  
+    $AutopilotOOBEControl.Visibility = "Collapsed"  
 }
 #================================================
-#   OSEditionComboBox
+#   OSEditionControl
 #================================================
-$OSEditionComboBox.add_SelectionChanged({
+$OSEditionControl.add_SelectionChanged({
     #Home
-    if ($OSEditionComboBox.SelectedIndex -eq 0) {
-        $ImageIndexTextBox.Text = 4
+    if ($OSEditionControl.SelectedIndex -eq 0) {
+        $ImageIndexControl.Text = 4
         $ImageIndexLabel.IsEnabled = $false
-        $ImageIndexTextBox.IsEnabled = $false   #Disable
-        $OSLicenseComboBox.SelectedIndex = 0    #Retail
-        $OSLicenseComboBox.IsEnabled = $false   #Disable
+        $ImageIndexControl.IsEnabled = $false   #Disable
+        $OSLicenseControl.SelectedIndex = 0    #Retail
+        $OSLicenseControl.IsEnabled = $false   #Disable
     }
     #Home N
-    if ($OSEditionComboBox.SelectedIndex -eq 1) {
-        $ImageIndexTextBox.Text = 5
-        $ImageIndexTextBox.IsEnabled = $false   #Disable
-        $OSLicenseComboBox.SelectedIndex = 0    #Retail
-        $OSLicenseComboBox.IsEnabled = $false   #Disable
+    if ($OSEditionControl.SelectedIndex -eq 1) {
+        $ImageIndexControl.Text = 5
+        $ImageIndexControl.IsEnabled = $false   #Disable
+        $OSLicenseControl.SelectedIndex = 0    #Retail
+        $OSLicenseControl.IsEnabled = $false   #Disable
     }
     #Home Single Language
-    if ($OSEditionComboBox.SelectedIndex -eq 2) {
-        $ImageIndexTextBox.Text = 6
-        $ImageIndexTextBox.IsEnabled = $false   #Disable
-        $OSLicenseComboBox.SelectedIndex = 0    #Retail
-        $OSLicenseComboBox.IsEnabled = $false   #Disable
+    if ($OSEditionControl.SelectedIndex -eq 2) {
+        $ImageIndexControl.Text = 6
+        $ImageIndexControl.IsEnabled = $false   #Disable
+        $OSLicenseControl.SelectedIndex = 0    #Retail
+        $OSLicenseControl.IsEnabled = $false   #Disable
     }
     #Education
-    if ($OSEditionComboBox.SelectedIndex -eq 3) {
-        $OSLicenseComboBox.IsEnabled = $true
-        if ($OSLicenseComboBox.SelectedIndex -eq 0) {
-            $ImageIndexTextBox.Text = 7
+    if ($OSEditionControl.SelectedIndex -eq 3) {
+        $OSLicenseControl.IsEnabled = $true
+        if ($OSLicenseControl.SelectedIndex -eq 0) {
+            $ImageIndexControl.Text = 7
         }
         else {
-            $ImageIndexTextBox.Text = 4
+            $ImageIndexControl.Text = 4
         }
     }
     #Education N
-    if ($OSEditionComboBox.SelectedIndex -eq 4) {
-        $OSLicenseComboBox.IsEnabled = $true
-        if ($OSLicenseComboBox.SelectedIndex -eq 0) {
-            $ImageIndexTextBox.Text = 8
+    if ($OSEditionControl.SelectedIndex -eq 4) {
+        $OSLicenseControl.IsEnabled = $true
+        if ($OSLicenseControl.SelectedIndex -eq 0) {
+            $ImageIndexControl.Text = 8
         }
         else {
-            $ImageIndexTextBox.Text = 5
+            $ImageIndexControl.Text = 5
         }
     }
     #Enterprise
-    if ($OSEditionComboBox.SelectedIndex -eq 5) {
-        $OSLicenseComboBox.SelectedIndex = 1
-        $OSLicenseComboBox.IsEnabled = $false
-        $ImageIndexTextBox.Text = 6
+    if ($OSEditionControl.SelectedIndex -eq 5) {
+        $OSLicenseControl.SelectedIndex = 1
+        $OSLicenseControl.IsEnabled = $false
+        $ImageIndexControl.Text = 6
     }
     #Enterprise N
-    if ($OSEditionComboBox.SelectedIndex -eq 6) {
-        $OSLicenseComboBox.SelectedIndex = 1
-        $OSLicenseComboBox.IsEnabled = $false
-        $ImageIndexTextBox.Text = 7
+    if ($OSEditionControl.SelectedIndex -eq 6) {
+        $OSLicenseControl.SelectedIndex = 1
+        $OSLicenseControl.IsEnabled = $false
+        $ImageIndexControl.Text = 7
     }
     #Pro
-    if ($OSEditionComboBox.SelectedIndex -eq 7) {
-        $OSLicenseComboBox.IsEnabled = $true
-        if ($OSLicenseComboBox.SelectedIndex -eq 0) {
-            $ImageIndexTextBox.Text = 9
+    if ($OSEditionControl.SelectedIndex -eq 7) {
+        $OSLicenseControl.IsEnabled = $true
+        if ($OSLicenseControl.SelectedIndex -eq 0) {
+            $ImageIndexControl.Text = 9
         }
         else {
-            $ImageIndexTextBox.Text = 8
+            $ImageIndexControl.Text = 8
         }
     }
     #Pro N
-    if ($OSEditionComboBox.SelectedIndex -eq 8) {
-        $OSLicenseComboBox.IsEnabled = $true
-        if ($OSLicenseComboBox.SelectedIndex -eq 0) {
-            $ImageIndexTextBox.Text = 10
+    if ($OSEditionControl.SelectedIndex -eq 8) {
+        $OSLicenseControl.IsEnabled = $true
+        if ($OSLicenseControl.SelectedIndex -eq 0) {
+            $ImageIndexControl.Text = 10
         }
         else {
-            $ImageIndexTextBox.Text = 9
+            $ImageIndexControl.Text = 9
         }
     }
 })
 #================================================
-#   OSLicenseComboBox
+#   OSLicenseControl
 #================================================
-$OSLicenseComboBox.add_SelectionChanged({
-    if ($OSLicenseComboBox.SelectedIndex -eq 0) {
-        if ($OSEditionComboBox.SelectedIndex -eq 3) {$ImageIndexTextBox.Text = 7}
-        if ($OSEditionComboBox.SelectedIndex -eq 4) {$ImageIndexTextBox.Text = 8}
-        if ($OSEditionComboBox.SelectedIndex -eq 7) {$ImageIndexTextBox.Text = 9}
-        if ($OSEditionComboBox.SelectedIndex -eq 8) {$ImageIndexTextBox.Text = 10}
+$OSLicenseControl.add_SelectionChanged({
+    if ($OSLicenseControl.SelectedIndex -eq 0) {
+        if ($OSEditionControl.SelectedIndex -eq 3) {$ImageIndexControl.Text = 7}
+        if ($OSEditionControl.SelectedIndex -eq 4) {$ImageIndexControl.Text = 8}
+        if ($OSEditionControl.SelectedIndex -eq 7) {$ImageIndexControl.Text = 9}
+        if ($OSEditionControl.SelectedIndex -eq 8) {$ImageIndexControl.Text = 10}
     }
-    if ($OSLicenseComboBox.SelectedIndex -eq 1) {
-        if ($OSEditionComboBox.SelectedIndex -eq 3) {$ImageIndexTextBox.Text = 4}
-        if ($OSEditionComboBox.SelectedIndex -eq 4) {$ImageIndexTextBox.Text = 5}
-        if ($OSEditionComboBox.SelectedIndex -eq 7) {$ImageIndexTextBox.Text = 8}
-        if ($OSEditionComboBox.SelectedIndex -eq 8) {$ImageIndexTextBox.Text = 9}
+    if ($OSLicenseControl.SelectedIndex -eq 1) {
+        if ($OSEditionControl.SelectedIndex -eq 3) {$ImageIndexControl.Text = 4}
+        if ($OSEditionControl.SelectedIndex -eq 4) {$ImageIndexControl.Text = 5}
+        if ($OSEditionControl.SelectedIndex -eq 7) {$ImageIndexControl.Text = 8}
+        if ($OSEditionControl.SelectedIndex -eq 8) {$ImageIndexControl.Text = 9}
     }
 })
 #================================================
-#   CustomImageComboBox
+#   CustomImageControl
 #================================================
-$CustomImageComboBox.add_SelectionChanged({
-    if ($CustomImageComboBox.SelectedIndex -eq 0) {
+$CustomImageControl.add_SelectionChanged({
+    if ($CustomImageControl.SelectedIndex -eq 0) {
         SetDefaultValues
     }
     else {
-        $OSBuildComboBox.IsEnabled = $false
-        $OSLanguageComboBox.IsEnabled = $false
-        $OSEditionComboBox.IsEnabled = $false
-        $OSLicenseComboBox.IsEnabled = $false
-        $ImageIndexTextBox.IsEnabled = $true
-        $ImageIndexTextBox.Text = 1
+        $OSBuildControl.IsEnabled = $false
+        $OSLanguageControl.IsEnabled = $false
+        $OSEditionControl.IsEnabled = $false
+        $OSLicenseControl.IsEnabled = $false
+        $ImageIndexControl.IsEnabled = $true
+        $ImageIndexControl.Text = 1
     }
 })
 #================================================
-#   GoButton
+#   StartButtonControl
 #================================================
-$GoButton.add_Click({
+$StartButtonControl.add_Click({
     $Global:XamlWindow.Close()
     Show-PowershellWindow
     #================================================
     #   Variables
     #================================================
-    $OSImageIndex = $ImageIndexTextBox.Text
-    $OSBuild = $OSBuildComboBox.SelectedItem
-    $OSEdition = $OSEditionComboBox.SelectedItem
-    $OSLanguage = $OSLanguageComboBox.SelectedItem
-    $OSLicense = $OSLicenseComboBox.SelectedItem
+    $OSImageIndex = $ImageIndexControl.Text
+    $OSBuild = $OSBuildControl.SelectedItem
+    $OSEdition = $OSEditionControl.SelectedItem
+    $OSLanguage = $OSLanguageControl.SelectedItem
+    $OSLicense = $OSLicenseControl.SelectedItem
     #================================================
     #   AutopilotJson
     #================================================
-    $AutopilotJsonName = $AutopilotComboBox.SelectedValue
+    $AutopilotJsonName = $AutopilotJsonControl.SelectedValue
     if ($AutopilotJsonName) {
         $AutopilotJsonItem = $AutopilotJsonChildItem | Where-Object {$_.FullName -eq "$AutopilotJsonName"}
     }
@@ -336,7 +339,7 @@ $GoButton.add_Click({
     #================================================
     #   OOBEDeployJson
     #================================================
-    $OOBEDeployJsonName = $OOBEDeployComboBox.SelectedValue
+    $OOBEDeployJsonName = $OOBEDeployControl.SelectedValue
     if ($OOBEDeployJsonName) {
         $OOBEDeployJsonItem = $OOBEDeployJsonChildItem | Where-Object {$_.FullName -eq "$OOBEDeployJsonName"}
     }
@@ -356,7 +359,7 @@ $GoButton.add_Click({
     #================================================
     #   AutopilotOOBEJson
     #================================================
-    $AutopilotOOBEJsonName = $AutopilotOOBEComboBox.SelectedValue
+    $AutopilotOOBEJsonName = $AutopilotOOBEControl.SelectedValue
     if ($AutopilotOOBEJsonName) {
         $AutopilotOOBEJsonItem = $AutopilotOOBEJsonChildItem | Where-Object {$_.FullName -eq "$AutopilotOOBEJsonName"}
     }
@@ -376,7 +379,7 @@ $GoButton.add_Click({
     #================================================
     #   ImageFile
     #================================================
-    $ImageFileFullName = $CustomImageComboBox.SelectedValue
+    $ImageFileFullName = $CustomImageControl.SelectedValue
     if ($ImageFileFullName) {
         $ImageFileItem = $CustomImageChildItem | Where-Object {$_.FullName -eq "$ImageFileFullName"}
         $ImageFileName = Split-Path -Path $ImageFileItem.FullName -Leaf
@@ -406,7 +409,7 @@ $GoButton.add_Click({
         ImageFileFullName           = $ImageFileFullName
         ImageFileItem               = $ImageFileItem
         ImageFileName               = $ImageFileName
-        Manufacturer                = $ManufacturerTextBox.Text
+        Manufacturer                = $CSManufacturerControl.Text
         OOBEDeployJsonChildItem     = $OOBEDeployJsonChildItem
         OOBEDeployJsonItem          = $OOBEDeployJsonItem
         OOBEDeployJsonName          = $OOBEDeployJsonName
@@ -416,7 +419,7 @@ $GoButton.add_Click({
         OSImageIndex                = $OSImageIndex
         OSLanguage                  = $OSLanguage
         OSLicense                   = $OSLicense
-        Product                     = $ProductTextBox.Text
+        Product                     = $CSProductControl.Text
         Restart                     = $RestartCheckbox.IsChecked
         SkipAutopilot               = $SkipAutopilot
         SkipAutopilotOOBE           = $SkipAutopilotOOBE
@@ -440,6 +443,10 @@ $GoButton.add_Click({
 #================================================
 [string]$ModuleVersion = Get-Module -Name OSD | Sort-Object -Property Version | Select-Object -ExpandProperty Version -Last 1
 $Global:XamlWindow.Title = "$ModuleVersion Start-OSDCloudGUI"
+if ($Global:OSDCloudGuiBranding) {
+    $TitleBranding.Content = $Global:OSDCloudGuiBranding.Branding
+    $TitleBranding.Foreground = $Global:OSDCloudGuiBranding.Color
+}
 #$Global:XamlWindow | Out-Host
 #================================================
 #   Launch

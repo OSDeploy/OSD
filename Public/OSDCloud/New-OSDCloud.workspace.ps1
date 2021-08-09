@@ -65,6 +65,19 @@ function New-OSDCloud.workspace {
         Break
     }
     #=======================================================================
+    #	Remove Old Autopilot Content
+    #=======================================================================
+    if (Test-Path "$env:ProgramData\OSDCloud\Autopilot") {
+        Write-Warning "Move all your Autopilot Profiles to $env:ProgramData\OSDCloud\Config\AutopilotJSON"
+        Write-Warning "You will be unable to create or update an OSDCloud Workspace until $env:ProgramData\OSDCloud\Autopilot is manually removed"
+        Break
+    }
+    if (Test-Path "$WorkspacePath\Autopilot") {
+        Write-Warning "Move all your Autopilot Profiles to $WorkspacePath\Config\AutopilotJSON"
+        Write-Warning "You will be unable to create or update an OSDCloud Workspace until $WorkspacePath\Autopilot is manually removed"
+        Break
+    }
+    #=======================================================================
     #	Set WorkspacePath
     #=======================================================================
     if ($PSBoundParameters.ContainsKey('WorkspacePath')) {

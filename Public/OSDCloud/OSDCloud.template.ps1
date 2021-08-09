@@ -341,8 +341,8 @@ Windows Registry Editor Version 5.00
 
         $Wallpaper = '/9j/4AAQSkZJRgABAQEAYABgAAD/2wBDAAIBAQIBAQICAgICAgICAwUDAwMDAwYEBAMFBwYHBwcGBwcICQsJCAgKCAcHCg0KCgsMDAwMBwkODw0MDgsMDAz/2wBDAQICAgMDAwYDAwYMCAcIDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAz/wAARCAAgACADASIAAhEBAxEB/8QAHwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtRAAAgEDAwIEAwUFBAQAAAF9AQIDAAQRBRIhMUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkKFhcYGRolJicoKSo0NTY3ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqDhIWGh4iJipKTlJWWl5iZmqKjpKWmp6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uHi4+Tl5ufo6erx8vP09fb3+Pn6/8QAHwEAAwEBAQEBAQEBAQAAAAAAAAECAwQFBgcICQoL/8QAtREAAgECBAQDBAcFBAQAAQJ3AAECAxEEBSExBhJBUQdhcRMiMoEIFEKRobHBCSMzUvAVYnLRChYkNOEl8RcYGRomJygpKjU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6goOEhYaHiImKkpOUlZaXmJmaoqOkpaanqKmqsrO0tba3uLm6wsPExcbHyMnK0tPU1dbX2Nna4uPk5ebn6Onq8vP09fb3+Pn6/9oADAMBAAIRAxEAPwD5vooor+sD+KwooooAKKKKACiiigD/2Q=='
         [byte[]]$Bytes = [convert]::FromBase64String($Wallpaper)
-        [System.IO.File]::WriteAllBytes("$env:TEMP\winre.jpg",$Bytes)
-        #[System.IO.File]::WriteAllBytes("$env:TEMP\winpe.jpg",$Bytes)
+        [System.IO.File]::WriteAllBytes("$env:TEMP\winpe.jpg",$Bytes)
+        #[System.IO.File]::WriteAllBytes("$env:TEMP\winre.jpg",$Bytes)
 
         Write-Host -ForegroundColor DarkGray "Injecting $MountPath\Windows\System32\winpe.jpg"
         $null = robocopy "$env:TEMP" "$MountPath\Windows\System32" winpe.jpg /b /ndl /np /r:0 /w:0 /xj /LOG+:$TemplateLogs\Robocopy.log
@@ -707,30 +707,29 @@ Windows Registry Editor Version 5.00
     #   Directories
     #=======================================================================
     Write-Host -ForegroundColor DarkGray "========================================================================="
-    Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Create Additional Directories"
+    Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Create Config Directories"
 
-    $SourcePath = "$TemplatePath\Autopilot\Profiles"
-    if (-NOT (Test-Path $SourcePath)) {
-        Write-Host -ForegroundColor DarkGray $SourcePath
-        New-Item -Path $SourcePath -ItemType Directory -Force | Out-Null
+    $CreateDirectories = @(
+        'Config\AutopilotJSON',
+        'Config\AutopilotOOBE',
+        'Config\OOBEDeploy'
+    )
+
+    foreach ($Item in $CreateDirectories) {
+        $SourcePath = "$TemplatePath\$Item"
+        if (-NOT (Test-Path $SourcePath)) {
+            Write-Host -ForegroundColor DarkGray $SourcePath
+            New-Item -Path $SourcePath -ItemType Directory -Force | Out-Null
+        }
     }
 
-    $SourcePath = "$TemplatePath\DriverPacks\Dell"
-    if (-NOT (Test-Path $SourcePath)) {
-        Write-Host -ForegroundColor DarkGray $SourcePath
-        New-Item -Path $SourcePath -ItemType Directory -Force | Out-Null
-    }
-
-    $SourcePath = "$TemplatePath\DriverPacks\HP"
-    if (-NOT (Test-Path $SourcePath)) {
-        Write-Host -ForegroundColor DarkGray $SourcePath
-        New-Item -Path $SourcePath -ItemType Directory -Force | Out-Null
-    }
-
-    $SourcePath = "$TemplatePath\DriverPacks\Lenovo"
-    if (-NOT (Test-Path $SourcePath)) {
-        Write-Host -ForegroundColor DarkGray $SourcePath
-        New-Item -Path $SourcePath -ItemType Directory -Force | Out-Null
+    if (Test-Path "$TemplatePath\Autopilot\Profiles") {
+        Write-Warning "Copying $TemplatePath\Autopilot\Profiles to $TemplatePath\Config\AutopilotJSON"
+        robocopy "$TemplatePath\Autopilot\Profiles" "$TemplatePath\Config\AutopilotJSON" *.* /s /ndl /njh /njs /b /np
+        Write-Warning "Make sure that you have moved all your Autopilot Profiles to $TemplatePath\Config\AutopilotJSON"
+        Write-Warning "Continuing in 10 seconds"
+        Write-Warning "This time will gradually increase until $TemplatePath\Autopilot is manually removed"
+        Start-Sleep -Seconds 10
     }
     #=======================================================================
     #   Restore VerbosePreference

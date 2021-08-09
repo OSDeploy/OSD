@@ -192,7 +192,7 @@ function Test-David {
             Grid.Row = "1"
             HorizontalAlignment = "Left">
             <ComboBox
-                Name = "ComboBoxScriptRepoName"
+                Name = "ComboBoxRepoName"
                 Background = "LightBlue"
                 FontSize = "16"
                 Height = "30"

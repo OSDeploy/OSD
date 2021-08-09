@@ -68,7 +68,7 @@ LoadForm -XamlPath (Join-Path $Global:MyScriptDir 'ScriptRepo.xaml')
 #================================================
 if ($Global:ScriptRepo) {
     $Global:ScriptRepo | ForEach-Object {
-        $ComboBoxScriptRepoName.Items.Add($_.Path) | Out-Null
+        $ComboBoxRepoName.Items.Add($_.Path) | Out-Null
         New-Variable -Name $_.Guid -Value $($_.ContentRAW) -Force -Scope Global
     }
     $LabelTitle.Content = "GitHub $($Global:ScriptRepo.Owner[0]) $($Global:ScriptRepo.Repo[0])"
@@ -76,25 +76,25 @@ if ($Global:ScriptRepo) {
 else {
     $LabelTitle.Content = ''
 }
-$ComboBoxScriptRepoName.Items.Add('NewScript.ps1') | Out-Null
-if (-NOT (Get-Variable -Name 'NewScript.ps1' -Scope Global -ErrorAction Ignore)) {
-    New-Variable -Name 'NewScript.ps1' -Value '#Blank PowerShell Script' -Scope Global -Force -ErrorAction Stop
+$ComboBoxRepoName.Items.Add('New PowerShell Script.ps1') | Out-Null
+if (-NOT (Get-Variable -Name 'New PowerShell Script.ps1' -Scope Global -ErrorAction Ignore)) {
+    New-Variable -Name 'New PowerShell Script.ps1' -Value '#Blank PowerShell Script' -Scope Global -Force -ErrorAction Stop
 }
-$LabelScriptRepoDescription.Content = 'NewScript.ps1 is a blank PowerShell Script that you can edit and Start-Process'
+$LabelScriptRepoDescription.Content = 'New PowerShell Script.ps1 is a blank PowerShell Script that you can edit and Start-Process'
 Write-Host -ForegroundColor DarkGray "================================================"
 #================================================
 #   Set-ScriptRepoContent
 #================================================
 function Set-ScriptRepoContent {
-    if ($ComboBoxScriptRepoName.SelectedValue -eq 'NewScript.ps1') {
-        Write-Host -ForegroundColor Cyan 'NewScript.ps1'
-        $TextBoxScriptRepoContent.Text = (Get-Variable -Name 'NewScript.ps1' -Scope Global).Value
-        $LabelScriptRepoDescription.Content = 'NewScript.ps1 is a blank PowerShell Script that you can edit and Start-Process'
+    if ($ComboBoxRepoName.SelectedValue -eq 'New PowerShell Script.ps1') {
+        Write-Host -ForegroundColor Cyan 'New PowerShell Script.ps1'
+        $TextBoxScriptRepoContent.Text = (Get-Variable -Name 'New PowerShell Script.ps1' -Scope Global).Value
+        $LabelScriptRepoDescription.Content = 'New PowerShell Script.ps1 is a blank PowerShell Script that you can edit and Start-Process'
         $TextBoxScriptRepoContent.IsReadOnly = $false
         $GoButton.Visibility = "Visible"
     }
     else {
-        $Global:WorkingScript = $Global:ScriptRepo | Where-Object {$_.Path -eq $ComboBoxScriptRepoName.SelectedValue} | Select-Object -First 1
+        $Global:WorkingScript = $Global:ScriptRepo | Where-Object {$_.Path -eq $ComboBoxRepoName.SelectedValue} | Select-Object -First 1
         Write-Host -ForegroundColor Cyan $Global:WorkingScript.Path
         Write-Host -ForegroundColor DarkGray $Global:WorkingScript.Git
         Write-Host -ForegroundColor DarkGray $Global:WorkingScript.Download
@@ -119,15 +119,15 @@ Set-ScriptRepoContent
 #================================================
 #   Change Selection
 #================================================
-<# $ComboBoxScriptRepoName.add_SelectionChanged({
+<# $ComboBoxRepoName.add_SelectionChanged({
     Set-ScriptRepoContent
 }) #>
-$ComboBoxScriptRepoName.add_SelectionChanged({
+$ComboBoxRepoName.add_SelectionChanged({
     Set-ScriptRepoContent
 })
 $TextBoxScriptRepoContent.add_TextChanged({
-    if ($ComboBoxScriptRepoName.SelectedValue -eq 'NewScript.ps1') {
-        Set-Variable -Name 'NewScript.ps1' -Value $($TextBoxScriptRepoContent.Text) -Scope Global -Force
+    if ($ComboBoxRepoName.SelectedValue -eq 'New PowerShell Script.ps1') {
+        Set-Variable -Name 'New PowerShell Script.ps1' -Value $($TextBoxScriptRepoContent.Text) -Scope Global -Force
     }
     else {
         Set-Variable -Name $($Global:WorkingScript.Guid) -Value $($TextBoxScriptRepoContent.Text) -Scope Global -Force
@@ -141,8 +141,8 @@ $GoButton.add_Click({
     $Global:ScriptRepoScriptBlock = [scriptblock]::Create($TextBoxScriptRepoContent.Text)
 
     if ($Global:ScriptRepoScriptBlock) {
-        if ($ComboBoxScriptRepoName.SelectedValue -eq 'NewScript.ps1') {
-            $ScriptFile = 'NewScript.ps1'
+        if ($ComboBoxRepoName.SelectedValue -eq 'New PowerShell Script.ps1') {
+            $ScriptFile = 'New PowerShell Script.ps1'
         }
         else {
             $ScriptFile = $Global:WorkingScript.Name

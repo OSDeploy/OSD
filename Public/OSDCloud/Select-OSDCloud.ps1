@@ -95,7 +95,11 @@ function Select-OSDCloudAutopilotJsonItem {
     param ()
 
     $i = $null
-    $FindOSDCloudFile = Find-OSDCloudFile -Name "*.json" -Path '\OSDCloud\Autopilot\Profiles\' | Sort-Object FullName
+    $FindOSDCloudFile = @()
+    [array]$FindOSDCloudFile = Find-OSDCloudFile -Name "*.json" -Path '\OSDCloud\Autopilot\Profiles\' | Sort-Object FullName
+    [array]$FindOSDCloudFile += Find-OSDCloudFile -Name "*.json" -Path '\OSDCloud\Config\AutopilotJSON\' | Sort-Object FullName
+
+
     $FindOSDCloudFile = $FindOSDCloudFile | Where-Object {$_.FullName -notlike "C*"}
 
 

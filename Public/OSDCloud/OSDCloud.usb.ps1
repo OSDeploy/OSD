@@ -204,12 +204,13 @@ function Save-OSDCloud.usb {
     Write-Host -ForegroundColor DarkGray        "========================================================================="
     Write-Host -ForegroundColor Cyan            "Autopilot Profiles"
 
-    if (-NOT (Test-Path "$OSDCloudOfflineFullName\Autopilot\Profiles")) {
-        New-Item -Path "$OSDCloudOfflineFullName\Autopilot\Profiles" -ItemType Directory -Force | Out-Null
-        Write-Host "Autopilot Profiles can be saved to $OSDCloudOfflineFullName\Autopilot\Profiles"
+    if (-NOT (Test-Path "$OSDCloudOfflineFullName\Config\AutopilotJSON")) {
+        New-Item -Path "$OSDCloudOfflineFullName\Config\AutopilotJSON" -ItemType Directory -Force | Out-Null
+        Write-Host "Autopilot Profiles can be saved to $OSDCloudOfflineFullName\Config\AutopilotJSON"
     }
-
-    $FindOSDCloudFile = Find-OSDCloudFile -Name $Global:OSDCloudAutopilotJsonName -Path '\OSDCloud\Autopilot\Profiles\' | Sort-Object FullName
+    $FindOSDCloudFile = @()
+    [array]$FindOSDCloudFile = Find-OSDCloudFile -Name $Global:OSDCloudAutopilotJsonName -Path '\OSDCloud\Autopilot\Profiles\' | Sort-Object FullName
+    [array]$FindOSDCloudFile += Find-OSDCloudFile -Name $Global:OSDCloudAutopilotJsonName -Path '\OSDCloud\Config\AutopilotJSON\' | Sort-Object FullName
     $FindOSDCloudFile = $FindOSDCloudFile | Where-Object {$_.FullName -notlike "C*"}
 
     if ($FindOSDCloudFile) {
@@ -217,8 +218,8 @@ function Save-OSDCloud.usb {
             Write-Host -ForegroundColor White "$($Item.FullName)"
         }
     } else {
-        Write-Warning "No Autopilot Profiles were found in any <PSDrive>:\OSDCloud\Autopilot\Profiles"
-        Write-Warning "Autopilot Profiles must be located in a $OSDCloudOfflineFullName\Autopilot\Profiles direcory"
+        Write-Warning "No Autopilot Profiles were found in any <PSDrive>:\OSDCloud\Config\AutopilotJSON"
+        Write-Warning "Autopilot Profiles must be located in a $OSDCloudOfflineFullName\Config\AutopilotJSON direcory"
     }
     #=======================================================================
     #	OSBuild

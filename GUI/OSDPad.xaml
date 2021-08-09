@@ -3,12 +3,13 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         x:Name="XamlWindow"
-        Title="Start-ScriptRepo"
-        Width="700"
-        Height="500"
+        Title="OSDPad"
+        Width="640"
+        Height="480"
         BorderThickness="0"
         RenderTransformOrigin="0.5,0.5"
-        ResizeMode="CanResizeWithGrip">
+        ResizeMode="CanResizeWithGrip"
+        Left="20" Top="20">
     <Window.Resources>
         <ResourceDictionary>
             <Style TargetType="{x:Type Button}">
@@ -121,24 +122,21 @@
                           Offset="1" />
         </RadialGradientBrush>
     </Window.Background>
-    <Grid Margin="20">
+    <Grid Margin="10">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
-            <RowDefinition Height="Auto" />
+            <RowDefinition Height="40" />
         </Grid.RowDefinitions>
         <!-- ScriptComboBox -->
         <ComboBox Grid.Row="0"
                   Name="ScriptComboBox"
-                  Background="LightBlue"
                   FontSize="16"
-                  Height="30"
-                  SelectedIndex="0"
-                  VerticalAlignment="Center" />
+                  SelectedIndex="0" />
         <!-- ScriptTextBox -->
         <TextBox Grid.Row="1"
                  Name="ScriptTextBox"
-                 Text=""
+                 Text="#This is the OSDPad for CMD and PowerShell"
                  AcceptsReturn="True"
                  AcceptsTab="True"
                  Background="Gainsboro"
@@ -150,26 +148,23 @@
                  ScrollViewer.VerticalScrollBarVisibility="Visible"
                  VerticalAlignment="Stretch"
                  Margin="0,10" />
-        <!-- TitleLabel -->
-        <StackPanel Grid.Row="2"
-                    HorizontalAlignment="Left"
-                    VerticalAlignment="Bottom">
-            <Label Name="TitleLabel"
-                   Content="ScriptRepo"
-                   FontSize="20"
-                   Foreground="#003E92" />
-        </StackPanel>
+        <!-- Branding -->
+        <Label Grid.Row="2"
+               Name="Branding"
+               Content="OSDPad"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Center"
+               FontSize="20"
+               Foreground="#003E92" />
         <!-- StartButton -->
-        <StackPanel Grid.Row="2"
-                    HorizontalAlignment="Right"
-                    Orientation="Horizontal"
-                    VerticalAlignment="Bottom">
-            <Button Name="StartButton"
-                    Content="Start-Process"
-                    FontSize="16"
-                    Foreground="White"
-                    Height="40"
-                    Width="130" />
-        </StackPanel>
+        <Button Grid.Row="2"
+                Name="StartButton"
+                Content="RUN"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Center"
+                FontSize="16"
+                Foreground="White"
+                Height="40"
+                Width="130" />
     </Grid>
 </Window>

@@ -1,29 +1,35 @@
-function Start-ScriptRepo {
+function Start-OSDPad {
     [CmdletBinding(DefaultParameterSetName = 'Standalone')]
     param (
         [Parameter(ParameterSetName = 'GitHub', Mandatory = $true, Position = 0)]
-        [Alias('GitOwner')]
-        [string]$Owner,
+        [Alias('Owner','GitOwner')]
+        [string]$RepoOwner,
         
         [Parameter(ParameterSetName = 'GitHub', Mandatory = $true, Position = 1)]
-        [Alias('GitRepo','Repository')]
-        [string]$Repo,
+        [Alias('Repository','GitRepo')]
+        [string]$RepoName,
         
         [Parameter(ParameterSetName = 'GitHub', Position = 2)]
         [Alias('GitPath')]
-        [string]$Path,
+        [string]$RepoFolder,
         
         [Parameter(ParameterSetName = 'GitHub')]
         [Alias('OAuthToken')]
-        [string]$OAuth
+        [string]$OAuth,
+
+        [Parameter(ParameterSetName = 'Standalone')]
+        [string]$Branding = 'OSDPad',
+        
+        [Parameter(ParameterSetName = 'Standalone')]
+        [ValidateSet('Branding','TextBox')]
+        [string[]]$Hide
     )
     #=======================================================================
     #   GitHub
     #=======================================================================
     if ($PSCmdlet.ParameterSetName -eq 'GitHub') {
-        $Uri = "https://api.github.com/repos/$Owner/$Repo/contents/$Path"
+        $Uri = "https://api.github.com/repos/$RepoOwner/$RepoName/contents/$RepoFolder"
         Write-Host -ForegroundColor DarkCyan $Uri
-
 
         if ($OAuth) {
             $Params = @{
@@ -37,7 +43,7 @@ function Start-ScriptRepo {
             $GitHubApiRateLimit = Invoke-RestMethod -UseBasicParsing -Uri 'https://api.github.com/rate_limit' -Method Get
             Write-Host -ForegroundColor DarkGray "You have used $($GitHubApiRateLimit.rate.used) of your $($GitHubApiRateLimit.rate.limit) GitHub API Requests"
             Write-Host -ForegroundColor DarkGray "You can create an OAuth Token at https://github.com/settings/tokens"
-            Write-Host -ForegroundColor DarkGray 'Use the OAuth parameter to enable ScriptRepo Child-Item support'
+            Write-Host -ForegroundColor DarkGray 'Use the OAuth parameter to enable OSDPad Child-Item support'
             $Params = @{
                 Method = 'GET'
                 Uri = $Uri
@@ -72,8 +78,10 @@ function Start-ScriptRepo {
             Write-Host -ForegroundColor DarkGray $Item.download_url
             if ($Item.type -eq 'dir') {
                 $ObjectProperties = @{
-                    Owner           = $Owner
-                    Repo            = $Repo
+                    Branding        = $Branding
+                    RepoOwner       = $RepoOwner
+                    RepoName        = $RepoName
+                    RepoFolder      = $RepoFolder
                     Name            = $Item.name
                     Type            = $Item.type
                     Guid            = New-Guid
@@ -100,8 +108,10 @@ function Start-ScriptRepo {
                 }
         
                 $ObjectProperties = @{
-                    Owner           = $Owner
-                    Repo            = $Repo
+                    Branding        = $Branding
+                    RepoOwner       = $RepoOwner
+                    RepoName        = $RepoName
+                    RepoFolder      = $RepoFolder
                     Name            = $Item.name
                     Type            = $Item.type
                     Guid            = New-Guid
@@ -118,43 +128,44 @@ function Start-ScriptRepo {
                 New-Object -TypeName PSObject -Property $ObjectProperties
             }
         }
-    
-        $Global:ScriptRepo = $Results
+        $Global:OSDPad = $Results
+        
     }
     else {
-        $Global:ScriptRepo = $null
+        $Global:OSDPad = $null
     }
     #=======================================================================
-    #   ScriptRepo.ps1
+    #   OSDPad.ps1
     #=======================================================================
-    & "$($MyInvocation.MyCommand.Module.ModuleBase)\GUI\ScriptRepo.ps1"
+    & "$($MyInvocation.MyCommand.Module.ModuleBase)\GUI\OSDPad.ps1"
     #=======================================================================
 }
-function Show-OSDCloudExamples {
+function Start-OSDCloudPad {
     [CmdletBinding()]
     param (
         [ValidateSet('Setup','Deploy')]
-        [Alias('GitPath')]
-        [string]$Path = 'Setup',
+        [string]$Learn = 'Deploy',
 
         [Alias('OAuthToken')]
         [string]$OAuth
     )
 
     if ($OAuth) {
-        $ScriptRepoParams = @{
-            Owner   = 'OSDeploy'
-            Repo    = 'ScriptRepo'
-            Path    = "OSDCloud/$Path"
-            OAuth   = $OAuth
+        $OSDPadParams = @{
+            Branding    = "OSDCloud $Learn Samples"
+            RepoOwner   = 'OSDeploy'
+            RepoName    = 'OSDPad'
+            RepoFolder  = "OSDCloud/$Learn"
+            OAuth       = $OAuth
         }
     }
     else {
-        $ScriptRepoParams = @{
-            Owner   = 'OSDeploy'
-            Repo    = 'ScriptRepo'
-            Path    = "OSDCloud/$Path"
+        $OSDPadParams = @{
+            Branding    = "OSDCloud $Learn Samples"
+            RepoOwner   = 'OSDeploy'
+            RepoName    = 'OSDPad'
+            RepoFolder  = "OSDCloud/$Learn"
         }
     }
-    Start-ScriptRepo @ScriptRepoParams
+    Start-OSDPad @OSDPadParams
 }
