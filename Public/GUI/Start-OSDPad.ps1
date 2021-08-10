@@ -146,18 +146,11 @@ function Start-OSDPad {
     & "$($MyInvocation.MyCommand.Module.ModuleBase)\GUI\OSDPad.ps1"
     #================================================
 }
-function Start-OSDCloudRepo {
+function Start-OSDPadRepo {
     [CmdletBinding()]
     param (
         [Parameter(Position = 0)]
-        [ValidateSet(
-            'OOBE',
-            'OSDCloud/Deploy',
-            'OSDCloud/EditWinPE',
-            'OSDCloud/Tasks',
-            'OSDCloud/Template'
-        )]
-        [string]$Show = 'OSDCloud/Deploy',
+        [string]$RepoFolder,
 
         [Alias('OAuthToken')]
         [string]$OAuth
@@ -165,19 +158,19 @@ function Start-OSDCloudRepo {
 
     if ($OAuth) {
         $OSDPadParams = @{
-            BrandingTitle   = "OSDCloudRepo $Show"
+            BrandingTitle   = "OSDPadRepo $RepoFolder"
             RepoOwner       = 'OSDeploy'
-            RepoName        = 'OSDCloudRepo'
-            RepoFolder      = $Show
+            RepoName        = 'OSDPadRepo'
+            RepoFolder      = $RepoFolder
             OAuth           = $OAuth
         }
     }
     else {
         $OSDPadParams = @{
-            BrandingTitle   = "OSDCloudRepo $Show"
+            BrandingTitle   = "OSDPadRepo $RepoFolder"
             RepoOwner       = 'OSDeploy'
-            RepoName        = 'OSDCloudRepo'
-            RepoFolder      = $Show
+            RepoName        = 'OSDPadRepo'
+            RepoFolder      = $RepoFolder
         }
     }
     Start-OSDPad @OSDPadParams

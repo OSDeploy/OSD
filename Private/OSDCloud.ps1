@@ -1,5 +1,5 @@
 function Copy-OSDCloud.media {
-    [CmdletBinding()]
+    [CmdletBinding(PositionalBinding = $false)]
     param (
         [Parameter(ValueFromPipelineByPropertyName = $true)]
         [string]$WorkspacePath = (Join-Path $env:TEMP (Get-Random))

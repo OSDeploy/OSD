@@ -12,7 +12,7 @@ Path of the OSDCloud Workspace. This is optional
 https://osdcloud.osdeploy.com
 #>
 function New-OSDCloud.iso {
-    [CmdletBinding()]
+    [CmdletBinding(PositionalBinding = $false)]
     param (
         [Parameter(ValueFromPipelineByPropertyName = $true)]
         [string]$WorkspacePath

@@ -24,7 +24,7 @@ Directory for the Workspace to contain the Media directory and the .iso file
 https://osdcloud.osdeploy.com
 #>
 function New-OSDCloud.workspace {
-    [CmdletBinding()]
+    [CmdletBinding(PositionalBinding = $false)]
     param (
         [Parameter(Mandatory = $true)]
         [string]$WorkspacePath
@@ -139,7 +139,7 @@ function New-OSDCloud.workspace {
     #=======================================================================
 }
 function Set-OSDCloud.workspace {
-    [CmdletBinding()]
+    [CmdletBinding(PositionalBinding = $false)]
     param (
         [Parameter(Mandatory = $true)]
         [string]$WorkspacePath

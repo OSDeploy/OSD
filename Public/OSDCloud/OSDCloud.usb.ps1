@@ -15,7 +15,7 @@ https://osdcloud.osdeploy.com
 21.3.18     Initial Release
 #>
 function New-OSDCloud.usb {
-    [CmdletBinding()]
+    [CmdletBinding(PositionalBinding = $false)]
     param (
         [Parameter(ValueFromPipelineByPropertyName = $true)]
         [string]$WorkspacePath
