@@ -83,7 +83,6 @@ function Start-OSDPad {
         Write-Host -ForegroundColor DarkGray "================================================"
         $Results = foreach ($Item in $GitHubApiContent) {
             #$FileContent = Invoke-RestMethod -UseBasicParsing -Uri $Item.git_url
-            Write-Host -ForegroundColor DarkGray $Item.download_url
             if ($Item.type -eq 'dir') {
                 $ObjectProperties = @{
                     RepoOwner       = $RepoOwner
@@ -105,6 +104,7 @@ function Start-OSDPad {
                 #New-Object -TypeName PSObject -Property $ObjectProperties
             }
             else {
+                Write-Host -ForegroundColor DarkGray $Item.download_url
                 try {
                     $ScriptWebRequest = Invoke-WebRequest -Uri $Item.download_url -UseBasicParsing -ErrorAction Ignore
                 }
@@ -146,7 +146,7 @@ function Start-OSDPad {
     & "$($MyInvocation.MyCommand.Module.ModuleBase)\GUI\OSDPad.ps1"
     #================================================
 }
-function Start-OSDPadRepo {
+function Start-OSDeployPad {
     [CmdletBinding()]
     param (
         [Parameter(Position = 0)]
@@ -158,18 +158,18 @@ function Start-OSDPadRepo {
 
     if ($OAuth) {
         $OSDPadParams = @{
-            BrandingTitle   = "OSDPadRepo $RepoFolder"
+            BrandingTitle   = "OSDeployPad $RepoFolder"
             RepoOwner       = 'OSDeploy'
-            RepoName        = 'OSDPadRepo'
+            RepoName        = 'OSDPad'
             RepoFolder      = $RepoFolder
             OAuth           = $OAuth
         }
     }
     else {
         $OSDPadParams = @{
-            BrandingTitle   = "OSDPadRepo $RepoFolder"
+            BrandingTitle   = "OSDeployPad $RepoFolder"
             RepoOwner       = 'OSDeploy'
-            RepoName        = 'OSDPadRepo'
+            RepoName        = 'OSDPad'
             RepoFolder      = $RepoFolder
         }
     }
