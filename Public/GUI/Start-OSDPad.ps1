@@ -20,8 +20,7 @@ function Start-OSDPad {
         [string]$BrandingTitle = 'OSDPad',
         [string]$BrandingColor = '#01786A',
         
-        [Parameter(ParameterSetName = 'Standalone')]
-        [ValidateSet('Branding','TextBox')]
+        [ValidateSet('Branding','Script')]
         [string[]]$Hide
     )
     #================================================
