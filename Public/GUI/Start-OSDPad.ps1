@@ -84,6 +84,8 @@ function Start-OSDPad {
         $Results = foreach ($Item in $GitHubApiContent) {
             #$FileContent = Invoke-RestMethod -UseBasicParsing -Uri $Item.git_url
             if ($Item.type -eq 'dir') {
+                Write-Host -ForegroundColor DarkCyan "Subdirectory: Start-OSDPad $RepoOwner $RepoName $($Item.name)"
+                
                 $ObjectProperties = @{
                     RepoOwner       = $RepoOwner
                     RepoName        = $RepoName
