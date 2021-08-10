@@ -81,6 +81,10 @@ if ($Global:OSDPad) {
     $Global:OSDPad | ForEach-Object {
         $ScriptSelectionControl.Items.Add($_.Path) | Out-Null
         New-Variable -Name $_.Guid -Value $($_.ContentRAW) -Force -Scope Global
+
+        if ($_.Path -like "*Readme.md") {
+            $ScriptSelectionControl.SelectedValue = $_.Path
+        }
         if ($Global:OSDPadBranding.Title -eq 'OSDPad') {
             $Global:OSDPadBranding.Title = "github.com/$RepoOwner/$RepoName/"
         }

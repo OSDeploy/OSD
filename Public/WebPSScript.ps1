@@ -22,6 +22,9 @@ function Invoke-WebPSScript {
         [string]$WebPSScript
     )
 
+    $WebPSScript = $WebPSScript -replace '%20',' '
+
+    Write-Host -ForegroundColor Cyan "$WebPSScript"
     if (-NOT (Test-WebConnection $WebPSScript)) {
         Return
     }
