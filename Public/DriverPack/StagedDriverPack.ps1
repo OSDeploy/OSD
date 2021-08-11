@@ -36,7 +36,7 @@ $UnattendXml = @'
     #=======================================================================
     #	Set Unattend
     #=======================================================================
-    $UnattendXml | Out-File -FilePath "C:\Windows\Panther\Expand-StagedDriverPack.xml" -Encoding utf8 -Force
+    $UnattendXml | Out-File -FilePath "C:\Windows\Panther\Expand-StagedDriverPack.xml" -Encoding utf8 -Width 2000 -Force
     #=======================================================================
 }
 function Expand-StagedDriverPack {

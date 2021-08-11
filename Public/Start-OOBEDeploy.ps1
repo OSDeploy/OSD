@@ -122,14 +122,14 @@ function Start-OOBEDeploy {
         @($Global:OOBEDeploy.Keys) | ForEach-Object { 
             if (-not $Global:OOBEDeploy[$_]) { $Global:OOBEDeploy.Remove($_) } 
         }
-        $Global:OOBEDeploy | ConvertTo-Json | Out-File "$ProgramDataOSDeploy\OSDeploy.OOBEDeploy.json" -Force
+        $Global:OOBEDeploy | ConvertTo-Json | Out-File "$ProgramDataOSDeploy\OSDeploy.OOBEDeploy.json" -Width 2000 -Force
     }
     else {
         Write-Host -ForegroundColor DarkGray "Exporting Configuration $env:Temp\OSDeploy.OOBEDeploy.json"
         @($Global:OOBEDeploy.Keys) | ForEach-Object { 
             if (-not $Global:OOBEDeploy[$_]) { $Global:OOBEDeploy.Remove($_) } 
         }
-        $Global:OOBEDeploy | ConvertTo-Json | Out-File "$env:Temp\OSDeploy.OOBEDeploy.json" -Force
+        $Global:OOBEDeploy | ConvertTo-Json | Out-File "$env:Temp\OSDeploy.OOBEDeploy.json" -Width 2000 -Force
         #=======================================================================
         #	ProductKey
         #=======================================================================

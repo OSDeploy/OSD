@@ -39,7 +39,7 @@ $Specialize = @'
 pause
 '@
 
-    $Specialize | Out-File -FilePath 'C:\Windows\Setup\Scripts\Specialize.cmd' -Force -Encoding ascii
+    $Specialize | Out-File -FilePath 'C:\Windows\Setup\Scripts\Specialize.cmd' -Encoding ascii -Width 2000 -Force
     #=======================================================================
     #	Panther Unattend.xml
     #=======================================================================
@@ -51,7 +51,7 @@ pause
     }
 
     Write-Verbose -Verbose "Setting Specialize.xml at $UnattendPath"
-    $UnattendXml | Out-File -FilePath $UnattendPath -Encoding utf8
+    $UnattendXml | Out-File -FilePath $UnattendPath -Encoding utf8 -Width 2000 -Force
     #=======================================================================
     #	Use-WindowsUnattend
     #=======================================================================

@@ -245,7 +245,7 @@ cd\
 ECHO Initialize Hardware
 start /wait PowerShell -Nol -W Mi -C Start-Sleep -Seconds 10
 '@
-    $StartnetCMD | Out-File -FilePath "$MountPath\Windows\System32\Startnet.cmd" -Force -Encoding ascii
+    $StartnetCMD | Out-File -FilePath "$MountPath\Windows\System32\Startnet.cmd" -Encoding ascii -Width 2000 -Force
     #=======================================================================
     #   Wireless
     #=======================================================================

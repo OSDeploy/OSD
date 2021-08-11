@@ -49,7 +49,7 @@ $UnattendXml = @'
 
     $SpecializeCmdPath = "C:\Windows\Setup\Scripts\Specialize.cmd"
     Write-Verbose -Verbose "Setting OSDCloud Specialize.cmd at $SpecializeCmdPath"
-    $SpecializeCmd | Out-File -FilePath $SpecializeCmdPath
+    $SpecializeCmd | Out-File -FilePath $SpecializeCmdPath -Width 2000 -Force
     #=======================================================================
     #	Panther Unattend.xml
     #=======================================================================
@@ -60,7 +60,7 @@ $UnattendXml = @'
 
     $UnattendPath = "$Panther\Unattend.xml"
     Write-Verbose -Verbose "Setting OSDCloud Unattend.xml at $UnattendPath"
-    $UnattendXml | Out-File -FilePath $UnattendPath -Encoding utf8
+    $UnattendXml | Out-File -FilePath $UnattendPath -Encoding utf8 -Width 2000 -Force
     #=======================================================================
     #	Use-WindowsUnattend
     #=======================================================================

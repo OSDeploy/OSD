@@ -34,7 +34,7 @@ $UnattendXml = @"
     #	Use-WindowsUnattend
     #=======================================================================
     $Random = Get-Random
-    $UnattendXml | Out-File -FilePath "$env:TEMP\$Random.xml" -Encoding utf8
+    $UnattendXml | Out-File -FilePath "$env:TEMP\$Random.xml" -Encoding utf8 -Width 2000 -Force
     Use-WindowsUnattend -Path 'C:\' -UnattendPath "$env:TEMP\$Random.xml" -Verbose
     #=======================================================================
 }

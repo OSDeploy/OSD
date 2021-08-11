@@ -46,7 +46,7 @@ $UnattendXml = @'
     $UnattendPath = "$Panther\Unattend.xml"
 
     Write-Verbose -Verbose "Setting $UnattendPath"
-    $UnattendXml | Out-File -FilePath $UnattendPath -Encoding utf8 -Force
+    $UnattendXml | Out-File -FilePath $UnattendPath -Encoding utf8 -Width 2000 -Force
     #=======================================================================
     #	Use-WindowsUnattend
     #=======================================================================
@@ -126,7 +126,7 @@ $UnattendXml = @'
     $UnattendPath = "$Panther\Unattend.xml"
 
     Write-Verbose -Verbose "Setting $UnattendPath"
-    $UnattendXml | Out-File -FilePath $UnattendPath -Encoding utf8 -Force
+    $UnattendXml | Out-File -FilePath $UnattendPath -Encoding utf8 -Width 2000 -Force
     #=======================================================================
     #	Copy PSModule
     #=======================================================================
@@ -181,7 +181,7 @@ $UnattendXml = @'
     $UnattendPath = "$Panther\Invoke-OSDSpecialize.xml"
 
     Write-Verbose -Verbose "Setting $UnattendPath"
-    $UnattendXml | Out-File -FilePath $UnattendPath -Encoding utf8 -Force
+    $UnattendXml | Out-File -FilePath $UnattendPath -Encoding utf8 -Width 2000 -Force
     #=======================================================================
     #	Registry Unattend
     #   HKEY_LOCAL_MACHINE\System\Setup\UnattendFile

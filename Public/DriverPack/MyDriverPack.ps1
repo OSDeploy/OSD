@@ -77,7 +77,7 @@ function Save-MyDriverPack {
         Save-WebFile -SourceUrl $DriverPackUrl -DestinationDirectory $DownloadPath -DestinationName $DriverPackFile
 
         $GetItemOutFile = Get-Item $OutFile
-        $GetMyDriverPack | ConvertTo-Json | Out-File "$OutFile.json" -Encoding ascii
+        $GetMyDriverPack | ConvertTo-Json | Out-File "$OutFile.json" -Encoding ascii -Width 2000 -Force
         #=======================================================================
         #   Expand
         #=======================================================================

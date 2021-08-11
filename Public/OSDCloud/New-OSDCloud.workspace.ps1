@@ -157,7 +157,7 @@ function Set-OSDCloud.workspace {
         WorkspacePath = $WorkspacePath
     }
 
-    $WorkspaceSettings | ConvertTo-Json | Out-File "$env:ProgramData\OSDCloud\workspace.json" -Encoding ASCII
+    $WorkspaceSettings | ConvertTo-Json | Out-File "$env:ProgramData\OSDCloud\workspace.json" -Encoding ascii -Width 2000 -Force
 
     $WorkspacePath
     #=======================================================================

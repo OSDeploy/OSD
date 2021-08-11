@@ -665,7 +665,7 @@ Windows Registry Editor Version 5.00
     Write-Host -ForegroundColor DarkGray "========================================================================="
     Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Modifying WinPE CMD and PowerShell Console settings"
     Write-Host -ForegroundColor Yellow "This increases the buffer and sets the window metrics and default fonts"
-    $RegistryConsole | Out-File -FilePath "$env:TEMP\RegistryConsole.reg" -Encoding ascii -Force
+    $RegistryConsole | Out-File -FilePath "$env:TEMP\RegistryConsole.reg" -Encoding ascii -Width 2000 -Force
 
     #Mount Registry
     Invoke-Exe reg load HKLM\Default "$MountPath\Windows\System32\Config\DEFAULT"
@@ -743,7 +743,7 @@ Windows Registry Editor Version 5.00
         Version = [Version](Get-Module -Name OSD -ListAvailable | Sort-Object Version -Descending | Select-Object -First 1).Version
     }
 
-    $WinPE | ConvertTo-Json | Out-File "$env:ProgramData\OSDCloud\winpe.json" -Encoding ASCII
+    $WinPE | ConvertTo-Json | Out-File "$env:ProgramData\OSDCloud\winpe.json" -Encoding ascii -Width 2000 -Force
     #=======================================================================
     #	Complete
     #=======================================================================

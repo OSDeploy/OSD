@@ -180,7 +180,7 @@ $StartButtonControl.add_Click({
         
         $ScriptPath = "$env:Temp\OSDPad\$ScriptFile"
         Write-Host -ForegroundColor DarkGray "Saving contents of `$Global:OSDPadScriptBlock` to $ScriptPath"
-        $Global:OSDPadScriptBlock | Out-File $ScriptPath -Encoding utf8
+        $Global:OSDPadScriptBlock | Out-File $ScriptPath -Encoding utf8 -Width 2000 -Force
 
         #$Global:XamlWindow.Close()
         #Invoke-Command $Global:OSDPadScriptBlock

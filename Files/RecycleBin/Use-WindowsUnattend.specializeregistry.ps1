@@ -21,7 +21,7 @@ C:\Drivers\tp_l14gen1_mt20u1-20u2-l15gen1_mt20u3-20u4_w1064_20h2_202101.exe /VER
 pause
 '@
 
-    $Specialize | Out-File -FilePath 'C:\Windows\Setup\Scripts\Specialize.cmd' -Force -Encoding ascii
+    $Specialize | Out-File -FilePath 'C:\Windows\Setup\Scripts\Specialize.cmd' -Encoding ascii -Width 2000 -Force
     #=======================================================================
     #	Panther Unattend.xml
     #=======================================================================

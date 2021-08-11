@@ -407,7 +407,7 @@ $BaseCatalog = @'
 			$Item.DriverPackUrl = ($Downloads).href
 	
 			$Item.FileName = Split-Path $Item.DriverPackUrl -Leaf
-			$Results | ConvertTo-Json | Out-File $CatalogLocalPath -Encoding ascii
+			$Results | ConvertTo-Json | Out-File $CatalogLocalPath -Encoding ascii -Width 2000 -Force
 		}
 
 		if (Test-Path $CatalogLocalPath) {

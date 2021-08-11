@@ -291,7 +291,7 @@ function Get-MyWindowsCapability {
         Sort-Object ProductName, Culture | `
         Select-Object Name, ProductName, Culture, DisplayName, Description | `
         ConvertTo-Json | `
-        Out-File "$env:TEMP\Get-MyWindowsCapability.json"
+        Out-File "$env:TEMP\Get-MyWindowsCapability.json" -Width 2000 -Force
         #=======================================================================
         #   Install / Return
         #=======================================================================
@@ -626,7 +626,7 @@ function Get-MyWindowsPackage {
     Where-Object {$_.PackageState -ne 'Superseded'} | `
     Select-Object PackageName, ProductName, Architecture, Culture, DisplayName, CapabilityId, Description | `
     ConvertTo-Json | `
-    Out-File "$env:TEMP\Get-MyWindowsPackage.json"
+    Out-File "$env:TEMP\Get-MyWindowsPackage.json" -Width 2000 -Force
     #=======================================================================
     #   Return
     #=======================================================================

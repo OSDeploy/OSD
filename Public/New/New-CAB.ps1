@@ -71,7 +71,7 @@ function New-CAB
 		#======================================================================================
 		Write-Verbose "Compressing '$FolderFullName' to '$ArchiveFullName' ..."
 		#======================================================================================
-		$DirectiveString.ToString() | Out-File -FilePath $DirectivePath -Encoding UTF8
+		$DirectiveString.ToString() | Out-File -FilePath $DirectivePath -Encoding UTF8 -Width 2000 -Force
 		makecab /F $DirectivePath
     }
     END {

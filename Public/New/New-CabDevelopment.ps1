@@ -54,7 +54,7 @@ $Compress
     $ddfpath = ($DestinationDir+"\$CabFileName.ddf")
     $ddf += (ls -recurse $Path | ? {!$_.psiscontainer}|select -expand fullname|%{'"'+$_+'" "'+$_.SubString($PathFullName.length+1)+'"'}) -join "`r`n"
     $ddf
-    $ddf | Out-File -encoding UTF8 $ddfpath
+    $ddf | Out-File -encoding UTF8 $ddfpath -Width 2000 -Force
     makecab /F $ddfpath
     #rm $ddfpath
     #rm setup.inf

@@ -38,7 +38,7 @@ $UnattendXml = @'
     }
 
     Write-Verbose -Verbose "Setting Autopilot Unattend.xml at $UnattendPath"
-    $UnattendXml | Out-File -FilePath $UnattendPath -Encoding utf8
+    $UnattendXml | Out-File -FilePath $UnattendPath -Encoding utf8 -Width 2000 -Force
     #=======================================================================
     #	Use-WindowsUnattend
     #=======================================================================

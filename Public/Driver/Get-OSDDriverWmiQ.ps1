@@ -80,7 +80,7 @@ function Get-OSDDriverWmiQ {
                     [void]$WmiCodeString.Append('OR ')
                 }
             }
-            $WmiCodeString.ToString() | Out-File -FilePath $WmiQueryFullName -Encoding UTF8
+            $WmiCodeString.ToString() | Out-File -FilePath $WmiQueryFullName -Encoding UTF8 -Width 2000 -Force
             if ($ShowTextFile.IsPresent) {
                 notepad.exe $WmiQueryFullName
             }
@@ -106,7 +106,7 @@ function Get-OSDDriverWmiQ {
                     [void]$WmiCodeString.Append('OR ')
                 }
             }
-            $WmiCodeString.ToString() | Out-File -FilePath $WmiQueryFullName -Encoding UTF8
+            $WmiCodeString.ToString() | Out-File -FilePath $WmiQueryFullName -Encoding UTF8 -Width 2000 -Force
             if ($ShowTextFile.IsPresent) {
                 notepad.exe $WmiQueryFullName
             }
@@ -131,7 +131,7 @@ function Get-OSDDriverWmiQ {
                     [void]$WmiCodeString.Append('OR ')
                 }
             }
-            $WmiCodeString.ToString() | Out-File -FilePath $WmiQueryFullName -Encoding UTF8
+            $WmiCodeString.ToString() | Out-File -FilePath $WmiQueryFullName -Encoding UTF8 -Width 2000 -Force
             if ($ShowTextFile.IsPresent) {
                 notepad.exe $WmiQueryFullName
             }
