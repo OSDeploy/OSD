@@ -245,8 +245,6 @@ wpeinit
 cd\
 ECHO Initialize Hardware
 start /wait PowerShell -Nol -W Mi -C Start-Sleep -Seconds 10
-ECHO Initialize PowerShell (Minimized)
-start PowerShell -Nol -W Mi
 '@
     $StartnetCMD | Out-File -FilePath "$MountPath\Windows\System32\Startnet.cmd" -Force -Encoding ascii
     #=======================================================================
@@ -281,6 +279,13 @@ start PowerShell -Nol -W Mi
         Add-Content -Path "$MountPath\Windows\System32\Startnet.cmd" -Value '@ECHO ON' -Force
     }
     #=======================================================================
+    #   PowerShell Minimized
+    #=======================================================================
+    Add-Content -Path "$MountPath\Windows\System32\Startnet.cmd" -Value '@ECHO OFF' -Force
+    Add-Content -Path "$MountPath\Windows\System32\Startnet.cmd" -Value 'ECHO Initialize PowerShell (Minimized)' -Force
+    Add-Content -Path "$MountPath\Windows\System32\Startnet.cmd" -Value 'start PowerShell -Nol -W Mi' -Force
+    Add-Content -Path "$MountPath\Windows\System32\Startnet.cmd" -Value '@ECHO ON' -Force
+    #=======================================================================
     #   StartPSCommand Wait
     #=======================================================================
     if ($StartPSCommand) {
@@ -310,10 +315,10 @@ start PowerShell -Nol -W Mi
         Write-Warning "The StartOSDCloud parameter is adding Start-OSDCloud to Startnet.cmd"
         Write-Warning "This must be set every time you run Edit-OSDCloud.winpe or it will revert back to defaults"
         
-        Write-Host -ForegroundColor DarkGray "Startnet.cmd: start /wait PowerShell -NoL -W Mi -C Start-OSDCloud $StartOSDCloud"
+        Write-Host -ForegroundColor DarkGray "Startnet.cmd: start /wait PowerShell -NoL -C Start-OSDCloud $StartOSDCloud"
         Add-Content -Path "$MountPath\Windows\System32\Startnet.cmd" -Value '@ECHO OFF' -Force
         Add-Content -Path "$MountPath\Windows\System32\Startnet.cmd" -Value 'ECHO Start-OSDCloud' -Force
-        Add-Content -Path "$MountPath\Windows\System32\Startnet.cmd" -Value "start /wait PowerShell -NoL -W Mi -C Start-OSDCloud $StartOSDCloud"
+        Add-Content -Path "$MountPath\Windows\System32\Startnet.cmd" -Value "start /wait PowerShell -NoL -C Start-OSDCloud $StartOSDCloud"
         Add-Content -Path "$MountPath\Windows\System32\Startnet.cmd" -Value '@ECHO ON' -Force
     }
     #=======================================================================
@@ -354,6 +359,9 @@ start PowerShell -Nol -W Mi
     }
     else {
         Write-Host -ForegroundColor DarkGray "Startnet.cmd: start PowerShell -NoL"
+
+        Add-Content -Path "$MountPath\Windows\System32\Startnet.cmd" -Value '@ECHO OFF' -Force
+        Add-Content -Path "$MountPath\Windows\System32\Startnet.cmd" -Value 'ECHO Start PowerShell' -Force
         Add-Content -Path "$MountPath\Windows\System32\Startnet.cmd" -Value 'start PowerShell -NoL' -Force
     }
     #=======================================================================
