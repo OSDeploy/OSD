@@ -34,6 +34,24 @@ function Get-OSDPad {
         Color   = $Color
     }
     #================================================
+    #   Certificate Workaround
+    #================================================
+    #region: Workaround for SelfSigned Cert and force TLS 1.2
+Add-Type @"
+using System.Net;
+using System.Security.Cryptography.X509Certificates;
+public class TrustAllCertsPolicy : ICertificatePolicy {
+    public bool CheckValidationResult(
+        ServicePoint srvPoint, X509Certificate certificate,
+        WebRequest request, int certificateProblem) {
+        return true;
+    }
+}
+"@
+    [System.Net.ServicePointManager]::CertificatePolicy = New-Object TrustAllCertsPolicy
+    [System.Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
+    #endregion
+    #================================================
     #   GitHub
     #================================================
     if ($PSCmdlet.ParameterSetName -eq 'GitHub') {
