@@ -1,4 +1,4 @@
-function Start-OSDPad {
+function Get-OSDPad {
     [CmdletBinding(DefaultParameterSetName = 'Standalone')]
     param (
         [Parameter(ParameterSetName = 'GitHub', Mandatory = $true, Position = 0)]
@@ -85,7 +85,7 @@ function Start-OSDPad {
         $Results = foreach ($Item in $GitHubApiContent) {
             #$FileContent = Invoke-RestMethod -UseBasicParsing -Uri $Item.git_url
             if ($Item.type -eq 'dir') {
-                Write-Host -ForegroundColor DarkCyan "Subdirectory: Start-OSDPad $RepoOwner $RepoName $($Item.name)"
+                Write-Host -ForegroundColor DarkCyan "GitHub Directory: OSDPad $RepoOwner $RepoName $($Item.name)"
                 
                 $ObjectProperties = @{
                     RepoOwner       = $RepoOwner
@@ -149,7 +149,7 @@ function Start-OSDPad {
     & "$($MyInvocation.MyCommand.Module.ModuleBase)\GUI\OSDPad.ps1"
     #================================================
 }
-function Start-OSDeployPad {
+function Get-OSDHelp {
     [CmdletBinding()]
     param (
         [Parameter(Position = 0)]
@@ -159,20 +159,23 @@ function Start-OSDeployPad {
         [string]$OAuth
     )
 
+    $RepoOwner = 'OSDeploy'
+    $RepoName = 'OSDHelp'
+
     if ($OAuth) {
         $OSDPadParams = @{
-            Brand           = "OSDeploy OSDPad $RepoFolder"
-            RepoOwner       = 'OSDeploy'
-            RepoName        = 'OSDPad'
+            Brand           = "OSDHelp $RepoFolder"
+            RepoOwner       = $RepoOwner
+            RepoName        = $RepoName
             RepoFolder      = $RepoFolder
             OAuth           = $OAuth
         }
     }
     else {
         $OSDPadParams = @{
-            Brand           = "OSDeploy OSDPad $RepoFolder"
-            RepoOwner       = 'OSDeploy'
-            RepoName        = 'OSDPad'
+            Brand           = "OSDHelp $RepoFolder"
+            RepoOwner       = $RepoOwner
+            RepoName        = $RepoName
             RepoFolder      = $RepoFolder
         }
     }

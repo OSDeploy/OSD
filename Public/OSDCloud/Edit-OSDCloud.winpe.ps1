@@ -243,7 +243,7 @@ wpeinit
 cd\
 start PowerShell -Nol -W Mi
 REM Waiting 5 seconds for hardware devices to initialize
-start /wait PowerShell -NoL -C Start-Sleep -Seconds 10
+start /wait PowerShell -Nol -W Mi -C Start-Sleep -Seconds 10
 '@
     $StartnetCMD | Out-File -FilePath "$MountPath\Windows\System32\Startnet.cmd" -Force -Encoding ascii
 
@@ -257,7 +257,7 @@ start /wait PowerShell -NoL -C Start-Sleep -Seconds 10
     }
 
     Add-Content -Path "$MountPath\Windows\System32\Startnet.cmd" -Value 'REM Waiting 10 seconds for network initialization' -Force
-    Add-Content -Path "$MountPath\Windows\System32\Startnet.cmd" -Value 'start /wait PowerShell -NoL -C Start-Sleep -Seconds 10' -Force
+    Add-Content -Path "$MountPath\Windows\System32\Startnet.cmd" -Value 'start /wait PowerShell -Nol -W Mi -C Start-Sleep -Seconds 10' -Force
 
 
     if ($StartUpdate) {

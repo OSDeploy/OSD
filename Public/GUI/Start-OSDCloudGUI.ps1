@@ -1,8 +1,10 @@
 function Start-OSDCloudGUI {
     [CmdletBinding()]
     param (
-        [string]$BrandingTitle = 'OSDCloud',
-        [string]$BrandingColor = '#01786A'
+        [Alias('BrandingTitle')]
+        [string]$Brand = 'OSDCloud',
+        [Alias('BrandingColor')]
+        [string]$Color = '#01786A'
     )
     #================================================
     #   Header
@@ -14,8 +16,8 @@ function Start-OSDCloudGUI {
     #   Branding
     #================================================
     $Global:OSDCloudGuiBranding = @{
-        Title   = $BrandingTitle
-        Color   = $BrandingColor
+        Title   = $Brand
+        Color   = $Color
     }
     #================================================
     & "$($MyInvocation.MyCommand.Module.ModuleBase)\GUI\OSDCloudGUI.ps1"
