@@ -179,5 +179,5 @@ function Get-OSDHelp {
             RepoFolder      = $RepoFolder
         }
     }
-    Start-OSDPad @OSDPadParams
+    Get-OSDPad @OSDPadParams
 }

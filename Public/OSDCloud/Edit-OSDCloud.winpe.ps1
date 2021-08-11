@@ -301,11 +301,11 @@ start /wait PowerShell -Nol -W Mi -C Start-Sleep -Seconds 10
     }
 
     if ($StartOSDPad) {
-        Write-Warning "The StartOSDPad parameter is adding Start-OSDPad to Startnet.cmd"
+        Write-Warning "The StartOSDPad parameter is adding OSDPad to Startnet.cmd"
         Write-Warning "This must be set every time you run Edit-OSDCloud.winpe or it will revert back to defaults"
         
-        Write-Host -ForegroundColor DarkGray "Startnet.cmd: start /wait PowerShell -NoL -C Start-OSDPad $StartOSDPad"
-        Add-Content -Path "$MountPath\Windows\System32\Startnet.cmd" -Value "start /wait PowerShell -NoL -C Start-OSDPad $StartOSDPad"
+        Write-Host -ForegroundColor DarkGray "Startnet.cmd: start /wait PowerShell -NoL -C OSDPad $StartOSDPad"
+        Add-Content -Path "$MountPath\Windows\System32\Startnet.cmd" -Value "start /wait PowerShell -NoL -C OSDPad $StartOSDPad"
     }
 
     if ($Startnet) {
