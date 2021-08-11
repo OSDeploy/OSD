@@ -40,7 +40,6 @@ function Edit-OSDCloud.winpe {
         [string]$StartPSCommand,
         [Alias('WebPSScript')]
         [string]$StartWebScript,
-        [switch]$StartUpdate,
         [string]$Wallpaper,
         [string]$WorkspacePath
     )
@@ -251,37 +250,17 @@ start /wait PowerShell -Nol -W Mi -C Start-Sleep -Seconds 10
     #   Wireless
     #=======================================================================
     if (Test-Path "$MountPath\Windows\WirelessConnect.exe") {
-        #Starting wlanSvc has moved to Start-WinREWiFi
-        #Write-Host -ForegroundColor DarkGray "Startnet.cmd: net start wlansvc"
-        #Add-Content -Path "$MountPath\Windows\System32\Startnet.cmd" -Value 'net start wlansvc' -Force
-
         Write-Host -ForegroundColor DarkGray 'Startnet.cmd: start PowerShell -NoL -C Start-WinREWiFi'
         Add-Content -Path "$MountPath\Windows\System32\Startnet.cmd" -Value 'ECHO Initialize Wireless Network' -Force
         Add-Content -Path "$MountPath\Windows\System32\Startnet.cmd" -Value 'start /wait PowerShell -NoL -C Start-WinREWiFi' -Force
     }
     #=======================================================================
-    #   Network Delay
+    #   Network Delay, Start Update, PowerShell Minimized
     #=======================================================================
     Add-Content -Path "$MountPath\Windows\System32\Startnet.cmd" -Value 'ECHO Initialize Network Connction (Minimized)' -Force
     Add-Content -Path "$MountPath\Windows\System32\Startnet.cmd" -Value 'start /wait PowerShell -Nol -W Mi -C Start-Sleep -Seconds 10' -Force
-    Add-Content -Path "$MountPath\Windows\System32\Startnet.cmd" -Value '@ECHO ON' -Force
-    #=======================================================================
-    #   StartUpdate Wait
-    #=======================================================================
-    if ($StartUpdate) {
-        Write-Warning "StartUpdate parameter is modifying Startnet.cmd"
-        Write-Warning "This parameter must be set every time you run Edit-OSDCloud.winpe or it will revert back to defaults"
-        
-        Write-Host -ForegroundColor DarkGray 'Startnet.cmd: start /wait PowerShell -NoL -W Mi -C "& {if (Test-WebConnection) {Install-Module OSD -Force -Verbose}}"'
-        Add-Content -Path "$MountPath\Windows\System32\Startnet.cmd" -Value '@ECHO OFF' -Force
-        Add-Content -Path "$MountPath\Windows\System32\Startnet.cmd" -Value 'ECHO Updating OSD PowerShell Module (Minimized)' -Force
-        Add-Content -Path "$MountPath\Windows\System32\Startnet.cmd" -Value 'start /wait PowerShell -NoL -W Mi -C "& {if (Test-WebConnection) {Install-Module OSD -Force -Verbose}}"'
-        Add-Content -Path "$MountPath\Windows\System32\Startnet.cmd" -Value '@ECHO ON' -Force
-    }
-    #=======================================================================
-    #   PowerShell Minimized
-    #=======================================================================
-    Add-Content -Path "$MountPath\Windows\System32\Startnet.cmd" -Value '@ECHO OFF' -Force
+    Add-Content -Path "$MountPath\Windows\System32\Startnet.cmd" -Value 'ECHO Updating OSD PowerShell Module (Minimized)' -Force
+    Add-Content -Path "$MountPath\Windows\System32\Startnet.cmd" -Value 'start /wait PowerShell -NoL -W Mi -C "& {if (Test-WebConnection) {Install-Module OSD -Force -Verbose}}"'
     Add-Content -Path "$MountPath\Windows\System32\Startnet.cmd" -Value 'ECHO Initialize PowerShell (Minimized)' -Force
     Add-Content -Path "$MountPath\Windows\System32\Startnet.cmd" -Value 'start PowerShell -Nol -W Mi' -Force
     Add-Content -Path "$MountPath\Windows\System32\Startnet.cmd" -Value '@ECHO ON' -Force
