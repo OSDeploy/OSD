@@ -235,39 +235,54 @@ function Edit-OSDCloud.winpe {
         Save-WindowsImage -Path $MountPath
     }
     #=======================================================================
-    #   Startnet
+    #   Drop initial Startnet.cmd
     #=======================================================================
     Write-Host -ForegroundColor DarkGray "Startnet.cmd: wpeinit"
 $StartnetCMD = @'
+@ECHO OFF
+ECHO Initialize WinPE
 wpeinit
 cd\
-start PowerShell -Nol -W Mi
-REM Waiting 5 seconds for hardware devices to initialize
+ECHO Initialize Hardware
 start /wait PowerShell -Nol -W Mi -C Start-Sleep -Seconds 10
+ECHO Initialize PowerShell (Minimized)
+start PowerShell -Nol -W Mi
 '@
     $StartnetCMD | Out-File -FilePath "$MountPath\Windows\System32\Startnet.cmd" -Force -Encoding ascii
-
+    #=======================================================================
+    #   Wireless
+    #=======================================================================
     if (Test-Path "$MountPath\Windows\WirelessConnect.exe") {
         #Starting wlanSvc has moved to Start-WinREWiFi
         #Write-Host -ForegroundColor DarkGray "Startnet.cmd: net start wlansvc"
         #Add-Content -Path "$MountPath\Windows\System32\Startnet.cmd" -Value 'net start wlansvc' -Force
 
         Write-Host -ForegroundColor DarkGray 'Startnet.cmd: start PowerShell -NoL -C Start-WinREWiFi'
+        Add-Content -Path "$MountPath\Windows\System32\Startnet.cmd" -Value 'ECHO Initialize Wireless Network' -Force
         Add-Content -Path "$MountPath\Windows\System32\Startnet.cmd" -Value 'start /wait PowerShell -NoL -C Start-WinREWiFi' -Force
     }
-
-    Add-Content -Path "$MountPath\Windows\System32\Startnet.cmd" -Value 'REM Waiting 10 seconds for network initialization' -Force
+    #=======================================================================
+    #   Network Delay
+    #=======================================================================
+    Add-Content -Path "$MountPath\Windows\System32\Startnet.cmd" -Value 'ECHO Initialize Network Connction (Minimized)' -Force
     Add-Content -Path "$MountPath\Windows\System32\Startnet.cmd" -Value 'start /wait PowerShell -Nol -W Mi -C Start-Sleep -Seconds 10' -Force
-
-
+    Add-Content -Path "$MountPath\Windows\System32\Startnet.cmd" -Value '@ECHO ON' -Force
+    #=======================================================================
+    #   StartUpdate Wait
+    #=======================================================================
     if ($StartUpdate) {
         Write-Warning "StartUpdate parameter is modifying Startnet.cmd"
         Write-Warning "This parameter must be set every time you run Edit-OSDCloud.winpe or it will revert back to defaults"
         
-        Write-Host -ForegroundColor DarkGray 'Startnet.cmd: start /wait PowerShell -NoL -C Install-Module OSD -Force -Verbose'
-        Add-Content -Path "$MountPath\Windows\System32\Startnet.cmd" -Value 'start /wait PowerShell -NoL -C "& {if (Test-WebConnection) {Install-Module OSD -Force -Verbose}"'
+        Write-Host -ForegroundColor DarkGray 'Startnet.cmd: start /wait PowerShell -NoL -W Mi -C "& {if (Test-WebConnection) {Install-Module OSD -Force -Verbose}}"'
+        Add-Content -Path "$MountPath\Windows\System32\Startnet.cmd" -Value '@ECHO OFF' -Force
+        Add-Content -Path "$MountPath\Windows\System32\Startnet.cmd" -Value 'ECHO Updating OSD PowerShell Module (Minimized)' -Force
+        Add-Content -Path "$MountPath\Windows\System32\Startnet.cmd" -Value 'start /wait PowerShell -NoL -W Mi -C "& {if (Test-WebConnection) {Install-Module OSD -Force -Verbose}}"'
+        Add-Content -Path "$MountPath\Windows\System32\Startnet.cmd" -Value '@ECHO ON' -Force
     }
-
+    #=======================================================================
+    #   StartPSCommand Wait
+    #=======================================================================
     if ($StartPSCommand) {
         Write-Warning "The StartPSCommand parameter is adding your Cloud PowerShell script to Startnet.cmd"
         Write-Warning "This must be set every time you run Edit-OSDCloud.winpe or it will revert back to defaults"
@@ -275,36 +290,56 @@ start /wait PowerShell -Nol -W Mi -C Start-Sleep -Seconds 10
         Write-Host -ForegroundColor DarkGray "Startnet.cmd: start /wait PowerShell -NoL -C `"$StartPSCommand`""
         Add-Content -Path "$MountPath\Windows\System32\Startnet.cmd" -Value "start /wait PowerShell -NoL -C `"$StartPSCommand`"" -Force
     }
-
+    #=======================================================================
+    #   StartWebScript /wait
+    #=======================================================================
     if ($StartWebScript) {
         Write-Warning "The StartWebScript parameter is adding your Cloud PowerShell script to Startnet.cmd"
         Write-Warning "This must be set every time you run Edit-OSDCloud.winpe or it will revert back to defaults"
 
         Write-Host -ForegroundColor DarkGray "Startnet.cmd: start /wait PowerShell -NoL -C Invoke-WebPSScript '$StartWebScript'"
+        Add-Content -Path "$MountPath\Windows\System32\Startnet.cmd" -Value '@ECHO OFF' -Force
+        Add-Content -Path "$MountPath\Windows\System32\Startnet.cmd" -Value 'Invoke-WebPSScript' -Force
+        Add-Content -Path "$MountPath\Windows\System32\Startnet.cmd" -Value '@ECHO ON' -Force
         Add-Content -Path "$MountPath\Windows\System32\Startnet.cmd" -Value "start /wait PowerShell -NoL -C Invoke-WebPSScript '$StartWebScript'" -Force
     }
-
+    #=======================================================================
+    #   StartOSDCloud /wait
+    #=======================================================================
     if ($StartOSDCloud) {
         Write-Warning "The StartOSDCloud parameter is adding Start-OSDCloud to Startnet.cmd"
         Write-Warning "This must be set every time you run Edit-OSDCloud.winpe or it will revert back to defaults"
         
-        Write-Host -ForegroundColor DarkGray "Startnet.cmd: start /wait PowerShell -NoL -C Start-OSDCloud $StartOSDCloud"
-        Add-Content -Path "$MountPath\Windows\System32\Startnet.cmd" -Value "start /wait PowerShell -NoL -C Start-OSDCloud $StartOSDCloud"
+        Write-Host -ForegroundColor DarkGray "Startnet.cmd: start /wait PowerShell -NoL -W Mi -C Start-OSDCloud $StartOSDCloud"
+        Add-Content -Path "$MountPath\Windows\System32\Startnet.cmd" -Value '@ECHO OFF' -Force
+        Add-Content -Path "$MountPath\Windows\System32\Startnet.cmd" -Value 'ECHO Start-OSDCloud' -Force
+        Add-Content -Path "$MountPath\Windows\System32\Startnet.cmd" -Value "start /wait PowerShell -NoL -W Mi -C Start-OSDCloud $StartOSDCloud"
+        Add-Content -Path "$MountPath\Windows\System32\Startnet.cmd" -Value '@ECHO ON' -Force
     }
-
+    #=======================================================================
+    #   StartOSDCloudGUI /wait
+    #=======================================================================
     if ($StartOSDCloudGUI) {
         Write-Warning "The StartOSDCloudGUI parameter is adding Start-OSDCloudGUI to Startnet.cmd"
         Write-Warning "This must be set every time you run Edit-OSDCloud.winpe or it will revert back to defaults"
         
-        Write-Host -ForegroundColor DarkGray 'Startnet.cmd: start /wait PowerShell -NoL -C Start-OSDCloudGUI'
-        Add-Content -Path "$MountPath\Windows\System32\Startnet.cmd" -Value 'start /wait PowerShell -NoL -C Start-OSDCloudGUI'
+        Write-Host -ForegroundColor DarkGray 'Startnet.cmd: start /wait PowerShell -NoL -W Mi -C Start-OSDCloudGUI'
+        Add-Content -Path "$MountPath\Windows\System32\Startnet.cmd" -Value '@ECHO OFF' -Force
+        Add-Content -Path "$MountPath\Windows\System32\Startnet.cmd" -Value 'ECHO Start-OSDCloudGUI' -Force
+        Add-Content -Path "$MountPath\Windows\System32\Startnet.cmd" -Value 'start /wait PowerShell -NoL -W Mi -C Start-OSDCloudGUI'
+        Add-Content -Path "$MountPath\Windows\System32\Startnet.cmd" -Value '@ECHO ON' -Force
     }
-
+    #=======================================================================
+    #   StartOSDPad /wait
+    #=======================================================================
     if ($StartOSDPad) {
         Write-Warning "The StartOSDPad parameter is adding OSDPad to Startnet.cmd"
         Write-Warning "This must be set every time you run Edit-OSDCloud.winpe or it will revert back to defaults"
         
         Write-Host -ForegroundColor DarkGray "Startnet.cmd: start /wait PowerShell -NoL -C OSDPad $StartOSDPad"
+        Add-Content -Path "$MountPath\Windows\System32\Startnet.cmd" -Value '@ECHO OFF' -Force
+        Add-Content -Path "$MountPath\Windows\System32\Startnet.cmd" -Value 'ECHO OSDPad' -Force
+        Add-Content -Path "$MountPath\Windows\System32\Startnet.cmd" -Value '@ECHO ON' -Force
         Add-Content -Path "$MountPath\Windows\System32\Startnet.cmd" -Value "start /wait PowerShell -NoL -C OSDPad $StartOSDPad"
     }
 

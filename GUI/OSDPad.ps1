@@ -136,7 +136,10 @@ function Set-OSDPadContent {
     }
     foreach ($Item in $Hide) {
         if ($Item -eq 'Branding') {$BrandingTitleControl.Visibility = "Collapsed"}
-        if ($Item -eq 'Script') {$ScriptTextControl.Visibility = "Collapsed"}
+        if ($Item -eq 'Script') {
+            $Global:XamlWindow.Height="140"
+            $ScriptTextControl.Visibility = "Collapsed"
+        }
     }
     Write-Host -ForegroundColor DarkGray "================================================"
 }
