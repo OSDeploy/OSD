@@ -156,9 +156,6 @@ FunctionsToExport =
 'Get-MyComputerManufacturer',
 'Get-MyComputerModel',
 'Get-MyComputerProduct',
-'Start-OOBE.autopilot',#OOBE
-'Start-OOBE.settings',
-'Start-OOBE.wifi',
 'Edit-OSDCloud.winpe',#OSDCLOUD
 'Find-OSDCloudOfflineFile',
 'Find-OSDCloudOfflinePath',
@@ -263,11 +260,15 @@ FunctionsToExport =
 'Get-DownLinks',
 'New-CAB',
 'Show-RegistryXML',
-'Start-OOBEDeploy',
 'Start-OSDPad',
 'Start-OSDeployPad',
 'Get-OSDPad',
-'Get-OSDHelp'
+'Get-OSDHelp',
+'Start-OOBEDeploy',
+'Invoke-oobeAddNetFX3',
+'Invoke-oobeAddRSAT',
+'Invoke-oobeUpdateDrivers',
+'Invoke-oobeUpdateWindows'
 
 # Cmdlets to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no cmdlets to export.
 CmdletsToExport = @()
