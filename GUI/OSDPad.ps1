@@ -29,7 +29,6 @@ $Global:MyScriptDir = [System.IO.Path]::GetDirectoryName($myInvocation.MyCommand
 #================================================
 [System.Reflection.Assembly]::LoadWithPartialName("presentationframework") | Out-Null
 [System.Reflection.Assembly]::LoadFrom("$Global:MyScriptDir\assembly\System.Windows.Interactivity.dll") | Out-Null
-[System.Reflection.Assembly]::LoadFrom("$Global:MyScriptDir\assembly\MahApps.Metro.dll") | Out-Null
 #================================================
 #   Set PowerShell Window Title
 #================================================
@@ -72,7 +71,6 @@ function LoadForm {
 #================================================
 #   LoadForm
 #================================================
-#LoadForm
 LoadForm -XamlPath (Join-Path $Global:MyScriptDir 'OSDPad.xaml')
 #================================================
 #   Initialize Script Selection

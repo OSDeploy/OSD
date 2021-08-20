@@ -1,19 +1,19 @@
 function Get-OSDWinEvent {
     [CmdletBinding()]
     param (
+        [ValidateSet('Autopilot','BlueScreen','Time')]
+        [Alias('Quick')]
+        [string]$Area,
 
         [int32]$DayCount = 1,
-        [string[]]$LogName = @('System','Application'),
-
-        [ValidateSet('Autopilot','BlueScreen')]
-        [string]$Quick
+        [string[]]$LogName = @('System','Application')
     )
 
     $Events = @()
 
     $StartTime = (Get-Date).AddDays(-$DayCount)
 
-    if ($Quick -eq 'Autopilot') {
+    if ($Area -eq 'Autopilot') {
         $Events += Get-WinEvent -FilterHashtable @{StartTime = $StartTime; LogName = 'Microsoft-Windows-AAD/Operational'} -ErrorAction Ignore
         #$Events += Get-WinEvent -FilterHashtable @{StartTime = $StartTime; LogName = 'Microsoft-Windows-AppXDeployment-Server/Operational'} -ErrorAction Ignore
         $Events += Get-WinEvent -FilterHashtable @{StartTime = $StartTime; LogName = 'Microsoft-Windows-AssignedAccess/Admin'} -ErrorAction Ignore
@@ -28,11 +28,17 @@ function Get-OSDWinEvent {
         $Events += Get-WinEvent -FilterHashtable @{StartTime = $StartTime; LogName = 'Microsoft-Windows-Shell-Core/Operational'} -ErrorAction Ignore
         $Events += Get-WinEvent -FilterHashtable @{StartTime = $StartTime; LogName = 'Microsoft-Windows-User Device Registration/Admin'} -ErrorAction Ignore
     }
-    elseif ($Quick -eq 'BlueScreen') {
+    elseif ($Area -eq 'BlueScreen') {
         $Events = Get-WinEvent -FilterHashtable @{
             Id = 1001
             ProviderName = 'Microsoft-Windows-WER-SystemErrorReporting'
             #StartTime = $StartTime
+        }
+    }
+    elseif ($Area -eq 'Time') {
+        $Events = Get-WinEvent -FilterHashtable @{
+            LogName = 'Microsoft-Windows-Time-Service/Operational'
+            StartTime = $StartTime
         }
     }
     else {
