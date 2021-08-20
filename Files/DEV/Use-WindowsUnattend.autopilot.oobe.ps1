@@ -21,15 +21,15 @@ $UnattendXml = @'
 </settings>
 </unattend>
 '@
-    #=======================================================================
+    #=================================================
     #	Block
-    #=======================================================================
+    #=================================================
     Block-WinOS
     Block-WindowsVersionNe10
     Block-PowerShellVersionLt5
-    #=======================================================================
+    #=================================================
     #	Panther Unattend.xml
-    #=======================================================================
+    #=================================================
     $Panther = 'C:\Windows\Panther'
     $UnattendPath = "$Panther\Unattend.xml"
 
@@ -39,9 +39,9 @@ $UnattendXml = @'
 
     Write-Verbose -Verbose "Setting Autopilot Unattend.xml at $UnattendPath"
     $UnattendXml | Out-File -FilePath $UnattendPath -Encoding utf8 -Width 2000 -Force
-    #=======================================================================
+    #=================================================
     #	Use-WindowsUnattend
-    #=======================================================================
+    #=================================================
     Write-Verbose -Verbose "Use-WindowsUnattend -Path 'C:\' -UnattendPath $UnattendPath"
     Use-WindowsUnattend -Path 'C:\' -UnattendPath $UnattendPath -Verbose
     
@@ -49,5 +49,5 @@ $UnattendXml = @'
     Copy-PSModuleToFolder -Name OSD -Destination 'C:\Program Files\WindowsPowerShell\Modules'
 
     Notepad $UnattendPath
-    #=======================================================================
+    #=================================================
 }

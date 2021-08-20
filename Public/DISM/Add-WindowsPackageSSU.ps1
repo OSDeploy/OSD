@@ -37,21 +37,21 @@ function Add-WindowsPackageSSU {
 
         [string]$LogPath = "$env:windir\Logs\Dism\dism.log"
     )
-    #=======================================================================
+    #=================================================
     #   Blocks
-    #=======================================================================
+    #=================================================
     Block-StandardUser
     Block-WindowsVersionNe10
-    #=======================================================================
+    #=================================================
     #   Test PackagePath
-    #=======================================================================
+    #=================================================
     if (!(Test-Path "$PackagePath" -PathType Leaf)) {
         Write-Warning "Add-WindowsPackageLCU could not find $Path"; Continue
     }
     $PackagePathItem = Get-Item $PackagePath
-    #=======================================================================
+    #=================================================
     #   SSU Temp Path
-    #=======================================================================
+    #=================================================
     $SSUTemp = Join-Path $env:Temp 'SSU'
 
     #See if the path already exists and remove it
@@ -66,9 +66,9 @@ function Add-WindowsPackageSSU {
     if (!(Test-Path $SSUTemp)) {
         Write-Warning "Add-WindowsPackageLCU could not create $SSUTemp"; Continue
     }
-    #=======================================================================
+    #=================================================
     #   Expand MSU
-    #=======================================================================
+    #=================================================
     if ($PackagePathItem.Extension -match '.msu') {
         & Expand.exe "$($PackagePathItem.FullName)" /f:Windows*.cab "$SSUTemp"
         Get-ChildItem -Path $SSUTemp *.cab | Where-Object {$_.Name -notmatch 'SSU'} | foreach {
@@ -79,9 +79,9 @@ function Add-WindowsPackageSSU {
         #Write-Host -ForegroundColor DarkGray "Expand SSU: $PackagePath"
         & Expand.exe "$($PackagePathItem.FullName)" /f:SSU*.cab "$SSUTemp"
     }
-    #=======================================================================
+    #=================================================
     #   Apply SSU
-    #=======================================================================
+    #=================================================
     if ($Online.IsPresent) {
         Get-ChildItem -Path $SSUTemp SSU*.cab | foreach {
             Write-Host -ForegroundColor DarkGray $_.FullName
@@ -94,5 +94,5 @@ function Add-WindowsPackageSSU {
             Add-WindowsPackage -PackagePath $_.FullName -Path $Path -LogPath $LogPath -Verbose | Out-Null
         }
     }
-    #=======================================================================
+    #=================================================
 }

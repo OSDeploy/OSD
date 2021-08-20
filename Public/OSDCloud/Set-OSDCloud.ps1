@@ -1,9 +1,9 @@
 function Set-OSDCloudUnattendAuditMode {
     [CmdletBinding()]
     param ()
-#=======================================================================
+#=================================================
 #	UnattendXml
-#=======================================================================
+#=================================================
 $UnattendXml = @'
 <?xml version="1.0" encoding="utf-8"?>
 <unattend xmlns="urn:schemas-microsoft-com:unattend">
@@ -27,40 +27,40 @@ $UnattendXml = @'
     </settings>
 </unattend>
 '@
-    #=======================================================================
+    #=================================================
     #	Block
-    #=======================================================================
+    #=================================================
     Block-WinOS
     Block-WindowsVersionNe10
     Block-PowerShellVersionLt5
-    #=======================================================================
+    #=================================================
     #	Directories
-    #=======================================================================
+    #=================================================
     if (-NOT (Test-Path 'C:\Windows\Panther')) {
         New-Item -Path 'C:\Windows\Panther'-ItemType Directory -Force -ErrorAction Stop | Out-Null
     }
-    #=======================================================================
+    #=================================================
     #	Panther Unattend
-    #=======================================================================
+    #=================================================
     $Panther = 'C:\Windows\Panther'
     $UnattendPath = "$Panther\Unattend.xml"
 
     Write-Verbose -Verbose "Setting $UnattendPath"
     $UnattendXml | Out-File -FilePath $UnattendPath -Encoding utf8 -Width 2000 -Force
-    #=======================================================================
+    #=================================================
     #	Use-WindowsUnattend
-    #=======================================================================
+    #=================================================
     Write-Verbose -Verbose "Use-WindowsUnattend -Path 'C:\' -UnattendPath $UnattendPath"
     Use-WindowsUnattend -Path 'C:\' -UnattendPath $UnattendPath -Verbose
     Notepad $UnattendPath
-    #=======================================================================
+    #=================================================
 }
 function Set-OSDCloudUnattendAuditModeAutopilot {
     [CmdletBinding()]
     param ()
-#=======================================================================
+#=================================================
 #	UnattendXml
-#=======================================================================
+#=================================================
 $UnattendXml = @'
 <?xml version="1.0" encoding="utf-8"?>
 <unattend xmlns="urn:schemas-microsoft-com:unattend">
@@ -107,45 +107,45 @@ $UnattendXml = @'
     </settings>
 </unattend>
 '@
-    #=======================================================================
+    #=================================================
     #	Block
-    #=======================================================================
+    #=================================================
     Block-WinOS
     Block-WindowsVersionNe10
     Block-PowerShellVersionLt5
-    #=======================================================================
+    #=================================================
     #	Directories
-    #=======================================================================
+    #=================================================
     if (-NOT (Test-Path 'C:\Windows\Panther')) {
         New-Item -Path 'C:\Windows\Panther'-ItemType Directory -Force -ErrorAction Stop | Out-Null
     }
-    #=======================================================================
+    #=================================================
     #	Panther Unattend
-    #=======================================================================
+    #=================================================
     $Panther = 'C:\Windows\Panther'
     $UnattendPath = "$Panther\Unattend.xml"
 
     Write-Verbose -Verbose "Setting $UnattendPath"
     $UnattendXml | Out-File -FilePath $UnattendPath -Encoding utf8 -Width 2000 -Force
-    #=======================================================================
+    #=================================================
     #	Copy PSModule
-    #=======================================================================
+    #=================================================
     Write-Verbose -Verbose "Copy-PSModuleToFolder -Name OSD to C:\Program Files\WindowsPowerShell\Modules"
     Copy-PSModuleToFolder -Name OSD -Destination 'C:\Program Files\WindowsPowerShell\Modules'
-    #=======================================================================
+    #=================================================
     #	Use-WindowsUnattend
-    #=======================================================================
+    #=================================================
     Write-Verbose -Verbose "Use-WindowsUnattend -Path 'C:\' -UnattendPath $UnattendPath"
     Use-WindowsUnattend -Path 'C:\' -UnattendPath $UnattendPath -Verbose
     Notepad $UnattendPath
-    #=======================================================================
+    #=================================================
 }
 function Set-OSDCloudUnattendSpecialize {
     [CmdletBinding()]
     param ()
-#=======================================================================
+#=================================================
 #	UnattendXml
-#=======================================================================
+#=================================================
 $UnattendXml = @'
 <?xml version="1.0" encoding="utf-8"?>
 <unattend xmlns="urn:schemas-microsoft-com:unattend">
@@ -162,36 +162,36 @@ $UnattendXml = @'
     </settings>
 </unattend>
 '@
-    #=======================================================================
+    #=================================================
     #	Block
-    #=======================================================================
+    #=================================================
     Block-WinOS
     Block-WindowsVersionNe10
     Block-PowerShellVersionLt5
-    #=======================================================================
+    #=================================================
     #	Directories
-    #=======================================================================
+    #=================================================
     if (-NOT (Test-Path 'C:\Windows\Panther')) {
         New-Item -Path 'C:\Windows\Panther'-ItemType Directory -Force -ErrorAction Stop | Out-Null
     }
-    #=======================================================================
+    #=================================================
     #	Panther Unattend
-    #=======================================================================
+    #=================================================
     $Panther = 'C:\Windows\Panther'
     $UnattendPath = "$Panther\Invoke-OSDSpecialize.xml"
 
     Write-Verbose -Verbose "Setting $UnattendPath"
     $UnattendXml | Out-File -FilePath $UnattendPath -Encoding utf8 -Width 2000 -Force
-    #=======================================================================
+    #=================================================
     #	Registry Unattend
     #   HKEY_LOCAL_MACHINE\System\Setup\UnattendFile
     #   Specifies a pointer in the registry to an answer file
     #   The answer file is not required to be named Unattend.xml
     #   https://docs.microsoft.com/en-us/windows-hardware/manufacture/desktop/windows-setup-automation-overview
-    #=======================================================================
+    #=================================================
     Write-Verbose -Verbose "Setting Unattend in Offline Registry"
     Invoke-Exe reg load HKLM\TempSYSTEM "C:\Windows\System32\Config\SYSTEM"
     Invoke-Exe reg add HKLM\TempSYSTEM\Setup /v UnattendFile /d "C:\Windows\Panther\Invoke-OSDSpecialize.xml" /f
     Invoke-Exe reg unload HKLM\TempSYSTEM
-    #=======================================================================
+    #=================================================
 }

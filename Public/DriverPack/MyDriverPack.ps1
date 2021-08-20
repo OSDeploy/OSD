@@ -4,13 +4,13 @@ function Get-MyDriverPack {
         [string]$Manufacturer = (Get-MyComputerManufacturer -Brief),
         [string]$Product = (Get-MyComputerProduct)
     )
-    #=======================================================================
+    #=================================================
     #   Set ErrorActionPreference
-    #=======================================================================
+    #=================================================
     $ErrorActionPreference = 'SilentlyContinue'
-    #=======================================================================
+    #=================================================
     #   Action
-    #=======================================================================
+    #=================================================
     if ($Manufacturer -eq 'Dell') {
         $Result = Get-DellDriverPack | Where-Object {($_.Product -contains $Product)}
         $Result[0]
@@ -30,7 +30,7 @@ function Get-MyDriverPack {
     else {
         Write-Warning "$Manufacturer is not supported yet"
     }
-    #=======================================================================
+    #=================================================
 }
 function Save-MyDriverPack {
     [CmdletBinding()]
@@ -43,14 +43,14 @@ function Save-MyDriverPack {
     )
     Write-Verbose "Manufacturer: $Manufacturer"
     Write-Verbose "Product: $Product"
-    #=======================================================================
+    #=================================================
     #   Block
-    #=======================================================================
+    #=================================================
     Block-StandardUser
     Block-WindowsVersionNe10
-    #=======================================================================
+    #=================================================
     #   Get-MyDriverPack
-    #=======================================================================
+    #=================================================
     $GetMyDriverPack = Get-MyDriverPack -Manufacturer $Manufacturer -Product $Product
 
     if ($GetMyDriverPack) {
@@ -63,9 +63,9 @@ function Save-MyDriverPack {
         $Source = $DriverPackUrl
         $Destination = $DownloadPath
         $OutFile = Join-Path $Destination $DriverPackFile
-        #=======================================================================
+        #=================================================
         #   Save-WebFile
-        #=======================================================================
+        #=================================================
         if (-NOT (Test-Path "$Destination")) {
             New-Item $Destination -ItemType Directory -Force -ErrorAction Stop | Out-Null
         }
@@ -78,16 +78,16 @@ function Save-MyDriverPack {
 
         $GetItemOutFile = Get-Item $OutFile
         $GetMyDriverPack | ConvertTo-Json | Out-File "$OutFile.json" -Encoding ascii -Width 2000 -Force
-        #=======================================================================
+        #=================================================
         #   Expand
-        #=======================================================================
+        #=================================================
         if ($PSBoundParameters.ContainsKey('Expand')) {
 
             $ExpandFile = $GetItemOutFile.FullName
             Write-Verbose -Verbose "DriverPack: $ExpandFile"
-            #=======================================================================
+            #=================================================
             #   Cab
-            #=======================================================================
+            #=================================================
             if ($GetItemOutFile.Extension -eq '.cab') {
                 $DestinationPath = Join-Path $GetItemOutFile.Directory $GetItemOutFile.BaseName
     
@@ -98,9 +98,9 @@ function Save-MyDriverPack {
                     Expand -R "$ExpandFile" -F:* "$DestinationPath" | Out-Null
                 }
             }
-            #=======================================================================
+            #=================================================
             #   HP
-            #=======================================================================
+            #=================================================
             if (($GetItemOutFile.Extension -eq '.exe') -and ($env:SystemDrive -ne 'X:')) {
                 if (($GetItemOutFile.VersionInfo.InternalName -match 'hpsoftpaqwrapper') -or ($GetItemOutFile.VersionInfo.OriginalFilename -match 'hpsoftpaqwrapper.exe') -or ($GetItemOutFile.VersionInfo.FileDescription -like "HP *")) {
                     Write-Verbose -Verbose "FileDescription: $($GetItemOutFile.VersionInfo.FileDescription)"
@@ -116,9 +116,9 @@ function Save-MyDriverPack {
                     }
                 }
             }
-            #=======================================================================
+            #=================================================
             #   Lenovo
-            #=======================================================================
+            #=================================================
             if (($GetItemOutFile.Extension -eq '.exe') -and ($env:SystemDrive -ne 'X:')) {
                 if ($GetItemOutFile.VersionInfo.FileDescription -match 'Lenovo') {
                     Write-Verbose -Verbose "FileDescription: $($GetItemOutFile.VersionInfo.FileDescription)"
@@ -132,9 +132,9 @@ function Save-MyDriverPack {
                     }
                 }
             }
-            #=======================================================================
+            #=================================================
             #   MSI
-            #=======================================================================
+            #=================================================
             if (($GetItemOutFile.Extension -eq '.msi') -and ($env:SystemDrive -ne 'X:')) {
                 $DestinationPath = Join-Path $GetItemOutFile.Directory $GetItemOutFile.BaseName
 
@@ -142,9 +142,9 @@ function Save-MyDriverPack {
                     #Need to sort out what to do here
                 }
             }
-            #=======================================================================
+            #=================================================
             #   Zip
-            #=======================================================================
+            #=================================================
             if ($GetItemOutFile.Extension -eq '.zip') {
                 $DestinationPath = Join-Path $GetItemOutFile.Directory $GetItemOutFile.BaseName
 
@@ -153,17 +153,17 @@ function Save-MyDriverPack {
                     Expand-Archive -Path $ExpandFile -DestinationPath $DestinationPath -Force
                 }
             }
-            #=======================================================================
+            #=================================================
             #   Everything Else
-            #=======================================================================
+            #=================================================
             #Write-Warning "Unable to expand $ExpandFile"
         }
-        #=======================================================================
+        #=================================================
         #   Enable-SpecializeDriverPack
-        #=======================================================================
+        #=================================================
 <#         if ($env:SystemDrive -eq 'X:') {
             Enable-SpecializeDriverPack
         } #>
-        #=======================================================================
+        #=================================================
     }
 }

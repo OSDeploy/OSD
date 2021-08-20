@@ -25,17 +25,17 @@ function Remove-AppxOnline {
     )
 
     begin {
-        #=======================================================================
+        #=================================================
         #   Blocks
-        #=======================================================================
+        #=================================================
         Block-StandardUser
         Block-WindowsVersionNe10
-        #=======================================================================
+        #=================================================
     }
     process {
-        #=======================================================================
+        #=================================================
         #   AppxPackage
-        #=======================================================================
+        #=================================================
         if (Get-Command Get-AppxPackage) {
             if ($GridRemoveAppx.IsPresent) {
                 Get-AppxPackage | Select-Object * | Where-Object {$_.NonRemovable -ne $true} | Out-GridView -PassThru -Title "Select Appx Packages to Remove from Online Windows Image" | ForEach-Object {
@@ -44,9 +44,9 @@ function Remove-AppxOnline {
                 }
             }
         }
-        #=======================================================================
+        #=================================================
         #   AppxProvisionedPackage
-        #=======================================================================
+        #=================================================
         if (Get-Command Get-AppxProvisionedPackage) {
             if ($GridRemoveAppxPP.IsPresent) {
                 Get-AppxProvisionedPackage -Online | Select-Object DisplayName, PackageName | Out-GridView -PassThru -Title "Select Appx Provisioned Packages to Remove from Online Windows Image" | ForEach-Object {
@@ -55,9 +55,9 @@ function Remove-AppxOnline {
                 }
             }
         }
-        #=======================================================================
+        #=================================================
         #   RemoveAppx
-        #=======================================================================
+        #=================================================
         foreach ($Item in $Name) {
             if (Get-Command Get-AppxPackage) {
                 if ((Get-Command Get-AppxPackage).Parameters.ContainsKey('AllUsers')) {

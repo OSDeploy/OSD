@@ -10,27 +10,27 @@ function Save-MsUpCatDriver {
         [ValidateSet('Display','Net','USB')]
         [string]$PNPClass
     )
-    #=======================================================================
+    #=================================================
     if (!($DestinationDirectory)) {
         Write-Warning 'Set the DestinationDirectory parameter to download the Drivers'
     }
-    #=======================================================================
+    #=================================================
     #	MSCatalog PowerShell Module
     #   Ryan-Jan
     #   https://github.com/ryan-jan/MSCatalog
     #   This excellent work is a good way to gather information from MS
     #   Catalog
-    #=======================================================================
+    #=================================================
 <#     if (!(Get-Module -ListAvailable -Name MSCatalog)) {
         Install-Module MSCatalog -Force -ErrorAction Ignore
     } #>
-    #=======================================================================
+    #=================================================
     #$DeviceIDPattern = 'VEN_([0-9a-f]){4}&DEV_([0-9a-f]){4}&SUBSYS_([0-9a-f]){8}'
     $DeviceIDPattern = 'v[ei][dn]_([0-9a-f]){4}&[pd][ie][dv]_([0-9a-f]){4}'
     if (Test-WebConnectionMsUpCat) {
-        #=======================================================================
+        #=================================================
         #	ByPNPClass
-        #=======================================================================
+        #=================================================
         if ($PSCmdlet.ParameterSetName -eq 'ByPNPClass') {
             $Params = @{
                 ClassName = 'Win32_PnpEntity' 
@@ -107,9 +107,9 @@ function Save-MsUpCatDriver {
                 }
             }
         }
-        #=======================================================================
+        #=================================================
         #	ByHardwareID
-        #=======================================================================
+        #=================================================
         if ($PSCmdlet.ParameterSetName -eq 'ByHardwareID') {
     
             foreach ($Item in $HardwareID) {

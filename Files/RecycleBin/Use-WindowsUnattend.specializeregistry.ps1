@@ -1,15 +1,15 @@
 function Use-WindowsUnattend.specializeregistry {
     [CmdletBinding()]
     param ()
-    #=======================================================================
+    #=================================================
     #	Block
-    #=======================================================================
+    #=================================================
     Block-WinOS
     Block-WindowsVersionNe10
     Block-PowerShellVersionLt5
-    #=======================================================================
+    #=================================================
     #   Specialize.cmd
-    #=======================================================================
+    #=================================================
     Write-Verbose "Creating C:\Windows\Setup\Scripts\Specialize.cmd"
 
     if (-NOT (Test-Path 'C:\Windows\Setup\Scripts')) {
@@ -22,9 +22,9 @@ pause
 '@
 
     $Specialize | Out-File -FilePath 'C:\Windows\Setup\Scripts\Specialize.cmd' -Encoding ascii -Width 2000 -Force
-    #=======================================================================
+    #=================================================
     #	Panther Unattend.xml
-    #=======================================================================
+    #=================================================
     #Mount Registry
     reg load HKLM\mSOFTWARE "C:\Windows\System32\Config\SOFTWARE"
     reg add "HKLM\mSOFTWARE\Microsoft\Windows NT\CurrentVersion\UnattendSettings\Setup-Unattend-Settings\RunSynchronous\1" /v Description /d OSDWinSetup /f
@@ -32,5 +32,5 @@ pause
     reg unload HKLM\mSOFTWARE
 
     Notepad 'C:\Windows\Setup\Scripts\Specialize.cmd'
-    #=======================================================================
+    #=================================================
 }

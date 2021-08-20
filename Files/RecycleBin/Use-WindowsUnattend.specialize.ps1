@@ -20,15 +20,15 @@ $UnattendXml = @'
 </settings>
 </unattend>
 '@
-    #=======================================================================
+    #=================================================
     #	Block
-    #=======================================================================
+    #=================================================
     Block-WinOS
     Block-WindowsVersionNe10
     Block-PowerShellVersionLt5
-    #=======================================================================
+    #=================================================
     #   Specialize.cmd
-    #=======================================================================
+    #=================================================
     Write-Verbose "Adding C:\Windows\Setup\Scripts\Specialize.cmd"
 
     if (-NOT (Test-Path 'C:\Windows\Setup\Scripts')) {
@@ -40,9 +40,9 @@ pause
 '@
 
     $Specialize | Out-File -FilePath 'C:\Windows\Setup\Scripts\Specialize.cmd' -Encoding ascii -Width 2000 -Force
-    #=======================================================================
+    #=================================================
     #	Panther Unattend.xml
-    #=======================================================================
+    #=================================================
     $Panther = 'C:\Windows\Panther'
     $UnattendPath = "$Panther\Specialize.xml"
 
@@ -52,9 +52,9 @@ pause
 
     Write-Verbose -Verbose "Setting Specialize.xml at $UnattendPath"
     $UnattendXml | Out-File -FilePath $UnattendPath -Encoding utf8 -Width 2000 -Force
-    #=======================================================================
+    #=================================================
     #	Use-WindowsUnattend
-    #=======================================================================
+    #=================================================
     Write-Verbose -Verbose "Use-WindowsUnattend -Path 'C:\' -UnattendPath $UnattendPath"
     Use-WindowsUnattend -Path 'C:\' -UnattendPath $UnattendPath -Verbose
     
@@ -62,5 +62,5 @@ pause
     #Copy-PSModuleToFolder -Name OSD -Destination 'C:\Program Files\WindowsPowerShell\Modules'
 
     Notepad 'C:\Windows\Setup\Scripts\Specialize.cmd'
-    #=======================================================================
+    #=================================================
 }

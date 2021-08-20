@@ -29,19 +29,19 @@ function Get-SystemFirmwareResource {
     }
 }
 function Get-SystemFirmwareUpdate {
-    #=======================================================================
+    #=================================================
     #	MSCatalog PowerShell Module
     #   Ryan-Jan
     #   https://github.com/ryan-jan/MSCatalog
     #   This excellent work is a good way to gather information from MS
     #   Catalog
-    #=======================================================================
+    #=================================================
     if (!(Get-Module -ListAvailable -Name MSCatalog)) {
         Install-Module MSCatalog -Force
     }
-    #=======================================================================
+    #=================================================
     #	Make sure the Module was installed
-    #=======================================================================
+    #=================================================
     if (Get-Module -ListAvailable -Name MSCatalog) {
         if (Test-WebConnectionMsUpCat) {
             Try {
@@ -58,28 +58,28 @@ function Get-SystemFirmwareUpdate {
     else {
         Write-Warning "Get-SystemFirmwareUpdate: Could not install required PowerShell Module MSCatalog"
     }
-    #=======================================================================
+    #=================================================
 }
 function Install-SystemFirmwareUpdate {
     [CmdLetBinding()]
     param (
         [String] $DestinationDirectory = "C:\Drivers\SystemFirmwareUpdate"
     )
-    #=======================================================================
+    #=================================================
     #	Blocks
-    #=======================================================================
+    #=================================================
     Block-StandardUser
-    #=======================================================================
+    #=================================================
     #	MSCatalog PowerShell Module
     #   Ryan-Jan
     #   https://github.com/ryan-jan/MSCatalog
     #   This excellent work is a good way to gather information from MS
     #   Catalog
-    #=======================================================================
+    #=================================================
     if (!(Get-Module -ListAvailable -Name MSCatalog)) {
         Install-Module MSCatalog -Force -ErrorAction Ignore
     }
-    #=======================================================================
+    #=================================================
     if (Test-Path 'C:\Windows' -PathType Container) {
         if (Test-WebConnectionMsUpCat) {
             if (Get-Module -ListAvailable -Name MSCatalog -ErrorAction Ignore) {
@@ -129,24 +129,24 @@ function Install-SystemFirmwareUpdate {
             Write-Warning "Make sure that Bitlocker encrypted drives are unlocked and suspended first"
         }
     }
-    #=======================================================================
+    #=================================================
 }
 function Save-SystemFirmwareUpdate {
     [CmdLetBinding()]
     param (
         [String] $DestinationDirectory = "$env:TEMP\SystemFirmwareUpdate"
     )
-    #=======================================================================
+    #=================================================
     #	MSCatalog PowerShell Module
     #   Ryan-Jan
     #   https://github.com/ryan-jan/MSCatalog
     #   This excellent work is a good way to gather information from MS
     #   Catalog
-    #=======================================================================
+    #=================================================
     if (!(Get-Module -ListAvailable -Name MSCatalog)) {
         Install-Module MSCatalog -Force -ErrorAction Ignore
     }
-    #=======================================================================
+    #=================================================
     if (Test-WebConnectionMsUpCat) {
         if (Get-Module -ListAvailable -Name MSCatalog -ErrorAction Ignore) {
             $SystemFirmwareUpdate = Get-SystemFirmwareUpdate
@@ -190,5 +190,5 @@ function Save-SystemFirmwareUpdate {
     else {
         Write-Warning "Save-SystemFirmwareUpdate: Could not reach https://www.catalog.update.microsoft.com/"
     }
-    #=======================================================================
+    #=================================================
 }

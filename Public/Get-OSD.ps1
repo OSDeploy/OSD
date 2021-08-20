@@ -13,15 +13,15 @@ https://osd.osdeploy.com/module/functions
 function Get-OSD {
     [CmdletBinding()]
     param ()
-    #=======================================================================
+    #=================================================
     #	PSBoundParameters
-    #=======================================================================
+    #=================================================
     $IsConfirmPresent   = $PSBoundParameters.ContainsKey('Confirm')
     $IsForcePresent     = $PSBoundParameters.ContainsKey('Force')
     $IsVerbosePresent   = $PSBoundParameters.ContainsKey('Verbose')
-    #=======================================================================
+    #=================================================
     #	Module and Command Information
-    #=======================================================================
+    #=================================================
     $GetCommandName = $MyInvocation.MyCommand | Select-Object -ExpandProperty Name
     $GetModuleBase = $MyInvocation.MyCommand.Module | Select-Object -ExpandProperty ModuleBase
     $GetModulePath = $MyInvocation.MyCommand.Module | Select-Object -ExpandProperty Path
@@ -37,9 +37,9 @@ function Get-OSD {
     Write-Host -ForegroundColor DarkCyan    "======================================================================="
     Write-Host -ForegroundColor Cyan        'OSD Module Functions:'
     Write-Host -ForegroundColor DarkCyan    "======================================================================="
-    #=======================================================================
+    #=================================================
     #	Function Information
-    #=======================================================================
+    #=================================================
     Get-Command -Module OSD | Where-Object {$_.CommandType -eq 'Function'} | Sort-Object Name | Select-Object Name
-    #=======================================================================
+    #=================================================
 }

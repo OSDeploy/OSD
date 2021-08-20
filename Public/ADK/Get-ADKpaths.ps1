@@ -20,9 +20,9 @@ function Get-ADKpaths {
         [string]$Arch = $Env:PROCESSOR_ARCHITECTURE
     )
     
-    #=======================================================================
+    #=================================================
     #   Get-AdkPaths AdkRoot
-    #=======================================================================
+    #=================================================
     $InstalledRoots32 = 'HKLM:\SOFTWARE\Microsoft\Windows Kits\Installed Roots'
     $InstalledRoots64 = 'HKLM:\SOFTWARE\WOW6432Node\Microsoft\Windows Kits\Installed Roots'
     if (Test-Path $InstalledRoots64) {
@@ -36,22 +36,22 @@ function Get-ADKpaths {
         Break
     }
     $AdkRoot = Join-Path $KitsRoot10 'Assessment and Deployment Kit'
-    #=======================================================================
+    #=================================================
     #   WinPERoot
-    #=======================================================================
+    #=================================================
     $WinPERoot = Join-Path $AdkRoot 'Windows Preinstallation Environment'
     if (-NOT (Test-Path $WinPERoot -PathType Container)) {
         Write-Warning "Cannot find WinPERoot: $WinPERoot"
         $WinPERoot = $null
     }
-    #=======================================================================
+    #=================================================
     #   PathDeploymentTools
-    #=======================================================================
+    #=================================================
     $PathDeploymentTools = Join-Path $AdkRoot (Join-Path 'Deployment Tools' $Arch)
     $PathWinPE = Join-Path $WinPERoot $Arch
-    #=======================================================================
+    #=================================================
     #   Create Object
-    #=======================================================================
+    #=================================================
     $Results = [PSCustomObject] @{
         #KitsRoot           = $KitsRoot10
         AdkRoot             = $AdkRoot

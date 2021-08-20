@@ -11,9 +11,9 @@ https://osd.osdeploy.com/functions/get-osddriverdellmodel
 function Get-OSDDriverDellModel {
     [CmdletBinding()]
     param ()
-    #=======================================================================
+    #=================================================
     #   Variables
-    #=======================================================================
+    #=================================================
     $global:SetOSDDriverDellModel = [ordered]@{
         Downloads                   = "$env:TEMP\OSD"
         UrlDownloads                = 'http://downloads.dell.com'
@@ -34,16 +34,16 @@ function Get-OSDDriverDellModel {
     $DriverPackCatalogXmlFullName = Join-Path $DownloadPath 'DriverPackCatalog.xml'
     $UrlDownloads = $global:SetOSDDriverDellModel.UrlDownloads
     $UrlCabDriverPackCatalog = $global:SetOSDDriverDellModel.UrlCabDriverPackCatalog
-    #=======================================================================
+    #=================================================
     #   Create DownloadPath
-    #=======================================================================
+    #=================================================
     if (-not (Test-Path $DownloadPath)) {
         Write-Verbose "Creating $DownloadPath"
         New-Item $DownloadPath -ItemType Directory -Force -ErrorAction Stop | Out-Null
     }
-    #=======================================================================
+    #=================================================
     #   Download DriverPackCatalog.cab
-    #=======================================================================
+    #=================================================
     (New-Object System.Net.WebClient).DownloadFile($UrlCabDriverPackCatalog, $DriverPackCatalogCabFullName)
 
     Expand $DriverPackCatalogCabFullName $DriverPackCatalogXmlFullName | Out-Null
@@ -54,20 +54,20 @@ function Get-OSDDriverDellModel {
         Write-Warning "Unable to download $UrlCabDriverPackCatalog"
         Return $null
     }
-    #=======================================================================
+    #=================================================
     #   Dell Catalog
-    #=======================================================================
+    #=================================================
     [xml]$DriverPackCatalogXmlContent = Get-Content "$DriverPackCatalogXmlFullName" -ErrorAction Stop
     $DriverPackCatalog = $DriverPackCatalogXmlContent.DriverPackManifest.DriverPackage
-    #=======================================================================
+    #=================================================
     #   ForEach
-    #=======================================================================
+    #=================================================
     $ErrorActionPreference = 'SilentlyContinue'
     $global:GetOSDDriverDellModel = @()
     $global:GetOSDDriverDellModel = foreach ($item in $DriverPackCatalog) {
-        #=======================================================================
+        #=================================================
         #   Defaults
-        #=======================================================================
+        #=================================================
         $OSDVersion = $(Get-Module -Name OSD | Sort-Object Version | Select-Object Version -Last 1).Version
         $LastUpdate = [datetime] $(Get-Date)
         $OSDStatus = $null
@@ -115,9 +115,9 @@ function Get-OSDDriverDellModel {
         $DriverDescription = $null
         $Hash = $null
         $OSDGuid = $(New-Guid)
-        #=======================================================================
+        #=================================================
         #   Get Values
-        #=======================================================================
+        #=================================================
         $LastUpdate         = [datetime] $item.dateTime
         $DriverVersion      = $item.dellVersion.Trim()
         $DriverDelta        = $item.delta.Trim()
@@ -146,9 +146,9 @@ function Get-OSDDriverDellModel {
         $ModelPrefix        = $item.SupportedSystems.Brand.Prefix.Trim() | Select-Object -Unique
 
         if ($null -eq $Model) {Continue}
-        #=======================================================================
+        #=================================================
         #   DriverFamily
-        #=======================================================================
+        #=================================================
         if ($ModelPrefix -Contains 'IOT') {
             $SystemFamily = 'IOT'
             $IsDesktop = $true
@@ -170,15 +170,15 @@ function Get-OSDDriverDellModel {
             $SystemFamily = 'XPS'
             $IsLaptop = $true
         }
-        #=======================================================================
+        #=================================================
         #   Corrections
-        #=======================================================================
+        #=================================================
         if ($Model -eq 'Latitude E6420' -and $SystemSku -eq '04E4') {$Model = 'Latitude E6420 XFR'}
         if ($Model -eq 'Precision M4600') {$Generation = 'X3'}
         if ($Model -eq 'Precision M3800') {$Model = 'Dell Precision M3800'}
-        #=======================================================================
+        #=================================================
         #   Customizations
-        #=======================================================================
+        #=================================================
         if ($OsCode -eq 'XP') {Continue}
         if ($OsCode -eq 'Vista') {Continue}
         #if ($OsCode -eq 'Windows8') {Continue}
@@ -191,9 +191,9 @@ function Get-OSDDriverDellModel {
         if (Test-Path "$DownloadPath\$DownloadFile") {
             $OSDStatus = 'Downloaded'
         }
-        #=======================================================================
+        #=================================================
         #   Create Object 
-        #=======================================================================
+        #=================================================
         $ObjectProperties = @{
             OSDVersion              = [string]$OSDVersion
             LastUpdate              = $(($LastUpdate).ToString("yyyy-MM-dd"))
@@ -245,9 +245,9 @@ function Get-OSDDriverDellModel {
         }
         New-Object -TypeName PSObject -Property $ObjectProperties
     }
-    #=======================================================================
+    #=================================================
     #   Select-Object
-    #=======================================================================
+    #=================================================
     $global:GetOSDDriverDellModel = $global:GetOSDDriverDellModel | Select-Object LastUpdate,`
     OSDType, OSDGroup, OSDStatus, `
     DriverGrouping, DriverName, Make, Generation, Model, SystemSku,`
@@ -255,13 +255,13 @@ function Get-OSDDriverDellModel {
     OsVersion, OsArch,
     DownloadFile, SizeMB, DriverUrl, DriverInfo,`
     Hash, OSDGuid, OSDVersion
-    #=======================================================================
+    #=================================================
     #   Sort Object
-    #=======================================================================
+    #=================================================
     $global:GetOSDDriverDellModel = $global:GetOSDDriverDellModel | Sort-Object LastUpdate -Descending
-    #=======================================================================
+    #=================================================
     #   Return
-    #=======================================================================
+    #=================================================
     Return $global:GetOSDDriverDellModel
-    #=======================================================================
+    #=================================================
 }

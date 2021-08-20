@@ -41,9 +41,9 @@ function Get-CatalogDellSystem {
         [string]$Component,
 		[switch]$Compatible
     )
-    #=======================================================================
+    #=================================================
     #   Paths
-    #=======================================================================
+    #=================================================
 	$CatalogState           = 'Online' #Online, Build, Local, Offline
     $DownloadsBaseUrl       = 'http://downloads.dell.com/'
 	$CatalogOnlinePath      = 'http://downloads.dell.com/catalog/CatalogPC.cab'
@@ -52,9 +52,9 @@ function Get-CatalogDellSystem {
 	$CatalogOfflinePath     = "$($MyInvocation.MyCommand.Module.ModuleBase)\Files\Catalogs\CatalogDellSystem.xml"
 	$CatalogLocalCabName  	= [string]($CatalogOnlinePath | Split-Path -Leaf)
     $CatalogLocalCabPath 	= Join-Path $env:TEMP $CatalogLocalCabName
-    #=======================================================================
+    #=================================================
     #   Test CatalogState Local
-    #=======================================================================
+    #=================================================
     if (Test-Path $CatalogLocalPath) {
 
 		#Get-Item to determine the age
@@ -68,9 +68,9 @@ function Get-CatalogDellSystem {
             $CatalogState = 'Local'
         }
     }
-    #=======================================================================
+    #=================================================
     #   Test CatalogState Online
-    #=======================================================================
+    #=================================================
 	if ($CatalogState -eq 'Online') {
 		if (Test-WebConnection -Uri $CatalogOnlinePath) {
 			#Catalog is online and can be downloaded
@@ -79,10 +79,10 @@ function Get-CatalogDellSystem {
 			$CatalogState = 'Offline'
 		}
 	}
-    #=======================================================================
+    #=================================================
     #   CatalogState Online
 	#	Need to get the Online Catalog to Local
-    #=======================================================================
+    #=================================================
 	if ($CatalogState -eq 'Online') {
 		Write-Verbose "Source: $CatalogOnlinePath"
 		Write-Verbose "Destination: $CatalogLocalCabPath"
@@ -105,9 +105,9 @@ function Get-CatalogDellSystem {
 			$CatalogState = 'Offline'
 		}
 	}
-    #=======================================================================
+    #=================================================
     #   CatalogState Build
-    #=======================================================================
+    #=================================================
 	if ($CatalogState -eq 'Build') {
 		Write-Verbose "Reading the System Catalog at $CatalogBuildPath"
 		[xml]$XmlCatalogContent = Get-Content $CatalogBuildPath -ErrorAction Stop
@@ -143,38 +143,38 @@ function Get-CatalogDellSystem {
 		$Result = $Result | Sort-Object ReleaseDate -Descending
 		$Result | Export-Clixml -Path $CatalogLocalPath
 	}
-    #=======================================================================
+    #=================================================
     #   CatalogState Local
-    #=======================================================================
+    #=================================================
 	if ($CatalogState -eq 'Local') {
 		Write-Verbose "Reading the Local System Catalog at $CatalogLocalPath"
 		$Result = Import-Clixml -Path $CatalogLocalPath
 	}
-    #=======================================================================
+    #=================================================
     #   CatalogState Offline
-    #=======================================================================
+    #=================================================
 	if ($CatalogState -eq 'Offline') {
 		Write-Verbose "Reading the Offline System Catalog at $CatalogOfflinePath"
 		$Result = Import-Clixml -Path $CatalogOfflinePath
 	}
-    #=======================================================================
+    #=================================================
     #   Compatible
-    #=======================================================================
+    #=================================================
 	if ($PSBoundParameters.ContainsKey('Compatible')) {
 		$MyComputerProduct = Get-MyComputerProduct
 		Write-Verbose "Filtering XML for items compatible with Product $MyComputerProduct"
 		$Result = $Result | Where-Object {$_.SupportedSystemID -contains $MyComputerProduct}
 	}
-    #=======================================================================
+    #=================================================
     #   Component
-    #=======================================================================
+    #=================================================
 	if ($PSBoundParameters.ContainsKey('Component')) {
 		Write-Verbose "Filtering XML for $Component"
 		$Result = $Result | Where-Object {$_.Component -eq $Component}
 	}
-    #=======================================================================
+    #=================================================
     #   Component
-    #=======================================================================
+    #=================================================
     $Result | Sort-Object -Property ReleaseDate -Descending
-    #=======================================================================
+    #=================================================
 }

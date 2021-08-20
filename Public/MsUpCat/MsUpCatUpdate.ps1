@@ -22,30 +22,30 @@ function Get-MsUpCatUpdate {
 
         [switch]$Latest
     )
-    #=======================================================================
+    #=================================================
     #	MSCatalog PowerShell Module
     #   Ryan-Jan
     #   https://github.com/ryan-jan/MSCatalog
     #   This excellent work is a good way to gather information from MS
     #   Catalog
-    #=======================================================================
+    #=================================================
     if (!(Get-Module -ListAvailable -Name MSCatalog)) {
         Install-Module MSCatalog -Force
     }
-    #=======================================================================
+    #=================================================
     #	Make sure the Module was installed first
-    #=======================================================================
+    #=================================================
     if (Test-WebConnectionMsUpCat) {
         if (Get-Module -ListAvailable -Name MSCatalog -ErrorAction Ignore) {
-            #=======================================================================
+            #=================================================
             #	Details
-            #=======================================================================
+            #=================================================
             Write-Verbose -Verbose "OperatingSystem: $OS"
             Write-Verbose -Verbose "Architecture: $Arch"
             Write-Verbose -Verbose "Category: $Category"
-            #=======================================================================
+            #=================================================
             #	Category
-            #=======================================================================
+            #=================================================
             if ($Category -eq 'LCU') {
                 $SearchString = "Cumulative Update $OS"
             }
@@ -66,20 +66,20 @@ function Get-MsUpCatUpdate {
             else {
                 $SearchString = "$SearchString $Arch"
             }
-            #=======================================================================
+            #=================================================
             #	Go
-            #=======================================================================
+            #=================================================
             $CatalogUpdate = Get-MSCatalogUpdate -Search $SearchString -SortBy "Title" -AllPages -Descending |`
             Sort-Object LastUpdated -Descending |`
             Select-Object LastUpdated,Classification,Title,Size,Products,Guid
-            #=======================================================================
+            #=================================================
             #	Exclude
-            #=======================================================================
+            #=================================================
             $CatalogUpdate = $CatalogUpdate | Where-Object {$_.Title -notmatch 'arm64'}
             $CatalogUpdate = $CatalogUpdate | Where-Object {$_.Title -notmatch 'Dynamic'}
-            #=======================================================================
+            #=================================================
             #	OperatingSystem
-            #=======================================================================
+            #=================================================
             if ($OS -eq 'Windows 10') {
                 $CatalogUpdate = $CatalogUpdate | Where-Object {$_.Title -match 'Windows 10'}
                 $CatalogUpdate = $CatalogUpdate | Where-Object {$_.Products -notmatch 'Windows Server'}
@@ -99,9 +99,9 @@ function Get-MsUpCatUpdate {
             if ($OS -eq 'Windows Server 2019') {
                 $CatalogUpdate = $CatalogUpdate | Where-Object {$_.Products -eq 'Windows Server 2019'}
             }
-            #=======================================================================
+            #=================================================
             #	Category
-            #=======================================================================
+            #=================================================
             if ($Category -eq 'LCU') {
                 $CatalogUpdate = $CatalogUpdate | Where-Object {$_.Title -notmatch '.NET'}
             }
@@ -116,15 +116,15 @@ function Get-MsUpCatUpdate {
                 $CatalogUpdate = $CatalogUpdate | Where-Object {$_.Title -notmatch 'Preview'}
             }
             $CatalogUpdate = $CatalogUpdate | Where-Object {$_.Products -notmatch 'Insider'}
-            #=======================================================================
+            #=================================================
             #	Latest
-            #=======================================================================
+            #=================================================
             if ($Latest.IsPresent) {
                 $CatalogUpdate = $CatalogUpdate | Select-Object -First 1
             }
-            #=======================================================================
+            #=================================================
             Write-Output $CatalogUpdate
-            #=======================================================================
+            #=================================================
         }
         else {
             Write-Warning "Save-MsUpCatUpdate: Could not install required PowerShell Module MSCatalog"
@@ -133,7 +133,7 @@ function Get-MsUpCatUpdate {
     else {
         Write-Warning "Save-MsUpCatUpdate: Could not reach https://www.catalog.update.microsoft.com/"
     }
-    #=======================================================================
+    #=================================================
 }
 function Save-MsUpCatUpdate {
     [CmdLetBinding()]
@@ -159,30 +159,30 @@ function Save-MsUpCatUpdate {
 
         [switch]$Latest
     )
-    #=======================================================================
+    #=================================================
     #	MSCatalog PowerShell Module
     #   Ryan-Jan
     #   https://github.com/ryan-jan/MSCatalog
     #   This excellent work is a good way to gather information from MS
     #   Catalog
-    #=======================================================================
+    #=================================================
     if (!(Get-Module -ListAvailable -Name MSCatalog)) {
         Install-Module MSCatalog -Force
     }
-    #=======================================================================
+    #=================================================
     #	Make sure the Module was installed first
-    #=======================================================================
+    #=================================================
     if (Test-WebConnectionMsUpCat) {
         if (Get-Module -ListAvailable -Name MSCatalog -ErrorAction Ignore) {
-            #=======================================================================
+            #=================================================
             #	Details
-            #=======================================================================
+            #=================================================
             Write-Verbose -Verbose "OperatingSystem: $OS"
             Write-Verbose -Verbose "Architecture: $Arch"
             Write-Verbose -Verbose "Category: $Category"
-            #=======================================================================
+            #=================================================
             #	Category
-            #=======================================================================
+            #=================================================
             if ($Category -eq 'LCU') {
                 $SearchString = "Cumulative Update $OS"
             }
@@ -203,20 +203,20 @@ function Save-MsUpCatUpdate {
             else {
                 $SearchString = "$SearchString $Arch"
             }
-            #=======================================================================
+            #=================================================
             #	Go
-            #=======================================================================
+            #=================================================
             $CatalogUpdate = Get-MSCatalogUpdate -Search $SearchString -SortBy "Title" -AllPages -Descending |`
             Sort-Object LastUpdated -Descending |`
             Select-Object LastUpdated,Classification,Title,Size,Products,Guid
-            #=======================================================================
+            #=================================================
             #	Exclude
-            #=======================================================================
+            #=================================================
             $CatalogUpdate = $CatalogUpdate | Where-Object {$_.Title -notmatch 'arm64'}
             $CatalogUpdate = $CatalogUpdate | Where-Object {$_.Title -notmatch 'Dynamic'}
-            #=======================================================================
+            #=================================================
             #	OperatingSystem
-            #=======================================================================
+            #=================================================
             if ($OS -eq 'Windows 10') {
                 $CatalogUpdate = $CatalogUpdate | Where-Object {$_.Title -match 'Windows 10'}
                 $CatalogUpdate = $CatalogUpdate | Where-Object {$_.Products -notmatch 'Windows Server'}
@@ -236,9 +236,9 @@ function Save-MsUpCatUpdate {
             if ($OS -eq 'Windows Server 2019') {
                 $CatalogUpdate = $CatalogUpdate | Where-Object {$_.Products -eq 'Windows Server 2019'}
             }
-            #=======================================================================
+            #=================================================
             #	Category
-            #=======================================================================
+            #=================================================
             if ($Category -eq 'LCU') {
                 $CatalogUpdate = $CatalogUpdate | Where-Object {$_.Title -notmatch '.NET'}
             }
@@ -253,22 +253,22 @@ function Save-MsUpCatUpdate {
                 $CatalogUpdate = $CatalogUpdate | Where-Object {$_.Title -notmatch 'Preview'}
             }
             $CatalogUpdate = $CatalogUpdate | Where-Object {$_.Products -notmatch 'Insider'}
-            #=======================================================================
+            #=================================================
             #	Select
-            #=======================================================================
+            #=================================================
             if ($Latest.IsPresent) {
                 $CatalogUpdate = $CatalogUpdate | Select-Object -First 1
             }
             else {
                 $CatalogUpdate = $CatalogUpdate | Out-GridView -Title 'Select a Microsoft Update to download' -PassThru
             }
-            #=======================================================================
+            #=================================================
             #	Download
-            #=======================================================================
+            #=================================================
             foreach ($Update in $CatalogUpdate) {
                 Save-UpdateCatalog -Guid $Update.Guid -DestinationDirectory $DestinationDirectory
             }
-            #=======================================================================
+            #=================================================
         }
         else {
             Write-Warning "Save-MsUpCatUpdate: Could not install required PowerShell Module MSCatalog"
@@ -277,5 +277,5 @@ function Save-MsUpCatUpdate {
     else {
         Write-Warning "Save-MsUpCatUpdate: Could not reach https://www.catalog.update.microsoft.com/"
     }
-    #=======================================================================
+    #=================================================
 }

@@ -31,9 +31,9 @@ function Show-RegistryXML {
 		if (!($RegistryPreferences)) {
 			Write-Host "Could not find any compatible Registry XML files"
 		} else {
-			#======================================================================================
+			#=================================================
 			# 	Process Registry XML
-			#======================================================================================
+			#=================================================
 			foreach ($RegistryXml in $RegistryPreferences) {
 				$RegistrySettings = @()
 				$RegistrySettings

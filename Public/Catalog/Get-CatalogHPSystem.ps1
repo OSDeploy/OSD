@@ -42,9 +42,9 @@ function Get-CatalogHPSystem {
         [string]$Component,
 		[switch]$Compatible
     )
-    #=======================================================================
+    #=================================================
     #   Paths
-    #=======================================================================
+    #=================================================
 	$CatalogState           = 'Online' #Online, Build, Local, Offline
 	$CatalogOnlinePath      = 'https://hpia.hpcloud.hp.com/downloads/sccmcatalog/HpCatalogForSms.latest.cab'
 	$CatalogBuildFolder     = $env:TEMP
@@ -54,9 +54,9 @@ function Get-CatalogHPSystem {
 	$CatalogOfflinePath     = "$($MyInvocation.MyCommand.Module.ModuleBase)\Files\Catalogs\CatalogHPSystem.xml"
 	$CatalogLocalCabName  	= [string]($CatalogOnlinePath | Split-Path -Leaf)
     $CatalogLocalCabPath 	= Join-Path $env:TEMP $CatalogLocalCabName
-    #=======================================================================
+    #=================================================
     #   Test CatalogState Local
-    #=======================================================================
+    #=================================================
     if (Test-Path $CatalogLocalPath) {
 
 		#Get-Item to determine the age
@@ -70,9 +70,9 @@ function Get-CatalogHPSystem {
             $CatalogState = 'Local'
         }
     }
-    #=======================================================================
+    #=================================================
     #   Test CatalogState Online
-    #=======================================================================
+    #=================================================
 	if ($CatalogState -eq 'Online') {
 		if (Test-WebConnection -Uri $CatalogOnlinePath) {
 			#Catalog is online and can be downloaded
@@ -81,10 +81,10 @@ function Get-CatalogHPSystem {
 			$CatalogState = 'Offline'
 		}
 	}
-    #=======================================================================
+    #=================================================
     #   CatalogState Online
 	#	Need to get the Online Catalog to Local
-    #=======================================================================
+    #=================================================
 	if ($CatalogState -eq 'Online') {
 		Write-Verbose "Source: $CatalogOnlinePath"
 		Write-Verbose "Destination: $CatalogLocalCabPath"
@@ -107,9 +107,9 @@ function Get-CatalogHPSystem {
 			$CatalogState = 'Offline'
 		}
 	}
-    #=======================================================================
+    #=================================================
     #   CatalogState Build
-    #=======================================================================
+    #=================================================
 	if ($CatalogState -eq 'Build') {
 		Write-Verbose "Getting the HP Platform List catalog to map System Id to model names."
 		$PlatformCatalogHashTable = @{}
@@ -175,31 +175,31 @@ function Get-CatalogHPSystem {
 		$Result = $Result | Sort-Object CreationDate -Descending
 		$Result | Export-Clixml -Path $CatalogLocalPath
 	}
-    #=======================================================================
+    #=================================================
     #   CatalogState Local
-    #=======================================================================
+    #=================================================
 	if ($CatalogState -eq 'Local') {
 		Write-Verbose "Reading the Local System Catalog at $CatalogLocalPath"
 		$Result = Import-Clixml -Path $CatalogLocalPath
 	}
-    #=======================================================================
+    #=================================================
     #   CatalogState Offline
-    #=======================================================================
+    #=================================================
 	if ($CatalogState -eq 'Offline') {
 		Write-Verbose "Reading the Offline System Catalog at $CatalogOfflinePath"
 		$Result = Import-Clixml -Path $CatalogOfflinePath
 	}
-    #=======================================================================
+    #=================================================
     #   Compatible
-    #=======================================================================
+    #=================================================
 	if ($PSBoundParameters.ContainsKey('Compatible')) {
 		$MyComputerProduct = Get-MyComputerProduct
 		Write-Verbose "Filtering XML for items compatible with Product $MyComputerProduct"
 		$Result = $Result | Where-Object {$_.SupportedSystemID -contains $MyComputerProduct}
 	}
-    #=======================================================================
+    #=================================================
     #   Component
-    #=======================================================================
+    #=================================================
 	if ($PSBoundParameters.ContainsKey('Component')) {
 		Write-Verbose "Filtering XML for $Component"
 		switch($Component){
@@ -214,9 +214,9 @@ function Get-CatalogHPSystem {
 			}
 		}
 	}
-    #=======================================================================
+    #=================================================
     #   Component
-    #=======================================================================
+    #=================================================
     $Result | Sort-Object -Property CreationDate -Descending
-    #=======================================================================
+    #=================================================
 }

@@ -33,15 +33,15 @@ $UnattendXml = @'
 </unattend>
 '@
 
-    #=======================================================================
+    #=================================================
     #	Block
-    #=======================================================================
+    #=================================================
     Block-WinOS
     Block-WindowsVersionNe10
     Block-PowerShellVersionLt5
-    #=======================================================================
+    #=================================================
     #	Setup Scripts Specialize.cmd
-    #=======================================================================
+    #=================================================
     $SetupScripts = 'C:\Windows\Setup\Scripts'
     if (-NOT (Test-Path $SetupScripts)) {
         New-Item -Path $SetupScripts -ItemType Directory -Force | Out-Null
@@ -50,9 +50,9 @@ $UnattendXml = @'
     $SpecializeCmdPath = "C:\Windows\Setup\Scripts\Specialize.cmd"
     Write-Verbose -Verbose "Setting OSDCloud Specialize.cmd at $SpecializeCmdPath"
     $SpecializeCmd | Out-File -FilePath $SpecializeCmdPath -Width 2000 -Force
-    #=======================================================================
+    #=================================================
     #	Panther Unattend.xml
-    #=======================================================================
+    #=================================================
     $Panther = 'C:\Windows\Panther'
     if (-NOT (Test-Path $Panther)) {
         New-Item -Path $Panther -ItemType Directory -Force | Out-Null
@@ -61,9 +61,9 @@ $UnattendXml = @'
     $UnattendPath = "$Panther\Unattend.xml"
     Write-Verbose -Verbose "Setting OSDCloud Unattend.xml at $UnattendPath"
     $UnattendXml | Out-File -FilePath $UnattendPath -Encoding utf8 -Width 2000 -Force
-    #=======================================================================
+    #=================================================
     #	Use-WindowsUnattend
-    #=======================================================================
+    #=================================================
     Write-Verbose -Verbose "Use-WindowsUnattend -Path 'C:\' -UnattendPath $UnattendPath"
     Use-WindowsUnattend -Path 'C:\' -UnattendPath $UnattendPath -Verbose
     
@@ -75,5 +75,5 @@ $UnattendXml = @'
     reg unload HKLM\OfflineSystem
 
     Notepad $UnattendPath
-    #=======================================================================
+    #=================================================
 }

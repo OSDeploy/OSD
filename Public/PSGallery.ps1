@@ -26,18 +26,18 @@ function Enable-PEWimPSGallery {
     )
 
     begin {
-		#=======================================================================
+		#=================================================
 		#	Blocks
-		#=======================================================================
+		#=================================================
 		Block-WinPE
 		Block-StandardUser
-		#=======================================================================
+		#=================================================
         $ErrorActionPreference = "Stop"
-        #=======================================================================
+        #=================================================
     }
     process {
         foreach ($Input in $ImagePath) {
-            #=======================================================================
+            #=================================================
             $WindowsImageDescription = (Get-WindowsImage -ImagePath $Input).ImageDescription
             Write-Verbose "WindowsImageDescription: $WindowsImageDescription"
 
@@ -48,7 +48,7 @@ function Enable-PEWimPSGallery {
             } else {
                 Write-Warning "Windows Image does not appear to be WinPE, WinRE, or WinSE"
             }
-            #=======================================================================
+            #=================================================
         }
     }
     end {}
@@ -75,37 +75,37 @@ function Enable-PEWindowsImagePSGallery {
     )
 
     begin {
-		#=======================================================================
+		#=================================================
 		#	Blocks
-		#=======================================================================
+		#=================================================
 		Block-WinPE
 		Block-StandardUser
-		#=======================================================================
-        #=======================================================================
+		#=================================================
+        #=================================================
         #   Get-WindowsImage Mounted
-        #=======================================================================
+        #=================================================
         if ($null -eq $Path) {
             $Path = (Get-WindowsImage -Mounted | Select-Object -Property Path).Path
         }
-        #=======================================================================
+        #=================================================
     }
     process {
         foreach ($Input in $Path) {
-            #=======================================================================
+            #=================================================
             #   Path
-            #=======================================================================
+            #=================================================
             $MountPath = (Get-Item -Path $Input | Select-Object FullName).FullName
             Write-Verbose "Path: $MountPath"
-            #=======================================================================
+            #=================================================
             #   Validate Mount Path
-            #=======================================================================
+            #=================================================
             if (-not (Test-Path $Input -ErrorAction SilentlyContinue)) {
                 Write-Warning "Unable to locate Mounted WindowsImage at $Input"
                 Break
             }
-            #=======================================================================
+            #=================================================
             #   Driver
-            #=======================================================================
+            #=================================================
 $InfContent = @'
 [Version]
 Signature   = "$WINDOWS NT$"
@@ -130,29 +130,29 @@ HKLM,"SYSTEM\ControlSet001\Control\Session Manager\Environment",HOMEDRIVE,0x0000
 HKLM,"SYSTEM\ControlSet001\Control\Session Manager\Environment",HOMEPATH,0x00000,"Windows\System32\Config\SystemProfile"
 HKLM,"SYSTEM\ControlSet001\Control\Session Manager\Environment",LOCALAPPDATA,0x00000,"X:\Windows\System32\Config\SystemProfile\AppData\Local"
 '@
-            #=======================================================================
+            #=================================================
             #   Build Driver
-            #=======================================================================
+            #=================================================
             $InfFile = "$env:Temp\Set-WinPEEnvironment.inf"
             New-Item -Path $InfFile -Force
             Set-Content -Path $InfFile -Value $InfContent -Encoding Unicode -Force
-            #=======================================================================
+            #=================================================
             #   Add Driver
-            #=======================================================================
+            #=================================================
             Add-WindowsDriver -Path $MountPath -Driver $InfFile -ForceUnsigned
-            #=======================================================================
+            #=================================================
             #   Save Modules
-            #=======================================================================
+            #=================================================
             Write-Verbose "Saving PackageManagement to $MountPath\Program Files\WindowsPowerShell\Modules"
             Save-Module -Name PackageManagement -Path "$MountPath\Program Files\WindowsPowerShell\Modules" -Force
 
             Write-Verbose "Saving PowerShellGet to $MountPath\Program Files\WindowsPowerShell\Modules"
             Save-Module -Name PowerShellGet -Path "$MountPath\Program Files\WindowsPowerShell\Modules" -Force
-            #=======================================================================
+            #=================================================
             #   Return for PassThru
-            #=======================================================================
+            #=================================================
             Return Get-WindowsImage -Mounted | Where-Object {$_.Path -eq $MountPath}
-            #=======================================================================
+            #=================================================
         }
     }
     end {}

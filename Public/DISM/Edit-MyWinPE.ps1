@@ -39,48 +39,48 @@ function Edit-MyWinPE {
     )
 
     begin {
-        #=======================================================================
+        #=================================================
         #	Block
-        #=======================================================================
+        #=================================================
         Block-WinPE
         Block-StandardUser
         Block-WindowsVersionNe10
         Block-PowerShellVersionLt5
-        #=======================================================================
+        #=================================================
         #   Get Registry Information
-        #=======================================================================
+        #=================================================
         $GetRegCurrentVersion = Get-RegCurrentVersion
-        #=======================================================================
+        #=================================================
         #   Require OSMajorVersion 10
-        #=======================================================================
+        #=================================================
         if ($GetRegCurrentVersion.CurrentMajorVersionNumber -ne 10) {
             Write-Warning "$($MyInvocation.MyCommand) requires OS MajorVersion 10"
             Break
         }
-        #=======================================================================
+        #=================================================
     }
     process {
-        #=======================================================================
+        #=================================================
         #   Get-WindowsImage Mounted
-        #=======================================================================
+        #=================================================
         if ($null -eq $ImagePath) {
             $ImagePath = (Get-WindowsImage -Mounted | Select-Object -Property ImagePath).ImagePath
         }
 
         foreach ($Input in $ImagePath) {
             Write-Verbose "Edit-MyWinPE $Input"
-            #=======================================================================
+            #=================================================
             #   Get-Item
-            #=======================================================================
+            #=================================================
             if (Get-Item $Input -ErrorAction SilentlyContinue) {
                 $GetItemInput = Get-Item -Path $Input
             } else {
                 Write-Warning "Unable to locate WindowsImage at $Input"
                 Continue
             }
-            #=======================================================================
+            #=================================================
             #   Mount-MyWindowsImage
-            #=======================================================================
+            #=================================================
             try {
                 $MountMyWindowsImage = Mount-MyWindowsImage -ImagePath $Input -Index $Index
             }
@@ -93,9 +93,9 @@ function Edit-MyWinPE {
                 Write-Warning "Could not mount this WIM for some reason"
                 Continue
             }
-            #=======================================================================
+            #=================================================
             #   Make sure WinPE is Major Version 10
-            #=======================================================================
+            #=================================================
             Write-Verbose "Verifying WinPE 10"
             $GetRegCurrentVersion = Get-RegCurrentVersion -Path $MountMyWindowsImage.Path
 
@@ -105,39 +105,39 @@ function Edit-MyWinPE {
                 $MountMyWindowsImage | Dismount-MyWindowsImage -Discard
                 Continue
             }
-            #=======================================================================
+            #=================================================
             #   Enable PowerShell Gallery
-            #=======================================================================
+            #=================================================
             if ($PSGallery) {
                 $MountMyWindowsImage | Enable-PEWindowsImagePSGallery
             }
-            #=======================================================================
+            #=================================================
             #   Set-WindowsImageExecutionPolicy
-            #=======================================================================
+            #=================================================
             if ($ExecutionPolicy) {
                 Set-WindowsImageExecutionPolicy -ExecutionPolicy $ExecutionPolicy -Path $MountMyWindowsImage.Path
             }
-            #=======================================================================
+            #=================================================
             #   PSModuleCopy
-            #=======================================================================
+            #=================================================
             if ($PSModuleCopy) {
                 Copy-PSModuleToFolder -Name $PSModuleCopy -Destination "$($MountMyWindowsImage.Path)\Program Files\WindowsPowerShell\Modules" -RemoveOldVersions
             }
-            #=======================================================================
+            #=================================================
             #   PSModuleSave
-            #=======================================================================
+            #=================================================
             if ($PSModuleSave) {
                 Save-Module -Name $PSModuleSave -Destination "$($MountMyWindowsImage.Path)\Program Files\WindowsPowerShell\Modules" -RemoveOldVersions
             }
-            #=======================================================================
+            #=================================================
             #   DriverPath
-            #=======================================================================
+            #=================================================
             foreach ($Driver in $DriverPath) {
                 Add-WindowsDriver -Path "$($MountMyWindowsImage.Path)" -Driver "$Driver" -Recurse -ForceUnsigned
             }
-            #=======================================================================
+            #=================================================
             #   DriverHWID
-            #=======================================================================
+            #=================================================
             if ($DriverHWID) {
                 $HardwareIDDriverPath = Join-Path $env:TEMP (Get-Random)
                 foreach ($Item in $DriverHWID) {
@@ -145,9 +145,9 @@ function Edit-MyWinPE {
                 }
                 Add-WindowsDriver -Path "$($MountMyWindowsImage.Path)" -Driver $HardwareIDDriverPath -Recurse -ForceUnsigned
             }
-            #=======================================================================
+            #=================================================
             #   CloudDriver
-            #=======================================================================
+            #=================================================
             foreach ($Driver in $CloudDriver) {
                 if ($Driver -eq 'Dell'){
                     Write-Verbose "Adding $Driver CloudDriver"
@@ -213,15 +213,15 @@ function Edit-MyWinPE {
                     }
                 }
             }
-            #=======================================================================
+            #=================================================
             #   Dismount-MyWindowsImage
-            #=======================================================================
+            #=================================================
             if ($DismountSave) {
                 $MountMyWindowsImage | Dismount-MyWindowsImage -Save
             } else {
                 $MountMyWindowsImage
             }
-            #=======================================================================
+            #=================================================
         }
     }
     end {}

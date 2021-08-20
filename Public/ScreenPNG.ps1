@@ -38,9 +38,9 @@ function Get-ScreenPNG {
         [switch]$Primary = $false
     )
     begin {
-        #=======================================================================
+        #=================================================
         #	Gather
-        #=======================================================================
+        #=================================================
         $GetCommandNoun = Get-Command -Name Get-ScreenPNG | Select-Object -ExpandProperty Noun
         $GetCommandVersion = Get-Command -Name Get-ScreenPNG | Select-Object -ExpandProperty Version
         $GetCommandHelpUri = Get-Command -Name Get-ScreenPNG | Select-Object -ExpandProperty HelpUri
@@ -49,13 +49,13 @@ function Get-ScreenPNG {
         $GetModuleProjectUri = Get-Module -Name $GetCommandModule | Select-Object -ExpandProperty ProjectUri
         $GetModulePath = Get-Module -Name $GetCommandModule | Select-Object -ExpandProperty Path
         $MyPictures = (New-Object -ComObject Shell.Application).NameSpace('shell:My Pictures').Self.Path
-        #=======================================================================
+        #=================================================
         #	Adjust Delay
-        #=======================================================================
+        #=================================================
         if ($Count -gt '1') {if ($Delay -eq 0) {$Delay = 1}}
-        #=======================================================================
+        #=================================================
         #	Determine Task Sequence
-        #=======================================================================
+        #=================================================
         $LogPath = ''
         $SMSTSLogPath = ''
         try {
@@ -69,9 +69,9 @@ function Get-ScreenPNG {
             $LogPath = ''
             $SMSTSLogPath = ''
         }
-        #=======================================================================
+        #=================================================
         #	Set AutoPath
-        #=======================================================================
+        #=================================================
         if ($Directory -eq '') {
             if ($IsTaskSequence -and (Test-Path $LogPath)) {
                 $AutoPath = Join-Path -Path $LogPath -ChildPath "Screenshots"
@@ -87,9 +87,9 @@ function Get-ScreenPNG {
         } else {
             $AutoPath = $Directory
         }
-        #=======================================================================
+        #=================================================
         #	Usage
-        #=======================================================================
+        #=================================================
         Write-Verbose '======================================================================================================'
         Write-Verbose "$GetCommandNoun $GetCommandVersion $GetCommandHelpUri"
         Write-Verbose $GetModuleDescription
@@ -121,18 +121,18 @@ function Get-ScreenPNG {
         Write-Verbose '-Primary     Captures Screenshot from the Primary Display only for Multiple Displays'
         Write-Verbose "             Value = $Primary"
         Write-Verbose '======================================================================================================'
-        #=======================================================================
+        #=================================================
         #	Load Assemblies
-        #=======================================================================
+        #=================================================
         Add-Type -Assembly System.Drawing
         Add-Type -Assembly System.Windows.Forms
-        #=======================================================================
+        #=================================================
     }
     process {
         foreach ($i in 1..$Count) {
-            #=======================================================================
+            #=================================================
             #	Determine Task Sequence (Process Block)
-            #=======================================================================
+            #=================================================
             $LogPath = ''
             $SMSTSLogPath = ''
             try {
@@ -146,9 +146,9 @@ function Get-ScreenPNG {
                 $LogPath = ''
                 $SMSTSLogPath = ''
             }
-            #=======================================================================
+            #=================================================
             #	Set AutoPath (Process Block)
-            #=======================================================================
+            #=================================================
             $AutoPathBackup = $AutoPath
             if ($Directory -eq '') {
                 if ($IsTaskSequence -and (Test-Path $LogPath)) {
@@ -166,32 +166,32 @@ function Get-ScreenPNG {
                 $AutoPath = $Directory
             }
             Write-Verbose "AutoPath is set to $AutoPath"
-            #=======================================================================
+            #=================================================
             #	AutoPathBackup
-            #=======================================================================
+            #=================================================
             if ($AutoPathBackup -ne $AutoPath) {
                 #Path changed, so need to move the content from the previous AutoPath
             }
-            #=======================================================================
+            #=================================================
             #	Determine AutoPath
-            #=======================================================================
+            #=================================================
             if (!(Test-Path "$AutoPath")) {
                 Write-Verbose "Creating snaScreenshot directory at $AutoPath"
                 New-Item -Path "$AutoPath" -ItemType Directory -Force -ErrorAction Stop | Out-Null
             }
-            #=======================================================================
+            #=================================================
             #	Delay
-            #=======================================================================
+            #=================================================
             Write-Verbose "Delay $Delay Seconds"
             Start-Sleep -Seconds $Delay
-            #=======================================================================
+            #=================================================
             #	Display Information
-            #=======================================================================
+            #=================================================
             $GetDisplayAllScreens = @(Get-DisplayAllScreens)
             $GetDisplayVirtualScreen = Get-DisplayVirtualScreen
-            #=======================================================================
+            #=================================================
             #	Display Number
-            #=======================================================================
+            #=================================================
             foreach ($Device in $GetDisplayAllScreens) {
                 #DateString
                 $DateString = (Get-Date).ToString('yyyyMMdd_HHmmss')
@@ -239,16 +239,16 @@ function Get-ScreenPNG {
                     Write-Verbose "Saving Secondary Screenshot $i of $Count to to $AutoPath\$FileName"
                 }
 
-                #=======================================================================
+                #=================================================
                 #	Save the Screenshot to File
                 #   https://docs.microsoft.com/en-us/dotnet/api/system.drawing.image.tag?view=dotnet-plat-ext-5.0
-                #=======================================================================
+                #=================================================
                 $ScreenshotBitmap.Save("$AutoPath\$FileName")
 
-                #=======================================================================
+                #=================================================
                 #	Copy the Screenshot to the Clipboard
                 #   https://docs.microsoft.com/en-us/dotnet/api/system.windows.forms.clipboard.setimage?view=net-5.0
-                #=======================================================================
+                #=================================================
                 if ($Device.Primary -eq $true) {
                     if ($Clipboard) {
                         Write-Verbose "Copying Screenshot to the Clipboard"
@@ -258,16 +258,16 @@ function Get-ScreenPNG {
                     }
                 }
             }
-            #=======================================================================
+            #=================================================
             #	Close
-            #=======================================================================
+            #=================================================
             $ScreenshotGraphics.Dispose()
             $ScreenshotBitmap.Dispose()
-            #=======================================================================
+            #=================================================
             #	Return Get-Item
-            #=======================================================================
+            #=================================================
             Get-Item "$AutoPath\$FileName"
-            #=======================================================================
+            #=================================================
         }
     }
     end {}

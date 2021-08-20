@@ -48,9 +48,9 @@ function New-OSDPartitionSystem {
         [uint64]$SizeMSR = 16MB
     )
 
-    #=======================================================================
+    #=================================================
     #	PartitionStyle
-    #=======================================================================
+    #=================================================
     if (-NOT ($PartitionStyle)) {
         if (Get-OSDGather -Property IsUEFI) {
             $PartitionStyle = 'GPT'
@@ -59,9 +59,9 @@ function New-OSDPartitionSystem {
         }
     }
     Write-Verbose "PartitionStyle is set to $PartitionStyle"
-    #=======================================================================
+    #=================================================
     #	GPT
-    #=======================================================================
+    #=================================================
     if ($PartitionStyle -eq 'GPT') {
         Write-Verbose "Creating GPT System Partition"
         $PartitionSystem = New-Partition -GptType '{ebd0a0a2-b9e5-4433-87c0-68b6b72699c7}' -DiskNumber $DiskNumber -Size $SizeSystemGpt
@@ -78,9 +78,9 @@ function New-OSDPartitionSystem {
         Write-Verbose "Creating MSR Partition GptType {e3c9e316-0b5c-4db8-817d-f92df00215ae}"
         $null = New-Partition -DiskNumber $DiskNumber -Size $SizeMSR -GptType '{e3c9e316-0b5c-4db8-817d-f92df00215ae}'
     }
-    #=======================================================================
+    #=================================================
     #	MBR
-    #=======================================================================
+    #=================================================
     if ($PartitionStyle -eq 'MBR') {
         Write-Verbose "Creating MBR System Partition as Active"
         $PartitionSystem = New-Partition -DiskNumber $DiskNumber -Size $SizeSystemMbr -IsActive

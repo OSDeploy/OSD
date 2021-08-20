@@ -288,20 +288,20 @@ function Start-WinREWiFi {
     param (
         [string] $wifiProfile
     )
-    #=======================================================================
+    #=================================================
     #	Block
-    #=======================================================================
+    #=================================================
     #Block-WinOS
     Block-PowerShellVersionLt5
-    #=======================================================================
+    #=================================================
     #	Header
-    #=======================================================================
+    #=================================================
     Write-Host -ForegroundColor DarkGray "========================================================================="
     Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) $($MyInvocation.MyCommand.Name) " -NoNewline
     Write-Host -ForegroundColor Green 'OK'
-    #=======================================================================
+    #=================================================
     #	Test Internet Connection
-    #=======================================================================
+    #=================================================
     Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Test-WebConnection google.com " -NoNewline
 
     if (Test-WebConnection -Uri 'google.com') {
@@ -314,9 +314,9 @@ function Start-WinREWiFi {
         Write-Host -ForegroundColor Red 'FAIL'
         $StartWinREWiFi = $true
     }
-    #=======================================================================
+    #=================================================
     #   Test WinRE
-    #=======================================================================
+    #=================================================
     if ($StartWinREWiFi) {
         Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Testing required WinRE content " -NoNewline
 
@@ -355,9 +355,9 @@ function Start-WinREWiFi {
             Write-Host -ForegroundColor Red 'FAIL'
         }
     }
-    #=======================================================================
+    #=================================================
     #	WlanSvc
-    #=======================================================================
+    #=================================================
     if ($StartWinREWiFi) {
         Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Starting WlanSvc Service" -NoNewline
         if (Get-Service -Name WlanSvc) {
@@ -369,9 +369,9 @@ function Start-WinREWiFi {
         }
         Write-Host -ForegroundColor Green 'OK'
     }
-    #=======================================================================
+    #=================================================
     #	Test Wi-Fi Adapter
-    #=======================================================================
+    #=================================================
     if ($StartWinREWiFi) {
         Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Testing Wi-Fi Network Adapter " -NoNewline
         $WirelessNetworkAdapter = Get-WmiObject -ClassName Win32_NetworkAdapter | Where-Object {$_.NetConnectionID -eq 'Wi-Fi'}
@@ -408,9 +408,9 @@ function Start-WinREWiFi {
             $StartWinREWiFi = $false
         }
     }
-    #=======================================================================
+    #=================================================
     #	Test Wi-Fi Connection
-    #=======================================================================
+    #=================================================
     if ($StartWinREWiFi) {
         Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Testing Wi-Fi Network Connection " -NoNewline
         if ($WirelessNetworkAdapter.NetEnabled -eq $true) {
@@ -426,9 +426,9 @@ function Start-WinREWiFi {
             Write-Host -ForegroundColor Green 'OK'
         }
     }
-    #=======================================================================
+    #=================================================
     #   Connect
-    #=======================================================================
+    #=================================================
     if ($StartWinREWiFi) {
             if ($wifiProfile -and (Test-Path $wifiProfile)) {
                 Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Starting unattended Wi-Fi connection " -NoNewline

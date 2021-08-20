@@ -87,21 +87,21 @@ function Get-OSDWinPE {
         #Shutdown the computer
         [switch]$Shutdown
     )
-    #=======================================================================
+    #=================================================
     #	Blocks
-    #=======================================================================
+    #=================================================
     Block-WinOS
-    #=======================================================================
+    #=================================================
     #	Increase the Console Screen Buffer size
-    #=======================================================================
+    #=================================================
     if (!(Test-Path "HKCU:\Console")) {
         Write-Verbose "OSDWinPE: Increase Console Screen Buffer"
         New-Item -Path "HKCU:\Console" -Force | Out-Null
         New-ItemProperty -Path HKCU:\Console ScreenBufferSize -Value 589889656 -PropertyType DWORD -Force | Out-Null
     }
-    #=======================================================================
+    #=================================================
     #	GetModules
-    #=======================================================================
+    #=================================================
     if ($GetModules.IsPresent) {
         $GetPSDrive = Get-PSDrive -PSProvider 'FileSystem'
         foreach ($PSDrive in $GetPSDrive) {
@@ -119,9 +119,9 @@ function Get-OSDWinPE {
             }
         }
     }
-    #=======================================================================
+    #=================================================
     #	GetScripts
-    #=======================================================================
+    #=================================================
     if ($GetScripts) {
         $GetPSDrive = Get-PSDrive -PSProvider 'FileSystem'
 
@@ -140,9 +140,9 @@ function Get-OSDWinPE {
             }
         }
     }
-    #=======================================================================
+    #=================================================
     #	wpeutil
-    #=======================================================================
+    #=================================================
     if ($InitializeNetwork.IsPresent) {
         Write-Verbose 'OSDWinPE: wpeutil InitializeNetwork'
         Start-Process -WindowStyle Hidden -FilePath wpeutil -ArgumentList 'InitializeNetwork' -Wait
@@ -168,16 +168,16 @@ function Get-OSDWinPE {
         Write-Verbose 'OSDWinPE: wpeutil UpdateBootInfo'
         Start-Process -WindowStyle Hidden -FilePath wpeutil -ArgumentList 'UpdateBootInfo'
     }
-    #=======================================================================
+    #=================================================
     #	Microsoft DaRT
-    #=======================================================================
+    #=================================================
     if (($RemoteRecovery.IsPresent) -and (Test-Path "$env:windir\System32\RemoteRecovery.exe")) {
         Write-Verbose 'OSDWinPE: Microsoft DaRT Remote Recovery'
         Start-Process -WindowStyle Minimized -FilePath RemoteRecovery.exe -ArgumentList '-nomessage'
     }
-    #=======================================================================
+    #=================================================
     #	Reboot Shutdown
-    #=======================================================================
+    #=================================================
     if ($Reboot.IsPresent) {
         Write-Verbose 'OSDWinPE: wpeutil Reboot'
         Start-Process -WindowStyle Hidden -FilePath wpeutil -ArgumentList 'Reboot'

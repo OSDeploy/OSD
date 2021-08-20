@@ -29,40 +29,40 @@ function Save-WebFile {
         #The default action is to skip the download
         [switch]$Overwrite
     )
-    #=======================================================================
+    #=================================================
     #	DestinationDirectory
-    #=======================================================================
+    #=================================================
     if (Test-Path "$DestinationDirectory") {
     }
     else {
         New-Item -Path "$DestinationDirectory" -ItemType Directory -Force -ErrorAction Stop | Out-Null
     }
     Write-Verbose "DestinationDirectory: $DestinationDirectory"
-    #=======================================================================
+    #=================================================
     #	DestinationName
-    #=======================================================================
+    #=================================================
     if ($PSBoundParameters['DestinationName']) {
     }
     else {
         $DestinationName = Split-Path -Path $SourceUrl -Leaf
     }
     Write-Verbose "DestinationName: $DestinationName"
-    #=======================================================================
+    #=================================================
     #	WebFileFullName
-    #=======================================================================
+    #=================================================
     $DestinationDirectoryItem = (Get-Item $DestinationDirectory).FullName
     $DestinationFullName = Join-Path $DestinationDirectoryItem $DestinationName
-    #=======================================================================
+    #=================================================
     #	OverWrite
-    #=======================================================================
+    #=================================================
     if ((-NOT ($PSBoundParameters['Overwrite'])) -and (Test-Path $DestinationFullName)) {
         Write-Verbose "DestinationFullName already exists"
         Get-Item $DestinationFullName
     }
     else {
-        #=======================================================================
+        #=================================================
         #	Download
-        #=======================================================================
+        #=================================================
         $SourceUrl = [Uri]::EscapeUriString($SourceUrl)
 
         if (Get-Command 'curl.exe') {
@@ -82,9 +82,9 @@ function Save-WebFile {
             $WebClient.DownloadFile($SourceUrl, $DestinationFullName)
             $WebClient.Dispose()
         }
-        #=======================================================================
+        #=================================================
         #	Return
-        #=======================================================================
+        #=================================================
         if (Test-Path $DestinationFullName) {
             Get-Item $DestinationFullName
         }
@@ -92,6 +92,6 @@ function Save-WebFile {
             Write-Warning "Could not download $DestinationFullName"
             $null
         }
-        #=======================================================================
+        #=================================================
     }
 }

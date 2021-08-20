@@ -3,26 +3,26 @@ function Invoke-OSDSpecialize {
     param (
         [switch]$Apply
     )
-    #=======================================================================
+    #=================================================
     #   Specialize
-    #=======================================================================
+    #=================================================
     $ImageState = (Get-ItemProperty -Path 'HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Setup\State' -ErrorAction Ignore).ImageState
     if ($ImageState -eq 'IMAGE_STATE_SPECIALIZE_RESEAL_TO_OOBE') {
         $Apply = $true
         reg delete HKLM\System\Setup /v UnattendFile /f
     }
-    #=======================================================================
+    #=================================================
     #   Specialize DriverPacks
-    #=======================================================================
+    #=================================================
     if (Test-Path 'C:\Drivers') {
         $DriverPacks = Get-ChildItem -Path 'C:\Drivers' -File
 
         foreach ($Item in $DriverPacks) {
             $ExpandFile = $Item.FullName
             Write-Verbose -Verbose "DriverPack: $ExpandFile"
-            #=======================================================================
+            #=================================================
             #   Cab
-            #=======================================================================
+            #=================================================
             if ($Item.Extension -eq '.cab') {
                 $DestinationPath = Join-Path $Item.Directory $Item.BaseName
     
@@ -41,9 +41,9 @@ function Invoke-OSDSpecialize {
                 }
                 Continue
             }
-            #=======================================================================
+            #=================================================
             #   HP
-            #=======================================================================
+            #=================================================
             if ($Item.Extension -eq '.exe') {
                 if (($Item.VersionInfo.InternalName -match 'hpsoftpaqwrapper') -or ($Item.VersionInfo.OriginalFilename -match 'hpsoftpaqwrapper.exe') -or ($Item.VersionInfo.FileDescription -like "HP *")) {
                     Write-Verbose -Verbose "FileDescription: $($Item.VersionInfo.FileDescription)"
@@ -67,9 +67,9 @@ function Invoke-OSDSpecialize {
                     Continue
                 }
             }
-            #=======================================================================
+            #=================================================
             #   Lenovo
-            #=======================================================================
+            #=================================================
             if ($Item.Extension -eq '.exe') {
                 if ($Item.VersionInfo.FileDescription -match 'Lenovo') {
                     Write-Verbose -Verbose "FileDescription: $($Item.VersionInfo.FileDescription)"
@@ -91,9 +91,9 @@ function Invoke-OSDSpecialize {
                     Continue
                 }
             }
-            #=======================================================================
+            #=================================================
             #   MSI
-            #=======================================================================
+            #=================================================
             if ($Item.Extension -eq '.msi') {
                 $DateStamp = Get-Date -Format yyyyMMddTHHmmss
                 $logFile = '{0}-{1}.log' -f $ExpandFile,$DateStamp
@@ -108,9 +108,9 @@ function Invoke-OSDSpecialize {
                 Start-Process "msiexec.exe" -ArgumentList $MSIArguments -Wait -NoNewWindow
                 Continue
             }
-            #=======================================================================
+            #=================================================
             #   Zip
-            #=======================================================================
+            #=================================================
             if ($Item.Extension -eq '.zip') {
                 $DestinationPath = Join-Path $Item.Directory $Item.BaseName
 
@@ -127,31 +127,31 @@ function Invoke-OSDSpecialize {
                 }
                 Continue
             }
-            #=======================================================================
+            #=================================================
             #   Json
-            #=======================================================================
+            #=================================================
             if ($Item.Extension -eq '.json') {
                 #Do Nothing
                 Continue
             }
-            #=======================================================================
+            #=================================================
             #   TXT
-            #=======================================================================
+            #=================================================
             if ($Item.Extension -eq '.txt') {
                 #Do Nothing
                 Continue
             }
-            #=======================================================================
+            #=================================================
             #   Everything Else
-            #=======================================================================
+            #=================================================
             Write-Warning "File cannot be expanded $ExpandFile"
             Write-Verbose -Verbose ""
-            #=======================================================================
+            #=================================================
         }
     }
-    #=======================================================================
+    #=================================================
     #   Specialize ODT
-    #=======================================================================
+    #=================================================
     if ((Test-Path "C:\OSDCloud\ODT\setup.exe") -and (Test-Path "C:\OSDCloud\ODT\Config.xml")) {
         Write-Verbose "ODT: Disable Telemetry"
         reg add HKCU\Software\Policies\Microsoft\Office\Common\ClientTelemetry /v DisableTelemetry /t REG_DWORD /d 1 /f
@@ -163,10 +163,10 @@ function Invoke-OSDSpecialize {
         Write-Verbose "ODT: Enable Telemetry"
         reg add HKCU\Software\Policies\Microsoft\Office\Common\ClientTelemetry /v DisableTelemetry /t REG_DWORD /d 0 /f
     }
-    #=======================================================================
+    #=================================================
     #   Complete
     #   Give a fair amount of time to display errors
-    #=======================================================================
+    #=================================================
     Start-Sleep -Seconds 10
-    #=======================================================================
+    #=================================================
 }

@@ -13,21 +13,21 @@ https://osdcloud.osdeploy.com
 function Enable-OSDCloudODT {
     [CmdletBinding()]
     param ()
-    #=======================================================================
+    #=================================================
     #	Start the Clock
-    #=======================================================================
+    #=================================================
     $ODTStartTime = Get-Date
-    #=======================================================================
+    #=================================================
     #	Blocks
-    #=======================================================================
+    #=================================================
     Block-WinPE
     Block-StandardUser
     Block-WindowsVersionNe10
     Block-PowerShellVersionLt5
     Block-NoCurl
-    #=======================================================================
+    #=================================================
     #	Get-OSDCloud.template
-    #=======================================================================
+    #=================================================
     if (-NOT (Get-OSDCloud.template)) {
         Write-Warning "Setting up a new OSDCloud.template"
         New-OSDCloud.template -Verbose
@@ -38,16 +38,16 @@ function Enable-OSDCloudODT {
         Write-Warning "Something bad happened.  I have to go"
         Break
     }
-    #=======================================================================
+    #=================================================
     #	Set WorkspacePath
-    #=======================================================================
+    #=================================================
     if ($PSBoundParameters.ContainsKey('WorkspacePath')) {
         Set-OSDCloud.workspace -WorkspacePath $WorkspacePath -ErrorAction Stop | Out-Null
     }
     $WorkspacePath = Get-OSDCloud.workspace -ErrorAction Stop
-    #=======================================================================
+    #=================================================
     #	Setup Workspace
-    #=======================================================================
+    #=================================================
     if (-NOT ($WorkspacePath)) {
         Write-Warning "You need to provide a path to your Workspace with one of the following examples"
         Write-Warning "New-OSDCloud.iso -WorkspacePath C:\OSDCloud"
@@ -67,9 +67,9 @@ function Enable-OSDCloudODT {
         Write-Warning "Nothing is going well for you today my friend"
         Break
     }
-#=======================================================================
+#=================================================
 #	O365ProPlusRetail Configurations
-#=======================================================================
+#=================================================
 $O365ProPlusRetailCurrent = @'
 <Configuration ID="4d85475a-3aea-4fcb-877a-85841651fb69">
   <Add OfficeClientEdition="64" Channel="Current">
@@ -160,9 +160,9 @@ $ProPlus2019Volume = @'
   <Display Level="Full" AcceptEULA="TRUE" />
 </Configuration>
 '@
-    #=======================================================================
+    #=================================================
     #	Enable OSDCloud ODT
-    #=======================================================================
+    #=================================================
     if (Test-WebConnection -Uri 'https://www.microsoft.com/en-us/download') {
         $ODTPageLinks = (Invoke-WebRequest -Uri 'https://www.microsoft.com/en-us/download/confirmation.aspx?id=49117' -UseBasicParsing).Links
         $ODTDownload = ($ODTPageLinks | Where-Object {$_.outerHTML -like "*click here to download manually*"}).href
@@ -207,13 +207,13 @@ $ProPlus2019Volume = @'
         Get-ChildItem -Path "$WorkspacePath\ODT\" -Include 'configuration-Office2019Enterprise.xml' -Recurse | Remove-Item
 
     }
-    #=======================================================================
+    #=================================================
     #	Complete
-    #=======================================================================
+    #=================================================
     $ODTEndTime = Get-Date
     $ODTTimeSpan = New-TimeSpan -Start $ODTStartTime -End $ODTEndTime
     Write-Host -ForegroundColor DarkGray    "========================================================================="
     Write-Host -ForegroundColor Yellow      "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) $($MyInvocation.MyCommand.Name) " -NoNewline
     Write-Host -ForegroundColor Cyan        "Completed in $($ODTTimeSpan.ToString("mm' minutes 'ss' seconds'"))"
-    #=======================================================================
+    #=================================================
 }

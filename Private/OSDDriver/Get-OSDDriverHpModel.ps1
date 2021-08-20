@@ -11,9 +11,9 @@ https://osd.osdeploy.com/functions/get-osddriverhpmodel
 function Get-OSDDriverHpModel {
     [CmdletBinding()]
     param ()
-    #=======================================================================
+    #=================================================
     #   Variables
-    #=======================================================================
+    #=================================================
     $global:SetOSDDriverHpModel = [ordered]@{
         Downloads                   = "$env:TEMP\OSD"
         UrlDownloads                = ''
@@ -34,16 +34,16 @@ function Get-OSDDriverHpModel {
     $DriverPackCatalogXmlFullName = Join-Path $DownloadPath 'DriverPackCatalog.xml'
     $UrlDownloads = $global:SetOSDDriverHpModel.UrlDownloads
     $UrlCabDriverPackCatalog = $global:SetOSDDriverHpModel.UrlCabDriverPackCatalog
-    #=======================================================================
+    #=================================================
     #   Create DownloadPath
-    #=======================================================================
+    #=================================================
     if (-not (Test-Path $DownloadPath)) {
         Write-Verbose "Get-OSDDriverHpModel: Creating $DownloadPath"
         New-Item $DownloadPath -ItemType Directory -Force -ErrorAction Stop | Out-Null
     }
-    #=======================================================================
+    #=================================================
     #   Download DriverPackCatalog.cab
-    #=======================================================================
+    #=================================================
     (New-Object System.Net.WebClient).DownloadFile($UrlCabDriverPackCatalog, $DriverPackCatalogCabFullName)
 
     Expand $DriverPackCatalogCabFullName $DriverPackCatalogXmlFullName | Out-Null
@@ -54,26 +54,26 @@ function Get-OSDDriverHpModel {
         Write-Warning "Get-OSDDriverHpModel: Unable to download $UrlCabDriverPackCatalog"
         Break
     }
-    #=======================================================================
+    #=================================================
     #   HP Catalog
-    #=======================================================================
+    #=================================================
     [xml]$DriverPackCatalogXmlContent = Get-Content "$DriverPackCatalogXmlFullName" -ErrorAction Stop
     $DriverPackCatalog = $DriverPackCatalogXmlContent.NewDataSet.HPClientDriverPackCatalog.SoftPaqList.SoftPaq
     $HpProductOSDriverPackList = $DriverPackCatalogXmlContent.NewDataSet.HPClientDriverPackCatalog.ProductOSDriverPackList.ProductOSDriverPack
     Write-Warning "Get-OSDDriverHpModel: Results are limited to Windows 10 x64"
-    #=======================================================================
+    #=================================================
     #   ForEach
-    #=======================================================================
+    #=================================================
     $ErrorActionPreference = 'SilentlyContinue'
     $global:GetOSDDriverHpModel = @()
     $global:GetOSDDriverHpModel = foreach ($item in $DriverPackCatalog) {
-        #=======================================================================
+        #=================================================
         #   Skip
-        #=======================================================================
+        #=================================================
         if ($item.Name -match 'IOT') {Continue}
-        #=======================================================================
+        #=================================================
         #   Defaults
-        #=======================================================================
+        #=================================================
         $OSDVersion = $(Get-Module -Name OSD | Sort-Object Version | Select-Object Version -Last 1).Version
         $LastUpdate = [datetime] $item.DateReleased
         $OSDStatus = $null
@@ -103,9 +103,9 @@ function Get-OSDDriverHpModel {
         $DriverVersion = $item.Version.Trim()
         $DriverReleaseId = ($item.Url | Split-Path -Leaf).Replace('.exe','').ToUpper()
         $DriverGrouping = $null
-        #=======================================================================
+        #=================================================
         #   Matching
-        #=======================================================================
+        #=================================================
         $MatchingList = @()
         $MatchingList = $HpProductOSDriverPackList | Where-Object {$_.SoftPaqId -match $DriverReleaseId}
 
@@ -150,9 +150,9 @@ function Get-OSDDriverHpModel {
         $DriverDescription = $item.ReleaseNotesUrl
         $Hash = $item.MD5.Trim()
         $OSDGuid = $(New-Guid)
-        #=======================================================================
+        #=================================================
         #   Get Values
-        #=======================================================================
+        #=================================================
         if ($item.Name -match 'x64') {$OsArch = 'x64'}
         if ($item.Name -match 'x86') {$OsArch = 'x86'}
         if ($null -eq $OsArch) {$OsArch = 'x64'}
@@ -174,24 +174,24 @@ function Get-OSDDriverHpModel {
         if ($item.Name -match 'G5') {$Generation = 'G5'}
         if ($item.Name -match 'G6') {$Generation = 'G6'}
         if ($item.Name -match 'G7') {$Generation = 'G7'}
-        #=======================================================================
+        #=================================================
         #   SystemFamily
-        #=======================================================================
-        #=======================================================================
+        #=================================================
+        #=================================================
         #   Corrections
-        #=======================================================================
+        #=================================================
         if ($SystemSku -contains '81C6') {$Generation = 'G4'}
         if ($SystemSku -contains '81C7') {$Generation = 'G4'}
         if ($SystemSku -contains '824C') {$Generation = 'G4'}
-        #=======================================================================
+        #=================================================
         #   Customizations
-        #=======================================================================
+        #=================================================
         if (Test-Path "$DownloadPath\$DownloadFile") {
             $OSDStatus = 'Downloaded'
         }
-        #=======================================================================
+        #=================================================
         #   Create Object 
-        #=======================================================================
+        #=================================================
         $ObjectProperties = @{
             OSDVersion              = [string]$OSDVersion
             LastUpdate              = $(($LastUpdate).ToString("yyyy-MM-dd"))
@@ -244,9 +244,9 @@ function Get-OSDDriverHpModel {
         }
         New-Object -TypeName PSObject -Property $ObjectProperties
     }
-    #=======================================================================
+    #=================================================
     #   Supersedence
-    #=======================================================================
+    #=================================================
     $global:GetOSDDriverHpModel = $global:GetOSDDriverHpModel | Sort-Object LastUpdate -Descending
     $CurrentOSDDriverHpModelPack = @()
     foreach ($HpModelPack in $global:GetOSDDriverHpModel) {
@@ -257,9 +257,9 @@ function Get-OSDDriverHpModel {
         }
     }
     $global:GetOSDDriverHpModel = $global:GetOSDDriverHpModel | Where-Object {$_.IsSuperseded -eq $false}
-    #=======================================================================
+    #=================================================
     #   Select-Object
-    #=======================================================================
+    #=================================================
     $global:GetOSDDriverHpModel = $global:GetOSDDriverHpModel | Select-Object LastUpdate,`
     OSDType, OSDGroup, OSDStatus, `
     DriverGrouping, DriverName, Make, Generation, Model, SystemSku,`
@@ -267,13 +267,13 @@ function Get-OSDDriverHpModel {
     OsVersion, OsArch,`
     DownloadFile, SizeMB, DriverUrl, DriverInfo, DriverDescription,
     Hash, OSDGuid, OSDVersion
-    #=======================================================================
+    #=================================================
     #   Sort Object
-    #=======================================================================
+    #=================================================
     $global:GetOSDDriverHpModel = $global:GetOSDDriverHpModel | Sort-Object LastUpdate -Descending
-    #=======================================================================
+    #=================================================
     #   Return
-    #=======================================================================
+    #=================================================
     Return $global:GetOSDDriverHpModel
-    #=======================================================================
+    #=================================================
 }

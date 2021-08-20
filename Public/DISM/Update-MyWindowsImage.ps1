@@ -46,50 +46,50 @@ function Update-MyWindowsImage {
     )
 
     begin {
-        #=======================================================================
+        #=================================================
         #   Block
-        #=======================================================================
+        #=================================================
         Block-StandardUser
         Block-WindowsVersionNe10
         Block-PSModuleNotInstalled -ModuleName OSDSUS
-        #=======================================================================
+        #=================================================
         #   Get-WindowsImage Mounted
-        #=======================================================================
+        #=================================================
         if ($null -eq $Path) {
             $Path = (Get-WindowsImage -Mounted | Select-Object -Property Path).Path
         }
-        #=======================================================================
+        #=================================================
     }
     process {
         foreach ($Input in $Path) {
-            #=======================================================================
+            #=================================================
             #   Path
-            #=======================================================================
+            #=================================================
             $MountPath = (Get-Item -Path $Input | Select-Object FullName).FullName
             Write-Verbose "Path: $MountPath" -Verbose
-            #=======================================================================
+            #=================================================
             #   Validate Mount Path
-            #=======================================================================
+            #=================================================
             if (-not (Test-Path $Input -ErrorAction SilentlyContinue)) {
                 Write-Warning "Update-MyWindowsImage: Unable to locate Mounted WindowsImage at $Input"
                 Break
             }
-            #=======================================================================
+            #=================================================
             #   Get Registry Information
-            #=======================================================================
+            #=================================================
             $global:GetRegCurrentVersion = Get-RegCurrentVersion -Path $Input
-            #=======================================================================
+            #=================================================
             #   Require OSMajorVersion 10
-            #=======================================================================
+            #=================================================
             if ($global:GetRegCurrentVersion.CurrentMajorVersionNumber -ne 10) {
                 Write-Warning "Update-MyWindowsImage: OS MajorVersion 10 is required"
                 Break
             }
 
             Write-Verbose -Verbose $global:GetRegCurrentVersion.ReleaseId
-            #=======================================================================
+            #=================================================
             #   Get-OSDSUS and Filter Results
-            #=======================================================================
+            #=================================================
             $global:GetOSDSUS = Get-OSDSUS -Catalog OSDBuilder | Sort-Object UpdateGroup -Descending
 
             if ($global:GetRegCurrentVersion.ReleaseId -gt 0) {
@@ -125,13 +125,13 @@ function Update-MyWindowsImage {
             if ($Update -ne 'Check' -and $Update -ne 'All') {
                 $global:GetOSDSUS = $global:GetOSDSUS | Where-Object {$_.UpdateGroup -match $Update}
             }
-            #=======================================================================
+            #=================================================
             #   Get-SessionsXml
-            #=======================================================================
+            #=================================================
             $global:GetSessionsXml = Get-SessionsXml -Path "$Input" | Where-Object {$_.targetState -eq 'Installed'} | Sort-Object id
-            #=======================================================================
+            #=================================================
             #   Apply Update
-            #=======================================================================
+            #=================================================
             foreach ($item in $global:GetOSDSUS) {
                 if (! ($Force.IsPresent)) {
                     if ($global:GetSessionsXml | Where-Object {$_.KBNumber -match "$($item.FileKBNumber)"}) {
@@ -169,11 +169,11 @@ function Update-MyWindowsImage {
                     Write-Warning "Unable to download $($UpdateFile.FullName)"
                 }
             }
-            #=======================================================================
+            #=================================================
             #   Return for PassThru
-            #=======================================================================
+            #=================================================
             Get-WindowsImage -Mounted | Where-Object {$_.Path -eq $MountPath}
-            #=======================================================================
+            #=================================================
         }
     }
     end {}

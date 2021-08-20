@@ -55,13 +55,13 @@ function Show-MsSettings {
 
         [switch]$DisableWSUS
     )
-    #=======================================================================
+    #=================================================
     #	Block
-    #=======================================================================
+    #=================================================
     Block-WinPE
-    #=======================================================================
+    #=================================================
     #	Switch
-    #=======================================================================
+    #=================================================
     switch ($Setting)
     {
         $null               {$SettingURI = 'ms-settings:'}
@@ -89,12 +89,12 @@ function Show-MsSettings {
         WiFiNetworks        {$SettingURI = 'ms-settings:network-wifisettings'}
         WindowsUpdate       {$SettingURI = 'ms-settings:windowsupdate'}
     }
-    #=======================================================================
+    #=================================================
     #   UseWUServer
     #   Original code from Martin Bengtsson
     #   https://www.imab.dk/deploy-rsat-remote-server-administration-tools-for-windows-10-v2004-using-configmgr-and-powershell/
     #   https://github.com/imabdk/Powershell/blob/master/Install-RSATv1809v1903v1909v2004v20H2.ps1
-    #=======================================================================
+    #=================================================
     if ($Setting -eq 'WindowsUpdate') {
         $WUServer = (Get-ItemProperty "HKLM:\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate" -Name WUServer -ErrorAction Ignore).WUServer
         $UseWUServer = (Get-ItemProperty -Path "HKLM:\Software\Policies\Microsoft\Windows\WindowsUpdate\AU" -ErrorAction Ignore).UseWuServer
@@ -109,9 +109,9 @@ function Show-MsSettings {
             Restart-Service wuauserv
         }
     }
-    #=======================================================================
+    #=================================================
     #	Execute
-    #=======================================================================
+    #=================================================
     if ($Setting.IsPresent) {
         Write-Host -ForegroundColor Cyan $Setting
     }
@@ -120,7 +120,7 @@ function Show-MsSettings {
     }
     Write-Host -ForegroundColor Cyan "Start-Process $SettingURI"
     Start-Process $SettingURI
-    #=======================================================================
+    #=================================================
 }
 <#
 .SYNOPSIS
@@ -149,16 +149,16 @@ function Unblock-WindowsUpdate {
         [switch]$DisableWSUS,
         [switch]$EnableDrivers
     )
-    #=======================================================================
+    #=================================================
     #	Block
-    #=======================================================================
+    #=================================================
     Block-WinPE
-    #=======================================================================
+    #=================================================
     #   UseWUServer
     #   Original code from Martin Bengtsson
     #   https://www.imab.dk/deploy-rsat-remote-server-administration-tools-for-windows-10-v2004-using-configmgr-and-powershell/
     #   https://github.com/imabdk/Powershell/blob/master/Install-RSATv1809v1903v1909v2004v20H2.ps1
-    #=======================================================================
+    #=================================================
     $WUServer = (Get-ItemProperty "HKLM:\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate" -Name WUServer -ErrorAction Ignore).WUServer
     $UseWUServer = (Get-ItemProperty -Path "HKLM:\Software\Policies\Microsoft\Windows\WindowsUpdate\AU" -ErrorAction Ignore).UseWuServer
     $WUDrivers = (Get-ItemProperty -Path "HKLM:\Software\Policies\Microsoft\Windows\WindowsUpdate" -ErrorAction Ignore).ExcludeWUDriversInQualityUpdate
@@ -172,9 +172,9 @@ function Unblock-WindowsUpdate {
         Write-Warning "This computer is not configured to receive Driver updates from Windows Update"
         Write-Warning "Add the EnableDrivers parameter to enable Driver updates from Windows Update"
     }
-    #=======================================================================
+    #=================================================
     #	Execute
-    #=======================================================================
+    #=================================================
     if (($DisableWSUS -eq $true) -and ($UseWUServer -eq 1)) {
         Set-ItemProperty -Path "HKLM:\Software\Policies\Microsoft\Windows\WindowsUpdate\AU" -Name "UseWuServer" -Value 0
     }
@@ -189,5 +189,5 @@ function Unblock-WindowsUpdate {
 
     Write-Host -ForegroundColor Cyan "Start-Process ms-settings:windowsupdate"
     Start-Process ms-settings:windowsupdate
-    #=======================================================================
+    #=================================================
 }

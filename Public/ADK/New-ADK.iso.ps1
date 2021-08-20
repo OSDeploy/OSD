@@ -40,20 +40,20 @@ function New-ADK.iso {
         #[switch]$Mount,
         [switch]$OpenExplorer
     )
-    #=======================================================================
+    #=================================================
     #   Header
-    #=======================================================================
+    #=================================================
     Write-Host -ForegroundColor DarkGray "========================================================================="
     Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) $($MyInvocation.MyCommand.Name)"
-	#=======================================================================
+	#=================================================
 	#	Blocks
-	#=======================================================================
+	#=================================================
 	Block-WinPE
 	Block-StandardUser
     Block-PowerShellVersionLt5
-    #=======================================================================
+    #=================================================
     #   Get Adk Paths
-    #=======================================================================
+    #=================================================
     $AdkPaths = Get-AdkPaths
 
     if ($null -eq $AdkPaths) {
@@ -62,7 +62,7 @@ function New-ADK.iso {
         Write-Host -ForegroundColor DarkGray "========================================================================="
         Break
     }
-    #=======================================================================
+    #=================================================
     Write-Host -ForegroundColor DarkGray "========================================================================="
     Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Setting Paths"
 
@@ -75,9 +75,9 @@ function New-ADK.iso {
     Write-Host -ForegroundColor DarkGray "IsoFullName: $IsoFullName"
     Write-Host -ForegroundColor DarkGray "PathOscdimg: $PathOscdimg"
     Write-Host -ForegroundColor DarkGray "oscdimgexe: $oscdimgexe"
-    #=======================================================================
+    #=================================================
     #   Test Paths
-    #=======================================================================
+    #=================================================
     $DestinationBoot = Join-Path $MediaPath 'boot'
     if (-NOT (Test-Path $DestinationBoot)) {
         Write-Host -ForegroundColor DarkGray "========================================================================="
@@ -94,15 +94,15 @@ function New-ADK.iso {
         Write-Host -ForegroundColor DarkGray "========================================================================="
         Break
     }
-    #=======================================================================
+    #=================================================
     #   etfsboot.com
-    #=======================================================================
+    #=================================================
     $etfsbootcom = $AdkPaths.etfsbootcom
     Copy-Item -Path $etfsbootcom -Destination $DestinationBoot -Force -ErrorAction Stop
     $Destinationetfsbootcom = Join-Path $DestinationBoot 'etfsboot.com'
-    #=======================================================================
+    #=================================================
     #   efisys.bin and efisys_noprompt.bin
-    #=======================================================================
+    #=================================================
     $efisysbin = $AdkPaths.efisysbin
     Copy-Item -Path $efisysbin -Destination $DestinationEfiBoot -Force -ErrorAction Stop
     $Destinationefisysbin = Join-Path $DestinationEfiBoot 'efisys.bin'
@@ -130,14 +130,14 @@ function New-ADK.iso {
     Write-Host -ForegroundColor DarkGray  "Destinationefisysbin: $Destinationefisysbin"
     Write-Host -ForegroundColor DarkGray  "efisysnopromptbin: $efisysnopromptbin"
     Write-Host -ForegroundColor DarkGray  "Destinationefisysnopromptbin: $Destinationefisysnopromptbin"
-    #=======================================================================
+    #=================================================
     #   Strings
-    #=======================================================================
+    #=================================================
     $isoLabelString = '-l"{0}"' -f "$isoLabel"
     Write-Host -ForegroundColor DarkGray  "isoLabelString: $isoLabelString"
-    #=======================================================================
+    #=================================================
     #   Create Prompt ISO
-    #=======================================================================
+    #=================================================
     Write-Host -ForegroundColor DarkGray "========================================================================="
     Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Creating Prompt ISO"
     $BootDataString = '2#p0,e,b"{0}"#pEF,e,b"{1}"' -f "$Destinationetfsbootcom", "$Destinationefisysbin"
@@ -153,9 +153,9 @@ function New-ADK.iso {
     }
     $PromptIso = Get-Item -Path $IsoFullName
     Write-Host -ForegroundColor DarkGray  "PromptIso: $PromptIso"
-    #=======================================================================
+    #=================================================
     #   Create NoPrompt ISO
-    #=======================================================================
+    #=================================================
     Write-Host -ForegroundColor DarkGray "========================================================================="
     Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Creating NoPrompt ISO"
     $IsoFullName = "$($PromptIso.Directory)\$($PromptIso.BaseName)_NoPrompt.iso"
@@ -172,21 +172,21 @@ function New-ADK.iso {
     }
     $NoPromptIso = Get-Item -Path $IsoFullName
     Write-Host -ForegroundColor DarkGray  "NoPromptIso: $NoPromptIso"
-    #=======================================================================
+    #=================================================
     #   OpenExplorer
-    #=======================================================================
+    #=================================================
     if ($PSBoundParameters.ContainsKey('OpenExplorer')) {
         explorer $WorkspacePath
     }
-    #=======================================================================
+    #=================================================
     #   Mount
-    #=======================================================================
+    #=================================================
     if ($PSBoundParameters.ContainsKey('Mount')) {
         explorer $IsoFullName
     }
-    #=======================================================================
+    #=================================================
     #   Return Get-Item
-    #=======================================================================
+    #=================================================
     Return $PromptIso
 
 <#     $Results += [pscustomobject]@{
@@ -196,5 +196,5 @@ function New-ADK.iso {
         isoDirectory     = $MediaPath
     }
     Return $Results #>
-    #=======================================================================
+    #=================================================
 }

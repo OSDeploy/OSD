@@ -23,7 +23,7 @@ function Find-TextInFile {
         [string]$Text,
 		[string[]]$Include = '*.txt'
 	)
-    #=======================================================================
+    #=================================================
 	$Results = Get-ChildItem $Path -Recurse -Include $Include -File | `
 	Select-String $Text | `
 	Select-Object Path, Filename, LineNumber, Line | `
@@ -34,7 +34,7 @@ function Find-TextInFile {
 	code $($Item.Path)
 		}
 	}
-    #=======================================================================
+    #=================================================
 }
 <#
 .SYNOPSIS
@@ -65,9 +65,9 @@ function Find-TextInModule {
         [string]$Module = 'OSD',
 		[string[]]$Include = '*.*'
 	)
-    #=======================================================================
+    #=================================================
     #	Get-Module Path
-    #=======================================================================
+    #=================================================
     $GetModule = @()
     $GetModule = Get-Module -ListAvailable -Name $Module | Select-Object Name, Version, ModuleBase
     $GetModule = $GetModule | Sort-Object Name, Version -Descending | Group-Object Name | ForEach-Object {$_.Group | Select-Object -First 1}

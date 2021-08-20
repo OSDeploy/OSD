@@ -122,45 +122,45 @@ function New-OSDisk {
         [Alias('F')]
         [switch]$Force
     )
-    #=======================================================================
+    #=================================================
     #	PSBoundParameters
-    #=======================================================================
+    #=================================================
     $IsConfirmPresent   = $PSBoundParameters.ContainsKey('Confirm')
     $IsForcePresent     = $PSBoundParameters.ContainsKey('Force')
     $IsVerbosePresent   = $PSBoundParameters.ContainsKey('Verbose')
-    #=======================================================================
+    #=================================================
     #	Block
-    #=======================================================================
+    #=================================================
     Block-StandardUser
     Block-WindowsVersionNe10
     Block-WinOS
-    #=======================================================================
+    #=================================================
     #	Enable Verbose if Force parameter is not $true
-    #=======================================================================
+    #=================================================
     if ($IsForcePresent -eq $false) {
         $VerbosePreference = 'Continue'
     }
-    #=======================================================================
+    #=================================================
     #	Get-Disk
-    #=======================================================================
+    #=================================================
     if ($Input) {
         $GetDisk = $Input
     } else {
         $GetDisk = Get-Disk.fixed | Sort-Object Number
     }
-    #=======================================================================
+    #=================================================
     #	Get DiskNumber
-    #=======================================================================
+    #=================================================
     if ($PSBoundParameters.ContainsKey('DiskNumber')) {
         $GetDisk = $GetDisk | Where-Object {$_.DiskNumber -eq $DiskNumber}
     }
-    #=======================================================================
+    #=================================================
     #	OSDisks must be large enough for a Windows installation
-    #=======================================================================
+    #=================================================
     $GetDisk = $GetDisk | Where-Object {$_.Size -gt 15GB}
-    #=======================================================================
+    #=================================================
     #	-PartitionStyle
-    #=======================================================================
+    #=================================================
     if (-NOT ($PSBoundParameters.ContainsKey('PartitionStyle'))) {
         if (Get-OSDGather -Property IsUEFI) {
             Write-Verbose "IsUEFI = $true"
@@ -171,15 +171,15 @@ function New-OSDisk {
         }
     }
     Write-Verbose "PartitionStyle = $PartitionStyle"
-    #=======================================================================
+    #=================================================
     #	Get-Help
-    #=======================================================================
+    #=================================================
     if ($IsForcePresent -eq $false) {
         Get-Help $($MyInvocation.MyCommand.Name)
     }
-    #=======================================================================
+    #=================================================
     #	Display Disk Information
-    #=======================================================================
+    #=================================================
     if ($IsForcePresent -eq $false) {
         $GetDisk | Select-Object -Property DiskNumber, BusType,`
         @{Name='SizeGB';Expression={[int]($_.Size / 1000000000)}},`
@@ -189,21 +189,21 @@ function New-OSDisk {
         
         Break
     }
-    #=======================================================================
+    #=================================================
     #	Failure: No Fixed Disks are present
-    #=======================================================================
+    #=================================================
     if ($null -eq $GetDisk) {
         Write-Warning "No Fixed Disks were found"
         Break
     }
-    #=======================================================================
+    #=================================================
     #	Set Defaults
-    #=======================================================================
+    #=================================================
     $OSDisk = $null
     $DataDisks = $null
-    #=======================================================================
+    #=================================================
     #	Identify OSDisk
-    #=======================================================================
+    #=================================================
     if (($GetDisk | Measure-Object).Count -eq 1) {
         $OSDisk = $GetDisk
     } else {
@@ -212,16 +212,16 @@ function New-OSDisk {
         $DataDisks = $GetDisk | Where-Object {$_.Number -ne $OSDisk.Number}
     }
     Write-Host ""
-    #=======================================================================
+    #=================================================
     #	Make sure there is only one OSDisk
-    #=======================================================================
+    #=================================================
     if (($OSDisk | Measure-Object).Count -gt 1) {
         Write-Warning "Something went wrong"
         Break
     }
-    #=======================================================================
+    #=================================================
     #   Create OSDisk
-    #=======================================================================
+    #=================================================
     #Create from RAW Disk
     if (($OSDisk.NumberOfPartitions -eq 0) -and ($OSDisk.PartitionStyle -eq 'RAW')) {
         Write-Verbose "Initializing Disk $($OSDisk.Number) as $PartitionStyle"
@@ -250,9 +250,9 @@ function New-OSDisk {
             $OSDisk | Initialize-Disk -PartitionStyle $PartitionStyle
         }
     }
-    #=======================================================================
+    #=================================================
     #	Reassign Volume S
-    #=======================================================================
+    #=================================================
     $GetVolume = Get-Volume | Where-Object {$_.DriveLetter -eq 'S'}
 
     if ($GetVolume) {
@@ -260,9 +260,9 @@ function New-OSDisk {
         #Get-Partition -DriveLetter 'S' | Set-Partition -NewDriveLetter (Get-LastAvailableDriveLetter)
         Get-Volume -DriveLetter S | Get-Partition | Remove-PartitionAccessPath -AccessPath 'S:\' -ErrorAction SilentlyContinue
     }
-    #=======================================================================
+    #=================================================
     #	System Partition
-    #=======================================================================
+    #=================================================
     $SystemPartition = @{
         DiskNumber          = $OSDisk.Number
         LabelSystem         = $LabelSystem
@@ -272,18 +272,18 @@ function New-OSDisk {
         SizeSystemGpt       = $SizeSystemGpt
     }
     New-OSDPartitionSystem @SystemPartition
-    #=======================================================================
+    #=================================================
     #	Reassign Volume C
-    #=======================================================================
+    #=================================================
     $GetVolume = Get-Volume | Where-Object {$_.DriveLetter -eq 'C'}
 
     if ($GetVolume) {
         Write-Verbose "Reassigning Drive Letter C"
         Get-Partition -DriveLetter 'C' | Set-Partition -NewDriveLetter (Get-LastAvailableDriveLetter)
     }
-    #=======================================================================
+    #=================================================
     #	Reassign Volume R
-    #=======================================================================
+    #=================================================
     $GetVolume = Get-Volume | Where-Object {$_.DriveLetter -eq 'R'}
 
     if ($GetVolume) {
@@ -291,9 +291,9 @@ function New-OSDisk {
         #Get-Partition -DriveLetter 'R' | Set-Partition -NewDriveLetter (Get-LastAvailableDriveLetter)
         Get-Volume -DriveLetter R | Get-Partition | Remove-PartitionAccessPath -AccessPath 'R:\' -ErrorAction SilentlyContinue
     }
-    #=======================================================================
+    #=================================================
     #	Windows Partition
-    #=======================================================================
+    #=================================================
     $WindowsPartition = @{
         DiskNumber              = $OSDisk.Number
         LabelRecovery           = $LabelRecovery
@@ -303,9 +303,9 @@ function New-OSDisk {
         NoRecoveryPartition     = $NoRecoveryPartition
     }
     New-OSDPartitionWindows @WindowsPartition
-    #=======================================================================
+    #=================================================
     #	DataDisks
-    #=======================================================================
+    #=================================================
     Get-Disk.osd | Select-Object -Property DiskNumber, BusType,`
     @{Name='SizeGB';Expression={[int]($_.Size / 1000000000)}},`
     FriendlyName, Model, PartitionStyle,`

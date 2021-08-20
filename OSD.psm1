@@ -37,7 +37,7 @@ else {
 }
 
 Export-ModuleMember -Function $Public.BaseName
-#===================================================================================================
+#=================================================
 #WinPE
 if ($env:SystemDrive -eq 'X:') {
     $Public  = @( Get-ChildItem -Path ("$PSScriptRoot\Public\*.ps1","$PSScriptRoot\WinPE\*.ps1") -Recurse -ErrorAction SilentlyContinue )
@@ -57,7 +57,7 @@ if ($env:SystemDrive -eq 'X:') {
     }
 }
 
-#===================================================================================================
+#=================================================
 #Alias
 New-Alias -Name Clear-LocalDisk -Value Clear-Disk.fixed -Force -ErrorAction SilentlyContinue
 New-Alias -Name Clear-USBDisk -Value Clear-Disk.usb -Force -ErrorAction SilentlyContinue
@@ -83,6 +83,6 @@ New-Alias -Name Select-USBDisk -Value Select-Disk.usb -Force -ErrorAction Silent
 New-Alias -Name Select-USBVolume -Value Select-Volume.usb -Force -ErrorAction SilentlyContinue
 New-Alias -Name Update-OSDWindowsImage -Value Update-MyWindowsImage -Force -ErrorAction SilentlyContinue
 New-Alias -Name Update-WindowsImageOSD -Value Update-MyWindowsImage -Force -ErrorAction SilentlyContinue
-#===================================================================================================
+#=================================================
 #Export-ModuleMember
 Export-ModuleMember -Function * -Alias *

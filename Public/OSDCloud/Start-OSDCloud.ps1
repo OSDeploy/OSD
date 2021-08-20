@@ -72,9 +72,9 @@ function Start-OSDCloud {
         [Parameter(ParameterSetName = 'CustomImage')]
         [int32]$ImageIndex = 1
     )
-    #=======================================================================
+    #=================================================
     #	Create Hashtable
-    #=======================================================================
+    #=================================================
     $Global:StartOSDCloud = $null
     $Global:StartOSDCloud = [ordered]@{
         AutopilotJsonChildItem = $null
@@ -131,30 +131,30 @@ function Start-OSDCloud {
             $Global:StartOSDCloud.$Key = $Global:StartOSDCloudGUI.$Key
         }
     }
-    #=======================================================================
+    #=================================================
     #	Block
-    #=======================================================================
+    #=================================================
     Block-StandardUser
     Block-PowerShellVersionLt5
     Block-NoCurl
-    #=======================================================================
+    #=================================================
     #	-Screenshot
-    #=======================================================================
+    #=================================================
     if ($PSBoundParameters.ContainsKey('Screenshot')) {
         $Global:StartOSDCloud.Screenshot = "$env:TEMP\ScreenPNG"
         Start-ScreenPNGProcess -Directory $Global:StartOSDCloud.Screenshot
     }
-    #=======================================================================
+    #=================================================
     #   Header
-    #=======================================================================
+    #=================================================
     Write-Host -ForegroundColor DarkGray "========================================================================="
     Write-Host -ForegroundColor Green "Start-OSDCloud"
     Write-Host -ForegroundColor DarkGray "========================================================================="
     Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) $($Global:StartOSDCloud.Function)" -NoNewline
     Write-Host -ForegroundColor Cyan " | Manufacturer: $Manufacturer | Product: $Product"
-    #=======================================================================
+    #=================================================
     #	-ZTI
-    #=======================================================================
+    #=================================================
     if ($Global:StartOSDCloud.ZTI) {
         $Global:StartOSDCloud.GetDiskFixed = Get-Disk.fixed | Where-Object {$_.IsBoot -eq $false} | Sort-Object Number
 
@@ -180,15 +180,15 @@ function Start-OSDCloud {
             Start-Sleep -Seconds 5
         }
     }
-    #=======================================================================
+    #=================================================
     #	Battery
-    #=======================================================================
+    #=================================================
     if ($Global:StartOSDCloud.IsOnBattery) {
         Write-Warning "This computer is currently running on Battery"
     }
-    #=======================================================================
+    #=================================================
     #	Test Web Connection
-    #=======================================================================
+    #=================================================
     Write-Host -ForegroundColor DarkGray "========================================================================="
     Write-Host -ForegroundColor Cyan "Test-WebConnection"
     Write-Host -ForegroundColor DarkGray "google.com"
@@ -201,15 +201,15 @@ function Start-OSDCloud {
         Write-Warning "Could not validate an Internet connection"
         Write-Warning "OSDCloud will continue, but there may be issues if this can't be resolved"
     }
-    #=======================================================================
+    #=================================================
     #	Custom Image
-    #=======================================================================
+    #=================================================
     if ($Global:ImageFileItem -and $Global:ImageFileFullName -and $Global:ImageFileName) {
         #Custom Image set in OSDCloudGUI
     }
-    #=======================================================================
+    #=================================================
     #	ParameterSet CustomImage
-    #=======================================================================
+    #=================================================
     elseif ($PSCmdlet.ParameterSetName -eq 'CustomImage') {
         Write-Host -ForegroundColor DarkGray "========================================================================="
         Write-Host -ForegroundColor Cyan "Custom Windows Image"
@@ -237,13 +237,13 @@ function Start-OSDCloud {
             }
         }
     }
-    #=======================================================================
+    #=================================================
     #	ParameterSet Default
-    #=======================================================================
+    #=================================================
     elseif ($PSCmdlet.ParameterSetName -eq 'Default') {
-        #=======================================================================
+        #=================================================
         #	OSBuild
-        #=======================================================================
+        #=================================================
         Write-Host -ForegroundColor DarkGray "========================================================================="
         Write-Host -ForegroundColor Cyan "Windows 10 OSBuild " -NoNewline
         
@@ -280,9 +280,9 @@ function Start-OSDCloud {
             Write-Host -ForegroundColor Cyan "OSBuild: " -NoNewline
             Write-Host -ForegroundColor Green $Global:StartOSDCloud.OSBuild
         }
-        #=======================================================================
+        #=================================================
         #	OSEdition
-        #=======================================================================
+        #=================================================
         Write-Host -ForegroundColor DarkGray "========================================================================="
         Write-Host -ForegroundColor Cyan "Windows 10 OSEdition " -NoNewline
 
@@ -319,9 +319,9 @@ function Start-OSDCloud {
             Write-Host -ForegroundColor Cyan "OSEdition: " -NoNewline
             Write-Host -ForegroundColor Green $Global:StartOSDCloud.OSEdition
         }
-        #=======================================================================
+        #=================================================
         #	OSEditionId and OSLicense
-        #=======================================================================
+        #=================================================
         if ($Global:StartOSDCloud.OSEdition -eq 'Home') {
             $Global:StartOSDCloud.OSEditionId = 'Core'
             $Global:StartOSDCloud.OSLicense = 'Retail'
@@ -347,9 +347,9 @@ function Start-OSDCloud {
             $Global:StartOSDCloud.OSLicense = 'Volume'
             $Global:StartOSDCloud.OSImageIndex = 7
         }
-        #=======================================================================
+        #=================================================
         #	OSLicense
-        #=======================================================================
+        #=================================================
         Write-Host -ForegroundColor DarkGray "========================================================================="
         Write-Host -ForegroundColor Cyan "Windows 10 OSLicense " -NoNewline
 
@@ -417,9 +417,9 @@ function Start-OSDCloud {
         Write-Host -ForegroundColor Green $Global:StartOSDCloud.OSEditionId
         Write-Host -ForegroundColor Cyan "OSImageIndex: " -NoNewline
         Write-Host -ForegroundColor Green $Global:StartOSDCloud.OSImageIndex
-        #=======================================================================
+        #=================================================
         #	OSLanguage
-        #=======================================================================
+        #=================================================
         Write-Host -ForegroundColor DarkGray "========================================================================="
         Write-Host -ForegroundColor Cyan "Windows 10 OSLanguage " -NoNewline
         
@@ -459,11 +459,11 @@ function Start-OSDCloud {
             Write-Host -ForegroundColor Cyan "OSLanguage: " -NoNewline
             Write-Host -ForegroundColor Green $Global:StartOSDCloud.OSLanguage
         }
-        #=======================================================================
+        #=================================================
         #	Get-FeatureUpdate
         #   This is where we take the OSB OSE OSL information and get the
         #   Feature Update.  Global Variables will be set for Deploy-OSDCloud
-        #=======================================================================
+        #=================================================
         Write-Host -ForegroundColor DarkGray "========================================================================="
         Write-Host -ForegroundColor Cyan "Get-FeatureUpdate"
         Write-Host -ForegroundColor DarkGray "Windows 10 x64 | OSLicense: $($Global:StartOSDCloud.OSLicense) | OSBuild: $($Global:StartOSDCloud.OSBuild) | OSLanguage: $($Global:StartOSDCloud.OSLanguage)"
@@ -480,11 +480,11 @@ function Start-OSDCloud {
             Write-Warning "OSDCloud cannot continue"
             Break
         }
-        #=======================================================================
+        #=================================================
         #	Get-FeatureUpdate Offline
         #   Determine if the OS is Offline
         #   Need to bail if the file is Online is not valid or not Offline
-        #=======================================================================
+        #=================================================
         $Global:StartOSDCloud.ImageFileItem = Find-OSDCloudFile -Name $Global:StartOSDCloud.GetFeatureUpdate.FileName -Path '\OSDCloud\OS\' | Sort-Object FullName | Where-Object {$_.Length -gt 3GB}
         $Global:StartOSDCloud.ImageFileItem = $Global:StartOSDCloud.ImageFileItem | Where-Object {$_.FullName -notlike "C*"} | Where-Object {$_.FullName -notlike "X*"} | Select-Object -First 1
 
@@ -504,9 +504,9 @@ function Start-OSDCloud {
             Break
         }
     }
-    #=======================================================================
+    #=================================================
     #	Start-OSDCloud Get-MyDriverPack
-    #=======================================================================
+    #=================================================
     if ($Global:StartOSDCloud.Product -ne 'None') {
         Write-Host -ForegroundColor DarkGray "========================================================================="
         Write-Host -ForegroundColor Cyan "Get-MyDriverPack"
@@ -539,12 +539,12 @@ function Start-OSDCloud {
             Write-Warning "Unable to determine a suitable Driver Pack for this Computer Model"
         }
     }
-    #=======================================================================
+    #=================================================
     #   Invoke-OSDCloud.ps1
-    #=======================================================================
+    #=================================================
     Write-Host -ForegroundColor DarkGray "========================================================================="
     Write-Host -ForegroundColor Green "Invoke-OSDCloud ... Starting in 5 seconds..."
     Start-Sleep -Seconds 5
     Invoke-OSDCloud
-    #=======================================================================
+    #=================================================
 }

@@ -13,20 +13,20 @@ https://osd.osdeploy.com/module/functions/oobe
 function Start-OOBE.autopilot {
     [CmdletBinding()]
     param ()
-    #=======================================================================
+    #=================================================
     #	Block
-    #=======================================================================
+    #=================================================
     Block-StandardUser
     Block-PowerShellVersionLt5
     Block-WinPE
-    #=======================================================================
+    #=================================================
     #	Set Environment
-    #=======================================================================
+    #=================================================
     $env:APPDATA = "$SystemRoot\System32\Config\SystemProfile\AppData\Roaming"
     $env:LOCALAPPDATA = "$SystemRoot\System32\Config\SystemProfile\AppData\Local"
-    #=======================================================================
+    #=================================================
     #	Start-OOBE.autopilot
-    #=======================================================================
+    #=================================================
     Write-Host "Starting OSDCloud OOBE" -ForegroundColor Cyan
     Set-ExecutionPolicy -ExecutionPolicy Bypass -Scope Process
 

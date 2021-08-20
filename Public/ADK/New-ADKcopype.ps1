@@ -24,18 +24,18 @@ function New-ADKcopype {
         [string]$WinPEArch = 'amd64'
     )
 
-    #=======================================================================
+    #=================================================
     #   Require Admin Rights
-    #=======================================================================
+    #=================================================
     if ((Get-OSDGather -Property IsAdmin) -eq $false) {
         Write-Warning "$($MyInvocation.MyCommand) requires Admin Rights ELEVATED"
         Break
     }
-    #=======================================================================
+    #=================================================
     #   Get Adk Paths
-    #=======================================================================
+    #=================================================
     $AdkPaths = Get-AdkPaths -Arch $WinPEArch
-    #=======================================================================
+    #=================================================
     $Destination = $Path
 
     $AdkWimSourcePath = $AdkPaths.WimSourcePath
@@ -67,5 +67,5 @@ function New-ADKcopype {
     Copy-Item "$AdkWimSourcePath" "$DestinationSources\boot.wim"
     Copy-Item "$AdkPathOscdimg\efisys.bin" "$DestinationFirmwareFiles"
     Copy-Item "$AdkPathOscdimg\etfsboot.com" "$DestinationFirmwareFiles"
-    #=======================================================================
+    #=================================================
 }

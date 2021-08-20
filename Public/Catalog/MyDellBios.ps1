@@ -19,38 +19,38 @@ function Get-MyDellBios {
     param ()
 
     $ErrorActionPreference = 'SilentlyContinue'
-    #=======================================================================
+    #=================================================
     #   Require Dell Computer
-    #=======================================================================
+    #=================================================
     if ((Get-MyComputerManufacturer -Brief) -ne 'Dell') {
         Write-Warning "Dell computer is required for this function"
         Return $null
     }
-    #=======================================================================
+    #=================================================
     #   Current System Information
-    #=======================================================================
+    #=================================================
     $SystemSKU = $((Get-WmiObject -Class Win32_ComputerSystem).SystemSKUNumber).Trim()
 	$BIOSVersion = $((Get-WmiObject -Class Win32_BIOS).SMBIOSBIOSVersion).Trim()
-    #=======================================================================
+    #=================================================
     #   Get-CatalogDellSystem
-    #=======================================================================
+    #=================================================
     #$GetMyDellBios = Get-CatalogDellSystem -Component BIOS -Compatible | Sort-Object ReleaseDate -Descending | Select-Object -First 1
     $GetMyDellBIOS = Import-Clixml "$($MyInvocation.MyCommand.Module.ModuleBase)\Files\Catalogs\OSD-Dell-CatalogPC-BIOS.xml" | Sort-Object ReleaseDate -Descending
     $GetMyDellBIOS | Add-Member -MemberType NoteProperty -Name 'Flash64W' -Value 'https://github.com/OSDeploy/OSDCloud/raw/main/BIOS/Flash64W_Ver3.3.8.cab'
-    #=======================================================================
+    #=================================================
     #   Filter Compatible
-    #=======================================================================
+    #=================================================
     Write-Verbose "Filtering XML for items compatible with SystemSKU $SystemSKU"
     $GetMyDellBIOS = $GetMyDellBIOS | `
         Where-Object {$_.SupportedSystemID -contains $SystemSKU}
-    #=======================================================================
+    #=================================================
     #   Pick and Sort
-    #=======================================================================
+    #=================================================
     $GetMyDellBios = $GetMyDellBios | Sort-Object ReleaseDate -Descending | Select-Object -First 1
     #Write-Verbose "You are currently running Dell Bios version $BIOSVersion" -Verbose
-    #=======================================================================
+    #=================================================
     #   Return
-    #=======================================================================
+    #=================================================
     Return $GetMyDellBios
 }
 function Save-MyDellBios {
@@ -136,25 +136,25 @@ function Update-MyDellBios {
         [switch]$Reboot,
         [switch]$Silent
     )
-    #=======================================================================
+    #=================================================
     #   Block
-    #=======================================================================
+    #=================================================
     Block-StandardUser
-    #=======================================================================
+    #=================================================
     #   Require Dell Computer
-    #=======================================================================
+    #=================================================
     if ((Get-MyComputerManufacturer -Brief) -ne 'Dell') {
         Write-Warning "Dell computer is required for this function"
         Return $null
     }
-    #=======================================================================
+    #=================================================
     #   Current System Information
-    #=======================================================================
+    #=================================================
     $SystemSKU = $((Get-WmiObject -Class Win32_ComputerSystem).SystemSKUNumber).Trim()
 	$BIOSVersion = $((Get-WmiObject -Class Win32_BIOS).SMBIOSBIOSVersion).Trim()
-    #=======================================================================
+    #=================================================
     #   Compare
-    #=======================================================================
+    #=================================================
     $GetMyDellBios = Get-MyDellBios | Sort-Object ReleaseDate -Descending | Select-Object -First 1
 
     if ($GetMyDellBios.DellVersion -eq (Get-MyBiosVersion)) {
@@ -162,9 +162,9 @@ function Update-MyDellBios {
         Start-Sleep -Seconds 5
     }
     if (($GetMyDellBios.DellVersion -lt (Get-MyBiosVersion)) -or ($Force.IsPresent) ) {
-        #=======================================================================
+        #=================================================
         #   Download
-        #=======================================================================
+        #=================================================
         $SaveMyDellBios = Save-MyDellBios -DownloadPath $DownloadPath
         if (-NOT ($SaveMyDellBios)) {Return $null}
         if (-NOT (Test-Path $SaveMyDellBios.FullName)) {Return $null}
@@ -175,9 +175,9 @@ function Update-MyDellBios {
             if (-NOT (Test-Path $SaveMyDellBiosFlash64W.FullName)) {Return $null}
         }
         $SaveMyDellBiosFlash64W = Save-MyDellBiosFlash64W -DownloadPath $DownloadPath
-        #=======================================================================
+        #=================================================
         #   BitLocker
-        #=======================================================================
+        #=================================================
         if ($env:SystemDrive -ne 'X:') {
             Write-Verbose "Checking for BitLocker" -Verbose
             #http://www.dptechjournal.net/2017/01/powershell-script-to-deploy-dell.html
@@ -194,9 +194,9 @@ function Update-MyDellBios {
                 Write-Verbose "BitLocker was not enabled" -Verbose
             }
         }
-        #=======================================================================
+        #=================================================
         #   Arguments
-        #=======================================================================
+        #=================================================
         $BiosLog = Join-Path $env:TEMP 'Update-MyDellBios.log'
     
         $Arguments = "/l=`"$BiosLog`""
@@ -205,9 +205,9 @@ function Update-MyDellBios {
         } elseif ($Silent) {
             $Arguments = $Arguments + " /s"
         }
-        #=======================================================================
+        #=================================================
         #   Execution
-        #=======================================================================
+        #=================================================
         if (($env:SystemDrive -eq 'X:') -and ($env:PROCESSOR_ARCHITECTURE -match '64')) {
             $Arguments = "/b=`"$($SaveMyDellBios.FullName)`" " + $Arguments
             Write-Verbose "Start-Process -WorkingDirectory `"$($SaveMyDellBios.Directory)`" -FilePath `"$($SaveMyDellBiosFlash64W.FullName)`" -ArgumentList $Arguments -Wait" -Verbose
@@ -217,7 +217,7 @@ function Update-MyDellBios {
             Write-Verbose "Start-Process -FilePath `"$($SaveMyDellBios.FullName)`" -ArgumentList $Arguments -Wait" -Verbose
             Start-Process -FilePath "$($SaveMyDellBios.FullName)" -ArgumentList $Arguments -Wait -ErrorAction Inquire
         }
-        #=======================================================================
+        #=================================================
     }
 }
 function Save-MyDellBiosFlash64W {

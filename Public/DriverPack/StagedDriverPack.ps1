@@ -17,53 +17,53 @@ $UnattendXml = @'
     </settings>
 </unattend>
 '@
-    #=======================================================================
+    #=================================================
     #	Block
-    #=======================================================================
+    #=================================================
     Block-WinOS
     Block-WindowsVersionNe10
     Block-PowerShellVersionLt5  
-    #=======================================================================
+    #=================================================
     #	Set Unattend in the Registry
     #   HKEY_LOCAL_MACHINE\System\Setup\UnattendFile
     #   Specifies a pointer in the registry to an answer file
     #   The answer file is not required to be named Unattend.xml
     #   https://docs.microsoft.com/en-us/windows-hardware/manufacture/desktop/windows-setup-automation-overview
-    #=======================================================================  
+    #=================================================  
     reg load HKLM\TempSYSTEM "C:\Windows\System32\Config\SYSTEM"
     reg add HKLM\TempSYSTEM\Setup /v UnattendFile /d "C:\Windows\Panther\Expand-StagedDriverPack.xml" /f
     reg unload HKLM\TempSYSTEM
-    #=======================================================================
+    #=================================================
     #	Set Unattend
-    #=======================================================================
+    #=================================================
     $UnattendXml | Out-File -FilePath "C:\Windows\Panther\Expand-StagedDriverPack.xml" -Encoding utf8 -Width 2000 -Force
-    #=======================================================================
+    #=================================================
 }
 function Expand-StagedDriverPack {
     [CmdletBinding()]
     param (
         [switch]$Apply
     )
-    #=======================================================================
+    #=================================================
     #   Specialize
-    #=======================================================================
+    #=================================================
     $ImageState = (Get-ItemProperty -Path 'HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Setup\State' -ErrorAction Ignore).ImageState
     if ($ImageState -eq 'IMAGE_STATE_SPECIALIZE_RESEAL_TO_OOBE') {
         $Apply = $true
         reg delete HKLM\System\Setup /v UnattendFile /f
     }
-    #=======================================================================
+    #=================================================
     #   Specialize
-    #=======================================================================
+    #=================================================
     if (Test-Path 'C:\Drivers') {
         $DriverPacks = Get-ChildItem -Path 'C:\Drivers' -File
 
         foreach ($Item in $DriverPacks) {
             $ExpandFile = $Item.FullName
             Write-Verbose -Verbose "DriverPack: $ExpandFile"
-            #=======================================================================
+            #=================================================
             #   Cab
-            #=======================================================================
+            #=================================================
             if ($Item.Extension -eq '.cab') {
                 $DestinationPath = Join-Path $Item.Directory $Item.BaseName
     
@@ -82,9 +82,9 @@ function Expand-StagedDriverPack {
                 }
                 Continue
             }
-            #=======================================================================
+            #=================================================
             #   HP
-            #=======================================================================
+            #=================================================
             if ($Item.Extension -eq '.exe') {
                 if (($Item.VersionInfo.InternalName -match 'hpsoftpaqwrapper') -or ($Item.VersionInfo.OriginalFilename -match 'hpsoftpaqwrapper.exe') -or ($Item.VersionInfo.FileDescription -like "HP *")) {
                     Write-Verbose -Verbose "FileDescription: $($Item.VersionInfo.FileDescription)"
@@ -108,9 +108,9 @@ function Expand-StagedDriverPack {
                     Continue
                 }
             }
-            #=======================================================================
+            #=================================================
             #   Lenovo
-            #=======================================================================
+            #=================================================
             if ($Item.Extension -eq '.exe') {
                 if ($Item.VersionInfo.FileDescription -match 'Lenovo') {
                     Write-Verbose -Verbose "FileDescription: $($Item.VersionInfo.FileDescription)"
@@ -132,9 +132,9 @@ function Expand-StagedDriverPack {
                     Continue
                 }
             }
-            #=======================================================================
+            #=================================================
             #   MSI
-            #=======================================================================
+            #=================================================
             if ($Item.Extension -eq '.msi') {
                 $DateStamp = Get-Date -Format yyyyMMddTHHmmss
                 $logFile = '{0}-{1}.log' -f $ExpandFile,$DateStamp
@@ -149,9 +149,9 @@ function Expand-StagedDriverPack {
                 Start-Process "msiexec.exe" -ArgumentList $MSIArguments -Wait -NoNewWindow
                 Continue
             }
-            #=======================================================================
+            #=================================================
             #   Zip
-            #=======================================================================
+            #=================================================
             if ($Item.Extension -eq '.zip') {
                 $DestinationPath = Join-Path $Item.Directory $Item.BaseName
 
@@ -168,12 +168,12 @@ function Expand-StagedDriverPack {
                 }
                 Continue
             }
-            #=======================================================================
+            #=================================================
             #   Everything Else
-            #=======================================================================
+            #=================================================
             Write-Warning "Unable to expand $ExpandFile"
             Write-Verbose -Verbose ""
-            #=======================================================================
+            #=================================================
         }
     }
 }

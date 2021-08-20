@@ -28,18 +28,18 @@ function New-CAB
 	)
 	BEGIN {}
     PROCESS {
-		#======================================================================================
+		#=================================================
 		Write-Verbose "Processing '$SourceDirectory' ..."
-		#======================================================================================
+		#=================================================
 		$ArchiveBaseName = (Get-Item $SourceDirectory).Name
 		$ArchiveFileName = "$ArchiveBaseName.cab"
 		$FolderFullName = (Get-Item $SourceDirectory).Fullname
 		$DestinationFolder = (Get-Item $SourceDirectory).Parent.FullName
 		$ArchiveFullName = Join-Path -Path $DestinationFolder -ChildPath $ArchiveFileName
 
-		#======================================================================================
+		#=================================================
 		Write-Verbose "Generating MakeCAB DDF ..."
-		#======================================================================================
+		#=================================================
 		$DirectiveString = [System.Text.StringBuilder]::new()
 		[void]$DirectiveString.AppendLine(';*** MakeCAB Directive file;')
 		[void]$DirectiveString.AppendLine('.OPTION EXPLICIT')
@@ -55,28 +55,28 @@ function New-CAB
 		[void]$DirectiveString.AppendLine('.Set MaxDiskFileCount=0')
 		[void]$DirectiveString.AppendLine('.Set MaxDiskSize=0')
 
-		#======================================================================================
+		#=================================================
 		Write-Verbose "Unblocking Files ..."
-		#======================================================================================
+		#=================================================
 		Get-ChildItem $FolderFullName -Recurse | Unblock-File
 		
-		#======================================================================================
+		#=================================================
 		Write-Verbose "Adding DDF Content ..."
-		#======================================================================================
+		#=================================================
 		$DirectivePath = Join-Path -Path $DestinationFolder -ChildPath "$ArchiveBaseName.ddf"
 		Get-ChildItem -Recurse $SourceDirectory | Where-Object { -Not($_.psiscontainer)} | Select-Object -ExpandProperty Fullname | Foreach-Object {
 			[void]$DirectiveString.AppendLine("""$_"" ""$($_.SubString($FolderFullName.Length + 1))""")
 		}
 		
-		#======================================================================================
+		#=================================================
 		Write-Verbose "Compressing '$FolderFullName' to '$ArchiveFullName' ..."
-		#======================================================================================
+		#=================================================
 		$DirectiveString.ToString() | Out-File -FilePath $DirectivePath -Encoding UTF8 -Width 2000 -Force
 		makecab /F $DirectivePath
     }
     END {
-		#======================================================================================
+		#=================================================
 		Write-Verbose "Complete"
-		#======================================================================================
+		#=================================================
 	}
 }

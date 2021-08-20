@@ -18,9 +18,9 @@ function Get-CatalogMicrosoftDriverPack {
     param (
 		[switch]$Compatible
     )
-#=======================================================================
+#=================================================
 #	BaseCatalog
-#=======================================================================
+#=================================================
 $BaseCatalog = @'
 [
     {
@@ -340,13 +340,13 @@ $BaseCatalog = @'
     }
 ]
 '@
-	#=======================================================================
+	#=================================================
 	#	Reference
-	#=======================================================================
+	#=================================================
 	#https://docs.microsoft.com/en-us/surface/surface-system-sku-reference
-	#=======================================================================
+	#=================================================
 	#   Paths
-	#=======================================================================
+	#=================================================
 	$CatalogState           = 'Offline' #Online, Build, Local, Offline
 	$DownloadsBaseUrl 		= 'https://www.microsoft.com/en-us/download/confirmation.aspx?id='
 	$CatalogOnlinePath      = 'https://support.microsoft.com/en-us/surface/download-drivers-and-firmware-for-surface-09bb2e09-2a4b-cb69-0951-078a7739e120'
@@ -355,9 +355,9 @@ $BaseCatalog = @'
 	$CatalogOfflinePath     = "$($MyInvocation.MyCommand.Module.ModuleBase)\Catalogs\CatalogMicrosoftDriverPack.json"
 	#$CatalogLocalCabName  	= [string]($CatalogOnlinePath | Split-Path -Leaf)
 	#$CatalogLocalCabPath 	= Join-Path $env:TEMP $CatalogLocalCabName
-    #=======================================================================
+    #=================================================
     #   Test CatalogState Local
-    #=======================================================================
+    #=================================================
 	if ($CatalogState -ne 'Offline') {
         if (Test-Path $CatalogLocalPath) {
             Write-Verbose "Testing $CatalogLocalPath"
@@ -375,9 +375,9 @@ $BaseCatalog = @'
             }
         }
     }
-    #=======================================================================
+    #=================================================
     #   Test CatalogState Online
-    #=======================================================================
+    #=================================================
 	if ($CatalogState -eq 'Online') {
 		if (Test-WebConnection -Uri $CatalogOnlinePath) {
 			#Catalog is online and can be downloaded
@@ -386,10 +386,10 @@ $BaseCatalog = @'
 			$CatalogState = 'Offline'
 		}
 	}
-    #=======================================================================
+    #=================================================
     #   CatalogState Online
 	#	Need to get the Online Catalog to Local
-    #=======================================================================
+    #=================================================
 	if ($CatalogState -eq 'Online') {
 		$Results = $BaseCatalog | ConvertFrom-Json
 	
@@ -418,31 +418,31 @@ $BaseCatalog = @'
 			$CatalogState = 'Offline'
 		}
 	}
-    #=======================================================================
+    #=================================================
     #   CatalogState Local
-    #=======================================================================
+    #=================================================
 	if ($CatalogState -eq 'Local') {
 		Write-Verbose "Reading the Local System Catalog at $CatalogLocalPath"
 		$Results = Get-Content -Path $CatalogLocalPath | ConvertFrom-Json
 	}
-    #=======================================================================
+    #=================================================
     #   CatalogState Offline
-    #=======================================================================
+    #=================================================
 	if ($CatalogState -eq 'Offline') {
 		Write-Verbose "Reading the Offline System Catalog at $CatalogOfflinePath"
 		$Results = Get-Content -Path $CatalogOfflinePath | ConvertFrom-Json
 	}
-    #=======================================================================
+    #=================================================
     #   Compatible
-    #=======================================================================
+    #=================================================
 	if ($PSBoundParameters.ContainsKey('Compatible')) {
 		$MyComputerProduct = Get-MyComputerProduct
 		Write-Verbose "Filtering XML for items compatible with Product $MyComputerProduct"
 		$Results = $Results | Where-Object {$_.Product -contains $MyComputerProduct}
 	}
-    #=======================================================================
+    #=================================================
     #   Results
-    #=======================================================================
+    #=================================================
     $Results | Sort-Object -Property Product
-    #=======================================================================
+    #=================================================
 }

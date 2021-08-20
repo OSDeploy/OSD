@@ -13,20 +13,20 @@ https://osd.osdeploy.com/module/functions/disk/get-volume
 function Get-Volume.osd {
     [CmdletBinding()]
     param ()
-    #=======================================================================
+    #=================================================
     #	PSBoundParameters
-    #=======================================================================
+    #=================================================
     $IsConfirmPresent   = $PSBoundParameters.ContainsKey('Confirm')
     $IsForcePresent     = $PSBoundParameters.ContainsKey('Force')
     $IsVerbosePresent   = $PSBoundParameters.ContainsKey('Verbose')
-    #=======================================================================
+    #=================================================
     #	Get Variables
-    #=======================================================================
+    #=================================================
     $GetPartition = Get-Partition.usb
     $GetVolume = Get-Volume | Sort-Object DriveLetter
-    #=======================================================================
+    #=================================================
     #	Add Property IsUSB
-    #=======================================================================
+    #=================================================
     foreach ($Volume in $GetVolume) {
         if ($Volume.Path -in $($GetPartition).AccessPaths) {
             $Volume | Add-Member -NotePropertyName 'IsUSB' -NotePropertyValue $true -Force
@@ -34,15 +34,15 @@ function Get-Volume.osd {
             $Volume | Add-Member -NotePropertyName 'IsUSB' -NotePropertyValue $false -Force
         }
     }
-    #=======================================================================
+    #=================================================
     #	Return
-    #=======================================================================
+    #=================================================
     Return $GetVolume | Sort-Object DriveLetter | Select-Object -Property DriveLetter, FileSystemLabel, FileSystem, `
                         @{Name='SizeGB';Expression={[int]($_.Size / 1000000000)}}, `
                         @{Name='SizeRemainingGB';Expression={[int]($_.SizeRemaining / 1000000000)}}, `
                         @{Name='SizeRemainingMB';Expression={[int]($_.SizeRemaining / 1000000)}}, `
                         IsUSB, DriveType, OperationalStatus, HealthStatus
-    #=======================================================================
+    #=================================================
 }
 <#
 .SYNOPSIS
@@ -61,11 +61,11 @@ https://osd.osdeploy.com/module/functions/disk/get-volume
 function Get-Volume.fixed {
     [CmdletBinding()]
     param ()
-    #=======================================================================
+    #=================================================
     #	Return
-    #=======================================================================
+    #=================================================
     Return (Get-Volume.osd | Where-Object {$_.IsUSB -eq $false})
-    #=======================================================================
+    #=================================================
 }
 <#
 .SYNOPSIS
@@ -84,9 +84,9 @@ https://osd.osdeploy.com/module/functions/disk/get-volume
 function Get-Volume.usb {
     [CmdletBinding()]
     param ()
-    #=======================================================================
+    #=================================================
     #	Return
-    #=======================================================================
+    #=================================================
     Return (Get-Volume.osd | Where-Object {$_.IsUSB -eq $true})
-    #=======================================================================
+    #=================================================
 }

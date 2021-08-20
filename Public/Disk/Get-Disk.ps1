@@ -97,39 +97,39 @@ function Get-Disk.osd {
         [ValidateSet('GPT','MBR','RAW')]
         [string[]]$PartitionStyleNot
     )
-    #=======================================================================
+    #=================================================
     #	PSBoundParameters
-    #=======================================================================
+    #=================================================
     $IsConfirmPresent   = $PSBoundParameters.ContainsKey('Confirm')
     $IsForcePresent     = $PSBoundParameters.ContainsKey('Force')
     $IsVerbosePresent   = $PSBoundParameters.ContainsKey('Verbose')
-    #=======================================================================
+    #=================================================
     #	Get Variables
-    #=======================================================================
+    #=================================================
     $GetDisk = Get-Disk | Sort-Object DiskNumber | Select-Object -Property *
     $GetPhysicalDisk = Get-PhysicalDisk | Sort-Object DeviceId
-    #=======================================================================
+    #=================================================
     #	Add Property MediaType
-    #=======================================================================
+    #=================================================
     foreach ($Disk in $GetDisk) {
         foreach ($PhysicalDisk in $GetPhysicalDisk | Where-Object {$_.DeviceId -eq $Disk.Number}) {
             $Disk | Add-Member -NotePropertyName 'MediaType' -NotePropertyValue $PhysicalDisk.MediaType
         }
     }
-    #=======================================================================
+    #=================================================
     #	Exclude Empty Disks or Card Readers
-    #=======================================================================
+    #=================================================
     $GetDisk = $GetDisk | Where-Object {$_.IsOffline -eq $false}
     $GetDisk = $GetDisk | Where-Object {$_.OperationalStatus -ne 'No Media'}
-    #=======================================================================
+    #=================================================
     #	-Number
-    #=======================================================================
+    #=================================================
     if ($PSBoundParameters.ContainsKey('Number')) {
         $GetDisk = $GetDisk | Where-Object {$_.DiskNumber -eq $Number}
     }
-    #=======================================================================
+    #=================================================
     #	Filters
-    #=======================================================================
+    #=================================================
     if ($PSBoundParameters.ContainsKey('BootFromDisk')) {$GetDisk = $GetDisk | Where-Object {$_.BootFromDisk -eq $BootFromDisk}}
     if ($PSBoundParameters.ContainsKey('IsBoot')) {$GetDisk = $GetDisk | Where-Object {$_.IsBoot -eq $IsBoot}}
     if ($PSBoundParameters.ContainsKey('IsReadOnly')) {$GetDisk = $GetDisk | Where-Object {$_.IsReadOnly -eq $IsReadOnly}}
@@ -141,11 +141,11 @@ function Get-Disk.osd {
     if ($MediaTypeNot)          {$GetDisk = $GetDisk | Where-Object {$_.MediaType -notin $MediaTypeNot}}
     if ($PartitionStyle)        {$GetDisk = $GetDisk | Where-Object {$_.PartitionStyle -in $PartitionStyle}}
     if ($PartitionStyleNot)     {$GetDisk = $GetDisk | Where-Object {$_.PartitionStyle -notin $PartitionStyleNot}}
-    #=======================================================================
+    #=================================================
     #	Return
-    #=======================================================================
+    #=================================================
     Return $GetDisk
-    #=======================================================================
+    #=================================================
 }
 <#
 .SYNOPSIS
@@ -160,15 +160,15 @@ https://osd.osdeploy.com/module/functions
 function Get-Disk.fixed {
     [CmdletBinding()]
     param ()
-    #=======================================================================
+    #=================================================
     #	Get-Disk.osd
-    #=======================================================================
+    #=================================================
     $GetDisk = Get-Disk.osd -BusTypeNot 'File Backed Virtual',MAX,'Microsoft Reserved',USB,Virtual
-    #=======================================================================
+    #=================================================
     #	Return
-    #=======================================================================
+    #=================================================
     Return $GetDisk
-    #=======================================================================
+    #=================================================
 }
 <#
 .SYNOPSIS
@@ -183,22 +183,22 @@ https://osd.osdeploy.com/module/functions
 function Get-Disk.usb {
     [CmdletBinding()]
     param ()
-    #=======================================================================
+    #=================================================
     #	Get-Disk.osd
-    #=======================================================================
+    #=================================================
     $GetDisk = Get-Disk.osd -BusType USB
-    #=======================================================================
+    #=================================================
     #	Return
-    #=======================================================================
+    #=================================================
     Return $GetDisk
-    #=======================================================================
+    #=================================================
 }
 function Get-Disk.storage {
     [CmdletBinding()]
     param ()
-    #=======================================================================
+    #=================================================
     #   Get-Partition Information
-    #=======================================================================
+    #=================================================
     $GetPartition = Get-Partition | `
     Where-Object {$_.DriveLetter -gt 0} | `
     Where-Object {$_.IsOffline -eq $false} | `
@@ -206,15 +206,15 @@ function Get-Disk.storage {
     Where-Object {$_.Size -gt 10000000000} | `
     Sort-Object -Property DriveLetter | `
     Select-Object -Property DriveLetter, DiskNumber
-    #=======================================================================
+    #=================================================
     #   Get-Volume Information
-    #=======================================================================
+    #=================================================
     $GetVolume = $(Get-Volume | `
     Sort-Object -Property DriveLetter | `
     Select-Object -Property DriveLetter,FileSystem,OperationalStatus,DriveType,FileSystemLabel,Size,SizeRemaining)
-    #=======================================================================
+    #=================================================
     #   Create Object
-    #=======================================================================
+    #=================================================
     $LocalResults = foreach ($Item in $GetPartition) {
         $GetVolumeProperties = $GetVolume | Where-Object {$_.DriveLetter -eq $Item.DriveLetter}
         $ObjectProperties = @{
@@ -231,9 +231,9 @@ function Get-Disk.storage {
         }
         New-Object -TypeName PSObject -Property $ObjectProperties
     }
-    #=======================================================================
+    #=================================================
     #   Get-DriveInfo
-    #=======================================================================
+    #=================================================
     $GetNetworkDrives = [System.IO.DriveInfo]::getdrives() | Where-Object {$_.DriveType -eq 'Network'} | Where-Object {$_.DriveFormat -eq 'NTFS'}
     $NetworkResults = foreach ($Item in $GetNetworkDrives) {
         $ObjectProperties = @{
@@ -249,9 +249,9 @@ function Get-Disk.storage {
         }
         New-Object -TypeName PSObject -Property $ObjectProperties
     }
-    #=======================================================================
+    #=================================================
     #   Return Results
-    #=======================================================================
+    #=================================================
     $LocalResults = $LocalResults | Sort-Object -Property DriveLetter
     $LocalResults = $LocalResults | Where-Object {$_.FileSystem -eq 'NTFS'}
     [array]$Results = [array]$LocalResults + [array]$NetworkResults

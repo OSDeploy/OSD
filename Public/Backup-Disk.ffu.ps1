@@ -14,29 +14,29 @@ https://docs.microsoft.com/en-us/windows-hardware/manufacture/desktop/deploy-win
 function Backup-Disk.ffu {
     [CmdletBinding()]
     param ()
-    #=======================================================================
+    #=================================================
     #	Start the Clock
-    #=======================================================================
+    #=================================================
     $backupdiskffuStartTime = Get-Date
-    #=======================================================================
+    #=================================================
     #	PSBoundParameters
-    #=======================================================================
+    #=================================================
     $IsConfirmPresent   = $PSBoundParameters.ContainsKey('Confirm')
     $IsForcePresent     = $PSBoundParameters.ContainsKey('Force')
     $IsVerbosePresent   = $PSBoundParameters.ContainsKey('Verbose')
-    #=======================================================================
+    #=================================================
     #	Set Variables
-    #=======================================================================
+    #=================================================
     $ErrorActionPreference = 'Stop'
-    #=======================================================================
+    #=================================================
     #	Block
-    #=======================================================================
+    #=================================================
     Block-StandardUser
     Block-WindowsVersionNe10
     Block-PowerShellVersionLt5
-    #=======================================================================
+    #=================================================
     #	Module and Command Information
-    #=======================================================================
+    #=================================================
     $GetCommandName = $MyInvocation.MyCommand | Select-Object -ExpandProperty Name
     $GetModuleBase = $MyInvocation.MyCommand.Module | Select-Object -ExpandProperty ModuleBase
     $GetModulePath = $MyInvocation.MyCommand.Module | Select-Object -ExpandProperty Path
@@ -45,24 +45,24 @@ function Backup-Disk.ffu {
     Write-Host "$GetCommandName" -ForegroundColor Cyan
     Write-Host "$GetCommandHelpUri"
     Write-Host ""
-    #=======================================================================
+    #=================================================
     #	Select-Disk.ffu
-    #=======================================================================
+    #=================================================
     $SelectFFUDisk = Select-Disk.ffu -SelectOne
-    #=======================================================================
+    #=================================================
     #	Bail if there are no results
-    #=======================================================================
+    #=================================================
     if (-NOT ($SelectFFUDisk)) {
         Write-Warning "No Fixed Drives that met the required criteria were detected"
         Break
     }
-    #=======================================================================
+    #=================================================
     #	Select-Disk.storage
-    #=======================================================================
+    #=================================================
     $SelectFFUDestination = Select-Disk.storage -NotDiskNumber $SelectFFUDisk.DiskNumber
-    #=======================================================================
+    #=================================================
     #	Bail if there are no results
-    #=======================================================================
+    #=================================================
     if (-NOT ($SelectFFUDestination)) {
         Write-Warning "Could not find a Disk to use for an FFU Backup"
         Break

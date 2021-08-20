@@ -33,9 +33,9 @@ function Get-OSDDriverWmiQ {
     )
 
     begin {
-        #=======================================================================
+        #=================================================
         #	Information
-        #=======================================================================
+        #=================================================
         Write-Verbose 'Get-OSDDriverWmiQ: Results are saved in the Global Variable $GetOSDDriverWmiQ for this PowerShell session'
         $OSDComputerModels = @()
         $OSDModelPacks = @()
@@ -61,9 +61,9 @@ function Get-OSDDriverWmiQ {
 
     end {
         $Items = @()
-        #=======================================================================
+        #=================================================
         #   Model
-        #=======================================================================
+        #=================================================
         if ($Result -eq 'Model') {
             foreach ($Item in $OSDModelPacks.Model) {$Items += $Item}
             $Items = $Items | Sort-Object -Unique
@@ -87,9 +87,9 @@ function Get-OSDDriverWmiQ {
             $global:GetOSDDriverWmiQ = $WmiCodeString.ToString()
             Return $global:GetOSDDriverWmiQ
         }
-        #=======================================================================
+        #=================================================
         #   Dell SystemId
-        #=======================================================================
+        #=================================================
         if ($Result -eq 'SystemId' -and $OSDGroup -eq 'DellModel') {
             foreach ($Item in $OSDModelPacks.SystemSku) {$Items += $Item}
             $Items = $Items | Sort-Object -Unique
@@ -112,9 +112,9 @@ function Get-OSDDriverWmiQ {
             }
             Return $WmiCodeString.ToString()
         }
-        #=======================================================================
+        #=================================================
         #   HP SystemId
-        #=======================================================================
+        #=================================================
         if ($Result -eq 'SystemId' -and $OSDGroup -eq 'HpModel') {
             foreach ($Item in $OSDModelPacks.SystemSku) {$Items += $Item}
 

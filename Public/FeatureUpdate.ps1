@@ -21,36 +21,36 @@ function Get-FeatureUpdate {
         [Alias('Culture','OSCulture')]
         [string]$OSLanguage = 'en-us'
     )
-    #=======================================================================
+    #=================================================
     #   Import Local FeatureUpdates
-    #=======================================================================
+    #=================================================
     $GetFeatureUpdate = Import-Clixml "$($MyInvocation.MyCommand.Module.ModuleBase)\Catalogs\FeatureUpdate\Catalog.xml"
-    #=======================================================================
+    #=================================================
     #   Filter Compatible
-    #=======================================================================
+    #=================================================
     $GetFeatureUpdate = $GetFeatureUpdate | `
         Where-Object {$_.UpdateOS -eq 'Windows 10'} | `
         Where-Object {$_.UpdateBuild -eq $OSBuild} | `
         Where-Object {$_.UpdateArch -eq 'x64'} | `
         Where-Object {$_.Title -match $OSLanguage}
-    #=======================================================================
+    #=================================================
     #   $OSLicense
-    #=======================================================================
+    #=================================================
     if ($OSLicense -eq 'Retail') {
         $GetFeatureUpdate = $GetFeatureUpdate | Where-Object {$_.Title -match 'consumer'}
     }
     else {
         $GetFeatureUpdate = $GetFeatureUpdate | Where-Object {$_.Title -match 'business'}
     }
-    #=======================================================================
+    #=================================================
     #   Pick and Sort
-    #=======================================================================
+    #=================================================
     $GetFeatureUpdate = $GetFeatureUpdate | Sort-Object CreationDate -Descending | Select-Object -First 1
-    #=======================================================================
+    #=================================================
     #   Return
-    #=======================================================================
+    #=================================================
     Return $GetFeatureUpdate
-    #=======================================================================
+    #=================================================
 }
 function Save-FeatureUpdate {
     [CmdletBinding()]
@@ -79,13 +79,13 @@ function Save-FeatureUpdate {
         [Alias('Culture','OSCulture')]
         [string]$OSLanguage = 'en-us'
     )
-    #=======================================================================
+    #=================================================
     #   Get-FeatureUpdate
-    #=======================================================================
+    #=================================================
     $GetFeatureUpdate = Get-FeatureUpdate -OSLicense $OSLicense -OSBuild $OSBuild -OSLanguage $OSLanguage
-    #=======================================================================
+    #=================================================
     #   SaveWebFile
-    #=======================================================================
+    #=================================================
     if ($GetFeatureUpdate) {
         if (Test-Path "$DownloadPath\$($GetFeatureUpdate.FileName)") {
             Get-Item "$DownloadPath\$($GetFeatureUpdate.FileName)"
