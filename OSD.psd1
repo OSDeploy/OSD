@@ -170,6 +170,7 @@ FunctionsToExport =
 'New-OSDCloud.workspace',
 'Save-OSDCloudOfflineModules',
 'Save-OSDCloud.usb',
+'Save-OSDCloudDriverPack.usb',
 'Select-OSDCloudAutopilotJsonItem',
 'Select-OSDCloudODTFile',
 'Set-OSDCloud.workspace',
