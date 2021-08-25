@@ -108,12 +108,22 @@ function SetDefaultValues {
     $ImageIndexControl.Text = 6             #Enterprise
 
     $OSBuildControl.IsEnabled = $true
-    $OSLanguageControl.IsEnabled = $true
     $OSEditionControl.IsEnabled = $true
+    $OSLanguageControl.IsEnabled = $true
     $OSLicenseControl.IsEnabled = $false
     $ImageIndexControl.IsEnabled = $false
     $CSModelControl.IsEnabled = $false
     $AutopilotJsonControl.IsEnabled = $true
+
+    $GetWindowsImageControl.Items.Clear()
+    $GetWindowsImageControl.Visibility = "Collapsed"
+    
+    $OperatingSystemLabel.Content = "Cloud Windows 10 x64"
+    $OperatingSystemLabel.Width = "210"
+    $OSBuildControl.Visibility = "Visible"
+    $OSEditionControl.Visibility = "Visible"
+    $OSLanguageControl.Visibility = "Visible"
+    $OSLicenseControl.Visibility = "Visible"
 }
 SetDefaultValues
 #================================================
@@ -295,13 +305,28 @@ $CustomImageControl.add_SelectionChanged({
         SetDefaultValues
     }
     else {
-        $OSBuildControl.IsEnabled = $false
-        $OSLanguageControl.IsEnabled = $false
-        $OSEditionControl.IsEnabled = $false
-        $OSLicenseControl.IsEnabled = $false
+        $OperatingSystemLabel.Content = "Image Name"
+        $OperatingSystemLabel.Width = "150"
+        $OSBuildControl.Visibility = "Collapsed"
+        $OSEditionControl.Visibility = "Collapsed"
+        $OSLanguageControl.Visibility = "Collapsed"
+        $OSLicenseControl.Visibility = "Collapsed"
         $ImageIndexControl.IsEnabled = $true
         $ImageIndexControl.Text = 1
+
+        $GetWindowsImageControl.Visibility = "Visible"
+        $GetWindowsImageControl.Items.Clear()
+        $GetWindowsImageControl.IsEnabled = $true
+        $GetWindowsImageOptions = Get-WindowsImage -ImagePath $CustomImageControl.SelectedValue
+        $GetWindowsImageOptions | ForEach-Object {
+            $GetWindowsImageControl.Items.Add($_.ImageName) | Out-Null
+        }
+        $GetWindowsImageControl.SelectedIndex = 0
     }
+})
+$GetWindowsImageControl.add_SelectionChanged({
+    $ImageIndexControl.Text = $GetWindowsImageControl.SelectedIndex + 1
+    if ($ImageIndexControl.Text -eq 0) {$ImageIndexControl.Text = 1}
 })
 #================================================
 #   StartButtonControl
