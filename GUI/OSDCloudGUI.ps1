@@ -130,7 +130,23 @@ SetDefaultValues
 #   CustomImage
 #================================================
 $CustomImageControl.IsEnabled = $false
-$CustomImageChildItem = Find-OSDCloudFile -Name '*.wim' -Path '\OSDCloud\OS\'
+
+$CustomImageIso = @()
+[array]$CustomImageIso = Find-OSDCloudFile -Name '*.iso' -Path '\OSDCloud\OS\'
+
+foreach ($Item in $CustomImageIso) {
+    if ((Get-DiskImage -ImagePath $Item.FullName).Attached) {
+        #ISO is already mounted
+    }
+    else {
+        Write-Host "Attaching ISO $($Item.FullName)" -ForegroundColor Cyan
+        Mount-DiskImage -ImagePath $Item.FullName
+    }
+}
+
+$CustomImageChildItem = @()
+[array]$CustomImageChildItem = Find-OSDCloudFile -Name '*.wim' -Path '\OSDCloud\OS\'
+[array]$CustomImageChildItem += Find-OSDCloudFile -Name 'install.wim' -Path '\Sources\'
 $CustomImageChildItem = $CustomImageChildItem | Sort-Object -Property Length -Unique | Sort-Object FullName | Where-Object {$_.Length -gt 3GB}
         
 if ($CustomImageChildItem) {
