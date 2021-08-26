@@ -204,7 +204,7 @@ function Start-OSDCloud {
     #=================================================
     #	Custom Image
     #=================================================
-    if ($Global:ImageFileItem -and $Global:ImageFileFullName -and $Global:ImageFileName) {
+    if ($Global:StartOSDCloud.ImageFileFullName -and $Global:StartOSDCloud.ImageFileItem -and $Global:StartOSDCloud.ImageFileName) {
         #Custom Image set in OSDCloudGUI
     }
     #=================================================

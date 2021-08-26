@@ -20,7 +20,7 @@ function Start-OSDCloudGUI {
         Color   = $Color
     }
     #================================================
-    & "$($MyInvocation.MyCommand.Module.ModuleBase)\GUI\OSDCloudGUI.ps1"
+    & "$($MyInvocation.MyCommand.Module.ModuleBase)\Projects\OSDCloudGUI\MainWindow.ps1"
     Start-Sleep -Seconds 2
     #================================================
 }
