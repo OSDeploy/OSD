@@ -1,0 +1,22 @@
+# User-specific files
+*.rsuser
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# User-specific files (MonoDevelop/Xamarin Studio)
+*.userprefs
+
+# Build results
+Projects/OSDCloudGUI/obj/Debug/
+
+# Visual Studio 2015/2017 cache/options directory
+.vs/
+
+# Visual Studio cache files
+# files ending in .cache can be ignored
+*.[Cc]ache
+# but keep track of directories ending in .cache
+!*.[Cc]ache/
+MainWindow.g.i.cs

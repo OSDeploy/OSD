@@ -9,7 +9,7 @@
         RenderTransformOrigin="0.5,0.5"
         ResizeMode="NoResize"
         WindowStartupLocation = "CenterScreen"
-        Title="OSDCloudGUI" Height="590" Width="780">
+        Title="OSDCloudGUI" Height="560" Width="770">
     <Window.Resources>
         <ResourceDictionary>
             <Style TargetType="{x:Type Button}">
@@ -168,7 +168,7 @@
                        Foreground="#003E92"
                        Margin="5"
                        Padding="5"
-                       Width="175"
+                       Width="165"
                        FlowDirection="RightToLeft" />
                 <ComboBox Name="OperatingSystemCombobox"
                           FontSize="16"
@@ -187,7 +187,7 @@
                        FontWeight="Bold"
                        Foreground="#003E92"
                        Margin="5"
-                       Width="175" />
+                       Width="165" />
                 <ComboBox Name="OSBuildCombobox"
                           FontSize="16"
                           Margin="5"
@@ -242,7 +242,7 @@
                    Foreground="#003E92"
                    Margin="5"
                    Padding="5"
-                   Width="170"
+                   Width="160"
                    FlowDirection="RightToLeft" />
             <TextBox Name="CSManufacturerTextbox"
                      FontSize="16"
@@ -278,7 +278,7 @@
               Stretch="Uniform"></Line>
         <!-- RowCustomizations -->
         <StackPanel Grid.Row="6"
-                    Orientation="Vertical"
+                    Orientation="Horizontal"
                     HorizontalAlignment="Left"
                     VerticalAlignment="Top">
             <Label Name="DeploymentOptionsLabel"
@@ -289,8 +289,13 @@
                    HorizontalAlignment="Left"
                    Margin="5"
                    Padding="5"
-                   Width="175"
+                   Width="165"
                    FlowDirection="RightToLeft" />
+        </StackPanel>
+            <StackPanel Grid.Row="6"
+                    Orientation="Vertical"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Top">
             <CheckBox Name="RestartCheckbox"
                       BorderBrush="Black"
                       BorderThickness="2"
@@ -299,7 +304,7 @@
                       IsChecked="True"
                       Padding="5,-2,5,10"
                       VerticalAlignment="Center"
-                      Margin="190,0,0,0">Restart the computer after WinPE phase is complete</CheckBox>
+                      Margin="180,15,0,0">Restart the computer after WinPE phase is complete</CheckBox>
             <CheckBox Name="ScreenshotCheckbox"
                       BorderBrush="Black"
                       BorderThickness="2"
@@ -307,7 +312,7 @@
                       Foreground="Black"
                       Padding="5,-2,5,10"
                       VerticalAlignment="Center"
-                      Margin="190,0,0,0">Capture WinPE screenshots and save to C:\OSDCloud\ScreenPNG</CheckBox>
+                      Margin="180,0,0,0">Capture WinPE screenshots and save to C:\OSDCloud\ScreenPNG</CheckBox>
             <CheckBox Name="ZTICheckbox"
                       BorderBrush="Crimson"
                       BorderThickness="2"
@@ -316,7 +321,7 @@
                       Foreground="Crimson"
                       Padding="5,-2,5,10"
                       VerticalAlignment="Center"
-                      Margin="190,0,0,0">Don't warn before wiping disks</CheckBox>
+                      Margin="180,0,0,0">Don't warn before wiping disks</CheckBox>
             <!-- AutopilotJson -->
             <StackPanel HorizontalAlignment="Left"
                         VerticalAlignment="Center"
@@ -330,7 +335,7 @@
                        Margin="5"
                        Padding="5"
                        VerticalAlignment="Center"
-                       Width="175"
+                       Width="165"
                        FlowDirection="RightToLeft" />
                 <ComboBox Name="AutopilotJsonCombobox"
                           FontSize="14"
@@ -349,7 +354,7 @@
                        Margin="5"
                        Padding="5"
                        VerticalAlignment="Center"
-                       Width="175"
+                       Width="165"
                        FlowDirection="RightToLeft" />
                 <ComboBox Name="OOBEDeployCombobox"
                           FontSize="14"
@@ -368,7 +373,7 @@
                        Margin="5"
                        Padding="5"
                        VerticalAlignment="Center"
-                       Width="175"
+                       Width="165"
                        FlowDirection="RightToLeft" />
                 <ComboBox Name="AutopilotOOBECombobox"
                           FontSize="14"
