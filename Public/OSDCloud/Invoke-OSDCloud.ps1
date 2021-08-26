@@ -327,13 +327,25 @@ function Invoke-OSDCloud {
     if ($Global:OSDCloud.ImageFileItem) {
         Write-Host -ForegroundColor DarkGray "========================================================================="
         Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Copy OSDCloud ImageFile Offline"
-        
+
+        #It's possible that Drive Letters may have changed if a USB is used
+
+        #Check to see if the image file exists already after the USB Drive has been reinitialized
+        if (Test-Path $Global:OSDCloud.ImageFileItem.FullName) {
+            $Global:OSDCloud.ImageFileSource = Get-Item -Path $Global:OSDCloud.ImageFileItem.FullName
+        }
+
+        #Set the ImageFile Name if it does not exist
         if (!($Global:OSDCloud.ImageFileName)) {
             $Global:OSDCloud.ImageFileName = Split-Path -Path $Global:OSDCloud.ImageFileItem.FullName -Leaf
         }
 
-        $Global:OSDCloud.ImageFileSource = Find-OSDCloudFile -Name $Global:OSDCloud.ImageFileName -Path (Split-Path -Path (Split-Path -Path $Global:OSDCloud.ImageFileItem.FullName -Parent) -NoQualifier) | Where-Object {$_.FullName -notlike "C:*"} |Select-Object -First 1
-        
+        #If the Source did not exist after the USB, have to do a best guess
+        if (!($Global:OSDCloud.ImageFileSource)) {
+            $Global:OSDCloud.ImageFileSource = Find-OSDCloudFile -Name $Global:OSDCloud.ImageFileName -Path (Split-Path -Path (Split-Path -Path $Global:OSDCloud.ImageFileItem.FullName -Parent) -NoQualifier) | Where-Object {$_.FullName -notlike "C:*"} | Select-Object -First 1
+        }
+
+        #Now that we have an ImageFileSource, everything is good
         if ($Global:OSDCloud.ImageFileSource) {
             Write-Host -ForegroundColor DarkGray "ImageFileSource: $($Global:OSDCloud.ImageFileSource.FullName)"
             if (!(Test-Path 'C:\OSDCloud\OS')) {
