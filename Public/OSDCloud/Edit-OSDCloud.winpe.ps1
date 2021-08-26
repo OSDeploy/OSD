@@ -236,15 +236,17 @@ function Edit-OSDCloud.winpe {
     #=================================================
     #   Drop initial Startnet.cmd
     #=================================================
+    $OSDVersion = (Get-Module -Name OSD -ListAvailable | Sort-Object Version -Descending | Select-Object -First 1).Version
     Write-Host -ForegroundColor DarkGray "Startnet.cmd: wpeinit"
-$StartnetCMD = @'
+$StartnetCMD = @"
 @ECHO OFF
+ECHO OSD $OSDVersion
 ECHO Initialize WinPE
 wpeinit
 cd\
 ECHO Initialize Hardware
 start /wait PowerShell -Nol -W Mi -C Start-Sleep -Seconds 10
-'@
+"@
     $StartnetCMD | Out-File -FilePath "$MountPath\Windows\System32\Startnet.cmd" -Encoding ascii -Width 2000 -Force
     #=================================================
     #   Wireless
