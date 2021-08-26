@@ -64,7 +64,6 @@ function Show-MsSettings {
     #=================================================
     switch ($Setting)
     {
-        $null               {$SettingURI = 'ms-settings:'}
         About               {$SettingURI = 'ms-settings:about'}
         AdvancedScaling     {$SettingURI = 'ms-settings:display-advanced'}
         DateTime            {$SettingURI = 'ms-settings:dateandtime'}
@@ -88,6 +87,7 @@ function Show-MsSettings {
         WiFiAvailable       {$SettingURI = 'ms-availablenetworks:'}
         WiFiNetworks        {$SettingURI = 'ms-settings:network-wifisettings'}
         WindowsUpdate       {$SettingURI = 'ms-settings:windowsupdate'}
+        Default             {$SettingURI = 'ms-settings:'}
     }
     #=================================================
     #   UseWUServer

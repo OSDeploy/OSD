@@ -531,7 +531,7 @@ function Start-OSDCloud {
                 Write-Host -ForegroundColor Yellow $Global:StartOSDCloud.GetMyDriverPack.DriverPackUrl
             }
             else {
-                Write-Warning "Could not verify an Internet connection for the Dell Driver Pack"
+                Write-Warning "Could not verify an Internet connection for the Driver Pack"
                 Write-Warning "OSDCloud will continue, but there may be issues"
             }
         }
