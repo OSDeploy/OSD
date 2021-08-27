@@ -314,16 +314,17 @@ SetDefaultValues
 #================================================
 #   CustomImage
 #================================================
-$CustomImageIso = @()
-[array]$CustomImageIso = Find-OSDCloudFile -Name '*.iso' -Path '\OSDCloud\OS\'
+[array]$OSDCloudOSIso = @()
+[array]$OSDCloudOSIso = Find-OSDCloudFile -Name '*.iso' -Path '\OSDCloud\OS\' | Where-Object {$_.Length -gt 3GB}
 
-foreach ($Item in $CustomImageIso) {
+foreach ($Item in $OSDCloudOSIso) {
     if ((Get-DiskImage -ImagePath $Item.FullName).Attached) {
         #ISO is already mounted
     }
     else {
-        Write-Host "Attaching ISO $($Item.FullName)" -ForegroundColor Cyan
-        Mount-DiskImage -ImagePath $Item.FullName
+        Write-Host "Mounting OSDCloud OS ISO $($Item.FullName)" -ForegroundColor Cyan
+        $Results = Mount-DiskImage -ImagePath $Item.FullName
+        $Results | Select-Object -Property Attached,DevicePath,ImagePath,Number,Size | Format-List
     }
 }
 
@@ -497,7 +498,6 @@ $formMainWindowControlOperatingSystemCombobox.add_SelectionChanged({
         SetDefaultValues
     }
     else {
-        $formMainWindowControlOperatingSystemDetailsLabel.Width = "175"
         $formMainWindowControlOSBuildCombobox.Visibility = "Collapsed"
         $formMainWindowControlOSEditionCombobox.Visibility = "Collapsed"
         $formMainWindowControlOSLanguageCombobox.Visibility = "Collapsed"
