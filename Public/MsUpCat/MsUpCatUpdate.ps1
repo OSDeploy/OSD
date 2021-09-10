@@ -15,12 +15,9 @@ function Get-MsUpCatUpdate {
         [ValidateSet('LCU','SSU','DotNetCU')]
         [string]$Category = 'LCU',
 
-        [ValidateSet('Preview')]
-        [string[]]$Include,
+        [switch]$Insider,
 
-        [string]$DestinationDirectory = "$env:TEMP\MsUpCat",
-
-        [switch]$Latest
+        [switch]$ListAvailable
     )
     #=================================================
     #	MSCatalog PowerShell Module
@@ -44,28 +41,32 @@ function Get-MsUpCatUpdate {
             Write-Verbose -Verbose "Architecture: $Arch"
             Write-Verbose -Verbose "Category: $Category"
             #=================================================
-            #	Category
+            #	Build
             #=================================================
-            if ($Category -eq 'LCU') {
-                $SearchString = "Cumulative Update $OS"
-            }
-            if ($Category -eq 'SSU') {
-                $SearchString = "Servicing Stack Update $OS"
-            }
-            if ($Category -eq 'DotNetCU') {
-                $SearchString = "Framework $OS"
-            }
             if ($OS -eq 'Windows 10') {
                 Write-Verbose -Verbose "Build: $Build"
-                $SearchString = "$SearchString $Build $Arch"
+                $SearchString = "$OS $Build $Arch"
             }
             elseif ($OS -eq 'Windows Server') {
                 Write-Verbose -Verbose "Build: $Build"
-                $SearchString = "$SearchString $Build $Arch"
+                $SearchString = "$OS $Build $Arch"
             }
             else {
-                $SearchString = "$SearchString $Arch"
+                $SearchString = "$OS $Arch"
             }
+            #=================================================
+            #	Category
+            #=================================================
+            if ($Category -eq 'SSU') {
+                $SearchString = "$SearchString Servicing Stack Update"
+            }
+            if ($Category -eq 'LCU') {
+                $SearchString = "$SearchString Cumulative Update"
+            }
+            if ($Category -eq 'DotNetCU') {
+                $SearchString = "$SearchString Framework"
+            }
+            Write-Verbose -Verbose "SearchString: $SearchString"
             #=================================================
             #	Go
             #=================================================
@@ -76,19 +77,12 @@ function Get-MsUpCatUpdate {
             #	Exclude
             #=================================================
             $CatalogUpdate = $CatalogUpdate | Where-Object {$_.Title -notmatch 'arm64'}
-            $CatalogUpdate = $CatalogUpdate | Where-Object {$_.Title -notmatch 'Dynamic'}
             #=================================================
             #	OperatingSystem
             #=================================================
             if ($OS -eq 'Windows 10') {
                 $CatalogUpdate = $CatalogUpdate | Where-Object {$_.Title -match 'Windows 10'}
                 $CatalogUpdate = $CatalogUpdate | Where-Object {$_.Products -notmatch 'Windows Server'}
-                if ($Category -eq 'LCU') {
-                    #$CatalogUpdate = $CatalogUpdate | Where-Object {$_.Title -match "Cumulative Update for Windows 10 Version $Build"}
-                }
-                if ($Category -eq 'SSU') {
-                    #$CatalogUpdate = $CatalogUpdate | Where-Object {$_.Title -match "Servicing Stack Update for Windows 10 Version $Build"}
-                }
             }
             if ($OS -eq 'Windows Server') {
                 $CatalogUpdate = $CatalogUpdate | Where-Object {$_.Products -eq 'Windows Server, version 1903 and later'}
@@ -102,24 +96,31 @@ function Get-MsUpCatUpdate {
             #=================================================
             #	Category
             #=================================================
+            if ($Category -eq 'SSU') {
+                #Do nothing
+            }
             if ($Category -eq 'LCU') {
                 $CatalogUpdate = $CatalogUpdate | Where-Object {$_.Title -notmatch '.NET'}
+                $CatalogUpdate = $CatalogUpdate | Where-Object {$_.Title -notmatch 'Dynamic Cumulative Update'}
             }
             if ($Category -eq 'DotNetCU') {
                 $CatalogUpdate = $CatalogUpdate | Where-Object {$_.Title -match "Framework"}
             }
-            if ($Include -contains 'Preview') {
-                Write-Verbose -Verbose "Include Preview Updates: True"
+            if ($Insider) {
+                Write-Verbose -Verbose "Insider and Preview Updates: True"
             }
             else {
-                Write-Verbose -Verbose "Include Preview Updates: False"
+                Write-Verbose -Verbose "Insider and Preview Updates: False"
                 $CatalogUpdate = $CatalogUpdate | Where-Object {$_.Title -notmatch 'Preview'}
+                $CatalogUpdate = $CatalogUpdate | Where-Object {$_.Products -notmatch 'Insider'}
             }
-            $CatalogUpdate = $CatalogUpdate | Where-Object {$_.Products -notmatch 'Insider'}
             #=================================================
-            #	Latest
+            #	ListAvailable
             #=================================================
-            if ($Latest.IsPresent) {
+            if ($ListAvailable) {
+                #Do Nothing
+            }
+            else {
                 $CatalogUpdate = $CatalogUpdate | Select-Object -First 1
             }
             #=================================================
