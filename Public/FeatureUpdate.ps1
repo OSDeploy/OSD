@@ -1,13 +1,16 @@
 function Get-FeatureUpdate {
     [CmdletBinding()]
     param (
+        [ValidateSet('Windows 10','Windows 11')]
+        [string]$OSVersion = 'Windows 10',
+
         [ValidateSet('Retail','Volume')]
         [Alias('License')]
         [string]$OSLicense = 'Volume',
 
-        [ValidateSet('21H1','20H2','2004','1909','1903','1809')]
+        [ValidateSet('21H2','21H1','20H2','2004','1909','1903','1809')]
         [Alias('Build')]
-        [string]$OSBuild = '21H1',
+        [string]$OSBuild = '21H2',
 
         [ValidateSet (
             'ar-sa','bg-bg','cs-cz','da-dk','de-de','el-gr',
@@ -29,10 +32,18 @@ function Get-FeatureUpdate {
     #   Filter Compatible
     #=================================================
     $GetFeatureUpdate = $GetFeatureUpdate | `
-        Where-Object {$_.UpdateOS -eq 'Windows 10'} | `
         Where-Object {$_.UpdateBuild -eq $OSBuild} | `
         Where-Object {$_.UpdateArch -eq 'x64'} | `
         Where-Object {$_.Title -match $OSLanguage}
+    #=================================================
+    #   $OSVersion
+    #=================================================
+    if ($OSVersion -eq 'Windows 10') {
+        $GetFeatureUpdate = $GetFeatureUpdate | Where-Object {$_.UpdateOS -eq 'Windows 10'}
+    }
+    else {
+        $GetFeatureUpdate = $GetFeatureUpdate | Where-Object {$_.UpdateOS -eq 'Windows 11'}
+    }
     #=================================================
     #   $OSLicense
     #=================================================
@@ -63,7 +74,7 @@ function Save-FeatureUpdate {
         [Alias('License')]
         [string]$OSLicense = 'Volume',
 
-        [ValidateSet('21H1','20H2','2004','1909','1903','1809')]
+        [ValidateSet('21H2','21H1','20H2','2004','1909','1903','1809')]
         [Alias('Build')]
         [string]$OSBuild = '21H1',
 

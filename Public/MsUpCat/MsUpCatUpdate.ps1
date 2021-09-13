@@ -147,7 +147,7 @@ function Save-MsUpCatUpdate {
         [Alias('Architecture')]
         [string]$Arch = 'x64',
 
-        [ValidateSet('21H1','20H2',2004,1909,1903,1809,1803,1709,1703,1607,1511,1507)]
+        [ValidateSet('21H2','21H1','20H2',2004,1909,1903,1809,1803,1709,1703,1607,1511,1507)]
         [string]$Build = '21H1',
 
         [ValidateSet('LCU','SSU','DotNetCU')]

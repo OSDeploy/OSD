@@ -1,9 +1,9 @@
 <#
 .SYNOPSIS
-Starts the OSDCloud Windows 10 Build Process from the OSD Module or a GitHub Repository
+Starts the OSDCloud Windows 10 or 11 Build Process from the OSD Module or a GitHub Repository
 
 .DESCRIPTION
-Starts the OSDCloud Windows 10 Build Process from the OSD Module or a GitHub Repository
+Starts the OSDCloud Windows 10 or 11 Process from the OSD Module or a GitHub Repository
 
 .PARAMETER OSEdition
 Edition of the Windows installation
@@ -38,7 +38,7 @@ function Start-OSDCloud {
         [switch]$ZTI,
 
         [Parameter(ParameterSetName = 'Default')]
-        [ValidateSet('21H1','20H2','2004','1909','1903','1809')]
+        [ValidateSet('21H2','21H1','20H2','2004','1909','1903','1809')]
         [Alias('Build')]
         [string]$OSBuild,
 
@@ -116,6 +116,7 @@ function Start-OSDCloud {
         OSLanguageMenu = $null
         OSLanguageNames = $null
         OSLicense = $OSLicense
+        OSVersion = 'Windows 10'
         Product = $Product
         Restart = $Restart
         Screenshot = $Screenshot
@@ -241,11 +242,18 @@ function Start-OSDCloud {
     #	ParameterSet Default
     #=================================================
     elseif ($PSCmdlet.ParameterSetName -eq 'Default') {
+
+        if ($Global:StartOSDCloud.OSVersion = 'Windows 11') {
+            $OSVersion = 'Windows 11'
+        }
+        else {
+            $OSVersion = 'Windows 10'
+        }
         #=================================================
         #	OSBuild
         #=================================================
         Write-Host -ForegroundColor DarkGray "========================================================================="
-        Write-Host -ForegroundColor Cyan "Windows 10 OSBuild " -NoNewline
+        Write-Host -ForegroundColor Cyan "$OSVersion OSBuild " -NoNewline
         
         if ($Global:StartOSDCloud.OSBuild) {
             Write-Host -ForegroundColor Green $Global:StartOSDCloud.OSBuild
@@ -256,7 +264,7 @@ function Start-OSDCloud {
         }
         else {
             Write-Host -ForegroundColor Cyan "Menu"
-            $Global:StartOSDCloud.OSBuildNames = @('21H1','20H2','2004','1909','1903','1809')
+            $Global:StartOSDCloud.OSBuildNames = @('21H2','21H1','20H2','2004','1909','1903','1809')
             
             $i = $null
             $Global:StartOSDCloud.OSBuildMenu = foreach ($Item in $Global:StartOSDCloud.OSBuildNames) {
@@ -272,7 +280,7 @@ function Start-OSDCloud {
             $Global:StartOSDCloud.OSBuildMenu | Select-Object -Property Selection, Name | Format-Table | Out-Host
             
             do {
-                $SelectReadHost = Read-Host -Prompt "Enter a Selection for the Windows 10 OSBuild"
+                $SelectReadHost = Read-Host -Prompt "Enter a Selection for the Windows OSBuild"
             }
             until (((($SelectReadHost -ge 0) -and ($SelectReadHost -in $Global:StartOSDCloud.OSBuildMenu.Selection))))
             
@@ -284,7 +292,7 @@ function Start-OSDCloud {
         #	OSEdition
         #=================================================
         Write-Host -ForegroundColor DarkGray "========================================================================="
-        Write-Host -ForegroundColor Cyan "Windows 10 OSEdition " -NoNewline
+        Write-Host -ForegroundColor Cyan "$OSVersion OSEdition " -NoNewline
 
         if ($Global:StartOSDCloud.OSEdition) {
             Write-Host -ForegroundColor Green $Global:StartOSDCloud.OSEdition
@@ -311,7 +319,7 @@ function Start-OSDCloud {
             $Global:StartOSDCloud.OSEditionMenu | Select-Object -Property Selection, Name | Format-Table | Out-Host
             
             do {
-                $SelectReadHost = Read-Host -Prompt "Enter a Selection for the Windows 10 OSEdition"
+                $SelectReadHost = Read-Host -Prompt "Enter a Selection for the Windows OSEdition"
             }
             until (((($SelectReadHost -ge 0) -and ($SelectReadHost -in $Global:StartOSDCloud.OSEditionMenu.Selection))))
             
@@ -351,7 +359,7 @@ function Start-OSDCloud {
         #	OSLicense
         #=================================================
         Write-Host -ForegroundColor DarkGray "========================================================================="
-        Write-Host -ForegroundColor Cyan "Windows 10 OSLicense " -NoNewline
+        Write-Host -ForegroundColor Cyan "$OSVersion OSLicense " -NoNewline
 
         if ($Global:StartOSDCloud.OSLicense) {
             Write-Host -ForegroundColor Green $Global:StartOSDCloud.OSLicense
@@ -362,7 +370,7 @@ function Start-OSDCloud {
         }
         else {
             Write-Host -ForegroundColor Cyan "Menu"
-            $Global:StartOSDCloud.OSLicenseNames = @('Retail Windows 10 Consumer Editions','Volume Windows 10 Business Editions')
+            $Global:StartOSDCloud.OSLicenseNames = @('Retail Windows Consumer Editions','Volume Windows Business Editions')
             
             $i = $null
             $Global:StartOSDCloud.OSLicenseMenu = foreach ($Item in $Global:StartOSDCloud.OSLicenseNames) {
@@ -378,7 +386,7 @@ function Start-OSDCloud {
             $Global:StartOSDCloud.OSLicenseMenu | Select-Object -Property Selection, Name | Format-Table | Out-Host
             
             do {
-                $SelectReadHost = Read-Host -Prompt "Enter a Selection for the Windows 10 License"
+                $SelectReadHost = Read-Host -Prompt "Enter a Selection for the Windows License"
             }
             until (((($SelectReadHost -ge 0) -and ($SelectReadHost -in $Global:StartOSDCloud.OSLicenseMenu.Selection))))
             
@@ -421,7 +429,7 @@ function Start-OSDCloud {
         #	OSLanguage
         #=================================================
         Write-Host -ForegroundColor DarkGray "========================================================================="
-        Write-Host -ForegroundColor Cyan "Windows 10 OSLanguage " -NoNewline
+        Write-Host -ForegroundColor Cyan "$OSVersion OSLanguage " -NoNewline
         
         if ($Global:StartOSDCloud.OSLanguage) {
             Write-Host -ForegroundColor Green $Global:StartOSDCloud.OSLanguage
@@ -451,7 +459,7 @@ function Start-OSDCloud {
             $Global:StartOSDCloud.OSLanguageMenu | Select-Object -Property Selection, Name | Format-Table | Out-Host
             
             do {
-                $SelectReadHost = Read-Host -Prompt "Enter a Selection for the Windows 10 OSLanguage"
+                $SelectReadHost = Read-Host -Prompt "Enter a Selection for the Windows OSLanguage"
             }
             until (((($SelectReadHost -ge 0) -and ($SelectReadHost -in $Global:StartOSDCloud.OSLanguageMenu.Selection))))
             
@@ -466,9 +474,15 @@ function Start-OSDCloud {
         #=================================================
         Write-Host -ForegroundColor DarkGray "========================================================================="
         Write-Host -ForegroundColor Cyan "Get-FeatureUpdate"
-        Write-Host -ForegroundColor DarkGray "Windows 10 x64 | OSLicense: $($Global:StartOSDCloud.OSLicense) | OSBuild: $($Global:StartOSDCloud.OSBuild) | OSLanguage: $($Global:StartOSDCloud.OSLanguage)"
+        if ($Global:StartOSDCloud.OSVersion -eq 'Windows 11') {
+            Write-Host -ForegroundColor DarkGray "Windows 11 x64 | OSLicense: $($Global:StartOSDCloud.OSLicense) | OSBuild: $($Global:StartOSDCloud.OSBuild) | OSLanguage: $($Global:StartOSDCloud.OSLanguage)"
+            $Global:StartOSDCloud.GetFeatureUpdate = Get-FeatureUpdate -OSVersion 'Windows 11' -OSLicense $Global:StartOSDCloud.OSLicense -OSBuild $Global:StartOSDCloud.OSBuild -OSLanguage $Global:StartOSDCloud.OSLanguage
+        }
+        else {
+            Write-Host -ForegroundColor DarkGray "Windows 10 x64 | OSLicense: $($Global:StartOSDCloud.OSLicense) | OSBuild: $($Global:StartOSDCloud.OSBuild) | OSLanguage: $($Global:StartOSDCloud.OSLanguage)"
+            $Global:StartOSDCloud.GetFeatureUpdate = Get-FeatureUpdate -OSLicense $Global:StartOSDCloud.OSLicense -OSBuild $Global:StartOSDCloud.OSBuild -OSLanguage $Global:StartOSDCloud.OSLanguag
+        }
 
-        $Global:StartOSDCloud.GetFeatureUpdate = Get-FeatureUpdate -OSLicense $Global:StartOSDCloud.OSLicense -OSBuild $Global:StartOSDCloud.OSBuild -OSLanguage $Global:StartOSDCloud.OSLanguage
 
         if ($Global:StartOSDCloud.GetFeatureUpdate) {
             $Global:StartOSDCloud.GetFeatureUpdate = $Global:StartOSDCloud.GetFeatureUpdate | Select-Object -Property CreationDate,KBNumber,Title,UpdateOS,UpdateBuild,UpdateArch,FileName, @{Name='SizeMB';Expression={[int]($_.Size /1024/1024)}},FileUri,Hash,AdditionalHash
@@ -476,7 +490,7 @@ function Start-OSDCloud {
             $Global:StartOSDCloud.ImageFileUrl = $Global:StartOSDCloud.GetFeatureUpdate.FileUri
         }
         else {
-            Write-Warning "Unable to locate a Windows 10 Feature Update"
+            Write-Warning "Unable to locate a Windows Feature Update"
             Write-Warning "OSDCloud cannot continue"
             Break
         }
@@ -499,7 +513,7 @@ function Start-OSDCloud {
             Write-Host -ForegroundColor Yellow $Global:StartOSDCloud.GetFeatureUpdate.FileUri
         }
         else {
-            Write-Warning "Could not verify an Internet connection for Windows 10 Feature Update"
+            Write-Warning "Could not verify an Internet connection for Windows Feature Update"
             Write-Warning "OSDCloud cannot continue"
             Break
         }

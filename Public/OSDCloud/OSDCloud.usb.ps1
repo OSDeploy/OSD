@@ -127,7 +127,7 @@ https://osdcloud.osdeploy.com/
 function Save-OSDCloud.usb {
     [CmdletBinding()]
     param (
-        [ValidateSet('21H1','20H2','2004','1909','1903','1809')]
+        [ValidateSet('21H2','21H1','20H2','2004','1909','1903','1809')]
         [Alias('Build')]
         [string]$OSBuild,
 
@@ -231,7 +231,7 @@ function Save-OSDCloud.usb {
     }
     else {
         Write-Host -ForegroundColor Cyan "Menu"
-        $OSBuildNames = @('21H1','20H2','2004','1909','1903','1809')
+        $OSBuildNames = @('21H2','21H1','20H2','2004','1909','1903','1809')
         
         $i = $null
         $OSBuildMenu = foreach ($Item in $OSBuildNames) {

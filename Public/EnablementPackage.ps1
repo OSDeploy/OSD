@@ -1,7 +1,7 @@
 function Get-EnablementPackage {
     [CmdletBinding()]
     param (
-        [ValidateSet('21H1','20H2','1909')]
+        [ValidateSet('21H2','21H1','20H2','1909')]
         [Alias('Build')]
         [string]$OSBuild = '21H1',
 
@@ -35,7 +35,7 @@ function Save-EnablementPackage {
         [Alias ('DownloadFolder','Path')]
         [string]$DownloadPath = "$env:TEMP",
 
-        [ValidateSet('21H1','20H2','1909')]
+        [ValidateSet('21H2','21H1','20H2','1909')]
         [Alias('Build')]
         [string]$OSBuild = '21H1',
 

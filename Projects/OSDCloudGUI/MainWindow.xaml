@@ -175,7 +175,8 @@
                           Margin="5"
                           Padding="5"
                           SelectedIndex="0" >
-                    <ComboBoxItem Content="OSDCloud Windows 10 x64"/>
+                        <ComboBoxItem Content="OSDCloud Windows 10 x64"/>
+                        <ComboBoxItem Content="OSDCloud Windows 11 x64"/>
                 </ComboBox>
             </StackPanel>
             <StackPanel Orientation="Horizontal"

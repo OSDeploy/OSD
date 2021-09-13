@@ -99,7 +99,7 @@ $CSModelControl.Text = Get-MyComputerModel -Brief
 #   SetDefaultValues
 #================================================
 function SetDefaultValues {
-    $OSBuildControl.SelectedIndex = 0      #21H1
+    $OSBuildControl.SelectedIndex = 1      #21H1
     $OSLanguageControl.SelectedIndex = 7   #en-us
     $OSEditionControl.SelectedIndex = 5    #Enterprise
     $OSLicenseControl.SelectedIndex = 1    #Volume
