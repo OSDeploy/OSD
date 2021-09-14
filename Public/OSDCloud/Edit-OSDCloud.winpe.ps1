@@ -397,7 +397,7 @@ start /wait PowerShell -Nol -W Mi -C Start-Sleep -Seconds 10
     #=================================================
     $WinpeEndTime = Get-Date
     $WinpeTimeSpan = New-TimeSpan -Start $WinpeStartTime -End $WinpeEndTime
-    Write-Host -ForegroundColor DarkGray    "========================================================================="
+    Write-Host -ForegroundColor DarkGray    "================================================"
     Write-Host -ForegroundColor Yellow      "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) $($MyInvocation.MyCommand.Name) " -NoNewline
     Write-Host -ForegroundColor Cyan        "Completed in $($WinpeTimeSpan.ToString("mm' minutes 'ss' seconds'"))"
     #=================================================

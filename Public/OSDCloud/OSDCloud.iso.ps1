@@ -24,7 +24,7 @@ function New-OSDCloud.iso {
     #=================================================
     #   Header
     #=================================================
-    Write-Host -ForegroundColor DarkGray "========================================================================="
+    Write-Host -ForegroundColor DarkGray "================================================"
     Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) $($MyInvocation.MyCommand.Name)"
     #=================================================
     #	Block
@@ -84,7 +84,7 @@ function New-OSDCloud.iso {
     #=================================================
     #   Create ISO
     #=================================================
-    Write-Host -ForegroundColor DarkGray "========================================================================="
+    Write-Host -ForegroundColor DarkGray "================================================"
     Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Creating ISO"
     Write-Host -ForegroundColor Yellow "OSD Function: New-ADK.iso"
     $NewADKiso = New-ADK.iso -MediaPath "$WorkspacePath\Media" -isoFileName $isoFileName -isoLabel $isoLabel
@@ -93,10 +93,10 @@ function New-OSDCloud.iso {
     #=================================================
     $IsoEndTime = Get-Date
     $IsoTimeSpan = New-TimeSpan -Start $IsoStartTime -End $IsoEndTime
-    Write-Host -ForegroundColor DarkGray    "========================================================================="
+    Write-Host -ForegroundColor DarkGray    "================================================"
     Write-Host -ForegroundColor Yellow      "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) $($MyInvocation.MyCommand.Name) " -NoNewline
     Write-Host -ForegroundColor Cyan        "Completed in $($IsoTimeSpan.ToString("mm' minutes 'ss' seconds'"))"
     Write-Host -ForegroundColor Cyan        "OSDCloud ISO created at $($NewADKiso.FullName)"
-    Write-Host -ForegroundColor DarkGray    "========================================================================="
+    Write-Host -ForegroundColor DarkGray    "================================================"
     #=================================================
 }

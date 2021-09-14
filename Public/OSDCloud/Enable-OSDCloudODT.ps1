@@ -212,7 +212,7 @@ $ProPlus2019Volume = @'
     #=================================================
     $ODTEndTime = Get-Date
     $ODTTimeSpan = New-TimeSpan -Start $ODTStartTime -End $ODTEndTime
-    Write-Host -ForegroundColor DarkGray    "========================================================================="
+    Write-Host -ForegroundColor DarkGray    "================================================"
     Write-Host -ForegroundColor Yellow      "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) $($MyInvocation.MyCommand.Name) " -NoNewline
     Write-Host -ForegroundColor Cyan        "Completed in $($ODTTimeSpan.ToString("mm' minutes 'ss' seconds'"))"
     #=================================================

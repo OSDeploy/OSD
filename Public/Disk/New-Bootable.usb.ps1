@@ -106,7 +106,7 @@ function New-Bootable.usb {
     #=================================================
     $osdbootEndTime = Get-Date
     $osdbootTimeSpan = New-TimeSpan -Start $osdbootStartTime -End $osdbootEndTime
-    Write-Host -ForegroundColor DarkGray    "========================================================================="
+    Write-Host -ForegroundColor DarkGray    "================================================"
     Write-Host -ForegroundColor Yellow      "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) $($MyInvocation.MyCommand.Name) " -NoNewline
     Write-Host -ForegroundColor Cyan        "Completed in $($osdbootTimeSpan.ToString("mm' minutes 'ss' seconds'"))"
     #=================================================

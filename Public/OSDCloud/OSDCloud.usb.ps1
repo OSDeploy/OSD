@@ -100,7 +100,7 @@ function New-OSDCloud.usb {
     #=================================================
     $osdcloudusbEndTime = Get-Date
     $osdcloudusbTimeSpan = New-TimeSpan -Start $osdcloudusbStartTime -End $osdcloudusbEndTime
-    Write-Host -ForegroundColor DarkGray    "========================================================================="
+    Write-Host -ForegroundColor DarkGray    "================================================"
     Write-Host -ForegroundColor Yellow      "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) $($MyInvocation.MyCommand.Name) " -NoNewline
     Write-Host -ForegroundColor Cyan        "Completed in $($osdcloudusbTimeSpan.ToString("mm' minutes 'ss' seconds'"))"
     #=================================================
@@ -168,7 +168,7 @@ function Save-OSDCloud.usb {
     #=================================================
     #   Header
     #=================================================
-    Write-Host -ForegroundColor DarkGray "========================================================================="
+    Write-Host -ForegroundColor DarkGray "================================================"
     Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) $($MyInvocation.MyCommand.Name)" -NoNewline
     Write-Host -ForegroundColor Cyan " | Manufacturer: $Manufacturer | Product: $Product"
     Write-Host -ForegroundColor Cyan "OSDCloud content can be saved to an 8GB+ NTFS USB Volume"
@@ -180,12 +180,12 @@ function Save-OSDCloud.usb {
     if (-NOT ($GetUSBVolume)) {
         Write-Warning                           "Unfortunately, I don't see any USB Volumes that will work"
         Write-Warning                           "OSDCloud Failed!"
-        Write-Host -ForegroundColor DarkGray    "========================================================================="
+        Write-Host -ForegroundColor DarkGray    "================================================"
         Break
     }
 
     Write-Warning                               "USB Free Space is not verified before downloading yet, so this is on you!"
-    Write-Host -ForegroundColor DarkGray        "========================================================================="
+    Write-Host -ForegroundColor DarkGray        "================================================"
     if ($GetUSBVolume) {
         #$GetUSBVolume | Select-Object -Property DriveLetter, FileSystemLabel, SizeGB, SizeRemainingMB, DriveType | Format-Table
         $SelectUSBVolume = Select-Volume.usb -MinimumSizeGB 8 -FileSystem 'NTFS'
@@ -200,7 +200,7 @@ function Save-OSDCloud.usb {
     #=================================================
     #	Autopilot Profiles
     #=================================================
-    Write-Host -ForegroundColor DarkGray        "========================================================================="
+    Write-Host -ForegroundColor DarkGray        "================================================"
     Write-Host -ForegroundColor Cyan            "Autopilot Profiles"
 
     if (-NOT (Test-Path "$OSDCloudOfflineFullName\Config\AutopilotJSON")) {
@@ -223,7 +223,7 @@ function Save-OSDCloud.usb {
     #=================================================
     #	OSBuild
     #=================================================
-    Write-Host -ForegroundColor DarkGray "========================================================================="
+    Write-Host -ForegroundColor DarkGray "================================================"
     Write-Host -ForegroundColor Cyan "Windows 10 OSBuild " -NoNewline
     
     if ($OSBuild) {
@@ -258,7 +258,7 @@ function Save-OSDCloud.usb {
     #=================================================
     #	OSEdition
     #=================================================
-    Write-Host -ForegroundColor DarkGray "========================================================================="
+    Write-Host -ForegroundColor DarkGray "================================================"
     Write-Host -ForegroundColor Cyan "Windows 10 OSEdition " -NoNewline
 
     if ($PSBoundParameters.ContainsKey('OSEdition')) {
@@ -321,7 +321,7 @@ function Save-OSDCloud.usb {
     #=================================================
     #	OSLicense
     #=================================================
-    Write-Host -ForegroundColor DarkGray "========================================================================="
+    Write-Host -ForegroundColor DarkGray "================================================"
     Write-Host -ForegroundColor Cyan "Windows 10 OSLicense " -NoNewline
 
     if ($OSLicense) {
@@ -387,7 +387,7 @@ function Save-OSDCloud.usb {
     #=================================================
     #	OSLanguage
     #=================================================
-    Write-Host -ForegroundColor DarkGray "========================================================================="
+    Write-Host -ForegroundColor DarkGray "================================================"
     Write-Host -ForegroundColor Cyan "Windows 10 OSLanguage " -NoNewline
     
     if ($PSBoundParameters.ContainsKey('OSLanguage')) {
@@ -422,7 +422,7 @@ function Save-OSDCloud.usb {
     #=================================================
     #	Get-FeatureUpdate
     #=================================================
-    Write-Host -ForegroundColor DarkGray "========================================================================="
+    Write-Host -ForegroundColor DarkGray "================================================"
     Write-Host -ForegroundColor Cyan "Get-FeatureUpdate"
     Write-Host -ForegroundColor DarkGray "Windows 10 x64 | OSLicense: $OSLicense | OSBuild: $OSBuild | OSLanguage: $OSLanguage"
 
@@ -456,14 +456,14 @@ function Save-OSDCloud.usb {
     #=================================================
     #	Save-MyDriverPack
     #=================================================
-    Write-Host -ForegroundColor DarkGray    "========================================================================="
+    Write-Host -ForegroundColor DarkGray    "================================================"
     Write-Host -ForegroundColor Cyan        "Save-MyDriverPack"
 
     Save-MyDriverPack -DownloadPath "$OSDCloudOfflineFullName\DriverPacks\$Manufacturer" -Manufacturer $Manufacturer -Product $Product
     #=================================================
     #	PSGallery Modules
     #=================================================
-    Write-Host -ForegroundColor DarkGray    "========================================================================="
+    Write-Host -ForegroundColor DarkGray    "================================================"
     Write-Host -ForegroundColor Cyan        "PowerShell Modules and Scripts"
 
     #Offline
@@ -511,7 +511,7 @@ function Save-OSDCloud.usb {
     #=================================================
     $Global:OSDCloudEndTime = Get-Date
     $Global:OSDCloudTimeSpan = New-TimeSpan -Start $Global:OSDCloudStartTime -End $Global:OSDCloudEndTime
-    Write-Host -ForegroundColor DarkGray    "========================================================================="
+    Write-Host -ForegroundColor DarkGray    "================================================"
     Write-Host -ForegroundColor Yellow      "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) $($MyInvocation.MyCommand.Name) " -NoNewline
     Write-Host -ForegroundColor Cyan        "Completed in $($Global:OSDCloudTimeSpan.ToString("mm' minutes 'ss' seconds'"))!"
     explorer $OSDCloudOfflineFullName

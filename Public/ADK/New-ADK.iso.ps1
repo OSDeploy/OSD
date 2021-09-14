@@ -43,7 +43,7 @@ function New-ADK.iso {
     #=================================================
     #   Header
     #=================================================
-    Write-Host -ForegroundColor DarkGray "========================================================================="
+    Write-Host -ForegroundColor DarkGray "================================================"
     Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) $($MyInvocation.MyCommand.Name)"
 	#=================================================
 	#	Blocks
@@ -57,13 +57,13 @@ function New-ADK.iso {
     $AdkPaths = Get-AdkPaths
 
     if ($null -eq $AdkPaths) {
-        Write-Host -ForegroundColor DarkGray "========================================================================="
+        Write-Host -ForegroundColor DarkGray "================================================"
         Write-Warning "Could not get ADK going, sorry"
-        Write-Host -ForegroundColor DarkGray "========================================================================="
+        Write-Host -ForegroundColor DarkGray "================================================"
         Break
     }
     #=================================================
-    Write-Host -ForegroundColor DarkGray "========================================================================="
+    Write-Host -ForegroundColor DarkGray "================================================"
     Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Setting Paths"
 
     $WorkspacePath = (Get-Item -Path $MediaPath -ErrorAction Stop).Parent.FullName
@@ -80,18 +80,18 @@ function New-ADK.iso {
     #=================================================
     $DestinationBoot = Join-Path $MediaPath 'boot'
     if (-NOT (Test-Path $DestinationBoot)) {
-        Write-Host -ForegroundColor DarkGray "========================================================================="
+        Write-Host -ForegroundColor DarkGray "================================================"
         Write-Warning "Cannot locate $DestinationBoot"
         Write-Warning "This does not appear to be a valid bootable ISO"
-        Write-Host -ForegroundColor DarkGray "========================================================================="
+        Write-Host -ForegroundColor DarkGray "================================================"
         Break
     }
     $DestinationEfiBoot = Join-Path $MediaPath 'efi\microsoft\boot'
     if (-NOT (Test-Path $DestinationEfiBoot)) {
-        Write-Host -ForegroundColor DarkGray "========================================================================="
+        Write-Host -ForegroundColor DarkGray "================================================"
         Write-Warning "Cannot locate $DestinationEfiBoot"
         Write-Warning "This does not appear to be a valid bootable ISO"
-        Write-Host -ForegroundColor DarkGray "========================================================================="
+        Write-Host -ForegroundColor DarkGray "================================================"
         Break
     }
     #=================================================
@@ -138,7 +138,7 @@ function New-ADK.iso {
     #=================================================
     #   Create Prompt ISO
     #=================================================
-    Write-Host -ForegroundColor DarkGray "========================================================================="
+    Write-Host -ForegroundColor DarkGray "================================================"
     Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Creating Prompt ISO"
     $BootDataString = '2#p0,e,b"{0}"#pEF,e,b"{1}"' -f "$Destinationetfsbootcom", "$Destinationefisysbin"
     Write-Host -ForegroundColor DarkGray  "BootDataString: $BootDataString"
@@ -146,9 +146,9 @@ function New-ADK.iso {
     $Process = Start-Process $oscdimgexe -args @("-m","-o","-u2","-bootdata:$BootDataString",'-u2','-udfver102',$isoLabelString,"`"$MediaPath`"", "`"$IsoFullName`"") -PassThru -Wait -NoNewWindow
 
     if (-NOT (Test-Path $IsoFullName)) {
-        Write-Host -ForegroundColor DarkGray "========================================================================="
+        Write-Host -ForegroundColor DarkGray "================================================"
         Write-Error "Something didn't work"
-        Write-Host -ForegroundColor DarkGray "========================================================================="
+        Write-Host -ForegroundColor DarkGray "================================================"
         Break
     }
     $PromptIso = Get-Item -Path $IsoFullName
@@ -156,7 +156,7 @@ function New-ADK.iso {
     #=================================================
     #   Create NoPrompt ISO
     #=================================================
-    Write-Host -ForegroundColor DarkGray "========================================================================="
+    Write-Host -ForegroundColor DarkGray "================================================"
     Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Creating NoPrompt ISO"
     $IsoFullName = "$($PromptIso.Directory)\$($PromptIso.BaseName)_NoPrompt.iso"
     $BootDataString = '2#p0,e,b"{0}"#pEF,e,b"{1}"' -f "$Destinationetfsbootcom", "$Destinationefisysnopromptbin"
@@ -165,9 +165,9 @@ function New-ADK.iso {
     $Process = Start-Process $oscdimgexe -args @("-m","-o","-u2","-bootdata:$BootDataString",'-u2','-udfver102',$isoLabelString,"`"$MediaPath`"", "`"$IsoFullName`"") -PassThru -Wait -NoNewWindow
 
     if (-NOT (Test-Path $IsoFullName)) {
-        Write-Host -ForegroundColor DarkGray "========================================================================="
+        Write-Host -ForegroundColor DarkGray "================================================"
         Write-Error "Something didn't work"
-        Write-Host -ForegroundColor DarkGray "========================================================================="
+        Write-Host -ForegroundColor DarkGray "================================================"
         Break
     }
     $NoPromptIso = Get-Item -Path $IsoFullName

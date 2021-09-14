@@ -30,7 +30,7 @@ function Save-OSDCloudDriverPack.usb {
     #=================================================
     #   Header
     #=================================================
-    Write-Host -ForegroundColor DarkGray "========================================================================="
+    Write-Host -ForegroundColor DarkGray "================================================"
     Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) $($MyInvocation.MyCommand.Name)" -NoNewline
     Write-Host -ForegroundColor Cyan " | Manufacturer: $Manufacturer"
     Write-Host -ForegroundColor Cyan "OSDCloud content can be saved to an 8GB+ NTFS USB Volume"
@@ -42,12 +42,12 @@ function Save-OSDCloudDriverPack.usb {
     if (-NOT ($GetUSBVolume)) {
         Write-Warning                           "Unfortunately, I don't see any USB Volumes that will work"
         Write-Warning                           "OSDCloud Failed!"
-        Write-Host -ForegroundColor DarkGray    "========================================================================="
+        Write-Host -ForegroundColor DarkGray    "================================================"
         Break
     }
 
     Write-Warning                               "USB Free Space is not verified before downloading yet, so this is on you!"
-    Write-Host -ForegroundColor DarkGray        "========================================================================="
+    Write-Host -ForegroundColor DarkGray        "================================================"
     if ($GetUSBVolume) {
         #$GetUSBVolume | Select-Object -Property DriveLetter, FileSystemLabel, SizeGB, SizeRemainingMB, DriveType | Format-Table
         $SelectUSBVolume = Select-Volume.usb -MinimumSizeGB 8 -FileSystem 'NTFS'
@@ -62,7 +62,7 @@ function Save-OSDCloudDriverPack.usb {
     #=================================================
     #	Save-MyDriverPack
     #=================================================
-    Write-Host -ForegroundColor DarkGray    "========================================================================="
+    Write-Host -ForegroundColor DarkGray    "================================================"
     Write-Host -ForegroundColor Cyan        "Save-MyDriverPack"
     $DownloadPath = "$OSDCloudOfflineFullName\DriverPacks\$Manufacturer"
     switch ($Manufacturer) {
@@ -76,7 +76,7 @@ function Save-OSDCloudDriverPack.usb {
     #=================================================
     $Global:OSDCloudEndTime = Get-Date
     $Global:OSDCloudTimeSpan = New-TimeSpan -Start $Global:OSDCloudStartTime -End $Global:OSDCloudEndTime
-    Write-Host -ForegroundColor DarkGray    "========================================================================="
+    Write-Host -ForegroundColor DarkGray    "================================================"
     Write-Host -ForegroundColor Yellow      "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) $($MyInvocation.MyCommand.Name) " -NoNewline
     Write-Host -ForegroundColor Cyan        "Completed in $($Global:OSDCloudTimeSpan.ToString("mm' minutes 'ss' seconds'"))!"
     explorer $OSDCloudOfflineFullName

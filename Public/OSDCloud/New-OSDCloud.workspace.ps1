@@ -36,7 +36,7 @@ function New-OSDCloud.workspace {
     #=================================================
     #   Header
     #=================================================
-    Write-Host -ForegroundColor DarkGray "========================================================================="
+    Write-Host -ForegroundColor DarkGray "================================================"
     Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) $($MyInvocation.MyCommand.Name)"
     $Global:OSDRobocopyLogs = @()
     #=================================================
@@ -51,17 +51,17 @@ function New-OSDCloud.workspace {
     #	Get-OSDCloud.template
     #=================================================
     if (!(Get-OSDCloud.template)) {
-        Write-Host -ForegroundColor DarkGray "========================================================================="
+        Write-Host -ForegroundColor DarkGray "================================================"
         Write-Warning "Setting up a new OSDCloud.template"
-        Write-Host -ForegroundColor DarkGray "========================================================================="
+        Write-Host -ForegroundColor DarkGray "================================================"
         New-OSDCloud.template
     }
 
     $OSDCloudTemplate = Get-OSDCloud.template
     if (!($OSDCloudTemplate)) {
-        Write-Host -ForegroundColor DarkGray "========================================================================="
+        Write-Host -ForegroundColor DarkGray "================================================"
         Write-Warning "Something bad happened.  I have to go"
-        Write-Host -ForegroundColor DarkGray "========================================================================="
+        Write-Host -ForegroundColor DarkGray "================================================"
         Break
     }
     #=================================================
@@ -107,7 +107,7 @@ function New-OSDCloud.workspace {
     #=================================================
     #	Copy WorkspacePath
     #=================================================
-    Write-Host -ForegroundColor DarkGray "========================================================================="
+    Write-Host -ForegroundColor DarkGray "================================================"
     Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Copying OSDCloud Template using Robocopy"
     
     Write-Host -ForegroundColor DarkGray "Source: $OSDCloudTemplate"
@@ -117,7 +117,7 @@ function New-OSDCloud.workspace {
     #=================================================
     #	Mirror Media
     #=================================================
-    Write-Host -ForegroundColor DarkGray "========================================================================="
+    Write-Host -ForegroundColor DarkGray "================================================"
     Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Mirroring OSDCloud Template Media using Robocopy"
     Write-Host -ForegroundColor Yellow 'Mirroring will replace any previous WinPE with a new Template WinPE'
     
@@ -130,11 +130,11 @@ function New-OSDCloud.workspace {
     #=================================================
     $WorkspaceEndTime = Get-Date
     $WorkspaceTimeSpan = New-TimeSpan -Start $WorkspaceStartTime -End $WorkspaceEndTime
-    Write-Host -ForegroundColor DarkGray    "========================================================================="
+    Write-Host -ForegroundColor DarkGray    "================================================"
     Write-Host -ForegroundColor Yellow      "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) $($MyInvocation.MyCommand.Name) " -NoNewline
     Write-Host -ForegroundColor Cyan        "Completed in $($WorkspaceTimeSpan.ToString("mm' minutes 'ss' seconds'"))"
     Write-Host -ForegroundColor Cyan        "OSDCloud Workspace created at $WorkspacePath"
-    Write-Host -ForegroundColor DarkGray    "========================================================================="
+    Write-Host -ForegroundColor DarkGray    "================================================"
     Stop-Transcript
     #=================================================
 }
