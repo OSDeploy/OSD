@@ -265,18 +265,18 @@ function Invoke-OSDCloud {
         if ($Global:OSDCloud.Test -ne $true) {
             New-OSDisk -NoRecoveryPartition -Force -ErrorAction Stop
         }
-        Write-Host "================================================" -ForegroundColor Cyan
+        Write-Host "=========================================================================" -ForegroundColor Cyan
         Write-Host "| SYSTEM | MSR |                    WINDOWS                             |" -ForegroundColor Cyan
-        Write-Host "================================================" -ForegroundColor Cyan
+        Write-Host "=========================================================================" -ForegroundColor Cyan
     }
     else {
         Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) New-OSDisk -Force -ErrorAction Stop"
         if ($Global:OSDCloud.Test -ne $true) {
             New-OSDisk -Force -ErrorAction Stop
         }
-        Write-Host "================================================" -ForegroundColor Cyan
+        Write-Host "=========================================================================" -ForegroundColor Cyan
         Write-Host "| SYSTEM | MSR |                    WINDOWS                  | RECOVERY |" -ForegroundColor Cyan
-        Write-Host "================================================" -ForegroundColor Cyan
+        Write-Host "=========================================================================" -ForegroundColor Cyan
     }
     Start-Sleep -Seconds 5
     if (-NOT (Get-PSDrive -Name 'C')) {
