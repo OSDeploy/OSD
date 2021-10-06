@@ -1,7 +1,7 @@
 function Get-MsUpCatUpdate {
     [CmdLetBinding()]
     param (
-        [ValidateSet('Windows 11','Windows 10','Windows Server','Windows Server 2016','Windows Server 2019')]
+        [ValidateSet('Windows 11','Windows 10','Windows Server','Windows Server 2016','Windows Server 2019','Windows Server 2022')]
         [Alias('OperatingSystem')]
         [string]$OS = 'Windows 10',
 
