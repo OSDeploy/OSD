@@ -3,7 +3,7 @@ function Get-EnablementPackage {
     param (
         [ValidateSet('21H2','21H1','20H2','1909')]
         [Alias('Build')]
-        [string]$OSBuild = '21H1',
+        [string]$OSBuild = '21H2',
 
         [ValidateSet('x64','x86')]
         [string]$OSArch = 'x64'
