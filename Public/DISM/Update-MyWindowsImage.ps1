@@ -3,7 +3,7 @@
 Updates a mounted WIM
 
 .DESCRIPTION
-Updates a mounted WIM files.  Requires OSDSUS Catalog
+Updates a mounted WIM files.  Requires WSUSXML Catalog
 
 .PARAMETER Path
 Specifies the full path to the root directory of the offline Windows image that you will service
@@ -51,7 +51,6 @@ function Update-MyWindowsImage {
         #=================================================
         Block-StandardUser
         Block-WindowsVersionNe10
-        Block-PSModuleNotInstalled -ModuleName OSDSUS
         #=================================================
         #   Get-WindowsImage Mounted
         #=================================================
@@ -88,42 +87,42 @@ function Update-MyWindowsImage {
 
             Write-Verbose -Verbose $global:GetRegCurrentVersion.ReleaseId
             #=================================================
-            #   Get-OSDSUS and Filter Results
+            #   Get-WSUSXML and Filter Results
             #=================================================
-            $global:GetOSDSUS = Get-OSDSUS -Catalog OSDBuilder | Sort-Object UpdateGroup -Descending
+            $global:GetWSUSXML = Get-WSUSXML -Catalog Windows | Sort-Object UpdateGroup -Descending
 
             if ($global:GetRegCurrentVersion.ReleaseId -gt 0) {
-                $global:GetOSDSUS = $global:GetOSDSUS | Where-Object {$_.UpdateBuild -eq $global:GetRegCurrentVersion.DisplayVersion}
+                $global:GetWSUSXML = $global:GetWSUSXML | Where-Object {$_.UpdateBuild -eq $global:GetRegCurrentVersion.DisplayVersion}
             }
             else {
-                $global:GetOSDSUS = $global:GetOSDSUS | Where-Object {$_.UpdateBuild -eq $global:GetRegCurrentVersion.ReleaseId}
+                $global:GetWSUSXML = $global:GetWSUSXML | Where-Object {$_.UpdateBuild -eq $global:GetRegCurrentVersion.ReleaseId}
             }
 
             if ($global:GetRegCurrentVersion.BuildLabEx -match 'amd64') {
-                $global:GetOSDSUS = $global:GetOSDSUS | Where-Object {$_.UpdateArch -eq 'x64'}
+                $global:GetWSUSXML = $global:GetWSUSXML | Where-Object {$_.UpdateArch -eq 'x64'}
             } else {
-                $global:GetOSDSUS = $global:GetOSDSUS | Where-Object {$_.UpdateArch -eq 'x86'}
+                $global:GetWSUSXML = $global:GetWSUSXML | Where-Object {$_.UpdateArch -eq 'x86'}
             }
             if ($global:GetRegCurrentVersion.InstallationType -match 'WindowsPE') {
-                $global:GetOSDSUS = $global:GetOSDSUS | Where-Object {$_.UpdateOS -eq 'Windows 10'}
-                $global:GetOSDSUS = $global:GetOSDSUS | Where-Object {$_.UpdateGroup -notmatch 'Adobe'}
-                $global:GetOSDSUS = $global:GetOSDSUS | Where-Object {$_.UpdateGroup -notmatch 'DotNet'}
+                $global:GetWSUSXML = $global:GetWSUSXML | Where-Object {$_.UpdateOS -eq 'Windows 10'}
+                $global:GetWSUSXML = $global:GetWSUSXML | Where-Object {$_.UpdateGroup -notmatch 'Adobe'}
+                $global:GetWSUSXML = $global:GetWSUSXML | Where-Object {$_.UpdateGroup -notmatch 'DotNet'}
             }
             if ($global:GetRegCurrentVersion.InstallationType -match 'Core') {
-                $global:GetOSDSUS = $global:GetOSDSUS | Where-Object {$_.UpdateGroup -notmatch 'Adobe'}
+                $global:GetWSUSXML = $global:GetWSUSXML | Where-Object {$_.UpdateGroup -notmatch 'Adobe'}
             }
             if ($global:GetRegCurrentVersion.InstallationType -match 'Client') {
-                $global:GetOSDSUS = $global:GetOSDSUS | Where-Object {$_.UpdateOS -notmatch 'Server'}
+                $global:GetWSUSXML = $global:GetWSUSXML | Where-Object {$_.UpdateOS -notmatch 'Server'}
             }
             if ($global:GetRegCurrentVersion.InstallationType -match 'Server') {
-                $global:GetOSDSUS = $global:GetOSDSUS | Where-Object {$_.UpdateOS -match 'Server'}
+                $global:GetWSUSXML = $global:GetWSUSXML | Where-Object {$_.UpdateOS -match 'Server'}
             }
 
             #Don't install Optional Updates
-            $global:GetOSDSUS = $global:GetOSDSUS | Where-Object {$_.UpdateGroup -ne ''}
+            $global:GetWSUSXML = $global:GetWSUSXML | Where-Object {$_.UpdateGroup -ne ''}
 
             if ($Update -ne 'Check' -and $Update -ne 'All') {
-                $global:GetOSDSUS = $global:GetOSDSUS | Where-Object {$_.UpdateGroup -match $Update}
+                $global:GetWSUSXML = $global:GetWSUSXML | Where-Object {$_.UpdateGroup -match $Update}
             }
             #=================================================
             #   Get-SessionsXml
@@ -132,7 +131,7 @@ function Update-MyWindowsImage {
             #=================================================
             #   Apply Update
             #=================================================
-            foreach ($item in $global:GetOSDSUS) {
+            foreach ($item in $global:GetWSUSXML) {
                 if (! ($Force.IsPresent)) {
                     if ($global:GetSessionsXml | Where-Object {$_.KBNumber -match "$($item.FileKBNumber)"}) {
                         Write-Verbose "Installed: $($item.Title) $($item.FileName)" -Verbose

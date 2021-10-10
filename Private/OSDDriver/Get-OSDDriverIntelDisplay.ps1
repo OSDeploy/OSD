@@ -69,19 +69,40 @@ function Get-OSDDriverIntelDisplay {
 
     $DriverWebContent = $DriverWebContent | Where-Object {$_.innerText -notlike "*Intel Graphics 15.40 G4*"}
     $DriverWebContent = $DriverWebContent | Where-Object {$_.innerText -notlike "*Intel Graphics 15.40 G6*"}
+
+
+
+
+
+    $IntelDriverUrls = @(
+        'https://intel.com/content/www/us/en/download/19344/intel-graphics-windows-dch-drivers.html'
+        'https://intel.com/content/www/us/en/download/18424/intel-graphics-driver-for-windows-7-8-1-15-36.html'
+        'https://intel.com/content/www/us/en/download/18799/intel-graphics-driver-for-windows-15-45.html'
+        'https://intel.com/content/www/us/en/download/18606/intel-graphics-driver-for-windows-15-33.html'
+    )
+
+
+
+
     #=================================================
     #   ForEach
     #=================================================
     $UrlDownloads = @()
     $DriverResults = @()
-    $DriverResults = foreach ($DriverLink in $DriverWebContent) {
+<#     $DriverResults = foreach ($DriverLink in $DriverWebContent) {
         $DriverResultsName = $($DriverLink.innerText)
         $DriverInfo = $($DriverLink.href)
-        Write-Verbose "OSD: $DriverResultsName $DriverInfo" -Verbose
+        Write-Verbose "OSD: $DriverResultsName $DriverInfo" -Verbose #>
+    $DriverResults = foreach ($DriverLink in $IntelDriverUrls) {
+        $DriverResultsName = $($DriverLink.innerText)
+        $DriverInfo = $DriverLink
+        Write-Verbose "OSD: $DriverInfo" -Verbose
         #=================================================
         #   Intel WebRequest
         #=================================================
         $DriverInfoContent = Invoke-WebRequest -Uri $DriverInfo -Method Get
+
+        $DriverInfoContent | ogv -Wait
 
         $DriverHTML = $DriverInfoContent.ParsedHtml.childNodes | Where-Object {$_.nodename -eq 'HTML'} 
         $DriverHEAD = $DriverHTML.childNodes | Where-Object {$_.nodename -eq 'HEAD'}
