@@ -31,11 +31,11 @@ function Get-WSUSXML {
             'Office 2016 32-Bit',
             'Office 2016 64-Bit',
             'Windows',
-            'WindowsClient',
             'Windows 10',
-            'Windows 11',
             'Windows 10 Dynamic Update',
+            'Windows 11',
             'Windows 11 Dynamic Update',
+            'Windows Client',
             'Windows Server'
         )]
         [Alias('Format')]
@@ -87,7 +87,7 @@ function Get-WSUSXML {
             $WSUSXMLCatalogs = $WSUSXMLCatalogs | Where-Object {$_.BaseName -match 'Windows'}
             $WSUSXMLCatalogs = $WSUSXMLCatalogs | Where-Object {$_.BaseName -notmatch 'FeatureUpdate'}
         }
-        'WindowsClient' {
+        'Windows Client' {
             $WSUSXMLCatalogs = $WSUSXMLCatalogs | Where-Object {$_.BaseName -match 'Windows'}
             $WSUSXMLCatalogs = $WSUSXMLCatalogs | Where-Object {$_.BaseName -notmatch 'Server'}
             $WSUSXMLCatalogs = $WSUSXMLCatalogs | Where-Object {$_.BaseName -notmatch 'Dynamic Update'}
@@ -111,7 +111,7 @@ function Get-WSUSXML {
     #   Update Information
     #===================================================================================================
     if (!($Silent.IsPresent)) {
-        Write-Verbose "WSUSXML $WSUSXMLVersion $Catalog http://WSUSXML.osdeploy.com/release" -Verbose
+        Write-Verbose "WSUSXML $WSUSXMLVersion $Catalog http://wsusxml.osdeploy.com/release" -Verbose
     }
     #===================================================================================================
     #   Variables
