@@ -151,8 +151,8 @@ function Edit-MyWinPE {
             foreach ($Driver in $CloudDriver) {
                 if ($Driver -eq 'Dell'){
                     Write-Verbose "Adding $Driver CloudDriver"
-                    if (Test-WebConnection -Uri 'http://downloads.dell.com/FOLDER07283025M/1/WinPE10.0-Drivers-A24-45F17.CAB') {
-                        $SaveWebFile = Save-WebFile -SourceUrl 'http://downloads.dell.com/FOLDER07283025M/1/WinPE10.0-Drivers-A24-45F17.CAB'
+                    if (Test-WebConnection -Uri 'http://downloads.dell.com/FOLDER07703466M/1/WinPE10.0-Drivers-A25-F0XPX.CAB') {
+                        $SaveWebFile = Save-WebFile -SourceUrl 'http://downloads.dell.com/FOLDER07703466M/1/WinPE10.0-Drivers-A25-F0XPX.CAB'
                         if (Test-Path $SaveWebFile.FullName) {
                             $DriverCab = Get-Item -Path $SaveWebFile.FullName
                             $ExpandPath = Join-Path $DriverCab.Directory $DriverCab.BaseName
@@ -161,14 +161,14 @@ function Edit-MyWinPE {
                                 New-Item -Path $ExpandPath -ItemType Directory -Force | Out-Null
                             }
                             Expand -R "$($DriverCab.FullName)" -F:* "$ExpandPath" | Out-Null
-                            Add-WindowsDriver -Path "$($MountMyWindowsImage.Path)" -Driver "$ExpandPath" -Recurse -ForceUnsigned -Verbose
+                            Add-WindowsDriver -Path "$($MountMyWindowsImage.Path)" -Driver "$ExpandPath\winpe\x64" -Recurse -ForceUnsigned -Verbose
                         }
                     }
                 }
                 if ($Driver -eq 'HP'){
                     Write-Verbose "Adding $Driver CloudDriver"
-                    if (Test-WebConnection -Uri 'https://ftp.hp.com/pub/softpaq/sp110001-110500/sp110326.exe') {
-                        $SaveWebFile = Save-WebFile -SourceUrl 'https://ftp.hp.com/pub/softpaq/sp110001-110500/sp110326.exe'
+                    if (Test-WebConnection -Uri 'https://ftp.hp.com/pub/softpaq/sp112501-113000/sp112810.exe') {
+                        $SaveWebFile = Save-WebFile -SourceUrl 'https://ftp.hp.com/pub/softpaq/sp112501-113000/sp112810.exe'
                         if (Test-Path $SaveWebFile.FullName) {
                             $DriverCab = Get-Item -Path $SaveWebFile.FullName
                             $ExpandPath = Join-Path $DriverCab.Directory $DriverCab.BaseName
