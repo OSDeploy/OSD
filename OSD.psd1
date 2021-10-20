@@ -4,7 +4,7 @@
 RootModule = 'OSD.psm1'
 
 # Version number of this module.
-ModuleVersion = '21.10.14.1'
+ModuleVersion = '21.10.17.1'
 
 # Supported PSEditions
 # CompatiblePSEditions = @()
@@ -270,7 +270,8 @@ FunctionsToExport =
 'Invoke-oobeAddRSAT',
 'Invoke-oobeUpdateDrivers',
 'Invoke-oobeUpdateWindows',
-'Get-WSUSXML'
+'Get-WSUSXML',
+'Invoke-MSCatalogParseDate'
 
 # Cmdlets to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no cmdlets to export.
 CmdletsToExport = @()

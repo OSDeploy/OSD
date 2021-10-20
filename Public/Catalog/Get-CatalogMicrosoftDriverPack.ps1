@@ -151,6 +151,15 @@ $BaseCatalog = @'
     },
     {
         "CatalogVersion":  "",
+        "Name":  "Surface Go 3",
+        "Model":  "Surface Go 3",
+        "Product":  "Surface_Go_3",
+        "PackageID": "103504",
+        "DriverPackUrl": "",
+        "FileName":  ""
+    },
+    {
+        "CatalogVersion":  "",
         "Name":  "Surface Hub 2",
         "Model":  "Surface Hub 2",
         "Product":  "Surface_Hub_2",
@@ -214,10 +223,37 @@ $BaseCatalog = @'
     },
     {
         "CatalogVersion":  "",
+        "Name":  "Surface Laptop 4",
+        "Model":  "Surface Laptop 4 13 Intel",
+        "Product":  "Surface_Laptop_4",
+        "PackageID": "102924",
+        "DriverPackUrl": "",
+        "FileName":  ""
+    },
+    {
+        "CatalogVersion":  "",
+        "Name":  "Surface Laptop 4",
+        "Model":  "Surface Laptop 4 13 AMD",
+        "Product":  "Surface_Laptop_4",
+        "PackageID": "102923",
+        "DriverPackUrl": "",
+        "FileName":  ""
+    },
+    {
+        "CatalogVersion":  "",
         "Name":  "Surface Laptop Go",
         "Model":  "Surface Laptop Go",
         "Product":  "Surface_Laptop_Go_1943",
         "PackageID": "102261",
+        "DriverPackUrl": "",
+        "FileName":  ""
+    },
+    {
+        "CatalogVersion":  "",
+        "Name":  "Surface Laptop Studio",
+        "Model":  "Surface Laptop Studio",
+        "Product":  "Surface_Laptop_Studio",
+        "PackageID": "103505",
         "DriverPackUrl": "",
         "FileName":  ""
     },
@@ -322,6 +358,15 @@ $BaseCatalog = @'
     },
     {
         "CatalogVersion":  "",
+        "Name":  "Surface Pro 8",
+        "Model":  "Surface Pro 8",
+        "Product":  "Surface_Pro_8",
+        "PackageID": "103503",
+        "DriverPackUrl": "",
+        "FileName":  ""
+    },
+    {
+        "CatalogVersion":  "",
         "Name":  "Surface Studio",
         "Model":  "Surface Studio",
         "Product":  "Surface_Studio",
@@ -400,7 +445,7 @@ $BaseCatalog = @'
 			$DriverPage = $DownloadsBaseUrl + $Item.PackageID
 			$Downloads = (Invoke-WebRequest -Uri $DriverPage -UseBasicParsing).Links
 			$Downloads = $Downloads | Where-Object {$_.href -match 'download.microsoft.com'}
-			$Downloads = $Downloads | Where-Object {$_.href -match 'Win10'}
+			$Downloads = $Downloads | Where-Object {($_.href -match 'Win11') -or ($_.href -match 'Win10')}
 			$Downloads = $Downloads | Sort-Object href | Select-Object href -Unique
 			$Downloads = $Downloads | Select-Object -Last 1
 	

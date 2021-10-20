@@ -77,6 +77,9 @@ function Start-OSDCloud {
     #=================================================
     $Global:StartOSDCloud = $null
     $Global:StartOSDCloud = [ordered]@{
+        ApplyManufacturerDrivers = $true
+        ApplyCatalogDrivers = $true
+        ApplyCatalogFirmware = $true
         AutopilotJsonChildItem = $null
         AutopilotJsonItem = $null
         AutopilotJsonName = $null

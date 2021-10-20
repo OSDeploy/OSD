@@ -9,7 +9,7 @@
         RenderTransformOrigin="0.5,0.5"
         ResizeMode="NoResize"
         WindowStartupLocation = "CenterScreen"
-        Title="OSDCloudGUI" Height="560" Width="770">
+        Title="OSDCloudGUI" Height="580" Width="770">
     <Window.Resources>
         <ResourceDictionary>
             <Style TargetType="{x:Type Button}">
@@ -125,11 +125,11 @@
     <Grid Margin="10,0,10,10">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
-            <RowDefinition Height="15" />
+            <RowDefinition Height="5" />
             <RowDefinition Height="Auto" />
-            <RowDefinition Height="15" />
+            <RowDefinition Height="5" />
             <RowDefinition Height="Auto" />
-            <RowDefinition Height="15" />
+            <RowDefinition Height="5" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
             <RowDefinition Height="Auto" />
@@ -167,13 +167,13 @@
                        FontWeight="Bold"
                        Foreground="#003E92"
                        Margin="5"
-                       Padding="5"
+                       Padding="2"
                        Width="165"
                        FlowDirection="RightToLeft" />
                 <ComboBox Name="OperatingSystemCombobox"
                           FontSize="16"
                           Margin="5"
-                          Padding="5"
+                          Padding="2"
                           SelectedIndex="0" >
                         <ComboBoxItem Content="OSDCloud Windows 10 x64"/>
                         <ComboBoxItem Content="OSDCloud Windows 11 x64"/>
@@ -188,38 +188,39 @@
                        FontWeight="Bold"
                        Foreground="#003E92"
                        Margin="5"
+                       Padding="2"
                        Width="165" />
                 <ComboBox Name="OSBuildCombobox"
                           FontSize="16"
                           Margin="5"
-                          Padding="5" />
+                          Padding="2" />
                 <ComboBox Name="OSEditionCombobox"
                           FontSize="16"
                           Margin="5"
-                          Padding="5" />
+                          Padding="2" />
                 <ComboBox Name="OSLanguageCombobox"
                           FontSize="16"
                           Margin="5"
-                          Padding="5" />
+                          Padding="2" />
                 <ComboBox Name="OSLicenseCombobox"
                           FontSize="16"
                           Margin="5"
-                          Padding="5" />
+                          Padding="2" />
                 <ComboBox Name="ImageNameCombobox"
                           FontSize="16"
                           Margin="5"
-                          Padding="5" />
+                          Padding="2" />
                 <Label Name="ImageIndexLabel"
                        Content="Index"
                        FontSize="18"
                        FontWeight="Bold"
                        Foreground="#003E92"
                        Margin="5"
-                       Padding="5" />
+                       Padding="2" />
                 <TextBox Name="ImageIndexTextbox"
                          FontSize="16"
                          Margin="5"
-                         Padding="5"
+                         Padding="2"
                          Text="1" />
             </StackPanel>
         </StackPanel>
@@ -242,18 +243,18 @@
                    FontWeight="Bold"
                    Foreground="#003E92"
                    Margin="5"
-                   Padding="5"
+                   Padding="2"
                    Width="160"
                    FlowDirection="RightToLeft" />
             <TextBox Name="CSManufacturerTextbox"
                      FontSize="16"
                      Margin="5"
-                     Padding="5"
+                     Padding="2"
                      Text="Manufacturer" />
             <TextBox Name="CSModelTextbox"
                      FontSize="16"
                      Margin="5"
-                     Padding="5"
+                     Padding="2"
                      Text="Model" />
             <Label Name="CSProductLabel"
                    Content="Product"
@@ -261,11 +262,11 @@
                    FontWeight="Bold"
                    Foreground="#003E92"
                    Margin="5"
-                   Padding="5" />
+                   Padding="2" />
             <TextBox Name="CSProductTextbox"
                      FontSize="16"
                      Margin="5"
-                     Padding="5"
+                     Padding="2"
                      Text="Product" />
         </StackPanel>
         <!-- Line -->
@@ -289,7 +290,7 @@
                    Foreground="#003E92"
                    HorizontalAlignment="Left"
                    Margin="5"
-                   Padding="5"
+                   Padding="2"
                    Width="165"
                    FlowDirection="RightToLeft" />
         </StackPanel>
@@ -297,23 +298,6 @@
                     Orientation="Vertical"
                     HorizontalAlignment="Left"
                     VerticalAlignment="Top">
-            <CheckBox Name="RestartCheckbox"
-                      BorderBrush="Black"
-                      BorderThickness="2"
-                      FontSize="16"
-                      Foreground="Black"
-                      IsChecked="True"
-                      Padding="5,-2,5,10"
-                      VerticalAlignment="Center"
-                      Margin="180,15,0,0">Restart the computer after WinPE phase is complete</CheckBox>
-            <CheckBox Name="ScreenshotCheckbox"
-                      BorderBrush="Black"
-                      BorderThickness="2"
-                      FontSize="15"
-                      Foreground="Black"
-                      Padding="5,-2,5,10"
-                      VerticalAlignment="Center"
-                      Margin="180,0,0,0">Capture WinPE screenshots and save to C:\OSDCloud\ScreenPNG</CheckBox>
             <CheckBox Name="ZTICheckbox"
                       BorderBrush="Crimson"
                       BorderThickness="2"
@@ -322,7 +306,51 @@
                       Foreground="Crimson"
                       Padding="5,-2,5,10"
                       VerticalAlignment="Center"
-                      Margin="180,0,0,0">Don't warn before wiping disks</CheckBox>
+                      Margin="180,15,0,0">Don't warn before wiping disks</CheckBox>
+            <CheckBox Name="ManufacturerDriversCheckbox"
+                      BorderBrush="Black"
+                      BorderThickness="2"
+                      FontSize="15"
+                      Foreground="Black"
+                      IsChecked="True"
+                      Padding="5,-2,5,10"
+                      VerticalAlignment="Center"
+                      Margin="180,0,0,0">Apply Manufacturer Drivers (Dell, HP, Lenovo, Surface)</CheckBox>
+            <CheckBox Name="CatalogDriversCheckbox"
+                      BorderBrush="Black"
+                      BorderThickness="2"
+                      FontSize="15"
+                      Foreground="Black"
+                      IsChecked="True"
+                      Padding="5,-2,5,10"
+                      VerticalAlignment="Center"
+                      Margin="180,0,0,0">Apply Microsoft Catalog Drivers</CheckBox>
+            <CheckBox Name="CatalogFirmwareCheckbox"
+                      BorderBrush="Black"
+                      BorderThickness="2"
+                      FontSize="15"
+                      Foreground="Black"
+                      IsChecked="True"
+                      Padding="5,-2,5,10"
+                      VerticalAlignment="Center"
+                      Margin="180,0,0,0">Apply Microsoft Catalog Firmware</CheckBox>
+            <CheckBox Name="RestartCheckbox"
+                      BorderBrush="Black"
+                      BorderThickness="2"
+                      FontSize="15"
+                      Foreground="Black"
+                      IsChecked="True"
+                      Padding="5,-2,5,10"
+                      VerticalAlignment="Center"
+                      Margin="180,0,0,0">Restart after WinPE Phase</CheckBox>
+            <CheckBox Name="ScreenshotCheckbox"
+                      BorderBrush="Black"
+                      BorderThickness="2"
+                      FontSize="15"
+                      Foreground="Black"
+                      Padding="5,-2,5,10"
+                      VerticalAlignment="Center"
+                      Margin="180,0,0,0">Capture Screenshots C:\OSDCloud\ScreenPNG</CheckBox>
             <!-- AutopilotJson -->
             <StackPanel HorizontalAlignment="Left"
                         VerticalAlignment="Center"
@@ -334,14 +362,14 @@
                        Foreground="Black"
                        HorizontalAlignment="Right"
                        Margin="5"
-                       Padding="5"
+                       Padding="2"
                        VerticalAlignment="Center"
                        Width="165"
                        FlowDirection="RightToLeft" />
                 <ComboBox Name="AutopilotJsonCombobox"
                           FontSize="14"
                           Margin="5"
-                          Padding="5" />
+                          Padding="2" />
             </StackPanel>
             <!-- OOBEDeployJson -->
             <StackPanel HorizontalAlignment="Left"
@@ -353,14 +381,14 @@
                        FontSize="15"
                        Foreground="Black"
                        Margin="5"
-                       Padding="5"
+                       Padding="2"
                        VerticalAlignment="Center"
                        Width="165"
                        FlowDirection="RightToLeft" />
                 <ComboBox Name="OOBEDeployCombobox"
                           FontSize="14"
                           Margin="5"
-                          Padding="5" />
+                          Padding="2" />
             </StackPanel>
             <!-- AutopilotOOBEJson -->
             <StackPanel HorizontalAlignment="Left"
@@ -372,14 +400,14 @@
                        FontSize="15"
                        Foreground="Black"
                        Margin="5"
-                       Padding="5"
+                       Padding="2"
                        VerticalAlignment="Center"
                        Width="165"
                        FlowDirection="RightToLeft" />
                 <ComboBox Name="AutopilotOOBECombobox"
                           FontSize="14"
                           Margin="5"
-                          Padding="5" />
+                          Padding="2" />
             </StackPanel>
         </StackPanel>
         <!-- Line -->
