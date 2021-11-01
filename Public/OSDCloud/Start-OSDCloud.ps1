@@ -5,15 +5,43 @@ Starts the OSDCloud Windows 10 or 11 Build Process from the OSD Module or a GitH
 .DESCRIPTION
 Starts the OSDCloud Windows 10 or 11 Process from the OSD Module or a GitHub Repository
 
-.PARAMETER OSEdition
-Edition of the Windows installation
+.PARAMETER Manufacturer
 
-.PARAMETER OSLanguage
-Language of the Windows installation
-Alias = Culture, Language
+.PARAMETER Product
+
+.PARAMETER Restart
 
 .PARAMETER Screenshot
 Captures screenshots during OSDCloud
+
+.PARAMETER SkipAutopilot
+
+.PARAMETER SkipODT
+
+.PARAMETER ZTI
+
+.PARAMETER OSBuild
+Default ParameterSet
+
+.PARAMETER OSEdition
+Default ParameterSet
+Edition of the Windows installation
+
+.PARAMETER OSLanguage
+Default ParameterSet
+Language of the Windows installation
+Alias = Culture, Language
+
+.PARAMETER OSLicense
+
+.PARAMETER FindImageFile
+CustomImage ParameterSet
+
+.PARAMETER ImageFileUrl
+CustomImage ParameterSet
+
+.PARAMETER ImageIndex
+CustomImage ParameterSet
 
 .LINK
 https://osdcloud.osdeploy.com/
@@ -23,18 +51,14 @@ https://osdcloud.osdeploy.com/
 function Start-OSDCloud {
     [CmdletBinding(DefaultParameterSetName = 'Default')]
     param (
+        [switch]$Firmware,
+
         [string]$Manufacturer = (Get-MyComputerManufacturer -Brief),
-
         [string]$Product = (Get-MyComputerProduct),
-
         [switch]$Restart,
-
         [switch]$Screenshot,
-
         [switch]$SkipAutopilot,
-
         [switch]$SkipODT,
-
         [switch]$ZTI,
 
         [Parameter(ParameterSetName = 'Default')]
@@ -73,13 +97,13 @@ function Start-OSDCloud {
         [int32]$ImageIndex = 1
     )
     #=================================================
-    #	Create Hashtable
+    #	$Global:StartOSDCloud
     #=================================================
     $Global:StartOSDCloud = $null
     $Global:StartOSDCloud = [ordered]@{
         ApplyManufacturerDrivers = $true
         ApplyCatalogDrivers = $true
-        ApplyCatalogFirmware = $true
+        ApplyCatalogFirmware = $false
         AutopilotJsonChildItem = $null
         AutopilotJsonItem = $null
         AutopilotJsonName = $null
@@ -130,6 +154,15 @@ function Start-OSDCloud {
         TimeStart = Get-Date
         ZTI = $ZTI
     }
+    #=================================================
+    #	Parameters
+    #=================================================
+    if ($Firmware) {
+        $Global:StartOSDCloud.ApplyCatalogFirmware = $true
+    }
+    #=================================================
+    #	$Global:StartOSDCloudGUI
+    #=================================================
     if ($Global:StartOSDCloudGUI) {
         foreach ($Key in $Global:StartOSDCloudGUI.Keys) {
             $Global:StartOSDCloud.$Key = $Global:StartOSDCloudGUI.$Key

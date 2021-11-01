@@ -505,7 +505,7 @@ function Invoke-OSDCloud {
         New-Item -Path 'C:\Windows\Setup\Scripts' -ItemType Directory -Force -ErrorAction Stop | Out-Null
     }
     #=================================================
-    #	Manufacturer Drivers
+    #	ApplyManufacturerDrivers = TRUE
     #=================================================
     $SaveMyDriverPack = $null
     if ($Global:OSDCloud.ApplyManufacturerDrivers -eq $true) {
@@ -552,20 +552,30 @@ function Invoke-OSDCloud {
     }
     #=================================================
     #	ApplyCatalogFirmware
+    #   This section will download any available
+    #   Firmware updates from Microsoft Update Catalog
     #=================================================
+    Write-Host -ForegroundColor DarkGray "================================================"
+    Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Microsoft Catalog Firmware Update"
+
     if ((Get-MyComputerModel) -match 'Virtual') {
-        #Do Nothing
+        $Global:OSDCloud.ApplyCatalogFirmware = $false
     }
-    elseif ($Global:OSDCloud.ApplyCatalogFirmware -eq $true) {
+
+    if ($Global:OSDCloud.ApplyCatalogFirmware -eq $false) {
+        Write-Host -ForegroundColor DarkGray "Microsoft Catalog Firmware Update is not enabled for this deployment"
+    }
+    else {
         if (Test-WebConnectionMsUpCat) {
-            Write-Host -ForegroundColor DarkGray "================================================"
-            Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Save-SystemFirmwareUpdate"
             Write-Host -ForegroundColor DarkGray "Firmware Updates will be downloaded from Microsoft Update Catalog to C:\Drivers"
-            Write-Host -ForegroundColor DarkGray "If the downloaded Firmware Update is newer than the existing Firmware, it will be installed"
-            Write-Host -ForegroundColor DarkGray "This doesn't always work 100% in testing on some systems"
+            Write-Host -ForegroundColor DarkGray "Some systems do not support a driver Firmware Update"
+            Write-Host -ForegroundColor DarkGray "You may have to enable this setting in your BIOS or Firmware Settings"
             Write-Host -ForegroundColor Gray "Command: Save-SystemFirmwareUpdate -DestinationDirectory 'C:\Drivers\Firmware'"
     
             Save-SystemFirmwareUpdate -DestinationDirectory 'C:\Drivers\Firmware'
+        }
+        else {
+            #TODO add some notification
         }
     }
     #=================================================
