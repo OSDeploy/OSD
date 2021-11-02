@@ -14,112 +14,60 @@ function Get-OSDDriverIntelDisplay {
     [CmdletBinding()]
     param ()
     #=================================================
-    #   Uri
+    #   DriverWebPages
     #=================================================
-    $Uri = 'https://downloadcenter.intel.com/product/80939/Graphics-Drivers'
-    #=================================================
-    #   DriverWebContentRaw
-    #=================================================
-    $DriverWebContentRaw = @()
-    Write-Verbose "OSD: Get Latest Driver Versions $Uri" -Verbose
-    try {
-        $DriverWebContentRaw = (Invoke-WebRequest $Uri).Links
-    }
-    catch {
-        Write-Error "OSDDrivers uses Internet Explorer to parse the HTML data.  Make sure you can open the URL in Internet Explorer and that you dismiss any first run wizards" -ErrorAction Stop
-    }
-    #=================================================
-    #   DriverWebContent
-    #=================================================
-    $DriverWebContent = @()
-    $DriverWebContent = $DriverWebContentRaw
-    #=================================================
-    #   Filter Results
-    #=================================================
-    $DriverWebContent = $DriverWebContent | Select-Object -Property innerText, href
-    $DriverWebContent = $DriverWebContent | Where-Object {$_.innerText -notlike "*Beta*"}
-    $DriverWebContent = $DriverWebContent | Where-Object {$_.innerText -notlike "*embedded*"}
-    $DriverWebContent = $DriverWebContent | Where-Object {$_.innerText -notlike "*exe*"}
-    $DriverWebContent = $DriverWebContent | Where-Object {$_.innerText -notlike "*production*"}
-    $DriverWebContent = $DriverWebContent | Where-Object {$_.innerText -notlike "*Radeon*"}
-    $DriverWebContent = $DriverWebContent | Where-Object {$_.innerText -notlike "*Windows XP*"}
-    $DriverWebContent = $DriverWebContent | Where-Object {$_.innerText -notlike "*XP32*"}
-    $DriverWebContent = $DriverWebContent | Where-Object {$_.href -like "/download*"}
-
-    foreach ($DriverLink in $DriverWebContent) {
-        $DriverLink.innerText = ($DriverLink).innerText.replace('][',' ')
-        $DriverLink.innerText = $DriverLink.innerText -replace '[[]', ''
-        $DriverLink.innerText = $DriverLink.innerText -replace '[]]', ''
-        $DriverLink.innerText = $DriverLink.innerText -replace '[®]', ''
-        $DriverLink.innerText = $DriverLink.innerText -replace '[*]', ''
-    }
-
-    foreach ($DriverLink in $DriverWebContent) {
-        if ($DriverLink.innerText -like "*Graphics Media Accelerator*") {$DriverLink.innerText = 'Intel Graphics MA'} #Win7
-        if ($DriverLink.innerText -like "*HD Graphics*") {$DriverLink.innerText = 'Intel Graphics HD'} #Win7
-        if ($DriverLink.innerText -like "*15.33*") {$DriverLink.innerText = 'Intel Graphics 15.33'} #Win7 #Win10
-        if ($DriverLink.innerText -like "*15.36*") {$DriverLink.innerText = 'Intel Graphics 15.36'} #Win7
-        if ($DriverLink.innerText -like "*Intel Graphics Driver for Windows 15.40*") {$DriverLink.innerText = 'Intel Graphics 15.40'} #Win7
-        if ($DriverLink.innerText -like "*15.40 6th Gen*") {$DriverLink.innerText = 'Intel Graphics 15.40 G6'} #Win7
-        if ($DriverLink.innerText -like "*15.40 4th Gen*") {$DriverLink.innerText = 'Intel Graphics 15.40 G4'} #Win10
-        if ($DriverLink.innerText -like "*15.45*") {$DriverLink.innerText = 'Intel Graphics 15.45'} #Win7
-        if ($DriverLink.innerText -like "*DCH*") {$DriverLink.innerText = 'Intel Graphics DCH'} #Win10
-        $DriverLink.href = "https://downloadcenter.intel.com$($DriverLink.href)"
-    }
-
-    $DriverWebContent = $DriverWebContent | Where-Object {$_.innerText -notlike "*Intel Graphics 15.40 G4*"}
-    $DriverWebContent = $DriverWebContent | Where-Object {$_.innerText -notlike "*Intel Graphics 15.40 G6*"}
-
-
-
-
-
-    $IntelDriverUrls = @(
+    $DriverWebPages = @(
         'https://intel.com/content/www/us/en/download/19344/intel-graphics-windows-dch-drivers.html'
-        'https://intel.com/content/www/us/en/download/18424/intel-graphics-driver-for-windows-7-8-1-15-36.html'
+        'https://intel.com/content/www/us/en/download/19387/intel-graphics-beta-windows-dch-drivers.html'
+        'https://intel.com/content/www/us/en/download/19282/radeon-rx-vega-m-graphics.html'
         'https://intel.com/content/www/us/en/download/18799/intel-graphics-driver-for-windows-15-45.html'
+        'https://intel.com/content/www/us/en/download/18369/intel-graphics-driver-for-windows-15-40.html'
+        'https://intel.com/content/www/us/en/download/18563/intel-graphics-driver-for-windows-7-8-1-15-40-6th-gen.html'
+        'https://intel.com/content/www/us/en/download/18424/intel-graphics-driver-for-windows-7-8-1-15-36.html'
         'https://intel.com/content/www/us/en/download/18606/intel-graphics-driver-for-windows-15-33.html'
+        'https://intel.com/content/www/us/en/download/18338/intel-hd-graphics-production-driver-for-windows-10-64-bit-n-series.html'
+        'https://intel.com/content/www/us/en/download/18301/intel-hd-graphics-production-driver-for-windows-10-32-bit-n-series.html'
     )
-
-
-
-
     #=================================================
     #   ForEach
     #=================================================
-    $UrlDownloads = @()
+    $ZipFileResults = @()
     $DriverResults = @()
-<#     $DriverResults = foreach ($DriverLink in $DriverWebContent) {
-        $DriverResultsName = $($DriverLink.innerText)
-        $DriverInfo = $($DriverLink.href)
-        Write-Verbose "OSD: $DriverResultsName $DriverInfo" -Verbose #>
-    $DriverResults = foreach ($DriverLink in $IntelDriverUrls) {
-        $DriverResultsName = $($DriverLink.innerText)
-        $DriverInfo = $DriverLink
-        Write-Verbose "OSD: $DriverInfo" -Verbose
+    $DriverResults = foreach ($DriverWebPage in $DriverWebPages) {
+        if ($DriverWebPage -match '19344'){$DriverResultsName = 'Intel Graphics DCH'}
+        if ($DriverWebPage -match '19387'){$DriverResultsName = 'Intel Graphics DCH Beta'}
+        if ($DriverWebPage -match '19282'){$DriverResultsName = 'Intel Radeon RX Vega M'}
+        if ($DriverWebPage -match '18799'){$DriverResultsName = 'Intel Graphics 15.45'}
+        if ($DriverWebPage -match '18563'){$DriverResultsName = 'Intel Graphics 15.40'}
+        if ($DriverWebPage -match '18424'){$DriverResultsName = 'Intel Graphics 15.36'}
+        if ($DriverWebPage -match '18606'){$DriverResultsName = 'Intel Graphics 15.33'}
+        if ($DriverWebPage -match '18338'){$DriverResultsName = 'Intel Graphics HD N Series'}
+        if ($DriverWebPage -match '18301'){$DriverResultsName = 'Intel Graphics HD N Series'}
+        $DriverInfo = $DriverWebPage
+        Write-Verbose "DriverInfo: $DriverInfo" -Verbose
         #=================================================
         #   Intel WebRequest
         #=================================================
-        $DriverInfoContent = Invoke-WebRequest -Uri $DriverInfo -Method Get
+        $DriverWebPageContent = Invoke-WebRequest -Uri $DriverInfo -Method Get
 
-        $DriverInfoContent | ogv -Wait
-
-        $DriverHTML = $DriverInfoContent.ParsedHtml.childNodes | Where-Object {$_.nodename -eq 'HTML'} 
+        $DriverHTML = $DriverWebPageContent.ParsedHtml.childNodes | Where-Object {$_.nodename -eq 'HTML'} 
         $DriverHEAD = $DriverHTML.childNodes | Where-Object {$_.nodename -eq 'HEAD'}
-        $DriverMETA = $DriverHEAD.childNodes | Where-Object {$_.nodename -like "meta*"}
+        $DriverMETA = $DriverHEAD.childNodes | Where-Object {$_.nodename -like "meta*"} | Select-Object -Property Name, Content
+        $DriverCONTENT = $DriverWebPageContent.Content
 
         #$DriverType = $DriverMETA | Where-Object {$_.name -eq 'DownloadType'} | Select-Object -ExpandProperty Content
-        #$DriverCompatibility = $DriverMETA | Where-Object {$_.name -eq 'DownloadOSes'} | Select-Object -ExpandProperty Content
-        #Write-Verbose "DriverCompatibility: $DriverCompatibility" -Verbose
+        $DriverCompatibility = $DriverMETA | Where-Object {$_.name -eq 'DownloadOSes'} | Select-Object -ExpandProperty Content
+        Write-Verbose "DriverCompatibility: $DriverCompatibility" -Verbose
         #=================================================
         #   Driver Filter
         #=================================================
-        $UrlDownloads = ($DriverInfoContent).Links
-        $UrlDownloads = $UrlDownloads | Where-Object {$_.'data-direct-path' -like "*.zip"}
+        $ZipFileResults = @($DriverCONTENT -split " " -split '"' -match 'http' -match ".zip")
+        $ZipFileResults = $ZipFileResults | Select-Object -Unique
         #=================================================
         #   Driver Details
         #=================================================
-        foreach ($UrlDownload in $UrlDownloads) {
+        foreach ($DriverZipFile in $ZipFileResults) {
+            Write-Verbose "$DriverZipFile" -Verbose
             #=================================================
             #   Defaults
             #=================================================
@@ -191,11 +139,12 @@ function Get-OSDDriverIntelDisplay {
             #=================================================
             #   DriverUrl
             #=================================================
-            $DriverUrl = $UrlDownload.'data-direct-path'
+            #$DriverUrl = $DriverZipFile.'data-direct-path'
+            $DriverUrl = $DriverZipFile
             #=================================================
             #   OsArch
             #=================================================
-            if (($DriverUrl -match 'Win64') -or ($DriverUrl -match 'Driver64') -or ($DriverUrl -match '64_') -or ($DriverInfo -match '64-Bit')) {
+            if (($DriverWebPage -match '19344') -or ($DriverUrl -match 'Win64') -or ($DriverUrl -match 'Driver64') -or ($DriverUrl -match '64_') -or ($DriverInfo -match '64-Bit')) {
                 $OsArch = 'x64'
             } else {
                 $OsArch = 'x86'
@@ -206,7 +155,7 @@ function Get-OSDDriverIntelDisplay {
             if ($DriverResultsName -eq 'Intel Graphics MA') {
                 $OsVersion = @('6.1')
             } 
-            if ($DriverResultsName -eq 'Intel Graphics HD') {
+            if ($DriverResultsName -match 'Intel Graphics HD') {
                 $OsVersion = @('6.1','6.3')
             }
             if ($DriverResultsName -eq 'Intel Graphics 15.33') {
@@ -221,17 +170,21 @@ function Get-OSDDriverIntelDisplay {
             if ($DriverResultsName -eq 'Intel Graphics 15.45') {
                 $OsVersion = @('6.1','6.3')
             }
-            if ($DriverResultsName -eq 'Intel Graphics DCH') {
+            if ($DriverResultsName -match 'Intel Graphics DCH') {
+                $OsVersion = @('10.0')
+                $OsArch = 'x64'
+            }
+            if ($DriverResultsName -match 'Radeon') {
                 $OsVersion = @('10.0')
                 $OsArch = 'x64'
             }
             #=================================================
             #   Values
             #=================================================
-            $DriverName = "$OSDGroup $DriverVersion $OsArch $OsVersion"
+            $DriverName = "$OSDGroup $DriverVersion $OsArch"
             $DriverGrouping = "$DriverResultsName $OsArch $OsVersion"
             $DriverDescription = $DriverMETA | Where-Object {$_.name -eq 'Description'} | Select-Object -ExpandProperty Content
-            $DriverInfo = $DriverLink.href
+            $DriverInfo = $DriverWebPage
             $DownloadFile = Split-Path $DriverUrl -Leaf
             $OSDPnpClass = 'Display'
             $OSDPnpClassGuid = '{4D36E968-E325-11CE-BFC1-08002BE10318}'
