@@ -65,7 +65,7 @@ function Save-WebFile {
         #=================================================
         $SourceUrl = [Uri]::EscapeUriString($SourceUrl)
 
-        if (Get-Command 'curl.exe') {
+        if (Test-CommandCurlExe) {
             Write-Verbose "cURL: $SourceUrl"
     
             if ($host.name -match 'ConsoleHost') {

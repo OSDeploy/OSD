@@ -270,6 +270,7 @@ function Get-OSDDriverIntelDisplay {
     #   Sort-Object
     #=================================================
     $DriverResults = $DriverResults | Sort-Object -Property LastUpdate -Descending
+    $DriverResults | ConvertTo-Json | Out-File "$env:TEMP\OSDDriverIntelDisplay.json"
     #=================================================
     #   Return
     #=================================================
