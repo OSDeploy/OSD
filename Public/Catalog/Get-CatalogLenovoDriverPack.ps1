@@ -24,8 +24,8 @@ function Get-CatalogLenovoDriverPack {
 	$CatalogState           = 'Online' #Online, Build, Local, Offline
     #$DownloadsBaseUrl       = 'http://downloads.Lenovo.com/'
 	$CatalogOnlinePath      = 'https://download.lenovo.com/cdrt/td/catalogv2.xml'
-	$CatalogBuildPath       = Join-Path $env:TEMP 'catalogv2.xml'
-	$CatalogLocalPath  		= Join-Path $env:TEMP 'CatalogLenovoDriverPack.xml'
+	$CatalogBuildPath       = Join-Path $env:TEMP (Join-Path 'OSD' 'catalogv2.xml')
+	$CatalogLocalPath  		= Join-Path $env:TEMP (Join-Path 'OSD' 'CatalogLenovoDriverPack.xml')
 	$CatalogOfflinePath     = "$($MyInvocation.MyCommand.Module.ModuleBase)\Catalogs\CatalogLenovoDriverPack.xml"
 	#$CatalogLocalCabName  	= [string]($CatalogOnlinePath | Split-Path -Leaf)
     #$CatalogLocalCabPath 	= Join-Path $env:TEMP $CatalogLocalCabName
@@ -33,7 +33,7 @@ function Get-CatalogLenovoDriverPack {
     #   Test CatalogState Local
     #=================================================
     if (Test-Path $CatalogLocalPath) {
-
+		Write-Verbose "Catalog already downloaded to $CatalogLocalPath"
 		#Get-Item to determine the age
         $GetItemCatalogLocalPath = Get-Item $CatalogLocalPath
 
@@ -50,9 +50,10 @@ function Get-CatalogLenovoDriverPack {
     #=================================================
 	if ($CatalogState -eq 'Online') {
 		if (Test-WebConnection -Uri $CatalogOnlinePath) {
-			#Catalog is online and can be downloaded
+			Write-Verbose "Catalog is Online"
 		}
 		else {
+			Write-Verbose "Catalog is Offline"
 			$CatalogState = 'Offline'
 		}
 	}
@@ -63,13 +64,16 @@ function Get-CatalogLenovoDriverPack {
 	if ($CatalogState -eq 'Online') {
 		Write-Verbose "Source: $CatalogOnlinePath"
 		Write-Verbose "Destination: $CatalogBuildPath"
-        Save-WebFile -SourceUrl $CatalogOnlinePath -DestinationDirectory $env:Temp -DestinationName catalogv2.xml -Overwrite | Out-Null
+		Write-Verbose "Downloading Online Catalog"
+        Save-WebFile -SourceUrl $CatalogOnlinePath -DestinationName 'catalogv2.xml' -Overwrite | Out-Null
 
 		#Make sure the file downloaded
 		if (Test-Path $CatalogBuildPath) {
+			Write-Verbose "Catalog downloaded to $CatalogBuildPath"
 			$CatalogState = 'Build'
 		}
 		else {
+			Write-Verbose "Catalog was NOT downloaded to $CatalogBuildPath"
 			$CatalogState = 'Offline'
 		}
 	}
@@ -78,7 +82,7 @@ function Get-CatalogLenovoDriverPack {
     #=================================================
 	if ($CatalogState -eq 'Build') {
 		Write-Verbose "Reading the System Catalog at $CatalogBuildPath"
-		[xml]$XmlCatalogContent = Get-Content -Path "$env:Temp\catalogv2.xml" -Raw
+		[xml]$XmlCatalogContent = Get-Content -Path "$env:Temp\OSD\catalogv2.xml" -Raw
 
 		$ModelList = $XmlCatalogContent.ModelList.Model
 		#=================================================
