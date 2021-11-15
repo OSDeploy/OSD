@@ -85,22 +85,26 @@ function Get-WSUSXML {
         'Office 2016 64-Bit'            {$WSUSXMLCatalogs = $WSUSXMLCatalogs | Where-Object {$_.BaseName -match 'Office 2016'}}
         'Windows' {
             $WSUSXMLCatalogs = $WSUSXMLCatalogs | Where-Object {$_.BaseName -match 'Windows'}
+            $WSUSXMLCatalogs = $WSUSXMLCatalogs | Where-Object {$_.BaseName -notmatch 'Enablement'}
             $WSUSXMLCatalogs = $WSUSXMLCatalogs | Where-Object {$_.BaseName -notmatch 'FeatureUpdate'}
         }
         'Windows Client' {
             $WSUSXMLCatalogs = $WSUSXMLCatalogs | Where-Object {$_.BaseName -match 'Windows'}
-            $WSUSXMLCatalogs = $WSUSXMLCatalogs | Where-Object {$_.BaseName -notmatch 'Server'}
             $WSUSXMLCatalogs = $WSUSXMLCatalogs | Where-Object {$_.BaseName -notmatch 'Dynamic Update'}
+            $WSUSXMLCatalogs = $WSUSXMLCatalogs | Where-Object {$_.BaseName -notmatch 'Enablement'}
             $WSUSXMLCatalogs = $WSUSXMLCatalogs | Where-Object {$_.BaseName -notmatch 'FeatureUpdate'}
+            $WSUSXMLCatalogs = $WSUSXMLCatalogs | Where-Object {$_.BaseName -notmatch 'Server'}
         }
         'Windows 10' {
             $WSUSXMLCatalogs = $WSUSXMLCatalogs | Where-Object {$_.BaseName -match 'Windows 10'}
             $WSUSXMLCatalogs = $WSUSXMLCatalogs | Where-Object {$_.BaseName -notmatch 'Dynamic Update'}
+            $WSUSXMLCatalogs = $WSUSXMLCatalogs | Where-Object {$_.BaseName -notmatch 'Enablement'}
             $WSUSXMLCatalogs = $WSUSXMLCatalogs | Where-Object {$_.BaseName -notmatch 'FeatureUpdate'}
         }
         'Windows 11' {
             $WSUSXMLCatalogs = $WSUSXMLCatalogs | Where-Object {$_.BaseName -match 'Windows 11'}
             $WSUSXMLCatalogs = $WSUSXMLCatalogs | Where-Object {$_.BaseName -notmatch 'Dynamic Update'}
+            $WSUSXMLCatalogs = $WSUSXMLCatalogs | Where-Object {$_.BaseName -notmatch 'Enablement'}
             $WSUSXMLCatalogs = $WSUSXMLCatalogs | Where-Object {$_.BaseName -notmatch 'FeatureUpdate'}
         }
         'Windows 10 Dynamic Update' {$WSUSXMLCatalogs = $WSUSXMLCatalogs | Where-Object {$_.BaseName -eq $Catalog}}

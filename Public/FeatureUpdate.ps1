@@ -27,7 +27,7 @@ function Get-FeatureUpdate {
     #=================================================
     #   Import Local FeatureUpdates
     #=================================================
-    $GetFeatureUpdate = Import-Clixml "$($MyInvocation.MyCommand.Module.ModuleBase)\Catalogs\FeatureUpdate\Catalog.xml"
+    $GetFeatureUpdate = Get-WSUSXML -Catalog FeatureUpdate
     #=================================================
     #   Filter Compatible
     #=================================================

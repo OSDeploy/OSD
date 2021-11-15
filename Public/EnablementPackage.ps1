@@ -11,7 +11,7 @@ function Get-EnablementPackage {
     #=================================================
     #   Import Local EnablementPackage
     #=================================================
-    $Result = Import-Clixml "$($MyInvocation.MyCommand.Module.ModuleBase)\Catalogs\EnablementPackage\Catalog.xml"
+    $Result = Get-WSUSXML -Catalog Enablement
     #=================================================
     #   Filter Compatible
     #=================================================
