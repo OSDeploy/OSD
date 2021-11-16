@@ -4,7 +4,7 @@
 RootModule = 'OSD.psm1'
 
 # Version number of this module.
-ModuleVersion = '21.11.14.1'
+ModuleVersion = '21.11.16.1'
 
 # Supported PSEditions
 # CompatiblePSEditions = @()
