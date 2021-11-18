@@ -34,7 +34,9 @@ function Get-SessionsXml {
         #=================================================
         #   Mount Path
         #=================================================
-        if ($SessionsXml -notmatch 'Sessions.xml') {$SessionsXml = "$Path\Windows\Servicing\Sessions\Sessions.xml"}
+        if ($SessionsXml -notmatch 'Sessions.xml') {
+            $SessionsXml = "$Path\Windows\Servicing\Sessions\Sessions.xml"
+        }
         #=================================================
         #   Test-Path
         #=================================================
