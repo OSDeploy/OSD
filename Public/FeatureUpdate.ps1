@@ -70,6 +70,9 @@ function Save-FeatureUpdate {
         [Alias ('DownloadFolder','Path')]
         [string]$DownloadPath = 'C:\OSDCloud\OS',
 
+        [ValidateSet('Windows 10','Windows 11')]
+        [string]$OSVersion = 'Windows 10',
+
         [ValidateSet('Retail','Volume')]
         [Alias('License')]
         [string]$OSLicense = 'Volume',
@@ -93,7 +96,7 @@ function Save-FeatureUpdate {
     #=================================================
     #   Get-FeatureUpdate
     #=================================================
-    $GetFeatureUpdate = Get-FeatureUpdate -OSLicense $OSLicense -OSBuild $OSBuild -OSLanguage $OSLanguage
+    $GetFeatureUpdate = Get-FeatureUpdate -OSVersion $OSVersion -OSBuild $OSBuild -OSLanguage $OSLanguage -OSLicense $OSLicense
     #=================================================
     #   SaveWebFile
     #=================================================

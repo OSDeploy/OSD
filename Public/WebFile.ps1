@@ -15,10 +15,12 @@ function Save-WebFile {
     [CmdletBinding()]
     param (
         #URL of the file to download
-        [Parameter(Position = 0, Mandatory = $true, ValueFromPipeline)]
+        [Parameter(Position = 0, Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
+        [Alias('FileUri')]
         [string]$SourceUrl,
 
-        #Destination File Name
+        [Parameter(ValueFromPipelineByPropertyName = $true)]
+        [Alias('FileName')]
         [string]$DestinationName,
 
         #Destination Folder

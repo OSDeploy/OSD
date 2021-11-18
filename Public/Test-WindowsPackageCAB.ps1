@@ -1,4 +1,4 @@
-function Test-CombinedWindowsPackage {
+function Test-WindowsPackageCAB {
     [CmdletBinding()]
     param (
         [string]$PackagePath
@@ -17,13 +17,16 @@ function Test-CombinedWindowsPackage {
             Write-Verbose -Verbose $WinPackage.PackageName
         }
         if ($WinPackage.PackageName -match 'OnePackage') {
-            $true
+            Write-Output 'CombinedMSU'
         }
         elseif ($WinPackage.PackageName -match 'Multiple_Packages') {
-            $true
+            Write-Output 'CombinedLCU'
         }
-        else {
-            $false
+        elseif ($WinPackage.PackageName -match 'DotNetRollup') {
+            Write-Output 'DotNetCU'
+        }
+        elseif ($WinPackage.PackageName -match 'ServicingStack') {
+            Write-Output 'SSU'
         }
     }
 }

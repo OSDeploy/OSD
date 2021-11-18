@@ -1,4 +1,4 @@
-function Start-WimRobotCLI {
+function Start-DEVWimRobotCLI {
     [CmdletBinding()]
     param (
         [Parameter(Mandatory = $true)]
