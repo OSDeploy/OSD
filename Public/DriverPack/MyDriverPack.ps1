@@ -2,7 +2,9 @@ function Get-MyDriverPack {
     [CmdletBinding()]
     param (
         [string]$Manufacturer = (Get-MyComputerManufacturer -Brief),
-        [string]$Product = (Get-MyComputerProduct)
+        [string]$Product = (Get-MyComputerProduct),
+        [ValidateSet('Win10','Win11')]
+        [string]$OsCode = 'Win10'
     )
     #=================================================
     #   Set ErrorActionPreference
@@ -13,7 +15,14 @@ function Get-MyDriverPack {
     #=================================================
     if ($Manufacturer -eq 'Dell') {
         $Result = Get-DellDriverPack | Where-Object {($_.Product -contains $Product)}
-        $Result[0]
+        if ($OsCode -eq 'Win10') {
+            $Result = $Result | Where-Object {($_.SupportedOperatingSystems -contains 'Windows 10 x64')}
+            $Result[0]
+        }
+        if ($OsCode -eq 'Win11') {
+            $Result = $Result | Where-Object {($_.SupportedOperatingSystems -contains 'Windows 11 x64')}
+            $Result[0]
+        }
     }
     elseif ($Manufacturer -eq 'HP') {
         $Result = Get-HpDriverPack | Where-Object {($_.Product -contains $Product)}
@@ -39,10 +48,13 @@ function Save-MyDriverPack {
         [string]$DownloadPath = 'C:\Drivers',
         [switch]$Expand,
         [string]$Manufacturer = (Get-MyComputerManufacturer -Brief),
-        [string]$Product = (Get-MyComputerProduct)
+        [string]$Product = (Get-MyComputerProduct),
+        [ValidateSet('Win10','Win11')]
+        [string]$OsCode = 'Win10'
     )
     Write-Verbose "Manufacturer: $Manufacturer"
     Write-Verbose "Product: $Product"
+    Write-Verbose "OsCode: $OsCode"
     #=================================================
     #   Block
     #=================================================
@@ -51,7 +63,7 @@ function Save-MyDriverPack {
     #=================================================
     #   Get-MyDriverPack
     #=================================================
-    $GetMyDriverPack = Get-MyDriverPack -Manufacturer $Manufacturer -Product $Product
+    $GetMyDriverPack = Get-MyDriverPack -Manufacturer $Manufacturer -Product $Product -OsCode $OsCode
 
     if ($GetMyDriverPack) {
         $GetMyDriverPack

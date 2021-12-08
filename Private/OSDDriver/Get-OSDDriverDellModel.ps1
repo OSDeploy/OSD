@@ -186,7 +186,13 @@ function Get-OSDDriverDellModel {
         if ($OsCode -match 'WinPE') {Continue}
         $DriverUrl = "$UrlDownloads/$($item.path)"
         $OsVersion = "$($OsMajor).$($OsMinor)"
-        $DriverName = "$OSDGroup $Generation $Model $OsVersion $DriverVersion"
+        if ($OsCode -eq 'Windows11') {$OsVersion = 'Win11'}
+        if ($Generation -eq '') {
+            $DriverName = "$OSDGroup $Generation $Model $OsVersion $DriverVersion"
+        }
+        else {
+            $DriverName = "$OSDGroup $Generation $Model $OsVersion $DriverVersion"
+        }
         $DriverGrouping = "$Generation $Model $OsVersion"
         if (Test-Path "$DownloadPath\$DownloadFile") {
             $OSDStatus = 'Downloaded'
@@ -206,6 +212,7 @@ function Get-OSDDriverDellModel {
             DriverReleaseId         = $DriverReleaseID
 
             OperatingSystem         = $OperatingSystem
+            OsCode                  = $OsCode
             OsVersion               = $OsVersion
             OsArch                  = $OsArch
             OsBuildMax              = $OsBuildMax
@@ -252,7 +259,7 @@ function Get-OSDDriverDellModel {
     OSDType, OSDGroup, OSDStatus, `
     DriverGrouping, DriverName, Make, Generation, Model, SystemSku,`
     DriverVersion, DriverReleaseId,`
-    OsVersion, OsArch,
+    OsCode, OsVersion, OsArch,
     DownloadFile, SizeMB, DriverUrl, DriverInfo,`
     Hash, OSDGuid, OSDVersion
     #=================================================

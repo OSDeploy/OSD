@@ -174,6 +174,8 @@ function Get-OSDDriverHpModel {
         if ($item.Name -match 'G5') {$Generation = 'G5'}
         if ($item.Name -match 'G6') {$Generation = 'G6'}
         if ($item.Name -match 'G7') {$Generation = 'G7'}
+        if ($item.Name -match 'G8') {$Generation = 'G8'}
+        if ($item.Name -match 'G9') {$Generation = 'G8'}
         #=================================================
         #   SystemFamily
         #=================================================
@@ -204,6 +206,7 @@ function Get-OSDDriverHpModel {
             DriverReleaseId         = $DriverReleaseID
 
             OperatingSystem         = $OperatingSystem
+            OsCode                  = $OsCode
             OsVersion               = $OsVersion
             OsArch                  = $OsArch
             OsBuildMax              = $OsBuildMax

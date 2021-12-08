@@ -3,45 +3,62 @@
 Starts the OSDCloud Windows 10 or 11 Build Process from the OSD Module or a GitHub Repository
 
 .DESCRIPTION
-Starts the OSDCloud Windows 10 or 11 Process from the OSD Module or a GitHub Repository
+Starts the OSDCloud Windows 10 or 11 Build Process from the OSD Module or a GitHub Repository
 
 .PARAMETER Manufacturer
+Automatically populated from Get-MyComputerManufacturer -Brief
+Overrides the System Manufacturer for Driver matching
 
 .PARAMETER Product
+Automatically populated from Get-MyComputerProduct
+Overrides the System Product for Driver matching
+
+.PARAMETER Firmware
+$Global:StartOSDCloud.ApplyCatalogFirmware = $true
 
 .PARAMETER Restart
+Restart the computer after Invoke-OSDCloud to OOBE
+
+.PARAMETER Shutdown
+Shutdown the computer after Invoke-OSDCloud
 
 .PARAMETER Screenshot
-Captures screenshots during OSDCloud
+Captures screenshots during OSDCloud WinPE
 
 .PARAMETER SkipAutopilot
+Skips the Autopilot Task routine
 
 .PARAMETER SkipODT
+Skips the ODT Task routine
 
 .PARAMETER ZTI
+Skip prompting to wipe Disks
 
 .PARAMETER OSBuild
-Default ParameterSet
+ParameterSet Default
+Operating System Build of the Windows installation
+Alias = Build
 
 .PARAMETER OSEdition
-Default ParameterSet
-Edition of the Windows installation
+ParameterSet Default
+Operating System Edition of the Windows installation
+Alias = Edition
 
 .PARAMETER OSLanguage
-Default ParameterSet
-Language of the Windows installation
-Alias = Culture, Language
+ParameterSet Default
+Operating System Language of the Windows installation
+Alias = Culture, OSCulture
 
 .PARAMETER OSLicense
 
 .PARAMETER FindImageFile
-CustomImage ParameterSet
+ParameterSet CustomImage
 
 .PARAMETER ImageFileUrl
-CustomImage ParameterSet
+ParameterSet CustomImage
 
 .PARAMETER ImageIndex
-CustomImage ParameterSet
+ParameterSet CustomImage
 
 .LINK
 https://osdcloud.osdeploy.com/
@@ -51,11 +68,12 @@ https://osdcloud.osdeploy.com/
 function Start-OSDCloud {
     [CmdletBinding(DefaultParameterSetName = 'Default')]
     param (
-        [switch]$Firmware,
-
         [string]$Manufacturer = (Get-MyComputerManufacturer -Brief),
         [string]$Product = (Get-MyComputerProduct),
+
+        [switch]$Firmware,
         [switch]$Restart,
+        [switch]$Shutdown,
         [switch]$Screenshot,
         [switch]$SkipAutopilot,
         [switch]$SkipODT,
@@ -147,6 +165,7 @@ function Start-OSDCloud {
         Product = $Product
         Restart = $Restart
         Screenshot = $Screenshot
+        Shutdown = $Shutdown
         SkipAutopilot = $SkipAutopilot
         SkipAutopilotOOBE = $null
         SkipODT = $SkipODT
@@ -559,10 +578,18 @@ function Start-OSDCloud {
     if ($Global:StartOSDCloud.Product -ne 'None') {
         Write-Host -ForegroundColor DarkGray "================================================"
         Write-Host -ForegroundColor Cyan "Get-MyDriverPack"
-        
-        $Global:StartOSDCloud.GetMyDriverPack = Get-MyDriverPack -Manufacturer $Global:StartOSDCloud.Manufacturer -Product $Global:StartOSDCloud.Product
 
-    
+        if ($OSVersion -eq 'Windows 11') {
+            $Global:StartOSDCloud.GetMyDriverPack = Get-MyDriverPack -Manufacturer $Global:StartOSDCloud.Manufacturer -Product $Global:StartOSDCloud.Product -OsCode 'Win11'
+
+            if (! ($Global:StartOSDCloud.GetMyDriverPack)) {
+                $Global:StartOSDCloud.GetMyDriverPack = Get-MyDriverPack -Manufacturer $Global:StartOSDCloud.Manufacturer -Product $Global:StartOSDCloud.Product -OsCode 'Win10'
+            }
+        }
+        else {
+            $Global:StartOSDCloud.GetMyDriverPack = Get-MyDriverPack -Manufacturer $Global:StartOSDCloud.Manufacturer -Product $Global:StartOSDCloud.Product -OsCode 'Win10'
+        }
+
         if ($Global:StartOSDCloud.GetMyDriverPack) {
             Write-Host -ForegroundColor DarkGray "Name: $($Global:StartOSDCloud.GetMyDriverPack.Name)"
             Write-Host -ForegroundColor DarkGray "Product: $($Global:StartOSDCloud.GetMyDriverPack.Product)"
