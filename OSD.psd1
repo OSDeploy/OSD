@@ -277,7 +277,6 @@ FunctionsToExport =
 'Get-DriverPackIntelWireless',
 'Get-OSDDriverNvidiaDisplay',
 'Test-WindowsPackageCAB',
-'Start-DEVWimRobotCLI',
 'Convert-EsdToFolder',
 'Convert-EsdToIso',
 'Convert-EsdToWim',
