@@ -59,8 +59,9 @@ function Invoke-OSDCloud {
         OSLanguageNames = $null
         OSLicense = $null
         Product = Get-MyComputerProduct
-        Restart = $null
+        Restart = [bool]$false
         Screenshot = $null
+        Shutdown = [bool]$false
         SkipAutopilot = [bool]$false
         SkipAutopilotOOBE = [bool]$false
         SkipODT = [bool]$false
@@ -745,6 +746,15 @@ exit
         Start-Sleep -Seconds 30
         if ($Global:OSDCloud.Test -ne $true) {
             Restart-Computer
+        }
+    }
+    #=================================================
+    if ($Global:OSDCloud.Shutdown) {
+        Write-Warning "WinPE will shutdown in 30 seconds"
+        Write-Warning "Press CTRL + C to cancel"
+        Start-Sleep -Seconds 30
+        if ($Global:OSDCloud.Test -ne $true) {
+            Stop-Computer
         }
     }
     #=================================================
