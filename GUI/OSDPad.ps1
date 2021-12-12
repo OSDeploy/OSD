@@ -96,7 +96,7 @@ $ScriptSelectionControl.Items.Add('New PowerShell Script.ps1') | Out-Null
 if (-NOT (Get-Variable -Name 'New PowerShell Script.ps1' -Scope Global -ErrorAction Ignore)) {
     New-Variable -Name 'New PowerShell Script.ps1' -Value '#Paint on your blank canvas' -Scope Global -Force -ErrorAction Stop
 }
-Write-Host -ForegroundColor DarkGray "================================================"
+Write-Host -ForegroundColor DarkGray "========================================================================="
 #================================================
 #   Set-OSDPadContent
 #================================================
@@ -139,7 +139,7 @@ function Set-OSDPadContent {
             $ScriptTextControl.Visibility = "Collapsed"
         }
     }
-    Write-Host -ForegroundColor DarkGray "================================================"
+    Write-Host -ForegroundColor DarkGray "========================================================================="
 }
 
 Set-OSDPadContent
@@ -187,7 +187,7 @@ $StartButtonControl.add_Click({
         Write-Host -ForegroundColor DarkCyan "Start-Process -WorkingDirectory `"$env:Temp\OSDPad`" -FilePath PowerShell.exe -ArgumentList '-NoLogo -NoExit',`"-File `"$ScriptFile`"`""
         Start-Process -WorkingDirectory "$env:Temp\OSDPad" -FilePath PowerShell.exe -ArgumentList '-NoLogo -NoExit',"-File `"$ScriptFile`""
     }
-    #Write-Host -ForegroundColor DarkGray "================================================"
+    #Write-Host -ForegroundColor DarkGray "========================================================================="
 })
 #================================================
 #   Customizations

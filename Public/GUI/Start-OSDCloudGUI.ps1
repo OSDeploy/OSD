@@ -9,9 +9,9 @@ function Start-OSDCloudGUI {
     #================================================
     #   Header
     #================================================
-    Write-Host -ForegroundColor DarkGray "================================================"
+    Write-Host -ForegroundColor DarkGray "========================================================================="
     Write-Host -ForegroundColor Green "Start-OSDCloudGUI"
-    Write-Host -ForegroundColor DarkGray "================================================"
+    Write-Host -ForegroundColor DarkGray "========================================================================="
     #================================================
     #   Branding
     #================================================

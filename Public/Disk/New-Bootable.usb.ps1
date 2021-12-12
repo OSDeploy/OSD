@@ -17,7 +17,7 @@ function New-Bootable.usb {
     #=================================================
     $ErrorActionPreference = 'Stop'
     $MinimumSizeGB = 7
-    $MaximumSizeGB = 1800
+    $MaximumSizeGB = 2000
     #=================================================
     #	Block
     #=================================================
@@ -81,7 +81,7 @@ function New-Bootable.usb {
         $GetUSBDisk | Initialize-Disk -PartitionStyle MBR -ErrorAction Stop
     }
 
-    if ($GetUSBDisk.SizeGB -lt 1800) {
+    if ($GetUSBDisk.SizeGB -le 2000) {
         Write-Verbose -Verbose '$DataDisk = $GetUSBDisk | New-Partition -Size ($GetUSBDisk.Size - 2GB) -AssignDriveLetter | Format-Volume -FileSystem NTFS -NewFileSystemLabel $DataLabel'
         $DataDisk = $GetUSBDisk | New-Partition -Size ($GetUSBDisk.Size - 2GB) -AssignDriveLetter | Format-Volume -FileSystem NTFS -NewFileSystemLabel $DataLabel -ErrorAction Stop
         

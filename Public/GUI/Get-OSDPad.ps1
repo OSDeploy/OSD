@@ -99,7 +99,7 @@ public class TrustAllCertsPolicy : ICertificatePolicy {
         #$GitHubApiContent = $GitHubApiContent | Where-Object {$_.type -eq 'file'} | Where-Object {($_.name -match 'README.md') -or ($_.name -like "*.ps1")}
         $GitHubApiContent = $GitHubApiContent | Where-Object {($_.type -eq 'dir') -or ($_.name -like "*.md") -or ($_.name -like "*.ps1")}
 
-        Write-Host -ForegroundColor DarkGray "================================================"
+        Write-Host -ForegroundColor DarkGray "========================================================================="
         $Results = foreach ($Item in $GitHubApiContent) {
             #$FileContent = Invoke-RestMethod -UseBasicParsing -Uri $Item.git_url
             if ($Item.type -eq 'dir') {
