@@ -1,112 +1,5 @@
 <#
 .SYNOPSIS
-Clear, Initialize, 2 Partition, and Format a USB Disk for use with OSDCloud
-
-.Description
-Clear, Initialize, 2 Partition, and Format a USB Disk for use with OSDCloud
-
-.PARAMETER WorkspacePath
-Directory for the Workspace.  Contains the Media directory
-
-.LINK
-https://osdcloud.osdeploy.com
-
-.NOTES
-21.3.18     Initial Release
-#>
-function New-OSDCloud.usb {
-    [CmdletBinding(PositionalBinding = $false)]
-    param (
-        [Parameter(ValueFromPipelineByPropertyName = $true)]
-        [string]$WorkspacePath
-    )
-    #=================================================
-    #	Start the Clock
-    #=================================================
-    $osdcloudusbStartTime = Get-Date
-    #=================================================
-    #	Block
-    #=================================================
-    Block-StandardUser
-    Block-WindowsVersionNe10
-    Block-PowerShellVersionLt5
-    Block-WindowsReleaseIdLt1703
-    #=================================================
-    #	Set Variables
-    #=================================================
-    $ErrorActionPreference = 'Stop'
-    $BootLabel = 'OSDBoot'
-    $DataLabel = 'OSDCloud'
-    #=================================================
-    #	Set WorkspacePath
-    #=================================================
-    if ($PSBoundParameters.ContainsKey('WorkspacePath')) {
-        Set-OSDCloud.workspace -WorkspacePath $WorkspacePath -ErrorAction Stop | Out-Null
-    }
-    $WorkspacePath = Get-OSDCloud.workspace -ErrorAction Stop
-    #=================================================
-    #	Setup Workspace
-    #=================================================
-    if (-NOT ($WorkspacePath)) {
-        Write-Warning "You need to provide a path to your Workspace with one of the following examples"
-        Write-Warning "New-OSDCloud.iso -WorkspacePath C:\OSDCloud"
-        Write-Warning "New-OSDCloud.workspace -WorkspacePath C:\OSDCloud"
-        Break
-    }
-
-    if (-NOT (Test-Path $WorkspacePath)) {
-        New-OSDCloud.workspace -WorkspacePath $WorkspacePath -Verbose -ErrorAction Stop
-    }
-
-    if (-NOT (Test-Path "$WorkspacePath\Media")) {
-        New-OSDCloud.workspace -WorkspacePath $WorkspacePath -Verbose -ErrorAction Stop
-    }
-
-    if (-NOT (Test-Path "$WorkspacePath\Media\sources\boot.wim")) {
-        Write-Warning "Nothing is going well for you today my friend"
-        Break
-    }
-    #=================================================
-    #	New-Bootable.usb
-    #=================================================
-    $NewOSDBootUSB = New-Bootable.usb -DataLabel 'OSDCloud'
-    #=================================================
-    #	Get-Partition.usb
-    #=================================================
-    $GetOSDBootPartition = Get-Partition.usb | Where-Object {($_.DiskNumber -eq $NewOSDBootUSB.DiskNumber) -and ($_.PartitionNumber -eq 2)}
-    if (-NOT ($GetOSDBootPartition)) {
-        Write-Warning "Something went very very wrong in this process"
-        Break
-    }
-    $GetUSBDataPartition = Get-Partition.usb | Where-Object {($_.DiskNumber -eq $NewOSDBootUSB.DiskNumber) -and ($_.PartitionNumber -eq 1)}
-    if (-NOT ($GetUSBDataPartition)) {
-        Write-Warning "Something went very very wrong in this process"
-        Break
-    }
-    #=================================================
-    #	Copy OSDCloud
-    #=================================================
-    if ((Test-Path -Path "$WorkspacePath\Media") -and (Test-Path -Path "$($GetOSDBootPartition.DriveLetter):\")) {
-        robocopy "$WorkspacePath\Media" "$($GetOSDBootPartition.DriveLetter):\" *.* /e /ndl /njh /njs /np /r:0 /w:0
-    }
-    if (Test-Path -Path "$WorkspacePath\Autopilot") {
-        robocopy "$WorkspacePath\Autopilot" "$($GetUSBDataPartition.DriveLetter):\OSDCloud\Autopilot" *.* /e /ndl /njh /njs /np /r:0 /w:0
-    }
-    if (Test-Path -Path "$WorkspacePath\ODT") {
-        robocopy "$WorkspacePath\ODT" "$($GetUSBDataPartition.DriveLetter):\OSDCloud\ODT" *.* /e /ndl /njh /njs /np /r:0 /w:0
-    }
-    #=================================================
-    #	Complete
-    #=================================================
-    $osdcloudusbEndTime = Get-Date
-    $osdcloudusbTimeSpan = New-TimeSpan -Start $osdcloudusbStartTime -End $osdcloudusbEndTime
-    Write-Host -ForegroundColor DarkGray    "================================================"
-    Write-Host -ForegroundColor Yellow      "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) $($MyInvocation.MyCommand.Name) " -NoNewline
-    Write-Host -ForegroundColor Cyan        "Completed in $($osdcloudusbTimeSpan.ToString("mm' minutes 'ss' seconds'"))"
-    #=================================================
-}
-<#
-.SYNOPSIS
 Saves OSDCloud to an NTFS Partition on a USB Drive
 
 .DESCRIPTION
@@ -127,6 +20,9 @@ https://osdcloud.osdeploy.com/
 function Save-OSDCloud.usb {
     [CmdletBinding()]
     param (
+        [ValidateSet('Windows 10','Windows 11')]
+        [string]$OSVersion = 'Windows 10',
+
         [ValidateSet('21H2','21H1','20H2','2004','1909','1903','1809')]
         [Alias('Build')]
         [string]$OSBuild,
@@ -158,6 +54,7 @@ function Save-OSDCloud.usb {
     #=================================================
     #	Global Variables
     #=================================================
+    $Global:OSDCloudOSVersion = $OSVersion
     $Global:OSDCloudOSEdition = $OSEdition
     $Global:OSDCloudOSCulture = $OSCulture
     #=================================================
@@ -168,7 +65,7 @@ function Save-OSDCloud.usb {
     #=================================================
     #   Header
     #=================================================
-    Write-Host -ForegroundColor DarkGray "================================================"
+    Write-Host -ForegroundColor DarkGray "========================================================================="
     Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) $($MyInvocation.MyCommand.Name)" -NoNewline
     Write-Host -ForegroundColor Cyan " | Manufacturer: $Manufacturer | Product: $Product"
     Write-Host -ForegroundColor Cyan "OSDCloud content can be saved to an 8GB+ NTFS USB Volume"
@@ -223,8 +120,12 @@ function Save-OSDCloud.usb {
     #=================================================
     #	OSBuild
     #=================================================
-    Write-Host -ForegroundColor DarkGray "================================================"
-    Write-Host -ForegroundColor Cyan "Windows 10 OSBuild " -NoNewline
+    Write-Host -ForegroundColor DarkGray "========================================================================="
+    Write-Host -ForegroundColor Cyan "$OSVersion OSBuild " -NoNewline
+
+    if ($OSVersion -eq 'Windows 11') {
+        $OSBuild = '21H2'
+    }
     
     if ($OSBuild) {
         Write-Host -ForegroundColor Green $OSBuild
@@ -247,7 +148,7 @@ function Save-OSDCloud.usb {
         $OSBuildMenu | Select-Object -Property Selection, Name | Format-Table | Out-Host
         
         do {
-            $SelectReadHost = Read-Host -Prompt "Enter a Selection for the Windows 10 OSBuild"
+            $SelectReadHost = Read-Host -Prompt "Enter a Selection for the $OSVersion OSBuild"
         }
         until (((($SelectReadHost -ge 0) -and ($SelectReadHost -in $OSBuildMenu.Selection))))
         
@@ -258,8 +159,8 @@ function Save-OSDCloud.usb {
     #=================================================
     #	OSEdition
     #=================================================
-    Write-Host -ForegroundColor DarkGray "================================================"
-    Write-Host -ForegroundColor Cyan "Windows 10 OSEdition " -NoNewline
+    Write-Host -ForegroundColor DarkGray "========================================================================="
+    Write-Host -ForegroundColor Cyan "$OSVersion OSEdition " -NoNewline
 
     if ($PSBoundParameters.ContainsKey('OSEdition')) {
         Write-Host -ForegroundColor Green $OSEdition
@@ -282,7 +183,7 @@ function Save-OSDCloud.usb {
         $OSEditionMenu | Select-Object -Property Selection, Name | Format-Table | Out-Host
         
         do {
-            $SelectReadHost = Read-Host -Prompt "Enter a Selection for the Windows 10 OSEdition"
+            $SelectReadHost = Read-Host -Prompt "Enter a Selection for the $OSVersion OSEdition"
         }
         until (((($SelectReadHost -ge 0) -and ($SelectReadHost -in $OSEditionMenu.Selection))))
         
@@ -321,15 +222,15 @@ function Save-OSDCloud.usb {
     #=================================================
     #	OSLicense
     #=================================================
-    Write-Host -ForegroundColor DarkGray "================================================"
-    Write-Host -ForegroundColor Cyan "Windows 10 OSLicense " -NoNewline
+    Write-Host -ForegroundColor DarkGray "========================================================================="
+    Write-Host -ForegroundColor Cyan "$OSVersion OSLicense " -NoNewline
 
     if ($OSLicense) {
         Write-Host -ForegroundColor Green $OSLicense
     }
     else {
         Write-Host -ForegroundColor Cyan "Menu"
-        $OSLicenseNames = @('Retail Windows 10 Consumer Editions','Volume Windows 10 Business Editions')
+        $OSLicenseNames = @('Retail Windows Consumer Editions','Volume Windows Business Editions')
         
         $i = $null
         $OSLicenseMenu = foreach ($Item in $OSLicenseNames) {
@@ -345,7 +246,7 @@ function Save-OSDCloud.usb {
         $OSLicenseMenu | Select-Object -Property Selection, Name | Format-Table | Out-Host
         
         do {
-            $SelectReadHost = Read-Host -Prompt "Enter a Selection for the Windows 10 License"
+            $SelectReadHost = Read-Host -Prompt "Enter a Selection for the $OSVersion License"
         }
         until (((($SelectReadHost -ge 0) -and ($SelectReadHost -in $OSLicenseMenu.Selection))))
         
@@ -387,8 +288,8 @@ function Save-OSDCloud.usb {
     #=================================================
     #	OSLanguage
     #=================================================
-    Write-Host -ForegroundColor DarkGray "================================================"
-    Write-Host -ForegroundColor Cyan "Windows 10 OSLanguage " -NoNewline
+    Write-Host -ForegroundColor DarkGray "========================================================================="
+    Write-Host -ForegroundColor Cyan "$OSVersion OSLanguage " -NoNewline
     
     if ($PSBoundParameters.ContainsKey('OSLanguage')) {
         Write-Host -ForegroundColor Green $OSLanguage
@@ -411,7 +312,7 @@ function Save-OSDCloud.usb {
         $OSLanguageMenu | Select-Object -Property Selection, Name | Format-Table | Out-Host
         
         do {
-            $SelectReadHost = Read-Host -Prompt "Enter a Selection for the Windows 10 OSLanguage"
+            $SelectReadHost = Read-Host -Prompt "Enter a Selection for the $OSVersion OSLanguage"
         }
         until (((($SelectReadHost -ge 0) -and ($SelectReadHost -in $OSLanguageMenu.Selection))))
         
@@ -422,17 +323,22 @@ function Save-OSDCloud.usb {
     #=================================================
     #	Get-FeatureUpdate
     #=================================================
-    Write-Host -ForegroundColor DarkGray "================================================"
+    Write-Host -ForegroundColor DarkGray "========================================================================="
     Write-Host -ForegroundColor Cyan "Get-FeatureUpdate"
-    Write-Host -ForegroundColor DarkGray "Windows 10 x64 | OSLicense: $OSLicense | OSBuild: $OSBuild | OSLanguage: $OSLanguage"
+    Write-Host -ForegroundColor DarkGray "$OSVersion x64 | OSLicense: $OSLicense | OSBuild: $OSBuild | OSLanguage: $OSLanguage"
 
-    $GetFeatureUpdate = Get-FeatureUpdate -OSLicense $OSLicense -OSBuild $OSBuild -OSLanguage $OSLanguage
+    if ($OSVersion -eq 'Windows 11') {
+        $GetFeatureUpdate = Get-FeatureUpdate -OSVersion 'Windows 11' -OSLicense $OSLicense -OSBuild $OSBuild -OSLanguage $OSLanguage
+    }
+    else {
+        $GetFeatureUpdate = Get-FeatureUpdate -OSLicense $OSLicense -OSBuild $OSBuild -OSLanguage $OSLanguage
+    }
 
     if ($GetFeatureUpdate) {
         $GetFeatureUpdate = $GetFeatureUpdate | Select-Object -Property CreationDate,KBNumber,Title,UpdateOS,UpdateBuild,UpdateArch,FileName, @{Name='SizeMB';Expression={[int]($_.Size /1024/1024)}},FileUri,Hash,AdditionalHash
     }
     else {
-        Write-Warning "Unable to locate a Windows 10 Feature Update"
+        Write-Warning "Unable to locate a $OSVersion Feature Update"
         Write-Warning "OSDCloud cannot continue"
         Break
     }
@@ -515,115 +421,5 @@ function Save-OSDCloud.usb {
     Write-Host -ForegroundColor Yellow      "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) $($MyInvocation.MyCommand.Name) " -NoNewline
     Write-Host -ForegroundColor Cyan        "Completed in $($Global:OSDCloudTimeSpan.ToString("mm' minutes 'ss' seconds'"))!"
     explorer $OSDCloudOfflineFullName
-    #=================================================
-}
-function Update-OSDCloud.usb {
-    [CmdletBinding()]
-    param (
-        [switch]$Mirror
-    )
-    #=================================================
-    #	Block
-    #=================================================
-    Block-PowerShellVersionLt5
-    Block-StandardUser
-    #=================================================
-    #	USBBOOT
-    #=================================================
-    $OSDCloudWorkspace = Get-OSDCloud.workspace
-
-    if ($OSDCloudWorkspace){
-        #=================================================
-        #	USBBOOT
-        #=================================================
-        $USBBOOT = Get-Volume.usb | Where-Object {$_.FileSystemLabel -eq 'USBBOOT'}
-    
-        if ($USBBOOT) {
-            Write-Verbose -Verbose "Setting NewFileSystemLabel to OSDBoot"
-            Set-Volume -DriveLetter $USBBOOT.DriveLetter -NewFileSystemLabel 'OSDBoot' -ErrorAction Ignore
-        }
-        #=================================================
-        #	OSDBoot
-        #=================================================
-        $OSDBoot = (Get-Volume.usb | Where-Object {$_.FileSystemLabel -eq 'OSDBoot'}).DriveLetter
-    
-        if ($OSDBoot) {
-            Write-Verbose -Verbose "Updating Volume OSDBoot with content from $OSDCloudWorkspace\Media"
-            
-            if ($PSBoundParameters.ContainsKey('Mirror')) {
-                Write-Verbose -Verbose "Mirroring $OSDCloudWorkspace\Media to $($OSDBoot):\"
-                robocopy "$OSDCloudWorkspace\Media" "$($OSDBoot):\" *.* /mir /ndl /np /njh /njs /b /r:0 /w:0 /zb /xd "$RECYCLE.BIN" "System Volume Information"
-            }
-            else {
-                Write-Verbose -Verbose "Copying $OSDCloudWorkspace\Media to $($OSDBoot):\"
-                robocopy "$OSDCloudWorkspace\Media" "$($OSDBoot):\" *.* /e /ndl /np /njh /njs /b /r:0 /w:0 /zb /xd "$RECYCLE.BIN" "System Volume Information"
-            }
-        }
-        #=================================================
-        #	OSDCloud
-        #=================================================
-        $OSDCloud = (Get-Volume.usb | Where-Object {$_.FileSystemLabel -eq 'OSDCloud'}).DriveLetter
-    
-        if ($OSDCloud) {
-            if ($PSBoundParameters.ContainsKey('Mirror')) {
-                if (Test-Path "$OSDCloudWorkspace\Autopilot") {
-                    Write-Verbose -Verbose "Mirroring $OSDCloudWorkspace\Autopilot to $($OSDCloud):\OSDCloud\Autopilot"
-                    robocopy "$OSDCloudWorkspace\Autopilot" "$($OSDCloud):\OSDCloud\Autopilot" *.* /mir /mt /ndl /njh /njs /r:0 /w:0 /zb /xd "$RECYCLE.BIN" "System Volume Information"
-                }
-                
-                if (Test-Path "$OSDCloudWorkspace\DriverPacks") {
-                    Write-Verbose -Verbose "Mirroring $OSDCloudWorkspace\DriverPacks to $($OSDCloud):\OSDCloud\DriverPacks"
-                    robocopy "$OSDCloudWorkspace\DriverPacks" "$($OSDCloud):\OSDCloud\DriverPacks" *.* /mir /mt /ndl /njh /njs /r:0 /w:0 /zb /xd "$RECYCLE.BIN" "System Volume Information"
-                }
-                
-                if (Test-Path "$OSDCloudWorkspace\ODT") {
-                    Write-Verbose -Verbose "Mirroring $OSDCloudWorkspace\ODT to $($OSDCloud):\OSDCloud\ODT"
-                    robocopy "$OSDCloudWorkspace\ODT" "$($OSDCloud):\OSDCloud\ODT" *.* /mir /mt /ndl /njh /njs /r:0 /w:0 /zb /xd "$RECYCLE.BIN" "System Volume Information"
-                }
-                
-                if (Test-Path "$OSDCloudWorkspace\OS") {
-                    Write-Verbose -Verbose "Mirroring $OSDCloudWorkspace\OS to $($OSDCloud):\OSDCloud\OS"
-                    robocopy "$OSDCloudWorkspace\OS" "$($OSDCloud):\OSDCloud\OS" *.* /mir /mt /ndl /njh /njs /r:0 /w:0 /zb /xd "$RECYCLE.BIN" "System Volume Information"
-                }
-                
-                if (Test-Path "$OSDCloudWorkspace\PowerShell") {
-                    Write-Verbose -Verbose "Mirroring $OSDCloudWorkspace\PowerShell to $($OSDCloud):\OSDCloud\PowerShell"
-                    robocopy "$OSDCloudWorkspace\PowerShell" "$($OSDCloud):\OSDCloud\PowerShell" *.* /mir /mt /ndl /njh /njs /r:0 /w:0 /zb /xd "$RECYCLE.BIN" "System Volume Information"
-                }
-            }
-            else {
-                if (Test-Path "$OSDCloudWorkspace\Autopilot") {
-                    if (Test-Path "$OSDCloudWorkspace\Autopilot") {
-                        Write-Verbose -Verbose "Copying $OSDCloudWorkspace\Autopilot to $($OSDCloud):\OSDCloud\Autopilot"
-                        robocopy "$OSDCloudWorkspace\Autopilot" "$($OSDCloud):\OSDCloud\Autopilot" *.* /e /mt /ndl /njh /njs /r:0 /w:0 /zb /xd "$RECYCLE.BIN" "System Volume Information"
-                    }
-                    
-                    if (Test-Path "$OSDCloudWorkspace\DriverPacks") {
-                        Write-Verbose -Verbose "Copying $OSDCloudWorkspace\DriverPacks to $($OSDCloud):\OSDCloud\DriverPacks"
-                        robocopy "$OSDCloudWorkspace\DriverPacks" "$($OSDCloud):\OSDCloud\DriverPacks" *.* /e /mt /ndl /njh /njs /r:0 /w:0 /zb /xd "$RECYCLE.BIN" "System Volume Information"
-                    }
-                    
-                    if (Test-Path "$OSDCloudWorkspace\ODT") {
-                        Write-Verbose -Verbose "Copying $OSDCloudWorkspace\ODT to $($OSDCloud):\OSDCloud\ODT"
-                        robocopy "$OSDCloudWorkspace\ODT" "$($OSDCloud):\OSDCloud\ODT" *.* /e /mt /ndl /njh /njs /r:0 /w:0 /zb /xd "$RECYCLE.BIN" "System Volume Information"
-                    }
-                    
-                    if (Test-Path "$OSDCloudWorkspace\OS") {
-                        Write-Verbose -Verbose "Copying $OSDCloudWorkspace\OS to $($OSDCloud):\OSDCloud\OS"
-                        robocopy "$OSDCloudWorkspace\OS" "$($OSDCloud):\OSDCloud\OS" *.* /e /mt /ndl /njh /njs /r:0 /w:0 /zb /xd "$RECYCLE.BIN" "System Volume Information"
-                    }
-                    
-                    if (Test-Path "$OSDCloudWorkspace\PowerShell") {
-                        Write-Verbose -Verbose "Copying $OSDCloudWorkspace\PowerShell to $($OSDCloud):\OSDCloud\PowerShell"
-                        robocopy "$OSDCloudWorkspace\PowerShell" "$($OSDCloud):\OSDCloud\PowerShell" *.* /e /mt /ndl /njh /njs /r:0 /w:0 /zb /xd "$RECYCLE.BIN" "System Volume Information"
-                    }
-                }
-            }
-        }
-        #=================================================
-    }
-    else {
-        Write-Warning "Could not find the path to OSDCloud.workspace"
-    }
     #=================================================
 }

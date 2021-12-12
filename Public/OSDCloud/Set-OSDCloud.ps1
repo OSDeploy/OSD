@@ -180,7 +180,7 @@ $UnattendXml = @'
     $Panther = 'C:\Windows\Panther'
     $UnattendPath = "$Panther\Invoke-OSDSpecialize.xml"
 
-    Write-Verbose -Verbose "Setting $UnattendPath"
+    Write-Verbose "Setting $UnattendPath"
     $UnattendXml | Out-File -FilePath $UnattendPath -Encoding utf8 -Width 2000 -Force
     #=================================================
     #	Registry Unattend
@@ -189,7 +189,7 @@ $UnattendXml = @'
     #   The answer file is not required to be named Unattend.xml
     #   https://docs.microsoft.com/en-us/windows-hardware/manufacture/desktop/windows-setup-automation-overview
     #=================================================
-    Write-Verbose -Verbose "Setting Unattend in Offline Registry"
+    Write-Verbose "Setting Unattend in Offline Registry"
     Invoke-Exe reg load HKLM\TempSYSTEM "C:\Windows\System32\Config\SYSTEM"
     Invoke-Exe reg add HKLM\TempSYSTEM\Setup /v UnattendFile /d "C:\Windows\Panther\Invoke-OSDSpecialize.xml" /f
     Invoke-Exe reg unload HKLM\TempSYSTEM

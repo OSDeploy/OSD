@@ -174,7 +174,7 @@ function Start-OSDCloud {
         ZTI = $ZTI
     }
     #=================================================
-    #	Parameters
+    #	Update Defaults
     #=================================================
     if ($Firmware) {
         $Global:StartOSDCloud.ApplyCatalogFirmware = $true
@@ -203,9 +203,9 @@ function Start-OSDCloud {
     #=================================================
     #   Header
     #=================================================
-    Write-Host -ForegroundColor DarkGray "================================================"
+    Write-Host -ForegroundColor DarkGray "========================================================================="
     Write-Host -ForegroundColor Green "Start-OSDCloud"
-    Write-Host -ForegroundColor DarkGray "================================================"
+    Write-Host -ForegroundColor DarkGray "========================================================================="
     Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) $($Global:StartOSDCloud.Function)" -NoNewline
     Write-Host -ForegroundColor Cyan " | Manufacturer: $Manufacturer | Product: $Product"
     #=================================================
@@ -215,7 +215,7 @@ function Start-OSDCloud {
         $Global:StartOSDCloud.GetDiskFixed = Get-Disk.fixed | Where-Object {$_.IsBoot -eq $false} | Sort-Object Number
 
         if (($Global:StartOSDCloud.GetDiskFixed | Measure-Object).Count -lt 2) {
-            Write-Host -ForegroundColor DarkGray "================================================"
+            Write-Host -ForegroundColor DarkGray "========================================================================="
             Write-Warning "This Warning is displayed when using the -ZTI parameter"
             Write-Warning "OSDisk will be cleaned automatically without confirmation"
             Write-Warning "Press CTRL + C to cancel"
@@ -227,7 +227,7 @@ function Start-OSDCloud {
             Start-Sleep -Seconds 5
         }
         else {
-            Write-Host -ForegroundColor DarkGray "================================================"
+            Write-Host -ForegroundColor DarkGray "========================================================================="
             Write-Warning "More than 1 Fixed Disk is present"
             Write-Warning "Disks will not be cleaned automatically"
             $Global:StartOSDCloud.GetDiskFixed | Select-Object -Property Number, BusType, MediaType,`
@@ -245,7 +245,7 @@ function Start-OSDCloud {
     #=================================================
     #	Test Web Connection
     #=================================================
-    Write-Host -ForegroundColor DarkGray "================================================"
+    Write-Host -ForegroundColor DarkGray "========================================================================="
     Write-Host -ForegroundColor Cyan "Test-WebConnection"
     Write-Host -ForegroundColor DarkGray "google.com"
 
@@ -267,7 +267,7 @@ function Start-OSDCloud {
     #	ParameterSet CustomImage
     #=================================================
     elseif ($PSCmdlet.ParameterSetName -eq 'CustomImage') {
-        Write-Host -ForegroundColor DarkGray "================================================"
+        Write-Host -ForegroundColor DarkGray "========================================================================="
         Write-Host -ForegroundColor Cyan "Custom Windows Image"
 
         if ($Global:StartOSDCloud.ImageFileUrl) {
@@ -307,7 +307,7 @@ function Start-OSDCloud {
         #=================================================
         #	OSBuild
         #=================================================
-        Write-Host -ForegroundColor DarkGray "================================================"
+        Write-Host -ForegroundColor DarkGray "========================================================================="
         Write-Host -ForegroundColor Cyan "$OSVersion OSBuild " -NoNewline
         
         if ($Global:StartOSDCloud.OSBuild) {
@@ -346,7 +346,7 @@ function Start-OSDCloud {
         #=================================================
         #	OSEdition
         #=================================================
-        Write-Host -ForegroundColor DarkGray "================================================"
+        Write-Host -ForegroundColor DarkGray "========================================================================="
         Write-Host -ForegroundColor Cyan "$OSVersion OSEdition " -NoNewline
 
         if ($Global:StartOSDCloud.OSEdition) {
@@ -413,7 +413,7 @@ function Start-OSDCloud {
         #=================================================
         #	OSLicense
         #=================================================
-        Write-Host -ForegroundColor DarkGray "================================================"
+        Write-Host -ForegroundColor DarkGray "========================================================================="
         Write-Host -ForegroundColor Cyan "$OSVersion OSLicense " -NoNewline
 
         if ($Global:StartOSDCloud.OSLicense) {
@@ -483,7 +483,7 @@ function Start-OSDCloud {
         #=================================================
         #	OSLanguage
         #=================================================
-        Write-Host -ForegroundColor DarkGray "================================================"
+        Write-Host -ForegroundColor DarkGray "========================================================================="
         Write-Host -ForegroundColor Cyan "$OSVersion OSLanguage " -NoNewline
         
         if ($Global:StartOSDCloud.OSLanguage) {
@@ -527,7 +527,7 @@ function Start-OSDCloud {
         #   This is where we take the OSB OSE OSL information and get the
         #   Feature Update.  Global Variables will be set for Deploy-OSDCloud
         #=================================================
-        Write-Host -ForegroundColor DarkGray "================================================"
+        Write-Host -ForegroundColor DarkGray "========================================================================="
         Write-Host -ForegroundColor Cyan "Get-FeatureUpdate"
         if ($Global:StartOSDCloud.OSVersion -eq 'Windows 11') {
             Write-Host -ForegroundColor DarkGray "Windows 11 x64 | OSLicense: $($Global:StartOSDCloud.OSLicense) | OSBuild: $($Global:StartOSDCloud.OSBuild) | OSLanguage: $($Global:StartOSDCloud.OSLanguage)"
@@ -576,7 +576,7 @@ function Start-OSDCloud {
     #	Start-OSDCloud Get-MyDriverPack
     #=================================================
     if ($Global:StartOSDCloud.Product -ne 'None') {
-        Write-Host -ForegroundColor DarkGray "================================================"
+        Write-Host -ForegroundColor DarkGray "========================================================================="
         Write-Host -ForegroundColor Cyan "Get-MyDriverPack"
 
         if ($OSVersion -eq 'Windows 11') {
@@ -618,7 +618,7 @@ function Start-OSDCloud {
     #=================================================
     #   Invoke-OSDCloud.ps1
     #=================================================
-    Write-Host -ForegroundColor DarkGray "================================================"
+    Write-Host -ForegroundColor DarkGray "========================================================================="
     Write-Host -ForegroundColor Green "Invoke-OSDCloud ... Starting in 5 seconds..."
     Start-Sleep -Seconds 5
     Invoke-OSDCloud
