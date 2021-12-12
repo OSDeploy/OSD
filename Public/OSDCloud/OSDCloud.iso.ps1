@@ -24,7 +24,7 @@ function New-OSDCloud.iso {
     #=================================================
     #   Header
     #=================================================
-    Write-Host -ForegroundColor DarkGray "================================================"
+    Write-Host -ForegroundColor DarkGray "========================================================================="
     Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) $($MyInvocation.MyCommand.Name)"
     #=================================================
     #	Block
@@ -84,7 +84,7 @@ function New-OSDCloud.iso {
     #=================================================
     #   Create ISO
     #=================================================
-    Write-Host -ForegroundColor DarkGray "================================================"
+    Write-Host -ForegroundColor DarkGray "========================================================================="
     Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Creating ISO"
     Write-Host -ForegroundColor Yellow "OSD Function: New-ADK.iso"
     $NewADKiso = New-ADK.iso -MediaPath "$WorkspacePath\Media" -isoFileName $isoFileName -isoLabel $isoLabel

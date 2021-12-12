@@ -24,11 +24,11 @@ function Invoke-Exe {
       [Parameter(ValueFromRemainingArguments = $true, ValueFromPipelineByPropertyName = $true)]
       $Arguments = $null
   )
-  Write-Host -ForegroundColor Cyan "Invoke-Exe '$Executable' Arguments '$Arguments'"
+  Write-Host -ForegroundColor DarkGray "Invoke-Exe '$Executable' Arguments '$Arguments'"
   $Out = &$Executable $Arguments 2>&1 | Out-String
   if ($Out.Trim()) {
       $Out.Trim().Split("`n") | ForEach-Object {
-          Write-Host -ForegroundColor DarkCyan "$_"
+          Write-Host -ForegroundColor DarkGray "$_"
       }
   }
 }

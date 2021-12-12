@@ -296,7 +296,7 @@ function Start-WinREWiFi {
     #=================================================
     #	Header
     #=================================================
-    Write-Host -ForegroundColor DarkGray "================================================"
+    Write-Host -ForegroundColor DarkGray "========================================================================="
     Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) $($MyInvocation.MyCommand.Name) " -NoNewline
     Write-Host -ForegroundColor Green 'OK'
     #=================================================
@@ -436,7 +436,7 @@ function Start-WinREWiFi {
                 Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Starting Wi-Fi Network Menu " -NoNewline
             }
             Write-Host -ForegroundColor Green 'OK'
-            Write-Host -ForegroundColor DarkGray "================================================"
+            Write-Host -ForegroundColor DarkGray "========================================================================="
 
         while (((Get-CimInstance -ClassName Win32_NetworkAdapter | Where-Object {$_.NetConnectionID -eq 'Wi-Fi'}).NetEnabled) -eq $false) {
             Start-Sleep -Seconds 3
@@ -473,7 +473,7 @@ function Start-WinREWiFi {
                     $SSID = $SSIDList | Where-Object { $_.index -eq $SSIDIndex } | Select-Object -exp SSID
         
                     # connect to selected Wi-Fi
-                    Write-Host -ForegroundColor DarkGray "================================================"
+                    Write-Host -ForegroundColor DarkGray "========================================================================="
                     Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Establishing a connection to SSID $SSID"
                     try {
                         Connect-WinREWiFi $SSID -ErrorAction Stop

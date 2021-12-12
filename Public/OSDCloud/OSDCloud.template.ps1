@@ -181,7 +181,7 @@ Windows Registry Editor Version 5.00
     #=================================================
     #   Header
     #=================================================
-    Write-Host -ForegroundColor DarkGray "================================================"
+    Write-Host -ForegroundColor DarkGray "========================================================================="
     Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) $($MyInvocation.MyCommand.Name)"
     #=================================================
     #	Block
@@ -197,9 +197,9 @@ Windows Registry Editor Version 5.00
     $AdkPaths = Get-AdkPaths
 
     if ($null -eq $AdkPaths) {
-        Write-Host -ForegroundColor DarkGray "================================================"
+        Write-Host -ForegroundColor DarkGray "========================================================================="
         Write-Warning "Could not get ADK going, sorry"
-        Write-Host -ForegroundColor DarkGray "================================================"
+        Write-Host -ForegroundColor DarkGray "========================================================================="
         Break
     }
     #=================================================
@@ -207,15 +207,15 @@ Windows Registry Editor Version 5.00
     #=================================================
     if ($PSBoundParameters.ContainsKey('WinRE')) {
         if ((Get-PartitionWinRE).OperationalStatus -ne 'Online') {
-            Write-Host -ForegroundColor DarkGray "================================================"
+            Write-Host -ForegroundColor DarkGray "========================================================================="
             Write-Warning "You can't use WinRE because of some issue.  Sorry!"
-            Write-Host -ForegroundColor DarkGray "================================================"
+            Write-Host -ForegroundColor DarkGray "========================================================================="
             Break
         }
         if ((Get-RegCurrentVersion).CurrentBuild -gt 20000) {
-            Write-Host -ForegroundColor DarkGray "================================================"
+            Write-Host -ForegroundColor DarkGray "========================================================================="
             Write-Warning "WinRE is not working with Windows 11 at this time.  Sorry!"
-            Write-Host -ForegroundColor DarkGray "================================================"
+            Write-Host -ForegroundColor DarkGray "========================================================================="
             #Break
         }
     }
@@ -224,15 +224,15 @@ Windows Registry Editor Version 5.00
     #=================================================
     $WimSourcePath = $AdkPaths.WimSourcePath
     if (-NOT (Test-Path $WimSourcePath)) {
-        Write-Host -ForegroundColor DarkGray "================================================"
+        Write-Host -ForegroundColor DarkGray "========================================================================="
         Write-Warning "Could not find the ADK WimSourcePath: $WimSourcePath"
-        Write-Host -ForegroundColor DarkGray "================================================"
+        Write-Host -ForegroundColor DarkGray "========================================================================="
         Break
     }
     #=================================================
     #   Template
     #=================================================
-    Write-Host -ForegroundColor DarkGray "================================================"
+    Write-Host -ForegroundColor DarkGray "========================================================================="
     $TemplatePath = "$env:ProgramData\OSDCloud"
     Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Creating OSDCloud Template at $TemplatePath"
     
@@ -257,7 +257,7 @@ Windows Registry Editor Version 5.00
     #=================================================
     #   Mirror ADK Media
     #=================================================
-    Write-Host -ForegroundColor DarkGray "================================================"
+    Write-Host -ForegroundColor DarkGray "========================================================================="
     Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Mirroring ADK Media using Robocopy"
     Write-Host -ForegroundColor Yellow 'Mirroring will remove any previous WinPE and will force a full rebuild'
     
@@ -271,7 +271,7 @@ Windows Registry Editor Version 5.00
     #=================================================
     #   Copy Boot.wim
     #=================================================
-    Write-Host -ForegroundColor DarkGray "================================================"
+    Write-Host -ForegroundColor DarkGray "========================================================================="
     $DestinationSources = Join-Path $DestinationMedia 'sources'
     if (-NOT (Test-Path "$DestinationSources")) {
         New-Item -Path "$DestinationSources" -ItemType Directory -Force -ErrorAction Stop | Out-Null
@@ -298,9 +298,9 @@ Windows Registry Editor Version 5.00
     #   Test BootWim
     #=================================================
     if (!(Test-Path $BootWim)) {
-        Write-Host -ForegroundColor DarkGray "================================================"
+        Write-Host -ForegroundColor DarkGray "========================================================================="
         Write-Warning "I'm not sure what happened, but I can't find $BootWim"
-        Write-Host -ForegroundColor DarkGray "================================================"
+        Write-Host -ForegroundColor DarkGray "========================================================================="
         Break
     }
     #=================================================
@@ -308,7 +308,7 @@ Windows Registry Editor Version 5.00
     #   This is used to resolve issues with WinPE Resolutions in 2004/20H2
     #=================================================
     if ((Get-RegCurrentVersion).CurrentBuild -lt 20000) {
-        Write-Host -ForegroundColor DarkGray "================================================"
+        Write-Host -ForegroundColor DarkGray "========================================================================="
         Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Replacing Boot Media font wgl4_boot.ttf"
         Write-Host -ForegroundColor Yellow "Replacing this file resolves an issue where WinPE does not boot to the proper display resolution"
     
@@ -329,7 +329,7 @@ Windows Registry Editor Version 5.00
     #=================================================
     #   Mount-MyWindowsImage
     #=================================================
-    Write-Host -ForegroundColor DarkGray "================================================"
+    Write-Host -ForegroundColor DarkGray "========================================================================="
     Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Mount Boot.wim"
     Write-Host -ForegroundColor Yellow "OSD Function: Mount-MyWindowsImage"
     $MountMyWindowsImage = Mount-MyWindowsImage $BootWim
@@ -342,7 +342,7 @@ Windows Registry Editor Version 5.00
         #=================================================
         #	Wallpaper
         #=================================================
-        Write-Host -ForegroundColor DarkGray "================================================"
+        Write-Host -ForegroundColor DarkGray "========================================================================="
         Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) WinRE Wallpaper"
         Write-Host -ForegroundColor Yellow "WinRE does not use the standard winpe.jpg and uses an all black winre.jpg"
         Write-Host -ForegroundColor Yellow "This step adds the default WinPE Wallpaper and modifies the Registry to point to winpe.jpg"
@@ -370,7 +370,7 @@ Windows Registry Editor Version 5.00
         #=================================================
         #	Wireless
         #=================================================
-        Write-Host -ForegroundColor DarkGray "================================================"
+        Write-Host -ForegroundColor DarkGray "========================================================================="
         Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) WinRE Wireless"
         Write-Host -ForegroundColor Yellow "These files need to be added to support Wireless"
 
@@ -433,7 +433,7 @@ Windows Registry Editor Version 5.00
     #=================================================
     #   Install Default en-us Language
     #=================================================
-    Write-Host -ForegroundColor DarkGray "================================================"
+    Write-Host -ForegroundColor DarkGray "========================================================================="
     Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Adding default en-US ADK Packages"
     Write-Host -ForegroundColor Yellow "Dism Function: Add-WindowsPackage"
     $Lang = 'en-us'
@@ -477,7 +477,7 @@ Windows Registry Editor Version 5.00
     #=================================================
     #   Save-WindowsImage
     #=================================================
-    Write-Host -ForegroundColor DarkGray "================================================"
+    Write-Host -ForegroundColor DarkGray "========================================================================="
     Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Save Windows Image"
     Write-Host -ForegroundColor Yellow "Dism Function: Save-WindowsImage"
 
@@ -491,7 +491,7 @@ Windows Registry Editor Version 5.00
     }
 
     foreach ($Lang in $Language) {
-        Write-Host -ForegroundColor DarkGray "================================================"
+        Write-Host -ForegroundColor DarkGray "========================================================================="
         Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Adding $Lang ADK Packages"
         Write-Host -ForegroundColor Yellow "Dism Function: Add-WindowsPackage"
 
@@ -519,7 +519,7 @@ Windows Registry Editor Version 5.00
                 Catch {Write-Host -ForegroundColor Red $CurrentLog}
             }
         }
-        Write-Host -ForegroundColor DarkGray "================================================"
+        Write-Host -ForegroundColor DarkGray "========================================================================="
         Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Save Windows Image"
         Write-Host -ForegroundColor Yellow "Dism Function: Save-WindowsImage"
         $CurrentLog = "$TemplateLogs\$((Get-Date).ToString('yyyy-MM-dd-HHmmss'))-Save-WindowsImage.log"
@@ -529,7 +529,7 @@ Windows Registry Editor Version 5.00
     #   International Settings
     #=================================================
     if ($SetAllIntl -or $SetInputLocale) {
-        Write-Host -ForegroundColor DarkGray "================================================"
+        Write-Host -ForegroundColor DarkGray "========================================================================="
         Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Current Get-Intl Settings"
         Dism /image:"$MountPath" /Get-Intl
     }
@@ -551,7 +551,7 @@ Windows Registry Editor Version 5.00
     #=================================================
     #	Additional Files
     #=================================================
-    Write-Host -ForegroundColor DarkGray "================================================"
+    Write-Host -ForegroundColor DarkGray "========================================================================="
     Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) WinPE Additional Files"
     #=================================================
     #	curl.exe
@@ -615,7 +615,7 @@ Windows Registry Editor Version 5.00
     #=================================================
     #   Adding Microsoft DaRT
     #=================================================
-    Write-Host -ForegroundColor DarkGray "================================================"
+    Write-Host -ForegroundColor DarkGray "========================================================================="
     Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Microsoft DaRT"
     $SourceFile = "C:\Program Files\Microsoft DaRT\v10\Toolsx64.cab"
     if (Test-Path $SourceFile) {
@@ -637,7 +637,7 @@ Windows Registry Editor Version 5.00
     #=================================================
     #	Save-WindowsImage
     #=================================================
-    Write-Host -ForegroundColor DarkGray "================================================"
+    Write-Host -ForegroundColor DarkGray "========================================================================="
     Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Save Windows Image"
     Write-Host -ForegroundColor Yellow "Dism Function: Save-WindowsImage"
 
@@ -646,14 +646,14 @@ Windows Registry Editor Version 5.00
     #=================================================
     #	PowerShell Execution Policy
     #=================================================
-    Write-Host -ForegroundColor DarkGray "================================================"
+    Write-Host -ForegroundColor DarkGray "========================================================================="
     Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Set WinPE PowerShell ExecutionPolicy to Bypass"
     Write-Host -ForegroundColor Yellow "OSD Function: Set-WindowsImageExecutionPolicy"
     Set-WindowsImageExecutionPolicy -Path $MountPath -ExecutionPolicy Bypass | Out-Null
     #=================================================
     #   Enable PowerShell Gallery
     #=================================================
-    Write-Host -ForegroundColor DarkGray "================================================"
+    Write-Host -ForegroundColor DarkGray "========================================================================="
     Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Enable WinPE PowerShell Gallery"
     Write-Host -ForegroundColor Yellow "OSD Function: Enable-PEWindowsImagePSGallery"
     Enable-PEWindowsImagePSGallery -Path $MountPath | Out-Null
@@ -662,7 +662,7 @@ Windows Registry Editor Version 5.00
     #=================================================
     $SourceFile = "$MountPath\Windows\System32\winpeshl.ini"
     if (Test-Path $SourceFile) {
-        Write-Host -ForegroundColor DarkGray "================================================"
+        Write-Host -ForegroundColor DarkGray "========================================================================="
         Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Removing WinRE $SourceFile"
         Write-Host -ForegroundColor Yellow "This file is present when using WinRE.wim and needs to be removed for WinPE compatibility"
         Remove-Item -Path $SourceFile -Force
@@ -670,7 +670,7 @@ Windows Registry Editor Version 5.00
     #=================================================
     #   Registry Fixes
     #=================================================
-    Write-Host -ForegroundColor DarkGray "================================================"
+    Write-Host -ForegroundColor DarkGray "========================================================================="
     Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Modifying WinPE CMD and PowerShell Console settings"
     Write-Host -ForegroundColor Yellow "This increases the buffer and sets the window metrics and default fonts"
     $RegistryConsole | Out-File -FilePath "$env:TEMP\RegistryConsole.reg" -Encoding ascii -Width 2000 -Force
@@ -690,7 +690,7 @@ Windows Registry Editor Version 5.00
     #=================================================
     #   Save WIM
     #=================================================
-    Write-Host -ForegroundColor DarkGray "================================================"
+    Write-Host -ForegroundColor DarkGray "========================================================================="
     Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Dismounting and Saving Windows Image"
     Write-Host -ForegroundColor Yellow "OSD Function: Dismount-MyWindowsImage"
     $MountMyWindowsImage | Dismount-MyWindowsImage -Save
@@ -698,7 +698,7 @@ Windows Registry Editor Version 5.00
     #   Save WIM
     #=================================================
     if ($PSBoundParameters.ContainsKey('WinRE')) {
-        Write-Host -ForegroundColor DarkGray "================================================"
+        Write-Host -ForegroundColor DarkGray "========================================================================="
         Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Exporting WinRE Boot.wim"
         $BootWim = Join-Path $DestinationSources 'boot.wim'
         $WinREWim = Join-Path $DestinationSources 'winre.wim'
@@ -714,7 +714,7 @@ Windows Registry Editor Version 5.00
     #=================================================
     #   Directories
     #=================================================
-    Write-Host -ForegroundColor DarkGray "================================================"
+    Write-Host -ForegroundColor DarkGray "========================================================================="
     Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Create Config Directories"
 
     $CreateDirectories = @(
