@@ -87,7 +87,7 @@ FunctionsToExport =
 'Convert-EsdToFolder',
 'Convert-EsdToIso',
 'Convert-EsdToWim',
-'Convert-FolderToIso'
+'Convert-FolderToIso',
 'Convert-PNPDeviceIDtoGuid',
 'Copy-IsoToUsb',
 'Copy-PSModuleToFolder',
