@@ -1,7 +1,7 @@
 [
     {
         "Catalog":  "Windows Server 21H2",
-        "OSDVersion":  "21.12.14.1",
+        "OSDVersion":  "21.12.15.1",
         "OSDStatus":  "",
         "UpdateOS":  "Windows Server",
         "UpdateBuild":  "21H2",
@@ -47,13 +47,13 @@
         "AdditionalHash":  "172 144 233 232 181 39 88 150 203 39 30 218 71 251 22 239 92 88 15 10 105 176 3 122 233 124 75 255 65 181 246 225",
         "OSDCore":  "",
         "OSDWinPE":  "",
-        "OSDGuid":  "b9bbce13-1ca1-4c31-a8df-c3d0a860e13a",
+        "OSDGuid":  "ffd0c4ab-d4a6-4f9d-8b0d-8a4d64b9e7fc",
         "PartitionKey":  "Windows Server 21H2",
-        "RowKey":  "b9bbce13-1ca1-4c31-a8df-c3d0a860e13a"
+        "RowKey":  "ffd0c4ab-d4a6-4f9d-8b0d-8a4d64b9e7fc"
     },
     {
         "Catalog":  "Windows Server 21H2",
-        "OSDVersion":  "21.12.14.1",
+        "OSDVersion":  "21.12.15.1",
         "OSDStatus":  "",
         "UpdateOS":  "Windows Server",
         "UpdateBuild":  "21H2",
@@ -99,8 +99,8 @@
         "AdditionalHash":  "248 202 9 18 236 175 63 9 77 174 102 241 98 168 11 87 120 42 227 40 162 41 227 36 164 251 147 57 10 241 119 230",
         "OSDCore":  "",
         "OSDWinPE":  "",
-        "OSDGuid":  "3b1f1176-08b5-4989-9c54-32ba371e607b",
+        "OSDGuid":  "eb34c064-496d-45b0-a756-b413c2e6f646",
         "PartitionKey":  "Windows Server 21H2",
-        "RowKey":  "3b1f1176-08b5-4989-9c54-32ba371e607b"
+        "RowKey":  "eb34c064-496d-45b0-a756-b413c2e6f646"
     }
 ]

@@ -1,7 +1,7 @@
 [
     {
         "Catalog":  "Windows 10 1507",
-        "OSDVersion":  "21.12.14.1",
+        "OSDVersion":  "21.12.15.1",
         "OSDStatus":  "",
         "UpdateOS":  "Windows 10",
         "UpdateBuild":  "1507",
@@ -47,13 +47,13 @@
         "AdditionalHash":  "245 188 15 87 135 65 144 24 249 148 156 212 79 164 215 237 0 119 205 215 85 190 130 146 43 69 247 162 165 166 38 23",
         "OSDCore":  "",
         "OSDWinPE":  "",
-        "OSDGuid":  "cb53cc28-b05b-4ef1-95bc-a3f98847af2d",
+        "OSDGuid":  "3d2f7d01-37ba-4f4d-9a62-fa15e65e89b8",
         "PartitionKey":  "Windows 10 1507",
-        "RowKey":  "cb53cc28-b05b-4ef1-95bc-a3f98847af2d"
+        "RowKey":  "3d2f7d01-37ba-4f4d-9a62-fa15e65e89b8"
     },
     {
         "Catalog":  "Windows 10 1507",
-        "OSDVersion":  "21.12.14.1",
+        "OSDVersion":  "21.12.15.1",
         "OSDStatus":  "",
         "UpdateOS":  "Windows 10",
         "UpdateBuild":  "1507",
@@ -99,13 +99,13 @@
         "AdditionalHash":  "74 154 125 226 239 13 234 242 0 178 81 254 56 177 236 169 201 120 100 248 12 66 175 213 197 147 146 167 67 67 154 70",
         "OSDCore":  "",
         "OSDWinPE":  "",
-        "OSDGuid":  "114e2808-20f3-4363-8546-dda46d560a20",
+        "OSDGuid":  "b818fbe2-e143-4a57-a1af-d032ec176a5e",
         "PartitionKey":  "Windows 10 1507",
-        "RowKey":  "114e2808-20f3-4363-8546-dda46d560a20"
+        "RowKey":  "b818fbe2-e143-4a57-a1af-d032ec176a5e"
     },
     {
         "Catalog":  "Windows 10 1507",
-        "OSDVersion":  "21.12.14.1",
+        "OSDVersion":  "21.12.15.1",
         "OSDStatus":  "",
         "UpdateOS":  "Windows 10",
         "UpdateBuild":  "1507",
@@ -151,13 +151,13 @@
         "AdditionalHash":  "100 95 14 132 210 206 245 157 211 49 18 59 250 120 79 229 114 152 143 96 66 141 171 157 49 45 1 199 121 222 79 181",
         "OSDCore":  "",
         "OSDWinPE":  "",
-        "OSDGuid":  "e6408af6-cbe7-4c5d-a8ad-0b891220497b",
+        "OSDGuid":  "9c6dbc27-5961-4f53-a77d-a296c6850b6a",
         "PartitionKey":  "Windows 10 1507",
-        "RowKey":  "e6408af6-cbe7-4c5d-a8ad-0b891220497b"
+        "RowKey":  "9c6dbc27-5961-4f53-a77d-a296c6850b6a"
     },
     {
         "Catalog":  "Windows 10 1507",
-        "OSDVersion":  "21.12.14.1",
+        "OSDVersion":  "21.12.15.1",
         "OSDStatus":  "",
         "UpdateOS":  "Windows 10",
         "UpdateBuild":  "1507",
@@ -203,13 +203,13 @@
         "AdditionalHash":  "14 8 87 183 193 12 127 72 204 36 140 118 125 223 30 193 178 136 144 99 179 254 131 68 195 35 5 154 69 138 226 159",
         "OSDCore":  "",
         "OSDWinPE":  "",
-        "OSDGuid":  "39677b4b-923c-4e16-836d-5ce35a30e5c6",
+        "OSDGuid":  "444b4023-2db7-45d3-8e4a-2b58b9535abe",
         "PartitionKey":  "Windows 10 1507",
-        "RowKey":  "39677b4b-923c-4e16-836d-5ce35a30e5c6"
+        "RowKey":  "444b4023-2db7-45d3-8e4a-2b58b9535abe"
     },
     {
         "Catalog":  "Windows 10 1507",
-        "OSDVersion":  "21.12.14.1",
+        "OSDVersion":  "21.12.15.1",
         "OSDStatus":  "",
         "UpdateOS":  "Windows 10",
         "UpdateBuild":  "1507",
@@ -255,13 +255,13 @@
         "AdditionalHash":  "115 232 204 85 141 36 30 67 16 13 143 95 127 192 209 180 251 209 113 170 25 16 69 88 12 169 12 226 109 203 199 131",
         "OSDCore":  "",
         "OSDWinPE":  "",
-        "OSDGuid":  "de8dd969-80fb-4ca9-904f-9cf5030d674d",
+        "OSDGuid":  "8857d232-b1f0-4677-a7a1-dd443680823f",
         "PartitionKey":  "Windows 10 1507",
-        "RowKey":  "de8dd969-80fb-4ca9-904f-9cf5030d674d"
+        "RowKey":  "8857d232-b1f0-4677-a7a1-dd443680823f"
     },
     {
         "Catalog":  "Windows 10 1507",
-        "OSDVersion":  "21.12.14.1",
+        "OSDVersion":  "21.12.15.1",
         "OSDStatus":  "",
         "UpdateOS":  "Windows 10",
         "UpdateBuild":  "1507",
@@ -307,13 +307,13 @@
         "AdditionalHash":  "207 46 251 213 217 165 206 40 61 116 141 231 124 150 72 79 108 9 240 212 36 180 125 175 217 157 7 230 34 254 66 253",
         "OSDCore":  "",
         "OSDWinPE":  "",
-        "OSDGuid":  "10299fb6-3598-40d8-827f-80711edf1080",
+        "OSDGuid":  "7ebda654-09f8-46f0-a81a-c9df2669eea7",
         "PartitionKey":  "Windows 10 1507",
-        "RowKey":  "10299fb6-3598-40d8-827f-80711edf1080"
+        "RowKey":  "7ebda654-09f8-46f0-a81a-c9df2669eea7"
     },
     {
         "Catalog":  "Windows 10 1507",
-        "OSDVersion":  "21.12.14.1",
+        "OSDVersion":  "21.12.15.1",
         "OSDStatus":  "",
         "UpdateOS":  "Windows 10",
         "UpdateBuild":  "1507",
@@ -359,13 +359,13 @@
         "AdditionalHash":  "220 246 217 33 249 75 242 212 242 237 55 160 210 62 245 106 240 45 227 79 132 97 35 251 251 0 129 71 64 94 57 31",
         "OSDCore":  "",
         "OSDWinPE":  "",
-        "OSDGuid":  "50443e9c-cf92-40c6-8980-796da348a59b",
+        "OSDGuid":  "0beadb94-2bbd-4be0-83da-e3414a27fcaf",
         "PartitionKey":  "Windows 10 1507",
-        "RowKey":  "50443e9c-cf92-40c6-8980-796da348a59b"
+        "RowKey":  "0beadb94-2bbd-4be0-83da-e3414a27fcaf"
     },
     {
         "Catalog":  "Windows 10 1507",
-        "OSDVersion":  "21.12.14.1",
+        "OSDVersion":  "21.12.15.1",
         "OSDStatus":  "",
         "UpdateOS":  "Windows 10",
         "UpdateBuild":  "1507",
@@ -411,13 +411,13 @@
         "AdditionalHash":  "125 16 58 124 145 175 53 84 45 188 180 153 91 99 98 95 186 55 70 237 40 126 88 109 134 131 65 210 1 115 165 219",
         "OSDCore":  "",
         "OSDWinPE":  "",
-        "OSDGuid":  "de17239a-4e69-4812-a696-a20826fc3ec3",
+        "OSDGuid":  "f470075d-a1df-4776-a5c4-27b0662da012",
         "PartitionKey":  "Windows 10 1507",
-        "RowKey":  "de17239a-4e69-4812-a696-a20826fc3ec3"
+        "RowKey":  "f470075d-a1df-4776-a5c4-27b0662da012"
     },
     {
         "Catalog":  "Windows 10 1507",
-        "OSDVersion":  "21.12.14.1",
+        "OSDVersion":  "21.12.15.1",
         "OSDStatus":  "",
         "UpdateOS":  "Windows 10",
         "UpdateBuild":  "1507",
@@ -463,8 +463,8 @@
         "AdditionalHash":  "107 129 247 216 113 46 194 121 156 197 28 152 17 0 113 129 1 67 43 253 32 127 223 117 70 127 49 33 9 35 249 104",
         "OSDCore":  "",
         "OSDWinPE":  "",
-        "OSDGuid":  "1bba3c13-88e9-49af-be65-b703efe89d6b",
+        "OSDGuid":  "720347d6-de51-4660-8cc1-df76f2259c08",
         "PartitionKey":  "Windows 10 1507",
-        "RowKey":  "1bba3c13-88e9-49af-be65-b703efe89d6b"
+        "RowKey":  "720347d6-de51-4660-8cc1-df76f2259c08"
     }
 ]

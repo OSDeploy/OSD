@@ -1,7 +1,7 @@
 [
     {
         "Catalog":  "Windows 11 21H2",
-        "OSDVersion":  "21.12.14.1",
+        "OSDVersion":  "21.12.15.1",
         "OSDStatus":  "",
         "UpdateOS":  "Windows 11",
         "UpdateBuild":  "21H2",
@@ -47,13 +47,13 @@
         "AdditionalHash":  "98 177 39 19 102 224 187 221 206 197 73 207 195 102 249 50 28 110 6 31 107 64 240 98 150 77 228 9 185 122 240 40",
         "OSDCore":  "",
         "OSDWinPE":  "",
-        "OSDGuid":  "a8da346b-64f4-4c0b-8914-ecb5c5b3d26b",
+        "OSDGuid":  "229e657c-fbe9-4093-a9a8-046f524712f7",
         "PartitionKey":  "Windows 11 21H2",
-        "RowKey":  "a8da346b-64f4-4c0b-8914-ecb5c5b3d26b"
+        "RowKey":  "229e657c-fbe9-4093-a9a8-046f524712f7"
     },
     {
         "Catalog":  "Windows 11 21H2",
-        "OSDVersion":  "21.12.14.1",
+        "OSDVersion":  "21.12.15.1",
         "OSDStatus":  "",
         "UpdateOS":  "Windows 11",
         "UpdateBuild":  "21H2",
@@ -99,13 +99,13 @@
         "AdditionalHash":  "210 61 232 33 235 149 25 237 56 195 169 29 219 190 22 61 96 57 109 212 79 47 112 134 63 128 226 220 93 98 4 198",
         "OSDCore":  "",
         "OSDWinPE":  "",
-        "OSDGuid":  "889f5695-dc2e-4182-9d3a-c74ce54eda5a",
+        "OSDGuid":  "6e25126e-7eea-4182-bbb5-d2bdbca10dd5",
         "PartitionKey":  "Windows 11 21H2",
-        "RowKey":  "889f5695-dc2e-4182-9d3a-c74ce54eda5a"
+        "RowKey":  "6e25126e-7eea-4182-bbb5-d2bdbca10dd5"
     },
     {
         "Catalog":  "Windows 11 21H2",
-        "OSDVersion":  "21.12.14.1",
+        "OSDVersion":  "21.12.15.1",
         "OSDStatus":  "",
         "UpdateOS":  "Windows 11",
         "UpdateBuild":  "21H2",
@@ -151,8 +151,8 @@
         "AdditionalHash":  "101 65 223 35 23 10 141 191 169 236 159 238 64 61 76 196 237 198 7 175 90 3 204 85 161 130 171 81 75 228 252 212",
         "OSDCore":  "",
         "OSDWinPE":  "",
-        "OSDGuid":  "3c920ba4-3747-4e63-814c-8df1170315ed",
+        "OSDGuid":  "e82962cf-ffb8-4698-a23f-4e61b6daa0c6",
         "PartitionKey":  "Windows 11 21H2",
-        "RowKey":  "3c920ba4-3747-4e63-814c-8df1170315ed"
+        "RowKey":  "e82962cf-ffb8-4698-a23f-4e61b6daa0c6"
     }
 ]
