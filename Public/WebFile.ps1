@@ -70,7 +70,8 @@ function Save-WebFile {
     if ($PSBoundParameters['DestinationName']) {
     }
     else {
-        $DestinationName = Split-Path -Path $SourceUrl -Leaf
+        $DestinationNameUri = $SourceUrl -as [System.Uri] # Convert to Uri so we can ignore any query string
+        $DestinationName = $DestinationNameUri.AbsolutePath.Split('/')[-1]
     }
     Write-Verbose "DestinationName: $DestinationName"
     #=================================================
@@ -89,7 +90,7 @@ function Save-WebFile {
         #=================================================
         #	Download
         #=================================================
-        $SourceUrl = [Uri]::EscapeUriString($SourceUrl)
+        $SourceUrl = [Uri]::EscapeUriString($SourceUrl.Replace('%', '~')).Replace('~', '%') # Substitute and replace '%' to avoid escaping os Azure SAS tokens
         Write-Verbose "Testing file at $SourceUrl"
         #=================================================
         #	Test for WebClient Proxy
