@@ -2,7 +2,7 @@ function Get-DownLinks {
     [CmdletBinding()]
     PARAM (
         [Parameter(Position=0,Mandatory=$true)]
-        [string]$URL,
+        [uri]$Url,
         [Parameter(Position=1)]
         [string]$Extension
     )
