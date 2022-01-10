@@ -17,7 +17,7 @@ function Save-WebFile {
         #URL of the file to download
         [Parameter(Position = 0, Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
         [Alias('FileUri')]
-        [string]$SourceUrl,
+        [uri]$SourceUrl,
 
         [Parameter(ValueFromPipelineByPropertyName = $true)]
         [Alias('FileName')]

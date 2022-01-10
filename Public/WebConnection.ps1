@@ -1,71 +1,72 @@
 <#
-.SYNOPSIS
+.Synopsis
 Tests to see if a Uri by Invoke-WebRequest -Method Head
-
-.DESCRIPTION
+.Description
 Tests to see if a Uri by Invoke-WebRequest -Method Head
-
-.PARAMETER Uri
-Uri to test
-
-.LINK
+.Link
 https://osd.osdeploy.com/module/functions/webconnection
-
-.NOTES
-21.3.12 Renamed from Invoke-UrlExpression
-
 #>
-function Test-WebConnection {
+function Test-WebConnection
+{
     [CmdletBinding()]
-    param (
-        [Parameter(ValueFromPipeline = $True)]
-        [string]$Uri = 'google.com'
+    param
+    (
+        [Parameter(ValueFromPipeline)]
+        # Uri to test
+        [System.Uri]
+        $Uri = 'google.com'
     )
-    
-    begin {}
-    
-    process {
-        $Params = @{
-            Method = 'Head'
-            Uri = $Uri
-            UseBasicParsing = $True
-        }
-
-        try {
-            Write-Verbose "Test-WebConnection OK: $Uri"
-            Invoke-WebRequest @Params | Out-Null
-            $true
-        }
-        catch {
-            Write-Verbose "Test-WebConnection FAIL: $Uri"
-            $false
-        }
-        finally {
-            $Error.Clear()
-        }
+    $Params = @{
+        Method = 'Head'
+        Uri = $Uri
+        UseBasicParsing = $true
+        Headers = @{'Cache-Control'='no-cache'}
     }
-    
-    end {}
+
+    try {
+        Write-Verbose "Test-WebConnection OK: $Uri"
+        Invoke-WebRequest @Params | Out-Null
+        $true
+    }
+    catch {
+        Write-Verbose "Test-WebConnection FAIL: $Uri"
+        $false
+    }
+    finally {
+        $Error.Clear()
+    }
 }
-function Wait-WebConnection {
+<#
+.Synopsis
+Waits for an internet connection to the specified Uri
+.Description
+Waits for an internet connection to the specified Uri
+.Link
+https://osd.osdeploy.com/module/functions/webconnection
+#>
+function Wait-WebConnection
+{
     [CmdletBinding()]
-    param (
-        [Parameter(ValueFromPipeline = $True)]
-        [string]$Uri = 'powershellgallery.com'
+    param
+    (
+        [Parameter(ValueFromPipeline)]
+        # Waits for a valid connection to a Uri
+        [System.Uri]
+        $Uri = 'powershellgallery.com'
     )
-
-
-    if ((Test-WebConnection -Uri 'powershellgallery.com') -eq $true) {
+    if ((Test-WebConnection -Uri "$Uri") -eq $true)
+    {
         Write-Verbose "Wait-WebConnection to $Uri"
     }
-    else {
-        do {
-            Write-Verbose "Wait-WebConnection to $Uri"
-            
+    else
+    {
+        Write-Verbose "Wait-WebConnection to $Uri"
+        do
+        {
             Write-Verbose "Waiting 10 seconds to try again ..."
             Start-Sleep -Seconds 10
-    
-        } until ((Test-WebConnection -Uri 'powershellgallery.com') -eq $true)
+        }
+        until ((Test-WebConnection -Uri 'powershellgallery.com') -eq $true)
     }
     $Error.Clear()
 }
