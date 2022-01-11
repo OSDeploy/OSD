@@ -283,6 +283,8 @@ start /wait PowerShell -Nol -W Mi -C Start-Sleep -Seconds 10
     Add-Content -Path "$MountPath\Windows\System32\Startnet.cmd" -Value 'start /wait PowerShell -Nol -W Mi -C Start-Sleep -Seconds 10' -Force
     Add-Content -Path "$MountPath\Windows\System32\Startnet.cmd" -Value 'ECHO Updating OSD PowerShell Module (Minimized)' -Force
     Add-Content -Path "$MountPath\Windows\System32\Startnet.cmd" -Value 'start /wait PowerShell -NoL -W Mi -C "& {if (Test-WebConnection) {Install-Module OSD -Force -Verbose}}"'
+    #Add-Content -Path "$MountPath\Windows\System32\Startnet.cmd" -Value 'ECHO Installing Azure Modules for Accounts, KeyVault, and Storage (Minimized)' -Force
+    #Add-Content -Path "$MountPath\Windows\System32\Startnet.cmd" -Value 'start /wait PowerShell -NoL -W Mi -C "& {if (Test-WebConnection) {Install-Module Az.KeyVault,Az.Storage -Force -Verbose}}"'
     Add-Content -Path "$MountPath\Windows\System32\Startnet.cmd" -Value 'ECHO Initialize PowerShell (Minimized)' -Force
     Add-Content -Path "$MountPath\Windows\System32\Startnet.cmd" -Value 'start PowerShell -Nol -W Mi' -Force
     Add-Content -Path "$MountPath\Windows\System32\Startnet.cmd" -Value '@ECHO ON' -Force
@@ -378,8 +380,24 @@ start /wait PowerShell -Nol -W Mi -C Start-Sleep -Seconds 10
     #=================================================
     #   Update OSD Module
     #=================================================
-    Write-Host -ForegroundColor DarkGray "Saving OSD to $MountPath\Program Files\WindowsPowerShell\Modules"
+    Write-Host -ForegroundColor DarkGray "Saving OSD Module to $MountPath\Program Files\WindowsPowerShell\Modules"
     Save-Module -Name OSD -Path "$MountPath\Program Files\WindowsPowerShell\Modules" -Force
+    if ($AddAzure.IsPresent) {
+        Write-Host -ForegroundColor DarkGray "Saving Azure Modules to $MountPath\Program Files\WindowsPowerShell\Modules"
+        Save-Module -Name Az.Accounts -Path "$MountPath\Program Files\WindowsPowerShell\Modules" -Force
+        Save-Module -Name Az.Storage -Path "$MountPath\Program Files\WindowsPowerShell\Modules" -Force
+        Write-Host -ForegroundColor DarkGray "Saving AzCopy to $MountPath\Windows"
+        $AzCopy = Save-WebFile -SourceUrl (Invoke-WebRequest -UseBasicParsing 'https://aka.ms/downloadazcopy-v10-windows' -MaximumRedirection 0 -ErrorAction SilentlyContinue).headers.location
+        if ($AzCopy) {
+            Expand-Archive -Path $AzCopy.FullName -DestinationPath $env:windir\Temp\AzCopy -Force
+            Get-ChildItem -Path $env:windir\Temp\AzCopy -Recurse -Include azcopy.exe | foreach {Copy-Item $_.FullName -Destination "$MountPath\Windows\azcopy.exe" -Force -ErrorAction SilentlyContinue}
+        }
+    }
+    if ($AddAws.IsPresent) {
+        Write-Host -ForegroundColor DarkGray "Saving AWS Modules to $MountPath\Program Files\WindowsPowerShell\Modules"
+        Save-Module -Name AWS.Tools.Common "$MountPath\Program Files\WindowsPowerShell\Modules" -Force
+        Save-Module -Name AWS.Tools.S3 -Path "$MountPath\Program Files\WindowsPowerShell\Modules" -Force
+    }
     #=================================================
     #   PSModuleInstall
     #=================================================
