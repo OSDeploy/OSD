@@ -1,7 +1,7 @@
 [
     {
         "Catalog":  "Windows Server 2019",
-        "OSDVersion":  "21.11.14.1",
+        "OSDVersion":  "22.1.11.1",
         "OSDStatus":  "",
         "UpdateOS":  "Windows Server",
         "UpdateBuild":  "1809",

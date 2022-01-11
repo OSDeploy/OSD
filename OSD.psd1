@@ -19,7 +19,7 @@ Author = 'David Segura @SeguraOSD'
 CompanyName = 'osdeploy.com'
 
 # Copyright statement for this module
-Copyright = '(c) 2021 David Segura osdeploy.com. All rights reserved.'
+Copyright = '(c) 2022 David Segura osdeploy.com. All rights reserved.'
 
 # Description of the functionality provided by this module
 Description = @'
