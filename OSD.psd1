@@ -4,7 +4,7 @@
 RootModule = 'OSD.psm1'
 
 # Version number of this module.
-ModuleVersion = '21.12.15.1'
+ModuleVersion = '22.1.8.1'
 
 # Supported PSEditions
 # CompatiblePSEditions = @()
@@ -282,7 +282,11 @@ FunctionsToExport =
 'Update-OSDCloud.usb',
 'Use-WinPEContent',
 'Wait-WebConnection',
-'New-CloudModelPack'
+'ConvertTo-PSKeyVaultSecret',
+'Get-GithubRawContent',
+'Get-GithubRawUrl',
+'Get-PSCloudScript',
+'Resolve-MsUrl'
 
 # Cmdlets to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no cmdlets to export.
 CmdletsToExport = @()
