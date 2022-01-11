@@ -1,37 +1,38 @@
 <#
-.SYNOPSIS
+.Synopsis
 Downloads a file from the internet and returns a Get-Item Object
-
-.DESCRIPTION
+.Description
 Downloads a file from the internet and returns a Get-Item Object
-
-.LINK
+.Link
 https://osd.osdeploy.com/module/functions/save-webfile
-
-.NOTES
-21.3.16.2   Updated to Return Get-Item
 #>
-function Save-WebFile {
+function Save-WebFile
+{
     [CmdletBinding()]
-    param (
-        #URL of the file to download
-        [Parameter(Position = 0, Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
-        [Alias('FileUri')]
-        [uri]$SourceUrl,
+    param
+    (
+        [Parameter(Position=0, Mandatory, ValueFromPipelineByPropertyName)]
+        # Url of the file to download
+        [Alias('FileUri','SourceUrl')]
+        [System.Uri]
+        $Uri,
 
-        [Parameter(ValueFromPipelineByPropertyName = $true)]
+        [Parameter(ValueFromPipelineByPropertyName)]
         [Alias('FileName')]
-        [string]$DestinationName,
+        [System.String]
+        $DestinationName,
 
         #Destination Folder
         [Alias('Path')]
-        [string]$DestinationDirectory = (Join-Path $env:TEMP 'OSD'),
+        [System.String]$DestinationDirectory = (Join-Path $env:TEMP 'OSD'),
 
         #Overwrite the file if it exists already
         #The default action is to skip the download
-        [switch]$Overwrite,
+        [System.Management.Automation.SwitchParameter]
+        $Overwrite,
 
-        [switch]$WebClient
+        [System.Management.Automation.SwitchParameter]
+        $WebClient
     )
     #=================================================
     #	Values
@@ -42,9 +43,10 @@ function Save-WebFile {
     Write-Verbose "Overwrite: $Overwrite"
     Write-Verbose "WebClient: $WebClient"
     #=================================================
-    #	Set DestinationDirectory
+    #	DestinationDirectory
     #=================================================
-    if (Test-Path "$DestinationDirectory") {
+    if (Test-Path "$DestinationDirectory")
+    {
         Write-Verbose "Directory already exists at $DestinationDirectory"
     }
     else {
