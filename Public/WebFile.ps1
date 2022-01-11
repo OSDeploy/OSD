@@ -8,6 +8,7 @@ https://osd.osdeploy.com/module/functions/save-webfile
 #>
 function Save-WebFile
 {
+    [OutputType([System.IO.FileInfo])]
     [CmdletBinding()]
     param
     (

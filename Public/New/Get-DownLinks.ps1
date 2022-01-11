@@ -1,20 +1,39 @@
-function Get-DownLinks {
+<#
+.Synopsis
+Gets a list of links to download
+.Description
+Gets a list of links to download
+.Link
+https://osd.osdeploy.com
+#>
+function Get-DownLinks
+{
     [CmdletBinding()]
-    PARAM (
-        [Parameter(Position=0,Mandatory=$true)]
-        [uri]$Url,
+    param
+    (
+        [Parameter(Position=0,Mandatory)]
+        # Uri to get download to download
+        [System.String]
+        $Url,
+
         [Parameter(Position=1)]
-        [string]$Extension
+        # File extension of the links to get
+        [System.String]
+        $Extension
     )
 
-    Write-Verbose "Validating $URL" -Verbose
-    Write-Host ""
     $DownLinks = @()
     $DownLinks = (Invoke-WebRequest -Uri "$URL").Links | Select-Object -Property *
-    if ($Extension) {$DownLinks = $DownLinks | Where-Object {$_.href -like "*$Extension"}}
+    if ($Extension)
+    {
+        $DownLinks = $DownLinks | Where-Object {$_.href -like "*$Extension"}
+    }
+    
     #$Downlinks = $Downlinks | Select-Object -Property href
-    foreach ($DownLink in $DownLinks) {
-        if ($DownLink.href -like "/*") {
+    foreach ($DownLink in $DownLinks)
+    {
+        if ($DownLink.href -like "/*")
+        {
             $DownLink.href = "http://downloads.dell.com$($DownLink.href)"
         }
     }
