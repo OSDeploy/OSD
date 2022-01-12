@@ -8,9 +8,15 @@ https://osd.osdeploy.com
 #>
 function Get-PSCloudScript
 {
-    [CmdletBinding(DefaultParameterSetName='ByUriContent', PositionalBinding=$false)]
+    [CmdletBinding(DefaultParameterSetName='ByUriContent', PositionalBinding=$true)]
     param
     (
+        [Parameter(Mandatory, ParameterSetName='ByUriContent')]
+        [ValidateNotNull()]
+        # Uri to store as the Azure Key Vault secret
+        [System.Uri]
+        $Uri,
+
         [Parameter(Mandatory, ParameterSetName='ByAzKeyVaultSecret')]
         [ValidateNotNull()]
         [System.String]
@@ -54,11 +60,6 @@ function Get-PSCloudScript
         [System.String]
         # Specifies the name of the key vault to which the secret belongs. This cmdlet constructs the fully qualified domain name (FQDN) of a key vault based on the name that this parameter specifies and your current environment.
         $GithubPath,
-
-        [Parameter(Mandatory, ParameterSetName='ByUriContent')]
-        # Uri to store as the Azure Key Vault secret
-        [System.Uri]
-        $Uri,
 
         [Parameter(Mandatory=$false)]
         [ValidateSet('Command','File','FileRunas')]
@@ -179,25 +180,40 @@ function Get-PSCloudScript
     if ($PSCmdlet.ParameterSetName -eq 'ByUriContent')
     {
         
-        if ($Uri -match 'github.com')
+        if ($Uri -match 'github')
         {
-            $Result = Get-GithubRawContent -Uri $Uri
+            [System.Array]$ResolvedUrl = Get-GithubRawUrl -Uri $Uri
         }
-        else 
+        elseif (([System.Uri]$Uri).AbsoluteUri)
+        {
+            [System.String]$ResolvedUrl = ([System.Uri]$Uri).AbsoluteUri
+        }
+        else
+        {
+            [System.String]$ResolvedUrl = $Uri
+        }
+
+        foreach ($Item in $ResolvedUrl)
         {
             try
             {
-                $WebRequest = Invoke-WebRequest $GithubRawUrl -UseBasicParsing -Method Head -ErrorAction SilentlyContinue
+                $WebRequest = Invoke-WebRequest $Item -UseBasicParsing -Method Head -ErrorAction SilentlyContinue
                 if ($WebRequest.StatusCode -eq 200)
                 {
-                    $Result = (Invoke-WebRequest -Uri $GithubRawUrl -UseBasicParsing).Content
+                    if ($ResolvedUrl -is [System.Array])
+                    {
+                        [Array]$Result += (Invoke-WebRequest -Uri $Item -UseBasicParsing).Content
+                    }
+                    else
+                    {
+                        $Result = (Invoke-WebRequest -Uri $Item -UseBasicParsing).Content
+                    }
                 }
             }
             catch
             {
                 Write-Warning $_
             }
-
         }
     }
     #=================================================
