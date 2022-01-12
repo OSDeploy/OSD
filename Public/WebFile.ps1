@@ -13,19 +13,18 @@ function Save-WebFile
     param
     (
         [Parameter(Position=0, Mandatory, ValueFromPipelineByPropertyName)]
-        # Url of the file to download
-        [Alias('FileUri','SourceUrl')]
-        [System.Uri]
-        $Uri,
+        [Alias('FileUri')]
+        [System.String]
+        $SourceUrl,
 
         [Parameter(ValueFromPipelineByPropertyName)]
         [Alias('FileName')]
         [System.String]
         $DestinationName,
 
-        #Destination Folder
         [Alias('Path')]
-        [System.String]$DestinationDirectory = (Join-Path $env:TEMP 'OSD'),
+        [System.String]
+        $DestinationDirectory = (Join-Path $env:TEMP 'OSD'),
 
         #Overwrite the file if it exists already
         #The default action is to skip the download
