@@ -8,13 +8,13 @@ https://osd.osdeploy.com
 #>
 function Get-PSCloudScript
 {
-    [CmdletBinding(DefaultParameterSetName='ByUriContent', PositionalBinding=$true)]
+    [CmdletBinding(DefaultParameterSetName='ByUriContent')]
     param
     (
-        [Parameter(Mandatory, ParameterSetName='ByUriContent')]
+        [Parameter(Mandatory, ParameterSetName='ByUriContent',Position=0)]
         [ValidateNotNull()]
         # Uri to store as the Azure Key Vault secret
-        [System.Uri]
+        [System.String]
         $Uri,
 
         [Parameter(Mandatory, ParameterSetName='ByAzKeyVaultSecret')]
@@ -43,23 +43,22 @@ function Get-PSCloudScript
         [System.String]
         $String,
         
-        [Parameter(Mandatory, ParameterSetName='ByGithubRepo',Position=0)]
+        [Parameter(Mandatory, ParameterSetName='ByGithubRepo')]
         [ValidateNotNull()]
         [System.String]
         # Specifies the name of the key vault to which the secret belongs. This cmdlet constructs the fully qualified domain name (FQDN) of a key vault based on the name that this parameter specifies and your current environment.
         $RepoOwner,
         
-        [Parameter(Mandatory, ParameterSetName='ByGithubRepo',Position=1)]
+        [Parameter(Mandatory, ParameterSetName='ByGithubRepo')]
         [ValidateNotNull()]
         [System.String]
         # Specifies the name of the key vault to which the secret belongs. This cmdlet constructs the fully qualified domain name (FQDN) of a key vault based on the name that this parameter specifies and your current environment.
         $RepoName,
         
-        [Parameter(Mandatory=$false, ParameterSetName='ByGithubRepo',Position=2)]
-        [ValidateNotNull()]
+        [Parameter(Mandatory=$false, ParameterSetName='ByGithubRepo')]
         [System.String]
         # Specifies the name of the key vault to which the secret belongs. This cmdlet constructs the fully qualified domain name (FQDN) of a key vault based on the name that this parameter specifies and your current environment.
-        $GithubPath,
+        $GithubPath = $null,
 
         [Parameter(Mandatory=$false)]
         [ValidateSet('Command','File','FileRunas')]
@@ -70,6 +69,48 @@ function Get-PSCloudScript
     Write-Warning 'Functionality is subject to change until this warning is removed'
 
     $Result = $null
+    #=================================================
+    #	ByUriContent
+    #=================================================
+    if ($PSCmdlet.ParameterSetName -eq 'ByUriContent')
+    {
+        
+        if ($Uri -match 'github')
+        {
+            [System.Array]$ResolvedUrl = Get-GithubRawUrl -Uri $Uri
+        }
+        elseif (([System.Uri]$Uri).AbsoluteUri)
+        {
+            [System.String]$ResolvedUrl = ([System.Uri]$Uri).AbsoluteUri
+        }
+        else
+        {
+            [System.String]$ResolvedUrl = $Uri
+        }
+
+        foreach ($Item in $ResolvedUrl)
+        {
+            try
+            {
+                $WebRequest = Invoke-WebRequest $Item -UseBasicParsing -Method Head -ErrorAction SilentlyContinue
+                if ($WebRequest.StatusCode -eq 200)
+                {
+                    if ($ResolvedUrl -is [System.Array])
+                    {
+                        [Array]$Result += (Invoke-RestMethod -Uri $Item)
+                    }
+                    else
+                    {
+                        $Result = (Invoke-RestMethod -Uri $Item)
+                    }
+                }
+            }
+            catch
+            {
+                Write-Warning $_
+            }
+        }
+    }
     #=================================================
     #	ByAzKeyVaultSecret
     #=================================================
@@ -172,49 +213,19 @@ function Get-PSCloudScript
             Break
         }
 
-        $Result = [Text.Encoding]::Utf8.GetString([Convert]::FromBase64String($GitHubApiContent.content))
-    }
-    #=================================================
-    #	ByUriContent
-    #=================================================
-    if ($PSCmdlet.ParameterSetName -eq 'ByUriContent')
-    {
-        
-        if ($Uri -match 'github')
+        if ($GitHubApiContent.count -eq 1)
         {
-            [System.Array]$ResolvedUrl = Get-GithubRawUrl -Uri $Uri
-        }
-        elseif (([System.Uri]$Uri).AbsoluteUri)
-        {
-            [System.String]$ResolvedUrl = ([System.Uri]$Uri).AbsoluteUri
+            $Result = [Text.Encoding]::Utf8.GetString([Convert]::FromBase64String($GitHubApiContent.content))
         }
         else
         {
-            [System.String]$ResolvedUrl = $Uri
+            foreach ($Item in $GitHubApiContent)
+            {
+                [array]$Result += Invoke-RestMethod $Item.download_url
+            }
         }
 
-        foreach ($Item in $ResolvedUrl)
-        {
-            try
-            {
-                $WebRequest = Invoke-WebRequest $Item -UseBasicParsing -Method Head -ErrorAction SilentlyContinue
-                if ($WebRequest.StatusCode -eq 200)
-                {
-                    if ($ResolvedUrl -is [System.Array])
-                    {
-                        [Array]$Result += (Invoke-WebRequest -Uri $Item -UseBasicParsing).Content
-                    }
-                    else
-                    {
-                        $Result = (Invoke-WebRequest -Uri $Item -UseBasicParsing).Content
-                    }
-                }
-            }
-            catch
-            {
-                Write-Warning $_
-            }
-        }
+
     }
     #=================================================
     #	Invoke
