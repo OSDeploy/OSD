@@ -1,63 +1,64 @@
 <#
 .Synopsis
-Runs an Azure Key Vault Secret using PowerShell Invoke-Expression
+Development function to get the contents of a PSCloudScript. Optionally allows for execution by command or file
 .Description
-Runs an Azure Key Vault Secret using PowerShell Invoke-Expression
+Development function to get the contents of a PSCloudScript. Optionally allows for execution by command or file
 .Link
 https://osd.osdeploy.com
 #>
 function Get-PSCloudScript
 {
-    [CmdletBinding(DefaultParameterSetName='ByUriContent')]
+    [CmdletBinding(DefaultParameterSetName='FromUriContent')]
     param
     (
-        [Parameter(Mandatory, ParameterSetName='ByUriContent',Position=0)]
+        [Parameter(Mandatory, ParameterSetName='FromUriContent',Position=0)]
         [ValidateNotNull()]
-        # Uri to store as the Azure Key Vault secret
+        # Uri content to use as a PSCloudScript
         [System.String]
         $Uri,
 
-        [Parameter(Mandatory, ParameterSetName='ByAzKeyVaultSecret')]
+        [Parameter(Mandatory, ParameterSetName='FromAzKeyVaultSecret')]
         [ValidateNotNull()]
         [System.String]
         # Specifies the name of the key vault to which the secret belongs. This cmdlet constructs the fully qualified domain name (FQDN) of a key vault based on the name that this parameter specifies and your current environment.
         $VaultName,
 
-        [Parameter(ParameterSetName='ByAzKeyVaultSecret')]
+        [Parameter(ParameterSetName='FromAzKeyVaultSecret')]
         [ValidateNotNull()]
         [System.String[]]
-        # Specifies the name of the secret to get.
+        # Specifies the name of the secret to get the content to use as a PSCloudScript
         $Name,
 
-        [Parameter(Mandatory, ParameterSetName='ByClipboard')]
-        # Clipboard text to store as the Azure Key Vault secret
+        [Parameter(Mandatory, ParameterSetName='FromClipboard')]
+        # Clipboard raw text to use as a PSCloudScript
         [System.Management.Automation.SwitchParameter]
         $Clipboard,
 
-        [Parameter(Mandatory, ParameterSetName='ByFileContent')]
-        # File selected to store the contents as the Azure Key Vault secret
-        [System.IO.FileInfo]$File,
+        [Parameter(Mandatory, ParameterSetName='FromFile')]
+        # File content to use as a PSCloudScript
+        [System.IO.FileInfo]
+        $File,
 
-        [Parameter(Mandatory, ParameterSetName='ByString')]
-        # String to store as the Azure Key Vault secret
+        [Parameter(Mandatory, ParameterSetName='FromString')]
+        # String to use as a PSCloudScript
         [System.String]
         $String,
         
-        [Parameter(Mandatory, ParameterSetName='ByGithubRepo')]
+        [Parameter(Mandatory, ParameterSetName='FromGitHubRepo')]
         [ValidateNotNull()]
         [System.String]
-        # Specifies the name of the key vault to which the secret belongs. This cmdlet constructs the fully qualified domain name (FQDN) of a key vault based on the name that this parameter specifies and your current environment.
+        # GitHub Organization
         $RepoOwner,
         
-        [Parameter(Mandatory, ParameterSetName='ByGithubRepo')]
+        [Parameter(Mandatory, ParameterSetName='FromGitHubRepo')]
         [ValidateNotNull()]
         [System.String]
-        # Specifies the name of the key vault to which the secret belongs. This cmdlet constructs the fully qualified domain name (FQDN) of a key vault based on the name that this parameter specifies and your current environment.
+        # GitHub Repo
         $RepoName,
         
-        [Parameter(Mandatory=$false, ParameterSetName='ByGithubRepo')]
+        [Parameter(Mandatory=$false, ParameterSetName='FromGitHubRepo')]
         [System.String]
-        # Specifies the name of the key vault to which the secret belongs. This cmdlet constructs the fully qualified domain name (FQDN) of a key vault based on the name that this parameter specifies and your current environment.
+        # GitHub Path
         $GithubPath = $null,
 
         [Parameter(Mandatory=$false)]
@@ -70,9 +71,9 @@ function Get-PSCloudScript
 
     $Result = $null
     #=================================================
-    #	ByUriContent
+    #	FromUriContent
     #=================================================
-    if ($PSCmdlet.ParameterSetName -eq 'ByUriContent')
+    if ($PSCmdlet.ParameterSetName -eq 'FromUriContent')
     {
         
         if ($Uri -match 'github')
@@ -112,9 +113,9 @@ function Get-PSCloudScript
         }
     }
     #=================================================
-    #	ByAzKeyVaultSecret
+    #	FromAzKeyVaultSecret
     #=================================================
-    if ($PSCmdlet.ParameterSetName -eq 'ByAzKeyVaultSecret')
+    if ($PSCmdlet.ParameterSetName -eq 'FromAzKeyVaultSecret')
     {
         $Module = Import-Module Az.Accounts -PassThru -ErrorAction Ignore
         if (-not $Module)
@@ -154,9 +155,9 @@ function Get-PSCloudScript
         }
     }
     #=================================================
-    #	ByClipboard
+    #	FromClipboard
     #=================================================
-    if ($PSCmdlet.ParameterSetName -eq 'ByClipboard')
+    if ($PSCmdlet.ParameterSetName -eq 'FromClipboard')
     {
         if (Get-Clipboard -ErrorAction Ignore)
         {
@@ -171,9 +172,9 @@ function Get-PSCloudScript
         }
     }
     #=================================================
-    #	ByFileContent
+    #	FromFile
     #=================================================
-    if ($PSCmdlet.ParameterSetName -eq 'ByFileContent')
+    if ($PSCmdlet.ParameterSetName -eq 'FromFile')
     {
         if (Test-Path $File)
         {
@@ -188,9 +189,16 @@ function Get-PSCloudScript
         }
     }
     #=================================================
-    #	ByGithubRepo
+    #	FromString
     #=================================================
-    if ($PSCmdlet.ParameterSetName -eq 'ByGithubRepo')
+    if ($PSCmdlet.ParameterSetName -eq 'FromString')
+    {
+        $Result = $String
+    }
+    #=================================================
+    #	FromGitHubRepo
+    #=================================================
+    if ($PSCmdlet.ParameterSetName -eq 'FromGitHubRepo')
     {
         $Uri = "https://api.github.com/repos/$RepoOwner/$RepoName/contents/$GithubPath"
         Write-Verbose $Uri

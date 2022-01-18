@@ -9,7 +9,7 @@ https://osd.osdeploy.com
 #>
 function ConvertTo-PSKeyVaultSecret
 {
-    [CmdletBinding(DefaultParameterSetName='FromString', PositionalBinding=$false)]
+    [CmdletBinding(DefaultParameterSetName='FromUriContent')]
     param
     (
         [Parameter(Mandatory)]
@@ -20,31 +20,34 @@ function ConvertTo-PSKeyVaultSecret
         
         [Parameter(Mandatory)]
         [Alias('Secret','SecretName')]
-        # Specifies the name of the secret to get.
+        # Specifies the name of the secret to set
         [System.String]
         $Name,
 
+        [Parameter(ParameterSetName='FromUriContent', Mandatory)]
+        # Uri content to set as the Azure Key Vault secret
+        [System.Uri]
+        $Uri,
+
         [Parameter(ParameterSetName='FromClipboard', Mandatory)]
-        # Clipboard text to store as the Azure Key Vault secret
+        # Clipboard raw text to set as the Azure Key Vault secret
         [System.Management.Automation.SwitchParameter]
         $Clipboard,
 
         [Parameter(ParameterSetName='FromFile', Mandatory)]
-        # File selected to store the contents as the Azure Key Vault secret
-        [System.IO.FileInfo]$File,
+        # File content to set as the Azure Key Vault secret
+        [System.IO.FileInfo]
+        $File,
 
         [Parameter(ParameterSetName='FromString', Mandatory)]
-        # String to store as the Azure Key Vault secret
+        # String to set as the Azure Key Vault secret
         [System.String]
-        $String,
-
-        [Parameter(ParameterSetName='FromUriContent', Mandatory)]
-        # Uri to store as the Azure Key Vault secret
-        [System.Uri]
-        $Uri
+        $String
     )
     $RawString = $null
-
+    #=================================================
+    #	Import Az Modules
+    #=================================================
     $Module = Import-Module Az.Accounts -PassThru -ErrorAction Ignore
     if (-not $Module)
     {
@@ -64,41 +67,9 @@ function ConvertTo-PSKeyVaultSecret
     
     if (Get-AzContext -ErrorAction Ignore)
     {
-        if ($PSCmdlet.ParameterSetName -eq 'FromClipboard')
-        {
-            if (Get-Clipboard -ErrorAction Ignore)
-            {
-                try
-                {
-                    $RawString = Get-Clipboard -Format Text -Raw
-                }
-                catch
-                {
-                    Write-Warning $_
-                }
-            }
-        }
-        if ($PSCmdlet.ParameterSetName -eq 'FromFile')
-        {
-            if (Test-Path $File)
-            {
-                try
-                {
-                    $RawString = Get-Content $File -Raw
-                }
-                catch
-                {
-                    Write-Warning $_
-                }
-            }
-        }
-        if ($PSCmdlet.ParameterSetName -eq 'FromString')
-        {
-            if ($String)
-            {
-                $RawString = $String
-            }
-        }
+        #=================================================
+        #	FromUriContent
+        #=================================================
         if ($PSCmdlet.ParameterSetName -eq 'FromUriContent')
         {
             $GithubRawUrl = (Get-GithubRawUrl -Uri $Uri)
@@ -120,6 +91,53 @@ function ConvertTo-PSKeyVaultSecret
                 }
             }
         }
+        #=================================================
+        #	FromClipboard
+        #=================================================
+        if ($PSCmdlet.ParameterSetName -eq 'FromClipboard')
+        {
+            if (Get-Clipboard -ErrorAction Ignore)
+            {
+                try
+                {
+                    $RawString = Get-Clipboard -Format Text -Raw
+                }
+                catch
+                {
+                    Write-Warning $_
+                }
+            }
+        }
+        #=================================================
+        #	FromFile
+        #=================================================
+        if ($PSCmdlet.ParameterSetName -eq 'FromFile')
+        {
+            if (Test-Path $File)
+            {
+                try
+                {
+                    $RawString = Get-Content $File -Raw
+                }
+                catch
+                {
+                    Write-Warning $_
+                }
+            }
+        }
+        #=================================================
+        #	FromString
+        #=================================================
+        if ($PSCmdlet.ParameterSetName -eq 'FromString')
+        {
+            if ($String)
+            {
+                $RawString = $String
+            }
+        }
+        #=================================================
+        #	Set-AzKeyVaultSecret
+        #=================================================
         if ($RawString)
         {
             try
