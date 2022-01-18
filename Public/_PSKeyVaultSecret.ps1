@@ -9,7 +9,7 @@ https://osd.osdeploy.com
 #>
 function ConvertTo-PSKeyVaultSecret
 {
-    [CmdletBinding(DefaultParameterSetName='ByString', PositionalBinding=$false)]
+    [CmdletBinding(DefaultParameterSetName='FromString', PositionalBinding=$false)]
     param
     (
         [Parameter(Mandatory)]
@@ -19,26 +19,26 @@ function ConvertTo-PSKeyVaultSecret
         $VaultName,
         
         [Parameter(Mandatory)]
-        [Alias('Secret')]
+        [Alias('Secret','SecretName')]
         # Specifies the name of the secret to get.
         [System.String]
         $Name,
 
-        [Parameter(ParameterSetName='ByClipboard', Mandatory)]
+        [Parameter(ParameterSetName='FromClipboard', Mandatory)]
         # Clipboard text to store as the Azure Key Vault secret
         [System.Management.Automation.SwitchParameter]
         $Clipboard,
 
-        [Parameter(ParameterSetName='ByFileContent', Mandatory)]
+        [Parameter(ParameterSetName='FromFile', Mandatory)]
         # File selected to store the contents as the Azure Key Vault secret
         [System.IO.FileInfo]$File,
 
-        [Parameter(ParameterSetName='ByString', Mandatory)]
+        [Parameter(ParameterSetName='FromString', Mandatory)]
         # String to store as the Azure Key Vault secret
         [System.String]
         $String,
 
-        [Parameter(ParameterSetName='ByUriContent', Mandatory)]
+        [Parameter(ParameterSetName='FromUriContent', Mandatory)]
         # Uri to store as the Azure Key Vault secret
         [System.Uri]
         $Uri
@@ -64,7 +64,7 @@ function ConvertTo-PSKeyVaultSecret
     
     if (Get-AzContext -ErrorAction Ignore)
     {
-        if ($PSCmdlet.ParameterSetName -eq 'ByClipboard')
+        if ($PSCmdlet.ParameterSetName -eq 'FromClipboard')
         {
             if (Get-Clipboard -ErrorAction Ignore)
             {
@@ -78,7 +78,7 @@ function ConvertTo-PSKeyVaultSecret
                 }
             }
         }
-        if ($PSCmdlet.ParameterSetName -eq 'ByFileContent')
+        if ($PSCmdlet.ParameterSetName -eq 'FromFile')
         {
             if (Test-Path $File)
             {
@@ -92,26 +92,32 @@ function ConvertTo-PSKeyVaultSecret
                 }
             }
         }
-        if ($PSCmdlet.ParameterSetName -eq 'ByString')
+        if ($PSCmdlet.ParameterSetName -eq 'FromString')
         {
             if ($String)
             {
                 $RawString = $String
             }
         }
-        if ($PSCmdlet.ParameterSetName -eq 'ByUriContent')
+        if ($PSCmdlet.ParameterSetName -eq 'FromUriContent')
         {
-            try
+            $GithubRawUrl = (Get-GithubRawUrl -Uri $Uri)
+
+            foreach ($Item in $GithubRawUrl)
             {
-                $WebRequest = Invoke-WebRequest "$Uri" -UseBasicParsing -Method Head -MaximumRedirection 0 -ErrorAction SilentlyContinue
-                if ($WebRequest.StatusCode -eq 200)
+                try
                 {
-                    $RawString = (Invoke-WebRequest -Uri $Uri -UseBasicParsing).Content
+                    $WebRequest = Invoke-WebRequest "$Item" -UseBasicParsing -Method Head -MaximumRedirection 0 -ErrorAction SilentlyContinue
+                    if ($WebRequest.StatusCode -eq 200)
+                    {
+                        if ($RawString) {[System.String]$RawString += "`n"}
+                        [System.String]$RawString += Invoke-RestMethod -Uri $Item
+                    }
                 }
-            }
-            catch
-            {
-                Write-Warning $_
+                catch
+                {
+                    Write-Warning $_
+                }
             }
         }
         if ($RawString)
@@ -119,7 +125,7 @@ function ConvertTo-PSKeyVaultSecret
             try
             {
                 $SecretValue = ConvertTo-SecureString -String $RawString -AsPlainText -Force
-                Set-AzKeyVaultSecret -VaultName $VaultName -Name $Name -SecretValue $SecretValue
+                Set-AzKeyVaultSecret -VaultName $VaultName -Name $Name -SecretValue $SecretValue -ContentType 'text/plain'
             }
             catch
             {
