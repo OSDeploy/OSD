@@ -113,7 +113,13 @@ function Get-ReAgentXml {
             $WinreLocationOffset = $_.WinreLocation.offset
             $WinreLocationPath = $_.WinreLocation.path
 
-            $WinreLocationPartition = (Get-Disk -Number $WinreLocationId | Get-Partition | Where-Object {$_.Offset -eq $WinreLocationOffset}).PartitionNumber
+            if ($WinreLocationId -gt 1000) {
+                $WinreLocationPartition = (Get-Disk | Where-Object {$_.Signature -eq $WinreLocationId} | Get-Partition | Where-Object {$_.Offset -eq $WinreLocationOffset}).PartitionNumber
+            }
+            else {
+                $WinreLocationPartition = (Get-Disk -Number $WinreLocationId | Get-Partition | Where-Object {$_.Offset -eq $WinreLocationOffset}).PartitionNumber
+            }
+
 
             $WinreBCD = $_.WinreBCD.id -replace ('{','') -replace ('}','')
 
