@@ -265,9 +265,6 @@ Windows Registry Editor Version 5.00
     if (-NOT (Test-Path "$DestinationSources")) {
         New-Item -Path "$DestinationSources" -ItemType Directory -Force -ErrorAction Stop | Out-Null
     }
-
-    Break
-
     if ($PSBoundParameters.ContainsKey('WinRE')) {
         Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Copying WinRE.wim"
         Write-Host -ForegroundColor Yellow "OSD Function: Copy-WinRE.wim"
@@ -294,6 +291,12 @@ Windows Registry Editor Version 5.00
         Write-Host -ForegroundColor DarkGray "========================================================================="
         Break
     }
+    
+        
+    Write-Verbose -Verbose 'ATTRIB'
+    attrib -s -h -r $DestinationSources
+    attrib -s -h -r $BootWim
+    pause
     #=================================================
     #   Download wgl4_boot.ttf
     #   This is used to resolve issues with WinPE Resolutions in 2004/20H2
