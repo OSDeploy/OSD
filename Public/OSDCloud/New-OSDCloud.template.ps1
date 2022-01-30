@@ -291,12 +291,8 @@ Windows Registry Editor Version 5.00
         Write-Host -ForegroundColor DarkGray "========================================================================="
         Break
     }
-    
-        
-    Write-Verbose -Verbose 'ATTRIB'
     attrib -s -h -r $DestinationSources
     attrib -s -h -r $BootWim
-    pause
     #=================================================
     #   Download wgl4_boot.ttf
     #   This is used to resolve issues with WinPE Resolutions in 2004/20H2
