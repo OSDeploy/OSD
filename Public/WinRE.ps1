@@ -69,10 +69,13 @@ function Copy-WinRE.wim {
         if ($CreateNewDriveLetter) {
             Remove-PartitionAccessPath -DiskNumber $GetPartitionWinRE.DiskNumber -PartitionNumber $GetPartitionWinRE.PartitionNumber -AccessPath "$($WinrePartitionDriveLetter):"
         }
+        
+        Write-Verbose -Verbose 'ATTRIB'
+        attrib -s -h -r $DestinationDirectory
+        attrib -s -h -r $DestinationFileName
         #=================================================
         #	Return WinreDestination Get-Item
         #=================================================
-        attrib -s -h -r $DestinationDirectory
         if (Test-Path $WinreDestination -ErrorAction Ignore) {
             (Get-Item -Path $WinreDestination -Force).Attributes = 'Archive'
             Get-Item -Path $WinreDestination
