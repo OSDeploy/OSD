@@ -603,6 +603,19 @@ Windows Registry Editor Version 5.00
         Write-Warning "Could not find $SourceFile"
     }
     #=================================================
+    #   Adding Microsoft DartConfig from MDT
+    #=================================================
+    Write-Host -ForegroundColor DarkGray "========================================================================="
+    Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Microsoft DaRT Config from MDT"
+    $SourceFile = "C:\Program Files\Microsoft Deployment Toolkit\Templates\DartConfig8.dat"
+    if (Test-Path $SourceFile) {
+        Write-Host -ForegroundColor DarkGray $SourceFile
+        Copy-Item -Path $SourceFile -Destination "$MountPath\Windows\System32\DartConfig.dat" -Force
+    }
+    else {
+        Write-Warning "Could not find $SourceFile"
+    }
+    #=================================================
     #   Adding Microsoft DaRT
     #=================================================
     Write-Host -ForegroundColor DarkGray "========================================================================="
@@ -611,14 +624,8 @@ Windows Registry Editor Version 5.00
     if (Test-Path $SourceFile) {
         Write-Host -ForegroundColor DarkGray $SourceFile
         expand.exe "$SourceFile" -F:*.* "$MountPath" | Out-Null
-
-        $SourceFile = "C:\Program Files\Microsoft Deployment Toolkit\Templates\DartConfig8.dat"
-        if (Test-Path $SourceFile) {
-            Write-Host -ForegroundColor DarkGray $SourceFile
-            Copy-Item -Path $SourceFile -Destination "$MountPath\Windows\System32\DartConfig.dat" -Force
-        }
-        else {
-            Write-Warning "Could not find $SourceFile"
+        if (!(Test-Path "$MountPath\Windows\System32\DartConfig.dat")) {
+            Write-Warning "Microsoft DaRT requires MDT to be installed so DartConfig.dat can be copied"
         }
     }
     else {
