@@ -1,7 +1,7 @@
 function Copy-WinRE.wim {
     [CmdletBinding()]
     param (
-        [string]$DestinationDirectory = $env:Temp,
+        [string]$DestinationDirectory = "$env:Temp\sources",
 
         [string]$DestinationFileName = 'winre.wim'
     )
@@ -44,6 +44,10 @@ function Copy-WinRE.wim {
         $WinreDirectory = Join-Path "$($WinrePartitionDriveLetter):" -ChildPath $WinreLocationPath
         Write-Verbose "WinreDirectory: $WinreDirectory"
 
+        if (!(Test-Path $DestinationDirectory)) {
+            $null = New-Item -Path $DestinationDirectory -ItemType Directory -Force -ErrorAction SilentlyContinue
+        }
+
         if (Test-Path "$WinreDirectory" -PathType Container -ErrorAction Ignore) {
             $WinreSource = Join-Path $WinreDirectory -ChildPath 'winre.wim'
             Write-Verbose "WinreSource: $WinreSource"
@@ -68,6 +72,7 @@ function Copy-WinRE.wim {
         #=================================================
         #	Return WinreDestination Get-Item
         #=================================================
+        attrib -s -h -r $DestinationDirectory
         if (Test-Path $WinreDestination -ErrorAction Ignore) {
             (Get-Item -Path $WinreDestination -Force).Attributes = 'Archive'
             Get-Item -Path $WinreDestination
