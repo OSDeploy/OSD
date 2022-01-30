@@ -1,33 +1,21 @@
-function Get-OSDCloud.workspace {
-    [CmdletBinding()]
-    param ()
-
-    if (Test-Path "$env:ProgramData\OSDCloud\workspace.json") {
-        $WorkspaceSettings = Get-Content -Path "$env:ProgramData\OSDCloud\workspace.json" | ConvertFrom-Json
-        $WorkspacePath = $WorkspaceSettings.WorkspacePath
-        $WorkspacePath
-    } else {
-        $null
-    }
-}
 <#
 .SYNOPSIS
-Creates an OSDCloud Workspace
+Creates or updates an OSDCloud Workspace
 
 .Description
-Creates an OSDCloud Workspace
+Creates or updates an OSDCloud Workspace from an OSDCloud Template
 
 .PARAMETER WorkspacePath
-Directory for the Workspace to contain the Media directory and the .iso file
+Directory for the OSDCloud Workspace to create or update.  Default is $env:SystemDrive\OSDCloud
 
 .LINK
 https://osdcloud.osdeploy.com
 #>
 function New-OSDCloud.workspace {
-    [CmdletBinding(PositionalBinding = $false)]
+    [CmdletBinding()]
     param (
-        [Parameter(Mandatory = $true)]
-        [string]$WorkspacePath
+        [Parameter(Position=0)]
+        [System.String]$WorkspacePath = "$env:SystemDrive\OSDCloud"
     )
     #=================================================
     #	Start the Clock
@@ -136,29 +124,5 @@ function New-OSDCloud.workspace {
     Write-Host -ForegroundColor Cyan        "OSDCloud Workspace created at $WorkspacePath"
     Write-Host -ForegroundColor DarkGray    "================================================"
     Stop-Transcript
-    #=================================================
-}
-function Set-OSDCloud.workspace {
-    [CmdletBinding(PositionalBinding = $false)]
-    param (
-        [Parameter(Mandatory = $true)]
-        [string]$WorkspacePath
-    )
-    #=================================================
-    #	Block
-    #=================================================
-    Block-StandardUser
-    Block-PowerShellVersionLt5
-    Block-WinPE
-    #=================================================
-    #	Set-OSDCloud.workspace
-    #=================================================
-    $WorkspaceSettings = [PSCustomObject]@{
-        WorkspacePath = $WorkspacePath
-    }
-
-    $WorkspaceSettings | ConvertTo-Json | Out-File "$env:ProgramData\OSDCloud\workspace.json" -Encoding ascii -Width 2000 -Force
-
-    $WorkspacePath
     #=================================================
 }

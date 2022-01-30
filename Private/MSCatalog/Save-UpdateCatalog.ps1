@@ -55,7 +55,7 @@ function Save-UpdateCatalog {
     if ($Links.Matches.Count -eq 1) {
         $Link = $Links.Matches[0]
 
-        Write-Host -ForegroundColor DarkGray "DownloadUrl: $($Link.Value)"
+        Write-Host -ForegroundColor DarkGray "$($Link.Value)"
 
         $SaveWebFile = Save-WebFile -SourceUrl $Link.Value -DestinationDirectory "$DestinationDirectory" -DestinationName $Link.Value.Split('/')[-1]
         $SaveWebFile

@@ -111,30 +111,40 @@ function Save-MsUpCatDriver {
         #	ByHardwareID
         #=================================================
         if ($PSCmdlet.ParameterSetName -eq 'ByHardwareID') {
-    
             foreach ($Item in $HardwareID) {
+                $WindowsUpdateDriver = $null
                 #See if DeviceID matches the pattern
                 $FindHardwareID = $Item | Select-String -Pattern $DeviceIDPattern -AllMatches | Select-Object -ExpandProperty Matches | Select-Object -ExpandProperty Value
     
                 if ($FindHardwareID) {
                     $SearchString = "$FindHardwareID".Replace('&',"`%26")
-                    $WindowsUpdateDriver = Get-MsUpCat -Search "1903+$SearchString" -Descending | Select-Object LastUpdated,Title,Version,Size,Guid -First 1 -ErrorAction Ignore
-        
+
+                    #Windows 10 2004 - 21H1
+                    $WindowsUpdateDriver = Get-MsUpCat -Search "Vibranium+$SearchString" -Descending | Select-Object LastUpdated,Title,Version,Size,Guid -First 1 -ErrorAction Ignore
+                    if (-not ($WindowsUpdateDriver)) {
+                        $WindowsUpdateDriver = Get-MsUpCat -Search "1903+$SearchString" -Descending | Select-Object LastUpdated,Title,Version,Size,Guid -First 1 -ErrorAction Ignore
+                    }
+                    if (-not ($WindowsUpdateDriver)) {
+                        $WindowsUpdateDriver = Get-MsUpCat -Search "1809+$SearchString" -Descending | Select-Object LastUpdated,Title,Version,Size,Guid -First 1 -ErrorAction Ignore
+                    }
+
                     if ($WindowsUpdateDriver.Guid) {
-                        Write-Host -ForegroundColor Cyan $Item
-                        Write-Host -ForegroundColor DarkGray "HardwareID: $FindHardwareID"
-                        Write-Host -ForegroundColor DarkGray "SearchString: $SearchString"
-    
-                        Write-Host -ForegroundColor DarkGray "$($WindowsUpdateDriver.Title) version $($WindowsUpdateDriver.Version)"
-                        Write-Host -ForegroundColor DarkGray "Version $($WindowsUpdateDriver.Version) Size: $($WindowsUpdateDriver.Size)"
-                        Write-Host -ForegroundColor DarkGray "Last Updated $($WindowsUpdateDriver.LastUpdated)"
+                        Write-Host -ForegroundColor Cyan "$Item $($WindowsUpdateDriver.Title)"
                         Write-Host -ForegroundColor DarkGray "UpdateID: $($WindowsUpdateDriver.Guid)"
+                        Write-Host -ForegroundColor DarkGray "Size: $($WindowsUpdateDriver.Size) Last Updated $($WindowsUpdateDriver.LastUpdated)"
+
+                        #Write-Host -ForegroundColor DarkGray "HardwareID: $FindHardwareID"
+                        #Write-Host -ForegroundColor DarkGray "SearchString: $SearchString"
+    
+                        #Write-Host -ForegroundColor DarkGray "$($WindowsUpdateDriver.Title) version $($WindowsUpdateDriver.Version)"
+                        #Write-Host -ForegroundColor DarkGray "Version $($WindowsUpdateDriver.Version) Size: $($WindowsUpdateDriver.Size)"
+                        #Write-Host -ForegroundColor DarkGray "Last Updated $($WindowsUpdateDriver.LastUpdated)"
     
                         if ($DestinationDirectory) {
                             $DestinationPath = Join-Path $DestinationDirectory $WindowsUpdateDriver.Guid
-                            Write-Host -ForegroundColor DarkGray "DestinationPath: $DestinationPath"
                             $WindowsUpdateDriverFile = Save-UpdateCatalog -Guid $WindowsUpdateDriver.Guid -DestinationDirectory $DestinationPath
                             if ($WindowsUpdateDriverFile) {
+                                Write-Host -ForegroundColor DarkGray "Complete: $DestinationPath"
                                 expand.exe "$($WindowsUpdateDriverFile.FullName)" -F:* "$DestinationPath" | Out-Null
                                 Remove-Item $WindowsUpdateDriverFile.FullName | Out-Null
                             }
