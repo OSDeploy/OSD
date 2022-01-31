@@ -14,7 +14,7 @@ https://osdcloud.osdeploy.com
 function New-OSDCloud.workspace {
     [CmdletBinding()]
     param (
-        [Parameter(Position=0)]
+        [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
         [System.String]$WorkspacePath = "$env:SystemDrive\OSDCloud"
     )
     #=================================================

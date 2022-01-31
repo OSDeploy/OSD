@@ -13,16 +13,15 @@ https://osdcloud.osdeploy.com
 
 .NOTES
 #>
-function New-OSDCloud.usb {
+function New-AzOSDCloudUsb {
     [CmdletBinding()]
     param (
-        [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
-        [System.String]$WorkspacePath
+        [System.Uri]$Uri = 'https://winpe.blob.core.windows.net/public/OSDCloud_22.1.30.iso'
     )
     #=================================================
     #	Start the Clock
     #=================================================
-    $osdcloudusbStartTime = Get-Date
+    $azosdcloudusbStartTime = Get-Date
     #=================================================
     #	Block
     #=================================================
@@ -37,38 +36,29 @@ function New-OSDCloud.usb {
     $BootLabel = 'WinPE'
     $DataLabel = 'OSDCloud'
     #=================================================
-    #	Set WorkspacePath
+    #	Download ISO
     #=================================================
-    if ($PSBoundParameters.ContainsKey('WorkspacePath')) {
-        Set-OSDCloud.workspace -WorkspacePath $WorkspacePath -ErrorAction Stop | Out-Null
+    if ($Uri.AbsolutePath) {
+        $WinpeIsoUrl = $Uri.AbsolutePath
     }
-    $WorkspacePath = Get-OSDCloud.workspace -ErrorAction Stop
-    #=================================================
-    #	Setup Workspace
-    #=================================================
-    if (-NOT ($WorkspacePath)) {
-        Write-Warning "You need to provide a path to your Workspace with one of the following examples"
-        Write-Warning "New-OSDCloud.iso -WorkspacePath C:\OSDCloud"
-        Write-Warning "New-OSDCloud.workspace -WorkspacePath C:\OSDCloud"
+    else {
+        $WinpeIsoUrl = $Uri.OriginalString
+    }
+    $WinpeIsoDownload = Save-WebFile -SourceUrl $WinpeIsoUrl -DestinationDirectory (Join-Path $HOME 'Downloads')
+
+    if ($WinpeIsoUrl) {
+
+    }
+    else {
+        Write-Warning "Could not download $WinpeIsoUrl"
         Break
     }
 
-    if (-NOT (Test-Path $WorkspacePath)) {
-        New-OSDCloud.workspace -WorkspacePath $WorkspacePath -Verbose -ErrorAction Stop
-    }
-
-    if (-NOT (Test-Path "$WorkspacePath\Media")) {
-        New-OSDCloud.workspace -WorkspacePath $WorkspacePath -Verbose -ErrorAction Stop
-    }
-
-    if (-NOT (Test-Path "$WorkspacePath\Media\sources\boot.wim")) {
-        Write-Warning "Nothing is going well for you today my friend"
-        Break
-    }
+    Break
     #=================================================
     #	New-Bootable.usb
     #=================================================
-    $BootableUSB = New-Bootable.usb -BootLabel 'WinPE' -DataLabel 'OSDCloud'
+    $BootableUSB = New-Bootable.usb -BootLabel $BootLabel -DataLabel $DataLabel
     #=================================================
     #	Get-Partition.usb
     #=================================================
@@ -82,6 +72,10 @@ function New-OSDCloud.usb {
         Write-Warning "Something went very very wrong in this process"
         Break
     }
+
+
+
+    Break
     #=================================================
     #	Copy OSDCloud
     #=================================================
@@ -97,10 +91,10 @@ function New-OSDCloud.usb {
     #=================================================
     #	Complete
     #=================================================
-    $osdcloudusbEndTime = Get-Date
-    $osdcloudusbTimeSpan = New-TimeSpan -Start $osdcloudusbStartTime -End $osdcloudusbEndTime
+    $azosdcloudusbEndTime = Get-Date
+    $azosdcloudusbTimeSpan = New-TimeSpan -Start $azosdcloudusbStartTime -End $azosdcloudusbEndTime
     Write-Host -ForegroundColor DarkGray    "================================================"
     Write-Host -ForegroundColor Yellow      "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) $($MyInvocation.MyCommand.Name) " -NoNewline
-    Write-Host -ForegroundColor Cyan        "Completed in $($osdcloudusbTimeSpan.ToString("mm' minutes 'ss' seconds'"))"
+    Write-Host -ForegroundColor Cyan        "Completed in $($azosdcloudusbTimeSpan.ToString("mm' minutes 'ss' seconds'"))"
     #=================================================
 }

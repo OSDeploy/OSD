@@ -9,7 +9,7 @@ function Update-OSDCloud.usb {
     Block-PowerShellVersionLt5
     Block-StandardUser
     #=================================================
-    #	USBBOOT
+    #	Build
     #=================================================
     $OSDCloudWorkspace = Get-OSDCloud.workspace
 
@@ -17,29 +17,27 @@ function Update-OSDCloud.usb {
         Write-Host -ForegroundColor DarkGray "========================================================================="
         Write-Host -ForegroundColor DarkGray  "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) OSDCloud Workspace: $OSDCloudWorkspace"
         #=================================================
-        #	USBBOOT
+        #	Set Boot Labels
         #=================================================
-        $USBBOOT = Get-Volume.usb | Where-Object {$_.FileSystemLabel -eq 'USBBOOT'}
+        $UpdateBootLabel = Get-Volume.usb | Where-Object {($_.FileSystemLabel -eq 'USBBOOT') -or ($_.FileSystemLabel -eq 'OSDBOOT')}
     
-        if ($USBBOOT) {
-            Write-Host -ForegroundColor DarkGray "Setting NewFileSystemLabel to OSDBoot"
-            Set-Volume -DriveLetter $USBBOOT.DriveLetter -NewFileSystemLabel 'OSDBoot' -ErrorAction Ignore
+        foreach ($Item in $UpdateBootLabel) {
+                Write-Host -ForegroundColor DarkGray "Setting NewFileSystemLabel to WinPE"
+                Set-Volume -DriveLetter $UpdateBootLabel.DriveLetter -NewFileSystemLabel 'WinPE' -ErrorAction Ignore
         }
         #=================================================
-        #	OSDBoot
+        #	WinPE
         #=================================================
-        $OSDBoot = (Get-Volume.usb | Where-Object {$_.FileSystemLabel -eq 'OSDBoot'}).DriveLetter
+        $WinpeVolume = (Get-Volume.usb | Where-Object {$_.FileSystemLabel -eq 'WinPE'}).DriveLetter
     
-        if ($OSDBoot) {
-            #Write-Host -ForegroundColor DarkGray "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Updating USB Volume OSDBoot with content from $OSDCloudWorkspace\Media"
-            
+        if ($WinpeVolume) {            
             if ($PSBoundParameters.ContainsKey('Mirror')) {
-                Write-Host -ForegroundColor DarkGray "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Mirroring $OSDCloudWorkspace\Media to $($OSDBoot):\"
-                robocopy "$OSDCloudWorkspace\Media" "$($OSDBoot):\" *.* /mir /ndl /np /njh /njs /b /r:0 /w:0 /zb /xd "$RECYCLE.BIN" "System Volume Information"
+                Write-Host -ForegroundColor DarkGray "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Mirroring $OSDCloudWorkspace\Media to $($WinpeVolume):\"
+                robocopy "$OSDCloudWorkspace\Media" "$($WinpeVolume):\" *.* /mir /ndl /np /njh /njs /b /r:0 /w:0 /zb /xd "$RECYCLE.BIN" "System Volume Information"
             }
             else {
-                Write-Host -ForegroundColor DarkGray "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Copying $OSDCloudWorkspace\Media to $($OSDBoot):\"
-                robocopy "$OSDCloudWorkspace\Media" "$($OSDBoot):\" *.* /e /ndl /np /njh /njs /b /r:0 /w:0 /zb /xd "$RECYCLE.BIN" "System Volume Information"
+                Write-Host -ForegroundColor DarkGray "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Copying $OSDCloudWorkspace\Media to $($WinpeVolume):\"
+                robocopy "$OSDCloudWorkspace\Media" "$($WinpeVolume):\" *.* /e /ndl /np /njh /njs /b /r:0 /w:0 /zb /xd "$RECYCLE.BIN" "System Volume Information"
             }
         }
         #=================================================
