@@ -1,38 +1,38 @@
 function Save-WinPECloudDriver {
     [CmdletBinding()]
     param (
-        [ValidateSet('*','Dell','HP','Intel','LenovoDock','Nutanix','USB','VMware','WiFi')]
+        [ValidateSet('*','Dell','HP','IntelNet','LenovoDock','Nutanix','USB','VMware','WiFi')]
         [System.String[]]$CloudDriver,
         [System.String[]]$HardwareID,
         [System.String]$Path,
-        [System.Switch]$Clipboard
+        [Switch]$Clipboard
     )
     #=================================================
     #	Cloud Drivers
     #=================================================
     if ($CloudDriver -contains '*') {
-        $CloudDriver = @('Dell','HP','Intel','LenovoDock','Nutanix','USB','VMware','WiFi')
+        $CloudDriver = @('Dell','HP','IntelNet','LenovoDock','Nutanix','USB','VMware','WiFi')
     }
 
-    $DellCloudDriverText            = 'Dell A25 WinPE Driver Pack'
+    $DellCloudDriverText            = 'Dell WinPE Driver Pack [A25]'
     $DellCloudDriverUrl             = 'http://downloads.dell.com/FOLDER07703466M/1/WinPE10.0-Drivers-A25-F0XPX.CAB'
     
-    $HpCloudDriverText              = 'HP 2.0 WinPE Driver Pack'
+    $HpCloudDriverText              = 'HP WinPE Driver Pack [2.0]'
     $HpCloudDriverUrl               = 'https://ftp.hp.com/pub/softpaq/sp112501-113000/sp112810.exe'
 
-    $IntelEthernetCloudDriverText   = 'Intel Ethernet 26.8 WinPE Driver Pack'
+    $IntelEthernetCloudDriverText   = 'Intel Ethernet Driver Pack [26.8]'
     $IntelEthernetCloudDriverUrl    = 'https://downloadmirror.intel.com/710138/Wired_driver_26.8_x64.zip'
     
-    $IntelWiFiCloudDriverText       = 'Intel Wireless 22.80.1 WinPE Driver Pack'
+    $IntelWiFiCloudDriverText       = 'Intel Wireless Driver Pack [22.80.1]'
     $IntelWiFiCloudDriverUrl        = 'https://downloadmirror.intel.com/655277/WiFi-22.80.1-Driver64-Win10-Win11.zip'
     
-    $LenovoDockCloudDriverText      = 'Lenovo Dock 22.1.31 WinPE Driver Pack'
+    $LenovoDockCloudDriverText      = 'Lenovo Dock WinPE Driver Pack [22.1.31]'
     $LenovoDockCloudDriverUrl       = @(
                                         'https://download.lenovo.com/pccbbs/mobiles/rtk-winpe-w10.zip'
                                         'https://download.lenovo.com/km/media/attachment/USBCG2.zip'
                                         )
 
-    $NutanixCloudDriverText         = 'Nutanix WinPE Driver Pack (Microsoft Catalog)'
+    $NutanixCloudDriverText         = 'Nutanix WinPE Driver Pack [Microsoft Catalog]'
     $NutanixCloudDriverUrl          = 'https://github.com/OSDeploy/OSDCloud/raw/main/Drivers/WinPE/Nutanix.cab'
     $NutanixCloudDriverHwids         = @(
                                         'VEN_1AF4&DEV_1000 and VEN_1AF4&DEV_1041' #Red Hat Nutanix VirtIO Ethernet Adapter
@@ -40,16 +40,17 @@ function Save-WinPECloudDriver {
                                         'VEN_1AF4&DEV_1004 and VEN_1AF4&DEV_1048' #Red Hat Nutanix VirtIO SCSI pass-through controller
                                         )
     
-    $UsbDongleHwidsText             = 'USB Dongle 22.1.31 Driver Pack (Microsoft Catalog)'
+    $UsbDongleHwidsText             = 'USB Dongle Driver Pack [Microsoft Catalog]'
     $UsbDongleHwids                 = @(
                                         'VID_045E&PID_0927 VID_045E&PID_0927 VID_045E&PID_09A0 Surface Ethernet'
                                         'VID_0B95&PID_7720 VID_0B95&PID_7E2B Asix AX88772 USB2.0 to Fast Ethernet'
                                         'VID_0B95&PID_1790 ASIX AX88179 USB 3.0 to Gigabit Ethernet'
                                         'VID_0BDA&PID_8153 Realtek USB GbE and Dell DA 300'
+                                        'VID_13B1&PID_0041'
                                         'VID_17EF&PID_720C Lenovo USB-C Ethernet'
                                         )
     
-    $VmwareCloudDriverText          = 'VMware WinPE Driver Pack (Microsoft Catalog)'
+    $VmwareCloudDriverText          = 'VMware WinPE Driver Pack [Microsoft Catalog]'
     $VmwareCloudDriverUrl           = 'https://github.com/OSDeploy/OSDCloud/raw/main/Drivers/WinPE/VMware.cab'
     $VmwareCloudDriverHwids         = @(
                                         'VEN_15AD&DEV_0740' #VMware Virtual Machine Communication Interface
@@ -60,7 +61,7 @@ function Save-WinPECloudDriver {
     #	Block
     #=================================================
     Block-WinPE
-    #Block-StandardUser
+    Block-StandardUser
     Block-WindowsVersionNe10
     Block-PowerShellVersionLt5
     Block-NoCurl
@@ -161,7 +162,7 @@ function Save-WinPECloudDriver {
         #=================================================
         #   Intel Ethernet
         #=================================================
-        if ($DriverPack -eq 'Intel') {
+        if ($DriverPack -eq 'IntelNet') {
             Write-Host -ForegroundColor Yellow $IntelEthernetCloudDriverText
 
             if (Test-WebConnection -Uri $IntelEthernetCloudDriverUrl)   {
@@ -176,7 +177,7 @@ function Save-WinPECloudDriver {
                     #$DriverPackExpand = Join-Path $DriverPackItem.Directory $DriverPackItem.BaseName
                     $DriverPackExpand = Join-Path $Path (Join-Path $DriverPack $DriverPackItem.BaseName)
                     Expand-Archive -Path $DriverPackItem.FullName -DestinationPath $DriverPackExpand -Force
-                    $RemoveItems = Get-ChildItem -Path $DriverPackExpand -Directory -Recurse | Where-Object {$_.Name -in @('APPS','NDIS63','NDIS64','NDIS68','PRO2500','WS2022')}
+                    $RemoveItems = Get-ChildItem -Path $DriverPackExpand -Directory -Recurse | Where-Object {$_.Name -in @('APPS','NDIS63','NDIS64')}
                     foreach ($Item in $RemoveItems) {
                         Remove-Item $Item.FullName -Recurse -Force -ErrorAction Ignore
                     }

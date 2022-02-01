@@ -23,7 +23,7 @@ https://osdcloud.osdeploy.com
 function Edit-OSDCloud.winpe {
     [CmdletBinding(PositionalBinding = $false)]
     param (
-        [ValidateSet('*','Dell','HP','Intel','LenovoDock','Nutanix','USB','VMware','WiFi')]
+        [ValidateSet('*','Dell','HP','IntelNet','LenovoDock','Nutanix','USB','VMware','WiFi')]
         [string[]]$CloudDriver,
         [string[]]$DriverHWID,
         [string[]]$DriverPath,
@@ -46,55 +46,6 @@ function Edit-OSDCloud.winpe {
     #	Start the Clock
     #=================================================
     $WinpeStartTime = Get-Date
-    #=================================================
-    #	Cloud Drivers
-    #=================================================
-    if ($CloudDriver -contains '*') {
-        $CloudDriver = @('Dell','HP','Intel','LenovoDock','Nutanix','USB','VMware','WiFi')
-    }
-
-    $DellCloudDriverText            = 'Dell A25 WinPE Driver Pack'
-    $DellCloudDriverUrl             = 'http://downloads.dell.com/FOLDER07703466M/1/WinPE10.0-Drivers-A25-F0XPX.CAB'
-    
-    $HpCloudDriverText              = 'HP 2.0 WinPE Driver Pack'
-    $HpCloudDriverUrl               = 'https://ftp.hp.com/pub/softpaq/sp112501-113000/sp112810.exe'
-
-    $IntelEthernetCloudDriverText   = 'Intel Ethernet 26.8 WinPE Driver Pack'
-    $IntelEthernetCloudDriverUrl    = 'https://downloadmirror.intel.com/710138/Wired_driver_26.8_x64.zip'
-    
-    $IntelWiFiCloudDriverText       = 'Intel Wireless 22.80.1 WinPE Driver Pack'
-    $IntelWiFiCloudDriverUrl        = 'https://downloadmirror.intel.com/655277/WiFi-22.80.1-Driver64-Win10-Win11.zip'
-    
-    $LenovoDockCloudDriverText      = 'Lenovo Dock 22.1.31 WinPE Driver Pack'
-    $LenovoDockCloudDriverUrl       = @(
-                                        'https://download.lenovo.com/pccbbs/mobiles/rtk-winpe-w10.zip'
-                                        'https://download.lenovo.com/km/media/attachment/USBCG2.zip'
-                                        )
-
-    $NutanixCloudDriverText         = 'Nutanix WinPE Driver Pack'
-    $NutanixCloudDriverUrl          = 'https://github.com/OSDeploy/OSDCloud/raw/main/Drivers/WinPE/Nutanix.cab'
-    $NutanixCloudDriverHwids         = @(
-                                        'VEN_1AF4&DEV_1000 and VEN_1AF4&DEV_1041' #Red Hat Nutanix VirtIO Ethernet Adapter
-                                        'VEN_1AF4&DEV_1002' #Red Hat Nutanix VirtIO Balloon
-                                        'VEN_1AF4&DEV_1004 and VEN_1AF4&DEV_1048' #Red Hat Nutanix VirtIO SCSI pass-through controller
-                                        )
-    
-    $UsbDongleHwidsText             = 'OSDCloud USB Dongle 22.1.31 Driver Pack'
-    $UsbDongleHwids                 = @(
-                                        'VID_045E&PID_0927 VID_045E&PID_0927 VID_045E&PID_09A0 Surface Ethernet'
-                                        'VID_0B95&PID_7720 VID_0B95&PID_7E2B Asix AX88772 USB2.0 to Fast Ethernet'
-                                        'VID_0B95&PID_1790 ASIX AX88179 USB 3.0 to Gigabit Ethernet'
-                                        'VID_0BDA&PID_8153 Realtek USB GbE and Dell DA 300'
-                                        'VID_17EF&PID_720C Lenovo USB-C Ethernet'
-                                        )
-    
-    $VmwareCloudDriverText          = 'VMware WinPE Driver Pack'
-    $VmwareCloudDriverUrl           = 'https://github.com/OSDeploy/OSDCloud/raw/main/Drivers/WinPE/VMware.cab'
-    $VmwareCloudDriverHwids         = @(
-                                        'VEN_15AD&DEV_0740' #VMware Virtual Machine Communication Interface
-                                        'VEN_15AD&DEV_07B0' #VMware VMXNET3 Ethernet Controller
-                                        'VEN_15AD&DEV_07C0' #VMware PVSCSI Controller
-                                        )
     #=================================================
     #	Block
     #=================================================
@@ -178,21 +129,15 @@ function Edit-OSDCloud.winpe {
         robocopy "$WorkspacePath\ODT" "$MountPath\OSDCloud\ODT" setup.exe /mir /ndl /njh /njs /b /np
     }
     #=================================================
-    #   DriverPath
-    #=================================================
-    foreach ($Driver in $DriverPath) {
-        Add-WindowsDriver -Path "$($MountMyWindowsImage.Path)" -Driver "$Driver" -Recurse -ForceUnsigned -Verbose
-    }
-    #=================================================
     #   DriverHWID
     #=================================================
     if ($DriverHWID) {
-        $HardwareIDDriverPath = Join-Path $env:TEMP (Get-Random)
+        $AddWindowsDriverPath = Join-Path $env:TEMP (Get-Random)
         foreach ($Item in $DriverHWID) {
-            Save-MsUpCatDriver -HardwareID $Item -DestinationDirectory $HardwareIDDriverPath
+            Save-MsUpCatDriver -HardwareID $Item -DestinationDirectory $AddWindowsDriverPath
         }
         try {
-            Add-WindowsDriver -Path "$($MountMyWindowsImage.Path)" -Driver $HardwareIDDriverPath -Recurse -ForceUnsigned -Verbose | Out-Null
+            Add-WindowsDriver -Path "$($MountMyWindowsImage.Path)" -Driver $AddWindowsDriverPath -Recurse -ForceUnsigned -Verbose | Out-Null
         }
         catch {
             Write-Warning "Unable to find a driver for $Item"
@@ -201,155 +146,18 @@ function Edit-OSDCloud.winpe {
     #=================================================
     #   CloudDriver
     #=================================================
-    foreach ($Driver in $CloudDriver) {
-        if ($Driver -eq 'Dell'){
-            Write-Host -ForegroundColor Yellow $DellCloudDriverText
-            if (Test-WebConnection -Uri $DellCloudDriverUrl) {
-                $SaveWebFile = Save-WebFile -SourceUrl $DellCloudDriverUrl
-                if (Test-Path $SaveWebFile.FullName) {
-                    $DriverCab = Get-Item -Path $SaveWebFile.FullName
-                    $ExpandPath = Join-Path $DriverCab.Directory $DriverCab.BaseName
-            
-                    if (-NOT (Test-Path $ExpandPath)) {
-                        New-Item -Path $ExpandPath -ItemType Directory -Force | Out-Null
-                    }
-                    Expand -R "$($DriverCab.FullName)" -F:* "$ExpandPath" | Out-Null
-                    Add-WindowsDriver -Path "$($MountMyWindowsImage.Path)" -Driver "$ExpandPath\winpe\x64" -Recurse -ForceUnsigned -Verbose | Out-Null
-                }
-            }
-            else {
-                Write-Warning "Unable to connect to $DellCloudDriverUrl"
-            }
-        }
-        if ($Driver -eq 'HP') {
-            Write-Host -ForegroundColor Yellow $HpCloudDriverText
-            if (Test-WebConnection -Uri $HpCloudDriverUrl)   {
-              $SaveWebFile = Save-WebFile -SourceUrl $HpCloudDriverUrl
-                    if (Test-Path $SaveWebFile.FullName) {
-                    $DriverCab = Get-Item -Path $SaveWebFile.FullName
-                    $ExpandPath = Join-Path $DriverCab.Directory $DriverCab.BaseName
-                    Start-Process -FilePath $DriverCab -ArgumentList "/s /e /f `"$ExpandPath`"" -Wait
-                    Add-WindowsDriver -Path "$($MountMyWindowsImage.Path)" -Driver "$ExpandPath" -Recurse -ForceUnsigned -Verbose | Out-Null
-                }
-            }
-            else {  
-                Write-Warning "Unable to connect to $HpCloudDriverUrl"  
-            }
-        }
-        if ($Driver -eq 'LenovoDock') {
-            Write-Host -ForegroundColor Yellow $LenovoDockCloudDriverText
-            foreach ($ZipFile in $LenovoDockCloudDriverUrl) {
-                if (Test-WebConnection -Uri $ZipFile) {
-                    $SaveWebFile = Save-WebFile -SourceUrl $ZipFile
-                    if (Test-Path $SaveWebFile.FullName) {
-                        $DriverCab = Get-Item -Path $SaveWebFile.FullName
-                        $ExpandPath = Join-Path $DriverCab.Directory $DriverCab.BaseName
-                        Expand-Archive -Path $DriverCab -DestinationPath $ExpandPath -Force
-                        Add-WindowsDriver -Path "$($MountMyWindowsImage.Path)" -Driver "$ExpandPath" -Recurse -ForceUnsigned -Verbose | Out-Null
-                    }
-                }
-                else {
-                    Write-Warning "Unable to connect to $IntelWiFiCloudDriverUrl"
-                }
-            }
-        }
-        if ($Driver -eq 'Intel') {
-            Write-Host -ForegroundColor Yellow $IntelEthernetCloudDriverText
-            if (Test-WebConnection -Uri $IntelEthernetCloudDriverUrl)   {
-                $SaveWebFile = Save-WebFile -SourceUrl $IntelEthernetCloudDriverUrl
-                   if (Test-Path $SaveWebFile.FullName) {
-                    $DriverCab = Get-Item -Path $SaveWebFile.FullName
-                    $ExpandPath = Join-Path $DriverCab.Directory $DriverCab.BaseName
-                    Expand-Archive -Path $DriverCab -DestinationPath $ExpandPath -Force
-                    $IntelExe = Get-ChildItem -Path $ExpandPath 'Wired_driver_26.8_x64.exe'
-                    $IntelExe | Rename-Item -newname { $_.name -replace '.exe','.zip' } -Force -ErrorAction Ignore
-                    $IntelZip = Get-ChildItem -Path $ExpandPath 'Wired_driver_26.8_x64.zip' -Recurse
-                    $ExpandPath = Join-Path $IntelZip.Directory $IntelZip.BaseName
-                    Expand-Archive -Path $IntelZip.FullName -DestinationPath $ExpandPath -Force
-                    $NDIS65 = Get-ChildItem -Path $ExpandPath -Directory -Recurse | Where-Object {$_.Name -match 'NDIS65'}
-                    foreach ($Item in $NDIS65) {
-                        Add-WindowsDriver -Path "$($MountMyWindowsImage.Path)" -Driver $Item.FullName -Recurse -ForceUnsigned -Verbose | Out-Null
-                    }
-                }
-            }
-            else {
-                Write-Warning "Unable to connect to $IntelWiFiCloudDriverUrl"
-            }
-        }
-        if ($Driver -eq 'WiFi') {
-            Write-Host -ForegroundColor Yellow $IntelWiFiCloudDriverText
-            if (Test-WebConnection -Uri $IntelWiFiCloudDriverUrl) {
-                #$WiFiDownloads = (Invoke-WebRequest -Uri $IntelWiFiCloudDriverUrl -UseBasicParsing).Links
-                #$WiFiDownloads = $WiFiDownloads | Where-Object {$_.download -match 'Driver64_Win10.zip'} | Sort-Object Download -Unique | Select-Object Download, Title -First 1
-                #$SaveWebFile = Save-WebFile -SourceUrl $WiFiDownloads.download
-                $SaveWebFile = Save-WebFile -SourceUrl $IntelWiFiCloudDriverUrl
-                if (Test-Path $SaveWebFile.FullName) {
-                    $DriverCab = Get-Item -Path $SaveWebFile.FullName
-                    $ExpandPath = Join-Path $DriverCab.Directory $DriverCab.BaseName
-                    Expand-Archive -Path $DriverCab -DestinationPath $ExpandPath -Force
-                    Add-WindowsDriver -Path "$($MountMyWindowsImage.Path)" -Driver "$ExpandPath" -Recurse -ForceUnsigned -Verbose | Out-Null
-                }
-            }
-            else {
-                Write-Warning "Unable to connect to $IntelWiFiCloudDriverUrl"
-            }
-        }
-        if ($Driver -eq 'Nutanix') {
-            Write-Host -ForegroundColor Yellow $NutanixCloudDriverText
-            $HardwareIDDriverPath = Join-Path $env:TEMP (Get-Random)
-            Save-MsUpCatDriver -HardwareID $NutanixCloudDriverHwids -DestinationDirectory $HardwareIDDriverPath
-            Add-WindowsDriver -Path "$($MountMyWindowsImage.Path)" -Driver $HardwareIDDriverPath -Recurse -ForceUnsigned -Verbose | Out-Null
-        }
-        if ($Driver -eq 'NutanixOLD') {
-            Write-Host -ForegroundColor Yellow $NutanixCloudDriverText
-            if (Test-WebConnection -Uri $NutanixCloudDriverUrl) {
-                    $SaveWebFile = Save-WebFile -SourceUrl $NutanixCloudDriverUrl
-                 if (Test-Path $SaveWebFile.FullName) {
-                    $DriverCab = Get-Item -Path $SaveWebFile.FullName
-                    $ExpandPath = Join-Path $DriverCab.Directory $DriverCab.BaseName
-                    if (-NOT (Test-Path $ExpandPath)) {
-                        New-Item -Path $ExpandPath -ItemType Directory -Force | Out-Null
-                    }
-                    Expand -R "$($DriverCab.FullName)" -F:* "$ExpandPath" | Out-Null
-                    Add-WindowsDriver -Path "$($MountMyWindowsImage.Path)" -Driver "$ExpandPath" -Recurse -ForceUnsigned -Verbose | Out-Null
-                }
-            }
-            else {
-                Write-Warning "Unable to connect to $NutanixCloudDriverUrl"
-            }
-        }
-        if ($Driver -eq 'USB') {
-            Write-Host -ForegroundColor Yellow $UsbDongleHwidsText
-            $HardwareIDDriverPath = Join-Path $env:TEMP (Get-Random)
-            Save-MsUpCatDriver -HardwareID $UsbDongleHwids -DestinationDirectory $HardwareIDDriverPath
-            Add-WindowsDriver -Path "$($MountMyWindowsImage.Path)" -Driver $HardwareIDDriverPath -Recurse -ForceUnsigned -Verbose | Out-Null
-        }
-        if ($Driver -eq 'VMware') {
-            Write-Host -ForegroundColor Yellow $VmwareCloudDriverText
-            $HardwareIDDriverPath = Join-Path $env:TEMP (Get-Random)
-            Save-MsUpCatDriver -HardwareID $VmwareCloudDriverHwids -DestinationDirectory $HardwareIDDriverPath
-            Add-WindowsDriver -Path "$($MountMyWindowsImage.Path)" -Driver $HardwareIDDriverPath -Recurse -ForceUnsigned -Verbose | Out-Null
-        }
-        if ($Driver -eq 'VMwareOLD') {
-            Write-Host -ForegroundColor Yellow $VmwareCloudDriverText
-            if (Test-WebConnection -Uri $VmwareCloudDriverUrl) {
-                $SaveWebFile = Save-WebFile -SourceUrl $VmwareCloudDriverUrl
-                if (Test-Path   $SaveWebFile.FullName) {
-                    $DriverCab = Get-Item -Path $SaveWebFile.FullName
-                    $ExpandPath = Join-Path $DriverCab.Directory $DriverCab.BaseName
-            
-                    if (-NOT (Test-Path $ExpandPath)) {
-                        New-Item -Path $ExpandPath -ItemType Directory -Force | Out-Null
-                    }
-                    Expand -R "$($DriverCab.FullName)" -F:* "$ExpandPath" | Out-Null
-                    Add-WindowsDriver -Path "$($MountMyWindowsImage.Path)" -Driver "$ExpandPath" -Recurse -ForceUnsigned -Verbose | Out-Null
-                }
-            }
-            else {
-                Write-Warning "Unable to connect to $VmwareCloudDriverUrl"
-            }
+    if ($CloudDriver) {
+        foreach ($Driver in $CloudDriver) {
+            $AddWindowsDriverPath = Save-WinPECloudDriver -CloudDriver $CloudDriver -Path (Join-Path $env:TEMP (Get-Random))
+            Add-WindowsDriver -Path "$($MountMyWindowsImage.Path)" -Driver "$AddWindowsDriverPath" -Recurse -ForceUnsigned -Verbose | Out-Null
         }
         $null = Save-WindowsImage -Path $MountPath
+    }
+    #=================================================
+    #   DriverPath
+    #=================================================
+    foreach ($AddWindowsDriverPath in $DriverPath) {
+        Add-WindowsDriver -Path "$($MountMyWindowsImage.Path)" -Driver "$AddWindowsDriverPath" -Recurse -ForceUnsigned -Verbose
     }
     #=================================================
     #   Drop initial Startnet.cmd
