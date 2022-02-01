@@ -1,10 +1,12 @@
+$Classes = @(Get-ChildItem -Path "$PSScriptRoot\Classes\*.ps1")
+$Private = @(Get-ChildItem -Path "$PSScriptRoot\Private\*.ps1" -Recurse -ErrorAction SilentlyContinue)
+
 #Determine the current state of the OS
 $ImageState = (Get-ItemProperty -Path 'HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Setup\State' -ErrorAction Ignore).ImageState
 
-#Can't load these functions in Specialize
+#Can't load these functions in Specialize Phase
 if ($ImageState -eq 'IMAGE_STATE_SPECIALIZE_RESEAL_TO_OOBE') {
-    $Public  = @( Get-ChildItem -Path $PSScriptRoot\Public\*.ps1 -Recurse -ErrorAction SilentlyContinue | Where-Object {$_.Name -notmatch 'ScreenPNG'} | Where-Object {$_.Name -notmatch 'Clipboard'})
-    $Private = @( Get-ChildItem -Path $PSScriptRoot\Private\*.ps1 -Recurse -ErrorAction SilentlyContinue )
+    $Public  = @(Get-ChildItem -Path ("$PSScriptRoot\Public\*.ps1","$PSScriptRoot\Public-OOBE\*.ps1") -Recurse -ErrorAction SilentlyContinue | Where-Object {$_.Name -notmatch 'ScreenPNG'} | Where-Object {$_.Name -notmatch 'Clipboard'})
 
     foreach ($Import in @($Public + $Private)) {
         Try {. $Import.FullName}
@@ -26,22 +28,25 @@ else {
         throw $Err
     }
 
-    $Public  = @( Get-ChildItem -Path $PSScriptRoot\Public\*.ps1 -Recurse -ErrorAction SilentlyContinue )
-    $Private = @( Get-ChildItem -Path $PSScriptRoot\Private\*.ps1 -Recurse -ErrorAction SilentlyContinue )
-    $Classes = @(Get-ChildItem -Path $PSScriptRoot\Classes\*.ps1)
+    if ($env:SystemDrive -eq 'X:') {
+        $Public = @(Get-ChildItem -Path ("$PSScriptRoot\Public\*.ps1","$PSScriptRoot\Public-WinPE\*.ps1") -Recurse -ErrorAction SilentlyContinue)
+    }
+    elseif ($env:UserName -eq 'defaultuser0') {
+        $Public = @(Get-ChildItem -Path ("$PSScriptRoot\Public\*.ps1","$PSScriptRoot\Public-OOBE\*.ps1") -Recurse -ErrorAction SilentlyContinue)
+    }
+    else {
+        $Public = @(Get-ChildItem -Path ("$PSScriptRoot\Public\*.ps1","$PSScriptRoot\Public-WinOS\*.ps1") -Recurse -ErrorAction SilentlyContinue)
+    }
 
     foreach ($Import in @($Public + $Private + $Classes)) {
         Try {. $Import.FullName}
         Catch {Write-Error -Message "Failed to import function $($Import.FullName): $_"}
     }
 }
-
 Export-ModuleMember -Function $Public.BaseName
 #=================================================
 #WinPE
 if ($env:SystemDrive -eq 'X:') {
-    $Public  = @( Get-ChildItem -Path ("$PSScriptRoot\Public\*.ps1","$PSScriptRoot\WinPE\*.ps1") -Recurse -ErrorAction SilentlyContinue )
-
     [System.Environment]::SetEnvironmentVariable('APPDATA', (Join-Path $env:USERPROFILE 'AppData\Roaming'),[System.EnvironmentVariableTarget]::Machine)
     [System.Environment]::SetEnvironmentVariable('HOMEDRIVE', $env:SystemDrive,[System.EnvironmentVariableTarget]::Machine)
     [System.Environment]::SetEnvironmentVariable('HOMEPATH', (($env:USERPROFILE) -split ":")[1],[System.EnvironmentVariableTarget]::Machine)
@@ -56,7 +61,6 @@ if ($env:SystemDrive -eq 'X:') {
         New-ItemProperty -Path $VolatileEnvironment -Name "LOCALAPPDATA" -Value (Join-Path $env:USERPROFILE 'AppData\Local') -Force
     }
 }
-
 #=================================================
 #Alias
 New-Alias -Name Clear-LocalDisk -Value Clear-Disk.fixed -Force -ErrorAction SilentlyContinue

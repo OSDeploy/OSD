@@ -23,7 +23,7 @@ https://osdcloud.osdeploy.com
 function Edit-OSDCloud.winpe {
     [CmdletBinding(PositionalBinding = $false)]
     param (
-        [ValidateSet('*','Dell','HP','Intel','Nutanix','USB','VMware','WiFi')]
+        [ValidateSet('*','Dell','HP','Intel','LenovoDock','Nutanix','USB','VMware','WiFi')]
         [string[]]$CloudDriver,
         [string[]]$DriverHWID,
         [string[]]$DriverPath,
@@ -50,7 +50,7 @@ function Edit-OSDCloud.winpe {
     #	Cloud Drivers
     #=================================================
     if ($CloudDriver -contains '*') {
-        $CloudDriver = @('Dell','HP','Intel','Nutanix','USB','VMware','WiFi')
+        $CloudDriver = @('Dell','HP','Intel','LenovoDock','Nutanix','USB','VMware','WiFi')
     }
 
     $DellCloudDriverText            = 'Dell A25 WinPE Driver Pack'
@@ -64,31 +64,35 @@ function Edit-OSDCloud.winpe {
     
     $IntelWiFiCloudDriverText       = 'Intel Wireless 22.80.1 WinPE Driver Pack'
     $IntelWiFiCloudDriverUrl        = 'https://downloadmirror.intel.com/655277/WiFi-22.80.1-Driver64-Win10-Win11.zip'
+    
+    $LenovoDockCloudDriverText      = 'Lenovo Dock 22.1.31 WinPE Driver Pack'
+    $LenovoDockCloudDriverUrl       = @(
+                                        'https://download.lenovo.com/pccbbs/mobiles/rtk-winpe-w10.zip'
+                                        'https://download.lenovo.com/km/media/attachment/USBCG2.zip'
+                                        )
 
     $NutanixCloudDriverText         = 'Nutanix WinPE Driver Pack'
     $NutanixCloudDriverUrl          = 'https://github.com/OSDeploy/OSDCloud/raw/main/Drivers/WinPE/Nutanix.cab'
     $NutanixCloudDriverHwids         = @(
-                                        'VEN_1AF4&DEV_1000' #Net
-                                        #'VEN_1AF4&DEV_1041' #Net
-                                        'VEN_1AF4&DEV_1004' #SCSIAdapter
-                                        #'VEN_1AF4&DEV_1048' #SCSIAdapter
-                                        'VEN_1AF4&DEV_1002' #Balloon
+                                        'VEN_1AF4&DEV_1000 and VEN_1AF4&DEV_1041' #Red Hat Nutanix VirtIO Ethernet Adapter
+                                        'VEN_1AF4&DEV_1002' #Red Hat Nutanix VirtIO Balloon
+                                        'VEN_1AF4&DEV_1004 and VEN_1AF4&DEV_1048' #Red Hat Nutanix VirtIO SCSI pass-through controller
                                         )
     
     $UsbDongleHwidsText             = 'OSDCloud USB Dongle 22.1.31 Driver Pack'
     $UsbDongleHwids                 = @(
-                                        'VID_045E&PID_0927' #Surface USB-C Ethernet
-                                        'VID_0B95&PID_7720' #Asix AX88772 USB2.0 to Fast Ethernet Adapter
-                                        'VID_0B95&PID_7E2B' #Asix AX8872B USB2.0
-                                        'VID_0BDA&PID_8153' #Realtek USB GbE or Dell DA 300
-                                        'VID_17EF&PID_720C' #Lenovo USB-C Ethernet
+                                        'VID_045E&PID_0927 VID_045E&PID_0927 VID_045E&PID_09A0 Surface Ethernet'
+                                        'VID_0B95&PID_7720 VID_0B95&PID_7E2B Asix AX88772 USB2.0 to Fast Ethernet'
+                                        'VID_0B95&PID_1790 ASIX AX88179 USB 3.0 to Gigabit Ethernet'
+                                        'VID_0BDA&PID_8153 Realtek USB GbE and Dell DA 300'
+                                        'VID_17EF&PID_720C Lenovo USB-C Ethernet'
                                         )
     
     $VmwareCloudDriverText          = 'VMware WinPE Driver Pack'
     $VmwareCloudDriverUrl           = 'https://github.com/OSDeploy/OSDCloud/raw/main/Drivers/WinPE/VMware.cab'
     $VmwareCloudDriverHwids         = @(
-                                        'VEN_15AD&DEV_0405' #Display
-                                        'VEN_15AD&DEV_07B0' #vmxnet3
+                                        'VEN_15AD&DEV_0740' #VMware Virtual Machine Communication Interface
+                                        'VEN_15AD&DEV_07B0' #VMware VMXNET3 Ethernet Controller
                                         'VEN_15AD&DEV_07C0' #VMware PVSCSI Controller
                                         )
     #=================================================
@@ -177,7 +181,7 @@ function Edit-OSDCloud.winpe {
     #   DriverPath
     #=================================================
     foreach ($Driver in $DriverPath) {
-        Add-WindowsDriver -Path "$($MountMyWindowsImage.Path)" -Driver "$Driver" -Recurse -ForceUnsigned
+        Add-WindowsDriver -Path "$($MountMyWindowsImage.Path)" -Driver "$Driver" -Recurse -ForceUnsigned -Verbose
     }
     #=================================================
     #   DriverHWID
@@ -188,7 +192,7 @@ function Edit-OSDCloud.winpe {
             Save-MsUpCatDriver -HardwareID $Item -DestinationDirectory $HardwareIDDriverPath
         }
         try {
-            $null = Add-WindowsDriver -Path "$($MountMyWindowsImage.Path)" -Driver $HardwareIDDriverPath -Recurse -ForceUnsigned
+            Add-WindowsDriver -Path "$($MountMyWindowsImage.Path)" -Driver $HardwareIDDriverPath -Recurse -ForceUnsigned -Verbose | Out-Null
         }
         catch {
             Write-Warning "Unable to find a driver for $Item"
@@ -230,6 +234,23 @@ function Edit-OSDCloud.winpe {
             }
             else {  
                 Write-Warning "Unable to connect to $HpCloudDriverUrl"  
+            }
+        }
+        if ($Driver -eq 'LenovoDock') {
+            Write-Host -ForegroundColor Yellow $LenovoDockCloudDriverText
+            foreach ($ZipFile in $LenovoDockCloudDriverUrl) {
+                if (Test-WebConnection -Uri $ZipFile) {
+                    $SaveWebFile = Save-WebFile -SourceUrl $ZipFile
+                    if (Test-Path $SaveWebFile.FullName) {
+                        $DriverCab = Get-Item -Path $SaveWebFile.FullName
+                        $ExpandPath = Join-Path $DriverCab.Directory $DriverCab.BaseName
+                        Expand-Archive -Path $DriverCab -DestinationPath $ExpandPath -Force
+                        Add-WindowsDriver -Path "$($MountMyWindowsImage.Path)" -Driver "$ExpandPath" -Recurse -ForceUnsigned -Verbose | Out-Null
+                    }
+                }
+                else {
+                    Write-Warning "Unable to connect to $IntelWiFiCloudDriverUrl"
+                }
             }
         }
         if ($Driver -eq 'Intel') {
@@ -304,6 +325,12 @@ function Edit-OSDCloud.winpe {
             Add-WindowsDriver -Path "$($MountMyWindowsImage.Path)" -Driver $HardwareIDDriverPath -Recurse -ForceUnsigned -Verbose | Out-Null
         }
         if ($Driver -eq 'VMware') {
+            Write-Host -ForegroundColor Yellow $VmwareCloudDriverText
+            $HardwareIDDriverPath = Join-Path $env:TEMP (Get-Random)
+            Save-MsUpCatDriver -HardwareID $VmwareCloudDriverHwids -DestinationDirectory $HardwareIDDriverPath
+            Add-WindowsDriver -Path "$($MountMyWindowsImage.Path)" -Driver $HardwareIDDriverPath -Recurse -ForceUnsigned -Verbose | Out-Null
+        }
+        if ($Driver -eq 'VMwareOLD') {
             Write-Host -ForegroundColor Yellow $VmwareCloudDriverText
             if (Test-WebConnection -Uri $VmwareCloudDriverUrl) {
                 $SaveWebFile = Save-WebFile -SourceUrl $VmwareCloudDriverUrl
