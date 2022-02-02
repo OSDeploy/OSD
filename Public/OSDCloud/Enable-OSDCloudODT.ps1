@@ -41,9 +41,6 @@ function Enable-OSDCloudODT {
     #=================================================
     #	Set WorkspacePath
     #=================================================
-    if ($PSBoundParameters.ContainsKey('WorkspacePath')) {
-        Set-OSDCloud.workspace -WorkspacePath $WorkspacePath -ErrorAction Stop | Out-Null
-    }
     $WorkspacePath = Get-OSDCloud.workspace -ErrorAction Stop
     #=================================================
     #	Setup Workspace

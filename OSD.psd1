@@ -74,6 +74,7 @@ FunctionsToExport =
 'Block-AdminUser',
 'Block-ManufacturerNeLenovo',
 'Block-NoCurl',
+'Block-NoInternet',
 'Block-PowerShellVersionLt5',
 'Block-StandardUser',
 'Block-WinOS',

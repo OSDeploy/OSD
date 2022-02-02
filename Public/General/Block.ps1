@@ -105,6 +105,41 @@ function Block-NoCurl {
 }
 <#
 .SYNOPSIS
+Break the running script if internet is not available
+
+.DESCRIPTION
+Break the running script if internet is not available
+
+.PARAMETER Warn
+Warning Message without a Break
+
+.PARAMETER Pause
+Adds a 'Press Enter to Continue'
+
+.LINK
+https://osd.osdeploy.com/module/functions/block
+#>
+function Block-NoInternet {
+    [CmdletBinding()]
+    param (
+        [switch]$Warn,
+        [switch]$Pause
+    )
+    $CallingFunction = (Get-PSCallStack)[1].InvocationInfo.Line
+    $Message = "[$((Get-Date).ToString('yyyy-MM-dd-HHmmss'))] $CallingFunction requires Internet access"
+        
+    if (-NOT (Test-WebConnection -Uri 'microsoft.com')) {
+        Write-Warning $Message
+        if ($PSBoundParameters.ContainsKey('Pause')) {
+            [void]('Press Enter to Continue')
+        }
+        if (-NOT ($PSBoundParameters.ContainsKey('Warn'))) {
+            Break
+        }
+    }
+}
+<#
+.SYNOPSIS
 Break the running script if PowerShell Version is less than 5
 
 .DESCRIPTION
@@ -129,6 +164,42 @@ function Block-PowerShellVersionLt5 {
     $Message = "[$((Get-Date).ToString('yyyy-MM-dd-HHmmss'))] $CallingFunction requires PowerShell version 5 or greater"
         
     if ($PSVersionTable.PSVersion.Major -lt 5) {
+        Write-Warning $Message
+        if ($PSBoundParameters.ContainsKey('Pause')) {
+            [void]('Press Enter to Continue')
+        }
+        if (-NOT ($PSBoundParameters.ContainsKey('Warn'))) {
+            Break
+        }
+    }
+}
+<#
+.SYNOPSIS
+Break the running script if PowerShell Module is not installed
+
+.DESCRIPTION
+Break the running script if PowerShell Module is not installed
+
+.PARAMETER Warn
+Warning Message without a Break
+
+.PARAMETER Pause
+Adds a 'Press Enter to Continue'
+
+.LINK
+https://osd.osdeploy.com/module/functions/block
+#>
+function Block-PSModuleNotInstalled {
+    [CmdletBinding()]
+    param (
+        [string]$ModuleName = 'OSD',
+        [switch]$Warn,
+        [switch]$Pause
+    )
+    $CallingFunction = (Get-PSCallStack)[1].InvocationInfo.Line
+    $Message = "[$((Get-Date).ToString('yyyy-MM-dd-HHmmss'))] $CallingFunction requires PowerShell Module $ModuleName to be installed"
+        
+    if (-not (Get-Module -ListAvailable -Name $ModuleName)) {
         Write-Warning $Message
         if ($PSBoundParameters.ContainsKey('Pause')) {
             [void]('Press Enter to Continue')
@@ -304,42 +375,6 @@ function Block-WinPE {
     $Message = "[$((Get-Date).ToString('yyyy-MM-dd-HHmmss'))] $CallingFunction cannot be run from WinPE"
         
     if ((Get-OSDGather -Property IsWinPE)) {
-        Write-Warning $Message
-        if ($PSBoundParameters.ContainsKey('Pause')) {
-            [void]('Press Enter to Continue')
-        }
-        if (-NOT ($PSBoundParameters.ContainsKey('Warn'))) {
-            Break
-        }
-    }
-}
-<#
-.SYNOPSIS
-Break the running script if PowerShell Module is not installed
-
-.DESCRIPTION
-Break the running script if PowerShell Module is not installed
-
-.PARAMETER Warn
-Warning Message without a Break
-
-.PARAMETER Pause
-Adds a 'Press Enter to Continue'
-
-.LINK
-https://osd.osdeploy.com/module/functions/block
-#>
-function Block-PSModuleNotInstalled {
-    [CmdletBinding()]
-    param (
-        [string]$ModuleName = 'OSD',
-        [switch]$Warn,
-        [switch]$Pause
-    )
-    $CallingFunction = (Get-PSCallStack)[1].InvocationInfo.Line
-    $Message = "[$((Get-Date).ToString('yyyy-MM-dd-HHmmss'))] $CallingFunction requires PowerShell Module $ModuleName to be installed"
-        
-    if (-not (Get-Module -ListAvailable -Name $ModuleName)) {
         Write-Warning $Message
         if ($PSBoundParameters.ContainsKey('Pause')) {
             [void]('Press Enter to Continue')

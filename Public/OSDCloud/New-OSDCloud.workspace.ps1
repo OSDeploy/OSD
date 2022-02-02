@@ -68,9 +68,7 @@ function New-OSDCloud.workspace {
     #=================================================
     #	Set WorkspacePath
     #=================================================
-    if ($PSBoundParameters.ContainsKey('WorkspacePath')) {
-        Set-OSDCloud.workspace -WorkspacePath $WorkspacePath -ErrorAction Stop | Out-Null
-    }
+    Set-OSDCloud.workspace -WorkspacePath $WorkspacePath -ErrorAction Stop | Out-Null
     #=================================================
     #	Create WorkspacePath
     #=================================================

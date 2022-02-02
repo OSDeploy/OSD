@@ -607,7 +607,7 @@ Windows Registry Editor Version 5.00
     #=================================================
     Write-Host -ForegroundColor DarkGray "========================================================================="
     Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Microsoft DaRT Config from MDT"
-    $SourceFile = "C:\Program Files\Microsoft Deployment Toolkit\Templates\DartConfig8.dat"
+    $SourceFile = "$env:ProgramFiles\Microsoft Deployment Toolkit\Templates\DartConfig8.dat"
     if (Test-Path $SourceFile) {
         Write-Host -ForegroundColor DarkGray $SourceFile
         Copy-Item -Path $SourceFile -Destination "$MountPath\Windows\System32\DartConfig.dat" -Force
@@ -620,7 +620,7 @@ Windows Registry Editor Version 5.00
     #=================================================
     Write-Host -ForegroundColor DarkGray "========================================================================="
     Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Microsoft DaRT"
-    $SourceFile = "C:\Program Files\Microsoft DaRT\v10\Toolsx64.cab"
+    $SourceFile = "$env:ProgramFiles\Microsoft DaRT\v10\Toolsx64.cab"
     if (Test-Path $SourceFile) {
         Write-Host -ForegroundColor DarkGray $SourceFile
         expand.exe "$SourceFile" -F:*.* "$MountPath" | Out-Null
