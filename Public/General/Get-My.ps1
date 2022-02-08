@@ -150,11 +150,11 @@ function Get-MyComputerProduct {
         $Result = (Get-CimInstance -ClassName CIM_ComputerSystem).SystemSKUNumber
     }
     elseif ($MyComputerManufacturer -eq 'HP')  {
-        $Result = (Get-WmiObject -Class Win32_BaseBoard).Product
+        $Result = (Get-CimInstance -ClassName Win32_BaseBoard).Product
     }
     elseif ($MyComputerManufacturer -eq 'Lenovo')  {
         #Thanks Maurice
-        $Result = (Get-WmiObject -Class Win32_ComputerSystem | Select-Object -ExpandProperty Model).SubString(0, 4)
+        $Result = (Get-CimInstance -ClassName Win32_ComputerSystem | Select-Object -ExpandProperty Model).SubString(0, 4)
     }
     elseif ($MyComputerManufacturer -eq 'Microsoft')  {
         #Surface_Book
