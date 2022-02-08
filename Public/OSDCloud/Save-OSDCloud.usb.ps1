@@ -1,35 +1,44 @@
 <#
 .SYNOPSIS
-Saves OSDCloud to an NTFS Partition on a USB Drive
+Saves Operating System and Driver Pack to an OSDCloud USB Drive
 
 .DESCRIPTION
-Saves OSDCloud to an NTFS Partition on a USB Drive
+Saves Operating System and Driver Pack to an OSDCloud USB Drive
+
+.PARAMETER OSVersion
+Operating System Version to download
+
+.PARAMETER OSBuild
+Operating System Build to download
 
 .PARAMETER OSEdition
-Edition of the Windows installation
+Operating System Edition to download
 
-.PARAMETER OSCulture
-Culture of the Windows installation
+.PARAMETER OSLanguage
+Operating System Language to download
+
+.PARAMETER Manufacturer
+Computer Manufacturer of the Driver Pack
+
+.PARAMETER Product
+Computer Product of the Driver Pack
 
 .LINK
-https://osdcloud.osdeploy.com/
-
-.NOTES
-21.3.13 Initial Release
+https://www.osdcloud.com/build/media/save-osdcloud.usb
 #>
 function Save-OSDCloud.usb {
     [CmdletBinding()]
     param (
         [ValidateSet('Windows 10','Windows 11')]
-        [string]$OSVersion = 'Windows 10',
+        [System.String]$OSVersion,
 
         [ValidateSet('21H2','21H1','20H2','2004','1909','1903','1809')]
         [Alias('Build')]
-        [string]$OSBuild,
+        [System.String]$OSBuild,
 
         [ValidateSet('Home','Home N','Home Single Language','Education','Education N','Enterprise','Enterprise N','Pro','Pro N')]
         [Alias('Edition')]
-        [string]$OSEdition,
+        [System.String]$OSEdition,
 
         [ValidateSet (
             'ar-sa','bg-bg','cs-cz','da-dk','de-de','el-gr',
@@ -41,39 +50,34 @@ function Save-OSDCloud.usb {
             'uk-ua','zh-cn','zh-tw'
         )]
         [Alias('Culture','OSCulture')]
-        [string]$OSLanguage,
+        [System.String]$OSLanguage,
 
-        [string]$Manufacturer = (Get-MyComputerManufacturer -Brief),
-        [string]$Product = (Get-MyComputerProduct)
+        [System.String]$Manufacturer = (Get-MyComputerManufacturer -Brief),
+        [System.String]$Product = (Get-MyComputerProduct)
     )
-
     #=================================================
     #	Start the Clock
     #=================================================
     $Global:OSDCloudStartTime = Get-Date
     #=================================================
-    #	Global Variables
-    #=================================================
-    $Global:OSDCloudOSVersion = $OSVersion
-    $Global:OSDCloudOSEdition = $OSEdition
-    $Global:OSDCloudOSCulture = $OSCulture
-    #=================================================
     #	Block
     #=================================================
     Block-PowerShellVersionLt5
     Block-NoCurl
+    Block-WinPE
     #=================================================
     #   Header
     #=================================================
-    Write-Host -ForegroundColor DarkGray "========================================================================="
-    Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) $($MyInvocation.MyCommand.Name)" -NoNewline
-    Write-Host -ForegroundColor Cyan " | Manufacturer: $Manufacturer | Product: $Product"
-    Write-Host -ForegroundColor Cyan "OSDCloud content can be saved to an 8GB+ NTFS USB Volume"
-    Write-Host -ForegroundColor White "Windows 10 will require about 4GB, and DriverPacks up to 2GB"
+    Write-Host -ForegroundColor DarkGray    "========================================================================="
+    Write-Host -ForegroundColor Cyan        "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) $($MyInvocation.MyCommand.Name)" -NoNewline
+    Write-Host -ForegroundColor Cyan        " | Manufacturer: $Manufacturer | Product: $Product"
+    Write-Host -ForegroundColor Cyan        "OSDCloud content can be saved to an 8GB+ NTFS USB Volume"
+    Write-Host -ForegroundColor White       "Windows 10/11 will require about 4GB, and DriverPacks up to 2GB"
     #=================================================
     #   Get-Volume.usb
     #=================================================
     $GetUSBVolume = Get-Volume.usb | Where-Object {$_.FileSystem -eq 'NTFS'} | Where-Object {$_.SizeGB -ge 8} | Sort-Object DriveLetter -Descending
+    
     if (-NOT ($GetUSBVolume)) {
         Write-Warning                           "Unfortunately, I don't see any USB Volumes that will work"
         Write-Warning                           "OSDCloud Failed!"
@@ -83,12 +87,14 @@ function Save-OSDCloud.usb {
 
     Write-Warning                               "USB Free Space is not verified before downloading yet, so this is on you!"
     Write-Host -ForegroundColor DarkGray        "================================================"
+    
     if ($GetUSBVolume) {
         #$GetUSBVolume | Select-Object -Property DriveLetter, FileSystemLabel, SizeGB, SizeRemainingMB, DriveType | Format-Table
         $SelectUSBVolume = Select-Volume.usb -MinimumSizeGB 8 -FileSystem 'NTFS'
         $Global:OSDCloudOfflineFullName = "$($SelectUSBVolume.DriveLetter):\OSDCloud"
         Write-Host -ForegroundColor White       "OSDCloud content will be saved to $OSDCloudOfflineFullName"
-    } else {
+    }
+    else {
         Write-Warning                           "Save-OSDCloud.usb Requirements:"
         Write-Warning                           "8 GB Minimum"
         Write-Warning                           "NTFS File System"
@@ -104,6 +110,7 @@ function Save-OSDCloud.usb {
         New-Item -Path "$OSDCloudOfflineFullName\Config\AutopilotJSON" -ItemType Directory -Force | Out-Null
         Write-Host "Autopilot Profiles can be saved to $OSDCloudOfflineFullName\Config\AutopilotJSON"
     }
+
     $FindOSDCloudFile = @()
     [array]$FindOSDCloudFile = Find-OSDCloudFile -Name $Global:OSDCloudAutopilotJsonName -Path '\OSDCloud\Autopilot\Profiles\' | Sort-Object FullName
     [array]$FindOSDCloudFile += Find-OSDCloudFile -Name $Global:OSDCloudAutopilotJsonName -Path '\OSDCloud\Config\AutopilotJSON\' | Sort-Object FullName
@@ -113,9 +120,45 @@ function Save-OSDCloud.usb {
         foreach ($Item in $FindOSDCloudFile) {
             Write-Host -ForegroundColor White "$($Item.FullName)"
         }
-    } else {
+    }
+    else {
         Write-Warning "No Autopilot Profiles were found in any <PSDrive>:\OSDCloud\Config\AutopilotJSON"
         Write-Warning "Autopilot Profiles must be located in a $OSDCloudOfflineFullName\Config\AutopilotJSON direcory"
+    }
+    #=================================================
+    #	OSVersion
+    #=================================================
+    Write-Host -ForegroundColor DarkGray "========================================================================="
+    Write-Host -ForegroundColor Cyan "OSVersion " -NoNewline
+
+    if ($OSVersion) {
+        Write-Host -ForegroundColor Green $OSVersion
+    }
+    else {
+        Write-Host -ForegroundColor Cyan "Menu"
+        $OSVersionNames = @('Windows 11','Windows 10')
+        
+        $i = $null
+        $OSVersionMenu = foreach ($Item in $OSVersionNames) {
+            $i++
+        
+            $ObjectProperties = @{
+                Selection   = $i
+                Name     = $Item
+            }
+            New-Object -TypeName PSObject -Property $ObjectProperties
+        }
+        
+        $OSVersionMenu | Select-Object -Property Selection, Name | Format-Table | Out-Host
+        
+        do {
+            $SelectReadHost = Read-Host -Prompt "Enter a Selection for the OSVersion"
+        }
+        until (((($SelectReadHost -ge 0) -and ($SelectReadHost -in $OSVersionMenu.Selection))))
+        
+        $OSVersion = $OSVersionMenu | Where-Object {$_.Selection -eq $SelectReadHost} | Select-Object -ExpandProperty Name
+        Write-Host -ForegroundColor Cyan "OSVersion: " -NoNewline
+        Write-Host -ForegroundColor Green "$OSVersion"
     }
     #=================================================
     #	OSBuild
@@ -126,7 +169,7 @@ function Save-OSDCloud.usb {
     if ($OSVersion -eq 'Windows 11') {
         $OSBuild = '21H2'
     }
-    
+
     if ($OSBuild) {
         Write-Host -ForegroundColor Green $OSBuild
     }
@@ -160,7 +203,7 @@ function Save-OSDCloud.usb {
     #	OSEdition
     #=================================================
     Write-Host -ForegroundColor DarkGray "========================================================================="
-    Write-Host -ForegroundColor Cyan "$OSVersion OSEdition " -NoNewline
+    Write-Host -ForegroundColor Cyan "$OSVersion $OSBuild OSEdition " -NoNewline
 
     if ($PSBoundParameters.ContainsKey('OSEdition')) {
         Write-Host -ForegroundColor Green $OSEdition
@@ -223,7 +266,7 @@ function Save-OSDCloud.usb {
     #	OSLicense
     #=================================================
     Write-Host -ForegroundColor DarkGray "========================================================================="
-    Write-Host -ForegroundColor Cyan "$OSVersion OSLicense " -NoNewline
+    Write-Host -ForegroundColor Cyan "$OSVersion $OSBuild $OSEdition OSLicense " -NoNewline
 
     if ($OSLicense) {
         Write-Host -ForegroundColor Green $OSLicense
@@ -289,7 +332,7 @@ function Save-OSDCloud.usb {
     #	OSLanguage
     #=================================================
     Write-Host -ForegroundColor DarkGray "========================================================================="
-    Write-Host -ForegroundColor Cyan "$OSVersion OSLanguage " -NoNewline
+    Write-Host -ForegroundColor Cyan "$OSVersion $OSBuild $OSEdition $OSLicense OSLanguage " -NoNewline
     
     if ($PSBoundParameters.ContainsKey('OSLanguage')) {
         Write-Host -ForegroundColor Green $OSLanguage
@@ -351,13 +394,15 @@ function Save-OSDCloud.usb {
         $OSDCloudOfflineOSFullName = $OSDCloudOfflineOS.FullName
         Write-Host -ForegroundColor Cyan "Offline: $OSDCloudOfflineOSFullName"
     }
-    elseif (Test-WebConnection -Uri $GetFeatureUpdate.FileUri) {
-        $SaveFeatureUpdate = Save-FeatureUpdate -OSLicense $OSLicense -OSBuild $OSBuild -OSLanguage $OSLanguage -DownloadPath "$OSDCloudOfflineFullName\OS" | Out-Null
-    }
     else {
-        Write-Warning "Could not verify an Internet connection for the Windows Feature Update"
-        Write-Warning "OSDCloud cannot continue"
-        Break
+        if (Test-WebConnection -Uri $GetFeatureUpdate.FileUri) {
+            $SaveFeatureUpdate = Save-FeatureUpdate -OSVersion $OSVersion -OSLicense $OSLicense -OSBuild $OSBuild -OSLanguage $OSLanguage -DownloadPath "$OSDCloudOfflineFullName\OS" | Out-Null
+        }
+        else {
+            Write-Warning "Could not verify an Internet connection for the Windows Feature Update"
+            Write-Warning "OSDCloud cannot continue"
+            Break
+        }
     }
     #=================================================
     #	Save-MyDriverPack
@@ -420,6 +465,5 @@ function Save-OSDCloud.usb {
     Write-Host -ForegroundColor DarkGray    "================================================"
     Write-Host -ForegroundColor Yellow      "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) $($MyInvocation.MyCommand.Name) " -NoNewline
     Write-Host -ForegroundColor Cyan        "Completed in $($Global:OSDCloudTimeSpan.ToString("mm' minutes 'ss' seconds'"))!"
-    explorer $OSDCloudOfflineFullName
     #=================================================
 }
