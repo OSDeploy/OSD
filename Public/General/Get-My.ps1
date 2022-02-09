@@ -1,22 +1,21 @@
 <#
 .SYNOPSIS
-Returns the Bios SerialNumber
+Returns the Win32_BIOS SerialNumber
 
 .DESCRIPTION
-Returns the Bios SerialNumber
+Returns the Win32_BIOS SerialNumber
 
 .PARAMETER Brief
 Returns a short version removing soem non-standard characters
 
 .LINK
-https://osd.osdeploy.com/module/functions
+https://osd.osdeploy.com
 
 .NOTES
 #>
 function Get-MyBiosSerialNumber {
     [CmdletBinding()]
     param (
-        #Normalize the Return
         [switch]$Brief
     )
 
@@ -40,7 +39,7 @@ Returns the Bios Version
 Returns the Bios Version
 
 .LINK
-https://osd.osdeploy.com/module/functions
+https://osd.osdeploy.com
 
 .NOTES
 #>
@@ -48,7 +47,16 @@ function Get-MyBiosVersion {
     [CmdletBinding()]
     param ()
 
-    ((Get-CimInstance -ClassName Win32_BIOS).SMBIOSBIOSVersion).Trim()
+    $CimBios = Get-CimInstance -ClassName Win32_BIOS
+    if ($CimBios.Manufacturer -match 'Lenovo') {
+        $SystemBiosMajorVersion = $CimBios.SystemBiosMajorVersion
+        $SystemBiosMinorVersion = $CimBios.SystemBiosMinorVersion
+        $MyBiosVersion = "$SystemBiosMajorVersion.$SystemBiosMinorVersion"
+        Return $MyBiosVersion
+    }
+    else {
+        ((Get-CimInstance -ClassName Win32_BIOS).SMBIOSBIOSVersion).Trim()
+    }
 }
 <#
 .SYNOPSIS
@@ -61,7 +69,7 @@ Returns the Computer Manufacturer
 Returns a shortened Computer Manufacturer
 
 .LINK
-https://osd.osdeploy.com/module/functions
+https://osd.osdeploy.com
 
 .NOTES
 #>
@@ -100,7 +108,7 @@ Returns the Computer Model
 Returns a modified Computer Model for Generic and Unknown
 
 .LINK
-https://osd.osdeploy.com/module/functions
+https://osd.osdeploy.com
 
 .NOTES
 #>
@@ -136,7 +144,7 @@ Returns the ComputerSystem Product (SystemSku, BaseBoardProduct)
 Returns the ComputerSystem Product (SystemSku, BaseBoardProduct)
 
 .LINK
-https://osd.osdeploy.com/module/functions
+https://osd.osdeploy.com
 
 .NOTES
 #>
