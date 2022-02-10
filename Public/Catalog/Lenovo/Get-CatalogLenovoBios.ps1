@@ -1,15 +1,15 @@
 <#
 .SYNOPSIS
-Returns the Lenovo BIOS packages
+Returns the Lenovo BIOS downloads
 
 .DESCRIPTION
-Returns the Lenovo BIOS packages
+Returns the Lenovo BIOS downloads
 
 .PARAMETER Compatible
 Filters results based on your current Product
 
 .LINK
-https://osd.osdeploy.com/module/functions
+https://osd.osdeploy.com
 
 .NOTES
 #>
@@ -21,24 +21,21 @@ function Get-CatalogLenovoBios {
     #=================================================
     #   Paths
     #=================================================
-	$CatalogState           = 'Online' #Online, Build, Local, Offline
-    #$DownloadsBaseUrl       = 'http://downloads.Lenovo.com/'
-	$CatalogOnlinePath      = 'https://download.lenovo.com/cdrt/td/catalogv2.xml'
-	$CatalogBuildPath       = Join-Path $env:TEMP 'catalogv2.xml'
-	$CatalogLocalPath  		= Join-Path $env:TEMP 'CatalogLenovoBios.xml'
-	$CatalogOfflinePath     = "$($MyInvocation.MyCommand.Module.ModuleBase)\Catalogs\CatalogLenovoBios.xml"
-	#$CatalogLocalCabName  	= [string]($CatalogOnlinePath | Split-Path -Leaf)
-    #$CatalogLocalCabPath 	= Join-Path $env:TEMP $CatalogLocalCabName
+	$CatalogState           = 'Online'
+	$CatalogUri      		= 'https://download.lenovo.com/cdrt/td/catalogv2.xml'
+	$CatalogFileRaw       	= Join-Path $env:TEMP 'catalogv2.xml'
+	$CatalogFileDownload	= Join-Path $env:TEMP 'CatalogLenovoBios.xml'
+	$CatalogFileOffline     = "$($MyInvocation.MyCommand.Module.ModuleBase)\Catalogs\Lenovo\catalogv2.xml"
     #=================================================
-    #   Test CatalogState Local
+    #   Test Local CatalogState
     #=================================================
-    if (Test-Path $CatalogLocalPath) {
+    if (Test-Path $CatalogFileDownload) {
+		Write-Verbose "Catalog already downloaded to $CatalogFileDownload"
 
-		#Get-Item to determine the age
-        $GetItemCatalogLocalPath = Get-Item $CatalogLocalPath
+        $GetItemCatalogFileDownload = Get-Item $CatalogFileDownload
 
 		#If the local is older than 12 hours, delete it
-        if (((Get-Date) - $GetItemCatalogLocalPath.LastWriteTime).TotalHours -gt 12) {
+        if (((Get-Date) - $GetItemCatalogFileDownload.LastWriteTime).TotalHours -gt 12) {
             Write-Verbose "Removing previous Offline Catalog"
 		}
 		else {
@@ -49,36 +46,36 @@ function Get-CatalogLenovoBios {
     #   Test CatalogState Online
     #=================================================
 	if ($CatalogState -eq 'Online') {
-		if (Test-WebConnection -Uri $CatalogOnlinePath) {
-			#Catalog is online and can be downloaded
-		}
-		else {
-			$CatalogState = 'Offline'
-		}
-	}
-    #=================================================
-    #   CatalogState Online
-	#	Need to get the Online Catalog to Local
-    #=================================================
-	if ($CatalogState -eq 'Online') {
-		Write-Verbose "Source: $CatalogOnlinePath"
-		Write-Verbose "Destination: $CatalogBuildPath"
-        Save-WebFile -SourceUrl $CatalogOnlinePath -DestinationDirectory $env:Temp -DestinationName catalogv2.xml -Overwrite | Out-Null
+		try {
+			$CatalogOnlineRaw = Invoke-RestMethod -Uri $CatalogUri -UseBasicParsing
+			Write-Verbose "Catalog is Online at $CatalogUri"
+			Write-Verbose "Saving Online Catalog to $CatalogFileRaw"		
+			$CatalogOnlineContent = $CatalogOnlineRaw.Substring(3)
+			$CatalogOnlineContent | Out-File -FilePath $CatalogFileRaw -Encoding utf8 -Force
 
-		#Make sure the file downloaded
-		if (Test-Path $CatalogBuildPath) {
-			$CatalogState = 'Build'
+			if (Test-Path $CatalogFileRaw) {
+				Write-Verbose "Catalog saved to $CatalogFileRaw"
+				$CatalogState = 'Build'
+			}
+			else {
+				Write-Verbose "Catalog was NOT downloaded to $CatalogFileRaw"
+				Write-Verbose "Using Offline Catalog at $CatalogFileOffline"
+				$CatalogFileRaw = $CatalogFileOffline
+				$CatalogState = 'Build'
+			}
 		}
-		else {
-			$CatalogState = 'Offline'
+		catch {
+			Write-Verbose "Using Offline Catalog at $CatalogFileOffline"
+			$CatalogFileRaw = $CatalogFileOffline
+			$CatalogState = 'Build'
 		}
 	}
     #=================================================
     #   CatalogState Build
     #=================================================
 	if ($CatalogState -eq 'Build') {
-		Write-Verbose "Reading the System Catalog at $CatalogBuildPath"
-		[xml]$XmlCatalogContent = Get-Content -Path "$env:Temp\catalogv2.xml" -Raw
+		Write-Verbose "Reading the System Catalog at $CatalogFileRaw"		
+		[xml]$XmlCatalogContent = Get-Content -Path $CatalogFileRaw -Raw
 
 		$ModelList = $XmlCatalogContent.ModelList.Model
 		#=================================================
@@ -115,7 +112,7 @@ function Get-CatalogLenovoBios {
 		
 					$ObjectProperties = [Ordered]@{
 						CatalogVersion 	= Get-Date -Format yy.MM.dd
-						Name            = $Model.name
+						Name           	= $Model.name
 						Product         = $Model.Types.Type.split(',').Trim()
 						UEFIVersion     = $UEFIVersion
 						ECPVersion      = $ECPVersion #Embedded Controller Program
@@ -139,22 +136,15 @@ function Get-CatalogLenovoBios {
 			@{Label="FileName";Expression={($_.Group)[0].FileName};},
 			@{Label="Url";Expression={($_.Group)[0].Url};}
 	
-		Write-Verbose "Exporting Offline Catalog to $CatalogLocalPath"
-		$Results | Export-Clixml -Path $CatalogLocalPath
+		Write-Verbose "Exporting Offline Catalog to $CatalogFileDownload"
+		$Results | Export-Clixml -Path $CatalogFileDownload
 	}
     #=================================================
     #   CatalogState Local
     #=================================================
 	if ($CatalogState -eq 'Local') {
-		Write-Verbose "Reading the Local System Catalog at $CatalogLocalPath"
-		$Results = Import-Clixml -Path $CatalogLocalPath
-	}
-    #=================================================
-    #   CatalogState Offline
-    #=================================================
-	if ($CatalogState -eq 'Offline') {
-		Write-Verbose "Reading the Offline System Catalog at $CatalogOfflinePath"
-		$Results = Import-Clixml -Path $CatalogOfflinePath
+		Write-Verbose "Reading the Local System Catalog at $CatalogFileDownload"
+		$Results = Import-Clixml -Path $CatalogFileDownload
 	}
     #=================================================
     #   Compatible
