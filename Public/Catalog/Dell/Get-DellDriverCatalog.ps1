@@ -14,16 +14,16 @@ https://osd.osdeploy.com/module/functions
 
 .NOTES
 #>
-function Get-CatalogDellDriver {
+function Get-DellDriverCatalog {
     [CmdletBinding()]
     param (
 		  [switch]$Compatible
     )
 	
     if ($PSBoundParameters.ContainsKey('Compatible')) {
-	    Get-CatalogDellSystem -Compatible -Component Driver | Sort-Object -Property ReleaseDate -Descending
+	    Get-DellSystemCatalog -Compatible -Component Driver | Sort-Object -Property ReleaseDate -Descending
     }
     else {
-        Get-CatalogDellSystem -Component Driver | Sort-Object -Property ReleaseDate -Descending
+        Get-DellSystemCatalog -Component Driver | Sort-Object -Property ReleaseDate -Descending
     }
 }

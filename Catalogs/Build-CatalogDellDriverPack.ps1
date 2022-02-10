@@ -1,2 +1,2 @@
 Import-Module -Name OSD -Force
-Get-CatalogDellDriverPack | Export-Clixml -Path $PSScriptRoot\CatalogDellDriverPack.xml
+Get-DellDriverPackCatalog | Export-Clixml -Path $PSScriptRoot\DellDriverPackCatalog.xml

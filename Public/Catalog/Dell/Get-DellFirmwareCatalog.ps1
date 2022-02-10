@@ -14,16 +14,16 @@ https://osd.osdeploy.com/module/functions
 
 .NOTES
 #>
-function Get-CatalogDellFirmware {
+function Get-DellFirmwareCatalog {
     [CmdletBinding()]
     param (
       [switch]$Compatible
     )
 	
     if ($PSBoundParameters.ContainsKey('Compatible')) {
-	    Get-CatalogDellSystem -Compatible -Component Firmware | Sort-Object -Property ReleaseDate -Descending
+	    Get-DellSystemCatalog -Compatible -Component Firmware | Sort-Object -Property ReleaseDate -Descending
     }
     else {
-        Get-CatalogDellSystem -Component Firmware | Sort-Object -Property ReleaseDate -Descending
+        Get-DellSystemCatalog -Component Firmware | Sort-Object -Property ReleaseDate -Descending
     }
 }

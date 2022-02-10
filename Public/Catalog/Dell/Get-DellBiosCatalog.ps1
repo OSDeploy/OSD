@@ -14,16 +14,16 @@ https://osd.osdeploy.com/module/functions
 
 .NOTES
 #>
-function Get-CatalogDellBios {
+function Get-DellBiosCatalog {
     [CmdletBinding()]
     param (
 		  [switch]$Compatible
     )
 	
     if ($PSBoundParameters.ContainsKey('Compatible')) {
-	    Get-CatalogDellSystem -Compatible -Component BIOS | Sort-Object -Property ReleaseDate -Descending
+	    Get-DellSystemCatalog -Compatible -Component BIOS | Sort-Object -Property ReleaseDate -Descending
     }
     else {
-        Get-CatalogDellSystem -Component BIOS | Sort-Object -Property ReleaseDate -Descending
+        Get-DellSystemCatalog -Component BIOS | Sort-Object -Property ReleaseDate -Descending
     }
 }

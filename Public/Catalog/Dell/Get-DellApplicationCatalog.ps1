@@ -14,16 +14,16 @@ https://osd.osdeploy.com/module/functions
 
 .NOTES
 #>
-function Get-CatalogDellApplication {
+function Get-DellApplicationCatalog {
     [CmdletBinding()]
     param (
-		  [switch]$Compatible
+        [switch]$Compatible
     )
 	
     if ($PSBoundParameters.ContainsKey('Compatible')) {
-	    Get-CatalogDellSystem -Compatible -Component Application | Sort-Object -Property ReleaseDate -Descending
+	    Get-DellSystemCatalog -Compatible -Component Application | Sort-Object -Property ReleaseDate -Descending
     }
     else {
-        Get-CatalogDellSystem -Component Application | Sort-Object -Property ReleaseDate -Descending
+        Get-DellSystemCatalog -Component Application | Sort-Object -Property ReleaseDate -Descending
     }
 }

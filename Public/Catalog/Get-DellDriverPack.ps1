@@ -7,7 +7,7 @@ function Get-DellDriverPack {
     #=================================================
     #   Get Catalog
     #=================================================
-    $Results = Get-CatalogDellDriverPack
+    $Results = Get-DellDriverPackCatalog
     $Results = $Results | Where-Object {$_.SupportedSystemId -ne $null}
     $Results = $Results | Where-Object {($_.SupportedOperatingSystems -contains 'Windows 11 x64') -or ($_.SupportedOperatingSystems -contains 'Windows 10 x64')}
     $Results = $Results | Sort-Object OSVersion -Descending | Group-Object Name | ForEach-Object {$_.Group | Select-Object -First 1}

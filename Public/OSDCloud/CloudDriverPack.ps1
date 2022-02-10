@@ -55,8 +55,8 @@ function Get-CloudDriverPackDell {
     $DownloadsBaseUrl       = 'http://downloads.dell.com/'
 	$CatalogOnlinePath      = 'https://downloads.dell.com/catalog/DriverPackCatalog.cab'
 	$CatalogBuildPath       = Join-Path $env:TEMP 'CatalogPC.xml'
-	$CatalogLocalPath  		= Join-Path $env:TEMP 'CatalogDellDriverPack.xml'
-	$CatalogOfflinePath     = "$($MyInvocation.MyCommand.Module.ModuleBase)\Catalogs\CatalogDellDriverPack.xml"
+	$CatalogLocalPath  		= Join-Path $env:TEMP 'DellDriverPackCatalog.xml'
+	$CatalogOfflinePath     = "$($MyInvocation.MyCommand.Module.ModuleBase)\Catalogs\DellDriverPackCatalog.xml"
 	$CatalogLocalCabName  	= [string]($CatalogOnlinePath | Split-Path -Leaf)
     $CatalogLocalCabPath 	= Join-Path $env:TEMP $CatalogLocalCabName
     #=================================================

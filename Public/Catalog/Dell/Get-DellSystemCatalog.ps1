@@ -1,21 +1,44 @@
 <#
 .SYNOPSIS
-Returns the Dell DriverPacks downloads
+Converts the Dell Catalog PC to a PowerShell Object
 
 .DESCRIPTION
-Returns the Dell DriverPacks downloads
+Converts the Dell Catalog PC to a PowerShell Object
+Requires Internet Access to download Dell CatalogPC.cab
+
+.PARAMETER Component
+Filter the results based on these Components:
+Application
+BIOS
+Driver
+Firmware
 
 .PARAMETER Compatible
-Filters results based on your current Product
+If you have a Dell System, this will filter the results based on your
+ComputerSystem SystemSKUNumber
+
+.EXAMPLE
+Get-DellSystemCatalog
+Don't do this, you will get an almost endless list
+
+.EXAMPLE
+$Result = Get-DellSystemCatalog
+Yes do this.  Save it in a Variable
+
+.EXAMPLE
+Get-DellSystemCatalog -Component BIOS | Out-GridView
+Displays all the Dell BIOS Updates in GridView
 
 .LINK
 https://osd.osdeploy.com
 
 .NOTES
 #>
-function Get-CatalogDellDriverPack {
+function Get-DellSystemCatalog {
     [CmdletBinding()]
     param (
+        [ValidateSet('Application','BIOS','Driver','Firmware')]
+        [System.String]$Component,
 		[switch]$Compatible
     )
     #=================================================
@@ -23,10 +46,10 @@ function Get-CatalogDellDriverPack {
     #=================================================
 	$CatalogState           = 'Online'
     $DownloadsBaseUrl       = 'http://downloads.dell.com/'
-	$CatalogUri      		= 'https://downloads.dell.com/catalog/DriverPackCatalog.cab'
-	$CatalogFileRaw			= Join-Path $env:TEMP (Join-Path 'OSD' 'DriverPackCatalog.xml')
-	$CatalogFileBuild		= Join-Path $env:TEMP (Join-Path 'OSD' 'CatalogDellDriverPack.xml')
-	$CatalogFileLocal     	= "$($MyInvocation.MyCommand.Module.ModuleBase)\Catalogs\Dell\DriverPackCatalog.xml"
+	$CatalogUri      		= 'http://downloads.dell.com/catalog/CatalogPC.cab'
+	$CatalogFileRaw			= Join-Path $env:TEMP (Join-Path 'OSD' 'CatalogPC.xml')
+	$CatalogFileBuild		= Join-Path $env:TEMP (Join-Path 'OSD' 'DellSystemCatalog.xml')
+	$CatalogFileLocal     	= "$($MyInvocation.MyCommand.Module.ModuleBase)\Catalogs\Dell\CatalogPC.xml"
 	$CatalogLocalCabName  	= [string]($CatalogUri | Split-Path -Leaf)
     $CatalogLocalCabPath 	= Join-Path $env:TEMP (Join-Path 'OSD' $CatalogLocalCabName)
     #=================================================
@@ -99,27 +122,27 @@ function Get-CatalogDellDriverPack {
 	if ($CatalogState -eq 'Build') {
 		Write-Verbose "Reading the System Catalog at $CatalogFileRaw"
 		[xml]$XmlCatalogContent = Get-Content $CatalogFileRaw -ErrorAction Stop
-		$CatalogVersion = $XmlCatalogContent.DriverPackManifest.version
-		$Results = $XmlCatalogContent.DriverPackManifest.DriverPackage
+		$CatalogVersion = $XmlCatalogContent.Manifest.version
+		$Result = $XmlCatalogContent.Manifest.SoftwareComponent
 
 		Write-Verbose "Building the System Catalog"
 
-		$Results = $Results | Select-Object @{Label="CatalogVersion";Expression={$CatalogVersion};},
-		@{Label="Component";Expression={"DriverPack"};},
+		$Result = $Result | Select-Object @{Label="CatalogVersion";Expression={$CatalogVersion};},
+		@{Label="Component";Expression={($_.ComponentType.Display.'#cdata-section'.Trim())};},
 		@{Label="ReleaseDate";Expression = {[datetime] ($_.dateTime)};},
 		@{Label="Name";Expression={($_.Name.Display.'#cdata-section'.Trim())};},
 		#@{Label="Description";Expression={($_.Description.Display.'#cdata-section'.Trim())};},
 		@{Label="DellVersion";Expression={$_.dellVersion};},
 		@{Label="Url";Expression={-join ($DownloadsBaseUrl, $_.path)};},
 		@{Label="VendorVersion";Expression={$_.vendorVersion};},
-		#@{Label="Criticality";Expression={($_.Criticality.Display.'#cdata-section'.Trim())};},
+		@{Label="Criticality";Expression={($_.Criticality.Display.'#cdata-section'.Trim())};},
 		@{Label="FileName";Expression = {(split-path -leaf $_.path)};},
 		@{Label="SizeMB";Expression={'{0:f2}' -f ($_.size/1MB)};},
-		#@{Label="PackageID";Expression={$_.packageID};},
-		#@{Label="PackageType";Expression={$_.packageType};},
+		@{Label="PackageID";Expression={$_.packageID};},
+		@{Label="PackageType";Expression={$_.packageType};},
 		@{Label="ReleaseID";Expression={$_.ReleaseID};},
-		#@{Label="Category";Expression={($_.Category.Display.'#cdata-section'.Trim())};},
-		#@{Label="SupportedDevices";Expression={($_.SupportedDevices.Device.Display.'#cdata-section'.Trim())};},
+		@{Label="Category";Expression={($_.Category.Display.'#cdata-section'.Trim())};},
+		@{Label="SupportedDevices";Expression={($_.SupportedDevices.Device.Display.'#cdata-section'.Trim())};},
 		@{Label="SupportedBrand";Expression={($_.SupportedSystems.Brand.Display.'#cdata-section'.Trim())};},
 		@{Label="SupportedModel";Expression={($_.SupportedSystems.Brand.Model.Display.'#cdata-section'.Trim())};},
 		@{Label="SupportedSystemID";Expression={($_.SupportedSystems.Brand.Model.systemID)};},
@@ -128,41 +151,41 @@ function Get-CatalogDellDriverPack {
 		@{Label="HashMD5";Expression={$_.HashMD5};}
 	
 		Write-Verbose "Exporting Offline Catalog to $CatalogFileBuild"
-		$Results = $Results | Sort-Object ReleaseDate -Descending
-		$Results | Export-Clixml -Path $CatalogFileBuild
+		$Result = $Result | Sort-Object ReleaseDate -Descending
+		$Result | Export-Clixml -Path $CatalogFileBuild
 	}
     #=================================================
     #   CatalogState Local
     #=================================================
 	if ($CatalogState -eq 'Local') {
 		Write-Verbose "Reading the Local System Catalog at $CatalogFileBuild"
-		$Results = Import-Clixml -Path $CatalogFileBuild
+		$Result = Import-Clixml -Path $CatalogFileBuild
 	}
     #=================================================
     #   CatalogState Offline
     #=================================================
 	if ($CatalogState -eq 'Offline') {
 		Write-Verbose "Reading the Offline System Catalog at $CatalogFileLocal"
-		$	Results = Import-Clixml -Path $CatalogFileLocal
+		$Result = Import-Clixml -Path $CatalogFileLocal
 	}
- 	   #=================================================
+    #=================================================
     #   Compatible
     #=================================================
 	if ($PSBoundParameters.ContainsKey('Compatible')) {
 		$MyComputerProduct = Get-MyComputerProduct
 		Write-Verbose "Filtering XML for items compatible with Product $MyComputerProduct"
-		$Results = $Results | Where-Object {$_.SupportedSystemID -contains $MyComputerProduct}
+		$Result = $Result | Where-Object {$_.SupportedSystemID -contains $MyComputerProduct}
 	}
     #=================================================
     #   Component
     #=================================================
 	if ($PSBoundParameters.ContainsKey('Component')) {
 		Write-Verbose "Filtering XML for $Component"
-		$Results = $Results | Where-Object {$_.Component -eq $Component}
+		$Result = $Result | Where-Object {$_.Component -eq $Component}
 	}
     #=================================================
     #   Component
     #=================================================
-    $Results | Sort-Object -Property ReleaseDate -Descending
+    $Result | Sort-Object -Property ReleaseDate -Descending
     #=================================================
 }
