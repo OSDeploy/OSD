@@ -4,11 +4,17 @@ function Get-LenovoDriverPack {
 		[switch]$Compatible,
         [System.String]$DownloadPath
     )
+    #=================================================
+    #   Get Catalog
+    #=================================================
     $Results = Get-CatalogLenovoDriverPack
-	if ($Compatible) {
-		$MyComputerProduct = Get-MyComputerProduct
-		Write-Verbose "Filtering results for items compatible with Product $MyComputerProduct"
-		$Results = $Results | Where-Object {$_.Product -contains $MyComputerProduct}
+    #=================================================
+    #   Compatible and Download
+    #=================================================
+    if ($Compatible) {
+        $MyComputerProduct = Get-MyComputerProduct
+        Write-Verbose "Filtering results for items compatible with Product $MyComputerProduct"
+        $Results = $Results | Where-Object {$_.Product -contains $MyComputerProduct}
         if ($DownloadPath) {
             foreach ($Item in $Results) {
                 Save-MyDriverPack -Manufacturer Lenovo -Product $Item.Product[0] -DownloadPath $DownloadPath

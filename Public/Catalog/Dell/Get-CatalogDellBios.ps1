@@ -17,7 +17,7 @@ https://osd.osdeploy.com/module/functions
 function Get-CatalogDellBios {
     [CmdletBinding()]
     param (
-		[switch]$Compatible
+		  [switch]$Compatible
     )
 	
     if ($PSBoundParameters.ContainsKey('Compatible')) {

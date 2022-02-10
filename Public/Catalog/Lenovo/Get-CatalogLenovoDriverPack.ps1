@@ -24,18 +24,21 @@ function Get-CatalogLenovoDriverPack {
 	$CatalogState           = 'Online'
 	$CatalogUri      		= 'https://download.lenovo.com/cdrt/td/catalogv2.xml'
 	$CatalogFileRaw			= Join-Path $env:TEMP (Join-Path 'OSD' 'catalogv2.xml')
-	$CatalogFileDownload	= Join-Path $env:TEMP (Join-Path 'OSD' 'CatalogLenovoDriverPack.xml')
-	$CatalogFileOffline		= "$($MyInvocation.MyCommand.Module.ModuleBase)\Catalogs\Lenovo\catalogv2.xml"
+	$CatalogFileBuild		= Join-Path $env:TEMP (Join-Path 'OSD' 'CatalogLenovoDriverPack.xml')
+	$CatalogFileLocal		= "$($MyInvocation.MyCommand.Module.ModuleBase)\Catalogs\Lenovo\catalogv2.xml"
+	if (-not(Test-Path (Join-Path $env:TEMP 'OSD'))) {
+		$null = New-Item -Path (Join-Path $env:TEMP 'OSD') -ItemType Directory -Force
+	}
     #=================================================
     #   Test Local CatalogState
     #=================================================
-    if (Test-Path $CatalogFileDownload) {
-		Write-Verbose "Catalog already downloaded to $CatalogFileDownload"
+    if (Test-Path $CatalogFileBuild)	 {
+		Write-Verbose "Catalog already downloaded to $CatalogFileBuild"	
 
-        $GetItemCatalogFileDownload = Get-Item $CatalogFileDownload
+        $GetItemCatalogFileBuild = Get-Item $CatalogFileBuild
 
 		#If the local is older than 12 hours, delete it
-        if (((Get-Date) - $GetItemCatalogFileDownload.LastWriteTime).TotalHours -gt 12) {
+        if (((Get-Date) - $GetItemCatalogFileBuild.	LastWriteTime).TotalHours -gt 12) {
             Write-Verbose "Removing previous Offline Catalog"
 		}
 		else {
@@ -59,14 +62,14 @@ function Get-CatalogLenovoDriverPack {
 			}
 			else {
 				Write-Verbose "Catalog was NOT downloaded to $CatalogFileRaw"
-				Write-Verbose "Using Offline Catalog at $CatalogFileOffline"
-				$CatalogFileRaw = $CatalogFileOffline
+				Write-Verbose "Using Offline Catalog at $CatalogFileLocal"
+				$CatalogFileRaw = $CatalogFileLocal
 				$CatalogState = 'Build'
 			}
 		}
 		catch {
-			Write-Verbose "Using Offline Catalog at $CatalogFileOffline"
-			$CatalogFileRaw = $CatalogFileOffline
+			Write-Verbose "Using Offline Catalog at $CatalogFileLocal"
+			$CatalogFileRaw = $CatalogFileLocal
 			$CatalogState = 'Build'
 		}
 	}
@@ -99,16 +102,16 @@ function Get-CatalogLenovoDriverPack {
 		$Results = $Results | Sort-Object Name, OSVersion -Descending | Group-Object Name | ForEach-Object {$_.Group | Select-Object -First 1}
 		$Results = $Results | Sort-Object Name, OSVersion -Descending | Select-Object CatalogVersion, Name, Product, DriverPackUrl, FileName
 	
-		Write-Verbose "Exporting Offline Catalog to $CatalogFileDownload"
-		$Results | Export-Clixml -Path $CatalogFileDownload
-	}
+		Write-Verbose "Exporting Offline Catalog to $CatalogFileBuild"	
+		$Results | Export-Clixml -Path $CatalogFileBuild
+		}
     #=================================================
     #   CatalogState Local
     #=================================================
 	if ($CatalogState -eq 'Local') {
-		Write-Verbose "Reading the Local System Catalog at $CatalogFileDownload"
-		$Results = Import-Clixml -Path $CatalogFileDownload
-	}
+		Write-Verbose "Reading the Local System Catalog at $CatalogFileBuild"	
+		$Results = Import-Clixml -Path $CatalogFileBuild
+		}
     #=================================================
     #   Compatible
     #=================================================
