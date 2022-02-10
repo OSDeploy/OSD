@@ -7,7 +7,7 @@ function Get-LenovoDriverPack {
     #=================================================
     #   Get Catalog
     #=================================================
-    $Results = Get-CatalogLenovoDriverPack
+    $Results = Get-LenovoDriverPackCatalog
     #=================================================
     #   Compatible and Download
     #=================================================

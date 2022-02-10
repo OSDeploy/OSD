@@ -13,7 +13,7 @@ https://osd.osdeploy.com
 
 .NOTES
 #>
-function Get-CatalogLenovoBios {
+function Get-LenovoBiosCatalog {
     [CmdletBinding()]
     param (
 		[switch]$Compatible

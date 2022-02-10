@@ -4,7 +4,7 @@ function Get-LenovoBiosUpdate {
 		[switch]$Compatible,
         [System.String]$DownloadPath
     )
-    $Results = Get-CatalogLenovoBios
+    $Results = Get-LenovoBiosCatalog
 	if ($Compatible) {
 		$MyComputerProduct = Get-MyComputerProduct
 		Write-Verbose "Filtering results for items compatible with Product $MyComputerProduct"

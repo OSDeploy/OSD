@@ -13,10 +13,11 @@ https://osd.osdeploy.com
 
 .NOTES
 #>
-function Get-CatalogLenovoDriverPack {
+function Get-LenovoDriverPackCatalog {
     [CmdletBinding()]
     param (
-		[switch]$Compatible
+		[switch]$Compatible,
+        [System.String]$DownloadPath
     )
     #=================================================
     #   Paths
@@ -111,7 +112,7 @@ function Get-CatalogLenovoDriverPack {
 	if ($CatalogState -eq 'Local') {
 		Write-Verbose "Reading the Local System Catalog at $CatalogFileBuild"	
 		$Results = Import-Clixml -Path $CatalogFileBuild
-		}
+	}
     #=================================================
     #   Compatible
     #=================================================
@@ -120,6 +121,16 @@ function Get-CatalogLenovoDriverPack {
 		Write-Verbose "Filtering XML for items compatible with Product $MyComputerProduct"
 		$Results = $Results | Where-Object {$_.Product -contains $MyComputerProduct}
 	}
+    #=================================================
+    #   DownloadPath
+    #=================================================
+	if ($PSBoundParameters.ContainsKey('DownloadPath')) {
+        $Results = $Results | Out-GridView -Title 'Select one or more files to Download' -PassThru -ErrorAction Stop
+        foreach ($Item in $Results) {
+			$OutFile = Save-WebFile -SourceUrl $Item.DriverPackUrl -DestinationDirectory $DownloadPath -DestinationName $Item.FileName -Verbose
+			$Item | ConvertTo-Json | Out-File "$($OutFile.FullName).json" -Encoding ascii -Width 2000 -Force
+        }
+    }
     #=================================================
     #   Component
     #=================================================
