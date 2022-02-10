@@ -51,73 +51,73 @@ function Get-CloudDriverPackDell {
     #=================================================
     #   Paths
     #=================================================
-	$CatalogState           = 'Online' #Online, Build, Local, Offline
+	$UseCatalogFile           = 'Cloud' #Cloud, Build, Local, Offline
     $DownloadsBaseUrl       = 'http://downloads.dell.com/'
-	$CatalogOnlinePath      = 'https://downloads.dell.com/catalog/DriverPackCatalog.cab'
-	$CatalogBuildPath       = Join-Path $env:TEMP 'CatalogPC.xml'
-	$CatalogLocalPath  		= Join-Path $env:TEMP 'DellDriverPackCatalog.xml'
-	$CatalogOfflinePath     = "$($MyInvocation.MyCommand.Module.ModuleBase)\Catalogs\DellDriverPackCatalog.xml"
-	$CatalogLocalCabName  	= [string]($CatalogOnlinePath | Split-Path -Leaf)
-    $CatalogLocalCabPath 	= Join-Path $env:TEMP $CatalogLocalCabName
+	$CloudCatalogUri      = 'https://downloads.dell.com/catalog/DriverPackCatalog.cab'
+	$RawCatalogFile       = Join-Path $env:TEMP 'CatalogPC.xml'
+	$BuildCatalogFile  		= Join-Path $env:TEMP 'DellDriverPackCatalog.xml'
+	$OfflineCatalogFile     = "$($MyInvocation.MyCommand.Module.ModuleBase)\Catalogs\DellDriverPackCatalog.xml"
+	$RawCatalogCabName  	= [string]($CloudCatalogUri | Split-Path -Leaf)
+    $RawCatalogCabPath 	= Join-Path $env:TEMP $RawCatalogCabName
     #=================================================
-    #   Test CatalogState Local
+    #   Test UseCatalogFile Local
     #=================================================
-    if (Test-Path $CatalogLocalPath) {
+    if (Test-Path $BuildCatalogFile) {
 
 		#Get-Item to determine the age
-        $GetItemCatalogLocalPath = Get-Item $CatalogLocalPath
+        $GetItemBuildCatalogFile = Get-Item $BuildCatalogFile
 
 		#If the local is older than 12 hours, delete it
-<#         if (((Get-Date) - $GetItemCatalogLocalPath.LastWriteTime).TotalHours -gt 12) {
+<#         if (((Get-Date) - $GetItemBuildCatalogFile.LastWriteTime).TotalHours -gt 12) {
             Write-Verbose "Removing previous Offline Catalog"
         }
         else {
-            $CatalogState = 'Local'
+            $UseCatalogFile = 'Local'
         } #>
     }
     #=================================================
-    #   Test CatalogState Online
+    #   Test UseCatalogFile Cloud
     #=================================================
-	if ($CatalogState -eq 'Online') {
-		if (Test-WebConnection -Uri $CatalogOnlinePath) {
-			#Catalog is online and can be downloaded
+	if ($UseCatalogFile -eq 'Cloud') {
+		if (Test-WebConnection -Uri $CloudCatalogUri) {
+			#Catalog is Cloud and can be downloaded
 		}
 		else {
-			$CatalogState = 'Offline'
+			$UseCatalogFile = 'Offline'
 		}
 	}
     #=================================================
-    #   CatalogState Online
-	#	Need to get the Online Catalog to Local
+    #   UseCatalogFile Cloud
+	#	Need to get the Cloud Catalog to Local
     #=================================================
-	if ($CatalogState -eq 'Online') {
-		Write-Verbose "Source: $CatalogOnlinePath"
-		Write-Verbose "Destination: $CatalogLocalCabPath"
-		(New-Object System.Net.WebClient).DownloadFile($CatalogOnlinePath, $CatalogLocalCabPath)
+	if ($UseCatalogFile -eq 'Cloud') {
+		Write-Verbose "Source: $CloudCatalogUri"
+		Write-Verbose "Destination: $RawCatalogCabPath"
+		(New-Object System.Net.WebClient).DownloadFile($CloudCatalogUri, $RawCatalogCabPath)
 
 		#Make sure the file downloaded
-		if (Test-Path $CatalogLocalCabPath) {
-			Write-Verbose "Expand: $CatalogLocalCabPath"
-			Expand "$CatalogLocalCabPath" "$CatalogBuildPath" | Out-Null
+		if (Test-Path $RawCatalogCabPath) {
+			Write-Verbose "Expand: $RawCatalogCabPath"
+			Expand "$RawCatalogCabPath" "$RawCatalogFile" | Out-Null
 
-			if (Test-Path $CatalogBuildPath) {
-				$CatalogState = 'Build'
+			if (Test-Path $RawCatalogFile) {
+				$UseCatalogFile = 'Build'
 			}
 			else {
-				Write-Verbose "Could not expand $CatalogLocalCabPath"
-				$CatalogState = 'Offline'
+				Write-Verbose "Could not expand $RawCatalogCabPath"
+				$UseCatalogFile = 'Offline'
 			}
 		}
 		else {
-			$CatalogState = 'Offline'
+			$UseCatalogFile = 'Offline'
 		}
 	}
     #=================================================
-    #   CatalogState Build
+    #   UseCatalogFile Build
     #=================================================
-	if ($CatalogState -eq 'Build') {
-		Write-Verbose "Reading the System Catalog at $CatalogBuildPath"
-		[xml]$XmlCatalogContent = Get-Content $CatalogBuildPath -ErrorAction Stop
+	if ($UseCatalogFile -eq 'Build') {
+		Write-Verbose "Reading the System Catalog at $RawCatalogFile"
+		[xml]$XmlCatalogContent = Get-Content $RawCatalogFile -ErrorAction Stop
 		$CatalogVersion = $XmlCatalogContent.DriverPackManifest.version
 		$Results = $XmlCatalogContent.DriverPackManifest.DriverPackage
 
@@ -146,9 +146,9 @@ function Get-CloudDriverPackDell {
 		@{Label="SupportedArchitecture";Expression={($_.SupportedOperatingSystems.OperatingSystem.osArch)};},
 		@{Label="HashMD5";Expression={$_.HashMD5};}
 	
-		Write-Verbose "Exporting Offline Catalog to $CatalogLocalPath"
+		Write-Verbose "Exporting Offline Catalog to $BuildCatalogFile"
 		$Results = $Results | Sort-Object ReleaseDate -Descending
-		$Results | Export-Clixml -Path $CatalogLocalPath
+		$Results | Export-Clixml -Path $BuildCatalogFile
 
         foreach ($Item in $Results) {
             $Item.SupportedModel = $Item.SupportedModel | Get-Unique -AsString
@@ -203,18 +203,18 @@ function Get-CloudDriverPackDell {
     $DellCloudDriverPacks
     Break
     #=================================================
-    #   CatalogState Local
+    #   UseCatalogFile Local
     #=================================================
-	if ($CatalogState -eq 'Local') {
-		Write-Verbose "Reading the Local System Catalog at $CatalogLocalPath"
-		$Results = Import-Clixml -Path $CatalogLocalPath
+	if ($UseCatalogFile -eq 'Local') {
+		Write-Verbose "Reading the Local System Catalog at $BuildCatalogFile"
+		$Results = Import-Clixml -Path $BuildCatalogFile
 	}
     #=================================================
-    #   CatalogState Offline
+    #   UseCatalogFile Offline
     #=================================================
-	if ($CatalogState -eq 'Offline') {
-		Write-Verbose "Reading the Offline System Catalog at $CatalogOfflinePath"
-		$Results = Import-Clixml -Path $CatalogOfflinePath
+	if ($UseCatalogFile -eq 'Offline') {
+		Write-Verbose "Reading the Offline System Catalog at $OfflineCatalogFile"
+		$Results = Import-Clixml -Path $OfflineCatalogFile
 	}
     #=================================================
     #   Compatible
