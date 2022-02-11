@@ -6,9 +6,9 @@ Returns a PowerShell Object of the HP Model Driver Packs
 Returns a PowerShell Object of the HP Model Driver Packs by parsing the Catalog at https://ftp.hp.com/pub/caps-softpaq/cmit/HPClientDriverPackCatalog.cab"
 
 .LINK
-https://osd.osdeploy.com/functions/get-osddriverhpmodel
+https://osd.osdeploy.com
 #>
-function Get-OSDDriverHpModel {
+function Get-HPOSDDriversCatalog {
     [CmdletBinding()]
     param ()
     #=================================================
@@ -38,7 +38,7 @@ function Get-OSDDriverHpModel {
     #   Create DownloadPath
     #=================================================
     if (-not (Test-Path $DownloadPath)) {
-        Write-Verbose "Get-OSDDriverHpModel: Creating $DownloadPath"
+        Write-Verbose "Get-HPOSDDriversCatalog: Creating $DownloadPath"
         New-Item $DownloadPath -ItemType Directory -Force -ErrorAction Stop | Out-Null
     }
     #=================================================
@@ -51,7 +51,7 @@ function Get-OSDDriverHpModel {
     if (Test-Path $DriverPackCatalogCabFullName) {
         Remove-Item -Path "$DriverPackCatalogCabFullName" -Force | Out-Null
     } else {
-        Write-Warning "Get-OSDDriverHpModel: Unable to download $UrlCabDriverPackCatalog"
+        Write-Warning "Get-HPOSDDriversCatalog: Unable to download $UrlCabDriverPackCatalog"
         Break
     }
     #=================================================
@@ -60,7 +60,7 @@ function Get-OSDDriverHpModel {
     [xml]$DriverPackCatalogXmlContent = Get-Content "$DriverPackCatalogXmlFullName" -ErrorAction Stop
     $DriverPackCatalog = $DriverPackCatalogXmlContent.NewDataSet.HPClientDriverPackCatalog.SoftPaqList.SoftPaq
     $HpProductOSDriverPackList = $DriverPackCatalogXmlContent.NewDataSet.HPClientDriverPackCatalog.ProductOSDriverPackList.ProductOSDriverPack
-    Write-Warning "Get-OSDDriverHpModel: Results are limited to Windows 10 x64"
+    Write-Warning "Get-HPOSDDriversCatalog: Results are limited to Windows 10 x64"
     #=================================================
     #   ForEach
     #=================================================

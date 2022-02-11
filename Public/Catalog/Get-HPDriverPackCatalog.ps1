@@ -98,93 +98,53 @@ function Get-HPDriverPackCatalog {
         Write-Verbose "Reading the Raw Catalog at $RawCatalogFile"
         Write-Warning "Building Catalog content, please wait ..."
         [xml]$XmlCatalogContent = Get-Content $RawCatalogFile -ErrorAction Stop
-        $DriverPackManifest = $XmlCatalogContent.NewDataSet.HPClientDriverPackCatalog.SoftPaqList.SoftPaq
+
+        $HpSoftPaqList = $XmlCatalogContent.NewDataSet.HPClientDriverPackCatalog.SoftPaqList.SoftPaq
+
         $HpModelList = $XmlCatalogContent.NewDataSet.HPClientDriverPackCatalog.ProductOSDriverPackList.ProductOSDriverPack
+        $HpModelList = $HpModelList | Where-Object {$_.OSId -ge '4243'}
+        $HpModelList = $HpModelList | Sort-Object OSId -Descending | Group-Object ProductId, SoftPaqId | ForEach-Object {$_.Group | Select-Object -First 1}
+        $HpModelList = $HpModelList | Sort-Object OSId -Descending | Group-Object ProductId | ForEach-Object {$_.Group | Select-Object -First 1}
 
-        $HpModelList = $HpModelList | Where-Object {$_.OSName -notmatch 'Windows 7'}
-        $HpModelList = $HpModelList | Where-Object {$_.OSName -notmatch 'Windows 8'}
-        $HpModelList = $HpModelList | Where-Object {$_.OSName -notmatch 'Windows 10 IoT'}
-
-        foreach ($Item in $HpModelList) {
-            $Item.SystemId = $Item.SystemId.Trim()
-        }
-
-        if ($PSBoundParameters.ContainsKey('Product')) {
-            $HpModelList = $HpModelList | Where-Object {($_.SystemId -match $Product) -or ($_.SystemId -contains $Product)}
-        }
-        #=================================================
-        #   Create Object 
-        #=================================================
-        $ErrorActionPreference = "Ignore"
-
-        $Results = foreach ($DriverPackage in $DriverPackManifest) {
+        $Results = foreach ($Item in $HpModelList) {
             #=================================================
             #   Matching
             #=================================================
-            $ProductId          = $DriverPackage.Id
-            $MatchingList       = @()
-            $MatchingList       = $HpModelList | Where-Object {$_.SoftPaqId -match $ProductId}
+            $HpSoftPaq = $null
+            $HpSoftPaq = $HpSoftPaqList | Where-Object {$_.Id -eq $Item.SoftPaqId}
 
-            if ($null -eq $MatchingList) {
+            if ($null -eq $HpSoftPaq) {
                 Continue
             }
 
-            $SystemSku          = @()
-            $SystemSku          = $MatchingList | Select-Object -Property SystemId -Unique
-            $SystemSku          = ($SystemSku).SystemId
-
-            $SystemModel        = @()
-            $SystemModel        = $MatchingList | Select-Object -Property SystemName -Unique
-            $SystemModel        = ($SystemModel).SystemName
-
-            $DriverPackVersion  = $DriverPackage.Version
-            $DriverPackName     = "$($DriverPackage.Name) $DriverPackVersion"
-
             $ObjectProperties = [Ordered]@{
                 CatalogVersion 	= Get-Date -Format yy.MM.dd
-                ReleaseDate     = [datetime]$DriverPackage.DateReleased
-                Name            = $DriverPackage.Name
-                Model           = $SystemModel
-                FileName        = $DriverPackage.Url | Split-Path -Leaf
-                Product         = [array]$SystemSku
-                Version         = $DriverPackVersion
-                Url             = $DriverPackage.Url
+                Component       = 'DriverPack'
+                Model           = $Item.SystemName
+                Name            = "$($HpSoftPaq.Name) $($HpSoftPaq.Version)"
+                DateReleased    = $HpSoftPaq.DateReleased
+                SystemId        = $Item.SystemId
+                SoftPaqId       = $Item.SoftPaqId
+                OSId            = $Item.OSId
+                OSName          = $Item.OSName
+                Architecture    = $Item.Architecture
+                ProductType     = $Item.ProductType
+                SoftPaqName     = $HpSoftPaq.Name
+                Version         = $HpSoftPaq.Version
+                Category        = $HpSoftPaq.Category
+                Url             = $HpSoftPaq.Url
+                FileName        = $HpSoftPaq.Url | Split-Path -Leaf
+                Size            = $HpSoftPaq.Size
+                MD5             = $HpSoftPaq.MD5
+                SHA256          = $HpSoftPaq.SHA256
+                CvaFileUrl      = $HpSoftPaq.CvaFileUrl
+                ReleaseNotesUrl = $HpSoftPaq.ReleaseNotesUrl
+                CvaTitle        = $HpSoftPaq.CvaTitle
             }
             New-Object -TypeName PSObject -Property $ObjectProperties
         }
-        #$Results = $Results | Where-Object {$_.Name -notmatch 'Win 7'}
-        #$Results = $Results | Where-Object {$_.Name -notmatch 'Windows 7'}
-        #$Results = $Results | Where-Object {$_.Name -notmatch 'Windows 8'}
-        #$Results = $Results | Where-Object {$_.Name -match 'Windows 10'}
-        $Results = $Results | Sort-Object Name, ReleaseDate -Descending | Group-Object Name | ForEach-Object {$_.Group | Select-Object -First 1}
-        #$Results = $Results | Sort-Object Name | Select-Object CatalogVersion, ReleaseDate, @{Name='Name';Expression={"$($_.Name) $($_.Version)"}}, Product, Url, FileName
 
-        $Results = $Results | Sort-Object Name | Select-Object CatalogVersion, ReleaseDate, @{Name='Name';Expression={"$($_.Name) $($_.Version)"}}, @{
-            Name='Product';Expression={
-                $p = $_.Product
-                $pBaseType = $p.gettype().BaseType.Name
-                if ($pBaseType -eq "Array") {
-                    # its array
-                    $p | ForEach-Object {
-                        if ($_ -match ",") {
-                            ($_ -split ",").trim()
-                        }
-                        else {
-                            $_
-                        }
-                    }
-                }
-                elseif ($p -match ",") {
-                    # its string that contains more items
-                    ($p -split ",").trim()
-                }
-                else {
-                    # its one item
-                    $p
-                }
-            }
-        }, Url, FileName
-
+        $Results = $Results | Sort-Object Model
         Write-Verbose "Exporting Build Catalog to $BuildCatalogFile"
         $Results | Export-Clixml -Path $BuildCatalogFile
     }
