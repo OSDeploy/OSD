@@ -97,13 +97,13 @@ function Get-LenovoDriverPackCatalog {
                     FileName        = $Item.'#text' | Split-Path -Leaf
         
                     OSVersion       = $Item.version
-                    Url             = $Item.'#text'
+                    DriverPackUrl   = $Item.'#text'
                 }
                 New-Object -TypeName PSObject -Property $ObjectProperties
             }
         }
         $Results = $Results | Sort-Object Name, OSVersion -Descending | Group-Object Name | ForEach-Object {$_.Group | Select-Object -First 1}
-        $Results = $Results | Sort-Object Name, OSVersion -Descending | Select-Object CatalogVersion, Name, Product, Url, FileName
+        $Results = $Results | Sort-Object Name, OSVersion -Descending | Select-Object CatalogVersion, Name, Product, DriverPackUrl, FileName
 
         Write-Verbose "Exporting Build Catalog to $BuildCatalogFile"
         $Results = $Results | Sort-Object Name
@@ -144,7 +144,7 @@ function Get-LenovoDriverPackCatalog {
     if ($PSBoundParameters.ContainsKey('DownloadPath')) {
         $Results = $Results | Out-GridView -Title 'Select one or more files to Download' -PassThru -ErrorAction Stop
         foreach ($Item in $Results) {
-            $OutFile = Save-WebFile -SourceUrl $Item.Url -DestinationDirectory $DownloadPath -DestinationName $Item.FileName -Verbose
+            $OutFile = Save-WebFile -SourceUrl $Item.DriverPackUrl -DestinationDirectory $DownloadPath -DestinationName $Item.FileName -Verbose
             $Item | ConvertTo-Json | Out-File "$($OutFile.FullName).json" -Encoding ascii -Width 2000 -Force
         }
     }
