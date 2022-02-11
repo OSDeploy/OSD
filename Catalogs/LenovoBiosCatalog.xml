@@ -6,7 +6,7 @@
       <T>System.Object</T>
     </TN>
     <MS>
-      <S N="CatalogVersion">22.02.10</S>
+      <S N="CatalogVersion">22.02.11</S>
       <S N="SupportedModel">Lenovo 500w Gen 3</S>
       <Obj N="SupportedProduct" RefId="1">
         <TN RefId="1">
@@ -29,7 +29,7 @@
   <Obj RefId="2">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">22.02.10</S>
+      <S N="CatalogVersion">22.02.11</S>
       <S N="SupportedModel">Lenovo Tablet 10</S>
       <Obj N="SupportedProduct" RefId="3">
         <TNRef RefId="1" />
@@ -48,7 +48,7 @@
   <Obj RefId="4">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">22.02.10</S>
+      <S N="CatalogVersion">22.02.11</S>
       <S N="SupportedModel">ThinkCentre M625Q</S>
       <Obj N="SupportedProduct" RefId="5">
         <TNRef RefId="1" />
@@ -75,7 +75,7 @@
   <Obj RefId="6">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">22.02.10</S>
+      <S N="CatalogVersion">22.02.11</S>
       <S N="SupportedModel">ThinkCentre M630E</S>
       <Obj N="SupportedProduct" RefId="7">
         <TNRef RefId="1" />
@@ -96,7 +96,7 @@
   <Obj RefId="8">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">22.02.10</S>
+      <S N="CatalogVersion">22.02.11</S>
       <Obj N="SupportedModel" RefId="9">
         <TNRef RefId="1" />
         <LST>
@@ -149,7 +149,7 @@
   <Obj RefId="11">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">22.02.10</S>
+      <S N="CatalogVersion">22.02.11</S>
       <S N="SupportedModel">ThinkCentre M700 TOWER AND SMALL</S>
       <Obj N="SupportedProduct" RefId="12">
         <TNRef RefId="1" />
@@ -174,7 +174,7 @@
   <Obj RefId="13">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">22.02.10</S>
+      <S N="CatalogVersion">22.02.11</S>
       <Obj N="SupportedModel" RefId="14">
         <TNRef RefId="1" />
         <LST>
@@ -204,7 +204,7 @@
   <Obj RefId="16">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">22.02.10</S>
+      <S N="CatalogVersion">22.02.11</S>
       <S N="SupportedModel">ThinkCentre M70A</S>
       <Obj N="SupportedProduct" RefId="17">
         <TNRef RefId="1" />
@@ -225,7 +225,7 @@
   <Obj RefId="18">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">22.02.10</S>
+      <S N="CatalogVersion">22.02.11</S>
       <S N="SupportedModel">ThinkCentre M70A Gen 2</S>
       <Obj N="SupportedProduct" RefId="19">
         <TNRef RefId="1" />
@@ -246,7 +246,7 @@
   <Obj RefId="20">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">22.02.10</S>
+      <S N="CatalogVersion">22.02.11</S>
       <S N="SupportedModel">ThinkCentre M70C</S>
       <Obj N="SupportedProduct" RefId="21">
         <TNRef RefId="1" />
@@ -267,7 +267,7 @@
   <Obj RefId="22">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">22.02.10</S>
+      <S N="CatalogVersion">22.02.11</S>
       <Obj N="SupportedModel" RefId="23">
         <TNRef RefId="1" />
         <LST>
@@ -303,7 +303,7 @@
   <Obj RefId="25">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">22.02.10</S>
+      <S N="CatalogVersion">22.02.11</S>
       <Obj N="SupportedModel" RefId="26">
         <TNRef RefId="1" />
         <LST>
@@ -354,7 +354,7 @@
   <Obj RefId="28">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">22.02.10</S>
+      <S N="CatalogVersion">22.02.11</S>
       <S N="SupportedModel">ThinkCentre M710E</S>
       <Obj N="SupportedProduct" RefId="29">
         <TNRef RefId="1" />
@@ -374,7 +374,7 @@
   <Obj RefId="30">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">22.02.10</S>
+      <S N="CatalogVersion">22.02.11</S>
       <Obj N="SupportedModel" RefId="31">
         <TNRef RefId="1" />
         <LST>
@@ -431,7 +431,7 @@
   <Obj RefId="33">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">22.02.10</S>
+      <S N="CatalogVersion">22.02.11</S>
       <Obj N="SupportedModel" RefId="34">
         <TNRef RefId="1" />
         <LST>
@@ -464,7 +464,7 @@
   <Obj RefId="36">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">22.02.10</S>
+      <S N="CatalogVersion">22.02.11</S>
       <S N="SupportedModel">ThinkCentre M715Q</S>
       <Obj N="SupportedProduct" RefId="37">
         <TNRef RefId="1" />
@@ -489,7 +489,7 @@
   <Obj RefId="38">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">22.02.10</S>
+      <S N="CatalogVersion">22.02.11</S>
       <S N="SupportedModel">ThinkCentre M715Q 2nd Gen</S>
       <Obj N="SupportedProduct" RefId="39">
         <TNRef RefId="1" />
@@ -514,7 +514,7 @@
   <Obj RefId="40">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">22.02.10</S>
+      <S N="CatalogVersion">22.02.11</S>
       <Obj N="SupportedModel" RefId="41">
         <TNRef RefId="1" />
         <LST>
@@ -541,7 +541,7 @@
   <Obj RefId="43">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">22.02.10</S>
+      <S N="CatalogVersion">22.02.11</S>
       <S N="SupportedModel">ThinkCentre M720E</S>
       <Obj N="SupportedProduct" RefId="44">
         <TNRef RefId="1" />
@@ -560,7 +560,7 @@
   <Obj RefId="45">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">22.02.10</S>
+      <S N="CatalogVersion">22.02.11</S>
       <Obj N="SupportedModel" RefId="46">
         <TNRef RefId="1" />
         <LST>
@@ -648,7 +648,7 @@
   <Obj RefId="48">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">22.02.10</S>
+      <S N="CatalogVersion">22.02.11</S>
       <S N="SupportedModel">ThinkCentre M725S</S>
       <Obj N="SupportedProduct" RefId="49">
         <TNRef RefId="1" />
@@ -667,7 +667,7 @@
   <Obj RefId="50">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">22.02.10</S>
+      <S N="CatalogVersion">22.02.11</S>
       <S N="SupportedModel">ThinkCentre M73</S>
       <Obj N="SupportedProduct" RefId="51">
         <TNRef RefId="1" />
@@ -702,7 +702,7 @@
   <Obj RefId="52">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">22.02.10</S>
+      <S N="CatalogVersion">22.02.11</S>
       <Obj N="SupportedModel" RefId="53">
         <TNRef RefId="1" />
         <LST>
@@ -759,7 +759,7 @@
   <Obj RefId="55">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">22.02.10</S>
+      <S N="CatalogVersion">22.02.11</S>
       <S N="SupportedModel">ThinkCentre M75N</S>
       <Obj N="SupportedProduct" RefId="56">
         <TNRef RefId="1" />
@@ -788,7 +788,7 @@
   <Obj RefId="57">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">22.02.10</S>
+      <S N="CatalogVersion">22.02.11</S>
       <Obj N="SupportedModel" RefId="58">
         <TNRef RefId="1" />
         <LST>
@@ -815,7 +815,7 @@
   <Obj RefId="60">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">22.02.10</S>
+      <S N="CatalogVersion">22.02.11</S>
       <S N="SupportedModel">ThinkCentre M75Q Gen 2 Type 11JN 11JQ 11JR 11JS</S>
       <Obj N="SupportedProduct" RefId="61">
         <TNRef RefId="1" />
@@ -836,7 +836,7 @@
   <Obj RefId="62">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">22.02.10</S>
+      <S N="CatalogVersion">22.02.11</S>
       <Obj N="SupportedModel" RefId="63">
         <TNRef RefId="1" />
         <LST>
@@ -863,7 +863,7 @@
   <Obj RefId="65">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">22.02.10</S>
+      <S N="CatalogVersion">22.02.11</S>
       <Obj N="SupportedModel" RefId="66">
         <TNRef RefId="1" />
         <LST>
@@ -894,7 +894,7 @@
   <Obj RefId="68">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">22.02.10</S>
+      <S N="CatalogVersion">22.02.11</S>
       <Obj N="SupportedModel" RefId="69">
         <TNRef RefId="1" />
         <LST>
@@ -934,7 +934,7 @@
   <Obj RefId="71">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">22.02.10</S>
+      <S N="CatalogVersion">22.02.11</S>
       <Obj N="SupportedModel" RefId="72">
         <TNRef RefId="1" />
         <LST>
@@ -961,7 +961,7 @@
   <Obj RefId="74">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">22.02.10</S>
+      <S N="CatalogVersion">22.02.11</S>
       <S N="SupportedModel">ThinkCentre M79</S>
       <Obj N="SupportedProduct" RefId="75">
         <TNRef RefId="1" />
@@ -994,7 +994,7 @@
   <Obj RefId="76">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">22.02.10</S>
+      <S N="CatalogVersion">22.02.11</S>
       <Obj N="SupportedModel" RefId="77">
         <TNRef RefId="1" />
         <LST>
@@ -1057,7 +1057,7 @@
   <Obj RefId="79">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">22.02.10</S>
+      <S N="CatalogVersion">22.02.11</S>
       <S N="SupportedModel">ThinkCentre M810Z</S>
       <Obj N="SupportedProduct" RefId="80">
         <TNRef RefId="1" />
@@ -1079,7 +1079,7 @@
   <Obj RefId="81">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">22.02.10</S>
+      <S N="CatalogVersion">22.02.11</S>
       <S N="SupportedModel">ThinkCentre M820Z</S>
       <Obj N="SupportedProduct" RefId="82">
         <TNRef RefId="1" />
@@ -1099,7 +1099,7 @@
   <Obj RefId="83">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">22.02.10</S>
+      <S N="CatalogVersion">22.02.11</S>
       <S N="SupportedModel">ThinkCentre M900Z</S>
       <Obj N="SupportedProduct" RefId="84">
         <TNRef RefId="1" />
@@ -1120,7 +1120,7 @@
   <Obj RefId="85">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">22.02.10</S>
+      <S N="CatalogVersion">22.02.11</S>
       <S N="SupportedModel">ThinkCentre M90A</S>
       <Obj N="SupportedProduct" RefId="86">
         <TNRef RefId="1" />
@@ -1142,7 +1142,7 @@
   <Obj RefId="87">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">22.02.10</S>
+      <S N="CatalogVersion">22.02.11</S>
       <S N="SupportedModel">ThinkCentre M90A Gen 2</S>
       <Obj N="SupportedProduct" RefId="88">
         <TNRef RefId="1" />
@@ -1164,7 +1164,7 @@
   <Obj RefId="89">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">22.02.10</S>
+      <S N="CatalogVersion">22.02.11</S>
       <Obj N="SupportedModel" RefId="90">
         <TNRef RefId="1" />
         <LST>
@@ -1197,7 +1197,7 @@
   <Obj RefId="92">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">22.02.10</S>
+      <S N="CatalogVersion">22.02.11</S>
       <S N="SupportedModel">ThinkCentre M920Z</S>
       <Obj N="SupportedProduct" RefId="93">
         <TNRef RefId="1" />
@@ -1218,7 +1218,7 @@
   <Obj RefId="94">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">22.02.10</S>
+      <S N="CatalogVersion">22.02.11</S>
       <S N="SupportedModel">ThinkPad 10</S>
       <Obj N="SupportedProduct" RefId="95">
         <TNRef RefId="1" />
@@ -1237,7 +1237,7 @@
   <Obj RefId="96">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">22.02.10</S>
+      <S N="CatalogVersion">22.02.11</S>
       <S N="SupportedModel">ThinkPad 10 20E3 20E4</S>
       <Obj N="SupportedProduct" RefId="97">
         <TNRef RefId="1" />
@@ -1256,7 +1256,7 @@
   <Obj RefId="98">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">22.02.10</S>
+      <S N="CatalogVersion">22.02.11</S>
       <Obj N="SupportedModel" RefId="99">
         <TNRef RefId="1" />
         <LST>
@@ -1283,7 +1283,7 @@
   <Obj RefId="101">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">22.02.10</S>
+      <S N="CatalogVersion">22.02.11</S>
       <S N="SupportedModel">ThinkPad 11e 20G9 20GB</S>
       <Obj N="SupportedProduct" RefId="102">
         <TNRef RefId="1" />
@@ -1302,7 +1302,7 @@
   <Obj RefId="103">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">22.02.10</S>
+      <S N="CatalogVersion">22.02.11</S>
       <Obj N="SupportedModel" RefId="104">
         <TNRef RefId="1" />
         <LST>
@@ -1329,7 +1329,7 @@
   <Obj RefId="106">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">22.02.10</S>
+      <S N="CatalogVersion">22.02.11</S>
       <Obj N="SupportedModel" RefId="107">
         <TNRef RefId="1" />
         <LST>
@@ -1356,7 +1356,7 @@
   <Obj RefId="109">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">22.02.10</S>
+      <S N="CatalogVersion">22.02.11</S>
       <Obj N="SupportedModel" RefId="110">
         <TNRef RefId="1" />
         <LST>
@@ -1381,7 +1381,7 @@
   <Obj RefId="112">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">22.02.10</S>
+      <S N="CatalogVersion">22.02.11</S>
       <S N="SupportedModel">ThinkPad 13</S>
       <Obj N="SupportedProduct" RefId="113">
         <TNRef RefId="1" />
@@ -1400,7 +1400,7 @@
   <Obj RefId="114">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">22.02.10</S>
+      <S N="CatalogVersion">22.02.11</S>
       <S N="SupportedModel">ThinkPad 13 Type 20J1 20J2</S>
       <Obj N="SupportedProduct" RefId="115">
         <TNRef RefId="1" />
@@ -1419,7 +1419,7 @@
   <Obj RefId="116">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">22.02.10</S>
+      <S N="CatalogVersion">22.02.11</S>
       <S N="SupportedModel">ThinkPad 8</S>
       <Obj N="SupportedProduct" RefId="117">
         <TNRef RefId="1" />
@@ -1438,7 +1438,7 @@
   <Obj RefId="118">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">22.02.10</S>
+      <S N="CatalogVersion">22.02.11</S>
       <S N="SupportedModel">ThinkPad A275 Type 20KC 20KD</S>
       <Obj N="SupportedProduct" RefId="119">
         <TNRef RefId="1" />
@@ -1457,7 +1457,7 @@
   <Obj RefId="120">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">22.02.10</S>
+      <S N="CatalogVersion">22.02.11</S>
       <S N="SupportedModel">ThinkPad A285 Type 20MW 20MX</S>
       <Obj N="SupportedProduct" RefId="121">
         <TNRef RefId="1" />
@@ -1476,7 +1476,7 @@
   <Obj RefId="122">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">22.02.10</S>
+      <S N="CatalogVersion">22.02.11</S>
       <S N="SupportedModel">ThinkPad A475 Type 20KL 20KM</S>
       <Obj N="SupportedProduct" RefId="123">
         <TNRef RefId="1" />
@@ -1495,7 +1495,7 @@
   <Obj RefId="124">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">22.02.10</S>
+      <S N="CatalogVersion">22.02.11</S>
       <S N="SupportedModel">ThinkPad A485 Type 20MU 20MV</S>
       <Obj N="SupportedProduct" RefId="125">
         <TNRef RefId="1" />
@@ -1514,7 +1514,7 @@
   <Obj RefId="126">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">22.02.10</S>
+      <S N="CatalogVersion">22.02.11</S>
       <Obj N="SupportedModel" RefId="127">
         <TNRef RefId="1" />
         <LST>
@@ -1541,7 +1541,7 @@
   <Obj RefId="129">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">22.02.10</S>
+      <S N="CatalogVersion">22.02.11</S>
       <Obj N="SupportedModel" RefId="130">
         <TNRef RefId="1" />
         <LST>
@@ -1568,7 +1568,7 @@
   <Obj RefId="132">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">22.02.10</S>
+      <S N="CatalogVersion">22.02.11</S>
       <Obj N="SupportedModel" RefId="133">
         <TNRef RefId="1" />
         <LST>
@@ -1599,7 +1599,7 @@
   <Obj RefId="135">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">22.02.10</S>
+      <S N="CatalogVersion">22.02.11</S>
       <Obj N="SupportedModel" RefId="136">
         <TNRef RefId="1" />
         <LST>
@@ -1626,7 +1626,7 @@
   <Obj RefId="138">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">22.02.10</S>
+      <S N="CatalogVersion">22.02.11</S>
       <Obj N="SupportedModel" RefId="139">
         <TNRef RefId="1" />
         <LST>
@@ -1653,7 +1653,7 @@
   <Obj RefId="141">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">22.02.10</S>
+      <S N="CatalogVersion">22.02.11</S>
       <Obj N="SupportedModel" RefId="142">
         <TNRef RefId="1" />
         <LST>
@@ -1678,7 +1678,7 @@
   <Obj RefId="144">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">22.02.10</S>
+      <S N="CatalogVersion">22.02.11</S>
       <Obj N="SupportedModel" RefId="145">
         <TNRef RefId="1" />
         <LST>
@@ -1705,7 +1705,7 @@
   <Obj RefId="147">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">22.02.10</S>
+      <S N="CatalogVersion">22.02.11</S>
       <Obj N="SupportedModel" RefId="148">
         <TNRef RefId="1" />
         <LST>
@@ -1730,7 +1730,7 @@
   <Obj RefId="150">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">22.02.10</S>
+      <S N="CatalogVersion">22.02.11</S>
       <Obj N="SupportedModel" RefId="151">
         <TNRef RefId="1" />
         <LST>
@@ -1757,7 +1757,7 @@
   <Obj RefId="153">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">22.02.10</S>
+      <S N="CatalogVersion">22.02.11</S>
       <Obj N="SupportedModel" RefId="154">
         <TNRef RefId="1" />
         <LST>
@@ -1782,7 +1782,7 @@
   <Obj RefId="156">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">22.02.10</S>
+      <S N="CatalogVersion">22.02.11</S>
       <Obj N="SupportedModel" RefId="157">
         <TNRef RefId="1" />
         <LST>
@@ -1811,7 +1811,7 @@
   <Obj RefId="159">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">22.02.10</S>
+      <S N="CatalogVersion">22.02.11</S>
       <Obj N="SupportedModel" RefId="160">
         <TNRef RefId="1" />
         <LST>
@@ -1836,7 +1836,7 @@
   <Obj RefId="162">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">22.02.10</S>
+      <S N="CatalogVersion">22.02.11</S>
       <S N="SupportedModel">ThinkPad HELIX Type 20CG 20CH</S>
       <Obj N="SupportedProduct" RefId="163">
         <TNRef RefId="1" />
@@ -1855,7 +1855,7 @@
   <Obj RefId="164">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">22.02.10</S>
+      <S N="CatalogVersion">22.02.11</S>
       <Obj N="SupportedModel" RefId="165">
         <TNRef RefId="1" />
         <LST>
@@ -1884,7 +1884,7 @@
   <Obj RefId="167">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">22.02.10</S>
+      <S N="CatalogVersion">22.02.11</S>
       <Obj N="SupportedModel" RefId="168">
         <TNRef RefId="1" />
         <LST>
@@ -1913,7 +1913,7 @@
   <Obj RefId="170">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">22.02.10</S>
+      <S N="CatalogVersion">22.02.11</S>
       <Obj N="SupportedModel" RefId="171">
         <TNRef RefId="1" />
         <LST>
@@ -1940,7 +1940,7 @@
   <Obj RefId="173">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">22.02.10</S>
+      <S N="CatalogVersion">22.02.11</S>
       <Obj N="SupportedModel" RefId="174">
         <TNRef RefId="1" />
         <LST>
@@ -1967,7 +1967,7 @@
   <Obj RefId="176">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">22.02.10</S>
+      <S N="CatalogVersion">22.02.11</S>
       <Obj N="SupportedModel" RefId="177">
         <TNRef RefId="1" />
         <LST>
@@ -1994,7 +1994,7 @@
   <Obj RefId="179">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">22.02.10</S>
+      <S N="CatalogVersion">22.02.11</S>
       <Obj N="SupportedModel" RefId="180">
         <TNRef RefId="1" />
         <LST>
@@ -2021,7 +2021,7 @@
   <Obj RefId="182">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">22.02.10</S>
+      <S N="CatalogVersion">22.02.11</S>
       <Obj N="SupportedModel" RefId="183">
         <TNRef RefId="1" />
         <LST>
@@ -2048,7 +2048,7 @@
   <Obj RefId="185">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">22.02.10</S>
+      <S N="CatalogVersion">22.02.11</S>
       <Obj N="SupportedModel" RefId="186">
         <TNRef RefId="1" />
         <LST>
@@ -2075,7 +2075,7 @@
   <Obj RefId="188">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">22.02.10</S>
+      <S N="CatalogVersion">22.02.11</S>
       <Obj N="SupportedModel" RefId="189">
         <TNRef RefId="1" />
         <LST>
@@ -2102,7 +2102,7 @@
   <Obj RefId="191">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">22.02.10</S>
+      <S N="CatalogVersion">22.02.11</S>
       <Obj N="SupportedModel" RefId="192">
         <TNRef RefId="1" />
         <LST>
@@ -2129,7 +2129,7 @@
   <Obj RefId="194">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">22.02.10</S>
+      <S N="CatalogVersion">22.02.11</S>
       <S N="SupportedModel">ThinkPad L450</S>
       <Obj N="SupportedProduct" RefId="195">
         <TNRef RefId="1" />
@@ -2148,7 +2148,7 @@
   <Obj RefId="196">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">22.02.10</S>
+      <S N="CatalogVersion">22.02.11</S>
       <S N="SupportedModel">ThinkPad L460</S>
       <Obj N="SupportedProduct" RefId="197">
         <TNRef RefId="1" />
@@ -2167,7 +2167,7 @@
   <Obj RefId="198">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">22.02.10</S>
+      <S N="CatalogVersion">22.02.11</S>
       <Obj N="SupportedModel" RefId="199">
         <TNRef RefId="1" />
         <LST>
@@ -2194,7 +2194,7 @@
   <Obj RefId="201">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">22.02.10</S>
+      <S N="CatalogVersion">22.02.11</S>
       <Obj N="SupportedModel" RefId="202">
         <TNRef RefId="1" />
         <LST>
@@ -2221,7 +2221,7 @@
   <Obj RefId="204">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">22.02.10</S>
+      <S N="CatalogVersion">22.02.11</S>
       <Obj N="SupportedModel" RefId="205">
         <TNRef RefId="1" />
         <LST>
@@ -2248,7 +2248,7 @@
   <Obj RefId="207">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">22.02.10</S>
+      <S N="CatalogVersion">22.02.11</S>
       <S N="SupportedModel">ThinkPad L560</S>
       <Obj N="SupportedProduct" RefId="208">
         <TNRef RefId="1" />
@@ -2267,7 +2267,7 @@
   <Obj RefId="209">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">22.02.10</S>
+      <S N="CatalogVersion">22.02.11</S>
       <Obj N="SupportedModel" RefId="210">
         <TNRef RefId="1" />
         <LST>
@@ -2294,7 +2294,7 @@
   <Obj RefId="212">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">22.02.10</S>
+      <S N="CatalogVersion">22.02.11</S>
       <Obj N="SupportedModel" RefId="213">
         <TNRef RefId="1" />
         <LST>
@@ -2321,7 +2321,7 @@
   <Obj RefId="215">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">22.02.10</S>
+      <S N="CatalogVersion">22.02.11</S>
       <Obj N="SupportedModel" RefId="216">
         <TNRef RefId="1" />
         <LST>
@@ -2348,7 +2348,7 @@
   <Obj RefId="218">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">22.02.10</S>
+      <S N="CatalogVersion">22.02.11</S>
       <Obj N="SupportedModel" RefId="219">
         <TNRef RefId="1" />
         <LST>
@@ -2375,7 +2375,7 @@
   <Obj RefId="221">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">22.02.10</S>
+      <S N="CatalogVersion">22.02.11</S>
       <Obj N="SupportedModel" RefId="222">
         <TNRef RefId="1" />
         <LST>
@@ -2402,7 +2402,7 @@
   <Obj RefId="224">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">22.02.10</S>
+      <S N="CatalogVersion">22.02.11</S>
       <Obj N="SupportedModel" RefId="225">
         <TNRef RefId="1" />
         <LST>
@@ -2435,7 +2435,7 @@
   <Obj RefId="227">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">22.02.10</S>
+      <S N="CatalogVersion">22.02.11</S>
       <Obj N="SupportedModel" RefId="228">
         <TNRef RefId="1" />
         <LST>
@@ -2462,7 +2462,7 @@
   <Obj RefId="230">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">22.02.10</S>
+      <S N="CatalogVersion">22.02.11</S>
       <Obj N="SupportedModel" RefId="231">
         <TNRef RefId="1" />
         <LST>
@@ -2492,7 +2492,7 @@
   <Obj RefId="233">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">22.02.10</S>
+      <S N="CatalogVersion">22.02.11</S>
       <Obj N="SupportedModel" RefId="234">
         <TNRef RefId="1" />
         <LST>
@@ -2528,7 +2528,7 @@
   <Obj RefId="236">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">22.02.10</S>
+      <S N="CatalogVersion">22.02.11</S>
       <Obj N="SupportedModel" RefId="237">
         <TNRef RefId="1" />
         <LST>
@@ -2564,7 +2564,7 @@
   <Obj RefId="239">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">22.02.10</S>
+      <S N="CatalogVersion">22.02.11</S>
       <Obj N="SupportedModel" RefId="240">
         <TNRef RefId="1" />
         <LST>
@@ -2591,7 +2591,7 @@
   <Obj RefId="242">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">22.02.10</S>
+      <S N="CatalogVersion">22.02.11</S>
       <Obj N="SupportedModel" RefId="243">
         <TNRef RefId="1" />
         <LST>
@@ -2620,7 +2620,7 @@
   <Obj RefId="245">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">22.02.10</S>
+      <S N="CatalogVersion">22.02.11</S>
       <Obj N="SupportedModel" RefId="246">
         <TNRef RefId="1" />
         <LST>
@@ -2659,7 +2659,7 @@
   <Obj RefId="248">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">22.02.10</S>
+      <S N="CatalogVersion">22.02.11</S>
       <S N="SupportedModel">ThinkPad P50</S>
       <Obj N="SupportedProduct" RefId="249">
         <TNRef RefId="1" />
@@ -2678,7 +2678,7 @@
   <Obj RefId="250">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">22.02.10</S>
+      <S N="CatalogVersion">22.02.11</S>
       <Obj N="SupportedModel" RefId="251">
         <TNRef RefId="1" />
         <LST>
@@ -2705,7 +2705,7 @@
   <Obj RefId="253">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">22.02.10</S>
+      <S N="CatalogVersion">22.02.11</S>
       <Obj N="SupportedModel" RefId="254">
         <TNRef RefId="1" />
         <LST>
@@ -2732,7 +2732,7 @@
   <Obj RefId="256">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">22.02.10</S>
+      <S N="CatalogVersion">22.02.11</S>
       <Obj N="SupportedModel" RefId="257">
         <TNRef RefId="1" />
         <LST>
@@ -2765,7 +2765,7 @@
   <Obj RefId="259">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">22.02.10</S>
+      <S N="CatalogVersion">22.02.11</S>
       <Obj N="SupportedModel" RefId="260">
         <TNRef RefId="1" />
         <LST>
@@ -2792,7 +2792,7 @@
   <Obj RefId="262">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">22.02.10</S>
+      <S N="CatalogVersion">22.02.11</S>
       <Obj N="SupportedModel" RefId="263">
         <TNRef RefId="1" />
         <LST>
@@ -2819,7 +2819,7 @@
   <Obj RefId="265">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">22.02.10</S>
+      <S N="CatalogVersion">22.02.11</S>
       <Obj N="SupportedModel" RefId="266">
         <TNRef RefId="1" />
         <LST>
@@ -2846,7 +2846,7 @@
   <Obj RefId="268">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">22.02.10</S>
+      <S N="CatalogVersion">22.02.11</S>
       <S N="SupportedModel">ThinkPad P70</S>
       <Obj N="SupportedProduct" RefId="269">
         <TNRef RefId="1" />
@@ -2865,7 +2865,7 @@
   <Obj RefId="270">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">22.02.10</S>
+      <S N="CatalogVersion">22.02.11</S>
       <S N="SupportedModel">ThinkPad P71</S>
       <Obj N="SupportedProduct" RefId="271">
         <TNRef RefId="1" />
@@ -2884,7 +2884,7 @@
   <Obj RefId="272">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">22.02.10</S>
+      <S N="CatalogVersion">22.02.11</S>
       <Obj N="SupportedModel" RefId="273">
         <TNRef RefId="1" />
         <LST>
@@ -2911,7 +2911,7 @@
   <Obj RefId="275">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">22.02.10</S>
+      <S N="CatalogVersion">22.02.11</S>
       <Obj N="SupportedModel" RefId="276">
         <TNRef RefId="1" />
         <LST>
@@ -2938,7 +2938,7 @@
   <Obj RefId="278">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">22.02.10</S>
+      <S N="CatalogVersion">22.02.11</S>
       <Obj N="SupportedModel" RefId="279">
         <TNRef RefId="1" />
         <LST>
@@ -2965,7 +2965,7 @@
   <Obj RefId="281">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">22.02.10</S>
+      <S N="CatalogVersion">22.02.11</S>
       <Obj N="SupportedModel" RefId="282">
         <TNRef RefId="1" />
         <LST>
@@ -2992,7 +2992,7 @@
   <Obj RefId="284">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">22.02.10</S>
+      <S N="CatalogVersion">22.02.11</S>
       <Obj N="SupportedModel" RefId="285">
         <TNRef RefId="1" />
         <LST>
@@ -3019,7 +3019,7 @@
   <Obj RefId="287">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">22.02.10</S>
+      <S N="CatalogVersion">22.02.11</S>
       <Obj N="SupportedModel" RefId="288">
         <TNRef RefId="1" />
         <LST>
@@ -3048,7 +3048,7 @@
   <Obj RefId="290">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">22.02.10</S>
+      <S N="CatalogVersion">22.02.11</S>
       <Obj N="SupportedModel" RefId="291">
         <TNRef RefId="1" />
         <LST>
@@ -3075,7 +3075,7 @@
   <Obj RefId="293">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">22.02.10</S>
+      <S N="CatalogVersion">22.02.11</S>
       <S N="SupportedModel">ThinkPad T440P</S>
       <Obj N="SupportedProduct" RefId="294">
         <TNRef RefId="1" />
@@ -3094,7 +3094,7 @@
   <Obj RefId="295">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">22.02.10</S>
+      <S N="CatalogVersion">22.02.11</S>
       <Obj N="SupportedModel" RefId="296">
         <TNRef RefId="1" />
         <LST>
@@ -3122,7 +3122,7 @@
   <Obj RefId="298">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">22.02.10</S>
+      <S N="CatalogVersion">22.02.11</S>
       <S N="SupportedModel">ThinkPad T460</S>
       <Obj N="SupportedProduct" RefId="299">
         <TNRef RefId="1" />
@@ -3141,7 +3141,7 @@
   <Obj RefId="300">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">22.02.10</S>
+      <S N="CatalogVersion">22.02.11</S>
       <S N="SupportedModel">ThinkPad T460P</S>
       <Obj N="SupportedProduct" RefId="301">
         <TNRef RefId="1" />
@@ -3160,7 +3160,7 @@
   <Obj RefId="302">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">22.02.10</S>
+      <S N="CatalogVersion">22.02.11</S>
       <S N="SupportedModel">ThinkPad T460S</S>
       <Obj N="SupportedProduct" RefId="303">
         <TNRef RefId="1" />
@@ -3179,7 +3179,7 @@
   <Obj RefId="304">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">22.02.10</S>
+      <S N="CatalogVersion">22.02.11</S>
       <S N="SupportedModel">ThinkPad T470P</S>
       <Obj N="SupportedProduct" RefId="305">
         <TNRef RefId="1" />
@@ -3198,7 +3198,7 @@
   <Obj RefId="306">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">22.02.10</S>
+      <S N="CatalogVersion">22.02.11</S>
       <Obj N="SupportedModel" RefId="307">
         <TNRef RefId="1" />
         <LST>
@@ -3225,7 +3225,7 @@
   <Obj RefId="309">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">22.02.10</S>
+      <S N="CatalogVersion">22.02.11</S>
       <S N="SupportedModel">ThinkPad T480 Type 20L5 20L6</S>
       <Obj N="SupportedProduct" RefId="310">
         <TNRef RefId="1" />
@@ -3244,7 +3244,7 @@
   <Obj RefId="311">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">22.02.10</S>
+      <S N="CatalogVersion">22.02.11</S>
       <S N="SupportedModel">ThinkPad T480S Type 20L7 20L8</S>
       <Obj N="SupportedProduct" RefId="312">
         <TNRef RefId="1" />
@@ -3263,7 +3263,7 @@
   <Obj RefId="313">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">22.02.10</S>
+      <S N="CatalogVersion">22.02.11</S>
       <Obj N="SupportedModel" RefId="314">
         <TNRef RefId="1" />
         <LST>
@@ -3293,7 +3293,7 @@
   <Obj RefId="316">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">22.02.10</S>
+      <S N="CatalogVersion">22.02.11</S>
       <S N="SupportedModel">ThinkPad T495 Type 20NJ 20NK</S>
       <Obj N="SupportedProduct" RefId="317">
         <TNRef RefId="1" />
@@ -3312,7 +3312,7 @@
   <Obj RefId="318">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">22.02.10</S>
+      <S N="CatalogVersion">22.02.11</S>
       <Obj N="SupportedModel" RefId="319">
         <TNRef RefId="1" />
         <LST>
@@ -3339,7 +3339,7 @@
   <Obj RefId="321">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">22.02.10</S>
+      <S N="CatalogVersion">22.02.11</S>
       <S N="SupportedModel">ThinkPad T540P</S>
       <Obj N="SupportedProduct" RefId="322">
         <TNRef RefId="1" />
@@ -3358,7 +3358,7 @@
   <Obj RefId="323">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">22.02.10</S>
+      <S N="CatalogVersion">22.02.11</S>
       <Obj N="SupportedModel" RefId="324">
         <TNRef RefId="1" />
         <LST>
@@ -3385,7 +3385,7 @@
   <Obj RefId="326">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">22.02.10</S>
+      <S N="CatalogVersion">22.02.11</S>
       <Obj N="SupportedModel" RefId="327">
         <TNRef RefId="1" />
         <LST>
@@ -3412,7 +3412,7 @@
   <Obj RefId="329">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">22.02.10</S>
+      <S N="CatalogVersion">22.02.11</S>
       <S N="SupportedModel">ThinkPad X1 Carbon 20BS 20BT</S>
       <Obj N="SupportedProduct" RefId="330">
         <TNRef RefId="1" />
@@ -3431,7 +3431,7 @@
   <Obj RefId="331">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">22.02.10</S>
+      <S N="CatalogVersion">22.02.11</S>
       <S N="SupportedModel">ThinkPad X1 Carbon 6TH Gen Type 20KH 20KG</S>
       <Obj N="SupportedProduct" RefId="332">
         <TNRef RefId="1" />
@@ -3450,7 +3450,7 @@
   <Obj RefId="333">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">22.02.10</S>
+      <S N="CatalogVersion">22.02.11</S>
       <Obj N="SupportedModel" RefId="334">
         <TNRef RefId="1" />
         <LST>
@@ -3483,7 +3483,7 @@
   <Obj RefId="336">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">22.02.10</S>
+      <S N="CatalogVersion">22.02.11</S>
       <Obj N="SupportedModel" RefId="337">
         <TNRef RefId="1" />
         <LST>
@@ -3510,7 +3510,7 @@
   <Obj RefId="339">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">22.02.10</S>
+      <S N="CatalogVersion">22.02.11</S>
       <Obj N="SupportedModel" RefId="340">
         <TNRef RefId="1" />
         <LST>
@@ -3537,7 +3537,7 @@
   <Obj RefId="342">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">22.02.10</S>
+      <S N="CatalogVersion">22.02.11</S>
       <S N="SupportedModel">ThinkPad X1 Carbon Type 20A7 20A8</S>
       <Obj N="SupportedProduct" RefId="343">
         <TNRef RefId="1" />
@@ -3556,7 +3556,7 @@
   <Obj RefId="344">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">22.02.10</S>
+      <S N="CatalogVersion">22.02.11</S>
       <Obj N="SupportedModel" RefId="345">
         <TNRef RefId="1" />
         <LST>
@@ -3583,7 +3583,7 @@
   <Obj RefId="347">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">22.02.10</S>
+      <S N="CatalogVersion">22.02.11</S>
       <Obj N="SupportedModel" RefId="348">
         <TNRef RefId="1" />
         <LST>
@@ -3610,7 +3610,7 @@
   <Obj RefId="350">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">22.02.10</S>
+      <S N="CatalogVersion">22.02.11</S>
       <S N="SupportedModel">ThinkPad X1 FOLD Gen 1 Type 20RK 20RL</S>
       <Obj N="SupportedProduct" RefId="351">
         <TNRef RefId="1" />
@@ -3629,7 +3629,7 @@
   <Obj RefId="352">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">22.02.10</S>
+      <S N="CatalogVersion">22.02.11</S>
       <S N="SupportedModel">ThinkPad X1 NANO Gen 1 Type 20UN 20UQ</S>
       <Obj N="SupportedProduct" RefId="353">
         <TNRef RefId="1" />
@@ -3648,7 +3648,7 @@
   <Obj RefId="354">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">22.02.10</S>
+      <S N="CatalogVersion">22.02.11</S>
       <S N="SupportedModel">ThinkPad X1 Tablet</S>
       <Obj N="SupportedProduct" RefId="355">
         <TNRef RefId="1" />
@@ -3667,7 +3667,7 @@
   <Obj RefId="356">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">22.02.10</S>
+      <S N="CatalogVersion">22.02.11</S>
       <S N="SupportedModel">ThinkPad X1 Tablet 3rd Gen 20KJ 20KK</S>
       <Obj N="SupportedProduct" RefId="357">
         <TNRef RefId="1" />
@@ -3686,7 +3686,7 @@
   <Obj RefId="358">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">22.02.10</S>
+      <S N="CatalogVersion">22.02.11</S>
       <S N="SupportedModel">ThinkPad X1 Tablet Type 20JB 20JC</S>
       <Obj N="SupportedProduct" RefId="359">
         <TNRef RefId="1" />
@@ -3705,7 +3705,7 @@
   <Obj RefId="360">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">22.02.10</S>
+      <S N="CatalogVersion">22.02.11</S>
       <S N="SupportedModel">ThinkPad X1 TITANIUM Type 20QA 20QB</S>
       <Obj N="SupportedProduct" RefId="361">
         <TNRef RefId="1" />
@@ -3724,7 +3724,7 @@
   <Obj RefId="362">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">22.02.10</S>
+      <S N="CatalogVersion">22.02.11</S>
       <S N="SupportedModel">ThinkPad X1 Yoga 3rd Gen Type 20LD 20LE 20LF 20LG</S>
       <Obj N="SupportedProduct" RefId="363">
         <TNRef RefId="1" />
@@ -3745,7 +3745,7 @@
   <Obj RefId="364">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">22.02.10</S>
+      <S N="CatalogVersion">22.02.11</S>
       <S N="SupportedModel">ThinkPad X1 Yoga Type 20JD 20JE 20JF 20JG</S>
       <Obj N="SupportedProduct" RefId="365">
         <TNRef RefId="1" />
@@ -3766,7 +3766,7 @@
   <Obj RefId="366">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">22.02.10</S>
+      <S N="CatalogVersion">22.02.11</S>
       <S N="SupportedModel">ThinkPad X12 DETACHABLE Gen 1 Type 20UW 20UV</S>
       <Obj N="SupportedProduct" RefId="367">
         <TNRef RefId="1" />
@@ -3785,7 +3785,7 @@
   <Obj RefId="368">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">22.02.10</S>
+      <S N="CatalogVersion">22.02.11</S>
       <S N="SupportedModel">ThinkPad X13 Yoga Gen 1</S>
       <Obj N="SupportedProduct" RefId="369">
         <TNRef RefId="1" />
@@ -3804,7 +3804,7 @@
   <Obj RefId="370">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">22.02.10</S>
+      <S N="CatalogVersion">22.02.11</S>
       <S N="SupportedModel">ThinkPad X13 Yoga Gen 2 Type 20W8 20W9</S>
       <Obj N="SupportedProduct" RefId="371">
         <TNRef RefId="1" />
@@ -3823,7 +3823,7 @@
   <Obj RefId="372">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">22.02.10</S>
+      <S N="CatalogVersion">22.02.11</S>
       <S N="SupportedModel">ThinkPad X140E</S>
       <Obj N="SupportedProduct" RefId="373">
         <TNRef RefId="1" />
@@ -3842,7 +3842,7 @@
   <Obj RefId="374">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">22.02.10</S>
+      <S N="CatalogVersion">22.02.11</S>
       <Obj N="SupportedModel" RefId="375">
         <TNRef RefId="1" />
         <LST>
@@ -3869,7 +3869,7 @@
   <Obj RefId="377">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">22.02.10</S>
+      <S N="CatalogVersion">22.02.11</S>
       <S N="SupportedModel">ThinkPad X250</S>
       <Obj N="SupportedProduct" RefId="378">
         <TNRef RefId="1" />
@@ -3888,7 +3888,7 @@
   <Obj RefId="379">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">22.02.10</S>
+      <S N="CatalogVersion">22.02.11</S>
       <S N="SupportedModel">ThinkPad X260</S>
       <Obj N="SupportedProduct" RefId="380">
         <TNRef RefId="1" />
@@ -3907,7 +3907,7 @@
   <Obj RefId="381">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">22.02.10</S>
+      <S N="CatalogVersion">22.02.11</S>
       <Obj N="SupportedModel" RefId="382">
         <TNRef RefId="1" />
         <LST>
@@ -3934,7 +3934,7 @@
   <Obj RefId="384">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">22.02.10</S>
+      <S N="CatalogVersion">22.02.11</S>
       <S N="SupportedModel">ThinkPad X280 Type 20KF 20KE</S>
       <Obj N="SupportedProduct" RefId="385">
         <TNRef RefId="1" />
@@ -3953,7 +3953,7 @@
   <Obj RefId="386">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">22.02.10</S>
+      <S N="CatalogVersion">22.02.11</S>
       <S N="SupportedModel">ThinkPad X380 Yoga</S>
       <Obj N="SupportedProduct" RefId="387">
         <TNRef RefId="1" />
@@ -3974,7 +3974,7 @@
   <Obj RefId="388">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">22.02.10</S>
+      <S N="CatalogVersion">22.02.11</S>
       <S N="SupportedModel">ThinkPad X390 Yoga</S>
       <Obj N="SupportedProduct" RefId="389">
         <TNRef RefId="1" />
@@ -3993,7 +3993,7 @@
   <Obj RefId="390">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">22.02.10</S>
+      <S N="CatalogVersion">22.02.11</S>
       <S N="SupportedModel">ThinkPad Yoga</S>
       <Obj N="SupportedProduct" RefId="391">
         <TNRef RefId="1" />
@@ -4012,7 +4012,7 @@
   <Obj RefId="392">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">22.02.10</S>
+      <S N="CatalogVersion">22.02.11</S>
       <S N="SupportedModel">ThinkPad Yoga 11e 20G8 20GA</S>
       <Obj N="SupportedProduct" RefId="393">
         <TNRef RefId="1" />
@@ -4031,7 +4031,7 @@
   <Obj RefId="394">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">22.02.10</S>
+      <S N="CatalogVersion">22.02.11</S>
       <S N="SupportedModel">ThinkPad Yoga 11e 6th Gen Type 20SE 20SF</S>
       <Obj N="SupportedProduct" RefId="395">
         <TNRef RefId="1" />
@@ -4050,7 +4050,7 @@
   <Obj RefId="396">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">22.02.10</S>
+      <S N="CatalogVersion">22.02.11</S>
       <S N="SupportedModel">ThinkPad Yoga 12</S>
       <Obj N="SupportedProduct" RefId="397">
         <TNRef RefId="1" />
@@ -4069,7 +4069,7 @@
   <Obj RefId="398">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">22.02.10</S>
+      <S N="CatalogVersion">22.02.11</S>
       <S N="SupportedModel">ThinkPad Yoga 14</S>
       <Obj N="SupportedProduct" RefId="399">
         <TNRef RefId="1" />
@@ -4088,7 +4088,7 @@
   <Obj RefId="400">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">22.02.10</S>
+      <S N="CatalogVersion">22.02.11</S>
       <S N="SupportedModel">ThinkPad Yoga 15</S>
       <Obj N="SupportedProduct" RefId="401">
         <TNRef RefId="1" />
@@ -4107,7 +4107,7 @@
   <Obj RefId="402">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">22.02.10</S>
+      <S N="CatalogVersion">22.02.11</S>
       <S N="SupportedModel">ThinkPad Yoga 260</S>
       <Obj N="SupportedProduct" RefId="403">
         <TNRef RefId="1" />
@@ -4128,7 +4128,7 @@
   <Obj RefId="404">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">22.02.10</S>
+      <S N="CatalogVersion">22.02.11</S>
       <S N="SupportedModel">ThinkPad Yoga 370</S>
       <Obj N="SupportedProduct" RefId="405">
         <TNRef RefId="1" />
@@ -4147,7 +4147,7 @@
   <Obj RefId="406">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">22.02.10</S>
+      <S N="CatalogVersion">22.02.11</S>
       <S N="SupportedModel">ThinkStation P320</S>
       <Obj N="SupportedProduct" RefId="407">
         <TNRef RefId="1" />
@@ -4170,7 +4170,7 @@
   <Obj RefId="408">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">22.02.10</S>
+      <S N="CatalogVersion">22.02.11</S>
       <Obj N="SupportedModel" RefId="409">
         <TNRef RefId="1" />
         <LST>
@@ -4205,7 +4205,7 @@
   <Obj RefId="411">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">22.02.10</S>
+      <S N="CatalogVersion">22.02.11</S>
       <S N="SupportedModel">ThinkStation P340</S>
       <Obj N="SupportedProduct" RefId="412">
         <TNRef RefId="1" />
@@ -4228,7 +4228,7 @@
   <Obj RefId="413">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">22.02.10</S>
+      <S N="CatalogVersion">22.02.11</S>
       <S N="SupportedModel">ThinkStation P348</S>
       <Obj N="SupportedProduct" RefId="414">
         <TNRef RefId="1" />
@@ -4247,7 +4247,7 @@
   <Obj RefId="415">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">22.02.10</S>
+      <S N="CatalogVersion">22.02.11</S>
       <S N="SupportedModel">ThinkStation P350</S>
       <Obj N="SupportedProduct" RefId="416">
         <TNRef RefId="1" />
@@ -4268,7 +4268,7 @@
   <Obj RefId="417">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">22.02.10</S>
+      <S N="CatalogVersion">22.02.11</S>
       <Obj N="SupportedModel" RefId="418">
         <TNRef RefId="1" />
         <LST>
@@ -4295,7 +4295,7 @@
   <Obj RefId="420">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">22.02.10</S>
+      <S N="CatalogVersion">22.02.11</S>
       <S N="SupportedModel">ThinkStation P500</S>
       <Obj N="SupportedProduct" RefId="421">
         <TNRef RefId="1" />
@@ -4314,7 +4314,7 @@
   <Obj RefId="422">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">22.02.10</S>
+      <S N="CatalogVersion">22.02.11</S>
       <Obj N="SupportedModel" RefId="423">
         <TNRef RefId="1" />
         <LST>
@@ -4344,7 +4344,7 @@
   <Obj RefId="425">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">22.02.10</S>
+      <S N="CatalogVersion">22.02.11</S>
       <S N="SupportedModel">ThinkStation P620</S>
       <Obj N="SupportedProduct" RefId="426">
         <TNRef RefId="1" />
@@ -4363,7 +4363,7 @@
   <Obj RefId="427">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">22.02.10</S>
+      <S N="CatalogVersion">22.02.11</S>
       <S N="SupportedModel">ThinkStation P700</S>
       <Obj N="SupportedProduct" RefId="428">
         <TNRef RefId="1" />
@@ -4382,7 +4382,7 @@
   <Obj RefId="429">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">22.02.10</S>
+      <S N="CatalogVersion">22.02.11</S>
       <S N="SupportedModel">ThinkStation P710</S>
       <Obj N="SupportedProduct" RefId="430">
         <TNRef RefId="1" />
@@ -4401,7 +4401,7 @@
   <Obj RefId="431">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">22.02.10</S>
+      <S N="CatalogVersion">22.02.11</S>
       <S N="SupportedModel">ThinkStation P720</S>
       <Obj N="SupportedProduct" RefId="432">
         <TNRef RefId="1" />
@@ -4421,7 +4421,7 @@
   <Obj RefId="433">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">22.02.10</S>
+      <S N="CatalogVersion">22.02.11</S>
       <S N="SupportedModel">ThinkStation P900</S>
       <Obj N="SupportedProduct" RefId="434">
         <TNRef RefId="1" />
@@ -4440,7 +4440,7 @@
   <Obj RefId="435">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">22.02.10</S>
+      <S N="CatalogVersion">22.02.11</S>
       <S N="SupportedModel">ThinkStation P910</S>
       <Obj N="SupportedProduct" RefId="436">
         <TNRef RefId="1" />
@@ -4459,7 +4459,7 @@
   <Obj RefId="437">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">22.02.10</S>
+      <S N="CatalogVersion">22.02.11</S>
       <S N="SupportedModel">ThinkStation P920</S>
       <Obj N="SupportedProduct" RefId="438">
         <TNRef RefId="1" />

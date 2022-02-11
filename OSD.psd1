@@ -130,7 +130,7 @@ FunctionsToExport =
 'Get-HPSystemCatalog',
 'Get-LenovoBiosCatalog',
 'Get-LenovoDriverPackCatalog',
-'Get-CatalogMicrosoftDriverPack',
+'Get-MicrosoftDriverPackCatalog',
 'Get-CimVideoControllerResolution',
 'Get-ComObjMicrosoftUpdateAutoUpdate',
 'Get-ComObjMicrosoftUpdateInstaller',

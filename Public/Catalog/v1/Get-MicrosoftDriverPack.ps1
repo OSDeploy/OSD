@@ -4,9 +4,9 @@ function Get-MicrosoftDriverPack {
         [string]$DownloadPath
     )
     #=================================================
-    #   Get-CatalogMicrosoftDriverPack
+    #   Get-MicrosoftDriverPackCatalog
     #=================================================
-    $Results = Get-CatalogMicrosoftDriverPack | Sort-Object Product
+    $Results = Get-MicrosoftDriverPackCatalog | Sort-Object Product
     #=================================================
     #   Download
     #=================================================

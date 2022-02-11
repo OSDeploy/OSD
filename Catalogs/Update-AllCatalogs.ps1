@@ -63,5 +63,14 @@ if (Test-Path $Source) {
     Copy-Item $Source $Destination -Force
 }
 #=================================================
+#   MicrosoftDriverPackCatalog
+#=================================================
+$null = Get-MicrosoftDriverPackCatalog -Verbose -UseCatalog Cloud
+$Source = Join-Path $env:TEMP (Join-Path 'OSD' 'MicrosoftDriverPackCatalog.json')
+$Destination = Join-Path (Get-Module OSD).ModuleBase "Catalogs\MicrosoftDriverPackCatalog.json"
+if (Test-Path $Source) {
+    Copy-Item $Source $Destination -Force
+}
+#=================================================
 #
 #=================================================

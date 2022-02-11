@@ -162,19 +162,19 @@ function Get-HPSystemCatalog {
             $DescriptionMatchInfo = $Item.LocalizedProperties | Where-Object{$_.Language -eq 'en'} | Select-Object -ExpandProperty Description | Select-String -Pattern "^\[(.*)\] (.*)$"
             
             $ObjectProperties = [Ordered]@{
-                CatalogVersion 	     = $CatalogVersion
-                Component            = $Item.Properties.ProductName
-                CreationDate         = ($Item.Properties.CreationDate) | Get-Date -Format yy.MM.dd
-                Title                = $Title
-                Version              = ($DescriptionMatchInfo.Matches.Groups[1].Value).Trim('.')
-                SupportedSystemId    = $SupportedSystemId
-                SupportedModel       = $SupportedModel
-                Description          = ($DescriptionMatchInfo.Matches.Groups[2].Value)
-                SoftPaqId            = $Item.UpdateSpecificData.KBArticleID
-                Program              = $Item.InstallableItem.CommandLineInstallerData.Program
-                ProgramArguments     = $Item.InstallableItem.CommandLineInstallerData.Arguments
-                ProgramDownloadUrl   = $Item.InstallableItem.OriginFile.OriginUri
-                MoreInfoUrl          = $Item.Properties.MoreInfoUrl
+                CatalogVersion      = $CatalogVersion
+                Component           = $Item.Properties.ProductName
+                CreationDate        = ($Item.Properties.CreationDate) | Get-Date -Format yy.MM.dd
+                Title               = $Title
+                Version             = ($DescriptionMatchInfo.Matches.Groups[1].Value).Trim('.')
+                SupportedSystemId   = $SupportedSystemId
+                SupportedModel      = $SupportedModel
+                Description         = ($DescriptionMatchInfo.Matches.Groups[2].Value)
+                SoftPaqId           = $Item.UpdateSpecificData.KBArticleID
+                Program             = $Item.InstallableItem.CommandLineInstallerData.Program
+                ProgramArguments    = $Item.InstallableItem.CommandLineInstallerData.Arguments
+                Url                 = $Item.InstallableItem.OriginFile.OriginUri
+                MoreInfoUrl         = $Item.Properties.MoreInfoUrl
             }
             New-Object -TypeName PSObject -Property $ObjectProperties
         }
@@ -228,7 +228,7 @@ function Get-HPSystemCatalog {
     if ($PSBoundParameters.ContainsKey('DownloadPath')) {
         $Results = $Results | Out-GridView -Title 'Select one or more files to Download' -PassThru -ErrorAction Stop
         foreach ($Item in $Results) {
-            $OutFile = Save-WebFile -SourceUrl $Item.ProgramDownloadUrl -DestinationDirectory $DownloadPath -DestinationName $Item.FileName -Verbose
+            $OutFile = Save-WebFile -SourceUrl $Item.Url -DestinationDirectory $DownloadPath -DestinationName $Item.FileName -Verbose
             $Item | ConvertTo-Json | Out-File "$($OutFile.FullName).json" -Encoding ascii -Width 2000 -Force
         }
     }
