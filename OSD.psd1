@@ -4,7 +4,7 @@
 RootModule = 'OSD.psm1'
 
 # Version number of this module.
-ModuleVersion = '22.2.9.1'
+ModuleVersion = '22.2.11.1'
 
 # Supported PSEditions
 CompatiblePSEditions = @('Desktop')
@@ -290,7 +290,9 @@ FunctionsToExport =
 'Get-PSCloudScript',
 'Resolve-MsUrl',
 'Save-WinPECloudDriver',
-'ConvertTo-PSKeyVaultSecret'
+'ConvertTo-PSKeyVaultSecret',
+'Get-DellOSDDriversCatalog',
+'Get-HPOSDDriversCatalog'
 
 # Cmdlets to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no cmdlets to export.
 CmdletsToExport = @()

@@ -6,9 +6,9 @@ Returns a PowerShell Object of the Dell Model Driver Packs
 Returns a PowerShell Object of the Dell Model Driver Packs by parsing the Catalog at http://downloads.dell.com/catalog/DriverPackCatalog.cab"
 
 .LINK
-https://osd.osdeploy.com/functions/get-osddriverdellmodel
+https://osd.osdeploy.com
 #>
-function Get-OSDDriverDellModel {
+function Get-DellOSDDriversCatalog {
     [CmdletBinding()]
     param ()
     #=================================================
@@ -58,7 +58,8 @@ function Get-OSDDriverDellModel {
     #   Dell Catalog
     #=================================================
     [xml]$DriverPackCatalogXmlContent = Get-Content "$DriverPackCatalogXmlFullName" -ErrorAction Stop
-    $DriverPackCatalog = $DriverPackCatalogXmlContent.DriverPackManifest.DriverPackage
+    ##$DriverPackCatalog = $DriverPackCatalogXmlContent.DriverPackManifest.DriverPackage
+    $DriverPackCatalog = Get-DellDriverPackCatalog
     #=================================================
     #   ForEach
     #=================================================
@@ -118,55 +119,53 @@ function Get-OSDDriverDellModel {
         #=================================================
         #   Get Values
         #=================================================
-        $LastUpdate         = [datetime] $item.dateTime
-        $DriverVersion      = $item.dellVersion.Trim()
-        $DriverDelta        = $item.delta.Trim()
-        $DriverFormat       = $item.format.Trim()
-        $Hash               = $item.hashMD5.Trim()
-        $DownloadFile       = $item.Name.Display.'#cdata-section'.Trim()
-        $DriverReleaseId    = $item.releaseID.Trim()
-        $SizeMB             = ($item.size.Trim() | Select-Object -Unique) / 1024
-        $DriverType         = $item.type.Trim()
-        $VendorVersion      = $item.vendorVersion.Trim()
-        $DriverInfo         = $item.ImportantInfo.URL.Trim() | Select-Object -Unique
-        $OperatingSystem    = $item.SupportedOperatingSystems.OperatingSystem.Display.'#cdata-section'.Trim() | Select-Object -Unique
-        $OsArch             = $item.SupportedOperatingSystems.OperatingSystem.osArch.Trim() | Select-Object -Unique
-        $OsCode             = $item.SupportedOperatingSystems.OperatingSystem.osCode.Trim() | Select-Object -Unique
-        $OsType             = $item.SupportedOperatingSystems.OperatingSystem.osType.Trim() | Select-Object -Unique
-        $OsVendor           = $item.SupportedOperatingSystems.OperatingSystem.osVendor.Trim() | Select-Object -Unique
-        $OsMajor            = $item.SupportedOperatingSystems.OperatingSystem.majorVersion.Trim() | Select-Object -Unique
-        $OsMinor            = $item.SupportedOperatingSystems.OperatingSystem.minorVersion.Trim() | Select-Object -Unique
-        $ModelBrand         = $item.SupportedSystems.Brand.Display.'#cdata-section'.Trim() | Select-Object -Unique
-        $ModelBrandKey      = $item.SupportedSystems.Brand.Key.Trim() | Select-Object -Unique
-        $ModelId            = $item.SupportedSystems.Brand.Model.Display.'#cdata-section'.Trim() | Select-Object -Unique
-        $Generation         = $item.SupportedSystems.Brand.Model.Generation.Trim() | Select-Object -Unique
-        $Model              = $item.SupportedSystems.Brand.Model.Name.Trim() | Select-Object -Unique
-        $ModelRtsDate       = [datetime] $($item.SupportedSystems.Brand.Model.rtsdate.Trim() | Select-Object -Unique)
-        $SystemSku          = $item.SupportedSystems.Brand.Model.systemID.Trim() | Select-Object -Unique
-        $ModelPrefix        = $item.SupportedSystems.Brand.Prefix.Trim() | Select-Object -Unique
+        $LastUpdate         = [datetime] $item.ReleaseDate
+        $DriverVersion      = $item.DellVersion
+        $DriverReleaseId    = $item.ReleaseID
+        $OperatingSystem    = $item.SupportedOS
+        $OsCode             = $item.osCode
+        $OsArch             = $item.osArch
+        $Generation         = $item.Generation
+        $Model              = $item.Model
+        $SystemSku          = $item.SystemID
+        $DownloadFile       = $item.FileName
+        $SizeMB             = $item.SizeMB
+        $DriverUrl          = $item.Url
+        $DriverInfo         = $item.ImportantInfoUrl
+        $Hash               = $item.HashMD5
+
+        $OsMajor            = $item.majorVersion
+        $OsMinor            = $item.minorVersion
+        $ModelBrand         = $item.Brand
+        $ModelBrandKey      = $item.Key
+        $ModelId            = $item.Model
+        $ModelRtsDate       = [datetime] $item.rtsDate
+        $ModelPrefix        = $item.Prefix
 
         if ($null -eq $Model) {Continue}
         #=================================================
         #   DriverFamily
         #=================================================
-        if ($ModelPrefix -Contains 'IOT') {
+        if ($ModelPrefix -eq 'IOT') {
             $SystemFamily = 'IOT'
             $IsDesktop = $true
         }
-        if ($ModelPrefix -Contains 'LAT') {
+        if ($ModelPrefix -eq 'LAT') {
             $SystemFamily = 'Latitude'
             $IsLaptop = $true
         }
-        if ($ModelPrefix -Contains 'OP') {
+        if ($ModelPrefix -eq 'OP') {
             $SystemFamily = 'Optiplex'
             $IsDesktop = $true
         }
-        if ($ModelPrefix -Contains 'PRE') {$SystemFamily = 'Precision'}
-        if ($ModelPrefix -Contains 'TABLET') {
+        if ($ModelPrefix -eq 'PRE') {
+            $SystemFamily = 'Precision'
+        }
+        if ($ModelPrefix -eq 'TABLET') {
             $SystemFamily = 'Tablet'
             $IsLaptop = $true
         }
-        if ($ModelPrefix -Contains 'XPSNOTEBOOK') {
+        if ($ModelPrefix -eq 'XPSNOTEBOOK') {
             $SystemFamily = 'XPS'
             $IsLaptop = $true
         }
@@ -184,7 +183,6 @@ function Get-OSDDriverDellModel {
         #if ($OsCode -eq 'Windows8') {Continue}
         #if ($OsCode -eq 'Windows8.1') {Continue}
         if ($OsCode -match 'WinPE') {Continue}
-        $DriverUrl = "$UrlDownloads/$($item.path)"
         $OsVersion = "$($OsMajor).$($OsMinor)"
         if ($OsCode -eq 'Windows11') {$OsVersion = 'Win11'}
         if ($Generation -eq '') {

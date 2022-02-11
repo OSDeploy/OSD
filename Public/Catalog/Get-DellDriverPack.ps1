@@ -9,7 +9,7 @@ function Get-DellDriverPack {
     #=================================================
     #   Get Catalog
     #=================================================
-    $Results = Get-DellDriverPackCatalog | Select-Object CatalogVersion, ReleaseDate, Name, @{Name='Product';Expression={($_.SupportedSystemId)}}, @{Name='DriverPackUrl';Expression={($_.Url)}}, FileName, @{Name='SupportedOS';Expression={($_.SupportedOperatingSystems)}}
+    $Results = Get-DellDriverPackCatalog | Select-Object CatalogVersion, ReleaseDate, Name, @{Name='Product';Expression={($_.SystemID)}}, @{Name='DriverPackUrl';Expression={($_.Url)}}, FileName, SupportedOS
     $Results = $Results | Where-Object {$null -ne $_.Product}
     #=================================================
     #   OsCode

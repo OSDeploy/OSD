@@ -39,11 +39,11 @@ function Get-OSDDriver {
     }
     if ($OSDGroup -eq 'DellModel') {
         Write-Verbose "Get-OSDDriver: $OSDGroup Drivers are pulled in real time from the vendor's Catalogs and should always have the latest versions"
-        $global:GetOSDDriver = Get-OSDDriverDellModel
+        $global:GetOSDDriver = Get-DellOSDDriversCatalog
     }
     if ($OSDGroup -eq 'HpModel') {
         Write-Verbose "Get-OSDDriver: $OSDGroup Drivers are pulled in real time from the vendor's Catalogs and should always have the latest versions"
-        $global:GetOSDDriver = Get-OSDDriverHpModel
+        $global:GetOSDDriver = Get-HPOSDDriversCatalog
     }
     if ($OSDGroup -eq 'IntelDisplay') {
         Write-Verbose "Get-OSDDriver: $OSDGroup Drivers are pulled in real time from the vendor's website and should always have the latest versions"
