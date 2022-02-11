@@ -148,7 +148,7 @@ function Get-HPDriverPackCatalog {
                 FileName        = $DriverPackage.Url | Split-Path -Leaf
                 Product         = [array]$SystemSku
                 Version         = $DriverPackVersion
-                DriverPackUrl   = $DriverPackage.Url
+                Url             = $DriverPackage.Url
             }
             New-Object -TypeName PSObject -Property $ObjectProperties
         }
@@ -157,7 +157,7 @@ function Get-HPDriverPackCatalog {
         #$Results = $Results | Where-Object {$_.Name -notmatch 'Windows 8'}
         #$Results = $Results | Where-Object {$_.Name -match 'Windows 10'}
         $Results = $Results | Sort-Object Name, ReleaseDate -Descending | Group-Object Name | ForEach-Object {$_.Group | Select-Object -First 1}
-        #$Results = $Results | Sort-Object Name | Select-Object CatalogVersion, ReleaseDate, @{Name='Name';Expression={"$($_.Name) $($_.Version)"}}, Product, DriverPackUrl, FileName
+        #$Results = $Results | Sort-Object Name | Select-Object CatalogVersion, ReleaseDate, @{Name='Name';Expression={"$($_.Name) $($_.Version)"}}, Product, Url, FileName
 
         $Results = $Results | Sort-Object Name | Select-Object CatalogVersion, ReleaseDate, @{Name='Name';Expression={"$($_.Name) $($_.Version)"}}, @{
             Name='Product';Expression={
@@ -183,7 +183,7 @@ function Get-HPDriverPackCatalog {
                     $p
                 }
             }
-        }, DriverPackUrl, FileName
+        }, Url, FileName
 
         Write-Verbose "Exporting Build Catalog to $BuildCatalogFile"
         $Results | Export-Clixml -Path $BuildCatalogFile
@@ -223,7 +223,7 @@ function Get-HPDriverPackCatalog {
     if ($PSBoundParameters.ContainsKey('DownloadPath')) {
         $Results = $Results | Out-GridView -Title 'Select one or more files to Download' -PassThru -ErrorAction Stop
         foreach ($Item in $Results) {
-            $OutFile = Save-WebFile -SourceUrl $Item.DriverPackUrl -DestinationDirectory $DownloadPath -DestinationName $Item.FileName -Verbose
+            $OutFile = Save-WebFile -SourceUrl $Item.Url -DestinationDirectory $DownloadPath -DestinationName $Item.FileName -Verbose
             $Item | ConvertTo-Json | Out-File "$($OutFile.FullName).json" -Encoding ascii -Width 2000 -Force
         }
     }

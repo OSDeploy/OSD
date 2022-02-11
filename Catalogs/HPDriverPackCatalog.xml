@@ -20,7 +20,7 @@
           <S>8890</S>
         </LST>
       </Obj>
-      <S N="DriverPackUrl">https://ftp.hp.com/pub/softpaq/sp114001-114500/sp114253.exe</S>
+      <S N="Url">https://ftp.hp.com/pub/softpaq/sp114001-114500/sp114253.exe</S>
       <S N="FileName">sp114253.exe</S>
     </MS>
   </Obj>
@@ -37,7 +37,7 @@
           <S>8890</S>
         </LST>
       </Obj>
-      <S N="DriverPackUrl">https://ftp.hp.com/pub/softpaq/sp136001-136500/sp136219.exe</S>
+      <S N="Url">https://ftp.hp.com/pub/softpaq/sp136001-136500/sp136219.exe</S>
       <S N="FileName">sp136219.exe</S>
     </MS>
   </Obj>
@@ -48,7 +48,7 @@
       <DT N="ReleaseDate">2021-06-09T00:00:00</DT>
       <S N="Name">HP Elite Dragonfly Windows 10 x64 Driver Pack 9.00 A 1</S>
       <S N="Product">861f</S>
-      <S N="DriverPackUrl">https://ftp.hp.com/pub/softpaq/sp114001-114500/sp114162.exe</S>
+      <S N="Url">https://ftp.hp.com/pub/softpaq/sp114001-114500/sp114162.exe</S>
       <S N="FileName">sp114162.exe</S>
     </MS>
   </Obj>
@@ -59,7 +59,7 @@
       <DT N="ReleaseDate">2019-05-29T00:00:00</DT>
       <S N="Name">HP Elite Folio 9480m Windows 10 x64 Driver Pack 7.00 A 1</S>
       <S N="Product">22da</S>
-      <S N="DriverPackUrl">https://ftp.hp.com/pub/softpaq/sp96501-97000/sp96753.exe</S>
+      <S N="Url">https://ftp.hp.com/pub/softpaq/sp96501-97000/sp96753.exe</S>
       <S N="FileName">sp96753.exe</S>
     </MS>
   </Obj>
@@ -70,7 +70,7 @@
       <DT N="ReleaseDate">2020-07-06T00:00:00</DT>
       <S N="Name">HP Elite Folio G1 Windows 10 x64 Driver Pack 17.0 A 1</S>
       <S N="Product">8170</S>
-      <S N="DriverPackUrl">https://ftp.hp.com/pub/softpaq/sp105501-106000/sp105937.exe</S>
+      <S N="Url">https://ftp.hp.com/pub/softpaq/sp105501-106000/sp105937.exe</S>
       <S N="FileName">sp105937.exe</S>
     </MS>
   </Obj>
@@ -81,7 +81,7 @@
       <DT N="ReleaseDate">2021-12-02T00:00:00</DT>
       <S N="Name">HP Elite Slice G2 Windows 10 x64 Driver Pack 19.00 A 1</S>
       <S N="Product">8396</S>
-      <S N="DriverPackUrl">https://ftp.hp.com/pub/softpaq/sp136501-137000/sp136512.exe</S>
+      <S N="Url">https://ftp.hp.com/pub/softpaq/sp136501-137000/sp136512.exe</S>
       <S N="FileName">sp136512.exe</S>
     </MS>
   </Obj>
@@ -100,7 +100,7 @@
           <S>81c3</S>
         </LST>
       </Obj>
-      <S N="DriverPackUrl">https://ftp.hp.com/pub/softpaq/sp114001-114500/sp114257.exe</S>
+      <S N="Url">https://ftp.hp.com/pub/softpaq/sp114001-114500/sp114257.exe</S>
       <S N="FileName">sp114257.exe</S>
     </MS>
   </Obj>
@@ -111,7 +111,7 @@
       <DT N="ReleaseDate">2017-02-24T00:00:00</DT>
       <S N="Name">HP Elite x2 1011 G1 Tablet Win10 x64 Driver Pack 5.00 A 1</S>
       <S N="Product">2009</S>
-      <S N="DriverPackUrl">https://ftp.hp.com/pub/softpaq/sp79001-79500/sp79218.exe</S>
+      <S N="Url">https://ftp.hp.com/pub/softpaq/sp79001-79500/sp79218.exe</S>
       <S N="FileName">sp79218.exe</S>
     </MS>
   </Obj>
@@ -122,7 +122,7 @@
       <DT N="ReleaseDate">2019-05-29T00:00:00</DT>
       <S N="Name">HP Elite x2 1011 G1 Tablet Windows 10 x64 Driver Pack 7.00 A 1</S>
       <S N="Product">2009</S>
-      <S N="DriverPackUrl">https://ftp.hp.com/pub/softpaq/sp96501-97000/sp96750.exe</S>
+      <S N="Url">https://ftp.hp.com/pub/softpaq/sp96501-97000/sp96750.exe</S>
       <S N="FileName">sp96750.exe</S>
     </MS>
   </Obj>
@@ -133,7 +133,7 @@
       <DT N="ReleaseDate">2020-07-06T00:00:00</DT>
       <S N="Name">HP Elite x2 1012 G1 Windows 10 x64 Driver Pack 15.0 A 1</S>
       <S N="Product">80fc</S>
-      <S N="DriverPackUrl">https://ftp.hp.com/pub/softpaq/sp105501-106000/sp105959.exe</S>
+      <S N="Url">https://ftp.hp.com/pub/softpaq/sp105501-106000/sp105959.exe</S>
       <S N="FileName">sp105959.exe</S>
     </MS>
   </Obj>
@@ -144,7 +144,7 @@
       <DT N="ReleaseDate">2017-06-19T00:00:00</DT>
       <S N="Name">HP Elite x2 1012 G2 Tablet Win10 x64 Driver Pack 1.00 A 1</S>
       <S N="Product">82ca</S>
-      <S N="DriverPackUrl">https://ftp.hp.com/pub/softpaq/sp78501-79000/sp78544.exe</S>
+      <S N="Url">https://ftp.hp.com/pub/softpaq/sp78501-79000/sp78544.exe</S>
       <S N="FileName">sp78544.exe</S>
     </MS>
   </Obj>
@@ -155,7 +155,7 @@
       <DT N="ReleaseDate">2021-01-05T00:00:00</DT>
       <S N="Name">HP Elite x2 1012 G2 Tablet Windows 10 x64 Driver Pack 12.0 A 1</S>
       <S N="Product">82ca</S>
-      <S N="DriverPackUrl">https://ftp.hp.com/pub/softpaq/sp112001-112500/sp112088.exe</S>
+      <S N="Url">https://ftp.hp.com/pub/softpaq/sp112001-112500/sp112088.exe</S>
       <S N="FileName">sp112088.exe</S>
     </MS>
   </Obj>
@@ -166,7 +166,7 @@
       <DT N="ReleaseDate">2021-06-16T00:00:00</DT>
       <S N="Name">HP Elite x2 1013 G3 Windows 10 x64 Driver Pack 12.00 A 1</S>
       <S N="Product">8414</S>
-      <S N="DriverPackUrl">https://ftp.hp.com/pub/softpaq/sp114001-114500/sp114207.exe</S>
+      <S N="Url">https://ftp.hp.com/pub/softpaq/sp114001-114500/sp114207.exe</S>
       <S N="FileName">sp114207.exe</S>
     </MS>
   </Obj>
@@ -177,7 +177,7 @@
       <DT N="ReleaseDate">2021-06-09T00:00:00</DT>
       <S N="Name">HP Elite x2 G4 Tablet Windows 10 x64 Driver Pack 10.00 A 1</S>
       <S N="Product">85b9</S>
-      <S N="DriverPackUrl">https://ftp.hp.com/pub/softpaq/sp114001-114500/sp114168.exe</S>
+      <S N="Url">https://ftp.hp.com/pub/softpaq/sp114001-114500/sp114168.exe</S>
       <S N="FileName">sp114168.exe</S>
     </MS>
   </Obj>
@@ -188,7 +188,7 @@
       <DT N="ReleaseDate">2021-06-17T00:00:00</DT>
       <S N="Name">HP Elite x2 G8 Tablet Windows 10 x64 Driver Pack 2.00 A 1</S>
       <S N="Product">870D</S>
-      <S N="DriverPackUrl">https://ftp.hp.com/pub/softpaq/sp114001-114500/sp114219.exe</S>
+      <S N="Url">https://ftp.hp.com/pub/softpaq/sp114001-114500/sp114219.exe</S>
       <S N="FileName">sp114219.exe</S>
     </MS>
   </Obj>
@@ -199,7 +199,7 @@
       <DT N="ReleaseDate">2018-11-08T00:00:00</DT>
       <S N="Name">HP Elite/Pro G1 Tablet Windows 10 x64 Driver Pack 6.00 A 1</S>
       <S N="Product">221b</S>
-      <S N="DriverPackUrl">https://ftp.hp.com/pub/softpaq/sp92501-93000/sp92562.exe</S>
+      <S N="Url">https://ftp.hp.com/pub/softpaq/sp92501-93000/sp92562.exe</S>
       <S N="FileName">sp92562.exe</S>
     </MS>
   </Obj>
@@ -216,7 +216,7 @@
           <S>2216</S>
         </LST>
       </Obj>
-      <S N="DriverPackUrl">https://ftp.hp.com/pub/softpaq/sp96501-97000/sp96717.exe</S>
+      <S N="Url">https://ftp.hp.com/pub/softpaq/sp96501-97000/sp96717.exe</S>
       <S N="FileName">sp96717.exe</S>
     </MS>
   </Obj>
@@ -233,7 +233,7 @@
           <S>828c</S>
         </LST>
       </Obj>
-      <S N="DriverPackUrl">https://ftp.hp.com/pub/softpaq/sp112001-112500/sp112019.exe</S>
+      <S N="Url">https://ftp.hp.com/pub/softpaq/sp112001-112500/sp112019.exe</S>
       <S N="FileName">sp112019.exe</S>
     </MS>
   </Obj>
@@ -251,7 +251,7 @@
           <S>83b2</S>
         </LST>
       </Obj>
-      <S N="DriverPackUrl">https://ftp.hp.com/pub/softpaq/sp95001-95500/sp95434.exe</S>
+      <S N="Url">https://ftp.hp.com/pub/softpaq/sp95001-95500/sp95434.exe</S>
       <S N="FileName">sp95434.exe</S>
     </MS>
   </Obj>
@@ -269,7 +269,7 @@
           <S>83b2</S>
         </LST>
       </Obj>
-      <S N="DriverPackUrl">https://ftp.hp.com/pub/softpaq/sp114001-114500/sp114196.exe</S>
+      <S N="Url">https://ftp.hp.com/pub/softpaq/sp114001-114500/sp114196.exe</S>
       <S N="FileName">sp114196.exe</S>
     </MS>
   </Obj>
@@ -286,7 +286,7 @@
           <S>8549</S>
         </LST>
       </Obj>
-      <S N="DriverPackUrl">https://ftp.hp.com/pub/softpaq/sp114001-114500/sp114161.exe</S>
+      <S N="Url">https://ftp.hp.com/pub/softpaq/sp114001-114500/sp114161.exe</S>
       <S N="FileName">sp114161.exe</S>
     </MS>
   </Obj>
@@ -313,7 +313,7 @@
           <S>8723</S>
         </LST>
       </Obj>
-      <S N="DriverPackUrl">https://ftp.hp.com/pub/softpaq/sp113501-114000/sp113588.exe</S>
+      <S N="Url">https://ftp.hp.com/pub/softpaq/sp113501-114000/sp113588.exe</S>
       <S N="FileName">sp113588.exe</S>
     </MS>
   </Obj>
@@ -330,7 +330,7 @@
           <S>8846</S>
         </LST>
       </Obj>
-      <S N="DriverPackUrl">https://ftp.hp.com/pub/softpaq/sp114001-114500/sp114045.exe</S>
+      <S N="Url">https://ftp.hp.com/pub/softpaq/sp114001-114500/sp114045.exe</S>
       <S N="FileName">sp114045.exe</S>
     </MS>
   </Obj>
@@ -341,7 +341,7 @@
       <DT N="ReleaseDate">2019-12-30T00:00:00</DT>
       <S N="Name">HP EliteBook 1030 G1 Windows 10 x64 Driver Pack 15.0 A 1</S>
       <S N="Product">80fb</S>
-      <S N="DriverPackUrl">https://ftp.hp.com/pub/softpaq/sp101001-101500/sp101081.exe</S>
+      <S N="Url">https://ftp.hp.com/pub/softpaq/sp101001-101500/sp101081.exe</S>
       <S N="FileName">sp101081.exe</S>
     </MS>
   </Obj>
@@ -352,7 +352,7 @@
       <DT N="ReleaseDate">2018-11-14T00:00:00</DT>
       <S N="Name">HP EliteBook 1040 G1 Windows 10 x64 Driver Pack 1.00 A 1</S>
       <S N="Product">213e</S>
-      <S N="DriverPackUrl">https://ftp.hp.com/pub/softpaq/sp92501-93000/sp92709.exe</S>
+      <S N="Url">https://ftp.hp.com/pub/softpaq/sp92501-93000/sp92709.exe</S>
       <S N="FileName">sp92709.exe</S>
     </MS>
   </Obj>
@@ -363,7 +363,7 @@
       <DT N="ReleaseDate">2019-05-28T00:00:00</DT>
       <S N="Name">HP EliteBook 1040 G2 Windows 10 x64 Driver Pack 7.00 A 1</S>
       <S N="Product">2270</S>
-      <S N="DriverPackUrl">https://ftp.hp.com/pub/softpaq/sp96501-97000/sp96718.exe</S>
+      <S N="Url">https://ftp.hp.com/pub/softpaq/sp96501-97000/sp96718.exe</S>
       <S N="FileName">sp96718.exe</S>
     </MS>
   </Obj>
@@ -380,7 +380,7 @@
           <S>82de</S>
         </LST>
       </Obj>
-      <S N="DriverPackUrl">https://ftp.hp.com/pub/softpaq/sp112001-112500/sp112022.exe</S>
+      <S N="Url">https://ftp.hp.com/pub/softpaq/sp112001-112500/sp112022.exe</S>
       <S N="FileName">sp112022.exe</S>
     </MS>
   </Obj>
@@ -397,7 +397,7 @@
           <S>198f</S>
         </LST>
       </Obj>
-      <S N="DriverPackUrl">https://ftp.hp.com/pub/softpaq/sp92501-93000/sp92710.exe</S>
+      <S N="Url">https://ftp.hp.com/pub/softpaq/sp92501-93000/sp92710.exe</S>
       <S N="FileName">sp92710.exe</S>
     </MS>
   </Obj>
@@ -414,7 +414,7 @@
           <S>8079</S>
         </LST>
       </Obj>
-      <S N="DriverPackUrl">https://ftp.hp.com/pub/softpaq/sp101001-101500/sp101082.exe</S>
+      <S N="Url">https://ftp.hp.com/pub/softpaq/sp101001-101500/sp101082.exe</S>
       <S N="FileName">sp101082.exe</S>
     </MS>
   </Obj>
@@ -431,7 +431,7 @@
           <S>221c</S>
         </LST>
       </Obj>
-      <S N="DriverPackUrl">https://ftp.hp.com/pub/softpaq/sp96501-97000/sp96748.exe</S>
+      <S N="Url">https://ftp.hp.com/pub/softpaq/sp96501-97000/sp96748.exe</S>
       <S N="FileName">sp96748.exe</S>
     </MS>
   </Obj>
@@ -448,7 +448,7 @@
           <S>807e</S>
         </LST>
       </Obj>
-      <S N="DriverPackUrl">https://ftp.hp.com/pub/softpaq/sp105501-106000/sp105958.exe</S>
+      <S N="Url">https://ftp.hp.com/pub/softpaq/sp105501-106000/sp105958.exe</S>
       <S N="FileName">sp105958.exe</S>
     </MS>
   </Obj>
@@ -467,7 +467,7 @@
           <S>8236</S>
         </LST>
       </Obj>
-      <S N="DriverPackUrl">https://ftp.hp.com/pub/softpaq/sp105501-106000/sp105897.exe</S>
+      <S N="Url">https://ftp.hp.com/pub/softpaq/sp105501-106000/sp105897.exe</S>
       <S N="FileName">sp105897.exe</S>
     </MS>
   </Obj>
@@ -486,7 +486,7 @@
           <S>8236</S>
         </LST>
       </Obj>
-      <S N="DriverPackUrl">https://ftp.hp.com/pub/softpaq/sp112001-112500/sp112090.exe</S>
+      <S N="Url">https://ftp.hp.com/pub/softpaq/sp112001-112500/sp112090.exe</S>
       <S N="FileName">sp112090.exe</S>
     </MS>
   </Obj>
@@ -503,7 +503,7 @@
           <S>83d5</S>
         </LST>
       </Obj>
-      <S N="DriverPackUrl">https://ftp.hp.com/pub/softpaq/sp114001-114500/sp114233.exe</S>
+      <S N="Url">https://ftp.hp.com/pub/softpaq/sp114001-114500/sp114233.exe</S>
       <S N="FileName">sp114233.exe</S>
     </MS>
   </Obj>
@@ -520,7 +520,7 @@
           <S>8584</S>
         </LST>
       </Obj>
-      <S N="DriverPackUrl">https://ftp.hp.com/pub/softpaq/sp114001-114500/sp114213.exe</S>
+      <S N="Url">https://ftp.hp.com/pub/softpaq/sp114001-114500/sp114213.exe</S>
       <S N="FileName">sp114213.exe</S>
     </MS>
   </Obj>
@@ -531,7 +531,7 @@
       <DT N="ReleaseDate">2021-06-21T00:00:00</DT>
       <S N="Name">HP EliteBook 840r G4 Windows 10 x64 Driver Pack 12.00 A 1</S>
       <S N="Product">8418</S>
-      <S N="DriverPackUrl">https://ftp.hp.com/pub/softpaq/sp114001-114500/sp114232.exe</S>
+      <S N="Url">https://ftp.hp.com/pub/softpaq/sp114001-114500/sp114232.exe</S>
       <S N="FileName">sp114232.exe</S>
     </MS>
   </Obj>
@@ -542,7 +542,7 @@
       <DT N="ReleaseDate">2021-05-25T00:00:00</DT>
       <S N="Name">HP EliteBook 8x5 G7 Windows 10 x64 Driver Pack 4.00 A 1</S>
       <S N="Product">8760</S>
-      <S N="DriverPackUrl">https://ftp.hp.com/pub/softpaq/sp113501-114000/sp113985.exe</S>
+      <S N="Url">https://ftp.hp.com/pub/softpaq/sp113501-114000/sp113985.exe</S>
       <S N="FileName">sp113985.exe</S>
     </MS>
   </Obj>
@@ -553,7 +553,7 @@
       <DT N="ReleaseDate">2021-03-09T00:00:00</DT>
       <S N="Name">HP EliteBook 8x5 G8 Win 10 x64 Driver Pack 1.00 A 1</S>
       <S N="Product">8895</S>
-      <S N="DriverPackUrl">https://ftp.hp.com/pub/softpaq/sp112501-113000/sp112926.exe</S>
+      <S N="Url">https://ftp.hp.com/pub/softpaq/sp112501-113000/sp112926.exe</S>
       <S N="FileName">sp112926.exe</S>
     </MS>
   </Obj>
@@ -564,7 +564,7 @@
       <DT N="ReleaseDate">2021-06-07T00:00:00</DT>
       <S N="Name">HP EliteBook 8x5 G8 Windows 10 x64 Driver Pack 2.00 A 1</S>
       <S N="Product">8895</S>
-      <S N="DriverPackUrl">https://ftp.hp.com/pub/softpaq/sp114001-114500/sp114138.exe</S>
+      <S N="Url">https://ftp.hp.com/pub/softpaq/sp114001-114500/sp114138.exe</S>
       <S N="FileName">sp114138.exe</S>
     </MS>
   </Obj>
@@ -575,7 +575,7 @@
       <DT N="ReleaseDate">2021-11-26T00:00:00</DT>
       <S N="Name">HP EliteBook 8x5 G8 Windows 11 Driver Pack 1.00 A 1</S>
       <S N="Product">8895</S>
-      <S N="DriverPackUrl">https://ftp.hp.com/pub/softpaq/sp136001-136500/sp136363.exe</S>
+      <S N="Url">https://ftp.hp.com/pub/softpaq/sp136001-136500/sp136363.exe</S>
       <S N="FileName">sp136363.exe</S>
     </MS>
   </Obj>
@@ -586,7 +586,7 @@
       <DT N="ReleaseDate">2019-05-29T00:00:00</DT>
       <S N="Name">HP EliteBook Folio 1020 G1 Windows 10 x64 Driver Pack 7.00 A 1</S>
       <S N="Product">2271</S>
-      <S N="DriverPackUrl">https://ftp.hp.com/pub/softpaq/sp96501-97000/sp96749.exe</S>
+      <S N="Url">https://ftp.hp.com/pub/softpaq/sp96501-97000/sp96749.exe</S>
       <S N="FileName">sp96749.exe</S>
     </MS>
   </Obj>
@@ -597,7 +597,7 @@
       <DT N="ReleaseDate">2019-05-29T00:00:00</DT>
       <S N="Name">HP EliteBook Revolve 810 G3 Windows 10 x64 Driver Pack 7.00 A 1</S>
       <S N="Product">22fb</S>
-      <S N="DriverPackUrl">https://ftp.hp.com/pub/softpaq/sp96501-97000/sp96755.exe</S>
+      <S N="Url">https://ftp.hp.com/pub/softpaq/sp96501-97000/sp96755.exe</S>
       <S N="FileName">sp96755.exe</S>
     </MS>
   </Obj>
@@ -608,7 +608,7 @@
       <DT N="ReleaseDate">2020-12-30T00:00:00</DT>
       <S N="Name">HP EliteBook x360 1020 G2 Windows 10 x64 Driver Pack 10.0 A 1</S>
       <S N="Product">8300</S>
-      <S N="DriverPackUrl">https://ftp.hp.com/pub/softpaq/sp112001-112500/sp112001.exe</S>
+      <S N="Url">https://ftp.hp.com/pub/softpaq/sp112001-112500/sp112001.exe</S>
       <S N="FileName">sp112001.exe</S>
     </MS>
   </Obj>
@@ -619,7 +619,7 @@
       <DT N="ReleaseDate">2021-01-06T00:00:00</DT>
       <S N="Name">HP EliteBook x360 1030 G2 Windows 10 x64 Driver Pack 19.0 A 1</S>
       <S N="Product">827d</S>
-      <S N="DriverPackUrl">https://ftp.hp.com/pub/softpaq/sp112001-112500/sp112131.exe</S>
+      <S N="Url">https://ftp.hp.com/pub/softpaq/sp112001-112500/sp112131.exe</S>
       <S N="FileName">sp112131.exe</S>
     </MS>
   </Obj>
@@ -630,7 +630,7 @@
       <DT N="ReleaseDate">2021-06-14T00:00:00</DT>
       <S N="Name">HP EliteBook x360 1030 G3 Win 10 x64 Driver Pack 13.00 A 1</S>
       <S N="Product">8438</S>
-      <S N="DriverPackUrl">https://ftp.hp.com/pub/softpaq/sp114001-114500/sp114188.exe</S>
+      <S N="Url">https://ftp.hp.com/pub/softpaq/sp114001-114500/sp114188.exe</S>
       <S N="FileName">sp114188.exe</S>
     </MS>
   </Obj>
@@ -641,7 +641,7 @@
       <DT N="ReleaseDate">2020-05-21T00:00:00</DT>
       <S N="Name">HP EliteBook x360 1030 G3 Windows 10 x64 Driver Pack 11.0 A 1</S>
       <S N="Product">8438</S>
-      <S N="DriverPackUrl">https://ftp.hp.com/pub/softpaq/sp103501-104000/sp103614.exe</S>
+      <S N="Url">https://ftp.hp.com/pub/softpaq/sp103501-104000/sp103614.exe</S>
       <S N="FileName">sp103614.exe</S>
     </MS>
   </Obj>
@@ -652,7 +652,7 @@
       <DT N="ReleaseDate">2020-11-30T00:00:00</DT>
       <S N="Name">HP EliteBook x360 1030 G4 Win 10 x64 Driver Pack 8.00 A 1</S>
       <S N="Product">8637</S>
-      <S N="DriverPackUrl">https://ftp.hp.com/pub/softpaq/sp111001-111500/sp111344.exe</S>
+      <S N="Url">https://ftp.hp.com/pub/softpaq/sp111001-111500/sp111344.exe</S>
       <S N="FileName">sp111344.exe</S>
     </MS>
   </Obj>
@@ -663,7 +663,7 @@
       <DT N="ReleaseDate">2021-06-07T00:00:00</DT>
       <S N="Name">HP EliteBook x360 1030 G4 Windows 10 x64 Driver Pack 9.00 A 1</S>
       <S N="Product">8637</S>
-      <S N="DriverPackUrl">https://ftp.hp.com/pub/softpaq/sp114001-114500/sp114132.exe</S>
+      <S N="Url">https://ftp.hp.com/pub/softpaq/sp114001-114500/sp114132.exe</S>
       <S N="FileName">sp114132.exe</S>
     </MS>
   </Obj>
@@ -674,7 +674,7 @@
       <DT N="ReleaseDate">2021-05-25T00:00:00</DT>
       <S N="Name">HP EliteBook x360 1030/40 G7 Windows 10 Driver Pack 5.00 A 1</S>
       <S N="Product">876d</S>
-      <S N="DriverPackUrl">https://ftp.hp.com/pub/softpaq/sp113501-114000/sp113980.exe</S>
+      <S N="Url">https://ftp.hp.com/pub/softpaq/sp113501-114000/sp113980.exe</S>
       <S N="FileName">sp113980.exe</S>
     </MS>
   </Obj>
@@ -685,7 +685,7 @@
       <DT N="ReleaseDate">2021-06-11T00:00:00</DT>
       <S N="Name">HP EliteBook x360 1030/40 G8 Windows 10 Driver Pack 3.00 A 1</S>
       <S N="Product">8720</S>
-      <S N="DriverPackUrl">https://ftp.hp.com/pub/softpaq/sp114001-114500/sp114184.exe</S>
+      <S N="Url">https://ftp.hp.com/pub/softpaq/sp114001-114500/sp114184.exe</S>
       <S N="FileName">sp114184.exe</S>
     </MS>
   </Obj>
@@ -696,7 +696,7 @@
       <DT N="ReleaseDate">2021-06-14T00:00:00</DT>
       <S N="Name">HP EliteBook x360 1040 G5 Windows 10 x64 Driver Pack 13.00 A 1</S>
       <S N="Product">8470</S>
-      <S N="DriverPackUrl">https://ftp.hp.com/pub/softpaq/sp114001-114500/sp114187.exe</S>
+      <S N="Url">https://ftp.hp.com/pub/softpaq/sp114001-114500/sp114187.exe</S>
       <S N="FileName">sp114187.exe</S>
     </MS>
   </Obj>
@@ -707,7 +707,7 @@
       <DT N="ReleaseDate">2021-06-07T00:00:00</DT>
       <S N="Name">HP EliteBook x360 1040 G6 Windows 10 Driver Pack 9.00 A 1</S>
       <S N="Product">857f</S>
-      <S N="DriverPackUrl">https://ftp.hp.com/pub/softpaq/sp114001-114500/sp114134.exe</S>
+      <S N="Url">https://ftp.hp.com/pub/softpaq/sp114001-114500/sp114134.exe</S>
       <S N="FileName">sp114134.exe</S>
     </MS>
   </Obj>
@@ -718,7 +718,7 @@
       <DT N="ReleaseDate">2021-06-18T00:00:00</DT>
       <S N="Name">HP EliteBook x360 830 G5 Windows 10 Driver Pack 6.00 A 1</S>
       <S N="Product">853d</S>
-      <S N="DriverPackUrl">https://ftp.hp.com/pub/softpaq/sp114001-114500/sp114225.exe</S>
+      <S N="Url">https://ftp.hp.com/pub/softpaq/sp114001-114500/sp114225.exe</S>
       <S N="FileName">sp114225.exe</S>
     </MS>
   </Obj>
@@ -729,7 +729,7 @@
       <DT N="ReleaseDate">2021-06-18T00:00:00</DT>
       <S N="Name">HP EliteBook x360 830 G6 Windows 10 Driver Pack 7.00 A 1</S>
       <S N="Product">8548</S>
-      <S N="DriverPackUrl">https://ftp.hp.com/pub/softpaq/sp114001-114500/sp114224.exe</S>
+      <S N="Url">https://ftp.hp.com/pub/softpaq/sp114001-114500/sp114224.exe</S>
       <S N="FileName">sp114224.exe</S>
     </MS>
   </Obj>
@@ -740,7 +740,7 @@
       <DT N="ReleaseDate">2021-05-21T00:00:00</DT>
       <S N="Name">HP EliteBook x360 830 G7 Windows 10 Driver Pack 5.00 A 1</S>
       <S N="Product">8725</S>
-      <S N="DriverPackUrl">https://ftp.hp.com/pub/softpaq/sp113501-114000/sp113956.exe</S>
+      <S N="Url">https://ftp.hp.com/pub/softpaq/sp113501-114000/sp113956.exe</S>
       <S N="FileName">sp113956.exe</S>
     </MS>
   </Obj>
@@ -751,7 +751,7 @@
       <DT N="ReleaseDate">2021-06-25T00:00:00</DT>
       <S N="Name">HP EliteBook x360 830 G8 Windows 10 Driver Pack 4.00 A 1</S>
       <S N="Product">8847</S>
-      <S N="DriverPackUrl">https://ftp.hp.com/pub/softpaq/sp114001-114500/sp114275.exe</S>
+      <S N="Url">https://ftp.hp.com/pub/softpaq/sp114001-114500/sp114275.exe</S>
       <S N="FileName">sp114275.exe</S>
     </MS>
   </Obj>
@@ -762,7 +762,7 @@
       <DT N="ReleaseDate">2021-11-23T00:00:00</DT>
       <S N="Name">HP EliteBook x360 830 G8 Windows 11 Driver Pack 1.00 A 1</S>
       <S N="Product">8847</S>
-      <S N="DriverPackUrl">https://ftp.hp.com/pub/softpaq/sp136001-136500/sp136303.exe</S>
+      <S N="Url">https://ftp.hp.com/pub/softpaq/sp136001-136500/sp136303.exe</S>
       <S N="FileName">sp136303.exe</S>
     </MS>
   </Obj>
@@ -780,7 +780,7 @@
           <S>805c</S>
         </LST>
       </Obj>
-      <S N="DriverPackUrl">https://ftp.hp.com/pub/softpaq/sp105501-106000/sp105919.exe</S>
+      <S N="Url">https://ftp.hp.com/pub/softpaq/sp105501-106000/sp105919.exe</S>
       <S N="FileName">sp105919.exe</S>
     </MS>
   </Obj>
@@ -798,7 +798,7 @@
           <S>8265</S>
         </LST>
       </Obj>
-      <S N="DriverPackUrl">https://ftp.hp.com/pub/softpaq/sp96001-96500/sp96059.exe</S>
+      <S N="Url">https://ftp.hp.com/pub/softpaq/sp96001-96500/sp96059.exe</S>
       <S N="FileName">sp96059.exe</S>
     </MS>
   </Obj>
@@ -816,7 +816,7 @@
           <S>835b</S>
         </LST>
       </Obj>
-      <S N="DriverPackUrl">https://ftp.hp.com/pub/softpaq/sp111501-112000/sp111957.exe</S>
+      <S N="Url">https://ftp.hp.com/pub/softpaq/sp111501-112000/sp111957.exe</S>
       <S N="FileName">sp111957.exe</S>
     </MS>
   </Obj>
@@ -834,7 +834,7 @@
           <S>835b</S>
         </LST>
       </Obj>
-      <S N="DriverPackUrl">https://ftp.hp.com/pub/softpaq/sp105501-106000/sp105595.exe</S>
+      <S N="Url">https://ftp.hp.com/pub/softpaq/sp105501-106000/sp105595.exe</S>
       <S N="FileName">sp105595.exe</S>
     </MS>
   </Obj>
@@ -868,7 +868,7 @@
           <S>8462</S>
         </LST>
       </Obj>
-      <S N="DriverPackUrl">https://ftp.hp.com/pub/softpaq/sp114001-114500/sp114270.exe</S>
+      <S N="Url">https://ftp.hp.com/pub/softpaq/sp114001-114500/sp114270.exe</S>
       <S N="FileName">sp114270.exe</S>
     </MS>
   </Obj>
@@ -891,7 +891,7 @@
           <S>83e8</S>
         </LST>
       </Obj>
-      <S N="DriverPackUrl">https://ftp.hp.com/pub/softpaq/sp111001-111500/sp111437.exe</S>
+      <S N="Url">https://ftp.hp.com/pub/softpaq/sp111001-111500/sp111437.exe</S>
       <S N="FileName">sp111437.exe</S>
     </MS>
   </Obj>
@@ -902,7 +902,7 @@
       <DT N="ReleaseDate">2021-06-17T00:00:00</DT>
       <S N="Name">HP EliteDesk 705 G5 DM Win10 x64 Driver Pack 7.00 A 1</S>
       <S N="Product">8619</S>
-      <S N="DriverPackUrl">https://ftp.hp.com/pub/softpaq/sp114001-114500/sp114221.exe</S>
+      <S N="Url">https://ftp.hp.com/pub/softpaq/sp114001-114500/sp114221.exe</S>
       <S N="FileName">sp114221.exe</S>
     </MS>
   </Obj>
@@ -913,7 +913,7 @@
       <DT N="ReleaseDate">2021-01-29T00:00:00</DT>
       <S N="Name">HP EliteDesk 705 G5 DM Windows 10 x64 Driver Pack 6.00 A 1</S>
       <S N="Product">8619</S>
-      <S N="DriverPackUrl">https://ftp.hp.com/pub/softpaq/sp112501-113000/sp112551.exe</S>
+      <S N="Url">https://ftp.hp.com/pub/softpaq/sp112501-113000/sp112551.exe</S>
       <S N="FileName">sp112551.exe</S>
     </MS>
   </Obj>
@@ -930,7 +930,7 @@
           <S>8617</S>
         </LST>
       </Obj>
-      <S N="DriverPackUrl">https://ftp.hp.com/pub/softpaq/sp112501-113000/sp112583.exe</S>
+      <S N="Url">https://ftp.hp.com/pub/softpaq/sp112501-113000/sp112583.exe</S>
       <S N="FileName">sp112583.exe</S>
     </MS>
   </Obj>
@@ -949,7 +949,7 @@
           <S>8618</S>
         </LST>
       </Obj>
-      <S N="DriverPackUrl">https://ftp.hp.com/pub/softpaq/sp114001-114500/sp114220.exe</S>
+      <S N="Url">https://ftp.hp.com/pub/softpaq/sp114001-114500/sp114220.exe</S>
       <S N="FileName">sp114220.exe</S>
     </MS>
   </Obj>
@@ -968,7 +968,7 @@
           <S>88A0</S>
         </LST>
       </Obj>
-      <S N="DriverPackUrl">https://ftp.hp.com/pub/softpaq/sp113001-113500/sp113168.exe</S>
+      <S N="Url">https://ftp.hp.com/pub/softpaq/sp113001-113500/sp113168.exe</S>
       <S N="FileName">sp113168.exe</S>
     </MS>
   </Obj>
@@ -979,7 +979,7 @@
       <DT N="ReleaseDate">2020-05-22T00:00:00</DT>
       <S N="Name">HP EliteOne 1000 G1 AiO Win10 x64 Driver Pack 11.0 A 1</S>
       <S N="Product">829f</S>
-      <S N="DriverPackUrl">https://ftp.hp.com/pub/softpaq/sp104001-104500/sp104100.exe</S>
+      <S N="Url">https://ftp.hp.com/pub/softpaq/sp104001-104500/sp104100.exe</S>
       <S N="FileName">sp104100.exe</S>
     </MS>
   </Obj>
@@ -990,7 +990,7 @@
       <DT N="ReleaseDate">2020-12-15T00:00:00</DT>
       <S N="Name">HP EliteOne 1000 G1 AiO Windows 10 x64 Driver Pack 12.0 A 1</S>
       <S N="Product">829f</S>
-      <S N="DriverPackUrl">https://ftp.hp.com/pub/softpaq/sp111501-112000/sp111642.exe</S>
+      <S N="Url">https://ftp.hp.com/pub/softpaq/sp111501-112000/sp111642.exe</S>
       <S N="FileName">sp111642.exe</S>
     </MS>
   </Obj>
@@ -1001,7 +1001,7 @@
       <DT N="ReleaseDate">2021-06-29T00:00:00</DT>
       <S N="Name">HP EliteOne 1000 G2 AiO Win10 x64 Driver Pack 14.00 A 1</S>
       <S N="Product">83e5</S>
-      <S N="DriverPackUrl">https://ftp.hp.com/pub/softpaq/sp115001-115500/sp115294.exe</S>
+      <S N="Url">https://ftp.hp.com/pub/softpaq/sp115001-115500/sp115294.exe</S>
       <S N="FileName">sp115294.exe</S>
     </MS>
   </Obj>
@@ -1012,7 +1012,7 @@
       <DT N="ReleaseDate">2020-01-24T00:00:00</DT>
       <S N="Name">HP EliteOne 1000 G2 AiO Windows 10 x64 Driver Pack 10.0 A 1</S>
       <S N="Product">83e5</S>
-      <S N="DriverPackUrl">https://ftp.hp.com/pub/softpaq/sp101001-101500/sp101466.exe</S>
+      <S N="Url">https://ftp.hp.com/pub/softpaq/sp101001-101500/sp101466.exe</S>
       <S N="FileName">sp101466.exe</S>
     </MS>
   </Obj>
@@ -1035,7 +1035,7 @@
           <S>874E</S>
         </LST>
       </Obj>
-      <S N="DriverPackUrl">https://ftp.hp.com/pub/softpaq/sp123501-124000/sp123503.exe</S>
+      <S N="Url">https://ftp.hp.com/pub/softpaq/sp123501-124000/sp123503.exe</S>
       <S N="FileName">sp123503.exe</S>
     </MS>
   </Obj>
@@ -1056,7 +1056,7 @@
           <S>874D</S>
         </LST>
       </Obj>
-      <S N="DriverPackUrl">https://ftp.hp.com/pub/softpaq/sp136001-136500/sp136259.exe</S>
+      <S N="Url">https://ftp.hp.com/pub/softpaq/sp136001-136500/sp136259.exe</S>
       <S N="FileName">sp136259.exe</S>
     </MS>
   </Obj>
@@ -1077,7 +1077,7 @@
           <S>874E</S>
         </LST>
       </Obj>
-      <S N="DriverPackUrl">https://ftp.hp.com/pub/softpaq/sp109001-109500/sp109005.exe</S>
+      <S N="Url">https://ftp.hp.com/pub/softpaq/sp109001-109500/sp109005.exe</S>
       <S N="FileName">sp109005.exe</S>
     </MS>
   </Obj>
@@ -1088,7 +1088,7 @@
       <DT N="ReleaseDate">2021-07-23T00:00:00</DT>
       <S N="Name">HP EliteOne 800 G8 AIO Win 10 x64 Driver Pack 3.00 A 1</S>
       <S N="Product">88AA</S>
-      <S N="DriverPackUrl">https://ftp.hp.com/pub/softpaq/sp123501-124000/sp123514.exe</S>
+      <S N="Url">https://ftp.hp.com/pub/softpaq/sp123501-124000/sp123514.exe</S>
       <S N="FileName">sp123514.exe</S>
     </MS>
   </Obj>
@@ -1099,7 +1099,7 @@
       <DT N="ReleaseDate">2021-11-19T00:00:00</DT>
       <S N="Name">HP EliteOne 800 G8 AIO Win 11 Driver Pack 1.00 A 1</S>
       <S N="Product">88AA</S>
-      <S N="DriverPackUrl">https://ftp.hp.com/pub/softpaq/sp136001-136500/sp136261.exe</S>
+      <S N="Url">https://ftp.hp.com/pub/softpaq/sp136001-136500/sp136261.exe</S>
       <S N="FileName">sp136261.exe</S>
     </MS>
   </Obj>
@@ -1110,7 +1110,7 @@
       <DT N="ReleaseDate">2016-09-09T00:00:00</DT>
       <S N="Name">HP ElitePad 1000 G2 Windows 10 x64 Driver Pack 1.00 A 1</S>
       <S N="Product">2157</S>
-      <S N="DriverPackUrl">https://ftp.hp.com/pub/softpaq/sp77001-77500/sp77446.exe</S>
+      <S N="Url">https://ftp.hp.com/pub/softpaq/sp77001-77500/sp77446.exe</S>
       <S N="FileName">sp77446.exe</S>
     </MS>
   </Obj>
@@ -1131,7 +1131,7 @@
           <S>805e</S>
         </LST>
       </Obj>
-      <S N="DriverPackUrl">https://ftp.hp.com/pub/softpaq/sp96001-96500/sp96027.exe</S>
+      <S N="Url">https://ftp.hp.com/pub/softpaq/sp96001-96500/sp96027.exe</S>
       <S N="FileName">sp96027.exe</S>
     </MS>
   </Obj>
@@ -1156,7 +1156,7 @@
           <S>805d</S>
         </LST>
       </Obj>
-      <S N="DriverPackUrl">https://ftp.hp.com/pub/softpaq/sp96001-96500/sp96028.exe</S>
+      <S N="Url">https://ftp.hp.com/pub/softpaq/sp96001-96500/sp96028.exe</S>
       <S N="FileName">sp96028.exe</S>
     </MS>
   </Obj>
@@ -1177,7 +1177,7 @@
           <S>83ea</S>
         </LST>
       </Obj>
-      <S N="DriverPackUrl">https://ftp.hp.com/pub/softpaq/sp95001-95500/sp95456.exe</S>
+      <S N="Url">https://ftp.hp.com/pub/softpaq/sp95001-95500/sp95456.exe</S>
       <S N="FileName">sp95456.exe</S>
     </MS>
   </Obj>
@@ -1210,7 +1210,7 @@
           <S>83ee</S>
         </LST>
       </Obj>
-      <S N="DriverPackUrl">https://ftp.hp.com/pub/softpaq/sp100001-100500/sp100497.exe</S>
+      <S N="Url">https://ftp.hp.com/pub/softpaq/sp100001-100500/sp100497.exe</S>
       <S N="FileName">sp100497.exe</S>
     </MS>
   </Obj>
@@ -1243,7 +1243,7 @@
           <S>83ee</S>
         </LST>
       </Obj>
-      <S N="DriverPackUrl">https://ftp.hp.com/pub/softpaq/sp101001-101500/sp101465.exe</S>
+      <S N="Url">https://ftp.hp.com/pub/softpaq/sp101001-101500/sp101465.exe</S>
       <S N="FileName">sp101465.exe</S>
     </MS>
   </Obj>
@@ -1268,7 +1268,7 @@
           <S>85a2</S>
         </LST>
       </Obj>
-      <S N="DriverPackUrl">https://ftp.hp.com/pub/softpaq/sp96501-97000/sp96782.exe</S>
+      <S N="Url">https://ftp.hp.com/pub/softpaq/sp96501-97000/sp96782.exe</S>
       <S N="FileName">sp96782.exe</S>
     </MS>
   </Obj>
@@ -1299,7 +1299,7 @@
           <S>859f</S>
         </LST>
       </Obj>
-      <S N="DriverPackUrl">https://ftp.hp.com/pub/softpaq/sp114001-114500/sp114248.exe</S>
+      <S N="Url">https://ftp.hp.com/pub/softpaq/sp114001-114500/sp114248.exe</S>
       <S N="FileName">sp114248.exe</S>
     </MS>
   </Obj>
@@ -1324,7 +1324,7 @@
           <S>8597</S>
         </LST>
       </Obj>
-      <S N="DriverPackUrl">https://ftp.hp.com/pub/softpaq/sp111001-111500/sp111207.exe</S>
+      <S N="Url">https://ftp.hp.com/pub/softpaq/sp111001-111500/sp111207.exe</S>
       <S N="FileName">sp111207.exe</S>
     </MS>
   </Obj>
@@ -1354,7 +1354,7 @@
           <S>8593</S>
         </LST>
       </Obj>
-      <S N="DriverPackUrl">https://ftp.hp.com/pub/softpaq/sp114001-114500/sp114190.exe</S>
+      <S N="Url">https://ftp.hp.com/pub/softpaq/sp114001-114500/sp114190.exe</S>
       <S N="FileName">sp114190.exe</S>
     </MS>
   </Obj>
@@ -1365,7 +1365,7 @@
       <DT N="ReleaseDate">2021-01-20T00:00:00</DT>
       <S N="Name">HP ElitePro 4/6/800 G6 DM Win 10 x64 Driver Pack 3.00 A 1</S>
       <S N="Product">871a</S>
-      <S N="DriverPackUrl">https://ftp.hp.com/pub/softpaq/sp112001-112500/sp112401.exe</S>
+      <S N="Url">https://ftp.hp.com/pub/softpaq/sp112001-112500/sp112401.exe</S>
       <S N="FileName">sp112401.exe</S>
     </MS>
   </Obj>
@@ -1392,7 +1392,7 @@
           <S>870f</S>
         </LST>
       </Obj>
-      <S N="DriverPackUrl">https://ftp.hp.com/pub/softpaq/sp113001-113500/sp113468.exe</S>
+      <S N="Url">https://ftp.hp.com/pub/softpaq/sp113001-113500/sp113468.exe</S>
       <S N="FileName">sp113468.exe</S>
     </MS>
   </Obj>
@@ -1409,7 +1409,7 @@
           <S>8714</S>
         </LST>
       </Obj>
-      <S N="DriverPackUrl">https://ftp.hp.com/pub/softpaq/sp136501-137000/sp136700.exe</S>
+      <S N="Url">https://ftp.hp.com/pub/softpaq/sp136501-137000/sp136700.exe</S>
       <S N="FileName">sp136700.exe</S>
     </MS>
   </Obj>
@@ -1434,7 +1434,7 @@
           <S>870f</S>
         </LST>
       </Obj>
-      <S N="DriverPackUrl">https://ftp.hp.com/pub/softpaq/sp105501-106000/sp105836.exe</S>
+      <S N="Url">https://ftp.hp.com/pub/softpaq/sp105501-106000/sp105836.exe</S>
       <S N="FileName">sp105836.exe</S>
     </MS>
   </Obj>
@@ -1461,7 +1461,7 @@
           <S>870b</S>
         </LST>
       </Obj>
-      <S N="DriverPackUrl">https://ftp.hp.com/pub/softpaq/sp123501-124000/sp123507.exe</S>
+      <S N="Url">https://ftp.hp.com/pub/softpaq/sp123501-124000/sp123507.exe</S>
       <S N="FileName">sp123507.exe</S>
     </MS>
   </Obj>
@@ -1486,7 +1486,7 @@
           <S>870c</S>
         </LST>
       </Obj>
-      <S N="DriverPackUrl">https://ftp.hp.com/pub/softpaq/sp136001-136500/sp136330.exe</S>
+      <S N="Url">https://ftp.hp.com/pub/softpaq/sp136001-136500/sp136330.exe</S>
       <S N="FileName">sp136330.exe</S>
     </MS>
   </Obj>
@@ -1511,7 +1511,7 @@
           <S>870b</S>
         </LST>
       </Obj>
-      <S N="DriverPackUrl">https://ftp.hp.com/pub/softpaq/sp108501-109000/sp108773.exe</S>
+      <S N="Url">https://ftp.hp.com/pub/softpaq/sp108501-109000/sp108773.exe</S>
       <S N="FileName">sp108773.exe</S>
     </MS>
   </Obj>
@@ -1542,7 +1542,7 @@
           <S>8836</S>
         </LST>
       </Obj>
-      <S N="DriverPackUrl">https://ftp.hp.com/pub/softpaq/sp123501-124000/sp123511.exe</S>
+      <S N="Url">https://ftp.hp.com/pub/softpaq/sp123501-124000/sp123511.exe</S>
       <S N="FileName">sp123511.exe</S>
     </MS>
   </Obj>
@@ -1562,7 +1562,7 @@
           <S>872E</S>
         </LST>
       </Obj>
-      <S N="DriverPackUrl">https://ftp.hp.com/pub/softpaq/sp136001-136500/sp136311.exe</S>
+      <S N="Url">https://ftp.hp.com/pub/softpaq/sp136001-136500/sp136311.exe</S>
       <S N="FileName">sp136311.exe</S>
     </MS>
   </Obj>
@@ -1582,7 +1582,7 @@
           <S>8836</S>
         </LST>
       </Obj>
-      <S N="DriverPackUrl">https://ftp.hp.com/pub/softpaq/sp113001-113500/sp113466.exe</S>
+      <S N="Url">https://ftp.hp.com/pub/softpaq/sp113001-113500/sp113466.exe</S>
       <S N="FileName">sp113466.exe</S>
     </MS>
   </Obj>
@@ -1605,7 +1605,7 @@
           <S>8835</S>
         </LST>
       </Obj>
-      <S N="DriverPackUrl">https://ftp.hp.com/pub/softpaq/sp123501-124000/sp123510.exe</S>
+      <S N="Url">https://ftp.hp.com/pub/softpaq/sp123501-124000/sp123510.exe</S>
       <S N="FileName">sp123510.exe</S>
     </MS>
   </Obj>
@@ -1624,7 +1624,7 @@
           <S>8835</S>
         </LST>
       </Obj>
-      <S N="DriverPackUrl">https://ftp.hp.com/pub/softpaq/sp136001-136500/sp136309.exe</S>
+      <S N="Url">https://ftp.hp.com/pub/softpaq/sp136001-136500/sp136309.exe</S>
       <S N="FileName">sp136309.exe</S>
     </MS>
   </Obj>
@@ -1643,7 +1643,7 @@
           <S>8835</S>
         </LST>
       </Obj>
-      <S N="DriverPackUrl">https://ftp.hp.com/pub/softpaq/sp111001-111500/sp111033.exe</S>
+      <S N="Url">https://ftp.hp.com/pub/softpaq/sp111001-111500/sp111033.exe</S>
       <S N="FileName">sp111033.exe</S>
     </MS>
   </Obj>
@@ -1663,7 +1663,7 @@
           <S>8882</S>
         </LST>
       </Obj>
-      <S N="DriverPackUrl">https://ftp.hp.com/pub/softpaq/sp121001-121500/sp121400.exe</S>
+      <S N="Url">https://ftp.hp.com/pub/softpaq/sp121001-121500/sp121400.exe</S>
       <S N="FileName">sp121400.exe</S>
     </MS>
   </Obj>
@@ -1681,7 +1681,7 @@
           <S>8882</S>
         </LST>
       </Obj>
-      <S N="DriverPackUrl">https://ftp.hp.com/pub/softpaq/sp136001-136500/sp136360.exe</S>
+      <S N="Url">https://ftp.hp.com/pub/softpaq/sp136001-136500/sp136360.exe</S>
       <S N="FileName">sp136360.exe</S>
     </MS>
   </Obj>
@@ -1698,7 +1698,7 @@
           <S>8884</S>
         </LST>
       </Obj>
-      <S N="DriverPackUrl">https://ftp.hp.com/pub/softpaq/sp121001-121500/sp121401.exe</S>
+      <S N="Url">https://ftp.hp.com/pub/softpaq/sp121001-121500/sp121401.exe</S>
       <S N="FileName">sp121401.exe</S>
     </MS>
   </Obj>
@@ -1715,7 +1715,7 @@
           <S>8884</S>
         </LST>
       </Obj>
-      <S N="DriverPackUrl">https://ftp.hp.com/pub/softpaq/sp136001-136500/sp136310.exe</S>
+      <S N="Url">https://ftp.hp.com/pub/softpaq/sp136001-136500/sp136310.exe</S>
       <S N="FileName">sp136310.exe</S>
     </MS>
   </Obj>
@@ -1742,7 +1742,7 @@
           <S>2179</S>
         </LST>
       </Obj>
-      <S N="DriverPackUrl">https://ftp.hp.com/pub/softpaq/sp96501-97000/sp96758.exe</S>
+      <S N="Url">https://ftp.hp.com/pub/softpaq/sp96501-97000/sp96758.exe</S>
       <S N="FileName">sp96758.exe</S>
     </MS>
   </Obj>
@@ -1763,7 +1763,7 @@
           <S>83eb</S>
         </LST>
       </Obj>
-      <S N="DriverPackUrl">https://ftp.hp.com/pub/softpaq/sp114001-114500/sp114256.exe</S>
+      <S N="Url">https://ftp.hp.com/pub/softpaq/sp114001-114500/sp114256.exe</S>
       <S N="FileName">sp114256.exe</S>
     </MS>
   </Obj>
@@ -1784,7 +1784,7 @@
           <S>83ea</S>
         </LST>
       </Obj>
-      <S N="DriverPackUrl">https://ftp.hp.com/pub/softpaq/sp101501-102000/sp101775.exe</S>
+      <S N="Url">https://ftp.hp.com/pub/softpaq/sp101501-102000/sp101775.exe</S>
       <S N="FileName">sp101775.exe</S>
     </MS>
   </Obj>
@@ -1826,7 +1826,7 @@
           <S>845a</S>
         </LST>
       </Obj>
-      <S N="DriverPackUrl">https://ftp.hp.com/pub/softpaq/sp114001-114500/sp114276.exe</S>
+      <S N="Url">https://ftp.hp.com/pub/softpaq/sp114001-114500/sp114276.exe</S>
       <S N="FileName">sp114276.exe</S>
     </MS>
   </Obj>
@@ -1856,7 +1856,7 @@
           <S>83ee</S>
         </LST>
       </Obj>
-      <S N="DriverPackUrl">https://ftp.hp.com/pub/softpaq/sp103501-104000/sp103581.exe</S>
+      <S N="Url">https://ftp.hp.com/pub/softpaq/sp103501-104000/sp103581.exe</S>
       <S N="FileName">sp103581.exe</S>
     </MS>
   </Obj>
@@ -1873,7 +1873,7 @@
           <S>889F</S>
         </LST>
       </Obj>
-      <S N="DriverPackUrl">https://ftp.hp.com/pub/softpaq/sp136001-136500/sp136423.exe</S>
+      <S N="Url">https://ftp.hp.com/pub/softpaq/sp136001-136500/sp136423.exe</S>
       <S N="FileName">sp136423.exe</S>
     </MS>
   </Obj>
@@ -1890,7 +1890,7 @@
           <S>889c</S>
         </LST>
       </Obj>
-      <S N="DriverPackUrl">https://ftp.hp.com/pub/softpaq/sp136001-136500/sp136262.exe</S>
+      <S N="Url">https://ftp.hp.com/pub/softpaq/sp136001-136500/sp136262.exe</S>
       <S N="FileName">sp136262.exe</S>
     </MS>
   </Obj>
@@ -1907,7 +1907,7 @@
           <S>889c</S>
         </LST>
       </Obj>
-      <S N="DriverPackUrl">https://ftp.hp.com/pub/softpaq/sp113001-113500/sp113167.exe</S>
+      <S N="Url">https://ftp.hp.com/pub/softpaq/sp113001-113500/sp113167.exe</S>
       <S N="FileName">sp113167.exe</S>
     </MS>
   </Obj>
@@ -1926,7 +1926,7 @@
           <S>805e</S>
         </LST>
       </Obj>
-      <S N="DriverPackUrl">https://ftp.hp.com/pub/softpaq/sp105501-106000/sp105920.exe</S>
+      <S N="Url">https://ftp.hp.com/pub/softpaq/sp105501-106000/sp105920.exe</S>
       <S N="FileName">sp105920.exe</S>
     </MS>
   </Obj>
@@ -1945,7 +1945,7 @@
           <S>805e</S>
         </LST>
       </Obj>
-      <S N="DriverPackUrl">https://ftp.hp.com/pub/softpaq/sp100501-101000/sp100850.exe</S>
+      <S N="Url">https://ftp.hp.com/pub/softpaq/sp100501-101000/sp100850.exe</S>
       <S N="FileName">sp100850.exe</S>
     </MS>
   </Obj>
@@ -1969,7 +1969,7 @@
           <S>805d</S>
         </LST>
       </Obj>
-      <S N="DriverPackUrl">https://ftp.hp.com/pub/softpaq/sp100501-101000/sp100851.exe</S>
+      <S N="Url">https://ftp.hp.com/pub/softpaq/sp100501-101000/sp100851.exe</S>
       <S N="FileName">sp100851.exe</S>
     </MS>
   </Obj>
@@ -1993,7 +1993,7 @@
           <S>805d</S>
         </LST>
       </Obj>
-      <S N="DriverPackUrl">https://ftp.hp.com/pub/softpaq/sp95001-95500/sp95330.exe</S>
+      <S N="Url">https://ftp.hp.com/pub/softpaq/sp95001-95500/sp95330.exe</S>
       <S N="FileName">sp95330.exe</S>
     </MS>
   </Obj>
@@ -2028,7 +2028,7 @@
           <S>82b5</S>
         </LST>
       </Obj>
-      <S N="DriverPackUrl">https://ftp.hp.com/pub/softpaq/sp105501-106000/sp105672.exe</S>
+      <S N="Url">https://ftp.hp.com/pub/softpaq/sp105501-106000/sp105672.exe</S>
       <S N="FileName">sp105672.exe</S>
     </MS>
   </Obj>
@@ -2064,7 +2064,7 @@
           <S>82a6</S>
         </LST>
       </Obj>
-      <S N="DriverPackUrl">https://ftp.hp.com/pub/softpaq/sp111501-112000/sp111958.exe</S>
+      <S N="Url">https://ftp.hp.com/pub/softpaq/sp111501-112000/sp111958.exe</S>
       <S N="FileName">sp111958.exe</S>
     </MS>
   </Obj>
@@ -2075,7 +2075,7 @@
       <DT N="ReleaseDate">2021-08-11T00:00:00</DT>
       <S N="Name">HP Engage Flex Mini Win10 x64 Driver Pack 2.00 A 1</S>
       <S N="Product">8715</S>
-      <S N="DriverPackUrl">https://ftp.hp.com/pub/softpaq/sp132501-133000/sp132842.exe</S>
+      <S N="Url">https://ftp.hp.com/pub/softpaq/sp132501-133000/sp132842.exe</S>
       <S N="FileName">sp132842.exe</S>
     </MS>
   </Obj>
@@ -2086,7 +2086,7 @@
       <DT N="ReleaseDate">2021-11-16T00:00:00</DT>
       <S N="Name">HP Engage Flex Mini Win11 x64 Driver Pack 1.00 A 1</S>
       <S N="Product">8715</S>
-      <S N="DriverPackUrl">https://ftp.hp.com/pub/softpaq/sp136001-136500/sp136215.exe</S>
+      <S N="Url">https://ftp.hp.com/pub/softpaq/sp136001-136500/sp136215.exe</S>
       <S N="FileName">sp136215.exe</S>
     </MS>
   </Obj>
@@ -2104,7 +2104,7 @@
           <S>8476</S>
         </LST>
       </Obj>
-      <S N="DriverPackUrl">https://ftp.hp.com/pub/softpaq/sp112501-113000/sp112554.exe</S>
+      <S N="Url">https://ftp.hp.com/pub/softpaq/sp112501-113000/sp112554.exe</S>
       <S N="FileName">sp112554.exe</S>
     </MS>
   </Obj>
@@ -2122,7 +2122,7 @@
           <S>8476</S>
         </LST>
       </Obj>
-      <S N="DriverPackUrl">https://ftp.hp.com/pub/softpaq/sp136001-136500/sp136312.exe</S>
+      <S N="Url">https://ftp.hp.com/pub/softpaq/sp136001-136500/sp136312.exe</S>
       <S N="FileName">sp136312.exe</S>
     </MS>
   </Obj>
@@ -2133,7 +2133,7 @@
       <DT N="ReleaseDate">2021-12-01T00:00:00</DT>
       <S N="Name">HP Engage Go 10 Mobile System Win10 x64 Driver Pack 2.00 A 1</S>
       <S N="Product">888c</S>
-      <S N="DriverPackUrl">https://ftp.hp.com/pub/softpaq/sp136001-136500/sp136477.exe</S>
+      <S N="Url">https://ftp.hp.com/pub/softpaq/sp136001-136500/sp136477.exe</S>
       <S N="FileName">sp136477.exe</S>
     </MS>
   </Obj>
@@ -2144,7 +2144,7 @@
       <DT N="ReleaseDate">2021-11-29T00:00:00</DT>
       <S N="Name">HP Engage Go 10 Mobile System Win11 x64 Driver Pack 1.00 A 1</S>
       <S N="Product">888c</S>
-      <S N="DriverPackUrl">https://ftp.hp.com/pub/softpaq/sp136001-136500/sp136404.exe</S>
+      <S N="Url">https://ftp.hp.com/pub/softpaq/sp136001-136500/sp136404.exe</S>
       <S N="FileName">sp136404.exe</S>
     </MS>
   </Obj>
@@ -2155,7 +2155,7 @@
       <DT N="ReleaseDate">2021-01-29T00:00:00</DT>
       <S N="Name">HP Engage Go G1 Win10 x64 Driver Pack 6.00 A 1</S>
       <S N="Product">846f</S>
-      <S N="DriverPackUrl">https://ftp.hp.com/pub/softpaq/sp112001-112500/sp112432.exe</S>
+      <S N="Url">https://ftp.hp.com/pub/softpaq/sp112001-112500/sp112432.exe</S>
       <S N="FileName">sp112432.exe</S>
     </MS>
   </Obj>
@@ -2166,7 +2166,7 @@
       <DT N="ReleaseDate">2021-02-03T00:00:00</DT>
       <S N="Name">HP Engage One G1 Win10 x64 Driver Pack 9.00 A 1</S>
       <S N="Product">830a</S>
-      <S N="DriverPackUrl">https://ftp.hp.com/pub/softpaq/sp112501-113000/sp112581.exe</S>
+      <S N="Url">https://ftp.hp.com/pub/softpaq/sp112501-113000/sp112581.exe</S>
       <S N="FileName">sp112581.exe</S>
     </MS>
   </Obj>
@@ -2183,7 +2183,7 @@
           <S>874F</S>
         </LST>
       </Obj>
-      <S N="DriverPackUrl">https://ftp.hp.com/pub/softpaq/sp113501-114000/sp113747.exe</S>
+      <S N="Url">https://ftp.hp.com/pub/softpaq/sp113501-114000/sp113747.exe</S>
       <S N="FileName">sp113747.exe</S>
     </MS>
   </Obj>
@@ -2200,7 +2200,7 @@
           <S>8740</S>
         </LST>
       </Obj>
-      <S N="DriverPackUrl">https://ftp.hp.com/pub/softpaq/sp136001-136500/sp136298.exe</S>
+      <S N="Url">https://ftp.hp.com/pub/softpaq/sp136001-136500/sp136298.exe</S>
       <S N="FileName">sp136298.exe</S>
     </MS>
   </Obj>
@@ -2211,7 +2211,7 @@
       <DT N="ReleaseDate">2019-12-30T00:00:00</DT>
       <S N="Name">HP Folio 1040 G3 Windows 10 x64 Driver Pack 16.0 A 1</S>
       <S N="Product">80fa</S>
-      <S N="DriverPackUrl">https://ftp.hp.com/pub/softpaq/sp101001-101500/sp101080.exe</S>
+      <S N="Url">https://ftp.hp.com/pub/softpaq/sp101001-101500/sp101080.exe</S>
       <S N="FileName">sp101080.exe</S>
     </MS>
   </Obj>
@@ -2222,7 +2222,7 @@
       <DT N="ReleaseDate">2018-11-02T00:00:00</DT>
       <S N="Name">HP MP9 G2 Win10 x64 Driver Pack 2.00 A 1</S>
       <S N="Product">8055</S>
-      <S N="DriverPackUrl">https://ftp.hp.com/pub/softpaq/sp92001-92500/sp92266.exe</S>
+      <S N="Url">https://ftp.hp.com/pub/softpaq/sp92001-92500/sp92266.exe</S>
       <S N="FileName">sp92266.exe</S>
     </MS>
   </Obj>
@@ -2239,7 +2239,7 @@
           <S>83ef</S>
         </LST>
       </Obj>
-      <S N="DriverPackUrl">https://ftp.hp.com/pub/softpaq/sp133001-133500/sp133118.exe</S>
+      <S N="Url">https://ftp.hp.com/pub/softpaq/sp133001-133500/sp133118.exe</S>
       <S N="FileName">sp133118.exe</S>
     </MS>
   </Obj>
@@ -2250,7 +2250,7 @@
       <DT N="ReleaseDate">2017-02-24T00:00:00</DT>
       <S N="Name">HP Pro Tablet 608 G1 Windows 10 x64 Driver Pack 5.00 A 1</S>
       <S N="Product">8042</S>
-      <S N="DriverPackUrl">https://ftp.hp.com/pub/softpaq/sp79001-79500/sp79217.exe</S>
+      <S N="Url">https://ftp.hp.com/pub/softpaq/sp79001-79500/sp79217.exe</S>
       <S N="FileName">sp79217.exe</S>
     </MS>
   </Obj>
@@ -2261,7 +2261,7 @@
       <DT N="ReleaseDate">2019-05-29T00:00:00</DT>
       <S N="Name">HP Pro x2 612 G1 Tablet Windows 10 x64 Driver Pack 7.00 A 1</S>
       <S N="Product">221b</S>
-      <S N="DriverPackUrl">https://ftp.hp.com/pub/softpaq/sp96501-97000/sp96751.exe</S>
+      <S N="Url">https://ftp.hp.com/pub/softpaq/sp96501-97000/sp96751.exe</S>
       <S N="FileName">sp96751.exe</S>
     </MS>
   </Obj>
@@ -2272,7 +2272,7 @@
       <DT N="ReleaseDate">2021-01-05T00:00:00</DT>
       <S N="Name">HP Pro x2 612 G2 Windows 10 x64 Driver Pack 19.0 A 1</S>
       <S N="Product">828b</S>
-      <S N="DriverPackUrl">https://ftp.hp.com/pub/softpaq/sp112001-112500/sp112093.exe</S>
+      <S N="Url">https://ftp.hp.com/pub/softpaq/sp112001-112500/sp112093.exe</S>
       <S N="FileName">sp112093.exe</S>
     </MS>
   </Obj>
@@ -2283,7 +2283,7 @@
       <DT N="ReleaseDate">2018-09-25T00:00:00</DT>
       <S N="Name">HP Pro x2 612 RS G2 Win10 x64 Driver Pack 1.00 A 1</S>
       <S N="Product">828b</S>
-      <S N="DriverPackUrl">https://ftp.hp.com/pub/softpaq/sp88001-88500/sp88417.exe</S>
+      <S N="Url">https://ftp.hp.com/pub/softpaq/sp88001-88500/sp88417.exe</S>
       <S N="FileName">sp88417.exe</S>
     </MS>
   </Obj>
@@ -2302,7 +2302,7 @@
           <S>80ef</S>
         </LST>
       </Obj>
-      <S N="DriverPackUrl">https://ftp.hp.com/pub/softpaq/sp101001-101500/sp101087.exe</S>
+      <S N="Url">https://ftp.hp.com/pub/softpaq/sp101001-101500/sp101087.exe</S>
       <S N="FileName">sp101087.exe</S>
     </MS>
   </Obj>
@@ -2319,7 +2319,7 @@
           <S>823c</S>
         </LST>
       </Obj>
-      <S N="DriverPackUrl">https://ftp.hp.com/pub/softpaq/sp112001-112500/sp112154.exe</S>
+      <S N="Url">https://ftp.hp.com/pub/softpaq/sp112001-112500/sp112154.exe</S>
       <S N="FileName">sp112154.exe</S>
     </MS>
   </Obj>
@@ -2336,7 +2336,7 @@
           <S>8370</S>
         </LST>
       </Obj>
-      <S N="DriverPackUrl">https://ftp.hp.com/pub/softpaq/sp111501-112000/sp111865.exe</S>
+      <S N="Url">https://ftp.hp.com/pub/softpaq/sp111501-112000/sp111865.exe</S>
       <S N="FileName">sp111865.exe</S>
     </MS>
   </Obj>
@@ -2362,7 +2362,7 @@
           <S>2247</S>
         </LST>
       </Obj>
-      <S N="DriverPackUrl">https://ftp.hp.com/pub/softpaq/sp92501-93000/sp92635.exe</S>
+      <S N="Url">https://ftp.hp.com/pub/softpaq/sp92501-93000/sp92635.exe</S>
       <S N="FileName">sp92635.exe</S>
     </MS>
   </Obj>
@@ -2381,7 +2381,7 @@
           <S>8102</S>
         </LST>
       </Obj>
-      <S N="DriverPackUrl">https://ftp.hp.com/pub/softpaq/sp101001-101500/sp101088.exe</S>
+      <S N="Url">https://ftp.hp.com/pub/softpaq/sp101001-101500/sp101088.exe</S>
       <S N="FileName">sp101088.exe</S>
     </MS>
   </Obj>
@@ -2401,7 +2401,7 @@
           <S>8234</S>
         </LST>
       </Obj>
-      <S N="DriverPackUrl">https://ftp.hp.com/pub/softpaq/sp105501-106000/sp105834.exe</S>
+      <S N="Url">https://ftp.hp.com/pub/softpaq/sp105501-106000/sp105834.exe</S>
       <S N="FileName">sp105834.exe</S>
     </MS>
   </Obj>
@@ -2420,7 +2420,7 @@
           <S>837f</S>
         </LST>
       </Obj>
-      <S N="DriverPackUrl">https://ftp.hp.com/pub/softpaq/sp115001-115500/sp115298.exe</S>
+      <S N="Url">https://ftp.hp.com/pub/softpaq/sp115001-115500/sp115298.exe</S>
       <S N="FileName">sp115298.exe</S>
     </MS>
   </Obj>
@@ -2441,7 +2441,7 @@
           <S>85aa</S>
         </LST>
       </Obj>
-      <S N="DriverPackUrl">https://ftp.hp.com/pub/softpaq/sp113501-114000/sp113701.exe</S>
+      <S N="Url">https://ftp.hp.com/pub/softpaq/sp113501-114000/sp113701.exe</S>
       <S N="FileName">sp113701.exe</S>
     </MS>
   </Obj>
@@ -2461,7 +2461,7 @@
           <S>86a8</S>
         </LST>
       </Obj>
-      <S N="DriverPackUrl">https://ftp.hp.com/pub/softpaq/sp110001-110500/sp110123.exe</S>
+      <S N="Url">https://ftp.hp.com/pub/softpaq/sp110001-110500/sp110123.exe</S>
       <S N="FileName">sp110123.exe</S>
     </MS>
   </Obj>
@@ -2481,7 +2481,7 @@
           <S>86a8</S>
         </LST>
       </Obj>
-      <S N="DriverPackUrl">https://ftp.hp.com/pub/softpaq/sp114001-114500/sp114212.exe</S>
+      <S N="Url">https://ftp.hp.com/pub/softpaq/sp114001-114500/sp114212.exe</S>
       <S N="FileName">sp114212.exe</S>
     </MS>
   </Obj>
@@ -2545,7 +2545,7 @@
           <S>8809</S>
         </LST>
       </Obj>
-      <S N="DriverPackUrl">https://ftp.hp.com/pub/softpaq/sp114001-114500/sp114062.exe</S>
+      <S N="Url">https://ftp.hp.com/pub/softpaq/sp114001-114500/sp114062.exe</S>
       <S N="FileName">sp114062.exe</S>
     </MS>
   </Obj>
@@ -2577,7 +2577,7 @@
           <S>8809</S>
         </LST>
       </Obj>
-      <S N="DriverPackUrl">https://ftp.hp.com/pub/softpaq/sp136001-136500/sp136227.exe</S>
+      <S N="Url">https://ftp.hp.com/pub/softpaq/sp136001-136500/sp136227.exe</S>
       <S N="FileName">sp136227.exe</S>
     </MS>
   </Obj>
@@ -2598,7 +2598,7 @@
           <S>2236</S>
         </LST>
       </Obj>
-      <S N="DriverPackUrl">https://ftp.hp.com/pub/softpaq/sp92501-93000/sp92636.exe</S>
+      <S N="Url">https://ftp.hp.com/pub/softpaq/sp92501-93000/sp92636.exe</S>
       <S N="FileName">sp92636.exe</S>
     </MS>
   </Obj>
@@ -2609,7 +2609,7 @@
       <DT N="ReleaseDate">2021-06-11T00:00:00</DT>
       <S N="Name">HP ProBook 4x5 G6 Windows 10 x64 Driver Pack 7.00 A 1</S>
       <S N="Product">85d9</S>
-      <S N="DriverPackUrl">https://ftp.hp.com/pub/softpaq/sp114001-114500/sp114179.exe</S>
+      <S N="Url">https://ftp.hp.com/pub/softpaq/sp114001-114500/sp114179.exe</S>
       <S N="FileName">sp114179.exe</S>
     </MS>
   </Obj>
@@ -2626,7 +2626,7 @@
           <S>876b</S>
         </LST>
       </Obj>
-      <S N="DriverPackUrl">https://ftp.hp.com/pub/softpaq/sp115001-115500/sp115296.exe</S>
+      <S N="Url">https://ftp.hp.com/pub/softpaq/sp115001-115500/sp115296.exe</S>
       <S N="FileName">sp115296.exe</S>
     </MS>
   </Obj>
@@ -2647,7 +2647,7 @@
           <S>8867</S>
         </LST>
       </Obj>
-      <S N="DriverPackUrl">https://ftp.hp.com/pub/softpaq/sp113501-114000/sp113578.exe</S>
+      <S N="Url">https://ftp.hp.com/pub/softpaq/sp113501-114000/sp113578.exe</S>
       <S N="FileName">sp113578.exe</S>
     </MS>
   </Obj>
@@ -2658,7 +2658,7 @@
       <DT N="ReleaseDate">2021-06-11T00:00:00</DT>
       <S N="Name">HP ProBook 4x5R G6 Windows 10 x64 Driver Pack 7.00 A 1</S>
       <S N="Product">85ad</S>
-      <S N="DriverPackUrl">https://ftp.hp.com/pub/softpaq/sp114001-114500/sp114178.exe</S>
+      <S N="Url">https://ftp.hp.com/pub/softpaq/sp114001-114500/sp114178.exe</S>
       <S N="FileName">sp114178.exe</S>
     </MS>
   </Obj>
@@ -2669,7 +2669,7 @@
       <DT N="ReleaseDate">2021-05-03T00:00:00</DT>
       <S N="Name">HP ProBook 635 Aero G7 Windows 10 x64 Driver Pack 3.00 A 1</S>
       <S N="Product">8830</S>
-      <S N="DriverPackUrl">https://ftp.hp.com/pub/softpaq/sp113501-114000/sp113589.exe</S>
+      <S N="Url">https://ftp.hp.com/pub/softpaq/sp113501-114000/sp113589.exe</S>
       <S N="FileName">sp113589.exe</S>
     </MS>
   </Obj>
@@ -2680,7 +2680,7 @@
       <DT N="ReleaseDate">2021-06-08T00:00:00</DT>
       <S N="Name">HP ProBook 635 Aero G8 Windows 10 x64 Driver Pack 2.00 A 1</S>
       <S N="Product">8892</S>
-      <S N="DriverPackUrl">https://ftp.hp.com/pub/softpaq/sp114001-114500/sp114158.exe</S>
+      <S N="Url">https://ftp.hp.com/pub/softpaq/sp114001-114500/sp114158.exe</S>
       <S N="FileName">sp114158.exe</S>
     </MS>
   </Obj>
@@ -2691,7 +2691,7 @@
       <DT N="ReleaseDate">2021-11-29T00:00:00</DT>
       <S N="Name">HP ProBook 635 Aero G8 Windows 11 Driver Pack 1.00 A 1</S>
       <S N="Product">8892</S>
-      <S N="DriverPackUrl">https://ftp.hp.com/pub/softpaq/sp136001-136500/sp136396.exe</S>
+      <S N="Url">https://ftp.hp.com/pub/softpaq/sp136001-136500/sp136396.exe</S>
       <S N="FileName">sp136396.exe</S>
     </MS>
   </Obj>
@@ -2712,7 +2712,7 @@
           <S>2101</S>
         </LST>
       </Obj>
-      <S N="DriverPackUrl">https://ftp.hp.com/pub/softpaq/sp96501-97000/sp96757.exe</S>
+      <S N="Url">https://ftp.hp.com/pub/softpaq/sp96501-97000/sp96757.exe</S>
       <S N="FileName">sp96757.exe</S>
     </MS>
   </Obj>
@@ -2729,7 +2729,7 @@
           <S>82ab</S>
         </LST>
       </Obj>
-      <S N="DriverPackUrl">https://ftp.hp.com/pub/softpaq/sp105501-106000/sp105734.exe</S>
+      <S N="Url">https://ftp.hp.com/pub/softpaq/sp105501-106000/sp105734.exe</S>
       <S N="FileName">sp105734.exe</S>
     </MS>
   </Obj>
@@ -2747,7 +2747,7 @@
           <S>8416</S>
         </LST>
       </Obj>
-      <S N="DriverPackUrl">https://ftp.hp.com/pub/softpaq/sp114001-114500/sp114195.exe</S>
+      <S N="Url">https://ftp.hp.com/pub/softpaq/sp114001-114500/sp114195.exe</S>
       <S N="FileName">sp114195.exe</S>
     </MS>
   </Obj>
@@ -2764,7 +2764,7 @@
           <S>856e</S>
         </LST>
       </Obj>
-      <S N="DriverPackUrl">https://ftp.hp.com/pub/softpaq/sp114001-114500/sp114135.exe</S>
+      <S N="Url">https://ftp.hp.com/pub/softpaq/sp114001-114500/sp114135.exe</S>
       <S N="FileName">sp114135.exe</S>
     </MS>
   </Obj>
@@ -2781,7 +2781,7 @@
           <S>882d</S>
         </LST>
       </Obj>
-      <S N="DriverPackUrl">https://ftp.hp.com/pub/softpaq/sp113001-113500/sp113465.exe</S>
+      <S N="Url">https://ftp.hp.com/pub/softpaq/sp113001-113500/sp113465.exe</S>
       <S N="FileName">sp113465.exe</S>
     </MS>
   </Obj>
@@ -2800,7 +2800,7 @@
           <S>87ED</S>
         </LST>
       </Obj>
-      <S N="DriverPackUrl">https://ftp.hp.com/pub/softpaq/sp114001-114500/sp114068.exe</S>
+      <S N="Url">https://ftp.hp.com/pub/softpaq/sp114001-114500/sp114068.exe</S>
       <S N="FileName">sp114068.exe</S>
     </MS>
   </Obj>
@@ -2819,7 +2819,7 @@
           <S>87EA</S>
         </LST>
       </Obj>
-      <S N="DriverPackUrl">https://ftp.hp.com/pub/softpaq/sp136001-136500/sp136221.exe</S>
+      <S N="Url">https://ftp.hp.com/pub/softpaq/sp136001-136500/sp136221.exe</S>
       <S N="FileName">sp136221.exe</S>
     </MS>
   </Obj>
@@ -2830,7 +2830,7 @@
       <DT N="ReleaseDate">2019-05-29T00:00:00</DT>
       <S N="Name">HP ProBook 6x5 G1 Windows 10 x64 Driver Pack 2.00 A 1</S>
       <S N="Product">1992</S>
-      <S N="DriverPackUrl">https://ftp.hp.com/pub/softpaq/sp96501-97000/sp96756.exe</S>
+      <S N="Url">https://ftp.hp.com/pub/softpaq/sp96501-97000/sp96756.exe</S>
       <S N="FileName">sp96756.exe</S>
     </MS>
   </Obj>
@@ -2841,7 +2841,7 @@
       <DT N="ReleaseDate">2021-01-05T00:00:00</DT>
       <S N="Name">HP Probook 6x5 G3 Windows 10 x64 Driver Pack 18.0 A 1</S>
       <S N="Product">823a</S>
-      <S N="DriverPackUrl">https://ftp.hp.com/pub/softpaq/sp112001-112500/sp112091.exe</S>
+      <S N="Url">https://ftp.hp.com/pub/softpaq/sp112001-112500/sp112091.exe</S>
       <S N="FileName">sp112091.exe</S>
     </MS>
   </Obj>
@@ -2852,7 +2852,7 @@
       <DT N="ReleaseDate">2021-06-22T00:00:00</DT>
       <S N="Name">HP Probook 6x5 G4 Windows 10 x64 Driver Pack 10.00 A 1</S>
       <S N="Product">8401</S>
-      <S N="DriverPackUrl">https://ftp.hp.com/pub/softpaq/sp114001-114500/sp114239.exe</S>
+      <S N="Url">https://ftp.hp.com/pub/softpaq/sp114001-114500/sp114239.exe</S>
       <S N="FileName">sp114239.exe</S>
     </MS>
   </Obj>
@@ -2873,7 +2873,7 @@
           <S>80fd</S>
         </LST>
       </Obj>
-      <S N="DriverPackUrl">https://ftp.hp.com/pub/softpaq/sp101001-101500/sp101083.exe</S>
+      <S N="Url">https://ftp.hp.com/pub/softpaq/sp101001-101500/sp101083.exe</S>
       <S N="FileName">sp101083.exe</S>
     </MS>
   </Obj>
@@ -2884,7 +2884,7 @@
       <DT N="ReleaseDate">2019-12-02T00:00:00</DT>
       <S N="Name">HP ProBook x360 11 G1 Windows 10 x64 Driver Pack 11.0 A 1</S>
       <S N="Product">82ee</S>
-      <S N="DriverPackUrl">https://ftp.hp.com/pub/softpaq/sp100001-100500/sp100366.exe</S>
+      <S N="Url">https://ftp.hp.com/pub/softpaq/sp100001-100500/sp100366.exe</S>
       <S N="FileName">sp100366.exe</S>
     </MS>
   </Obj>
@@ -2895,7 +2895,7 @@
       <DT N="ReleaseDate">2020-01-06T00:00:00</DT>
       <S N="Name">HP ProBook x360 11 G2 Win 10 x64 Driver Pack 10.0 A 1</S>
       <S N="Product">8334</S>
-      <S N="DriverPackUrl">https://ftp.hp.com/pub/softpaq/sp100501-101000/sp100808.exe</S>
+      <S N="Url">https://ftp.hp.com/pub/softpaq/sp100501-101000/sp100808.exe</S>
       <S N="FileName">sp100808.exe</S>
     </MS>
   </Obj>
@@ -2906,7 +2906,7 @@
       <DT N="ReleaseDate">2020-06-22T00:00:00</DT>
       <S N="Name">HP ProBook x360 11 G2 Windows 10 x64 Driver Pack 11.0 A 1</S>
       <S N="Product">8334</S>
-      <S N="DriverPackUrl">https://ftp.hp.com/pub/softpaq/sp105501-106000/sp105669.exe</S>
+      <S N="Url">https://ftp.hp.com/pub/softpaq/sp105501-106000/sp105669.exe</S>
       <S N="FileName">sp105669.exe</S>
     </MS>
   </Obj>
@@ -2917,7 +2917,7 @@
       <DT N="ReleaseDate">2020-12-21T00:00:00</DT>
       <S N="Name">HP ProBook x360 11 G3 Windows 10 x64 Driver Pack 7.00 A 1</S>
       <S N="Product">8521</S>
-      <S N="DriverPackUrl">https://ftp.hp.com/pub/softpaq/sp111501-112000/sp111752.exe</S>
+      <S N="Url">https://ftp.hp.com/pub/softpaq/sp111501-112000/sp111752.exe</S>
       <S N="FileName">sp111752.exe</S>
     </MS>
   </Obj>
@@ -2928,7 +2928,7 @@
       <DT N="ReleaseDate">2021-06-08T00:00:00</DT>
       <S N="Name">HP ProBook x360 11 G4 Windows 10 x64 Driver Pack 9.00 A 1</S>
       <S N="Product">8524</S>
-      <S N="DriverPackUrl">https://ftp.hp.com/pub/softpaq/sp114001-114500/sp114146.exe</S>
+      <S N="Url">https://ftp.hp.com/pub/softpaq/sp114001-114500/sp114146.exe</S>
       <S N="FileName">sp114146.exe</S>
     </MS>
   </Obj>
@@ -2939,7 +2939,7 @@
       <DT N="ReleaseDate">2021-06-09T00:00:00</DT>
       <S N="Name">HP ProBook x360 11 G5 Windows 10 x64 Driver Pack 7.00 A 1</S>
       <S N="Product">86cf</S>
-      <S N="DriverPackUrl">https://ftp.hp.com/pub/softpaq/sp114001-114500/sp114160.exe</S>
+      <S N="Url">https://ftp.hp.com/pub/softpaq/sp114001-114500/sp114160.exe</S>
       <S N="FileName">sp114160.exe</S>
     </MS>
   </Obj>
@@ -2950,7 +2950,7 @@
       <DT N="ReleaseDate">2021-09-15T00:00:00</DT>
       <S N="Name">HP ProBook x360 11 G6 Windows 10 x64 Driver Pack 7.00 A 1</S>
       <S N="Product">86d0</S>
-      <S N="DriverPackUrl">https://ftp.hp.com/pub/softpaq/sp134501-135000/sp134540.exe</S>
+      <S N="Url">https://ftp.hp.com/pub/softpaq/sp134501-135000/sp134540.exe</S>
       <S N="FileName">sp134540.exe</S>
     </MS>
   </Obj>
@@ -2961,7 +2961,7 @@
       <DT N="ReleaseDate">2021-04-22T00:00:00</DT>
       <S N="Name">HP ProBook x360 11 G7 Windows 10 x64 Driver Pack 2.00 A 1</S>
       <S N="Product">887D</S>
-      <S N="DriverPackUrl">https://ftp.hp.com/pub/softpaq/sp113001-113500/sp113444.exe</S>
+      <S N="Url">https://ftp.hp.com/pub/softpaq/sp113001-113500/sp113444.exe</S>
       <S N="FileName">sp113444.exe</S>
     </MS>
   </Obj>
@@ -2972,7 +2972,7 @@
       <DT N="ReleaseDate">2021-11-18T00:00:00</DT>
       <S N="Name">HP ProBook x360 11 G7 Windows 11 Driver Pack 1.00 A 1</S>
       <S N="Product">887D</S>
-      <S N="DriverPackUrl">https://ftp.hp.com/pub/softpaq/sp136001-136500/sp136241.exe</S>
+      <S N="Url">https://ftp.hp.com/pub/softpaq/sp136001-136500/sp136241.exe</S>
       <S N="FileName">sp136241.exe</S>
     </MS>
   </Obj>
@@ -2983,7 +2983,7 @@
       <DT N="ReleaseDate">2020-04-22T00:00:00</DT>
       <S N="Name">HP ProBook x360 435 G7 Win 10 x64 Driver Pack 1.00 A 1</S>
       <S N="Product">8735</S>
-      <S N="DriverPackUrl">https://ftp.hp.com/pub/softpaq/sp103501-104000/sp103625.exe</S>
+      <S N="Url">https://ftp.hp.com/pub/softpaq/sp103501-104000/sp103625.exe</S>
       <S N="FileName">sp103625.exe</S>
     </MS>
   </Obj>
@@ -2994,7 +2994,7 @@
       <DT N="ReleaseDate">2021-06-03T00:00:00</DT>
       <S N="Name">HP ProBook x360 435 G7 Windows 10 x64 Driver Pack 5.00 A 1</S>
       <S N="Product">8735</S>
-      <S N="DriverPackUrl">https://ftp.hp.com/pub/softpaq/sp114001-114500/sp114097.exe</S>
+      <S N="Url">https://ftp.hp.com/pub/softpaq/sp114001-114500/sp114097.exe</S>
       <S N="FileName">sp114097.exe</S>
     </MS>
   </Obj>
@@ -3005,7 +3005,7 @@
       <DT N="ReleaseDate">2021-04-23T00:00:00</DT>
       <S N="Name">HP ProBook x360 435 G8 Windows 10 x64 Driver Pack 2.00 A 1</S>
       <S N="Product">8886</S>
-      <S N="DriverPackUrl">https://ftp.hp.com/pub/softpaq/sp113001-113500/sp113445.exe</S>
+      <S N="Url">https://ftp.hp.com/pub/softpaq/sp113001-113500/sp113445.exe</S>
       <S N="FileName">sp113445.exe</S>
     </MS>
   </Obj>
@@ -3016,7 +3016,7 @@
       <DT N="ReleaseDate">2021-11-26T00:00:00</DT>
       <S N="Name">HP ProBook x360 435 G8 Windows 11 Driver Pack 1.00 A 1</S>
       <S N="Product">8886</S>
-      <S N="DriverPackUrl">https://ftp.hp.com/pub/softpaq/sp136001-136500/sp136364.exe</S>
+      <S N="Url">https://ftp.hp.com/pub/softpaq/sp136001-136500/sp136364.exe</S>
       <S N="FileName">sp136364.exe</S>
     </MS>
   </Obj>
@@ -3027,7 +3027,7 @@
       <DT N="ReleaseDate">2021-06-22T00:00:00</DT>
       <S N="Name">HP ProBook x360 440 G1 Windows 10 x64 Driver Pack 11.00 A 1</S>
       <S N="Product">84d8</S>
-      <S N="DriverPackUrl">https://ftp.hp.com/pub/softpaq/sp114001-114500/sp114238.exe</S>
+      <S N="Url">https://ftp.hp.com/pub/softpaq/sp114001-114500/sp114238.exe</S>
       <S N="FileName">sp114238.exe</S>
     </MS>
   </Obj>
@@ -3038,7 +3038,7 @@
       <DT N="ReleaseDate">2021-06-24T00:00:00</DT>
       <S N="Name">HP ProDesk 405 G4 DM Win 10 Driver Pack 9.00 A 1</S>
       <S N="Product">8626</S>
-      <S N="DriverPackUrl">https://ftp.hp.com/pub/softpaq/sp114001-114500/sp114258.exe</S>
+      <S N="Url">https://ftp.hp.com/pub/softpaq/sp114001-114500/sp114258.exe</S>
       <S N="FileName">sp114258.exe</S>
     </MS>
   </Obj>
@@ -3049,7 +3049,7 @@
       <DT N="ReleaseDate">2019-04-02T00:00:00</DT>
       <S N="Name">HP ProDesk 405 G4 DM Win 10 x64 Driver Pack 1.00 A 1</S>
       <S N="Product">8626</S>
-      <S N="DriverPackUrl">https://ftp.hp.com/pub/softpaq/sp95001-95500/sp95002.exe</S>
+      <S N="Url">https://ftp.hp.com/pub/softpaq/sp95001-95500/sp95002.exe</S>
       <S N="FileName">sp95002.exe</S>
     </MS>
   </Obj>
@@ -3060,7 +3060,7 @@
       <DT N="ReleaseDate">2020-01-27T00:00:00</DT>
       <S N="Name">HP ProDesk 405 G4 DM Windows 10 Driver Pack 5.00 A 1</S>
       <S N="Product">8626</S>
-      <S N="DriverPackUrl">https://ftp.hp.com/pub/softpaq/sp101001-101500/sp101450.exe</S>
+      <S N="Url">https://ftp.hp.com/pub/softpaq/sp101001-101500/sp101450.exe</S>
       <S N="FileName">sp101450.exe</S>
     </MS>
   </Obj>
@@ -3071,7 +3071,7 @@
       <DT N="ReleaseDate">2021-06-24T00:00:00</DT>
       <S N="Name">HP ProDesk 405 G4 SFF Win 10 Driver Pack 6.00 A 1</S>
       <S N="Product">83e8</S>
-      <S N="DriverPackUrl">https://ftp.hp.com/pub/softpaq/sp114001-114500/sp114259.exe</S>
+      <S N="Url">https://ftp.hp.com/pub/softpaq/sp114001-114500/sp114259.exe</S>
       <S N="FileName">sp114259.exe</S>
     </MS>
   </Obj>
@@ -3082,7 +3082,7 @@
       <DT N="ReleaseDate">2020-10-05T00:00:00</DT>
       <S N="Name">HP ProDesk 405 G4 SFF Windows 10 Driver Pack 5.00 A 1</S>
       <S N="Product">83e8</S>
-      <S N="DriverPackUrl">https://ftp.hp.com/pub/softpaq/sp110001-110500/sp110349.exe</S>
+      <S N="Url">https://ftp.hp.com/pub/softpaq/sp110001-110500/sp110349.exe</S>
       <S N="FileName">sp110349.exe</S>
     </MS>
   </Obj>
@@ -3093,7 +3093,7 @@
       <DT N="ReleaseDate">2019-11-26T00:00:00</DT>
       <S N="Name">HP ProDesk 405 G4 SFF Windows 10 x64 Driver Pack 2.00 A 1</S>
       <S N="Product">83e8</S>
-      <S N="DriverPackUrl">https://ftp.hp.com/pub/softpaq/sp100001-100500/sp100259.exe</S>
+      <S N="Url">https://ftp.hp.com/pub/softpaq/sp100001-100500/sp100259.exe</S>
       <S N="FileName">sp100259.exe</S>
     </MS>
   </Obj>
@@ -3115,7 +3115,7 @@
           <S>846e</S>
         </LST>
       </Obj>
-      <S N="DriverPackUrl">https://ftp.hp.com/pub/softpaq/sp105501-106000/sp105758.exe</S>
+      <S N="Url">https://ftp.hp.com/pub/softpaq/sp105501-106000/sp105758.exe</S>
       <S N="FileName">sp105758.exe</S>
     </MS>
   </Obj>
@@ -3137,7 +3137,7 @@
           <S>82a1</S>
         </LST>
       </Obj>
-      <S N="DriverPackUrl">https://ftp.hp.com/pub/softpaq/sp111501-112000/sp111982.exe</S>
+      <S N="Url">https://ftp.hp.com/pub/softpaq/sp111501-112000/sp111982.exe</S>
       <S N="FileName">sp111982.exe</S>
     </MS>
   </Obj>
@@ -3157,7 +3157,7 @@
           <S>83f0</S>
         </LST>
       </Obj>
-      <S N="DriverPackUrl">https://ftp.hp.com/pub/softpaq/sp114001-114500/sp114246.exe</S>
+      <S N="Url">https://ftp.hp.com/pub/softpaq/sp114001-114500/sp114246.exe</S>
       <S N="FileName">sp114246.exe</S>
     </MS>
   </Obj>
@@ -3177,7 +3177,7 @@
           <S>83f0</S>
         </LST>
       </Obj>
-      <S N="DriverPackUrl">https://ftp.hp.com/pub/softpaq/sp101501-102000/sp101758.exe</S>
+      <S N="Url">https://ftp.hp.com/pub/softpaq/sp101501-102000/sp101758.exe</S>
       <S N="FileName">sp101758.exe</S>
     </MS>
   </Obj>
@@ -3197,7 +3197,7 @@
           <S>859a</S>
         </LST>
       </Obj>
-      <S N="DriverPackUrl">https://ftp.hp.com/pub/softpaq/sp112501-113000/sp112656.exe</S>
+      <S N="Url">https://ftp.hp.com/pub/softpaq/sp112501-113000/sp112656.exe</S>
       <S N="FileName">sp112656.exe</S>
     </MS>
   </Obj>
@@ -3215,7 +3215,7 @@
           <S>859b</S>
         </LST>
       </Obj>
-      <S N="DriverPackUrl">https://ftp.hp.com/pub/softpaq/sp101001-101500/sp101210.exe</S>
+      <S N="Url">https://ftp.hp.com/pub/softpaq/sp101001-101500/sp101210.exe</S>
       <S N="FileName">sp101210.exe</S>
     </MS>
   </Obj>
@@ -3226,7 +3226,7 @@
       <DT N="ReleaseDate">2021-06-08T00:00:00</DT>
       <S N="Name">HP ProDesk 680 G4 MT Win 10 x64 Driver Pack 9.00 A 1</S>
       <S N="Product">8580</S>
-      <S N="DriverPackUrl">https://ftp.hp.com/pub/softpaq/sp114001-114500/sp114157.exe</S>
+      <S N="Url">https://ftp.hp.com/pub/softpaq/sp114001-114500/sp114157.exe</S>
       <S N="FileName">sp114157.exe</S>
     </MS>
   </Obj>
@@ -3237,7 +3237,7 @@
       <DT N="ReleaseDate">2019-10-22T00:00:00</DT>
       <S N="Name">HP ProDesk 680 G4 MT Windows 10 x64 Driver Pack 4.00 A 1</S>
       <S N="Product">8580</S>
-      <S N="DriverPackUrl">https://ftp.hp.com/pub/softpaq/sp99501-100000/sp99651.exe</S>
+      <S N="Url">https://ftp.hp.com/pub/softpaq/sp99501-100000/sp99651.exe</S>
       <S N="FileName">sp99651.exe</S>
     </MS>
   </Obj>
@@ -3316,7 +3316,7 @@
           <S>880f</S>
         </LST>
       </Obj>
-      <S N="DriverPackUrl">https://ftp.hp.com/pub/softpaq/sp123501-124000/sp123509.exe</S>
+      <S N="Url">https://ftp.hp.com/pub/softpaq/sp123501-124000/sp123509.exe</S>
       <S N="FileName">sp123509.exe</S>
     </MS>
   </Obj>
@@ -3349,7 +3349,7 @@
           <S>8810</S>
         </LST>
       </Obj>
-      <S N="DriverPackUrl">https://ftp.hp.com/pub/softpaq/sp136001-136500/sp136307.exe</S>
+      <S N="Url">https://ftp.hp.com/pub/softpaq/sp136001-136500/sp136307.exe</S>
       <S N="FileName">sp136307.exe</S>
     </MS>
   </Obj>
@@ -3360,7 +3360,7 @@
       <DT N="ReleaseDate">2019-05-30T00:00:00</DT>
       <S N="Name">HP RP5 5810 Win10 x64 Driver Pack 3.00 A 1</S>
       <S N="Product">2175</S>
-      <S N="DriverPackUrl">https://ftp.hp.com/pub/softpaq/sp94501-95000/sp94917.exe</S>
+      <S N="Url">https://ftp.hp.com/pub/softpaq/sp94501-95000/sp94917.exe</S>
       <S N="FileName">sp94917.exe</S>
     </MS>
   </Obj>
@@ -3379,7 +3379,7 @@
           <S>8139</S>
         </LST>
       </Obj>
-      <S N="DriverPackUrl">https://ftp.hp.com/pub/softpaq/sp112501-113000/sp112600.exe</S>
+      <S N="Url">https://ftp.hp.com/pub/softpaq/sp112501-113000/sp112600.exe</S>
       <S N="FileName">sp112600.exe</S>
     </MS>
   </Obj>
@@ -3396,7 +3396,7 @@
           <S>8197</S>
         </LST>
       </Obj>
-      <S N="DriverPackUrl">https://ftp.hp.com/pub/softpaq/sp80501-81000/sp80891.exe</S>
+      <S N="Url">https://ftp.hp.com/pub/softpaq/sp80501-81000/sp80891.exe</S>
       <S N="FileName">sp80891.exe</S>
     </MS>
   </Obj>
@@ -3407,7 +3407,7 @@
       <DT N="ReleaseDate">2017-10-20T00:00:00</DT>
       <S N="Name">HP Sprout Pro Windows 10 x64 Driver Pack 10.2017 B 1</S>
       <S N="Product">2b5c</S>
-      <S N="DriverPackUrl">https://ftp.hp.com/pub/softpaq/sp80001-80500/sp80155.exe</S>
+      <S N="Url">https://ftp.hp.com/pub/softpaq/sp80001-80500/sp80155.exe</S>
       <S N="FileName">sp80155.exe</S>
     </MS>
   </Obj>
@@ -3418,7 +3418,7 @@
       <DT N="ReleaseDate">2021-03-09T00:00:00</DT>
       <S N="Name">HP VR Backpack G2 Windows 10 x64 Driver Pack 5.00 A 1</S>
       <S N="Product">8590</S>
-      <S N="DriverPackUrl">https://ftp.hp.com/pub/softpaq/sp113001-113500/sp113140.exe</S>
+      <S N="Url">https://ftp.hp.com/pub/softpaq/sp113001-113500/sp113140.exe</S>
       <S N="FileName">sp113140.exe</S>
     </MS>
   </Obj>
@@ -3429,7 +3429,7 @@
       <DT N="ReleaseDate">2018-12-05T00:00:00</DT>
       <S N="Name">HP Z VR Backpack G1 Windows 10 x64 Driver Pack 12.2018 B 1</S>
       <S N="Product">8376</S>
-      <S N="DriverPackUrl">https://ftp.hp.com/pub/softpaq/sp93001-93500/sp93203.exe</S>
+      <S N="Url">https://ftp.hp.com/pub/softpaq/sp93001-93500/sp93203.exe</S>
       <S N="FileName">sp93203.exe</S>
     </MS>
   </Obj>
@@ -3440,7 +3440,7 @@
       <DT N="ReleaseDate">2019-05-07T00:00:00</DT>
       <S N="Name">HP Z VR Backpack G2 Windows 10 x64 Driver Pack 05.2019 A 1</S>
       <S N="Product">8590</S>
-      <S N="DriverPackUrl">https://ftp.hp.com/pub/softpaq/sp96001-96500/sp96024.exe</S>
+      <S N="Url">https://ftp.hp.com/pub/softpaq/sp96001-96500/sp96024.exe</S>
       <S N="FileName">sp96024.exe</S>
     </MS>
   </Obj>
@@ -3451,7 +3451,7 @@
       <DT N="ReleaseDate">2015-08-16T00:00:00</DT>
       <S N="Name">HP Z1 G2 Workstations Windows 10 x64 Driver Pack 1.00 A 1</S>
       <S N="Product">192F</S>
-      <S N="DriverPackUrl">https://ftp.hp.com/pub/softpaq/sp72001-72500/sp72467.exe</S>
+      <S N="Url">https://ftp.hp.com/pub/softpaq/sp72001-72500/sp72467.exe</S>
       <S N="FileName">sp72467.exe</S>
     </MS>
   </Obj>
@@ -3462,7 +3462,7 @@
       <DT N="ReleaseDate">2017-07-11T00:00:00</DT>
       <S N="Name">HP Z1G3 Windows 10 x64 Driver Pack 07.2017 B 1</S>
       <S N="Product">8115</S>
-      <S N="DriverPackUrl">https://ftp.hp.com/pub/softpaq/sp80501-81000/sp80814.exe</S>
+      <S N="Url">https://ftp.hp.com/pub/softpaq/sp80501-81000/sp80814.exe</S>
       <S N="FileName">sp80814.exe</S>
     </MS>
   </Obj>
@@ -3481,7 +3481,7 @@
           <S>82bf</S>
         </LST>
       </Obj>
-      <S N="DriverPackUrl">https://ftp.hp.com/pub/softpaq/sp92501-93000/sp92593.exe</S>
+      <S N="Url">https://ftp.hp.com/pub/softpaq/sp92501-93000/sp92593.exe</S>
       <S N="FileName">sp92593.exe</S>
     </MS>
   </Obj>
@@ -3498,7 +3498,7 @@
           <S>1905</S>
         </LST>
       </Obj>
-      <S N="DriverPackUrl">https://ftp.hp.com/pub/softpaq/sp72001-72500/sp72465.exe</S>
+      <S N="Url">https://ftp.hp.com/pub/softpaq/sp72001-72500/sp72465.exe</S>
       <S N="FileName">sp72465.exe</S>
     </MS>
   </Obj>
@@ -3515,7 +3515,7 @@
           <S>802f</S>
         </LST>
       </Obj>
-      <S N="DriverPackUrl">https://ftp.hp.com/pub/softpaq/sp99001-99500/sp99401.exe</S>
+      <S N="Url">https://ftp.hp.com/pub/softpaq/sp99001-99500/sp99401.exe</S>
       <S N="FileName">sp99401.exe</S>
     </MS>
   </Obj>
@@ -3536,7 +3536,7 @@
           <S>8458</S>
         </LST>
       </Obj>
-      <S N="DriverPackUrl">https://ftp.hp.com/pub/softpaq/sp112001-112500/sp112392.exe</S>
+      <S N="Url">https://ftp.hp.com/pub/softpaq/sp112001-112500/sp112392.exe</S>
       <S N="FileName">sp112392.exe</S>
     </MS>
   </Obj>
@@ -3563,7 +3563,7 @@
           <S>8752</S>
         </LST>
       </Obj>
-      <S N="DriverPackUrl">https://ftp.hp.com/pub/softpaq/sp135501-136000/sp135910.exe</S>
+      <S N="Url">https://ftp.hp.com/pub/softpaq/sp135501-136000/sp135910.exe</S>
       <S N="FileName">sp135910.exe</S>
     </MS>
   </Obj>
@@ -3584,7 +3584,7 @@
           <S>8751</S>
         </LST>
       </Obj>
-      <S N="DriverPackUrl">https://ftp.hp.com/pub/softpaq/sp136001-136500/sp136297.exe</S>
+      <S N="Url">https://ftp.hp.com/pub/softpaq/sp136001-136500/sp136297.exe</S>
       <S N="FileName">sp136297.exe</S>
     </MS>
   </Obj>
@@ -3607,7 +3607,7 @@
           <S>88BE</S>
         </LST>
       </Obj>
-      <S N="DriverPackUrl">https://ftp.hp.com/pub/softpaq/sp135501-136000/sp135909.exe</S>
+      <S N="Url">https://ftp.hp.com/pub/softpaq/sp135501-136000/sp135909.exe</S>
       <S N="FileName">sp135909.exe</S>
     </MS>
   </Obj>
@@ -3626,7 +3626,7 @@
           <S>0010</S>
         </LST>
       </Obj>
-      <S N="DriverPackUrl">https://ftp.hp.com/pub/softpaq/sp136001-136500/sp136296.exe</S>
+      <S N="Url">https://ftp.hp.com/pub/softpaq/sp136001-136500/sp136296.exe</S>
       <S N="FileName">sp136296.exe</S>
     </MS>
   </Obj>
@@ -3644,7 +3644,7 @@
           <S>158b</S>
         </LST>
       </Obj>
-      <S N="DriverPackUrl">https://ftp.hp.com/pub/softpaq/sp99001-99500/sp99374.exe</S>
+      <S N="Url">https://ftp.hp.com/pub/softpaq/sp99001-99500/sp99374.exe</S>
       <S N="FileName">sp99374.exe</S>
     </MS>
   </Obj>
@@ -3662,7 +3662,7 @@
           <S>2129</S>
         </LST>
       </Obj>
-      <S N="DriverPackUrl">https://ftp.hp.com/pub/softpaq/sp87501-88000/sp87513.exe</S>
+      <S N="Url">https://ftp.hp.com/pub/softpaq/sp87501-88000/sp87513.exe</S>
       <S N="FileName">sp87513.exe</S>
     </MS>
   </Obj>
@@ -3673,7 +3673,7 @@
       <DT N="ReleaseDate">2021-10-15T00:00:00</DT>
       <S N="Name">HP Z4G4 Windows 10 x64 Driver Pack 8.00 A 1</S>
       <S N="Product">81c5</S>
-      <S N="DriverPackUrl">https://ftp.hp.com/pub/softpaq/sp135501-136000/sp135907.exe</S>
+      <S N="Url">https://ftp.hp.com/pub/softpaq/sp135501-136000/sp135907.exe</S>
       <S N="FileName">sp135907.exe</S>
     </MS>
   </Obj>
@@ -3684,7 +3684,7 @@
       <DT N="ReleaseDate">2021-12-17T00:00:00</DT>
       <S N="Name">HP Z4G4 Windows 11 x64 Driver Pack 1.00 A 1</S>
       <S N="Product">81c5</S>
-      <S N="DriverPackUrl">https://ftp.hp.com/pub/softpaq/sp136001-136500/sp136295.exe</S>
+      <S N="Url">https://ftp.hp.com/pub/softpaq/sp136001-136500/sp136295.exe</S>
       <S N="FileName">sp136295.exe</S>
     </MS>
   </Obj>
@@ -3701,7 +3701,7 @@
           <S>81c7</S>
         </LST>
       </Obj>
-      <S N="DriverPackUrl">https://ftp.hp.com/pub/softpaq/sp135501-136000/sp135906.exe</S>
+      <S N="Url">https://ftp.hp.com/pub/softpaq/sp135501-136000/sp135906.exe</S>
       <S N="FileName">sp135906.exe</S>
     </MS>
   </Obj>
@@ -3718,7 +3718,7 @@
           <S>81c7</S>
         </LST>
       </Obj>
-      <S N="DriverPackUrl">https://ftp.hp.com/pub/softpaq/sp136001-136500/sp136150.exe</S>
+      <S N="Url">https://ftp.hp.com/pub/softpaq/sp136001-136500/sp136150.exe</S>
       <S N="FileName">sp136150.exe</S>
     </MS>
   </Obj>
@@ -3738,7 +3738,7 @@
           <S>8427</S>
         </LST>
       </Obj>
-      <S N="DriverPackUrl">https://ftp.hp.com/pub/softpaq/sp114001-114500/sp114252.exe</S>
+      <S N="Url">https://ftp.hp.com/pub/softpaq/sp114001-114500/sp114252.exe</S>
       <S N="FileName">sp114252.exe</S>
     </MS>
   </Obj>
@@ -3755,7 +3755,7 @@
           <S>2255</S>
         </LST>
       </Obj>
-      <S N="DriverPackUrl">https://ftp.hp.com/pub/softpaq/sp96501-97000/sp96754.exe</S>
+      <S N="Url">https://ftp.hp.com/pub/softpaq/sp96501-97000/sp96754.exe</S>
       <S N="FileName">sp96754.exe</S>
     </MS>
   </Obj>
@@ -3772,7 +3772,7 @@
           <S>80d6</S>
         </LST>
       </Obj>
-      <S N="DriverPackUrl">https://ftp.hp.com/pub/softpaq/sp100001-100500/sp100350.exe</S>
+      <S N="Url">https://ftp.hp.com/pub/softpaq/sp100001-100500/sp100350.exe</S>
       <S N="FileName">sp100350.exe</S>
     </MS>
   </Obj>
@@ -3789,7 +3789,7 @@
           <S>842d</S>
         </LST>
       </Obj>
-      <S N="DriverPackUrl">https://ftp.hp.com/pub/softpaq/sp103501-104000/sp103584.exe</S>
+      <S N="Url">https://ftp.hp.com/pub/softpaq/sp103501-104000/sp103584.exe</S>
       <S N="FileName">sp103584.exe</S>
     </MS>
   </Obj>
@@ -3806,7 +3806,7 @@
           <S>842d</S>
         </LST>
       </Obj>
-      <S N="DriverPackUrl">https://ftp.hp.com/pub/softpaq/sp114001-114500/sp114269.exe</S>
+      <S N="Url">https://ftp.hp.com/pub/softpaq/sp114001-114500/sp114269.exe</S>
       <S N="FileName">sp114269.exe</S>
     </MS>
   </Obj>
@@ -3823,7 +3823,7 @@
           <S>860c</S>
         </LST>
       </Obj>
-      <S N="DriverPackUrl">https://ftp.hp.com/pub/softpaq/sp114001-114500/sp114120.exe</S>
+      <S N="Url">https://ftp.hp.com/pub/softpaq/sp114001-114500/sp114120.exe</S>
       <S N="FileName">sp114120.exe</S>
     </MS>
   </Obj>
@@ -3834,7 +3834,7 @@
       <DT N="ReleaseDate">2021-10-19T00:00:00</DT>
       <S N="Name">HP ZBook 15v G5 Windows 10 x64 Driver Pack 6.00 A 1</S>
       <S N="Product">847b</S>
-      <S N="DriverPackUrl">https://ftp.hp.com/pub/softpaq/sp135501-136000/sp135797.exe</S>
+      <S N="Url">https://ftp.hp.com/pub/softpaq/sp135501-136000/sp135797.exe</S>
       <S N="FileName">sp135797.exe</S>
     </MS>
   </Obj>
@@ -3851,7 +3851,7 @@
           <S>8780</S>
         </LST>
       </Obj>
-      <S N="DriverPackUrl">https://ftp.hp.com/pub/softpaq/sp113501-114000/sp113944.exe</S>
+      <S N="Url">https://ftp.hp.com/pub/softpaq/sp113501-114000/sp113944.exe</S>
       <S N="FileName">sp113944.exe</S>
     </MS>
   </Obj>
@@ -3868,7 +3868,7 @@
           <S>886d</S>
         </LST>
       </Obj>
-      <S N="DriverPackUrl">https://ftp.hp.com/pub/softpaq/sp136001-136500/sp136447.exe</S>
+      <S N="Url">https://ftp.hp.com/pub/softpaq/sp136001-136500/sp136447.exe</S>
       <S N="FileName">sp136447.exe</S>
     </MS>
   </Obj>
@@ -3879,7 +3879,7 @@
       <DT N="ReleaseDate">2021-05-26T00:00:00</DT>
       <S N="Name">HP ZBook Power G7 Windows 10 x64 Driver Pack 4.00 A 1</S>
       <S N="Product">87EC</S>
-      <S N="DriverPackUrl">https://ftp.hp.com/pub/softpaq/sp114001-114500/sp114004.exe</S>
+      <S N="Url">https://ftp.hp.com/pub/softpaq/sp114001-114500/sp114004.exe</S>
       <S N="FileName">sp114004.exe</S>
     </MS>
   </Obj>
@@ -3890,7 +3890,7 @@
       <DT N="ReleaseDate">2021-05-21T00:00:00</DT>
       <S N="Name">HP ZBook Power G8 Windows 10 x64 Driver Pack 1.00 A 1</S>
       <S N="Product">888d</S>
-      <S N="DriverPackUrl">https://ftp.hp.com/pub/softpaq/sp113501-114000/sp113954.exe</S>
+      <S N="Url">https://ftp.hp.com/pub/softpaq/sp113501-114000/sp113954.exe</S>
       <S N="FileName">sp113954.exe</S>
     </MS>
   </Obj>
@@ -3901,7 +3901,7 @@
       <DT N="ReleaseDate">2021-11-22T00:00:00</DT>
       <S N="Name">HP ZBook Power G8 Windows 11 Driver Pack 1.00 A 1</S>
       <S N="Product">888d</S>
-      <S N="DriverPackUrl">https://ftp.hp.com/pub/softpaq/sp136001-136500/sp136286.exe</S>
+      <S N="Url">https://ftp.hp.com/pub/softpaq/sp136001-136500/sp136286.exe</S>
       <S N="FileName">sp136286.exe</S>
     </MS>
   </Obj>
@@ -3912,7 +3912,7 @@
       <DT N="ReleaseDate">2018-07-31T00:00:00</DT>
       <S N="Name">HP ZBook Studio G3 Win 10 x64 Driver Pack 13.0 A 1</S>
       <S N="Product">80d4</S>
-      <S N="DriverPackUrl">https://ftp.hp.com/pub/softpaq/sp90001-90500/sp90227.exe</S>
+      <S N="Url">https://ftp.hp.com/pub/softpaq/sp90001-90500/sp90227.exe</S>
       <S N="FileName">sp90227.exe</S>
     </MS>
   </Obj>
@@ -3923,7 +3923,7 @@
       <DT N="ReleaseDate">2020-01-02T00:00:00</DT>
       <S N="Name">HP ZBook Studio G3 Windows 10 x64 Driver Pack 17.0 A 1</S>
       <S N="Product">80d4</S>
-      <S N="DriverPackUrl">https://ftp.hp.com/pub/softpaq/sp101001-101500/sp101089.exe</S>
+      <S N="Url">https://ftp.hp.com/pub/softpaq/sp101001-101500/sp101089.exe</S>
       <S N="FileName">sp101089.exe</S>
     </MS>
   </Obj>
@@ -3934,7 +3934,7 @@
       <DT N="ReleaseDate">2021-05-21T00:00:00</DT>
       <S N="Name">HP ZBook Studio G7 Windows 10 x64 Driver Pack 6.00 A 1</S>
       <S N="Product">8736</S>
-      <S N="DriverPackUrl">https://ftp.hp.com/pub/softpaq/sp113501-114000/sp113952.exe</S>
+      <S N="Url">https://ftp.hp.com/pub/softpaq/sp113501-114000/sp113952.exe</S>
       <S N="FileName">sp113952.exe</S>
     </MS>
   </Obj>
@@ -3945,7 +3945,7 @@
       <DT N="ReleaseDate">2021-12-02T00:00:00</DT>
       <S N="Name">HP ZBook Studio/Create G8 Windows 10 x64 Driver Pack 4.00 A 1</S>
       <S N="Product">8873</S>
-      <S N="DriverPackUrl">https://ftp.hp.com/pub/softpaq/sp136001-136500/sp136488.exe</S>
+      <S N="Url">https://ftp.hp.com/pub/softpaq/sp136001-136500/sp136488.exe</S>
       <S N="FileName">sp136488.exe</S>
     </MS>
   </Obj>
@@ -3956,7 +3956,7 @@
       <DT N="ReleaseDate">2021-11-18T00:00:00</DT>
       <S N="Name">HP ZBook Studio/Create G8 Windows 11 Driver Pack 1.00 A 1</S>
       <S N="Product">8873</S>
-      <S N="DriverPackUrl">https://ftp.hp.com/pub/softpaq/sp136001-136500/sp136253.exe</S>
+      <S N="Url">https://ftp.hp.com/pub/softpaq/sp136001-136500/sp136253.exe</S>
       <S N="FileName">sp136253.exe</S>
     </MS>
   </Obj>
@@ -3967,7 +3967,7 @@
       <DT N="ReleaseDate">2019-03-22T00:00:00</DT>
       <S N="Name">HP ZBook x2 G4 Windows 10 x64 Driver Pack 7.00 A 1</S>
       <S N="Product">824c</S>
-      <S N="DriverPackUrl">https://ftp.hp.com/pub/softpaq/sp95001-95500/sp95452.exe</S>
+      <S N="Url">https://ftp.hp.com/pub/softpaq/sp95001-95500/sp95452.exe</S>
       <S N="FileName">sp95452.exe</S>
     </MS>
   </Obj>
@@ -3978,7 +3978,7 @@
       <DT N="ReleaseDate">2021-01-03T00:00:00</DT>
       <S N="Name">HP ZBook x2 Windows 10 x64 Driver Pack 12.0 A 1</S>
       <S N="Product">824c</S>
-      <S N="DriverPackUrl">https://ftp.hp.com/pub/softpaq/sp112001-112500/sp112035.exe</S>
+      <S N="Url">https://ftp.hp.com/pub/softpaq/sp112001-112500/sp112035.exe</S>
       <S N="FileName">sp112035.exe</S>
     </MS>
   </Obj>
@@ -3996,7 +3996,7 @@
           <S>826b</S>
         </LST>
       </Obj>
-      <S N="DriverPackUrl">https://ftp.hp.com/pub/softpaq/sp112001-112500/sp112002.exe</S>
+      <S N="Url">https://ftp.hp.com/pub/softpaq/sp112001-112500/sp112002.exe</S>
       <S N="FileName">sp112002.exe</S>
     </MS>
   </Obj>
@@ -4007,7 +4007,7 @@
       <DT N="ReleaseDate">2021-05-19T00:00:00</DT>
       <S N="Name">HP ZCentral 4R Windows 10 x64 Driver Pack 3.00 A 1</S>
       <S N="Product">873E</S>
-      <S N="DriverPackUrl">https://ftp.hp.com/pub/softpaq/sp113501-114000/sp113897.exe</S>
+      <S N="Url">https://ftp.hp.com/pub/softpaq/sp113501-114000/sp113897.exe</S>
       <S N="FileName">sp113897.exe</S>
     </MS>
   </Obj>
@@ -4026,7 +4026,7 @@
           <S>83fd</S>
         </LST>
       </Obj>
-      <S N="DriverPackUrl">https://ftp.hp.com/pub/softpaq/sp114001-114500/sp114245.exe</S>
+      <S N="Url">https://ftp.hp.com/pub/softpaq/sp114001-114500/sp114245.exe</S>
       <S N="FileName">sp114245.exe</S>
     </MS>
   </Obj>

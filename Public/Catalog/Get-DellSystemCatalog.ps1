@@ -132,7 +132,7 @@ function Get-DellSystemCatalog {
         @{Label="Name";Expression={($_.Name.Display.'#cdata-section'.Trim())};},
         #@{Label="Description";Expression={($_.Description.Display.'#cdata-section'.Trim())};},
         @{Label="DellVersion";Expression={$_.dellVersion};},
-        @{Label="DriverPackUrl";Expression={-join ($DownloadsBaseUrl, $_.path)};},
+        @{Label="Url";Expression={-join ($DownloadsBaseUrl, $_.path)};},
         @{Label="VendorVersion";Expression={$_.vendorVersion};},
         @{Label="Criticality";Expression={($_.Criticality.Display.'#cdata-section'.Trim())};},
         @{Label="FileName";Expression = {(split-path -leaf $_.path)};},
@@ -188,7 +188,7 @@ function Get-DellSystemCatalog {
     if ($PSBoundParameters.ContainsKey('DownloadPath')) {
         $Results = $Results | Out-GridView -Title 'Select one or more files to Download' -PassThru -ErrorAction Stop
         foreach ($Item in $Results) {
-            $OutFile = Save-WebFile -SourceUrl $Item.DriverPackUrl -DestinationDirectory $DownloadPath -DestinationName $Item.FileName -Verbose
+            $OutFile = Save-WebFile -SourceUrl $Item.Url -DestinationDirectory $DownloadPath -DestinationName $Item.FileName -Verbose
             $Item | ConvertTo-Json | Out-File "$($OutFile.FullName).json" -Encoding ascii -Width 2000 -Force
         }
     }

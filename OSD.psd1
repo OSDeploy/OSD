@@ -153,7 +153,6 @@ FunctionsToExport =
 'Get-EnablementPackage',
 'Get-FeatureUpdate',
 'Get-HpDriverPack',
-'Get-LenovoBiosUpdate',
 'Get-LenovoDriverPack',
 'Get-MicrosoftDriverPack',
 'Get-MsUpCat',
