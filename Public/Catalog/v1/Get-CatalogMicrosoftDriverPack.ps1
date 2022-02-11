@@ -421,7 +421,7 @@ $BaseCatalog = @'
         }
     }
     #=================================================
-    #   Test UseCatalog Cloud
+    #   Test Cloud Catalog
     #=================================================
 	if ($UseCatalog -eq 'Cloud') {
 		if (Test-WebConnection -Uri $CloudCatalogUri) {
@@ -433,7 +433,6 @@ $BaseCatalog = @'
 	}
     #=================================================
     #   UseCatalog Cloud
-	#	Need to get the Cloud Catalog to Local
     #=================================================
 	if ($UseCatalog -eq 'Cloud') {
 		$Results = $BaseCatalog | ConvertFrom-Json

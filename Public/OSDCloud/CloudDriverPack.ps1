@@ -88,7 +88,6 @@ function Get-CloudDriverPackDell {
 	}
     #=================================================
     #   UseCatalogFile Cloud
-	#	Need to get the Cloud Catalog to Local
     #=================================================
 	if ($UseCatalogFile -eq 'Cloud') {
 		Write-Verbose "Source: $CloudCatalogUri"

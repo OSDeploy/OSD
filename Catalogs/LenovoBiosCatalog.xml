@@ -1,0 +1,4479 @@
+<Objs Version="1.1.0.1" xmlns="http://schemas.microsoft.com/powershell/2004/04">
+  <Obj RefId="0">
+    <TN RefId="0">
+      <T>Selected.Microsoft.PowerShell.Commands.GroupInfo</T>
+      <T>System.Management.Automation.PSCustomObject</T>
+      <T>System.Object</T>
+    </TN>
+    <MS>
+      <S N="CatalogVersion">22.02.10</S>
+      <S N="SupportedModel">Lenovo 500w Gen 3</S>
+      <Obj N="SupportedProduct" RefId="1">
+        <TN RefId="1">
+          <T>System.Object[]</T>
+          <T>System.Array</T>
+          <T>System.Object</T>
+        </TN>
+        <LST>
+          <S>82J3</S>
+          <S>82J4</S>
+        </LST>
+      </Obj>
+      <S N="UEFIVersion">G6CN31WW</S>
+      <S N="ECPVersion">(none)</S>
+      <S N="Image">g6cn</S>
+      <S N="FileName">g6cn31ww.exe</S>
+      <S N="Url">https://download.lenovo.com/consumer/mobiles/g6cn31ww.exe</S>
+    </MS>
+  </Obj>
+  <Obj RefId="2">
+    <TNRef RefId="0" />
+    <MS>
+      <S N="CatalogVersion">22.02.10</S>
+      <S N="SupportedModel">Lenovo Tablet 10</S>
+      <Obj N="SupportedProduct" RefId="3">
+        <TNRef RefId="1" />
+        <LST>
+          <S>20L3</S>
+          <S>20L4</S>
+        </LST>
+      </Obj>
+      <S N="UEFIVersion">1.29</S>
+      <S N="ECPVersion">(none)</S>
+      <S N="Image">n29e</S>
+      <S N="FileName">n29et49w.exe</S>
+      <S N="Url">https://download.lenovo.com/pccbbs/mobiles/n29et49w.exe</S>
+    </MS>
+  </Obj>
+  <Obj RefId="4">
+    <TNRef RefId="0" />
+    <MS>
+      <S N="CatalogVersion">22.02.10</S>
+      <S N="SupportedModel">ThinkCentre M625Q</S>
+      <Obj N="SupportedProduct" RefId="5">
+        <TNRef RefId="1" />
+        <LST>
+          <S>10V2</S>
+          <S>10TF</S>
+          <S>10TK</S>
+          <S>10TJ</S>
+          <S>10V1</S>
+          <S>10UY</S>
+          <S>10TG</S>
+          <S>10TH</S>
+          <S>10V0</S>
+          <S>10TL</S>
+        </LST>
+      </Obj>
+      <S N="UEFIVersion">M1WKT42A</S>
+      <S N="ECPVersion">(none)</S>
+      <S N="Image">m1wj</S>
+      <S N="FileName">m1wjy42usa.exe</S>
+      <S N="Url">https://download.lenovo.com/pccbbs/thinkcentre_bios/m1wjy42usa.exe</S>
+    </MS>
+  </Obj>
+  <Obj RefId="6">
+    <TNRef RefId="0" />
+    <MS>
+      <S N="CatalogVersion">22.02.10</S>
+      <S N="SupportedModel">ThinkCentre M630E</S>
+      <Obj N="SupportedProduct" RefId="7">
+        <TNRef RefId="1" />
+        <LST>
+          <S>10YR</S>
+          <S>10YM</S>
+          <S>10YN</S>
+          <S>10YQ</S>
+        </LST>
+      </Obj>
+      <S N="UEFIVersion">M28KT28A</S>
+      <S N="ECPVersion">(none)</S>
+      <S N="Image">m28j</S>
+      <S N="FileName">m28jy28usa.exe</S>
+      <S N="Url">https://download.lenovo.com/pccbbs/thinkcentre_bios/m28jy28usa.exe</S>
+    </MS>
+  </Obj>
+  <Obj RefId="8">
+    <TNRef RefId="0" />
+    <MS>
+      <S N="CatalogVersion">22.02.10</S>
+      <Obj N="SupportedModel" RefId="9">
+        <TNRef RefId="1" />
+        <LST>
+          <S>ThinkCentre M700 THIN CLIENT</S>
+          <S>ThinkCentre M700 TINY</S>
+          <S>ThinkCentre M800</S>
+          <S>ThinkCentre M900</S>
+          <S>ThinkCentre M900X</S>
+        </LST>
+      </Obj>
+      <Obj N="SupportedProduct" RefId="10">
+        <TNRef RefId="1" />
+        <LST>
+          <S>10JQ</S>
+          <S>10JT</S>
+          <S>10JS</S>
+          <S>10JR</S>
+          <S>10HY</S>
+          <S>10JM</S>
+          <S>10J0</S>
+          <S>10JN</S>
+          <S>10FX</S>
+          <S>10FW</S>
+          <S>10FV</S>
+          <S>10FY</S>
+          <S>10FG</S>
+          <S>10FR</S>
+          <S>10FD</S>
+          <S>10FC</S>
+          <S>10FL</S>
+          <S>10FH</S>
+          <S>10NE</S>
+          <S>10NG</S>
+          <S>10ND</S>
+          <S>10FS</S>
+          <S>10FM</S>
+          <S>10NF</S>
+          <S>10LX</S>
+          <S>10LY</S>
+          <S>10M6</S>
+        </LST>
+      </Obj>
+      <S N="UEFIVersion">FWKTBCA</S>
+      <S N="ECPVersion">(none)</S>
+      <S N="Image">fwjy</S>
+      <S N="FileName">fwjybcusa.exe</S>
+      <S N="Url">https://download.lenovo.com/pccbbs/thinkcentre_bios/fwjybcusa.exe</S>
+    </MS>
+  </Obj>
+  <Obj RefId="11">
+    <TNRef RefId="0" />
+    <MS>
+      <S N="CatalogVersion">22.02.10</S>
+      <S N="SupportedModel">ThinkCentre M700 TOWER AND SMALL</S>
+      <Obj N="SupportedProduct" RefId="12">
+        <TNRef RefId="1" />
+        <LST>
+          <S>10GS</S>
+          <S>10KQ</S>
+          <S>10KN</S>
+          <S>10KM</S>
+          <S>10GQ</S>
+          <S>10KL</S>
+          <S>10GT</S>
+          <S>10GR</S>
+        </LST>
+      </Obj>
+      <S N="UEFIVersion">M05KT93A</S>
+      <S N="ECPVersion">(none)</S>
+      <S N="Image">m05j</S>
+      <S N="FileName">m05jy93usa.exe</S>
+      <S N="Url">https://download.lenovo.com/pccbbs/thinkcentre_bios/m05jy93usa.exe</S>
+    </MS>
+  </Obj>
+  <Obj RefId="13">
+    <TNRef RefId="0" />
+    <MS>
+      <S N="CatalogVersion">22.02.10</S>
+      <Obj N="SupportedModel" RefId="14">
+        <TNRef RefId="1" />
+        <LST>
+          <S>ThinkCentre M700Z</S>
+          <S>ThinkCentre M800Z</S>
+        </LST>
+      </Obj>
+      <Obj N="SupportedProduct" RefId="15">
+        <TNRef RefId="1" />
+        <LST>
+          <S>10EY</S>
+          <S>10LM</S>
+          <S>10F1</S>
+          <S>10EU</S>
+          <S>10EW</S>
+          <S>10ET</S>
+          <S>10EV</S>
+        </LST>
+      </Obj>
+      <S N="UEFIVersion">FVKT68A</S>
+      <S N="ECPVersion">(none)</S>
+      <S N="Image">fvjy</S>
+      <S N="FileName">fvjy68usa.exe</S>
+      <S N="Url">https://download.lenovo.com/pccbbs/thinkcentre_bios/fvjy68usa.exe</S>
+    </MS>
+  </Obj>
+  <Obj RefId="16">
+    <TNRef RefId="0" />
+    <MS>
+      <S N="CatalogVersion">22.02.10</S>
+      <S N="SupportedModel">ThinkCentre M70A</S>
+      <Obj N="SupportedProduct" RefId="17">
+        <TNRef RefId="1" />
+        <LST>
+          <S>11E2</S>
+          <S>11E3</S>
+          <S>11CL</S>
+          <S>11CK</S>
+        </LST>
+      </Obj>
+      <S N="UEFIVersion">M2SKT24A</S>
+      <S N="ECPVersion">(none)</S>
+      <S N="Image">m2sj</S>
+      <S N="FileName">m2sjy24usa.exe</S>
+      <S N="Url">https://download.lenovo.com/pccbbs/thinkcentre_bios/m2sjy24usa.exe</S>
+    </MS>
+  </Obj>
+  <Obj RefId="18">
+    <TNRef RefId="0" />
+    <MS>
+      <S N="CatalogVersion">22.02.10</S>
+      <S N="SupportedModel">ThinkCentre M70A Gen 2</S>
+      <Obj N="SupportedProduct" RefId="19">
+        <TNRef RefId="1" />
+        <LST>
+          <S>11K6</S>
+          <S>11K3</S>
+          <S>11K4</S>
+          <S>11K5</S>
+        </LST>
+      </Obj>
+      <S N="UEFIVersion">M3NKT18A</S>
+      <S N="ECPVersion">(none)</S>
+      <S N="Image">m3nj</S>
+      <S N="FileName">m3njy18usa.exe</S>
+      <S N="Url">https://download.lenovo.com/pccbbs/thinkcentre_bios/m3njy18usa.exe</S>
+    </MS>
+  </Obj>
+  <Obj RefId="20">
+    <TNRef RefId="0" />
+    <MS>
+      <S N="CatalogVersion">22.02.10</S>
+      <S N="SupportedModel">ThinkCentre M70C</S>
+      <Obj N="SupportedProduct" RefId="21">
+        <TNRef RefId="1" />
+        <LST>
+          <S>11GK</S>
+          <S>11GJ</S>
+          <S>11GL</S>
+          <S>11GM</S>
+        </LST>
+      </Obj>
+      <S N="UEFIVersion">M2VKT1DA</S>
+      <S N="ECPVersion">(none)</S>
+      <S N="Image">m2vj</S>
+      <S N="FileName">m2vjy1dusa.exe</S>
+      <S N="Url">https://download.lenovo.com/pccbbs/desktop/m2vjy1dusa.exe</S>
+    </MS>
+  </Obj>
+  <Obj RefId="22">
+    <TNRef RefId="0" />
+    <MS>
+      <S N="CatalogVersion">22.02.10</S>
+      <Obj N="SupportedModel" RefId="23">
+        <TNRef RefId="1" />
+        <LST>
+          <S>ThinkCentre M70Q Gen 2</S>
+          <S>ThinkStation P350 TINY</S>
+          <S>ThinkCentre M90Q Gen 2</S>
+        </LST>
+      </Obj>
+      <Obj N="SupportedProduct" RefId="24">
+        <TNRef RefId="1" />
+        <LST>
+          <S>11N3</S>
+          <S>11N4</S>
+          <S>11MY</S>
+          <S>11N0</S>
+          <S>30EH</S>
+          <S>30EG</S>
+          <S>30EF</S>
+          <S>30EJ</S>
+          <S>11MU</S>
+          <S>11MV</S>
+          <S>11MR</S>
+          <S>11MQ</S>
+        </LST>
+      </Obj>
+      <S N="UEFIVersion">M3JKT2DA</S>
+      <S N="ECPVersion">(none)</S>
+      <S N="Image">m3jj</S>
+      <S N="FileName">m3jjy2dusa.exe</S>
+      <S N="Url">https://download.lenovo.com/pccbbs/thinkcentre_bios/m3jjy2dusa.exe</S>
+    </MS>
+  </Obj>
+  <Obj RefId="25">
+    <TNRef RefId="0" />
+    <MS>
+      <S N="CatalogVersion">22.02.10</S>
+      <Obj N="SupportedModel" RefId="26">
+        <TNRef RefId="1" />
+        <LST>
+          <S>ThinkCentre M70S</S>
+          <S>ThinkCentre M70T</S>
+          <S>ThinkCentre M80S</S>
+          <S>ThinkCentre M80T</S>
+          <S>ThinkCentre M90S</S>
+          <S>ThinkCentre M90T</S>
+        </LST>
+      </Obj>
+      <Obj N="SupportedProduct" RefId="27">
+        <TNRef RefId="1" />
+        <LST>
+          <S>11EX</S>
+          <S>11DB</S>
+          <S>11DC</S>
+          <S>11EW</S>
+          <S>11EV</S>
+          <S>11D9</S>
+          <S>11EU</S>
+          <S>11DA</S>
+          <S>11CV</S>
+          <S>11EM</S>
+          <S>11CU</S>
+          <S>11EN</S>
+          <S>11CT</S>
+          <S>11CS</S>
+          <S>11EK</S>
+          <S>11EL</S>
+          <S>11D6</S>
+          <S>11D7</S>
+          <S>11D2</S>
+          <S>11D1</S>
+          <S>11D0</S>
+          <S>11D4</S>
+          <S>11D5</S>
+          <S>11CY</S>
+        </LST>
+      </Obj>
+      <S N="UEFIVersion">M2TKT4BA</S>
+      <S N="ECPVersion">(none)</S>
+      <S N="Image">m2tj</S>
+      <S N="FileName">m2tjy4busa.exe</S>
+      <S N="Url">https://download.lenovo.com/pccbbs/thinkcentre_bios/m2tjy4busa.exe</S>
+    </MS>
+  </Obj>
+  <Obj RefId="28">
+    <TNRef RefId="0" />
+    <MS>
+      <S N="CatalogVersion">22.02.10</S>
+      <S N="SupportedModel">ThinkCentre M710E</S>
+      <Obj N="SupportedProduct" RefId="29">
+        <TNRef RefId="1" />
+        <LST>
+          <S>10YD</S>
+          <S>10UR</S>
+          <S>10UQ</S>
+        </LST>
+      </Obj>
+      <S N="UEFIVersion">M1ZKT38A</S>
+      <S N="ECPVersion">(none)</S>
+      <S N="Image">m1zj</S>
+      <S N="FileName">m1zjy38usa.exe</S>
+      <S N="Url">https://download.lenovo.com/pccbbs/thinkcentre_bios/m1zjy38usa.exe</S>
+    </MS>
+  </Obj>
+  <Obj RefId="30">
+    <TNRef RefId="0" />
+    <MS>
+      <S N="CatalogVersion">22.02.10</S>
+      <Obj N="SupportedModel" RefId="31">
+        <TNRef RefId="1" />
+        <LST>
+          <S>ThinkCentre M710Q</S>
+          <S>ThinkCentre M710Q Type 10YC</S>
+          <S>ThinkCentre M910Q</S>
+          <S>ThinkCentre M910S</S>
+          <S>ThinkCentre M910T</S>
+          <S>ThinkCentre M910X</S>
+          <S>ThinkStation P320 TINY</S>
+        </LST>
+      </Obj>
+      <Obj N="SupportedProduct" RefId="32">
+        <TNRef RefId="1" />
+        <LST>
+          <S>10MS</S>
+          <S>10MQ</S>
+          <S>10MT</S>
+          <S>10N3</S>
+          <S>10QR</S>
+          <S>10MR</S>
+          <S>10YC</S>
+          <S>10MX</S>
+          <S>10MW</S>
+          <S>10MV</S>
+          <S>10MU</S>
+          <S>10QN</S>
+          <S>10QM</S>
+          <S>10NA</S>
+          <S>10ML</S>
+          <S>10MK</S>
+          <S>10MM</S>
+          <S>10N9</S>
+          <S>10MN</S>
+          <S>10QL</S>
+          <S>10N2</S>
+          <S>10QQ</S>
+          <S>10N1</S>
+          <S>10R4</S>
+          <S>10N0</S>
+          <S>10MY</S>
+          <S>30C2</S>
+          <S>30C1</S>
+          <S>30C3</S>
+        </LST>
+      </Obj>
+      <S N="UEFIVersion">M1AKT52A</S>
+      <S N="ECPVersion">(none)</S>
+      <S N="Image">m1aj</S>
+      <S N="FileName">m1ajy52usa.exe</S>
+      <S N="Url">https://download.lenovo.com/pccbbs/thinkcentre_bios/m1ajy52usa.exe</S>
+    </MS>
+  </Obj>
+  <Obj RefId="33">
+    <TNRef RefId="0" />
+    <MS>
+      <S N="CatalogVersion">22.02.10</S>
+      <Obj N="SupportedModel" RefId="34">
+        <TNRef RefId="1" />
+        <LST>
+          <S>ThinkCentre M710S</S>
+          <S>ThinkCentre M710T</S>
+        </LST>
+      </Obj>
+      <Obj N="SupportedProduct" RefId="35">
+        <TNRef RefId="1" />
+        <LST>
+          <S>10M8</S>
+          <S>10M7</S>
+          <S>10NC</S>
+          <S>10QT</S>
+          <S>10R7</S>
+          <S>10QK</S>
+          <S>10M9</S>
+          <S>10NB</S>
+          <S>10R8</S>
+          <S>10MA</S>
+        </LST>
+      </Obj>
+      <S N="UEFIVersion">M16KT68A</S>
+      <S N="ECPVersion">(none)</S>
+      <S N="Image">m16j</S>
+      <S N="FileName">m16jy68usa.exe</S>
+      <S N="Url">https://download.lenovo.com/pccbbs/thinkcentre_bios/m16jy68usa.exe</S>
+    </MS>
+  </Obj>
+  <Obj RefId="36">
+    <TNRef RefId="0" />
+    <MS>
+      <S N="CatalogVersion">22.02.10</S>
+      <S N="SupportedModel">ThinkCentre M715Q</S>
+      <Obj N="SupportedProduct" RefId="37">
+        <TNRef RefId="1" />
+        <LST>
+          <S>10M4</S>
+          <S>10RA</S>
+          <S>10RB</S>
+          <S>10M5</S>
+          <S>10RC</S>
+          <S>10M2</S>
+          <S>10RD</S>
+          <S>10M3</S>
+        </LST>
+      </Obj>
+      <S N="UEFIVersion">M11KT53A</S>
+      <S N="ECPVersion">(none)</S>
+      <S N="Image">m11j</S>
+      <S N="FileName">m11jy53usa.exe</S>
+      <S N="Url">https://download.lenovo.com/pccbbs/thinkcentre_bios/m11jy53usa.exe</S>
+    </MS>
+  </Obj>
+  <Obj RefId="38">
+    <TNRef RefId="0" />
+    <MS>
+      <S N="CatalogVersion">22.02.10</S>
+      <S N="SupportedModel">ThinkCentre M715Q 2nd Gen</S>
+      <Obj N="SupportedProduct" RefId="39">
+        <TNRef RefId="1" />
+        <LST>
+          <S>10VL</S>
+          <S>10VN</S>
+          <S>10VJ</S>
+          <S>10VG</S>
+          <S>10VQ</S>
+          <S>10VM</S>
+          <S>10VH</S>
+          <S>10VK</S>
+        </LST>
+      </Obj>
+      <S N="UEFIVersion">M1XKT55A</S>
+      <S N="ECPVersion">(none)</S>
+      <S N="Image">m1xj</S>
+      <S N="FileName">m1xjy55usa.exe</S>
+      <S N="Url">https://download.lenovo.com/pccbbs/thinkcentre_bios/m1xjy55usa.exe</S>
+    </MS>
+  </Obj>
+  <Obj RefId="40">
+    <TNRef RefId="0" />
+    <MS>
+      <S N="CatalogVersion">22.02.10</S>
+      <Obj N="SupportedModel" RefId="41">
+        <TNRef RefId="1" />
+        <LST>
+          <S>ThinkCentre M715S</S>
+          <S>ThinkCentre M715T</S>
+        </LST>
+      </Obj>
+      <Obj N="SupportedProduct" RefId="42">
+        <TNRef RefId="1" />
+        <LST>
+          <S>10MB</S>
+          <S>10MC</S>
+          <S>10ME</S>
+          <S>10MD</S>
+        </LST>
+      </Obj>
+      <S N="UEFIVersion">O2VKTA5A</S>
+      <S N="ECPVersion">(none)</S>
+      <S N="Image">o2vj</S>
+      <S N="FileName">o2vjya5usa.exe</S>
+      <S N="Url">https://download.lenovo.com/pccbbs/thinkcentre_bios/o2vjya5usa.exe</S>
+    </MS>
+  </Obj>
+  <Obj RefId="43">
+    <TNRef RefId="0" />
+    <MS>
+      <S N="CatalogVersion">22.02.10</S>
+      <S N="SupportedModel">ThinkCentre M720E</S>
+      <Obj N="SupportedProduct" RefId="44">
+        <TNRef RefId="1" />
+        <LST>
+          <S>11BE</S>
+          <S>11BD</S>
+        </LST>
+      </Obj>
+      <S N="UEFIVersion">M30KT26A</S>
+      <S N="ECPVersion">(none)</S>
+      <S N="Image">m30j</S>
+      <S N="FileName">m30jy26usa.exe</S>
+      <S N="Url">https://download.lenovo.com/pccbbs/thinkcentre_bios/m30jy26usa.exe</S>
+    </MS>
+  </Obj>
+  <Obj RefId="45">
+    <TNRef RefId="0" />
+    <MS>
+      <S N="CatalogVersion">22.02.10</S>
+      <Obj N="SupportedModel" RefId="46">
+        <TNRef RefId="1" />
+        <LST>
+          <S>ThinkCentre M720S</S>
+          <S>ThinkCentre M720T</S>
+          <S>ThinkCentre M920Q</S>
+          <S>ThinkCentre M920S</S>
+          <S>ThinkCentre M920T</S>
+          <S>ThinkCentre M920X</S>
+          <S>ThinkStation P330 TINY</S>
+          <S>ThinkCentre M720Q</S>
+        </LST>
+      </Obj>
+      <Obj N="SupportedProduct" RefId="47">
+        <TNRef RefId="1" />
+        <LST>
+          <S>10SV</S>
+          <S>10SX</S>
+          <S>10U6</S>
+          <S>10TR</S>
+          <S>10U7</S>
+          <S>10SU</S>
+          <S>10ST</S>
+          <S>10U5</S>
+          <S>10U4</S>
+          <S>10SW</S>
+          <S>10SQ</S>
+          <S>10SS</S>
+          <S>10TQ</S>
+          <S>10SR</S>
+          <S>10RS</S>
+          <S>10T1</S>
+          <S>10UH</S>
+          <S>10V8</S>
+          <S>10RR</S>
+          <S>10SY</S>
+          <S>10T2</S>
+          <S>10RT</S>
+          <S>10RU</S>
+          <S>10SL</S>
+          <S>10SJ</S>
+          <S>10TN</S>
+          <S>10SK</S>
+          <S>10U3</S>
+          <S>10U2</S>
+          <S>10U0</S>
+          <S>10U1</S>
+          <S>10SG</S>
+          <S>10TM</S>
+          <S>10SM</S>
+          <S>10SF</S>
+          <S>10SH</S>
+          <S>10T5</S>
+          <S>10S3</S>
+          <S>10S0</S>
+          <S>10T6</S>
+          <S>10S4</S>
+          <S>10UJ</S>
+          <S>10S2</S>
+          <S>10T3</S>
+          <S>10S1</S>
+          <S>30CF</S>
+          <S>30CG</S>
+          <S>30CE</S>
+          <S>30D6</S>
+          <S>30D5</S>
+          <S>30D7</S>
+          <S>10T7</S>
+          <S>10TA</S>
+          <S>10UA</S>
+          <S>10TC</S>
+          <S>10T8</S>
+          <S>10T9</S>
+          <S>10U9</S>
+          <S>10U8</S>
+        </LST>
+      </Obj>
+      <S N="UEFIVersion">M1UKT68A</S>
+      <S N="ECPVersion">(none)</S>
+      <S N="Image">m1uj</S>
+      <S N="FileName">m1ujy68usa.exe</S>
+      <S N="Url">https://download.lenovo.com/pccbbs/thinkcentre_bios/m1ujy68usa.exe</S>
+    </MS>
+  </Obj>
+  <Obj RefId="48">
+    <TNRef RefId="0" />
+    <MS>
+      <S N="CatalogVersion">22.02.10</S>
+      <S N="SupportedModel">ThinkCentre M725S</S>
+      <Obj N="SupportedProduct" RefId="49">
+        <TNRef RefId="1" />
+        <LST>
+          <S>10VU</S>
+          <S>10VT</S>
+        </LST>
+      </Obj>
+      <S N="UEFIVersion">M25KT5FA</S>
+      <S N="ECPVersion">(none)</S>
+      <S N="Image">m25j</S>
+      <S N="FileName">m25jy5fusa.exe</S>
+      <S N="Url">https://download.lenovo.com/pccbbs/thinkcentre_bios/m25jy5fusa.exe</S>
+    </MS>
+  </Obj>
+  <Obj RefId="50">
+    <TNRef RefId="0" />
+    <MS>
+      <S N="CatalogVersion">22.02.10</S>
+      <S N="SupportedModel">ThinkCentre M73</S>
+      <Obj N="SupportedProduct" RefId="51">
+        <TNRef RefId="1" />
+        <LST>
+          <S>10B3</S>
+          <S>10DL</S>
+          <S>10HK</S>
+          <S>10HM</S>
+          <S>10HL</S>
+          <S>10B5</S>
+          <S>10B7</S>
+          <S>10B4</S>
+          <S>10B1</S>
+          <S>10AX</S>
+          <S>10DN</S>
+          <S>10HJ</S>
+          <S>10B6</S>
+          <S>10B2</S>
+          <S>10DK</S>
+          <S>10AY</S>
+          <S>10DM</S>
+          <S>10B0</S>
+        </LST>
+      </Obj>
+      <S N="UEFIVersion">FCKT99A</S>
+      <S N="ECPVersion">(none)</S>
+      <S N="Image">fcjy</S>
+      <S N="FileName">fcjy99usa.exe</S>
+      <S N="Url">https://download.lenovo.com/pccbbs/thinkcentre_bios/fcjy99usa.exe</S>
+    </MS>
+  </Obj>
+  <Obj RefId="52">
+    <TNRef RefId="0" />
+    <MS>
+      <S N="CatalogVersion">22.02.10</S>
+      <Obj N="SupportedModel" RefId="53">
+        <TNRef RefId="1" />
+        <LST>
+          <S>ThinkCentre M73P</S>
+          <S>ThinkCentre M83</S>
+          <S>ThinkCentre M93</S>
+          <S>ThinkCentre M93P</S>
+        </LST>
+      </Obj>
+      <Obj N="SupportedProduct" RefId="54">
+        <TNRef RefId="1" />
+        <LST>
+          <S>10KC</S>
+          <S>10KA</S>
+          <S>10KB</S>
+          <S>10K9</S>
+          <S>10EA</S>
+          <S>10E8</S>
+          <S>10AH</S>
+          <S>10AG</S>
+          <S>10EB</S>
+          <S>10AK</S>
+          <S>10AL</S>
+          <S>10AM</S>
+          <S>10AJ</S>
+          <S>10AN</S>
+          <S>10E9</S>
+          <S>10BE</S>
+          <S>10A3</S>
+          <S>10A1</S>
+          <S>10DF</S>
+          <S>10A4</S>
+          <S>10A0</S>
+          <S>10A5</S>
+          <S>10A2</S>
+          <S>10DG</S>
+          <S>10AA</S>
+          <S>10A8</S>
+          <S>10DJ</S>
+          <S>10A6</S>
+          <S>10A7</S>
+          <S>10AB</S>
+          <S>10DH</S>
+          <S>10A9</S>
+        </LST>
+      </Obj>
+      <S N="UEFIVersion">FBKTE0A</S>
+      <S N="ECPVersion">(none)</S>
+      <S N="Image">fbjy</S>
+      <S N="FileName">fbjye0usa.exe</S>
+      <S N="Url">https://download.lenovo.com/pccbbs/thinkcentre_bios/fbjye0usa.exe</S>
+    </MS>
+  </Obj>
+  <Obj RefId="55">
+    <TNRef RefId="0" />
+    <MS>
+      <S N="CatalogVersion">22.02.10</S>
+      <S N="SupportedModel">ThinkCentre M75N</S>
+      <Obj N="SupportedProduct" RefId="56">
+        <TNRef RefId="1" />
+        <LST>
+          <S>11G4</S>
+          <S>11BT</S>
+          <S>11GW</S>
+          <S>11BX</S>
+          <S>11BS</S>
+          <S>11BW</S>
+          <S>11G5</S>
+          <S>11BU</S>
+          <S>11GX</S>
+          <S>11BV</S>
+          <S>11G7</S>
+          <S>11G6</S>
+        </LST>
+      </Obj>
+      <S N="UEFIVersion">M33KT24A</S>
+      <S N="ECPVersion">(none)</S>
+      <S N="Image">m33j</S>
+      <S N="FileName">m33jy24usa.exe</S>
+      <S N="Url">https://download.lenovo.com/pccbbs/thinkcentre_bios/m33jy24usa.exe</S>
+    </MS>
+  </Obj>
+  <Obj RefId="57">
+    <TNRef RefId="0" />
+    <MS>
+      <S N="CatalogVersion">22.02.10</S>
+      <Obj N="SupportedModel" RefId="58">
+        <TNRef RefId="1" />
+        <LST>
+          <S>ThinkCentre M75Q Gen 2</S>
+          <S>ThinkCentre ThinkCentre M75Q Gen 2</S>
+        </LST>
+      </Obj>
+      <Obj N="SupportedProduct" RefId="59">
+        <TNRef RefId="1" />
+        <LST>
+          <S>11JJ</S>
+          <S>11JM</S>
+          <S>11JK</S>
+          <S>11JL</S>
+        </LST>
+      </Obj>
+      <S N="UEFIVersion">M3CKT2FA</S>
+      <S N="ECPVersion">(none)</S>
+      <S N="Image">m3cj</S>
+      <S N="FileName">m3cjy2fusa.exe</S>
+      <S N="Url">https://download.lenovo.com/pccbbs/thinkcentre_bios/m3cjy2fusa.exe</S>
+    </MS>
+  </Obj>
+  <Obj RefId="60">
+    <TNRef RefId="0" />
+    <MS>
+      <S N="CatalogVersion">22.02.10</S>
+      <S N="SupportedModel">ThinkCentre M75Q Gen 2 Type 11JN 11JQ 11JR 11JS</S>
+      <Obj N="SupportedProduct" RefId="61">
+        <TNRef RefId="1" />
+        <LST>
+          <S>11JR</S>
+          <S>11JN</S>
+          <S>11JS</S>
+          <S>11JQ</S>
+        </LST>
+      </Obj>
+      <S N="UEFIVersion">M47KT1EA</S>
+      <S N="ECPVersion">(none)</S>
+      <S N="Image">m47j</S>
+      <S N="FileName">m47jy1eusa.exe</S>
+      <S N="Url">https://download.lenovo.com/pccbbs/thinkcentre_bios/m47jy1eusa.exe</S>
+    </MS>
+  </Obj>
+  <Obj RefId="62">
+    <TNRef RefId="0" />
+    <MS>
+      <S N="CatalogVersion">22.02.10</S>
+      <Obj N="SupportedModel" RefId="63">
+        <TNRef RefId="1" />
+        <LST>
+          <S>ThinkCentre M75Q-1</S>
+          <S>ThinkCentre M75Q 1</S>
+        </LST>
+      </Obj>
+      <Obj N="SupportedProduct" RefId="64">
+        <TNRef RefId="1" />
+        <LST>
+          <S>11A7</S>
+          <S>11A4</S>
+          <S>11A5</S>
+          <S>11A6</S>
+        </LST>
+      </Obj>
+      <S N="UEFIVersion">M2FKT2CA</S>
+      <S N="ECPVersion">(none)</S>
+      <S N="Image">m2fj</S>
+      <S N="FileName">m2fjy2cusa.exe</S>
+      <S N="Url">https://download.lenovo.com/pccbbs/thinkcentre_bios/m2fjy2cusa.exe</S>
+    </MS>
+  </Obj>
+  <Obj RefId="65">
+    <TNRef RefId="0" />
+    <MS>
+      <S N="CatalogVersion">22.02.10</S>
+      <Obj N="SupportedModel" RefId="66">
+        <TNRef RefId="1" />
+        <LST>
+          <S>ThinkCentre M75S Gen 2 CEZANNE</S>
+          <S>ThinkCentre M75T Gen 2 CEZANNE</S>
+        </LST>
+      </Obj>
+      <Obj N="SupportedProduct" RefId="67">
+        <TNRef RefId="1" />
+        <LST>
+          <S>11R8</S>
+          <S>11RA</S>
+          <S>11R7</S>
+          <S>11R9</S>
+          <S>11RE</S>
+          <S>11RC</S>
+          <S>11RB</S>
+          <S>11RD</S>
+        </LST>
+      </Obj>
+      <S N="UEFIVersion">M46KT22A</S>
+      <S N="ECPVersion">(none)</S>
+      <S N="Image">m46j</S>
+      <S N="FileName">m46jy22usa.exe</S>
+      <S N="Url">https://download.lenovo.com/pccbbs/thinkcentre_bios/m46jy22usa.exe</S>
+    </MS>
+  </Obj>
+  <Obj RefId="68">
+    <TNRef RefId="0" />
+    <MS>
+      <S N="CatalogVersion">22.02.10</S>
+      <Obj N="SupportedModel" RefId="69">
+        <TNRef RefId="1" />
+        <LST>
+          <S>ThinkCentre M75S Gen 2</S>
+          <S>ThinkCentre M75T Gen 2</S>
+          <S>ThinkCentre M75S Gen-2</S>
+        </LST>
+      </Obj>
+      <Obj N="SupportedProduct" RefId="70">
+        <TNRef RefId="1" />
+        <LST>
+          <S>11JD</S>
+          <S>11JC</S>
+          <S>11JB</S>
+          <S>11JA</S>
+          <S>11W3</S>
+          <S>11W4</S>
+          <S>11W2</S>
+          <S>11W1</S>
+          <S>11KC</S>
+          <S>11KD</S>
+          <S>11KB</S>
+          <S>11KE</S>
+          <S>11W8</S>
+          <S>11W6</S>
+          <S>11W5</S>
+          <S>11W7</S>
+        </LST>
+      </Obj>
+      <S N="UEFIVersion">M3AKT41A</S>
+      <S N="ECPVersion">(none)</S>
+      <S N="Image">m3aj</S>
+      <S N="FileName">m3ajy41usa.exe</S>
+      <S N="Url">https://download.lenovo.com/pccbbs/thinkcentre_bios/m3ajy41usa.exe</S>
+    </MS>
+  </Obj>
+  <Obj RefId="71">
+    <TNRef RefId="0" />
+    <MS>
+      <S N="CatalogVersion">22.02.10</S>
+      <Obj N="SupportedModel" RefId="72">
+        <TNRef RefId="1" />
+        <LST>
+          <S>ThinkCentre M75S-1</S>
+          <S>ThinkCentre M75S 1</S>
+        </LST>
+      </Obj>
+      <Obj N="SupportedProduct" RefId="73">
+        <TNRef RefId="1" />
+        <LST>
+          <S>11A9</S>
+          <S>11AA</S>
+          <S>11AV</S>
+          <S>11AW</S>
+        </LST>
+      </Obj>
+      <S N="UEFIVersion">M2CKT4BA</S>
+      <S N="ECPVersion">(none)</S>
+      <S N="Image">m2cj</S>
+      <S N="FileName">m2cjy4busa.exe</S>
+      <S N="Url">https://download.lenovo.com/pccbbs/desktop/m2cjy4busa.exe</S>
+    </MS>
+  </Obj>
+  <Obj RefId="74">
+    <TNRef RefId="0" />
+    <MS>
+      <S N="CatalogVersion">22.02.10</S>
+      <S N="SupportedModel">ThinkCentre M79</S>
+      <Obj N="SupportedProduct" RefId="75">
+        <TNRef RefId="1" />
+        <LST>
+          <S>10J7</S>
+          <S>10CR</S>
+          <S>10CN</S>
+          <S>10CT</S>
+          <S>10CU</S>
+          <S>10JB</S>
+          <S>10CV</S>
+          <S>10JC</S>
+          <S>10JA</S>
+          <S>10CS</S>
+          <S>10J8</S>
+          <S>10CW</S>
+          <S>10CQ</S>
+          <S>10J5</S>
+          <S>10J6</S>
+          <S>10J9</S>
+        </LST>
+      </Obj>
+      <S N="UEFIVersion">FPKT44A</S>
+      <S N="ECPVersion">(none)</S>
+      <S N="Image">fpjy</S>
+      <S N="FileName">fpjy44usa.exe</S>
+      <S N="Url">https://download.lenovo.com/pccbbs/thinkcentre_bios/fpjy44usa.exe</S>
+    </MS>
+  </Obj>
+  <Obj RefId="76">
+    <TNRef RefId="0" />
+    <MS>
+      <S N="CatalogVersion">22.02.10</S>
+      <Obj N="SupportedModel" RefId="77">
+        <TNRef RefId="1" />
+        <LST>
+          <S>ThinkCentre M80Q</S>
+          <S>ThinkCentre M70Q</S>
+          <S>ThinkCentre M90Q</S>
+          <S>ThinkStation P340 TINY</S>
+          <S>ThinkCentre M70Q Type 11e8</S>
+        </LST>
+      </Obj>
+      <Obj N="SupportedProduct" RefId="78">
+        <TNRef RefId="1" />
+        <LST>
+          <S>11DQ</S>
+          <S>11DR</S>
+          <S>11DS</S>
+          <S>11DN</S>
+          <S>11F7</S>
+          <S>11EH</S>
+          <S>11H7</S>
+          <S>11H8</S>
+          <S>11EG</S>
+          <S>11F9</S>
+          <S>11F8</S>
+          <S>11F6</S>
+          <S>11QA</S>
+          <S>11Q9</S>
+          <S>11DT</S>
+          <S>11DU</S>
+          <S>11DV</S>
+          <S>11DW</S>
+          <S>11CR</S>
+          <S>11DJ</S>
+          <S>11DG</S>
+          <S>11DH</S>
+          <S>11DL</S>
+          <S>11F0</S>
+          <S>11EY</S>
+          <S>11DK</S>
+          <S>30DS</S>
+          <S>30DF</S>
+          <S>30DG</S>
+          <S>30DE</S>
+          <S>30DR</S>
+          <S>30DT</S>
+          <S>30DW</S>
+          <S>30DV</S>
+          <S>30DU</S>
+          <S>30DX</S>
+          <S>11E8</S>
+        </LST>
+      </Obj>
+      <S N="UEFIVersion">M2WKT52A</S>
+      <S N="ECPVersion">(none)</S>
+      <S N="Image">m2wj</S>
+      <S N="FileName">m2wjy52usa.exe</S>
+      <S N="Url">https://download.lenovo.com/pccbbs/thinkcentre_bios/m2wjy52usa.exe</S>
+    </MS>
+  </Obj>
+  <Obj RefId="79">
+    <TNRef RefId="0" />
+    <MS>
+      <S N="CatalogVersion">22.02.10</S>
+      <S N="SupportedModel">ThinkCentre M810Z</S>
+      <Obj N="SupportedProduct" RefId="80">
+        <TNRef RefId="1" />
+        <LST>
+          <S>10NY</S>
+          <S>10NX</S>
+          <S>10Q0</S>
+          <S>10Q2</S>
+          <S>10Q1</S>
+        </LST>
+      </Obj>
+      <S N="UEFIVersion">M1CKT48A</S>
+      <S N="ECPVersion">(none)</S>
+      <S N="Image">m1cj</S>
+      <S N="FileName">m1cjy48usa.exe</S>
+      <S N="Url">https://download.lenovo.com/pccbbs/thinkcentre_bios/m1cjy48usa.exe</S>
+    </MS>
+  </Obj>
+  <Obj RefId="81">
+    <TNRef RefId="0" />
+    <MS>
+      <S N="CatalogVersion">22.02.10</S>
+      <S N="SupportedModel">ThinkCentre M820Z</S>
+      <Obj N="SupportedProduct" RefId="82">
+        <TNRef RefId="1" />
+        <LST>
+          <S>10SC</S>
+          <S>10SD</S>
+          <S>10S9</S>
+        </LST>
+      </Obj>
+      <S N="UEFIVersion">M1NKT57A</S>
+      <S N="ECPVersion">(none)</S>
+      <S N="Image">m1nj</S>
+      <S N="FileName">m1njy57usa.exe</S>
+      <S N="Url">https://download.lenovo.com/pccbbs/thinkcentre_bios/m1njy57usa.exe</S>
+    </MS>
+  </Obj>
+  <Obj RefId="83">
+    <TNRef RefId="0" />
+    <MS>
+      <S N="CatalogVersion">22.02.10</S>
+      <S N="SupportedModel">ThinkCentre M900Z</S>
+      <Obj N="SupportedProduct" RefId="84">
+        <TNRef RefId="1" />
+        <LST>
+          <S>10F3</S>
+          <S>10F4</S>
+          <S>10F5</S>
+          <S>10F2</S>
+        </LST>
+      </Obj>
+      <S N="UEFIVersion">FUKT59A</S>
+      <S N="ECPVersion">(none)</S>
+      <S N="Image">fujy</S>
+      <S N="FileName">fujy59usa.exe</S>
+      <S N="Url">https://download.lenovo.com/pccbbs/thinkcentre_bios/fujy59usa.exe</S>
+    </MS>
+  </Obj>
+  <Obj RefId="85">
+    <TNRef RefId="0" />
+    <MS>
+      <S N="CatalogVersion">22.02.10</S>
+      <S N="SupportedModel">ThinkCentre M90A</S>
+      <Obj N="SupportedProduct" RefId="86">
+        <TNRef RefId="1" />
+        <LST>
+          <S>11E0</S>
+          <S>11CE</S>
+          <S>11DY</S>
+          <S>11CD</S>
+          <S>11JX</S>
+        </LST>
+      </Obj>
+      <S N="UEFIVersion">M2RKT53A</S>
+      <S N="ECPVersion">(none)</S>
+      <S N="Image">m2rj</S>
+      <S N="FileName">m2rjy53usa.exe</S>
+      <S N="Url">https://download.lenovo.com/pccbbs/thinkcentre_bios/m2rjy53usa.exe</S>
+    </MS>
+  </Obj>
+  <Obj RefId="87">
+    <TNRef RefId="0" />
+    <MS>
+      <S N="CatalogVersion">22.02.10</S>
+      <S N="SupportedModel">ThinkCentre M90A Gen 2</S>
+      <Obj N="SupportedProduct" RefId="88">
+        <TNRef RefId="1" />
+        <LST>
+          <S>11K1</S>
+          <S>11K2</S>
+          <S>11K0</S>
+          <S>11JY</S>
+          <S>11MN</S>
+        </LST>
+      </Obj>
+      <S N="UEFIVersion">M3LKT22A</S>
+      <S N="ECPVersion">(none)</S>
+      <S N="Image">m3lj</S>
+      <S N="FileName">m3ljy22usa.exe</S>
+      <S N="Url">https://download.lenovo.com/pccbbs/thinkcentre_bios/m3ljy22usa.exe</S>
+    </MS>
+  </Obj>
+  <Obj RefId="89">
+    <TNRef RefId="0" />
+    <MS>
+      <S N="CatalogVersion">22.02.10</S>
+      <Obj N="SupportedModel" RefId="90">
+        <TNRef RefId="1" />
+        <LST>
+          <S>ThinkCentre M90N-1</S>
+          <S>ThinkCentre M90N 1</S>
+        </LST>
+      </Obj>
+      <Obj N="SupportedProduct" RefId="91">
+        <TNRef RefId="1" />
+        <LST>
+          <S>11AJ</S>
+          <S>11AG</S>
+          <S>11AF</S>
+          <S>11AE</S>
+          <S>11AS</S>
+          <S>11AD</S>
+          <S>11AL</S>
+          <S>11AM</S>
+          <S>11AH</S>
+          <S>11AK</S>
+        </LST>
+      </Obj>
+      <S N="UEFIVersion">M2AKT32A</S>
+      <S N="ECPVersion">(none)</S>
+      <S N="Image">m2aj</S>
+      <S N="FileName">m2ajy32usa.exe</S>
+      <S N="Url">https://download.lenovo.com/pccbbs/thinkcentre_bios/m2ajy32usa.exe</S>
+    </MS>
+  </Obj>
+  <Obj RefId="92">
+    <TNRef RefId="0" />
+    <MS>
+      <S N="CatalogVersion">22.02.10</S>
+      <S N="SupportedModel">ThinkCentre M920Z</S>
+      <Obj N="SupportedProduct" RefId="93">
+        <TNRef RefId="1" />
+        <LST>
+          <S>10S6</S>
+          <S>10S7</S>
+          <S>10Y5</S>
+          <S>10Y6</S>
+        </LST>
+      </Obj>
+      <S N="UEFIVersion">M1MKT51A</S>
+      <S N="ECPVersion">(none)</S>
+      <S N="Image">m1mj</S>
+      <S N="FileName">m1mjy51usa.exe</S>
+      <S N="Url">https://download.lenovo.com/pccbbs/thinkcentre_bios/m1mjy51usa.exe</S>
+    </MS>
+  </Obj>
+  <Obj RefId="94">
+    <TNRef RefId="0" />
+    <MS>
+      <S N="CatalogVersion">22.02.10</S>
+      <S N="SupportedModel">ThinkPad 10</S>
+      <Obj N="SupportedProduct" RefId="95">
+        <TNRef RefId="1" />
+        <LST>
+          <S>20C1</S>
+          <S>20C3</S>
+        </LST>
+      </Obj>
+      <S N="UEFIVersion">1.50</S>
+      <S N="ECPVersion">(none)</S>
+      <S N="Image">gwuj</S>
+      <S N="FileName">gwuj30ww.exe</S>
+      <S N="Url">https://download.lenovo.com/pccbbs/mobiles/gwuj30ww.exe</S>
+    </MS>
+  </Obj>
+  <Obj RefId="96">
+    <TNRef RefId="0" />
+    <MS>
+      <S N="CatalogVersion">22.02.10</S>
+      <S N="SupportedModel">ThinkPad 10 20E3 20E4</S>
+      <Obj N="SupportedProduct" RefId="97">
+        <TNRef RefId="1" />
+        <LST>
+          <S>20E4</S>
+          <S>20E3</S>
+        </LST>
+      </Obj>
+      <S N="UEFIVersion">2.26</S>
+      <S N="ECPVersion">(none)</S>
+      <S N="Image">n1au</S>
+      <S N="FileName">n1auj30w.exe</S>
+      <S N="Url">https://download.lenovo.com/pccbbs/mobiles/n1auj30w.exe</S>
+    </MS>
+  </Obj>
+  <Obj RefId="98">
+    <TNRef RefId="0" />
+    <MS>
+      <S N="CatalogVersion">22.02.10</S>
+      <Obj N="SupportedModel" RefId="99">
+        <TNRef RefId="1" />
+        <LST>
+          <S>ThinkPad 11e 20E6 20E8</S>
+          <S>ThinkPad Yoga 11e 20E5 20E7</S>
+        </LST>
+      </Obj>
+      <Obj N="SupportedProduct" RefId="100">
+        <TNRef RefId="1" />
+        <LST>
+          <S>20E8</S>
+          <S>20E6</S>
+          <S>20E7</S>
+          <S>20E5</S>
+        </LST>
+      </Obj>
+      <S N="UEFIVersion">1.69</S>
+      <S N="ECPVersion">(none)</S>
+      <S N="Image">jhuj</S>
+      <S N="FileName">jhuj22ww.exe</S>
+      <S N="Url">https://download.lenovo.com/pccbbs/mobiles/jhuj22ww.exe</S>
+    </MS>
+  </Obj>
+  <Obj RefId="101">
+    <TNRef RefId="0" />
+    <MS>
+      <S N="CatalogVersion">22.02.10</S>
+      <S N="SupportedModel">ThinkPad 11e 20G9 20GB</S>
+      <Obj N="SupportedProduct" RefId="102">
+        <TNRef RefId="1" />
+        <LST>
+          <S>20G9</S>
+          <S>20GB</S>
+        </LST>
+      </Obj>
+      <S N="UEFIVersion">1.29</S>
+      <S N="ECPVersion">(none)</S>
+      <S N="Image">r0bu</S>
+      <S N="FileName">r0buj24ww.exe</S>
+      <S N="Url">https://download.lenovo.com/pccbbs/mobiles/r0buj24ww.exe</S>
+    </MS>
+  </Obj>
+  <Obj RefId="103">
+    <TNRef RefId="0" />
+    <MS>
+      <S N="CatalogVersion">22.02.10</S>
+      <Obj N="SupportedModel" RefId="104">
+        <TNRef RefId="1" />
+        <LST>
+          <S>ThinkPad 11e 4th Gen Type 20HT 20HV</S>
+          <S>ThinkPad Yoga 11e 4th Gen Type 20HS 20HU</S>
+        </LST>
+      </Obj>
+      <Obj N="SupportedProduct" RefId="105">
+        <TNRef RefId="1" />
+        <LST>
+          <S>20HV</S>
+          <S>20HT</S>
+          <S>20HS</S>
+          <S>20HU</S>
+        </LST>
+      </Obj>
+      <S N="UEFIVersion">1.28</S>
+      <S N="ECPVersion">(none)</S>
+      <S N="Image">r0ku</S>
+      <S N="FileName">r0kuj24w.exe</S>
+      <S N="Url">https://download.lenovo.com/pccbbs/mobiles/r0kuj24w.exe</S>
+    </MS>
+  </Obj>
+  <Obj RefId="106">
+    <TNRef RefId="0" />
+    <MS>
+      <S N="CatalogVersion">22.02.10</S>
+      <Obj N="SupportedModel" RefId="107">
+        <TNRef RefId="1" />
+        <LST>
+          <S>ThinkPad 11e 5TH Gen Type 20LR 20LQ</S>
+          <S>ThinkPad Yoga 11e 5TH Gen Type 20LN 20LM</S>
+        </LST>
+      </Obj>
+      <Obj N="SupportedProduct" RefId="108">
+        <TNRef RefId="1" />
+        <LST>
+          <S>20LR</S>
+          <S>20LQ</S>
+          <S>20LN</S>
+          <S>20LM</S>
+        </LST>
+      </Obj>
+      <S N="UEFIVersion">1.37</S>
+      <S N="ECPVersion">(none)</S>
+      <S N="Image">r0tu</S>
+      <S N="FileName">r0tuj16ww.exe</S>
+      <S N="Url">https://download.lenovo.com/pccbbs/mobiles/r0tuj16ww.exe</S>
+    </MS>
+  </Obj>
+  <Obj RefId="109">
+    <TNRef RefId="0" />
+    <MS>
+      <S N="CatalogVersion">22.02.10</S>
+      <Obj N="SupportedModel" RefId="110">
+        <TNRef RefId="1" />
+        <LST>
+          <S>ThinkPad 11e</S>
+          <S>ThinkPad Yoga 11e</S>
+        </LST>
+      </Obj>
+      <Obj N="SupportedProduct" RefId="111">
+        <TNRef RefId="1" />
+        <LST>
+          <S>20D9</S>
+          <S>20DA</S>
+        </LST>
+      </Obj>
+      <S N="UEFIVersion">1.40</S>
+      <S N="ECPVersion">(none)</S>
+      <S N="Image">n15u</S>
+      <S N="FileName">n15uj28w.exe</S>
+      <S N="Url">https://download.lenovo.com/pccbbs/mobiles/n15uj28w.exe</S>
+    </MS>
+  </Obj>
+  <Obj RefId="112">
+    <TNRef RefId="0" />
+    <MS>
+      <S N="CatalogVersion">22.02.10</S>
+      <S N="SupportedModel">ThinkPad 13</S>
+      <Obj N="SupportedProduct" RefId="113">
+        <TNRef RefId="1" />
+        <LST>
+          <S>20GK</S>
+          <S>20GJ</S>
+        </LST>
+      </Obj>
+      <S N="UEFIVersion">1.36</S>
+      <S N="ECPVersion">(none)</S>
+      <S N="Image">r0cu</S>
+      <S N="FileName">r0cuj26w.exe</S>
+      <S N="Url">https://download.lenovo.com/pccbbs/mobiles/r0cuj26w.exe</S>
+    </MS>
+  </Obj>
+  <Obj RefId="114">
+    <TNRef RefId="0" />
+    <MS>
+      <S N="CatalogVersion">22.02.10</S>
+      <S N="SupportedModel">ThinkPad 13 Type 20J1 20J2</S>
+      <Obj N="SupportedProduct" RefId="115">
+        <TNRef RefId="1" />
+        <LST>
+          <S>20J1</S>
+          <S>20J2</S>
+        </LST>
+      </Obj>
+      <S N="UEFIVersion">1.30</S>
+      <S N="ECPVersion">(none)</S>
+      <S N="Image">r0ju</S>
+      <S N="FileName">r0juj23w.exe</S>
+      <S N="Url">https://download.lenovo.com/pccbbs/mobiles/r0juj23w.exe</S>
+    </MS>
+  </Obj>
+  <Obj RefId="116">
+    <TNRef RefId="0" />
+    <MS>
+      <S N="CatalogVersion">22.02.10</S>
+      <S N="SupportedModel">ThinkPad 8</S>
+      <Obj N="SupportedProduct" RefId="117">
+        <TNRef RefId="1" />
+        <LST>
+          <S>20BQ</S>
+          <S>20BN</S>
+        </LST>
+      </Obj>
+      <S N="UEFIVersion">1.41</S>
+      <S N="ECPVersion">(none)</S>
+      <S N="Image">gyuj</S>
+      <S N="FileName">gyuj20ww.exe</S>
+      <S N="Url">https://download.lenovo.com/pccbbs/mobiles/gyuj20ww.exe</S>
+    </MS>
+  </Obj>
+  <Obj RefId="118">
+    <TNRef RefId="0" />
+    <MS>
+      <S N="CatalogVersion">22.02.10</S>
+      <S N="SupportedModel">ThinkPad A275 Type 20KC 20KD</S>
+      <Obj N="SupportedProduct" RefId="119">
+        <TNRef RefId="1" />
+        <LST>
+          <S>20KD</S>
+          <S>20KC</S>
+        </LST>
+      </Obj>
+      <S N="UEFIVersion">1.24</S>
+      <S N="ECPVersion">(none)</S>
+      <S N="Image">r0nu</S>
+      <S N="FileName">r0nuj16w.exe</S>
+      <S N="Url">https://download.lenovo.com/pccbbs/mobiles/r0nuj16w.exe</S>
+    </MS>
+  </Obj>
+  <Obj RefId="120">
+    <TNRef RefId="0" />
+    <MS>
+      <S N="CatalogVersion">22.02.10</S>
+      <S N="SupportedModel">ThinkPad A285 Type 20MW 20MX</S>
+      <Obj N="SupportedProduct" RefId="121">
+        <TNRef RefId="1" />
+        <LST>
+          <S>20MW</S>
+          <S>20MX</S>
+        </LST>
+      </Obj>
+      <S N="UEFIVersion">1.47</S>
+      <S N="ECPVersion">(none)</S>
+      <S N="Image">r0xu</S>
+      <S N="FileName">r0xuj70w.exe</S>
+      <S N="Url">https://download.lenovo.com/pccbbs/mobiles/r0xuj70w.exe</S>
+    </MS>
+  </Obj>
+  <Obj RefId="122">
+    <TNRef RefId="0" />
+    <MS>
+      <S N="CatalogVersion">22.02.10</S>
+      <S N="SupportedModel">ThinkPad A475 Type 20KL 20KM</S>
+      <Obj N="SupportedProduct" RefId="123">
+        <TNRef RefId="1" />
+        <LST>
+          <S>20KM</S>
+          <S>20KL</S>
+        </LST>
+      </Obj>
+      <S N="UEFIVersion">1.23</S>
+      <S N="ECPVersion">(none)</S>
+      <S N="Image">r04u</S>
+      <S N="FileName">r04uj17w.exe</S>
+      <S N="Url">https://download.lenovo.com/pccbbs/mobiles/r04uj17w.exe</S>
+    </MS>
+  </Obj>
+  <Obj RefId="124">
+    <TNRef RefId="0" />
+    <MS>
+      <S N="CatalogVersion">22.02.10</S>
+      <S N="SupportedModel">ThinkPad A485 Type 20MU 20MV</S>
+      <Obj N="SupportedProduct" RefId="125">
+        <TNRef RefId="1" />
+        <LST>
+          <S>20MV</S>
+          <S>20MU</S>
+        </LST>
+      </Obj>
+      <S N="UEFIVersion">1.33</S>
+      <S N="ECPVersion">(none)</S>
+      <S N="Image">r0wu</S>
+      <S N="FileName">r0wuj65w.exe</S>
+      <S N="Url">https://download.lenovo.com/pccbbs/mobiles/r0wuj65w.exe</S>
+    </MS>
+  </Obj>
+  <Obj RefId="126">
+    <TNRef RefId="0" />
+    <MS>
+      <S N="CatalogVersion">22.02.10</S>
+      <Obj N="SupportedModel" RefId="127">
+        <TNRef RefId="1" />
+        <LST>
+          <S>ThinkPad E14 Gen 2 Type 20T6 20T7</S>
+          <S>ThinkPad E15 Gen 2 Type 20T8 20T9</S>
+        </LST>
+      </Obj>
+      <Obj N="SupportedProduct" RefId="128">
+        <TNRef RefId="1" />
+        <LST>
+          <S>20T7</S>
+          <S>20T6</S>
+          <S>20T8</S>
+          <S>20T9</S>
+        </LST>
+      </Obj>
+      <S N="UEFIVersion">1.17</S>
+      <S N="ECPVersion">(none)</S>
+      <S N="Image">r1au</S>
+      <S N="FileName">r1auj41w.exe</S>
+      <S N="Url">https://download.lenovo.com/pccbbs/mobiles/r1auj41w.exe</S>
+    </MS>
+  </Obj>
+  <Obj RefId="129">
+    <TNRef RefId="0" />
+    <MS>
+      <S N="CatalogVersion">22.02.10</S>
+      <Obj N="SupportedModel" RefId="130">
+        <TNRef RefId="1" />
+        <LST>
+          <S>ThinkPad E14 Gen 2 Type 20TA 20TB</S>
+          <S>ThinkPad E15 Gen 2 Type 20TD 20TE</S>
+        </LST>
+      </Obj>
+      <Obj N="SupportedProduct" RefId="131">
+        <TNRef RefId="1" />
+        <LST>
+          <S>20TB</S>
+          <S>20TA</S>
+          <S>20TD</S>
+          <S>20TE</S>
+        </LST>
+      </Obj>
+      <S N="UEFIVersion">1.46</S>
+      <S N="ECPVersion">(none)</S>
+      <S N="Image">r1eu</S>
+      <S N="FileName">r1euj46w.exe</S>
+      <S N="Url">https://download.lenovo.com/pccbbs/mobiles/r1euj46w.exe</S>
+    </MS>
+  </Obj>
+  <Obj RefId="132">
+    <TNRef RefId="0" />
+    <MS>
+      <S N="CatalogVersion">22.02.10</S>
+      <Obj N="SupportedModel" RefId="133">
+        <TNRef RefId="1" />
+        <LST>
+          <S>ThinkPad E14 Gen 3</S>
+          <S>ThinkPad E15 Gen 3</S>
+        </LST>
+      </Obj>
+      <Obj N="SupportedProduct" RefId="134">
+        <TNRef RefId="1" />
+        <LST>
+          <S>20YE</S>
+          <S>20YD</S>
+          <S>20YF</S>
+          <S>20Y7</S>
+          <S>20YJ</S>
+          <S>20YG</S>
+          <S>20YH</S>
+          <S>20YK</S>
+        </LST>
+      </Obj>
+      <S N="UEFIVersion">1.10</S>
+      <S N="ECPVersion">(none)</S>
+      <S N="Image">r1ou</S>
+      <S N="FileName">r1ouj31w.exe</S>
+      <S N="Url">https://download.lenovo.com/pccbbs/mobiles/r1ouj31w.exe</S>
+    </MS>
+  </Obj>
+  <Obj RefId="135">
+    <TNRef RefId="0" />
+    <MS>
+      <S N="CatalogVersion">22.02.10</S>
+      <Obj N="SupportedModel" RefId="136">
+        <TNRef RefId="1" />
+        <LST>
+          <S>ThinkPad E14 Type 20RA 20RB</S>
+          <S>ThinkPad E15 Type 20RD 20RE</S>
+        </LST>
+      </Obj>
+      <Obj N="SupportedProduct" RefId="137">
+        <TNRef RefId="1" />
+        <LST>
+          <S>20RA</S>
+          <S>20RB</S>
+          <S>20RD</S>
+          <S>20RE</S>
+        </LST>
+      </Obj>
+      <S N="UEFIVersion">1.19</S>
+      <S N="ECPVersion">(none)</S>
+      <S N="Image">r16u</S>
+      <S N="FileName">r16uj16w.exe</S>
+      <S N="Url">https://download.lenovo.com/pccbbs/mobiles/r16uj16w.exe</S>
+    </MS>
+  </Obj>
+  <Obj RefId="138">
+    <TNRef RefId="0" />
+    <MS>
+      <S N="CatalogVersion">22.02.10</S>
+      <Obj N="SupportedModel" RefId="139">
+        <TNRef RefId="1" />
+        <LST>
+          <S>ThinkPad E460</S>
+          <S>ThinkPad E560</S>
+        </LST>
+      </Obj>
+      <Obj N="SupportedProduct" RefId="140">
+        <TNRef RefId="1" />
+        <LST>
+          <S>20ET</S>
+          <S>20EU</S>
+          <S>20EV</S>
+          <S>20EW</S>
+        </LST>
+      </Obj>
+      <S N="UEFIVersion">1.42</S>
+      <S N="ECPVersion">(none)</S>
+      <S N="Image">r00u</S>
+      <S N="FileName">r00uj29ww.exe</S>
+      <S N="Url">https://download.lenovo.com/pccbbs/mobiles/r00uj29ww.exe</S>
+    </MS>
+  </Obj>
+  <Obj RefId="141">
+    <TNRef RefId="0" />
+    <MS>
+      <S N="CatalogVersion">22.02.10</S>
+      <Obj N="SupportedModel" RefId="142">
+        <TNRef RefId="1" />
+        <LST>
+          <S>ThinkPad E465</S>
+          <S>ThinkPad E565</S>
+        </LST>
+      </Obj>
+      <Obj N="SupportedProduct" RefId="143">
+        <TNRef RefId="1" />
+        <LST>
+          <S>20EX</S>
+          <S>20EY</S>
+        </LST>
+      </Obj>
+      <S N="UEFIVersion">1.22</S>
+      <S N="ECPVersion">(none)</S>
+      <S N="Image">r01u</S>
+      <S N="FileName">r01uj17ww.exe</S>
+      <S N="Url">https://download.lenovo.com/pccbbs/mobiles/r01uj17ww.exe</S>
+    </MS>
+  </Obj>
+  <Obj RefId="144">
+    <TNRef RefId="0" />
+    <MS>
+      <S N="CatalogVersion">22.02.10</S>
+      <Obj N="SupportedModel" RefId="145">
+        <TNRef RefId="1" />
+        <LST>
+          <S>ThinkPad E470</S>
+          <S>ThinkPad E570</S>
+        </LST>
+      </Obj>
+      <Obj N="SupportedProduct" RefId="146">
+        <TNRef RefId="1" />
+        <LST>
+          <S>20H2</S>
+          <S>20H1</S>
+          <S>20H5</S>
+          <S>20H6</S>
+        </LST>
+      </Obj>
+      <S N="UEFIVersion">2.05</S>
+      <S N="ECPVersion">(none)</S>
+      <S N="Image">r0du</S>
+      <S N="FileName">r0duj35w.exe</S>
+      <S N="Url">https://download.lenovo.com/pccbbs/mobiles/r0duj35w.exe</S>
+    </MS>
+  </Obj>
+  <Obj RefId="147">
+    <TNRef RefId="0" />
+    <MS>
+      <S N="CatalogVersion">22.02.10</S>
+      <Obj N="SupportedModel" RefId="148">
+        <TNRef RefId="1" />
+        <LST>
+          <S>ThinkPad E475</S>
+          <S>ThinkPad E575</S>
+        </LST>
+      </Obj>
+      <Obj N="SupportedProduct" RefId="149">
+        <TNRef RefId="1" />
+        <LST>
+          <S>20H4</S>
+          <S>20H8</S>
+        </LST>
+      </Obj>
+      <S N="UEFIVersion">1.25</S>
+      <S N="ECPVersion">(none)</S>
+      <S N="Image">r0eu</S>
+      <S N="FileName">r0euj16w.exe</S>
+      <S N="Url">https://download.lenovo.com/pccbbs/mobiles/r0euj16w.exe</S>
+    </MS>
+  </Obj>
+  <Obj RefId="150">
+    <TNRef RefId="0" />
+    <MS>
+      <S N="CatalogVersion">22.02.10</S>
+      <Obj N="SupportedModel" RefId="151">
+        <TNRef RefId="1" />
+        <LST>
+          <S>ThinkPad E480 Type 20KN 20KQ</S>
+          <S>ThinkPad E580 Type 20KS 20KT</S>
+        </LST>
+      </Obj>
+      <Obj N="SupportedProduct" RefId="152">
+        <TNRef RefId="1" />
+        <LST>
+          <S>20KQ</S>
+          <S>20KN</S>
+          <S>20KT</S>
+          <S>20KS</S>
+        </LST>
+      </Obj>
+      <S N="UEFIVersion">1.45</S>
+      <S N="ECPVersion">(none)</S>
+      <S N="Image">r0pu</S>
+      <S N="FileName">r0puj33w.exe</S>
+      <S N="Url">https://download.lenovo.com/pccbbs/mobiles/r0puj33w.exe</S>
+    </MS>
+  </Obj>
+  <Obj RefId="153">
+    <TNRef RefId="0" />
+    <MS>
+      <S N="CatalogVersion">22.02.10</S>
+      <Obj N="SupportedModel" RefId="154">
+        <TNRef RefId="1" />
+        <LST>
+          <S>ThinkPad E485 Type 20KU</S>
+          <S>ThinkPad E585 Type 20KV</S>
+        </LST>
+      </Obj>
+      <Obj N="SupportedProduct" RefId="155">
+        <TNRef RefId="1" />
+        <LST>
+          <S>20KU</S>
+          <S>20KV</S>
+        </LST>
+      </Obj>
+      <S N="UEFIVersion">1.59</S>
+      <S N="ECPVersion">(none)</S>
+      <S N="Image">r0uu</S>
+      <S N="FileName">r0uuj79w.exe</S>
+      <S N="Url">https://download.lenovo.com/pccbbs/mobiles/r0uuj79w.exe</S>
+    </MS>
+  </Obj>
+  <Obj RefId="156">
+    <TNRef RefId="0" />
+    <MS>
+      <S N="CatalogVersion">22.02.10</S>
+      <Obj N="SupportedModel" RefId="157">
+        <TNRef RefId="1" />
+        <LST>
+          <S>ThinkPad E490 Type 20N8 20N9</S>
+          <S>ThinkPad E490S Type 20NG</S>
+          <S>ThinkPad E590 Type 20NB 20NC</S>
+        </LST>
+      </Obj>
+      <Obj N="SupportedProduct" RefId="158">
+        <TNRef RefId="1" />
+        <LST>
+          <S>20N8</S>
+          <S>20N9</S>
+          <S>20NG</S>
+          <S>20NB</S>
+          <S>20NC</S>
+        </LST>
+      </Obj>
+      <S N="UEFIVersion">1.31</S>
+      <S N="ECPVersion">(none)</S>
+      <S N="Image">r0yu</S>
+      <S N="FileName">r0yuj24w.exe</S>
+      <S N="Url">https://download.lenovo.com/pccbbs/mobiles/r0yuj24w.exe</S>
+    </MS>
+  </Obj>
+  <Obj RefId="159">
+    <TNRef RefId="0" />
+    <MS>
+      <S N="CatalogVersion">22.02.10</S>
+      <Obj N="SupportedModel" RefId="160">
+        <TNRef RefId="1" />
+        <LST>
+          <S>ThinkPad E495 Type 20NE</S>
+          <S>ThinkPad E595 Type 20NF</S>
+        </LST>
+      </Obj>
+      <Obj N="SupportedProduct" RefId="161">
+        <TNRef RefId="1" />
+        <LST>
+          <S>20NE</S>
+          <S>20NF</S>
+        </LST>
+      </Obj>
+      <S N="UEFIVersion">1.22</S>
+      <S N="ECPVersion">(none)</S>
+      <S N="Image">r11u</S>
+      <S N="FileName">r11uj42w.exe</S>
+      <S N="Url">https://download.lenovo.com/pccbbs/mobiles/r11uj42w.exe</S>
+    </MS>
+  </Obj>
+  <Obj RefId="162">
+    <TNRef RefId="0" />
+    <MS>
+      <S N="CatalogVersion">22.02.10</S>
+      <S N="SupportedModel">ThinkPad HELIX Type 20CG 20CH</S>
+      <Obj N="SupportedProduct" RefId="163">
+        <TNRef RefId="1" />
+        <LST>
+          <S>20CH</S>
+          <S>20CG</S>
+        </LST>
+      </Obj>
+      <S N="UEFIVersion">2.16</S>
+      <S N="ECPVersion">(none)</S>
+      <S N="Image">n17u</S>
+      <S N="FileName">n17uj61w.exe</S>
+      <S N="Url">https://download.lenovo.com/pccbbs/mobiles/n17uj61w.exe</S>
+    </MS>
+  </Obj>
+  <Obj RefId="164">
+    <TNRef RefId="0" />
+    <MS>
+      <S N="CatalogVersion">22.02.10</S>
+      <Obj N="SupportedModel" RefId="165">
+        <TNRef RefId="1" />
+        <LST>
+          <S>ThinkPad L13 Gen 2 Type 21AB 21AC</S>
+          <S>ThinkPad L13 Yoga Gen 2 Type 21AD 21AE</S>
+        </LST>
+      </Obj>
+      <Obj N="SupportedProduct" RefId="166">
+        <TNRef RefId="1" />
+        <LST>
+          <S>21AB</S>
+          <S>21AF</S>
+          <S>21AC</S>
+          <S>21AD</S>
+          <S>21AE</S>
+          <S>21AG</S>
+        </LST>
+      </Obj>
+      <S N="UEFIVersion">1.15</S>
+      <S N="ECPVersion">(none)</S>
+      <S N="Image">r1qu</S>
+      <S N="FileName">r1quj04w.exe</S>
+      <S N="Url">https://download.lenovo.com/pccbbs/mobiles/r1quj04w.exe</S>
+    </MS>
+  </Obj>
+  <Obj RefId="167">
+    <TNRef RefId="0" />
+    <MS>
+      <S N="CatalogVersion">22.02.10</S>
+      <Obj N="SupportedModel" RefId="168">
+        <TNRef RefId="1" />
+        <LST>
+          <S>ThinkPad L13 Gen 2 VPro Type 20VH 20VJ</S>
+          <S>ThinkPad L13 Gen 2 Non-VPro Type 20VH 20VJ</S>
+          <S>ThinkPad L13 Yoga Gen 2 VPro Type 20VL 20VK</S>
+          <S>ThinkPad L13 Yoga Gen 2 Non-VPro Type 20VL 20VK</S>
+        </LST>
+      </Obj>
+      <Obj N="SupportedProduct" RefId="169">
+        <TNRef RefId="1" />
+        <LST>
+          <S>20VJ</S>
+          <S>20VH</S>
+          <S>20VK</S>
+          <S>20VL</S>
+        </LST>
+      </Obj>
+      <S N="UEFIVersion">1.14.1.11</S>
+      <S N="ECPVersion">(none)</S>
+      <S N="Image">r1fp</S>
+      <S N="FileName">r1fpuj01ww.exe</S>
+      <S N="Url">https://download.lenovo.com/pccbbs/mobiles/r1fpuj01ww.exe</S>
+    </MS>
+  </Obj>
+  <Obj RefId="170">
+    <TNRef RefId="0" />
+    <MS>
+      <S N="CatalogVersion">22.02.10</S>
+      <Obj N="SupportedModel" RefId="171">
+        <TNRef RefId="1" />
+        <LST>
+          <S>ThinkPad L13 Yoga Type 20R5 20R6</S>
+          <S>ThinkPad L13 Type 20R3 20R4</S>
+        </LST>
+      </Obj>
+      <Obj N="SupportedProduct" RefId="172">
+        <TNRef RefId="1" />
+        <LST>
+          <S>20R5</S>
+          <S>20R6</S>
+          <S>20R4</S>
+          <S>20R3</S>
+        </LST>
+      </Obj>
+      <S N="UEFIVersion">1.31</S>
+      <S N="ECPVersion">(none)</S>
+      <S N="Image">r15u</S>
+      <S N="FileName">r15uj13w.exe</S>
+      <S N="Url">https://download.lenovo.com/pccbbs/mobiles/r15uj13w.exe</S>
+    </MS>
+  </Obj>
+  <Obj RefId="173">
+    <TNRef RefId="0" />
+    <MS>
+      <S N="CatalogVersion">22.02.10</S>
+      <Obj N="SupportedModel" RefId="174">
+        <TNRef RefId="1" />
+        <LST>
+          <S>ThinkPad L14 Gen 2 Type 20X1 20X2</S>
+          <S>ThinkPad L15 Gen 2 Type 20X3 20X4</S>
+        </LST>
+      </Obj>
+      <Obj N="SupportedProduct" RefId="175">
+        <TNRef RefId="1" />
+        <LST>
+          <S>20X1</S>
+          <S>20X2</S>
+          <S>20X4</S>
+          <S>20X3</S>
+        </LST>
+      </Obj>
+      <S N="UEFIVersion">1.53</S>
+      <S N="ECPVersion">1.45</S>
+      <S N="Image">r1ju</S>
+      <S N="FileName">r1juj10w_v2.exe</S>
+      <S N="Url">https://download.lenovo.com/pccbbs/mobiles/r1juj10w_v2.exe</S>
+    </MS>
+  </Obj>
+  <Obj RefId="176">
+    <TNRef RefId="0" />
+    <MS>
+      <S N="CatalogVersion">22.02.10</S>
+      <Obj N="SupportedModel" RefId="177">
+        <TNRef RefId="1" />
+        <LST>
+          <S>ThinkPad L14 Gen 2 Type 20X5 20X6</S>
+          <S>ThinkPad L15 Gen 2 Type 20X7 20X8</S>
+        </LST>
+      </Obj>
+      <Obj N="SupportedProduct" RefId="178">
+        <TNRef RefId="1" />
+        <LST>
+          <S>20X6</S>
+          <S>20X5</S>
+          <S>20X8</S>
+          <S>20X7</S>
+        </LST>
+      </Obj>
+      <S N="UEFIVersion">1.21</S>
+      <S N="ECPVersion">(none)</S>
+      <S N="Image">r1ku</S>
+      <S N="FileName">r1kuj07w.exe</S>
+      <S N="Url">https://download.lenovo.com/pccbbs/mobiles/r1kuj07w.exe</S>
+    </MS>
+  </Obj>
+  <Obj RefId="179">
+    <TNRef RefId="0" />
+    <MS>
+      <S N="CatalogVersion">22.02.10</S>
+      <Obj N="SupportedModel" RefId="180">
+        <TNRef RefId="1" />
+        <LST>
+          <S>ThinkPad L14 Type 20U1 20U2</S>
+          <S>ThinkPad L15 Type 20U3 20U4</S>
+        </LST>
+      </Obj>
+      <Obj N="SupportedProduct" RefId="181">
+        <TNRef RefId="1" />
+        <LST>
+          <S>20U1</S>
+          <S>20U2</S>
+          <S>20U4</S>
+          <S>20U3</S>
+        </LST>
+      </Obj>
+      <S N="UEFIVersion">1.15</S>
+      <S N="ECPVersion">(none)</S>
+      <S N="Image">r17u</S>
+      <S N="FileName">r17uj12w.exe</S>
+      <S N="Url">https://download.lenovo.com/pccbbs/mobiles/r17uj12w.exe</S>
+    </MS>
+  </Obj>
+  <Obj RefId="182">
+    <TNRef RefId="0" />
+    <MS>
+      <S N="CatalogVersion">22.02.10</S>
+      <Obj N="SupportedModel" RefId="183">
+        <TNRef RefId="1" />
+        <LST>
+          <S>ThinkPad L14 Type 20U5 20U6</S>
+          <S>ThinkPad L15 Type 20U7 20U8</S>
+        </LST>
+      </Obj>
+      <Obj N="SupportedProduct" RefId="184">
+        <TNRef RefId="1" />
+        <LST>
+          <S>20U5</S>
+          <S>20U6</S>
+          <S>20U7</S>
+          <S>20U8</S>
+        </LST>
+      </Obj>
+      <S N="UEFIVersion">1.23</S>
+      <S N="ECPVersion">(none)</S>
+      <S N="Image">r19u</S>
+      <S N="FileName">r19uj13w.exe</S>
+      <S N="Url">https://download.lenovo.com/pccbbs/mobiles/r19uj13w.exe</S>
+    </MS>
+  </Obj>
+  <Obj RefId="185">
+    <TNRef RefId="0" />
+    <MS>
+      <S N="CatalogVersion">22.02.10</S>
+      <Obj N="SupportedModel" RefId="186">
+        <TNRef RefId="1" />
+        <LST>
+          <S>ThinkPad L380 Type 20M5 20M6</S>
+          <S>ThinkPad L380 Yoga Type 20M7 20M8</S>
+        </LST>
+      </Obj>
+      <Obj N="SupportedProduct" RefId="187">
+        <TNRef RefId="1" />
+        <LST>
+          <S>20M5</S>
+          <S>20M6</S>
+          <S>20M8</S>
+          <S>20M7</S>
+        </LST>
+      </Obj>
+      <S N="UEFIVersion">1.27</S>
+      <S N="ECPVersion">(none)</S>
+      <S N="Image">r0ru</S>
+      <S N="FileName">r0ruj20w.exe</S>
+      <S N="Url">https://download.lenovo.com/pccbbs/mobiles/r0ruj20w.exe</S>
+    </MS>
+  </Obj>
+  <Obj RefId="188">
+    <TNRef RefId="0" />
+    <MS>
+      <S N="CatalogVersion">22.02.10</S>
+      <Obj N="SupportedModel" RefId="189">
+        <TNRef RefId="1" />
+        <LST>
+          <S>ThinkPad L390 Type 20NR 20NS</S>
+          <S>ThinkPad L390 Yoga Type 20NT 20NU</S>
+        </LST>
+      </Obj>
+      <Obj N="SupportedProduct" RefId="190">
+        <TNRef RefId="1" />
+        <LST>
+          <S>20NS</S>
+          <S>20NR</S>
+          <S>20NT</S>
+          <S>20NU</S>
+        </LST>
+      </Obj>
+      <S N="UEFIVersion">1.36</S>
+      <S N="ECPVersion">(none)</S>
+      <S N="Image">r10u</S>
+      <S N="FileName">r10uj17w.exe</S>
+      <S N="Url">https://download.lenovo.com/pccbbs/mobiles/r10uj17w.exe</S>
+    </MS>
+  </Obj>
+  <Obj RefId="191">
+    <TNRef RefId="0" />
+    <MS>
+      <S N="CatalogVersion">22.02.10</S>
+      <Obj N="SupportedModel" RefId="192">
+        <TNRef RefId="1" />
+        <LST>
+          <S>ThinkPad L440</S>
+          <S>ThinkPad L540</S>
+        </LST>
+      </Obj>
+      <Obj N="SupportedProduct" RefId="193">
+        <TNRef RefId="1" />
+        <LST>
+          <S>20AT</S>
+          <S>20AS</S>
+          <S>20AU</S>
+          <S>20AV</S>
+        </LST>
+      </Obj>
+      <S N="UEFIVersion">1.93</S>
+      <S N="ECPVersion">(none)</S>
+      <S N="Image">j4uj</S>
+      <S N="FileName">j4uj75ww.exe</S>
+      <S N="Url">https://download.lenovo.com/pccbbs/mobiles/j4uj75ww.exe</S>
+    </MS>
+  </Obj>
+  <Obj RefId="194">
+    <TNRef RefId="0" />
+    <MS>
+      <S N="CatalogVersion">22.02.10</S>
+      <S N="SupportedModel">ThinkPad L450</S>
+      <Obj N="SupportedProduct" RefId="195">
+        <TNRef RefId="1" />
+        <LST>
+          <S>20DS</S>
+          <S>20DT</S>
+        </LST>
+      </Obj>
+      <S N="UEFIVersion">1.30</S>
+      <S N="ECPVersion">1.28</S>
+      <S N="Image">jduj</S>
+      <S N="FileName">jduj20ww.exe</S>
+      <S N="Url">https://download.lenovo.com/pccbbs/mobiles/jduj20ww.exe</S>
+    </MS>
+  </Obj>
+  <Obj RefId="196">
+    <TNRef RefId="0" />
+    <MS>
+      <S N="CatalogVersion">22.02.10</S>
+      <S N="SupportedModel">ThinkPad L460</S>
+      <Obj N="SupportedProduct" RefId="197">
+        <TNRef RefId="1" />
+        <LST>
+          <S>20FV</S>
+          <S>20FU</S>
+        </LST>
+      </Obj>
+      <S N="UEFIVersion">1.42</S>
+      <S N="ECPVersion">(none)</S>
+      <S N="Image">r08u</S>
+      <S N="FileName">r08uj33ww.exe</S>
+      <S N="Url">https://download.lenovo.com/pccbbs/mobiles/r08uj33ww.exe</S>
+    </MS>
+  </Obj>
+  <Obj RefId="198">
+    <TNRef RefId="0" />
+    <MS>
+      <S N="CatalogVersion">22.02.10</S>
+      <Obj N="SupportedModel" RefId="199">
+        <TNRef RefId="1" />
+        <LST>
+          <S>ThinkPad L470</S>
+          <S>ThinkPad L470 Type 20JU 20JV</S>
+        </LST>
+      </Obj>
+      <Obj N="SupportedProduct" RefId="200">
+        <TNRef RefId="1" />
+        <LST>
+          <S>20J5</S>
+          <S>20J4</S>
+          <S>20JV</S>
+          <S>20JU</S>
+        </LST>
+      </Obj>
+      <S N="UEFIVersion">1.77</S>
+      <S N="ECPVersion">(none)</S>
+      <S N="Image">r0gu</S>
+      <S N="FileName">r0guj28ww.exe</S>
+      <S N="Url">https://download.lenovo.com/pccbbs/mobiles/r0guj28ww.exe</S>
+    </MS>
+  </Obj>
+  <Obj RefId="201">
+    <TNRef RefId="0" />
+    <MS>
+      <S N="CatalogVersion">22.02.10</S>
+      <Obj N="SupportedModel" RefId="202">
+        <TNRef RefId="1" />
+        <LST>
+          <S>ThinkPad L480 Type 20LS 20LT</S>
+          <S>ThinkPad L580 Type 20LW 20LX</S>
+        </LST>
+      </Obj>
+      <Obj N="SupportedProduct" RefId="203">
+        <TNRef RefId="1" />
+        <LST>
+          <S>20LT</S>
+          <S>20LS</S>
+          <S>20LX</S>
+          <S>20LW</S>
+        </LST>
+      </Obj>
+      <S N="UEFIVersion">1.42</S>
+      <S N="ECPVersion">(none)</S>
+      <S N="Image">r0qu</S>
+      <S N="FileName">r0quj28w.exe</S>
+      <S N="Url">https://download.lenovo.com/pccbbs/mobiles/r0quj28w.exe</S>
+    </MS>
+  </Obj>
+  <Obj RefId="204">
+    <TNRef RefId="0" />
+    <MS>
+      <S N="CatalogVersion">22.02.10</S>
+      <Obj N="SupportedModel" RefId="205">
+        <TNRef RefId="1" />
+        <LST>
+          <S>ThinkPad L490 Type 20Q5 20Q6</S>
+          <S>ThinkPad L590 Type 20Q7 20Q8</S>
+        </LST>
+      </Obj>
+      <Obj N="SupportedProduct" RefId="206">
+        <TNRef RefId="1" />
+        <LST>
+          <S>20Q6</S>
+          <S>20Q5</S>
+          <S>20Q8</S>
+          <S>20Q7</S>
+        </LST>
+      </Obj>
+      <S N="UEFIVersion">1.27</S>
+      <S N="ECPVersion">(none)</S>
+      <S N="Image">r0zu</S>
+      <S N="FileName">r0zuj21w.exe</S>
+      <S N="Url">https://download.lenovo.com/pccbbs/mobiles/r0zuj21w.exe</S>
+    </MS>
+  </Obj>
+  <Obj RefId="207">
+    <TNRef RefId="0" />
+    <MS>
+      <S N="CatalogVersion">22.02.10</S>
+      <S N="SupportedModel">ThinkPad L560</S>
+      <Obj N="SupportedProduct" RefId="208">
+        <TNRef RefId="1" />
+        <LST>
+          <S>20F1</S>
+          <S>20F2</S>
+        </LST>
+      </Obj>
+      <S N="UEFIVersion">1.58</S>
+      <S N="ECPVersion">(none)</S>
+      <S N="Image">n1hu</S>
+      <S N="FileName">n1huj41w.exe</S>
+      <S N="Url">https://download.lenovo.com/pccbbs/mobiles/n1huj41w.exe</S>
+    </MS>
+  </Obj>
+  <Obj RefId="209">
+    <TNRef RefId="0" />
+    <MS>
+      <S N="CatalogVersion">22.02.10</S>
+      <Obj N="SupportedModel" RefId="210">
+        <TNRef RefId="1" />
+        <LST>
+          <S>ThinkPad L570 Type 20J8 20J9</S>
+          <S>ThinkPad L570 Type 20JQ 20JR</S>
+        </LST>
+      </Obj>
+      <Obj N="SupportedProduct" RefId="211">
+        <TNRef RefId="1" />
+        <LST>
+          <S>20J8</S>
+          <S>20J9</S>
+          <S>20JR</S>
+          <S>20JQ</S>
+        </LST>
+      </Obj>
+      <S N="UEFIVersion">1.54</S>
+      <S N="ECPVersion">(none)</S>
+      <S N="Image">n1xu</S>
+      <S N="FileName">n1xuj37w.exe</S>
+      <S N="Url">https://download.lenovo.com/pccbbs/mobiles/n1xuj37w.exe</S>
+    </MS>
+  </Obj>
+  <Obj RefId="212">
+    <TNRef RefId="0" />
+    <MS>
+      <S N="CatalogVersion">22.02.10</S>
+      <Obj N="SupportedModel" RefId="213">
+        <TNRef RefId="1" />
+        <LST>
+          <S>ThinkPad P1 Gen 2 Type 20QT 20QU</S>
+          <S>ThinkPad X1 EXTREME Gen 2</S>
+        </LST>
+      </Obj>
+      <Obj N="SupportedProduct" RefId="214">
+        <TNRef RefId="1" />
+        <LST>
+          <S>20QT</S>
+          <S>20QU</S>
+          <S>20QW</S>
+          <S>20QV</S>
+        </LST>
+      </Obj>
+      <S N="UEFIVersion">1.42</S>
+      <S N="ECPVersion">(none)</S>
+      <S N="Image">n2ou</S>
+      <S N="FileName">n2ouj24w.exe</S>
+      <S N="Url">https://download.lenovo.com/pccbbs/mobiles/n2ouj24w.exe</S>
+    </MS>
+  </Obj>
+  <Obj RefId="215">
+    <TNRef RefId="0" />
+    <MS>
+      <S N="CatalogVersion">22.02.10</S>
+      <Obj N="SupportedModel" RefId="216">
+        <TNRef RefId="1" />
+        <LST>
+          <S>ThinkPad P1 Gen 3 Type 20TH 20TJ</S>
+          <S>ThinkPad X1 EXTREME 3rd Gen Type 20TK 20TL</S>
+        </LST>
+      </Obj>
+      <Obj N="SupportedProduct" RefId="217">
+        <TNRef RefId="1" />
+        <LST>
+          <S>20TH</S>
+          <S>20TJ</S>
+          <S>20TL</S>
+          <S>20TK</S>
+        </LST>
+      </Obj>
+      <S N="UEFIVersion">1.22</S>
+      <S N="ECPVersion">(none)</S>
+      <S N="Image">n2vu</S>
+      <S N="FileName">n2vuj17w.exe</S>
+      <S N="Url">https://download.lenovo.com/pccbbs/mobiles/n2vuj17w.exe</S>
+    </MS>
+  </Obj>
+  <Obj RefId="218">
+    <TNRef RefId="0" />
+    <MS>
+      <S N="CatalogVersion">22.02.10</S>
+      <Obj N="SupportedModel" RefId="219">
+        <TNRef RefId="1" />
+        <LST>
+          <S>ThinkPad P1 Gen 4 Type 20Y3 20Y4</S>
+          <S>ThinkPad X1 EXTREME 4th Gen Type 20Y5 20Y6</S>
+        </LST>
+      </Obj>
+      <Obj N="SupportedProduct" RefId="220">
+        <TNRef RefId="1" />
+        <LST>
+          <S>20Y4</S>
+          <S>20Y3</S>
+          <S>20Y5</S>
+          <S>20Y6</S>
+        </LST>
+      </Obj>
+      <S N="UEFIVersion">1.14</S>
+      <S N="ECPVersion">(none)</S>
+      <S N="Image">n40u</S>
+      <S N="FileName">n40uj10w.exe</S>
+      <S N="Url">https://download.lenovo.com/pccbbs/mobiles/n40uj10w.exe</S>
+    </MS>
+  </Obj>
+  <Obj RefId="221">
+    <TNRef RefId="0" />
+    <MS>
+      <S N="CatalogVersion">22.02.10</S>
+      <Obj N="SupportedModel" RefId="222">
+        <TNRef RefId="1" />
+        <LST>
+          <S>ThinkPad P1 Type 20MD 20ME</S>
+          <S>ThinkPad X1 EXTREME</S>
+        </LST>
+      </Obj>
+      <Obj N="SupportedProduct" RefId="223">
+        <TNRef RefId="1" />
+        <LST>
+          <S>20ME</S>
+          <S>20MD</S>
+          <S>20MF</S>
+          <S>20MG</S>
+        </LST>
+      </Obj>
+      <S N="UEFIVersion">1.39</S>
+      <S N="ECPVersion">(none)</S>
+      <S N="Image">n2eu</S>
+      <S N="FileName">n2euj31w.exe</S>
+      <S N="Url">https://download.lenovo.com/pccbbs/mobiles/n2euj31w.exe</S>
+    </MS>
+  </Obj>
+  <Obj RefId="224">
+    <TNRef RefId="0" />
+    <MS>
+      <S N="CatalogVersion">22.02.10</S>
+      <Obj N="SupportedModel" RefId="225">
+        <TNRef RefId="1" />
+        <LST>
+          <S>ThinkPad P14S Gen 2 Type 20VX  20VY</S>
+          <S>ThinkPad P15S Gen 2 Type 20W6 20W7</S>
+          <S>ThinkPad T14 Gen 2 Type 20W0 20W1</S>
+          <S>ThinkPad T15 Gen 2 Type 20W4 20W5</S>
+        </LST>
+      </Obj>
+      <Obj N="SupportedProduct" RefId="226">
+        <TNRef RefId="1" />
+        <LST>
+          <S>20VX</S>
+          <S>20VY</S>
+          <S>20W7</S>
+          <S>20W6</S>
+          <S>20W0</S>
+          <S>20W1</S>
+          <S>20W5</S>
+          <S>20W4</S>
+        </LST>
+      </Obj>
+      <S N="UEFIVersion">1.47</S>
+      <S N="ECPVersion">(none)</S>
+      <S N="Image">n34u</S>
+      <S N="FileName">n34uj13w.exe</S>
+      <S N="Url">https://download.lenovo.com/pccbbs/mobiles/n34uj13w.exe</S>
+    </MS>
+  </Obj>
+  <Obj RefId="227">
+    <TNRef RefId="0" />
+    <MS>
+      <S N="CatalogVersion">22.02.10</S>
+      <Obj N="SupportedModel" RefId="228">
+        <TNRef RefId="1" />
+        <LST>
+          <S>ThinkPad P14S Gen 2 Type 21A0 21A1</S>
+          <S>ThinkPad T14 Gen 2 Type 20XK 20XL</S>
+        </LST>
+      </Obj>
+      <Obj N="SupportedProduct" RefId="229">
+        <TNRef RefId="1" />
+        <LST>
+          <S>21A1</S>
+          <S>21A0</S>
+          <S>20XK</S>
+          <S>20XL</S>
+        </LST>
+      </Obj>
+      <S N="UEFIVersion">1.13</S>
+      <S N="ECPVersion">(none)</S>
+      <S N="Image">r1mu</S>
+      <S N="FileName">r1muj43w.exe</S>
+      <S N="Url">https://download.lenovo.com/pccbbs/mobiles/r1muj43w.exe</S>
+    </MS>
+  </Obj>
+  <Obj RefId="230">
+    <TNRef RefId="0" />
+    <MS>
+      <S N="CatalogVersion">22.02.10</S>
+      <Obj N="SupportedModel" RefId="231">
+        <TNRef RefId="1" />
+        <LST>
+          <S>ThinkPad P15 Gen 2 Type 20YQ 20YR</S>
+          <S>ThinkPad T15G Gen 2 Type 20YS 20YT</S>
+          <S>ThinkPad P17 Gen 2 Type 20YU 20YV</S>
+        </LST>
+      </Obj>
+      <Obj N="SupportedProduct" RefId="232">
+        <TNRef RefId="1" />
+        <LST>
+          <S>20YQ</S>
+          <S>20YR</S>
+          <S>20YS</S>
+          <S>20YT</S>
+          <S>20YV</S>
+          <S>20YU</S>
+        </LST>
+      </Obj>
+      <S N="UEFIVersion">1.18</S>
+      <S N="ECPVersion">(none)</S>
+      <S N="Image">n37u</S>
+      <S N="FileName">n37uj07w.exe</S>
+      <S N="Url">https://download.lenovo.com/pccbbs/mobiles/n37uj07w.exe</S>
+    </MS>
+  </Obj>
+  <Obj RefId="233">
+    <TNRef RefId="0" />
+    <MS>
+      <S N="CatalogVersion">22.02.10</S>
+      <Obj N="SupportedModel" RefId="234">
+        <TNRef RefId="1" />
+        <LST>
+          <S>ThinkPad P15 Type 20ST 20SU</S>
+          <S>ThinkPad P15V Type 20TQ 20TR</S>
+          <S>ThinkPad P17 Gen 1 Type 20SN 20SQ</S>
+          <S>ThinkPad T15G Gen 1 Type 20UR 20US</S>
+          <S>ThinkPad T15P Type 20TN 20TM</S>
+        </LST>
+      </Obj>
+      <Obj N="SupportedProduct" RefId="235">
+        <TNRef RefId="1" />
+        <LST>
+          <S>20ST</S>
+          <S>20SU</S>
+          <S>20TQ</S>
+          <S>20TR</S>
+          <S>20SN</S>
+          <S>20SQ</S>
+          <S>20US</S>
+          <S>20UR</S>
+          <S>20TM</S>
+          <S>20TN</S>
+        </LST>
+      </Obj>
+      <S N="UEFIVersion">1.26</S>
+      <S N="ECPVersion">(none)</S>
+      <S N="Image">n30u</S>
+      <S N="FileName">n30uj12w.exe</S>
+      <S N="Url">https://download.lenovo.com/pccbbs/mobiles/n30uj12w.exe</S>
+    </MS>
+  </Obj>
+  <Obj RefId="236">
+    <TNRef RefId="0" />
+    <MS>
+      <S N="CatalogVersion">22.02.10</S>
+      <Obj N="SupportedModel" RefId="237">
+        <TNRef RefId="1" />
+        <LST>
+          <S>ThinkPad P15S Type 20T4 20T5</S>
+          <S>ThinkPad T14 Type 20S0 20S1</S>
+          <S>ThinkPad T14 Type 20S2 20S3</S>
+          <S>ThinkPad T15 Type 20S6 20S7</S>
+          <S>ThinkPad P14S Type 20S4 20S5</S>
+        </LST>
+      </Obj>
+      <Obj N="SupportedProduct" RefId="238">
+        <TNRef RefId="1" />
+        <LST>
+          <S>20T5</S>
+          <S>20T4</S>
+          <S>20S0</S>
+          <S>20S1</S>
+          <S>20S2</S>
+          <S>20S3</S>
+          <S>20S7</S>
+          <S>20S6</S>
+          <S>20S4</S>
+          <S>20S5</S>
+        </LST>
+      </Obj>
+      <S N="UEFIVersion">1.23</S>
+      <S N="ECPVersion">(none)</S>
+      <S N="Image">n2xu</S>
+      <S N="FileName">n2xuj15w.exe</S>
+      <S N="Url">https://download.lenovo.com/pccbbs/mobiles/n2xuj15w.exe</S>
+    </MS>
+  </Obj>
+  <Obj RefId="239">
+    <TNRef RefId="0" />
+    <MS>
+      <S N="CatalogVersion">22.02.10</S>
+      <Obj N="SupportedModel" RefId="240">
+        <TNRef RefId="1" />
+        <LST>
+          <S>ThinkPad P15V Gen 2 Type 21A9 21AA</S>
+          <S>ThinkPad T15P Gen 2 Type 21A7 21A8</S>
+        </LST>
+      </Obj>
+      <Obj N="SupportedProduct" RefId="241">
+        <TNRef RefId="1" />
+        <LST>
+          <S>21A9</S>
+          <S>21AA</S>
+          <S>21A7</S>
+          <S>21A8</S>
+        </LST>
+      </Obj>
+      <S N="UEFIVersion">1.13</S>
+      <S N="ECPVersion">(none)</S>
+      <S N="Image">n38u</S>
+      <S N="FileName">n38uj05w.exe</S>
+      <S N="Url">https://download.lenovo.com/pccbbs/mobiles/n38uj05w.exe</S>
+    </MS>
+  </Obj>
+  <Obj RefId="242">
+    <TNRef RefId="0" />
+    <MS>
+      <S N="CatalogVersion">22.02.10</S>
+      <Obj N="SupportedModel" RefId="243">
+        <TNRef RefId="1" />
+        <LST>
+          <S>ThinkPad P40 Yoga</S>
+          <S>ThinkPad Yoga 14 20FY</S>
+          <S>ThinkPad Yoga 460</S>
+        </LST>
+      </Obj>
+      <Obj N="SupportedProduct" RefId="244">
+        <TNRef RefId="1" />
+        <LST>
+          <S>20GQ</S>
+          <S>20GR</S>
+          <S>20FY</S>
+          <S>20EM</S>
+          <S>20EL</S>
+        </LST>
+      </Obj>
+      <S N="UEFIVersion">1.59</S>
+      <S N="ECPVersion">(none)</S>
+      <S N="Image">r05u</S>
+      <S N="FileName">r05uj20ww.exe</S>
+      <S N="Url">https://download.lenovo.com/pccbbs/mobiles/r05uj20ww.exe</S>
+    </MS>
+  </Obj>
+  <Obj RefId="245">
+    <TNRef RefId="0" />
+    <MS>
+      <S N="CatalogVersion">22.02.10</S>
+      <Obj N="SupportedModel" RefId="246">
+        <TNRef RefId="1" />
+        <LST>
+          <S>ThinkPad P43S Type 20RH 20RJ</S>
+          <S>ThinkPad P53S Type 20N6 20N7</S>
+          <S>ThinkPad T490 Type 20N2 20N3</S>
+          <S>ThinkPad T490 Type 20Q9 20QH</S>
+          <S>ThinkPad T590 Type 20N4 20N5</S>
+          <S>ThinkPad T490 Type 20RY 20RX</S>
+        </LST>
+      </Obj>
+      <Obj N="SupportedProduct" RefId="247">
+        <TNRef RefId="1" />
+        <LST>
+          <S>20RH</S>
+          <S>20RJ</S>
+          <S>20N6</S>
+          <S>20N7</S>
+          <S>20N2</S>
+          <S>20N3</S>
+          <S>20QH</S>
+          <S>20Q9</S>
+          <S>20N4</S>
+          <S>20N5</S>
+          <S>20RY</S>
+          <S>20RX</S>
+        </LST>
+      </Obj>
+      <S N="UEFIVersion">1.75</S>
+      <S N="ECPVersion">1.17</S>
+      <S N="Image">n2iu</S>
+      <S N="FileName">n2iuj30w.exe</S>
+      <S N="Url">https://download.lenovo.com/pccbbs/mobiles/n2iuj30w.exe</S>
+    </MS>
+  </Obj>
+  <Obj RefId="248">
+    <TNRef RefId="0" />
+    <MS>
+      <S N="CatalogVersion">22.02.10</S>
+      <S N="SupportedModel">ThinkPad P50</S>
+      <Obj N="SupportedProduct" RefId="249">
+        <TNRef RefId="1" />
+        <LST>
+          <S>20EN</S>
+          <S>20EQ</S>
+        </LST>
+      </Obj>
+      <S N="UEFIVersion">1.67</S>
+      <S N="ECPVersion">(none)</S>
+      <S N="Image">n1eu</S>
+      <S N="FileName">n1euj49w.exe</S>
+      <S N="Url">https://download.lenovo.com/pccbbs/mobiles/n1euj49w.exe</S>
+    </MS>
+  </Obj>
+  <Obj RefId="250">
+    <TNRef RefId="0" />
+    <MS>
+      <S N="CatalogVersion">22.02.10</S>
+      <Obj N="SupportedModel" RefId="251">
+        <TNRef RefId="1" />
+        <LST>
+          <S>ThinkPad P50S</S>
+          <S>ThinkPad T560</S>
+        </LST>
+      </Obj>
+      <Obj N="SupportedProduct" RefId="252">
+        <TNRef RefId="1" />
+        <LST>
+          <S>20FK</S>
+          <S>20FL</S>
+          <S>20FJ</S>
+          <S>20FH</S>
+        </LST>
+      </Obj>
+      <S N="UEFIVersion">1.41</S>
+      <S N="ECPVersion">(none)</S>
+      <S N="Image">n1ku</S>
+      <S N="FileName">n1kuj31w.exe</S>
+      <S N="Url">https://download.lenovo.com/pccbbs/mobiles/n1kuj31w.exe</S>
+    </MS>
+  </Obj>
+  <Obj RefId="253">
+    <TNRef RefId="0" />
+    <MS>
+      <S N="CatalogVersion">22.02.10</S>
+      <Obj N="SupportedModel" RefId="254">
+        <TNRef RefId="1" />
+        <LST>
+          <S>ThinkPad P51 Type 20HH 20HJ</S>
+          <S>ThinkPad P51 Type 20MM 20MN</S>
+        </LST>
+      </Obj>
+      <Obj N="SupportedProduct" RefId="255">
+        <TNRef RefId="1" />
+        <LST>
+          <S>20HH</S>
+          <S>20HJ</S>
+          <S>20MN</S>
+          <S>20MM</S>
+        </LST>
+      </Obj>
+      <S N="UEFIVersion">1.56</S>
+      <S N="ECPVersion">(none)</S>
+      <S N="Image">n1uu</S>
+      <S N="FileName">n1uuj31w.exe</S>
+      <S N="Url">https://download.lenovo.com/pccbbs/mobiles/n1uuj31w.exe</S>
+    </MS>
+  </Obj>
+  <Obj RefId="256">
+    <TNRef RefId="0" />
+    <MS>
+      <S N="CatalogVersion">22.02.10</S>
+      <Obj N="SupportedModel" RefId="257">
+        <TNRef RefId="1" />
+        <LST>
+          <S>ThinkPad P51S Type 20HB 20HC</S>
+          <S>ThinkPad P51S Type 20JY 20K0</S>
+          <S>ThinkPad T570</S>
+          <S>ThinkPad T570 Type 20JW  20JX</S>
+        </LST>
+      </Obj>
+      <Obj N="SupportedProduct" RefId="258">
+        <TNRef RefId="1" />
+        <LST>
+          <S>20HB</S>
+          <S>20HC</S>
+          <S>20K0</S>
+          <S>20JY</S>
+          <S>20H9</S>
+          <S>20HA</S>
+          <S>20JX</S>
+          <S>20JW</S>
+        </LST>
+      </Obj>
+      <S N="UEFIVersion">1.49</S>
+      <S N="ECPVersion">(none)</S>
+      <S N="Image">n1vu</S>
+      <S N="FileName">n1vuj30w.exe</S>
+      <S N="Url">https://download.lenovo.com/pccbbs/mobiles/n1vuj30w.exe</S>
+    </MS>
+  </Obj>
+  <Obj RefId="259">
+    <TNRef RefId="0" />
+    <MS>
+      <S N="CatalogVersion">22.02.10</S>
+      <Obj N="SupportedModel" RefId="260">
+        <TNRef RefId="1" />
+        <LST>
+          <S>ThinkPad P52 Type 20M9 20MA</S>
+          <S>ThinkPad P72 Type 20MB 20MC</S>
+        </LST>
+      </Obj>
+      <Obj N="SupportedProduct" RefId="261">
+        <TNRef RefId="1" />
+        <LST>
+          <S>20MA</S>
+          <S>20M9</S>
+          <S>20MC</S>
+          <S>20MB</S>
+        </LST>
+      </Obj>
+      <S N="UEFIVersion">1.44</S>
+      <S N="ECPVersion">(none)</S>
+      <S N="Image">n2cu</S>
+      <S N="FileName">n2cuj32w.exe</S>
+      <S N="Url">https://download.lenovo.com/pccbbs/mobiles/n2cuj32w.exe</S>
+    </MS>
+  </Obj>
+  <Obj RefId="262">
+    <TNRef RefId="0" />
+    <MS>
+      <S N="CatalogVersion">22.02.10</S>
+      <Obj N="SupportedModel" RefId="263">
+        <TNRef RefId="1" />
+        <LST>
+          <S>ThinkPad P52S Type 20LB 20LC</S>
+          <S>ThinkPad T580 Type 20L9 20LA</S>
+        </LST>
+      </Obj>
+      <Obj N="SupportedProduct" RefId="264">
+        <TNRef RefId="1" />
+        <LST>
+          <S>20LB</S>
+          <S>20LC</S>
+          <S>20L9</S>
+          <S>20LA</S>
+        </LST>
+      </Obj>
+      <S N="UEFIVersion">1.31</S>
+      <S N="ECPVersion">(none)</S>
+      <S N="Image">n27u</S>
+      <S N="FileName">n27uj24w.exe</S>
+      <S N="Url">https://download.lenovo.com/pccbbs/mobiles/n27uj24w.exe</S>
+    </MS>
+  </Obj>
+  <Obj RefId="265">
+    <TNRef RefId="0" />
+    <MS>
+      <S N="CatalogVersion">22.02.10</S>
+      <Obj N="SupportedModel" RefId="266">
+        <TNRef RefId="1" />
+        <LST>
+          <S>ThinkPad P53 Type 20QN 20QQ</S>
+          <S>ThinkPad P73 Type 20QR 20QS</S>
+        </LST>
+      </Obj>
+      <Obj N="SupportedProduct" RefId="267">
+        <TNRef RefId="1" />
+        <LST>
+          <S>20QN</S>
+          <S>20QQ</S>
+          <S>20QS</S>
+          <S>20QR</S>
+        </LST>
+      </Obj>
+      <S N="UEFIVersion">1.34</S>
+      <S N="ECPVersion">(none)</S>
+      <S N="Image">n2nu</S>
+      <S N="FileName">n2nuj20w.exe</S>
+      <S N="Url">https://download.lenovo.com/pccbbs/mobiles/n2nuj20w.exe</S>
+    </MS>
+  </Obj>
+  <Obj RefId="268">
+    <TNRef RefId="0" />
+    <MS>
+      <S N="CatalogVersion">22.02.10</S>
+      <S N="SupportedModel">ThinkPad P70</S>
+      <Obj N="SupportedProduct" RefId="269">
+        <TNRef RefId="1" />
+        <LST>
+          <S>20ES</S>
+          <S>20ER</S>
+        </LST>
+      </Obj>
+      <S N="UEFIVersion">2.40</S>
+      <S N="ECPVersion">(none)</S>
+      <S N="Image">n1du</S>
+      <S N="FileName">n1duj49w.exe</S>
+      <S N="Url">https://download.lenovo.com/pccbbs/mobiles/n1duj49w.exe</S>
+    </MS>
+  </Obj>
+  <Obj RefId="270">
+    <TNRef RefId="0" />
+    <MS>
+      <S N="CatalogVersion">22.02.10</S>
+      <S N="SupportedModel">ThinkPad P71</S>
+      <Obj N="SupportedProduct" RefId="271">
+        <TNRef RefId="1" />
+        <LST>
+          <S>20HL</S>
+          <S>20HK</S>
+        </LST>
+      </Obj>
+      <S N="UEFIVersion">1.35</S>
+      <S N="ECPVersion">(none)</S>
+      <S N="Image">n1tu</S>
+      <S N="FileName">n1tuj29w.exe</S>
+      <S N="Url">https://download.lenovo.com/pccbbs/mobiles/n1tuj29w.exe</S>
+    </MS>
+  </Obj>
+  <Obj RefId="272">
+    <TNRef RefId="0" />
+    <MS>
+      <S N="CatalogVersion">22.02.10</S>
+      <Obj N="SupportedModel" RefId="273">
+        <TNRef RefId="1" />
+        <LST>
+          <S>ThinkPad T14 Type 20UD 20UE</S>
+          <S>ThinkPad P14S Type 20Y1 20Y2</S>
+        </LST>
+      </Obj>
+      <Obj N="SupportedProduct" RefId="274">
+        <TNRef RefId="1" />
+        <LST>
+          <S>20UD</S>
+          <S>20UE</S>
+          <S>20Y2</S>
+          <S>20Y1</S>
+        </LST>
+      </Obj>
+      <S N="UEFIVersion">1.36</S>
+      <S N="ECPVersion">(none)</S>
+      <S N="Image">r1bu</S>
+      <S N="FileName">r1buj67w.exe</S>
+      <S N="Url">https://download.lenovo.com/pccbbs/mobiles/r1buj67w.exe</S>
+    </MS>
+  </Obj>
+  <Obj RefId="275">
+    <TNRef RefId="0" />
+    <MS>
+      <S N="CatalogVersion">22.02.10</S>
+      <Obj N="SupportedModel" RefId="276">
+        <TNRef RefId="1" />
+        <LST>
+          <S>ThinkPad T14S Gen 2 Type 20WM 20WN</S>
+          <S>ThinkPad X13 Gen 2 Type 20WK 20WL</S>
+        </LST>
+      </Obj>
+      <Obj N="SupportedProduct" RefId="277">
+        <TNRef RefId="1" />
+        <LST>
+          <S>20WN</S>
+          <S>20WM</S>
+          <S>20WL</S>
+          <S>20WK</S>
+        </LST>
+      </Obj>
+      <S N="UEFIVersion">1.43</S>
+      <S N="ECPVersion">(none)</S>
+      <S N="Image">n35u</S>
+      <S N="FileName">n35uj07w.exe</S>
+      <S N="Url">https://download.lenovo.com/pccbbs/mobiles/n35uj07w.exe</S>
+    </MS>
+  </Obj>
+  <Obj RefId="278">
+    <TNRef RefId="0" />
+    <MS>
+      <S N="CatalogVersion">22.02.10</S>
+      <Obj N="SupportedModel" RefId="279">
+        <TNRef RefId="1" />
+        <LST>
+          <S>ThinkPad T14S Gen 2 Type 20XF 20XG</S>
+          <S>ThinkPad X13 Gen 2 Type 20XH 20XJ</S>
+        </LST>
+      </Obj>
+      <Obj N="SupportedProduct" RefId="280">
+        <TNRef RefId="1" />
+        <LST>
+          <S>20XG</S>
+          <S>20XF</S>
+          <S>20XH</S>
+          <S>20XJ</S>
+        </LST>
+      </Obj>
+      <S N="UEFIVersion">1.17</S>
+      <S N="ECPVersion">(none)</S>
+      <S N="Image">r1nu</S>
+      <S N="FileName">r1nuj47w.exe</S>
+      <S N="Url">https://download.lenovo.com/pccbbs/mobiles/r1nuj47w.exe</S>
+    </MS>
+  </Obj>
+  <Obj RefId="281">
+    <TNRef RefId="0" />
+    <MS>
+      <S N="CatalogVersion">22.02.10</S>
+      <Obj N="SupportedModel" RefId="282">
+        <TNRef RefId="1" />
+        <LST>
+          <S>ThinkPad T14S Type 20T0 20T1</S>
+          <S>ThinkPad X13 Type 20T2 20T3</S>
+        </LST>
+      </Obj>
+      <Obj N="SupportedProduct" RefId="283">
+        <TNRef RefId="1" />
+        <LST>
+          <S>20T1</S>
+          <S>20T0</S>
+          <S>20T2</S>
+          <S>20T3</S>
+        </LST>
+      </Obj>
+      <S N="UEFIVersion">1.21</S>
+      <S N="ECPVersion">(none)</S>
+      <S N="Image">n2yu</S>
+      <S N="FileName">n2yuj11w.exe</S>
+      <S N="Url">https://download.lenovo.com/pccbbs/mobiles/n2yuj11w.exe</S>
+    </MS>
+  </Obj>
+  <Obj RefId="284">
+    <TNRef RefId="0" />
+    <MS>
+      <S N="CatalogVersion">22.02.10</S>
+      <Obj N="SupportedModel" RefId="285">
+        <TNRef RefId="1" />
+        <LST>
+          <S>ThinkPad T14S Type 20UH 20UJ</S>
+          <S>ThinkPad X13 Type 20UF 20UG</S>
+        </LST>
+      </Obj>
+      <Obj N="SupportedProduct" RefId="286">
+        <TNRef RefId="1" />
+        <LST>
+          <S>20UJ</S>
+          <S>20UH</S>
+          <S>20UG</S>
+          <S>20UF</S>
+        </LST>
+      </Obj>
+      <S N="UEFIVersion">1.36</S>
+      <S N="ECPVersion">(none)</S>
+      <S N="Image">r1cu</S>
+      <S N="FileName">r1cuj67w.exe</S>
+      <S N="Url">https://download.lenovo.com/pccbbs/mobiles/r1cuj67w.exe</S>
+    </MS>
+  </Obj>
+  <Obj RefId="287">
+    <TNRef RefId="0" />
+    <MS>
+      <S N="CatalogVersion">22.02.10</S>
+      <Obj N="SupportedModel" RefId="288">
+        <TNRef RefId="1" />
+        <LST>
+          <S>ThinkPad T25 Type 20K7</S>
+          <S>ThinkPad T470</S>
+          <S>ThinkPad T470 Type 20JM 20JN</S>
+        </LST>
+      </Obj>
+      <Obj N="SupportedProduct" RefId="289">
+        <TNRef RefId="1" />
+        <LST>
+          <S>20K7</S>
+          <S>20HE</S>
+          <S>20HD</S>
+          <S>20JM</S>
+          <S>20JN</S>
+        </LST>
+      </Obj>
+      <S N="UEFIVersion">1.69</S>
+      <S N="ECPVersion">(none)</S>
+      <S N="Image">n1qu</S>
+      <S N="FileName">n1quj35w.exe</S>
+      <S N="Url">https://download.lenovo.com/pccbbs/mobiles/n1quj35w.exe</S>
+    </MS>
+  </Obj>
+  <Obj RefId="290">
+    <TNRef RefId="0" />
+    <MS>
+      <S N="CatalogVersion">22.02.10</S>
+      <Obj N="SupportedModel" RefId="291">
+        <TNRef RefId="1" />
+        <LST>
+          <S>ThinkPad T440</S>
+          <S>ThinkPad T440S</S>
+        </LST>
+      </Obj>
+      <Obj N="SupportedProduct" RefId="292">
+        <TNRef RefId="1" />
+        <LST>
+          <S>20B6</S>
+          <S>20B7</S>
+          <S>20AR</S>
+          <S>20AQ</S>
+        </LST>
+      </Obj>
+      <S N="UEFIVersion">2.54</S>
+      <S N="ECPVersion">(none)</S>
+      <S N="Image">gjuj</S>
+      <S N="FileName">gjuj40us.exe</S>
+      <S N="Url">https://download.lenovo.com/pccbbs/mobiles/gjuj40us.exe</S>
+    </MS>
+  </Obj>
+  <Obj RefId="293">
+    <TNRef RefId="0" />
+    <MS>
+      <S N="CatalogVersion">22.02.10</S>
+      <S N="SupportedModel">ThinkPad T440P</S>
+      <Obj N="SupportedProduct" RefId="294">
+        <TNRef RefId="1" />
+        <LST>
+          <S>20AW</S>
+          <S>20AN</S>
+        </LST>
+      </Obj>
+      <S N="UEFIVersion">2.56</S>
+      <S N="ECPVersion">(none)</S>
+      <S N="Image">gluj</S>
+      <S N="FileName">gluj44us.exe</S>
+      <S N="Url">https://download.lenovo.com/pccbbs/mobiles/gluj44us.exe</S>
+    </MS>
+  </Obj>
+  <Obj RefId="295">
+    <TNRef RefId="0" />
+    <MS>
+      <S N="CatalogVersion">22.02.10</S>
+      <Obj N="SupportedModel" RefId="296">
+        <TNRef RefId="1" />
+        <LST>
+          <S>ThinkPad T450</S>
+          <S>ThinkPad T450S</S>
+        </LST>
+      </Obj>
+      <Obj N="SupportedProduct" RefId="297">
+        <TNRef RefId="1" />
+        <LST>
+          <S>20DJ</S>
+          <S>20BV</S>
+          <S>20BU</S>
+          <S>20BW</S>
+          <S>20BX</S>
+        </LST>
+      </Obj>
+      <S N="UEFIVersion">1.37</S>
+      <S N="ECPVersion">(none)</S>
+      <S N="Image">jbuj</S>
+      <S N="FileName">jbuj73ww.exe</S>
+      <S N="Url">https://download.lenovo.com/pccbbs/mobiles/jbuj73ww.exe</S>
+    </MS>
+  </Obj>
+  <Obj RefId="298">
+    <TNRef RefId="0" />
+    <MS>
+      <S N="CatalogVersion">22.02.10</S>
+      <S N="SupportedModel">ThinkPad T460</S>
+      <Obj N="SupportedProduct" RefId="299">
+        <TNRef RefId="1" />
+        <LST>
+          <S>20FN</S>
+          <S>20FM</S>
+        </LST>
+      </Obj>
+      <S N="UEFIVersion">1.43.1.11</S>
+      <S N="ECPVersion">(none)</S>
+      <S N="Image">r06u</S>
+      <S N="FileName">r06uj69w.exe</S>
+      <S N="Url">https://download.lenovo.com/pccbbs/mobiles/r06uj69w.exe</S>
+    </MS>
+  </Obj>
+  <Obj RefId="300">
+    <TNRef RefId="0" />
+    <MS>
+      <S N="CatalogVersion">22.02.10</S>
+      <S N="SupportedModel">ThinkPad T460P</S>
+      <Obj N="SupportedProduct" RefId="301">
+        <TNRef RefId="1" />
+        <LST>
+          <S>20FW</S>
+          <S>20FX</S>
+        </LST>
+      </Obj>
+      <S N="UEFIVersion">2.34</S>
+      <S N="ECPVersion">(none)</S>
+      <S N="Image">r07u</S>
+      <S N="FileName">r07uj31ww.exe</S>
+      <S N="Url">https://download.lenovo.com/pccbbs/mobiles/r07uj31ww.exe</S>
+    </MS>
+  </Obj>
+  <Obj RefId="302">
+    <TNRef RefId="0" />
+    <MS>
+      <S N="CatalogVersion">22.02.10</S>
+      <S N="SupportedModel">ThinkPad T460S</S>
+      <Obj N="SupportedProduct" RefId="303">
+        <TNRef RefId="1" />
+        <LST>
+          <S>20FA</S>
+          <S>20F9</S>
+        </LST>
+      </Obj>
+      <S N="UEFIVersion">1.54</S>
+      <S N="ECPVersion">(none)</S>
+      <S N="Image">n1cu</S>
+      <S N="FileName">n1cuj41w.exe</S>
+      <S N="Url">https://download.lenovo.com/pccbbs/mobiles/n1cuj41w.exe</S>
+    </MS>
+  </Obj>
+  <Obj RefId="304">
+    <TNRef RefId="0" />
+    <MS>
+      <S N="CatalogVersion">22.02.10</S>
+      <S N="SupportedModel">ThinkPad T470P</S>
+      <Obj N="SupportedProduct" RefId="305">
+        <TNRef RefId="1" />
+        <LST>
+          <S>20J6</S>
+          <S>20J7</S>
+        </LST>
+      </Obj>
+      <S N="UEFIVersion">1.36</S>
+      <S N="ECPVersion">1.05</S>
+      <S N="Image">r0fu</S>
+      <S N="FileName">r0fuj29ww.exe</S>
+      <S N="Url">https://download.lenovo.com/pccbbs/mobiles/r0fuj29ww.exe</S>
+    </MS>
+  </Obj>
+  <Obj RefId="306">
+    <TNRef RefId="0" />
+    <MS>
+      <S N="CatalogVersion">22.02.10</S>
+      <Obj N="SupportedModel" RefId="307">
+        <TNRef RefId="1" />
+        <LST>
+          <S>ThinkPad T470S</S>
+          <S>ThinkPad T470S  Type 20JS 20JT</S>
+        </LST>
+      </Obj>
+      <Obj N="SupportedProduct" RefId="308">
+        <TNRef RefId="1" />
+        <LST>
+          <S>20HG</S>
+          <S>20HF</S>
+          <S>20JS</S>
+          <S>20JT</S>
+        </LST>
+      </Obj>
+      <S N="UEFIVersion">1.42</S>
+      <S N="ECPVersion">(none)</S>
+      <S N="Image">n1wu</S>
+      <S N="FileName">n1wuj35w.exe</S>
+      <S N="Url">https://download.lenovo.com/pccbbs/mobiles/n1wuj35w.exe</S>
+    </MS>
+  </Obj>
+  <Obj RefId="309">
+    <TNRef RefId="0" />
+    <MS>
+      <S N="CatalogVersion">22.02.10</S>
+      <S N="SupportedModel">ThinkPad T480 Type 20L5 20L6</S>
+      <Obj N="SupportedProduct" RefId="310">
+        <TNRef RefId="1" />
+        <LST>
+          <S>20L6</S>
+          <S>20L5</S>
+        </LST>
+      </Obj>
+      <S N="UEFIVersion">1.42</S>
+      <S N="ECPVersion">(none)</S>
+      <S N="Image">n24u</S>
+      <S N="FileName">n24uj29w.exe</S>
+      <S N="Url">https://download.lenovo.com/pccbbs/mobiles/n24uj29w.exe</S>
+    </MS>
+  </Obj>
+  <Obj RefId="311">
+    <TNRef RefId="0" />
+    <MS>
+      <S N="CatalogVersion">22.02.10</S>
+      <S N="SupportedModel">ThinkPad T480S Type 20L7 20L8</S>
+      <Obj N="SupportedProduct" RefId="312">
+        <TNRef RefId="1" />
+        <LST>
+          <S>20L8</S>
+          <S>20L7</S>
+        </LST>
+      </Obj>
+      <S N="UEFIVersion">1.49</S>
+      <S N="ECPVersion">(none)</S>
+      <S N="Image">n22u</S>
+      <S N="FileName">n22uj29w.exe</S>
+      <S N="Url">https://download.lenovo.com/pccbbs/mobiles/n22uj29w.exe</S>
+    </MS>
+  </Obj>
+  <Obj RefId="313">
+    <TNRef RefId="0" />
+    <MS>
+      <S N="CatalogVersion">22.02.10</S>
+      <Obj N="SupportedModel" RefId="314">
+        <TNRef RefId="1" />
+        <LST>
+          <S>ThinkPad T490S Type 20NX 20NY</S>
+          <S>ThinkPad X390</S>
+          <S>ThinkPad X390 Type 20SC 20SD</S>
+        </LST>
+      </Obj>
+      <Obj N="SupportedProduct" RefId="315">
+        <TNRef RefId="1" />
+        <LST>
+          <S>20NX</S>
+          <S>20NY</S>
+          <S>20Q1</S>
+          <S>20Q0</S>
+          <S>20SC</S>
+          <S>20SD</S>
+        </LST>
+      </Obj>
+      <S N="UEFIVersion">(none)</S>
+      <S N="ECPVersion">1.12</S>
+      <S N="Image">n2ju</S>
+      <S N="FileName">n2juj14w.exe</S>
+      <S N="Url">https://download.lenovo.com/pccbbs/mobiles/n2juj14w.exe</S>
+    </MS>
+  </Obj>
+  <Obj RefId="316">
+    <TNRef RefId="0" />
+    <MS>
+      <S N="CatalogVersion">22.02.10</S>
+      <S N="SupportedModel">ThinkPad T495 Type 20NJ 20NK</S>
+      <Obj N="SupportedProduct" RefId="317">
+        <TNRef RefId="1" />
+        <LST>
+          <S>20NJ</S>
+          <S>20NK</S>
+        </LST>
+      </Obj>
+      <S N="UEFIVersion">1.28</S>
+      <S N="ECPVersion">(none)</S>
+      <S N="Image">r12u</S>
+      <S N="FileName">r12uj58w.exe</S>
+      <S N="Url">https://download.lenovo.com/pccbbs/mobiles/r12uj58w.exe</S>
+    </MS>
+  </Obj>
+  <Obj RefId="318">
+    <TNRef RefId="0" />
+    <MS>
+      <S N="CatalogVersion">22.02.10</S>
+      <Obj N="SupportedModel" RefId="319">
+        <TNRef RefId="1" />
+        <LST>
+          <S>ThinkPad T495S Type 20QJ 20QK</S>
+          <S>ThinkPad X395</S>
+        </LST>
+      </Obj>
+      <Obj N="SupportedProduct" RefId="320">
+        <TNRef RefId="1" />
+        <LST>
+          <S>20QK</S>
+          <S>20QJ</S>
+          <S>20NM</S>
+          <S>20NL</S>
+        </LST>
+      </Obj>
+      <S N="UEFIVersion">1.24</S>
+      <S N="ECPVersion">(none)</S>
+      <S N="Image">r13u</S>
+      <S N="FileName">r13uj50w.exe</S>
+      <S N="Url">https://download.lenovo.com/pccbbs/mobiles/r13uj50w.exe</S>
+    </MS>
+  </Obj>
+  <Obj RefId="321">
+    <TNRef RefId="0" />
+    <MS>
+      <S N="CatalogVersion">22.02.10</S>
+      <S N="SupportedModel">ThinkPad T540P</S>
+      <Obj N="SupportedProduct" RefId="322">
+        <TNRef RefId="1" />
+        <LST>
+          <S>20BE</S>
+          <S>20BF</S>
+        </LST>
+      </Obj>
+      <S N="UEFIVersion">2.39</S>
+      <S N="ECPVersion">(none)</S>
+      <S N="Image">gmuj</S>
+      <S N="FileName">gmuj35us.exe</S>
+      <S N="Url">https://download.lenovo.com/pccbbs/mobiles/gmuj35us.exe</S>
+    </MS>
+  </Obj>
+  <Obj RefId="323">
+    <TNRef RefId="0" />
+    <MS>
+      <S N="CatalogVersion">22.02.10</S>
+      <Obj N="SupportedModel" RefId="324">
+        <TNRef RefId="1" />
+        <LST>
+          <S>ThinkPad T550</S>
+          <S>ThinkPad W550S</S>
+        </LST>
+      </Obj>
+      <Obj N="SupportedProduct" RefId="325">
+        <TNRef RefId="1" />
+        <LST>
+          <S>20CJ</S>
+          <S>20CK</S>
+          <S>20E2</S>
+          <S>20E1</S>
+        </LST>
+      </Obj>
+      <S N="UEFIVersion">1.30</S>
+      <S N="ECPVersion">(none)</S>
+      <S N="Image">n11u</S>
+      <S N="FileName">n11uj22w.exe</S>
+      <S N="Url">https://download.lenovo.com/pccbbs/mobiles/n11uj22w.exe</S>
+    </MS>
+  </Obj>
+  <Obj RefId="326">
+    <TNRef RefId="0" />
+    <MS>
+      <S N="CatalogVersion">22.02.10</S>
+      <Obj N="SupportedModel" RefId="327">
+        <TNRef RefId="1" />
+        <LST>
+          <S>ThinkPad W540</S>
+          <S>ThinkPad W541</S>
+        </LST>
+      </Obj>
+      <Obj N="SupportedProduct" RefId="328">
+        <TNRef RefId="1" />
+        <LST>
+          <S>20BG</S>
+          <S>20BH</S>
+          <S>20EG</S>
+          <S>20EF</S>
+        </LST>
+      </Obj>
+      <S N="UEFIVersion">2.42</S>
+      <S N="ECPVersion">(none)</S>
+      <S N="Image">gnuj</S>
+      <S N="FileName">gnuj39us.exe</S>
+      <S N="Url">https://download.lenovo.com/pccbbs/mobiles/gnuj39us.exe</S>
+    </MS>
+  </Obj>
+  <Obj RefId="329">
+    <TNRef RefId="0" />
+    <MS>
+      <S N="CatalogVersion">22.02.10</S>
+      <S N="SupportedModel">ThinkPad X1 Carbon 20BS 20BT</S>
+      <Obj N="SupportedProduct" RefId="330">
+        <TNRef RefId="1" />
+        <LST>
+          <S>20BT</S>
+          <S>20BS</S>
+        </LST>
+      </Obj>
+      <S N="UEFIVersion">1.34</S>
+      <S N="ECPVersion">(none)</S>
+      <S N="Image">n14u</S>
+      <S N="FileName">n14uj32w.exe</S>
+      <S N="Url">https://download.lenovo.com/pccbbs/mobiles/n14uj32w.exe</S>
+    </MS>
+  </Obj>
+  <Obj RefId="331">
+    <TNRef RefId="0" />
+    <MS>
+      <S N="CatalogVersion">22.02.10</S>
+      <S N="SupportedModel">ThinkPad X1 Carbon 6TH Gen Type 20KH 20KG</S>
+      <Obj N="SupportedProduct" RefId="332">
+        <TNRef RefId="1" />
+        <LST>
+          <S>20KG</S>
+          <S>20KH</S>
+        </LST>
+      </Obj>
+      <S N="UEFIVersion">1.55</S>
+      <S N="ECPVersion">(none)</S>
+      <S N="Image">n23u</S>
+      <S N="FileName">n23uj33w.exe</S>
+      <S N="Url">https://download.lenovo.com/pccbbs/mobiles/n23uj33w.exe</S>
+    </MS>
+  </Obj>
+  <Obj RefId="333">
+    <TNRef RefId="0" />
+    <MS>
+      <S N="CatalogVersion">22.02.10</S>
+      <Obj N="SupportedModel" RefId="334">
+        <TNRef RefId="1" />
+        <LST>
+          <S>ThinkPad X1 Carbon 7TH Gen Type 20QD 20QE</S>
+          <S>ThinkPad X1 Carbon 7TH Gen Type 20R1 20R2</S>
+          <S>ThinkPad X1 Yoga 4th Gen Type 20QF 20QG</S>
+          <S>ThinkPad X1 Yoga 4th Gen Type 20SA 20SB</S>
+        </LST>
+      </Obj>
+      <Obj N="SupportedProduct" RefId="335">
+        <TNRef RefId="1" />
+        <LST>
+          <S>20QE</S>
+          <S>20QD</S>
+          <S>20R1</S>
+          <S>20R2</S>
+          <S>20QF</S>
+          <S>20QG</S>
+          <S>20SA</S>
+          <S>20SB</S>
+        </LST>
+      </Obj>
+      <S N="UEFIVersion">1.49</S>
+      <S N="ECPVersion">1.38</S>
+      <S N="Image">n2hu</S>
+      <S N="FileName">n2huj43w.exe</S>
+      <S N="Url">https://download.lenovo.com/pccbbs/mobiles/n2huj43w.exe</S>
+    </MS>
+  </Obj>
+  <Obj RefId="336">
+    <TNRef RefId="0" />
+    <MS>
+      <S N="CatalogVersion">22.02.10</S>
+      <Obj N="SupportedModel" RefId="337">
+        <TNRef RefId="1" />
+        <LST>
+          <S>ThinkPad X1 Carbon 8th Gen Type 20U9 20UA</S>
+          <S>ThinkPad X1 Yoga 5th Gen Type 20UB 20UC</S>
+        </LST>
+      </Obj>
+      <Obj N="SupportedProduct" RefId="338">
+        <TNRef RefId="1" />
+        <LST>
+          <S>20UA</S>
+          <S>20U9</S>
+          <S>20UB</S>
+          <S>20UC</S>
+        </LST>
+      </Obj>
+      <S N="UEFIVersion">1.24</S>
+      <S N="ECPVersion">(none)</S>
+      <S N="Image">n2wu</S>
+      <S N="FileName">n2wuj20w.exe</S>
+      <S N="Url">https://download.lenovo.com/pccbbs/mobiles/n2wuj20w.exe</S>
+    </MS>
+  </Obj>
+  <Obj RefId="339">
+    <TNRef RefId="0" />
+    <MS>
+      <S N="CatalogVersion">22.02.10</S>
+      <Obj N="SupportedModel" RefId="340">
+        <TNRef RefId="1" />
+        <LST>
+          <S>ThinkPad X1 Carbon 9TH Gen Type 20XW 20XX</S>
+          <S>ThinkPad X1 Yoga 6th Gen Type 20XY 20Y0</S>
+        </LST>
+      </Obj>
+      <Obj N="SupportedProduct" RefId="341">
+        <TNRef RefId="1" />
+        <LST>
+          <S>20XX</S>
+          <S>20XW</S>
+          <S>20Y0</S>
+          <S>20XY</S>
+        </LST>
+      </Obj>
+      <S N="UEFIVersion">1.51</S>
+      <S N="ECPVersion">1.32</S>
+      <S N="Image">n32u</S>
+      <S N="FileName">n32uj15w.exe</S>
+      <S N="Url">https://download.lenovo.com/pccbbs/mobiles/n32uj15w.exe</S>
+    </MS>
+  </Obj>
+  <Obj RefId="342">
+    <TNRef RefId="0" />
+    <MS>
+      <S N="CatalogVersion">22.02.10</S>
+      <S N="SupportedModel">ThinkPad X1 Carbon Type 20A7 20A8</S>
+      <Obj N="SupportedProduct" RefId="343">
+        <TNRef RefId="1" />
+        <LST>
+          <S>20A8</S>
+          <S>20A7</S>
+        </LST>
+      </Obj>
+      <S N="UEFIVersion">1.40</S>
+      <S N="ECPVersion">(none)</S>
+      <S N="Image">gruj</S>
+      <S N="FileName">gruj37us.exe</S>
+      <S N="Url">https://download.lenovo.com/pccbbs/mobiles/gruj37us.exe</S>
+    </MS>
+  </Obj>
+  <Obj RefId="344">
+    <TNRef RefId="0" />
+    <MS>
+      <S N="CatalogVersion">22.02.10</S>
+      <Obj N="SupportedModel" RefId="345">
+        <TNRef RefId="1" />
+        <LST>
+          <S>ThinkPad X1 Carbon Type 20FB 20FC</S>
+          <S>ThinkPad X1 Yoga Type 20FQ 20FR</S>
+        </LST>
+      </Obj>
+      <Obj N="SupportedProduct" RefId="346">
+        <TNRef RefId="1" />
+        <LST>
+          <S>20FC</S>
+          <S>20FB</S>
+          <S>20FR</S>
+          <S>20FQ</S>
+        </LST>
+      </Obj>
+      <S N="UEFIVersion">1.52</S>
+      <S N="ECPVersion">(none)</S>
+      <S N="Image">n1fu</S>
+      <S N="FileName">n1fuj45w.exe</S>
+      <S N="Url">https://download.lenovo.com/pccbbs/mobiles/n1fuj45w.exe</S>
+    </MS>
+  </Obj>
+  <Obj RefId="347">
+    <TNRef RefId="0" />
+    <MS>
+      <S N="CatalogVersion">22.02.10</S>
+      <Obj N="SupportedModel" RefId="348">
+        <TNRef RefId="1" />
+        <LST>
+          <S>ThinkPad X1 Carbon Type 20HR 20HQ</S>
+          <S>ThinkPad X1 Carbon Type 20K4 20K3</S>
+        </LST>
+      </Obj>
+      <Obj N="SupportedProduct" RefId="349">
+        <TNRef RefId="1" />
+        <LST>
+          <S>20HQ</S>
+          <S>20HR</S>
+          <S>20K4</S>
+          <S>20K3</S>
+        </LST>
+      </Obj>
+      <S N="UEFIVersion">1.53</S>
+      <S N="ECPVersion">(none)</S>
+      <S N="Image">n1mu</S>
+      <S N="FileName">n1muj38w.exe</S>
+      <S N="Url">https://download.lenovo.com/pccbbs/mobiles/n1muj38w.exe</S>
+    </MS>
+  </Obj>
+  <Obj RefId="350">
+    <TNRef RefId="0" />
+    <MS>
+      <S N="CatalogVersion">22.02.10</S>
+      <S N="SupportedModel">ThinkPad X1 FOLD Gen 1 Type 20RK 20RL</S>
+      <Obj N="SupportedProduct" RefId="351">
+        <TNRef RefId="1" />
+        <LST>
+          <S>20RL</S>
+          <S>20RK</S>
+        </LST>
+      </Obj>
+      <S N="UEFIVersion">1.22</S>
+      <S N="ECPVersion">(none)</S>
+      <S N="Image">n2pu</S>
+      <S N="FileName">n2puj05w.exe</S>
+      <S N="Url">https://download.lenovo.com/pccbbs/mobiles/n2puj05w.exe</S>
+    </MS>
+  </Obj>
+  <Obj RefId="352">
+    <TNRef RefId="0" />
+    <MS>
+      <S N="CatalogVersion">22.02.10</S>
+      <S N="SupportedModel">ThinkPad X1 NANO Gen 1 Type 20UN 20UQ</S>
+      <Obj N="SupportedProduct" RefId="353">
+        <TNRef RefId="1" />
+        <LST>
+          <S>20UN</S>
+          <S>20UQ</S>
+        </LST>
+      </Obj>
+      <S N="UEFIVersion">1.47</S>
+      <S N="ECPVersion">(none)</S>
+      <S N="Image">n2tu</S>
+      <S N="FileName">n2tuj16w.exe</S>
+      <S N="Url">https://download.lenovo.com/pccbbs/mobiles/n2tuj16w.exe</S>
+    </MS>
+  </Obj>
+  <Obj RefId="354">
+    <TNRef RefId="0" />
+    <MS>
+      <S N="CatalogVersion">22.02.10</S>
+      <S N="SupportedModel">ThinkPad X1 Tablet</S>
+      <Obj N="SupportedProduct" RefId="355">
+        <TNRef RefId="1" />
+        <LST>
+          <S>20GG</S>
+          <S>20GH</S>
+        </LST>
+      </Obj>
+      <S N="UEFIVersion">1.94</S>
+      <S N="ECPVersion">(none)</S>
+      <S N="Image">n1lu</S>
+      <S N="FileName">n1luj55w.exe</S>
+      <S N="Url">https://download.lenovo.com/pccbbs/mobiles/n1luj55w.exe</S>
+    </MS>
+  </Obj>
+  <Obj RefId="356">
+    <TNRef RefId="0" />
+    <MS>
+      <S N="CatalogVersion">22.02.10</S>
+      <S N="SupportedModel">ThinkPad X1 Tablet 3rd Gen 20KJ 20KK</S>
+      <Obj N="SupportedProduct" RefId="357">
+        <TNRef RefId="1" />
+        <LST>
+          <S>20KK</S>
+          <S>20KJ</S>
+        </LST>
+      </Obj>
+      <S N="UEFIVersion">1.44</S>
+      <S N="ECPVersion">(none)</S>
+      <S N="Image">n1zu</S>
+      <S N="FileName">n1zuj29w.exe</S>
+      <S N="Url">https://download.lenovo.com/pccbbs/mobiles/n1zuj29w.exe</S>
+    </MS>
+  </Obj>
+  <Obj RefId="358">
+    <TNRef RefId="0" />
+    <MS>
+      <S N="CatalogVersion">22.02.10</S>
+      <S N="SupportedModel">ThinkPad X1 Tablet Type 20JB 20JC</S>
+      <Obj N="SupportedProduct" RefId="359">
+        <TNRef RefId="1" />
+        <LST>
+          <S>20JB</S>
+          <S>20JC</S>
+        </LST>
+      </Obj>
+      <S N="UEFIVersion">1.43</S>
+      <S N="ECPVersion">(none)</S>
+      <S N="Image">n1ou</S>
+      <S N="FileName">n1ouj41w.exe</S>
+      <S N="Url">https://download.lenovo.com/pccbbs/mobiles/n1ouj41w.exe</S>
+    </MS>
+  </Obj>
+  <Obj RefId="360">
+    <TNRef RefId="0" />
+    <MS>
+      <S N="CatalogVersion">22.02.10</S>
+      <S N="SupportedModel">ThinkPad X1 TITANIUM Type 20QA 20QB</S>
+      <Obj N="SupportedProduct" RefId="361">
+        <TNRef RefId="1" />
+        <LST>
+          <S>20QA</S>
+          <S>20QB</S>
+        </LST>
+      </Obj>
+      <S N="UEFIVersion">1.19</S>
+      <S N="ECPVersion">(none)</S>
+      <S N="Image">n2mu</S>
+      <S N="FileName">n2muj12w.exe</S>
+      <S N="Url">https://download.lenovo.com/pccbbs/mobiles/n2muj12w.exe</S>
+    </MS>
+  </Obj>
+  <Obj RefId="362">
+    <TNRef RefId="0" />
+    <MS>
+      <S N="CatalogVersion">22.02.10</S>
+      <S N="SupportedModel">ThinkPad X1 Yoga 3rd Gen Type 20LD 20LE 20LF 20LG</S>
+      <Obj N="SupportedProduct" RefId="363">
+        <TNRef RefId="1" />
+        <LST>
+          <S>20LF</S>
+          <S>20LD</S>
+          <S>20LE</S>
+          <S>20LG</S>
+        </LST>
+      </Obj>
+      <S N="UEFIVersion">1.45</S>
+      <S N="ECPVersion">(none)</S>
+      <S N="Image">n25u</S>
+      <S N="FileName">n25uj37w.exe</S>
+      <S N="Url">https://download.lenovo.com/pccbbs/mobiles/n25uj37w.exe</S>
+    </MS>
+  </Obj>
+  <Obj RefId="364">
+    <TNRef RefId="0" />
+    <MS>
+      <S N="CatalogVersion">22.02.10</S>
+      <S N="SupportedModel">ThinkPad X1 Yoga Type 20JD 20JE 20JF 20JG</S>
+      <Obj N="SupportedProduct" RefId="365">
+        <TNRef RefId="1" />
+        <LST>
+          <S>20JE</S>
+          <S>20JG</S>
+          <S>20JD</S>
+          <S>20JF</S>
+        </LST>
+      </Obj>
+      <S N="UEFIVersion">1.43</S>
+      <S N="ECPVersion">(none)</S>
+      <S N="Image">n1nu</S>
+      <S N="FileName">n1nuj34w.exe</S>
+      <S N="Url">https://download.lenovo.com/pccbbs/mobiles/n1nuj34w.exe</S>
+    </MS>
+  </Obj>
+  <Obj RefId="366">
+    <TNRef RefId="0" />
+    <MS>
+      <S N="CatalogVersion">22.02.10</S>
+      <S N="SupportedModel">ThinkPad X12 DETACHABLE Gen 1 Type 20UW 20UV</S>
+      <Obj N="SupportedProduct" RefId="367">
+        <TNRef RefId="1" />
+        <LST>
+          <S>20UW</S>
+          <S>20UV</S>
+        </LST>
+      </Obj>
+      <S N="UEFIVersion">1.18</S>
+      <S N="ECPVersion">(none)</S>
+      <S N="Image">r1gu</S>
+      <S N="FileName">r1guj07w.exe</S>
+      <S N="Url">https://download.lenovo.com/pccbbs/mobiles/r1guj07w.exe</S>
+    </MS>
+  </Obj>
+  <Obj RefId="368">
+    <TNRef RefId="0" />
+    <MS>
+      <S N="CatalogVersion">22.02.10</S>
+      <S N="SupportedModel">ThinkPad X13 Yoga Gen 1</S>
+      <Obj N="SupportedProduct" RefId="369">
+        <TNRef RefId="1" />
+        <LST>
+          <S>20SX</S>
+          <S>20SY</S>
+        </LST>
+      </Obj>
+      <S N="UEFIVersion">1.39</S>
+      <S N="ECPVersion">(none)</S>
+      <S N="Image">n2uu</S>
+      <S N="FileName">n2uuj20w.exe</S>
+      <S N="Url">https://download.lenovo.com/pccbbs/mobiles/n2uuj20w.exe</S>
+    </MS>
+  </Obj>
+  <Obj RefId="370">
+    <TNRef RefId="0" />
+    <MS>
+      <S N="CatalogVersion">22.02.10</S>
+      <S N="SupportedModel">ThinkPad X13 Yoga Gen 2 Type 20W8 20W9</S>
+      <Obj N="SupportedProduct" RefId="371">
+        <TNRef RefId="1" />
+        <LST>
+          <S>20W9</S>
+          <S>20W8</S>
+        </LST>
+      </Obj>
+      <S N="UEFIVersion">1.32</S>
+      <S N="ECPVersion">(none)</S>
+      <S N="Image">n39u</S>
+      <S N="FileName">n39uj10w.exe</S>
+      <S N="Url">https://download.lenovo.com/pccbbs/mobiles/n39uj10w.exe</S>
+    </MS>
+  </Obj>
+  <Obj RefId="372">
+    <TNRef RefId="0" />
+    <MS>
+      <S N="CatalogVersion">22.02.10</S>
+      <S N="SupportedModel">ThinkPad X140E</S>
+      <Obj N="SupportedProduct" RefId="373">
+        <TNRef RefId="1" />
+        <LST>
+          <S>20BL</S>
+          <S>20BM</S>
+        </LST>
+      </Obj>
+      <S N="UEFIVersion">2.19</S>
+      <S N="ECPVersion">(none)</S>
+      <S N="Image">gsuj</S>
+      <S N="FileName">gsuj21ww.exe</S>
+      <S N="Url">https://download.lenovo.com/pccbbs/mobiles/gsuj21ww.exe</S>
+    </MS>
+  </Obj>
+  <Obj RefId="374">
+    <TNRef RefId="0" />
+    <MS>
+      <S N="CatalogVersion">22.02.10</S>
+      <Obj N="SupportedModel" RefId="375">
+        <TNRef RefId="1" />
+        <LST>
+          <S>ThinkPad X240</S>
+          <S>ThinkPad X240S</S>
+        </LST>
+      </Obj>
+      <Obj N="SupportedProduct" RefId="376">
+        <TNRef RefId="1" />
+        <LST>
+          <S>20AL</S>
+          <S>20AM</S>
+          <S>20AK</S>
+          <S>20AJ</S>
+        </LST>
+      </Obj>
+      <S N="UEFIVersion">2.49</S>
+      <S N="ECPVersion">(none)</S>
+      <S N="Image">giuj</S>
+      <S N="FileName">giuj36us.exe</S>
+      <S N="Url">https://download.lenovo.com/pccbbs/mobiles/giuj36us.exe</S>
+    </MS>
+  </Obj>
+  <Obj RefId="377">
+    <TNRef RefId="0" />
+    <MS>
+      <S N="CatalogVersion">22.02.10</S>
+      <S N="SupportedModel">ThinkPad X250</S>
+      <Obj N="SupportedProduct" RefId="378">
+        <TNRef RefId="1" />
+        <LST>
+          <S>20CL</S>
+          <S>20CM</S>
+        </LST>
+      </Obj>
+      <S N="UEFIVersion">1.42</S>
+      <S N="ECPVersion">(none)</S>
+      <S N="Image">n10u</S>
+      <S N="FileName">n10uj29w.exe</S>
+      <S N="Url">https://download.lenovo.com/pccbbs/mobiles/n10uj29w.exe</S>
+    </MS>
+  </Obj>
+  <Obj RefId="379">
+    <TNRef RefId="0" />
+    <MS>
+      <S N="CatalogVersion">22.02.10</S>
+      <S N="SupportedModel">ThinkPad X260</S>
+      <Obj N="SupportedProduct" RefId="380">
+        <TNRef RefId="1" />
+        <LST>
+          <S>20F5</S>
+          <S>20F6</S>
+        </LST>
+      </Obj>
+      <S N="UEFIVersion">1.47</S>
+      <S N="ECPVersion">1.15</S>
+      <S N="Image">r02u</S>
+      <S N="FileName">r02uj74w.exe</S>
+      <S N="Url">https://download.lenovo.com/pccbbs/mobiles/r02uj74w.exe</S>
+    </MS>
+  </Obj>
+  <Obj RefId="381">
+    <TNRef RefId="0" />
+    <MS>
+      <S N="CatalogVersion">22.02.10</S>
+      <Obj N="SupportedModel" RefId="382">
+        <TNRef RefId="1" />
+        <LST>
+          <S>ThinkPad X270</S>
+          <S>ThinkPad X270 Type 20K6 20K5</S>
+        </LST>
+      </Obj>
+      <Obj N="SupportedProduct" RefId="383">
+        <TNRef RefId="1" />
+        <LST>
+          <S>20HM</S>
+          <S>20HN</S>
+          <S>20K6</S>
+          <S>20K5</S>
+        </LST>
+      </Obj>
+      <S N="UEFIVersion">1.44</S>
+      <S N="ECPVersion">(none)</S>
+      <S N="Image">r0iu</S>
+      <S N="FileName">r0iuj37w.exe</S>
+      <S N="Url">https://download.lenovo.com/pccbbs/mobiles/r0iuj37w.exe</S>
+    </MS>
+  </Obj>
+  <Obj RefId="384">
+    <TNRef RefId="0" />
+    <MS>
+      <S N="CatalogVersion">22.02.10</S>
+      <S N="SupportedModel">ThinkPad X280 Type 20KF 20KE</S>
+      <Obj N="SupportedProduct" RefId="385">
+        <TNRef RefId="1" />
+        <LST>
+          <S>20KE</S>
+          <S>20KF</S>
+        </LST>
+      </Obj>
+      <S N="UEFIVersion">1.45</S>
+      <S N="ECPVersion">(none)</S>
+      <S N="Image">n20u</S>
+      <S N="FileName">n20uj30w.exe</S>
+      <S N="Url">https://download.lenovo.com/pccbbs/mobiles/n20uj30w.exe</S>
+    </MS>
+  </Obj>
+  <Obj RefId="386">
+    <TNRef RefId="0" />
+    <MS>
+      <S N="CatalogVersion">22.02.10</S>
+      <S N="SupportedModel">ThinkPad X380 Yoga</S>
+      <Obj N="SupportedProduct" RefId="387">
+        <TNRef RefId="1" />
+        <LST>
+          <S>20LJ</S>
+          <S>20LH</S>
+          <S>20LK</S>
+          <S>20LL</S>
+        </LST>
+      </Obj>
+      <S N="UEFIVersion">1.34</S>
+      <S N="ECPVersion">(none)</S>
+      <S N="Image">r0su</S>
+      <S N="FileName">r0suj24w.exe</S>
+      <S N="Url">https://download.lenovo.com/pccbbs/mobiles/r0suj24w.exe</S>
+    </MS>
+  </Obj>
+  <Obj RefId="388">
+    <TNRef RefId="0" />
+    <MS>
+      <S N="CatalogVersion">22.02.10</S>
+      <S N="SupportedModel">ThinkPad X390 Yoga</S>
+      <Obj N="SupportedProduct" RefId="389">
+        <TNRef RefId="1" />
+        <LST>
+          <S>20NN</S>
+          <S>20NQ</S>
+        </LST>
+      </Obj>
+      <S N="UEFIVersion">1.89</S>
+      <S N="ECPVersion">(none)</S>
+      <S N="Image">n2lu</S>
+      <S N="FileName">n2luj26w.exe</S>
+      <S N="Url">https://download.lenovo.com/pccbbs/mobiles/n2luj26w.exe</S>
+    </MS>
+  </Obj>
+  <Obj RefId="390">
+    <TNRef RefId="0" />
+    <MS>
+      <S N="CatalogVersion">22.02.10</S>
+      <S N="SupportedModel">ThinkPad Yoga</S>
+      <Obj N="SupportedProduct" RefId="391">
+        <TNRef RefId="1" />
+        <LST>
+          <S>20CD</S>
+          <S>20C0</S>
+        </LST>
+      </Obj>
+      <S N="UEFIVersion">1.43</S>
+      <S N="ECPVersion">1.34</S>
+      <S N="Image">gquj</S>
+      <S N="FileName">gquj35ww.exe</S>
+      <S N="Url">https://download.lenovo.com/pccbbs/mobiles/gquj35ww.exe</S>
+    </MS>
+  </Obj>
+  <Obj RefId="392">
+    <TNRef RefId="0" />
+    <MS>
+      <S N="CatalogVersion">22.02.10</S>
+      <S N="SupportedModel">ThinkPad Yoga 11e 20G8 20GA</S>
+      <Obj N="SupportedProduct" RefId="393">
+        <TNRef RefId="1" />
+        <LST>
+          <S>20G8</S>
+          <S>20GA</S>
+        </LST>
+      </Obj>
+      <S N="UEFIVersion">1.22</S>
+      <S N="ECPVersion">(none)</S>
+      <S N="Image">r0au</S>
+      <S N="FileName">r0auj16w.exe</S>
+      <S N="Url">https://download.lenovo.com/pccbbs/mobiles/r0auj16w.exe</S>
+    </MS>
+  </Obj>
+  <Obj RefId="394">
+    <TNRef RefId="0" />
+    <MS>
+      <S N="CatalogVersion">22.02.10</S>
+      <S N="SupportedModel">ThinkPad Yoga 11e 6th Gen Type 20SE 20SF</S>
+      <Obj N="SupportedProduct" RefId="395">
+        <TNRef RefId="1" />
+        <LST>
+          <S>20SE</S>
+          <S>20SF</S>
+        </LST>
+      </Obj>
+      <S N="UEFIVersion">1.12</S>
+      <S N="ECPVersion">(none)</S>
+      <S N="Image">r18u</S>
+      <S N="FileName">r18uj10w.exe</S>
+      <S N="Url">https://download.lenovo.com/pccbbs/mobiles/r18uj10w.exe</S>
+    </MS>
+  </Obj>
+  <Obj RefId="396">
+    <TNRef RefId="0" />
+    <MS>
+      <S N="CatalogVersion">22.02.10</S>
+      <S N="SupportedModel">ThinkPad Yoga 12</S>
+      <Obj N="SupportedProduct" RefId="397">
+        <TNRef RefId="1" />
+        <LST>
+          <S>20DK</S>
+          <S>20DL</S>
+        </LST>
+      </Obj>
+      <S N="UEFIVersion">1.34</S>
+      <S N="ECPVersion">(none)</S>
+      <S N="Image">jeuj</S>
+      <S N="FileName">jeuj85ww.exe</S>
+      <S N="Url">https://download.lenovo.com/pccbbs/mobiles/jeuj85ww.exe</S>
+    </MS>
+  </Obj>
+  <Obj RefId="398">
+    <TNRef RefId="0" />
+    <MS>
+      <S N="CatalogVersion">22.02.10</S>
+      <S N="SupportedModel">ThinkPad Yoga 14</S>
+      <Obj N="SupportedProduct" RefId="399">
+        <TNRef RefId="1" />
+        <LST>
+          <S>20DN</S>
+          <S>20DM</S>
+        </LST>
+      </Obj>
+      <S N="UEFIVersion">1.20</S>
+      <S N="ECPVersion">1.32</S>
+      <S N="Image">jfuj</S>
+      <S N="FileName">jfuj18ww.exe</S>
+      <S N="Url">https://download.lenovo.com/pccbbs/mobiles/jfuj18ww.exe</S>
+    </MS>
+  </Obj>
+  <Obj RefId="400">
+    <TNRef RefId="0" />
+    <MS>
+      <S N="CatalogVersion">22.02.10</S>
+      <S N="SupportedModel">ThinkPad Yoga 15</S>
+      <Obj N="SupportedProduct" RefId="401">
+        <TNRef RefId="1" />
+        <LST>
+          <S>20DQ</S>
+          <S>20DR</S>
+        </LST>
+      </Obj>
+      <S N="UEFIVersion">1.39</S>
+      <S N="ECPVersion">(none)</S>
+      <S N="Image">n19u</S>
+      <S N="FileName">n19uj34w.exe</S>
+      <S N="Url">https://download.lenovo.com/pccbbs/mobiles/n19uj34w.exe</S>
+    </MS>
+  </Obj>
+  <Obj RefId="402">
+    <TNRef RefId="0" />
+    <MS>
+      <S N="CatalogVersion">22.02.10</S>
+      <S N="SupportedModel">ThinkPad Yoga 260</S>
+      <Obj N="SupportedProduct" RefId="403">
+        <TNRef RefId="1" />
+        <LST>
+          <S>20FE</S>
+          <S>20GT</S>
+          <S>20FD</S>
+          <S>20GS</S>
+        </LST>
+      </Obj>
+      <S N="UEFIVersion">1.85</S>
+      <S N="ECPVersion">(none)</S>
+      <S N="Image">n1gu</S>
+      <S N="FileName">n1guj40w.exe</S>
+      <S N="Url">https://download.lenovo.com/pccbbs/mobiles/n1guj40w.exe</S>
+    </MS>
+  </Obj>
+  <Obj RefId="404">
+    <TNRef RefId="0" />
+    <MS>
+      <S N="CatalogVersion">22.02.10</S>
+      <S N="SupportedModel">ThinkPad Yoga 370</S>
+      <Obj N="SupportedProduct" RefId="405">
+        <TNRef RefId="1" />
+        <LST>
+          <S>20JJ</S>
+          <S>20JH</S>
+        </LST>
+      </Obj>
+      <S N="UEFIVersion">1.37</S>
+      <S N="ECPVersion">(none)</S>
+      <S N="Image">r0hu</S>
+      <S N="FileName">r0huj28w.exe</S>
+      <S N="Url">https://download.lenovo.com/pccbbs/mobiles/r0huj28w.exe</S>
+    </MS>
+  </Obj>
+  <Obj RefId="406">
+    <TNRef RefId="0" />
+    <MS>
+      <S N="CatalogVersion">22.02.10</S>
+      <S N="SupportedModel">ThinkStation P320</S>
+      <Obj N="SupportedProduct" RefId="407">
+        <TNRef RefId="1" />
+        <LST>
+          <S>30BG</S>
+          <S>30BK</S>
+          <S>30BH</S>
+          <S>30BR</S>
+          <S>30BJ</S>
+          <S>30BS</S>
+        </LST>
+      </Obj>
+      <S N="UEFIVersion">S06KT59A</S>
+      <S N="ECPVersion">(none)</S>
+      <S N="Image">s06j</S>
+      <S N="FileName">s06jy59usa.exe</S>
+      <S N="Url">https://download.lenovo.com/pccbbs/thinkcentre_bios/s06jy59usa.exe</S>
+    </MS>
+  </Obj>
+  <Obj RefId="408">
+    <TNRef RefId="0" />
+    <MS>
+      <S N="CatalogVersion">22.02.10</S>
+      <Obj N="SupportedModel" RefId="409">
+        <TNRef RefId="1" />
+        <LST>
+          <S>ThinkStation P330</S>
+          <S>ThinkStation P330 2nd Gen</S>
+        </LST>
+      </Obj>
+      <Obj N="SupportedProduct" RefId="410">
+        <TNRef RefId="1" />
+        <LST>
+          <S>30C8</S>
+          <S>30C5</S>
+          <S>30C9</S>
+          <S>30CA</S>
+          <S>30C6</S>
+          <S>30C7</S>
+          <S>30CY</S>
+          <S>30D0</S>
+          <S>30D2</S>
+          <S>30D4</S>
+          <S>30D3</S>
+          <S>30D1</S>
+        </LST>
+      </Obj>
+      <S N="UEFIVersion">M1VKT68A</S>
+      <S N="ECPVersion">(none)</S>
+      <S N="Image">m1vj</S>
+      <S N="FileName">m1vjy68usa.exe</S>
+      <S N="Url">https://download.lenovo.com/pccbbs/thinkcentre_bios/m1vjy68usa.exe</S>
+    </MS>
+  </Obj>
+  <Obj RefId="411">
+    <TNRef RefId="0" />
+    <MS>
+      <S N="CatalogVersion">22.02.10</S>
+      <S N="SupportedModel">ThinkStation P340</S>
+      <Obj N="SupportedProduct" RefId="412">
+        <TNRef RefId="1" />
+        <LST>
+          <S>30DH</S>
+          <S>30DK</S>
+          <S>30DM</S>
+          <S>30DN</S>
+          <S>30DJ</S>
+          <S>30DL</S>
+        </LST>
+      </Obj>
+      <S N="UEFIVersion">S08KT4AA</S>
+      <S N="ECPVersion">(none)</S>
+      <S N="Image">s08j</S>
+      <S N="FileName">s08jy4ausa.exe</S>
+      <S N="Url">https://download.lenovo.com/pccbbs/thinkcentre_bios/s08jy4ausa.exe</S>
+    </MS>
+  </Obj>
+  <Obj RefId="413">
+    <TNRef RefId="0" />
+    <MS>
+      <S N="CatalogVersion">22.02.10</S>
+      <S N="SupportedModel">ThinkStation P348</S>
+      <Obj N="SupportedProduct" RefId="414">
+        <TNRef RefId="1" />
+        <LST>
+          <S>30EQ</S>
+          <S>30ER</S>
+        </LST>
+      </Obj>
+      <S N="UEFIVersion">M3KKT29A</S>
+      <S N="ECPVersion">(none)</S>
+      <S N="Image">m3kj</S>
+      <S N="FileName">m3kjy29usa.exe</S>
+      <S N="Url">https://download.lenovo.com/pccbbs/thinkcentre_bios/m3kjy29usa.exe</S>
+    </MS>
+  </Obj>
+  <Obj RefId="415">
+    <TNRef RefId="0" />
+    <MS>
+      <S N="CatalogVersion">22.02.10</S>
+      <S N="SupportedModel">ThinkStation P350</S>
+      <Obj N="SupportedProduct" RefId="416">
+        <TNRef RefId="1" />
+        <LST>
+          <S>30E4</S>
+          <S>30E3</S>
+          <S>30E6</S>
+          <S>30E5</S>
+        </LST>
+      </Obj>
+      <S N="UEFIVersion">S0AKT29A</S>
+      <S N="ECPVersion">(none)</S>
+      <S N="Image">s0aj</S>
+      <S N="FileName">s0ajy29usa.exe</S>
+      <S N="Url">https://download.lenovo.com/pccbbs/thinkcentre_bios/s0ajy29usa.exe</S>
+    </MS>
+  </Obj>
+  <Obj RefId="417">
+    <TNRef RefId="0" />
+    <MS>
+      <S N="CatalogVersion">22.02.10</S>
+      <Obj N="SupportedModel" RefId="418">
+        <TNRef RefId="1" />
+        <LST>
+          <S>ThinkStation P410</S>
+          <S>ThinkStation P510</S>
+        </LST>
+      </Obj>
+      <Obj N="SupportedProduct" RefId="419">
+        <TNRef RefId="1" />
+        <LST>
+          <S>30B3</S>
+          <S>30B2</S>
+          <S>30B5</S>
+          <S>30B4</S>
+        </LST>
+      </Obj>
+      <S N="UEFIVersion">S00KT72A</S>
+      <S N="ECPVersion">(none)</S>
+      <S N="Image">s00j</S>
+      <S N="FileName">s00jy72usa.exe</S>
+      <S N="Url">https://download.lenovo.com/pccbbs/thinkcentre_bios/s00jy72usa.exe</S>
+    </MS>
+  </Obj>
+  <Obj RefId="420">
+    <TNRef RefId="0" />
+    <MS>
+      <S N="CatalogVersion">22.02.10</S>
+      <S N="SupportedModel">ThinkStation P500</S>
+      <Obj N="SupportedProduct" RefId="421">
+        <TNRef RefId="1" />
+        <LST>
+          <S>30A7</S>
+          <S>30A6</S>
+        </LST>
+      </Obj>
+      <S N="UEFIVersion">A4KTACA</S>
+      <S N="ECPVersion">(none)</S>
+      <S N="Image">a4jy</S>
+      <S N="FileName">a4jyacusa.exe</S>
+      <S N="Url">https://download.lenovo.com/pccbbs/thinkcentre_bios/a4jyacusa.exe</S>
+    </MS>
+  </Obj>
+  <Obj RefId="422">
+    <TNRef RefId="0" />
+    <MS>
+      <S N="CatalogVersion">22.02.10</S>
+      <Obj N="SupportedModel" RefId="423">
+        <TNRef RefId="1" />
+        <LST>
+          <S>ThinkStation P520</S>
+          <S>ThinkStation P520C</S>
+        </LST>
+      </Obj>
+      <Obj N="SupportedProduct" RefId="424">
+        <TNRef RefId="1" />
+        <LST>
+          <S>30BQ</S>
+          <S>30BF</S>
+          <S>30BE</S>
+          <S>30DC</S>
+          <S>30C0</S>
+          <S>30BY</S>
+          <S>30BX</S>
+        </LST>
+      </Obj>
+      <S N="UEFIVersion">S03KT50A</S>
+      <S N="ECPVersion">(none)</S>
+      <S N="Image">s03j</S>
+      <S N="FileName">s03jy50usa.exe</S>
+      <S N="Url">https://download.lenovo.com/pccbbs/thinkcentre_bios/s03jy50usa.exe</S>
+    </MS>
+  </Obj>
+  <Obj RefId="425">
+    <TNRef RefId="0" />
+    <MS>
+      <S N="CatalogVersion">22.02.10</S>
+      <S N="SupportedModel">ThinkStation P620</S>
+      <Obj N="SupportedProduct" RefId="426">
+        <TNRef RefId="1" />
+        <LST>
+          <S>30E0</S>
+          <S>30E1</S>
+        </LST>
+      </Obj>
+      <S N="UEFIVersion">S07KT26A</S>
+      <S N="ECPVersion">(none)</S>
+      <S N="Image">s07j</S>
+      <S N="FileName">s07jy26usa.exe</S>
+      <S N="Url">https://download.lenovo.com/pccbbs/thinkcentre_bios/s07jy26usa.exe</S>
+    </MS>
+  </Obj>
+  <Obj RefId="427">
+    <TNRef RefId="0" />
+    <MS>
+      <S N="CatalogVersion">22.02.10</S>
+      <S N="SupportedModel">ThinkStation P700</S>
+      <Obj N="SupportedProduct" RefId="428">
+        <TNRef RefId="1" />
+        <LST>
+          <S>30A9</S>
+          <S>30A8</S>
+        </LST>
+      </Obj>
+      <S N="UEFIVersion">A5KTACA</S>
+      <S N="ECPVersion">(none)</S>
+      <S N="Image">a5jy</S>
+      <S N="FileName">a5jyacusa.exe</S>
+      <S N="Url">https://download.lenovo.com/pccbbs/thinkcentre_bios/a5jyacusa.exe</S>
+    </MS>
+  </Obj>
+  <Obj RefId="429">
+    <TNRef RefId="0" />
+    <MS>
+      <S N="CatalogVersion">22.02.10</S>
+      <S N="SupportedModel">ThinkStation P710</S>
+      <Obj N="SupportedProduct" RefId="430">
+        <TNRef RefId="1" />
+        <LST>
+          <S>30B7</S>
+          <S>30B6</S>
+        </LST>
+      </Obj>
+      <S N="UEFIVersion">S01KT72A</S>
+      <S N="ECPVersion">(none)</S>
+      <S N="Image">s01j</S>
+      <S N="FileName">s01jy72usa.exe</S>
+      <S N="Url">https://download.lenovo.com/pccbbs/thinkcentre_bios/s01jy72usa.exe</S>
+    </MS>
+  </Obj>
+  <Obj RefId="431">
+    <TNRef RefId="0" />
+    <MS>
+      <S N="CatalogVersion">22.02.10</S>
+      <S N="SupportedModel">ThinkStation P720</S>
+      <Obj N="SupportedProduct" RefId="432">
+        <TNRef RefId="1" />
+        <LST>
+          <S>30BB</S>
+          <S>30BU</S>
+          <S>30BA</S>
+        </LST>
+      </Obj>
+      <S N="UEFIVersion">S04KT57A</S>
+      <S N="ECPVersion">(none)</S>
+      <S N="Image">s04j</S>
+      <S N="FileName">s04jy57usa.exe</S>
+      <S N="Url">https://download.lenovo.com/pccbbs/thinkcentre_bios/s04jy57usa.exe</S>
+    </MS>
+  </Obj>
+  <Obj RefId="433">
+    <TNRef RefId="0" />
+    <MS>
+      <S N="CatalogVersion">22.02.10</S>
+      <S N="SupportedModel">ThinkStation P900</S>
+      <Obj N="SupportedProduct" RefId="434">
+        <TNRef RefId="1" />
+        <LST>
+          <S>30A5</S>
+          <S>30A4</S>
+        </LST>
+      </Obj>
+      <S N="UEFIVersion">A6KTACA</S>
+      <S N="ECPVersion">(none)</S>
+      <S N="Image">a6jy</S>
+      <S N="FileName">a6jyacusa.exe</S>
+      <S N="Url">https://download.lenovo.com/pccbbs/thinkcentre_bios/a6jyacusa.exe</S>
+    </MS>
+  </Obj>
+  <Obj RefId="435">
+    <TNRef RefId="0" />
+    <MS>
+      <S N="CatalogVersion">22.02.10</S>
+      <S N="SupportedModel">ThinkStation P910</S>
+      <Obj N="SupportedProduct" RefId="436">
+        <TNRef RefId="1" />
+        <LST>
+          <S>30B9</S>
+          <S>30B8</S>
+        </LST>
+      </Obj>
+      <S N="UEFIVersion">S02KT72A</S>
+      <S N="ECPVersion">(none)</S>
+      <S N="Image">s02j</S>
+      <S N="FileName">s02jy72usa.exe</S>
+      <S N="Url">https://download.lenovo.com/pccbbs/thinkcentre_bios/s02jy72usa.exe</S>
+    </MS>
+  </Obj>
+  <Obj RefId="437">
+    <TNRef RefId="0" />
+    <MS>
+      <S N="CatalogVersion">22.02.10</S>
+      <S N="SupportedModel">ThinkStation P920</S>
+      <Obj N="SupportedProduct" RefId="438">
+        <TNRef RefId="1" />
+        <LST>
+          <S>30BC</S>
+          <S>30BD</S>
+          <S>30BV</S>
+        </LST>
+      </Obj>
+      <S N="UEFIVersion">S05KT57A</S>
+      <S N="ECPVersion">(none)</S>
+      <S N="Image">s05j</S>
+      <S N="FileName">s05jy57usa.exe</S>
+      <S N="Url">https://download.lenovo.com/pccbbs/thinkcentre_bios/s05jy57usa.exe</S>
+    </MS>
+  </Obj>
+</Objs>

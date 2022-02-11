@@ -1,7 +1,7 @@
 function Get-HpDriverPack {
     [CmdletBinding()]
     param (
-        [string]$DownloadPath
+        [System.String]$DownloadPath
     )
     #=================================================
     #   Get-HPDriverPackCatalog

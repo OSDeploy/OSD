@@ -1,2 +1,0 @@
-Save-WebFile -Overwrite -DestinationDirectory $PSScriptRoot -SourceUrl https://download.lenovo.com/cdrt/td/catalog.xml
-Save-WebFile -Overwrite -DestinationDirectory $PSScriptRoot -SourceUrl https://download.lenovo.com/cdrt/td/catalogv2.xml
