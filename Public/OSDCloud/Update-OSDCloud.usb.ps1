@@ -22,8 +22,8 @@ function Update-OSDCloud.usb {
         $UpdateBootLabel = Get-Volume.usb | Where-Object {($_.FileSystemLabel -eq 'USBBOOT') -or ($_.FileSystemLabel -eq 'OSDBOOT') -or ($_.FileSystemLabel -eq 'USB BOOT')}
     
         foreach ($Item in $UpdateBootLabel) {
-                Write-Host -ForegroundColor DarkGray "Setting NewFileSystemLabel to WinPE"
-                Set-Volume -DriveLetter $UpdateBootLabel.DriveLetter -NewFileSystemLabel 'WinPE' -ErrorAction Ignore
+            Write-Host -ForegroundColor DarkGray "Setting NewFileSystemLabel to WinPE"
+            Set-Volume -DriveLetter $Item.DriveLetter -NewFileSystemLabel 'WinPE' -ErrorAction Ignore
         }
         #=================================================
         #	WinPE
