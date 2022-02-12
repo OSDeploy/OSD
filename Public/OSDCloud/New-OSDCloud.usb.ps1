@@ -91,9 +91,6 @@ function New-OSDCloud.usb {
     if (Test-Path -Path "$WorkspacePath\Autopilot") {
         robocopy "$WorkspacePath\Autopilot" "$($UsbDataPartition.DriveLetter):\OSDCloud\Autopilot" *.* /e /ndl /njh /njs /np /r:0 /w:0
     }
-    if (Test-Path -Path "$WorkspacePath\ODT") {
-        robocopy "$WorkspacePath\ODT" "$($UsbDataPartition.DriveLetter):\OSDCloud\ODT" *.* /e /ndl /njh /njs /np /r:0 /w:0
-    }
     #=================================================
     #	Complete
     #=================================================

@@ -9,15 +9,11 @@ Downloads a Manufacturer Driver Pack by selection using Out-Gridview to an OSDCl
 Computer Manufacturer of the Driver Pack
 
 .LINK
-https://www.osdcloud.com/build/media/save-osdclouddriverpack.usb
+https://www.osdcloud.com
 #>
-function Save-OSDCloudDriverPack.usb {
+function Save-OSDCloudUsbDriverPack {
     [CmdletBinding()]
-    param (
-        [Parameter(Mandatory)]
-        [ValidateSet('Dell','HP','Lenovo','Microsoft')]
-        [System.String]$Manufacturer
-    )
+    param ()
     #=================================================
     #	Start the Clock
     #=================================================
@@ -50,19 +46,39 @@ function Save-OSDCloudDriverPack.usb {
 
     Write-Warning                               "USB Free Space is not verified before downloading yet, so this is on you!"
     Write-Host -ForegroundColor DarkGray        "================================================"
+    Write-Host -ForegroundColor Cyan            "Select one or more USB Drives to update in the PowerShell GridView window"
     
+    if (($GetUSBVolume).Count -gt 1) {
+        $GetUSBVolume = $GetUSBVolume | Out-GridView -Title 'Select one or more USB Drives to update and press OK' -PassThru
+    }
+
+    $GetUSBVolume
+    Write-Host -ForegroundColor DarkGray        "================================================"
+    Write-Host -ForegroundColor Cyan            "Select one or more Driver Pack Manufacturers in the PowerShell GridView window"
+
+    $Manufacturers = @('Dell','HP','Lenovo','Microsoft')
+
+    $Manufacturers = $Manufacturers | Out-GridView -Title 'Select one or more Driver Pack Manufacturers and press OK' -PassThru
+    $Manufacturers
+
     if ($GetUSBVolume) {
         #$GetUSBVolume | Select-Object -Property DriveLetter, FileSystemLabel, SizeGB, SizeRemainingMB, DriveType | Format-Table
         $SelectUSBVolume = Select-Volume.usb -MinimumSizeGB 8 -FileSystem 'NTFS'
         $Global:OSDCloudOfflineFullName = "$($SelectUSBVolume.DriveLetter):\OSDCloud"
         Write-Host -ForegroundColor White       "OSDCloud content will be saved to $OSDCloudOfflineFullName"
     }
-    else {
-        Write-Warning                           "Save-OSDCloud.usb Requirements:"
-        Write-Warning                           "8 GB Minimum"
-        Write-Warning                           "NTFS File System"
-        Break
+
+    if ($Manufacturers -contains 'Dell') {}
+
+    
+
+    $Manufacturers = @('Dell','HP','Lenovo','Microsoft')
+    
+    foreach ($Item in $Manufacturers) {
+
     }
+
+    Break
     #=================================================
     #	Save-MyDriverPack
     #=================================================

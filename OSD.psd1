@@ -292,7 +292,9 @@ FunctionsToExport =
 'Save-WinPECloudDriver',
 'ConvertTo-PSKeyVaultSecret',
 'Get-DellOSDDriversCatalog',
-'Get-HPOSDDriversCatalog'
+'Get-HPOSDDriversCatalog',
+'Save-OSDCloudUsbDriverPack',
+'Update-OSDCloudUSB'
 
 # Cmdlets to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no cmdlets to export.
 CmdletsToExport = @()
