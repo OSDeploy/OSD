@@ -1,3 +1,23 @@
+<#
+.SYNOPSIS
+Creates an OSDCloud USB Drive and updates WinPE
+Clear, Initialize, Partition (WinPE and OSDCloud), and Format a USB Disk
+Requires Admin Rights
+
+.Description
+Creates an OSDCloud USB Drive and updates WinPE
+Clear, Initialize, Partition (WinPE and OSDCloud), and Format a USB Disk
+Requires Admin Rights
+
+.PARAMETER WorkspacePath
+Directory for the Workspace.  Contains the Media directory
+
+.EXAMPLE
+Update-OSDCloudUSB -WorkspacePath C:\OSDCloud
+
+.LINK
+https://osdcloud.osdeploy.com
+#>
 function Update-OSDCloudUSB {
     [CmdletBinding()]
     param (
