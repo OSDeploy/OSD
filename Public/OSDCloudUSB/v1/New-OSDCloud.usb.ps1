@@ -19,6 +19,8 @@ function New-OSDCloud.usb {
         [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
         [System.String]$WorkspacePath
     )
+    Write-Warning 'This function has been replaced by New-OSDCloudUSB'
+    Break
     #=================================================
     #	Start the Clock
     #=================================================
@@ -88,8 +90,8 @@ function New-OSDCloud.usb {
     if ((Test-Path -Path "$WorkspacePath\Media") -and (Test-Path -Path "$($UsbBootPartition.DriveLetter):\")) {
         robocopy "$WorkspacePath\Media" "$($UsbBootPartition.DriveLetter):\" *.* /e /ndl /njh /njs /np /r:0 /w:0
     }
-    if (Test-Path -Path "$WorkspacePath\Autopilot") {
-        robocopy "$WorkspacePath\Autopilot" "$($UsbDataPartition.DriveLetter):\OSDCloud\Autopilot" *.* /e /ndl /njh /njs /np /r:0 /w:0
+    if (Test-Path -Path "$WorkspacePath\Config") {
+        robocopy "$WorkspacePath\Config" "$($UsbDataPartition.DriveLetter):\OSDCloud\Config" *.* /e /ndl /njh /njs /np /r:0 /w:0
     }
     #=================================================
     #	Complete

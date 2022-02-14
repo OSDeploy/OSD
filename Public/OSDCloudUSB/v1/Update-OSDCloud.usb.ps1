@@ -47,19 +47,14 @@ function Update-OSDCloud.usb {
     
         if ($OSDCloud) {
             if ($PSBoundParameters.ContainsKey('Mirror')) {
-                if (Test-Path "$OSDCloudWorkspace\Autopilot") {
-                    Write-Host -ForegroundColor DarkGray "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Mirroring $OSDCloudWorkspace\Autopilot to $($OSDCloud):\OSDCloud\Autopilot"
-                    robocopy "$OSDCloudWorkspace\Autopilot" "$($OSDCloud):\OSDCloud\Autopilot" *.* /mir /mt /ndl /njh /njs /r:0 /w:0 /zb /xd "$RECYCLE.BIN" "System Volume Information"
+                if (Test-Path "$OSDCloudWorkspace\Config") {
+                    Write-Host -ForegroundColor DarkGray "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Mirroring $OSDCloudWorkspace\Config to $($OSDCloud):\OSDCloud\Config"
+                    robocopy "$OSDCloudWorkspace\Config" "$($OSDCloud):\OSDCloud\Config" *.* /mir /mt /ndl /njh /njs /r:0 /w:0 /zb /xd "$RECYCLE.BIN" "System Volume Information"
                 }
                 
                 if (Test-Path "$OSDCloudWorkspace\DriverPacks") {
                     Write-Host -ForegroundColor DarkGray "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Mirroring $OSDCloudWorkspace\DriverPacks to $($OSDCloud):\OSDCloud\DriverPacks"
                     robocopy "$OSDCloudWorkspace\DriverPacks" "$($OSDCloud):\OSDCloud\DriverPacks" *.* /mir /mt /ndl /njh /njs /r:0 /w:0 /zb /xd "$RECYCLE.BIN" "System Volume Information"
-                }
-                
-                if (Test-Path "$OSDCloudWorkspace\ODT") {
-                    Write-Host -ForegroundColor DarkGray "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Mirroring $OSDCloudWorkspace\ODT to $($OSDCloud):\OSDCloud\ODT"
-                    robocopy "$OSDCloudWorkspace\ODT" "$($OSDCloud):\OSDCloud\ODT" *.* /mir /mt /ndl /njh /njs /r:0 /w:0 /zb /xd "$RECYCLE.BIN" "System Volume Information"
                 }
                 
                 if (Test-Path "$OSDCloudWorkspace\OS") {
@@ -73,19 +68,14 @@ function Update-OSDCloud.usb {
                 }
             }
             else {
-                if (Test-Path "$OSDCloudWorkspace\Autopilot") {
-                    Write-Host -ForegroundColor DarkGray "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Copying $OSDCloudWorkspace\Autopilot to $($OSDCloud):\OSDCloud\Autopilot"
-                    robocopy "$OSDCloudWorkspace\Autopilot" "$($OSDCloud):\OSDCloud\Autopilot" *.* /e /mt /ndl /njh /njs /r:0 /w:0 /zb /xd "$RECYCLE.BIN" "System Volume Information"
+                if (Test-Path "$OSDCloudWorkspace\Config") {
+                    Write-Host -ForegroundColor DarkGray "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Copying $OSDCloudWorkspace\Config to $($OSDCloud):\OSDCloud\Config"
+                    robocopy "$OSDCloudWorkspace\Config" "$($OSDCloud):\OSDCloud\Config" *.* /e /mt /ndl /njh /njs /r:0 /w:0 /zb /xd "$RECYCLE.BIN" "System Volume Information"
                 }
                 
                 if (Test-Path "$OSDCloudWorkspace\DriverPacks") {
                     Write-Host -ForegroundColor DarkGray "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Copying $OSDCloudWorkspace\DriverPacks to $($OSDCloud):\OSDCloud\DriverPacks"
                     robocopy "$OSDCloudWorkspace\DriverPacks" "$($OSDCloud):\OSDCloud\DriverPacks" *.* /e /mt /ndl /njh /njs /r:0 /w:0 /zb /xd "$RECYCLE.BIN" "System Volume Information"
-                }
-                
-                if (Test-Path "$OSDCloudWorkspace\ODT") {
-                    Write-Host -ForegroundColor DarkGray "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Copying $OSDCloudWorkspace\ODT to $($OSDCloud):\OSDCloud\ODT"
-                    robocopy "$OSDCloudWorkspace\ODT" "$($OSDCloud):\OSDCloud\ODT" *.* /e /mt /ndl /njh /njs /r:0 /w:0 /zb /xd "$RECYCLE.BIN" "System Volume Information"
                 }
                 
                 if (Test-Path (Join-Path $OSDCloudWorkspace 'OS')) {
