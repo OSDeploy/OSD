@@ -4,7 +4,7 @@ This will return the latest compatible BIOS Update for your system as a PowerShe
 
 .DESCRIPTION
 This will return the latest compatible BIOS Update for your system as a PowerShell Object
-Shortcut for Get-DellSystemCatalogMaster -Component BIOS -Compatible
+Shortcut for Get-DellSystemMasterCatalog -Component BIOS -Compatible
 
 .LINK
 https://osd.osdeploy.com/module/functions/dell/get-mydellbios
@@ -32,9 +32,9 @@ function Get-MyDellBios {
     $SystemSKU = $((Get-WmiObject -Class Win32_ComputerSystem).SystemSKUNumber).Trim()
 	$BIOSVersion = $((Get-WmiObject -Class Win32_BIOS).SMBIOSBIOSVersion).Trim()
     #=================================================
-    #   Get-DellSystemCatalogMaster
+    #   Get-DellSystemMasterCatalog
     #=================================================
-    #$GetMyDellBios = Get-DellSystemCatalogMaster -Component BIOS -Compatible | Sort-Object ReleaseDate -Descending | Select-Object -First 1
+    #$GetMyDellBios = Get-DellSystemMasterCatalog -Component BIOS -Compatible | Sort-Object ReleaseDate -Descending | Select-Object -First 1
     $GetMyDellBIOS = Get-DellBiosCatalog | Sort-Object ReleaseDate -Descending
     $GetMyDellBIOS | Add-Member -MemberType NoteProperty -Name 'Flash64W' -Value 'https://github.com/OSDeploy/OSDCloud/raw/main/BIOS/Flash64W_Ver3.3.8.cab'
     #=================================================

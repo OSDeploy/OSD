@@ -8,15 +8,15 @@ Requires Internet Access to download platformList.cab
 
 
 .EXAMPLE
-Get-HPPlatformListCatalogMaster
+Get-HPPlatformListMasterCatalog
 Don't do this, you will get a big list.
 
 .EXAMPLE
-$Results = Get-HPPlatformListCatalogMaster
+$Results = Get-HPPlatformListMasterCatalog
 Yes do this.  Save it in a Variable
 
 .EXAMPLE
-Get-HPPlatformListCatalogMaster | Out-GridView
+Get-HPPlatformListMasterCatalog | Out-GridView
 Displays all the HP System Ids with the applicable computer model names in GridView
 
 .LINK
@@ -24,7 +24,7 @@ https://osd.osdeploy.com
 
 .NOTES
 #>
-function Get-HPPlatformListCatalogMaster {
+function Get-HPPlatformListMasterCatalog {
     [CmdletBinding()]
     param ()
     #=================================================
@@ -33,8 +33,8 @@ function Get-HPPlatformListCatalogMaster {
     $UseCatalog             = 'Cloud'
     $CloudCatalogUri        = 'https://ftp.hp.com/pub/caps-softpaq/cmit/imagepal/ref/platformList.cab'
     $RawCatalogFile			= Join-Path $env:TEMP (Join-Path 'OSD' 'platformList.xml')
-    $BuildCatalogFile		= Join-Path $env:TEMP (Join-Path 'OSD' 'HPPlatformListCatalogMaster.xml')
-    $OfflineCatalogFile     = "$($MyInvocation.MyCommand.Module.ModuleBase)\Catalogs\HPPlatformListCatalogMaster.xml"
+    $BuildCatalogFile		= Join-Path $env:TEMP (Join-Path 'OSD' 'HPPlatformListMasterCatalog.xml')
+    $OfflineCatalogFile     = "$($MyInvocation.MyCommand.Module.ModuleBase)\Catalogs\HPPlatformListMasterCatalog.xml"
 
     $RawCatalogCabName  	= [string]($CloudCatalogUri | Split-Path -Leaf)
     $RawCatalogCabPath 	    = Join-Path $env:TEMP (Join-Path 'OSD' $RawCatalogCabName)

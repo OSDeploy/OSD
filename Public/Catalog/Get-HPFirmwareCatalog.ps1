@@ -21,9 +21,9 @@ function Get-HPFirmwareCatalog {
     )
 	
     if ($PSBoundParameters.ContainsKey('Compatible')) {
-	    Get-HPSystemCatalogMaster -Component Firmware -Compatible | Sort-Object -Property CreationDate -Descending
+	    Get-HPSystemMasterCatalog -Component Firmware -Compatible | Sort-Object -Property CreationDate -Descending
     }
     else {
-        Get-HPSystemCatalogMaster -Component Firmware | Sort-Object -Property CreationDate -Descending
+        Get-HPSystemMasterCatalog -Component Firmware | Sort-Object -Property CreationDate -Descending
     }
 }

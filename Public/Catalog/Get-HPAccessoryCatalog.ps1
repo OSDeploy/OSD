@@ -21,9 +21,9 @@ function Get-HPAccessoryCatalog {
     )
 	
     if ($PSBoundParameters.ContainsKey('Compatible')) {
-	    Get-HPSystemCatalogMaster -Component 'Accessories Firmware and Driver' -Compatible | Sort-Object -Property CreationDate -Descending
+	    Get-HPSystemMasterCatalog -Component 'Accessories Firmware and Driver' -Compatible | Sort-Object -Property CreationDate -Descending
     }
     else {
-        Get-HPSystemCatalogMaster -Component 'Accessories Firmware and Driver' | Sort-Object -Property CreationDate -Descending
+        Get-HPSystemMasterCatalog -Component 'Accessories Firmware and Driver' | Sort-Object -Property CreationDate -Descending
     }
 }

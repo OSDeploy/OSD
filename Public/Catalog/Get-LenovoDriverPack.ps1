@@ -6,7 +6,7 @@ function Get-LenovoDriverPack {
     #=================================================
     #   Get Catalog
     #=================================================
-    $Results = Get-LenovoDriverPackCatalogMaster | Select-Object CatalogVersion, ReleaseDate, Name, Product, @{Name='DriverPackUrl';Expression={($_.Url)}}, FileName
+    $Results = Get-LenovoDriverPackMasterCatalog | Select-Object CatalogVersion, ReleaseDate, Name, Product, @{Name='DriverPackUrl';Expression={($_.Url)}}, FileName
     #=================================================
     #   DownloadPath
     #=================================================

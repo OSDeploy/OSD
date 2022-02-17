@@ -13,7 +13,7 @@ https://osd.osdeploy.com
 
 .NOTES
 #>
-function Get-HPDriverPackCatalogMaster {
+function Get-HPDriverPackMasterCatalog {
     [CmdletBinding()]
     param (
         [System.String]$DownloadPath,
@@ -25,8 +25,8 @@ function Get-HPDriverPackCatalogMaster {
     $UseCatalog             = 'Cloud'
     $CloudCatalogUri        = 'http://ftp.hp.com/pub/caps-softpaq/cmit/HPClientDriverPackCatalog.cab'
     $RawCatalogFile			= Join-Path $env:TEMP (Join-Path 'OSD' 'HPClientDriverPackCatalog.xml')
-    $BuildCatalogFile		= Join-Path $env:TEMP (Join-Path 'OSD' 'HPDriverPackCatalogMaster.xml')
-    $OfflineCatalogFile     = "$($MyInvocation.MyCommand.Module.ModuleBase)\Catalogs\HPDriverPackCatalogMaster.xml"
+    $BuildCatalogFile		= Join-Path $env:TEMP (Join-Path 'OSD' 'HPDriverPackMasterCatalog.xml')
+    $OfflineCatalogFile     = "$($MyInvocation.MyCommand.Module.ModuleBase)\Catalogs\HPDriverPackMasterCatalog.xml"
     
     $RawCatalogCabName  	= [string]($CloudCatalogUri | Split-Path -Leaf)
     $RawCatalogCabPath 	    = Join-Path $env:TEMP (Join-Path 'OSD' $RawCatalogCabName)

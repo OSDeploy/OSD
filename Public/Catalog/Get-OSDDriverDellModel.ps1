@@ -6,15 +6,59 @@ Returns a PowerShell Object of the Dell Model Driver Packs
 Returns a PowerShell Object of the Dell Model Driver Packs by parsing the Catalog at http://downloads.dell.com/catalog/DriverPackCatalog.cab"
 
 .LINK
-https://osd.osdeploy.com
+https://osd.osdeploy.com/functions/get-osddriverdellmodel
 #>
-function Get-DellOSDDriversCatalog {
+function Get-OSDDriverDellModel {
     [CmdletBinding()]
     param ()
     #=================================================
-    #   DriverPackCatalog
+    #   Variables
     #=================================================
-    $DriverPackCatalog = Get-DellDriverPackMasterCatalog
+    $global:SetOSDDriverDellModel = [ordered]@{
+        Downloads                   = "$env:TEMP\OSD"
+        UrlDownloads                = 'http://downloads.dell.com'
+        UrlDownloadsList            = 'http://downloads.dell.com/published/Pages/index.html'
+        UrlCommunity                = 'http://en.community.dell.com'
+        UrlBios64Utility            = 'http://en.community.dell.com/techcenter/enterprise-client/w/wiki/12237.64-bit-bios-installation-utility'
+        UrlDriverPackTable          = 'http://en.community.dell.com/techcenter/enterprise-client/w/wiki/2065.dell-command-deploy-driver-packs-for-enterprise-client-os-deployment'
+        UrlCabCatalogPC             = 'http://downloads.dell.com/catalog/CatalogPC.cab'
+        UrlCabDriverPackCatalog     = 'http://downloads.dell.com/catalog/DriverPackCatalog.cab'
+    }
+
+    $global:SetOSDDriverDellModel.CatalogPCCab           = [string]($global:SetOSDDriverDellModel.UrlCabCatalogPC | Split-Path -Leaf)
+    $global:SetOSDDriverDellModel.DriverPackCatalogCab   = [string]($global:SetOSDDriverDellModel.UrlCabDriverPackCatalog | Split-Path -Leaf)
+
+    $DownloadPath = $global:SetOSDDriverDellModel.Downloads
+    $DriverPackCatalogCab = $global:SetOSDDriverDellModel.DriverPackCatalogCab
+    $DriverPackCatalogCabFullName = Join-Path $DownloadPath $DriverPackCatalogCab
+    $DriverPackCatalogXmlFullName = Join-Path $DownloadPath 'DriverPackCatalog.xml'
+    $UrlDownloads = $global:SetOSDDriverDellModel.UrlDownloads
+    $UrlCabDriverPackCatalog = $global:SetOSDDriverDellModel.UrlCabDriverPackCatalog
+    #=================================================
+    #   Create DownloadPath
+    #=================================================
+    if (-not (Test-Path $DownloadPath)) {
+        Write-Verbose "Creating $DownloadPath"
+        New-Item $DownloadPath -ItemType Directory -Force -ErrorAction Stop | Out-Null
+    }
+    #=================================================
+    #   Download DriverPackCatalog.cab
+    #=================================================
+    (New-Object System.Net.WebClient).DownloadFile($UrlCabDriverPackCatalog, $DriverPackCatalogCabFullName)
+
+    Expand $DriverPackCatalogCabFullName $DriverPackCatalogXmlFullName | Out-Null
+
+    if (Test-Path $DriverPackCatalogCabFullName) {
+        Remove-Item -Path "$DriverPackCatalogCabFullName" -Force | Out-Null
+    } else {
+        Write-Warning "Unable to download $UrlCabDriverPackCatalog"
+        Return $null
+    }
+    #=================================================
+    #   Dell Catalog
+    #=================================================
+    [xml]$DriverPackCatalogXmlContent = Get-Content "$DriverPackCatalogXmlFullName" -ErrorAction Stop
+    $DriverPackCatalog = $DriverPackCatalogXmlContent.DriverPackManifest.DriverPackage
     #=================================================
     #   ForEach
     #=================================================
@@ -48,7 +92,7 @@ function Get-DellOSDDriversCatalog {
         $MakeMatch = @()
         $MakeNotMatch = @()
 
-        $Generation = 'XX'
+        $Generation = $null
         $SystemFamily = $null
 
         $Model = $null
@@ -74,53 +118,55 @@ function Get-DellOSDDriversCatalog {
         #=================================================
         #   Get Values
         #=================================================
-        $LastUpdate         = [datetime] $item.ReleaseDate
-        $DriverVersion      = $item.DellVersion
-        $DriverReleaseId    = $item.ReleaseID
-        $OperatingSystem    = $item.SupportedOS
-        $OsCode             = $item.osCode
-        $OsArch             = $item.osArch
-        $Generation         = $item.Generation
-        $Model              = $item.Model
-        $SystemSku          = $item.SystemID
-        $DownloadFile       = $item.FileName
-        $SizeMB             = $item.SizeMB
-        $DriverUrl          = $item.Url
-        $DriverInfo         = $item.ImportantInfoUrl
-        $Hash               = $item.HashMD5
-
-        $OsMajor            = $item.majorVersion
-        $OsMinor            = $item.minorVersion
-        $ModelBrand         = $item.Brand
-        $ModelBrandKey      = $item.Key
-        $ModelId            = $item.Model
-        $ModelRtsDate       = [datetime] $item.rtsDate
-        $ModelPrefix        = $item.Prefix
+        $LastUpdate         = [datetime] $item.dateTime
+        $DriverVersion      = $item.dellVersion.Trim()
+        $DriverDelta        = $item.delta.Trim()
+        $DriverFormat       = $item.format.Trim()
+        $Hash               = $item.hashMD5.Trim()
+        $DownloadFile       = $item.Name.Display.'#cdata-section'.Trim()
+        $DriverReleaseId    = $item.releaseID.Trim()
+        $SizeMB             = ($item.size.Trim() | Select-Object -Unique) / 1024
+        $DriverType         = $item.type.Trim()
+        $VendorVersion      = $item.vendorVersion.Trim()
+        $DriverInfo         = $item.ImportantInfo.URL.Trim() | Select-Object -Unique
+        $OperatingSystem    = $item.SupportedOperatingSystems.OperatingSystem.Display.'#cdata-section'.Trim() | Select-Object -Unique
+        $OsArch             = $item.SupportedOperatingSystems.OperatingSystem.osArch.Trim() | Select-Object -Unique
+        $OsCode             = $item.SupportedOperatingSystems.OperatingSystem.osCode.Trim() | Select-Object -Unique
+        $OsType             = $item.SupportedOperatingSystems.OperatingSystem.osType.Trim() | Select-Object -Unique
+        $OsVendor           = $item.SupportedOperatingSystems.OperatingSystem.osVendor.Trim() | Select-Object -Unique
+        $OsMajor            = $item.SupportedOperatingSystems.OperatingSystem.majorVersion.Trim() | Select-Object -Unique
+        $OsMinor            = $item.SupportedOperatingSystems.OperatingSystem.minorVersion.Trim() | Select-Object -Unique
+        $ModelBrand         = $item.SupportedSystems.Brand.Display.'#cdata-section'.Trim() | Select-Object -Unique
+        $ModelBrandKey      = $item.SupportedSystems.Brand.Key.Trim() | Select-Object -Unique
+        $ModelId            = $item.SupportedSystems.Brand.Model.Display.'#cdata-section'.Trim() | Select-Object -Unique
+        $Generation         = $item.SupportedSystems.Brand.Model.Generation.Trim() | Select-Object -Unique
+        $Model              = $item.SupportedSystems.Brand.Model.Name.Trim() | Select-Object -Unique
+        $ModelRtsDate       = [datetime] $($item.SupportedSystems.Brand.Model.rtsdate.Trim() | Select-Object -Unique)
+        $SystemSku          = $item.SupportedSystems.Brand.Model.systemID.Trim() | Select-Object -Unique
+        $ModelPrefix        = $item.SupportedSystems.Brand.Prefix.Trim() | Select-Object -Unique
 
         if ($null -eq $Model) {Continue}
         #=================================================
         #   DriverFamily
         #=================================================
-        if ($ModelPrefix -eq 'IOT') {
+        if ($ModelPrefix -Contains 'IOT') {
             $SystemFamily = 'IOT'
             $IsDesktop = $true
         }
-        if ($ModelPrefix -eq 'LAT') {
+        if ($ModelPrefix -Contains 'LAT') {
             $SystemFamily = 'Latitude'
             $IsLaptop = $true
         }
-        if ($ModelPrefix -eq 'OP') {
+        if ($ModelPrefix -Contains 'OP') {
             $SystemFamily = 'Optiplex'
             $IsDesktop = $true
         }
-        if ($ModelPrefix -eq 'PRE') {
-            $SystemFamily = 'Precision'
-        }
-        if ($ModelPrefix -eq 'TABLET') {
+        if ($ModelPrefix -Contains 'PRE') {$SystemFamily = 'Precision'}
+        if ($ModelPrefix -Contains 'TABLET') {
             $SystemFamily = 'Tablet'
             $IsLaptop = $true
         }
-        if ($ModelPrefix -eq 'XPSNOTEBOOK') {
+        if ($ModelPrefix -Contains 'XPSNOTEBOOK') {
             $SystemFamily = 'XPS'
             $IsLaptop = $true
         }
@@ -138,13 +184,16 @@ function Get-DellOSDDriversCatalog {
         #if ($OsCode -eq 'Windows8') {Continue}
         #if ($OsCode -eq 'Windows8.1') {Continue}
         if ($OsCode -match 'WinPE') {Continue}
+        $DriverUrl = "$UrlDownloads/$($item.path)"
         $OsVersion = "$($OsMajor).$($OsMinor)"
-        if ($OsCode -eq 'Windows7') {$OsVersion = 'Win7'}
-        if ($OsCode -eq 'Windows10') {$OsVersion = 'Win10'}
         if ($OsCode -eq 'Windows11') {$OsVersion = 'Win11'}
-        $DriverName = "$OSDGroup $($Item.Name)"
-        $DriverGrouping = "$Model $OsVersion"
-
+        if ($Generation -eq '') {
+            $DriverName = "$OSDGroup $Generation $Model $OsVersion $DriverVersion"
+        }
+        else {
+            $DriverName = "$OSDGroup $Generation $Model $OsVersion $DriverVersion"
+        }
+        $DriverGrouping = "$Generation $Model $OsVersion"
         if (Test-Path "$DownloadPath\$DownloadFile") {
             $OSDStatus = 'Downloaded'
         }
@@ -208,7 +257,7 @@ function Get-DellOSDDriversCatalog {
     #=================================================
     $global:GetOSDDriverDellModel = $global:GetOSDDriverDellModel | Select-Object LastUpdate,`
     OSDType, OSDGroup, OSDStatus, `
-    DriverName, DriverGrouping, Make, Generation, Model, SystemSku,`
+    DriverGrouping, DriverName, Make, Generation, Model, SystemSku,`
     DriverVersion, DriverReleaseId,`
     OsCode, OsVersion, OsArch,
     DownloadFile, SizeMB, DriverUrl, DriverInfo,`
@@ -216,7 +265,7 @@ function Get-DellOSDDriversCatalog {
     #=================================================
     #   Sort Object
     #=================================================
-    $global:GetOSDDriverDellModel = $global:GetOSDDriverDellModel | Sort-Object DriverName
+    $global:GetOSDDriverDellModel = $global:GetOSDDriverDellModel | Sort-Object LastUpdate -Descending
     #=================================================
     #   Return
     #=================================================

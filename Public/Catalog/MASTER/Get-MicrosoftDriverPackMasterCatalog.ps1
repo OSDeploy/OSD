@@ -13,7 +13,7 @@ https://osd.osdeploy.com
 
 .NOTES
 #>
-function Get-MicrosoftDriverPackCatalogMaster {
+function Get-MicrosoftDriverPackMasterCatalog {
     [CmdletBinding()]
     param (
         [switch]$Compatible,
@@ -483,8 +483,8 @@ $BaseCatalog = @'
     #=================================================
     #$UseCatalog             = 'Offline'
     $CloudCatalogUri        = 'https://support.microsoft.com/en-us/surface/download-drivers-and-firmware-for-surface-09bb2e09-2a4b-cb69-0951-078a7739e120'
-    $BuildCatalogFile		= Join-Path $env:TEMP (Join-Path 'OSD' 'MicrosoftDriverPackCatalogMaster.json')
-    $OfflineCatalogFile     = "$($MyInvocation.MyCommand.Module.ModuleBase)\Catalogs\MicrosoftDriverPackCatalogMaster.json"
+    $BuildCatalogFile		= Join-Path $env:TEMP (Join-Path 'OSD' 'MicrosoftDriverPackMasterCatalog.json')
+    $OfflineCatalogFile     = "$($MyInvocation.MyCommand.Module.ModuleBase)\Catalogs\MicrosoftDriverPackMasterCatalog.json"
     $DownloadsBaseUrl 		= 'https://www.microsoft.com/en-us/download/confirmation.aspx?id='
     #=================================================
     #   Create Paths

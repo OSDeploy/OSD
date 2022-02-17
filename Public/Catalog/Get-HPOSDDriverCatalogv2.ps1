@@ -8,13 +8,13 @@ Returns a PowerShell Object of the HP Model Driver Packs by parsing the Catalog 
 .LINK
 https://osd.osdeploy.com
 #>
-function Get-HPOSDDriversCatalogv2 {
+function Get-HPOSDDriversCatalog {
     [CmdletBinding()]
     param ()
     #=================================================
     #   DriverPackCatalog
     #=================================================
-    $DriverPackCatalog = Get-HPDriverPackCatalogMaster
+    $DriverPackCatalog = Get-HPDriverPackMasterCatalog
     #=================================================
     #   ForEach
     #=================================================

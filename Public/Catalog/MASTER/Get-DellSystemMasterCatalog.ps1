@@ -1,35 +1,60 @@
 <#
 .SYNOPSIS
-Returns the Dell DriverPacks downloads
+Converts the Dell Catalog PC to a PowerShell Object
 
 .DESCRIPTION
-Returns the Dell DriverPacks downloads
+Converts the Dell Catalog PC to a PowerShell Object
+Requires Internet Access to download Dell CatalogPC.cab
+
+.PARAMETER Component
+Filter the results based on these Components:
+Application
+BIOS
+Driver
+Firmware
 
 .PARAMETER Compatible
-Filters results based on your current Product
+If you have a Dell System, this will filter the results based on your
+ComputerSystem SystemSKUNumber
+
+.EXAMPLE
+Get-DellSystemMasterCatalog
+Don't do this, you will get an almost endless list
+
+.EXAMPLE
+$Result = Get-DellSystemMasterCatalog
+Yes do this.  Save it in a Variable
+
+.EXAMPLE
+Get-DellSystemMasterCatalog -Component BIOS | Out-GridView
+Displays all the Dell BIOS Updates in GridView
 
 .LINK
 https://osd.osdeploy.com
 
 .NOTES
 #>
-function Get-DellDriverPackCatalogMaster {
+function Get-DellSystemMasterCatalog {
     [CmdletBinding()]
     param (
         [System.String]$DownloadPath,
-        [switch]$Compatible
+        [switch]$Compatible,
+
+        [ValidateSet('Application','BIOS','Driver','Firmware')]
+        [System.String]$Component
     )
     #=================================================
     #   Paths
     #=================================================
     $UseCatalog				= 'Cloud'
-    $CloudCatalogUri		= 'https://downloads.dell.com/catalog/DriverPackCatalog.cab'
-    $RawCatalogFile			= Join-Path $env:TEMP (Join-Path 'OSD' 'DriverPackCatalog.xml')
-    $BuildCatalogFile		= Join-Path $env:TEMP (Join-Path 'OSD' 'DellDriverPackCatalogMaster.xml')
-    $OfflineCatalogFile		= "$($MyInvocation.MyCommand.Module.ModuleBase)\Catalogs\DellDriverPackCatalogMaster.xml"
+    $CloudCatalogUri		= 'http://downloads.dell.com/catalog/CatalogPC.cab'
+    $RawCatalogFile			= Join-Path $env:TEMP (Join-Path 'OSD' 'CatalogPC.xml')
+    $BuildCatalogFile		= Join-Path $env:TEMP (Join-Path 'OSD' 'DellSystemMasterCatalog.xml')
+    $OfflineCatalogFile		= "$($MyInvocation.MyCommand.Module.ModuleBase)\Catalogs\DellSystemMasterCatalog.xml"
 
     $RawCatalogCabName  	= [string]($CloudCatalogUri | Split-Path -Leaf)
     $RawCatalogCabPath 		= Join-Path $env:TEMP (Join-Path 'OSD' $RawCatalogCabName)
+    
     $DownloadsBaseUrl       = 'http://downloads.dell.com/'
     #=================================================
     #   Create Download Path
@@ -98,78 +123,35 @@ function Get-DellDriverPackCatalogMaster {
     if ($UseCatalog -eq 'Raw') {
         Write-Verbose "Reading the Raw Catalog at $RawCatalogFile"
         [xml]$XmlCatalogContent = Get-Content $RawCatalogFile -ErrorAction Stop
-        $CatalogVersion = (Get-Date $XmlCatalogContent.DriverPackManifest.version).ToString('yy.MM.dd')
-        $DellDriverPackXml = $XmlCatalogContent.DriverPackManifest.DriverPackage
+        $CatalogVersion = $XmlCatalogContent.Manifest.version
+        $Results = $XmlCatalogContent.Manifest.SoftwareComponent
 
-        $DellDriverPackXml = $DellDriverPackXml | Where-Object {($_.SupportedOperatingSystems.OperatingSystem.osCode.Trim() | Select-Object -Unique) -notmatch 'winpe'}
-
-        #=================================================
-        #   Create DriverPack Object
-        #=================================================
-        $Results = foreach ($Item in $DellDriverPackXml) {
-
-            $osCode = $Item.SupportedOperatingSystems.OperatingSystem.osCode.Trim() | Select-Object -Unique
-            if ($osCode -match 'Windows11') {
-                $osShortName = 'Win11'
-            }
-            elseif ($osCode -match 'Windows10') {
-                $osShortName = 'Win10'
-            }
-            elseif ($osCode -match 'Windows7') {
-                $osShortName = 'Win7'
-                Continue
-            }
-            else {
-                Continue
-            }
-
-            $Name = "$($Item.SupportedSystems.Brand.Model.name | Select-Object -Unique) $osShortName $($Item.dellVersion)"
-            $Generation = $Item.SupportedSystems.Brand.Model.generation | Select-Object -Unique
-            if ($Generation -notmatch 'X') {
-                $Generation = 'XX'
-            }
-
-            $ObjectProperties = [Ordered]@{
-                CatalogVersion 	    = $CatalogVersion
-                Status		        = $null
-                Component		    = "DriverPack"
-                ReleaseDate		    = Get-Date $Item.dateTime -Format "yy.MM.dd"
-                Name		        = $Name
-                #Description		= ($Item.Description.Display.'#cdata-section'.Trim())
-                DellVersion		    = $Item.dellVersion
-                Url		            = -join ($DownloadsBaseUrl, $Item.path)
-                VendorVersion		= $Item.vendorVersion
-                FileName		    = (split-path -leaf $Item.path)
-                SizeMB		        = '{0:f2}' -f ($Item.size/1MB)
-                ReleaseID		    = $Item.ReleaseID
-                Brand		        = ($Item.SupportedSystems.Brand.Display.'#cdata-section'.Trim() | Select-Object -Unique)
-                Key		            = ($Item.SupportedSystems.Brand.key | Select-Object -Unique)
-                Prefix		        = ($Item.SupportedSystems.Brand.prefix | Select-Object -Unique)
-                Model		        = ($Item.SupportedSystems.Brand.Model.name | Select-Object -Unique)
-                ModelID		        = ($Item.SupportedSystems.Brand.Model.Display.'#cdata-section'.Trim() | Select-Object -Unique)
-                SystemID		    = ($Item.SupportedSystems.Brand.Model.systemID | Select-Object -Unique)
-                RtsDate		        = ($Item.SupportedSystems.Brand.Model.rtsDate | Select-Object -Unique)
-                Generation		    = $Generation
-                SupportedOS		    = ($Item.SupportedOperatingSystems.OperatingSystem.Display.'#cdata-section'.Trim() | Select-Object -Unique)
-                osCode		        = $osCode
-                osVendor		    = ($Item.SupportedOperatingSystems.OperatingSystem.osVendor.Trim() | Select-Object -Unique)
-                osArch		        = ($Item.SupportedOperatingSystems.OperatingSystem.osArch.Trim() | Select-Object -Unique)
-                osType		        = ($Item.SupportedOperatingSystems.OperatingSystem.osType.Trim() | Select-Object -Unique)
-                majorVersion		= ($Item.SupportedOperatingSystems.OperatingSystem.majorVersion.Trim() | Select-Object -Unique)
-                minorVersion		= ($Item.SupportedOperatingSystems.OperatingSystem.minorVersion.Trim() | Select-Object -Unique)
-                spMajorVersion		= ($Item.SupportedOperatingSystems.OperatingSystem.spMajorVersion.Trim() | Select-Object -Unique)
-                spMinorVersion		= ($Item.SupportedOperatingSystems.OperatingSystem.spMinorVersion.Trim() | Select-Object -Unique)
-                ImportantInfoUrl    = ($Item.ImportantInfo.URL.Trim() | Select-Object -Unique)
-                #Format		        = $Item.format
-                #Delta		        = $Item.delta
-                #Type		        = $Item.type
-                HashMD5		        = $Item.HashMD5
-            }
-            New-Object -TypeName PSObject -Property $ObjectProperties
-        }
+        $Results = $Results | Select-Object @{Label="CatalogVersion";Expression={$CatalogVersion};},
+        @{Label="Status";Expression={$null};},
+        @{Label="Component";Expression={($_.ComponentType.Display.'#cdata-section'.Trim())};},
+        @{Label="ReleaseDate";Expression = {[datetime] ($_.dateTime)};},
+        @{Label="Name";Expression={($_.Name.Display.'#cdata-section'.Trim())};},
+        #@{Label="Description";Expression={($_.Description.Display.'#cdata-section'.Trim())};},
+        @{Label="DellVersion";Expression={$_.dellVersion};},
+        @{Label="Url";Expression={-join ($DownloadsBaseUrl, $_.path)};},
+        @{Label="VendorVersion";Expression={$_.vendorVersion};},
+        @{Label="Criticality";Expression={($_.Criticality.Display.'#cdata-section'.Trim())};},
+        @{Label="FileName";Expression = {(split-path -leaf $_.path)};},
+        @{Label="SizeMB";Expression={'{0:f2}' -f ($_.size/1MB)};},
+        @{Label="PackageID";Expression={$_.packageID};},
+        @{Label="PackageType";Expression={$_.packageType};},
+        @{Label="ReleaseID";Expression={$_.ReleaseID};},
+        @{Label="Category";Expression={($_.Category.Display.'#cdata-section'.Trim())};},
+        @{Label="SupportedDevices";Expression={($_.SupportedDevices.Device.Display.'#cdata-section'.Trim())};},
+        @{Label="SupportedBrand";Expression={($_.SupportedSystems.Brand.Display.'#cdata-section'.Trim())};},
+        @{Label="SupportedModel";Expression={($_.SupportedSystems.Brand.Model.Display.'#cdata-section'.Trim())};},
+        @{Label="SupportedSystemID";Expression={($_.SupportedSystems.Brand.Model.systemID)};},
+        @{Label="SupportedOperatingSystems";Expression={($_.SupportedOperatingSystems.OperatingSystem.Display.'#cdata-section'.Trim())};},
+        @{Label="SupportedArchitecture";Expression={($_.SupportedOperatingSystems.OperatingSystem.osArch)};},
+        @{Label="HashMD5";Expression={$_.HashMD5};}
 
         Write-Verbose "Exporting Build Catalog to $BuildCatalogFile"
-        $Results = $Results | Sort-Object Name
+        $Results = $Results | Sort-Object ReleaseDate -Descending
         $Results | Export-Clixml -Path $BuildCatalogFile
     }
     #=================================================

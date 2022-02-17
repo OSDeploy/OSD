@@ -1,9 +1,9 @@
 <#
 .SYNOPSIS
-Returns the Lenovo DriverPacks downloads
+Returns the Lenovo BIOS downloads
 
 .DESCRIPTION
-Returns the Lenovo DriverPacks downloads
+Returns the Lenovo BIOS downloads
 
 .PARAMETER Compatible
 Filters results based on your current Product
@@ -13,11 +13,11 @@ https://osd.osdeploy.com
 
 .NOTES
 #>
-function Get-LenovoDriverPackCatalogMaster {
+function Get-LenovoBiosMasterCatalog {
     [CmdletBinding()]
     param (
-        [switch]$Compatible,
-        [System.String]$DownloadPath
+        [System.String]$DownloadPath,
+		[switch]$Compatible
     )
     #=================================================
     #   Paths
@@ -25,14 +25,14 @@ function Get-LenovoDriverPackCatalogMaster {
     $UseCatalog           	= 'Cloud'
     $CloudCatalogUri		= 'https://download.lenovo.com/cdrt/td/catalogv2.xml'
     $RawCatalogFile			= Join-Path $env:TEMP (Join-Path 'OSD' 'catalogv2.xml')
-    $BuildCatalogFile       = Join-Path $env:TEMP (Join-Path 'OSD' 'LenovoDriverPackCatalogMaster.xml')
-    $OfflineCatalogFile		= "$($MyInvocation.MyCommand.Module.ModuleBase)\Catalogs\LenovoDriverPackCatalogMaster.xml"
+    $BuildCatalogFile		= Join-Path $env:TEMP (Join-Path 'OSD' 'LenovoBiosMasterCatalog.xml')
+	$OfflineCatalogFile     = "$($MyInvocation.MyCommand.Module.ModuleBase)\Catalogs\LenovoBiosMasterCatalog.xml"
     #=================================================
     #   Create Paths
     #=================================================
-    if (-not(Test-Path (Join-Path $env:TEMP 'OSD'))) {
-        $null = New-Item -Path (Join-Path $env:TEMP 'OSD') -ItemType Directory -Force
-    }
+	if (-not(Test-Path (Join-Path $env:TEMP 'OSD'))) {
+		$null = New-Item -Path (Join-Path $env:TEMP 'OSD') -ItemType Directory -Force
+	}
     #=================================================
     #   Test Build Catalog
     #=================================================
@@ -84,32 +84,71 @@ function Get-LenovoDriverPackCatalogMaster {
         [xml]$XmlCatalogContent = Get-Content -Path $RawCatalogFile -Raw
 
         $ModelList = $XmlCatalogContent.ModelList.Model
-        #=================================================
-        #   Create Object 
-        #=================================================
-        $Results = foreach ($Model in $ModelList) {
-            foreach ($Item in $Model.SCCM) {
-
-                $ObjectProperties = [Ordered]@{
-                    CatalogVersion 	= Get-Date -Format yy.MM.dd
-                    Status          = $null
-                    Component       = 'DriverPack'
-                    Name			= $Model.name
-                    Product			= [array]$Model.Types.Type.split(',').Trim()
-                    FileName        = $Item.'#text' | Split-Path -Leaf
-                    OSVersion       = $Item.version
-                    Url             = $Item.'#text'
-                }
-                New-Object -TypeName PSObject -Property $ObjectProperties
-            }
-        }
-        $Results = $Results | Sort-Object Name, OSVersion -Descending | Group-Object Name | ForEach-Object {$_.Group | Select-Object -First 1}
-        $Results = $Results | Sort-Object Name, OSVersion -Descending | Select-Object CatalogVersion, Status, Component, Name, Product, Url, FileName
-
-        Write-Verbose "Exporting Build Catalog to $BuildCatalogFile"
-        $Results = $Results | Sort-Object Name
-        $Results | Export-Clixml -Path $BuildCatalogFile
-    }
+		#=================================================
+		#   Create Object 
+		#=================================================
+		$Results = foreach ($Model in $ModelList) {
+			foreach ($Item in $Model.BIOS) {
+				If($Item.'#text'){#Some models do not have BIOS updates
+					$Version = $Item.version
+					$UEFIVersion = $null
+					$ECPVersion = $null
+		
+					If($Version -notmatch "^[a-z,A-Z]"){#Do not try to parse BIOS versions that starts with a letter. Ex: M1AKT4FA
+						If($Version -match "-"){
+							$UEFIVersion = ($Version.split("-")[0]).Trim()
+							$ECPVersion = ($Version.split("-")[1]).Trim()
+						}ElseIf($Version -match "/"){
+							$UEFIVersion = ($Version.split("/")[0]).Trim()
+							$ECPVersion = ($Version.split("/")[1]).Trim()
+						}
+		
+						If($ECPVersion -match "^[\d|.]+"){#Make sure we filter out anything added after the ECP version. Ex: 1.28(JDET69WW
+							$ECPVersion = $matches[0]
+						}
+					}
+		
+					If(-not $UEFIVersion){
+						$UEFIVersion = $Version
+					}
+					If(-not $ECPVersion){
+						$ECPVersion = "(none)"
+					}
+		
+					$ObjectProperties = [Ordered]@{
+						CatalogVersion 	= Get-Date -Format yy.MM.dd
+                        Status          = $null
+                        Component       = 'BIOS'
+						Name           	= $Model.name
+						Product         = $Model.Types.Type.split(',').Trim()
+						UEFIVersion     = $UEFIVersion
+						ECPVersion      = $ECPVersion #Embedded Controller Program
+						Image           = $Item.image
+						FileName        = $Item.'#text' | Split-Path -Leaf
+						Url             = $Item.'#text'
+					}
+					New-Object -TypeName PSObject -Property $ObjectProperties
+				}			
+			}
+		}
+		
+		#Some BIOS packages are applicable to multiple models, grouping results...
+		$Results = $Results | Group-Object -Property Image | Select-Object -Property `
+			@{Label="CatalogVersion";Expression={($_.Group)[0].CatalogVersion};},
+            @{Label="Status";Expression={$null};},
+            @{Label="Component";Expression={'BIOS'};},
+			@{Label="SupportedModel";Expression={$_.Group.Name | Select-Object -Unique};},
+			@{Label="SupportedProduct";Expression={$_.Group.Product | Select-Object -Unique};},
+			@{Label="UEFIVersion";Expression={($_.Group)[0].UEFIVersion};},
+			@{Label="ECPVersion";Expression={($_.Group)[0].ECPVersion};},
+			@{Label="Image";Expression={($_.Group)[0].Image};},
+			@{Label="FileName";Expression={($_.Group)[0].FileName};},
+			@{Label="Url";Expression={($_.Group)[0].Url};}
+	
+		Write-Verbose "Exporting Offline Catalog to $BuildCatalogFile"
+        $Results = $Results | Sort-Object SupportedModel
+		$Results | Export-Clixml -Path $BuildCatalogFile
+	}
     #=================================================
     #   UseCatalog Build
     #=================================================
@@ -152,6 +191,6 @@ function Get-LenovoDriverPackCatalogMaster {
     #=================================================
     #   Component
     #=================================================
-    $Results | Sort-Object -Property Name
+    $Results | Sort-Object -Property SupportedModel
     #=================================================
 }

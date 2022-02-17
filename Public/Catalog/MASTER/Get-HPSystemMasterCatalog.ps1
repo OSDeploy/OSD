@@ -19,15 +19,15 @@ If you have a HP System, this will filter the results based on your
 ComputerSystem Product (Win32_BaseBoard Product)
 
 .EXAMPLE
-Get-HPSystemCatalogMaster
+Get-HPSystemMasterCatalog
 Don't do this, you will get an almost endless list
 
 .EXAMPLE
-$Results = Get-HPSystemCatalogMaster
+$Results = Get-HPSystemMasterCatalog
 Yes do this.  Save it in a Variable
 
 .EXAMPLE
-Get-HPSystemCatalogMaster -Component BIOS | Out-GridView
+Get-HPSystemMasterCatalog -Component BIOS | Out-GridView
 Displays all the HP BIOS updates in GridView
 
 .LINK
@@ -35,7 +35,7 @@ https://osd.osdeploy.com
 
 .NOTES
 #>
-function Get-HPSystemCatalogMaster {
+function Get-HPSystemMasterCatalog {
     [CmdletBinding()]
     param (
         [System.String]$DownloadPath,
@@ -51,8 +51,8 @@ function Get-HPSystemCatalogMaster {
     $CloudCatalogUri        = 'https://hpia.hpcloud.hp.com/downloads/sccmcatalog/HpCatalogForSms.latest.cab'
     $RawCatalogFileName     = 'HpCatalogForSms.xml'
     $RawCatalogFile			= Join-Path $env:TEMP (Join-Path 'OSD' 'HpCatalogForSms.xml')
-    $BuildCatalogFile		= Join-Path $env:TEMP (Join-Path 'OSD' 'HPSystemCatalogMaster.xml')
-    $OfflineCatalogFile     = "$($MyInvocation.MyCommand.Module.ModuleBase)\Catalogs\HPSystemCatalogMaster.xml"
+    $BuildCatalogFile		= Join-Path $env:TEMP (Join-Path 'OSD' 'HPSystemMasterCatalog.xml')
+    $OfflineCatalogFile     = "$($MyInvocation.MyCommand.Module.ModuleBase)\Catalogs\HPSystemMasterCatalog.xml"
 
     $RawCatalogCabName  	= [string]($CloudCatalogUri | Split-Path -Leaf)
     $RawCatalogCabPath 		= Join-Path $env:TEMP (Join-Path 'OSD' $RawCatalogCabName)
@@ -125,7 +125,7 @@ function Get-HPSystemCatalogMaster {
     if ($UseCatalog -eq 'Raw') {
         Write-Verbose "Reading the Raw Catalog at $RawCatalogFile"
         $PlatformCatalogHashTable = @{}
-        Get-HPPlatformListCatalogMaster | ForEach-Object{
+        Get-HPPlatformListMasterCatalog | ForEach-Object{
             $PlatformCatalogHashTable.Add($_.SystemId,$_.SupportedModel)
         }
         
