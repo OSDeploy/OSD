@@ -30,6 +30,10 @@ function Set-OSDCloud.workspace {
         WorkspacePath = $WorkspacePath
     }
 
+    if (-not (Test-Path "$env:ProgramData\OSDCloud")) {
+        $null = New-Item -Path "$env:ProgramData\OSDCloud" -ItemType Directory -Force -ErrorAction Stop
+    }
+
     $WorkspaceSettings | ConvertTo-Json | Out-File "$env:ProgramData\OSDCloud\workspace.json" -Encoding ascii -Width 2000 -Force
 
     $WorkspacePath

@@ -55,6 +55,8 @@ function Save-OSDCloud.usb {
         [System.String]$Manufacturer = (Get-MyComputerManufacturer -Brief),
         [System.String]$Product = (Get-MyComputerProduct)
     )
+    Write-Warning 'This function has been replaced by Add-OSDCloudUSB'
+    Break
     #=================================================
     #	Start the Clock
     #=================================================

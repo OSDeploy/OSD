@@ -20,7 +20,7 @@ function Get-MyBiosUpdate {
         $Result[0]
     }
     elseif ($Manufacturer -eq 'Lenovo') {
-        $Result = Get-LenovoBiosCatalog | Where-Object {($_.SupportedProduct -contains $Product)}
+        $Result = Get-LenovoBiosCatalogMaster | Where-Object {($_.SupportedProduct -contains $Product)}
         $Result[0]
     }
     else {

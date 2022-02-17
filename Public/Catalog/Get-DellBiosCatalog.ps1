@@ -21,9 +21,9 @@ function Get-DellBiosCatalog {
     )
 	
     if ($PSBoundParameters.ContainsKey('Compatible')) {
-	    Get-DellSystemCatalog -Component BIOS -Compatible | Sort-Object -Property ReleaseDate -Descending
+	    Get-DellSystemCatalogMaster -Component BIOS -Compatible | Sort-Object -Property ReleaseDate -Descending
     }
     else {
-        Get-DellSystemCatalog -Component BIOS | Sort-Object -Property ReleaseDate -Descending
+        Get-DellSystemCatalogMaster -Component BIOS | Sort-Object -Property ReleaseDate -Descending
     }
 }

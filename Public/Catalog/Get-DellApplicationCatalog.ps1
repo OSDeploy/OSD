@@ -21,9 +21,9 @@ function Get-DellApplicationCatalog {
     )
 	
     if ($PSBoundParameters.ContainsKey('Compatible')) {
-	    Get-DellSystemCatalog -Component Application -Compatible | Sort-Object -Property ReleaseDate -Descending
+	    Get-DellSystemCatalogMaster -Component Application -Compatible | Sort-Object -Property ReleaseDate -Descending
     }
     else {
-        Get-DellSystemCatalog -Component Application | Sort-Object -Property ReleaseDate -Descending
+        Get-DellSystemCatalogMaster -Component Application | Sort-Object -Property ReleaseDate -Descending
     }
 }

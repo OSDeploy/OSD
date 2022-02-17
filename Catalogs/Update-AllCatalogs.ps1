@@ -2,72 +2,72 @@ Import-Module -Name OSD -Force
 #=================================================
 #   DellDriverPackCatalog
 #=================================================
-$null = Get-DellDriverPackCatalog -Verbose
-$Source = Join-Path $env:TEMP (Join-Path 'OSD' 'DellDriverPackCatalog.xml')
-$Destination = Join-Path (Get-Module OSD).ModuleBase "Catalogs\DellDriverPackCatalog.xml"
+$null = Get-DellDriverPackCatalogMaster -Verbose
+$Source = Join-Path $env:TEMP (Join-Path 'OSD' 'DellDriverPackCatalogMaster.xml')
+$Destination = Join-Path (Get-Module OSD).ModuleBase "Catalogs\DellDriverPackCatalogMaster.xml"
 if (Test-Path $Source) {
     Copy-Item $Source $Destination -Force
 }
 #=================================================
 #   DellSystemCatalog
 #=================================================
-$null = Get-DellSystemCatalog -Verbose
-$Source = Join-Path $env:TEMP (Join-Path 'OSD' 'DellSystemCatalog.xml')
-$Destination = Join-Path (Get-Module OSD).ModuleBase "Catalogs\DellSystemCatalog.xml"
+$null = Get-DellSystemCatalogMaster -Verbose
+$Source = Join-Path $env:TEMP (Join-Path 'OSD' 'DellSystemCatalogMaster.xml')
+$Destination = Join-Path (Get-Module OSD).ModuleBase "Catalogs\DellSystemCatalogMaster.xml"
 if (Test-Path $Source) {
     Copy-Item $Source $Destination -Force
 }
 #=================================================
 #   HPPlatformListCatalog
 #=================================================
-$null = Get-HPPlatformListCatalog -Verbose
-$Source = Join-Path $env:TEMP (Join-Path 'OSD' 'HPPlatformListCatalog.xml')
-$Destination = Join-Path (Get-Module OSD).ModuleBase "Catalogs\Get-HPPlatformListCatalog.xml"
+$null = Get-HPPlatformListCatalogMaster -Verbose
+$Source = Join-Path $env:TEMP (Join-Path 'OSD' 'HPPlatformListCatalogMaster.xml')
+$Destination = Join-Path (Get-Module OSD).ModuleBase "Catalogs\HPPlatformListCatalogMaster.xml"
 if (Test-Path $Source) {
     Copy-Item $Source $Destination -Force
 }
 #=================================================
 #   HPSystemCatalog
 #=================================================
-$null = Get-HPSystemCatalog -Verbose
-$Source = Join-Path $env:TEMP (Join-Path 'OSD' 'HPSystemCatalog.xml')
-$Destination = Join-Path (Get-Module OSD).ModuleBase "Catalogs\HPSystemCatalog.xml"
+$null = Get-HPSystemCatalogMaster -Verbose
+$Source = Join-Path $env:TEMP (Join-Path 'OSD' 'HPSystemCatalogMaster.xml')
+$Destination = Join-Path (Get-Module OSD).ModuleBase "Catalogs\HPSystemCatalogMaster.xml"
 if (Test-Path $Source) {
     Copy-Item $Source $Destination -Force
 }
 #=================================================
 #   HPDriverPackCatalog
 #=================================================
-$null = Get-HPDriverPackCatalog -Verbose
-$Source = Join-Path $env:TEMP (Join-Path 'OSD' 'HPDriverPackCatalog.xml')
-$Destination = Join-Path (Get-Module OSD).ModuleBase "Catalogs\HPDriverPackCatalog.xml"
+$null = Get-HPDriverPackCatalogMaster -Verbose
+$Source = Join-Path $env:TEMP (Join-Path 'OSD' 'HPDriverPackCatalogMaster.xml')
+$Destination = Join-Path (Get-Module OSD).ModuleBase "Catalogs\HPDriverPackCatalogMaster.xml"
 if (Test-Path $Source) {
     Copy-Item $Source $Destination -Force
 }
 #=================================================
 #   LenovoBiosCatalog
 #=================================================
-$null = Get-LenovoBiosCatalog -Verbose
-$Source = Join-Path $env:TEMP (Join-Path 'OSD' 'LenovoBiosCatalog.xml')
-$Destination = Join-Path (Get-Module OSD).ModuleBase "Catalogs\LenovoBiosCatalog.xml"
+$null = Get-LenovoBiosCatalogMaster -Verbose
+$Source = Join-Path $env:TEMP (Join-Path 'OSD' 'LenovoBiosCatalogMaster.xml')
+$Destination = Join-Path (Get-Module OSD).ModuleBase "Catalogs\LenovoBiosCatalogMaster.xml"
 if (Test-Path $Source) {
     Copy-Item $Source $Destination -Force
 }
 #=================================================
 #   LenovoDriverPackCatalog
 #=================================================
-$null = Get-LenovoDriverPackCatalog -Verbose
-$Source = Join-Path $env:TEMP (Join-Path 'OSD' 'LenovoDriverPackCatalog.xml')
-$Destination = Join-Path (Get-Module OSD).ModuleBase "Catalogs\LenovoDriverPackCatalog.xml"
+$null = Get-LenovoDriverPackCatalogMaster -Verbose
+$Source = Join-Path $env:TEMP (Join-Path 'OSD' 'LenovoDriverPackCatalogMaster.xml')
+$Destination = Join-Path (Get-Module OSD).ModuleBase "Catalogs\LenovoDriverPackCatalogMaster.xml"
 if (Test-Path $Source) {
     Copy-Item $Source $Destination -Force
 }
 #=================================================
 #   MicrosoftDriverPackCatalog
 #=================================================
-$null = Get-MicrosoftDriverPackCatalog -Verbose -UseCatalog Cloud
-$Source = Join-Path $env:TEMP (Join-Path 'OSD' 'MicrosoftDriverPackCatalog.json')
-$Destination = Join-Path (Get-Module OSD).ModuleBase "Catalogs\MicrosoftDriverPackCatalog.json"
+$null = Get-MicrosoftDriverPackCatalogMaster -Verbose -UseCatalog Cloud
+$Source = Join-Path $env:TEMP (Join-Path 'OSD' 'MicrosoftDriverPackCatalogMaster.json')
+$Destination = Join-Path (Get-Module OSD).ModuleBase "Catalogs\MicrosoftDriverPackCatalogMaster.json"
 if (Test-Path $Source) {
     Copy-Item $Source $Destination -Force
 }

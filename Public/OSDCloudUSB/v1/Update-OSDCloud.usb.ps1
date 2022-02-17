@@ -3,6 +3,8 @@ function Update-OSDCloud.usb {
     param (
         [switch]$Mirror
     )
+    Write-Warning 'This function has been replaced by Update-OSDCloudUSB'
+    Break
     #=================================================
     #	Block
     #=================================================

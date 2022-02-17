@@ -3,25 +3,25 @@ function Get-DellDriverPack {
     param (
         [System.String]$DownloadPath,
         
-        [ValidateSet('Win10','Win11')]
-        [System.String]$OsCode
+        [ValidateSet('Windows 11 x64','Windows 10 x64')]
+        [System.String]$DriverPackOS
     )
     #=================================================
     #   Get Catalog
     #=================================================
-    $Results = Get-DellDriverPackCatalog | Select-Object CatalogVersion, ReleaseDate, Name, @{Name='Product';Expression={($_.SystemID)}}, @{Name='DriverPackUrl';Expression={($_.Url)}}, FileName, SupportedOS
+    $Results = Get-DellDriverPackCatalogMaster | Select-Object CatalogVersion, ReleaseDate, Name, @{Name='Product';Expression={($_.SystemID)}}, @{Name='DriverPackUrl';Expression={($_.Url)}}, FileName, @{Name='DriverPackOS';Expression={($_.SupportedOS)}}
     $Results = $Results | Where-Object {$null -ne $_.Product}
     #=================================================
-    #   OsCode
+    #   DriverPackOS
     #=================================================
-    if ($OsCode -eq 'Win11') {
-        $Results = $Results | Where-Object {$_.SupportedOS -contains 'Windows 11 x64'}
+    if ($DriverPackOS -eq 'Win11') {
+        $Results = $Results | Where-Object {$_.DriverPackOS -contains 'Windows 11 x64'}
     }
-    elseif ($OsCode -eq 'Win10') {
-        $Results = $Results | Where-Object {$_.SupportedOS -contains 'Windows 10 x64'}
+    elseif ($DriverPackOS -eq 'Win10') {
+        $Results = $Results | Where-Object {$_.DriverPackOS -contains 'Windows 10 x64'}
     }
     else {
-        $Results = $Results | Where-Object {($_.SupportedOS -contains 'Windows 11 x64') -or ($_.SupportedOS -contains 'Windows 10 x64')}
+        $Results = $Results | Where-Object {($_.DriverPackOS -contains 'Windows 11 x64') -or ($_.DriverPackOS -contains 'Windows 10 x64')}
     }
     #$Results = $Results | Sort-Object SupportedOS -Descending | Group-Object Name | ForEach-Object {$_.Group | Select-Object -First 1}
     #=================================================

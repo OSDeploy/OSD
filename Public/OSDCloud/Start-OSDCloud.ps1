@@ -580,14 +580,14 @@ function Start-OSDCloud {
         Write-Host -ForegroundColor Cyan "Get-MyDriverPack"
 
         if ($OSVersion -eq 'Windows 11') {
-            $Global:StartOSDCloud.GetMyDriverPack = Get-MyDriverPack -Manufacturer $Global:StartOSDCloud.Manufacturer -Product $Global:StartOSDCloud.Product -OsCode 'Win11'
+            $Global:StartOSDCloud.GetMyDriverPack = Get-MyDriverPack -Manufacturer $Global:StartOSDCloud.Manufacturer -Product $Global:StartOSDCloud.Product -DriverPackOS 'Windows 11 x64'
 
             if (! ($Global:StartOSDCloud.GetMyDriverPack)) {
-                $Global:StartOSDCloud.GetMyDriverPack = Get-MyDriverPack -Manufacturer $Global:StartOSDCloud.Manufacturer -Product $Global:StartOSDCloud.Product -OsCode 'Win10'
+                $Global:StartOSDCloud.GetMyDriverPack = Get-MyDriverPack -Manufacturer $Global:StartOSDCloud.Manufacturer -Product $Global:StartOSDCloud.Product -DriverPackOS 'Windows 10 x64'
             }
         }
         else {
-            $Global:StartOSDCloud.GetMyDriverPack = Get-MyDriverPack -Manufacturer $Global:StartOSDCloud.Manufacturer -Product $Global:StartOSDCloud.Product -OsCode 'Win10'
+            $Global:StartOSDCloud.GetMyDriverPack = Get-MyDriverPack -Manufacturer $Global:StartOSDCloud.Manufacturer -Product $Global:StartOSDCloud.Product -DriverPackOS 'Windows 10 x64'
         }
 
         if ($Global:StartOSDCloud.GetMyDriverPack) {

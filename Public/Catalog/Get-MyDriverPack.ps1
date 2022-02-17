@@ -4,8 +4,8 @@ function Get-MyDriverPack {
         [System.String]$Manufacturer = (Get-MyComputerManufacturer -Brief),
         [System.String]$Product = (Get-MyComputerProduct),
         
-        [ValidateSet('Win10','Win11')]
-        [System.String]$OsCode = 'Win10'
+        [ValidateSet('Windows 11 x64','Windows 10 x64')]
+        [System.String]$DriverPackOS
     )
     #=================================================
     #   Set ErrorActionPreference
@@ -15,11 +15,14 @@ function Get-MyDriverPack {
     #   Action
     #=================================================
     if ($Manufacturer -eq 'Dell') {
-        if ($OsCode -eq 'Win10') {
-            $Results = Get-DellDriverPack -OsCode 'Win10' | Where-Object {($_.Product -contains $Product)}
+        if ($DriverPackOS -eq 'Windows 10 x64') {
+            $Results = Get-DellDriverPack -DriverPackOS 'Windows 10 x64' | Where-Object {($_.Product -contains $Product)}
         }
-        if ($OsCode -eq 'Win11') {
-            $Results = Get-DellDriverPack -OsCode 'Win11' | Where-Object {($_.Product -contains $Product)}
+        elseif ($DriverPackOS -eq 'Windows 11 x64') {
+            $Results = Get-DellDriverPack -DriverPackOS 'Windows 11 x64' | Where-Object {($_.Product -contains $Product)}
+        }
+        else {
+            $Results = Get-DellDriverPack | Where-Object {($_.Product -contains $Product)}
         }
     }
     elseif ($Manufacturer -eq 'HP') {
@@ -51,21 +54,23 @@ function Save-MyDriverPack {
         [System.String]$Manufacturer = (Get-MyComputerManufacturer -Brief),
         [System.String]$Product = (Get-MyComputerProduct),
         
-        [ValidateSet('Win10','Win11')]
-        [System.String]$OsCode = 'Win10'
+        [ValidateSet('Windows 11 x64','Windows 10 x64')]
+        [System.String]$DriverPackOS
     )
     Write-Verbose "Manufacturer: $Manufacturer"
     Write-Verbose "Product: $Product"
-    Write-Verbose "OsCode: $OsCode"
+    Write-Verbose "DriverPackOS: $DriverPackOS"
     #=================================================
     #   Block
     #=================================================
-    Block-StandardUser
+    if ($Expand) {
+        Block-StandardUser
+    }
     Block-WindowsVersionNe10
     #=================================================
     #   Get-MyDriverPack
     #=================================================
-    $GetMyDriverPack = Get-MyDriverPack -Manufacturer $Manufacturer -Product $Product -OsCode $OsCode
+    $GetMyDriverPack = Get-MyDriverPack -Manufacturer $Manufacturer -Product $Product -DriverPackOS $DriverPackOS
 
     if ($GetMyDriverPack) {
         $OutFile = Join-Path $DownloadPath $GetMyDriverPack.FileName

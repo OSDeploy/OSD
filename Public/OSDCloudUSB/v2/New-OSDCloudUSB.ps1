@@ -31,6 +31,7 @@ function New-OSDCloudUSB {
     Block-WindowsVersionNe10
     Block-PowerShellVersionLt5
     Block-WindowsReleaseIdLt1703
+    Block-WinPE
     #=================================================
     #	Initialize
     #=================================================
@@ -39,12 +40,26 @@ function New-OSDCloudUSB {
     $DataLabel = 'OSDCloud'
     $ErrorActionPreference = 'Stop'
     #=================================================
-    #	Set Workspace
+    #	New-Bootable.usb
     #=================================================
-    if ($PSBoundParameters.ContainsKey('WorkspacePath')) {
-        Set-OSDCloud.workspace -WorkspacePath $WorkspacePath -ErrorAction Stop | Out-Null
+    $BootableUSB = New-Bootable.usb -BootLabel 'WinPE' -DataLabel 'OSDCloud'
+    #=================================================
+    #	Test USB Volumes
+    #=================================================
+    $WinPEVolume = Get-Partition.usb | Where-Object {($_.DiskNumber -eq $BootableUSB.DiskNumber) -and ($_.PartitionNumber -eq 2)}
+    if (-NOT ($WinPEVolume)) {
+        Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Unable to create OSDCloud WinPE Partition"
+        Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Something went very very wrong in this process"
+        Write-Host -ForegroundColor DarkGray "========================================================================="
+        Break
     }
-    $WorkspacePath = Get-OSDCloud.workspace -ErrorAction Stop
+    $OSDCloudVolume = Get-Partition.usb | Where-Object {($_.DiskNumber -eq $BootableUSB.DiskNumber) -and ($_.PartitionNumber -eq 1)}
+    if (-NOT ($OSDCloudVolume)) {
+        Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Unable to create OSDCloud Data Partition"
+        Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Something went very very wrong in this process"
+        Write-Host -ForegroundColor DarkGray "========================================================================="
+        Break
+    }
     #=================================================
     #	WorkspacePath
     #=================================================
@@ -55,63 +70,32 @@ function New-OSDCloudUSB {
 
     if (-NOT ($WorkspacePath)) {
         Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Unable to find an OSDCloud Workspace at $WorkspacePath"
-        Get-Help New-OSDCloudUSB -Examples
+        Write-Host -ForegroundColor DarkGray "========================================================================="
         Break
     }
 
     if (-NOT (Test-Path $WorkspacePath)) {
         Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Unable to find an OSDCloud Workspace at $WorkspacePath"
-        Get-Help New-OSDCloudUSB -Examples
+        Write-Host -ForegroundColor DarkGray "========================================================================="
         Break
     }
 
     if (-NOT (Test-Path "$WorkspacePath\Media\sources\boot.wim")) {
         Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Unable to find an OSDCloud WinPE at $WorkspacePath\Media\sources\boot.wim"
-        Get-Help New-OSDCloudUSB -Examples
+        Write-Host -ForegroundColor DarkGray "========================================================================="
         Break
     }
     #=================================================
-    #	New-Bootable.usb
+    #	Update WinPE Volume
     #=================================================
-    $BootableUSB = New-Bootable.usb -BootLabel 'WinPE' -DataLabel 'OSDCloud'
-    #=================================================
-    #	Verify Volumes
-    #=================================================
-    $WinPEVolume = Get-Partition.usb | Where-Object {($_.DiskNumber -eq $BootableUSB.DiskNumber) -and ($_.PartitionNumber -eq 2)}
-    if (-NOT ($WinPEVolume)) {
-        Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Unable to create OSDCloud WinPE Partition"
-        Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Something went very very wrong in this process"
-        Break
-    }
-    $OSDCloudVolume = Get-Partition.usb | Where-Object {($_.DiskNumber -eq $BootableUSB.DiskNumber) -and ($_.PartitionNumber -eq 1)}
-    if (-NOT ($OSDCloudVolume)) {
-        Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Unable to create OSDCloud Data Partition"
-        Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Something went very very wrong in this process"
-        Break
-    }
-    #=================================================
-    #	WinPE Volume
-    #=================================================
-    $WinPEVolume = Get-Partition.usb | Where-Object {($_.DiskNumber -eq $BootableUSB.DiskNumber) -and ($_.PartitionNumber -eq 2)}
-
-    if (-NOT ($WinPEVolume)) {
-        Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Unable to find OSDCloud WinPE Partition"
-        Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Something went very very wrong in this process"
-        Break
-    }
-
     if ((Test-Path -Path "$WorkspacePath\Media") -and (Test-Path -Path "$($WinPEVolume.DriveLetter):\")) {
-        Write-Host -ForegroundColor DarkGray "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Copying $WorkspacePath\Media and OSDCloud WinPE partition at $($WinPEVolume.DriveLetter):\"
+        Write-Host -ForegroundColor DarkGray "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Copying $WorkspacePath\Media to OSDCloud WinPE partition at $($WinPEVolume.DriveLetter):\"
         robocopy "$WorkspacePath\Media" "$($WinPEVolume.DriveLetter):\" *.* /e /ndl /njh /njs /np /r:0 /w:0 /b /zb
     }
-    #=================================================
-    #	OSDCloud Volume
-    #=================================================
-
-    
     #=================================================
     #   Complete
     #=================================================
     Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) New-OSDCloudUSB is complete"
     Write-Host -ForegroundColor DarkGray "========================================================================="
+    #=================================================
 }
