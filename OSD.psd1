@@ -4,7 +4,7 @@
 RootModule = 'OSD.psm1'
 
 # Version number of this module.
-ModuleVersion = '22.2.11.1'
+ModuleVersion = '22.2.17.1'
 
 # Supported PSEditions
 CompatiblePSEditions = @('Desktop')
@@ -234,7 +234,6 @@ FunctionsToExport =
 'Save-MyDriverPack',
 'Save-OSDCloud.usb',
 'Save-OSDCloudDriverPack.usb',
-'Save-OSDCloudOfflineModules',
 'Save-OSDDownload',
 'Save-SystemFirmwareUpdate',
 'Save-WebFile',
@@ -293,12 +292,12 @@ FunctionsToExport =
 'ConvertTo-PSKeyVaultSecret',
 'Get-OSDDriverDellModel',
 'Get-OSDDriverHpModel',
-'Add-OSDCloudUSB',
 'New-OSDCloudUSB',
 'Update-OSDCloudUSB',
 'Import-OSDCloudUSB',
 'Get-DellOSDDriversCatalog',
-'Get-HPOSDDriversCatalog'
+'Get-HPOSDDriversCatalog',
+'Save-OSDCloudOffline'
 
 # Cmdlets to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no cmdlets to export.
 CmdletsToExport = @()

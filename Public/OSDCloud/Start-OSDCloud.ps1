@@ -579,21 +579,11 @@ function Start-OSDCloud {
         Write-Host -ForegroundColor DarkGray "========================================================================="
         Write-Host -ForegroundColor Cyan "Get-MyDriverPack"
 
-        if ($OSVersion -eq 'Windows 11') {
-            $Global:StartOSDCloud.GetMyDriverPack = Get-MyDriverPack -Manufacturer $Global:StartOSDCloud.Manufacturer -Product $Global:StartOSDCloud.Product -DriverPackOS 'Windows 11 x64'
-
-            if (! ($Global:StartOSDCloud.GetMyDriverPack)) {
-                $Global:StartOSDCloud.GetMyDriverPack = Get-MyDriverPack -Manufacturer $Global:StartOSDCloud.Manufacturer -Product $Global:StartOSDCloud.Product -DriverPackOS 'Windows 10 x64'
-            }
-        }
-        else {
-            $Global:StartOSDCloud.GetMyDriverPack = Get-MyDriverPack -Manufacturer $Global:StartOSDCloud.Manufacturer -Product $Global:StartOSDCloud.Product -DriverPackOS 'Windows 10 x64'
-        }
+        $Global:StartOSDCloud.GetMyDriverPack = Get-MyDriverPack -Manufacturer $Global:StartOSDCloud.Manufacturer -Product $Global:StartOSDCloud.Product
 
         if ($Global:StartOSDCloud.GetMyDriverPack) {
             Write-Host -ForegroundColor DarkGray "Name: $($Global:StartOSDCloud.GetMyDriverPack.Name)"
             Write-Host -ForegroundColor DarkGray "Product: $($Global:StartOSDCloud.GetMyDriverPack.Product)"
-
 
             $Global:StartOSDCloud.DriverPackOffline = Find-OSDCloudFile -Name $Global:StartOSDCloud.GetMyDriverPack.FileName -Path '\OSDCloud\DriverPacks\' | Sort-Object FullName
             $Global:StartOSDCloud.DriverPackOffline = $Global:StartOSDCloud.DriverPackOffline | Where-Object {$_.FullName -notlike "C*"} | Where-Object {$_.FullName -notlike "X*"} | Select-Object -First 1

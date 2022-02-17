@@ -2,10 +2,7 @@ function Get-MyDriverPack {
     [CmdletBinding()]
     param (
         [System.String]$Manufacturer = (Get-MyComputerManufacturer -Brief),
-        [System.String]$Product = (Get-MyComputerProduct),
-        
-        [ValidateSet('Windows 11 x64','Windows 10 x64')]
-        [System.String]$DriverPackOS
+        [System.String]$Product = (Get-MyComputerProduct)
     )
     #=================================================
     #   Set ErrorActionPreference
@@ -15,15 +12,7 @@ function Get-MyDriverPack {
     #   Action
     #=================================================
     if ($Manufacturer -eq 'Dell') {
-        if ($DriverPackOS -eq 'Windows 10 x64') {
-            $Results = Get-DellDriverPack -DriverPackOS 'Windows 10 x64' | Where-Object {($_.Product -contains $Product)}
-        }
-        elseif ($DriverPackOS -eq 'Windows 11 x64') {
-            $Results = Get-DellDriverPack -DriverPackOS 'Windows 11 x64' | Where-Object {($_.Product -contains $Product)}
-        }
-        else {
-            $Results = Get-DellDriverPack | Where-Object {($_.Product -contains $Product)}
-        }
+        $Results = Get-DellDriverPack | Where-Object {($_.Product -contains $Product)}
     }
     elseif ($Manufacturer -eq 'HP') {
         $Results = Get-HpDriverPack | Where-Object {($_.Product -contains $Product)}
@@ -41,7 +30,7 @@ function Get-MyDriverPack {
         $Results[0]
     }
     else {
-        Write-Warning "$Manufacturer is not supported yet"
+        Write-Warning "$Manufacturer $Product is not supported"
     }
     #=================================================
 }
@@ -52,14 +41,10 @@ function Save-MyDriverPack {
         [System.String]$DownloadPath = 'C:\Drivers',
         [switch]$Expand,
         [System.String]$Manufacturer = (Get-MyComputerManufacturer -Brief),
-        [System.String]$Product = (Get-MyComputerProduct),
-        
-        [ValidateSet('Windows 11 x64','Windows 10 x64')]
-        [System.String]$DriverPackOS
+        [System.String]$Product = (Get-MyComputerProduct)
     )
     Write-Verbose "Manufacturer: $Manufacturer"
     Write-Verbose "Product: $Product"
-    Write-Verbose "DriverPackOS: $DriverPackOS"
     #=================================================
     #   Block
     #=================================================
@@ -70,7 +55,7 @@ function Save-MyDriverPack {
     #=================================================
     #   Get-MyDriverPack
     #=================================================
-    $GetMyDriverPack = Get-MyDriverPack -Manufacturer $Manufacturer -Product $Product -DriverPackOS $DriverPackOS
+    $GetMyDriverPack = Get-MyDriverPack -Manufacturer $Manufacturer -Product $Product
 
     if ($GetMyDriverPack) {
         $OutFile = Join-Path $DownloadPath $GetMyDriverPack.FileName

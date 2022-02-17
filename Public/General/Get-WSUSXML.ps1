@@ -115,7 +115,7 @@ function Get-WSUSXML {
     #   Update Information
     #===================================================================================================
     if (!($Silent.IsPresent)) {
-        Write-Verbose "WSUSXML $WSUSXMLVersion $Catalog http://wsusxml.osdeploy.com/release" -Verbose
+        Write-Verbose "WSUSXML $WSUSXMLVersion $Catalog" -Verbose
     }
     #===================================================================================================
     #   Variables

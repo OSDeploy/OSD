@@ -47,8 +47,7 @@ function Enable-OSDCloudODT {
     #=================================================
     if (-NOT ($WorkspacePath)) {
         Write-Warning "You need to provide a path to your Workspace with one of the following examples"
-        Write-Warning "New-OSDCloud.iso -WorkspacePath C:\OSDCloud"
-        Write-Warning "New-OSDCloud.workspace -WorkspacePath C:\OSDCloud"
+        Write-Warning "Set-OSDCloud.workspace -WorkspacePath C:\OSDCloud"
         Break
     }
 
