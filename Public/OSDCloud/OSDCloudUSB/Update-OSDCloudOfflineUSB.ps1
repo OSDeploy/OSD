@@ -11,7 +11,7 @@ Computer Manufacturer of the Driver Pack
 .LINK
 https://www.osdcloud.com
 #>
-function Save-OSDCloudOffline {
+function Update-OSDCloudOfflineUSB {
     [CmdletBinding()]
     param (
         [ValidateSet('*','ThisPC','Dell','HP','Lenovo','Microsoft')]
@@ -56,6 +56,7 @@ function Save-OSDCloudOffline {
     $UsbVolumes = Get-Volume.usb
     #=================================================
     #	USB Volumes
+    #   e9ae9fce-f699-4300-8276-3cdf8a9cf675
     #=================================================
     if ($UsbVolumes) {
         Write-Host -ForegroundColor DarkGray "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) USB volumes found"
@@ -162,9 +163,9 @@ function Save-OSDCloudOffline {
     else {
         Write-Host -ForegroundColor DarkGray "========================================================================="
         Write-Host -ForegroundColor DarkGray "To save an OSDCloud Offline Operating System:"
-        Write-Host -ForegroundColor DarkGray "Save-OSDCloudOfflineOS -OS 'Windows 11 21H2'"
-        Write-Host -ForegroundColor DarkGray "Save-OSDCloudOfflineOS -OS 'Windows 10 21H2' -OSLicense Retail"
-        Write-Host -ForegroundColor DarkGray "Save-OSDCloudOfflineOS -OS 'Windows 10 21H1' -OSLicense Volume -OSLanguage en-us"
+        Write-Host -ForegroundColor DarkGray "Update-OSDCloudOfflineUSB -OS 'Windows 11 21H2'"
+        Write-Host -ForegroundColor DarkGray "Update-OSDCloudOfflineUSB -OS 'Windows 10 21H2' -OSLicense Retail"
+        Write-Host -ForegroundColor DarkGray "Update-OSDCloudOfflineUSB -OS 'Windows 10 21H1' -OSLicense Volume -OSLanguage en-us"
     }
     #=================================================
     #   OSDCloud DriverPack
@@ -204,10 +205,10 @@ function Save-OSDCloudOffline {
     else {
         Write-Host -ForegroundColor DarkGray "========================================================================="
         Write-Host -ForegroundColor DarkGray "To save an OSDCloud Offline Driver Pack:"
-        Write-Host -ForegroundColor DarkGray "Save-OSDCloudOffline -DriverPack *"
-        Write-Host -ForegroundColor DarkGray "Save-OSDCloudOffline -DriverPack ThisPC"
-        Write-Host -ForegroundColor DarkGray "Save-OSDCloudOffline -DriverPack Dell"
-        Write-Host -ForegroundColor DarkGray "Save-OSDCloudOffline -DriverPack Dell,HP,Lenovo,Microsoft"
+        Write-Host -ForegroundColor DarkGray "Update-OSDCloudOfflineUSB -DriverPack *"
+        Write-Host -ForegroundColor DarkGray "Update-OSDCloudOfflineUSB -DriverPack ThisPC"
+        Write-Host -ForegroundColor DarkGray "Update-OSDCloudOfflineUSB -DriverPack Dell"
+        Write-Host -ForegroundColor DarkGray "Update-OSDCloudOfflineUSB -DriverPack Dell,HP,Lenovo,Microsoft"
         Write-Host -ForegroundColor DarkGray "========================================================================="
     }
     #=================================================
@@ -229,7 +230,9 @@ function Save-OSDCloudOffline {
     if (-not (Test-Path "$PowerShellPath\Required\Scripts")) {
         $null = New-Item -Path "$PowerShellPath\Required\Scripts" -ItemType Directory -Force -ErrorAction Ignore
     }
-
+    #=================================================
+    #   Online
+    #=================================================
     Write-Host -ForegroundColor DarkGray "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Updating OSD and WindowsAutoPilotIntune PowerShell Modules at $PowerShellPath"
 
     try {
@@ -258,7 +261,7 @@ function Save-OSDCloudOffline {
     #=================================================
     #   Complete
     #=================================================
-    Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Save-OSDCloudOffline is complete"
+    Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Update-OSDCloudOfflineUSB is complete"
     Write-Host -ForegroundColor DarkGray "========================================================================="
     #=================================================
 }

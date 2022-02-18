@@ -18,7 +18,7 @@ function Save-OSDCloudDriverPack.usb {
         [ValidateSet('Dell','HP','Lenovo','Microsoft')]
         [System.String]$Manufacturer
     )
-    Write-Warning 'This function has been replaced by Save-OSDCloudOffline'
+    Write-Warning 'This function has been replaced by Update-OSDCloudOfflineUSB'
     Break
     #=================================================
     #	Start the Clock
