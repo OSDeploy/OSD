@@ -1,14 +1,11 @@
 <#
 .SYNOPSIS
-Updates an OSDCloud USB by copying content from an OSDCloud Workspace
-This function works with multiple OSDCloud USB Drives
+    Updates an OSDCloud USB by copying content from an OSDCloud Workspace
+    This function works with multiple OSDCloud USB Drives
 
 .Description
-Updates an OSDCloud USB by copying content from an OSDCloud Workspace
-This function works with multiple OSDCloud USB Drives
-
-.EXAMPLE
-Update-OSDCloudUSB
+    Updates an OSDCloud USB by copying content from an OSDCloud Workspace
+    This function works with multiple OSDCloud USB Drives
 
 .LINK
 https://osdcloud.osdeploy.com
@@ -29,6 +26,27 @@ function Update-OSDCloudUSB {
     $IsAdmin = Get-OSDGather -Property IsAdmin
     $UsbVolumes = Get-Volume.usb
     $WorkspacePath = Get-OSDCloud.workspace
+    #=================================================
+    #	Test OSDCloud Workspace
+    #=================================================
+    if (! $WorkspacePath) {
+        Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) OSDCloud Workspace is not present on this system"
+        Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Use New-OSDCloud.workspace or Set-OSDCloud.workspace to resolve this issue"
+        Write-Host -ForegroundColor DarkGray "========================================================================="
+        Break
+    }
+    elseif (! (Test-Path $WorkspacePath)) {
+        Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) OSDCloud Workspace is not at the path $WorkspacePath"
+        Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) If the OSDCloud Workspace is somewhere else, use Set-OSDCloud.workspace to resolve this issue"
+        Write-Host -ForegroundColor DarkGray "========================================================================="
+        Break
+    }
+    elseif (! (Test-Path "$WorkspacePath\Media\sources\boot.wim")) {
+        Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) OSDCloud WinPE does not exist at $WorkspacePath\Media\sources\boot.wim"
+        Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Use New-OSDCloud.workspace or Set-OSDCloud.workspace to resolve this issue"
+        Write-Host -ForegroundColor DarkGray "========================================================================="
+        Break
+    }
     #=================================================
     #	USB Volumes
     #=================================================
@@ -60,24 +78,6 @@ function Update-OSDCloudUSB {
         }
     }
     #=================================================
-    #	Test OSDCloud Workspace
-    #=================================================
-    if (! $WorkspacePath) {
-        Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) OSDCloud Workspace is not present on this system"
-        Write-Host -ForegroundColor DarkGray "========================================================================="
-        Break
-    }
-    elseif (! (Test-Path $WorkspacePath)) {
-        Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) OSDCloud Workspace is not at the path $WorkspacePath"
-        Write-Host -ForegroundColor DarkGray "========================================================================="
-        Break
-    }
-    elseif (! (Test-Path "$WorkspacePath\Media\sources\boot.wim")) {
-        Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) OSDCloud WinPE does not exist at $WorkspacePath\Media\sources\boot.wim"
-        Write-Host -ForegroundColor DarkGray "========================================================================="
-        Break
-    }
-    #=================================================
     #   Update OSDCloud Workspace PowerShell
     #=================================================
     $PowerShellPath = "$WorkspacePath\PowerShell"
@@ -99,30 +99,32 @@ function Update-OSDCloudUSB {
         $null = New-Item -Path "$PowerShellPath\Required\Scripts" -ItemType Directory -Force -ErrorAction Ignore
     }
 
-    Write-Host -ForegroundColor DarkGray "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Updating OSDCloud Workspace PowerShell Modules and Scripts at $PowerShellPath"
-
-    try {
-        Save-Module OSD -Path "$PowerShellPath\Offline\Modules" -ErrorAction Stop
-    }
-    catch {
-        Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) There were some issues updating the OSD PowerShell Module at $PowerShellPath\Offline\Modules"
-        Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Make sure you have an Internet connection and can access powershellgallery.com"
-    }
-
-    try {
-        Save-Module WindowsAutoPilotIntune -Path "$PowerShellPath\Offline\Modules" -ErrorAction Stop
-    }
-    catch {
-        Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) There were some issues updating the WindowsAutoPilotIntune PowerShell Module at $PowerShellPath\Offline\Modules"
-        Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Make sure you have an Internet connection and can access powershellgallery.com"
-    }
-
-    try {
-        Save-Script -Name Get-WindowsAutopilotInfo -Path "$PowerShellPath\Offline\Scripts" -ErrorAction Stop
-    }
-    catch {
-        Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) There were some issues updating the Get-WindowsAutopilotInfo PowerShell Script at $PowerShellPath\Offline\Scripts"
-        Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Make sure you have an Internet connection and can access powershellgallery.com"
+    if ($UpdateModules) {
+        Write-Host -ForegroundColor DarkGray "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Updating OSDCloud Workspace PowerShell Modules and Scripts at $PowerShellPath"
+    
+        try {
+            Save-Module OSD -Path "$PowerShellPath\Offline\Modules" -ErrorAction Stop
+        }
+        catch {
+            Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) There were some issues updating the OSD PowerShell Module at $PowerShellPath\Offline\Modules"
+            Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Make sure you have an Internet connection and can access powershellgallery.com"
+        }
+    
+        try {
+            Save-Module WindowsAutoPilotIntune -Path "$PowerShellPath\Offline\Modules" -ErrorAction Stop
+        }
+        catch {
+            Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) There were some issues updating the WindowsAutoPilotIntune PowerShell Module at $PowerShellPath\Offline\Modules"
+            Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Make sure you have an Internet connection and can access powershellgallery.com"
+        }
+    
+        try {
+            Save-Script -Name Get-WindowsAutopilotInfo -Path "$PowerShellPath\Offline\Scripts" -ErrorAction Stop
+        }
+        catch {
+            Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) There were some issues updating the Get-WindowsAutopilotInfo PowerShell Script at $PowerShellPath\Offline\Scripts"
+            Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Make sure you have an Internet connection and can access powershellgallery.com"
+        }
     }
     #=================================================
     #	Update all WinPE volumes with Workspace
@@ -167,7 +169,7 @@ function Update-OSDCloudUSB {
     #=================================================
     #   Complete
     #=================================================
-    Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Update-OSDCloudUSB is complete"
     Write-Host -ForegroundColor DarkGray "========================================================================="
+    Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Update-OSDCloudUSB is complete"
     #=================================================
 }

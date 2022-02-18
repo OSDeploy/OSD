@@ -735,11 +735,12 @@ function Invoke-OSDCloud {
     Write-Host -ForegroundColor DarkGray "========================================================================="
     Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Set Specialize Unattend.xml"
     Write-Host -ForegroundColor DarkGray "C:\Windows\Panther\Invoke-OSDSpecialize.xml is being applied as an Unattend file"
-    Write-Host -ForegroundColor DarkGray "This will enable the extraction and installation of HP and Lenovo Drivers if necessary"
+    Write-Host -ForegroundColor DarkGray "This will enable the extraction and installation of HP, Lenovo, and Microsoft Surface Drivers if necessary"
     
     Write-Host -ForegroundColor DarkGray "Set-OSDCloudUnattendSpecialize"
     if ($Global:OSDCloud.Test -ne $true) {
         Set-OSDCloudUnattendSpecialize
+        #Set-OSDxCloudUnattendSpecialize -Verbose
     }
     #=================================================
     #   AutopilotConfigurationFile.json
@@ -851,11 +852,41 @@ exit
         
         if (Test-WebConnection -Uri "https://www.powershellgallery.com") {
             Copy-PSModuleToFolder -Name OSD -Destination "$PowerShellSavePath\Modules"
-            Save-Module -Name OSD -Path "$PowerShellSavePath\Modules" -Force
-            Save-Module -Name PackageManagement -Path "$PowerShellSavePath\Modules" -Force
-            Save-Module -Name PowerShellGet -Path "$PowerShellSavePath\Modules" -Force
-            Save-Module -Name WindowsAutopilotIntune -Path "$PowerShellSavePath\Modules" -Force
-            Save-Script -Name Get-WindowsAutopilotInfo -Path "$PowerShellSavePath\Scripts" -Force
+
+            try {
+                Save-Module -Name OSD -Path "$PowerShellSavePath\Modules" -Force -ErrorAction Stop
+            }
+            catch {
+                Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Unable to Save-Module OSD to $PowerShellSavePath\Modules"
+            }
+
+            try {
+                Save-Module -Name PackageManagement -Path "$PowerShellSavePath\Modules" -Force -ErrorAction Stop
+            }
+            catch {
+                Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Unable to Save-Module PackageManagement to $PowerShellSavePath\Modules"
+            }
+
+            try {
+                Save-Module -Name PowerShellGet -Path "$PowerShellSavePath\Modules" -Force -ErrorAction Stop
+            }
+            catch {
+                Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Unable to Save-Module PowerShellGet to $PowerShellSavePath\Modules"
+            }
+
+            try {
+                Save-Module -Name WindowsAutopilotIntune -Path "$PowerShellSavePath\Modules" -Force -ErrorAction Stop
+            }
+            catch {
+                Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Unable to Save-Module WindowsAutopilotIntune to $PowerShellSavePath\Modules"
+            }
+
+            try {
+                Save-Script -Name Get-WindowsAutopilotInfo -Path "$PowerShellSavePath\Scripts" -ErrorAction Stop
+            }
+            catch {
+                Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Unable to Save-Script Get-WindowsAutopilotInfo to $PowerShellSavePath\Scripts"
+            }
         }
         else {
             Write-Verbose -Verbose "Copy-PSModuleToFolder -Name OSD to $PowerShellSavePath\Modules"

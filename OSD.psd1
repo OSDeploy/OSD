@@ -294,10 +294,10 @@ FunctionsToExport =
 'Get-OSDDriverHpModel',
 'New-OSDCloudUSB',
 'Update-OSDCloudUSB',
-'Import-OSDCloudUSB',
 'Get-DellOSDDriversCatalog',
 'Get-HPOSDDriversCatalog',
-'Update-OSDCloudOfflineUSB'
+'Update-OSDCloudOfflineUSB',
+'Set-OSDxCloudUnattendSpecialize'
 
 # Cmdlets to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no cmdlets to export.
 CmdletsToExport = @()
