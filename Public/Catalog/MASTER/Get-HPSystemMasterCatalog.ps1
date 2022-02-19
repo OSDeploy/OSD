@@ -52,7 +52,7 @@ function Get-HPSystemMasterCatalog {
     $RawCatalogFileName     = 'HpCatalogForSms.xml'
     $RawCatalogFile			= Join-Path $env:TEMP (Join-Path 'OSD' 'HpCatalogForSms.xml')
     $BuildCatalogFile		= Join-Path $env:TEMP (Join-Path 'OSD' 'HPSystemMasterCatalog.xml')
-    $OfflineCatalogFile     = "$($MyInvocation.MyCommand.Module.ModuleBase)\Catalogs\HPSystemMasterCatalog.xml"
+    $OfflineCatalogFile     = "$($MyInvocation.MyCommand.Module.ModuleBase)\Catalogs\MASTER\HPSystemMasterCatalog.xml"
 
     $RawCatalogCabName  	= [string]($CloudCatalogUri | Split-Path -Leaf)
     $RawCatalogCabPath 		= Join-Path $env:TEMP (Join-Path 'OSD' $RawCatalogCabName)

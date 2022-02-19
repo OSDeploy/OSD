@@ -1,29 +1,29 @@
 <#
 .SYNOPSIS
-Returns a Intel Radeon Display Driver Object
+Returns a Intel Display Driver Object
 
 .DESCRIPTION
-Returns a Intel Radeon Display Driver Object
+Returns a Intel Display Driver Object
 
 .LINK
 https://osddrivers.osdeploy.com
 #>
-function Get-DriverPackIntelRadeonDisplay {
+function Get-IntelDisplayDriverMasterCatalog {
     [CmdletBinding()]
     param (
         [ValidateSet('x64','x86')]
         [string]$CompatArch,
-        [ValidateSet('Win10')]
+        [ValidateSet('Win7','Win10')]
         [string]$CompatOS
     )
     #=================================================
     #   Uri
     #=================================================
-    $Uri = 'https://www.intel.com/content/www/us/en/download/19282/radeon-rx-vega-m-graphics.html'
+    $Uri = 'https://www.intel.com/content/www/us/en/download/19344/intel-graphics-windows-dch-drivers.html'
     #=================================================
     #   Import Base Catalog
     #=================================================
-    $BaseCatalog = Get-Content -Path "$($MyInvocation.MyCommand.Module.ModuleBase)\Catalogs\DriverPacks\DriverPackIntelRadeonDisplay.json" -Raw | ConvertFrom-Json
+    $BaseCatalog = Get-Content -Path "$($MyInvocation.MyCommand.Module.ModuleBase)\Catalogs\MASTER\IntelDisplayDriverMasterCatalog.json" -Raw | ConvertFrom-Json
     #=================================================
     #   Filter
     #=================================================
@@ -83,7 +83,7 @@ function Get-DriverPackIntelRadeonDisplay {
                 $OSDVersion = $(Get-Module -Name OSD | Sort-Object Version | Select-Object Version -Last 1).Version
                 $LastUpdate = [datetime] $(Get-Date)
                 $OSDStatus = $null
-                $OSDGroup = 'IntelRadeonDisplay'
+                $OSDGroup = 'IntelDisplay'
                 $OSDType = 'Driver'
 
                 $DriverName = $null
@@ -248,7 +248,7 @@ function Get-DriverPackIntelRadeonDisplay {
     #   Sort-Object
     #=================================================
     $DriverResults = $DriverResults | Sort-Object -Property LastUpdate -Descending
-    $DriverResults | ConvertTo-Json | Out-File "$env:TEMP\DriverPackIntelRadeonDisplay.json"
+    $DriverResults | ConvertTo-Json | Out-File "$env:TEMP\IntelDisplayDriverMasterCatalog.json"
     #=================================================
     #   Return
     #=================================================

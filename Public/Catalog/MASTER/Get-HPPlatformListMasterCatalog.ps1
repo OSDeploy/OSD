@@ -34,7 +34,7 @@ function Get-HPPlatformListMasterCatalog {
     $CloudCatalogUri        = 'https://ftp.hp.com/pub/caps-softpaq/cmit/imagepal/ref/platformList.cab'
     $RawCatalogFile			= Join-Path $env:TEMP (Join-Path 'OSD' 'platformList.xml')
     $BuildCatalogFile		= Join-Path $env:TEMP (Join-Path 'OSD' 'HPPlatformListMasterCatalog.xml')
-    $OfflineCatalogFile     = "$($MyInvocation.MyCommand.Module.ModuleBase)\Catalogs\HPPlatformListMasterCatalog.xml"
+    $OfflineCatalogFile     = "$($MyInvocation.MyCommand.Module.ModuleBase)\Catalogs\MASTER\HPPlatformListMasterCatalog.xml"
 
     $RawCatalogCabName  	= [string]($CloudCatalogUri | Split-Path -Leaf)
     $RawCatalogCabPath 	    = Join-Path $env:TEMP (Join-Path 'OSD' $RawCatalogCabName)

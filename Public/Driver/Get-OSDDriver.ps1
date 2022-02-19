@@ -47,15 +47,15 @@ function Get-OSDDriver {
     }
     if ($OSDGroup -eq 'IntelDisplay') {
         Write-Verbose "Get-OSDDriver: $OSDGroup Drivers are pulled in real time from the vendor's website and should always have the latest versions"
-        $global:GetOSDDriver = Get-DriverPackIntelDisplay
+        $global:GetOSDDriver = Get-IntelDisplayDriverMasterCatalog
     }
     if ($OSDGroup -eq 'IntelRadeonDisplay') {
         Write-Verbose "Get-OSDDriver: $OSDGroup Drivers are pulled in real time from the vendor's website and should always have the latest versions"
-        $global:GetOSDDriver = Get-DriverPackIntelRadeonDisplay
+        $global:GetOSDDriver = Get-IntelRadeonDisplayDriverMasterCatalog
     }
     if ($OSDGroup -eq 'IntelWireless') {
         Write-Verbose "Get-OSDDriver: $OSDGroup Drivers are pulled in real time from the vendor's website and should always have the latest versions"
-        $global:GetOSDDriver = Get-DriverPackIntelWireless
+        $global:GetOSDDriver = Get-IntelWirelessDriverMasterCatalog
     }
     if ($OSDGroup -eq 'NvidiaDisplay') {
         Write-Verbose "Get-OSDDriver: $OSDGroup Drivers are generated from OSD Local Catalogs and may not always have the latest versions"

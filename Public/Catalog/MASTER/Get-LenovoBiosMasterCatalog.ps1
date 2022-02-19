@@ -26,7 +26,7 @@ function Get-LenovoBiosMasterCatalog {
     $CloudCatalogUri		= 'https://download.lenovo.com/cdrt/td/catalogv2.xml'
     $RawCatalogFile			= Join-Path $env:TEMP (Join-Path 'OSD' 'catalogv2.xml')
     $BuildCatalogFile		= Join-Path $env:TEMP (Join-Path 'OSD' 'LenovoBiosMasterCatalog.xml')
-	$OfflineCatalogFile     = "$($MyInvocation.MyCommand.Module.ModuleBase)\Catalogs\LenovoBiosMasterCatalog.xml"
+	$OfflineCatalogFile     = "$($MyInvocation.MyCommand.Module.ModuleBase)\Catalogs\MASTER\LenovoBiosMasterCatalog.xml"
     #=================================================
     #   Create Paths
     #=================================================

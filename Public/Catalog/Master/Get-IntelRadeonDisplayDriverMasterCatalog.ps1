@@ -1,44 +1,54 @@
 <#
 .SYNOPSIS
-Returns a Intel Wireless Driver Object
+Returns a Intel Radeon Display Driver Object
 
 .DESCRIPTION
-Returns a Intel Wireless Driver Object
+Returns a Intel Radeon Display Driver Object
 
 .LINK
 https://osddrivers.osdeploy.com
 #>
-function Get-DriverPackIntelWireless {
+function Get-IntelRadeonDisplayDriverMasterCatalog {
     [CmdletBinding()]
     param (
         [ValidateSet('x64','x86')]
         [string]$CompatArch,
-        [ValidateSet('Win7','Win10')]
+        [ValidateSet('Win10')]
         [string]$CompatOS
     )
     #=================================================
     #   Uri
     #=================================================
-    $Uri = 'https://www.intel.com/content/www/us/en/support/articles/000017246/network-and-i-o/wireless-networking.html'
+    $Uri = 'https://www.intel.com/content/www/us/en/download/19282/radeon-rx-vega-m-graphics.html'
     #=================================================
     #   Import Base Catalog
     #=================================================
-    $BaseCatalog = Get-Content -Path "$($MyInvocation.MyCommand.Module.ModuleBase)\Catalogs\DriverPacks\DriverPackIntelWireless.json" -Raw | ConvertFrom-Json
+    $BaseCatalog = Get-Content -Path "$($MyInvocation.MyCommand.Module.ModuleBase)\Catalogs\MASTER\IntelRadeonDisplayDriverMasterCatalog.json" -Raw | ConvertFrom-Json
+    #=================================================
+    #   Filter
+    #=================================================
+    switch ($CompatArch) {
+        'x64'   {$BaseCatalog = $BaseCatalog | Where-Object {$_.OSArch -match 'x64'}}
+        'x86'   {$BaseCatalog = $BaseCatalog | Where-Object {$_.OSArch -match 'x86'}}
+    }
+    switch ($CompatOS) {
+        'Win7'   {$BaseCatalog = $BaseCatalog | Where-Object {$_.OsVersion -match '6.0'}}
+        'Win8'   {$BaseCatalog = $BaseCatalog | Where-Object {$_.OsVersion -match '6.3'}}
+        'Win10'   {$BaseCatalog = $BaseCatalog | Where-Object {$_.OsVersion -match '10.0'}}
+    }
     #=================================================
     #   Online
     #=================================================
     if (Test-WebConnection $Uri) {
         Write-Verbose "Catalog is Online"
-        #All Drivers are from the same URL
-        $BaseCatalog = $BaseCatalog | Select-Object -First 1
         #=================================================
         #   ForEach
         #=================================================
         $ZipFileResults = @()
         $DriverResults = @()
         $DriverResults = foreach ($BaseCatalogItem in $BaseCatalog) {
-            #Write-Verbose "$($BaseCatalogItem.DriverGrouping) $($BaseCatalogItem.OsArch)" -Verbose
-            #Write-Verbose "     $($BaseCatalogItem.DriverInfo)" -Verbose
+            Write-Verbose "$($BaseCatalogItem.DriverGrouping) $($BaseCatalogItem.OsArch)"
+            Write-Verbose "     $($BaseCatalogItem.DriverInfo)"
             #=================================================
             #   WebRequest
             #=================================================
@@ -49,13 +59,11 @@ function Get-DriverPackIntelWireless {
             $DriverInfoHEAD = $DriverInfoHTML.childNodes | Where-Object {$_.nodename -eq 'HEAD'}
             $DriverInfoMETA = $DriverInfoHEAD.childNodes | Where-Object {$_.nodename -like "meta*"} | Select-Object -Property Name, Content
             $OSCompatibility = $DriverInfoMETA | Where-Object {$_.name -eq 'DownloadOSes'} | Select-Object -ExpandProperty Content
-            Write-Verbose "     $OSCompatibility"
+            #Write-Verbose "     $OSCompatibility"
             #=================================================
             #   Driver Filter
             #=================================================
             $ZipFileResults = @($DriverInfoWebRequestContent -split " " -split '"' -match 'http' -match "downloadmirror" -match ".zip")
-
-            $ZipFileResults = $ZipFileResults | Where-Object {$_ -match 'Driver'}
 
             if ($BaseCatalogItem.OsArch -match 'x64') {
                 $ZipFileResults = $ZipFileResults | Where-Object {$_ -notmatch 'win32'}
@@ -75,7 +83,7 @@ function Get-DriverPackIntelWireless {
                 $OSDVersion = $(Get-Module -Name OSD | Sort-Object Version | Select-Object Version -Last 1).Version
                 $LastUpdate = [datetime] $(Get-Date)
                 $OSDStatus = $null
-                $OSDGroup = 'IntelWireless'
+                $OSDGroup = 'IntelRadeonDisplay'
                 $OSDType = 'Driver'
 
                 $DriverName = $null
@@ -83,11 +91,9 @@ function Get-DriverPackIntelWireless {
                 $DriverReleaseId = $null
                 $DriverGrouping = $null
 
-                if ($DriverZipFile -match 'Win7') {$OsVersion = '6.0'}
-                if ($DriverZipFile -match 'Win8') {$OsVersion = '6.3';Continue}
-                if ($DriverZipFile -match 'Win10') {$OsVersion = '10.0'}
-                if ($DriverZipFile -match 'Driver32') {$OsArch = 'x86'}
-                if ($DriverZipFile -match 'Driver64') {$OsArch = 'x64'}
+                $OperatingSystem = @()
+                $OsVersion = $BaseCatalogItem.OsVersion
+                $OsArch = $BaseCatalogItem.OsArch
                 $OsBuildMax = @()
                 $OsBuildMin = @()
         
@@ -96,7 +102,7 @@ function Get-DriverPackIntelWireless {
                 $MakeLike = @()
                 $MakeNotLike = @()
                 $MakeMatch = @()
-                $MakeNotMatch = @()
+                $MakeNotMatch = @('Microsoft')
         
                 $Generation = $null
                 $SystemFamily = $null
@@ -106,7 +112,7 @@ function Get-DriverPackIntelWireless {
                 $ModelLike = @()
                 $ModelNotLike = @()
                 $ModelMatch = @()
-                $ModelNotMatch = @()
+                $ModelNotMatch = @('Surface')
         
                 $SystemSku = @()
                 $SystemSkuNe = @()
@@ -138,7 +144,7 @@ function Get-DriverPackIntelWireless {
                 #=================================================
                 #   DriverVersion
                 #=================================================
-                $DriverVersion = ($DriverZipFile -split ('-'))[1]
+                $DriverVersion = $DriverInfoMETA | Where-Object {$_.name -eq 'DownloadVersion'} | Select-Object -ExpandProperty Content
                 #=================================================
                 #   DriverUrl
                 #=================================================
@@ -150,8 +156,8 @@ function Get-DriverPackIntelWireless {
                 $DriverName = "$DriverGrouping $OsArch $DriverVersion $OsVersion"
                 $DriverDescription = $DriverInfoMETA | Where-Object {$_.name -eq 'Description'} | Select-Object -ExpandProperty Content
                 $DownloadFile = Split-Path $DriverUrl -Leaf
-                $OSDPnpClass = 'Net'
-                $OSDPnpClassGuid = '{4D36E972-E325-11CE-BFC1-08002BE10318}'
+                $OSDPnpClass = 'Display'
+                $OSDPnpClassGuid = '{4D36E968-E325-11CE-BFC1-08002BE10318}'
                 #=================================================
                 #   Create Object
                 #=================================================
@@ -233,7 +239,7 @@ function Get-DriverPackIntelWireless {
     #=================================================
     $DriverResults = $DriverResults | Select-Object OSDVersion, LastUpdate, OSDStatus, OSDType, OSDGroup,`
     DriverName, DriverVersion,`
-    OsVersion, OsArch,`
+    OsVersion, OsArch, MakeNotMatch, ModelNotMatch,`
     DriverGrouping,`
     DownloadFile, DriverUrl, DriverInfo, DriverDescription,`
     OSDGuid,`
@@ -242,19 +248,7 @@ function Get-DriverPackIntelWireless {
     #   Sort-Object
     #=================================================
     $DriverResults = $DriverResults | Sort-Object -Property LastUpdate -Descending
-    $DriverResults | ConvertTo-Json | Out-File "$env:TEMP\DriverPackIntelWireless.json"
-    #=================================================
-    #   Filter
-    #=================================================
-    switch ($CompatArch) {
-        'x64'   {$DriverResults = $DriverResults | Where-Object {$_.OSArch -match 'x64'}}
-        'x86'   {$DriverResults = $DriverResults | Where-Object {$_.OSArch -match 'x86'}}
-    }
-    switch ($CompatOS) {
-        'Win7'   {$DriverResults = $DriverResults | Where-Object {$_.OsVersion -match '6.0'}}
-        'Win8'   {$DriverResults = $DriverResults | Where-Object {$_.OsVersion -match '6.3'}}
-        'Win10'   {$DriverResults = $DriverResults | Where-Object {$_.OsVersion -match '10.0'}}
-    }
+    $DriverResults | ConvertTo-Json | Out-File "$env:TEMP\IntelRadeonDisplayDriverMasterCatalog.json"
     #=================================================
     #   Return
     #=================================================

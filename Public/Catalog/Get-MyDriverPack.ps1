@@ -27,6 +27,7 @@ function Get-MyDriverPack {
     #   Results
     #=================================================
     if ($Results) {
+        $Results = $Results | Sort-Object -Property Name -Descending
         $Results[0]
     }
     else {
@@ -74,87 +75,94 @@ function Save-MyDriverPack {
         
         Save-WebFile -SourceUrl $GetMyDriverPack.DriverPackUrl -DestinationDirectory $DownloadPath -DestinationName $GetMyDriverPack.FileName
 
-        $GetItemOutFile = Get-Item $OutFile
+        if (! (Test-Path $OutFile)) {
+            Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Driver Pack failed to download"
+        }
+        else {
+            $GetItemOutFile = Get-Item $OutFile
+        }
         $GetMyDriverPack | ConvertTo-Json | Out-File "$OutFile.json" -Encoding ascii -Width 2000 -Force
         #=================================================
         #   Expand
         #=================================================
-        if ($PSBoundParameters.ContainsKey('Expand')) {
-
-            $ExpandFile = $GetItemOutFile.FullName
-            Write-Verbose -Verbose "DriverPack: $ExpandFile"
-            #=================================================
-            #   Cab
-            #=================================================
-            if ($GetItemOutFile.Extension -eq '.cab') {
-                $DestinationPath = Join-Path $GetItemOutFile.Directory $GetItemOutFile.BaseName
+        if ($GetItemOutFile) {
+            if ($PSBoundParameters.ContainsKey('Expand')) {
     
-                if (-NOT (Test-Path "$DestinationPath")) {
-                    New-Item $DestinationPath -ItemType Directory -Force -ErrorAction Ignore | Out-Null
-
-                    Write-Verbose -Verbose "Expanding CAB Driver Pack to $DestinationPath"
-                    Expand -R "$ExpandFile" -F:* "$DestinationPath" | Out-Null
-                }
-            }
-            #=================================================
-            #   HP
-            #=================================================
-            if (($GetItemOutFile.Extension -eq '.exe') -and ($env:SystemDrive -ne 'X:')) {
-                if (($GetItemOutFile.VersionInfo.InternalName -match 'hpsoftpaqwrapper') -or ($GetItemOutFile.VersionInfo.OriginalFilename -match 'hpsoftpaqwrapper.exe') -or ($GetItemOutFile.VersionInfo.FileDescription -like "HP *")) {
-                    Write-Verbose -Verbose "FileDescription: $($GetItemOutFile.VersionInfo.FileDescription)"
-                    Write-Verbose -Verbose "InternalName: $($GetItemOutFile.VersionInfo.InternalName)"
-                    Write-Verbose -Verbose "OriginalFilename: $($GetItemOutFile.VersionInfo.OriginalFilename)"
-                    Write-Verbose -Verbose "ProductVersion: $($GetItemOutFile.VersionInfo.ProductVersion)"
-                    
+                $ExpandFile = $GetItemOutFile.FullName
+                Write-Verbose -Verbose "DriverPack: $ExpandFile"
+                #=================================================
+                #   Cab
+                #=================================================
+                if ($GetItemOutFile.Extension -eq '.cab') {
                     $DestinationPath = Join-Path $GetItemOutFile.Directory $GetItemOutFile.BaseName
-
+        
                     if (-NOT (Test-Path "$DestinationPath")) {
-                        Write-Verbose -Verbose "Expanding HP Driver Pack to $DestinationPath"
-                        Start-Process -FilePath $ExpandFile -ArgumentList "/s /e /f `"$DestinationPath`"" -Wait
+                        New-Item $DestinationPath -ItemType Directory -Force -ErrorAction Ignore | Out-Null
+    
+                        Write-Verbose -Verbose "Expanding CAB Driver Pack to $DestinationPath"
+                        Expand -R "$ExpandFile" -F:* "$DestinationPath" | Out-Null
                     }
                 }
-            }
-            #=================================================
-            #   Lenovo
-            #=================================================
-            if (($GetItemOutFile.Extension -eq '.exe') -and ($env:SystemDrive -ne 'X:')) {
-                if ($GetItemOutFile.VersionInfo.FileDescription -match 'Lenovo') {
-                    Write-Verbose -Verbose "FileDescription: $($GetItemOutFile.VersionInfo.FileDescription)"
-                    Write-Verbose -Verbose "ProductVersion: $($GetItemOutFile.VersionInfo.ProductVersion)"
-
-                    $DestinationPath = Join-Path $GetItemOutFile.Directory 'SCCM'
-
-                    if (-NOT (Test-Path "$DestinationPath")) {
-                        Write-Verbose -Verbose "Expanding Lenovo Driver Pack to $DestinationPath"
-                        Start-Process -FilePath $ExpandFile -ArgumentList "/SILENT /SUPPRESSMSGBOXES" -Wait
+                #=================================================
+                #   HP
+                #=================================================
+                if (($GetItemOutFile.Extension -eq '.exe') -and ($env:SystemDrive -ne 'X:')) {
+                    if (($GetItemOutFile.VersionInfo.InternalName -match 'hpsoftpaqwrapper') -or ($GetItemOutFile.VersionInfo.OriginalFilename -match 'hpsoftpaqwrapper.exe') -or ($GetItemOutFile.VersionInfo.FileDescription -like "HP *")) {
+                        Write-Verbose -Verbose "FileDescription: $($GetItemOutFile.VersionInfo.FileDescription)"
+                        Write-Verbose -Verbose "InternalName: $($GetItemOutFile.VersionInfo.InternalName)"
+                        Write-Verbose -Verbose "OriginalFilename: $($GetItemOutFile.VersionInfo.OriginalFilename)"
+                        Write-Verbose -Verbose "ProductVersion: $($GetItemOutFile.VersionInfo.ProductVersion)"
+                        
+                        $DestinationPath = Join-Path $GetItemOutFile.Directory $GetItemOutFile.BaseName
+    
+                        if (-NOT (Test-Path "$DestinationPath")) {
+                            Write-Verbose -Verbose "Expanding HP Driver Pack to $DestinationPath"
+                            Start-Process -FilePath $ExpandFile -ArgumentList "/s /e /f `"$DestinationPath`"" -Wait
+                        }
                     }
                 }
-            }
-            #=================================================
-            #   MSI
-            #=================================================
-            if (($GetItemOutFile.Extension -eq '.msi') -and ($env:SystemDrive -ne 'X:')) {
-                $DestinationPath = Join-Path $GetItemOutFile.Directory $GetItemOutFile.BaseName
-
-                if (-NOT (Test-Path "$DestinationPath")) {
-                    #Need to sort out what to do here
+                #=================================================
+                #   Lenovo
+                #=================================================
+                if (($GetItemOutFile.Extension -eq '.exe') -and ($env:SystemDrive -ne 'X:')) {
+                    if ($GetItemOutFile.VersionInfo.FileDescription -match 'Lenovo') {
+                        Write-Verbose -Verbose "FileDescription: $($GetItemOutFile.VersionInfo.FileDescription)"
+                        Write-Verbose -Verbose "ProductVersion: $($GetItemOutFile.VersionInfo.ProductVersion)"
+    
+                        $DestinationPath = Join-Path $GetItemOutFile.Directory 'SCCM'
+    
+                        if (-NOT (Test-Path "$DestinationPath")) {
+                            Write-Verbose -Verbose "Expanding Lenovo Driver Pack to $DestinationPath"
+                            Start-Process -FilePath $ExpandFile -ArgumentList "/SILENT /SUPPRESSMSGBOXES" -Wait
+                        }
+                    }
                 }
-            }
-            #=================================================
-            #   Zip
-            #=================================================
-            if ($GetItemOutFile.Extension -eq '.zip') {
-                $DestinationPath = Join-Path $GetItemOutFile.Directory $GetItemOutFile.BaseName
-
-                if (-NOT (Test-Path "$DestinationPath")) {
-                    Write-Verbose -Verbose "Expanding ZIP Driver Pack to $DestinationPath"
-                    Expand-Archive -Path $ExpandFile -DestinationPath $DestinationPath -Force
+                #=================================================
+                #   MSI
+                #=================================================
+                if (($GetItemOutFile.Extension -eq '.msi') -and ($env:SystemDrive -ne 'X:')) {
+                    $DestinationPath = Join-Path $GetItemOutFile.Directory $GetItemOutFile.BaseName
+    
+                    if (-NOT (Test-Path "$DestinationPath")) {
+                        #Need to sort out what to do here
+                    }
                 }
+                #=================================================
+                #   Zip
+                #=================================================
+                if ($GetItemOutFile.Extension -eq '.zip') {
+                    $DestinationPath = Join-Path $GetItemOutFile.Directory $GetItemOutFile.BaseName
+    
+                    if (-NOT (Test-Path "$DestinationPath")) {
+                        Write-Verbose -Verbose "Expanding ZIP Driver Pack to $DestinationPath"
+                        Expand-Archive -Path $ExpandFile -DestinationPath $DestinationPath -Force
+                    }
+                }
+                #=================================================
+                #   Everything Else
+                #=================================================
+                #Write-Warning "Unable to expand $ExpandFile"
             }
-            #=================================================
-            #   Everything Else
-            #=================================================
-            #Write-Warning "Unable to expand $ExpandFile"
         }
         #=================================================
         #   Enable-SpecializeDriverPack

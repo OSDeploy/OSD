@@ -26,7 +26,7 @@ function Get-HPDriverPackMasterCatalog {
     $CloudCatalogUri        = 'http://ftp.hp.com/pub/caps-softpaq/cmit/HPClientDriverPackCatalog.cab'
     $RawCatalogFile			= Join-Path $env:TEMP (Join-Path 'OSD' 'HPClientDriverPackCatalog.xml')
     $BuildCatalogFile		= Join-Path $env:TEMP (Join-Path 'OSD' 'HPDriverPackMasterCatalog.xml')
-    $OfflineCatalogFile     = "$($MyInvocation.MyCommand.Module.ModuleBase)\Catalogs\HPDriverPackMasterCatalog.xml"
+    $OfflineCatalogFile     = "$($MyInvocation.MyCommand.Module.ModuleBase)\Catalogs\MASTER\HPDriverPackMasterCatalog.xml"
     
     $RawCatalogCabName  	= [string]($CloudCatalogUri | Split-Path -Leaf)
     $RawCatalogCabPath 	    = Join-Path $env:TEMP (Join-Path 'OSD' $RawCatalogCabName)

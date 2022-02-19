@@ -26,7 +26,7 @@ function Get-DellDriverPackMasterCatalog {
     $CloudCatalogUri		= 'https://downloads.dell.com/catalog/DriverPackCatalog.cab'
     $RawCatalogFile			= Join-Path $env:TEMP (Join-Path 'OSD' 'DriverPackCatalog.xml')
     $BuildCatalogFile		= Join-Path $env:TEMP (Join-Path 'OSD' 'DellDriverPackMasterCatalog.xml')
-    $OfflineCatalogFile		= "$($MyInvocation.MyCommand.Module.ModuleBase)\Catalogs\DellDriverPackMasterCatalog.xml"
+    $OfflineCatalogFile		= "$($MyInvocation.MyCommand.Module.ModuleBase)\Catalogs\MASTER\DellDriverPackMasterCatalog.xml"
 
     $RawCatalogCabName  	= [string]($CloudCatalogUri | Split-Path -Leaf)
     $RawCatalogCabPath 		= Join-Path $env:TEMP (Join-Path 'OSD' $RawCatalogCabName)

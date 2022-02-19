@@ -26,7 +26,7 @@ function Get-LenovoDriverPackMasterCatalog {
     $CloudCatalogUri		= 'https://download.lenovo.com/cdrt/td/catalogv2.xml'
     $RawCatalogFile			= Join-Path $env:TEMP (Join-Path 'OSD' 'catalogv2.xml')
     $BuildCatalogFile       = Join-Path $env:TEMP (Join-Path 'OSD' 'LenovoDriverPackMasterCatalog.xml')
-    $OfflineCatalogFile		= "$($MyInvocation.MyCommand.Module.ModuleBase)\Catalogs\LenovoDriverPackMasterCatalog.xml"
+    $OfflineCatalogFile		= "$($MyInvocation.MyCommand.Module.ModuleBase)\Catalogs\MASTER\LenovoDriverPackMasterCatalog.xml"
     #=================================================
     #   Create Paths
     #=================================================
