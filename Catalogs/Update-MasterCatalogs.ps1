@@ -83,7 +83,7 @@ if (Test-Path $Source) {
 #=================================================
 #   IntelRadeonDisplayDriverMasterCatalog
 #=================================================
-$null = Get-IntelDisplayDriverMasterCatalog -Verbose
+$null = Get-IntelRadeonDisplayDriverMasterCatalog -Verbose
 $Source = Join-Path $env:TEMP 'IntelRadeonDisplayDriverMasterCatalog.json'
 $Destination = Join-Path (Get-Module OSD).ModuleBase "Catalogs\MASTER\IntelRadeonDisplayDriverMasterCatalog.json"
 if (Test-Path $Source) {
@@ -92,7 +92,7 @@ if (Test-Path $Source) {
 #=================================================
 #   IntelWirelessDriverMasterCatalog
 #=================================================
-$null = Get-IntelDisplayDriverMasterCatalog -Verbose
+$null = Get-IntelWirelessDriverMasterCatalog -Verbose
 $Source = Join-Path $env:TEMP 'IntelWirelessDriverMasterCatalog.json'
 $Destination = Join-Path (Get-Module OSD).ModuleBase "Catalogs\MASTER\IntelWirelessDriverMasterCatalog.json"
 if (Test-Path $Source) {
