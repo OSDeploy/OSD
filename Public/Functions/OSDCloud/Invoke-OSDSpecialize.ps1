@@ -3,7 +3,6 @@ function Invoke-OSDSpecialize {
     param (
         [switch]$Apply
     )
-    Start-Process cmd -Wait
     #=================================================
     #   Specialize
     #=================================================
@@ -12,7 +11,6 @@ function Invoke-OSDSpecialize {
         $Apply = $true
         reg delete HKLM\System\Setup /v UnattendFile /f
     }
-    Start-Process cmd -Wait
     #=================================================
     #   Specialize DriverPacks
     #=================================================
@@ -170,6 +168,5 @@ function Invoke-OSDSpecialize {
     #   Give a fair amount of time to display errors
     #=================================================
     Start-Sleep -Seconds 10
-    Start-Process cmd -Wait
     #=================================================
 }

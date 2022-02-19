@@ -6,7 +6,7 @@ $ImageState = (Get-ItemProperty -Path 'HKLM:\SOFTWARE\Microsoft\Windows\CurrentV
 
 #Can't load these functions in Specialize Phase
 if ($ImageState -eq 'IMAGE_STATE_SPECIALIZE_RESEAL_TO_OOBE') {
-    $Public  = @(Get-ChildItem -Path ("$PSScriptRoot\Public\*.ps1","$PSScriptRoot\Public-OOBE\*.ps1") -Recurse -ErrorAction SilentlyContinue | Where-Object {$_.Name -notmatch 'ScreenPNG'} | Where-Object {$_.Name -notmatch 'Clipboard'})
+    $Public  = @(Get-ChildItem -Path ("$PSScriptRoot\Public\Functions\*.ps1","$PSScriptRoot\Public\OOBE\*.ps1") -Recurse -ErrorAction SilentlyContinue | Where-Object {$_.Name -notmatch 'ScreenPNG'} | Where-Object {$_.Name -notmatch 'Clipboard'})
 
     foreach ($Import in @($Public + $Private)) {
         Try {. $Import.FullName}
@@ -29,13 +29,13 @@ else {
     }
 
     if ($env:SystemDrive -eq 'X:') {
-        $Public = @(Get-ChildItem -Path ("$PSScriptRoot\Public\*.ps1","$PSScriptRoot\Public-WinPE\*.ps1") -Recurse -ErrorAction SilentlyContinue)
+        $Public = @(Get-ChildItem -Path ("$PSScriptRoot\Public\Functions\*.ps1","$PSScriptRoot\Public\WinPE\*.ps1") -Recurse -ErrorAction SilentlyContinue)
     }
     elseif ($env:UserName -eq 'defaultuser0') {
-        $Public = @(Get-ChildItem -Path ("$PSScriptRoot\Public\*.ps1","$PSScriptRoot\Public-OOBE\*.ps1") -Recurse -ErrorAction SilentlyContinue)
+        $Public = @(Get-ChildItem -Path ("$PSScriptRoot\Public\Functions\*.ps1","$PSScriptRoot\Public\OOBE\*.ps1") -Recurse -ErrorAction SilentlyContinue)
     }
     else {
-        $Public = @(Get-ChildItem -Path ("$PSScriptRoot\Public\*.ps1","$PSScriptRoot\Public-WinOS\*.ps1") -Recurse -ErrorAction SilentlyContinue)
+        $Public = @(Get-ChildItem -Path ("$PSScriptRoot\Public\Functions\*.ps1","$PSScriptRoot\Public\WinOS\*.ps1") -Recurse -ErrorAction SilentlyContinue)
     }
 
     foreach ($Import in @($Public + $Private + $Classes)) {

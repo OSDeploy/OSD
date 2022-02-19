@@ -1,4 +1,4 @@
-function Get-OSDPad {
+function Start-OSDPad {
     [CmdletBinding(DefaultParameterSetName = 'Standalone')]
     param (
         [Parameter(ParameterSetName = 'GitHub', Mandatory = $true, Position = 0)]
@@ -33,24 +33,6 @@ function Get-OSDPad {
         Title   = $Brand
         Color   = $Color
     }
-    #================================================
-    #   Certificate Workaround
-    #================================================
-    #region: Workaround for SelfSigned Cert and force TLS 1.2
-Add-Type @"
-using System.Net;
-using System.Security.Cryptography.X509Certificates;
-public class TrustAllCertsPolicy : ICertificatePolicy {
-    public bool CheckValidationResult(
-        ServicePoint srvPoint, X509Certificate certificate,
-        WebRequest request, int certificateProblem) {
-        return true;
-    }
-}
-"@
-    [System.Net.ServicePointManager]::CertificatePolicy = New-Object TrustAllCertsPolicy
-    [System.Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
-    #endregion
     #================================================
     #   GitHub
     #================================================
@@ -103,7 +85,7 @@ public class TrustAllCertsPolicy : ICertificatePolicy {
         $Results = foreach ($Item in $GitHubApiContent) {
             #$FileContent = Invoke-RestMethod -UseBasicParsing -Uri $Item.git_url
             if ($Item.type -eq 'dir') {
-                Write-Host -ForegroundColor DarkCyan "GitHub Directory: OSDPad $RepoOwner $RepoName $($Item.name)"
+                Write-Host -ForegroundColor DarkCyan "Directory: Start-OSDPad $RepoOwner $RepoName $($Item.name)"
                 
                 $ObjectProperties = @{
                     RepoOwner       = $RepoOwner
@@ -164,10 +146,10 @@ public class TrustAllCertsPolicy : ICertificatePolicy {
     #================================================
     #   OSDPad.ps1
     #================================================
-    & "$($MyInvocation.MyCommand.Module.ModuleBase)\GUI\OSDPad.ps1"
+    & "$($MyInvocation.MyCommand.Module.ModuleBase)\Projects\OSDPad\OSDPad.ps1"
     #================================================
 }
-function Get-OSDHelp {
+function Start-OSDeployPad {
     [CmdletBinding()]
     param (
         [Parameter(Position = 0)]
@@ -177,25 +159,22 @@ function Get-OSDHelp {
         [string]$OAuth
     )
 
-    $RepoOwner = 'OSDeploy'
-    $RepoName = 'OSDHelp'
-
     if ($OAuth) {
         $OSDPadParams = @{
-            Brand           = "OSDHelp $RepoFolder"
-            RepoOwner       = $RepoOwner
-            RepoName        = $RepoName
+            Brand           = "OSDeploy OSDPad $RepoFolder"
+            RepoOwner       = 'OSDeploy'
+            RepoName        = 'OSDPad'
             RepoFolder      = $RepoFolder
             OAuth           = $OAuth
         }
     }
     else {
         $OSDPadParams = @{
-            Brand           = "OSDHelp $RepoFolder"
-            RepoOwner       = $RepoOwner
-            RepoName        = $RepoName
+            Brand           = "OSDeploy OSDPad $RepoFolder"
+            RepoOwner       = 'OSDeploy'
+            RepoName        = 'OSDPad'
             RepoFolder      = $RepoFolder
         }
     }
-    Get-OSDPad @OSDPadParams
+    Start-OSDPad @OSDPadParams
 }

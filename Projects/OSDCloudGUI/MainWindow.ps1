@@ -345,7 +345,7 @@ function SetDefaultWin11 {
     $formMainWindowControlOSLanguageCombobox.Visibility = "Visible"
     $formMainWindowControlOSLicenseCombobox.Visibility = "Visible"
 }
-SetDefaultWin10
+SetDefaultWin11
 #================================================
 #   CustomImage
 #================================================
