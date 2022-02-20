@@ -296,7 +296,6 @@ FunctionsToExport =
 'Update-OSDCloudUSB',
 'Get-DellOSDDriversCatalog',
 'Get-HPOSDDriversCatalog',
-'Update-OSDCloudOfflineUSB',
 'Set-OSDxCloudUnattendSpecialize',
 'Start-DiskImageFFU'
 
