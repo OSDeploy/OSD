@@ -5,15 +5,43 @@ Edits the boot.wim in an OSDCloud.workspace
 .Description
 Edits the boot.wim in an OSDCloud.workspace
 
-.PARAMETER WorkspacePath
-Directory for the OSDCloud.workspace which contains Media directory
-This is optional as the OSDCloud.workspace is returned by Get-OSDCloud.workspace automatically
+.PARAMETER Brand
+Sets the Brand for OSDCloudGUI
+
+.PARAMETER CloudDriver
+Download and install in WinPE drivers from Dell,HP,IntelNet,LenovoDock,Nutanix,USB,VMware,WiFi
+
+.PARAMETER DriverHWID
+HardwareID of the Driver to add to WinPE
 
 .PARAMETER DriverPath
 Path to additional Drivers you want to install
 
-.PARAMETER CloudDriver
-Download and install in WinPE drivers from Dell,HP,Nutanix,VMware,WiFi
+.PARAMETER PSModuleCopy
+Copies named PowerShell Modules to WinPE
+
+.PARAMETER PSModuleInstall
+Installs named PowerShell Modules from PowerShell Gallery to WinPE
+
+.PARAMETER Startnet
+
+.PARAMETER StartOSDCloud
+
+.PARAMETER StartOSDCloudGUI
+
+.PARAMETER StartOSDPad
+
+.PARAMETER StartPSCommand
+
+.PARAMETER StartWebScript
+
+.PARAMETER UpdateUsb
+
+.PARAMETER Wallpaper
+
+.PARAMETER WorkspacePath
+Directory for the OSDCloud.workspace which contains Media directory
+This is optional as the OSDCloud.workspace is returned by Get-OSDCloud.workspace automatically
 
 .LINK
 https://osdcloud.osdeploy.com
@@ -23,6 +51,7 @@ https://osdcloud.osdeploy.com
 function Edit-OSDCloud.winpe {
     [CmdletBinding(PositionalBinding = $false)]
     param (
+        $Brand = 'OSDCloud',
         [ValidateSet('*','Dell','HP','IntelNet','LenovoDock','Nutanix','USB','VMware','WiFi')]
         [string[]]$CloudDriver,
         [string[]]$DriverHWID,
@@ -238,10 +267,10 @@ start /wait PowerShell -Nol -W Mi -C Start-Sleep -Seconds 10
         Write-Warning "The StartOSDCloudGUI parameter is adding Start-OSDCloudGUI to Startnet.cmd"
         Write-Warning "This must be set every time you run Edit-OSDCloud.winpe or it will revert back to defaults"
         
-        Write-Host -ForegroundColor DarkGray "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Startnet.cmd: start /wait PowerShell -NoL -W Mi -C Start-OSDCloudGUI"
+        Write-Host -ForegroundColor DarkGray "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Startnet.cmd: start /wait PowerShell -NoL -W Mi -C Start-OSDCloudGUI -Brand '$Brand'"
         Add-Content -Path "$MountPath\Windows\System32\Startnet.cmd" -Value '@ECHO OFF' -Force
         Add-Content -Path "$MountPath\Windows\System32\Startnet.cmd" -Value 'ECHO Start-OSDCloudGUI' -Force
-        Add-Content -Path "$MountPath\Windows\System32\Startnet.cmd" -Value 'start /wait PowerShell -NoL -W Mi -C Start-OSDCloudGUI'
+        Add-Content -Path "$MountPath\Windows\System32\Startnet.cmd" -Value "start /wait PowerShell -NoL -W Mi -C Start-OSDCloudGUI -Brand $Brand"
         Add-Content -Path "$MountPath\Windows\System32\Startnet.cmd" -Value '@ECHO ON' -Force
     }
     #=================================================
@@ -341,11 +370,13 @@ start /wait PowerShell -Nol -W Mi -C Start-Sleep -Seconds 10
     #	UpdateUsb
     #=================================================
     if ($UpdateUsb) {
-        $WinpeVolume = (Get-Volume.usb | Where-Object {$_.FileSystemLabel -eq 'WinPE'}).DriveLetter
+        $WinpeVolumes = (Get-Volume.usb | Where-Object {$_.FileSystemLabel -eq 'WinPE'}).DriveLetter
     
-        if ($WinpeVolume) {
-            Write-Host -ForegroundColor DarkGray "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Copying $WorkspacePath\Media to $($WinpeVolume):\"
-            robocopy "$WorkspacePath\Media" "$($WinpeVolume):\" *.* /e /ndl /np /njh /njs /b /r:0 /w:0 /zb /xd "$RECYCLE.BIN" "System Volume Information"
+        if ($WinpeVolumes) {
+            foreach ($WinpeVolume in $WinpeVolumes) {
+                Write-Host -ForegroundColor DarkGray "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Copying $WorkspacePath\Media to $($WinpeVolume):\"
+                robocopy "$WorkspacePath\Media" "$($WinpeVolume):\" *.* /e /ndl /np /njh /njs /b /r:0 /w:0 /zb /xd "$RECYCLE.BIN" "System Volume Information"
+            }
         }
     }
     #=================================================

@@ -33,7 +33,7 @@ function New-Bootable.usb {
     #	Select-Disk.usb
     #   Select a USB Disk
     #=================================================
-    Write-Verbose -Verbose '$SelectDisk = Select-Disk.usb -MinimumSizeGB $MinimumSizeGB -MaximumSizeGB $MaximumSizeGB'
+    Write-Verbose '$SelectDisk = Select-Disk.usb -MinimumSizeGB $MinimumSizeGB -MaximumSizeGB $MaximumSizeGB'
     $SelectDisk = Select-Disk.usb -MinimumSizeGB $MinimumSizeGB -MaximumSizeGB $MaximumSizeGB
     #=================================================
     #	Select-Disk.usb
@@ -49,24 +49,24 @@ function New-Bootable.usb {
     #	Get-Disk.osd -BusType USB
     #   At this point I have the Disk object in $GetUSBDisk
     #=================================================
-    Write-Verbose -Verbose '$GetUSBDisk = Get-Disk.osd -BusType USB -Number $SelectDisk.Number'
+    Write-Verbose '$GetUSBDisk = Get-Disk.osd -BusType USB -Number $SelectDisk.Number'
     $GetUSBDisk = Get-Disk.osd -BusType USB -Number $SelectDisk.Number
     #=================================================
     #	Clear-Disk
     #   Prompt for Confirmation
     #=================================================
     if ($GetUSBDisk.NumberOfPartitions -eq 0) {
-        Write-Verbose -Verbose "Disk does not have any partitions.  This is a good thing!"
+        Write-Verbose "Disk does not have any partitions.  This is a good thing!"
     }
     else {
-        Write-Verbose -Verbose '$GetUSBDisk | Clear-Disk -RemoveData -RemoveOEM -Confirm:$true'
+        Write-Verbose '$GetUSBDisk | Clear-Disk -RemoveData -RemoveOEM -Confirm:$true'
         $GetUSBDisk | Clear-Disk -RemoveData -RemoveOEM -Confirm:$true -ErrorAction Stop
     }
     #=================================================
     #	Get-Disk.osd -BusType USB
     #	Run another Get-Disk to make sure that things are ok
     #=================================================
-    Write-Verbose -Verbose '$GetUSBDisk = Get-Disk.osd -BusType USB -Number $SelectDisk.Number | Where-Object {$_.NumberOfPartitions -eq 0}'
+    Write-Verbose '$GetUSBDisk = Get-Disk.osd -BusType USB -Number $SelectDisk.Number | Where-Object {$_.NumberOfPartitions -eq 0}'
     $GetUSBDisk = Get-Disk.osd -BusType USB -Number $SelectDisk.Number | Where-Object {$_.NumberOfPartitions -eq 0}
 
     if (-NOT ($GetUSBDisk)) {
@@ -77,15 +77,15 @@ function New-Bootable.usb {
     #	-lt 2TB
     #=================================================
     if ($GetUSBDisk.PartitionStyle -eq 'RAW') {
-        Write-Verbose -Verbose '$GetUSBDisk | Initialize-Disk -PartitionStyle MBR'
+        Write-Verbose '$GetUSBDisk | Initialize-Disk -PartitionStyle MBR'
         $GetUSBDisk | Initialize-Disk -PartitionStyle MBR -ErrorAction Stop
     }
 
     if ($GetUSBDisk.SizeGB -le 2000) {
-        Write-Verbose -Verbose '$DataDisk = $GetUSBDisk | New-Partition -Size ($GetUSBDisk.Size - 2GB) -AssignDriveLetter | Format-Volume -FileSystem NTFS -NewFileSystemLabel $DataLabel'
+        Write-Verbose '$DataDisk = $GetUSBDisk | New-Partition -Size ($GetUSBDisk.Size - 2GB) -AssignDriveLetter | Format-Volume -FileSystem NTFS -NewFileSystemLabel $DataLabel'
         $DataDisk = $GetUSBDisk | New-Partition -Size ($GetUSBDisk.Size - 2GB) -AssignDriveLetter | Format-Volume -FileSystem NTFS -NewFileSystemLabel $DataLabel -ErrorAction Stop
         
-        Write-Verbose -Verbose '$BootDisk = $GetUSBDisk | New-Partition -UseMaximumSize -IsActive -AssignDriveLetter | Format-Volume -FileSystem FAT32 -NewFileSystemLabel $BootLabel'
+        Write-Verbose '$BootDisk = $GetUSBDisk | New-Partition -UseMaximumSize -IsActive -AssignDriveLetter | Format-Volume -FileSystem FAT32 -NewFileSystemLabel $BootLabel'
         $BootDisk = $GetUSBDisk | New-Partition -UseMaximumSize -IsActive -AssignDriveLetter | Format-Volume -FileSystem FAT32 -NewFileSystemLabel $BootLabel -ErrorAction Stop
     }
     #=================================================
