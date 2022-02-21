@@ -146,7 +146,7 @@ function Start-OSDPad {
     #================================================
     #   OSDPad.ps1
     #================================================
-    & "$($MyInvocation.MyCommand.Module.ModuleBase)\Projects\OSDPad\OSDPad.ps1"
+    & "$($MyInvocation.MyCommand.Module.ModuleBase)\Projects\OSDPad.ps1"
     #================================================
 }
 function Start-OSDeployPad {
