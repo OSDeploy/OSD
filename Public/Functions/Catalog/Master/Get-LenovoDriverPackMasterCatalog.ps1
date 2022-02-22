@@ -16,7 +16,7 @@ https://osd.osdeploy.com
 function Get-LenovoDriverPackMasterCatalog {
     [CmdletBinding()]
     param (
-        [switch]$Compatible,
+        [System.Management.Automation.SwitchParameter]$Compatible,
         [System.String]$DownloadPath
     )
     #=================================================

@@ -47,7 +47,7 @@ function Get-OSDGather {
             )]
         [string]$Property,
         #Returns additional CimInstance results
-        [switch]$Full
+        [System.Management.Automation.SwitchParameter]$Full
     )
     #=================================================
     #   IsAdmin

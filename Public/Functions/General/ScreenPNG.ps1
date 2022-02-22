@@ -32,10 +32,10 @@ function Get-ScreenPNG {
         [uint32]$Count = 1,
 
         #Additionally copies the Screenshot to the Clipboard
-        [switch]$Clipboard = $false,
+        [System.Management.Automation.SwitchParameter]$Clipboard = $false,
 
         #Screenshot of the Primary Display only
-        [switch]$Primary = $false
+        [System.Management.Automation.SwitchParameter]$Primary = $false
     )
     begin {
         #=================================================

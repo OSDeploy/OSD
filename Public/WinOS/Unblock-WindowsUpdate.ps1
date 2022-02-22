@@ -22,8 +22,8 @@ https://osd.osdeploy.com
 function Unblock-WindowsUpdate {
     [CmdletBinding()]
     param (
-        [switch]$DisableWSUS,
-        [switch]$EnableDrivers
+        [System.Management.Automation.SwitchParameter]$DisableWSUS,
+        [System.Management.Automation.SwitchParameter]$EnableDrivers
     )
     #=================================================
     #	Block

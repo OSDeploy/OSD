@@ -27,14 +27,14 @@ function Edit-MyWindowsImage {
 
         #Specifies that the action is to be taken on the operating system that is currently running on the local computer.
         [Parameter(ParameterSetName = 'Online', Mandatory = $true)]
-        [switch]$Online,
+        [System.Management.Automation.SwitchParameter]$Online,
 
         #Appx Packages selected in GridView will be removed from the Windows Image
         [Parameter(ParameterSetName = 'Online')]
-        [switch]$GridRemoveAppx,
+        [System.Management.Automation.SwitchParameter]$GridRemoveAppx,
 
         #Appx Provisioned Packages selected in GridView will be removed from the Windows Image
-        [switch]$GridRemoveAppxPP,
+        [System.Management.Automation.SwitchParameter]$GridRemoveAppxPP,
 
         #Appx Packages matching the string will be removed
         [Parameter(ParameterSetName = 'Online')]
@@ -43,7 +43,7 @@ function Edit-MyWindowsImage {
         #Appx Provisioned Packages matching the string will be removed
         [string[]]$RemoveAppxPP,
 
-        [switch]$DismountSave
+        [System.Management.Automation.SwitchParameter]$DismountSave
     )
 
     begin {

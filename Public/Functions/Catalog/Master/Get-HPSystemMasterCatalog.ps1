@@ -39,7 +39,7 @@ function Get-HPSystemMasterCatalog {
     [CmdletBinding()]
     param (
         [System.String]$DownloadPath,
-        [switch]$Compatible,
+        [System.Management.Automation.SwitchParameter]$Compatible,
 
         [ValidateSet('Software','Firmware','Driver','Accessories Firmware and Driver','BIOS')]
         [System.String]$Component

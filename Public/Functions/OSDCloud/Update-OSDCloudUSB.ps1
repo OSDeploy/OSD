@@ -32,9 +32,9 @@ function Update-OSDCloudUSB {
         [ValidateSet('*','ThisPC','Dell','HP','Lenovo','Microsoft')]
         [System.String[]]$DriverPack,
 
-        [switch]$PSUpdate,
+        [System.Management.Automation.SwitchParameter]$PSUpdate,
 
-        [switch]$OS,
+        [System.Management.Automation.SwitchParameter]$OS,
 
         [ValidateSet(
             'Windows 11 21H2',
@@ -67,7 +67,7 @@ function Update-OSDCloudUSB {
     #	Initialize
     #=================================================
     $UsbVolumes = Get-Volume.usb
-    $WorkspacePath = Get-OSDCloud.workspace
+    $WorkspacePath = Get-OSDCloudWorkspace
     $IsAdmin = Get-OSDGather -Property IsAdmin
     #=================================================
     #	Test USB Volumes

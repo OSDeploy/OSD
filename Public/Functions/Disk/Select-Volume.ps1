@@ -8,8 +8,8 @@ function Select-Volume.osd {
         [ValidateSet('FAT32','NTFS')]
         [string]$FileSystem,
 
-        [switch]$Skip,
-        [switch]$SelectOne
+        [System.Management.Automation.SwitchParameter]$Skip,
+        [System.Management.Automation.SwitchParameter]$SelectOne
     )
     #=================================================
     #	Get-Volume
@@ -77,8 +77,8 @@ function Select-Volume.fixed {
         [ValidateSet('FAT32','NTFS')]
         [string]$FileSystem,
 
-        [switch]$Skip,
-        [switch]$SelectOne
+        [System.Management.Automation.SwitchParameter]$Skip,
+        [System.Management.Automation.SwitchParameter]$SelectOne
     )
     #=================================================
     #	Get-Volume
@@ -145,8 +145,8 @@ function Select-Volume.usb {
         [ValidateSet('FAT32','NTFS')]
         [string]$FileSystem,
 
-        [switch]$Skip,
-        [switch]$SelectOne
+        [System.Management.Automation.SwitchParameter]$Skip,
+        [System.Management.Automation.SwitchParameter]$SelectOne
     )
     #=================================================
     #	Get-Volume

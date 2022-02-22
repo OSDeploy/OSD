@@ -33,7 +33,7 @@ function Add-WindowsPackageSSU {
         [string]$Path,
 
         [Parameter(ParameterSetName = 'Online', Mandatory = $true)]
-        [switch]$Online,
+        [System.Management.Automation.SwitchParameter]$Online,
 
         [string]$LogPath = "$env:windir\Logs\Dism\dism.log"
     )

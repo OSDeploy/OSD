@@ -21,7 +21,7 @@ Uses Windows 10 WinRE.wim instead of the ADK Boot.wim
 .LINK
 https://osdcloud.osdeploy.com
 #>
-function New-OSDCloud.template {
+function New-OSDCloudTemplate {
     [CmdletBinding()]
     param (
         [ValidateSet (
@@ -36,7 +36,7 @@ function New-OSDCloud.template {
         [string[]]$Language,
         [string]$SetAllIntl,
         [string]$SetInputLocale,
-        [switch]$WinRE
+        [System.Management.Automation.SwitchParameter]$WinRE
     )
 #=================================================
 #   WinREDriver
@@ -241,7 +241,7 @@ Windows Registry Editor Version 5.00
         $null = New-Item -Path $TemplateLogs -ItemType Directory -Force | Out-Null
     }
 
-    $Transcript = "$((Get-Date).ToString('yyyy-MM-dd-HHmmss'))-New-OSDCloud.template.log"
+    $Transcript = "$((Get-Date).ToString('yyyy-MM-dd-HHmmss'))-New-OSDCloudTemplate.log"
     Start-Transcript -Path (Join-Path $TemplateLogs $Transcript) -ErrorAction Ignore
     #=================================================
     #   Mirror ADK Media

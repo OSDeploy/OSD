@@ -6,7 +6,7 @@ function Start-DEVWimRobotCLI {
 
         [Int32]$Index = 1,
 
-        [switch]$Update
+        [System.Management.Automation.SwitchParameter]$Update
     )
     function Show-WimRobotTime {
         [CmdletBinding()]

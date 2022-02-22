@@ -40,9 +40,9 @@ function Update-MyWindowsImage {
         [ValidateSet('Check','All','AdobeSU','DotNet','DotNetCU','LCU','SSU')]
         [string]$Update = 'Check',
 
-        [switch]$BitsTransfer,
+        [System.Management.Automation.SwitchParameter]$BitsTransfer,
 
-        [switch]$Force
+        [System.Management.Automation.SwitchParameter]$Force
     )
 
     begin {

@@ -182,7 +182,7 @@ function Set-WinREWiFi() {
         [string]$Passwd,
         
         [Parameter(Mandatory = $false, HelpMessage = "This switch will generate a WPA profile instead of WPA2")]
-        [switch]$WPA = $false
+        [System.Management.Automation.SwitchParameter]$WPA = $false
     )
 
     if ($Passwd) {

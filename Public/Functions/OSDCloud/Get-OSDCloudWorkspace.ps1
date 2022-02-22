@@ -8,7 +8,7 @@ Gets an OSDCloud Workspace by reading the path stored in $env:ProgramData\OSDClo
 .LINK
 https://osdcloud.osdeploy.com
 #>
-function Get-OSDCloud.workspace {
+function Get-OSDCloudWorkspace {
     [CmdletBinding()]
     param ()
 

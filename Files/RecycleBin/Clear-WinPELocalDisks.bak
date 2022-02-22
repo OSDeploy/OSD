@@ -55,10 +55,10 @@ function Clear-WinPELocalDisks {
         [string]$Title = 'Clear-WinPELocalDisks',
 
         [Alias('NI')]
-        [switch]$NonInteractive,
+        [System.Management.Automation.SwitchParameter]$NonInteractive,
 
         [Alias('F')]
-        [switch]$Force
+        [System.Management.Automation.SwitchParameter]$Force
     )
     
     #=================================================

@@ -40,7 +40,7 @@ function Save-MyDriverPack {
     param (
         [Parameter(ValueFromPipeline = $true)]
         [System.String]$DownloadPath = 'C:\Drivers',
-        [switch]$Expand,
+        [System.Management.Automation.SwitchParameter]$Expand,
         [System.String]$Manufacturer = (Get-MyComputerManufacturer -Brief),
         [System.String]$Product = (Get-MyComputerProduct)
     )

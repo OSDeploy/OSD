@@ -9,7 +9,7 @@ function Sort-CatalogResults {
         [string] $SortBy,
 
         [Parameter(Mandatory = $false)]
-        [switch] $Descending,
+        [System.Management.Automation.SwitchParameter] $Descending,
 
         [Parameter(DontShow)]
         [string] $EventArgument,

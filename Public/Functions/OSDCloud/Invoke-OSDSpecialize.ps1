@@ -1,7 +1,7 @@
 function Invoke-OSDSpecialize {
     [CmdletBinding()]
     param (
-        [switch]$Apply
+        [System.Management.Automation.SwitchParameter]$Apply
     )
     #=================================================
     #   Specialize

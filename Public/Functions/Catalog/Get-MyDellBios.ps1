@@ -132,9 +132,9 @@ function Update-MyDellBios {
         [Parameter(ValueFromPipeline = $true)]
         [Alias ('DownloadFolder','Path')]
         [string]$DownloadPath = $env:TEMP,
-        [switch]$Force,
-        [switch]$Reboot,
-        [switch]$Silent
+        [System.Management.Automation.SwitchParameter]$Force,
+        [System.Management.Automation.SwitchParameter]$Reboot,
+        [System.Management.Automation.SwitchParameter]$Silent
     )
     #=================================================
     #   Block

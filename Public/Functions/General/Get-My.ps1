@@ -16,7 +16,7 @@ https://osd.osdeploy.com
 function Get-MyBiosSerialNumber {
     [CmdletBinding()]
     param (
-        [switch]$Brief
+        [System.Management.Automation.SwitchParameter]$Brief
     )
 
     $Result = ((Get-CimInstance -ClassName Win32_BIOS).SerialNumber).Trim()
@@ -76,7 +76,7 @@ https://osd.osdeploy.com
 function Get-MyComputerManufacturer {
     [CmdletBinding()]
     param (
-        [switch]$Brief
+        [System.Management.Automation.SwitchParameter]$Brief
     )
     #Should always opt for CIM over WMI
     $MyComputerManufacturer = ((Get-CimInstance -ClassName CIM_ComputerSystem).Manufacturer).Trim()
@@ -116,7 +116,7 @@ function Get-MyComputerModel {
     [CmdletBinding()]
     param (
         #Normalize the Return
-        [switch]$Brief
+        [System.Management.Automation.SwitchParameter]$Brief
     )
 
     $MyComputerManufacturer = Get-MyComputerManufacturer -Brief

@@ -43,10 +43,10 @@ function Dismount-MyWindowsImage {
         [string[]]$Path,
 
         [Parameter(ParameterSetName = 'DismountDiscard', Mandatory = $true)]
-        [switch]$Discard,
+        [System.Management.Automation.SwitchParameter]$Discard,
 
         [Parameter(ParameterSetName = 'DismountSave', Mandatory = $true)]
-        [switch]$Save
+        [System.Management.Automation.SwitchParameter]$Save
     )
 
     begin {

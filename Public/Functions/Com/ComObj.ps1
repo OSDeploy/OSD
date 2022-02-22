@@ -22,7 +22,7 @@ function Get-ComObjects {
  
         [Parameter(Mandatory=$true,
         ParameterSetName='ListAllComObjects')]
-        [switch]$ListAll
+        [System.Management.Automation.SwitchParameter]$ListAll
     )
  
     $ListofObjects = Get-ChildItem HKLM:\Software\Classes -ErrorAction SilentlyContinue | Where-Object {

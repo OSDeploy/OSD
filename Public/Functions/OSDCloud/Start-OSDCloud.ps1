@@ -71,13 +71,13 @@ function Start-OSDCloud {
         [string]$Manufacturer = (Get-MyComputerManufacturer -Brief),
         [string]$Product = (Get-MyComputerProduct),
 
-        [switch]$Firmware,
-        [switch]$Restart,
-        [switch]$Shutdown,
-        [switch]$Screenshot,
-        [switch]$SkipAutopilot,
-        [switch]$SkipODT,
-        [switch]$ZTI,
+        [System.Management.Automation.SwitchParameter]$Firmware,
+        [System.Management.Automation.SwitchParameter]$Restart,
+        [System.Management.Automation.SwitchParameter]$Shutdown,
+        [System.Management.Automation.SwitchParameter]$Screenshot,
+        [System.Management.Automation.SwitchParameter]$SkipAutopilot,
+        [System.Management.Automation.SwitchParameter]$SkipODT,
+        [System.Management.Automation.SwitchParameter]$ZTI,
 
         [Parameter(ParameterSetName = 'Default')]
         [ValidateSet('21H2','21H1','20H2','2004','1909','1903','1809')]
@@ -106,7 +106,7 @@ function Start-OSDCloud {
         [string]$OSLicense,
 
         [Parameter(ParameterSetName = 'CustomImage')]
-        [switch]$FindImageFile,
+        [System.Management.Automation.SwitchParameter]$FindImageFile,
 
         [Parameter(ParameterSetName = 'CustomImage')]
         [string]$ImageFileUrl,
@@ -275,7 +275,7 @@ function Start-OSDCloud {
             Write-Host -ForegroundColor DarkGray "ImageIndex: $($Global:StartOSDCloud.OSImageIndex)"
         }
         if ($PSBoundParameters.ContainsKey('FindImageFile')) {
-            $Global:StartOSDCloud.ImageFileItem = Select-OSDCloudFile.wim
+            $Global:StartOSDCloud.ImageFileItem = Select-OSDCloudFileWim
         
             if ($Global:StartOSDCloud.ImageFileItem) {
                 $Global:StartOSDCloud.OSImageIndex = Select-OSDCloudImageIndex -ImagePath $Global:StartOSDCloud.ImageFileItem.FullName

@@ -17,8 +17,8 @@ https://osd.osdeploy.com/module/functions/block
 function Block-AdminUser {
     [CmdletBinding()]
     param (
-        [switch]$Warn,
-        [switch]$Pause
+        [System.Management.Automation.SwitchParameter]$Warn,
+        [System.Management.Automation.SwitchParameter]$Pause
     )
     $CallingFunction = (Get-PSCallStack)[1].InvocationInfo.Line
     $Message = "[$((Get-Date).ToString('yyyy-MM-dd-HHmmss'))] $CallingFunction requires non-Admin Rights"
@@ -52,8 +52,8 @@ https://osd.osdeploy.com/module/functions/block
 function Block-ManufacturerNeLenovo {
     [CmdletBinding()]
     param (
-        [switch]$Warn,
-        [switch]$Pause
+        [System.Management.Automation.SwitchParameter]$Warn,
+        [System.Management.Automation.SwitchParameter]$Pause
     )
     $CallingFunction = (Get-PSCallStack)[1].InvocationInfo.Line
     $Message = "[$((Get-Date).ToString('yyyy-MM-dd-HHmmss'))] $CallingFunction requires a Lenovo computer"
@@ -87,8 +87,8 @@ https://osd.osdeploy.com/module/functions/block
 function Block-NoCurl {
     [CmdletBinding()]
     param (
-        [switch]$Warn,
-        [switch]$Pause
+        [System.Management.Automation.SwitchParameter]$Warn,
+        [System.Management.Automation.SwitchParameter]$Pause
     )
     $CallingFunction = (Get-PSCallStack)[1].InvocationInfo.Line
     $Message = "[$((Get-Date).ToString('yyyy-MM-dd-HHmmss'))] $CallingFunction requires curl.exe"
@@ -122,8 +122,8 @@ https://osd.osdeploy.com/module/functions/block
 function Block-NoInternet {
     [CmdletBinding()]
     param (
-        [switch]$Warn,
-        [switch]$Pause
+        [System.Management.Automation.SwitchParameter]$Warn,
+        [System.Management.Automation.SwitchParameter]$Pause
     )
     $CallingFunction = (Get-PSCallStack)[1].InvocationInfo.Line
     $Message = "[$((Get-Date).ToString('yyyy-MM-dd-HHmmss'))] $CallingFunction requires Internet access"
@@ -157,8 +157,8 @@ https://osd.osdeploy.com/module/functions/block
 function Block-PowerShellVersionLt5 {
     [CmdletBinding()]
     param (
-        [switch]$Warn,
-        [switch]$Pause
+        [System.Management.Automation.SwitchParameter]$Warn,
+        [System.Management.Automation.SwitchParameter]$Pause
     )
     $CallingFunction = (Get-PSCallStack)[1].InvocationInfo.Line
     $Message = "[$((Get-Date).ToString('yyyy-MM-dd-HHmmss'))] $CallingFunction requires PowerShell version 5 or greater"
@@ -193,8 +193,8 @@ function Block-PSModuleNotInstalled {
     [CmdletBinding()]
     param (
         [string]$ModuleName = 'OSD',
-        [switch]$Warn,
-        [switch]$Pause
+        [System.Management.Automation.SwitchParameter]$Warn,
+        [System.Management.Automation.SwitchParameter]$Pause
     )
     $CallingFunction = (Get-PSCallStack)[1].InvocationInfo.Line
     $Message = "[$((Get-Date).ToString('yyyy-MM-dd-HHmmss'))] $CallingFunction requires PowerShell Module $ModuleName to be installed"
@@ -228,8 +228,8 @@ https://osd.osdeploy.com/module/functions/block
 function Block-StandardUser {
     [CmdletBinding()]
     param (
-        [switch]$Warn,
-        [switch]$Pause
+        [System.Management.Automation.SwitchParameter]$Warn,
+        [System.Management.Automation.SwitchParameter]$Pause
     )
     $CallingFunction = (Get-PSCallStack)[1].InvocationInfo.Line
     $Message = "[$((Get-Date).ToString('yyyy-MM-dd-HHmmss'))] $CallingFunction requires Admin Rights"
@@ -263,8 +263,8 @@ https://osd.osdeploy.com/module/functions/block
 function Block-WindowsReleaseIdLt1703 {
     [CmdletBinding()]
     param (
-        [switch]$Warn,
-        [switch]$Pause
+        [System.Management.Automation.SwitchParameter]$Warn,
+        [System.Management.Automation.SwitchParameter]$Pause
     )
     $CallingFunction = (Get-PSCallStack)[1].InvocationInfo.Line
     $Message = "[$((Get-Date).ToString('yyyy-MM-dd-HHmmss'))] $CallingFunction requires Windows ReleaseId of 1703 or greater"
@@ -298,8 +298,8 @@ https://osd.osdeploy.com/module/functions/block
 function Block-WindowsVersionNe10 {
     [CmdletBinding()]
     param (
-        [switch]$Warn,
-        [switch]$Pause
+        [System.Management.Automation.SwitchParameter]$Warn,
+        [System.Management.Automation.SwitchParameter]$Pause
     )
     $CallingFunction = (Get-PSCallStack)[1].InvocationInfo.Line
     $Message = "[$((Get-Date).ToString('yyyy-MM-dd-HHmmss'))] $CallingFunction requires Windows with a Major version 10 or greater"
@@ -333,8 +333,8 @@ https://osd.osdeploy.com/module/functions/block
 function Block-WinOS {
     [CmdletBinding()]
     param (
-        [switch]$Warn,
-        [switch]$Pause
+        [System.Management.Automation.SwitchParameter]$Warn,
+        [System.Management.Automation.SwitchParameter]$Pause
     )
     $CallingFunction = (Get-PSCallStack)[1].InvocationInfo.Line
     $Message = "[$((Get-Date).ToString('yyyy-MM-dd-HHmmss'))] $CallingFunction requires WinPE"
@@ -368,8 +368,8 @@ https://osd.osdeploy.com/module/functions/block
 function Block-WinPE {
     [CmdletBinding()]
     param (
-        [switch]$Warn,
-        [switch]$Pause
+        [System.Management.Automation.SwitchParameter]$Warn,
+        [System.Management.Automation.SwitchParameter]$Pause
     )
     $CallingFunction = (Get-PSCallStack)[1].InvocationInfo.Line
     $Message = "[$((Get-Date).ToString('yyyy-MM-dd-HHmmss'))] $CallingFunction cannot be run from WinPE"

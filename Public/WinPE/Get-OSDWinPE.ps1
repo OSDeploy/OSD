@@ -19,7 +19,7 @@ function Get-OSDWinPE {
         #Searches all PSDrives for <drive>:\Content\Modules directory
         #Copies Modules to X:\Program Files\WindowsPowerShell\Modules
         [Alias('Modules','AddModules')]
-        [switch]$GetModules,
+        [System.Management.Automation.SwitchParameter]$GetModules,
 
         #Find and Run PowerShell Scripts
         #Searches all PSDrives for <drive>:\<$GetScript>
@@ -31,7 +31,7 @@ function Get-OSDWinPE {
         #wpeutil InitializeNetwork
         #Initializes network components and drivers and sets the computer name to a randomly-chosen value
         [Alias('Network')]
-        [switch]$InitializeNetwork,
+        [System.Management.Automation.SwitchParameter]$InitializeNetwork,
 
         #wpeutil InitializeNetwork /NoWait
         #Initializes network components and drivers and sets the computer name to a randomly-chosen value
@@ -39,23 +39,23 @@ function Get-OSDWinPE {
         #If you don't use /NoWait, Windows PE will wait to acquire an address before it finishes loading your WinPE session
         #/NoWait is helpful for environments that don't use DHCP
         [Alias('NetworkNoWait')]
-        [switch]$InitializeNetworkNoWait,
+        [System.Management.Automation.SwitchParameter]$InitializeNetworkNoWait,
 
         #wpeutil WaitForNetwork
         #Waits for the network card to be initialized
         #Use this command when creating scripts to make sure that the network card has been fully initialized before continuing
         [Alias('WaitNetwork')]
-        [switch]$WaitForNetwork,
+        [System.Management.Automation.SwitchParameter]$WaitForNetwork,
 
         #wpeutil WaitForRemovableStorage
         #During the Windows PE startup sequence, this command will block startup until the removable storage devices, such as USB hard drives, are initialized
         [Alias('WaitUSB')]
-        [switch]$WaitForRemovableStorage,
+        [System.Management.Automation.SwitchParameter]$WaitForRemovableStorage,
 
         #wpeutil DisableFirewall
         #Disables the Firewall
         [Alias('Disable')]
-        [switch]$DisableFirewall,
+        [System.Management.Automation.SwitchParameter]$DisableFirewall,
 
         #wpeutil UpdateBootInfo
         #Populates the registry with information about how Windows PE boots
@@ -72,20 +72,20 @@ function Get-OSDWinPE {
         #If you are not booting Windows Deployment Services, the best way to determine where Windows PE booted from is to first check for PEBootRamdiskSourceDrive registry key
         #If it is not present, scan the drives of the correct PEBootType and look for some kind of tag file that identifies the boot drive
         [Alias('Update')]
-        [switch]$UpdateBootInfo,
+        [System.Management.Automation.SwitchParameter]$UpdateBootInfo,
 
         #RemoteRecovery.exe -nomessage
         #Microsoft Diagnostic and Recovery Toolset Remote Recovery
         [Alias('Remote')]
-        [switch]$RemoteRecovery,
+        [System.Management.Automation.SwitchParameter]$RemoteRecovery,
 
         #wpeutil Reboot
         #Reboots the computer
-        [switch]$Reboot,
+        [System.Management.Automation.SwitchParameter]$Reboot,
         
         #wpeutil Shutdown
         #Shutdown the computer
-        [switch]$Shutdown
+        [System.Management.Automation.SwitchParameter]$Shutdown
     )
     #=================================================
     #	Blocks

@@ -53,7 +53,7 @@ function Show-MsSettings {
         )]
         [string]$Setting,
 
-        [switch]$DisableWSUS
+        [System.Management.Automation.SwitchParameter]$DisableWSUS
     )
     #=================================================
     #	Block

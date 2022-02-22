@@ -29,7 +29,7 @@ function Get-OSDDriverWmiQ {
         [string]$Result = 'Model',
 
         #Open a Text File with the WMI Query after completion
-        [switch]$ShowTextFile
+        [System.Management.Automation.SwitchParameter]$ShowTextFile
     )
 
     begin {

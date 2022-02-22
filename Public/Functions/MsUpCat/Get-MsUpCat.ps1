@@ -55,16 +55,16 @@ function Get-MsUpCat {
         [string] $SortBy,
 
         [Parameter(Mandatory = $false)]
-        [switch] $Descending,
+        [System.Management.Automation.SwitchParameter] $Descending,
 
         [Parameter(Mandatory = $false)]
-        [switch] $Strict,
+        [System.Management.Automation.SwitchParameter] $Strict,
 
         [Parameter(Mandatory = $false)]
-        [switch] $IncludeFileNames,
+        [System.Management.Automation.SwitchParameter] $IncludeFileNames,
 
         [Parameter(Mandatory = $false)]
-        [switch] $AllPages
+        [System.Management.Automation.SwitchParameter] $AllPages
     )
 
     try {

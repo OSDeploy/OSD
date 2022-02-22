@@ -11,7 +11,7 @@ Directory for the OSDCloud Workspace to set.  Default is $env:SystemDrive\OSDClo
 .LINK
 https://osdcloud.osdeploy.com
 #>
-function Set-OSDCloud.workspace {
+function Set-OSDCloudWorkspace {
     [CmdletBinding()]
     param (
         [Parameter(Position=0)]
@@ -24,7 +24,7 @@ function Set-OSDCloud.workspace {
     Block-PowerShellVersionLt5
     Block-WinPE
     #=================================================
-    #	Set-OSDCloud.workspace
+    #	Set-OSDCloudWorkspace
     #=================================================
     $WorkspaceSettings = [PSCustomObject]@{
         WorkspacePath = $WorkspacePath

@@ -16,7 +16,7 @@ function Get-CimVideoControllerResolution {
     param (
 
         #Returns Interlaced resolutions
-        [switch]$Interlaced=$false
+        [System.Management.Automation.SwitchParameter]$Interlaced=$false
     )
 
     $GetMyVideoControllerResolution = (Get-CimInstance -Class CIM_VideoControllerResolution | Select-Object -Property * | `

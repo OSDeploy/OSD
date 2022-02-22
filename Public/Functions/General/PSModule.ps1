@@ -37,7 +37,7 @@ function Copy-PSModuleToFolder {
         [Alias('Folder')]
         [String]$Destination,
 
-        [switch]$RemoveOldVersions
+        [System.Management.Automation.SwitchParameter]$RemoveOldVersions
     )
 
     begin {

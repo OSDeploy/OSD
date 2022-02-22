@@ -109,7 +109,7 @@ function New-OSDisk {
         [string]$LabelWindows = 'OS',
 
         [Alias('SkipRecovery','SkipRecoveryPartition')]
-        [switch]$NoRecoveryPartition,
+        [System.Management.Automation.SwitchParameter]$NoRecoveryPartition,
 
         [Alias('LR','LabelR')]
         [string]$LabelRecovery = 'Recovery',
@@ -120,7 +120,7 @@ function New-OSDisk {
 
         [Parameter(ValueFromPipelineByPropertyName = $true)]
         [Alias('F')]
-        [switch]$Force
+        [System.Management.Automation.SwitchParameter]$Force
     )
     #=================================================
     #	PSBoundParameters

@@ -58,10 +58,10 @@ function Get-WSUSXML {
         [string]$UpdateOS,
 
         #Display the results in GridView
-        [switch]$GridView,
+        [System.Management.Automation.SwitchParameter]$GridView,
 
         #Don't display the Module Information
-        [switch]$Silent
+        [System.Management.Automation.SwitchParameter]$Silent
     )
     #===================================================================================================
     #   Defaults

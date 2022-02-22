@@ -38,7 +38,7 @@ function Get-DellSystemMasterCatalog {
     [CmdletBinding()]
     param (
         [System.String]$DownloadPath,
-        [switch]$Compatible,
+        [System.Management.Automation.SwitchParameter]$Compatible,
 
         [ValidateSet('Application','BIOS','Driver','Firmware')]
         [System.String]$Component

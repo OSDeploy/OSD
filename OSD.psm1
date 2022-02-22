@@ -87,6 +87,18 @@ New-Alias -Name Select-USBDisk -Value Select-Disk.usb -Force -ErrorAction Silent
 New-Alias -Name Select-USBVolume -Value Select-Volume.usb -Force -ErrorAction SilentlyContinue
 New-Alias -Name Update-OSDWindowsImage -Value Update-MyWindowsImage -Force -ErrorAction SilentlyContinue
 New-Alias -Name Update-WindowsImageOSD -Value Update-MyWindowsImage -Force -ErrorAction SilentlyContinue
+
+New-Alias -Name Edit-OSDCloud.winpe -Value Edit-OSDCloudWinpe -Force -ErrorAction SilentlyContinue
+New-Alias -Name Get-OSDCloud.template -Value Get-OSDCloudTemplate -Force -ErrorAction SilentlyContinue
+New-Alias -Name Get-OSDCloud.workspace -Value Get-OSDCloudWorkspace -Force -ErrorAction SilentlyContinue
+New-Alias -Name New-OSDCloud.iso -Value New-OSDCloudISO -Force -ErrorAction SilentlyContinue
+New-Alias -Name New-OSDCloud.template -Value New-OSDCloudTemplate -Force -ErrorAction SilentlyContinue
+New-Alias -Name New-OSDCloud.usb -Value New-OSDCloudUSB -Force -ErrorAction SilentlyContinue
+New-Alias -Name New-OSDCloud.workspace -Value New-OSDCloudWorkspace -Force -ErrorAction SilentlyContinue
+New-Alias -Name Save-OSDCloud.usb -Value Update-OSDCloudUSB -Force -ErrorAction SilentlyContinue
+New-Alias -Name Save-OSDCloudDriverPack.usb -Value Update-OSDCloudUSB -Force -ErrorAction SilentlyContinue
+New-Alias -Name Set-OSDCloud.workspace -Value Set-OSDCloudWorkspace -Force -ErrorAction SilentlyContinue
+New-Alias -Name Update-OSDCloud.usb -Value Update-OSDCloudUSB -Force -ErrorAction SilentlyContinue
 #=================================================
 #Export-ModuleMember
 Export-ModuleMember -Function * -Alias *

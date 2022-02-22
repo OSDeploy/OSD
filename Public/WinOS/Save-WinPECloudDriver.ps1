@@ -5,7 +5,7 @@ function Save-WinPECloudDriver {
         [System.String[]]$CloudDriver,
         [System.String[]]$HardwareID,
         [System.String]$Path,
-        [Switch]$Clipboard
+        [System.Management.Automation.SwitchParameter]$Clipboard
     )
     #=================================================
     #	Cloud Drivers

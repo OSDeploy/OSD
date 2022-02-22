@@ -33,9 +33,9 @@ function Edit-MyWinPE {
 
         [String[]]$PSModuleCopy,
 
-        [switch]$PSGallery,
+        [System.Management.Automation.SwitchParameter]$PSGallery,
 
-        [switch]$DismountSave
+        [System.Management.Automation.SwitchParameter]$DismountSave
     )
 
     begin {

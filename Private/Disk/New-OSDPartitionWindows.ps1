@@ -47,7 +47,7 @@ function New-OSDPartitionWindows {
 
         #Skips the creation of the Recovery Partition
         [Alias('SkipRecovery','SkipRecoveryPartition')]
-        [switch]$NoRecoveryPartition
+        [System.Management.Automation.SwitchParameter]$NoRecoveryPartition
     )
 
     #=================================================

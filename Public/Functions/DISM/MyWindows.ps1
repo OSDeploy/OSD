@@ -90,10 +90,10 @@ function Get-MyWindowsCapability {
         [string[]]$Like,
         [string[]]$Match,
 
-        [switch]$Detail,
+        [System.Management.Automation.SwitchParameter]$Detail,
 
         [Parameter(ParameterSetName = "Online")]
-        [switch]$DisableWSUS
+        [System.Management.Automation.SwitchParameter]$DisableWSUS
     )
     begin {
         #=================================================
@@ -417,7 +417,7 @@ function Get-MyWindowsPackage {
         [string[]]$Like,
         [string[]]$Match,
 
-        [switch]$Detail
+        [System.Management.Automation.SwitchParameter]$Detail
     )
     #=================================================
     #   Require Admin Rights

@@ -15,9 +15,9 @@ function Get-MsUpCatUpdate {
         [ValidateSet('LCU','SSU','DotNetCU')]
         [string]$Category = 'LCU',
 
-        [switch]$Insider,
+        [System.Management.Automation.SwitchParameter]$Insider,
 
-        [switch]$ListAvailable
+        [System.Management.Automation.SwitchParameter]$ListAvailable
     )
     #=================================================
     #	MSCatalog PowerShell Module
@@ -158,7 +158,7 @@ function Save-MsUpCatUpdate {
 
         [string]$DestinationDirectory = "$env:TEMP\MsUpCat",
 
-        [switch]$Latest
+        [System.Management.Automation.SwitchParameter]$Latest
     )
     #=================================================
     #	MSCatalog PowerShell Module

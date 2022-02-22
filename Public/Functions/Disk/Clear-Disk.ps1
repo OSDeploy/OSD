@@ -60,7 +60,7 @@ function Clear-Disk.fixed {
         [uint32]$DiskNumber,
 
         [Alias('I')]
-        [switch]$Initialize,
+        [System.Management.Automation.SwitchParameter]$Initialize,
 
         [Alias('PS')]
         [ValidateSet('GPT','MBR')]
@@ -68,12 +68,12 @@ function Clear-Disk.fixed {
 
         [Parameter(ValueFromPipelineByPropertyName = $true)]
         [Alias('F')]
-        [switch]$Force,
+        [System.Management.Automation.SwitchParameter]$Force,
 
-        [switch]$NoResults,
+        [System.Management.Automation.SwitchParameter]$NoResults,
 
         [Alias('W','Warn','Warning')]
-        [switch]$ShowWarning
+        [System.Management.Automation.SwitchParameter]$ShowWarning
     )
     #=================================================
     #	PSBoundParameters
@@ -241,7 +241,7 @@ function Clear-Disk.usb {
         [uint32]$DiskNumber,
 
         [Alias('I')]
-        [switch]$Initialize,
+        [System.Management.Automation.SwitchParameter]$Initialize,
 
         [Alias('PS')]
         [ValidateSet('GPT','MBR')]
@@ -249,10 +249,10 @@ function Clear-Disk.usb {
 
         [Parameter(ValueFromPipelineByPropertyName)]
         [Alias('F')]
-        [switch]$Force,
+        [System.Management.Automation.SwitchParameter]$Force,
 
         [Alias('W','Warn','Warning')]
-        [switch]$ShowWarning
+        [System.Management.Automation.SwitchParameter]$ShowWarning
     )
     #=================================================
     #	PSBoundParameters

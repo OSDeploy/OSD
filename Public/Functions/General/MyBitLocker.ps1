@@ -68,7 +68,7 @@ function Get-MyBitLockerKeyProtectors {
     [CmdletBinding()]
     param (
         [Parameter(Position = 0, ValueFromPipelineByPropertyName)]
-        [switch]$ShowRecoveryPassword
+        [System.Management.Automation.SwitchParameter]$ShowRecoveryPassword
     )
     begin {
         #=================================================
@@ -387,7 +387,7 @@ function Unlock-MyBitLockerExternalKey {
         [string[]]$Path,
 
         [Parameter(Position = 1, ValueFromPipelineByPropertyName)]
-        [switch]$Recurse
+        [System.Management.Automation.SwitchParameter]$Recurse
     )
     begin {
         #=================================================

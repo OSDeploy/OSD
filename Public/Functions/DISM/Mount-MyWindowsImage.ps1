@@ -40,12 +40,12 @@ function Mount-MyWindowsImage {
         [Parameter(
             ValueFromPipelineByPropertyName
         )]
-        [switch]$ReadOnly,
+        [System.Management.Automation.SwitchParameter]$ReadOnly,
 
         [Parameter(
             ValueFromPipelineByPropertyName
         )]
-        [switch]$Explorer
+        [System.Management.Automation.SwitchParameter]$Explorer
     )
 
     begin {

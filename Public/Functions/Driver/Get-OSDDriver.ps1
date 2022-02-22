@@ -19,7 +19,7 @@ function Get-OSDDriver {
         [string]$OSDGroup,
 
         #Select results in GridView with PassThru
-        [switch]$GridView
+        [System.Management.Automation.SwitchParameter]$GridView
     )
     #=================================================
     #	Information

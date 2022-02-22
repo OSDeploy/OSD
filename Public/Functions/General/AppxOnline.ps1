@@ -15,10 +15,10 @@ function Remove-AppxOnline {
     [CmdletBinding()]
     param (
         #Appx Packages selected in GridView will be removed from the Windows Image
-        [switch]$GridRemoveAppx,
+        [System.Management.Automation.SwitchParameter]$GridRemoveAppx,
 
         #Appx Provisioned Packages selected in GridView will be removed from the Windows Image
-        [switch]$GridRemoveAppxPP,
+        [System.Management.Automation.SwitchParameter]$GridRemoveAppxPP,
 
         #Appx Packages matching the string will be removed
         [string[]]$Name

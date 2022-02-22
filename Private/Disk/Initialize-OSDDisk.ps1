@@ -39,7 +39,7 @@ function Initialize-OSDDisk {
 
         [Parameter(ValueFromPipelineByPropertyName = $true)]
         [Alias('F')]
-        [switch]$Force
+        [System.Management.Automation.SwitchParameter]$Force
     )
 
     #=================================================

@@ -1,4 +1,4 @@
-function Get-OSDCloud.template {
+function Get-OSDCloudTemplate {
     [CmdletBinding()]
     param ()
 

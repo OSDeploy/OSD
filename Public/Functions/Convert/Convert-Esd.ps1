@@ -79,9 +79,9 @@ function Convert-EsdToIso {
         [ValidateLength(1,16)]
         [string]$isoLabel = 'EsdToIso',
 
-        [switch]$noPrompt,
+        [System.Management.Automation.SwitchParameter]$noPrompt,
 
-        [switch]$Demo
+        [System.Management.Automation.SwitchParameter]$Demo
     )
     #=================================================
     #	Blocks

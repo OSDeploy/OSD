@@ -42,7 +42,7 @@ $UnattendXml = @'
 function Expand-StagedDriverPack {
     [CmdletBinding()]
     param (
-        [switch]$Apply
+        [System.Management.Automation.SwitchParameter]$Apply
     )
     #=================================================
     #   Specialize

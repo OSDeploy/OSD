@@ -16,7 +16,7 @@ https://osd.osdeploy.com
 function Get-MicrosoftDriverPackMasterCatalog {
     [CmdletBinding()]
     param (
-        [switch]$Compatible,
+        [System.Management.Automation.SwitchParameter]$Compatible,
         [System.String]$DownloadPath,
         
         [ValidateSet('Build','Cloud','Offline','Raw')]

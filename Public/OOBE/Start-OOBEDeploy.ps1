@@ -3,13 +3,13 @@ function Start-OOBEDeploy {
     param (
         [Parameter(ValueFromPipeline = $true)]
         [string]$CustomProfile,
-        [switch]$AddNetFX3,
-        [switch]$AddRSAT,
-        [switch]$Autopilot,
+        [System.Management.Automation.SwitchParameter]$AddNetFX3,
+        [System.Management.Automation.SwitchParameter]$AddRSAT,
+        [System.Management.Automation.SwitchParameter]$Autopilot,
         [string]$ProductKey,
         [string[]]$RemoveAppx,
-        [switch]$UpdateDrivers,
-        [switch]$UpdateWindows,
+        [System.Management.Automation.SwitchParameter]$UpdateDrivers,
+        [System.Management.Automation.SwitchParameter]$UpdateWindows,
         [ValidateSet('Enterprise')]
         [string]$SetEdition
     )

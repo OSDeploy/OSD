@@ -39,7 +39,7 @@ function Backup-DiskToFFU {
         [string] $Compress = 'Default',
 
         #Executes the capture
-        [switch] $Force
+        [System.Management.Automation.SwitchParameter] $Force
     )
     #=================================================
     #	PSBoundParameters

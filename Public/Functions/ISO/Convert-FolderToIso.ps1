@@ -12,7 +12,7 @@ function Convert-FolderToIso {
         [ValidateLength(1,16)]
         [string]$isoLabel = 'FolderToIso',
 
-        [switch]$noPrompt
+        [System.Management.Automation.SwitchParameter]$noPrompt
     )
     #=================================================
     #	Blocks

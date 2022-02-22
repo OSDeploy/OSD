@@ -17,7 +17,7 @@ function Get-LenovoBiosMasterCatalog {
     [CmdletBinding()]
     param (
         [System.String]$DownloadPath,
-		[switch]$Compatible
+		[System.Management.Automation.SwitchParameter]$Compatible
     )
     #=================================================
     #   Paths

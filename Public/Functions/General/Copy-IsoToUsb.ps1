@@ -34,9 +34,9 @@ function Copy-IsoToUsb {
         [ValidateNotNullOrEmpty()]
         [ValidateScript({(Test-Path $_) -and ((Get-Item $_).Extension -eq '.iso')})]
         [string]$ISOFile,
-        [switch]$MakeBootable,
-        [switch]$NTFS,
-        [switch]$SplitWim,
+        [System.Management.Automation.SwitchParameter]$MakeBootable,
+        [System.Management.Automation.SwitchParameter]$NTFS,
+        [System.Management.Automation.SwitchParameter]$SplitWim,
         [string]$USBLabel
     )
     BEGIN {

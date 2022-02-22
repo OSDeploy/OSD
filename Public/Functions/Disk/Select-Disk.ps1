@@ -4,8 +4,8 @@ function Select-Disk.osd {
     param (
         [Parameter(ValueFromPipeline = $true)]
         [Object]$Input,
-        [switch]$Skip,
-        [switch]$SelectOne
+        [System.Management.Automation.SwitchParameter]$Skip,
+        [System.Management.Automation.SwitchParameter]$SelectOne
     )
     #=================================================
     #	Get-Disk
@@ -60,8 +60,8 @@ function Select-Disk.osd {
 function Select-Disk.ffu {
     [CmdletBinding()]
     param (
-        [switch]$Skip,
-        [switch]$SelectOne
+        [System.Management.Automation.SwitchParameter]$Skip,
+        [System.Management.Automation.SwitchParameter]$SelectOne
     )
     #=================================================
     #	Get-Disk
@@ -123,8 +123,8 @@ function Select-Disk.fixed {
     param (
         [Parameter(ValueFromPipeline = $true)]
         [Object]$Input,
-        [switch]$Skip,
-        [switch]$SelectOne
+        [System.Management.Automation.SwitchParameter]$Skip,
+        [System.Management.Automation.SwitchParameter]$SelectOne
     )
     #=================================================
     #	Get-Disk
@@ -188,8 +188,8 @@ function Select-Disk.usb {
         [Alias('Max','MaxGB','MaxSize')]
         [int]$MaximumSizeGB = 1800,
 
-        [switch]$Skip,
-        [switch]$SelectOne
+        [System.Management.Automation.SwitchParameter]$Skip,
+        [System.Management.Automation.SwitchParameter]$SelectOne
     )
     #=================================================
     #	Get-Disk
@@ -245,8 +245,8 @@ function Select-Disk.storage {
     [CmdletBinding()]
     param (
         [int]$NotDiskNumber,
-        [switch]$Skip,
-        [switch]$SelectOne
+        [System.Management.Automation.SwitchParameter]$Skip,
+        [System.Management.Automation.SwitchParameter]$SelectOne
     )
     #=================================================
     #	Get USB Disk and add the MinimumSizeGB filter

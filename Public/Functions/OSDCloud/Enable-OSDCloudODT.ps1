@@ -26,14 +26,14 @@ function Enable-OSDCloudODT {
     Block-PowerShellVersionLt5
     Block-NoCurl
     #=================================================
-    #	Get-OSDCloud.template
+    #	Get-OSDCloudTemplate
     #=================================================
-    if (-NOT (Get-OSDCloud.template)) {
-        Write-Warning "Setting up a new OSDCloud.template"
-        New-OSDCloud.template -Verbose
+    if (-NOT (Get-OSDCloudTemplate)) {
+        Write-Warning "Setting up a new OSDCloudTemplate"
+        New-OSDCloudTemplate -Verbose
     }
 
-    $OSDCloudTemplate = Get-OSDCloud.template
+    $OSDCloudTemplate = Get-OSDCloudTemplate
     if (-NOT ($OSDCloudTemplate)) {
         Write-Warning "Something bad happened.  I have to go"
         Break
@@ -41,22 +41,22 @@ function Enable-OSDCloudODT {
     #=================================================
     #	Set WorkspacePath
     #=================================================
-    $WorkspacePath = Get-OSDCloud.workspace -ErrorAction Stop
+    $WorkspacePath = Get-OSDCloudWorkspace -ErrorAction Stop
     #=================================================
     #	Setup Workspace
     #=================================================
     if (-NOT ($WorkspacePath)) {
         Write-Warning "You need to provide a path to your Workspace with one of the following examples"
-        Write-Warning "Set-OSDCloud.workspace -WorkspacePath C:\OSDCloud"
+        Write-Warning "Set-OSDCloudWorkspace -WorkspacePath C:\OSDCloud"
         Break
     }
 
     if (-NOT (Test-Path $WorkspacePath)) {
-        New-OSDCloud.workspace -WorkspacePath $WorkspacePath -Verbose -ErrorAction Stop
+        New-OSDCloudWorkspace -WorkspacePath $WorkspacePath -Verbose -ErrorAction Stop
     }
 
     if (-NOT (Test-Path "$WorkspacePath\Media")) {
-        New-OSDCloud.workspace -WorkspacePath $WorkspacePath -Verbose -ErrorAction Stop
+        New-OSDCloudWorkspace -WorkspacePath $WorkspacePath -Verbose -ErrorAction Stop
     }
 
     if (-NOT (Test-Path "$WorkspacePath\Media\sources\boot.wim")) {

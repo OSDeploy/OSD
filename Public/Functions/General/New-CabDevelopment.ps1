@@ -4,8 +4,8 @@ function New-CabDevelopment
 	Param (
 		[Parameter(Mandatory=$True)]
 		[string]$Path,
-		[switch]$LZXHighCompression,
-		[switch]$MakeCABsFromSubDirs
+		[System.Management.Automation.SwitchParameter]$LZXHighCompression,
+		[System.Management.Automation.SwitchParameter]$MakeCABsFromSubDirs
 	)
 	
 	If ($LZXHighCompression) {

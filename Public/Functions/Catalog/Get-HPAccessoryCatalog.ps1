@@ -17,7 +17,7 @@ https://osd.osdeploy.com
 function Get-HPAccessoryCatalog {
     [CmdletBinding()]
     param (
-        [switch]$Compatible
+        [System.Management.Automation.SwitchParameter]$Compatible
     )
 	
     if ($PSBoundParameters.ContainsKey('Compatible')) {
