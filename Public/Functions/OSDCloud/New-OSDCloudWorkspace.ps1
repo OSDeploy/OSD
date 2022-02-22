@@ -49,7 +49,7 @@ function New-OSDCloudWorkspace {
         #=================================================
         #	OSDCloudTemplate
         #=================================================
-        $OSDCloudTemplate = Get-OSDCloudWorkspace -ErrorAction Stop
+        $OSDCloudTemplate = Get-OSDCloudTemplate -ErrorAction Stop
     
         if (-NOT ($OSDCloudTemplate)) {
             Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Unable to find an OSDCloud Template at $OSDCloudTemplate"
