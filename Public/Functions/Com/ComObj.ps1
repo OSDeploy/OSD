@@ -6,7 +6,6 @@ Returns all ComObjects
 Returns all ComObjects
 
 .LINK
-https://osd.osdeploy.com/module/functions/comobj
 https://www.powershellmagazine.com/2013/06/27/pstip-get-a-list-of-all-com-objects-available/
 
 .NOTES
@@ -43,7 +42,6 @@ Returns (New-Object -ComObject Microsoft.Update.AutoUpdate).Settings
 Returns (New-Object -ComObject Microsoft.Update.AutoUpdate).Settings
 
 .LINK
-https://osd.osdeploy.com/module/functions/update
 https://twitter.com/byteben/status/1356893619811155968
 
 .NOTES
@@ -63,7 +61,6 @@ Returns New-Object -ComObject Microsoft.Update.Installer
 Returns New-Object -ComObject Microsoft.Update.Installer
 
 .LINK
-https://osd.osdeploy.com/module/functions/update
 https://twitter.com/byteben/status/1356893619811155968
 
 .NOTES
@@ -83,7 +80,6 @@ Returns (New-Object -ComObject Microsoft.Update.ServiceManager).Services
 Returns (New-Object -ComObject Microsoft.Update.ServiceManager).Services
 
 .LINK
-https://osd.osdeploy.com/module/functions/update
 https://twitter.com/byteben/status/1356893619811155968
 
 .NOTES

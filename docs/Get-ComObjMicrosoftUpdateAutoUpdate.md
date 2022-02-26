@@ -1,8 +1,7 @@
 ---
 external help file: OSD-help.xml
 Module Name: OSD
-online version: https://osd.osdeploy.com/module/functions/update
-https://twitter.com/byteben/status/1356893619811155968
+online version: https://twitter.com/byteben/status/1356893619811155968
 schema: 2.0.0
 ---
 
@@ -43,7 +42,5 @@ Credit Ben Whitmore | byteben.com | @byteben
 
 ## RELATED LINKS
 
-[https://osd.osdeploy.com/module/functions/update
-https://twitter.com/byteben/status/1356893619811155968](https://osd.osdeploy.com/module/functions/update
-https://twitter.com/byteben/status/1356893619811155968)
+[https://twitter.com/byteben/status/1356893619811155968](https://twitter.com/byteben/status/1356893619811155968)
 

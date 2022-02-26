@@ -69,8 +69,8 @@ Accept wildcard characters: False
 ```
 
 ### -BitsTransfer
-#Download the file using BITS-Transfer
-#Interactive Login required
+Download the file using BITS-Transfer
+Interactive Login required
 
 ```yaml
 Type: SwitchParameter

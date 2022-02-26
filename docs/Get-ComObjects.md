@@ -1,8 +1,7 @@
 ---
 external help file: OSD-help.xml
 Module Name: OSD
-online version: https://osd.osdeploy.com/module/functions/comobj
-https://www.powershellmagazine.com/2013/06/27/pstip-get-a-list-of-all-com-objects-available/
+online version: https://www.powershellmagazine.com/2013/06/27/pstip-get-a-list-of-all-com-objects-available/
 schema: 2.0.0
 ---
 
@@ -80,7 +79,5 @@ I'm not quite sure this works as it is not listing the Microsoft Update stuff
 
 ## RELATED LINKS
 
-[https://osd.osdeploy.com/module/functions/comobj
-https://www.powershellmagazine.com/2013/06/27/pstip-get-a-list-of-all-com-objects-available/](https://osd.osdeploy.com/module/functions/comobj
-https://www.powershellmagazine.com/2013/06/27/pstip-get-a-list-of-all-com-objects-available/)
+[https://www.powershellmagazine.com/2013/06/27/pstip-get-a-list-of-all-com-objects-available/](https://www.powershellmagazine.com/2013/06/27/pstip-get-a-list-of-all-com-objects-available/)
 

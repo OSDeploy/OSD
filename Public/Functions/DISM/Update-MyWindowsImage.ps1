@@ -19,8 +19,8 @@ LCU = Latest Cumulative Update
 SSU = Servicing Stack Update
 
 .PARAMETER BitsTransfer
-#Download the file using BITS-Transfer
-#Interactive Login required
+Download the file using BITS-Transfer
+Interactive Login required
 
 .PARAMETER Force
 Updates are only installed if they are needed
@@ -35,14 +35,14 @@ function Update-MyWindowsImage {
     [CmdletBinding()]
     param (
         [Parameter(ValueFromPipelineByPropertyName)]
-        [string[]]$Path,
+        [System.String[]]$Path,
 
         [ValidateSet('Check','All','AdobeSU','DotNet','DotNetCU','LCU','SSU')]
-        [string]$Update = 'Check',
+        [System.String]$Update = 'Check',
 
-        [System.Management.Automation.SwitchParameter]$BitsTransfer,
+        [switch]$BitsTransfer,
 
-        [System.Management.Automation.SwitchParameter]$Force
+        [switch]$Force
     )
 
     begin {
