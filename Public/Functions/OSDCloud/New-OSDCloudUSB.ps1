@@ -109,7 +109,7 @@ function New-OSDCloudUSB {
     #	Resolve CloudISO
     #=================================================
     if ($PSCmdlet.ParameterSetName -eq 'fromIsoUrl') {
-        $ResolveUrl = Invoke-WebRequest -Uri $fromIsoUrl -Method Head -MaximumRedirection 0 -ErrorAction SilentlyContinue
+        $ResolveUrl = Invoke-WebRequest -Uri $fromIsoUrl -Method Head -MaximumRedirection 0 -UseBasicParsing -ErrorAction SilentlyContinue
         if ($ResolveUrl.StatusCode -eq 302) {
             $fromIsoUrl = $ResolveUrl.Headers.Location
         }
@@ -180,7 +180,14 @@ function New-OSDCloudUSB {
         Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Something went very very wrong in this process"
         Break
     }
+    #=================================================
+    #	WinpeDestinationPath
+    #=================================================
     $WinpeDestinationPath = "$($WinPEPartition.DriveLetter):\"
+    if (-NOT ($WinpeDestinationPath)) {
+        Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Unable to find Destination Path at $WinpeDestinationPath"
+        Break
+    }
     #=================================================
     #	Update WinPE Volume
     #=================================================

@@ -112,7 +112,7 @@ function New-OSDCloudWorkspace {
     #	Initialize CloudISO
     #=================================================
     if ($PSCmdlet.ParameterSetName -eq 'fromIsoUrl') {
-        $ResolveUrl = Invoke-WebRequest -Uri $fromIsoUrl -Method Head -MaximumRedirection 0 -ErrorAction SilentlyContinue
+        $ResolveUrl = Invoke-WebRequest -Uri $fromIsoUrl -Method Head -MaximumRedirection 0 -UseBasicParsing -ErrorAction SilentlyContinue
         if ($ResolveUrl.StatusCode -eq 302) {
             $fromIsoUrl = $ResolveUrl.Headers.Location
         }

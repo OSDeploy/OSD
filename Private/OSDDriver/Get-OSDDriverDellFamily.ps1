@@ -24,7 +24,7 @@ function Get-OSDDriverDellFamily {
     Write-Verbose "OSD: Get Latest Driver Versions $Uri" -Verbose
     $DriverWebContentRaw = @()
     try {
-        $DriverWebContentRaw = (Invoke-WebRequest $Uri).RawContent
+        $DriverWebContentRaw = (Invoke-WebRequest $Uri -UseBasicParsing).RawContent
     }
     catch {
         Write-Error "OSDDrivers uses Internet Explorer to parse the HTML data.  Make sure you can open the URL in Internet Explorer and that you dismiss any first run wizards" -ErrorAction Stop
