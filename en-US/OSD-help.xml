@@ -2,6 +2,56 @@
 <helpItems schema="maml" xmlns="http://msh">
   <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
     <command:details>
+      <command:name>Add-OSDCloudREBootManager</command:name>
+      <command:verb>Add</command:verb>
+      <command:noun>OSDCloudREBootManager</command:noun>
+      <maml:description>
+        <maml:para>OSDCloudRE: Adds OSDCloudRE as the last entry in the Boot Manager</maml:para>
+      </maml:description>
+    </command:details>
+    <maml:description>
+      <maml:para>OSDCloudRE: Adds OSDCloudRE as the last entry in the Boot Manager. Requires ADMIN righs</maml:para>
+    </maml:description>
+    <command:syntax>
+      <command:syntaxItem>
+        <maml:name>Add-OSDCloudREBootManager</maml:name>
+      </command:syntaxItem>
+    </command:syntax>
+    <command:parameters />
+    <command:inputTypes />
+    <command:returnValues>
+      <command:returnValue>
+        <dev:type>
+          <maml:name>System.Void</maml:name>
+        </dev:type>
+        <maml:description>
+          <maml:para></maml:para>
+        </maml:description>
+      </command:returnValue>
+    </command:returnValues>
+    <maml:alertSet>
+      <maml:alert>
+        <maml:para></maml:para>
+      </maml:alert>
+    </maml:alertSet>
+    <command:examples>
+      <command:example>
+        <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
+        <dev:code>Add-OSDCloudREBootManager</dev:code>
+        <dev:remarks>
+          <maml:para></maml:para>
+        </dev:remarks>
+      </command:example>
+    </command:examples>
+    <command:relatedLinks>
+      <maml:navigationLink>
+        <maml:linkText>https://github.com/OSDeploy/OSD/tree/master/docs</maml:linkText>
+        <maml:uri>https://github.com/OSDeploy/OSD/tree/master/docs</maml:uri>
+      </maml:navigationLink>
+    </command:relatedLinks>
+  </command:command>
+  <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
+    <command:details>
       <command:name>Add-WindowsPackageSSU</command:name>
       <command:verb>Add</command:verb>
       <command:noun>WindowsPackageSSU</command:noun>
@@ -15645,6 +15695,56 @@ Original credit to Mike Robbins http://mikefrobbins.com/2018/01/18/use-powershel
   </command:command>
   <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
     <command:details>
+      <command:name>Remove-OSDCloudREBootManager</command:name>
+      <command:verb>Remove</command:verb>
+      <command:noun>OSDCloudREBootManager</command:noun>
+      <maml:description>
+        <maml:para>OSDCloudRE: Removes OSDCloudRE from Boot Manager</maml:para>
+      </maml:description>
+    </command:details>
+    <maml:description>
+      <maml:para>OSDCloudRE: Removes OSDCloudRE from Boot Manager. Requires ADMIN righs</maml:para>
+    </maml:description>
+    <command:syntax>
+      <command:syntaxItem>
+        <maml:name>Remove-OSDCloudREBootManager</maml:name>
+      </command:syntaxItem>
+    </command:syntax>
+    <command:parameters />
+    <command:inputTypes />
+    <command:returnValues>
+      <command:returnValue>
+        <dev:type>
+          <maml:name>System.Void</maml:name>
+        </dev:type>
+        <maml:description>
+          <maml:para></maml:para>
+        </maml:description>
+      </command:returnValue>
+    </command:returnValues>
+    <maml:alertSet>
+      <maml:alert>
+        <maml:para></maml:para>
+      </maml:alert>
+    </maml:alertSet>
+    <command:examples>
+      <command:example>
+        <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
+        <dev:code>Add-OSDCloudREBootManager</dev:code>
+        <dev:remarks>
+          <maml:para></maml:para>
+        </dev:remarks>
+      </command:example>
+    </command:examples>
+    <command:relatedLinks>
+      <maml:navigationLink>
+        <maml:linkText>https://github.com/OSDeploy/OSD/tree/master/docs</maml:linkText>
+        <maml:uri>https://github.com/OSDeploy/OSD/tree/master/docs</maml:uri>
+      </maml:navigationLink>
+    </command:relatedLinks>
+  </command:command>
+  <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
+    <command:details>
       <command:name>Resolve-MsUrl</command:name>
       <command:verb>Resolve</command:verb>
       <command:noun>MsUrl</command:noun>
@@ -15715,56 +15815,6 @@ Original credit to Mike Robbins http://mikefrobbins.com/2018/01/18/use-powershel
       <maml:navigationLink>
         <maml:linkText>https://osd.osdeploy.com</maml:linkText>
         <maml:uri>https://osd.osdeploy.com</maml:uri>
-      </maml:navigationLink>
-    </command:relatedLinks>
-  </command:command>
-  <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
-    <command:details>
-      <command:name>Restart-OSDCloudRE</command:name>
-      <command:verb>Restart</command:verb>
-      <command:noun>OSDCloudRE</command:noun>
-      <maml:description>
-        <maml:para>OSDCloudRE: Launch OSDCloudRE on next boot</maml:para>
-      </maml:description>
-    </command:details>
-    <maml:description>
-      <maml:para>OSDCloudRE: Launch OSDCloudRE on next boot by editing the BCD bootsequence for {766548eb-6165-4bfe-9db5-95af1965ba26}</maml:para>
-    </maml:description>
-    <command:syntax>
-      <command:syntaxItem>
-        <maml:name>Restart-OSDCloudRE</maml:name>
-      </command:syntaxItem>
-    </command:syntax>
-    <command:parameters />
-    <command:inputTypes />
-    <command:returnValues>
-      <command:returnValue>
-        <dev:type>
-          <maml:name>System.Void</maml:name>
-        </dev:type>
-        <maml:description>
-          <maml:para></maml:para>
-        </maml:description>
-      </command:returnValue>
-    </command:returnValues>
-    <maml:alertSet>
-      <maml:alert>
-        <maml:para></maml:para>
-      </maml:alert>
-    </maml:alertSet>
-    <command:examples>
-      <command:example>
-        <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
-        <dev:code>Restart-OSDCloudRE</dev:code>
-        <dev:remarks>
-          <maml:para></maml:para>
-        </dev:remarks>
-      </command:example>
-    </command:examples>
-    <command:relatedLinks>
-      <maml:navigationLink>
-        <maml:linkText>https://github.com/OSDeploy/OSD/tree/master/docs</maml:linkText>
-        <maml:uri>https://github.com/OSDeploy/OSD/tree/master/docs</maml:uri>
       </maml:navigationLink>
     </command:relatedLinks>
   </command:command>
@@ -19101,6 +19151,131 @@ Original credit to Mike Robbins http://mikefrobbins.com/2018/01/18/use-powershel
       <maml:navigationLink>
         <maml:linkText>Online Version:</maml:linkText>
         <maml:uri>https://osdcloud.osdeploy.com</maml:uri>
+      </maml:navigationLink>
+    </command:relatedLinks>
+  </command:command>
+  <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
+    <command:details>
+      <command:name>Set-BootmgrTimeout</command:name>
+      <command:verb>Set</command:verb>
+      <command:noun>BootmgrTimeout</command:noun>
+      <maml:description>
+        <maml:para>BCD: Sets the Bootmgr Timeout in seconds</maml:para>
+      </maml:description>
+    </command:details>
+    <maml:description>
+      <maml:para>BCD: Sets the Bootmgr Timeout in seconds</maml:para>
+    </maml:description>
+    <command:syntax>
+      <command:syntaxItem>
+        <maml:name>Set-BootmgrTimeout</maml:name>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="none">
+          <maml:name>Timeout</maml:name>
+          <maml:description>
+            <maml:para>Timeout value in seconds</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">UInt32</command:parameterValue>
+          <dev:type>
+            <maml:name>UInt32</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>0</dev:defaultValue>
+        </command:parameter>
+      </command:syntaxItem>
+    </command:syntax>
+    <command:parameters>
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="none">
+        <maml:name>Timeout</maml:name>
+        <maml:description>
+          <maml:para>Timeout value in seconds</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">UInt32</command:parameterValue>
+        <dev:type>
+          <maml:name>UInt32</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>0</dev:defaultValue>
+      </command:parameter>
+    </command:parameters>
+    <command:inputTypes />
+    <command:returnValues>
+      <command:returnValue>
+        <dev:type>
+          <maml:name>System.Void</maml:name>
+        </dev:type>
+        <maml:description>
+          <maml:para></maml:para>
+        </maml:description>
+      </command:returnValue>
+    </command:returnValues>
+    <maml:alertSet>
+      <maml:alert>
+        <maml:para></maml:para>
+      </maml:alert>
+    </maml:alertSet>
+    <command:examples>
+      <command:example>
+        <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
+        <dev:code>Set-BootmgrTimeout -Timeout 10</dev:code>
+        <dev:remarks>
+          <maml:para></maml:para>
+        </dev:remarks>
+      </command:example>
+    </command:examples>
+    <command:relatedLinks>
+      <maml:navigationLink>
+        <maml:linkText>https://github.com/OSDeploy/OSD/tree/master/docs</maml:linkText>
+        <maml:uri>https://github.com/OSDeploy/OSD/tree/master/docs</maml:uri>
+      </maml:navigationLink>
+    </command:relatedLinks>
+  </command:command>
+  <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
+    <command:details>
+      <command:name>Set-BootToOSDCloudRE</command:name>
+      <command:verb>Set</command:verb>
+      <command:noun>BootToOSDCloudRE</command:noun>
+      <maml:description>
+        <maml:para>OSDCloudRE: Launch OSDCloudRE on next boot</maml:para>
+      </maml:description>
+    </command:details>
+    <maml:description>
+      <maml:para>OSDCloudRE: Launch OSDCloudRE on next boot by editing the BCD bootsequence for {766548eb-6165-4bfe-9db5-95af1965ba26}</maml:para>
+    </maml:description>
+    <command:syntax>
+      <command:syntaxItem>
+        <maml:name>Set-BootToOSDCloudRE</maml:name>
+      </command:syntaxItem>
+    </command:syntax>
+    <command:parameters />
+    <command:inputTypes />
+    <command:returnValues>
+      <command:returnValue>
+        <dev:type>
+          <maml:name>System.Void</maml:name>
+        </dev:type>
+        <maml:description>
+          <maml:para></maml:para>
+        </maml:description>
+      </command:returnValue>
+    </command:returnValues>
+    <maml:alertSet>
+      <maml:alert>
+        <maml:para></maml:para>
+      </maml:alert>
+    </maml:alertSet>
+    <command:examples>
+      <command:example>
+        <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
+        <dev:code>Set-BootToOSDCloudRE</dev:code>
+        <dev:remarks>
+          <maml:para></maml:para>
+        </dev:remarks>
+      </command:example>
+    </command:examples>
+    <command:relatedLinks>
+      <maml:navigationLink>
+        <maml:linkText>https://github.com/OSDeploy/OSD/tree/master/docs</maml:linkText>
+        <maml:uri>https://github.com/OSDeploy/OSD/tree/master/docs</maml:uri>
       </maml:navigationLink>
     </command:relatedLinks>
   </command:command>

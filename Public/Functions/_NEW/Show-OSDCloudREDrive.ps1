@@ -26,7 +26,8 @@ select disk $($OSDCloudREPartition.DiskNumber)
 select partition $($OSDCloudREPartition.PartitionNumber)
 set id="ebd0a0a2-b9e5-4433-87c0-68b6b72699c7"
 gpt attributes=0x0000000000000000
-assign letter=O
+rescan
+assign letter=o
 exit
 "@ | diskpart.exe
     }

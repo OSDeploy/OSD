@@ -5,25 +5,26 @@ online version: https://github.com/OSDeploy/OSD/tree/master/docs
 schema: 2.0.0
 ---
 
-# Restart-OSDCloudRE
+# Remove-OSDCloudREBootManager
 
 ## SYNOPSIS
-OSDCloudRE: Launch OSDCloudRE on next boot
+OSDCloudRE: Removes OSDCloudRE from Boot Manager
 
 ## SYNTAX
 
 ```
-Restart-OSDCloudRE [<CommonParameters>]
+Remove-OSDCloudREBootManager [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-OSDCloudRE: Launch OSDCloudRE on next boot by editing the BCD bootsequence for {766548eb-6165-4bfe-9db5-95af1965ba26}
+OSDCloudRE: Removes OSDCloudRE from Boot Manager.
+Requires ADMIN righs
 
 ## EXAMPLES
 
 ### EXAMPLE 1
 ```
-Restart-OSDCloudRE
+Add-OSDCloudREBootManager
 ```
 
 ## PARAMETERS

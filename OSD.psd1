@@ -4,7 +4,7 @@
 RootModule = 'OSD.psm1'
 
 # Version number of this module.
-ModuleVersion = '22.2.27.1'
+ModuleVersion = '22.2.27.2'
 
 # Supported PSEditions
 CompatiblePSEditions = @('Desktop')
@@ -67,6 +67,14 @@ FormatsToProcess = @(
 
 # Functions to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no functions to export.
 FunctionsToExport =
+'Add-OSDCloudREBootManager',
+'Get-OSDCloudREPartition',
+'Get-OSDCloudREVolume',
+'Hide-OSDCloudREDrive',
+'Remove-OSDCloudREBootManager',
+'Set-BootmgrTimeout',
+'Set-BootToOSDCloudRE',
+'Show-OSDCloudREDrive',
 'Add-WindowsDriver.offlineservicing',
 'Add-WindowsPackageSSU',
 'Backup-Disk.ffu',
@@ -206,11 +214,6 @@ FunctionsToExport =
 'New-CAB',
 'New-CabDevelopment',
 'New-OSDisk',
-'Get-OSDCloudREPartition',
-'Get-OSDCloudREVolume',
-'Hide-OSDCloudREDrive',
-'Restart-OSDCloudRE',
-'Show-OSDCloudREDrive',
 'Remove-AppxOnline',
 'Save-ClipboardImage',
 'Save-EnablementPackage',
