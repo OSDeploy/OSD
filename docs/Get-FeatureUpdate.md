@@ -23,7 +23,7 @@ Get-FeatureUpdate [[-OSVersion] <String>] [[-OSLicense] <String>] [[-OSBuild] <S
 ## EXAMPLES
 
 ### Example 1
-```powershell
+```
 PS C:\> {{ Add example code here }}
 ```
 
@@ -101,7 +101,6 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ## INPUTS
 
 ### None
-
 ## OUTPUTS
 
 ### System.Object
