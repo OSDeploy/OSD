@@ -5,7 +5,7 @@ online version: https://github.com/OSDeploy/OSD/tree/master/docs
 schema: 2.0.0
 ---
 
-# Remove-OSDCloudREBootManager
+# Remove-OSDCloudREBootmgr
 
 ## SYNOPSIS
 OSDCloudRE: Removes OSDCloudRE from Boot Manager
@@ -13,7 +13,7 @@ OSDCloudRE: Removes OSDCloudRE from Boot Manager
 ## SYNTAX
 
 ```
-Remove-OSDCloudREBootManager [<CommonParameters>]
+Remove-OSDCloudREBootmgr [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -24,7 +24,7 @@ Requires ADMIN righs
 
 ### EXAMPLE 1
 ```
-Add-OSDCloudREBootManager
+Add-OSDCloudREBootmgr
 ```
 
 ## PARAMETERS

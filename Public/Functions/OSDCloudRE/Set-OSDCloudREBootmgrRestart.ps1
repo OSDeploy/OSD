@@ -1,4 +1,4 @@
-function Set-BootToOSDCloudRE {
+function Set-OSDCloudREBootmgrRestart {
     <#
     .Synopsis
     OSDCloudRE: Launch OSDCloudRE on next boot
@@ -7,7 +7,7 @@ function Set-BootToOSDCloudRE {
     OSDCloudRE: Launch OSDCloudRE on next boot by editing the BCD bootsequence for {766548eb-6165-4bfe-9db5-95af1965ba26}
 
     .Example
-    Set-BootToOSDCloudRE
+    Set-OSDCloudREBootmgrRestart
 
     .Link
     https://github.com/OSDeploy/OSD/tree/master/docs

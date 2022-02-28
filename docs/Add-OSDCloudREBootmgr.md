@@ -5,7 +5,7 @@ online version: https://github.com/OSDeploy/OSD/tree/master/docs
 schema: 2.0.0
 ---
 
-# Add-OSDCloudREBootManager
+# Add-OSDCloudREBootmgr
 
 ## SYNOPSIS
 OSDCloudRE: Adds OSDCloudRE as the last entry in the Boot Manager
@@ -13,7 +13,7 @@ OSDCloudRE: Adds OSDCloudRE as the last entry in the Boot Manager
 ## SYNTAX
 
 ```
-Add-OSDCloudREBootManager [<CommonParameters>]
+Add-OSDCloudREBootmgr [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -24,7 +24,7 @@ Requires ADMIN righs
 
 ### EXAMPLE 1
 ```
-Add-OSDCloudREBootManager
+Add-OSDCloudREBootmgr
 ```
 
 ## PARAMETERS

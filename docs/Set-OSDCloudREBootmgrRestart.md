@@ -5,7 +5,7 @@ online version: https://github.com/OSDeploy/OSD/tree/master/docs
 schema: 2.0.0
 ---
 
-# Set-BootToOSDCloudRE
+# Set-OSDCloudREBootmgrRestart
 
 ## SYNOPSIS
 OSDCloudRE: Launch OSDCloudRE on next boot
@@ -13,7 +13,7 @@ OSDCloudRE: Launch OSDCloudRE on next boot
 ## SYNTAX
 
 ```
-Set-BootToOSDCloudRE [<CommonParameters>]
+Set-OSDCloudREBootmgrRestart [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -23,7 +23,7 @@ OSDCloudRE: Launch OSDCloudRE on next boot by editing the BCD bootsequence for {
 
 ### EXAMPLE 1
 ```
-Set-BootToOSDCloudRE
+Set-OSDCloudREBootmgrRestart
 ```
 
 ## PARAMETERS

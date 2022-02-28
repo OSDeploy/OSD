@@ -2,9 +2,9 @@
 <helpItems schema="maml" xmlns="http://msh">
   <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
     <command:details>
-      <command:name>Add-OSDCloudREBootManager</command:name>
+      <command:name>Add-OSDCloudREBootmgr</command:name>
       <command:verb>Add</command:verb>
-      <command:noun>OSDCloudREBootManager</command:noun>
+      <command:noun>OSDCloudREBootmgr</command:noun>
       <maml:description>
         <maml:para>OSDCloudRE: Adds OSDCloudRE as the last entry in the Boot Manager</maml:para>
       </maml:description>
@@ -14,7 +14,7 @@
     </maml:description>
     <command:syntax>
       <command:syntaxItem>
-        <maml:name>Add-OSDCloudREBootManager</maml:name>
+        <maml:name>Add-OSDCloudREBootmgr</maml:name>
       </command:syntaxItem>
     </command:syntax>
     <command:parameters />
@@ -37,7 +37,7 @@
     <command:examples>
       <command:example>
         <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
-        <dev:code>Add-OSDCloudREBootManager</dev:code>
+        <dev:code>Add-OSDCloudREBootmgr</dev:code>
         <dev:remarks>
           <maml:para></maml:para>
         </dev:remarks>
@@ -15695,9 +15695,9 @@ Original credit to Mike Robbins http://mikefrobbins.com/2018/01/18/use-powershel
   </command:command>
   <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
     <command:details>
-      <command:name>Remove-OSDCloudREBootManager</command:name>
+      <command:name>Remove-OSDCloudREBootmgr</command:name>
       <command:verb>Remove</command:verb>
-      <command:noun>OSDCloudREBootManager</command:noun>
+      <command:noun>OSDCloudREBootmgr</command:noun>
       <maml:description>
         <maml:para>OSDCloudRE: Removes OSDCloudRE from Boot Manager</maml:para>
       </maml:description>
@@ -15707,7 +15707,7 @@ Original credit to Mike Robbins http://mikefrobbins.com/2018/01/18/use-powershel
     </maml:description>
     <command:syntax>
       <command:syntaxItem>
-        <maml:name>Remove-OSDCloudREBootManager</maml:name>
+        <maml:name>Remove-OSDCloudREBootmgr</maml:name>
       </command:syntaxItem>
     </command:syntax>
     <command:parameters />
@@ -15730,7 +15730,7 @@ Original credit to Mike Robbins http://mikefrobbins.com/2018/01/18/use-powershel
     <command:examples>
       <command:example>
         <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
-        <dev:code>Add-OSDCloudREBootManager</dev:code>
+        <dev:code>Add-OSDCloudREBootmgr</dev:code>
         <dev:remarks>
           <maml:para></maml:para>
         </dev:remarks>
@@ -19231,56 +19231,6 @@ Original credit to Mike Robbins http://mikefrobbins.com/2018/01/18/use-powershel
   </command:command>
   <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
     <command:details>
-      <command:name>Set-BootToOSDCloudRE</command:name>
-      <command:verb>Set</command:verb>
-      <command:noun>BootToOSDCloudRE</command:noun>
-      <maml:description>
-        <maml:para>OSDCloudRE: Launch OSDCloudRE on next boot</maml:para>
-      </maml:description>
-    </command:details>
-    <maml:description>
-      <maml:para>OSDCloudRE: Launch OSDCloudRE on next boot by editing the BCD bootsequence for {766548eb-6165-4bfe-9db5-95af1965ba26}</maml:para>
-    </maml:description>
-    <command:syntax>
-      <command:syntaxItem>
-        <maml:name>Set-BootToOSDCloudRE</maml:name>
-      </command:syntaxItem>
-    </command:syntax>
-    <command:parameters />
-    <command:inputTypes />
-    <command:returnValues>
-      <command:returnValue>
-        <dev:type>
-          <maml:name>System.Void</maml:name>
-        </dev:type>
-        <maml:description>
-          <maml:para></maml:para>
-        </maml:description>
-      </command:returnValue>
-    </command:returnValues>
-    <maml:alertSet>
-      <maml:alert>
-        <maml:para></maml:para>
-      </maml:alert>
-    </maml:alertSet>
-    <command:examples>
-      <command:example>
-        <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
-        <dev:code>Set-BootToOSDCloudRE</dev:code>
-        <dev:remarks>
-          <maml:para></maml:para>
-        </dev:remarks>
-      </command:example>
-    </command:examples>
-    <command:relatedLinks>
-      <maml:navigationLink>
-        <maml:linkText>https://github.com/OSDeploy/OSD/tree/master/docs</maml:linkText>
-        <maml:uri>https://github.com/OSDeploy/OSD/tree/master/docs</maml:uri>
-      </maml:navigationLink>
-    </command:relatedLinks>
-  </command:command>
-  <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
-    <command:details>
       <command:name>Set-ClipboardScreenshot</command:name>
       <command:verb>Set</command:verb>
       <command:noun>ClipboardScreenshot</command:noun>
@@ -19407,6 +19357,56 @@ Original credit to Mike Robbins http://mikefrobbins.com/2018/01/18/use-powershel
       <maml:navigationLink>
         <maml:linkText>https://osd.osdeploy.com/module/functions/display/set-disres</maml:linkText>
         <maml:uri>https://osd.osdeploy.com/module/functions/display/set-disres</maml:uri>
+      </maml:navigationLink>
+    </command:relatedLinks>
+  </command:command>
+  <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
+    <command:details>
+      <command:name>Set-OSDCloudREBootmgrRestart</command:name>
+      <command:verb>Set</command:verb>
+      <command:noun>OSDCloudREBootmgrRestart</command:noun>
+      <maml:description>
+        <maml:para>OSDCloudRE: Launch OSDCloudRE on next boot</maml:para>
+      </maml:description>
+    </command:details>
+    <maml:description>
+      <maml:para>OSDCloudRE: Launch OSDCloudRE on next boot by editing the BCD bootsequence for {766548eb-6165-4bfe-9db5-95af1965ba26}</maml:para>
+    </maml:description>
+    <command:syntax>
+      <command:syntaxItem>
+        <maml:name>Set-OSDCloudREBootmgrRestart</maml:name>
+      </command:syntaxItem>
+    </command:syntax>
+    <command:parameters />
+    <command:inputTypes />
+    <command:returnValues>
+      <command:returnValue>
+        <dev:type>
+          <maml:name>System.Void</maml:name>
+        </dev:type>
+        <maml:description>
+          <maml:para></maml:para>
+        </maml:description>
+      </command:returnValue>
+    </command:returnValues>
+    <maml:alertSet>
+      <maml:alert>
+        <maml:para></maml:para>
+      </maml:alert>
+    </maml:alertSet>
+    <command:examples>
+      <command:example>
+        <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
+        <dev:code>Set-OSDCloudREBootmgrRestart</dev:code>
+        <dev:remarks>
+          <maml:para></maml:para>
+        </dev:remarks>
+      </command:example>
+    </command:examples>
+    <command:relatedLinks>
+      <maml:navigationLink>
+        <maml:linkText>https://github.com/OSDeploy/OSD/tree/master/docs</maml:linkText>
+        <maml:uri>https://github.com/OSDeploy/OSD/tree/master/docs</maml:uri>
       </maml:navigationLink>
     </command:relatedLinks>
   </command:command>
