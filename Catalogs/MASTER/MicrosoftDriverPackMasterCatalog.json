@@ -1,6 +1,6 @@
 [
     {
-        "CatalogVersion":  "22.02.27",
+        "CatalogVersion":  "22.03.02",
         "Status":  "",
         "Component":  "DriverPack",
         "Name":  "Surface 3 WiFI",
@@ -11,7 +11,7 @@
         "FileName":  "Surface3_WiFi_Win10_18362_1902003_0.msi"
     },
     {
-        "CatalogVersion":  "22.02.27",
+        "CatalogVersion":  "22.03.02",
         "Status":  "",
         "Component":  "DriverPack",
         "Name":  "Surface 3 LTE ATT",
@@ -22,7 +22,7 @@
         "FileName":  "Surface3_4GLTE-ATT_Win10_18362_1902003_0.msi"
     },
     {
-        "CatalogVersion":  "22.02.27",
+        "CatalogVersion":  "22.03.02",
         "Status":  "",
         "Component":  "DriverPack",
         "Name":  "Surface 3 LTE Verizon",
@@ -33,7 +33,7 @@
         "FileName":  "Surface3_4GLTE-NorthAmericaUnlocked_Win10_18362_1902003_0.msi"
     },
     {
-        "CatalogVersion":  "22.02.27",
+        "CatalogVersion":  "22.03.02",
         "Status":  "",
         "Component":  "DriverPack",
         "Name":  "Surface 3 LTE North America",
@@ -44,7 +44,7 @@
         "FileName":  "Surface3_4GLTE-NorthAmericaUnlocked_Win10_18362_1902003_0.msi"
     },
     {
-        "CatalogVersion":  "22.02.27",
+        "CatalogVersion":  "22.03.02",
         "Status":  "",
         "Component":  "DriverPack",
         "Name":  "Surface 3 LTE Rest of World",
@@ -55,7 +55,7 @@
         "FileName":  "Surface3_4GLTE-RestOfTheWorld_Win10_18362_1902003_0.msi"
     },
     {
-        "CatalogVersion":  "22.02.27",
+        "CatalogVersion":  "22.03.02",
         "Status":  "",
         "Component":  "DriverPack",
         "Name":  "Surface Book",
@@ -66,7 +66,7 @@
         "FileName":  "SurfaceBook_Win10_18362_21.062.17202.0.msi"
     },
     {
-        "CatalogVersion":  "22.02.27",
+        "CatalogVersion":  "22.03.02",
         "Status":  "",
         "Component":  "DriverPack",
         "Name":  "Surface Book 2 15",
@@ -77,7 +77,7 @@
         "FileName":  "SurfaceBook2_Win10_18362_21.101.14869.0.msi"
     },
     {
-        "CatalogVersion":  "22.02.27",
+        "CatalogVersion":  "22.03.02",
         "Status":  "",
         "Component":  "DriverPack",
         "Name":  "Surface Book 2 13",
@@ -88,7 +88,7 @@
         "FileName":  "SurfaceBook2_Win10_18362_21.101.14869.0.msi"
     },
     {
-        "CatalogVersion":  "22.02.27",
+        "CatalogVersion":  "22.03.02",
         "Status":  "",
         "Component":  "DriverPack",
         "Name":  "Surface Book 3 15",
@@ -99,7 +99,7 @@
         "FileName":  "SurfaceBook3_Win11_22000_21.094.40263.0.msi"
     },
     {
-        "CatalogVersion":  "22.02.27",
+        "CatalogVersion":  "22.03.02",
         "Status":  "",
         "Component":  "DriverPack",
         "Name":  "Surface Book 3 13",
@@ -110,7 +110,7 @@
         "FileName":  "SurfaceBook3_Win11_22000_21.094.40263.0.msi"
     },
     {
-        "CatalogVersion":  "22.02.27",
+        "CatalogVersion":  "22.03.02",
         "Status":  "",
         "Component":  "DriverPack",
         "Name":  "Surface Go Commercial",
@@ -121,7 +121,7 @@
         "FileName":  "SurfaceGo_Win10_18362_21.063.23730_WiFi_0.msi"
     },
     {
-        "CatalogVersion":  "22.02.27",
+        "CatalogVersion":  "22.03.02",
         "Status":  "",
         "Component":  "DriverPack",
         "Name":  "Surface Go Consumer",
@@ -132,7 +132,7 @@
         "FileName":  "SurfaceGo_Win10_18362_21.063.23730_WiFi_0.msi"
     },
     {
-        "CatalogVersion":  "22.02.27",
+        "CatalogVersion":  "22.03.02",
         "Status":  "",
         "Component":  "DriverPack",
         "Name":  "Surface Go LTE Commercial",
@@ -143,7 +143,7 @@
         "FileName":  "SurfaceGo_Win10_18362_21.063.23730_LTE_0.msi"
     },
     {
-        "CatalogVersion":  "22.02.27",
+        "CatalogVersion":  "22.03.02",
         "Status":  "",
         "Component":  "DriverPack",
         "Name":  "Surface Go 2",
@@ -154,7 +154,7 @@
         "FileName":  "SurfaceGo2_Win10_18362_21.091.03540_0.msi"
     },
     {
-        "CatalogVersion":  "22.02.27",
+        "CatalogVersion":  "22.03.02",
         "Status":  "",
         "Component":  "DriverPack",
         "Name":  "Surface Go 3",
@@ -165,7 +165,7 @@
         "FileName":  "SurfaceGo3_Win11_22000_21.120.382.0.msi"
     },
     {
-        "CatalogVersion":  "22.02.27",
+        "CatalogVersion":  "22.03.02",
         "Status":  "",
         "Component":  "DriverPack",
         "Name":  "Surface Hub 2",
@@ -176,7 +176,7 @@
         "FileName":  "SurfaceHub2S_Win10_18363_22.012.17224.0.msi"
     },
     {
-        "CatalogVersion":  "22.02.27",
+        "CatalogVersion":  "22.03.02",
         "Status":  "",
         "Component":  "DriverPack",
         "Name":  "Surface Laptop",
@@ -187,7 +187,7 @@
         "FileName":  "SurfaceLaptop_Win10_18362_21.101.11476.0.msi"
     },
     {
-        "CatalogVersion":  "22.02.27",
+        "CatalogVersion":  "22.03.02",
         "Status":  "",
         "Component":  "DriverPack",
         "Name":  "Surface Laptop 2",
@@ -198,7 +198,7 @@
         "FileName":  "SurfaceLaptop2_Win10_18362_21.101.11630.0.msi"
     },
     {
-        "CatalogVersion":  "22.02.27",
+        "CatalogVersion":  "22.03.02",
         "Status":  "",
         "Component":  "DriverPack",
         "Name":  "Surface Laptop 2",
@@ -209,7 +209,7 @@
         "FileName":  "SurfaceLaptop2_Win10_18362_21.101.11630.0.msi"
     },
     {
-        "CatalogVersion":  "22.02.27",
+        "CatalogVersion":  "22.03.02",
         "Status":  "",
         "Component":  "DriverPack",
         "Name":  "Surface Laptop 3",
@@ -220,7 +220,7 @@
         "FileName":  "SurfaceLaptop3_Win11_22000_21.100.5594.0.msi"
     },
     {
-        "CatalogVersion":  "22.02.27",
+        "CatalogVersion":  "22.03.02",
         "Status":  "",
         "Component":  "DriverPack",
         "Name":  "Surface Laptop 3",
@@ -231,7 +231,7 @@
         "FileName":  "SurfaceLaptop3_Win11_22000_21.100.5594.0.msi"
     },
     {
-        "CatalogVersion":  "22.02.27",
+        "CatalogVersion":  "22.03.02",
         "Status":  "",
         "Component":  "DriverPack",
         "Name":  "Surface Laptop 3",
@@ -242,7 +242,7 @@
         "FileName":  "SurfaceLaptop3_Win10_18362_21.071.8492.0.msi"
     },
     {
-        "CatalogVersion":  "22.02.27",
+        "CatalogVersion":  "22.03.02",
         "Status":  "",
         "Component":  "DriverPack",
         "Name":  "Surface Laptop 4",
@@ -253,7 +253,7 @@
         "FileName":  "SurfaceLaptop4_Win11_22000_22.011.9895.0.msi"
     },
     {
-        "CatalogVersion":  "22.02.27",
+        "CatalogVersion":  "22.03.02",
         "Status":  "",
         "Component":  "DriverPack",
         "Name":  "Surface Laptop 4",
@@ -264,29 +264,29 @@
         "FileName":  "SurfaceLaptop4_Win11_22000_21.111.15693.0.msi"
     },
     {
-        "CatalogVersion":  "22.02.27",
+        "CatalogVersion":  "22.03.02",
         "Status":  "",
         "Component":  "DriverPack",
         "Name":  "Surface Laptop Go",
         "Model":  "Surface Laptop Go",
         "Product":  "Surface_Laptop_Go_1943",
         "PackageID":  "102261",
-        "Url":  "https://download.microsoft.com/download/5/9/4/594604a4-26c0-405c-ac04-b385d824c30c/SurfaceLaptopGo_Win10_18363_21.112.16896.0.msi",
-        "FileName":  "SurfaceLaptopGo_Win10_18363_21.112.16896.0.msi"
+        "Url":  "https://download.microsoft.com/download/5/9/4/594604a4-26c0-405c-ac04-b385d824c30c/SurfaceLaptopGo_Win11_22000_22.021.14347.0.msi",
+        "FileName":  "SurfaceLaptopGo_Win11_22000_22.021.14347.0.msi"
     },
     {
-        "CatalogVersion":  "22.02.27",
+        "CatalogVersion":  "22.03.02",
         "Status":  "",
         "Component":  "DriverPack",
         "Name":  "Surface Laptop Studio",
         "Model":  "Surface Laptop Studio",
         "Product":  "Surface_Laptop_Studio",
         "PackageID":  "103505",
-        "Url":  "https://download.microsoft.com/download/b/3/0/b30ecc34-3bab-4c68-a5b3-0d258d73e747/SurfaceLaptopStudio_Win11_22000_21.093.32860.0.msi",
-        "FileName":  "SurfaceLaptopStudio_Win11_22000_21.093.32860.0.msi"
+        "Url":  "https://download.microsoft.com/download/b/3/0/b30ecc34-3bab-4c68-a5b3-0d258d73e747/SurfaceLaptopStudio_Win11_22000_22.013.34609.0.msi",
+        "FileName":  "SurfaceLaptopStudio_Win11_22000_22.013.34609.0.msi"
     },
     {
-        "CatalogVersion":  "22.02.27",
+        "CatalogVersion":  "22.03.02",
         "Status":  "",
         "Component":  "DriverPack",
         "Name":  "Surface Pro",
@@ -297,7 +297,7 @@
         "FileName":  "SurfacePro_Win10_150723_0.zip"
     },
     {
-        "CatalogVersion":  "22.02.27",
+        "CatalogVersion":  "22.03.02",
         "Status":  "",
         "Component":  "DriverPack",
         "Name":  "Surface Pro 2",
@@ -308,7 +308,7 @@
         "FileName":  "SurfacePro2_Win10_160501_2.zip"
     },
     {
-        "CatalogVersion":  "22.02.27",
+        "CatalogVersion":  "22.03.02",
         "Status":  "",
         "Component":  "DriverPack",
         "Name":  "Surface Pro 3",
@@ -319,7 +319,7 @@
         "FileName":  "SurfacePro3_Win10_18362_1902002_0.msi"
     },
     {
-        "CatalogVersion":  "22.02.27",
+        "CatalogVersion":  "22.03.02",
         "Status":  "",
         "Component":  "DriverPack",
         "Name":  "Surface Pro 4",
@@ -330,51 +330,51 @@
         "FileName":  "SurfacePro4_Win10_18362_21.061.12819.0.msi"
     },
     {
-        "CatalogVersion":  "22.02.27",
+        "CatalogVersion":  "22.03.02",
         "Status":  "",
         "Component":  "DriverPack",
         "Name":  "Surface Pro (5th Gen)",
         "Model":  "Surface Pro",
         "Product":  "Surface_Pro_1796",
         "PackageID":  "55484",
-        "Url":  "https://download.microsoft.com/download/4/C/7/4C7DA85D-03DE-4B89-B8E0-386437331C46/SurfacePro_Win10_18362_21.101.11488.0.msi",
-        "FileName":  "SurfacePro_Win10_18362_21.101.11488.0.msi"
+        "Url":  "https://download.microsoft.com/download/4/C/7/4C7DA85D-03DE-4B89-B8E0-386437331C46/SurfacePro_Win10_19041_22.020.4052.0.msi",
+        "FileName":  "SurfacePro_Win10_19041_22.020.4052.0.msi"
     },
     {
-        "CatalogVersion":  "22.02.27",
+        "CatalogVersion":  "22.03.02",
         "Status":  "",
         "Component":  "DriverPack",
         "Name":  "Surface Pro with LTE Advanced",
         "Model":  "Surface Pro",
         "Product":  "Surface_Pro_1807",
         "PackageID":  "56278",
-        "Url":  "https://download.microsoft.com/download/4/1/6/416D7D4F-64D9-4633-A5CC-922A941854FD/SurfacePro_Win10_18362_21.101.11488.0.msi",
-        "FileName":  "SurfacePro_Win10_18362_21.101.11488.0.msi"
+        "Url":  "https://download.microsoft.com/download/4/1/6/416D7D4F-64D9-4633-A5CC-922A941854FD/SurfacePro_Win10_19041_22.020.4052.0.msi",
+        "FileName":  "SurfacePro_Win10_19041_22.020.4052.0.msi"
     },
     {
-        "CatalogVersion":  "22.02.27",
+        "CatalogVersion":  "22.03.02",
         "Status":  "",
         "Component":  "DriverPack",
         "Name":  "Surface Pro 6",
         "Model":  "Surface Pro 6",
         "Product":  "Surface_Pro_6_1796_Commercial",
         "PackageID":  "57514",
-        "Url":  "https://download.microsoft.com/download/8/9/8/8986DE75-9E21-478A-B002-A7E92BA0F053/SurfacePro6_Win10_18362_21.101.14415.0.msi",
-        "FileName":  "SurfacePro6_Win10_18362_21.101.14415.0.msi"
+        "Url":  "https://download.microsoft.com/download/8/9/8/8986DE75-9E21-478A-B002-A7E92BA0F053/SurfacePro6_Win10_19041_22.020.4173.0.msi",
+        "FileName":  "SurfacePro6_Win10_19041_22.020.4173.0.msi"
     },
     {
-        "CatalogVersion":  "22.02.27",
+        "CatalogVersion":  "22.03.02",
         "Status":  "",
         "Component":  "DriverPack",
         "Name":  "Surface Pro 6",
         "Model":  "Surface Pro 6",
         "Product":  "Surface_Pro_6_1796_Consumer",
         "PackageID":  "57514",
-        "Url":  "https://download.microsoft.com/download/8/9/8/8986DE75-9E21-478A-B002-A7E92BA0F053/SurfacePro6_Win10_18362_21.101.14415.0.msi",
-        "FileName":  "SurfacePro6_Win10_18362_21.101.14415.0.msi"
+        "Url":  "https://download.microsoft.com/download/8/9/8/8986DE75-9E21-478A-B002-A7E92BA0F053/SurfacePro6_Win10_19041_22.020.4173.0.msi",
+        "FileName":  "SurfacePro6_Win10_19041_22.020.4173.0.msi"
     },
     {
-        "CatalogVersion":  "22.02.27",
+        "CatalogVersion":  "22.03.02",
         "Status":  "",
         "Component":  "DriverPack",
         "Name":  "Surface Pro 7",
@@ -385,7 +385,7 @@
         "FileName":  "SurfacePro7_Win11_22000_21.092.22602.0.msi"
     },
     {
-        "CatalogVersion":  "22.02.27",
+        "CatalogVersion":  "22.03.02",
         "Status":  "",
         "Component":  "DriverPack",
         "Name":  "Surface Pro 7+",
@@ -396,7 +396,7 @@
         "FileName":  "SurfacePro7+_Win11_22000_21.122.20178.0.msi"
     },
     {
-        "CatalogVersion":  "22.02.27",
+        "CatalogVersion":  "22.03.02",
         "Status":  "",
         "Component":  "DriverPack",
         "Name":  "Surface Pro 7+",
@@ -407,7 +407,7 @@
         "FileName":  "SurfacePro7+_Win11_22000_21.122.20178.0.msi"
     },
     {
-        "CatalogVersion":  "22.02.27",
+        "CatalogVersion":  "22.03.02",
         "Status":  "",
         "Component":  "DriverPack",
         "Name":  "Surface Pro 8",
@@ -418,7 +418,7 @@
         "FileName":  "SurfacePro8_Win11_22000_22.011.9739.0.msi"
     },
     {
-        "CatalogVersion":  "22.02.27",
+        "CatalogVersion":  "22.03.02",
         "Status":  "",
         "Component":  "DriverPack",
         "Name":  "Surface Studio",
@@ -429,7 +429,7 @@
         "FileName":  "SurfaceStudio_Win10_19041_21.093.33210.0.msi"
     },
     {
-        "CatalogVersion":  "22.02.27",
+        "CatalogVersion":  "22.03.02",
         "Status":  "",
         "Component":  "DriverPack",
         "Name":  "Surface Studio 2",
