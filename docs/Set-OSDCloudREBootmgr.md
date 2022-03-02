@@ -13,7 +13,8 @@ OSDCloudRE: Configures OSDCloudRE Boot Manager options
 ## SYNTAX
 
 ```
-Set-OSDCloudREBootmgr [-OSMenuAdd] [-OSMenuRemove] [-BootToOSDCloudRE] [<CommonParameters>]
+Set-OSDCloudREBootmgr [-SetRamdisk] [-SetOSloader] [-OSMenuAdd] [-OSMenuRemove] [-BootToOSDCloudRE]
+ [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -24,19 +25,27 @@ Requires ADMIN righs
 
 ### EXAMPLE 1
 ```
+Set-OSDCloudREBootmgr -SetRamdisk -SetOSloader
+```
+
+Creates or updates the OSDCloudRE Ramdisk and OSLoader
+Requires boot content in O:\
+
+### EXAMPLE 2
+```
 Set-OSDCloudREBootmgr -OSMenuAdd
 ```
 
 Adds OSDCloudRE to the Boot Manager Operating System selection
 
-### EXAMPLE 2
+### EXAMPLE 3
 ```
 Set-OSDCloudREBootmgr -OSMenuRemove
 ```
 
 Removes OSDCloudRE from the Boot Manager Operating System selection
 
-### EXAMPLE 3
+### EXAMPLE 4
 ```
 Set-OSDCloudREBootmgr -BootToOSDCloudRE
 ```
@@ -44,6 +53,36 @@ Set-OSDCloudREBootmgr -BootToOSDCloudRE
 Boots to OSDCloudRE on the next reboot
 
 ## PARAMETERS
+
+### -SetRamdisk
+Creates or updates the OSDCloudRE Ramdisk
+
+```yaml
+Type: SwitchParameter
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: False
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -SetOSloader
+Creates or updates the OSDCloudRE OSLoader
+
+```yaml
+Type: SwitchParameter
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: False
+Accept pipeline input: False
+Accept wildcard characters: False
+```
 
 ### -OSMenuAdd
 Adds OSDCloudRE to the Boot Manager Operating System selection

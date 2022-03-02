@@ -19276,6 +19276,28 @@ Original credit to Mike Robbins http://mikefrobbins.com/2018/01/18/use-powershel
       <command:syntaxItem>
         <maml:name>Set-OSDCloudREBootmgr</maml:name>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+          <maml:name>SetRamdisk</maml:name>
+          <maml:description>
+            <maml:para>Creates or updates the OSDCloudRE Ramdisk</maml:para>
+          </maml:description>
+          <dev:type>
+            <maml:name>SwitchParameter</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>False</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+          <maml:name>SetOSloader</maml:name>
+          <maml:description>
+            <maml:para>Creates or updates the OSDCloudRE OSLoader</maml:para>
+          </maml:description>
+          <dev:type>
+            <maml:name>SwitchParameter</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>False</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>OSMenuAdd</maml:name>
           <maml:description>
             <maml:para>Adds OSDCloudRE to the Boot Manager Operating System selection</maml:para>
@@ -19311,6 +19333,30 @@ Original credit to Mike Robbins http://mikefrobbins.com/2018/01/18/use-powershel
       </command:syntaxItem>
     </command:syntax>
     <command:parameters>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+        <maml:name>SetRamdisk</maml:name>
+        <maml:description>
+          <maml:para>Creates or updates the OSDCloudRE Ramdisk</maml:para>
+        </maml:description>
+        <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
+        <dev:type>
+          <maml:name>SwitchParameter</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>False</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+        <maml:name>SetOSloader</maml:name>
+        <maml:description>
+          <maml:para>Creates or updates the OSDCloudRE OSLoader</maml:para>
+        </maml:description>
+        <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
+        <dev:type>
+          <maml:name>SwitchParameter</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>False</dev:defaultValue>
+      </command:parameter>
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
         <maml:name>OSMenuAdd</maml:name>
         <maml:description>
@@ -19367,20 +19413,27 @@ Original credit to Mike Robbins http://mikefrobbins.com/2018/01/18/use-powershel
     <command:examples>
       <command:example>
         <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
+        <dev:code>Set-OSDCloudREBootmgr -SetRamdisk -SetOSloader</dev:code>
+        <dev:remarks>
+          <maml:para>Creates or updates the OSDCloudRE Ramdisk and OSLoader Requires boot content in O:\</maml:para>
+        </dev:remarks>
+      </command:example>
+      <command:example>
+        <maml:title>-------------------------- EXAMPLE 2 --------------------------</maml:title>
         <dev:code>Set-OSDCloudREBootmgr -OSMenuAdd</dev:code>
         <dev:remarks>
           <maml:para>Adds OSDCloudRE to the Boot Manager Operating System selection</maml:para>
         </dev:remarks>
       </command:example>
       <command:example>
-        <maml:title>-------------------------- EXAMPLE 2 --------------------------</maml:title>
+        <maml:title>-------------------------- EXAMPLE 3 --------------------------</maml:title>
         <dev:code>Set-OSDCloudREBootmgr -OSMenuRemove</dev:code>
         <dev:remarks>
           <maml:para>Removes OSDCloudRE from the Boot Manager Operating System selection</maml:para>
         </dev:remarks>
       </command:example>
       <command:example>
-        <maml:title>-------------------------- EXAMPLE 3 --------------------------</maml:title>
+        <maml:title>-------------------------- EXAMPLE 4 --------------------------</maml:title>
         <dev:code>Set-OSDCloudREBootmgr -BootToOSDCloudRE</dev:code>
         <dev:remarks>
           <maml:para>Boots to OSDCloudRE on the next reboot</maml:para>
