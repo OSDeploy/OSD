@@ -2,7 +2,7 @@
 .SYNOPSIS
 Creates or updates an OSDCloud Workspace
 
-.Description
+.DESCRIPTION
 Creates or updates an OSDCloud Workspace from an OSDCloud Template
 
 .PARAMETER WorkspacePath

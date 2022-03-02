@@ -2,7 +2,7 @@
 .SYNOPSIS
 Changes the path to the OSDCloud Workspace
 
-.Description
+.DESCRIPTION
 Changes the path to the OSDCloud Workspace from an OSDCloud Template
 
 .PARAMETER WorkspacePath

@@ -1,9 +1,9 @@
 <#
-.Synopsis
+.SYNOPSIS
 Allows you to execute a PowerShell Script as a URL Link
-.Description
+.DESCRIPTION
 Allows you to execute a PowerShell Script as a URL Link
-.Link
+.LINK
 https://osd.osdeploy.com/module/functions/webpsscript
 #>
 function Invoke-WebPSScript

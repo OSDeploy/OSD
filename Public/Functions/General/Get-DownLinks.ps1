@@ -1,9 +1,9 @@
 <#
-.Synopsis
+.SYNOPSIS
 Gets a list of links to download
-.Description
+.DESCRIPTION
 Gets a list of links to download
-.Link
+.LINK
 https://osd.osdeploy.com
 #>
 function Get-DownLinks

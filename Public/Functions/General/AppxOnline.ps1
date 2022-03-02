@@ -2,7 +2,7 @@
 .SYNOPSIS
 Removes Appx Packages and Appx Provisioned Packages for All Users
 
-.Description
+.DESCRIPTION
 Removes Appx Packages and Appx Provisioned Packages for All Users
 
 .LINK

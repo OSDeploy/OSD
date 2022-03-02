@@ -1,9 +1,9 @@
 <#
-.Synopsis
+.SYNOPSIS
 Downloads a file from the internet and returns a Get-Item Object
-.Description
+.DESCRIPTION
 Downloads a file from the internet and returns a Get-Item Object
-.Link
+.LINK
 https://osd.osdeploy.com/module/functions/save-webfile
 #>
 function Save-WebFile

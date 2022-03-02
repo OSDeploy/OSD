@@ -67,13 +67,11 @@ FormatsToProcess = @(
 
 # Functions to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no functions to export.
 FunctionsToExport =
-'Add-OSDCloudREBootmgr',
 'Get-OSDCloudREPartition',
 'Get-OSDCloudREVolume',
 'Hide-OSDCloudREDrive',
-'Remove-OSDCloudREBootmgr',
+'Set-OSDCloudREBootmgr',
 'Set-BootmgrTimeout',
-'Set-OSDCloudREBootmgrRestart',
 'Show-OSDCloudREDrive',
 'Add-WindowsDriver.offlineservicing',
 'Add-WindowsPackageSSU',

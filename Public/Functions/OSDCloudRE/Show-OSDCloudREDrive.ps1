@@ -1,15 +1,15 @@
 function Show-OSDCloudREDrive {
     <#
-    .Synopsis
+    .SYNOPSIS
     OSDCloudRE: Shows the OSDCloudRE Drive
     
-    .Description
+    .DESCRIPTION
     OSDCloudRE: Shows the OSDCloudRE Drive
     
-    .Example
+    .EXAMPLE
     Show-OSDCloudREDrive
     
-    .Link
+    .LINK
     https://github.com/OSDeploy/OSD/tree/master/docs
     #>
 
@@ -26,8 +26,8 @@ select disk $($OSDCloudREPartition.DiskNumber)
 select partition $($OSDCloudREPartition.PartitionNumber)
 set id="ebd0a0a2-b9e5-4433-87c0-68b6b72699c7"
 gpt attributes=0x0000000000000000
-rescan
 assign letter=o
+rescan
 exit
 "@ | diskpart.exe
     }

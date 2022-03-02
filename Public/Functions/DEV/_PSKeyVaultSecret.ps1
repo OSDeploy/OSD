@@ -1,10 +1,10 @@
 <#
-.Synopsis
+.SYNOPSIS
 Converts a value to an Azure Key Vault Secret
-.Description
+.DESCRIPTION
 Converts a value to an Azure Key Vault Secret
-.Notes
-.Link
+.NOTES
+.LINK
 https://osd.osdeploy.com
 #>
 function ConvertTo-PSKeyVaultSecret

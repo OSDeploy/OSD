@@ -1,15 +1,15 @@
 function Hide-OSDCloudREDrive {
     <#
-    .Synopsis
+    .SYNOPSIS
     OSDCloudRE: Hides the OSDCloudRE Drive
     
-    .Description
+    .DESCRIPTION
     OSDCloudRE: Hides the OSDCloudRE Drive
     
-    .Example
+    .EXAMPLE
     Hide-OSDCloudREDrive
     
-    .Link
+    .LINK
     https://github.com/OSDeploy/OSD/tree/master/docs
     #>
 

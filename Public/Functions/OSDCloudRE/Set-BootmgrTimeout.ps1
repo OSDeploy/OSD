@@ -1,15 +1,15 @@
 function Set-BootmgrTimeout {
     <#
-    .Synopsis
+    .SYNOPSIS
     BCD: Sets the Bootmgr Timeout in seconds
 
-    .Description
+    .DESCRIPTION
     BCD: Sets the Bootmgr Timeout in seconds
 
-    .Example
+    .EXAMPLE
     Set-BootmgrTimeout -Timeout 10
 
-    .Link
+    .LINK
     https://github.com/OSDeploy/OSD/tree/master/docs
     #>
     
@@ -17,7 +17,7 @@ function Set-BootmgrTimeout {
     [OutputType([System.Void])]
     param (
         # Timeout value in seconds
-        [Parameter(Mandatory)]
+        [Parameter(Position = 0, Mandatory = $True)]
         [uint32]
         $Timeout
     )

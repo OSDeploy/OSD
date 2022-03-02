@@ -91,7 +91,7 @@ function Get-PartitionWinRE {
 .SYNOPSIS
 Gathers information about from Get-ReAgentXml
 
-.Description
+.DESCRIPTION
 Gathers information about from Get-ReAgentXml
 
 .LINK

@@ -2,7 +2,7 @@
 .SYNOPSIS
 Gets many Windows ADK Paths into a hash to easily use in your code
 
-.Description
+.DESCRIPTION
 Gets many Windows ADK Paths into a hash to easily use in your code
 
 .LINK

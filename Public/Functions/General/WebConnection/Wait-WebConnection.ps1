@@ -1,9 +1,9 @@
 <#
-.Synopsis
+.SYNOPSIS
 Waits for an internet connection to the specified Uri
-.Description
+.DESCRIPTION
 Waits for an internet connection to the specified Uri
-.Link
+.LINK
 https://osd.osdeploy.com/module/functions/webconnection
 #>
 function Wait-WebConnection

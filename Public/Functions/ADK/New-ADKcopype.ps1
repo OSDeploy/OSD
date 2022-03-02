@@ -2,7 +2,7 @@
 .SYNOPSIS
 Creates an ADK CopyPE Working Directory
 
-.Description
+.DESCRIPTION
 Creates an ADK CopyPE Working Directory
 
 .LINK

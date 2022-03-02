@@ -2,7 +2,7 @@
 .SYNOPSIS
 Connects to the selected WiFi Network SSID.  Requires WinRE
 
-.Description
+.DESCRIPTION
 Connects to the selected WiFi Network SSID.  Requires WinRE
 
 .PARAMETER SSID
@@ -55,7 +55,7 @@ function Connect-WinREWiFi {
 .SYNOPSIS
 Connects to the selected WiFi Network using given XML profile.  Requires WinRE
 
-.Description
+.DESCRIPTION
 Connects to the selected WiFi Network using given XML profile.  Requires WinRE
 
 .PARAMETER wifiProfile
@@ -107,7 +107,7 @@ function Connect-WinREWiFiByXMLProfile {
 .SYNOPSIS
 Returns WiFi Network SSID's.  Requires WinRE
 
-.Description
+.DESCRIPTION
 Returns WiFi Network SSID's.  Requires WinRE
 
 .PARAMETER SSID
@@ -151,7 +151,7 @@ function Get-WinREWiFi {
 .SYNOPSIS
 Creates a WiFi Network Profile.  Requires WinRE
 
-.Description
+.DESCRIPTION
 Creates a WiFi Network Profile.  Requires WinRE
 
 .PARAMETER Passwd
@@ -267,7 +267,7 @@ function Set-WinREWiFi() {
 .SYNOPSIS
 Starts the WiFi Network Profile connection Wizard.  Requires WinRE
 
-.Description
+.DESCRIPTION
 Starts the WiFi Network Profile connection Wizard.  Requires WinRE
 
 .PARAMETER wifiProfile

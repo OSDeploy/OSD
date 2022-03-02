@@ -2,7 +2,7 @@
 .SYNOPSIS
 Edits the boot.wim in an OSDCloudWorkspace
 
-.Description
+.DESCRIPTION
 Edits the boot.wim in an OSDCloudWorkspace
 
 .PARAMETER Brand

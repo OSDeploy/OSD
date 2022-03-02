@@ -1,15 +1,15 @@
 function Get-OSDCloudREPartition {
     <#
-    .Synopsis
+    .SYNOPSIS
     OSDCloudRE: Gets the OSDCloudRE Partition object
     
-    .Description
+    .DESCRIPTION
     OSDCloudRE: Gets the OSDCloudRE Partition object
     
-    .Example
+    .EXAMPLE
     Get-OSDCloudREPartition
     
-    .Link
+    .LINK
     https://github.com/OSDeploy/OSD/tree/master/docs
     #>
     

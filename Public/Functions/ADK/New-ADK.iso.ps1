@@ -2,7 +2,7 @@
 .SYNOPSIS
 Creates an .iso file from a bootable media directory.  ADK is required
 
-.Description
+.DESCRIPTION
 Creates a .iso file from a bootable media directory.  ADK is required
 
 .PARAMETER MediaPath

@@ -2,7 +2,7 @@
 .SYNOPSIS
 Adds PowerShell and PowerShell Gallery support to ADK's x64 winpe.wim
 
-.Description
+.DESCRIPTION
 Adds PowerShell and PowerShell Gallery support to ADK's x64 winpe.wim.  This will speed things up with MDT and MEM CM going forward
 
 .LINK

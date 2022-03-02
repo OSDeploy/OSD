@@ -2,7 +2,7 @@
 .SYNOPSIS
 Enables ODT Support in an OSDCloud Workspace
 
-.Description
+.DESCRIPTION
 Enables ODT Support in an OSDCloud Workspace
 
 .LINK

@@ -2,7 +2,7 @@
 .SYNOPSIS
 Gets an OSDCloud Workspace
 
-.Description
+.DESCRIPTION
 Gets an OSDCloud Workspace by reading the path stored in $env:ProgramData\OSDCloud\workspace.json
 
 .LINK

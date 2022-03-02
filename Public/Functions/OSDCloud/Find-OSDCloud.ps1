@@ -34,7 +34,7 @@ function Find-OSDCloudFile {
 .SYNOPSIS
 Searches all PSDrives for Office Configuration Files [PSDrive]:\OSDCloud\ODT
 
-.Description
+.DESCRIPTION
 Searches all PSDrives for Office Configuration Files [PSDrive]:\OSDCloud\ODT
 
 .LINK

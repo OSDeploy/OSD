@@ -1,9 +1,9 @@
 <#
-.Synopsis
+.SYNOPSIS
 Development function to get the contents of a PSCloudScript. Optionally allows for execution by command or file
-.Description
+.DESCRIPTION
 Development function to get the contents of a PSCloudScript. Optionally allows for execution by command or file
-.Link
+.LINK
 https://osd.osdeploy.com
 #>
 function Get-PSCloudScript

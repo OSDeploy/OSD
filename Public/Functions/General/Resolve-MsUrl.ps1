@@ -1,9 +1,9 @@
 <#
-.Synopsis
+.SYNOPSIS
 Resolves a short Microsoft akams or a fwlink URL
-.Description
+.DESCRIPTION
 Resolves a short Microsoft akams or a fwlink URL
-.Link
+.LINK
 https://osd.osdeploy.com
 #>
 function Resolve-MsUrl

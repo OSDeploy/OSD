@@ -1,15 +1,15 @@
 function Get-OSDCloudREVolume {
     <#
-    .Synopsis
+    .SYNOPSIS
     OSDCloudRE: Gets the OSDCloudRE Volume object
 
-    .Description
+    .DESCRIPTION
     OSDCloudRE: Gets the OSDCloudRE Volume object
 
-    .Example
+    .EXAMPLE
     Get-OSDCloudREVolume
 
-    .Link
+    .LINK
     https://github.com/OSDeploy/OSD/tree/master/docs
     #>
     

@@ -2,7 +2,7 @@
 .SYNOPSIS
 Creates an .iso file in the OSDCloud Workspace.  ADK is required
 
-.Description
+.DESCRIPTION
 Creates an .iso file in the OSDCloud Workspace.  ADK is required
 
 .PARAMETER WorkspacePath

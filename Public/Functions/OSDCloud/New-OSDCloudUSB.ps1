@@ -4,7 +4,7 @@ Creates an OSDCloud USB Drive and updates WinPE
 Clear, Initialize, Partition (WinPE and OSDCloud), and Format a USB Disk
 Requires Admin Rights
 
-.Description
+.DESCRIPTION
 Creates an OSDCloud USB Drive and updates WinPE
 Clear, Initialize, Partition (WinPE and OSDCloud), and Format a USB Disk
 Requires Admin Rights

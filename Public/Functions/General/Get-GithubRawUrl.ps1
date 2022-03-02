@@ -1,9 +1,9 @@
 <#
-.Synopsis
+.SYNOPSIS
 Returns the RAW URL for a provided GitHub or GitHub Gist URL
-.Description
+.DESCRIPTION
 Returns the RAW URL for a provided GitHub or GitHub Gist URL
-.Link
+.LINK
 https://osd.osdeploy.com
 #>
 function Get-GithubRawUrl
@@ -55,11 +55,11 @@ function Get-GithubRawUrl
     }
 }
 <#
-.Synopsis
+.SYNOPSIS
 Returns the RAW content for a provided GitHub or GitHub Gist URL
-.Description
+.DESCRIPTION
 Returns the RAW content for a provided GitHub or GitHub Gist URL
-.Link
+.LINK
 https://osd.osdeploy.com
 #>
 function Get-GithubRawContent

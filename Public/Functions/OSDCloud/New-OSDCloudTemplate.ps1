@@ -3,7 +3,7 @@
 .SYNOPSIS
 Creates an OSDCloud Template in $env:ProgramData\OSDCloud
 
-.Description
+.DESCRIPTION
 Creates an OSDCloud Template in $env:ProgramData\OSDCloud
 
 .PARAMETER Language

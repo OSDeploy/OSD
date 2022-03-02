@@ -1,9 +1,9 @@
 <#
-.Synopsis
+.SYNOPSIS
 Tests to see if a Uri by Invoke-WebRequest -Method Head
-.Description
+.DESCRIPTION
 Tests to see if a Uri by Invoke-WebRequest -Method Head
-.Link
+.LINK
 https://osd.osdeploy.com/module/functions/webconnection
 #>
 function Test-WebConnection
