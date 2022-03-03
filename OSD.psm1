@@ -1,4 +1,4 @@
-$Classes = @(Get-ChildItem -Path "$PSScriptRoot\Classes\*.ps1")
+$Classes = @(Get-ChildItem -Path "$PSScriptRoot\classes\*.ps1")
 $Private = @(Get-ChildItem -Path "$PSScriptRoot\Private\*.ps1" -Recurse -ErrorAction SilentlyContinue)
 
 #Determine the current state of the OS

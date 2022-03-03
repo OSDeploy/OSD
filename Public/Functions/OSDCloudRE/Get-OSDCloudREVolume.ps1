@@ -16,6 +16,7 @@ function Get-OSDCloudREVolume {
     [CmdletBinding()]
     [OutputType([Microsoft.Management.Infrastructure.CimInstance])]
     param ()
+    Write-Verbose $MyInvocation.MyCommand
     
     Get-Volume | Where-Object {$_.FileSystemLabel -match 'OSDCloudRE'}
 }

@@ -21,6 +21,7 @@ function Set-BootmgrTimeout {
         [uint32]
         $Timeout
     )
+    Write-Verbose $MyInvocation.MyCommand
 
     Block-StandardUser
     $null = bcdedit /set '{bootmgr}' timeout $Timeout

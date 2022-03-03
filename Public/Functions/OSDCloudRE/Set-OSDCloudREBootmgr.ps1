@@ -51,6 +51,8 @@ function Set-OSDCloudREBootmgr {
         [System.Management.Automation.SwitchParameter]
         $BootToOSDCloudRE
     )
+    Write-Verbose $MyInvocation.MyCommand
+
     Block-StandardUser
 
     if ($SetRamdisk -or $SetOSloader) {

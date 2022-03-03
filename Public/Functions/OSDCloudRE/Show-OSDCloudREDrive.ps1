@@ -16,6 +16,7 @@ function Show-OSDCloudREDrive {
     [CmdletBinding()]
     [OutputType([System.Void])]
     param ()
+    Write-Verbose $MyInvocation.MyCommand
 
     Block-StandardUser
     $OSDCloudREPartition = Get-OSDCloudREPartition

@@ -16,6 +16,7 @@ function Get-OSDCloudREPartition {
     [CmdletBinding()]
     [OutputType([Microsoft.Management.Infrastructure.CimInstance])]
     param ()
+    Write-Verbose $MyInvocation.MyCommand
 
     Get-OSDCloudREVolume | Get-Partition
 }
