@@ -1,4 +1,4 @@
-﻿cls
+﻿Clear-Host
 #Install-Module -Name platyPS -Scope CurrentUser
 #Import-Module platyPS
 Import-Module OSD -Force
