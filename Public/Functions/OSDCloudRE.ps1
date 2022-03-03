@@ -15,6 +15,7 @@ function Get-OSDCloudREPartition {
     
     [CmdletBinding()]
     [OutputType([Microsoft.Management.Infrastructure.CimInstance])]
+    [OutputType('Microsoft.Management.Infrastructure.CimInstance#ROOT/Microsoft/Windows/Storage/MSFT_Partition')]
     param ()
     Write-Verbose $MyInvocation.MyCommand
 
@@ -59,6 +60,7 @@ function Get-OSDCloudREVolume {
     
     [CmdletBinding()]
     [OutputType([Microsoft.Management.Infrastructure.CimInstance])]
+    [OutputType('Microsoft.Management.Infrastructure.CimInstance#ROOT/Microsoft/Windows/Storage/MSFT_Volume')]
     param ()
     Write-Verbose $MyInvocation.MyCommand
     
@@ -118,6 +120,7 @@ function New-OSDCloudREVolume {
     
     [CmdletBinding()]
     [OutputType([Microsoft.Management.Infrastructure.CimInstance])]
+    [OutputType('Microsoft.Management.Infrastructure.CimInstance#ROOT/Microsoft/Windows/Storage/MSFT_Volume')]
     param ()
     Write-Verbose $MyInvocation.MyCommand
 

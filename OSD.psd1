@@ -4,7 +4,7 @@
 
 @{
     RootModule              = 'OSD.psm1'
-    ModuleVersion           = '22.3.2.2'
+    ModuleVersion           = '22.3.2.3'
     CompatiblePSEditions    = @('Desktop')
     GUID                    = '9fe5b9b6-0224-4d87-9018-a8978529f6f5'
     Author                  = 'David Segura @SeguraOSD'
