@@ -1,29 +1,24 @@
-
-<#
-.SYNOPSIS
-Creates an OSDCloud Template in $env:ProgramData\OSDCloud
-
-.DESCRIPTION
-Creates an OSDCloud Template in $env:ProgramData\OSDCloud
-
-.PARAMETER Language
-Adds additional language ADK Packages
-
-.PARAMETER SetAllIntl
-Sets all International settings in WinPE to the specified setting
-
-.PARAMETER SetInputLocale
-Sets the default InputLocale in WinPE to the specified Input Locale
-
-.PARAMETER WinRE
-Uses Windows 10 WinRE.wim instead of the ADK Boot.wim
-
-.LINK
-https://osdcloud.osdeploy.com
-#>
 function New-OSDCloudTemplate {
+    <#
+    .SYNOPSIS
+    Creates an OSDCloud Template in $env:ProgramData\OSDCloud
+
+    .DESCRIPTION
+    Creates an OSDCloud Template in $env:ProgramData\OSDCloud    
+
+    .EXAMPLE
+    New-OSDCloudTemplate
+
+    .EXAMPLE
+    New-OSDCloudTemplate -WinRE
+
+    .LINK
+    https://www.osdcloud.com/setup/osdcloud-template
+    #>
+
     [CmdletBinding()]
     param (
+        #Adds additional language ADK Packages
         [ValidateSet (
             '*','ar-sa','bg-bg','cs-cz','da-dk','de-de','el-gr',
             'en-gb','es-es','es-mx','et-ee','fi-fi',
@@ -33,9 +28,15 @@ function New-OSDCloudTemplate {
             'sl-si','sr-latn-rs','sv-se','th-th','tr-tr',
             'uk-ua','zh-cn','zh-tw'
         )]
-        [string[]]$Language,
-        [string]$SetAllIntl,
-        [string]$SetInputLocale,
+        [System.String[]]$Language,
+
+        #Sets all International settings in WinPE to the specified setting
+        [System.String]$SetAllIntl,
+
+        #Sets the default InputLocale in WinPE to the specified Input Locale
+        [System.String]$SetInputLocale,
+
+        #Uses Windows 10 WinRE.wim instead of the ADK Boot.wim
         [System.Management.Automation.SwitchParameter]$WinRE
     )
 #=================================================

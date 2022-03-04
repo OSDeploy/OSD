@@ -4015,27 +4015,27 @@ Original credit to Mike Robbins http://mikefrobbins.com/2018/01/18/use-powershel
   </command:command>
   <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
     <command:details>
-      <command:name>Edit-OSDCloudWinpe</command:name>
+      <command:name>Edit-OSDCloudWinPE</command:name>
       <command:verb>Edit</command:verb>
-      <command:noun>OSDCloudWinpe</command:noun>
+      <command:noun>OSDCloudWinPE</command:noun>
       <maml:description>
-        <maml:para>Edits the boot.wim in an OSDCloudWorkspace</maml:para>
+        <maml:para>Edits WinPE in an OSDCloud Workspace</maml:para>
       </maml:description>
     </command:details>
     <maml:description>
-      <maml:para>Edits the boot.wim in an OSDCloudWorkspace</maml:para>
+      <maml:para>Edits WinPE in an OSDCloud Workspace</maml:para>
     </maml:description>
     <command:syntax>
       <command:syntaxItem>
-        <maml:name>Edit-OSDCloudWinpe</maml:name>
+        <maml:name>Edit-OSDCloudWinPE</maml:name>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>Brand</maml:name>
           <maml:description>
-            <maml:para>Sets the Brand for OSDCloudGUI</maml:para>
+            <maml:para>Sets the custom Brand for OSDCloudGUI</maml:para>
           </maml:description>
-          <command:parameterValue required="true" variableLength="false">Object</command:parameterValue>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
-            <maml:name>Object</maml:name>
+            <maml:name>String</maml:name>
             <maml:uri />
           </dev:type>
           <dev:defaultValue>OSDCloud</dev:defaultValue>
@@ -4043,7 +4043,7 @@ Original credit to Mike Robbins http://mikefrobbins.com/2018/01/18/use-powershel
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>CloudDriver</maml:name>
           <maml:description>
-            <maml:para>Download and install in WinPE drivers from Dell,HP,IntelNet,LenovoDock,Nutanix,USB,VMware,WiFi</maml:para>
+            <maml:para>WinPE Driver: Download and install in WinPE drivers from Dell,HP,IntelNet,LenovoDock,Nutanix,USB,VMware,WiFi</maml:para>
           </maml:description>
           <command:parameterValue required="true" variableLength="false">String[]</command:parameterValue>
           <dev:type>
@@ -4055,7 +4055,7 @@ Original credit to Mike Robbins http://mikefrobbins.com/2018/01/18/use-powershel
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>DriverHWID</maml:name>
           <maml:description>
-            <maml:para>HardwareID of the Driver to add to WinPE</maml:para>
+            <maml:para>WinPE Driver: HardwareID of the Driver to add to WinPE</maml:para>
           </maml:description>
           <command:parameterValue required="true" variableLength="false">String[]</command:parameterValue>
           <dev:type>
@@ -4067,7 +4067,7 @@ Original credit to Mike Robbins http://mikefrobbins.com/2018/01/18/use-powershel
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>DriverPath</maml:name>
           <maml:description>
-            <maml:para>Path to additional Drivers you want to install</maml:para>
+            <maml:para>WinPE Driver: Path to additional Drivers you want to install</maml:para>
           </maml:description>
           <command:parameterValue required="true" variableLength="false">String[]</command:parameterValue>
           <dev:type>
@@ -4079,7 +4079,7 @@ Original credit to Mike Robbins http://mikefrobbins.com/2018/01/18/use-powershel
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>PSModuleCopy</maml:name>
           <maml:description>
-            <maml:para>Copies named PowerShell Modules to WinPE</maml:para>
+            <maml:para>Copies named PowerShell Modules from the running OS to WinPE</maml:para>
           </maml:description>
           <command:parameterValue required="true" variableLength="false">String[]</command:parameterValue>
           <dev:type>
@@ -4103,7 +4103,7 @@ Original credit to Mike Robbins http://mikefrobbins.com/2018/01/18/use-powershel
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>Startnet</maml:name>
           <maml:description>
-            <maml:para>{{ Fill Startnet Description }}</maml:para>
+            <maml:para>WinPE Startup: Modifies Startnet.cmd to execute the specified string</maml:para>
           </maml:description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -4115,7 +4115,7 @@ Original credit to Mike Robbins http://mikefrobbins.com/2018/01/18/use-powershel
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>StartOSDCloud</maml:name>
           <maml:description>
-            <maml:para>{{ Fill StartOSDCloud Description }}</maml:para>
+            <maml:para>WinPE Startup: Modifies Startnet.cmd to execute Start-OSDCloud with the specified string</maml:para>
           </maml:description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -4127,7 +4127,7 @@ Original credit to Mike Robbins http://mikefrobbins.com/2018/01/18/use-powershel
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>StartOSDCloudGUI</maml:name>
           <maml:description>
-            <maml:para>{{ Fill StartOSDCloudGUI Description }}</maml:para>
+            <maml:para>WinPE Startup: Modifies Startnet.cmd to execute Start-OSDCloudGUI</maml:para>
           </maml:description>
           <dev:type>
             <maml:name>SwitchParameter</maml:name>
@@ -4138,7 +4138,7 @@ Original credit to Mike Robbins http://mikefrobbins.com/2018/01/18/use-powershel
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>StartOSDPad</maml:name>
           <maml:description>
-            <maml:para>{{ Fill StartOSDPad Description }}</maml:para>
+            <maml:para>WinPE Startup: Modifies Startnet.cmd to execute Start-OSDPad with the specified string</maml:para>
           </maml:description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -4150,7 +4150,7 @@ Original credit to Mike Robbins http://mikefrobbins.com/2018/01/18/use-powershel
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>StartPSCommand</maml:name>
           <maml:description>
-            <maml:para>{{ Fill StartPSCommand Description }}</maml:para>
+            <maml:para>WinPE Startup: Modifies Startnet.cmd to execute the specified string before OSDCloud</maml:para>
           </maml:description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -4162,7 +4162,7 @@ Original credit to Mike Robbins http://mikefrobbins.com/2018/01/18/use-powershel
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="WebPSScript">
           <maml:name>StartWebScript</maml:name>
           <maml:description>
-            <maml:para>{{ Fill StartWebScript Description }}</maml:para>
+            <maml:para>WinPE Startup: Modifies Startnet.cmd to execute the specified string before OSDCloud</maml:para>
           </maml:description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -4174,7 +4174,7 @@ Original credit to Mike Robbins http://mikefrobbins.com/2018/01/18/use-powershel
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>UpdateUsb</maml:name>
           <maml:description>
-            <maml:para>{{ Fill UpdateUsb Description }}</maml:para>
+            <maml:para>After WinPE has been updated, the contents of the OSDCloud Workspace will be updated on any OSDCloud USB Drives</maml:para>
           </maml:description>
           <dev:type>
             <maml:name>SwitchParameter</maml:name>
@@ -4185,7 +4185,7 @@ Original credit to Mike Robbins http://mikefrobbins.com/2018/01/18/use-powershel
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>Wallpaper</maml:name>
           <maml:description>
-            <maml:para>{{ Fill Wallpaper Description }}</maml:para>
+            <maml:para>Sets the specified Wallpaper JPG file as the WinPE Background</maml:para>
           </maml:description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -4212,11 +4212,11 @@ Original credit to Mike Robbins http://mikefrobbins.com/2018/01/18/use-powershel
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
         <maml:name>Brand</maml:name>
         <maml:description>
-          <maml:para>Sets the Brand for OSDCloudGUI</maml:para>
+          <maml:para>Sets the custom Brand for OSDCloudGUI</maml:para>
         </maml:description>
-        <command:parameterValue required="true" variableLength="false">Object</command:parameterValue>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
-          <maml:name>Object</maml:name>
+          <maml:name>String</maml:name>
           <maml:uri />
         </dev:type>
         <dev:defaultValue>OSDCloud</dev:defaultValue>
@@ -4224,7 +4224,7 @@ Original credit to Mike Robbins http://mikefrobbins.com/2018/01/18/use-powershel
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
         <maml:name>CloudDriver</maml:name>
         <maml:description>
-          <maml:para>Download and install in WinPE drivers from Dell,HP,IntelNet,LenovoDock,Nutanix,USB,VMware,WiFi</maml:para>
+          <maml:para>WinPE Driver: Download and install in WinPE drivers from Dell,HP,IntelNet,LenovoDock,Nutanix,USB,VMware,WiFi</maml:para>
         </maml:description>
         <command:parameterValue required="true" variableLength="false">String[]</command:parameterValue>
         <dev:type>
@@ -4236,7 +4236,7 @@ Original credit to Mike Robbins http://mikefrobbins.com/2018/01/18/use-powershel
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
         <maml:name>DriverHWID</maml:name>
         <maml:description>
-          <maml:para>HardwareID of the Driver to add to WinPE</maml:para>
+          <maml:para>WinPE Driver: HardwareID of the Driver to add to WinPE</maml:para>
         </maml:description>
         <command:parameterValue required="true" variableLength="false">String[]</command:parameterValue>
         <dev:type>
@@ -4248,7 +4248,7 @@ Original credit to Mike Robbins http://mikefrobbins.com/2018/01/18/use-powershel
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
         <maml:name>DriverPath</maml:name>
         <maml:description>
-          <maml:para>Path to additional Drivers you want to install</maml:para>
+          <maml:para>WinPE Driver: Path to additional Drivers you want to install</maml:para>
         </maml:description>
         <command:parameterValue required="true" variableLength="false">String[]</command:parameterValue>
         <dev:type>
@@ -4260,7 +4260,7 @@ Original credit to Mike Robbins http://mikefrobbins.com/2018/01/18/use-powershel
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
         <maml:name>PSModuleCopy</maml:name>
         <maml:description>
-          <maml:para>Copies named PowerShell Modules to WinPE</maml:para>
+          <maml:para>Copies named PowerShell Modules from the running OS to WinPE</maml:para>
         </maml:description>
         <command:parameterValue required="true" variableLength="false">String[]</command:parameterValue>
         <dev:type>
@@ -4284,7 +4284,7 @@ Original credit to Mike Robbins http://mikefrobbins.com/2018/01/18/use-powershel
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
         <maml:name>Startnet</maml:name>
         <maml:description>
-          <maml:para>{{ Fill Startnet Description }}</maml:para>
+          <maml:para>WinPE Startup: Modifies Startnet.cmd to execute the specified string</maml:para>
         </maml:description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
@@ -4296,7 +4296,7 @@ Original credit to Mike Robbins http://mikefrobbins.com/2018/01/18/use-powershel
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
         <maml:name>StartOSDCloud</maml:name>
         <maml:description>
-          <maml:para>{{ Fill StartOSDCloud Description }}</maml:para>
+          <maml:para>WinPE Startup: Modifies Startnet.cmd to execute Start-OSDCloud with the specified string</maml:para>
         </maml:description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
@@ -4308,7 +4308,7 @@ Original credit to Mike Robbins http://mikefrobbins.com/2018/01/18/use-powershel
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
         <maml:name>StartOSDCloudGUI</maml:name>
         <maml:description>
-          <maml:para>{{ Fill StartOSDCloudGUI Description }}</maml:para>
+          <maml:para>WinPE Startup: Modifies Startnet.cmd to execute Start-OSDCloudGUI</maml:para>
         </maml:description>
         <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
         <dev:type>
@@ -4320,7 +4320,7 @@ Original credit to Mike Robbins http://mikefrobbins.com/2018/01/18/use-powershel
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
         <maml:name>StartOSDPad</maml:name>
         <maml:description>
-          <maml:para>{{ Fill StartOSDPad Description }}</maml:para>
+          <maml:para>WinPE Startup: Modifies Startnet.cmd to execute Start-OSDPad with the specified string</maml:para>
         </maml:description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
@@ -4332,7 +4332,7 @@ Original credit to Mike Robbins http://mikefrobbins.com/2018/01/18/use-powershel
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
         <maml:name>StartPSCommand</maml:name>
         <maml:description>
-          <maml:para>{{ Fill StartPSCommand Description }}</maml:para>
+          <maml:para>WinPE Startup: Modifies Startnet.cmd to execute the specified string before OSDCloud</maml:para>
         </maml:description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
@@ -4344,7 +4344,7 @@ Original credit to Mike Robbins http://mikefrobbins.com/2018/01/18/use-powershel
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="WebPSScript">
         <maml:name>StartWebScript</maml:name>
         <maml:description>
-          <maml:para>{{ Fill StartWebScript Description }}</maml:para>
+          <maml:para>WinPE Startup: Modifies Startnet.cmd to execute the specified string before OSDCloud</maml:para>
         </maml:description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
@@ -4356,7 +4356,7 @@ Original credit to Mike Robbins http://mikefrobbins.com/2018/01/18/use-powershel
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
         <maml:name>UpdateUsb</maml:name>
         <maml:description>
-          <maml:para>{{ Fill UpdateUsb Description }}</maml:para>
+          <maml:para>After WinPE has been updated, the contents of the OSDCloud Workspace will be updated on any OSDCloud USB Drives</maml:para>
         </maml:description>
         <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
         <dev:type>
@@ -4368,7 +4368,7 @@ Original credit to Mike Robbins http://mikefrobbins.com/2018/01/18/use-powershel
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
         <maml:name>Wallpaper</maml:name>
         <maml:description>
-          <maml:para>{{ Fill Wallpaper Description }}</maml:para>
+          <maml:para>Sets the specified Wallpaper JPG file as the WinPE Background</maml:para>
         </maml:description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
@@ -4408,8 +4408,8 @@ Original credit to Mike Robbins http://mikefrobbins.com/2018/01/18/use-powershel
     </command:examples>
     <command:relatedLinks>
       <maml:navigationLink>
-        <maml:linkText>https://osdcloud.osdeploy.com</maml:linkText>
-        <maml:uri>https://osdcloud.osdeploy.com</maml:uri>
+        <maml:linkText>https://www.osdcloud.com/setup/osdcloud-winpe</maml:linkText>
+        <maml:uri>https://www.osdcloud.com/setup/osdcloud-winpe</maml:uri>
       </maml:navigationLink>
     </command:relatedLinks>
   </command:command>
@@ -4449,8 +4449,8 @@ Original credit to Mike Robbins http://mikefrobbins.com/2018/01/18/use-powershel
     </command:examples>
     <command:relatedLinks>
       <maml:navigationLink>
-        <maml:linkText>https://osdcloud.osdeploy.com</maml:linkText>
-        <maml:uri>https://osdcloud.osdeploy.com</maml:uri>
+        <maml:linkText>https://github.com/OSDeploy/OSD/tree/master/docs</maml:linkText>
+        <maml:uri>https://github.com/OSDeploy/OSD/tree/master/docs</maml:uri>
       </maml:navigationLink>
     </command:relatedLinks>
   </command:command>
@@ -10939,11 +10939,11 @@ Original credit to Mike Robbins http://mikefrobbins.com/2018/01/18/use-powershel
       <command:verb>Get</command:verb>
       <command:noun>OSDCloudTemplate</command:noun>
       <maml:description>
-        <maml:para>{{ Fill in the Synopsis }}</maml:para>
+        <maml:para>Returns the path to the OSDCloud Template.  This is typically $env:ProgramData\OSDCloud</maml:para>
       </maml:description>
     </command:details>
     <maml:description>
-      <maml:para>{{ Fill in the Description }}</maml:para>
+      <maml:para>Returns the path to the OSDCloud Template.  This is typically $env:ProgramData\OSDCloud</maml:para>
     </maml:description>
     <command:syntax>
       <command:syntaxItem>
@@ -10951,26 +10951,8 @@ Original credit to Mike Robbins http://mikefrobbins.com/2018/01/18/use-powershel
       </command:syntaxItem>
     </command:syntax>
     <command:parameters />
-    <command:inputTypes>
-      <command:inputType>
-        <dev:type>
-          <maml:name>None</maml:name>
-        </dev:type>
-        <maml:description>
-          <maml:para></maml:para>
-        </maml:description>
-      </command:inputType>
-    </command:inputTypes>
-    <command:returnValues>
-      <command:returnValue>
-        <dev:type>
-          <maml:name>System.Object</maml:name>
-        </dev:type>
-        <maml:description>
-          <maml:para></maml:para>
-        </maml:description>
-      </command:returnValue>
-    </command:returnValues>
+    <command:inputTypes />
+    <command:returnValues />
     <maml:alertSet>
       <maml:alert>
         <maml:para></maml:para>
@@ -10987,8 +10969,8 @@ Original credit to Mike Robbins http://mikefrobbins.com/2018/01/18/use-powershel
     </command:examples>
     <command:relatedLinks>
       <maml:navigationLink>
-        <maml:linkText>Online Version:</maml:linkText>
-        <maml:uri>https://osd.osdeploy.com/module/functions/general/get-osdclass</maml:uri>
+        <maml:linkText>https://github.com/OSDeploy/OSD/tree/master/docs</maml:linkText>
+        <maml:uri>https://github.com/OSDeploy/OSD/tree/master/docs</maml:uri>
       </maml:navigationLink>
     </command:relatedLinks>
   </command:command>
@@ -10998,11 +10980,11 @@ Original credit to Mike Robbins http://mikefrobbins.com/2018/01/18/use-powershel
       <command:verb>Get</command:verb>
       <command:noun>OSDCloudWorkspace</command:noun>
       <maml:description>
-        <maml:para>Gets an OSDCloud Workspace</maml:para>
+        <maml:para>Returns the path to the OSDCloud Workspace by reading the path stored in $env:ProgramData\OSDCloud\workspace.json</maml:para>
       </maml:description>
     </command:details>
     <maml:description>
-      <maml:para>Gets an OSDCloud Workspace by reading the path stored in $env:ProgramData\OSDCloud\workspace.json</maml:para>
+      <maml:para>Returns the path to the OSDCloud Workspace by reading the path stored in $env:ProgramData\OSDCloud\workspace.json</maml:para>
     </maml:description>
     <command:syntax>
       <command:syntaxItem>
@@ -11028,8 +11010,8 @@ Original credit to Mike Robbins http://mikefrobbins.com/2018/01/18/use-powershel
     </command:examples>
     <command:relatedLinks>
       <maml:navigationLink>
-        <maml:linkText>https://osdcloud.osdeploy.com</maml:linkText>
-        <maml:uri>https://osdcloud.osdeploy.com</maml:uri>
+        <maml:linkText>https://github.com/OSDeploy/OSD/tree/master/docs</maml:linkText>
+        <maml:uri>https://github.com/OSDeploy/OSD/tree/master/docs</maml:uri>
       </maml:navigationLink>
     </command:relatedLinks>
   </command:command>
@@ -13762,8 +13744,8 @@ Original credit to Mike Robbins http://mikefrobbins.com/2018/01/18/use-powershel
     </command:examples>
     <command:relatedLinks>
       <maml:navigationLink>
-        <maml:linkText>Online Version:</maml:linkText>
-        <maml:uri>https://osd.osdeploy.com/</maml:uri>
+        <maml:linkText>https://github.com/OSDeploy/OSD/tree/master/docs</maml:linkText>
+        <maml:uri>https://github.com/OSDeploy/OSD/tree/master/docs</maml:uri>
       </maml:navigationLink>
     </command:relatedLinks>
   </command:command>
@@ -13857,11 +13839,11 @@ Original credit to Mike Robbins http://mikefrobbins.com/2018/01/18/use-powershel
       <command:verb>Invoke</command:verb>
       <command:noun>OSDCloud</command:noun>
       <maml:description>
-        <maml:para>{{ Fill in the Synopsis }}</maml:para>
+        <maml:para>This is the master OSDCloud Task Sequence</maml:para>
       </maml:description>
     </command:details>
     <maml:description>
-      <maml:para>{{ Fill in the Description }}</maml:para>
+      <maml:para>This is the master OSDCloud Task Sequence</maml:para>
     </maml:description>
     <command:syntax>
       <command:syntaxItem>
@@ -13869,26 +13851,8 @@ Original credit to Mike Robbins http://mikefrobbins.com/2018/01/18/use-powershel
       </command:syntaxItem>
     </command:syntax>
     <command:parameters />
-    <command:inputTypes>
-      <command:inputType>
-        <dev:type>
-          <maml:name>None</maml:name>
-        </dev:type>
-        <maml:description>
-          <maml:para></maml:para>
-        </maml:description>
-      </command:inputType>
-    </command:inputTypes>
-    <command:returnValues>
-      <command:returnValue>
-        <dev:type>
-          <maml:name>System.Object</maml:name>
-        </dev:type>
-        <maml:description>
-          <maml:para></maml:para>
-        </maml:description>
-      </command:returnValue>
-    </command:returnValues>
+    <command:inputTypes />
+    <command:returnValues />
     <maml:alertSet>
       <maml:alert>
         <maml:para></maml:para>
@@ -13905,8 +13869,8 @@ Original credit to Mike Robbins http://mikefrobbins.com/2018/01/18/use-powershel
     </command:examples>
     <command:relatedLinks>
       <maml:navigationLink>
-        <maml:linkText>Online Version:</maml:linkText>
-        <maml:uri>https://osd.osdeploy.com/</maml:uri>
+        <maml:linkText>https://github.com/OSDeploy/OSD/tree/master/docs</maml:linkText>
+        <maml:uri>https://github.com/OSDeploy/OSD/tree/master/docs</maml:uri>
       </maml:navigationLink>
     </command:relatedLinks>
   </command:command>
@@ -14744,7 +14708,7 @@ Original credit to Mike Robbins http://mikefrobbins.com/2018/01/18/use-powershel
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="1" aliases="none">
           <maml:name>WorkspacePath</maml:name>
           <maml:description>
-            <maml:para>Path to the OSDCloud Workspace containing the Media directory</maml:para>
+            <maml:para>Path to the OSDCloud Workspace containing the Media directory This parameter is not necessary if Get-OSDCloudWorkspace can get a return</maml:para>
           </maml:description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -14759,7 +14723,7 @@ Original credit to Mike Robbins http://mikefrobbins.com/2018/01/18/use-powershel
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="1" aliases="none">
         <maml:name>WorkspacePath</maml:name>
         <maml:description>
-          <maml:para>Path to the OSDCloud Workspace containing the Media directory</maml:para>
+          <maml:para>Path to the OSDCloud Workspace containing the Media directory This parameter is not necessary if Get-OSDCloudWorkspace can get a return</maml:para>
         </maml:description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
@@ -14778,17 +14742,24 @@ Original credit to Mike Robbins http://mikefrobbins.com/2018/01/18/use-powershel
     </maml:alertSet>
     <command:examples>
       <command:example>
-        <maml:title>-------------------------- Example 1 --------------------------</maml:title>
-        <dev:code>PS C:\&gt; {{ Add example code here }}</dev:code>
+        <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
+        <dev:code>New-OSDCloudISO</dev:code>
         <dev:remarks>
-          <maml:para>{{ Add example description here }}</maml:para>
+          <maml:para></maml:para>
+        </dev:remarks>
+      </command:example>
+      <command:example>
+        <maml:title>-------------------------- EXAMPLE 2 --------------------------</maml:title>
+        <dev:code>New-OSDCloudISO -WorkspacePath C:\OSDCloud</dev:code>
+        <dev:remarks>
+          <maml:para></maml:para>
         </dev:remarks>
       </command:example>
     </command:examples>
     <command:relatedLinks>
       <maml:navigationLink>
-        <maml:linkText>https://osdcloud.osdeploy.com</maml:linkText>
-        <maml:uri>https://osdcloud.osdeploy.com</maml:uri>
+        <maml:linkText>https://www.osdcloud.com/setup/osdcloud-iso</maml:linkText>
+        <maml:uri>https://www.osdcloud.com/setup/osdcloud-iso</maml:uri>
       </maml:navigationLink>
     </command:relatedLinks>
   </command:command>
@@ -14973,17 +14944,24 @@ Original credit to Mike Robbins http://mikefrobbins.com/2018/01/18/use-powershel
     </maml:alertSet>
     <command:examples>
       <command:example>
-        <maml:title>-------------------------- Example 1 --------------------------</maml:title>
-        <dev:code>PS C:\&gt; {{ Add example code here }}</dev:code>
+        <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
+        <dev:code>New-OSDCloudTemplate</dev:code>
         <dev:remarks>
-          <maml:para>{{ Add example description here }}</maml:para>
+          <maml:para></maml:para>
+        </dev:remarks>
+      </command:example>
+      <command:example>
+        <maml:title>-------------------------- EXAMPLE 2 --------------------------</maml:title>
+        <dev:code>New-OSDCloudTemplate -WinRE</dev:code>
+        <dev:remarks>
+          <maml:para></maml:para>
         </dev:remarks>
       </command:example>
     </command:examples>
     <command:relatedLinks>
       <maml:navigationLink>
-        <maml:linkText>https://osdcloud.osdeploy.com</maml:linkText>
-        <maml:uri>https://osdcloud.osdeploy.com</maml:uri>
+        <maml:linkText>https://www.osdcloud.com/setup/osdcloud-template</maml:linkText>
+        <maml:uri>https://www.osdcloud.com/setup/osdcloud-template</maml:uri>
       </maml:navigationLink>
     </command:relatedLinks>
   </command:command>
@@ -14993,11 +14971,11 @@ Original credit to Mike Robbins http://mikefrobbins.com/2018/01/18/use-powershel
       <command:verb>New</command:verb>
       <command:noun>OSDCloudUSB</command:noun>
       <maml:description>
-        <maml:para>Creates an OSDCloud USB Drive and updates WinPE Clear, Initialize, Partition (WinPE and OSDCloud), and Format a USB Disk Requires Admin Rights</maml:para>
+        <maml:para>Creates an OSDCloud USB Drive and copies the contents of the OSDCloud Workspace Media directory Clear, Initialize, Partition (WinPE and OSDCloud), and Format a USB Disk Requires Admin Rights</maml:para>
       </maml:description>
     </command:details>
     <maml:description>
-      <maml:para>Creates an OSDCloud USB Drive and updates WinPE Clear, Initialize, Partition (WinPE and OSDCloud), and Format a USB Disk Requires Admin Rights</maml:para>
+      <maml:para>Creates an OSDCloud USB Drive and copies the contents of the OSDCloud Workspace Media directory Clear, Initialize, Partition (WinPE and OSDCloud), and Format a USB Disk Requires Admin Rights</maml:para>
     </maml:description>
     <command:syntax>
       <command:syntaxItem>
@@ -15005,7 +14983,7 @@ Original credit to Mike Robbins http://mikefrobbins.com/2018/01/18/use-powershel
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="named" aliases="none">
           <maml:name>WorkspacePath</maml:name>
           <maml:description>
-            <maml:para>Path to the OSDCloud Workspace containing the Media directory</maml:para>
+            <maml:para>Path to the OSDCloud Workspace containing the Media directory This parameter is not necessary if Get-OSDCloudWorkspace can get a return</maml:para>
           </maml:description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -15020,7 +14998,7 @@ Original credit to Mike Robbins http://mikefrobbins.com/2018/01/18/use-powershel
         <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>fromIsoFile</maml:name>
           <maml:description>
-            <maml:para>{{ Fill fromIsoFile Description }}</maml:para>
+            <maml:para>Path to an OSDCloud ISO This file will be mounted and the contents will be copied to the OSDCloud USB</maml:para>
           </maml:description>
           <command:parameterValue required="true" variableLength="false">FileInfo</command:parameterValue>
           <dev:type>
@@ -15035,7 +15013,7 @@ Original credit to Mike Robbins http://mikefrobbins.com/2018/01/18/use-powershel
         <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>fromIsoUrl</maml:name>
           <maml:description>
-            <maml:para>{{ Fill fromIsoUrl Description }}</maml:para>
+            <maml:para>Path to an OSDCloud ISO saved on the internet This file will be downloaded and mounted and the contents will be copied to the OSDCloud USB</maml:para>
           </maml:description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -15050,7 +15028,7 @@ Original credit to Mike Robbins http://mikefrobbins.com/2018/01/18/use-powershel
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="named" aliases="none">
         <maml:name>WorkspacePath</maml:name>
         <maml:description>
-          <maml:para>Path to the OSDCloud Workspace containing the Media directory</maml:para>
+          <maml:para>Path to the OSDCloud Workspace containing the Media directory This parameter is not necessary if Get-OSDCloudWorkspace can get a return</maml:para>
         </maml:description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
@@ -15062,7 +15040,7 @@ Original credit to Mike Robbins http://mikefrobbins.com/2018/01/18/use-powershel
       <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
         <maml:name>fromIsoFile</maml:name>
         <maml:description>
-          <maml:para>{{ Fill fromIsoFile Description }}</maml:para>
+          <maml:para>Path to an OSDCloud ISO This file will be mounted and the contents will be copied to the OSDCloud USB</maml:para>
         </maml:description>
         <command:parameterValue required="true" variableLength="false">FileInfo</command:parameterValue>
         <dev:type>
@@ -15074,7 +15052,7 @@ Original credit to Mike Robbins http://mikefrobbins.com/2018/01/18/use-powershel
       <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
         <maml:name>fromIsoUrl</maml:name>
         <maml:description>
-          <maml:para>{{ Fill fromIsoUrl Description }}</maml:para>
+          <maml:para>Path to an OSDCloud ISO saved on the internet This file will be downloaded and mounted and the contents will be copied to the OSDCloud USB</maml:para>
         </maml:description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
@@ -15099,11 +15077,25 @@ Original credit to Mike Robbins http://mikefrobbins.com/2018/01/18/use-powershel
           <maml:para></maml:para>
         </dev:remarks>
       </command:example>
+      <command:example>
+        <maml:title>-------------------------- EXAMPLE 2 --------------------------</maml:title>
+        <dev:code>New-OSDCloudUSB -fromIsoFile D:\osdcloud.iso</dev:code>
+        <dev:remarks>
+          <maml:para></maml:para>
+        </dev:remarks>
+      </command:example>
+      <command:example>
+        <maml:title>-------------------------- EXAMPLE 3 --------------------------</maml:title>
+        <dev:code>New-OSDCloudUSB -fromIsoUrl https://contoso.blob.core.windows.net/public/osdcloud.iso</dev:code>
+        <dev:remarks>
+          <maml:para></maml:para>
+        </dev:remarks>
+      </command:example>
     </command:examples>
     <command:relatedLinks>
       <maml:navigationLink>
-        <maml:linkText>https://osdcloud.osdeploy.com</maml:linkText>
-        <maml:uri>https://osdcloud.osdeploy.com</maml:uri>
+        <maml:linkText>https://www.osdcloud.com/setup/osdcloud-usb</maml:linkText>
+        <maml:uri>https://www.osdcloud.com/setup/osdcloud-usb</maml:uri>
       </maml:navigationLink>
     </command:relatedLinks>
   </command:command>
@@ -15117,7 +15109,7 @@ Original credit to Mike Robbins http://mikefrobbins.com/2018/01/18/use-powershel
       </maml:description>
     </command:details>
     <maml:description>
-      <maml:para>Creates or updates an OSDCloud Workspace from an OSDCloud Template</maml:para>
+      <maml:para>Creates or updates an OSDCloud Workspace</maml:para>
     </maml:description>
     <command:syntax>
       <command:syntaxItem>
@@ -15137,7 +15129,7 @@ Original credit to Mike Robbins http://mikefrobbins.com/2018/01/18/use-powershel
         <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>fromIsoFile</maml:name>
           <maml:description>
-            <maml:para>{{ Fill fromIsoFile Description }}</maml:para>
+            <maml:para>Path to an OSDCloud ISO This file will be mounted and the contents will be copied to the OSDCloud Workspace</maml:para>
           </maml:description>
           <command:parameterValue required="true" variableLength="false">FileInfo</command:parameterValue>
           <dev:type>
@@ -15164,7 +15156,7 @@ Original credit to Mike Robbins http://mikefrobbins.com/2018/01/18/use-powershel
         <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>fromIsoUrl</maml:name>
           <maml:description>
-            <maml:para>{{ Fill fromIsoUrl Description }}</maml:para>
+            <maml:para>Path to an OSDCloud ISO saved on the internet This file will be downloaded and mounted and the contents will be copied to the OSDCloud Workspace</maml:para>
           </maml:description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -15191,7 +15183,7 @@ Original credit to Mike Robbins http://mikefrobbins.com/2018/01/18/use-powershel
         <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>fromUsbDrive</maml:name>
           <maml:description>
-            <maml:para>{{ Fill fromUsbDrive Description }}</maml:para>
+            <maml:para>Searches for an OSDCloud USB The OSDCloud USB contents will be copied to the OSDCloud Workspace</maml:para>
           </maml:description>
           <dev:type>
             <maml:name>SwitchParameter</maml:name>
@@ -15217,7 +15209,7 @@ Original credit to Mike Robbins http://mikefrobbins.com/2018/01/18/use-powershel
       <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
         <maml:name>fromIsoFile</maml:name>
         <maml:description>
-          <maml:para>{{ Fill fromIsoFile Description }}</maml:para>
+          <maml:para>Path to an OSDCloud ISO This file will be mounted and the contents will be copied to the OSDCloud Workspace</maml:para>
         </maml:description>
         <command:parameterValue required="true" variableLength="false">FileInfo</command:parameterValue>
         <dev:type>
@@ -15229,7 +15221,7 @@ Original credit to Mike Robbins http://mikefrobbins.com/2018/01/18/use-powershel
       <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
         <maml:name>fromIsoUrl</maml:name>
         <maml:description>
-          <maml:para>{{ Fill fromIsoUrl Description }}</maml:para>
+          <maml:para>Path to an OSDCloud ISO saved on the internet This file will be downloaded and mounted and the contents will be copied to the OSDCloud Workspace</maml:para>
         </maml:description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
@@ -15241,7 +15233,7 @@ Original credit to Mike Robbins http://mikefrobbins.com/2018/01/18/use-powershel
       <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
         <maml:name>fromUsbDrive</maml:name>
         <maml:description>
-          <maml:para>{{ Fill fromUsbDrive Description }}</maml:para>
+          <maml:para>Searches for an OSDCloud USB The OSDCloud USB contents will be copied to the OSDCloud Workspace</maml:para>
         </maml:description>
         <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
         <dev:type>
@@ -15269,8 +15261,8 @@ Original credit to Mike Robbins http://mikefrobbins.com/2018/01/18/use-powershel
     </command:examples>
     <command:relatedLinks>
       <maml:navigationLink>
-        <maml:linkText>https://osdcloud.osdeploy.com</maml:linkText>
-        <maml:uri>https://osdcloud.osdeploy.com</maml:uri>
+        <maml:linkText>https://www.osdcloud.com/setup/osdcloud-workspace</maml:linkText>
+        <maml:uri>https://www.osdcloud.com/setup/osdcloud-workspace</maml:uri>
       </maml:navigationLink>
     </command:relatedLinks>
   </command:command>
@@ -18447,7 +18439,7 @@ Original credit to Mike Robbins http://mikefrobbins.com/2018/01/18/use-powershel
     <command:returnValues />
     <maml:alertSet>
       <maml:alert>
-        <maml:para>21.3.12  Initial Release</maml:para>
+        <maml:para></maml:para>
       </maml:alert>
     </maml:alertSet>
     <command:examples>
@@ -18461,8 +18453,8 @@ Original credit to Mike Robbins http://mikefrobbins.com/2018/01/18/use-powershel
     </command:examples>
     <command:relatedLinks>
       <maml:navigationLink>
-        <maml:linkText>https://osdcloud.osdeploy.com</maml:linkText>
-        <maml:uri>https://osdcloud.osdeploy.com</maml:uri>
+        <maml:linkText>https://github.com/OSDeploy/OSD/tree/master/docs</maml:linkText>
+        <maml:uri>https://github.com/OSDeploy/OSD/tree/master/docs</maml:uri>
       </maml:navigationLink>
     </command:relatedLinks>
   </command:command>
@@ -18502,8 +18494,8 @@ Original credit to Mike Robbins http://mikefrobbins.com/2018/01/18/use-powershel
     </command:examples>
     <command:relatedLinks>
       <maml:navigationLink>
-        <maml:linkText>https://osdcloud.osdeploy.com</maml:linkText>
-        <maml:uri>https://osdcloud.osdeploy.com</maml:uri>
+        <maml:linkText>https://github.com/OSDeploy/OSD/tree/master/docs</maml:linkText>
+        <maml:uri>https://github.com/OSDeploy/OSD/tree/master/docs</maml:uri>
       </maml:navigationLink>
     </command:relatedLinks>
   </command:command>
@@ -18627,8 +18619,8 @@ Original credit to Mike Robbins http://mikefrobbins.com/2018/01/18/use-powershel
     </command:examples>
     <command:relatedLinks>
       <maml:navigationLink>
-        <maml:linkText>https://osdcloud.osdeploy.com</maml:linkText>
-        <maml:uri>https://osdcloud.osdeploy.com</maml:uri>
+        <maml:linkText>https://github.com/OSDeploy/OSD/tree/master/docs</maml:linkText>
+        <maml:uri>https://github.com/OSDeploy/OSD/tree/master/docs</maml:uri>
       </maml:navigationLink>
     </command:relatedLinks>
   </command:command>
@@ -19809,8 +19801,8 @@ Original credit to Mike Robbins http://mikefrobbins.com/2018/01/18/use-powershel
     </command:examples>
     <command:relatedLinks>
       <maml:navigationLink>
-        <maml:linkText>https://osdcloud.osdeploy.com</maml:linkText>
-        <maml:uri>https://osdcloud.osdeploy.com</maml:uri>
+        <maml:linkText>https://github.com/OSDeploy/OSD/tree/master/docs</maml:linkText>
+        <maml:uri>https://github.com/OSDeploy/OSD/tree/master/docs</maml:uri>
       </maml:navigationLink>
     </command:relatedLinks>
   </command:command>
@@ -20774,7 +20766,7 @@ Original credit to Mike Robbins http://mikefrobbins.com/2018/01/18/use-powershel
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>OSLicense</maml:name>
           <maml:description>
-            <maml:para>{{ Fill OSLicense Description }}</maml:para>
+            <maml:para>License of the Windows Operating System Retail or Volume</maml:para>
           </maml:description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -20890,7 +20882,7 @@ Original credit to Mike Robbins http://mikefrobbins.com/2018/01/18/use-powershel
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>OSLicense</maml:name>
           <maml:description>
-            <maml:para>{{ Fill OSLicense Description }}</maml:para>
+            <maml:para>License of the Windows Operating System Retail or Volume</maml:para>
           </maml:description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -20902,7 +20894,7 @@ Original credit to Mike Robbins http://mikefrobbins.com/2018/01/18/use-powershel
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>FindImageFile</maml:name>
           <maml:description>
-            <maml:para>ParameterSet CustomImage</maml:para>
+            <maml:para>Searches for the specified WIM file</maml:para>
           </maml:description>
           <dev:type>
             <maml:name>SwitchParameter</maml:name>
@@ -20913,7 +20905,7 @@ Original credit to Mike Robbins http://mikefrobbins.com/2018/01/18/use-powershel
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>ImageFileUrl</maml:name>
           <maml:description>
-            <maml:para>ParameterSet CustomImage</maml:para>
+            <maml:para>Downloads a WIM file specified by the URK</maml:para>
           </maml:description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -20925,7 +20917,7 @@ Original credit to Mike Robbins http://mikefrobbins.com/2018/01/18/use-powershel
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>ImageIndex</maml:name>
           <maml:description>
-            <maml:para>ParameterSet CustomImage</maml:para>
+            <maml:para>Images using the specified Image Index</maml:para>
           </maml:description>
           <command:parameterValue required="true" variableLength="false">Int32</command:parameterValue>
           <dev:type>
@@ -21084,7 +21076,7 @@ Original credit to Mike Robbins http://mikefrobbins.com/2018/01/18/use-powershel
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
         <maml:name>OSLicense</maml:name>
         <maml:description>
-          <maml:para>{{ Fill OSLicense Description }}</maml:para>
+          <maml:para>License of the Windows Operating System Retail or Volume</maml:para>
         </maml:description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
@@ -21096,7 +21088,7 @@ Original credit to Mike Robbins http://mikefrobbins.com/2018/01/18/use-powershel
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
         <maml:name>FindImageFile</maml:name>
         <maml:description>
-          <maml:para>ParameterSet CustomImage</maml:para>
+          <maml:para>Searches for the specified WIM file</maml:para>
         </maml:description>
         <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
         <dev:type>
@@ -21108,7 +21100,7 @@ Original credit to Mike Robbins http://mikefrobbins.com/2018/01/18/use-powershel
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
         <maml:name>ImageFileUrl</maml:name>
         <maml:description>
-          <maml:para>ParameterSet CustomImage</maml:para>
+          <maml:para>Downloads a WIM file specified by the URK</maml:para>
         </maml:description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
@@ -21120,7 +21112,7 @@ Original credit to Mike Robbins http://mikefrobbins.com/2018/01/18/use-powershel
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
         <maml:name>ImageIndex</maml:name>
         <maml:description>
-          <maml:para>ParameterSet CustomImage</maml:para>
+          <maml:para>Images using the specified Image Index</maml:para>
         </maml:description>
         <command:parameterValue required="true" variableLength="false">Int32</command:parameterValue>
         <dev:type>
@@ -21148,8 +21140,8 @@ Original credit to Mike Robbins http://mikefrobbins.com/2018/01/18/use-powershel
     </command:examples>
     <command:relatedLinks>
       <maml:navigationLink>
-        <maml:linkText>https://osdcloud.osdeploy.com/</maml:linkText>
-        <maml:uri>https://osdcloud.osdeploy.com/</maml:uri>
+        <maml:linkText>https://github.com/OSDeploy/OSD/tree/master/docs</maml:linkText>
+        <maml:uri>https://github.com/OSDeploy/OSD/tree/master/docs</maml:uri>
       </maml:navigationLink>
     </command:relatedLinks>
   </command:command>
@@ -21159,87 +21151,69 @@ Original credit to Mike Robbins http://mikefrobbins.com/2018/01/18/use-powershel
       <command:verb>Start</command:verb>
       <command:noun>OSDCloudGUI</command:noun>
       <maml:description>
-        <maml:para>{{ Fill in the Synopsis }}</maml:para>
+        <maml:para>OSDCloud imaging using the command line</maml:para>
       </maml:description>
     </command:details>
     <maml:description>
-      <maml:para>{{ Fill in the Description }}</maml:para>
+      <maml:para>OSDCloud imaging using the command line</maml:para>
     </maml:description>
     <command:syntax>
       <command:syntaxItem>
         <maml:name>Start-OSDCloudGUI</maml:name>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="0" aliases="BrandingTitle">
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="BrandingTitle">
           <maml:name>Brand</maml:name>
           <maml:description>
-            <maml:para>{{ Fill Brand Description }}</maml:para>
+            <maml:para>The custom Brand for OSDCloudGUI</maml:para>
           </maml:description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
             <maml:name>String</maml:name>
             <maml:uri />
           </dev:type>
-          <dev:defaultValue>None</dev:defaultValue>
+          <dev:defaultValue>OSDCloud</dev:defaultValue>
         </command:parameter>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="BrandingColor">
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="2" aliases="BrandingColor">
           <maml:name>Color</maml:name>
           <maml:description>
-            <maml:para>{{ Fill Color Description }}</maml:para>
+            <maml:para>Color for the OSDCloudGUI Brand</maml:para>
           </maml:description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
             <maml:name>String</maml:name>
             <maml:uri />
           </dev:type>
-          <dev:defaultValue>None</dev:defaultValue>
+          <dev:defaultValue>#01786A</dev:defaultValue>
         </command:parameter>
       </command:syntaxItem>
     </command:syntax>
     <command:parameters>
-      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="0" aliases="BrandingTitle">
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="BrandingTitle">
         <maml:name>Brand</maml:name>
         <maml:description>
-          <maml:para>{{ Fill Brand Description }}</maml:para>
+          <maml:para>The custom Brand for OSDCloudGUI</maml:para>
         </maml:description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
           <maml:name>String</maml:name>
           <maml:uri />
         </dev:type>
-        <dev:defaultValue>None</dev:defaultValue>
+        <dev:defaultValue>OSDCloud</dev:defaultValue>
       </command:parameter>
-      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="BrandingColor">
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="2" aliases="BrandingColor">
         <maml:name>Color</maml:name>
         <maml:description>
-          <maml:para>{{ Fill Color Description }}</maml:para>
+          <maml:para>Color for the OSDCloudGUI Brand</maml:para>
         </maml:description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
           <maml:name>String</maml:name>
           <maml:uri />
         </dev:type>
-        <dev:defaultValue>None</dev:defaultValue>
+        <dev:defaultValue>#01786A</dev:defaultValue>
       </command:parameter>
     </command:parameters>
-    <command:inputTypes>
-      <command:inputType>
-        <dev:type>
-          <maml:name>None</maml:name>
-        </dev:type>
-        <maml:description>
-          <maml:para></maml:para>
-        </maml:description>
-      </command:inputType>
-    </command:inputTypes>
-    <command:returnValues>
-      <command:returnValue>
-        <dev:type>
-          <maml:name>System.Object</maml:name>
-        </dev:type>
-        <maml:description>
-          <maml:para></maml:para>
-        </maml:description>
-      </command:returnValue>
-    </command:returnValues>
+    <command:inputTypes />
+    <command:returnValues />
     <maml:alertSet>
       <maml:alert>
         <maml:para></maml:para>
@@ -21256,8 +21230,8 @@ Original credit to Mike Robbins http://mikefrobbins.com/2018/01/18/use-powershel
     </command:examples>
     <command:relatedLinks>
       <maml:navigationLink>
-        <maml:linkText>Online Version:</maml:linkText>
-        <maml:uri>https://osdcloud.osdeploy.com/</maml:uri>
+        <maml:linkText>https://github.com/OSDeploy/OSD/tree/master/docs</maml:linkText>
+        <maml:uri>https://github.com/OSDeploy/OSD/tree/master/docs</maml:uri>
       </maml:navigationLink>
     </command:relatedLinks>
   </command:command>
@@ -22899,18 +22873,6 @@ Original credit to Mike Robbins http://mikefrobbins.com/2018/01/18/use-powershel
           <dev:defaultValue>None</dev:defaultValue>
         </command:parameter>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="2" aliases="none">
-          <maml:name>OSName</maml:name>
-          <maml:description>
-            <maml:para>Optional. Selects an Operating System to download If this parameter is not used, any Operating Systems can be downloaded 'Windows 11 21H2','Windows 10 21H2','Windows 10 21H1','Windows 10 20H2','Windows 10 2004','Windows 10 1909','Windows 10 1903','Windows 10 1809'</maml:para>
-          </maml:description>
-          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
-          <dev:type>
-            <maml:name>String</maml:name>
-            <maml:uri />
-          </dev:type>
-          <dev:defaultValue>None</dev:defaultValue>
-        </command:parameter>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="3" aliases="none">
           <maml:name>OSLanguage</maml:name>
           <maml:description>
             <maml:para>Optional. Allows the selection of Driver Packs to download If this parameter is not used, any language can be downloaded downloaded</maml:para>
@@ -22922,10 +22884,22 @@ Original credit to Mike Robbins http://mikefrobbins.com/2018/01/18/use-powershel
           </dev:type>
           <dev:defaultValue>None</dev:defaultValue>
         </command:parameter>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="4" aliases="none">
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="3" aliases="none">
           <maml:name>OSLicense</maml:name>
           <maml:description>
-            <maml:para>Optional. Selects the proper OS License If this parameter is not used, Operating Systems with either license can be downloaded 'Retail','Volume'</maml:para>
+            <maml:para>Optional. Selects the proper OS License If this parameter is not used, Operating Systems with the specified License can be downloaded 'Retail','Volume'</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="4" aliases="none">
+          <maml:name>OSName</maml:name>
+          <maml:description>
+            <maml:para>Optional. Selects an Operating System to download If this parameter is not used, any Operating Systems can be downloaded 'Windows 11 21H2','Windows 10 21H2','Windows 10 21H1','Windows 10 20H2','Windows 10 2004','Windows 10 1909','Windows 10 1903','Windows 10 1809'</maml:para>
           </maml:description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -22937,7 +22911,7 @@ Original credit to Mike Robbins http://mikefrobbins.com/2018/01/18/use-powershel
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>PSUpdate</maml:name>
           <maml:description>
-            <maml:para>{{ Fill PSUpdate Description }}</maml:para>
+            <maml:para>Updates the required OSDCloud PowerShell Modules</maml:para>
           </maml:description>
           <dev:type>
             <maml:name>SwitchParameter</maml:name>
@@ -22948,7 +22922,7 @@ Original credit to Mike Robbins http://mikefrobbins.com/2018/01/18/use-powershel
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>OS</maml:name>
           <maml:description>
-            <maml:para>{{ Fill OS Description }}</maml:para>
+            <maml:para>Optional. Allows the selection of an Operating System to add to the USB</maml:para>
           </maml:description>
           <dev:type>
             <maml:name>SwitchParameter</maml:name>
@@ -22974,7 +22948,7 @@ Original credit to Mike Robbins http://mikefrobbins.com/2018/01/18/use-powershel
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
         <maml:name>PSUpdate</maml:name>
         <maml:description>
-          <maml:para>{{ Fill PSUpdate Description }}</maml:para>
+          <maml:para>Updates the required OSDCloud PowerShell Modules</maml:para>
         </maml:description>
         <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
         <dev:type>
@@ -22986,7 +22960,7 @@ Original credit to Mike Robbins http://mikefrobbins.com/2018/01/18/use-powershel
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
         <maml:name>OS</maml:name>
         <maml:description>
-          <maml:para>{{ Fill OS Description }}</maml:para>
+          <maml:para>Optional. Allows the selection of an Operating System to add to the USB</maml:para>
         </maml:description>
         <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
         <dev:type>
@@ -22996,18 +22970,6 @@ Original credit to Mike Robbins http://mikefrobbins.com/2018/01/18/use-powershel
         <dev:defaultValue>False</dev:defaultValue>
       </command:parameter>
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="2" aliases="none">
-        <maml:name>OSName</maml:name>
-        <maml:description>
-          <maml:para>Optional. Selects an Operating System to download If this parameter is not used, any Operating Systems can be downloaded 'Windows 11 21H2','Windows 10 21H2','Windows 10 21H1','Windows 10 20H2','Windows 10 2004','Windows 10 1909','Windows 10 1903','Windows 10 1809'</maml:para>
-        </maml:description>
-        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
-        <dev:type>
-          <maml:name>String</maml:name>
-          <maml:uri />
-        </dev:type>
-        <dev:defaultValue>None</dev:defaultValue>
-      </command:parameter>
-      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="3" aliases="none">
         <maml:name>OSLanguage</maml:name>
         <maml:description>
           <maml:para>Optional. Allows the selection of Driver Packs to download If this parameter is not used, any language can be downloaded downloaded</maml:para>
@@ -23019,10 +22981,22 @@ Original credit to Mike Robbins http://mikefrobbins.com/2018/01/18/use-powershel
         </dev:type>
         <dev:defaultValue>None</dev:defaultValue>
       </command:parameter>
-      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="4" aliases="none">
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="3" aliases="none">
         <maml:name>OSLicense</maml:name>
         <maml:description>
-          <maml:para>Optional. Selects the proper OS License If this parameter is not used, Operating Systems with either license can be downloaded 'Retail','Volume'</maml:para>
+          <maml:para>Optional. Selects the proper OS License If this parameter is not used, Operating Systems with the specified License can be downloaded 'Retail','Volume'</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="4" aliases="none">
+        <maml:name>OSName</maml:name>
+        <maml:description>
+          <maml:para>Optional. Selects an Operating System to download If this parameter is not used, any Operating Systems can be downloaded 'Windows 11 21H2','Windows 10 21H2','Windows 10 21H1','Windows 10 20H2','Windows 10 2004','Windows 10 1909','Windows 10 1903','Windows 10 1809'</maml:para>
         </maml:description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
@@ -23050,8 +23024,8 @@ Original credit to Mike Robbins http://mikefrobbins.com/2018/01/18/use-powershel
     </command:examples>
     <command:relatedLinks>
       <maml:navigationLink>
-        <maml:linkText>https://www.osdcloud.com</maml:linkText>
-        <maml:uri>https://www.osdcloud.com</maml:uri>
+        <maml:linkText>https://github.com/OSDeploy/OSD/tree/master/docs</maml:linkText>
+        <maml:uri>https://github.com/OSDeploy/OSD/tree/master/docs</maml:uri>
       </maml:navigationLink>
     </command:relatedLinks>
   </command:command>

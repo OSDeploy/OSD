@@ -1,19 +1,25 @@
-<#
-.SYNOPSIS
-Creates an .iso file in the OSDCloud Workspace.  ADK is required
-
-.DESCRIPTION
-Creates an .iso file in the OSDCloud Workspace.  ADK is required
-
-.PARAMETER WorkspacePath
-Path to the OSDCloud Workspace containing the Media directory
-
-.LINK
-https://osdcloud.osdeploy.com
-#>
 function New-OSDCloudISO {
+    <#
+    .SYNOPSIS
+    Creates an .iso file in the OSDCloud Workspace.  ADK is required
+
+    .DESCRIPTION
+    Creates an .iso file in the OSDCloud Workspace.  ADK is required
+
+    .EXAMPLE
+    New-OSDCloudISO
+
+    .EXAMPLE
+    New-OSDCloudISO -WorkspacePath C:\OSDCloud
+
+    .LINK
+    https://www.osdcloud.com/setup/osdcloud-iso
+    #>
+
     [CmdletBinding()]
     param (
+        #Path to the OSDCloud Workspace containing the Media directory
+        #This parameter is not necessary if Get-OSDCloudWorkspace can get a return
         [Parameter(Position=0,ValueFromPipelineByPropertyName)]
         [System.String]$WorkspacePath
     )

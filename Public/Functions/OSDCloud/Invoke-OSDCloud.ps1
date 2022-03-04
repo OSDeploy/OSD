@@ -1,4 +1,15 @@
 function Invoke-OSDCloud {
+    <#
+    .SYNOPSIS
+    This is the master OSDCloud Task Sequence
+    
+    .DESCRIPTION
+    This is the master OSDCloud Task Sequence
+    
+    .LINK
+    https://github.com/OSDeploy/OSD/tree/master/docs
+    #>
+
     [CmdletBinding()]
     param ()
     #=================================================

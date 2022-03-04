@@ -1,26 +1,26 @@
 ---
 external help file: OSD-help.xml
 Module Name: OSD
-online version: https://osdcloud.osdeploy.com
+online version: https://www.osdcloud.com/setup/osdcloud-winpe
 schema: 2.0.0
 ---
 
-# Edit-OSDCloudWinpe
+# Edit-OSDCloudWinPE
 
 ## SYNOPSIS
-Edits the boot.wim in an OSDCloudWorkspace
+Edits WinPE in an OSDCloud Workspace
 
 ## SYNTAX
 
 ```
-Edit-OSDCloudWinpe [-Brand <Object>] [-CloudDriver <String[]>] [-DriverHWID <String[]>]
+Edit-OSDCloudWinPE [-Brand <String>] [-CloudDriver <String[]>] [-DriverHWID <String[]>]
  [-DriverPath <String[]>] [-PSModuleCopy <String[]>] [-PSModuleInstall <String[]>] [-Startnet <String>]
  [-StartOSDCloud <String>] [-StartOSDCloudGUI] [-StartOSDPad <String>] [-StartPSCommand <String>]
  [-StartWebScript <String>] [-UpdateUsb] [-Wallpaper <String>] [-WorkspacePath <String>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-Edits the boot.wim in an OSDCloudWorkspace
+Edits WinPE in an OSDCloud Workspace
 
 ## EXAMPLES
 
@@ -34,10 +34,10 @@ PS C:\> {{ Add example code here }}
 ## PARAMETERS
 
 ### -Brand
-Sets the Brand for OSDCloudGUI
+Sets the custom Brand for OSDCloudGUI
 
 ```yaml
-Type: Object
+Type: String
 Parameter Sets: (All)
 Aliases:
 
@@ -49,7 +49,7 @@ Accept wildcard characters: False
 ```
 
 ### -CloudDriver
-Download and install in WinPE drivers from Dell,HP,IntelNet,LenovoDock,Nutanix,USB,VMware,WiFi
+WinPE Driver: Download and install in WinPE drivers from Dell,HP,IntelNet,LenovoDock,Nutanix,USB,VMware,WiFi
 
 ```yaml
 Type: String[]
@@ -64,7 +64,7 @@ Accept wildcard characters: False
 ```
 
 ### -DriverHWID
-HardwareID of the Driver to add to WinPE
+WinPE Driver: HardwareID of the Driver to add to WinPE
 
 ```yaml
 Type: String[]
@@ -79,7 +79,7 @@ Accept wildcard characters: False
 ```
 
 ### -DriverPath
-Path to additional Drivers you want to install
+WinPE Driver: Path to additional Drivers you want to install
 
 ```yaml
 Type: String[]
@@ -94,7 +94,7 @@ Accept wildcard characters: False
 ```
 
 ### -PSModuleCopy
-Copies named PowerShell Modules to WinPE
+Copies named PowerShell Modules from the running OS to WinPE
 
 ```yaml
 Type: String[]
@@ -124,7 +124,7 @@ Accept wildcard characters: False
 ```
 
 ### -Startnet
-{{ Fill Startnet Description }}
+WinPE Startup: Modifies Startnet.cmd to execute the specified string
 
 ```yaml
 Type: String
@@ -139,7 +139,7 @@ Accept wildcard characters: False
 ```
 
 ### -StartOSDCloud
-{{ Fill StartOSDCloud Description }}
+WinPE Startup: Modifies Startnet.cmd to execute Start-OSDCloud with the specified string
 
 ```yaml
 Type: String
@@ -154,7 +154,7 @@ Accept wildcard characters: False
 ```
 
 ### -StartOSDCloudGUI
-{{ Fill StartOSDCloudGUI Description }}
+WinPE Startup: Modifies Startnet.cmd to execute Start-OSDCloudGUI
 
 ```yaml
 Type: SwitchParameter
@@ -169,7 +169,7 @@ Accept wildcard characters: False
 ```
 
 ### -StartOSDPad
-{{ Fill StartOSDPad Description }}
+WinPE Startup: Modifies Startnet.cmd to execute Start-OSDPad with the specified string
 
 ```yaml
 Type: String
@@ -184,7 +184,7 @@ Accept wildcard characters: False
 ```
 
 ### -StartPSCommand
-{{ Fill StartPSCommand Description }}
+WinPE Startup: Modifies Startnet.cmd to execute the specified string before OSDCloud
 
 ```yaml
 Type: String
@@ -199,7 +199,7 @@ Accept wildcard characters: False
 ```
 
 ### -StartWebScript
-{{ Fill StartWebScript Description }}
+WinPE Startup: Modifies Startnet.cmd to execute the specified string before OSDCloud
 
 ```yaml
 Type: String
@@ -214,7 +214,7 @@ Accept wildcard characters: False
 ```
 
 ### -UpdateUsb
-{{ Fill UpdateUsb Description }}
+After WinPE has been updated, the contents of the OSDCloud Workspace will be updated on any OSDCloud USB Drives
 
 ```yaml
 Type: SwitchParameter
@@ -229,7 +229,7 @@ Accept wildcard characters: False
 ```
 
 ### -Wallpaper
-{{ Fill Wallpaper Description }}
+Sets the specified Wallpaper JPG file as the WinPE Background
 
 ```yaml
 Type: String
@@ -270,5 +270,5 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## RELATED LINKS
 
-[https://osdcloud.osdeploy.com](https://osdcloud.osdeploy.com)
+[https://www.osdcloud.com/setup/osdcloud-winpe](https://www.osdcloud.com/setup/osdcloud-winpe)
 

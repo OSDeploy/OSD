@@ -1,14 +1,14 @@
 ---
 external help file: OSD-help.xml
 Module Name: OSD
-online version: https://osdcloud.osdeploy.com/
+online version: https://github.com/OSDeploy/OSD/tree/master/docs
 schema: 2.0.0
 ---
 
 # Start-OSDCloudGUI
 
 ## SYNOPSIS
-{{ Fill in the Synopsis }}
+OSDCloud imaging using the command line
 
 ## SYNTAX
 
@@ -17,12 +17,12 @@ Start-OSDCloudGUI [[-Brand] <String>] [[-Color] <String>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-{{ Fill in the Description }}
+OSDCloud imaging using the command line
 
 ## EXAMPLES
 
 ### Example 1
-```
+```powershell
 PS C:\> {{ Add example code here }}
 ```
 
@@ -31,7 +31,7 @@ PS C:\> {{ Add example code here }}
 ## PARAMETERS
 
 ### -Brand
-{{ Fill Brand Description }}
+The custom Brand for OSDCloudGUI
 
 ```yaml
 Type: String
@@ -39,14 +39,14 @@ Parameter Sets: (All)
 Aliases: BrandingTitle
 
 Required: False
-Position: 0
-Default value: None
+Position: 1
+Default value: OSDCloud
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
 ### -Color
-{{ Fill Color Description }}
+Color for the OSDCloudGUI Brand
 
 ```yaml
 Type: String
@@ -54,8 +54,8 @@ Parameter Sets: (All)
 Aliases: BrandingColor
 
 Required: False
-Position: 1
-Default value: None
+Position: 2
+Default value: #01786A
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
@@ -65,10 +65,11 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## INPUTS
 
-### None
 ## OUTPUTS
 
-### System.Object
 ## NOTES
 
 ## RELATED LINKS
+
+[https://github.com/OSDeploy/OSD/tree/master/docs](https://github.com/OSDeploy/OSD/tree/master/docs)
+

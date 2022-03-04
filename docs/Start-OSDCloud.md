@@ -1,7 +1,7 @@
 ---
 external help file: OSD-help.xml
 Module Name: OSD
-online version: https://osdcloud.osdeploy.com/
+online version: https://github.com/OSDeploy/OSD/tree/master/docs
 schema: 2.0.0
 ---
 
@@ -229,7 +229,8 @@ Accept wildcard characters: False
 ```
 
 ### -OSLicense
-{{ Fill OSLicense Description }}
+License of the Windows Operating System
+Retail or Volume
 
 ```yaml
 Type: String
@@ -244,7 +245,7 @@ Accept wildcard characters: False
 ```
 
 ### -FindImageFile
-ParameterSet CustomImage
+Searches for the specified WIM file
 
 ```yaml
 Type: SwitchParameter
@@ -259,7 +260,7 @@ Accept wildcard characters: False
 ```
 
 ### -ImageFileUrl
-ParameterSet CustomImage
+Downloads a WIM file specified by the URK
 
 ```yaml
 Type: String
@@ -274,7 +275,7 @@ Accept wildcard characters: False
 ```
 
 ### -ImageIndex
-ParameterSet CustomImage
+Images using the specified Image Index
 
 ```yaml
 Type: Int32
@@ -299,5 +300,5 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## RELATED LINKS
 
-[https://osdcloud.osdeploy.com/](https://osdcloud.osdeploy.com/)
+[https://github.com/OSDeploy/OSD/tree/master/docs](https://github.com/OSDeploy/OSD/tree/master/docs)
 

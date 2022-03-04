@@ -1,32 +1,42 @@
-<#
-.SYNOPSIS
-Creates an OSDCloud USB Drive and updates WinPE
-Clear, Initialize, Partition (WinPE and OSDCloud), and Format a USB Disk
-Requires Admin Rights
-
-.DESCRIPTION
-Creates an OSDCloud USB Drive and updates WinPE
-Clear, Initialize, Partition (WinPE and OSDCloud), and Format a USB Disk
-Requires Admin Rights
-
-.PARAMETER WorkspacePath
-Path to the OSDCloud Workspace containing the Media directory
-
-.EXAMPLE
-New-OSDCloudUSB -WorkspacePath C:\OSDCloud
-
-.LINK
-https://osdcloud.osdeploy.com
-#>
 function New-OSDCloudUSB {
+    <#
+    .SYNOPSIS
+    Creates an OSDCloud USB Drive and copies the contents of the OSDCloud Workspace Media directory
+    Clear, Initialize, Partition (WinPE and OSDCloud), and Format a USB Disk
+    Requires Admin Rights
+
+    .DESCRIPTION
+    Creates an OSDCloud USB Drive and copies the contents of the OSDCloud Workspace Media directory
+    Clear, Initialize, Partition (WinPE and OSDCloud), and Format a USB Disk
+    Requires Admin Rights
+
+    .EXAMPLE
+    New-OSDCloudUSB -WorkspacePath C:\OSDCloud
+
+    .EXAMPLE
+    New-OSDCloudUSB -fromIsoFile D:\osdcloud.iso
+
+    .EXAMPLE
+    New-OSDCloudUSB -fromIsoUrl https://contoso.blob.core.windows.net/public/osdcloud.iso
+
+    .LINK
+    https://www.osdcloud.com/setup/osdcloud-usb
+    #>
+
     [CmdletBinding(DefaultParameterSetName='Workspace')]
     param (
+        #Path to the OSDCloud Workspace containing the Media directory
+        #This parameter is not necessary if Get-OSDCloudWorkspace can get a return
         [Parameter(ParameterSetName='Workspace',ValueFromPipelineByPropertyName)]
         [System.String]$WorkspacePath,
         
+        #Path to an OSDCloud ISO
+        #This file will be mounted and the contents will be copied to the OSDCloud USB
         [Parameter(ParameterSetName='fromIsoFile',Mandatory)]
         [System.IO.FileInfo]$fromIsoFile,
         
+        #Path to an OSDCloud ISO saved on the internet
+        #This file will be downloaded and mounted and the contents will be copied to the OSDCloud USB
         [Parameter(ParameterSetName='fromIsoUrl',Mandatory)]
         [System.String]$fromIsoUrl
     )

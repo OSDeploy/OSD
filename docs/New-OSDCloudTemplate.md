@@ -1,7 +1,7 @@
 ---
 external help file: OSD-help.xml
 Module Name: OSD
-online version: https://osdcloud.osdeploy.com
+online version: https://www.osdcloud.com/setup/osdcloud-template
 schema: 2.0.0
 ---
 
@@ -22,12 +22,15 @@ Creates an OSDCloud Template in $env:ProgramData\OSDCloud
 
 ## EXAMPLES
 
-### Example 1
-```powershell
-PS C:\> {{ Add example code here }}
+### EXAMPLE 1
+```
+New-OSDCloudTemplate
 ```
 
-{{ Add example description here }}
+### EXAMPLE 2
+```
+New-OSDCloudTemplate -WinRE
+```
 
 ## PARAMETERS
 
@@ -102,5 +105,5 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## RELATED LINKS
 
-[https://osdcloud.osdeploy.com](https://osdcloud.osdeploy.com)
+[https://www.osdcloud.com/setup/osdcloud-template](https://www.osdcloud.com/setup/osdcloud-template)
 

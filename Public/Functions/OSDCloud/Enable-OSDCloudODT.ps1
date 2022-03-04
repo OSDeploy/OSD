@@ -1,16 +1,15 @@
-<#
-.SYNOPSIS
-Enables ODT Support in an OSDCloud Workspace
-
-.DESCRIPTION
-Enables ODT Support in an OSDCloud Workspace
-
-.LINK
-https://osdcloud.osdeploy.com
-
-.NOTES
-#>
 function Enable-OSDCloudODT {
+    <#
+    .SYNOPSIS
+    Enables ODT Support in an OSDCloud Workspace
+
+    .DESCRIPTION
+    Enables ODT Support in an OSDCloud Workspace
+
+    .LINK
+    https://github.com/OSDeploy/OSD/tree/master/docs
+    #>
+    
     [CmdletBinding()]
     param ()
     #=================================================

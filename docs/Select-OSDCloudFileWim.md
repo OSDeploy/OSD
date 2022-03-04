@@ -1,7 +1,7 @@
 ---
 external help file: OSD-help.xml
 Module Name: OSD
-online version: https://osdcloud.osdeploy.com
+online version: https://github.com/OSDeploy/OSD/tree/master/docs
 schema: 2.0.0
 ---
 
@@ -41,5 +41,5 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## RELATED LINKS
 
-[https://osdcloud.osdeploy.com](https://osdcloud.osdeploy.com)
+[https://github.com/OSDeploy/OSD/tree/master/docs](https://github.com/OSDeploy/OSD/tree/master/docs)
 

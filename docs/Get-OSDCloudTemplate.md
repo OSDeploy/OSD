@@ -1,14 +1,15 @@
 ---
 external help file: OSD-help.xml
 Module Name: OSD
-online version: https://osd.osdeploy.com/module/functions/general/get-osdclass
+online version: https://github.com/OSDeploy/OSD/tree/master/docs
 schema: 2.0.0
 ---
 
 # Get-OSDCloudTemplate
 
 ## SYNOPSIS
-{{ Fill in the Synopsis }}
+Returns the path to the OSDCloud Template. 
+This is typically $env:ProgramData\OSDCloud
 
 ## SYNTAX
 
@@ -17,12 +18,13 @@ Get-OSDCloudTemplate [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-{{ Fill in the Description }}
+Returns the path to the OSDCloud Template. 
+This is typically $env:ProgramData\OSDCloud
 
 ## EXAMPLES
 
 ### Example 1
-```
+```powershell
 PS C:\> {{ Add example code here }}
 ```
 
@@ -35,10 +37,11 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## INPUTS
 
-### None
 ## OUTPUTS
 
-### System.Object
 ## NOTES
 
 ## RELATED LINKS
+
+[https://github.com/OSDeploy/OSD/tree/master/docs](https://github.com/OSDeploy/OSD/tree/master/docs)
+

@@ -6,10 +6,7 @@ Selects Autopilot Profiles
 Selects Autopilot Profiles
 
 .LINK
-https://osdcloud.osdeploy.com
-
-.NOTES
-21.3.12  Initial Release
+https://github.com/OSDeploy/OSD/tree/master/docs
 #>
 function Select-OSDCloudAutopilotJsonItem {
     [CmdletBinding()]

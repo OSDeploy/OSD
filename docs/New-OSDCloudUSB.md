@@ -1,14 +1,14 @@
 ---
 external help file: OSD-help.xml
 Module Name: OSD
-online version: https://osdcloud.osdeploy.com
+online version: https://www.osdcloud.com/setup/osdcloud-usb
 schema: 2.0.0
 ---
 
 # New-OSDCloudUSB
 
 ## SYNOPSIS
-Creates an OSDCloud USB Drive and updates WinPE
+Creates an OSDCloud USB Drive and copies the contents of the OSDCloud Workspace Media directory
 Clear, Initialize, Partition (WinPE and OSDCloud), and Format a USB Disk
 Requires Admin Rights
 
@@ -30,7 +30,7 @@ New-OSDCloudUSB -fromIsoUrl <String> [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-Creates an OSDCloud USB Drive and updates WinPE
+Creates an OSDCloud USB Drive and copies the contents of the OSDCloud Workspace Media directory
 Clear, Initialize, Partition (WinPE and OSDCloud), and Format a USB Disk
 Requires Admin Rights
 
@@ -41,10 +41,21 @@ Requires Admin Rights
 New-OSDCloudUSB -WorkspacePath C:\OSDCloud
 ```
 
+### EXAMPLE 2
+```
+New-OSDCloudUSB -fromIsoFile D:\osdcloud.iso
+```
+
+### EXAMPLE 3
+```
+New-OSDCloudUSB -fromIsoUrl https://contoso.blob.core.windows.net/public/osdcloud.iso
+```
+
 ## PARAMETERS
 
 ### -WorkspacePath
 Path to the OSDCloud Workspace containing the Media directory
+This parameter is not necessary if Get-OSDCloudWorkspace can get a return
 
 ```yaml
 Type: String
@@ -59,7 +70,8 @@ Accept wildcard characters: False
 ```
 
 ### -fromIsoFile
-{{ Fill fromIsoFile Description }}
+Path to an OSDCloud ISO
+This file will be mounted and the contents will be copied to the OSDCloud USB
 
 ```yaml
 Type: FileInfo
@@ -74,7 +86,8 @@ Accept wildcard characters: False
 ```
 
 ### -fromIsoUrl
-{{ Fill fromIsoUrl Description }}
+Path to an OSDCloud ISO saved on the internet
+This file will be downloaded and mounted and the contents will be copied to the OSDCloud USB
 
 ```yaml
 Type: String
@@ -99,5 +112,5 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## RELATED LINKS
 
-[https://osdcloud.osdeploy.com](https://osdcloud.osdeploy.com)
+[https://www.osdcloud.com/setup/osdcloud-usb](https://www.osdcloud.com/setup/osdcloud-usb)
 

@@ -88,7 +88,7 @@ New-Alias -Name Select-USBVolume -Value Select-Volume.usb -Force -ErrorAction Si
 New-Alias -Name Update-OSDWindowsImage -Value Update-MyWindowsImage -Force -ErrorAction SilentlyContinue
 New-Alias -Name Update-WindowsImageOSD -Value Update-MyWindowsImage -Force -ErrorAction SilentlyContinue
 
-New-Alias -Name Edit-OSDCloud.winpe -Value Edit-OSDCloudWinpe -Force -ErrorAction SilentlyContinue
+New-Alias -Name Edit-OSDCloud.winpe -Value Edit-OSDCloudWinPE -Force -ErrorAction SilentlyContinue
 New-Alias -Name Get-OSDCloud.template -Value Get-OSDCloudTemplate -Force -ErrorAction SilentlyContinue
 New-Alias -Name Get-OSDCloud.workspace -Value Get-OSDCloudWorkspace -Force -ErrorAction SilentlyContinue
 New-Alias -Name New-OSDCloud.iso -Value New-OSDCloudISO -Force -ErrorAction SilentlyContinue

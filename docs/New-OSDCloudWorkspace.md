@@ -1,7 +1,7 @@
 ---
 external help file: OSD-help.xml
 Module Name: OSD
-online version: https://osdcloud.osdeploy.com
+online version: https://www.osdcloud.com/setup/osdcloud-workspace
 schema: 2.0.0
 ---
 
@@ -33,7 +33,7 @@ New-OSDCloudWorkspace [[-WorkspacePath] <String>] -fromIsoFile <FileInfo> [<Comm
 ```
 
 ## DESCRIPTION
-Creates or updates an OSDCloud Workspace from an OSDCloud Template
+Creates or updates an OSDCloud Workspace
 
 ## EXAMPLES
 
@@ -63,7 +63,8 @@ Accept wildcard characters: False
 ```
 
 ### -fromIsoFile
-{{ Fill fromIsoFile Description }}
+Path to an OSDCloud ISO
+This file will be mounted and the contents will be copied to the OSDCloud Workspace
 
 ```yaml
 Type: FileInfo
@@ -78,7 +79,8 @@ Accept wildcard characters: False
 ```
 
 ### -fromIsoUrl
-{{ Fill fromIsoUrl Description }}
+Path to an OSDCloud ISO saved on the internet
+This file will be downloaded and mounted and the contents will be copied to the OSDCloud Workspace
 
 ```yaml
 Type: String
@@ -93,7 +95,8 @@ Accept wildcard characters: False
 ```
 
 ### -fromUsbDrive
-{{ Fill fromUsbDrive Description }}
+Searches for an OSDCloud USB
+The OSDCloud USB contents will be copied to the OSDCloud Workspace
 
 ```yaml
 Type: SwitchParameter
@@ -118,5 +121,5 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## RELATED LINKS
 
-[https://osdcloud.osdeploy.com](https://osdcloud.osdeploy.com)
+[https://www.osdcloud.com/setup/osdcloud-workspace](https://www.osdcloud.com/setup/osdcloud-workspace)
 

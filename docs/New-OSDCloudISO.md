@@ -1,7 +1,7 @@
 ---
 external help file: OSD-help.xml
 Module Name: OSD
-online version: https://osdcloud.osdeploy.com
+online version: https://www.osdcloud.com/setup/osdcloud-iso
 schema: 2.0.0
 ---
 
@@ -23,17 +23,21 @@ ADK is required
 
 ## EXAMPLES
 
-### Example 1
-```powershell
-PS C:\> {{ Add example code here }}
+### EXAMPLE 1
+```
+New-OSDCloudISO
 ```
 
-{{ Add example description here }}
+### EXAMPLE 2
+```
+New-OSDCloudISO -WorkspacePath C:\OSDCloud
+```
 
 ## PARAMETERS
 
 ### -WorkspacePath
 Path to the OSDCloud Workspace containing the Media directory
+This parameter is not necessary if Get-OSDCloudWorkspace can get a return
 
 ```yaml
 Type: String
@@ -58,5 +62,5 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## RELATED LINKS
 
-[https://osdcloud.osdeploy.com](https://osdcloud.osdeploy.com)
+[https://www.osdcloud.com/setup/osdcloud-iso](https://www.osdcloud.com/setup/osdcloud-iso)
 

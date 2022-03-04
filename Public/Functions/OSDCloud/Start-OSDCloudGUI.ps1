@@ -1,10 +1,24 @@
 function Start-OSDCloudGUI {
+    <#
+    .SYNOPSIS
+    OSDCloud imaging using the command line
+
+    .DESCRIPTION
+    OSDCloud imaging using the command line
+
+    .LINK
+    https://github.com/OSDeploy/OSD/tree/master/docs
+    #>
+
     [CmdletBinding()]
     param (
+        #The custom Brand for OSDCloudGUI
         [Alias('BrandingTitle')]
-        [string]$Brand = 'OSDCloud',
+        [System.String]$Brand = 'OSDCloud',
+        
+        #Color for the OSDCloudGUI Brand
         [Alias('BrandingColor')]
-        [string]$Color = '#01786A'
+        [System.String]$Color = '#01786A'
     )
     #================================================
     #   Header

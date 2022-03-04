@@ -1,33 +1,38 @@
-<#
-.SYNOPSIS
-Creates or updates an OSDCloud Workspace
-
-.DESCRIPTION
-Creates or updates an OSDCloud Workspace from an OSDCloud Template
-
-.PARAMETER WorkspacePath
-Directory for the OSDCloud Workspace to create or update.  Default is $env:SystemDrive\OSDCloud
-
-.LINK
-https://osdcloud.osdeploy.com
-#>
 function New-OSDCloudWorkspace {
+    <#
+    .SYNOPSIS
+    Creates or updates an OSDCloud Workspace
+
+    .DESCRIPTION
+    Creates or updates an OSDCloud Workspace
+
+    .LINK
+    https://www.osdcloud.com/setup/osdcloud-workspace
+    #>
+    
     [CmdletBinding(DefaultParameterSetName='fromTemplate')]
     param (
+        #Directory for the OSDCloud Workspace to create or update.  Default is $env:SystemDrive\OSDCloud
         [Parameter(ParameterSetName='fromTemplate',Position=0,ValueFromPipelineByPropertyName)]
         [Parameter(ParameterSetName='fromIsoFile',Position=0,ValueFromPipelineByPropertyName)]
         [Parameter(ParameterSetName='fromIsoUrl',Position=0,ValueFromPipelineByPropertyName)]
         [Parameter(ParameterSetName='fromUsbDrive',Position=0,ValueFromPipelineByPropertyName)]
         [System.String]$WorkspacePath = "$env:SystemDrive\OSDCloud",
         
+        #Path to an OSDCloud ISO
+        #This file will be mounted and the contents will be copied to the OSDCloud Workspace
         [Parameter(ParameterSetName='fromIsoFile',Mandatory)]
         [System.IO.FileInfo]$fromIsoFile,
         
+        #Path to an OSDCloud ISO saved on the internet
+        #This file will be downloaded and mounted and the contents will be copied to the OSDCloud Workspace
         [Parameter(ParameterSetName='fromIsoUrl',Mandatory)]
         [System.String]$fromIsoUrl,
         
+        #Searches for an OSDCloud USB
+        #The OSDCloud USB contents will be copied to the OSDCloud Workspace
         [Parameter(ParameterSetName='fromUsbDrive',Mandatory)]
-        [switch]$fromUsbDrive
+        [System.Management.Automation.SwitchParameter]$fromUsbDrive
     )
     #=================================================
     #	Blocks

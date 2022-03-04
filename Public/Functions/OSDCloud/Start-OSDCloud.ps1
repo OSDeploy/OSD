@@ -1,94 +1,65 @@
-<#
-.SYNOPSIS
-Starts the OSDCloud Windows 10 or 11 Build Process from the OSD Module or a GitHub Repository
-
-.DESCRIPTION
-Starts the OSDCloud Windows 10 or 11 Build Process from the OSD Module or a GitHub Repository
-
-.PARAMETER Manufacturer
-Automatically populated from Get-MyComputerManufacturer -Brief
-Overrides the System Manufacturer for Driver matching
-
-.PARAMETER Product
-Automatically populated from Get-MyComputerProduct
-Overrides the System Product for Driver matching
-
-.PARAMETER Firmware
-$Global:StartOSDCloud.ApplyCatalogFirmware = $true
-
-.PARAMETER Restart
-Restart the computer after Invoke-OSDCloud to OOBE
-
-.PARAMETER Shutdown
-Shutdown the computer after Invoke-OSDCloud
-
-.PARAMETER Screenshot
-Captures screenshots during OSDCloud WinPE
-
-.PARAMETER SkipAutopilot
-Skips the Autopilot Task routine
-
-.PARAMETER SkipODT
-Skips the ODT Task routine
-
-.PARAMETER ZTI
-Skip prompting to wipe Disks
-
-.PARAMETER OSBuild
-ParameterSet Default
-Operating System Build of the Windows installation
-Alias = Build
-
-.PARAMETER OSEdition
-ParameterSet Default
-Operating System Edition of the Windows installation
-Alias = Edition
-
-.PARAMETER OSLanguage
-ParameterSet Default
-Operating System Language of the Windows installation
-Alias = Culture, OSCulture
-
-.PARAMETER OSLicense
-
-.PARAMETER FindImageFile
-ParameterSet CustomImage
-
-.PARAMETER ImageFileUrl
-ParameterSet CustomImage
-
-.PARAMETER ImageIndex
-ParameterSet CustomImage
-
-.LINK
-https://osdcloud.osdeploy.com/
-
-.NOTES
-#>
 function Start-OSDCloud {
+    <#
+    .SYNOPSIS
+    Starts the OSDCloud Windows 10 or 11 Build Process from the OSD Module or a GitHub Repository
+
+    .DESCRIPTION
+    Starts the OSDCloud Windows 10 or 11 Build Process from the OSD Module or a GitHub Repository
+
+    .LINK
+    https://github.com/OSDeploy/OSD/tree/master/docs
+    #>
+
     [CmdletBinding(DefaultParameterSetName = 'Default')]
     param (
-        [string]$Manufacturer = (Get-MyComputerManufacturer -Brief),
-        [string]$Product = (Get-MyComputerProduct),
+        #Automatically populated from Get-MyComputerManufacturer -Brief
+        #Overrides the System Manufacturer for Driver matching
+        [System.String]$Manufacturer = (Get-MyComputerManufacturer -Brief),
+        
+        #Automatically populated from Get-MyComputerProduct
+        #Overrides the System Product for Driver matching
+        [System.String]$Product = (Get-MyComputerProduct),
 
+        #$Global:StartOSDCloud.ApplyCatalogFirmware = $true
         [System.Management.Automation.SwitchParameter]$Firmware,
+
+        #Restart the computer after Invoke-OSDCloud to OOBE
         [System.Management.Automation.SwitchParameter]$Restart,
+
+        #Shutdown the computer after Invoke-OSDCloud
         [System.Management.Automation.SwitchParameter]$Shutdown,
+        
+        #Captures screenshots during OSDCloud WinPE
         [System.Management.Automation.SwitchParameter]$Screenshot,
+        
+        #Skips the Autopilot Task routine
         [System.Management.Automation.SwitchParameter]$SkipAutopilot,
+        
+        #Skips the ODT Task routine
         [System.Management.Automation.SwitchParameter]$SkipODT,
+        
+        #Skip prompting to wipe Disks
         [System.Management.Automation.SwitchParameter]$ZTI,
 
+        #ParameterSet Default
+        #Operating System Build of the Windows installation
+        #Alias = Build
         [Parameter(ParameterSetName = 'Default')]
         [ValidateSet('21H2','21H1','20H2','2004','1909','1903','1809')]
         [Alias('Build')]
-        [string]$OSBuild,
+        [System.String]$OSBuild,
 
+        #ParameterSet Default
+        #Operating System Edition of the Windows installation
+        #Alias = Edition
         [Parameter(ParameterSetName = 'Default')]
         [ValidateSet('Home','Home N','Home Single Language','Education','Education N','Enterprise','Enterprise N','Pro','Pro N')]
         [Alias('Edition')]
-        [string]$OSEdition,
+        [System.String]$OSEdition,
 
+        #ParameterSet Default
+        #Operating System Language of the Windows installation
+        #Alias = Culture, OSCulture
         [Parameter(ParameterSetName = 'Default')]
         [ValidateSet (
             'ar-sa','bg-bg','cs-cz','da-dk','de-de','el-gr',
@@ -100,17 +71,22 @@ function Start-OSDCloud {
             'uk-ua','zh-cn','zh-tw'
         )]
         [Alias('Culture','OSCulture')]
-        [string]$OSLanguage,
+        [System.String]$OSLanguage,
 
+        #License of the Windows Operating System
+        #Retail or Volume
         [ValidateSet('Retail','Volume')]
-        [string]$OSLicense,
+        [System.String]$OSLicense,
 
+        #Searches for the specified WIM file
         [Parameter(ParameterSetName = 'CustomImage')]
         [System.Management.Automation.SwitchParameter]$FindImageFile,
 
+        #Downloads a WIM file specified by the URK
         [Parameter(ParameterSetName = 'CustomImage')]
-        [string]$ImageFileUrl,
+        [System.String]$ImageFileUrl,
 
+        #Images using the specified Image Index
         [Parameter(ParameterSetName = 'CustomImage')]
         [int32]$ImageIndex = 1
     )

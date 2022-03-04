@@ -1,49 +1,30 @@
-<#
-.SYNOPSIS
-    Updates an OSDCloud USB by downloading OS and Driver Packs from the internet
-
-.DESCRIPTION
-    Updates an OSDCloud USB by downloading OS and Driver Packs from the internet
-
-.PARAMETER DriverPack
-    Optional. Select one or more of the following Driver Packs to download
-    '*','ThisPC','Dell','HP','Lenovo','Microsoft'
-
-.PARAMETER OSName
-    Optional. Selects an Operating System to download
-    If this parameter is not used, any Operating Systems can be downloaded
-    'Windows 11 21H2','Windows 10 21H2','Windows 10 21H1','Windows 10 20H2','Windows 10 2004','Windows 10 1909','Windows 10 1903','Windows 10 1809'
-
-.PARAMETER OSLicense
-    Optional. Selects the proper OS License
-    If this parameter is not used, Operating Systems with either license can be downloaded
-    'Retail','Volume'
-
-.PARAMETER OSLanguage
-    Optional. Allows the selection of Driver Packs to download
-    If this parameter is not used, any language can be downloaded downloaded
-
-.LINK
-https://www.osdcloud.com
-#>
 function Update-OSDCloudUSB {
+    <#
+    .SYNOPSIS
+    Updates an OSDCloud USB by downloading OS and Driver Packs from the internet
+
+    .DESCRIPTION
+    Updates an OSDCloud USB by downloading OS and Driver Packs from the internet
+
+    .LINK
+    https://github.com/OSDeploy/OSD/tree/master/docs
+    #>
+
     [CmdletBinding()]
     param (
+        #Optional. Select one or more of the following Driver Packs to download
+        #'*','ThisPC','Dell','HP','Lenovo','Microsoft'
         [ValidateSet('*','ThisPC','Dell','HP','Lenovo','Microsoft')]
         [System.String[]]$DriverPack,
 
+        #Updates the required OSDCloud PowerShell Modules
         [System.Management.Automation.SwitchParameter]$PSUpdate,
 
+        #Optional. Allows the selection of an Operating System to add to the USB
         [System.Management.Automation.SwitchParameter]$OS,
 
-        [ValidateSet(
-            'Windows 11 21H2',
-            'Windows 10 21H2','Windows 10 21H1','Windows 10 20H2','Windows 10 2004',
-            'Windows 10 1909','Windows 10 1903',
-            'Windows 10 1809'
-            )]
-        [System.String]$OSName,
-
+        #Optional. Allows the selection of Driver Packs to download
+        #If this parameter is not used, any language can be downloaded downloaded
         [ValidateSet (
             'ar-sa','bg-bg','cs-cz','da-dk','de-de','el-gr',
             'en-gb','en-us','es-es','es-mx','et-ee','fi-fi',
@@ -55,8 +36,22 @@ function Update-OSDCloudUSB {
         )]
         [System.String]$OSLanguage,
 
+        #Optional. Selects the proper OS License
+        #If this parameter is not used, Operating Systems with the specified License can be downloaded
+        #'Retail','Volume'
         [ValidateSet('Retail','Volume')]
-        [System.String]$OSLicense
+        [System.String]$OSLicense,
+
+        #Optional. Selects an Operating System to download
+        #If this parameter is not used, any Operating Systems can be downloaded
+        #'Windows 11 21H2','Windows 10 21H2','Windows 10 21H1','Windows 10 20H2','Windows 10 2004','Windows 10 1909','Windows 10 1903','Windows 10 1809'
+        [ValidateSet(
+            'Windows 11 21H2',
+            'Windows 10 21H2','Windows 10 21H1','Windows 10 20H2','Windows 10 2004',
+            'Windows 10 1909','Windows 10 1903',
+            'Windows 10 1809'
+            )]
+        [System.String]$OSName
     )
     #=================================================
     #	Block
