@@ -2,7 +2,7 @@ Import-Module -Name OSD -Force
 #=================================================
 #   DellDriverPackCatalog
 #=================================================
-$null = Get-DellDriverPackMasterCatalog -Verbose
+$null = Get-OSDMasterCatalogDellDriverPack -Verbose
 $Source = Join-Path $env:TEMP (Join-Path 'OSD' 'DellDriverPackMasterCatalog.xml')
 $Destination = Join-Path (Get-Module OSD).ModuleBase "Catalogs\MASTER\DellDriverPackMasterCatalog.xml"
 if (Test-Path $Source) {
@@ -11,7 +11,7 @@ if (Test-Path $Source) {
 #=================================================
 #   DellSystemCatalog
 #=================================================
-$null = Get-DellSystemMasterCatalog -Verbose
+$null = Get-OSDMasterCatalogDellSystem -Verbose
 $Source = Join-Path $env:TEMP (Join-Path 'OSD' 'DellSystemMasterCatalog.xml')
 $Destination = Join-Path (Get-Module OSD).ModuleBase "Catalogs\MASTER\DellSystemMasterCatalog.xml"
 if (Test-Path $Source) {
@@ -20,7 +20,7 @@ if (Test-Path $Source) {
 #=================================================
 #   HPPlatformListCatalog
 #=================================================
-$null = Get-HPPlatformListMasterCatalog -Verbose
+$null = Get-OSDMasterCatalogHPPlatformList -Verbose
 $Source = Join-Path $env:TEMP (Join-Path 'OSD' 'HPPlatformListMasterCatalog.xml')
 $Destination = Join-Path (Get-Module OSD).ModuleBase "Catalogs\MASTER\HPPlatformListMasterCatalog.xml"
 if (Test-Path $Source) {
@@ -29,7 +29,7 @@ if (Test-Path $Source) {
 #=================================================
 #   HPSystemCatalog
 #=================================================
-$null = Get-HPSystemMasterCatalog -Verbose
+$null = Get-OSDMasterCatalogHPSystem -Verbose
 $Source = Join-Path $env:TEMP (Join-Path 'OSD' 'HPSystemMasterCatalog.xml')
 $Destination = Join-Path (Get-Module OSD).ModuleBase "Catalogs\MASTER\HPSystemMasterCatalog.xml"
 if (Test-Path $Source) {
@@ -38,7 +38,7 @@ if (Test-Path $Source) {
 #=================================================
 #   HPDriverPackCatalog
 #=================================================
-$null = Get-HPDriverPackMasterCatalog -Verbose
+$null = Get-OSDMasterCatalogHPDriverPack -Verbose
 $Source = Join-Path $env:TEMP (Join-Path 'OSD' 'HPDriverPackMasterCatalog.xml')
 $Destination = Join-Path (Get-Module OSD).ModuleBase "Catalogs\MASTER\HPDriverPackMasterCatalog.xml"
 if (Test-Path $Source) {
@@ -47,7 +47,7 @@ if (Test-Path $Source) {
 #=================================================
 #   LenovoBiosCatalog
 #=================================================
-$null = Get-LenovoBiosMasterCatalog -Verbose
+$null = Get-OSDMasterCatalogLenovoBios -Verbose
 $Source = Join-Path $env:TEMP (Join-Path 'OSD' 'LenovoBiosMasterCatalog.xml')
 $Destination = Join-Path (Get-Module OSD).ModuleBase "Catalogs\MASTER\LenovoBiosMasterCatalog.xml"
 if (Test-Path $Source) {
@@ -56,7 +56,7 @@ if (Test-Path $Source) {
 #=================================================
 #   LenovoDriverPackCatalog
 #=================================================
-$null = Get-LenovoDriverPackMasterCatalog -Verbose
+$null = Get-OSDMasterCatalogLenovoDriverPack -Verbose
 $Source = Join-Path $env:TEMP (Join-Path 'OSD' 'LenovoDriverPackMasterCatalog.xml')
 $Destination = Join-Path (Get-Module OSD).ModuleBase "Catalogs\MASTER\LenovoDriverPackMasterCatalog.xml"
 if (Test-Path $Source) {
@@ -65,7 +65,7 @@ if (Test-Path $Source) {
 #=================================================
 #   MicrosoftDriverPackCatalog
 #=================================================
-$null = Get-MicrosoftDriverPackMasterCatalog -Verbose -UseCatalog Cloud
+$null = Get-OSDMasterCatalogMicrosoftDriverPack -Verbose -UseCatalog Cloud
 $Source = Join-Path $env:TEMP (Join-Path 'OSD' 'MicrosoftDriverPackMasterCatalog.json')
 $Destination = Join-Path (Get-Module OSD).ModuleBase "Catalogs\MASTER\MicrosoftDriverPackMasterCatalog.json"
 if (Test-Path $Source) {
@@ -74,7 +74,7 @@ if (Test-Path $Source) {
 #=================================================
 #   IntelDisplayDriverMasterCatalog
 #=================================================
-$null = Get-IntelDisplayDriverMasterCatalog -Verbose
+$null = Get-OSDMasterCatalogIntelDisplayDriver -Verbose
 $Source = Join-Path $env:TEMP 'IntelDisplayDriverMasterCatalog.json'
 $Destination = Join-Path (Get-Module OSD).ModuleBase "Catalogs\MASTER\IntelDisplayDriverMasterCatalog.json"
 if (Test-Path $Source) {
@@ -83,7 +83,7 @@ if (Test-Path $Source) {
 #=================================================
 #   IntelRadeonDisplayDriverMasterCatalog
 #=================================================
-$null = Get-IntelRadeonDisplayDriverMasterCatalog -Verbose
+$null = Get-OSDMasterCatalogIntelRadeonDisplayDriver -Verbose
 $Source = Join-Path $env:TEMP 'IntelRadeonDisplayDriverMasterCatalog.json'
 $Destination = Join-Path (Get-Module OSD).ModuleBase "Catalogs\MASTER\IntelRadeonDisplayDriverMasterCatalog.json"
 if (Test-Path $Source) {
@@ -92,7 +92,7 @@ if (Test-Path $Source) {
 #=================================================
 #   IntelWirelessDriverMasterCatalog
 #=================================================
-$null = Get-IntelWirelessDriverMasterCatalog -Verbose
+$null = Get-OSDMasterCatalogIntelWirelessDriver -Verbose
 $Source = Join-Path $env:TEMP 'IntelWirelessDriverMasterCatalog.json'
 $Destination = Join-Path (Get-Module OSD).ModuleBase "Catalogs\MASTER\IntelWirelessDriverMasterCatalog.json"
 if (Test-Path $Source) {
