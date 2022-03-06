@@ -23,7 +23,7 @@ function Get-OSDMasterCatalogIntelWirelessDriver {
     #=================================================
     #   Import Base Catalog
     #=================================================
-    $BaseCatalog = Get-Content -Path "$($MyInvocation.MyCommand.Module.ModuleBase)\Catalogs\MASTER\IntelWirelessDriverMasterCatalog.json" -Raw | ConvertFrom-Json
+    $BaseCatalog = Get-Content -Path "$($MyInvocation.MyCommand.Module.ModuleBase)\Catalogs\MASTER\OSDMasterCatalogIntelWirelessDriver.json" -Raw | ConvertFrom-Json
     #=================================================
     #   Online
     #=================================================
@@ -242,7 +242,7 @@ function Get-OSDMasterCatalogIntelWirelessDriver {
     #   Sort-Object
     #=================================================
     $DriverResults = $DriverResults | Sort-Object -Property LastUpdate -Descending
-    $DriverResults | ConvertTo-Json | Out-File "$env:TEMP\IntelWirelessDriverMasterCatalog.json"
+    $DriverResults | ConvertTo-Json | Out-File "$env:TEMP\OSDMasterCatalogIntelWirelessDriver.json"
     #=================================================
     #   Filter
     #=================================================

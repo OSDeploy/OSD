@@ -126,7 +126,6 @@ function Get-OSDWinPE {
         $GetPSDrive = Get-PSDrive -PSProvider 'FileSystem'
 
         foreach ($Item in $GetScripts) {
-            $OSDGetScripts = @()
             foreach ($PSDrive in $GetPSDrive) {
                 $ScriptFullName = @("$($PSDrive.Root)$Item","$($PSDrive.Root)Content\Scripts\$Item")
 

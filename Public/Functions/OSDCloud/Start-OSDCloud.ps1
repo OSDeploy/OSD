@@ -14,50 +14,64 @@ function Start-OSDCloud {
     param (
         #Automatically populated from Get-MyComputerManufacturer -Brief
         #Overrides the System Manufacturer for Driver matching
-        [System.String]$Manufacturer = (Get-MyComputerManufacturer -Brief),
+        [System.String]
+        $Manufacturer = (Get-MyComputerManufacturer -Brief),
         
         #Automatically populated from Get-MyComputerProduct
         #Overrides the System Product for Driver matching
-        [System.String]$Product = (Get-MyComputerProduct),
+        [System.String]
+        $Product = (Get-MyComputerProduct),
 
         #$Global:StartOSDCloud.ApplyCatalogFirmware = $true
-        [System.Management.Automation.SwitchParameter]$Firmware,
+        [System.Management.Automation.SwitchParameter]
+        $Firmware,
 
         #Restart the computer after Invoke-OSDCloud to OOBE
-        [System.Management.Automation.SwitchParameter]$Restart,
+        [System.Management.Automation.SwitchParameter]
+        $Restart,
 
         #Shutdown the computer after Invoke-OSDCloud
-        [System.Management.Automation.SwitchParameter]$Shutdown,
+        [System.Management.Automation.SwitchParameter]
+        $Shutdown,
         
         #Captures screenshots during OSDCloud WinPE
-        [System.Management.Automation.SwitchParameter]$Screenshot,
+        [System.Management.Automation.SwitchParameter]
+        $Screenshot,
         
         #Skips the Autopilot Task routine
-        [System.Management.Automation.SwitchParameter]$SkipAutopilot,
+        [System.Management.Automation.SwitchParameter]
+        $SkipAutopilot,
         
         #Skips the ODT Task routine
-        [System.Management.Automation.SwitchParameter]$SkipODT,
+        [System.Management.Automation.SwitchParameter]
+        $SkipODT,
         
         #Skip prompting to wipe Disks
-        [System.Management.Automation.SwitchParameter]$ZTI,
+        [System.Management.Automation.SwitchParameter]
+        $ZTI,
 
-        #ParameterSet Default
+        #Operating System Version of the Windows installation
+        [Parameter(ParameterSetName = 'Default')]
+        [ValidateSet('Windows 11','Windows 10')]
+        [System.String]
+        $OSVersion,
+
         #Operating System Build of the Windows installation
         #Alias = Build
         [Parameter(ParameterSetName = 'Default')]
         [ValidateSet('21H2','21H1','20H2','2004','1909','1903','1809')]
         [Alias('Build')]
-        [System.String]$OSBuild,
+        [System.String]
+        $OSBuild,
 
-        #ParameterSet Default
         #Operating System Edition of the Windows installation
         #Alias = Edition
         [Parameter(ParameterSetName = 'Default')]
         [ValidateSet('Home','Home N','Home Single Language','Education','Education N','Enterprise','Enterprise N','Pro','Pro N')]
         [Alias('Edition')]
-        [System.String]$OSEdition,
+        [System.String]
+        $OSEdition,
 
-        #ParameterSet Default
         #Operating System Language of the Windows installation
         #Alias = Culture, OSCulture
         [Parameter(ParameterSetName = 'Default')]
@@ -71,24 +85,29 @@ function Start-OSDCloud {
             'uk-ua','zh-cn','zh-tw'
         )]
         [Alias('Culture','OSCulture')]
-        [System.String]$OSLanguage,
+        [System.String]
+        $OSLanguage,
 
         #License of the Windows Operating System
-        #Retail or Volume
+        [Parameter(ParameterSetName = 'Default')]
         [ValidateSet('Retail','Volume')]
-        [System.String]$OSLicense,
+        [System.String]
+        $OSLicense,
 
         #Searches for the specified WIM file
         [Parameter(ParameterSetName = 'CustomImage')]
-        [System.Management.Automation.SwitchParameter]$FindImageFile,
+        [System.Management.Automation.SwitchParameter]
+        $FindImageFile,
 
         #Downloads a WIM file specified by the URK
         [Parameter(ParameterSetName = 'CustomImage')]
-        [System.String]$ImageFileUrl,
+        [System.String]
+        $ImageFileUrl,
 
         #Images using the specified Image Index
         [Parameter(ParameterSetName = 'CustomImage')]
-        [int32]$ImageIndex = 1
+        [int32]
+        $ImageIndex = 1
     )
     #=================================================
     #	$Global:StartOSDCloud
@@ -137,7 +156,9 @@ function Start-OSDCloud {
         OSLanguageMenu = $null
         OSLanguageNames = $null
         OSLicense = $OSLicense
-        OSVersion = 'Windows 10'
+        OSVersion = $OSVersion
+        OSVersionMenu = $null
+        OSVersionNames = @('Windows 11','Windows 10')
         Product = $Product
         Restart = $Restart
         Screenshot = $Screenshot
@@ -177,13 +198,16 @@ function Start-OSDCloud {
         Start-ScreenPNGProcess -Directory $Global:StartOSDCloud.Screenshot
     }
     #=================================================
-    #   Header
+    #	Computer Information
     #=================================================
     Write-Host -ForegroundColor DarkGray "========================================================================="
-    Write-Host -ForegroundColor Green "Start-OSDCloud"
-    Write-Host -ForegroundColor DarkGray "========================================================================="
-    Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) $($Global:StartOSDCloud.Function)" -NoNewline
-    Write-Host -ForegroundColor Cyan " | Manufacturer: $Manufacturer | Product: $Product"
+    Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) $($Global:StartOSDCloud.Function) | Manufacturer: $Manufacturer | Product: $Product"
+    #=================================================
+    #	Battery
+    #=================================================
+    if ($Global:StartOSDCloud.IsOnBattery) {
+        Write-Warning "Computer is currently running on Battery"
+    }
     #=================================================
     #	-ZTI
     #=================================================
@@ -213,20 +237,14 @@ function Start-OSDCloud {
         }
     }
     #=================================================
-    #	Battery
-    #=================================================
-    if ($Global:StartOSDCloud.IsOnBattery) {
-        Write-Warning "This computer is currently running on Battery"
-    }
-    #=================================================
     #	Test Web Connection
     #=================================================
     Write-Host -ForegroundColor DarkGray "========================================================================="
-    Write-Host -ForegroundColor Cyan "Test-WebConnection"
-    Write-Host -ForegroundColor DarkGray "google.com"
+    Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Test-WebConnection" -NoNewline
+    #Write-Host -ForegroundColor DarkGray "google.com"
 
     if (Test-WebConnection -Uri "google.com") {
-        Write-Host -ForegroundColor Green "OK"
+        Write-Host -ForegroundColor Green " OK"
     }
     else {
         Write-Host -ForegroundColor Red " FAILED"
@@ -273,28 +291,57 @@ function Start-OSDCloud {
     #	ParameterSet Default
     #=================================================
     elseif ($PSCmdlet.ParameterSetName -eq 'Default') {
-
-        if ($Global:StartOSDCloud.OSVersion -eq 'Windows 11') {
-            $OSVersion = 'Windows 11'
+        #=================================================
+        #	OSVersion
+        #=================================================
+        if ($Global:StartOSDCloud.OSVersion) {
+        }
+        elseif ($Global:StartOSDCloud.ZTI) {
+            $Global:StartOSDCloud.OSVersion = 'Windows 10'
         }
         else {
-            $OSVersion = 'Windows 10'
+            Write-Host -ForegroundColor DarkGray "========================================================================="
+            Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Select an Operating System"
+            $Global:StartOSDCloud.OSVersionNames = @('Windows 11','Windows 10')
+            
+            $i = $null
+            $Global:StartOSDCloud.OSVersionMenu = foreach ($Item in $Global:StartOSDCloud.OSVersionNames) {
+                $i++
+            
+                $ObjectProperties = @{
+                    Selection   = $i
+                    Name     = $Item
+                }
+                New-Object -TypeName PSObject -Property $ObjectProperties
+            }
+            
+            $Global:StartOSDCloud.OSVersionMenu | Select-Object -Property Selection, Name | Format-Table | Out-Host
+            
+            do {
+                $SelectReadHost = Read-Host -Prompt "Enter the Selection Number"
+            }
+            until (((($SelectReadHost -ge 0) -and ($SelectReadHost -in $Global:StartOSDCloud.OSVersionMenu.Selection))))
+            
+            $Global:StartOSDCloud.OSVersion = $Global:StartOSDCloud.OSVersionMenu | Where-Object {$_.Selection -eq $SelectReadHost} | Select-Object -ExpandProperty Name
+        }
+        $OSVersion = $Global:StartOSDCloud.OSVersion
+        #=================================================
+        #	Defaults
+        #=================================================
+        if ($Global:StartOSDCloud.OSVersion -eq 'Windows 11') {
+            $Global:StartOSDCloud.OSBuild = '21H2'
         }
         #=================================================
         #	OSBuild
         #=================================================
-        Write-Host -ForegroundColor DarkGray "========================================================================="
-        Write-Host -ForegroundColor Cyan "$OSVersion OSBuild " -NoNewline
-        
         if ($Global:StartOSDCloud.OSBuild) {
-            Write-Host -ForegroundColor Green $Global:StartOSDCloud.OSBuild
         }
         elseif ($Global:StartOSDCloud.ZTI) {
-            $Global:StartOSDCloud.OSBuild = '21H1'
-            Write-Host -ForegroundColor Green $Global:StartOSDCloud.OSBuild
+            $Global:StartOSDCloud.OSBuild = '21H2'
         }
         else {
-            Write-Host -ForegroundColor Cyan "Menu"
+            Write-Host -ForegroundColor DarkGray "========================================================================="
+            Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Select a Build for $OSVersion"
             $Global:StartOSDCloud.OSBuildNames = @('21H2','21H1','20H2','2004','1909','1903','1809')
             
             $i = $null
@@ -311,29 +358,24 @@ function Start-OSDCloud {
             $Global:StartOSDCloud.OSBuildMenu | Select-Object -Property Selection, Name | Format-Table | Out-Host
             
             do {
-                $SelectReadHost = Read-Host -Prompt "Enter a Selection for the Windows OSBuild"
+                $SelectReadHost = Read-Host -Prompt "Enter the Selection Number"
             }
             until (((($SelectReadHost -ge 0) -and ($SelectReadHost -in $Global:StartOSDCloud.OSBuildMenu.Selection))))
             
             $Global:StartOSDCloud.OSBuild = $Global:StartOSDCloud.OSBuildMenu | Where-Object {$_.Selection -eq $SelectReadHost} | Select-Object -ExpandProperty Name
-            Write-Host -ForegroundColor Cyan "OSBuild: " -NoNewline
-            Write-Host -ForegroundColor Green $Global:StartOSDCloud.OSBuild
         }
+        $OSBuild = $Global:StartOSDCloud.OSBuild
         #=================================================
         #	OSEdition
         #=================================================
-        Write-Host -ForegroundColor DarkGray "========================================================================="
-        Write-Host -ForegroundColor Cyan "$OSVersion OSEdition " -NoNewline
-
         if ($Global:StartOSDCloud.OSEdition) {
-            Write-Host -ForegroundColor Green $Global:StartOSDCloud.OSEdition
         }
         elseif ($ZTI) {
             $Global:StartOSDCloud.OSEdition = 'Enterprise'
-            Write-Host -ForegroundColor Green $Global:StartOSDCloud.OSEdition
         }
         else {
-            Write-Host -ForegroundColor Cyan "Menu"
+            Write-Host -ForegroundColor DarkGray "========================================================================="
+            Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Select an Edition for $OSVersion $OSBuild"
             $Global:StartOSDCloud.OSEditionNames = @('Home','Home N','Home Single Language','Education','Education N','Enterprise','Enterprise N','Pro','Pro N')
 
             $i = $null
@@ -350,13 +392,11 @@ function Start-OSDCloud {
             $Global:StartOSDCloud.OSEditionMenu | Select-Object -Property Selection, Name | Format-Table | Out-Host
             
             do {
-                $SelectReadHost = Read-Host -Prompt "Enter a Selection for the Windows OSEdition"
+                $SelectReadHost = Read-Host -Prompt "Enter the Selection Number"
             }
             until (((($SelectReadHost -ge 0) -and ($SelectReadHost -in $Global:StartOSDCloud.OSEditionMenu.Selection))))
             
             $Global:StartOSDCloud.OSEdition = $Global:StartOSDCloud.OSEditionMenu | Where-Object {$_.Selection -eq $SelectReadHost} | Select-Object -ExpandProperty Name
-            Write-Host -ForegroundColor Cyan "OSEdition: " -NoNewline
-            Write-Host -ForegroundColor Green $Global:StartOSDCloud.OSEdition
         }
         #=================================================
         #	OSEditionId and OSLicense
@@ -386,21 +426,18 @@ function Start-OSDCloud {
             $Global:StartOSDCloud.OSLicense = 'Volume'
             $Global:StartOSDCloud.OSImageIndex = 7
         }
+        $OSEdition = $Global:StartOSDCloud.OSEdition
         #=================================================
         #	OSLicense
         #=================================================
-        Write-Host -ForegroundColor DarkGray "========================================================================="
-        Write-Host -ForegroundColor Cyan "$OSVersion OSLicense " -NoNewline
-
         if ($Global:StartOSDCloud.OSLicense) {
-            Write-Host -ForegroundColor Green $Global:StartOSDCloud.OSLicense
         }
         elseif ($Global:StartOSDCloud.ZTI) {
             $Global:StartOSDCloud.OSLicense = 'Volume'
-            Write-Host -ForegroundColor Green $Global:StartOSDCloud.OSLicense
         }
         else {
-            Write-Host -ForegroundColor Cyan "Menu"
+            Write-Host -ForegroundColor DarkGray "========================================================================="
+            Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Select a License for $OSVersion $OSBuild $OSEdition"
             $Global:StartOSDCloud.OSLicenseNames = @('Retail Windows Consumer Editions','Volume Windows Business Editions')
             
             $i = $null
@@ -417,7 +454,7 @@ function Start-OSDCloud {
             $Global:StartOSDCloud.OSLicenseMenu | Select-Object -Property Selection, Name | Format-Table | Out-Host
             
             do {
-                $SelectReadHost = Read-Host -Prompt "Enter a Selection for the Windows License"
+                $SelectReadHost = Read-Host -Prompt "Enter the Selection Number"
             }
             until (((($SelectReadHost -ge 0) -and ($SelectReadHost -in $Global:StartOSDCloud.OSLicenseMenu.Selection))))
             
@@ -459,21 +496,16 @@ function Start-OSDCloud {
         #=================================================
         #	OSLanguage
         #=================================================
-        Write-Host -ForegroundColor DarkGray "========================================================================="
-        Write-Host -ForegroundColor Cyan "$OSVersion OSLanguage " -NoNewline
-        
         if ($Global:StartOSDCloud.OSLanguage) {
-            Write-Host -ForegroundColor Green $Global:StartOSDCloud.OSLanguage
         }
         elseif ($PSBoundParameters.ContainsKey('OSLanguage')) {
-            Write-Host -ForegroundColor Green $Global:StartOSDCloud.OSLanguage
         }
         elseif ($ZTI) {
             $Global:StartOSDCloud.OSLanguage = 'en-us'
-            Write-Host -ForegroundColor Green $Global:StartOSDCloud.OSLanguage
         }
         else {
-            Write-Host -ForegroundColor Cyan "Menu"
+            Write-Host -ForegroundColor DarkGray "========================================================================="
+            Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Select a Language for $OSVersion $OSBuild $OSEdition"
             $Global:StartOSDCloud.OSLanguageNames = @('ar-sa','bg-bg','cs-cz','da-dk','de-de','el-gr','en-gb','en-us','es-es','es-mx','et-ee','fi-fi','fr-ca','fr-fr','he-il','hr-hr','hu-hu','it-it','ja-jp','ko-kr','lt-lt','lv-lv','nb-no','nl-nl','pl-pl','pt-br','pt-pt','ro-ro','ru-ru','sk-sk','sl-si','sr-latn-rs','sv-se','th-th','tr-tr','uk-ua','zh-cn','zh-tw')
             
             $i = $null
@@ -490,14 +522,13 @@ function Start-OSDCloud {
             $Global:StartOSDCloud.OSLanguageMenu | Select-Object -Property Selection, Name | Format-Table | Out-Host
             
             do {
-                $SelectReadHost = Read-Host -Prompt "Enter a Selection for the Windows OSLanguage"
+                $SelectReadHost = Read-Host -Prompt "Enter the Selection number"
             }
             until (((($SelectReadHost -ge 0) -and ($SelectReadHost -in $Global:StartOSDCloud.OSLanguageMenu.Selection))))
             
             $Global:StartOSDCloud.OSLanguage = $Global:StartOSDCloud.OSLanguageMenu | Where-Object {$_.Selection -eq $SelectReadHost} | Select-Object -ExpandProperty Name
-            Write-Host -ForegroundColor Cyan "OSLanguage: " -NoNewline
-            Write-Host -ForegroundColor Green $Global:StartOSDCloud.OSLanguage
         }
+        $OSLanguage = $Global:StartOSDCloud.OSLanguage
         #=================================================
         #	Get-FeatureUpdate
         #   This is where we take the OSB OSE OSL information and get the

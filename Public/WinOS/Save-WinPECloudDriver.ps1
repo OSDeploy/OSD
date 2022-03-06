@@ -33,7 +33,6 @@ function Save-WinPECloudDriver {
                                         )
 
     $NutanixCloudDriverText         = 'Nutanix WinPE Driver Pack [Microsoft Catalog]'
-    $NutanixCloudDriverUrl          = 'https://github.com/OSDeploy/OSDCloud/raw/main/Drivers/WinPE/Nutanix.cab'
     $NutanixCloudDriverHwids         = @(
                                         'VEN_1AF4&DEV_1000 and VEN_1AF4&DEV_1041' #Red Hat Nutanix VirtIO Ethernet Adapter
                                         'VEN_1AF4&DEV_1002' #Red Hat Nutanix VirtIO Balloon
@@ -51,7 +50,6 @@ function Save-WinPECloudDriver {
                                         )
     
     $VmwareCloudDriverText          = 'VMware WinPE Driver Pack [Microsoft Catalog]'
-    $VmwareCloudDriverUrl           = 'https://github.com/OSDeploy/OSDCloud/raw/main/Drivers/WinPE/VMware.cab'
     $VmwareCloudDriverHwids         = @(
                                         'VEN_15AD&DEV_0740' #VMware Virtual Machine Communication Interface
                                         'VEN_15AD&DEV_07B0' #VMware VMXNET3 Ethernet Controller

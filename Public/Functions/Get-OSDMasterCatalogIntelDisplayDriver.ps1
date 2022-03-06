@@ -23,7 +23,7 @@ function Get-OSDMasterCatalogIntelDisplayDriver {
     #=================================================
     #   Import Base Catalog
     #=================================================
-    $BaseCatalog = Get-Content -Path "$($MyInvocation.MyCommand.Module.ModuleBase)\Catalogs\MASTER\IntelDisplayDriverMasterCatalog.json" -Raw | ConvertFrom-Json
+    $BaseCatalog = Get-Content -Path "$($MyInvocation.MyCommand.Module.ModuleBase)\Catalogs\MASTER\OSDMasterCatalogIntelDisplayDriver.json" -Raw | ConvertFrom-Json
     #=================================================
     #   Filter
     #=================================================
@@ -58,8 +58,6 @@ function Get-OSDMasterCatalogIntelDisplayDriver {
             $DriverInfoHTML = $DriverInfoWebRequest.ParsedHtml.childNodes | Where-Object {$_.nodename -eq 'HTML'} 
             $DriverInfoHEAD = $DriverInfoHTML.childNodes | Where-Object {$_.nodename -eq 'HEAD'}
             $DriverInfoMETA = $DriverInfoHEAD.childNodes | Where-Object {$_.nodename -like "meta*"} | Select-Object -Property Name, Content
-            $OSCompatibility = $DriverInfoMETA | Where-Object {$_.name -eq 'DownloadOSes'} | Select-Object -ExpandProperty Content
-            #Write-Verbose "     $OSCompatibility"
             #=================================================
             #   Driver Filter
             #=================================================
@@ -248,7 +246,7 @@ function Get-OSDMasterCatalogIntelDisplayDriver {
     #   Sort-Object
     #=================================================
     $DriverResults = $DriverResults | Sort-Object -Property LastUpdate -Descending
-    $DriverResults | ConvertTo-Json | Out-File "$env:TEMP\IntelDisplayDriverMasterCatalog.json"
+    $DriverResults | ConvertTo-Json | Out-File "$env:TEMP\OSDMasterCatalogIntelDisplayDriver.json"
     #=================================================
     #   Return
     #=================================================

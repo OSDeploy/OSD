@@ -62,7 +62,7 @@ function New-OSDCloudISO {
     #=================================================
     #   Create ISO
     #=================================================
-    $NewADKiso = New-ADK.iso -MediaPath "$WorkspacePath\Media" -isoFileName $isoFileName -isoLabel $isoLabel
+    $NewADKiso = New-AdkISO -MediaPath "$WorkspacePath\Media" -isoFileName $isoFileName -isoLabel $isoLabel
     #=================================================
     #   Complete
     #=================================================

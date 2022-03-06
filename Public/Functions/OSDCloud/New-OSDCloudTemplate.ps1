@@ -196,7 +196,7 @@ Windows Registry Editor Version 5.00
     #   Test WinRE
     #=================================================
     if ($PSBoundParameters.ContainsKey('WinRE')) {
-        if ((Get-PartitionWinRE).OperationalStatus -ne 'Online') {
+        if ((Get-WinREPartition).OperationalStatus -ne 'Online') {
             Write-Host -ForegroundColor DarkGray "========================================================================="
             Write-Warning "You can't use WinRE because of some issue.  Sorry!"
             Write-Host -ForegroundColor DarkGray "========================================================================="
@@ -268,12 +268,12 @@ Windows Registry Editor Version 5.00
     }
     if ($PSBoundParameters.ContainsKey('WinRE')) {
         Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Copying WinRE.wim"
-        Write-Host -ForegroundColor Yellow "OSD Function: Copy-WinRE.wim"
+        Write-Host -ForegroundColor Yellow "OSD Function: Copy-WinREWIM"
 
         $BootWim = Join-Path $DestinationSources 'winre.wim'
         Write-Host -ForegroundColor DarkGray "Destination: $BootWim"
 
-        Copy-WinRE.wim -DestinationDirectory $DestinationSources -DestinationFileName 'winre.wim' -ErrorAction Stop | Out-Null
+        Copy-WinREWIM -DestinationDirectory $DestinationSources -DestinationFileName 'winre.wim' -ErrorAction Stop | Out-Null
     }
     else {
         Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Copying ADK WinPE.wim"

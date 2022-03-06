@@ -49,8 +49,8 @@ function Get-OSDMasterCatalogDellSystem {
     $UseCatalog				= 'Cloud'
     $CloudCatalogUri		= 'http://downloads.dell.com/catalog/CatalogPC.cab'
     $RawCatalogFile			= Join-Path $env:TEMP (Join-Path 'OSD' 'CatalogPC.xml')
-    $BuildCatalogFile		= Join-Path $env:TEMP (Join-Path 'OSD' 'DellSystemMasterCatalog.xml')
-    $OfflineCatalogFile		= "$($MyInvocation.MyCommand.Module.ModuleBase)\Catalogs\MASTER\DellSystemMasterCatalog.xml"
+    $BuildCatalogFile		= Join-Path $env:TEMP (Join-Path 'OSD' 'OSDMasterCatalogDellSystem.xml')
+    $OfflineCatalogFile		= "$($MyInvocation.MyCommand.Module.ModuleBase)\Catalogs\MASTER\OSDMasterCatalogDellSystem.xml"
 
     $RawCatalogCabName  	= [string]($CloudCatalogUri | Split-Path -Leaf)
     $RawCatalogCabPath 		= Join-Path $env:TEMP (Join-Path 'OSD' $RawCatalogCabName)

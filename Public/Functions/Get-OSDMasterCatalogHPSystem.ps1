@@ -51,8 +51,8 @@ function Get-OSDMasterCatalogHPSystem {
     $CloudCatalogUri        = 'https://hpia.hpcloud.hp.com/downloads/sccmcatalog/HpCatalogForSms.latest.cab'
     $RawCatalogFileName     = 'HpCatalogForSms.xml'
     $RawCatalogFile			= Join-Path $env:TEMP (Join-Path 'OSD' 'HpCatalogForSms.xml')
-    $BuildCatalogFile		= Join-Path $env:TEMP (Join-Path 'OSD' 'HPSystemMasterCatalog.xml')
-    $OfflineCatalogFile     = "$($MyInvocation.MyCommand.Module.ModuleBase)\Catalogs\MASTER\HPSystemMasterCatalog.xml"
+    $BuildCatalogFile		= Join-Path $env:TEMP (Join-Path 'OSD' 'OSDMasterCatalogHPSystem.xml')
+    $OfflineCatalogFile     = "$($MyInvocation.MyCommand.Module.ModuleBase)\Catalogs\MASTER\OSDMasterCatalogHPSystem.xml"
 
     $RawCatalogCabName  	= [string]($CloudCatalogUri | Split-Path -Leaf)
     $RawCatalogCabPath 		= Join-Path $env:TEMP (Join-Path 'OSD' $RawCatalogCabName)

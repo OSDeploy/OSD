@@ -12,7 +12,7 @@ https://osd.osdeploy.com/module/functions/adk
 21.3.15.2   Renamed to make it easier to understand what it does
 21.3.10     Initial Release
 #>
-function Get-ADKpaths {
+function Get-AdkPaths {
     [CmdletBinding()]
     param (
         [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
