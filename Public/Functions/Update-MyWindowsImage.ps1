@@ -89,7 +89,7 @@ function Update-MyWindowsImage {
             #=================================================
             #   Get-WSUSXML and Filter Results
             #=================================================
-            $global:GetWSUSXML = Get-WSUSXML -Catalog Windows | Sort-Object UpdateGroup -Descending
+            $global:GetWSUSXML = Get-WSUSXML -Catalog Windows -Silent | Sort-Object UpdateGroup -Descending
 
             if ($global:GetRegCurrentVersion.ReleaseId -gt 0) {
                 $global:GetWSUSXML = $global:GetWSUSXML | Where-Object {$_.UpdateBuild -eq $global:GetRegCurrentVersion.DisplayVersion}

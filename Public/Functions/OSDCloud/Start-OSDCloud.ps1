@@ -341,7 +341,7 @@ function Start-OSDCloud {
         }
         else {
             Write-Host -ForegroundColor DarkGray "========================================================================="
-            Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Select a Build for $OSVersion"
+            Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Select a Build for $OSVersion x64"
             $Global:StartOSDCloud.OSBuildNames = @('21H2','21H1','20H2','2004','1909','1903','1809')
             
             $i = $null
@@ -375,7 +375,7 @@ function Start-OSDCloud {
         }
         else {
             Write-Host -ForegroundColor DarkGray "========================================================================="
-            Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Select an Edition for $OSVersion $OSBuild"
+            Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Select an Edition for $OSVersion x64 $OSBuild"
             $Global:StartOSDCloud.OSEditionNames = @('Home','Home N','Home Single Language','Education','Education N','Enterprise','Enterprise N','Pro','Pro N')
 
             $i = $null
@@ -437,7 +437,7 @@ function Start-OSDCloud {
         }
         else {
             Write-Host -ForegroundColor DarkGray "========================================================================="
-            Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Select a License for $OSVersion $OSBuild $OSEdition"
+            Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Select a License for $OSVersion x64 $OSBuild $OSEdition"
             $Global:StartOSDCloud.OSLicenseNames = @('Retail Windows Consumer Editions','Volume Windows Business Editions')
             
             $i = $null
@@ -466,8 +466,8 @@ function Start-OSDCloud {
             else {
                 $Global:StartOSDCloud.OSLicense = 'Volume'
             }
-            Write-Host -ForegroundColor Cyan "OSLicense: " -NoNewline
-            Write-Host -ForegroundColor Green $Global:StartOSDCloud.OSLicense
+            #Write-Host -ForegroundColor Cyan "OSLicense: " -NoNewline
+            #Write-Host -ForegroundColor Green $Global:StartOSDCloud.OSLicense
         }
         if ($Global:StartOSDCloud.OSEdition -eq 'Education') {
             $Global:StartOSDCloud.OSEditionId = 'Education'
@@ -489,6 +489,7 @@ function Start-OSDCloud {
             if ($Global:StartOSDCloud.OSLicense -eq 'Retail') {$Global:StartOSDCloud.OSImageIndex = 10}
             if ($Global:StartOSDCloud.OSLicense -eq 'Volume') {$Global:StartOSDCloud.OSImageIndex = 9}
         }
+        $OSLicense = $Global:StartOSDCloud.OSLicense
         Write-Host -ForegroundColor Cyan "OSEditionId: " -NoNewline
         Write-Host -ForegroundColor Green $Global:StartOSDCloud.OSEditionId
         Write-Host -ForegroundColor Cyan "OSImageIndex: " -NoNewline
@@ -505,7 +506,7 @@ function Start-OSDCloud {
         }
         else {
             Write-Host -ForegroundColor DarkGray "========================================================================="
-            Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Select a Language for $OSVersion $OSBuild $OSEdition"
+            Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Select a Language for $OSVersion x64 $OSBuild $OSEdition $OSLicense"
             $Global:StartOSDCloud.OSLanguageNames = @('ar-sa','bg-bg','cs-cz','da-dk','de-de','el-gr','en-gb','en-us','es-es','es-mx','et-ee','fi-fi','fr-ca','fr-fr','he-il','hr-hr','hu-hu','it-it','ja-jp','ko-kr','lt-lt','lv-lv','nb-no','nl-nl','pl-pl','pt-br','pt-pt','ro-ro','ru-ru','sk-sk','sl-si','sr-latn-rs','sv-se','th-th','tr-tr','uk-ua','zh-cn','zh-tw')
             
             $i = $null
@@ -535,15 +536,16 @@ function Start-OSDCloud {
         #   Feature Update.  Global Variables will be set for Deploy-OSDCloud
         #=================================================
         Write-Host -ForegroundColor DarkGray "========================================================================="
-        Write-Host -ForegroundColor Cyan "Get-FeatureUpdate"
-        if ($Global:StartOSDCloud.OSVersion -eq 'Windows 11') {
-            Write-Host -ForegroundColor DarkGray "Windows 11 x64 | OSLicense: $($Global:StartOSDCloud.OSLicense) | OSBuild: $($Global:StartOSDCloud.OSBuild) | OSLanguage: $($Global:StartOSDCloud.OSLanguage)"
-            $Global:StartOSDCloud.GetFeatureUpdate = Get-FeatureUpdate -OSVersion 'Windows 11' -OSLicense $Global:StartOSDCloud.OSLicense -OSBuild $Global:StartOSDCloud.OSBuild -OSLanguage $Global:StartOSDCloud.OSLanguage
+        Write-Host -ForegroundColor Cyan "Get-FeatureUpdate " -NoNewline
+        Write-Host -ForegroundColor DarkGray "-OSVersion '$OSVersion' -OSBuild $OSBuild -OSLicense $OSLicense -OSLanguage $OSLanguage"
+
+        $Params = @{
+            OSVersion   = $OSVersion
+            OSBuild     = $OSBuild
+            OSLicense   = $OSLicense
+            OSLanguage  = $OSLanguage
         }
-        else {
-            Write-Host -ForegroundColor DarkGray "Windows 10 x64 | OSLicense: $($Global:StartOSDCloud.OSLicense) | OSBuild: $($Global:StartOSDCloud.OSBuild) | OSLanguage: $($Global:StartOSDCloud.OSLanguage)"
-            $Global:StartOSDCloud.GetFeatureUpdate = Get-FeatureUpdate -OSLicense $Global:StartOSDCloud.OSLicense -OSBuild $Global:StartOSDCloud.OSBuild -OSLanguage $Global:StartOSDCloud.OSLanguage
-        }
+        $Global:StartOSDCloud.GetFeatureUpdate = Get-FeatureUpdate @Params
 
         if ($Global:StartOSDCloud.GetFeatureUpdate) {
             $Global:StartOSDCloud.GetFeatureUpdate = $Global:StartOSDCloud.GetFeatureUpdate | Select-Object -Property CreationDate,KBNumber,Title,UpdateOS,UpdateBuild,UpdateArch,FileName, @{Name='SizeMB';Expression={[int]($_.Size /1024/1024)}},FileUri,Hash,AdditionalHash
@@ -564,16 +566,18 @@ function Start-OSDCloud {
         $Global:StartOSDCloud.ImageFileItem = $Global:StartOSDCloud.ImageFileItem | Where-Object {$_.FullName -notlike "C*"} | Where-Object {$_.FullName -notlike "X*"} | Select-Object -First 1
 
         if ($Global:StartOSDCloud.ImageFileItem) {
-            Write-Host -ForegroundColor Green "OK"
+            #Write-Host -ForegroundColor Green "OK"
             Write-Host -ForegroundColor DarkGray $Global:StartOSDCloud.GetFeatureUpdate.Title
             Write-Host -ForegroundColor DarkGray $Global:StartOSDCloud.ImageFileItem.FullName
         }
         elseif (Test-WebConnection -Uri $Global:StartOSDCloud.GetFeatureUpdate.FileUri) {
-            Write-Host -ForegroundColor Yellow "Download"
+            #Write-Host -ForegroundColor Yellow "Download"
             Write-Host -ForegroundColor Yellow $Global:StartOSDCloud.GetFeatureUpdate.Title
             Write-Host -ForegroundColor Yellow $Global:StartOSDCloud.GetFeatureUpdate.FileUri
         }
         else {
+            Write-Warning $Global:StartOSDCloud.GetFeatureUpdate.Title
+            Write-Warning $Global:StartOSDCloud.GetFeatureUpdate.FileUri
             Write-Warning "Could not verify an Internet connection for Windows Feature Update"
             Write-Warning "OSDCloud cannot continue"
             Break
@@ -584,26 +588,26 @@ function Start-OSDCloud {
     #=================================================
     if ($Global:StartOSDCloud.Product -ne 'None') {
         Write-Host -ForegroundColor DarkGray "========================================================================="
-        Write-Host -ForegroundColor Cyan "Get-MyDriverPack"
+        Write-Host -ForegroundColor Cyan "Get-MyDriverPack " -NoNewline
+        Write-Host -ForegroundColor DarkGray "-Manufacturer $($Global:StartOSDCloud.Manufacturer) -Product $($Global:StartOSDCloud.Product)"
 
         $Global:StartOSDCloud.GetMyDriverPack = Get-MyDriverPack -Manufacturer $Global:StartOSDCloud.Manufacturer -Product $Global:StartOSDCloud.Product
 
         if ($Global:StartOSDCloud.GetMyDriverPack) {
-            Write-Host -ForegroundColor DarkGray "Name: $($Global:StartOSDCloud.GetMyDriverPack.Name)"
-            Write-Host -ForegroundColor DarkGray "Product: $($Global:StartOSDCloud.GetMyDriverPack.Product)"
-
             $Global:StartOSDCloud.DriverPackOffline = Find-OSDCloudFile -Name $Global:StartOSDCloud.GetMyDriverPack.FileName -Path '\OSDCloud\DriverPacks\' | Sort-Object FullName
             $Global:StartOSDCloud.DriverPackOffline = $Global:StartOSDCloud.DriverPackOffline | Where-Object {$_.FullName -notlike "C*"} | Where-Object {$_.FullName -notlike "X*"} | Select-Object -First 1
 
             if ($Global:StartOSDCloud.DriverPackOffline) {
-                Write-Host -ForegroundColor Green "OK"
+                Write-Host -ForegroundColor DarkGray $Global:StartOSDCloud.GetMyDriverPack.Name
                 Write-Host -ForegroundColor DarkGray $Global:StartOSDCloud.DriverPackOffline.FullName
             }
             elseif (Test-WebConnection -Uri $Global:StartOSDCloud.GetMyDriverPack.DriverPackUrl) {
-                Write-Host -ForegroundColor Yellow "Download"
+                Write-Host -ForegroundColor Yellow $Global:StartOSDCloud.GetMyDriverPack.Name
                 Write-Host -ForegroundColor Yellow $Global:StartOSDCloud.GetMyDriverPack.DriverPackUrl
             }
             else {
+                Write-Warning $Global:StartOSDCloud.GetMyDriverPack.Name
+                Write-Warning $Global:StartOSDCloud.GetMyDriverPack.DriverPackUrl
                 Write-Warning "Could not verify an Internet connection for the Driver Pack"
                 Write-Warning "OSDCloud will continue, but there may be issues"
             }

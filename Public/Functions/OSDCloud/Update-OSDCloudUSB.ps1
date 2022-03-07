@@ -280,7 +280,7 @@ function Update-OSDCloudUSB {
             if (Test-Path $OSDownloadPath) {
                 $OSDCloudSavedOS = Get-ChildItem -Path $OSDownloadPath *.esd -Recurse -File | Select-Object -ExpandProperty Name
             }
-            $OperatingSystems = Get-WSUSXML -Catalog FeatureUpdate -UpdateArch 'x64'
+            $OperatingSystems = Get-WSUSXML -Catalog FeatureUpdate -UpdateArch 'x64' -Silent
         
             if ($OSName) {
                 $OperatingSystems = $OperatingSystems | Where-Object {$_.Catalog -cmatch $OSName}
