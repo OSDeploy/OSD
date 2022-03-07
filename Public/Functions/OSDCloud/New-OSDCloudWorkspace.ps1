@@ -243,7 +243,7 @@ function New-OSDCloudWorkspace {
             Break
         }
     
-        $OSDCloudVolumes = Get-Volume.usb | Where-Object {$_.FileSystemLabel -eq 'OSDCloud'}
+        $OSDCloudVolumes = Get-Volume.usb | Where-Object {($_.FileSystemLabel -eq 'OSDCloud') -or ($_.FileSystemLabel -eq 'OSDCloudUSB')}
     
         if ($OSDCloudVolumes) {
             foreach ($OSDCloudVolume in $OSDCloudVolumes) {

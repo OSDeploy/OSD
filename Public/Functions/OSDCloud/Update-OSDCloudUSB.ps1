@@ -108,14 +108,12 @@ function Update-OSDCloudUSB {
     #=================================================
     #	Set WinPE USB Volume Label
     #=================================================
-    $UsbVolumes = Get-Volume.usb
-    $WinpeVolumes = $UsbVolumes | Where-Object {($_.FileSystemLabel -eq 'USBBOOT') -or ($_.FileSystemLabel -eq 'OSDBOOT') -or ($_.FileSystemLabel -eq 'USB BOOT')}
-
+    $WinpeVolumes = Get-Volume.usb | Where-Object {($_.FileSystemLabel -eq 'USBBOOT') -or ($_.FileSystemLabel -eq 'OSDBOOT') -or ($_.FileSystemLabel -eq 'USB BOOT')}
     if ($WinpeVolumes) {
         if ($IsAdmin) {
             Write-Host -ForegroundColor DarkGray "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Setting OSDCloud USB WinPE volume labels to WinPE"
-            foreach ($WinpeVolume in $WinpeVolumes) {
-                Set-Volume -DriveLetter $WinpeVolume.DriveLetter -NewFileSystemLabel 'WinPE' -ErrorAction Ignore
+            foreach ($volume in $WinpeVolumes) {
+                Set-Volume -DriveLetter $volume.DriveLetter -NewFileSystemLabel 'WinPE' -ErrorAction Ignore
             }
         }
         else {
@@ -126,14 +124,12 @@ function Update-OSDCloudUSB {
     #=================================================
     #	Update all WinPE volumes with Workspace
     #=================================================
-    $UsbVolumes = Get-Volume.usb
-    $WinpeVolumes = $UsbVolumes | Where-Object {($_.FileSystemLabel -eq 'USBBOOT') -or ($_.FileSystemLabel -eq 'OSDBOOT') -or ($_.FileSystemLabel -eq 'USB BOOT') -or ($_.FileSystemLabel -eq 'WinPE')}
-
+    $WinpeVolumes = Get-Volume.usb | Where-Object {($_.FileSystemLabel -eq 'USBBOOT') -or ($_.FileSystemLabel -eq 'OSDBOOT') -or ($_.FileSystemLabel -eq 'USB BOOT') -or ($_.FileSystemLabel -eq 'WinPE')}
     if ($WinpeVolumes -and $RobocopyWorkspace) {
-        foreach ($WinpeVolume in $WinpeVolumes) {
-            if (Test-Path -Path "$($WinPEVolume.DriveLetter):\") {
-                Write-Host -ForegroundColor DarkGray "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) ROBOCOPY $WorkspacePath\Media $($WinPEVolume.DriveLetter):\"
-                robocopy "$WorkspacePath\Media" "$($WinPEVolume.DriveLetter):\" *.* /e /ndl /njh /njs /np /r:0 /w:0 /xd "$RECYCLE.BIN" "System Volume Information"
+        foreach ($volume in $WinpeVolumes) {
+            if (Test-Path -Path "$($volume.DriveLetter):\") {
+                Write-Host -ForegroundColor DarkGray "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) ROBOCOPY $WorkspacePath\Media $($volume.DriveLetter):\"
+                robocopy "$WorkspacePath\Media" "$($volume.DriveLetter):\" *.* /e /ndl /njh /njs /np /r:0 /w:0 /xd "$RECYCLE.BIN" "System Volume Information"
                 Write-Host -ForegroundColor DarkGray "========================================================================="
             }
         }
@@ -202,13 +198,26 @@ function Update-OSDCloudUSB {
     #   OSDCloudVolumes
     #=================================================
     $OSDCloudVolumes = Get-Volume.usb | Where-Object {$_.FileSystemLabel -eq 'OSDCloud'} | Where-Object {$_.SizeGB -ge 8} | Sort-Object DriveLetter -Descending
+    if ($OSDCloudVolumes) {
+        if ($IsAdmin) {
+            Write-Host -ForegroundColor DarkGray "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Setting OSDCloud USB volume labels to OSDCloudUSB"
+            foreach ($volume in $OSDCloudVolumes) {
+                Set-Volume -DriveLetter $volume.DriveLetter -NewFileSystemLabel 'OSDCloudUSB' -ErrorAction Ignore
+            }
+        }
+        else {
+            Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Unable to set OSDCloud USB volume label"
+            Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Run this function again elevated with Admin rights"
+        }
+    }
     #=================================================
     #   IsOfflineReady
     #=================================================
+    $OSDCloudVolumes = Get-Volume.usb | Where-Object {($_.FileSystemLabel -eq 'OSDCloudUSB') -or ($_.FileSystemLabel -eq 'OSDCloud')} | Where-Object {$_.SizeGB -ge 8} | Sort-Object DriveLetter -Descending
     $IsOfflineReady = $false
     if ($RobocopyWorkspace -and $OSDCloudVolumes) {
-        foreach ($OSDCloudVolume in $OSDCloudVolumes) {
-            if (Test-Path "$($OSDCloudVolume.DriveLetter):\OSDCloud") {
+        foreach ($volume in $OSDCloudVolumes) {
+            if (Test-Path "$($volume.DriveLetter):\OSDCloud") {
                 $IsOfflineReady = $true
             }
         }
@@ -217,29 +226,29 @@ function Update-OSDCloudUSB {
     #   Update OSDCloud Offline
     #=================================================
     if ($RobocopyWorkspace -and $OSDCloudVolumes) {
-        foreach ($OSDCloudVolume in $OSDCloudVolumes) {
+        foreach ($volume in $OSDCloudVolumes) {
             if ($IsOfflineReady -or $UpdateModules -or $PSUpdate -or $DriverPack -or $OS -or $OSName -or $OSLicense -or $OSLanguage) {
                 if (Test-Path "$WorkspacePath\Config") {
-                    Write-Host -ForegroundColor DarkGray "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) ROBOCOPY $WorkspacePath\Config $($OSDCloudVolume.DriveLetter):\OSDCloud\Config"
-                    robocopy "$WorkspacePath\Config" "$($OSDCloudVolume.DriveLetter):\OSDCloud\Config" *.* /e /mt /ndl /njh /njs /r:0 /w:0 /xd "$RECYCLE.BIN" "System Volume Information"
+                    Write-Host -ForegroundColor DarkGray "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) ROBOCOPY $WorkspacePath\Config $($volume.DriveLetter):\OSDCloud\Config"
+                    robocopy "$WorkspacePath\Config" "$($volume.DriveLetter):\OSDCloud\Config" *.* /e /mt /ndl /njh /njs /r:0 /w:0 /xd "$RECYCLE.BIN" "System Volume Information"
                     Write-Host -ForegroundColor DarkGray "========================================================================="
                 }
     
                 if (Test-Path "$WorkspacePath\DriverPacks") {
-                    Write-Host -ForegroundColor DarkGray "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) ROBOCOPY $WorkspacePath\DriverPacks $($OSDCloudVolume.DriveLetter):\OSDCloud\DriverPacks"
-                    robocopy "$WorkspacePath\DriverPacks" "$($OSDCloudVolume.DriveLetter):\OSDCloud\DriverPacks" *.* /e /mt /ndl /njh /njs /r:0 /w:0 /xd "$RECYCLE.BIN" "System Volume Information"
+                    Write-Host -ForegroundColor DarkGray "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) ROBOCOPY $WorkspacePath\DriverPacks $($volume.DriveLetter):\OSDCloud\DriverPacks"
+                    robocopy "$WorkspacePath\DriverPacks" "$($volume.DriveLetter):\OSDCloud\DriverPacks" *.* /e /mt /ndl /njh /njs /r:0 /w:0 /xd "$RECYCLE.BIN" "System Volume Information"
                     Write-Host -ForegroundColor DarkGray "========================================================================="
                 }
     
                 if (Test-Path "$WorkspacePath\OS") {
-                    Write-Host -ForegroundColor DarkGray "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) ROBOCOPY $WorkspacePath\OS $($OSDCloudVolume.DriveLetter):\OSDCloud\OS"
-                    robocopy "$WorkspacePath\OS" "$($OSDCloudVolume.DriveLetter):\OSDCloud\OS" *.* /e /mt /ndl /njh /njs /r:0 /w:0 /xd "$RECYCLE.BIN" "System Volume Information"
+                    Write-Host -ForegroundColor DarkGray "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) ROBOCOPY $WorkspacePath\OS $($volume.DriveLetter):\OSDCloud\OS"
+                    robocopy "$WorkspacePath\OS" "$($volume.DriveLetter):\OSDCloud\OS" *.* /e /mt /ndl /njh /njs /r:0 /w:0 /xd "$RECYCLE.BIN" "System Volume Information"
                     Write-Host -ForegroundColor DarkGray "========================================================================="
                 }
     
                 if (Test-Path "$WorkspacePath\PowerShell") {
-                    Write-Host -ForegroundColor DarkGray "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) ROBOCOPY $WorkspacePath\PowerShell $($OSDCloudVolume.DriveLetter):\OSDCloud\PowerShell"
-                    robocopy "$WorkspacePath\PowerShell" "$($OSDCloudVolume.DriveLetter):\OSDCloud\PowerShell" *.* /e /mt /ndl /njh /njs /r:0 /w:0 /xd "$RECYCLE.BIN" "System Volume Information"
+                    Write-Host -ForegroundColor DarkGray "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) ROBOCOPY $WorkspacePath\PowerShell $($volume.DriveLetter):\OSDCloud\PowerShell"
+                    robocopy "$WorkspacePath\PowerShell" "$($volume.DriveLetter):\OSDCloud\PowerShell" *.* /e /mt /ndl /njh /njs /r:0 /w:0 /xd "$RECYCLE.BIN" "System Volume Information"
                     Write-Host -ForegroundColor DarkGray "========================================================================="
                 }
             }

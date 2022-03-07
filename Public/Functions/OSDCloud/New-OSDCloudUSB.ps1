@@ -2,7 +2,7 @@ function New-OSDCloudUSB {
     <#
     .SYNOPSIS
     Creates an OSDCloud USB Drive and copies the contents of the OSDCloud Workspace Media directory
-    Clear, Initialize, Partition (WinPE and OSDCloud), and Format a USB Disk
+    Clear, Initialize, Partition (WinPE and OSDCloudUSB), and Format a USB Disk
     Requires Admin Rights
 
     .DESCRIPTION
@@ -52,7 +52,7 @@ function New-OSDCloudUSB {
     #	Initialize
     #=================================================
     $BootLabel = 'WinPE'
-    $DataLabel = 'OSDCloud'
+    $DataLabel = 'OSDCloudUSB'
     $ErrorActionPreference = 'Stop'
     $WinpeSourcePath = $null
     #=================================================
@@ -174,7 +174,7 @@ function New-OSDCloudUSB {
     #=================================================
     #	New-Bootable.usb
     #=================================================
-    $BootableUSB = New-Bootable.usb -BootLabel 'WinPE' -DataLabel 'OSDCloud'
+    $BootableUSB = New-Bootable.usb -BootLabel $BootLabel -DataLabel $DataLabel
     #=================================================
     #	Test USB Volumes
     #=================================================
