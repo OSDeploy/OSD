@@ -24,7 +24,7 @@ function Save-WinPECloudDriver {
     $IntelEthernetCloudDriverUrl    = 'https://downloadmirror.intel.com/710138/Wired_driver_26.8_x64.zip'
     
     $IntelWiFiCloudDriverText       = 'Intel Wireless Driver Pack [22.80.1]'
-    $IntelWiFiCloudDriverUrl        = 'https://downloadmirror.intel.com/655277/WiFi-22.80.1-Driver64-Win10-Win11.zip'
+    $IntelWiFiCloudDriverUrl        = 'https://downloadmirror.intel.com/714401/WiFi-22.110.1-Driver64-Win10-Win11.zip'
     
     $LenovoDockCloudDriverText      = 'Lenovo Dock WinPE Driver Pack [22.1.31]'
     $LenovoDockCloudDriverUrl       = @(
