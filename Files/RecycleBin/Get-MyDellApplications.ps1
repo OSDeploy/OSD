@@ -7,7 +7,7 @@ function Get-MyDellApplications {
     $SystemSKU = $((Get-WmiObject -Class Win32_ComputerSystem).SystemSKUNumber).Trim()
 	$BIOSVersion = $((Get-WmiObject -Class Win32_BIOS).SMBIOSBIOSVersion).Trim()
 
-    $GetDellCatalogPC = Get-OSDMasterCatalogDellSystem -UpdateType Application
+    $GetDellCatalogPC = Get-MasterCatalogDellSystem -UpdateType Application
 
     $GetMyDellApplications = $GetDellCatalogPC | Where-Object {$_.SupportedSystemID -contains $SystemSKU}
 
