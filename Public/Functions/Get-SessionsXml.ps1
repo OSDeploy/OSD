@@ -7,11 +7,6 @@ Returns the Session.xml Updates that have been applied to an Operating System
 
 .LINK
 https://osd.osdeploy.com/module/functions/general/get-osdsessions
-
-.NOTES
-19.11.20    Added Pipeline Support
-19.11.20    Path now supports Mounted WIM Path
-19.10.14    David Segura @SeguraOSD Initial Release
 #>
 function Get-SessionsXml {
     [CmdletBinding()]
@@ -48,8 +43,14 @@ function Get-SessionsXml {
         [xml]$XmlDocument = Get-Content -Path "$SessionsXml"
     
         $SessionsXml = $XmlDocument.SelectNodes('Sessions/Session') | ForEach-Object {
+            $Started = [datetime]::ParseExact($_.Started,'yyyy/MM/dd/HH:mm:ss',$null)
+            $Complete = [datetime]::ParseExact($_.Complete,'yyyy/MM/dd/HH:mm:ss',$null)
+            $Duration = New-TimeSpan -Start $Started -End $Complete
+
             New-Object -Type PSObject -Property @{
-                Complete = $_.Complete
+                Started = $Started
+                Complete = $Complete
+                Duration = $Duration
                 KBNumber = $_.Tasks.Phase.package.name
                 TargetState = $_.Tasks.Phase.package.targetState
                 Id = $_.Tasks.Phase.package.id
@@ -59,7 +60,8 @@ function Get-SessionsXml {
         }
     
         $SessionsXml = $SessionsXml | Where-Object {$_.Id -like "Package*"}
-        $SessionsXml = $SessionsXml | Select-Object -Property Complete, KBNumber, TargetState, Id, Client, Status | Sort-Object Complete
+        $SessionsXml = $SessionsXml | Sort-Object Complete
+        $SessionsXml = $SessionsXml | Select-Object -Property Id, Started, Complete, Duration, KBNumber, TargetState, Client, Status | Sort-Object Complete
         #=================================================
         #   KBNumber
         #=================================================
