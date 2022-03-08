@@ -764,7 +764,6 @@ function Invoke-OSDCloud {
     }
     else {
         if (Test-WebConnectionMsUpCat) {
-            Write-Host -ForegroundColor DarkGray "========================================================================="
             if ($null -eq $SaveMyDriverPack) {
                 Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Save-MsUpCatDriver (All Devices)"
                 Write-Host -ForegroundColor DarkGray "Drivers for all devices will be downloaded from Microsoft Update Catalog to C:\Drivers"
