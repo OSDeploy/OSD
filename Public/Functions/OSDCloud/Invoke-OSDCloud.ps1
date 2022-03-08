@@ -704,17 +704,19 @@ function Invoke-OSDCloud {
                     }
                 }
                 if ($SaveMyDriverPack) {
-                    #=================================================
-                    #	Cache to OSDCloudUSB
-                    #=================================================
-                    $OSDCloudUSB = Get-Volume.usb | Where-Object {($_.FileSystemLabel -match 'OSDCloud') -or ($_.FileSystemLabel -match 'BHIMAGE')} | Where-Object {$_.SizeGB -ge 8} | Where-Object {$_.SizeRemainingGB -ge 2} | Select-Object -First 1
-                    if ($OSDCloudUSB) {
-                        $OSDCloudUSBDestination = "$($OSDCloudUSB.DriveLetter):\OSDCloud\DriverPacks\$($Global:OSDCloud.Manufacturer)"
-                        Write-Host -ForegroundColor Yellow "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Copying Driver Pack to OSDCloudUSB at $OSDCloudUSBDestination"
-                        If (! (Test-Path $OSDCloudUSBDestination)) {
-                            $null = New-Item -Path $OSDCloudUSBDestination -ItemType Directory -Force
+                    if (-not ($Global:OSDCloud.DriverPackSource)) {
+                        #=================================================
+                        #	Cache to OSDCloudUSB
+                        #=================================================
+                        $OSDCloudUSB = Get-Volume.usb | Where-Object {($_.FileSystemLabel -match 'OSDCloud') -or ($_.FileSystemLabel -match 'BHIMAGE')} | Where-Object {$_.SizeGB -ge 8} | Where-Object {$_.SizeRemainingGB -ge 2} | Select-Object -First 1
+                        if ($OSDCloudUSB) {
+                            $OSDCloudUSBDestination = "$($OSDCloudUSB.DriveLetter):\OSDCloud\DriverPacks\$($Global:OSDCloud.Manufacturer)"
+                            Write-Host -ForegroundColor Yellow "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Copying Driver Pack to OSDCloudUSB at $OSDCloudUSBDestination"
+                            If (! (Test-Path $OSDCloudUSBDestination)) {
+                                $null = New-Item -Path $OSDCloudUSBDestination -ItemType Directory -Force
+                            }
+                            $Results = Copy-Item -Path $SaveMyDriverPack.FullName -Destination $OSDCloudUSBDestination -Force -PassThru -ErrorAction Stop
                         }
-                        $Results = Copy-Item -Path $SaveMyDriverPack.FullName -Destination $OSDCloudUSBDestination -Force -PassThru -ErrorAction Stop
                     }
                 }
             }
@@ -728,8 +730,14 @@ function Invoke-OSDCloud {
     Write-Host -ForegroundColor DarkGray "========================================================================="
     Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Microsoft Catalog Firmware Update (Save-SystemFirmwareUpdate)"
 
-    if ((Test-IsVM) -or ($Global:OSDCloud.ApplyCatalogFirmware -eq $false)) {
+    if ($Global:OSDCloud.ApplyCatalogFirmware -eq $false) {
         Write-Host -ForegroundColor DarkGray "Microsoft Catalog Firmware Update is not enabled for this deployment"
+    }
+    elseif (Test-IsVM) {
+        Write-Host -ForegroundColor DarkGray "Microsoft Catalog Firmware Update is not enabled for Virtual Machines"
+    }
+    elseif ($OSDCloud.IsOnBattery -eq $true) {
+        Write-Host -ForegroundColor DarkGray "Microsoft Catalog Firmware Update is not enabled for devices on battery power"
     }
     else {
         if (Test-WebConnectionMsUpCat) {
@@ -747,10 +755,14 @@ function Invoke-OSDCloud {
     #=================================================
     #	ApplyCatalogDrivers
     #=================================================
-    if ((Get-MyComputerModel) -match 'Virtual') {
-        #Do Nothing
+    Write-Host -ForegroundColor DarkGray "========================================================================="
+    if ($Global:OSDCloud.ApplyCatalogDrivers -eq $false) {
+        Write-Host -ForegroundColor DarkGray "Microsoft Catalog Drivers is not enabled for this deployment"
     }
-    elseif ($Global:OSDCloud.ApplyCatalogDrivers -eq $true) {
+    elseif (Test-IsVM) {
+        Write-Host -ForegroundColor DarkGray "Microsoft Catalog Drivers is not enabled for Virtual Machines"
+    }
+    else {
         if (Test-WebConnectionMsUpCat) {
             Write-Host -ForegroundColor DarkGray "========================================================================="
             if ($null -eq $SaveMyDriverPack) {
