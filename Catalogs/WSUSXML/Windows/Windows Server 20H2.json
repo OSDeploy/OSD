@@ -1,7 +1,7 @@
 [
     {
         "Catalog":  "Windows Server 20H2",
-        "OSDVersion":  "22.2.19.1",
+        "OSDVersion":  "22.3.8.1",
         "OSDStatus":  "",
         "UpdateOS":  "Windows Server",
         "UpdateBuild":  "20H2",
@@ -47,13 +47,13 @@
         "AdditionalHash":  "89 182 148 163 5 79 30 154 106 201 31 87 1 240 43 143 219 6 67 105 111 57 44 226 230 44 246 198 191 104 123 153",
         "OSDCore":  "",
         "OSDWinPE":  "",
-        "OSDGuid":  "62ef3773-4c9d-4fc5-8637-b05d509050d5",
+        "OSDGuid":  "b78c10b3-fde7-43f4-b834-ca296b6e6122",
         "PartitionKey":  "Windows Server 20H2",
-        "RowKey":  "62ef3773-4c9d-4fc5-8637-b05d509050d5"
+        "RowKey":  "b78c10b3-fde7-43f4-b834-ca296b6e6122"
     },
     {
         "Catalog":  "Windows Server 20H2",
-        "OSDVersion":  "22.2.19.1",
+        "OSDVersion":  "22.3.8.1",
         "OSDStatus":  "",
         "UpdateOS":  "Windows Server",
         "UpdateBuild":  "20H2",
@@ -99,13 +99,13 @@
         "AdditionalHash":  "105 149 50 78 234 243 222 76 117 96 156 226 38 135 72 99 236 246 105 212 119 48 40 43 79 233 162 92 212 190 240 76",
         "OSDCore":  "",
         "OSDWinPE":  "",
-        "OSDGuid":  "a873ca93-048f-4dcc-9b99-c979b8981ea1",
+        "OSDGuid":  "faffeb62-8d69-4cf0-9d32-b8624c9f405e",
         "PartitionKey":  "Windows Server 20H2",
-        "RowKey":  "a873ca93-048f-4dcc-9b99-c979b8981ea1"
+        "RowKey":  "faffeb62-8d69-4cf0-9d32-b8624c9f405e"
     },
     {
         "Catalog":  "Windows Server 20H2",
-        "OSDVersion":  "22.2.19.1",
+        "OSDVersion":  "22.3.8.1",
         "OSDStatus":  "",
         "UpdateOS":  "Windows Server",
         "UpdateBuild":  "20H2",
@@ -151,13 +151,13 @@
         "AdditionalHash":  "82 36 173 110 141 157 46 145 171 222 203 216 195 166 161 41 193 234 1 180 52 216 52 28 135 49 151 168 99 186 83 174",
         "OSDCore":  "",
         "OSDWinPE":  "",
-        "OSDGuid":  "16e5b253-b381-4c4d-8f01-121cdb6fc647",
+        "OSDGuid":  "07a8351f-1804-42ed-81f7-216fa1e41bc1",
         "PartitionKey":  "Windows Server 20H2",
-        "RowKey":  "16e5b253-b381-4c4d-8f01-121cdb6fc647"
+        "RowKey":  "07a8351f-1804-42ed-81f7-216fa1e41bc1"
     },
     {
         "Catalog":  "Windows Server 20H2",
-        "OSDVersion":  "22.2.19.1",
+        "OSDVersion":  "22.3.8.1",
         "OSDStatus":  "",
         "UpdateOS":  "Windows Server",
         "UpdateBuild":  "20H2",
@@ -203,13 +203,13 @@
         "AdditionalHash":  "203 212 180 225 1 93 202 203 114 107 57 111 136 204 13 139 37 102 248 176 226 76 131 167 68 225 114 199 187 130 57 245",
         "OSDCore":  "",
         "OSDWinPE":  "",
-        "OSDGuid":  "b9043407-34fd-440a-b480-ae44574df974",
+        "OSDGuid":  "951d18e5-86aa-4da2-bdad-6f02b6ff5871",
         "PartitionKey":  "Windows Server 20H2",
-        "RowKey":  "b9043407-34fd-440a-b480-ae44574df974"
+        "RowKey":  "951d18e5-86aa-4da2-bdad-6f02b6ff5871"
     },
     {
         "Catalog":  "Windows Server 20H2",
-        "OSDVersion":  "22.2.19.1",
+        "OSDVersion":  "22.3.8.1",
         "OSDStatus":  "",
         "UpdateOS":  "Windows Server",
         "UpdateBuild":  "20H2",
@@ -255,27 +255,27 @@
         "AdditionalHash":  "245 55 54 244 172 157 231 18 156 16 71 34 128 217 197 185 244 72 204 120 101 133 20 99 187 92 61 85 38 200 48 77",
         "OSDCore":  "",
         "OSDWinPE":  "",
-        "OSDGuid":  "5e0bb118-99eb-4c18-b24b-bce7325e234b",
+        "OSDGuid":  "fb2598b9-852c-48d8-bd03-f999b34324bb",
         "PartitionKey":  "Windows Server 20H2",
-        "RowKey":  "5e0bb118-99eb-4c18-b24b-bce7325e234b"
+        "RowKey":  "fb2598b9-852c-48d8-bd03-f999b34324bb"
     },
     {
         "Catalog":  "Windows Server 20H2",
-        "OSDVersion":  "22.2.19.1",
+        "OSDVersion":  "22.3.8.1",
         "OSDStatus":  "",
         "UpdateOS":  "Windows Server",
         "UpdateBuild":  "20H2",
         "UpdateArch":  "x64",
         "UpdateGroup":  "LCU",
-        "CreationDate":  "\/Date(1644343208000)\/",
-        "KBNumber":  "5010342",
-        "FileKBNumber":  "5010342",
-        "Title":  "2022-02 Cumulative Update for Windows Server version 20H2 for x64-based Systems (KB5010342)",
-        "UpdateId":  "b728bd9b-8f6f-4c04-bb89-1aa8e3c9a36b",
-        "LegacyName":  "KB5010342-Windows1020h2Server-RTM-UnifiedCumulativeSecurity-X64-TSL-World",
+        "CreationDate":  "\/Date(1646762408000)\/",
+        "KBNumber":  "5011487",
+        "FileKBNumber":  "5011487",
+        "Title":  "2022-03 Cumulative Update for Windows Server version 20H2 for x64-based Systems (KB5011487)",
+        "UpdateId":  "c606eb9e-eec6-4246-b330-4c0158d4d515",
+        "LegacyName":  "KB5011487-Windows1020h2Server-RTM-UnifiedCumulativeSecurity-X64-TSL-World",
         "Type":  "SelfContained",
-        "FileName":  "Windows10.0-KB5010342-x64.cab",
-        "Size":  671836741,
+        "FileName":  "Windows10.0-KB5011487-x64.cab",
+        "Size":  670739422,
         "CompanyTitles":  "Microsoft",
         "ProductFamilyTitles":  "Windows",
         "Category":  "Windows Server, version 1903 and later",
@@ -298,17 +298,17 @@
         "IsWsusInfrastructureUpdate":  false,
         "IsEditable":  false,
         "UpdateSource":  "MicrosoftUpdate",
-        "AdditionalInformationUrls":  "https://support.microsoft.com/help/5010342",
+        "AdditionalInformationUrls":  "https://support.microsoft.com/help/5011487",
         "Description":  "Install this update to resolve issues in Windows. For a complete listing of the issues that are included in this update, see the associated Microsoft Knowledge Base article for more information. After you install this item, you may have to restart your computer.",
         "ReleaseNotes":  "",
-        "FileUri":  "http://download.windowsupdate.com/d/msdownload/update/software/secu/2022/02/windows10.0-kb5010342-x64_d4da88ac9f75b6baf61196a2578fe8159816b9c7.cab",
-        "OriginUri":  "http://download.windowsupdate.com/d/msdownload/update/software/secu/2022/02/windows10.0-kb5010342-x64_d4da88ac9f75b6baf61196a2578fe8159816b9c7.cab",
-        "Hash":  "212 218 136 172 159 117 182 186 246 17 150 162 87 143 232 21 152 22 185 199",
-        "AdditionalHash":  "117 10 81 244 9 199 69 147 136 213 160 40 69 0 187 30 8 171 101 192 92 233 48 177 220 5 95 168 138 136 208 163",
+        "FileUri":  "http://download.windowsupdate.com/d/msdownload/update/software/secu/2022/03/windows10.0-kb5011487-x64_69d93efb37d6fb59e3daec3d15a04f7a6fe89005.cab",
+        "OriginUri":  "http://download.windowsupdate.com/d/msdownload/update/software/secu/2022/03/windows10.0-kb5011487-x64_69d93efb37d6fb59e3daec3d15a04f7a6fe89005.cab",
+        "Hash":  "105 217 62 251 55 214 251 89 227 218 236 61 21 160 79 122 111 232 144 5",
+        "AdditionalHash":  "107 85 183 210 218 234 186 16 251 188 244 131 152 193 53 229 80 81 111 115 127 209 135 192 82 253 96 223 11 62 107 184",
         "OSDCore":  "",
         "OSDWinPE":  "",
-        "OSDGuid":  "812f46f6-8257-4db0-8eab-c49ce0f82e0e",
+        "OSDGuid":  "f6fe9920-c763-46c8-a6eb-113516aa19d0",
         "PartitionKey":  "Windows Server 20H2",
-        "RowKey":  "812f46f6-8257-4db0-8eab-c49ce0f82e0e"
+        "RowKey":  "f6fe9920-c763-46c8-a6eb-113516aa19d0"
     }
 ]
