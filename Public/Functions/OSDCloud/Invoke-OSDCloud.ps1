@@ -493,7 +493,7 @@ function Invoke-OSDCloud {
                 #=================================================
                 #	Cache to USB
                 #=================================================
-                $OSDCloudUSB = Get-Volume.usb | Where-Object {($_.FileSystemLabel -eq 'OSDCloudUSB') -or ($_.FileSystemLabel -eq 'OSDCloud')} | Where-Object {$_.SizeGB -ge 8} | Where-Object {$_.SizeRemainingGB -ge 5} | Select-Object -First 1
+                $OSDCloudUSB = Get-Volume.usb | Where-Object {($_.FileSystemLabel -match 'OSDCloud') -or ($_.FileSystemLabel -match 'BHIMAGE')} | Where-Object {$_.SizeGB -ge 8} | Where-Object {$_.SizeRemainingGB -ge 5} | Select-Object -First 1
                 
                 if ($OSDCloudUSB -and $Global:OSDCloud.OSVersion -and $Global:OSDCloud.OSBuild) {
                     $OSDownloadChildPath = "$($OSDCloudUSB.DriveLetter):\OSDCloud\OS\$($Global:OSDCloud.OSVersion) $($Global:OSDCloud.OSBuild)"
@@ -707,7 +707,7 @@ function Invoke-OSDCloud {
                     #=================================================
                     #	Cache to OSDCloudUSB
                     #=================================================
-                    $OSDCloudUSB = Get-Volume.usb | Where-Object {($_.FileSystemLabel -eq 'OSDCloudUSB') -or ($_.FileSystemLabel -eq 'OSDCloud')} | Where-Object {$_.SizeGB -ge 8} | Where-Object {$_.SizeRemainingGB -ge 2} | Select-Object -First 1
+                    $OSDCloudUSB = Get-Volume.usb | Where-Object {($_.FileSystemLabel -match 'OSDCloud') -or ($_.FileSystemLabel -match 'BHIMAGE')} | Where-Object {$_.SizeGB -ge 8} | Where-Object {$_.SizeRemainingGB -ge 2} | Select-Object -First 1
                     if ($OSDCloudUSB) {
                         $OSDCloudUSBDestination = "$($OSDCloudUSB.DriveLetter):\OSDCloud\DriverPacks\$($Global:OSDCloud.Manufacturer)"
                         Write-Host -ForegroundColor Yellow "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Copying Driver Pack to OSDCloudUSB at $OSDCloudUSBDestination"

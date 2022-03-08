@@ -213,7 +213,7 @@ function Update-OSDCloudUSB {
     #=================================================
     #   IsOfflineReady
     #=================================================
-    $OSDCloudVolumes = Get-Volume.usb | Where-Object {($_.FileSystemLabel -eq 'OSDCloudUSB') -or ($_.FileSystemLabel -eq 'OSDCloud')} | Where-Object {$_.SizeGB -ge 8} | Sort-Object DriveLetter -Descending
+    $OSDCloudVolumes = Get-Volume.usb | Where-Object {($_.FileSystemLabel -match 'OSDCloud') -or ($_.FileSystemLabel -match 'BHIMAGE')} | Where-Object {$_.SizeGB -ge 8} | Sort-Object DriveLetter -Descending
     $IsOfflineReady = $false
     if ($RobocopyWorkspace -and $OSDCloudVolumes) {
         foreach ($volume in $OSDCloudVolumes) {

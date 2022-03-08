@@ -13881,7 +13881,7 @@ Original credit to Mike Robbins http://mikefrobbins.com/2018/01/18/use-powershel
     <command:returnValues />
     <maml:alertSet>
       <maml:alert>
-        <maml:para>19.11.20    Added Pipeline Support 19.11.20    Path now supports Mounted WIM Path 19.10.14    David Segura @SeguraOSD Initial Release</maml:para>
+        <maml:para></maml:para>
       </maml:alert>
     </maml:alertSet>
     <command:examples>
@@ -15883,7 +15883,7 @@ Original credit to Mike Robbins http://mikefrobbins.com/2018/01/18/use-powershel
       <command:verb>New</command:verb>
       <command:noun>OSDCloudUSB</command:noun>
       <maml:description>
-        <maml:para>Creates an OSDCloud USB Drive and copies the contents of the OSDCloud Workspace Media directory Clear, Initialize, Partition (WinPE and OSDCloud), and Format a USB Disk Requires Admin Rights</maml:para>
+        <maml:para>Creates an OSDCloud USB Drive and copies the contents of the OSDCloud Workspace Media directory Clear, Initialize, Partition (WinPE and OSDCloudUSB), and Format a USB Disk Requires Admin Rights</maml:para>
       </maml:description>
     </command:details>
     <maml:description>
@@ -22255,10 +22255,10 @@ Original credit to Mike Robbins http://mikefrobbins.com/2018/01/18/use-powershel
     </maml:alertSet>
     <command:examples>
       <command:example>
-        <maml:title>-------------------------- Example 1 --------------------------</maml:title>
-        <dev:code>PS C:\&gt; {{ Add example code here }}</dev:code>
+        <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
+        <dev:code>Start-OSDCloudGUI</dev:code>
         <dev:remarks>
-          <maml:para>{{ Add example description here }}</maml:para>
+          <maml:para></maml:para>
         </dev:remarks>
       </command:example>
     </command:examples>

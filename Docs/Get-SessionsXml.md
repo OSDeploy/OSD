@@ -70,9 +70,6 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ## OUTPUTS
 
 ## NOTES
-19.11.20    Added Pipeline Support
-19.11.20    Path now supports Mounted WIM Path
-19.10.14    David Segura @SeguraOSD Initial Release
 
 ## RELATED LINKS
 

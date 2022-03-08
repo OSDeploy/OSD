@@ -21,12 +21,10 @@ OSDCloud imaging using the command line
 
 ## EXAMPLES
 
-### Example 1
-```powershell
-PS C:\> {{ Add example code here }}
+### EXAMPLE 1
 ```
-
-{{ Add example description here }}
+Start-OSDCloudGUI
+```
 
 ## PARAMETERS
 

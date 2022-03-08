@@ -9,7 +9,7 @@ schema: 2.0.0
 
 ## SYNOPSIS
 Creates an OSDCloud USB Drive and copies the contents of the OSDCloud Workspace Media directory
-Clear, Initialize, Partition (WinPE and OSDCloud), and Format a USB Disk
+Clear, Initialize, Partition (WinPE and OSDCloudUSB), and Format a USB Disk
 Requires Admin Rights
 
 ## SYNTAX
