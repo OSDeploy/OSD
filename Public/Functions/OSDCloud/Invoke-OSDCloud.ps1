@@ -86,11 +86,11 @@ function Invoke-OSDCloud {
         Transcript = $null
         USBPartitions = $null
         Version = [Version](Get-Module -Name OSD -ListAvailable | Sort-Object Version -Descending | Select-Object -First 1).Version
-        VersionMin = [Version]'21.8.3.2'
+        VersionMin = [Version]'22.2.22.1'
         ZTI = [bool]$false
     }
     #=================================================
-    #	Update Defaults
+    #	Set Defaults
     #=================================================
     if (Test-IsVM) {
         $Global:OSDCloud.RecoveryPartition = $false
@@ -240,8 +240,8 @@ function Invoke-OSDCloud {
         $Global:OSDCloud.ODTFiles = Find-OSDCloudODTFile
         
         if ($Global:OSDCloud.ODTFiles) {
-            Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) ================================================"
-            Write-Host -ForegroundColor DarkGray "Select Office Deployment Tool Configuration"
+            Write-Host -ForegroundColor DarkGray "========================================================================="
+            Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Select Office Deployment Tool Configuration"
         
             $Global:OSDCloud.ODTFile = Select-OSDCloudODTFile
             if ($Global:OSDCloud.ODTFile) {
@@ -257,6 +257,7 @@ function Invoke-OSDCloud {
     #   OSDCloud won't continue past this point unless you are in WinPE
     #   The reason for the late failure is so you can test the Menu
     #=================================================
+    $Global:OSDCloud.Test = $true
     if ((Get-OSDGather -Property IsWinPE) -eq $false) {
         Write-Host -ForegroundColor DarkGray "========================================================================="
         Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Test WinPE"
@@ -273,40 +274,39 @@ function Invoke-OSDCloud {
     #=================================================
     #   Remove-PartitionAccessPath
     #=================================================
-    #Get the USB Partitions
     $Global:OSDCloud.USBPartitions = Get-Partition.usb
-    
-    #If there are any USB Partitions, the Partition Access Path needs to be removed
     if ($Global:OSDCloud.USBPartitions) {
         Write-Host -ForegroundColor DarkGray "========================================================================="
-        Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Remove-PartitionAccessPath"
-        Write-Host -ForegroundColor DarkGray "https://docs.microsoft.com/en-us/powershell/module/storage/remove-partitionaccesspath"
-        Write-Host -ForegroundColor DarkGray "Partition Access Paths are being removed from USB Drive Letters"
-        Write-Host -ForegroundColor DarkGray "This prevents issues when Drive Letters are reassigned"
+        Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Removing USB drive letters"
+        Write-Verbose -Message "https://docs.microsoft.com/en-us/powershell/module/storage/remove-partitionaccesspath"
+        Write-Verbose -Message "Partition Access Paths are being removed from USB Drive Letters"
+        Write-Verbose -Message "This prevents issues when Drive Letters are reassigned"
 
-        foreach ($USBPartition in $Global:OSDCloud.USBPartitions) {
-            Write-Host -ForegroundColor DarkGray "Remove-PartitionAccessPath -DiskNumber $($USBPartition.DiskNumber) -PartitionNumber $($USBPartition.PartitionNumber) -AccessPath $($USBPartition.DriveLetter):"
-            Remove-PartitionAccessPath -DiskNumber $USBPartition.DiskNumber -PartitionNumber $USBPartition.PartitionNumber -AccessPath "$($USBPartition.DriveLetter):"
-            Start-Sleep -Seconds 5
+        if ($Global:OSDCloud.Test -eq $false) {
+            foreach ($USBPartition in $Global:OSDCloud.USBPartitions) {
+                Write-Verbose -Message "Remove-PartitionAccessPath -DiskNumber $($USBPartition.DiskNumber) -PartitionNumber $($USBPartition.PartitionNumber) -AccessPath $($USBPartition.DriveLetter):"
+                Remove-PartitionAccessPath -DiskNumber $USBPartition.DiskNumber -PartitionNumber $USBPartition.PartitionNumber -AccessPath "$($USBPartition.DriveLetter):"
+                Start-Sleep -Seconds 3
+            }
         }
     }
     #=================================================
     #   Clear-Disk
     #=================================================
-    Write-Host -ForegroundColor DarkGray "========================================================================="
+        Write-Host -ForegroundColor DarkGray "========================================================================="
     Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Clear-Disk"
-    Write-Host -ForegroundColor DarkGray "https://docs.microsoft.com/en-us/powershell/module/storage/clear-disk"
-    Write-Host -ForegroundColor DarkGray "Fixed Disks must be cleared before new partitions can be created"
+    Write-Verbose -Message "https://docs.microsoft.com/en-us/powershell/module/storage/clear-disk"
+    Write-Verbose -Message "Fixed Disks must be cleared before new partitions can be created"
 
     if (($Global:OSDCloud.ZTI -eq $true) -and (($Global:OSDCloud.GetDiskFixed | Measure-Object).Count -lt 2)) {
-        Write-Host -ForegroundColor DarkGray "Clear-Disk.fixed -Force -NoResults -Confirm:$false"
-        if ($Global:OSDCloud.Test -ne $true) {
+        Write-Verbose -Message "Clear-Disk.fixed -Force -NoResults -Confirm:$false"
+        if ($Global:OSDCloud.Test -eq $false) {
             Clear-Disk.fixed -Force -NoResults -Confirm:$false -ErrorAction Stop
         }
     }
     else {
-        Write-Host -ForegroundColor DarkGray "Clear-Disk.fixed -Force -NoResults"
-        if ($Global:OSDCloud.Test -ne $true) {
+        Write-Verbose -Message "Clear-Disk.fixed -Force -NoResults"
+        if ($Global:OSDCloud.Test -eq $false) {
             Clear-Disk.fixed -Force -NoResults -ErrorAction Stop
         }
     }
@@ -316,11 +316,11 @@ function Invoke-OSDCloud {
     #=================================================
     Write-Host -ForegroundColor DarkGray "========================================================================="
     Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) New-OSDisk"
-    Write-Host -ForegroundColor DarkGray "New Partitions will be created using Microsoft Standard Layout"
-    Write-Host -ForegroundColor DarkGray "https://docs.microsoft.com/en-us/windows-hardware/manufacture/desktop/configure-uefigpt-based-hard-drive-partitions"
+    Write-Verbose -Message "New Partitions will be created using Microsoft Standard Layout"
+    Write-Verbose -Message "https://docs.microsoft.com/en-us/windows-hardware/manufacture/desktop/configure-uefigpt-based-hard-drive-partitions"
     if ($Global:OSDCloud.RecoveryPartition -eq $false) {
-        Write-Host -ForegroundColor DarkGray "New-OSDisk -NoRecoveryPartition -Force"
-        if ($Global:OSDCloud.Test -ne $true) {
+        Write-Verbose -Message "New-OSDisk -NoRecoveryPartition -Force"
+        if ($Global:OSDCloud.Test -eq $false) {
             New-OSDisk -NoRecoveryPartition -Force -ErrorAction Stop
         }
         Write-Host "=========================================================================" -ForegroundColor Cyan
@@ -328,8 +328,8 @@ function Invoke-OSDCloud {
         Write-Host "=========================================================================" -ForegroundColor Cyan
     }
     else {
-        Write-Host -ForegroundColor DarkGray "New-OSDisk -Force"
-        if ($Global:OSDCloud.Test -ne $true) {
+        Write-Verbose -Message "New-OSDisk -Force"
+        if ($Global:OSDCloud.Test -eq $false) {
             New-OSDisk -Force -ErrorAction Stop
         }
         Write-Host "=========================================================================" -ForegroundColor Cyan
@@ -352,35 +352,24 @@ function Invoke-OSDCloud {
     #=================================================
     if ($Global:OSDCloud.USBPartitions) {
         Write-Host -ForegroundColor DarkGray "========================================================================="
-        Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Add-PartitionAccessPath"
-        Write-Host -ForegroundColor DarkGray "https://docs.microsoft.com/en-us/powershell/module/storage/add-partitionaccesspath"
-        Write-Host -ForegroundColor DarkGray "Assigning Drive Letters to USB Partitions"
+        Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Restoring USB Drive Letters"
+        Write-Verbose -Message "https://docs.microsoft.com/en-us/powershell/module/storage/add-partitionaccesspath"
 
-        foreach ($USBPartition in $Global:OSDCloud.USBPartitions) {
-            Write-Host -ForegroundColor DarkGray "Add-PartitionAccessPath -DiskNumber $($USBPartition.DiskNumber) -PartitionNumber $($USBPartition.PartitionNumber) -AssignDriveLetter"
-            Add-PartitionAccessPath -DiskNumber $USBPartition.DiskNumber -PartitionNumber $USBPartition.PartitionNumber -AssignDriveLetter
-            Start-Sleep -Seconds 5
+        if ($Global:OSDCloud.Test -eq $false) {
+            foreach ($USBPartition in $Global:OSDCloud.USBPartitions) {
+                Write-Verbose -Message "Add-PartitionAccessPath -DiskNumber $($USBPartition.DiskNumber) -PartitionNumber $($USBPartition.PartitionNumber) -AssignDriveLetter"
+                Add-PartitionAccessPath -DiskNumber $USBPartition.DiskNumber -PartitionNumber $USBPartition.PartitionNumber -AssignDriveLetter
+                Start-Sleep -Seconds 5
+            }
         }
-    }
-    #=================================================
-    #   Set the Power Plan to High Performance
-    #=================================================
-    Write-Host -ForegroundColor DarkGray "========================================================================="
-    Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Enable High Performance"
-    Write-Host -ForegroundColor DarkGray "https://docs.microsoft.com/en-us/windows/win32/power/power-policy-settings"
-    Write-Host -ForegroundColor DarkGray "High Performance Power Plan is enabled to speed up OSDCloud performance"
-    if ($Global:OSDCloud.Test -ne $true) {
-        #Get-OSDPower -Property High
-        Invoke-Exe powercfg.exe -SetActive 8c5e7fda-e8bf-4a96-9a85-a6e23a8c635c
     }
     #=================================================
     #   Screenshot
     #=================================================
     if ($Global:OSDCloud.Screenshot) {
         Write-Host -ForegroundColor DarkGray "========================================================================="
-        Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Move Screenshots to OSDisk"
-        Write-Host -ForegroundColor DarkGray "https://docs.microsoft.com/en-us/windows-server/administration/windows-commands/robocopy"
-        Write-Host -ForegroundColor DarkGray "Moving Screenshots to C:\OSDCloud\ScreenPNG"
+        Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Moving Screenshots to C:\OSDCloud\ScreenPNG"
+        Write-Verbose -Message "https://docs.microsoft.com/en-us/windows-server/administration/windows-commands/robocopy"
         Stop-ScreenPNGProcess
         Invoke-Exe robocopy "$($Global:OSDCloud.Screenshot)" C:\OSDCloud\ScreenPNG *.* /s /ndl /nfl /njh /njs
         Start-ScreenPNGProcess -Directory 'C:\OSDCloud\ScreenPNG'
@@ -390,9 +379,8 @@ function Invoke-OSDCloud {
     #   Start Transcript
     #=================================================
     Write-Host -ForegroundColor DarkGray "========================================================================="
-    Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Start-Transcript"
-    Write-Host -ForegroundColor DarkGray "https://docs.microsoft.com/en-us/powershell/module/microsoft.powershell.host/start-transcript"
-    Write-Host -ForegroundColor DarkGray "Saving PowerShell Transcript to C:\OSDCloud\Logs"
+    Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Saving PowerShell Transcript to C:\OSDCloud\Logs"
+    Write-Verbose -Message "https://docs.microsoft.com/en-us/powershell/module/microsoft.powershell.host/start-transcript"
 
     if (-NOT (Test-Path 'C:\OSDCloud\Logs')) {
         New-Item -Path 'C:\OSDCloud\Logs' -ItemType Directory -Force -ErrorAction Stop | Out-Null
@@ -401,12 +389,25 @@ function Invoke-OSDCloud {
     $Global:OSDCloud.Transcript = "$((Get-Date).ToString('yyyy-MM-dd-HHmmss'))-Deploy-OSDCloud.log"
     Start-Transcript -Path (Join-Path 'C:\OSDCloud\Logs' $Global:OSDCloud.Transcript) -ErrorAction Ignore
     #=================================================
+    #   High Performance
+    #   If computer isn't running on battery
+    #=================================================
+    if ($Global:StartOSDCloud.IsOnBattery -eq $false) {
+        Write-Host -ForegroundColor DarkGray "========================================================================="
+        Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Enable Powercfg High Performance"
+        Write-Verbose -Message "https://docs.microsoft.com/en-us/windows/win32/power/power-policy-settings"
+        Write-Verbose -Message "High Performance Power Plan is enabled to speed up OSDCloud performance"
+        if ($Global:OSDCloud.Test -eq $false) {
+            Invoke-Exe powercfg.exe -SetActive 8c5e7fda-e8bf-4a96-9a85-a6e23a8c635c
+        }
+    }
+    #=================================================
     #	Image File Offline
     #=================================================
     if ($Global:OSDCloud.ImageFileItem) {
         Write-Host -ForegroundColor DarkGray "========================================================================="
-        Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Copy Offline Windows Image"
-        Write-Host -ForegroundColor DarkGray "Copying Microsoft Windows Image from Offline Source"
+        Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Copy Offline Windows Image (Copy-Item)"
+        Write-Verbose -Message "Copying Microsoft Windows Image from Offline Source"
 
         #It's possible that Drive Letters may have changed if a USB is used
 
@@ -427,7 +428,7 @@ function Invoke-OSDCloud {
 
         #Now that we have an ImageFileSource, everything is good
         if ($Global:OSDCloud.ImageFileSource) {
-            Write-Host -ForegroundColor DarkGray "Source: $($Global:OSDCloud.ImageFileSource.FullName)"
+            Write-Host -ForegroundColor DarkGray "-Source $($Global:OSDCloud.ImageFileSource.FullName)"
             if (!(Test-Path 'C:\OSDCloud\OS')) {
                 New-Item -Path 'C:\OSDCloud\OS' -ItemType Directory -Force -ErrorAction Stop | Out-Null
             }
@@ -437,7 +438,7 @@ function Invoke-OSDCloud {
             }
         }
         if ($Global:OSDCloud.ImageFileTarget) {
-            Write-Host -ForegroundColor DarkGray "Destination: $($Global:OSDCloud.ImageFileTarget.FullName)"
+            Write-Host -ForegroundColor DarkGray "-Destination $($Global:OSDCloud.ImageFileTarget.FullName)"
             $Global:OSDCloud.ImageFileUrl = $null
         }
         else {
@@ -482,17 +483,39 @@ function Invoke-OSDCloud {
     #=================================================
     if (!($Global:OSDCloud.ImageFileTarget) -and ($Global:OSDCloud.ImageFileUrl)) {
         Write-Host -ForegroundColor DarkGray "========================================================================="
-        Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Download OSDCloud ImageFile"
+        Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Download Operating System"
         Write-Host -ForegroundColor DarkGray "$($Global:OSDCloud.ImageFileUrl)"
-        
+
+        $null = New-Item -Path 'C:\OSDCloud\OS' -ItemType Directory -Force -ErrorAction Ignore
+
         if (Test-WebConnection -Uri $Global:OSDCloud.ImageFileUrl) {
             if ($Global:OSDCloud.ImageFileName) {
-                $Global:OSDCloud.ImageFileTarget = Save-WebFile -SourceUrl $Global:OSDCloud.ImageFileUrl -DestinationDirectory 'C:\OSDCloud\OS' -DestinationName $Global:OSDCloud.ImageFileName -ErrorAction Stop
+                #=================================================
+                #	Cache to USB
+                #=================================================
+                $OSDCloudUSB = Get-Volume.usb | Where-Object {($_.FileSystemLabel -eq 'OSDCloudUSB') -or ($_.FileSystemLabel -eq 'OSDCloud')} | Where-Object {$_.SizeGB -ge 8} | Where-Object {$_.SizeRemainingGB -ge 5} | Select-Object -First 1
+                
+                if ($OSDCloudUSB -and $Global:OSDCloud.OSVersion -and $Global:OSDCloud.OSBuild) {
+                    $OSDownloadChildPath = "$($OSDCloudUSB.DriveLetter):\OSDCloud\OS\$($Global:OSDCloud.OSVersion) $($Global:OSDCloud.OSBuild)"
+                    Write-Host -ForegroundColor Yellow "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Downloading to OSDCloudUSB at $OSDownloadChildPath"
+
+                    $OSDCloudUsbOS = Save-WebFile -SourceUrl $Global:OSDCloud.ImageFileUrl -DestinationDirectory "$OSDownloadChildPath" -DestinationName $Global:OSDCloud.ImageFileName
+
+                    if ($OSDCloudUsbOS) {
+                        Write-Host -ForegroundColor DarkGray "========================================================================="
+                        Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Copying Operating System to C:\OSDCloud\OS\$($OSDCloudUsbOS.Name)"
+                        $null = Copy-Item -Path $OSDCloudUsbOS.FullName -Destination "C:\OSDCloud\OS" -Force
+
+                        $Global:OSDCloud.ImageFileTarget = Get-Item "C:\OSDCloud\OS\$($OSDCloudUsbOS.Name)"
+                    }
+                }
+                else {
+                    $Global:OSDCloud.ImageFileTarget = Save-WebFile -SourceUrl $Global:OSDCloud.ImageFileUrl -DestinationDirectory 'C:\OSDCloud\OS' -DestinationName $Global:OSDCloud.ImageFileName -ErrorAction Stop
+                }
             }
             else {
                 $Global:OSDCloud.ImageFileTarget = Save-WebFile -SourceUrl $Global:OSDCloud.ImageFileUrl -DestinationDirectory 'C:\OSDCloud\OS' -ErrorAction Stop
             }
-
             if (!(Test-Path $Global:OSDCloud.ImageFileTarget.FullName)) {
                 $Global:OSDCloud.ImageFileTarget = Get-ChildItem -Path 'C:\OSDCloud\OS\*' -Include *.wim,*.esd | Select-Object -First 1
             }
@@ -506,7 +529,7 @@ function Invoke-OSDCloud {
         }
 
         if ($Global:OSDCloud.ImageFileTarget) {
-            Write-Host -ForegroundColor DarkGray "ImageFileTarget: $($Global:OSDCloud.ImageFileTarget.FullName)"
+            Write-Verbose -Message "ImageFileTarget: $($Global:OSDCloud.ImageFileTarget.FullName)"
         }
     }
     #=================================================
@@ -520,11 +543,11 @@ function Invoke-OSDCloud {
         Break
     }
     #=================================================
-    #	Expand OS
+    #	Expand-WindowsImage
     #=================================================
     Write-Host -ForegroundColor DarkGray "========================================================================="
     Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Expand-WindowsImage"
-    Write-Host -ForegroundColor DarkGray "https://docs.microsoft.com/en-us/powershell/module/dism/expand-windowsimage"
+    Write-Verbose -Message "https://docs.microsoft.com/en-us/powershell/module/dism/expand-windowsimage"
 
     if (-NOT (Test-Path 'C:\OSDCloud\Temp')) {
         New-Item 'C:\OSDCloud\Temp' -ItemType Directory -Force | Out-Null
@@ -543,7 +566,9 @@ function Invoke-OSDCloud {
                 $Global:OSDCloud.OSImageIndex = 4
             }
         }
-
+        #=================================================
+        #	FAILED
+        #=================================================
         if (($OSLicense -eq 'Retail') -and ($ImageCount -eq 9)) {
             if ($OSEdition -eq 'Home Single Language') {
                 Write-Host -ForegroundColor DarkGray "========================================================================="
@@ -560,8 +585,11 @@ function Invoke-OSDCloud {
             }
         }
 
-        Write-Host -ForegroundColor DarkGray "Expand-WindowsImage -ApplyPath 'C:\' -ImagePath $($Global:OSDCloud.ImageFileTarget.FullName) -Index $($Global:OSDCloud.OSImageIndex) -ScratchDirectory 'C:\OSDCloud\Temp'"
-        if ($Global:OSDCloud.Test -ne $true) {
+        Write-Host -ForegroundColor DarkGray "-ApplyPath 'C:\'"
+        Write-Host -ForegroundColor DarkGray "-ImagePath $($Global:OSDCloud.ImageFileTarget.FullName)"
+        Write-Host -ForegroundColor DarkGray "-Index $($Global:OSDCloud.OSImageIndex)"
+        Write-Host -ForegroundColor DarkGray "-ScratchDirectory 'C:\OSDCloud\Temp'"
+        if ($Global:OSDCloud.Test -eq $false) {
             Expand-WindowsImage -ApplyPath 'C:\' -ImagePath $Global:OSDCloud.ImageFileTarget.FullName -Index $Global:OSDCloud.OSImageIndex -ScratchDirectory 'C:\OSDCloud\Temp' -ErrorAction Stop
 
             $SystemDrive = Get-Partition | Where-Object {$_.Type -eq 'System'} | Select-Object -First 1
@@ -574,6 +602,9 @@ function Invoke-OSDCloud {
         }
     }
     else {
+        #=================================================
+        #	FAILED
+        #=================================================
         Write-Host -ForegroundColor DarkGray "========================================================================="
         Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) OSDCloud Failed"
         Write-Warning "Could not find a proper Windows Image for deployment"
@@ -606,22 +637,23 @@ function Invoke-OSDCloud {
                 Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Save-MyDriverPack"
                 
                 if ($Global:OSDCloud.GetMyDriverPack) {
-                    Write-Host -ForegroundColor DarkGray "Name: $($Global:OSDCloud.GetMyDriverPack.Name)"
-                    Write-Host -ForegroundColor DarkGray "Product: $($Global:OSDCloud.GetMyDriverPack.Product)"
-                    Write-Host -ForegroundColor DarkGray "FileName: $($Global:OSDCloud.GetMyDriverPack.FileName)"
-                    Write-Host -ForegroundColor DarkGray "DriverPackUrl: $($Global:OSDCloud.GetMyDriverPack.DriverPackUrl)"
+                    Write-Host -ForegroundColor DarkGray "-Name $($Global:OSDCloud.GetMyDriverPack.Name)"
+                    Write-Host -ForegroundColor DarkGray "-Product $($Global:OSDCloud.GetMyDriverPack.Product)"
+                    Write-Host -ForegroundColor DarkGray "-FileName $($Global:OSDCloud.GetMyDriverPack.FileName)"
+                    Write-Host -ForegroundColor DarkGray "-DriverPackUrl $($Global:OSDCloud.GetMyDriverPack.DriverPackUrl)"
     
                     if ($Global:OSDCloud.DriverPackOffline) {
                         $Global:OSDCloud.DriverPackSource = Find-OSDCloudFile -Name (Split-Path -Path $Global:OSDCloud.DriverPackOffline -Leaf) -Path (Split-Path -Path (Split-Path -Path $Global:OSDCloud.DriverPackOffline.FullName -Parent) -NoQualifier) | Select-Object -First 1
                     }
     
                     if ($Global:OSDCloud.DriverPackSource) {
-                        Write-Host -ForegroundColor DarkGray "DriverPackSource.FullName: $($Global:OSDCloud.DriverPackSource.FullName)"
+                        Write-Host -ForegroundColor DarkGray "-DriverPackSource $($Global:OSDCloud.DriverPackSource.FullName)"
                         Copy-Item -Path $Global:OSDCloud.DriverPackSource.FullName -Destination 'C:\Drivers' -Force
                         
                         $DriverPacks = Get-ChildItem -Path 'C:\Drivers' -File
 
                         foreach ($Item in $DriverPacks) {
+                            $SaveMyDriverPack = $Item.FullName
                             $ExpandFile = $Item.FullName
                             Write-Verbose -Verbose "DriverPack: $ExpandFile"
                             #=================================================
@@ -671,6 +703,20 @@ function Invoke-OSDCloud {
                         $SaveMyDriverPack = Save-MyDriverPack -DownloadPath 'C:\Drivers' -Expand -Product $Global:OSDCloud.Product
                     }
                 }
+                if ($SaveMyDriverPack) {
+                    #=================================================
+                    #	Cache to OSDCloudUSB
+                    #=================================================
+                    $OSDCloudUSB = Get-Volume.usb | Where-Object {($_.FileSystemLabel -eq 'OSDCloudUSB') -or ($_.FileSystemLabel -eq 'OSDCloud')} | Where-Object {$_.SizeGB -ge 8} | Where-Object {$_.SizeRemainingGB -ge 2} | Select-Object -First 1
+                    if ($OSDCloudUSB) {
+                        $OSDCloudUSBDestination = "$($OSDCloudUSB.DriveLetter):\OSDCloud\DriverPacks\$($Global:OSDCloud.Manufacturer)"
+                        Write-Host -ForegroundColor Yellow "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Copying Driver Pack to OSDCloudUSB at $OSDCloudUSBDestination"
+                        If (! (Test-Path $OSDCloudUSBDestination)) {
+                            $null = New-Item -Path $OSDCloudUSBDestination -ItemType Directory -Force
+                        }
+                        $Results = Copy-Item -Path $SaveMyDriverPack.FullName -Destination $OSDCloudUSBDestination -Force -PassThru -ErrorAction Stop
+                    }
+                }
             }
         }
     }
@@ -680,21 +726,17 @@ function Invoke-OSDCloud {
     #   Firmware updates from Microsoft Update Catalog
     #=================================================
     Write-Host -ForegroundColor DarkGray "========================================================================="
-    Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Microsoft Catalog Firmware Update"
+    Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Microsoft Catalog Firmware Update (Save-SystemFirmwareUpdate)"
 
-    if ((Get-MyComputerModel) -match 'Virtual') {
-        $Global:OSDCloud.ApplyCatalogFirmware = $false
-    }
-
-    if ($Global:OSDCloud.ApplyCatalogFirmware -eq $false) {
+    if ((Test-IsVM) -or ($Global:OSDCloud.ApplyCatalogFirmware -eq $false)) {
         Write-Host -ForegroundColor DarkGray "Microsoft Catalog Firmware Update is not enabled for this deployment"
     }
     else {
         if (Test-WebConnectionMsUpCat) {
-            Write-Host -ForegroundColor DarkGray "Firmware Updates will be downloaded from Microsoft Update Catalog to C:\Drivers"
+            Write-Host -ForegroundColor DarkGray "Firmware Updates will be downloaded from Microsoft Update Catalog to C:\Drivers\Firmware"
             Write-Host -ForegroundColor DarkGray "Some systems do not support a driver Firmware Update"
             Write-Host -ForegroundColor DarkGray "You may have to enable this setting in your BIOS or Firmware Settings"
-            Write-Host -ForegroundColor DarkGray "Save-SystemFirmwareUpdate -DestinationDirectory 'C:\Drivers\Firmware'"
+            Write-Verbose -Message "Save-SystemFirmwareUpdate -DestinationDirectory 'C:\Drivers\Firmware'"
     
             Save-SystemFirmwareUpdate -DestinationDirectory 'C:\Drivers\Firmware'
         }
@@ -731,25 +773,23 @@ function Invoke-OSDCloud {
     #   Add-WindowsDriver.offlineservicing
     #=================================================
     Write-Host -ForegroundColor DarkGray "========================================================================="
-    Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Add Windows Driver with Offline Servicing"
-    Write-Host -ForegroundColor DarkGray "https://docs.microsoft.com/en-us/powershell/module/dism/add-windowsdriver"
+    Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Add Windows Driver with Offline Servicing (Add-WindowsDriver.offlineservicing)"
+    Write-Verbose -Message "https://docs.microsoft.com/en-us/powershell/module/dism/add-windowsdriver"
     Write-Host -ForegroundColor DarkGray "Drivers in C:\Drivers are being added to the offline Windows Image"
     Write-Host -ForegroundColor DarkGray "This process can take up to 20 minutes"
-
-    Write-Host -ForegroundColor DarkGray "Add-WindowsDriver.offlineservicing"
-    if ($Global:OSDCloud.Test -ne $true) {
+    Write-Verbose -Message "Add-WindowsDriver.offlineservicing"
+    if ($Global:OSDCloud.Test -eq $false) {
         Add-WindowsDriver.offlineservicing
     }
     #=================================================
     #   Set-OSDCloudUnattendSpecialize
     #=================================================
     Write-Host -ForegroundColor DarkGray "========================================================================="
-    Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Set Specialize Unattend.xml"
+    Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Set Specialize Unattend.xml (Set-OSDCloudUnattendSpecialize)"
     Write-Host -ForegroundColor DarkGray "C:\Windows\Panther\Invoke-OSDSpecialize.xml is being applied as an Unattend file"
     Write-Host -ForegroundColor DarkGray "This will enable the extraction and installation of HP, Lenovo, and Microsoft Surface Drivers if necessary"
-    
-    Write-Host -ForegroundColor DarkGray "Set-OSDCloudUnattendSpecialize"
-    if ($Global:OSDCloud.Test -ne $true) {
+    Write-Verbose -Message "Set-OSDCloudUnattendSpecialize"
+    if ($Global:OSDCloud.Test -eq $false) {
         Set-OSDCloudUnattendSpecialize
         #Set-OSDxCloudUnattendSpecialize -Verbose
     }
@@ -846,9 +886,7 @@ exit
     #=================================================
     Write-Host -ForegroundColor DarkGray "========================================================================="
     Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Saving PowerShell Modules and Scripts"
-    
-    Write-Host -ForegroundColor DarkGray "Save PowerShell Modules to OSDisk"
-    if ($Global:OSDCloud.Test -ne $true) {
+    if ($Global:OSDCloud.Test -eq $false) {
         $PowerShellSavePath = 'C:\Program Files\WindowsPowerShell'
 
         if (-NOT (Test-Path "$PowerShellSavePath\Configuration")) {
@@ -925,8 +963,7 @@ exit
     $Global:OSDCloud | ConvertTo-Json | Out-File -FilePath 'C:\OSDCloud\OSDCloud.json' -Encoding ascii -Width 2000 -Force
     Write-Host -ForegroundColor DarkGray "========================================================================="
     Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) OSDCloud Finished"
-    Write-Host -ForegroundColor DarkGray "Completed in $($Global:OSDCloud.TimeSpan.ToString("mm' minutes 'ss' seconds'"))!"
-    Write-Host -ForegroundColor DarkGray "========================================================================="
+    Write-Host -ForegroundColor DarkGray "Completed in $($Global:OSDCloud.TimeSpan.ToString("mm' minutes 'ss' seconds'"))"
     #=================================================
     if ($Global:OSDCloud.Screenshot) {
         Start-Sleep 5
@@ -938,7 +975,7 @@ exit
         Write-Warning "WinPE is restarting in 30 seconds"
         Write-Warning "Press CTRL + C to cancel"
         Start-Sleep -Seconds 30
-        if ($Global:OSDCloud.Test -ne $true) {
+        if ($Global:OSDCloud.Test -eq $false) {
             Restart-Computer
         }
     }
@@ -947,9 +984,15 @@ exit
         Write-Warning "WinPE will shutdown in 30 seconds"
         Write-Warning "Press CTRL + C to cancel"
         Start-Sleep -Seconds 30
-        if ($Global:OSDCloud.Test -ne $true) {
+        if ($Global:OSDCloud.Test -eq $false) {
             Stop-Computer
         }
+    }
+    #=================================================
+    #	Stop-Transcript
+    #=================================================
+    if ($OSDCloud.Test -eq $true) {
+        Stop-Transcript
     }
     #=================================================
 }

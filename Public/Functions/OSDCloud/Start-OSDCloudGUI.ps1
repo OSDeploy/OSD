@@ -6,6 +6,9 @@ function Start-OSDCloudGUI {
     .DESCRIPTION
     OSDCloud imaging using the command line
 
+    .EXAMPLE
+    Start-OSDCloudGUI
+
     .LINK
     https://github.com/OSDeploy/OSD/tree/master/docs
     #>
@@ -20,12 +23,6 @@ function Start-OSDCloudGUI {
         [Alias('BrandingColor')]
         [System.String]$Color = '#01786A'
     )
-    #================================================
-    #   Header
-    #================================================
-    Write-Host -ForegroundColor DarkGray "========================================================================="
-    Write-Host -ForegroundColor Green "Start-OSDCloudGUI"
-    Write-Host -ForegroundColor DarkGray "========================================================================="
     #================================================
     #   Branding
     #================================================
