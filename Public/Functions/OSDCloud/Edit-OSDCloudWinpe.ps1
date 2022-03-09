@@ -16,7 +16,7 @@ function Edit-OSDCloudWinPE {
         [System.String]$Brand = 'OSDCloud',
 
         #WinPE Driver: Download and install in WinPE drivers from Dell,HP,IntelNet,LenovoDock,Nutanix,USB,VMware,WiFi
-        [ValidateSet('*','Dell','HP','IntelNet','LenovoDock','Nutanix','USB','VMware','WiFi')]
+        [ValidateSet('*','Dell','HP','IntelNet','LenovoDock','Surface','Nutanix','USB','VMware','WiFi')]
         [System.String[]]$CloudDriver,
 
         #WinPE Driver: HardwareID of the Driver to add to WinPE

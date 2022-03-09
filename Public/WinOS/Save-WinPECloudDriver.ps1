@@ -1,7 +1,7 @@
 function Save-WinPECloudDriver {
     [CmdletBinding()]
     param (
-        [ValidateSet('*','Dell','HP','IntelNet','LenovoDock','Nutanix','USB','VMware','WiFi')]
+        [ValidateSet('*','Dell','HP','IntelNet','LenovoDock','Nutanix','Surface','USB','VMware','WiFi')]
         [System.String[]]$CloudDriver,
         [System.String[]]$HardwareID,
         [System.String]$Path,
@@ -11,7 +11,7 @@ function Save-WinPECloudDriver {
     #	Cloud Drivers
     #=================================================
     if ($CloudDriver -contains '*') {
-        $CloudDriver = @('Dell','HP','IntelNet','LenovoDock','Nutanix','USB','VMware','WiFi')
+        $CloudDriver = @('Dell','HP','IntelNet','LenovoDock','Nutanix','Surface','USB','VMware','WiFi')
     }
 
     $DellCloudDriverText            = 'Dell WinPE Driver Pack [A25]'
@@ -32,14 +32,28 @@ function Save-WinPECloudDriver {
     $LenovoDockCloudDriverUrl       = @(
                                         'https://download.lenovo.com/pccbbs/mobiles/rtk-winpe-w10.zip'
                                         'https://download.lenovo.com/km/media/attachment/USBCG2.zip'
-                                        )
+                                    )
 
     $NutanixCloudDriverText         = 'Nutanix WinPE Driver Pack [Microsoft Catalog]'
-    $NutanixCloudDriverHwids         = @(
+    $NutanixCloudDriverHwids        = @(
                                         'VEN_1AF4&DEV_1000 and VEN_1AF4&DEV_1041' #Red Hat Nutanix VirtIO Ethernet Adapter
                                         'VEN_1AF4&DEV_1002' #Red Hat Nutanix VirtIO Balloon
                                         'VEN_1AF4&DEV_1004 and VEN_1AF4&DEV_1048' #Red Hat Nutanix VirtIO SCSI pass-through controller
-                                        )
+                                    )
+
+                                    #https://docs.microsoft.com/en-us/surface/enable-surface-keyboard-for-windows-pe-deployment
+    $SurfaceCloudDriverText         = 'Surface WinPE Driver Pack [Microsoft Catalog]'
+    $SurfaceCloudDriverHwids        = @(
+                                        'MSHW0028' #Button
+                                        'MSHW0040' #Button
+                                        'MSHW0084' #Serial Hub
+                                        'MSHW0091' #ACPI Notify
+                                        'MSHW0094' #Null
+                                        'MSHW0096' #Keyboard
+                                        'MSHW0146' #Battery
+                                        'MSHW0153' #HotPlug
+                                        'MSHW0184' #Light Sensor
+                                    )
     
     $UsbDongleHwidsText             = 'USB Dongle Driver Pack [Microsoft Catalog]'
     $UsbDongleHwids                 = @(
@@ -49,14 +63,14 @@ function Save-WinPECloudDriver {
                                         'VID_0BDA&PID_8153 Realtek USB GbE and Dell DA 300'
                                         'VID_13B1&PID_0041'
                                         'VID_17EF&PID_720C Lenovo USB-C Ethernet'
-                                        )
+                                    )
     
     $VmwareCloudDriverText          = 'VMware WinPE Driver Pack [Microsoft Catalog]'
     $VmwareCloudDriverHwids         = @(
                                         'VEN_15AD&DEV_0740' #VMware Virtual Machine Communication Interface
                                         'VEN_15AD&DEV_07B0' #VMware VMXNET3 Ethernet Controller
                                         'VEN_15AD&DEV_07C0' #VMware PVSCSI Controller
-                                        )
+                                    )
     #=================================================
     #	Block
     #=================================================
@@ -211,6 +225,13 @@ function Save-WinPECloudDriver {
         if ($DriverPack -eq 'Nutanix') {
             Write-Host -ForegroundColor Yellow "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) $NutanixCloudDriverText"
             Save-MsUpCatDriver -HardwareID $NutanixCloudDriverHwids -DestinationDirectory (Join-Path $Path $DriverPack)
+        }
+        #=================================================
+        #   Surface
+        #=================================================
+        if ($DriverPack -eq 'Surface') {
+            Write-Host -ForegroundColor Yellow "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) $SurfaceCloudDriverText"
+            Save-MsUpCatDriver -SurfaceID $SurfaceCloudDriverHwids -DestinationDirectory (Join-Path $Path $DriverPack)
         }
         #=================================================
         #   USB Dongles
