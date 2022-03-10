@@ -4,7 +4,7 @@
 
 @{
     RootModule              = 'OSD.psm1'
-    ModuleVersion           = '22.3.9.3'
+    ModuleVersion           = '22.3.9.4'
     CompatiblePSEditions    = @('Desktop')
     GUID                    = '9fe5b9b6-0224-4d87-9018-a8978529f6f5'
     Author                  = 'David Segura @SeguraOSD'
@@ -97,17 +97,17 @@
         'Get-GithubRawUrl',
         'Get-HpDriverPack',
         'Get-LenovoDriverPack',
-        'Get-MasterCatalogDellDriverPack',
-        'Get-MasterCatalogDellSystem',
-        'Get-MasterCatalogHPDriverPack',
-        'Get-MasterCatalogHPPlatformList',
-        'Get-MasterCatalogHPSystem',
-        'Get-MasterCatalogIntelDisplayDriver',
-        'Get-MasterCatalogIntelRadeonDisplayDriver',
-        'Get-MasterCatalogIntelWirelessDriver',
-        'Get-MasterCatalogLenovoBios',
-        'Get-MasterCatalogLenovoDriverPack',
-        'Get-MasterCatalogMicrosoftDriverPack',
+        'Get-BaseCatalogDellDriverPack',
+        'Get-BaseCatalogDellSystem',
+        'Get-BaseCatalogHPDriverPack',
+        'Get-BaseCatalogHPPlatformList',
+        'Get-BaseCatalogHPSystem',
+        'Get-BaseCatalogIntelDisplayDriver',
+        'Get-BaseCatalogIntelRadeonDisplayDriver',
+        'Get-BaseCatalogIntelWirelessDriver',
+        'Get-BaseCatalogLenovoBios',
+        'Get-BaseCatalogLenovoDriverPack',
+        'Get-BaseCatalogMicrosoftDriverPack',
         'Get-MicrosoftDriverPack',
         'Get-MsUpCat',
         'Get-MsUpCatUpdate',

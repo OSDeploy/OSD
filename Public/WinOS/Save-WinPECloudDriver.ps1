@@ -23,11 +23,11 @@ function Save-WinPECloudDriver {
     $IntelEthernetCloudDriverText   = 'Intel Ethernet Driver Pack [26.8]'
     $IntelEthernetCloudDriverUrl    = 'https://downloadmirror.intel.com/710138/Wired_driver_26.8_x64.zip'
 
-    $MasterCatalogIntelWiFi         = Get-MasterCatalogIntelWirelessDriver | `
+    $BaseCatalogIntelWiFi         = Get-BaseCatalogIntelWirelessDriver | `
                                         Where-Object {($_.OSVersion -match '10.0') -and ($_.OSArch -match 'x64')} | `
                                         Select-Object -First 1
-    $IntelWiFiCloudDriverText       = "Intel Wireless Driver Pack [$($MasterCatalogIntelWiFi.DriverVersion)] $($MasterCatalogIntelWiFi.DriverUrl)"
-    $IntelWiFiCloudDriverUrl        = $MasterCatalogIntelWiFi.DriverUrl
+    $IntelWiFiCloudDriverText       = "Intel Wireless Driver Pack [$($BaseCatalogIntelWiFi.DriverVersion)] $($BaseCatalogIntelWiFi.DriverUrl)"
+    $IntelWiFiCloudDriverUrl        = $BaseCatalogIntelWiFi.DriverUrl
     
     $LenovoDockCloudDriverText      = 'Lenovo Dock WinPE Driver Pack [22.1.31]'
     $LenovoDockCloudDriverUrl       = @(

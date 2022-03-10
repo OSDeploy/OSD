@@ -21,9 +21,9 @@ function Get-CatalogHPDriver {
     )
 	
     if ($PSBoundParameters.ContainsKey('Compatible')) {
-	    Get-MasterCatalogHPSystem -Component Driver -Compatible | Sort-Object -Property CreationDate -Descending
+	    Get-BaseCatalogHPSystem -Component Driver -Compatible | Sort-Object -Property CreationDate -Descending
     }
     else {
-        Get-MasterCatalogHPSystem -Component Driver | Sort-Object -Property CreationDate -Descending
+        Get-BaseCatalogHPSystem -Component Driver | Sort-Object -Property CreationDate -Descending
     }
 }

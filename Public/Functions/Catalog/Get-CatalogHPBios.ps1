@@ -21,9 +21,9 @@ function Get-CatalogHPBios {
     )
 	
     if ($PSBoundParameters.ContainsKey('Compatible')) {
-	    Get-MasterCatalogHPSystem -Component BIOS -Compatible | Sort-Object -Property CreationDate -Descending
+	    Get-BaseCatalogHPSystem -Component BIOS -Compatible | Sort-Object -Property CreationDate -Descending
     }
     else {
-        Get-MasterCatalogHPSystem -Component BIOS | Sort-Object -Property CreationDate -Descending
+        Get-BaseCatalogHPSystem -Component BIOS | Sort-Object -Property CreationDate -Descending
     }
 }

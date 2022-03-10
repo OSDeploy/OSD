@@ -22,7 +22,7 @@ Enable-PEWimPSGallery [-ImagePath] <String[]> [[-Index] <UInt32>] [<CommonParame
 ## EXAMPLES
 
 ### Example 1
-```
+```powershell
 PS C:\> {{ Add example code here }}
 ```
 
@@ -66,7 +66,9 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ## INPUTS
 
 ### System.String[]
+
 ### System.UInt32
+
 ## OUTPUTS
 
 ### System.Object

@@ -23,7 +23,7 @@ Save-WinPECloudDriver [[-CloudDriver] <String[]>] [[-HardwareID] <String[]>] [[-
 ## EXAMPLES
 
 ### Example 1
-```
+```powershell
 PS C:\> {{ Add example code here }}
 ```
 
@@ -41,7 +41,7 @@ Aliases:
 
 Required: False
 Position: Named
-Default value: False
+Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
@@ -53,7 +53,7 @@ Accept wildcard characters: False
 Type: String[]
 Parameter Sets: (All)
 Aliases:
-Accepted values: *, Dell, HP, IntelNet, LenovoDock, Nutanix, USB, VMware, WiFi
+Accepted values: *, Dell, HP, IntelNet, LenovoDock, Nutanix, Surface, USB, VMware, WiFi
 
 Required: False
 Position: 0
@@ -98,6 +98,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ## INPUTS
 
 ### None
+
 ## OUTPUTS
 
 ### System.Object
