@@ -4071,19 +4071,19 @@ Original credit to Mike Robbins http://mikefrobbins.com/2018/01/18/use-powershel
       <command:verb>Edit</command:verb>
       <command:noun>MyWinPE</command:noun>
       <maml:description>
-        <maml:para>Performs many tasks on a WinPE.wim file.  Not good for an OS wim</maml:para>
+        <maml:para>Mounts and edits a WinPE WIM file</maml:para>
       </maml:description>
     </command:details>
     <maml:description>
-      <maml:para>Performs many tasks on a WinPE.wim file.  Not good for an OS wim</maml:para>
+      <maml:para>Mounts and edits a WinPE WIM file</maml:para>
     </maml:description>
     <command:syntax>
       <command:syntaxItem>
         <maml:name>Edit-MyWinPE</maml:name>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="1" aliases="none">
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="named" aliases="none">
           <maml:name>ImagePath</maml:name>
           <maml:description>
-            <maml:para>{{ Fill ImagePath Description }}</maml:para>
+            <maml:para>Path to the WinPE WIM file. This file must be local and not on a USB or Network Share</maml:para>
           </maml:description>
           <command:parameterValue required="true" variableLength="false">String[]</command:parameterValue>
           <dev:type>
@@ -4092,10 +4092,10 @@ Original credit to Mike Robbins http://mikefrobbins.com/2018/01/18/use-powershel
           </dev:type>
           <dev:defaultValue>None</dev:defaultValue>
         </command:parameter>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="2" aliases="none">
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="named" aliases="none">
           <maml:name>Index</maml:name>
           <maml:description>
-            <maml:para>{{ Fill Index Description }}</maml:para>
+            <maml:para>Index of the WinPE WIM file to mount. Default is 1</maml:para>
           </maml:description>
           <command:parameterValue required="true" variableLength="false">UInt32</command:parameterValue>
           <dev:type>
@@ -4104,10 +4104,10 @@ Original credit to Mike Robbins http://mikefrobbins.com/2018/01/18/use-powershel
           </dev:type>
           <dev:defaultValue>1</dev:defaultValue>
         </command:parameter>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="3" aliases="none">
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>CloudDriver</maml:name>
           <maml:description>
-            <maml:para>{{ Fill CloudDriver Description }}</maml:para>
+            <maml:para>WinPE Driver: Download and install in WinPE drivers from Dell,HP,IntelNet,LenovoDock,Nutanix,USB,VMware,WiFi</maml:para>
           </maml:description>
           <command:parameterValue required="true" variableLength="false">String[]</command:parameterValue>
           <dev:type>
@@ -4116,10 +4116,10 @@ Original credit to Mike Robbins http://mikefrobbins.com/2018/01/18/use-powershel
           </dev:type>
           <dev:defaultValue>None</dev:defaultValue>
         </command:parameter>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="4" aliases="none">
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="HardwareID">
           <maml:name>DriverHWID</maml:name>
           <maml:description>
-            <maml:para>{{ Fill DriverHWID Description }}</maml:para>
+            <maml:para>WinPE Driver: HardwareID of the Driver to add to WinPE</maml:para>
           </maml:description>
           <command:parameterValue required="true" variableLength="false">String[]</command:parameterValue>
           <dev:type>
@@ -4128,10 +4128,10 @@ Original credit to Mike Robbins http://mikefrobbins.com/2018/01/18/use-powershel
           </dev:type>
           <dev:defaultValue>None</dev:defaultValue>
         </command:parameter>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="5" aliases="none">
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>DriverPath</maml:name>
           <maml:description>
-            <maml:para>{{ Fill DriverPath Description }}</maml:para>
+            <maml:para>WinPE Driver: Path to additional Drivers you want to add to WinPE</maml:para>
           </maml:description>
           <command:parameterValue required="true" variableLength="false">String[]</command:parameterValue>
           <dev:type>
@@ -4140,10 +4140,10 @@ Original credit to Mike Robbins http://mikefrobbins.com/2018/01/18/use-powershel
           </dev:type>
           <dev:defaultValue>None</dev:defaultValue>
         </command:parameter>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="6" aliases="none">
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>ExecutionPolicy</maml:name>
           <maml:description>
-            <maml:para>{{ Fill ExecutionPolicy Description }}</maml:para>
+            <maml:para>PowerShell: Sets the PowerShell Execution Policy of WinPE.  Bypass is recommended</maml:para>
           </maml:description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -4152,10 +4152,10 @@ Original credit to Mike Robbins http://mikefrobbins.com/2018/01/18/use-powershel
           </dev:type>
           <dev:defaultValue>None</dev:defaultValue>
         </command:parameter>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="7" aliases="none">
-          <maml:name>PSModuleSave</maml:name>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="PSModuleSave">
+          <maml:name>PSModuleInstall</maml:name>
           <maml:description>
-            <maml:para>{{ Fill PSModuleSave Description }}</maml:para>
+            <maml:para>PowerShell: Installs named PowerShell Modules from PowerShell Gallery to WinPE</maml:para>
           </maml:description>
           <command:parameterValue required="true" variableLength="false">String[]</command:parameterValue>
           <dev:type>
@@ -4164,10 +4164,10 @@ Original credit to Mike Robbins http://mikefrobbins.com/2018/01/18/use-powershel
           </dev:type>
           <dev:defaultValue>None</dev:defaultValue>
         </command:parameter>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="8" aliases="none">
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>PSModuleCopy</maml:name>
           <maml:description>
-            <maml:para>{{ Fill PSModuleCopy Description }}</maml:para>
+            <maml:para>PowerShell: Copies named PowerShell Modules from the running OS to WinPE This is useful for adding Modules that are customized or not on PowerShell Gallery</maml:para>
           </maml:description>
           <command:parameterValue required="true" variableLength="false">String[]</command:parameterValue>
           <dev:type>
@@ -4179,7 +4179,7 @@ Original credit to Mike Robbins http://mikefrobbins.com/2018/01/18/use-powershel
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>PSGallery</maml:name>
           <maml:description>
-            <maml:para>{{ Fill PSGallery Description }}</maml:para>
+            <maml:para>PowerShell: Enables PowerShell Gallery functionality in WinPE</maml:para>
           </maml:description>
           <dev:type>
             <maml:name>SwitchParameter</maml:name>
@@ -4188,9 +4188,21 @@ Original credit to Mike Robbins http://mikefrobbins.com/2018/01/18/use-powershel
           <dev:defaultValue>False</dev:defaultValue>
         </command:parameter>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+          <maml:name>Wallpaper</maml:name>
+          <maml:description>
+            <maml:para>Sets the specified Wallpaper JPG file as the WinPE Background</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>DismountSave</maml:name>
           <maml:description>
-            <maml:para>{{ Fill DismountSave Description }}</maml:para>
+            <maml:para>Dismounts and saves changes to the mounted WinPE WIM</maml:para>
           </maml:description>
           <dev:type>
             <maml:name>SwitchParameter</maml:name>
@@ -4201,10 +4213,10 @@ Original credit to Mike Robbins http://mikefrobbins.com/2018/01/18/use-powershel
       </command:syntaxItem>
     </command:syntax>
     <command:parameters>
-      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="1" aliases="none">
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="named" aliases="none">
         <maml:name>ImagePath</maml:name>
         <maml:description>
-          <maml:para>{{ Fill ImagePath Description }}</maml:para>
+          <maml:para>Path to the WinPE WIM file. This file must be local and not on a USB or Network Share</maml:para>
         </maml:description>
         <command:parameterValue required="true" variableLength="false">String[]</command:parameterValue>
         <dev:type>
@@ -4213,10 +4225,10 @@ Original credit to Mike Robbins http://mikefrobbins.com/2018/01/18/use-powershel
         </dev:type>
         <dev:defaultValue>None</dev:defaultValue>
       </command:parameter>
-      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="2" aliases="none">
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="named" aliases="none">
         <maml:name>Index</maml:name>
         <maml:description>
-          <maml:para>{{ Fill Index Description }}</maml:para>
+          <maml:para>Index of the WinPE WIM file to mount. Default is 1</maml:para>
         </maml:description>
         <command:parameterValue required="true" variableLength="false">UInt32</command:parameterValue>
         <dev:type>
@@ -4225,10 +4237,10 @@ Original credit to Mike Robbins http://mikefrobbins.com/2018/01/18/use-powershel
         </dev:type>
         <dev:defaultValue>1</dev:defaultValue>
       </command:parameter>
-      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="3" aliases="none">
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
         <maml:name>CloudDriver</maml:name>
         <maml:description>
-          <maml:para>{{ Fill CloudDriver Description }}</maml:para>
+          <maml:para>WinPE Driver: Download and install in WinPE drivers from Dell,HP,IntelNet,LenovoDock,Nutanix,USB,VMware,WiFi</maml:para>
         </maml:description>
         <command:parameterValue required="true" variableLength="false">String[]</command:parameterValue>
         <dev:type>
@@ -4237,10 +4249,10 @@ Original credit to Mike Robbins http://mikefrobbins.com/2018/01/18/use-powershel
         </dev:type>
         <dev:defaultValue>None</dev:defaultValue>
       </command:parameter>
-      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="4" aliases="none">
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="HardwareID">
         <maml:name>DriverHWID</maml:name>
         <maml:description>
-          <maml:para>{{ Fill DriverHWID Description }}</maml:para>
+          <maml:para>WinPE Driver: HardwareID of the Driver to add to WinPE</maml:para>
         </maml:description>
         <command:parameterValue required="true" variableLength="false">String[]</command:parameterValue>
         <dev:type>
@@ -4249,10 +4261,10 @@ Original credit to Mike Robbins http://mikefrobbins.com/2018/01/18/use-powershel
         </dev:type>
         <dev:defaultValue>None</dev:defaultValue>
       </command:parameter>
-      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="5" aliases="none">
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
         <maml:name>DriverPath</maml:name>
         <maml:description>
-          <maml:para>{{ Fill DriverPath Description }}</maml:para>
+          <maml:para>WinPE Driver: Path to additional Drivers you want to add to WinPE</maml:para>
         </maml:description>
         <command:parameterValue required="true" variableLength="false">String[]</command:parameterValue>
         <dev:type>
@@ -4261,10 +4273,10 @@ Original credit to Mike Robbins http://mikefrobbins.com/2018/01/18/use-powershel
         </dev:type>
         <dev:defaultValue>None</dev:defaultValue>
       </command:parameter>
-      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="6" aliases="none">
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
         <maml:name>ExecutionPolicy</maml:name>
         <maml:description>
-          <maml:para>{{ Fill ExecutionPolicy Description }}</maml:para>
+          <maml:para>PowerShell: Sets the PowerShell Execution Policy of WinPE.  Bypass is recommended</maml:para>
         </maml:description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
@@ -4273,10 +4285,10 @@ Original credit to Mike Robbins http://mikefrobbins.com/2018/01/18/use-powershel
         </dev:type>
         <dev:defaultValue>None</dev:defaultValue>
       </command:parameter>
-      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="7" aliases="none">
-        <maml:name>PSModuleSave</maml:name>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="PSModuleSave">
+        <maml:name>PSModuleInstall</maml:name>
         <maml:description>
-          <maml:para>{{ Fill PSModuleSave Description }}</maml:para>
+          <maml:para>PowerShell: Installs named PowerShell Modules from PowerShell Gallery to WinPE</maml:para>
         </maml:description>
         <command:parameterValue required="true" variableLength="false">String[]</command:parameterValue>
         <dev:type>
@@ -4285,10 +4297,10 @@ Original credit to Mike Robbins http://mikefrobbins.com/2018/01/18/use-powershel
         </dev:type>
         <dev:defaultValue>None</dev:defaultValue>
       </command:parameter>
-      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="8" aliases="none">
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
         <maml:name>PSModuleCopy</maml:name>
         <maml:description>
-          <maml:para>{{ Fill PSModuleCopy Description }}</maml:para>
+          <maml:para>PowerShell: Copies named PowerShell Modules from the running OS to WinPE This is useful for adding Modules that are customized or not on PowerShell Gallery</maml:para>
         </maml:description>
         <command:parameterValue required="true" variableLength="false">String[]</command:parameterValue>
         <dev:type>
@@ -4300,7 +4312,7 @@ Original credit to Mike Robbins http://mikefrobbins.com/2018/01/18/use-powershel
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
         <maml:name>PSGallery</maml:name>
         <maml:description>
-          <maml:para>{{ Fill PSGallery Description }}</maml:para>
+          <maml:para>PowerShell: Enables PowerShell Gallery functionality in WinPE</maml:para>
         </maml:description>
         <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
         <dev:type>
@@ -4310,9 +4322,21 @@ Original credit to Mike Robbins http://mikefrobbins.com/2018/01/18/use-powershel
         <dev:defaultValue>False</dev:defaultValue>
       </command:parameter>
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+        <maml:name>Wallpaper</maml:name>
+        <maml:description>
+          <maml:para>Sets the specified Wallpaper JPG file as the WinPE Background</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
         <maml:name>DismountSave</maml:name>
         <maml:description>
-          <maml:para>{{ Fill DismountSave Description }}</maml:para>
+          <maml:para>Dismounts and saves changes to the mounted WinPE WIM</maml:para>
         </maml:description>
         <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
         <dev:type>
@@ -4326,7 +4350,7 @@ Original credit to Mike Robbins http://mikefrobbins.com/2018/01/18/use-powershel
     <command:returnValues />
     <maml:alertSet>
       <maml:alert>
-        <maml:para>21.3.12  Initial Release</maml:para>
+        <maml:para></maml:para>
       </maml:alert>
     </maml:alertSet>
     <command:examples>
@@ -4340,8 +4364,8 @@ Original credit to Mike Robbins http://mikefrobbins.com/2018/01/18/use-powershel
     </command:examples>
     <command:relatedLinks>
       <maml:navigationLink>
-        <maml:linkText>https://osd.osdeploy.com/module/functions/winpewim</maml:linkText>
-        <maml:uri>https://osd.osdeploy.com/module/functions/winpewim</maml:uri>
+        <maml:linkText>https://github.com/OSDeploy/OSD/tree/master/Docs</maml:linkText>
+        <maml:uri>https://github.com/OSDeploy/OSD/tree/master/Docs</maml:uri>
       </maml:navigationLink>
     </command:relatedLinks>
   </command:command>
@@ -4384,7 +4408,7 @@ Original credit to Mike Robbins http://mikefrobbins.com/2018/01/18/use-powershel
           </dev:type>
           <dev:defaultValue>None</dev:defaultValue>
         </command:parameter>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="HardwareID">
           <maml:name>DriverHWID</maml:name>
           <maml:description>
             <maml:para>WinPE Driver: HardwareID of the Driver to add to WinPE</maml:para>
@@ -4399,7 +4423,7 @@ Original credit to Mike Robbins http://mikefrobbins.com/2018/01/18/use-powershel
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>DriverPath</maml:name>
           <maml:description>
-            <maml:para>WinPE Driver: Path to additional Drivers you want to install</maml:para>
+            <maml:para>WinPE Driver: Path to additional Drivers you want to add to WinPE</maml:para>
           </maml:description>
           <command:parameterValue required="true" variableLength="false">String[]</command:parameterValue>
           <dev:type>
@@ -4411,7 +4435,7 @@ Original credit to Mike Robbins http://mikefrobbins.com/2018/01/18/use-powershel
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>PSModuleCopy</maml:name>
           <maml:description>
-            <maml:para>Copies named PowerShell Modules from the running OS to WinPE</maml:para>
+            <maml:para>PowerShell: Copies named PowerShell Modules from the running OS to WinPE This is useful for adding Modules that are customized or not on PowerShell Gallery</maml:para>
           </maml:description>
           <command:parameterValue required="true" variableLength="false">String[]</command:parameterValue>
           <dev:type>
@@ -4423,7 +4447,7 @@ Original credit to Mike Robbins http://mikefrobbins.com/2018/01/18/use-powershel
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="Modules">
           <maml:name>PSModuleInstall</maml:name>
           <maml:description>
-            <maml:para>Installs named PowerShell Modules from PowerShell Gallery to WinPE</maml:para>
+            <maml:para>PowerShell: Installs named PowerShell Modules from PowerShell Gallery to WinPE</maml:para>
           </maml:description>
           <command:parameterValue required="true" variableLength="false">String[]</command:parameterValue>
           <dev:type>
@@ -4565,7 +4589,7 @@ Original credit to Mike Robbins http://mikefrobbins.com/2018/01/18/use-powershel
         </dev:type>
         <dev:defaultValue>None</dev:defaultValue>
       </command:parameter>
-      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="HardwareID">
         <maml:name>DriverHWID</maml:name>
         <maml:description>
           <maml:para>WinPE Driver: HardwareID of the Driver to add to WinPE</maml:para>
@@ -4580,7 +4604,7 @@ Original credit to Mike Robbins http://mikefrobbins.com/2018/01/18/use-powershel
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
         <maml:name>DriverPath</maml:name>
         <maml:description>
-          <maml:para>WinPE Driver: Path to additional Drivers you want to install</maml:para>
+          <maml:para>WinPE Driver: Path to additional Drivers you want to add to WinPE</maml:para>
         </maml:description>
         <command:parameterValue required="true" variableLength="false">String[]</command:parameterValue>
         <dev:type>
@@ -4592,7 +4616,7 @@ Original credit to Mike Robbins http://mikefrobbins.com/2018/01/18/use-powershel
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
         <maml:name>PSModuleCopy</maml:name>
         <maml:description>
-          <maml:para>Copies named PowerShell Modules from the running OS to WinPE</maml:para>
+          <maml:para>PowerShell: Copies named PowerShell Modules from the running OS to WinPE This is useful for adding Modules that are customized or not on PowerShell Gallery</maml:para>
         </maml:description>
         <command:parameterValue required="true" variableLength="false">String[]</command:parameterValue>
         <dev:type>
@@ -4604,7 +4628,7 @@ Original credit to Mike Robbins http://mikefrobbins.com/2018/01/18/use-powershel
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="Modules">
         <maml:name>PSModuleInstall</maml:name>
         <maml:description>
-          <maml:para>Installs named PowerShell Modules from PowerShell Gallery to WinPE</maml:para>
+          <maml:para>PowerShell: Installs named PowerShell Modules from PowerShell Gallery to WinPE</maml:para>
         </maml:description>
         <command:parameterValue required="true" variableLength="false">String[]</command:parameterValue>
         <dev:type>
@@ -4781,8 +4805,8 @@ Original credit to Mike Robbins http://mikefrobbins.com/2018/01/18/use-powershel
     </command:examples>
     <command:relatedLinks>
       <maml:navigationLink>
-        <maml:linkText>https://github.com/OSDeploy/OSD/tree/master/docs</maml:linkText>
-        <maml:uri>https://github.com/OSDeploy/OSD/tree/master/docs</maml:uri>
+        <maml:linkText>https://github.com/OSDeploy/OSD/tree/master/Docs</maml:linkText>
+        <maml:uri>https://github.com/OSDeploy/OSD/tree/master/Docs</maml:uri>
       </maml:navigationLink>
     </command:relatedLinks>
   </command:command>
@@ -4898,7 +4922,7 @@ Original credit to Mike Robbins http://mikefrobbins.com/2018/01/18/use-powershel
     <command:relatedLinks>
       <maml:navigationLink>
         <maml:linkText>Online Version:</maml:linkText>
-        <maml:uri>https://github.com/OSDeploy/OSD/tree/master/docs</maml:uri>
+        <maml:uri>https://github.com/OSDeploy/OSD/tree/master/Docs</maml:uri>
       </maml:navigationLink>
     </command:relatedLinks>
   </command:command>
@@ -4982,7 +5006,7 @@ Original credit to Mike Robbins http://mikefrobbins.com/2018/01/18/use-powershel
     <command:relatedLinks>
       <maml:navigationLink>
         <maml:linkText>Online Version:</maml:linkText>
-        <maml:uri>https://github.com/OSDeploy/OSD/tree/master/docs</maml:uri>
+        <maml:uri>https://github.com/OSDeploy/OSD/tree/master/Docs</maml:uri>
       </maml:navigationLink>
     </command:relatedLinks>
   </command:command>
@@ -5041,7 +5065,7 @@ Original credit to Mike Robbins http://mikefrobbins.com/2018/01/18/use-powershel
     <command:relatedLinks>
       <maml:navigationLink>
         <maml:linkText>Online Version:</maml:linkText>
-        <maml:uri>https://github.com/OSDeploy/OSD/tree/master/docs</maml:uri>
+        <maml:uri>https://github.com/OSDeploy/OSD/tree/master/Docs</maml:uri>
       </maml:navigationLink>
     </command:relatedLinks>
   </command:command>
@@ -5124,7 +5148,7 @@ Original credit to Mike Robbins http://mikefrobbins.com/2018/01/18/use-powershel
     <command:relatedLinks>
       <maml:navigationLink>
         <maml:linkText>Online Version:</maml:linkText>
-        <maml:uri>https://github.com/OSDeploy/OSD/tree/master/docs</maml:uri>
+        <maml:uri>https://github.com/OSDeploy/OSD/tree/master/Docs</maml:uri>
       </maml:navigationLink>
     </command:relatedLinks>
   </command:command>
@@ -5183,7 +5207,7 @@ Original credit to Mike Robbins http://mikefrobbins.com/2018/01/18/use-powershel
     <command:relatedLinks>
       <maml:navigationLink>
         <maml:linkText>Online Version:</maml:linkText>
-        <maml:uri>https://github.com/OSDeploy/OSD/tree/master/docs</maml:uri>
+        <maml:uri>https://github.com/OSDeploy/OSD/tree/master/Docs</maml:uri>
       </maml:navigationLink>
     </command:relatedLinks>
   </command:command>
@@ -5242,7 +5266,7 @@ Original credit to Mike Robbins http://mikefrobbins.com/2018/01/18/use-powershel
     <command:relatedLinks>
       <maml:navigationLink>
         <maml:linkText>Online Version:</maml:linkText>
-        <maml:uri>https://github.com/OSDeploy/OSD/tree/master/docs</maml:uri>
+        <maml:uri>https://github.com/OSDeploy/OSD/tree/master/Docs</maml:uri>
       </maml:navigationLink>
     </command:relatedLinks>
   </command:command>
@@ -5350,7 +5374,7 @@ Original credit to Mike Robbins http://mikefrobbins.com/2018/01/18/use-powershel
     <command:relatedLinks>
       <maml:navigationLink>
         <maml:linkText>Online Version:</maml:linkText>
-        <maml:uri>https://github.com/OSDeploy/OSD/tree/master/docs</maml:uri>
+        <maml:uri>https://github.com/OSDeploy/OSD/tree/master/Docs</maml:uri>
       </maml:navigationLink>
     </command:relatedLinks>
   </command:command>
@@ -5409,7 +5433,7 @@ Original credit to Mike Robbins http://mikefrobbins.com/2018/01/18/use-powershel
     <command:relatedLinks>
       <maml:navigationLink>
         <maml:linkText>Online Version:</maml:linkText>
-        <maml:uri>https://github.com/OSDeploy/OSD/tree/master/docs</maml:uri>
+        <maml:uri>https://github.com/OSDeploy/OSD/tree/master/Docs</maml:uri>
       </maml:navigationLink>
     </command:relatedLinks>
   </command:command>
@@ -5493,7 +5517,7 @@ Original credit to Mike Robbins http://mikefrobbins.com/2018/01/18/use-powershel
     <command:relatedLinks>
       <maml:navigationLink>
         <maml:linkText>Online Version:</maml:linkText>
-        <maml:uri>https://github.com/OSDeploy/OSD/tree/master/docs</maml:uri>
+        <maml:uri>https://github.com/OSDeploy/OSD/tree/master/Docs</maml:uri>
       </maml:navigationLink>
     </command:relatedLinks>
   </command:command>
@@ -5552,7 +5576,7 @@ Original credit to Mike Robbins http://mikefrobbins.com/2018/01/18/use-powershel
     <command:relatedLinks>
       <maml:navigationLink>
         <maml:linkText>Online Version:</maml:linkText>
-        <maml:uri>https://github.com/OSDeploy/OSD/tree/master/docs</maml:uri>
+        <maml:uri>https://github.com/OSDeploy/OSD/tree/master/Docs</maml:uri>
       </maml:navigationLink>
     </command:relatedLinks>
   </command:command>
@@ -5684,7 +5708,7 @@ Original credit to Mike Robbins http://mikefrobbins.com/2018/01/18/use-powershel
     <command:relatedLinks>
       <maml:navigationLink>
         <maml:linkText>Online Version:</maml:linkText>
-        <maml:uri>https://github.com/OSDeploy/OSD/tree/master/docs</maml:uri>
+        <maml:uri>https://github.com/OSDeploy/OSD/tree/master/Docs</maml:uri>
       </maml:navigationLink>
     </command:relatedLinks>
   </command:command>
@@ -5816,7 +5840,7 @@ Original credit to Mike Robbins http://mikefrobbins.com/2018/01/18/use-powershel
     <command:relatedLinks>
       <maml:navigationLink>
         <maml:linkText>Online Version:</maml:linkText>
-        <maml:uri>https://github.com/OSDeploy/OSD/tree/master/docs</maml:uri>
+        <maml:uri>https://github.com/OSDeploy/OSD/tree/master/Docs</maml:uri>
       </maml:navigationLink>
     </command:relatedLinks>
   </command:command>
@@ -9325,8 +9349,8 @@ Original credit to Mike Robbins http://mikefrobbins.com/2018/01/18/use-powershel
     </command:examples>
     <command:relatedLinks>
       <maml:navigationLink>
-        <maml:linkText>https://github.com/OSDeploy/OSD/tree/master/docs</maml:linkText>
-        <maml:uri>https://github.com/OSDeploy/OSD/tree/master/docs</maml:uri>
+        <maml:linkText>https://github.com/OSDeploy/OSD/tree/master/Docs</maml:linkText>
+        <maml:uri>https://github.com/OSDeploy/OSD/tree/master/Docs</maml:uri>
       </maml:navigationLink>
     </command:relatedLinks>
   </command:command>
@@ -9410,7 +9434,7 @@ Original credit to Mike Robbins http://mikefrobbins.com/2018/01/18/use-powershel
     <command:relatedLinks>
       <maml:navigationLink>
         <maml:linkText>Online Version:</maml:linkText>
-        <maml:uri>https://github.com/OSDeploy/OSD/tree/master/docs</maml:uri>
+        <maml:uri>https://github.com/OSDeploy/OSD/tree/master/Docs</maml:uri>
       </maml:navigationLink>
     </command:relatedLinks>
   </command:command>
@@ -9494,7 +9518,7 @@ Original credit to Mike Robbins http://mikefrobbins.com/2018/01/18/use-powershel
     <command:relatedLinks>
       <maml:navigationLink>
         <maml:linkText>Online Version:</maml:linkText>
-        <maml:uri>https://github.com/OSDeploy/OSD/tree/master/docs</maml:uri>
+        <maml:uri>https://github.com/OSDeploy/OSD/tree/master/Docs</maml:uri>
       </maml:navigationLink>
     </command:relatedLinks>
   </command:command>
@@ -9578,7 +9602,7 @@ Original credit to Mike Robbins http://mikefrobbins.com/2018/01/18/use-powershel
     <command:relatedLinks>
       <maml:navigationLink>
         <maml:linkText>Online Version:</maml:linkText>
-        <maml:uri>https://github.com/OSDeploy/OSD/tree/master/docs</maml:uri>
+        <maml:uri>https://github.com/OSDeploy/OSD/tree/master/Docs</maml:uri>
       </maml:navigationLink>
     </command:relatedLinks>
   </command:command>
@@ -9662,7 +9686,7 @@ Original credit to Mike Robbins http://mikefrobbins.com/2018/01/18/use-powershel
     <command:relatedLinks>
       <maml:navigationLink>
         <maml:linkText>Online Version:</maml:linkText>
-        <maml:uri>https://github.com/OSDeploy/OSD/tree/master/docs</maml:uri>
+        <maml:uri>https://github.com/OSDeploy/OSD/tree/master/Docs</maml:uri>
       </maml:navigationLink>
     </command:relatedLinks>
   </command:command>
@@ -9746,7 +9770,7 @@ Original credit to Mike Robbins http://mikefrobbins.com/2018/01/18/use-powershel
     <command:relatedLinks>
       <maml:navigationLink>
         <maml:linkText>Online Version:</maml:linkText>
-        <maml:uri>https://github.com/OSDeploy/OSD/tree/master/docs</maml:uri>
+        <maml:uri>https://github.com/OSDeploy/OSD/tree/master/Docs</maml:uri>
       </maml:navigationLink>
     </command:relatedLinks>
   </command:command>
@@ -9956,7 +9980,7 @@ Original credit to Mike Robbins http://mikefrobbins.com/2018/01/18/use-powershel
     <command:relatedLinks>
       <maml:navigationLink>
         <maml:linkText>Online Version:</maml:linkText>
-        <maml:uri>https://github.com/OSDeploy/OSD/tree/master/docs</maml:uri>
+        <maml:uri>https://github.com/OSDeploy/OSD/tree/master/Docs</maml:uri>
       </maml:navigationLink>
     </command:relatedLinks>
   </command:command>
@@ -10190,7 +10214,7 @@ Original credit to Mike Robbins http://mikefrobbins.com/2018/01/18/use-powershel
     <command:relatedLinks>
       <maml:navigationLink>
         <maml:linkText>Online Version:</maml:linkText>
-        <maml:uri>https://github.com/OSDeploy/OSD/tree/master/docs</maml:uri>
+        <maml:uri>https://github.com/OSDeploy/OSD/tree/master/Docs</maml:uri>
       </maml:navigationLink>
     </command:relatedLinks>
   </command:command>
@@ -10273,7 +10297,7 @@ Original credit to Mike Robbins http://mikefrobbins.com/2018/01/18/use-powershel
     <command:relatedLinks>
       <maml:navigationLink>
         <maml:linkText>Online Version:</maml:linkText>
-        <maml:uri>https://github.com/OSDeploy/OSD/tree/master/docs</maml:uri>
+        <maml:uri>https://github.com/OSDeploy/OSD/tree/master/Docs</maml:uri>
       </maml:navigationLink>
     </command:relatedLinks>
   </command:command>
@@ -10381,7 +10405,7 @@ Original credit to Mike Robbins http://mikefrobbins.com/2018/01/18/use-powershel
     <command:relatedLinks>
       <maml:navigationLink>
         <maml:linkText>Online Version:</maml:linkText>
-        <maml:uri>https://github.com/OSDeploy/OSD/tree/master/docs</maml:uri>
+        <maml:uri>https://github.com/OSDeploy/OSD/tree/master/Docs</maml:uri>
       </maml:navigationLink>
     </command:relatedLinks>
   </command:command>
@@ -10440,7 +10464,7 @@ Original credit to Mike Robbins http://mikefrobbins.com/2018/01/18/use-powershel
     <command:relatedLinks>
       <maml:navigationLink>
         <maml:linkText>Online Version:</maml:linkText>
-        <maml:uri>https://github.com/OSDeploy/OSD/tree/master/docs</maml:uri>
+        <maml:uri>https://github.com/OSDeploy/OSD/tree/master/Docs</maml:uri>
       </maml:navigationLink>
     </command:relatedLinks>
   </command:command>
@@ -10523,7 +10547,7 @@ Original credit to Mike Robbins http://mikefrobbins.com/2018/01/18/use-powershel
     <command:relatedLinks>
       <maml:navigationLink>
         <maml:linkText>Online Version:</maml:linkText>
-        <maml:uri>https://github.com/OSDeploy/OSD/tree/master/docs</maml:uri>
+        <maml:uri>https://github.com/OSDeploy/OSD/tree/master/Docs</maml:uri>
       </maml:navigationLink>
     </command:relatedLinks>
   </command:command>
@@ -10606,7 +10630,7 @@ Original credit to Mike Robbins http://mikefrobbins.com/2018/01/18/use-powershel
     <command:relatedLinks>
       <maml:navigationLink>
         <maml:linkText>Online Version:</maml:linkText>
-        <maml:uri>https://github.com/OSDeploy/OSD/tree/master/docs</maml:uri>
+        <maml:uri>https://github.com/OSDeploy/OSD/tree/master/Docs</maml:uri>
       </maml:navigationLink>
     </command:relatedLinks>
   </command:command>
@@ -10689,7 +10713,7 @@ Original credit to Mike Robbins http://mikefrobbins.com/2018/01/18/use-powershel
     <command:relatedLinks>
       <maml:navigationLink>
         <maml:linkText>Online Version:</maml:linkText>
-        <maml:uri>https://github.com/OSDeploy/OSD/tree/master/docs</maml:uri>
+        <maml:uri>https://github.com/OSDeploy/OSD/tree/master/Docs</maml:uri>
       </maml:navigationLink>
     </command:relatedLinks>
   </command:command>
@@ -10748,7 +10772,7 @@ Original credit to Mike Robbins http://mikefrobbins.com/2018/01/18/use-powershel
     <command:relatedLinks>
       <maml:navigationLink>
         <maml:linkText>Online Version:</maml:linkText>
-        <maml:uri>https://github.com/OSDeploy/OSD/tree/master/docs</maml:uri>
+        <maml:uri>https://github.com/OSDeploy/OSD/tree/master/Docs</maml:uri>
       </maml:navigationLink>
     </command:relatedLinks>
   </command:command>
@@ -11718,8 +11742,8 @@ Original credit to Mike Robbins http://mikefrobbins.com/2018/01/18/use-powershel
     </command:examples>
     <command:relatedLinks>
       <maml:navigationLink>
-        <maml:linkText>https://github.com/OSDeploy/OSD/tree/master/docs</maml:linkText>
-        <maml:uri>https://github.com/OSDeploy/OSD/tree/master/docs</maml:uri>
+        <maml:linkText>https://github.com/OSDeploy/OSD/tree/master/Docs</maml:linkText>
+        <maml:uri>https://github.com/OSDeploy/OSD/tree/master/Docs</maml:uri>
       </maml:navigationLink>
     </command:relatedLinks>
   </command:command>
@@ -11768,8 +11792,8 @@ Original credit to Mike Robbins http://mikefrobbins.com/2018/01/18/use-powershel
     </command:examples>
     <command:relatedLinks>
       <maml:navigationLink>
-        <maml:linkText>https://github.com/OSDeploy/OSD/tree/master/docs</maml:linkText>
-        <maml:uri>https://github.com/OSDeploy/OSD/tree/master/docs</maml:uri>
+        <maml:linkText>https://github.com/OSDeploy/OSD/tree/master/Docs</maml:linkText>
+        <maml:uri>https://github.com/OSDeploy/OSD/tree/master/Docs</maml:uri>
       </maml:navigationLink>
     </command:relatedLinks>
   </command:command>
@@ -11826,8 +11850,8 @@ Original credit to Mike Robbins http://mikefrobbins.com/2018/01/18/use-powershel
     </command:examples>
     <command:relatedLinks>
       <maml:navigationLink>
-        <maml:linkText>https://github.com/OSDeploy/OSD/tree/master/docs</maml:linkText>
-        <maml:uri>https://github.com/OSDeploy/OSD/tree/master/docs</maml:uri>
+        <maml:linkText>https://github.com/OSDeploy/OSD/tree/master/Docs</maml:linkText>
+        <maml:uri>https://github.com/OSDeploy/OSD/tree/master/Docs</maml:uri>
       </maml:navigationLink>
     </command:relatedLinks>
   </command:command>
@@ -11867,8 +11891,8 @@ Original credit to Mike Robbins http://mikefrobbins.com/2018/01/18/use-powershel
     </command:examples>
     <command:relatedLinks>
       <maml:navigationLink>
-        <maml:linkText>https://github.com/OSDeploy/OSD/tree/master/docs</maml:linkText>
-        <maml:uri>https://github.com/OSDeploy/OSD/tree/master/docs</maml:uri>
+        <maml:linkText>https://github.com/OSDeploy/OSD/tree/master/Docs</maml:linkText>
+        <maml:uri>https://github.com/OSDeploy/OSD/tree/master/Docs</maml:uri>
       </maml:navigationLink>
     </command:relatedLinks>
   </command:command>
@@ -11908,8 +11932,8 @@ Original credit to Mike Robbins http://mikefrobbins.com/2018/01/18/use-powershel
     </command:examples>
     <command:relatedLinks>
       <maml:navigationLink>
-        <maml:linkText>https://github.com/OSDeploy/OSD/tree/master/docs</maml:linkText>
-        <maml:uri>https://github.com/OSDeploy/OSD/tree/master/docs</maml:uri>
+        <maml:linkText>https://github.com/OSDeploy/OSD/tree/master/Docs</maml:linkText>
+        <maml:uri>https://github.com/OSDeploy/OSD/tree/master/Docs</maml:uri>
       </maml:navigationLink>
     </command:relatedLinks>
   </command:command>
@@ -14566,8 +14590,8 @@ Original credit to Mike Robbins http://mikefrobbins.com/2018/01/18/use-powershel
     </command:examples>
     <command:relatedLinks>
       <maml:navigationLink>
-        <maml:linkText>https://github.com/OSDeploy/OSD/tree/master/docs</maml:linkText>
-        <maml:uri>https://github.com/OSDeploy/OSD/tree/master/docs</maml:uri>
+        <maml:linkText>https://github.com/OSDeploy/OSD/tree/master/Docs</maml:linkText>
+        <maml:uri>https://github.com/OSDeploy/OSD/tree/master/Docs</maml:uri>
       </maml:navigationLink>
     </command:relatedLinks>
   </command:command>
@@ -14651,7 +14675,7 @@ Original credit to Mike Robbins http://mikefrobbins.com/2018/01/18/use-powershel
     <command:relatedLinks>
       <maml:navigationLink>
         <maml:linkText>Online Version:</maml:linkText>
-        <maml:uri>https://github.com/OSDeploy/OSD/tree/master/docs</maml:uri>
+        <maml:uri>https://github.com/OSDeploy/OSD/tree/master/Docs</maml:uri>
       </maml:navigationLink>
     </command:relatedLinks>
   </command:command>
@@ -14786,8 +14810,8 @@ Original credit to Mike Robbins http://mikefrobbins.com/2018/01/18/use-powershel
     </command:examples>
     <command:relatedLinks>
       <maml:navigationLink>
-        <maml:linkText>https://github.com/OSDeploy/OSD/tree/master/docs</maml:linkText>
-        <maml:uri>https://github.com/OSDeploy/OSD/tree/master/docs</maml:uri>
+        <maml:linkText>https://github.com/OSDeploy/OSD/tree/master/Docs</maml:linkText>
+        <maml:uri>https://github.com/OSDeploy/OSD/tree/master/Docs</maml:uri>
       </maml:navigationLink>
     </command:relatedLinks>
   </command:command>
@@ -14871,7 +14895,7 @@ Original credit to Mike Robbins http://mikefrobbins.com/2018/01/18/use-powershel
     <command:relatedLinks>
       <maml:navigationLink>
         <maml:linkText>Online Version:</maml:linkText>
-        <maml:uri>https://github.com/OSDeploy/OSD/tree/master/docs</maml:uri>
+        <maml:uri>https://github.com/OSDeploy/OSD/tree/master/Docs</maml:uri>
       </maml:navigationLink>
     </command:relatedLinks>
   </command:command>
@@ -14911,8 +14935,8 @@ Original credit to Mike Robbins http://mikefrobbins.com/2018/01/18/use-powershel
     </command:examples>
     <command:relatedLinks>
       <maml:navigationLink>
-        <maml:linkText>https://github.com/OSDeploy/OSD/tree/master/docs</maml:linkText>
-        <maml:uri>https://github.com/OSDeploy/OSD/tree/master/docs</maml:uri>
+        <maml:linkText>https://github.com/OSDeploy/OSD/tree/master/Docs</maml:linkText>
+        <maml:uri>https://github.com/OSDeploy/OSD/tree/master/Docs</maml:uri>
       </maml:navigationLink>
     </command:relatedLinks>
   </command:command>
@@ -14995,7 +15019,7 @@ Original credit to Mike Robbins http://mikefrobbins.com/2018/01/18/use-powershel
     <command:relatedLinks>
       <maml:navigationLink>
         <maml:linkText>Online Version:</maml:linkText>
-        <maml:uri>https://github.com/OSDeploy/OSD/tree/master/docs</maml:uri>
+        <maml:uri>https://github.com/OSDeploy/OSD/tree/master/Docs</maml:uri>
       </maml:navigationLink>
     </command:relatedLinks>
   </command:command>
@@ -15728,8 +15752,8 @@ Original credit to Mike Robbins http://mikefrobbins.com/2018/01/18/use-powershel
     </command:examples>
     <command:relatedLinks>
       <maml:navigationLink>
-        <maml:linkText>https://github.com/OSDeploy/OSD/tree/master/docs</maml:linkText>
-        <maml:uri>https://github.com/OSDeploy/OSD/tree/master/docs</maml:uri>
+        <maml:linkText>https://github.com/OSDeploy/OSD/tree/master/Docs</maml:linkText>
+        <maml:uri>https://github.com/OSDeploy/OSD/tree/master/Docs</maml:uri>
       </maml:navigationLink>
     </command:relatedLinks>
   </command:command>
@@ -17228,8 +17252,8 @@ Original credit to Mike Robbins http://mikefrobbins.com/2018/01/18/use-powershel
     </command:examples>
     <command:relatedLinks>
       <maml:navigationLink>
-        <maml:linkText>https://github.com/OSDeploy/OSD/tree/master/docs</maml:linkText>
-        <maml:uri>https://github.com/OSDeploy/OSD/tree/master/docs</maml:uri>
+        <maml:linkText>https://github.com/OSDeploy/OSD/tree/master/Docs</maml:linkText>
+        <maml:uri>https://github.com/OSDeploy/OSD/tree/master/Docs</maml:uri>
       </maml:navigationLink>
     </command:relatedLinks>
   </command:command>
@@ -17381,7 +17405,7 @@ Original credit to Mike Robbins http://mikefrobbins.com/2018/01/18/use-powershel
     <command:relatedLinks>
       <maml:navigationLink>
         <maml:linkText>Online Version:</maml:linkText>
-        <maml:uri>https://github.com/OSDeploy/OSD/tree/master/docs</maml:uri>
+        <maml:uri>https://github.com/OSDeploy/OSD/tree/master/Docs</maml:uri>
       </maml:navigationLink>
     </command:relatedLinks>
   </command:command>
@@ -17641,7 +17665,7 @@ Original credit to Mike Robbins http://mikefrobbins.com/2018/01/18/use-powershel
     <command:relatedLinks>
       <maml:navigationLink>
         <maml:linkText>Online Version:</maml:linkText>
-        <maml:uri>https://github.com/OSDeploy/OSD/tree/master/docs</maml:uri>
+        <maml:uri>https://github.com/OSDeploy/OSD/tree/master/Docs</maml:uri>
       </maml:navigationLink>
     </command:relatedLinks>
   </command:command>
@@ -17725,7 +17749,7 @@ Original credit to Mike Robbins http://mikefrobbins.com/2018/01/18/use-powershel
     <command:relatedLinks>
       <maml:navigationLink>
         <maml:linkText>Online Version:</maml:linkText>
-        <maml:uri>https://github.com/OSDeploy/OSD/tree/master/docs</maml:uri>
+        <maml:uri>https://github.com/OSDeploy/OSD/tree/master/Docs</maml:uri>
       </maml:navigationLink>
     </command:relatedLinks>
   </command:command>
@@ -17809,7 +17833,7 @@ Original credit to Mike Robbins http://mikefrobbins.com/2018/01/18/use-powershel
     <command:relatedLinks>
       <maml:navigationLink>
         <maml:linkText>Online Version:</maml:linkText>
-        <maml:uri>https://github.com/OSDeploy/OSD/tree/master/docs</maml:uri>
+        <maml:uri>https://github.com/OSDeploy/OSD/tree/master/Docs</maml:uri>
       </maml:navigationLink>
     </command:relatedLinks>
   </command:command>
@@ -17893,7 +17917,7 @@ Original credit to Mike Robbins http://mikefrobbins.com/2018/01/18/use-powershel
     <command:relatedLinks>
       <maml:navigationLink>
         <maml:linkText>Online Version:</maml:linkText>
-        <maml:uri>https://github.com/OSDeploy/OSD/tree/master/docs</maml:uri>
+        <maml:uri>https://github.com/OSDeploy/OSD/tree/master/Docs</maml:uri>
       </maml:navigationLink>
     </command:relatedLinks>
   </command:command>
@@ -17977,7 +18001,7 @@ Original credit to Mike Robbins http://mikefrobbins.com/2018/01/18/use-powershel
     <command:relatedLinks>
       <maml:navigationLink>
         <maml:linkText>Online Version:</maml:linkText>
-        <maml:uri>https://github.com/OSDeploy/OSD/tree/master/docs</maml:uri>
+        <maml:uri>https://github.com/OSDeploy/OSD/tree/master/Docs</maml:uri>
       </maml:navigationLink>
     </command:relatedLinks>
   </command:command>
@@ -18061,7 +18085,7 @@ Original credit to Mike Robbins http://mikefrobbins.com/2018/01/18/use-powershel
     <command:relatedLinks>
       <maml:navigationLink>
         <maml:linkText>Online Version:</maml:linkText>
-        <maml:uri>https://github.com/OSDeploy/OSD/tree/master/docs</maml:uri>
+        <maml:uri>https://github.com/OSDeploy/OSD/tree/master/Docs</maml:uri>
       </maml:navigationLink>
     </command:relatedLinks>
   </command:command>
@@ -18216,7 +18240,7 @@ Original credit to Mike Robbins http://mikefrobbins.com/2018/01/18/use-powershel
     <command:relatedLinks>
       <maml:navigationLink>
         <maml:linkText>Online Version:</maml:linkText>
-        <maml:uri>https://github.com/OSDeploy/OSD/tree/master/docs</maml:uri>
+        <maml:uri>https://github.com/OSDeploy/OSD/tree/master/Docs</maml:uri>
       </maml:navigationLink>
     </command:relatedLinks>
   </command:command>
@@ -18300,7 +18324,7 @@ Original credit to Mike Robbins http://mikefrobbins.com/2018/01/18/use-powershel
     <command:relatedLinks>
       <maml:navigationLink>
         <maml:linkText>Online Version:</maml:linkText>
-        <maml:uri>https://github.com/OSDeploy/OSD/tree/master/docs</maml:uri>
+        <maml:uri>https://github.com/OSDeploy/OSD/tree/master/Docs</maml:uri>
       </maml:navigationLink>
     </command:relatedLinks>
   </command:command>
@@ -18479,32 +18503,20 @@ Original credit to Mike Robbins http://mikefrobbins.com/2018/01/18/use-powershel
       <command:verb>Save</command:verb>
       <command:noun>WinPECloudDriver</command:noun>
       <maml:description>
-        <maml:para>{{ Fill in the Synopsis }}</maml:para>
+        <maml:para>Download and expand WinPE Drivers</maml:para>
       </maml:description>
     </command:details>
     <maml:description>
-      <maml:para>{{ Fill in the Description }}</maml:para>
+      <maml:para>Download and expand WinPE Drivers</maml:para>
     </maml:description>
     <command:syntax>
       <command:syntaxItem>
         <maml:name>Save-WinPECloudDriver</maml:name>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="0" aliases="none">
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>CloudDriver</maml:name>
           <maml:description>
-            <maml:para>{{ Fill CloudDriver Description }}</maml:para>
+            <maml:para>WinPE Driver: Download and install in WinPE drivers from Dell,HP,IntelNet,LenovoDock,Nutanix,USB,VMware,WiFi</maml:para>
           </maml:description>
-          <command:parameterValueGroup>
-            <command:parameterValue required="false" command:variableLength="false">*</command:parameterValue>
-            <command:parameterValue required="false" command:variableLength="false">Dell</command:parameterValue>
-            <command:parameterValue required="false" command:variableLength="false">HP</command:parameterValue>
-            <command:parameterValue required="false" command:variableLength="false">IntelNet</command:parameterValue>
-            <command:parameterValue required="false" command:variableLength="false">LenovoDock</command:parameterValue>
-            <command:parameterValue required="false" command:variableLength="false">Nutanix</command:parameterValue>
-            <command:parameterValue required="false" command:variableLength="false">Surface</command:parameterValue>
-            <command:parameterValue required="false" command:variableLength="false">USB</command:parameterValue>
-            <command:parameterValue required="false" command:variableLength="false">VMware</command:parameterValue>
-            <command:parameterValue required="false" command:variableLength="false">WiFi</command:parameterValue>
-          </command:parameterValueGroup>
           <command:parameterValue required="true" variableLength="false">String[]</command:parameterValue>
           <dev:type>
             <maml:name>String[]</maml:name>
@@ -18512,10 +18524,10 @@ Original credit to Mike Robbins http://mikefrobbins.com/2018/01/18/use-powershel
           </dev:type>
           <dev:defaultValue>None</dev:defaultValue>
         </command:parameter>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="none">
-          <maml:name>HardwareID</maml:name>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="HardwareID">
+          <maml:name>DriverHWID</maml:name>
           <maml:description>
-            <maml:para>{{ Fill HardwareID Description }}</maml:para>
+            <maml:para>WinPE Driver: HardwareID of the Driver download from Microsoft Catalog</maml:para>
           </maml:description>
           <command:parameterValue required="true" variableLength="false">String[]</command:parameterValue>
           <dev:type>
@@ -18524,10 +18536,10 @@ Original credit to Mike Robbins http://mikefrobbins.com/2018/01/18/use-powershel
           </dev:type>
           <dev:defaultValue>None</dev:defaultValue>
         </command:parameter>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="2" aliases="none">
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>Path</maml:name>
           <maml:description>
-            <maml:para>{{ Fill Path Description }}</maml:para>
+            <maml:para>WinPE Driver: Destination path to save the drivers If not specified, a random directory in $env:TEMP is selected</maml:para>
           </maml:description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -18539,7 +18551,7 @@ Original credit to Mike Robbins http://mikefrobbins.com/2018/01/18/use-powershel
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>Clipboard</maml:name>
           <maml:description>
-            <maml:para>{{ Fill Clipboard Description }}</maml:para>
+            <maml:para>Saves the Path to the Clipboard</maml:para>
           </maml:description>
           <dev:type>
             <maml:name>SwitchParameter</maml:name>
@@ -18551,21 +18563,9 @@ Original credit to Mike Robbins http://mikefrobbins.com/2018/01/18/use-powershel
     </command:syntax>
     <command:parameters>
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
-        <maml:name>Clipboard</maml:name>
-        <maml:description>
-          <maml:para>{{ Fill Clipboard Description }}</maml:para>
-        </maml:description>
-        <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
-        <dev:type>
-          <maml:name>SwitchParameter</maml:name>
-          <maml:uri />
-        </dev:type>
-        <dev:defaultValue>False</dev:defaultValue>
-      </command:parameter>
-      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="0" aliases="none">
         <maml:name>CloudDriver</maml:name>
         <maml:description>
-          <maml:para>{{ Fill CloudDriver Description }}</maml:para>
+          <maml:para>WinPE Driver: Download and install in WinPE drivers from Dell,HP,IntelNet,LenovoDock,Nutanix,USB,VMware,WiFi</maml:para>
         </maml:description>
         <command:parameterValue required="true" variableLength="false">String[]</command:parameterValue>
         <dev:type>
@@ -18574,10 +18574,10 @@ Original credit to Mike Robbins http://mikefrobbins.com/2018/01/18/use-powershel
         </dev:type>
         <dev:defaultValue>None</dev:defaultValue>
       </command:parameter>
-      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="none">
-        <maml:name>HardwareID</maml:name>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="HardwareID">
+        <maml:name>DriverHWID</maml:name>
         <maml:description>
-          <maml:para>{{ Fill HardwareID Description }}</maml:para>
+          <maml:para>WinPE Driver: HardwareID of the Driver download from Microsoft Catalog</maml:para>
         </maml:description>
         <command:parameterValue required="true" variableLength="false">String[]</command:parameterValue>
         <dev:type>
@@ -18586,10 +18586,10 @@ Original credit to Mike Robbins http://mikefrobbins.com/2018/01/18/use-powershel
         </dev:type>
         <dev:defaultValue>None</dev:defaultValue>
       </command:parameter>
-      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="2" aliases="none">
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
         <maml:name>Path</maml:name>
         <maml:description>
-          <maml:para>{{ Fill Path Description }}</maml:para>
+          <maml:para>WinPE Driver: Destination path to save the drivers If not specified, a random directory in $env:TEMP is selected</maml:para>
         </maml:description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
@@ -18598,27 +18598,21 @@ Original credit to Mike Robbins http://mikefrobbins.com/2018/01/18/use-powershel
         </dev:type>
         <dev:defaultValue>None</dev:defaultValue>
       </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+        <maml:name>Clipboard</maml:name>
+        <maml:description>
+          <maml:para>Saves the Path to the Clipboard</maml:para>
+        </maml:description>
+        <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
+        <dev:type>
+          <maml:name>SwitchParameter</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>False</dev:defaultValue>
+      </command:parameter>
     </command:parameters>
-    <command:inputTypes>
-      <command:inputType>
-        <dev:type>
-          <maml:name>None</maml:name>
-        </dev:type>
-        <maml:description>
-          <maml:para></maml:para>
-        </maml:description>
-      </command:inputType>
-    </command:inputTypes>
-    <command:returnValues>
-      <command:returnValue>
-        <dev:type>
-          <maml:name>System.Object</maml:name>
-        </dev:type>
-        <maml:description>
-          <maml:para></maml:para>
-        </maml:description>
-      </command:returnValue>
-    </command:returnValues>
+    <command:inputTypes />
+    <command:returnValues />
     <maml:alertSet>
       <maml:alert>
         <maml:para></maml:para>
@@ -18635,8 +18629,8 @@ Original credit to Mike Robbins http://mikefrobbins.com/2018/01/18/use-powershel
     </command:examples>
     <command:relatedLinks>
       <maml:navigationLink>
-        <maml:linkText>Online Version:</maml:linkText>
-        <maml:uri>https://osd.osdeploy.com/module/functions/save-webfile</maml:uri>
+        <maml:linkText>https://github.com/OSDeploy/OSD/tree/master/Docs</maml:linkText>
+        <maml:uri>https://github.com/OSDeploy/OSD/tree/master/Docs</maml:uri>
       </maml:navigationLink>
     </command:relatedLinks>
   </command:command>
@@ -18744,7 +18738,7 @@ Original credit to Mike Robbins http://mikefrobbins.com/2018/01/18/use-powershel
     <command:relatedLinks>
       <maml:navigationLink>
         <maml:linkText>Online Version:</maml:linkText>
-        <maml:uri>https://osd.osdeploy.com/module/functions/save-webfile</maml:uri>
+        <maml:uri>https://github.com/OSDeploy/OSD/tree/master/Docs</maml:uri>
       </maml:navigationLink>
     </command:relatedLinks>
   </command:command>
@@ -18850,7 +18844,7 @@ Original credit to Mike Robbins http://mikefrobbins.com/2018/01/18/use-powershel
     <command:relatedLinks>
       <maml:navigationLink>
         <maml:linkText>Online Version:</maml:linkText>
-        <maml:uri>https://osd.osdeploy.com/module/functions/save-webfile</maml:uri>
+        <maml:uri>https://github.com/OSDeploy/OSD/tree/master/Docs</maml:uri>
       </maml:navigationLink>
     </command:relatedLinks>
   </command:command>
@@ -18980,7 +18974,7 @@ Original credit to Mike Robbins http://mikefrobbins.com/2018/01/18/use-powershel
     <command:relatedLinks>
       <maml:navigationLink>
         <maml:linkText>Online Version:</maml:linkText>
-        <maml:uri>https://osd.osdeploy.com/module/functions/save-webfile</maml:uri>
+        <maml:uri>https://github.com/OSDeploy/OSD/tree/master/Docs</maml:uri>
       </maml:navigationLink>
     </command:relatedLinks>
   </command:command>
@@ -19110,7 +19104,7 @@ Original credit to Mike Robbins http://mikefrobbins.com/2018/01/18/use-powershel
     <command:relatedLinks>
       <maml:navigationLink>
         <maml:linkText>Online Version:</maml:linkText>
-        <maml:uri>https://osd.osdeploy.com/module/functions/save-webfile</maml:uri>
+        <maml:uri>https://github.com/OSDeploy/OSD/tree/master/Docs</maml:uri>
       </maml:navigationLink>
     </command:relatedLinks>
   </command:command>
@@ -19240,7 +19234,7 @@ Original credit to Mike Robbins http://mikefrobbins.com/2018/01/18/use-powershel
     <command:relatedLinks>
       <maml:navigationLink>
         <maml:linkText>Online Version:</maml:linkText>
-        <maml:uri>https://osd.osdeploy.com/module/functions/save-webfile</maml:uri>
+        <maml:uri>https://github.com/OSDeploy/OSD/tree/master/Docs</maml:uri>
       </maml:navigationLink>
     </command:relatedLinks>
   </command:command>
@@ -19418,7 +19412,7 @@ Original credit to Mike Robbins http://mikefrobbins.com/2018/01/18/use-powershel
     <command:relatedLinks>
       <maml:navigationLink>
         <maml:linkText>Online Version:</maml:linkText>
-        <maml:uri>https://osd.osdeploy.com/module/functions/save-webfile</maml:uri>
+        <maml:uri>https://github.com/OSDeploy/OSD/tree/master/Docs</maml:uri>
       </maml:navigationLink>
     </command:relatedLinks>
   </command:command>
@@ -19458,8 +19452,8 @@ Original credit to Mike Robbins http://mikefrobbins.com/2018/01/18/use-powershel
     </command:examples>
     <command:relatedLinks>
       <maml:navigationLink>
-        <maml:linkText>https://github.com/OSDeploy/OSD/tree/master/docs</maml:linkText>
-        <maml:uri>https://github.com/OSDeploy/OSD/tree/master/docs</maml:uri>
+        <maml:linkText>https://github.com/OSDeploy/OSD/tree/master/Docs</maml:linkText>
+        <maml:uri>https://github.com/OSDeploy/OSD/tree/master/Docs</maml:uri>
       </maml:navigationLink>
     </command:relatedLinks>
   </command:command>
@@ -19499,8 +19493,8 @@ Original credit to Mike Robbins http://mikefrobbins.com/2018/01/18/use-powershel
     </command:examples>
     <command:relatedLinks>
       <maml:navigationLink>
-        <maml:linkText>https://github.com/OSDeploy/OSD/tree/master/docs</maml:linkText>
-        <maml:uri>https://github.com/OSDeploy/OSD/tree/master/docs</maml:uri>
+        <maml:linkText>https://github.com/OSDeploy/OSD/tree/master/Docs</maml:linkText>
+        <maml:uri>https://github.com/OSDeploy/OSD/tree/master/Docs</maml:uri>
       </maml:navigationLink>
     </command:relatedLinks>
   </command:command>
@@ -19584,7 +19578,7 @@ Original credit to Mike Robbins http://mikefrobbins.com/2018/01/18/use-powershel
     <command:relatedLinks>
       <maml:navigationLink>
         <maml:linkText>Online Version:</maml:linkText>
-        <maml:uri>https://github.com/OSDeploy/OSD/tree/master/docs</maml:uri>
+        <maml:uri>https://github.com/OSDeploy/OSD/tree/master/Docs</maml:uri>
       </maml:navigationLink>
     </command:relatedLinks>
   </command:command>
@@ -19624,8 +19618,8 @@ Original credit to Mike Robbins http://mikefrobbins.com/2018/01/18/use-powershel
     </command:examples>
     <command:relatedLinks>
       <maml:navigationLink>
-        <maml:linkText>https://github.com/OSDeploy/OSD/tree/master/docs</maml:linkText>
-        <maml:uri>https://github.com/OSDeploy/OSD/tree/master/docs</maml:uri>
+        <maml:linkText>https://github.com/OSDeploy/OSD/tree/master/Docs</maml:linkText>
+        <maml:uri>https://github.com/OSDeploy/OSD/tree/master/Docs</maml:uri>
       </maml:navigationLink>
     </command:relatedLinks>
   </command:command>
@@ -19807,7 +19801,7 @@ Original credit to Mike Robbins http://mikefrobbins.com/2018/01/18/use-powershel
     <command:relatedLinks>
       <maml:navigationLink>
         <maml:linkText>Online Version:</maml:linkText>
-        <maml:uri>https://github.com/OSDeploy/OSD/tree/master/docs</maml:uri>
+        <maml:uri>https://github.com/OSDeploy/OSD/tree/master/Docs</maml:uri>
       </maml:navigationLink>
     </command:relatedLinks>
   </command:command>
@@ -19989,7 +19983,7 @@ Original credit to Mike Robbins http://mikefrobbins.com/2018/01/18/use-powershel
     <command:relatedLinks>
       <maml:navigationLink>
         <maml:linkText>Online Version:</maml:linkText>
-        <maml:uri>https://github.com/OSDeploy/OSD/tree/master/docs</maml:uri>
+        <maml:uri>https://github.com/OSDeploy/OSD/tree/master/Docs</maml:uri>
       </maml:navigationLink>
     </command:relatedLinks>
   </command:command>
@@ -20171,7 +20165,7 @@ Original credit to Mike Robbins http://mikefrobbins.com/2018/01/18/use-powershel
     <command:relatedLinks>
       <maml:navigationLink>
         <maml:linkText>Online Version:</maml:linkText>
-        <maml:uri>https://github.com/OSDeploy/OSD/tree/master/docs</maml:uri>
+        <maml:uri>https://github.com/OSDeploy/OSD/tree/master/Docs</maml:uri>
       </maml:navigationLink>
     </command:relatedLinks>
   </command:command>
@@ -20245,8 +20239,8 @@ Original credit to Mike Robbins http://mikefrobbins.com/2018/01/18/use-powershel
     </command:examples>
     <command:relatedLinks>
       <maml:navigationLink>
-        <maml:linkText>https://github.com/OSDeploy/OSD/tree/master/docs</maml:linkText>
-        <maml:uri>https://github.com/OSDeploy/OSD/tree/master/docs</maml:uri>
+        <maml:linkText>https://github.com/OSDeploy/OSD/tree/master/Docs</maml:linkText>
+        <maml:uri>https://github.com/OSDeploy/OSD/tree/master/Docs</maml:uri>
       </maml:navigationLink>
     </command:relatedLinks>
   </command:command>
@@ -20305,7 +20299,7 @@ Original credit to Mike Robbins http://mikefrobbins.com/2018/01/18/use-powershel
     <command:relatedLinks>
       <maml:navigationLink>
         <maml:linkText>Online Version:</maml:linkText>
-        <maml:uri>https://github.com/OSDeploy/OSD/tree/master/docs</maml:uri>
+        <maml:uri>https://github.com/OSDeploy/OSD/tree/master/Docs</maml:uri>
       </maml:navigationLink>
     </command:relatedLinks>
   </command:command>
@@ -20581,8 +20575,8 @@ Original credit to Mike Robbins http://mikefrobbins.com/2018/01/18/use-powershel
     </command:examples>
     <command:relatedLinks>
       <maml:navigationLink>
-        <maml:linkText>https://github.com/OSDeploy/OSD/tree/master/docs</maml:linkText>
-        <maml:uri>https://github.com/OSDeploy/OSD/tree/master/docs</maml:uri>
+        <maml:linkText>https://github.com/OSDeploy/OSD/tree/master/Docs</maml:linkText>
+        <maml:uri>https://github.com/OSDeploy/OSD/tree/master/Docs</maml:uri>
       </maml:navigationLink>
     </command:relatedLinks>
   </command:command>
@@ -20641,7 +20635,7 @@ Original credit to Mike Robbins http://mikefrobbins.com/2018/01/18/use-powershel
     <command:relatedLinks>
       <maml:navigationLink>
         <maml:linkText>Online Version:</maml:linkText>
-        <maml:uri>https://github.com/OSDeploy/OSD/tree/master/docs</maml:uri>
+        <maml:uri>https://github.com/OSDeploy/OSD/tree/master/Docs</maml:uri>
       </maml:navigationLink>
     </command:relatedLinks>
   </command:command>
@@ -20700,7 +20694,7 @@ Original credit to Mike Robbins http://mikefrobbins.com/2018/01/18/use-powershel
     <command:relatedLinks>
       <maml:navigationLink>
         <maml:linkText>Online Version:</maml:linkText>
-        <maml:uri>https://github.com/OSDeploy/OSD/tree/master/docs</maml:uri>
+        <maml:uri>https://github.com/OSDeploy/OSD/tree/master/Docs</maml:uri>
       </maml:navigationLink>
     </command:relatedLinks>
   </command:command>
@@ -20759,7 +20753,7 @@ Original credit to Mike Robbins http://mikefrobbins.com/2018/01/18/use-powershel
     <command:relatedLinks>
       <maml:navigationLink>
         <maml:linkText>Online Version:</maml:linkText>
-        <maml:uri>https://github.com/OSDeploy/OSD/tree/master/docs</maml:uri>
+        <maml:uri>https://github.com/OSDeploy/OSD/tree/master/Docs</maml:uri>
       </maml:navigationLink>
     </command:relatedLinks>
   </command:command>
@@ -20824,8 +20818,8 @@ Original credit to Mike Robbins http://mikefrobbins.com/2018/01/18/use-powershel
     </command:examples>
     <command:relatedLinks>
       <maml:navigationLink>
-        <maml:linkText>https://github.com/OSDeploy/OSD/tree/master/docs</maml:linkText>
-        <maml:uri>https://github.com/OSDeploy/OSD/tree/master/docs</maml:uri>
+        <maml:linkText>https://github.com/OSDeploy/OSD/tree/master/Docs</maml:linkText>
+        <maml:uri>https://github.com/OSDeploy/OSD/tree/master/Docs</maml:uri>
       </maml:navigationLink>
     </command:relatedLinks>
   </command:command>
@@ -20884,7 +20878,7 @@ Original credit to Mike Robbins http://mikefrobbins.com/2018/01/18/use-powershel
     <command:relatedLinks>
       <maml:navigationLink>
         <maml:linkText>Online Version:</maml:linkText>
-        <maml:uri>https://github.com/OSDeploy/OSD/tree/master/docs</maml:uri>
+        <maml:uri>https://github.com/OSDeploy/OSD/tree/master/Docs</maml:uri>
       </maml:navigationLink>
     </command:relatedLinks>
   </command:command>
@@ -21230,8 +21224,8 @@ Original credit to Mike Robbins http://mikefrobbins.com/2018/01/18/use-powershel
     </command:examples>
     <command:relatedLinks>
       <maml:navigationLink>
-        <maml:linkText>https://github.com/OSDeploy/OSD/tree/master/docs</maml:linkText>
-        <maml:uri>https://github.com/OSDeploy/OSD/tree/master/docs</maml:uri>
+        <maml:linkText>https://github.com/OSDeploy/OSD/tree/master/Docs</maml:linkText>
+        <maml:uri>https://github.com/OSDeploy/OSD/tree/master/Docs</maml:uri>
       </maml:navigationLink>
     </command:relatedLinks>
   </command:command>
@@ -22175,8 +22169,8 @@ Original credit to Mike Robbins http://mikefrobbins.com/2018/01/18/use-powershel
     </command:examples>
     <command:relatedLinks>
       <maml:navigationLink>
-        <maml:linkText>https://github.com/OSDeploy/OSD/tree/master/docs</maml:linkText>
-        <maml:uri>https://github.com/OSDeploy/OSD/tree/master/docs</maml:uri>
+        <maml:linkText>https://github.com/OSDeploy/OSD/tree/master/Docs</maml:linkText>
+        <maml:uri>https://github.com/OSDeploy/OSD/tree/master/Docs</maml:uri>
       </maml:navigationLink>
     </command:relatedLinks>
   </command:command>
@@ -22265,8 +22259,8 @@ Original credit to Mike Robbins http://mikefrobbins.com/2018/01/18/use-powershel
     </command:examples>
     <command:relatedLinks>
       <maml:navigationLink>
-        <maml:linkText>https://github.com/OSDeploy/OSD/tree/master/docs</maml:linkText>
-        <maml:uri>https://github.com/OSDeploy/OSD/tree/master/docs</maml:uri>
+        <maml:linkText>https://github.com/OSDeploy/OSD/tree/master/Docs</maml:linkText>
+        <maml:uri>https://github.com/OSDeploy/OSD/tree/master/Docs</maml:uri>
       </maml:navigationLink>
     </command:relatedLinks>
   </command:command>
@@ -22374,7 +22368,7 @@ Original credit to Mike Robbins http://mikefrobbins.com/2018/01/18/use-powershel
     <command:relatedLinks>
       <maml:navigationLink>
         <maml:linkText>Online Version:</maml:linkText>
-        <maml:uri>https://github.com/OSDeploy/OSD/tree/master/docs</maml:uri>
+        <maml:uri>https://github.com/OSDeploy/OSD/tree/master/Docs</maml:uri>
       </maml:navigationLink>
     </command:relatedLinks>
   </command:command>
@@ -22606,7 +22600,7 @@ Original credit to Mike Robbins http://mikefrobbins.com/2018/01/18/use-powershel
     <command:relatedLinks>
       <maml:navigationLink>
         <maml:linkText>Online Version:</maml:linkText>
-        <maml:uri>https://github.com/OSDeploy/OSD/tree/master/docs</maml:uri>
+        <maml:uri>https://github.com/OSDeploy/OSD/tree/master/Docs</maml:uri>
       </maml:navigationLink>
     </command:relatedLinks>
   </command:command>
@@ -22738,7 +22732,7 @@ Original credit to Mike Robbins http://mikefrobbins.com/2018/01/18/use-powershel
     <command:relatedLinks>
       <maml:navigationLink>
         <maml:linkText>Online Version:</maml:linkText>
-        <maml:uri>https://github.com/OSDeploy/OSD/tree/master/docs</maml:uri>
+        <maml:uri>https://github.com/OSDeploy/OSD/tree/master/Docs</maml:uri>
       </maml:navigationLink>
     </command:relatedLinks>
   </command:command>
@@ -22797,7 +22791,7 @@ Original credit to Mike Robbins http://mikefrobbins.com/2018/01/18/use-powershel
     <command:relatedLinks>
       <maml:navigationLink>
         <maml:linkText>Online Version:</maml:linkText>
-        <maml:uri>https://github.com/OSDeploy/OSD/tree/master/docs</maml:uri>
+        <maml:uri>https://github.com/OSDeploy/OSD/tree/master/Docs</maml:uri>
       </maml:navigationLink>
     </command:relatedLinks>
   </command:command>
@@ -22929,7 +22923,7 @@ Original credit to Mike Robbins http://mikefrobbins.com/2018/01/18/use-powershel
     <command:relatedLinks>
       <maml:navigationLink>
         <maml:linkText>Online Version:</maml:linkText>
-        <maml:uri>https://github.com/OSDeploy/OSD/tree/master/docs</maml:uri>
+        <maml:uri>https://github.com/OSDeploy/OSD/tree/master/Docs</maml:uri>
       </maml:navigationLink>
     </command:relatedLinks>
   </command:command>
@@ -22988,7 +22982,7 @@ Original credit to Mike Robbins http://mikefrobbins.com/2018/01/18/use-powershel
     <command:relatedLinks>
       <maml:navigationLink>
         <maml:linkText>Online Version:</maml:linkText>
-        <maml:uri>https://github.com/OSDeploy/OSD/tree/master/docs</maml:uri>
+        <maml:uri>https://github.com/OSDeploy/OSD/tree/master/Docs</maml:uri>
       </maml:navigationLink>
     </command:relatedLinks>
   </command:command>
@@ -24085,8 +24079,8 @@ Original credit to Mike Robbins http://mikefrobbins.com/2018/01/18/use-powershel
     </command:examples>
     <command:relatedLinks>
       <maml:navigationLink>
-        <maml:linkText>https://github.com/OSDeploy/OSD/tree/master/docs</maml:linkText>
-        <maml:uri>https://github.com/OSDeploy/OSD/tree/master/docs</maml:uri>
+        <maml:linkText>https://github.com/OSDeploy/OSD/tree/master/Docs</maml:linkText>
+        <maml:uri>https://github.com/OSDeploy/OSD/tree/master/Docs</maml:uri>
       </maml:navigationLink>
     </command:relatedLinks>
   </command:command>

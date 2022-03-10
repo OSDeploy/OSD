@@ -1,27 +1,25 @@
 ---
 external help file: OSD-help.xml
 Module Name: OSD
-online version: https://osd.osdeploy.com/module/functions/winpewim
+online version: https://github.com/OSDeploy/OSD/tree/master/Docs
 schema: 2.0.0
 ---
 
 # Edit-MyWinPE
 
 ## SYNOPSIS
-Performs many tasks on a WinPE.wim file. 
-Not good for an OS wim
+Mounts and edits a WinPE WIM file
 
 ## SYNTAX
 
 ```
-Edit-MyWinPE [[-ImagePath] <String[]>] [[-Index] <UInt32>] [[-CloudDriver] <String[]>]
- [[-DriverHWID] <String[]>] [[-DriverPath] <String[]>] [[-ExecutionPolicy] <String>]
- [[-PSModuleSave] <String[]>] [[-PSModuleCopy] <String[]>] [-PSGallery] [-DismountSave] [<CommonParameters>]
+Edit-MyWinPE [-ImagePath <String[]>] [-Index <UInt32>] [-CloudDriver <String[]>] [-DriverHWID <String[]>]
+ [-DriverPath <String[]>] [-ExecutionPolicy <String>] [-PSModuleInstall <String[]>] [-PSModuleCopy <String[]>]
+ [-PSGallery] [-Wallpaper <String>] [-DismountSave] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-Performs many tasks on a WinPE.wim file. 
-Not good for an OS wim
+Mounts and edits a WinPE WIM file
 
 ## EXAMPLES
 
@@ -35,7 +33,8 @@ PS C:\> {{ Add example code here }}
 ## PARAMETERS
 
 ### -ImagePath
-{{ Fill ImagePath Description }}
+Path to the WinPE WIM file.
+This file must be local and not on a USB or Network Share
 
 ```yaml
 Type: String[]
@@ -43,14 +42,15 @@ Parameter Sets: (All)
 Aliases:
 
 Required: False
-Position: 1
+Position: Named
 Default value: None
 Accept pipeline input: True (ByPropertyName)
 Accept wildcard characters: False
 ```
 
 ### -Index
-{{ Fill Index Description }}
+Index of the WinPE WIM file to mount.
+Default is 1
 
 ```yaml
 Type: UInt32
@@ -58,14 +58,14 @@ Parameter Sets: (All)
 Aliases:
 
 Required: False
-Position: 2
+Position: Named
 Default value: 1
 Accept pipeline input: True (ByPropertyName)
 Accept wildcard characters: False
 ```
 
 ### -CloudDriver
-{{ Fill CloudDriver Description }}
+WinPE Driver: Download and install in WinPE drivers from Dell,HP,IntelNet,LenovoDock,Nutanix,USB,VMware,WiFi
 
 ```yaml
 Type: String[]
@@ -73,29 +73,29 @@ Parameter Sets: (All)
 Aliases:
 
 Required: False
-Position: 3
+Position: Named
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
 ### -DriverHWID
-{{ Fill DriverHWID Description }}
+WinPE Driver: HardwareID of the Driver to add to WinPE
 
 ```yaml
 Type: String[]
 Parameter Sets: (All)
-Aliases:
+Aliases: HardwareID
 
 Required: False
-Position: 4
+Position: Named
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
 ### -DriverPath
-{{ Fill DriverPath Description }}
+WinPE Driver: Path to additional Drivers you want to add to WinPE
 
 ```yaml
 Type: String[]
@@ -103,14 +103,15 @@ Parameter Sets: (All)
 Aliases:
 
 Required: False
-Position: 5
+Position: Named
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
 ### -ExecutionPolicy
-{{ Fill ExecutionPolicy Description }}
+PowerShell: Sets the PowerShell Execution Policy of WinPE. 
+Bypass is recommended
 
 ```yaml
 Type: String
@@ -118,29 +119,30 @@ Parameter Sets: (All)
 Aliases:
 
 Required: False
-Position: 6
+Position: Named
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -PSModuleSave
-{{ Fill PSModuleSave Description }}
+### -PSModuleInstall
+PowerShell: Installs named PowerShell Modules from PowerShell Gallery to WinPE
 
 ```yaml
 Type: String[]
 Parameter Sets: (All)
-Aliases:
+Aliases: PSModuleSave
 
 Required: False
-Position: 7
+Position: Named
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
 ### -PSModuleCopy
-{{ Fill PSModuleCopy Description }}
+PowerShell: Copies named PowerShell Modules from the running OS to WinPE
+This is useful for adding Modules that are customized or not on PowerShell Gallery
 
 ```yaml
 Type: String[]
@@ -148,14 +150,14 @@ Parameter Sets: (All)
 Aliases:
 
 Required: False
-Position: 8
+Position: Named
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
 ### -PSGallery
-{{ Fill PSGallery Description }}
+PowerShell: Enables PowerShell Gallery functionality in WinPE
 
 ```yaml
 Type: SwitchParameter
@@ -169,8 +171,23 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
+### -Wallpaper
+Sets the specified Wallpaper JPG file as the WinPE Background
+
+```yaml
+Type: String
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
 ### -DismountSave
-{{ Fill DismountSave Description }}
+Dismounts and saves changes to the mounted WinPE WIM
 
 ```yaml
 Type: SwitchParameter
@@ -192,9 +209,8 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ## OUTPUTS
 
 ## NOTES
-21.3.12  Initial Release
 
 ## RELATED LINKS
 
-[https://osd.osdeploy.com/module/functions/winpewim](https://osd.osdeploy.com/module/functions/winpewim)
+[https://github.com/OSDeploy/OSD/tree/master/Docs](https://github.com/OSDeploy/OSD/tree/master/Docs)
 

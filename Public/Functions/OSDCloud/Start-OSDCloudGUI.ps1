@@ -10,7 +10,7 @@ function Start-OSDCloudGUI {
     Start-OSDCloudGUI
 
     .LINK
-    https://github.com/OSDeploy/OSD/tree/master/docs
+    https://github.com/OSDeploy/OSD/tree/master/Docs
     #>
 
     [CmdletBinding()]

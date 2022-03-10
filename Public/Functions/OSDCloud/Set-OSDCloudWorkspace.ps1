@@ -9,7 +9,7 @@ Changes the path to the OSDCloud Workspace from an OSDCloud Template
 Directory for the OSDCloud Workspace to set.  Default is $env:SystemDrive\OSDCloud
 
 .LINK
-https://github.com/OSDeploy/OSD/tree/master/docs
+https://github.com/OSDeploy/OSD/tree/master/Docs
 #>
 function Set-OSDCloudWorkspace {
     [CmdletBinding()]

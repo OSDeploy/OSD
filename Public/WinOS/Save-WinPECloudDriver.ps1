@@ -1,14 +1,34 @@
 function Save-WinPECloudDriver {
-    [CmdletBinding()]
+    <#
+    .SYNOPSIS
+    Download and expand WinPE Drivers
+
+    .DESCRIPTION
+    Download and expand WinPE Drivers
+
+    .LINK
+    https://github.com/OSDeploy/OSD/tree/master/Docs
+    #>
+
+    [CmdletBinding(PositionalBinding = $false)]
     param (
-        [ValidateSet('*','Dell','HP','IntelNet','LenovoDock','Nutanix','Surface','USB','VMware','WiFi')]
+        #WinPE Driver: Download and install in WinPE drivers from Dell,HP,IntelNet,LenovoDock,Nutanix,USB,VMware,WiFi
+        [ValidateSet('*','Dell','HP','IntelNet','LenovoDock','Surface','Nutanix','USB','VMware','WiFi')]
         [System.String[]]$CloudDriver,
-        [System.String[]]$HardwareID,
+
+        #WinPE Driver: HardwareID of the Driver download from Microsoft Catalog
+        [Alias('HardwareID')]
+        [System.String[]]$DriverHWID,
+
+        #WinPE Driver: Destination path to save the drivers
+        #If not specified, a random directory in $env:TEMP is selected
         [System.String]$Path,
+
+        #Saves the Path to the Clipboard
         [System.Management.Automation.SwitchParameter]$Clipboard
     )
     #=================================================
-    #	Cloud Drivers
+    #	CloudDriver
     #=================================================
     if ($CloudDriver -contains '*') {
         $CloudDriver = @('Dell','HP','IntelNet','LenovoDock','Nutanix','Surface','USB','VMware','WiFi')
@@ -23,7 +43,7 @@ function Save-WinPECloudDriver {
     $IntelEthernetCloudDriverText   = 'Intel Ethernet Driver Pack [26.8]'
     $IntelEthernetCloudDriverUrl    = 'https://downloadmirror.intel.com/710138/Wired_driver_26.8_x64.zip'
 
-    $BaseCatalogIntelWiFi         = Get-BaseCatalogIntelWirelessDriver | `
+    $BaseCatalogIntelWiFi           = Get-BaseCatalogIntelWirelessDriver | `
                                         Where-Object {($_.OSVersion -match '10.0') -and ($_.OSArch -match 'x64')} | `
                                         Select-Object -First 1
     $IntelWiFiCloudDriverText       = "Intel Wireless Driver Pack [$($BaseCatalogIntelWiFi.DriverVersion)] $($BaseCatalogIntelWiFi.DriverUrl)"
@@ -98,9 +118,9 @@ function Save-WinPECloudDriver {
         }
     }
     #=================================================
-    #   HardwareID
+    #   DriverHWID
     #=================================================
-    foreach ($Item in $HardwareID) {
+    foreach ($Item in $DriverHWID) {
         Save-MsUpCatDriver -HardwareID $Item -DestinationDirectory (Join-Path $Path 'HardwareID')
     }
     #=================================================
@@ -257,4 +277,5 @@ function Save-WinPECloudDriver {
         Set-Clipboard -Value $DriverPath.FullName -Verbose
     }
     Return $DriverPath
+    #=================================================
 }

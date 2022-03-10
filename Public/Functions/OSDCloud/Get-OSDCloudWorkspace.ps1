@@ -7,7 +7,7 @@ function Get-OSDCloudWorkspace {
     Returns the path to the OSDCloud Workspace by reading the path stored in $env:ProgramData\OSDCloud\workspace.json
     
     .LINK
-    https://github.com/OSDeploy/OSD/tree/master/docs
+    https://github.com/OSDeploy/OSD/tree/master/Docs
     #>
 
     [CmdletBinding()]

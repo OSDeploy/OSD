@@ -7,7 +7,7 @@ function Invoke-OSDCloud {
     This is the master OSDCloud Task Sequence
     
     .LINK
-    https://github.com/OSDeploy/OSD/tree/master/docs
+    https://github.com/OSDeploy/OSD/tree/master/Docs
     #>
 
     [CmdletBinding()]

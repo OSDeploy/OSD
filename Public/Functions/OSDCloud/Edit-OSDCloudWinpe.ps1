@@ -20,15 +20,17 @@ function Edit-OSDCloudWinPE {
         [System.String[]]$CloudDriver,
 
         #WinPE Driver: HardwareID of the Driver to add to WinPE
+        [Alias('HardwareID')]
         [System.String[]]$DriverHWID,
 
-        #WinPE Driver: Path to additional Drivers you want to install
+        #WinPE Driver: Path to additional Drivers you want to add to WinPE
         [System.String[]]$DriverPath,
 
-        #Copies named PowerShell Modules from the running OS to WinPE
+        #PowerShell: Copies named PowerShell Modules from the running OS to WinPE
+        #This is useful for adding Modules that are customized or not on PowerShell Gallery
         [System.String[]]$PSModuleCopy,
 
-        #Installs named PowerShell Modules from PowerShell Gallery to WinPE
+        #PowerShell: Installs named PowerShell Modules from PowerShell Gallery to WinPE
         [Alias('Modules')]
         [System.String[]]$PSModuleInstall,
 
@@ -157,7 +159,7 @@ function Edit-OSDCloudWinPE {
             Save-MsUpCatDriver -HardwareID $Item -DestinationDirectory $AddWindowsDriverPath
         }
         try {
-            Add-WindowsDriver -Path "$($MountMyWindowsImage.Path)" -Driver $AddWindowsDriverPath -Recurse -ForceUnsigned -Verbose | Out-Null
+            Add-WindowsDriver -Path "$MountPath" -Driver $AddWindowsDriverPath -Recurse -ForceUnsigned -Verbose | Out-Null
         }
         catch {
             Write-Warning "Unable to find a driver for $Item"
@@ -169,7 +171,7 @@ function Edit-OSDCloudWinPE {
     if ($CloudDriver) {
         foreach ($Driver in $CloudDriver) {
             $AddWindowsDriverPath = Save-WinPECloudDriver -CloudDriver $Driver -Path (Join-Path $env:TEMP (Get-Random))
-            Add-WindowsDriver -Path "$($MountMyWindowsImage.Path)" -Driver "$AddWindowsDriverPath" -Recurse -ForceUnsigned -Verbose | Out-Null
+            Add-WindowsDriver -Path "$MountPath" -Driver "$AddWindowsDriverPath" -Recurse -ForceUnsigned -Verbose | Out-Null
         }
         $null = Save-WindowsImage -Path $MountPath
     }
@@ -177,7 +179,7 @@ function Edit-OSDCloudWinPE {
     #   DriverPath
     #=================================================
     foreach ($AddWindowsDriverPath in $DriverPath) {
-        Add-WindowsDriver -Path "$($MountMyWindowsImage.Path)" -Driver "$AddWindowsDriverPath" -Recurse -ForceUnsigned -Verbose
+        Add-WindowsDriver -Path "$MountPath" -Driver "$AddWindowsDriverPath" -Recurse -ForceUnsigned -Verbose
     }
     #=================================================
     #   Drop initial Startnet.cmd

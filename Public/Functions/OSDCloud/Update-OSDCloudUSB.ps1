@@ -7,7 +7,7 @@ function Update-OSDCloudUSB {
     Updates an OSDCloud USB by downloading OS and Driver Packs from the internet
 
     .LINK
-    https://github.com/OSDeploy/OSD/tree/master/docs
+    https://github.com/OSDeploy/OSD/tree/master/Docs
     #>
 
     [CmdletBinding()]

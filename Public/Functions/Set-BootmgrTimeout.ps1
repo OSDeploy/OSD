@@ -10,7 +10,7 @@ function Set-BootmgrTimeout {
     Set-BootmgrTimeout -Timeout 10
 
     .LINK
-    https://github.com/OSDeploy/OSD/tree/master/docs
+    https://github.com/OSDeploy/OSD/tree/master/Docs
     #>
     
     [CmdletBinding()]

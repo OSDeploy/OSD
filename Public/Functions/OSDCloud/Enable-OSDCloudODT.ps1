@@ -7,7 +7,7 @@ function Enable-OSDCloudODT {
     Enables ODT Support in an OSDCloud Workspace
 
     .LINK
-    https://github.com/OSDeploy/OSD/tree/master/docs
+    https://github.com/OSDeploy/OSD/tree/master/Docs
     #>
     
     [CmdletBinding()]

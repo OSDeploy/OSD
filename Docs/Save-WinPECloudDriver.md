@@ -1,24 +1,24 @@
 ---
 external help file: OSD-help.xml
 Module Name: OSD
-online version: https://osd.osdeploy.com/module/functions/save-webfile
+online version: https://github.com/OSDeploy/OSD/tree/master/Docs
 schema: 2.0.0
 ---
 
 # Save-WinPECloudDriver
 
 ## SYNOPSIS
-{{ Fill in the Synopsis }}
+Download and expand WinPE Drivers
 
 ## SYNTAX
 
 ```
-Save-WinPECloudDriver [[-CloudDriver] <String[]>] [[-HardwareID] <String[]>] [[-Path] <String>] [-Clipboard]
+Save-WinPECloudDriver [-CloudDriver <String[]>] [-DriverHWID <String[]>] [-Path <String>] [-Clipboard]
  [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-{{ Fill in the Description }}
+Download and expand WinPE Drivers
 
 ## EXAMPLES
 
@@ -31,11 +31,11 @@ PS C:\> {{ Add example code here }}
 
 ## PARAMETERS
 
-### -Clipboard
-{{ Fill Clipboard Description }}
+### -CloudDriver
+WinPE Driver: Download and install in WinPE drivers from Dell,HP,IntelNet,LenovoDock,Nutanix,USB,VMware,WiFi
 
 ```yaml
-Type: SwitchParameter
+Type: String[]
 Parameter Sets: (All)
 Aliases:
 
@@ -46,39 +46,24 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -CloudDriver
-{{ Fill CloudDriver Description }}
+### -DriverHWID
+WinPE Driver: HardwareID of the Driver download from Microsoft Catalog
 
 ```yaml
 Type: String[]
 Parameter Sets: (All)
-Aliases:
-Accepted values: *, Dell, HP, IntelNet, LenovoDock, Nutanix, Surface, USB, VMware, WiFi
+Aliases: HardwareID
 
 Required: False
-Position: 0
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -HardwareID
-{{ Fill HardwareID Description }}
-
-```yaml
-Type: String[]
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 1
+Position: Named
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
 ### -Path
-{{ Fill Path Description }}
+WinPE Driver: Destination path to save the drivers
+If not specified, a random directory in $env:TEMP is selected
 
 ```yaml
 Type: String
@@ -86,8 +71,23 @@ Parameter Sets: (All)
 Aliases:
 
 Required: False
-Position: 2
+Position: Named
 Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -Clipboard
+Saves the Path to the Clipboard
+
+```yaml
+Type: SwitchParameter
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: False
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
@@ -97,11 +97,11 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## INPUTS
 
-### None
-
 ## OUTPUTS
 
-### System.Object
 ## NOTES
 
 ## RELATED LINKS
+
+[https://github.com/OSDeploy/OSD/tree/master/Docs](https://github.com/OSDeploy/OSD/tree/master/Docs)
+

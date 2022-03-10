@@ -16,7 +16,7 @@ function Invoke-Exe {
     Invoke-Exe dir c:\
     
     .LINK
-    https://github.com/OSDeploy/OSD/tree/master/docs
+    https://github.com/OSDeploy/OSD/tree/master/Docs
     #>
     
     [CmdletBinding(SupportsShouldProcess = $true)]

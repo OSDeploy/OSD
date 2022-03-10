@@ -7,7 +7,7 @@ function Start-OSDCloud {
     Starts the OSDCloud Windows 10 or 11 Build Process from the OSD Module or a GitHub Repository
 
     .LINK
-    https://github.com/OSDeploy/OSD/tree/master/docs
+    https://github.com/OSDeploy/OSD/tree/master/Docs
     #>
 
     [CmdletBinding(DefaultParameterSetName = 'Default')]

@@ -7,7 +7,7 @@ function Get-OSDCloudTemplate {
     Returns the path to the OSDCloud Template.  This is typically $env:ProgramData\OSDCloud
 
     .LINK
-    https://github.com/OSDeploy/OSD/tree/master/docs
+    https://github.com/OSDeploy/OSD/tree/master/Docs
     #>
     
     [CmdletBinding()]

@@ -1,40 +1,55 @@
-<#
-.SYNOPSIS
-Performs many tasks on a WinPE.wim file.  Not good for an OS wim
-
-.DESCRIPTION
-Performs many tasks on a WinPE.wim file.  Not good for an OS wim
-
-.LINK
-https://osd.osdeploy.com/module/functions/winpewim
-
-.NOTES
-21.3.12  Initial Release
-#>
 function Edit-MyWinPE {
+    <#
+    .SYNOPSIS
+    Mounts and edits a WinPE WIM file
+
+    .DESCRIPTION
+    Mounts and edits a WinPE WIM file
+
+    .LINK
+    https://github.com/OSDeploy/OSD/tree/master/Docs
+    #>
+
+    [CmdletBinding(PositionalBinding = $false)]
     param (
+        #Path to the WinPE WIM file. This file must be local and not on a USB or Network Share
         [Parameter(ValueFromPipelineByPropertyName)]
-        [string[]]$ImagePath,
+        [System.String[]]$ImagePath,
 
+        #Index of the WinPE WIM file to mount. Default is 1
         [Parameter(ValueFromPipelineByPropertyName)]
-        [UInt32]$Index = 1,
+        [System.UInt32]$Index = 1,
 
-        [ValidateSet('Dell','HP','Nutanix','VMware')]
-        [string[]]$CloudDriver,
+        #WinPE Driver: Download and install in WinPE drivers from Dell,HP,IntelNet,LenovoDock,Nutanix,USB,VMware,WiFi
+        [ValidateSet('*','Dell','HP','IntelNet','LenovoDock','Surface','Nutanix','USB','VMware','WiFi')]
+        [System.String[]]$CloudDriver,
 
-        [string[]]$DriverHWID,
+        #WinPE Driver: HardwareID of the Driver to add to WinPE
+        [Alias('HardwareID')]
+        [System.String[]]$DriverHWID,
 
-        [string[]]$DriverPath,
+        #WinPE Driver: Path to additional Drivers you want to add to WinPE
+        [System.String[]]$DriverPath,
 
+        #PowerShell: Sets the PowerShell Execution Policy of WinPE.  Bypass is recommended
         [ValidateSet('Restricted','AllSigned','RemoteSigned','Unrestricted','Bypass','Undefined')]
-        [string]$ExecutionPolicy,
+        [System.String]$ExecutionPolicy,
 
-        [String[]]$PSModuleSave,
+        #PowerShell: Installs named PowerShell Modules from PowerShell Gallery to WinPE
+        [Alias('PSModuleSave')]
+        [System.String[]]$PSModuleInstall,
 
-        [String[]]$PSModuleCopy,
+        #PowerShell: Copies named PowerShell Modules from the running OS to WinPE
+        #This is useful for adding Modules that are customized or not on PowerShell Gallery
+        [System.String[]]$PSModuleCopy,
 
+        #PowerShell: Enables PowerShell Gallery functionality in WinPE
         [System.Management.Automation.SwitchParameter]$PSGallery,
 
+        #Sets the specified Wallpaper JPG file as the WinPE Background
+        [System.String]$Wallpaper,
+
+        #Dismounts and saves changes to the mounted WinPE WIM
         [System.Management.Automation.SwitchParameter]$DismountSave
     )
 
@@ -83,6 +98,7 @@ function Edit-MyWinPE {
             #=================================================
             try {
                 $MountMyWindowsImage = Mount-MyWindowsImage -ImagePath $Input -Index $Index
+                $MountPath = $MountMyWindowsImage.Path
             }
             catch {
                 Write-Warning "Could not mount this WIM for some reason"
@@ -97,7 +113,7 @@ function Edit-MyWinPE {
             #   Make sure WinPE is Major Version 10
             #=================================================
             Write-Verbose "Verifying WinPE 10"
-            $GetRegCurrentVersion = Get-RegCurrentVersion -Path $MountMyWindowsImage.Path
+            $GetRegCurrentVersion = Get-RegCurrentVersion -Path $MountPath
 
             if ($GetRegCurrentVersion.CurrentMajorVersionNumber -ne 10) {
                 Write-Warning "$($MyInvocation.MyCommand) can only service WinPE with MajorVersion 10"
@@ -115,103 +131,76 @@ function Edit-MyWinPE {
             #   Set-WindowsImageExecutionPolicy
             #=================================================
             if ($ExecutionPolicy) {
-                Set-WindowsImageExecutionPolicy -ExecutionPolicy $ExecutionPolicy -Path $MountMyWindowsImage.Path
-            }
-            #=================================================
-            #   PSModuleCopy
-            #=================================================
-            if ($PSModuleCopy) {
-                Copy-PSModuleToFolder -Name $PSModuleCopy -Destination "$($MountMyWindowsImage.Path)\Program Files\WindowsPowerShell\Modules" -RemoveOldVersions
-            }
-            #=================================================
-            #   PSModuleSave
-            #=================================================
-            if ($PSModuleSave) {
-                Save-Module -Name $PSModuleSave -Destination "$($MountMyWindowsImage.Path)\Program Files\WindowsPowerShell\Modules" -RemoveOldVersions
-            }
-            #=================================================
-            #   DriverPath
-            #=================================================
-            foreach ($Driver in $DriverPath) {
-                Add-WindowsDriver -Path "$($MountMyWindowsImage.Path)" -Driver "$Driver" -Recurse -ForceUnsigned
+                Set-WindowsImageExecutionPolicy -ExecutionPolicy $ExecutionPolicy -Path $MountPath
             }
             #=================================================
             #   DriverHWID
             #=================================================
             if ($DriverHWID) {
-                $HardwareIDDriverPath = Join-Path $env:TEMP (Get-Random)
+                $AddWindowsDriverPath = Join-Path $env:TEMP (Get-Random)
                 foreach ($Item in $DriverHWID) {
-                    Save-MsUpCatDriver -HardwareID $Item -DestinationDirectory $HardwareIDDriverPath
+                    Save-MsUpCatDriver -HardwareID $Item -DestinationDirectory $AddWindowsDriverPath
                 }
-                Add-WindowsDriver -Path "$($MountMyWindowsImage.Path)" -Driver $HardwareIDDriverPath -Recurse -ForceUnsigned
+                try {
+                    Add-WindowsDriver -Path "$MountPath" -Driver $AddWindowsDriverPath -Recurse -ForceUnsigned -Verbose | Out-Null
+                }
+                catch {
+                    Write-Warning "Unable to find a driver for $Item"
+                }
             }
             #=================================================
             #   CloudDriver
             #=================================================
-            foreach ($Driver in $CloudDriver) {
-                if ($Driver -eq 'Dell'){
-                    Write-Verbose "Adding $Driver CloudDriver"
-                    if (Test-WebConnection -Uri 'http://downloads.dell.com/FOLDER07703466M/1/WinPE10.0-Drivers-A25-F0XPX.CAB') {
-                        $SaveWebFile = Save-WebFile -SourceUrl 'http://downloads.dell.com/FOLDER07703466M/1/WinPE10.0-Drivers-A25-F0XPX.CAB'
-                        if (Test-Path $SaveWebFile.FullName) {
-                            $DriverCab = Get-Item -Path $SaveWebFile.FullName
-                            $ExpandPath = Join-Path $DriverCab.Directory $DriverCab.BaseName
-                    
-                            if (-NOT (Test-Path $ExpandPath)) {
-                                New-Item -Path $ExpandPath -ItemType Directory -Force | Out-Null
-                            }
-                            Expand -R "$($DriverCab.FullName)" -F:* "$ExpandPath" | Out-Null
-                            Add-WindowsDriver -Path "$($MountMyWindowsImage.Path)" -Driver "$ExpandPath\winpe\x64" -Recurse -ForceUnsigned -Verbose
-                        }
+            if ($CloudDriver) {
+                foreach ($Driver in $CloudDriver) {
+                    $AddWindowsDriverPath = Save-WinPECloudDriver -CloudDriver $Driver -Path (Join-Path $env:TEMP (Get-Random))
+                    Add-WindowsDriver -Path "$MountPath" -Driver "$AddWindowsDriverPath" -Recurse -ForceUnsigned -Verbose | Out-Null
+                }
+                $null = Save-WindowsImage -Path $MountPath
+            }
+            #=================================================
+            #   DriverPath
+            #=================================================
+            foreach ($AddWindowsDriverPath in $DriverPath) {
+                Add-WindowsDriver -Path "$MountPath" -Driver "$AddWindowsDriverPath" -Recurse -ForceUnsigned -Verbose
+            }
+            #=================================================
+            #   Wallpaper
+            #=================================================
+            if ($Wallpaper) {
+                Write-Host -ForegroundColor DarkGray "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Wallpaper: $Wallpaper"
+                Copy-Item -Path $Wallpaper -Destination "$env:TEMP\winpe.jpg" -Force | Out-Null
+                Copy-Item -Path $Wallpaper -Destination "$env:TEMP\winre.jpg" -Force | Out-Null
+                robocopy "$env:TEMP" "$MountPath\Windows\System32" winpe.jpg /ndl /njh /njs /b /np /r:0 /w:0
+                robocopy "$env:TEMP" "$MountPath\Windows\System32" winre.jpg /ndl /njh /njs /b /np /r:0 /w:0
+            }
+            #=================================================
+            #   PSModuleInstall
+            #=================================================
+            foreach ($Module in $PSModuleInstall) {
+                if ($Module -eq 'DellBiosProvider') {
+                    if (Test-Path "$env:SystemRoot\System32\msvcp140.dll") {
+                        Write-Host -ForegroundColor DarkGray "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Copying $env:SystemRoot\System32\msvcp140.dll to WinPE"
+                        Copy-Item -Path "$env:SystemRoot\System32\msvcp140.dll" -Destination "$MountPath\System32" -Force | Out-Null
+                    }
+                    if (Test-Path "$env:SystemRoot\System32\vcruntime140.dll") {
+                        Write-Host -ForegroundColor DarkGray "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Copying $env:SystemRoot\System32\vcruntime140.dll to WinPE"
+                        Copy-Item -Path "$env:SystemRoot\System32\vcruntime140.dll" -Destination "$MountPath\System32" -Force | Out-Null
+                    }
+                    if (Test-Path "$env:SystemRoot\System32\msvcp140.dll") {
+                        Write-Host -ForegroundColor DarkGray "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Copying $env:SystemRoot\System32\vcruntime140_1.dll to WinPE"
+                        Copy-Item -Path "$env:SystemRoot\System32\vcruntime140_1.dll" -Destination "$MountPath\System32" -Force | Out-Null
                     }
                 }
-                if ($Driver -eq 'HP'){
-                    Write-Verbose "Adding $Driver CloudDriver"
-                    if (Test-WebConnection -Uri 'https://ftp.hp.com/pub/softpaq/sp112501-113000/sp112810.exe') {
-                        $SaveWebFile = Save-WebFile -SourceUrl 'https://ftp.hp.com/pub/softpaq/sp112501-113000/sp112810.exe'
-                        if (Test-Path $SaveWebFile.FullName) {
-                            $DriverCab = Get-Item -Path $SaveWebFile.FullName
-                            $ExpandPath = Join-Path $DriverCab.Directory $DriverCab.BaseName
-        
-        
-                            Write-Verbose -Verbose "Expanding HP Client Windows PE Driver Pack to $ExpandPath"
-                            Start-Process -FilePath $DriverCab -ArgumentList "/s /e /f `"$ExpandPath`"" -Wait
-                            Add-WindowsDriver -Path "$($MountMyWindowsImage.Path)" -Driver "$ExpandPath" -Recurse -ForceUnsigned -Verbose
-                        }
-                    }
-                }
-                if ($Driver -eq 'Nutanix'){
-                    Write-Verbose "Adding $Driver CloudDriver"
-                    if (Test-WebConnection -Uri 'https://github.com/OSDeploy/OSDCloud/raw/main/Drivers/WinPE/Nutanix.cab') {
-                        $SaveWebFile = Save-WebFile -SourceUrl 'https://github.com/OSDeploy/OSDCloud/raw/main/Drivers/WinPE/Nutanix.cab'
-                        if (Test-Path $SaveWebFile.FullName) {
-                            $DriverCab = Get-Item -Path $SaveWebFile.FullName
-                            $ExpandPath = Join-Path $DriverCab.Directory $DriverCab.BaseName
-                    
-                            if (-NOT (Test-Path $ExpandPath)) {
-                                New-Item -Path $ExpandPath -ItemType Directory -Force | Out-Null
-                            }
-                            Expand -R "$($DriverCab.FullName)" -F:* "$ExpandPath" | Out-Null
-                            Add-WindowsDriver -Path "$($MountMyWindowsImage.Path)" -Driver "$ExpandPath" -Recurse -ForceUnsigned -Verbose
-                        }
-                    }
-                }
-                if ($Driver -eq 'VMware'){
-                    Write-Verbose "Adding $Driver CloudDriver"
-                    if (Test-WebConnection -Uri 'https://github.com/OSDeploy/OSDCloud/raw/main/Drivers/WinPE/VMware.cab') {
-                        $SaveWebFile = Save-WebFile -SourceUrl 'https://github.com/OSDeploy/OSDCloud/raw/main/Drivers/WinPE/VMware.cab'
-                        if (Test-Path $SaveWebFile.FullName) {
-                            $DriverCab = Get-Item -Path $SaveWebFile.FullName
-                            $ExpandPath = Join-Path $DriverCab.Directory $DriverCab.BaseName
-                    
-                            if (-NOT (Test-Path $ExpandPath)) {
-                                New-Item -Path $ExpandPath -ItemType Directory -Force | Out-Null
-                            }
-                            Expand -R "$($DriverCab.FullName)" -F:* "$ExpandPath" | Out-Null
-                            Add-WindowsDriver -Path "$($MountMyWindowsImage.Path)" -Driver "$ExpandPath" -Recurse -ForceUnsigned -Verbose
-                        }
-                    }
-                }
+                Write-Host -ForegroundColor DarkGray "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Saving $Module to $MountPath\Program Files\WindowsPowerShell\Modules"
+                Save-Module -Name $Module -Path "$MountPath\Program Files\WindowsPowerShell\Modules" -Force
+            }
+            #=================================================
+            #   PSModuleCopy
+            #=================================================
+            foreach ($Module in $PSModuleCopy) {
+                Write-Host -ForegroundColor DarkGray "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Copy-PSModuleToWindowsImage -Name $Module -Path $MountPath"
+                Copy-PSModuleToWindowsImage -Name $Module -Path $MountPath
             }
             #=================================================
             #   Dismount-MyWindowsImage

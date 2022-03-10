@@ -69,7 +69,7 @@ WinPE Driver: HardwareID of the Driver to add to WinPE
 ```yaml
 Type: String[]
 Parameter Sets: (All)
-Aliases:
+Aliases: HardwareID
 
 Required: False
 Position: Named
@@ -79,7 +79,7 @@ Accept wildcard characters: False
 ```
 
 ### -DriverPath
-WinPE Driver: Path to additional Drivers you want to install
+WinPE Driver: Path to additional Drivers you want to add to WinPE
 
 ```yaml
 Type: String[]
@@ -94,7 +94,8 @@ Accept wildcard characters: False
 ```
 
 ### -PSModuleCopy
-Copies named PowerShell Modules from the running OS to WinPE
+PowerShell: Copies named PowerShell Modules from the running OS to WinPE
+This is useful for adding Modules that are customized or not on PowerShell Gallery
 
 ```yaml
 Type: String[]
@@ -109,7 +110,7 @@ Accept wildcard characters: False
 ```
 
 ### -PSModuleInstall
-Installs named PowerShell Modules from PowerShell Gallery to WinPE
+PowerShell: Installs named PowerShell Modules from PowerShell Gallery to WinPE
 
 ```yaml
 Type: String[]
