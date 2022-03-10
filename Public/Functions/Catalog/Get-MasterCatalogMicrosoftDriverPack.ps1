@@ -24,6 +24,7 @@ function Get-MasterCatalogMicrosoftDriverPack {
     )
 #=================================================
 #	BaseCatalog
+#   https://docs.microsoft.com/en-us/surface/surface-system-sku-reference
 #=================================================
 $BaseCatalog = @'
 [
@@ -274,8 +275,19 @@ $BaseCatalog = @'
         "Status":  "",
         "Component":  "DriverPack",
         "Name":  "Surface Laptop 4",
+        "Model":  "Surface Laptop 4 13 AMD",
+        "Product":  "Surface_Laptop_4_1958:1959",
+        "PackageID": "102923",
+        "Url": "",
+        "FileName":  ""
+    },
+    {
+        "CatalogVersion":  "",
+        "Status":  "",
+        "Component":  "DriverPack",
+        "Name":  "Surface Laptop 4",
         "Model":  "Surface Laptop 4 13 Intel",
-        "Product":  "Surface_Laptop_4",
+        "Product":  "Surface_Laptop_4_1950:1951",
         "PackageID": "102924",
         "Url": "",
         "FileName":  ""
@@ -285,9 +297,20 @@ $BaseCatalog = @'
         "Status":  "",
         "Component":  "DriverPack",
         "Name":  "Surface Laptop 4",
-        "Model":  "Surface Laptop 4 13 AMD",
-        "Product":  "Surface_Laptop_4",
+        "Model":  "Surface Laptop 4 15 AMD",
+        "Product":  "Surface_Laptop_4_1952:1953",
         "PackageID": "102923",
+        "Url": "",
+        "FileName":  ""
+    },
+    {
+        "CatalogVersion":  "",
+        "Status":  "",
+        "Component":  "DriverPack",
+        "Name":  "Surface Laptop 4",
+        "Model":  "Surface Laptop 4 15 Intel",
+        "Product":  "Surface_Laptop_4_1978:1979",
+        "PackageID": "102924",
         "Url": "",
         "FileName":  ""
     },
