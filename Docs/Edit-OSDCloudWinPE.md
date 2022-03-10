@@ -16,7 +16,7 @@ Edits WinPE in an OSDCloud Workspace
 Edit-OSDCloudWinPE [-Brand <String>] [-CloudDriver <String[]>] [-DriverHWID <String[]>]
  [-DriverPath <String[]>] [-PSModuleCopy <String[]>] [-PSModuleInstall <String[]>] [-Startnet <String>]
  [-StartOSDCloud <String>] [-StartOSDCloudGUI] [-StartOSDPad <String>] [-StartPSCommand <String>]
- [-StartWebScript <String>] [-UpdateUsb] [-Wallpaper <String>] [-WorkspacePath <String>] [<CommonParameters>]
+ [-StartWebScript <String>] [-UpdateUSB] [-Wallpaper <String>] [-WorkspacePath <String>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -213,7 +213,7 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -UpdateUsb
+### -UpdateUSB
 After WinPE has been updated, the contents of the OSDCloud Workspace will be updated on any OSDCloud USB Drives
 
 ```yaml

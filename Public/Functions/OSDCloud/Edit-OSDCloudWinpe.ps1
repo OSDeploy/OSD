@@ -52,7 +52,7 @@ function Edit-OSDCloudWinPE {
         [System.String]$StartWebScript,
 
         #After WinPE has been updated, the contents of the OSDCloud Workspace will be updated on any OSDCloud USB Drives
-        [System.Management.Automation.SwitchParameter]$UpdateUsb,
+        [System.Management.Automation.SwitchParameter]$UpdateUSB,
 
         #Sets the specified Wallpaper JPG file as the WinPE Background
         [System.String]$Wallpaper,
@@ -357,9 +357,9 @@ start /wait PowerShell -Nol -W Mi -C Start-Sleep -Seconds 10
     #=================================================
     $MountMyWindowsImage | Dismount-MyWindowsImage -Save
     #=================================================
-    #	UpdateUsb
+    #	UpdateUSB
     #=================================================
-    if ($UpdateUsb) {
+    if ($UpdateUSB) {
         $WinpeVolumes = (Get-Volume.usb | Where-Object {$_.FileSystemLabel -eq 'WinPE'}).DriveLetter
     
         if ($WinpeVolumes) {
