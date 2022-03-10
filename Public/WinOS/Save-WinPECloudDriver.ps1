@@ -44,8 +44,7 @@ function Save-WinPECloudDriver {
                                     #https://docs.microsoft.com/en-us/surface/enable-surface-keyboard-for-windows-pe-deployment
     $SurfaceCloudDriverText         = 'Surface WinPE Driver Pack [Microsoft Catalog]'
     $SurfaceCloudDriverHwids        = @(
-                                        'MSHW0028' #Button
-                                        'MSHW0040' #Button
+                                        'MSHW0028' #Button and MSHW0040
                                         'MSHW0084' #Serial Hub
                                         'MSHW0091' #ACPI Notify
                                         'MSHW0094' #Null
@@ -231,7 +230,7 @@ function Save-WinPECloudDriver {
         #=================================================
         if ($DriverPack -eq 'Surface') {
             Write-Host -ForegroundColor Yellow "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) $SurfaceCloudDriverText"
-            Save-MsUpCatDriver -SurfaceID $SurfaceCloudDriverHwids -DestinationDirectory (Join-Path $Path $DriverPack)
+            Save-MsUpCatDriver -HardwareID $SurfaceCloudDriverHwids -DestinationDirectory (Join-Path $Path $DriverPack)
         }
         #=================================================
         #   USB Dongles

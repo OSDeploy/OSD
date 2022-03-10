@@ -6,9 +6,6 @@ function Save-MsUpCatDriver {
         [Parameter(ParameterSetName = 'ByHardwareID')]
         [string[]]$HardwareID,
 
-        [Parameter(ParameterSetName = 'BySurfaceID')]
-        [string[]]$SurfaceID,
-
         [Parameter(ParameterSetName = 'ByPNPClass')]
         [ValidateSet('Display','Net','USB')]
         [string]$PNPClass
@@ -28,8 +25,10 @@ function Save-MsUpCatDriver {
         Install-Module MSCatalog -Force -ErrorAction Ignore
     } #>
     #=================================================
-    #$DeviceIDPattern = 'VEN_([0-9a-f]){4}&DEV_([0-9a-f]){4}&SUBSYS_([0-9a-f]){8}'
-    $DeviceIDPattern = 'v[ei][dn]_([0-9a-f]){4}&[pd][ie][dv]_([0-9a-f]){4}'
+    #$HardwareIDPattern = 'VEN_([0-9a-f]){4}&DEV_([0-9a-f]){4}&SUBSYS_([0-9a-f]){8}'
+    $HardwareIDPattern = 'v[ei][dn]_([0-9a-f]){4}&[pd][ie][dv]_([0-9a-f]){4}'
+    $SurfaceIDPattern = 'mshw0[0-1]([0-9]){2}'
+
     if (Test-WebConnectionMsUpCat) {
         #=================================================
         #	ByPNPClass
@@ -50,12 +49,12 @@ function Save-MsUpCatDriver {
 
             foreach ($Item in $Devices) {
                 $FindHardwareID = $null
-    
+
                 #See if DeviceID matches the pattern
-                $FindHardwareID = $Item.DeviceID | Select-String -Pattern $DeviceIDPattern -AllMatches | Select-Object -ExpandProperty Matches | Select-Object -ExpandProperty Value
-    
+                $FindHardwareID = $Item.DeviceID | Select-String -Pattern $HardwareIDPattern -AllMatches | Select-Object -ExpandProperty Matches | Select-Object -ExpandProperty Value
+
                 if (($null -eq $FindHardwareID) -and ($Item.HardwareID)) {
-                    $FindHardwareID = $Item.HardwareID[0] | Select-String -Pattern $DeviceIDPattern -AllMatches | Select-Object -ExpandProperty Matches | Select-Object -ExpandProperty Value
+                    $FindHardwareID = $Item.HardwareID[0] | Select-String -Pattern $HardwareIDPattern -AllMatches | Select-Object -ExpandProperty Matches | Select-Object -ExpandProperty Value
                 }
     
                 if ($FindHardwareID) {
@@ -115,64 +114,17 @@ function Save-MsUpCatDriver {
         #=================================================
         if ($PSCmdlet.ParameterSetName -eq 'ByHardwareID') {
             foreach ($Item in $HardwareID) {
+                Write-Verbose $Item
+
+
                 $WindowsUpdateDriver = $null
+
                 #See if DeviceID matches the pattern
-                $FindHardwareID = $Item | Select-String -Pattern $DeviceIDPattern -AllMatches | Select-Object -ExpandProperty Matches | Select-Object -ExpandProperty Value
-    
-                if ($FindHardwareID) {
-                    $SearchString = "$FindHardwareID".Replace('&',"`%26")
+                $FindHardwareID = $Item | Select-String -Pattern $HardwareIDPattern | Select-Object -ExpandProperty Matches | Select-Object -ExpandProperty Value
 
-                    #Windows 10 2004 - 21H1
-                    $WindowsUpdateDriver = Get-MsUpCat -Search "Vibranium+$SearchString" -Descending | Select-Object LastUpdated,Title,Version,Size,Guid -First 1 -ErrorAction Ignore
-                    if (-not ($WindowsUpdateDriver)) {
-                        $WindowsUpdateDriver = Get-MsUpCat -Search "1903+$SearchString" -Descending | Select-Object LastUpdated,Title,Version,Size,Guid -First 1 -ErrorAction Ignore
-                    }
-                    if (-not ($WindowsUpdateDriver)) {
-                        $WindowsUpdateDriver = Get-MsUpCat -Search "1809+$SearchString" -Descending | Select-Object LastUpdated,Title,Version,Size,Guid -First 1 -ErrorAction Ignore
-                    }
-
-                    if ($WindowsUpdateDriver.Guid) {
-                        Write-Host -ForegroundColor Cyan "$Item $($WindowsUpdateDriver.Title)"
-                        Write-Host -ForegroundColor DarkGray "UpdateID: $($WindowsUpdateDriver.Guid)"
-                        Write-Host -ForegroundColor DarkGray "Size: $($WindowsUpdateDriver.Size) Last Updated $($WindowsUpdateDriver.LastUpdated)"
-
-                        #Write-Host -ForegroundColor DarkGray "HardwareID: $FindHardwareID"
-                        #Write-Host -ForegroundColor DarkGray "SearchString: $SearchString"
-    
-                        #Write-Host -ForegroundColor DarkGray "$($WindowsUpdateDriver.Title) version $($WindowsUpdateDriver.Version)"
-                        #Write-Host -ForegroundColor DarkGray "Version $($WindowsUpdateDriver.Version) Size: $($WindowsUpdateDriver.Size)"
-                        #Write-Host -ForegroundColor DarkGray "Last Updated $($WindowsUpdateDriver.LastUpdated)"
-    
-                        if ($DestinationDirectory) {
-                            $DestinationPath = Join-Path $DestinationDirectory $WindowsUpdateDriver.Guid
-                            $WindowsUpdateDriverFile = Save-UpdateCatalog -Guid $WindowsUpdateDriver.Guid -DestinationDirectory $DestinationPath
-                            if ($WindowsUpdateDriverFile) {
-                                Write-Host -ForegroundColor DarkGray "Complete: $DestinationPath"
-                                expand.exe "$($WindowsUpdateDriverFile.FullName)" -F:* "$DestinationPath" | Out-Null
-                                Remove-Item $WindowsUpdateDriverFile.FullName | Out-Null
-                            }
-                            else {
-                                Write-Warning "Save-MsUpCatDriver: Could not find a Driver for this HardwareID"
-                            }
-                        }
-                    }
-                    else {
-                        Write-Host -ForegroundColor Gray "No Results: $FindHardwareID"
-                    }
+                if (-not ($FindHardwareID)) {
+                    $FindHardwareID = $Item | Select-String -Pattern $SurfaceIDPattern | Select-Object -ExpandProperty Matches | Select-Object -ExpandProperty Value
                 }
-                else {
-                    Write-Host -ForegroundColor Gray "No Results: $FindHardwareID"
-                }
-            }
-        }
-        #=================================================
-        #	BySufaceID
-        #=================================================
-        if ($PSCmdlet.ParameterSetName -eq 'BySurfaceID') {
-            foreach ($Item in $SurfaceID) {
-                $WindowsUpdateDriver = $null
-                #See if DeviceID matches the pattern
-                $FindHardwareID = $Item
     
                 if ($FindHardwareID) {
                     $SearchString = "$FindHardwareID".Replace('&',"`%26")
