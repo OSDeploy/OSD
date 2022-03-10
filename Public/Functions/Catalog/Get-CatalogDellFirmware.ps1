@@ -21,9 +21,9 @@ function Get-CatalogDellFirmware {
     )
 	
     if ($PSBoundParameters.ContainsKey('Compatible')) {
-	    Get-BaseCatalogDellSystem -Component Firmware -Compatible | Sort-Object -Property ReleaseDate -Descending
+	    Get-OSDCatalogDellSystem -Component Firmware -Compatible | Sort-Object -Property ReleaseDate -Descending
     }
     else {
-        Get-BaseCatalogDellSystem -Component Firmware | Sort-Object -Property ReleaseDate -Descending
+        Get-OSDCatalogDellSystem -Component Firmware | Sort-Object -Property ReleaseDate -Descending
     }
 }

@@ -49,7 +49,7 @@ Accept wildcard characters: False
 ```
 
 ### -CloudDriver
-WinPE Driver: Download and install in WinPE drivers from Dell,HP,IntelNet,LenovoDock,Nutanix,USB,VMware,WiFi
+WinPE Driver: Download and install in WinPE drivers from Dell,HP,IntelNet,LenovoDock,Nutanix,Surface,USB,VMware,WiFi
 
 ```yaml
 Type: String[]

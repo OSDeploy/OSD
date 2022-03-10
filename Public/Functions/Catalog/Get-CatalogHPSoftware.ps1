@@ -21,9 +21,9 @@ function Get-CatalogHPSoftware {
     )
 	
     if ($PSBoundParameters.ContainsKey('Compatible')) {
-	    Get-BaseCatalogHPSystem -Component Software -Compatible | Sort-Object -Property CreationDate -Descending
+	    Get-OSDCatalogHPSystem -Component Software -Compatible | Sort-Object -Property CreationDate -Descending
     }
     else {
-        Get-BaseCatalogHPSystem -Component Software | Sort-Object -Property CreationDate -Descending
+        Get-OSDCatalogHPSystem -Component Software | Sort-Object -Property CreationDate -Descending
     }
 }

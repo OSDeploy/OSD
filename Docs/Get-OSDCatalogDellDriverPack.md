@@ -5,44 +5,28 @@ online version: https://osd.osdeploy.com
 schema: 2.0.0
 ---
 
-# Get-BaseCatalogDellSystem
+# Get-OSDCatalogDellDriverPack
 
 ## SYNOPSIS
-Converts the Dell Catalog PC to a PowerShell Object
+Returns the Dell DriverPacks downloads
 
 ## SYNTAX
 
 ```
-Get-BaseCatalogDellSystem [[-DownloadPath] <String>] [-Compatible] [[-Component] <String>] [<CommonParameters>]
+Get-OSDCatalogDellDriverPack [[-DownloadPath] <String>] [-Compatible] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-Converts the Dell Catalog PC to a PowerShell Object
-Requires Internet Access to download Dell CatalogPC.cab
+Returns the Dell DriverPacks downloads
 
 ## EXAMPLES
 
-### EXAMPLE 1
-```
-Get-BaseCatalogDellSystem
-```
-
-Don't do this, you will get an almost endless list
-
-### EXAMPLE 2
-```
-$Result = Get-BaseCatalogDellSystem
+### Example 1
+```powershell
+PS C:\> {{ Add example code here }}
 ```
 
-Yes do this. 
-Save it in a Variable
-
-### EXAMPLE 3
-```
-Get-BaseCatalogDellSystem -Component BIOS | Out-GridView
-```
-
-Displays all the Dell BIOS Updates in GridView
+{{ Add example description here }}
 
 ## PARAMETERS
 
@@ -62,8 +46,7 @@ Accept wildcard characters: False
 ```
 
 ### -Compatible
-If you have a Dell System, this will filter the results based on your
-ComputerSystem SystemSKUNumber
+Filters results based on your current Product
 
 ```yaml
 Type: SwitchParameter
@@ -73,25 +56,6 @@ Aliases:
 Required: False
 Position: Named
 Default value: False
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -Component
-Filter the results based on these Components:
-Application
-BIOS
-Driver
-Firmware
-
-```yaml
-Type: String
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 2
-Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```

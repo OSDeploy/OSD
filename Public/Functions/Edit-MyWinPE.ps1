@@ -20,7 +20,7 @@ function Edit-MyWinPE {
         [Parameter(ValueFromPipelineByPropertyName)]
         [System.UInt32]$Index = 1,
 
-        #WinPE Driver: Download and install in WinPE drivers from Dell,HP,IntelNet,LenovoDock,Nutanix,USB,VMware,WiFi
+        #WinPE Driver: Download and install in WinPE drivers from Dell,HP,IntelNet,LenovoDock,Nutanix,Surface,USB,VMware,WiFi
         [ValidateSet('*','Dell','HP','IntelNet','LenovoDock','Surface','Nutanix','USB','VMware','WiFi')]
         [System.String[]]$CloudDriver,
 

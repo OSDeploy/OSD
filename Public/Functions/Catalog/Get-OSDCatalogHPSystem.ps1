@@ -19,15 +19,15 @@ If you have a HP System, this will filter the results based on your
 ComputerSystem Product (Win32_BaseBoard Product)
 
 .EXAMPLE
-Get-BaseCatalogHPSystem
+Get-OSDCatalogHPSystem
 Don't do this, you will get an almost endless list
 
 .EXAMPLE
-$Results = Get-BaseCatalogHPSystem
+$Results = Get-OSDCatalogHPSystem
 Yes do this.  Save it in a Variable
 
 .EXAMPLE
-Get-BaseCatalogHPSystem -Component BIOS | Out-GridView
+Get-OSDCatalogHPSystem -Component BIOS | Out-GridView
 Displays all the HP BIOS updates in GridView
 
 .LINK
@@ -35,7 +35,7 @@ https://osd.osdeploy.com
 
 .NOTES
 #>
-function Get-BaseCatalogHPSystem {
+function Get-OSDCatalogHPSystem {
     [CmdletBinding()]
     param (
         [System.String]$DownloadPath,
@@ -51,8 +51,8 @@ function Get-BaseCatalogHPSystem {
     $CloudCatalogUri        = 'https://hpia.hpcloud.hp.com/downloads/sccmcatalog/HpCatalogForSms.latest.cab'
     $RawCatalogFileName     = 'HpCatalogForSms.xml'
     $RawCatalogFile			= Join-Path $env:TEMP (Join-Path 'OSD' 'HpCatalogForSms.xml')
-    $BuildCatalogFile		= Join-Path $env:TEMP (Join-Path 'OSD' 'BaseCatalogHPSystem.xml')
-    $OfflineCatalogFile     = "$($MyInvocation.MyCommand.Module.ModuleBase)\Catalogs\BASE\BaseCatalogHPSystem.xml"
+    $BuildCatalogFile		= Join-Path $env:TEMP (Join-Path 'OSD' 'OSDCatalogHPSystem.xml')
+    $OfflineCatalogFile     = "$($MyInvocation.MyCommand.Module.ModuleBase)\Catalogs\OSDCatalog\OSDCatalogHPSystem.xml"
 
     $RawCatalogCabName  	= [string]($CloudCatalogUri | Split-Path -Leaf)
     $RawCatalogCabPath 		= Join-Path $env:TEMP (Join-Path 'OSD' $RawCatalogCabName)
@@ -125,7 +125,7 @@ function Get-BaseCatalogHPSystem {
     if ($UseCatalog -eq 'Raw') {
         Write-Verbose "Reading the Raw Catalog at $RawCatalogFile"
         $PlatformCatalogHashTable = @{}
-        Get-BaseCatalogHPPlatformList | ForEach-Object{
+        Get-OSDCatalogHPPlatformList | ForEach-Object{
             $PlatformCatalogHashTable.Add($_.SystemId,$_.SupportedModel)
         }
         

@@ -21,9 +21,9 @@ function Get-CatalogDellDriver {
     )
 	
     if ($PSBoundParameters.ContainsKey('Compatible')) {
-	    Get-BaseCatalogDellSystem -Component Driver -Compatible | Sort-Object -Property ReleaseDate -Descending
+	    Get-OSDCatalogDellSystem -Component Driver -Compatible | Sort-Object -Property ReleaseDate -Descending
     }
     else {
-        Get-BaseCatalogDellSystem -Component Driver | Sort-Object -Property ReleaseDate -Descending
+        Get-OSDCatalogDellSystem -Component Driver | Sort-Object -Property ReleaseDate -Descending
     }
 }

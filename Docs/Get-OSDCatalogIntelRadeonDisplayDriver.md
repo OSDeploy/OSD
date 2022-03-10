@@ -5,19 +5,19 @@ online version: https://osddrivers.osdeploy.com
 schema: 2.0.0
 ---
 
-# Get-BaseCatalogIntelWirelessDriver
+# Get-OSDCatalogIntelRadeonDisplayDriver
 
 ## SYNOPSIS
-Returns a Intel Wireless Driver Object
+Returns a Intel Radeon Display Driver Object
 
 ## SYNTAX
 
 ```
-Get-BaseCatalogIntelWirelessDriver [[-CompatArch] <String>] [[-CompatOS] <String>] [<CommonParameters>]
+Get-OSDCatalogIntelRadeonDisplayDriver [[-CompatArch] <String>] [[-CompatOS] <String>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-Returns a Intel Wireless Driver Object
+Returns a Intel Radeon Display Driver Object
 
 ## EXAMPLES
 

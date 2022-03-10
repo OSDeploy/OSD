@@ -8,7 +8,7 @@ Returns a Intel Wireless Driver Object
 .LINK
 https://osddrivers.osdeploy.com
 #>
-function Get-BaseCatalogIntelWirelessDriver {
+function Get-OSDCatalogIntelWirelessDriver {
     [CmdletBinding()]
     param (
         [ValidateSet('x64','x86')]
@@ -23,26 +23,26 @@ function Get-BaseCatalogIntelWirelessDriver {
     #=================================================
     #   Import Base Catalog
     #=================================================
-    $BaseCatalog = Get-Content -Path "$($MyInvocation.MyCommand.Module.ModuleBase)\Catalogs\BASE\BaseCatalogIntelWirelessDriver.json" -Raw | ConvertFrom-Json
+    $OSDCatalog = Get-Content -Path "$($MyInvocation.MyCommand.Module.ModuleBase)\Catalogs\OSDCatalog\OSDCatalogIntelWirelessDriver.json" -Raw | ConvertFrom-Json
     #=================================================
     #   Online
     #=================================================
     if (Test-WebConnection $Uri) {
         Write-Verbose "Catalog is Online"
         #All Drivers are from the same URL
-        $BaseCatalog = $BaseCatalog | Select-Object -First 1
+        $OSDCatalog = $OSDCatalog | Select-Object -First 1
         #=================================================
         #   ForEach
         #=================================================
         $ZipFileResults = @()
         $DriverResults = @()
-        $DriverResults = foreach ($BaseCatalogItem in $BaseCatalog) {
-            #Write-Verbose "$($BaseCatalogItem.DriverGrouping) $($BaseCatalogItem.OsArch)" -Verbose
-            #Write-Verbose "     $($BaseCatalogItem.DriverInfo)" -Verbose
+        $DriverResults = foreach ($OSDCatalogItem in $OSDCatalog) {
+            #Write-Verbose "$($OSDCatalogItem.DriverGrouping) $($OSDCatalogItem.OsArch)" -Verbose
+            #Write-Verbose "     $($OSDCatalogItem.DriverInfo)" -Verbose
             #=================================================
             #   WebRequest
             #=================================================
-            $DriverInfoWebRequest = Invoke-WebRequest -Uri $BaseCatalogItem.DriverInfo -Method Get
+            $DriverInfoWebRequest = Invoke-WebRequest -Uri $OSDCatalogItem.DriverInfo -Method Get
             $DriverInfoWebRequestContent = $DriverInfoWebRequest.Content
 
             $DriverInfoHTML = $DriverInfoWebRequest.ParsedHtml.childNodes | Where-Object {$_.nodename -eq 'HTML'} 
@@ -57,10 +57,10 @@ function Get-BaseCatalogIntelWirelessDriver {
 
             $ZipFileResults = $ZipFileResults | Where-Object {$_ -match 'Driver'}
 
-            if ($BaseCatalogItem.OsArch -match 'x64') {
+            if ($OSDCatalogItem.OsArch -match 'x64') {
                 $ZipFileResults = $ZipFileResults | Where-Object {$_ -notmatch 'win32'}
             }
-            if ($BaseCatalogItem.OsArch -match 'x86') {
+            if ($OSDCatalogItem.OsArch -match 'x86') {
                 $ZipFileResults = $ZipFileResults | Where-Object {$_ -notmatch 'win64'}
             }
             $ZipFileResults = $ZipFileResults | Select-Object -Unique
@@ -117,7 +117,7 @@ function Get-BaseCatalogIntelWirelessDriver {
                 $DownloadFile = $null
                 $SizeMB = $null
                 $DriverUrl = $null
-                $DriverInfo = $BaseCatalogItem.DriverInfo
+                $DriverInfo = $OSDCatalogItem.DriverInfo
                 $DriverDescription = $null
                 $Hash = $null
                 $OSDGuid = $(New-Guid)
@@ -146,7 +146,7 @@ function Get-BaseCatalogIntelWirelessDriver {
                 #=================================================
                 #   Values
                 #=================================================
-                $DriverGrouping = $BaseCatalogItem.DriverGrouping
+                $DriverGrouping = $OSDCatalogItem.DriverGrouping
                 $DriverName = "$DriverGrouping $OsArch $DriverVersion $OsVersion"
                 $DriverDescription = $DriverInfoMETA | Where-Object {$_.name -eq 'Description'} | Select-Object -ExpandProperty Content
                 $DownloadFile = Split-Path $DriverUrl -Leaf
@@ -222,7 +222,7 @@ function Get-BaseCatalogIntelWirelessDriver {
     #=================================================
     else {
         Write-Verbose "Catalog is Offline"
-        $DriverResults = $BaseCatalog
+        $DriverResults = $OSDCatalog
     }
     #=================================================
     #   Remove Duplicates
@@ -242,7 +242,7 @@ function Get-BaseCatalogIntelWirelessDriver {
     #   Sort-Object
     #=================================================
     $DriverResults = $DriverResults | Sort-Object -Property LastUpdate -Descending
-    $DriverResults | ConvertTo-Json | Out-File "$env:TEMP\BaseCatalogIntelWirelessDriver.json"
+    $DriverResults | ConvertTo-Json | Out-File "$env:TEMP\OSDCatalogIntelWirelessDriver.json"
     #=================================================
     #   Filter
     #=================================================

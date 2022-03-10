@@ -1,35 +1,61 @@
 <#
 .SYNOPSIS
-Returns the HP DriverPacks
+Converts the Dell Catalog PC to a PowerShell Object
 
 .DESCRIPTION
-Returns the HP DriverPacks
+Converts the Dell Catalog PC to a PowerShell Object
+Requires Internet Access to download Dell CatalogPC.cab
+
+.PARAMETER Component
+Filter the results based on these Components:
+Application
+BIOS
+Driver
+Firmware
 
 .PARAMETER Compatible
-Filters results based on your current Product
+If you have a Dell System, this will filter the results based on your
+ComputerSystem SystemSKUNumber
+
+.EXAMPLE
+Get-OSDCatalogDellSystem
+Don't do this, you will get an almost endless list
+
+.EXAMPLE
+$Result = Get-OSDCatalogDellSystem
+Yes do this.  Save it in a Variable
+
+.EXAMPLE
+Get-OSDCatalogDellSystem -Component BIOS | Out-GridView
+Displays all the Dell BIOS Updates in GridView
 
 .LINK
 https://osd.osdeploy.com
 
 .NOTES
 #>
-function Get-BaseCatalogHPDriverPack {
+function Get-OSDCatalogDellSystem {
     [CmdletBinding()]
     param (
         [System.String]$DownloadPath,
-        [System.Management.Automation.SwitchParameter]$Compatible
+        [System.Management.Automation.SwitchParameter]$Compatible,
+
+        [ValidateSet('Application','BIOS','Driver','Firmware')]
+        [System.String]$Component
     )
     #=================================================
     #   Paths
     #=================================================
-    $UseCatalog             = 'Cloud'
-    $CloudCatalogUri        = 'http://ftp.hp.com/pub/caps-softpaq/cmit/HPClientDriverPackCatalog.cab'
-    $RawCatalogFile			= Join-Path $env:TEMP (Join-Path 'OSD' 'HPClientDriverPackCatalog.xml')
-    $BuildCatalogFile		= Join-Path $env:TEMP (Join-Path 'OSD' 'BaseCatalogHPDriverPack.xml')
-    $OfflineCatalogFile     = "$($MyInvocation.MyCommand.Module.ModuleBase)\Catalogs\BASE\BaseCatalogHPDriverPack.xml"
-    
+    $UseCatalog				= 'Cloud'
+    $CloudCatalogUri		= 'http://downloads.dell.com/catalog/CatalogPC.cab'
+    $RawCatalogFile			= Join-Path $env:TEMP (Join-Path 'OSD' 'CatalogPC.xml')
+    $BuildCatalogFile		= Join-Path $env:TEMP (Join-Path 'OSD' 'OSDCatalogDellSystem.xml')
+    $OfflineCatalogFile		= "$($MyInvocation.MyCommand.Module.ModuleBase)\Catalogs\OSDCatalog\OSDCatalogDellSystem.xml"
+
     $RawCatalogCabName  	= [string]($CloudCatalogUri | Split-Path -Leaf)
-    $RawCatalogCabPath 	    = Join-Path $env:TEMP (Join-Path 'OSD' $RawCatalogCabName)
+    $RawCatalogCabPath 		= Join-Path $env:TEMP (Join-Path 'OSD' $RawCatalogCabName)
+    
+    $DownloadsBaseUrl       = 'http://downloads.dell.com/'
     #=================================================
     #   Create Download Path
     #=================================================
@@ -96,70 +122,36 @@ function Get-BaseCatalogHPDriverPack {
     #=================================================
     if ($UseCatalog -eq 'Raw') {
         Write-Verbose "Reading the Raw Catalog at $RawCatalogFile"
-        Write-Warning "Building Catalog content, please wait ..."
         [xml]$XmlCatalogContent = Get-Content $RawCatalogFile -ErrorAction Stop
+        $CatalogVersion = $XmlCatalogContent.Manifest.version
+        $Results = $XmlCatalogContent.Manifest.SoftwareComponent
 
-        $HpSoftPaqList = $XmlCatalogContent.NewDataSet.HPClientDriverPackCatalog.SoftPaqList.SoftPaq
+        $Results = $Results | Select-Object @{Label="CatalogVersion";Expression={$CatalogVersion};},
+        @{Label="Status";Expression={$null};},
+        @{Label="Component";Expression={($_.ComponentType.Display.'#cdata-section'.Trim())};},
+        @{Label="ReleaseDate";Expression = {[datetime] ($_.dateTime)};},
+        @{Label="Name";Expression={($_.Name.Display.'#cdata-section'.Trim())};},
+        #@{Label="Description";Expression={($_.Description.Display.'#cdata-section'.Trim())};},
+        @{Label="DellVersion";Expression={$_.dellVersion};},
+        @{Label="Url";Expression={-join ($DownloadsBaseUrl, $_.path)};},
+        @{Label="VendorVersion";Expression={$_.vendorVersion};},
+        @{Label="Criticality";Expression={($_.Criticality.Display.'#cdata-section'.Trim())};},
+        @{Label="FileName";Expression = {(split-path -leaf $_.path)};},
+        @{Label="SizeMB";Expression={'{0:f2}' -f ($_.size/1MB)};},
+        @{Label="PackageID";Expression={$_.packageID};},
+        @{Label="PackageType";Expression={$_.packageType};},
+        @{Label="ReleaseID";Expression={$_.ReleaseID};},
+        @{Label="Category";Expression={($_.Category.Display.'#cdata-section'.Trim())};},
+        @{Label="SupportedDevices";Expression={($_.SupportedDevices.Device.Display.'#cdata-section'.Trim())};},
+        @{Label="SupportedBrand";Expression={($_.SupportedSystems.Brand.Display.'#cdata-section'.Trim())};},
+        @{Label="SupportedModel";Expression={($_.SupportedSystems.Brand.Model.Display.'#cdata-section'.Trim())};},
+        @{Label="SupportedSystemID";Expression={($_.SupportedSystems.Brand.Model.systemID)};},
+        @{Label="SupportedOperatingSystems";Expression={($_.SupportedOperatingSystems.OperatingSystem.Display.'#cdata-section'.Trim())};},
+        @{Label="SupportedArchitecture";Expression={($_.SupportedOperatingSystems.OperatingSystem.osArch)};},
+        @{Label="HashMD5";Expression={$_.HashMD5};}
 
-        $HpModelList = $XmlCatalogContent.NewDataSet.HPClientDriverPackCatalog.ProductOSDriverPackList.ProductOSDriverPack
-        $HpModelList = $HpModelList | Where-Object {$_.OSId -ge '4243'}
-        $HpModelList = $HpModelList | Sort-Object OSId -Descending | Group-Object ProductId, SoftPaqId | ForEach-Object {$_.Group | Select-Object -First 1}
-        $HpModelList = $HpModelList | Sort-Object OSId -Descending | Group-Object ProductId | ForEach-Object {$_.Group | Select-Object -First 1}
-
-        #=================================================
-        #   Create DriverPack Object
-        #=================================================
-        $Results = foreach ($Item in $HpModelList) {
-            $HpSoftPaq = $null
-            $HpSoftPaq = $HpSoftPaqList | Where-Object {$_.Id -eq $Item.SoftPaqId}
-
-            if ($null -eq $HpSoftPaq) {
-                Continue
-            }
-
-            $Name = $($HpSoftPaq.Name)
-            $Name = ($Name).Replace(' x64','')
-            $Name = ($Name).Replace('Win 10','Win10')
-            $Name = ($Name).Replace('Win 11','Win11')
-            $Name = ($Name).Replace('Windows 10','Win10')
-            $Name = ($Name).Replace('Windows 11','Win11')
-            $Name = ($Name).Replace(' Driver Pack','')
-            $Name = ($Name).Replace('/',' ')
-            $Name = ($Name).Replace('-',' ')
-            $Name = "$Name $($Item.SoftPaqId)"
-            #$Name = ($Name).Replace(' A 1','')
-
-
-            $ObjectProperties = [Ordered]@{
-                CatalogVersion 	= Get-Date -Format yy.MM.dd
-                Status          = $null
-                Component       = 'DriverPack'
-                ReleaseDate     = (Get-Date $HpSoftPaq.DateReleased -Format "yy.MM.dd")
-                Name            = $Name
-                Model           = $Item.SystemName
-                SystemId        = $Item.SystemId
-                SoftPaqId       = $Item.SoftPaqId
-                OSId            = $Item.OSId
-                OSName          = $Item.OSName
-                Architecture    = $Item.Architecture
-                ProductType     = $Item.ProductType
-                SoftPaqName     = $HpSoftPaq.Name
-                Version         = $HpSoftPaq.Version
-                Category        = $HpSoftPaq.Category
-                Url             = $HpSoftPaq.Url
-                FileName        = $HpSoftPaq.Url | Split-Path -Leaf
-                Size            = $HpSoftPaq.Size
-                MD5             = $HpSoftPaq.MD5
-                SHA256          = $HpSoftPaq.SHA256
-                CvaFileUrl      = $HpSoftPaq.CvaFileUrl
-                ReleaseNotesUrl = $HpSoftPaq.ReleaseNotesUrl
-                CvaTitle        = $HpSoftPaq.CvaTitle
-            }
-            New-Object -TypeName PSObject -Property $ObjectProperties
-        }
-
-        $Results = $Results | Sort-Object Model
         Write-Verbose "Exporting Build Catalog to $BuildCatalogFile"
+        $Results = $Results | Sort-Object ReleaseDate -Descending
         $Results | Export-Clixml -Path $BuildCatalogFile
     }
     #=================================================
@@ -182,7 +174,7 @@ function Get-BaseCatalogHPDriverPack {
     if ($PSBoundParameters.ContainsKey('Compatible')) {
         $MyComputerProduct = Get-MyComputerProduct
         Write-Verbose "Filtering Catalog for items compatible with Product $MyComputerProduct"
-        $Results = $Results | Where-Object {$_.Product -contains $MyComputerProduct}
+        $Results = $Results | Where-Object {$_.SupportedSystemID -contains $MyComputerProduct}
     }
     #=================================================
     #   Component
@@ -204,6 +196,6 @@ function Get-BaseCatalogHPDriverPack {
     #=================================================
     #   Complete
     #=================================================
-    $Results
+    $Results | Sort-Object -Property Name
     #=================================================
 }

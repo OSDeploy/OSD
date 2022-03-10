@@ -1,23 +1,23 @@
 ---
 external help file: OSD-help.xml
 Module Name: OSD
-online version: https://osd.osdeploy.com
+online version: https://osddrivers.osdeploy.com
 schema: 2.0.0
 ---
 
-# Get-BaseCatalogHPDriverPack
+# Get-OSDCatalogIntelDisplayDriver
 
 ## SYNOPSIS
-Returns the HP DriverPacks
+Returns a Intel Display Driver Object
 
 ## SYNTAX
 
 ```
-Get-BaseCatalogHPDriverPack [[-DownloadPath] <String>] [-Compatible] [<CommonParameters>]
+Get-OSDCatalogIntelDisplayDriver [[-CompatArch] <String>] [[-CompatOS] <String>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-Returns the HP DriverPacks
+Returns a Intel Display Driver Object
 
 ## EXAMPLES
 
@@ -30,8 +30,8 @@ PS C:\> {{ Add example code here }}
 
 ## PARAMETERS
 
-### -DownloadPath
-{{ Fill DownloadPath Description }}
+### -CompatArch
+{{ Fill CompatArch Description }}
 
 ```yaml
 Type: String
@@ -45,17 +45,17 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -Compatible
-Filters results based on your current Product
+### -CompatOS
+{{ Fill CompatOS Description }}
 
 ```yaml
-Type: SwitchParameter
+Type: String
 Parameter Sets: (All)
 Aliases:
 
 Required: False
-Position: Named
-Default value: False
+Position: 2
+Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
@@ -71,5 +71,5 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## RELATED LINKS
 
-[https://osd.osdeploy.com](https://osd.osdeploy.com)
+[https://osddrivers.osdeploy.com](https://osddrivers.osdeploy.com)
 

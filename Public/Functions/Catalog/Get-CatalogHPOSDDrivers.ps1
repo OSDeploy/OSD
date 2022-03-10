@@ -14,7 +14,7 @@ function Get-CatalogHPOSDDrivers {
     #=================================================
     #   DriverPackCatalog
     #=================================================
-    $DriverPackCatalog = Get-BaseCatalogHPDriverPack
+    $DriverPackCatalog = Get-OSDCatalogHPDriverPack
     #=================================================
     #   ForEach
     #=================================================

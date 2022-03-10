@@ -5,7 +5,7 @@ online version: https://osd.osdeploy.com
 schema: 2.0.0
 ---
 
-# Get-BaseCatalogHPSystem
+# Get-OSDCatalogHPSystem
 
 ## SYNOPSIS
 Converts the HP Client Catalog for Microsoft System Center Product to a PowerShell Object
@@ -13,7 +13,7 @@ Converts the HP Client Catalog for Microsoft System Center Product to a PowerShe
 ## SYNTAX
 
 ```
-Get-BaseCatalogHPSystem [[-DownloadPath] <String>] [-Compatible] [[-Component] <String>] [<CommonParameters>]
+Get-OSDCatalogHPSystem [[-DownloadPath] <String>] [-Compatible] [[-Component] <String>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -24,14 +24,14 @@ Requires Internet Access to download HpCatalogForSms.latest.cab
 
 ### EXAMPLE 1
 ```
-Get-BaseCatalogHPSystem
+Get-OSDCatalogHPSystem
 ```
 
 Don't do this, you will get an almost endless list
 
 ### EXAMPLE 2
 ```
-$Results = Get-BaseCatalogHPSystem
+$Results = Get-OSDCatalogHPSystem
 ```
 
 Yes do this. 
@@ -39,7 +39,7 @@ Save it in a Variable
 
 ### EXAMPLE 3
 ```
-Get-BaseCatalogHPSystem -Component BIOS | Out-GridView
+Get-OSDCatalogHPSystem -Component BIOS | Out-GridView
 ```
 
 Displays all the HP BIOS updates in GridView

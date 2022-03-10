@@ -8,7 +8,7 @@ Returns a Intel Radeon Display Driver Object
 .LINK
 https://osddrivers.osdeploy.com
 #>
-function Get-BaseCatalogIntelRadeonDisplayDriver {
+function Get-OSDCatalogIntelRadeonDisplayDriver {
     [CmdletBinding()]
     param (
         [ValidateSet('x64','x86')]
@@ -23,18 +23,18 @@ function Get-BaseCatalogIntelRadeonDisplayDriver {
     #=================================================
     #   Import Base Catalog
     #=================================================
-    $BaseCatalog = Get-Content -Path "$($MyInvocation.MyCommand.Module.ModuleBase)\Catalogs\BASE\BaseCatalogIntelRadeonDisplayDriver.json" -Raw | ConvertFrom-Json
+    $OSDCatalog = Get-Content -Path "$($MyInvocation.MyCommand.Module.ModuleBase)\Catalogs\OSDCatalog\OSDCatalogIntelRadeonDisplayDriver.json" -Raw | ConvertFrom-Json
     #=================================================
     #   Filter
     #=================================================
     switch ($CompatArch) {
-        'x64'   {$BaseCatalog = $BaseCatalog | Where-Object {$_.OSArch -match 'x64'}}
-        'x86'   {$BaseCatalog = $BaseCatalog | Where-Object {$_.OSArch -match 'x86'}}
+        'x64'   {$OSDCatalog = $OSDCatalog | Where-Object {$_.OSArch -match 'x64'}}
+        'x86'   {$OSDCatalog = $OSDCatalog | Where-Object {$_.OSArch -match 'x86'}}
     }
     switch ($CompatOS) {
-        'Win7'   {$BaseCatalog = $BaseCatalog | Where-Object {$_.OsVersion -match '6.0'}}
-        'Win8'   {$BaseCatalog = $BaseCatalog | Where-Object {$_.OsVersion -match '6.3'}}
-        'Win10'   {$BaseCatalog = $BaseCatalog | Where-Object {$_.OsVersion -match '10.0'}}
+        'Win7'   {$OSDCatalog = $OSDCatalog | Where-Object {$_.OsVersion -match '6.0'}}
+        'Win8'   {$OSDCatalog = $OSDCatalog | Where-Object {$_.OsVersion -match '6.3'}}
+        'Win10'   {$OSDCatalog = $OSDCatalog | Where-Object {$_.OsVersion -match '10.0'}}
     }
     #=================================================
     #   Online
@@ -46,13 +46,13 @@ function Get-BaseCatalogIntelRadeonDisplayDriver {
         #=================================================
         $ZipFileResults = @()
         $DriverResults = @()
-        $DriverResults = foreach ($BaseCatalogItem in $BaseCatalog) {
-            Write-Verbose "$($BaseCatalogItem.DriverGrouping) $($BaseCatalogItem.OsArch)"
-            Write-Verbose "     $($BaseCatalogItem.DriverInfo)"
+        $DriverResults = foreach ($OSDCatalogItem in $OSDCatalog) {
+            Write-Verbose "$($OSDCatalogItem.DriverGrouping) $($OSDCatalogItem.OsArch)"
+            Write-Verbose "     $($OSDCatalogItem.DriverInfo)"
             #=================================================
             #   WebRequest
             #=================================================
-            $DriverInfoWebRequest = Invoke-WebRequest -Uri $BaseCatalogItem.DriverInfo -Method Get
+            $DriverInfoWebRequest = Invoke-WebRequest -Uri $OSDCatalogItem.DriverInfo -Method Get
             $DriverInfoWebRequestContent = $DriverInfoWebRequest.Content
 
             $DriverInfoHTML = $DriverInfoWebRequest.ParsedHtml.childNodes | Where-Object {$_.nodename -eq 'HTML'} 
@@ -63,10 +63,10 @@ function Get-BaseCatalogIntelRadeonDisplayDriver {
             #=================================================
             $ZipFileResults = @($DriverInfoWebRequestContent -split " " -split '"' -match 'http' -match "downloadmirror" -match ".zip")
 
-            if ($BaseCatalogItem.OsArch -match 'x64') {
+            if ($OSDCatalogItem.OsArch -match 'x64') {
                 $ZipFileResults = $ZipFileResults | Where-Object {$_ -notmatch 'win32'}
             }
-            if ($BaseCatalogItem.OsArch -match 'x86') {
+            if ($OSDCatalogItem.OsArch -match 'x86') {
                 $ZipFileResults = $ZipFileResults | Where-Object {$_ -notmatch 'win64'}
             }
             $ZipFileResults = $ZipFileResults | Select-Object -Unique
@@ -90,8 +90,8 @@ function Get-BaseCatalogIntelRadeonDisplayDriver {
                 $DriverGrouping = $null
 
                 $OperatingSystem = @()
-                $OsVersion = $BaseCatalogItem.OsVersion
-                $OsArch = $BaseCatalogItem.OsArch
+                $OsVersion = $OSDCatalogItem.OsVersion
+                $OsArch = $OSDCatalogItem.OsArch
                 $OsBuildMax = @()
                 $OsBuildMin = @()
         
@@ -121,7 +121,7 @@ function Get-BaseCatalogIntelRadeonDisplayDriver {
                 $DownloadFile = $null
                 $SizeMB = $null
                 $DriverUrl = $null
-                $DriverInfo = $BaseCatalogItem.DriverInfo
+                $DriverInfo = $OSDCatalogItem.DriverInfo
                 $DriverDescription = $null
                 $Hash = $null
                 $OSDGuid = $(New-Guid)
@@ -150,7 +150,7 @@ function Get-BaseCatalogIntelRadeonDisplayDriver {
                 #=================================================
                 #   Values
                 #=================================================
-                $DriverGrouping = $BaseCatalogItem.DriverGrouping
+                $DriverGrouping = $OSDCatalogItem.DriverGrouping
                 $DriverName = "$DriverGrouping $OsArch $DriverVersion $OsVersion"
                 $DriverDescription = $DriverInfoMETA | Where-Object {$_.name -eq 'Description'} | Select-Object -ExpandProperty Content
                 $DownloadFile = Split-Path $DriverUrl -Leaf
@@ -226,7 +226,7 @@ function Get-BaseCatalogIntelRadeonDisplayDriver {
     #=================================================
     else {
         Write-Verbose "Catalog is Offline"
-        $DriverResults = $BaseCatalog
+        $DriverResults = $OSDCatalog
     }
     #=================================================
     #   Remove Duplicates
@@ -246,7 +246,7 @@ function Get-BaseCatalogIntelRadeonDisplayDriver {
     #   Sort-Object
     #=================================================
     $DriverResults = $DriverResults | Sort-Object -Property LastUpdate -Descending
-    $DriverResults | ConvertTo-Json | Out-File "$env:TEMP\BaseCatalogIntelRadeonDisplayDriver.json"
+    $DriverResults | ConvertTo-Json | Out-File "$env:TEMP\OSDCatalogIntelRadeonDisplayDriver.json"
     #=================================================
     #   Return
     #=================================================

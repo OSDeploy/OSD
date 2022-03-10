@@ -5,7 +5,7 @@ online version: https://osd.osdeploy.com
 schema: 2.0.0
 ---
 
-# Get-BaseCatalogLenovoDriverPack
+# Get-OSDCatalogLenovoDriverPack
 
 ## SYNOPSIS
 Returns the Lenovo DriverPacks downloads
@@ -13,7 +13,7 @@ Returns the Lenovo DriverPacks downloads
 ## SYNTAX
 
 ```
-Get-BaseCatalogLenovoDriverPack [-Compatible] [[-DownloadPath] <String>] [<CommonParameters>]
+Get-OSDCatalogLenovoDriverPack [-Compatible] [[-DownloadPath] <String>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION

@@ -14,7 +14,7 @@ function Get-CatalogDellOSDDrivers {
     #=================================================
     #   DriverPackCatalog
     #=================================================
-    $DriverPackCatalog = Get-BaseCatalogDellDriverPack
+    $DriverPackCatalog = Get-OSDCatalogDellDriverPack
     #=================================================
     #   ForEach
     #=================================================

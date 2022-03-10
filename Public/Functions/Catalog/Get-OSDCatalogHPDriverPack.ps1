@@ -1,9 +1,9 @@
 <#
 .SYNOPSIS
-Returns the Dell DriverPacks downloads
+Returns the HP DriverPacks
 
 .DESCRIPTION
-Returns the Dell DriverPacks downloads
+Returns the HP DriverPacks
 
 .PARAMETER Compatible
 Filters results based on your current Product
@@ -13,7 +13,7 @@ https://osd.osdeploy.com
 
 .NOTES
 #>
-function Get-BaseCatalogDellDriverPack {
+function Get-OSDCatalogHPDriverPack {
     [CmdletBinding()]
     param (
         [System.String]$DownloadPath,
@@ -22,15 +22,14 @@ function Get-BaseCatalogDellDriverPack {
     #=================================================
     #   Paths
     #=================================================
-    $UseCatalog				= 'Cloud'
-    $CloudCatalogUri		= 'https://downloads.dell.com/catalog/DriverPackCatalog.cab'
-    $RawCatalogFile			= Join-Path $env:TEMP (Join-Path 'OSD' 'DriverPackCatalog.xml')
-    $BuildCatalogFile		= Join-Path $env:TEMP (Join-Path 'OSD' 'BaseCatalogDellDriverPack.xml')
-    $OfflineCatalogFile		= "$($MyInvocation.MyCommand.Module.ModuleBase)\Catalogs\BASE\BaseCatalogDellDriverPack.xml"
-
+    $UseCatalog             = 'Cloud'
+    $CloudCatalogUri        = 'http://ftp.hp.com/pub/caps-softpaq/cmit/HPClientDriverPackCatalog.cab'
+    $RawCatalogFile			= Join-Path $env:TEMP (Join-Path 'OSD' 'HPClientDriverPackCatalog.xml')
+    $BuildCatalogFile		= Join-Path $env:TEMP (Join-Path 'OSD' 'OSDCatalogHPDriverPack.xml')
+    $OfflineCatalogFile     = "$($MyInvocation.MyCommand.Module.ModuleBase)\Catalogs\OSDCatalog\OSDCatalogHPDriverPack.xml"
+    
     $RawCatalogCabName  	= [string]($CloudCatalogUri | Split-Path -Leaf)
-    $RawCatalogCabPath 		= Join-Path $env:TEMP (Join-Path 'OSD' $RawCatalogCabName)
-    $DownloadsBaseUrl       = 'http://downloads.dell.com/'
+    $RawCatalogCabPath 	    = Join-Path $env:TEMP (Join-Path 'OSD' $RawCatalogCabName)
     #=================================================
     #   Create Download Path
     #=================================================
@@ -97,79 +96,70 @@ function Get-BaseCatalogDellDriverPack {
     #=================================================
     if ($UseCatalog -eq 'Raw') {
         Write-Verbose "Reading the Raw Catalog at $RawCatalogFile"
+        Write-Warning "Building Catalog content, please wait ..."
         [xml]$XmlCatalogContent = Get-Content $RawCatalogFile -ErrorAction Stop
-        $CatalogVersion = (Get-Date $XmlCatalogContent.DriverPackManifest.version).ToString('yy.MM.dd')
-        $DellDriverPackXml = $XmlCatalogContent.DriverPackManifest.DriverPackage
 
-        $DellDriverPackXml = $DellDriverPackXml | Where-Object {($_.SupportedOperatingSystems.OperatingSystem.osCode.Trim() | Select-Object -Unique) -notmatch 'winpe'}
+        $HpSoftPaqList = $XmlCatalogContent.NewDataSet.HPClientDriverPackCatalog.SoftPaqList.SoftPaq
+
+        $HpModelList = $XmlCatalogContent.NewDataSet.HPClientDriverPackCatalog.ProductOSDriverPackList.ProductOSDriverPack
+        $HpModelList = $HpModelList | Where-Object {$_.OSId -ge '4243'}
+        $HpModelList = $HpModelList | Sort-Object OSId -Descending | Group-Object ProductId, SoftPaqId | ForEach-Object {$_.Group | Select-Object -First 1}
+        $HpModelList = $HpModelList | Sort-Object OSId -Descending | Group-Object ProductId | ForEach-Object {$_.Group | Select-Object -First 1}
 
         #=================================================
         #   Create DriverPack Object
         #=================================================
-        $Results = foreach ($Item in $DellDriverPackXml) {
+        $Results = foreach ($Item in $HpModelList) {
+            $HpSoftPaq = $null
+            $HpSoftPaq = $HpSoftPaqList | Where-Object {$_.Id -eq $Item.SoftPaqId}
 
-            $osCode = $Item.SupportedOperatingSystems.OperatingSystem.osCode.Trim() | Select-Object -Unique
-            if ($osCode -match 'Windows11') {
-                $osShortName = 'Win11'
-            }
-            elseif ($osCode -match 'Windows10') {
-                $osShortName = 'Win10'
-            }
-            elseif ($osCode -match 'Windows7') {
-                $osShortName = 'Win7'
-                Continue
-            }
-            else {
+            if ($null -eq $HpSoftPaq) {
                 Continue
             }
 
-            $Name = "$($Item.SupportedSystems.Brand.Model.name | Select-Object -Unique) $osShortName $($Item.dellVersion)"
-            $Generation = $Item.SupportedSystems.Brand.Model.generation | Select-Object -Unique
-            if ($Generation -notmatch 'X') {
-                $Generation = 'XX'
-            }
+            $Name = $($HpSoftPaq.Name)
+            $Name = ($Name).Replace(' x64','')
+            $Name = ($Name).Replace('Win 10','Win10')
+            $Name = ($Name).Replace('Win 11','Win11')
+            $Name = ($Name).Replace('Windows 10','Win10')
+            $Name = ($Name).Replace('Windows 11','Win11')
+            $Name = ($Name).Replace(' Driver Pack','')
+            $Name = ($Name).Replace('/',' ')
+            $Name = ($Name).Replace('-',' ')
+            $Name = "$Name $($Item.SoftPaqId)"
+            #$Name = ($Name).Replace(' A 1','')
+
 
             $ObjectProperties = [Ordered]@{
-                CatalogVersion 	    = $CatalogVersion
-                Status		        = $null
-                Component		    = "DriverPack"
-                ReleaseDate		    = Get-Date $Item.dateTime -Format "yy.MM.dd"
-                Name		        = $Name
-                #Description		= ($Item.Description.Display.'#cdata-section'.Trim())
-                DellVersion		    = $Item.dellVersion
-                Url		            = -join ($DownloadsBaseUrl, $Item.path)
-                VendorVersion		= $Item.vendorVersion
-                FileName		    = (split-path -leaf $Item.path)
-                SizeMB		        = '{0:f2}' -f ($Item.size/1MB)
-                ReleaseID		    = $Item.ReleaseID
-                Brand		        = ($Item.SupportedSystems.Brand.Display.'#cdata-section'.Trim() | Select-Object -Unique)
-                Key		            = ($Item.SupportedSystems.Brand.key | Select-Object -Unique)
-                Prefix		        = ($Item.SupportedSystems.Brand.prefix | Select-Object -Unique)
-                Model		        = ($Item.SupportedSystems.Brand.Model.name | Select-Object -Unique)
-                ModelID		        = ($Item.SupportedSystems.Brand.Model.Display.'#cdata-section'.Trim() | Select-Object -Unique)
-                SystemID		    = ($Item.SupportedSystems.Brand.Model.systemID | Select-Object -Unique)
-                RtsDate		        = ($Item.SupportedSystems.Brand.Model.rtsDate | Select-Object -Unique)
-                Generation		    = $Generation
-                SupportedOS		    = ($Item.SupportedOperatingSystems.OperatingSystem.Display.'#cdata-section'.Trim() | Select-Object -Unique)
-                osCode		        = $osCode
-                osVendor		    = ($Item.SupportedOperatingSystems.OperatingSystem.osVendor.Trim() | Select-Object -Unique)
-                osArch		        = ($Item.SupportedOperatingSystems.OperatingSystem.osArch.Trim() | Select-Object -Unique)
-                osType		        = ($Item.SupportedOperatingSystems.OperatingSystem.osType.Trim() | Select-Object -Unique)
-                majorVersion		= ($Item.SupportedOperatingSystems.OperatingSystem.majorVersion.Trim() | Select-Object -Unique)
-                minorVersion		= ($Item.SupportedOperatingSystems.OperatingSystem.minorVersion.Trim() | Select-Object -Unique)
-                spMajorVersion		= ($Item.SupportedOperatingSystems.OperatingSystem.spMajorVersion.Trim() | Select-Object -Unique)
-                spMinorVersion		= ($Item.SupportedOperatingSystems.OperatingSystem.spMinorVersion.Trim() | Select-Object -Unique)
-                ImportantInfoUrl    = ($Item.ImportantInfo.URL.Trim() | Select-Object -Unique)
-                #Format		        = $Item.format
-                #Delta		        = $Item.delta
-                #Type		        = $Item.type
-                HashMD5		        = $Item.HashMD5
+                CatalogVersion 	= Get-Date -Format yy.MM.dd
+                Status          = $null
+                Component       = 'DriverPack'
+                ReleaseDate     = (Get-Date $HpSoftPaq.DateReleased -Format "yy.MM.dd")
+                Name            = $Name
+                Model           = $Item.SystemName
+                SystemId        = $Item.SystemId
+                SoftPaqId       = $Item.SoftPaqId
+                OSId            = $Item.OSId
+                OSName          = $Item.OSName
+                Architecture    = $Item.Architecture
+                ProductType     = $Item.ProductType
+                SoftPaqName     = $HpSoftPaq.Name
+                Version         = $HpSoftPaq.Version
+                Category        = $HpSoftPaq.Category
+                Url             = $HpSoftPaq.Url
+                FileName        = $HpSoftPaq.Url | Split-Path -Leaf
+                Size            = $HpSoftPaq.Size
+                MD5             = $HpSoftPaq.MD5
+                SHA256          = $HpSoftPaq.SHA256
+                CvaFileUrl      = $HpSoftPaq.CvaFileUrl
+                ReleaseNotesUrl = $HpSoftPaq.ReleaseNotesUrl
+                CvaTitle        = $HpSoftPaq.CvaTitle
             }
             New-Object -TypeName PSObject -Property $ObjectProperties
         }
 
+        $Results = $Results | Sort-Object Model
         Write-Verbose "Exporting Build Catalog to $BuildCatalogFile"
-        $Results = $Results | Sort-Object Name
         $Results | Export-Clixml -Path $BuildCatalogFile
     }
     #=================================================
@@ -192,7 +182,7 @@ function Get-BaseCatalogDellDriverPack {
     if ($PSBoundParameters.ContainsKey('Compatible')) {
         $MyComputerProduct = Get-MyComputerProduct
         Write-Verbose "Filtering Catalog for items compatible with Product $MyComputerProduct"
-        $Results = $Results | Where-Object {$_.SupportedSystemID -contains $MyComputerProduct}
+        $Results = $Results | Where-Object {$_.Product -contains $MyComputerProduct}
     }
     #=================================================
     #   Component
@@ -214,6 +204,6 @@ function Get-BaseCatalogDellDriverPack {
     #=================================================
     #   Complete
     #=================================================
-    $Results | Sort-Object -Property Name
+    $Results
     #=================================================
 }

@@ -5,20 +5,19 @@ online version: https://osd.osdeploy.com
 schema: 2.0.0
 ---
 
-# Get-BaseCatalogMicrosoftDriverPack
+# Get-OSDCatalogLenovoBios
 
 ## SYNOPSIS
-Returns the Microsoft Surface DriverPacks
+Returns the Lenovo BIOS downloads
 
 ## SYNTAX
 
 ```
-Get-BaseCatalogMicrosoftDriverPack [-Compatible] [[-DownloadPath] <String>] [[-UseCatalog] <String>]
- [<CommonParameters>]
+Get-OSDCatalogLenovoBios [[-DownloadPath] <String>] [-Compatible] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-Returns the Microsoft Surface DriverPacks
+Returns the Lenovo BIOS downloads
 
 ## EXAMPLES
 
@@ -30,21 +29,6 @@ PS C:\> {{ Add example code here }}
 {{ Add example description here }}
 
 ## PARAMETERS
-
-### -Compatible
-Filters results based on your current Product
-
-```yaml
-Type: SwitchParameter
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: Named
-Default value: False
-Accept pipeline input: False
-Accept wildcard characters: False
-```
 
 ### -DownloadPath
 {{ Fill DownloadPath Description }}
@@ -61,17 +45,17 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -UseCatalog
-{{ Fill UseCatalog Description }}
+### -Compatible
+Filters results based on your current Product
 
 ```yaml
-Type: String
+Type: SwitchParameter
 Parameter Sets: (All)
 Aliases:
 
 Required: False
-Position: 2
-Default value: Offline
+Position: Named
+Default value: False
 Accept pipeline input: False
 Accept wildcard characters: False
 ```

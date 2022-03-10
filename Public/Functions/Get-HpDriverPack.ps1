@@ -6,7 +6,7 @@ function Get-HpDriverPack {
     #=================================================
     #   Get Catalog
     #=================================================
-    $Results = Get-BaseCatalogHPDriverPack | Select-Object CatalogVersion, Status, @{Name='ReleaseDate';Expression={($_.DateReleased)}}, @{Name='Name';Expression={($_.Model)}}, @{Name='Product';Expression={($_.SystemId)}}, @{Name='DriverPackUrl';Expression={($_.Url)}}, FileName
+    $Results = Get-OSDCatalogHPDriverPack | Select-Object CatalogVersion, Status, @{Name='ReleaseDate';Expression={($_.DateReleased)}}, @{Name='Name';Expression={($_.Model)}}, @{Name='Product';Expression={($_.SystemId)}}, @{Name='DriverPackUrl';Expression={($_.Url)}}, FileName
     #=================================================
     #   DownloadPath
     #=================================================

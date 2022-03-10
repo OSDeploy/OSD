@@ -5,28 +5,44 @@ online version: https://osd.osdeploy.com
 schema: 2.0.0
 ---
 
-# Get-BaseCatalogLenovoBios
+# Get-OSDCatalogDellSystem
 
 ## SYNOPSIS
-Returns the Lenovo BIOS downloads
+Converts the Dell Catalog PC to a PowerShell Object
 
 ## SYNTAX
 
 ```
-Get-BaseCatalogLenovoBios [[-DownloadPath] <String>] [-Compatible] [<CommonParameters>]
+Get-OSDCatalogDellSystem [[-DownloadPath] <String>] [-Compatible] [[-Component] <String>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-Returns the Lenovo BIOS downloads
+Converts the Dell Catalog PC to a PowerShell Object
+Requires Internet Access to download Dell CatalogPC.cab
 
 ## EXAMPLES
 
-### Example 1
-```powershell
-PS C:\> {{ Add example code here }}
+### EXAMPLE 1
+```
+Get-OSDCatalogDellSystem
 ```
 
-{{ Add example description here }}
+Don't do this, you will get an almost endless list
+
+### EXAMPLE 2
+```
+$Result = Get-OSDCatalogDellSystem
+```
+
+Yes do this. 
+Save it in a Variable
+
+### EXAMPLE 3
+```
+Get-OSDCatalogDellSystem -Component BIOS | Out-GridView
+```
+
+Displays all the Dell BIOS Updates in GridView
 
 ## PARAMETERS
 
@@ -46,7 +62,8 @@ Accept wildcard characters: False
 ```
 
 ### -Compatible
-Filters results based on your current Product
+If you have a Dell System, this will filter the results based on your
+ComputerSystem SystemSKUNumber
 
 ```yaml
 Type: SwitchParameter
@@ -56,6 +73,25 @@ Aliases:
 Required: False
 Position: Named
 Default value: False
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -Component
+Filter the results based on these Components:
+Application
+BIOS
+Driver
+Firmware
+
+```yaml
+Type: String
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 2
+Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```

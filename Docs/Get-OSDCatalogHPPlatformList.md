@@ -5,7 +5,7 @@ online version: https://osd.osdeploy.com
 schema: 2.0.0
 ---
 
-# Get-BaseCatalogHPPlatformList
+# Get-OSDCatalogHPPlatformList
 
 ## SYNOPSIS
 Converts the HP Platform list to a PowerShell Object.
@@ -14,7 +14,7 @@ Useful to get the computer model name for System Ids
 ## SYNTAX
 
 ```
-Get-BaseCatalogHPPlatformList [<CommonParameters>]
+Get-OSDCatalogHPPlatformList [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -26,14 +26,14 @@ Requires Internet Access to download platformList.cab
 
 ### EXAMPLE 1
 ```
-Get-BaseCatalogHPPlatformList
+Get-OSDCatalogHPPlatformList
 ```
 
 Don't do this, you will get a big list.
 
 ### EXAMPLE 2
 ```
-$Results = Get-BaseCatalogHPPlatformList
+$Results = Get-OSDCatalogHPPlatformList
 ```
 
 Yes do this. 
@@ -41,7 +41,7 @@ Save it in a Variable
 
 ### EXAMPLE 3
 ```
-Get-BaseCatalogHPPlatformList | Out-GridView
+Get-OSDCatalogHPPlatformList | Out-GridView
 ```
 
 Displays all the HP System Ids with the applicable computer model names in GridView

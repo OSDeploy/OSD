@@ -13,7 +13,7 @@ https://osd.osdeploy.com
 
 .NOTES
 #>
-function Get-BaseCatalogMicrosoftDriverPack {
+function Get-OSDCatalogMicrosoftDriverPack {
     [CmdletBinding()]
     param (
         [System.Management.Automation.SwitchParameter]$Compatible,
@@ -23,12 +23,12 @@ function Get-BaseCatalogMicrosoftDriverPack {
         [System.String]$UseCatalog = 'Offline'
     )
 #=================================================
-#	BaseCatalog
+#	OSDCatalog
 #   https://docs.microsoft.com/en-us/surface/manage-surface-driver-and-firmware-updates
 #   https://docs.microsoft.com/en-us/surface/surface-system-sku-reference
 #   https://www.reddit.com/r/Surface/comments/mlhqw5/all_direct_download_links_for_surface/
 #=================================================
-$BaseCatalog = @'
+$OSDCatalog = @'
 [
     {
         "CatalogVersion":  "",
@@ -596,8 +596,8 @@ $BaseCatalog = @'
     #=================================================
     #$UseCatalog             = 'Offline'
     $CloudCatalogUri        = 'https://support.microsoft.com/en-us/surface/download-drivers-and-firmware-for-surface-09bb2e09-2a4b-cb69-0951-078a7739e120'
-    $BuildCatalogFile		= Join-Path $env:TEMP (Join-Path 'OSD' 'BaseCatalogMicrosoftDriverPack.json')
-    $OfflineCatalogFile     = "$($MyInvocation.MyCommand.Module.ModuleBase)\Catalogs\BASE\BaseCatalogMicrosoftDriverPack.json"
+    $BuildCatalogFile		= Join-Path $env:TEMP (Join-Path 'OSD' 'OSDCatalogMicrosoftDriverPack.json')
+    $OfflineCatalogFile     = "$($MyInvocation.MyCommand.Module.ModuleBase)\Catalogs\OSDCatalog\OSDCatalogMicrosoftDriverPack.json"
     $DownloadsBaseUrl 		= 'https://www.microsoft.com/en-us/download/confirmation.aspx?id='
     #=================================================
     #   Create Paths
@@ -637,7 +637,7 @@ $BaseCatalog = @'
     #   UseCatalog Cloud
     #=================================================
     if ($UseCatalog -eq 'Cloud') {
-        $Results = $BaseCatalog | ConvertFrom-Json
+        $Results = $OSDCatalog | ConvertFrom-Json
     
         foreach ($Item in $Results) {
             Write-Verbose "Processing $($Item.Name)"

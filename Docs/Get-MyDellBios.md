@@ -18,7 +18,7 @@ Get-MyDellBios [<CommonParameters>]
 
 ## DESCRIPTION
 This will return the latest compatible BIOS Update for your system as a PowerShell Object
-Shortcut for Get-BaseCatalogDellSystem -Component BIOS -Compatible
+Shortcut for Get-OSDCatalogDellSystem -Component BIOS -Compatible
 
 ## EXAMPLES
 

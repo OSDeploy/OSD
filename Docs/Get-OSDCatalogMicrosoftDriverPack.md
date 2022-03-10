@@ -5,19 +5,20 @@ online version: https://osd.osdeploy.com
 schema: 2.0.0
 ---
 
-# Get-BaseCatalogDellDriverPack
+# Get-OSDCatalogMicrosoftDriverPack
 
 ## SYNOPSIS
-Returns the Dell DriverPacks downloads
+Returns the Microsoft Surface DriverPacks
 
 ## SYNTAX
 
 ```
-Get-BaseCatalogDellDriverPack [[-DownloadPath] <String>] [-Compatible] [<CommonParameters>]
+Get-OSDCatalogMicrosoftDriverPack [-Compatible] [[-DownloadPath] <String>] [[-UseCatalog] <String>]
+ [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-Returns the Dell DriverPacks downloads
+Returns the Microsoft Surface DriverPacks
 
 ## EXAMPLES
 
@@ -29,6 +30,21 @@ PS C:\> {{ Add example code here }}
 {{ Add example description here }}
 
 ## PARAMETERS
+
+### -Compatible
+Filters results based on your current Product
+
+```yaml
+Type: SwitchParameter
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: False
+Accept pipeline input: False
+Accept wildcard characters: False
+```
 
 ### -DownloadPath
 {{ Fill DownloadPath Description }}
@@ -45,17 +61,17 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -Compatible
-Filters results based on your current Product
+### -UseCatalog
+{{ Fill UseCatalog Description }}
 
 ```yaml
-Type: SwitchParameter
+Type: String
 Parameter Sets: (All)
 Aliases:
 
 Required: False
-Position: Named
-Default value: False
+Position: 2
+Default value: Offline
 Accept pipeline input: False
 Accept wildcard characters: False
 ```

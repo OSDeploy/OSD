@@ -12,10 +12,7 @@ function Edit-OSDCloudWinPE {
     
     [CmdletBinding(PositionalBinding = $false)]
     param (
-        #Sets the custom Brand for OSDCloudGUI
-        [System.String]$Brand = 'OSDCloud',
-
-        #WinPE Driver: Download and install in WinPE drivers from Dell,HP,IntelNet,LenovoDock,Nutanix,USB,VMware,WiFi
+        #WinPE Driver: Download and install in WinPE drivers from Dell,HP,IntelNet,LenovoDock,Nutanix,Surface,USB,VMware,WiFi
         [ValidateSet('*','Dell','HP','IntelNet','LenovoDock','Surface','Nutanix','USB','VMware','WiFi')]
         [System.String[]]$CloudDriver,
 
@@ -61,7 +58,10 @@ function Edit-OSDCloudWinPE {
 
         #Directory for the OSDCloudWorkspace which contains Media directory
         #This is optional as the OSDCloudWorkspace is returned by Get-OSDCloudWorkspace automatically
-        [System.String]$WorkspacePath
+        [System.String]$WorkspacePath,
+
+        #Sets the custom Brand for OSDCloudGUI
+        [System.String]$Brand = 'OSDCloud'
     )
     #=================================================
     #	Start the Clock
