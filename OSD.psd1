@@ -4,7 +4,7 @@
 
 @{
     RootModule              = 'OSD.psm1'
-    ModuleVersion           = '22.3.10.1'
+    ModuleVersion           = '22.3.14.1'
     CompatiblePSEditions    = @('Desktop')
     GUID                    = '9fe5b9b6-0224-4d87-9018-a8978529f6f5'
     Author                  = 'David Segura @SeguraOSD'
@@ -81,6 +81,7 @@
         'Get-ComObjMicrosoftUpdateServiceManager',
         'Get-ComObjects',
         'Get-DellDriverPack',
+        'Get-DellWinPEDriverPack',
         'Get-Disk.fixed',
         'Get-Disk.osd',
         'Get-Disk.storage',
@@ -96,6 +97,7 @@
         'Get-GithubRawContent',
         'Get-GithubRawUrl',
         'Get-HpDriverPack',
+        'Get-HpWinPEDriverPack',
         'Get-LenovoDriverPack',
         'Get-OSDCatalogDellDriverPack',
         'Get-OSDCatalogDellSystem',
@@ -103,6 +105,7 @@
         'Get-OSDCatalogHPPlatformList',
         'Get-OSDCatalogHPSystem',
         'Get-OSDCatalogIntelDisplayDriver',
+        'Get-OSDCatalogIntelEthernetDriver',
         'Get-OSDCatalogIntelRadeonDisplayDriver',
         'Get-OSDCatalogIntelWirelessDriver',
         'Get-OSDCatalogLenovoBios',

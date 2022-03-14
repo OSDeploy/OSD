@@ -13,12 +13,12 @@ Download and expand WinPE Drivers
 ## SYNTAX
 
 ```
-Save-WinPECloudDriver [-CloudDriver <String[]>] [-DriverHWID <String[]>] [-Path <String>] [-Clipboard]
- [<CommonParameters>]
+Save-WinPECloudDriver [-CloudDriver <String[]>] [-DriverHWID <String[]>] [-Path <String>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
 Download and expand WinPE Drivers
+This function must be run in Windows
 
 ## EXAMPLES
 
@@ -77,21 +77,6 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -Clipboard
-Saves the Path to the Clipboard
-
-```yaml
-Type: SwitchParameter
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: Named
-Default value: False
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
 ### CommonParameters
 This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see [about_CommonParameters](http://go.microsoft.com/fwlink/?LinkID=113216).
 
@@ -99,6 +84,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## OUTPUTS
 
+### System.IO.FileInfo
 ## NOTES
 
 ## RELATED LINKS

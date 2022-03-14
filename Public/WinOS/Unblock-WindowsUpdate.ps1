@@ -1,29 +1,25 @@
-<#
-.SYNOPSIS
-Opens Windows Update and checks for WSUS configuration
-
-.DESCRIPTION
-Opens Windows Update and checks for WSUS configuration
-
-.PARAMETER DisableWSUS
-Sets the Group Policy 'Download repair content and optional features directly from Windows Update instead of Windows Server Update Services (WSUS)'
-Restarts the Windows Update Service
-This setting will be enabled after restart by Group Policy
-
-.PARAMETER EnableDrivers
-Allows Driver Updates in Windows Update
-
-.LINK
-https://osd.osdeploy.com
-
-
-.NOTES
-#>
 function Unblock-WindowsUpdate {
+    <#
+    .SYNOPSIS
+    Opens Windows Update and checks for WSUS configuration
+
+    .DESCRIPTION
+    Opens Windows Update and checks for WSUS configuration
+
+    .LINK
+    https://github.com/OSDeploy/OSD/tree/master/Docs
+    #>
     [CmdletBinding()]
     param (
-        [System.Management.Automation.SwitchParameter]$DisableWSUS,
-        [System.Management.Automation.SwitchParameter]$EnableDrivers
+        [System.Management.Automation.SwitchParameter]
+        #Sets the Group Policy 'Download repair content and optional features directly from Windows Update instead of Windows Server Update Services (WSUS)'
+        #Restarts the Windows Update Service
+        #This setting will be enabled after restart by Group Policy
+        $DisableWSUS,
+
+        [System.Management.Automation.SwitchParameter]
+        #Allows Driver Updates in Windows Update
+        $EnableDrivers
     )
     #=================================================
     #	Block

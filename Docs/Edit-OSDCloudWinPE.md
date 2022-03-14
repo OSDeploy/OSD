@@ -13,10 +13,10 @@ Edits WinPE in an OSDCloud Workspace
 ## SYNTAX
 
 ```
-Edit-OSDCloudWinPE [-Brand <String>] [-CloudDriver <String[]>] [-DriverHWID <String[]>]
- [-DriverPath <String[]>] [-PSModuleCopy <String[]>] [-PSModuleInstall <String[]>] [-Startnet <String>]
- [-StartOSDCloud <String>] [-StartOSDCloudGUI] [-StartOSDPad <String>] [-StartPSCommand <String>]
- [-StartWebScript <String>] [-UpdateUSB] [-Wallpaper <String>] [-WorkspacePath <String>] [<CommonParameters>]
+Edit-OSDCloudWinPE [-CloudDriver <String[]>] [-DriverHWID <String[]>] [-DriverPath <String[]>]
+ [-PSModuleCopy <String[]>] [-PSModuleInstall <String[]>] [-Startnet <String>] [-StartOSDCloud <String>]
+ [-StartOSDCloudGUI] [-StartOSDPad <String>] [-StartPSCommand <String>] [-StartWebScript <String>] [-UpdateUSB]
+ [-Wallpaper <String>] [-WorkspacePath <String>] [-Brand <String>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -32,21 +32,6 @@ PS C:\> {{ Add example code here }}
 {{ Add example description here }}
 
 ## PARAMETERS
-
-### -Brand
-Sets the custom Brand for OSDCloudGUI
-
-```yaml
-Type: String
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: Named
-Default value: OSDCloud
-Accept pipeline input: False
-Accept wildcard characters: False
-```
 
 ### -CloudDriver
 WinPE Driver: Download and install in WinPE drivers from Dell,HP,IntelNet,LenovoDock,Nutanix,Surface,USB,VMware,WiFi
@@ -256,6 +241,21 @@ Aliases:
 Required: False
 Position: Named
 Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -Brand
+Sets the custom Brand for OSDCloudGUI
+
+```yaml
+Type: String
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: OSDCloud
 Accept pipeline input: False
 Accept wildcard characters: False
 ```

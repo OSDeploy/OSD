@@ -99,3 +99,12 @@ if (Test-Path $Source) {
     Copy-Item $Source $Destination -Force
 }
 #=================================================
+#   OSDCatalogIntelEthernetDriver
+#=================================================
+$null = Get-OSDCatalogIntelEthernetDriver -Verbose
+$Source = Join-Path $env:TEMP 'OSDCatalogIntelEthernetDriver.json'
+$Destination = Join-Path (Get-Module OSD).ModuleBase "Catalogs\OSDCatalog\OSDCatalogIntelEthernetDriver.json"
+if (Test-Path $Source) {
+    Copy-Item $Source $Destination -Force
+}
+#=================================================

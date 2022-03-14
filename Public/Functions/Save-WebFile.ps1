@@ -6,10 +6,9 @@ Downloads a file from the internet and returns a Get-Item Object
 .LINK
 https://osd.osdeploy.com/module/functions/save-webfile
 #>
-function Save-WebFile
-{
-    [OutputType([System.IO.FileInfo])]
+function Save-WebFile {
     [CmdletBinding()]
+    [OutputType([System.IO.FileInfo])]
     param
     (
         [Parameter(Position=0, Mandatory, ValueFromPipelineByPropertyName)]

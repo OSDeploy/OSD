@@ -1,14 +1,14 @@
 ---
 external help file: OSD-help.xml
 Module Name: OSD
-online version: https://osd.osdeploy.com/module/functions/general/get-osdsessions
+online version: https://github.com/OSDeploy/OSD/tree/master/Docs
 schema: 2.0.0
 ---
 
 # Get-WinREPartition
 
 ## SYNOPSIS
-{{ Fill in the Synopsis }}
+Returns the Partition containing Windows Recovery Environment WIM
 
 ## SYNTAX
 
@@ -17,7 +17,8 @@ Get-WinREPartition [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-{{ Fill in the Description }}
+Returns the Partition containing Windows Recovery Environment WIM
+This function must be run in Windows
 
 ## EXAMPLES
 
@@ -35,11 +36,13 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## INPUTS
 
-### None
-
 ## OUTPUTS
 
-### System.Object
+### Microsoft.Management.Infrastructure.CimInstance
+### Microsoft.Management.Infrastructure.CimInstance#ROOT/Microsoft/Windows/Storage/MSFT_Partition
 ## NOTES
 
 ## RELATED LINKS
+
+[https://github.com/OSDeploy/OSD/tree/master/Docs](https://github.com/OSDeploy/OSD/tree/master/Docs)
+

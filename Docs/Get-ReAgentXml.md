@@ -1,14 +1,14 @@
 ---
 external help file: OSD-help.xml
 Module Name: OSD
-online version: https://osd.osdeploy.com
+online version: https://github.com/OSDeploy/OSD/tree/master/Docs
 schema: 2.0.0
 ---
 
 # Get-ReAgentXml
 
 ## SYNOPSIS
-{{ Fill in the Synopsis }}
+Returns information from the Reagent XML file
 
 ## SYNTAX
 
@@ -17,7 +17,8 @@ Get-ReAgentXml [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-{{ Fill in the Description }}
+Returns information from the Reagent XML file
+This function must be run in Windows
 
 ## EXAMPLES
 
@@ -35,11 +36,11 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## INPUTS
 
-### None
-
 ## OUTPUTS
 
-### System.Object
 ## NOTES
 
 ## RELATED LINKS
+
+[https://github.com/OSDeploy/OSD/tree/master/Docs](https://github.com/OSDeploy/OSD/tree/master/Docs)
+

@@ -1,27 +1,22 @@
-<#
-.SYNOPSIS
-Opens the ms-setting: URI that is specified in the Setting parameter
-
-.DESCRIPTION
-Opens the ms-setting: URI that is specified in the Setting parameter
-
-.PARAMETER Settings
-The Windows Setting URI
-
-.PARAMETER DisableWSUS
-Sets the Group Policy 'Download repair content and optional features directly from Windows Update instead of Windows Server Update Services (WSUS)'
-Restarts the Windows Update Service
-This setting will be enabled after restart by Group Policy
-
-.LINK
-https://osd.osdeploy.com
-
-.LINK
-https://4sysops.com/wiki/list-of-ms-settings-uri-commands-to-open-specific-settings-in-windows-10/history/?revision=1555539
-
-.NOTES
-#>
 function Show-MsSettings {
+    <#
+    .SYNOPSIS
+    Opens the ms-setting: URI that is specified in the Setting parameter
+
+    .DESCRIPTION
+    Opens the ms-setting: URI that is specified in the Setting parameter
+
+    .PARAMETER Settings
+    The Windows Setting URI
+
+    .PARAMETER DisableWSUS
+    Sets the Group Policy 'Download repair content and optional features directly from Windows Update instead of Windows Server Update Services (WSUS)'
+    Restarts the Windows Update Service
+    This setting will be enabled after restart by Group Policy
+
+    .LINK
+    https://github.com/OSDeploy/OSD/tree/master/Docs
+    #>
     [CmdletBinding()]
     param (
         [Parameter(Position = 0)]
@@ -53,7 +48,8 @@ function Show-MsSettings {
         )]
         [string]$Setting,
 
-        [System.Management.Automation.SwitchParameter]$DisableWSUS
+        [System.Management.Automation.SwitchParameter]
+        $DisableWSUS
     )
     #=================================================
     #	Block

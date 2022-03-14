@@ -1,14 +1,14 @@
 ---
 external help file: OSD-help.xml
 Module Name: OSD
-online version: https://www.osdeploy.com
+online version: https://github.com/OSDeploy/OSD/tree/master/Docs
 schema: 2.0.0
 ---
 
 # Copy-WinREWIM
 
 ## SYNOPSIS
-{{ Fill in the Synopsis }}
+Copies the Windows Recovery Environment WIM to the specified DestinationDirectory
 
 ## SYNTAX
 
@@ -17,7 +17,8 @@ Copy-WinREWIM [[-DestinationDirectory] <String>] [[-DestinationFileName] <String
 ```
 
 ## DESCRIPTION
-{{ Fill in the Description }}
+Copies the Windows Recovery Environment WIM to the specified DestinationDirectory
+This function must be run in Windows
 
 ## EXAMPLES
 
@@ -31,22 +32,8 @@ PS C:\> {{ Add example code here }}
 ## PARAMETERS
 
 ### -DestinationDirectory
-{{ Fill DestinationDirectory Description }}
-
-```yaml
-Type: String
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 0
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -DestinationFileName
-{{ Fill DestinationFileName Description }}
+Directory to save the Windows Recovery Environment WIM
+Default: $env:Temp\sources
 
 ```yaml
 Type: String
@@ -55,7 +42,23 @@ Aliases:
 
 Required: False
 Position: 1
-Default value: None
+Default value: "$env:Temp\sources"
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -DestinationFileName
+File Name of the Windows Recovery WIM
+Default: winre.wim
+
+```yaml
+Type: String
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 2
+Default value: Winre.wim
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
@@ -65,11 +68,12 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## INPUTS
 
-### None
-
 ## OUTPUTS
 
-### System.Object
+### System.IO.FileInfo
 ## NOTES
 
 ## RELATED LINKS
+
+[https://github.com/OSDeploy/OSD/tree/master/Docs](https://github.com/OSDeploy/OSD/tree/master/Docs)
+
