@@ -54,7 +54,7 @@ function Save-WinPECloudDriver {
                                         Select-Object -First 1
     $IntelEthernetCloudDriverUrl        = $OSDCatalogIntelEthernetDriver.DriverUrl
     $IntelEthernetCloudDriverVersion    = $OSDCatalogIntelEthernetDriver.DriverVersion
-    $IntelEthernetCloudDriverText       = "Intel Wireless Driver Pack [$IntelEthernetCloudDriverVersion] $IntelEthernetCloudDriverUrl"
+    $IntelEthernetCloudDriverText       = "Intel Ethernet Driver Pack [$IntelEthernetCloudDriverVersion] $IntelEthernetCloudDriverUrl"
 
     $OSDCatalogIntelWirelessDriver      = Get-OSDCatalogIntelWirelessDriver | `
                                         Where-Object {($_.OSVersion -match '10.0')} | `
@@ -241,29 +241,6 @@ function Save-WinPECloudDriver {
             }
         }
         #=================================================
-        #   LenovoDock
-        #=================================================
-        if ($DriverPack -eq 'LenovoDock') {
-            Write-Host -ForegroundColor Yellow "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) $LenovoDockCloudDriverText"
-
-            foreach ($OnlineDriver in $LenovoDockCloudDriverUrl) {
-                if (Test-WebConnection -Uri $OnlineDriver) {
-                    $DriverPackDownload = Save-WebFile -SourceUrl $OnlineDriver
-
-                    if (Test-Path $DriverPackDownload.FullName) {
-                        $DriverPackItem = Get-Item -Path $DriverPackDownload.FullName
-                        $DriverPackExpand = Join-Path $Path (Join-Path $DriverPack $DriverPackItem.BaseName)
-
-                        Expand-Archive -Path $DriverPackItem -DestinationPath $DriverPackExpand -Force
-                        Get-ChildItem -Path "$DriverPackExpand\WIN10\32" | Remove-Item -Recurse -Force
-                    }
-                }
-                else {
-                    Write-Warning "Unable to connect to $LenovoDockCloudDriverUrl"
-                }
-            }
-        }
-        #=================================================
         #   Intel Ethernet
         #=================================================
         if ($DriverPack -eq 'IntelNet') {
@@ -273,15 +250,18 @@ function Save-WinPECloudDriver {
                 $DriverPackDownload = Save-WebFile -SourceUrl $IntelEthernetCloudDriverUrl
                    if (Test-Path $DriverPackDownload.FullName) {
                     $DriverPackItem = Get-Item -Path $DriverPackDownload.FullName
-                    $DriverPackExpand = Join-Path $DriverPackItem.Directory $DriverPackItem.BaseName
-                    Expand-Archive -Path $DriverPackItem -DestinationPath $DriverPackExpand -Force
-                    $IntelExe = Get-ChildItem -Path $DriverPackExpand 'Wired_driver_26.8_x64.exe'
-                    $IntelExe | Rename-Item -newname { $_.name -replace '.exe','.zip' } -Force -ErrorAction Ignore
-                    $DriverPackItem = Get-ChildItem -Path $DriverPackExpand 'Wired_driver_26.8_x64.zip' -Recurse
-                    #$DriverPackExpand = Join-Path $DriverPackItem.Directory $DriverPackItem.BaseName
                     $DriverPackExpand = Join-Path $Path (Join-Path $DriverPack $DriverPackItem.BaseName)
-                    Expand-Archive -Path $DriverPackItem.FullName -DestinationPath $DriverPackExpand -Force
-                    $RemoveItems = Get-ChildItem -Path $DriverPackExpand -Directory -Recurse | Where-Object {$_.Name -in @('APPS','NDIS63','NDIS64')}
+                    Expand-Archive -Path $DriverPackItem -DestinationPath $DriverPackExpand -Force
+
+                    #$DriverPackExpand = Join-Path $DriverPackItem.Directory $DriverPackItem.BaseName
+                    #Expand-Archive -Path $DriverPackItem -DestinationPath $DriverPackExpand -Force
+                    #$IntelExe = Get-ChildItem -Path $DriverPackExpand 'Wired_driver_26.8_x64.exe'
+                    #$IntelExe | Rename-Item -newname { $_.name -replace '.exe','.zip' } -Force -ErrorAction Ignore
+                    #$DriverPackItem = Get-ChildItem -Path $DriverPackExpand 'Wired_driver_26.8_x64.zip' -Recurse
+                    #$DriverPackExpand = Join-Path $DriverPackItem.Directory $DriverPackItem.BaseName
+                    #$DriverPackExpand = Join-Path $Path (Join-Path $DriverPack $DriverPackItem.BaseName)
+                    #Expand-Archive -Path $DriverPackItem.FullName -DestinationPath $DriverPackExpand -Force
+                    $RemoveItems = Get-ChildItem -Path $DriverPackExpand -Directory -Recurse | Where-Object {$_.Name -in @('APPS','DDP_Profiles','DOCS','NDIS63','NDIS64','NVMUpdatePackage','RDMA')}
                     foreach ($Item in $RemoveItems) {
                         Remove-Item $Item.FullName -Recurse -Force -ErrorAction Ignore
                     }
@@ -306,6 +286,29 @@ function Save-WinPECloudDriver {
             }
             else {
                 Write-Warning "Unable to connect to $IntelWiFiCloudDriverUrl"
+            }
+        }
+        #=================================================
+        #   LenovoDock
+        #=================================================
+        if ($DriverPack -eq 'LenovoDock') {
+            Write-Host -ForegroundColor Yellow "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) $LenovoDockCloudDriverText"
+
+            foreach ($OnlineDriver in $LenovoDockCloudDriverUrl) {
+                if (Test-WebConnection -Uri $OnlineDriver) {
+                    $DriverPackDownload = Save-WebFile -SourceUrl $OnlineDriver
+
+                    if (Test-Path $DriverPackDownload.FullName) {
+                        $DriverPackItem = Get-Item -Path $DriverPackDownload.FullName
+                        $DriverPackExpand = Join-Path $Path (Join-Path $DriverPack $DriverPackItem.BaseName)
+
+                        Expand-Archive -Path $DriverPackItem -DestinationPath $DriverPackExpand -Force
+                        Get-ChildItem -Path "$DriverPackExpand\WIN10\32" | Remove-Item -Recurse -Force
+                    }
+                }
+                else {
+                    Write-Warning "Unable to connect to $LenovoDockCloudDriverUrl"
+                }
             }
         }
         #=================================================
