@@ -5,24 +5,24 @@ online version: https://github.com/OSDeploy/OSD/tree/master/Docs
 schema: 2.0.0
 ---
 
-# Save-ZTIDriverPack
+# Import-MDTWinPECloudDriver
 
 ## SYNOPSIS
-{{ Fill in the Synopsis }}
+Imports OSDCloud CloudDrivers into an MDT Deployment Share
 
 ## SYNTAX
 
 ```
-Save-ZTIDriverPack [[-Manufacturer] <String>] [[-Product] <String>] [<CommonParameters>]
+Import-MDTWinPECloudDriver [[-CloudDriver] <String[]>] [[-DriverHWID] <String[]>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-{{ Fill in the Description }}
+Imports OSDCloud CloudDrivers into an MDT Deployment Share
 
 ## EXAMPLES
 
 ### Example 1
-```
+```powershell
 PS C:\> {{ Add example code here }}
 ```
 
@@ -30,26 +30,11 @@ PS C:\> {{ Add example code here }}
 
 ## PARAMETERS
 
-### -Manufacturer
-{{ Fill Manufacturer Description }}
+### -CloudDriver
+WinPE Driver: Download and install in WinPE drivers from Dell,HP,IntelNet,LenovoDock,Nutanix,Surface,USB,VMware,WiFi
 
 ```yaml
-Type: String
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 0
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -Product
-{{ Fill Product Description }}
-
-```yaml
-Type: String
+Type: String[]
 Parameter Sets: (All)
 Aliases:
 
@@ -60,15 +45,31 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
+### -DriverHWID
+WinPE Driver: HardwareID of the Driver to add to WinPE
+
+```yaml
+Type: String[]
+Parameter Sets: (All)
+Aliases: HardwareID
+
+Required: False
+Position: 2
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
 ### CommonParameters
 This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see [about_CommonParameters](http://go.microsoft.com/fwlink/?LinkID=113216).
 
 ## INPUTS
 
-### None
 ## OUTPUTS
 
-### System.Object
 ## NOTES
 
 ## RELATED LINKS
+
+[https://github.com/OSDeploy/OSD/tree/master/Docs](https://github.com/OSDeploy/OSD/tree/master/Docs)
+

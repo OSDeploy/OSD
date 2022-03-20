@@ -22,7 +22,7 @@ Invoke-MSCatalogParseDate [[-DateString] <String>]
 ## EXAMPLES
 
 ### Example 1
-```powershell
+```
 PS C:\> {{ Add example code here }}
 ```
 
@@ -48,7 +48,6 @@ Accept wildcard characters: False
 ## INPUTS
 
 ### None
-
 ## OUTPUTS
 
 ### System.Object
