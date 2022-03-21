@@ -121,9 +121,9 @@ function Edit-OSDCloudWinPE {
     #=================================================
     #	Remove Old Autopilot Content
     #=================================================
-    if (Test-Path "$env:ProgramData\OSDCloud\Autopilot") {
-        Write-Warning "Move all your Autopilot Profiles to $env:ProgramData\OSDCloud\Config\AutopilotJSON"
-        Write-Warning "You will be unable to create or update an OSDCloud Workspace until $env:ProgramData\OSDCloud\Autopilot is manually removed"
+    if (Test-Path "$(Get-OSDCloudTemplate)\Autopilot") {
+        Write-Warning "Move all your Autopilot Profiles to $(Get-OSDCloudTemplate)\Config\AutopilotJSON"
+        Write-Warning "You will be unable to create or update an OSDCloud Workspace until $(Get-OSDCloudTemplate)\Autopilot is manually removed"
         Break
     }
     if (Test-Path "$WorkspacePath\Autopilot") {

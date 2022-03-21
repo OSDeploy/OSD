@@ -17,7 +17,8 @@ function Get-OSDCloudWorkspace {
         $WorkspaceSettings = Get-Content -Path "$env:ProgramData\OSDCloud\workspace.json" | ConvertFrom-Json
         $WorkspacePath = $WorkspaceSettings.WorkspacePath
         $WorkspacePath
-    } else {
+    }
+    else {
         Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Unable to locate $env:ProgramData\OSDCloud\workspace.json"
     }
 }

@@ -68,9 +68,9 @@ function New-OSDCloudWorkspace {
         #=================================================
         #	Remove Old Autopilot Content
         #=================================================
-        if (Test-Path "$env:ProgramData\OSDCloud\Autopilot") {
-            Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Move all your Autopilot Profiles to $env:ProgramData\OSDCloud\Config\AutopilotJSON"
-            Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) You will be unable to create or update an OSDCloud Workspace until $env:ProgramData\OSDCloud\Autopilot is manually removed"
+        if (Test-Path "$(Get-OSDCloudTemplate)\Autopilot") {
+            Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Move all your Autopilot Profiles to $(Get-OSDCloudTemplate)\Config\AutopilotJSON"
+            Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) You will be unable to create or update an OSDCloud Workspace until $(Get-OSDCloudTemplate)\Autopilot is manually removed"
             Break
         }
         if (Test-Path "$WorkspacePath\Autopilot") {
@@ -210,6 +210,7 @@ function New-OSDCloudWorkspace {
         #=================================================
         #	Copy WorkspacePath
         #=================================================
+        Write-Host -ForegroundColor DarkGray "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Copying from OSDCloud Template at $OSDCloudTemplate"
         Write-Verbose "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Source: $OSDCloudTemplate"
         Write-Verbose "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Destination: $WorkspacePath"
     

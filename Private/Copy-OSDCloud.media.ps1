@@ -149,6 +149,6 @@ function Copy-OSDCloud.media {
     #=================================================
     #	Return
     #=================================================
-    Return Get-Item -Path "$env:ProgramData\OSDCloud\Media"
+    Return Get-Item -Path "$(Get-OSDCloudTemplate)\Media"
     #=================================================
 }

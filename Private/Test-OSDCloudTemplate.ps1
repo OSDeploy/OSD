@@ -1,12 +1,33 @@
 function Test-OSDCloudTemplate {
+    <#
+    .SYNOPSIS
+    Tests if the OSDCloud Template is valid.
+
+    .DESCRIPTION
+    Tests if the OSDCloud Template is valid.
+    
+    .LINK
+    https://github.com/OSDeploy/OSD/tree/master/Docs
+    #>
+
     [CmdletBinding()]
     param ()
 
-    $TemplatePath = "$env:ProgramData\OSDCloud"
-    
-    if (-NOT (Test-Path "$TemplatePath")) {Return $false}
-    if (-NOT (Test-Path "$TemplatePath\Media" )) {Return $false}
-    if (-NOT (Test-Path "$TemplatePath\Media\sources\boot.wim" )) {Return $false}
+    $TemplatePath = Get-OSDCloudTemplate
 
-    Return $true
+    if ($null -eq $TemplatePath) {
+        $false
+    }
+    elseif (-NOT (Test-Path "$TemplatePath")) {
+        $false
+    }
+    elseif (-NOT (Test-Path "$TemplatePath\Media")) {
+        $false
+    }
+    elseif (-NOT (Test-Path "$TemplatePath\Media\sources\boot.wim")) {
+        $false
+    }
+    else {
+        $true
+    }
 }

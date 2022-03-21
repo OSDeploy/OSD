@@ -4,7 +4,7 @@ function New-OSDCloudTemplate {
     Creates an OSDCloud Template in $env:ProgramData\OSDCloud
 
     .DESCRIPTION
-    Creates an OSDCloud Template in $env:ProgramData\OSDCloud    
+    Creates an OSDCloud Template in $env:ProgramData\OSDCloud
 
     .EXAMPLE
     New-OSDCloudTemplate
@@ -18,7 +18,10 @@ function New-OSDCloudTemplate {
 
     [CmdletBinding()]
     param (
-        #Adds additional language ADK Packages
+        [System.String]
+        #Name of the OSDCloud Template. This determines the OSDCloud Template Path
+        $Name = 'default',
+
         [ValidateSet (
             '*','ar-sa','bg-bg','cs-cz','da-dk','de-de','el-gr',
             'en-gb','es-es','es-mx','et-ee','fi-fi',
@@ -28,16 +31,25 @@ function New-OSDCloudTemplate {
             'sl-si','sr-latn-rs','sv-se','th-th','tr-tr',
             'uk-ua','zh-cn','zh-tw'
         )]
-        [System.String[]]$Language,
+        [System.String[]]
+        #Adds additional language ADK Packages
+        $Language,
 
+        [System.String]
         #Sets all International settings in WinPE to the specified setting
-        [System.String]$SetAllIntl,
+        $SetAllIntl,
 
+        [System.String]
         #Sets the default InputLocale in WinPE to the specified Input Locale
-        [System.String]$SetInputLocale,
+        $SetInputLocale,
 
+        [System.Management.Automation.SwitchParameter]
+        #Skips the integration of Microsoft DaRT
+        $SkipDaRT,
+
+        [System.Management.Automation.SwitchParameter]
         #Uses Windows 10 WinRE.wim instead of the ADK Boot.wim
-        [System.Management.Automation.SwitchParameter]$WinRE
+        $WinRE
     )
 #=================================================
 #   WinREDriver
@@ -188,7 +200,7 @@ Windows Registry Editor Version 5.00
 
     if ($null -eq $AdkPaths) {
         Write-Host -ForegroundColor DarkGray "========================================================================="
-        Write-Warning "Could not get ADK going, sorry"
+        Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Could not get ADK going, sorry"
         Write-Host -ForegroundColor DarkGray "========================================================================="
         Break
     }
@@ -198,15 +210,17 @@ Windows Registry Editor Version 5.00
     if ($PSBoundParameters.ContainsKey('WinRE')) {
         if ((Get-WinREPartition).OperationalStatus -ne 'Online') {
             Write-Host -ForegroundColor DarkGray "========================================================================="
-            Write-Warning "You can't use WinRE because of some issue.  Sorry!"
+            Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) You can't use WinRE because of some issue.  Sorry!"
             Write-Host -ForegroundColor DarkGray "========================================================================="
             Break
         }
         if ((Get-RegCurrentVersion).CurrentBuild -gt 20000) {
             Write-Host -ForegroundColor DarkGray "========================================================================="
-            Write-Warning "WinRE is not working with Windows 11 at this time.  Sorry!"
+            Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Windows 11 WinRE does not support booting Virtual Machines"
+            Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) It is recommended that you remove the -WinRE parameter if you need Virtual Machine support"
+            Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Press Ctrl+C to cancel in the next 10 seconds"
+            Start-Sleep -Seconds 10
             Write-Host -ForegroundColor DarkGray "========================================================================="
-            #Break
         }
     }
     #=================================================
@@ -215,7 +229,7 @@ Windows Registry Editor Version 5.00
     $WimSourcePath = $AdkPaths.WimSourcePath
     if (-NOT (Test-Path $WimSourcePath)) {
         Write-Host -ForegroundColor DarkGray "========================================================================="
-        Write-Warning "Could not find the ADK WimSourcePath: $WimSourcePath"
+        Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Could not find the ADK WimSourcePath: $WimSourcePath"
         Write-Host -ForegroundColor DarkGray "========================================================================="
         Break
     }
@@ -223,16 +237,21 @@ Windows Registry Editor Version 5.00
     #   Template
     #=================================================
     Write-Host -ForegroundColor DarkGray "========================================================================="
-    $TemplatePath = "$env:ProgramData\OSDCloud"
-    Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Creating OSDCloud Template at $TemplatePath"
-    
-    if (-NOT (Test-Path $TemplatePath)) {
-        $null = New-Item -Path $TemplatePath -ItemType Directory -Force
+    if ($Name -eq 'default') {
+        $OSDCloudTemplate = "$env:ProgramData\OSDCloud"
+    }
+    else {
+        $OSDCloudTemplate = "$env:ProgramData\OSDCloud\Templates\$Name"
+    }
+
+    if (-NOT (Test-Path $OSDCloudTemplate)) {
+        Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Creating OSDCloud Template: $OSDCloudTemplate"
+        $null = New-Item -Path $OSDCloudTemplate -ItemType Directory -Force
     }
     #=================================================
     #   Logs
     #=================================================
-    $TemplateLogs = "$TemplatePath\Logs\Template"
+    $TemplateLogs = "$OSDCloudTemplate\Logs\Template"
     Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Creating OSDCloud Template Logs at $TemplateLogs"
 
     if (Test-Path $TemplateLogs) {
@@ -254,7 +273,7 @@ Windows Registry Editor Version 5.00
     $PathWinPEMedia = $AdkPaths.PathWinPEMedia
     Write-Host -ForegroundColor DarkGray "Source: $PathWinPEMedia"
 
-    $DestinationMedia = Join-Path $TemplatePath 'Media'
+    $DestinationMedia = Join-Path $OSDCloudTemplate 'Media'
     Write-Host -ForegroundColor DarkGray "Destination: $DestinationMedia"
 
     $null = robocopy "$PathWinPEMedia" "$DestinationMedia" *.* /mir /b /ndl /np /r:0 /w:0 /xj /LOG+:$TemplateLogs\Robocopy.log
@@ -622,7 +641,10 @@ Windows Registry Editor Version 5.00
     Write-Host -ForegroundColor DarkGray "========================================================================="
     Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Microsoft DaRT"
     $SourceFile = "$env:ProgramFiles\Microsoft DaRT\v10\Toolsx64.cab"
-    if (Test-Path $SourceFile) {
+    if ($SkipDaRT) {
+        Write-Host -ForegroundColor DarkGray 'Skipping Microsoft DaRT due to -SkipDaRT switch'
+    }
+    elseif (Test-Path $SourceFile) {
         Write-Host -ForegroundColor DarkGray $SourceFile
         expand.exe "$SourceFile" -F:*.* "$MountPath" | Out-Null
         if (!(Test-Path "$MountPath\Windows\System32\DartConfig.dat")) {
@@ -722,25 +744,18 @@ Windows Registry Editor Version 5.00
     )
 
     foreach ($Item in $CreateDirectories) {
-        $SourcePath = "$TemplatePath\$Item"
+        $SourcePath = "$OSDCloudTemplate\$Item"
         if (-NOT (Test-Path $SourcePath)) {
             Write-Host -ForegroundColor DarkGray $SourcePath
             New-Item -Path $SourcePath -ItemType Directory -Force | Out-Null
         }
     }
-
-    if (Test-Path "$TemplatePath\Autopilot\Profiles") {
-        Write-Warning "Copying $TemplatePath\Autopilot\Profiles to $TemplatePath\Config\AutopilotJSON"
-        robocopy "$TemplatePath\Autopilot\Profiles" "$TemplatePath\Config\AutopilotJSON" *.* /s /ndl /njh /njs /b /np
-        Write-Warning "Make sure that you have moved all your Autopilot Profiles to $TemplatePath\Config\AutopilotJSON"
-        Write-Warning "Continuing in 10 seconds"
-        Write-Warning "This time will gradually increase until $TemplatePath\Autopilot is manually removed"
-        Start-Sleep -Seconds 10
-    }
     #=================================================
-    #   Restore VerbosePreference
+    #   New-OSDCloudISO
     #=================================================
-    #$VerbosePreference = $CurrentVerbosePreference
+    $isoFileName = 'OSDCloud.iso'
+    $isoLabel = 'OSDCloud'
+    $NewADKiso = New-AdkISO -MediaPath "$OSDCloudTemplate\Media" -isoFileName $isoFileName -isoLabel $isoLabel
     #=================================================
     #	OSDCloud Template Version
     #=================================================
@@ -749,7 +764,11 @@ Windows Registry Editor Version 5.00
         Version = [Version](Get-Module -Name OSD -ListAvailable | Sort-Object Version -Descending | Select-Object -First 1).Version
     }
 
-    $WinPE | ConvertTo-Json | Out-File "$env:ProgramData\OSDCloud\winpe.json" -Encoding ascii -Width 2000 -Force
+    $WinPE | ConvertTo-Json | Out-File "$OSDCloudTemplate\winpe.json" -Encoding ascii -Width 2000 -Force
+    #=================================================
+    #	Set-OSDCloudTemplate
+    #=================================================
+    Set-OSDCloudTemplate -Name $Name
     #=================================================
     #	Complete
     #=================================================
@@ -758,7 +777,7 @@ Windows Registry Editor Version 5.00
     Write-Host -ForegroundColor DarkGray    "================================================"
     Write-Host -ForegroundColor Yellow      "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) $($MyInvocation.MyCommand.Name) " -NoNewline
     Write-Host -ForegroundColor Cyan        "Completed in $($TemplateTimeSpan.ToString("mm' minutes 'ss' seconds'"))"
-    Write-Host -ForegroundColor Cyan        "OSDCloud Template created at $TemplatePath"
+    Write-Host -ForegroundColor Cyan        "OSDCloud Template created at $OSDCloudTemplate"
     Write-Host -ForegroundColor DarkGray    "================================================"
     Stop-Transcript
     #=================================================
