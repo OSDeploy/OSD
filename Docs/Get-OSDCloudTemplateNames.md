@@ -5,21 +5,19 @@ online version: https://github.com/OSDeploy/OSD/tree/master/Docs
 schema: 2.0.0
 ---
 
-# Get-OSDCloudTemplate
+# Get-OSDCloudTemplateNames
 
 ## SYNOPSIS
-Returns the path to the OSDCloud Template. 
-This is typically $env:ProgramData\OSDCloud\Templates\Default
+Returns valid OSDCloud Template Names
 
 ## SYNTAX
 
 ```
-Get-OSDCloudTemplate [<CommonParameters>]
+Get-OSDCloudTemplateNames [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-Returns the path to the OSDCloud Template. 
-This is typically $env:ProgramData\OSDCloud\Templates\Default
+Returns valid OSDCloud Template Names
 
 ## EXAMPLES
 

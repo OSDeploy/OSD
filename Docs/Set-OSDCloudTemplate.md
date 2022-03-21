@@ -5,21 +5,19 @@ online version: https://github.com/OSDeploy/OSD/tree/master/Docs
 schema: 2.0.0
 ---
 
-# Get-OSDCloudTemplate
+# Set-OSDCloudTemplate
 
 ## SYNOPSIS
-Returns the path to the OSDCloud Template. 
-This is typically $env:ProgramData\OSDCloud\Templates\Default
+Changes the path to the OSDCloud Template to $env:ProgramData\OSDCloud
 
 ## SYNTAX
 
 ```
-Get-OSDCloudTemplate [<CommonParameters>]
+Set-OSDCloudTemplate [[-Name] <String>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-Returns the path to the OSDCloud Template. 
-This is typically $env:ProgramData\OSDCloud\Templates\Default
+Changes the path to the OSDCloud Template to $env:ProgramData\OSDCloud
 
 ## EXAMPLES
 
@@ -31,6 +29,21 @@ PS C:\> {{ Add example code here }}
 {{ Add example description here }}
 
 ## PARAMETERS
+
+### -Name
+Name of the OSDCloud Template
+
+```yaml
+Type: String
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 1
+Default value: Default
+Accept pipeline input: False
+Accept wildcard characters: False
+```
 
 ### CommonParameters
 This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see [about_CommonParameters](http://go.microsoft.com/fwlink/?LinkID=113216).

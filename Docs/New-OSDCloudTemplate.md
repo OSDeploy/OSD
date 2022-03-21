@@ -13,8 +13,8 @@ Creates an OSDCloud Template in $env:ProgramData\OSDCloud
 ## SYNTAX
 
 ```
-New-OSDCloudTemplate [[-Language] <String[]>] [[-SetAllIntl] <String>] [[-SetInputLocale] <String>] [-WinRE]
- [<CommonParameters>]
+New-OSDCloudTemplate [[-Name] <String>] [[-Language] <String[]>] [[-SetAllIntl] <String>]
+ [[-SetInputLocale] <String>] [-SkipDaRT] [-WinRE] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -34,6 +34,22 @@ New-OSDCloudTemplate -WinRE
 
 ## PARAMETERS
 
+### -Name
+Name of the OSDCloud Template.
+This determines the OSDCloud Template Path
+
+```yaml
+Type: String
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 1
+Default value: Default
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
 ### -Language
 Adds additional language ADK Packages
 
@@ -43,7 +59,7 @@ Parameter Sets: (All)
 Aliases:
 
 Required: False
-Position: 1
+Position: 2
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -58,7 +74,7 @@ Parameter Sets: (All)
 Aliases:
 
 Required: False
-Position: 2
+Position: 3
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -73,8 +89,23 @@ Parameter Sets: (All)
 Aliases:
 
 Required: False
-Position: 3
+Position: 4
 Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -SkipDaRT
+Skips the integration of Microsoft DaRT
+
+```yaml
+Type: SwitchParameter
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: False
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
