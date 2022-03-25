@@ -1,5 +1,5 @@
 <#PSScriptInfo
-.VERSION 22.2.25.1
+.VERSION 22.3.23.1
 .GUID 302752c7-8567-45db-91ba-55c40fb9caee
 .AUTHOR David Segura @SeguraOSD
 .COMPANYNAME osdcloud.com
@@ -23,20 +23,23 @@ powershell iex(irm functions.osdcloud.com)
 .DESCRIPTION
     PSCloudScript at functions.osdcloud.com
 .NOTES
-    Version 22.2.25.1
+    Version 22.3.23.1
 .LINK
     https://raw.githubusercontent.com/OSDeploy/OSD/master/cloudscript/functions.ps1
 .EXAMPLE
     powershell iex(irm functions.osdcloud.com)
 #>
 #----------------------------------------------------------[Initialize]----------------------------------------------------------
-Write-Host -ForegroundColor DarkGray "functions.osdcloud.com 22.2.25.1"
+Write-Host -ForegroundColor DarkGray "functions.osdcloud.com 22.3.23.1"
 [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
 #----------------------------------------------------------[Declarations]--------------------------------------------------------
 $oobePowerShellProfile = @'
 [System.Environment]::SetEnvironmentVariable('Path',$Env:Path + ";$Env:ProgramFiles\WindowsPowerShell\Scripts",'Process')
 '@
 $winpePowerShellProfile = @'
+[System.Environment]::SetEnvironmentVariable('APPDATA',"$Env:UserProfile\AppData\Roaming",[System.EnvironmentVariableTarget]::Process)
+[System.Environment]::SetEnvironmentVariable('HOMEDRIVE',"$Env:SystemDrive",[System.EnvironmentVariableTarget]::Process)
+[System.Environment]::SetEnvironmentVariable('HOMEPATH',"$Env:UserProfile",[System.EnvironmentVariableTarget]::Process)
 [System.Environment]::SetEnvironmentVariable('LOCALAPPDATA',"$Env:UserProfile\AppData\Local",[System.EnvironmentVariableTarget]::Process)
 '@
 #----------------------------------------------------------[Prompt]--------------------------------------------------------------
@@ -352,6 +355,9 @@ if ($env:SystemDrive -eq 'X:') {
                 Write-Verbose 'This can be enabled for this Power Session, but it will not persist'
                 Write-Verbose 'Set System Environment Variable LocalAppData for this PowerShell session'
                 #[System.Environment]::SetEnvironmentVariable('LocalAppData',"$env:UserProfile\AppData\Local")
+                [System.Environment]::SetEnvironmentVariable('APPDATA',"$Env:UserProfile\AppData\Roaming",[System.EnvironmentVariableTarget]::Process)
+                [System.Environment]::SetEnvironmentVariable('HOMEDRIVE',"$Env:SystemDrive",[System.EnvironmentVariableTarget]::Process)
+                [System.Environment]::SetEnvironmentVariable('HOMEPATH',"$Env:UserProfile",[System.EnvironmentVariableTarget]::Process)
                 [System.Environment]::SetEnvironmentVariable('LOCALAPPDATA',"$Env:UserProfile\AppData\Local",[System.EnvironmentVariableTarget]::Process)
             }
         }

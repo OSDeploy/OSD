@@ -1,10 +1,10 @@
 function Edit-OSDCloudWinPE {
     <#
     .SYNOPSIS
-    Edits WinPE in an OSDCloud Workspace
+    Edits WinPE in an OSDCloud Workspace for customization
 
     .DESCRIPTION
-    Edits WinPE in an OSDCloud Workspace
+    Edits WinPE in an OSDCloud Workspace for customization
 
     .LINK
     https://www.osdcloud.com/setup/osdcloud-winpe
