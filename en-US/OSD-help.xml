@@ -4366,11 +4366,11 @@ Original credit to Mike Robbins http://mikefrobbins.com/2018/01/18/use-powershel
       <command:verb>Edit</command:verb>
       <command:noun>OSDCloudWinPE</command:noun>
       <maml:description>
-        <maml:para>Edits WinPE in an OSDCloud Workspace</maml:para>
+        <maml:para>Edits WinPE in an OSDCloud Workspace for customization</maml:para>
       </maml:description>
     </command:details>
     <maml:description>
-      <maml:para>Edits WinPE in an OSDCloud Workspace</maml:para>
+      <maml:para>Edits WinPE in an OSDCloud Workspace for customization</maml:para>
     </maml:description>
     <command:syntax>
       <command:syntaxItem>
@@ -7031,10 +7031,17 @@ Original credit to Mike Robbins http://mikefrobbins.com/2018/01/18/use-powershel
     </maml:alertSet>
     <command:examples>
       <command:example>
-        <maml:title>-------------------------- Example 1 --------------------------</maml:title>
-        <dev:code>PS C:\&gt; {{ Add example code here }}</dev:code>
+        <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
+        <dev:code>Get-DellWinPEDriverPack</dev:code>
         <dev:remarks>
-          <maml:para>{{ Add example description here }}</maml:para>
+          <maml:para></maml:para>
+        </dev:remarks>
+      </command:example>
+      <command:example>
+        <maml:title>-------------------------- EXAMPLE 2 --------------------------</maml:title>
+        <dev:code>$DellWinPEDriverPack = Get-DellWinPEDriverPack</dev:code>
+        <dev:remarks>
+          <maml:para></maml:para>
         </dev:remarks>
       </command:example>
     </command:examples>

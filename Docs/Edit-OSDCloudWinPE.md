@@ -8,7 +8,7 @@ schema: 2.0.0
 # Edit-OSDCloudWinPE
 
 ## SYNOPSIS
-Edits WinPE in an OSDCloud Workspace
+Edits WinPE in an OSDCloud Workspace for customization
 
 ## SYNTAX
 
@@ -20,7 +20,7 @@ Edit-OSDCloudWinPE [-CloudDriver <String[]>] [-DriverHWID <String[]>] [-DriverPa
 ```
 
 ## DESCRIPTION
-Edits WinPE in an OSDCloud Workspace
+Edits WinPE in an OSDCloud Workspace for customization
 
 ## EXAMPLES
 

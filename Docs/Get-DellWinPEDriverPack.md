@@ -21,12 +21,15 @@ Download and expand WinPE Drivers
 
 ## EXAMPLES
 
-### Example 1
-```powershell
-PS C:\> {{ Add example code here }}
+### EXAMPLE 1
+```
+Get-DellWinPEDriverPack
 ```
 
-{{ Add example description here }}
+### EXAMPLE 2
+```
+$DellWinPEDriverPack = Get-DellWinPEDriverPack
+```
 
 ## PARAMETERS
 
