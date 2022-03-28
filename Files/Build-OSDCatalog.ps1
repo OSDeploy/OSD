@@ -9,7 +9,6 @@ if (Test-Path $Source) {
     Copy-Item $Source $Destination -Force
 }
 Import-Clixml -Path $Destination | ConvertTo-Json | Out-File -FilePath (Join-Path (Get-Module OSD).ModuleBase "Catalogs\OSDCatalog\OSDCatalogLenovoDriverPack.json") -Force -Encoding ascii
-Break
 #=================================================
 #   DellDriverPackCatalog
 #=================================================
@@ -19,7 +18,7 @@ $Destination = Join-Path (Get-Module OSD).ModuleBase "Catalogs\OSDCatalog\OSDCat
 if (Test-Path $Source) {
     Copy-Item $Source $Destination -Force
 }
-Import-Clixml -Path $Destination | ConvertTo-Json | Out-File -FilePath (Join-Path (Get-Module OSD).ModuleBase "Catalogs\OSDCatalog\OSDCatalogDellDriverPack.json") -Force -Encoding UTF8
+Import-Clixml -Path $Destination | ConvertTo-Json | Out-File -FilePath (Join-Path (Get-Module OSD).ModuleBase "Catalogs\OSDCatalog\OSDCatalogDellDriverPack.json") -Force -Encoding ascii
 #=================================================
 #   DellSystemCatalog
 #=================================================
@@ -56,7 +55,7 @@ $Destination = Join-Path (Get-Module OSD).ModuleBase "Catalogs\OSDCatalog\OSDCat
 if (Test-Path $Source) {
     Copy-Item $Source $Destination -Force
 }
-Import-Clixml -Path $Destination | ConvertTo-Json | Out-File -FilePath (Join-Path (Get-Module OSD).ModuleBase "Catalogs\OSDCatalog\OSDCatalogHPDriverPack.json") -Force -Encoding UTF8
+Import-Clixml -Path $Destination | ConvertTo-Json | Out-File -FilePath (Join-Path (Get-Module OSD).ModuleBase "Catalogs\OSDCatalog\OSDCatalogHPDriverPack.json") -Force -Encoding ascii
 #=================================================
 #   LenovoBiosCatalog
 #=================================================
