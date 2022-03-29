@@ -1,5 +1,5 @@
 <#PSScriptInfo
-.VERSION 22.3.28.1
+.VERSION 22.3.29.1
 .GUID c480a6f6-f482-45af-9ba6-28b2a409101d
 .AUTHOR David Segura @SeguraOSD
 .COMPANYNAME osdeploy.com
@@ -23,7 +23,7 @@ powershell iex (irm go.osdcloud.com/hash)
 .DESCRIPTION
     PSCloudScript at go.osdcloud.com/hash
 .NOTES
-    Version 22.3.28.1
+    Version 22.3.29.1
 .LINK
     https://raw.githubusercontent.com/OSDeploy/OSD/master/cloudscript/hash.ps1
 .EXAMPLE
@@ -32,23 +32,21 @@ powershell iex (irm go.osdcloud.com/hash)
 if ($env:SystemDrive -eq 'X:') {
     Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) go.osdcloud.com/hash cannot be run from WinPE"
 }
+elseif (-NOT ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] 'Administrator')) {
+    Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) go.osdcloud.com/hash requires elevated Admin Rights"
+}
 else {
-    if (([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] 'Administrator')) {
-        $TempSession = New-CimSession
-        $Global:serialNumber = (Get-CimInstance -CimSession $TempSession -Class Win32_BIOS).SerialNumber
-        $devDetail = (Get-CimInstance -CimSession $TempSession -Namespace root/cimv2/mdm/dmmap -Class MDM_DevDetail_Ext01 -Filter "InstanceID='Ext' AND ParentID='./DevDetail'")
-        if ($devDetail) {
-            $Global:hardwareIdentifier = $devDetail.DeviceHardwareData
-            $Global:hardwareIdentifier
-        }
-        else {
-            Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) go.osdcloud.com/hash is unable to retrieve device hardware data (hash) from computer"
-        }
-
-        Remove-CimSession $TempSession
-        Remove-Variable -Name devDetail,TempSession
+    $TempSession = New-CimSession
+    $Global:serialNumber = (Get-CimInstance -CimSession $TempSession -Class Win32_BIOS).SerialNumber
+    $devDetail = (Get-CimInstance -CimSession $TempSession -Namespace root/cimv2/mdm/dmmap -Class MDM_DevDetail_Ext01 -Filter "InstanceID='Ext' AND ParentID='./DevDetail'")
+    if ($devDetail) {
+        $Global:hardwareIdentifier = $devDetail.DeviceHardwareData
+        $Global:hardwareIdentifier
     }
     else {
-        Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) go.osdcloud.com/hash requires elevated Admin Rights"
+        Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) go.osdcloud.com/hash is unable to retrieve device hardware data (hash) from computer"
     }
+
+    Remove-CimSession $TempSession
+    Remove-Variable -Name devDetail,TempSession
 }
