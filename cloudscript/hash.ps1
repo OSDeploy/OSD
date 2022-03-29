@@ -33,34 +33,22 @@ if ($env:SystemDrive -eq 'X:') {
     Write-Warning "This script cannot be run from WinPE"
 }
 else {
-    $IsAdmin = ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] 'Administrator')
-    if (! $IsAdmin) {
-        Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) go.osdcloud.com/hash requires elevated Admin Rights"
-    }
-    else {
-        $bad = $false
-        $session = New-CimSession
-        $serial = (Get-CimInstance -CimSession $session -Class Win32_BIOS).SerialNumber
-        $devDetail = (Get-CimInstance -CimSession $session -Namespace root/cimv2/mdm/dmmap -Class MDM_DevDetail_Ext01 -Filter "InstanceID='Ext' AND ParentID='./DevDetail'")
+    if (([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] 'Administrator')) {
+        $TempSession = New-CimSession
+        $Global:serialNumber = (Get-CimInstance -CimSession $TempSession -Class Win32_BIOS).SerialNumber
+        $devDetail = (Get-CimInstance -CimSession $TempSession -Namespace root/cimv2/mdm/dmmap -Class MDM_DevDetail_Ext01 -Filter "InstanceID='Ext' AND ParentID='./DevDetail'")
         if ($devDetail) {
-            $hash = $devDetail.DeviceHardwareData
+            $Global:hardwareIdentifier = $devDetail.DeviceHardwareData
+            $Global:hardwareIdentifier
         }
         else {
-            $bad = $true
-            $hash = ""
-        }
-
-        if ($serial) {
-            $Global:serialNumber = $serial
-        }
-    
-        if ($bad) {
             Write-Error -Message "Unable to retrieve device hardware data (hash) from computer" -Category DeviceError
         }
-        else {
-            $Global:hardwareIdentifier = $hash
-            $hash
-        }
-        Remove-CimSession $session
+
+        Remove-CimSession $TempSession
+        Remove-Variable -Name devDetail,TempSession
+    }
+    else {
+        Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) go.osdcloud.com/hash requires elevated Admin Rights"
     }
 }
