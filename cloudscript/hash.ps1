@@ -38,9 +38,11 @@ elseif (-NOT ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsI
 else {
     $TempSession = New-CimSession
     $Global:serialNumber = (Get-CimInstance -CimSession $TempSession -Class Win32_BIOS).SerialNumber
+    Write-Verbose -Verbose '$Global:serialNumber contains the device Serial Number'
     $devDetail = (Get-CimInstance -CimSession $TempSession -Namespace root/cimv2/mdm/dmmap -Class MDM_DevDetail_Ext01 -Filter "InstanceID='Ext' AND ParentID='./DevDetail'")
     if ($devDetail) {
         $Global:hardwareIdentifier = $devDetail.DeviceHardwareData
+        Write-Verbose -Verbose '$Global:hardwareIdentifier contains the device Hardware Hash'
         $Global:hardwareIdentifier
     }
     else {
