@@ -1,5 +1,5 @@
 <#PSScriptInfo
-.VERSION 22.3.28.1
+.VERSION 22.3.29.1
 .GUID 75acdf11-6054-47af-8c22-95a764e57193
 .AUTHOR David Segura @SeguraOSD
 .COMPANYNAME osdeploy.com
@@ -23,7 +23,7 @@ powershell iex (irm go.osdcloud.com/testdelldriverpacks)
 .DESCRIPTION
     PSCloudScript at go.osdcloud.com/testdelldriverpacks
 .NOTES
-    Version 22.3.28.1
+    Version 22.3.29.1
 .LINK
     https://raw.githubusercontent.com/OSDeploy/OSD/master/cloudscript/testdelldriverpacks.ps1
 .EXAMPLE
@@ -31,7 +31,6 @@ powershell iex (irm go.osdcloud.com/testdelldriverpacks)
 #>
 
 $DriverPackCatalog = 'https://raw.githubusercontent.com/OSDeploy/OSD/master/Catalogs/OSDCatalog/OSDCatalogDellDriverPack.json'
-
 
 $DriverPacks = Invoke-RestMethod -Uri $DriverPackCatalog
 
