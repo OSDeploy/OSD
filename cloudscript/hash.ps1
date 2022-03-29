@@ -51,14 +51,14 @@ else {
         }
 
         if ($serial) {
-            $Global:SerialNumber = $serial
+            $Global:serialNumber = $serial
         }
     
         if ($bad) {
             Write-Error -Message "Unable to retrieve device hardware data (hash) from computer" -Category DeviceError
         }
         else {
-            $Global:HardwareHash = $hash
+            $Global:hardwareIdentifier = $hash
             $hash
         }
         Remove-CimSession $session
