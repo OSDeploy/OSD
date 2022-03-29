@@ -30,7 +30,7 @@ powershell iex (irm go.osdcloud.com/hash)
     powershell iex (irm go.osdcloud.com/hash)
 #>
 if ($env:SystemDrive -eq 'X:') {
-    Write-Warning "This script cannot be run from WinPE"
+    Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) go.osdcloud.com/hash cannot be run from WinPE"
 }
 else {
     if (([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] 'Administrator')) {
@@ -42,7 +42,7 @@ else {
             $Global:hardwareIdentifier
         }
         else {
-            Write-Error -Message "Unable to retrieve device hardware data (hash) from computer" -Category DeviceError
+            Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) go.osdcloud.com/hash is unable to retrieve device hardware data (hash) from computer"
         }
 
         Remove-CimSession $TempSession
