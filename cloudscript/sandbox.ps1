@@ -31,23 +31,36 @@ powershell iex(irm sandbox.osdcloud.com)
 #>
 [CmdletBinding()]
 param()
-#----------------------------------------------------------[Initialize]----------------------------------------------------------
+#============================================
+#   Initialize
+#============================================
 Write-Host -ForegroundColor DarkGray "sandbox.osdcloud.com 22.3.31.1"
 [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
 Invoke-Expression -Command (Invoke-RestMethod -Uri functions.osdcloud.com)
-#----------------------------------------------------------[Transcript]----------------------------------------------------------
 $Transcript = "$((Get-Date).ToString('yyyy-MM-dd-HHmmss'))-OSDCloud.log"
 $null = Start-Transcript -Path (Join-Path "$env:SystemRoot\Temp" $Transcript) -ErrorAction Ignore
-#----------------------------------------------------------[WinPE]---------------------------------------------------------------
+#============================================
+#   WinPE
+#============================================
 if ($env:SystemDrive -eq 'X:') {
     Start-WinPE -OSDCloud
     Write-Host -ForegroundColor Cyan "To start a new PowerShell session, type 'start powershell' and press enter"
     Write-Host -ForegroundColor Cyan "Start-OSDCloud or Start-OSDCloudGUI can be run in the new PowerShell session"
 }
-#----------------------------------------------------------[OOBE]----------------------------------------------------------------
+#============================================
+#   OOBE
+#============================================
 if ($env:UserName -eq 'defaultuser0') {
     Start-OOBE -Autopilot -Display -Language -DateTime -KeyVault
 }
-#----------------------------------------------------------[Transcript]----------------------------------------------------------
+#============================================
+#   Windows
+#============================================
+if (($env:SystemDrive -ne 'X:') -and ($env:UserName -ne 'defaultuser0')) {
+    #Do something
+}
+#============================================
+#   Complete
+#============================================
 $null = Stop-Transcript
-#----------------------------------------------------------[End]-----------------------------------------------------------------
+#============================================

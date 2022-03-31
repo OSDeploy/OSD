@@ -1,5 +1,5 @@
 <#PSScriptInfo
-.VERSION 22.3.25.2
+.VERSION 22.3.31.1
 .GUID 68790315-3c3f-4a9a-b191-84928e5d6a83
 .AUTHOR David Segura @SeguraOSD
 .COMPANYNAME osdcloud.com
@@ -12,21 +12,17 @@
 .REQUIREDSCRIPTS 
 .EXTERNALSCRIPTDEPENDENCIES 
 .RELEASENOTES
-    Script should be executed in a Command Prompt using either of the following commands:
-    powershell Invoke-Expression -Command (Invoke-RestMethod -Uri re.osdcloud.com)
-    powershell iex (irm re.osdcloud.com)
 #>
 <#
 .SYNOPSIS
-    PSCloudScript at re.osdcloud.com
+    PSCloudScript
 .DESCRIPTION
-    PSCloudScript at re.osdcloud.com
+    PSCloudScript
 .NOTES
-    Version 22.3.25.2
+    Version 22.3.31.1
 .LINK
     https://raw.githubusercontent.com/OSDeploy/OSD/master/cloudscript/re.ps1
 .EXAMPLE
-    powershell iex (irm re.osdcloud.com)
 #>
 [CmdletBinding()]
 param()
@@ -36,15 +32,15 @@ param()
 #============================================
 #   Initialize
 #============================================
-$OSDCloudREVersion = '22.3.25.2'
-Write-Host -ForegroundColor DarkGray "re.osdcloud.com $OSDCloudREVersion"
+$OSDCloudREVersion = '22.3.31.1'
+Write-Host -ForegroundColor DarkGray "OSDCloudRE $OSDCloudREVersion"
 #============================================
 #   Test Admin Rights
 #============================================
 Write-Host -ForegroundColor DarkGray "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Test Admin Rights"
 $IsAdmin = ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] 'Administrator')
 if (! $IsAdmin) {
-    Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) re.osdcloud.com requires elevated Admin Rights"
+    Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) OSDCloudRE requires elevated Admin Rights"
     Break
 }
 #============================================
@@ -79,7 +75,8 @@ Start-Sleep -Seconds 10
 #============================================
 #	Download ISO
 #============================================
-$fromIsoUrl = 'https://winpe.blob.core.windows.net/public/public_22.3.25.2.iso'
+$fromIsoUrl = ''
+Break
 
 $ResolveUrl = Invoke-WebRequest -Uri $fromIsoUrl -Method Head -MaximumRedirection 0 -UseBasicParsing -ErrorAction SilentlyContinue
 if ($ResolveUrl.StatusCode -eq 302) {

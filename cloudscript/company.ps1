@@ -1,5 +1,5 @@
 <#PSScriptInfo
-.VERSION 22.3.25.2
+.VERSION 22.3.31.1
 .GUID e9ff19c4-655f-40c9-b0d9-6aa4542b3342
 .AUTHOR David Segura @SeguraOSD
 .COMPANYNAME osdcloud.com
@@ -13,28 +13,28 @@
 .EXTERNALSCRIPTDEPENDENCIES 
 .RELEASENOTES
 Script should be executed in a Command Prompt using the following command
-powershell Invoke-Expression -Command (Invoke-RestMethod -Uri bh.osdcloud.com)
+powershell Invoke-Expression -Command (Invoke-RestMethod -Uri go.osdcloud.com/xxx)
 This is abbreviated as
-powershell iex(irm bh.osdcloud.com)
+powershell iex(irm go.osdcloud.com/xxx)
 #>
 <#
 .SYNOPSIS
-    PSCloudScript at bh.osdcloud.com
+    PSCloudScript at go.osdcloud.com/xxx
 .DESCRIPTION
-    PSCloudScript at bh.osdcloud.com
+    PSCloudScript at go.osdcloud.com/xxx
 .NOTES
-    Version 22.3.25.2
+    Version 22.3.31.1
 .LINK
     https://raw.githubusercontent.com/OSDeploy/OSD/master/cloudscript/company.ps1
 .EXAMPLE
-    powershell iex(irm bh.osdcloud.com)
+    powershell iex(irm go.osdcloud.com/xxx)
 #>
 [CmdletBinding()]
 param()
 #=================================================
 #   Initialize
 #=================================================
-Write-Host -ForegroundColor DarkGray "bh.osdcloud.com 22.3.25.2"
+Write-Host -ForegroundColor DarkGray "go.osdcloud.com/xxx 22.3.31.1"
 [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
 Invoke-Expression -Command (Invoke-RestMethod -Uri functions.osdcloud.com)
 $Transcript = "$((Get-Date).ToString('yyyy-MM-dd-HHmmss'))-OSDCloud.log"
