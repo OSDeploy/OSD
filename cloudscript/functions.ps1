@@ -1,5 +1,5 @@
 <#PSScriptInfo
-.VERSION 22.3.25.2
+.VERSION 22.3.31.1
 .GUID 302752c7-8567-45db-91ba-55c40fb9caee
 .AUTHOR David Segura @SeguraOSD
 .COMPANYNAME osdcloud.com
@@ -23,14 +23,14 @@ powershell iex(irm functions.osdcloud.com)
 .DESCRIPTION
     PSCloudScript at functions.osdcloud.com
 .NOTES
-    Version 22.3.25.2
+    Version 22.3.31.1
 .LINK
     https://raw.githubusercontent.com/OSDeploy/OSD/master/cloudscript/functions.ps1
 .EXAMPLE
     powershell iex(irm functions.osdcloud.com)
 #>
 #----------------------------------------------------------[Initialize]----------------------------------------------------------
-Write-Host -ForegroundColor DarkGray "functions.osdcloud.com 22.3.25.2"
+Write-Host -ForegroundColor DarkGray "functions.osdcloud.com 22.3.31.1"
 [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
 #----------------------------------------------------------[Declarations]--------------------------------------------------------
 $oobePowerShellProfile = @'
