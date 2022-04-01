@@ -55,10 +55,10 @@ if ($env:UserName -eq 'defaultuser0') {
     $null = Stop-Transcript
     
     $TestAutopilotProfile = sandbox-TestAutopilotProfile
-    if (sandbox-TestAutopilotProfile -eq $true) {
+    if ($TestAutopilotProfile -eq $true) {
         sandbox-ShowAutopilotProfile
     }
-    elseif (sandbox-TestAutopilotProfile -eq $false) {
+    elseif ($TestAutopilotProfile -eq $false) {
         $AutopilotRegisterCommand = 'Get-WindowsAutopilotInfo -Online -GroupTag Enterprise -Assign'
         $AutopilotRegisterProcess = sandbox-AutopilotRegisterCommand -Command $AutopilotRegisterCommand;Start-Sleep -Seconds 30
     }
