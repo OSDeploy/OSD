@@ -677,6 +677,16 @@ if ($env:UserName -eq 'defaultuser0') {
             Write-Warning 'Function is not supported in this Windows Phase'
         }
     }
+    function UpdateDefender {
+        [CmdletBinding()]
+        param ()
+        if ($env:UserName -eq 'defaultuser0') {
+            if (Test-Path "$env:ProgramFiles\Windows Defender\MpCmdRun.exe") {
+                Write-Host -ForegroundColor Cyan 'Updating Windows Defender'
+                & "$env:ProgramFiles\Windows Defender\MpCmdRun.exe" -signatureupdate
+            }
+        }
+    }
 }
 #endregion
 

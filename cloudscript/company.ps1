@@ -70,12 +70,11 @@ if ($env:UserName -eq 'defaultuser0') {
     NetFX
     UpdateDrivers
     UpdateWindows
-    & 'C:\Program Files\Windows Defender\MpCmdRun.exe' -signatureupdate
-    #& 'C:\Program Files\Windows Defender\MpCmdRun.exe' -removedefinitions -dynamicsignatures
+    UpdateDefender
     if ($AutopilotRegisterProcess) {
         Write-Host -ForegroundColor Cyan 'Waiting for Autopilot Registration to complete'
-        if (Get-Process -Id $AutopilotRegisterProcess.Id -ErrorAction Ignore)
-        {
+        #$AutopilotRegisterProcess.WaitForExit()
+        if (Get-Process -Id $AutopilotRegisterProcess.Id -ErrorAction Ignore) {
             Wait-Process -Id $AutopilotRegisterProcess.Id
         }
     }
