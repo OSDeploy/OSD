@@ -41,7 +41,7 @@ $null = Start-Transcript -Path (Join-Path "$env:SystemRoot\Temp" $Transcript) -E
 
 #region WinPE
 if ($env:SystemDrive -eq 'X:') {
-    Start-WinPE -OSDCloud
+    Start-WinPE -OSDCloud -KeyVault
     Write-Host -ForegroundColor Cyan "To start a new PowerShell session, type 'start powershell' and press enter"
     Write-Host -ForegroundColor Cyan "Start-OSDCloud or Start-OSDCloudGUI can be run in the new PowerShell session"
     $null = Stop-Transcript

@@ -416,11 +416,11 @@ function sandbox-StopComputer {
 #endregion
 
 #region OOBE Custom Functions
-function sandbox-AutopilotRegisterGroupTagEnterprise {
+function sandbox-AutopilotRegisterCommand {
     [CmdletBinding()]
     param (
         [System.String]
-        $Command = 'Get-WindowsAutopilotInfo -Online -GroupTag Enterprise -Assign'
+        $Command = 'Get-WindowsAutopilotInfo -Online -Assign'
     )
     if ($env:UserName -eq 'defaultuser0') {
         Write-Host -ForegroundColor Cyan 'Registering Device in Autopilot in new PowerShell window ' -NoNewline
@@ -435,7 +435,7 @@ function sandbox-AutopilotRegisterGroupTagEnterprise {
 #endregion
 
 #region DEV Functions
-function sandbox-TestAutopilot {
+function sandbox-ShowAutopilotInfo {
     [CmdletBinding()]
     param ()
     if ($env:UserName -eq 'defaultuser0') {
@@ -462,6 +462,27 @@ function sandbox-TestAutopilot {
         }
         else {
             Write-Warning 'Could not find an Autopilot Profile on this device.  If this device is registered, restart the device while connected to the internet'
+        }
+    }
+    else {
+        Write-Warning 'Function is not supported in this Windows Phase'
+    }
+}
+function sandbox-TestAutopilotProfile {
+    [CmdletBinding()]
+    param ()
+    if ($env:UserName -eq 'defaultuser0') {
+        $Global:RegAutopilot = Get-ItemProperty -Path 'Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Provisioning\Diagnostics\Autopilot'
+
+        #Oter Keys
+        #Get-ItemProperty -Path 'Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Provisioning\AutopilotPolicyCache'
+        #Get-ItemProperty -Path 'Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Provisioning\Diagnostics\Autopilot\EstablishedCorrelations'
+        
+        if ($Global:RegAutoPilot.CloudAssignedForcedEnrollment -eq 1) {
+            $true
+        }
+        else {
+            $false
         }
     }
     else {
