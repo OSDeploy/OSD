@@ -1,5 +1,5 @@
 <#PSScriptInfo
-.VERSION 22.3.31.1
+.VERSION 22.3.31.2
 .GUID 55a834b8-513e-4399-bbdb-2e54a1305eee
 .AUTHOR David Segura @SeguraOSD
 .COMPANYNAME osdcloud.com
@@ -23,44 +23,41 @@ powershell iex(irm sandbox.osdcloud.com)
 .DESCRIPTION
     PSCloudScript at sandbox.osdcloud.com
 .NOTES
-    Version 22.3.31.1
+    Version 22.3.31.2
 .LINK
     https://raw.githubusercontent.com/OSDeploy/OSD/master/cloudscript/sandbox.ps1
 .EXAMPLE
-    powershell iex(irm sandbox.osdcloud.com)
+    powershell iex (irm sandbox.osdcloud.com)
 #>
 [CmdletBinding()]
 param()
-#============================================
-#   Initialize
-#============================================
-Write-Host -ForegroundColor DarkGray "sandbox.osdcloud.com 22.3.31.1"
-[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
+
+#region Initialize
+Write-Host -ForegroundColor DarkGray "sandbox.osdcloud.com 22.3.31.2"
 Invoke-Expression -Command (Invoke-RestMethod -Uri functions.osdcloud.com)
 $Transcript = "$((Get-Date).ToString('yyyy-MM-dd-HHmmss'))-OSDCloud.log"
 $null = Start-Transcript -Path (Join-Path "$env:SystemRoot\Temp" $Transcript) -ErrorAction Ignore
-#============================================
-#   WinPE
-#============================================
+#endregion
+
+#region WinPE
 if ($env:SystemDrive -eq 'X:') {
     Start-WinPE -OSDCloud
     Write-Host -ForegroundColor Cyan "To start a new PowerShell session, type 'start powershell' and press enter"
     Write-Host -ForegroundColor Cyan "Start-OSDCloud or Start-OSDCloudGUI can be run in the new PowerShell session"
+    $null = Stop-Transcript
 }
-#============================================
-#   OOBE
-#============================================
+#endregion
+
+#region OOBE
 if ($env:UserName -eq 'defaultuser0') {
-    Start-OOBE -Autopilot -Display -Language -DateTime -KeyVault
+    Start-OOBE -Display -Language -DateTime -Autopilot -KeyVault
+    $null = Stop-Transcript
 }
-#============================================
-#   Windows
-#============================================
+#endregion
+
+#region FullOS
 if (($env:SystemDrive -ne 'X:') -and ($env:UserName -ne 'defaultuser0')) {
     #Do something
+    $null = Stop-Transcript
 }
-#============================================
-#   Complete
-#============================================
-$null = Stop-Transcript
-#============================================
+#endregion

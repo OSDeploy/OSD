@@ -68,7 +68,7 @@ if ($OSDCloudPhase -eq 'OOBE') {
     }
     else {
         $oobeRegisterAutopilotCommand = 'Get-WindowsAutopilotInfo -Online -GroupTag Enterprise -Assign'
-        $oobeRegisterAutopilotProcess = Step-oobeRegisterAutopilot -Command $oobeRegisterAutopilotCommand;Start-Sleep -Seconds 30
+        $oobeRegisterAutopilotProcess = sandbox-AutopilotRegisterGroupTagEnterprise -Command $oobeRegisterAutopilotCommand;Start-Sleep -Seconds 30
     }
     RemoveAppx -Basic
     Rsat -Basic
@@ -84,7 +84,7 @@ if ($OSDCloudPhase -eq 'OOBE') {
             Wait-Process -Id $oobeRegisterAutopilotProcess.Id
         }
     }
-    Step-oobeRestartComputer
+    sandbox-RestartComputer
 }
 #=================================================
 #   Complete
