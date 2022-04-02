@@ -60,7 +60,7 @@ function Save-UpdateCatalog {
         $SaveWebFile = Save-WebFile -SourceUrl $Link.Value -DestinationDirectory "$DestinationDirectory" -DestinationName $Link.Value.Split('/')[-1]
         $SaveWebFile
     }
-    else {
+    elseif ($Links.Matches.Count -gt 1) {
         Write-Host "Id  FileName`r"
         Write-Host "--  --------"
         foreach ($Link in $Links.Matches) {
@@ -87,5 +87,8 @@ function Save-UpdateCatalog {
         foreach ($Item in $ToDownload) {
             $SaveWebFile = Save-WebFile -SourceUrl $Item -DestinationDirectory "$DestinationDirectory" -DestinationName $Item.Split('/')[-1]
         }
+    }
+    else {
+        Write-Warning "Can not find link for file, nothing was downloaded"
     }
 }
