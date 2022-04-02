@@ -54,13 +54,13 @@ if ($env:UserName -eq 'defaultuser0') {
     Start-OOBE -Display -Language -DateTime -Autopilot -KeyVault
     $null = Stop-Transcript
     
-    $TestAutopilotProfile = sandbox-TestAutopilotProfile
+    $TestAutopilotProfile = osdcloud-TestAutopilotProfile
     if ($TestAutopilotProfile -eq $true) {
-        sandbox-ShowAutopilotProfile
+        osdcloud-ShowAutopilotProfile
     }
     elseif ($TestAutopilotProfile -eq $false) {
         $AutopilotRegisterCommand = 'Get-WindowsAutopilotInfo -Online -GroupTag Enterprise -Assign'
-        $AutopilotRegisterProcess = sandbox-AutopilotRegisterCommand -Command $AutopilotRegisterCommand;Start-Sleep -Seconds 30
+        $AutopilotRegisterProcess = osdcloud-AutopilotRegisterCommand -Command $AutopilotRegisterCommand;Start-Sleep -Seconds 30
     }
     else {
         Write-Warning 'Unable to determine if device is Autopilot registered'
@@ -78,7 +78,7 @@ if ($env:UserName -eq 'defaultuser0') {
             Wait-Process -Id $AutopilotRegisterProcess.Id
         }
     }
-    sandbox-RestartComputer
+    osdcloud-RestartComputer
 }
 #endregion
 

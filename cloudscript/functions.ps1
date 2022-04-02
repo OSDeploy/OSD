@@ -63,7 +63,7 @@ function Prompt {
 #endregion
 
 #region Default Functions
-function sandbox-InstallCurl {
+function osdcloud-InstallCurl {
     [CmdletBinding()]
     param ()
     if ($env:SystemDrive -eq 'X:') {
@@ -83,7 +83,7 @@ function sandbox-InstallCurl {
         Write-Warning 'Function is not supported in this Windows Phase'
     }
 }
-function sandbox-InstallNuget {
+function osdcloud-InstallNuget {
     [CmdletBinding()]
     param ()
     if ($env:SystemDrive -eq 'X:') {
@@ -116,7 +116,7 @@ function sandbox-InstallNuget {
         Write-Warning 'Function is not supported in this Windows Phase'
     }
 }
-function sandbox-InstallPackageManagement {
+function osdcloud-InstallPackageManagement {
     [CmdletBinding()]
     param ()
     if ($env:SystemDrive -eq 'X:') {
@@ -146,7 +146,7 @@ function sandbox-InstallPackageManagement {
         Write-Warning 'Function is not supported in this Windows Phase'
     }
 }
-function sandbox-InstallPowerShellGet {
+function osdcloud-InstallPowerShellGet {
     [CmdletBinding()]
     param ()
     if ($env:SystemDrive -eq 'X:') {
@@ -167,7 +167,7 @@ function sandbox-InstallPowerShellGet {
         Write-Warning 'Function is not supported in this Windows Phase'
     }
 }
-function sandbox-InstallModuleAutopilot {
+function osdcloud-InstallModuleAutopilot {
     [CmdletBinding()]
     param ()
     if ($env:UserName -eq 'defaultuser0') {
@@ -181,7 +181,7 @@ function sandbox-InstallModuleAutopilot {
         Write-Warning 'Function is not supported in this Windows Phase'
     }
 }
-function sandbox-InstallModuleAzureAd {
+function osdcloud-InstallModuleAzureAd {
     [CmdletBinding()]
     param ()
     if ($env:UserName -eq 'defaultuser0') {
@@ -195,7 +195,7 @@ function sandbox-InstallModuleAzureAd {
         Write-Warning 'Function is not supported in this Windows Phase'
     }
 }
-function sandbox-InstallModuleKeyVault {
+function osdcloud-InstallModuleKeyVault {
     [CmdletBinding()]
     param ()
     if ($env:SystemDrive -eq 'X:') {
@@ -216,7 +216,7 @@ function sandbox-InstallModuleKeyVault {
         Write-Warning 'Function is not supported in this Windows Phase'
     }
 }
-function sandbox-InstallModuleOSD {
+function osdcloud-InstallModuleOSD {
     [CmdletBinding()]
     param ()
     if ($env:SystemDrive -eq 'X:') {
@@ -227,7 +227,7 @@ function sandbox-InstallModuleOSD {
         Write-Warning 'Function is not supported in this Windows Phase'
     }
 }
-function sandbox-InstallScriptAutopilot {
+function osdcloud-InstallScriptAutopilot {
     [CmdletBinding()]
     param ()
     if ($env:UserName -eq 'defaultuser0') {
@@ -241,7 +241,7 @@ function sandbox-InstallScriptAutopilot {
         Write-Warning 'Function is not supported in this Windows Phase'
     }
 }
-function sandbox-SetEnvironmentVariables {
+function osdcloud-SetEnvironmentVariables {
     [CmdletBinding()]
     param ()
     if ($env:SystemDrive -eq 'X:') {
@@ -264,7 +264,7 @@ function sandbox-SetEnvironmentVariables {
         Write-Warning 'Function is not supported in this Windows Phase'
     }
 }
-function sandbox-SetExecutionPolicy {
+function osdcloud-SetExecutionPolicy {
     [CmdletBinding()]
     param ()
     if ($env:SystemDrive -eq 'X:') {
@@ -283,7 +283,7 @@ function sandbox-SetExecutionPolicy {
         Write-Warning 'Function is not supported in this Windows Phase'
     }
 }
-function sandbox-SetPowerShellProfile {
+function osdcloud-SetPowerShellProfile {
     [CmdletBinding()]
     param ()
     if ($env:SystemDrive -eq 'X:') {
@@ -311,7 +311,7 @@ function sandbox-SetPowerShellProfile {
         Write-Warning 'Function is not supported in this Windows Phase'
     }
 }
-function sandbox-SetWindowsDateTime {
+function osdcloud-SetWindowsDateTime {
     [CmdletBinding()]
     param ()
     if ($env:UserName -eq 'defaultuser0') {
@@ -327,7 +327,7 @@ function sandbox-SetWindowsDateTime {
         Write-Warning 'Function is not supported in this Windows Phase'
     }
 }
-function sandbox-SetWindowsDisplay {
+function osdcloud-SetWindowsDisplay {
     [CmdletBinding()]
     param ()
     if ($env:UserName -eq 'defaultuser0') {
@@ -342,7 +342,7 @@ function sandbox-SetWindowsDisplay {
         Write-Warning 'Function is not supported in this Windows Phase'
     }
 }
-function sandbox-SetWindowsLanguage {
+function osdcloud-SetWindowsLanguage {
     [CmdletBinding()]
     param ()
     if ($env:UserName -eq 'defaultuser0') {
@@ -357,7 +357,7 @@ function sandbox-SetWindowsLanguage {
         Write-Warning 'Function is not supported in this Windows Phase'
     }
 }
-function sandbox-TrustPSGallery {
+function osdcloud-TrustPSGallery {
     [CmdletBinding()]
     param ()
     if ($env:SystemDrive -eq 'X:') {
@@ -385,7 +385,7 @@ function sandbox-TrustPSGallery {
 #endregion
 
 #region OOBE User Functions
-function sandbox-RestartComputer {
+function osdcloud-RestartComputer {
     [CmdletBinding()]
     param ()
     if ($env:UserName -eq 'defaultuser0') {
@@ -399,7 +399,7 @@ function sandbox-RestartComputer {
         Write-Warning 'Function is not supported in this Windows Phase'
     }
 }
-function sandbox-StopComputer {
+function osdcloud-StopComputer {
     [CmdletBinding()]
     param ()
     if ($env:UserName -eq 'defaultuser0') {
@@ -416,7 +416,7 @@ function sandbox-StopComputer {
 #endregion
 
 #region OOBE Custom Functions
-function sandbox-AutopilotRegisterCommand {
+function osdcloud-AutopilotRegisterCommand {
     [CmdletBinding()]
     param (
         [System.String]
@@ -435,7 +435,7 @@ function sandbox-AutopilotRegisterCommand {
 #endregion
 
 #region DEV Functions
-function sandbox-ShowAutopilotInfo {
+function osdcloud-ShowAutopilotInfo {
     [CmdletBinding()]
     param ()
     if ($env:UserName -eq 'defaultuser0') {
@@ -468,7 +468,7 @@ function sandbox-ShowAutopilotInfo {
         Write-Warning 'Function is not supported in this Windows Phase'
     }
 }
-function sandbox-TestAutopilotProfile {
+function osdcloud-TestAutopilotProfile {
     [CmdletBinding()]
     param ()
     if ($env:UserName -eq 'defaultuser0') {
@@ -700,16 +700,16 @@ function Start-WinPE {
         [Switch]$OSDCloud
     )
     if ($env:SystemDrive -eq 'X:') {
-        sandbox-SetExecutionPolicy
-        sandbox-SetEnvironmentVariables
-        sandbox-SetPowerShellProfile
-        #sandbox-InstallNuget
-        sandbox-InstallPackageManagement
-        sandbox-InstallPowerShellGet
-        sandbox-TrustPSGallery
+        osdcloud-SetExecutionPolicy
+        osdcloud-SetEnvironmentVariables
+        osdcloud-SetPowerShellProfile
+        #osdcloud-InstallNuget
+        osdcloud-InstallPackageManagement
+        osdcloud-InstallPowerShellGet
+        osdcloud-TrustPSGallery
         if ($OSDCloud) {
-            sandbox-InstallCurl
-            sandbox-InstallModuleOSD
+            osdcloud-InstallCurl
+            osdcloud-InstallModuleOSD
             if (-not (Get-Command 'curl.exe' -ErrorAction SilentlyContinue)) {
                 Write-Warning 'curl.exe is missing from WinPE. This is required for OSDCloud to function'
                 Start-Sleep -Seconds 5
@@ -717,7 +717,7 @@ function Start-WinPE {
             }
         }
         if ($KeyVault) {
-            sandbox-InstallModuleKeyVault
+            osdcloud-InstallModuleKeyVault
         }
     }
     else {
@@ -743,22 +743,22 @@ function Start-OOBE {
     )
     if ($env:UserName -eq 'defaultuser0') {
         if ($Display) {
-            sandbox-SetWindowsDisplay
+            osdcloud-SetWindowsDisplay
         }
         if ($Language) {
-            sandbox-SetWindowsLanguage
+            osdcloud-SetWindowsLanguage
         }
         if ($DateTime) {
-            sandbox-SetWindowsDateTime
+            osdcloud-SetWindowsDateTime
         }
-        sandbox-SetExecutionPolicy
-        sandbox-SetPowerShellProfile
-        sandbox-InstallPackageManagement
-        sandbox-TrustPSGallery
+        osdcloud-SetExecutionPolicy
+        osdcloud-SetPowerShellProfile
+        osdcloud-InstallPackageManagement
+        osdcloud-TrustPSGallery
         if ($Autopilot) {
-            sandbox-InstallModuleAutopilot
-            sandbox-InstallModuleAzureAd
-            sandbox-InstallScriptAutopilot
+            osdcloud-InstallModuleAutopilot
+            osdcloud-InstallModuleAzureAd
+            osdcloud-InstallScriptAutopilot
             $Global:RegAutopilotPolicyCache = Get-ItemProperty -Path 'Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Provisioning\AutopilotPolicyCache'
             $Global:RegAutopilot = Get-ItemProperty -Path 'Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Provisioning\Diagnostics\Autopilot'
             $Global:RegEstablishedCorrelations = Get-ItemProperty -Path 'Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Provisioning\Diagnostics\Autopilot\EstablishedCorrelations'
@@ -780,7 +780,7 @@ function Start-OOBE {
             }
         }
         if ($KeyVault) {
-            sandbox-InstallModuleKeyVault
+            osdcloud-InstallModuleKeyVault
         }
     }
 }
