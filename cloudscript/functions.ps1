@@ -677,7 +677,7 @@ if ($env:UserName -eq 'defaultuser0') {
             Write-Warning 'Function is not supported in this Windows Phase'
         }
     }
-    function UpdateDefender {
+    function osdcloud-UpdateDefender {
         [CmdletBinding()]
         param ()
         if ($env:UserName -eq 'defaultuser0') {
@@ -687,6 +687,7 @@ if ($env:UserName -eq 'defaultuser0') {
             }
         }
     }
+    New-Alias -Name 'UpdateDefender' -Value 'osdcloud-UpdateDefender' -Description 'OSDCloud' -Force
 }
 #endregion
 
@@ -724,7 +725,7 @@ function osdcloud-StartWinPE {
         Write-Warning 'Function is not supported in this Windows Phase'
     }
 }
-New-Alias -Name 'Start-WinPE' -Value 'osdcloud-StartWinPE'
+New-Alias -Name 'Start-WinPE' -Value 'osdcloud-StartWinPE' -Description 'OSDCloud' -Force
 #endregion
 
 #region OOBE Startup
@@ -785,5 +786,5 @@ function osdcloud-StartOOBE {
         }
     }
 }
-New-Alias -Name 'Start-OOBE' -Value 'osdcloud-StartOOBE'
+New-Alias -Name 'Start-OOBE' -Value 'osdcloud-StartOOBE' -Description 'OSDCloud' -Force
 #endregion

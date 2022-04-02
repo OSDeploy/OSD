@@ -70,7 +70,7 @@ if ($env:UserName -eq 'defaultuser0') {
     NetFX
     UpdateDrivers
     UpdateWindows
-    UpdateDefender
+    osdcloud-UpdateDefender
     if ($AutopilotRegisterProcess) {
         Write-Host -ForegroundColor Cyan 'Waiting for Autopilot Registration to complete'
         #$AutopilotRegisterProcess.WaitForExit()
