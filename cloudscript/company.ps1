@@ -1,5 +1,5 @@
 <#PSScriptInfo
-.VERSION 22.3.31.2
+.VERSION 22.4.1.1
 .GUID e9ff19c4-655f-40c9-b0d9-6aa4542b3342
 .AUTHOR David Segura @SeguraOSD
 .COMPANYNAME osdcloud.com
@@ -23,7 +23,7 @@ powershell iex(irm go.osdcloud.com/xxx)
 .DESCRIPTION
     PSCloudScript at go.osdcloud.com/xxx
 .NOTES
-    Version 22.3.31.2
+    Version 22.4.1.1
 .LINK
     https://raw.githubusercontent.com/OSDeploy/OSD/master/cloudscript/company.ps1
 .EXAMPLE
@@ -33,7 +33,7 @@ powershell iex(irm go.osdcloud.com/xxx)
 param()
 
 #region Initialize
-Write-Host -ForegroundColor DarkGray "go.osdcloud.com/xxx 22.3.31.2"
+Write-Host -ForegroundColor DarkGray "go.osdcloud.com/xxx 22.4.1.1"
 Invoke-Expression -Command (Invoke-RestMethod -Uri functions.osdcloud.com)
 $Transcript = "$((Get-Date).ToString('yyyy-MM-dd-HHmmss'))-OSDCloud.log"
 $null = Start-Transcript -Path (Join-Path "$env:SystemRoot\Temp" $Transcript) -ErrorAction Ignore
@@ -41,7 +41,7 @@ $null = Start-Transcript -Path (Join-Path "$env:SystemRoot\Temp" $Transcript) -E
 
 #region WinPE
 if ($env:SystemDrive -eq 'X:') {
-    Start-WinPE -OSDCloud -KeyVault
+    osdcloud-StartWinPE -OSDCloud -KeyVault
     #Write-Host -ForegroundColor Cyan "To start a new PowerShell session, type 'start powershell' and press enter"
     #Write-Host -ForegroundColor Cyan "Start-OSDCloud or Start-OSDCloudGUI can be run in the new PowerShell session"
     $null = Stop-Transcript
@@ -51,7 +51,7 @@ if ($env:SystemDrive -eq 'X:') {
 
 #region OOBE
 if ($env:UserName -eq 'defaultuser0') {
-    Start-OOBE -Display -Language -DateTime -Autopilot -KeyVault
+    osdcloud-StartOOBE -Display -Language -DateTime -Autopilot -KeyVault
     $null = Stop-Transcript
     
     $TestAutopilotProfile = osdcloud-TestAutopilotProfile

@@ -1,5 +1,5 @@
 <#PSScriptInfo
-.VERSION 22.3.31.2
+.VERSION 22.4.1.1
 .GUID 68790315-3c3f-4a9a-b191-84928e5d6a83
 .AUTHOR David Segura @SeguraOSD
 .COMPANYNAME osdcloud.com
@@ -19,7 +19,7 @@
 .DESCRIPTION
     PSCloudScript
 .NOTES
-    Version 22.3.31.2
+    Version 22.4.1.1
 .LINK
     https://raw.githubusercontent.com/OSDeploy/OSD/master/cloudscript/re.ps1
 .EXAMPLE
@@ -32,7 +32,7 @@ param()
 
 if ($fromIsoUrl) {
     #region Initialize
-    $OSDCloudREVersion = '22.3.31.2'
+    $OSDCloudREVersion = '22.4.1.1'
     [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
     Write-Host -ForegroundColor DarkGray "OSDCloudRE $OSDCloudREVersion"
     #endregion

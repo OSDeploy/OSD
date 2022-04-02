@@ -1,5 +1,5 @@
 <#PSScriptInfo
-.VERSION 22.4.1.0
+.VERSION 22.4.1.1
 .GUID 302752c7-8567-45db-91ba-55c40fb9caee
 .AUTHOR David Segura @SeguraOSD
 .COMPANYNAME osdcloud.com
@@ -23,14 +23,14 @@ powershell iex (irm functions.osdcloud.com)
 .DESCRIPTION
     PSCloudScript at functions.osdcloud.com
 .NOTES
-    Version 22.4.1.0
+    Version 22.4.1.1
 .LINK
     https://raw.githubusercontent.com/OSDeploy/OSD/master/cloudscript/functions.ps1
 .EXAMPLE
     powershell iex (irm functions.osdcloud.com)
 #>
 #region Initialize
-Write-Host -ForegroundColor DarkGray "OSDCloud Functions 22.4.1.0"
+Write-Host -ForegroundColor DarkGray "OSDCloud Functions 22.4.1.1"
 [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
 #endregion
 
@@ -691,7 +691,7 @@ if ($env:UserName -eq 'defaultuser0') {
 #endregion
 
 #region WinPE Startup
-function Start-WinPE {
+function osdcloud-StartWinPE {
     [CmdletBinding()]
     param (
         [Parameter()]
@@ -727,7 +727,7 @@ function Start-WinPE {
 #endregion
 
 #region OOBE Startup
-function Start-OOBE {
+function osdcloud-StartOOBE {
     [CmdletBinding()]
     param (
         [Parameter()]
@@ -784,4 +784,5 @@ function Start-OOBE {
         }
     }
 }
+New-Alias -Name 'Start-OOBE' -Value 'osdcloud-StartOOBE'
 #endregion
