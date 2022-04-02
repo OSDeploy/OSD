@@ -30,7 +30,7 @@ param()
 #https://docs.microsoft.com/en-us/windows/security/information-protection/bitlocker/bcd-settings-and-bitlocker
 #http://www.mistyprojects.co.uk/documents/BCDEdit/files/examples1.htm
 
-if ($OSDCloudISOUrl) {
+if ($fromIsoUrl) {
     #region Initialize
     $OSDCloudREVersion = '22.3.31.2'
     [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
@@ -77,7 +77,6 @@ if ($OSDCloudISOUrl) {
     Start-Sleep -Seconds 10
     #endregion
 
-    $fromIsoUrl = $OSDCloudISOUrl
     $ResolveUrl = Invoke-WebRequest -Uri $fromIsoUrl -Method Head -MaximumRedirection 0 -UseBasicParsing -ErrorAction SilentlyContinue
     if ($ResolveUrl.StatusCode -eq 302) {
         $fromIsoUrl = $ResolveUrl.Headers.Location
@@ -191,19 +190,10 @@ if ($OSDCloudISOUrl) {
     Set-OSDCloudREBootmgr -SetRamdisk
     Write-Host -ForegroundColor DarkGray "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Set OSDCloudRE OSLoader: Set-OSDCloudREBootmgr -SetOSloader"
     Set-OSDCloudREBootmgr -SetOSloader
-    #============================================
-    #   Hide-OSDCloudREDrive
-    #============================================
-    Write-Host -ForegroundColor DarkGray "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Hiding OSDCloudRE volume: Hide-OSDCloudREDrive"
+    Write-Host -ForegroundColor DarkGray "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Hiding OSDCloudRE volume"
     Hide-OSDCloudREDrive
-    #============================================
-    #   Set-OSDCloudREBootmgr
-    #============================================
     Write-Host -ForegroundColor DarkGray "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Set OSDCloudRE to restart on next boot: Set-OSDCloudREBootmgr -BootToOSDCloudRE"
     Set-OSDCloudREBootmgr -BootToOSDCloudRE
-    #============================================
-    #   Complete
-    #============================================
     Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) OSDCloudRE setup is complete"
     #============================================
 }
