@@ -62,6 +62,6 @@ $MasterDriverPacks += Get-DellDriverPack
 $MasterDriverPacks += Get-HpDriverPack
 $MasterDriverPacks += Get-LenovoDriverPack
 $MasterDriverPacks += Get-MicrosoftDriverPack
-$MasterDriverPacks | Export-Clixml -Path (Join-Path (Get-Module OSD).ModuleBase "Catalogs\MasterDriverPack.xml") -Force
-Import-Clixml -Path (Join-Path (Get-Module OSD).ModuleBase "Catalogs\MasterDriverPack.xml") | ConvertTo-Json | Out-File (Join-Path (Get-Module OSD).ModuleBase "Catalogs\MasterDriverPack.json") -Force -Encoding ascii
-#=================================================
+$MasterDriverPacks | Export-Clixml -Path (Join-Path (Get-Module OSD).ModuleBase "OSDCloud\driverpack.xml") -Force
+Import-Clixml -Path (Join-Path (Get-Module OSD).ModuleBase "OSDCloud\driverpack.xml") | ConvertTo-Json | Out-File (Join-Path (Get-Module OSD).ModuleBase "OSDCloud\driverpack.json") -Force -Encoding ascii
+#================================================
