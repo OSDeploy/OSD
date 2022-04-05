@@ -17,7 +17,8 @@ function Get-OSDCatalogLenovoDriverPack {
     [CmdletBinding()]
     param (
         [System.Management.Automation.SwitchParameter]$Compatible,
-        [System.String]$DownloadPath
+        [System.String]$DownloadPath,
+        [System.Management.Automation.SwitchParameter]$Force
     )
     #=================================================
     #   Paths
@@ -53,6 +54,9 @@ function Get-OSDCatalogLenovoDriverPack {
     #=================================================
     #   Test Cloud Catalog
     #=================================================
+    if ($Force) {
+        $UseCatalog = 'Cloud'
+    }
     if ($UseCatalog -eq 'Cloud') {
         try {
             $CatalogCloudRaw = Invoke-RestMethod -Uri $CloudCatalogUri -UseBasicParsing
@@ -89,22 +93,62 @@ function Get-OSDCatalogLenovoDriverPack {
         #=================================================
         $Results = foreach ($Model in $ModelList) {
             foreach ($Item in $Model.SCCM) {
+                $DownloadUrl = $Item.'#text'
+
+                $ReleaseDate = $null
 
                 $ObjectProperties = [Ordered]@{
                     CatalogVersion 	= Get-Date -Format yy.MM.dd
                     Status          = $null
+                    ReleaseDate     = $ReleaseDate
                     Component       = 'DriverPack'
-                    Name			= $Model.name
+                    Manufacturer    = 'Lenovo'
+                    Model           = $Model.name
                     Product			= [array]$Model.Types.Type.split(',').Trim()
-                    FileName        = $Item.'#text' | Split-Path -Leaf
+                    Name			= $Model.name
+                    PackageID       = $null
+                    FileName        = $DownloadUrl | Split-Path -Leaf
+                    Url             = $DownloadUrl
                     OSVersion       = $Item.version
-                    Url             = $Item.'#text'
+                    HashMD5         = $null
                 }
                 New-Object -TypeName PSObject -Property $ObjectProperties
             }
         }
         $Results = $Results | Sort-Object Name, OSVersion -Descending | Group-Object Name | ForEach-Object {$_.Group | Select-Object -First 1}
-        $Results = $Results | Sort-Object Name, OSVersion -Descending | Select-Object CatalogVersion, Status, Component, Name, Product, Url, FileName
+        $Results = $Results | Sort-Object Name, OSVersion -Descending
+
+        foreach ($Item in $Results) {
+            if ($Item.FileName -match 'w11') {
+                $Item.OSVersion = 'Windows 11 x64'
+            }
+            else {
+                $Item.OSVersion = 'Windows 10 x64'
+            }
+        }
+
+        if ($Force) {
+            $Results = $Results | Sort-Object Url
+            $PreviousUrl = $null
+            foreach ($Item in $Results) {
+                $CurrentUrl = $Item.Url
+                if ($CurrentUrl -ne $PreviousUrl) {
+                    Write-Verbose "Testing Download File at $CurrentUrl"
+                    try {
+                        $DownloadHeaders = (Invoke-WebRequest -Method Head -Uri $CurrentUrl -UseBasicParsing).Headers
+                        $Item.ReleaseDate = Get-Date ($DownloadHeaders['Last-Modified']) -Format "yy.MM.dd"
+                    }
+                    catch {
+                        Write-Warning "Failed: $CurrentUrl"
+                        $Item.Status = 'Failed'
+                    }
+                }
+                else {
+                    $Item.ReleaseDate = Get-Date ($DownloadHeaders['Last-Modified']) -Format "yy.MM.dd"
+                }
+                $PreviousUrl = $CurrentUrl
+            }
+        }
 
         Write-Verbose "Exporting Build Catalog to $BuildCatalogFile"
         $Results = $Results | Sort-Object Name

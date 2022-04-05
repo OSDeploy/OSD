@@ -1,4 +1,4 @@
-function Get-LenovoDriverPack {
+function Get-HpDriverPack {
     [CmdletBinding()]
     param (
         [System.String]$DownloadPath
@@ -6,7 +6,26 @@ function Get-LenovoDriverPack {
     #=================================================
     #   Get Catalog
     #=================================================
-    $Results = Get-OSDCatalogLenovoDriverPack | Select-Object CatalogVersion, Status, ReleaseDate, Name, Product, @{Name='DriverPackUrl';Expression={($_.Url)}}, FileName
+    $Results = Get-OSDCatalogHPDriverPack | `
+    Select-Object CatalogVersion, `
+    Status, `
+    @{Name='ReleaseDate';Expression={($_.DateReleased)}}, `
+    @{Name='Manufacturer';Expression={('HP')}}, `
+    @{Name='Product';Expression={([array]$_.SystemId)}}, `
+    @{Name='Name';Expression={($_.Model)}}, `
+    FileName, `
+    @{Name='DriverPackUrl';Expression={($_.Url)}}, `
+    @{Name='DriverPackOS';Expression={($_.OSName)}}, `
+    @{Name='HashMD5';Expression={($_.MD5)}}
+
+    foreach ($Result in $Results) {
+        if ($Result.DriverPackOS -match 'Windows 11') {
+            $Result.DriverPackOS = 'Windows 11 x64'
+        }
+        elseif ($Result.DriverPackOS -match 'Windows 10') {
+            $Result.DriverPackOS = 'Windows 10 x64'
+        }
+    }
     #=================================================
     #   DownloadPath
     #=================================================

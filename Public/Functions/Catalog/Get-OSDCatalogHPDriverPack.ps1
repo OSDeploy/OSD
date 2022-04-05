@@ -137,7 +137,7 @@ function Get-OSDCatalogHPDriverPack {
                 ReleaseDate     = (Get-Date $HpSoftPaq.DateReleased -Format "yy.MM.dd")
                 Name            = $Name
                 Model           = $Item.SystemName
-                SystemId        = $Item.SystemId
+                SystemId        = [array]$Item.SystemId.split(',').Trim()
                 SoftPaqId       = $Item.SoftPaqId
                 OSId            = $Item.OSId
                 OSName          = $Item.OSName

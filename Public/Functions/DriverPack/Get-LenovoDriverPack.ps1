@@ -1,4 +1,4 @@
-function Get-HpDriverPack {
+function Get-LenovoDriverPack {
     [CmdletBinding()]
     param (
         [System.String]$DownloadPath
@@ -6,7 +6,17 @@ function Get-HpDriverPack {
     #=================================================
     #   Get Catalog
     #=================================================
-    $Results = Get-OSDCatalogHPDriverPack | Select-Object CatalogVersion, Status, @{Name='ReleaseDate';Expression={($_.DateReleased)}}, @{Name='Name';Expression={($_.Model)}}, @{Name='Product';Expression={($_.SystemId)}}, @{Name='DriverPackUrl';Expression={($_.Url)}}, FileName
+    $Results = Get-OSDCatalogLenovoDriverPack | `
+    Select-Object CatalogVersion, `
+    Status, `
+    ReleaseDate, `
+    Manufacturer, Model, `
+    @{Name='Product';Expression={([array]$_.Product)}}, `
+    Name, PackageID,`
+    FileName, `
+    @{Name='DriverPackUrl';Expression={($_.Url)}}, `
+    @{Name='DriverPackOS';Expression={($_.OSVersion)}}, `
+    HashMD5
     #=================================================
     #   DownloadPath
     #=================================================

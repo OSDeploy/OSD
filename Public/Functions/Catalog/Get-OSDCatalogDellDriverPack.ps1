@@ -16,8 +16,9 @@ https://osd.osdeploy.com
 function Get-OSDCatalogDellDriverPack {
     [CmdletBinding()]
     param (
+        [System.Management.Automation.SwitchParameter]$Compatible,
         [System.String]$DownloadPath,
-        [System.Management.Automation.SwitchParameter]$Compatible
+        [System.Management.Automation.SwitchParameter]$Force
     )
     #=================================================
     #   Paths
@@ -57,6 +58,9 @@ function Get-OSDCatalogDellDriverPack {
     #=================================================
     #   Test Cloud Catalog
     #=================================================
+    if ($Force) {
+        $UseCatalog = 'Cloud'
+    }
     if ($UseCatalog -eq 'Cloud') {
         if (Test-WebConnection -Uri $CloudCatalogUri) {
             $UseCatalog = 'Cloud'
@@ -166,6 +170,25 @@ function Get-OSDCatalogDellDriverPack {
                 HashMD5		        = $Item.HashMD5
             }
             New-Object -TypeName PSObject -Property $ObjectProperties
+        }
+
+        if ($Force) {
+            $Results = $Results | Sort-Object Url
+            $PreviousUrl = $null
+            foreach ($Item in $Results) {
+                $CurrentUrl = $Item.Url
+                if ($CurrentUrl -ne $PreviousUrl) {
+                    Write-Verbose "Testing Download File at $CurrentUrl"
+                    try {
+                        $DownloadHeaders = (Invoke-WebRequest -Method Head -Uri $CurrentUrl -UseBasicParsing).Headers
+                    }
+                    catch {
+                        Write-Warning "Failed: $CurrentUrl"
+                        $Item.Status = 'Failed'
+                    }
+                }
+                $PreviousUrl = $CurrentUrl
+            }
         }
 
         Write-Verbose "Exporting Build Catalog to $BuildCatalogFile"
