@@ -7,12 +7,10 @@ function Get-HpDriverPack {
     #   Get Catalog
     #=================================================
     $Results = Get-OSDCatalogHPDriverPack | `
-    Select-Object CatalogVersion, `
-    Status, `
-    @{Name='ReleaseDate';Expression={($_.DateReleased)}}, `
-    @{Name='Manufacturer';Expression={('HP')}}, `
+    Select-Object CatalogVersion, Status, ReleaseDate, Manufacturer, Model, `
     @{Name='Product';Expression={([array]$_.SystemId)}}, `
     @{Name='Name';Expression={($_.Model)}}, `
+    @{Name='PackageID';Expression={($_.SoftPaqId)}}, `
     FileName, `
     @{Name='DriverPackUrl';Expression={($_.Url)}}, `
     @{Name='DriverPackOS';Expression={($_.OSName)}}, `
@@ -26,6 +24,8 @@ function Get-HpDriverPack {
             $Result.DriverPackOS = 'Windows 10 x64'
         }
     }
+
+    $Results = $Results | Sort-Object -Property Model
     #=================================================
     #   DownloadPath
     #=================================================

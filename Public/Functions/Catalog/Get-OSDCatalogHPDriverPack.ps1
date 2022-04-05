@@ -16,8 +16,9 @@ https://osd.osdeploy.com
 function Get-OSDCatalogHPDriverPack {
     [CmdletBinding()]
     param (
+        [System.Management.Automation.SwitchParameter]$Compatible,
         [System.String]$DownloadPath,
-        [System.Management.Automation.SwitchParameter]$Compatible
+        [System.Management.Automation.SwitchParameter]$Force
     )
     #=================================================
     #   Paths
@@ -56,6 +57,9 @@ function Get-OSDCatalogHPDriverPack {
     #=================================================
     #   Test Cloud Catalog
     #=================================================
+    if ($Force) {
+        $UseCatalog = 'Cloud'
+    }
     if ($UseCatalog -eq 'Cloud') {
         if (Test-WebConnection -Uri $CloudCatalogUri) {
             $UseCatalog = 'Cloud'
@@ -135,6 +139,7 @@ function Get-OSDCatalogHPDriverPack {
                 Status          = $null
                 Component       = 'DriverPack'
                 ReleaseDate     = (Get-Date $HpSoftPaq.DateReleased -Format "yy.MM.dd")
+                Manufacturer    = 'HP'
                 Name            = $Name
                 Model           = $Item.SystemName
                 SystemId        = [array]$Item.SystemId.split(',').Trim()
@@ -156,6 +161,10 @@ function Get-OSDCatalogHPDriverPack {
                 CvaTitle        = $HpSoftPaq.CvaTitle
             }
             New-Object -TypeName PSObject -Property $ObjectProperties
+        }
+
+        foreach ($Item in $Results) {
+            $Item.Model = $Item.Model -replace 'HP ', ''
         }
 
         $Results = $Results | Sort-Object Model

@@ -7,16 +7,23 @@ function Get-LenovoDriverPack {
     #   Get Catalog
     #=================================================
     $Results = Get-OSDCatalogLenovoDriverPack | `
-    Select-Object CatalogVersion, `
-    Status, `
-    ReleaseDate, `
-    Manufacturer, Model, `
+    Select-Object CatalogVersion, Status, ReleaseDate, Manufacturer, Model, `
     @{Name='Product';Expression={([array]$_.Product)}}, `
-    Name, PackageID,`
-    FileName, `
+    Name, PackageID, FileName, `
     @{Name='DriverPackUrl';Expression={($_.Url)}}, `
     @{Name='DriverPackOS';Expression={($_.OSVersion)}}, `
     HashMD5
+
+    foreach ($Result in $Results) {
+        if ($Result.FileName -match 'w11') {
+            $Result.DriverPackOS = 'Windows 11 x64'
+        }
+        else {
+            $Result.DriverPackOS = 'Windows 10 x64'
+        }
+    }
+
+    $Results = $Results | Sort-Object -Property Model
     #=================================================
     #   DownloadPath
     #=================================================

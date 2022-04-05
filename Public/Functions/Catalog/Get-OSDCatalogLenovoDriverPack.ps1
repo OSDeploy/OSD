@@ -100,8 +100,8 @@ function Get-OSDCatalogLenovoDriverPack {
                 $ObjectProperties = [Ordered]@{
                     CatalogVersion 	= Get-Date -Format yy.MM.dd
                     Status          = $null
-                    ReleaseDate     = $ReleaseDate
                     Component       = 'DriverPack'
+                    ReleaseDate     = $ReleaseDate
                     Manufacturer    = 'Lenovo'
                     Model           = $Model.name
                     Product			= [array]$Model.Types.Type.split(',').Trim()
@@ -117,15 +117,6 @@ function Get-OSDCatalogLenovoDriverPack {
         }
         $Results = $Results | Sort-Object Name, OSVersion -Descending | Group-Object Name | ForEach-Object {$_.Group | Select-Object -First 1}
         $Results = $Results | Sort-Object Name, OSVersion -Descending
-
-        foreach ($Item in $Results) {
-            if ($Item.FileName -match 'w11') {
-                $Item.OSVersion = 'Windows 11 x64'
-            }
-            else {
-                $Item.OSVersion = 'Windows 10 x64'
-            }
-        }
 
         if ($Force) {
             $Results = $Results | Sort-Object Url
