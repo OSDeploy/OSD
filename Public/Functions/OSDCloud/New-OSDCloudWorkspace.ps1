@@ -12,27 +12,35 @@ function New-OSDCloudWorkspace {
     
     [CmdletBinding(DefaultParameterSetName='fromTemplate')]
     param (
-        #Directory for the OSDCloud Workspace to create or update.  Default is $env:SystemDrive\OSDCloud
         [Parameter(ParameterSetName='fromTemplate',Position=0,ValueFromPipelineByPropertyName)]
         [Parameter(ParameterSetName='fromIsoFile',Position=0,ValueFromPipelineByPropertyName)]
         [Parameter(ParameterSetName='fromIsoUrl',Position=0,ValueFromPipelineByPropertyName)]
         [Parameter(ParameterSetName='fromUsbDrive',Position=0,ValueFromPipelineByPropertyName)]
-        [System.String]$WorkspacePath = "$env:SystemDrive\OSDCloud",
+        [System.String]
+        #Directory for the OSDCloud Workspace to create or update.  Default is $env:SystemDrive\OSDCloud
+        $WorkspacePath = "$env:SystemDrive\OSDCloud",
         
+        [Parameter(ParameterSetName='fromIsoFile',Mandatory)]
+        [System.IO.FileInfo]
         #Path to an OSDCloud ISO
         #This file will be mounted and the contents will be copied to the OSDCloud Workspace
-        [Parameter(ParameterSetName='fromIsoFile',Mandatory)]
-        [System.IO.FileInfo]$fromIsoFile,
+        $fromIsoFile,
         
+        [Parameter(ParameterSetName='fromIsoUrl',Mandatory)]
+        [System.String]
         #Path to an OSDCloud ISO saved on the internet
         #This file will be downloaded and mounted and the contents will be copied to the OSDCloud Workspace
-        [Parameter(ParameterSetName='fromIsoUrl',Mandatory)]
-        [System.String]$fromIsoUrl,
+        $fromIsoUrl,
         
+        [Parameter(ParameterSetName='fromUsbDrive',Mandatory)]
+        [System.Management.Automation.SwitchParameter]
         #Searches for an OSDCloud USB
         #The OSDCloud USB contents will be copied to the OSDCloud Workspace
-        [Parameter(ParameterSetName='fromUsbDrive',Mandatory)]
-        [System.Management.Automation.SwitchParameter]$fromUsbDrive
+        $fromUsbDrive,
+
+        [System.Management.Automation.SwitchParameter]
+        #Prevents the copying of Private Config files
+        $Public
     )
     #=================================================
     #	Blocks
@@ -248,10 +256,11 @@ function New-OSDCloudWorkspace {
     
         if ($OSDCloudVolumes) {
             foreach ($OSDCloudVolume in $OSDCloudVolumes) {
-                
-                if (Test-Path "$($OSDCloudVolume.DriveLetter):\OSDCloud\Config") {
-                    Write-Host -ForegroundColor DarkGray "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Copying $($OSDCloudVolume.DriveLetter):\OSDCloud\Config to OSDCloud Workspace $WorkspacePath\Config"
-                    robocopy "$($OSDCloudVolume.DriveLetter):\OSDCloud\Config" "$WorkspacePath\Config" *.* /e /mt /ndl /njh /njs /r:0 /w:0 /xd "$RECYCLE.BIN" "System Volume Information"
+                if (! $Public) {
+                    if (Test-Path "$($OSDCloudVolume.DriveLetter):\OSDCloud\Config") {
+                        Write-Host -ForegroundColor DarkGray "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Copying $($OSDCloudVolume.DriveLetter):\OSDCloud\Config to OSDCloud Workspace $WorkspacePath\Config"
+                        robocopy "$($OSDCloudVolume.DriveLetter):\OSDCloud\Config" "$WorkspacePath\Config" *.* /e /mt /ndl /njh /njs /r:0 /w:0 /xd "$RECYCLE.BIN" "System Volume Information"
+                    }
                 }
     
                 if (Test-Path "$($OSDCloudVolume.DriveLetter):\OSDCloud\DriverPacks") {

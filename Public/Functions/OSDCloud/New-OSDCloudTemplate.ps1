@@ -45,7 +45,7 @@ function New-OSDCloudTemplate {
 
         [System.Management.Automation.SwitchParameter]
         #Skips the integration of Microsoft DaRT
-        $SkipDaRT,
+        $Public,
 
         [System.Management.Automation.SwitchParameter]
         #Uses Windows 10 WinRE.wim instead of the ADK Boot.wim
@@ -641,8 +641,8 @@ Windows Registry Editor Version 5.00
     Write-Host -ForegroundColor DarkGray "========================================================================="
     Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Microsoft DaRT"
     $SourceFile = "$env:ProgramFiles\Microsoft DaRT\v10\Toolsx64.cab"
-    if ($SkipDaRT) {
-        Write-Host -ForegroundColor DarkGray 'Skipping Microsoft DaRT due to -SkipDaRT switch'
+    if ($Public) {
+        Write-Host -ForegroundColor DarkGray 'Skipping Microsoft DaRT due to -Public switch'
     }
     elseif (Test-Path $SourceFile) {
         Write-Host -ForegroundColor DarkGray $SourceFile

@@ -211,8 +211,8 @@ start /wait PowerShell -Nol -W Mi -C Start-Sleep -Seconds 10
     Add-Content -Path "$MountPath\Windows\System32\Startnet.cmd" -Value 'start /wait PowerShell -Nol -W Mi -C Start-Sleep -Seconds 10' -Force
     Add-Content -Path "$MountPath\Windows\System32\Startnet.cmd" -Value 'ECHO Updating OSD PowerShell Module (Minimized)' -Force
     Add-Content -Path "$MountPath\Windows\System32\Startnet.cmd" -Value 'start /wait PowerShell -NoL -W Mi -C "& {if (Test-WebConnection) {Install-Module OSD -Force -Verbose}}"'
-    #Add-Content -Path "$MountPath\Windows\System32\Startnet.cmd" -Value 'ECHO Installing Azure Modules for Accounts, KeyVault, and Storage (Minimized)' -Force
-    #Add-Content -Path "$MountPath\Windows\System32\Startnet.cmd" -Value 'start /wait PowerShell -NoL -W Mi -C "& {if (Test-WebConnection) {Install-Module Az.KeyVault,Az.Storage -Force -Verbose}}"'
+    Add-Content -Path "$MountPath\Windows\System32\Startnet.cmd" -Value 'ECHO Installing Azure Modules for Accounts, KeyVault, and Storage (Minimized)' -Force
+    Add-Content -Path "$MountPath\Windows\System32\Startnet.cmd" -Value 'start /wait PowerShell -NoL -W Mi -C "& {if (Test-WebConnection) {Install-Module Az.KeyVault,Az.Storage -Force -Verbose}}"'
     Add-Content -Path "$MountPath\Windows\System32\Startnet.cmd" -Value 'ECHO Initialize PowerShell (Minimized)' -Force
     Add-Content -Path "$MountPath\Windows\System32\Startnet.cmd" -Value 'start PowerShell -Nol -W Mi' -Force
     Add-Content -Path "$MountPath\Windows\System32\Startnet.cmd" -Value '@ECHO ON' -Force
