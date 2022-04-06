@@ -13,7 +13,7 @@ Returns the Dell DriverPacks downloads
 ## SYNTAX
 
 ```
-Get-OSDCatalogDellDriverPack [[-DownloadPath] <String>] [-Compatible] [<CommonParameters>]
+Get-OSDCatalogDellDriverPack [-Compatible] [[-DownloadPath] <String>] [-Force] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -30,6 +30,21 @@ PS C:\> {{ Add example code here }}
 
 ## PARAMETERS
 
+### -Compatible
+Filters results based on your current Product
+
+```yaml
+Type: SwitchParameter
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: False
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
 ### -DownloadPath
 {{ Fill DownloadPath Description }}
 
@@ -45,8 +60,8 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -Compatible
-Filters results based on your current Product
+### -Force
+{{ Fill Force Description }}
 
 ```yaml
 Type: SwitchParameter

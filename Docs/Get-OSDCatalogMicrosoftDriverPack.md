@@ -13,8 +13,7 @@ Returns the Microsoft Surface DriverPacks
 ## SYNTAX
 
 ```
-Get-OSDCatalogMicrosoftDriverPack [-Compatible] [[-DownloadPath] <String>] [[-UseCatalog] <String>]
- [<CommonParameters>]
+Get-OSDCatalogMicrosoftDriverPack [-Compatible] [[-DownloadPath] <String>] [-Force] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -61,17 +60,17 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -UseCatalog
-{{ Fill UseCatalog Description }}
+### -Force
+{{ Fill Force Description }}
 
 ```yaml
-Type: String
+Type: SwitchParameter
 Parameter Sets: (All)
 Aliases:
 
 Required: False
-Position: 2
-Default value: Offline
+Position: Named
+Default value: False
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
