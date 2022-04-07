@@ -321,7 +321,7 @@ function Invoke-OSDCloud {
     if ($Global:OSDCloud.RecoveryPartition -eq $false) {
         Write-Verbose -Message "New-OSDisk -NoRecoveryPartition -Force"
         if ($Global:OSDCloud.Test -eq $false) {
-            New-OSDisk -NoRecoveryPartition -Force -ErrorAction Stop
+            New-OSDisk -PartitionStyle GPT -NoRecoveryPartition -Force -ErrorAction Stop
         }
         Write-Host "=========================================================================" -ForegroundColor Cyan
         Write-Host "| SYSTEM | MSR |                    WINDOWS                             |" -ForegroundColor Cyan
@@ -330,7 +330,7 @@ function Invoke-OSDCloud {
     else {
         Write-Verbose -Message "New-OSDisk -Force"
         if ($Global:OSDCloud.Test -eq $false) {
-            New-OSDisk -Force -ErrorAction Stop
+            New-OSDisk -PartitionStyle GPT -Force -ErrorAction Stop
         }
         Write-Host "=========================================================================" -ForegroundColor Cyan
         Write-Host "| SYSTEM | MSR |                    WINDOWS                  | RECOVERY |" -ForegroundColor Cyan
