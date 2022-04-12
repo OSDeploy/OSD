@@ -14,22 +14,22 @@ Creates or updates an OSDCloud Workspace
 
 ### fromTemplate (Default)
 ```
-New-OSDCloudWorkspace [[-WorkspacePath] <String>] [<CommonParameters>]
+New-OSDCloudWorkspace [[-WorkspacePath] <String>] [-Public] [<CommonParameters>]
 ```
 
 ### fromUsbDrive
 ```
-New-OSDCloudWorkspace [[-WorkspacePath] <String>] [-fromUsbDrive] [<CommonParameters>]
+New-OSDCloudWorkspace [[-WorkspacePath] <String>] [-fromUsbDrive] [-Public] [<CommonParameters>]
 ```
 
 ### fromIsoUrl
 ```
-New-OSDCloudWorkspace [[-WorkspacePath] <String>] -fromIsoUrl <String> [<CommonParameters>]
+New-OSDCloudWorkspace [[-WorkspacePath] <String>] -fromIsoUrl <String> [-Public] [<CommonParameters>]
 ```
 
 ### fromIsoFile
 ```
-New-OSDCloudWorkspace [[-WorkspacePath] <String>] -fromIsoFile <FileInfo> [<CommonParameters>]
+New-OSDCloudWorkspace [[-WorkspacePath] <String>] -fromIsoFile <FileInfo> [-Public] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -104,6 +104,21 @@ Parameter Sets: fromUsbDrive
 Aliases:
 
 Required: True
+Position: Named
+Default value: False
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -Public
+Prevents the copying of Private Config files
+
+```yaml
+Type: SwitchParameter
+Parameter Sets: (All)
+Aliases:
+
+Required: False
 Position: Named
 Default value: False
 Accept pipeline input: False

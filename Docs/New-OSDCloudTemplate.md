@@ -14,7 +14,7 @@ Creates an OSDCloud Template in $env:ProgramData\OSDCloud
 
 ```
 New-OSDCloudTemplate [[-Name] <String>] [[-Language] <String[]>] [[-SetAllIntl] <String>]
- [[-SetInputLocale] <String>] [-SkipDaRT] [-WinRE] [<CommonParameters>]
+ [[-SetInputLocale] <String>] [-WinRE] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -91,21 +91,6 @@ Aliases:
 Required: False
 Position: 4
 Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -SkipDaRT
-Skips the integration of Microsoft DaRT
-
-```yaml
-Type: SwitchParameter
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: Named
-Default value: False
 Accept pipeline input: False
 Accept wildcard characters: False
 ```

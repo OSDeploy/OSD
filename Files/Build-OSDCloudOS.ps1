@@ -80,6 +80,6 @@ foreach ($Result in $Results) {
     #=================================================
 }
 $Results = $Results | Sort-Object -Property Name
-$Results | Export-Clixml -Path (Join-Path (Get-Module OSD).ModuleBase "OSDCloud\os.xml") -Force
-Import-Clixml -Path (Join-Path (Get-Module OSD).ModuleBase "OSDCloud\os.xml") | ConvertTo-Json | Out-File (Join-Path (Get-Module OSD).ModuleBase "OSDCloud\os.json") -Force -Encoding ascii
+$Results | Export-Clixml -Path (Join-Path (Get-Module OSD).ModuleBase "Catalogs\os.xml") -Force
+Import-Clixml -Path (Join-Path (Get-Module OSD).ModuleBase "Catalogs\os.xml") | ConvertTo-Json | Out-File (Join-Path (Get-Module OSD).ModuleBase "Catalogs\os.json") -Force -Encoding ascii
 #================================================

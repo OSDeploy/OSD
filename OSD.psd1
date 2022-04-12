@@ -4,7 +4,7 @@
 
 @{
     RootModule              = 'OSD.psm1'
-    ModuleVersion           = '22.4.5.2'
+    ModuleVersion           = '22.4.12.1'
     CompatiblePSEditions    = @('Desktop')
     GUID                    = '9fe5b9b6-0224-4d87-9018-a8978529f6f5'
     Author                  = 'David Segura @SeguraOSD'
@@ -255,7 +255,9 @@
         'Wait-WebConnection',
         'Import-MDTWinPECloudDriver',
         'Set-OSDCloudTemplate',
-        'Get-OSDCloudTemplateNames'
+        'Get-OSDCloudTemplateNames',
+        'Get-OSDCloudOSList',
+        'Get-OSDCloudDriverPackList'
     )
     CmdletsToExport = @()
     VariablesToExport = @()

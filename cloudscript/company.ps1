@@ -1,5 +1,5 @@
 <#PSScriptInfo
-.VERSION 22.4.8.1
+.VERSION 22.4.12.1
 .GUID e9ff19c4-655f-40c9-b0d9-6aa4542b3342
 .AUTHOR David Segura @SeguraOSD
 .COMPANYNAME osdcloud.com
@@ -23,7 +23,7 @@ powershell iex(irm go.osdcloud.com/companydemo)
 .DESCRIPTION
     PSCloudScript at go.osdcloud.com/companydemo
 .NOTES
-    Version 22.4.8.1
+    Version 22.4.12.1
 .LINK
     https://raw.githubusercontent.com/OSDeploy/OSD/master/cloudscript/company.ps1
 .EXAMPLE
@@ -33,7 +33,7 @@ powershell iex(irm go.osdcloud.com/companydemo)
 param()
 
 #region Initialize
-Write-Host -ForegroundColor DarkGray "go.osdcloud.com/companydemo 22.4.8.1"
+Write-Host -ForegroundColor DarkGray "go.osdcloud.com/companydemo 22.4.12.1"
 Invoke-Expression -Command (Invoke-RestMethod -Uri functions.osdcloud.com)
 $Transcript = "$((Get-Date).ToString('yyyy-MM-dd-HHmmss'))-OSDCloud.log"
 $null = Start-Transcript -Path (Join-Path "$env:SystemRoot\Temp" $Transcript) -ErrorAction Ignore
