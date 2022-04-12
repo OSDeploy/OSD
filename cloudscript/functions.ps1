@@ -1,5 +1,5 @@
 <#PSScriptInfo
-.VERSION 22.4.1.1
+.VERSION 22.4.8.1
 .GUID 302752c7-8567-45db-91ba-55c40fb9caee
 .AUTHOR David Segura @SeguraOSD
 .COMPANYNAME osdcloud.com
@@ -23,14 +23,14 @@ powershell iex (irm functions.osdcloud.com)
 .DESCRIPTION
     PSCloudScript at functions.osdcloud.com
 .NOTES
-    Version 22.4.1.1
+    Version 22.4.8.1
 .LINK
     https://raw.githubusercontent.com/OSDeploy/OSD/master/cloudscript/functions.ps1
 .EXAMPLE
     powershell iex (irm functions.osdcloud.com)
 #>
 #region Initialize
-Write-Host -ForegroundColor DarkGray "OSDCloud Functions 22.4.1.1"
+Write-Host -ForegroundColor DarkGray "OSDCloud Functions 22.4.8.1"
 [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
 #endregion
 
@@ -493,7 +493,7 @@ function osdcloud-TestAutopilotProfile {
 
 #region OOBE Optional Functions
 if ($env:UserName -eq 'defaultuser0') {
-    function AddCapability {
+    function osdcloud-AddCapability {
         [CmdletBinding(DefaultParameterSetName='Default')]
         param (
             [Parameter(Mandatory,ParameterSetName='ByName',Position=0)]
@@ -520,6 +520,7 @@ if ($env:UserName -eq 'defaultuser0') {
             }
         }
     }
+    New-Alias -Name 'AddCapability' -Value 'osdcloud-AddCapability' -Description 'OSDCloud' -Force
     function NetFX {
         [CmdletBinding()]
         param ()
@@ -534,7 +535,8 @@ if ($env:UserName -eq 'defaultuser0') {
             }
         }
     }
-    function Rsat {
+    New-Alias -Name 'NetFX' -Value 'osdcloud-NetFX' -Description 'OSDCloud' -Force
+    function osdcloud-Rsat {
         [CmdletBinding(DefaultParameterSetName='Default')]
         param (
             [Parameter(Mandatory,ParameterSetName='Basic')]
@@ -577,7 +579,8 @@ if ($env:UserName -eq 'defaultuser0') {
             }
         }
     }
-    function RemoveAppx {
+    New-Alias -Name 'Rsat' -Value 'osdcloud-Rsat' -Description 'OSDCloud' -Force
+    function osdcloud-RemoveAppx {
         [CmdletBinding(DefaultParameterSetName='Default')]
         param (
             [Parameter(Mandatory,ParameterSetName='Basic')]
@@ -631,7 +634,8 @@ if ($env:UserName -eq 'defaultuser0') {
             }
         }
     }
-    function UpdateDrivers {
+    New-Alias -Name 'RemoveAppx' -Value 'osdcloud-RemoveAppx' -Description 'OSDCloud' -Force
+    function osdcloud-UpdateDrivers {
         [CmdletBinding()]
         param ()
         if ($env:UserName -eq 'defaultuser0') {
@@ -650,7 +654,8 @@ if ($env:UserName -eq 'defaultuser0') {
             }
         }
     }
-    function UpdateWindows {
+    New-Alias -Name 'UpdateDrivers' -Value 'osdcloud-UpdateDrivers' -Description 'OSDCloud' -Force
+    function osdcloud-UpdateWindows {
         [CmdletBinding()]
         param ()
         if ($env:UserName -eq 'defaultuser0') {
@@ -677,6 +682,7 @@ if ($env:UserName -eq 'defaultuser0') {
             Write-Warning 'Function is not supported in this Windows Phase'
         }
     }
+    New-Alias -Name 'UpdateWindows' -Value 'osdcloud-UpdateWindows' -Description 'OSDCloud' -Force
     function osdcloud-UpdateDefender {
         [CmdletBinding()]
         param ()

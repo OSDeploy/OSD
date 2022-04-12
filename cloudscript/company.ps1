@@ -1,5 +1,5 @@
 <#PSScriptInfo
-.VERSION 22.4.1.1
+.VERSION 22.4.8.1
 .GUID e9ff19c4-655f-40c9-b0d9-6aa4542b3342
 .AUTHOR David Segura @SeguraOSD
 .COMPANYNAME osdcloud.com
@@ -23,7 +23,7 @@ powershell iex(irm go.osdcloud.com/companydemo)
 .DESCRIPTION
     PSCloudScript at go.osdcloud.com/companydemo
 .NOTES
-    Version 22.4.1.1
+    Version 22.4.8.1
 .LINK
     https://raw.githubusercontent.com/OSDeploy/OSD/master/cloudscript/company.ps1
 .EXAMPLE
@@ -33,7 +33,7 @@ powershell iex(irm go.osdcloud.com/companydemo)
 param()
 
 #region Initialize
-Write-Host -ForegroundColor DarkGray "go.osdcloud.com/companydemo 22.4.1.1"
+Write-Host -ForegroundColor DarkGray "go.osdcloud.com/companydemo 22.4.8.1"
 Invoke-Expression -Command (Invoke-RestMethod -Uri functions.osdcloud.com)
 $Transcript = "$((Get-Date).ToString('yyyy-MM-dd-HHmmss'))-OSDCloud.log"
 $null = Start-Transcript -Path (Join-Path "$env:SystemRoot\Temp" $Transcript) -ErrorAction Ignore
@@ -65,11 +65,11 @@ if ($env:UserName -eq 'defaultuser0') {
     else {
         Write-Warning 'Unable to determine if device is Autopilot registered'
     }
-    RemoveAppx -Basic
-    Rsat -Basic
-    NetFX
-    UpdateDrivers
-    UpdateWindows
+    osdcloud-RemoveAppx -Basic
+    osdcloud-Rsat -Basic
+    osdcloud-NetFX
+    osdcloud-UpdateDrivers
+    osdcloud-UpdateWindows
     osdcloud-UpdateDefender
     if ($AutopilotRegisterProcess) {
         Write-Host -ForegroundColor Cyan 'Waiting for Autopilot Registration to complete'

@@ -67,17 +67,26 @@ function Get-OSDGather {
     #=================================================
     #   IsUEFI
     #=================================================
-    if ($IsWinPE) {
+    if ($env:firmware_type -eq 'UEFI') {
+        $IsUEFI = $true
+    }
+    if ($env:firmware_type -eq 'Legacy') {
+        $IsUEFI = $false
+    }
+    elseif ($IsWinPE) {
         Start-Process -WindowStyle Hidden -FilePath wpeutil.exe -ArgumentList ('updatebootinfo') -Wait
         $IsUEFI = (Get-ItemProperty -Path HKLM:\System\CurrentControlSet\Control).PEFirmwareType -eq 2
-    } else {
+    }
+    else {
         if ($null -eq (Get-ItemProperty HKLM:\System\CurrentControlSet\Control\SecureBoot\State -ErrorAction SilentlyContinue)) {
             $IsUEFI = $false
         } else {
             $IsUEFI = $true
         }
     }
-    if ($Property -eq 'IsUEFI') {Return $IsUEFI}
+    if ($Property -eq 'IsUEFI') {
+        Return $IsUEFI
+    }
     #=================================================
     #   IsUEFI
     #   Credit FriendsOfMDT         https://github.com/FriendsOfMDT/PSD

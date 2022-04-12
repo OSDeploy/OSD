@@ -44,10 +44,6 @@ function New-OSDCloudTemplate {
         $SetInputLocale,
 
         [System.Management.Automation.SwitchParameter]
-        #Skips the integration of Microsoft DaRT
-        $Public,
-
-        [System.Management.Automation.SwitchParameter]
         #Uses Windows 10 WinRE.wim instead of the ADK Boot.wim
         $WinRE
     )
@@ -641,8 +637,8 @@ Windows Registry Editor Version 5.00
     Write-Host -ForegroundColor DarkGray "========================================================================="
     Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Microsoft DaRT"
     $SourceFile = "$env:ProgramFiles\Microsoft DaRT\v10\Toolsx64.cab"
-    if ($Public) {
-        Write-Host -ForegroundColor DarkGray 'Skipping Microsoft DaRT due to -Public switch'
+    if ($Name -match 'public') {
+        Write-Host -ForegroundColor DarkGray 'Skipping Microsoft DaRT for Public Template'
     }
     elseif (Test-Path $SourceFile) {
         Write-Host -ForegroundColor DarkGray $SourceFile
@@ -742,12 +738,17 @@ Windows Registry Editor Version 5.00
         'Config\AutopilotOOBE',
         'Config\OOBEDeploy'
     )
-
-    foreach ($Item in $CreateDirectories) {
-        $SourcePath = "$OSDCloudTemplate\$Item"
-        if (-NOT (Test-Path $SourcePath)) {
-            Write-Host -ForegroundColor DarkGray $SourcePath
-            New-Item -Path $SourcePath -ItemType Directory -Force | Out-Null
+    
+    if ($Name -match 'public') {
+        Write-Host -ForegroundColor DarkGray 'Skipping Config Directories for Public Template'
+    }
+    else {
+        foreach ($Item in $CreateDirectories) {
+            $SourcePath = "$OSDCloudTemplate\$Item"
+            if (-NOT (Test-Path $SourcePath)) {
+                Write-Host -ForegroundColor DarkGray $SourcePath
+                New-Item -Path $SourcePath -ItemType Directory -Force | Out-Null
+            }
         }
     }
     #=================================================
