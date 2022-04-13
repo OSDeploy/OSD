@@ -257,7 +257,9 @@
         'Set-OSDCloudTemplate',
         'Get-OSDCloudTemplateNames',
         'Get-OSDCloudOSList',
-        'Get-OSDCloudDriverPackList'
+        'Get-OSDCloudDriverPackList',
+        'Get-OSDCloudDriverPack',
+        'Save-OSDCloudDriverPack'
     )
     CmdletsToExport = @()
     VariablesToExport = @()

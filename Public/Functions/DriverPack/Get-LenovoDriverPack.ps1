@@ -11,7 +11,7 @@ function Get-LenovoDriverPack {
     @{Name='Product';Expression={([array]$_.Product)}}, `
     Name, PackageID, FileName, `
     @{Name='DriverPackUrl';Expression={($_.Url)}}, `
-    @{Name='DriverPackOS';Expression={($_.OSVersion)}}, `
+    @{Name='DriverPackOS';Expression={($null)}}, `
     HashMD5
 
     foreach ($Result in $Results) {

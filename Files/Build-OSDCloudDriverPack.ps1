@@ -17,7 +17,6 @@ Stop-Transcript
 #=================================================
 Import-Module -Name OSD -Force
 Start-Transcript -Path (Join-Path (Get-Module OSD).ModuleBase "Catalogs\OSDCatalog\OSDCatalogLenovoDriverPack.log")
-Import-Module -Name OSD -Force
 $null = Get-OSDCatalogLenovoDriverPack -Force -Verbose
 $Source = Join-Path $env:TEMP (Join-Path 'OSD' 'OSDCatalogLenovoDriverPack.xml')
 $Destination = Join-Path (Get-Module OSD).ModuleBase "Catalogs\OSDCatalog\OSDCatalogLenovoDriverPack.xml"
@@ -62,6 +61,15 @@ $MasterDriverPacks += Get-DellDriverPack
 $MasterDriverPacks += Get-HpDriverPack
 $MasterDriverPacks += Get-LenovoDriverPack
 $MasterDriverPacks += Get-MicrosoftDriverPack
-$MasterDriverPacks | Export-Clixml -Path (Join-Path (Get-Module OSD).ModuleBase "Catalogs\driverpack.xml") -Force
+
+$Results = $MasterDriverPacks | `
+Select-Object CatalogVersion, Status, ReleaseDate, Manufacturer, Model, `
+Product, Name, PackageID, FileName, `
+@{Name='Url';Expression={([array]$_.DriverPackUrl)}}, `
+@{Name='OS';Expression={([array]$_.DriverPackOS)}}, `
+HashMD5, `
+@{Name='Guid';Expression={([guid]((New-Guid).ToString()))}}
+
+$Results | Export-Clixml -Path (Join-Path (Get-Module OSD).ModuleBase "Catalogs\driverpack.xml") -Force
 Import-Clixml -Path (Join-Path (Get-Module OSD).ModuleBase "Catalogs\driverpack.xml") | ConvertTo-Json | Out-File (Join-Path (Get-Module OSD).ModuleBase "Catalogs\driverpack.json") -Force -Encoding ascii
 #================================================

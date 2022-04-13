@@ -18,7 +18,8 @@ function Get-OSDCatalogDellDriverPack {
     param (
         [System.Management.Automation.SwitchParameter]$Compatible,
         [System.String]$DownloadPath,
-        [System.Management.Automation.SwitchParameter]$Force
+        [System.Management.Automation.SwitchParameter]$Force,
+        [System.Management.Automation.SwitchParameter]$TestUrl
     )
     #=================================================
     #   Paths
@@ -173,7 +174,10 @@ function Get-OSDCatalogDellDriverPack {
             New-Object -TypeName PSObject -Property $ObjectProperties
         }
 
-        if ($Force) {
+        #Need to remove duplicates
+        $Results = $Results | Sort-Object ReleaseDate -Descending | Group-Object Name | ForEach-Object {$_.Group | Select-Object -First 1}
+
+        if ($TestUrl) {
             $Results = $Results | Sort-Object Url
             $PreviousUrl = $null
             foreach ($Item in $Results) {

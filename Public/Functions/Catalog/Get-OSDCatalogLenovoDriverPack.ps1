@@ -18,7 +18,8 @@ function Get-OSDCatalogLenovoDriverPack {
     param (
         [System.Management.Automation.SwitchParameter]$Compatible,
         [System.String]$DownloadPath,
-        [System.Management.Automation.SwitchParameter]$Force
+        [System.Management.Automation.SwitchParameter]$Force,
+        [System.Management.Automation.SwitchParameter]$TestUrl
     )
     #=================================================
     #   Paths
@@ -118,7 +119,16 @@ function Get-OSDCatalogLenovoDriverPack {
         $Results = $Results | Sort-Object Name, OSVersion -Descending | Group-Object Name | ForEach-Object {$_.Group | Select-Object -First 1}
         $Results = $Results | Sort-Object Name, OSVersion -Descending
 
-        if ($Force) {
+        foreach ($Result in $Results) {
+            if ($Result.FileName -match 'w11') {
+                $Result.Name = $Result.Name + ' Win11'
+            }
+            else {
+                $Result.Name = $Result.Name + ' Win10'
+            }
+        }
+
+        if ($TestUrl) {
             $Results = $Results | Sort-Object Url
             $PreviousUrl = $null
             foreach ($Item in $Results) {
