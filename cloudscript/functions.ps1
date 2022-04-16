@@ -491,6 +491,100 @@ function osdcloud-TestAutopilotProfile {
 }
 #endregion
 
+#region WinPE and OOBE Functions
+function osdcloud-RemoveAppx {
+    [CmdletBinding(DefaultParameterSetName='Default')]
+    param (
+        [Parameter(Mandatory,ParameterSetName='Basic')]
+        [Switch]$Basic,
+
+        [Parameter(Mandatory,ParameterSetName='ByName',Position=0)]
+        [System.String[]]$Name
+    )
+    if ($env:SystemDrive -eq 'X:') {
+        if (Get-Command Get-AppxProvisionedPackage) {
+            if ($Basic) {
+                $Name = @('CommunicationsApps','OfficeHub','People','Skype','Solitaire','Xbox','ZuneMusic','ZuneVideo')
+            }
+            elseif ($Name) {
+                #Do Nothing
+            }
+            else {
+                $Name = Get-AppxProvisionedPackage -ErrorAction SilentlyContinue | `
+                Select-Object -Property DisplayName, PackageName | `
+                Out-GridView -PassThru -Title 'Select one or more Appx Provisioned Packages to remove' | `
+                Select-Object -ExpandProperty DisplayName
+            }
+            if ($Name) {
+                Write-Host -ForegroundColor Cyan 'Remove-AppxProvisionedPackage -AllUsers -PackageName'
+                foreach ($Item in $Name) {
+                    Get-AppxProvisionedPackage | Where-Object {$_.DisplayName -Match $Item} | ForEach-Object {
+                        Write-Host -ForegroundColor DarkGray $_.DisplayName
+                        if ((Get-Command Remove-AppxProvisionedPackage).Parameters.ContainsKey('AllUsers')) {
+                            Try {
+                                $null = Remove-AppxProvisionedPackage -AllUsers -PackageName $_.PackageName
+                            }
+                            Catch {
+                                Write-Warning "AllUsers Appx Provisioned Package $($_.PackageName) did not remove successfully"
+                            }
+                        }
+                        else {
+                            Try {
+                                $null = Remove-AppxProvisionedPackage -PackageName $_.PackageName
+                            }
+                            Catch {
+                                Write-Warning "Appx Provisioned Package $($_.PackageName) did not remove successfully"
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    if ($env:UserName -eq 'defaultuser0') {
+        if (Get-Command Get-AppxProvisionedPackage) {
+            if ($Basic) {
+                $Name = @('CommunicationsApps','OfficeHub','People','Skype','Solitaire','Xbox','ZuneMusic','ZuneVideo')
+            }
+            elseif ($Name) {
+                #Do Nothing
+            }
+            else {
+                $Name = Get-AppxProvisionedPackage -Online -ErrorAction SilentlyContinue | `
+                Select-Object -Property DisplayName, PackageName | `
+                Out-GridView -PassThru -Title 'Select one or more Appx Provisioned Packages to remove' | `
+                Select-Object -ExpandProperty DisplayName
+            }
+            if ($Name) {
+                Write-Host -ForegroundColor Cyan 'Remove-AppxProvisionedPackage -Online -AllUsers -PackageName'
+                foreach ($Item in $Name) {
+                    Get-AppxProvisionedPackage -Online | Where-Object {$_.DisplayName -Match $Item} | ForEach-Object {
+                        Write-Host -ForegroundColor DarkGray $_.DisplayName
+                        if ((Get-Command Remove-AppxProvisionedPackage).Parameters.ContainsKey('AllUsers')) {
+                            Try {
+                                $null = Remove-AppxProvisionedPackage -Online -AllUsers -PackageName $_.PackageName
+                            }
+                            Catch {
+                                Write-Warning "AllUsers Appx Provisioned Package $($_.PackageName) did not remove successfully"
+                            }
+                        }
+                        else {
+                            Try {
+                                $null = Remove-AppxProvisionedPackage -Online -PackageName $_.PackageName
+                            }
+                            Catch {
+                                Write-Warning "Appx Provisioned Package $($_.PackageName) did not remove successfully"
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+New-Alias -Name 'RemoveAppx' -Value 'osdcloud-RemoveAppx' -Description 'OSDCloud' -Force
+#endregion
+
 #region OOBE Optional Functions
 if ($env:UserName -eq 'defaultuser0') {
     function osdcloud-AddCapability {
@@ -580,61 +674,6 @@ if ($env:UserName -eq 'defaultuser0') {
         }
     }
     New-Alias -Name 'Rsat' -Value 'osdcloud-Rsat' -Description 'OSDCloud' -Force
-    function osdcloud-RemoveAppx {
-        [CmdletBinding(DefaultParameterSetName='Default')]
-        param (
-            [Parameter(Mandatory,ParameterSetName='Basic')]
-            [Switch]$Basic,
-    
-            [Parameter(Mandatory,ParameterSetName='ByName',Position=0)]
-            [System.String[]]$Name
-        )
-        if ($env:UserName -eq 'defaultuser0') {
-            if (Get-Command Get-AppxProvisionedPackage) {
-                if ($Basic) {
-                    $Name = @('CommunicationsApps','OfficeHub','People','Skype','Solitaire','Xbox','ZuneMusic','ZuneVideo')
-                }
-                elseif ($Name) {
-                    #Do Nothing
-                }
-                else {
-                    $Name = Get-AppxProvisionedPackage -Online -ErrorAction SilentlyContinue | `
-                    Select-Object -Property DisplayName, PackageName | `
-                    Out-GridView -PassThru -Title 'Select one or more Appx Provisioned Packages to remove' | `
-                    Select-Object -ExpandProperty DisplayName
-                }
-                if ($Name) {
-                    Write-Host -ForegroundColor Cyan 'Remove-AppxProvisionedPackage -Online -AllUsers -PackageName'
-                    foreach ($Item in $Name) {
-                        Get-AppxProvisionedPackage -Online | Where-Object {$_.DisplayName -Match $Item} | ForEach-Object {
-                            Write-Host -ForegroundColor DarkGray $_.DisplayName
-                            if ((Get-Command Remove-AppxProvisionedPackage).Parameters.ContainsKey('AllUsers')) {
-                                Try
-                                {
-                                    $null = Remove-AppxProvisionedPackage -Online -AllUsers -PackageName $_.PackageName
-                                }
-                                Catch
-                                {
-                                    Write-Warning "AllUsers Appx Provisioned Package $($_.PackageName) did not remove successfully"
-                                }
-                            }
-                            else {
-                                Try
-                                {
-                                    $null = Remove-AppxProvisionedPackage -Online -PackageName $_.PackageName
-                                }
-                                Catch
-                                {
-                                    Write-Warning "Appx Provisioned Package $($_.PackageName) did not remove successfully"
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }
-    }
-    New-Alias -Name 'RemoveAppx' -Value 'osdcloud-RemoveAppx' -Description 'OSDCloud' -Force
     function osdcloud-UpdateDrivers {
         [CmdletBinding()]
         param ()
