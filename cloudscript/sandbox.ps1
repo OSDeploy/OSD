@@ -49,26 +49,6 @@ Write-Host -ForegroundColor DarkGray "Starting OSDCloud $WindowsPhase Sandbox $S
 Invoke-Expression -Command (Invoke-RestMethod -Uri functions.osdcloud.com)
 #endregion
 
-#region WindowsPhase
-$ImageState = (Get-ItemProperty -Path 'HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Setup\State' -ErrorAction Ignore).ImageState
-if ($env:SystemDrive -eq 'X:') {
-    $WindowsPhase = 'WinPE'
-}
-elseif ($ImageState -eq 'IMAGE_STATE_SPECIALIZE_RESEAL_TO_OOBE') {
-    $WindowsPhase = 'Specialize'
-}
-elseif ($ImageState -eq 'IMAGE_STATE_SPECIALIZE_RESEAL_TO_AUDIT') {
-    $WindowsPhase = 'AuditMode'
-}
-elseif ($env:UserName -eq 'defaultuser0') {
-    $WindowsPhase = 'OOBE'
-}
-else {
-    $WindowsPhase = 'Windows'
-}
-Write-Host -ForegroundColor DarkGray "OSDCloud is running in $WindowsPhase"
-#endregion
-
 #region WinPE
 if ($WindowsPhase -eq 'WinPE') {
     osdcloud-StartWinPE -OSDCloud -KeyVault
