@@ -510,19 +510,19 @@ function osdcloud-RemoveAppx {
                 #Do Nothing
             }
             else {
-                $Name = Get-AppxProvisionedPackage -ErrorAction SilentlyContinue | `
+                $Name = Get-AppxProvisionedPackage -Path 'C:\' -ErrorAction SilentlyContinue | `
                 Select-Object -Property DisplayName, PackageName | `
                 Out-GridView -PassThru -Title 'Select one or more Appx Provisioned Packages to remove' | `
                 Select-Object -ExpandProperty DisplayName
             }
             if ($Name) {
-                Write-Host -ForegroundColor Cyan 'Remove-AppxProvisionedPackage -AllUsers -PackageName'
+                Write-Host -ForegroundColor Cyan "Remove-AppxProvisionedPackage -Path 'C:\' -AllUsers -PackageName"
                 foreach ($Item in $Name) {
-                    Get-AppxProvisionedPackage | Where-Object {$_.DisplayName -Match $Item} | ForEach-Object {
+                    Get-AppxProvisionedPackage -Path 'C:\' | Where-Object {$_.DisplayName -Match $Item} | ForEach-Object {
                         Write-Host -ForegroundColor DarkGray $_.DisplayName
                         if ((Get-Command Remove-AppxProvisionedPackage).Parameters.ContainsKey('AllUsers')) {
                             Try {
-                                $null = Remove-AppxProvisionedPackage -AllUsers -PackageName $_.PackageName
+                                $null = Remove-AppxProvisionedPackage -Path 'C:\' -AllUsers -PackageName $_.PackageName
                             }
                             Catch {
                                 Write-Warning "AllUsers Appx Provisioned Package $($_.PackageName) did not remove successfully"
@@ -530,7 +530,7 @@ function osdcloud-RemoveAppx {
                         }
                         else {
                             Try {
-                                $null = Remove-AppxProvisionedPackage -PackageName $_.PackageName
+                                $null = Remove-AppxProvisionedPackage -Path 'C:\' -PackageName $_.PackageName
                             }
                             Catch {
                                 Write-Warning "Appx Provisioned Package $($_.PackageName) did not remove successfully"
