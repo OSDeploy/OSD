@@ -21,7 +21,7 @@
 .NOTES
     Version 22.4.16.1
 .LINK
-    https://raw.githubusercontent.com/OSDeploy/OSD/master/cloudscript/re.ps1
+    https://raw.githubusercontent.com/OSDeploy/OSD/master/cloudscript/re.osdcloud.com.ps1
 .EXAMPLE
 #>
 [CmdletBinding()]
@@ -32,12 +32,13 @@ param()
 
 if ($fromIsoUrl) {
     #region Initialize
-    $OSDCloudREVersion = '22.4.16.1'
-    [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
-    Write-Host -ForegroundColor DarkGray "OSDCloudRE $OSDCloudREVersion"
+    $ScriptVersion = '22.4.16.1'
+    Write-Host -ForegroundColor DarkGray "OSDCloudRE $ScriptVersion"
     #endregion
     
     #region Prerequesites
+    [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
+    
     #============================================
     #   Test Admin Rights
     #============================================
