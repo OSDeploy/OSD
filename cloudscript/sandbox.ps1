@@ -1,5 +1,5 @@
 <#PSScriptInfo
-.VERSION 22.4.15.1
+.VERSION 22.4.16.1
 .GUID 55a834b8-513e-4399-bbdb-2e54a1305eee
 .AUTHOR David Segura @SeguraOSD
 .COMPANYNAME osdcloud.com
@@ -23,7 +23,7 @@ powershell iex(irm sandbox.osdcloud.com)
 .DESCRIPTION
     PSCloudScript at sandbox.osdcloud.com
 .NOTES
-    Version 22.4.15.1
+    Version 22.4.16.1
 .LINK
     https://raw.githubusercontent.com/OSDeploy/OSD/master/cloudscript/sandbox.ps1
 .EXAMPLE
@@ -33,7 +33,7 @@ powershell iex(irm sandbox.osdcloud.com)
 param()
 
 #region Initialize
-$SandboxVersion = '22.4.15.1'
+$SandboxVersion = '22.4.16.1'
 $Transcript = "$((Get-Date).ToString('yyyy-MM-dd-HHmmss'))-OSDCloud.log"
 $null = Start-Transcript -Path (Join-Path "$env:SystemRoot\Temp" $Transcript) -ErrorAction Ignore
 
@@ -45,7 +45,7 @@ else {
     elseif ($ImageState -eq 'IMAGE_STATE_SPECIALIZE_RESEAL_TO_AUDIT') {$WindowsPhase = 'AuditMode'}
     else {$WindowsPhase = 'Windows'}
 }
-Write-Host -ForegroundColor DarkGray "Starting OSDCloud Sandbox $SandboxVersion in $WindowsPhase"
+Write-Host -ForegroundColor DarkGray "Starting OSDCloud $WindowsPhase Sandbox $SandboxVersion"
 Invoke-Expression -Command (Invoke-RestMethod -Uri functions.osdcloud.com)
 #endregion
 
