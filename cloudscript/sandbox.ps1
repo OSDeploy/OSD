@@ -33,10 +33,20 @@ powershell iex(irm sandbox.osdcloud.com)
 param()
 
 #region Initialize
-Write-Host -ForegroundColor DarkGray "sandbox.osdcloud.com 22.4.15.1"
-Invoke-Expression -Command (Invoke-RestMethod -Uri functions.osdcloud.com)
+$SandboxVersion = '22.4.15.1'
 $Transcript = "$((Get-Date).ToString('yyyy-MM-dd-HHmmss'))-OSDCloud.log"
 $null = Start-Transcript -Path (Join-Path "$env:SystemRoot\Temp" $Transcript) -ErrorAction Ignore
+
+if ($env:SystemDrive -eq 'X:') {$WindowsPhase = 'WinPE'}
+else {
+    $ImageState = (Get-ItemProperty -Path 'HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Setup\State' -ErrorAction Ignore).ImageState
+    if ($env:UserName -eq 'defaultuser0') {$WindowsPhase = 'OOBE'}
+    elseif ($ImageState -eq 'IMAGE_STATE_SPECIALIZE_RESEAL_TO_OOBE') {$WindowsPhase = 'Specialize'}
+    elseif ($ImageState -eq 'IMAGE_STATE_SPECIALIZE_RESEAL_TO_AUDIT') {$WindowsPhase = 'AuditMode'}
+    else {$WindowsPhase = 'Windows'}
+}
+Write-Host -ForegroundColor DarkGray "Starting OSDCloud Sandbox $SandboxVersion in $WindowsPhase"
+Invoke-Expression -Command (Invoke-RestMethod -Uri functions.osdcloud.com)
 #endregion
 
 #region WindowsPhase
@@ -56,11 +66,11 @@ elseif ($env:UserName -eq 'defaultuser0') {
 else {
     $WindowsPhase = 'Windows'
 }
+Write-Host -ForegroundColor DarkGray "OSDCloud is running in $WindowsPhase"
 #endregion
 
 #region WinPE
 if ($WindowsPhase -eq 'WinPE') {
-    Write-Host -ForegroundColor DarkGray 'OSDCloud WinPE'
     osdcloud-StartWinPE -OSDCloud -KeyVault
     Write-Host -ForegroundColor Cyan "To start a new PowerShell session, type 'start powershell' and press enter"
     Write-Host -ForegroundColor Cyan "Start-OSDCloud or Start-OSDCloudGUI can be run in the new PowerShell session"
@@ -70,7 +80,6 @@ if ($WindowsPhase -eq 'WinPE') {
 
 #region Specialize
 if ($WindowsPhase -eq 'Specialize') {
-    Write-Host -ForegroundColor DarkGray 'OSDCloud Specialize'
     #Do something
     $null = Stop-Transcript
 }
@@ -78,7 +87,6 @@ if ($WindowsPhase -eq 'Specialize') {
 
 #region AuditMode
 if ($WindowsPhase -eq 'AuditMode') {
-    Write-Host -ForegroundColor DarkGray 'OSDCloud Audit Mode'
     #Do something
     $null = Stop-Transcript
 }
@@ -86,7 +94,6 @@ if ($WindowsPhase -eq 'AuditMode') {
 
 #region OOBE
 if ($WindowsPhase -eq 'OOBE') {
-    Write-Host -ForegroundColor DarkGray 'OSDCloud OOBE'
     osdcloud-StartOOBE -Display -Language -DateTime -Autopilot -KeyVault
     #Do something
     $null = Stop-Transcript
@@ -95,7 +102,6 @@ if ($WindowsPhase -eq 'OOBE') {
 
 #region Windows
 if ($WindowsPhase -eq 'Windows') {
-    Write-Host -ForegroundColor DarkGray 'OSDCloud Windows'
     #Do something
     $null = Stop-Transcript
 }

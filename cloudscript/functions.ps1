@@ -30,27 +30,18 @@ powershell iex (irm functions.osdcloud.com)
     powershell iex (irm functions.osdcloud.com)
 #>
 #region Initialize
-Write-Host -ForegroundColor DarkGray "OSDCloud Functions 22.4.15.1"
-[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
-#endregion
+$FunctionsVersion = '22.4.15.1'
 
-#region WindowsPhase
-$ImageState = (Get-ItemProperty -Path 'HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Setup\State' -ErrorAction Ignore).ImageState
-if ($env:SystemDrive -eq 'X:') {
-    $WindowsPhase = 'WinPE'
-}
-elseif ($ImageState -eq 'IMAGE_STATE_SPECIALIZE_RESEAL_TO_OOBE') {
-    $WindowsPhase = 'Specialize'
-}
-elseif ($ImageState -eq 'IMAGE_STATE_SPECIALIZE_RESEAL_TO_AUDIT') {
-    $WindowsPhase = 'AuditMode'
-}
-elseif ($env:UserName -eq 'defaultuser0') {
-    $WindowsPhase = 'OOBE'
-}
+if ($env:SystemDrive -eq 'X:') {$WindowsPhase = 'WinPE'}
 else {
-    $WindowsPhase = 'Windows'
+    $ImageState = (Get-ItemProperty -Path 'HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Setup\State' -ErrorAction Ignore).ImageState
+    if ($env:UserName -eq 'defaultuser0') {$WindowsPhase = 'OOBE'}
+    elseif ($ImageState -eq 'IMAGE_STATE_SPECIALIZE_RESEAL_TO_OOBE') {$WindowsPhase = 'Specialize'}
+    elseif ($ImageState -eq 'IMAGE_STATE_SPECIALIZE_RESEAL_TO_AUDIT') {$WindowsPhase = 'AuditMode'}
+    else {$WindowsPhase = 'Windows'}
 }
+Write-Host -ForegroundColor DarkGray "Loading OSDCloud Functions $FunctionsVersion in $WindowsPhase"
+[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
 #endregion
 
 #region Environment Variables
@@ -216,6 +207,81 @@ if (($WindowsPhase -eq 'WinPE') -or ($WindowsPhase -eq 'OOBE')) {
             }
         }
     }
+    function osdcloud-RemoveAppx {
+        [CmdletBinding(DefaultParameterSetName='Default')]
+        param (
+            [Parameter(Mandatory,ParameterSetName='Basic')]
+            [Switch]$Basic,
+    
+            [Parameter(Mandatory,ParameterSetName='ByName',Position=0)]
+            [System.String[]]$Name
+        )
+        if ($WindowsPhase -eq 'WinPE') {
+            if (Get-Command Get-AppxProvisionedPackage) {
+                if ($Basic) {
+                    $Name = @('CommunicationsApps','OfficeHub','People','Skype','Solitaire','Xbox','ZuneMusic','ZuneVideo')
+                }
+                elseif ($Name) {
+                    #Do Nothing
+                }
+                if ($Name) {
+                    Write-Host -ForegroundColor Cyan "Remove-AppxProvisionedPackage -Path 'C:\' -PackageName"
+                    foreach ($Item in $Name) {
+                        Get-AppxProvisionedPackage -Path 'C:\' | Where-Object {$_.DisplayName -Match $Item} | ForEach-Object {
+                            Write-Host -ForegroundColor DarkGray $_.DisplayName
+                            Try {
+                                $null = Remove-AppxProvisionedPackage -Path 'C:\' -PackageName $_.PackageName
+                            }
+                            Catch {
+                                Write-Warning "Appx Provisioned Package $($_.PackageName) did not remove successfully"
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        if ($WindowsPhase -eq 'OOBE') {
+            if (Get-Command Get-AppxProvisionedPackage) {
+                if ($Basic) {
+                    $Name = @('CommunicationsApps','OfficeHub','People','Skype','Solitaire','Xbox','ZuneMusic','ZuneVideo')
+                }
+                elseif ($Name) {
+                    #Do Nothing
+                }
+                else {
+                    $Name = Get-AppxProvisionedPackage -Online -ErrorAction SilentlyContinue | `
+                    Select-Object -Property DisplayName, PackageName | `
+                    Out-GridView -PassThru -Title 'Select one or more Appx Provisioned Packages to remove' | `
+                    Select-Object -ExpandProperty DisplayName
+                }
+                if ($Name) {
+                    Write-Host -ForegroundColor Cyan 'Remove-AppxProvisionedPackage -Online -AllUsers -PackageName'
+                    foreach ($Item in $Name) {
+                        Get-AppxProvisionedPackage -Online | Where-Object {$_.DisplayName -Match $Item} | ForEach-Object {
+                            Write-Host -ForegroundColor DarkGray $_.DisplayName
+                            if ((Get-Command Remove-AppxProvisionedPackage).Parameters.ContainsKey('AllUsers')) {
+                                Try {
+                                    $null = Remove-AppxProvisionedPackage -Online -AllUsers -PackageName $_.PackageName
+                                }
+                                Catch {
+                                    Write-Warning "AllUsers Appx Provisioned Package $($_.PackageName) did not remove successfully"
+                                }
+                            }
+                            else {
+                                Try {
+                                    $null = Remove-AppxProvisionedPackage -Online -PackageName $_.PackageName
+                                }
+                                Catch {
+                                    Write-Warning "Appx Provisioned Package $($_.PackageName) did not remove successfully"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    New-Alias -Name 'RemoveAppx' -Value 'osdcloud-RemoveAppx' -Description 'OSDCloud' -Force
     function osdcloud-SetExecutionPolicy {
         [CmdletBinding()]
         param ()
