@@ -17,7 +17,7 @@ Stop-Transcript
 #=================================================
 Import-Module -Name OSD -Force
 Start-Transcript -Path (Join-Path (Get-Module OSD).ModuleBase "Catalogs\OSDCatalog\OSDCatalogLenovoDriverPack.log")
-$null = Get-OSDCatalogLenovoDriverPack -Force -Verbose
+$null = Get-OSDCatalogLenovoDriverPack -Force -Verbose -TestUrl
 $Source = Join-Path $env:TEMP (Join-Path 'OSD' 'OSDCatalogLenovoDriverPack.xml')
 $Destination = Join-Path (Get-Module OSD).ModuleBase "Catalogs\OSDCatalog\OSDCatalogLenovoDriverPack.xml"
 if (Test-Path $Source) {

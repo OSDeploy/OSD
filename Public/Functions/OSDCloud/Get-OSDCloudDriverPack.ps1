@@ -19,7 +19,7 @@ function Get-OSDCloudDriverPack {
     #   Results
     #=================================================
     if ($Results) {
-        $Results = $Results | Sort-Object -Property DriverPackOS -Descending
+        $Results = $Results | Sort-Object -Property OS -Descending
         $Results[0]
     }
     else {
