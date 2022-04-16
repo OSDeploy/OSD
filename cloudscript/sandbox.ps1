@@ -1,5 +1,5 @@
 <#PSScriptInfo
-.VERSION 22.4.12.1
+.VERSION 22.4.15.1
 .GUID 55a834b8-513e-4399-bbdb-2e54a1305eee
 .AUTHOR David Segura @SeguraOSD
 .COMPANYNAME osdcloud.com
@@ -23,7 +23,7 @@ powershell iex(irm sandbox.osdcloud.com)
 .DESCRIPTION
     PSCloudScript at sandbox.osdcloud.com
 .NOTES
-    Version 22.4.12.1
+    Version 22.4.15.1
 .LINK
     https://raw.githubusercontent.com/OSDeploy/OSD/master/cloudscript/sandbox.ps1
 .EXAMPLE
@@ -33,14 +33,34 @@ powershell iex(irm sandbox.osdcloud.com)
 param()
 
 #region Initialize
-Write-Host -ForegroundColor DarkGray "sandbox.osdcloud.com 22.4.12.1"
+Write-Host -ForegroundColor DarkGray "sandbox.osdcloud.com 22.4.15.1"
 Invoke-Expression -Command (Invoke-RestMethod -Uri functions.osdcloud.com)
 $Transcript = "$((Get-Date).ToString('yyyy-MM-dd-HHmmss'))-OSDCloud.log"
 $null = Start-Transcript -Path (Join-Path "$env:SystemRoot\Temp" $Transcript) -ErrorAction Ignore
 #endregion
 
-#region WinPE
+#region WindowsPhase
+$ImageState = (Get-ItemProperty -Path 'HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Setup\State' -ErrorAction Ignore).ImageState
 if ($env:SystemDrive -eq 'X:') {
+    $WindowsPhase = 'WinPE'
+}
+elseif ($ImageState -eq 'IMAGE_STATE_SPECIALIZE_RESEAL_TO_OOBE') {
+    $WindowsPhase = 'Specialize'
+}
+elseif ($ImageState -eq 'IMAGE_STATE_SPECIALIZE_RESEAL_TO_AUDIT') {
+    $WindowsPhase = 'AuditMode'
+}
+elseif ($env:UserName -eq 'defaultuser0') {
+    $WindowsPhase = 'OOBE'
+}
+else {
+    $WindowsPhase = 'Windows'
+}
+#endregion
+
+#region WinPE
+if ($WindowsPhase -eq 'WinPE') {
+    Write-Host -ForegroundColor DarkGray 'OSDCloud WinPE'
     osdcloud-StartWinPE -OSDCloud -KeyVault
     Write-Host -ForegroundColor Cyan "To start a new PowerShell session, type 'start powershell' and press enter"
     Write-Host -ForegroundColor Cyan "Start-OSDCloud or Start-OSDCloudGUI can be run in the new PowerShell session"
@@ -48,15 +68,34 @@ if ($env:SystemDrive -eq 'X:') {
 }
 #endregion
 
-#region OOBE
-if ($env:UserName -eq 'defaultuser0') {
-    osdcloud-StartOOBE -Display -Language -DateTime -Autopilot -KeyVault
+#region Specialize
+if ($WindowsPhase -eq 'Specialize') {
+    Write-Host -ForegroundColor DarkGray 'OSDCloud Specialize'
+    #Do something
     $null = Stop-Transcript
 }
 #endregion
 
-#region FullOS
-if (($env:SystemDrive -ne 'X:') -and ($env:UserName -ne 'defaultuser0')) {
+#region AuditMode
+if ($WindowsPhase -eq 'AuditMode') {
+    Write-Host -ForegroundColor DarkGray 'OSDCloud Audit Mode'
+    #Do something
+    $null = Stop-Transcript
+}
+#endregion
+
+#region OOBE
+if ($WindowsPhase -eq 'OOBE') {
+    Write-Host -ForegroundColor DarkGray 'OSDCloud OOBE'
+    osdcloud-StartOOBE -Display -Language -DateTime -Autopilot -KeyVault
+    #Do something
+    $null = Stop-Transcript
+}
+#endregion
+
+#region Windows
+if ($WindowsPhase -eq 'Windows') {
+    Write-Host -ForegroundColor DarkGray 'OSDCloud Windows'
     #Do something
     $null = Stop-Transcript
 }

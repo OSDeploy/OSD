@@ -3,7 +3,7 @@
         "CatalogVersion":  "22.04.13",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  null,
+        "ReleaseDate":  "21.07.13",
         "Manufacturer":  "Lenovo",
         "Model":  "Lenovo 500w Gen 3",
         "Product":  [
@@ -21,7 +21,7 @@
         "CatalogVersion":  "22.04.13",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  null,
+        "ReleaseDate":  "20.09.08",
         "Manufacturer":  "Lenovo",
         "Model":  "Lenovo Tablet 10",
         "Product":  [
@@ -39,7 +39,7 @@
         "CatalogVersion":  "22.04.13",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  null,
+        "ReleaseDate":  "17.11.22",
         "Manufacturer":  "Lenovo",
         "Model":  "ThinkCentre M600",
         "Product":  [
@@ -69,7 +69,7 @@
         "CatalogVersion":  "22.04.13",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  null,
+        "ReleaseDate":  "20.01.06",
         "Manufacturer":  "Lenovo",
         "Model":  "ThinkCentre M625Q",
         "Product":  [
@@ -95,7 +95,7 @@
         "CatalogVersion":  "22.04.13",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  null,
+        "ReleaseDate":  "20.06.19",
         "Manufacturer":  "Lenovo",
         "Model":  "ThinkCentre M630E",
         "Product":  [
@@ -115,7 +115,7 @@
         "CatalogVersion":  "22.04.13",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  null,
+        "ReleaseDate":  "16.12.20",
         "Manufacturer":  "Lenovo",
         "Model":  "ThinkCentre M700 THIN CLIENT",
         "Product":  [
@@ -135,7 +135,7 @@
         "CatalogVersion":  "22.04.13",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  null,
+        "ReleaseDate":  "16.12.20",
         "Manufacturer":  "Lenovo",
         "Model":  "ThinkCentre M700 TINY",
         "Product":  [
@@ -155,7 +155,7 @@
         "CatalogVersion":  "22.04.13",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  null,
+        "ReleaseDate":  "16.12.20",
         "Manufacturer":  "Lenovo",
         "Model":  "ThinkCentre M700 TOWER AND SMALL",
         "Product":  [
@@ -179,7 +179,7 @@
         "CatalogVersion":  "22.04.13",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  null,
+        "ReleaseDate":  "16.01.26",
         "Manufacturer":  "Lenovo",
         "Model":  "ThinkCentre M700Z",
         "Product":  [
@@ -198,7 +198,7 @@
         "CatalogVersion":  "22.04.13",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  null,
+        "ReleaseDate":  "21.04.15",
         "Manufacturer":  "Lenovo",
         "Model":  "ThinkCentre M70A Gen 2",
         "Product":  [
@@ -218,7 +218,7 @@
         "CatalogVersion":  "22.04.13",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  null,
+        "ReleaseDate":  "20.12.09",
         "Manufacturer":  "Lenovo",
         "Model":  "ThinkCentre M70A",
         "Product":  [
@@ -238,7 +238,7 @@
         "CatalogVersion":  "22.04.13",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  null,
+        "ReleaseDate":  "21.09.07",
         "Manufacturer":  "Lenovo",
         "Model":  "ThinkCentre M70C",
         "Product":  [
@@ -258,7 +258,7 @@
         "CatalogVersion":  "22.04.13",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  null,
+        "ReleaseDate":  "21.12.05",
         "Manufacturer":  "Lenovo",
         "Model":  "ThinkCentre M70Q Gen 2",
         "Product":  [
@@ -278,7 +278,7 @@
         "CatalogVersion":  "22.04.13",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  null,
+        "ReleaseDate":  "22.03.28",
         "Manufacturer":  "Lenovo",
         "Model":  "ThinkCentre M70Q Gen 3",
         "Product":  [
@@ -301,7 +301,7 @@
         "CatalogVersion":  "22.04.13",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  null,
+        "ReleaseDate":  "21.12.05",
         "Manufacturer":  "Lenovo",
         "Model":  "ThinkCentre M70Q Type 11e8",
         "Product":  [
@@ -318,7 +318,7 @@
         "CatalogVersion":  "22.04.13",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  null,
+        "ReleaseDate":  "21.12.05",
         "Manufacturer":  "Lenovo",
         "Model":  "ThinkCentre M70Q",
         "Product":  [
@@ -338,7 +338,7 @@
         "CatalogVersion":  "22.04.13",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  null,
+        "ReleaseDate":  "21.12.05",
         "Manufacturer":  "Lenovo",
         "Model":  "ThinkCentre M70S Gen 2",
         "Product":  [
@@ -358,7 +358,7 @@
         "CatalogVersion":  "22.04.13",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  null,
+        "ReleaseDate":  "22.03.28",
         "Manufacturer":  "Lenovo",
         "Model":  "ThinkCentre M70S Gen 3",
         "Product":  [
@@ -384,7 +384,7 @@
         "CatalogVersion":  "22.04.13",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  null,
+        "ReleaseDate":  "21.12.05",
         "Manufacturer":  "Lenovo",
         "Model":  "ThinkCentre M70S",
         "Product":  [
@@ -404,7 +404,7 @@
         "CatalogVersion":  "22.04.13",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  null,
+        "ReleaseDate":  "21.12.05",
         "Manufacturer":  "Lenovo",
         "Model":  "ThinkCentre M70T Gen 2",
         "Product":  [
@@ -424,7 +424,7 @@
         "CatalogVersion":  "22.04.13",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  null,
+        "ReleaseDate":  "22.03.28",
         "Manufacturer":  "Lenovo",
         "Model":  "ThinkCentre M70T Gen 3",
         "Product":  [
@@ -450,7 +450,7 @@
         "CatalogVersion":  "22.04.13",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  null,
+        "ReleaseDate":  "21.12.05",
         "Manufacturer":  "Lenovo",
         "Model":  "ThinkCentre M70T",
         "Product":  [
@@ -470,7 +470,7 @@
         "CatalogVersion":  "22.04.13",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  null,
+        "ReleaseDate":  "19.07.24",
         "Manufacturer":  "Lenovo",
         "Model":  "ThinkCentre M710E",
         "Product":  [
@@ -489,7 +489,7 @@
         "CatalogVersion":  "22.04.13",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  null,
+        "ReleaseDate":  "19.09.06",
         "Manufacturer":  "Lenovo",
         "Model":  "ThinkCentre M710Q Type 10YC",
         "Product":  [
@@ -506,7 +506,7 @@
         "CatalogVersion":  "22.04.13",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  null,
+        "ReleaseDate":  "19.09.06",
         "Manufacturer":  "Lenovo",
         "Model":  "ThinkCentre M710Q",
         "Product":  [
@@ -528,7 +528,7 @@
         "CatalogVersion":  "22.04.13",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  null,
+        "ReleaseDate":  "19.09.06",
         "Manufacturer":  "Lenovo",
         "Model":  "ThinkCentre M710S",
         "Product":  [
@@ -549,7 +549,7 @@
         "CatalogVersion":  "22.04.13",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  null,
+        "ReleaseDate":  "19.09.06",
         "Manufacturer":  "Lenovo",
         "Model":  "ThinkCentre M710T",
         "Product":  [
@@ -570,7 +570,7 @@
         "CatalogVersion":  "22.04.13",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  null,
+        "ReleaseDate":  "20.02.19",
         "Manufacturer":  "Lenovo",
         "Model":  "ThinkCentre M715Q 2nd Gen",
         "Product":  [
@@ -594,7 +594,7 @@
         "CatalogVersion":  "22.04.13",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  null,
+        "ReleaseDate":  "18.05.30",
         "Manufacturer":  "Lenovo",
         "Model":  "ThinkCentre M715Q",
         "Product":  [
@@ -618,7 +618,7 @@
         "CatalogVersion":  "22.04.13",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  null,
+        "ReleaseDate":  "19.03.25",
         "Manufacturer":  "Lenovo",
         "Model":  "ThinkCentre M715S",
         "Product":  [
@@ -636,7 +636,7 @@
         "CatalogVersion":  "22.04.13",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  null,
+        "ReleaseDate":  "19.03.25",
         "Manufacturer":  "Lenovo",
         "Model":  "ThinkCentre M715T",
         "Product":  [
@@ -654,7 +654,7 @@
         "CatalogVersion":  "22.04.13",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  null,
+        "ReleaseDate":  "20.08.11",
         "Manufacturer":  "Lenovo",
         "Model":  "ThinkCentre M720E",
         "Product":  [
@@ -672,7 +672,7 @@
         "CatalogVersion":  "22.04.13",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  null,
+        "ReleaseDate":  "21.02.04",
         "Manufacturer":  "Lenovo",
         "Model":  "ThinkCentre M720Q",
         "Product":  [
@@ -696,7 +696,7 @@
         "CatalogVersion":  "22.04.13",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  null,
+        "ReleaseDate":  "21.02.04",
         "Manufacturer":  "Lenovo",
         "Model":  "ThinkCentre M720S",
         "Product":  [
@@ -719,7 +719,7 @@
         "CatalogVersion":  "22.04.13",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  null,
+        "ReleaseDate":  "21.02.04",
         "Manufacturer":  "Lenovo",
         "Model":  "ThinkCentre M720T",
         "Product":  [
@@ -742,7 +742,7 @@
         "CatalogVersion":  "22.04.13",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  null,
+        "ReleaseDate":  "19.06.03",
         "Manufacturer":  "Lenovo",
         "Model":  "ThinkCentre M725S",
         "Product":  [
@@ -760,7 +760,7 @@
         "CatalogVersion":  "22.04.13",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  null,
+        "ReleaseDate":  "15.09.15",
         "Manufacturer":  "Lenovo",
         "Model":  "ThinkCentre M73",
         "Product":  [
@@ -794,7 +794,7 @@
         "CatalogVersion":  "22.04.13",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  null,
+        "ReleaseDate":  "15.09.15",
         "Manufacturer":  "Lenovo",
         "Model":  "ThinkCentre M73P",
         "Product":  [
@@ -814,7 +814,7 @@
         "CatalogVersion":  "22.04.13",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  null,
+        "ReleaseDate":  "21.08.08",
         "Manufacturer":  "Lenovo",
         "Model":  "ThinkCentre M75N",
         "Product":  [
@@ -842,7 +842,7 @@
         "CatalogVersion":  "22.04.13",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  null,
+        "ReleaseDate":  "20.08.09",
         "Manufacturer":  "Lenovo",
         "Model":  "ThinkCentre M75Q 1",
         "Product":  [
@@ -862,7 +862,7 @@
         "CatalogVersion":  "22.04.13",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  null,
+        "ReleaseDate":  "21.12.30",
         "Manufacturer":  "Lenovo",
         "Model":  "ThinkCentre M75Q Gen 2 Type 11JN 11JQ 11JR 11JS",
         "Product":  [
@@ -882,7 +882,7 @@
         "CatalogVersion":  "22.04.13",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  null,
+        "ReleaseDate":  "21.12.12",
         "Manufacturer":  "Lenovo",
         "Model":  "ThinkCentre M75Q Gen 2",
         "Product":  [
@@ -902,7 +902,7 @@
         "CatalogVersion":  "22.04.13",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  null,
+        "ReleaseDate":  "20.08.09",
         "Manufacturer":  "Lenovo",
         "Model":  "ThinkCentre M75Q-1",
         "Product":  [
@@ -922,7 +922,7 @@
         "CatalogVersion":  "22.04.13",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  null,
+        "ReleaseDate":  "20.08.09",
         "Manufacturer":  "Lenovo",
         "Model":  "ThinkCentre M75S 1",
         "Product":  [
@@ -942,7 +942,7 @@
         "CatalogVersion":  "22.04.13",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  null,
+        "ReleaseDate":  "21.12.30",
         "Manufacturer":  "Lenovo",
         "Model":  "ThinkCentre M75S Gen 2 CEZANNE",
         "Product":  [
@@ -962,7 +962,7 @@
         "CatalogVersion":  "22.04.13",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  null,
+        "ReleaseDate":  "21.12.12",
         "Manufacturer":  "Lenovo",
         "Model":  "ThinkCentre M75S Gen 2",
         "Product":  [
@@ -986,7 +986,7 @@
         "CatalogVersion":  "22.04.13",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  null,
+        "ReleaseDate":  "21.12.12",
         "Manufacturer":  "Lenovo",
         "Model":  "ThinkCentre M75S Gen-2",
         "Product":  [
@@ -1006,7 +1006,7 @@
         "CatalogVersion":  "22.04.13",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  null,
+        "ReleaseDate":  "20.08.09",
         "Manufacturer":  "Lenovo",
         "Model":  "ThinkCentre M75S-1",
         "Product":  [
@@ -1026,7 +1026,7 @@
         "CatalogVersion":  "22.04.13",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  null,
+        "ReleaseDate":  "21.12.30",
         "Manufacturer":  "Lenovo",
         "Model":  "ThinkCentre M75T Gen 2 CEZANNE",
         "Product":  [
@@ -1046,7 +1046,7 @@
         "CatalogVersion":  "22.04.13",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  null,
+        "ReleaseDate":  "21.12.12",
         "Manufacturer":  "Lenovo",
         "Model":  "ThinkCentre M75T Gen 2",
         "Product":  [
@@ -1070,7 +1070,7 @@
         "CatalogVersion":  "22.04.13",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  null,
+        "ReleaseDate":  "17.04.17",
         "Manufacturer":  "Lenovo",
         "Model":  "ThinkCentre M79",
         "Product":  [
@@ -1102,7 +1102,7 @@
         "CatalogVersion":  "22.04.13",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  null,
+        "ReleaseDate":  "16.12.20",
         "Manufacturer":  "Lenovo",
         "Model":  "ThinkCentre M800",
         "Product":  [
@@ -1122,7 +1122,7 @@
         "CatalogVersion":  "22.04.13",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  null,
+        "ReleaseDate":  "16.01.26",
         "Manufacturer":  "Lenovo",
         "Model":  "ThinkCentre M800Z",
         "Product":  [
@@ -1142,7 +1142,7 @@
         "CatalogVersion":  "22.04.13",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  null,
+        "ReleaseDate":  "22.03.28",
         "Manufacturer":  "Lenovo",
         "Model":  "ThinkCentre M80Q Gen 3",
         "Product":  [
@@ -1165,7 +1165,7 @@
         "CatalogVersion":  "22.04.13",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  null,
+        "ReleaseDate":  "21.12.05",
         "Manufacturer":  "Lenovo",
         "Model":  "ThinkCentre M80Q",
         "Product":  [
@@ -1195,7 +1195,7 @@
         "CatalogVersion":  "22.04.13",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  null,
+        "ReleaseDate":  "21.12.05",
         "Manufacturer":  "Lenovo",
         "Model":  "ThinkCentre M80S",
         "Product":  [
@@ -1215,7 +1215,7 @@
         "CatalogVersion":  "22.04.13",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  null,
+        "ReleaseDate":  "21.12.05",
         "Manufacturer":  "Lenovo",
         "Model":  "ThinkCentre M80T",
         "Product":  [
@@ -1235,7 +1235,7 @@
         "CatalogVersion":  "22.04.13",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  null,
+        "ReleaseDate":  "19.05.01",
         "Manufacturer":  "Lenovo",
         "Model":  "ThinkCentre M810Z",
         "Product":  [
@@ -1256,7 +1256,7 @@
         "CatalogVersion":  "22.04.13",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  null,
+        "ReleaseDate":  "20.06.02",
         "Manufacturer":  "Lenovo",
         "Model":  "ThinkCentre M820Z",
         "Product":  [
@@ -1275,7 +1275,7 @@
         "CatalogVersion":  "22.04.13",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  null,
+        "ReleaseDate":  "15.09.15",
         "Manufacturer":  "Lenovo",
         "Model":  "ThinkCentre M83",
         "Product":  [
@@ -1303,7 +1303,7 @@
         "CatalogVersion":  "22.04.13",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  null,
+        "ReleaseDate":  "16.12.20",
         "Manufacturer":  "Lenovo",
         "Model":  "ThinkCentre M900",
         "Product":  [
@@ -1331,7 +1331,7 @@
         "CatalogVersion":  "22.04.13",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  null,
+        "ReleaseDate":  "16.12.20",
         "Manufacturer":  "Lenovo",
         "Model":  "ThinkCentre M900X",
         "Product":  [
@@ -1350,7 +1350,7 @@
         "CatalogVersion":  "22.04.13",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  null,
+        "ReleaseDate":  "16.03.01",
         "Manufacturer":  "Lenovo",
         "Model":  "ThinkCentre M900Z",
         "Product":  [
@@ -1370,7 +1370,7 @@
         "CatalogVersion":  "22.04.13",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  null,
+        "ReleaseDate":  "21.11.01",
         "Manufacturer":  "Lenovo",
         "Model":  "ThinkCentre M90A Gen 2",
         "Product":  [
@@ -1391,7 +1391,7 @@
         "CatalogVersion":  "22.04.13",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  null,
+        "ReleaseDate":  "21.11.02",
         "Manufacturer":  "Lenovo",
         "Model":  "ThinkCentre M90A",
         "Product":  [
@@ -1412,7 +1412,7 @@
         "CatalogVersion":  "22.04.13",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  null,
+        "ReleaseDate":  "22.01.26",
         "Manufacturer":  "Lenovo",
         "Model":  "ThinkCentre M90N 1",
         "Product":  [
@@ -1438,7 +1438,7 @@
         "CatalogVersion":  "22.04.13",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  null,
+        "ReleaseDate":  "22.01.26",
         "Manufacturer":  "Lenovo",
         "Model":  "ThinkCentre M90N-1",
         "Product":  [
@@ -1464,7 +1464,7 @@
         "CatalogVersion":  "22.04.13",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  null,
+        "ReleaseDate":  "21.12.05",
         "Manufacturer":  "Lenovo",
         "Model":  "ThinkCentre M90Q Gen 2",
         "Product":  [
@@ -1484,7 +1484,7 @@
         "CatalogVersion":  "22.04.13",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  null,
+        "ReleaseDate":  "22.03.28",
         "Manufacturer":  "Lenovo",
         "Model":  "ThinkCentre M90Q Gen 3",
         "Product":  [
@@ -1505,7 +1505,7 @@
         "CatalogVersion":  "22.04.13",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  null,
+        "ReleaseDate":  "21.12.05",
         "Manufacturer":  "Lenovo",
         "Model":  "ThinkCentre M90Q",
         "Product":  [
@@ -1529,7 +1529,7 @@
         "CatalogVersion":  "22.04.13",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  null,
+        "ReleaseDate":  "21.12.05",
         "Manufacturer":  "Lenovo",
         "Model":  "ThinkCentre M90S Gen 2",
         "Product":  [
@@ -1549,7 +1549,7 @@
         "CatalogVersion":  "22.04.13",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  null,
+        "ReleaseDate":  "21.12.05",
         "Manufacturer":  "Lenovo",
         "Model":  "ThinkCentre M90S",
         "Product":  [
@@ -1569,7 +1569,7 @@
         "CatalogVersion":  "22.04.13",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  null,
+        "ReleaseDate":  "21.12.05",
         "Manufacturer":  "Lenovo",
         "Model":  "ThinkCentre M90T Gen 2",
         "Product":  [
@@ -1589,7 +1589,7 @@
         "CatalogVersion":  "22.04.13",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  null,
+        "ReleaseDate":  "21.12.05",
         "Manufacturer":  "Lenovo",
         "Model":  "ThinkCentre M90T",
         "Product":  [
@@ -1609,7 +1609,7 @@
         "CatalogVersion":  "22.04.13",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  null,
+        "ReleaseDate":  "19.09.06",
         "Manufacturer":  "Lenovo",
         "Model":  "ThinkCentre M910Q",
         "Product":  [
@@ -1630,7 +1630,7 @@
         "CatalogVersion":  "22.04.13",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  null,
+        "ReleaseDate":  "19.09.06",
         "Manufacturer":  "Lenovo",
         "Model":  "ThinkCentre M910S",
         "Product":  [
@@ -1650,7 +1650,7 @@
         "CatalogVersion":  "22.04.13",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  null,
+        "ReleaseDate":  "19.09.06",
         "Manufacturer":  "Lenovo",
         "Model":  "ThinkCentre M910T",
         "Product":  [
@@ -1670,7 +1670,7 @@
         "CatalogVersion":  "22.04.13",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  null,
+        "ReleaseDate":  "19.09.06",
         "Manufacturer":  "Lenovo",
         "Model":  "ThinkCentre M910X",
         "Product":  [
@@ -1692,7 +1692,7 @@
         "CatalogVersion":  "22.04.13",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  null,
+        "ReleaseDate":  "17.07.03",
         "Manufacturer":  "Lenovo",
         "Model":  "ThinkCentre M910Z",
         "Product":  [
@@ -1714,7 +1714,7 @@
         "CatalogVersion":  "22.04.13",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  null,
+        "ReleaseDate":  "21.02.04",
         "Manufacturer":  "Lenovo",
         "Model":  "ThinkCentre M920Q",
         "Product":  [
@@ -1739,7 +1739,7 @@
         "CatalogVersion":  "22.04.13",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  null,
+        "ReleaseDate":  "21.02.04",
         "Manufacturer":  "Lenovo",
         "Model":  "ThinkCentre M920S",
         "Product":  [
@@ -1761,7 +1761,7 @@
         "CatalogVersion":  "22.04.13",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  null,
+        "ReleaseDate":  "21.02.04",
         "Manufacturer":  "Lenovo",
         "Model":  "ThinkCentre M920T",
         "Product":  [
@@ -1784,7 +1784,7 @@
         "CatalogVersion":  "22.04.13",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  null,
+        "ReleaseDate":  "21.02.04",
         "Manufacturer":  "Lenovo",
         "Model":  "ThinkCentre M920X",
         "Product":  [
@@ -1809,7 +1809,7 @@
         "CatalogVersion":  "22.04.13",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  null,
+        "ReleaseDate":  "19.12.27",
         "Manufacturer":  "Lenovo",
         "Model":  "ThinkCentre M920Z",
         "Product":  [
@@ -1829,7 +1829,7 @@
         "CatalogVersion":  "22.04.13",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  null,
+        "ReleaseDate":  "15.09.15",
         "Manufacturer":  "Lenovo",
         "Model":  "ThinkCentre M93",
         "Product":  [
@@ -1853,7 +1853,7 @@
         "CatalogVersion":  "22.04.13",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  null,
+        "ReleaseDate":  "15.09.15",
         "Manufacturer":  "Lenovo",
         "Model":  "ThinkCentre M93P",
         "Product":  [
@@ -1877,7 +1877,7 @@
         "CatalogVersion":  "22.04.13",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  null,
+        "ReleaseDate":  "21.12.12",
         "Manufacturer":  "Lenovo",
         "Model":  "ThinkCentre ThinkCentre M75Q Gen 2",
         "Product":  [
@@ -1897,7 +1897,7 @@
         "CatalogVersion":  "22.04.13",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  null,
+        "ReleaseDate":  "16.08.29",
         "Manufacturer":  "Lenovo",
         "Model":  "ThinkCentre X1",
         "Product":  [
@@ -1921,7 +1921,7 @@
         "CatalogVersion":  "22.04.13",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  null,
+        "ReleaseDate":  "19.06.04",
         "Manufacturer":  "Lenovo",
         "Model":  "ThinkPad 10 20E3 20E4",
         "Product":  [
@@ -1939,7 +1939,7 @@
         "CatalogVersion":  "22.04.13",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  null,
+        "ReleaseDate":  "15.09.28",
         "Manufacturer":  "Lenovo",
         "Model":  "ThinkPad 10",
         "Product":  [
@@ -1957,7 +1957,7 @@
         "CatalogVersion":  "22.04.13",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  null,
+        "ReleaseDate":  "20.06.16",
         "Manufacturer":  "Lenovo",
         "Model":  "ThinkPad 11e 20E6 20E8",
         "Product":  [
@@ -1975,7 +1975,7 @@
         "CatalogVersion":  "22.04.13",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  null,
+        "ReleaseDate":  "20.12.28",
         "Manufacturer":  "Lenovo",
         "Model":  "ThinkPad 11e 20G9 20GB",
         "Product":  [
@@ -1993,7 +1993,7 @@
         "CatalogVersion":  "22.04.13",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  null,
+        "ReleaseDate":  "20.12.28",
         "Manufacturer":  "Lenovo",
         "Model":  "ThinkPad 11e 4th Gen Type 20HT 20HV",
         "Product":  [
@@ -2011,7 +2011,7 @@
         "CatalogVersion":  "22.04.13",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  null,
+        "ReleaseDate":  "22.01.12",
         "Manufacturer":  "Lenovo",
         "Model":  "ThinkPad 11e 5TH Gen Type 20LR 20LQ",
         "Product":  [
@@ -2029,7 +2029,7 @@
         "CatalogVersion":  "22.04.13",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  null,
+        "ReleaseDate":  "17.07.10",
         "Manufacturer":  "Lenovo",
         "Model":  "ThinkPad 11e",
         "Product":  [
@@ -2047,7 +2047,7 @@
         "CatalogVersion":  "22.04.13",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  null,
+        "ReleaseDate":  "20.12.28",
         "Manufacturer":  "Lenovo",
         "Model":  "ThinkPad 13 Type 20J1 20J2",
         "Product":  [
@@ -2065,7 +2065,7 @@
         "CatalogVersion":  "22.04.13",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  null,
+        "ReleaseDate":  "20.12.28",
         "Manufacturer":  "Lenovo",
         "Model":  "ThinkPad 13",
         "Product":  [
@@ -2083,7 +2083,7 @@
         "CatalogVersion":  "22.04.13",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  null,
+        "ReleaseDate":  "15.09.28",
         "Manufacturer":  "Lenovo",
         "Model":  "ThinkPad 8",
         "Product":  [
@@ -2101,7 +2101,7 @@
         "CatalogVersion":  "22.04.13",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  null,
+        "ReleaseDate":  "21.05.19",
         "Manufacturer":  "Lenovo",
         "Model":  "ThinkPad A275 Type 20KC 20KD",
         "Product":  [
@@ -2119,7 +2119,7 @@
         "CatalogVersion":  "22.04.13",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  null,
+        "ReleaseDate":  "21.05.19",
         "Manufacturer":  "Lenovo",
         "Model":  "ThinkPad A285 Type 20MW 20MX",
         "Product":  [
@@ -2137,7 +2137,7 @@
         "CatalogVersion":  "22.04.13",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  null,
+        "ReleaseDate":  "21.05.19",
         "Manufacturer":  "Lenovo",
         "Model":  "ThinkPad A475 Type 20KL 20KM",
         "Product":  [
@@ -2155,7 +2155,7 @@
         "CatalogVersion":  "22.04.13",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  null,
+        "ReleaseDate":  "21.05.19",
         "Manufacturer":  "Lenovo",
         "Model":  "ThinkPad A485 Type 20MU 20MV",
         "Product":  [
@@ -2173,7 +2173,7 @@
         "CatalogVersion":  "22.04.13",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  null,
+        "ReleaseDate":  "22.03.13",
         "Manufacturer":  "Lenovo",
         "Model":  "ThinkPad E14 Gen 2 Type 20T6 20T7",
         "Product":  [
@@ -2191,7 +2191,7 @@
         "CatalogVersion":  "22.04.13",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  null,
+        "ReleaseDate":  "21.10.08",
         "Manufacturer":  "Lenovo",
         "Model":  "ThinkPad E14 Gen 2 Type 20TA 20TB",
         "Product":  [
@@ -2209,7 +2209,7 @@
         "CatalogVersion":  "22.04.13",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  null,
+        "ReleaseDate":  "21.10.08",
         "Manufacturer":  "Lenovo",
         "Model":  "ThinkPad E14 Gen 3",
         "Product":  [
@@ -2229,7 +2229,7 @@
         "CatalogVersion":  "22.04.13",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  null,
+        "ReleaseDate":  "22.03.13",
         "Manufacturer":  "Lenovo",
         "Model":  "ThinkPad E14 Type 20RA 20RB",
         "Product":  [
@@ -2247,7 +2247,7 @@
         "CatalogVersion":  "22.04.13",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  null,
+        "ReleaseDate":  "22.03.13",
         "Manufacturer":  "Lenovo",
         "Model":  "ThinkPad E15 Gen 2 Type 20T8 20T9",
         "Product":  [
@@ -2265,7 +2265,7 @@
         "CatalogVersion":  "22.04.13",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  null,
+        "ReleaseDate":  "21.10.08",
         "Manufacturer":  "Lenovo",
         "Model":  "ThinkPad E15 Gen 2 Type 20TD 20TE",
         "Product":  [
@@ -2283,7 +2283,7 @@
         "CatalogVersion":  "22.04.13",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  null,
+        "ReleaseDate":  "21.10.08",
         "Manufacturer":  "Lenovo",
         "Model":  "ThinkPad E15 Gen 3",
         "Product":  [
@@ -2303,7 +2303,7 @@
         "CatalogVersion":  "22.04.13",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  null,
+        "ReleaseDate":  "22.03.13",
         "Manufacturer":  "Lenovo",
         "Model":  "ThinkPad E15 Type 20RD 20RE",
         "Product":  [
@@ -2321,7 +2321,7 @@
         "CatalogVersion":  "22.04.13",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  null,
+        "ReleaseDate":  "20.04.07",
         "Manufacturer":  "Lenovo",
         "Model":  "ThinkPad E460",
         "Product":  [
@@ -2339,7 +2339,7 @@
         "CatalogVersion":  "22.04.13",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  null,
+        "ReleaseDate":  "20.04.07",
         "Manufacturer":  "Lenovo",
         "Model":  "ThinkPad E465",
         "Product":  [
@@ -2356,7 +2356,7 @@
         "CatalogVersion":  "22.04.13",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  null,
+        "ReleaseDate":  "20.04.07",
         "Manufacturer":  "Lenovo",
         "Model":  "ThinkPad E470",
         "Product":  [
@@ -2374,7 +2374,7 @@
         "CatalogVersion":  "22.04.13",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  null,
+        "ReleaseDate":  "20.12.16",
         "Manufacturer":  "Lenovo",
         "Model":  "ThinkPad E475",
         "Product":  [
@@ -2391,7 +2391,7 @@
         "CatalogVersion":  "22.04.13",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  null,
+        "ReleaseDate":  "22.03.13",
         "Manufacturer":  "Lenovo",
         "Model":  "ThinkPad E480 Type 20KN 20KQ",
         "Product":  [
@@ -2409,7 +2409,7 @@
         "CatalogVersion":  "22.04.13",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  null,
+        "ReleaseDate":  "21.05.20",
         "Manufacturer":  "Lenovo",
         "Model":  "ThinkPad E485 Type 20KU",
         "Product":  [
@@ -2426,7 +2426,7 @@
         "CatalogVersion":  "22.04.13",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  null,
+        "ReleaseDate":  "22.03.13",
         "Manufacturer":  "Lenovo",
         "Model":  "ThinkPad E490 Type 20N8 20N9",
         "Product":  [
@@ -2444,7 +2444,7 @@
         "CatalogVersion":  "22.04.13",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  null,
+        "ReleaseDate":  "22.03.13",
         "Manufacturer":  "Lenovo",
         "Model":  "ThinkPad E490S Type 20NG",
         "Product":  [
@@ -2461,7 +2461,7 @@
         "CatalogVersion":  "22.04.13",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  null,
+        "ReleaseDate":  "22.03.13",
         "Manufacturer":  "Lenovo",
         "Model":  "ThinkPad E495 Type 20NE",
         "Product":  [
@@ -2478,7 +2478,7 @@
         "CatalogVersion":  "22.04.13",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  null,
+        "ReleaseDate":  "20.04.07",
         "Manufacturer":  "Lenovo",
         "Model":  "ThinkPad E560",
         "Product":  [
@@ -2496,7 +2496,7 @@
         "CatalogVersion":  "22.04.13",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  null,
+        "ReleaseDate":  "20.04.07",
         "Manufacturer":  "Lenovo",
         "Model":  "ThinkPad E565",
         "Product":  [
@@ -2513,7 +2513,7 @@
         "CatalogVersion":  "22.04.13",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  null,
+        "ReleaseDate":  "20.04.07",
         "Manufacturer":  "Lenovo",
         "Model":  "ThinkPad E570",
         "Product":  [
@@ -2531,7 +2531,7 @@
         "CatalogVersion":  "22.04.13",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  null,
+        "ReleaseDate":  "20.12.16",
         "Manufacturer":  "Lenovo",
         "Model":  "ThinkPad E575",
         "Product":  [
@@ -2548,7 +2548,7 @@
         "CatalogVersion":  "22.04.13",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  null,
+        "ReleaseDate":  "22.03.13",
         "Manufacturer":  "Lenovo",
         "Model":  "ThinkPad E580 Type 20KS 20KT",
         "Product":  [
@@ -2566,7 +2566,7 @@
         "CatalogVersion":  "22.04.13",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  null,
+        "ReleaseDate":  "21.05.20",
         "Manufacturer":  "Lenovo",
         "Model":  "ThinkPad E585 Type 20KV",
         "Product":  [
@@ -2583,7 +2583,7 @@
         "CatalogVersion":  "22.04.13",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  null,
+        "ReleaseDate":  "22.03.13",
         "Manufacturer":  "Lenovo",
         "Model":  "ThinkPad E590 Type 20NB 20NC",
         "Product":  [
@@ -2601,7 +2601,7 @@
         "CatalogVersion":  "22.04.13",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  null,
+        "ReleaseDate":  "22.03.13",
         "Manufacturer":  "Lenovo",
         "Model":  "ThinkPad E595 Type 20NF",
         "Product":  [
@@ -2618,7 +2618,7 @@
         "CatalogVersion":  "22.04.13",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  null,
+        "ReleaseDate":  "17.07.10",
         "Manufacturer":  "Lenovo",
         "Model":  "ThinkPad HELIX Type 20CG 20CH",
         "Product":  [
@@ -2636,7 +2636,7 @@
         "CatalogVersion":  "22.04.13",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  null,
+        "ReleaseDate":  "22.03.22",
         "Manufacturer":  "Lenovo",
         "Model":  "ThinkPad L13 Gen 2 Non-VPro Type 20VH 20VJ",
         "Product":  [
@@ -2654,7 +2654,7 @@
         "CatalogVersion":  "22.04.13",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  null,
+        "ReleaseDate":  "22.02.10",
         "Manufacturer":  "Lenovo",
         "Model":  "ThinkPad L13 Gen 2 Type 21AB 21AC",
         "Product":  [
@@ -2673,7 +2673,7 @@
         "CatalogVersion":  "22.04.13",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  null,
+        "ReleaseDate":  "22.03.22",
         "Manufacturer":  "Lenovo",
         "Model":  "ThinkPad L13 Gen 2 VPro Type 20VH 20VJ",
         "Product":  [
@@ -2691,7 +2691,7 @@
         "CatalogVersion":  "22.04.13",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  null,
+        "ReleaseDate":  "22.01.12",
         "Manufacturer":  "Lenovo",
         "Model":  "ThinkPad L13 Type 20R3 20R4",
         "Product":  [
@@ -2709,7 +2709,7 @@
         "CatalogVersion":  "22.04.13",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  null,
+        "ReleaseDate":  "22.03.22",
         "Manufacturer":  "Lenovo",
         "Model":  "ThinkPad L13 Yoga Gen 2 Non-VPro Type 20VL 20VK",
         "Product":  [
@@ -2727,7 +2727,7 @@
         "CatalogVersion":  "22.04.13",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  null,
+        "ReleaseDate":  "22.02.10",
         "Manufacturer":  "Lenovo",
         "Model":  "ThinkPad L13 Yoga Gen 2 Type 21AD 21AE",
         "Product":  [
@@ -2746,7 +2746,7 @@
         "CatalogVersion":  "22.04.13",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  null,
+        "ReleaseDate":  "22.03.22",
         "Manufacturer":  "Lenovo",
         "Model":  "ThinkPad L13 Yoga Gen 2 VPro Type 20VL 20VK",
         "Product":  [
@@ -2764,7 +2764,7 @@
         "CatalogVersion":  "22.04.13",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  null,
+        "ReleaseDate":  "22.01.12",
         "Manufacturer":  "Lenovo",
         "Model":  "ThinkPad L13 Yoga Type 20R5 20R6",
         "Product":  [
@@ -2782,7 +2782,7 @@
         "CatalogVersion":  "22.04.13",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  null,
+        "ReleaseDate":  "22.01.17",
         "Manufacturer":  "Lenovo",
         "Model":  "ThinkPad L14 Gen 2 Type 20X1 20X2",
         "Product":  [
@@ -2800,7 +2800,7 @@
         "CatalogVersion":  "22.04.13",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  null,
+        "ReleaseDate":  "22.03.17",
         "Manufacturer":  "Lenovo",
         "Model":  "ThinkPad L14 Gen 2 Type 20X5 20X6",
         "Product":  [
@@ -2818,7 +2818,7 @@
         "CatalogVersion":  "22.04.13",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  null,
+        "ReleaseDate":  "22.03.07",
         "Manufacturer":  "Lenovo",
         "Model":  "ThinkPad L14 Gen 3 Type 21C5 21C6",
         "Product":  [
@@ -2836,7 +2836,7 @@
         "CatalogVersion":  "22.04.13",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  null,
+        "ReleaseDate":  "21.11.16",
         "Manufacturer":  "Lenovo",
         "Model":  "ThinkPad L14 Type 20U1 20U2",
         "Product":  [
@@ -2854,7 +2854,7 @@
         "CatalogVersion":  "22.04.13",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  null,
+        "ReleaseDate":  "21.12.30",
         "Manufacturer":  "Lenovo",
         "Model":  "ThinkPad L14 Type 20U5 20U6",
         "Product":  [
@@ -2872,7 +2872,7 @@
         "CatalogVersion":  "22.04.13",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  null,
+        "ReleaseDate":  "22.01.17",
         "Manufacturer":  "Lenovo",
         "Model":  "ThinkPad L15 Gen 2 Type 20X3 20X4",
         "Product":  [
@@ -2890,7 +2890,7 @@
         "CatalogVersion":  "22.04.13",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  null,
+        "ReleaseDate":  "22.03.17",
         "Manufacturer":  "Lenovo",
         "Model":  "ThinkPad L15 Gen 2 Type 20X7 20X8",
         "Product":  [
@@ -2908,7 +2908,7 @@
         "CatalogVersion":  "22.04.13",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  null,
+        "ReleaseDate":  "22.03.07",
         "Manufacturer":  "Lenovo",
         "Model":  "ThinkPad L15 Gen 3 Type 21C7 21C8",
         "Product":  [
@@ -2926,7 +2926,7 @@
         "CatalogVersion":  "22.04.13",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  null,
+        "ReleaseDate":  "21.11.16",
         "Manufacturer":  "Lenovo",
         "Model":  "ThinkPad L15 Type 20U3 20U4",
         "Product":  [
@@ -2944,7 +2944,7 @@
         "CatalogVersion":  "22.04.13",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  null,
+        "ReleaseDate":  "21.12.30",
         "Manufacturer":  "Lenovo",
         "Model":  "ThinkPad L15 Type 20U7 20U8",
         "Product":  [
@@ -2962,7 +2962,7 @@
         "CatalogVersion":  "22.04.13",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  null,
+        "ReleaseDate":  "22.01.12",
         "Manufacturer":  "Lenovo",
         "Model":  "ThinkPad L380 Type 20M5 20M6",
         "Product":  [
@@ -2980,7 +2980,7 @@
         "CatalogVersion":  "22.04.13",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  null,
+        "ReleaseDate":  "22.01.12",
         "Manufacturer":  "Lenovo",
         "Model":  "ThinkPad L380 Yoga Type 20M7 20M8",
         "Product":  [
@@ -2998,7 +2998,7 @@
         "CatalogVersion":  "22.04.13",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  null,
+        "ReleaseDate":  "22.01.12",
         "Manufacturer":  "Lenovo",
         "Model":  "ThinkPad L390 Type 20NR 20NS",
         "Product":  [
@@ -3016,7 +3016,7 @@
         "CatalogVersion":  "22.04.13",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  null,
+        "ReleaseDate":  "22.01.12",
         "Manufacturer":  "Lenovo",
         "Model":  "ThinkPad L390 Yoga Type 20NT 20NU",
         "Product":  [
@@ -3034,7 +3034,7 @@
         "CatalogVersion":  "22.04.13",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  null,
+        "ReleaseDate":  "16.02.29",
         "Manufacturer":  "Lenovo",
         "Model":  "ThinkPad L440",
         "Product":  [
@@ -3052,7 +3052,7 @@
         "CatalogVersion":  "22.04.13",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  null,
+        "ReleaseDate":  "20.04.16",
         "Manufacturer":  "Lenovo",
         "Model":  "ThinkPad L450",
         "Product":  [
@@ -3070,7 +3070,7 @@
         "CatalogVersion":  "22.04.13",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  null,
+        "ReleaseDate":  "20.04.16",
         "Manufacturer":  "Lenovo",
         "Model":  "ThinkPad L460",
         "Product":  [
@@ -3088,7 +3088,7 @@
         "CatalogVersion":  "22.04.13",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  null,
+        "ReleaseDate":  "21.05.26",
         "Manufacturer":  "Lenovo",
         "Model":  "ThinkPad L470 Type 20JU 20JV",
         "Product":  [
@@ -3106,7 +3106,7 @@
         "CatalogVersion":  "22.04.13",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  null,
+        "ReleaseDate":  "21.05.26",
         "Manufacturer":  "Lenovo",
         "Model":  "ThinkPad L470",
         "Product":  [
@@ -3124,7 +3124,7 @@
         "CatalogVersion":  "22.04.13",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  null,
+        "ReleaseDate":  "21.11.16",
         "Manufacturer":  "Lenovo",
         "Model":  "ThinkPad L480 Type 20LS 20LT",
         "Product":  [
@@ -3142,7 +3142,7 @@
         "CatalogVersion":  "22.04.13",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  null,
+        "ReleaseDate":  "22.02.25",
         "Manufacturer":  "Lenovo",
         "Model":  "ThinkPad L490 Type 20Q5 20Q6",
         "Product":  [
@@ -3160,7 +3160,7 @@
         "CatalogVersion":  "22.04.13",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  null,
+        "ReleaseDate":  "16.02.29",
         "Manufacturer":  "Lenovo",
         "Model":  "ThinkPad L540",
         "Product":  [
@@ -3178,7 +3178,7 @@
         "CatalogVersion":  "22.04.13",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  null,
+        "ReleaseDate":  "20.01.31",
         "Manufacturer":  "Lenovo",
         "Model":  "ThinkPad L560",
         "Product":  [
@@ -3196,7 +3196,7 @@
         "CatalogVersion":  "22.04.13",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  null,
+        "ReleaseDate":  "21.06.02",
         "Manufacturer":  "Lenovo",
         "Model":  "ThinkPad L570 Type 20J8 20J9",
         "Product":  [
@@ -3214,7 +3214,7 @@
         "CatalogVersion":  "22.04.13",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  null,
+        "ReleaseDate":  "21.06.02",
         "Manufacturer":  "Lenovo",
         "Model":  "ThinkPad L570 Type 20JQ 20JR",
         "Product":  [
@@ -3232,7 +3232,7 @@
         "CatalogVersion":  "22.04.13",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  null,
+        "ReleaseDate":  "21.11.16",
         "Manufacturer":  "Lenovo",
         "Model":  "ThinkPad L580 Type 20LW 20LX",
         "Product":  [
@@ -3250,7 +3250,7 @@
         "CatalogVersion":  "22.04.13",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  null,
+        "ReleaseDate":  "22.02.25",
         "Manufacturer":  "Lenovo",
         "Model":  "ThinkPad L590 Type 20Q7 20Q8",
         "Product":  [
@@ -3268,7 +3268,7 @@
         "CatalogVersion":  "22.04.13",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  null,
+        "ReleaseDate":  "21.11.17",
         "Manufacturer":  "Lenovo",
         "Model":  "ThinkPad P1 Gen 2 Type 20QT 20QU",
         "Product":  [
@@ -3286,7 +3286,7 @@
         "CatalogVersion":  "22.04.13",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  null,
+        "ReleaseDate":  "21.11.17",
         "Manufacturer":  "Lenovo",
         "Model":  "ThinkPad P1 Gen 3 Type 20TH 20TJ",
         "Product":  [
@@ -3304,7 +3304,7 @@
         "CatalogVersion":  "22.04.13",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  null,
+        "ReleaseDate":  "22.01.29",
         "Manufacturer":  "Lenovo",
         "Model":  "ThinkPad P1 Gen 4 Type 20Y3 20Y4",
         "Product":  [
@@ -3322,7 +3322,7 @@
         "CatalogVersion":  "22.04.13",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  null,
+        "ReleaseDate":  "21.11.17",
         "Manufacturer":  "Lenovo",
         "Model":  "ThinkPad P1 Type 20MD 20ME",
         "Product":  [
@@ -3340,7 +3340,7 @@
         "CatalogVersion":  "22.04.13",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  null,
+        "ReleaseDate":  "22.03.14",
         "Manufacturer":  "Lenovo",
         "Model":  "ThinkPad P14S Gen 2 Type 20VX  20VY",
         "Product":  [
@@ -3358,7 +3358,7 @@
         "CatalogVersion":  "22.04.13",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  null,
+        "ReleaseDate":  "21.12.29",
         "Manufacturer":  "Lenovo",
         "Model":  "ThinkPad P14S Gen 2 Type 21A0 21A1",
         "Product":  [
@@ -3376,7 +3376,7 @@
         "CatalogVersion":  "22.04.13",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  null,
+        "ReleaseDate":  "21.11.11",
         "Manufacturer":  "Lenovo",
         "Model":  "ThinkPad P14S Type 20S4 20S5",
         "Product":  [
@@ -3394,7 +3394,7 @@
         "CatalogVersion":  "22.04.13",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  null,
+        "ReleaseDate":  "22.02.25",
         "Manufacturer":  "Lenovo",
         "Model":  "ThinkPad P14S Type 20Y1 20Y2",
         "Product":  [
@@ -3412,7 +3412,7 @@
         "CatalogVersion":  "22.04.13",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  null,
+        "ReleaseDate":  "22.02.28",
         "Manufacturer":  "Lenovo",
         "Model":  "ThinkPad P15 Gen 2 Type 20YQ 20YR",
         "Product":  [
@@ -3430,7 +3430,7 @@
         "CatalogVersion":  "22.04.13",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  null,
+        "ReleaseDate":  "21.11.05",
         "Manufacturer":  "Lenovo",
         "Model":  "ThinkPad P15 Type 20ST 20SU",
         "Product":  [
@@ -3448,7 +3448,7 @@
         "CatalogVersion":  "22.04.13",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  null,
+        "ReleaseDate":  "22.03.14",
         "Manufacturer":  "Lenovo",
         "Model":  "ThinkPad P15S Gen 2 Type 20W6 20W7",
         "Product":  [
@@ -3466,7 +3466,7 @@
         "CatalogVersion":  "22.04.13",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  null,
+        "ReleaseDate":  "21.11.11",
         "Manufacturer":  "Lenovo",
         "Model":  "ThinkPad P15S Type 20T4 20T5",
         "Product":  [
@@ -3484,7 +3484,7 @@
         "CatalogVersion":  "22.04.13",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  null,
+        "ReleaseDate":  "22.01.14",
         "Manufacturer":  "Lenovo",
         "Model":  "ThinkPad P15V Gen 2 Type 21A9 21AA",
         "Product":  [
@@ -3502,7 +3502,7 @@
         "CatalogVersion":  "22.04.13",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  null,
+        "ReleaseDate":  "21.11.05",
         "Manufacturer":  "Lenovo",
         "Model":  "ThinkPad P15V Type 20TQ 20TR",
         "Product":  [
@@ -3520,7 +3520,7 @@
         "CatalogVersion":  "22.04.13",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  null,
+        "ReleaseDate":  "21.11.05",
         "Manufacturer":  "Lenovo",
         "Model":  "ThinkPad P17 Gen 1 Type 20SN 20SQ",
         "Product":  [
@@ -3538,7 +3538,7 @@
         "CatalogVersion":  "22.04.13",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  null,
+        "ReleaseDate":  "22.02.28",
         "Manufacturer":  "Lenovo",
         "Model":  "ThinkPad P17 Gen 2 Type 20YU 20YV",
         "Product":  [
@@ -3556,7 +3556,7 @@
         "CatalogVersion":  "22.04.13",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  null,
+        "ReleaseDate":  "20.03.12",
         "Manufacturer":  "Lenovo",
         "Model":  "ThinkPad P40 Yoga",
         "Product":  [
@@ -3574,7 +3574,7 @@
         "CatalogVersion":  "22.04.13",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  null,
+        "ReleaseDate":  "21.11.11",
         "Manufacturer":  "Lenovo",
         "Model":  "ThinkPad P43S Type 20RH 20RJ",
         "Product":  [
@@ -3592,7 +3592,7 @@
         "CatalogVersion":  "22.04.13",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  null,
+        "ReleaseDate":  "20.01.31",
         "Manufacturer":  "Lenovo",
         "Model":  "ThinkPad P50",
         "Product":  [
@@ -3610,7 +3610,7 @@
         "CatalogVersion":  "22.04.13",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  null,
+        "ReleaseDate":  "20.02.02",
         "Manufacturer":  "Lenovo",
         "Model":  "ThinkPad P50S",
         "Product":  [
@@ -3628,7 +3628,7 @@
         "CatalogVersion":  "22.04.13",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  null,
+        "ReleaseDate":  "20.12.22",
         "Manufacturer":  "Lenovo",
         "Model":  "ThinkPad P51 Type 20HH 20HJ",
         "Product":  [
@@ -3646,7 +3646,7 @@
         "CatalogVersion":  "22.04.13",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  null,
+        "ReleaseDate":  "20.12.22",
         "Manufacturer":  "Lenovo",
         "Model":  "ThinkPad P51 Type 20MM 20MN",
         "Product":  [
@@ -3664,7 +3664,7 @@
         "CatalogVersion":  "22.04.13",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  null,
+        "ReleaseDate":  "20.12.08",
         "Manufacturer":  "Lenovo",
         "Model":  "ThinkPad P51S Type 20HB 20HC",
         "Product":  [
@@ -3682,7 +3682,7 @@
         "CatalogVersion":  "22.04.13",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  null,
+        "ReleaseDate":  "20.12.08",
         "Manufacturer":  "Lenovo",
         "Model":  "ThinkPad P51S Type 20JY 20K0",
         "Product":  [
@@ -3700,7 +3700,7 @@
         "CatalogVersion":  "22.04.13",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  null,
+        "ReleaseDate":  "22.03.17",
         "Manufacturer":  "Lenovo",
         "Model":  "ThinkPad P52 Type 20M9 20MA",
         "Product":  [
@@ -3718,7 +3718,7 @@
         "CatalogVersion":  "22.04.13",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  null,
+        "ReleaseDate":  "21.11.11",
         "Manufacturer":  "Lenovo",
         "Model":  "ThinkPad P52S Type 20LB 20LC",
         "Product":  [
@@ -3736,7 +3736,7 @@
         "CatalogVersion":  "22.04.13",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  null,
+        "ReleaseDate":  "22.03.17",
         "Manufacturer":  "Lenovo",
         "Model":  "ThinkPad P53 Type 20QN 20QQ",
         "Product":  [
@@ -3754,7 +3754,7 @@
         "CatalogVersion":  "22.04.13",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  null,
+        "ReleaseDate":  "21.11.11",
         "Manufacturer":  "Lenovo",
         "Model":  "ThinkPad P53S Type 20N6 20N7",
         "Product":  [
@@ -3772,7 +3772,7 @@
         "CatalogVersion":  "22.04.13",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  null,
+        "ReleaseDate":  "20.01.31",
         "Manufacturer":  "Lenovo",
         "Model":  "ThinkPad P70",
         "Product":  [
@@ -3790,7 +3790,7 @@
         "CatalogVersion":  "22.04.13",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  null,
+        "ReleaseDate":  "20.12.22",
         "Manufacturer":  "Lenovo",
         "Model":  "ThinkPad P71",
         "Product":  [
@@ -3808,7 +3808,7 @@
         "CatalogVersion":  "22.04.13",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  null,
+        "ReleaseDate":  "22.03.17",
         "Manufacturer":  "Lenovo",
         "Model":  "ThinkPad P72 Type 20MB 20MC",
         "Product":  [
@@ -3826,7 +3826,7 @@
         "CatalogVersion":  "22.04.13",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  null,
+        "ReleaseDate":  "22.03.17",
         "Manufacturer":  "Lenovo",
         "Model":  "ThinkPad P73 Type 20QR 20QS",
         "Product":  [
@@ -3844,7 +3844,7 @@
         "CatalogVersion":  "22.04.13",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  null,
+        "ReleaseDate":  "22.03.14",
         "Manufacturer":  "Lenovo",
         "Model":  "ThinkPad T14 Gen 2 Type 20W0 20W1",
         "Product":  [
@@ -3862,7 +3862,7 @@
         "CatalogVersion":  "22.04.13",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  null,
+        "ReleaseDate":  "21.12.29",
         "Manufacturer":  "Lenovo",
         "Model":  "ThinkPad T14 Gen 2 Type 20XK 20XL",
         "Product":  [
@@ -3880,7 +3880,7 @@
         "CatalogVersion":  "22.04.13",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  null,
+        "ReleaseDate":  "21.11.11",
         "Manufacturer":  "Lenovo",
         "Model":  "ThinkPad T14 Type 20S0 20S1",
         "Product":  [
@@ -3898,7 +3898,7 @@
         "CatalogVersion":  "22.04.13",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  null,
+        "ReleaseDate":  "21.11.11",
         "Manufacturer":  "Lenovo",
         "Model":  "ThinkPad T14 Type 20S2 20S3",
         "Product":  [
@@ -3916,7 +3916,7 @@
         "CatalogVersion":  "22.04.13",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  null,
+        "ReleaseDate":  "21.12.29",
         "Manufacturer":  "Lenovo",
         "Model":  "ThinkPad T14 Type 20UD 20UE",
         "Product":  [
@@ -3934,7 +3934,7 @@
         "CatalogVersion":  "22.04.13",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  null,
+        "ReleaseDate":  "22.01.18",
         "Manufacturer":  "Lenovo",
         "Model":  "ThinkPad T14S Gen 2 Type 20WM 20WN",
         "Product":  [
@@ -3952,7 +3952,7 @@
         "CatalogVersion":  "22.04.13",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  null,
+        "ReleaseDate":  "21.12.29",
         "Manufacturer":  "Lenovo",
         "Model":  "ThinkPad T14S Gen 2 Type 20XF 20XG",
         "Product":  [
@@ -3970,7 +3970,7 @@
         "CatalogVersion":  "22.04.13",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  null,
+        "ReleaseDate":  "21.11.11",
         "Manufacturer":  "Lenovo",
         "Model":  "ThinkPad T14S Type 20T0 20T1",
         "Product":  [
@@ -3988,7 +3988,7 @@
         "CatalogVersion":  "22.04.13",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  null,
+        "ReleaseDate":  "21.12.29",
         "Manufacturer":  "Lenovo",
         "Model":  "ThinkPad T14S Type 20UH 20UJ",
         "Product":  [
@@ -4006,7 +4006,7 @@
         "CatalogVersion":  "22.04.13",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  null,
+        "ReleaseDate":  "22.03.14",
         "Manufacturer":  "Lenovo",
         "Model":  "ThinkPad T15 Gen 2 Type 20W4 20W5",
         "Product":  [
@@ -4024,7 +4024,7 @@
         "CatalogVersion":  "22.04.13",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  null,
+        "ReleaseDate":  "21.11.11",
         "Manufacturer":  "Lenovo",
         "Model":  "ThinkPad T15 Type 20S6 20S7",
         "Product":  [
@@ -4042,7 +4042,7 @@
         "CatalogVersion":  "22.04.13",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  null,
+        "ReleaseDate":  "21.11.05",
         "Manufacturer":  "Lenovo",
         "Model":  "ThinkPad T15G Gen 1 Type 20UR 20US",
         "Product":  [
@@ -4060,7 +4060,7 @@
         "CatalogVersion":  "22.04.13",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  null,
+        "ReleaseDate":  "22.02.28",
         "Manufacturer":  "Lenovo",
         "Model":  "ThinkPad T15G Gen 2 Type 20YS 20YT",
         "Product":  [
@@ -4078,7 +4078,7 @@
         "CatalogVersion":  "22.04.13",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  null,
+        "ReleaseDate":  "22.01.14",
         "Manufacturer":  "Lenovo",
         "Model":  "ThinkPad T15P Gen 2 Type 21A7 21A8",
         "Product":  [
@@ -4096,7 +4096,7 @@
         "CatalogVersion":  "22.04.13",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  null,
+        "ReleaseDate":  "21.11.05",
         "Manufacturer":  "Lenovo",
         "Model":  "ThinkPad T15P Type 20TN 20TM",
         "Product":  [
@@ -4114,7 +4114,7 @@
         "CatalogVersion":  "22.04.13",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  null,
+        "ReleaseDate":  "21.06.02",
         "Manufacturer":  "Lenovo",
         "Model":  "ThinkPad T25 Type 20K7",
         "Product":  [
@@ -4131,7 +4131,7 @@
         "CatalogVersion":  "22.04.13",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  null,
+        "ReleaseDate":  "18.07.26",
         "Manufacturer":  "Lenovo",
         "Model":  "ThinkPad T440",
         "Product":  [
@@ -4149,7 +4149,7 @@
         "CatalogVersion":  "22.04.13",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  null,
+        "ReleaseDate":  "18.08.03",
         "Manufacturer":  "Lenovo",
         "Model":  "ThinkPad T440P",
         "Product":  [
@@ -4167,7 +4167,7 @@
         "CatalogVersion":  "22.04.13",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  null,
+        "ReleaseDate":  "18.07.26",
         "Manufacturer":  "Lenovo",
         "Model":  "ThinkPad T440S",
         "Product":  [
@@ -4185,7 +4185,7 @@
         "CatalogVersion":  "22.04.13",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  null,
+        "ReleaseDate":  "19.07.05",
         "Manufacturer":  "Lenovo",
         "Model":  "ThinkPad T450",
         "Product":  [
@@ -4204,7 +4204,7 @@
         "CatalogVersion":  "22.04.13",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  null,
+        "ReleaseDate":  "19.07.05",
         "Manufacturer":  "Lenovo",
         "Model":  "ThinkPad T450S",
         "Product":  [
@@ -4222,7 +4222,7 @@
         "CatalogVersion":  "22.04.13",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  null,
+        "ReleaseDate":  "20.01.07",
         "Manufacturer":  "Lenovo",
         "Model":  "ThinkPad T460",
         "Product":  [
@@ -4240,7 +4240,7 @@
         "CatalogVersion":  "22.04.13",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  null,
+        "ReleaseDate":  "19.12.03",
         "Manufacturer":  "Lenovo",
         "Model":  "ThinkPad T460P",
         "Product":  [
@@ -4258,7 +4258,7 @@
         "CatalogVersion":  "22.04.13",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  null,
+        "ReleaseDate":  "20.02.03",
         "Manufacturer":  "Lenovo",
         "Model":  "ThinkPad T460S",
         "Product":  [
@@ -4276,7 +4276,7 @@
         "CatalogVersion":  "22.04.13",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  null,
+        "ReleaseDate":  "21.06.02",
         "Manufacturer":  "Lenovo",
         "Model":  "ThinkPad T470 Type 20JM 20JN",
         "Product":  [
@@ -4294,7 +4294,7 @@
         "CatalogVersion":  "22.04.13",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  null,
+        "ReleaseDate":  "21.06.02",
         "Manufacturer":  "Lenovo",
         "Model":  "ThinkPad T470",
         "Product":  [
@@ -4312,7 +4312,7 @@
         "CatalogVersion":  "22.04.13",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  null,
+        "ReleaseDate":  "20.12.22",
         "Manufacturer":  "Lenovo",
         "Model":  "ThinkPad T470P",
         "Product":  [
@@ -4330,7 +4330,7 @@
         "CatalogVersion":  "22.04.13",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  null,
+        "ReleaseDate":  "21.06.02",
         "Manufacturer":  "Lenovo",
         "Model":  "ThinkPad T470S  Type 20JS 20JT",
         "Product":  [
@@ -4348,7 +4348,7 @@
         "CatalogVersion":  "22.04.13",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  null,
+        "ReleaseDate":  "21.06.02",
         "Manufacturer":  "Lenovo",
         "Model":  "ThinkPad T470S",
         "Product":  [
@@ -4366,7 +4366,7 @@
         "CatalogVersion":  "22.04.13",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  null,
+        "ReleaseDate":  "21.11.11",
         "Manufacturer":  "Lenovo",
         "Model":  "ThinkPad T480 Type 20L5 20L6",
         "Product":  [
@@ -4384,7 +4384,7 @@
         "CatalogVersion":  "22.04.13",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  null,
+        "ReleaseDate":  "21.11.11",
         "Manufacturer":  "Lenovo",
         "Model":  "ThinkPad T480S Type 20L7 20L8",
         "Product":  [
@@ -4402,7 +4402,7 @@
         "CatalogVersion":  "22.04.13",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  null,
+        "ReleaseDate":  "21.11.11",
         "Manufacturer":  "Lenovo",
         "Model":  "ThinkPad T490 Type 20N2 20N3",
         "Product":  [
@@ -4420,7 +4420,7 @@
         "CatalogVersion":  "22.04.13",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  null,
+        "ReleaseDate":  "21.11.11",
         "Manufacturer":  "Lenovo",
         "Model":  "ThinkPad T490 Type 20Q9 20QH",
         "Product":  [
@@ -4438,7 +4438,7 @@
         "CatalogVersion":  "22.04.13",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  null,
+        "ReleaseDate":  "21.11.11",
         "Manufacturer":  "Lenovo",
         "Model":  "ThinkPad T490 Type 20RY 20RX",
         "Product":  [
@@ -4456,7 +4456,7 @@
         "CatalogVersion":  "22.04.13",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  null,
+        "ReleaseDate":  "21.11.11",
         "Manufacturer":  "Lenovo",
         "Model":  "ThinkPad T490S Type 20NX 20NY",
         "Product":  [
@@ -4474,7 +4474,7 @@
         "CatalogVersion":  "22.04.13",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  null,
+        "ReleaseDate":  "22.02.25",
         "Manufacturer":  "Lenovo",
         "Model":  "ThinkPad T495 Type 20NJ 20NK",
         "Product":  [
@@ -4492,7 +4492,7 @@
         "CatalogVersion":  "22.04.13",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  null,
+        "ReleaseDate":  "22.02.25",
         "Manufacturer":  "Lenovo",
         "Model":  "ThinkPad T495S Type 20QJ 20QK",
         "Product":  [
@@ -4510,7 +4510,7 @@
         "CatalogVersion":  "22.04.13",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  null,
+        "ReleaseDate":  "18.11.07",
         "Manufacturer":  "Lenovo",
         "Model":  "ThinkPad T540P",
         "Product":  [
@@ -4528,7 +4528,7 @@
         "CatalogVersion":  "22.04.13",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  null,
+        "ReleaseDate":  "20.01.31",
         "Manufacturer":  "Lenovo",
         "Model":  "ThinkPad T550",
         "Product":  [
@@ -4546,7 +4546,7 @@
         "CatalogVersion":  "22.04.13",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  null,
+        "ReleaseDate":  "20.02.02",
         "Manufacturer":  "Lenovo",
         "Model":  "ThinkPad T560",
         "Product":  [
@@ -4564,7 +4564,7 @@
         "CatalogVersion":  "22.04.13",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  null,
+        "ReleaseDate":  "20.12.08",
         "Manufacturer":  "Lenovo",
         "Model":  "ThinkPad T570 Type 20JW  20JX",
         "Product":  [
@@ -4582,7 +4582,7 @@
         "CatalogVersion":  "22.04.13",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  null,
+        "ReleaseDate":  "20.12.08",
         "Manufacturer":  "Lenovo",
         "Model":  "ThinkPad T570",
         "Product":  [
@@ -4600,7 +4600,7 @@
         "CatalogVersion":  "22.04.13",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  null,
+        "ReleaseDate":  "21.11.11",
         "Manufacturer":  "Lenovo",
         "Model":  "ThinkPad T580 Type 20L9 20LA",
         "Product":  [
@@ -4618,7 +4618,7 @@
         "CatalogVersion":  "22.04.13",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  null,
+        "ReleaseDate":  "21.11.11",
         "Manufacturer":  "Lenovo",
         "Model":  "ThinkPad T590 Type 20N4 20N5",
         "Product":  [
@@ -4636,7 +4636,7 @@
         "CatalogVersion":  "22.04.13",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  null,
+        "ReleaseDate":  "18.11.07",
         "Manufacturer":  "Lenovo",
         "Model":  "ThinkPad W540",
         "Product":  [
@@ -4654,7 +4654,7 @@
         "CatalogVersion":  "22.04.13",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  null,
+        "ReleaseDate":  "18.11.07",
         "Manufacturer":  "Lenovo",
         "Model":  "ThinkPad W541",
         "Product":  [
@@ -4672,7 +4672,7 @@
         "CatalogVersion":  "22.04.13",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  null,
+        "ReleaseDate":  "20.01.31",
         "Manufacturer":  "Lenovo",
         "Model":  "ThinkPad W550S",
         "Product":  [
@@ -4690,7 +4690,7 @@
         "CatalogVersion":  "22.04.13",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  null,
+        "ReleaseDate":  "22.03.09",
         "Manufacturer":  "Lenovo",
         "Model":  "ThinkPad X1 Carbon 10TH Gen Type 21CB 21CC",
         "Product":  [
@@ -4708,7 +4708,7 @@
         "CatalogVersion":  "22.04.13",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  null,
+        "ReleaseDate":  "20.01.31",
         "Manufacturer":  "Lenovo",
         "Model":  "ThinkPad X1 Carbon 20BS 20BT",
         "Product":  [
@@ -4726,7 +4726,7 @@
         "CatalogVersion":  "22.04.13",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  null,
+        "ReleaseDate":  "21.11.11",
         "Manufacturer":  "Lenovo",
         "Model":  "ThinkPad X1 Carbon 6TH Gen Type 20KH 20KG",
         "Product":  [
@@ -4744,7 +4744,7 @@
         "CatalogVersion":  "22.04.13",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  null,
+        "ReleaseDate":  "21.11.11",
         "Manufacturer":  "Lenovo",
         "Model":  "ThinkPad X1 Carbon 7TH Gen Type 20QD 20QE",
         "Product":  [
@@ -4762,7 +4762,7 @@
         "CatalogVersion":  "22.04.13",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  null,
+        "ReleaseDate":  "21.11.11",
         "Manufacturer":  "Lenovo",
         "Model":  "ThinkPad X1 Carbon 7TH Gen Type 20R1 20R2",
         "Product":  [
@@ -4780,7 +4780,7 @@
         "CatalogVersion":  "22.04.13",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  null,
+        "ReleaseDate":  "21.11.12",
         "Manufacturer":  "Lenovo",
         "Model":  "ThinkPad X1 Carbon 8th Gen Type 20U9 20UA",
         "Product":  [
@@ -4798,7 +4798,7 @@
         "CatalogVersion":  "22.04.13",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  null,
+        "ReleaseDate":  "22.01.29",
         "Manufacturer":  "Lenovo",
         "Model":  "ThinkPad X1 Carbon 9TH Gen Type 20XW 20XX",
         "Product":  [
@@ -4816,7 +4816,7 @@
         "CatalogVersion":  "22.04.13",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  null,
+        "ReleaseDate":  "18.11.07",
         "Manufacturer":  "Lenovo",
         "Model":  "ThinkPad X1 Carbon Type 20A7 20A8",
         "Product":  [
@@ -4834,7 +4834,7 @@
         "CatalogVersion":  "22.04.13",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  null,
+        "ReleaseDate":  "20.01.31",
         "Manufacturer":  "Lenovo",
         "Model":  "ThinkPad X1 Carbon Type 20FB 20FC",
         "Product":  [
@@ -4852,7 +4852,7 @@
         "CatalogVersion":  "22.04.13",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  null,
+        "ReleaseDate":  "21.06.08",
         "Manufacturer":  "Lenovo",
         "Model":  "ThinkPad X1 Carbon Type 20HR 20HQ",
         "Product":  [
@@ -4870,7 +4870,7 @@
         "CatalogVersion":  "22.04.13",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  null,
+        "ReleaseDate":  "21.06.08",
         "Manufacturer":  "Lenovo",
         "Model":  "ThinkPad X1 Carbon Type 20K4 20K3",
         "Product":  [
@@ -4888,7 +4888,7 @@
         "CatalogVersion":  "22.04.13",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  null,
+        "ReleaseDate":  "21.11.17",
         "Manufacturer":  "Lenovo",
         "Model":  "ThinkPad X1 EXTREME 3rd Gen Type 20TK 20TL",
         "Product":  [
@@ -4906,7 +4906,7 @@
         "CatalogVersion":  "22.04.13",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  null,
+        "ReleaseDate":  "22.01.29",
         "Manufacturer":  "Lenovo",
         "Model":  "ThinkPad X1 EXTREME 4th Gen Type 20Y5 20Y6",
         "Product":  [
@@ -4924,7 +4924,7 @@
         "CatalogVersion":  "22.04.13",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  null,
+        "ReleaseDate":  "21.11.17",
         "Manufacturer":  "Lenovo",
         "Model":  "ThinkPad X1 EXTREME Gen 2",
         "Product":  [
@@ -4942,7 +4942,7 @@
         "CatalogVersion":  "22.04.13",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  null,
+        "ReleaseDate":  "21.11.17",
         "Manufacturer":  "Lenovo",
         "Model":  "ThinkPad X1 EXTREME",
         "Product":  [
@@ -4960,7 +4960,7 @@
         "CatalogVersion":  "22.04.13",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  null,
+        "ReleaseDate":  "22.01.29",
         "Manufacturer":  "Lenovo",
         "Model":  "ThinkPad X1 FOLD Gen 1 Type 20RK 20RL",
         "Product":  [
@@ -4978,7 +4978,7 @@
         "CatalogVersion":  "22.04.13",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  null,
+        "ReleaseDate":  "22.01.29",
         "Manufacturer":  "Lenovo",
         "Model":  "ThinkPad X1 NANO Gen 1 Type 20UN 20UQ",
         "Product":  [
@@ -4996,7 +4996,7 @@
         "CatalogVersion":  "22.04.13",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  null,
+        "ReleaseDate":  "21.11.17",
         "Manufacturer":  "Lenovo",
         "Model":  "ThinkPad X1 Tablet 3rd Gen 20KJ 20KK",
         "Product":  [
@@ -5014,7 +5014,7 @@
         "CatalogVersion":  "22.04.13",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  null,
+        "ReleaseDate":  "20.12.02",
         "Manufacturer":  "Lenovo",
         "Model":  "ThinkPad X1 Tablet Type 20JB 20JC",
         "Product":  [
@@ -5032,7 +5032,7 @@
         "CatalogVersion":  "22.04.13",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  null,
+        "ReleaseDate":  "20.02.03",
         "Manufacturer":  "Lenovo",
         "Model":  "ThinkPad X1 Tablet",
         "Product":  [
@@ -5050,7 +5050,7 @@
         "CatalogVersion":  "22.04.13",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  null,
+        "ReleaseDate":  "22.01.29",
         "Manufacturer":  "Lenovo",
         "Model":  "ThinkPad X1 TITANIUM Type 20QA 20QB",
         "Product":  [
@@ -5068,7 +5068,7 @@
         "CatalogVersion":  "22.04.13",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  null,
+        "ReleaseDate":  "21.11.17",
         "Manufacturer":  "Lenovo",
         "Model":  "ThinkPad X1 Yoga 3rd Gen Type 20LD 20LE 20LF 20LG",
         "Product":  [
@@ -5088,7 +5088,7 @@
         "CatalogVersion":  "22.04.13",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  null,
+        "ReleaseDate":  "21.11.11",
         "Manufacturer":  "Lenovo",
         "Model":  "ThinkPad X1 Yoga 4th Gen Type 20QF 20QG",
         "Product":  [
@@ -5106,7 +5106,7 @@
         "CatalogVersion":  "22.04.13",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  null,
+        "ReleaseDate":  "21.11.11",
         "Manufacturer":  "Lenovo",
         "Model":  "ThinkPad X1 Yoga 4th Gen Type 20SA 20SB",
         "Product":  [
@@ -5124,7 +5124,7 @@
         "CatalogVersion":  "22.04.13",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  null,
+        "ReleaseDate":  "21.11.12",
         "Manufacturer":  "Lenovo",
         "Model":  "ThinkPad X1 Yoga 5th Gen Type 20UB 20UC",
         "Product":  [
@@ -5142,7 +5142,7 @@
         "CatalogVersion":  "22.04.13",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  null,
+        "ReleaseDate":  "22.01.29",
         "Manufacturer":  "Lenovo",
         "Model":  "ThinkPad X1 Yoga 6th Gen Type 20XY 20Y0",
         "Product":  [
@@ -5160,7 +5160,7 @@
         "CatalogVersion":  "22.04.13",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  null,
+        "ReleaseDate":  "22.03.09",
         "Manufacturer":  "Lenovo",
         "Model":  "ThinkPad X1 Yoga 7th Gen Type 21CD 21CE",
         "Product":  [
@@ -5178,7 +5178,7 @@
         "CatalogVersion":  "22.04.13",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  null,
+        "ReleaseDate":  "20.01.31",
         "Manufacturer":  "Lenovo",
         "Model":  "ThinkPad X1 Yoga Type 20FQ 20FR",
         "Product":  [
@@ -5196,7 +5196,7 @@
         "CatalogVersion":  "22.04.13",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  null,
+        "ReleaseDate":  "20.12.08",
         "Manufacturer":  "Lenovo",
         "Model":  "ThinkPad X1 Yoga Type 20JD 20JE 20JF 20JG",
         "Product":  [
@@ -5216,7 +5216,7 @@
         "CatalogVersion":  "22.04.13",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  null,
+        "ReleaseDate":  "22.03.14",
         "Manufacturer":  "Lenovo",
         "Model":  "ThinkPad X12 DETACHABLE Gen 1 Type 20UW 20UV",
         "Product":  [
@@ -5234,7 +5234,7 @@
         "CatalogVersion":  "22.04.13",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  null,
+        "ReleaseDate":  "22.01.18",
         "Manufacturer":  "Lenovo",
         "Model":  "ThinkPad X13 Gen 2 Type 20WK 20WL",
         "Product":  [
@@ -5252,7 +5252,7 @@
         "CatalogVersion":  "22.04.13",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  null,
+        "ReleaseDate":  "21.12.29",
         "Manufacturer":  "Lenovo",
         "Model":  "ThinkPad X13 Gen 2 Type 20XH 20XJ",
         "Product":  [
@@ -5270,7 +5270,7 @@
         "CatalogVersion":  "22.04.13",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  null,
+        "ReleaseDate":  "21.11.11",
         "Manufacturer":  "Lenovo",
         "Model":  "ThinkPad X13 Type 20T2 20T3",
         "Product":  [
@@ -5288,7 +5288,7 @@
         "CatalogVersion":  "22.04.13",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  null,
+        "ReleaseDate":  "21.12.29",
         "Manufacturer":  "Lenovo",
         "Model":  "ThinkPad X13 Type 20UF 20UG",
         "Product":  [
@@ -5306,7 +5306,7 @@
         "CatalogVersion":  "22.04.13",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  null,
+        "ReleaseDate":  "21.11.11",
         "Manufacturer":  "Lenovo",
         "Model":  "ThinkPad X13 Yoga Gen 1",
         "Product":  [
@@ -5324,7 +5324,7 @@
         "CatalogVersion":  "22.04.13",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  null,
+        "ReleaseDate":  "22.01.17",
         "Manufacturer":  "Lenovo",
         "Model":  "ThinkPad X13 Yoga Gen 2 Type 20W8 20W9",
         "Product":  [
@@ -5342,7 +5342,7 @@
         "CatalogVersion":  "22.04.13",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  null,
+        "ReleaseDate":  "15.09.15",
         "Manufacturer":  "Lenovo",
         "Model":  "ThinkPad X140E",
         "Product":  [
@@ -5360,7 +5360,7 @@
         "CatalogVersion":  "22.04.13",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  null,
+        "ReleaseDate":  "18.07.26",
         "Manufacturer":  "Lenovo",
         "Model":  "ThinkPad X240",
         "Product":  [
@@ -5378,7 +5378,7 @@
         "CatalogVersion":  "22.04.13",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  null,
+        "ReleaseDate":  "18.07.26",
         "Manufacturer":  "Lenovo",
         "Model":  "ThinkPad X240S",
         "Product":  [
@@ -5396,7 +5396,7 @@
         "CatalogVersion":  "22.04.13",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  null,
+        "ReleaseDate":  "19.04.30",
         "Manufacturer":  "Lenovo",
         "Model":  "ThinkPad X250",
         "Product":  [
@@ -5414,7 +5414,7 @@
         "CatalogVersion":  "22.04.13",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  null,
+        "ReleaseDate":  "20.01.07",
         "Manufacturer":  "Lenovo",
         "Model":  "ThinkPad X260",
         "Product":  [
@@ -5432,7 +5432,7 @@
         "CatalogVersion":  "22.04.13",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  null,
+        "ReleaseDate":  "21.06.01",
         "Manufacturer":  "Lenovo",
         "Model":  "ThinkPad X270 Type 20K6 20K5",
         "Product":  [
@@ -5450,7 +5450,7 @@
         "CatalogVersion":  "22.04.13",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  null,
+        "ReleaseDate":  "21.06.01",
         "Manufacturer":  "Lenovo",
         "Model":  "ThinkPad X270",
         "Product":  [
@@ -5468,7 +5468,7 @@
         "CatalogVersion":  "22.04.13",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  null,
+        "ReleaseDate":  "21.11.11",
         "Manufacturer":  "Lenovo",
         "Model":  "ThinkPad X280 Type 20KF 20KE",
         "Product":  [
@@ -5486,7 +5486,7 @@
         "CatalogVersion":  "22.04.13",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  null,
+        "ReleaseDate":  "22.01.12",
         "Manufacturer":  "Lenovo",
         "Model":  "ThinkPad X380 Yoga",
         "Product":  [
@@ -5506,7 +5506,7 @@
         "CatalogVersion":  "22.04.13",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  null,
+        "ReleaseDate":  "21.11.11",
         "Manufacturer":  "Lenovo",
         "Model":  "ThinkPad X390 Type 20SC 20SD",
         "Product":  [
@@ -5524,7 +5524,7 @@
         "CatalogVersion":  "22.04.13",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  null,
+        "ReleaseDate":  "21.11.11",
         "Manufacturer":  "Lenovo",
         "Model":  "ThinkPad X390",
         "Product":  [
@@ -5542,7 +5542,7 @@
         "CatalogVersion":  "22.04.13",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  null,
+        "ReleaseDate":  "21.11.11",
         "Manufacturer":  "Lenovo",
         "Model":  "ThinkPad X390 Yoga",
         "Product":  [
@@ -5560,7 +5560,7 @@
         "CatalogVersion":  "22.04.13",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  null,
+        "ReleaseDate":  "22.02.25",
         "Manufacturer":  "Lenovo",
         "Model":  "ThinkPad X395",
         "Product":  [
@@ -5578,7 +5578,7 @@
         "CatalogVersion":  "22.04.13",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  null,
+        "ReleaseDate":  "20.06.16",
         "Manufacturer":  "Lenovo",
         "Model":  "ThinkPad Yoga 11e 20E5 20E7",
         "Product":  [
@@ -5596,7 +5596,7 @@
         "CatalogVersion":  "22.04.13",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  null,
+        "ReleaseDate":  "20.12.28",
         "Manufacturer":  "Lenovo",
         "Model":  "ThinkPad Yoga 11e 20G8 20GA",
         "Product":  [
@@ -5614,7 +5614,7 @@
         "CatalogVersion":  "22.04.13",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  null,
+        "ReleaseDate":  "20.12.28",
         "Manufacturer":  "Lenovo",
         "Model":  "ThinkPad Yoga 11e 4th Gen Type 20HS 20HU",
         "Product":  [
@@ -5632,7 +5632,7 @@
         "CatalogVersion":  "22.04.13",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  null,
+        "ReleaseDate":  "22.01.12",
         "Manufacturer":  "Lenovo",
         "Model":  "ThinkPad Yoga 11e 5TH Gen Type 20LN 20LM",
         "Product":  [
@@ -5650,7 +5650,7 @@
         "CatalogVersion":  "22.04.13",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  null,
+        "ReleaseDate":  "22.01.12",
         "Manufacturer":  "Lenovo",
         "Model":  "ThinkPad Yoga 11e 6th Gen Type 20SE 20SF",
         "Product":  [
@@ -5668,7 +5668,7 @@
         "CatalogVersion":  "22.04.13",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  null,
+        "ReleaseDate":  "17.07.10",
         "Manufacturer":  "Lenovo",
         "Model":  "ThinkPad Yoga 11e",
         "Product":  [
@@ -5686,7 +5686,7 @@
         "CatalogVersion":  "22.04.13",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  null,
+        "ReleaseDate":  "17.07.07",
         "Manufacturer":  "Lenovo",
         "Model":  "ThinkPad Yoga 12",
         "Product":  [
@@ -5704,7 +5704,7 @@
         "CatalogVersion":  "22.04.13",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  null,
+        "ReleaseDate":  "15.09.24",
         "Manufacturer":  "Lenovo",
         "Model":  "ThinkPad Yoga 14 20FY",
         "Product":  [
@@ -5721,7 +5721,7 @@
         "CatalogVersion":  "22.04.13",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  null,
+        "ReleaseDate":  "20.03.12",
         "Manufacturer":  "Lenovo",
         "Model":  "ThinkPad Yoga 14",
         "Product":  [
@@ -5739,7 +5739,7 @@
         "CatalogVersion":  "22.04.13",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  null,
+        "ReleaseDate":  "17.07.10",
         "Manufacturer":  "Lenovo",
         "Model":  "ThinkPad Yoga 15",
         "Product":  [
@@ -5757,7 +5757,7 @@
         "CatalogVersion":  "22.04.13",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  null,
+        "ReleaseDate":  "20.02.03",
         "Manufacturer":  "Lenovo",
         "Model":  "ThinkPad Yoga 260",
         "Product":  [
@@ -5777,7 +5777,7 @@
         "CatalogVersion":  "22.04.13",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  null,
+        "ReleaseDate":  "21.03.18",
         "Manufacturer":  "Lenovo",
         "Model":  "ThinkPad Yoga 370",
         "Product":  [
@@ -5795,7 +5795,7 @@
         "CatalogVersion":  "22.04.13",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  null,
+        "ReleaseDate":  "20.03.12",
         "Manufacturer":  "Lenovo",
         "Model":  "ThinkPad Yoga 460",
         "Product":  [
@@ -5813,7 +5813,7 @@
         "CatalogVersion":  "22.04.13",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  null,
+        "ReleaseDate":  "15.09.15",
         "Manufacturer":  "Lenovo",
         "Model":  "ThinkPad Yoga",
         "Product":  [
@@ -5831,7 +5831,7 @@
         "CatalogVersion":  "22.04.13",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  null,
+        "ReleaseDate":  "16.11.07",
         "Manufacturer":  "Lenovo",
         "Model":  "ThinkStation P310",
         "Product":  [
@@ -5852,7 +5852,7 @@
         "CatalogVersion":  "22.04.13",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  null,
+        "ReleaseDate":  "18.07.18",
         "Manufacturer":  "Lenovo",
         "Model":  "ThinkStation P320 TINY",
         "Product":  [
@@ -5871,7 +5871,7 @@
         "CatalogVersion":  "22.04.13",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  null,
+        "ReleaseDate":  "19.05.16",
         "Manufacturer":  "Lenovo",
         "Model":  "ThinkStation P320",
         "Product":  [
@@ -5893,7 +5893,7 @@
         "CatalogVersion":  "22.04.13",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  null,
+        "ReleaseDate":  "20.09.09",
         "Manufacturer":  "Lenovo",
         "Model":  "ThinkStation P330 2nd Gen",
         "Product":  [
@@ -5915,7 +5915,7 @@
         "CatalogVersion":  "22.04.13",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  null,
+        "ReleaseDate":  "21.02.04",
         "Manufacturer":  "Lenovo",
         "Model":  "ThinkStation P330 TINY",
         "Product":  [
@@ -5937,7 +5937,7 @@
         "CatalogVersion":  "22.04.13",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  null,
+        "ReleaseDate":  "19.01.23",
         "Manufacturer":  "Lenovo",
         "Model":  "ThinkStation P330",
         "Product":  [
@@ -5959,7 +5959,7 @@
         "CatalogVersion":  "22.04.13",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  null,
+        "ReleaseDate":  "21.12.05",
         "Manufacturer":  "Lenovo",
         "Model":  "ThinkStation P340 TINY",
         "Product":  [
@@ -5985,7 +5985,7 @@
         "CatalogVersion":  "22.04.13",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  null,
+        "ReleaseDate":  "22.03.04",
         "Manufacturer":  "Lenovo",
         "Model":  "ThinkStation P340",
         "Product":  [
@@ -6007,7 +6007,7 @@
         "CatalogVersion":  "22.04.13",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  null,
+        "ReleaseDate":  "22.02.23",
         "Manufacturer":  "Lenovo",
         "Model":  "ThinkStation P348",
         "Product":  [
@@ -6027,7 +6027,7 @@
         "CatalogVersion":  "22.04.13",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  null,
+        "ReleaseDate":  "21.12.05",
         "Manufacturer":  "Lenovo",
         "Model":  "ThinkStation P350 TINY",
         "Product":  [
@@ -6047,7 +6047,7 @@
         "CatalogVersion":  "22.04.13",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  null,
+        "ReleaseDate":  "22.01.25",
         "Manufacturer":  "Lenovo",
         "Model":  "ThinkStation P350",
         "Product":  [
@@ -6067,7 +6067,7 @@
         "CatalogVersion":  "22.04.13",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  null,
+        "ReleaseDate":  "17.07.13",
         "Manufacturer":  "Lenovo",
         "Model":  "ThinkStation P410",
         "Product":  [
@@ -6085,7 +6085,7 @@
         "CatalogVersion":  "22.04.13",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  null,
+        "ReleaseDate":  "15.12.07",
         "Manufacturer":  "Lenovo",
         "Model":  "ThinkStation P500",
         "Product":  [
@@ -6103,7 +6103,7 @@
         "CatalogVersion":  "22.04.13",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  null,
+        "ReleaseDate":  "17.07.13",
         "Manufacturer":  "Lenovo",
         "Model":  "ThinkStation P510",
         "Product":  [
@@ -6121,7 +6121,7 @@
         "CatalogVersion":  "22.04.13",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  null,
+        "ReleaseDate":  "22.03.30",
         "Manufacturer":  "Lenovo",
         "Model":  "ThinkStation P520",
         "Product":  [
@@ -6141,7 +6141,7 @@
         "CatalogVersion":  "22.04.13",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  null,
+        "ReleaseDate":  "22.03.30",
         "Manufacturer":  "Lenovo",
         "Model":  "ThinkStation P520C",
         "Product":  [
@@ -6160,7 +6160,7 @@
         "CatalogVersion":  "22.04.13",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  null,
+        "ReleaseDate":  "22.04.01",
         "Manufacturer":  "Lenovo",
         "Model":  "ThinkStation P620",
         "Product":  [
@@ -6178,7 +6178,7 @@
         "CatalogVersion":  "22.04.13",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  null,
+        "ReleaseDate":  "15.12.07",
         "Manufacturer":  "Lenovo",
         "Model":  "ThinkStation P700",
         "Product":  [
@@ -6196,7 +6196,7 @@
         "CatalogVersion":  "22.04.13",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  null,
+        "ReleaseDate":  "17.07.13",
         "Manufacturer":  "Lenovo",
         "Model":  "ThinkStation P710",
         "Product":  [
@@ -6214,7 +6214,7 @@
         "CatalogVersion":  "22.04.13",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  null,
+        "ReleaseDate":  "22.03.30",
         "Manufacturer":  "Lenovo",
         "Model":  "ThinkStation P720",
         "Product":  [
@@ -6233,7 +6233,7 @@
         "CatalogVersion":  "22.04.13",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  null,
+        "ReleaseDate":  "15.12.07",
         "Manufacturer":  "Lenovo",
         "Model":  "ThinkStation P900",
         "Product":  [
@@ -6251,7 +6251,7 @@
         "CatalogVersion":  "22.04.13",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  null,
+        "ReleaseDate":  "17.07.13",
         "Manufacturer":  "Lenovo",
         "Model":  "ThinkStation P910",
         "Product":  [
@@ -6269,7 +6269,7 @@
         "CatalogVersion":  "22.04.13",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  null,
+        "ReleaseDate":  "22.03.30",
         "Manufacturer":  "Lenovo",
         "Model":  "ThinkStation P920",
         "Product":  [

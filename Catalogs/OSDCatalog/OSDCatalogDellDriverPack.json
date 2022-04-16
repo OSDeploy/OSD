@@ -5613,7 +5613,7 @@
     },
     {
         "CatalogVersion":  "22.03.02",
-        "Status":  "Failed",
+        "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "22.03.05",
         "Manufacturer":  "Dell",
