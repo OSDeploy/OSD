@@ -115,42 +115,34 @@ function Get-PSCloudScript
     #=================================================
     #	FromAzKeyVaultSecret
     #=================================================
-    if ($PSCmdlet.ParameterSetName -eq 'FromAzKeyVaultSecret')
-    {
+    if ($PSCmdlet.ParameterSetName -eq 'FromAzKeyVaultSecret') {
+        
         $Module = Import-Module Az.Accounts -PassThru -ErrorAction Ignore
-        if (-not $Module)
-        {
+        if (-not $Module) {
             Install-Module Az.Accounts -Force
         }
         
         $Module = Import-Module Az.KeyVault -PassThru -ErrorAction Ignore
-        if (-not $Module)
-        {
+        if (-not $Module) {
             Install-Module Az.KeyVault -Force
         }
     
-        if (!(Get-AzContext -ErrorAction Ignore))
-        {
+        if (!(Get-AzContext -ErrorAction Ignore)) {
             Connect-AzAccount -DeviceCode
         }
 
-        if (Get-AzContext -ErrorAction Ignore)
-        {
-            if (! ($Name))
-            {
+        if (Get-AzContext -ErrorAction Ignore) {
+            if (! ($Name)) {
                 $Name = Get-AzKeyVaultSecret -VaultName "$VaultName" | Select-Object -ExpandProperty Name
             }
-            if ($Name)
-            {
-                foreach ($Item in $Name)
-                {
+            if ($Name) {
+                foreach ($Item in $Name) {
                     Write-Verbose "Get-AzKeyVaultSecret -VaultName $VaultName -Name $Item"
                     [array]$Result += Get-AzKeyVaultSecret -VaultName "$VaultName" -Name "$Item" -AsPlainText
                 }
             }
         }
-        else
-        {
+        else {
             Write-Error "Authenticate to Azure using 'Connect-AzAccount -DeviceCode'"
         }
     }

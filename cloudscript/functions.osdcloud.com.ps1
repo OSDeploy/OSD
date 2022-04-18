@@ -346,6 +346,74 @@ if (($WindowsPhase -eq 'WinPE') -or ($WindowsPhase -eq 'OOBE')) {
             }
         }
     }
+    function osdcloud-GetKeyVaultSecretList {
+        [CmdletBinding()]
+        param (
+            [Parameter(Mandatory=$true, Position=0)]
+            [System.String]
+            # Specifies the name of the key vault to which the secret belongs. This cmdlet constructs the fully qualified domain name (FQDN) of a key vault based on the name that this parameter specifies and your current environment.
+            $VaultName
+        )
+        $Module = Import-Module Az.Accounts -PassThru -ErrorAction Ignore
+        if (-not $Module) {
+            Install-Module Az.Accounts -Force
+        }
+        
+        $Module = Import-Module Az.KeyVault -PassThru -ErrorAction Ignore
+        if (-not $Module) {
+            Install-Module Az.KeyVault -Force
+        }
+    
+        if (!(Get-AzContext -ErrorAction Ignore)) {
+            Connect-AzAccount -DeviceCode
+        }
+
+        if (Get-AzContext -ErrorAction Ignore) {
+            Get-AzKeyVaultSecret -VaultName "$VaultName" | Select-Object -ExpandProperty Name
+        }
+        else {
+            Write-Error "Authenticate to Azure using 'Connect-AzAccount -DeviceCode'"
+        }
+    }
+    New-Alias -Name 'ListSecrets' -Value 'osdcloud-GetKeyVaultSecretList' -Description 'OSDCloud' -Force
+    function osdcloud-InvokeKeyVaultSecret {
+        [CmdletBinding()]
+        param (
+            [Parameter(Mandatory=$true, Position=0)]
+            [System.String]
+            # Specifies the name of the key vault to which the secret belongs. This cmdlet constructs the fully qualified domain name (FQDN) of a key vault based on the name that this parameter specifies and your current environment.
+            $VaultName,
+
+            [Parameter(Mandatory=$true, Position=1)]
+            [System.String]
+            # Specifies the name of the secret to get the content to use as a PSCloudScript
+            $Name
+        )
+        $Module = Import-Module Az.Accounts -PassThru -ErrorAction Ignore
+        if (-not $Module) {
+            Install-Module Az.Accounts -Force
+        }
+        
+        $Module = Import-Module Az.KeyVault -PassThru -ErrorAction Ignore
+        if (-not $Module) {
+            Install-Module Az.KeyVault -Force
+        }
+    
+        if (!(Get-AzContext -ErrorAction Ignore)) {
+            Connect-AzAccount -DeviceCode
+        }
+
+        if (Get-AzContext -ErrorAction Ignore) {
+            $Result = Get-AzKeyVaultSecret -VaultName "$VaultName" -Name "$Name" -AsPlainText
+            if ($Result) {
+                Invoke-Expression -Command $Result
+            }
+        }
+        else {
+            Write-Error "Authenticate to Azure using 'Connect-AzAccount -DeviceCode'"
+        }
+    }
+    New-Alias -Name 'InvokeSecret' -Value 'osdcloud-InvokeKeyVaultSecret' -Description 'OSDCloud' -Force
 }
 #endregion
 
