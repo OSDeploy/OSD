@@ -1,5 +1,5 @@
 <#PSScriptInfo
-.VERSION 22.4.16.1
+.VERSION 22.4.20.1
 .GUID 302752c7-8567-45db-91ba-55c40fb9caee
 .AUTHOR David Segura @SeguraOSD
 .COMPANYNAME osdcloud.com
@@ -23,14 +23,14 @@ powershell iex (irm functions.osdcloud.com)
 .DESCRIPTION
     PSCloudScript at functions.osdcloud.com
 .NOTES
-    Version 22.4.16.1
+    Version 22.4.20.1
 .LINK
     https://raw.githubusercontent.com/OSDeploy/OSD/master/cloudscript/functions.ps1
 .EXAMPLE
     powershell iex (irm functions.osdcloud.com)
 #>
 #region Initialize
-$FunctionsVersion = '22.4.16.1'
+$FunctionsVersion = '22.4.20.1'
 
 if ($env:SystemDrive -eq 'X:') {$WindowsPhase = 'WinPE'}
 else {

@@ -1,5 +1,5 @@
 <#PSScriptInfo
-.VERSION 22.4.16.1
+.VERSION 22.4.20.1
 .GUID 68790315-3c3f-4a9a-b191-84928e5d6a83
 .AUTHOR David Segura @SeguraOSD
 .COMPANYNAME osdcloud.com
@@ -19,7 +19,7 @@
 .DESCRIPTION
     PSCloudScript
 .NOTES
-    Version 22.4.16.1
+    Version 22.4.20.1
 .LINK
     https://raw.githubusercontent.com/OSDeploy/OSD/master/cloudscript/re.osdcloud.com.ps1
 .EXAMPLE
@@ -32,7 +32,7 @@ param()
 
 if ($fromIsoUrl) {
     #region Initialize
-    $ScriptVersion = '22.4.16.1'
+    $ScriptVersion = '22.4.20.1'
     Write-Host -ForegroundColor DarkGray "OSDCloudRE $ScriptVersion"
     #endregion
     

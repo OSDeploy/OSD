@@ -1,6 +1,6 @@
 <#PSScriptInfo
 .VERSION 22.4.20.1
-.GUID e9ff19c4-655f-40c9-b0d9-6aa4542b3342
+.GUID 57f30acf-8336-4519-9971-1d71d261f197
 .AUTHOR David Segura @SeguraOSD
 .COMPANYNAME osdcloud.com
 .COPYRIGHT (c) 2022 David Segura osdcloud.com. All rights reserved.
@@ -13,27 +13,27 @@
 .EXTERNALSCRIPTDEPENDENCIES 
 .RELEASENOTES
 Script should be executed in a Command Prompt using the following command
-powershell Invoke-Expression -Command (Invoke-RestMethod -Uri go.osdcloud.com/companydemo)
+powershell Invoke-Expression -Command (Invoke-RestMethod -Uri go.osdcloud.com/enterprise)
 This is abbreviated as
-powershell iex(irm go.osdcloud.com/companydemo)
+powershell iex(irm go.osdcloud.com/enterprise)
 #>
 <#
 .SYNOPSIS
-    PSCloudScript at go.osdcloud.com/companydemo
+    PSCloudScript at go.osdcloud.com/enterprise
 .DESCRIPTION
-    PSCloudScript at go.osdcloud.com/companydemo
+    PSCloudScript at go.osdcloud.com/enterprise
 .NOTES
     Version 22.4.20.1
 .LINK
-    https://raw.githubusercontent.com/OSDeploy/OSD/master/cloudscript/company.ps1
+    https://raw.githubusercontent.com/OSDeploy/OSD/master/cloudscript/enterprise.osdcloud.com.ps1
 .EXAMPLE
-    powershell iex (irm go.osdcloud.com/companydemo)
+    powershell iex (irm go.osdcloud.com/enterprise)
 #>
 [CmdletBinding()]
 param()
 
 #region Initialize
-Write-Host -ForegroundColor DarkGray "go.osdcloud.com/companydemo 22.4.20.1"
+Write-Host -ForegroundColor DarkGray "go.osdcloud.com/enterprise 22.4.20.1"
 Invoke-Expression -Command (Invoke-RestMethod -Uri functions.osdcloud.com)
 $Transcript = "$((Get-Date).ToString('yyyy-MM-dd-HHmmss'))-OSDCloud.log"
 $null = Start-Transcript -Path (Join-Path "$env:SystemRoot\Temp" $Transcript) -ErrorAction Ignore

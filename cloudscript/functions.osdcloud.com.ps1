@@ -1,5 +1,5 @@
 <#PSScriptInfo
-.VERSION 22.4.16.1
+.VERSION 22.4.20.1
 .GUID 7a3671f6-485b-443e-8e86-b60fdcea1419
 .AUTHOR David Segura @SeguraOSD
 .COMPANYNAME osdcloud.com
@@ -23,7 +23,7 @@ powershell iex (irm functions.osdcloud.com)
 .DESCRIPTION
     PSCloudScript at functions.osdcloud.com
 .NOTES
-    Version 22.4.16.1
+    Version 22.4.20.1
 .LINK
     https://raw.githubusercontent.com/OSDeploy/OSD/master/cloudscript/functions.osdcloud.com.ps1
 .EXAMPLE
@@ -32,7 +32,7 @@ powershell iex (irm functions.osdcloud.com)
 [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
 
 #region Initialize
-$ScriptVersion = '22.4.16.1'
+$ScriptVersion = '22.4.20.1'
 
 if ($env:SystemDrive -eq 'X:') {$WindowsPhase = 'WinPE'}
 else {
