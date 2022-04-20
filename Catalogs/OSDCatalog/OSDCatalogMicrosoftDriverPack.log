@@ -1,17 +1,17 @@
 ﻿**********************
 Windows PowerShell transcript start
-Start time: 20220413011302
+Start time: 20220420013920
 Username: OSDCODE\David
 RunAs User: OSDCODE\David
 Configuration Name: 
 Machine: OSDCODE (Microsoft Windows NT 10.0.22000.0)
 Host Application: C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe -NoProfile -NonInteractive -ExecutionPolicy Bypass -Command Import-Module 'c:\Users\David\.vscode\extensions\ms-vscode.powershell-2021.12.0\modules\PowerShellEditorServices\PowerShellEditorServices.psd1'; Start-EditorServices -HostName 'Visual Studio Code Host' -HostProfileId 'Microsoft.VSCode' -HostVersion '2021.12.0' -AdditionalModules @('PowerShellEditorServices.VSCode') -BundledModulesPath 'c:\Users\David\.vscode\extensions\ms-vscode.powershell-2021.12.0\modules' -EnableConsoleRepl -StartupBanner '=====> PowerShell Integrated Console v2021.12.0 <=====
-' -LogLevel 'Normal' -LogPath 'c:\Users\David\.vscode\extensions\ms-vscode.powershell-2021.12.0\logs\1649830103-e92900f4-bec4-418f-875f-c4c413a59f431649830099444\EditorServices.log' -SessionDetailsPath 'c:\Users\David\.vscode\extensions\ms-vscode.powershell-2021.12.0\sessions\PSES-VSCode-10452-745504' -FeatureFlags @() 
-Process ID: 29800
-PSVersion: 5.1.22000.282
+' -LogLevel 'Normal' -LogPath 'c:\Users\David\.vscode\extensions\ms-vscode.powershell-2021.12.0\logs\1650436289-0d39a529-e8b8-4f05-a557-1d0a8eb945ab1650436282109\EditorServices.log' -SessionDetailsPath 'c:\Users\David\.vscode\extensions\ms-vscode.powershell-2021.12.0\sessions\PSES-VSCode-9724-317634' -FeatureFlags @() 
+Process ID: 7596
+PSVersion: 5.1.22000.613
 PSEdition: Desktop
-PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1.22000.282
-BuildVersion: 10.0.22000.282
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1.22000.613
+BuildVersion: 10.0.22000.613
 CLRVersion: 4.0.30319.42000
 WSManStackVersion: 3.0
 PSRemotingProtocolVersion: 2.3
@@ -19,6 +19,7 @@ SerializationVersion: 1.1.0.1
 **********************
 Transcript started, output file is D:\GitHub\MyModules\OSD\Catalogs\OSDCatalog\OSDCatalogMicrosoftDriverPack.log
 VERBOSE: Build Catalog already created at C:\Users\David\AppData\Local\Temp\OSD\OSDCatalogMicrosoftDriverPack.json
+VERBOSE: Removing previous Build Catalog
 VERBOSE: Test-WebConnection OK: https://support.microsoft.com/en-us/surface/download-drivers-and-firmware-for-surface-09bb2e09-2a4b-cb69-0951-078a7739e120
 VERBOSE: HEAD with 0-byte payload
 VERBOSE: received 0-byte response of content type text/html; charset=utf-8
@@ -400,12 +401,12 @@ VERBOSE: received 639029248-byte response of content type application/octet-stre
 VERBOSE: Processing Surface Laptop Studio
 VERBOSE: GET with 0-byte payload
 VERBOSE: received -1-byte response of content type text/html
-VERBOSE: Testing Download File at https://download.microsoft.com/download/b/3/0/b30ecc34-3bab-4c68-a5b3-0d258d73e747/SurfaceLaptopStudio_Win10_19042_22.013.34524.0.msi
+VERBOSE: Testing Download File at https://download.microsoft.com/download/b/3/0/b30ecc34-3bab-4c68-a5b3-0d258d73e747/SurfaceLaptopStudio_Win10_19042_22.023.33423.0.msi
 VERBOSE: HEAD with 0-byte payload
-VERBOSE: received 1667080192-byte response of content type application/octet-stream
-VERBOSE: Testing Download File at https://download.microsoft.com/download/b/3/0/b30ecc34-3bab-4c68-a5b3-0d258d73e747/SurfaceLaptopStudio_Win11_22000_22.013.34609.0.msi
+VERBOSE: received 1624571904-byte response of content type application/octet-stream
+VERBOSE: Testing Download File at https://download.microsoft.com/download/b/3/0/b30ecc34-3bab-4c68-a5b3-0d258d73e747/SurfaceLaptopStudio_Win11_22000_22.034.41310.0.msi
 VERBOSE: HEAD with 0-byte payload
-VERBOSE: received 1667080192-byte response of content type application/octet-stream
+VERBOSE: received 1624567808-byte response of content type application/octet-stream
 VERBOSE: Processing Surface Pro
 VERBOSE: GET with 0-byte payload
 VERBOSE: received -1-byte response of content type text/html
@@ -607,5 +608,5 @@ VERBOSE: received 656039936-byte response of content type application/octet-stre
 VERBOSE: Importing the Build Catalog at C:\Users\David\AppData\Local\Temp\OSD\OSDCatalogMicrosoftDriverPack.json
 **********************
 Windows PowerShell transcript end
-End time: 20220413011357
+End time: 20220420014022
 **********************
