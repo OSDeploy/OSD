@@ -1,5 +1,5 @@
 <#PSScriptInfo
-.VERSION 22.4.20.1
+.VERSION 22.4.21.1
 .GUID 7a3671f6-485b-443e-8e86-b60fdcea1419
 .AUTHOR David Segura @SeguraOSD
 .COMPANYNAME osdcloud.com
@@ -23,17 +23,21 @@ powershell iex (irm functions.osdcloud.com)
 .DESCRIPTION
     PSCloudScript at functions.osdcloud.com
 .NOTES
-    Version 22.4.20.1
+    Version 22.4.21.1
 .LINK
     https://raw.githubusercontent.com/OSDeploy/OSD/master/cloudscript/functions.osdcloud.com.ps1
 .EXAMPLE
     powershell iex (irm functions.osdcloud.com)
 #>
+#=================================================
+#Script Information
+$ScriptName = 'functions.osdcloud.com'
+$ScriptVersion = '22.4.21.1'
+#=================================================
+#region Initialize Functions
 [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
 
-#region Initialize
-$ScriptVersion = '22.4.20.1'
-
+#Determine the proper Windows environment
 if ($env:SystemDrive -eq 'X:') {$WindowsPhase = 'WinPE'}
 else {
     $ImageState = (Get-ItemProperty -Path 'HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Setup\State' -ErrorAction Ignore).ImageState
@@ -42,9 +46,12 @@ else {
     elseif ($ImageState -eq 'IMAGE_STATE_SPECIALIZE_RESEAL_TO_AUDIT') {$WindowsPhase = 'AuditMode'}
     else {$WindowsPhase = 'Windows'}
 }
-Write-Host -ForegroundColor DarkGray "functions.osdcloud.com $ScriptVersion $WindowsPhase"
-#endregion
 
+#Finish Initialization
+Write-Host -ForegroundColor DarkGray "$ScriptName $ScriptVersion $WindowsPhase"
+
+#endregion
+#=================================================
 #region Environment Variables
 $oobePowerShellProfile = @'
 [System.Environment]::SetEnvironmentVariable('Path',$Env:Path + ";$Env:ProgramFiles\WindowsPowerShell\Scripts",'Process')
@@ -56,7 +63,7 @@ $winpePowerShellProfile = @'
 [System.Environment]::SetEnvironmentVariable('LOCALAPPDATA',"$Env:UserProfile\AppData\Local",[System.EnvironmentVariableTarget]::Process)
 '@
 #endregion
-
+#=================================================
 #region PowerShell Prompt
 <#
 Since these functions are temporarily loaded, the PowerShell Prompt is changed to make it visual if the functions are loaded or not
@@ -72,7 +79,7 @@ function Prompt {
     $(if ($NestedPromptLevel -ge 1) { '>>' }) + '> '
 }
 #endregion
-
+#=================================================
 #region WinPE Functions
 if ($WindowsPhase -eq 'WinPE') {
     function osdcloud-InstallCurl {
@@ -160,8 +167,8 @@ if ($WindowsPhase -eq 'WinPE') {
     }
 }
 #endregion
-
-#region WinPE and OOBE Functions
+#=================================================
+#region WinPE OOBE Functions
 if (($WindowsPhase -eq 'WinPE') -or ($WindowsPhase -eq 'OOBE')) {
     function osdcloud-InstallPackageManagement {
         [CmdletBinding()]
@@ -416,7 +423,7 @@ if (($WindowsPhase -eq 'WinPE') -or ($WindowsPhase -eq 'OOBE')) {
     New-Alias -Name 'InvokeSecret' -Value 'osdcloud-InvokeKeyVaultSecret' -Description 'OSDCloud' -Force
 }
 #endregion
-
+#=================================================
 #region OOBE Functions
 if ($WindowsPhase -eq 'OOBE') {
     function osdcloud-InstallModuleAutopilot {
@@ -683,7 +690,7 @@ if ($WindowsPhase -eq 'OOBE') {
     New-Alias -Name 'UpdateDefender' -Value 'osdcloud-UpdateDefender' -Description 'OSDCloud' -Force
 }
 #endregion
-
+#=================================================
 #region WinPE Startup
 if ($WindowsPhase -eq 'WinPE') {
     function osdcloud-StartWinPE {
@@ -722,7 +729,7 @@ if ($WindowsPhase -eq 'WinPE') {
     New-Alias -Name 'Start-WinPE' -Value 'osdcloud-StartWinPE' -Description 'OSDCloud' -Force
 }
 #endregion
-
+#=================================================
 #region OOBE Startup
 if ($WindowsPhase -eq 'OOBE') {
     function osdcloud-StartOOBE {
@@ -783,3 +790,4 @@ if ($WindowsPhase -eq 'OOBE') {
     New-Alias -Name 'Start-OOBE' -Value 'osdcloud-StartOOBE' -Description 'OSDCloud' -Force
 }
 #endregion
+#=================================================

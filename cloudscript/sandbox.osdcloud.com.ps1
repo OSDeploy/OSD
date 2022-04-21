@@ -1,5 +1,5 @@
 <#PSScriptInfo
-.VERSION 22.4.20.1
+.VERSION 22.4.21.1
 .GUID 9670c013-d1b1-4f5d-9bd0-0fa185b9f203
 .AUTHOR David Segura @SeguraOSD
 .COMPANYNAME osdcloud.com
@@ -23,7 +23,7 @@ powershell iex (irm sandbox.osdcloud.com)
 .DESCRIPTION
     PSCloudScript at sandbox.osdcloud.com
 .NOTES
-    Version 22.4.20.1
+    Version 22.4.21.1
 .LINK
     https://raw.githubusercontent.com/OSDeploy/OSD/master/cloudscript/sandbox.osdcloud.com.ps1
 .EXAMPLE
@@ -31,13 +31,18 @@ powershell iex (irm sandbox.osdcloud.com)
 #>
 [CmdletBinding()]
 param()
+#=================================================
+#Script Information
+$ScriptName = 'sandbox.osdcloud.com'
+$ScriptVersion = '22.4.21.1'
+#=================================================
+#region Initialize
 
+#Start the Transcript
 $Transcript = "$((Get-Date).ToString('yyyy-MM-dd-HHmmss'))-OSDCloud.log"
 $null = Start-Transcript -Path (Join-Path "$env:SystemRoot\Temp" $Transcript) -ErrorAction Ignore
 
-#region Initialize
-$ScriptVersion = '22.4.20.1'
-
+#Determine the proper Windows environment
 if ($env:SystemDrive -eq 'X:') {$WindowsPhase = 'WinPE'}
 else {
     $ImageState = (Get-ItemProperty -Path 'HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Setup\State' -ErrorAction Ignore).ImageState
@@ -46,44 +51,59 @@ else {
     elseif ($ImageState -eq 'IMAGE_STATE_SPECIALIZE_RESEAL_TO_AUDIT') {$WindowsPhase = 'AuditMode'}
     else {$WindowsPhase = 'Windows'}
 }
-Write-Host -ForegroundColor DarkGray "sandbox.osdcloud.com $ScriptVersion $WindowsPhase"
-Invoke-Expression -Command (Invoke-RestMethod -Uri functions.osdcloud.com)
-#endregion
 
+#Load OSDCloud Functions
+Invoke-Expression -Command (Invoke-RestMethod -Uri functions.osdcloud.com)
+
+#Finish initialization
+Write-Host -ForegroundColor DarkGray "$ScriptName $ScriptVersion $WindowsPhase"
+
+#endregion
+#=================================================
 #region WinPE
 if ($WindowsPhase -eq 'WinPE') {
+
+    #Process OSDCloud startup and load Azure KeyVault dependencies
     osdcloud-StartWinPE -OSDCloud -KeyVault
     Write-Host -ForegroundColor Cyan "To start a new PowerShell session, type 'start powershell' and press enter"
     Write-Host -ForegroundColor Cyan "Start-OSDCloud or Start-OSDCloudGUI can be run in the new PowerShell session"
+    
+    #Stop the startup Transcript.  OSDCloud will create its own
     $null = Stop-Transcript
 }
 #endregion
-
+#=================================================
 #region Specialize
 if ($WindowsPhase -eq 'Specialize') {
+    
     #Do something
     $null = Stop-Transcript
 }
 #endregion
-
+#=================================================
 #region AuditMode
 if ($WindowsPhase -eq 'AuditMode') {
+    
     #Do something
     $null = Stop-Transcript
 }
 #endregion
-
+#=================================================
 #region OOBE
 if ($WindowsPhase -eq 'OOBE') {
+
+    #Load everything needed to run AutoPilot and Azure KeyVault
     osdcloud-StartOOBE -Display -Language -DateTime -Autopilot -KeyVault
-    #Do something
+
     $null = Stop-Transcript
 }
 #endregion
-
+#=================================================
 #region Windows
 if ($WindowsPhase -eq 'Windows') {
+    
     #Do something
     $null = Stop-Transcript
 }
 #endregion
+#=================================================

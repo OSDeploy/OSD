@@ -1,5 +1,5 @@
 <#PSScriptInfo
-.VERSION 22.4.20.1
+.VERSION 22.4.21.1
 .GUID de7396a9-c2df-4a50-b6c2-c00cfc885d8d
 .AUTHOR David Segura @SeguraOSD
 .COMPANYNAME osdcloud.com
@@ -23,7 +23,7 @@ powershell iex (irm start.osdcloud.com)
 .DESCRIPTION
     PSCloudScript at start.osdcloud.com
 .NOTES
-    Version 22.4.20.1
+    Version 22.4.21.1
 .LINK
     https://raw.githubusercontent.com/OSDeploy/OSD/master/cloudscript/start.osdcloud.com.ps1
 .EXAMPLE
@@ -36,7 +36,7 @@ $Transcript = "$((Get-Date).ToString('yyyy-MM-dd-HHmmss'))-OSDCloud.log"
 $null = Start-Transcript -Path (Join-Path "$env:SystemRoot\Temp" $Transcript) -ErrorAction Ignore
 
 #region Initialize
-$ScriptVersion = '22.4.20.1'
+$ScriptVersion = '22.4.21.1'
 
 if ($env:SystemDrive -eq 'X:') {$WindowsPhase = 'WinPE'}
 else {

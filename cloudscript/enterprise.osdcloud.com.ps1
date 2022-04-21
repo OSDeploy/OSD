@@ -1,5 +1,5 @@
 <#PSScriptInfo
-.VERSION 22.4.20.1
+.VERSION 22.4.21.1
 .GUID 57f30acf-8336-4519-9971-1d71d261f197
 .AUTHOR David Segura @SeguraOSD
 .COMPANYNAME osdcloud.com
@@ -23,7 +23,7 @@ powershell iex(irm go.osdcloud.com/enterprise)
 .DESCRIPTION
     PSCloudScript at go.osdcloud.com/enterprise
 .NOTES
-    Version 22.4.20.1
+    Version 22.4.21.1
 .LINK
     https://raw.githubusercontent.com/OSDeploy/OSD/master/cloudscript/enterprise.osdcloud.com.ps1
 .EXAMPLE
@@ -31,29 +31,68 @@ powershell iex(irm go.osdcloud.com/enterprise)
 #>
 [CmdletBinding()]
 param()
-
+#=================================================
+#Script Information
+$ScriptName = 'go.osdcloud.com/enterprise'
+$ScriptVersion = '22.4.21.1'
+#=================================================
 #region Initialize
-Write-Host -ForegroundColor DarkGray "go.osdcloud.com/enterprise 22.4.20.1"
-Invoke-Expression -Command (Invoke-RestMethod -Uri functions.osdcloud.com)
+#Start the Transcript
 $Transcript = "$((Get-Date).ToString('yyyy-MM-dd-HHmmss'))-OSDCloud.log"
 $null = Start-Transcript -Path (Join-Path "$env:SystemRoot\Temp" $Transcript) -ErrorAction Ignore
+#Determine the proper Windows environment
+if ($env:SystemDrive -eq 'X:') {$WindowsPhase = 'WinPE'}
+else {
+    $ImageState = (Get-ItemProperty -Path 'HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Setup\State' -ErrorAction Ignore).ImageState
+    if ($env:UserName -eq 'defaultuser0') {$WindowsPhase = 'OOBE'}
+    elseif ($ImageState -eq 'IMAGE_STATE_SPECIALIZE_RESEAL_TO_OOBE') {$WindowsPhase = 'Specialize'}
+    elseif ($ImageState -eq 'IMAGE_STATE_SPECIALIZE_RESEAL_TO_AUDIT') {$WindowsPhase = 'AuditMode'}
+    else {$WindowsPhase = 'Windows'}
+}
+#Load OSDCloud Functions
+Invoke-Expression -Command (Invoke-RestMethod -Uri functions.osdcloud.com)
+#Finish initialization
+Write-Host -ForegroundColor DarkGray "$ScriptName $ScriptVersion $WindowsPhase"
 #endregion
-
+#=================================================
 #region WinPE
-if ($env:SystemDrive -eq 'X:') {
+if ($WindowsPhase -eq 'WinPE') {
+    #Process OSDCloud startup and load Azure KeyVault dependencies
     osdcloud-StartWinPE -OSDCloud -KeyVault
     #Write-Host -ForegroundColor Cyan "To start a new PowerShell session, type 'start powershell' and press enter"
     #Write-Host -ForegroundColor Cyan "Start-OSDCloud or Start-OSDCloudGUI can be run in the new PowerShell session"
+    #Stop the startup Transcript.  OSDCloud will create its own
     $null = Stop-Transcript
+
+    #Start OSDCloud and pass all the parameters except the Language to allow for prompting
     Start-OSDCloud -OSVersion 'Windows 10' -OSBuild 21H2 -OSEdition Enterprise -OSLicense Volume -SkipAutopilot -SkipODT -Restart
 }
 #endregion
-
-#region OOBE
-if ($env:UserName -eq 'defaultuser0') {
-    osdcloud-StartOOBE -Display -Language -DateTime -Autopilot -KeyVault
+#=================================================
+#region Specialize
+if ($WindowsPhase -eq 'Specialize') {
+    #Do something
     $null = Stop-Transcript
-    
+}
+#endregion
+#=================================================
+#region AuditMode
+if ($WindowsPhase -eq 'AuditMode') {
+    #Do something
+    $null = Stop-Transcript
+}
+#endregion
+#=================================================
+#region OOBE
+if ($WindowsPhase -eq 'OOBE') {
+    osdcloud-StartOOBE -Display -Language -DateTime -Autopilot -KeyVault
+    #Do something
+    $null = Stop-Transcript
+}
+#endregion
+#=================================================
+#region Windows
+if ($WindowsPhase -eq 'Windows') {
     $TestAutopilotProfile = osdcloud-TestAutopilotProfile
     if ($TestAutopilotProfile -eq $true) {
         osdcloud-ShowAutopilotProfile
@@ -78,13 +117,8 @@ if ($env:UserName -eq 'defaultuser0') {
             Wait-Process -Id $AutopilotRegisterProcess.Id
         }
     }
+    $null = Stop-Transcript
     osdcloud-RestartComputer
 }
 #endregion
-
-#region FullOS
-if (($env:SystemDrive -ne 'X:') -and ($env:UserName -ne 'defaultuser0')) {
-    #Do something
-    $null = Stop-Transcript
-}
-#endregion
+#=================================================
