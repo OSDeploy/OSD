@@ -1,7 +1,7 @@
 $InstalledModule = Import-Module Microsoft.Graph.DeviceManagement -PassThru -ErrorAction Ignore
 if (-not $InstalledModule) {
     Write-Host -ForegroundColor DarkGray 'Install-Module Microsoft.Graph.DeviceManagement [Global]'
-    Install-Module Microsoft.Graph.Intune -Force -Scope CurrentUser
+    Install-Module Microsoft.Graph.DeviceManagement -Force -Scope CurrentUser
 }
 
 $InstalledModule = Import-Module Microsoft.Graph.Intune -PassThru -ErrorAction Ignore
