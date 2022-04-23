@@ -4,13 +4,13 @@ if (-not $InstalledModule) {
     Install-Module Microsoft.Graph.Intune -Force -Scope CurrentUser
 }
 if (Get-Command Connect-MSGraph -ErrorAction Ignore) {
-    Connect-MSGraph
+    Connect-MSGraph -Quiet
     $graphApiVersion = "Beta"
     $graphUrl = "https://graph.microsoft.com/$graphApiVersion"
     $graphRequest = Invoke-MSGraphRequest -Url "$graphUrl/deviceManagement/deviceManagementScripts" -HttpMethod GET
     
     $deviceManagementScripts = $graphRequest.Value | Select-Object *
-    $deviceManagementScripts = $deviceManagementScripts | Out-GridView -PassThru
+    $deviceManagementScripts = $deviceManagementScripts | Out-GridView -PassThru -Title 'Select one or more scripts to execute'
     
     foreach($deviceScript in $deviceManagementScripts) {
         $deviceManagementScript = Invoke-MSGraphRequest -Url "$graphUrl/deviceManagement/deviceManagementScripts/$($deviceScript.id)" -HttpMethod GET
