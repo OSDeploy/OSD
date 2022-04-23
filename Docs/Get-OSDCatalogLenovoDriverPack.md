@@ -13,7 +13,8 @@ Returns the Lenovo DriverPacks downloads
 ## SYNTAX
 
 ```
-Get-OSDCatalogLenovoDriverPack [-Compatible] [[-DownloadPath] <String>] [-Force] [<CommonParameters>]
+Get-OSDCatalogLenovoDriverPack [-Compatible] [[-DownloadPath] <String>] [-Force] [-TestUrl]
+ [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -62,6 +63,21 @@ Accept wildcard characters: False
 
 ### -Force
 {{ Fill Force Description }}
+
+```yaml
+Type: SwitchParameter
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: False
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -TestUrl
+{{ Fill TestUrl Description }}
 
 ```yaml
 Type: SwitchParameter

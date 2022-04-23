@@ -13,10 +13,10 @@ Edits WinPE in an OSDCloud Workspace for customization
 ## SYNTAX
 
 ```
-Edit-OSDCloudWinPE [-CloudDriver <String[]>] [-DriverHWID <String[]>] [-DriverPath <String[]>]
- [-PSModuleCopy <String[]>] [-PSModuleInstall <String[]>] [-Startnet <String>] [-StartOSDCloud <String>]
- [-StartOSDCloudGUI] [-StartOSDPad <String>] [-StartPSCommand <String>] [-StartWebScript <String>] [-UpdateUSB]
- [-Wallpaper <String>] [-WorkspacePath <String>] [-Brand <String>] [<CommonParameters>]
+Edit-OSDCloudWinPE [-CloudDriver <String[]>] [-StartOSDCloudGUI] [-DriverHWID <String[]>]
+ [-DriverPath <String[]>] [-PSModuleCopy <String[]>] [-PSModuleInstall <String[]>] [-Startnet <String>]
+ [-StartOSDCloud <String>] [-StartOSDPad <String>] [-StartPSCommand <String>] [-StartURL <String>] [-UpdateUSB]
+ [-Wallpaper <String>] [-Brand <String>] [-WorkspacePath <String>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -24,12 +24,20 @@ Edits WinPE in an OSDCloud Workspace for customization
 
 ## EXAMPLES
 
-### Example 1
-```powershell
-PS C:\> {{ Add example code here }}
+### EXAMPLE 1
+```
+Edit-OSDCloudWinPE -StartOSDCloudGUI
 ```
 
-{{ Add example description here }}
+### EXAMPLE 2
+```
+Edit-OSDCloudWinPE -StartOSDCloud '-OSBuild 21H2 -OSEdition Pro -OSLanguage en-us -OSLicense Retail'
+```
+
+### EXAMPLE 3
+```
+Edit-OSDCloudWinPE â€"StartURL 'https://sandbox.osdcloud.com'
+```
 
 ## PARAMETERS
 
@@ -44,6 +52,21 @@ Aliases:
 Required: False
 Position: Named
 Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -StartOSDCloudGUI
+WinPE Startup: Modifies Startnet.cmd to execute Start-OSDCloudGUI
+
+```yaml
+Type: SwitchParameter
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: False
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
@@ -125,7 +148,7 @@ Accept wildcard characters: False
 ```
 
 ### -StartOSDCloud
-WinPE Startup: Modifies Startnet.cmd to execute Start-OSDCloud with the specified string
+WinPE Startup: Modifies Startnet.cmd to execute Start-OSDCloud with the specified string parameters
 
 ```yaml
 Type: String
@@ -135,21 +158,6 @@ Aliases:
 Required: False
 Position: Named
 Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -StartOSDCloudGUI
-WinPE Startup: Modifies Startnet.cmd to execute Start-OSDCloudGUI
-
-```yaml
-Type: SwitchParameter
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: Named
-Default value: False
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
@@ -184,13 +192,13 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -StartWebScript
+### -StartURL
 WinPE Startup: Modifies Startnet.cmd to execute the specified string before OSDCloud
 
 ```yaml
 Type: String
 Parameter Sets: (All)
-Aliases: WebPSScript
+Aliases: WebPSScript, StartWebScript, StartCloudScript
 
 Required: False
 Position: Named
@@ -229,6 +237,21 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
+### -Brand
+Sets the custom Brand for OSDCloudGUI
+
+```yaml
+Type: String
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: OSDCloud
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
 ### -WorkspacePath
 Directory for the OSDCloudWorkspace which contains Media directory
 This is optional as the OSDCloudWorkspace is returned by Get-OSDCloudWorkspace automatically
@@ -241,21 +264,6 @@ Aliases:
 Required: False
 Position: Named
 Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -Brand
-Sets the custom Brand for OSDCloudGUI
-
-```yaml
-Type: String
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: Named
-Default value: OSDCloud
 Accept pipeline input: False
 Accept wildcard characters: False
 ```

@@ -5,19 +5,21 @@ online version: https://osd.osdeploy.com
 schema: 2.0.0
 ---
 
-# Get-OSDCatalogDellDriverPack
+# Get-CloudSecret
 
 ## SYNOPSIS
-Returns the Dell DriverPacks downloads
+Development function to get the contents of a PSCloudScript.
+Optionally allows for execution by command or file
 
 ## SYNTAX
 
 ```
-Get-OSDCatalogDellDriverPack [-Compatible] [[-DownloadPath] <String>] [-Force] [-TestUrl] [<CommonParameters>]
+Get-CloudSecret [-VaultName] <String> [-Name] <String> [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-Returns the Dell DriverPacks downloads
+Development function to get the contents of a PSCloudScript.
+Optionally allows for execution by command or file
 
 ## EXAMPLES
 
@@ -30,62 +32,33 @@ PS C:\> {{ Add example code here }}
 
 ## PARAMETERS
 
-### -Compatible
-Filters results based on your current Product
-
-```yaml
-Type: SwitchParameter
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: Named
-Default value: False
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -DownloadPath
-{{ Fill DownloadPath Description }}
+### -VaultName
+Specifies the name of the key vault to which the secret belongs.
+This cmdlet constructs the fully qualified domain name (FQDN) of a key vault based on the name that this parameter specifies and your current environment.
 
 ```yaml
 Type: String
 Parameter Sets: (All)
 Aliases:
 
-Required: False
+Required: True
 Position: 1
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -Force
-{{ Fill Force Description }}
+### -Name
+Specifies the name of the secret to get the content to use as a PSCloudScript
 
 ```yaml
-Type: SwitchParameter
+Type: String
 Parameter Sets: (All)
 Aliases:
 
-Required: False
-Position: Named
-Default value: False
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -TestUrl
-{{ Fill TestUrl Description }}
-
-```yaml
-Type: SwitchParameter
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: Named
-Default value: False
+Required: True
+Position: 2
+Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```

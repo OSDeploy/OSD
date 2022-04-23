@@ -6,62 +6,86 @@ function Edit-OSDCloudWinPE {
     .DESCRIPTION
     Edits WinPE in an OSDCloud Workspace for customization
 
+    .EXAMPLE
+    Edit-OSDCloudWinPE -StartOSDCloudGUI
+
+    .EXAMPLE
+    Edit-OSDCloudWinPE -StartOSDCloud '-OSBuild 21H2 -OSEdition Pro -OSLanguage en-us -OSLicense Retail'
+
+    .EXAMPLE
+    Edit-OSDCloudWinPE –StartURL 'https://sandbox.osdcloud.com'
+
     .LINK
     https://www.osdcloud.com/setup/osdcloud-winpe
     #>
     
     [CmdletBinding(PositionalBinding = $false)]
     param (
-        #WinPE Driver: Download and install in WinPE drivers from Dell,HP,IntelNet,LenovoDock,Nutanix,Surface,USB,VMware,WiFi
         [ValidateSet('*','Dell','HP','IntelNet','LenovoDock','Surface','Nutanix','USB','VMware','WiFi')]
-        [System.String[]]$CloudDriver,
+        [System.String[]]
+        #WinPE Driver: Download and install in WinPE drivers from Dell,HP,IntelNet,LenovoDock,Nutanix,Surface,USB,VMware,WiFi
+        $CloudDriver,
 
-        #WinPE Driver: HardwareID of the Driver to add to WinPE
+        [System.Management.Automation.SwitchParameter]
+        #WinPE Startup: Modifies Startnet.cmd to execute Start-OSDCloudGUI
+        $StartOSDCloudGUI,
+
         [Alias('HardwareID')]
-        [System.String[]]$DriverHWID,
+        [System.String[]]
+        #WinPE Driver: HardwareID of the Driver to add to WinPE
+        $DriverHWID,
 
+        [System.String[]]
         #WinPE Driver: Path to additional Drivers you want to add to WinPE
-        [System.String[]]$DriverPath,
+        $DriverPath,
 
+        [System.String[]]
         #PowerShell: Copies named PowerShell Modules from the running OS to WinPE
         #This is useful for adding Modules that are customized or not on PowerShell Gallery
-        [System.String[]]$PSModuleCopy,
+        $PSModuleCopy,
 
-        #PowerShell: Installs named PowerShell Modules from PowerShell Gallery to WinPE
         [Alias('Modules')]
-        [System.String[]]$PSModuleInstall,
+        [System.String[]]
+        #PowerShell: Installs named PowerShell Modules from PowerShell Gallery to WinPE
+        $PSModuleInstall,
 
+        [System.String]
         #WinPE Startup: Modifies Startnet.cmd to execute the specified string
-        [System.String]$Startnet,
+        $Startnet,
 
-        #WinPE Startup: Modifies Startnet.cmd to execute Start-OSDCloud with the specified string
-        [System.String]$StartOSDCloud,
+        [System.String]
+        #WinPE Startup: Modifies Startnet.cmd to execute Start-OSDCloud with the specified string parameters
+        $StartOSDCloud,
 
-        #WinPE Startup: Modifies Startnet.cmd to execute Start-OSDCloudGUI
-        [System.Management.Automation.SwitchParameter]$StartOSDCloudGUI,
-
+        [System.String]
         #WinPE Startup: Modifies Startnet.cmd to execute Start-OSDPad with the specified string
-        [System.String]$StartOSDPad,
+        $StartOSDPad,
 
+        [System.String]
         #WinPE Startup: Modifies Startnet.cmd to execute the specified string before OSDCloud
-        [System.String]$StartPSCommand,
+        $StartPSCommand,
 
+        [Alias('WebPSScript','StartWebScript','StartCloudScript')]
+        [System.String]
         #WinPE Startup: Modifies Startnet.cmd to execute the specified string before OSDCloud
-        [Alias('WebPSScript')]
-        [System.String]$StartWebScript,
+        $StartURL,
 
+        [System.Management.Automation.SwitchParameter]
         #After WinPE has been updated, the contents of the OSDCloud Workspace will be updated on any OSDCloud USB Drives
-        [System.Management.Automation.SwitchParameter]$UpdateUSB,
+        $UpdateUSB,
 
+        [System.String]
         #Sets the specified Wallpaper JPG file as the WinPE Background
-        [System.String]$Wallpaper,
+        $Wallpaper,
 
+        [System.String]
+        #Sets the custom Brand for OSDCloudGUI
+        $Brand = 'OSDCloud',
+
+        [System.String]
         #Directory for the OSDCloudWorkspace which contains Media directory
         #This is optional as the OSDCloudWorkspace is returned by Get-OSDCloudWorkspace automatically
-        [System.String]$WorkspacePath,
-
-        #Sets the custom Brand for OSDCloudGUI
-        [System.String]$Brand = 'OSDCloud'
+        $WorkspacePath
     )
     #=================================================
     #	Start the Clock
@@ -227,17 +251,17 @@ start /wait PowerShell -Nol -W Mi -C Start-Sleep -Seconds 10
         Add-Content -Path "$MountPath\Windows\System32\Startnet.cmd" -Value "start /wait PowerShell -NoL -C `"$StartPSCommand`"" -Force
     }
     #=================================================
-    #   StartWebScript /wait
+    #   StartURL /wait
     #=================================================
-    if ($StartWebScript) {
-        Write-Warning "The StartWebScript parameter is adding your Cloud PowerShell script to Startnet.cmd"
+    if ($StartURL) {
+        Write-Warning "The StartURL parameter is adding your Cloud PowerShell script to Startnet.cmd"
         Write-Warning "This must be set every time you run Edit-OSDCloudWinPE or it will revert back to defaults"
 
-        Write-Host -ForegroundColor DarkGray "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Startnet.cmd: start /wait PowerShell -NoL -C Invoke-WebPSScript '$StartWebScript'"
+        Write-Host -ForegroundColor DarkGray "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Startnet.cmd: start /wait PowerShell -NoL -C Invoke-WebPSScript '$StartURL'"
         Add-Content -Path "$MountPath\Windows\System32\Startnet.cmd" -Value '@ECHO OFF' -Force
         Add-Content -Path "$MountPath\Windows\System32\Startnet.cmd" -Value 'Invoke-WebPSScript' -Force
         Add-Content -Path "$MountPath\Windows\System32\Startnet.cmd" -Value '@ECHO ON' -Force
-        Add-Content -Path "$MountPath\Windows\System32\Startnet.cmd" -Value "start /wait PowerShell -NoL -C Invoke-WebPSScript '$StartWebScript'" -Force
+        Add-Content -Path "$MountPath\Windows\System32\Startnet.cmd" -Value "start /wait PowerShell -NoL -C Invoke-WebPSScript '$StartURL'" -Force
     }
     #=================================================
     #   StartOSDCloud /wait
@@ -285,7 +309,7 @@ start /wait PowerShell -Nol -W Mi -C Start-Sleep -Seconds 10
 
         Add-Content -Path "$MountPath\Windows\System32\Startnet.cmd" -Value $Startnet -Force
     }
-    if ($StartOSDCloud -or $StartOSDCloudGUI -or $StartWebScript -or $StartOSDPad -or $Startnet){
+    if ($StartOSDCloud -or $StartOSDCloudGUI -or $StartURL -or $StartOSDPad -or $Startnet){
         #Do Nothing
     }
     else {

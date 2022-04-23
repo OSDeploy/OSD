@@ -10,8 +10,7 @@ https://osd.osdeploy.com
 function ConvertTo-PSKeyVaultSecret
 {
     [CmdletBinding(DefaultParameterSetName='FromUriContent')]
-    param
-    (
+    param (
         [Parameter(Mandatory)]
         [Alias('Vault')]
         # Specifies the name of the key vault to which the secret belongs. This cmdlet constructs the fully qualified domain name (FQDN) of a key vault based on the name that this parameter specifies and your current environment.
@@ -49,44 +48,35 @@ function ConvertTo-PSKeyVaultSecret
     #	Import Az Modules
     #=================================================
     $Module = Import-Module Az.Accounts -PassThru -ErrorAction Ignore
-    if (-not $Module)
-    {
+    if (-not $Module) {
         Install-Module Az.Accounts -Force
     }
     
     $Module = Import-Module Az.KeyVault -PassThru -ErrorAction Ignore
-    if (-not $Module)
-    {
+    if (-not $Module) {
         Install-Module Az.KeyVault -Force
     }
     
-    if (!(Get-AzContext -ErrorAction Ignore))
-    {
+    if (!(Get-AzContext -ErrorAction Ignore)) {
         Connect-AzAccount -DeviceCode
     }
     
-    if (Get-AzContext -ErrorAction Ignore)
-    {
+    if (Get-AzContext -ErrorAction Ignore) {
         #=================================================
         #	FromUriContent
         #=================================================
-        if ($PSCmdlet.ParameterSetName -eq 'FromUriContent')
-        {
+        if ($PSCmdlet.ParameterSetName -eq 'FromUriContent') {
             $GithubRawUrl = (Get-GithubRawUrl -Uri $Uri)
 
-            foreach ($Item in $GithubRawUrl)
-            {
-                try
-                {
+            foreach ($Item in $GithubRawUrl) {
+                try {
                     $WebRequest = Invoke-WebRequest "$Item" -UseBasicParsing -Method Head -MaximumRedirection 0 -ErrorAction SilentlyContinue
-                    if ($WebRequest.StatusCode -eq 200)
-                    {
+                    if ($WebRequest.StatusCode -eq 200) {
                         if ($RawString) {[System.String]$RawString += "`n"}
                         [System.String]$RawString += Invoke-RestMethod -Uri $Item
                     }
                 }
-                catch
-                {
+                catch {
                     Write-Warning $_
                 }
             }
@@ -94,16 +84,12 @@ function ConvertTo-PSKeyVaultSecret
         #=================================================
         #	FromClipboard
         #=================================================
-        if ($PSCmdlet.ParameterSetName -eq 'FromClipboard')
-        {
-            if (Get-Clipboard -ErrorAction Ignore)
-            {
-                try
-                {
+        if ($PSCmdlet.ParameterSetName -eq 'FromClipboard') {
+            if (Get-Clipboard -ErrorAction Ignore) {
+                try {
                     $RawString = Get-Clipboard -Format Text -Raw
                 }
-                catch
-                {
+                catch {
                     Write-Warning $_
                 }
             }
@@ -111,16 +97,12 @@ function ConvertTo-PSKeyVaultSecret
         #=================================================
         #	FromFile
         #=================================================
-        if ($PSCmdlet.ParameterSetName -eq 'FromFile')
-        {
-            if (Test-Path $File)
-            {
-                try
-                {
+        if ($PSCmdlet.ParameterSetName -eq 'FromFile') {
+            if (Test-Path $File) {
+                try {
                     $RawString = Get-Content $File -Raw
                 }
-                catch
-                {
+                catch {
                     Write-Warning $_
                 }
             }
@@ -128,25 +110,20 @@ function ConvertTo-PSKeyVaultSecret
         #=================================================
         #	FromString
         #=================================================
-        if ($PSCmdlet.ParameterSetName -eq 'FromString')
-        {
-            if ($String)
-            {
+        if ($PSCmdlet.ParameterSetName -eq 'FromString') {
+            if ($String) {
                 $RawString = $String
             }
         }
         #=================================================
         #	Set-AzKeyVaultSecret
         #=================================================
-        if ($RawString)
-        {
-            try
-            {
+        if ($RawString) {
+            try {
                 $SecretValue = ConvertTo-SecureString -String $RawString -AsPlainText -Force
                 Set-AzKeyVaultSecret -VaultName $VaultName -Name $Name -SecretValue $SecretValue -ContentType 'text/plain'
             }
-            catch
-            {
+            catch {
                 Write-Warning $_
             }
         }

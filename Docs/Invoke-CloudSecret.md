@@ -5,19 +5,21 @@ online version: https://osd.osdeploy.com
 schema: 2.0.0
 ---
 
-# Get-OSDCatalogDellDriverPack
+# Invoke-CloudSecret
 
 ## SYNOPSIS
-Returns the Dell DriverPacks downloads
+Development function to get the contents of a PSCloudScript.
+Optionally allows for execution by command or file
 
 ## SYNTAX
 
 ```
-Get-OSDCatalogDellDriverPack [-Compatible] [[-DownloadPath] <String>] [-Force] [-TestUrl] [<CommonParameters>]
+Invoke-CloudSecret [-VaultName] <String> [-Name] <String> [-Invoke <String>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-Returns the Dell DriverPacks downloads
+Development function to get the contents of a PSCloudScript.
+Optionally allows for execution by command or file
 
 ## EXAMPLES
 
@@ -30,23 +32,39 @@ PS C:\> {{ Add example code here }}
 
 ## PARAMETERS
 
-### -Compatible
-Filters results based on your current Product
+### -VaultName
+Specifies the name of the key vault to which the secret belongs.
+This cmdlet constructs the fully qualified domain name (FQDN) of a key vault based on the name that this parameter specifies and your current environment.
 
 ```yaml
-Type: SwitchParameter
+Type: String
 Parameter Sets: (All)
 Aliases:
 
-Required: False
-Position: Named
-Default value: False
+Required: True
+Position: 1
+Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -DownloadPath
-{{ Fill DownloadPath Description }}
+### -Name
+Specifies the name of the secret to get the content to use as a PSCloudScript
+
+```yaml
+Type: String
+Parameter Sets: (All)
+Aliases:
+
+Required: True
+Position: 2
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -Invoke
+{{ Fill Invoke Description }}
 
 ```yaml
 Type: String
@@ -54,38 +72,8 @@ Parameter Sets: (All)
 Aliases:
 
 Required: False
-Position: 1
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -Force
-{{ Fill Force Description }}
-
-```yaml
-Type: SwitchParameter
-Parameter Sets: (All)
-Aliases:
-
-Required: False
 Position: Named
-Default value: False
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -TestUrl
-{{ Fill TestUrl Description }}
-
-```yaml
-Type: SwitchParameter
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: Named
-Default value: False
+Default value: Command
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
