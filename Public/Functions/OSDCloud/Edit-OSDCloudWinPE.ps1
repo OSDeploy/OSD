@@ -323,6 +323,12 @@ start /wait PowerShell -Nol -W Mi -C Start-Sleep -Seconds 10
     #   Wallpaper
     #=================================================
     if ($Wallpaper) {
+        if ($Wallpaper = '') {
+            $Wallpaper = Join-Path (Get-Module OSD).ModuleBase "Resources\OSDCloud.jpg"
+        }
+        if (! (Test-Path $Wallpaper)) {
+            $Wallpaper = Join-Path (Get-Module OSD).ModuleBase "Resources\OSDCloud.jpg"
+        }
         Write-Host -ForegroundColor DarkGray "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Wallpaper: $Wallpaper"
         Copy-Item -Path $Wallpaper -Destination "$env:TEMP\winpe.jpg" -Force | Out-Null
         Copy-Item -Path $Wallpaper -Destination "$env:TEMP\winre.jpg" -Force | Out-Null
