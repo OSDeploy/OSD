@@ -1,5 +1,5 @@
 <#PSScriptInfo
-.VERSION 22.4.21.1
+.VERSION 22.4.26.1
 .GUID 9670c013-d1b1-4f5d-9bd0-0fa185b9f203
 .AUTHOR David Segura @SeguraOSD
 .COMPANYNAME osdcloud.com
@@ -23,7 +23,7 @@ powershell iex (irm sandbox.osdcloud.com)
 .DESCRIPTION
     PSCloudScript at sandbox.osdcloud.com
 .NOTES
-    Version 22.4.21.1
+    Version 22.4.26.1
 .LINK
     https://raw.githubusercontent.com/OSDeploy/OSD/master/cloudscript/sandbox.osdcloud.com.ps1
 .EXAMPLE
@@ -34,7 +34,7 @@ param()
 #=================================================
 #Script Information
 $ScriptName = 'sandbox.osdcloud.com'
-$ScriptVersion = '22.4.21.1'
+$ScriptVersion = '22.4.26.1'
 #=================================================
 #region Initialize
 
@@ -52,11 +52,11 @@ else {
     else {$WindowsPhase = 'Windows'}
 }
 
-#Load OSDCloud Functions
-Invoke-Expression -Command (Invoke-RestMethod -Uri functions.osdcloud.com)
-
 #Finish initialization
 Write-Host -ForegroundColor DarkGray "$ScriptName $ScriptVersion $WindowsPhase"
+
+#Load OSDCloud Functions
+Invoke-Expression -Command (Invoke-RestMethod -Uri functions.osdcloud.com)
 
 #endregion
 #=================================================
@@ -75,16 +75,12 @@ if ($WindowsPhase -eq 'WinPE') {
 #=================================================
 #region Specialize
 if ($WindowsPhase -eq 'Specialize') {
-    
-    #Do something
     $null = Stop-Transcript
 }
 #endregion
 #=================================================
 #region AuditMode
 if ($WindowsPhase -eq 'AuditMode') {
-    
-    #Do something
     $null = Stop-Transcript
 }
 #endregion
@@ -101,8 +97,6 @@ if ($WindowsPhase -eq 'OOBE') {
 #=================================================
 #region Windows
 if ($WindowsPhase -eq 'Windows') {
-    
-    #Do something
     $null = Stop-Transcript
 }
 #endregion
