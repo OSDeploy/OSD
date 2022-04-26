@@ -12,7 +12,9 @@ function Get-OSDCloudDriverPack {
     
     [CmdletBinding()]
     param (
-        [System.String]$Product = (Get-MyComputerProduct)
+        [System.String]
+        #Product is determined automatically by Get-MyComputerProduct
+        $Product = (Get-MyComputerProduct)
     )
     $Results = Get-OSDCloudDriverPackList | Where-Object {($_.Product -contains $Product)}
     #=================================================
