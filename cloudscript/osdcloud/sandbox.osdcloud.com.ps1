@@ -52,11 +52,11 @@ else {
     else {$WindowsPhase = 'Windows'}
 }
 
-#Load OSDCloud Functions
-Invoke-Expression -Command (Invoke-RestMethod -Uri functions.osdcloud.com)
-
 #Finish initialization
 Write-Host -ForegroundColor DarkGray "$ScriptName $ScriptVersion $WindowsPhase"
+
+#Load OSDCloud Functions
+Invoke-Expression -Command (Invoke-RestMethod -Uri functions.osdcloud.com)
 
 #endregion
 #=================================================
@@ -75,16 +75,12 @@ if ($WindowsPhase -eq 'WinPE') {
 #=================================================
 #region Specialize
 if ($WindowsPhase -eq 'Specialize') {
-    
-    #Do something
     $null = Stop-Transcript
 }
 #endregion
 #=================================================
 #region AuditMode
 if ($WindowsPhase -eq 'AuditMode') {
-    
-    #Do something
     $null = Stop-Transcript
 }
 #endregion
@@ -101,8 +97,6 @@ if ($WindowsPhase -eq 'OOBE') {
 #=================================================
 #region Windows
 if ($WindowsPhase -eq 'Windows') {
-    
-    #Do something
     $null = Stop-Transcript
 }
 #endregion

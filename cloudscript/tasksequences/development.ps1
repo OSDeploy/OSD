@@ -37,9 +37,11 @@ $ScriptName = 'go.osdcloud.com/enterprise'
 $ScriptVersion = '22.4.26.1'
 #=================================================
 #region Initialize
+
 #Start the Transcript
 $Transcript = "$((Get-Date).ToString('yyyy-MM-dd-HHmmss'))-OSDCloud.log"
 $null = Start-Transcript -Path (Join-Path "$env:SystemRoot\Temp" $Transcript) -ErrorAction Ignore
+
 #Determine the proper Windows environment
 if ($env:SystemDrive -eq 'X:') {$WindowsPhase = 'WinPE'}
 else {
@@ -49,16 +51,21 @@ else {
     elseif ($ImageState -eq 'IMAGE_STATE_SPECIALIZE_RESEAL_TO_AUDIT') {$WindowsPhase = 'AuditMode'}
     else {$WindowsPhase = 'Windows'}
 }
-#Load OSDCloud Functions
-Invoke-Expression -Command (Invoke-RestMethod -Uri functions.osdcloud.com)
+
 #Finish initialization
 Write-Host -ForegroundColor DarkGray "$ScriptName $ScriptVersion $WindowsPhase"
+
+#Load OSDCloud Functions
+Invoke-Expression -Command (Invoke-RestMethod -Uri functions.osdcloud.com)
+
 #endregion
 #=================================================
 #region WinPE
 if ($WindowsPhase -eq 'WinPE') {
+
     #Process OSDCloud startup and load Azure KeyVault dependencies
     osdcloud-StartWinPE -OSDCloud -KeyVault
+
     #Write-Host -ForegroundColor Cyan "To start a new PowerShell session, type 'start powershell' and press enter"
     #Write-Host -ForegroundColor Cyan "Start-OSDCloud or Start-OSDCloudGUI can be run in the new PowerShell session"
     #Stop the startup Transcript.  OSDCloud will create its own
@@ -71,32 +78,30 @@ if ($WindowsPhase -eq 'WinPE') {
 #=================================================
 #region Specialize
 if ($WindowsPhase -eq 'Specialize') {
-    #Do something
     $null = Stop-Transcript
 }
 #endregion
 #=================================================
 #region AuditMode
 if ($WindowsPhase -eq 'AuditMode') {
-    #Do something
     $null = Stop-Transcript
 }
 #endregion
 #=================================================
 #region OOBE
 if ($WindowsPhase -eq 'OOBE') {
+
+    #Load everything needed to run AutoPilot and Azure KeyVault
     osdcloud-StartOOBE -Display -Language -DateTime -Autopilot -KeyVault
-    #Do something
-    $null = Stop-Transcript
-}
-#endregion
-#=================================================
-#region Windows
-if ($WindowsPhase -eq 'Windows') {
+
+    #Get Autopilot information from the device
     $TestAutopilotProfile = osdcloud-TestAutopilotProfile
+
+    #If the device has an Autopilot Profile
     if ($TestAutopilotProfile -eq $true) {
         osdcloud-ShowAutopilotProfile
     }
+    #If not, need to register the device ussing the Enterprise GroupTag and Assign it
     elseif ($TestAutopilotProfile -eq $false) {
         $AutopilotRegisterCommand = 'Get-WindowsAutopilotInfo -Online -GroupTag Enterprise -Assign'
         $AutopilotRegisterProcess = osdcloud-AutopilotRegisterCommand -Command $AutopilotRegisterCommand;Start-Sleep -Seconds 30
@@ -119,6 +124,12 @@ if ($WindowsPhase -eq 'Windows') {
     }
     $null = Stop-Transcript
     osdcloud-RestartComputer
+}
+#endregion
+#=================================================
+#region Windows
+if ($WindowsPhase -eq 'Windows') {
+    $null = Stop-Transcript
 }
 #endregion
 #=================================================

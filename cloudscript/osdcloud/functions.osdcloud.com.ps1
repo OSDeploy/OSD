@@ -541,7 +541,7 @@ if ($WindowsPhase -eq 'OOBE') {
             Write-Warning 'Could not find an Autopilot Profile on this device.  If this device is registered, restart the device while connected to the internet'
         }
     }
-    function osdcloud-TestAutopilotProfile {
+    function osdcloud-ShowAutopilotInfo {
         [CmdletBinding()]
         param ()
         $Global:RegAutopilot = Get-ItemProperty -Path 'Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Provisioning\Diagnostics\Autopilot'
@@ -583,7 +583,7 @@ if ($WindowsPhase -eq 'OOBE') {
         }
     }
     New-Alias -Name 'AddCapability' -Value 'osdcloud-AddCapability' -Description 'OSDCloud' -Force
-    function NetFX {
+    function osdcloud-NetFX {
         [CmdletBinding()]
         param ()
         $WindowsCapability = Get-WindowsCapability -Online -Name "*NetFX*" -ErrorAction SilentlyContinue | Where-Object {$_.State -ne 'Installed'}

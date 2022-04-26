@@ -583,7 +583,7 @@ if ($WindowsPhase -eq 'OOBE') {
         }
     }
     New-Alias -Name 'AddCapability' -Value 'osdcloud-AddCapability' -Description 'OSDCloud' -Force
-    function NetFX {
+    function osdcloud-NetFX {
         [CmdletBinding()]
         param ()
         $WindowsCapability = Get-WindowsCapability -Online -Name "*NetFX*" -ErrorAction SilentlyContinue | Where-Object {$_.State -ne 'Installed'}
