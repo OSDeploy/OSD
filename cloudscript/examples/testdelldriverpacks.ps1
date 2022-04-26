@@ -25,7 +25,7 @@ powershell iex (irm go.osdcloud.com/testdelldriverpacks)
 .NOTES
     Version 22.4.26.1
 .LINK
-    https://raw.githubusercontent.com/OSDeploy/OSD/master/cloudscript/testdelldriverpacks.ps1
+    https://raw.githubusercontent.com/OSDeploy/OSD/master/cloudscript/examples/testdelldriverpacks.ps1
 .EXAMPLE
     powershell iex (irm go.osdcloud.com/testdelldriverpacks)
 #>

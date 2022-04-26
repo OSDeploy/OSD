@@ -1,6 +1,6 @@
 <#PSScriptInfo
 .VERSION 22.4.26.1
-.GUID 57f30acf-8336-4519-9971-1d71d261f197
+.GUID ea8ddb28-f77d-4977-a49f-4ff35b752d83
 .AUTHOR David Segura @SeguraOSD
 .COMPANYNAME osdcloud.com
 .COPYRIGHT (c) 2022 David Segura osdcloud.com. All rights reserved.
@@ -13,27 +13,27 @@
 .EXTERNALSCRIPTDEPENDENCIES 
 .RELEASENOTES
 Script should be executed in a Command Prompt using the following command
-powershell Invoke-Expression -Command (Invoke-RestMethod -Uri go.osdcloud.com/enterprise)
+powershell Invoke-Expression -Command (Invoke-RestMethod -Uri go.osdcloud.com/development)
 This is abbreviated as
-powershell iex(irm go.osdcloud.com/enterprise)
+powershell iex(irm go.osdcloud.com/development)
 #>
 <#
 .SYNOPSIS
-    PSCloudScript at go.osdcloud.com/enterprise
+    PSCloudScript at go.osdcloud.com/development
 .DESCRIPTION
-    PSCloudScript at go.osdcloud.com/enterprise
+    PSCloudScript at go.osdcloud.com/development
 .NOTES
     Version 22.4.26.1
 .LINK
-    https://raw.githubusercontent.com/OSDeploy/OSD/master/cloudscript/enterprise.osdcloud.com.ps1
+    https://raw.githubusercontent.com/OSDeploy/OSD/master/cloudscript/tasksequences/development.ps1
 .EXAMPLE
-    powershell iex (irm go.osdcloud.com/enterprise)
+    powershell iex (irm go.osdcloud.com/development)
 #>
 [CmdletBinding()]
 param()
 #=================================================
 #Script Information
-$ScriptName = 'go.osdcloud.com/enterprise'
+$ScriptName = 'go.osdcloud.com/development'
 $ScriptVersion = '22.4.26.1'
 #=================================================
 #region Initialize
@@ -72,7 +72,7 @@ if ($WindowsPhase -eq 'WinPE') {
     $null = Stop-Transcript
 
     #Start OSDCloud and pass all the parameters except the Language to allow for prompting
-    Start-OSDCloud -OSVersion 'Windows 10' -OSBuild 21H2 -OSEdition Enterprise -OSLicense Volume -SkipAutopilot -SkipODT -Restart
+    Start-OSDCloud -OSVersion 'Windows 10' -OSBuild 21H2 -OSEdition Development -OSLicense Volume -SkipAutopilot -SkipODT -Restart
 }
 #endregion
 #=================================================

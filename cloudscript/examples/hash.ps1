@@ -25,7 +25,7 @@ powershell iex (irm go.osdcloud.com/hash)
 .NOTES
     Version 22.4.26.1
 .LINK
-    https://raw.githubusercontent.com/OSDeploy/OSD/master/cloudscript/hash.ps1
+    https://raw.githubusercontent.com/OSDeploy/OSD/master/cloudscript/examples/hash.ps1
 .EXAMPLE
     powershell iex (irm go.osdcloud.com/hash)
 #>

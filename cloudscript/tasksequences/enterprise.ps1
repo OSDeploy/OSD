@@ -25,7 +25,7 @@ powershell iex(irm go.osdcloud.com/enterprise)
 .NOTES
     Version 22.4.26.1
 .LINK
-    https://raw.githubusercontent.com/OSDeploy/OSD/master/cloudscript/enterprise.osdcloud.com.ps1
+    https://raw.githubusercontent.com/OSDeploy/OSD/master/cloudscript/tasksequences/enterprise.ps1
 .EXAMPLE
     powershell iex (irm go.osdcloud.com/enterprise)
 #>
