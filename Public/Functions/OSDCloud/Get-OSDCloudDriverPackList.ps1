@@ -12,6 +12,6 @@ function Get-OSDCloudDriverPackList {
     
     [CmdletBinding()]
     param ()
-    $Results = Get-Content -Path (Join-Path (Get-Module OSD).ModuleBase "Catalogs\driverpack.json") | ConvertFrom-Json
+    $Results = Get-Content -Path (Join-Path (Get-Module OSD).ModuleBase "Catalogs\driverpacks.json") | ConvertFrom-Json
     $Results
 }

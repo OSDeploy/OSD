@@ -1,0 +1,30 @@
+;==================================================================================================
+;   David Segura
+;   https://www.osdeploy.com
+;==================================================================================================
+;   Purpose: Restores Browse in WinPE
+;   Requires shellstyle*, explorerframe*, StructuredQuery*, edputil*
+;==================================================================================================
+;   Compatibility: WinPE 10 x86/x64
+;==================================================================================================
+[Version]
+Signature   = "$WINDOWS NT$"
+Class       = System
+ClassGuid   = {4D36E97d-E325-11CE-BFC1-08002BE10318}
+Provider    = OSDeploy
+DriverVer   = 2/1/2021,2021.2.1.0
+
+[DefaultInstall] 
+AddReg      = AddReg
+
+[AddReg]
+;rootkey,[subkey],[value],[flags],[data]
+;0x00000    REG_SZ
+;0x00001    REG_BINARY
+;0x10000    REG_MULTI_SZ
+;0x20000    REG_EXPAND_SZ
+;0x10001    REG_DWORD
+;0x20001    REG_NONE
+HKLM,SOFTWARE\Classes\CLSID\{AE054212-3535-4430-83ED-D501AA6680E6},,0x00000,"Shell Name Space ListView"
+HKLM,SOFTWARE\Classes\CLSID\{AE054212-3535-4430-83ED-D501AA6680E6}\InProcServer32,,0x20000,"%SystemRoot%\system32\explorerframe.dll"
+HKLM,SOFTWARE\Classes\CLSID\{AE054212-3535-4430-83ED-D501AA6680E6}\InProcServer32,ThreadingModel,0x00000,Apartment

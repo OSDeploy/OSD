@@ -12046,7 +12046,7 @@ Original credit to Mike Robbins http://mikefrobbins.com/2018/01/18/use-powershel
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="none">
           <maml:name>Product</maml:name>
           <maml:description>
-            <maml:para>{{ Fill Product Description }}</maml:para>
+            <maml:para>Product is determined automatically by Get-MyComputerProduct</maml:para>
           </maml:description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -12061,7 +12061,7 @@ Original credit to Mike Robbins http://mikefrobbins.com/2018/01/18/use-powershel
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="none">
         <maml:name>Product</maml:name>
         <maml:description>
-          <maml:para>{{ Fill Product Description }}</maml:para>
+          <maml:para>Product is determined automatically by Get-MyComputerProduct</maml:para>
         </maml:description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>

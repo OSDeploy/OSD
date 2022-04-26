@@ -12,6 +12,6 @@ function Get-OSDCloudOSList {
     
     [CmdletBinding()]
     param ()
-    $Results = Get-Content -Path (Join-Path (Get-Module OSD).ModuleBase "Catalogs\os.json") | ConvertFrom-Json
+    $Results = Get-Content -Path (Join-Path (Get-Module OSD).ModuleBase "Catalogs\operatingsystems.json") | ConvertFrom-Json
     $Results
 }

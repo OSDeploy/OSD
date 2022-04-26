@@ -31,7 +31,7 @@ PS C:\> {{ Add example code here }}
 ## PARAMETERS
 
 ### -Product
-{{ Fill Product Description }}
+Product is determined automatically by Get-MyComputerProduct
 
 ```yaml
 Type: String
