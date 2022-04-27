@@ -139,12 +139,6 @@ if ($WindowsPhase -eq 'WinPE') {
             Import-Module PowerShellGet -Force -Scope Global
         }
     }
-    function osdcloud-InstallModuleOSD {
-        [CmdletBinding()]
-        param ()
-        Write-Host -ForegroundColor DarkGray 'Install-Module OSD'
-        Install-Module OSD -Force
-    }
     function osdcloud-SetEnvironmentVariables {
         [CmdletBinding()]
         param ()
@@ -209,6 +203,24 @@ if (($WindowsPhase -eq 'WinPE') -or ($WindowsPhase -eq 'OOBE')) {
             if (-not $InstalledModule) {
                 Write-Host -ForegroundColor DarkGray 'Install-Module Az.KeyVault,Az.Accounts [CurrentUser]'
                 Install-Module Az.KeyVault -Force -Scope CurrentUser
+            }
+        }
+    }
+    function osdcloud-InstallModuleOSD {
+        [CmdletBinding()]
+        param ()
+        if ($WindowsPhase -eq 'WinPE') {
+            $InstalledModule = Import-Module OSD -PassThru -ErrorAction Ignore
+            if (-not $InstalledModule) {
+                Write-Host -ForegroundColor DarkGray 'Install-Module OSD [AllUsers]'
+                Install-Module OSD -Force -Scope AllUsers
+            }
+        }
+        if ($WindowsPhase -eq 'OOBE') {
+            $InstalledModule = Import-Module OSD -PassThru -ErrorAction Ignore
+            if (-not $InstalledModule) {
+                Write-Host -ForegroundColor DarkGray 'Install-Module OSD [CurrentUser]'
+                Install-Module OSD -Force -Scope CurrentUser
             }
         }
     }
@@ -756,6 +768,7 @@ if ($WindowsPhase -eq 'OOBE') {
         osdcloud-SetPowerShellProfile
         osdcloud-InstallPackageManagement
         osdcloud-TrustPSGallery
+        osdcloud-InstallModuleOSD
         if ($Autopilot) {
             osdcloud-InstallModuleAutopilot
             osdcloud-InstallModuleAzureAd

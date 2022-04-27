@@ -23,7 +23,7 @@ powershell iex (irm raw.osdcloud.com/dev/min.ps1)
 .DESCRIPTION
     PSCloudScript at raw.osdcloud.com/dev/min.ps1
 .NOTES
-    Version 22.4.26.1
+    Version 22.4.27.1
 .LINK
     https://raw.githubusercontent.com/OSDeploy/OSD/master/cloudscript/dev/min.ps1
 .EXAMPLE
@@ -34,7 +34,7 @@ param()
 #=================================================
 #Script Information
 $ScriptName = 'raw.osdcloud.com/dev/min.ps1'
-$ScriptVersion = '22.4.26.1'
+$ScriptVersion = '22.4.27.1'
 #=================================================
 #region Initialize
 
@@ -62,13 +62,8 @@ Invoke-Expression -Command (Invoke-RestMethod -Uri functions.osdcloud.com)
 #=================================================
 #region WinPE
 if ($WindowsPhase -eq 'WinPE') {
-
-    #Process OSDCloud startup and load Azure KeyVault dependencies
-    osdcloud-StartWinPE -OSDCloud -KeyVault
-    Write-Host -ForegroundColor Cyan "To start a new PowerShell session, type 'start powershell' and press enter"
-    Write-Host -ForegroundColor Cyan "Start-OSDCloud or Start-OSDCloudGUI can be run in the new PowerShell session"
-    
-    #Stop the startup Transcript.  OSDCloud will create its own
+    osdcloud-StartWinPE
+    osdcloud-InstallCurl
     $null = Stop-Transcript
 }
 #endregion
@@ -87,10 +82,7 @@ if ($WindowsPhase -eq 'AuditMode') {
 #=================================================
 #region OOBE
 if ($WindowsPhase -eq 'OOBE') {
-
-    #Load everything needed to run AutoPilot and Azure KeyVault
-    osdcloud-StartOOBE -Display -Language -DateTime -Autopilot -KeyVault
-
+    osdcloud-StartOOBE
     $null = Stop-Transcript
 }
 #endregion
