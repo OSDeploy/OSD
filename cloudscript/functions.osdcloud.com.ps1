@@ -793,18 +793,20 @@ if ($WindowsPhase -eq 'OOBE') {
         if ($KeyVault) {
             osdcloud-InstallModuleKeyVault
         }
-
         #Get Autopilot information from the device
         $TestAutopilotProfile = osdcloud-TestAutopilotProfile
 
-        #If the device has an Autopilot Profile
+        #If the device has an Autopilot Profile, show the information
         if ($TestAutopilotProfile -eq $true) {
             osdcloud-ShowAutopilotInfo
         }
-        if ($TestAutopilotProfile -eq $false) {
-            osdcloud-InstallModuleAutopilot
-            osdcloud-InstallModuleAzureAd
-            osdcloud-InstallScriptAutopilot
+        if ($Autopilot) {
+            #Install the required Autopilot Modules
+            if ($TestAutopilotProfile -eq $false) {
+                osdcloud-InstallModuleAutopilot
+                osdcloud-InstallModuleAzureAd
+                osdcloud-InstallScriptAutopilot
+            }
         }
     }
     New-Alias -Name 'Start-OOBE' -Value 'osdcloud-StartOOBE' -Description 'OSDCloud' -Force
