@@ -801,7 +801,7 @@ if ($WindowsPhase -eq 'OOBE') {
         if ($TestAutopilotProfile -eq $true) {
             osdcloud-ShowAutopilotInfo
         }
-        if (($TestAutopilotProfile -eq $false) -or ($Autopilot)) {
+        if ($TestAutopilotProfile -eq $false) {
             osdcloud-InstallModuleAutopilot
             osdcloud-InstallModuleAzureAd
             osdcloud-InstallScriptAutopilot
