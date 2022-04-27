@@ -98,11 +98,8 @@ if ($WindowsPhase -eq 'OOBE') {
     $TestAutopilotProfile = osdcloud-TestAutopilotProfile
 
     #If the device has an Autopilot Profile
-    if ($TestAutopilotProfile -eq $true) {
-        osdcloud-ShowAutopilotInfo
-    }
-    #If not, need to register the device ussing the Enterprise GroupTag and Assign it
-    elseif ($TestAutopilotProfile -eq $false) {
+    #If not, need to register the device using the Enterprise GroupTag and Assign it
+    if ($TestAutopilotProfile -eq $false) {
         $AutopilotRegisterCommand = 'Get-WindowsAutopilotInfo -Online -GroupTag Enterprise -Assign'
         $AutopilotRegisterProcess = osdcloud-AutopilotRegisterCommand -Command $AutopilotRegisterCommand;Start-Sleep -Seconds 30
     }
