@@ -751,20 +751,16 @@ if ($WindowsPhase -eq 'OOBE') {
         [CmdletBinding()]
         param (
             [System.Management.Automation.SwitchParameter]
+            #This parameter is not used anymore
             $Autopilot,
-
             [System.Management.Automation.SwitchParameter]
             $Display,
-
             [System.Management.Automation.SwitchParameter]
             $Language,
-
             [System.Management.Automation.SwitchParameter]
             $DateTime,
-
             [System.Management.Automation.SwitchParameter]
             $OSD,
-
             [System.Management.Automation.SwitchParameter]
             $KeyVault
         )
