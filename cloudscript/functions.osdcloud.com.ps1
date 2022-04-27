@@ -790,9 +790,11 @@ if ($WindowsPhase -eq 'OOBE') {
         if ($OSD) {
             osdcloud-InstallModuleOSD
         }
+        #Add Azure KeuVault Support
         if ($KeyVault) {
             osdcloud-InstallModuleKeyVault
         }
+
         #Get Autopilot information from the device
         $TestAutopilotProfile = osdcloud-TestAutopilotProfile
 
@@ -800,8 +802,9 @@ if ($WindowsPhase -eq 'OOBE') {
         if ($TestAutopilotProfile -eq $true) {
             osdcloud-ShowAutopilotInfo
         }
+        
+        #Install the required Autopilot Modules
         if ($Autopilot) {
-            #Install the required Autopilot Modules
             if ($TestAutopilotProfile -eq $false) {
                 osdcloud-InstallModuleAutopilot
                 osdcloud-InstallModuleAzureAd
