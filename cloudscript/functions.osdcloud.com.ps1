@@ -751,17 +751,27 @@ if ($WindowsPhase -eq 'OOBE') {
         [CmdletBinding()]
         param (
             [System.Management.Automation.SwitchParameter]
-            #This parameter is not used anymore
+            #Install Autopilot Support
             $Autopilot,
+
             [System.Management.Automation.SwitchParameter]
+            #Show Windows Settings Display
             $Display,
+
             [System.Management.Automation.SwitchParameter]
+            #Show Windows Settings Display
             $Language,
+
             [System.Management.Automation.SwitchParameter]
+            #Show Windows Settings Display
             $DateTime,
+
             [System.Management.Automation.SwitchParameter]
+            #Install the OSD PowerShell Module
             $OSD,
+
             [System.Management.Automation.SwitchParameter]
+            #Install Azure KeyVault support
             $KeyVault
         )
         if ($Display) {
@@ -791,7 +801,7 @@ if ($WindowsPhase -eq 'OOBE') {
         if ($TestAutopilotProfile -eq $true) {
             osdcloud-ShowAutopilotInfo
         }
-        else {
+        if (($TestAutopilotProfile -eq $false) -or ($Autopilot)) {
             osdcloud-InstallModuleAutopilot
             osdcloud-InstallModuleAzureAd
             osdcloud-InstallScriptAutopilot
