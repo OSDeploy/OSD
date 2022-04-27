@@ -234,7 +234,7 @@ if (($WindowsPhase -eq 'WinPE') -or ($WindowsPhase -eq 'OOBE')) {
         [CmdletBinding(DefaultParameterSetName='Default')]
         param (
             [Parameter(Mandatory,ParameterSetName='Basic')]
-            [Switch]$Basic,
+            [System.Management.Automation.SwitchParameter]$Basic,
     
             [Parameter(Mandatory,ParameterSetName='ByName',Position=0)]
             [System.String[]]$Name
@@ -615,10 +615,10 @@ if ($WindowsPhase -eq 'OOBE') {
         [CmdletBinding(DefaultParameterSetName='Default')]
         param (
             [Parameter(Mandatory,ParameterSetName='Basic')]
-            [Switch]$Basic,
+            [System.Management.Automation.SwitchParameter]$Basic,
     
             [Parameter(Mandatory,ParameterSetName='Full')]
-            [Switch]$Full,
+            [System.Management.Automation.SwitchParameter]$Full,
     
             [Parameter(Mandatory,ParameterSetName='ByName',Position=0)]
             [System.String[]]$Name
@@ -712,9 +712,9 @@ if ($WindowsPhase -eq 'WinPE') {
         [CmdletBinding()]
         param (
             [Parameter()]
-            [Switch]$KeyVault,
+            [System.Management.Automation.SwitchParameter]$KeyVault,
             [Parameter()]
-            [Switch]$OSDCloud
+            [System.Management.Automation.SwitchParameter]$OSDCloud
         )
         if ($env:SystemDrive -eq 'X:') {
             osdcloud-SetExecutionPolicy
@@ -750,16 +750,23 @@ if ($WindowsPhase -eq 'OOBE') {
     function osdcloud-StartOOBE {
         [CmdletBinding()]
         param (
-            [Parameter()]
-            [Switch]$Autopilot,
-            [Parameter()]
-            [Switch]$Display,
-            [Parameter()]
-            [Switch]$Language,
-            [Parameter()]
-            [Switch]$DateTime,
-            [Parameter()]
-            [Switch]$KeyVault
+            [System.Management.Automation.SwitchParameter]
+            $Autopilot,
+
+            [System.Management.Automation.SwitchParameter]
+            $Display,
+
+            [System.Management.Automation.SwitchParameter]
+            $Language,
+
+            [System.Management.Automation.SwitchParameter]
+            $DateTime,
+
+            [System.Management.Automation.SwitchParameter]
+            $OSD,
+
+            [System.Management.Automation.SwitchParameter]
+            $KeyVault
         )
         if ($Display) {
             osdcloud-SetWindowsDisplay
@@ -774,7 +781,12 @@ if ($WindowsPhase -eq 'OOBE') {
         osdcloud-SetPowerShellProfile
         osdcloud-InstallPackageManagement
         osdcloud-TrustPSGallery
-        osdcloud-InstallModuleOSD
+        if ($OSD) {
+            osdcloud-InstallModuleOSD
+        }
+        if ($KeyVault) {
+            osdcloud-InstallModuleKeyVault
+        }
         if ($Autopilot) {
             osdcloud-InstallModuleAutopilot
             osdcloud-InstallModuleAzureAd
@@ -798,9 +810,6 @@ if ($WindowsPhase -eq 'OOBE') {
                 Write-Host -ForegroundColor DarkGray "  IsForcedEnrollmentEnabled: $($Global:RegAutoPilot.IsForcedEnrollmentEnabled)"
                 Write-Host -ForegroundColor DarkGray "  SetTelemetryLevel_Succeeded_With_Level: $($Global:RegAutoPilot.SetTelemetryLevel_Succeeded_With_Level)"
             }
-        }
-        if ($KeyVault) {
-            osdcloud-InstallModuleKeyVault
         }
     }
     New-Alias -Name 'Start-OOBE' -Value 'osdcloud-StartOOBE' -Description 'OSDCloud' -Force

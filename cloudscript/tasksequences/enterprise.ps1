@@ -92,14 +92,14 @@ if ($WindowsPhase -eq 'AuditMode') {
 if ($WindowsPhase -eq 'OOBE') {
 
     #Load everything needed to run AutoPilot and Azure KeyVault
-    osdcloud-StartOOBE -Display -Language -DateTime -Autopilot -KeyVault
+    osdcloud-StartOOBE -Display -Language -DateTime -OSD -Autopilot -KeyVault
 
     #Get Autopilot information from the device
     $TestAutopilotProfile = osdcloud-TestAutopilotProfile
 
     #If the device has an Autopilot Profile
     if ($TestAutopilotProfile -eq $true) {
-        osdcloud-ShowAutopilotProfile
+        osdcloud-ShowAutopilotInfo
     }
     #If not, need to register the device ussing the Enterprise GroupTag and Assign it
     elseif ($TestAutopilotProfile -eq $false) {
