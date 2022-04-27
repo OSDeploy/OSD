@@ -32,7 +32,7 @@ powershell iex (irm functions.osdcloud.com)
 #=================================================
 #Script Information
 $ScriptName = 'functions.osdcloud.com'
-$ScriptVersion = '22.4.27.1'
+$ScriptVersion = '22.4.27.2'
 #=================================================
 #region Initialize Functions
 [Net.ServicePointManager]::SecurityProtocol = [Net.ServicePointManager]::SecurityProtocol -bor [Net.SecurityProtocolType]::Tls12
@@ -214,10 +214,12 @@ if (($WindowsPhase -eq 'WinPE') -or ($WindowsPhase -eq 'OOBE')) {
             if (-not $InstalledModule) {
                 Write-Host -ForegroundColor DarkGray 'Install-Module OSD [AllUsers]'
                 Install-Module OSD -Force -Scope AllUsers
+                Import-Module OSD -Force
             }
             else {
                 Write-Host -ForegroundColor DarkGray 'Install-Module OSD [AllUsers]'
                 Install-Module OSD -Force -Scope AllUsers
+                Import-Module OSD -Force
             }
         }
         if ($WindowsPhase -eq 'OOBE') {
