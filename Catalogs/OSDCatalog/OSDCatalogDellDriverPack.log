@@ -1,0 +1,1174 @@
+﻿**********************
+Windows PowerShell transcript start
+Start time: 20220427113810
+Username: OSDCODE\David
+RunAs User: OSDCODE\David
+Configuration Name: 
+Machine: OSDCODE (Microsoft Windows NT 10.0.22000.0)
+Host Application: C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe -NoProfile -NonInteractive -ExecutionPolicy Bypass -Command Import-Module 'c:\Users\David\.vscode\extensions\ms-vscode.powershell-2021.12.0\modules\PowerShellEditorServices\PowerShellEditorServices.psd1'; Start-EditorServices -HostName 'Visual Studio Code Host' -HostProfileId 'Microsoft.VSCode' -HostVersion '2021.12.0' -AdditionalModules @('PowerShellEditorServices.VSCode') -BundledModulesPath 'c:\Users\David\.vscode\extensions\ms-vscode.powershell-2021.12.0\modules' -EnableConsoleRepl -StartupBanner '=====> PowerShell Integrated Console v2021.12.0 <=====
+' -LogLevel 'Normal' -LogPath 'c:\Users\David\.vscode\extensions\ms-vscode.powershell-2021.12.0\logs\1651066957-e4ecd9d7-d592-4227-b50f-9e5b5fb201c41651066955775\EditorServices.log' -SessionDetailsPath 'c:\Users\David\.vscode\extensions\ms-vscode.powershell-2021.12.0\sessions\PSES-VSCode-32624-892561' -FeatureFlags @() 
+Process ID: 32300
+PSVersion: 5.1.22000.613
+PSEdition: Desktop
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1.22000.613
+BuildVersion: 10.0.22000.613
+CLRVersion: 4.0.30319.42000
+WSManStackVersion: 3.0
+PSRemotingProtocolVersion: 2.3
+SerializationVersion: 1.1.0.1
+**********************
+Transcript started, output file is D:\GitHub\MyModules\OSD\Catalogs\OSDCatalog\OSDCatalogDellDriverPack.log
+VERBOSE: Test-WebConnection OK: https://downloads.dell.com/catalog/DriverPackCatalog.cab
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 155783-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Source: https://downloads.dell.com/catalog/DriverPackCatalog.cab
+VERBOSE: Destination: C:\Users\David\AppData\Local\Temp\OSD\DriverPackCatalog.cab
+VERBOSE: Expand: C:\Users\David\AppData\Local\Temp\OSD\DriverPackCatalog.cab
+VERBOSE: Using Raw Catalog at C:\Users\David\AppData\Local\Temp\OSD\DriverPackCatalog.xml
+VERBOSE: Reading the Raw Catalog at C:\Users\David\AppData\Local\Temp\OSD\DriverPackCatalog.xml
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER03201484M/1/XT3-win10-A00-KY4CH.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 60777657-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER03480611M/1/3011-win10-A01-YP44V.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 473616707-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER03528023M/1/R5500-win10-A01-385D1.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 395953834-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER03537821M/1/T3600-win10-A01-X9M2C.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 802107201-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER03537942M/1/T5600-win10-A01-VFHNM.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 802010184-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER03538550M/1/T7600-win10-A01-0P54F.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 802016700-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER03631140M/1/7010-win10-A01-GR1XM.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 734517890-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER03642465M/1/T1650-win10-A01-G15VM.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 1186190272-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER03644304M/1/E5430-win10-A01-0CYM6.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 468657958-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER03646873M/1/E5530-win10-A01-0740M.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 468640536-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER03647074M/1/E6230-win10-A01-GWP8V.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 284439244-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER03647285M/1/E6330-win10-A01-XD69T.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 284480178-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER03647870M/1/E6430-win10-A01-6GCWC.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 674383165-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER03647922M/1/E6430s-win10-A01-1XVV0.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 664069642-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER03649264M/1/E6530-win10-A01-PXT6R.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 675737161-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER03649935M/1/6430U-win10-A01-46V71.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 740157671-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER03650061M/1/M4700-win10-A02-GMFJV.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 1107482069-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER03650102M/1/M6700-win10-A02-T08R2.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 1107516871-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER03651130M/1/9010-win10-A02-TRYJN.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 889491070-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER03651157M/1/9010 AIO-Win10-A01-84DGG.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 225028309-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER03656814M/1/3010-Win10-A01-XM7K2.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 485251630-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER03695173M/1/5130-win10-A02-G9TYN.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 208557493-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER03698751M/1/5830-win10-A02-5VXCN.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 89631954-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER03923349M/1/3330-win10-A03-RVC2V.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 294009030-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER03994830M/1/M4800-win10-A03-5DVNT.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 1288963078-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER03998281M/1/M6800-win10-A03-XT1RJ.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 1288748695-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER04066328M/1/M2800-Win10-A03-6HN8N.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 642511807-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER04306795M/1/3150-win10-A04-R27P9.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 271103894-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER04319691M/1/3160-win10-A05-464RT.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 352808956-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER04510396M/1/R7910-win10-A05-23V7P.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 1147781775-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER04843715M/1/9343-Win10-A05-JKF3J.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 311112315-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER04843753M/1/7140-win10-A06-XNGHF.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 327920916-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER04845787M/1/7202-Win10-A06-H82Y2.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 379755260-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER04845871M/1/7350-Win10-A07-8VD30.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 338153242-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER04846197M/1/E5250_5250-win10-A08-32HKG.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 452622188-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER04846464M/1/T7810-win10-A06-7DNKJ.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 1747018159-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER04846542M/1/T7910-win10-A06-RN2J6.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 1747335828-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER04846565M/1/E5440-win10-A04-00F72.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 829938182-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER04846777M/1/T5810-win10-A05-774GJ.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 1753476032-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER04846942M/1/3550-Win10-A07-YT0P2.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 885591977-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER04847957M/1/3450-Win10-A07-TJ5YR.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 837711085-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER04848866M/1/E5540-Win10-A03-5XY4J.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 796093805-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER04850247M/1/E5550_5550-win10-A08-YTCDG.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 852856879-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER04894324M/1/3020M-Win10-A04-DYD40.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 362466994-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER04895413M/1/E7240-Win10-A04-8FN88.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 440518902-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER04895537M/1/7204-Win10-A05-CJ9XY.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 333092815-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER04895591M/1/T3610-win10-A03-XPNV2.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 1012779629-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER04896975M/1/9020M-Win10-A04-WM3PT.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 381380712-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER04897495M/1/9020-win10-A05-6TD3V.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 870362084-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER04898010M/1/XE2-win10-A04-X1TN0.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 1263200612-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER04898157M/1/7404-Win10-A05-88C14.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 551587669-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER04898292M/1/R7610-win10-A02-9JCPH.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 1014923510-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER04898339M/1/7130-win10-A04-WDD3H.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 289452832-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER04898417M/1/9020 AIO-win10-A04-HFGR3.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 782010663-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER04898481M/1/7020-win10-A04-KXG7W.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 650908259-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER04898824M/1/E7440-Win10-A04-J1YD9.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 444790879-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER04900748M/1/T5610-win10-A04-CPKF3.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 1012716898-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER04901365M/1/E6440-win10-A04-M1GYF.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 849172864-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER04901480M/1/E6540-win10-A04-HW0T8.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 849637017-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER04901695M/1/9030-win10-A04-09R0F.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 932837668-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER04901743M/1/3340-win10-A05-990JJ.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 469361974-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER04901836M/1/T7610-win10-A02-T2W1W.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 1012243114-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER04901932M/1/5404-Win10-A06-0X4M7.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 810563574-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER04904244M/1/M3800-win10-A02-7K2W2.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 708712893-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER04904615M/1/3030 AIO-win10-A04-6G0WM.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 628765717-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER04906888M/1/3020-win10-A03-D46TR.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 608817580-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER04907472M/1/T1700-win10-A04-M1X9P.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 1057041194-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER05153722M/1/E7450-win10-A08-V0T12.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 971462314-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER05159410M/1/7710-win10-A11-HWN90.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 1175395139-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER05159454M/1/E7250_7250-win10-A08-59X09.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 553977791-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER05280155M/1/3350-win10-A12-2X2P8.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 369312660-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER05280997M/1/3460-win10-A11-3F4DN.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 660727900-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER05282644M/1/3560-win10-A12-W97JT.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 924480336-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER05282751M/1/3470-Win10-A12-094G8.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 770530391-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER05283329M/1/3570-Win10-A12-WKJ11.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 1031047815-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER05290024M/1/5040-Win10-A13-TF53Y.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 717545077-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER05295293M/1/7440 AIO-win10-A13-021PV.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 668654554-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER05295607M/1/3379-Win10-A07-F6H07.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 540243131-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER05305441M/1/3240 AIO-win10-A11-M5C9X.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 668112118-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER05332970M/1/3046-win10-A09-9D81J.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 718547066-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER05382957M/1/5056-win10-A12-P4G6J.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 267215256-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER05383060M/1/7214-Win10-A08-7J3NP.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 469544974-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER05383544M/1/5855-win10-A11-75HY0.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 273443331-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER05387873M/1/3510-Win10-A15-8FHVG.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 667853004-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER05389473M/1/7414-Win10-A09-P2YWW.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 680510187-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER05395260M/1/9550-Win10-A14-TV5DD.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 822625061-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER05397209M/1/Dell Embedded Box PC 5000-win10-A05-M2XHF.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 323846389-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER05397218M/1/Dell Embedded Box PC 3000-win10-A03-90PDY.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 230432190-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER05422014M/1/T3620-win10-A13-7T7FD.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 1441686615-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER05444919M/1/5179-win10-A10-91P8R.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 550864722-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER05445200M/1/9250-Win10-A13-5FK7V.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 546345104-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER05471840M/1/T3420-win10-A13-PM4W0.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 1091383798-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER05504327M/1/5414-Win10-A10-X6K2Y.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 698273343-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER05561454M/1/E7270-win10-A12-1Y7X7.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 508578763-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER05574863M/1/7275-win10-A13-M0K80.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 592381465-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER05575684M/1/9350-win10-A14-5G6R8.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 486519097-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER05575873M/1/7370-win10-A16-W8J2J.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 509131080-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER05767062M/1/OptiPlex 5055 Ryzen APU-Win10-A04-CCG9P.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 576777829-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER05767101M/1/OptiPlex 5055 Ryzen CPU-win10-A07-42WR6.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 457179847-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER06071572M/1/5520-win10-A13-KMMND.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 1090855617-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER06071649M/1/9560-win10-A14-TT7W3.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 1118514085-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER06072207M/1/9365-win10-A14-GXYTC.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 581373846-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER06082406M/1/3480-Win10-A12-NTKMR.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 1177447720-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER06082849M/1/3580-Win10-A13-WN8VN.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 1177243084-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER06092771M/1/7285-win10-A11-5VWFM.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 672693751-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER06102691M/1/5495-win10-A06-97R2Y.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 753846135-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER06104383M/1/9370-win10-A08-WNYXM.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 703773040-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER06104751M/1/9360-win10-A15-RTNJ7.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 651217693-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER06105198M/1/9575-win10-A07-GJDT1.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 767560327-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER06105244M/1/5720 AIO-win10-A12-8DN8T.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 890109383-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER06105298M/1/7212-win10-A10-H4GY4.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 690950262-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER06144397M/1/5285-win10-A13-NYPWP.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 693402063-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER06175492M/1/5580-win10-A13-JRG2W.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 1031611819-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER06178974M/1/5050-win10-A13-X89GJ.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 876926876-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER06179464M/1/7720-win10-A12-XHT1M.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 1352037849-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER06179551M/1/3520-win10-A13-F2C2V.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 1408022207-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER06190065M/1/7389-win10-A10-FYHNG.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 657096717-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER06190084M/1/3380-win10-A13-P1X8T.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 589079101-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER06191589M/1/7380-win10-A10-CW27C.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 632881696-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER06191609M/1/OptiPlex 5055 A-Series-win10-A07-KVP96.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 342172668-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER06199621M/1/5250 AIO-win10-A13-9M57F.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 865509381-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER06200467M/1/7450 AIO-win10-A13-CMMF0.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 868505254-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER06201705M/1/3050 AIO-win10-A13-T7CGN.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 579670392-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER06220950M/1/3189-win10-A12-HGY7M.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 483348963-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER06220990M/1/3180-win10-A12-559Y5.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 508877730-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER06251954M/1/E5570-Win10-A18-441JC.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 956581507-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER06315906M/1/E7470-win10-A13-3P8NR.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 522732096-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER06447469M/1/7480-win10-A15-FMJK7.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 717169377-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER06447757M/1/5480-win10-A14-0T2MV.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 1163337582-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER06522386M/1/7040-Win10-A14-G65J8.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 1096685889-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER06522425M/1/3040-win10-A14-YCK4X.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 1017227743-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER06522466M/1/E5470-Win10-A16-CD3KM.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 855805017-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER06522502M/1/3050-Win10-A13-84FTP.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 871701628-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER06527729M/1/5175-win10-A10-XHGFM.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 594299018-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER06528223M/1/7510-win10-A14-G9R71.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 1288251613-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER06528239M/1/7050-win10-A14-772VV.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 890914965-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER06528263M/1/7520-Win10-A13-Y55Y7.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 1402184615-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER06528841M/1/5289-win10-A12-JDW66.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 690237223-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER06528860M/1/E5270-Win10-A14-N8KCM.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 648528263-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER06528868M/1/5280-win10-A14-T4KTP.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 730613241-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER06563763M/1/E5450_5450-win10-A09-0K2C6.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 1198698401-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER07024452M/1/7280-win10-A15-CYF27.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 735167984-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER07167657M/1/3430-win10-A09-GH0FV.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 1208625808-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER07177684M/1/PRECISION 3650 TOWER-win10-A00-GK77T.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 1767253134-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER07306886M/1/5290-win10-A15-K3H32.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 726414930-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER07308660M/1/3390 2-in-1-win10-A14-JGRW1.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 672457067-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER07333564M/1/7460 AIO-win10-A12-9DK2C.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 980315313-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER07333584M/1/7760 AIO-win10-A12-TCNTX.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 980414003-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER07335657M/1/7290-win10-A15-CP4G4.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 1016343605-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER07336372M/1/5490-win10-A15-0DWT0.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 1119296250-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER07337399M/1/3060-win10-A13-0JJVK.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 1226153789-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER07340435M/1/3530-Win10-A13-RVGFR.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 1284014664-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER07340507M/1/5060-win10-A12-9C16J.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 1243716981-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER07340574M/1/5260 AIO-win10-A12-5TH0D.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 652199992-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER07340603M/1/7060-win10-A12-TD7PC.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 1688080902-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER07340616M/1/5290 2-IN-1-win10-A15-V8N0D.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 737176767-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER07340632M/1/XE3-win10-A12-0K2NN.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 1688763617-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER07340652M/1/5491-win10-A13-M714V.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 1293477191-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER07340737M/1/5591-Win10-A13-2N50D.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 1293556431-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER07350473M/1/3490-win10-A15-1RNK0.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 1287030314-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER07350620M/1/3590-win10-A15-HFJ4R.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 1286655647-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER07387978M/1/3551-win10-A07-HTV16.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 1756671217-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER07388428M/1/7390V-win10-A15-YRHCC.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 831008525-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER07388448M/1/9570-win10-A12-VX9T3.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 1363859732-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER07388489M/1/5530-win10-A13-CD246.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 1369682472-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER07409301M/1/5420-win10-A10-7PYRM.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 1187635657-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER07409707M/1/5424-win10-A10-0Y20V.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 1187589038-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER07409844M/1/7424-win10-A10-KX1DK.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 1184474252-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER07416488M/1/3190-win10-A11-V6918.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 526726880-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER07416497M/1/3190 2-in-1-win10-A11-HM7VY.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 526687052-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER07542470M/1/7390-win10-A16-ND17P.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 989343485-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER07542477M/1/7490-win10-A15-3F3NX.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 990654003-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER07546177M/1/7730-win10-A13-6VXK9.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 1804900600-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER07546243M/1/7530-win10-A13-4PJ79.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 1804757959-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER07605986M/1/5590-win10-A17-7X0X1.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 1308128428-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER07628266M/1/9410-win10-A08-V511G.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 1662837348-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER07645428M/1/5511-win10-A07-VDM8R.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 1983888758-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER07646126M/1/3550-win10-A08-XMJWG.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 1953054850-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER07646329M/1/5410-win10-A06-W62CK.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 1752190953-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER07646602M/1/5411-win10-A07-3NMYT.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 1983909442-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER07647569M/1/5510-win10-A06-MM6RJ.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 1752129165-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER07648016M/1/7310-win10-A08-3YFT8.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 1829426500-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER07648019M/1/7410-win10-A08-MXH8R.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 1829412002-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER07672178M/1/Precision 5820 Tower-win10-A14-M7P4G.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 1517114626-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER07751639M/1/PRECISION 3650 TOWER-win11-A00-17XKC.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 1466576080-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER07758491M/1/7390-win11-A00-1R0CD.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 1110812872-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER07758994M/1/5490 AIO-win11-A00-HVM4R.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 1322322563-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER07759068M/1/7490 AIO-win11-A00-VNTKK.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 1322374204-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER07759287M/1/9300-win11-A00-RHR1D.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 1131023131-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER07761817M/1/7520-win11-A00-5R4NH.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 2096020057-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER07762657M/1/7590-win11-A00-59MW4.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 1453091630-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER07762903M/1/9380-win11-A00-2PNY6.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 935216432-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER07764082M/1/3120-win11-A00-M53T6.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 1138562083-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER07769070M/1/9700-win11-A00-T4CT1.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 1723232452-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER07772029M/1/7390 2in1-win11-A00-4PY3P.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 906379213-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER07773245M/1/9500-win11-A00-68YC6.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 1652598077-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER07773390M/1/9310 2in1-win11-A00-F3RK7.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 1212286463-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER07789340M/1/9520-win10-A03-YY2NG.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 1621964847-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER07789425M/1/LATITUDE 7320 DETACHABLE-Win11-A00-2YPR3.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 1513002777-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER07791195M/1/7320-win11-A00-GY5K1.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 2096094280-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER07791271M/1/3560-win11-A00-5WMD2.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 1705843773-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER07791822M/1/7560-win11-A00-C6V81.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 1904816348-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER07792215M/1/7760-win11-A00-6H80H.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 1904815688-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER07792230M/1/5560-win11-A00-FR5HY.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 1798862994-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER07792260M/1/3090 ULTRA-win11-A00-YMKN6.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 1254392546-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER07792274M/1/5090-win11-A00-9MT3D.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 1606158209-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER07792466M/1/5521-Win11-A00-1DGMR.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 1195341900-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER07792561M/1/3520-win11-A00-KJVNG.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 1898563358-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER07793313M/1/5421-win11-A00-58C08.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 1790025924-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER07795749M/1/3450-win11-A00-5CKY9.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 1703574505-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER07795826M/1/7090-win11-A00-9JR76.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 1609020582-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER07795842M/1/7090 ULTRA-win11-A00-0Y4FW.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 1253703928-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER07795853M/1/3561-win11-A00-VXC49.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 1723573393-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER07796071M/1/3320-win11-A00-4C8D9.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 1701188547-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER07796309M/1/5520-win11-A00-Y7KFJ.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 1706092539-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER07822440M/1/3431-win10-A09-WM0JH.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 1736456748-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER07822891M/1/3301-win10-A11-VC45D.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 884826825-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER07823035M/1/Precision 7920 Rack-win10-A15-V41TW.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 821660730-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER07823104M/1/3300-win10-A12-Y7N6G.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 812693588-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER07823170M/1/5401-win10-A12-9CRYT.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 1495858906-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER07823555M/1/3541-win10-A14-YPXPF.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 1486511525-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER07823603M/1/5501-win10-A12-78T17.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 1495916482-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER07823675M/1/Precision 7820 Tower-win10-A15-7H5C8.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 1679985257-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER07823685M/1/5070-win10-A09-WRGT4.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 1730603205-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER07823912M/1/Precision 7920 Tower-win10-A15-H6JK4.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 1680062337-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER07850521M/1/7220-win10-A08-TN18C.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 1206137842-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER07850616M/1/7770 AIO-win10-A10-09G0F.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 1550495312-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER07851470M/1/7470 AIO-win10-A10-4CD4H.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 1550477224-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER07851533M/1/5270 AIO-win10-A10-C4GV0.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 919623980-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER07852216M/1/7390 2in1-win10-A10-V68D3.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 971454502-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER07890539M/1/3070-win10-A08-F8T2C.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 1732518700-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER07894932M/1/7750-win10-A08-J8DPH.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 1951509193-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER07895477M/1/7550-win10-A08-6HP22.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 1946087770-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER07900660M/1/3120-win10-A05-K5XW3.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 1144061766-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER07900962M/1/7070-win10-A11-M0K2V.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 1805655125-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER07916789M/1/5421-win10-A03-RF9W0.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 1864767548-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER07916868M/1/7560-win10-A02-J3Y94.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 1903447854-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER07917275M/1/7760-win10-A02-7RFFT.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 1903311430-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER07936715M/1/9380-win10-A14-18WFG.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 960748950-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER07938913M/1/5300 2-IN-1-win10-A13-DM2DG.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 1270439939-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER07939023M/1/5300-win10-A13-VGY73.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 1266340190-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER07939287M/1/5400-win10-A13-7CP7C.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 1432224284-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER07939391M/1/5500-win10-A14-R6KHX.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 1432292138-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER07939475M/1/3540-win10-A13-XFN93.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 1428598758-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER07939628M/1/5530 2-IN-1-win10-A15-4RT82.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 1288537322-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER07954879M/1/7200 2-in-1-win10-A11-6505G.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 1184211026-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER07954927M/1/7300-win10-A12-3MDT6.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 1189719762-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER07954968M/1/7400-win10-A12-C3CMJ.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 1189716946-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER07956560M/1/3400-win10-A12-G5DHY.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 1525734136-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER07956694M/1/3500-win10-A13-4C3N9.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 1548021133-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER07959771M/1/7540-win10-A10-NRM5X.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 1991970026-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER07959836M/1/7400 2-IN-1-win10-A12-F2XY8.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 1186506427-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER07961172M/1/7590-win10-A11-PKXRV.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 1567299524-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER07961303M/1/5540-win10-A11-C87NP.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 1570941235-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER07961336M/1/7740-win10-A11-8FH1R.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 1993566792-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER07972253M/1/7070 ULTRA-win10-A09-N40JD.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 915965808-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER07973757M/1/3310-win10-A11-FF7CG.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 1227544230-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER07982899M/1/Precision 3930 Rack-win10-A18-RVKXM.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 2097216675-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER07982906M/1/3630-win10-A19-36V7K.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 1794798163-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER07982913M/1/OptiPlex 7071 Tower-win10-A09-FX82J.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 1305308059-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER07982920M/1/7220EX-win10-A08-WP0FH.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 1203624510-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER08005283M/1/5310-win10-A09-YNWD8.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 1212244179-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER08005358M/1/5310 2-IN-1-win10-A09-2V176.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 1212185806-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER08026976M/1/7520-win10-A06-R0JC3.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 1474698912-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER08042999M/1/OptiPlex 7400 All-in-One-win10-A00-C6M8X.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 1236678663-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER08043146M/1/OptiPlex 5400 All-in-One-win10-A00-32WF2.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 946500744-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER08043389M/1/OptiPlex 5400 All-in-One-win11-A00-5KX85.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 946548732-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER08043473M/1/OptiPlex 7400 All-in-One-win11-A00-W1970.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 1236646943-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER08044813M/1/5521-Win10-A04-HMC18.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 1197827739-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER08044829M/1/3561-win10-A04-6HG6D.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 1184596250-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER08046412M/1/3090 ULTRA-win10-A06-07MXH.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 788536867-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER08046440M/1/7090 ULTRA-win10-A05-RP8X2.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 789166796-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER08046539M/1/3320-win10-A05-PM70J.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 1249241040-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER08053253M/1/OptiPlex 5000-win10-A01-67HN7.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 1820893359-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER08061388M/1/9410-win11-A00-FPN41.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 1747130502-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER08061416M/1/3550-win11-A00-P2MTX.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 2030834636-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER08061469M/1/Latitude 5430 Rugged-win10-A01-JFJRW.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 1569204496-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER08061480M/1/Latitude 5430 Rugged-win11-A01-CMCNC.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 1439829251-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER08079817M/1/5480 AIO-win11-A00-MGPDH.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 1867547638-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER08080094M/1/7780 AIO-win11-A00-F6WXH.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 1867490278-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER08080168M/1/7480 AIO-win11-A00-1612X.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 1867492628-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER08080256M/1/5550-win11-A00-NWDCT.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 1977626324-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER08080481M/1/9510-win11-A00-79YT6.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 1596936632-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER08086217M/1/3280 AIO-win11-A00-31G23.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 1075484310-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER08092329M/1/3510-win11-A00-XG6JH.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 1583721328-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER08093011M/1/3410-win11-A00-9FPRD.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 1562843531-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER08095609M/1/3435-win10-A00-V98C6.CAB
+VERBOSE: HEAD with 0-byte payload
+>> TerminatingError(Invoke-WebRequest): "The remote server returned an error: (404) Not Found."
+WARNING: Failed: http://downloads.dell.com/FOLDER08095609M/1/3435-win10-A00-V98C6.CAB
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER08095818M/1/3435-win11-A00-KFXP3.CAB
+VERBOSE: HEAD with 0-byte payload
+>> TerminatingError(Invoke-WebRequest): "The remote server returned an error: (404) Not Found."
+WARNING: Failed: http://downloads.dell.com/FOLDER08095818M/1/3435-win11-A00-KFXP3.CAB
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER08096243M/1/3535-win10-A00-3TN40.CAB
+VERBOSE: HEAD with 0-byte payload
+>> TerminatingError(Invoke-WebRequest): "The remote server returned an error: (404) Not Found."
+WARNING: Failed: http://downloads.dell.com/FOLDER08096243M/1/3535-win10-A00-3TN40.CAB
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER08096397M/1/3535-win11-A00-J1GG6.CAB
+VERBOSE: HEAD with 0-byte payload
+>> TerminatingError(Invoke-WebRequest): "The remote server returned an error: (404) Not Found."
+WARNING: Failed: http://downloads.dell.com/FOLDER08096397M/1/3535-win11-A00-J1GG6.CAB
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER08097966M/1/7000-win10-A00-VMXTD.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 1823885608-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER08098122M/1/XE4-win10-A00-40P5W.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 1823991554-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER08098133M/1/OptiPlex 3000-win10-A00-HJD3H.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 1120095719-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER08102930M/1/5530 2-IN-1-win11-A00-854JG.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 1288680022-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER08109908M/1/Precision 5560-win10-A05-GH9P5.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 1859798669-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER08109912M/1/7210 2-in-1-win11-A00-0431V.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 1505064155-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER08117862M/1/5300 2-IN-1-win11-A00-M3W15.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 1603416874-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER08127722M/1/5300-win11-A00-WX3C3.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 980344272-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER08128496M/1/5310-win11-A00-P9Y95.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 1312198498-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER08131660M/1/7200 2-in-1-win11-A00-9FDW0.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 1187585888-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER08131764M/1/7400 2-IN-1-win11-A00-9GP3G.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 1190102823-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER08144832M/1/XPS 17 9720-win11-A00-G2Y9H.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 1719917385-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER08146814M/1/Precision 3640 Tower-win11-A00-HYT2W.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 1678415708-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER08160654M/1/Latitude 7330 Rugged Extreme-win10-A01-4259W.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 1569463810-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER08160864M/1/Latitude 7330 Rugged Extreme-win11-A01-HXD2T.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 1440020671-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER08164671M/1/Precision 5770-win11-A00-5VJWD.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 1603766941-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER08164869M/1/7470 AIO-win11-A00-8DNP9.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 1640370793-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER08164874M/1/5270 AIO-win11-A00-P7P26.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 1008426734-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER08165454M/1/7770 AIO-win11-A00-XD7X8.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 1640391887-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER08167515M/1/7080-win10-A08-0F75W.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 1660356742-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER08169311M/1/7480 AIO-win10-A09-T8XXC.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 1878872432-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER08169365M/1/PRECISION 3240 COMPACT-win10-A08-6DHMP.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 1388294921-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER08170714M/1/7390-win10-A11-P04TW.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 1150728573-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER08171176M/1/7780 AIO-win10-A09-W8H2V.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 1878783122-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER08171865M/1/3310 2-IN-1-win10-A11-GXXFT.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 1442751545-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER08172086M/1/9300-win10-A11-4CX21.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 1225750501-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER08174330M/1/9310-Win10-A08-CMCFY.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 1318272824-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER08174544M/1/3280 AIO-win10-A09-19DP8.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 1086855900-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER08174938M/1/5750-win10-A09-DG6YH.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 1877664853-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER08174992M/1/9700-win10-A09-CJ46J.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 2066843516-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER08179292M/1/Latitude 5431-win10-A00-41KNV.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 1773558379-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER08179361M/1/Latitude 5431-win11-A00-JP0Y6.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 1773595771-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER08179366M/1/3630-win11-A00-T7F59.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 1878657037-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER08189746M/1/Precision 3640 Tower-win10-A08-9JFMF.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 1679742507-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER08198851M/1/3450-win10-A04-P1XDF.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 2033421221-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER08200332M/1/PRECISION 3650 TOWER-win10-A03-VWFJX.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 1687899852-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER08200472M/1/3560-win10-A07-434N1.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 1570658349-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER08201128M/1/5520-win10-A06-0FF6X.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 1583522889-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER08202191M/1/3440-win10-A08-HP0VK.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 1954606810-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER08204374M/1/7090-win10-A05-HHCF6.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 1765438191-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER08204399M/1/5490 AIO-win10-A05-5TPGY.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 1520282218-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER08204427M/1/7490 AIO-win10-A05-JGH1N.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 1520367400-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER08204463M/1/5090-win10-A05-J55R9.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 1762575300-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER08221702M/1/7220EX-win11-A00-41DPR.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 1207719343-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER08230505M/1/5080-Win10-A08-3DTY2.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 1945551439-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER08240801M/1/7220-win11-A00-RHWKP.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 1338079296-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER08249423M/1/9310 2in1-win10-A07-9XR93.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 1292279053-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER08258282M/1/5550-win10-A09-44WD1.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 1988838666-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER08258532M/1/3410-win10-A10-98KJD.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 1574006762-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER08258560M/1/7210 2-in-1-win10-A10-CRX7J.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 1516469163-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER08258616M/1/3510-win10-A10-YWF7C.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 1610411475-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER08259383M/1/3080-win10-A08-H1P51.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 1998998301-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER08261052M/1/9500-win10-A10-75GJH.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 1404430203-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER08261240M/1/9510-win10-A09-N4GTP.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 1619885565-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER08272238M/1/7320-win10-A06-1T4J2.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 1278159938-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER08272647M/1/Latitude 7430-win10-A00-K3JDY.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 1602084350-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER08274273M/1/Latitude 7330-win10-A00-GRHTX.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 1602142994-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER08275593M/1/Latitude 7530-win10-A00-FXD5K.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 1605167952-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER08284180M/1/LATITUDE 7320 DETACHABLE-Win10-A06-V6TPC.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 1313663191-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER08289036M/1/9510-win10-A05-VGDCR.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 1786328564-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER08290569M/1/9420-win10-A07-8203X.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 1886574385-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER08291390M/1/9305-win10-A05-9YV83.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 1320693093-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER08295247M/1/Latitude 5531-win10-A00-P87RG.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 1999722860-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER08295264M/1/Precision 3571-win10-A00-H7F97.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 1999557745-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER08295272M/1/Latitude 5531-win11-A00-WTDF6.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 1998509061-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER08295282M/1/Precision 3571-win11-A00-VX6JR.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 1998549797-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER08309701M/1/7420-win11-A01-D1G51.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 1394500163-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER08312190M/1/9420-win11-A01-H4FMY.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 1886623711-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER08312401M/1/9310-win11-A01-10FP8.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 1330918716-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER08312574M/1/7420-win10-A08-Y56C2.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 1394527369-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER08313420M/1/9510-win11-A01-C96MX.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 1786276852-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER08313464M/1/3520-win10-A06-40D27.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 1598988573-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER08314686M/1/5320-win11-A01-C6WH8.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 1597127781-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER08315053M/1/9305-win11-A01-FXRFN.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 1039097172-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER08323515M/1/Precision 5570-win11-A00-N4W0Y.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 1741328716-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER08323556M/1/5320-win10-A07-RMCNF.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 1585472934-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER08323871M/1/Precision 5570-win10-A00-007HP.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 1741289542-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER08324261M/1/9520-win11-A00-JWHGG.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 1866239495-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER08329281M/1/Optiplex 3090-win10-A02-K2RCM.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 1638334248-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER08329333M/1/Optiplex 3090-win11-A01-5T6YR.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 1638297868-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER08387715M/1/5480 AIO-win10-A08-6W8KP.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 1879739265-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER08434663M/1/Precision 5760-win10-A03-F9NGG.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 1743247833-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER08435047M/1/Precision 5760-win11-A01-32YF4.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 1743269923-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER08435579M/1/5420-win10-A07-5FM64.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 1560649804-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER08435765M/1/3420-win10-A06-4CPNM.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 1606127629-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER08435936M/1/3420-win11-A02-5HD05.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 1606151955-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER08440843M/1/5420-win11-A02-YV9JR.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 1560707514-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER08443958M/1/9710-win11-A02-YRCKH.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 1739914475-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER08444154M/1/9710-win10-A04-R9M7M.CAB
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 1740015347-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: Exporting Build Catalog to C:\Users\David\AppData\Local\Temp\OSD\OSDCatalogDellDriverPack.xml
+**********************
+Windows PowerShell transcript end
+End time: 20220427113931
+**********************

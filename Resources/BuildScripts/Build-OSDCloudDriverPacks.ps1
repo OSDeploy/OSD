@@ -4,7 +4,7 @@ Import-Module -Name OSD -Force
 #=================================================
 Import-Module -Name OSD -Force
 Start-Transcript -Path (Join-Path (Get-Module OSD).ModuleBase "Catalogs\OSDCatalog\OSDCatalogDellDriverPack.log")
-$null = Get-OSDCatalogDellDriverPack -Force -Verbose
+$null = Get-OSDCatalogDellDriverPack -Force -Verbose -TestUrl
 $Source = Join-Path $env:TEMP (Join-Path 'OSD' 'OSDCatalogDellDriverPack.xml')
 $Destination = Join-Path (Get-Module OSD).ModuleBase "Catalogs\OSDCatalog\OSDCatalogDellDriverPack.xml"
 if (Test-Path $Source) {
