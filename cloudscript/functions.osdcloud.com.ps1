@@ -767,10 +767,6 @@ if ($WindowsPhase -eq 'OOBE') {
             $DateTime,
 
             [System.Management.Automation.SwitchParameter]
-            #Install the OSD PowerShell Module
-            $OSD,
-
-            [System.Management.Automation.SwitchParameter]
             #Install Azure KeyVault support
             $KeyVault
         )
@@ -787,9 +783,8 @@ if ($WindowsPhase -eq 'OOBE') {
         osdcloud-SetPowerShellProfile
         osdcloud-InstallPackageManagement
         osdcloud-TrustPSGallery
-        if ($OSD) {
-            osdcloud-InstallModuleOSD
-        }
+        osdcloud-InstallModuleOSD
+
         #Add Azure KeuVault Support
         if ($KeyVault) {
             osdcloud-InstallModuleKeyVault
