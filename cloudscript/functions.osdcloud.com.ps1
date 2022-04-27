@@ -35,7 +35,7 @@ $ScriptName = 'functions.osdcloud.com'
 $ScriptVersion = '22.4.26.1'
 #=================================================
 #region Initialize Functions
-[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
+[Net.ServicePointManager]::SecurityProtocol = [Net.ServicePointManager]::SecurityProtocol -bor [Net.SecurityProtocolType]::Tls12
 
 #Determine the proper Windows environment
 if ($env:SystemDrive -eq 'X:') {$WindowsPhase = 'WinPE'}
@@ -54,9 +54,11 @@ Write-Host -ForegroundColor DarkGray "$ScriptName $ScriptVersion $WindowsPhase"
 #=================================================
 #region Environment Variables
 $oobePowerShellProfile = @'
+[Net.ServicePointManager]::SecurityProtocol = [Net.ServicePointManager]::SecurityProtocol -bor [Net.SecurityProtocolType]::Tls12
 [System.Environment]::SetEnvironmentVariable('Path',$Env:Path + ";$Env:ProgramFiles\WindowsPowerShell\Scripts",'Process')
 '@
 $winpePowerShellProfile = @'
+[Net.ServicePointManager]::SecurityProtocol = [Net.ServicePointManager]::SecurityProtocol -bor [Net.SecurityProtocolType]::Tls12
 [System.Environment]::SetEnvironmentVariable('APPDATA',"$Env:UserProfile\AppData\Roaming",[System.EnvironmentVariableTarget]::Process)
 [System.Environment]::SetEnvironmentVariable('HOMEDRIVE',"$Env:SystemDrive",[System.EnvironmentVariableTarget]::Process)
 [System.Environment]::SetEnvironmentVariable('HOMEPATH',"$Env:UserProfile",[System.EnvironmentVariableTarget]::Process)
@@ -88,7 +90,6 @@ if ($WindowsPhase -eq 'WinPE') {
         if (-not (Get-Command 'curl.exe' -ErrorAction SilentlyContinue)) {
             Write-Host -ForegroundColor DarkGray 'Install Curl'
             $Uri = 'https://curl.se/windows/dl-7.81.0/curl-7.81.0-win64-mingw.zip'
-            [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
             Invoke-WebRequest -UseBasicParsing -Uri $Uri -OutFile "$env:TEMP\curl.zip"
     
             $null = New-Item -Path "$env:TEMP\Curl" -ItemType Directory -Force
@@ -111,7 +112,6 @@ if ($WindowsPhase -eq 'WinPE') {
             $null = New-Item -Path $nugetExeBasePath -ItemType Directory -Force -ErrorAction SilentlyContinue -WarningAction SilentlyContinue
         }
         $nugetExeFilePath = Join-Path -Path $nugetExeBasePath -ChildPath $NuGetExeName
-        [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
         $null = Invoke-WebRequest -UseBasicParsing -Uri $NuGetClientSourceURL -OutFile $nugetExeFilePath
     
         $PSGetAppLocalPath = Join-Path -Path $env:LOCALAPPDATA -ChildPath 'Microsoft\Windows\PowerShell\PowerShellGet\'
@@ -122,7 +122,6 @@ if ($WindowsPhase -eq 'WinPE') {
             $null = New-Item -Path $nugetExeBasePath -ItemType Directory -Force -ErrorAction SilentlyContinue -WarningAction SilentlyContinue
         }
         $nugetExeFilePath = Join-Path -Path $nugetExeBasePath -ChildPath $NuGetExeName
-        [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
         $null = Invoke-WebRequest -UseBasicParsing -Uri $NuGetClientSourceURL -OutFile $nugetExeFilePath
     }
     function osdcloud-InstallPowerShellGet {
@@ -132,7 +131,6 @@ if ($WindowsPhase -eq 'WinPE') {
         if (-not $InstalledModule) {
             Write-Host -ForegroundColor DarkGray 'Install PowerShellGet'
             $PowerShellGetURL = "https://psg-prod-eastus.azureedge.net/packages/powershellget.2.2.5.nupkg"
-            [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
             Invoke-WebRequest -UseBasicParsing -Uri $PowerShellGetURL -OutFile "$env:TEMP\powershellget.2.2.5.zip"
             $null = New-Item -Path "$env:TEMP\2.2.5" -ItemType Directory -Force
             Expand-Archive -Path "$env:TEMP\powershellget.2.2.5.zip" -DestinationPath "$env:TEMP\2.2.5"
@@ -178,7 +176,6 @@ if (($WindowsPhase -eq 'WinPE') -or ($WindowsPhase -eq 'OOBE')) {
             if (-not $InstalledModule) {
                 Write-Host -ForegroundColor DarkGray 'Install PackageManagement'
                 $PackageManagementURL = "https://psg-prod-eastus.azureedge.net/packages/packagemanagement.1.4.7.nupkg"
-                [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
                 Invoke-WebRequest -UseBasicParsing -Uri $PackageManagementURL -OutFile "$env:TEMP\packagemanagement.1.4.7.zip"
                 $null = New-Item -Path "$env:TEMP\1.4.7" -ItemType Directory -Force
                 Expand-Archive -Path "$env:TEMP\packagemanagement.1.4.7.zip" -DestinationPath "$env:TEMP\1.4.7"
