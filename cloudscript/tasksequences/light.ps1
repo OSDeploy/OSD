@@ -13,27 +13,27 @@
 .EXTERNALSCRIPTDEPENDENCIES 
 .RELEASENOTES
 Script should be executed in a Command Prompt using the following command
-powershell Invoke-Expression -Command (Invoke-RestMethod -Uri raw.osdcloud.com/dev/min.ps1)
+powershell Invoke-Expression -Command (Invoke-RestMethod -Uri raw.osdcloud.com/tasksequences/light.ps1)
 This is abbreviated as
-powershell iex (irm raw.osdcloud.com/dev/min.ps1)
+powershell iex (irm raw.osdcloud.com/tasksequences/light.ps1)
 #>
 <#
 .SYNOPSIS
-    PSCloudScript at raw.osdcloud.com/dev/min.ps1
+    PSCloudScript at raw.osdcloud.com/tasksequences/light.ps1
 .DESCRIPTION
-    PSCloudScript at raw.osdcloud.com/dev/min.ps1
+    PSCloudScript at raw.osdcloud.com/tasksequences/light.ps1
 .NOTES
     Version 22.4.28.1
 .LINK
-    https://raw.githubusercontent.com/OSDeploy/OSD/master/cloudscript/dev/min.ps1
+    https://raw.githubusercontent.com/OSDeploy/OSD/master/cloudscript/tasksequences/light.ps1
 .EXAMPLE
-    powershell iex (irm raw.osdcloud.com/dev/min.ps1)
+    powershell iex (irm raw.osdcloud.com/tasksequences/light.ps1)
 #>
 [CmdletBinding()]
 param()
 #=================================================
 #Script Information
-$ScriptName = 'raw.osdcloud.com/dev/min.ps1'
+$ScriptName = 'raw.osdcloud.com/tasksequences/light.ps1'
 $ScriptVersion = '22.4.28.1'
 #=================================================
 #region Initialize
