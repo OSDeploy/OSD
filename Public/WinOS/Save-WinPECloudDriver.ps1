@@ -213,7 +213,9 @@ function Save-WinPECloudDriver {
                     }
 
                     Expand -R "$($DriverPackItem.FullName)" -F:* "$DriverPackExpand" | Out-Null
-                    $null = Remove-Item -Path "$DriverPackExpand\winpe\x86" -Recurse
+                    if (Test-Path "$DriverPackExpand\winpe\x86") {
+                        $null = Remove-Item -Path "$DriverPackExpand\winpe\x86" -Recurse -Force -ErrorAction Ignore
+                    }
                 }
             }
             else {

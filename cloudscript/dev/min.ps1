@@ -1,5 +1,5 @@
 <#PSScriptInfo
-.VERSION 22.4.27.1
+.VERSION 22.4.28.1
 .GUID b9c79000-c271-464e-839a-605b3b384c4e
 .AUTHOR David Segura @SeguraOSD
 .COMPANYNAME osdcloud.com
@@ -23,7 +23,7 @@ powershell iex (irm raw.osdcloud.com/dev/min.ps1)
 .DESCRIPTION
     PSCloudScript at raw.osdcloud.com/dev/min.ps1
 .NOTES
-    Version 22.4.27.1
+    Version 22.4.28.1
 .LINK
     https://raw.githubusercontent.com/OSDeploy/OSD/master/cloudscript/dev/min.ps1
 .EXAMPLE
@@ -34,7 +34,7 @@ param()
 #=================================================
 #Script Information
 $ScriptName = 'raw.osdcloud.com/dev/min.ps1'
-$ScriptVersion = '22.4.27.1'
+$ScriptVersion = '22.4.28.1'
 #=================================================
 #region Initialize
 

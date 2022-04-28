@@ -1,5 +1,5 @@
 <#PSScriptInfo
-.VERSION 22.4.27.1
+.VERSION 22.4.28.1
 .GUID 7a3671f6-485b-443e-8e86-b60fdcea1419
 .AUTHOR David Segura @SeguraOSD
 .COMPANYNAME osdcloud.com
@@ -23,7 +23,7 @@ powershell iex (irm functions.osdcloud.com)
 .DESCRIPTION
     PSCloudScript at functions.osdcloud.com
 .NOTES
-    Version 22.4.27.1
+    Version 22.4.28.1
 .LINK
     https://raw.githubusercontent.com/OSDeploy/OSD/master/cloudscript/functions.osdcloud.com.ps1
 .EXAMPLE
@@ -796,6 +796,7 @@ if ($WindowsPhase -eq 'OOBE') {
         #If the device has an Autopilot Profile, show the information
         if ($TestAutopilotProfile -eq $true) {
             osdcloud-ShowAutopilotInfo
+            $Autopilot = $false
         }
         
         #Install the required Autopilot Modules

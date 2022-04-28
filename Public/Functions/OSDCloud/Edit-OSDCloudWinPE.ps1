@@ -74,9 +74,25 @@ function Edit-OSDCloudWinPE {
         #After WinPE has been updated, the contents of the OSDCloud Workspace will be updated on any OSDCloud USB Drives
         $UpdateUSB,
 
-        [System.String]
+        [ValidateScript({
+            if (!($_ | Test-Path)) {
+                throw 'Wallpaper JPG file does not exist'
+            }
+            if (!($_ | Test-Path -PathType Leaf)) {
+                throw 'Wallpaper JPG must be a file'
+            }
+            if ($_ -notmatch "(\.jpg)") {
+                throw 'Wallpaper must be a JPG file'
+            }
+            return $true
+        })]
+        [System.IO.FileInfo]
         #Sets the specified Wallpaper JPG file as the WinPE Background
         $Wallpaper,
+
+        [System.Management.Automation.SwitchParameter]
+        #Uses the default OSDCloud Wallpaper
+        $UseDefaultWallpaper,
 
         [System.String]
         #Sets the custom Brand for OSDCloudGUI
@@ -235,8 +251,8 @@ start /wait PowerShell -Nol -W Mi -C Start-Sleep -Seconds 10
     Add-Content -Path "$MountPath\Windows\System32\Startnet.cmd" -Value 'start /wait PowerShell -Nol -W Mi -C Start-Sleep -Seconds 10' -Force
     Add-Content -Path "$MountPath\Windows\System32\Startnet.cmd" -Value 'ECHO Updating OSD PowerShell Module (Minimized)' -Force
     Add-Content -Path "$MountPath\Windows\System32\Startnet.cmd" -Value 'start /wait PowerShell -NoL -W Mi -C "& {if (Test-WebConnection) {Install-Module OSD -Force -Verbose}}"'
-    Add-Content -Path "$MountPath\Windows\System32\Startnet.cmd" -Value 'ECHO Installing Azure Modules for Accounts, KeyVault, and Storage (Minimized)' -Force
-    Add-Content -Path "$MountPath\Windows\System32\Startnet.cmd" -Value 'start /wait PowerShell -NoL -W Mi -C "& {if (Test-WebConnection) {Install-Module Az.KeyVault,Az.Storage -Force -Verbose}}"'
+    #Add-Content -Path "$MountPath\Windows\System32\Startnet.cmd" -Value 'ECHO Installing Azure Modules for Accounts, KeyVault, and Storage (Minimized)' -Force
+    #Add-Content -Path "$MountPath\Windows\System32\Startnet.cmd" -Value 'start /wait PowerShell -NoL -W Mi -C "& {if (Test-WebConnection) {Install-Module Az.KeyVault,Az.Storage -Force -Verbose}}"'
     Add-Content -Path "$MountPath\Windows\System32\Startnet.cmd" -Value 'ECHO Initialize PowerShell (Minimized)' -Force
     Add-Content -Path "$MountPath\Windows\System32\Startnet.cmd" -Value 'start PowerShell -Nol -W Mi' -Force
     Add-Content -Path "$MountPath\Windows\System32\Startnet.cmd" -Value '@ECHO ON' -Force
@@ -322,13 +338,10 @@ start /wait PowerShell -Nol -W Mi -C Start-Sleep -Seconds 10
     #=================================================
     #   Wallpaper
     #=================================================
+    if ($UseDefaultWallpaper) {
+        $Wallpaper = Join-Path (Get-Module OSD).ModuleBase "Resources\Images\OSDCloud.jpg"
+    }
     if ($Wallpaper) {
-        if ($Wallpaper = '') {
-            $Wallpaper = Join-Path (Get-Module OSD).ModuleBase "Resources\Images\OSDCloud.jpg"
-        }
-        if (! (Test-Path $Wallpaper)) {
-            $Wallpaper = Join-Path (Get-Module OSD).ModuleBase "Resources\Images\OSDCloud.jpg"
-        }
         Write-Host -ForegroundColor DarkGray "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Wallpaper: $Wallpaper"
         Copy-Item -Path $Wallpaper -Destination "$env:TEMP\winpe.jpg" -Force | Out-Null
         Copy-Item -Path $Wallpaper -Destination "$env:TEMP\winre.jpg" -Force | Out-Null
