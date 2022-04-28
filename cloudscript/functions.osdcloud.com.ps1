@@ -504,7 +504,6 @@ if ($WindowsPhase -eq 'OOBE') {
         param ()
         Write-Host -ForegroundColor Green 'Complete!'
         Write-Warning 'Device will restart in 30 seconds.  Press Ctrl + C to cancel'
-        $null = Stop-Transcript -ErrorAction Ignore
         Start-Sleep -Seconds 30
         Restart-Computer
     }
@@ -513,7 +512,6 @@ if ($WindowsPhase -eq 'OOBE') {
         param ()
         Write-Host -ForegroundColor Green 'Complete!'
         Write-Warning 'Device will shutdown in 30 seconds.  Press Ctrl + C to cancel'
-        $null = Stop-Transcript -ErrorAction Ignore
         Start-Sleep -Seconds 30
         Stop-Computer
     }
