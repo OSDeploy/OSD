@@ -162,74 +162,6 @@ if ($WindowsPhase -eq 'WinPE') {
 #=================================================
 #region WinPE OOBE Functions
 if (($WindowsPhase -eq 'WinPE') -or ($WindowsPhase -eq 'OOBE')) {
-    function osdcloud-InstallPackageManagement {
-        [CmdletBinding()]
-        param ()
-        if ($WindowsPhase -eq 'WinPE') {
-            $InstalledModule = Import-Module PackageManagement -PassThru -ErrorAction Ignore
-            if (-not $InstalledModule) {
-                Write-Host -ForegroundColor DarkGray 'Install PackageManagement'
-                $PackageManagementURL = "https://psg-prod-eastus.azureedge.net/packages/packagemanagement.1.4.7.nupkg"
-                Invoke-WebRequest -UseBasicParsing -Uri $PackageManagementURL -OutFile "$env:TEMP\packagemanagement.1.4.7.zip"
-                $null = New-Item -Path "$env:TEMP\1.4.7" -ItemType Directory -Force
-                Expand-Archive -Path "$env:TEMP\packagemanagement.1.4.7.zip" -DestinationPath "$env:TEMP\1.4.7"
-                $null = New-Item -Path "$env:ProgramFiles\WindowsPowerShell\Modules\PackageManagement" -ItemType Directory -ErrorAction SilentlyContinue
-                Move-Item -Path "$env:TEMP\1.4.7" -Destination "$env:ProgramFiles\WindowsPowerShell\Modules\PackageManagement\1.4.7"
-                Import-Module PackageManagement -Force -Scope Global
-            }
-        }
-        if ($WindowsPhase -eq 'OOBE') {
-            if (-not (Get-Module -Name PowerShellGet -ListAvailable | Where-Object {$_.Version -ge '2.2.5'})) {
-                Write-Host -ForegroundColor DarkGray 'Install-Package PackageManagement,PowerShellGet [AllUsers]'
-                Install-Package -Name PowerShellGet -MinimumVersion 2.2.5 -Force -Confirm:$false -Source PSGallery | Out-Null
-        
-                Write-Host -ForegroundColor DarkGray 'Import-Module PackageManagement,PowerShellGet [Global]'
-                Import-Module PackageManagement,PowerShellGet -Force -Scope Global
-            }
-        }
-    }
-    function osdcloud-InstallModuleKeyVault {
-        [CmdletBinding()]
-        param ()
-        if ($WindowsPhase -eq 'WinPE') {
-            $InstalledModule = Import-Module Az.KeyVault -PassThru -ErrorAction Ignore
-            if (-not $InstalledModule) {
-                Write-Host -ForegroundColor DarkGray 'Install-Module Az.KeyVault,Az.Accounts [AllUsers]'
-                Install-Module Az.KeyVault -Force -Scope AllUsers
-            }
-        }
-        if ($WindowsPhase -eq 'OOBE') {
-            $InstalledModule = Import-Module Az.KeyVault -PassThru -ErrorAction Ignore
-            if (-not $InstalledModule) {
-                Write-Host -ForegroundColor DarkGray 'Install-Module Az.KeyVault,Az.Accounts [CurrentUser]'
-                Install-Module Az.KeyVault -Force -Scope CurrentUser
-            }
-        }
-    }
-    function osdcloud-InstallModuleOSD {
-        [CmdletBinding()]
-        param ()
-        if ($WindowsPhase -eq 'WinPE') {
-            $InstalledModule = Import-Module OSD -PassThru -ErrorAction Ignore
-            if (-not $InstalledModule) {
-                Write-Host -ForegroundColor DarkGray 'Install-Module OSD [AllUsers]'
-                Install-Module OSD -Force -Scope AllUsers
-                Import-Module OSD -Force
-            }
-            else {
-                Write-Host -ForegroundColor DarkGray 'Install-Module OSD [AllUsers]'
-                Install-Module OSD -Force -Scope AllUsers
-                Import-Module OSD -Force
-            }
-        }
-        if ($WindowsPhase -eq 'OOBE') {
-            $InstalledModule = Import-Module OSD -PassThru -ErrorAction Ignore
-            if (-not $InstalledModule) {
-                Write-Host -ForegroundColor DarkGray 'Install-Module OSD [CurrentUser]'
-                Install-Module OSD -Force -Scope CurrentUser
-            }
-        }
-    }
     function osdcloud-RemoveAppx {
         [CmdletBinding(DefaultParameterSetName='Default')]
         param (
@@ -441,33 +373,6 @@ if (($WindowsPhase -eq 'WinPE') -or ($WindowsPhase -eq 'OOBE')) {
 #=================================================
 #region OOBE Functions
 if ($WindowsPhase -eq 'OOBE') {
-    function osdcloud-InstallModuleAutopilot {
-        [CmdletBinding()]
-        param ()
-        $InstalledModule = Import-Module WindowsAutopilotIntune -PassThru -ErrorAction Ignore
-        if (-not $InstalledModule) {
-            Write-Host -ForegroundColor DarkGray 'Install-Module AzureAD,Microsoft.Graph.Intune,WindowsAutopilotIntune [CurrentUser]'
-            Install-Module WindowsAutopilotIntune -Force -Scope CurrentUser
-        }
-    }
-    function osdcloud-InstallModuleAzureAd {
-        [CmdletBinding()]
-        param ()
-        $InstalledModule = Import-Module AzureAD -PassThru -ErrorAction Ignore
-        if (-not $InstalledModule) {
-            Write-Host -ForegroundColor DarkGray 'Install-Module AzureAD [CurrentUser]'
-            Install-Module AzureAD -Force -Scope CurrentUser
-        }
-    }
-    function osdcloud-InstallScriptAutopilot {
-        [CmdletBinding()]
-        param ()
-        $InstalledScript = Get-InstalledScript -Name Get-WindowsAutoPilotInfo -ErrorAction SilentlyContinue
-        if (-not $InstalledScript) {
-            Write-Host -ForegroundColor DarkGray 'Install-Script Get-WindowsAutoPilotInfo [AllUsers]'
-            Install-Script -Name Get-WindowsAutoPilotInfo -Force -Scope AllUsers
-        }
-    }
     function osdcloud-SetWindowsDateTime {
         [CmdletBinding()]
         param ()
@@ -499,22 +404,6 @@ if ($WindowsPhase -eq 'OOBE') {
             Wait-Process $ProcessId
         }
     }
-    function osdcloud-RestartComputer {
-        [CmdletBinding()]
-        param ()
-        Write-Host -ForegroundColor Green 'Complete!'
-        Write-Warning 'Device will restart in 30 seconds.  Press Ctrl + C to cancel'
-        Start-Sleep -Seconds 30
-        Restart-Computer
-    }
-    function osdcloud-StopComputer {
-        [CmdletBinding()]
-        param ()
-        Write-Host -ForegroundColor Green 'Complete!'
-        Write-Warning 'Device will shutdown in 30 seconds.  Press Ctrl + C to cancel'
-        Start-Sleep -Seconds 30
-        Stop-Computer
-    }
     function osdcloud-AutopilotRegisterCommand {
         [CmdletBinding()]
         param (
@@ -525,50 +414,6 @@ if ($WindowsPhase -eq 'OOBE') {
         $AutopilotProcess = Start-Process PowerShell.exe -ArgumentList "-Command $Command" -PassThru
         Write-Host -ForegroundColor Green "(Process Id $($AutopilotProcess.Id))"
         Return $AutopilotProcess
-    }
-    function osdcloud-ShowAutopilotInfo {
-        [CmdletBinding()]
-        param ()
-        $Global:RegAutopilot = Get-ItemProperty -Path 'Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Provisioning\Diagnostics\Autopilot'
-
-        #Oter Keys
-        #Get-ItemProperty -Path 'Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Provisioning\AutopilotPolicyCache'
-        #Get-ItemProperty -Path 'Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Provisioning\Diagnostics\Autopilot\EstablishedCorrelations'
-        
-        if ($Global:RegAutoPilot.CloudAssignedForcedEnrollment -eq 1) {
-            Write-Host -ForegroundColor Cyan "This device has an Autopilot Profile"
-            Write-Host -ForegroundColor DarkGray "  TenantDomain: $($Global:RegAutoPilot.CloudAssignedTenantDomain)"
-            Write-Host -ForegroundColor DarkGray "  TenantId: $($Global:RegAutoPilot.TenantId)"
-            Write-Host -ForegroundColor DarkGray "  CloudAssignedLanguage: $($Global:RegAutoPilot.CloudAssignedLanguage)"
-            Write-Host -ForegroundColor DarkGray "  CloudAssignedMdmId: $($Global:RegAutoPilot.CloudAssignedMdmId)"
-            Write-Host -ForegroundColor DarkGray "  CloudAssignedOobeConfig: $($Global:RegAutoPilot.CloudAssignedOobeConfig)"
-            Write-Host -ForegroundColor DarkGray "  CloudAssignedRegion: $($Global:RegAutoPilot.CloudAssignedRegion)"
-            Write-Host -ForegroundColor DarkGray "  CloudAssignedTelemetryLevel: $($Global:RegAutoPilot.CloudAssignedTelemetryLevel)"
-            Write-Host -ForegroundColor DarkGray "  AutopilotServiceCorrelationId: $($Global:RegAutoPilot.AutopilotServiceCorrelationId)"
-            Write-Host -ForegroundColor DarkGray "  IsAutoPilotDisabled: $($Global:RegAutoPilot.IsAutoPilotDisabled)"
-            Write-Host -ForegroundColor DarkGray "  IsDevicePersonalized: $($Global:RegAutoPilot.IsDevicePersonalized)"
-            Write-Host -ForegroundColor DarkGray "  IsForcedEnrollmentEnabled: $($Global:RegAutoPilot.IsForcedEnrollmentEnabled)"
-            Write-Host -ForegroundColor DarkGray "  SetTelemetryLevel_Succeeded_With_Level: $($Global:RegAutoPilot.SetTelemetryLevel_Succeeded_With_Level)"
-        }
-        else {
-            Write-Warning 'Could not find an Autopilot Profile on this device.  If this device is registered, restart the device while connected to the internet'
-        }
-    }
-    function osdcloud-TestAutopilotProfile {
-        [CmdletBinding()]
-        param ()
-        $Global:RegAutopilot = Get-ItemProperty -Path 'Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Provisioning\Diagnostics\Autopilot'
-
-        #Oter Keys
-        #Get-ItemProperty -Path 'Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Provisioning\AutopilotPolicyCache'
-        #Get-ItemProperty -Path 'Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Provisioning\Diagnostics\Autopilot\EstablishedCorrelations'
-        
-        if ($Global:RegAutoPilot.CloudAssignedForcedEnrollment -eq 1) {
-            $true
-        }
-        else {
-            $false
-        }
     }
     function osdcloud-AddCapability {
         [CmdletBinding(DefaultParameterSetName='Default')]
@@ -701,6 +546,156 @@ if ($WindowsPhase -eq 'OOBE') {
         }
     }
     New-Alias -Name 'UpdateDefender' -Value 'osdcloud-UpdateDefender' -Description 'OSDCloud' -Force
+}
+#endregion
+#=================================================
+#region Anywhere Functions
+function osdcloud-InstallPackageManagement {
+    [CmdletBinding()]
+    param ()
+    if ($WindowsPhase -eq 'WinPE') {
+        $InstalledModule = Import-Module PackageManagement -PassThru -ErrorAction Ignore
+        if (-not $InstalledModule) {
+            Write-Host -ForegroundColor DarkGray 'Install PackageManagement'
+            $PackageManagementURL = "https://psg-prod-eastus.azureedge.net/packages/packagemanagement.1.4.7.nupkg"
+            Invoke-WebRequest -UseBasicParsing -Uri $PackageManagementURL -OutFile "$env:TEMP\packagemanagement.1.4.7.zip"
+            $null = New-Item -Path "$env:TEMP\1.4.7" -ItemType Directory -Force
+            Expand-Archive -Path "$env:TEMP\packagemanagement.1.4.7.zip" -DestinationPath "$env:TEMP\1.4.7"
+            $null = New-Item -Path "$env:ProgramFiles\WindowsPowerShell\Modules\PackageManagement" -ItemType Directory -ErrorAction SilentlyContinue
+            Move-Item -Path "$env:TEMP\1.4.7" -Destination "$env:ProgramFiles\WindowsPowerShell\Modules\PackageManagement\1.4.7"
+            Import-Module PackageManagement -Force -Scope Global
+        }
+    }
+    else {
+        if (-not (Get-Module -Name PowerShellGet -ListAvailable | Where-Object {$_.Version -ge '2.2.5'})) {
+            Write-Host -ForegroundColor DarkGray 'Install-Package PackageManagement,PowerShellGet [AllUsers]'
+            Install-Package -Name PowerShellGet -MinimumVersion 2.2.5 -Force -Confirm:$false -Source PSGallery | Out-Null
+    
+            Write-Host -ForegroundColor DarkGray 'Import-Module PackageManagement,PowerShellGet [Global]'
+            Import-Module PackageManagement,PowerShellGet -Force -Scope Global
+        }
+    }
+}
+function osdcloud-InstallModuleKeyVault {
+    [CmdletBinding()]
+    param ()
+    if ($WindowsPhase -eq 'WinPE') {
+        $InstalledModule = Import-Module Az.KeyVault -PassThru -ErrorAction Ignore
+        if (-not $InstalledModule) {
+            Write-Host -ForegroundColor DarkGray 'Install-Module Az.KeyVault,Az.Accounts [AllUsers]'
+            Install-Module Az.KeyVault -Force -Scope AllUsers
+        }
+    }
+    else {
+        $InstalledModule = Import-Module Az.KeyVault -PassThru -ErrorAction Ignore
+        if (-not $InstalledModule) {
+            Write-Host -ForegroundColor DarkGray 'Install-Module Az.KeyVault,Az.Accounts [CurrentUser]'
+            Install-Module Az.KeyVault -Force -Scope CurrentUser
+        }
+    }
+}
+function osdcloud-InstallModuleOSD {
+    [CmdletBinding()]
+    param ()
+    if ($WindowsPhase -eq 'WinPE') {
+        Write-Host -ForegroundColor DarkGray 'Install-Module OSD [AllUsers]'
+        Install-Module OSD -Force -Scope AllUsers
+        Import-Module OSD -Force
+    }
+    else {
+        $InstalledModule = Import-Module OSD -PassThru -ErrorAction Ignore
+        if (-not $InstalledModule) {
+            Write-Host -ForegroundColor DarkGray 'Install-Module OSD [CurrentUser]'
+            Install-Module OSD -Force -Scope CurrentUser
+        }
+    }
+}
+function osdcloud-InstallModuleAutopilot {
+    [CmdletBinding()]
+    param ()
+    $InstalledModule = Import-Module WindowsAutopilotIntune -PassThru -ErrorAction Ignore
+    if (-not $InstalledModule) {
+        Write-Host -ForegroundColor DarkGray 'Install-Module AzureAD,Microsoft.Graph.Intune,WindowsAutopilotIntune [CurrentUser]'
+        Install-Module WindowsAutopilotIntune -Force -Scope CurrentUser
+    }
+}
+function osdcloud-InstallModuleAzureAd {
+    [CmdletBinding()]
+    param ()
+    $InstalledModule = Import-Module AzureAD -PassThru -ErrorAction Ignore
+    if (-not $InstalledModule) {
+        Write-Host -ForegroundColor DarkGray 'Install-Module AzureAD [CurrentUser]'
+        Install-Module AzureAD -Force -Scope CurrentUser
+    }
+}
+function osdcloud-InstallScriptAutopilot {
+    [CmdletBinding()]
+    param ()
+    $InstalledScript = Get-InstalledScript -Name Get-WindowsAutoPilotInfo -ErrorAction SilentlyContinue
+    if (-not $InstalledScript) {
+        Write-Host -ForegroundColor DarkGray 'Install-Script Get-WindowsAutoPilotInfo [AllUsers]'
+        Install-Script -Name Get-WindowsAutoPilotInfo -Force -Scope AllUsers
+    }
+}
+function osdcloud-RestartComputer {
+    [CmdletBinding()]
+    param ()
+    Write-Host -ForegroundColor Green 'Complete!'
+    Write-Warning 'Device will restart in 30 seconds.  Press Ctrl + C to cancel'
+    Start-Sleep -Seconds 30
+    Restart-Computer
+}
+function osdcloud-StopComputer {
+    [CmdletBinding()]
+    param ()
+    Write-Host -ForegroundColor Green 'Complete!'
+    Write-Warning 'Device will shutdown in 30 seconds.  Press Ctrl + C to cancel'
+    Start-Sleep -Seconds 30
+    Stop-Computer
+}
+function osdcloud-ShowAutopilotInfo {
+    [CmdletBinding()]
+    param ()
+    $Global:RegAutopilot = Get-ItemProperty -Path 'Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Provisioning\Diagnostics\Autopilot'
+
+    #Oter Keys
+    #Get-ItemProperty -Path 'Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Provisioning\AutopilotPolicyCache'
+    #Get-ItemProperty -Path 'Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Provisioning\Diagnostics\Autopilot\EstablishedCorrelations'
+    
+    if ($Global:RegAutoPilot.CloudAssignedForcedEnrollment -eq 1) {
+        Write-Host -ForegroundColor Cyan "This device has an Autopilot Profile"
+        Write-Host -ForegroundColor DarkGray "  TenantDomain: $($Global:RegAutoPilot.CloudAssignedTenantDomain)"
+        Write-Host -ForegroundColor DarkGray "  TenantId: $($Global:RegAutoPilot.TenantId)"
+        Write-Host -ForegroundColor DarkGray "  CloudAssignedLanguage: $($Global:RegAutoPilot.CloudAssignedLanguage)"
+        Write-Host -ForegroundColor DarkGray "  CloudAssignedMdmId: $($Global:RegAutoPilot.CloudAssignedMdmId)"
+        Write-Host -ForegroundColor DarkGray "  CloudAssignedOobeConfig: $($Global:RegAutoPilot.CloudAssignedOobeConfig)"
+        Write-Host -ForegroundColor DarkGray "  CloudAssignedRegion: $($Global:RegAutoPilot.CloudAssignedRegion)"
+        Write-Host -ForegroundColor DarkGray "  CloudAssignedTelemetryLevel: $($Global:RegAutoPilot.CloudAssignedTelemetryLevel)"
+        Write-Host -ForegroundColor DarkGray "  AutopilotServiceCorrelationId: $($Global:RegAutoPilot.AutopilotServiceCorrelationId)"
+        Write-Host -ForegroundColor DarkGray "  IsAutoPilotDisabled: $($Global:RegAutoPilot.IsAutoPilotDisabled)"
+        Write-Host -ForegroundColor DarkGray "  IsDevicePersonalized: $($Global:RegAutoPilot.IsDevicePersonalized)"
+        Write-Host -ForegroundColor DarkGray "  IsForcedEnrollmentEnabled: $($Global:RegAutoPilot.IsForcedEnrollmentEnabled)"
+        Write-Host -ForegroundColor DarkGray "  SetTelemetryLevel_Succeeded_With_Level: $($Global:RegAutoPilot.SetTelemetryLevel_Succeeded_With_Level)"
+    }
+    else {
+        Write-Warning 'Could not find an Autopilot Profile on this device.  If this device is registered, restart the device while connected to the internet'
+    }
+}
+function osdcloud-TestAutopilotProfile {
+    [CmdletBinding()]
+    param ()
+    $Global:RegAutopilot = Get-ItemProperty -Path 'Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Provisioning\Diagnostics\Autopilot'
+
+    #Oter Keys
+    #Get-ItemProperty -Path 'Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Provisioning\AutopilotPolicyCache'
+    #Get-ItemProperty -Path 'Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Provisioning\Diagnostics\Autopilot\EstablishedCorrelations'
+    
+    if ($Global:RegAutoPilot.CloudAssignedForcedEnrollment -eq 1) {
+        $true
+    }
+    else {
+        $false
+    }
 }
 #endregion
 #=================================================

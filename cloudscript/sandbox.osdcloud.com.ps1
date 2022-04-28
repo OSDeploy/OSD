@@ -97,6 +97,9 @@ if ($WindowsPhase -eq 'OOBE') {
 #=================================================
 #region Windows
 if ($WindowsPhase -eq 'Windows') {
+
+    #Load OSD and Azure stuff
+
     $null = Stop-Transcript -ErrorAction Ignore
 }
 #endregion

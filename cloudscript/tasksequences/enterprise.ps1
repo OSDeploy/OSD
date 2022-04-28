@@ -130,6 +130,12 @@ if ($WindowsPhase -eq 'OOBE') {
 #=================================================
 #region Windows
 if ($WindowsPhase -eq 'Windows') {
+
+    #Load OSD and Azure stuff
+    osdcloud-InstallPackageManagement
+    osdcloud-InstallModuleKeyVault
+    osdcloud-InstallModuleOSD
+    osdcloud-InstallModuleAzureAd
     $null = Stop-Transcript -ErrorAction Ignore
 }
 #endregion
