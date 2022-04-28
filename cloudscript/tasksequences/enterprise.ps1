@@ -132,6 +132,7 @@ if ($WindowsPhase -eq 'OOBE') {
 if ($WindowsPhase -eq 'Windows') {
 
     #Load OSD and Azure stuff
+    osdcloud-SetExecutionPolicy
     osdcloud-InstallPackageManagement
     osdcloud-InstallModuleKeyVault
     osdcloud-InstallModuleOSD

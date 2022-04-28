@@ -237,22 +237,6 @@ if (($WindowsPhase -eq 'WinPE') -or ($WindowsPhase -eq 'OOBE')) {
         }
     }
     New-Alias -Name 'RemoveAppx' -Value 'osdcloud-RemoveAppx' -Description 'OSDCloud' -Force
-    function osdcloud-SetExecutionPolicy {
-        [CmdletBinding()]
-        param ()
-        if ($WindowsPhase -eq 'WinPE') {
-            if ((Get-ExecutionPolicy) -ne 'Bypass') {
-                Write-Host -ForegroundColor DarkGray 'Set-ExecutionPolicy Bypass'
-                Set-ExecutionPolicy Bypass -Force
-            }
-        }
-        if ($WindowsPhase -eq 'OOBE') {
-            if ((Get-ExecutionPolicy -Scope CurrentUser) -ne 'RemoteSigned') {
-                Write-Host -ForegroundColor DarkGray 'Set-ExecutionPolicy RemoteSigned [CurrentUser]'
-                Set-ExecutionPolicy RemoteSigned -Force -Scope CurrentUser
-            }
-        }
-    }
     function osdcloud-SetPowerShellProfile {
         [CmdletBinding()]
         param ()
@@ -550,6 +534,22 @@ if ($WindowsPhase -eq 'OOBE') {
 #endregion
 #=================================================
 #region Anywhere Functions
+function osdcloud-SetExecutionPolicy {
+    [CmdletBinding()]
+    param ()
+    if ($WindowsPhase -eq 'WinPE') {
+        if ((Get-ExecutionPolicy) -ne 'Bypass') {
+            Write-Host -ForegroundColor DarkGray 'Set-ExecutionPolicy Bypass'
+            Set-ExecutionPolicy Bypass -Force
+        }
+    }
+    else {
+        if ((Get-ExecutionPolicy -Scope CurrentUser) -ne 'RemoteSigned') {
+            Write-Host -ForegroundColor DarkGray 'Set-ExecutionPolicy RemoteSigned [CurrentUser]'
+            Set-ExecutionPolicy RemoteSigned -Force -Scope CurrentUser
+        }
+    }
+}
 function osdcloud-InstallPackageManagement {
     [CmdletBinding()]
     param ()
