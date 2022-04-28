@@ -36,6 +36,10 @@ $ScriptVersion = '22.4.28.1'
 #=================================================
 #region Initialize
 
+#Start the Transcript
+$Transcript = "$((Get-Date).ToString('yyyy-MM-dd-HHmmss'))-OSDCloud.log"
+$null = Start-Transcript -Path (Join-Path "$env:SystemRoot\Temp" $Transcript) -ErrorAction Ignore
+
 #Determine the proper Windows environment
 if ($env:SystemDrive -eq 'X:') {$WindowsPhase = 'WinPE'}
 else {
@@ -46,17 +50,18 @@ else {
     else {$WindowsPhase = 'Windows'}
 }
 
-#Load OSDCloud Functions
-Invoke-Expression -Command (Invoke-RestMethod -Uri functions.osdcloud.com)
-
 #Finish initialization
 Write-Host -ForegroundColor DarkGray "$ScriptName $ScriptVersion $WindowsPhase"
-[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
+
+#Load OSDCloud Functions
+Invoke-Expression -Command (Invoke-RestMethod -Uri functions.osdcloud.com)
 
 #endregion
 #=================================================
 #region Windows
 if ($WindowsPhase -eq 'Windows') {
+    $fromIsoUrl = 'https://osdclouddemo.blob.core.windows.net/public/OSDCloud.iso'
+
     if ($fromIsoUrl) {
         #============================================
         #   Test Admin Rights
