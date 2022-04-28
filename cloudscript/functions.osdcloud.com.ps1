@@ -32,7 +32,7 @@ powershell iex (irm functions.osdcloud.com)
 #=================================================
 #Script Information
 $ScriptName = 'functions.osdcloud.com'
-$ScriptVersion = '22.4.27.2'
+$ScriptVersion = '22.4.28.1'
 #=================================================
 #region Initialize Functions
 [Net.ServicePointManager]::SecurityProtocol = [Net.ServicePointManager]::SecurityProtocol -bor [Net.SecurityProtocolType]::Tls12
@@ -504,7 +504,7 @@ if ($WindowsPhase -eq 'OOBE') {
         param ()
         Write-Host -ForegroundColor Green 'Complete!'
         Write-Warning 'Device will restart in 30 seconds.  Press Ctrl + C to cancel'
-        Stop-Transcript
+        $null = Stop-Transcript -ErrorAction Ignore
         Start-Sleep -Seconds 30
         Restart-Computer
     }
@@ -513,7 +513,7 @@ if ($WindowsPhase -eq 'OOBE') {
         param ()
         Write-Host -ForegroundColor Green 'Complete!'
         Write-Warning 'Device will shutdown in 30 seconds.  Press Ctrl + C to cancel'
-        Stop-Transcript
+        $null = Stop-Transcript -ErrorAction Ignore
         Start-Sleep -Seconds 30
         Stop-Computer
     }
