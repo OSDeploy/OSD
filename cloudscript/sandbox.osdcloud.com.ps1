@@ -69,19 +69,19 @@ if ($WindowsPhase -eq 'WinPE') {
     Write-Host -ForegroundColor Cyan "Start-OSDCloud or Start-OSDCloudGUI can be run in the new PowerShell session"
     
     #Stop the startup Transcript.  OSDCloud will create its own
-    $null = Stop-Transcript
+    $null = Stop-Transcript -ErrorAction Ignore
 }
 #endregion
 #=================================================
 #region Specialize
 if ($WindowsPhase -eq 'Specialize') {
-    $null = Stop-Transcript
+    $null = Stop-Transcript -ErrorAction Ignore
 }
 #endregion
 #=================================================
 #region AuditMode
 if ($WindowsPhase -eq 'AuditMode') {
-    $null = Stop-Transcript
+    $null = Stop-Transcript -ErrorAction Ignore
 }
 #endregion
 #=================================================
@@ -91,13 +91,13 @@ if ($WindowsPhase -eq 'OOBE') {
     #Load everything needed to run AutoPilot and Azure KeyVault
     osdcloud-StartOOBE -Display -Language -DateTime -Autopilot -KeyVault
 
-    $null = Stop-Transcript
+    $null = Stop-Transcript -ErrorAction Ignore
 }
 #endregion
 #=================================================
 #region Windows
 if ($WindowsPhase -eq 'Windows') {
-    $null = Stop-Transcript
+    $null = Stop-Transcript -ErrorAction Ignore
 }
 #endregion
 #=================================================

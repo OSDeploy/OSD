@@ -64,32 +64,32 @@ Invoke-Expression -Command (Invoke-RestMethod -Uri functions.osdcloud.com)
 if ($WindowsPhase -eq 'WinPE') {
     osdcloud-StartWinPE
     osdcloud-InstallCurl
-    $null = Stop-Transcript
+    $null = Stop-Transcript -ErrorAction Ignore
 }
 #endregion
 #=================================================
 #region Specialize
 if ($WindowsPhase -eq 'Specialize') {
-    $null = Stop-Transcript
+    $null = Stop-Transcript -ErrorAction Ignore
 }
 #endregion
 #=================================================
 #region AuditMode
 if ($WindowsPhase -eq 'AuditMode') {
-    $null = Stop-Transcript
+    $null = Stop-Transcript -ErrorAction Ignore
 }
 #endregion
 #=================================================
 #region OOBE
 if ($WindowsPhase -eq 'OOBE') {
     osdcloud-StartOOBE
-    $null = Stop-Transcript
+    $null = Stop-Transcript -ErrorAction Ignore
 }
 #endregion
 #=================================================
 #region Windows
 if ($WindowsPhase -eq 'Windows') {
-    $null = Stop-Transcript
+    $null = Stop-Transcript -ErrorAction Ignore
 }
 #endregion
 #=================================================

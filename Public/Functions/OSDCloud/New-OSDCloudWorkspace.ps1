@@ -344,6 +344,6 @@ function New-OSDCloudWorkspace {
     Write-Host -ForegroundColor Gray "Set-OSDCloudWorkspace C:\OSDCloud2"
     Write-Host -ForegroundColor DarkGray "========================================================================="
     Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) New-OSDCloudWorkspace created at $WorkspacePath"
-    $null = Stop-Transcript
+    $null = Stop-Transcript -ErrorAction Ignore
     #=================================================
 }

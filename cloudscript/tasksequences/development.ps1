@@ -69,7 +69,7 @@ if ($WindowsPhase -eq 'WinPE') {
     #Write-Host -ForegroundColor Cyan "To start a new PowerShell session, type 'start powershell' and press enter"
     #Write-Host -ForegroundColor Cyan "Start-OSDCloud or Start-OSDCloudGUI can be run in the new PowerShell session"
     #Stop the startup Transcript.  OSDCloud will create its own
-    $null = Stop-Transcript
+    $null = Stop-Transcript -ErrorAction Ignore
 
     #Start OSDCloud and pass all the parameters except the Language to allow for prompting
     Start-OSDCloud -OSVersion 'Windows 10' -OSBuild 21H2 -OSEdition Development -OSLicense Volume -SkipAutopilot -SkipODT -Restart
@@ -78,13 +78,13 @@ if ($WindowsPhase -eq 'WinPE') {
 #=================================================
 #region Specialize
 if ($WindowsPhase -eq 'Specialize') {
-    $null = Stop-Transcript
+    $null = Stop-Transcript -ErrorAction Ignore
 }
 #endregion
 #=================================================
 #region AuditMode
 if ($WindowsPhase -eq 'AuditMode') {
-    $null = Stop-Transcript
+    $null = Stop-Transcript -ErrorAction Ignore
 }
 #endregion
 #=================================================
@@ -123,14 +123,14 @@ if ($WindowsPhase -eq 'OOBE') {
             Wait-Process -Id $AutopilotRegisterProcess.Id
         }
     }
-    $null = Stop-Transcript
+    $null = Stop-Transcript -ErrorAction Ignore
     osdcloud-RestartComputer
 }
 #endregion
 #=================================================
 #region Windows
 if ($WindowsPhase -eq 'Windows') {
-    $null = Stop-Transcript
+    $null = Stop-Transcript -ErrorAction Ignore
 }
 #endregion
 #=================================================
