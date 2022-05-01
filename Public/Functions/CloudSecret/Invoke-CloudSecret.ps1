@@ -8,7 +8,7 @@ https://osd.osdeploy.com
 #>
 function Invoke-CloudSecret
 {
-    [CmdletBinding(DefaultParameterSetName='FromUriContent')]
+    [CmdletBinding()]
     param (
         [Parameter(Mandatory, Position = 0)]
         [ValidateNotNull()]
