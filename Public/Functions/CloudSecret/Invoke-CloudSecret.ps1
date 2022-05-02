@@ -29,7 +29,7 @@ function Invoke-CloudSecret
     #=================================================
     #	Get-CloudSecret
     #=================================================
-    $GetCloudSecret = Get-CloudSecret -VaultName $VaultName -Name $Name
+    [System.String]$GetCloudSecret = Get-CloudSecret -VaultName $VaultName -Name $Name
     #=================================================
     #	Invoke
     #=================================================

@@ -26,23 +26,28 @@ function Get-CloudSecret
     #=================================================
     #	FromAzKeyVaultSecret
     #=================================================
-    $Module = Import-Module Az.Accounts -PassThru -ErrorAction Ignore
-    if (-not $Module) {
-        Install-Module Az.Accounts -Force
-    }
-    
     $Module = Import-Module Az.KeyVault -PassThru -ErrorAction Ignore
     if (-not $Module) {
         Install-Module Az.KeyVault -Force
     }
 
+    $Module = Import-Module Az.Accounts -PassThru -ErrorAction Ignore
+    if (-not $Module) {
+        Install-Module Az.Accounts -Force
+    }
+    
     if (!(Get-AzContext -ErrorAction Ignore)) {
-        Connect-AzAccount -DeviceCode
+        if ($env:SystemDrive -eq 'X:') {
+            $null = Connect-AzAccount -DeviceCode
+        }
+        else {
+            $null = Connect-AzAccount
+        }
     }
 
     if (Get-AzContext -ErrorAction Ignore) {
         $GetAzKeyVaultSecret = Get-AzKeyVaultSecret -VaultName $VaultName -Name $Name -AsPlainText
-        $GetAzKeyVaultSecret
+        Return $GetAzKeyVaultSecret
     }
     else {
         Write-Warning "Authenticate to Azure using 'Connect-AzAccount -DeviceCode'"
