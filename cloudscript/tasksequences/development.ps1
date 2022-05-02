@@ -1,5 +1,5 @@
 <#PSScriptInfo
-.VERSION 22.4.28.1
+.VERSION 22.5.1.1
 .GUID ea8ddb28-f77d-4977-a49f-4ff35b752d83
 .AUTHOR David Segura @SeguraOSD
 .COMPANYNAME osdcloud.com
@@ -23,7 +23,7 @@ powershell iex(irm go.osdcloud.com/development)
 .DESCRIPTION
     PSCloudScript at go.osdcloud.com/development
 .NOTES
-    Version 22.4.28.1
+    Version 22.5.1.1
 .LINK
     https://raw.githubusercontent.com/OSDeploy/OSD/master/cloudscript/tasksequences/development.ps1
 .EXAMPLE
@@ -34,7 +34,7 @@ param()
 #=================================================
 #Script Information
 $ScriptName = 'go.osdcloud.com/development'
-$ScriptVersion = '22.4.28.1'
+$ScriptVersion = '22.5.1.1'
 #=================================================
 #region Initialize
 

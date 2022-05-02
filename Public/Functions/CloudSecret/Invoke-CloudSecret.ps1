@@ -29,21 +29,21 @@ function Invoke-CloudSecret
     #=================================================
     #	Get-CloudSecret
     #=================================================
-    $Result = Get-CloudSecret -VaultName $VaultName -Name $Name
+    $GetCloudSecret = Get-CloudSecret -VaultName $VaultName -Name $Name
     #=================================================
     #	Invoke
     #=================================================
-    if ($Result) {
+    if ($GetCloudSecret) {
         if ($Invoke -eq 'Command') {
-            Invoke-Expression -Command $Result
+            Invoke-Expression -Command $GetCloudSecret
         }
         if ($Invoke -eq 'File') {
-            $Result | Out-File -FilePath "$env:TEMP\CloudSecret.ps1"
+            $GetCloudSecret | Out-File -FilePath "$env:TEMP\CloudSecret.ps1"
             & "$env:TEMP\CloudSecret.ps1"
             Remove-Item -Path "$env:TEMP\CloudSecret.ps1" -Force -ErrorAction Ignore | Out-Null
         }
         if ($Invoke -eq 'FileRunas') {
-            $Result | Out-File -FilePath "$env:TEMP\CloudSecret.ps1"
+            $GetCloudSecret | Out-File -FilePath "$env:TEMP\CloudSecret.ps1"
             Start-Process powershell.exe -Verb Runas "& $env:TEMP\CloudSecret.ps1" -Wait
             Remove-Item -Path "$env:TEMP\CloudSecret.ps1" -Force -ErrorAction Ignore | Out-Null
         }

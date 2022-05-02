@@ -22,7 +22,7 @@ function Get-CloudSecret
         # Specifies the name of the secret to get the content to use as a PSCloudScript
         $Name
     )
-    $Result = $null
+    $GetAzKeyVaultSecret = $null
     #=================================================
     #	FromAzKeyVaultSecret
     #=================================================
@@ -41,10 +41,11 @@ function Get-CloudSecret
     }
 
     if (Get-AzContext -ErrorAction Ignore) {
-        $Result = Get-AzKeyVaultSecret -VaultName $VaultName -Name $Name -AsPlainText
-        $Result
+        $GetAzKeyVaultSecret = Get-AzKeyVaultSecret -VaultName $VaultName -Name $Name -AsPlainText
+        $GetAzKeyVaultSecret
     }
     else {
-        Write-Error "Authenticate to Azure using 'Connect-AzAccount -DeviceCode'"
+        Write-Warning "Authenticate to Azure using 'Connect-AzAccount -DeviceCode'"
+        Break
     }
 }
