@@ -1,5 +1,5 @@
 <#PSScriptInfo
-.VERSION 22.5.1.1
+.VERSION 22.5.2.1
 .GUID 68790315-3c3f-4a9a-b191-84928e5d6a83
 .AUTHOR David Segura @SeguraOSD
 .COMPANYNAME osdcloud.com
@@ -19,7 +19,7 @@
 .DESCRIPTION
     PSCloudScript
 .NOTES
-    Version 22.5.1.1
+    Version 22.5.2.1
 .LINK
     https://raw.githubusercontent.com/OSDeploy/OSD/master/cloudscript/re.osdcloud.com.ps1
 .EXAMPLE
@@ -32,7 +32,7 @@ param()
 #=================================================
 #Script Information
 $ScriptName = 'OSDCloud RE'
-$ScriptVersion = '22.5.1.1'
+$ScriptVersion = '22.5.2.1'
 #=================================================
 #region Initialize
 
