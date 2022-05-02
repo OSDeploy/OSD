@@ -41,7 +41,7 @@ function Get-CloudSecret
             $null = Connect-AzAccount -DeviceCode
         }
         else {
-            $null = Connect-AzAccount
+            $null = Connect-AzAccount -DeviceCode
         }
     }
 
