@@ -792,9 +792,12 @@ if ($WindowsPhase -eq 'WinPE') {
         osdcloud-InstallModuleAzStorage
         osdcloud-InstallModuleMSGraphDeviceManagement
     
-        Connect-AzAccount -Device -AuthScope KeyVault
-
         $Global:AzContext = Get-AzContext
+        if (!($Global:AzContext)) {
+            $null = Connect-AzAccount -Device -AuthScope KeyVault
+            $Global:AzContext = Get-AzContext
+        }
+
         if ($Global:AzContext) {
             Write-Host -ForegroundColor Green 'Connected to Azure'
             Write-Host -ForegroundColor DarkGray "========================================================================="
@@ -876,9 +879,6 @@ if ($WindowsPhase -eq 'WinPE') {
             #Write-Verbose -Verbose 'Azure Auth Headers have been saved to $Global:Headers*'
             #$Global:MgGraph = Connect-MgGraph -AccessToken $Global:AccessTokenMSGraph.Token -Scopes DeviceManagementConfiguration.Read.All,DeviceManagementServiceConfig.Read.All,DeviceManagementServiceConfiguration.Read.All
             $Global:AzureAD = Connect-AzureAD -AadAccessToken $Global:AccessTokenAadGraph.Token -AccountId $Global:AzContext.Account.Id
-        }
-        else {
-            Write-Warning 'Could not connect to Azure'
         }
     }
 }
