@@ -812,12 +812,12 @@ if ($WindowsPhase -eq 'WinPE') {
             #	AAD Graph
             #=================================================
             Write-Host -ForegroundColor DarkGray "========================================================================="
-            Write-Host -ForegroundColor Cyan 'AadGraph Access Token ($Global:AccessTokenAadGraph)'
+            Write-Host -ForegroundColor Cyan '$Global:AccessTokenAadGraph'
             $Global:AccessTokenAadGraph = Get-AzAccessToken -ResourceTypeName AadGraph
             $Global:AccessTokenAadGraph
 
             Write-Host -ForegroundColor DarkGray "========================================================================="
-            Write-Host -ForegroundColor Cyan 'AadGraph Headers ($Global:HeadersAadGraph)'
+            Write-Host -ForegroundColor Cyan '$Global:HeadersAadGraph'
             $Global:HeadersAadGraph = @{
                 'Authorization' = 'Bearer ' + $Global:AccessTokenAadGraph.Token
                 'Content-Type'  = 'application/json'
@@ -828,12 +828,12 @@ if ($WindowsPhase -eq 'WinPE') {
             #	Azure KeyVault
             #=================================================
             Write-Host -ForegroundColor DarkGray "========================================================================="
-            Write-Host -ForegroundColor Cyan 'KeyVault Access Token ($Global:AccessTokenKeyVault)'
+            Write-Host -ForegroundColor Cyan '$Global:AccessTokenKeyVault'
             $Global:AccessTokenKeyVault = Get-AzAccessToken -ResourceTypeName KeyVault
             $Global:AccessTokenKeyVault
 
             Write-Host -ForegroundColor DarkGray "========================================================================="
-            Write-Host -ForegroundColor Cyan 'KeyVault Headers ($Global:HeadersKeyVault)'
+            Write-Host -ForegroundColor Cyan '$Global:HeadersKeyVault'
             $Global:HeadersKeyVault = @{
                 'Authorization' = 'Bearer ' + $Global:AccessTokenKeyVault.Token
                 'Content-Type'  = 'application/json'
@@ -844,12 +844,12 @@ if ($WindowsPhase -eq 'WinPE') {
             #	Azure MSGraph
             #=================================================
             Write-Host -ForegroundColor DarkGray "========================================================================="
-            Write-Host -ForegroundColor Cyan 'MSGraph Access Token ($Global:AccessTokenMSGraph)'
+            Write-Host -ForegroundColor Cyan '$Global:AccessTokenMSGraph'
             $Global:AccessTokenMSGraph = Get-AzAccessToken -ResourceTypeName MSGraph
             $Global:AccessTokenMSGraph
 
             Write-Host -ForegroundColor DarkGray "========================================================================="
-            Write-Host -ForegroundColor Cyan 'MSGraph Headers ($Global:HeadersKeyVault)'
+            Write-Host -ForegroundColor Cyan '$Global:HeadersKeyVault'
             $Global:HeadersMSGraph = @{
                 'Authorization' = 'Bearer ' + $Global:AccessTokenMSGraph.Token
                 'Content-Type'  = 'application/json'
@@ -860,12 +860,12 @@ if ($WindowsPhase -eq 'WinPE') {
             #	Azure Storage
             #=================================================
             Write-Host -ForegroundColor DarkGray "========================================================================="
-            Write-Host -ForegroundColor Cyan 'Storage Access Token ($Global:AccessTokenStorage)'
+            Write-Host -ForegroundColor Cyan '$Global:AccessTokenStorage'
             $Global:AccessTokenStorage = Get-AzAccessToken -ResourceTypeName Storage
             $Global:AccessTokenStorage
 
             Write-Host -ForegroundColor DarkGray "========================================================================="
-            Write-Host -ForegroundColor Cyan 'Storage Headers ($Global:HeadersStorage)'
+            Write-Host -ForegroundColor Cyan '$Global:HeadersStorage'
             $Global:HeadersStorage = @{
                 'Authorization' = 'Bearer ' + $Global:AccessTokenStorage.Token
                 'Content-Type'  = 'application/json'
