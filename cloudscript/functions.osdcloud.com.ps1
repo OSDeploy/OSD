@@ -793,7 +793,7 @@ if ($WindowsPhase -eq 'WinPE') {
             Write-Host -ForegroundColor Green 'Connected to Azure'
             Write-Host -ForegroundColor DarkGray "========================================================================="
             Write-Host -ForegroundColor Cyan 'Azure Context ($Global:AzContext)'
-            $Global:AzContext
+            $Global:AzContext | Format-list
 
             $Global:AzAccount = $Global:AzContext.Account
             $Global:AzEnvironment = $Global:AzContext.Environment
