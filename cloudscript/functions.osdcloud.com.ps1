@@ -675,7 +675,6 @@ function osdcloud-InstallModuleMSGraphDeviceManagement {
         }
     }
 }
-Install-Module Microsoft.Graph.DeviceManagement -Force
 function osdcloud-InstallScriptAutopilot {
     [CmdletBinding()]
     param ()
@@ -800,7 +799,9 @@ if ($WindowsPhase -eq 'WinPE') {
             $Global:AzEnvironment = $Global:AzContext.Environment
             $Global:AzSubscription = $Global:AzContext.Subscription
             $Global:AzTenantId = $Global:AzContext.Tenant
-
+            #=================================================
+            #	AAD Graph
+            #=================================================
             Write-Host -ForegroundColor DarkGray "========================================================================="
             Write-Host -ForegroundColor Cyan 'AadGraph Access Token ($Global:AccessTokenAadGraph)'
             $Global:AccessTokenAadGraph = Get-AzAccessToken -ResourceTypeName AadGraph
@@ -814,7 +815,9 @@ if ($WindowsPhase -eq 'WinPE') {
                 'ExpiresOn'     = $Global:AccessTokenAadGraph.ExpiresOn
             }
             $Global:HeadersAadGraph
-
+            #=================================================
+            #	Azure KeyVault
+            #=================================================
             Write-Host -ForegroundColor DarkGray "========================================================================="
             Write-Host -ForegroundColor Cyan 'KeyVault Access Token ($Global:AccessTokenKeyVault)'
             $Global:AccessTokenKeyVault = Get-AzAccessToken -ResourceTypeName KeyVault
@@ -828,45 +831,49 @@ if ($WindowsPhase -eq 'WinPE') {
                 'ExpiresOn'     = $Global:AccessTokenKeyVault.ExpiresOn
             }
             $Global:HeadersKeyVault
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-            
-
-        
+            #=================================================
+            #	Azure MSGraph
+            #=================================================
+            Write-Host -ForegroundColor DarkGray "========================================================================="
+            Write-Host -ForegroundColor Cyan 'MSGraph Access Token ($Global:AccessTokenMSGraph)'
             $Global:AccessTokenMSGraph = Get-AzAccessToken -ResourceTypeName MSGraph
+            $Global:AccessTokenMSGraph
+
+            Write-Host -ForegroundColor DarkGray "========================================================================="
+            Write-Host -ForegroundColor Cyan 'MSGraph Headers ($Global:HeadersKeyVault)'
             $Global:HeadersMSGraph = @{
                 'Authorization' = 'Bearer ' + $Global:AccessTokenMSGraph.Token
                 'Content-Type'  = 'application/json'
                 'ExpiresOn'     = $Global:HeadersMSGraph.ExpiresOn
             }
-            
+            $Global:HeadersMSGraph
+            #=================================================
+            #	Azure Storage
+            #=================================================
+            Write-Host -ForegroundColor DarkGray "========================================================================="
+            Write-Host -ForegroundColor Cyan 'Storage Access Token ($Global:AccessTokenStorage)'
             $Global:AccessTokenStorage = Get-AzAccessToken -ResourceTypeName Storage
+            $Global:AccessTokenStorage
+
+            Write-Host -ForegroundColor DarkGray "========================================================================="
+            Write-Host -ForegroundColor Cyan 'Storage Headers ($Global:HeadersStorage)'
             $Global:HeadersStorage = @{
                 'Authorization' = 'Bearer ' + $Global:AccessTokenStorage.Token
                 'Content-Type'  = 'application/json'
                 'ExpiresOn'     = $Global:HeadersStorage.ExpiresOn
             }
+            $Global:HeadersStorage
+            #=================================================
+            #	Info
+            #=================================================
+            #Write-Verbose -Verbose 'Azure Access Tokens have been saved to $Global:AccessToken*'
+            #Write-Verbose -Verbose 'Azure Auth Headers have been saved to $Global:Headers*'
+            #$Global:MgGraph = Connect-MgGraph -AccessToken $Global:AccessTokenMSGraph.Token -Scopes DeviceManagementConfiguration.Read.All,DeviceManagementServiceConfig.Read.All,DeviceManagementServiceConfiguration.Read.All
+            $Global:AzureAD = Connect-AzureAD -AadAccessToken $Global:AccessTokenAadGraph.Token -AccountId $Global:AzContext.Account.Id
         }
         else {
             Write-Warning 'Could not connect to Azure'
         }
-        
-        #Write-Verbose -Verbose 'Azure Access Tokens have been saved to $Global:AccessToken*'
-        #Write-Verbose -Verbose 'Azure Auth Headers have been saved to $Global:Headers*'
-        #$Global:MgGraph = Connect-MgGraph -AccessToken $Global:AccessTokenMSGraph.Token -Scopes DeviceManagementConfiguration.Read.All,DeviceManagementServiceConfig.Read.All,DeviceManagementServiceConfiguration.Read.All
-        $Global:AzureAD = Connect-AzureAD -AadAccessToken $Global:AccessTokenAadGraph.Token -AccountId $Global:AzContext.Account.Id
     }
 }
 #endregion
