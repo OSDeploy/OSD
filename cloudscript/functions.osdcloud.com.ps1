@@ -576,24 +576,6 @@ function osdcloud-InstallPackageManagement {
         }
     }
 }
-function osdcloud-InstallModuleAzKeyVault {
-    [CmdletBinding()]
-    param ()
-    if ($WindowsPhase -eq 'WinPE') {
-        $InstalledModule = Import-Module Az.KeyVault -PassThru -ErrorAction Ignore
-        if (-not $InstalledModule) {
-            Write-Host -ForegroundColor DarkGray 'Install-Module Az.KeyVault,Az.Accounts [AllUsers]'
-            Install-Module Az.KeyVault -Force -Scope AllUsers
-        }
-    }
-    else {
-        $InstalledModule = Import-Module Az.KeyVault -PassThru -ErrorAction Ignore
-        if (-not $InstalledModule) {
-            Write-Host -ForegroundColor DarkGray 'Install-Module Az.KeyVault,Az.Accounts [CurrentUser]'
-            Install-Module Az.KeyVault -Force -Scope CurrentUser
-        }
-    }
-}
 function osdcloud-InstallModuleOSD {
     [CmdletBinding()]
     param ()
@@ -619,22 +601,81 @@ function osdcloud-InstallModuleAutopilot {
         Install-Module WindowsAutopilotIntune -Force -Scope CurrentUser
     }
 }
-function osdcloud-InstallModuleAzureAd {
+function osdcloud-InstallModuleAzKeyVault {
     [CmdletBinding()]
     param ()
-    if ($WindowsPhase -eq 'WinPE') {
-        Write-Host -ForegroundColor DarkGray 'Install-Module AzureAD [AllUsers]'
-        Install-Module AzureAD -Force
-        Import-Module AzureAD -Force
-    }
-    else {
-        $InstalledModule = Import-Module AzureAD -PassThru -ErrorAction Ignore
-        if (-not $InstalledModule) {
-            Write-Host -ForegroundColor DarkGray 'Install-Module AzureAD [CurrentUser]'
-            Install-Module AzureAD -Force -Scope CurrentUser
+    $InstalledModule = Import-Module Az.KeyVault -PassThru -ErrorAction Ignore
+    
+    if (-not $InstalledModule) {
+        if ($WindowsPhase -eq 'WinPE') {
+            Write-Host -ForegroundColor DarkGray 'Install-Module Az.KeyVault [AllUsers]'
+            Install-Module Az.KeyVault -Scope AllUsers
+            Import-Module Az.KeyVault -Force
+        }
+        else {
+            Write-Host -ForegroundColor DarkGray 'Install-Module Az.KeyVault [CurrentUser]'
+            Install-Module Az.KeyVault -Force -Scope CurrentUser
         }
     }
 }
+function osdcloud-InstallModuleAzStorage {
+    [CmdletBinding()]
+    param ()
+    $InstalledModule = Import-Module Az.Storage -PassThru -ErrorAction Ignore
+
+    if (-not $InstalledModule) {
+        if ($WindowsPhase -eq 'WinPE') {
+            Write-Host -ForegroundColor DarkGray 'Install-Module Az.Storage [AllUsers]'
+            Install-Module Az.Storage -Scope AllUsers
+            Import-Module Az.Storage -Force
+        }
+        else {
+            Write-Host -ForegroundColor DarkGray 'Install-Module Az.Storage [CurrentUser]'
+            Install-Module Az.Storage -Force -Scope CurrentUser
+        }
+    }
+}
+function osdcloud-InstallModuleAzureAd {
+    [CmdletBinding()]
+    param ()
+    $InstalledModule = Import-Module AzureAD -PassThru -ErrorAction Ignore
+
+    if (-not $InstalledModule) {
+        if ($WindowsPhase -eq 'WinPE') {
+            Write-Host -ForegroundColor DarkGray 'Install-Module AzureAD [AllUsers]'
+            Install-Module AzureAD -Scope AllUsers
+            Import-Module AzureAD -Force
+        }
+        else {
+            $InstalledModule = Import-Module AzureAD -PassThru -ErrorAction Ignore
+            if (-not $InstalledModule) {
+                Write-Host -ForegroundColor DarkGray 'Install-Module AzureAD [CurrentUser]'
+                Install-Module AzureAD -Force -Scope CurrentUser
+            }
+        }
+    }
+}
+function osdcloud-InstallModuleMSGraphDeviceManagement {
+    [CmdletBinding()]
+    param ()
+    $InstalledModule = Import-Module Microsoft.Graph.DeviceManagement -PassThru -ErrorAction Ignore
+
+    if (-not $InstalledModule) {
+        if ($WindowsPhase -eq 'WinPE') {
+            Write-Host -ForegroundColor DarkGray 'Install-Module Microsoft.Graph.DeviceManagement [AllUsers]'
+            Install-Module Microsoft.Graph.DeviceManagement -Scope AllUsers
+            Import-Module Microsoft.Graph.DeviceManagement -Force
+        }
+        else {
+            $InstalledModule = Import-Module Microsoft.Graph.DeviceManagement -PassThru -ErrorAction Ignore
+            if (-not $InstalledModule) {
+                Write-Host -ForegroundColor DarkGray 'Install-Module Microsoft.Graph.DeviceManagement [CurrentUser]'
+                Install-Module Microsoft.Graph.DeviceManagement -Force -Scope CurrentUser
+            }
+        }
+    }
+}
+Install-Module Microsoft.Graph.DeviceManagement -Force
 function osdcloud-InstallScriptAutopilot {
     [CmdletBinding()]
     param ()
