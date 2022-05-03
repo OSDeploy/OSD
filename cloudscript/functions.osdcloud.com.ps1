@@ -1,5 +1,5 @@
 <#PSScriptInfo
-.VERSION 22.5.2.1
+.VERSION 22.5.3.1
 .GUID 7a3671f6-485b-443e-8e86-b60fdcea1419
 .AUTHOR David Segura @SeguraOSD
 .COMPANYNAME osdcloud.com
@@ -23,7 +23,7 @@ powershell iex (irm functions.osdcloud.com)
 .DESCRIPTION
     PSCloudScript at functions.osdcloud.com
 .NOTES
-    Version 22.5.2.1
+    Version 22.5.3.1
 .LINK
     https://raw.githubusercontent.com/OSDeploy/OSD/master/cloudscript/functions.osdcloud.com.ps1
 .EXAMPLE
@@ -32,7 +32,7 @@ powershell iex (irm functions.osdcloud.com)
 #=================================================
 #Script Information
 $ScriptName = 'functions.osdcloud.com'
-$ScriptVersion = '22.5.2.1'
+$ScriptVersion = '22.5.3.1'
 #=================================================
 #region Initialize Functions
 [Net.ServicePointManager]::SecurityProtocol = [Net.ServicePointManager]::SecurityProtocol -bor [Net.SecurityProtocolType]::Tls12
@@ -594,26 +594,6 @@ function osdcloud-InstallModuleAzKeyVault {
         }
     }
 }
-function osdcloud-InstallModuleAz {
-    [CmdletBinding()]
-    param ()
-    if ($WindowsPhase -eq 'WinPE') {
-        $InstalledModule = Import-Module Az.Storage -PassThru -ErrorAction Ignore
-        if (-not $InstalledModule) {
-            Write-Host -ForegroundColor DarkGray 'Installing WinPE Azure Modules [AllUsers]'
-            Install-Module Az.Storage -Force
-            Install-Module Microsoft.Graph.DeviceManagement -Force
-            #Install-Module Microsoft.Graph.Intune -Force
-        }
-    }
-    else {
-        $InstalledModule = Import-Module Az.Storage -PassThru -ErrorAction Ignore
-        if (-not $InstalledModule) {
-            Write-Host -ForegroundColor DarkGray 'Install-Module Az.Storage,Az.Accounts [CurrentUser]'
-            Install-Module Az.Storage -Force -Scope CurrentUser
-        }
-    }
-}
 function osdcloud-InstallModuleOSD {
     [CmdletBinding()]
     param ()
@@ -642,10 +622,17 @@ function osdcloud-InstallModuleAutopilot {
 function osdcloud-InstallModuleAzureAd {
     [CmdletBinding()]
     param ()
-    $InstalledModule = Import-Module AzureAD -PassThru -ErrorAction Ignore
-    if (-not $InstalledModule) {
-        Write-Host -ForegroundColor DarkGray 'Install-Module AzureAD [CurrentUser]'
-        Install-Module AzureAD -Force -Scope CurrentUser
+    if ($WindowsPhase -eq 'WinPE') {
+        Write-Host -ForegroundColor DarkGray 'Install-Module AzureAD [AllUsers]'
+        Install-Module AzureAD -Force
+        Import-Module AzureAD -Force
+    }
+    else {
+        $InstalledModule = Import-Module AzureAD -PassThru -ErrorAction Ignore
+        if (-not $InstalledModule) {
+            Write-Host -ForegroundColor DarkGray 'Install-Module AzureAD [CurrentUser]'
+            Install-Module AzureAD -Force -Scope CurrentUser
+        }
     }
 }
 function osdcloud-InstallScriptAutopilot {
@@ -726,9 +713,6 @@ if ($WindowsPhase -eq 'WinPE') {
         param (
             [Parameter()]
             [System.Management.Automation.SwitchParameter]
-            $Azure,
-            [Parameter()]
-            [System.Management.Automation.SwitchParameter]
             $KeyVault,
             [Parameter()]
             [System.Management.Automation.SwitchParameter]
@@ -751,11 +735,8 @@ if ($WindowsPhase -eq 'WinPE') {
                     Break
                 }
             }
-            if ($Azure -or $KeyVault) {
+            if ($KeyVault) {
                 osdcloud-InstallModuleAzKeyVault
-            }
-            if ($Azure) {
-                osdcloud-InstallModuleAz
             }
         }
         else {

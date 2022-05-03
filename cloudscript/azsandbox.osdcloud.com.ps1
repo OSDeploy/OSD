@@ -64,9 +64,13 @@ Invoke-Expression -Command (Invoke-RestMethod -Uri functions.osdcloud.com)
 if ($WindowsPhase -eq 'WinPE') {
 
     #Process OSDCloud startup and load Azure dependencies
-    osdcloud-StartWinPE -OSDCloud -Azure
+    osdcloud-StartWinPE -OSDCloud -KeyVault
+    osdcloud-InstallModuleAzureAd
+    Install-Module Az.Storage -Force
+    Install-Module Microsoft.Graph.DeviceManagement -Force
+
     Connect-AzAccount -Device -AuthScope KeyVault
-    Write-Host -ForegroundColor Cyan "Open a new PowerShell session, type 'start powershell' and press enter"
+    #Write-Host -ForegroundColor Cyan "Open a new PowerShell session, type 'start powershell' and press enter"
     Write-Host -ForegroundColor Cyan "Run Connect-AzurePE to connect to Azure Resources"
     
     #Stop the startup Transcript.  OSDCloud will create its own
