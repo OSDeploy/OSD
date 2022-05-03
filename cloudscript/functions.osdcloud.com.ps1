@@ -968,6 +968,12 @@ function Connect-AzWinPE {
                 $Global:BlobImages += Get-AzStorageBlob -Context $StorageContext -Container $Container.Name -Blob *.wim -ErrorAction Ignore
             }
         }
+        if ($Global:BlobImages) {
+            Write-Host -ForegroundColor Cyan 'Blob images are stored in $Global:BlobImages'
+        }
+        else {
+            Write-Warning 'Unable to find any wim Windows Images on the storage accounts'
+        }
     }
     else {
         Write-Warning 'Unable to connect to AzureAD'
