@@ -784,9 +784,15 @@ if ($WindowsPhase -eq 'WinPE') {
         }
     }
     New-Alias -Name 'Start-WinPE' -Value 'osdcloud-StartWinPE' -Description 'OSDCloud' -Force
-    function Connect-AzurePE {
+    function Connect-AzureWinPE {
         [CmdletBinding()]
         param ()
+        osdcloud-InstallModuleAzureAd
+        osdcloud-InstallModuleAzKeyVault
+        osdcloud-InstallModuleAzStorage
+        osdcloud-InstallModuleMSGraphDeviceManagement
+    
+        Connect-AzAccount -Device -AuthScope KeyVault
 
         $Global:AzContext = Get-AzContext
         if ($Global:AzContext) {

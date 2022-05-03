@@ -65,11 +65,11 @@ if ($WindowsPhase -eq 'WinPE') {
 
     #Process OSDCloud startup and load Azure dependencies
     osdcloud-StartWinPE -OSDCloud -KeyVault
-    osdcloud-InstallModuleAzureAd
-    osdcloud-InstallModuleAzStorage
-    osdcloud-InstallModuleMSGraphDeviceManagement
+    #osdcloud-InstallModuleAzureAd
+    #osdcloud-InstallModuleAzStorage
+    #osdcloud-InstallModuleMSGraphDeviceManagement
 
-    Connect-AzAccount -Device -AuthScope KeyVault
+    #Connect-AzAccount -Device -AuthScope KeyVault
     #Write-Host -ForegroundColor Cyan "Open a new PowerShell session, type 'start powershell' and press enter"
     Write-Host -ForegroundColor Cyan "Run Connect-AzurePE to connect to Azure Resources"
     
