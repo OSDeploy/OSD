@@ -790,42 +790,81 @@ if ($WindowsPhase -eq 'WinPE') {
         param ()
 
         $Global:AzContext = Get-AzContext
+        if ($Global:AzContext) {
+            Write-Host -ForegroundColor Green 'Connected to Azure'
+            Write-Host -ForegroundColor DarkGray "========================================================================="
+            Write-Host -ForegroundColor Cyan 'Azure Context ($Global:AzContext)'
+            $Global:AzContext
+
+            $Global:AzAccount = $Global:AzContext.Account
+            $Global:AzEnvironment = $Global:AzContext.Environment
+            $Global:AzSubscription = $Global:AzContext.Subscription
+            $Global:AzTenantId = $Global:AzContext.Tenant
+
+            Write-Host -ForegroundColor DarkGray "========================================================================="
+            Write-Host -ForegroundColor Cyan 'AadGraph Access Token ($Global:AccessTokenAadGraph)'
+            $Global:AccessTokenAadGraph = Get-AzAccessToken -ResourceTypeName AadGraph
+            $Global:AccessTokenAadGraph
+
+            Write-Host -ForegroundColor DarkGray "========================================================================="
+            Write-Host -ForegroundColor Cyan 'AadGraph Headers ($Global:HeadersAadGraph)'
+            $Global:HeadersAadGraph = @{
+                'Authorization' = 'Bearer ' + $Global:AccessTokenAadGraph.Token
+                'Content-Type'  = 'application/json'
+                'ExpiresOn'     = $Global:AccessTokenAadGraph.ExpiresOn
+            }
+            $Global:HeadersAadGraph
+
+            Write-Host -ForegroundColor DarkGray "========================================================================="
+            Write-Host -ForegroundColor Cyan 'KeyVault Access Token ($Global:AccessTokenKeyVault)'
+            $Global:AccessTokenKeyVault = Get-AzAccessToken -ResourceTypeName KeyVault
+            $Global:AccessTokenKeyVault
+
+            Write-Host -ForegroundColor DarkGray "========================================================================="
+            Write-Host -ForegroundColor Cyan 'KeyVault Headers ($Global:HeadersKeyVault)'
+            $Global:HeadersKeyVault = @{
+                'Authorization' = 'Bearer ' + $Global:AccessTokenKeyVault.Token
+                'Content-Type'  = 'application/json'
+                'ExpiresOn'     = $Global:AccessTokenKeyVault.ExpiresOn
+            }
+            $Global:HeadersKeyVault
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            
+
         
-        $Global:AzAccount = $Global:AzContext.Account
-        $Global:AzEnvironment = $Global:AzContext.Environment
-        $Global:AzSubscription = $Global:AzContext.Subscription
-        $Global:AzTenantId = $Global:AzContext.Tenant
-        
-        $Global:AccessTokenAadGraph = Get-AzAccessToken -ResourceTypeName AadGraph
-        $Global:HeadersAadGraph = @{
-            'Authorization' = 'Bearer ' + $Global:AccessTokenAadGraph.Token
-            'Content-Type'  = 'application/json'
-            'ExpiresOn'     = $Global:AccessTokenAadGraph.ExpiresOn
+            $Global:AccessTokenMSGraph = Get-AzAccessToken -ResourceTypeName MSGraph
+            $Global:HeadersMSGraph = @{
+                'Authorization' = 'Bearer ' + $Global:AccessTokenMSGraph.Token
+                'Content-Type'  = 'application/json'
+                'ExpiresOn'     = $Global:HeadersMSGraph.ExpiresOn
+            }
+            
+            $Global:AccessTokenStorage = Get-AzAccessToken -ResourceTypeName Storage
+            $Global:HeadersStorage = @{
+                'Authorization' = 'Bearer ' + $Global:AccessTokenStorage.Token
+                'Content-Type'  = 'application/json'
+                'ExpiresOn'     = $Global:HeadersStorage.ExpiresOn
+            }
+        }
+        else {
+            Write-Warning 'Could not connect to Azure'
         }
         
-        $Global:AccessTokenKeyVault = Get-AzAccessToken -ResourceTypeName KeyVault
-        $Global:HeadersKeyVault = @{
-            'Authorization' = 'Bearer ' + $Global:AccessTokenKeyVault.Token
-            'Content-Type'  = 'application/json'
-            'ExpiresOn'     = $Global:AccessTokenKeyVault.ExpiresOn
-        }
-        
-        $Global:AccessTokenMSGraph = Get-AzAccessToken -ResourceTypeName MSGraph
-        $Global:HeadersMSGraph = @{
-            'Authorization' = 'Bearer ' + $Global:HeadersMSGraph.Token
-            'Content-Type'  = 'application/json'
-            'ExpiresOn'     = $Global:HeadersMSGraph.ExpiresOn
-        }
-        
-        $Global:AccessTokenStorage = Get-AzAccessToken -ResourceTypeName Storage
-        $Global:HeadersStorage = @{
-            'Authorization' = 'Bearer ' + $Global:HeadersStorage.Token
-            'Content-Type'  = 'application/json'
-            'ExpiresOn'     = $Global:HeadersStorage.ExpiresOn
-        }
-        
-        Write-Verbose -Verbose 'Azure Access Tokens have been saved to $Global:AccessToken*'
-        Write-Verbose -Verbose 'Azure Auth Headers have been saved to $Global:Headers*'
+        #Write-Verbose -Verbose 'Azure Access Tokens have been saved to $Global:AccessToken*'
+        #Write-Verbose -Verbose 'Azure Auth Headers have been saved to $Global:Headers*'
         #$Global:MgGraph = Connect-MgGraph -AccessToken $Global:AccessTokenMSGraph.Token -Scopes DeviceManagementConfiguration.Read.All,DeviceManagementServiceConfig.Read.All,DeviceManagementServiceConfiguration.Read.All
         $Global:AzureAD = Connect-AzureAD -AadAccessToken $Global:AccessTokenAadGraph.Token -AccountId $Global:AzContext.Account.Id
     }
