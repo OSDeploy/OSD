@@ -943,12 +943,31 @@ function Connect-AzWinPE {
         }
         $Global:HeadersStorage
         #=================================================
-        #	Info
+        #	AzureAD
         #=================================================
         #Write-Verbose -Verbose 'Azure Access Tokens have been saved to $Global:AccessToken*'
         #Write-Verbose -Verbose 'Azure Auth Headers have been saved to $Global:Headers*'
         #$Global:MgGraph = Connect-MgGraph -AccessToken $Global:AccessTokenMSGraph.Token -Scopes DeviceManagementConfiguration.Read.All,DeviceManagementServiceConfig.Read.All,DeviceManagementServiceConfiguration.Read.All
         $Global:AzureAD = Connect-AzureAD -AadAccessToken $Global:AccessTokenAadGraph.Token -AccountId $Global:AzContext.Account.Id
+
+        Write-Host -ForegroundColor DarkGray "========================================================================="
+        Write-Host -ForegroundColor Cyan 'Saving Azure Storage Accounts to $Global:AzStorageAccount'
+        $Global:AzStorageAccount = Get-AzStorageAccount
+        
+        Write-Host -ForegroundColor Cyan 'Saving Azure Storage Contexts to $Global:AzStorageContext'
+        $Global:AzStorageContext = @{}
+        $Global:BlobImages = @()
+        foreach ($Item in $Global:AzStorageAccount) {
+            $StorageContext = New-AzStorageContext -StorageAccountName $Item.StorageAccountName
+            $Global:AzStorageContext."$($Item.StorageAccountName)" = $StorageContext
+        
+            $StorageContainers = Get-AzStorageContainer -Context $StorageContext
+        
+            foreach ($Container in $StorageContainers) {
+                Write-Host -ForegroundColor Cyan "Scanning for Windows images on Storage Account $($Item.StorageAccountName) Container: $($Container.Name)"
+                $Global:BlobImages += Get-AzStorageBlob -Context $StorageContext -Container $Container.Name -Blob *.wim -ErrorAction Ignore
+            }
+        }
     }
     else {
         Write-Warning 'Unable to connect to AzureAD'
@@ -967,4 +986,13 @@ function osdcloud-AzureStorageDemo {
     Write-Host 'Get-AzStorageContainer -Context $Global:AzStorageContext'
     Write-Host 'Get-AzStorageBlob -Container private -Context $Global:AzStorageContext'
     Write-Host 'Get-AzStorageBlobContent -Blob "OSDCloud.iso" -Container private -Context $Global:AzStorageContext'
+    Break
+    Write-Host -ForegroundColor Cyan 'List your Containers using these Commands:'
+    foreach ($Item in $Global:AzStorageAccount) {
+        Write-Host -ForegroundColor Yellow "Get-AzStorageContainer -Context `$Global:AzStorageContext`.$($Item.StorageAccountName)"
+    }
+
+    Write-Host -ForegroundColor Cyan 'List your Blobs using this command:'
+    Write-Host -ForegroundColor Yellow 'Get-AzStorageBlob -Container <name> -Context $Global:AzStorageContext.<storageaccountname>'
+    Write-Host -ForegroundColor Yellow 'Get-AzStorageBlobContent -Container <name> -Blob <filenamecasesensitive>  -Context $Global:AzStorageContext'
 }
