@@ -784,7 +784,7 @@ if ($WindowsPhase -eq 'WinPE') {
         }
     }
     New-Alias -Name 'Start-WinPE' -Value 'osdcloud-StartWinPE' -Description 'OSDCloud' -Force
-    function Connect-AzureWinPE {
+    function Connect-AzWinPE {
         [CmdletBinding()]
         param ()
         osdcloud-InstallModuleAzureAd
