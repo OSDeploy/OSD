@@ -576,7 +576,7 @@ function osdcloud-InstallPackageManagement {
         }
     }
 }
-function osdcloud-InstallModuleKeyVault {
+function osdcloud-InstallModuleAzKeyVault {
     [CmdletBinding()]
     param ()
     if ($WindowsPhase -eq 'WinPE') {
@@ -591,6 +591,26 @@ function osdcloud-InstallModuleKeyVault {
         if (-not $InstalledModule) {
             Write-Host -ForegroundColor DarkGray 'Install-Module Az.KeyVault,Az.Accounts [CurrentUser]'
             Install-Module Az.KeyVault -Force -Scope CurrentUser
+        }
+    }
+}
+function osdcloud-InstallModuleAz {
+    [CmdletBinding()]
+    param ()
+    if ($WindowsPhase -eq 'WinPE') {
+        $InstalledModule = Import-Module Az.Storage -PassThru -ErrorAction Ignore
+        if (-not $InstalledModule) {
+            Write-Host -ForegroundColor DarkGray 'Installing WinPE Azure Modules [AllUsers]'
+            Install-Module Az.Storage -Force
+            Install-Module Microsoft.Graph.DeviceManagement -Force
+            #Install-Module Microsoft.Graph.Intune -Force
+        }
+    }
+    else {
+        $InstalledModule = Import-Module Az.Storage -PassThru -ErrorAction Ignore
+        if (-not $InstalledModule) {
+            Write-Host -ForegroundColor DarkGray 'Install-Module Az.Storage,Az.Accounts [CurrentUser]'
+            Install-Module Az.Storage -Force -Scope CurrentUser
         }
     }
 }
@@ -705,9 +725,14 @@ if ($WindowsPhase -eq 'WinPE') {
         [CmdletBinding()]
         param (
             [Parameter()]
-            [System.Management.Automation.SwitchParameter]$KeyVault,
+            [System.Management.Automation.SwitchParameter]
+            $Azure,
             [Parameter()]
-            [System.Management.Automation.SwitchParameter]$OSDCloud
+            [System.Management.Automation.SwitchParameter]
+            $KeyVault,
+            [Parameter()]
+            [System.Management.Automation.SwitchParameter]
+            $OSDCloud
         )
         if ($env:SystemDrive -eq 'X:') {
             osdcloud-SetExecutionPolicy
@@ -726,8 +751,11 @@ if ($WindowsPhase -eq 'WinPE') {
                     Break
                 }
             }
-            if ($KeyVault) {
-                osdcloud-InstallModuleKeyVault
+            if ($Azure -or $KeyVault) {
+                osdcloud-InstallModuleAzKeyVault
+            }
+            if ($Azure) {
+                osdcloud-InstallModuleAz
             }
         }
         else {
@@ -735,6 +763,50 @@ if ($WindowsPhase -eq 'WinPE') {
         }
     }
     New-Alias -Name 'Start-WinPE' -Value 'osdcloud-StartWinPE' -Description 'OSDCloud' -Force
+    function Connect-AzurePE {
+        [CmdletBinding()]
+        param ()
+
+        $Global:AzContext = Get-AzContext
+        
+        $Global:AzAccount = $Global:AzContext.Account
+        $Global:AzEnvironment = $Global:AzContext.Environment
+        $Global:AzSubscription = $Global:AzContext.Subscription
+        $Global:AzTenantId = $Global:AzContext.Tenant
+        
+        $Global:AccessTokenAadGraph = Get-AzAccessToken -ResourceTypeName AadGraph
+        $Global:HeadersAadGraph = @{
+            'Authorization' = 'Bearer ' + $Global:AccessTokenAadGraph.Token
+            'Content-Type'  = 'application/json'
+            'ExpiresOn'     = $Global:AccessTokenAadGraph.ExpiresOn
+        }
+        
+        $Global:AccessTokenKeyVault = Get-AzAccessToken -ResourceTypeName KeyVault
+        $Global:HeadersKeyVault = @{
+            'Authorization' = 'Bearer ' + $Global:AccessTokenKeyVault.Token
+            'Content-Type'  = 'application/json'
+            'ExpiresOn'     = $Global:AccessTokenKeyVault.ExpiresOn
+        }
+        
+        $Global:AccessTokenMSGraph = Get-AzAccessToken -ResourceTypeName MSGraph
+        $Global:HeadersMSGraph = @{
+            'Authorization' = 'Bearer ' + $Global:HeadersMSGraph.Token
+            'Content-Type'  = 'application/json'
+            'ExpiresOn'     = $Global:HeadersMSGraph.ExpiresOn
+        }
+        
+        $Global:AccessTokenStorage = Get-AzAccessToken -ResourceTypeName Storage
+        $Global:HeadersStorage = @{
+            'Authorization' = 'Bearer ' + $Global:HeadersStorage.Token
+            'Content-Type'  = 'application/json'
+            'ExpiresOn'     = $Global:HeadersStorage.ExpiresOn
+        }
+        
+        Write-Verbose -Verbose 'Azure Access Tokens have been saved to $Global:AccessToken*'
+        Write-Verbose -Verbose 'Azure Auth Headers have been saved to $Global:Headers*'
+        #$Global:MgGraph = Connect-MgGraph -AccessToken $Global:AccessTokenMSGraph.Token -Scopes DeviceManagementConfiguration.Read.All,DeviceManagementServiceConfig.Read.All,DeviceManagementServiceConfiguration.Read.All
+        $Global:AzureAD = Connect-AzureAD -AadAccessToken $Global:AccessTokenAadGraph.Token -AccountId $Global:AzContext.Account.Id
+    }
 }
 #endregion
 #=================================================
@@ -780,7 +852,7 @@ if ($WindowsPhase -eq 'OOBE') {
 
         #Add Azure KeuVault Support
         if ($KeyVault) {
-            osdcloud-InstallModuleKeyVault
+            osdcloud-InstallModuleAzKeyVault
         }
 
         #Get Autopilot information from the device
