@@ -71,7 +71,7 @@ if ($WindowsPhase -eq 'WinPE') {
 
     #Connect-AzAccount -Device -AuthScope KeyVault
     #Write-Host -ForegroundColor Cyan "Open a new PowerShell session, type 'start powershell' and press enter"
-    Write-Host -ForegroundColor Cyan "Run Connect-AzurePE to connect to Azure Resources"
+    Write-Host -ForegroundColor Cyan "Run Connect-AzWinPE to connect to Azure Resources"
     
     #Stop the startup Transcript.  OSDCloud will create its own
     $null = Stop-Transcript -ErrorAction Ignore

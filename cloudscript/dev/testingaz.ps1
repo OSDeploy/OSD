@@ -94,7 +94,8 @@ if ($Global:AzContext) {
     foreach ($Item in $Global:OSDCloudStorageAccounts) {
         $Global:LastStorageContext = New-AzStorageContext -StorageAccountName $Item.ResourceName
         $Global:AzStorageContext."$($Item.ResourceName)" = $Global:LastStorageContext
-        #Get-AzStorageBlobByTag -TagFilterSqlExpression """osdcloudimage""=""win10ltsc""" -Context $StorageContext
-        Get-AzStorageBlobByTag -Context $Global:LastStorageContext
+        #Get-AzStorageBlobByTag -TagFilterSqlExpression ""osdcloudimage""=""win10ltsc"" -Context $StorageContext
+        #Get-AzStorageBlobByTag -Context $Global:LastStorageContext
+        "&where=Status = 'In Progress'"
     }
 }
