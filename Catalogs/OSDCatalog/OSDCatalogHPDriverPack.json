@@ -1,6 +1,6 @@
 [
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "21.11.19",
@@ -29,7 +29,7 @@
         "CvaTitle":  "HP EliteOne 800 G6 AiO Win 11 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "21.11.19",
@@ -37,8 +37,8 @@
         "Name":  "HP EliteOne 800 G6 AiO Win11 sp136259",
         "Model":  "Collaboration G6 27 All-in-One with Zoom Rooms",
         "SystemId":  [
-                         "874e",
-                         "874d"
+                         "874d",
+                         "874e"
                      ],
         "SoftPaqId":  "sp136259",
         "OSId":  "4298",
@@ -58,7 +58,7 @@
         "CvaTitle":  "HP EliteOne 800 G6 AiO Win 11 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "22.03.11",
@@ -86,7 +86,7 @@
         "CvaTitle":  "HP Elite Dragonfly 13.5 G3 Windows 11 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "21.11.16",
@@ -114,7 +114,7 @@
         "CvaTitle":  "HP Elite Dragonfly G2 Windows 11 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "21.11.16",
@@ -142,7 +142,7 @@
         "CvaTitle":  "HP Elite Dragonfly G2 Windows 11 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "21.06.09",
@@ -170,7 +170,7 @@
         "CvaTitle":  "HP Elite Dragonfly Windows 10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "22.01.24",
@@ -198,7 +198,7 @@
         "CvaTitle":  "HP Pro/Elite Mini 4/6/800 G9 Win 11 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "22.01.24",
@@ -206,8 +206,8 @@
         "Name":  "HP Pro Elite Mini 4 6 800 G9 Win11 sp137181",
         "Model":  "Elite Mini 800 G9 Desktop PC",
         "SystemId":  [
-                         "894F",
-                         "8952"
+                         "8952",
+                         "894F"
                      ],
         "SoftPaqId":  "sp137181",
         "OSId":  "4298",
@@ -227,7 +227,7 @@
         "CvaTitle":  "HP Pro/Elite Mini 4/6/800 G9 Win 11 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "22.01.24",
@@ -255,7 +255,7 @@
         "CvaTitle":  "HP Elite Tower/SFF 6x0/8x0 G9/Z1 Win 11 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "22.01.24",
@@ -283,7 +283,7 @@
         "CvaTitle":  "HP Elite Tower/SFF 6x0/8x0 G9/Z1 Win 11 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "21.06.24",
@@ -291,8 +291,8 @@
         "Name":  "HP Elite Slice Win10 sp114257",
         "Model":  "Elite Slice",
         "SystemId":  [
-                         "8396",
-                         "81c3"
+                         "81c3",
+                         "8396"
                      ],
         "SoftPaqId":  "sp114257",
         "OSId":  "4297",
@@ -312,7 +312,7 @@
         "CvaTitle":  "HP Elite Slice Windows 10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "21.06.24",
@@ -341,7 +341,7 @@
         "CvaTitle":  "HP Elite Slice Windows 10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "21.12.02",
@@ -369,7 +369,7 @@
         "CvaTitle":  "HP Elite Slice G2 Windows 10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "21.12.02",
@@ -397,7 +397,7 @@
         "CvaTitle":  "HP Elite Slice G2 Windows 10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "21.12.02",
@@ -425,7 +425,7 @@
         "CvaTitle":  "HP Elite Slice G2 Windows 10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "21.12.02",
@@ -453,7 +453,7 @@
         "CvaTitle":  "HP Elite Slice G2 Windows 10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "21.12.02",
@@ -481,7 +481,7 @@
         "CvaTitle":  "HP Elite Slice G2 Windows 10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "22.01.24",
@@ -509,7 +509,7 @@
         "CvaTitle":  "HP Elite Tower/SFF 6x0/8x0 G9/Z1 Win 11 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "22.01.24",
@@ -537,7 +537,7 @@
         "CvaTitle":  "HP Elite Tower/SFF 6x0/8x0 G9/Z1 Win 11 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "22.01.24",
@@ -565,7 +565,7 @@
         "CvaTitle":  "HP Elite Tower/SFF 6x0/8x0 G9/Z1 Win 11 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "22.01.24",
@@ -593,7 +593,7 @@
         "CvaTitle":  "HP Elite Tower/SFF 6x0/8x0 G9/Z1 Win 11 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "19.05.29",
@@ -621,7 +621,7 @@
         "CvaTitle":  "HP Elite x2 1011 G1 Tablet Windows 10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "19.05.29",
@@ -649,7 +649,7 @@
         "CvaTitle":  "HP Elite x2 1011 G1 Tablet Windows 10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "20.07.06",
@@ -677,7 +677,7 @@
         "CvaTitle":  "HP Elite x2 1012 G1 Windows 10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "20.07.06",
@@ -705,7 +705,7 @@
         "CvaTitle":  "HP Elite x2 1012 G1 Windows 10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "21.01.05",
@@ -733,7 +733,7 @@
         "CvaTitle":  "HP Elite x2 1012 G2 Tablet Windows 10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "21.06.16",
@@ -761,7 +761,7 @@
         "CvaTitle":  "HP Elite x2 1013 G3 Windows 10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "21.06.09",
@@ -789,7 +789,7 @@
         "CvaTitle":  "HP Elite x2 G4 Tablet Windows 10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "22.04.06",
@@ -817,7 +817,7 @@
         "CvaTitle":  "HP Elite x2 G8 Tablet Windows 11 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "19.12.30",
@@ -845,7 +845,7 @@
         "CvaTitle":  "HP EliteBook 1030 G1 Windows 10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "19.12.30",
@@ -873,7 +873,7 @@
         "CvaTitle":  "HP Folio 1040 G3 Windows 10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "20.12.31",
@@ -881,8 +881,8 @@
         "Name":  "HP EliteBook 1040 G4 Win10 sp112022",
         "Model":  "EliteBook 1040 G4 Notebook PC",
         "SystemId":  [
-                         "8417",
-                         "82de"
+                         "82de",
+                         "8417"
                      ],
         "SoftPaqId":  "sp112022",
         "OSId":  "4288",
@@ -902,7 +902,7 @@
         "CvaTitle":  "HP EliteBook 1040 G4 Windows 10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "21.06.23",
@@ -930,7 +930,7 @@
         "CvaTitle":  "HP ZB Studio G5/EB 1050 G1 Windows 10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "22.03.02",
@@ -958,7 +958,7 @@
         "CvaTitle":  "HP EB 4/6x0 G9 ZHAN Windows 11 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "22.03.02",
@@ -987,7 +987,7 @@
         "CvaTitle":  "HP EB 4/6x0 G9 ZHAN Windows 11 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "21.12.24",
@@ -995,8 +995,8 @@
         "Name":  "HP ZHAN Pro Elite 4 6x5 Win11 sp136777",
         "Model":  "EliteBook 645 14 inch G9 Notebook PC",
         "SystemId":  [
-                         "89D2",
-                         "8B12"
+                         "8B12",
+                         "89D2"
                      ],
         "SoftPaqId":  "sp136777",
         "OSId":  "4298",
@@ -1016,7 +1016,7 @@
         "CvaTitle":  "HP ZHAN/Pro/Elite 4/6x5 Windows 11 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "22.03.02",
@@ -1045,7 +1045,7 @@
         "CvaTitle":  "HP EB 4/6x0 G9 ZHAN Windows 11 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "21.12.24",
@@ -1074,7 +1074,7 @@
         "CvaTitle":  "HP ZHAN/Pro/Elite 4/6x5 Windows 11 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "18.11.14",
@@ -1102,7 +1102,7 @@
         "CvaTitle":  "HP EliteBook 7x0/8x0 G1 Windows 10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "19.05.28",
@@ -1130,7 +1130,7 @@
         "CvaTitle":  "HP Elite/ZBook 7x/8x G2 Windows 10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "19.05.29",
@@ -1158,7 +1158,7 @@
         "CvaTitle":  "HP EliteBook 7x5 G2 Windows 10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "20.07.06",
@@ -1186,7 +1186,7 @@
         "CvaTitle":  "HP EliteBook 7x5 G3 Windows 10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "21.01.05",
@@ -1214,7 +1214,7 @@
         "CvaTitle":  "HP EliteBook 7x5 G4 Windows 10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "21.06.21",
@@ -1242,7 +1242,7 @@
         "CvaTitle":  "HP EliteBook 7x5 G5 Windows 10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "21.06.17",
@@ -1270,7 +1270,7 @@
         "CvaTitle":  "HP EliteBook 7x5 G6 Windows 10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "18.11.14",
@@ -1298,7 +1298,7 @@
         "CvaTitle":  "HP EliteBook 7x0/8x0 G1 Windows 10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "19.05.28",
@@ -1326,7 +1326,7 @@
         "CvaTitle":  "HP Elite/ZBook 7x/8x G2 Windows 10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "19.05.29",
@@ -1354,7 +1354,7 @@
         "CvaTitle":  "HP EliteBook 7x5 G2 Windows 10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "20.07.06",
@@ -1382,7 +1382,7 @@
         "CvaTitle":  "HP EliteBook 7x5 G3 Windows 10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "21.01.05",
@@ -1390,8 +1390,8 @@
         "Name":  "HP EliteBook 7x5 G4 Win10 sp112090",
         "Model":  "EliteBook 745 G4 Notebook PC",
         "SystemId":  [
-                         "8236",
-                         "82eb"
+                         "82eb",
+                         "8236"
                      ],
         "SoftPaqId":  "sp112090",
         "OSId":  "4288",
@@ -1411,7 +1411,7 @@
         "CvaTitle":  "HP EliteBook 7x5 G4 Windows 10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "21.06.21",
@@ -1439,7 +1439,7 @@
         "CvaTitle":  "HP EliteBook 7x5 G5 Windows 10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "21.06.17",
@@ -1467,7 +1467,7 @@
         "CvaTitle":  "HP EliteBook 7x5 G6 Windows 10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "18.11.14",
@@ -1495,7 +1495,7 @@
         "CvaTitle":  "HP EliteBook 7x0/8x0 G1 Windows 10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "19.05.28",
@@ -1523,7 +1523,7 @@
         "CvaTitle":  "HP Elite/ZBook 7x/8x G2 Windows 10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "19.05.29",
@@ -1551,7 +1551,7 @@
         "CvaTitle":  "HP EliteBook 7x5 G2 Windows 10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "20.07.06",
@@ -1579,7 +1579,7 @@
         "CvaTitle":  "HP EliteBook 7x5 G3 Windows 10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "21.01.05",
@@ -1607,7 +1607,7 @@
         "CvaTitle":  "HP EliteBook 7x5 G4 Windows 10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "21.06.21",
@@ -1635,7 +1635,7 @@
         "CvaTitle":  "HP EliteBook 7x5 G5 Windows 10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "18.11.14",
@@ -1663,7 +1663,7 @@
         "CvaTitle":  "HP EliteBook 7x0/8x0 G1 Windows 10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "19.05.28",
@@ -1691,7 +1691,7 @@
         "CvaTitle":  "HP Elite/ZBook 7x/8x G2 Windows 10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "19.12.30",
@@ -1719,7 +1719,7 @@
         "CvaTitle":  "HP EliteBook 7x0/8x0 G3 Windows 10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "20.12.31",
@@ -1747,7 +1747,7 @@
         "CvaTitle":  "HP Elite/ZBook 8x0 G4 Windows 10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "19.12.30",
@@ -1775,7 +1775,7 @@
         "CvaTitle":  "HP EliteBook 7x0/8x0 G3 Windows 10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "21.06.15",
@@ -1803,7 +1803,7 @@
         "CvaTitle":  "HP Elite/ZBook 8x0 G5 Windows 10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "21.06.09",
@@ -1831,7 +1831,7 @@
         "CvaTitle":  "HP Elite/ZBook 8x0 G6 Windows 10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "21.05.03",
@@ -1859,7 +1859,7 @@
         "CvaTitle":  "HP Elite/ZBook 8x0 G7 Windows 10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "22.03.03",
@@ -1867,8 +1867,8 @@
         "Name":  "HP Elite ZBook 8x0 G8 Win11 sp138604",
         "Model":  "EliteBook 830 G8 Notebook PC",
         "SystemId":  [
-                         "8AB3",
                          "880D",
+                         "8AB3",
                          "8AB8"
                      ],
         "SoftPaqId":  "sp138604",
@@ -1889,7 +1889,7 @@
         "CvaTitle":  "HP Elite/ZBook 8x0 G8 Windows 11 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "21.05.25",
@@ -1917,7 +1917,7 @@
         "CvaTitle":  "HP EliteBook 8x5 G7 Windows 10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "21.11.26",
@@ -1945,7 +1945,7 @@
         "CvaTitle":  "HP EliteBook 8x5 G8 Windows 11 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "21.06.15",
@@ -1973,7 +1973,7 @@
         "CvaTitle":  "HP Elite/ZBook 8x0 G5 Windows 10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "21.06.09",
@@ -2001,7 +2001,7 @@
         "CvaTitle":  "HP Elite/ZBook 8x0 G6 Windows 10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "22.03.03",
@@ -2029,7 +2029,7 @@
         "CvaTitle":  "HP Elite/ZBook 8x0 G8 Windows 11 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "18.11.14",
@@ -2057,7 +2057,7 @@
         "CvaTitle":  "HP EliteBook 7x0/8x0 G1 Windows 10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "19.05.28",
@@ -2085,7 +2085,7 @@
         "CvaTitle":  "HP Elite/ZBook 7x/8x G2 Windows 10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "19.12.30",
@@ -2113,7 +2113,7 @@
         "CvaTitle":  "HP EliteBook 7x0/8x0 G3 Windows 10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "20.12.31",
@@ -2141,7 +2141,7 @@
         "CvaTitle":  "HP Elite/ZBook 8x0 G4 Windows 10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "21.06.15",
@@ -2169,7 +2169,7 @@
         "CvaTitle":  "HP Elite/ZBook 8x0 G5 Windows 10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "21.06.15",
@@ -2197,7 +2197,7 @@
         "CvaTitle":  "HP Elite/ZBook 8x0 G5 Windows 10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "21.06.09",
@@ -2225,7 +2225,7 @@
         "CvaTitle":  "HP Elite/ZBook 8x0 G6 Windows 10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "21.06.09",
@@ -2253,7 +2253,7 @@
         "CvaTitle":  "HP Elite/ZBook 8x0 G6 Windows 10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "21.05.03",
@@ -2281,7 +2281,7 @@
         "CvaTitle":  "HP Elite/ZBook 8x0 G7 Windows 10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "22.03.03",
@@ -2289,9 +2289,9 @@
         "Name":  "HP Elite ZBook 8x0 G8 Win11 sp138604",
         "Model":  "EliteBook 840 G8 Notebook PC",
         "SystemId":  [
-                         "8AB3",
+                         "8AB8",
                          "880D",
-                         "8AB8"
+                         "8AB3"
                      ],
         "SoftPaqId":  "sp138604",
         "OSId":  "4298",
@@ -2311,7 +2311,7 @@
         "CvaTitle":  "HP Elite/ZBook 8x0 G8 Windows 11 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "21.06.21",
@@ -2339,7 +2339,7 @@
         "CvaTitle":  "HP EliteBook 840r G4 Windows 10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "21.05.25",
@@ -2367,7 +2367,7 @@
         "CvaTitle":  "HP EliteBook 8x5 G7 Windows 10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "21.11.26",
@@ -2395,7 +2395,7 @@
         "CvaTitle":  "HP EliteBook 8x5 G8 Windows 11 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "21.06.15",
@@ -2423,7 +2423,7 @@
         "CvaTitle":  "HP Elite/ZBook 8x0 G5 Windows 10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "21.06.21",
@@ -2451,7 +2451,7 @@
         "CvaTitle":  "HP EliteBook 840r G4 Windows 10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "21.06.21",
@@ -2479,7 +2479,7 @@
         "CvaTitle":  "HP EliteBook 840r G4 Windows 10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "19.12.30",
@@ -2507,7 +2507,7 @@
         "CvaTitle":  "HP EliteBook 7x0/8x0 G3 Windows 10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "20.12.31",
@@ -2535,7 +2535,7 @@
         "CvaTitle":  "HP Elite/ZBook 8x0 G4 Windows 10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "18.11.14",
@@ -2563,7 +2563,7 @@
         "CvaTitle":  "HP EliteBook 7x0/8x0 G1 Windows 10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "19.05.28",
@@ -2591,7 +2591,7 @@
         "CvaTitle":  "HP Elite/ZBook 7x/8x G2 Windows 10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "19.12.30",
@@ -2619,7 +2619,7 @@
         "CvaTitle":  "HP EliteBook 7x0/8x0 G3 Windows 10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "20.12.31",
@@ -2647,7 +2647,7 @@
         "CvaTitle":  "HP Elite/ZBook 8x0 G4 Windows 10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "21.06.15",
@@ -2675,7 +2675,7 @@
         "CvaTitle":  "HP Elite/ZBook 8x0 G5 Windows 10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "21.06.09",
@@ -2703,7 +2703,7 @@
         "CvaTitle":  "HP Elite/ZBook 8x0 G6 Windows 10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "21.05.03",
@@ -2731,7 +2731,7 @@
         "CvaTitle":  "HP Elite/ZBook 8x0 G7 Windows 10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "22.03.03",
@@ -2759,7 +2759,7 @@
         "CvaTitle":  "HP Elite/ZBook 8x0 G8 Windows 11 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "21.05.25",
@@ -2787,7 +2787,7 @@
         "CvaTitle":  "HP EliteBook 8x5 G7 Windows 10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "21.11.26",
@@ -2815,7 +2815,7 @@
         "CvaTitle":  "HP EliteBook 8x5 G8 Windows 11 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "19.05.29",
@@ -2843,7 +2843,7 @@
         "CvaTitle":  "HP EliteBook Folio 1020 G1 Windows 10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "19.05.29",
@@ -2871,7 +2871,7 @@
         "CvaTitle":  "HP EliteBook Folio 1020 G1 Windows 10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "19.05.29",
@@ -2899,7 +2899,7 @@
         "CvaTitle":  "HP EliteBook Folio 1020 G1 Windows 10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "18.11.14",
@@ -2927,7 +2927,7 @@
         "CvaTitle":  "HP EliteBook 1040 G1 Windows 10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "19.05.28",
@@ -2955,7 +2955,7 @@
         "CvaTitle":  "HP EliteBook 1040 G2 Windows 10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "19.05.29",
@@ -2983,7 +2983,7 @@
         "CvaTitle":  "HP Elite Folio 9480m Windows 10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "20.07.06",
@@ -3011,7 +3011,7 @@
         "CvaTitle":  "HP Elite Folio G1 Windows 10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "19.05.29",
@@ -3039,7 +3039,7 @@
         "CvaTitle":  "HP EliteBook Revolve 810 G3 Windows 10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "20.12.30",
@@ -3067,7 +3067,7 @@
         "CvaTitle":  "HP EliteBook x360 1020 G2 Windows 10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "21.01.06",
@@ -3095,7 +3095,7 @@
         "CvaTitle":  "HP EliteBook x360 1030 G2 Windows 10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "21.06.14",
@@ -3123,7 +3123,7 @@
         "CvaTitle":  "HP EliteBook x360 1030 G3 Win 10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "21.06.07",
@@ -3151,7 +3151,7 @@
         "CvaTitle":  "HP EliteBook x360 1030 G4 Windows 10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "21.05.25",
@@ -3179,7 +3179,7 @@
         "CvaTitle":  "HP EliteBook x360 1030/40 G7 Windows 10 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "22.04.07",
@@ -3207,7 +3207,7 @@
         "CvaTitle":  "HP EliteBook x360 1030/40 G8 Windows 11 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "21.06.14",
@@ -3235,7 +3235,7 @@
         "CvaTitle":  "HP EliteBook x360 1040 G5 Windows 10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "21.06.07",
@@ -3263,7 +3263,7 @@
         "CvaTitle":  "HP EliteBook x360 1040 G6 Windows 10 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "21.05.25",
@@ -3291,7 +3291,7 @@
         "CvaTitle":  "HP EliteBook x360 1030/40 G7 Windows 10 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "22.04.07",
@@ -3319,7 +3319,7 @@
         "CvaTitle":  "HP EliteBook x360 1030/40 G8 Windows 11 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "21.06.18",
@@ -3347,7 +3347,7 @@
         "CvaTitle":  "HP EliteBook x360 830 G5 Windows 10 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "21.06.18",
@@ -3375,7 +3375,7 @@
         "CvaTitle":  "HP EliteBook x360 830 G6 Windows 10 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "21.05.21",
@@ -3403,35 +3403,35 @@
         "CvaTitle":  "HP EliteBook x360 830 G7 Windows 10 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  "21.11.23",
+        "ReleaseDate":  "22.04.21",
         "Manufacturer":  "HP",
-        "Name":  "HP EliteBook x360 830 G8 Win11 sp136303",
+        "Name":  "HP EliteBook x360 830 G8 Win11 sp140015",
         "Model":  "EliteBook x360 830 G8 Notebook PC",
         "SystemId":  [
                          "8847"
                      ],
-        "SoftPaqId":  "sp136303",
+        "SoftPaqId":  "sp140015",
         "OSId":  "4298",
         "OSName":  "Windows 11 64-bit, 21H2",
         "Architecture":  "64-bit",
         "ProductType":  "Notebooks \u0026 Tablets",
         "SoftPaqName":  "HP EliteBook x360 830 G8 Windows 11 Driver Pack",
-        "Version":  "1.00 A 1",
+        "Version":  "2.00 A 1",
         "Category":  "Manageability - Driver Pack",
-        "Url":  "https://ftp.hp.com/pub/softpaq/sp136001-136500/sp136303.exe",
-        "FileName":  "sp136303.exe",
-        "Size":  "1106733728",
-        "MD5":  "29b3a7d44c616037e8cda41418cc914b",
-        "SHA256":  "1B5BF3F1F2C780DA16EF3AC091D14F79AA9F5A15BF2BDAA2116496A4244396A4",
-        "CvaFileUrl":  "https://ftp.hp.com/pub/softpaq/sp136001-136500/sp136303.cva",
-        "ReleaseNotesUrl":  "https://ftp.hp.com/pub/softpaq/sp136001-136500/sp136303.html",
+        "Url":  "https://ftp.hp.com/pub/softpaq/sp140001-140500/sp140015.exe",
+        "FileName":  "sp140015.exe",
+        "Size":  "1106683000",
+        "MD5":  "9d4d4ba015c65b7b648ad06d7a1fc937",
+        "SHA256":  "311573E39277591F0A79843E15FC73B483C2C7428C05BB2D4C4D7F47E259F892",
+        "CvaFileUrl":  "https://ftp.hp.com/pub/softpaq/sp140001-140500/sp140015.cva",
+        "ReleaseNotesUrl":  "https://ftp.hp.com/pub/softpaq/sp140001-140500/sp140015.html",
         "CvaTitle":  "HP EliteBook x360 830 G8 Windows 11 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "18.11.14",
@@ -3459,7 +3459,7 @@
         "CvaTitle":  "HP ElitePro 400-800 G1 PC Win10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "21.06.25",
@@ -3467,8 +3467,8 @@
         "Name":  "HP EliteDesk 705 G4 Win10 sp114270",
         "Model":  "EliteDesk 705 35W G4 Desktop Mini PC",
         "SystemId":  [
-                         "8464",
-                         "83e9"
+                         "83e9",
+                         "8464"
                      ],
         "SoftPaqId":  "sp114270",
         "OSId":  "4297",
@@ -3488,7 +3488,7 @@
         "CvaTitle":  "HP EliteDesk 705 G4 Win10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "21.06.25",
@@ -3517,7 +3517,7 @@
         "CvaTitle":  "HP EliteDesk 705 G4 Win10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "19.05.29",
@@ -3545,7 +3545,7 @@
         "CvaTitle":  "HP ElitePro 400-800 G1 PC Win10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "19.05.29",
@@ -3573,7 +3573,7 @@
         "CvaTitle":  "HP ElitePro 400-800 G1 PC Win10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "19.05.29",
@@ -3601,7 +3601,7 @@
         "CvaTitle":  "HP ElitePro 400-800 G1 PC Win10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "20.07.03",
@@ -3629,7 +3629,7 @@
         "CvaTitle":  "HP EliteDesk 705 G2 Win10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "20.07.03",
@@ -3657,7 +3657,7 @@
         "CvaTitle":  "HP EliteDesk 705 G2 Win10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "20.07.03",
@@ -3685,7 +3685,7 @@
         "CvaTitle":  "HP EliteDesk 705 G2 Win10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "20.12.28",
@@ -3713,7 +3713,7 @@
         "CvaTitle":  "HP EliteDesk 705 G3 Windows 10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "20.12.28",
@@ -3721,8 +3721,8 @@
         "Name":  "HP EliteDesk 705 G3 Win10 sp111957",
         "Model":  "EliteDesk 705 G3 Microtower PC",
         "SystemId":  [
-                         "8265",
-                         "835b"
+                         "835b",
+                         "8265"
                      ],
         "SoftPaqId":  "sp111957",
         "OSId":  "4288",
@@ -3742,7 +3742,7 @@
         "CvaTitle":  "HP EliteDesk 705 G3 Windows 10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "20.12.28",
@@ -3771,7 +3771,7 @@
         "CvaTitle":  "HP EliteDesk 705 G3 Windows 10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "21.06.25",
@@ -3801,7 +3801,7 @@
         "CvaTitle":  "HP EliteDesk 705 G4 Win10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "21.06.25",
@@ -3809,9 +3809,9 @@
         "Name":  "HP EliteDesk 705 G4 Win10 sp114270",
         "Model":  "EliteDesk 705 G4 Small Form Factor PC",
         "SystemId":  [
+                         "83e8",
                          "8462",
-                         "8463",
-                         "83e8"
+                         "8463"
                      ],
         "SoftPaqId":  "sp114270",
         "OSId":  "4297",
@@ -3831,7 +3831,7 @@
         "CvaTitle":  "HP EliteDesk 705 G4 Win10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "21.06.17",
@@ -3859,7 +3859,7 @@
         "CvaTitle":  "HP EliteDesk 705 G5 DM Win10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "21.06.17",
@@ -3888,7 +3888,7 @@
         "CvaTitle":  "HP EliteDesk 705 G5 Windows 10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "19.12.19",
@@ -3916,7 +3916,7 @@
         "CvaTitle":  "HP ElitePro 600/800 G2 PC Win10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "19.12.19",
@@ -3924,8 +3924,8 @@
         "Name":  "HP ElitePro 600 800 G2 PC Win10 sp100851",
         "Model":  "EliteDesk 800 35W G2 Desktop Mini PC",
         "SystemId":  [
-                         "8056",
-                         "8055"
+                         "8055",
+                         "8056"
                      ],
         "SoftPaqId":  "sp100851",
         "OSId":  "4283",
@@ -3945,7 +3945,7 @@
         "CvaTitle":  "HP ElitePro 600/800 G2 PC Win10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "20.12.28",
@@ -3973,7 +3973,7 @@
         "CvaTitle":  "HP ElitePro 600/800 G3 PC Windows 10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "20.12.28",
@@ -4001,7 +4001,7 @@
         "CvaTitle":  "HP ElitePro 600/800 G3 PC Windows 10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "21.06.28",
@@ -4009,8 +4009,8 @@
         "Name":  "HP ElitePro 400 600 800 G4 PC Win10 sp114276",
         "Model":  "EliteDesk 800 35W G4 Desktop Mini PC",
         "SystemId":  [
-                         "845a",
                          "83e2",
+                         "845a",
                          "8409"
                      ],
         "SoftPaqId":  "sp114276",
@@ -4031,7 +4031,7 @@
         "CvaTitle":  "HP ElitePro 400/600/800 G4 PC Win10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "19.12.19",
@@ -4059,7 +4059,7 @@
         "CvaTitle":  "HP ElitePro 600/800 G2 PC Win10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "20.12.28",
@@ -4087,7 +4087,7 @@
         "CvaTitle":  "HP ElitePro 600/800 G3 PC Windows 10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "21.06.28",
@@ -4095,38 +4095,8 @@
         "Name":  "HP ElitePro 400 600 800 G4 PC Win10 sp114276",
         "Model":  "EliteDesk 800 65W G4 Desktop Mini PC",
         "SystemId":  [
-                         "83e2",
-                         "845a",
-                         "8409"
-                     ],
-        "SoftPaqId":  "sp114276",
-        "OSId":  "4297",
-        "OSName":  "Windows 10 64-bit, 21H2",
-        "Architecture":  "64-bit",
-        "ProductType":  "Desktops",
-        "SoftPaqName":  "HP ElitePro 400/600/800 G4 PC Win10 x64 Driver Pack",
-        "Version":  "14.00 A 1",
-        "Category":  "Manageability - Driver Pack",
-        "Url":  "https://ftp.hp.com/pub/softpaq/sp114001-114500/sp114276.exe",
-        "FileName":  "sp114276.exe",
-        "Size":  "1496484384",
-        "MD5":  "fe508c14282d24f1ef3fc7bdedd81b53",
-        "SHA256":  "3864E2875EA9FD345F24C36ABB5A40359861D5700A902F3EB007245ACC4FB1E5",
-        "CvaFileUrl":  "https://ftp.hp.com/pub/softpaq/sp114001-114500/sp114276.cva",
-        "ReleaseNotesUrl":  "https://ftp.hp.com/pub/softpaq/sp114001-114500/sp114276.html",
-        "CvaTitle":  "HP ElitePro 400/600/800 G4 PC Win10 x64 Driver Pack"
-    },
-    {
-        "CatalogVersion":  "22.04.27",
-        "Status":  null,
-        "Component":  "DriverPack",
-        "ReleaseDate":  "21.06.28",
-        "Manufacturer":  "HP",
-        "Name":  "HP ElitePro 400 600 800 G4 PC Win10 sp114276",
-        "Model":  "EliteDesk 800 95W G4 Desktop Mini PC",
-        "SystemId":  [
-                         "83e2",
                          "8409",
+                         "83e2",
                          "845a"
                      ],
         "SoftPaqId":  "sp114276",
@@ -4147,7 +4117,37 @@
         "CvaTitle":  "HP ElitePro 400/600/800 G4 PC Win10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
+        "Status":  null,
+        "Component":  "DriverPack",
+        "ReleaseDate":  "21.06.28",
+        "Manufacturer":  "HP",
+        "Name":  "HP ElitePro 400 600 800 G4 PC Win10 sp114276",
+        "Model":  "EliteDesk 800 95W G4 Desktop Mini PC",
+        "SystemId":  [
+                         "8409",
+                         "83e2",
+                         "845a"
+                     ],
+        "SoftPaqId":  "sp114276",
+        "OSId":  "4297",
+        "OSName":  "Windows 10 64-bit, 21H2",
+        "Architecture":  "64-bit",
+        "ProductType":  "Desktops",
+        "SoftPaqName":  "HP ElitePro 400/600/800 G4 PC Win10 x64 Driver Pack",
+        "Version":  "14.00 A 1",
+        "Category":  "Manageability - Driver Pack",
+        "Url":  "https://ftp.hp.com/pub/softpaq/sp114001-114500/sp114276.exe",
+        "FileName":  "sp114276.exe",
+        "Size":  "1496484384",
+        "MD5":  "fe508c14282d24f1ef3fc7bdedd81b53",
+        "SHA256":  "3864E2875EA9FD345F24C36ABB5A40359861D5700A902F3EB007245ACC4FB1E5",
+        "CvaFileUrl":  "https://ftp.hp.com/pub/softpaq/sp114001-114500/sp114276.cva",
+        "ReleaseNotesUrl":  "https://ftp.hp.com/pub/softpaq/sp114001-114500/sp114276.html",
+        "CvaTitle":  "HP ElitePro 400/600/800 G4 PC Win10 x64 Driver Pack"
+    },
+    {
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "18.11.14",
@@ -4175,7 +4175,7 @@
         "CvaTitle":  "HP ElitePro 400-800 G1 PC Win10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "19.05.29",
@@ -4203,7 +4203,7 @@
         "CvaTitle":  "HP ElitePro 400-800 G1 PC Win10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "19.05.29",
@@ -4231,7 +4231,7 @@
         "CvaTitle":  "HP ElitePro 400-800 G1 PC Win10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "18.11.14",
@@ -4259,7 +4259,7 @@
         "CvaTitle":  "HP ElitePro 400-800 G1 PC Win10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "19.12.19",
@@ -4287,7 +4287,7 @@
         "CvaTitle":  "HP ElitePro 600/800 G2 PC Win10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "19.12.19",
@@ -4315,7 +4315,7 @@
         "CvaTitle":  "HP ElitePro 600/800 G2 PC Win10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "20.12.28",
@@ -4343,7 +4343,7 @@
         "CvaTitle":  "HP ElitePro 600/800 G3 PC Windows 10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "20.12.28",
@@ -4371,7 +4371,7 @@
         "CvaTitle":  "HP ElitePro 600/800 G3 PC Windows 10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "21.06.28",
@@ -4399,7 +4399,7 @@
         "CvaTitle":  "HP ElitePro 400/600/800 G4 PC Win10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "21.06.28",
@@ -4427,7 +4427,7 @@
         "CvaTitle":  "HP ElitePro 400/600/800 G4 PC Win10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "21.06.14",
@@ -4457,7 +4457,7 @@
         "CvaTitle":  "HP ElitePro 4/6/800 G5 PC Windows 10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "21.06.14",
@@ -4485,7 +4485,7 @@
         "CvaTitle":  "HP ElitePro 4/6/800 G5 PC Windows 10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "21.06.14",
@@ -4513,7 +4513,7 @@
         "CvaTitle":  "HP ElitePro 4/6/800 G5 PC Windows 10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "21.11.23",
@@ -4521,9 +4521,9 @@
         "Name":  "HP ElitePro 4 6 800 G6 DM SFF Win11 sp136313",
         "Model":  "EliteDesk 800 G6 Desktop Mini PC",
         "SystemId":  [
-                         "870f",
                          "8710",
-                         "8711"
+                         "8711",
+                         "870f"
                      ],
         "SoftPaqId":  "sp136313",
         "OSId":  "4298",
@@ -4543,7 +4543,7 @@
         "CvaTitle":  "HP ElitePro 4/6/800 G6 DM/SFF Win 11 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "21.11.24",
@@ -4572,7 +4572,7 @@
         "CvaTitle":  "HP ElitePro 4/6/8x0 G6/7 PC Win 11 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "21.11.24",
@@ -4601,7 +4601,7 @@
         "CvaTitle":  "HP ElitePro 4/6/8x0 G6/7 PC Win 11 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "21.11.30",
@@ -4630,7 +4630,7 @@
         "CvaTitle":  "HP ElitePro 6/800 G8 DM Win 11 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "21.11.19",
@@ -4658,7 +4658,7 @@
         "CvaTitle":  "HP ElitePro 6/8x0 G8 PC Win 11 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "21.11.19",
@@ -4686,7 +4686,7 @@
         "CvaTitle":  "HP ElitePro 6/8x0 G8 PC Win 11 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "21.11.23",
@@ -4715,7 +4715,7 @@
         "CvaTitle":  "HP ElitePro 4/805 G6 DM Win 11 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "21.11.23",
@@ -4743,7 +4743,7 @@
         "CvaTitle":  "HP ElitePro 4/805 G6 SFF Win 11 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "21.11.26",
@@ -4771,7 +4771,7 @@
         "CvaTitle":  "HP ElitePro 4/805 G8 DM Windows 11 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "21.11.23",
@@ -4799,7 +4799,7 @@
         "CvaTitle":  "HP ElitePro 4/805 G8 SFF Windows 11 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "18.11.14",
@@ -4827,7 +4827,7 @@
         "CvaTitle":  "HP ElitePro 400-800 G1 PC Win10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "19.12.19",
@@ -4855,7 +4855,7 @@
         "CvaTitle":  "HP ElitePro 600/800 G2 PC Win10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "20.12.28",
@@ -4883,7 +4883,7 @@
         "CvaTitle":  "HP ElitePro 600/800 G3 PC Windows 10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "21.06.28",
@@ -4911,7 +4911,7 @@
         "CvaTitle":  "HP ElitePro 400/600/800 G4 PC Win10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "21.06.14",
@@ -4939,7 +4939,7 @@
         "CvaTitle":  "HP ElitePro 4/6/800 G5 PC Windows 10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "21.11.24",
@@ -4947,8 +4947,8 @@
         "Name":  "HP ElitePro 4 6 8x0 G6 7 PC Win11 sp136330",
         "Model":  "EliteDesk 880 G6 Tower PC",
         "SystemId":  [
-                         "870C",
-                         "870B"
+                         "870B",
+                         "870C"
                      ],
         "SoftPaqId":  "sp136330",
         "OSId":  "4298",
@@ -4968,7 +4968,7 @@
         "CvaTitle":  "HP ElitePro 4/6/8x0 G6/7 PC Win 11 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "21.11.19",
@@ -4996,7 +4996,7 @@
         "CvaTitle":  "HP ElitePro 6/8x0 G8 PC Win 11 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "20.12.15",
@@ -5024,7 +5024,7 @@
         "CvaTitle":  "HP EliteOne 1000 G1 AiO Windows 10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "20.12.15",
@@ -5052,7 +5052,7 @@
         "CvaTitle":  "HP EliteOne 1000 G1 AiO Windows 10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "20.12.15",
@@ -5080,7 +5080,7 @@
         "CvaTitle":  "HP EliteOne 1000 G1 AiO Windows 10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "20.12.15",
@@ -5108,7 +5108,7 @@
         "CvaTitle":  "HP EliteOne 1000 G1 AiO Windows 10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "21.06.29",
@@ -5136,7 +5136,7 @@
         "CvaTitle":  "HP EliteOne 1000 G2 AiO Win10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "21.06.29",
@@ -5164,7 +5164,7 @@
         "CvaTitle":  "HP EliteOne 1000 G2 AiO Win10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "21.06.29",
@@ -5192,7 +5192,7 @@
         "CvaTitle":  "HP EliteOne 1000 G2 AiO Win10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "21.06.29",
@@ -5220,7 +5220,7 @@
         "CvaTitle":  "HP EliteOne 1000 G2 AiO Win10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "19.05.29",
@@ -5248,7 +5248,7 @@
         "CvaTitle":  "HP ElitePro 400-800 G1 PC Win10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "20.07.03",
@@ -5276,7 +5276,7 @@
         "CvaTitle":  "HP EliteDesk 705 G2 Win10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "19.05.29",
@@ -5304,7 +5304,7 @@
         "CvaTitle":  "HP ElitePro 400-800 G1 PC Win10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "18.11.14",
@@ -5332,7 +5332,7 @@
         "CvaTitle":  "HP ElitePro 400-800 G1 PC Win10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "20.07.05",
@@ -5361,7 +5361,7 @@
         "CvaTitle":  "HP ElitePro 600/800 G2 AiO Win10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "20.07.05",
@@ -5369,8 +5369,8 @@
         "Name":  "HP ElitePro 600 800 G2 AiO Win10 sp105920",
         "Model":  "EliteOne 800 G2 23-inch Touch All-in-One PC",
         "SystemId":  [
-                         "8058",
-                         "8057"
+                         "8057",
+                         "8058"
                      ],
         "SoftPaqId":  "sp105920",
         "OSId":  "4285",
@@ -5390,7 +5390,7 @@
         "CvaTitle":  "HP ElitePro 600/800 G2 AiO Win10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "20.12.28",
@@ -5418,7 +5418,7 @@
         "CvaTitle":  "HP ElitePro 600/800 G3 PC Windows 10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "20.12.28",
@@ -5426,38 +5426,8 @@
         "Name":  "HP ElitePro 600 800 G3 PC Win10 sp111958",
         "Model":  "EliteOne 800 G3 23.8-inch Non-Touch All-in-One PC",
         "SystemId":  [
-                         "829b",
-                         "929C",
-                         "829c"
-                     ],
-        "SoftPaqId":  "sp111958",
-        "OSId":  "4288",
-        "OSName":  "Windows 10 64-bit, 20H2",
-        "Architecture":  "64-bit",
-        "ProductType":  "Desktops",
-        "SoftPaqName":  "HP ElitePro 600/800 G3 PC Windows 10 x64 Driver Pack",
-        "Version":  "20.0 A 1",
-        "Category":  "Manageability - Driver Pack",
-        "Url":  "https://ftp.hp.com/pub/softpaq/sp111501-112000/sp111958.exe",
-        "FileName":  "sp111958.exe",
-        "Size":  "941719952",
-        "MD5":  "131008b12c785e2a71c3a5eb14168fe3",
-        "SHA256":  "A17BA7A8E0D6F85D1DEE884401D5819CF9859F09DA0EBABC67F633D03334264E",
-        "CvaFileUrl":  "https://ftp.hp.com/pub/softpaq/sp111501-112000/sp111958.cva",
-        "ReleaseNotesUrl":  "https://ftp.hp.com/pub/softpaq/sp111501-112000/sp111958.html",
-        "CvaTitle":  "HP ElitePro 600/800 G3 PC Windows 10 x64 Driver Pack"
-    },
-    {
-        "CatalogVersion":  "22.04.27",
-        "Status":  null,
-        "Component":  "DriverPack",
-        "ReleaseDate":  "20.12.28",
-        "Manufacturer":  "HP",
-        "Name":  "HP ElitePro 600 800 G3 PC Win10 sp111958",
-        "Model":  "EliteOne 800 G3 23.8-inch Non-Touch All-in-One PC (ENERGY STAR)",
-        "SystemId":  [
-                         "829b",
                          "829c",
+                         "829b",
                          "929C"
                      ],
         "SoftPaqId":  "sp111958",
@@ -5478,7 +5448,37 @@
         "CvaTitle":  "HP ElitePro 600/800 G3 PC Windows 10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
+        "Status":  null,
+        "Component":  "DriverPack",
+        "ReleaseDate":  "20.12.28",
+        "Manufacturer":  "HP",
+        "Name":  "HP ElitePro 600 800 G3 PC Win10 sp111958",
+        "Model":  "EliteOne 800 G3 23.8-inch Non-Touch All-in-One PC (ENERGY STAR)",
+        "SystemId":  [
+                         "829c",
+                         "829b",
+                         "929C"
+                     ],
+        "SoftPaqId":  "sp111958",
+        "OSId":  "4288",
+        "OSName":  "Windows 10 64-bit, 20H2",
+        "Architecture":  "64-bit",
+        "ProductType":  "Desktops",
+        "SoftPaqName":  "HP ElitePro 600/800 G3 PC Windows 10 x64 Driver Pack",
+        "Version":  "20.0 A 1",
+        "Category":  "Manageability - Driver Pack",
+        "Url":  "https://ftp.hp.com/pub/softpaq/sp111501-112000/sp111958.exe",
+        "FileName":  "sp111958.exe",
+        "Size":  "941719952",
+        "MD5":  "131008b12c785e2a71c3a5eb14168fe3",
+        "SHA256":  "A17BA7A8E0D6F85D1DEE884401D5819CF9859F09DA0EBABC67F633D03334264E",
+        "CvaFileUrl":  "https://ftp.hp.com/pub/softpaq/sp111501-112000/sp111958.cva",
+        "ReleaseNotesUrl":  "https://ftp.hp.com/pub/softpaq/sp111501-112000/sp111958.html",
+        "CvaTitle":  "HP ElitePro 600/800 G3 PC Windows 10 x64 Driver Pack"
+    },
+    {
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "20.12.28",
@@ -5508,7 +5508,7 @@
         "CvaTitle":  "HP ElitePro 600/800 G3 PC Windows 10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "21.06.24",
@@ -5536,7 +5536,7 @@
         "CvaTitle":  "HP ElitePro 400/600/800 G4 AiO Win10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "21.06.24",
@@ -5564,7 +5564,7 @@
         "CvaTitle":  "HP ElitePro 400/600/800 G4 AiO Win10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "21.06.24",
@@ -5592,7 +5592,7 @@
         "CvaTitle":  "HP ElitePro 400/600/800 G4 AiO Win10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "21.06.24",
@@ -5620,7 +5620,7 @@
         "CvaTitle":  "HP ElitePro 400/600/800 G4 AiO Win10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "21.06.24",
@@ -5648,7 +5648,7 @@
         "CvaTitle":  "HP ElitePro 400/600/800 G4 AiO Win10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "21.06.23",
@@ -5657,8 +5657,8 @@
         "Model":  "EliteOne 800 G5 23.8-in Healthcare Edition All-in-One",
         "SystemId":  [
                          "85eb",
-                         "85a0",
-                         "859f"
+                         "859f",
+                         "85a0"
                      ],
         "SoftPaqId":  "sp114248",
         "OSId":  "4297",
@@ -5678,7 +5678,7 @@
         "CvaTitle":  "HP ElitePro 4/6/800 G5 AiO Windows 10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "21.06.23",
@@ -5686,8 +5686,8 @@
         "Name":  "HP ElitePro 4 6 800 G5 AiO Win10 sp114248",
         "Model":  "EliteOne 800 G5 23.8-inch All-in-One",
         "SystemId":  [
-                         "85a0",
                          "85eb",
+                         "85a0",
                          "859f"
                      ],
         "SoftPaqId":  "sp114248",
@@ -5708,7 +5708,7 @@
         "CvaTitle":  "HP ElitePro 4/6/800 G5 AiO Windows 10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "21.11.19",
@@ -5737,7 +5737,7 @@
         "CvaTitle":  "HP EliteOne 800 G6 AiO Win 11 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "21.11.19",
@@ -5745,8 +5745,8 @@
         "Name":  "HP EliteOne 800 G6 AiO Win11 sp136259",
         "Model":  "EliteOne 800 G6 27 All-in-One PC",
         "SystemId":  [
-                         "874D",
-                         "874E"
+                         "874E",
+                         "874D"
                      ],
         "SoftPaqId":  "sp136259",
         "OSId":  "4298",
@@ -5766,7 +5766,7 @@
         "CvaTitle":  "HP EliteOne 800 G6 AiO Win 11 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "21.11.19",
@@ -5794,7 +5794,7 @@
         "CvaTitle":  "HP EliteOne 800 G8 AIO Win 11 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "21.11.19",
@@ -5822,7 +5822,7 @@
         "CvaTitle":  "HP EliteOne 800 G8 AIO Win 11 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "22.01.27",
@@ -5830,8 +5830,8 @@
         "Name":  "HP EliteOne 8x0 27 G9 AIO Win11 sp138243",
         "Model":  "EliteOne 840 23.8 inch G9 All-in-One Desktop PC",
         "SystemId":  [
-                         "8957",
-                         "895f"
+                         "895f",
+                         "8957"
                      ],
         "SoftPaqId":  "sp138243",
         "OSId":  "4298",
@@ -5851,7 +5851,7 @@
         "CvaTitle":  "HP EliteOne 8x0 27 G9 AIO Win 11 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "22.01.27",
@@ -5880,7 +5880,7 @@
         "CvaTitle":  "HP EliteOne 8x0 27 G9 AIO Win 11 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "16.09.09",
@@ -5908,7 +5908,7 @@
         "CvaTitle":  "HP ElitePad 1000 G2 Windows 10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "21.11.16",
@@ -5936,7 +5936,7 @@
         "CvaTitle":  "HP Engage Flex Mini Win11 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "21.11.24",
@@ -5964,7 +5964,7 @@
         "CvaTitle":  "HP Engage Flex Pro G1 Win11 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "21.11.24",
@@ -5992,7 +5992,7 @@
         "CvaTitle":  "HP Engage Flex Pro G1 Win11 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "21.11.29",
@@ -6020,7 +6020,7 @@
         "CvaTitle":  "HP Engage Go 10 Mobile System Win11 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "21.01.29",
@@ -6048,91 +6048,91 @@
         "CvaTitle":  "HP Engage Go G1 Win10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  "21.02.03",
+        "ReleaseDate":  "22.03.04",
         "Manufacturer":  "HP",
-        "Name":  "HP Engage One G1 Win10 sp112581",
+        "Name":  "HP Engage One G1 Win10 sp138619",
         "Model":  "Engage One All-in-One System Model 141",
         "SystemId":  [
                          "830a"
                      ],
-        "SoftPaqId":  "sp112581",
-        "OSId":  "4288",
-        "OSName":  "Windows 10 64-bit, 20H2",
+        "SoftPaqId":  "sp138619",
+        "OSId":  "4297",
+        "OSName":  "Windows 10 64-bit, 21H2",
         "Architecture":  "64-bit",
         "ProductType":  "POS Systems/Retail Solutions",
         "SoftPaqName":  "HP Engage One G1 Win10 x64 Driver Pack",
-        "Version":  "9.00 A 1",
+        "Version":  "10.00 A 1",
         "Category":  "Manageability - Driver Pack",
-        "Url":  "https://ftp.hp.com/pub/softpaq/sp112501-113000/sp112581.exe",
-        "FileName":  "sp112581.exe",
-        "Size":  "450215776",
-        "MD5":  "03ccdbbf87c8a7772bb15582dc127f64",
-        "SHA256":  "A7C664370B372581B8C6D14B44383EE5A53FCB0A7A7E84D57C18E85EAD7A9A46",
-        "CvaFileUrl":  "https://ftp.hp.com/pub/softpaq/sp112501-113000/sp112581.cva",
-        "ReleaseNotesUrl":  "https://ftp.hp.com/pub/softpaq/sp112501-113000/sp112581.html",
+        "Url":  "https://ftp.hp.com/pub/softpaq/sp138501-139000/sp138619.exe",
+        "FileName":  "sp138619.exe",
+        "Size":  "560469912",
+        "MD5":  "797d6896aaed552d68e52b83e1cb3a3d",
+        "SHA256":  "40426666807C4D0FE8CDEDDBA177F60397B9591E9DD823AF5232714E48E4B426",
+        "CvaFileUrl":  "https://ftp.hp.com/pub/softpaq/sp138501-139000/sp138619.cva",
+        "ReleaseNotesUrl":  "https://ftp.hp.com/pub/softpaq/sp138501-139000/sp138619.html",
         "CvaTitle":  "HP Engage One G1 Win10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  "21.02.03",
+        "ReleaseDate":  "22.03.04",
         "Manufacturer":  "HP",
-        "Name":  "HP Engage One G1 Win10 sp112581",
+        "Name":  "HP Engage One G1 Win10 sp138619",
         "Model":  "Engage One All-in-One System Model 143",
         "SystemId":  [
                          "830a"
                      ],
-        "SoftPaqId":  "sp112581",
-        "OSId":  "4288",
-        "OSName":  "Windows 10 64-bit, 20H2",
+        "SoftPaqId":  "sp138619",
+        "OSId":  "4297",
+        "OSName":  "Windows 10 64-bit, 21H2",
         "Architecture":  "64-bit",
         "ProductType":  "POS Systems/Retail Solutions",
         "SoftPaqName":  "HP Engage One G1 Win10 x64 Driver Pack",
-        "Version":  "9.00 A 1",
+        "Version":  "10.00 A 1",
         "Category":  "Manageability - Driver Pack",
-        "Url":  "https://ftp.hp.com/pub/softpaq/sp112501-113000/sp112581.exe",
-        "FileName":  "sp112581.exe",
-        "Size":  "450215776",
-        "MD5":  "03ccdbbf87c8a7772bb15582dc127f64",
-        "SHA256":  "A7C664370B372581B8C6D14B44383EE5A53FCB0A7A7E84D57C18E85EAD7A9A46",
-        "CvaFileUrl":  "https://ftp.hp.com/pub/softpaq/sp112501-113000/sp112581.cva",
-        "ReleaseNotesUrl":  "https://ftp.hp.com/pub/softpaq/sp112501-113000/sp112581.html",
+        "Url":  "https://ftp.hp.com/pub/softpaq/sp138501-139000/sp138619.exe",
+        "FileName":  "sp138619.exe",
+        "Size":  "560469912",
+        "MD5":  "797d6896aaed552d68e52b83e1cb3a3d",
+        "SHA256":  "40426666807C4D0FE8CDEDDBA177F60397B9591E9DD823AF5232714E48E4B426",
+        "CvaFileUrl":  "https://ftp.hp.com/pub/softpaq/sp138501-139000/sp138619.cva",
+        "ReleaseNotesUrl":  "https://ftp.hp.com/pub/softpaq/sp138501-139000/sp138619.html",
         "CvaTitle":  "HP Engage One G1 Win10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  "21.02.03",
+        "ReleaseDate":  "22.03.04",
         "Manufacturer":  "HP",
-        "Name":  "HP Engage One G1 Win10 sp112581",
+        "Name":  "HP Engage One G1 Win10 sp138619",
         "Model":  "Engage One All-in-One System Model 145",
         "SystemId":  [
                          "830a"
                      ],
-        "SoftPaqId":  "sp112581",
-        "OSId":  "4288",
-        "OSName":  "Windows 10 64-bit, 20H2",
+        "SoftPaqId":  "sp138619",
+        "OSId":  "4297",
+        "OSName":  "Windows 10 64-bit, 21H2",
         "Architecture":  "64-bit",
         "ProductType":  "POS Systems/Retail Solutions",
         "SoftPaqName":  "HP Engage One G1 Win10 x64 Driver Pack",
-        "Version":  "9.00 A 1",
+        "Version":  "10.00 A 1",
         "Category":  "Manageability - Driver Pack",
-        "Url":  "https://ftp.hp.com/pub/softpaq/sp112501-113000/sp112581.exe",
-        "FileName":  "sp112581.exe",
-        "Size":  "450215776",
-        "MD5":  "03ccdbbf87c8a7772bb15582dc127f64",
-        "SHA256":  "A7C664370B372581B8C6D14B44383EE5A53FCB0A7A7E84D57C18E85EAD7A9A46",
-        "CvaFileUrl":  "https://ftp.hp.com/pub/softpaq/sp112501-113000/sp112581.cva",
-        "ReleaseNotesUrl":  "https://ftp.hp.com/pub/softpaq/sp112501-113000/sp112581.html",
+        "Url":  "https://ftp.hp.com/pub/softpaq/sp138501-139000/sp138619.exe",
+        "FileName":  "sp138619.exe",
+        "Size":  "560469912",
+        "MD5":  "797d6896aaed552d68e52b83e1cb3a3d",
+        "SHA256":  "40426666807C4D0FE8CDEDDBA177F60397B9591E9DD823AF5232714E48E4B426",
+        "CvaFileUrl":  "https://ftp.hp.com/pub/softpaq/sp138501-139000/sp138619.cva",
+        "ReleaseNotesUrl":  "https://ftp.hp.com/pub/softpaq/sp138501-139000/sp138619.html",
         "CvaTitle":  "HP Engage One G1 Win10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "21.11.30",
@@ -6160,7 +6160,7 @@
         "CvaTitle":  "HP Engage One Essential AIO IoT10 2019 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "21.11.23",
@@ -6189,7 +6189,7 @@
         "CvaTitle":  "HP Engage One Pro AIO Win11 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "18.11.02",
@@ -6217,7 +6217,7 @@
         "CvaTitle":  "HP MP9 G2 IoT10 2016 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "21.08.24",
@@ -6246,7 +6246,7 @@
         "CvaTitle":  "HP MP9 G4 Win10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "17.02.24",
@@ -6274,7 +6274,7 @@
         "CvaTitle":  "HP Pro Tablet 608 G1 Windows 10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "19.05.29",
@@ -6302,7 +6302,7 @@
         "CvaTitle":  "HP Pro x2 612 G1 Tablet Windows 10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "19.05.29",
@@ -6330,7 +6330,7 @@
         "CvaTitle":  "HP Pro x2 612 G1 Tablet Windows 10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "19.05.29",
@@ -6358,7 +6358,7 @@
         "CvaTitle":  "HP Pro x2 612 G1 Tablet Windows 10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "21.01.05",
@@ -6386,7 +6386,7 @@
         "CvaTitle":  "HP Pro x2 612 G2 Windows 10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "21.01.05",
@@ -6414,7 +6414,7 @@
         "CvaTitle":  "HP Pro x2 612 G2 Windows 10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "22.03.07",
@@ -6442,7 +6442,7 @@
         "CvaTitle":  "HP Pro x360 435 13.3 G9 Windows 11 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "22.04.06",
@@ -6470,7 +6470,7 @@
         "CvaTitle":  "HP ProBook x360 Fortis 11 G9 Windows 11 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "18.11.12",
@@ -6498,7 +6498,7 @@
         "CvaTitle":  "HP ProBook 4x0 G2 Windows 10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "20.01.02",
@@ -6526,7 +6526,7 @@
         "CvaTitle":  "HP ProBook 4x0 G3 Windows 10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "20.06.30",
@@ -6534,8 +6534,8 @@
         "Name":  "HP ProBook 4x0 G4 Win10 sp105834",
         "Model":  "ProBook 430 G4 Notebook PC",
         "SystemId":  [
-                         "822c",
-                         "8301"
+                         "8301",
+                         "822c"
                      ],
         "SoftPaqId":  "sp105834",
         "OSId":  "4285",
@@ -6555,7 +6555,7 @@
         "CvaTitle":  "HP ProBook 4x0 G4 Windows 10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "21.06.30",
@@ -6583,7 +6583,7 @@
         "CvaTitle":  "HP ProBook 4x0 G5 Windows 10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "21.06.09",
@@ -6611,7 +6611,7 @@
         "CvaTitle":  "HP ProBook 4x0 G6/ZHAN G2 Windows 10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "21.06.17",
@@ -6639,7 +6639,7 @@
         "CvaTitle":  "HP ProBook 4x0 G7/ZHAN G3 Windows 10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "21.11.17",
@@ -6649,8 +6649,8 @@
         "SystemId":  [
                          "8A83",
                          "8A73",
-                         "87DF",
-                         "8806"
+                         "8806",
+                         "87DF"
                      ],
         "SoftPaqId":  "sp136227",
         "OSId":  "4298",
@@ -6670,7 +6670,7 @@
         "CvaTitle":  "HP ProBook 4x0 G8/ZHAN G4 Windows 11 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "22.03.02",
@@ -6699,7 +6699,7 @@
         "CvaTitle":  "HP EB 4/6x0 G9 ZHAN Windows 11 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "18.11.12",
@@ -6707,8 +6707,8 @@
         "Name":  "HP ProBook 4x0 G2 Win10 sp92635",
         "Model":  "ProBook 440 G2 Notebook PC",
         "SystemId":  [
-                         "2247",
-                         "224a"
+                         "224a",
+                         "2247"
                      ],
         "SoftPaqId":  "sp92635",
         "OSId":  "4263",
@@ -6728,7 +6728,7 @@
         "CvaTitle":  "HP ProBook 4x0 G2 Windows 10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "20.01.02",
@@ -6756,7 +6756,7 @@
         "CvaTitle":  "HP ProBook 4x0 G3 Windows 10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "20.06.30",
@@ -6784,7 +6784,7 @@
         "CvaTitle":  "HP ProBook 4x0 G4 Windows 10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "21.06.30",
@@ -6812,7 +6812,7 @@
         "CvaTitle":  "HP ProBook 4x0 G5 Windows 10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "21.06.09",
@@ -6840,7 +6840,7 @@
         "CvaTitle":  "HP ProBook 4x0 G6/ZHAN G2 Windows 10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "21.06.17",
@@ -6868,7 +6868,7 @@
         "CvaTitle":  "HP ProBook 4x0 G7/ZHAN G3 Windows 10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "21.11.17",
@@ -6876,12 +6876,12 @@
         "Name":  "HP ProBook 4x0 G8 ZHAN G4 Win11 sp136227",
         "Model":  "ProBook 440 G8 Notebook PC",
         "SystemId":  [
-                         "87E0",
-                         "8A74",
+                         "8A76",
+                         "8A86",
                          "8807",
                          "8A84",
-                         "8A76",
-                         "8A86"
+                         "8A74",
+                         "87E0"
                      ],
         "SoftPaqId":  "sp136227",
         "OSId":  "4298",
@@ -6901,7 +6901,7 @@
         "CvaTitle":  "HP ProBook 4x0 G8/ZHAN G4 Windows 11 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "21.12.24",
@@ -6930,7 +6930,7 @@
         "CvaTitle":  "HP ZHAN/Pro/Elite 4/6x5 Windows 11 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "18.11.12",
@@ -6938,8 +6938,8 @@
         "Name":  "HP ProBook 4x5 G2 Win10 sp92636",
         "Model":  "ProBook 445 G2 Notebook PC",
         "SystemId":  [
-                         "2236",
-                         "2234"
+                         "2234",
+                         "2236"
                      ],
         "SoftPaqId":  "sp92636",
         "OSId":  "4263",
@@ -6959,7 +6959,7 @@
         "CvaTitle":  "HP ProBook 4x5 G2 Windows 10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "21.06.11",
@@ -6987,7 +6987,7 @@
         "CvaTitle":  "HP ProBook 4x5 G6 Windows 10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "21.06.29",
@@ -7015,7 +7015,7 @@
         "CvaTitle":  "HP ProBook 4x5 G7 Windows 10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "21.11.17",
@@ -7044,7 +7044,7 @@
         "CvaTitle":  "HP ProBook 4x5 G8 Windows 11 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "21.06.11",
@@ -7072,7 +7072,7 @@
         "CvaTitle":  "HP ProBook 4x5R G6 Windows 10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "20.01.02",
@@ -7100,7 +7100,7 @@
         "CvaTitle":  "HP ProBook 4x0 G3 Windows 10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "22.03.02",
@@ -7108,8 +7108,8 @@
         "Name":  "HP EB 4 6x0 G9 ZHAN Win11 sp138584",
         "Model":  "ProBook 450 15.6 inch G9 Notebook PC",
         "SystemId":  [
-                         "8978",
-                         "8AA1"
+                         "8AA1",
+                         "8978"
                      ],
         "SoftPaqId":  "sp138584",
         "OSId":  "4298",
@@ -7129,7 +7129,7 @@
         "CvaTitle":  "HP EB 4/6x0 G9 ZHAN Windows 11 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "18.11.12",
@@ -7158,7 +7158,7 @@
         "CvaTitle":  "HP ProBook 4x0 G2 Windows 10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "20.01.02",
@@ -7186,7 +7186,7 @@
         "CvaTitle":  "HP ProBook 4x0 G3 Windows 10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "20.06.30",
@@ -7214,7 +7214,7 @@
         "CvaTitle":  "HP ProBook 4x0 G4 Windows 10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "21.06.30",
@@ -7242,7 +7242,7 @@
         "CvaTitle":  "HP ProBook 4x0 G5 Windows 10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "21.06.09",
@@ -7270,7 +7270,7 @@
         "CvaTitle":  "HP ProBook 4x0 G6/ZHAN G2 Windows 10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "21.06.17",
@@ -7298,7 +7298,7 @@
         "CvaTitle":  "HP ProBook 4x0 G7/ZHAN G3 Windows 10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "21.11.17",
@@ -7307,10 +7307,10 @@
         "Model":  "ProBook 450 G8 Notebook PC",
         "SystemId":  [
                          "8A85",
+                         "8A75",
                          "87E1",
                          "8A77",
-                         "8808",
-                         "8A75"
+                         "8808"
                      ],
         "SoftPaqId":  "sp136227",
         "OSId":  "4298",
@@ -7330,7 +7330,7 @@
         "CvaTitle":  "HP ProBook 4x0 G8/ZHAN G4 Windows 11 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "21.12.24",
@@ -7359,7 +7359,7 @@
         "CvaTitle":  "HP ZHAN/Pro/Elite 4/6x5 Windows 11 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "18.11.12",
@@ -7388,7 +7388,7 @@
         "CvaTitle":  "HP ProBook 4x5 G2 Windows 10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "20.01.02",
@@ -7417,7 +7417,7 @@
         "CvaTitle":  "HP ProBook 455 G3 Windows 10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "21.01.07",
@@ -7425,8 +7425,8 @@
         "Name":  "HP ProBook 455 G4 Win10 sp112154",
         "Model":  "ProBook 455 G4 Notebook PC",
         "SystemId":  [
-                         "823c",
-                         "823e"
+                         "823e",
+                         "823c"
                      ],
         "SoftPaqId":  "sp112154",
         "OSId":  "4288",
@@ -7446,7 +7446,7 @@
         "CvaTitle":  "HP ProBook 455 G4 Windows 10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "20.12.23",
@@ -7475,7 +7475,7 @@
         "CvaTitle":  "HP ProBook 455 G5 Windows 10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "21.06.11",
@@ -7503,7 +7503,7 @@
         "CvaTitle":  "HP ProBook 4x5 G6 Windows 10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "21.06.29",
@@ -7531,7 +7531,7 @@
         "CvaTitle":  "HP ProBook 4x5 G7 Windows 10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "21.11.17",
@@ -7539,8 +7539,8 @@
         "Name":  "HP ProBook 4x5 G8 Win11 sp136223",
         "Model":  "ProBook 455 G8 Notebook PC",
         "SystemId":  [
-                         "8A90",
-                         "8864"
+                         "8864",
+                         "8A90"
                      ],
         "SoftPaqId":  "sp136223",
         "OSId":  "4298",
@@ -7560,7 +7560,7 @@
         "CvaTitle":  "HP ProBook 4x5 G8 Windows 11 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "21.06.11",
@@ -7588,7 +7588,7 @@
         "CvaTitle":  "HP ProBook 4x5R G6 Windows 10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "18.11.12",
@@ -7617,7 +7617,7 @@
         "CvaTitle":  "HP ProBook 4x0 G2 Windows 10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "20.01.02",
@@ -7645,7 +7645,7 @@
         "CvaTitle":  "HP ProBook 4x0 G3 Windows 10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "20.06.30",
@@ -7673,7 +7673,7 @@
         "CvaTitle":  "HP ProBook 4x0 G4 Windows 10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "21.06.30",
@@ -7701,7 +7701,7 @@
         "CvaTitle":  "HP ProBook 4x0 G5 Windows 10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "21.11.16",
@@ -7730,7 +7730,7 @@
         "CvaTitle":  "HP Probook 6x0 G8 Windows 11 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "22.02.15",
@@ -7758,7 +7758,7 @@
         "CvaTitle":  "HP ProBook 635 Aero G7 Windows 10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "21.11.29",
@@ -7786,7 +7786,7 @@
         "CvaTitle":  "HP ProBook 635 Aero G8 Windows 11 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "19.05.29",
@@ -7794,10 +7794,10 @@
         "Name":  "HP ProBook 6x0 G1 Win10 sp96757",
         "Model":  "ProBook 640 G1 Notebook PC",
         "SystemId":  [
+                         "2102",
                          "1994",
                          "2101",
-                         "1993",
-                         "2102"
+                         "1993"
                      ],
         "SoftPaqId":  "sp96757",
         "OSId":  "4279",
@@ -7817,7 +7817,7 @@
         "CvaTitle":  "HP ProBook 6x0 G1 Windows 10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "19.12.30",
@@ -7845,7 +7845,7 @@
         "CvaTitle":  "HP Probook 6xx G2 Windows 10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "20.06.23",
@@ -7873,7 +7873,7 @@
         "CvaTitle":  "HP Probook 6x0 G3 Windows 10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "21.06.15",
@@ -7901,7 +7901,7 @@
         "CvaTitle":  "HP Probook 6x0 G4 Windows 10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "21.06.07",
@@ -7929,7 +7929,7 @@
         "CvaTitle":  "HP Probook 6x0 G5 Windows 10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "21.05.19",
@@ -7957,7 +7957,7 @@
         "CvaTitle":  "HP Probook 6x0 G7 Windows 10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "21.11.16",
@@ -7965,8 +7965,8 @@
         "Name":  "HP Probook 6x0 G8 Win11 sp136221",
         "Model":  "ProBook 640 G8 Notebook PC",
         "SystemId":  [
-                         "87EA",
-                         "87ED"
+                         "87ED",
+                         "87EA"
                      ],
         "SoftPaqId":  "sp136221",
         "OSId":  "4298",
@@ -7986,7 +7986,7 @@
         "CvaTitle":  "HP Probook 6x0 G8 Windows 11 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "19.05.29",
@@ -8014,7 +8014,7 @@
         "CvaTitle":  "HP ProBook 6x5 G1 Windows 10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "19.12.30",
@@ -8042,7 +8042,7 @@
         "CvaTitle":  "HP Probook 6xx G2 Windows 10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "21.01.05",
@@ -8070,7 +8070,7 @@
         "CvaTitle":  "HP Probook 6x5 G3 Windows 10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "21.06.22",
@@ -8098,7 +8098,7 @@
         "CvaTitle":  "HP Probook 6x5 G4 Windows 10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "19.05.29",
@@ -8127,7 +8127,7 @@
         "CvaTitle":  "HP ProBook 6x0 G1 Windows 10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "19.12.30",
@@ -8156,7 +8156,7 @@
         "CvaTitle":  "HP Probook 6xx G2 Windows 10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "20.06.23",
@@ -8184,7 +8184,7 @@
         "CvaTitle":  "HP Probook 6x0 G3 Windows 10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "20.06.23",
@@ -8212,7 +8212,7 @@
         "CvaTitle":  "HP Probook 6x0 G3 Windows 10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "20.06.23",
@@ -8240,7 +8240,7 @@
         "CvaTitle":  "HP Probook 6x0 G3 Windows 10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "21.06.15",
@@ -8269,7 +8269,7 @@
         "CvaTitle":  "HP Probook 6x0 G4 Windows 10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "21.06.07",
@@ -8297,7 +8297,7 @@
         "CvaTitle":  "HP Probook 6x0 G5 Windows 10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "21.05.19",
@@ -8325,7 +8325,7 @@
         "CvaTitle":  "HP Probook 6x0 G7 Windows 10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "21.11.16",
@@ -8354,7 +8354,7 @@
         "CvaTitle":  "HP Probook 6x0 G8 Windows 11 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "19.05.29",
@@ -8382,7 +8382,7 @@
         "CvaTitle":  "HP ProBook 6x5 G1 Windows 10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "19.12.30",
@@ -8410,7 +8410,7 @@
         "CvaTitle":  "HP Probook 6xx G2 Windows 10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "21.01.05",
@@ -8438,7 +8438,7 @@
         "CvaTitle":  "HP Probook 6x5 G3 Windows 10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "22.04.06",
@@ -8466,7 +8466,7 @@
         "CvaTitle":  "HP ProBook x360 Fortis 11 G9 Windows 11 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "19.12.02",
@@ -8494,7 +8494,7 @@
         "CvaTitle":  "HP ProBook x360 11 G1 Windows 10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "19.12.02",
@@ -8522,7 +8522,7 @@
         "CvaTitle":  "HP ProBook x360 11 G1 Windows 10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "20.06.22",
@@ -8550,7 +8550,7 @@
         "CvaTitle":  "HP ProBook x360 11 G2 Windows 10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "20.12.21",
@@ -8578,7 +8578,7 @@
         "CvaTitle":  "HP ProBook x360 11 G3 Windows 10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "21.06.08",
@@ -8606,35 +8606,35 @@
         "CvaTitle":  "HP ProBook x360 11 G4 Windows 10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  "22.03.15",
+        "ReleaseDate":  "22.04.18",
         "Manufacturer":  "HP",
-        "Name":  "HP ProBook x360 11 G5 Win10 sp138924",
+        "Name":  "HP ProBook x360 11 G5 Win11 sp139872",
         "Model":  "ProBook x360 11 G5 EE Notebook PC",
         "SystemId":  [
                          "86cf"
                      ],
-        "SoftPaqId":  "sp138924",
-        "OSId":  "4297",
-        "OSName":  "Windows 10 64-bit, 21H2",
+        "SoftPaqId":  "sp139872",
+        "OSId":  "4298",
+        "OSName":  "Windows 11 64-bit, 21H2",
         "Architecture":  "64-bit",
         "ProductType":  "Notebooks \u0026 Tablets",
-        "SoftPaqName":  "HP ProBook x360 11 G5 Windows 10 x64 Driver Pack",
-        "Version":  "8.00 A 1",
+        "SoftPaqName":  "HP ProBook x360 11 G5 Windows 11 Driver Pack",
+        "Version":  "1.00 A 1",
         "Category":  "Manageability - Driver Pack",
-        "Url":  "https://ftp.hp.com/pub/softpaq/sp138501-139000/sp138924.exe",
-        "FileName":  "sp138924.exe",
-        "Size":  "1027158216",
-        "MD5":  "05daa381c73a83f699c0973e1b831d51",
-        "SHA256":  "351D70784534CDFC1D8BD55E083EB1774945065FCB3459A73F9F61809747B550",
-        "CvaFileUrl":  "https://ftp.hp.com/pub/softpaq/sp138501-139000/sp138924.cva",
-        "ReleaseNotesUrl":  "https://ftp.hp.com/pub/softpaq/sp138501-139000/sp138924.html",
-        "CvaTitle":  "HP ProBook x360 11 G5 Windows 10 x64 Driver Pack"
+        "Url":  "https://ftp.hp.com/pub/softpaq/sp139501-140000/sp139872.exe",
+        "FileName":  "sp139872.exe",
+        "Size":  "1047919984",
+        "MD5":  "b89b10c96ae4a7b6e8a8fe794c3a6ac1",
+        "SHA256":  "11D26B223735EBA5B43222965BBCE15C6BC2E436837DEA021A178114744054AC",
+        "CvaFileUrl":  "https://ftp.hp.com/pub/softpaq/sp139501-140000/sp139872.cva",
+        "ReleaseNotesUrl":  "https://ftp.hp.com/pub/softpaq/sp139501-140000/sp139872.html",
+        "CvaTitle":  "HP ProBook x360 11 G5 Windows 11 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "21.09.15",
@@ -8662,7 +8662,7 @@
         "CvaTitle":  "HP ProBook x360 11 G6 Windows 10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "21.11.18",
@@ -8690,7 +8690,7 @@
         "CvaTitle":  "HP ProBook x360 11 G7 Windows 11 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "21.06.03",
@@ -8718,7 +8718,7 @@
         "CvaTitle":  "HP ProBook x360 435 G7 Windows 10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "21.11.26",
@@ -8746,7 +8746,7 @@
         "CvaTitle":  "HP ProBook x360 435 G8 Windows 11 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "21.06.22",
@@ -8774,7 +8774,7 @@
         "CvaTitle":  "HP ProBook x360 440 G1 Windows 10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "19.05.29",
@@ -8802,7 +8802,7 @@
         "CvaTitle":  "HP ElitePro 400-800 G1 PC Win10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "19.05.29",
@@ -8810,8 +8810,8 @@
         "Name":  "HP ElitePro 400 800 G1 PC Win10 sp96758",
         "Model":  "ProDesk 400 G1 Microtower PC",
         "SystemId":  [
-                         "198e",
-                         "21f6"
+                         "21f6",
+                         "198e"
                      ],
         "SoftPaqId":  "sp96758",
         "OSId":  "4279",
@@ -8831,7 +8831,7 @@
         "CvaTitle":  "HP ElitePro 400-800 G1 PC Win10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "18.11.14",
@@ -8859,7 +8859,7 @@
         "CvaTitle":  "HP ElitePro 400-800 G1 PC Win10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "19.12.19",
@@ -8887,7 +8887,7 @@
         "CvaTitle":  "HP ElitePro 600/800 G2 PC Win10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "19.05.01",
@@ -8915,7 +8915,7 @@
         "CvaTitle":  "HP ElitePro 4/6/800 G2 PC Win 10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "20.12.28",
@@ -8943,7 +8943,7 @@
         "CvaTitle":  "HP ElitePro 600/800 G3 PC Windows 10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "19.01.11",
@@ -8971,7 +8971,7 @@
         "CvaTitle":  "HP ElitePro 600/800 G3 PC Win10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "19.01.11",
@@ -8999,7 +8999,7 @@
         "CvaTitle":  "HP ElitePro 600/800 G3 PC Win10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "21.06.28",
@@ -9027,7 +9027,7 @@
         "CvaTitle":  "HP ElitePro 400/600/800 G4 PC Win10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "20.12.29",
@@ -9035,9 +9035,9 @@
         "Name":  "HP ProDesk 4x0 G4 SFF MT Win10 sp111982",
         "Model":  "ProDesk 400 G4 Microtower PC",
         "SystemId":  [
+                         "846e",
                          "82a4",
-                         "82a1",
-                         "846e"
+                         "82a1"
                      ],
         "SoftPaqId":  "sp111982",
         "OSId":  "4288",
@@ -9057,7 +9057,7 @@
         "CvaTitle":  "HP ProDesk 4x0 G4 SFF/MT Windows 10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "20.12.29",
@@ -9085,7 +9085,7 @@
         "CvaTitle":  "HP ProDesk 4x0 G4 SFF/MT Windows 10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "21.06.14",
@@ -9113,7 +9113,7 @@
         "CvaTitle":  "HP ElitePro 4/6/800 G5 PC Windows 10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "21.06.23",
@@ -9121,8 +9121,8 @@
         "Name":  "HP ProDesk 4x0 G5 SFF MT Win10 sp114246",
         "Model":  "ProDesk 400 G5 Microtower PC",
         "SystemId":  [
-                         "83f0",
-                         "83f1"
+                         "83f1",
+                         "83f0"
                      ],
         "SoftPaqId":  "sp114246",
         "OSId":  "4297",
@@ -9142,7 +9142,7 @@
         "CvaTitle":  "HP ProDesk 4x0 G5 SFF/MT Win10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "21.06.23",
@@ -9170,7 +9170,7 @@
         "CvaTitle":  "HP ProDesk 4x0 G5 SFF/MT Win10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "22.03.08",
@@ -9198,7 +9198,7 @@
         "CvaTitle":  "HP ElitePro 4/6/800 G6 Desktop Mini Win 10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "21.02.12",
@@ -9227,7 +9227,7 @@
         "CvaTitle":  "HP ProDesk 4x0 G6 SFF/MT Win 10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "21.02.12",
@@ -9255,7 +9255,7 @@
         "CvaTitle":  "HP ProDesk 4x0 G6 SFF/MT Win 10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "21.11.24",
@@ -9283,7 +9283,7 @@
         "CvaTitle":  "HP ElitePro 4/6/8x0 G6/7 PC Win 11 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "21.12.16",
@@ -9311,7 +9311,7 @@
         "CvaTitle":  "HP ElitePro 4/6/800 G6 DM/SFF Win 11 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "21.06.24",
@@ -9339,7 +9339,7 @@
         "CvaTitle":  "HP ProDesk 405 G4 DM Win 10 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "21.06.24",
@@ -9367,7 +9367,7 @@
         "CvaTitle":  "HP ProDesk 405 G4 SFF Win 10 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "21.11.23",
@@ -9396,7 +9396,7 @@
         "CvaTitle":  "HP ElitePro 4/805 G6 SFF Win 11 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "21.11.23",
@@ -9425,7 +9425,7 @@
         "CvaTitle":  "HP ElitePro 4/805 G6 DM Win 11 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "21.11.26",
@@ -9433,8 +9433,8 @@
         "Name":  "HP ElitePro 4 805 G8 DM Win11 sp136360",
         "Model":  "ProDesk 405 G8 Desktop Mini PC",
         "SystemId":  [
-                         "8882",
-                         "8968"
+                         "8968",
+                         "8882"
                      ],
         "SoftPaqId":  "sp136360",
         "OSId":  "4298",
@@ -9454,7 +9454,7 @@
         "CvaTitle":  "HP ElitePro 4/805 G8 DM Windows 11 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "21.11.23",
@@ -9482,7 +9482,7 @@
         "CvaTitle":  "HP ElitePro 4/805 G8 SFF Windows 11 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "18.11.14",
@@ -9510,7 +9510,7 @@
         "CvaTitle":  "HP ElitePro 400-800 G1 PC Win10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "19.01.11",
@@ -9538,7 +9538,7 @@
         "CvaTitle":  "HP ElitePro 600/800 G3 PC Win10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "20.12.29",
@@ -9568,7 +9568,7 @@
         "CvaTitle":  "HP ProDesk 4x0 G4 SFF/MT Windows 10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "21.06.23",
@@ -9597,7 +9597,7 @@
         "CvaTitle":  "HP ProDesk 4x0 G5 SFF/MT Win10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "21.02.12",
@@ -9626,7 +9626,7 @@
         "CvaTitle":  "HP ProDesk 4x0 G6 SFF/MT Win 10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "21.11.24",
@@ -9654,7 +9654,7 @@
         "CvaTitle":  "HP ElitePro 4/6/8x0 G6/7 PC Win 11 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "18.11.14",
@@ -9682,7 +9682,7 @@
         "CvaTitle":  "HP ElitePro 400-800 G1 PC Win10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "19.01.11",
@@ -9710,7 +9710,7 @@
         "CvaTitle":  "HP ElitePro 600/800 G3 PC Win10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "18.11.14",
@@ -9738,7 +9738,7 @@
         "CvaTitle":  "HP ElitePro 400-800 G1 PC Win10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "19.01.11",
@@ -9766,7 +9766,7 @@
         "CvaTitle":  "HP ElitePro 600/800 G3 PC Win10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "19.05.29",
@@ -9794,7 +9794,7 @@
         "CvaTitle":  "HP ElitePro 400-800 G1 PC Win10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "18.11.14",
@@ -9822,7 +9822,7 @@
         "CvaTitle":  "HP ElitePro 400-800 G1 PC Win10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "18.11.14",
@@ -9850,7 +9850,7 @@
         "CvaTitle":  "HP ElitePro 400-800 G1 PC Win10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "19.12.19",
@@ -9878,7 +9878,7 @@
         "CvaTitle":  "HP ElitePro 600/800 G2 PC Win10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "19.12.19",
@@ -9906,7 +9906,7 @@
         "CvaTitle":  "HP ElitePro 600/800 G2 PC Win10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "19.12.19",
@@ -9934,7 +9934,7 @@
         "CvaTitle":  "HP ElitePro 600/800 G2 PC Win10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "20.12.28",
@@ -9962,7 +9962,7 @@
         "CvaTitle":  "HP ElitePro 600/800 G3 PC Windows 10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "20.12.28",
@@ -9990,7 +9990,7 @@
         "CvaTitle":  "HP ElitePro 600/800 G3 PC Windows 10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "20.12.28",
@@ -9998,8 +9998,8 @@
         "Name":  "HP ElitePro 600 800 G3 PC Win10 sp111958",
         "Model":  "ProDesk 600 G3 Microtower PC",
         "SystemId":  [
-                         "82b3",
-                         "829d"
+                         "829d",
+                         "82b3"
                      ],
         "SoftPaqId":  "sp111958",
         "OSId":  "4288",
@@ -10019,7 +10019,7 @@
         "CvaTitle":  "HP ElitePro 600/800 G3 PC Windows 10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "20.12.28",
@@ -10048,7 +10048,7 @@
         "CvaTitle":  "HP ElitePro 600/800 G3 PC Windows 10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "21.06.28",
@@ -10076,7 +10076,7 @@
         "CvaTitle":  "HP ElitePro 400/600/800 G4 PC Win10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "21.06.28",
@@ -10105,7 +10105,7 @@
         "CvaTitle":  "HP ElitePro 400/600/800 G4 PC Win10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "21.06.28",
@@ -10113,8 +10113,8 @@
         "Name":  "HP ElitePro 400 600 800 G4 PC Win10 sp114276",
         "Model":  "ProDesk 600 G4 Microtower PC (with PCI slot)",
         "SystemId":  [
-                         "83ed",
-                         "83ec"
+                         "83ec",
+                         "83ed"
                      ],
         "SoftPaqId":  "sp114276",
         "OSId":  "4297",
@@ -10134,7 +10134,7 @@
         "CvaTitle":  "HP ElitePro 400/600/800 G4 PC Win10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "21.06.28",
@@ -10162,7 +10162,7 @@
         "CvaTitle":  "HP ElitePro 400/600/800 G4 PC Win10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "21.06.14",
@@ -10190,7 +10190,7 @@
         "CvaTitle":  "HP ElitePro 4/6/800 G5 PC Windows 10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "21.06.14",
@@ -10198,8 +10198,8 @@
         "Name":  "HP ElitePro 4 6 800 G5 PC Win10 sp114190",
         "Model":  "ProDesk 600 G5 Microtower PC",
         "SystemId":  [
-                         "8596",
-                         "861a"
+                         "861a",
+                         "8596"
                      ],
         "SoftPaqId":  "sp114190",
         "OSId":  "4297",
@@ -10219,7 +10219,7 @@
         "CvaTitle":  "HP ElitePro 4/6/800 G5 PC Windows 10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "21.06.14",
@@ -10248,7 +10248,7 @@
         "CvaTitle":  "HP ElitePro 4/6/800 G5 PC Windows 10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "21.06.14",
@@ -10276,7 +10276,7 @@
         "CvaTitle":  "HP ElitePro 4/6/800 G5 PC Windows 10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "21.11.23",
@@ -10304,7 +10304,7 @@
         "CvaTitle":  "HP ElitePro 4/6/800 G6 DM/SFF Win 11 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "21.11.24",
@@ -10332,7 +10332,7 @@
         "CvaTitle":  "HP ElitePro 4/6/8x0 G6/7 PC Win 11 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "21.11.24",
@@ -10360,7 +10360,7 @@
         "CvaTitle":  "HP ElitePro 4/6/8x0 G6/7 PC Win 11 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "21.12.16",
@@ -10388,7 +10388,7 @@
         "CvaTitle":  "HP ElitePro 4/6/800 G6 DM/SFF Win 11 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "18.11.14",
@@ -10416,7 +10416,7 @@
         "CvaTitle":  "HP ElitePro 400-800 G1 PC Win10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "19.12.19",
@@ -10444,7 +10444,7 @@
         "CvaTitle":  "HP ElitePro 600/800 G2 PC Win10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "20.12.28",
@@ -10452,8 +10452,8 @@
         "Name":  "HP ElitePro 600 800 G3 PC Win10 sp111958",
         "Model":  "ProDesk 680 G3 Microtower PC",
         "SystemId":  [
-                         "829d",
-                         "82b3"
+                         "82b3",
+                         "829d"
                      ],
         "SoftPaqId":  "sp111958",
         "OSId":  "4288",
@@ -10473,7 +10473,7 @@
         "CvaTitle":  "HP ElitePro 600/800 G3 PC Windows 10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "21.06.08",
@@ -10501,7 +10501,7 @@
         "CvaTitle":  "HP ProDesk 680 G4 MT Win 10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "21.06.28",
@@ -10509,8 +10509,8 @@
         "Name":  "HP ElitePro 400 600 800 G4 PC Win10 sp114276",
         "Model":  "ProDesk 680 G4 Microtower PC (with PCI slot)",
         "SystemId":  [
-                         "83ed",
-                         "83ec"
+                         "83ec",
+                         "83ed"
                      ],
         "SoftPaqId":  "sp114276",
         "OSId":  "4297",
@@ -10530,7 +10530,7 @@
         "CvaTitle":  "HP ElitePro 400/600/800 G4 PC Win10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "21.11.24",
@@ -10558,7 +10558,7 @@
         "CvaTitle":  "HP ElitePro 4/6/8x0 G6/7 PC Win 11 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "19.05.29",
@@ -10586,7 +10586,7 @@
         "CvaTitle":  "HP ElitePro 400-800 G1 PC Win10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "19.05.29",
@@ -10614,7 +10614,7 @@
         "CvaTitle":  "HP ElitePro 400-800 G1 PC Win10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "19.05.29",
@@ -10642,7 +10642,7 @@
         "CvaTitle":  "HP ElitePro 400-800 G1 PC Win10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "20.07.05",
@@ -10670,7 +10670,7 @@
         "CvaTitle":  "HP ElitePro 600/800 G2 AiO Win10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "20.07.05",
@@ -10698,7 +10698,7 @@
         "CvaTitle":  "HP ElitePro 600/800 G2 AiO Win10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "20.12.28",
@@ -10726,7 +10726,7 @@
         "CvaTitle":  "HP ElitePro 600/800 G3 PC Windows 10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "20.12.28",
@@ -10754,7 +10754,7 @@
         "CvaTitle":  "HP ElitePro 600/800 G3 PC Windows 10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "20.12.28",
@@ -10782,7 +10782,7 @@
         "CvaTitle":  "HP ElitePro 600/800 G3 PC Windows 10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "21.06.24",
@@ -10790,8 +10790,8 @@
         "Name":  "HP ElitePro 400 600 800 G4 AiO Win10 sp114256",
         "Model":  "ProOne 400 G4 20-inch HD+ Non-Touch All-in-One Business PC",
         "SystemId":  [
-                         "83eb",
-                         "83ea"
+                         "83ea",
+                         "83eb"
                      ],
         "SoftPaqId":  "sp114256",
         "OSId":  "4297",
@@ -10811,7 +10811,7 @@
         "CvaTitle":  "HP ElitePro 400/600/800 G4 AiO Win10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "21.06.24",
@@ -10840,7 +10840,7 @@
         "CvaTitle":  "HP ElitePro 400/600/800 G4 AiO Win10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "21.06.23",
@@ -10848,8 +10848,8 @@
         "Name":  "HP ElitePro 4 6 800 G5 AiO Win10 sp114248",
         "Model":  "ProOne 400 G5 20-inch All-in-One Business PC",
         "SystemId":  [
-                         "85a2",
-                         "85a1"
+                         "85a1",
+                         "85a2"
                      ],
         "SoftPaqId":  "sp114248",
         "OSId":  "4297",
@@ -10869,7 +10869,7 @@
         "CvaTitle":  "HP ElitePro 4/6/800 G5 AiO Windows 10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "21.06.23",
@@ -10898,7 +10898,7 @@
         "CvaTitle":  "HP ElitePro 4/6/800 G5 AiO Windows 10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "21.11.23",
@@ -10906,10 +10906,10 @@
         "Name":  "HP ProOne 4 600 G6 AiO Win11 sp136307",
         "Model":  "ProOne 400 G6 20 All-in-One PC",
         "SystemId":  [
+                         "871b",
                          "880f",
-                         "8810",
                          "871c",
-                         "871b"
+                         "8810"
                      ],
         "SoftPaqId":  "sp136307",
         "OSId":  "4298",
@@ -10929,7 +10929,7 @@
         "CvaTitle":  "HP ProOne 4/600 G6 AiO Win 11 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "21.11.23",
@@ -10939,8 +10939,8 @@
         "SystemId":  [
                          "871C",
                          "880F",
-                         "8810",
-                         "871B"
+                         "871B",
+                         "8810"
                      ],
         "SoftPaqId":  "sp136307",
         "OSId":  "4298",
@@ -10960,7 +10960,7 @@
         "CvaTitle":  "HP ProOne 4/600 G6 AiO Win 11 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "22.04.05",
@@ -10968,8 +10968,8 @@
         "Name":  "HP ProOne 440 23.8 G9 AIO Win11 sp139477",
         "Model":  "ProOne 440 23.8 inch G9 All-in-One Desktop PC",
         "SystemId":  [
-                         "8958",
-                         "8959"
+                         "8959",
+                         "8958"
                      ],
         "SoftPaqId":  "sp139477",
         "OSId":  "4298",
@@ -10989,7 +10989,7 @@
         "CvaTitle":  "HP ProOne 440 23.8 G9 AIO Win 11 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "21.06.24",
@@ -11018,7 +11018,7 @@
         "CvaTitle":  "HP ElitePro 400/600/800 G4 AiO Win10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "21.06.23",
@@ -11047,7 +11047,7 @@
         "CvaTitle":  "HP ElitePro 4/6/800 G5 AiO Windows 10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "21.11.23",
@@ -11078,7 +11078,7 @@
         "CvaTitle":  "HP ProOne 4/600 G6 AiO Win 11 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "20.12.28",
@@ -11106,7 +11106,7 @@
         "CvaTitle":  "HP ElitePro 600/800 G3 PC Windows 10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "18.11.14",
@@ -11134,7 +11134,7 @@
         "CvaTitle":  "HP ElitePro 400-800 G1 PC Win10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "20.07.05",
@@ -11162,7 +11162,7 @@
         "CvaTitle":  "HP ElitePro 600/800 G2 AiO Win10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "20.07.05",
@@ -11190,7 +11190,7 @@
         "CvaTitle":  "HP ElitePro 600/800 G2 AiO Win10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "20.06.22",
@@ -11218,7 +11218,7 @@
         "CvaTitle":  "HP ElitePro 600/800 G3 PC Win10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "21.06.24",
@@ -11247,7 +11247,7 @@
         "CvaTitle":  "HP ElitePro 400/600/800 G4 AiO Win10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "21.06.24",
@@ -11276,7 +11276,7 @@
         "CvaTitle":  "HP ElitePro 400/600/800 G4 AiO Win10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "21.06.23",
@@ -11284,8 +11284,8 @@
         "Name":  "HP ElitePro 4 6 800 G5 AiO Win10 sp114248",
         "Model":  "ProOne 600 G5 21.5-in All-in-One Business PC",
         "SystemId":  [
-                         "85a1",
-                         "85a2"
+                         "85a2",
+                         "85a1"
                      ],
         "SoftPaqId":  "sp114248",
         "OSId":  "4297",
@@ -11305,7 +11305,7 @@
         "CvaTitle":  "HP ElitePro 4/6/800 G5 AiO Windows 10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "21.11.23",
@@ -11334,7 +11334,7 @@
         "CvaTitle":  "HP ProOne 4/600 G6 AiO Win 11 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "19.05.30",
@@ -11362,7 +11362,7 @@
         "CvaTitle":  "HP RP5 5810 Win10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "21.02.08",
@@ -11391,7 +11391,7 @@
         "CvaTitle":  "HP RP9 G1 Win10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "21.02.08",
@@ -11420,7 +11420,7 @@
         "CvaTitle":  "HP RP9 G1 Win10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "21.02.08",
@@ -11449,7 +11449,7 @@
         "CvaTitle":  "HP RP9 G1 Win10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "21.02.08",
@@ -11457,8 +11457,8 @@
         "Name":  "HP RP9 G1 Win10 sp112600",
         "Model":  "RP9 G1 Retail System Model 9118",
         "SystemId":  [
-                         "8397",
-                         "8139"
+                         "8139",
+                         "8397"
                      ],
         "SoftPaqId":  "sp112600",
         "OSId":  "4288",
@@ -11478,7 +11478,7 @@
         "CvaTitle":  "HP RP9 G1 Win10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "17.06.23",
@@ -11486,8 +11486,8 @@
         "Name":  "HP Spectre Pro x360 G2 Win10 sp80891",
         "Model":  "Spectre Pro x360 G2 Convertible PC",
         "SystemId":  [
-                         "8198",
-                         "8197"
+                         "8197",
+                         "8198"
                      ],
         "SoftPaqId":  "sp80891",
         "OSId":  "4243",
@@ -11507,7 +11507,7 @@
         "CvaTitle":  "HP Spectre Pro x360 G2 Windows 10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "17.10.20",
@@ -11535,7 +11535,7 @@
         "CvaTitle":  "HP Sprout Pro Windows 10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "21.03.09",
@@ -11563,7 +11563,7 @@
         "CvaTitle":  "HP VR Backpack G2 Windows 10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "18.12.05",
@@ -11591,7 +11591,7 @@
         "CvaTitle":  "HP Z VR Backpack G1 Windows 10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "15.08.16",
@@ -11619,7 +11619,7 @@
         "CvaTitle":  "HP Z1 G2 Workstations Windows 10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "17.07.11",
@@ -11647,7 +11647,7 @@
         "CvaTitle":  "HP Z1G3 Windows 10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "21.06.14",
@@ -11675,7 +11675,7 @@
         "CvaTitle":  "HP ElitePro 4/6/800 G5 PC Windows 10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "21.11.24",
@@ -11704,7 +11704,7 @@
         "CvaTitle":  "HP ElitePro 4/6/8x0 G6/7 PC Win 11 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "21.11.19",
@@ -11732,7 +11732,7 @@
         "CvaTitle":  "HP ElitePro 6/8x0 G8 PC Win 11 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "22.01.24",
@@ -11760,7 +11760,7 @@
         "CvaTitle":  "HP Elite Tower/SFF 6x0/8x0 G9/Z1 Win 11 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "22.01.12",
@@ -11789,7 +11789,7 @@
         "CvaTitle":  "HP Z2G8 Windows 11 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "22.04.06",
@@ -11817,7 +11817,7 @@
         "CvaTitle":  "HP Z2G9 Windows 11 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "22.04.06",
@@ -11845,7 +11845,7 @@
         "CvaTitle":  "HP Z2G9 Windows 11 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "22.04.06",
@@ -11873,7 +11873,7 @@
         "CvaTitle":  "HP Z2G9 Windows 11 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "18.12.03",
@@ -11902,7 +11902,7 @@
         "CvaTitle":  "HP Z2 Mini G3 Windows 10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "21.06.25",
@@ -11931,7 +11931,7 @@
         "CvaTitle":  "HP Z2G4 Windows 10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "21.12.17",
@@ -11960,7 +11960,7 @@
         "CvaTitle":  "HP Z2G5 Windows 11 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "21.06.25",
@@ -11988,7 +11988,7 @@
         "CvaTitle":  "HP Z2G4 Windows 10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "21.12.17",
@@ -12017,7 +12017,7 @@
         "CvaTitle":  "HP Z2G5 Windows 11 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "22.01.12",
@@ -12046,7 +12046,7 @@
         "CvaTitle":  "HP Z2G8 Windows 11 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "21.06.25",
@@ -12074,7 +12074,7 @@
         "CvaTitle":  "HP Z2G4 Windows 10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "21.12.17",
@@ -12103,7 +12103,7 @@
         "CvaTitle":  "HP Z2G5 Windows 11 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "15.08.16",
@@ -12131,7 +12131,7 @@
         "CvaTitle":  "HP Z230 Workstations Windows 10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "15.08.16",
@@ -12159,7 +12159,7 @@
         "CvaTitle":  "HP Z230 Workstations Windows 10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "19.09.26",
@@ -12187,7 +12187,7 @@
         "CvaTitle":  "HP Z240 Windows 10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "19.09.26",
@@ -12215,7 +12215,7 @@
         "CvaTitle":  "HP Z240 Windows 10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "21.12.17",
@@ -12243,7 +12243,7 @@
         "CvaTitle":  "HP Z4G4 Windows 11 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "19.10.30",
@@ -12271,7 +12271,7 @@
         "CvaTitle":  "HP Z420, Z620, Z820 Windows 10 x86 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "18.05.09",
@@ -12299,7 +12299,7 @@
         "CvaTitle":  "HP Z440/Z640/Z840 Windows 10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "21.12.10",
@@ -12327,7 +12327,7 @@
         "CvaTitle":  "HP Z6/Z8 Windows 11 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "19.10.30",
@@ -12355,7 +12355,7 @@
         "CvaTitle":  "HP Z420, Z620, Z820 Windows 10 x86 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "18.05.09",
@@ -12383,7 +12383,7 @@
         "CvaTitle":  "HP Z440/Z640/Z840 Windows 10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "21.12.10",
@@ -12411,7 +12411,7 @@
         "CvaTitle":  "HP Z6/Z8 Windows 11 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "19.10.30",
@@ -12439,7 +12439,7 @@
         "CvaTitle":  "HP Z420, Z620, Z820 Windows 10 x86 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "18.05.09",
@@ -12467,7 +12467,7 @@
         "CvaTitle":  "HP Z440/Z640/Z840 Windows 10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "19.05.28",
@@ -12495,7 +12495,7 @@
         "CvaTitle":  "HP Elite/ZBook 7x/8x G2 Windows 10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "18.11.14",
@@ -12523,7 +12523,7 @@
         "CvaTitle":  "HP EliteBook 7x0/8x0 G1 Windows 10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "20.12.31",
@@ -12551,7 +12551,7 @@
         "CvaTitle":  "HP Elite/ZBook 8x0 G4 Windows 10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "21.06.15",
@@ -12579,7 +12579,7 @@
         "CvaTitle":  "HP Elite/ZBook 8x0 G5 Windows 10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "21.06.09",
@@ -12607,7 +12607,7 @@
         "CvaTitle":  "HP Elite/ZBook 8x0 G6 Windows 10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "19.05.29",
@@ -12635,7 +12635,7 @@
         "CvaTitle":  "HP ZBook 15/17 G2 Windows 10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "19.12.01",
@@ -12663,7 +12663,7 @@
         "CvaTitle":  "HP ZBook 15/17 G3 Windows 10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "20.12.30",
@@ -12691,7 +12691,7 @@
         "CvaTitle":  "HP ZBook/Studio 15/17 G4 Windows 10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "21.06.25",
@@ -12719,7 +12719,7 @@
         "CvaTitle":  "HP Zbook 15/17 G5 Windows 10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "21.06.04",
@@ -12747,7 +12747,7 @@
         "CvaTitle":  "HP ZBook 15/17 G6 Windows 10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "19.05.28",
@@ -12775,7 +12775,7 @@
         "CvaTitle":  "HP Elite/ZBook 7x/8x G2 Windows 10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "19.12.30",
@@ -12803,7 +12803,7 @@
         "CvaTitle":  "HP EliteBook 7x0/8x0 G3 Windows 10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "20.12.31",
@@ -12831,7 +12831,7 @@
         "CvaTitle":  "HP Elite/ZBook 8x0 G4 Windows 10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "21.06.15",
@@ -12859,7 +12859,7 @@
         "CvaTitle":  "HP Elite/ZBook 8x0 G5 Windows 10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "21.06.09",
@@ -12887,7 +12887,7 @@
         "CvaTitle":  "HP Elite/ZBook 8x0 G6 Windows 10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "21.10.19",
@@ -12915,7 +12915,7 @@
         "CvaTitle":  "HP ZBook 15v G5 Windows 10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "19.05.29",
@@ -12943,7 +12943,7 @@
         "CvaTitle":  "HP ZBook 15/17 G2 Windows 10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "19.12.01",
@@ -12971,7 +12971,7 @@
         "CvaTitle":  "HP ZBook 15/17 G3 Windows 10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "20.12.30",
@@ -12999,7 +12999,7 @@
         "CvaTitle":  "HP ZBook/Studio 15/17 G4 Windows 10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "21.06.25",
@@ -13027,7 +13027,7 @@
         "CvaTitle":  "HP Zbook 15/17 G5 Windows 10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "21.06.04",
@@ -13055,7 +13055,7 @@
         "CvaTitle":  "HP ZBook 15/17 G6 Windows 10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "21.05.21",
@@ -13083,7 +13083,7 @@
         "CvaTitle":  "HP ZBook Studio G7 Windows 10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "21.05.03",
@@ -13112,7 +13112,7 @@
         "CvaTitle":  "HP Elite/ZBook 8x0 G7 Windows 10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "22.03.03",
@@ -13141,7 +13141,7 @@
         "CvaTitle":  "HP Elite/ZBook 8x0 G8 Windows 11 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "21.05.03",
@@ -13169,7 +13169,7 @@
         "CvaTitle":  "HP Elite/ZBook 8x0 G7 Windows 10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "22.03.03",
@@ -13197,7 +13197,7 @@
         "CvaTitle":  "HP Elite/ZBook 8x0 G8 Windows 11 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "21.05.20",
@@ -13225,7 +13225,7 @@
         "CvaTitle":  "HP ZBook Fury 15/17 G7 Windows 10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "21.11.19",
@@ -13253,7 +13253,7 @@
         "CvaTitle":  "HP ZBook Fury G8 Windows 11 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "21.05.20",
@@ -13281,7 +13281,7 @@
         "CvaTitle":  "HP ZBook Fury 15/17 G7 Windows 10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "21.11.19",
@@ -13309,7 +13309,7 @@
         "CvaTitle":  "HP ZBook Fury G8 Windows 11 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "21.11.22",
@@ -13337,7 +13337,7 @@
         "CvaTitle":  "HP ZBook Power G8 Windows 11 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "22.02.23",
@@ -13365,7 +13365,7 @@
         "CvaTitle":  "HP ZBook Power 15.6 G9 Mobile Workstation PC Windows 11 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "21.05.26",
@@ -13393,7 +13393,7 @@
         "CvaTitle":  "HP ZBook Power G7 Windows 10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "21.11.18",
@@ -13421,7 +13421,7 @@
         "CvaTitle":  "HP ZBook Studio/Create G8 Windows 11 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "20.01.02",
@@ -13449,7 +13449,7 @@
         "CvaTitle":  "HP ZBook Studio G3 Windows 10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "20.12.30",
@@ -13477,7 +13477,7 @@
         "CvaTitle":  "HP ZBook/Studio 15/17 G4 Windows 10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "21.06.23",
@@ -13485,8 +13485,8 @@
         "Name":  "HP ZB Studio G5 EB 1050 G1 Win10 sp114252",
         "Model":  "ZBook Studio G5 Mobile Workstation",
         "SystemId":  [
-                         "844f",
-                         "8427"
+                         "8427",
+                         "844f"
                      ],
         "SoftPaqId":  "sp114252",
         "OSId":  "4295",
@@ -13506,7 +13506,7 @@
         "CvaTitle":  "HP ZB Studio G5/EB 1050 G1 Windows 10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "21.05.21",
@@ -13534,7 +13534,7 @@
         "CvaTitle":  "HP ZBook Studio G7 Windows 10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "21.06.23",
@@ -13563,7 +13563,7 @@
         "CvaTitle":  "HP ZB Studio G5/EB 1050 G1 Windows 10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "21.01.03",
@@ -13591,35 +13591,35 @@
         "CvaTitle":  "HP ZBook x2 Windows 10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  "21.05.19",
+        "ReleaseDate":  "22.02.11",
         "Manufacturer":  "HP",
-        "Name":  "HP ZCentral 4R Win10 sp113897",
+        "Name":  "HP ZCentral 4R Win11 sp138517",
         "Model":  "ZCentral 4R Workstation",
         "SystemId":  [
                          "873E"
                      ],
-        "SoftPaqId":  "sp113897",
-        "OSId":  "4295",
-        "OSName":  "Windows 10 64-bit, 21H1",
+        "SoftPaqId":  "sp138517",
+        "OSId":  "4298",
+        "OSName":  "Windows 11 64-bit, 21H2",
         "Architecture":  "64-bit",
         "ProductType":  "Workstations",
-        "SoftPaqName":  "HP ZCentral 4R Windows 10 x64 Driver Pack",
-        "Version":  "3.00 A 1",
+        "SoftPaqName":  "HP ZCentral 4R Windows 11 x64 Driver Pack",
+        "Version":  "1.00 A 1",
         "Category":  "Manageability - Driver Pack",
-        "Url":  "https://ftp.hp.com/pub/softpaq/sp113501-114000/sp113897.exe",
-        "FileName":  "sp113897.exe",
-        "Size":  "603460280",
-        "MD5":  "b20709b234a5ae79cffba0f2fbe97d5b",
-        "SHA256":  "FAC4EF5F8F149BBC8BB850AF864AC42F09B8612301FC71D5DB66D50265009766",
-        "CvaFileUrl":  "https://ftp.hp.com/pub/softpaq/sp113501-114000/sp113897.cva",
-        "ReleaseNotesUrl":  "https://ftp.hp.com/pub/softpaq/sp113501-114000/sp113897.html",
-        "CvaTitle":  "HP ZCentral 4R Windows 10 x64 Driver Pack"
+        "Url":  "https://ftp.hp.com/pub/softpaq/sp138501-139000/sp138517.exe",
+        "FileName":  "sp138517.exe",
+        "Size":  "789456824",
+        "MD5":  "3be1d4cd93c4099e8482bc960504775c",
+        "SHA256":  "A76E769986645953C1CF9417EAD9CA3F054985937FB6FF6B09D0AAE6AB876D0F",
+        "CvaFileUrl":  "https://ftp.hp.com/pub/softpaq/sp138501-139000/sp138517.cva",
+        "ReleaseNotesUrl":  "https://ftp.hp.com/pub/softpaq/sp138501-139000/sp138517.html",
+        "CvaTitle":  "HP ZCentral 4R Windows 11 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "21.06.09",
@@ -13647,7 +13647,7 @@
         "CvaTitle":  "HP ProBook 4x0 G6/ZHAN G2 Windows 10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "21.06.09",
@@ -13675,7 +13675,7 @@
         "CvaTitle":  "HP ProBook 4x0 G6/ZHAN G2 Windows 10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "21.06.17",
@@ -13703,7 +13703,7 @@
         "CvaTitle":  "HP ProBook 4x0 G7/ZHAN G3 Windows 10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "21.11.17",
@@ -13711,8 +13711,8 @@
         "Name":  "HP ProBook 4x0 G8 ZHAN G4 Win11 sp136227",
         "Model":  "ZHAN 66 Pro 14 G4 Notebook PC",
         "SystemId":  [
-                         "87E2",
-                         "8809"
+                         "8809",
+                         "87E2"
                      ],
         "SoftPaqId":  "sp136227",
         "OSId":  "4298",
@@ -13732,7 +13732,7 @@
         "CvaTitle":  "HP ProBook 4x0 G8/ZHAN G4 Windows 11 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "22.03.02",
@@ -13740,8 +13740,8 @@
         "Name":  "HP EB 4 6x0 G9 ZHAN Win11 sp138584",
         "Model":  "ZHAN 66 Pro 14 G5 Notebook PC",
         "SystemId":  [
-                         "8B21",
-                         "8979"
+                         "8979",
+                         "8B21"
                      ],
         "SoftPaqId":  "sp138584",
         "OSId":  "4298",
@@ -13761,7 +13761,7 @@
         "CvaTitle":  "HP EB 4/6x0 G9 ZHAN Windows 11 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "21.06.09",
@@ -13789,7 +13789,7 @@
         "CvaTitle":  "HP ProBook 4x0 G6/ZHAN G2 Windows 10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "21.06.17",
@@ -13817,7 +13817,7 @@
         "CvaTitle":  "HP ProBook 4x0 G7/ZHAN G3 Windows 10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "21.06.29",
@@ -13845,7 +13845,7 @@
         "CvaTitle":  "HP ProBook 4x5 G7 Windows 10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "21.11.17",
@@ -13874,7 +13874,7 @@
         "CvaTitle":  "HP ProBook 4x5 G8 Windows 11 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "21.12.24",
@@ -13902,7 +13902,7 @@
         "CvaTitle":  "HP ZHAN/Pro/Elite 4/6x5 Windows 11 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "21.06.24",
@@ -13910,8 +13910,8 @@
         "Name":  "HP ElitePro 400 600 800 G4 AiO Win10 sp114256",
         "Model":  "ZHAN 66 Pro G1 23.8 inch FHD Non-Touch GPU All-in-One Business PC",
         "SystemId":  [
-                         "83ea",
-                         "83eb"
+                         "83eb",
+                         "83ea"
                      ],
         "SoftPaqId":  "sp114256",
         "OSId":  "4297",
@@ -13931,7 +13931,7 @@
         "CvaTitle":  "HP ElitePro 400/600/800 G4 AiO Win10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "21.06.23",
@@ -13939,8 +13939,8 @@
         "Name":  "HP ZHAN 66 Pro G1 Win10 sp114245",
         "Model":  "ZHAN 66 Pro G1 Notebook PC",
         "SystemId":  [
-                         "83fd",
-                         "8471"
+                         "8471",
+                         "83fd"
                      ],
         "SoftPaqId":  "sp114245",
         "OSId":  "4295",
@@ -13960,7 +13960,7 @@
         "CvaTitle":  "HP ZHAN 66 Pro G1 Windows 10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "21.06.23",
@@ -13989,7 +13989,7 @@
         "CvaTitle":  "HP ElitePro 4/6/800 G5 AiO Windows 10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "21.06.23",
@@ -14018,7 +14018,7 @@
         "CvaTitle":  "HP ElitePro 4/6/800 G5 AiO Windows 10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "21.11.23",
@@ -14026,7 +14026,38 @@
         "Name":  "HP ProOne 4 600 G6 AiO Win11 sp136307",
         "Model":  "ZHAN 66 Pro G3 22 All-in-One PC",
         "SystemId":  [
+                         "871b",
+                         "871c"
+                     ],
+        "SoftPaqId":  "sp136307",
+        "OSId":  "4298",
+        "OSName":  "Windows 11 64-bit, 21H2",
+        "Architecture":  "64-bit",
+        "ProductType":  "Desktops",
+        "SoftPaqName":  "HP ProOne 4/600 G6 AiO Win 11 Driver Pack",
+        "Version":  "1.00 A 1",
+        "Category":  "Manageability - Driver Pack",
+        "Url":  "https://ftp.hp.com/pub/softpaq/sp136001-136500/sp136307.exe",
+        "FileName":  "sp136307.exe",
+        "Size":  "1556853040",
+        "MD5":  "541deeef497fb9bb41a636bacc0282ab",
+        "SHA256":  "81D15FBBC14A4D555F95D1DF4339BCDD54840271F37378F8B471102FFC04B817",
+        "CvaFileUrl":  "https://ftp.hp.com/pub/softpaq/sp136001-136500/sp136307.cva",
+        "ReleaseNotesUrl":  "https://ftp.hp.com/pub/softpaq/sp136001-136500/sp136307.html",
+        "CvaTitle":  "HP ProOne 4/600 G6 AiO Win 11 Driver Pack"
+    },
+    {
+        "CatalogVersion":  "22.05.05",
+        "Status":  null,
+        "Component":  "DriverPack",
+        "ReleaseDate":  "21.11.23",
+        "Manufacturer":  "HP",
+        "Name":  "HP ProOne 4 600 G6 AiO Win11 sp136307",
+        "Model":  "ZHAN 66 Pro G3 24 All-in-One PC",
+        "SystemId":  [
+                         "8810",
                          "871c",
+                         "880f",
                          "871b"
                      ],
         "SoftPaqId":  "sp136307",
@@ -14047,38 +14078,7 @@
         "CvaTitle":  "HP ProOne 4/600 G6 AiO Win 11 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
-        "Status":  null,
-        "Component":  "DriverPack",
-        "ReleaseDate":  "21.11.23",
-        "Manufacturer":  "HP",
-        "Name":  "HP ProOne 4 600 G6 AiO Win11 sp136307",
-        "Model":  "ZHAN 66 Pro G3 24 All-in-One PC",
-        "SystemId":  [
-                         "880f",
-                         "871c",
-                         "871b",
-                         "8810"
-                     ],
-        "SoftPaqId":  "sp136307",
-        "OSId":  "4298",
-        "OSName":  "Windows 11 64-bit, 21H2",
-        "Architecture":  "64-bit",
-        "ProductType":  "Desktops",
-        "SoftPaqName":  "HP ProOne 4/600 G6 AiO Win 11 Driver Pack",
-        "Version":  "1.00 A 1",
-        "Category":  "Manageability - Driver Pack",
-        "Url":  "https://ftp.hp.com/pub/softpaq/sp136001-136500/sp136307.exe",
-        "FileName":  "sp136307.exe",
-        "Size":  "1556853040",
-        "MD5":  "541deeef497fb9bb41a636bacc0282ab",
-        "SHA256":  "81D15FBBC14A4D555F95D1DF4339BCDD54840271F37378F8B471102FFC04B817",
-        "CvaFileUrl":  "https://ftp.hp.com/pub/softpaq/sp136001-136500/sp136307.cva",
-        "ReleaseNotesUrl":  "https://ftp.hp.com/pub/softpaq/sp136001-136500/sp136307.html",
-        "CvaTitle":  "HP ProOne 4/600 G6 AiO Win 11 Driver Pack"
-    },
-    {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "22.04.05",
@@ -14086,8 +14086,8 @@
         "Name":  "HP ProOne 440 23.8 G9 AIO Win11 sp139477",
         "Model":  "ZHAN 99 Pro 23.8 inch G9 All-in-One Desktop PC",
         "SystemId":  [
-                         "8958",
-                         "8959"
+                         "8959",
+                         "8958"
                      ],
         "SoftPaqId":  "sp139477",
         "OSId":  "4298",
@@ -14107,7 +14107,7 @@
         "CvaTitle":  "HP ProOne 440 23.8 G9 AIO Win 11 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "21.06.24",
@@ -14115,8 +14115,8 @@
         "Name":  "HP ElitePro 400 600 800 G4 AiO Win10 sp114256",
         "Model":  "Zhan60 G1 21.5-inch FHD Non-Touch GPU All-in-One Business PC",
         "SystemId":  [
-                         "83eb",
-                         "83ea"
+                         "83ea",
+                         "83eb"
                      ],
         "SoftPaqId":  "sp114256",
         "OSId":  "4297",
@@ -14136,7 +14136,7 @@
         "CvaTitle":  "HP ElitePro 400/600/800 G4 AiO Win10 x64 Driver Pack"
     },
     {
-        "CatalogVersion":  "22.04.27",
+        "CatalogVersion":  "22.05.05",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "21.06.24",
@@ -14144,8 +14144,8 @@
         "Name":  "HP ElitePro 400 600 800 G4 AiO Win10 sp114256",
         "Model":  "Zhan60 G1 23.8-inch FHD Non-Touch GPU All-in-One Business PC",
         "SystemId":  [
-                         "83ea",
-                         "83eb"
+                         "83eb",
+                         "83ea"
                      ],
         "SoftPaqId":  "sp114256",
         "OSId":  "4297",

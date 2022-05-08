@@ -864,7 +864,7 @@ function Connect-AzWinPE {
 
     $Global:AzContext = Get-AzContext
     if (!($Global:AzContext)) {
-        $null = Connect-AzAccount -Device -AuthScope KeyVault
+        $null = Connect-AzAccount -Device -AuthScope Storage -ErrorAction Ignore
         $Global:AzContext = Get-AzContext
     }
 
@@ -953,10 +953,37 @@ function Connect-AzWinPE {
         Write-Host -ForegroundColor DarkGray "========================================================================="
         Write-Host -ForegroundColor Cyan 'Saving Azure Storage Accounts to $Global:AzStorageAccount'
         $Global:AzStorageAccount = Get-AzStorageAccount
-        
+        $Global:BlobImages = @()
+
+        Write-Host -ForegroundColor Cyan 'Saving OSDCloud Azure Storage Resources to $Global:OSDCloudStorageAccounts'
+        $Global:OSDCloudStorageAccounts = Get-AzResource -ResourceType 'Microsoft.Storage/storageAccounts' | Where-Object {$_.Tags.Keys -contains 'osdcloud'}
+
         Write-Host -ForegroundColor Cyan 'Saving Azure Storage Contexts to $Global:AzStorageContext'
         $Global:AzStorageContext = @{}
-        $Global:BlobImages = @()
+        foreach ($Item in $Global:OSDCloudStorageAccounts) {
+            $Global:LastStorageContext = New-AzStorageContext -StorageAccountName $Item.ResourceName
+            $Global:AzStorageContext."$($Item.ResourceName)" = $Global:LastStorageContext
+            #Get-AzStorageBlobByTag -TagFilterSqlExpression ""osdcloudimage""=""win10ltsc"" -Context $StorageContext
+            #Get-AzStorageBlobByTag -Context $Global:LastStorageContext
+
+            $StorageContainers = Get-AzStorageContainer -Context $Global:LastStorageContext
+        
+            foreach ($Container in $StorageContainers) {
+                Write-Host -ForegroundColor Cyan "Scanning for Windows images on Storage Account $($Item.StorageAccountName) Container: $($Container.Name)"
+                $Global:BlobImages += Get-AzStorageBlob -Context $Global:LastStorageContext -Container $Container.Name -Blob *.wim -ErrorAction Ignore
+            }
+        }
+        if ($Global:BlobImages) {
+            Write-Host -ForegroundColor Cyan 'Blob images are stored in $Global:BlobImages'
+            $Global:BlobImages
+        }
+        else {
+            Write-Warning 'Unable to find any wim Windows Images on the storage accounts'
+        }
+
+        Break
+
+        $Global:BlobImages += Get-AzStorageBlob -Context $Global:AzStorageContext."$($Item.ResourceName)" -Container $Container.Name -Blob *.wim -ErrorAction Ignore
         foreach ($Item in $Global:AzStorageAccount) {
             $StorageContext = New-AzStorageContext -StorageAccountName $Item.StorageAccountName
             $Global:AzStorageContext."$($Item.StorageAccountName)" = $StorageContext
@@ -965,7 +992,7 @@ function Connect-AzWinPE {
         
             foreach ($Container in $StorageContainers) {
                 Write-Host -ForegroundColor Cyan "Scanning for Windows images on Storage Account $($Item.StorageAccountName) Container: $($Container.Name)"
-                $Global:BlobImages += Get-AzStorageBlob -Context $StorageContext -Container $Container.Name -Blob *.wim -ErrorAction Ignore
+                #$Global:BlobImages += Get-AzStorageBlob -Context $StorageContext -Container $Container.Name -Blob *.wim -ErrorAction Ignore
             }
         }
         if ($Global:BlobImages) {
