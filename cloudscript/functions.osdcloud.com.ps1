@@ -32,7 +32,7 @@ powershell iex (irm functions.osdcloud.com)
 #=================================================
 #Script Information
 $ScriptName = 'functions.osdcloud.com'
-$ScriptVersion = '22.5.8.6'
+$ScriptVersion = '22.5.8.1'
 #=================================================
 #region Initialize Functions
 [Net.ServicePointManager]::SecurityProtocol = [Net.ServicePointManager]::SecurityProtocol -bor [Net.SecurityProtocolType]::Tls12
@@ -639,7 +639,7 @@ function osdcloud-InstallModuleAzStorage {
     [CmdletBinding()]
     param ()
     $PSModuleName = 'Az.Storage'
-    $InstalledModule = Get-InstalledModule $PSModuleName | Select-Object -First 1
+    $InstalledModule = Get-InstalledModule $PSModuleName -ErrorAction Ignore | Select-Object -First 1
 
     if ($InstalledModule) {
         $GalleryPSModule = Find-Module -Name $PSModuleName -Repository PSGallery -ErrorAction Ignore
@@ -672,7 +672,7 @@ function osdcloud-InstallModuleAzureAd {
     [CmdletBinding()]
     param ()
     $PSModuleName = 'AzureAD'
-    $InstalledModule = Get-InstalledModule $PSModuleName | Select-Object -First 1
+    $InstalledModule = Get-InstalledModule $PSModuleName -ErrorAction Ignore | Select-Object -First 1
 
     if ($InstalledModule) {
         $GalleryPSModule = Find-Module -Name $PSModuleName -Repository PSGallery -ErrorAction Ignore
