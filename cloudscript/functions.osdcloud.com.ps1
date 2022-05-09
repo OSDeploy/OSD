@@ -32,7 +32,7 @@ powershell iex (irm functions.osdcloud.com)
 #=================================================
 #Script Information
 $ScriptName = 'functions.osdcloud.com'
-$ScriptVersion = '22.5.8.5'
+$ScriptVersion = '22.5.8.6'
 #=================================================
 #region Initialize Functions
 [Net.ServicePointManager]::SecurityProtocol = [Net.ServicePointManager]::SecurityProtocol -bor [Net.SecurityProtocolType]::Tls12
@@ -638,39 +638,68 @@ function osdcloud-InstallModuleAzResources {
 function osdcloud-InstallModuleAzStorage {
     [CmdletBinding()]
     param ()
-    $InstalledModule = Import-Module Az.Storage -PassThru -ErrorAction Ignore
+    $PSModuleName = 'Az.Storage'
+    $InstalledModule = Get-InstalledModule $PSModuleName | Select-Object -First 1
 
-    if (-not $InstalledModule) {
-        if ($WindowsPhase -eq 'WinPE') {
-            Write-Host -ForegroundColor DarkGray 'Install-Module Az.Storage [AllUsers]'
-            Install-Module Az.Storage -Scope AllUsers
-            Import-Module Az.Storage -Force
-        }
-        else {
-            Write-Host -ForegroundColor DarkGray 'Install-Module Az.Storage [CurrentUser]'
-            Install-Module Az.Storage -Force -Scope CurrentUser
+    if ($InstalledModule) {
+        $GalleryPSModule = Find-Module -Name $PSModuleName -Repository PSGallery -ErrorAction Ignore
+        if (($GalleryPSModule.Version -as [version]) -gt ($InstalledModule.Version -as [version])) {
+            if ($WindowsPhase -eq 'WinPE') {
+                Write-Host -ForegroundColor DarkGray "Update-Module $PSModuleName [AllUsers]"
+                Update-Module -Name $PSModuleName -Repository PSGallery -Scope AllUsers -Force
+                Import-Module $PSModuleName -Force
+            }
+            else {
+                Write-Host -ForegroundColor DarkGray "Update-Module $PSModuleName [CurrentUser]"
+                Update-Module -Name $PSModuleName -Repository PSGallery -Scope CurrentUser -Force
+                Import-Module $PSModuleName -Force
+            } 
         }
     }
+    else {
+        if ($WindowsPhase -eq 'WinPE') {
+            Write-Host -ForegroundColor DarkGray "Install-Module $PSModuleName [AllUsers]"
+            Install-Module $PSModuleName -Scope AllUsers
+        }
+        else {
+            Write-Host -ForegroundColor DarkGray "Install-Module $PSModuleName [CurrentUser]"
+            Install-Module $PSModuleName -Scope CurrentUser
+        }
+    }
+    Import-Module $PSModuleName -Force
 }
 function osdcloud-InstallModuleAzureAd {
     [CmdletBinding()]
     param ()
-    $InstalledModule = Import-Module AzureAD -PassThru -ErrorAction Ignore
+    $PSModuleName = 'AzureAD'
+    $InstalledModule = Get-InstalledModule $PSModuleName | Select-Object -First 1
 
-    if (-not $InstalledModule) {
-        if ($WindowsPhase -eq 'WinPE') {
-            Write-Host -ForegroundColor DarkGray 'Install-Module AzureAD [AllUsers]'
-            Install-Module AzureAD -Scope AllUsers
-            Import-Module AzureAD -Force
-        }
-        else {
-            $InstalledModule = Import-Module AzureAD -PassThru -ErrorAction Ignore
-            if (-not $InstalledModule) {
-                Write-Host -ForegroundColor DarkGray 'Install-Module AzureAD [CurrentUser]'
-                Install-Module AzureAD -Force -Scope CurrentUser
+    if ($InstalledModule) {
+        $GalleryPSModule = Find-Module -Name $PSModuleName -Repository PSGallery -ErrorAction Ignore
+        if (($GalleryPSModule.Version -as [version]) -gt ($InstalledModule.Version -as [version])) {
+            if ($WindowsPhase -eq 'WinPE') {
+                Write-Host -ForegroundColor DarkGray "Update-Module $PSModuleName [AllUsers]"
+                Update-Module -Name $PSModuleName -Repository PSGallery -Scope AllUsers -Force
+                Import-Module $PSModuleName -Force
             }
+            else {
+                Write-Host -ForegroundColor DarkGray "Update-Module $PSModuleName [CurrentUser]"
+                Update-Module -Name $PSModuleName -Repository PSGallery -Scope CurrentUser -Force
+                Import-Module $PSModuleName -Force
+            } 
         }
     }
+    else {
+        if ($WindowsPhase -eq 'WinPE') {
+            Write-Host -ForegroundColor DarkGray "Install-Module $PSModuleName [AllUsers]"
+            Install-Module $PSModuleName -Scope AllUsers
+        }
+        else {
+            Write-Host -ForegroundColor DarkGray "Install-Module $PSModuleName [CurrentUser]"
+            Install-Module $PSModuleName -Scope CurrentUser
+        }
+    }
+    Import-Module $PSModuleName -Force
 }
 function osdcloud-InstallModuleMSGraphDeviceManagement {
     [CmdletBinding()]
@@ -1002,7 +1031,7 @@ function Connect-AzWinPE {
             until (((($SelectReadHost -ge 0) -and ($SelectReadHost -in $Results.Selection))))
 
             $Results = $Results | Where-Object {$_.Selection -eq $SelectReadHost}
-            
+
             $Global:AzOSDCloudImage = $Global:AzBlobImages | Where-Object {$_.Name -eq $Results.Name}
             $Global:AzOSDCloudImage | Select-Object * | Export-Clixml X:\AzOSDCloudImage.xml
             #=================================================
