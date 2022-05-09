@@ -32,7 +32,7 @@ powershell iex (irm functions.osdcloud.com)
 #=================================================
 #Script Information
 $ScriptName = 'functions.osdcloud.com'
-$ScriptVersion = '22.5.8.2'
+$ScriptVersion = '22.5.8.3'
 #=================================================
 #region Initialize Functions
 [Net.ServicePointManager]::SecurityProtocol = [Net.ServicePointManager]::SecurityProtocol -bor [Net.SecurityProtocolType]::Tls12
@@ -880,12 +880,12 @@ function Connect-AzWinPE {
     osdcloud-InstallModuleAzStorage
     osdcloud-InstallModuleMSGraphDeviceManagement
 
-    Get-AzContext -ErrorAction Ignore | Disconnect-AzAccount -ErrorAction Ignore
+    #Get-AzContext -ErrorAction Ignore | Disconnect-AzAccount -ErrorAction Ignore
 
     $Global:AzContext = Get-AzContext
     if (!($Global:AzContext)) {
-        $null = Connect-AzAccount -Device -AuthScope Storage -ErrorAction Ignore
-        $Global:AzContext = Get-AzContext
+        #$null = Connect-AzAccount -Device -AuthScope Storage -ErrorAction Ignore
+        #$Global:AzContext = Get-AzContext
     }
 
     if ($Global:AzContext) {
@@ -986,7 +986,7 @@ function Connect-AzWinPE {
             Write-Host -ForegroundColor Cyan 'Auto-selecting first image file Context at X:\Context.xml'
             ($Global:BlobImages | Select-Object * -First 1).Context | Select-Object * | Export-Clixml X:\Context.xml
             
-            Write-Host -ForegroundColor Cyan 'Run Invoke-OSDCloud in this powershell session for AzOSDCloud Deployment'
+            Write-Host -ForegroundColor Yellow 'Run Invoke-OSDCloud in this powershell session for AzOSDCloud Deployment'
         }
         else {
             Write-Warning 'Unable to find any wim Windows Images on the storage accounts'
