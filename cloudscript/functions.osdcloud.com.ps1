@@ -1097,70 +1097,74 @@ function Connect-AzureWinPE {
         #Write-Verbose -Verbose 'Azure Auth Headers have been saved to $Global:Headers*'
         #$Global:MgGraph = Connect-MgGraph -AccessToken $Global:AzMSGraphAccessToken.Token -Scopes DeviceManagementConfiguration.Read.All,DeviceManagementServiceConfig.Read.All,DeviceManagementServiceConfiguration.Read.All
         $Global:AzureAD = Connect-AzureAD -AadAccessToken $Global:AzAadGraphAccessToken.Token -AccountId $Global:AzContext.Account.Id
-
-        Write-Host -ForegroundColor DarkGray    'Storage Accounts:          $Global:AzStorageAccounts'
-        $Global:AzStorageAccounts = Get-AzStorageAccount
-
-        Write-Host -ForegroundColor DarkGray    'OSDCloud Storage Accounts: $Global:AzOSDCloudStorageAccounts'
-        $Global:AzOSDCloudStorageAccounts = Get-AzResource -ResourceType 'Microsoft.Storage/storageAccounts' | Where-Object {$_.Tags.Keys -contains 'osdcloud'}
-
-        Write-Host -ForegroundColor DarkGray    'Storage Contexts:          $Global:AzStorageContext'
-        Write-Host ''
-        $Global:AzStorageContext = @{}
-        $Global:AzBlobImages = @()
-
-        foreach ($Item in $Global:AzOSDCloudStorageAccounts) {
-            $Global:LastStorageContext = New-AzStorageContext -StorageAccountName $Item.ResourceName
-            $Global:AzStorageContext."$($Item.ResourceName)" = $Global:LastStorageContext
-            #Get-AzStorageBlobByTag -TagFilterSqlExpression ""osdcloudimage""=""win10ltsc"" -Context $StorageContext
-            #Get-AzStorageBlobByTag -Context $Global:LastStorageContext
-
-            $StorageContainers = Get-AzStorageContainer -Context $Global:LastStorageContext
-        
-            foreach ($Container in $StorageContainers) {
-                Write-Host -ForegroundColor Cyan "Scanning for Windows Images on Storage Account: $($Item.ResourceName) Container: $($Container.Name)"
-                $Global:AzBlobImages += Get-AzStorageBlob -Context $Global:LastStorageContext -Container $Container.Name -Blob *.wim -ErrorAction Ignore
-            }
-        }
-
-        if ($Global:AzBlobImages) {
-            Write-Host -ForegroundColor DarkGray    'Windows Images:            $Global:AzBlobImages'
-
-            $i = $null
-            $Results = foreach ($Item in $Global:AzBlobImages) {
-                $i++
-
-                $ObjectProperties = @{
-                    Selection   = $i
-                    Name        = $Item.Name
-                }
-                New-Object -TypeName PSObject -Property $ObjectProperties
-            }
-
-            $Results | Select-Object -Property Selection, Name | Format-Table | Out-Host
-
-            do {
-                $SelectReadHost = Read-Host -Prompt "Select a Windows Image to apply by Selection [Number]"
-            }
-            until (((($SelectReadHost -ge 0) -and ($SelectReadHost -in $Results.Selection))))
-
-            $Results = $Results | Where-Object {$_.Selection -eq $SelectReadHost}
-
-            $Global:AzOSDCloudImage = $Global:AzBlobImages | Where-Object {$_.Name -eq $Results.Name}
-            $Global:AzOSDCloudImage | Select-Object * | Export-Clixml X:\AzOSDCloudImage.xml
-            #=================================================
-            #   Invoke-OSDCloud.ps1
-            #=================================================
-            Write-Host -ForegroundColor DarkGray "========================================================================="
-            Write-Host -ForegroundColor Green "Invoke-OSDCloud ... Starting in 5 seconds..."
-            Start-Sleep -Seconds 5
-            Invoke-OSDCloud
-        }
-        else {
-            Write-Warning 'Unable to find any Windows Images on the storage accounts'
-        }
     }
     else {
         Write-Warning 'Unable to connect to AzureAD'
+    }
+}
+function Start-AzOSDCloudByTag {
+    [CmdletBinding()]
+    param ()
+
+    Write-Host -ForegroundColor DarkGray    'Storage Accounts:          $Global:AzStorageAccounts'
+    $Global:AzStorageAccounts = Get-AzStorageAccount
+
+    Write-Host -ForegroundColor DarkGray    'OSDCloud Storage Accounts: $Global:AzOSDCloudStorageAccounts'
+    $Global:AzOSDCloudStorageAccounts = Get-AzResource -ResourceType 'Microsoft.Storage/storageAccounts' | Where-Object {$_.Tags.Keys -contains 'osdcloud'}
+
+    Write-Host -ForegroundColor DarkGray    'Storage Contexts:          $Global:AzStorageContext'
+    Write-Host ''
+    $Global:AzStorageContext = @{}
+    $Global:AzBlobImages = @()
+
+    foreach ($Item in $Global:AzOSDCloudStorageAccounts) {
+        $Global:LastStorageContext = New-AzStorageContext -StorageAccountName $Item.ResourceName
+        $Global:AzStorageContext."$($Item.ResourceName)" = $Global:LastStorageContext
+        #Get-AzStorageBlobByTag -TagFilterSqlExpression ""osdcloudimage""=""win10ltsc"" -Context $StorageContext
+        #Get-AzStorageBlobByTag -Context $Global:LastStorageContext
+
+        $StorageContainers = Get-AzStorageContainer -Context $Global:LastStorageContext
+    
+        foreach ($Container in $StorageContainers) {
+            Write-Host -ForegroundColor Cyan "Scanning for Windows Images on Storage Account: $($Item.ResourceName) Container: $($Container.Name)"
+            $Global:AzBlobImages += Get-AzStorageBlob -Context $Global:LastStorageContext -Container $Container.Name -Blob *.wim -ErrorAction Ignore
+        }
+    }
+
+    if ($Global:AzBlobImages) {
+        Write-Host -ForegroundColor DarkGray    'Windows Images:            $Global:AzBlobImages'
+
+        $i = $null
+        $Results = foreach ($Item in $Global:AzBlobImages) {
+            $i++
+
+            $ObjectProperties = @{
+                Selection   = $i
+                Name        = $Item.Name
+            }
+            New-Object -TypeName PSObject -Property $ObjectProperties
+        }
+
+        $Results | Select-Object -Property Selection, Name | Format-Table | Out-Host
+
+        do {
+            $SelectReadHost = Read-Host -Prompt "Select a Windows Image to apply by Selection [Number]"
+        }
+        until (((($SelectReadHost -ge 0) -and ($SelectReadHost -in $Results.Selection))))
+
+        $Results = $Results | Where-Object {$_.Selection -eq $SelectReadHost}
+
+        $Global:AzOSDCloudImage = $Global:AzBlobImages | Where-Object {$_.Name -eq $Results.Name}
+        $Global:AzOSDCloudImage | Select-Object * | Export-Clixml X:\AzOSDCloudImage.xml
+        #=================================================
+        #   Invoke-OSDCloud.ps1
+        #=================================================
+        Write-Host -ForegroundColor DarkGray "========================================================================="
+        Write-Host -ForegroundColor Green "Invoke-OSDCloud ... Starting in 5 seconds..."
+        Start-Sleep -Seconds 5
+        Invoke-OSDCloud
+    }
+    else {
+        Write-Warning 'Unable to find any Windows Images on the storage accounts'
     }
 }

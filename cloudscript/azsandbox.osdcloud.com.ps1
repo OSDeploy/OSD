@@ -64,14 +64,14 @@ Invoke-Expression -Command (Invoke-RestMethod -Uri functions.osdcloud.com)
 if ($WindowsPhase -eq 'WinPE') {
 
     #Process OSDCloud startup and load Azure dependencies
-    osdcloud-StartWinPE -OSDCloud -KeyVault
+    osdcloud-StartWinPE -OSDCloud -Azure
     #osdcloud-InstallModuleAzureAd
     #osdcloud-InstallModuleAzStorage
     #osdcloud-InstallModuleMSGraphDeviceManagement
 
     #Connect-AzAccount -Device -AuthScope KeyVault
     #Write-Host -ForegroundColor Cyan "Open a new PowerShell session, type 'start powershell' and press enter"
-    Write-Host -ForegroundColor Cyan "Run Connect-AzWinPE to connect to Azure Resources"
+    Write-Host -ForegroundColor Cyan "Run Connect-AzureWinPE to connect to Azure Resources"
     
     #Stop the startup Transcript.  OSDCloud will create its own
     $null = Stop-Transcript -ErrorAction Ignore
@@ -94,7 +94,7 @@ if ($WindowsPhase -eq 'AuditMode') {
 if ($WindowsPhase -eq 'OOBE') {
 
     #Load everything needed to run AutoPilot and Azure KeyVault
-    osdcloud-StartOOBE -Display -Language -DateTime -Autopilot -KeyVault
+    osdcloud-StartOOBE -Display -Language -DateTime -Autopilot -Azure
 
     $null = Stop-Transcript -ErrorAction Ignore
 }

@@ -64,7 +64,7 @@ Invoke-Expression -Command (Invoke-RestMethod -Uri functions.osdcloud.com)
 if ($WindowsPhase -eq 'WinPE') {
 
     #Process OSDCloud startup and load Azure KeyVault dependencies
-    osdcloud-StartWinPE -OSDCloud -KeyVault
+    osdcloud-StartWinPE -OSDCloud -Azure
     Write-Host -ForegroundColor Cyan "To start a new PowerShell session, type 'start powershell' and press enter"
     Write-Host -ForegroundColor Cyan "Start-OSDCloud or Start-OSDCloudGUI can be run in the new PowerShell session"
     
@@ -89,7 +89,7 @@ if ($WindowsPhase -eq 'AuditMode') {
 if ($WindowsPhase -eq 'OOBE') {
 
     #Load everything needed to run AutoPilot and Azure KeyVault
-    osdcloud-StartOOBE -Display -Language -DateTime -Autopilot -KeyVault
+    osdcloud-StartOOBE -Display -Language -DateTime -Autopilot -Azure
 
     $null = Stop-Transcript -ErrorAction Ignore
 }
