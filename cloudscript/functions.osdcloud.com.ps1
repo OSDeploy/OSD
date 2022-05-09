@@ -893,9 +893,13 @@ if ($WindowsPhase -eq 'WinPE') {
         [CmdletBinding()]
         param (
             [Parameter()]
-            [Alias('KeyVault')]
             [System.Management.Automation.SwitchParameter]
             $Azure,
+
+            [Parameter()]
+            [System.Management.Automation.SwitchParameter]
+            $KeyVault,
+
             [Parameter()]
             [System.Management.Automation.SwitchParameter]
             $OSDCloud
@@ -924,6 +928,10 @@ if ($WindowsPhase -eq 'WinPE') {
                 osdcloud-InstallModuleAzResources
                 osdcloud-InstallModuleAzStorage
                 osdcloud-InstallModuleMSGraphDeviceManagement
+            }
+            if ($KeyVault) {
+                osdcloud-InstallModuleAzAccounts
+                osdcloud-InstallModuleAzKeyVault
             }
         }
         else {
@@ -956,6 +964,10 @@ if ($WindowsPhase -eq 'OOBE') {
             $DateTime,
 
             [System.Management.Automation.SwitchParameter]
+            #Install Azure support
+            $Azure,
+
+            [System.Management.Automation.SwitchParameter]
             #Install Azure KeyVault support
             $KeyVault
         )
@@ -975,7 +987,14 @@ if ($WindowsPhase -eq 'OOBE') {
         osdcloud-InstallModuleOSD
 
         #Add Azure KeuVault Support
+        if ($Azure) {
+            osdcloud-InstallModuleAzAccounts
+            osdcloud-InstallModuleAzKeyVault
+        }
+
+        #Add Azure KeuVault Support
         if ($KeyVault) {
+            osdcloud-InstallModuleAzAccounts
             osdcloud-InstallModuleAzKeyVault
         }
 
