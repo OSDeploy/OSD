@@ -512,11 +512,11 @@ if ($WindowsPhase -eq 'OOBE') {
             }
         }
         if (Get-Module PSWindowsUpdate -ListAvailable -ErrorAction Ignore) {
-            #Write-Host -ForegroundColor DarkCyan 'Add-WUServiceManager -MicrosoftUpdate -Confirm:$false'
+            #Write-Host -ForegroundColor DarkGray 'Add-WUServiceManager -MicrosoftUpdate -Confirm:$false'
             Add-WUServiceManager -MicrosoftUpdate -Confirm:$false | Out-Null
-            #Write-Host -ForegroundColor DarkCyan 'Install-WindowsUpdate -UpdateType Software -AcceptAll -IgnoreReboot'
+            #Write-Host -ForegroundColor DarkGray 'Install-WindowsUpdate -UpdateType Software -AcceptAll -IgnoreReboot'
             #Install-WindowsUpdate -UpdateType Software -AcceptAll -IgnoreReboot -NotTitle 'Malicious'
-            #Write-Host -ForegroundColor DarkCyan 'Install-WindowsUpdate -MicrosoftUpdate -AcceptAll -IgnoreReboot'
+            #Write-Host -ForegroundColor DarkGray 'Install-WindowsUpdate -MicrosoftUpdate -AcceptAll -IgnoreReboot'
             Start-Process -WindowStyle Minimized PowerShell.exe -ArgumentList "-Command Install-WindowsUpdate -MicrosoftUpdate -AcceptAll -IgnoreReboot -NotTitle 'Preview' -NotKBArticleID 'KB890830','KB5005463','KB4481252'" -Wait
         }
     }
@@ -1038,9 +1038,9 @@ function Connect-AzureWinPE {
         Write-Host -ForegroundColor Cyan        '$Global:AzTenantId:       ' $Global:AzTenantId
         Write-Host ''
 
-        Write-Host -ForegroundColor DarkCyan    'Azure Context:             $Global:AzContext'
-        Write-Host -ForegroundColor DarkCyan    'Access Tokens:             $Global:Az*AccessToken'
-        Write-Host -ForegroundColor DarkCyan    'Headers:                   $Global:Az*Headers'
+        Write-Host -ForegroundColor DarkGray    'Azure Context:             $Global:AzContext'
+        Write-Host -ForegroundColor DarkGray    'Access Tokens:             $Global:Az*AccessToken'
+        Write-Host -ForegroundColor DarkGray    'Headers:                   $Global:Az*Headers'
         Write-Host ''
         #=================================================
         #	AAD Graph
@@ -1098,13 +1098,13 @@ function Connect-AzureWinPE {
         #$Global:MgGraph = Connect-MgGraph -AccessToken $Global:AzMSGraphAccessToken.Token -Scopes DeviceManagementConfiguration.Read.All,DeviceManagementServiceConfig.Read.All,DeviceManagementServiceConfiguration.Read.All
         $Global:AzureAD = Connect-AzureAD -AadAccessToken $Global:AzAadGraphAccessToken.Token -AccountId $Global:AzContext.Account.Id
 
-        Write-Host -ForegroundColor DarkCyan    'Storage Accounts:          $Global:AzStorageAccounts'
+        Write-Host -ForegroundColor DarkGray    'Storage Accounts:          $Global:AzStorageAccounts'
         $Global:AzStorageAccounts = Get-AzStorageAccount
 
-        Write-Host -ForegroundColor DarkCyan    'OSDCloud Storage Accounts: $Global:AzOSDCloudStorageAccounts'
+        Write-Host -ForegroundColor DarkGray    'OSDCloud Storage Accounts: $Global:AzOSDCloudStorageAccounts'
         $Global:AzOSDCloudStorageAccounts = Get-AzResource -ResourceType 'Microsoft.Storage/storageAccounts' | Where-Object {$_.Tags.Keys -contains 'osdcloud'}
 
-        Write-Host -ForegroundColor DarkCyan    'Storage Contexts:          $Global:AzStorageContext'
+        Write-Host -ForegroundColor DarkGray    'Storage Contexts:          $Global:AzStorageContext'
         Write-Host ''
         $Global:AzStorageContext = @{}
         $Global:AzBlobImages = @()
@@ -1124,7 +1124,7 @@ function Connect-AzureWinPE {
         }
 
         if ($Global:AzBlobImages) {
-            Write-Host -ForegroundColor DarkCyan    'Windows Images:            $Global:AzBlobImages'
+            Write-Host -ForegroundColor DarkGray    'Windows Images:            $Global:AzBlobImages'
 
             $i = $null
             $Results = foreach ($Item in $Global:AzBlobImages) {
