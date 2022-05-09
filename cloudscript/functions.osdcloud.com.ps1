@@ -981,10 +981,10 @@ function Connect-AzWinPE {
         if ($Global:BlobImages) {
             Write-Host -ForegroundColor Cyan 'Windows Images are stored in $Global:BlobImages'
             Write-Host -ForegroundColor Cyan 'Auto-selecting first image file as ICloudBlob at X:\ICloudBlob.xml'
-            ($Global:BlobImages | Select-Object * -First 1).ICloudBlob | Select-Object * | Export-Clixml -File X:\ICloudBlob.xml
+            ($Global:BlobImages | Select-Object * -First 1).ICloudBlob | Select-Object * | Export-Clixml X:\ICloudBlob.xml
 
             Write-Host -ForegroundColor Cyan 'Auto-selecting first image file Context at X:\Context.xml'
-            ($Global:BlobImages | Select-Object * -First 1).Context | Select-Object * | Export-Clixml -File X:\Context.xml
+            ($Global:BlobImages | Select-Object * -First 1).Context | Select-Object * | Export-Clixml X:\Context.xml
             
             Write-Host -ForegroundColor Cyan 'Run Invoke-OSDCloud in this powershell session for AzOSDCloud Deployment'
         }
