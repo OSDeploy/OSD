@@ -32,7 +32,7 @@ powershell iex (irm functions.osdcloud.com)
 #=================================================
 #Script Information
 $ScriptName = 'functions.osdcloud.com'
-$ScriptVersion = '22.5.8.1'
+$ScriptVersion = '22.5.8.2'
 #=================================================
 #region Initialize Functions
 [Net.ServicePointManager]::SecurityProtocol = [Net.ServicePointManager]::SecurityProtocol -bor [Net.SecurityProtocolType]::Tls12
@@ -600,6 +600,39 @@ function osdcloud-InstallModuleAutopilot {
         Write-Host -ForegroundColor DarkGray 'Install-Module AzureAD,Microsoft.Graph.Intune,WindowsAutopilotIntune [CurrentUser]'
         Install-Module WindowsAutopilotIntune -Force -Scope CurrentUser
     }
+}
+function osdcloud-InstallModuleAzAccounts {
+    [CmdletBinding()]
+    param ()
+    $PSModuleName = 'Az.Accounts'
+    $InstalledModule = Get-InstalledModule $PSModuleName -ErrorAction Ignore | Select-Object -First 1
+
+    if ($InstalledModule) {
+        $GalleryPSModule = Find-Module -Name $PSModuleName -Repository PSGallery -ErrorAction Ignore
+        if (($GalleryPSModule.Version -as [version]) -gt ($InstalledModule.Version -as [version])) {
+            if ($WindowsPhase -eq 'WinPE') {
+                Write-Host -ForegroundColor DarkGray "Update-Module $PSModuleName [AllUsers]"
+                Update-Module -Name $PSModuleName -Repository PSGallery -Scope AllUsers -Force
+                Import-Module $PSModuleName -Force
+            }
+            else {
+                Write-Host -ForegroundColor DarkGray "Update-Module $PSModuleName [CurrentUser]"
+                Update-Module -Name $PSModuleName -Repository PSGallery -Scope CurrentUser -Force
+                Import-Module $PSModuleName -Force
+            } 
+        }
+    }
+    else {
+        if ($WindowsPhase -eq 'WinPE') {
+            Write-Host -ForegroundColor DarkGray "Install-Module $PSModuleName [AllUsers]"
+            Install-Module $PSModuleName -Scope AllUsers
+        }
+        else {
+            Write-Host -ForegroundColor DarkGray "Install-Module $PSModuleName [CurrentUser]"
+            Install-Module $PSModuleName -Scope CurrentUser
+        }
+    }
+    Import-Module $PSModuleName -Force
 }
 function osdcloud-InstallModuleAzKeyVault {
     [CmdletBinding()]
