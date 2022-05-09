@@ -1003,7 +1003,10 @@ if ($WindowsPhase -eq 'OOBE') {
 #=================================================
 function Connect-AzureWinPE {
     [CmdletBinding()]
-    param ()
+    param (
+        [System.Management.Automation.SwitchParameter]
+        $Refresh
+    )
     osdcloud-InstallModuleAzureAd
     osdcloud-InstallModuleAzAccounts
     osdcloud-InstallModuleAzKeyVault
@@ -1011,7 +1014,9 @@ function Connect-AzureWinPE {
     osdcloud-InstallModuleAzStorage
     osdcloud-InstallModuleMSGraphDeviceManagement
 
-    Get-AzContext -ErrorAction Ignore | Disconnect-AzAccount -ErrorAction Ignore
+    if ($Refresh) {
+        Get-AzContext -ErrorAction Ignore | Disconnect-AzAccount -ErrorAction Ignore
+    }
 
     $Global:AzContext = Get-AzContext
     if (!($Global:AzContext)) {
