@@ -32,7 +32,7 @@ powershell iex (irm functions.osdcloud.com)
 #=================================================
 #Script Information
 $ScriptName = 'functions.osdcloud.com'
-$ScriptVersion = '22.5.8.4'
+$ScriptVersion = '22.5.8.5'
 #=================================================
 #region Initialize Functions
 [Net.ServicePointManager]::SecurityProtocol = [Net.ServicePointManager]::SecurityProtocol -bor [Net.SecurityProtocolType]::Tls12
@@ -1002,12 +1002,9 @@ function Connect-AzWinPE {
             until (((($SelectReadHost -ge 0) -and ($SelectReadHost -in $Results.Selection))))
 
             $Results = $Results | Where-Object {$_.Selection -eq $SelectReadHost}
-
-            $Global:AzOSDCloudImage = $Global:AzOSDCloudImage | Where-Object {$_.Name -eq $Results.Name}
-
+            
+            $Global:AzOSDCloudImage = $Global:AzBlobImages | Where-Object {$_.Name -eq $Results.Name}
             $Global:AzOSDCloudImage | Select-Object * | Export-Clixml X:\AzOSDCloudImage.xml
-
-            $Global:AzOSDCloudImage | Select-Object * | Out-Host
             #=================================================
             #   Invoke-OSDCloud.ps1
             #=================================================
