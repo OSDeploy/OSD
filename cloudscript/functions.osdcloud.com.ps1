@@ -32,7 +32,7 @@ powershell iex (irm functions.osdcloud.com)
 #=================================================
 #Script Information
 $ScriptName = 'functions.osdcloud.com'
-$ScriptVersion = '22.5.3.1'
+$ScriptVersion = '22.5.8.1'
 #=================================================
 #region Initialize Functions
 [Net.ServicePointManager]::SecurityProtocol = [Net.ServicePointManager]::SecurityProtocol -bor [Net.SecurityProtocolType]::Tls12
@@ -875,10 +875,12 @@ function Connect-AzWinPE {
     [CmdletBinding()]
     param ()
     osdcloud-InstallModuleAzureAd
-    osdcloud-InstallModuleAzKeyVault
+    #osdcloud-InstallModuleAzKeyVault
     osdcloud-InstallModuleAzResources
     osdcloud-InstallModuleAzStorage
     osdcloud-InstallModuleMSGraphDeviceManagement
+
+    Get-AzContext -ErrorAction Ignore | Disconnect-AzAccount -ErrorAction Ignore
 
     $Global:AzContext = Get-AzContext
     if (!($Global:AzContext)) {
