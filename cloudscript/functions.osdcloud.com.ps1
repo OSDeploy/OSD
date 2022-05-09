@@ -32,7 +32,7 @@ powershell iex (irm functions.osdcloud.com)
 #=================================================
 #Script Information
 $ScriptName = 'functions.osdcloud.com'
-$ScriptVersion = '22.5.8.4'
+$ScriptVersion = '22.5.8.1'
 #=================================================
 #region Initialize Functions
 [Net.ServicePointManager]::SecurityProtocol = [Net.ServicePointManager]::SecurityProtocol -bor [Net.SecurityProtocolType]::Tls12
@@ -893,8 +893,9 @@ if ($WindowsPhase -eq 'WinPE') {
         [CmdletBinding()]
         param (
             [Parameter()]
+            [Alias('KeyVault')]
             [System.Management.Automation.SwitchParameter]
-            $KeyVault,
+            $Azure,
             [Parameter()]
             [System.Management.Automation.SwitchParameter]
             $OSDCloud
@@ -916,8 +917,13 @@ if ($WindowsPhase -eq 'WinPE') {
                     Break
                 }
             }
-            if ($KeyVault) {
+            if ($Azure) {
+                osdcloud-InstallModuleAzureAd
+                osdcloud-InstallModuleAzAccounts
                 osdcloud-InstallModuleAzKeyVault
+                osdcloud-InstallModuleAzResources
+                osdcloud-InstallModuleAzStorage
+                osdcloud-InstallModuleMSGraphDeviceManagement
             }
         }
         else {
@@ -995,7 +1001,7 @@ if ($WindowsPhase -eq 'OOBE') {
 }
 #endregion
 #=================================================
-function Connect-AzWinPE {
+function Connect-AzureWinPE {
     [CmdletBinding()]
     param ()
     osdcloud-InstallModuleAzureAd
