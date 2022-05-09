@@ -32,7 +32,7 @@ powershell iex (irm functions.osdcloud.com)
 #=================================================
 #Script Information
 $ScriptName = 'functions.osdcloud.com'
-$ScriptVersion = '22.5.8.4'
+$ScriptVersion = '22.5.8.5'
 #=================================================
 #region Initialize Functions
 [Net.ServicePointManager]::SecurityProtocol = [Net.ServicePointManager]::SecurityProtocol -bor [Net.SecurityProtocolType]::Tls12
@@ -892,7 +892,7 @@ function Connect-AzWinPE {
         Write-Host -ForegroundColor Green 'Connected to Azure'
         Write-Host -ForegroundColor DarkGray "========================================================================="
         Write-Host -ForegroundColor Cyan 'Azure Context ($Global:AzContext)'
-        $Global:AzContext | Format-list
+        $Global:AzContext | Select-Object Account, Environment, Subscription, Tenant | Format-list
 
         $Global:AzAccount = $Global:AzContext.Account
         $Global:AzEnvironment = $Global:AzContext.Environment
