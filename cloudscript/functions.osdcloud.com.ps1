@@ -32,7 +32,7 @@ powershell iex (irm functions.osdcloud.com)
 #=================================================
 #Script Information
 $ScriptName = 'functions.osdcloud.com'
-$ScriptVersion = '22.5.8.1'
+$ScriptVersion = '22.5.8.2'
 #=================================================
 #region Initialize Functions
 [Net.ServicePointManager]::SecurityProtocol = [Net.ServicePointManager]::SecurityProtocol -bor [Net.SecurityProtocolType]::Tls12
@@ -984,10 +984,7 @@ function Connect-AzWinPE {
             Write-Host -ForegroundColor Cyan 'Windows Images are stored in $Global:AzBlobImages'
 
             $i = $null
-
-            $Results = $Global:AzBlobImages
-
-            $Global:AzBlobImages = foreach ($Item in $Results) {
+            $Results = foreach ($Item in $Global:AzBlobImages) {
                 $i++
 
                 $ObjectProperties = @{
