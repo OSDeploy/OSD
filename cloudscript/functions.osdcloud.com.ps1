@@ -32,7 +32,7 @@ powershell iex (irm functions.osdcloud.com)
 #=================================================
 #Script Information
 $ScriptName = 'functions.osdcloud.com'
-$ScriptVersion = '22.5.8.2'
+$ScriptVersion = '22.5.8.4'
 #=================================================
 #region Initialize Functions
 [Net.ServicePointManager]::SecurityProtocol = [Net.ServicePointManager]::SecurityProtocol -bor [Net.SecurityProtocolType]::Tls12
@@ -1001,7 +1001,9 @@ function Connect-AzWinPE {
             }
             until (((($SelectReadHost -ge 0) -and ($SelectReadHost -in $Results.Selection))))
 
-            $Global:AzOSDCloudImage = $Results | Where-Object {$_.Selection -eq $SelectReadHost}
+            $Results = $Results | Where-Object {$_.Selection -eq $SelectReadHost}
+
+            $Global:AzOSDCloudImage = $Global:AzOSDCloudImage | Where-Object {$_.Name -eq $Results.Name}
 
             $Global:AzOSDCloudImage | Select-Object * | Export-Clixml X:\AzOSDCloudImage.xml
 
@@ -1015,136 +1017,10 @@ function Connect-AzWinPE {
             Invoke-OSDCloud
         }
         else {
-            Write-Warning 'Unable to find any wim Windows Images on the storage accounts'
-        }
-
-        Break
-
-
-
-
-
-
-
-
-        foreach ($Item in $Global:AzOSDCloudStorageAccounts) {
-            $Global:LastStorageContext = New-AzStorageContext -StorageAccountName $Item.ResourceName
-            $Global:AzStorageContext."$($Item.ResourceName)" = $Global:LastStorageContext
-            #Get-AzStorageBlobByTag -TagFilterSqlExpression ""osdcloudimage""=""win10ltsc"" -Context $StorageContext
-            #Get-AzStorageBlobByTag -Context $Global:LastStorageContext
-
-            $StorageContainers = Get-AzStorageContainer -Context $Global:LastStorageContext
-
-        }
-
-
-
-
-
-
-        foreach ($Item in $Global:AzOSDCloudStorageAccounts) {
-            $Global:LastStorageContext = New-AzStorageContext -StorageAccountName $Item.ResourceName
-            $Global:AzStorageContext."$($Item.ResourceName)" = $Global:LastStorageContext
-            #Get-AzStorageBlobByTag -TagFilterSqlExpression ""osdcloudimage""=""win10ltsc"" -Context $StorageContext
-            #Get-AzStorageBlobByTag -Context $Global:LastStorageContext
-
-            $StorageContainers = Get-AzStorageContainer -Context $Global:LastStorageContext
-        
-            foreach ($Container in $StorageContainers) {
-                Write-Host -ForegroundColor Cyan "Scanning for Windows images on Storage Account $($Item.StorageAccountName) Container: $($Container.Name)"
-                $Global:AzBlobImages += Get-AzStorageBlob -Context $Global:LastStorageContext -Container $Container.Name -Blob *.wim -ErrorAction Ignore
-            }
-        }
-        if ($Global:AzBlobImages) {
-            Write-Host -ForegroundColor Cyan 'Blob images are stored in $Global:AzBlobImages'
-            $Global:AzBlobImages
-        }
-        else {
-            Write-Warning 'Unable to find any wim Windows Images on the storage accounts'
-        }
-
-        Break
-
-        $Global:AzBlobImages += Get-AzStorageBlob -Context $Global:AzStorageContext."$($Item.ResourceName)" -Container $Container.Name -Blob *.wim -ErrorAction Ignore
-        foreach ($Item in $Global:AzStorageAccounts) {
-            $StorageContext = New-AzStorageContext -StorageAccountName $Item.StorageAccountName
-            $Global:AzStorageContext."$($Item.StorageAccountName)" = $StorageContext
-        
-            $StorageContainers = Get-AzStorageContainer -Context $StorageContext
-        
-            foreach ($Container in $StorageContainers) {
-                Write-Host -ForegroundColor Cyan "Scanning for Windows images on Storage Account $($Item.StorageAccountName) Container: $($Container.Name)"
-                #$Global:AzBlobImages += Get-AzStorageBlob -Context $StorageContext -Container $Container.Name -Blob *.wim -ErrorAction Ignore
-            }
-        }
-        if ($Global:AzBlobImages) {
-            Write-Host -ForegroundColor Cyan 'Blob images are stored in $Global:AzBlobImages'
-        }
-        else {
-            Write-Warning 'Unable to find any wim Windows Images on the storage accounts'
+            Write-Warning 'Unable to find any Windows Images on the storage accounts'
         }
     }
     else {
         Write-Warning 'Unable to connect to AzureAD'
     }
-}
-function osdcloud-SelectAzOSDCloudImage {
-    [CmdletBinding()]
-    param ()
-
-    $i = $null
-    $Results = Find-OSDCloudFile -Name '*.wim' -Path '\OSDCloud\OS\'
-
-    $Results = $Results | Sort-Object -Property Length -Unique | Sort-Object FullName | Where-Object {$_.Length -gt 3GB}
-
-    if ($Results) {
-        $Results = foreach ($Item in $Results) {
-            $i++
-
-            $ObjectProperties = @{
-                Selection   = $i
-                Name        = $Item.Name
-                Directory   = $Item.Directory
-            }
-            New-Object -TypeName PSObject -Property $ObjectProperties
-        }
-
-        $Results | Select-Object -Property Selection, Name, Directory | Format-Table | Out-Host
-
-        do {
-            $SelectReadHost = Read-Host -Prompt "Select a Windows Image to apply by Selection [Number]"
-        }
-        until (((($SelectReadHost -ge 0) -and ($SelectReadHost -in $Results.Selection))))
-        
-        if ($SelectReadHost -eq 'S') {
-            Return $false
-        }
-
-        $Results = $Results | Where-Object {$_.Selection -eq $SelectReadHost}
-
-        Return Get-Item (Join-Path $Results.Directory $Results.Name)
-    }
-}
-function osdcloud-AzureStorageDemo {
-    [CmdletBinding()]
-    param ()
-    $Global:AzStorageContext = New-AzStorageContext -StorageAccountName osdclouddemo
-    $Global:AzStorageContext
-
-    $Global:AzStorageContainer = Get-AzStorageContainer -Context $Global:AzStorageContext
-    $Global:AzStorageContainer
-
-    Write-Host '$Global:AzStorageContext = New-AzStorageContext -StorageAccountName osdclouddemo'
-    Write-Host 'Get-AzStorageContainer -Context $Global:AzStorageContext'
-    Write-Host 'Get-AzStorageBlob -Container private -Context $Global:AzStorageContext'
-    Write-Host 'Get-AzStorageBlobContent -Blob "OSDCloud.iso" -Container private -Context $Global:AzStorageContext'
-    Break
-    Write-Host -ForegroundColor Cyan 'List your Containers using these Commands:'
-    foreach ($Item in $Global:AzStorageAccounts) {
-        Write-Host -ForegroundColor Yellow "Get-AzStorageContainer -Context `$Global:AzStorageContext`.$($Item.StorageAccountName)"
-    }
-
-    Write-Host -ForegroundColor Cyan 'List your Blobs using this command:'
-    Write-Host -ForegroundColor Yellow 'Get-AzStorageBlob -Container <name> -Context $Global:AzStorageContext.<storageaccountname>'
-    Write-Host -ForegroundColor Yellow 'Get-AzStorageBlobContent -Container <name> -Blob <filenamecasesensitive>  -Context $Global:AzStorageContext'
 }
