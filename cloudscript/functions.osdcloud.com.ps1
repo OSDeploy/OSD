@@ -32,7 +32,7 @@ powershell iex (irm functions.osdcloud.com)
 #=================================================
 #Script Information
 $ScriptName = 'functions.osdcloud.com'
-$ScriptVersion = '22.5.8.5'
+$ScriptVersion = '22.5.8.6'
 #=================================================
 #region Initialize Functions
 [Net.ServicePointManager]::SecurityProtocol = [Net.ServicePointManager]::SecurityProtocol -bor [Net.SecurityProtocolType]::Tls12
@@ -880,12 +880,12 @@ function Connect-AzWinPE {
     osdcloud-InstallModuleAzStorage
     osdcloud-InstallModuleMSGraphDeviceManagement
 
-    #Get-AzContext -ErrorAction Ignore | Disconnect-AzAccount -ErrorAction Ignore
+    Get-AzContext -ErrorAction Ignore | Disconnect-AzAccount -ErrorAction Ignore
 
     $Global:AzContext = Get-AzContext
     if (!($Global:AzContext)) {
-        #$null = Connect-AzAccount -Device -AuthScope Storage -ErrorAction Ignore
-        #$Global:AzContext = Get-AzContext
+        $null = Connect-AzAccount -Device -AuthScope Storage -ErrorAction Ignore
+        $Global:AzContext = Get-AzContext
     }
 
     if ($Global:AzContext) {
