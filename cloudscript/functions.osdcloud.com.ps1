@@ -1036,10 +1036,12 @@ function Connect-AzureWinPE {
         Write-Host -ForegroundColor Cyan        '$Global:AzEnvironment:    ' $Global:AzEnvironment
         Write-Host -ForegroundColor Cyan        '$Global:AzSubscription:   ' $Global:AzSubscription
         Write-Host -ForegroundColor Cyan        '$Global:AzTenantId:       ' $Global:AzTenantId
+        Write-Host ''
 
         Write-Host -ForegroundColor DarkCyan    'Azure Context:             $Global:AzContext'
         Write-Host -ForegroundColor DarkCyan    'Access Tokens:             $Global:Az*AccessToken'
         Write-Host -ForegroundColor DarkCyan    'Headers:                   $Global:Az*Headers'
+        Write-Host ''
         #=================================================
         #	AAD Graph
         #=================================================
@@ -1103,6 +1105,7 @@ function Connect-AzureWinPE {
         $Global:AzOSDCloudStorageAccounts = Get-AzResource -ResourceType 'Microsoft.Storage/storageAccounts' | Where-Object {$_.Tags.Keys -contains 'osdcloud'}
 
         Write-Host -ForegroundColor DarkCyan    'Storage Contexts:          $Global:AzStorageContext'
+        Write-Host ''
         $Global:AzStorageContext = @{}
         $Global:AzBlobImages = @()
 
@@ -1115,7 +1118,7 @@ function Connect-AzureWinPE {
             $StorageContainers = Get-AzStorageContainer -Context $Global:LastStorageContext
         
             foreach ($Container in $StorageContainers) {
-                Write-Host -ForegroundColor DarkCyan "Scanning for Windows Images on Storage Account: $($Item.ResourceName) Container: $($Container.Name)"
+                Write-Host -ForegroundColor Cyan "Scanning for Windows Images on Storage Account: $($Item.ResourceName) Container: $($Container.Name)"
                 $Global:AzBlobImages += Get-AzStorageBlob -Context $Global:LastStorageContext -Container $Container.Name -Blob *.wim -ErrorAction Ignore
             }
         }
