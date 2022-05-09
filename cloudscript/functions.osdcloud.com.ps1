@@ -937,6 +937,7 @@ function Connect-AzWinPE {
     [CmdletBinding()]
     param ()
     osdcloud-InstallModuleAzureAd
+    osdcloud-InstallModuleAzAccounts
     osdcloud-InstallModuleAzKeyVault
     osdcloud-InstallModuleAzResources
     osdcloud-InstallModuleAzStorage
