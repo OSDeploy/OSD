@@ -32,7 +32,7 @@ powershell iex (irm functions.osdcloud.com)
 #=================================================
 #Script Information
 $ScriptName = 'functions.osdcloud.com'
-$ScriptVersion = '22.5.8.1'
+$ScriptVersion = '22.5.8.2'
 #=================================================
 #region Initialize Functions
 [Net.ServicePointManager]::SecurityProtocol = [Net.ServicePointManager]::SecurityProtocol -bor [Net.SecurityProtocolType]::Tls12
@@ -1022,15 +1022,19 @@ function Connect-AzureWinPE {
     if ($Global:AzContext) {
         Write-Host -ForegroundColor Green 'Connected to Azure'
         Write-Host -ForegroundColor DarkGray "========================================================================="
-        Write-Host -ForegroundColor Cyan 'Azure Context ($Global:AzContext)'
-        $Global:AzContext | Select-Object Account, Environment, Subscription, Tenant | Format-list
-
         $Global:AzAccount = $Global:AzContext.Account
         $Global:AzEnvironment = $Global:AzContext.Environment
         $Global:AzSubscription = $Global:AzContext.Subscription
         $Global:AzTenantId = $Global:AzContext.Tenant
-        Write-Host -ForegroundColor Cyan 'Building $Global:Az*AccessToken'
-        Write-Host -ForegroundColor Cyan 'Building $Global:Az*Headers'
+
+        Write-Host -ForegroundColor Cyan '$Global:AzAccount: ' $Global:AzAccount
+        Write-Host -ForegroundColor Cyan '$Global:AzEnvironment: ' $Global:AzEnvironment
+        Write-Host -ForegroundColor Cyan '$Global:AzSubscription: ' $Global:AzSubscription
+        Write-Host -ForegroundColor Cyan '$Global:AzTenantId: ' $Global:AzTenantId
+
+        Write-Host -ForegroundColor DarkCyan 'Azure Context:    $Global:AzContext'
+        Write-Host -ForegroundColor DarkCyan 'Access Tokens:    $Global:Az*AccessToken'
+        Write-Host -ForegroundColor DarkCyan 'Headers:          $Global:Az*Headers'
         #=================================================
         #	AAD Graph
         #=================================================
