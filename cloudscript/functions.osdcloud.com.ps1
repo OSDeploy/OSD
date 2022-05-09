@@ -579,18 +579,35 @@ function osdcloud-InstallPackageManagement {
 function osdcloud-InstallModuleOSD {
     [CmdletBinding()]
     param ()
-    if ($WindowsPhase -eq 'WinPE') {
-        Write-Host -ForegroundColor DarkGray 'Install-Module OSD [AllUsers]'
-        Install-Module OSD -Force -Scope AllUsers
-        Import-Module OSD -Force
-    }
-    else {
-        $InstalledModule = Import-Module OSD -PassThru -ErrorAction Ignore
-        if (-not $InstalledModule) {
-            Write-Host -ForegroundColor DarkGray 'Install-Module OSD [CurrentUser]'
-            Install-Module OSD -Force -Scope CurrentUser
+    $PSModuleName = 'OSD'
+    $InstalledModule = Get-InstalledModule $PSModuleName -ErrorAction Ignore | Select-Object -First 1
+    $GalleryPSModule = Find-Module -Name $PSModuleName -Repository PSGallery -ErrorAction Ignore
+
+    if ($InstalledModule) {
+        if (($GalleryPSModule.Version -as [version]) -gt ($InstalledModule.Version -as [version])) {
+            if ($WindowsPhase -eq 'WinPE') {
+                Write-Host -ForegroundColor DarkGray "Update-Module $PSModuleName $($GalleryPSModule.Version) [AllUsers]"
+                Update-Module -Name $PSModuleName -Repository PSGallery -Scope AllUsers -Force
+                Import-Module $PSModuleName -Force
+            }
+            else {
+                Write-Host -ForegroundColor DarkGray "Update-Module $PSModuleName $($GalleryPSModule.Version) [CurrentUser]"
+                Update-Module -Name $PSModuleName -Repository PSGallery -Scope CurrentUser -Force
+                Import-Module $PSModuleName -Force
+            } 
         }
     }
+    else {
+        if ($WindowsPhase -eq 'WinPE') {
+            Write-Host -ForegroundColor DarkGray "Install-Module $PSModuleName $($GalleryPSModule.Version) [AllUsers]"
+            Install-Module $PSModuleName -Scope AllUsers
+        }
+        else {
+            Write-Host -ForegroundColor DarkGray "Install-Module $PSModuleName $($GalleryPSModule.Version) [CurrentUser]"
+            Install-Module $PSModuleName -Scope CurrentUser
+        }
+    }
+    Import-Module $PSModuleName -Force
 }
 function osdcloud-InstallModuleAutopilot {
     [CmdletBinding()]
