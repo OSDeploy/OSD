@@ -1027,14 +1027,14 @@ function Connect-AzureWinPE {
         $Global:AzSubscription = $Global:AzContext.Subscription
         $Global:AzTenantId = $Global:AzContext.Tenant
 
-        Write-Host -ForegroundColor Cyan '$Global:AzAccount: ' $Global:AzAccount
-        Write-Host -ForegroundColor Cyan '$Global:AzEnvironment: ' $Global:AzEnvironment
-        Write-Host -ForegroundColor Cyan '$Global:AzSubscription: ' $Global:AzSubscription
-        Write-Host -ForegroundColor Cyan '$Global:AzTenantId: ' $Global:AzTenantId
+        Write-Host -ForegroundColor Cyan        '$Global:AzAccount:        ' $Global:AzAccount
+        Write-Host -ForegroundColor Cyan        '$Global:AzEnvironment:    ' $Global:AzEnvironment
+        Write-Host -ForegroundColor Cyan        '$Global:AzSubscription:   ' $Global:AzSubscription
+        Write-Host -ForegroundColor Cyan        '$Global:AzTenantId:       ' $Global:AzTenantId
 
-        Write-Host -ForegroundColor DarkCyan 'Azure Context:    $Global:AzContext'
-        Write-Host -ForegroundColor DarkCyan 'Access Tokens:    $Global:Az*AccessToken'
-        Write-Host -ForegroundColor DarkCyan 'Headers:          $Global:Az*Headers'
+        Write-Host -ForegroundColor DarkCyan    'Azure Context:             $Global:AzContext'
+        Write-Host -ForegroundColor DarkCyan    'Access Tokens:             $Global:Az*AccessToken'
+        Write-Host -ForegroundColor DarkCyan    'Headers:                   $Global:Az*Headers'
         #=================================================
         #	AAD Graph
         #=================================================
@@ -1091,13 +1091,13 @@ function Connect-AzureWinPE {
         #$Global:MgGraph = Connect-MgGraph -AccessToken $Global:AzMSGraphAccessToken.Token -Scopes DeviceManagementConfiguration.Read.All,DeviceManagementServiceConfig.Read.All,DeviceManagementServiceConfiguration.Read.All
         $Global:AzureAD = Connect-AzureAD -AadAccessToken $Global:AzAadGraphAccessToken.Token -AccountId $Global:AzContext.Account.Id
 
-        Write-Host -ForegroundColor Cyan 'Saving Azure Storage Accounts to $Global:AzStorageAccounts'
+        Write-Host -ForegroundColor DarkCyan    'Storage Accounts:          $Global:AzStorageAccounts'
         $Global:AzStorageAccounts = Get-AzStorageAccount
 
-        Write-Host -ForegroundColor Cyan 'Saving OSDCloud Azure Storage Resources to $Global:AzOSDCloudStorageAccounts'
+        Write-Host -ForegroundColor DarkCyan    'OSDCloud Storage Accounts: $Global:AzOSDCloudStorageAccounts'
         $Global:AzOSDCloudStorageAccounts = Get-AzResource -ResourceType 'Microsoft.Storage/storageAccounts' | Where-Object {$_.Tags.Keys -contains 'osdcloud'}
 
-        Write-Host -ForegroundColor Cyan 'Saving Azure Storage Contexts to $Global:AzStorageContext'
+        Write-Host -ForegroundColor DarkCyan    'Storage Contexts:          $Global:AzStorageContext'
         $Global:AzStorageContext = @{}
         $Global:AzBlobImages = @()
 
@@ -1110,13 +1110,13 @@ function Connect-AzureWinPE {
             $StorageContainers = Get-AzStorageContainer -Context $Global:LastStorageContext
         
             foreach ($Container in $StorageContainers) {
-                Write-Host -ForegroundColor Cyan "Scanning for Windows images on Storage Account $($Item.ResourceName) Container: $($Container.Name)"
+                Write-Host -ForegroundColor DarkCyan "Scanning for Windows Images on Storage Account: $($Item.ResourceName) Container: $($Container.Name)"
                 $Global:AzBlobImages += Get-AzStorageBlob -Context $Global:LastStorageContext -Container $Container.Name -Blob *.wim -ErrorAction Ignore
             }
         }
 
         if ($Global:AzBlobImages) {
-            Write-Host -ForegroundColor Cyan 'Windows Images are stored in $Global:AzBlobImages'
+            Write-Host -ForegroundColor DarkCyan    'Windows Images:            $Global:AzBlobImages'
 
             $i = $null
             $Results = foreach ($Item in $Global:AzBlobImages) {
