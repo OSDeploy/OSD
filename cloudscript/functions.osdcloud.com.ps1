@@ -32,7 +32,7 @@ powershell iex (irm functions.osdcloud.com)
 #=================================================
 #Script Information
 $ScriptName = 'functions.osdcloud.com'
-$ScriptVersion = '22.5.8.3'
+$ScriptVersion = '22.5.8.4'
 #=================================================
 #region Initialize Functions
 [Net.ServicePointManager]::SecurityProtocol = [Net.ServicePointManager]::SecurityProtocol -bor [Net.SecurityProtocolType]::Tls12
@@ -898,12 +898,14 @@ function Connect-AzWinPE {
         $Global:AzEnvironment = $Global:AzContext.Environment
         $Global:AzSubscription = $Global:AzContext.Subscription
         $Global:AzTenantId = $Global:AzContext.Tenant
+        Write-Host -ForegroundColor Cyan 'Building $Global:Az*AccessToken'
+        Write-Host -ForegroundColor Cyan 'Building $Global:Az*Headers'
         #=================================================
         #	AAD Graph
         #=================================================
-        Write-Host -ForegroundColor Cyan 'Building $Global:AzAadGraphAccessToken'
+        #Write-Host -ForegroundColor Cyan 'Building $Global:AzAadGraphAccessToken'
         $Global:AzAadGraphAccessToken = Get-AzAccessToken -ResourceTypeName AadGraph
-        Write-Host -ForegroundColor Cyan 'Building $Global:AzAadGraphHeaders'
+        #Write-Host -ForegroundColor Cyan 'Building $Global:AzAadGraphHeaders'
         $Global:AzAadGraphHeaders = @{
             'Authorization' = 'Bearer ' + $Global:AzAadGraphAccessToken.Token
             'Content-Type'  = 'application/json'
@@ -913,9 +915,9 @@ function Connect-AzWinPE {
         #=================================================
         #	Azure KeyVault
         #=================================================
-        Write-Host -ForegroundColor Cyan 'Building $Global:AzKeyVaultAccessToken'
+        #Write-Host -ForegroundColor Cyan 'Building $Global:AzKeyVaultAccessToken'
         $Global:AzKeyVaultAccessToken = Get-AzAccessToken -ResourceTypeName KeyVault
-        Write-Host -ForegroundColor Cyan 'Building $Global:AzKeyVaultHeaders'
+        #Write-Host -ForegroundColor Cyan 'Building $Global:AzKeyVaultHeaders'
         $Global:AzKeyVaultHeaders = @{
             'Authorization' = 'Bearer ' + $Global:AzKeyVaultAccessToken.Token
             'Content-Type'  = 'application/json'
@@ -925,9 +927,9 @@ function Connect-AzWinPE {
         #=================================================
         #	Azure MSGraph
         #=================================================
-        Write-Host -ForegroundColor Cyan 'Building $Global:AzMSGraphAccessToken'
+        #Write-Host -ForegroundColor Cyan 'Building $Global:AzMSGraphAccessToken'
         $Global:AzMSGraphAccessToken = Get-AzAccessToken -ResourceTypeName MSGraph
-        Write-Host -ForegroundColor Cyan 'Building $Global:AzMSGraphHeaders'
+        #Write-Host -ForegroundColor Cyan 'Building $Global:AzMSGraphHeaders'
         $Global:AzMSGraphHeaders = @{
             'Authorization' = 'Bearer ' + $Global:AzMSGraphAccessToken.Token
             'Content-Type'  = 'application/json'
@@ -937,9 +939,9 @@ function Connect-AzWinPE {
         #=================================================
         #	Azure Storage
         #=================================================
-        Write-Host -ForegroundColor Cyan 'Building $Global:AzStorageAccessToken'
+        #Write-Host -ForegroundColor Cyan 'Building $Global:AzStorageAccessToken'
         $Global:AzStorageAccessToken = Get-AzAccessToken -ResourceTypeName Storage
-        Write-Host -ForegroundColor Cyan 'Building $Global:AzStorageHeaders'
+        #Write-Host -ForegroundColor Cyan 'Building $Global:AzStorageHeaders'
         $Global:AzStorageHeaders = @{
             'Authorization' = 'Bearer ' + $Global:AzStorageAccessToken.Token
             'Content-Type'  = 'application/json'
