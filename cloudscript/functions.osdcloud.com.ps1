@@ -32,7 +32,7 @@ powershell iex (irm functions.osdcloud.com)
 #=================================================
 #Script Information
 $ScriptName = 'functions.osdcloud.com'
-$ScriptVersion = '22.5.8.6'
+$ScriptVersion = '22.5.8.1'
 #=================================================
 #region Initialize Functions
 [Net.ServicePointManager]::SecurityProtocol = [Net.ServicePointManager]::SecurityProtocol -bor [Net.SecurityProtocolType]::Tls12
@@ -982,13 +982,40 @@ function Connect-AzWinPE {
 
         if ($Global:AzBlobImages) {
             Write-Host -ForegroundColor Cyan 'Windows Images are stored in $Global:AzBlobImages'
-            Write-Host -ForegroundColor Cyan 'Auto-selecting first image file as ICloudBlob at X:\ICloudBlob.xml'
-            ($Global:AzBlobImages | Select-Object * -First 1).ICloudBlob | Select-Object * | Export-Clixml X:\ICloudBlob.xml
 
-            Write-Host -ForegroundColor Cyan 'Auto-selecting first image file Context at X:\Context.xml'
-            ($Global:AzBlobImages | Select-Object * -First 1).Context | Select-Object * | Export-Clixml X:\Context.xml
-            
-            Write-Host -ForegroundColor Yellow 'Run Invoke-OSDCloud in this powershell session for AzOSDCloud Deployment'
+            $i = $null
+
+            $Results = $Global:AzBlobImages
+
+            $Global:AzBlobImages = foreach ($Item in $Results) {
+                $i++
+
+                $ObjectProperties = @{
+                    Selection   = $i
+                    Name        = $Item.Name
+                }
+                New-Object -TypeName PSObject -Property $ObjectProperties
+            }
+
+            $Results | Select-Object -Property Selection, Name | Format-Table | Out-Host
+
+            do {
+                $SelectReadHost = Read-Host -Prompt "Select a Windows Image to apply by Selection [Number]"
+            }
+            until (((($SelectReadHost -ge 0) -and ($SelectReadHost -in $Results.Selection))))
+
+            $Global:AzOSDCloudImage = $Results | Where-Object {$_.Selection -eq $SelectReadHost}
+
+            $Global:AzOSDCloudImage | Select-Object * | Export-Clixml X:\AzOSDCloudImage.xml
+
+            $Global:AzOSDCloudImage | Select-Object * | Out-Host
+            #=================================================
+            #   Invoke-OSDCloud.ps1
+            #=================================================
+            Write-Host -ForegroundColor DarkGray "========================================================================="
+            Write-Host -ForegroundColor Green "Invoke-OSDCloud ... Starting in 5 seconds..."
+            Start-Sleep -Seconds 5
+            Invoke-OSDCloud
         }
         else {
             Write-Warning 'Unable to find any wim Windows Images on the storage accounts'
@@ -1062,6 +1089,43 @@ function Connect-AzWinPE {
     }
     else {
         Write-Warning 'Unable to connect to AzureAD'
+    }
+}
+function osdcloud-SelectAzOSDCloudImage {
+    [CmdletBinding()]
+    param ()
+
+    $i = $null
+    $Results = Find-OSDCloudFile -Name '*.wim' -Path '\OSDCloud\OS\'
+
+    $Results = $Results | Sort-Object -Property Length -Unique | Sort-Object FullName | Where-Object {$_.Length -gt 3GB}
+
+    if ($Results) {
+        $Results = foreach ($Item in $Results) {
+            $i++
+
+            $ObjectProperties = @{
+                Selection   = $i
+                Name        = $Item.Name
+                Directory   = $Item.Directory
+            }
+            New-Object -TypeName PSObject -Property $ObjectProperties
+        }
+
+        $Results | Select-Object -Property Selection, Name, Directory | Format-Table | Out-Host
+
+        do {
+            $SelectReadHost = Read-Host -Prompt "Select a Windows Image to apply by Selection [Number]"
+        }
+        until (((($SelectReadHost -ge 0) -and ($SelectReadHost -in $Results.Selection))))
+        
+        if ($SelectReadHost -eq 'S') {
+            Return $false
+        }
+
+        $Results = $Results | Where-Object {$_.Selection -eq $SelectReadHost}
+
+        Return Get-Item (Join-Path $Results.Directory $Results.Name)
     }
 }
 function osdcloud-AzureStorageDemo {
