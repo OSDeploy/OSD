@@ -32,7 +32,7 @@ powershell iex (irm functions.osdcloud.com)
 #=================================================
 #Script Information
 $ScriptName = 'functions.osdcloud.com'
-$ScriptVersion = '22.5.8.2'
+$ScriptVersion = '22.5.8.3'
 #=================================================
 #region Initialize Functions
 [Net.ServicePointManager]::SecurityProtocol = [Net.ServicePointManager]::SecurityProtocol -bor [Net.SecurityProtocolType]::Tls12
@@ -1048,13 +1048,20 @@ function Connect-AzureWinPE {
         Write-Host -ForegroundColor DarkGray "========================================================================="
         $Global:AzAccount = $Global:AzContext.Account
         $Global:AzEnvironment = $Global:AzContext.Environment
-        $Global:AzSubscription = $Global:AzContext.Subscription
         $Global:AzTenantId = $Global:AzContext.Tenant
+        $Global:AzSubscription = $Global:AzContext.Subscription
 
         Write-Host -ForegroundColor Cyan        '$Global:AzAccount:        ' $Global:AzAccount
         Write-Host -ForegroundColor Cyan        '$Global:AzEnvironment:    ' $Global:AzEnvironment
-        Write-Host -ForegroundColor Cyan        '$Global:AzSubscription:   ' $Global:AzSubscription
         Write-Host -ForegroundColor Cyan        '$Global:AzTenantId:       ' $Global:AzTenantId
+        Write-Host -ForegroundColor Cyan        '$Global:AzSubscription:   ' $Global:AzSubscription
+        if ($null -eq $Global:AzContext.Subscription) {
+            Write-Warning 'You do not have access to any Azure Subscriptions'
+            Write-Warning 'This is likely due to not having rights to Azure Resources'
+            Write-Warning 'Contact your administrator to resolve this issue'
+            Break
+        }
+
         Write-Host ''
 
         Write-Host -ForegroundColor DarkGray    'Azure Context:             $Global:AzContext'
