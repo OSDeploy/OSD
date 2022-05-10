@@ -32,7 +32,7 @@ powershell iex (irm functions.osdcloud.com)
 #=================================================
 #Script Information
 $ScriptName = 'functions.osdcloud.com'
-$ScriptVersion = '22.5.9.1'
+$ScriptVersion = '22.5.9.2'
 #=================================================
 #region Initialize Functions
 [Net.ServicePointManager]::SecurityProtocol = [Net.ServicePointManager]::SecurityProtocol -bor [Net.SecurityProtocolType]::Tls12
@@ -587,22 +587,22 @@ function osdcloud-InstallModuleOSD {
         if (($GalleryPSModule.Version -as [version]) -gt ($InstalledModule.Version -as [version])) {
             if ($WindowsPhase -eq 'WinPE') {
                 Write-Host -ForegroundColor DarkGray "Install-Module $PSModuleName $($GalleryPSModule.Version) [AllUsers]"
-                Install-Module $PSModuleName -Scope AllUsers
+                Install-Module $PSModuleName -Scope AllUsers -Force
             }
             else {
-                Write-Host -ForegroundColor DarkGray "Install-Module $PSModuleName $($GalleryPSModule.Version) [CurrentUser]"
-                Install-Module $PSModuleName -Scope CurrentUser
+                Write-Host -ForegroundColor DarkGray "Install-Module $PSModuleName $($GalleryPSModule.Version) [AllUsers]"
+                Install-Module $PSModuleName -Scope AllUsers -Force
             } 
         }
     }
     else {
         if ($WindowsPhase -eq 'WinPE') {
             Write-Host -ForegroundColor DarkGray "Install-Module $PSModuleName $($GalleryPSModule.Version) [AllUsers]"
-            Install-Module $PSModuleName -Scope AllUsers
+            Install-Module $PSModuleName -Scope AllUsers -Force
         }
         else {
-            Write-Host -ForegroundColor DarkGray "Install-Module $PSModuleName $($GalleryPSModule.Version) [CurrentUser]"
-            Install-Module $PSModuleName -Scope CurrentUser
+            Write-Host -ForegroundColor DarkGray "Install-Module $PSModuleName $($GalleryPSModule.Version) [AllUsers]"
+            Install-Module $PSModuleName -Scope AllUsers -Force
         }
     }
     Import-Module $PSModuleName -Force
