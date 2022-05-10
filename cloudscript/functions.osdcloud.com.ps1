@@ -32,7 +32,7 @@ powershell iex (irm functions.osdcloud.com)
 #=================================================
 #Script Information
 $ScriptName = 'functions.osdcloud.com'
-$ScriptVersion = '22.5.8.3'
+$ScriptVersion = '22.5.8.4'
 #=================================================
 #region Initialize Functions
 [Net.ServicePointManager]::SecurityProtocol = [Net.ServicePointManager]::SecurityProtocol -bor [Net.SecurityProtocolType]::Tls12
@@ -1139,6 +1139,7 @@ function Start-AzOSDCloudByTag {
     $Global:AzOSDCloudStorageAccounts = Get-AzResource -ResourceType 'Microsoft.Storage/storageAccounts' | Where-Object {$_.Tags.Keys -contains 'osdcloud'}
 
     Write-Host -ForegroundColor DarkGray    'Storage Contexts:          $Global:AzStorageContext'
+    Write-Host -ForegroundColor DarkGray    'Blob Windows Images:       $Global:AzBlobImages'
     Write-Host ''
     $Global:AzStorageContext = @{}
     $Global:AzBlobImages = @()
@@ -1158,20 +1159,20 @@ function Start-AzOSDCloudByTag {
     }
 
     if ($Global:AzBlobImages) {
-        Write-Host -ForegroundColor DarkGray    'Windows Images:            $Global:AzBlobImages'
-
         $i = $null
         $Results = foreach ($Item in $Global:AzBlobImages) {
             $i++
 
             $ObjectProperties = @{
-                Selection   = $i
-                Name        = $Item.Name
+                Selection       = $i
+                StorageAccount  = $Item.BlobClient.AccountName
+                Container       = $Item.BlobClient.BlobContainerName
+                Name            = $Item.Name
             }
             New-Object -TypeName PSObject -Property $ObjectProperties
         }
 
-        $Results | Select-Object -Property Selection, Name | Format-Table | Out-Host
+        $Results | Select-Object -Property Selection, StorageAccount, Container, Name | Format-Table | Out-Host
 
         do {
             $SelectReadHost = Read-Host -Prompt "Select a Windows Image to apply by Selection [Number]"
