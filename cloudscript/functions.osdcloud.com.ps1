@@ -32,7 +32,7 @@ powershell iex (irm functions.osdcloud.com)
 #=================================================
 #Script Information
 $ScriptName = 'functions.osdcloud.com'
-$ScriptVersion = '22.5.8.4'
+$ScriptVersion = '22.5.8.5'
 #=================================================
 #region Initialize Functions
 [Net.ServicePointManager]::SecurityProtocol = [Net.ServicePointManager]::SecurityProtocol -bor [Net.SecurityProtocolType]::Tls12
@@ -1164,24 +1164,24 @@ function Start-AzOSDCloudByTag {
             $i++
 
             $ObjectProperties = @{
-                Selection       = $i
+                Number       = $i
                 StorageAccount  = $Item.BlobClient.AccountName
                 Container       = $Item.BlobClient.BlobContainerName
-                Name            = $Item.Name
+                Blob            = $Item.Name
             }
             New-Object -TypeName PSObject -Property $ObjectProperties
         }
 
-        $Results | Select-Object -Property Selection, StorageAccount, Container, Name | Format-Table | Out-Host
+        $Results | Select-Object -Property Number, StorageAccount, Container, Blob | Format-Table | Out-Host
 
         do {
-            $SelectReadHost = Read-Host -Prompt "Select a Windows Image to apply by Selection [Number]"
+            $SelectReadHost = Read-Host -Prompt "Select a Windows Image to apply by Number"
         }
-        until (((($SelectReadHost -ge 0) -and ($SelectReadHost -in $Results.Selection))))
+        until (((($SelectReadHost -ge 0) -and ($SelectReadHost -in $Results.Number))))
 
-        $Results = $Results | Where-Object {$_.Selection -eq $SelectReadHost}
+        $Results = $Results | Where-Object {$_.Number -eq $SelectReadHost}
 
-        $Global:AzOSDCloudImage = $Global:AzBlobImages | Where-Object {$_.Name -eq $Results.Name}
+        $Global:AzOSDCloudImage = $Global:AzBlobImages | Where-Object {$_.Name -eq $Results.Blob}
         $Global:AzOSDCloudImage | Select-Object * | Export-Clixml X:\AzOSDCloudImage.xml
         #=================================================
         #   Invoke-OSDCloud.ps1
