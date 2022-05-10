@@ -32,7 +32,7 @@ powershell iex (irm functions.osdcloud.com)
 #=================================================
 #Script Information
 $ScriptName = 'functions.osdcloud.com'
-$ScriptVersion = '22.5.8.8'
+$ScriptVersion = '22.5.9.1'
 #=================================================
 #region Initialize Functions
 [Net.ServicePointManager]::SecurityProtocol = [Net.ServicePointManager]::SecurityProtocol -bor [Net.SecurityProtocolType]::Tls12
@@ -581,19 +581,17 @@ function osdcloud-InstallModuleOSD {
     param ()
     $PSModuleName = 'OSD'
     $InstalledModule = Get-InstalledModule $PSModuleName -ErrorAction Ignore | Select-Object -First 1
-    $GalleryPSModule = Find-Module -Name $PSModuleName -Repository PSGallery -ErrorAction Ignore
+    $GalleryPSModule = Find-Module -Name $PSModuleName -ErrorAction Ignore
 
     if ($InstalledModule) {
         if (($GalleryPSModule.Version -as [version]) -gt ($InstalledModule.Version -as [version])) {
             if ($WindowsPhase -eq 'WinPE') {
-                Write-Host -ForegroundColor DarkGray "Update-Module $PSModuleName $($GalleryPSModule.Version) [AllUsers]"
-                Update-Module -Name $PSModuleName -Repository PSGallery -Scope AllUsers -Force
-                Import-Module $PSModuleName -Force
+                Write-Host -ForegroundColor DarkGray "Install-Module $PSModuleName $($GalleryPSModule.Version) [AllUsers]"
+                Install-Module $PSModuleName -Scope AllUsers
             }
             else {
-                Write-Host -ForegroundColor DarkGray "Update-Module $PSModuleName $($GalleryPSModule.Version) [CurrentUser]"
-                Update-Module -Name $PSModuleName -Repository PSGallery -Scope CurrentUser -Force
-                Import-Module $PSModuleName -Force
+                Write-Host -ForegroundColor DarkGray "Install-Module $PSModuleName $($GalleryPSModule.Version) [CurrentUser]"
+                Install-Module $PSModuleName -Scope CurrentUser
             } 
         }
     }
@@ -623,18 +621,18 @@ function osdcloud-InstallModuleAzAccounts {
     param ()
     $PSModuleName = 'Az.Accounts'
     $InstalledModule = Get-InstalledModule $PSModuleName -ErrorAction Ignore | Select-Object -First 1
-    $GalleryPSModule = Find-Module -Name $PSModuleName -Repository PSGallery -ErrorAction Ignore
+    $GalleryPSModule = Find-Module -Name $PSModuleName -ErrorAction Ignore
 
     if ($InstalledModule) {
         if (($GalleryPSModule.Version -as [version]) -gt ($InstalledModule.Version -as [version])) {
             if ($WindowsPhase -eq 'WinPE') {
                 Write-Host -ForegroundColor DarkGray "Update-Module $PSModuleName $($GalleryPSModule.Version) [AllUsers]"
-                Update-Module -Name $PSModuleName -Repository PSGallery -Scope AllUsers -Force
+                Update-Module -Name $PSModuleName -Scope AllUsers -Force
                 Import-Module $PSModuleName -Force
             }
             else {
                 Write-Host -ForegroundColor DarkGray "Update-Module $PSModuleName $($GalleryPSModule.Version) [CurrentUser]"
-                Update-Module -Name $PSModuleName -Repository PSGallery -Scope CurrentUser -Force
+                Update-Module -Name $PSModuleName -Scope CurrentUser -Force
                 Import-Module $PSModuleName -Force
             } 
         }
@@ -656,18 +654,18 @@ function osdcloud-InstallModuleAzKeyVault {
     param ()
     $PSModuleName = 'Az.KeyVault'
     $InstalledModule = Get-InstalledModule $PSModuleName -ErrorAction Ignore | Select-Object -First 1
-    $GalleryPSModule = Find-Module -Name $PSModuleName -Repository PSGallery -ErrorAction Ignore
+    $GalleryPSModule = Find-Module -Name $PSModuleName -ErrorAction Ignore
 
     if ($InstalledModule) {
         if (($GalleryPSModule.Version -as [version]) -gt ($InstalledModule.Version -as [version])) {
             if ($WindowsPhase -eq 'WinPE') {
                 Write-Host -ForegroundColor DarkGray "Update-Module $PSModuleName $($GalleryPSModule.Version) [AllUsers]"
-                Update-Module -Name $PSModuleName -Repository PSGallery -Scope AllUsers -Force
+                Update-Module -Name $PSModuleName -Scope AllUsers -Force
                 Import-Module $PSModuleName -Force
             }
             else {
                 Write-Host -ForegroundColor DarkGray "Update-Module $PSModuleName $($GalleryPSModule.Version) [CurrentUser]"
-                Update-Module -Name $PSModuleName -Repository PSGallery -Scope CurrentUser -Force
+                Update-Module -Name $PSModuleName -Scope CurrentUser -Force
                 Import-Module $PSModuleName -Force
             } 
         }
@@ -689,18 +687,18 @@ function osdcloud-InstallModuleAzResources {
     param ()
     $PSModuleName = 'Az.Resources'
     $InstalledModule = Get-InstalledModule $PSModuleName -ErrorAction Ignore | Select-Object -First 1
-    $GalleryPSModule = Find-Module -Name $PSModuleName -Repository PSGallery -ErrorAction Ignore
+    $GalleryPSModule = Find-Module -Name $PSModuleName -ErrorAction Ignore
 
     if ($InstalledModule) {
         if (($GalleryPSModule.Version -as [version]) -gt ($InstalledModule.Version -as [version])) {
             if ($WindowsPhase -eq 'WinPE') {
                 Write-Host -ForegroundColor DarkGray "Update-Module $PSModuleName $($GalleryPSModule.Version) [AllUsers]"
-                Update-Module -Name $PSModuleName -Repository PSGallery -Scope AllUsers -Force
+                Update-Module -Name $PSModuleName -Scope AllUsers -Force
                 Import-Module $PSModuleName -Force
             }
             else {
                 Write-Host -ForegroundColor DarkGray "Update-Module $PSModuleName $($GalleryPSModule.Version) [CurrentUser]"
-                Update-Module -Name $PSModuleName -Repository PSGallery -Scope CurrentUser -Force
+                Update-Module -Name $PSModuleName -Scope CurrentUser -Force
                 Import-Module $PSModuleName -Force
             } 
         }
@@ -722,18 +720,18 @@ function osdcloud-InstallModuleAzStorage {
     param ()
     $PSModuleName = 'Az.Storage'
     $InstalledModule = Get-InstalledModule $PSModuleName -ErrorAction Ignore | Select-Object -First 1
-    $GalleryPSModule = Find-Module -Name $PSModuleName -Repository PSGallery -ErrorAction Ignore
+    $GalleryPSModule = Find-Module -Name $PSModuleName -ErrorAction Ignore
 
     if ($InstalledModule) {
         if (($GalleryPSModule.Version -as [version]) -gt ($InstalledModule.Version -as [version])) {
             if ($WindowsPhase -eq 'WinPE') {
                 Write-Host -ForegroundColor DarkGray "Update-Module $PSModuleName $($GalleryPSModule.Version) [AllUsers]"
-                Update-Module -Name $PSModuleName -Repository PSGallery -Scope AllUsers -Force
+                Update-Module -Name $PSModuleName -Scope AllUsers -Force
                 Import-Module $PSModuleName -Force
             }
             else {
                 Write-Host -ForegroundColor DarkGray "Update-Module $PSModuleName $($GalleryPSModule.Version) [CurrentUser]"
-                Update-Module -Name $PSModuleName -Repository PSGallery -Scope CurrentUser -Force
+                Update-Module -Name $PSModuleName -Scope CurrentUser -Force
                 Import-Module $PSModuleName -Force
             } 
         }
@@ -755,18 +753,18 @@ function osdcloud-InstallModuleAzureAd {
     param ()
     $PSModuleName = 'AzureAD'
     $InstalledModule = Get-InstalledModule $PSModuleName -ErrorAction Ignore | Select-Object -First 1
-    $GalleryPSModule = Find-Module -Name $PSModuleName -Repository PSGallery -ErrorAction Ignore
+    $GalleryPSModule = Find-Module -Name $PSModuleName -ErrorAction Ignore
 
     if ($InstalledModule) {
         if (($GalleryPSModule.Version -as [version]) -gt ($InstalledModule.Version -as [version])) {
             if ($WindowsPhase -eq 'WinPE') {
                 Write-Host -ForegroundColor DarkGray "Update-Module $PSModuleName $($GalleryPSModule.Version) [AllUsers]"
-                Update-Module -Name $PSModuleName -Repository PSGallery -Scope AllUsers -Force
+                Update-Module -Name $PSModuleName -Scope AllUsers -Force
                 Import-Module $PSModuleName -Force
             }
             else {
                 Write-Host -ForegroundColor DarkGray "Update-Module $PSModuleName $($GalleryPSModule.Version) [CurrentUser]"
-                Update-Module -Name $PSModuleName -Repository PSGallery -Scope CurrentUser -Force
+                Update-Module -Name $PSModuleName -Scope CurrentUser -Force
                 Import-Module $PSModuleName -Force
             } 
         }
@@ -788,18 +786,18 @@ function osdcloud-InstallModuleMSGraphDeviceManagement {
     param ()
     $PSModuleName = 'Microsoft.Graph.DeviceManagement'
     $InstalledModule = Get-InstalledModule $PSModuleName -ErrorAction Ignore | Select-Object -First 1
-    $GalleryPSModule = Find-Module -Name $PSModuleName -Repository PSGallery -ErrorAction Ignore
+    $GalleryPSModule = Find-Module -Name $PSModuleName -ErrorAction Ignore
 
     if ($InstalledModule) {
         if (($GalleryPSModule.Version -as [version]) -gt ($InstalledModule.Version -as [version])) {
             if ($WindowsPhase -eq 'WinPE') {
                 Write-Host -ForegroundColor DarkGray "Update-Module $PSModuleName $($GalleryPSModule.Version) [AllUsers]"
-                Update-Module -Name $PSModuleName -Repository PSGallery -Scope AllUsers -Force
+                Update-Module -Name $PSModuleName -Scope AllUsers -Force
                 Import-Module $PSModuleName -Force
             }
             else {
                 Write-Host -ForegroundColor DarkGray "Update-Module $PSModuleName $($GalleryPSModule.Version) [CurrentUser]"
-                Update-Module -Name $PSModuleName -Repository PSGallery -Scope CurrentUser -Force
+                Update-Module -Name $PSModuleName -Scope CurrentUser -Force
                 Import-Module $PSModuleName -Force
             } 
         }
