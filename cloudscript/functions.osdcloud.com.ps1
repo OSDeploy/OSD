@@ -32,7 +32,7 @@ powershell iex (irm functions.osdcloud.com)
 #=================================================
 #Script Information
 $ScriptName = 'functions.osdcloud.com'
-$ScriptVersion = '22.5.8.7'
+$ScriptVersion = '22.5.8.8'
 #=================================================
 #region Initialize Functions
 [Net.ServicePointManager]::SecurityProtocol = [Net.ServicePointManager]::SecurityProtocol -bor [Net.SecurityProtocolType]::Tls12
@@ -1145,19 +1145,21 @@ function Start-AzOSDCloudByTag {
     $Global:AzStorageContext = @{}
     $Global:AzBlobImages = @()
 
-    foreach ($Item in $Global:AzOSDCloudStorageAccounts) {
-        $Global:LastStorageContext = New-AzStorageContext -StorageAccountName $Item.ResourceName
-        $Global:AzStorageContext."$($Item.ResourceName)" = $Global:LastStorageContext
-        #Get-AzStorageBlobByTag -TagFilterSqlExpression ""osdcloudimage""=""win10ltsc"" -Context $StorageContext
-        #Get-AzStorageBlobByTag -Context $Global:LastStorageContext
-
-        $StorageContainers = Get-AzStorageContainer -Context $Global:LastStorageContext
+    if ($Global:AzOSDCloudStorageAccounts) {
+        Write-Host -ForegroundColor Cyan "Scanning for Windows Images"
+        foreach ($Item in $Global:AzOSDCloudStorageAccounts) {
+            $Global:LastStorageContext = New-AzStorageContext -StorageAccountName $Item.ResourceName
+            $Global:AzStorageContext."$($Item.ResourceName)" = $Global:LastStorageContext
+            #Get-AzStorageBlobByTag -TagFilterSqlExpression ""osdcloudimage""=""win10ltsc"" -Context $StorageContext
+            #Get-AzStorageBlobByTag -Context $Global:LastStorageContext
     
-        if ($StorageContainers) {
-            Write-Host -ForegroundColor Cyan "Scanning for Windows Images"
-            foreach ($Container in $StorageContainers) {
-                Write-Host -ForegroundColor DarkGray "Storage Account: $($Item.ResourceName) Container: $($Container.Name)"
-                $Global:AzBlobImages += Get-AzStorageBlob -Context $Global:LastStorageContext -Container $Container.Name -Blob *.wim -ErrorAction Ignore
+            $StorageContainers = Get-AzStorageContainer -Context $Global:LastStorageContext
+        
+            if ($StorageContainers) {
+                foreach ($Container in $StorageContainers) {
+                    Write-Host -ForegroundColor DarkGray "Storage Account: $($Item.ResourceName) Container: $($Container.Name)"
+                    $Global:AzBlobImages += Get-AzStorageBlob -Context $Global:LastStorageContext -Container $Container.Name -Blob *.wim -ErrorAction Ignore
+                }
             }
         }
     }
