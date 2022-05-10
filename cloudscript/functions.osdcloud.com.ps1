@@ -32,7 +32,7 @@ powershell iex (irm functions.osdcloud.com)
 #=================================================
 #Script Information
 $ScriptName = 'functions.osdcloud.com'
-$ScriptVersion = '22.5.8.6'
+$ScriptVersion = '22.5.8.7'
 #=================================================
 #region Initialize Functions
 [Net.ServicePointManager]::SecurityProtocol = [Net.ServicePointManager]::SecurityProtocol -bor [Net.SecurityProtocolType]::Tls12
@@ -1020,7 +1020,7 @@ if ($WindowsPhase -eq 'OOBE') {
 }
 #endregion
 #=================================================
-function Connect-AzureWinPE {
+function Connect-AzWinPE {
     [CmdletBinding()]
     param (
         [System.Management.Automation.SwitchParameter]
@@ -1128,6 +1128,7 @@ function Connect-AzureWinPE {
         Write-Warning 'Unable to connect to AzureAD'
     }
 }
+New-Alias -Name 'Connect-AzureWinPE' -Value 'Connect-AzWinPE' -Description 'OSDCloud' -Force
 function Start-AzOSDCloudByTag {
     [CmdletBinding()]
     param ()
