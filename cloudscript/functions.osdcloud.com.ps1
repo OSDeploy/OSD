@@ -1022,7 +1022,7 @@ function Connect-AzWinPE {
     [CmdletBinding()]
     param (
         [System.Management.Automation.SwitchParameter]
-        $Refresh
+        $Force
     )
     osdcloud-InstallModuleAzureAd
     osdcloud-InstallModuleAzAccounts
@@ -1031,7 +1031,7 @@ function Connect-AzWinPE {
     osdcloud-InstallModuleAzStorage
     osdcloud-InstallModuleMSGraphDeviceManagement
 
-    if ($Refresh) {
+    if ($Force) {
         Get-AzContext -ErrorAction Ignore | Disconnect-AzAccount -ErrorAction Ignore
     }
 
