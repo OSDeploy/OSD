@@ -16,7 +16,8 @@ Edits WinPE in an OSDCloud Workspace for customization
 Edit-OSDCloudWinPE [-CloudDriver <String[]>] [-StartOSDCloudGUI] [-DriverHWID <String[]>]
  [-DriverPath <String[]>] [-PSModuleCopy <String[]>] [-PSModuleInstall <String[]>] [-Startnet <String>]
  [-StartOSDCloud <String>] [-StartOSDPad <String>] [-StartPSCommand <String>] [-StartURL <String>] [-UpdateUSB]
- [-Wallpaper <String>] [-Brand <String>] [-WorkspacePath <String>] [<CommonParameters>]
+ [-Wallpaper <FileInfo>] [-UseDefaultWallpaper] [-Brand <String>] [-WorkspacePath <String>]
+ [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -226,13 +227,28 @@ Accept wildcard characters: False
 Sets the specified Wallpaper JPG file as the WinPE Background
 
 ```yaml
-Type: String
+Type: FileInfo
 Parameter Sets: (All)
 Aliases:
 
 Required: False
 Position: Named
 Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -UseDefaultWallpaper
+Uses the default OSDCloud Wallpaper
+
+```yaml
+Type: SwitchParameter
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: False
 Accept pipeline input: False
 Accept wildcard characters: False
 ```

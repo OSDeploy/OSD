@@ -4522,12 +4522,23 @@ Original credit to Mike Robbins http://mikefrobbins.com/2018/01/18/use-powershel
           <maml:description>
             <maml:para>Sets the specified Wallpaper JPG file as the WinPE Background</maml:para>
           </maml:description>
-          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <command:parameterValue required="true" variableLength="false">FileInfo</command:parameterValue>
           <dev:type>
-            <maml:name>String</maml:name>
+            <maml:name>FileInfo</maml:name>
             <maml:uri />
           </dev:type>
           <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+          <maml:name>UseDefaultWallpaper</maml:name>
+          <maml:description>
+            <maml:para>Uses the default OSDCloud Wallpaper</maml:para>
+          </maml:description>
+          <dev:type>
+            <maml:name>SwitchParameter</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>False</dev:defaultValue>
         </command:parameter>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>Brand</maml:name>
@@ -4705,12 +4716,24 @@ Original credit to Mike Robbins http://mikefrobbins.com/2018/01/18/use-powershel
         <maml:description>
           <maml:para>Sets the specified Wallpaper JPG file as the WinPE Background</maml:para>
         </maml:description>
-        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <command:parameterValue required="true" variableLength="false">FileInfo</command:parameterValue>
         <dev:type>
-          <maml:name>String</maml:name>
+          <maml:name>FileInfo</maml:name>
           <maml:uri />
         </dev:type>
         <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+        <maml:name>UseDefaultWallpaper</maml:name>
+        <maml:description>
+          <maml:para>Uses the default OSDCloud Wallpaper</maml:para>
+        </maml:description>
+        <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
+        <dev:type>
+          <maml:name>SwitchParameter</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>False</dev:defaultValue>
       </command:parameter>
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
         <maml:name>Brand</maml:name>
