@@ -32,7 +32,7 @@ powershell iex (irm functions.osdcloud.com)
 #=================================================
 #Script Information
 $ScriptName = 'functions.osdcloud.com'
-$ScriptVersion = '22.5.10.5'
+$ScriptVersion = '22.5.11.1'
 #=================================================
 #region Initialize Functions
 [Net.ServicePointManager]::SecurityProtocol = [Net.ServicePointManager]::SecurityProtocol -bor [Net.SecurityProtocolType]::Tls12
@@ -296,7 +296,8 @@ if ($WindowsPhase -eq 'WinPE') {
     
         Write-Host -ForegroundColor DarkGray    'OSDCloud Storage Accounts: $Global:AzOSDCloudStorageAccounts'
         #$Global:AzOSDCloudStorageAccounts = Get-AzResource -ResourceType 'Microsoft.Storage/storageAccounts'
-        $Global:AzOSDCloudStorageAccounts = Get-AzResource -ResourceType 'Microsoft.Storage/storageAccounts' | Where-Object {$_.Tags.ContainsKey('OSDCloud')}
+        #$Global:AzOSDCloudStorageAccounts = Get-AzResource -ResourceType 'Microsoft.Storage/storageAccounts' | Where-Object {$_.Tags.ContainsKey('OSDCloud')}
+        $Global:AzOSDCloudStorageAccounts = Get-AzStorageAccount | Where-Object {$_.Tags.ContainsKey('OSDCloud')}
     
         Write-Host -ForegroundColor DarkGray    'Storage Contexts:          $Global:AzStorageContext'
         Write-Host -ForegroundColor DarkGray    'Blob Windows Images:       $Global:AzStorageBlobImage'
@@ -307,8 +308,8 @@ if ($WindowsPhase -eq 'WinPE') {
         if ($Global:AzOSDCloudStorageAccounts) {
             Write-Host -ForegroundColor Cyan "Scanning for Windows Images"
             foreach ($Item in $Global:AzOSDCloudStorageAccounts) {
-                $Global:LastStorageContext = New-AzStorageContext -StorageAccountName $Item.ResourceName
-                $Global:AzStorageContext."$($Item.ResourceName)" = $Global:LastStorageContext
+                $Global:LastStorageContext = New-AzStorageContext -StorageAccountName $Item.StorageAccountName
+                $Global:AzStorageContext."$($Item.StorageAccountName)" = $Global:LastStorageContext
                 #Get-AzStorageBlobByTag -TagFilterSqlExpression ""osdcloudimage""=""win10ltsc"" -Context $StorageContext
                 #Get-AzStorageBlobByTag -Context $Global:LastStorageContext
         
@@ -316,7 +317,7 @@ if ($WindowsPhase -eq 'WinPE') {
             
                 if ($StorageContainers) {
                     foreach ($Container in $StorageContainers) {
-                        Write-Host -ForegroundColor DarkGray "Storage Account: $($Item.ResourceName) Container: $($Container.Name)"
+                        Write-Host -ForegroundColor DarkGray "Storage Account: $($Item.StorageAccountName) Container: $($Container.Name)"
                         $Global:AzStorageBlobImage += Get-AzStorageBlob -Context $Global:LastStorageContext -Container $Container.Name -Blob *.wim -ErrorAction Ignore
                     }
                 }
@@ -330,8 +331,8 @@ if ($WindowsPhase -eq 'WinPE') {
     
                 $ObjectProperties = @{
                     Number              = $i
-                    ResourceGroupName   = $Global:AzOSDCloudStorageAccounts | Where-Object {$_.ResourceName -eq $Item.BlobClient.AccountName} | Select-Object -ExpandProperty ResourceGroupName
-                    Location            = $Global:AzOSDCloudStorageAccounts | Where-Object {$_.ResourceName -eq $Item.BlobClient.AccountName} | Select-Object -ExpandProperty Location
+                    ResourceGroupName   = $Global:AzOSDCloudStorageAccounts | Where-Object {$_.StorageAccountName -eq $Item.BlobClient.AccountName} | Select-Object -ExpandProperty ResourceGroupName
+                    Location            = $Global:AzOSDCloudStorageAccounts | Where-Object {$_.StorageAccountName -eq $Item.BlobClient.AccountName} | Select-Object -ExpandProperty Location
                     StorageAccount      = $Item.BlobClient.AccountName
                     Container           = $Item.BlobClient.BlobContainerName
                     Blob                = $Item.Name
