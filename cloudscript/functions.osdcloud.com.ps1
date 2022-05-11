@@ -32,7 +32,7 @@ powershell iex (irm functions.osdcloud.com)
 #=================================================
 #Script Information
 $ScriptName = 'functions.osdcloud.com'
-$ScriptVersion = '22.5.10.3'
+$ScriptVersion = '22.5.10.4'
 #=================================================
 #region Initialize Functions
 [Net.ServicePointManager]::SecurityProtocol = [Net.ServicePointManager]::SecurityProtocol -bor [Net.SecurityProtocolType]::Tls12
@@ -1054,7 +1054,7 @@ function Connect-AzWinPE {
     
         $Results = $Results | Where-Object {$_.Number -eq $SelectReadHost}
     
-        $Global:AzContext = Set-AzContext -Subscription $Results.Id -Tenant $Results.TenantId
+        $Global:AzContext = Set-AzContext -Subscription $Results.Id
     }
     else {
         $Global:AzContext = Get-AzContext
