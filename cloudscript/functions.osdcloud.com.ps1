@@ -32,7 +32,7 @@ powershell iex (irm functions.osdcloud.com)
 #=================================================
 #Script Information
 $ScriptName = 'functions.osdcloud.com'
-$ScriptVersion = '22.5.10.2'
+$ScriptVersion = '22.5.10.3'
 #=================================================
 #region Initialize Functions
 [Net.ServicePointManager]::SecurityProtocol = [Net.ServicePointManager]::SecurityProtocol -bor [Net.SecurityProtocolType]::Tls12
@@ -1022,8 +1022,6 @@ function Connect-AzWinPE {
     [CmdletBinding()]
     param ()
 
-    Write-Warning 'This function is under heavy development at this time'
-
     osdcloud-InstallModuleAzureAd
     osdcloud-InstallModuleAzAccounts
     osdcloud-InstallModuleAzKeyVault
@@ -1031,7 +1029,7 @@ function Connect-AzWinPE {
     osdcloud-InstallModuleAzStorage
     osdcloud-InstallModuleMSGraphDeviceManagement
 
-    Connect-AzAccount -Device -AuthScope Storage -ErrorAction Ignore -WarningAction SilentlyContinue
+    Connect-AzAccount -Device -AuthScope Storage -ErrorAction Ignore
     $Global:AzSubscription = Get-AzSubscription
 
     if (($Global:AzSubscription).Count -ge 2) {
