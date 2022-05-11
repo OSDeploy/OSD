@@ -32,7 +32,7 @@ powershell iex (irm functions.osdcloud.com)
 #=================================================
 #Script Information
 $ScriptName = 'functions.osdcloud.com'
-$ScriptVersion = '22.5.9.2'
+$ScriptVersion = '22.5.9.3'
 #=================================================
 #region Initialize Functions
 [Net.ServicePointManager]::SecurityProtocol = [Net.ServicePointManager]::SecurityProtocol -bor [Net.SecurityProtocolType]::Tls12
@@ -1055,9 +1055,9 @@ function Connect-AzWinPE {
         Write-Host -ForegroundColor Cyan        '$Global:AzTenantId:       ' $Global:AzTenantId
         Write-Host -ForegroundColor Cyan        '$Global:AzSubscription:   ' $Global:AzSubscription
         if ($null -eq $Global:AzContext.Subscription) {
-            Write-Warning 'You do not have access to any Azure Subscriptions'
-            Write-Warning 'This is likely due to not having rights to Azure Resources'
-            Write-Warning 'Contact your administrator to resolve this issue'
+            Write-Warning 'You do not have access to an Azure Subscriptions'
+            Write-Warning 'This is likely due to not having rights to Azure Resources or Azure Storage'
+            Write-Warning 'Contact your Azure administrator to resolve this issue'
             Break
         }
 
