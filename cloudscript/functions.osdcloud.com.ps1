@@ -1020,11 +1020,10 @@ if ($WindowsPhase -eq 'OOBE') {
 #=================================================
 function Connect-AzWinPE {
     [CmdletBinding()]
-    param (
-        [System.Management.Automation.SwitchParameter]
-        $Force
-    )
+    param ()
+
     Write-Warning 'This function is under heavy development at this time'
+
     osdcloud-InstallModuleAzureAd
     osdcloud-InstallModuleAzAccounts
     osdcloud-InstallModuleAzKeyVault
@@ -1032,13 +1031,34 @@ function Connect-AzWinPE {
     osdcloud-InstallModuleAzStorage
     osdcloud-InstallModuleMSGraphDeviceManagement
 
-    if ($Force) {
-        Get-AzContext -ErrorAction Ignore | Disconnect-AzAccount -ErrorAction Ignore
-    }
+    Connect-AzAccount -Device -AuthScope Storage -ErrorAction Ignore -WarningAction SilentlyContinue
+    $Global:AzSubscription = Get-AzSubscription
 
-    $Global:AzContext = Get-AzContext
-    if (!($Global:AzContext)) {
-        $null = Connect-AzAccount -Device -AuthScope Storage -ErrorAction Ignore
+    if (($Global:AzSubscription).Count -ge 2) {
+        $i = $null
+        $Results = foreach ($Item in $Global:AzSubscription) {
+            $i++
+    
+            $ObjectProperties = @{
+                Number  = $i
+                Name    = $Item.Name
+                Id      = $Item.Id
+            }
+            New-Object -TypeName PSObject -Property $ObjectProperties
+        }
+    
+        $Results | Select-Object -Property Number, Name, Id | Format-Table | Out-Host
+    
+        do {
+            $SelectReadHost = Read-Host -Prompt "Select an Azure Subscription by Number"
+        }
+        until (((($SelectReadHost -ge 0) -and ($SelectReadHost -in $Results.Number))))
+    
+        $Results = $Results | Where-Object {$_.Number -eq $SelectReadHost}
+    
+        $Global:AzContext = Set-AzContext -Subscription $Results.Id -Tenant $Results.TenantId
+    }
+    else {
         $Global:AzContext = Get-AzContext
     }
 
