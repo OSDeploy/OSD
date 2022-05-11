@@ -32,7 +32,7 @@ powershell iex (irm functions.osdcloud.com)
 #=================================================
 #Script Information
 $ScriptName = 'functions.osdcloud.com'
-$ScriptVersion = '22.5.11.1'
+$ScriptVersion = '22.5.11.2'
 #=================================================
 #region Initialize Functions
 [Net.ServicePointManager]::SecurityProtocol = [Net.ServicePointManager]::SecurityProtocol -bor [Net.SecurityProtocolType]::Tls12
@@ -365,6 +365,12 @@ if ($WindowsPhase -eq 'WinPE') {
         }
     }
     New-Alias -Name 'Start-AzOSDCloudBeta' -Value 'Start-AzOSDCloud' -Description 'OSDCloud' -Force
+    function AzOSD {
+        [CmdletBinding()]
+        param ()
+        Connect-AzOSDCloud
+        Start-AzOSDCloud
+    }
 }
 #endregion
 #=================================================
