@@ -274,8 +274,7 @@ if ($WindowsPhase -eq 'WinPE') {
     function Start-AzOSDCloud {
         [CmdletBinding()]
         param ()
-        Write-Warning 'This function is under heavy development at this time'
-    
+         
         Write-Host -ForegroundColor DarkGray    'Storage Accounts:          $Global:AzStorageAccounts'
         $Global:AzStorageAccounts = Get-AzStorageAccount
     
