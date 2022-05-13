@@ -202,8 +202,8 @@ if ($WindowsPhase -eq 'WinPE') {
         }
     
         if ($Global:AzContext) {
-            Write-Host -ForegroundColor Green 'Connected to Azure'
             Write-Host -ForegroundColor DarkGray "========================================================================="
+            Write-Host -ForegroundColor Green 'Welcome to Azure OSDCloud!'
             $Global:AzAccount = $Global:AzContext.Account
             $Global:AzEnvironment = $Global:AzContext.Environment
             $Global:AzTenantId = $Global:AzContext.Tenant
