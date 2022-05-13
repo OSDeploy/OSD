@@ -153,15 +153,15 @@
               Stroke="Gainsboro"
               StrokeThickness="1"
               Stretch="Uniform"></Line>
-        <!-- RowOperatingSystem -->
+        <!-- RowStorage -->
         <StackPanel Grid.Row="2"
                     HorizontalAlignment="Left"
                     VerticalAlignment="Top">
-            <!-- Operating System -->
+            <!-- Storage Account -->
             <StackPanel Orientation="Horizontal"
                         HorizontalAlignment="Left"
                         VerticalAlignment="Top">
-                <Label Name="OperatingSystemLabel"
+                <Label Name="StorageAccountLabel"
                        Content="Storage Account"
                        FontSize="18"
                        FontWeight="Bold"
@@ -170,20 +170,18 @@
                        Padding="2"
                        Width="165"
                        FlowDirection="RightToLeft" />
-                <ComboBox Name="OperatingSystemCombobox"
+                <ComboBox Name="StorageAccountCombobox"
                           FontSize="16"
                           Margin="5"
                           Padding="2"
                           SelectedIndex="0" >
-                        <ComboBoxItem Content="osdclouddemo"/>
-                        <ComboBoxItem Content="OSDCloud Windows 11 x64"/>
                 </ComboBox>
             </StackPanel>
-            <!-- Operating System -->
+            <!-- Container -->
             <StackPanel Orientation="Horizontal"
                         HorizontalAlignment="Left"
                         VerticalAlignment="Top">
-                <Label Name="OperatingSystem2Label"
+                <Label Name="ContainerLabel"
                        Content="Container"
                        FontSize="18"
                        FontWeight="Bold"
@@ -192,20 +190,19 @@
                        Padding="2"
                        Width="165"
                        FlowDirection="RightToLeft" />
-                <ComboBox Name="OperatingSystem2Combobox"
+                <ComboBox Name="ContainerCombobox"
                           FontSize="16"
                           Margin="5"
                           Padding="2"
                           SelectedIndex="0" >
-                    <ComboBoxItem Content="private"/>
-                    <ComboBoxItem Content="OSDCloud Windows 11 x64"/>
+                    <ComboBoxItem Content=""/>
                 </ComboBox>
             </StackPanel>
-            <!-- Operating System -->
+            <!-- Blob -->
             <StackPanel Orientation="Horizontal"
                         HorizontalAlignment="Left"
                         VerticalAlignment="Top">
-                <Label Name="OperatingSystem3Label"
+                <Label Name="BlobLabel"
                        Content="Blob"
                        FontSize="18"
                        FontWeight="Bold"
@@ -214,13 +211,12 @@
                        Padding="2"
                        Width="165"
                        FlowDirection="RightToLeft" />
-                <ComboBox Name="OperatingSystem3Combobox"
+                <ComboBox Name="BlobCombobox"
                           FontSize="16"
                           Margin="5"
                           Padding="2"
                           SelectedIndex="0" >
-                    <ComboBoxItem Content="en-us_windows_10_enterprise_ltsc_2021_x64.wim"/>
-                    <ComboBoxItem Content="OSDCloud Windows 11 x64"/>
+                    <ComboBoxItem Content=""/>
                 </ComboBox>
             </StackPanel>
             <StackPanel Orientation="Horizontal"

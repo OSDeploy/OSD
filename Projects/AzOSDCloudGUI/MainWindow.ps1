@@ -260,302 +260,50 @@ function Show-PowershellWindow() {
 #================================================
 #   Initialize
 #================================================
-$localOSDCloudParams = (Get-Command Start-OSDCloud).Parameters
-
-<# $localOSDCloudParams["OSBuild"].Attributes.ValidValues | ForEach-Object {
-    $formMainWindowControlOSBuildCombobox.Items.Add($_) | Out-Null
-} #>
-
-$localOSDCloudParams["OSEdition"].Attributes.ValidValues | ForEach-Object {
-    $formMainWindowControlOSEditionCombobox.Items.Add($_) | Out-Null
+$Global:AzStorageAccounts = Get-AzStorageAccount | Where-Object {$_.Tags.ContainsKey('OSDCloud')}
+$Global:AzStorageAccounts.StorageAccountName | ForEach-Object {
+    $formMainWindowControlStorageAccountCombobox.Items.Add($_) | Out-Null
 }
 
-$localOSDCloudParams["OSLicense"].Attributes.ValidValues | ForEach-Object {
-    $formMainWindowControlOSLicenseCombobox.Items.Add($_) | Out-Null
+$Global:AzStorageContext = @{}
+if ($Global:AzOSDCloudStorageAccounts) {
+    foreach ($Item in $Global:AzOSDCloudStorageAccounts) {
+        $Global:AzCurrentStorageContext = New-AzStorageContext -StorageAccountName $Item.StorageAccountName
+        $Global:AzStorageContext."$($Item.StorageAccountName)" = $Global:AzCurrentStorageContext
+    }
 }
-
-$localOSDCloudParams["OSLanguage"].Attributes.ValidValues | ForEach-Object {
-    $formMainWindowControlOSLanguageCombobox.Items.Add($_) | Out-Null
-}
-
-$formMainWindowControlCSManufacturerTextbox.Text = Get-MyComputerManufacturer -Brief
-$formMainWindowControlCSProductTextbox.Text = Get-MyComputerProduct
-$formMainWindowControlCSModelTextbox.Text = Get-MyComputerModel -Brief
+$formMainWindowControlContainerCombobox.Items.Clear()
+$formMainWindowControlBlobCombobox.Items.Clear()
 #================================================
-#   SetDefaultWin
+#   StorageAccountCombobox
 #================================================
-function SetDefaultWin10 {
-    $formMainWindowControlOSBuildCombobox.Items.Clear()
-    $localOSDCloudParams["OSBuild"].Attributes.ValidValues | ForEach-Object {
-        $formMainWindowControlOSBuildCombobox.Items.Add($_) | Out-Null
-    }
-    
-    $formMainWindowControlOperatingSystemCombobox.SelectedIndex = 0 #Windows 10
-    $formMainWindowControlOSBuildCombobox.SelectedIndex = 0      #21H2
-    $formMainWindowControlOSLanguageCombobox.SelectedIndex = 7   #en-us
-    $formMainWindowControlOSEditionCombobox.SelectedIndex = 5    #Enterprise
-    $formMainWindowControlOSLicenseCombobox.SelectedIndex = 1    #Volume
+$formMainWindowControlStorageAccountCombobox.add_SelectionChanged({
+    $formMainWindowControlContainerCombobox.Items.Clear()
+    $formMainWindowControlBlobCombobox.Items.Clear()
 
-    $formMainWindowControlAutopilotJsonCombobox.SelectedIndex = 1    #OOBE
-    $formMainWindowControlImageIndexTextbox.Text = 6             #Enterprise
+    $StorageAccountName = $formMainWindowControlStorageAccountCombobox.SelectedValue
 
-    $formMainWindowControlOSBuildCombobox.IsEnabled = $true
-    $formMainWindowControlOSEditionCombobox.IsEnabled = $true
-    $formMainWindowControlOSLanguageCombobox.IsEnabled = $true
-    $formMainWindowControlOSLicenseCombobox.IsEnabled = $false
-    $formMainWindowControlImageIndexTextbox.IsEnabled = $false
-    $formMainWindowControlCSModelTextbox.IsEnabled = $false
-    $formMainWindowControlAutopilotJsonCombobox.IsEnabled = $true
+    $Context = New-AzStorageContext -StorageAccountName $StorageAccountName
 
-    $formMainWindowControlImageNameCombobox.Items.Clear()
-    $formMainWindowControlImageNameCombobox.Visibility = "Collapsed"
-    
-    $formMainWindowControlOSBuildCombobox.Visibility = "Visible"
-    $formMainWindowControlOSEditionCombobox.Visibility = "Visible"
-    $formMainWindowControlOSLanguageCombobox.Visibility = "Visible"
-    $formMainWindowControlOSLicenseCombobox.Visibility = "Visible"
-}
-function SetDefaultWin11 {
-    $formMainWindowControlOperatingSystemCombobox.SelectedIndex = 1 #Windows 11
+    $StorageContainers = Get-AzStorageContainer -Context $Context
 
-    $formMainWindowControlOSBuildCombobox.Items.Clear()
-    $formMainWindowControlOSBuildCombobox.Items.Add("21H2") | Out-Null
-    
-    $formMainWindowControlOSBuildCombobox.SelectedIndex = 0      #21H2
-    $formMainWindowControlOSLanguageCombobox.SelectedIndex = 7   #en-us
-    $formMainWindowControlOSEditionCombobox.SelectedIndex = 5    #Enterprise
-    $formMainWindowControlOSLicenseCombobox.SelectedIndex = 1    #Volume
-
-    $formMainWindowControlAutopilotJsonCombobox.SelectedIndex = 1    #OOBE
-    $formMainWindowControlImageIndexTextbox.Text = 6             #Enterprise
-
-    $formMainWindowControlOSBuildCombobox.IsEnabled = $true
-    $formMainWindowControlOSEditionCombobox.IsEnabled = $true
-    $formMainWindowControlOSLanguageCombobox.IsEnabled = $true
-    $formMainWindowControlOSLicenseCombobox.IsEnabled = $false
-    $formMainWindowControlImageIndexTextbox.IsEnabled = $false
-    $formMainWindowControlCSModelTextbox.IsEnabled = $false
-    $formMainWindowControlAutopilotJsonCombobox.IsEnabled = $true
-
-    $formMainWindowControlImageNameCombobox.Items.Clear()
-    $formMainWindowControlImageNameCombobox.Visibility = "Collapsed"
-    
-    $formMainWindowControlOSBuildCombobox.Visibility = "Visible"
-    $formMainWindowControlOSEditionCombobox.Visibility = "Visible"
-    $formMainWindowControlOSLanguageCombobox.Visibility = "Visible"
-    $formMainWindowControlOSLicenseCombobox.Visibility = "Visible"
-}
-SetDefaultWin11
-#================================================
-#   CustomImage
-#================================================
-[array]$OSDCloudOSIso = @()
-[array]$OSDCloudOSIso = Find-OSDCloudFile -Name '*.iso' -Path '\OSDCloud\OS\' | Where-Object {$_.Length -gt 3GB}
-
-foreach ($Item in $OSDCloudOSIso) {
-    if ((Get-DiskImage -ImagePath $Item.FullName).Attached) {
-        #ISO is already mounted
+    $StorageContainers | ForEach-Object {
+        $formMainWindowControlContainerCombobox.Items.Add($_.Name) | Out-Null
     }
-    else {
-        Write-Host "Mounting OSDCloud OS ISO $($Item.FullName)" -ForegroundColor Cyan
-        $Results = Mount-DiskImage -ImagePath $Item.FullName
-        $Results | Select-Object -Property Attached,DevicePath,ImagePath,Number,Size | Format-List
-    }
-}
-
-$CustomImageChildItem = @()
-[array]$CustomImageChildItem = Find-OSDCloudFile -Name '*.wim' -Path '\OSDCloud\OS\'
-[array]$CustomImageChildItem += Find-OSDCloudFile -Name 'install.wim' -Path '\Sources\'
-$CustomImageChildItem = $CustomImageChildItem | Sort-Object -Property Length -Unique | Sort-Object FullName | Where-Object {$_.Length -gt 3GB}
-        
-if ($CustomImageChildItem) {
-    $CustomImageChildItem | ForEach-Object {
-        $formMainWindowControlOperatingSystemCombobox.Items.Add($_) | Out-Null
-    }
-}
-#================================================
-#   AutopilotJsonCombobox
-#================================================
-$formMainWindowControlAutopilotJsonCombobox.IsEnabled = $false
-$AutopilotJsonChildItem = @()
-[array]$AutopilotJsonChildItem = Find-OSDCloudFile -Name "*.json" -Path '\OSDCloud\Autopilot\Profiles\' | Sort-Object FullName
-[array]$AutopilotJsonChildItem += Find-OSDCloudFile -Name "*.json" -Path '\OSDCloud\Config\AutopilotJSON\' | Sort-Object FullName
-$AutopilotJsonChildItem = $AutopilotJsonChildItem | Where-Object {$_.FullName -notlike "C*"}
-if ($AutopilotJsonChildItem) {
-    $formMainWindowControlAutopilotJsonCombobox.Items.Add('') | Out-Null
-    $formMainWindowControlAutopilotJsonCombobox.IsEnabled = $true
-    $AutopilotJsonChildItem | ForEach-Object {
-        $formMainWindowControlAutopilotJsonCombobox.Items.Add($_) | Out-Null
-    }
-    $formMainWindowControlAutopilotJsonCombobox.SelectedIndex = 1
-}
-else {
-    $formMainWindowControlAutopilotJsonLabel.Visibility = "Collapsed" 
-    $formMainWindowControlAutopilotJsonCombobox.Visibility = "Collapsed"  
-}
-#================================================
-#   OOBEDeployCombobox
-#================================================
-$formMainWindowControlOOBEDeployCombobox.IsEnabled = $false
-$OOBEDeployJsonChildItem = Find-OSDCloudFile -Name "*.json" -Path '\OSDCloud\Config\OOBEDeploy\' | Sort-Object FullName
-$OOBEDeployJsonChildItem = $OOBEDeployJsonChildItem | Where-Object {$_.FullName -notlike "C*"}
-if ($OOBEDeployJsonChildItem) {
-    $formMainWindowControlOOBEDeployCombobox.Items.Add('') | Out-Null
-    $formMainWindowControlOOBEDeployCombobox.IsEnabled = $true
-    $OOBEDeployJsonChildItem | ForEach-Object {
-        $formMainWindowControlOOBEDeployCombobox.Items.Add($_) | Out-Null
-    }
-    $formMainWindowControlOOBEDeployCombobox.SelectedIndex = 1
-}
-else {
-    $formMainWindowControlOOBEDeployLabel.Visibility = "Collapsed"  
-    $formMainWindowControlOOBEDeployCombobox.Visibility = "Collapsed"  
-}
-#================================================
-#   AutopilotOOBECombobox
-#================================================
-$formMainWindowControlAutopilotOOBECombobox.IsEnabled = $false
-$AutopilotOOBEJsonChildItem = Find-OSDCloudFile -Name "*.json" -Path '\OSDCloud\Config\AutopilotOOBE\' | Sort-Object FullName
-$AutopilotOOBEJsonChildItem = $AutopilotOOBEJsonChildItem | Where-Object {$_.FullName -notlike "C*"}
-if ($AutopilotOOBEJsonChildItem) {
-    $formMainWindowControlAutopilotOOBECombobox.Items.Add('') | Out-Null
-    $formMainWindowControlAutopilotOOBECombobox.IsEnabled = $true
-    $AutopilotOOBEJsonChildItem | ForEach-Object {
-        $formMainWindowControlAutopilotOOBECombobox.Items.Add($_) | Out-Null
-    }
-    $formMainWindowControlAutopilotOOBECombobox.SelectedIndex = 1
-}
-else {
-    $formMainWindowControlAutopilotOOBELabel.Visibility = "Collapsed"  
-    $formMainWindowControlAutopilotOOBECombobox.Visibility = "Collapsed"  
-}
-#================================================
-#   OSEditionCombobox
-#================================================
-$formMainWindowControlOSEditionCombobox.add_SelectionChanged({
-    #Home
-    if ($formMainWindowControlOSEditionCombobox.SelectedIndex -eq 0) {
-        $formMainWindowControlImageIndexTextbox.Text = 4
-        $formMainWindowControlImageIndexLabel.IsEnabled = $false
-        $formMainWindowControlImageIndexTextbox.IsEnabled = $false   #Disable
-        $formMainWindowControlOSLicenseCombobox.SelectedIndex = 0    #Retail
-        $formMainWindowControlOSLicenseCombobox.IsEnabled = $false   #Disable
-    }
-    #Home N
-    if ($formMainWindowControlOSEditionCombobox.SelectedIndex -eq 1) {
-        $formMainWindowControlImageIndexTextbox.Text = 5
-        $formMainWindowControlImageIndexTextbox.IsEnabled = $false   #Disable
-        $formMainWindowControlOSLicenseCombobox.SelectedIndex = 0    #Retail
-        $formMainWindowControlOSLicenseCombobox.IsEnabled = $false   #Disable
-    }
-    #Home Single Language
-    if ($formMainWindowControlOSEditionCombobox.SelectedIndex -eq 2) {
-        $formMainWindowControlImageIndexTextbox.Text = 6
-        $formMainWindowControlImageIndexTextbox.IsEnabled = $false   #Disable
-        $formMainWindowControlOSLicenseCombobox.SelectedIndex = 0    #Retail
-        $formMainWindowControlOSLicenseCombobox.IsEnabled = $false   #Disable
-    }
-    #Education
-    if ($formMainWindowControlOSEditionCombobox.SelectedIndex -eq 3) {
-        $formMainWindowControlOSLicenseCombobox.IsEnabled = $true
-        if ($formMainWindowControlOSLicenseCombobox.SelectedIndex -eq 0) {
-            $formMainWindowControlImageIndexTextbox.Text = 7
-        }
-        else {
-            $formMainWindowControlImageIndexTextbox.Text = 4
-        }
-    }
-    #Education N
-    if ($formMainWindowControlOSEditionCombobox.SelectedIndex -eq 4) {
-        $formMainWindowControlOSLicenseCombobox.IsEnabled = $true
-        if ($formMainWindowControlOSLicenseCombobox.SelectedIndex -eq 0) {
-            $formMainWindowControlImageIndexTextbox.Text = 8
-        }
-        else {
-            $formMainWindowControlImageIndexTextbox.Text = 5
-        }
-    }
-    #Enterprise
-    if ($formMainWindowControlOSEditionCombobox.SelectedIndex -eq 5) {
-        $formMainWindowControlOSLicenseCombobox.SelectedIndex = 1
-        $formMainWindowControlOSLicenseCombobox.IsEnabled = $false
-        $formMainWindowControlImageIndexTextbox.Text = 6
-    }
-    #Enterprise N
-    if ($formMainWindowControlOSEditionCombobox.SelectedIndex -eq 6) {
-        $formMainWindowControlOSLicenseCombobox.SelectedIndex = 1
-        $formMainWindowControlOSLicenseCombobox.IsEnabled = $false
-        $formMainWindowControlImageIndexTextbox.Text = 7
-    }
-    #Pro
-    if ($formMainWindowControlOSEditionCombobox.SelectedIndex -eq 7) {
-        $formMainWindowControlOSLicenseCombobox.IsEnabled = $true
-        if ($formMainWindowControlOSLicenseCombobox.SelectedIndex -eq 0) {
-            $formMainWindowControlImageIndexTextbox.Text = 9
-        }
-        else {
-            $formMainWindowControlImageIndexTextbox.Text = 8
-        }
-    }
-    #Pro N
-    if ($formMainWindowControlOSEditionCombobox.SelectedIndex -eq 8) {
-        $formMainWindowControlOSLicenseCombobox.IsEnabled = $true
-        if ($formMainWindowControlOSLicenseCombobox.SelectedIndex -eq 0) {
-            $formMainWindowControlImageIndexTextbox.Text = 10
-        }
-        else {
-            $formMainWindowControlImageIndexTextbox.Text = 9
-        }
-    }
+    $formMainWindowControlContainerCombobox.SelectedIndex = 0
 })
 #================================================
-#   OSLicenseCombobox
+#   ContainerCombobox
 #================================================
-$formMainWindowControlOSLicenseCombobox.add_SelectionChanged({
-    if ($formMainWindowControlOSLicenseCombobox.SelectedIndex -eq 0) {
-        if ($formMainWindowControlOSEditionCombobox.SelectedIndex -eq 3) {$formMainWindowControlImageIndexTextbox.Text = 7}
-        if ($formMainWindowControlOSEditionCombobox.SelectedIndex -eq 4) {$formMainWindowControlImageIndexTextbox.Text = 8}
-        if ($formMainWindowControlOSEditionCombobox.SelectedIndex -eq 7) {$formMainWindowControlImageIndexTextbox.Text = 9}
-        if ($formMainWindowControlOSEditionCombobox.SelectedIndex -eq 8) {$formMainWindowControlImageIndexTextbox.Text = 10}
-    }
-    if ($formMainWindowControlOSLicenseCombobox.SelectedIndex -eq 1) {
-        if ($formMainWindowControlOSEditionCombobox.SelectedIndex -eq 3) {$formMainWindowControlImageIndexTextbox.Text = 4}
-        if ($formMainWindowControlOSEditionCombobox.SelectedIndex -eq 4) {$formMainWindowControlImageIndexTextbox.Text = 5}
-        if ($formMainWindowControlOSEditionCombobox.SelectedIndex -eq 7) {$formMainWindowControlImageIndexTextbox.Text = 8}
-        if ($formMainWindowControlOSEditionCombobox.SelectedIndex -eq 8) {$formMainWindowControlImageIndexTextbox.Text = 9}
-    }
-})
-#================================================
-#   OperatingSystemCombobox
-#================================================
-$formMainWindowControlOperatingSystemCombobox.add_SelectionChanged({
-    if ($formMainWindowControlOperatingSystemCombobox.SelectedIndex -eq 0) {
-        SetDefaultWin10
-    }
-    elseif ($formMainWindowControlOperatingSystemCombobox.SelectedIndex -eq 1) {
-        SetDefaultWin11
-    }
-    else {
-        $formMainWindowControlOSBuildCombobox.Visibility = "Collapsed"
-        $formMainWindowControlOSEditionCombobox.Visibility = "Collapsed"
-        $formMainWindowControlOSLanguageCombobox.Visibility = "Collapsed"
-        $formMainWindowControlOSLicenseCombobox.Visibility = "Collapsed"
-        $formMainWindowControlImageIndexTextbox.IsEnabled = $false
-        $formMainWindowControlImageIndexTextbox.Text = 1
+$formMainWindowControlContainerCombobox.add_SelectionChanged({
+    $formMainWindowControlBlobCombobox.Items.Clear()
 
-        $formMainWindowControlImageNameCombobox.Visibility = "Visible"
-        $formMainWindowControlImageNameCombobox.Items.Clear()
-        $formMainWindowControlImageNameCombobox.IsEnabled = $true
-        $GetWindowsImageOptions = Get-WindowsImage -ImagePath $formMainWindowControlOperatingSystemCombobox.SelectedValue
-        $GetWindowsImageOptions | ForEach-Object {
-            $formMainWindowControlImageNameCombobox.Items.Add($_.ImageName) | Out-Null
-        }
-        $formMainWindowControlImageNameCombobox.SelectedIndex = 0
+    $StorageBlobs = Get-AzStorageBlob -Blob *.wim -Context $Context -Container $formMainWindowControlContainerCombobox.SelectedValue -ErrorAction Ignore
+
+    $StorageBlobs | ForEach-Object {
+        $formMainWindowControlBlobCombobox.Items.Add($_.Name) | Out-Null
     }
-})
-$formMainWindowControlImageNameCombobox.add_SelectionChanged({
-    $formMainWindowControlImageIndexTextbox.Text = $formMainWindowControlImageNameCombobox.SelectedIndex + 1
-    if ($formMainWindowControlImageIndexTextbox.Text -eq 0) {$formMainWindowControlImageIndexTextbox.Text = 1}
+    $formMainWindowControlBlobCombobox.SelectedIndex = 0
 })
 #================================================
 #   StartButton
@@ -566,10 +314,10 @@ $formMainWindowControlStartButton.add_Click({
     #================================================
     #   Variables
     #================================================
-    if ($formMainWindowControlOperatingSystemCombobox.SelectedIndex -eq 0) {
+    if ($formMainWindowControlStorageAccountCombobox.SelectedIndex -eq 0) {
         $OSVersion = 'Windows 10'
     }
-    elseif ($formMainWindowControlOperatingSystemCombobox.SelectedIndex -eq 1) {
+    elseif ($formMainWindowControlStorageAccountCombobox.SelectedIndex -eq 1) {
         $OSVersion = 'Windows 11'
     }
     else {
@@ -643,8 +391,8 @@ $formMainWindowControlStartButton.add_Click({
     #================================================
     #   ImageFile
     #================================================
-    if ($formMainWindowControlOperatingSystemCombobox.SelectedIndex -ge 2) {
-        $ImageFileFullName = $formMainWindowControlOperatingSystemCombobox.SelectedValue
+    if ($formMainWindowControlStorageAccountCombobox.SelectedIndex -ge 2) {
+        $ImageFileFullName = $formMainWindowControlStorageAccountCombobox.SelectedValue
         if ($ImageFileFullName) {
             $ImageFileItem = $CustomImageChildItem | Where-Object {$_.FullName -eq "$ImageFileFullName"}
             $ImageFileName = Split-Path -Path $ImageFileItem.FullName -Leaf
@@ -714,7 +462,7 @@ $formMainWindowControlStartButton.add_Click({
 #   Customizations
 #================================================
 [string]$ModuleVersion = Get-Module -Name OSD | Sort-Object -Property Version | Select-Object -ExpandProperty Version -Last 1
-$formMainWindow.Title = "OSDCloudGUI $ModuleVersion"
+$formMainWindow.Title = "AzOSDCloudGUI $ModuleVersion"
 #================================================
 #   Branding
 #================================================

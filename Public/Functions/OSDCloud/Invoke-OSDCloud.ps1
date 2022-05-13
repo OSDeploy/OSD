@@ -798,16 +798,16 @@ function Invoke-OSDCloud {
         }
     }
     #=================================================
-    #   Add-WindowsDriver.offlineservicing
+    #   Add-OfflineServicingWindowsDriver
     #=================================================
     Write-Host -ForegroundColor DarkGray "========================================================================="
-    Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Add Windows Driver with Offline Servicing (Add-WindowsDriver.offlineservicing)"
+    Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Add Windows Driver with Offline Servicing (Add-OfflineServicingWindowsDriver)"
     Write-Verbose -Message "https://docs.microsoft.com/en-us/powershell/module/dism/add-windowsdriver"
     Write-Host -ForegroundColor DarkGray "Drivers in C:\Drivers are being added to the offline Windows Image"
     Write-Host -ForegroundColor DarkGray "This process can take up to 20 minutes"
-    Write-Verbose -Message "Add-WindowsDriver.offlineservicing"
+    Write-Verbose -Message "Add-OfflineServicingWindowsDriver"
     if ($Global:OSDCloud.Test -eq $false) {
-        Add-WindowsDriver.offlineservicing
+        Add-OfflineServicingWindowsDriver
     }
     #=================================================
     #   Set-OSDCloudUnattendSpecialize

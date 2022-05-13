@@ -1,6 +1,6 @@
 <#PSScriptInfo
 .VERSION 22.5.13.1
-.GUID 57f30acf-8336-4519-9971-1d71d261f197
+.GUID aa123d2c-3cd3-4ef4-91f0-0c2139473991
 .AUTHOR David Segura @SeguraOSD
 .COMPANYNAME osdcloud.com
 .COPYRIGHT (c) 2022 David Segura osdcloud.com. All rights reserved.
@@ -13,27 +13,27 @@
 .EXTERNALSCRIPTDEPENDENCIES 
 .RELEASENOTES
 Script should be executed in a Command Prompt using the following command
-powershell Invoke-Expression -Command (Invoke-RestMethod -Uri go.osdcloud.com/enterprise)
+powershell Invoke-Expression -Command (Invoke-RestMethod -Uri az.osdcloud.com)
 This is abbreviated as
-powershell iex(irm go.osdcloud.com/enterprise)
+powershell iex (irm az.osdcloud.com)
 #>
 <#
 .SYNOPSIS
-    PSCloudScript at go.osdcloud.com/enterprise
+    PSCloudScript at az.osdcloud.com
 .DESCRIPTION
-    PSCloudScript at go.osdcloud.com/enterprise
+    PSCloudScript at az.osdcloud.com
 .NOTES
     Version 22.5.13.1
 .LINK
-    https://raw.githubusercontent.com/OSDeploy/OSD/master/cloudscript/tasksequences/enterprise.ps1
+    https://raw.githubusercontent.com/OSDeploy/OSD/master/cloudscript/az.osdcloud.com.ps1
 .EXAMPLE
-    powershell iex (irm go.osdcloud.com/enterprise)
+    powershell iex (irm az.osdcloud.com)
 #>
 [CmdletBinding()]
 param()
 #=================================================
 #Script Information
-$ScriptName = 'go.osdcloud.com/enterprise'
+$ScriptName = 'az.osdcloud.com'
 $ScriptVersion = '22.5.13.1'
 #=================================================
 #region Initialize
@@ -64,15 +64,11 @@ Invoke-Expression -Command (Invoke-RestMethod -Uri functions.osdcloud.com)
 if ($WindowsPhase -eq 'WinPE') {
 
     #Process OSDCloud startup and load Azure KeyVault dependencies
-    osdcloud-StartWinPE -OSDCloud -KeyVault
-
-    #Write-Host -ForegroundColor Cyan "To start a new PowerShell session, type 'start powershell' and press enter"
-    #Write-Host -ForegroundColor Cyan "Start-OSDCloud or Start-OSDCloudGUI can be run in the new PowerShell session"
+    osdcloud-StartWinPE -OSDCloud -Azure
     #Stop the startup Transcript.  OSDCloud will create its own
     $null = Stop-Transcript -ErrorAction Ignore
-
-    #Start OSDCloud and pass all the parameters except the Language to allow for prompting
-    Start-OSDCloud -OSVersion 'Windows 10' -OSBuild 21H2 -OSEdition Enterprise -OSLicense Volume -SkipAutopilot -SkipODT -Restart
+    Connect-AzOSDCloud
+    Start-AzOSDCloud
 }
 #endregion
 #=================================================
@@ -94,37 +90,7 @@ if ($WindowsPhase -eq 'OOBE') {
     #Load everything needed to run AutoPilot and Azure KeyVault
     osdcloud-StartOOBE -Display -Language -DateTime -Autopilot -KeyVault
 
-    #Get Autopilot information from the device
-    $TestAutopilotProfile = osdcloud-TestAutopilotProfile
-
-    #If the device has an Autopilot Profile
-    if ($TestAutopilotProfile -eq $true) {
-        #osdcloud-ShowAutopilotInfo
-    }
-    #If not, need to register the device using the Enterprise GroupTag and Assign it
-    elseif ($TestAutopilotProfile -eq $false) {
-        $AutopilotRegisterCommand = 'Get-WindowsAutopilotInfo -Online -GroupTag Enterprise -Assign'
-        $AutopilotRegisterProcess = osdcloud-AutopilotRegisterCommand -Command $AutopilotRegisterCommand;Start-Sleep -Seconds 30
-    }
-    #Or maybe we just can't figure it out
-    else {
-        Write-Warning 'Unable to determine if device is Autopilot registered'
-    }
-    osdcloud-RemoveAppx -Basic
-    osdcloud-Rsat -Basic
-    osdcloud-NetFX
-    osdcloud-UpdateDrivers
-    osdcloud-UpdateWindows
-    osdcloud-UpdateDefender
-    if ($AutopilotRegisterProcess) {
-        Write-Host -ForegroundColor Cyan 'Waiting for Autopilot Registration to complete'
-        #$AutopilotRegisterProcess.WaitForExit()
-        if (Get-Process -Id $AutopilotRegisterProcess.Id -ErrorAction Ignore) {
-            Wait-Process -Id $AutopilotRegisterProcess.Id
-        }
-    }
     $null = Stop-Transcript -ErrorAction Ignore
-    osdcloud-RestartComputer
 }
 #endregion
 #=================================================
@@ -132,11 +98,7 @@ if ($WindowsPhase -eq 'OOBE') {
 if ($WindowsPhase -eq 'Windows') {
 
     #Load OSD and Azure stuff
-    osdcloud-SetExecutionPolicy
-    osdcloud-InstallPackageManagement
-    osdcloud-InstallModuleKeyVault
-    osdcloud-InstallModuleOSD
-    osdcloud-InstallModuleAzureAd
+
     $null = Stop-Transcript -ErrorAction Ignore
 }
 #endregion

@@ -1,5 +1,5 @@
 <#PSScriptInfo
-.VERSION 22.5.2.1
+.VERSION 22.5.13.1
 .GUID 68790315-3c3f-4a9a-b191-84928e5d6a83
 .AUTHOR David Segura @SeguraOSD
 .COMPANYNAME osdcloud.com
@@ -19,7 +19,7 @@
 .DESCRIPTION
     PSCloudScript
 .NOTES
-    Version 22.5.2.1
+    Version 22.5.13.1
 .LINK
     https://raw.githubusercontent.com/OSDeploy/OSD/master/cloudscript/re.osdcloud.com.ps1
 .EXAMPLE
@@ -32,7 +32,7 @@ param()
 #=================================================
 #Script Information
 $ScriptName = 'OSDCloud RE'
-$ScriptVersion = '22.5.2.1'
+$ScriptVersion = '22.5.13.1'
 #=================================================
 #region Initialize
 
@@ -78,18 +78,26 @@ if ($WindowsPhase -eq 'Windows') {
             Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Force
         }
         #============================================
-        #	Test OSD Module
-        Write-Host -ForegroundColor DarkGray "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Test OSD Module"
-        $TestOSDModule = Import-Module OSD -PassThru -ErrorAction Ignore
-        if (! $TestOSDModule) {
-            Write-Host -ForegroundColor DarkGray "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Install Module OSD"
-            Install-Module OSD -Force
+        #	OSD Module
+        $InstallModule = $false
+        $PSModuleName = 'OSD'
+        Write-Host -ForegroundColor DarkGray "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Test $PSModuleName Module"
+        $InstalledModule = Get-InstalledModule $PSModuleName -ErrorAction Ignore | Select-Object -First 1
+        $GalleryPSModule = Find-Module -Name $PSModuleName -ErrorAction Ignore
+    
+        if ($InstalledModule) {
+            if (($GalleryPSModule.Version -as [version]) -gt ($InstalledModule.Version -as [version])) {
+                $InstallModule = $true
+            }
         }
-        Write-Host -ForegroundColor DarkGray "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Test OSD Commands"
-        $TestOSDCommand = Get-Command Get-OSDCloudREPSDrive -ErrorAction Ignore
-        if (-not $TestOSDCommand) {
-            Write-Host -ForegroundColor DarkGray "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Install Module OSD"
-            Install-Module OSD -Force
+        else {
+            $InstallModule = $true
+        }
+    
+        if ($InstallModule) {
+            Write-Host -ForegroundColor DarkGray "Install-Module $PSModuleName $($GalleryPSModule.Version) [AllUsers]"
+            Install-Module $PSModuleName -Scope AllUsers -Force
+            Import-Module $PSModuleName -Force
         }
         #============================================
         #	Final Warning

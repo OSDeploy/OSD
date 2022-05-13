@@ -29,10 +29,10 @@ else {
     }
 
     if ($env:SystemDrive -eq 'X:') {
-        $Public = @(Get-ChildItem -Path ("$PSScriptRoot\Public\Functions\*.ps1","$PSScriptRoot\Public\WinPE\*.ps1") -Recurse -ErrorAction SilentlyContinue)
+        $Public = @(Get-ChildItem -Path ("$PSScriptRoot\Public\Functions\*.ps1") -Recurse -ErrorAction SilentlyContinue)
     }
     elseif ($env:UserName -eq 'defaultuser0') {
-        $Public = @(Get-ChildItem -Path ("$PSScriptRoot\Public\Functions\*.ps1","$PSScriptRoot\Public\OOBE\*.ps1") -Recurse -ErrorAction SilentlyContinue)
+        $Public = @(Get-ChildItem -Path ("$PSScriptRoot\Public\Functions\*.ps1") -Recurse -ErrorAction SilentlyContinue)
     }
     else {
         $Public = @(Get-ChildItem -Path ("$PSScriptRoot\Public\Functions\*.ps1","$PSScriptRoot\Public\WinOS\*.ps1") -Recurse -ErrorAction SilentlyContinue)

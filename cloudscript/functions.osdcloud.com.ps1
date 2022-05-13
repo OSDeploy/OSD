@@ -160,6 +160,8 @@ if ($WindowsPhase -eq 'WinPE') {
     function Connect-AzOSDCloud {
         [CmdletBinding()]
         param ()
+        Write-Host -ForegroundColor DarkGray "========================================================================="
+        Write-Host -ForegroundColor Green "Connect-AzOSDCloud"
     
         osdcloud-InstallModuleAzureAd
         osdcloud-InstallModuleAzAccounts
@@ -274,79 +276,95 @@ if ($WindowsPhase -eq 'WinPE') {
     function Start-AzOSDCloud {
         [CmdletBinding()]
         param ()
-         
-        Write-Host -ForegroundColor DarkGray    'Storage Accounts:          $Global:AzStorageAccounts'
-        $Global:AzStorageAccounts = Get-AzStorageAccount
-    
-        Write-Host -ForegroundColor DarkGray    'OSDCloud Storage Accounts: $Global:AzOSDCloudStorageAccounts'
-        #$Global:AzOSDCloudStorageAccounts = Get-AzResource -ResourceType 'Microsoft.Storage/storageAccounts'
-        #$Global:AzOSDCloudStorageAccounts = Get-AzResource -ResourceType 'Microsoft.Storage/storageAccounts' | Where-Object {$_.Tags.ContainsKey('OSDCloud')}
-        $Global:AzOSDCloudStorageAccounts = Get-AzStorageAccount | Where-Object {$_.Tags.ContainsKey('OSDCloud')}
-    
-        Write-Host -ForegroundColor DarkGray    'Storage Contexts:          $Global:AzStorageContext'
-        Write-Host -ForegroundColor DarkGray    'Blob Windows Images:       $Global:AzStorageBlobImage'
-        Write-Host ''
-        $Global:AzStorageContext = @{}
-        $Global:AzStorageBlobImage = @()
-    
-        if ($Global:AzOSDCloudStorageAccounts) {
-            Write-Host -ForegroundColor Cyan "Scanning for Windows Images"
-            foreach ($Item in $Global:AzOSDCloudStorageAccounts) {
-                $Global:LastStorageContext = New-AzStorageContext -StorageAccountName $Item.StorageAccountName
-                $Global:AzStorageContext."$($Item.StorageAccountName)" = $Global:LastStorageContext
-                #Get-AzStorageBlobByTag -TagFilterSqlExpression ""osdcloudimage""=""win10ltsc"" -Context $StorageContext
-                #Get-AzStorageBlobByTag -Context $Global:LastStorageContext
+        Write-Host -ForegroundColor DarkGray "========================================================================="
+        Write-Host -ForegroundColor Green "Start-AzOSDCloud"
+
+        if ($Global:AzureAD) {  
+            Write-Host -ForegroundColor DarkGray    'Storage Accounts:          $Global:AzStorageAccounts'
+            $Global:AzStorageAccounts = Get-AzStorageAccount
         
-                $StorageContainers = Get-AzStorageContainer -Context $Global:LastStorageContext
+            Write-Host -ForegroundColor DarkGray    'OSDCloud Storage Accounts: $Global:AzOSDCloudStorageAccounts'
+            #$Global:AzOSDCloudStorageAccounts = Get-AzResource -ResourceType 'Microsoft.Storage/storageAccounts'
+            #$Global:AzOSDCloudStorageAccounts = Get-AzResource -ResourceType 'Microsoft.Storage/storageAccounts' | Where-Object {$_.Tags.ContainsKey('OSDCloud')}
+            $Global:AzOSDCloudStorageAccounts = Get-AzStorageAccount | Where-Object {$_.Tags.ContainsKey('OSDCloud')}
+        
+            Write-Host -ForegroundColor DarkGray    'Storage Contexts:          $Global:AzStorageContext'
+            Write-Host -ForegroundColor DarkGray    'Blob Windows Images:       $Global:AzStorageBlobImage'
+            Write-Host ''
+            $Global:AzStorageContext = @{}
+            $Global:AzStorageBlobImage = @()
+        
+            if ($Global:AzOSDCloudStorageAccounts) {
+                Write-Host -ForegroundColor Cyan "Scanning for Windows Images"
+                foreach ($Item in $Global:AzOSDCloudStorageAccounts) {
+                    $Global:AzCurrentStorageContext = New-AzStorageContext -StorageAccountName $Item.StorageAccountName
+                    $Global:AzStorageContext."$($Item.StorageAccountName)" = $Global:AzCurrentStorageContext
+                    #Get-AzStorageBlobByTag -TagFilterSqlExpression ""osdcloudimage""=""win10ltsc"" -Context $StorageContext
+                    #Get-AzStorageBlobByTag -Context $Global:AzCurrentStorageContext
             
-                if ($StorageContainers) {
-                    foreach ($Container in $StorageContainers) {
-                        Write-Host -ForegroundColor DarkGray "Storage Account: $($Item.StorageAccountName) Container: $($Container.Name)"
-                        $Global:AzStorageBlobImage += Get-AzStorageBlob -Context $Global:LastStorageContext -Container $Container.Name -Blob *.wim -ErrorAction Ignore
+                    $StorageContainers = Get-AzStorageContainer -Context $Global:AzCurrentStorageContext
+                
+                    if ($StorageContainers) {
+                        foreach ($Container in $StorageContainers) {
+                            Write-Host -ForegroundColor DarkGray "Storage Account: $($Item.StorageAccountName) Container: $($Container.Name)"
+                            $Global:AzStorageBlobImage += Get-AzStorageBlob -Context $Global:AzCurrentStorageContext -Container $Container.Name -Blob *.wim -ErrorAction Ignore
+                        }
                     }
                 }
             }
-        }
-    
-        if ($Global:AzStorageBlobImage) {
-            $i = $null
-            $Results = foreach ($Item in $Global:AzStorageBlobImage) {
-                $i++
-    
-                $ObjectProperties = @{
-                    Number              = $i
-                    ResourceGroupName   = $Global:AzOSDCloudStorageAccounts | Where-Object {$_.StorageAccountName -eq $Item.BlobClient.AccountName} | Select-Object -ExpandProperty ResourceGroupName
-                    Location            = $Global:AzOSDCloudStorageAccounts | Where-Object {$_.StorageAccountName -eq $Item.BlobClient.AccountName} | Select-Object -ExpandProperty Location
-                    StorageAccount      = $Item.BlobClient.AccountName
-                    Container           = $Item.BlobClient.BlobContainerName
-                    Blob                = $Item.Name
+            else {
+                Write-Warning 'Unable to find any Azure Storage Accounts'
+                Write-Warning 'Make sure the OSDCloud Azure Storage Account has an OSDCloud Tag'
+                Write-Warning 'Make sure this user has the Azure Reader role on the OSDCloud Azure Storage Account'
+            }
+            if ($Global:AzStorageBlobImage) {
+                $i = $null
+                $Results = foreach ($Item in $Global:AzStorageBlobImage) {
+                    $i++
+        
+                    $ObjectProperties = @{
+                        Number              = $i
+                        ResourceGroupName   = $Global:AzOSDCloudStorageAccounts | Where-Object {$_.StorageAccountName -eq $Item.BlobClient.AccountName} | Select-Object -ExpandProperty ResourceGroupName
+                        Location            = $Global:AzOSDCloudStorageAccounts | Where-Object {$_.StorageAccountName -eq $Item.BlobClient.AccountName} | Select-Object -ExpandProperty Location
+                        StorageAccount      = $Item.BlobClient.AccountName
+                        Container           = $Item.BlobClient.BlobContainerName
+                        Blob                = $Item.Name
+                    }
+                    New-Object -TypeName PSObject -Property $ObjectProperties
                 }
-                New-Object -TypeName PSObject -Property $ObjectProperties
+        
+                $Results | Select-Object -Property Number, StorageAccount, Container, Blob, Location, ResourceGroupName | Format-Table | Out-Host
+        
+                do {
+                    $SelectReadHost = Read-Host -Prompt "Select a Windows Image to apply by Number"
+                }
+                until (((($SelectReadHost -ge 0) -and ($SelectReadHost -in $Results.Number))))
+        
+                $Results = $Results | Where-Object {$_.Number -eq $SelectReadHost}
+        
+                $Global:AzOSDCloudImage = $Global:AzStorageBlobImage | Where-Object {$_.Name -eq $Results.Blob} | Where-Object {$_.BlobClient.BlobContainerName -eq $Results.Container} | Where-Object {$_.BlobClient.AccountName -eq $Results.StorageAccount}
+                $Global:AzOSDCloudImage | Select-Object * | Export-Clixml "$env:SystemDrive\AzOSDCloudImage.xml"
+                $Global:AzOSDCloudImage | Select-Object * | ConvertTo-Json | Out-File "$env:SystemDrive\AzOSDCloudImage.json"
+                #=================================================
+                #   Invoke-OSDCloud.ps1
+                #=================================================
+                Write-Host -ForegroundColor DarkGray "========================================================================="
+                Write-Host -ForegroundColor Green "Invoke-OSDCloud ... Starting in 5 seconds..."
+                Start-Sleep -Seconds 5
+                Invoke-OSDCloud
             }
-    
-            $Results | Select-Object -Property Number, StorageAccount, Container, Blob, Location, ResourceGroupName | Format-Table | Out-Host
-    
-            do {
-                $SelectReadHost = Read-Host -Prompt "Select a Windows Image to apply by Number"
+            else {
+                Write-Warning 'Unable to find a WIM on any of the OSDCloud Azure Storage Containers'
+                Write-Warning 'Make sure you have a WIM Windows Image in the OSDCloud Azure Storage Container'
+                Write-Warning 'Make sure this user has the Azure Storage Blob Data Reader role to the OSDCloud Container'
             }
-            until (((($SelectReadHost -ge 0) -and ($SelectReadHost -in $Results.Number))))
-    
-            $Results = $Results | Where-Object {$_.Number -eq $SelectReadHost}
-    
-            $Global:AzOSDCloudImage = $Global:AzStorageBlobImage | Where-Object {$_.Name -eq $Results.Blob} | Where-Object {$_.BlobClient.BlobContainerName -eq $Results.Container} | Where-Object {$_.BlobClient.AccountName -eq $Results.StorageAccount}
-            $Global:AzOSDCloudImage | Select-Object * | Export-Clixml "$env:SystemDrive\AzOSDCloudImage.xml"
-            $Global:AzOSDCloudImage | Select-Object * | ConvertTo-Json | Out-File "$env:SystemDrive\AzOSDCloudImage.json"
-            #=================================================
-            #   Invoke-OSDCloud.ps1
-            #=================================================
-            Write-Host -ForegroundColor DarkGray "========================================================================="
-            Write-Host -ForegroundColor Green "Invoke-OSDCloud ... Starting in 5 seconds..."
-            Start-Sleep -Seconds 5
-            Invoke-OSDCloud
         }
         else {
-            Write-Warning 'Unable to find an AzStorageBlobImage across the Storage Accounts'
+            Write-Warning 'Unable to connect to AzureAD'
+            Write-Warning 'You may need to execute Connect-AzOSDCloud then Start-AzOSDCloud'
         }
+       
+    
     }
     New-Alias -Name 'Start-AzOSDCloudBeta' -Value 'Start-AzOSDCloud' -Description 'OSDCloud' -Force
     function AzOSD {
@@ -777,23 +795,21 @@ function osdcloud-InstallPackageManagement {
 function osdcloud-InstallModuleOSD {
     [CmdletBinding()]
     param ()
+    $InstallModule = $false
     $PSModuleName = 'OSD'
     $InstalledModule = Get-InstalledModule $PSModuleName -ErrorAction Ignore | Select-Object -First 1
     $GalleryPSModule = Find-Module -Name $PSModuleName -ErrorAction Ignore
 
     if ($InstalledModule) {
         if (($GalleryPSModule.Version -as [version]) -gt ($InstalledModule.Version -as [version])) {
-            if ($WindowsPhase -eq 'WinPE') {
-                Write-Host -ForegroundColor DarkGray "Install-Module $PSModuleName $($GalleryPSModule.Version) [AllUsers]"
-                Install-Module $PSModuleName -Scope AllUsers -Force
-            }
-            else {
-                Write-Host -ForegroundColor DarkGray "Install-Module $PSModuleName $($GalleryPSModule.Version) [AllUsers]"
-                Install-Module $PSModuleName -Scope AllUsers -Force
-            } 
+            $InstallModule = $true
         }
     }
     else {
+        $InstallModule = $true
+    }
+
+    if ($InstallModule) {
         if ($WindowsPhase -eq 'WinPE') {
             Write-Host -ForegroundColor DarkGray "Install-Module $PSModuleName $($GalleryPSModule.Version) [AllUsers]"
             Install-Module $PSModuleName -Scope AllUsers -Force
@@ -1118,6 +1134,7 @@ if ($WindowsPhase -eq 'WinPE') {
                 }
             }
             if ($Azure) {
+                $KeyVault = $false
                 osdcloud-InstallModuleAzureAd
                 osdcloud-InstallModuleAzAccounts
                 osdcloud-InstallModuleAzKeyVault
