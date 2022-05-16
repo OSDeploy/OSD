@@ -9,7 +9,7 @@
         RenderTransformOrigin="0.5,0.5"
         ResizeMode="NoResize"
         WindowStartupLocation = "CenterScreen"
-        Title="AzOSDCloudGUI" Height="580" Width="770">
+        Title="AzOSDCloudGUI" Height="360" Width="800">
     <Window.Resources>
         <ResourceDictionary>
             <Style TargetType="{x:Type Button}">
@@ -137,7 +137,7 @@
         <!-- Row 0 -->
         <Label Grid.Row="0"
                Name="BrandingTitleControl"
-               Content="AzOSDCloud"
+               Content="OSDCloud Azure Edition"
                FlowDirection="RightToLeft"
                FontSize="20"
                FontWeight="Bold"
@@ -219,24 +219,19 @@
                     <ComboBoxItem Content=""/>
                 </ComboBox>
             </StackPanel>
+            <!-- Image Index -->
             <StackPanel Orientation="Horizontal"
                         HorizontalAlignment="Left"
                         VerticalAlignment="Top">
-                <Label Name="OperatingSystemDetailsLabel"
-                       Content=""
-                       FontSize="18"
-                       FontWeight="Bold"
-                       Foreground="#003E92"
-                       Margin="5"
-                       Padding="2"
-                       Width="165" />
                 <Label Name="ImageIndexLabel"
                        Content="Image Index"
                        FontSize="18"
                        FontWeight="Bold"
                        Foreground="#003E92"
                        Margin="5"
-                       Padding="2" />
+                       Padding="2"
+                       Width="165"
+                       FlowDirection="RightToLeft" />
                 <TextBox Name="ImageIndexTextbox"
                          FontSize="16"
                          Margin="5"
@@ -257,69 +252,13 @@
               StrokeThickness="1"
               Stretch="Uniform">
         </Line>
-        <!-- Row 4 Computer System two row StackPanel -->
-        <StackPanel Grid.Row="4"
-                    HorizontalAlignment="Left"
-                    VerticalAlignment="Top">
-
-                <StackPanel Orientation="Horizontal"
-                        HorizontalAlignment="Left"
-                        VerticalAlignment="Top" Margin="5,5,5,0">
-                    <Label Name="ComputerSystemLabel"
-                           Content="Driver Pack"
-                           FontSize="18"
-                           FontWeight="Bold"
-                           Foreground="#003E92"
-                           Margin="5"
-                           Padding="2"
-                           Width="160"
-                           FlowDirection="RightToLeft" />
-                <ComboBox Name="CSManufacturerTextbox"
-                          FontSize="16"
-                          Margin="5"
-                          Padding="2"
-                          SelectedIndex="0" >
-                    <ComboBoxItem Content="selected cloud driver pack"/>
-                </ComboBox>
-            </StackPanel>
-            <StackPanel HorizontalAlignment="Left"
-                        VerticalAlignment="Top">
-                <CheckBox Name="CatalogDriversCheckbox"
-                      BorderBrush="Black"
-                      BorderThickness="2"
-                      FontSize="15"
-                      Foreground="Black"
-                      IsChecked="True"
-                      Padding="5,-2,5,10"
-                      VerticalAlignment="Center"
-                      Margin="180,0,0,0">Microsoft Catalog Disk and Network Drivers</CheckBox>
-                <CheckBox Name="CatalogFirmwareCheckbox"
-                      BorderBrush="Black"
-                      BorderThickness="2"
-                      FontSize="15"
-                      Foreground="Black"
-                      IsChecked="True"
-                      Padding="5,-2,5,10"
-                      VerticalAlignment="Center"
-                      Margin="180,0,0,0">Microsoft Catalog Firmware Update</CheckBox>
-            </StackPanel>
-        </StackPanel>
-        <!-- Line -->
-        <Line Grid.Row="5"
-              X1="0"
-              Y1="0"
-              X2="1"
-              Y2="0"
-              Stroke="Gainsboro"
-              StrokeThickness="1"
-              Stretch="Uniform"></Line>
-        <!-- RowCustomizations -->
+        <!-- Deployment Options -->
         <StackPanel Grid.Row="6"
                     Orientation="Horizontal"
                     HorizontalAlignment="Left"
                     VerticalAlignment="Top">
             <Label Name="DeploymentOptionsLabel"
-                   Content="Deploy Options"
+                   Content="Options"
                    FontSize="18"
                    FontWeight="Bold"
                    Foreground="#003E92"
@@ -341,7 +280,7 @@
                       Foreground="Crimson"
                       Padding="5,-2,5,10"
                       VerticalAlignment="Center"
-                      Margin="180,15,0,0">Automatically wipe disks</CheckBox>
+                      Margin="180,15,0,0">Clear-Disk without Warning</CheckBox>
             <CheckBox Name="RestartCheckbox"
                       BorderBrush="Black"
                       BorderThickness="2"
@@ -350,7 +289,7 @@
                       IsChecked="True"
                       Padding="5,-2,5,10"
                       VerticalAlignment="Center"
-                      Margin="180,0,0,0">Restart after WinPE Phase</CheckBox>
+                      Margin="180,0,0,0">Restart-Computer</CheckBox>
         </StackPanel>
         <!-- Line -->
         <Line Grid.Row="7"

@@ -5,14 +5,14 @@
 @{
     RootModule              = 'OSD.psm1'
     NestedModules = @(
-      '.\nests\OSD.CloudMDT',
-      '.\nests\OSD.CloudRE',
-      '.\nests\OSD.CloudSecret',
-      '.\nests\OSD.OOBE',
-      '.\nests\OSD.WinPE',
-      '.\nests\OSD.WinRE.WiFi'
+                            '.\SubModules\OSD.CloudMDT',
+                            '.\SubModules\OSD.CloudRE',
+                            '.\SubModules\OSD.CloudSecret',
+                            '.\SubModules\OSD.OOBE',
+                            '.\SubModules\OSD.WinPE',
+                            '.\SubModules\OSD.WinRE.WiFi'
     )
-    ModuleVersion           = '22.5.13.1'
+    ModuleVersion           = '22.5.16.1'
     CompatiblePSEditions    = @('Desktop')
     GUID                    = '9fe5b9b6-0224-4d87-9018-a8978529f6f5'
     Author                  = 'David Segura . Damien Van Robaeys . Gary Blok . Jérôme Bezet-Torres . Mike Marable . Dean Ellerby . Doug McGee'

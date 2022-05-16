@@ -157,223 +157,11 @@ if ($WindowsPhase -eq 'WinPE') {
             [System.Environment]::SetEnvironmentVariable('LOCALAPPDATA',"$Env:UserProfile\AppData\Local",[System.EnvironmentVariableTarget]::Process)
         }
     }
-    function Connect-AzOSDCloud {
-        [CmdletBinding()]
-        param ()
-        Write-Host -ForegroundColor DarkGray "========================================================================="
-        Write-Host -ForegroundColor Green "Connect-AzOSDCloud"
-    
-        osdcloud-InstallModuleAzureAd
-        osdcloud-InstallModuleAzAccounts
-        osdcloud-InstallModuleAzKeyVault
-        osdcloud-InstallModuleAzResources
-        osdcloud-InstallModuleAzStorage
-        osdcloud-InstallModuleMSGraphDeviceManagement
-    
-        Connect-AzAccount -UseDeviceAuthentication -AuthScope Storage -ErrorAction Stop
-        $Global:AzSubscription = Get-AzSubscription
-    
-        if (($Global:AzSubscription).Count -ge 2) {
-            $i = $null
-            $Results = foreach ($Item in $Global:AzSubscription) {
-                $i++
-        
-                $ObjectProperties = @{
-                    Number  = $i
-                    Name    = $Item.Name
-                    Id      = $Item.Id
-                }
-                New-Object -TypeName PSObject -Property $ObjectProperties
-            }
-        
-            $Results | Select-Object -Property Number, Name, Id | Format-Table | Out-Host
-        
-            do {
-                $SelectReadHost = Read-Host -Prompt "Select an Azure Subscription by Number"
-            }
-            until (((($SelectReadHost -ge 0) -and ($SelectReadHost -in $Results.Number))))
-        
-            $Results = $Results | Where-Object {$_.Number -eq $SelectReadHost}
-        
-            $Global:AzContext = Set-AzContext -Subscription $Results.Id
-        }
-        else {
-            $Global:AzContext = Get-AzContext
-        }
-    
-        if ($Global:AzContext) {
-            Write-Host -ForegroundColor DarkGray "========================================================================="
-            Write-Host -ForegroundColor Green 'Welcome to Azure OSDCloud!'
-            $Global:AzAccount = $Global:AzContext.Account
-            $Global:AzEnvironment = $Global:AzContext.Environment
-            $Global:AzTenantId = $Global:AzContext.Tenant
-            $Global:AzSubscription = $Global:AzContext.Subscription
-
-            Write-Host -ForegroundColor Cyan        '$Global:AzAccount:        ' $Global:AzAccount
-            Write-Host -ForegroundColor Cyan        '$Global:AzEnvironment:    ' $Global:AzEnvironment
-            Write-Host -ForegroundColor Cyan        '$Global:AzTenantId:       ' $Global:AzTenantId
-            Write-Host -ForegroundColor Cyan        '$Global:AzSubscription:   ' $Global:AzSubscription
-            if ($null -eq $Global:AzContext.Subscription) {
-                Write-Warning 'You do not have access to an Azure Subscriptions'
-                Write-Warning 'This is likely due to not having rights to Azure Resources or Azure Storage'
-                Write-Warning 'Contact your Azure administrator to resolve this issue'
-                Break
-            }
-
-            Write-Host ''
-            Write-Host -ForegroundColor DarkGray    'Azure Context:             $Global:AzContext'
-            Write-Host -ForegroundColor DarkGray    'Access Tokens:             $Global:Az*AccessToken'
-            Write-Host -ForegroundColor DarkGray    'Headers:                   $Global:Az*Headers'
-            Write-Host ''
-            #=================================================
-            #	AAD Graph
-            #=================================================
-            $Global:AzAadGraphAccessToken = Get-AzAccessToken -ResourceTypeName AadGraph
-            $Global:AzAadGraphHeaders = @{
-                'Authorization' = 'Bearer ' + $Global:AzAadGraphAccessToken.Token
-                'Content-Type'  = 'application/json'
-                'ExpiresOn'     = $Global:AzAadGraphAccessToken.ExpiresOn
-            }
-            #=================================================
-            #	Azure KeyVault
-            #=================================================
-            $Global:AzKeyVaultAccessToken = Get-AzAccessToken -ResourceTypeName KeyVault
-            $Global:AzKeyVaultHeaders = @{
-                'Authorization' = 'Bearer ' + $Global:AzKeyVaultAccessToken.Token
-                'Content-Type'  = 'application/json'
-                'ExpiresOn'     = $Global:AzKeyVaultAccessToken.ExpiresOn
-            }
-            #=================================================
-            #	Azure MSGraph
-            #=================================================
-            $Global:AzMSGraphAccessToken = Get-AzAccessToken -ResourceTypeName MSGraph
-            $Global:AzMSGraphHeaders = @{
-                'Authorization' = 'Bearer ' + $Global:AzMSGraphAccessToken.Token
-                'Content-Type'  = 'application/json'
-                'ExpiresOn'     = $Global:AzMSGraphHeaders.ExpiresOn
-            }
-            #=================================================
-            #	Azure Storage
-            #=================================================
-            $Global:AzStorageAccessToken = Get-AzAccessToken -ResourceTypeName Storage
-            $Global:AzStorageHeaders = @{
-                'Authorization' = 'Bearer ' + $Global:AzStorageAccessToken.Token
-                'Content-Type'  = 'application/json'
-                'ExpiresOn'     = $Global:AzStorageHeaders.ExpiresOn
-            }
-            #=================================================
-            #	AzureAD
-            #=================================================
-            #$Global:MgGraph = Connect-MgGraph -AccessToken $Global:AzMSGraphAccessToken.Token -Scopes DeviceManagementConfiguration.Read.All,DeviceManagementServiceConfig.Read.All,DeviceManagementServiceConfiguration.Read.All
-            $Global:AzureAD = Connect-AzureAD -AadAccessToken $Global:AzAadGraphAccessToken.Token -AccountId $Global:AzContext.Account.Id
-        }
-        else {
-            Write-Warning 'Unable to connect to AzureAD'
-        }
-    }
-    New-Alias -Name 'Connect-AzWinPE' -Value 'Connect-AzOSDCloud' -Description 'OSDCloud' -Force
-    New-Alias -Name 'Connect-AzureWinPE' -Value 'Connect-AzOSDCloud' -Description 'OSDCloud' -Force
-    function Start-AzOSDCloud {
-        [CmdletBinding()]
-        param ()
-        Write-Host -ForegroundColor DarkGray "========================================================================="
-        Write-Host -ForegroundColor Green "Start-AzOSDCloud"
-
-        if ($Global:AzureAD) {
-            Write-Host -ForegroundColor DarkGray    'Storage Accounts:          $Global:AzStorageAccounts'
-            $Global:AzStorageAccounts = Get-AzStorageAccount
-        
-            Write-Host -ForegroundColor DarkGray    'OSDCloud Storage Accounts: $Global:AzOSDCloudStorageAccounts'
-            #$Global:AzOSDCloudStorageAccounts = Get-AzResource -ResourceType 'Microsoft.Storage/storageAccounts'
-            #$Global:AzOSDCloudStorageAccounts = Get-AzResource -ResourceType 'Microsoft.Storage/storageAccounts' | Where-Object {$_.Tags.ContainsKey('OSDCloud')}
-            $Global:AzOSDCloudStorageAccounts = Get-AzStorageAccount | Where-Object {$_.Tags.ContainsKey('OSDCloud')}
-        
-            Write-Host -ForegroundColor DarkGray    'Storage Contexts:          $Global:AzStorageContext'
-            Write-Host -ForegroundColor DarkGray    'Blob Windows Images:       $Global:AzStorageBlobImage'
-            Write-Host ''
-            $Global:AzStorageContext = @{}
-            $Global:AzStorageBlobImage = @()
-        
-            if ($Global:AzOSDCloudStorageAccounts) {
-                Write-Host -ForegroundColor Cyan "Scanning for Windows Images"
-                foreach ($Item in $Global:AzOSDCloudStorageAccounts) {
-                    $Global:AzCurrentStorageContext = New-AzStorageContext -StorageAccountName $Item.StorageAccountName
-                    $Global:AzStorageContext."$($Item.StorageAccountName)" = $Global:AzCurrentStorageContext
-                    #Get-AzStorageBlobByTag -TagFilterSqlExpression ""osdcloudimage""=""win10ltsc"" -Context $StorageContext
-                    #Get-AzStorageBlobByTag -Context $Global:AzCurrentStorageContext
-            
-                    $StorageContainers = Get-AzStorageContainer -Context $Global:AzCurrentStorageContext
-                
-                    if ($StorageContainers) {
-                        foreach ($Container in $StorageContainers) {
-                            Write-Host -ForegroundColor DarkGray "Storage Account: $($Item.StorageAccountName) Container: $($Container.Name)"
-                            $Global:AzStorageBlobImage += Get-AzStorageBlob -Context $Global:AzCurrentStorageContext -Container $Container.Name -Blob *.wim -ErrorAction Ignore
-                        }
-                    }
-                }
-            }
-            else {
-                Write-Warning 'Unable to find any Azure Storage Accounts'
-                Write-Warning 'Make sure the OSDCloud Azure Storage Account has an OSDCloud Tag'
-                Write-Warning 'Make sure this user has the Azure Reader role on the OSDCloud Azure Storage Account'
-            }
-            if ($Global:AzStorageBlobImage) {
-                $i = $null
-                $Results = foreach ($Item in $Global:AzStorageBlobImage) {
-                    $i++
-                    
-                    $BlobClient = $Global:AzOSDCloudStorageAccounts | Where-Object {$_.StorageAccountName -eq $Item.BlobClient.AccountName}
-        
-                    $ObjectProperties = @{
-                        Number        = $i
-                        Account       = $Item.BlobClient.AccountName
-                        Tag           = ($BlobClient | Select-Object -ExpandProperty Tags).Get_Item('OSDCloud')
-                        Container     = $Item.BlobClient.BlobContainerName
-                        Blob          = $Item.Name
-                        Location      = $BlobClient | Select-Object -ExpandProperty Location
-                        ResourceGroup = $BlobClient | Select-Object -ExpandProperty ResourceGroupName
-                    }
-                    New-Object -TypeName PSObject -Property $ObjectProperties
-                }
-        
-                $Results | Select-Object -Property Number, Account, Tag, Container, Blob, Location, ResourceGroup | Format-Table | Out-Host
-        
-                do {
-                    $SelectReadHost = Read-Host -Prompt "Select a Windows Image to apply by Number"
-                }
-                until (((($SelectReadHost -ge 0) -and ($SelectReadHost -in $Results.Number))))
-        
-                $Results = $Results | Where-Object {$_.Number -eq $SelectReadHost}
-        
-                $Global:AzOSDCloudImage = $Global:AzStorageBlobImage | Where-Object {$_.Name -eq $Results.Blob} | Where-Object {$_.BlobClient.BlobContainerName -eq $Results.Container} | Where-Object {$_.BlobClient.AccountName -eq $Results.StorageAccount}
-                $Global:AzOSDCloudImage | Select-Object * | Export-Clixml "$env:SystemDrive\AzOSDCloudImage.xml"
-                $Global:AzOSDCloudImage | Select-Object * | ConvertTo-Json | Out-File "$env:SystemDrive\AzOSDCloudImage.json"
-                #=================================================
-                #   Invoke-OSDCloud.ps1
-                #=================================================
-                Write-Host -ForegroundColor DarkGray "========================================================================="
-                Write-Host -ForegroundColor Green "Invoke-OSDCloud ... Starting in 5 seconds..."
-                Start-Sleep -Seconds 5
-                Invoke-OSDCloud
-            }
-            else {
-                Write-Warning 'Unable to find a WIM on any of the OSDCloud Azure Storage Containers'
-                Write-Warning 'Make sure you have a WIM Windows Image in the OSDCloud Azure Storage Container'
-                Write-Warning 'Make sure this user has the Azure Storage Blob Data Reader role to the OSDCloud Container'
-            }
-        }
-        else {
-            Write-Warning 'Unable to connect to AzureAD'
-            Write-Warning 'You may need to execute Connect-AzOSDCloud then Start-AzOSDCloud'
-        }
-       
-    
-    }
-    New-Alias -Name 'Start-AzOSDCloudBeta' -Value 'Start-AzOSDCloud' -Description 'OSDCloud' -Force
     function AzOSD {
         [CmdletBinding()]
         param ()
         Connect-AzOSDCloud
+        Get-AzOSDCloudBlobImage
         Start-AzOSDCloud
     }
 }
@@ -1234,5 +1022,226 @@ if ($WindowsPhase -eq 'OOBE') {
     }
     New-Alias -Name 'Start-OOBE' -Value 'osdcloud-StartOOBE' -Description 'OSDCloud' -Force
 }
+#endregion
+#=================================================
+#region AzOSDCloud Functions
+function Connect-AzOSDCloud {
+    [CmdletBinding()]
+    param ()
+    Write-Host -ForegroundColor DarkGray "========================================================================="
+    Write-Host -ForegroundColor Green "Connect-AzOSDCloud"
+
+    osdcloud-InstallModuleAzureAd
+    osdcloud-InstallModuleAzAccounts
+    osdcloud-InstallModuleAzKeyVault
+    osdcloud-InstallModuleAzResources
+    osdcloud-InstallModuleAzStorage
+    osdcloud-InstallModuleMSGraphDeviceManagement
+
+    Connect-AzAccount -UseDeviceAuthentication -AuthScope Storage -ErrorAction Stop
+    $Global:AzSubscription = Get-AzSubscription
+
+    if (($Global:AzSubscription).Count -ge 2) {
+        $i = $null
+        $Results = foreach ($Item in $Global:AzSubscription) {
+            $i++
+    
+            $ObjectProperties = @{
+                Number  = $i
+                Name    = $Item.Name
+                Id      = $Item.Id
+            }
+            New-Object -TypeName PSObject -Property $ObjectProperties
+        }
+    
+        $Results | Select-Object -Property Number, Name, Id | Format-Table | Out-Host
+    
+        do {
+            $SelectReadHost = Read-Host -Prompt "Select an Azure Subscription by Number"
+        }
+        until (((($SelectReadHost -ge 0) -and ($SelectReadHost -in $Results.Number))))
+    
+        $Results = $Results | Where-Object {$_.Number -eq $SelectReadHost}
+    
+        $Global:AzContext = Set-AzContext -Subscription $Results.Id
+    }
+    else {
+        $Global:AzContext = Get-AzContext
+    }
+
+    if ($Global:AzContext) {
+        Write-Host -ForegroundColor DarkGray "========================================================================="
+        Write-Host -ForegroundColor Green 'Welcome to Azure OSDCloud!'
+        $Global:AzAccount = $Global:AzContext.Account
+        $Global:AzEnvironment = $Global:AzContext.Environment
+        $Global:AzTenantId = $Global:AzContext.Tenant
+        $Global:AzSubscription = $Global:AzContext.Subscription
+
+        Write-Host -ForegroundColor Cyan        '$Global:AzAccount:        ' $Global:AzAccount
+        Write-Host -ForegroundColor Cyan        '$Global:AzEnvironment:    ' $Global:AzEnvironment
+        Write-Host -ForegroundColor Cyan        '$Global:AzTenantId:       ' $Global:AzTenantId
+        Write-Host -ForegroundColor Cyan        '$Global:AzSubscription:   ' $Global:AzSubscription
+        if ($null -eq $Global:AzContext.Subscription) {
+            Write-Warning 'You do not have access to an Azure Subscriptions'
+            Write-Warning 'This is likely due to not having rights to Azure Resources or Azure Storage'
+            Write-Warning 'Contact your Azure administrator to resolve this issue'
+            Break
+        }
+
+        Write-Host ''
+        Write-Host -ForegroundColor DarkGray    'Azure Context:             $Global:AzContext'
+        Write-Host -ForegroundColor DarkGray    'Access Tokens:             $Global:Az*AccessToken'
+        Write-Host -ForegroundColor DarkGray    'Headers:                   $Global:Az*Headers'
+        Write-Host ''
+        #=================================================
+        #	AAD Graph
+        #=================================================
+        $Global:AzAadGraphAccessToken = Get-AzAccessToken -ResourceTypeName AadGraph
+        $Global:AzAadGraphHeaders = @{
+            'Authorization' = 'Bearer ' + $Global:AzAadGraphAccessToken.Token
+            'Content-Type'  = 'application/json'
+            'ExpiresOn'     = $Global:AzAadGraphAccessToken.ExpiresOn
+        }
+        #=================================================
+        #	Azure KeyVault
+        #=================================================
+        $Global:AzKeyVaultAccessToken = Get-AzAccessToken -ResourceTypeName KeyVault
+        $Global:AzKeyVaultHeaders = @{
+            'Authorization' = 'Bearer ' + $Global:AzKeyVaultAccessToken.Token
+            'Content-Type'  = 'application/json'
+            'ExpiresOn'     = $Global:AzKeyVaultAccessToken.ExpiresOn
+        }
+        #=================================================
+        #	Azure MSGraph
+        #=================================================
+        $Global:AzMSGraphAccessToken = Get-AzAccessToken -ResourceTypeName MSGraph
+        $Global:AzMSGraphHeaders = @{
+            'Authorization' = 'Bearer ' + $Global:AzMSGraphAccessToken.Token
+            'Content-Type'  = 'application/json'
+            'ExpiresOn'     = $Global:AzMSGraphHeaders.ExpiresOn
+        }
+        #=================================================
+        #	Azure Storage
+        #=================================================
+        $Global:AzStorageAccessToken = Get-AzAccessToken -ResourceTypeName Storage
+        $Global:AzStorageHeaders = @{
+            'Authorization' = 'Bearer ' + $Global:AzStorageAccessToken.Token
+            'Content-Type'  = 'application/json'
+            'ExpiresOn'     = $Global:AzStorageHeaders.ExpiresOn
+        }
+        #=================================================
+        #	AzureAD
+        #=================================================
+        #$Global:MgGraph = Connect-MgGraph -AccessToken $Global:AzMSGraphAccessToken.Token -Scopes DeviceManagementConfiguration.Read.All,DeviceManagementServiceConfig.Read.All,DeviceManagementServiceConfiguration.Read.All
+        $Global:AzureAD = Connect-AzureAD -AadAccessToken $Global:AzAadGraphAccessToken.Token -AccountId $Global:AzContext.Account.Id
+    }
+    else {
+        Write-Warning 'Unable to connect to AzureAD'
+    }
+}
+New-Alias -Name 'Connect-AzWinPE' -Value 'Connect-AzOSDCloud' -Description 'OSDCloud' -Force
+New-Alias -Name 'Connect-AzureWinPE' -Value 'Connect-AzOSDCloud' -Description 'OSDCloud' -Force
+function Get-AzOSDCloudBlobImage {
+    [CmdletBinding()]
+    param ()
+    Write-Host -ForegroundColor DarkGray "========================================================================="
+    Write-Host -ForegroundColor Green "Get-AzOSDCloudBlobImage"
+
+    if ($Global:AzureAD) {
+        Write-Host -ForegroundColor DarkGray    'Storage Accounts:          $Global:AzStorageAccounts'
+        $Global:AzStorageAccounts = Get-AzStorageAccount
+    
+        Write-Host -ForegroundColor DarkGray    'OSDCloud Storage Accounts: $Global:AzOSDCloudStorageAccounts'
+        #$Global:AzOSDCloudStorageAccounts = Get-AzResource -ResourceType 'Microsoft.Storage/storageAccounts'
+        #$Global:AzOSDCloudStorageAccounts = Get-AzResource -ResourceType 'Microsoft.Storage/storageAccounts' | Where-Object {$_.Tags.ContainsKey('OSDCloud')}
+        $Global:AzOSDCloudStorageAccounts = Get-AzStorageAccount | Where-Object {$_.Tags.ContainsKey('OSDCloud')}
+    
+        Write-Host -ForegroundColor DarkGray    'Storage Contexts:          $Global:AzStorageContext'
+        Write-Host -ForegroundColor DarkGray    'Blob Windows Images:       $Global:AzOSDCloudBlobImage'
+        Write-Host ''
+        $Global:AzStorageContext = @{}
+        $Global:AzOSDCloudBlobImage = @()
+    
+        if ($Global:AzOSDCloudStorageAccounts) {
+            Write-Host -ForegroundColor Cyan "Scanning for Windows Images"
+            foreach ($Item in $Global:AzOSDCloudStorageAccounts) {
+                $Global:AzCurrentStorageContext = New-AzStorageContext -StorageAccountName $Item.StorageAccountName
+                $Global:AzStorageContext."$($Item.StorageAccountName)" = $Global:AzCurrentStorageContext
+                #Get-AzStorageBlobByTag -TagFilterSqlExpression ""osdcloudimage""=""win10ltsc"" -Context $StorageContext
+                #Get-AzStorageBlobByTag -Context $Global:AzCurrentStorageContext
+        
+                $StorageContainers = Get-AzStorageContainer -Context $Global:AzCurrentStorageContext
+            
+                if ($StorageContainers) {
+                    foreach ($Container in $StorageContainers) {
+                        Write-Host -ForegroundColor DarkGray "Storage Account: $($Item.StorageAccountName) Container: $($Container.Name)"
+                        $Global:AzOSDCloudBlobImage += Get-AzStorageBlob -Context $Global:AzCurrentStorageContext -Container $Container.Name -Blob *.wim -ErrorAction Ignore
+                    }
+                }
+            }
+        }
+        else {
+            Write-Warning 'Unable to find any Azure Storage Accounts'
+            Write-Warning 'Make sure the OSDCloud Azure Storage Account has an OSDCloud Tag'
+            Write-Warning 'Make sure this user has the Azure Reader role on the OSDCloud Azure Storage Account'
+        }
+    }
+    else {
+        Write-Warning 'Unable to connect to AzureAD'
+        Write-Warning 'You may need to execute Connect-AzOSDCloud then Start-AzOSDCloud'
+    }
+}
+function Start-AzOSDCloud {
+    [CmdletBinding()]
+    param ()
+    Write-Host -ForegroundColor DarkGray "========================================================================="
+    Write-Host -ForegroundColor Green "Start-AzOSDCloud"
+    if ($Global:AzOSDCloudBlobImage) {
+        $i = $null
+        $Results = foreach ($Item in $Global:AzOSDCloudBlobImage) {
+            $i++
+            
+            $BlobClient = $Global:AzOSDCloudStorageAccounts | Where-Object {$_.StorageAccountName -eq $Item.BlobClient.AccountName}
+
+            $ObjectProperties = @{
+                Number        = $i
+                Account       = $Item.BlobClient.AccountName
+                Tag           = ($BlobClient | Select-Object -ExpandProperty Tags).Get_Item('OSDCloud')
+                Container     = $Item.BlobClient.BlobContainerName
+                Blob          = $Item.Name
+                Location      = $BlobClient | Select-Object -ExpandProperty Location
+                ResourceGroup = $BlobClient | Select-Object -ExpandProperty ResourceGroupName
+            }
+            New-Object -TypeName PSObject -Property $ObjectProperties
+        }
+
+        $Results | Select-Object -Property Number, Account, Tag, Container, Blob, Location, ResourceGroup | Format-Table | Out-Host
+
+        do {
+            $SelectReadHost = Read-Host -Prompt "Select a Windows Image to apply by Number"
+        }
+        until (((($SelectReadHost -ge 0) -and ($SelectReadHost -in $Results.Number))))
+
+        $Results = $Results | Where-Object {$_.Number -eq $SelectReadHost}
+
+        $Global:AzOSDCloudImage = $Global:AzOSDCloudBlobImage | Where-Object {$_.Name -eq $Results.Blob} | Where-Object {$_.BlobClient.BlobContainerName -eq $Results.Container} | Where-Object {$_.BlobClient.AccountName -eq $Results.StorageAccount}
+        $Global:AzOSDCloudImage | Select-Object * | Export-Clixml "$env:SystemDrive\AzOSDCloudImage.xml"
+        $Global:AzOSDCloudImage | Select-Object * | ConvertTo-Json | Out-File "$env:SystemDrive\AzOSDCloudImage.json"
+        #=================================================
+        #   Invoke-OSDCloud.ps1
+        #=================================================
+        Write-Host -ForegroundColor DarkGray "========================================================================="
+        Write-Host -ForegroundColor Green "Invoke-OSDCloud ... Starting in 5 seconds..."
+        Start-Sleep -Seconds 5
+        Invoke-OSDCloud
+    }
+    else {
+        Write-Warning 'Unable to find a WIM on any of the OSDCloud Azure Storage Containers'
+        Write-Warning 'Make sure you have a WIM Windows Image in the OSDCloud Azure Storage Container'
+        Write-Warning 'Make sure this user has the Azure Storage Blob Data Reader role to the OSDCloud Container'
+        Write-Warning 'You may need to execute Get-AzOSDCloudBlobImage then Start-AzOSDCloud'
+    }
+}
+New-Alias -Name 'Start-AzOSDCloudBeta' -Value 'Start-AzOSDCloud' -Description 'OSDCloud' -Force
 #endregion
 #=================================================

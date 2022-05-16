@@ -258,52 +258,76 @@ function Show-PowershellWindow() {
     $null = $showWindowAsync::ShowWindowAsync((Get-Process -Id $pid).MainWindowHandle, 10)
 }
 #================================================
-#   AzStorageAccounts
+#   StorageAccounts
 #================================================
-$Global:AzStorageAccounts = Get-AzStorageAccount | Where-Object {$_.Tags.ContainsKey('OSDCloud')}
-$Global:AzStorageAccounts.StorageAccountName | ForEach-Object {
+$formMainWindowControlStorageAccountCombobox.Items.Clear()
+$GuiStorageAccounts = @()
+foreach ($Item in $Global:AzStorageBlobImage) {
+    $GuiStorageAccounts += $Item.BlobClient.AccountName
+}
+$GuiStorageAccounts | Select-Object -Unique | ForEach-Object {
     $formMainWindowControlStorageAccountCombobox.Items.Add($_) | Out-Null
 }
+$formMainWindowControlStorageAccountCombobox.SelectedIndex = 0
 #================================================
-#   AzStorageAccounts
+#   Containers
 #================================================
-$Global:AzStorageContext = @{}
-if ($Global:AzOSDCloudStorageAccounts) {
-    foreach ($Item in $Global:AzOSDCloudStorageAccounts) {
-        $Global:AzCurrentStorageContext = New-AzStorageContext -StorageAccountName $Item.StorageAccountName
-        $Global:AzStorageContext."$($Item.StorageAccountName)" = $Global:AzCurrentStorageContext
-    }
-}
 $formMainWindowControlContainerCombobox.Items.Clear()
+$GuiContainers = @()
+foreach ($Item in $Global:AzStorageBlobImage | Where-Object {$_.BlobClient.AccountName -eq $formMainWindowControlStorageAccountCombobox.SelectedValue}) {
+    $GuiContainers += $Item.BlobClient.BlobContainerName
+}
+$GuiContainers | Select-Object -Unique | ForEach-Object {
+    $formMainWindowControlContainerCombobox.Items.Add($_) | Out-Null
+}
+$formMainWindowControlContainerCombobox.SelectedIndex = 0
+#================================================
+#   Blobs
+#================================================
 $formMainWindowControlBlobCombobox.Items.Clear()
+$GuiBlobs = @()
+foreach ($Item in $Global:AzStorageBlobImage | Where-Object {$_.BlobClient.BlobContainerName -eq $formMainWindowControlContainerCombobox.SelectedValue}) {
+    $GuiBlobs += $Item.BlobClient.Name
+}
+$GuiBlobs | ForEach-Object {
+    $formMainWindowControlBlobCombobox.Items.Add($_) | Out-Null
+}
+$formMainWindowControlBlobCombobox.SelectedIndex = 0
 #================================================
 #   StorageAccountCombobox
 #================================================
 $formMainWindowControlStorageAccountCombobox.add_SelectionChanged({
     $formMainWindowControlContainerCombobox.Items.Clear()
-    $formMainWindowControlBlobCombobox.Items.Clear()
-
-    $StorageAccountName = $formMainWindowControlStorageAccountCombobox.SelectedValue
-
-    $Context = New-AzStorageContext -StorageAccountName $StorageAccountName
-
-    $StorageContainers = Get-AzStorageContainer -Context $Context
-
-    $StorageContainers | ForEach-Object {
-        $formMainWindowControlContainerCombobox.Items.Add($_.Name) | Out-Null
+    $GuiContainers = @()
+    foreach ($Item in $Global:AzStorageBlobImage | Where-Object {$_.BlobClient.AccountName -eq $formMainWindowControlStorageAccountCombobox.SelectedValue}) {
+        $GuiContainers += $Item.BlobClient.BlobContainerName
+    }
+    $GuiContainers | Select-Object -Unique | ForEach-Object {
+        $formMainWindowControlContainerCombobox.Items.Add($_) | Out-Null
     }
     $formMainWindowControlContainerCombobox.SelectedIndex = 0
+
+    $formMainWindowControlBlobCombobox.Items.Clear()
+    $GuiBlobs = @()
+    foreach ($Item in $Global:AzStorageBlobImage | Where-Object {$_.BlobClient.BlobContainerName -eq $formMainWindowControlContainerCombobox.SelectedValue}) {
+        $GuiBlobs += $Item.BlobClient.Name
+    }
+    $GuiBlobs | ForEach-Object {
+        $formMainWindowControlBlobCombobox.Items.Add($_) | Out-Null
+    }
+    $formMainWindowControlBlobCombobox.SelectedIndex = 0
 })
 #================================================
-#   ContainerCombobox
+#   ContainerCombobox SelectionChanged
 #================================================
 $formMainWindowControlContainerCombobox.add_SelectionChanged({
     $formMainWindowControlBlobCombobox.Items.Clear()
-
-    $StorageBlobs = Get-AzStorageBlob -Blob *.wim -Context $Context -Container $formMainWindowControlContainerCombobox.SelectedValue -ErrorAction Ignore
-
-    $StorageBlobs | ForEach-Object {
-        $formMainWindowControlBlobCombobox.Items.Add($_.Name) | Out-Null
+    $GuiBlobs = @()
+    foreach ($Item in $Global:AzStorageBlobImage | Where-Object {$_.BlobClient.BlobContainerName -eq $formMainWindowControlContainerCombobox.SelectedValue}) {
+        $GuiBlobs += $Item.BlobClient.Name
+    }
+    $GuiBlobs | ForEach-Object {
+        $formMainWindowControlBlobCombobox.Items.Add($_) | Out-Null
     }
     $formMainWindowControlBlobCombobox.SelectedIndex = 0
 })
@@ -316,20 +340,6 @@ $formMainWindowControlStartButton.add_Click({
     #================================================
     #   Variables
     #================================================
-    if ($formMainWindowControlStorageAccountCombobox.SelectedIndex -eq 0) {
-        $OSVersion = 'Windows 10'
-    }
-    elseif ($formMainWindowControlStorageAccountCombobox.SelectedIndex -eq 1) {
-        $OSVersion = 'Windows 11'
-    }
-    else {
-        $OSVersion = $null
-    }
-    $OSBuild = $formMainWindowControlOSBuildCombobox.SelectedItem
-    $OSEdition = $formMainWindowControlOSEditionCombobox.SelectedItem
-    $OSLanguage = $formMainWindowControlOSLanguageCombobox.SelectedItem
-    $OSLicense = $formMainWindowControlOSLicenseCombobox.SelectedItem
-    $OSImageIndex = $formMainWindowControlImageIndexTextbox.Text
     #================================================
     #   AutopilotJson
     #================================================
