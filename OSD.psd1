@@ -5,10 +5,12 @@
 @{
     RootModule              = 'OSD.psm1'
     NestedModules = @(
+      '.\nests\OSD.CloudMDT',
+      '.\nests\OSD.CloudRE',
+      '.\nests\OSD.CloudSecret',
       '.\nests\OSD.OOBE',
       '.\nests\OSD.WinPE',
-      '.\nests\OSD.WinRE.WiFi',
-      '.\nests\OSDCloudRE'
+      '.\nests\OSD.WinRE.WiFi'
     )
     ModuleVersion           = '22.5.13.1'
     CompatiblePSEditions    = @('Desktop')

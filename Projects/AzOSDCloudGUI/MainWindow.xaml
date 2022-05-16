@@ -9,7 +9,7 @@
         RenderTransformOrigin="0.5,0.5"
         ResizeMode="NoResize"
         WindowStartupLocation = "CenterScreen"
-        Title="AzOSDCloudGUI" Height="480" Width="700">
+        Title="AzOSDCloudGUI" Height="580" Width="770">
     <Window.Resources>
         <ResourceDictionary>
             <Style TargetType="{x:Type Button}">

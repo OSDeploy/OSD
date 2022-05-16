@@ -258,13 +258,15 @@ function Show-PowershellWindow() {
     $null = $showWindowAsync::ShowWindowAsync((Get-Process -Id $pid).MainWindowHandle, 10)
 }
 #================================================
-#   Initialize
+#   AzStorageAccounts
 #================================================
 $Global:AzStorageAccounts = Get-AzStorageAccount | Where-Object {$_.Tags.ContainsKey('OSDCloud')}
 $Global:AzStorageAccounts.StorageAccountName | ForEach-Object {
     $formMainWindowControlStorageAccountCombobox.Items.Add($_) | Out-Null
 }
-
+#================================================
+#   AzStorageAccounts
+#================================================
 $Global:AzStorageContext = @{}
 if ($Global:AzOSDCloudStorageAccounts) {
     foreach ($Item in $Global:AzOSDCloudStorageAccounts) {

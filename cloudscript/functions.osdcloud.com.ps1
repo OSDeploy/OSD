@@ -279,7 +279,7 @@ if ($WindowsPhase -eq 'WinPE') {
         Write-Host -ForegroundColor DarkGray "========================================================================="
         Write-Host -ForegroundColor Green "Start-AzOSDCloud"
 
-        if ($Global:AzureAD) {  
+        if ($Global:AzureAD) {
             Write-Host -ForegroundColor DarkGray    'Storage Accounts:          $Global:AzStorageAccounts'
             $Global:AzStorageAccounts = Get-AzStorageAccount
         
@@ -321,19 +321,22 @@ if ($WindowsPhase -eq 'WinPE') {
                 $i = $null
                 $Results = foreach ($Item in $Global:AzStorageBlobImage) {
                     $i++
+                    
+                    $BlobClient = $Global:AzOSDCloudStorageAccounts | Where-Object {$_.StorageAccountName -eq $Item.BlobClient.AccountName}
         
                     $ObjectProperties = @{
-                        Number              = $i
-                        ResourceGroupName   = $Global:AzOSDCloudStorageAccounts | Where-Object {$_.StorageAccountName -eq $Item.BlobClient.AccountName} | Select-Object -ExpandProperty ResourceGroupName
-                        Location            = $Global:AzOSDCloudStorageAccounts | Where-Object {$_.StorageAccountName -eq $Item.BlobClient.AccountName} | Select-Object -ExpandProperty Location
-                        StorageAccount      = $Item.BlobClient.AccountName
-                        Container           = $Item.BlobClient.BlobContainerName
-                        Blob                = $Item.Name
+                        Number        = $i
+                        Account       = $Item.BlobClient.AccountName
+                        Tag           = ($BlobClient | Select-Object -ExpandProperty Tags).Get_Item('OSDCloud')
+                        Container     = $Item.BlobClient.BlobContainerName
+                        Blob          = $Item.Name
+                        Location      = $BlobClient | Select-Object -ExpandProperty Location
+                        ResourceGroup = $BlobClient | Select-Object -ExpandProperty ResourceGroupName
                     }
                     New-Object -TypeName PSObject -Property $ObjectProperties
                 }
         
-                $Results | Select-Object -Property Number, StorageAccount, Container, Blob, Location, ResourceGroupName | Format-Table | Out-Host
+                $Results | Select-Object -Property Number, Account, Tag, Container, Blob, Location, ResourceGroup | Format-Table | Out-Host
         
                 do {
                     $SelectReadHost = Read-Host -Prompt "Select a Windows Image to apply by Number"
