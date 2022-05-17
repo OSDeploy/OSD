@@ -363,7 +363,7 @@ $formMainWindowControlStartButton.add_Click({
         ZTI                         = $formMainWindowControlZTICheckbox.IsChecked
     }
     $Global:StartOSDCloud | Out-Host
-    Invoke-OSDCloud
+    #Call Invoke-OSDCloud at this point
 })
 #================================================
 #   Customizations

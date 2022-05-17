@@ -52,8 +52,24 @@ function Start-AzOSDCloudGUI {
 
     [CmdletBinding()]
     param ()
-    #================================================
-    & "$($MyInvocation.MyCommand.Module.ModuleBase)\Projects\AzOSDCloudGUI\MainWindow.ps1"
-    Start-Sleep -Seconds 2
+    Write-Host -ForegroundColor DarkGray "========================================================================="
+    Write-Host -ForegroundColor Green "Start-AzOSDCloudGUI"
+    if ($Global:AzOSDCloudBlobImage) {
+        & "$($MyInvocation.MyCommand.Module.ModuleBase)\Projects\AzOSDCloudGUI\MainWindow.ps1"
+        Start-Sleep -Seconds 2
+
+        if ($Global:AzOSDCloudImage) {
+            Invoke-OSDCloud
+        }
+        else {
+            Write-Warning "Unable to get a Windows Image from Start-AzOSDCloudGUI to handoff to Invoke-OSDCloud"
+        }
+    }
+    else {
+        Write-Warning 'Unable to find a WIM on any of the OSDCloud Azure Storage Containers'
+        Write-Warning 'Make sure you have a WIM Windows Image in the OSDCloud Azure Storage Container'
+        Write-Warning 'Make sure this user has the Azure Storage Blob Data Reader role to the OSDCloud Container'
+        Write-Warning 'You may need to execute Get-AzOSDCloudBlobImage then Start-AzOSDCloud'
+    }
     #================================================
 }
