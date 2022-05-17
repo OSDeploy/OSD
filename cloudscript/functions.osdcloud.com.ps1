@@ -32,7 +32,7 @@ powershell iex (irm functions.osdcloud.com)
 #=================================================
 #Script Information
 $ScriptName = 'functions.osdcloud.com'
-$ScriptVersion = '22.5.11.2'
+$ScriptVersion = '22.5.16.1'
 #=================================================
 #region Initialize Functions
 [Net.ServicePointManager]::SecurityProtocol = [Net.ServicePointManager]::SecurityProtocol -bor [Net.SecurityProtocolType]::Tls12
@@ -753,10 +753,43 @@ function osdcloud-InstallModuleAzStorage {
     }
     Import-Module $PSModuleName -Force
 }
-function osdcloud-InstallModuleAzureAd {
+function osdcloud-InstallModuleAzureAD {
     [CmdletBinding()]
     param ()
     $PSModuleName = 'AzureAD'
+    $InstalledModule = Get-InstalledModule $PSModuleName -ErrorAction Ignore | Select-Object -First 1
+    $GalleryPSModule = Find-Module -Name $PSModuleName -ErrorAction Ignore
+
+    if ($InstalledModule) {
+        if (($GalleryPSModule.Version -as [version]) -gt ($InstalledModule.Version -as [version])) {
+            if ($WindowsPhase -eq 'WinPE') {
+                Write-Host -ForegroundColor DarkGray "Update-Module $PSModuleName $($GalleryPSModule.Version) [AllUsers]"
+                Update-Module -Name $PSModuleName -Scope AllUsers -Force
+                Import-Module $PSModuleName -Force
+            }
+            else {
+                Write-Host -ForegroundColor DarkGray "Update-Module $PSModuleName $($GalleryPSModule.Version) [CurrentUser]"
+                Update-Module -Name $PSModuleName -Scope CurrentUser -Force
+                Import-Module $PSModuleName -Force
+            } 
+        }
+    }
+    else {
+        if ($WindowsPhase -eq 'WinPE') {
+            Write-Host -ForegroundColor DarkGray "Install-Module $PSModuleName $($GalleryPSModule.Version) [AllUsers]"
+            Install-Module $PSModuleName -Scope AllUsers
+        }
+        else {
+            Write-Host -ForegroundColor DarkGray "Install-Module $PSModuleName $($GalleryPSModule.Version) [CurrentUser]"
+            Install-Module $PSModuleName -Scope CurrentUser
+        }
+    }
+    Import-Module $PSModuleName -Force
+}
+function osdcloud-InstallModuleMSGraphAuthentication {
+    [CmdletBinding()]
+    param ()
+    $PSModuleName = 'Microsoft.Graph.Authentication'
     $InstalledModule = Get-InstalledModule $PSModuleName -ErrorAction Ignore | Select-Object -First 1
     $GalleryPSModule = Find-Module -Name $PSModuleName -ErrorAction Ignore
 
@@ -926,7 +959,7 @@ if ($WindowsPhase -eq 'WinPE') {
             }
             if ($Azure) {
                 $KeyVault = $false
-                osdcloud-InstallModuleAzureAd
+                osdcloud-InstallModuleAzureAD
                 osdcloud-InstallModuleAzAccounts
                 osdcloud-InstallModuleAzKeyVault
                 osdcloud-InstallModuleAzResources
@@ -1015,7 +1048,7 @@ if ($WindowsPhase -eq 'OOBE') {
         if ($Autopilot) {
             if ($TestAutopilotProfile -eq $false) {
                 osdcloud-InstallModuleAutopilot
-                osdcloud-InstallModuleAzureAd
+                osdcloud-InstallModuleAzureAD
                 osdcloud-InstallScriptAutopilot
             }
         }
@@ -1025,18 +1058,135 @@ if ($WindowsPhase -eq 'OOBE') {
 #endregion
 #=================================================
 #region AzOSDCloud Functions
+function Connect-MgOSDCloud {
+    [CmdletBinding()]
+    param ()
+    Write-Host -ForegroundColor DarkGray "========================================================================="
+    Write-Host -ForegroundColor Green "Connect-MgOSDCloud"
+
+    osdcloud-InstallModuleAzureAD
+    osdcloud-InstallModuleAzAccounts
+    osdcloud-InstallModuleAzKeyVault
+    osdcloud-InstallModuleAzResources
+    osdcloud-InstallModuleAzStorage
+    osdcloud-InstallModuleMSGraphAuthentication
+    osdcloud-InstallModuleMSGraphDeviceManagement
+
+    Connect-AzAccount -UseDeviceAuthentication -AuthScope Storage -ErrorAction Stop
+    $Global:AzSubscription = Get-AzSubscription
+
+    if (($Global:AzSubscription).Count -ge 2) {
+        $i = $null
+        $Results = foreach ($Item in $Global:AzSubscription) {
+            $i++
+    
+            $ObjectProperties = @{
+                Number  = $i
+                Name    = $Item.Name
+                Id      = $Item.Id
+            }
+            New-Object -TypeName PSObject -Property $ObjectProperties
+        }
+    
+        $Results | Select-Object -Property Number, Name, Id | Format-Table | Out-Host
+    
+        do {
+            $SelectReadHost = Read-Host -Prompt "Select an Azure Subscription by Number"
+        }
+        until (((($SelectReadHost -ge 0) -and ($SelectReadHost -in $Results.Number))))
+    
+        $Results = $Results | Where-Object {$_.Number -eq $SelectReadHost}
+    
+        $Global:AzContext = Set-AzContext -Subscription $Results.Id
+    }
+    else {
+        $Global:AzContext = Get-AzContext
+    }
+
+    if ($Global:AzContext) {
+        Write-Host -ForegroundColor DarkGray "========================================================================="
+        Write-Host -ForegroundColor Green 'Welcome to Azure OSDCloud!'
+        $Global:AzAccount = $Global:AzContext.Account
+        $Global:AzEnvironment = $Global:AzContext.Environment
+        $Global:AzTenantId = $Global:AzContext.Tenant
+        $Global:AzSubscription = $Global:AzContext.Subscription
+
+        Write-Host -ForegroundColor Cyan        '$Global:AzAccount:        ' $Global:AzAccount
+        Write-Host -ForegroundColor Cyan        '$Global:AzEnvironment:    ' $Global:AzEnvironment
+        Write-Host -ForegroundColor Cyan        '$Global:AzTenantId:       ' $Global:AzTenantId
+        Write-Host -ForegroundColor Cyan        '$Global:AzSubscription:   ' $Global:AzSubscription
+        if ($null -eq $Global:AzContext.Subscription) {
+            Write-Warning 'You do not have access to an Azure Subscriptions'
+            Write-Warning 'This is likely due to not having rights to Azure Resources or Azure Storage'
+            Write-Warning 'Contact your Azure administrator to resolve this issue'
+            Break
+        }
+
+        Write-Host ''
+        Write-Host -ForegroundColor DarkGray    'Azure Context:             $Global:AzContext'
+        Write-Host -ForegroundColor DarkGray    'Access Tokens:             $Global:Az*AccessToken'
+        Write-Host -ForegroundColor DarkGray    'Headers:                   $Global:Az*Headers'
+        Write-Host ''
+        #=================================================
+        #	AAD Graph
+        #=================================================
+        $Global:AzAadGraphAccessToken = Get-AzAccessToken -ResourceTypeName AadGraph
+        $Global:AzAadGraphHeaders = @{
+            'Authorization' = 'Bearer ' + $Global:AzAadGraphAccessToken.Token
+            'Content-Type'  = 'application/json'
+            'ExpiresOn'     = $Global:AzAadGraphAccessToken.ExpiresOn
+        }
+        #=================================================
+        #	Azure KeyVault
+        #=================================================
+        $Global:AzKeyVaultAccessToken = Get-AzAccessToken -ResourceTypeName KeyVault
+        $Global:AzKeyVaultHeaders = @{
+            'Authorization' = 'Bearer ' + $Global:AzKeyVaultAccessToken.Token
+            'Content-Type'  = 'application/json'
+            'ExpiresOn'     = $Global:AzKeyVaultAccessToken.ExpiresOn
+        }
+        #=================================================
+        #	Azure MSGraph
+        #=================================================
+        $Global:AzMSGraphAccessToken = Get-AzAccessToken -ResourceTypeName MSGraph
+        $Global:AzMSGraphHeaders = @{
+            'Authorization' = 'Bearer ' + $Global:AzMSGraphAccessToken.Token
+            'Content-Type'  = 'application/json'
+            'ExpiresOn'     = $Global:AzMSGraphHeaders.ExpiresOn
+        }
+        #=================================================
+        #	Azure Storage
+        #=================================================
+        $Global:AzStorageAccessToken = Get-AzAccessToken -ResourceTypeName Storage
+        $Global:AzStorageHeaders = @{
+            'Authorization' = 'Bearer ' + $Global:AzStorageAccessToken.Token
+            'Content-Type'  = 'application/json'
+            'ExpiresOn'     = $Global:AzStorageHeaders.ExpiresOn
+        }
+        #=================================================
+        #	AzureAD
+        #=================================================
+        #$Global:MgGraph = Connect-MgGraph -AccessToken $Global:AzMSGraphAccessToken.Token -Scopes DeviceManagementConfiguration.Read.All,DeviceManagementServiceConfig.Read.All,DeviceManagementServiceConfiguration.Read.All
+        #$Global:AzureAD = Connect-AzureAD -AadAccessToken $Global:AzAadGraphAccessToken.Token -AccountId $Global:AzContext.Account.Id
+        $Global:MgGraph = Connect-MgGraph -AccessToken $Global:AzMSGraphAccessToken.Token
+    }
+    else {
+        Write-Warning 'Unable to get AzContext'
+    }
+}
 function Connect-AzOSDCloud {
     [CmdletBinding()]
     param ()
     Write-Host -ForegroundColor DarkGray "========================================================================="
     Write-Host -ForegroundColor Green "Connect-AzOSDCloud"
 
-    osdcloud-InstallModuleAzureAd
+    osdcloud-InstallModuleAzureAD
     osdcloud-InstallModuleAzAccounts
     osdcloud-InstallModuleAzKeyVault
     osdcloud-InstallModuleAzResources
     osdcloud-InstallModuleAzStorage
-    osdcloud-InstallModuleMSGraphDeviceManagement
+    #osdcloud-InstallModuleMSGraphAuthentication
+    #osdcloud-InstallModuleMSGraphDeviceManagement
 
     Connect-AzAccount -UseDeviceAuthentication -AuthScope Storage -ErrorAction Stop
     $Global:AzSubscription = Get-AzSubscription
@@ -1136,7 +1286,7 @@ function Connect-AzOSDCloud {
         $Global:AzureAD = Connect-AzureAD -AadAccessToken $Global:AzAadGraphAccessToken.Token -AccountId $Global:AzContext.Account.Id
     }
     else {
-        Write-Warning 'Unable to connect to AzureAD'
+        Write-Warning 'Unable to get AzContext'
     }
 }
 New-Alias -Name 'Connect-AzWinPE' -Value 'Connect-AzOSDCloud' -Description 'OSDCloud' -Force
@@ -1147,7 +1297,7 @@ function Get-AzOSDCloudBlobImage {
     Write-Host -ForegroundColor DarkGray "========================================================================="
     Write-Host -ForegroundColor Green "Get-AzOSDCloudBlobImage"
 
-    if ($Global:AzureAD) {
+    if ($Global:AzureAD -or $Global:MgGraph) {
         Write-Host -ForegroundColor DarkGray    'Storage Accounts:          $Global:AzStorageAccounts'
         $Global:AzStorageAccounts = Get-AzStorageAccount
     

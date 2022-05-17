@@ -260,9 +260,16 @@ function Show-PowershellWindow() {
 #================================================
 #   StorageAccounts
 #================================================
+if ($Global:AzOSDCloudBlobImage) {
+
+}
+else {
+    Break
+}
+
 $formMainWindowControlStorageAccountCombobox.Items.Clear()
 $GuiStorageAccounts = @()
-foreach ($Item in $Global:AzStorageBlobImage) {
+foreach ($Item in $Global:AzOSDCloudBlobImage) {
     $GuiStorageAccounts += $Item.BlobClient.AccountName
 }
 $GuiStorageAccounts | Select-Object -Unique | ForEach-Object {
@@ -274,7 +281,7 @@ $formMainWindowControlStorageAccountCombobox.SelectedIndex = 0
 #================================================
 $formMainWindowControlContainerCombobox.Items.Clear()
 $GuiContainers = @()
-foreach ($Item in $Global:AzStorageBlobImage | Where-Object {$_.BlobClient.AccountName -eq $formMainWindowControlStorageAccountCombobox.SelectedValue}) {
+foreach ($Item in $Global:AzOSDCloudBlobImage | Where-Object {$_.BlobClient.AccountName -eq $formMainWindowControlStorageAccountCombobox.SelectedValue}) {
     $GuiContainers += $Item.BlobClient.BlobContainerName
 }
 $GuiContainers | Select-Object -Unique | ForEach-Object {
@@ -286,7 +293,7 @@ $formMainWindowControlContainerCombobox.SelectedIndex = 0
 #================================================
 $formMainWindowControlBlobCombobox.Items.Clear()
 $GuiBlobs = @()
-foreach ($Item in $Global:AzStorageBlobImage | Where-Object {$_.BlobClient.BlobContainerName -eq $formMainWindowControlContainerCombobox.SelectedValue}) {
+foreach ($Item in $Global:AzOSDCloudBlobImage | Where-Object {$_.BlobClient.BlobContainerName -eq $formMainWindowControlContainerCombobox.SelectedValue}) {
     $GuiBlobs += $Item.BlobClient.Name
 }
 $GuiBlobs | ForEach-Object {
@@ -299,7 +306,7 @@ $formMainWindowControlBlobCombobox.SelectedIndex = 0
 $formMainWindowControlStorageAccountCombobox.add_SelectionChanged({
     $formMainWindowControlContainerCombobox.Items.Clear()
     $GuiContainers = @()
-    foreach ($Item in $Global:AzStorageBlobImage | Where-Object {$_.BlobClient.AccountName -eq $formMainWindowControlStorageAccountCombobox.SelectedValue}) {
+    foreach ($Item in $Global:AzOSDCloudBlobImage | Where-Object {$_.BlobClient.AccountName -eq $formMainWindowControlStorageAccountCombobox.SelectedValue}) {
         $GuiContainers += $Item.BlobClient.BlobContainerName
     }
     $GuiContainers | Select-Object -Unique | ForEach-Object {
@@ -309,7 +316,7 @@ $formMainWindowControlStorageAccountCombobox.add_SelectionChanged({
 
     $formMainWindowControlBlobCombobox.Items.Clear()
     $GuiBlobs = @()
-    foreach ($Item in $Global:AzStorageBlobImage | Where-Object {$_.BlobClient.BlobContainerName -eq $formMainWindowControlContainerCombobox.SelectedValue}) {
+    foreach ($Item in $Global:AzOSDCloudBlobImage | Where-Object {$_.BlobClient.BlobContainerName -eq $formMainWindowControlContainerCombobox.SelectedValue}) {
         $GuiBlobs += $Item.BlobClient.Name
     }
     $GuiBlobs | ForEach-Object {
@@ -323,7 +330,7 @@ $formMainWindowControlStorageAccountCombobox.add_SelectionChanged({
 $formMainWindowControlContainerCombobox.add_SelectionChanged({
     $formMainWindowControlBlobCombobox.Items.Clear()
     $GuiBlobs = @()
-    foreach ($Item in $Global:AzStorageBlobImage | Where-Object {$_.BlobClient.BlobContainerName -eq $formMainWindowControlContainerCombobox.SelectedValue}) {
+    foreach ($Item in $Global:AzOSDCloudBlobImage | Where-Object {$_.BlobClient.BlobContainerName -eq $formMainWindowControlContainerCombobox.SelectedValue}) {
         $GuiBlobs += $Item.BlobClient.Name
     }
     $GuiBlobs | ForEach-Object {
