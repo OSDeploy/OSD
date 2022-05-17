@@ -1378,6 +1378,7 @@ function Start-AzOSDCloud {
         until (((($SelectReadHost -ge 0) -and ($SelectReadHost -in $Results.Number))))
 
         $Results = $Results | Where-Object {$_.Number -eq $SelectReadHost}
+        $Results
 
         $Global:AzOSDCloudImage = $Global:AzOSDCloudBlobImage | Where-Object {$_.Name -eq $Results.Blob} | Where-Object {$_.BlobClient.BlobContainerName -eq $Results.Container} | Where-Object {$_.BlobClient.AccountName -eq $Results.StorageAccount}
         $Global:AzOSDCloudImage | Select-Object * | Export-Clixml "$env:SystemDrive\AzOSDCloudImage.xml"
