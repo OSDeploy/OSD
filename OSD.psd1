@@ -269,7 +269,8 @@
         'Get-OSDCloudDriverPack',
         'Get-CloudSecret',
         'Set-CloudSecret',
-        'Invoke-CloudSecret'
+        'Invoke-CloudSecret',
+        'Start-AzOSDCloudGUI'
     )
     CmdletsToExport = @()
     VariablesToExport = @()

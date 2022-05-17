@@ -345,137 +345,25 @@ $formMainWindowControlStartButton.add_Click({
     $formMainWindow.Close()
     Show-PowershellWindow
     #================================================
-    #   Variables
+    #   AzOSDCloudImage
     #================================================
-    #================================================
-    #   AutopilotJson
-    #================================================
-    $AutopilotJsonName = $formMainWindowControlAutopilotJsonCombobox.SelectedValue
-    if ($AutopilotJsonName) {
-        $AutopilotJsonItem = $AutopilotJsonChildItem | Where-Object {$_.FullName -eq "$AutopilotJsonName"}
-    }
-    else {
-        $SkipAutopilot = $true
-        $AutopilotJsonName = $null
-        $AutopilotJsonItem = $null
-    }
-    if ($AutopilotJsonItem) {
-        $AutopilotJsonObject = Get-Content -Raw $AutopilotJsonItem.FullName | ConvertFrom-Json
-        $SkipAutopilot = $false
-    }
-    else {
-        $SkipAutopilot = $true
-        $AutopilotJsonObject = $null
-    }
-    #================================================
-    #   OOBEDeployJson
-    #================================================
-    $OOBEDeployJsonName = $formMainWindowControlOOBEDeployCombobox.SelectedValue
-    if ($OOBEDeployJsonName) {
-        $OOBEDeployJsonItem = $OOBEDeployJsonChildItem | Where-Object {$_.FullName -eq "$OOBEDeployJsonName"}
-    }
-    else {
-        $SkipOOBEDeploy = $true
-        $OOBEDeployJsonName = $null
-        $OOBEDeployJsonItem = $null
-    }
-    if ($OOBEDeployJsonItem) {
-        $OOBEDeployJsonObject = Get-Content -Raw $OOBEDeployJsonItem.FullName | ConvertFrom-Json
-        $SkipOOBEDeploy = $false
-    }
-    else {
-        $SkipOOBEDeploy = $true
-        $OOBEDeployJsonObject = $null
-    }
-    #================================================
-    #   AutopilotOOBEJson
-    #================================================
-    $AutopilotOOBEJsonName = $formMainWindowControlAutopilotOOBECombobox.SelectedValue
-    if ($AutopilotOOBEJsonName) {
-        $AutopilotOOBEJsonItem = $AutopilotOOBEJsonChildItem | Where-Object {$_.FullName -eq "$AutopilotOOBEJsonName"}
-    }
-    else {
-        $SkipAutopilotOOBE = $true
-        $AutopilotOOBEJsonName = $null
-        $AutopilotOOBEJsonItem = $null
-    }
-    if ($AutopilotOOBEJsonItem) {
-        $AutopilotOOBEJsonObject = Get-Content -Raw $AutopilotOOBEJsonItem.FullName | ConvertFrom-Json
-        $SkipAutopilotOOBE = $false
-    }
-    else {
-        $SkipAutopilotOOBE = $true
-        $AutopilotOOBEJsonObject = $null
-    }
-    #================================================
-    #   ImageFile
-    #================================================
-    if ($formMainWindowControlStorageAccountCombobox.SelectedIndex -ge 2) {
-        $ImageFileFullName = $formMainWindowControlStorageAccountCombobox.SelectedValue
-        if ($ImageFileFullName) {
-            $ImageFileItem = $CustomImageChildItem | Where-Object {$_.FullName -eq "$ImageFileFullName"}
-            $ImageFileName = Split-Path -Path $ImageFileItem.FullName -Leaf
-            $OSVersion = $null
-            $OSBuild = $null
-            $OSEdition = $null
-            $OSLanguage = $null
-            $OSLicense = $null
-        }
-        else {
-            $ImageFileItem = $null
-            $ImageFileFullName = $null
-            $ImageFileName = $null
-        }
-    }
-
+    $Global:AzOSDCloudImage = $Global:AzOSDCloudBlobImage | `
+        Where-Object {$_.Name -eq $formMainWindowControlBlobCombobox.SelectedValue} | `
+        Where-Object {$_.BlobClient.BlobContainerName -eq $formMainWindowControlContainerCombobox.SelectedValue} | `
+        Where-Object {$_.BlobClient.AccountName -eq $formMainWindowControlStorageAccountCombobox.SelectedValue}
+    $Global:AzOSDCloudImage | Select-Object * | Export-Clixml "$env:SystemDrive\AzOSDCloudImage.xml"
+    $Global:AzOSDCloudImage | Select-Object * | ConvertTo-Json | Out-File "$env:SystemDrive\AzOSDCloudImage.json"
     #================================================
     #   Global Variables
     #================================================
-    $Global:StartOSDCloudGUI = $null
-    $Global:StartOSDCloudGUI = [ordered]@{
-        ApplyManufacturerDrivers    = $formMainWindowControlManufacturerDriversCheckbox.IsChecked
-        ApplyCatalogDrivers         = $formMainWindowControlCatalogDriversCheckbox.IsChecked
-        ApplyCatalogFirmware        = $formMainWindowControlCatalogFirmwareCheckbox.IsChecked
-        AutopilotJsonChildItem      = $AutopilotJsonChildItem
-        AutopilotJsonItem           = $AutopilotJsonItem
-        AutopilotJsonName           = $AutopilotJsonName
-        AutopilotJsonObject         = $AutopilotJsonObject
-        AutopilotOOBEJsonChildItem  = $AutopilotOOBEJsonChildItem
-        AutopilotOOBEJsonItem       = $AutopilotOOBEJsonItem
-        AutopilotOOBEJsonName       = $AutopilotOOBEJsonName
-        AutopilotOOBEJsonObject     = $AutopilotOOBEJsonObject
-        ImageFileFullName           = $ImageFileFullName
-        ImageFileItem               = $ImageFileItem
-        ImageFileName               = $ImageFileName
-        Manufacturer                = $formMainWindowControlCSManufacturerTextbox.Text
-        OOBEDeployJsonChildItem     = $OOBEDeployJsonChildItem
-        OOBEDeployJsonItem          = $OOBEDeployJsonItem
-        OOBEDeployJsonName          = $OOBEDeployJsonName
-        OOBEDeployJsonObject        = $OOBEDeployJsonObject
-        OSBuild                     = $OSBuild
-        OSEdition                   = $OSEdition
-        OSImageIndex                = $OSImageIndex
-        OSLanguage                  = $OSLanguage
-        OSLicense                   = $OSLicense
-        OSVersion                   = $OSVersion
-        Product                     = $formMainWindowControlCSProductTextbox.Text
+    $Global:StartOSDCloud = $null
+    $Global:StartOSDCloud = [ordered]@{
+        OSImageIndex                = $formMainWindowControlImageIndexTextbox.Text
         Restart                     = $formMainWindowControlRestartCheckbox.IsChecked
-        SkipAutopilot               = $SkipAutopilot
-        SkipAutopilotOOBE           = $SkipAutopilotOOBE
-        SkipODT                     = $true
-        SkipOOBEDeploy              = $SkipOOBEDeploy
         ZTI                         = $formMainWindowControlZTICheckbox.IsChecked
     }
-    #$Global:StartOSDCloudGUI | Out-Host
-    if ($formMainWindowControlScreenshotCheckbox.IsChecked) {
-        $Params = @{
-            Screenshot = $true
-        }
-        Start-OSDCloud @Params
-    }
-    else {
-        Start-OSDCloud 
-    }
+    $Global:StartOSDCloud | Out-Host
+    Invoke-OSDCloud
 })
 #================================================
 #   Customizations

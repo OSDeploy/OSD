@@ -1182,11 +1182,16 @@ function Connect-AzOSDCloud {
 
     osdcloud-InstallModuleAzureAD
     osdcloud-InstallModuleAzAccounts
+        #Connect-AzAccount
+        #Get-AzSubscription
+        #Set-AzContext
+        #Get-AzContext
+        #Get-AzAccessToken
     osdcloud-InstallModuleAzKeyVault
     osdcloud-InstallModuleAzResources
     osdcloud-InstallModuleAzStorage
-    #osdcloud-InstallModuleMSGraphAuthentication
-    #osdcloud-InstallModuleMSGraphDeviceManagement
+    osdcloud-InstallModuleMSGraphAuthentication
+    osdcloud-InstallModuleMSGraphDeviceManagement
 
     Connect-AzAccount -UseDeviceAuthentication -AuthScope Storage -ErrorAction Stop
     $Global:AzSubscription = Get-AzSubscription

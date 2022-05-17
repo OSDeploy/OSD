@@ -35,3 +35,25 @@ function Start-OSDCloudGUI {
     Start-Sleep -Seconds 2
     #================================================
 }
+function Start-AzOSDCloudGUI {
+    <#
+    .SYNOPSIS
+    AzOSDCloudGUI imaging using the command line
+
+    .DESCRIPTION
+    AzOSDCloudGUI imaging using the command line
+
+    .EXAMPLE
+    Start-AzOSDCloudGUI
+
+    .LINK
+    https://github.com/OSDeploy/OSD/tree/master/Docs
+    #>
+
+    [CmdletBinding()]
+    param ()
+    #================================================
+    & "$($MyInvocation.MyCommand.Module.ModuleBase)\Projects\AzOSDCloudGUI\MainWindow.ps1"
+    Start-Sleep -Seconds 2
+    #================================================
+}
