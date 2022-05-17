@@ -1359,18 +1359,18 @@ function Start-AzOSDCloud {
             $BlobClient = $Global:AzOSDCloudStorageAccounts | Where-Object {$_.StorageAccountName -eq $Item.BlobClient.AccountName}
 
             $ObjectProperties = @{
-                Number        = $i
-                Account       = $Item.BlobClient.AccountName
-                Tag           = ($BlobClient | Select-Object -ExpandProperty Tags).Get_Item('OSDCloud')
-                Container     = $Item.BlobClient.BlobContainerName
-                Blob          = $Item.Name
-                Location      = $BlobClient | Select-Object -ExpandProperty Location
-                ResourceGroup = $BlobClient | Select-Object -ExpandProperty ResourceGroupName
+                Number          = $i
+                StorageAccount  = $Item.BlobClient.AccountName
+                Tag             = ($BlobClient | Select-Object -ExpandProperty Tags).Get_Item('OSDCloud')
+                Container       = $Item.BlobClient.BlobContainerName
+                Blob            = $Item.Name
+                Location        = $BlobClient | Select-Object -ExpandProperty Location
+                ResourceGroup   = $BlobClient | Select-Object -ExpandProperty ResourceGroupName
             }
             New-Object -TypeName PSObject -Property $ObjectProperties
         }
 
-        $Results | Select-Object -Property Number, Account, Tag, Container, Blob, Location, ResourceGroup | Format-Table | Out-Host
+        $Results | Select-Object -Property Number, StorageAccount, Tag, Container, Blob, Location, ResourceGroup | Format-Table | Out-Host
 
         do {
             $SelectReadHost = Read-Host -Prompt "Select a Windows Image to apply by Number"
@@ -1380,7 +1380,9 @@ function Start-AzOSDCloud {
         $Results = $Results | Where-Object {$_.Number -eq $SelectReadHost}
         $Results
 
-        $Global:AzOSDCloudImage = $Global:AzOSDCloudBlobImage | Where-Object {$_.Name -eq $Results.Blob} | Where-Object {$_.BlobClient.BlobContainerName -eq $Results.Container} | Where-Object {$_.BlobClient.AccountName -eq $Results.StorageAccount}
+        $Global:AzOSDCloudImage = $Global:AzOSDCloudBlobImage | Where-Object {$_.Name -eq $Results.Blob}
+        $Global:AzOSDCloudImage = $Global:AzOSDCloudBlobImage | Where-Object {$_.BlobClient.BlobContainerName -eq $Results.Container}
+        $Global:AzOSDCloudImage = $Global:AzOSDCloudBlobImage | Where-Object {$_.BlobClient.AccountName -eq $Results.StorageAccount}
         $Global:AzOSDCloudImage | Select-Object * | Export-Clixml "$env:SystemDrive\AzOSDCloudImage.xml"
         $Global:AzOSDCloudImage | Select-Object * | ConvertTo-Json | Out-File "$env:SystemDrive\AzOSDCloudImage.json"
         #=================================================
