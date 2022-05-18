@@ -32,7 +32,7 @@ powershell iex (irm functions.osdcloud.com)
 #=================================================
 #Script Information
 $ScriptName = 'functions.osdcloud.com'
-$ScriptVersion = '22.5.16.3'
+$ScriptVersion = '22.5.18.1'
 #=================================================
 #region Initialize Functions
 [Net.ServicePointManager]::SecurityProtocol = [Net.ServicePointManager]::SecurityProtocol -bor [Net.SecurityProtocolType]::Tls12
@@ -877,7 +877,7 @@ function osdcloud-StopComputer {
     Start-Sleep -Seconds 30
     Stop-Computer
 }
-function osdcloud-ShowAutopilotInfo {
+function osdcloud-ShowAutopilotProfile {
     [CmdletBinding()]
     param ()
     $Global:RegAutopilot = Get-ItemProperty -Path 'Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Provisioning\Diagnostics\Autopilot'
@@ -905,6 +905,7 @@ function osdcloud-ShowAutopilotInfo {
         Write-Warning 'Could not find an Autopilot Profile on this device.  If this device is registered, restart the device while connected to the internet'
     }
 }
+New-Alias -Name 'osdcloud-ShowAutopilotInfo' -Value 'osdcloud-ShowAutopilotProfile' -Description 'OSDCloud' -Force
 function osdcloud-TestAutopilotProfile {
     [CmdletBinding()]
     param ()
@@ -1040,7 +1041,7 @@ if ($WindowsPhase -eq 'OOBE') {
 
         #If the device has an Autopilot Profile, show the information
         if ($TestAutopilotProfile -eq $true) {
-            osdcloud-ShowAutopilotInfo
+            osdcloud-ShowAutopilotProfile
             $Autopilot = $false
         }
         
