@@ -877,6 +877,11 @@ function osdcloud-StopComputer {
     Start-Sleep -Seconds 30
     Stop-Computer
 }
+function osdcloud-GetAutopilotEvents {
+    [CmdletBinding()]
+    param ()
+    Get-WinEvent -MaxEvents 25 -LogName 'Microsoft-Windows-ModernDeployment-Diagnostics-Provider/AutoPilot' | Sort-Object TimeCreated | Select-Object TimeCreated, Id, Message | Format-Table
+}
 function osdcloud-ShowAutopilotProfile {
     [CmdletBinding()]
     param ()
