@@ -23,7 +23,7 @@ powershell iex (irm functions.osdcloud.com)
 .DESCRIPTION
     PSCloudScript at functions.osdcloud.com
 .NOTES
-    Version 22.5.19.3
+    Version 22.5.19.4
 .LINK
     https://raw.githubusercontent.com/OSDeploy/OSD/master/cloudscript/functions.osdcloud.com.ps1
 .EXAMPLE
@@ -32,7 +32,7 @@ powershell iex (irm functions.osdcloud.com)
 #=================================================
 #Script Information
 $ScriptName = 'functions.osdcloud.com'
-$ScriptVersion = '22.5.19.3'
+$ScriptVersion = '22.5.19.4'
 #=================================================
 #region Initialize Functions
 [Net.ServicePointManager]::SecurityProtocol = [Net.ServicePointManager]::SecurityProtocol -bor [Net.SecurityProtocolType]::Tls12
@@ -1507,8 +1507,8 @@ function Start-AzOSDPAD {
         $Global:AzOSDCloudGlobalScripts = AzOSDCloudBlobScript | Where-Object {$_.Name -eq $Results.Blob}
         $Global:AzOSDCloudGlobalScripts = $Global:AzOSDCloudGlobalScripts | Where-Object {$_.BlobClient.BlobContainerName -eq $Results.Container}
         $Global:AzOSDCloudGlobalScripts = $Global:AzOSDCloudGlobalScripts | Where-Object {$_.BlobClient.AccountName -eq $Results.StorageAccount}
-        $Global:AzOSDCloudGlobalScripts | Select-Object * | Export-Clixml "$env:SystemDrive\AzOSDCloudScript.xml"
-        $Global:AzOSDCloudGlobalScripts | Select-Object * | ConvertTo-Json | Out-File "$env:SystemDrive\AzOSDCloudScripts.json"
+        $Global:AzOSDCloudGlobalScripts | Select-Object * | Export-Clixml "d:\OSD\AzOSDCloudScript.xml"
+        $Global:AzOSDCloudGlobalScripts | Select-Object * | ConvertTo-Json | Out-File "d:\OSD\AzOSDCloudScripts.json"
         #=================================================
         #   Invoke-OSDCloud.ps1
         #=================================================
