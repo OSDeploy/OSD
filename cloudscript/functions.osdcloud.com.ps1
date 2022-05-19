@@ -1,5 +1,5 @@
 <#PSScriptInfo
-.VERSION 22.5.3.1
+.VERSION 22.5.18.1
 .GUID 7a3671f6-485b-443e-8e86-b60fdcea1419
 .AUTHOR David Segura @SeguraOSD
 .COMPANYNAME osdcloud.com
@@ -23,7 +23,7 @@ powershell iex (irm functions.osdcloud.com)
 .DESCRIPTION
     PSCloudScript at functions.osdcloud.com
 .NOTES
-    Version 22.5.3.1
+    Version 22.5.18.1
 .LINK
     https://raw.githubusercontent.com/OSDeploy/OSD/master/cloudscript/functions.osdcloud.com.ps1
 .EXAMPLE
@@ -1182,9 +1182,16 @@ function Connect-MgOSDCloud {
 }
 function Connect-AzOSDCloud {
     [CmdletBinding()]
-    param ()
+    param (
+        [System.Management.Automation.SwitchParameter]
+        $UseDeviceAuthentication
+    )
     Write-Host -ForegroundColor DarkGray "========================================================================="
     Write-Host -ForegroundColor Green "Connect-AzOSDCloud"
+
+    if ($env:SystemDrive -eq 'X:') {
+        $UseDeviceAuthentication = $true
+    }
 
     osdcloud-InstallModuleAzureAD
     osdcloud-InstallModuleAzAccounts
@@ -1199,7 +1206,13 @@ function Connect-AzOSDCloud {
     osdcloud-InstallModuleMSGraphAuthentication
     osdcloud-InstallModuleMSGraphDeviceManagement
 
-    Connect-AzAccount -UseDeviceAuthentication -AuthScope Storage -ErrorAction Stop
+    if ($UseDeviceAuthentication) {
+        Connect-AzAccount -UseDeviceAuthentication -AuthScope Storage -ErrorAction Stop
+    }
+    else {
+        Connect-AzAccount -AuthScope Storage -ErrorAction Stop
+    }
+
     $Global:AzSubscription = Get-AzSubscription
 
     if (($Global:AzSubscription).Count -ge 2) {

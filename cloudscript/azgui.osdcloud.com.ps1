@@ -1,5 +1,5 @@
 <#PSScriptInfo
-.VERSION 22.5.17.1
+.VERSION 22.5.18.1
 .GUID aa123d2c-3cd3-4ef4-91f0-0c2139473991
 .AUTHOR David Segura @SeguraOSD
 .COMPANYNAME osdcloud.com
@@ -23,7 +23,7 @@ powershell iex (irm azgui.osdcloud.com)
 .DESCRIPTION
     PSCloudScript at azgui.osdcloud.com
 .NOTES
-    Version 22.5.17.1
+    Version 22.5.18.1
 .LINK
     https://raw.githubusercontent.com/OSDeploy/OSD/master/cloudscript/azgui.osdcloud.com.ps1
 .EXAMPLE
@@ -34,7 +34,7 @@ param()
 #=================================================
 #Script Information
 $ScriptName = 'azgui.osdcloud.com'
-$ScriptVersion = '22.5.17.1'
+$ScriptVersion = '22.5.18.1'
 #=================================================
 #region Initialize
 
@@ -62,12 +62,11 @@ Invoke-Expression -Command (Invoke-RestMethod -Uri functions.osdcloud.com)
 #=================================================
 #region WinPE
 if ($WindowsPhase -eq 'WinPE') {
-    #Process OSDCloud startup and load Azure KeyVault dependencies
     osdcloud-StartWinPE -OSDCloud -Azure
-    #Stop the startup Transcript.  OSDCloud will create its own
-    $null = Stop-Transcript -ErrorAction Ignore
     Connect-AzOSDCloud
     Get-AzOSDCloudBlobImage
+    #Stop the startup Transcript.  OSDCloud will create its own
+    $null = Stop-Transcript -ErrorAction Ignore
     Start-AzOSDCloudGUI
 }
 #endregion
@@ -86,19 +85,15 @@ if ($WindowsPhase -eq 'AuditMode') {
 #=================================================
 #region OOBE
 if ($WindowsPhase -eq 'OOBE') {
-
-    #Load everything needed to run AutoPilot and Azure KeyVault
     osdcloud-StartOOBE -Display -Language -DateTime -Autopilot -KeyVault
-
+    Connect-AzOSDCloud
     $null = Stop-Transcript -ErrorAction Ignore
 }
 #endregion
 #=================================================
 #region Windows
 if ($WindowsPhase -eq 'Windows') {
-
-    #Load OSD and Azure stuff
-
+    Connect-AzOSDCloud
     $null = Stop-Transcript -ErrorAction Ignore
 }
 #endregion
