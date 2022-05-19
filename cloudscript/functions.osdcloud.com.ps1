@@ -1411,7 +1411,7 @@ function Get-AzOSDCloudScript {
     }
     else {
         Write-Warning 'Unable to connect to AzureAD'
-        Write-Warning 'You may need to execute Connect-AzOSDCloud then Start-AzOSDCloud'
+        Write-Warning 'You may need to execute Connect-AzOSDCloud '
     }
 }
 function Start-AzOSDCloud {
