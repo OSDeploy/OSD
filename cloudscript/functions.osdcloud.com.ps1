@@ -1,5 +1,5 @@
 <#PSScriptInfo
-.VERSION 22.5.18.1
+.VERSION 22.5.19.1
 .GUID 7a3671f6-485b-443e-8e86-b60fdcea1419
 .AUTHOR David Segura @SeguraOSD
 .COMPANYNAME osdcloud.com
