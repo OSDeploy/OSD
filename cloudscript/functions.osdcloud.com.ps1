@@ -1380,7 +1380,7 @@ function Get-AzOSDCloudScript {
         $Global:AzOSDCloudStorageAccounts = Get-AzStorageAccount | Where-Object {$_.Tags.ContainsKey('OSDScripts')}
     
         Write-Host -ForegroundColor DarkGray    'Storage Contexts:          $Global:AzStorageContext'
-        Write-Host -ForegroundColor DarkGray    'Blob Windows Images:       $Global:AzOSDCloudBlobScript'
+        Write-Host -ForegroundColor DarkGray    'Blob PowerShell Scripts:       $Global:AzOSDCloudBlobScript'
         Write-Host ''
         $Global:AzStorageContext = @{}
         $Global:AzOSDCloudBlobScript = @()
