@@ -1469,5 +1469,62 @@ function Start-AzOSDCloud {
     }
 }
 New-Alias -Name 'Start-AzOSDCloudBeta' -Value 'Start-AzOSDCloud' -Description 'OSDCloud' -Force
+
+function Start-AzOSDPAD {
+    [CmdletBinding()]
+    param ()
+    Write-Host -ForegroundColor DarkGray "========================================================================="
+    Write-Host -ForegroundColor Green "Start-AzOSDPAD"
+    if ($Global:AzOSDCloudBlobScript) {
+        $i = $null
+        $Results = foreach ($Item in $Global:AzOSDCloudBlobScript) {
+            $i++
+            
+            $BlobClient = $Global:AzOSDCloudStorageAccounts | Where-Object {$_.StorageAccountName -eq $Item.BlobClient.AccountName}
+
+            $ObjectProperties = @{
+                Number          = $i
+                StorageAccount  = $Item.BlobClient.AccountName
+                Tag             = ($BlobClient | Select-Object -ExpandProperty Tags).Get_Item('OSDScripts')
+                Container       = $Item.BlobClient.BlobContainerName
+                Blob            = $Item.Name
+                Location        = $BlobClient | Select-Object -ExpandProperty Location
+                ResourceGroup   = $BlobClient | Select-Object -ExpandProperty ResourceGroupName
+            }
+            New-Object -TypeName PSObject -Property $ObjectProperties
+        }
+
+        $Results | Select-Object -Property Number, StorageAccount, Tag, Container, Blob, Location, ResourceGroup | Format-Table | Out-Host
+
+        do {
+            $SelectReadHost = Read-Host -Prompt "Select a Windows Image to apply by Number"
+        }
+        until (((($SelectReadHost -ge 0) -and ($SelectReadHost -in $Results.Number))))
+
+        $Results = $Results | Where-Object {$_.Number -eq $SelectReadHost}
+        $Results
+
+        $Global:AzOSDCloudGlobalScripts = AzOSDCloudBlobScript | Where-Object {$_.Name -eq $Results.Blob}
+        $Global:AzOSDCloudGlobalScripts = $Global:AzOSDCloudGlobalScripts | Where-Object {$_.BlobClient.BlobContainerName -eq $Results.Container}
+        $Global:AzOSDCloudGlobalScripts = $Global:AzOSDCloudGlobalScripts | Where-Object {$_.BlobClient.AccountName -eq $Results.StorageAccount}
+        $Global:AzOSDCloudGlobalScripts | Select-Object * | Export-Clixml "$env:SystemDrive\AzOSDCloudScript.xml"
+        $Global:AzOSDCloudGlobalScripts | Select-Object * | ConvertTo-Json | Out-File "$env:SystemDrive\AzOSDCloudScripts.json"
+        #=================================================
+        #   Invoke-OSDCloud.ps1
+        #=================================================
+        Write-Host -ForegroundColor DarkGray "========================================================================="
+        Write-Host -ForegroundColor Green "Invoke-OSDCloud ... Starting in 5 seconds..."
+        Start-Sleep -Seconds 5
+        #Invoke-OSDCloud
+    }
+    else {
+        Write-Warning 'Unable to find a WIM on any of the OSDCloud Azure Storage Containers'
+        Write-Warning 'Make sure you have a WIM Windows Image in the OSDCloud Azure Storage Container'
+        Write-Warning 'Make sure this user has the Azure Storage Blob Data Reader role to the OSDCloud Container'
+        Write-Warning 'You may need to execute Get-AzOSDCloudBlobImage then Start-AzOSDCloud'
+    }
+}
+
+
 #endregion
 #=================================================
