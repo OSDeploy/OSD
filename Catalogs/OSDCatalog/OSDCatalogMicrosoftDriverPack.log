@@ -1,25 +1,23 @@
 ﻿**********************
 Windows PowerShell transcript start
-Start time: 20220510140312
+Start time: 20220519144515
 Username: OSDCODE\David
 RunAs User: OSDCODE\David
 Configuration Name: 
 Machine: OSDCODE (Microsoft Windows NT 10.0.22000.0)
 Host Application: C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe -NoProfile -ExecutionPolicy Bypass -Command Import-Module 'c:\Users\David\.vscode\extensions\ms-vscode.powershell-2022.5.1\modules\PowerShellEditorServices\PowerShellEditorServices.psd1'; Start-EditorServices -HostName 'Visual Studio Code Host' -HostProfileId 'Microsoft.VSCode' -HostVersion '2022.5.1' -AdditionalModules @('PowerShellEditorServices.VSCode') -BundledModulesPath 'c:\Users\David\.vscode\extensions\ms-vscode.powershell-2022.5.1\modules' -EnableConsoleRepl -StartupBanner '=====> PowerShell Integrated Console v2022.5.1 <=====
-' -LogLevel 'Normal' -LogPath 'c:\Users\David\.vscode\extensions\ms-vscode.powershell-2022.5.1\logs\1652208744-83fd20f1-75f2-4daa-9d58-fed24f3135c11652208743108\EditorServices.log' -SessionDetailsPath 'c:\Users\David\.vscode\extensions\ms-vscode.powershell-2022.5.1\sessions\PSES-VSCode-27184-683403' -FeatureFlags @() 
-Process ID: 16928
-PSVersion: 5.1.22000.613
+' -LogLevel 'Normal' -LogPath 'c:\Users\David\.vscode\extensions\ms-vscode.powershell-2022.5.1\logs\1652988971-72305533-00fd-4fd0-8373-951f58fb81961652988970849\EditorServices.log' -SessionDetailsPath 'c:\Users\David\.vscode\extensions\ms-vscode.powershell-2022.5.1\sessions\PSES-VSCode-10560-592772' -FeatureFlags @() 
+Process ID: 24416
+PSVersion: 5.1.22000.653
 PSEdition: Desktop
-PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1.22000.613
-BuildVersion: 10.0.22000.613
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1.22000.653
+BuildVersion: 10.0.22000.653
 CLRVersion: 4.0.30319.42000
 WSManStackVersion: 3.0
 PSRemotingProtocolVersion: 2.3
 SerializationVersion: 1.1.0.1
 **********************
 Transcript started, output file is D:\GitHub\MyModules\OSD\Catalogs\OSDCatalog\OSDCatalogMicrosoftDriverPack.log
-VERBOSE: Build Catalog already created at C:\Users\David\AppData\Local\Temp\OSD\OSDCatalogMicrosoftDriverPack.json
-VERBOSE: Removing previous Build Catalog
 VERBOSE: Test-WebConnection OK: https://support.microsoft.com/en-us/surface/download-drivers-and-firmware-for-surface-09bb2e09-2a4b-cb69-0951-078a7739e120
 VERBOSE: HEAD with 0-byte payload
 VERBOSE: received 0-byte response of content type text/html; charset=utf-8
@@ -202,7 +200,44 @@ VERBOSE: HEAD with 0-byte payload
 VERBOSE: received 409518080-byte response of content type application/octet-stream
 VERBOSE: Processing Surface Go 2 LTE
 VERBOSE: GET with 0-byte payload
-VERBOSE: received -1-byte response of content type text/html
+>> TerminatingError(Invoke-WebRequest): "Error 404 - Not Found/**/Warning: This site requires the use of scripts, which your browser does not currently allow.See how to enable scriptsSkip to main contentMicrosoftDownload CenterDownload Center
+                            Download Center
+                         Home WindowsOfficeWeb browsersDeveloper toolsXboxWindows PhoneMoreAll MicrosoftMicrosoft 365OfficeWindowsSurfaceXboxDealsSupportSoftwareSoftwareWindows AppsOneDriveOutlookSkypeOneNoteMicrosoft TeamsMicrosoft EdgePCs &amp; Devices  PCs &amp; Devices  ComputersShop XboxAccessoriesVR &amp; mixed realityPhonesEntertainmentEntertainmentXbox Game Pass UltimatePC Game PassXbox gamesPC gamesWindows digital gamesMovies &amp; TVBusinessBusinessMicrosoft CloudMicrosoft SecurityDynamics 365Microsoft 365 for businessMicrosoft Power PlatformWindows 365Microsoft IndustrySmall BusinessDeveloper &amp; IT  Developer &amp; IT  AzureDeveloper CenterDocumentationMicrosoft LearnMicrosoft Tech CommunityAzure MarketplaceAppSourceVisual StudioOtherOtherMicrosoft Rewards Free downloads &amp; securityEducationVirtual workshops and trainingGift cardsGift IdeasLicensingMicrosoft Experience CenterView SitemapSearchSearch Microsoft.comCancel0Cart0 items in shopping cartSign in
+            /**//**//*<![CDATA[*/function DecodeHTML(){$(".msame_Header_chev").length&&($(".msame_Header_chev").text()?$(".msame_Header_chev").html($(".msame_Header_chev").text()).show():$(".msame_Header_chev").hide())}function checkDecode(){DecodeHTML();$(".msame_Header_chev").unbind("DOMSubtreeModified",checkDecode);$(".msame_Header_chev").unbind("DOMNo"
+Invoke-WebRequest : Error 404 - Not Found/**/Warning: This site requires the use of scripts, which your browser does 
+not currently allow.See how to enable scriptsSkip to main contentMicrosoftDownload CenterDownload Center
+                            Download Center
+                         Home WindowsOfficeWeb browsersDeveloper toolsXboxWindows PhoneMoreAll MicrosoftMicrosoft 
+365OfficeWindowsSurfaceXboxDealsSupportSoftwareSoftwareWindows AppsOneDriveOutlookSkypeOneNoteMicrosoft TeamsMicrosoft 
+EdgePCs &amp; Devices  PCs &amp; Devices  ComputersShop XboxAccessoriesVR &amp; mixed 
+realityPhonesEntertainmentEntertainmentXbox Game Pass UltimatePC Game PassXbox gamesPC gamesWindows digital gamesMovies 
+&amp; TVBusinessBusinessMicrosoft CloudMicrosoft SecurityDynamics 365Microsoft 365 for businessMicrosoft Power 
+PlatformWindows 365Microsoft IndustrySmall BusinessDeveloper &amp; IT  Developer &amp; IT  AzureDeveloper 
+CenterDocumentationMicrosoft LearnMicrosoft Tech CommunityAzure MarketplaceAppSourceVisual StudioOtherOtherMicrosoft 
+Rewards Free downloads &amp; securityEducationVirtual workshops and trainingGift cardsGift IdeasLicensingMicrosoft 
+Experience CenterView SitemapSearchSearch Microsoft.comCancel0Cart0 items in shopping cartSign in
+            /**//**//*<![CDATA[*/function DecodeHTML(){$(".msame_Header_chev").length&&($(".msame_Header_chev").text()?$
+(".msame_Header_chev").html($(".msame_Header_chev").text()).show():$(".msame_Header_chev").hide())}function checkDecode(
+){DecodeHTML();$(".msame_Header_chev").unbind("DOMSubtreeModified",checkDecode);$(".msame_Header_chev").unbind("DOMNo
+At D:\GitHub\MyModules\OSD\Public\Functions\Catalog\Get-OSDCatalogMicrosoftDriverPack.ps1:397 char:27
++ ... ownloads = (Invoke-WebRequest -Uri $DriverPage -UseBasicParsing).Link ...
++                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : InvalidOperation: (System.Net.HttpWebRequest:HttpWebRequest) [Invoke-WebRequest], 
+WebException
+    + FullyQualifiedErrorId : WebCmdletWebResponseException,Microsoft.PowerShell.Commands.InvokeWebRequestCommand
+Invoke-WebRequest : Error 404 - Not Found/**/Warning: This site requires the use of scripts, which your browser does not currently allow.See how to enable scriptsSkip to main contentMicrosoftDownload CenterDownload Center
+                            Download Center
+                         Home WindowsOfficeWeb browsersDeveloper toolsXboxWindows PhoneMoreAll MicrosoftMicrosoft 365OfficeWindowsSurfaceXboxDealsSupportSoftwareSoftwareWindows AppsOneDriveOutlookSkypeOneNoteMicrosoft TeamsMicrosoft EdgePCs &amp; Devices  PCs
+&amp; Devices  ComputersShop XboxAccessoriesVR &amp; mixed realityPhonesEntertainmentEntertainmentXbox Game Pass UltimatePC Game PassXbox gamesPC gamesWindows digital gamesMovies &amp; TVBusinessBusinessMicrosoft CloudMicrosoft SecurityDynamics 365Microsoft 365
+for businessMicrosoft Power PlatformWindows 365Microsoft IndustrySmall BusinessDeveloper &amp; IT  Developer &amp; IT  AzureDeveloper CenterDocumentationMicrosoft LearnMicrosoft Tech CommunityAzure MarketplaceAppSourceVisual StudioOtherOtherMicrosoft Rewards
+Free downloads &amp; securityEducationVirtual workshops and trainingGift cardsGift IdeasLicensingMicrosoft Experience CenterView SitemapSearchSearch Microsoft.comCancel0Cart0 items in shopping cartSign in
+            /**//**//*<![CDATA[*/function DecodeHTML(){$(".msame_Header_chev").length&&($(".msame_Header_chev").text()?$(".msame_Header_chev").html($(".msame_Header_chev").text()).show():$(".msame_Header_chev").hide())}function
+checkDecode(){DecodeHTML();$(".msame_Header_chev").unbind("DOMSubtreeModified",checkDecode);$(".msame_Header_chev").unbind("DOMNo
+At D:\GitHub\MyModules\OSD\Public\Functions\Catalog\Get-OSDCatalogMicrosoftDriverPack.ps1:397 char:27
++ ... ownloads = (Invoke-WebRequest -Uri $DriverPage -UseBasicParsing).Link ...
++                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : InvalidOperation: (System.Net.HttpWebRequest:HttpWebRequest) [Invoke-WebRequest], WebException
+    + FullyQualifiedErrorId : WebCmdletWebResponseException,Microsoft.PowerShell.Commands.InvokeWebRequestCommand
 VERBOSE: Testing Download File at https://download.microsoft.com/download/d/7/1/d71163b8-03a8-40c7-8a9f-fc2006c6bccb/SurfaceGo2_Win10_17763_20.063.23730_0.msi
 VERBOSE: HEAD with 0-byte payload
 VERBOSE: received 426106880-byte response of content type application/octet-stream
@@ -211,13 +246,50 @@ VERBOSE: HEAD with 0-byte payload
 VERBOSE: received 409518080-byte response of content type application/octet-stream
 VERBOSE: Processing Surface Go 3 Commercial
 VERBOSE: GET with 0-byte payload
-VERBOSE: received -1-byte response of content type text/html
-VERBOSE: Testing Download File at https://download.microsoft.com/download/e/8/2/e82f3029-e587-4c28-8ab4-ae1bf1e2c209/SurfaceGo3_Win10_19042_22.023.33209.0.msi
+>> TerminatingError(Invoke-WebRequest): "Error 404 - Not Found/**/Warning: This site requires the use of scripts, which your browser does not currently allow.See how to enable scriptsSkip to main contentMicrosoftDownload CenterDownload Center
+                            Download Center
+                         Home WindowsOfficeWeb browsersDeveloper toolsXboxWindows PhoneMoreAll MicrosoftMicrosoft 365OfficeWindowsSurfaceXboxDealsSupportSoftwareSoftwareWindows AppsOneDriveOutlookSkypeOneNoteMicrosoft TeamsMicrosoft EdgePCs &amp; Devices  PCs &amp; Devices  ComputersShop XboxAccessoriesVR &amp; mixed realityPhonesEntertainmentEntertainmentXbox Game Pass UltimatePC Game PassXbox gamesPC gamesWindows digital gamesMovies &amp; TVBusinessBusinessMicrosoft CloudMicrosoft SecurityDynamics 365Microsoft 365 for businessMicrosoft Power PlatformWindows 365Microsoft IndustrySmall BusinessDeveloper &amp; IT  Developer &amp; IT  AzureDeveloper CenterDocumentationMicrosoft LearnMicrosoft Tech CommunityAzure MarketplaceAppSourceVisual StudioOtherOtherMicrosoft Rewards Free downloads &amp; securityEducationVirtual workshops and trainingGift cardsGift IdeasLicensingMicrosoft Experience CenterView SitemapSearchSearch Microsoft.comCancel0Cart0 items in shopping cartSign in
+            /**//**//*<![CDATA[*/function DecodeHTML(){$(".msame_Header_chev").length&&($(".msame_Header_chev").text()?$(".msame_Header_chev").html($(".msame_Header_chev").text()).show():$(".msame_Header_chev").hide())}function checkDecode(){DecodeHTML();$(".msame_Header_chev").unbind("DOMSubtreeModified",checkDecode);$(".msame_Header_chev").unbind("DOMNo"
+Invoke-WebRequest : Error 404 - Not Found/**/Warning: This site requires the use of scripts, which your browser does 
+not currently allow.See how to enable scriptsSkip to main contentMicrosoftDownload CenterDownload Center
+                            Download Center
+                         Home WindowsOfficeWeb browsersDeveloper toolsXboxWindows PhoneMoreAll MicrosoftMicrosoft 
+365OfficeWindowsSurfaceXboxDealsSupportSoftwareSoftwareWindows AppsOneDriveOutlookSkypeOneNoteMicrosoft TeamsMicrosoft 
+EdgePCs &amp; Devices  PCs &amp; Devices  ComputersShop XboxAccessoriesVR &amp; mixed 
+realityPhonesEntertainmentEntertainmentXbox Game Pass UltimatePC Game PassXbox gamesPC gamesWindows digital gamesMovies 
+&amp; TVBusinessBusinessMicrosoft CloudMicrosoft SecurityDynamics 365Microsoft 365 for businessMicrosoft Power 
+PlatformWindows 365Microsoft IndustrySmall BusinessDeveloper &amp; IT  Developer &amp; IT  AzureDeveloper 
+CenterDocumentationMicrosoft LearnMicrosoft Tech CommunityAzure MarketplaceAppSourceVisual StudioOtherOtherMicrosoft 
+Rewards Free downloads &amp; securityEducationVirtual workshops and trainingGift cardsGift IdeasLicensingMicrosoft 
+Experience CenterView SitemapSearchSearch Microsoft.comCancel0Cart0 items in shopping cartSign in
+            /**//**//*<![CDATA[*/function DecodeHTML(){$(".msame_Header_chev").length&&($(".msame_Header_chev").text()?$
+(".msame_Header_chev").html($(".msame_Header_chev").text()).show():$(".msame_Header_chev").hide())}function checkDecode(
+){DecodeHTML();$(".msame_Header_chev").unbind("DOMSubtreeModified",checkDecode);$(".msame_Header_chev").unbind("DOMNo
+At D:\GitHub\MyModules\OSD\Public\Functions\Catalog\Get-OSDCatalogMicrosoftDriverPack.ps1:397 char:27
++ ... ownloads = (Invoke-WebRequest -Uri $DriverPage -UseBasicParsing).Link ...
++                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : InvalidOperation: (System.Net.HttpWebRequest:HttpWebRequest) [Invoke-WebRequest], 
+WebException
+    + FullyQualifiedErrorId : WebCmdletWebResponseException,Microsoft.PowerShell.Commands.InvokeWebRequestCommand
+Invoke-WebRequest : Error 404 - Not Found/**/Warning: This site requires the use of scripts, which your browser does not currently allow.See how to enable scriptsSkip to main contentMicrosoftDownload CenterDownload Center
+                            Download Center
+                         Home WindowsOfficeWeb browsersDeveloper toolsXboxWindows PhoneMoreAll MicrosoftMicrosoft 365OfficeWindowsSurfaceXboxDealsSupportSoftwareSoftwareWindows AppsOneDriveOutlookSkypeOneNoteMicrosoft TeamsMicrosoft EdgePCs &amp; Devices  PCs
+&amp; Devices  ComputersShop XboxAccessoriesVR &amp; mixed realityPhonesEntertainmentEntertainmentXbox Game Pass UltimatePC Game PassXbox gamesPC gamesWindows digital gamesMovies &amp; TVBusinessBusinessMicrosoft CloudMicrosoft SecurityDynamics 365Microsoft 365
+for businessMicrosoft Power PlatformWindows 365Microsoft IndustrySmall BusinessDeveloper &amp; IT  Developer &amp; IT  AzureDeveloper CenterDocumentationMicrosoft LearnMicrosoft Tech CommunityAzure MarketplaceAppSourceVisual StudioOtherOtherMicrosoft Rewards
+Free downloads &amp; securityEducationVirtual workshops and trainingGift cardsGift IdeasLicensingMicrosoft Experience CenterView SitemapSearchSearch Microsoft.comCancel0Cart0 items in shopping cartSign in
+            /**//**//*<![CDATA[*/function DecodeHTML(){$(".msame_Header_chev").length&&($(".msame_Header_chev").text()?$(".msame_Header_chev").html($(".msame_Header_chev").text()).show():$(".msame_Header_chev").hide())}function
+checkDecode(){DecodeHTML();$(".msame_Header_chev").unbind("DOMSubtreeModified",checkDecode);$(".msame_Header_chev").unbind("DOMNo
+At D:\GitHub\MyModules\OSD\Public\Functions\Catalog\Get-OSDCatalogMicrosoftDriverPack.ps1:397 char:27
++ ... ownloads = (Invoke-WebRequest -Uri $DriverPage -UseBasicParsing).Link ...
++                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : InvalidOperation: (System.Net.HttpWebRequest:HttpWebRequest) [Invoke-WebRequest], WebException
+    + FullyQualifiedErrorId : WebCmdletWebResponseException,Microsoft.PowerShell.Commands.InvokeWebRequestCommand
+VERBOSE: Testing Download File at https://download.microsoft.com/download/d/7/1/d71163b8-03a8-40c7-8a9f-fc2006c6bccb/SurfaceGo2_Win10_17763_20.063.23730_0.msi
 VERBOSE: HEAD with 0-byte payload
-VERBOSE: received 539009024-byte response of content type application/octet-stream
-VERBOSE: Testing Download File at https://download.microsoft.com/download/e/8/2/e82f3029-e587-4c28-8ab4-ae1bf1e2c209/SurfaceGo3_Win11_22000_21.120.382.0.msi
+VERBOSE: received 426106880-byte response of content type application/octet-stream
+VERBOSE: Testing Download File at https://download.microsoft.com/download/d/7/1/d71163b8-03a8-40c7-8a9f-fc2006c6bccb/SurfaceGo2_Win10_18362_22.013.15000_0.msi
 VERBOSE: HEAD with 0-byte payload
-VERBOSE: received 539111424-byte response of content type application/octet-stream
+VERBOSE: received 409518080-byte response of content type application/octet-stream
 VERBOSE: Processing Surface Go 3 Consumer
 VERBOSE: GET with 0-byte payload
 VERBOSE: received -1-byte response of content type text/html
@@ -608,5 +680,5 @@ VERBOSE: received 656039936-byte response of content type application/octet-stre
 VERBOSE: Importing the Build Catalog at C:\Users\David\AppData\Local\Temp\OSD\OSDCatalogMicrosoftDriverPack.json
 **********************
 Windows PowerShell transcript end
-End time: 20220510141129
+End time: 20220519145354
 **********************
