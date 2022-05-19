@@ -23,7 +23,7 @@ powershell iex (irm functions.osdcloud.com)
 .DESCRIPTION
     PSCloudScript at functions.osdcloud.com
 .NOTES
-    Version 22.5.19.4
+    Version 22.5.19.5
 .LINK
     https://raw.githubusercontent.com/OSDeploy/OSD/master/cloudscript/functions.osdcloud.com.ps1
 .EXAMPLE
@@ -32,7 +32,7 @@ powershell iex (irm functions.osdcloud.com)
 #=================================================
 #Script Information
 $ScriptName = 'functions.osdcloud.com'
-$ScriptVersion = '22.5.19.4'
+$ScriptVersion = '22.5.19.5'
 #=================================================
 #region Initialize Functions
 [Net.ServicePointManager]::SecurityProtocol = [Net.ServicePointManager]::SecurityProtocol -bor [Net.SecurityProtocolType]::Tls12
@@ -1470,7 +1470,7 @@ function Start-AzOSDCloud {
 }
 New-Alias -Name 'Start-AzOSDCloudBeta' -Value 'Start-AzOSDCloud' -Description 'OSDCloud' -Force
 
-function Start-AzOSDPAD {
+function Start-AzOSDPADbeta {
     [CmdletBinding()]
     param ()
     Write-Host -ForegroundColor DarkGray "========================================================================="
@@ -1504,9 +1504,10 @@ function Start-AzOSDPAD {
         $Results = $Results | Where-Object {$_.Number -eq $SelectReadHost}
         $Results
 
-        $Global:AzOSDCloudGlobalScripts = AzOSDCloudBlobScript | Where-Object {$_.Name -eq $Results.Blob}
+        $Global:AzOSDCloudGlobalScripts = $Global:AzOSDCloudBlobScript | Where-Object {$_.Name -eq $Results.Blob}
         $Global:AzOSDCloudGlobalScripts = $Global:AzOSDCloudGlobalScripts | Where-Object {$_.BlobClient.BlobContainerName -eq $Results.Container}
         $Global:AzOSDCloudGlobalScripts = $Global:AzOSDCloudGlobalScripts | Where-Object {$_.BlobClient.AccountName -eq $Results.StorageAccount}
+            # Path for Test only
         $Global:AzOSDCloudGlobalScripts | Select-Object * | Export-Clixml "d:\OSD\AzOSDCloudScript.xml"
         $Global:AzOSDCloudGlobalScripts | Select-Object * | ConvertTo-Json | Out-File "d:\OSD\AzOSDCloudScripts.json"
         #=================================================
