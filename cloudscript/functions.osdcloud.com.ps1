@@ -1365,6 +1365,55 @@ function Get-AzOSDCloudBlobImage {
         Write-Warning 'You may need to execute Connect-AzOSDCloud then Start-AzOSDCloud'
     }
 }
+
+function Get-AzOSDCloudScript {
+    [CmdletBinding()]
+    param ()
+    Write-Host -ForegroundColor DarkGray "========================================================================="
+    Write-Host -ForegroundColor Green "Get-AzOSDCloudScript"
+
+    if ($Global:AzureAD -or $Global:MgGraph) {
+        Write-Host -ForegroundColor DarkGray    'Storage Accounts:          $Global:AzStorageAccounts'
+        $Global:AzStorageAccounts = Get-AzStorageAccount
+    
+        Write-Host -ForegroundColor DarkGray    'OSDCloud Storage Accounts: $Global:AzOSDCloudStorageAccounts'
+        $Global:AzOSDCloudStorageAccounts = Get-AzStorageAccount | Where-Object {$_.Tags.ContainsKey('OSDScripts')}
+    
+        Write-Host -ForegroundColor DarkGray    'Storage Contexts:          $Global:AzStorageContext'
+        Write-Host -ForegroundColor DarkGray    'Blob Windows Images:       $Global:AzOSDCloudBlobScript'
+        Write-Host ''
+        $Global:AzStorageContext = @{}
+        $Global:AzOSDCloudBlobScript = @()
+    
+        if ($Global:AzOSDCloudStorageAccounts) {
+            Write-Host -ForegroundColor Cyan "Scanning for PowerShell Script"
+            foreach ($Item in $Global:AzOSDCloudStorageAccounts) {
+                $Global:AzCurrentStorageContext = New-AzStorageContext -StorageAccountName $Item.StorageAccountName
+                $Global:AzStorageContext."$($Item.StorageAccountName)" = $Global:AzCurrentStorageContext      
+                $StorageContainers = Get-AzStorageContainer -Context $Global:AzCurrentStorageContext
+                if ($StorageContainers) {
+                    foreach ($Container in $StorageContainers) {
+                        Write-Host -ForegroundColor DarkGray "Storage Account: $($Item.StorageAccountName) Container: $($Container.Name)"
+                        $Global:AzOSDCloudBlobScript += Get-AzStorageBlob -Context $Global:AzCurrentStorageContext -Container $Container.Name -Blob *.ps1 -ErrorAction Ignore
+                        #$Global:AzOSDCloudBlobScript += Get-AzStorageBlob -Context $Global:AzCurrentStorageContext -Container $Container.Name -Blob *.ppkg -ErrorAction Ignore
+                        #$Global:AzOSDCloudBlobScript += Get-AzStorageBlob -Context $Global:AzCurrentStorageContext -Container $Container.Name -Blob *.xml -ErrorAction Ignore
+
+                    }
+                }
+            }
+           # return $Global:AzOSDCloudBlobScript
+        }
+        else {
+            Write-Warning 'Unable to find any Azure Storage Accounts'
+            Write-Warning 'Make sure the OSDCloud Azure Storage Account has an OSDScripts Tag'
+            Write-Warning 'Make sure this user has the Azure Reader role on the OSDCloud Azure Storage Account'
+        }
+    }
+    else {
+        Write-Warning 'Unable to connect to AzureAD'
+        Write-Warning 'You may need to execute Connect-AzOSDCloud then Start-AzOSDCloud'
+    }
+}
 function Start-AzOSDCloud {
     [CmdletBinding()]
     param ()
