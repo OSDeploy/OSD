@@ -47,6 +47,11 @@ else {
     else {$WindowsPhase = 'Windows'}
 }
 
+$Manufacturer = (Get-CimInstance -Class:Win32_ComputerSystem).Manufacturer
+$Model = (Get-CimInstance -Class:Win32_ComputerSystem).Model
+if ($Manufacturer -match "HP" -or $Manufacturer -match "Hewlett-Packard"){$Manufacturer = "HP"}
+if ($Manufacturer -match "Dell"){$Manufacturer = "Dell"}
+
 #Finish Initialization
 Write-Host -ForegroundColor DarkGray "$ScriptName $ScriptVersion $WindowsPhase"
 
