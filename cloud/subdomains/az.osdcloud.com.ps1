@@ -1,6 +1,6 @@
 <#PSScriptInfo
 .VERSION 22.5.19.1
-.GUID b9c79000-c271-464e-839a-605b3b384c4e
+.GUID aa123d2c-3cd3-4ef4-91f0-0c2139473991
 .AUTHOR David Segura @SeguraOSD
 .COMPANYNAME osdcloud.com
 .COPYRIGHT (c) 2022 David Segura osdcloud.com. All rights reserved.
@@ -13,27 +13,27 @@
 .EXTERNALSCRIPTDEPENDENCIES 
 .RELEASENOTES
 Script should be executed in a Command Prompt using the following command
-powershell Invoke-Expression -Command (Invoke-RestMethod -Uri raw.osdcloud.com/tasksequences/light.ps1)
+powershell Invoke-Expression -Command (Invoke-RestMethod -Uri az.osdcloud.com)
 This is abbreviated as
-powershell iex (irm raw.osdcloud.com/tasksequences/light.ps1)
+powershell iex (irm az.osdcloud.com)
 #>
 <#
 .SYNOPSIS
-    PSCloudScript at raw.osdcloud.com/tasksequences/light.ps1
+    PSCloudScript at az.osdcloud.com
 .DESCRIPTION
-    PSCloudScript at raw.osdcloud.com/tasksequences/light.ps1
+    PSCloudScript at az.osdcloud.com
 .NOTES
     Version 22.5.19.1
 .LINK
-    https://raw.githubusercontent.com/OSDeploy/OSD/master/cloudscript/tasksequences/light.ps1
+    https://raw.githubusercontent.com/OSDeploy/OSD/master/cloud/az.osdcloud.com.ps1
 .EXAMPLE
-    powershell iex (irm raw.osdcloud.com/tasksequences/light.ps1)
+    powershell iex (irm az.osdcloud.com)
 #>
 [CmdletBinding()]
 param()
 #=================================================
 #Script Information
-$ScriptName = 'raw.osdcloud.com/tasksequences/light.ps1'
+$ScriptName = 'az.osdcloud.com'
 $ScriptVersion = '22.5.19.1'
 #=================================================
 #region Initialize
@@ -62,9 +62,12 @@ Invoke-Expression -Command (Invoke-RestMethod -Uri functions.osdcloud.com)
 #=================================================
 #region WinPE
 if ($WindowsPhase -eq 'WinPE') {
-    osdcloud-StartWinPE
-    osdcloud-WinpeInstallCurl
+    osdcloud-StartWinPE -OSDCloud -Azure
+    Connect-AzOSDCloud
+    Get-AzOSDCloudBlobImage
+    #Stop the startup Transcript.  OSDCloud will create its own
     $null = Stop-Transcript -ErrorAction Ignore
+    Start-AzOSDCloud
 }
 #endregion
 #=================================================
@@ -82,13 +85,15 @@ if ($WindowsPhase -eq 'AuditMode') {
 #=================================================
 #region OOBE
 if ($WindowsPhase -eq 'OOBE') {
-    osdcloud-StartOOBE
+    osdcloud-StartOOBE -Display -Language -DateTime -Autopilot -KeyVault
+    Connect-AzOSDCloud
     $null = Stop-Transcript -ErrorAction Ignore
 }
 #endregion
 #=================================================
 #region Windows
 if ($WindowsPhase -eq 'Windows') {
+    Connect-AzOSDCloud
     $null = Stop-Transcript -ErrorAction Ignore
 }
 #endregion
