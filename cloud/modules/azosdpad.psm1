@@ -26,7 +26,7 @@ function Get-AzOSDCloudScript {
         $Global:AzOSDCloudStorageAccounts = Get-AzStorageAccount | Where-Object {$_.Tags.ContainsKey('OSDScripts')}
     
         Write-Host -ForegroundColor DarkGray    'Storage Contexts:          $Global:AzStorageContext'
-        Write-Host -ForegroundColor DarkGray    'Blob PowerShell Scripts:       $Global:AzOSDCloudBlobScript'
+        Write-Host -ForegroundColor DarkGray    'Blob PowerShell Scripts:   $Global:AzOSDCloudBlobScript'
         Write-Host ''
         $Global:AzStorageContext = @{}
         $Global:AzOSDCloudBlobScript = @()
@@ -47,7 +47,13 @@ function Get-AzOSDCloudScript {
                     }
                 }
             }
-           # return $Global:AzOSDCloudBlobScript
+            Write-Host -ForegroundColor DarkGray "We found " -NoNewline
+            write-host -ForegroundColor Cyan "$($Global:AzOSDCloudBlobScript.count) " -NoNewline
+            write-host -ForegroundColor DarkGray "scripts on the storage account " -NoNewline
+            write-host -ForegroundColor Cyan "$($Global:AzOSDCloudStorageAccounts.StorageAccountName)"
+            Write-Host -ForegroundColor DarkGray "========================================================================="
+
+            # return $Global:AzOSDCloudBlobScript
         }
         else {
             Write-Warning 'Unable to find any Azure Storage Accounts'
@@ -80,20 +86,26 @@ function Start-AzOSDPADbeta {
                 Blob            = $Item.Name
                 Location        = $BlobClient | Select-Object -ExpandProperty Location
                 ResourceGroup   = $BlobClient | Select-Object -ExpandProperty ResourceGroupName
+                URL             = $Item.BlobClient.Uri
+                
             }
             New-Object -TypeName PSObject -Property $ObjectProperties
         }
 
-        $Results | Select-Object -Property Number, StorageAccount, Tag, Container, Blob, Location, ResourceGroup | Format-Table | Out-Host
+        $Results | Select-Object -Property Number, StorageAccount, Tag, Container, Blob, Location, ResourceGroup, URL | Format-Table | Out-Host
 
-        do {
+        $Global:AzOSDCloudGlobalScripts = $Results
+        <#
+            $($Global:AzOSDCloudBlobScript.ICloudBlob[0]).Properties.Lenght
+            $($Global:AzOSDCloudBlobScript.ICloudBlob[0]).Properties.ContentMD5
+            $($Global:AzOSDCloudBlobScript.ICloudBlob[0]).Properties.LastModified
+      do {
             $SelectReadHost = Read-Host -Prompt "Select a Windows Image to apply by Number"
         }
         until (((($SelectReadHost -ge 0) -and ($SelectReadHost -in $Results.Number))))
 
-        $Results = $Results | Where-Object {$_.Number -eq $SelectReadHost}
-        $Results
-
+        $Results | Where-Object {$_.Number -eq $SelectReadHost}
+        
         $Global:AzOSDCloudGlobalScripts = $Global:AzOSDCloudBlobScript | Where-Object {$_.Name -eq $Results.Blob}
         $Global:AzOSDCloudGlobalScripts = $Global:AzOSDCloudGlobalScripts | Where-Object {$_.BlobClient.BlobContainerName -eq $Results.Container}
         $Global:AzOSDCloudGlobalScripts = $Global:AzOSDCloudGlobalScripts | Where-Object {$_.BlobClient.AccountName -eq $Results.StorageAccount}
@@ -103,16 +115,15 @@ function Start-AzOSDPADbeta {
         #=================================================
         #   Invoke-OSDCloud.ps1
         #=================================================
-        Write-Host -ForegroundColor DarkGray "========================================================================="
-        Write-Host -ForegroundColor Green "Invoke-OSDCloud ... Starting in 5 seconds..."
-        Start-Sleep -Seconds 5
-        #Invoke-OSDCloud
+        #>
+       Write-Host -ForegroundColor DarkGray "========================================================================="
+
     }
     else {
-        Write-Warning 'Unable to find a WIM on any of the OSDCloud Azure Storage Containers'
-        Write-Warning 'Make sure you have a WIM Windows Image in the OSDCloud Azure Storage Container'
+        Write-Warning 'Unable to find scripts on any of the OSDScripts Azure Storage Containers'
+        Write-Warning 'Make sure you have a scripts file or unattened in the OSDScripts Azure Storage Container'
         Write-Warning 'Make sure this user has the Azure Storage Blob Data Reader role to the OSDCloud Container'
-        Write-Warning 'You may need to execute Get-AzOSDCloudBlobImage then Start-AzOSDCloud'
+        Write-Warning 'You may need to execute Get-AzOSDCloudBScript'
     }
 }
 #endregion
