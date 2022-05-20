@@ -63,7 +63,7 @@ Invoke-Expression -Command (Invoke-RestMethod -Uri functions.osdcloud.com)
 #region WinPE
 if ($WindowsPhase -eq 'WinPE') {
     osdcloud-StartWinPE
-    osdcloud-InstallCurl
+    osdcloud-WinpeInstallCurl
     $null = Stop-Transcript -ErrorAction Ignore
 }
 #endregion
