@@ -90,7 +90,7 @@ function osdcloud-UpdateHPTPM {
     if ($logsuffix -ne "NA"){
         write-output "Determined TPM Update $logsuffix required"
         if ((Get-BitLockerVolume -MountPoint $env:SystemDrive -ErrorAction SilentlyContinue).ProtectionStatus -eq "ON"){
-            Suspend-BitLocker -MountPoint $env:SystemDrive -RebootCount 2}
+            Suspend-BitLocker -MountPoint $env:SystemDrive -RebootCount 2 | Out-Null}
         $extractPath = osdcloud-DownloadHPTPM -WorkingFolder $WorkingFolder
         if (!(Test-Path -Path $extractPath)){Throw "Failed to Locate Update Path"}
         $Process = "$extractPath\TPMConfig64.exe"
