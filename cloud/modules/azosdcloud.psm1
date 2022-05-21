@@ -46,7 +46,7 @@ function Get-AzOSDCloudBlobImage {
                 if ($StorageContainers) {
                     foreach ($Container in $StorageContainers) {
                         Write-Host -ForegroundColor DarkGray "Storage Account: $($Item.StorageAccountName) Container: $($Container.Name)"
-                        $Global:AzOSDCloudBlobImage += Get-AzStorageBlob -Context $Global:AzCurrentStorageContext -Container $Container.Name -Blob *.wim -ErrorAction Ignore
+                        $Global:AzOSDCloudBlobImage += Get-AzStorageBlob -Context $Global:AzCurrentStorageContext -Container $Container.Name -Blob *.wim,*.iso -ErrorAction Ignore
                     }
                 }
             }
