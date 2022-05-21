@@ -7,9 +7,9 @@
     This module is designed to work in WinPE or Full
     This module is for HP Devices and leveraged HP Tools
 .LINK
-    https://raw.githubusercontent.com/OSDeploy/OSD/master/cloud/modules/DevicesHP.psm1
+    https://raw.githubusercontent.com/OSDeploy/OSD/master/cloud/modules/deviceshp.psm1
 .EXAMPLE
-    Invoke-Expression (Invoke-RestMethod -Uri 'https://raw.githubusercontent.com/OSDeploy/OSD/master/cloud/modules/DevicesHP.psm1')
+    Invoke-Expression (Invoke-RestMethod -Uri 'https://raw.githubusercontent.com/OSDeploy/OSD/master/cloud/modules/deviceshp.psm1')
 #>
 #=================================================
 #region Functions
@@ -87,6 +87,7 @@ function osdcloud-StartHPTPMUpdate {
     
     $Process = "$path\TPMConfig64.exe"
     #Create Argument List
+    if (!($logsuffix)){$logsuffix = "Update"}
     if ($filename -and $spec){$TPMArg = "-s -f$filename -a$spec -l$($env:temp)\TPMConfig_$($logsuffix).log"}
     elseif ($filename -and !($spec)) { $TPMArg = "-s -f$filename -l$($env:temp)\TPMConfig_$($logsuffix).log"}
     elseif (!($filename) -and $spec) { $TPMArg = "-s -a$spec -l$($env:temp)\TPMConfig_$($logsuffix).log"}
@@ -100,10 +101,17 @@ function osdcloud-StartHPTPMUpdate {
 function osdcloud-UpdateHPTPM {
     [CmdletBinding()]
     param ($WorkingFolder)
-    $extractPath = osdcloud-DownloadHPTPM -WorkingFolder $WorkingFolder
-    if (!(Test-Path -Path $extractPath)){Throw "Failed to Locate Update Path"}
-    osdcloud-StartHPTPMUpdate -path $extractPath
-
+    $logsuffix = osdcloud-DetermineHPTPM
+    if ($logsuffix -ne "NA"){
+        if ((Get-BitLockerVolume -MountPoint $env:SystemDrive -ErrorAction SilentlyContinue).ProtectionStatus -eq "ON"){
+            Suspend-BitLocker -MountPoint $env:SystemDrive -RebootCount 2}
+        $extractPath = osdcloud-DownloadHPTPM -WorkingFolder $WorkingFolder
+        if (!(Test-Path -Path $extractPath)){Throw "Failed to Locate Update Path"}
+        osdcloud-StartHPTPMUpdate -path $extractPath -logsuffix $logsuffix
+    }
+    else {
+        return "No TPM Update Available"
+    }
 }
 
 
