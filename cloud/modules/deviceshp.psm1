@@ -75,7 +75,7 @@ function osdcloud-DownloadHPTPM {
 function osdcloud-UpdateHPTPM {
     [CmdletBinding()]
     Param (
-        [Parameter(Mandatory=$true)]
+        [Parameter(Mandatory=$false)]
         $path,
         [Parameter(Mandatory=$false)]
         $filename,
@@ -88,6 +88,7 @@ function osdcloud-UpdateHPTPM {
         )
     $logsuffix = osdcloud-DetermineHPTPM
     if ($logsuffix -ne "NA"){
+        write-output "Determined TPM Update $logsuffix required"
         if ((Get-BitLockerVolume -MountPoint $env:SystemDrive -ErrorAction SilentlyContinue).ProtectionStatus -eq "ON"){
             Suspend-BitLocker -MountPoint $env:SystemDrive -RebootCount 2}
         $extractPath = osdcloud-DownloadHPTPM -WorkingFolder $WorkingFolder
