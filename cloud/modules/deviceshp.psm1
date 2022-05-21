@@ -54,26 +54,23 @@ function osdcloud-DownloadHPTPM {
     [CmdletBinding()]
     param ($WorkingFolder)
     osdcloud-InstallModuleHPCMSL
-    if ($Module){
-        $TPMUpdate = osdcloud-DetermineHPTPM
-        if ($TPMUpdate -ne "NA")
-            {
-            if ((!($WorkingFolder))-or ($null -eq $WorkingFolder)){$WorkingFolder = "$env:TEMP\TPM"}
-            if (!(Test-Path -Path $WorkingFolder)){New-Item -Path $WorkingFolder -ItemType Directory -Force |Out-Null}
-            $UpdatePath = "$WorkingFolder\$TPMUpdate.exe"
-            $extractPath = "$WorkingFolder\$TPMUpdate"
-            Write-Host "Starting downlaod & Install of TPM Update $TPMUpdate"
-            Get-Softpaq -Number $TPMUpdate -SaveAs $UpdatePath -Overwrite yes
-            if (!(Test-Path -Path $UpdatePath)){Throw "Failed to Download TPM Update"}
-            Start-Process -FilePath $UpdatePath -ArgumentList "/s /e /f $extractPath" -Wait
-            if (!(Test-Path -Path $UpdatePath)){Throw "Failed to Extract TPM Update"}
-            else {
-                Return $UpdatePath
-                }
+    Import-Module -Name HPCMSL -Force
+    $TPMUpdate = osdcloud-DetermineHPTPM
+    if ($TPMUpdate -ne "NA")
+        {
+        if ((!($WorkingFolder))-or ($null -eq $WorkingFolder)){$WorkingFolder = "$env:TEMP\TPM"}
+        if (!(Test-Path -Path $WorkingFolder)){New-Item -Path $WorkingFolder -ItemType Directory -Force |Out-Null}
+        $UpdatePath = "$WorkingFolder\$TPMUpdate.exe"
+        $extractPath = "$WorkingFolder\$TPMUpdate"
+        Write-Host "Starting downlaod & Install of TPM Update $TPMUpdate"
+        Get-Softpaq -Number $TPMUpdate -SaveAs $UpdatePath -Overwrite yes
+        if (!(Test-Path -Path $UpdatePath)){Throw "Failed to Download TPM Update"}
+        Start-Process -FilePath $UpdatePath -ArgumentList "/s /e /f $extractPath" -Wait
+        if (!(Test-Path -Path $UpdatePath)){Throw "Failed to Extract TPM Update"}
+        else {
+            Return $UpdatePath
             }
-        }
-    else {throw "Unable to load HPCMSL"}
-    
+        }    
 }
 function osdcloud-StartHPTPMUpdate {
     [CmdletBinding()]
