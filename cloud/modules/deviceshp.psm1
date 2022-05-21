@@ -68,7 +68,7 @@ function osdcloud-DownloadHPTPM {
         Start-Process -FilePath $UpdatePath -ArgumentList "/s /e /f $extractPath" -Wait
         if (!(Test-Path -Path $UpdatePath)){Throw "Failed to Extract TPM Update"}
         else {
-            Return $UpdatePath
+            Return $extractPath
             }
         }    
 }
@@ -100,9 +100,9 @@ function osdcloud-StartHPTPMUpdate {
 function osdcloud-UpdateHPTPM {
     [CmdletBinding()]
     param ($WorkingFolder)
-    $UpdatePath = osdcloud-DownloadHPTPM -WorkingFolder $WorkingFolder
-    if (!(Test-Path -Path $UpdatePath)){Throw "Failed to Locate Update Path"}
-    osdcloud-StartHPTPMUpdate -path $UpdatePath
+    $extractPath = osdcloud-DownloadHPTPM -WorkingFolder $WorkingFolder
+    if (!(Test-Path -Path $extractPath)){Throw "Failed to Locate Update Path"}
+    osdcloud-StartHPTPMUpdate -path $extractPath
 
 }
 
