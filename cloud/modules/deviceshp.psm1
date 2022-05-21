@@ -44,6 +44,7 @@ function osdcloud-InstallModuleHPCMSL {
     Import-Module -Name $PSModuleName -Force -Global -ErrorAction SilentlyContinue
 }
 function osdcloud-DetermineHPTPM{
+    osdcloud-InstallModuleHPCMSL
     $SP87753 = Get-CimInstance  -Namespace "root\cimv2\security\MicrosoftTPM" -query "select * from win32_tpm where IsEnabled_InitialValue = 'True' and ((ManufacturerVersion like '7.%' and ManufacturerVersion < '7.63.3353') or (ManufacturerVersion like '5.1%') or (ManufacturerVersion like '5.60%') or (ManufacturerVersion like '5.61%') or (ManufacturerVersion like '4.4%') or (ManufacturerVersion like '6.40%') or (ManufacturerVersion like '6.41%') or (ManufacturerVersion like '6.43.243.0') or (ManufacturerVersion like '6.43.244.0'))"
     $SP94937 = Get-CimInstance  -Namespace "root\cimv2\security\MicrosoftTPM" -query "select * from win32_tpm where IsEnabled_InitialValue = 'True' and ((ManufacturerVersion like '7.62%') or (ManufacturerVersion like '7.63%') or (ManufacturerVersion like '7.83%') or (ManufacturerVersion like '6.43%') )"
     if ($SP87753){Return SP87753}
@@ -53,8 +54,7 @@ function osdcloud-DetermineHPTPM{
 function osdcloud-DownloadHPTPM {
     [CmdletBinding()]
     param ($WorkingFolder)
-    $ImportModule = Import-Module -Name HPCMSL -Global -Force -ErrorAction SilentlyContinue
-    $Module = Get-Module -Name HPCMSL -ErrorAction SilentlyContinue
+    osdcloud-InstallModuleHPCMSL
     if ($Module){
         $TPMUpdate = osdcloud-DetermineHPTPM
         if ($TPMUpdate -ne "NA")
