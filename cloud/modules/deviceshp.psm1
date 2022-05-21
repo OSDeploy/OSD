@@ -72,7 +72,7 @@ function osdcloud-DownloadHPTPM {
             }
         }    
 }
-function osdcloud-StartHPTPMUpdate {
+function osdcloud-UpdateHPTPM {
     [CmdletBinding()]
     Param (
         [Parameter(Mandatory=$true)]
@@ -82,32 +82,26 @@ function osdcloud-StartHPTPMUpdate {
         [Parameter(Mandatory=$false)]
         $spec,
         [Parameter(Mandatory=$false)]
-        $logsuffix
+        $logsuffix,
+        [Parameter(Mandatory=$false)]
+        $WorkingFolder
         )
-    
-    $Process = "$path\TPMConfig64.exe"
-    #Create Argument List
-    if (!($logsuffix)){$logsuffix = "Update"}
-    if ($filename -and $spec){$TPMArg = "-s -f$filename -a$spec -l$($env:temp)\TPMConfig_$($logsuffix).log"}
-    elseif ($filename -and !($spec)) { $TPMArg = "-s -f$filename -l$($env:temp)\TPMConfig_$($logsuffix).log"}
-    elseif (!($filename) -and $spec) { $TPMArg = "-s -a$spec -l$($env:temp)\TPMConfig_$($logsuffix).log"}
-    elseif (!($filename) -and !($spec)) { $TPMArg = "-s -l$($env:temp)\TPMConfig_$($logsuffix).log"}
-    
-    Write-Output "Running Command: Start-Process -FilePath $Process -ArgumentList $TPMArg -PassThru -Wait"
-    
-    $TPMUpdate = Start-Process -FilePath $Process -ArgumentList $TPMArg -PassThru -Wait
-    write-output "TPMUpdate Exit Code: $($TPMUpdate.exitcode)"
-    }
-function osdcloud-UpdateHPTPM {
-    [CmdletBinding()]
-    param ($WorkingFolder)
     $logsuffix = osdcloud-DetermineHPTPM
     if ($logsuffix -ne "NA"){
         if ((Get-BitLockerVolume -MountPoint $env:SystemDrive -ErrorAction SilentlyContinue).ProtectionStatus -eq "ON"){
             Suspend-BitLocker -MountPoint $env:SystemDrive -RebootCount 2}
         $extractPath = osdcloud-DownloadHPTPM -WorkingFolder $WorkingFolder
         if (!(Test-Path -Path $extractPath)){Throw "Failed to Locate Update Path"}
-        osdcloud-StartHPTPMUpdate -path $extractPath -logsuffix $logsuffix
+        $Process = "$extractPath\TPMConfig64.exe"
+        #Create Argument List
+        if ($filename -and $spec){$TPMArg = "-s -f$filename -a$spec -l$($env:temp)\TPMConfig_$($logsuffix).log"}
+        elseif ($filename -and !($spec)) { $TPMArg = "-s -f$filename -l$($env:temp)\TPMConfig_$($logsuffix).log"}
+        elseif (!($filename) -and $spec) { $TPMArg = "-s -a$spec -l$($env:temp)\TPMConfig_$($logsuffix).log"}
+        elseif (!($filename) -and !($spec)) { $TPMArg = "-s -l$($env:temp)\TPMConfig_$($logsuffix).log"}
+        
+        Write-Output "Running Command: Start-Process -FilePath $Process -ArgumentList $TPMArg -PassThru -Wait"
+        $TPMUpdate = Start-Process -FilePath $Process -ArgumentList $TPMArg -PassThru -Wait
+        write-output "TPMUpdate Exit Code: $($TPMUpdate.exitcode)"
     }
     else {
         return "No TPM Update Available"
