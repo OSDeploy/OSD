@@ -102,7 +102,7 @@ function osdcloud-UpdateHPTPM {
     param ($WorkingFolder)
     $UpdatePath = osdcloud-DownloadHPTPM -WorkingFolder $WorkingFolder
     if (!(Test-Path -Path $UpdatePath)){Throw "Failed to Locate Update Path"}
-    osdcloud-StartHPTPMUpdate -path $extractPath
+    osdcloud-StartHPTPMUpdate -path $UpdatePath
 
 }
 
