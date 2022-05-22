@@ -133,6 +133,9 @@ function Get-OSDCatalogHPDriverPack {
             $Name = "$Name $($Item.SoftPaqId)"
             #$Name = ($Name).Replace(' A 1','')
 
+            $UniqueName = "$($Item.SystemName) $($Item.OSName) $($($Item.SoftPaqId))"
+            $UniqueName = $UniqueName.Replace('Windows 10 64-bit,', 'Win10')
+            $UniqueName = $UniqueName.Replace('Windows 11 64-bit,', 'Win11')
 
             $ObjectProperties = [Ordered]@{
                 CatalogVersion 	= Get-Date -Format yy.MM.dd
@@ -140,7 +143,7 @@ function Get-OSDCatalogHPDriverPack {
                 Component       = 'DriverPack'
                 ReleaseDate     = (Get-Date $HpSoftPaq.DateReleased -Format "yy.MM.dd")
                 Manufacturer    = 'HP'
-                Name            = $Name
+                Name            = $UniqueName
                 Model           = $Item.SystemName
                 SystemId        = [array]$Item.SystemId.split(',').Trim()
                 SoftPaqId       = $Item.SoftPaqId

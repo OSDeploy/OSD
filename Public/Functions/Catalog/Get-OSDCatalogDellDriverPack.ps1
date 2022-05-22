@@ -140,7 +140,7 @@ function Get-OSDCatalogDellDriverPack {
                 Component		    = "DriverPack"
                 ReleaseDate		    = Get-Date $Item.dateTime -Format "yy.MM.dd"
                 Manufacturer        = 'Dell'
-                Name		        = $Name
+                Name		        = "Dell $Name"
                 #Description		= ($Item.Description.Display.'#cdata-section'.Trim())
                 DellVersion		    = $Item.dellVersion
                 Url		            = -join ($DownloadsBaseUrl, $Item.path)

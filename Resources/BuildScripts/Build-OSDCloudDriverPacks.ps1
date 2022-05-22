@@ -5,6 +5,7 @@ Import-Module -Name OSD -Force
 Import-Module -Name OSD -Force
 Start-Transcript -Path (Join-Path (Get-Module OSD).ModuleBase "Catalogs\OSDCatalog\OSDCatalogDellDriverPack.log")
 $null = Get-OSDCatalogDellDriverPack -Force -Verbose -TestUrl
+#$null = Get-OSDCatalogDellDriverPack -Force -Verbose
 $Source = Join-Path $env:TEMP (Join-Path 'OSD' 'OSDCatalogDellDriverPack.xml')
 $Destination = Join-Path (Get-Module OSD).ModuleBase "Catalogs\OSDCatalog\OSDCatalogDellDriverPack.xml"
 if (Test-Path $Source) {
@@ -18,6 +19,7 @@ Stop-Transcript
 Import-Module -Name OSD -Force
 Start-Transcript -Path (Join-Path (Get-Module OSD).ModuleBase "Catalogs\OSDCatalog\OSDCatalogLenovoDriverPack.log")
 $null = Get-OSDCatalogLenovoDriverPack -Force -Verbose -TestUrl
+#$null = Get-OSDCatalogLenovoDriverPack -Force -Verbose
 $Source = Join-Path $env:TEMP (Join-Path 'OSD' 'OSDCatalogLenovoDriverPack.xml')
 $Destination = Join-Path (Get-Module OSD).ModuleBase "Catalogs\OSDCatalog\OSDCatalogLenovoDriverPack.xml"
 if (Test-Path $Source) {
@@ -28,16 +30,7 @@ Stop-Transcript
 #=================================================
 #   MicrosoftDriverPackCatalog
 #=================================================
-Import-Module -Name OSD -Force
-Start-Transcript -Path (Join-Path (Get-Module OSD).ModuleBase "Catalogs\OSDCatalog\OSDCatalogMicrosoftDriverPack.log")
-$MasterDriverPacks = @()
-$null = Get-OSDCatalogMicrosoftDriverPack -Force -Verbose
-$Source = Join-Path $env:TEMP (Join-Path 'OSD' 'OSDCatalogMicrosoftDriverPack.json')
-$Destination = Join-Path (Get-Module OSD).ModuleBase "Catalogs\OSDCatalog\OSDCatalogMicrosoftDriverPack.json"
-if (Test-Path $Source) {
-    Copy-Item $Source $Destination -Force
-}
-Stop-Transcript
+
 #=================================================
 #   HPDriverPackCatalog
 #=================================================

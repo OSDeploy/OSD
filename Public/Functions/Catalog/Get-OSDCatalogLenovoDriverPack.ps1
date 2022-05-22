@@ -106,7 +106,7 @@ function Get-OSDCatalogLenovoDriverPack {
                     Manufacturer    = 'Lenovo'
                     Model           = $Model.name
                     Product			= [array]$Model.Types.Type.split(',').Trim()
-                    Name			= $Model.name
+                    Name			= "Lenovo $($Model.name)"
                     PackageID       = $null
                     FileName        = $DownloadUrl | Split-Path -Leaf
                     Url             = $DownloadUrl

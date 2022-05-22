@@ -301,7 +301,19 @@ $GuiBlobs | ForEach-Object {
 }
 $formMainWindowControlBlobCombobox.SelectedIndex = 0
 #================================================
-#   StorageAccountCombobox
+#   DriverPack
+#================================================
+$DriverPack = Get-OSDCloudDriverPack
+$DriverPacks = @()
+$DriverPacks = Get-OSDCloudDriverPacks
+$DriverPacks | ForEach-Object {
+    $formMainWindowControlDriverPackCombobox.Items.Add($_.Name) | Out-Null
+}
+if ($DriverPack) {
+    $formMainWindowControlDriverPackCombobox.SelectedValue = $DriverPack.Name
+}
+#================================================
+#   StorageAccountCombobox SelectionChanged
 #================================================
 $formMainWindowControlStorageAccountCombobox.add_SelectionChanged({
     $formMainWindowControlContainerCombobox.Items.Clear()
@@ -358,6 +370,8 @@ $formMainWindowControlStartButton.add_Click({
     #================================================
     $Global:StartOSDCloud = $null
     $Global:StartOSDCloud = [ordered]@{
+        ApplyCatalogFirmware        = $formMainWindowControlCatalogFirmwareCheckbox.IsChecked
+        DriverPackName              = $formMainWindowControlDriverPackCombobox.SelectedValue
         OSImageIndex                = $formMainWindowControlImageIndexTextbox.Text
         Restart                     = $formMainWindowControlRestartCheckbox.IsChecked
         ZTI                         = $formMainWindowControlZTICheckbox.IsChecked
@@ -369,13 +383,13 @@ $formMainWindowControlStartButton.add_Click({
 #   Customizations
 #================================================
 [string]$ModuleVersion = Get-Module -Name OSD | Sort-Object -Property Version | Select-Object -ExpandProperty Version -Last 1
-$formMainWindow.Title = "AzOSDCloudGUI $ModuleVersion"
+$formMainWindow.Title = "AzOSDCloudGUI $ModuleVersion on $(Get-MyComputerManufacturer -Brief) $(Get-MyComputerModel -Brief) $(Get-MyComputerProduct)"
 #================================================
 #   Branding
 #================================================
 if ($Global:OSDCloudGuiBranding) {
-    $formMainWindowControlBrandingTitleControl.Content = $Global:OSDCloudGuiBranding.Title
-    $formMainWindowControlBrandingTitleControl.Foreground = $Global:OSDCloudGuiBranding.Color
+    #$formMainWindowControlBrandingTitleControl.Content = $Global:OSDCloudGuiBranding.Title
+    #$formMainWindowControlBrandingTitleControl.Foreground = $Global:OSDCloudGuiBranding.Color
 }
 #================================================
 #   Hide Windows

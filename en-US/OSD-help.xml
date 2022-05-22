@@ -12119,9 +12119,9 @@ Original credit to Mike Robbins http://mikefrobbins.com/2018/01/18/use-powershel
   </command:command>
   <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
     <command:details>
-      <command:name>Get-OSDCloudDriverPackList</command:name>
+      <command:name>Get-OSDCloudDriverPacks</command:name>
       <command:verb>Get</command:verb>
-      <command:noun>OSDCloudDriverPackList</command:noun>
+      <command:noun>OSDCloudDriverPacks</command:noun>
       <maml:description>
         <maml:para>Returns the DriverPacks used by OSDCloud</maml:para>
       </maml:description>
@@ -12131,7 +12131,7 @@ Original credit to Mike Robbins http://mikefrobbins.com/2018/01/18/use-powershel
     </maml:description>
     <command:syntax>
       <command:syntaxItem>
-        <maml:name>Get-OSDCloudDriverPackList</maml:name>
+        <maml:name>Get-OSDCloudDriverPacks</maml:name>
       </command:syntaxItem>
     </command:syntax>
     <command:parameters />

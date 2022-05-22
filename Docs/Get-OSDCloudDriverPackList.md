@@ -5,7 +5,7 @@ online version: https://github.com/OSDeploy/OSD/tree/master/Docs
 schema: 2.0.0
 ---
 
-# Get-OSDCloudDriverPackList
+# Get-OSDCloudDriverPacks
 
 ## SYNOPSIS
 Returns the DriverPacks used by OSDCloud
@@ -13,7 +13,7 @@ Returns the DriverPacks used by OSDCloud
 ## SYNTAX
 
 ```
-Get-OSDCloudDriverPackList [<CommonParameters>]
+Get-OSDCloudDriverPacks [<CommonParameters>]
 ```
 
 ## DESCRIPTION

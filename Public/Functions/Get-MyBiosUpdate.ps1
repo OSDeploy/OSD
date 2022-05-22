@@ -24,7 +24,7 @@ function Get-MyBiosUpdate {
         $Result[0]
     }
     else {
-        Write-Warning "$Manufacturer is not supported yet"
+        Write-Verbose "$Manufacturer is not supported yet"
     }
     #=================================================
 }

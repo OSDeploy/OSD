@@ -264,15 +264,15 @@ function Invoke-OSDCloudDisk {
     $SaveMyDriverPack = $null
     if ($Global:OSDCloud.ApplyManufacturerDrivers -eq $true) {
         if ($Global:OSDCloud.Product -ne 'None') {
-            if ($Global:OSDCloud.GetMyDriverPack -or $Global:OSDCloud.DriverPackUrl -or $Global:OSDCloud.DriverPackOffline) {
+            if ($Global:OSDCloud.DriverPack -or $Global:OSDCloud.DriverPackUrl -or $Global:OSDCloud.DriverPackOffline) {
                 Write-Host -ForegroundColor DarkGray "========================================================================="
                 Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Save-MyDriverPack"
                 
-                if ($Global:OSDCloud.GetMyDriverPack) {
-                    Write-Host -ForegroundColor DarkGray "Name: $($Global:OSDCloud.GetMyDriverPack.Name)"
-                    Write-Host -ForegroundColor DarkGray "Product: $($Global:OSDCloud.GetMyDriverPack.Product)"
-                    Write-Host -ForegroundColor DarkGray "FileName: $($Global:OSDCloud.GetMyDriverPack.FileName)"
-                    Write-Host -ForegroundColor DarkGray "DriverPackUrl: $($Global:OSDCloud.GetMyDriverPack.DriverPackUrl)"
+                if ($Global:OSDCloud.DriverPack) {
+                    Write-Host -ForegroundColor DarkGray "Name: $($Global:OSDCloud.DriverPack.Name)"
+                    Write-Host -ForegroundColor DarkGray "Product: $($Global:OSDCloud.DriverPack.Product)"
+                    Write-Host -ForegroundColor DarkGray "FileName: $($Global:OSDCloud.DriverPack.FileName)"
+                    Write-Host -ForegroundColor DarkGray "DriverPackUrl: $($Global:OSDCloud.DriverPack.DriverPackUrl)"
     
                     if ($Global:OSDCloud.DriverPackOffline) {
                         $Global:OSDCloud.DriverPackSource = Find-OSDCloudFile -Name (Split-Path -Path $Global:OSDCloud.DriverPackOffline -Leaf) -Path (Split-Path -Path (Split-Path -Path $Global:OSDCloud.DriverPackOffline.FullName -Parent) -NoQualifier) | Select-Object -First 1

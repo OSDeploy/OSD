@@ -1,13 +1,13 @@
 ﻿**********************
 Windows PowerShell transcript start
-Start time: 20220519145355
+Start time: 20220521232439
 Username: OSDCODE\David
 RunAs User: OSDCODE\David
 Configuration Name: 
 Machine: OSDCODE (Microsoft Windows NT 10.0.22000.0)
 Host Application: C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe -NoProfile -ExecutionPolicy Bypass -Command Import-Module 'c:\Users\David\.vscode\extensions\ms-vscode.powershell-2022.5.1\modules\PowerShellEditorServices\PowerShellEditorServices.psd1'; Start-EditorServices -HostName 'Visual Studio Code Host' -HostProfileId 'Microsoft.VSCode' -HostVersion '2022.5.1' -AdditionalModules @('PowerShellEditorServices.VSCode') -BundledModulesPath 'c:\Users\David\.vscode\extensions\ms-vscode.powershell-2022.5.1\modules' -EnableConsoleRepl -StartupBanner '=====> PowerShell Integrated Console v2022.5.1 <=====
-' -LogLevel 'Normal' -LogPath 'c:\Users\David\.vscode\extensions\ms-vscode.powershell-2022.5.1\logs\1652988971-72305533-00fd-4fd0-8373-951f58fb81961652988970849\EditorServices.log' -SessionDetailsPath 'c:\Users\David\.vscode\extensions\ms-vscode.powershell-2022.5.1\sessions\PSES-VSCode-10560-592772' -FeatureFlags @() 
-Process ID: 24416
+' -LogLevel 'Normal' -LogPath 'c:\Users\David\.vscode\extensions\ms-vscode.powershell-2022.5.1\logs\1653116965-b3ebfed4-8af5-468e-80ea-e4390a67b4dd1653116962490\EditorServices.log' -SessionDetailsPath 'c:\Users\David\.vscode\extensions\ms-vscode.powershell-2022.5.1\sessions\PSES-VSCode-20280-434106' -FeatureFlags @() 
+Process ID: 13108
 PSVersion: 5.1.22000.653
 PSEdition: Desktop
 PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1.22000.653
@@ -30,5 +30,5 @@ WARNING: Building Catalog content, please wait ...
 VERBOSE: Exporting Build Catalog to C:\Users\David\AppData\Local\Temp\OSD\OSDCatalogHPDriverPack.xml
 **********************
 Windows PowerShell transcript end
-End time: 20220519145450
+End time: 20220521232534
 **********************

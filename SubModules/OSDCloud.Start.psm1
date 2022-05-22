@@ -13,12 +13,10 @@ function Start-OSDCloud {
     [CmdletBinding(DefaultParameterSetName = 'Default')]
     param (
         #Automatically populated from Get-MyComputerManufacturer -Brief
-        #Overrides the System Manufacturer for Driver matching
         [System.String]
         $Manufacturer = (Get-MyComputerManufacturer -Brief),
         
         #Automatically populated from Get-MyComputerProduct
-        #Overrides the System Product for Driver matching
         [System.String]
         $Product = (Get-MyComputerProduct),
 
@@ -114,8 +112,6 @@ function Start-OSDCloud {
     #=================================================
     $Global:StartOSDCloud = $null
     $Global:StartOSDCloud = [ordered]@{
-        ApplyManufacturerDrivers = $true
-        ApplyCatalogDrivers = $true
         ApplyCatalogFirmware = $false
         AutopilotJsonChildItem = $null
         AutopilotJsonItem = $null
@@ -125,13 +121,9 @@ function Start-OSDCloud {
         AutopilotOOBEJsonItem = $null
         AutopilotOOBEJsonName = $null
         AutopilotOOBEJsonObject = $null
-        DriverPackUrl = $null
-        DriverPackOffline = $null
-        DriverPackSource = $null
         Function = $MyInvocation.MyCommand.Name
         GetDiskFixed = $null
         GetFeatureUpdate = $null
-        GetMyDriverPack = $null
         ImageFileFullName = $null
         ImageFileItem = $null
         ImageFileName = $null
@@ -581,39 +573,6 @@ function Start-OSDCloud {
             Write-Warning "Could not verify an Internet connection for Windows Feature Update"
             Write-Warning "OSDCloud cannot continue"
             Break
-        }
-    }
-    #=================================================
-    #	Start-OSDCloud Get-MyDriverPack
-    #=================================================
-    if ($Global:StartOSDCloud.Product -ne 'None') {
-        Write-Host -ForegroundColor DarkGray "========================================================================="
-        Write-Host -ForegroundColor Cyan "Get-MyDriverPack " -NoNewline
-        Write-Host -ForegroundColor DarkGray "-Manufacturer $($Global:StartOSDCloud.Manufacturer) -Product $($Global:StartOSDCloud.Product)"
-
-        $Global:StartOSDCloud.GetMyDriverPack = Get-MyDriverPack -Manufacturer $Global:StartOSDCloud.Manufacturer -Product $Global:StartOSDCloud.Product
-
-        if ($Global:StartOSDCloud.GetMyDriverPack) {
-            $Global:StartOSDCloud.DriverPackOffline = Find-OSDCloudFile -Name $Global:StartOSDCloud.GetMyDriverPack.FileName -Path '\OSDCloud\DriverPacks\' | Sort-Object FullName
-            $Global:StartOSDCloud.DriverPackOffline = $Global:StartOSDCloud.DriverPackOffline | Where-Object {$_.FullName -notlike "C*"} | Where-Object {$_.FullName -notlike "X*"} | Select-Object -First 1
-
-            if ($Global:StartOSDCloud.DriverPackOffline) {
-                Write-Host -ForegroundColor DarkGray $Global:StartOSDCloud.GetMyDriverPack.Name
-                Write-Host -ForegroundColor DarkGray $Global:StartOSDCloud.DriverPackOffline.FullName
-            }
-            elseif (Test-WebConnection -Uri $Global:StartOSDCloud.GetMyDriverPack.DriverPackUrl) {
-                Write-Host -ForegroundColor Yellow $Global:StartOSDCloud.GetMyDriverPack.Name
-                Write-Host -ForegroundColor Yellow $Global:StartOSDCloud.GetMyDriverPack.DriverPackUrl
-            }
-            else {
-                Write-Warning $Global:StartOSDCloud.GetMyDriverPack.Name
-                Write-Warning $Global:StartOSDCloud.GetMyDriverPack.DriverPackUrl
-                Write-Warning "Could not verify an Internet connection for the Driver Pack"
-                Write-Warning "OSDCloud will continue, but there may be issues"
-            }
-        }
-        else {
-            Write-Warning "Unable to determine a suitable Driver Pack for this Computer Model"
         }
     }
     #=================================================

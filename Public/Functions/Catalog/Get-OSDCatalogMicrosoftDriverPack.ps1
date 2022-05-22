@@ -425,6 +425,15 @@ $OSDCatalog = @'
                 $HexObject = $ByteArray | Format-Hex
                 $HashMD5 = ($HexObject.Bytes | ForEach-Object {"{0:X}" -f $_}) -join ''
 
+                $UniqueFileName = $FileName
+                $UniqueFileName = $UniqueFileName -replace '_Win', ' Win'
+                $UniqueFileName = $UniqueFileName.Split(' ')[1]
+                $UniqueFileName = $UniqueFileName -replace 'Win10_', 'Win10 '
+                $UniqueFileName = $UniqueFileName -replace 'Win11_', 'Win11 '
+                $UniqueFileName = $UniqueFileName.Split('_')[0]
+
+                $UniqueName = "Microsoft $($Item.Name) $UniqueFileName"
+
                 $ObjectProperties = [ordered] @{
                     CatalogVersion          = Get-Date -Format yy.MM.dd
                     Status                  = $null
@@ -433,7 +442,7 @@ $OSDCatalog = @'
                     Manufacturer            = 'Microsoft'
                     Model                   = $Item.Model
                     Product                 = $Item.Product
-                    Name                    = $Item.Name
+                    Name                    = $UniqueName
                     PackageID               = $Item.PackageID
                     FileName                = $FileName
                     Url                     = $DownloadUrl

@@ -31,6 +31,8 @@ function Invoke-OSDCloud {
         AutopilotOOBEJsonName = $null
         AutopilotOOBEJsonObject = $null
         BuildName = 'OSDCloud'
+        DriverPack = $null
+        DriverPackName = $null
         DriverPackUrl = $null
         DriverPackOffline = $null
         DriverPackSource = $null
@@ -451,8 +453,7 @@ function Invoke-OSDCloud {
     }
     #endregion
     #=================================================
-    #	Download Image File
-    #=================================================
+    #region Get Image File
     if ($Global:AzOSDCloudImage) {
         #AzOSDCloud
     }
@@ -482,9 +483,9 @@ function Invoke-OSDCloud {
             Break
         }
     }
+    #endregion
     #=================================================
-    #	Download Image File
-    #=================================================
+    #region Download Image File
     if ($Global:AzOSDCloudImage) {
         Write-Host -ForegroundColor DarkGray "========================================================================="
         Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) OSDCloud Azure Storage Image Download"
@@ -493,7 +494,7 @@ function Invoke-OSDCloud {
         $null = New-Item -Path 'C:\OSDCloud\OS' -ItemType Directory -Force -ErrorAction Ignore
 
         Get-AzStorageBlobContent -CloudBlob $Global:AzOSDCloudImage.ICloudBlob -Context $Global:AzOSDCloudImage.Context -Destination 'C:\OSDCloud\OS\'
-        $Global:OSDCloud.ImageFileTarget = Get-ChildItem -Path 'C:\OSDCloud\OS\*' -Include *.wim,*.esd | Select-Object -First 1
+        $Global:OSDCloud.ImageFileTarget = Get-ChildItem -Path 'C:\OSDCloud\OS\*' -Include *.wim,*.esd,*.iso | Select-Object -First 1
     }
     elseif (!($Global:OSDCloud.ImageFileTarget) -and ($Global:OSDCloud.ImageFileUrl)) {
         Write-Host -ForegroundColor DarkGray "========================================================================="
@@ -531,7 +532,7 @@ function Invoke-OSDCloud {
                 $Global:OSDCloud.ImageFileTarget = Save-WebFile -SourceUrl $Global:OSDCloud.ImageFileUrl -DestinationDirectory 'C:\OSDCloud\OS' -ErrorAction Stop
             }
             if (!(Test-Path $Global:OSDCloud.ImageFileTarget.FullName)) {
-                $Global:OSDCloud.ImageFileTarget = Get-ChildItem -Path 'C:\OSDCloud\OS\*' -Include *.wim,*.esd | Select-Object -First 1
+                $Global:OSDCloud.ImageFileTarget = Get-ChildItem -Path 'C:\OSDCloud\OS\*' -Include *.wim,*.esd,*.iso | Select-Object -First 1
             }
         }
         else {
@@ -559,9 +560,36 @@ function Invoke-OSDCloud {
         Start-Sleep -Seconds 30
         Break
     }
+    #endregion
     #=================================================
-    #	Expand-WindowsImage
+    #region ISO Image File
+    if ($Global:OSDCloud.ImageFileTarget.Extension -eq '.iso') {
+        Write-Host -ForegroundColor DarkGray "========================================================================="
+        Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) OSDCloud ISO Deployment"
+        if ((Get-DiskImage -ImagePath $Global:OSDCloud.ImageFileTarget.FullName).Attached) {
+            $Global:IsoVolume = Get-DiskImage -ImagePath $Global:OSDCloud.ImageFileTarget.FullName | Get-Volume
+        }
+        else {
+            Write-Host -ForegroundColor DarkGray "Mounting OS ISO $($Global:OSDCloud.ImageFileTarget.FullName)"
+            $Results = Mount-DiskImage -ImagePath $Global:OSDCloud.ImageFileTarget.FullName -PassThru
+            $Results
+            Start-Sleep -Seconds 8
+            $Global:IsoVolume = $Results | Get-Volume
+        }
+        $Global:IsoVolume
+        $Global:OSDCloud.ImageFileTarget = Get-ChildItem -Path "$($IsoVolume.DriveLetter):\*" -Include *.wim,*.esd -Recurse | Sort-Object Length -Descending | Select-Object -First 1
+
+        if (-not ($Global:OSDCloud.ImageFileTarget)) {
+            Write-Host -ForegroundColor DarkGray "========================================================================="
+            Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) OSDCloud Failed"
+            Write-Warning "Could not verify an Internet connection for the Windows ImageFile"
+            Start-Sleep -Seconds 30
+            Break
+        }
+    }
+    #endregion
     #=================================================
+    #region Expand-WindowsImage
     Write-Host -ForegroundColor DarkGray "========================================================================="
     Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Expand-WindowsImage"
     Write-Verbose -Message "https://docs.microsoft.com/en-us/powershell/module/dism/expand-windowsimage"
@@ -573,7 +601,7 @@ function Invoke-OSDCloud {
     if (Test-Path $Global:OSDCloud.ImageFileTarget.FullName) {
         $ImageCount = (Get-WindowsImage -ImagePath $Global:OSDCloud.ImageFileTarget.FullName).Count
 
-        if (!($Global:OSDCloud.OSImageIndex)) {
+        if ((!($Global:OSDCloud.OSImageIndex)) -or ($Global:OSDCloud.OSImageIndex -eq 'Auto')) {
             if ($ImageCount -eq 1) {
                 Write-Warning "No ImageIndex is specified, setting ImageIndex = 1"
                 $Global:OSDCloud.OSImageIndex = 1
@@ -628,9 +656,9 @@ function Invoke-OSDCloud {
         Start-Sleep -Seconds 30
         Break
     }
+    #endregion
     #=================================================
-    #	Required Directories
-    #=================================================
+    #region Required Directories
     if (-NOT (Test-Path 'C:\Drivers')) {
         New-Item -Path 'C:\Drivers' -ItemType Directory -Force -ErrorAction Stop | Out-Null
     }
@@ -643,98 +671,102 @@ function Invoke-OSDCloud {
     if (-NOT (Test-Path 'C:\Windows\Setup\Scripts')) {
         New-Item -Path 'C:\Windows\Setup\Scripts' -ItemType Directory -Force -ErrorAction Stop | Out-Null
     }
+    #endregion
     #=================================================
     #	ApplyManufacturerDrivers = TRUE
     #=================================================
-    $SaveMyDriverPack = $null
-    if ($Global:OSDCloud.ApplyManufacturerDrivers -eq $true) {
-        if ($Global:OSDCloud.Product -ne 'None') {
-            if ($Global:OSDCloud.GetMyDriverPack -or $Global:OSDCloud.DriverPackUrl -or $Global:OSDCloud.DriverPackOffline) {
-                Write-Host -ForegroundColor DarkGray "========================================================================="
-                Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Save-MyDriverPack"
-                
-                if ($Global:OSDCloud.GetMyDriverPack) {
-                    Write-Host -ForegroundColor DarkGray "-Name $($Global:OSDCloud.GetMyDriverPack.Name)"
-                    Write-Host -ForegroundColor DarkGray "-Product $($Global:OSDCloud.GetMyDriverPack.Product)"
-                    Write-Host -ForegroundColor DarkGray "-FileName $($Global:OSDCloud.GetMyDriverPack.FileName)"
-                    Write-Host -ForegroundColor DarkGray "-DriverPackUrl $($Global:OSDCloud.GetMyDriverPack.DriverPackUrl)"
-    
-                    if ($Global:OSDCloud.DriverPackOffline) {
-                        $Global:OSDCloud.DriverPackSource = Find-OSDCloudFile -Name (Split-Path -Path $Global:OSDCloud.DriverPackOffline -Leaf) -Path (Split-Path -Path (Split-Path -Path $Global:OSDCloud.DriverPackOffline.FullName -Parent) -NoQualifier) | Select-Object -First 1
-                    }
-    
-                    if ($Global:OSDCloud.DriverPackSource) {
-                        Write-Host -ForegroundColor DarkGray "-DriverPackSource $($Global:OSDCloud.DriverPackSource.FullName)"
-                        Copy-Item -Path $Global:OSDCloud.DriverPackSource.FullName -Destination 'C:\Drivers' -Force
-                        
-                        $DriverPacks = Get-ChildItem -Path 'C:\Drivers' -File
+    if ($Global:OSDCloud.DriverPackName) {
+        if ($Global:OSDCloud.DriverPackName -eq 'None') {
+            $Global:OSDCloud.DriverPack = $null
+        }
+        elseif ($Global:OSDCloud.DriverPackName -eq 'Microsoft Catalog Only') {
+            $Global:OSDCloud.DriverPack = $null
+        }
+        else {
+            $Global:OSDCloud.DriverPack = Get-OSDCloudDriverPacks | Where-Object {$_.Name -eq $Global:OSDCloud.DriverPackName} | Select-Object -First 1
+        }
+    }
+    else {
+        $Global:OSDCloud.DriverPack = Get-OSDCloudDriverPack | Select-Object -First 1
+    }
 
-                        foreach ($Item in $DriverPacks) {
-                            $SaveMyDriverPack = $Item.FullName
-                            $ExpandFile = $Item.FullName
-                            Write-Verbose -Verbose "DriverPack: $ExpandFile"
-                            #=================================================
-                            #   Cab
-                            #=================================================
-                            if ($Item.Extension -eq '.cab') {
-                                $DestinationPath = Join-Path $Item.Directory $Item.BaseName
-                    
-                                if (-NOT (Test-Path "$DestinationPath")) {
-                                    New-Item $DestinationPath -ItemType Directory -Force -ErrorAction Ignore | Out-Null
-                
-                                    Write-Verbose -Verbose "Expanding CAB Driver Pack to $DestinationPath"
-                                    Expand -R "$ExpandFile" -F:* "$DestinationPath" | Out-Null
-                                }
-                                Continue
-                            }
-                            #=================================================
-                            #   Zip
-                            #=================================================
-                            if ($Item.Extension -eq '.zip') {
-                                $DestinationPath = Join-Path $Item.Directory $Item.BaseName
-                
-                                if (-NOT (Test-Path "$DestinationPath")) {
-                                    Write-Verbose -Verbose "Expanding ZIP Driver Pack to $DestinationPath"
-                                    Expand-Archive -Path $ExpandFile -DestinationPath $DestinationPath -Force
-                                }
-                                Continue
-                            }
-                            #=================================================
-                        }
+    if ($Global:OSDCloud.DriverPack) {
+        Write-Host -ForegroundColor DarkGray "========================================================================="
+        Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Save OSDCloud Driver Pack"
+
+        Write-Host -ForegroundColor DarkGray "-Name $($Global:OSDCloud.DriverPack.Name)"
+        Write-Host -ForegroundColor DarkGray "-Product $($Global:OSDCloud.DriverPack.Product)"
+        Write-Host -ForegroundColor DarkGray "-FileName $($Global:OSDCloud.DriverPack.FileName)"
+        Write-Host -ForegroundColor DarkGray "-Url $($Global:OSDCloud.DriverPack.Url)"
+
+        $Global:StartOSDCloud.DriverPackOffline = Find-OSDCloudFile -Name $Global:StartOSDCloud.DriverPack.FileName -Path '\OSDCloud\DriverPacks\' | Sort-Object FullName
+        $Global:StartOSDCloud.DriverPackOffline = $Global:StartOSDCloud.DriverPackOffline | Where-Object {$_.FullName -notlike "C*"} | Where-Object {$_.FullName -notlike "X*"} | Select-Object -First 1
+
+        if ($Global:OSDCloud.DriverPackOffline) {
+            Write-Host -ForegroundColor DarkGray $Global:StartOSDCloud.DriverPack.Name
+            Write-Host -ForegroundColor DarkGray $Global:StartOSDCloud.DriverPackOffline.FullName
+            #$Global:OSDCloud.DriverPackSource = Find-OSDCloudFile -Name (Split-Path -Path $Global:OSDCloud.DriverPackOffline -Leaf) -Path (Split-Path -Path (Split-Path -Path $Global:OSDCloud.DriverPackOffline.FullName -Parent) -NoQualifier) | Select-Object -First 1
+            $Global:OSDCloud.DriverPackSource = $Global:StartOSDCloud.DriverPackOffline
+        }
+
+        $SaveMyDriverPack = $null
+
+        if ($Global:OSDCloud.DriverPackSource) {
+            Write-Host -ForegroundColor DarkGray "-DriverPackSource $($Global:OSDCloud.DriverPackSource.FullName)"
+            Copy-Item -Path $Global:OSDCloud.DriverPackSource.FullName -Destination 'C:\Drivers' -Force
+            
+            $DriverPacks = Get-ChildItem -Path 'C:\Drivers' -File
+
+            foreach ($Item in $DriverPacks) {
+                $SaveMyDriverPack = $Item.FullName
+                $ExpandFile = $Item.FullName
+                Write-Verbose -Verbose "DriverPack: $ExpandFile"
+                #=================================================
+                #   Cab
+                #=================================================
+                if ($Item.Extension -eq '.cab') {
+                    $DestinationPath = Join-Path $Item.Directory $Item.BaseName
+        
+                    if (-NOT (Test-Path "$DestinationPath")) {
+                        New-Item $DestinationPath -ItemType Directory -Force -ErrorAction Ignore | Out-Null
+    
+                        Write-Verbose -Verbose "Expanding CAB Driver Pack to $DestinationPath"
+                        Expand -R "$ExpandFile" -F:* "$DestinationPath" | Out-Null
                     }
-                    elseif ($Global:OSDCloud.Manufacturer -in ('Dell','HP','Lenovo','Microsoft')) {
-                        $SaveMyDriverPack = Save-MyDriverPack -DownloadPath 'C:\Drivers' -Expand -Manufacturer $Global:OSDCloud.Manufacturer -Product $Global:OSDCloud.Product
-                    }
-                    else {
-                        $SaveMyDriverPack = Save-MyDriverPack -DownloadPath 'C:\Drivers' -Expand -Product $Global:OSDCloud.Product
-                    }
+                    Continue
                 }
-                elseif ($Global:OSDCloud.DriverPackUrl) {
-                    $SaveMyDriverPack = Save-WebFile -SourceUrl $Global:OSDCloud.DriverPackUrl -DestinationDirectory 'C:\Drivers'
+                #=================================================
+                #   Zip
+                #=================================================
+                if ($Item.Extension -eq '.zip') {
+                    $DestinationPath = Join-Path $Item.Directory $Item.BaseName
+    
+                    if (-NOT (Test-Path "$DestinationPath")) {
+                        Write-Verbose -Verbose "Expanding ZIP Driver Pack to $DestinationPath"
+                        Expand-Archive -Path $ExpandFile -DestinationPath $DestinationPath -Force
+                    }
+                    Continue
                 }
-                else {
-                    if ($Global:OSDCloud.Manufacturer -in ('Dell','HP','Lenovo','Microsoft')) {
-                        $SaveMyDriverPack = Save-MyDriverPack -DownloadPath 'C:\Drivers' -Expand -Manufacturer $Global:OSDCloud.Manufacturer -Product $Global:OSDCloud.Product
+                #=================================================
+            }
+        }
+        elseif ($Global:OSDCloud.DriverPack.Guid) {
+            $SaveMyDriverPack = Save-MyDriverPack -DownloadPath 'C:\Drivers' -Expand -Guid $Global:OSDCloud.DriverPack.Guid
+        }
+
+        if ($SaveMyDriverPack) {
+            if (-not ($Global:OSDCloud.DriverPackSource)) {
+                #=================================================
+                #	Cache to OSDCloudUSB
+                #=================================================
+                $OSDCloudUSB = Get-Volume.usb | Where-Object {($_.FileSystemLabel -match 'OSDCloud') -or ($_.FileSystemLabel -match 'BHIMAGE')} | Where-Object {$_.SizeGB -ge 8} | Where-Object {$_.SizeRemainingGB -ge 2} | Select-Object -First 1
+                if ($OSDCloudUSB) {
+                    $OSDCloudUSBDestination = "$($OSDCloudUSB.DriveLetter):\OSDCloud\DriverPacks\$($Global:OSDCloud.Manufacturer)"
+                    Write-Host -ForegroundColor Yellow "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Copying Driver Pack to OSDCloudUSB at $OSDCloudUSBDestination"
+                    If (! (Test-Path $OSDCloudUSBDestination)) {
+                        $null = New-Item -Path $OSDCloudUSBDestination -ItemType Directory -Force
                     }
-                    else {
-                        $SaveMyDriverPack = Save-MyDriverPack -DownloadPath 'C:\Drivers' -Expand -Product $Global:OSDCloud.Product
-                    }
-                }
-                if ($SaveMyDriverPack) {
-                    if (-not ($Global:OSDCloud.DriverPackSource)) {
-                        #=================================================
-                        #	Cache to OSDCloudUSB
-                        #=================================================
-                        $OSDCloudUSB = Get-Volume.usb | Where-Object {($_.FileSystemLabel -match 'OSDCloud') -or ($_.FileSystemLabel -match 'BHIMAGE')} | Where-Object {$_.SizeGB -ge 8} | Where-Object {$_.SizeRemainingGB -ge 2} | Select-Object -First 1
-                        if ($OSDCloudUSB) {
-                            $OSDCloudUSBDestination = "$($OSDCloudUSB.DriveLetter):\OSDCloud\DriverPacks\$($Global:OSDCloud.Manufacturer)"
-                            Write-Host -ForegroundColor Yellow "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Copying Driver Pack to OSDCloudUSB at $OSDCloudUSBDestination"
-                            If (! (Test-Path $OSDCloudUSBDestination)) {
-                                $null = New-Item -Path $OSDCloudUSBDestination -ItemType Directory -Force
-                            }
-                            $Results = Copy-Item -Path $SaveMyDriverPack.FullName -Destination $OSDCloudUSBDestination -Force -PassThru -ErrorAction Stop
-                        }
-                    }
+                    $Results = Copy-Item -Path $SaveMyDriverPack.FullName -Destination $OSDCloudUSBDestination -Force -PassThru -ErrorAction Stop
                 }
             }
         }
@@ -781,7 +813,7 @@ function Invoke-OSDCloud {
     }
     else {
         if (Test-WebConnectionMsUpCat) {
-            if ($null -eq $SaveMyDriverPack) {
+            if (($null -eq $SaveMyDriverPack) -or ($Global:OSDCloud.DriverPackName -eq 'Microsoft Catalog Only')) {
                 Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Save-MsUpCatDriver (All Devices)"
                 Write-Host -ForegroundColor DarkGray "Drivers for all devices will be downloaded from Microsoft Update Catalog to C:\Drivers"
 
