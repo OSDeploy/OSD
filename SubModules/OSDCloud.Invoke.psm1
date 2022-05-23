@@ -88,7 +88,7 @@ function Invoke-OSDCloud {
         Transcript = $null
         USBPartitions = $null
         Version = [Version](Get-Module -Name OSD -ListAvailable | Sort-Object Version -Descending | Select-Object -First 1).Version
-        VersionMin = [Version]'22.5.9.1'
+        VersionMin = [Version]'22.5.23.1'
         ZTI = [bool]$false
     }
     #=================================================
@@ -687,10 +687,10 @@ function Invoke-OSDCloud {
     #	ApplyManufacturerDrivers = TRUE
     #=================================================
     if ($Global:OSDCloud.DriverPackName) {
-        if ($Global:OSDCloud.DriverPackName -eq 'None') {
+        if ($Global:OSDCloud.DriverPackName -match 'None') {
             $Global:OSDCloud.DriverPack = $null
         }
-        elseif ($Global:OSDCloud.DriverPackName -eq 'Microsoft Catalog Only') {
+        elseif ($Global:OSDCloud.DriverPackName -match 'Microsoft Update Catalog') {
             $Global:OSDCloud.DriverPack = $null
         }
         else {
@@ -824,7 +824,7 @@ function Invoke-OSDCloud {
     }
     else {
         if (Test-MicrosoftUpdateCatalog) {
-            if (($null -eq $SaveMyDriverPack) -or ($Global:OSDCloud.DriverPackName -eq 'Microsoft Catalog Only')) {
+            if (($null -eq $SaveMyDriverPack) -or ($Global:OSDCloud.DriverPackName -match 'Microsoft Update Catalog')) {
                 Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Save-MsUpCatDriver (All Devices)"
                 Write-Host -ForegroundColor DarkGray "Drivers for all devices will be downloaded from Microsoft Update Catalog to C:\Drivers"
 

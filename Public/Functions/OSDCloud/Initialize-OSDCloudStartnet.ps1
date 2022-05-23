@@ -2,8 +2,6 @@ function Initialize-OSDCloudStartnet {
     [CmdletBinding()]
     param ()
     if ($env:SystemDrive -eq 'X:') {
-        $OSDVersion = (Get-Module -Name OSD -ListAvailable | Sort-Object Version -Descending | Select-Object -First 1).Version
-        Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) OSD $OSDVersion"
         #=================================================
         #   Initialize Hardware Devices
         #=================================================
@@ -12,7 +10,7 @@ function Initialize-OSDCloudStartnet {
         #=================================================
         #   Initialize Wireless Network
         #=================================================
-        if (Test-Path "$env:SystemRoot\WirelessConnect.exe") {
+        if (Test-Path "$env:SystemRoot\System32\dmcmnutils.dll") {
             Write-Host -ForegroundColor DarkGray "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Wireless Network"
             Start-Process PowerShell Start-WinREWiFi -Wait
         }
@@ -46,6 +44,6 @@ function Initialize-OSDCloudStartnet {
         #=================================================
         Import-Module OSD -Force -ErrorAction Ignore -WarningAction Ignore
         $OSDVersion = (Get-Module -Name OSD -ListAvailable | Sort-Object Version -Descending | Select-Object -First 1).Version
-        Write-Host -ForegroundColor Green "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) OSDCloud $OSDVersion"
+        Write-Host -ForegroundColor Green "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) OSDCloud $OSDVersion Ready"
     }
 }

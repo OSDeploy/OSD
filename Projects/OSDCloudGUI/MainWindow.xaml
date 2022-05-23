@@ -260,7 +260,7 @@
                           Padding="2"
                           SelectedIndex="1" >
                     <ComboBoxItem Content="None"/>
-                    <ComboBoxItem Content="Microsoft Catalog Only"/>
+                    <ComboBoxItem Content="Microsoft Update Catalog"/>
                 </ComboBox>
             </StackPanel>
             <StackPanel HorizontalAlignment="Left"

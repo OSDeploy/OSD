@@ -51,7 +51,17 @@ function Start-AzOSDCloudGUI {
     #>
 
     [CmdletBinding()]
-    param ()
+    param (
+        [System.Management.Automation.SwitchParameter]
+        #Forces a reconnection to azgui.osdcloud.com
+        $Force
+    )
+
+    if ($Force) {
+        $Force = $false
+        $Global:AzOSDCloudBlobImage = $null
+    }
+
     if ($Global:AzOSDCloudBlobImage) {
         Write-Host -ForegroundColor DarkGray "========================================================================="
         Write-Host -ForegroundColor Green "Start-AzOSDCloudGUI"

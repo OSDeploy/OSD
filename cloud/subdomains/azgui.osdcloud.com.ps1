@@ -35,6 +35,7 @@ param()
 #Script Information
 $ScriptName = 'azgui.osdcloud.com'
 $ScriptVersion = '22.5.23.1'
+#TODO: Exclude Windows Images smaller than 3GB
 #=================================================
 #region Initialize
 

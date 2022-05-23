@@ -371,7 +371,7 @@ $formMainWindowControlStartButton.add_Click({
     $Global:StartOSDCloud = $null
     $Global:StartOSDCloud = [ordered]@{
         ApplyCatalogFirmware        = $formMainWindowControlCatalogFirmwareCheckbox.IsChecked
-        DriverPackName              = $formMainWindowControlDriverPackCombobox.SelectedValue
+        DriverPackName              = $formMainWindowControlDriverPackCombobox.Text
         OSImageIndex                = $formMainWindowControlImageIndexTextbox.Text
         Restart                     = $formMainWindowControlRestartCheckbox.IsChecked
         ZTI                         = $formMainWindowControlZTICheckbox.IsChecked

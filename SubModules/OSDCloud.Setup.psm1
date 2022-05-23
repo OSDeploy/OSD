@@ -230,6 +230,7 @@ $StartnetCMD = @"
 @ECHO OFF
 wpeinit
 cd\
+title OSD $OSDVersion
 PowerShell -Nol -C Initialize-OSDCloudStartnet
 "@
     $StartnetCMD | Out-File -FilePath "$MountPath\Windows\System32\Startnet.cmd" -Encoding ascii -Width 2000 -Force

@@ -681,7 +681,7 @@ $formMainWindowControlStartButton.add_Click({
         AutopilotOOBEJsonItem       = $AutopilotOOBEJsonItem
         AutopilotOOBEJsonName       = $AutopilotOOBEJsonName
         AutopilotOOBEJsonObject     = $AutopilotOOBEJsonObject
-        DriverPackName              = $formMainWindowControlDriverPackCombobox.SelectedValue
+        DriverPackName              = $formMainWindowControlDriverPackCombobox.Text
         ImageFileFullName           = $ImageFileFullName
         ImageFileItem               = $ImageFileItem
         ImageFileName               = $ImageFileName
