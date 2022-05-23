@@ -37,59 +37,6 @@ get-variable *WPF*
 #                    Variables                    #
 ###################################################
 
-function GetRecurse {
-    [CmdletBinding()]
-    Param(
-        [Parameter(ValueFromPipeline=$true)]
-        $DN
-    )
-    Process {
-        if ($ChildOrg = (Get-ADOrganizationalUnit -SearchBase $DN -SearchScope OneLevel -Filter *).DistinguishedName){
-            [PscustomObject]@{
-                Name = ($DN.Substring(3,(($DN.Split(',')[0]).Length - 3)))
-                DN = $DN 
-                GPO =  Get-ADOOUGPO $DN
-                Child = $ChildOrg | GetRecurse
-            }
-        }Else{
-            [PscustomObject]@{
-                Name = ($DN.Substring(3,(($DN.Split(',')[0]).Length - 3)))
-                DN = $DN
-                GPO =  Get-ADOOUGPO $DN
-                Child = $Null
-            }
-        }
-    }        
-}
-function Get-ADOOUGPO{
- [CmdletBinding()]
-    Param(
-        [Parameter(ValueFromPipeline=$true)]
-        $DN
-    )
-    process{Get-ADOrganizationalUnit -Identity $DN | select -Property LinkedGroupPolicyObjects | ForEach-Object {$GUID= $_.LinkedGroupPolicyObjects| Select-String -Pattern '{[-0-9A-F]+?}' -AllMatches | Select-Object -ExpandProperty Matches | Select-Object -ExpandProperty Value 
-            $GPO = @()
-        if (!($null -eq $GUID)){
-
-           if ($GUID.count -eq 1){ 
-              $GPO = (Get-GPO -Guid $GUID).DisplayName
-               }
-           else{
-          
-                for ($i = 0; $i -lt $GUID.count; $i++)
-                {   
-                    $GPO += (Get-GPO -Guid $GUID[$i]).DisplayName
-                }
-           }
-          }
-           return $GPO
-     
-        }
-    }
-
-
-
-}
 function Start-Scan {
     [CmdletBinding()]
     [Alias()]
@@ -138,7 +85,7 @@ function Start-Scan {
                 $treeViewItem.Add_PreviewMouseLeftButtonDown({
 
 		            [System.Windows.Controls.TreeViewItem]$sender = $args[0]
-                    $DistinguishedName.Text = $($sender.Tag[1].DN)
+                    #$DistinguishedName.Text = $($sender.Tag[1].DN)
                     $Sobjects.Visibility="Visible" 
                     
                     #$Object= Get-AzOSDCloudBlobScriptFile Container "$($sender.Tag[1].DN)"
