@@ -21,7 +21,7 @@ function Get-AzOSDCloudScript {
     if ($Global:AzureAD -or $Global:MgGraph) {
         Write-Host -ForegroundColor DarkGray    'Storage Accounts:          $Global:AzStorageAccounts'
         $Global:AzStorageAccounts = Get-AzStorageAccount
-    
+  
         Write-Host -ForegroundColor DarkGray    'OSDCloud Storage Accounts: $Global:AzOSDCloudStorageAccounts'
         $Global:AzOSDCloudStorageAccounts = Get-AzStorageAccount | Where-Object {$_.Tags.ContainsKey('OSDScripts')}
     
@@ -35,14 +35,14 @@ function Get-AzOSDCloudScript {
             Write-Host -ForegroundColor Cyan "Scanning for PowerShell Script"
             foreach ($Item in $Global:AzOSDCloudStorageAccounts) {
                 $Global:AzCurrentStorageContext = New-AzStorageContext -StorageAccountName $Item.StorageAccountName
+                $Global:StorageContainers = Get-AzStorageContainer -Context $Global:AzCurrentStorageContext
                 $Global:AzStorageContext."$($Item.StorageAccountName)" = $Global:AzCurrentStorageContext      
-                $StorageContainers = Get-AzStorageContainer -Context $Global:AzCurrentStorageContext
                 if ($StorageContainers) {
                     foreach ($Container in $StorageContainers) {
                         Write-Host -ForegroundColor DarkGray "Storage Account: $($Item.StorageAccountName) Container: $($Container.Name)"
                         $Global:AzOSDCloudBlobScript += Get-AzStorageBlob -Context $Global:AzCurrentStorageContext -Container $Container.Name -Blob *.ps1 -ErrorAction Ignore
-                        #$Global:AzOSDCloudBlobScript += Get-AzStorageBlob -Context $Global:AzCurrentStorageContext -Container $Container.Name -Blob *.ppkg -ErrorAction Ignore
-                        #$Global:AzOSDCloudBlobScript += Get-AzStorageBlob -Context $Global:AzCurrentStorageContext -Container $Container.Name -Blob *.xml -ErrorAction Ignore
+                        $Global:AzOSDCloudBlobScript += Get-AzStorageBlob -Context $Global:AzCurrentStorageContext -Container $Container.Name -Blob *.ppkg -ErrorAction Ignore
+                        $Global:AzOSDCloudBlobScript += Get-AzStorageBlob -Context $Global:AzCurrentStorageContext -Container $Container.Name -Blob *.xml -ErrorAction Ignore
 
                     }
                 }
@@ -87,6 +87,8 @@ function Start-AzOSDPADbeta {
                 Location        = $BlobClient | Select-Object -ExpandProperty Location
                 ResourceGroup   = $BlobClient | Select-Object -ExpandProperty ResourceGroupName
                 URL             = $Item.BlobClient.Uri
+                ContentHash     = $Item.BlobProperties.ContentHash
+                LastModified    = $Item.ICloudBlob.Properties.LastModified
                 
             }
             New-Object -TypeName PSObject -Property $ObjectProperties
@@ -126,5 +128,6 @@ function Start-AzOSDPADbeta {
         Write-Warning 'You may need to execute Get-AzOSDCloudBScript'
     }
 }
+
 #endregion
 #=================================================
