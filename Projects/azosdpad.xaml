@@ -137,7 +137,7 @@
                 <Setter Property="FontSize"
                         Value="16" />
                 <Setter Property="Background"
-                        Value="White" />
+                        Value="Black" />
                 <Setter Property="Foreground"
                         Value="Black" />
             </Style>
@@ -194,10 +194,10 @@
  				<StackPanel>
  				  <StackPanel Orientation="Horizontal" Background="{DynamicResource MahApps.Brushes.Accent}">
        				<Label Content="Containters:" HorizontalAlignment="Stretch" 
-      							 Foreground="White">
+      							 Foreground="Black">
       				</Label>
       				<Label Name="Domain" Content="" HorizontalAlignment="Stretch" Margin="-7 0 0 0 "
-      							 Foreground="White">
+      							 Foreground="Black">
       				</Label>
       		</StackPanel>
 					<TreeView Name="TreeView" Width="300" Height="300">
@@ -231,8 +231,8 @@
 					
 					<StackPanel Orientation="Vertical" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
 						<StackPanel Orientation="Horizontal" Background="{DynamicResource MahApps.Brushes.Accent}" >
-    						<Label Content="Objects:" HorizontalAlignment="Stretch" Foreground="White"/>
-    						<Label Name="CObjects" Content="2" HorizontalAlignment="Stretch" Foreground="White" Margin="-5 0 0 0 "/>
+    						<Label Content="Objects:" HorizontalAlignment="Stretch" Foreground="Black"/>
+    						<Label Name="CObjects" Content="2" HorizontalAlignment="Stretch" Foreground="Black" Margin="-5 0 0 0 "/>
 						</StackPanel>
 						<Grid x:Name="Destination" Height="300" HorizontalAlignment="Stretch"
 							Background="#FFFFFF">
