@@ -604,7 +604,7 @@ function Invoke-OSDCloud {
         if ($null -eq $ImageCount) {
             Write-Host -ForegroundColor DarkGray "========================================================================="
             Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) OSDCloud Failed"
-            Write-Warning "The Windows Image did not download properly"
+            Write-Warning "Could not read the Windows Image properly"
             Start-Sleep -Seconds 30
             Break
         }
@@ -614,13 +614,6 @@ function Invoke-OSDCloud {
         elseif ((!($Global:OSDCloud.OSImageIndex)) -or ($Global:OSDCloud.OSImageIndex -eq 'Auto')) {
             Write-Warning "No ImageIndex is specified, setting ImageIndex = 1"
             $Global:OSDCloud.OSImageIndex = 1
-        }
-        else {
-            Write-Host -ForegroundColor DarkGray "========================================================================="
-            Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) OSDCloud Failed"
-            Write-Warning "The Windows Image did not download properly"
-            Start-Sleep -Seconds 30
-            Break
         }
         #=================================================
         #	FAILED
