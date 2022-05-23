@@ -1,0 +1,1135 @@
+<Objs Version="1.1.0.1" xmlns="http://schemas.microsoft.com/powershell/2004/04">
+  <Obj RefId="0">
+    <TN RefId="0">
+      <T>Microsoft.WindowsAzure.Commands.Common.Storage.ResourceModel.AzureStorageBlob</T>
+      <T>Microsoft.WindowsAzure.Commands.Common.Storage.ResourceModel.AzureStorageBase</T>
+      <T>System.Object</T>
+    </TN>
+    <ToString>Microsoft.WindowsAzure.Commands.Common.Storage.ResourceModel.AzureStorageBlob</ToString>
+    <Props>
+      <Obj N="ICloudBlob" RefId="1">
+        <TN RefId="1">
+          <T>Microsoft.Azure.Storage.Blob.CloudBlockBlob</T>
+          <T>Microsoft.Azure.Storage.Blob.CloudBlob</T>
+          <T>System.Object</T>
+        </TN>
+        <ToString>Microsoft.Azure.Storage.Blob.CloudBlockBlob</ToString>
+        <Props>
+          <I32 N="StreamWriteSizeInBytes">4194304</I32>
+          <S N="ServiceClient">Microsoft.Azure.Storage.Blob.CloudBlobClient</S>
+          <I32 N="StreamMinimumReadSizeInBytes">4194304</I32>
+          <S N="Properties">Microsoft.Azure.Storage.Blob.BlobProperties</S>
+          <Obj N="Metadata" RefId="2">
+            <TN RefId="2">
+              <T>System.Collections.Generic.Dictionary`2[[System.String, System.Private.CoreLib, Version=6.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.String, System.Private.CoreLib, Version=6.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]</T>
+              <T>System.Object</T>
+            </TN>
+            <DCT />
+          </Obj>
+          <URI N="Uri">https://osdscripts.blob.core.windows.net/others/Invoke-oobeAddNetFX3.ps1</URI>
+          <S N="StorageUri">Primary = 'https://osdscripts.blob.core.windows.net/others/Invoke-oobeAddNetFX3.ps1'; Secondary = ''</S>
+          <Nil N="SnapshotTime" />
+          <B N="IsSnapshot">false</B>
+          <B N="IsDeleted">false</B>
+          <URI N="SnapshotQualifiedUri">https://osdscripts.blob.core.windows.net/others/Invoke-oobeAddNetFX3.ps1</URI>
+          <S N="SnapshotQualifiedStorageUri">Primary = 'https://osdscripts.blob.core.windows.net/others/Invoke-oobeAddNetFX3.ps1'; Secondary = ''</S>
+          <Nil N="CopyState" />
+          <S N="Name">Invoke-oobeAddNetFX3.ps1</S>
+          <S N="Container">Microsoft.Azure.Storage.Blob.CloudBlobContainer</S>
+          <S N="Parent">Microsoft.Azure.Storage.Blob.CloudBlobDirectory</S>
+          <S N="BlobType">BlockBlob</S>
+        </Props>
+      </Obj>
+      <Obj N="BlobType" RefId="3">
+        <TN RefId="3">
+          <T>Microsoft.Azure.Storage.Blob.BlobType</T>
+          <T>System.Enum</T>
+          <T>System.ValueType</T>
+          <T>System.Object</T>
+        </TN>
+        <ToString>BlockBlob</ToString>
+        <I32>2</I32>
+      </Obj>
+      <I64 N="Length">4438</I64>
+      <B N="IsDeleted">false</B>
+      <Obj N="BlobClient" RefId="4">
+        <TN RefId="4">
+          <T>Azure.Storage.Blobs.BlobClient</T>
+          <T>Azure.Storage.Blobs.Specialized.BlobBaseClient</T>
+          <T>System.Object</T>
+        </TN>
+        <ToString>Azure.Storage.Blobs.BlobClient</ToString>
+        <Props>
+          <URI N="Uri">https://osdscripts.blob.core.windows.net/others/Invoke-oobeAddNetFX3.ps1</URI>
+          <S N="AccountName">osdscripts</S>
+          <S N="BlobContainerName">others</S>
+          <S N="Name">Invoke-oobeAddNetFX3.ps1</S>
+          <B N="CanGenerateSasUri">false</B>
+        </Props>
+      </Obj>
+      <Obj N="BlobBaseClient" RefId="5">
+        <TN RefId="5">
+          <T>Azure.Storage.Blobs.Specialized.BlockBlobClient</T>
+          <T>Azure.Storage.Blobs.Specialized.BlobBaseClient</T>
+          <T>System.Object</T>
+        </TN>
+        <ToString>Azure.Storage.Blobs.Specialized.BlockBlobClient</ToString>
+        <Props>
+          <I32 N="BlockBlobMaxUploadBlobBytes">2147483647</I32>
+          <I64 N="BlockBlobMaxUploadBlobLongBytes">5242880000</I64>
+          <I32 N="BlockBlobMaxStageBlockBytes">2147483647</I32>
+          <I64 N="BlockBlobMaxStageBlockLongBytes">4194304000</I64>
+          <I32 N="BlockBlobMaxBlocks">50000</I32>
+          <URI N="Uri">https://osdscripts.blob.core.windows.net/others/Invoke-oobeAddNetFX3.ps1</URI>
+          <S N="AccountName">osdscripts</S>
+          <S N="BlobContainerName">others</S>
+          <S N="Name">Invoke-oobeAddNetFX3.ps1</S>
+          <B N="CanGenerateSasUri">false</B>
+        </Props>
+      </Obj>
+      <Obj N="BlobProperties" RefId="6">
+        <TN RefId="6">
+          <T>Azure.Storage.Blobs.Models.BlobProperties</T>
+          <T>System.Object</T>
+        </TN>
+        <ToString>Azure.Storage.Blobs.Models.BlobProperties</ToString>
+        <Props>
+          <S N="LastModified">05/18/2022 08:28:23 +00:00</S>
+          <S N="CreatedOn">05/18/2022 08:28:23 +00:00</S>
+          <Obj N="Metadata" RefId="7">
+            <TNRef RefId="2" />
+            <DCT />
+          </Obj>
+          <Nil N="ObjectReplicationDestinationPolicyId" />
+          <Nil N="ObjectReplicationSourceProperties" />
+          <S N="BlobType">Block</S>
+          <S N="CopyCompletedOn">01/01/0001 00:00:00 +00:00</S>
+          <Nil N="CopyStatusDescription" />
+          <Nil N="CopyId" />
+          <Nil N="CopyProgress" />
+          <Nil N="CopySource" />
+          <S N="CopyStatus">Pending</S>
+          <Nil N="BlobCopyStatus" />
+          <B N="IsIncrementalCopy">false</B>
+          <Nil N="DestinationSnapshot" />
+          <S N="LeaseDuration">Infinite</S>
+          <S N="LeaseState">Available</S>
+          <S N="LeaseStatus">Unlocked</S>
+          <I64 N="ContentLength">4438</I64>
+          <S N="ContentType">application/octet-stream</S>
+          <S N="ETag">"0x8DA38A85F4A1376"</S>
+          <BA N="ContentHash">ePQpN1T8MKR+GeZQhpHKcQ==</BA>
+          <Nil N="ContentEncoding" />
+          <Nil N="ContentDisposition" />
+          <Nil N="ContentLanguage" />
+          <Nil N="CacheControl" />
+          <I64 N="BlobSequenceNumber">0</I64>
+          <S N="AcceptRanges">bytes</S>
+          <I32 N="BlobCommittedBlockCount">0</I32>
+          <B N="IsServerEncrypted">true</B>
+          <Nil N="EncryptionKeySha256" />
+          <Nil N="EncryptionScope" />
+          <S N="AccessTier">Hot</S>
+          <B N="AccessTierInferred">true</B>
+          <Nil N="ArchiveStatus" />
+          <S N="AccessTierChangedOn">01/01/0001 00:00:00 +00:00</S>
+          <Nil N="VersionId" />
+          <B N="IsLatestVersion">false</B>
+          <I64 N="TagCount">0</I64>
+          <S N="ExpiresOn">01/01/0001 00:00:00 +00:00</S>
+          <B N="IsSealed">false</B>
+          <Nil N="RehydratePriority" />
+          <S N="LastAccessed">01/01/0001 00:00:00 +00:00</S>
+          <S N="ImmutabilityPolicy">Azure.Storage.Blobs.Models.BlobImmutabilityPolicy</S>
+          <B N="HasLegalHold">false</B>
+        </Props>
+      </Obj>
+      <Nil N="RemainingDaysBeforePermanentDelete" />
+      <S N="ContentType">application/octet-stream</S>
+      <Obj N="LastModified" RefId="8">
+        <TN RefId="7">
+          <T>System.DateTimeOffset</T>
+          <T>System.ValueType</T>
+          <T>System.Object</T>
+        </TN>
+        <ToString>05/18/2022 08:28:23 +00:00</ToString>
+        <Props>
+          <DT N="DateTime">2022-05-18T08:28:23</DT>
+          <DT N="UtcDateTime">2022-05-18T08:28:23Z</DT>
+          <DT N="LocalDateTime">2022-05-18T10:28:23+02:00</DT>
+          <DT N="Date">2022-05-18T00:00:00</DT>
+          <I32 N="Day">18</I32>
+          <S N="DayOfWeek">Wednesday</S>
+          <I32 N="DayOfYear">138</I32>
+          <I32 N="Hour">8</I32>
+          <I32 N="Millisecond">0</I32>
+          <I32 N="Minute">28</I32>
+          <I32 N="Month">5</I32>
+          <TS N="Offset">PT0S</TS>
+          <I32 N="Second">23</I32>
+          <I64 N="Ticks">637884593030000000</I64>
+          <I64 N="UtcTicks">637884593030000000</I64>
+          <TS N="TimeOfDay">PT8H28M23S</TS>
+          <I32 N="Year">2022</I32>
+        </Props>
+      </Obj>
+      <Nil N="SnapshotTime" />
+      <Nil N="ContinuationToken" />
+      <Nil N="VersionId" />
+      <Nil N="IsLatestVersion" />
+      <S N="AccessTier">Hot</S>
+      <I64 N="TagCount">0</I64>
+      <Nil N="Tags" />
+      <Obj N="Context" RefId="9">
+        <TN RefId="8">
+          <T>Microsoft.WindowsAzure.Commands.Storage.AzureStorageContext</T>
+          <T>System.Object</T>
+        </TN>
+        <ToString>Microsoft.WindowsAzure.Commands.Storage.AzureStorageContext</ToString>
+        <Props>
+          <S N="StorageAccountName">osdscripts</S>
+          <S N="BlobEndPoint">https://osdscripts.blob.core.windows.net/</S>
+          <S N="TableEndPoint">https://osdscripts.table.core.windows.net/</S>
+          <S N="QueueEndPoint">https://osdscripts.queue.core.windows.net/</S>
+          <S N="FileEndPoint">https://osdscripts.file.core.windows.net/</S>
+          <Ref N="Context" RefId="9" />
+          <S N="Name"></S>
+          <S N="StorageAccount">BlobEndpoint=https://osdscripts.blob.core.windows.net/;QueueEndpoint=https://osdscripts.queue.core.windows.net/;TableEndpoint=https://osdscripts.table.core.windows.net/;FileEndpoint=https://osdscripts.file.core.windows.net/;</S>
+          <S N="TableStorageAccount">BlobEndpoint=https://osdscripts.blob.core.windows.net/;QueueEndpoint=https://osdscripts.queue.core.windows.net/;TableEndpoint=https://osdscripts.table.core.windows.net/;FileEndpoint=https://osdscripts.file.core.windows.net/</S>
+          <S N="Track2OauthToken">Microsoft.WindowsAzure.Commands.Storage.Common.AzureSessionCredential</S>
+          <S N="EndPointSuffix">core.windows.net/</S>
+          <S N="ConnectionString">BlobEndpoint=https://osdscripts.blob.core.windows.net/;QueueEndpoint=https://osdscripts.queue.core.windows.net/;TableEndpoint=https://osdscripts.table.core.windows.net/;FileEndpoint=https://osdscripts.file.core.windows.net/;</S>
+          <Obj N="ExtendedProperties" RefId="10">
+            <TNRef RefId="2" />
+            <DCT />
+          </Obj>
+        </Props>
+      </Obj>
+      <S N="Name">Invoke-oobeAddNetFX3.ps1</S>
+    </Props>
+  </Obj>
+  <Obj RefId="11">
+    <TNRef RefId="0" />
+    <ToString>Microsoft.WindowsAzure.Commands.Common.Storage.ResourceModel.AzureStorageBlob</ToString>
+    <Props>
+      <Obj N="ICloudBlob" RefId="12">
+        <TNRef RefId="1" />
+        <ToString>Microsoft.Azure.Storage.Blob.CloudBlockBlob</ToString>
+        <Props>
+          <I32 N="StreamWriteSizeInBytes">4194304</I32>
+          <S N="ServiceClient">Microsoft.Azure.Storage.Blob.CloudBlobClient</S>
+          <I32 N="StreamMinimumReadSizeInBytes">4194304</I32>
+          <S N="Properties">Microsoft.Azure.Storage.Blob.BlobProperties</S>
+          <Obj N="Metadata" RefId="13">
+            <TNRef RefId="2" />
+            <DCT />
+          </Obj>
+          <URI N="Uri">https://osdscripts.blob.core.windows.net/others/Invoke-oobeAddRSAT.ps1</URI>
+          <S N="StorageUri">Primary = 'https://osdscripts.blob.core.windows.net/others/Invoke-oobeAddRSAT.ps1'; Secondary = ''</S>
+          <Nil N="SnapshotTime" />
+          <B N="IsSnapshot">false</B>
+          <B N="IsDeleted">false</B>
+          <URI N="SnapshotQualifiedUri">https://osdscripts.blob.core.windows.net/others/Invoke-oobeAddRSAT.ps1</URI>
+          <S N="SnapshotQualifiedStorageUri">Primary = 'https://osdscripts.blob.core.windows.net/others/Invoke-oobeAddRSAT.ps1'; Secondary = ''</S>
+          <Nil N="CopyState" />
+          <S N="Name">Invoke-oobeAddRSAT.ps1</S>
+          <S N="Container">Microsoft.Azure.Storage.Blob.CloudBlobContainer</S>
+          <S N="Parent">Microsoft.Azure.Storage.Blob.CloudBlobDirectory</S>
+          <S N="BlobType">BlockBlob</S>
+        </Props>
+      </Obj>
+      <Obj N="BlobType" RefId="14">
+        <TNRef RefId="3" />
+        <ToString>BlockBlob</ToString>
+        <I32>2</I32>
+      </Obj>
+      <I64 N="Length">4434</I64>
+      <B N="IsDeleted">false</B>
+      <Obj N="BlobClient" RefId="15">
+        <TNRef RefId="4" />
+        <ToString>Azure.Storage.Blobs.BlobClient</ToString>
+        <Props>
+          <URI N="Uri">https://osdscripts.blob.core.windows.net/others/Invoke-oobeAddRSAT.ps1</URI>
+          <S N="AccountName">osdscripts</S>
+          <S N="BlobContainerName">others</S>
+          <S N="Name">Invoke-oobeAddRSAT.ps1</S>
+          <B N="CanGenerateSasUri">false</B>
+        </Props>
+      </Obj>
+      <Obj N="BlobBaseClient" RefId="16">
+        <TNRef RefId="5" />
+        <ToString>Azure.Storage.Blobs.Specialized.BlockBlobClient</ToString>
+        <Props>
+          <I32 N="BlockBlobMaxUploadBlobBytes">2147483647</I32>
+          <I64 N="BlockBlobMaxUploadBlobLongBytes">5242880000</I64>
+          <I32 N="BlockBlobMaxStageBlockBytes">2147483647</I32>
+          <I64 N="BlockBlobMaxStageBlockLongBytes">4194304000</I64>
+          <I32 N="BlockBlobMaxBlocks">50000</I32>
+          <URI N="Uri">https://osdscripts.blob.core.windows.net/others/Invoke-oobeAddRSAT.ps1</URI>
+          <S N="AccountName">osdscripts</S>
+          <S N="BlobContainerName">others</S>
+          <S N="Name">Invoke-oobeAddRSAT.ps1</S>
+          <B N="CanGenerateSasUri">false</B>
+        </Props>
+      </Obj>
+      <Obj N="BlobProperties" RefId="17">
+        <TNRef RefId="6" />
+        <ToString>Azure.Storage.Blobs.Models.BlobProperties</ToString>
+        <Props>
+          <S N="LastModified">05/18/2022 08:28:23 +00:00</S>
+          <S N="CreatedOn">05/18/2022 08:28:23 +00:00</S>
+          <Obj N="Metadata" RefId="18">
+            <TNRef RefId="2" />
+            <DCT />
+          </Obj>
+          <Nil N="ObjectReplicationDestinationPolicyId" />
+          <Nil N="ObjectReplicationSourceProperties" />
+          <S N="BlobType">Block</S>
+          <S N="CopyCompletedOn">01/01/0001 00:00:00 +00:00</S>
+          <Nil N="CopyStatusDescription" />
+          <Nil N="CopyId" />
+          <Nil N="CopyProgress" />
+          <Nil N="CopySource" />
+          <S N="CopyStatus">Pending</S>
+          <Nil N="BlobCopyStatus" />
+          <B N="IsIncrementalCopy">false</B>
+          <Nil N="DestinationSnapshot" />
+          <S N="LeaseDuration">Infinite</S>
+          <S N="LeaseState">Available</S>
+          <S N="LeaseStatus">Unlocked</S>
+          <I64 N="ContentLength">4434</I64>
+          <S N="ContentType">application/octet-stream</S>
+          <S N="ETag">"0x8DA38A85F4BE7E0"</S>
+          <BA N="ContentHash">VlyUD+//+ZiuZ3ZAIOyilA==</BA>
+          <Nil N="ContentEncoding" />
+          <Nil N="ContentDisposition" />
+          <Nil N="ContentLanguage" />
+          <Nil N="CacheControl" />
+          <I64 N="BlobSequenceNumber">0</I64>
+          <S N="AcceptRanges">bytes</S>
+          <I32 N="BlobCommittedBlockCount">0</I32>
+          <B N="IsServerEncrypted">true</B>
+          <Nil N="EncryptionKeySha256" />
+          <Nil N="EncryptionScope" />
+          <S N="AccessTier">Hot</S>
+          <B N="AccessTierInferred">true</B>
+          <Nil N="ArchiveStatus" />
+          <S N="AccessTierChangedOn">01/01/0001 00:00:00 +00:00</S>
+          <Nil N="VersionId" />
+          <B N="IsLatestVersion">false</B>
+          <I64 N="TagCount">0</I64>
+          <S N="ExpiresOn">01/01/0001 00:00:00 +00:00</S>
+          <B N="IsSealed">false</B>
+          <Nil N="RehydratePriority" />
+          <S N="LastAccessed">01/01/0001 00:00:00 +00:00</S>
+          <S N="ImmutabilityPolicy">Azure.Storage.Blobs.Models.BlobImmutabilityPolicy</S>
+          <B N="HasLegalHold">false</B>
+        </Props>
+      </Obj>
+      <Nil N="RemainingDaysBeforePermanentDelete" />
+      <S N="ContentType">application/octet-stream</S>
+      <Obj N="LastModified" RefId="19">
+        <TNRef RefId="7" />
+        <ToString>05/18/2022 08:28:23 +00:00</ToString>
+        <Props>
+          <DT N="DateTime">2022-05-18T08:28:23</DT>
+          <DT N="UtcDateTime">2022-05-18T08:28:23Z</DT>
+          <DT N="LocalDateTime">2022-05-18T10:28:23+02:00</DT>
+          <DT N="Date">2022-05-18T00:00:00</DT>
+          <I32 N="Day">18</I32>
+          <S N="DayOfWeek">Wednesday</S>
+          <I32 N="DayOfYear">138</I32>
+          <I32 N="Hour">8</I32>
+          <I32 N="Millisecond">0</I32>
+          <I32 N="Minute">28</I32>
+          <I32 N="Month">5</I32>
+          <TS N="Offset">PT0S</TS>
+          <I32 N="Second">23</I32>
+          <I64 N="Ticks">637884593030000000</I64>
+          <I64 N="UtcTicks">637884593030000000</I64>
+          <TS N="TimeOfDay">PT8H28M23S</TS>
+          <I32 N="Year">2022</I32>
+        </Props>
+      </Obj>
+      <Nil N="SnapshotTime" />
+      <Nil N="ContinuationToken" />
+      <Nil N="VersionId" />
+      <Nil N="IsLatestVersion" />
+      <S N="AccessTier">Hot</S>
+      <I64 N="TagCount">0</I64>
+      <Nil N="Tags" />
+      <Ref N="Context" RefId="9" />
+      <S N="Name">Invoke-oobeAddRSAT.ps1</S>
+    </Props>
+  </Obj>
+  <Obj RefId="20">
+    <TNRef RefId="0" />
+    <ToString>Microsoft.WindowsAzure.Commands.Common.Storage.ResourceModel.AzureStorageBlob</ToString>
+    <Props>
+      <Obj N="ICloudBlob" RefId="21">
+        <TNRef RefId="1" />
+        <ToString>Microsoft.Azure.Storage.Blob.CloudBlockBlob</ToString>
+        <Props>
+          <I32 N="StreamWriteSizeInBytes">4194304</I32>
+          <S N="ServiceClient">Microsoft.Azure.Storage.Blob.CloudBlobClient</S>
+          <I32 N="StreamMinimumReadSizeInBytes">4194304</I32>
+          <S N="Properties">Microsoft.Azure.Storage.Blob.BlobProperties</S>
+          <Obj N="Metadata" RefId="22">
+            <TNRef RefId="2" />
+            <DCT />
+          </Obj>
+          <URI N="Uri">https://osdscripts.blob.core.windows.net/others/Invoke-oobeRemoveAppx.ps1</URI>
+          <S N="StorageUri">Primary = 'https://osdscripts.blob.core.windows.net/others/Invoke-oobeRemoveAppx.ps1'; Secondary = ''</S>
+          <Nil N="SnapshotTime" />
+          <B N="IsSnapshot">false</B>
+          <B N="IsDeleted">false</B>
+          <URI N="SnapshotQualifiedUri">https://osdscripts.blob.core.windows.net/others/Invoke-oobeRemoveAppx.ps1</URI>
+          <S N="SnapshotQualifiedStorageUri">Primary = 'https://osdscripts.blob.core.windows.net/others/Invoke-oobeRemoveAppx.ps1'; Secondary = ''</S>
+          <Nil N="CopyState" />
+          <S N="Name">Invoke-oobeRemoveAppx.ps1</S>
+          <S N="Container">Microsoft.Azure.Storage.Blob.CloudBlobContainer</S>
+          <S N="Parent">Microsoft.Azure.Storage.Blob.CloudBlobDirectory</S>
+          <S N="BlobType">BlockBlob</S>
+        </Props>
+      </Obj>
+      <Obj N="BlobType" RefId="23">
+        <TNRef RefId="3" />
+        <ToString>BlockBlob</ToString>
+        <I32>2</I32>
+      </Obj>
+      <I64 N="Length">3754</I64>
+      <B N="IsDeleted">false</B>
+      <Obj N="BlobClient" RefId="24">
+        <TNRef RefId="4" />
+        <ToString>Azure.Storage.Blobs.BlobClient</ToString>
+        <Props>
+          <URI N="Uri">https://osdscripts.blob.core.windows.net/others/Invoke-oobeRemoveAppx.ps1</URI>
+          <S N="AccountName">osdscripts</S>
+          <S N="BlobContainerName">others</S>
+          <S N="Name">Invoke-oobeRemoveAppx.ps1</S>
+          <B N="CanGenerateSasUri">false</B>
+        </Props>
+      </Obj>
+      <Obj N="BlobBaseClient" RefId="25">
+        <TNRef RefId="5" />
+        <ToString>Azure.Storage.Blobs.Specialized.BlockBlobClient</ToString>
+        <Props>
+          <I32 N="BlockBlobMaxUploadBlobBytes">2147483647</I32>
+          <I64 N="BlockBlobMaxUploadBlobLongBytes">5242880000</I64>
+          <I32 N="BlockBlobMaxStageBlockBytes">2147483647</I32>
+          <I64 N="BlockBlobMaxStageBlockLongBytes">4194304000</I64>
+          <I32 N="BlockBlobMaxBlocks">50000</I32>
+          <URI N="Uri">https://osdscripts.blob.core.windows.net/others/Invoke-oobeRemoveAppx.ps1</URI>
+          <S N="AccountName">osdscripts</S>
+          <S N="BlobContainerName">others</S>
+          <S N="Name">Invoke-oobeRemoveAppx.ps1</S>
+          <B N="CanGenerateSasUri">false</B>
+        </Props>
+      </Obj>
+      <Obj N="BlobProperties" RefId="26">
+        <TNRef RefId="6" />
+        <ToString>Azure.Storage.Blobs.Models.BlobProperties</ToString>
+        <Props>
+          <S N="LastModified">05/18/2022 08:28:23 +00:00</S>
+          <S N="CreatedOn">05/18/2022 08:28:23 +00:00</S>
+          <Obj N="Metadata" RefId="27">
+            <TNRef RefId="2" />
+            <DCT />
+          </Obj>
+          <Nil N="ObjectReplicationDestinationPolicyId" />
+          <Nil N="ObjectReplicationSourceProperties" />
+          <S N="BlobType">Block</S>
+          <S N="CopyCompletedOn">01/01/0001 00:00:00 +00:00</S>
+          <Nil N="CopyStatusDescription" />
+          <Nil N="CopyId" />
+          <Nil N="CopyProgress" />
+          <Nil N="CopySource" />
+          <S N="CopyStatus">Pending</S>
+          <Nil N="BlobCopyStatus" />
+          <B N="IsIncrementalCopy">false</B>
+          <Nil N="DestinationSnapshot" />
+          <S N="LeaseDuration">Infinite</S>
+          <S N="LeaseState">Available</S>
+          <S N="LeaseStatus">Unlocked</S>
+          <I64 N="ContentLength">3754</I64>
+          <S N="ContentType">application/octet-stream</S>
+          <S N="ETag">"0x8DA38A85F4C8401"</S>
+          <BA N="ContentHash">ux7I3qfhPrCyIAWNVozi9Q==</BA>
+          <Nil N="ContentEncoding" />
+          <Nil N="ContentDisposition" />
+          <Nil N="ContentLanguage" />
+          <Nil N="CacheControl" />
+          <I64 N="BlobSequenceNumber">0</I64>
+          <S N="AcceptRanges">bytes</S>
+          <I32 N="BlobCommittedBlockCount">0</I32>
+          <B N="IsServerEncrypted">true</B>
+          <Nil N="EncryptionKeySha256" />
+          <Nil N="EncryptionScope" />
+          <S N="AccessTier">Hot</S>
+          <B N="AccessTierInferred">true</B>
+          <Nil N="ArchiveStatus" />
+          <S N="AccessTierChangedOn">01/01/0001 00:00:00 +00:00</S>
+          <Nil N="VersionId" />
+          <B N="IsLatestVersion">false</B>
+          <I64 N="TagCount">0</I64>
+          <S N="ExpiresOn">01/01/0001 00:00:00 +00:00</S>
+          <B N="IsSealed">false</B>
+          <Nil N="RehydratePriority" />
+          <S N="LastAccessed">01/01/0001 00:00:00 +00:00</S>
+          <S N="ImmutabilityPolicy">Azure.Storage.Blobs.Models.BlobImmutabilityPolicy</S>
+          <B N="HasLegalHold">false</B>
+        </Props>
+      </Obj>
+      <Nil N="RemainingDaysBeforePermanentDelete" />
+      <S N="ContentType">application/octet-stream</S>
+      <Obj N="LastModified" RefId="28">
+        <TNRef RefId="7" />
+        <ToString>05/18/2022 08:28:23 +00:00</ToString>
+        <Props>
+          <DT N="DateTime">2022-05-18T08:28:23</DT>
+          <DT N="UtcDateTime">2022-05-18T08:28:23Z</DT>
+          <DT N="LocalDateTime">2022-05-18T10:28:23+02:00</DT>
+          <DT N="Date">2022-05-18T00:00:00</DT>
+          <I32 N="Day">18</I32>
+          <S N="DayOfWeek">Wednesday</S>
+          <I32 N="DayOfYear">138</I32>
+          <I32 N="Hour">8</I32>
+          <I32 N="Millisecond">0</I32>
+          <I32 N="Minute">28</I32>
+          <I32 N="Month">5</I32>
+          <TS N="Offset">PT0S</TS>
+          <I32 N="Second">23</I32>
+          <I64 N="Ticks">637884593030000000</I64>
+          <I64 N="UtcTicks">637884593030000000</I64>
+          <TS N="TimeOfDay">PT8H28M23S</TS>
+          <I32 N="Year">2022</I32>
+        </Props>
+      </Obj>
+      <Nil N="SnapshotTime" />
+      <Nil N="ContinuationToken" />
+      <Nil N="VersionId" />
+      <Nil N="IsLatestVersion" />
+      <S N="AccessTier">Hot</S>
+      <I64 N="TagCount">0</I64>
+      <Nil N="Tags" />
+      <Ref N="Context" RefId="9" />
+      <S N="Name">Invoke-oobeRemoveAppx.ps1</S>
+    </Props>
+  </Obj>
+  <Obj RefId="29">
+    <TNRef RefId="0" />
+    <ToString>Microsoft.WindowsAzure.Commands.Common.Storage.ResourceModel.AzureStorageBlob</ToString>
+    <Props>
+      <Obj N="ICloudBlob" RefId="30">
+        <TNRef RefId="1" />
+        <ToString>Microsoft.Azure.Storage.Blob.CloudBlockBlob</ToString>
+        <Props>
+          <I32 N="StreamWriteSizeInBytes">4194304</I32>
+          <S N="ServiceClient">Microsoft.Azure.Storage.Blob.CloudBlobClient</S>
+          <I32 N="StreamMinimumReadSizeInBytes">4194304</I32>
+          <S N="Properties">Microsoft.Azure.Storage.Blob.BlobProperties</S>
+          <Obj N="Metadata" RefId="31">
+            <TNRef RefId="2" />
+            <DCT />
+          </Obj>
+          <URI N="Uri">https://osdscripts.blob.core.windows.net/others/Invoke-oobeUpdateDrivers.ps1</URI>
+          <S N="StorageUri">Primary = 'https://osdscripts.blob.core.windows.net/others/Invoke-oobeUpdateDrivers.ps1'; Secondary = ''</S>
+          <Nil N="SnapshotTime" />
+          <B N="IsSnapshot">false</B>
+          <B N="IsDeleted">false</B>
+          <URI N="SnapshotQualifiedUri">https://osdscripts.blob.core.windows.net/others/Invoke-oobeUpdateDrivers.ps1</URI>
+          <S N="SnapshotQualifiedStorageUri">Primary = 'https://osdscripts.blob.core.windows.net/others/Invoke-oobeUpdateDrivers.ps1'; Secondary = ''</S>
+          <Nil N="CopyState" />
+          <S N="Name">Invoke-oobeUpdateDrivers.ps1</S>
+          <S N="Container">Microsoft.Azure.Storage.Blob.CloudBlobContainer</S>
+          <S N="Parent">Microsoft.Azure.Storage.Blob.CloudBlobDirectory</S>
+          <S N="BlobType">BlockBlob</S>
+        </Props>
+      </Obj>
+      <Obj N="BlobType" RefId="32">
+        <TNRef RefId="3" />
+        <ToString>BlockBlob</ToString>
+        <I32>2</I32>
+      </Obj>
+      <I64 N="Length">4542</I64>
+      <B N="IsDeleted">false</B>
+      <Obj N="BlobClient" RefId="33">
+        <TNRef RefId="4" />
+        <ToString>Azure.Storage.Blobs.BlobClient</ToString>
+        <Props>
+          <URI N="Uri">https://osdscripts.blob.core.windows.net/others/Invoke-oobeUpdateDrivers.ps1</URI>
+          <S N="AccountName">osdscripts</S>
+          <S N="BlobContainerName">others</S>
+          <S N="Name">Invoke-oobeUpdateDrivers.ps1</S>
+          <B N="CanGenerateSasUri">false</B>
+        </Props>
+      </Obj>
+      <Obj N="BlobBaseClient" RefId="34">
+        <TNRef RefId="5" />
+        <ToString>Azure.Storage.Blobs.Specialized.BlockBlobClient</ToString>
+        <Props>
+          <I32 N="BlockBlobMaxUploadBlobBytes">2147483647</I32>
+          <I64 N="BlockBlobMaxUploadBlobLongBytes">5242880000</I64>
+          <I32 N="BlockBlobMaxStageBlockBytes">2147483647</I32>
+          <I64 N="BlockBlobMaxStageBlockLongBytes">4194304000</I64>
+          <I32 N="BlockBlobMaxBlocks">50000</I32>
+          <URI N="Uri">https://osdscripts.blob.core.windows.net/others/Invoke-oobeUpdateDrivers.ps1</URI>
+          <S N="AccountName">osdscripts</S>
+          <S N="BlobContainerName">others</S>
+          <S N="Name">Invoke-oobeUpdateDrivers.ps1</S>
+          <B N="CanGenerateSasUri">false</B>
+        </Props>
+      </Obj>
+      <Obj N="BlobProperties" RefId="35">
+        <TNRef RefId="6" />
+        <ToString>Azure.Storage.Blobs.Models.BlobProperties</ToString>
+        <Props>
+          <S N="LastModified">05/18/2022 08:28:23 +00:00</S>
+          <S N="CreatedOn">05/18/2022 08:28:23 +00:00</S>
+          <Obj N="Metadata" RefId="36">
+            <TNRef RefId="2" />
+            <DCT />
+          </Obj>
+          <Nil N="ObjectReplicationDestinationPolicyId" />
+          <Nil N="ObjectReplicationSourceProperties" />
+          <S N="BlobType">Block</S>
+          <S N="CopyCompletedOn">01/01/0001 00:00:00 +00:00</S>
+          <Nil N="CopyStatusDescription" />
+          <Nil N="CopyId" />
+          <Nil N="CopyProgress" />
+          <Nil N="CopySource" />
+          <S N="CopyStatus">Pending</S>
+          <Nil N="BlobCopyStatus" />
+          <B N="IsIncrementalCopy">false</B>
+          <Nil N="DestinationSnapshot" />
+          <S N="LeaseDuration">Infinite</S>
+          <S N="LeaseState">Available</S>
+          <S N="LeaseStatus">Unlocked</S>
+          <I64 N="ContentLength">4542</I64>
+          <S N="ContentType">application/octet-stream</S>
+          <S N="ETag">"0x8DA38A85F4A887D"</S>
+          <BA N="ContentHash">5XFJn2RxiPyV60trBbPYQA==</BA>
+          <Nil N="ContentEncoding" />
+          <Nil N="ContentDisposition" />
+          <Nil N="ContentLanguage" />
+          <Nil N="CacheControl" />
+          <I64 N="BlobSequenceNumber">0</I64>
+          <S N="AcceptRanges">bytes</S>
+          <I32 N="BlobCommittedBlockCount">0</I32>
+          <B N="IsServerEncrypted">true</B>
+          <Nil N="EncryptionKeySha256" />
+          <Nil N="EncryptionScope" />
+          <S N="AccessTier">Hot</S>
+          <B N="AccessTierInferred">true</B>
+          <Nil N="ArchiveStatus" />
+          <S N="AccessTierChangedOn">01/01/0001 00:00:00 +00:00</S>
+          <Nil N="VersionId" />
+          <B N="IsLatestVersion">false</B>
+          <I64 N="TagCount">0</I64>
+          <S N="ExpiresOn">01/01/0001 00:00:00 +00:00</S>
+          <B N="IsSealed">false</B>
+          <Nil N="RehydratePriority" />
+          <S N="LastAccessed">01/01/0001 00:00:00 +00:00</S>
+          <S N="ImmutabilityPolicy">Azure.Storage.Blobs.Models.BlobImmutabilityPolicy</S>
+          <B N="HasLegalHold">false</B>
+        </Props>
+      </Obj>
+      <Nil N="RemainingDaysBeforePermanentDelete" />
+      <S N="ContentType">application/octet-stream</S>
+      <Obj N="LastModified" RefId="37">
+        <TNRef RefId="7" />
+        <ToString>05/18/2022 08:28:23 +00:00</ToString>
+        <Props>
+          <DT N="DateTime">2022-05-18T08:28:23</DT>
+          <DT N="UtcDateTime">2022-05-18T08:28:23Z</DT>
+          <DT N="LocalDateTime">2022-05-18T10:28:23+02:00</DT>
+          <DT N="Date">2022-05-18T00:00:00</DT>
+          <I32 N="Day">18</I32>
+          <S N="DayOfWeek">Wednesday</S>
+          <I32 N="DayOfYear">138</I32>
+          <I32 N="Hour">8</I32>
+          <I32 N="Millisecond">0</I32>
+          <I32 N="Minute">28</I32>
+          <I32 N="Month">5</I32>
+          <TS N="Offset">PT0S</TS>
+          <I32 N="Second">23</I32>
+          <I64 N="Ticks">637884593030000000</I64>
+          <I64 N="UtcTicks">637884593030000000</I64>
+          <TS N="TimeOfDay">PT8H28M23S</TS>
+          <I32 N="Year">2022</I32>
+        </Props>
+      </Obj>
+      <Nil N="SnapshotTime" />
+      <Nil N="ContinuationToken" />
+      <Nil N="VersionId" />
+      <Nil N="IsLatestVersion" />
+      <S N="AccessTier">Hot</S>
+      <I64 N="TagCount">0</I64>
+      <Nil N="Tags" />
+      <Ref N="Context" RefId="9" />
+      <S N="Name">Invoke-oobeUpdateDrivers.ps1</S>
+    </Props>
+  </Obj>
+  <Obj RefId="38">
+    <TNRef RefId="0" />
+    <ToString>Microsoft.WindowsAzure.Commands.Common.Storage.ResourceModel.AzureStorageBlob</ToString>
+    <Props>
+      <Obj N="ICloudBlob" RefId="39">
+        <TNRef RefId="1" />
+        <ToString>Microsoft.Azure.Storage.Blob.CloudBlockBlob</ToString>
+        <Props>
+          <I32 N="StreamWriteSizeInBytes">4194304</I32>
+          <S N="ServiceClient">Microsoft.Azure.Storage.Blob.CloudBlobClient</S>
+          <I32 N="StreamMinimumReadSizeInBytes">4194304</I32>
+          <S N="Properties">Microsoft.Azure.Storage.Blob.BlobProperties</S>
+          <Obj N="Metadata" RefId="40">
+            <TNRef RefId="2" />
+            <DCT />
+          </Obj>
+          <URI N="Uri">https://osdscripts.blob.core.windows.net/others/Invoke-oobeUpdateWindows.ps1</URI>
+          <S N="StorageUri">Primary = 'https://osdscripts.blob.core.windows.net/others/Invoke-oobeUpdateWindows.ps1'; Secondary = ''</S>
+          <Nil N="SnapshotTime" />
+          <B N="IsSnapshot">false</B>
+          <B N="IsDeleted">false</B>
+          <URI N="SnapshotQualifiedUri">https://osdscripts.blob.core.windows.net/others/Invoke-oobeUpdateWindows.ps1</URI>
+          <S N="SnapshotQualifiedStorageUri">Primary = 'https://osdscripts.blob.core.windows.net/others/Invoke-oobeUpdateWindows.ps1'; Secondary = ''</S>
+          <Nil N="CopyState" />
+          <S N="Name">Invoke-oobeUpdateWindows.ps1</S>
+          <S N="Container">Microsoft.Azure.Storage.Blob.CloudBlobContainer</S>
+          <S N="Parent">Microsoft.Azure.Storage.Blob.CloudBlobDirectory</S>
+          <S N="BlobType">BlockBlob</S>
+        </Props>
+      </Obj>
+      <Obj N="BlobType" RefId="41">
+        <TNRef RefId="3" />
+        <ToString>BlockBlob</ToString>
+        <I32>2</I32>
+      </Obj>
+      <I64 N="Length">5666</I64>
+      <B N="IsDeleted">false</B>
+      <Obj N="BlobClient" RefId="42">
+        <TNRef RefId="4" />
+        <ToString>Azure.Storage.Blobs.BlobClient</ToString>
+        <Props>
+          <URI N="Uri">https://osdscripts.blob.core.windows.net/others/Invoke-oobeUpdateWindows.ps1</URI>
+          <S N="AccountName">osdscripts</S>
+          <S N="BlobContainerName">others</S>
+          <S N="Name">Invoke-oobeUpdateWindows.ps1</S>
+          <B N="CanGenerateSasUri">false</B>
+        </Props>
+      </Obj>
+      <Obj N="BlobBaseClient" RefId="43">
+        <TNRef RefId="5" />
+        <ToString>Azure.Storage.Blobs.Specialized.BlockBlobClient</ToString>
+        <Props>
+          <I32 N="BlockBlobMaxUploadBlobBytes">2147483647</I32>
+          <I64 N="BlockBlobMaxUploadBlobLongBytes">5242880000</I64>
+          <I32 N="BlockBlobMaxStageBlockBytes">2147483647</I32>
+          <I64 N="BlockBlobMaxStageBlockLongBytes">4194304000</I64>
+          <I32 N="BlockBlobMaxBlocks">50000</I32>
+          <URI N="Uri">https://osdscripts.blob.core.windows.net/others/Invoke-oobeUpdateWindows.ps1</URI>
+          <S N="AccountName">osdscripts</S>
+          <S N="BlobContainerName">others</S>
+          <S N="Name">Invoke-oobeUpdateWindows.ps1</S>
+          <B N="CanGenerateSasUri">false</B>
+        </Props>
+      </Obj>
+      <Obj N="BlobProperties" RefId="44">
+        <TNRef RefId="6" />
+        <ToString>Azure.Storage.Blobs.Models.BlobProperties</ToString>
+        <Props>
+          <S N="LastModified">05/18/2022 08:28:23 +00:00</S>
+          <S N="CreatedOn">05/18/2022 08:28:23 +00:00</S>
+          <Obj N="Metadata" RefId="45">
+            <TNRef RefId="2" />
+            <DCT />
+          </Obj>
+          <Nil N="ObjectReplicationDestinationPolicyId" />
+          <Nil N="ObjectReplicationSourceProperties" />
+          <S N="BlobType">Block</S>
+          <S N="CopyCompletedOn">01/01/0001 00:00:00 +00:00</S>
+          <Nil N="CopyStatusDescription" />
+          <Nil N="CopyId" />
+          <Nil N="CopyProgress" />
+          <Nil N="CopySource" />
+          <S N="CopyStatus">Pending</S>
+          <Nil N="BlobCopyStatus" />
+          <B N="IsIncrementalCopy">false</B>
+          <Nil N="DestinationSnapshot" />
+          <S N="LeaseDuration">Infinite</S>
+          <S N="LeaseState">Available</S>
+          <S N="LeaseStatus">Unlocked</S>
+          <I64 N="ContentLength">5666</I64>
+          <S N="ContentType">application/octet-stream</S>
+          <S N="ETag">"0x8DA38A85F4E5879"</S>
+          <BA N="ContentHash">25+2U/v6RwOR7v+VQ2cgJw==</BA>
+          <Nil N="ContentEncoding" />
+          <Nil N="ContentDisposition" />
+          <Nil N="ContentLanguage" />
+          <Nil N="CacheControl" />
+          <I64 N="BlobSequenceNumber">0</I64>
+          <S N="AcceptRanges">bytes</S>
+          <I32 N="BlobCommittedBlockCount">0</I32>
+          <B N="IsServerEncrypted">true</B>
+          <Nil N="EncryptionKeySha256" />
+          <Nil N="EncryptionScope" />
+          <S N="AccessTier">Hot</S>
+          <B N="AccessTierInferred">true</B>
+          <Nil N="ArchiveStatus" />
+          <S N="AccessTierChangedOn">01/01/0001 00:00:00 +00:00</S>
+          <Nil N="VersionId" />
+          <B N="IsLatestVersion">false</B>
+          <I64 N="TagCount">0</I64>
+          <S N="ExpiresOn">01/01/0001 00:00:00 +00:00</S>
+          <B N="IsSealed">false</B>
+          <Nil N="RehydratePriority" />
+          <S N="LastAccessed">01/01/0001 00:00:00 +00:00</S>
+          <S N="ImmutabilityPolicy">Azure.Storage.Blobs.Models.BlobImmutabilityPolicy</S>
+          <B N="HasLegalHold">false</B>
+        </Props>
+      </Obj>
+      <Nil N="RemainingDaysBeforePermanentDelete" />
+      <S N="ContentType">application/octet-stream</S>
+      <Obj N="LastModified" RefId="46">
+        <TNRef RefId="7" />
+        <ToString>05/18/2022 08:28:23 +00:00</ToString>
+        <Props>
+          <DT N="DateTime">2022-05-18T08:28:23</DT>
+          <DT N="UtcDateTime">2022-05-18T08:28:23Z</DT>
+          <DT N="LocalDateTime">2022-05-18T10:28:23+02:00</DT>
+          <DT N="Date">2022-05-18T00:00:00</DT>
+          <I32 N="Day">18</I32>
+          <S N="DayOfWeek">Wednesday</S>
+          <I32 N="DayOfYear">138</I32>
+          <I32 N="Hour">8</I32>
+          <I32 N="Millisecond">0</I32>
+          <I32 N="Minute">28</I32>
+          <I32 N="Month">5</I32>
+          <TS N="Offset">PT0S</TS>
+          <I32 N="Second">23</I32>
+          <I64 N="Ticks">637884593030000000</I64>
+          <I64 N="UtcTicks">637884593030000000</I64>
+          <TS N="TimeOfDay">PT8H28M23S</TS>
+          <I32 N="Year">2022</I32>
+        </Props>
+      </Obj>
+      <Nil N="SnapshotTime" />
+      <Nil N="ContinuationToken" />
+      <Nil N="VersionId" />
+      <Nil N="IsLatestVersion" />
+      <S N="AccessTier">Hot</S>
+      <I64 N="TagCount">0</I64>
+      <Nil N="Tags" />
+      <Ref N="Context" RefId="9" />
+      <S N="Name">Invoke-oobeUpdateWindows.ps1</S>
+    </Props>
+  </Obj>
+  <Obj RefId="47">
+    <TNRef RefId="0" />
+    <ToString>Microsoft.WindowsAzure.Commands.Common.Storage.ResourceModel.AzureStorageBlob</ToString>
+    <Props>
+      <Obj N="ICloudBlob" RefId="48">
+        <TNRef RefId="1" />
+        <ToString>Microsoft.Azure.Storage.Blob.CloudBlockBlob</ToString>
+        <Props>
+          <I32 N="StreamWriteSizeInBytes">4194304</I32>
+          <S N="ServiceClient">Microsoft.Azure.Storage.Blob.CloudBlobClient</S>
+          <I32 N="StreamMinimumReadSizeInBytes">4194304</I32>
+          <S N="Properties">Microsoft.Azure.Storage.Blob.BlobProperties</S>
+          <Obj N="Metadata" RefId="49">
+            <TNRef RefId="2" />
+            <DCT />
+          </Obj>
+          <URI N="Uri">https://osdscripts.blob.core.windows.net/scripts/Show-MsSettings.ps1</URI>
+          <S N="StorageUri">Primary = 'https://osdscripts.blob.core.windows.net/scripts/Show-MsSettings.ps1'; Secondary = ''</S>
+          <Nil N="SnapshotTime" />
+          <B N="IsSnapshot">false</B>
+          <B N="IsDeleted">false</B>
+          <URI N="SnapshotQualifiedUri">https://osdscripts.blob.core.windows.net/scripts/Show-MsSettings.ps1</URI>
+          <S N="SnapshotQualifiedStorageUri">Primary = 'https://osdscripts.blob.core.windows.net/scripts/Show-MsSettings.ps1'; Secondary = ''</S>
+          <Nil N="CopyState" />
+          <S N="Name">Show-MsSettings.ps1</S>
+          <S N="Container">Microsoft.Azure.Storage.Blob.CloudBlobContainer</S>
+          <S N="Parent">Microsoft.Azure.Storage.Blob.CloudBlobDirectory</S>
+          <S N="BlobType">BlockBlob</S>
+        </Props>
+      </Obj>
+      <Obj N="BlobType" RefId="50">
+        <TNRef RefId="3" />
+        <ToString>BlockBlob</ToString>
+        <I32>2</I32>
+      </Obj>
+      <I64 N="Length">5360</I64>
+      <B N="IsDeleted">false</B>
+      <Obj N="BlobClient" RefId="51">
+        <TNRef RefId="4" />
+        <ToString>Azure.Storage.Blobs.BlobClient</ToString>
+        <Props>
+          <URI N="Uri">https://osdscripts.blob.core.windows.net/scripts/Show-MsSettings.ps1</URI>
+          <S N="AccountName">osdscripts</S>
+          <S N="BlobContainerName">scripts</S>
+          <S N="Name">Show-MsSettings.ps1</S>
+          <B N="CanGenerateSasUri">false</B>
+        </Props>
+      </Obj>
+      <Obj N="BlobBaseClient" RefId="52">
+        <TNRef RefId="5" />
+        <ToString>Azure.Storage.Blobs.Specialized.BlockBlobClient</ToString>
+        <Props>
+          <I32 N="BlockBlobMaxUploadBlobBytes">2147483647</I32>
+          <I64 N="BlockBlobMaxUploadBlobLongBytes">5242880000</I64>
+          <I32 N="BlockBlobMaxStageBlockBytes">2147483647</I32>
+          <I64 N="BlockBlobMaxStageBlockLongBytes">4194304000</I64>
+          <I32 N="BlockBlobMaxBlocks">50000</I32>
+          <URI N="Uri">https://osdscripts.blob.core.windows.net/scripts/Show-MsSettings.ps1</URI>
+          <S N="AccountName">osdscripts</S>
+          <S N="BlobContainerName">scripts</S>
+          <S N="Name">Show-MsSettings.ps1</S>
+          <B N="CanGenerateSasUri">false</B>
+        </Props>
+      </Obj>
+      <Obj N="BlobProperties" RefId="53">
+        <TNRef RefId="6" />
+        <ToString>Azure.Storage.Blobs.Models.BlobProperties</ToString>
+        <Props>
+          <S N="LastModified">05/18/2022 08:39:53 +00:00</S>
+          <S N="CreatedOn">05/18/2022 08:39:53 +00:00</S>
+          <Obj N="Metadata" RefId="54">
+            <TNRef RefId="2" />
+            <DCT />
+          </Obj>
+          <Nil N="ObjectReplicationDestinationPolicyId" />
+          <Nil N="ObjectReplicationSourceProperties" />
+          <S N="BlobType">Block</S>
+          <S N="CopyCompletedOn">01/01/0001 00:00:00 +00:00</S>
+          <Nil N="CopyStatusDescription" />
+          <Nil N="CopyId" />
+          <Nil N="CopyProgress" />
+          <Nil N="CopySource" />
+          <S N="CopyStatus">Pending</S>
+          <Nil N="BlobCopyStatus" />
+          <B N="IsIncrementalCopy">false</B>
+          <Nil N="DestinationSnapshot" />
+          <S N="LeaseDuration">Infinite</S>
+          <S N="LeaseState">Available</S>
+          <S N="LeaseStatus">Unlocked</S>
+          <I64 N="ContentLength">5360</I64>
+          <S N="ContentType">application/octet-stream</S>
+          <S N="ETag">"0x8DA38A9FAF9CE18"</S>
+          <BA N="ContentHash">wJqkpNYNRulfd79TceJuww==</BA>
+          <Nil N="ContentEncoding" />
+          <Nil N="ContentDisposition" />
+          <Nil N="ContentLanguage" />
+          <Nil N="CacheControl" />
+          <I64 N="BlobSequenceNumber">0</I64>
+          <S N="AcceptRanges">bytes</S>
+          <I32 N="BlobCommittedBlockCount">0</I32>
+          <B N="IsServerEncrypted">true</B>
+          <Nil N="EncryptionKeySha256" />
+          <Nil N="EncryptionScope" />
+          <S N="AccessTier">Hot</S>
+          <B N="AccessTierInferred">true</B>
+          <Nil N="ArchiveStatus" />
+          <S N="AccessTierChangedOn">01/01/0001 00:00:00 +00:00</S>
+          <Nil N="VersionId" />
+          <B N="IsLatestVersion">false</B>
+          <I64 N="TagCount">0</I64>
+          <S N="ExpiresOn">01/01/0001 00:00:00 +00:00</S>
+          <B N="IsSealed">false</B>
+          <Nil N="RehydratePriority" />
+          <S N="LastAccessed">01/01/0001 00:00:00 +00:00</S>
+          <S N="ImmutabilityPolicy">Azure.Storage.Blobs.Models.BlobImmutabilityPolicy</S>
+          <B N="HasLegalHold">false</B>
+        </Props>
+      </Obj>
+      <Nil N="RemainingDaysBeforePermanentDelete" />
+      <S N="ContentType">application/octet-stream</S>
+      <Obj N="LastModified" RefId="55">
+        <TNRef RefId="7" />
+        <ToString>05/18/2022 08:39:53 +00:00</ToString>
+        <Props>
+          <DT N="DateTime">2022-05-18T08:39:53</DT>
+          <DT N="UtcDateTime">2022-05-18T08:39:53Z</DT>
+          <DT N="LocalDateTime">2022-05-18T10:39:53+02:00</DT>
+          <DT N="Date">2022-05-18T00:00:00</DT>
+          <I32 N="Day">18</I32>
+          <S N="DayOfWeek">Wednesday</S>
+          <I32 N="DayOfYear">138</I32>
+          <I32 N="Hour">8</I32>
+          <I32 N="Millisecond">0</I32>
+          <I32 N="Minute">39</I32>
+          <I32 N="Month">5</I32>
+          <TS N="Offset">PT0S</TS>
+          <I32 N="Second">53</I32>
+          <I64 N="Ticks">637884599930000000</I64>
+          <I64 N="UtcTicks">637884599930000000</I64>
+          <TS N="TimeOfDay">PT8H39M53S</TS>
+          <I32 N="Year">2022</I32>
+        </Props>
+      </Obj>
+      <Nil N="SnapshotTime" />
+      <Nil N="ContinuationToken" />
+      <Nil N="VersionId" />
+      <Nil N="IsLatestVersion" />
+      <S N="AccessTier">Hot</S>
+      <I64 N="TagCount">0</I64>
+      <Nil N="Tags" />
+      <Ref N="Context" RefId="9" />
+      <S N="Name">Show-MsSettings.ps1</S>
+    </Props>
+  </Obj>
+  <Obj RefId="56">
+    <TNRef RefId="0" />
+    <ToString>Microsoft.WindowsAzure.Commands.Common.Storage.ResourceModel.AzureStorageBlob</ToString>
+    <Props>
+      <Obj N="ICloudBlob" RefId="57">
+        <TNRef RefId="1" />
+        <ToString>Microsoft.Azure.Storage.Blob.CloudBlockBlob</ToString>
+        <Props>
+          <I32 N="StreamWriteSizeInBytes">4194304</I32>
+          <S N="ServiceClient">Microsoft.Azure.Storage.Blob.CloudBlobClient</S>
+          <I32 N="StreamMinimumReadSizeInBytes">4194304</I32>
+          <S N="Properties">Microsoft.Azure.Storage.Blob.BlobProperties</S>
+          <Obj N="Metadata" RefId="58">
+            <TNRef RefId="2" />
+            <DCT />
+          </Obj>
+          <URI N="Uri">https://osdscripts.blob.core.windows.net/unattend/autounattend.xml</URI>
+          <S N="StorageUri">Primary = 'https://osdscripts.blob.core.windows.net/unattend/autounattend.xml'; Secondary = ''</S>
+          <Nil N="SnapshotTime" />
+          <B N="IsSnapshot">false</B>
+          <B N="IsDeleted">false</B>
+          <URI N="SnapshotQualifiedUri">https://osdscripts.blob.core.windows.net/unattend/autounattend.xml</URI>
+          <S N="SnapshotQualifiedStorageUri">Primary = 'https://osdscripts.blob.core.windows.net/unattend/autounattend.xml'; Secondary = ''</S>
+          <Nil N="CopyState" />
+          <S N="Name">autounattend.xml</S>
+          <S N="Container">Microsoft.Azure.Storage.Blob.CloudBlobContainer</S>
+          <S N="Parent">Microsoft.Azure.Storage.Blob.CloudBlobDirectory</S>
+          <S N="BlobType">BlockBlob</S>
+        </Props>
+      </Obj>
+      <Obj N="BlobType" RefId="59">
+        <TNRef RefId="3" />
+        <ToString>BlockBlob</ToString>
+        <I32>2</I32>
+      </Obj>
+      <I64 N="Length">4539</I64>
+      <B N="IsDeleted">false</B>
+      <Obj N="BlobClient" RefId="60">
+        <TNRef RefId="4" />
+        <ToString>Azure.Storage.Blobs.BlobClient</ToString>
+        <Props>
+          <URI N="Uri">https://osdscripts.blob.core.windows.net/unattend/autounattend.xml</URI>
+          <S N="AccountName">osdscripts</S>
+          <S N="BlobContainerName">unattend</S>
+          <S N="Name">autounattend.xml</S>
+          <B N="CanGenerateSasUri">false</B>
+        </Props>
+      </Obj>
+      <Obj N="BlobBaseClient" RefId="61">
+        <TNRef RefId="5" />
+        <ToString>Azure.Storage.Blobs.Specialized.BlockBlobClient</ToString>
+        <Props>
+          <I32 N="BlockBlobMaxUploadBlobBytes">2147483647</I32>
+          <I64 N="BlockBlobMaxUploadBlobLongBytes">5242880000</I64>
+          <I32 N="BlockBlobMaxStageBlockBytes">2147483647</I32>
+          <I64 N="BlockBlobMaxStageBlockLongBytes">4194304000</I64>
+          <I32 N="BlockBlobMaxBlocks">50000</I32>
+          <URI N="Uri">https://osdscripts.blob.core.windows.net/unattend/autounattend.xml</URI>
+          <S N="AccountName">osdscripts</S>
+          <S N="BlobContainerName">unattend</S>
+          <S N="Name">autounattend.xml</S>
+          <B N="CanGenerateSasUri">false</B>
+        </Props>
+      </Obj>
+      <Obj N="BlobProperties" RefId="62">
+        <TNRef RefId="6" />
+        <ToString>Azure.Storage.Blobs.Models.BlobProperties</ToString>
+        <Props>
+          <S N="LastModified">05/18/2022 08:46:33 +00:00</S>
+          <S N="CreatedOn">05/18/2022 08:46:33 +00:00</S>
+          <Obj N="Metadata" RefId="63">
+            <TNRef RefId="2" />
+            <DCT />
+          </Obj>
+          <Nil N="ObjectReplicationDestinationPolicyId" />
+          <Nil N="ObjectReplicationSourceProperties" />
+          <S N="BlobType">Block</S>
+          <S N="CopyCompletedOn">01/01/0001 00:00:00 +00:00</S>
+          <Nil N="CopyStatusDescription" />
+          <Nil N="CopyId" />
+          <Nil N="CopyProgress" />
+          <Nil N="CopySource" />
+          <S N="CopyStatus">Pending</S>
+          <Nil N="BlobCopyStatus" />
+          <B N="IsIncrementalCopy">false</B>
+          <Nil N="DestinationSnapshot" />
+          <S N="LeaseDuration">Infinite</S>
+          <S N="LeaseState">Available</S>
+          <S N="LeaseStatus">Unlocked</S>
+          <I64 N="ContentLength">4539</I64>
+          <S N="ContentType">text/xml</S>
+          <S N="ETag">"0x8DA38AAE949AEA3"</S>
+          <BA N="ContentHash">mzjqLlHu7vPm34XKg7Twyw==</BA>
+          <Nil N="ContentEncoding" />
+          <Nil N="ContentDisposition" />
+          <Nil N="ContentLanguage" />
+          <Nil N="CacheControl" />
+          <I64 N="BlobSequenceNumber">0</I64>
+          <S N="AcceptRanges">bytes</S>
+          <I32 N="BlobCommittedBlockCount">0</I32>
+          <B N="IsServerEncrypted">true</B>
+          <Nil N="EncryptionKeySha256" />
+          <Nil N="EncryptionScope" />
+          <S N="AccessTier">Hot</S>
+          <B N="AccessTierInferred">true</B>
+          <Nil N="ArchiveStatus" />
+          <S N="AccessTierChangedOn">01/01/0001 00:00:00 +00:00</S>
+          <Nil N="VersionId" />
+          <B N="IsLatestVersion">false</B>
+          <I64 N="TagCount">0</I64>
+          <S N="ExpiresOn">01/01/0001 00:00:00 +00:00</S>
+          <B N="IsSealed">false</B>
+          <Nil N="RehydratePriority" />
+          <S N="LastAccessed">01/01/0001 00:00:00 +00:00</S>
+          <S N="ImmutabilityPolicy">Azure.Storage.Blobs.Models.BlobImmutabilityPolicy</S>
+          <B N="HasLegalHold">false</B>
+        </Props>
+      </Obj>
+      <Nil N="RemainingDaysBeforePermanentDelete" />
+      <S N="ContentType">text/xml</S>
+      <Obj N="LastModified" RefId="64">
+        <TNRef RefId="7" />
+        <ToString>05/18/2022 08:46:33 +00:00</ToString>
+        <Props>
+          <DT N="DateTime">2022-05-18T08:46:33</DT>
+          <DT N="UtcDateTime">2022-05-18T08:46:33Z</DT>
+          <DT N="LocalDateTime">2022-05-18T10:46:33+02:00</DT>
+          <DT N="Date">2022-05-18T00:00:00</DT>
+          <I32 N="Day">18</I32>
+          <S N="DayOfWeek">Wednesday</S>
+          <I32 N="DayOfYear">138</I32>
+          <I32 N="Hour">8</I32>
+          <I32 N="Millisecond">0</I32>
+          <I32 N="Minute">46</I32>
+          <I32 N="Month">5</I32>
+          <TS N="Offset">PT0S</TS>
+          <I32 N="Second">33</I32>
+          <I64 N="Ticks">637884603930000000</I64>
+          <I64 N="UtcTicks">637884603930000000</I64>
+          <TS N="TimeOfDay">PT8H46M33S</TS>
+          <I32 N="Year">2022</I32>
+        </Props>
+      </Obj>
+      <Nil N="SnapshotTime" />
+      <Nil N="ContinuationToken" />
+      <Nil N="VersionId" />
+      <Nil N="IsLatestVersion" />
+      <S N="AccessTier">Hot</S>
+      <I64 N="TagCount">0</I64>
+      <Nil N="Tags" />
+      <Ref N="Context" RefId="9" />
+      <S N="Name">autounattend.xml</S>
+    </Props>
+  </Obj>
+</Objs>

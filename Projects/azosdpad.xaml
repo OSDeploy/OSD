@@ -1,0 +1,323 @@
+<Window
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Name="MainPanel" 
+        Title="AzOSDPAD"
+	    	SizeToContent="WidthAndHeight"
+	
+		xmlns:sys="clr-namespace:dev4sys.Tree;assembly=dev4sys.Tree" 
+		WindowStartupLocation="CenterScreen" Topmost="False"
+>  
+	<Window.Resources>
+        <ResourceDictionary>
+            <DrawingImage x:Key="Microsoft_Azure">
+               <DrawingImage.Drawing>
+    <DrawingGroup ClipGeometry="M0,0 V256 H256 V0 H0 Z">
+      <GeometryDrawing Geometry="F1 M256,256z M0,0z M89.158,18.266L158.396,18.266 86.523,231.224A11.041,11.041,0,0,1,76.062,238.734L22.179,238.734A11.023,11.023,0,0,1,11.734,224.186L78.697,25.776A11.04,11.04,0,0,1,89.158,18.266z">
+        <GeometryDrawing.Brush>
+          <LinearGradientBrush StartPoint="-960.606,283.397" EndPoint="-1032.511,70.972" MappingMode="Absolute" SpreadMethod="Pad" Opacity="1" Transform="1,0,0,-1,1075,318">
+            <GradientStop Color="#FF114A8B" Offset="0" />
+            <GradientStop Color="#FF0669BC" Offset="1" />
+          </LinearGradientBrush>
+        </GeometryDrawing.Brush>
+      </GeometryDrawing>
+      <GeometryDrawing Brush="#FF0078D4" Geometry="F1 M256,256z M0,0z M189.77,161.104L79.976,161.104A5.083,5.083,0,0,0,76.508,169.904L147.06,235.751A11.091,11.091,0,0,0,154.627,238.734L216.794,238.734z" />
+      <GeometryDrawing Geometry="F1 M256,256z M0,0z M89.158,18.266A10.95,10.95,0,0,0,78.675,25.92L11.817,224.006A11.01,11.01,0,0,0,22.21,238.734L77.484,238.734A11.814,11.814,0,0,0,86.553,231.02L99.883,191.73 147.508,236.148A11.267,11.267,0,0,0,154.597,238.734L216.534,238.734 189.368,161.104 110.178,161.122 158.648,18.266z">
+        <GeometryDrawing.Brush>
+          <LinearGradientBrush StartPoint="-938.144,184.402" EndPoint="-954.778,178.778" MappingMode="Absolute" SpreadMethod="Pad" Opacity="1" Transform="1,0,0,-1,1075,318">
+            <GradientStop Color="#4C000000" Offset="0" />
+            <GradientStop Color="#33000000" Offset="0.071" />
+            <GradientStop Color="#1A000000" Offset="0.321" />
+            <GradientStop Color="#0D000000" Offset="0.623" />
+            <GradientStop Color="#00000000" Offset="1" />
+          </LinearGradientBrush>
+        </GeometryDrawing.Brush>
+      </GeometryDrawing>
+      <GeometryDrawing Geometry="F1 M256,256z M0,0z M177.592,25.764A11.023,11.023,0,0,0,167.148,18.266L89.984,18.266A11.024,11.024,0,0,1,100.429,25.764L167.396,224.185A11.024,11.024,0,0,1,156.951,238.734L234.115,238.734A11.024,11.024,0,0,0,244.559,224.185z">
+        <GeometryDrawing.Brush>
+          <LinearGradientBrush StartPoint="-947.292,289.594" EndPoint="-868.363,79.308" MappingMode="Absolute" SpreadMethod="Pad" Opacity="1" Transform="1,0,0,-1,1075,318">
+            <GradientStop Color="#FF3CCBF4" Offset="0" />
+            <GradientStop Color="#FF2892DF" Offset="1" />
+          </LinearGradientBrush>
+        </GeometryDrawing.Brush>
+      </GeometryDrawing>
+    </DrawingGroup>
+  </DrawingImage.Drawing>
+            </DrawingImage>
+            <DrawingImage x:Key="Storage_Accounts">
+               <DrawingImage.Drawing>
+                   <DrawingGroup ClipGeometry="M0,0 V18 H18 V0 H0 Z">
+                    <GeometryDrawing Geometry="F1 M18,18z M0,0z M0.5,5.79L17.5,5.79A0,0,0,0,1,17.5,5.79L17.5,15.27A0.57,0.57,0,0,1,16.93,15.84L1.07,15.84A0.57,0.57,0,0,1,0.5,15.27L0.5,5.79A0,0,0,0,1,0.5,5.79z">
+                      <GeometryDrawing.Brush>
+                        <LinearGradientBrush StartPoint="9,15.83" EndPoint="9,5.79" MappingMode="Absolute" SpreadMethod="Pad" Opacity="1">
+                          <GradientStop Color="#FFB3B3B3" Offset="0" />
+                          <GradientStop Color="#FFC1C1C1" Offset="0.26" />
+                          <GradientStop Color="#FFE6E6E6" Offset="1" />
+                        </LinearGradientBrush>
+                      </GeometryDrawing.Brush>
+                    </GeometryDrawing>
+                    <GeometryDrawing Brush="#FF37C2B1" Geometry="F1 M18,18z M0,0z M1.07,2.17L16.93,2.17A0.57,0.57,0,0,1,17.5,2.74L17.5,5.79A0,0,0,0,1,17.5,5.79L0.5,5.79A0,0,0,0,1,0.5,5.79L0.5,2.73A0.57,0.57,0,0,1,1.07,2.17z" />
+                    <GeometryDrawing Brush="#FFFFFFFF" Geometry="F1 M18,18z M0,0z M2.81,6.89L15.18,6.89A0.27,0.27,0,0,1,15.44,7.16L15.44,8.56A0.27,0.27,0,0,1,15.18,8.83L2.81,8.83A0.27,0.27,0,0,1,2.55,8.56L2.55,7.16A0.27,0.27,0,0,1,2.81,6.89z" />
+                    <GeometryDrawing Brush="#FF37C2B1" Geometry="F1 M18,18z M0,0z M2.82,9.68L15.19,9.68A0.27,0.27,0,0,1,15.45,9.95L15.45,11.36A0.27,0.27,0,0,1,15.19,11.63L2.82,11.63A0.27,0.27,0,0,1,2.56,11.36L2.56,10A0.27,0.27,0,0,1,2.82,9.68z" />
+                    <GeometryDrawing Brush="#FF258277" Geometry="F1 M18,18z M0,0z M2.82,12.5L15.19,12.5A0.27,0.27,0,0,1,15.45,12.77L15.45,14.18A0.27,0.27,0,0,1,15.19,14.45L2.82,14.45A0.27,0.27,0,0,1,2.56,14.18L2.56,12.77A0.27,0.27,0,0,1,2.82,12.5z" />
+                  </DrawingGroup>
+             </DrawingImage.Drawing>
+            </DrawingImage>
+                <Style TargetType="{x:Type Button}">
+                <Setter Property="Background"
+                        Value="{DynamicResource FlatButtonBackgroundBrush}" />
+                <Setter Property="BorderThickness"
+                        Value="0" />
+                <Setter Property="FontSize"
+                        Value="{DynamicResource FlatButtonFontSize}" />
+                <Setter Property="Foreground"
+                        Value="{DynamicResource FlatButtonForegroundBrush}" />
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="{x:Type Button}">
+                            <Border x:Name="Border"
+                                    Margin="0"
+                                    Background="{TemplateBinding Background}"
+                                    BorderBrush="{TemplateBinding BorderBrush}"
+                                    CornerRadius="5"
+                                    BorderThickness="{TemplateBinding BorderThickness}"
+                                    SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}">
+                                <ContentPresenter x:Name="ContentPresenter"
+                                                  ContentTemplate="{TemplateBinding ContentTemplate}"
+                                                  Content="{TemplateBinding Content}"
+                                                  HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                                  Margin="{TemplateBinding Padding}"
+                                                  VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
+                            </Border>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+                <Style.Triggers>
+                    <Trigger Property="IsMouseOver"
+                             Value="True">
+                        <!-- Windows 11 Theme Dark Blue -->
+                        <Setter Property="Background"
+                                Value="#003E92" />
+                    </Trigger>
+                    <Trigger Property="IsMouseOver"
+                             Value="False">
+                        <!-- Windows 11 Theme Blue -->
+                        <Setter Property="Background"
+                                Value="#0067C0" />
+                    </Trigger>
+                    <Trigger Property="IsPressed"
+                             Value="True">
+                        <Setter Property="Background"
+                                Value="{DynamicResource FlatButtonPressedBackgroundBrush}" />
+                        <Setter Property="Foreground"
+                                Value="{DynamicResource FlatButtonPressedForegroundBrush}" />
+                    </Trigger>
+                    <Trigger Property="IsEnabled"
+                             Value="False">
+                        <Setter Property="Foreground"
+                                Value="{DynamicResource GrayBrush2}" />
+                    </Trigger>
+                </Style.Triggers>
+            </Style>
+            <Style TargetType="{x:Type ComboBox}">
+                <Setter Property="FontFamily"
+                        Value="Segoe UI" />
+            </Style>
+            <Style TargetType="{x:Type Label}">
+                <Setter Property="FontFamily"
+                        Value="Segoe UI" />
+            </Style>
+            <Style TargetType="{x:Type TextBox}">
+                <Setter Property="FontFamily"
+                        Value="Segoe UI" />
+            </Style>
+            <Style TargetType="{x:Type Window}">
+                <Setter Property="FontFamily"
+                        Value="Segoe UI" />
+                <Setter Property="FontSize"
+                        Value="16" />
+                <Setter Property="Background"
+                        Value="White" />
+                <Setter Property="Foreground"
+                        Value="Black" />
+            </Style>
+		</ResourceDictionary>
+    </Window.Resources>	
+	 <Window.Background>
+        <RadialGradientBrush GradientOrigin="0.2,0.2"
+                             Center="0.4,0.1"
+                             RadiusX="0.7"
+                             RadiusY="0.8">
+            <RadialGradientBrush.RelativeTransform>
+                <TransformGroup>
+                    <ScaleTransform CenterY="0.5"
+                                    CenterX="0.5" />
+                    <SkewTransform CenterY="0.5"
+                                   CenterX="0.5" />
+                    <RotateTransform Angle="-40.601"
+                                     CenterY="0.5"
+                                     CenterX="0.5" />
+                    <TranslateTransform />
+                </TransformGroup>
+            </RadialGradientBrush.RelativeTransform>
+            <GradientStop Color="White" />
+            <GradientStop Color="#FFF9FFFE"
+                          Offset="0.056" />
+            <GradientStop Color="#FFF8FEFF"
+                          Offset="0.776" />
+            <GradientStop Color="#FFF4FAFF"
+                          Offset="0.264" />
+            <GradientStop Color="White"
+                          Offset="0.506" />
+            <GradientStop Color="AliceBlue"
+                          Offset="1" />
+        </RadialGradientBrush>
+    </Window.Background>			
+
+	<Grid Name="RootGrid" >
+		<StackPanel Orientation="Vertical" Margin="0,10,0,10">
+				<StackPanel Orientation="Vertical" Margin="0,10,0,10">
+      			<StackPanel Orientation="Horizontal" Margin="20,0,0,0" HorizontalAlignment="Right">
+              <Image Source="{StaticResource Microsoft_Azure}" Height="30"/>
+      				<Label  Content="AzOSDPAD" FontSize="20" FontWeight="Bold" Foreground="#01786A" Margin="5 0 0 0 "></Label>
+      			</StackPanel>
+      			<StackPanel Orientation="Horizontal" Margin="10,0,0,0" HorizontalAlignment="Left">
+              <Image Source="{StaticResource Storage_Accounts}" Height="30"/>
+      				  <StackPanel Orientation="Horizontal">  
+      				    <Label  Content="Storage Account" FontSize="18" FontWeight="Bold" Foreground="#003E92" Margin="5" Padding="2" ></Label>
+      				    <Label  Content="osdscript" FontSize="13" FontWeight="Bold"  Margin="0 10 0 0 " Padding="2" Width="165"></Label>
+      			    </StackPanel>
+      			</StackPanel>
+        </StackPanel>
+			<StackPanel x:Name="StackElements" Orientation="Horizontal"  HorizontalAlignment="Center" Margin="0,25,0,0">
+ 				<Border  Margin="5,0,5,0" BorderBrush="{DynamicResource MahApps.Brushes.Accent}" BorderThickness="1" Height="327" Width="307">
+ 				<StackPanel>
+ 				  <StackPanel Orientation="Horizontal" Background="{DynamicResource MahApps.Brushes.Accent}">
+       				<Label Content="Containters:" HorizontalAlignment="Stretch" 
+      							 Foreground="White">
+      				</Label>
+      				<Label Name="Domain" Content="" HorizontalAlignment="Stretch" Margin="-7 0 0 0 "
+      							 Foreground="White">
+      				</Label>
+      		</StackPanel>
+					<TreeView Name="TreeView" Width="300" Height="300">
+						<TreeView.Resources>
+							<Style TargetType="{x:Type TreeViewItem}">
+								<Setter Property="HeaderTemplate">
+									<Setter.Value>
+										<HierarchicalDataTemplate  >
+												<StackPanel Orientation="Horizontal">
+												<Image Name="img"  Width="20" Height="20" Stretch="Fill"  
+												Source= "{Binding 
+												RelativeSource={RelativeSource 
+												Mode=FindAncestor, 
+												AncestorType={x:Type TreeViewItem}}, 
+												Path=Tag, 
+												Converter={sys:ObjectTagToImageConverter}}"      
+												/> 
+												<TextBlock Text="{Binding}"  Margin="5,0" />
+											</StackPanel>
+										</HierarchicalDataTemplate >
+									</Setter.Value>
+								</Setter>
+							</Style>
+						</TreeView.Resources> 		
+					</TreeView>
+					</StackPanel>
+				</Border>
+				
+				
+				<Border  Margin="5,0,0,0" BorderBrush="{DynamicResource MahApps.Brushes.Accent}" BorderThickness="1" Width="450">
+					
+					<StackPanel Orientation="Vertical" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+						<StackPanel Orientation="Horizontal" Background="{DynamicResource MahApps.Brushes.Accent}" >
+    						<Label Content="Objects:" HorizontalAlignment="Stretch" Foreground="White"/>
+    						<Label Name="CObjects" Content="2" HorizontalAlignment="Stretch" Foreground="White" Margin="-5 0 0 0 "/>
+						</StackPanel>
+						<Grid x:Name="Destination" Height="300" HorizontalAlignment="Stretch"
+							Background="#FFFFFF">
+							
+							<ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">						
+								<!-- LISTBOX -->
+								<ListBox Name="ListBoxControl" Height="300" HorizontalContentAlignment="Stretch">
+									<ListBox.ItemTemplate>
+										<DataTemplate>
+											<StackPanel Orientation="Horizontal">
+												<Image Name="img"  Width="20" Height="20" Margin="0,2,5,0" Stretch="Fill"  
+												   Source= "{Binding ObjectClass,
+												   Converter={sys:StringToImageConverter}}"      
+												   />  
+												<TextBlock Text="{Binding Name}" Margin="5,0" Width="100"/>
+												<TextBlock Text="{Binding DistinguishedName}" Margin="5,0" />
+											</StackPanel>
+											
+										</DataTemplate>
+									</ListBox.ItemTemplate>
+									<ListBox.ContextMenu>
+										<ContextMenu>
+											<MenuItem Name="MUsers" Header="Users" IsEnabled="True">
+											<MenuItem.Icon>
+											</MenuItem.Icon>
+												<MenuItem Header="Add group">
+												<MenuItem.Icon>
+											</MenuItem.Icon>
+												</MenuItem>
+												<MenuItem Header="Copy"/>
+												<MenuItem Header="Change password"/>
+												<Separator/>
+												<MenuItem Header="Properties">
+												<MenuItem.Icon>
+											</MenuItem.Icon>
+												</MenuItem>
+											</MenuItem>
+											<Separator/>
+											<MenuItem Name="MComputers" Header="Computers" IsEnabled="False">
+											<MenuItem.Icon>
+											</MenuItem.Icon>
+												<MenuItem Header="Add group">
+												<MenuItem.Icon>
+											</MenuItem.Icon>
+												</MenuItem>
+												<MenuItem Header="LAPS"/>
+												<Separator/>
+												<MenuItem Header="Properties">
+												<MenuItem.Icon>
+											</MenuItem.Icon>
+												</MenuItem>
+											</MenuItem>
+											<MenuItem Name="MGroups" Header="Groups" IsEnabled="False">
+											<MenuItem.Icon>
+											</MenuItem.Icon>
+												<MenuItem Header="List Member"/>
+												<MenuItem Header="Add to group"/>
+												<Separator/>
+												<MenuItem Header="Properties">
+												<MenuItem.Icon>
+											</MenuItem.Icon>
+												</MenuItem>
+											</MenuItem>
+										</ContextMenu>
+									</ListBox.ContextMenu>
+								</ListBox>
+              
+
+							</ScrollViewer>
+							
+						</Grid>
+						
+					</StackPanel>
+					
+				</Border>
+				
+				
+			</StackPanel>
+			<Expander Name="SObjects" Header="Objects selected" Margin="4,10,0,10"  Width="767" Height="170" IsExpanded="false">
+			<StackPanel Orientation="Vertical" Background="#A7F5F5F5"  Height="150" Margin="5,10,5,10">
+				<Label Content="...." Width="150" FontSize="13" HorizontalAlignment="Left"/>
+			</StackPanel>
+			</Expander>
+		</StackPanel>
+		
+	</Grid>
+	
+</Window>
