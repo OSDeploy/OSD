@@ -42,7 +42,6 @@ PS C:\> {{ Add example code here }}
 
 ### -Manufacturer
 Automatically populated from Get-MyComputerManufacturer -Brief
-Overrides the System Manufacturer for Driver matching
 
 ```yaml
 Type: String
@@ -58,7 +57,6 @@ Accept wildcard characters: False
 
 ### -Product
 Automatically populated from Get-MyComputerProduct
-Overrides the System Product for Driver matching
 
 ```yaml
 Type: String
