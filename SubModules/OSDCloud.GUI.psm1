@@ -21,7 +21,7 @@ function Start-OSDCloudGUI {
         
         #Color for the OSDCloudGUI Brand
         [Alias('BrandingColor')]
-        [System.String]$Color = '#01786A'
+        [System.String]$Color = '#003E92'
     )
     #================================================
     #   Branding
@@ -52,9 +52,9 @@ function Start-AzOSDCloudGUI {
 
     [CmdletBinding()]
     param ()
-    Write-Host -ForegroundColor DarkGray "========================================================================="
-    Write-Host -ForegroundColor Green "Start-AzOSDCloudGUI"
     if ($Global:AzOSDCloudBlobImage) {
+        Write-Host -ForegroundColor DarkGray "========================================================================="
+        Write-Host -ForegroundColor Green "Start-AzOSDCloudGUI"
         & "$($MyInvocation.MyCommand.Module.ModuleBase)\Projects\AzOSDCloudGUI\MainWindow.ps1"
         Start-Sleep -Seconds 2
 
@@ -66,10 +66,10 @@ function Start-AzOSDCloudGUI {
         }
     }
     else {
-        Write-Warning 'Unable to find a WIM on any of the OSDCloud Azure Storage Containers'
-        Write-Warning 'Make sure you have a WIM Windows Image in the OSDCloud Azure Storage Container'
-        Write-Warning 'Make sure this user has the Azure Storage Blob Data Reader role to the OSDCloud Container'
-        Write-Warning 'You may need to execute Get-AzOSDCloudBlobImage then Start-AzOSDCloud'
+        Invoke-Expression (Invoke-RestMethod azgui.osdcloud.com)
+        #Write-Warning 'Unable to find a WIM on any of the OSDCloud Azure Storage Containers'
+        #Write-Warning 'Make sure you have a WIM Windows Image in the OSDCloud Azure Storage Container'
+        #Write-Warning 'Make sure this user has the Azure Storage Blob Data Reader role to the OSDCloud Container'
+        #Write-Warning 'You may need to execute Get-AzOSDCloudBlobImage then Start-AzOSDCloud'
     }
-    #================================================
 }

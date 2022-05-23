@@ -277,10 +277,18 @@ $localOSDCloudParams["OSLicense"].Attributes.ValidValues | ForEach-Object {
 $localOSDCloudParams["OSLanguage"].Attributes.ValidValues | ForEach-Object {
     $formMainWindowControlOSLanguageCombobox.Items.Add($_) | Out-Null
 }
-
-$formMainWindowControlCSManufacturerTextbox.Text = Get-MyComputerManufacturer -Brief
-$formMainWindowControlCSProductTextbox.Text = Get-MyComputerProduct
-$formMainWindowControlCSModelTextbox.Text = Get-MyComputerModel -Brief
+#================================================
+#   DriverPack
+#================================================
+$DriverPack = Get-OSDCloudDriverPack
+$DriverPacks = @()
+$DriverPacks = Get-OSDCloudDriverPacks
+$DriverPacks | ForEach-Object {
+    $formMainWindowControlDriverPackCombobox.Items.Add($_.Name) | Out-Null
+}
+if ($DriverPack) {
+    $formMainWindowControlDriverPackCombobox.SelectedValue = $DriverPack.Name
+}
 #================================================
 #   SetDefaultWin
 #================================================
@@ -304,7 +312,6 @@ function SetDefaultWin10 {
     $formMainWindowControlOSLanguageCombobox.IsEnabled = $true
     $formMainWindowControlOSLicenseCombobox.IsEnabled = $false
     $formMainWindowControlImageIndexTextbox.IsEnabled = $false
-    $formMainWindowControlCSModelTextbox.IsEnabled = $false
     $formMainWindowControlAutopilotJsonCombobox.IsEnabled = $true
 
     $formMainWindowControlImageNameCombobox.Items.Clear()
@@ -334,7 +341,6 @@ function SetDefaultWin11 {
     $formMainWindowControlOSLanguageCombobox.IsEnabled = $true
     $formMainWindowControlOSLicenseCombobox.IsEnabled = $false
     $formMainWindowControlImageIndexTextbox.IsEnabled = $false
-    $formMainWindowControlCSModelTextbox.IsEnabled = $false
     $formMainWindowControlAutopilotJsonCombobox.IsEnabled = $true
 
     $formMainWindowControlImageNameCombobox.Items.Clear()
@@ -666,8 +672,6 @@ $formMainWindowControlStartButton.add_Click({
     #================================================
     $Global:StartOSDCloudGUI = $null
     $Global:StartOSDCloudGUI = [ordered]@{
-        ApplyManufacturerDrivers    = $formMainWindowControlManufacturerDriversCheckbox.IsChecked
-        ApplyCatalogDrivers         = $formMainWindowControlCatalogDriversCheckbox.IsChecked
         ApplyCatalogFirmware        = $formMainWindowControlCatalogFirmwareCheckbox.IsChecked
         AutopilotJsonChildItem      = $AutopilotJsonChildItem
         AutopilotJsonItem           = $AutopilotJsonItem
@@ -677,10 +681,10 @@ $formMainWindowControlStartButton.add_Click({
         AutopilotOOBEJsonItem       = $AutopilotOOBEJsonItem
         AutopilotOOBEJsonName       = $AutopilotOOBEJsonName
         AutopilotOOBEJsonObject     = $AutopilotOOBEJsonObject
+        DriverPackName              = $formMainWindowControlDriverPackCombobox.SelectedValue
         ImageFileFullName           = $ImageFileFullName
         ImageFileItem               = $ImageFileItem
         ImageFileName               = $ImageFileName
-        Manufacturer                = $formMainWindowControlCSManufacturerTextbox.Text
         OOBEDeployJsonChildItem     = $OOBEDeployJsonChildItem
         OOBEDeployJsonItem          = $OOBEDeployJsonItem
         OOBEDeployJsonName          = $OOBEDeployJsonName
@@ -691,7 +695,6 @@ $formMainWindowControlStartButton.add_Click({
         OSLanguage                  = $OSLanguage
         OSLicense                   = $OSLicense
         OSVersion                   = $OSVersion
-        Product                     = $formMainWindowControlCSProductTextbox.Text
         Restart                     = $formMainWindowControlRestartCheckbox.IsChecked
         SkipAutopilot               = $SkipAutopilot
         SkipAutopilotOOBE           = $SkipAutopilotOOBE
@@ -714,7 +717,7 @@ $formMainWindowControlStartButton.add_Click({
 #   Customizations
 #================================================
 [string]$ModuleVersion = Get-Module -Name OSD | Sort-Object -Property Version | Select-Object -ExpandProperty Version -Last 1
-$formMainWindow.Title = "OSDCloudGUI $ModuleVersion"
+$formMainWindow.Title = "OSDCloudGUI $ModuleVersion on $(Get-MyComputerManufacturer -Brief) $(Get-MyComputerModel -Brief) $(Get-MyComputerProduct)"
 #================================================
 #   Branding
 #================================================

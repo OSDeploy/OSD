@@ -9,7 +9,7 @@
         RenderTransformOrigin="0.5,0.5"
         ResizeMode="NoResize"
         WindowStartupLocation = "CenterScreen"
-        Title="OSDCloudGUI" Height="580" Width="770">
+        Title="OSDCloudGUI" Height="580" Width="800">
     <Window.Resources>
         <ResourceDictionary>
             <Style TargetType="{x:Type Button}">
@@ -134,17 +134,17 @@
             <RowDefinition Height="*" />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
-        <!-- Row 0 -->
+        <!-- Row 0 Title -->
         <Label Grid.Row="0"
                Name="BrandingTitleControl"
                Content="OSDCloud"
                FlowDirection="RightToLeft"
-               FontSize="20"
+               FontSize="24"
                FontWeight="Bold"
-               Foreground="#01786A"
+               Foreground="#003E92"
                HorizontalAlignment="Right"
                VerticalAlignment="Top" />
-        <!-- Line -->
+        <!-- Row 1 Gridline -->
         <Line Grid.Row="1"
               X1="0"
               Y1="0"
@@ -153,7 +153,7 @@
               Stroke="Gainsboro"
               StrokeThickness="1"
               Stretch="Uniform"></Line>
-        <!-- RowOperatingSystem -->
+        <!-- Row 2 OperatingSystem -->
         <StackPanel Grid.Row="2"
                     HorizontalAlignment="Left"
                     VerticalAlignment="Top">
@@ -168,7 +168,7 @@
                        Foreground="#003E92"
                        Margin="5"
                        Padding="2"
-                       Width="165"
+                       Width="155"
                        FlowDirection="RightToLeft" />
                 <ComboBox Name="OperatingSystemCombobox"
                           FontSize="16"
@@ -189,7 +189,7 @@
                        Foreground="#003E92"
                        Margin="5"
                        Padding="2"
-                       Width="165" />
+                       Width="155" />
                 <ComboBox Name="OSBuildCombobox"
                           FontSize="16"
                           Margin="5"
@@ -211,7 +211,7 @@
                           Margin="5"
                           Padding="2" />
                 <Label Name="ImageIndexLabel"
-                       Content="Index"
+                       Content="ImageIndex"
                        FontSize="18"
                        FontWeight="Bold"
                        Foreground="#003E92"
@@ -221,7 +221,7 @@
                          FontSize="16"
                          Margin="5"
                          Padding="2"
-                         Text="1" />
+                         Text="Auto" />
             </StackPanel>
             <StackPanel HorizontalAlignment="Left"
                         VerticalAlignment="Top">
@@ -237,78 +237,46 @@
               StrokeThickness="1"
               Stretch="Uniform">
         </Line>
-        <!-- Row 4 Computer System two row StackPanel -->
+        <!-- Row 4 Driver Pack -->
         <StackPanel Grid.Row="4"
                     HorizontalAlignment="Left"
                     VerticalAlignment="Top">
-
-                <StackPanel Orientation="Horizontal"
+            <!-- Driver Pack -->
+            <StackPanel Orientation="Horizontal"
                         HorizontalAlignment="Left"
-                        VerticalAlignment="Top" Margin="5,5,5,0">
-                    <Label Name="ComputerSystemLabel"
-                           Content="Computer System"
-                           FontSize="18"
-                           FontWeight="Bold"
-                           Foreground="#003E92"
-                           Margin="5"
-                           Padding="2"
-                           Width="160"
-                           FlowDirection="RightToLeft" />
-                    <TextBox Name="CSManufacturerTextbox"
-                             FontSize="16"
-                             Margin="5"
-                             Padding="2"
-                             Text="Manufacturer" />
-                    <TextBox Name="CSModelTextbox"
-                             FontSize="16"
-                             Margin="5"
-                             Padding="2"
-                             Text="Model" />
-                    <Label Name="CSProductLabel"
-                           Content="Product"
-                           FontSize="18"
-                           FontWeight="Bold"
-                           Foreground="#003E92"
-                           Margin="5"
-                           Padding="2" />
-                    <TextBox Name="CSProductTextbox"
-                             FontSize="16"
-                             Margin="5"
-                             Padding="2"
-                             Text="Product" />
-                </StackPanel>
+                        VerticalAlignment="Top">
+                <Label Name="DriverPackLabel"
+                       Content="Driver Pack"
+                       FontSize="18"
+                       FontWeight="Bold"
+                       Foreground="#003E92"
+                       Margin="5"
+                       Padding="2"
+                       Width="155"
+                       FlowDirection="RightToLeft" />
+                <ComboBox Name="DriverPackCombobox"
+                          FontSize="16"
+                          Margin="5"
+                          Padding="2"
+                          SelectedIndex="1" >
+                    <ComboBoxItem Content="None"/>
+                    <ComboBoxItem Content="Microsoft Catalog Only"/>
+                </ComboBox>
+            </StackPanel>
             <StackPanel HorizontalAlignment="Left"
                         VerticalAlignment="Top">
-                <CheckBox Name="ManufacturerDriversCheckbox"
-                      BorderBrush="Black"
-                      BorderThickness="2"
-                      FontSize="15"
-                      Foreground="Black"
-                      IsChecked="True"
-                      Padding="5,-2,5,10"
-                      VerticalAlignment="Center"
-                      Margin="180,0,0,0">Manufacturer Driver Pack (Dell, HP, Lenovo, Surface)</CheckBox>
-                <CheckBox Name="CatalogDriversCheckbox"
-                      BorderBrush="Black"
-                      BorderThickness="2"
-                      FontSize="15"
-                      Foreground="Black"
-                      IsChecked="True"
-                      Padding="5,-2,5,10"
-                      VerticalAlignment="Center"
-                      Margin="180,0,0,0">Microsoft Catalog Drivers (if Driver Pack is not available)</CheckBox>
                 <CheckBox Name="CatalogFirmwareCheckbox"
                       BorderBrush="Black"
                       BorderThickness="2"
                       FontSize="15"
                       Foreground="Black"
-                      IsChecked="True"
+                      IsChecked="False"
                       Padding="5,-2,5,10"
                       VerticalAlignment="Center"
-                      Margin="180,0,0,0">Microsoft Catalog Firmware Update</CheckBox>
+                      Margin="170,5,0,0">Update Firmware from Microsoft Update Catalog</CheckBox>
             </StackPanel>
         </StackPanel>
-        <!-- Line -->
+        <!-- Row 5 Gridline -->
         <Line Grid.Row="5"
               X1="0"
               Y1="0"
@@ -317,23 +285,23 @@
               Stroke="Gainsboro"
               StrokeThickness="1"
               Stretch="Uniform"></Line>
-        <!-- RowCustomizations -->
+        <!-- Row 6 Options -->
         <StackPanel Grid.Row="6"
                     Orientation="Horizontal"
                     HorizontalAlignment="Left"
                     VerticalAlignment="Top">
             <Label Name="DeploymentOptionsLabel"
-                   Content="Deploy Options"
+                   Content="Options"
                    FontSize="18"
                    FontWeight="Bold"
                    Foreground="#003E92"
                    HorizontalAlignment="Left"
                    Margin="5"
                    Padding="2"
-                   Width="165"
+                   Width="155"
                    FlowDirection="RightToLeft" />
         </StackPanel>
-            <StackPanel Grid.Row="6"
+        <StackPanel Grid.Row="6"
                     Orientation="Vertical"
                     HorizontalAlignment="Left"
                     VerticalAlignment="Top">
@@ -345,7 +313,7 @@
                       Foreground="Crimson"
                       Padding="5,-2,5,10"
                       VerticalAlignment="Center"
-                      Margin="180,15,0,0">Don't warn before wiping disks</CheckBox>
+                      Margin="170,10,0,0">Clear-Disk without confirm prompt</CheckBox>
             <CheckBox Name="RestartCheckbox"
                       BorderBrush="Black"
                       BorderThickness="2"
@@ -354,7 +322,7 @@
                       IsChecked="True"
                       Padding="5,-2,5,10"
                       VerticalAlignment="Center"
-                      Margin="180,0,0,0">Restart after WinPE Phase</CheckBox>
+                      Margin="170,0,0,0">Restart Device</CheckBox>
             <CheckBox Name="ScreenshotCheckbox"
                       BorderBrush="Black"
                       BorderThickness="2"
@@ -362,7 +330,7 @@
                       Foreground="Black"
                       Padding="5,-2,5,10"
                       VerticalAlignment="Center"
-                      Margin="180,0,0,0">Capture Screenshots C:\OSDCloud\ScreenPNG</CheckBox>
+                      Margin="170,0,0,0">Capture Screenshots C:\OSDCloud\ScreenPNG</CheckBox>
             <!-- AutopilotJson -->
             <StackPanel HorizontalAlignment="Left"
                         VerticalAlignment="Center"
@@ -376,7 +344,7 @@
                        Margin="5"
                        Padding="2"
                        VerticalAlignment="Center"
-                       Width="165"
+                       Width="145"
                        FlowDirection="RightToLeft" />
                 <ComboBox Name="AutopilotJsonCombobox"
                           FontSize="14"
@@ -395,7 +363,7 @@
                        Margin="5"
                        Padding="2"
                        VerticalAlignment="Center"
-                       Width="165"
+                       Width="145"
                        FlowDirection="RightToLeft" />
                 <ComboBox Name="OOBEDeployCombobox"
                           FontSize="14"
@@ -414,7 +382,7 @@
                        Margin="5"
                        Padding="2"
                        VerticalAlignment="Center"
-                       Width="165"
+                       Width="145"
                        FlowDirection="RightToLeft" />
                 <ComboBox Name="AutopilotOOBECombobox"
                           FontSize="14"
@@ -422,7 +390,7 @@
                           Padding="2" />
             </StackPanel>
         </StackPanel>
-        <!-- Line -->
+        <!-- Row 7 Gridline -->
         <Line Grid.Row="7"
               X1="0"
               Y1="0"
@@ -431,7 +399,7 @@
               Stroke="Gainsboro"
               StrokeThickness="1"
               Stretch="Uniform"></Line>
-        <!-- RowStart -->
+        <!-- Row 8 Start -->
         <Button Grid.Row="8"
                 Name="StartButton"
                 Content="Start"

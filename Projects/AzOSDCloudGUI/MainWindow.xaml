@@ -9,7 +9,7 @@
         RenderTransformOrigin="0.5,0.5"
         ResizeMode="NoResize"
         WindowStartupLocation = "CenterScreen"
-        Title="AzOSDCloudGUI" Height="440" Width="800">
+        Title="AzOSDCloudGUI version on Manufacturer Model Product" Height="425" Width="800">
     <Window.Resources>
         <ResourceDictionary>
             <Style TargetType="{x:Type Button}">
@@ -133,19 +133,31 @@
             <RowDefinition Height="Auto" />
             <RowDefinition Height="1" />
             <RowDefinition Height="Auto" />
-            <RowDefinition Height="5" />
+            <RowDefinition Height="*" />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
         <!-- Row 0 Title -->
-        <Label Grid.Row="0"
-               Name="BrandingTitleControl"
-               Content="OSDCloud Azure"
+        <StackPanel Grid.Row="0"
+                    Orientation="Horizontal"
+                    HorizontalAlignment="Right"
+                    VerticalAlignment="Top">
+        <Label Name="BrandLabel"
+               Content="OSDCloud"
                FlowDirection="RightToLeft"
-               FontSize="20"
+               FontSize="24"
                FontWeight="Bold"
-               Foreground="#01786A"
+               Foreground="#003E92"
                HorizontalAlignment="Right"
                VerticalAlignment="Top" />
+        <Label Name="AzureBrandLabel"
+               Content="Azure"
+               FlowDirection="RightToLeft"
+               FontSize="24"
+               FontWeight="Bold"
+               Foreground="#39CCF4"
+               HorizontalAlignment="Right"
+               VerticalAlignment="Top" />
+        </StackPanel>
         <!-- Row 1 Gridline -->
         <Line Grid.Row="1"
               X1="0"
@@ -177,6 +189,7 @@
                           Margin="5"
                           Padding="2"
                           SelectedIndex="0" >
+                          <ComboBoxItem Content="Get-AzStorageAccount"/>
                 </ComboBox>
             </StackPanel>
             <!-- Container -->
@@ -197,7 +210,7 @@
                           Margin="5"
                           Padding="2"
                           SelectedIndex="0" >
-                    <ComboBoxItem Content=""/>
+                    <ComboBoxItem Content="Get-AzStorageContainer"/>
                 </ComboBox>
             </StackPanel>
             <!-- Blob -->
@@ -218,7 +231,7 @@
                           Margin="5"
                           Padding="2"
                           SelectedIndex="0" >
-                    <ComboBoxItem Content=""/>
+                    <ComboBoxItem Content="Get-AzStorageBlob"/>
                 </ComboBox>
         </StackPanel>
             <!-- Index -->
@@ -226,16 +239,16 @@
                         HorizontalAlignment="Left"
                         VerticalAlignment="Top">
                 <Label Name="ImageIndexLabel"
-                       Content="Image Index"
-                       FontSize="16"
+                       Content="ImageIndex"
+                       FontSize="18"
                        FontWeight="Bold"
                        Foreground="#003E92"
                        Margin="5"
                        Padding="2"
-                       Width="255"
+                       Width="265"
                        FlowDirection="RightToLeft" />
                 <TextBox Name="ImageIndexTextbox"
-                         FontSize="14"
+                         FontSize="16"
                          Margin="5"
                          Padding="2"
                          Text="Auto" />
@@ -261,7 +274,7 @@
                         VerticalAlignment="Top">
                 <Label Name="DriverPackLabel"
                        Content="Driver Pack"
-                       FontSize="16"
+                       FontSize="18"
                        FontWeight="Bold"
                        Foreground="#003E92"
                        Margin="5"
@@ -282,12 +295,12 @@
                 <CheckBox Name="CatalogFirmwareCheckbox"
                       BorderBrush="Black"
                       BorderThickness="2"
-                      FontSize="16"
+                      FontSize="15"
                       Foreground="Black"
                       IsChecked="False"
                       Padding="5,-2,5,10"
                       VerticalAlignment="Center"
-                      Margin="165,0,0,0">Microsoft Catalog Firmware Update</CheckBox>
+                      Margin="165,5,0,0">Update Firmware from Microsoft Update Catalog</CheckBox>
             </StackPanel>
         </StackPanel>
         <!-- Row 5 Gridline -->
@@ -307,7 +320,7 @@
                     VerticalAlignment="Top">
             <Label Name="DeploymentOptionsLabel"
                    Content="Options"
-                   FontSize="16"
+                   FontSize="18"
                    FontWeight="Bold"
                    Foreground="#003E92"
                    HorizontalAlignment="Left"
@@ -323,21 +336,21 @@
             <CheckBox Name="ZTICheckbox"
                       BorderBrush="Crimson"
                       BorderThickness="2"
-                      FontSize="16"
+                      FontSize="15"
                       FontWeight="Bold"
                       Foreground="Crimson"
                       Padding="5,-2,5,10"
                       VerticalAlignment="Top"
-                      Margin="165,10,0,0">Clear-Disk without Warning</CheckBox>
+                      Margin="165,10,0,0">Clear-Disk without confirm prompt</CheckBox>
             <CheckBox Name="RestartCheckbox"
                       BorderBrush="Black"
                       BorderThickness="2"
-                      FontSize="16"
+                      FontSize="15"
                       Foreground="Black"
                       IsChecked="True"
                       Padding="5,-2,5,10"
                       VerticalAlignment="Center"
-                      Margin="165,0,0,0">Restart-Computer</CheckBox>
+                      Margin="165,0,0,0">Restart Device</CheckBox>
         </StackPanel>
         <!-- Row 7 Gridline -->
         <Line Grid.Row="7"
@@ -348,8 +361,8 @@
               Stroke="Gainsboro"
               StrokeThickness="1"
               Stretch="Uniform"></Line>
-        <!-- Row 8 Start -->
-        <Button Grid.Row="8"
+        <!-- Row 9 Start -->
+        <Button Grid.Row="9"
                 Name="StartButton"
                 Content="Start"
                 FontSize="18"

@@ -29,7 +29,7 @@ function Save-MsUpCatDriver {
     $HardwareIDPattern = 'v[ei][dn]_([0-9a-f]){4}&[pd][ie][dv]_([0-9a-f]){4}'
     $SurfaceIDPattern = 'mshw0[0-1]([0-9]){2}'
 
-    if (Test-WebConnectionMsUpCat) {
+    if (Test-MicrosoftUpdateCatalog) {
         #=================================================
         #	ByPNPClass
         #=================================================

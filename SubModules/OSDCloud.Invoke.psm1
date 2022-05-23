@@ -601,15 +601,26 @@ function Invoke-OSDCloud {
     if (Test-Path $Global:OSDCloud.ImageFileTarget.FullName) {
         $ImageCount = (Get-WindowsImage -ImagePath $Global:OSDCloud.ImageFileTarget.FullName).Count
 
-        if ((!($Global:OSDCloud.OSImageIndex)) -or ($Global:OSDCloud.OSImageIndex -eq 'Auto')) {
-            if ($ImageCount -eq 1) {
-                Write-Warning "No ImageIndex is specified, setting ImageIndex = 1"
-                $Global:OSDCloud.OSImageIndex = 1
-            }
-            else {
-                Write-Warning "No ImageIndex is specified, setting ImageIndex = 4"
-                $Global:OSDCloud.OSImageIndex = 4
-            }
+        if ($null -eq $ImageCount) {
+            Write-Host -ForegroundColor DarkGray "========================================================================="
+            Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) OSDCloud Failed"
+            Write-Warning "The Windows Image did not download properly"
+            Start-Sleep -Seconds 30
+            Break
+        }
+        elseif ($ImageCount -eq 1) {
+            $Global:OSDCloud.OSImageIndex = 1
+        }
+        elseif ((!($Global:OSDCloud.OSImageIndex)) -or ($Global:OSDCloud.OSImageIndex -eq 'Auto')) {
+            Write-Warning "No ImageIndex is specified, setting ImageIndex = 1"
+            $Global:OSDCloud.OSImageIndex = 1
+        }
+        else {
+            Write-Host -ForegroundColor DarkGray "========================================================================="
+            Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) OSDCloud Failed"
+            Write-Warning "The Windows Image did not download properly"
+            Start-Sleep -Seconds 30
+            Break
         }
         #=================================================
         #	FAILED
@@ -789,7 +800,7 @@ function Invoke-OSDCloud {
         Write-Host -ForegroundColor DarkGray "Microsoft Catalog Firmware Update is not enabled for devices on battery power"
     }
     else {
-        if (Test-WebConnectionMsUpCat) {
+        if (Test-MicrosoftUpdateCatalog) {
             Write-Host -ForegroundColor DarkGray "Firmware Updates will be downloaded from Microsoft Update Catalog to C:\Drivers\Firmware"
             Write-Host -ForegroundColor DarkGray "Some systems do not support a driver Firmware Update"
             Write-Host -ForegroundColor DarkGray "You may have to enable this setting in your BIOS or Firmware Settings"
@@ -812,7 +823,7 @@ function Invoke-OSDCloud {
         Write-Host -ForegroundColor DarkGray "Microsoft Catalog Drivers is not enabled for Virtual Machines"
     }
     else {
-        if (Test-WebConnectionMsUpCat) {
+        if (Test-MicrosoftUpdateCatalog) {
             if (($null -eq $SaveMyDriverPack) -or ($Global:OSDCloud.DriverPackName -eq 'Microsoft Catalog Only')) {
                 Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Save-MsUpCatDriver (All Devices)"
                 Write-Host -ForegroundColor DarkGray "Drivers for all devices will be downloaded from Microsoft Update Catalog to C:\Drivers"

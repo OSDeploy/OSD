@@ -388,8 +388,8 @@ $formMainWindow.Title = "AzOSDCloudGUI $ModuleVersion on $(Get-MyComputerManufac
 #   Branding
 #================================================
 if ($Global:OSDCloudGuiBranding) {
-    #$formMainWindowControlBrandingTitleControl.Content = $Global:OSDCloudGuiBranding.Title
-    #$formMainWindowControlBrandingTitleControl.Foreground = $Global:OSDCloudGuiBranding.Color
+    #$formMainWindowControlBrandLabel.Content = $Global:OSDCloudGuiBranding.Title
+    #$formMainWindowControlBrandLabel.Foreground = $Global:OSDCloudGuiBranding.Color
 }
 #================================================
 #   Hide Windows

@@ -353,7 +353,7 @@ function Invoke-OSDCloudDisk {
         Write-Host -ForegroundColor DarkGray "Microsoft Catalog Firmware Update is not enabled for this deployment"
     }
     else {
-        if (Test-WebConnectionMsUpCat) {
+        if (Test-MicrosoftUpdateCatalog) {
             Write-Host -ForegroundColor DarkGray "Firmware Updates will be downloaded from Microsoft Update Catalog to C:\Drivers"
             Write-Host -ForegroundColor DarkGray "Some systems do not support a driver Firmware Update"
             Write-Host -ForegroundColor DarkGray "You may have to enable this setting in your BIOS or Firmware Settings"
@@ -372,7 +372,7 @@ function Invoke-OSDCloudDisk {
         #Do Nothing
     }
     elseif ($Global:OSDCloud.ApplyCatalogDrivers -eq $true) {
-        if (Test-WebConnectionMsUpCat) {
+        if (Test-MicrosoftUpdateCatalog) {
             Write-Host -ForegroundColor DarkGray "========================================================================="
             if ($null -eq $SaveMyDriverPack) {
                 Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Save-MsUpCatDriver (All Devices)"
