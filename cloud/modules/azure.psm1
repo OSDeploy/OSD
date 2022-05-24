@@ -151,7 +151,7 @@ function Connect-AzOSDCloud {
         #$Global:MgGraph = Connect-MgGraph -AccessToken $Global:AzMSGraphAccessToken.Token -Scopes DeviceManagementConfiguration.Read.All,DeviceManagementServiceConfig.Read.All,DeviceManagementServiceConfiguration.Read.All
         $Global:AzureAD = Connect-AzureAD -AadAccessToken $Global:AzAadGraphAccessToken.Token -AccountId $Global:AzContext.Account.Id
         if ($DebugLogs) {
-            $Global:AzureAD | ConvertTo-Json | Out-File -FilePath "$DebugLogs\AzureAD.json" -Encoding ascii -Width 2000 -Force
+            #$Global:AzureAD | ConvertTo-Json | Out-File -FilePath "$DebugLogs\AzureAD.json" -Encoding ascii -Width 2000 -Force
         }
     }
     else {
