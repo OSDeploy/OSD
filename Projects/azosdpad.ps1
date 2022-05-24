@@ -78,12 +78,12 @@ function Start-Scan {
         {
             $dummyNode = $null
             ## real mode
-            #$AllNodes =$Global:AzOSDCloudBlobScript.BlobClient.BlobContainerName |Group-Object
+            $AllNodes =$Global:AzOSDCloudBlobScript.BlobClient.BlobContainerName |Group-Object
             
             ## offline test
 
-            $AllNode = Import-Clixml -path $Global:MyScriptDir\work.xml
-            $AllNodes = $AllNode.BlobClient.BlobContainerName |Group-Object
+            #$AllNode = Import-Clixml -path $Global:MyScriptDir\work.xml
+            #$AllNodes = $AllNode.BlobClient.BlobContainerName |Group-Object
         }
     process
         {
@@ -111,28 +111,33 @@ function Start-Scan {
                 
 		        [System.Windows.Controls.TreeViewItem]$sender = $args[0]
                 $OU=  $($sender.Tag[1].DN)
+                write-host $OU
                 })
                 $treeViewItem.Add_PreviewMouseRightButtonDown({
 
                     $Menu.IsOpen = $true
                 })
                 $treeViewItem.Add_PreviewMouseLeftButtonDown({
+                    [System.Windows.Controls.TreeViewItem]$sender = $args[0]
+                    [System.Windows.RoutedEventArgs]$e = $args[1]  
+                    Write-Host "Node clicked: " $sender.Header
 
-		            [System.Windows.Controls.TreeViewItem]$sender = $args[0]
-                    $DistinguishedName.Text = $($sender.Tag[1].DN)
-                    $Sobjects.Visibility="Visible" 
+		            #[System.Windows.Controls.TreeViewItem]$sender = $args[0]
+                    #$DistinguishedName.Text = $($sender.Tag[1].DN)
+                    #$Sobjects.Visibility="Visible" 
+                    write-host  Get-AzOSDCloudBlobScriptFile -Container   $sender.Header
+                                     
+                    $Object= Get-AzOSDCloudBlobScriptFile -Container  $sender.Header
                     
-                    #$Object= Get-AzOSDCloudBlobScriptFile Container "$($sender.Tag[1].DN)"
-
                     if ($null -eq $($Object).Count){
                         $CObjects.Content = 1
                         $TempArray = [System.Collections.ArrayList]::new()
-                        $TempArray.Add($Object)
-                        $ListBoxControl.ItemsSource = $TempArray
+                        $TempArray.Add($Object.Name)
+                        $WPF_ListBoxControl.ItemsSource = $TempArray
                     }
                     else{
-                        $ListBoxControl.ItemsSource = $Object
-                        $CObjects.Content = $($Object).Count
+                        $WPF_ListBoxControl.ItemsSource = $Object
+                        #$CObjects.Content = $($Object).Count
                     }
 
 
@@ -146,6 +151,7 @@ function Start-Scan {
 
         }
 }
+
 function Get-AzOSDCloudBlobScriptFile {
     [CmdletBinding()]
     param (
