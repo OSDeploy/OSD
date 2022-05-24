@@ -23,6 +23,10 @@ function Connect-AzOSDCloud {
 
     if ($env:SystemDrive -eq 'X:') {
         $UseDeviceAuthentication = $true
+        $DebugLogs = "$env:SystemDrive\DebugLogs"
+        if (-not (Test-Path $DebugLogs)) {
+            New-Item $DebugLogs -ItemType Directory -Force | Out-Null
+        }
     }
 
     osdcloud-InstallModuleAzureAD
@@ -46,6 +50,9 @@ function Connect-AzOSDCloud {
     }
 
     $Global:AzSubscription = Get-AzSubscription
+    if ($DebugLogs) {
+        $Global:AzSubscription | ConvertTo-Json | Out-File -FilePath "$DebugLogs\AzSubscription.json" -Encoding ascii -Width 2000 -Force
+    }
 
     if (($Global:AzSubscription).Count -ge 2) {
         $i = $null
@@ -76,6 +83,9 @@ function Connect-AzOSDCloud {
     }
 
     if ($Global:AzContext) {
+        if ($DebugLogs) {
+            $Global:AzContext | ConvertTo-Json | Out-File -FilePath "$DebugLogs\AzContext.json" -Encoding ascii -Width 2000 -Force
+        }
         Write-Host -ForegroundColor DarkGray "========================================================================="
         Write-Host -ForegroundColor Green 'Welcome to Azure OSDCloud!'
         $Global:AzAccount = $Global:AzContext.Account
@@ -140,6 +150,9 @@ function Connect-AzOSDCloud {
         #=================================================
         #$Global:MgGraph = Connect-MgGraph -AccessToken $Global:AzMSGraphAccessToken.Token -Scopes DeviceManagementConfiguration.Read.All,DeviceManagementServiceConfig.Read.All,DeviceManagementServiceConfiguration.Read.All
         $Global:AzureAD = Connect-AzureAD -AadAccessToken $Global:AzAadGraphAccessToken.Token -AccountId $Global:AzContext.Account.Id
+        if ($DebugLogs) {
+            $Global:AzureAD | ConvertTo-Json | Out-File -FilePath "$DebugLogs\AzureAD.json" -Encoding ascii -Width 2000 -Force
+        }
     }
     else {
         Write-Warning 'Unable to get AzContext'

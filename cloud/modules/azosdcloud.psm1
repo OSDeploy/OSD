@@ -18,22 +18,35 @@ function Get-AzOSDCloudBlobImage {
     Write-Host -ForegroundColor DarkGray "========================================================================="
     Write-Host -ForegroundColor Green "Get-AzOSDCloudBlobImage"
 
+    if ($env:SystemDrive -eq 'X:') {
+        $DebugLogs = "$env:SystemDrive\DebugLogs"
+        if (-not (Test-Path $DebugLogs)) {
+            New-Item $DebugLogs -ItemType Directory -Force | Out-Null
+        }
+    }
+
     if ($Global:AzureAD -or $Global:MgGraph) {
         Write-Host -ForegroundColor DarkGray    'Storage Accounts:          $Global:AzStorageAccounts'
         $Global:AzStorageAccounts = Get-AzStorageAccount
+        if ($DebugLogs) {
+            $Global:AzStorageAccounts | ConvertTo-Json | Out-File -FilePath "$DebugLogs\AzStorageAccounts.json" -Encoding ascii -Width 2000 -Force
+        }
     
         Write-Host -ForegroundColor DarkGray    'OSDCloud Storage Accounts: $Global:AzOSDCloudStorageAccounts'
+        $Global:AzOSDCloudStorageAccounts = Get-AzStorageAccount | Where-Object {$_.Tags.ContainsKey('OSDCloud')}
         #$Global:AzOSDCloudStorageAccounts = Get-AzResource -ResourceType 'Microsoft.Storage/storageAccounts'
         #$Global:AzOSDCloudStorageAccounts = Get-AzResource -ResourceType 'Microsoft.Storage/storageAccounts' | Where-Object {$_.Tags.ContainsKey('OSDCloud')}
-        $Global:AzOSDCloudStorageAccounts = Get-AzStorageAccount | Where-Object {$_.Tags.ContainsKey('OSDCloud')}
+        if ($DebugLogs) {
+            $Global:AzOSDCloudStorageAccounts | ConvertTo-Json | Out-File -FilePath "$DebugLogs\AzOSDCloudStorageAccounts.json" -Encoding ascii -Width 2000 -Force
+        }
     
-        Write-Host -ForegroundColor DarkGray    'Storage Contexts:          $Global:AzStorageContext'
-        Write-Host -ForegroundColor DarkGray    'Blob Windows Images:       $Global:AzOSDCloudBlobImage'
-        Write-Host ''
         $Global:AzStorageContext = @{}
         $Global:AzOSDCloudBlobImage = @()
     
         if ($Global:AzOSDCloudStorageAccounts) {
+            Write-Host -ForegroundColor DarkGray    'Storage Contexts:          $Global:AzStorageContext'
+            Write-Host -ForegroundColor DarkGray    'Blob Windows Images:       $Global:AzOSDCloudBlobImage'
+            Write-Host ''
             Write-Host -ForegroundColor Cyan "Scanning for Windows Images"
             foreach ($Item in $Global:AzOSDCloudStorageAccounts) {
                 $Global:AzCurrentStorageContext = New-AzStorageContext -StorageAccountName $Item.StorageAccountName
@@ -46,10 +59,14 @@ function Get-AzOSDCloudBlobImage {
                 if ($StorageContainers) {
                     foreach ($Container in $StorageContainers) {
                         Write-Host -ForegroundColor DarkGray "Storage Account: $($Item.StorageAccountName) Container: $($Container.Name)"
-                        $Global:AzOSDCloudBlobImage += Get-AzStorageBlob -Context $Global:AzCurrentStorageContext -Container $Container.Name -Blob *.iso -ErrorAction Ignore
-                        $Global:AzOSDCloudBlobImage += Get-AzStorageBlob -Context $Global:AzCurrentStorageContext -Container $Container.Name -Blob *.wim -ErrorAction Ignore
+                        $Global:AzOSDCloudBlobImage += Get-AzStorageBlob -Context $Global:AzCurrentStorageContext -Container $Container.Name -Blob *.iso -ErrorAction Ignore | Where-Object {$_.Length -gt 3000000000}
+                        $Global:AzOSDCloudBlobImage += Get-AzStorageBlob -Context $Global:AzCurrentStorageContext -Container $Container.Name -Blob *.wim -ErrorAction Ignore | Where-Object {$_.Length -gt 3000000000}
                     }
                 }
+            }
+            if ($DebugLogs) {
+                $Global:AzStorageContext | ConvertTo-Json | Out-File -FilePath "$DebugLogs\AzStorageContext.json" -Encoding ascii -Width 2000 -Force
+                $Global:AzOSDCloudBlobImage | ConvertTo-Json | Out-File -FilePath "$DebugLogs\AzOSDCloudBlobImage.json" -Encoding ascii -Width 2000 -Force
             }
         }
         else {
@@ -117,6 +134,5 @@ function Start-AzOSDCloud {
         Write-Warning 'You may need to execute Get-AzOSDCloudBlobImage then Start-AzOSDCloud'
     }
 }
-New-Alias -Name 'Start-AzOSDCloudBeta' -Value 'Start-AzOSDCloud' -Description 'OSDCloud' -Force
 #endregion
 #=================================================
