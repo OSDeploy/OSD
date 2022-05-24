@@ -62,7 +62,7 @@ if ($global:ReadmeDisplay -ne $true){Write-host "If you need to reference this d
 write-host "Found the following interactable elements from our form" -ForegroundColor Cyan
 get-variable *WPF*
 }
-#Get-FormVariables
+Get-FormVariables
 
 #================================================
 #   Initialize
@@ -136,7 +136,7 @@ function Start-Scan {
                         $WPF_ListBoxControl.ItemsSource = $TempArray
                     }
                     else{
-                        $WPF_ListBoxControl.ItemsSource = $Object
+                        $WPF_ListBoxControl.ItemsSource = $Object.Name
                         #$CObjects.Content = $($Object).Count
                     }
 
