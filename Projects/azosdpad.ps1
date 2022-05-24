@@ -120,24 +120,22 @@ function Start-Scan {
                 $treeViewItem.Add_PreviewMouseLeftButtonDown({
                     [System.Windows.Controls.TreeViewItem]$sender = $args[0]
                     [System.Windows.RoutedEventArgs]$e = $args[1]  
-                    Write-Host "Node clicked: " $sender.Header
-
-		            #[System.Windows.Controls.TreeViewItem]$sender = $args[0]
-                    #$DistinguishedName.Text = $($sender.Tag[1].DN)
+                    
+                    $WPF_tt.Content = $($sender.Tag[1].Name)
                     #$Sobjects.Visibility="Visible" 
                     write-host  Get-AzOSDCloudBlobScriptFile -Container   $sender.Header
                                      
-                    $Object= Get-AzOSDCloudBlobScriptFile -Container  $sender.Header
+                    $global:Object= Get-AzOSDCloudBlobScriptFile -Container  $sender.Header
                     
                     if ($null -eq $($Object).Count){
-                        $CObjects.Content = 1
+                        $WPF_CObjects.Content = 1
                         $TempArray = [System.Collections.ArrayList]::new()
                         $TempArray.Add($Object.Name)
                         $WPF_ListBoxControl.ItemsSource = $TempArray
                     }
                     else{
-                        $WPF_ListBoxControl.ItemsSource = $Object.Name
-                        #$CObjects.Content = $($Object).Count
+                        $WPF_ListBoxControl.ItemsSource = "$Object.Name"
+                        $WPF_CObjects.Content = $($Object).Count
                     }
 
 

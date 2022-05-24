@@ -247,8 +247,7 @@
 												   Source= "{Binding ObjectClass,
 												   Converter={sys:StringToImageConverter}}"      
 												   />  
-												<TextBlock Text="{Binding Name}" Margin="5,0" Width="100"/>
-												<TextBlock Text="{Binding DistinguishedName}" Margin="5,0" />
+												<TextBlock Text="{Binding Name}" Margin="5,0" Width="100" Foreground="Black"/>
 											</StackPanel>
 											
 										</DataTemplate>
@@ -313,7 +312,7 @@
 			</StackPanel>
 			<Expander Name="SObjects" Header="Objects selected" Margin="4,10,0,10"  Width="767" Height="170" IsExpanded="false">
 			<StackPanel Orientation="Vertical" Background="#A7F5F5F5"  Height="150" Margin="5,10,5,10">
-				<Label Content="...." Width="150" FontSize="13" HorizontalAlignment="Left"/>
+				<Label Name="tt" Content="...." Width="150" FontSize="13" HorizontalAlignment="Left"/>
 			</StackPanel>
 			</Expander>
 		</StackPanel>
