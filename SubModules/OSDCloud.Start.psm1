@@ -104,8 +104,8 @@ function Start-OSDCloud {
 
         #Images using the specified Image Index
         [Parameter(ParameterSetName = 'CustomImage')]
-        [int32]
-        $ImageIndex = 1
+        [System.String]
+        $ImageIndex = 'AUTO'
     )
     #=================================================
     #	$Global:StartOSDCloud
@@ -128,7 +128,7 @@ function Start-OSDCloud {
         ImageFileItem = $null
         ImageFileName = $null
         ImageFileSource = $null
-        ImageFileTarget = $null
+        ImageFileDestination = $null
         ImageFileUrl = $ImageFileUrl
         IsOnBattery = Get-OSDGather -Property IsOnBattery
         Manufacturer = $Manufacturer
@@ -271,7 +271,7 @@ function Start-OSDCloud {
             }
             else {
                 $Global:StartOSDCloud.ImageFileItem = $null
-                $Global:StartOSDCloud.OSImageIndex = 1
+                $Global:StartOSDCloud.OSImageIndex = 'AUTO'
                 #$Global:OSDImageParent = $null
                 #$Global:OSDCloudWimFullName = $null
                 Write-Warning "Custom Windows Image on USB was not found"

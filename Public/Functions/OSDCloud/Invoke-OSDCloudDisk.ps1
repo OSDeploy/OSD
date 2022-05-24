@@ -31,7 +31,7 @@ function Invoke-OSDCloudDisk {
         ImageFileItem = $null
         ImageFileName = $null
         ImageFileSource = $null
-        ImageFileTarget = $null
+        ImageFileDestination = $null
         ImageFileUrl = $null
         IsOnBattery = Get-OSDGather -Property IsOnBattery
         Manufacturer = Get-MyComputerManufacturer -Brief
@@ -111,7 +111,7 @@ function Invoke-OSDCloudDisk {
     #=================================================
     #	OS Check
     #=================================================
-<#     if ((!($Global:OSDCloud.ImageFileItem)) -and (!($Global:OSDCloud.ImageFileTarget)) -and (!($Global:OSDCloud.ImageFileUrl))) {
+<#     if ((!($Global:OSDCloud.ImageFileItem)) -and (!($Global:OSDCloud.ImageFileDestination)) -and (!($Global:OSDCloud.ImageFileUrl))) {
         Write-Host -ForegroundColor DarkGray "========================================================================="
         Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) OSDCloud Failed"
         Write-Warning "An Operating System was not specified by any Variables"
@@ -168,11 +168,11 @@ function Invoke-OSDCloudDisk {
     #=================================================
     Write-Host -ForegroundColor DarkGray "========================================================================="
     Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Find OSDCloud Image"
-    $Global:OSDCloud.ImageFileTarget = Get-ChildItem -Path 'C:\OSDCloud\OS\*' -Include *.wim,*.esd | Select-Object -First 1
+    $Global:OSDCloud.ImageFileDestination = Get-ChildItem -Path 'C:\OSDCloud\OS\*' -Include *.wim,*.esd | Select-Object -First 1
     #=================================================
     #	FAILED
     #=================================================
-    if (!($Global:OSDCloud.ImageFileTarget)) {
+    if (!($Global:OSDCloud.ImageFileDestination)) {
         Write-Host -ForegroundColor DarkGray "========================================================================="
         Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) OSDCloud Failed"
         Write-Warning "The Windows Image did not download properly"
@@ -185,16 +185,16 @@ function Invoke-OSDCloudDisk {
     Write-Host -ForegroundColor DarkGray "========================================================================="
     Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Expand-WindowsImage"
     Write-Host -ForegroundColor DarkGray "https://docs.microsoft.com/en-us/powershell/module/dism/expand-windowsimage"
-    if ($Global:OSDCloud.ImageFileTarget) {
-        Write-Host -ForegroundColor DarkGray "ImageFileTarget: $($Global:OSDCloud.ImageFileTarget.FullName)"
+    if ($Global:OSDCloud.ImageFileDestination) {
+        Write-Host -ForegroundColor DarkGray "ImageFileDestination: $($Global:OSDCloud.ImageFileDestination.FullName)"
     }
 
     if (-NOT (Test-Path 'C:\OSDCloud\Temp')) {
         New-Item 'C:\OSDCloud\Temp' -ItemType Directory -Force | Out-Null
     }
 
-    if (Test-Path $Global:OSDCloud.ImageFileTarget.FullName) {
-        $ImageCount = (Get-WindowsImage -ImagePath $Global:OSDCloud.ImageFileTarget.FullName).Count
+    if (Test-Path $Global:OSDCloud.ImageFileDestination.FullName) {
+        $ImageCount = (Get-WindowsImage -ImagePath $Global:OSDCloud.ImageFileDestination.FullName).Count
 
         if (!($Global:OSDCloud.OSImageIndex)) {
             if ($ImageCount -eq 1) {
@@ -223,9 +223,9 @@ function Invoke-OSDCloudDisk {
             }
         }
 
-        Write-Host -ForegroundColor DarkGray "Expand-WindowsImage -ApplyPath 'C:\' -ImagePath $($Global:OSDCloud.ImageFileTarget.FullName) -Index $($Global:OSDCloud.OSImageIndex) -ScratchDirectory 'C:\OSDCloud\Temp'"
+        Write-Host -ForegroundColor DarkGray "Expand-WindowsImage -ApplyPath 'C:\' -ImagePath $($Global:OSDCloud.ImageFileDestination.FullName) -Index $($Global:OSDCloud.OSImageIndex) -ScratchDirectory 'C:\OSDCloud\Temp'"
         if ($Global:OSDCloud.Test -ne $true) {
-            Expand-WindowsImage -ApplyPath 'C:\' -ImagePath $Global:OSDCloud.ImageFileTarget.FullName -Index $Global:OSDCloud.OSImageIndex -ScratchDirectory 'C:\OSDCloud\Temp' -ErrorAction Stop
+            Expand-WindowsImage -ApplyPath 'C:\' -ImagePath $Global:OSDCloud.ImageFileDestination.FullName -Index $Global:OSDCloud.OSImageIndex -ScratchDirectory 'C:\OSDCloud\Temp' -ErrorAction Stop
 
             $SystemDrive = Get-Partition | Where-Object {$_.Type -eq 'System'} | Select-Object -First 1
             if (-NOT (Get-PSDrive -Name S)) {

@@ -5,6 +5,7 @@
 @{
     RootModule              = 'OSD.psm1'
     NestedModules = @(
+                            '.\SubModules\Az.Clipboard',
                             '.\SubModules\OSD.CloudMDT',
                             '.\SubModules\OSD.CloudRE',
                             '.\SubModules\OSD.CloudSecret',
@@ -17,7 +18,7 @@
                             '.\SubModules\OSDCloud.Setup',
                             '.\SubModules\OSDCloud.Start'
     )
-    ModuleVersion           = '22.5.23.2'
+    ModuleVersion           = '22.5.23.3'
     CompatiblePSEditions    = @('Desktop')
     GUID                    = '9fe5b9b6-0224-4d87-9018-a8978529f6f5'
     Author                  = 'David Segura . Damien Van Robaeys . Gary Blok . Jérôme Bezet-Torres . Mike Marable . Dean Ellerby . Doug McGee'
@@ -277,7 +278,9 @@
         'Invoke-CloudSecret',
         'Start-AzOSDCloudGUI',
         'Test-MicrosoftUpdateCatalog',
-        'Initialize-OSDCloudStartnet'
+        'Initialize-OSDCloudStartnet',
+        'Get-AzClipboard',
+        'Set-AzClipboard'
     )
     CmdletsToExport = @()
     VariablesToExport = @()
