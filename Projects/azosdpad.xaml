@@ -238,7 +238,7 @@
 											<StackPanel Orientation="Horizontal">
 												<Image Name="img"  Width="20" Height="20" Margin="0,2,5,0" Stretch="Fill"  
 												   Source= "{Binding ObjectClass,Converter={sys:StringToImageConverter}}"/>  
-												<TextBlock Text="{Binding Name}" Margin="5,0" Width="100" Foreground="Black"/>
+												<TextBlock Text="{Binding}" Margin="5,0" Width="150" Foreground="Black"/>
 											</StackPanel>
 											
 										</DataTemplate>

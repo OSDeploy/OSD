@@ -167,7 +167,20 @@ function Get-AzOSDCloudBlobScriptFile {
        $Objects += Get-AzStorageBlob -Context $Global:AzCurrentStorageContext -Container $Container -Blob *.xml -ErrorAction Ignore
     }
     catch {}
-    return $Objects
+    $Results = foreach ($Item in $Objects) {
+    
+        $ObjectProperties = @{
+            StorageAccount  = $Item.BlobClient.AccountName
+            Name            = $Item.Name
+            URL             = $Item.BlobClient.Uri
+            ContentHash     = $Item.BlobProperties.ContentHash
+            LastModified    = $Item.ICloudBlob.Properties.LastModified
+            
+        }
+        New-Object -TypeName PSObject -Property $ObjectProperties
+    }
+
+    return $Results
 }
 
 #########################################################################
