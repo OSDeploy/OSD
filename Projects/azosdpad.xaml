@@ -190,31 +190,24 @@
       			</StackPanel>
         </StackPanel>
 			<StackPanel x:Name="StackElements" Orientation="Horizontal"  HorizontalAlignment="Center" Margin="0,25,0,0">
- 				<Border  Margin="5,0,5,0" BorderBrush="{DynamicResource MahApps.Brushes.Accent}" BorderThickness="1" Height="327" Width="307">
+ 				<Border Margin="-10 0 0 0 " BorderBrush="{DynamicResource MahApps.Brushes.Accent}" BorderThickness="2" Height="347" Width="290">
  				<StackPanel>
  				  <StackPanel Orientation="Horizontal" Background="{DynamicResource MahApps.Brushes.Accent}">
-       				<Label Content="Containters:" HorizontalAlignment="Stretch" 
-      							 Foreground="Black">
+       				<Label Content="Containters:" HorizontalAlignment="Stretch" Foreground="Black" Margin="15 0 0 0">
       				</Label>
       				<Label Name="Domain" Content="" HorizontalAlignment="Stretch" Margin="-7 0 0 0 "
       							 Foreground="Black">
       				</Label>
       		</StackPanel>
-					<TreeView Name="TreeView" Width="300" Height="300">
+					<TreeView Name="TreeView" Width="250" Height="300">
 						<TreeView.Resources>
 							<Style TargetType="{x:Type TreeViewItem}">
 								<Setter Property="HeaderTemplate">
 									<Setter.Value>
 										<HierarchicalDataTemplate  >
 												<StackPanel Orientation="Horizontal">
-												<Image Name="img"  Width="20" Height="20" Stretch="Fill"  
-												Source= "{Binding 
-												RelativeSource={RelativeSource 
-												Mode=FindAncestor, 
-												AncestorType={x:Type TreeViewItem}}, 
-												Path=Tag, 
-												Converter={sys:ObjectTagToImageConverter}}"      
-												/> 
+												<Image Name="img"  Width="25" Height="25" Stretch="Fill"  
+												Source= "{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type TreeViewItem}}, Path=Tag, Converter={sys:ObjectTagToImageConverter}}"/> 
 												<TextBlock Text="{Binding}"  Margin="5,0" />
 											</StackPanel>
 										</HierarchicalDataTemplate >
@@ -227,7 +220,7 @@
 				</Border>
 				
 				
-				<Border  Margin="5,0,0,0" BorderBrush="{DynamicResource MahApps.Brushes.Accent}" BorderThickness="1" Width="450">
+				<Border  Margin="5,0,0,0" BorderBrush="{DynamicResource MahApps.Brushes.Accent}" BorderThickness="2" Width="320">
 					
 					<StackPanel Orientation="Vertical" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
 						<StackPanel Orientation="Horizontal" Background="{DynamicResource MahApps.Brushes.Accent}" >
@@ -244,9 +237,7 @@
 										<DataTemplate>
 											<StackPanel Orientation="Horizontal">
 												<Image Name="img"  Width="20" Height="20" Margin="0,2,5,0" Stretch="Fill"  
-												   Source= "{Binding ObjectClass,
-												   Converter={sys:StringToImageConverter}}"      
-												   />  
+												   Source= "{Binding ObjectClass,Converter={sys:StringToImageConverter}}"/>  
 												<TextBlock Text="{Binding Name}" Margin="5,0" Width="100" Foreground="Black"/>
 											</StackPanel>
 											
