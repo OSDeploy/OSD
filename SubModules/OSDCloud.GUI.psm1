@@ -35,6 +35,43 @@ function Start-OSDCloudGUI {
     Start-Sleep -Seconds 2
     #================================================
 }
+function Start-HPOSDCloudGUI {
+    <#
+    .SYNOPSIS
+    OSDCloud imaging using the command line
+
+    .DESCRIPTION
+    OSDCloud imaging using the command line
+
+    .EXAMPLE
+    Start-OSDCloudGUI
+
+    .LINK
+    https://github.com/OSDeploy/OSD/tree/master/Docs
+    #>
+
+    [CmdletBinding()]
+    param (
+        #The custom Brand for OSDCloudGUI
+        [Alias('BrandingTitle')]
+        [System.String]$Brand = 'HPOSDCloud',
+        
+        #Color for the OSDCloudGUI Brand
+        [Alias('BrandingColor')]
+        [System.String]$Color = '#003E92'
+    )
+    #================================================
+    #   Branding
+    #================================================
+    $Global:OSDCloudGuiBranding = @{
+        Title   = $Brand
+        Color   = $Color
+    }
+    #================================================
+    & "$($MyInvocation.MyCommand.Module.ModuleBase)\Projects\HPOSDCloudGUI\MainWindow.ps1"
+    Start-Sleep -Seconds 2
+    #================================================
+}
 function Start-AzOSDCloudGUI {
     <#
     .SYNOPSIS

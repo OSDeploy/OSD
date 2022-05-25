@@ -47,6 +47,9 @@ function Invoke-OSDCloud {
         GetDiskFixed = $null
         GetFeatureUpdate = $null
         GetMyDriverPack = $null
+        HPIARun = $null
+        HPTPMUpdate = $null
+        HPBIOSUpdate = $null
         ImageCount = $null
         ImageFileFullName = $null
         ImageFileItem = $null
