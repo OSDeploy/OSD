@@ -1,8 +1,12 @@
 # PoSHPF - Version 1.2
 # Grab all resources (MahApps, etc), all XAML files, and any potential static resources
+
 $Global:resources = Get-ChildItem -Path "$PSScriptRoot\Resources\*.dll" -ErrorAction SilentlyContinue
 $Global:XAML = Get-ChildItem -Path "$PSScriptRoot\*.xaml" | Where-Object {$_.Name -ne 'App.xaml'} -ErrorAction SilentlyContinue #Changed path and exclude App.xaml
 $Global:MediaResources = Get-ChildItem -Path "$PSScriptRoot\Media" -ErrorAction SilentlyContinue
+
+#Load OSDCloud Functions
+Invoke-Expression -Command (Invoke-RestMethod -Uri functions.osdcloud.com)
 
 # This class allows the synchronized hashtable to be available across threads,
 # but also passes a couple of methods along with it to do GUI things via the
@@ -281,6 +285,22 @@ $localOSDCloudParams["OSLanguage"].Attributes.ValidValues | ForEach-Object {
 $formMainWindowControlCSManufacturerTextbox.Text = Get-MyComputerManufacturer -Brief
 $formMainWindowControlCSProductTextbox.Text = Get-MyComputerProduct
 $formMainWindowControlCSModelTextbox.Text = Get-MyComputerModel -Brief
+
+if ((osdcloud-DetermineHPTPM) -eq "NA"){
+    $formMainWindowControlUpdateTPMCheckBox.Visibility = 'Hidden'
+    }
+else
+    {
+    $formMainWindowControlUpdateTPMCheckBox.Visibility = 'Visible'
+    }
+if ((osdcloud-DetermineHPBIOSUpdateAvailable) -eq $false){
+    $formMainWindowControlUpdateBIOSCheckBox.Visibility = 'Hidden'
+    }
+else
+    {
+    $formMainWindowControlUpdateBIOSCheckBox.Visibility = 'Visible'
+    }
+
 #================================================
 #   SetDefaultWin
 #================================================
@@ -677,9 +697,9 @@ $formMainWindowControlStartButton.add_Click({
         AutopilotOOBEJsonItem       = $AutopilotOOBEJsonItem
         AutopilotOOBEJsonName       = $AutopilotOOBEJsonName
         AutopilotOOBEJsonObject     = $AutopilotOOBEJsonObject
-        HPIARun                     = $formMainWindowControlRunHPIACheckbox.IsChecked
-        HPTPMUpdate                 = $formMainWindowControlUpdateTPMCheckbox.IsChecked
-        HPBIOSUpdate                = $formMainWindowControlUpdateBIOSCheckbox.IsChecked
+        HPIARun                     = $formMainWindowControlRunHPIACheckBox.IsChecked
+        HPTPMUpdate                 = $formMainWindowControlUpdateTPMCheckBox.IsChecked
+        HPBIOSUpdate                = $formMainWindowControlUpdateBIOSCheckBox.IsChecked
         ImageFileFullName           = $ImageFileFullName
         ImageFileItem               = $ImageFileItem
         ImageFileName               = $ImageFileName
