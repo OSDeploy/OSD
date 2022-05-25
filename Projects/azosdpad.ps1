@@ -78,7 +78,11 @@ function Start-Scan {
         {
             $dummyNode = $null
             ## real mode
-            $AllNodes =$Global:AzOSDCloudBlobScript.BlobClient.BlobContainerName |Group-Object
+            #$AllNodes =$Global:AzOSDCloudBlobScript.BlobClient.BlobContainerName
+            
+            # test
+            
+            $AllNodes = $Global:AzOSDCloudGlobalScripts | Group-Object Container
             
             ## offline test
 
