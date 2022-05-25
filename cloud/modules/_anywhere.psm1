@@ -288,29 +288,16 @@ function osdcloud-InstallModuleOSD {
     param ()
     $InstallModule = $false
     $PSModuleName = 'OSD'
-    $InstalledModule = Get-InstalledModule $PSModuleName -ErrorAction Ignore | Select-Object -First 1
-    $GalleryPSModule = Find-Module -Name $PSModuleName -ErrorAction Ignore
+    $InstalledModule = Get-Module -Name $PSModuleName -ListAvailable -ErrorAction Ignore | Sort-Object Version -Descending | Select-Object -First 1
+    $GalleryPSModule = Find-Module -Name $PSModuleName -ErrorAction Ignore -WarningAction Ignore
 
-    if ($InstalledModule) {
+    if ($GalleryPSModule) {
         if (($GalleryPSModule.Version -as [version]) -gt ($InstalledModule.Version -as [version])) {
-            $InstallModule = $true
-        }
-    }
-    else {
-        $InstallModule = $true
-    }
-
-    if ($InstallModule) {
-        if ($WindowsPhase -eq 'WinPE') {
-            Write-Host -ForegroundColor DarkGray "Install-Module $PSModuleName $($GalleryPSModule.Version) [AllUsers]"
+            Write-Host -ForegroundColor DarkGray "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) $PSModuleName $($GalleryPSModule.Version) [AllUsers]"
             Install-Module $PSModuleName -Scope AllUsers -Force
-        }
-        else {
-            Write-Host -ForegroundColor DarkGray "Install-Module $PSModuleName $($GalleryPSModule.Version) [AllUsers]"
-            Install-Module $PSModuleName -Scope AllUsers -Force
+            Import-Module $PSModuleName -Force
         }
     }
-    Import-Module $PSModuleName -Force
 }
 function osdcloud-RestartComputer {
     [CmdletBinding()]
