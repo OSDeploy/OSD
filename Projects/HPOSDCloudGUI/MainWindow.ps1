@@ -1,12 +1,8 @@
 # PoSHPF - Version 1.2
 # Grab all resources (MahApps, etc), all XAML files, and any potential static resources
-
 $Global:resources = Get-ChildItem -Path "$PSScriptRoot\Resources\*.dll" -ErrorAction SilentlyContinue
 $Global:XAML = Get-ChildItem -Path "$PSScriptRoot\*.xaml" | Where-Object {$_.Name -ne 'App.xaml'} -ErrorAction SilentlyContinue #Changed path and exclude App.xaml
 $Global:MediaResources = Get-ChildItem -Path "$PSScriptRoot\Media" -ErrorAction SilentlyContinue
-
-#Load OSDCloud Functions
-Invoke-Expression -Command (Invoke-RestMethod -Uri functions.osdcloud.com)
 
 # This class allows the synchronized hashtable to be available across threads,
 # but also passes a couple of methods along with it to do GUI things via the
@@ -282,10 +278,6 @@ $localOSDCloudParams["OSLanguage"].Attributes.ValidValues | ForEach-Object {
     $formMainWindowControlOSLanguageCombobox.Items.Add($_) | Out-Null
 }
 
-$formMainWindowControlCSManufacturerTextbox.Text = Get-MyComputerManufacturer -Brief
-$formMainWindowControlCSProductTextbox.Text = Get-MyComputerProduct
-$formMainWindowControlCSModelTextbox.Text = Get-MyComputerModel -Brief
-
 if ((osdcloud-DetermineHPTPM) -eq "NA"){
     $formMainWindowControlUpdateTPMCheckBox.Visibility = 'Hidden'
     }
@@ -300,7 +292,18 @@ else
     {
     $formMainWindowControlUpdateBIOSCheckBox.Visibility = 'Visible'
     }
-
+#================================================
+#   DriverPack
+#================================================
+$DriverPack = Get-OSDCloudDriverPack
+$DriverPacks = @()
+$DriverPacks = Get-OSDCloudDriverPacks
+$DriverPacks | ForEach-Object {
+    $formMainWindowControlDriverPackCombobox.Items.Add($_.Name) | Out-Null
+}
+if ($DriverPack) {
+    $formMainWindowControlDriverPackCombobox.SelectedValue = $DriverPack.Name
+}
 #================================================
 #   SetDefaultWin
 #================================================
@@ -324,7 +327,6 @@ function SetDefaultWin10 {
     $formMainWindowControlOSLanguageCombobox.IsEnabled = $true
     $formMainWindowControlOSLicenseCombobox.IsEnabled = $false
     $formMainWindowControlImageIndexTextbox.IsEnabled = $false
-    $formMainWindowControlCSModelTextbox.IsEnabled = $false
     $formMainWindowControlAutopilotJsonCombobox.IsEnabled = $true
 
     $formMainWindowControlImageNameCombobox.Items.Clear()
@@ -354,7 +356,6 @@ function SetDefaultWin11 {
     $formMainWindowControlOSLanguageCombobox.IsEnabled = $true
     $formMainWindowControlOSLicenseCombobox.IsEnabled = $false
     $formMainWindowControlImageIndexTextbox.IsEnabled = $false
-    $formMainWindowControlCSModelTextbox.IsEnabled = $false
     $formMainWindowControlAutopilotJsonCombobox.IsEnabled = $true
 
     $formMainWindowControlImageNameCombobox.Items.Clear()
@@ -686,8 +687,6 @@ $formMainWindowControlStartButton.add_Click({
     #================================================
     $Global:StartOSDCloudGUI = $null
     $Global:StartOSDCloudGUI = [ordered]@{
-        ApplyManufacturerDrivers    = $formMainWindowControlManufacturerDriversCheckbox.IsChecked
-        ApplyCatalogDrivers         = $formMainWindowControlCatalogDriversCheckbox.IsChecked
         ApplyCatalogFirmware        = $formMainWindowControlCatalogFirmwareCheckbox.IsChecked
         AutopilotJsonChildItem      = $AutopilotJsonChildItem
         AutopilotJsonItem           = $AutopilotJsonItem
@@ -697,13 +696,13 @@ $formMainWindowControlStartButton.add_Click({
         AutopilotOOBEJsonItem       = $AutopilotOOBEJsonItem
         AutopilotOOBEJsonName       = $AutopilotOOBEJsonName
         AutopilotOOBEJsonObject     = $AutopilotOOBEJsonObject
+        DriverPackName              = $formMainWindowControlDriverPackCombobox.Text
         HPIARun                     = $formMainWindowControlRunHPIACheckBox.IsChecked
         HPTPMUpdate                 = $formMainWindowControlUpdateTPMCheckBox.IsChecked
         HPBIOSUpdate                = $formMainWindowControlUpdateBIOSCheckBox.IsChecked
         ImageFileFullName           = $ImageFileFullName
         ImageFileItem               = $ImageFileItem
         ImageFileName               = $ImageFileName
-        Manufacturer                = $formMainWindowControlCSManufacturerTextbox.Text
         OOBEDeployJsonChildItem     = $OOBEDeployJsonChildItem
         OOBEDeployJsonItem          = $OOBEDeployJsonItem
         OOBEDeployJsonName          = $OOBEDeployJsonName
@@ -714,7 +713,6 @@ $formMainWindowControlStartButton.add_Click({
         OSLanguage                  = $OSLanguage
         OSLicense                   = $OSLicense
         OSVersion                   = $OSVersion
-        Product                     = $formMainWindowControlCSProductTextbox.Text
         Restart                     = $formMainWindowControlRestartCheckbox.IsChecked
         SkipAutopilot               = $SkipAutopilot
         SkipAutopilotOOBE           = $SkipAutopilotOOBE
@@ -737,7 +735,7 @@ $formMainWindowControlStartButton.add_Click({
 #   Customizations
 #================================================
 [string]$ModuleVersion = Get-Module -Name OSD | Sort-Object -Property Version | Select-Object -ExpandProperty Version -Last 1
-$formMainWindow.Title = "OSDCloudGUI $ModuleVersion"
+$formMainWindow.Title = "OSDCloudGUI $ModuleVersion on $(Get-MyComputerManufacturer -Brief) $(Get-MyComputerModel -Brief) $(Get-MyComputerProduct)"
 #================================================
 #   Branding
 #================================================
