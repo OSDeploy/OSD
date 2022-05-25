@@ -331,7 +331,7 @@
                       Padding="5,-2,5,10"
                       VerticalAlignment="Center"
                       Margin="170,0,0,0">Capture Screenshots C:\OSDCloud\ScreenPNG</CheckBox>
-            <CheckBox Name="RunHPIA"
+            <CheckBox Name="RunHPIACheckBox"
                       BorderBrush="Black"
                       BorderThickness="2"
                       FontSize="15"
@@ -339,7 +339,7 @@
                       IsChecked="False"
                       Padding="5,-2,5,10"
                       Margin="170,0,0,0">Run HPIA in OOBE</CheckBox>
-            <CheckBox Name="UpdateTPM"
+            <CheckBox Name="UpdateTPMCheckBox"
                       BorderBrush="Black"
                       BorderThickness="2"
                       FontSize="15"
@@ -347,7 +347,7 @@
                       IsChecked="False"
                       Padding="5,-2,5,10"
                       Margin="170,0,0,0">Update TPM</CheckBox>
-            <CheckBox Name="UpdateBIOS"
+            <CheckBox Name="UpdateBIOSCheckBox"
                       BorderBrush="Black"
                       BorderThickness="2"
                       FontSize="15"
