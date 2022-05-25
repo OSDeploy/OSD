@@ -846,7 +846,9 @@ function Invoke-OSDCloud {
     }
 
     if ($Global:OSDCloud.AzOSDCloudBlobDriverPack -and $Global:OSDCloud.DriverPack) {
-        $Global:OSDCloud.AzOSDCloudDriverPack = $Global:OSDCloud.AzOSDCloudBlobDriverPack | Where-Object {$_.Name -match $Global:OSDCloud.DriverPack.Name} | Select-Object -First 1
+        Write-Host -ForegroundColor DarkGray "Checking Azure for DriverPack"
+        $Global:OSDCloud.AzOSDCloudDriverPack = $Global:OSDCloud.AzOSDCloudBlobDriverPack | Where-Object {$_.Name -match $Global:OSDCloud.DriverPack.FileName} | Select-Object -First 1
+        $Global:OSDCloud.AzOSDCloudDriverPack | ConvertTo-Json | Out-File -FilePath "$OSDCloudLogs\AzOSDCloudDriverPack.json" -Encoding ascii -Width 2000
     }
 
     if ($Global:OSDCloud.DriverPack) {
@@ -877,9 +879,7 @@ function Invoke-OSDCloud {
             $Global:OSDCloud.DriverPackExpand = $true
         }
         elseif ($Global:OSDCloud.AzOSDCloudDriverPack) {
-            Write-Host -ForegroundColor DarkGray "Copying matching DriverPack from Azure Storage to C:\Drivers"
-            $Global:OSDCloud.AzOSDCloudDriverPack | ConvertTo-Json | Out-File -FilePath "$OSDCloudLogs\AzOSDCloudDriverPack.json" -Encoding ascii -Width 2000
-    
+            Write-Host -ForegroundColor DarkGray "Copying matching DriverPack from Azure Storage to C:\Drivers"    
             $null = New-Item -Path 'C:\OSDCloud\Drivers' -ItemType Directory -Force -ErrorAction Ignore
     
             Get-AzStorageBlobContent -CloudBlob $Global:OSDCloud.AzOSDCloudDriverPack.ICloudBlob -Context $Global:OSDCloud.AzOSDCloudDriverPack.Context -Destination 'C:\Drivers\'
