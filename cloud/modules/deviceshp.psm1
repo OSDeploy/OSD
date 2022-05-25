@@ -19,6 +19,13 @@ function osdcloud-InstallModuleHPCMSL {
     param ()
     $InstallModule = $false
     $PSModuleName = 'HPCMSL'
+    if (-not (Get-Module -Name PowerShellGet -ListAvailable | Where-Object {$_.Version -ge '2.2.5'})) {
+        Write-Host -ForegroundColor DarkGray 'Install-Package PackageManagement,PowerShellGet [AllUsers]'
+        Install-Package -Name PowerShellGet -MinimumVersion 2.2.5 -Force -Confirm:$false -Source PSGallery | Out-Null
+
+        Write-Host -ForegroundColor DarkGray 'Import-Module PackageManagement,PowerShellGet [Global]'
+        Import-Module PackageManagement,PowerShellGet -Force -Scope Global
+        }
     $InstalledModule = Get-InstalledModule $PSModuleName -ErrorAction Ignore | Select-Object -First 1
     $GalleryPSModule = Find-Module -Name $PSModuleName -ErrorAction Ignore
 
