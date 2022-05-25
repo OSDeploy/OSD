@@ -1027,6 +1027,25 @@ function Invoke-OSDCloud {
         #Set-OSDxCloudUnattendSpecialize -Verbose
     }
     #=================================================
+    #   HP Updates Config for Specialize Phase
+    #=================================================
+    if (($HPIARun -eq $true) -or ($HPTPMUpdate -eq $true) -or ($HPBIOSUpdate -eq $true)){
+        $HPHashTable = @{
+            'HPUpdates' = @{
+                'HPIARun' = $HPIARun
+                'HPTPMUpdate' = $HPTPMUpdate
+                'HPBIOSUpdate' = $HPBIOSUpdate
+            }
+        }
+        $HPHashVar = $HPHashTable | ConvertTo-Json
+        $ConfigPath = "c:\osdcloud\configs"
+        $ConfigFile = "$ConfigPath\HP.JSON"
+        try {[void][System.IO.Directory]::CreateDirectory($ConfigPath)}
+        catch {}
+        $HPHashVar | Out-File $ConfigFile
+    }
+    
+    #=================================================
     #   AutopilotConfigurationFile.json
     #=================================================
     if ($Global:OSDCloud.AutopilotJsonObject) {
