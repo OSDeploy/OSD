@@ -31,15 +31,18 @@ function Invoke-OSDCloud {
         AutopilotOOBEJsonObject = $null
         AzContext = $Global:AzContext
         AzOSDCloudBlobImage = $Global:AzOSDCloudBlobImage
+        AzOSDCloudBlobDriverPack = $Global:AzOSDCloudBlobDriverPack
+        AzOSDCloudDriverPack = $null
         AzOSDCloudImage = $Global:AzOSDCloudImage
         AzStorageAccounts = $Global:AzStorageAccounts
         AzStorageContext = $Global:AzStorageContext
         BuildName = 'OSDCloud'
         DriverPack = $null
+        DriverPackExpand = [bool]$false
         DriverPackName = $null
-        DriverPackUrl = $null
         DriverPackOffline = $null
         DriverPackSource = $null
+        DriverPackUrl = $null
         Function = $MyInvocation.MyCommand.Name
         GetDiskFixed = $null
         GetFeatureUpdate = $null
@@ -580,7 +583,7 @@ function Invoke-OSDCloud {
     }
     #endregion
     #=================================================
-    #	FAILED ImageFileDestination
+    #region ImageFileDestination
     #=================================================
     if (-not ($Global:OSDCloud.ImageFileDestination)) {
         Write-Host -ForegroundColor DarkGray "========================================================================="
@@ -818,13 +821,17 @@ function Invoke-OSDCloud {
     }
     #endregion
     #=================================================
-    #	ApplyManufacturerDrivers = TRUE
+    #region Validate OSDCloud Driver Pack
     #=================================================
+    Write-Host -ForegroundColor DarkGray "========================================================================="
+    Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) OSDCloud DriverPack"
     if ($Global:OSDCloud.DriverPackName) {
         if ($Global:OSDCloud.DriverPackName -match 'None') {
+            Write-Host -ForegroundColor DarkGray "DriverPack is set to None"
             $Global:OSDCloud.DriverPack = $null
         }
         elseif ($Global:OSDCloud.DriverPackName -match 'Microsoft Update Catalog') {
+            Write-Host -ForegroundColor DarkGray "DriverPack is set to Microsoft Update Catalog"
             $Global:OSDCloud.DriverPack = $null
         }
         else {
@@ -835,10 +842,14 @@ function Invoke-OSDCloud {
         $Global:OSDCloud.DriverPack = Get-OSDCloudDriverPack | Select-Object -First 1
     }
 
-    if ($Global:OSDCloud.DriverPack) {
-        Write-Host -ForegroundColor DarkGray "========================================================================="
-        Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Save OSDCloud Driver Pack"
+    if ($Global:OSDCloud.AzOSDCloudBlobDriverPack -and $Global:OSDCloud.DriverPack) {
+        $Global:OSDCloud.AzOSDCloudDriverPack = $Global:OSDCloud.AzOSDCloudBlobDriverPack | Where-Object {$_.Name -match $Global:OSDCloud.DriverPack.Name} | Select-Object -First 1
+    }
 
+    if ($Global:OSDCloud.DriverPack) {
+        $SaveMyDriverPack = $null
+
+        Write-Host -ForegroundColor DarkGray "Matching DriverPack identified"
         Write-Host -ForegroundColor DarkGray "-Name $($Global:OSDCloud.DriverPack.Name)"
         Write-Host -ForegroundColor DarkGray "-Product $($Global:OSDCloud.DriverPack.Product)"
         Write-Host -ForegroundColor DarkGray "-FileName $($Global:OSDCloud.DriverPack.FileName)"
@@ -848,18 +859,35 @@ function Invoke-OSDCloud {
         $Global:StartOSDCloud.DriverPackOffline = $Global:StartOSDCloud.DriverPackOffline | Where-Object {$_.FullName -notlike "C*"} | Where-Object {$_.FullName -notlike "X*"} | Select-Object -First 1
 
         if ($Global:OSDCloud.DriverPackOffline) {
+            Write-Host -ForegroundColor DarkGray "Matching DriverPack is available on OSDCloudUSB"
             Write-Host -ForegroundColor DarkGray $Global:StartOSDCloud.DriverPack.Name
             Write-Host -ForegroundColor DarkGray $Global:StartOSDCloud.DriverPackOffline.FullName
             #$Global:OSDCloud.DriverPackSource = Find-OSDCloudFile -Name (Split-Path -Path $Global:OSDCloud.DriverPackOffline -Leaf) -Path (Split-Path -Path (Split-Path -Path $Global:OSDCloud.DriverPackOffline.FullName -Parent) -NoQualifier) | Select-Object -First 1
             $Global:OSDCloud.DriverPackSource = $Global:StartOSDCloud.DriverPackOffline
         }
 
-        $SaveMyDriverPack = $null
-
         if ($Global:OSDCloud.DriverPackSource) {
+            Write-Host -ForegroundColor DarkGray "Copying matching DriverPack from OSDCloudUSB to C:\Drivers"
             Write-Host -ForegroundColor DarkGray "-DriverPackSource $($Global:OSDCloud.DriverPackSource.FullName)"
             Copy-Item -Path $Global:OSDCloud.DriverPackSource.FullName -Destination 'C:\Drivers' -Force
-            
+
+            $Global:OSDCloud.DriverPackExpand = $true
+        }
+        elseif ($Global:OSDCloud.AzOSDCloudDriverPack) {
+            Write-Host -ForegroundColor DarkGray "Copying matching DriverPack from Azure Storage to C:\Drivers"
+            $Global:OSDCloud.AzOSDCloudDriverPack | ConvertTo-Json | Out-File -FilePath "$OSDCloudLogs\AzOSDCloudDriverPack.json" -Encoding ascii -Width 2000
+    
+            $null = New-Item -Path 'C:\OSDCloud\Drivers' -ItemType Directory -Force -ErrorAction Ignore
+    
+            Get-AzStorageBlobContent -CloudBlob $Global:OSDCloud.AzOSDCloudDriverPack.ICloudBlob -Context $Global:OSDCloud.AzOSDCloudDriverPack.Context -Destination 'C:\Drivers\'
+
+            $Global:OSDCloud.DriverPackExpand = $true
+        }
+        elseif ($Global:OSDCloud.DriverPack.Guid) {
+            $SaveMyDriverPack = Save-MyDriverPack -DownloadPath 'C:\Drivers' -Expand -Guid $Global:OSDCloud.DriverPack.Guid
+        }
+
+        if ($Global:OSDCloud.DriverPackExpand) {
             $DriverPacks = Get-ChildItem -Path 'C:\Drivers' -File
 
             foreach ($Item in $DriverPacks) {
@@ -894,9 +922,6 @@ function Invoke-OSDCloud {
                 }
                 #=================================================
             }
-        }
-        elseif ($Global:OSDCloud.DriverPack.Guid) {
-            $SaveMyDriverPack = Save-MyDriverPack -DownloadPath 'C:\Drivers' -Expand -Guid $Global:OSDCloud.DriverPack.Guid
         }
 
         if ($SaveMyDriverPack) {

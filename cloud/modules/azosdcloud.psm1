@@ -42,7 +42,7 @@ function Get-AzOSDCloudBlobImage {
     
         $Global:AzStorageContext = @{}
         $Global:AzOSDCloudBlobImage = @()
-        $Global:AzOSDCloudDriverPack = @()
+        $Global:AzOSDCloudBlobDriverPack = @()
     
         if ($Global:AzOSDCloudStorageAccounts) {
             Write-Host -ForegroundColor DarkGray    'Storage Contexts:          $Global:AzStorageContext'
@@ -64,7 +64,7 @@ function Get-AzOSDCloudBlobImage {
                         $Global:AzOSDCloudBlobImage += Get-AzStorageBlob -Context $Global:AzCurrentStorageContext -Container $Container.Name -Blob *.wim -ErrorAction Ignore | Where-Object {$_.Length -gt 3000000000}
 
                         if ($Container.Name -eq 'DriverPack') {
-                            $Global:AzOSDCloudDriverPack += Get-AzStorageBlob -Context $Global:AzCurrentStorageContext -Container $Container.Name -Blob *.cab -ErrorAction Ignore
+                            $Global:AzOSDCloudBlobDriverPack += Get-AzStorageBlob -Context $Global:AzCurrentStorageContext -Container $Container.Name -Blob *.cab -ErrorAction Ignore
                         }
                     }
                 }
@@ -72,7 +72,7 @@ function Get-AzOSDCloudBlobImage {
             if ($DebugLogs) {
                 $Global:AzStorageContext | ConvertTo-Json | Out-File -FilePath "$DebugLogs\AzStorageContext.json" -Encoding ascii -Width 2000 -Force
                 $Global:AzOSDCloudBlobImage | ConvertTo-Json | Out-File -FilePath "$DebugLogs\AzOSDCloudBlobImage.json" -Encoding ascii -Width 2000 -Force
-                $Global:AzOSDCloudDriverPack | ConvertTo-Json | Out-File -FilePath "$DebugLogs\AzOSDCloudDriverPack.json" -Encoding ascii -Width 2000 -Force
+                $Global:AzOSDCloudBlobDriverPack | ConvertTo-Json | Out-File -FilePath "$DebugLogs\AzOSDCloudBlobDriverPack.json" -Encoding ascii -Width 2000 -Force
             }
         }
         else {
