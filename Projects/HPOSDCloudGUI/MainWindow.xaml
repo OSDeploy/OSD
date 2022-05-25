@@ -1,4 +1,4 @@
-﻿<Window x:Class="OSDCloudGUI.MainWindow"
+<Window x:Class="OSDCloudGUI.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -175,8 +175,8 @@
                           Margin="5"
                           Padding="2"
                           SelectedIndex="0" >
-                        <ComboBoxItem Content="OSDCloud Windows 10 x64"/>
-                        <ComboBoxItem Content="OSDCloud Windows 11 x64"/>
+                    <ComboBoxItem Content="OSDCloud Windows 10 x64"/>
+                    <ComboBoxItem Content="OSDCloud Windows 11 x64"/>
                 </ComboBox>
             </StackPanel>
             <StackPanel Orientation="Horizontal"
@@ -331,6 +331,30 @@
                       Padding="5,-2,5,10"
                       VerticalAlignment="Center"
                       Margin="170,0,0,0">Capture Screenshots C:\OSDCloud\ScreenPNG</CheckBox>
+            <CheckBox Name="RunHPIA"
+                      BorderBrush="Black"
+                      BorderThickness="2"
+                      FontSize="15"
+                      Foreground="Black"
+                      IsChecked="False"
+                      Padding="5,-2,5,10"
+                      Margin="170,0,0,0">Run HPIA in OOBE</CheckBox>
+            <CheckBox Name="UpdateTPM"
+                      BorderBrush="Black"
+                      BorderThickness="2"
+                      FontSize="15"
+                      Foreground="Black"
+                      IsChecked="False"
+                      Padding="5,-2,5,10"
+                      Margin="170,0,0,0">Update TPM</CheckBox>
+            <CheckBox Name="UpdateBIOS"
+                      BorderBrush="Black"
+                      BorderThickness="2"
+                      FontSize="15"
+                      Foreground="Black"
+                      IsChecked="False"
+                      Padding="5,-2,5,10"
+                      Margin="170,0,0,0">Update BIOS</CheckBox>
             <!-- AutopilotJson -->
             <StackPanel HorizontalAlignment="Left"
                         VerticalAlignment="Center"
