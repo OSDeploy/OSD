@@ -103,20 +103,6 @@ function Start-Scan {
                 $treeViewItem.Tag = @("folder",$node)
                 $treeViewItem.Items.Add($dummyNode) | Out-Null
 
-
-                $treeViewItem.Add_Expanded({
-                try {
-                    $ListBoxControl.ItemsSource = $null
-                    $ListBoxControl.Items.Clear()                    
-                }
-                catch {}
-                Write-Host "2" $_.OriginalSource.Header  "JJJ"
-                $Sublevel = $_.OriginalSource.Header
-                
-		        [System.Windows.Controls.TreeViewItem]$sender = $args[0]
-                $OU=  $($sender.Tag[1].DN)
-                write-host $OU
-                })
                 $treeViewItem.Add_PreviewMouseRightButtonDown({
 
                     $Menu.IsOpen = $true
@@ -127,20 +113,18 @@ function Start-Scan {
                     
                     $WPF_tt.Content = $($sender.Tag[1].Name)
                     #$Sobjects.Visibility="Visible" 
-                    write-host  Get-AzOSDCloudBlobScriptFile -Container   $sender.Header
-                                     
+                                                     
                     $global:Object= Get-AzOSDCloudBlobScriptFile -Container  $sender.Header
                     
-                    if ($null -eq $($Object).Count){
+                    if ($null -eq $( $global:Object).Count){
                         $WPF_CObjects.Content = 1
                         $TempArray = [System.Collections.ArrayList]::new()
-                        $TempArray.Add($Object.Name)
+                        $TempArray.Add($global:Object.Name)
                         $WPF_ListBoxControl.ItemsSource = $TempArray
                     }
                     else{
-
-                        $WPF_ListBoxControl.ItemsSource = "$Object"
-                        $WPF_CObjects.Content = $($Object).Count
+                        $WPF_ListBoxControl.ItemsSource = "$global:Object.Name"
+                        $WPF_CObjects.Content = $($global:Object).Count
                     }
                     
     })
@@ -162,25 +146,14 @@ function Get-AzOSDCloudBlobScriptFile {
 
     )
       Try {
-       $Objects = Get-AzStorageBlob -Context $Global:AzCurrentStorageContext -Container $Container -Blob *.ps1 -ErrorAction Ignore
-       $Objects += Get-AzStorageBlob -Context $Global:AzCurrentStorageContext -Container $Container -Blob *.ppkg -ErrorAction Ignore
-       $Objects += Get-AzStorageBlob -Context $Global:AzCurrentStorageContext -Container $Container -Blob *.xml -ErrorAction Ignore
+       $Objects = @()
+       $Objects = Get-AzStorageBlob -Context $Global:AzCurrentStorageContext -Container $Container -Blob *.ps1 
+       $Objects += Get-AzStorageBlob -Context $Global:AzCurrentStorageContext -Container $Container -Blob *.ppkg 
+       $Objects += Get-AzStorageBlob -Context $Global:AzCurrentStorageContext -Container $Container -Blob *.xml 
     }
     catch {}
 
-    $Results = foreach ($Item in $Objects) {
-    
-        $ObjectProperties = @{
-            StorageAccount  = $Item.BlobClient.AccountName
-            Name            = $Item.Name
-            URL             = $Item.BlobClient.Uri
-            ContentHash     = $Item.BlobProperties.ContentHash
-            LastModified    = $Item.ICloudBlob.Properties.LastModified
-            
-        }
-        New-Object -TypeName PSObject -Property $ObjectProperties
-    }
-    return $Results
+    return $Objects
 }
 
 #########################################################################
