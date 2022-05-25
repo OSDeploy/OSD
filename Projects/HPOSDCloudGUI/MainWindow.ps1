@@ -677,9 +677,9 @@ $formMainWindowControlStartButton.add_Click({
         AutopilotOOBEJsonItem       = $AutopilotOOBEJsonItem
         AutopilotOOBEJsonName       = $AutopilotOOBEJsonName
         AutopilotOOBEJsonObject     = $AutopilotOOBEJsonObject
-        HPIARun                     = $formMainWindowControlCatalogRunHPIACheckbox.IsChecked
-        HPTPMUpdate                 = $formMainWindowControlCatalogUpdateTPMCheckbox.IsChecked
-        HPBIOSUpdate                = $formMainWindowControlCatalogUpdateBIOSCheckbox.IsChecked
+        HPIARun                     = $formMainWindowControlRunHPIACheckbox.IsChecked
+        HPTPMUpdate                 = $formMainWindowControlUpdateTPMCheckbox.IsChecked
+        HPBIOSUpdate                = $formMainWindowControlUpdateBIOSCheckbox.IsChecked
         ImageFileFullName           = $ImageFileFullName
         ImageFileItem               = $ImageFileItem
         ImageFileName               = $ImageFileName
