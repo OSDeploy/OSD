@@ -50,6 +50,23 @@ function osdcloud-DetermineHPTPM{
     elseif ($SP94937){Return "SP94937"}
     else{Return "NA"}
 }
+function osdcloud-DetermineHPBIOSUpdateAvailable{
+    [CmdletBinding()]
+    param ([Switch]$Details)
+    osdcloud-InstallModuleHPCMSL
+    Import-Module -Name HPCMSL -Force
+    [Version]$CurrentVersion = Get-HPBIOSVersion
+    [Version]$LatestVersion = (Get-HPBIOSUpdates -Latest).Ver
+    if ($Details){
+        if ($CurrentVersion -lt $LatestVersion){Return "Requires Update: $LatestVersion"}
+        else {Return "Already Current: $CurrentVersion"}
+        }
+    else
+        {
+        if ($CurrentVersion -lt $LatestVersion){Return $true}
+        else {Return $false}
+        }
+}
 function osdcloud-DownloadHPTPM {
     [CmdletBinding()]
     param ($WorkingFolder)
