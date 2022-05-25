@@ -38,6 +38,7 @@ function Invoke-OSDCloud {
         AzStorageContext = $Global:AzStorageContext
         BuildName = 'OSDCloud'
         DriverPack = $null
+        DriverPackBaseName = $null
         DriverPackExpand = [bool]$false
         DriverPackName = $null
         DriverPackOffline = $null
@@ -845,17 +846,24 @@ function Invoke-OSDCloud {
         $Global:OSDCloud.DriverPack = Get-OSDCloudDriverPack | Select-Object -First 1
     }
 
-    if ($Global:OSDCloud.AzOSDCloudBlobDriverPack -and $Global:OSDCloud.DriverPack) {
+    if ($Global:OSDCloud.DriverPack) {
+        $Global:OSDCloud.DriverPackBaseName = ($Global:OSDCloud.DriverPackFileName -split '.')[0]
+    }
+
+    if ($Global:OSDCloud.AzOSDCloudBlobDriverPack -and $Global:OSDCloud.DriverPackBaseName) {
         Write-Host -ForegroundColor DarkGray "Checking Azure for DriverPack"
-        $Global:OSDCloud.AzOSDCloudDriverPack = $Global:OSDCloud.AzOSDCloudBlobDriverPack | Where-Object {$_.Name -match $Global:OSDCloud.DriverPack.FileName} | Select-Object -First 1
+        $Global:OSDCloud.AzOSDCloudDriverPack = $Global:OSDCloud.AzOSDCloudBlobDriverPack | Where-Object {$_.Name -match $Global:OSDCloud.DriverPackBaseName} | Select-Object -First 1
         $Global:OSDCloud.AzOSDCloudDriverPack | ConvertTo-Json | Out-File -FilePath "$OSDCloudLogs\AzOSDCloudDriverPack.json" -Encoding ascii -Width 2000
     }
 
     if ($Global:OSDCloud.DriverPack) {
         $SaveMyDriverPack = $null
 
+        $Global:OSDCloud.DriverPackBaseName = ($Global:OSDCloud.DriverPackFileName -split '.')[0]
+
         Write-Host -ForegroundColor DarkGray "Matching DriverPack identified"
         Write-Host -ForegroundColor DarkGray "-Name $($Global:OSDCloud.DriverPack.Name)"
+        Write-Host -ForegroundColor DarkGray "-BaseName $($Global:OSDCloud.DriverPackBaseName)"
         Write-Host -ForegroundColor DarkGray "-Product $($Global:OSDCloud.DriverPack.Product)"
         Write-Host -ForegroundColor DarkGray "-FileName $($Global:OSDCloud.DriverPack.FileName)"
         Write-Host -ForegroundColor DarkGray "-Url $($Global:OSDCloud.DriverPack.Url)"
