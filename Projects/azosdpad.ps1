@@ -138,11 +138,11 @@ function Start-Scan {
                         $WPF_ListBoxControl.ItemsSource = $TempArray
                     }
                     else{
-                        $WPF_ListBoxControl.ItemsSource = "$Object.Name"
+
+                        $WPF_ListBoxControl.ItemsSource = "$Object"
                         $WPF_CObjects.Content = $($Object).Count
                     }
-
-
+                    
     })
 
             $WPF_TreeView.Items.Add($treeViewItem) | Out-Null
@@ -167,6 +167,7 @@ function Get-AzOSDCloudBlobScriptFile {
        $Objects += Get-AzStorageBlob -Context $Global:AzCurrentStorageContext -Container $Container -Blob *.xml -ErrorAction Ignore
     }
     catch {}
+
     $Results = foreach ($Item in $Objects) {
     
         $ObjectProperties = @{
@@ -179,7 +180,6 @@ function Get-AzOSDCloudBlobScriptFile {
         }
         New-Object -TypeName PSObject -Property $ObjectProperties
     }
-
     return $Results
 }
 
