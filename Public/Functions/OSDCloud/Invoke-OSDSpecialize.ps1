@@ -150,6 +150,22 @@ function Invoke-OSDSpecialize {
         }
     }
     #=================================================
+    #   Specialize Config HP JSON
+    #=================================================
+    $ConfigPath = "c:\osdcloud\configs"
+    if (Test-Path $ConfigPath){
+        $JSONConfigs = Get-ChildItem -path $ConfigPath -Filter "*.json"
+        if ($JSONConfigs.name -contains "HP.JSON"){
+            $HPJson = Get-Content -Path "$ConfigPath\HP.JSON" |ConvertFrom-Json
+            }
+        }
+        if ($HPJson){
+            if ($HPJson.HPUpdates.HPIARun -eq $true){
+                osdcloud-RunHPIA
+            }    
+        }
+    
+    #=================================================
     #   Specialize ODT
     #=================================================
     if ((Test-Path "C:\OSDCloud\ODT\setup.exe") -and (Test-Path "C:\OSDCloud\ODT\Config.xml")) {
