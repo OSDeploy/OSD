@@ -11,6 +11,19 @@
     Invoke-Expression (Invoke-RestMethod -Uri 'https://raw.githubusercontent.com/OSDeploy/OSD/master/cloud/modules/_winpestartup.psm1')
 #>
 #=================================================
+$Manufacturer = (Get-CimInstance -Class:Win32_ComputerSystem).Manufacturer
+$Model = (Get-CimInstance -Class:Win32_ComputerSystem).Model
+if ($Manufacturer -match "HP" -or $Manufacturer -match "Hewlett-Packard"){
+    $Manufacturer = "HP"
+    $EnterpriseModels = @("ProBook","ProDesk","EliteBook","EliteDesk","ZBook")
+    foreach ($EnterpriseModel in $EnterpriseModels){
+        if ($model -match $EnterpriseModel){
+            $HPEnterprise = $true
+            }
+        }
+    }
+if ($Manufacturer -match "Dell"){$Manufacturer = "Dell"}
+
 #region Functions
 function AzOSD {
     [CmdletBinding()]
@@ -63,6 +76,9 @@ function osdcloud-StartWinPE {
         if ($KeyVault) {
             osdcloud-InstallModuleAzAccounts
             osdcloud-InstallModuleAzKeyVault
+        }
+        if ($HPEnterprise) {
+            osdcloud-InstallModuleHPCMSL
         }
     }
     else {
