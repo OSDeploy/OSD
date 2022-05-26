@@ -77,16 +77,15 @@ function osdcloud-DetermineHPBIOSUpdateAvailable{
     param ([Switch]$Details)
     osdcloud-InstallModuleHPCMSL
     Import-Module -Name HPCMSL -Force
-    [Version]$CurrentVersion = Get-HPBIOSVersion
-    [Version]$LatestVersion = (Get-HPBIOSUpdates -Latest).Ver
+    $BIOSIsCurrent = Get-HPBIOSUpdates -Check
     if ($Details){
-        if ($CurrentVersion -lt $LatestVersion){Return "BIOS Update Available: $LatestVersion"}
-        else {Return "BIOS Already Current: $CurrentVersion"}
+        if (!($BIOSIsCurrent)){Return "HP BIOS Update Available: $((Get-HPBIOSUpdates -Latest).ver)"}
+        else {Return "HP BIOS Already Current: $(Get-HPBIOSVersion)"}
         }
     else
         {
-        if ($CurrentVersion -lt $LatestVersion){Return $true}
-        else {Return $false}
+        if ($BIOSIsCurrent){Return $false}
+        else {Return $true}
         }
 }
 function osdcloud-DownloadHPTPM {
