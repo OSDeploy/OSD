@@ -294,8 +294,8 @@ else
     }
 if ((osdcloud-DetermineHPBIOSUpdateAvailable) -eq $false){
     $CurrentVer = Get-HPBIOSVersion
-    $formMainWindowControlUpdateBIOSCheckBox.Content = 'HP System Firmware already Current: $CurrentVer'
-    $formMainWindowControlUpdateBIOSCheckBox.IsEnabled = 'false'
+    $formMainWindowControlUpdateBIOSCheckBox.Content = "HP System Firmware already Current: $CurrentVer"
+    $formMainWindowControlUpdateBIOSCheckBox.IsEnabled = $false
     }
 else
     {
