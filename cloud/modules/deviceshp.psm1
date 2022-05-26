@@ -177,10 +177,8 @@ Function osdcloud-RunHPIA {
             [ValidateSet("List", "Download", "Extract", "Install", "UpdateCVA")]
             $Action = "Install",
             [Parameter(Mandatory=$false)]
-            [ValidateSet("List", "Download", "Extract", "Install", "UpdateCVA")]
             $LogFolder = "$env:systemdrive\OSDCloud\Logs",
             [Parameter(Mandatory=$false)]
-            [ValidateSet("List", "Download", "Extract", "Install", "UpdateCVA")]
             $ReportsFolder = "$env:systemdrive\OSDCloud\HPIA"
             )
         # Params
