@@ -79,16 +79,25 @@ function Get-AzOSDCloudBlobImage {
                 $Global:AzOSDCloudBlobImage | ConvertTo-Json | Out-File -FilePath "$DebugLogs\AzOSDCloudBlobImage.json" -Encoding ascii -Width 2000 -Force
                 $Global:AzOSDCloudBlobDriverPack | ConvertTo-Json | Out-File -FilePath "$DebugLogs\AzOSDCloudBlobDriverPack.json" -Encoding ascii -Width 2000 -Force
             }
+            if ($null -eq $Global:AzOSDCloudBlobImage) {
+                Write-Warning 'Unable to find a WIM on any of the OSDCloud Azure Storage Containers'
+                Write-Warning 'Make sure you have a WIM Windows Image in the OSDCloud Azure Storage Container'
+                Write-Warning 'Make sure this user has the Azure Storage Blob Data Reader role to the OSDCloud Container'
+                Write-Warning 'You may need to execute Get-AzOSDCloudBlobImage then Start-AzOSDCloud'
+                Break
+            }
         }
         else {
             Write-Warning 'Unable to find any Azure Storage Accounts'
             Write-Warning 'Make sure the OSDCloud Azure Storage Account has an OSDCloud Tag'
             Write-Warning 'Make sure this user has the Azure Reader role on the OSDCloud Azure Storage Account'
+            Break
         }
     }
     else {
         Write-Warning 'Unable to connect to AzureAD'
         Write-Warning 'You may need to execute Connect-AzOSDCloud then Start-AzOSDCloud'
+        Break
     }
 }
 function Start-AzOSDCloud {
