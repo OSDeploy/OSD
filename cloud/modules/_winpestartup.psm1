@@ -13,18 +13,24 @@
 #=================================================
 $Manufacturer = (Get-CimInstance -Class:Win32_ComputerSystem).Manufacturer
 $Model = (Get-CimInstance -Class:Win32_ComputerSystem).Model
-if ($Manufacturer -match "HP" -or $Manufacturer -match "Hewlett-Packard"){
-    $Manufacturer = "HP"
-    $EnterpriseModels = @("ProBook","ProDesk","EliteBook","EliteDesk","ZBook")
-    foreach ($EnterpriseModel in $EnterpriseModels){
-        if ($model -match $EnterpriseModel){
-            $HPEnterprise = $true
-            }
-        }
-    }
+if ($Manufacturer -match "HP" -or $Manufacturer -match "Hewlett-Packard"){$Manufacturer = "HP"}
 if ($Manufacturer -match "Dell"){$Manufacturer = "Dell"}
 
 #region Functions
+function Test-HPIASupport {
+    $CabPath = "$env:TEMP\platformList.cab"
+    $XMLPath = "$env:TEMP\platformList.xml"
+    $PlatformListCabURL = "https://hpia.hpcloud.hp.com/ref/platformList.cab"
+    Invoke-WebRequest -Uri $PlatformListCabURL -OutFile $CabPath -UseBasicParsing
+    $Expand = expand $CabPath $XMLPath
+    [xml]$XML = Get-Content $XMLPath
+    $Platforms = $XML.ImagePal.Platform.SystemID
+    $MachinePlatform = (Get-CimInstance -Namespace root/cimv2 -ClassName Win32_BaseBoard).Product
+    if ($MachinePlatform -in $Platforms){$HPIASupport = $true}
+    else {$HPIASupport = $false}
+    return $HPIASupport
+    }
+    
 function AzOSD {
     [CmdletBinding()]
     param ()
@@ -77,8 +83,11 @@ function osdcloud-StartWinPE {
             osdcloud-InstallModuleAzAccounts
             osdcloud-InstallModuleAzKeyVault
         }
-        if ($HPEnterprise) {
-            osdcloud-InstallModuleHPCMSL
+        if ($Manufacturer -eq "HP")
+            $HPEnterprise = Test-HPIASupport
+            if ($HPEnterprise -eq $true) {
+                osdcloud-InstallModuleHPCMSL
+            }
         }
     }
     else {
