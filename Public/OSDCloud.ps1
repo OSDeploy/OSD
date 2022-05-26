@@ -1031,7 +1031,7 @@ function Invoke-OSDCloud {
     #=================================================
     #   HP Updates Config for Specialize Phase
     #=================================================
-    if ($Manufacturer -eq 'HP') {Write-Host -ForegroundColor DarkGray "HPIARun = $($Global:OSDCloud.HPIARun) | HPTPMUpdate = $($Global:OSDCloud.HPTPMUpdate) | HPBIOSUpdate = $($Global:OSDCloud.HPBIOSUpdate)"} #Debug
+    #Set Specialize JSON
     if (($Global:OSDCloud.HPIARun -eq $true) -or ($Global:OSDCloud.HPTPMUpdate -eq $true) -or ($Global:OSDCloud.HPBIOSUpdate -eq $true)){
     Write-Host -ForegroundColor DarkGray "========================================================================="
     Write-Host -ForegroundColor Cyan "Adding HP Tasks into JSON Config File for Action during Specialize" 
@@ -1049,6 +1049,18 @@ function Invoke-OSDCloud {
         try {[void][System.IO.Directory]::CreateDirectory($ConfigPath)}
         catch {}
         $HPHashVar | Out-File $ConfigFile
+    }
+    #Stage Firmware Update for Next Reboot
+    if ($Global:OSDCloud.HPBIOSUpdate -eq $true){
+    Write-Host -ForegroundColor DarkGray "========================================================================="
+    Write-Host -ForegroundColor Cyan "Updating HP System Firmware"
+    if (Get-HPBIOSSetupPasswordIsSet){Write-Host -ForegroundColor Red "Device currently has BIOS Setup Password, Please Update BIOS via different method"}
+    else{
+        Write-Host -ForegroundColor DarkGray "Current Firmware: $(Get-HPBIOSVersion)"
+        Write-Host -ForegroundColor DarkGray "Staging Update: $((Get-HPBIOSUpdates -Latest).ver) "
+        #Details: https://developers.hp.com/hp-client-management/doc/Get-HPBiosUpdates
+        Get-HPBIOSUpdates -Flash -Yes -Offline -BitLocker Suspend
+        }
     }
     
     #=================================================
