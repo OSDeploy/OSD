@@ -338,7 +338,7 @@
                       Foreground="Black"
                       IsChecked="False"
                       Padding="5,-2,5,10"
-                      Margin="170,0,0,0">Run HPIA in OOBE</CheckBox>
+                      Margin="170,0,0,0">HP Driver Update in OOBE - HPIA</CheckBox>
             <CheckBox Name="UpdateTPMCheckBox"
                       BorderBrush="Black"
                       BorderThickness="2"
@@ -346,7 +346,7 @@
                       Foreground="Black"
                       IsChecked="False"
                       Padding="5,-2,5,10"
-                      Margin="170,0,0,0">Update TPM</CheckBox>
+                      Margin="170,0,0,0">HP Update TPM Firmware</CheckBox>
             <CheckBox Name="UpdateBIOSCheckBox"
                       BorderBrush="Black"
                       BorderThickness="2"
@@ -354,7 +354,7 @@
                       Foreground="Black"
                       IsChecked="False"
                       Padding="5,-2,5,10"
-                      Margin="170,0,0,0">Update BIOS</CheckBox>
+                      Margin="170,0,0,0">HP Update System Firmware</CheckBox>
             <!-- AutopilotJson -->
             <StackPanel HorizontalAlignment="Left"
                         VerticalAlignment="Center"
