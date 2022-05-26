@@ -38,6 +38,20 @@ $ScriptVersion = '22.5.23.1'
 #region Initialize Functions
 [Net.ServicePointManager]::SecurityProtocol = [Net.ServicePointManager]::SecurityProtocol -bor [Net.SecurityProtocolType]::Tls12
 
+function Test-HPIASupport {
+    $CabPath = "$env:TEMP\platformList.cab"
+    $XMLPath = "$env:TEMP\platformList.xml"
+    $PlatformListCabURL = "https://hpia.hpcloud.hp.com/ref/platformList.cab"
+    Invoke-WebRequest -Uri $PlatformListCabURL -OutFile $CabPath -UseBasicParsing
+    $Expand = expand $CabPath $XMLPath
+    [xml]$XML = Get-Content $XMLPath
+    $Platforms = $XML.ImagePal.Platform.SystemID
+    $MachinePlatform = (Get-CimInstance -Namespace root/cimv2 -ClassName Win32_BaseBoard).Product
+    if ($MachinePlatform -in $Platforms){$HPIASupport = $true}
+    else {$HPIASupport = $false}
+    return $HPIASupport
+    }
+
 #Determine the proper Windows environment
 if ($env:SystemDrive -eq 'X:') {
     $WindowsPhase = 'WinPE'
@@ -54,14 +68,11 @@ $Manufacturer = (Get-CimInstance -Class:Win32_ComputerSystem).Manufacturer
 $Model = (Get-CimInstance -Class:Win32_ComputerSystem).Model
 if ($Manufacturer -match "HP" -or $Manufacturer -match "Hewlett-Packard"){
     $Manufacturer = "HP"
-    $EnterpriseModels = @("ProBook","ProDesk","EliteBook","EliteDesk","ZBook")
-    foreach ($EnterpriseModel in $EnterpriseModels){
-        if ($model -match $EnterpriseModel){
-            $HPEnterprise = $true
-            }
-        }
+    $HPEnterprise = Test-HPIASupport
     }
 if ($Manufacturer -match "Dell"){$Manufacturer = "Dell"}
+
+
 
 #Finish Initialization
 Write-Host -ForegroundColor DarkGray "$ScriptName $ScriptVersion $WindowsPhase"
