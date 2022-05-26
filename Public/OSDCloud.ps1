@@ -526,7 +526,7 @@ function Invoke-OSDCloud {
 
         $null = New-Item -Path 'C:\OSDCloud\OS' -ItemType Directory -Force -ErrorAction Ignore
 
-        Get-AzStorageBlobContent -CloudBlob $Global:OSDCloud.AzOSDCloudImage.ICloudBlob -Context $Global:OSDCloud.AzOSDCloudImage.Context -Destination 'C:\OSDCloud\OS\'
+        Get-AzStorageBlobContent -CloudBlob $Global:OSDCloud.AzOSDCloudImage.ICloudBlob -Context $Global:OSDCloud.AzOSDCloudImage.Context -Destination "C:\OSDCloud\OS\$(Split-Path $Global:OSDCloud.AzOSDCloudImage.Name -Leaf)"
         $Global:OSDCloud.ImageFileDestination = Get-ChildItem -Path 'C:\OSDCloud\OS\*' -Include *.wim,*.esd,*.iso | Select-Object -First 1
     }
     #endregion
@@ -887,7 +887,7 @@ function Invoke-OSDCloud {
         elseif ($Global:OSDCloud.AzOSDCloudDriverPack) {
             Write-Host -ForegroundColor DarkGray "DriverPack is being downloaded from Azure Storage to C:\Drivers"
             $null = New-Item -Path 'C:\OSDCloud\Drivers' -ItemType Directory -Force -ErrorAction Ignore
-            Get-AzStorageBlobContent -CloudBlob $Global:OSDCloud.AzOSDCloudDriverPack.ICloudBlob -Context $Global:OSDCloud.AzOSDCloudDriverPack.Context -Destination 'C:\Drivers\'
+            Get-AzStorageBlobContent -CloudBlob $Global:OSDCloud.AzOSDCloudDriverPack.ICloudBlob -Context $Global:OSDCloud.AzOSDCloudDriverPack.Context -Destination "C:\Drivers\$(Split-Path $Global:OSDCloud.AzOSDCloudDriverPack.Name -Leaf)"
             $Global:OSDCloud.DriverPackExpand = $true
         }
         elseif ($Global:OSDCloud.DriverPack.Guid) {
