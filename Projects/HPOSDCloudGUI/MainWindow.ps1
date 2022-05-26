@@ -284,17 +284,17 @@ $TPM = osdcloud-DetermineHPTPM
 $BIOS = osdcloud-DetermineHPBIOSUpdateAvailable
 
 if ((osdcloud-DetermineHPTPM) -eq $false){
-    $formMainWindowControlUpdateTPMCheckBox.Content = "Update TPM: Already Current"
+    $formMainWindowControlUpdateTPMCheckBox.Content = "HP TPM Firmware Already Current"
     $formMainWindowControlUpdateTPMCheckBox.IsEnabled = $false
     }
 else
     {
     $formMainWindowControlUpdateTPMCheckBox.Visibility = 'Visible'
-    $formMainWindowControlUpdateTPMCheckBox.Content = "Update TPM: $TPM"
+    $formMainWindowControlUpdateTPMCheckBox.Content = "HP Update TPM Firmware: $TPM"
     }
 if ((osdcloud-DetermineHPBIOSUpdateAvailable) -eq $false){
     $CurrentVer = Get-HPBIOSVersion
-    $formMainWindowControlUpdateBIOSCheckBox.Content = 'BIOS already Current: $CurrentVer'
+    $formMainWindowControlUpdateBIOSCheckBox.Content = 'HP System Firmware already Current: $CurrentVer'
     $formMainWindowControlUpdateBIOSCheckBox.IsEnabled = 'false'
     }
 else
@@ -302,7 +302,7 @@ else
     $LatestVer = (Get-HPBIOSUpdates -Latest).ver
     $CurrentVer = Get-HPBIOSVersion
     $formMainWindowControlUpdateBIOSCheckBox.Visibility = 'Visible'
-    $formMainWindowControlUpdateBIOSCheckBox.Content = "Update BIOS from $CurrentVer to $LatestVer"
+    $formMainWindowControlUpdateBIOSCheckBox.Content = "HP Update System Firmwware from $CurrentVer to $LatestVer"
     }
 #================================================
 #   DriverPack
