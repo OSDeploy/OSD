@@ -1037,12 +1037,16 @@ function Invoke-OSDCloud {
     #=================================================
     #   HP Updates Config for Specialize Phase
     #=================================================
-    if (($HPIARun -eq $true) -or ($HPTPMUpdate -eq $true) -or ($HPBIOSUpdate -eq $true)){
+    if ($Manufacturer -eq 'HP') {Write-Host -ForegroundColor DarkGray "HPIARun = $($Global:OSDCloud.HPIARun) | HPTPMUpdate = $($Global:OSDCloud.HPTPMUpdate) | HPBIOSUpdate = $($Global:OSDCloud.HPBIOSUpdate)"} #Debug
+    if (($Global:OSDCloud.HPIARun -eq $true) -or ($Global:OSDCloud.HPTPMUpdate -eq $true) -or ($Global:OSDCloud.HPBIOSUpdate -eq $true)){
+    Write-Host -ForegroundColor DarkGray "========================================================================="
+    Write-Host -ForegroundColor Cyan "Adding HP Tasks into JSON Config File for Action during Specialize" 
+    Write-Host -ForegroundColor DarkGray "HPIARun = $($Global:OSDCloud.HPIARun) | HPTPMUpdate = $($Global:OSDCloud.HPTPMUpdate) | HPBIOSUpdate = $($Global:OSDCloud.HPBIOSUpdate)" 
         $HPHashTable = @{
             'HPUpdates' = @{
-                'HPIARun' = $HPIARun
-                'HPTPMUpdate' = $HPTPMUpdate
-                'HPBIOSUpdate' = $HPBIOSUpdate
+                'HPIARun' = $Global:OSDCloud.HPIARun
+                'HPTPMUpdate' = $Global:OSDCloud.HPTPMUpdate
+                'HPBIOSUpdate' = $Global:OSDCloud.HPBIOSUpdate
             }
         }
         $HPHashVar = $HPHashTable | ConvertTo-Json
