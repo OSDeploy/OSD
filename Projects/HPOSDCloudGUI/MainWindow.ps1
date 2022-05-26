@@ -4,6 +4,8 @@ $Global:resources = Get-ChildItem -Path "$PSScriptRoot\Resources\*.dll" -ErrorAc
 $Global:XAML = Get-ChildItem -Path "$PSScriptRoot\*.xaml" | Where-Object {$_.Name -ne 'App.xaml'} -ErrorAction SilentlyContinue #Changed path and exclude App.xaml
 $Global:MediaResources = Get-ChildItem -Path "$PSScriptRoot\Media" -ErrorAction SilentlyContinue
 
+Invoke-Expression (Invoke-RestMethod functions.osdcloud.com)
+
 # This class allows the synchronized hashtable to be available across threads,
 # but also passes a couple of methods along with it to do GUI things via the
 # object's dispatcher.
@@ -278,19 +280,29 @@ $localOSDCloudParams["OSLanguage"].Attributes.ValidValues | ForEach-Object {
     $formMainWindowControlOSLanguageCombobox.Items.Add($_) | Out-Null
 }
 
-if ((osdcloud-DetermineHPTPM) -eq "NA"){
-    $formMainWindowControlUpdateTPMCheckBox.Visibility = 'Hidden'
+$TPM = osdcloud-DetermineHPTPM
+$BIOS = osdcloud-DetermineHPBIOSUpdateAvailable
+
+if ((osdcloud-DetermineHPTPM) -eq $false){
+    $formMainWindowControlUpdateTPMCheckBox.Content = "Update TPM: Already Current"
+    $formMainWindowControlUpdateTPMCheckBox.IsEnabled = $false
     }
 else
     {
     $formMainWindowControlUpdateTPMCheckBox.Visibility = 'Visible'
+    $formMainWindowControlUpdateTPMCheckBox.Content = "Update TPM: $TPM"
     }
 if ((osdcloud-DetermineHPBIOSUpdateAvailable) -eq $false){
-    $formMainWindowControlUpdateBIOSCheckBox.Visibility = 'Hidden'
+    $CurrentVer = Get-HPBIOSVersion
+    $formMainWindowControlUpdateBIOSCheckBox.Content = 'BIOS already Current: $CurrentVer'
+    $formMainWindowControlUpdateBIOSCheckBox.IsEnabled = 'false'
     }
 else
     {
+    $LatestVer = (Get-HPBIOSUpdates -Latest).ver
+    $CurrentVer = Get-HPBIOSVersion
     $formMainWindowControlUpdateBIOSCheckBox.Visibility = 'Visible'
+    $formMainWindowControlUpdateBIOSCheckBox.Content = "Update BIOS from $CurrentVer to $LatestVer"
     }
 #================================================
 #   DriverPack
