@@ -112,6 +112,7 @@ function Connect-AzOSDCloud {
         #=================================================
         #	AAD Graph
         #=================================================
+        Write-Host -ForegroundColor DarkGray "Generating AadGraph Access Tokens"
         $Global:AzAadGraphAccessToken = Get-AzAccessToken -ResourceTypeName AadGraph
         $Global:AzAadGraphHeaders = @{
             'Authorization' = 'Bearer ' + $Global:AzAadGraphAccessToken.Token
@@ -121,6 +122,7 @@ function Connect-AzOSDCloud {
         #=================================================
         #	Azure KeyVault
         #=================================================
+        Write-Host -ForegroundColor DarkGray "Generating KeyVault Access Tokens"
         $Global:AzKeyVaultAccessToken = Get-AzAccessToken -ResourceTypeName KeyVault
         $Global:AzKeyVaultHeaders = @{
             'Authorization' = 'Bearer ' + $Global:AzKeyVaultAccessToken.Token
@@ -130,6 +132,7 @@ function Connect-AzOSDCloud {
         #=================================================
         #	Azure MSGraph
         #=================================================
+        Write-Host -ForegroundColor DarkGray "Generating MSGraph Access Tokens"
         $Global:AzMSGraphAccessToken = Get-AzAccessToken -ResourceTypeName MSGraph
         $Global:AzMSGraphHeaders = @{
             'Authorization' = 'Bearer ' + $Global:AzMSGraphAccessToken.Token
@@ -139,6 +142,7 @@ function Connect-AzOSDCloud {
         #=================================================
         #	Azure Storage
         #=================================================
+        Write-Host -ForegroundColor DarkGray "Generating Storage Access Tokens"
         $Global:AzStorageAccessToken = Get-AzAccessToken -ResourceTypeName Storage
         $Global:AzStorageHeaders = @{
             'Authorization' = 'Bearer ' + $Global:AzStorageAccessToken.Token
@@ -149,6 +153,7 @@ function Connect-AzOSDCloud {
         #	AzureAD
         #=================================================
         #$Global:MgGraph = Connect-MgGraph -AccessToken $Global:AzMSGraphAccessToken.Token -Scopes DeviceManagementConfiguration.Read.All,DeviceManagementServiceConfig.Read.All,DeviceManagementServiceConfiguration.Read.All
+        Write-Host -ForegroundColor DarkGray "Connecting to AzureAD"
         $Global:AzureAD = Connect-AzureAD -AadAccessToken $Global:AzAadGraphAccessToken.Token -AccountId $Global:AzContext.Account.Id
         if ($DebugLogs) {
             #$Global:AzureAD | ConvertTo-Json | Out-File -FilePath "$DebugLogs\AzureAD.json" -Encoding ascii -Width 2000 -Force
