@@ -146,6 +146,7 @@ function osdcloud-UpdateHPTPM {
     else {
         return "No TPM Update Available"
     }
+    }
 Function osdcloud-RunHPIA {
     <#
     Update HP Drivers via HPIA - Gary Blok - @gwblok
@@ -548,7 +549,6 @@ Function osdcloud-RunHPIA {
         CMTraceLog –Message "NO JSON report." –Component "Report" –Type 1
         }
     }
-}
 
 
 #endregion
