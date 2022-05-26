@@ -198,7 +198,6 @@ Function osdcloud-RunHPIA {
         $script:TempWorkFolder = "$env:temp\HPIA"
         try 
         {
-            [void][System.IO.Directory]::CreateDirectory($WorkingDirectory)
             [void][System.IO.Directory]::CreateDirectory($LogFolder)
             [void][System.IO.Directory]::CreateDirectory($TempWorkFolder)
             [void][System.IO.Directory]::CreateDirectory($ReportsFolder)
