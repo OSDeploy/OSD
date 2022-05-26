@@ -65,8 +65,8 @@ function osdcloud-DetermineHPBIOSUpdateAvailable{
     [Version]$CurrentVersion = Get-HPBIOSVersion
     [Version]$LatestVersion = (Get-HPBIOSUpdates -Latest).Ver
     if ($Details){
-        if ($CurrentVersion -lt $LatestVersion){Return "Requires Update: $LatestVersion"}
-        else {Return "Already Current: $CurrentVersion"}
+        if ($CurrentVersion -lt $LatestVersion){Return "BIOS Update Available: $LatestVersion"}
+        else {Return "BIOS Already Current: $CurrentVersion"}
         }
     else
         {
