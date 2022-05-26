@@ -83,7 +83,7 @@ function osdcloud-StartWinPE {
             osdcloud-InstallModuleAzAccounts
             osdcloud-InstallModuleAzKeyVault
         }
-        if ($Manufacturer -eq "HP")
+        if ($Manufacturer -eq "HP") {
             $HPEnterprise = Test-HPIASupport
             if ($HPEnterprise -eq $true) {
                 osdcloud-InstallModuleHPCMSL
