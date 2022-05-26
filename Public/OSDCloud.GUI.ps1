@@ -114,9 +114,5 @@ function Start-AzOSDCloudGUI {
     }
     else {
         Invoke-Expression (Invoke-RestMethod azgui.osdcloud.com)
-        #Write-Warning 'Unable to find a WIM on any of the OSDCloud Azure Storage Containers'
-        #Write-Warning 'Make sure you have a WIM Windows Image in the OSDCloud Azure Storage Container'
-        #Write-Warning 'Make sure this user has the Azure Storage Blob Data Reader role to the OSDCloud Container'
-        #Write-Warning 'You may need to execute Get-AzOSDCloudBlobImage then Start-AzOSDCloud'
     }
 }
