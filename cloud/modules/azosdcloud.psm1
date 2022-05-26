@@ -41,6 +41,7 @@ function Get-AzOSDCloudBlobImage {
         }
     
         $Global:AzStorageContext = @{}
+        $Global:AzOSDCloudBootImage = @()
         $Global:AzOSDCloudBlobImage = @()
         $Global:AzOSDCloudBlobDriverPack = @()
     
@@ -60,7 +61,12 @@ function Get-AzOSDCloudBlobImage {
                 if ($StorageContainers) {
                     foreach ($Container in $StorageContainers) {
 
-                        if ($Container.Name -eq 'DriverPack') {
+                        if ($Container.Name -eq 'BootImage') {
+                            Write-Host -ForegroundColor DarkGray "Storage Account: $($Item.StorageAccountName) DriverPack Container: $($Container.Name)"
+                            $Global:AzOSDCloudBlobBootImage += Get-AzStorageBlob -Context $Global:AzCurrentStorageContext -Container $Container.Name -Blob *.iso -ErrorAction Ignore
+
+                        }
+                        elseif ($Container.Name -eq 'DriverPack') {
                             Write-Host -ForegroundColor DarkGray "Storage Account: $($Item.StorageAccountName) DriverPack Container: $($Container.Name)"
                             $Global:AzOSDCloudBlobDriverPack += Get-AzStorageBlob -Context $Global:AzCurrentStorageContext -Container $Container.Name -Blob *.cab -ErrorAction Ignore
                             $Global:AzOSDCloudBlobDriverPack += Get-AzStorageBlob -Context $Global:AzCurrentStorageContext -Container $Container.Name -Blob *.exe -ErrorAction Ignore
@@ -77,6 +83,7 @@ function Get-AzOSDCloudBlobImage {
             if ($DebugLogs) {
                 $Global:AzStorageContext | ConvertTo-Json | Out-File -FilePath "$DebugLogs\AzStorageContext.json" -Encoding ascii -Width 2000 -Force
                 $Global:AzOSDCloudBlobImage | ConvertTo-Json | Out-File -FilePath "$DebugLogs\AzOSDCloudBlobImage.json" -Encoding ascii -Width 2000 -Force
+                $Global:AzOSDCloudBlobBootImage| ConvertTo-Json | Out-File -FilePath "$DebugLogs\AzOSDCloudBlobDriverPack.json" -Encoding ascii -Width 2000 -Force
                 $Global:AzOSDCloudBlobDriverPack | ConvertTo-Json | Out-File -FilePath "$DebugLogs\AzOSDCloudBlobDriverPack.json" -Encoding ascii -Width 2000 -Force
             }
             if ($null -eq $Global:AzOSDCloudBlobImage) {
