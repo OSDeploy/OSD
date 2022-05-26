@@ -234,6 +234,7 @@
         'Start-OOBEDeploy',
         'Start-OSDCloud',
         'Start-OSDCloudGUI',
+        'Start-HPOSDCloudGUI',
         'Start-OSDPad',
         'Start-OSDeployPad',
         'Start-ScreenPNGProcess',
