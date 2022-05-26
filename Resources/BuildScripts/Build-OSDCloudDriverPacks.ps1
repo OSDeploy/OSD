@@ -30,7 +30,16 @@ Stop-Transcript
 #=================================================
 #   MicrosoftDriverPackCatalog
 #=================================================
-
+Import-Module -Name OSD -Force
+Start-Transcript -Path (Join-Path (Get-Module OSD).ModuleBase "Catalogs\OSDCatalog\OSDCatalogMicrosoftDriverPack.log")
+$MasterDriverPacks = @()
+$null = Get-OSDCatalogMicrosoftDriverPack -Force -Verbose
+$Source = Join-Path $env:TEMP (Join-Path 'OSD' 'OSDCatalogMicrosoftDriverPack.json')
+$Destination = Join-Path (Get-Module OSD).ModuleBase "Catalogs\OSDCatalog\OSDCatalogMicrosoftDriverPack.json"
+if (Test-Path $Source) {
+    Copy-Item $Source $Destination -Force
+}
+Stop-Transcript
 #=================================================
 #   HPDriverPackCatalog
 #=================================================

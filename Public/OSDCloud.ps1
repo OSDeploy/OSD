@@ -847,57 +847,52 @@ function Invoke-OSDCloud {
     }
 
     if ($Global:OSDCloud.DriverPack) {
-        $Global:OSDCloud.DriverPackBaseName = ($Global:OSDCloud.DriverPackFileName -split '.')[0]
+        Write-Host -ForegroundColor DarkGray "DriverPack has been matched to $($Global:OSDCloud.DriverPack.Name)"
+        $Global:OSDCloud.DriverPackBaseName = ($Global:OSDCloud.DriverPack.FileName).Split('.')[0]
     }
 
     if ($Global:OSDCloud.AzOSDCloudBlobDriverPack -and $Global:OSDCloud.DriverPackBaseName) {
-        Write-Host -ForegroundColor DarkGray "Checking Azure for DriverPack"
+        Write-Host -ForegroundColor DarkGray "Searching for DriverPack in Azure Storage"
         $Global:OSDCloud.AzOSDCloudDriverPack = $Global:OSDCloud.AzOSDCloudBlobDriverPack | Where-Object {$_.Name -match $Global:OSDCloud.DriverPackBaseName} | Select-Object -First 1
-        $Global:OSDCloud.AzOSDCloudDriverPack | ConvertTo-Json | Out-File -FilePath "$OSDCloudLogs\AzOSDCloudDriverPack.json" -Encoding ascii -Width 2000
+
+        if ($Global:OSDCloud.AzOSDCloudDriverPack) {
+            Write-Host -ForegroundColor DarkGray "DriverPack has been located in Azure Storage"
+            $Global:OSDCloud.AzOSDCloudDriverPack | ConvertTo-Json | Out-File -FilePath "$OSDCloudLogs\AzOSDCloudDriverPack.json" -Encoding ascii -Width 2000
+        }
     }
 
     if ($Global:OSDCloud.DriverPack) {
         $SaveMyDriverPack = $null
-
-        $Global:OSDCloud.DriverPackBaseName = ($Global:OSDCloud.DriverPackFileName -split '.')[0]
-
+        $Global:OSDCloud.DriverPackBaseName = ($Global:OSDCloud.DriverPack.FileName).Split('.')[0]
         Write-Host -ForegroundColor DarkGray "Matching DriverPack identified"
         Write-Host -ForegroundColor DarkGray "-Name $($Global:OSDCloud.DriverPack.Name)"
         Write-Host -ForegroundColor DarkGray "-BaseName $($Global:OSDCloud.DriverPackBaseName)"
         Write-Host -ForegroundColor DarkGray "-Product $($Global:OSDCloud.DriverPack.Product)"
         Write-Host -ForegroundColor DarkGray "-FileName $($Global:OSDCloud.DriverPack.FileName)"
         Write-Host -ForegroundColor DarkGray "-Url $($Global:OSDCloud.DriverPack.Url)"
-
         $Global:StartOSDCloud.DriverPackOffline = Find-OSDCloudFile -Name $Global:StartOSDCloud.DriverPack.FileName -Path '\OSDCloud\DriverPacks\' | Sort-Object FullName
         $Global:StartOSDCloud.DriverPackOffline = $Global:StartOSDCloud.DriverPackOffline | Where-Object {$_.FullName -notlike "C*"} | Where-Object {$_.FullName -notlike "X*"} | Select-Object -First 1
-
         if ($Global:OSDCloud.DriverPackOffline) {
-            Write-Host -ForegroundColor DarkGray "Matching DriverPack is available on OSDCloudUSB"
+            Write-Host -ForegroundColor DarkGray "DriverPack is available on OSDCloudUSB and will not be downloaded"
             Write-Host -ForegroundColor DarkGray $Global:StartOSDCloud.DriverPack.Name
             Write-Host -ForegroundColor DarkGray $Global:StartOSDCloud.DriverPackOffline.FullName
             #$Global:OSDCloud.DriverPackSource = Find-OSDCloudFile -Name (Split-Path -Path $Global:OSDCloud.DriverPackOffline -Leaf) -Path (Split-Path -Path (Split-Path -Path $Global:OSDCloud.DriverPackOffline.FullName -Parent) -NoQualifier) | Select-Object -First 1
             $Global:OSDCloud.DriverPackSource = $Global:StartOSDCloud.DriverPackOffline
         }
-
         if ($Global:OSDCloud.DriverPackSource) {
-            Write-Host -ForegroundColor DarkGray "Copying matching DriverPack from OSDCloudUSB to C:\Drivers"
-            Write-Host -ForegroundColor DarkGray "-DriverPackSource $($Global:OSDCloud.DriverPackSource.FullName)"
+            Write-Host -ForegroundColor DarkGray "DriverPack is being copied from OSDCloudUSB at $($Global:OSDCloud.DriverPackSource.FullName) to C:\Drivers"
             Copy-Item -Path $Global:OSDCloud.DriverPackSource.FullName -Destination 'C:\Drivers' -Force
-
             $Global:OSDCloud.DriverPackExpand = $true
         }
         elseif ($Global:OSDCloud.AzOSDCloudDriverPack) {
-            Write-Host -ForegroundColor DarkGray "Copying matching DriverPack from Azure Storage to C:\Drivers"    
+            Write-Host -ForegroundColor DarkGray "DriverPack is being downloaded from Azure Storage to C:\Drivers"
             $null = New-Item -Path 'C:\OSDCloud\Drivers' -ItemType Directory -Force -ErrorAction Ignore
-    
             Get-AzStorageBlobContent -CloudBlob $Global:OSDCloud.AzOSDCloudDriverPack.ICloudBlob -Context $Global:OSDCloud.AzOSDCloudDriverPack.Context -Destination 'C:\Drivers\'
-
             $Global:OSDCloud.DriverPackExpand = $true
         }
         elseif ($Global:OSDCloud.DriverPack.Guid) {
             $SaveMyDriverPack = Save-MyDriverPack -DownloadPath 'C:\Drivers' -Expand -Guid $Global:OSDCloud.DriverPack.Guid
         }
-
         if ($Global:OSDCloud.DriverPackExpand) {
             $DriverPacks = Get-ChildItem -Path 'C:\Drivers' -File
 
@@ -913,8 +908,7 @@ function Invoke-OSDCloud {
         
                     if (-NOT (Test-Path "$DestinationPath")) {
                         New-Item $DestinationPath -ItemType Directory -Force -ErrorAction Ignore | Out-Null
-    
-                        Write-Verbose -Verbose "Expanding CAB Driver Pack to $DestinationPath"
+                        Write-Host -ForegroundColor DarkGray "DriverPack CAB is being expanded to $DestinationPath"
                         Expand -R "$ExpandFile" -F:* "$DestinationPath" | Out-Null
                     }
                     Continue
@@ -926,7 +920,7 @@ function Invoke-OSDCloud {
                     $DestinationPath = Join-Path $Item.Directory $Item.BaseName
     
                     if (-NOT (Test-Path "$DestinationPath")) {
-                        Write-Verbose -Verbose "Expanding ZIP Driver Pack to $DestinationPath"
+                        Write-Host -ForegroundColor DarkGray "DriverPack ZIP is being expanded to $DestinationPath"
                         Expand-Archive -Path $ExpandFile -DestinationPath $DestinationPath -Force
                     }
                     Continue

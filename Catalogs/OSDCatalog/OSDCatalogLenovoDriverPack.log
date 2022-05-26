@@ -1,13 +1,13 @@
 ﻿**********************
 Windows PowerShell transcript start
-Start time: 20220521231906
+Start time: 20220525213558
 Username: OSDCODE\David
 RunAs User: OSDCODE\David
 Configuration Name: 
 Machine: OSDCODE (Microsoft Windows NT 10.0.22000.0)
 Host Application: C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe -NoProfile -ExecutionPolicy Bypass -Command Import-Module 'c:\Users\David\.vscode\extensions\ms-vscode.powershell-2022.5.1\modules\PowerShellEditorServices\PowerShellEditorServices.psd1'; Start-EditorServices -HostName 'Visual Studio Code Host' -HostProfileId 'Microsoft.VSCode' -HostVersion '2022.5.1' -AdditionalModules @('PowerShellEditorServices.VSCode') -BundledModulesPath 'c:\Users\David\.vscode\extensions\ms-vscode.powershell-2022.5.1\modules' -EnableConsoleRepl -StartupBanner '=====> PowerShell Integrated Console v2022.5.1 <=====
-' -LogLevel 'Normal' -LogPath 'c:\Users\David\.vscode\extensions\ms-vscode.powershell-2022.5.1\logs\1653116965-b3ebfed4-8af5-468e-80ea-e4390a67b4dd1653116962490\EditorServices.log' -SessionDetailsPath 'c:\Users\David\.vscode\extensions\ms-vscode.powershell-2022.5.1\sessions\PSES-VSCode-20280-434106' -FeatureFlags @() 
-Process ID: 13108
+' -LogLevel 'Normal' -LogPath 'c:\Users\David\.vscode\extensions\ms-vscode.powershell-2022.5.1\logs\1653515191-e7aaf8e5-a978-4c18-878a-3a7c4f1c67271653515173209\EditorServices.log' -SessionDetailsPath 'c:\Users\David\.vscode\extensions\ms-vscode.powershell-2022.5.1\sessions\PSES-VSCode-7968-833141' -FeatureFlags @() 
+Process ID: 6064
 PSVersion: 5.1.22000.653
 PSEdition: Desktop
 PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1.22000.653
@@ -19,7 +19,7 @@ SerializationVersion: 1.1.0.1
 **********************
 Transcript started, output file is D:\GitHub\MyModules\OSD\Catalogs\OSDCatalog\OSDCatalogLenovoDriverPack.log
 VERBOSE: GET with 0-byte payload
-VERBOSE: received 315848-byte response of content type text/xml
+VERBOSE: received 320903-byte response of content type text/xml
 VERBOSE: Cloud Catalog https://download.lenovo.com/cdrt/td/catalogv2.xml
 VERBOSE: Saving Cloud Catalog to C:\Users\David\AppData\Local\Temp\OSD\catalogv2.xml
 VERBOSE: Catalog saved to C:\Users\David\AppData\Local\Temp\OSD\catalogv2.xml
@@ -90,9 +90,9 @@ VERBOSE: received 232620520-byte response of content type application/octet-stre
 VERBOSE: Testing Download File at https://download.lenovo.com/pccbbs/mobiles/tp_helix_mt20cg-20ch_w1064_201706.exe
 VERBOSE: HEAD with 0-byte payload
 VERBOSE: received 194843320-byte response of content type application/octet-stream
-VERBOSE: Testing Download File at https://download.lenovo.com/pccbbs/mobiles/tp_l13-gen-3_l13-yoga-gen-3_s2-gen-7_s2-yoga-gen-7_w1064_21h2_202203.exe
+VERBOSE: Testing Download File at https://download.lenovo.com/pccbbs/mobiles/tp_l13-gen-3_l13-yoga-gen-3_s2-gen-7_s2-yoga-gen-7_amd_w10_21H2_202204.exe
 VERBOSE: HEAD with 0-byte payload
-VERBOSE: received 493537896-byte response of content type application/octet-stream
+VERBOSE: received 497505168-byte response of content type application/octet-stream
 VERBOSE: Testing Download File at https://download.lenovo.com/pccbbs/mobiles/tp_l13-gen-3_s2-gen-7_l13-yoga-gen-3_s2-yoga-gen-7_intel_w10_21H2_202204.exe
 VERBOSE: HEAD with 0-byte payload
 VERBOSE: received 876420528-byte response of content type application/octet-stream
@@ -438,9 +438,9 @@ VERBOSE: received 386983824-byte response of content type application/octet-stre
 VERBOSE: Testing Download File at https://download.lenovo.com/pccbbs/thinkcentre_drivers/tc_m70c-m730e-k70-v50s_w1064_20h2_202108.exe
 VERBOSE: HEAD with 0-byte payload
 VERBOSE: received 871409656-byte response of content type application/octet-stream
-VERBOSE: Testing Download File at https://download.lenovo.com/pccbbs/thinkcentre_drivers/tc_m70tsq_gen2-m90tsq_gen2-p350tiny_w1064_1809_1909_2004_20h2_202111.exe
+VERBOSE: Testing Download File at https://download.lenovo.com/pccbbs/thinkcentre_drivers/tc_m70q_gen2-m90q_gen2-p350tiny_w1064_20h2_21h1_21h2_202204.exe
 VERBOSE: HEAD with 0-byte payload
-VERBOSE: received 1818859472-byte response of content type application/octet-stream
+VERBOSE: received 2014815784-byte response of content type application/octet-stream
 VERBOSE: Testing Download File at https://download.lenovo.com/pccbbs/thinkcentre_drivers/tc_m70tsq_gen3-m80tsq_gen3-m90tsq_gen3-p360tiny_w1064_20h2_21h1_21h2_202204.exe
 VERBOSE: HEAD with 0-byte payload
 VERBOSE: received 2088014176-byte response of content type application/octet-stream
@@ -570,5 +570,5 @@ VERBOSE: received 1734977728-byte response of content type application/octet-str
 VERBOSE: Exporting Build Catalog to C:\Users\David\AppData\Local\Temp\OSD\OSDCatalogLenovoDriverPack.xml
 **********************
 Windows PowerShell transcript end
-End time: 20220521232438
+End time: 20220525214202
 **********************

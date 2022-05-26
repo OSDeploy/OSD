@@ -22,7 +22,7 @@ Start-OSDCloud [-Manufacturer <String>] [-Product <String>] [-Firmware] [-Restar
 ### CustomImage
 ```
 Start-OSDCloud [-Manufacturer <String>] [-Product <String>] [-Firmware] [-Restart] [-Shutdown] [-Screenshot]
- [-SkipAutopilot] [-SkipODT] [-ZTI] [-FindImageFile] [-ImageFileUrl <String>] [-ImageIndex <Int32>]
+ [-SkipAutopilot] [-SkipODT] [-ZTI] [-FindImageFile] [-ImageFileUrl <String>] [-ImageIndex <String>]
  [<CommonParameters>]
 ```
 
@@ -287,13 +287,13 @@ Accept wildcard characters: False
 Images using the specified Image Index
 
 ```yaml
-Type: Int32
+Type: String
 Parameter Sets: CustomImage
 Aliases:
 
 Required: False
 Position: Named
-Default value: 1
+Default value: AUTO
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
