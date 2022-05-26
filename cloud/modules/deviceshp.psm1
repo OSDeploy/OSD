@@ -55,7 +55,7 @@ function osdcloud-DetermineHPTPM{
     $SP94937 = Get-CimInstance  -Namespace "root\cimv2\security\MicrosoftTPM" -query "select * from win32_tpm where IsEnabled_InitialValue = 'True' and ((ManufacturerVersion like '7.62%') or (ManufacturerVersion like '7.63%') or (ManufacturerVersion like '7.83%') or (ManufacturerVersion like '6.43%') )"
     if ($SP87753){Return "SP87753"}
     elseif ($SP94937){Return "SP94937"}
-    else{Return "NA"}
+    else{Return $false}
 }
 function osdcloud-DetermineHPBIOSUpdateAvailable{
     [CmdletBinding()]
@@ -80,7 +80,7 @@ function osdcloud-DownloadHPTPM {
     osdcloud-InstallModuleHPCMSL
     Import-Module -Name HPCMSL -Force
     $TPMUpdate = osdcloud-DetermineHPTPM
-    if ($TPMUpdate -ne "NA")
+    if ($TPMUpdate -ne $false)
         {
         if ((!($WorkingFolder))-or ($null -eq $WorkingFolder)){$WorkingFolder = "$env:TEMP\TPM"}
         if (!(Test-Path -Path $WorkingFolder)){New-Item -Path $WorkingFolder -ItemType Directory -Force |Out-Null}
@@ -111,7 +111,7 @@ function osdcloud-UpdateHPTPM {
         $WorkingFolder
         )
     $logsuffix = osdcloud-DetermineHPTPM
-    if ($logsuffix -ne "NA"){
+    if ($logsuffix -ne $false){
         write-output "Determined TPM Update $logsuffix required"
         if ((Get-BitLockerVolume -MountPoint $env:SystemDrive -ErrorAction SilentlyContinue).ProtectionStatus -eq "ON"){
             Suspend-BitLocker -MountPoint $env:SystemDrive -RebootCount 2 | Out-Null}
