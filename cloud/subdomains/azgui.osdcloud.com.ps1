@@ -95,7 +95,9 @@ if ($WindowsPhase -eq 'OOBE') {
 #region Windows
 if ($WindowsPhase -eq 'Windows') {
     Connect-AzOSDCloud
+    Get-AzOSDCloudBlobImage
     $null = Stop-Transcript -ErrorAction Ignore
+    Start-AzOSDCloudGUI
 }
 #endregion
 #=================================================
