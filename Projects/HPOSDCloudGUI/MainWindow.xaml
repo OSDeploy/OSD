@@ -331,30 +331,22 @@
                       Padding="5,-2,5,10"
                       VerticalAlignment="Center"
                       Margin="170,0,0,0">Capture Screenshots C:\OSDCloud\ScreenPNG</CheckBox>
-            <CheckBox Name="RunHPIACheckBox"
+            <CheckBox x:Name="UpdateTPM"
                       BorderBrush="Black"
                       BorderThickness="2"
                       FontSize="15"
                       Foreground="Black"
                       IsChecked="False"
                       Padding="5,-2,5,10"
-                      Margin="170,0,0,0">HP Driver Update in OOBE - HPIA</CheckBox>
-            <CheckBox Name="UpdateTPMCheckBox"
+                      Margin="170,0,0,0" Content="HP TPM Firmware"/>
+            <CheckBox x:Name="UpdateBIOS"
                       BorderBrush="Black"
                       BorderThickness="2"
                       FontSize="15"
                       Foreground="Black"
                       IsChecked="False"
                       Padding="5,-2,5,10"
-                      Margin="170,0,0,0">HP Update TPM Firmware</CheckBox>
-            <CheckBox Name="UpdateBIOSCheckBox"
-                      BorderBrush="Black"
-                      BorderThickness="2"
-                      FontSize="15"
-                      Foreground="Black"
-                      IsChecked="False"
-                      Padding="5,-2,5,10"
-                      Margin="170,0,0,0">HP Update System Firmware</CheckBox>
+                      Margin="170,0,0,0" Content="HP System Firmware (BIOS)"/>
             <!-- AutopilotJson -->
             <StackPanel HorizontalAlignment="Left"
                         VerticalAlignment="Center"
@@ -433,5 +425,51 @@
                 Width="130"
                 HorizontalAlignment="Right"
                 VerticalAlignment="Bottom" />
+        <StackPanel Grid.Row="6"
+            Orientation="Vertical"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top" Margin="576,58,0,0">
+            <CheckBox x:Name="HPIAFirmware"
+                BorderBrush="Black"
+                BorderThickness="2"
+                FontSize="15"
+                Foreground="Black"
+                IsChecked="False"
+                Padding="5,-2,5,10"
+                Margin="10,0,0,0" Content="HP Firmware in OOBE"/>
+            <CheckBox x:Name="HPIASoftware"
+                BorderBrush="Black"
+                BorderThickness="2"
+                FontSize="15"
+                Foreground="Black"
+                IsChecked="False"
+                Padding="5,-2,5,10"
+                Margin="10,0,0,0" Content="HP Software in OOBE"/>
+            <CheckBox x:Name="HPIADrivers"
+                BorderBrush="Black"
+                BorderThickness="2"
+                FontSize="15"
+                Foreground="Black"
+                IsChecked="False"
+                Padding="5,-2,5,10"
+                Margin="10,0,0,0" Content="HP Drivers in OOBE"/>
+            <!-- AutopilotJson -->
+            <StackPanel HorizontalAlignment="Left"
+                VerticalAlignment="Center"
+                Orientation="Horizontal"
+                Margin="0,5,5,0"/>
+            <!-- OOBEDeployJson -->
+            <StackPanel HorizontalAlignment="Left"
+                VerticalAlignment="Center"
+                Orientation="Horizontal"
+                Margin="0,5,5,0"/>
+            <!-- AutopilotOOBEJson -->
+        </StackPanel>
+        <Label x:Name="HPIAFunctionsLabel"
+            Content="HPIA Functions"
+            FontSize="18"
+            FontWeight="Bold"
+            Foreground="#003E92"
+            Padding="2" Margin="585,24,63,214" Grid.Row="6" />
     </Grid>
 </Window>
