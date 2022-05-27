@@ -26,17 +26,19 @@ function Get-AzOSDCloudBlobImage {
     }
 
     if ($Global:AzureAD -or $Global:MgGraph) {
-        Write-Host -ForegroundColor DarkGray    'Storage Accounts:          $Global:AzStorageAccounts'
+        #Write-Host -ForegroundColor DarkGray    'Storage Accounts:          $Global:AzStorageAccounts'
         $Global:AzStorageAccounts = Get-AzStorageAccount
         if ($OSDCloudLogs) {
+            #Write-Host -ForegroundColor DarkGray "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) $OSDCloudLogs\AzStorageAccounts.json"
             $Global:AzStorageAccounts | ConvertTo-Json | Out-File -FilePath "$OSDCloudLogs\AzStorageAccounts.json" -Encoding ascii -Width 2000 -Force
         }
     
-        Write-Host -ForegroundColor DarkGray    'OSDCloud Storage Accounts: $Global:AzOSDCloudStorageAccounts'
+        #Write-Host -ForegroundColor DarkGray    'OSDCloud Storage Accounts: $Global:AzOSDCloudStorageAccounts'
         $Global:AzOSDCloudStorageAccounts = Get-AzStorageAccount | Where-Object {$_.Tags.ContainsKey('OSDCloud')}
         #$Global:AzOSDCloudStorageAccounts = Get-AzResource -ResourceType 'Microsoft.Storage/storageAccounts'
         #$Global:AzOSDCloudStorageAccounts = Get-AzResource -ResourceType 'Microsoft.Storage/storageAccounts' | Where-Object {$_.Tags.ContainsKey('OSDCloud')}
         if ($OSDCloudLogs) {
+            #Write-Host -ForegroundColor DarkGray "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) $OSDCloudLogs\AzOSDCloudStorageAccounts.json"
             $Global:AzOSDCloudStorageAccounts | ConvertTo-Json | Out-File -FilePath "$OSDCloudLogs\AzOSDCloudStorageAccounts.json" -Encoding ascii -Width 2000 -Force
         }
     
@@ -46,21 +48,24 @@ function Get-AzOSDCloudBlobImage {
         $Global:AzOSDCloudBlobDriverPack = @()
     
         if ($Global:AzOSDCloudStorageAccounts) {
-            Write-Host -ForegroundColor DarkGray    'Storage Contexts:          $Global:AzStorageContext'
-            Write-Host -ForegroundColor DarkGray    'Blob Windows Images:       $Global:AzOSDCloudBlobImage'
-            Write-Host ''
-            Write-Host -ForegroundColor Cyan "Scanning for Windows Images"
+            #Write-Host -ForegroundColor DarkGray    'Storage Contexts:          $Global:AzStorageContext'
+            #Write-Host -ForegroundColor DarkGray    'Blob Windows Images:       $Global:AzOSDCloudBlobImage'
+            #Write-Host ''
+            Write-Host -ForegroundColor Cyan "Searching Azure Storage for OSDCloud Resources"
             foreach ($Item in $Global:AzOSDCloudStorageAccounts) {
                 $Global:AzCurrentStorageContext = New-AzStorageContext -StorageAccountName $Item.StorageAccountName
                 $Global:AzStorageContext."$($Item.StorageAccountName)" = $Global:AzCurrentStorageContext
                 #Get-AzStorageBlobByTag -TagFilterSqlExpression ""osdcloudimage""=""win10ltsc"" -Context $StorageContext
                 #Get-AzStorageBlobByTag -Context $Global:AzCurrentStorageContext
         
-                $StorageContainers = Get-AzStorageContainer -Context $Global:AzCurrentStorageContext
+                $AzOSDCloudStorageContainers = Get-AzStorageContainer -Context $Global:AzCurrentStorageContext
+                if ($OSDCloudLogs) {
+                    #Write-Host -ForegroundColor DarkGray "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) $OSDCloudLogs\AzOSDCloudStorageContainers.json"
+                    $Global:AzOSDCloudStorageContainers | ConvertTo-Json | Out-File -FilePath "$OSDCloudLogs\AzOSDCloudStorageContainers.json" -Encoding ascii -Width 2000 -Force
+                }
             
-                if ($StorageContainers) {
-                    foreach ($Container in $StorageContainers) {
-
+                if ($AzOSDCloudStorageContainers) {
+                    foreach ($Container in $AzOSDCloudStorageContainers) {
                         if ($Container.Name -eq 'BootImage') {
                             Write-Host -ForegroundColor DarkGray "Storage Account: $($Item.StorageAccountName) DriverPack Container: $($Container.Name)"
                             $Global:AzOSDCloudBlobBootImage += Get-AzStorageBlob -Context $Global:AzCurrentStorageContext -Container $Container.Name -Blob *.iso -ErrorAction Ignore
