@@ -331,7 +331,7 @@
                       Padding="5,-2,5,10"
                       VerticalAlignment="Center"
                       Margin="170,0,0,0">Capture Screenshots C:\OSDCloud\ScreenPNG</CheckBox>
-            <CheckBox x:Name="UpdateTPM"
+            <CheckBox x:Name="HPTPMFirmwareCheckBox"
                       BorderBrush="Black"
                       BorderThickness="2"
                       FontSize="15"
@@ -339,7 +339,7 @@
                       IsChecked="False"
                       Padding="5,-2,5,10"
                       Margin="170,0,0,0" Content="HP TPM Firmware"/>
-            <CheckBox x:Name="UpdateBIOS"
+            <CheckBox x:Name="HPSystemFirmwareCheckBox"
                       BorderBrush="Black"
                       BorderThickness="2"
                       FontSize="15"
@@ -429,7 +429,7 @@
             Orientation="Vertical"
             HorizontalAlignment="Left"
             VerticalAlignment="Top" Margin="576,58,0,0">
-            <CheckBox x:Name="HPIAFirmware"
+            <CheckBox x:Name="HPIAFirmwareCheckBox"
                 BorderBrush="Black"
                 BorderThickness="2"
                 FontSize="15"
@@ -437,7 +437,7 @@
                 IsChecked="False"
                 Padding="5,-2,5,10"
                 Margin="10,0,0,0" Content="HP Firmware in OOBE"/>
-            <CheckBox x:Name="HPIASoftware"
+            <CheckBox x:Name="HPIASoftwareCheckBox"
                 BorderBrush="Black"
                 BorderThickness="2"
                 FontSize="15"
@@ -445,7 +445,7 @@
                 IsChecked="False"
                 Padding="5,-2,5,10"
                 Margin="10,0,0,0" Content="HP Software in OOBE"/>
-            <CheckBox x:Name="HPIADrivers"
+            <CheckBox x:Name="HPIADriversCheckBox"
                 BorderBrush="Black"
                 BorderThickness="2"
                 FontSize="15"
@@ -470,6 +470,6 @@
             FontSize="18"
             FontWeight="Bold"
             Foreground="#003E92"
-            Padding="2" Margin="585,24,63,214" Grid.Row="6" />
+            Padding="2" Margin="585,24,23,214" Grid.Row="6" />
     </Grid>
 </Window>
