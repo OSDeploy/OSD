@@ -19,25 +19,25 @@ function Get-AzOSDCloudBlobImage {
     Write-Host -ForegroundColor Green "Get-AzOSDCloudBlobImage"
 
     if ($env:SystemDrive -eq 'X:') {
-        $DebugLogs = "$env:SystemDrive\DebugLogs"
-        if (-not (Test-Path $DebugLogs)) {
-            New-Item $DebugLogs -ItemType Directory -Force | Out-Null
+        $OSDCloudLogs = "$env:SystemDrive\OSDCloud\Logs"
+        if (-not (Test-Path $OSDCloudLogs)) {
+            New-Item $OSDCloudLogs -ItemType Directory -Force | Out-Null
         }
     }
 
     if ($Global:AzureAD -or $Global:MgGraph) {
         Write-Host -ForegroundColor DarkGray    'Storage Accounts:          $Global:AzStorageAccounts'
         $Global:AzStorageAccounts = Get-AzStorageAccount
-        if ($DebugLogs) {
-            $Global:AzStorageAccounts | ConvertTo-Json | Out-File -FilePath "$DebugLogs\AzStorageAccounts.json" -Encoding ascii -Width 2000 -Force
+        if ($OSDCloudLogs) {
+            $Global:AzStorageAccounts | ConvertTo-Json | Out-File -FilePath "$OSDCloudLogs\AzStorageAccounts.json" -Encoding ascii -Width 2000 -Force
         }
     
         Write-Host -ForegroundColor DarkGray    'OSDCloud Storage Accounts: $Global:AzOSDCloudStorageAccounts'
         $Global:AzOSDCloudStorageAccounts = Get-AzStorageAccount | Where-Object {$_.Tags.ContainsKey('OSDCloud')}
         #$Global:AzOSDCloudStorageAccounts = Get-AzResource -ResourceType 'Microsoft.Storage/storageAccounts'
         #$Global:AzOSDCloudStorageAccounts = Get-AzResource -ResourceType 'Microsoft.Storage/storageAccounts' | Where-Object {$_.Tags.ContainsKey('OSDCloud')}
-        if ($DebugLogs) {
-            $Global:AzOSDCloudStorageAccounts | ConvertTo-Json | Out-File -FilePath "$DebugLogs\AzOSDCloudStorageAccounts.json" -Encoding ascii -Width 2000 -Force
+        if ($OSDCloudLogs) {
+            $Global:AzOSDCloudStorageAccounts | ConvertTo-Json | Out-File -FilePath "$OSDCloudLogs\AzOSDCloudStorageAccounts.json" -Encoding ascii -Width 2000 -Force
         }
     
         $Global:AzStorageContext = @{}
@@ -80,11 +80,11 @@ function Get-AzOSDCloudBlobImage {
                     }
                 }
             }
-            if ($DebugLogs) {
-                $Global:AzStorageContext | ConvertTo-Json | Out-File -FilePath "$DebugLogs\AzStorageContext.json" -Encoding ascii -Width 2000 -Force
-                $Global:AzOSDCloudBlobImage | ConvertTo-Json | Out-File -FilePath "$DebugLogs\AzOSDCloudBlobImage.json" -Encoding ascii -Width 2000 -Force
-                $Global:AzOSDCloudBlobBootImage| ConvertTo-Json | Out-File -FilePath "$DebugLogs\AzOSDCloudBlobDriverPack.json" -Encoding ascii -Width 2000 -Force
-                $Global:AzOSDCloudBlobDriverPack | ConvertTo-Json | Out-File -FilePath "$DebugLogs\AzOSDCloudBlobDriverPack.json" -Encoding ascii -Width 2000 -Force
+            if ($OSDCloudLogs) {
+                $Global:AzStorageContext | ConvertTo-Json | Out-File -FilePath "$OSDCloudLogs\AzStorageContext.json" -Encoding ascii -Width 2000 -Force
+                $Global:AzOSDCloudBlobImage | ConvertTo-Json | Out-File -FilePath "$OSDCloudLogs\AzOSDCloudBlobImage.json" -Encoding ascii -Width 2000 -Force
+                $Global:AzOSDCloudBlobBootImage| ConvertTo-Json | Out-File -FilePath "$OSDCloudLogs\AzOSDCloudBlobDriverPack.json" -Encoding ascii -Width 2000 -Force
+                $Global:AzOSDCloudBlobDriverPack | ConvertTo-Json | Out-File -FilePath "$OSDCloudLogs\AzOSDCloudBlobDriverPack.json" -Encoding ascii -Width 2000 -Force
             }
             if ($null -eq $Global:AzOSDCloudBlobImage) {
                 Write-Warning 'Unable to find a WIM on any of the OSDCloud Azure Storage Containers'

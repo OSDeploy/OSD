@@ -105,10 +105,10 @@ function Connect-AzOSDCloud {
         #Write-Host ''
 
         if ($OSDCloudLogs) {
-            Write-Host -ForegroundColor DarkGray "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Logging $OSDCloudLogs\AzSubscription.json"
+            #Write-Host -ForegroundColor DarkGray "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Logging $OSDCloudLogs\AzSubscription.json"
             $Global:AzSubscription | ConvertTo-Json | Out-File -FilePath "$OSDCloudLogs\AzSubscription.json" -Encoding ascii -Width 2000 -Force
 
-            Write-Host -ForegroundColor DarkGray "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Logging $OSDCloudLogs\AzContext.json"
+            #Write-Host -ForegroundColor DarkGray "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Logging $OSDCloudLogs\AzContext.json"
             $Global:AzContext | ConvertTo-Json | Out-File -FilePath "$OSDCloudLogs\AzContext.json" -Encoding ascii -Width 2000 -Force
         }
         #=================================================
@@ -122,10 +122,10 @@ function Connect-AzOSDCloud {
             'ExpiresOn'     = $Global:AzAadGraphAccessToken.ExpiresOn
         }
         if ($OSDCloudLogs) {
-            Write-Host -ForegroundColor DarkGray "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Logging $OSDCloudLogs\AzAadGraphAccessToken.json"
+            #Write-Host -ForegroundColor DarkGray "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Logging $OSDCloudLogs\AzAadGraphAccessToken.json"
             $Global:AzAadGraphAccessToken | ConvertTo-Json | Out-File -FilePath "$OSDCloudLogs\AzAadGraphAccessToken.json" -Encoding ascii -Width 2000 -Force
 
-            Write-Host -ForegroundColor DarkGray "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Logging $OSDCloudLogs\AzAadGraphHeaders.json"
+            #Write-Host -ForegroundColor DarkGray "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Logging $OSDCloudLogs\AzAadGraphHeaders.json"
             $Global:AzAadGraphHeaders | ConvertTo-Json | Out-File -FilePath "$OSDCloudLogs\AzAadGraphHeaders.json" -Encoding ascii -Width 2000 -Force
         }
         #=================================================
@@ -139,10 +139,10 @@ function Connect-AzOSDCloud {
             'ExpiresOn'     = $Global:AzKeyVaultAccessToken.ExpiresOn
         }
         if ($OSDCloudLogs) {
-            Write-Host -ForegroundColor DarkGray "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Logging $OSDCloudLogs\AzKeyVaultAccessToken.json"
+            #Write-Host -ForegroundColor DarkGray "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Logging $OSDCloudLogs\AzKeyVaultAccessToken.json"
             $Global:AzKeyVaultAccessToken | ConvertTo-Json | Out-File -FilePath "$OSDCloudLogs\AzKeyVaultAccessToken.json" -Encoding ascii -Width 2000 -Force
 
-            Write-Host -ForegroundColor DarkGray "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Logging $OSDCloudLogs\AzKeyVaultHeaders.json"
+            #Write-Host -ForegroundColor DarkGray "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Logging $OSDCloudLogs\AzKeyVaultHeaders.json"
             $Global:AzKeyVaultHeaders | ConvertTo-Json | Out-File -FilePath "$OSDCloudLogs\AzKeyVaultHeaders.json" -Encoding ascii -Width 2000 -Force
         }
         #=================================================
@@ -156,10 +156,10 @@ function Connect-AzOSDCloud {
             'ExpiresOn'     = $Global:AzMSGraphHeaders.ExpiresOn
         }
         if ($OSDCloudLogs) {
-            Write-Host -ForegroundColor DarkGray "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Logging $OSDCloudLogs\AzMSGraphAccessToken.json"
+            #Write-Host -ForegroundColor DarkGray "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Logging $OSDCloudLogs\AzMSGraphAccessToken.json"
             $Global:AzMSGraphAccessToken | ConvertTo-Json | Out-File -FilePath "$OSDCloudLogs\AzMSGraphAccessToken.json" -Encoding ascii -Width 2000 -Force
 
-            Write-Host -ForegroundColor DarkGray "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Logging $OSDCloudLogs\AzMSGraphHeaders.json"
+            #Write-Host -ForegroundColor DarkGray "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Logging $OSDCloudLogs\AzMSGraphHeaders.json"
             $Global:AzMSGraphHeaders | ConvertTo-Json | Out-File -FilePath "$OSDCloudLogs\AzMSGraphHeaders.json" -Encoding ascii -Width 2000 -Force
         }
         #=================================================
@@ -173,21 +173,21 @@ function Connect-AzOSDCloud {
             'ExpiresOn'     = $Global:AzStorageHeaders.ExpiresOn
         }
         if ($OSDCloudLogs) {
-            Write-Host -ForegroundColor DarkGray "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Logging $OSDCloudLogs\AzStorageAccessToken.json"
+            #Write-Host -ForegroundColor DarkGray "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Logging $OSDCloudLogs\AzStorageAccessToken.json"
             $Global:AzStorageAccessToken | ConvertTo-Json | Out-File -FilePath "$OSDCloudLogs\AzStorageAccessToken.json" -Encoding ascii -Width 2000 -Force
 
-            Write-Host -ForegroundColor DarkGray "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Logging $OSDCloudLogs\AzStorageHeaders.json"
+            #Write-Host -ForegroundColor DarkGray "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Logging $OSDCloudLogs\AzStorageHeaders.json"
             $Global:AzStorageHeaders | ConvertTo-Json | Out-File -FilePath "$OSDCloudLogs\AzStorageHeaders.json" -Encoding ascii -Width 2000 -Force
         }
         #=================================================
         #	AzureAD
         #=================================================
         #$Global:MgGraph = Connect-MgGraph -AccessToken $Global:AzMSGraphAccessToken.Token -Scopes DeviceManagementConfiguration.Read.All,DeviceManagementServiceConfig.Read.All,DeviceManagementServiceConfiguration.Read.All
-        Write-Host -ForegroundColor DarkGray "Connecting to AzureAD"
+        Write-Host -ForegroundColor DarkGray "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Connecting to AzureAD"
         $Global:AzureAD = Connect-AzureAD -AadAccessToken $Global:AzAadGraphAccessToken.Token -AccountId $Global:AzContext.Account.Id
     }
     else {
-        Write-Warning 'Unable to get AzContext'
+        Write-Warning "Unable to get AzContext"
     }
 }
 New-Alias -Name 'Connect-AzWinPE' -Value 'Connect-AzOSDCloud' -Description 'OSDCloud' -Force
