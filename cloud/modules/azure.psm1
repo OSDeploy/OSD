@@ -114,7 +114,7 @@ function Connect-AzOSDCloud {
         #=================================================
         #	AAD Graph
         #=================================================
-        Write-Host -ForegroundColor DarkGray "Generating AadGraph Access Tokens"
+        Write-Host -ForegroundColor DarkGray "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Generating AadGraph Access Tokens"
         $Global:AzAadGraphAccessToken = Get-AzAccessToken -ResourceTypeName AadGraph
         $Global:AzAadGraphHeaders = @{
             'Authorization' = 'Bearer ' + $Global:AzAadGraphAccessToken.Token
@@ -124,7 +124,7 @@ function Connect-AzOSDCloud {
         #=================================================
         #	Azure KeyVault
         #=================================================
-        Write-Host -ForegroundColor DarkGray "Generating KeyVault Access Tokens"
+        Write-Host -ForegroundColor DarkGray "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Generating KeyVault Access Tokens"
         $Global:AzKeyVaultAccessToken = Get-AzAccessToken -ResourceTypeName KeyVault
         $Global:AzKeyVaultHeaders = @{
             'Authorization' = 'Bearer ' + $Global:AzKeyVaultAccessToken.Token
@@ -134,7 +134,7 @@ function Connect-AzOSDCloud {
         #=================================================
         #	Azure MSGraph
         #=================================================
-        Write-Host -ForegroundColor DarkGray "Generating MSGraph Access Tokens"
+        Write-Host -ForegroundColor DarkGray "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Generating MSGraph Access Tokens"
         $Global:AzMSGraphAccessToken = Get-AzAccessToken -ResourceTypeName MSGraph
         $Global:AzMSGraphHeaders = @{
             'Authorization' = 'Bearer ' + $Global:AzMSGraphAccessToken.Token
@@ -144,6 +144,7 @@ function Connect-AzOSDCloud {
         #=================================================
         #	Azure Storage
         #=================================================
+        Write-Host -ForegroundColor DarkGray "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Generating Storage Access Tokens"
         $Global:AzStorageAccessToken = Get-AzAccessToken -ResourceTypeName Storage
         $Global:AzStorageHeaders = @{
             'Authorization' = 'Bearer ' + $Global:AzStorageAccessToken.Token
@@ -153,6 +154,7 @@ function Connect-AzOSDCloud {
         if ($OSDCloudLogs) {
             Write-Host -ForegroundColor DarkGray "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Logging $OSDCloudLogs\AzStorageAccessToken.json"
             $Global:AzStorageAccessToken | ConvertTo-Json | Out-File -FilePath "$OSDCloudLogs\AzStorageAccessToken.json" -Encoding ascii -Width 2000 -Force
+            Write-Host -ForegroundColor DarkGray "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Logging $OSDCloudLogs\AzStorageHeaders.json"
             $Global:AzStorageHeaders | ConvertTo-Json | Out-File -FilePath "$OSDCloudLogs\AzStorageHeaders.json" -Encoding ascii -Width 2000 -Force
         }
         #=================================================
