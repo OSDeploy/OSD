@@ -50,6 +50,7 @@ function Invoke-OSDCloud {
         GetMyDriverPack = $null
         HPIADrivers = $null
         HPIAFirmware = $null
+        HPIASoftware = $null
         HPTPMUpdate = $null
         HPBIOSUpdate = $null
         ImageCount = $null
@@ -1041,6 +1042,7 @@ function Invoke-OSDCloud {
             'HPUpdates' = @{
                 'HPIADrivers' = $Global:OSDCloud.HPIADrivers
                 'HPIAFirmware' = $Global:OSDCloud.HPIAFirmware
+                'HPIASoftware' = $Global:OSDCloud.HPIASoftware
                 'HPTPMUpdate' = $Global:OSDCloud.HPTPMUpdate
                 'HPBIOSUpdate' = $Global:OSDCloud.HPBIOSUpdate
             }
