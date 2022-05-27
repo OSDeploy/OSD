@@ -160,10 +160,14 @@ function Invoke-OSDSpecialize {
             }
         }
         if ($HPJson){
-            if ($HPJson.HPUpdates.HPIARun -eq $true){
+            if ($HPJson.HPUpdates.HPIADrivers -eq $true){
                 Invoke-Expression (Invoke-RestMethod -Uri 'https://raw.githubusercontent.com/OSDeploy/OSD/master/cloud/modules/deviceshp.psm1')
-                osdcloud-RunHPIA
-            }    
+                osdcloud-RunHPIA -Category Drivers
+            }
+            if ($HPJson.HPUpdates.HPIAFirmware -eq $true){
+                Invoke-Expression (Invoke-RestMethod -Uri 'https://raw.githubusercontent.com/OSDeploy/OSD/master/cloud/modules/deviceshp.psm1')
+                osdcloud-RunHPIA -Category Firmware
+            } 
         }
     
     #=================================================
