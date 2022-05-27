@@ -144,12 +144,16 @@ function Connect-AzOSDCloud {
         #=================================================
         #	Azure Storage
         #=================================================
-        Write-Host -ForegroundColor DarkGray "Generating Storage Access Tokens"
         $Global:AzStorageAccessToken = Get-AzAccessToken -ResourceTypeName Storage
         $Global:AzStorageHeaders = @{
             'Authorization' = 'Bearer ' + $Global:AzStorageAccessToken.Token
             'Content-Type'  = 'application/json'
             'ExpiresOn'     = $Global:AzStorageHeaders.ExpiresOn
+        }
+        if ($OSDCloudLogs) {
+            Write-Host -ForegroundColor DarkGray "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Logging $OSDCloudLogs\AzStorageAccessToken.json"
+            $Global:AzStorageAccessToken | ConvertTo-Json | Out-File -FilePath "$OSDCloudLogs\AzStorageAccessToken.json" -Encoding ascii -Width 2000 -Force
+            $Global:AzStorageHeaders | ConvertTo-Json | Out-File -FilePath "$OSDCloudLogs\AzStorageHeaders.json" -Encoding ascii -Width 2000 -Force
         }
         #=================================================
         #	AzureAD
