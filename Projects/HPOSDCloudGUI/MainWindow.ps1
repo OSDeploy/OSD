@@ -302,7 +302,7 @@ else
     $LatestVer = (Get-HPBIOSUpdates -Latest).ver
     $CurrentVer = Get-HPBIOSVersion
     $formMainWindowControlHPSystemFirmwareCheckBox.Visibility = 'Visible'
-    $formMainWindowControlHPSystemFirmwareCheckBox.Content = "HP System Firmwware Update from $CurrentVer to $LatestVer"
+    $formMainWindowControlHPSystemFirmwareCheckBox.Content = "HP System Firmware Update from $CurrentVer to $LatestVer"
     }
 #================================================
 #   DriverPack
