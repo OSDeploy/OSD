@@ -67,18 +67,19 @@ function Get-AzOSDCloudBlobImage {
                 if ($AzOSDCloudStorageContainers) {
                     foreach ($Container in $AzOSDCloudStorageContainers) {
                         if ($Container.Name -eq 'BootImage') {
-                            Write-Host -ForegroundColor DarkGray "Storage Account: $($Item.StorageAccountName) DriverPack Container: $($Container.Name)"
+                            Write-Host -ForegroundColor DarkGray "BootImage Container: $($Item.StorageAccountName)/$($Container.Name)"
                             $Global:AzOSDCloudBlobBootImage += Get-AzStorageBlob -Context $Global:AzCurrentStorageContext -Container $Container.Name -Blob *.iso -ErrorAction Ignore
 
                         }
                         elseif ($Container.Name -eq 'DriverPack') {
-                            Write-Host -ForegroundColor DarkGray "Storage Account: $($Item.StorageAccountName) DriverPack Container: $($Container.Name)"
+                            Write-Host -ForegroundColor DarkGray "DriverPack Container: $($Item.StorageAccountName)/$($Container.Name)"
                             $Global:AzOSDCloudBlobDriverPack += Get-AzStorageBlob -Context $Global:AzCurrentStorageContext -Container $Container.Name -Blob *.cab -ErrorAction Ignore
                             $Global:AzOSDCloudBlobDriverPack += Get-AzStorageBlob -Context $Global:AzCurrentStorageContext -Container $Container.Name -Blob *.exe -ErrorAction Ignore
                             $Global:AzOSDCloudBlobDriverPack += Get-AzStorageBlob -Context $Global:AzCurrentStorageContext -Container $Container.Name -Blob *.zip -ErrorAction Ignore
                         }
                         else {
-                            Write-Host -ForegroundColor DarkGray "Storage Account: $($Item.StorageAccountName) Image Container: $($Container.Name)"
+                            Write-Host -ForegroundColor DarkGray "Image Container: $($Item.StorageAccountName)/$($Container.Name)"
+                            $Global:AzOSDCloudBlobImage += Get-AzStorageBlob -Context $Global:AzCurrentStorageContext -Container $Container.Name -Blob *.esd -ErrorAction Ignore | Where-Object {$_.Length -gt 3000000000}
                             $Global:AzOSDCloudBlobImage += Get-AzStorageBlob -Context $Global:AzCurrentStorageContext -Container $Container.Name -Blob *.iso -ErrorAction Ignore | Where-Object {$_.Length -gt 3000000000}
                             $Global:AzOSDCloudBlobImage += Get-AzStorageBlob -Context $Global:AzCurrentStorageContext -Container $Container.Name -Blob *.wim -ErrorAction Ignore | Where-Object {$_.Length -gt 3000000000}
                         }
