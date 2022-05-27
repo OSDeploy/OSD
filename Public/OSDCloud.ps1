@@ -48,7 +48,8 @@ function Invoke-OSDCloud {
         GetDiskFixed = $null
         GetFeatureUpdate = $null
         GetMyDriverPack = $null
-        HPIARun = $null
+        HPIADrivers = $null
+        HPIAFirmware = $null
         HPTPMUpdate = $null
         HPBIOSUpdate = $null
         ImageCount = $null
@@ -1035,10 +1036,11 @@ function Invoke-OSDCloud {
     if (($Global:OSDCloud.HPIARun -eq $true) -or ($Global:OSDCloud.HPTPMUpdate -eq $true) -or ($Global:OSDCloud.HPBIOSUpdate -eq $true)){
     Write-Host -ForegroundColor DarkGray "========================================================================="
     Write-Host -ForegroundColor Cyan "Adding HP Tasks into JSON Config File for Action during Specialize" 
-    Write-Host -ForegroundColor DarkGray "HPIARun = $($Global:OSDCloud.HPIARun) | HPTPMUpdate = $($Global:OSDCloud.HPTPMUpdate) | HPBIOSUpdate = $($Global:OSDCloud.HPBIOSUpdate)" 
+    Write-Host -ForegroundColor DarkGray "HPIADrivers = $($Global:OSDCloud.HPIADrivers) | HPIAFirmware = $($Global:OSDCloud.HPIAFirmware) |HPTPMUpdate = $($Global:OSDCloud.HPTPMUpdate) | HPBIOSUpdate = $($Global:OSDCloud.HPBIOSUpdate)" 
         $HPHashTable = @{
             'HPUpdates' = @{
-                'HPIARun' = $Global:OSDCloud.HPIARun
+                'HPIADrivers' = $Global:OSDCloud.HPIADrivers
+                'HPIAFirmware' = $Global:OSDCloud.HPIAFirmware
                 'HPTPMUpdate' = $Global:OSDCloud.HPTPMUpdate
                 'HPBIOSUpdate' = $Global:OSDCloud.HPBIOSUpdate
             }
