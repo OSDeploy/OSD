@@ -168,6 +168,10 @@ function Invoke-OSDSpecialize {
                 Invoke-Expression (Invoke-RestMethod -Uri 'https://raw.githubusercontent.com/OSDeploy/OSD/master/cloud/modules/deviceshp.psm1')
                 osdcloud-RunHPIA -Category Firmware
             } 
+            if ($HPJson.HPUpdates.HPIASoftware -eq $true){
+                Invoke-Expression (Invoke-RestMethod -Uri 'https://raw.githubusercontent.com/OSDeploy/OSD/master/cloud/modules/deviceshp.psm1')
+                osdcloud-RunHPIA -Category Software
+            } 
         }
     
     #=================================================
