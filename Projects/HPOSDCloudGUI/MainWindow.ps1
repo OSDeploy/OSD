@@ -284,25 +284,25 @@ $TPM = osdcloud-DetermineHPTPM
 $BIOS = osdcloud-DetermineHPBIOSUpdateAvailable
 
 if ((osdcloud-DetermineHPTPM) -eq $false){
-    $formMainWindowControlUpdateTPMCheckBox.Content = "HP TPM Firmware Already Current"
-    $formMainWindowControlUpdateTPMCheckBox.IsEnabled = $false
+    $formMainWindowControlHPTPMFirmwareCheckBox.Content = "HP TPM Firmware Already Current"
+    $formMainWindowControlHPTPMFirmwareCheckBox.IsEnabled = $false
     }
 else
     {
-    $formMainWindowControlUpdateTPMCheckBox.Visibility = 'Visible'
-    $formMainWindowControlUpdateTPMCheckBox.Content = "HP Update TPM Firmware: $TPM"
+    $formMainWindowControlHPTPMFirmwareCheckBox.Visibility = 'Visible'
+    $formMainWindowControlHPTPMFirmwareCheckBox.Content = "HP TPM Firmware Update: $TPM"
     }
 if ((osdcloud-DetermineHPBIOSUpdateAvailable) -eq $false){
     $CurrentVer = Get-HPBIOSVersion
-    $formMainWindowControlUpdateBIOSCheckBox.Content = "HP System Firmware already Current: $CurrentVer"
-    $formMainWindowControlUpdateBIOSCheckBox.IsEnabled = $false
+    $formMainWindowControlHPSystemFirmwareCheckBox.Content = "HP System Firmware already Current: $CurrentVer"
+    $formMainWindowControlHPSystemFirmwareCheckBox.IsEnabled = $false
     }
 else
     {
     $LatestVer = (Get-HPBIOSUpdates -Latest).ver
     $CurrentVer = Get-HPBIOSVersion
-    $formMainWindowControlUpdateBIOSCheckBox.Visibility = 'Visible'
-    $formMainWindowControlUpdateBIOSCheckBox.Content = "HP Update System Firmwware from $CurrentVer to $LatestVer"
+    $formMainWindowControlHPSystemFirmwareCheckBox.Visibility = 'Visible'
+    $formMainWindowControlHPSystemFirmwareCheckBox.Content = "HP System Firmwware Update from $CurrentVer to $LatestVer"
     }
 #================================================
 #   DriverPack
@@ -709,9 +709,11 @@ $formMainWindowControlStartButton.add_Click({
         AutopilotOOBEJsonName       = $AutopilotOOBEJsonName
         AutopilotOOBEJsonObject     = $AutopilotOOBEJsonObject
         DriverPackName              = $formMainWindowControlDriverPackCombobox.Text
-        HPIARun                     = $formMainWindowControlRunHPIACheckBox.IsChecked
-        HPTPMUpdate                 = $formMainWindowControlUpdateTPMCheckBox.IsChecked
-        HPBIOSUpdate                = $formMainWindowControlUpdateBIOSCheckBox.IsChecked
+        HPIADrivers                 = $formMainWindowControlHPIADriversCheckBox.IsChecked
+        HPIAFirmware                = $formMainWindowControlHPIAFirmwareCheckBox.IsChecked
+        HPIASoftware                = $formMainWindowControlHPIASoftwareCheckBox.IsChecked
+        HPBIOSUpdate                = $formMainWindowControlHPSystemFirmwareCheckBox.IsChecked
+        HPTPMUpdate                 = $formMainWindowControlHPTPMFirmwareCheckBox.IsChecked
         ImageFileFullName           = $ImageFileFullName
         ImageFileItem               = $ImageFileItem
         ImageFileName               = $ImageFileName
