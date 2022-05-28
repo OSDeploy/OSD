@@ -103,16 +103,30 @@ function Start-Scan {
                 $treeViewItem.Tag = @("folder",$node)
                 $treeViewItem.Items.Add($dummyNode) | Out-Null
 
-                $treeViewItem.Add_PreviewMouseRightButtonDown({
-
-                    $Menu.IsOpen = $true
+                $treeViewItem.Add_Expanded({
                 })
                 $treeViewItem.Add_PreviewMouseLeftButtonDown({
                     [System.Windows.Controls.TreeViewItem]$sender = $args[0]
                     [System.Windows.RoutedEventArgs]$e = $args[1]  
                     
                     $WPF_tt.Content = $($sender.Tag[1].Name)
-                    #$Sobjects.Visibility="Visible" 
+                   
+                    #don't work it don't find the property Source ???
+                    switch ($($sender.Tag[1].Name))
+                    {
+                        "others" {
+                            $WPF_icone.Source = "./images/ps1.png"
+                        }
+                        "scripts" {
+                            $WPF_icone.Source = "./images/ps1.png"
+                        }
+                        "pacakges" {
+                            $WPF_icone.Source = "./images/ps1.png"
+                        }
+                        "unattend" {
+                            $WPF_icone.Source = "./images/xml.png"
+                        }
+                    }
                                                      
                     $global:Object= Get-AzOSDCloudBlobScriptFile -Container  $sender.Header
                     
@@ -123,8 +137,11 @@ function Start-Scan {
                         $WPF_ListBoxControl.ItemsSource = $TempArray
                     }
                     else{
-                        $WPF_ListBoxControl.ItemsSource = "$global:Object.Name"
-                        $WPF_CObjects.Content = $($global:Object).Count
+                        $TempArray = [System.Collections.ArrayList]::new()
+                        for ($i = 0; $i -lt $($global:Object).count; $i++) {
+                            $TempArray.Add($global:Object[$i].Name)
+                        }
+                        $WPF_ListBoxControl.ItemsSource = $TempArray
                     }
                     
     })
@@ -155,6 +172,13 @@ function Get-AzOSDCloudBlobScriptFile {
 
     return $Objects
 }
+$WPF_ListBoxControl.Add_MouseRightButtonUp({
+
+    $WPF_ListBoxControl.SelectedIndex = $args[0].Source.SelectedIndex
+
+    $WPF_ListBoxControl.SelectedIndex.ToString() | Out-Null
+})
+
 
 #########################################################################
 #                        Stuff                                          #

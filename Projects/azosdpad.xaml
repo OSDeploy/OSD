@@ -236,11 +236,9 @@
 									<ListBox.ItemTemplate>
 										<DataTemplate>
 											<StackPanel Orientation="Horizontal">
-												<Image Name="img"  Width="20" Height="20" Margin="0,2,5,0" Stretch="Fill"  
-												   Source= "{Binding ObjectClass,Converter={sys:StringToImageConverter}}"/>  
-												<TextBlock Text="{Binding}" Margin="5,0" Width="150" Foreground="Black"/>
+												<Image Name="icone"  Width="25" Height="25" Margin="0,2,5,0" Stretch="Fill" Source="./images/ps1.png"/>  
+												<TextBlock Text="{Binding}" Margin="5,0" Width="280" Foreground="Black"/>
 											</StackPanel>
-											
 										</DataTemplate>
 									</ListBox.ItemTemplate>
 									<ListBox.ContextMenu>
