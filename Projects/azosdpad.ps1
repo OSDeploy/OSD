@@ -112,6 +112,7 @@ function Start-Scan {
                     $WPF_tt.Content = $($sender.Tag[1].Name)
                    
                     #don't work it don't find the property Source ???
+                    <#
                     switch ($($sender.Tag[1].Name))
                     {
                         "others" {
@@ -127,7 +128,7 @@ function Start-Scan {
                             $WPF_icone.Source = "./images/xml.png"
                         }
                     }
-                                                     
+                      #>                               
                     $global:Object= Get-AzOSDCloudBlobScriptFile -Container  $sender.Header
                     
                     if ($null -eq $( $global:Object).Count){
@@ -176,7 +177,20 @@ $WPF_ListBoxControl.Add_MouseRightButtonUp({
 
     $WPF_ListBoxControl.SelectedIndex = $args[0].Source.SelectedIndex
 
-    $WPF_ListBoxControl.SelectedIndex.ToString() | Out-Null
+   Write-Host $WPF_ListBoxControl.SelectedValue 
+
+   foreach ($item in $Global:AzOSDCloudGlobalScripts.ICloudBlob) {
+
+    if ($item.Name -eq $WPF_ListBoxControl.SelectedValue) {
+        <# Action to perform if the condition is true #>
+        return $item
+    }
+
+   }
+    #$Global:AzOSDCloudGlobalScripts.ICloudBlob | Where-Object {$_.Name -eq $WPF_ListBoxControl.SelectedValue} 
+
+  # Get-AzStorageBlobContent -CloudBlob $($Global:AzOSDCloudGlobalScripts.ICloudBlob | Where-Object {$_.Name -eq $WPF_ListBoxControl.SelectedValue} ) -Context $Global:AzCurrentStorageContext.Context -Destination d:\
+
 })
 
 
