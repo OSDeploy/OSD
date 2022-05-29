@@ -168,8 +168,6 @@ $WPF_ListBoxControl.Add_MouseRightButtonUp({
     }
 
    }
-    #$Global:AzOSDCloudGlobalScripts.ICloudBlob | Where-Object {$_.Name -eq $WPF_ListBoxControl.SelectedValue} 
-
    Get-AzStorageBlobContent -CloudBlob $file  -Context $Global:AzCurrentStorageContext.Context -Destination d:\ -CheckMd5 
 
 })
