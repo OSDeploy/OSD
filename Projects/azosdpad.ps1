@@ -111,24 +111,6 @@ function Start-Scan {
                     
                     $WPF_tt.Content = $($sender.Tag[1].Name)
                    
-                    #don't work it don't find the property Source ???
-                    <#
-                    switch ($($sender.Tag[1].Name))
-                    {
-                        "others" {
-                            $WPF_icone.Source = "./images/ps1.png"
-                        }
-                        "scripts" {
-                            $WPF_icone.Source = "./images/ps1.png"
-                        }
-                        "pacakges" {
-                            $WPF_icone.Source = "./images/ps1.png"
-                        }
-                        "unattend" {
-                            $WPF_icone.Source = "./images/xml.png"
-                        }
-                    }
-                      #>                               
                     $global:Object= Get-AzOSDCloudBlobScriptFile -Container  $sender.Header
                     
                     if ($null -eq $( $global:Object).Count){
@@ -179,17 +161,16 @@ $WPF_ListBoxControl.Add_MouseRightButtonUp({
 
    Write-Host $WPF_ListBoxControl.SelectedValue 
 
-   foreach ($item in $Global:AzOSDCloudGlobalScripts) {
-    write-host $item.Name
+   foreach ($item in $Global:AzOSDCloudBlobScript) {
     if ($item.Name -eq $WPF_ListBoxControl.SelectedValue) {
         <# Action to perform if the condition is true #>
-        return $item
+       $File =  $item.ICloudBlob
     }
 
    }
     #$Global:AzOSDCloudGlobalScripts.ICloudBlob | Where-Object {$_.Name -eq $WPF_ListBoxControl.SelectedValue} 
 
-  # Get-AzStorageBlobContent -CloudBlob $($Global:AzOSDCloudGlobalScripts.ICloudBlob | Where-Object {$_.Name -eq $WPF_ListBoxControl.SelectedValue} ) -Context $Global:AzCurrentStorageContext.Context -Destination d:\
+   Get-AzStorageBlobContent -CloudBlob $file  -Context $Global:AzCurrentStorageContext.Context -Destination d:\ -CheckMd5 
 
 })
 
