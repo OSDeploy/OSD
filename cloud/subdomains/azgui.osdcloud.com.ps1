@@ -65,7 +65,7 @@ Invoke-Expression -Command (Invoke-RestMethod -Uri functions.osdcloud.com)
 if ($WindowsPhase -eq 'WinPE') {
     osdcloud-StartWinPE -OSDCloud -Azure
     Connect-AzOSDCloud
-    Get-AzOSDCloudBlobImage
+    Get-AzOSDCloudResources
     #Stop the startup Transcript.  OSDCloud will create its own
     $null = Stop-Transcript -ErrorAction Ignore
     Start-AzOSDCloudGUI
@@ -95,7 +95,7 @@ if ($WindowsPhase -eq 'OOBE') {
 #region Windows
 if ($WindowsPhase -eq 'Windows') {
     Connect-AzOSDCloud
-    Get-AzOSDCloudBlobImage
+    Get-AzOSDCloudResources
     $null = Stop-Transcript -ErrorAction Ignore
     Start-AzOSDCloudGUI
 }

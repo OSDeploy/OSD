@@ -12,11 +12,11 @@
 #>
 #=================================================
 #region Functions
-function Get-AzOSDCloudBlobImage {
+function Get-AzOSDCloudResources {
     [CmdletBinding()]
     param ()
     Write-Host -ForegroundColor DarkGray "========================================================================="
-    Write-Host -ForegroundColor Green "Get-AzOSDCloudBlobImage"
+    Write-Host -ForegroundColor Green "Get-AzOSDCloudResources"
 
     if ($env:SystemDrive -eq 'X:') {
         $OSDCloudLogs = "$env:SystemDrive\OSDCloud\Logs"
@@ -96,7 +96,7 @@ function Get-AzOSDCloudBlobImage {
                 Write-Warning 'Unable to find a WIM on any of the OSDCloud Azure Storage Containers'
                 Write-Warning 'Make sure you have a WIM Windows Image in the OSDCloud Azure Storage Container'
                 Write-Warning 'Make sure this user has the Azure Storage Blob Data Reader role to the OSDCloud Container'
-                Write-Warning 'You may need to execute Get-AzOSDCloudBlobImage then Start-AzOSDCloud'
+                Write-Warning 'You may need to execute Get-AzOSDCloudResources then Start-AzOSDCloud'
                 Break
             }
         }
@@ -164,7 +164,7 @@ function Start-AzOSDCloud {
         Write-Warning 'Unable to find a WIM on any of the OSDCloud Azure Storage Containers'
         Write-Warning 'Make sure you have a WIM Windows Image in the OSDCloud Azure Storage Container'
         Write-Warning 'Make sure this user has the Azure Storage Blob Data Reader role to the OSDCloud Container'
-        Write-Warning 'You may need to execute Get-AzOSDCloudBlobImage then Start-AzOSDCloud'
+        Write-Warning 'You may need to execute Get-AzOSDCloudResources then Start-AzOSDCloud'
     }
 }
 #endregion

@@ -35,7 +35,7 @@ function AzOSD {
     [CmdletBinding()]
     param ()
     Connect-AzOSDCloud
-    Get-AzOSDCloudBlobImage
+    Get-AzOSDCloudResources
     Start-AzOSDCloud
 }
 function osdcloud-StartWinPE {
