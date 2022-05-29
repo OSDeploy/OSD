@@ -105,7 +105,10 @@ function Start-AzOSDCloudGUI {
         & "$($MyInvocation.MyCommand.Module.ModuleBase)\Projects\AzOSDCloudGUI\MainWindow.ps1"
         Start-Sleep -Seconds 2
 
-        if ($Global:AzOSDCloudImage) {
+        if ($Global:StartOSDCloud.AzOSDCloudImage) {
+            Write-Host -ForegroundColor DarkGray "========================================================================="
+            Write-Host -ForegroundColor Green "Invoke-OSDCloud ... Starting in 5 seconds..."
+            Start-Sleep -Seconds 5
             Invoke-OSDCloud
         }
         else {
