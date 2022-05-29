@@ -179,8 +179,8 @@ $WPF_ListBoxControl.Add_MouseRightButtonUp({
 
    Write-Host $WPF_ListBoxControl.SelectedValue 
 
-   foreach ($item in $Global:AzOSDCloudGlobalScripts.ICloudBlob) {
-
+   foreach ($item in $Global:AzOSDCloudGlobalScripts) {
+    write-host $item.Name
     if ($item.Name -eq $WPF_ListBoxControl.SelectedValue) {
         <# Action to perform if the condition is true #>
         return $item
