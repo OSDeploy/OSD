@@ -4,7 +4,7 @@
 .DESCRIPTION
     OSDCloud Cloud Module for functions.osdcloud.com
 .NOTES
-    Version 22.5.26.1
+    Version 22.5.29.1
 .LINK
     https://raw.githubusercontent.com/OSDeploy/OSD/master/cloud/modules/_winpestartup.psm1
 .EXAMPLE
@@ -36,7 +36,7 @@ function AzOSD {
     param ()
     Connect-AzOSDCloud
     Get-AzOSDCloudResources
-    Start-AzOSDCloud
+    Start-AzOSDCloudGUI
 }
 function osdcloud-StartWinPE {
     [CmdletBinding()]

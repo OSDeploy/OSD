@@ -1,5 +1,5 @@
 <#PSScriptInfo
-.VERSION 22.5.28.1
+.VERSION 22.5.29.1
 .GUID aa123d2c-3cd3-4ef4-91f0-0c2139473991
 .AUTHOR David Segura @SeguraOSD
 .COMPANYNAME osdcloud.com
@@ -23,7 +23,7 @@ powershell iex (irm azgui.osdcloud.com)
 .DESCRIPTION
     PSCloudScript at azgui.osdcloud.com
 .NOTES
-    Version 22.5.28.1
+    Version 22.5.29.1
 .LINK
     https://raw.githubusercontent.com/OSDeploy/OSD/master/cloud/azgui.osdcloud.com.ps1
 .EXAMPLE
@@ -34,7 +34,7 @@ param()
 #=================================================
 #Script Information
 $ScriptName = 'azgui.osdcloud.com'
-$ScriptVersion = '22.5.28.1'
+$ScriptVersion = '22.5.29.1'
 #TODO: Exclude Windows Images smaller than 3GB
 #=================================================
 #region Initialize
