@@ -95,9 +95,9 @@ if ($WindowsPhase -eq 'OOBE') {
 #region Windows
 if ($WindowsPhase -eq 'Windows') {
     Connect-AzOSDCloud
-    Get-AzOSDCloudResources
+    Get-AzOSDCloudREResources
     $null = Stop-Transcript -ErrorAction Ignore
-    Start-AzOSDCloudGUI
+    Start-AzOSDCloudRE
 }
 #endregion
 #=================================================
