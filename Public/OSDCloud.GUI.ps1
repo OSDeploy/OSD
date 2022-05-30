@@ -68,7 +68,7 @@ function Start-HPOSDCloudGUI {
         Color   = $Color
     }
     #================================================
-    & "$($MyInvocation.MyCommand.Module.ModuleBase)\Projects\HPOSDCloudGUI\MainWindow.ps1"
+    & "$($MyInvocation.MyCommand.Module.ModuleBase)\Projects\OSDCloudHP\MainWindow.ps1"
     Start-Sleep -Seconds 2
     #================================================
 }
