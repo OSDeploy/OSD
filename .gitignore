@@ -9,14 +9,9 @@
 *.userprefs
 
 # Build Objects
-Projects/AzOSDCloudGUI/bin/
-Projects/AzOSDCloudGUI/obj/
-Projects/AzOSDCloudRE/bin/
-Projects/AzOSDCloudRE/obj/
-Projects/HPOSDCloudGUI/bin/
-Projects/HPOSDCloudGUI/obj/
-Projects/OSDCloudGUI/bin/
-Projects/OSDCloudGUI/obj/
+Projects/*/bin/
+Projects/*/obj/
+Projects/*/obj/Debug/MainWindow.g.cs
 
 # Visual Studio 2015/2017 cache/options directory
 .vs/
@@ -27,5 +22,3 @@ Projects/OSDCloudGUI/obj/
 # but keep track of directories ending in .cache
 !*.[Cc]ache/
 MainWindow.g.i.cs
-Projects/AzOSDCloudGUI/obj/Debug/MainWindow.g.cs
-Projects/AzOSDCloudGUI/obj/Debug/MainWindow.g.cs
