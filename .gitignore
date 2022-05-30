@@ -9,9 +9,13 @@
 *.userprefs
 
 # Build Objects
+Projects/AzOSDCloudGUI/bin/
 Projects/AzOSDCloudGUI/obj/
+Projects/AzOSDCloudRE/bin/
 Projects/AzOSDCloudRE/obj/
+Projects/HPOSDCloudGUI/bin/
 Projects/HPOSDCloudGUI/obj/
+Projects/OSDCloudGUI/bin/
 Projects/OSDCloudGUI/obj/
 
 # Visual Studio 2015/2017 cache/options directory
