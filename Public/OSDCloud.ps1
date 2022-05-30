@@ -16,9 +16,6 @@ function Invoke-OSDCloud {
     #=================================================
     $Global:OSDCloud = $null
     $Global:OSDCloud = [ordered]@{
-        ApplyManufacturerDrivers = $true
-        ApplyCatalogDrivers = $true
-        ApplyCatalogFirmware = $true
         AutopilotJsonChildItem = $null
         AutopilotJsonItem = $null
         AutopilotJsonName = $null
@@ -37,6 +34,7 @@ function Invoke-OSDCloud {
         AzStorageAccounts = $Global:AzStorageAccounts
         AzStorageContext = $Global:AzStorageContext
         BuildName = 'OSDCloud'
+        Debug = $false
         DriverPack = $null
         DriverPackBaseName = $null
         DriverPackExpand = [bool]$false
@@ -60,11 +58,14 @@ function Invoke-OSDCloud {
         ImageFileSource = $null
         ImageFileDestination = $null
         ImageFileUrl = $null
-        IsOnBattery = Get-OSDGather -Property IsOnBattery
+        IsOnBattery = $(Get-OSDGather -Property IsOnBattery)
+        IsVirtualMachine = $(Test-IsVM)
         IsoMountDiskImage = $null
         IsoGetDiskImage = $null
         IsoGetVolume = $null
         Manufacturer = Get-MyComputerManufacturer -Brief
+        MSCatalogFirmware = $true
+        MSCatalogNetDrivers = $false
         OOBEDeployJsonChildItem = $null
         OOBEDeployJsonItem = $null
         OOBEDeployJsonName = $null
@@ -91,7 +92,8 @@ function Invoke-OSDCloud {
         OSVersion = 'Windows 10'
         Product = Get-MyComputerProduct
         Restart = [bool]$false
-        Screenshot = $null
+        ScreenshotCapture = $false
+        ScreenshotPath = "$env:TEMP\Screenshots"
         SectionPassed = $true
         Shutdown = [bool]$false
         SkipAutopilot = [bool]$false
@@ -112,7 +114,7 @@ function Invoke-OSDCloud {
     #=================================================
     #region Set Pre-Merge Defaults
     #=================================================
-    if (Test-IsVM) {
+    if ($Global:OSDCloud.IsVirtualMachine) {
         $Global:OSDCloud.RecoveryPartition = $false
     }
 
@@ -395,20 +397,20 @@ function Invoke-OSDCloud {
     }
     #endregion
     #=================================================
-    #region Screenshot
+    #region ScreenshotCapture
     #=================================================
-    if ($Global:OSDCloud.Screenshot) {
+    if ($Global:OSDCloud.ScreenshotCapture) {
         Write-Host -ForegroundColor DarkGray "========================================================================="
-        Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Moving Screenshots to C:\OSDCloud\ScreenPNG"
+        Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Moving Screenshots to C:\OSDCloud\Screenshots"
         Write-Verbose -Message "https://docs.microsoft.com/en-us/windows-server/administration/windows-commands/robocopy"
         Stop-ScreenPNGProcess
-        Invoke-Exe robocopy "$($Global:OSDCloud.Screenshot)" C:\OSDCloud\ScreenPNG *.* /s /ndl /nfl /njh /njs
-        Start-ScreenPNGProcess -Directory 'C:\OSDCloud\ScreenPNG'
-        $Global:OSDCloud.Screenshot = 'C:\OSDCloud\ScreenPNG'
+        Invoke-Exe robocopy "$($Global:OSDCloud.ScreenshotPath)" C:\OSDCloud\Screenshots *.* /s /ndl /nfl /njh /njs
+        Start-ScreenPNGProcess -Directory 'C:\OSDCloud\Screenshots'
+        $Global:OSDCloud.ScreenshotPath = 'C:\OSDCloud\Screenshots'
     }
     #endregion
     #=================================================
-    #region Start Transcript
+    #region Transcript
     #=================================================
     Write-Host -ForegroundColor DarkGray "========================================================================="
     Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Saving PowerShell Transcript to C:\OSDCloud\Logs"
@@ -422,16 +424,23 @@ function Invoke-OSDCloud {
     Start-Transcript -Path (Join-Path 'C:\OSDCloud\Logs' $Global:OSDCloud.Transcript) -ErrorAction Ignore
     #endregion
     #=================================================
-    #region High Performance
-    #=================================================
-    if ($Global:StartOSDCloud.IsOnBattery -eq $false) {
-        Write-Host -ForegroundColor DarkGray "========================================================================="
-        Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Enable Powercfg High Performance"
-        Write-Verbose -Message "https://docs.microsoft.com/en-us/windows/win32/power/power-policy-settings"
-        Write-Verbose -Message "High Performance Power Plan is enabled to speed up OSDCloud performance"
-        if ($Global:OSDCloud.Test -eq $false) {
-            Invoke-Exe powercfg.exe -SetActive 8c5e7fda-e8bf-4a96-9a85-a6e23a8c635c
-        }
+    #region Performance Final
+    #https://docs.microsoft.com/en-us/windows/win32/power/power-policy-settings
+    Write-Host -ForegroundColor DarkGray "========================================================================="
+    Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Powercfg High Performance"
+
+    if ($Global:OSDCloud.IsOnBattery -eq $true) {
+        Write-Host -ForegroundColor DarkGray "Device is on battery power. Performance will not be adjusted"
+    }
+    elseif ($Global:OSDCloud.Test -eq $true) {
+        Write-Host -ForegroundColor DarkGray "Device is running in test mode. Performance will not be adjusted"
+    }
+    elseif ($Global:OSDCloud.Debug -eq $true) {
+        Write-Host -ForegroundColor DarkGray "Device is running in debug mode. Performance will not be adjusted"
+    }
+    else {
+        Write-Host -ForegroundColor DarkGray "Enable powercfg High Performance"
+        Invoke-Exe powercfg.exe -SetActive 8c5e7fda-e8bf-4a96-9a85-a6e23a8c635c
     }
     #endregion
     #=================================================
@@ -828,7 +837,6 @@ function Invoke-OSDCloud {
     #endregion
     #=================================================
     #region Validate OSDCloud Driver Pack
-    #=================================================
     Write-Host -ForegroundColor DarkGray "========================================================================="
     Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) OSDCloud DriverPack"
     if ($Global:OSDCloud.DriverPackName) {
@@ -872,14 +880,14 @@ function Invoke-OSDCloud {
         Write-Host -ForegroundColor DarkGray "-Product $($Global:OSDCloud.DriverPack.Product)"
         Write-Host -ForegroundColor DarkGray "-FileName $($Global:OSDCloud.DriverPack.FileName)"
         Write-Host -ForegroundColor DarkGray "-Url $($Global:OSDCloud.DriverPack.Url)"
-        $Global:StartOSDCloud.DriverPackOffline = Find-OSDCloudFile -Name $Global:StartOSDCloud.DriverPack.FileName -Path '\OSDCloud\DriverPacks\' | Sort-Object FullName
-        $Global:StartOSDCloud.DriverPackOffline = $Global:StartOSDCloud.DriverPackOffline | Where-Object {$_.FullName -notlike "C*"} | Where-Object {$_.FullName -notlike "X*"} | Select-Object -First 1
+        $Global:OSDCloud.DriverPackOffline = Find-OSDCloudFile -Name $Global:OSDCloud.DriverPack.FileName -Path '\OSDCloud\DriverPacks\' | Sort-Object FullName
+        $Global:OSDCloud.DriverPackOffline = $Global:OSDCloud.DriverPackOffline | Where-Object {$_.FullName -notlike "C*"} | Where-Object {$_.FullName -notlike "X*"} | Select-Object -First 1
         if ($Global:OSDCloud.DriverPackOffline) {
             Write-Host -ForegroundColor DarkGray "DriverPack is available on OSDCloudUSB and will not be downloaded"
-            Write-Host -ForegroundColor DarkGray $Global:StartOSDCloud.DriverPack.Name
-            Write-Host -ForegroundColor DarkGray $Global:StartOSDCloud.DriverPackOffline.FullName
+            Write-Host -ForegroundColor DarkGray $Global:OSDCloud.DriverPack.Name
+            Write-Host -ForegroundColor DarkGray $Global:OSDCloud.DriverPackOffline.FullName
             #$Global:OSDCloud.DriverPackSource = Find-OSDCloudFile -Name (Split-Path -Path $Global:OSDCloud.DriverPackOffline -Leaf) -Path (Split-Path -Path (Split-Path -Path $Global:OSDCloud.DriverPackOffline.FullName -Parent) -NoQualifier) | Select-Object -First 1
-            $Global:OSDCloud.DriverPackSource = $Global:StartOSDCloud.DriverPackOffline
+            $Global:OSDCloud.DriverPackSource = $Global:OSDCloud.DriverPackOffline
         }
         if ($Global:OSDCloud.DriverPackSource) {
             Write-Host -ForegroundColor DarkGray "DriverPack is being copied from OSDCloudUSB at $($Global:OSDCloud.DriverPackSource.FullName) to C:\Drivers"
@@ -948,64 +956,54 @@ function Invoke-OSDCloud {
             }
         }
     }
+    #endregion
     #=================================================
-    #	ApplyCatalogFirmware
-    #   This section will download any available
-    #   Firmware updates from Microsoft Update Catalog
-    #=================================================
+    #region MSCatalogFirmware Final
     Write-Host -ForegroundColor DarkGray "========================================================================="
-    Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Microsoft Catalog Firmware Update (Save-SystemFirmwareUpdate)"
+    Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Microsoft Update Catalog Firmware"
 
-    if ($Global:OSDCloud.ApplyCatalogFirmware -eq $false) {
-        Write-Host -ForegroundColor DarkGray "Microsoft Catalog Firmware Update is not enabled for this deployment"
+    if ($OSDCloud.IsOnBattery -eq $true) {
+        Write-Host -ForegroundColor DarkGray "Microsoft Update Catalog Firmware is not enabled for devices on battery power"
     }
-    elseif (Test-IsVM) {
-        Write-Host -ForegroundColor DarkGray "Microsoft Catalog Firmware Update is not enabled for Virtual Machines"
+    elseif ($OSDCloud.IsVirtualMachine) {
+        Write-Host -ForegroundColor DarkGray "Microsoft Update Catalog Firmware is not enabled for Virtual Machines"
     }
-    elseif ($OSDCloud.IsOnBattery -eq $true) {
-        Write-Host -ForegroundColor DarkGray "Microsoft Catalog Firmware Update is not enabled for devices on battery power"
+    elseif ($Global:OSDCloud.MSCatalogFirmware -eq $false) {
+        Write-Host -ForegroundColor DarkGray "Microsoft Update Catalog Firmware is not enabled for this deployment"
     }
     else {
         if (Test-MicrosoftUpdateCatalog) {
             Write-Host -ForegroundColor DarkGray "Firmware Updates will be downloaded from Microsoft Update Catalog to C:\Drivers\Firmware"
             Write-Host -ForegroundColor DarkGray "Some systems do not support a driver Firmware Update"
             Write-Host -ForegroundColor DarkGray "You may have to enable this setting in your BIOS or Firmware Settings"
-            Write-Verbose -Message "Save-SystemFirmwareUpdate -DestinationDirectory 'C:\Drivers\Firmware'"
     
             Save-SystemFirmwareUpdate -DestinationDirectory 'C:\Drivers\Firmware'
         }
         else {
-            #TODO add some notification
+            Write-Warning "Unable to download or find firware for his Device"
         }
     }
+    #endregion
     #=================================================
-    #	ApplyCatalogDrivers
-    #=================================================
+    #region MSCatalogDrivers Final
     Write-Host -ForegroundColor DarkGray "========================================================================="
-    if ($Global:OSDCloud.ApplyCatalogDrivers -eq $false) {
-        Write-Host -ForegroundColor DarkGray "Microsoft Catalog Drivers is not enabled for this deployment"
-    }
-    elseif (Test-IsVM) {
-        Write-Host -ForegroundColor DarkGray "Microsoft Catalog Drivers is not enabled for Virtual Machines"
-    }
-    else {
-        if (Test-MicrosoftUpdateCatalog) {
-            if (($null -eq $SaveMyDriverPack) -or ($Global:OSDCloud.DriverPackName -match 'Microsoft Update Catalog')) {
-                Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Save-MsUpCatDriver (All Devices)"
-                Write-Host -ForegroundColor DarkGray "Drivers for all devices will be downloaded from Microsoft Update Catalog to C:\Drivers"
+    Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Microsoft Update Catalog Drivers"
 
-                Write-Host -ForegroundColor DarkGray "Save-MsUpCatDriver -DestinationDirectory 'C:\Drivers'"
-                Save-MsUpCatDriver -DestinationDirectory 'C:\Drivers'
-            }
-            else {
-                Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Save-MsUpCatDriver (Network)"
-                Write-Host -ForegroundColor DarkGray "Drivers for Network devices will be downloaded from Microsoft Update Catalog to C:\Drivers"
-
-                Write-Host -ForegroundColor DarkGray "Save-MsUpCatDriver -DestinationDirectory 'C:\Drivers' -PNPClass 'Net'"
-                Save-MsUpCatDriver -DestinationDirectory 'C:\Drivers' -PNPClass 'Net'
-            }
+    if (Test-MicrosoftUpdateCatalog) {
+        if ($Global:OSDCloud.DriverPackName -eq 'Microsoft Update Catalog') {
+            Write-Host -ForegroundColor DarkGray "Drivers for all devices will be downloaded from Microsoft Update Catalog to C:\Drivers"
+            Save-MsUpCatDriver -DestinationDirectory 'C:\Drivers'
+        }
+        elseif ($null -eq $SaveMyDriverPack) {
+            Write-Host -ForegroundColor DarkGray "Drivers for all devices will be downloaded from Microsoft Update Catalog to C:\Drivers"
+            Save-MsUpCatDriver -DestinationDirectory 'C:\Drivers'
+        }
+        else {
+            Write-Host -ForegroundColor DarkGray "Drivers for Network devices will be downloaded from Microsoft Update Catalog to C:\Drivers"
+            Save-MsUpCatDriver -DestinationDirectory 'C:\Drivers' -PNPClass 'Net'
         }
     }
+    #endregion
     #=================================================
     #   Add-OfflineServicingWindowsDriver
     #=================================================

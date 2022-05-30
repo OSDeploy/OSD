@@ -9,7 +9,7 @@
         RenderTransformOrigin="0.5,0.5"
         ResizeMode="NoResize"
         WindowStartupLocation = "CenterScreen"
-        Title="AzOSDCloudGUI version on Manufacturer Model Product" Height="425" Width="800">
+        Title="AzOSDCloudGUI version on Manufacturer Model Product" Height="380" Width="820">
     <Window.Resources>
         <ResourceDictionary>
             <Style TargetType="{x:Type Button}">
@@ -122,10 +122,35 @@
                           Offset="1" />
         </RadialGradientBrush>
     </Window.Background>
+    <DockPanel>
+        <Menu DockPanel.Dock="Top">
+            <MenuItem Header="Deployment Options">
+                <MenuItem Name="ZTI"
+                          Header="Clear-Disk skip confirmation"
+                          IsCheckable="True"
+                          IsChecked="False" />
+                <MenuItem Name="Restart"
+                          Header="Restart-Computer when complete"
+                          IsCheckable="True"
+                          IsChecked="True" />
+                <MenuItem Name="ScreenshotCapture"
+                          Header="Screenshot Capture"
+                          IsCheckable="True"
+                          IsChecked="False" />
+            </MenuItem>
+            <MenuItem Header="Microsoft Catalog">
+                <MenuItem Name="MSCatalogNetDrivers"
+                          Header="Network Drivers"
+                          IsCheckable="True"
+                          IsChecked="True" />
+                <MenuItem Name="MSCatalogFirmware"
+                          Header="System Firmware"
+                          IsCheckable="True"
+                          IsChecked="False" />
+            </MenuItem>
+        </Menu>
     <Grid Margin="10,0,10,10">
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="1" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="1" />
             <RowDefinition Height="Auto" />
@@ -136,6 +161,7 @@
             <RowDefinition Height="*" />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
+
         <!-- Row 0 Title -->
         <StackPanel Grid.Row="0"
                     Orientation="Horizontal"
@@ -158,6 +184,7 @@
                HorizontalAlignment="Right"
                VerticalAlignment="Top" />
         </StackPanel>
+        
         <!-- Row 1 Gridline -->
         <Line Grid.Row="1"
               X1="0"
@@ -167,6 +194,7 @@
               Stroke="Gainsboro"
               StrokeThickness="1"
               Stretch="Uniform"></Line>
+        
         <!-- Row 2 Storage -->
         <StackPanel Grid.Row="2"
                     HorizontalAlignment="Left"
@@ -184,19 +212,20 @@
                        Padding="2"
                        Width="150"
                        FlowDirection="RightToLeft" />
-                <ComboBox Name="StorageAccountCombobox"
+                    <ComboBox Name="StorageAccountCombobox"
                           FontSize="16"
                           Margin="5"
                           Padding="2"
                           SelectedIndex="0" >
-                          <ComboBoxItem Content="Get-AzStorageAccount"/>
-                </ComboBox>
-            </StackPanel>
-            <!-- Container -->
+                        <ComboBoxItem Content="Get-AzStorageAccount"/>
+                    </ComboBox>
+                </StackPanel>
+
+            <!-- Blob -->
             <StackPanel Orientation="Horizontal"
-                        HorizontalAlignment="Left"
-                        VerticalAlignment="Top">
-                <Label Name="ContainerLabel"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Top">
+                    <Label Name="ContainerLabel"
                        Content="Container"
                        FontSize="18"
                        FontWeight="Bold"
@@ -205,14 +234,15 @@
                        Padding="2"
                        Width="150"
                        FlowDirection="RightToLeft" />
-                <ComboBox Name="ContainerCombobox"
+                    <ComboBox Name="ContainerCombobox"
                           FontSize="16"
                           Margin="5"
                           Padding="2"
                           SelectedIndex="0" >
-                    <ComboBoxItem Content="Get-AzStorageContainer"/>
-                </ComboBox>
-            </StackPanel>
+                        <ComboBoxItem Content="Get-AzStorageContainer"/>
+                    </ComboBox>
+                </StackPanel>
+
             <!-- Blob -->
             <StackPanel Orientation="Horizontal"
                         HorizontalAlignment="Left"
@@ -233,27 +263,32 @@
                           SelectedIndex="0" >
                     <ComboBoxItem Content="Get-AzStorageBlob"/>
                 </ComboBox>
-        </StackPanel>
-            <!-- Index -->
-            <StackPanel Orientation="Horizontal"
+            </StackPanel>
+            
+                <!-- Index -->
+                <StackPanel Orientation="Horizontal"
                         HorizontalAlignment="Left"
                         VerticalAlignment="Top">
-                <Label Name="ImageIndexLabel"
-                       Content="ImageIndex"
+                    <Label Name="ImageIndexLabel"
+                       Content="Index"
                        FontSize="18"
                        FontWeight="Bold"
                        Foreground="#003E92"
                        Margin="5"
                        Padding="2"
-                       Width="265"
+                       Width="150"
                        FlowDirection="RightToLeft" />
-                <TextBox Name="ImageIndexTextbox"
-                         FontSize="16"
-                         Margin="5"
-                         Padding="2"
-                         Text="Auto" />
+                    <ComboBox Name="ImageIndexCombobox"
+                          IsEditable="True"
+                          FontSize="16"
+                          Margin="5"
+                          Padding="2"
+                          SelectedIndex="0" >
+                        <ComboBoxItem Content="Auto"/>
+                    </ComboBox>
+                </StackPanel>
             </StackPanel>
-        </StackPanel>
+
         <!-- Row 3 Gridline -->
         <Line Grid.Row="3"
               X1="0"
@@ -264,15 +299,16 @@
               StrokeThickness="1"
               Stretch="Uniform">
         </Line>
+
         <!-- Row 4 Driver Pack -->
         <StackPanel Grid.Row="4"
                     HorizontalAlignment="Left"
                     VerticalAlignment="Top">
             <!-- Driver Pack -->
-            <StackPanel Orientation="Horizontal"
+                <StackPanel Orientation="Horizontal"
                         HorizontalAlignment="Left"
                         VerticalAlignment="Top">
-                <Label Name="DriverPackLabel"
+                    <Label Name="DriverPackLabel"
                        Content="Driver Pack"
                        FontSize="18"
                        FontWeight="Bold"
@@ -281,30 +317,19 @@
                        Padding="2"
                        Width="150"
                        FlowDirection="RightToLeft" />
-                <ComboBox Name="DriverPackCombobox"
+                    <ComboBox Name="DriverPackCombobox"
                           FontSize="16"
                           Margin="5"
                           Padding="2"
                           SelectedIndex="1" >
-                    <ComboBoxItem Content="None"/>
-                    <ComboBoxItem Content="Microsoft Update Catalog"/>
-                </ComboBox>
+                        <ComboBoxItem Content="None"/>
+                        <ComboBoxItem Content="Microsoft Update Catalog"/>
+                    </ComboBox>
+                </StackPanel>
             </StackPanel>
-            <StackPanel HorizontalAlignment="Left"
-                        VerticalAlignment="Top">
-                <CheckBox Name="CatalogFirmwareCheckbox"
-                      BorderBrush="Black"
-                      BorderThickness="2"
-                      FontSize="15"
-                      Foreground="Black"
-                      IsChecked="False"
-                      Padding="5,-2,5,10"
-                      VerticalAlignment="Center"
-                      Margin="165,5,0,0">Update Firmware from Microsoft Update Catalog</CheckBox>
-            </StackPanel>
-        </StackPanel>
+        
         <!-- Row 5 Gridline -->
-        <Line Grid.Row="5"
+            <Line Grid.Row="5"
               X1="0"
               Y1="0"
               X2="1"
@@ -312,55 +337,8 @@
               Stroke="Gainsboro"
               StrokeThickness="1"
               Stretch="Uniform">
-        </Line>
-        <!-- Row 6 Options -->
-        <StackPanel Grid.Row="6"
-                    Orientation="Horizontal"
-                    HorizontalAlignment="Left"
-                    VerticalAlignment="Top">
-            <Label Name="DeploymentOptionsLabel"
-                   Content="Options"
-                   FontSize="18"
-                   FontWeight="Bold"
-                   Foreground="#003E92"
-                   HorizontalAlignment="Left"
-                   Margin="5"
-                   Padding="2"
-                   Width="150"
-                   FlowDirection="RightToLeft" />
-        </StackPanel>
-        <StackPanel Grid.Row="6"
-                    Orientation="Vertical"
-                    HorizontalAlignment="Left"
-                    VerticalAlignment="Top">
-            <CheckBox Name="ZTICheckbox"
-                      BorderBrush="Crimson"
-                      BorderThickness="2"
-                      FontSize="15"
-                      FontWeight="Bold"
-                      Foreground="Crimson"
-                      Padding="5,-2,5,10"
-                      VerticalAlignment="Top"
-                      Margin="165,10,0,0">Clear-Disk without confirm prompt</CheckBox>
-            <CheckBox Name="RestartCheckbox"
-                      BorderBrush="Black"
-                      BorderThickness="2"
-                      FontSize="15"
-                      Foreground="Black"
-                      IsChecked="True"
-                      Padding="5,-2,5,10"
-                      VerticalAlignment="Center"
-                      Margin="165,0,0,0">Restart Device</CheckBox>
-        </StackPanel>
-        <!-- Row 7 Gridline -->
-        <Line Grid.Row="7"
-              X1="0"
-              Y1="0"
-              X2="1"
-              Y2="0"
-              Stroke="Gainsboro"
-              StrokeThickness="1"
-              Stretch="Uniform"></Line>
+            </Line>
+
         <!-- Row 9 Start -->
         <Button Grid.Row="9"
                 Name="StartButton"
@@ -371,5 +349,6 @@
                 Width="130"
                 HorizontalAlignment="Right"
                 VerticalAlignment="Bottom" />
-    </Grid>
+        </Grid>
+    </DockPanel>
 </Window>

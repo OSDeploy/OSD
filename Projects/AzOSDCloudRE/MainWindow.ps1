@@ -260,7 +260,7 @@ function Show-PowershellWindow() {
 #================================================
 #   StorageAccounts
 #================================================
-if ($Global:AzOSDCloudBlobImage) {
+if ($Global:AzOSDCloudBlobBootImage) {
 
 }
 else {
@@ -269,7 +269,7 @@ else {
 
 $formMainWindowControlStorageAccountCombobox.Items.Clear()
 $GuiStorageAccounts = @()
-foreach ($Item in $Global:AzOSDCloudBlobImage) {
+foreach ($Item in $Global:AzOSDCloudBlobBootImage) {
     $GuiStorageAccounts += $Item.BlobClient.AccountName
 }
 $GuiStorageAccounts | Select-Object -Unique | ForEach-Object {
@@ -281,7 +281,7 @@ $formMainWindowControlStorageAccountCombobox.SelectedIndex = 0
 #================================================
 $formMainWindowControlContainerCombobox.Items.Clear()
 $GuiContainers = @()
-foreach ($Item in $Global:AzOSDCloudBlobImage | Where-Object {$_.BlobClient.AccountName -eq $formMainWindowControlStorageAccountCombobox.SelectedValue}) {
+foreach ($Item in $Global:AzOSDCloudBlobBootImage | Where-Object {$_.BlobClient.AccountName -eq $formMainWindowControlStorageAccountCombobox.SelectedValue}) {
     $GuiContainers += $Item.BlobClient.BlobContainerName
 }
 $GuiContainers | Select-Object -Unique | ForEach-Object {
@@ -293,7 +293,7 @@ $formMainWindowControlContainerCombobox.SelectedIndex = 0
 #================================================
 $formMainWindowControlBlobCombobox.Items.Clear()
 $GuiBlobs = @()
-foreach ($Item in $Global:AzOSDCloudBlobImage | Where-Object {$_.BlobClient.BlobContainerName -eq $formMainWindowControlContainerCombobox.SelectedValue}) {
+foreach ($Item in $Global:AzOSDCloudBlobBootImage | Where-Object {$_.BlobClient.BlobContainerName -eq $formMainWindowControlContainerCombobox.SelectedValue}) {
     $GuiBlobs += $Item.BlobClient.Name
 }
 $GuiBlobs | ForEach-Object {
@@ -301,24 +301,12 @@ $GuiBlobs | ForEach-Object {
 }
 $formMainWindowControlBlobCombobox.SelectedIndex = 0
 #================================================
-#   DriverPack
-#================================================
-$DriverPack = Get-OSDCloudDriverPack
-$DriverPacks = @()
-$DriverPacks = Get-OSDCloudDriverPacks
-$DriverPacks | ForEach-Object {
-    $formMainWindowControlDriverPackCombobox.Items.Add($_.Name) | Out-Null
-}
-if ($DriverPack) {
-    $formMainWindowControlDriverPackCombobox.SelectedValue = $DriverPack.Name
-}
-#================================================
 #   StorageAccountCombobox SelectionChanged
 #================================================
 $formMainWindowControlStorageAccountCombobox.add_SelectionChanged({
     $formMainWindowControlContainerCombobox.Items.Clear()
     $GuiContainers = @()
-    foreach ($Item in $Global:AzOSDCloudBlobImage | Where-Object {$_.BlobClient.AccountName -eq $formMainWindowControlStorageAccountCombobox.SelectedValue}) {
+    foreach ($Item in $Global:AzOSDCloudBlobBootImage | Where-Object {$_.BlobClient.AccountName -eq $formMainWindowControlStorageAccountCombobox.SelectedValue}) {
         $GuiContainers += $Item.BlobClient.BlobContainerName
     }
     $GuiContainers | Select-Object -Unique | ForEach-Object {
@@ -328,7 +316,7 @@ $formMainWindowControlStorageAccountCombobox.add_SelectionChanged({
 
     $formMainWindowControlBlobCombobox.Items.Clear()
     $GuiBlobs = @()
-    foreach ($Item in $Global:AzOSDCloudBlobImage | Where-Object {$_.BlobClient.BlobContainerName -eq $formMainWindowControlContainerCombobox.SelectedValue}) {
+    foreach ($Item in $Global:AzOSDCloudBlobBootImage | Where-Object {$_.BlobClient.BlobContainerName -eq $formMainWindowControlContainerCombobox.SelectedValue}) {
         $GuiBlobs += $Item.BlobClient.Name
     }
     $GuiBlobs | ForEach-Object {
@@ -342,7 +330,7 @@ $formMainWindowControlStorageAccountCombobox.add_SelectionChanged({
 $formMainWindowControlContainerCombobox.add_SelectionChanged({
     $formMainWindowControlBlobCombobox.Items.Clear()
     $GuiBlobs = @()
-    foreach ($Item in $Global:AzOSDCloudBlobImage | Where-Object {$_.BlobClient.BlobContainerName -eq $formMainWindowControlContainerCombobox.SelectedValue}) {
+    foreach ($Item in $Global:AzOSDCloudBlobBootImage | Where-Object {$_.BlobClient.BlobContainerName -eq $formMainWindowControlContainerCombobox.SelectedValue}) {
         $GuiBlobs += $Item.BlobClient.Name
     }
     $GuiBlobs | ForEach-Object {
@@ -363,24 +351,21 @@ $formMainWindowControlStartButton.add_Click({
     $formMainWindow.Close()
     Show-PowershellWindow
     #================================================
-    #   AzOSDCloudImage
+    #   AzOSDCloudBootImage
     #================================================
-    $Global:AzOSDCloudImage = $Global:AzOSDCloudBlobImage | `
+    $Global:AzOSDCloudBootImage = $Global:AzOSDCloudBlobBootImage | `
         Where-Object {$_.Name -eq $formMainWindowControlBlobCombobox.SelectedValue} | `
         Where-Object {$_.BlobClient.BlobContainerName -eq $formMainWindowControlContainerCombobox.SelectedValue} | `
         Where-Object {$_.BlobClient.AccountName -eq $formMainWindowControlStorageAccountCombobox.SelectedValue}
-    $Global:AzOSDCloudImage | Select-Object * | Export-Clixml "$env:SystemDrive\AzOSDCloudImage.xml"
-    $Global:AzOSDCloudImage | Select-Object * | ConvertTo-Json | Out-File "$env:SystemDrive\AzOSDCloudImage.json"
+    $Global:AzOSDCloudBootImage | Select-Object * | Export-Clixml "$env:SystemDrive\AzOSDCloudBootImage.xml"
+    $Global:AzOSDCloudBootImage | Select-Object * | ConvertTo-Json | Out-File "$env:SystemDrive\AzOSDCloudBootImage.json"
     #================================================
     #   Global Variables
     #================================================
     $Global:StartOSDCloud = $null
     $Global:StartOSDCloud = [ordered]@{
-        AzOSDCloudBlobImage         = $Global:AzOSDCloudBlobImage
-        AzOSDCloudImage             = $Global:AzOSDCloudImage
-        DriverPackName              = $formMainWindowControlDriverPackCombobox.Text
-        MSCatalogNetDrivers         = $formMainWindowControlMSCatalogNetDrivers.IsChecked
-        MSCatalogFirmware           = $formMainWindowControlMSCatalogFirmware.IsChecked
+        AzOSDCloudBlobBootImage     = $Global:AzOSDCloudBlobBootImage
+        AzOSDCloudBootImage             = $Global:AzOSDCloudBootImage
         OSImageIndex                = $formMainWindowControlImageIndexCombobox.Text
         Restart                     = $formMainWindowControlRestart.IsChecked
         ScreenshotCapture           = $formMainWindowControlScreenshotCapture.IsChecked
@@ -393,7 +378,7 @@ $formMainWindowControlStartButton.add_Click({
 #   Customizations
 #================================================
 [string]$ModuleVersion = Get-Module -Name OSD | Sort-Object -Property Version | Select-Object -ExpandProperty Version -Last 1
-$formMainWindow.Title = "AzOSDCloudGUI $ModuleVersion on $(Get-MyComputerManufacturer -Brief) $(Get-MyComputerModel -Brief) $(Get-MyComputerProduct)"
+$formMainWindow.Title = "AzOSDCloudRE $ModuleVersion on $(Get-MyComputerManufacturer -Brief) $(Get-MyComputerModel -Brief) $(Get-MyComputerProduct)"
 #================================================
 #   Branding
 #================================================
@@ -423,7 +408,7 @@ Hide-PowershellWindow
 ###### DISPLAY DIALOG ######
 ############################
 [void]$formMainWindow.ShowDialog()
-$Global:AzOSDCloudImage = @()
+$Global:AzOSDCloudBootImage = @()
 
 ##########################
 ##### SCRIPT CLEANUP #####

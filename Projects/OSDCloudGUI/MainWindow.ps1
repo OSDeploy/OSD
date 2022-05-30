@@ -672,7 +672,6 @@ $formMainWindowControlStartButton.add_Click({
     #================================================
     $Global:StartOSDCloudGUI = $null
     $Global:StartOSDCloudGUI = [ordered]@{
-        ApplyCatalogFirmware        = $formMainWindowControlCatalogFirmwareCheckbox.IsChecked
         AutopilotJsonChildItem      = $AutopilotJsonChildItem
         AutopilotJsonItem           = $AutopilotJsonItem
         AutopilotJsonName           = $AutopilotJsonName
@@ -685,6 +684,8 @@ $formMainWindowControlStartButton.add_Click({
         ImageFileFullName           = $ImageFileFullName
         ImageFileItem               = $ImageFileItem
         ImageFileName               = $ImageFileName
+        MSCatalogNetDrivers         = $formMainWindowControlMSCatalogNetDrivers.IsChecked
+        MSCatalogFirmware           = $formMainWindowControlMSCatalogFirmware.IsChecked
         OOBEDeployJsonChildItem     = $OOBEDeployJsonChildItem
         OOBEDeployJsonItem          = $OOBEDeployJsonItem
         OOBEDeployJsonName          = $OOBEDeployJsonName
@@ -695,15 +696,16 @@ $formMainWindowControlStartButton.add_Click({
         OSLanguage                  = $OSLanguage
         OSLicense                   = $OSLicense
         OSVersion                   = $OSVersion
-        Restart                     = $formMainWindowControlRestartCheckbox.IsChecked
+        Restart                     = $formMainWindowControlRestart.IsChecked
+        ScreenshotCapture           = $formMainWindowControlScreenshotCapture.IsChecked
         SkipAutopilot               = $SkipAutopilot
         SkipAutopilotOOBE           = $SkipAutopilotOOBE
         SkipODT                     = $true
         SkipOOBEDeploy              = $SkipOOBEDeploy
-        ZTI                         = $formMainWindowControlZTICheckbox.IsChecked
+        ZTI                         = $formMainWindowControlZTI.IsChecked
     }
     #$Global:StartOSDCloudGUI | Out-Host
-    if ($formMainWindowControlScreenshotCheckbox.IsChecked) {
+    if ($formMainWindowControlScreenshotCapture.IsChecked) {
         $Params = @{
             Screenshot = $true
         }

@@ -20,7 +20,7 @@ function Start-OSDCloud {
         [System.String]
         $Product = (Get-MyComputerProduct),
 
-        #$Global:StartOSDCloud.ApplyCatalogFirmware = $true
+        #$Global:StartOSDCloud.MSCatalogFirmware = $true
         [System.Management.Automation.SwitchParameter]
         $Firmware,
 
@@ -112,7 +112,7 @@ function Start-OSDCloud {
     #=================================================
     $Global:StartOSDCloud = $null
     $Global:StartOSDCloud = [ordered]@{
-        ApplyCatalogFirmware = $false
+        MSCatalogFirmware = $false
         AutopilotJsonChildItem = $null
         AutopilotJsonItem = $null
         AutopilotJsonName = $null
@@ -153,7 +153,8 @@ function Start-OSDCloud {
         OSVersionNames = @('Windows 11','Windows 10')
         Product = $Product
         Restart = $Restart
-        Screenshot = $Screenshot
+        ScreenshotCapture = $false
+        ScreenshotPath = "$env:TEMP\Screenshots"
         Shutdown = $Shutdown
         SkipAutopilot = $SkipAutopilot
         SkipAutopilotOOBE = $null
@@ -166,7 +167,7 @@ function Start-OSDCloud {
     #	Update Defaults
     #=================================================
     if ($Firmware) {
-        $Global:StartOSDCloud.ApplyCatalogFirmware = $true
+        $Global:StartOSDCloud.MSCatalogFirmware = $true
     }
     #=================================================
     #	$Global:StartOSDCloudGUI
@@ -186,8 +187,8 @@ function Start-OSDCloud {
     #	-Screenshot
     #=================================================
     if ($PSBoundParameters.ContainsKey('Screenshot')) {
-        $Global:StartOSDCloud.Screenshot = "$env:TEMP\ScreenPNG"
-        Start-ScreenPNGProcess -Directory $Global:StartOSDCloud.Screenshot
+        $Global:StartOSDCloud.ScreenshotCapture = $true
+        Start-ScreenPNGProcess -Directory $Global:StartOSDCloud.ScreenshotPath
     }
     #=================================================
     #	Computer Information

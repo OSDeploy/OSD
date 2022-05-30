@@ -699,7 +699,7 @@ $formMainWindowControlStartButton.add_Click({
     #================================================
     $Global:StartOSDCloudGUI = $null
     $Global:StartOSDCloudGUI = [ordered]@{
-        ApplyCatalogFirmware        = $formMainWindowControlCatalogFirmwareCheckbox.IsChecked
+        MSCatalogFirmware           = $formMainWindowControlCatalogFirmwareCheckbox.IsChecked
         AutopilotJsonChildItem      = $AutopilotJsonChildItem
         AutopilotJsonItem           = $AutopilotJsonItem
         AutopilotJsonName           = $AutopilotJsonName

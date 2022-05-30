@@ -292,7 +292,7 @@
                       Foreground="Black"
                       Padding="5,-2,5,10"
                       VerticalAlignment="Center"
-                      Margin="170,0,0,0">Capture WinPE screenshots and save to C:\OSDCloud\ScreenPNG</CheckBox>
+                      Margin="170,0,0,0">Capture WinPE screenshots and save to C:\OSDCloud\Screenshots</CheckBox>
             <CheckBox Name="ZTICheckbox"
                       BorderBrush="Crimson"
                       BorderThickness="2"
