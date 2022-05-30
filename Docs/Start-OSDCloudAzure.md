@@ -5,42 +5,40 @@ online version: https://github.com/OSDeploy/OSD/tree/master/Docs
 schema: 2.0.0
 ---
 
-# Get-GithubRawUrl
+# Start-OSDCloudAzure
 
 ## SYNOPSIS
-{{ Fill in the Synopsis }}
+Start OSDCloud Azure
 
 ## SYNTAX
 
 ```
-Get-GithubRawUrl [-Uri] <Uri> [<CommonParameters>]
+Start-OSDCloudAzure [-Force] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-{{ Fill in the Description }}
+Start OSDCloud Azure
 
 ## EXAMPLES
 
-### Example 1
-```powershell
-PS C:\> {{ Add example code here }}
+### EXAMPLE 1
 ```
-
-{{ Add example description here }}
+Start-OSDCloudAzure
+```
 
 ## PARAMETERS
 
-### -Uri
-{{ Fill Uri Description }}
+### -Force
+Forces a reconnection to azgui.osdcloud.com
 
 ```yaml
-Type: Uri
+Type: SwitchParameter
 Parameter Sets: (All)
 Aliases:
 
-Required: True
-Position: 0
-Default value: None
+Required: False
+Position: Named
+Default value: False
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
@@ -50,11 +48,11 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## INPUTS
 
-### None
-
 ## OUTPUTS
 
-### System.Object
 ## NOTES
 
 ## RELATED LINKS
+
+[https://github.com/OSDeploy/OSD/tree/master/Docs](https://github.com/OSDeploy/OSD/tree/master/Docs)
+

@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace AzOSDCloudGUI.Properties
+namespace OSDCloudREAzure.Properties
 {
 
 

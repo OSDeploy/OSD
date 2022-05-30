@@ -72,16 +72,16 @@ function Start-HPOSDCloudGUI {
     Start-Sleep -Seconds 2
     #================================================
 }
-function Start-AzOSDCloudGUI {
+function Start-OSDCloudAzure {
     <#
     .SYNOPSIS
-    AzOSDCloudGUI imaging using the command line
+    Start OSDCloud Azure
 
     .DESCRIPTION
-    AzOSDCloudGUI imaging using the command line
+    Start OSDCloud Azure
 
     .EXAMPLE
-    Start-AzOSDCloudGUI
+    Start-OSDCloudAzure
 
     .LINK
     https://github.com/OSDeploy/OSD/tree/master/Docs
@@ -101,8 +101,8 @@ function Start-AzOSDCloudGUI {
 
     if ($Global:AzOSDCloudBlobImage) {
         Write-Host -ForegroundColor DarkGray "========================================================================="
-        Write-Host -ForegroundColor Green "Start-AzOSDCloudGUI"
-        & "$($MyInvocation.MyCommand.Module.ModuleBase)\Projects\AzOSDCloudGUI\MainWindow.ps1"
+        Write-Host -ForegroundColor Green "Start-OSDCloudAzure"
+        & "$($MyInvocation.MyCommand.Module.ModuleBase)\Projects\OSDCloudAzure\MainWindow.ps1"
         Start-Sleep -Seconds 2
 
         if ($Global:StartOSDCloud.AzOSDCloudImage) {
@@ -112,23 +112,23 @@ function Start-AzOSDCloudGUI {
             Invoke-OSDCloud
         }
         else {
-            Write-Warning "Unable to get a Windows Image from Start-AzOSDCloudGUI to handoff to Invoke-OSDCloud"
+            Write-Warning "Unable to get a Windows Image from Start-OSDCloudAzure to handoff to Invoke-OSDCloud"
         }
     }
     else {
         Invoke-Expression (Invoke-RestMethod azgui.osdcloud.com)
     }
 }
-function Start-AzOSDCloudRE {
+function Start-OSDCloudREAzure {
     <#
     .SYNOPSIS
-    AzOSDCloudRE imaging using the command line
+    Start OSDCloudRE Azure
 
     .DESCRIPTION
-    AzOSDCloudRE imaging using the command line
+    Start OSDCloudRE Azure
 
     .EXAMPLE
-    Start-AzOSDCloudRE
+    Start-OSDCloudREAzure
 
     .LINK
     https://github.com/OSDeploy/OSD/tree/master/Docs
@@ -148,8 +148,8 @@ function Start-AzOSDCloudRE {
 
     if ($Global:AzOSDCloudBlobBootImage) {
         Write-Host -ForegroundColor DarkGray "========================================================================="
-        Write-Host -ForegroundColor Green "Start-AzOSDCloudRE"
-        & "$($MyInvocation.MyCommand.Module.ModuleBase)\Projects\AzOSDCloudRE\MainWindow.ps1"
+        Write-Host -ForegroundColor Green "Start-OSDCloudREAzure"
+        & "$($MyInvocation.MyCommand.Module.ModuleBase)\Projects\OSDCloudREAzure\MainWindow.ps1"
         Start-Sleep -Seconds 2
 
         if ($Global:StartOSDCloud.AzOSDCloudBootImage) {
@@ -159,7 +159,7 @@ function Start-AzOSDCloudRE {
             #Invoke-OSDCloud
         }
         else {
-            Write-Warning "Unable to get an ISO Boot Image from Start-AzOSDCloudRE"
+            Write-Warning "Unable to get an ISO Boot Image from Start-OSDCloudREAzure"
         }
     }
     else {

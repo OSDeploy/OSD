@@ -199,7 +199,7 @@ function Invoke-OSDCloud {
         Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) OSDCloud Failed"
         Write-Warning "An Operating System Source was not specified by any required Variables"
         Write-Warning "Invoke-OSDCloud should not be run directly unless you know what you are doing"
-        Write-Warning "Try using Start-OSDCloud, Start-OSDCloudGUI, or Start-AzOSDCloudGUI"
+        Write-Warning "Try using Start-OSDCloud, Start-OSDCloudGUI, or Start-OSDCloudAzure"
         Write-Warning "Press Ctrl+C to exit"
         Start-Sleep -Seconds 86400
         Exit

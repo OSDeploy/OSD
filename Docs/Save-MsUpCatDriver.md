@@ -28,7 +28,7 @@ Save-MsUpCatDriver [-DestinationDirectory <String>] [-HardwareID <String[]>] [<C
 ## EXAMPLES
 
 ### Example 1
-```
+```powershell
 PS C:\> {{ Add example code here }}
 ```
 
@@ -73,7 +73,7 @@ Accept wildcard characters: False
 Type: String
 Parameter Sets: ByPNPClass
 Aliases:
-Accepted values: Display, Net, USB
+Accepted values: DiskDrive, Display, Net, SCSIAdapter, SecurityDevices, USB
 
 Required: False
 Position: Named
@@ -88,6 +88,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ## INPUTS
 
 ### None
+
 ## OUTPUTS
 
 ### System.Object

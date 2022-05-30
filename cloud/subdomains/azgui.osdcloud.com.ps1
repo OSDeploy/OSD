@@ -64,11 +64,11 @@ Invoke-Expression -Command (Invoke-RestMethod -Uri functions.osdcloud.com)
 #region WinPE
 if ($WindowsPhase -eq 'WinPE') {
     osdcloud-StartWinPE -OSDCloud -Azure
-    Connect-AzOSDCloud
-    Get-AzOSDCloudResources
+    Connect-OSDCloudAzure
+    Get-OSDCloudAzureResources
     #Stop the startup Transcript.  OSDCloud will create its own
     $null = Stop-Transcript -ErrorAction Ignore
-    Start-AzOSDCloudGUI
+    Start-OSDCloudAzure
 }
 #endregion
 #=================================================
@@ -87,17 +87,17 @@ if ($WindowsPhase -eq 'AuditMode') {
 #region OOBE
 if ($WindowsPhase -eq 'OOBE') {
     osdcloud-StartOOBE -Display -Language -DateTime -Autopilot -KeyVault
-    Connect-AzOSDCloud
+    Connect-OSDCloudAzure
     $null = Stop-Transcript -ErrorAction Ignore
 }
 #endregion
 #=================================================
 #region Windows
 if ($WindowsPhase -eq 'Windows') {
-    Connect-AzOSDCloud
-    Get-AzOSDCloudREResources
+    Connect-OSDCloudAzure
+    Get-OSDCloudREAzureResources
     $null = Stop-Transcript -ErrorAction Ignore
-    Start-AzOSDCloudRE
+    Start-OSDCloudREAzure
 }
 #endregion
 #=================================================

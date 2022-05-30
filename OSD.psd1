@@ -263,12 +263,12 @@
         'Get-CloudSecret',
         'Set-CloudSecret',
         'Invoke-CloudSecret',
-        'Start-AzOSDCloudGUI',
+        'Start-OSDCloudAzure',
         'Test-MicrosoftUpdateCatalog',
         'Initialize-OSDCloudStartnet',
         'Get-AzClipboard',
         'Set-AzClipboard',
-        'Start-AzOSDCloudRE'
+        'Start-OSDCloudREAzure'
     )
     CmdletsToExport = @()
     VariablesToExport = @()

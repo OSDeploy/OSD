@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace AzOSDCloudRE.Properties
+namespace OSDCloudAzure.Properties
 {
 
 

@@ -34,9 +34,9 @@ function Test-HPIASupport {
 function AzOSD {
     [CmdletBinding()]
     param ()
-    Connect-AzOSDCloud
-    Get-AzOSDCloudResources
-    Start-AzOSDCloudGUI
+    Connect-OSDCloudAzure
+    Get-OSDCloudAzureResources
+    Start-OSDCloudAzure
 }
 function osdcloud-StartWinPE {
     [CmdletBinding()]

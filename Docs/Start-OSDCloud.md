@@ -71,7 +71,7 @@ Accept wildcard characters: False
 ```
 
 ### -Firmware
-$Global:StartOSDCloud.ApplyCatalogFirmware = $true
+$Global:StartOSDCloud.MSCatalogFirmware = $true
 
 ```yaml
 Type: SwitchParameter

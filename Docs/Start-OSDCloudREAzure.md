@@ -5,25 +5,25 @@ online version: https://github.com/OSDeploy/OSD/tree/master/Docs
 schema: 2.0.0
 ---
 
-# Start-AzOSDCloudGUI
+# Start-OSDCloudREAzure
 
 ## SYNOPSIS
-AzOSDCloudGUI imaging using the command line
+Start OSDCloudRE Azure
 
 ## SYNTAX
 
 ```
-Start-AzOSDCloudGUI [-Force] [<CommonParameters>]
+Start-OSDCloudREAzure [-Force] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-AzOSDCloudGUI imaging using the command line
+Start OSDCloudRE Azure
 
 ## EXAMPLES
 
 ### EXAMPLE 1
 ```
-Start-AzOSDCloudGUI
+Start-OSDCloudREAzure
 ```
 
 ## PARAMETERS
