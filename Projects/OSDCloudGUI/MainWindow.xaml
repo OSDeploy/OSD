@@ -138,9 +138,17 @@
                           IsCheckable="True"
                           IsChecked="False" />
             </MenuItem>
-            <MenuItem Header="Microsoft Catalog">
+            <MenuItem Header="Microsoft Update Catalog">
+                <MenuItem Name="MSCatalogDiskDrivers"
+                          Header="Disk Drivers"
+                          IsCheckable="True"
+                          IsChecked="True" />
                 <MenuItem Name="MSCatalogNetDrivers"
                           Header="Network Drivers"
+                          IsCheckable="True"
+                          IsChecked="True" />
+                <MenuItem Name="MSCatalogScsiDrivers"
+                          Header="SCSIAdapter Drivers"
                           IsCheckable="True"
                           IsChecked="True" />
                 <MenuItem Name="MSCatalogFirmware"

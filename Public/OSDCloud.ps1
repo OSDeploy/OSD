@@ -65,7 +65,9 @@ function Invoke-OSDCloud {
         IsoGetVolume = $null
         Manufacturer = Get-MyComputerManufacturer -Brief
         MSCatalogFirmware = $true
-        MSCatalogNetDrivers = $false
+        MSCatalogDiskDrivers = $true
+        MSCatalogNetDrivers = $true
+        MSCatalogScsiDrivers = $true
         OOBEDeployJsonChildItem = $null
         OOBEDeployJsonItem = $null
         OOBEDeployJsonName = $null
@@ -999,8 +1001,18 @@ function Invoke-OSDCloud {
             Save-MsUpCatDriver -DestinationDirectory 'C:\Drivers'
         }
         else {
-            Write-Host -ForegroundColor DarkGray "Drivers for Network devices will be downloaded from Microsoft Update Catalog to C:\Drivers"
-            Save-MsUpCatDriver -DestinationDirectory 'C:\Drivers' -PNPClass 'Net'
+            if ($OSDCloud.MSCatalogDiskDrivers) {
+                Write-Host -ForegroundColor DarkGray "Drivers for PNPClass DiskDrive will be downloaded from Microsoft Update Catalog to C:\Drivers"
+                Save-MsUpCatDriver -DestinationDirectory 'C:\Drivers' -PNPClass 'DiskDrive'
+            }
+            if ($OSDCloud.MSCatalogNetDrivers) {
+                Write-Host -ForegroundColor DarkGray "Drivers for PNPClass Net will be downloaded from Microsoft Update Catalog to C:\Drivers"
+                Save-MsUpCatDriver -DestinationDirectory 'C:\Drivers' -PNPClass 'Net'
+            }
+            if ($OSDCloud.MSCatalogScsiDrivers) {
+                Write-Host -ForegroundColor DarkGray "Drivers for PNPClass SCSIAdapter will be downloaded from Microsoft Update Catalog to C:\Drivers"
+                Save-MsUpCatDriver -DestinationDirectory 'C:\Drivers' -PNPClass 'SCSIAdapter'
+            }
         }
     }
     #endregion

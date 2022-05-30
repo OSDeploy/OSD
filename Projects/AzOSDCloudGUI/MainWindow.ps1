@@ -379,7 +379,9 @@ $formMainWindowControlStartButton.add_Click({
         AzOSDCloudBlobImage         = $Global:AzOSDCloudBlobImage
         AzOSDCloudImage             = $Global:AzOSDCloudImage
         DriverPackName              = $formMainWindowControlDriverPackCombobox.Text
+        MSCatalogDiskDrivers        = $formMainWindowControlMSCatalogDiskDrivers.IsChecked
         MSCatalogNetDrivers         = $formMainWindowControlMSCatalogNetDrivers.IsChecked
+        MSCatalogScsiDrivers        = $formMainWindowControlMSCatalogScsiDrivers.IsChecked
         MSCatalogFirmware           = $formMainWindowControlMSCatalogFirmware.IsChecked
         OSImageIndex                = $formMainWindowControlImageIndexCombobox.Text
         Restart                     = $formMainWindowControlRestart.IsChecked

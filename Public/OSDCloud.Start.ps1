@@ -112,7 +112,6 @@ function Start-OSDCloud {
     #=================================================
     $Global:StartOSDCloud = $null
     $Global:StartOSDCloud = [ordered]@{
-        MSCatalogFirmware = $false
         AutopilotJsonChildItem = $null
         AutopilotJsonItem = $null
         AutopilotJsonName = $null
@@ -132,6 +131,10 @@ function Start-OSDCloud {
         ImageFileUrl = $ImageFileUrl
         IsOnBattery = Get-OSDGather -Property IsOnBattery
         Manufacturer = $Manufacturer
+        MSCatalogFirmware = $true
+        MSCatalogDiskDrivers = $true
+        MSCatalogNetDrivers = $true
+        MSCatalogScsiDrivers = $true
         OOBEDeployJsonChildItem = $null
         OOBEDeployJsonItem = $null
         OOBEDeployJsonName = $null
