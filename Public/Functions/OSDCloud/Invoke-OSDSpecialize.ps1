@@ -173,7 +173,26 @@ function Invoke-OSDSpecialize {
                 osdcloud-RunHPIA -Category Software
             } 
         }
-    
+    #=================================================
+    #   Specialize Config Dell JSON
+    #=================================================
+    $ConfigPath = "c:\osdcloud\configs"
+    if (Test-Path $ConfigPath){
+        $JSONConfigs = Get-ChildItem -path $ConfigPath -Filter "*.json"
+        if ($JSONConfigs.name -contains "Dell.JSON"){
+            $DellJson = Get-Content -Path "$ConfigPath\Dell.JSON" |ConvertFrom-Json
+            }
+        }
+        if ($DellJson){
+            if ($HPJson.DellUpdates.DCUInstall -eq $true){
+                Invoke-Expression (Invoke-RestMethod -Uri 'https://raw.githubusercontent.com/OSDeploy/OSD/master/cloud/modules/devicesdell.psm1')
+                osdcloud-InstallDCU
+            }
+            if ($DellJson.DellUpdates.DCURun -eq $true){
+                Invoke-Expression (Invoke-RestMethod -Uri 'https://raw.githubusercontent.com/OSDeploy/OSD/master/cloud/modules/devicesdell.psm1')
+                osdcloud-RunDCU
+            } 
+        }    
     #=================================================
     #   Specialize ODT
     #=================================================
