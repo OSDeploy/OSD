@@ -233,7 +233,6 @@ function Invoke-OSDCloudRE {
         Write-Error "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Unable to find OSDCloudRE PSDrive"
         Break
     }
-    Break
     #endregion
     #============================================
     #region Test OSDCloudRE Root
@@ -258,7 +257,7 @@ function Invoke-OSDCloudRE {
     #============================================
     #region Remove Read-Only Attribute
     Write-Host -ForegroundColor DarkGray "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Removing Read Only attributes in ($Global:OSDCloudRE.PSDriveRoot)"
-    Get-ChildItem -Path $Global:OSDCloudRE.PSDriveRoot -File -Recurse -Force | foreach {
+    Get-ChildItem -Path $Global:OSDCloudRE.PSDriveRoot -File -Recurse -Force -ErrorAction Ignore | foreach {
         Set-ItemProperty -Path $_.FullName -Name IsReadOnly -Value $false -Force -ErrorAction Ignore
     }
     #endregion

@@ -175,38 +175,26 @@ function New-OSDCloudREVolume {
                 #============================================
                 if ($WindowsPartition) {
                     #============================================
-                    #	Create NewPartition
+                    #   Create NewPartition
                     #============================================
                     Write-Verbose "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Creating OSDCloudRE Partition"
-                    $NewPartition = New-Partition -DiskNumber $WindowsDiskNumber -GptType '{de94bba4-06d1-4d40-a16a-bfd50179d6ac}' -UseMaximumSize
+                    $Global:NewPartition = New-Partition -DiskNumber $WindowsDiskNumber -GptType '{de94bba4-06d1-4d40-a16a-bfd50179d6ac}' -UseMaximumSize
                     #============================================
-                    #	Test NewPartition
+                    #   Test NewPartition
                     #============================================
-                    if ($NewPartition) {
+                    if ($Global:NewPartition) {
                         #============================================
                         #	Test NewPartitionNumber
                         #============================================
-                        $NewPartitionNumber = $NewPartition.PartitionNumber
+                        $Global:NewPartitionNumber = $Global:NewPartition.PartitionNumber
                         #============================================
                         #	Format Partition
                         #============================================
-                        if ($NewPartitionNumber) {
-                            Write-Verbose "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) select disk $WindowsDiskNumber"
-                            Write-Verbose "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) select partition $NewPartitionNumber"
-                            Write-Verbose "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) format fs=ntfs quick label=`"OSDCloudRE`""
-                            Write-Verbose "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) assign letter=o"
-                            Write-Verbose "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) rescan"
-                            Write-Verbose "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) exit"
-        
-$null = @"
-select disk $WindowsDiskNumber
-select partition $NewPartitionNumber
-format fs=ntfs quick label="OSDCloudRE"
-assign letter=o
-rescan
-exit
-"@ | diskpart.exe
-        
+                        if ($Global:NewPartitionNumber) {
+                        
+                            $Global:FormatVolume = Format-Volume -Partition $Global:NewPartition -FileSystem NTFS -NewFileSystemLabel 'OSDCloudRE' -Force
+                            $Global:PartitionAccessPath = Add-PartitionAccessPath -AccessPath O: -DiskNumber $Global:NewPartition.DiskNumber -PartitionNumber $Global:NewPartition.PartitionNumber
+
                             Write-Host -ForegroundColor DarkGray "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Testing OSDCloudRE Volume"
                             #============================================
                             #	Return Results
