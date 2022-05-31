@@ -285,7 +285,6 @@ Function osdcloud-RunHPIA {
                 If ($BitsJob.JobState -eq "Error")
                 {
                     CMTraceLog –Message "BITS tranfer failed: $($BitsJob.ErrorDescription)" –Component "Download" –Type 3
-                    throw
                 }
                 CMTraceLog –Message "Download is finished" –Component "Download"
                 Complete-BitsTransfer –BitsJob $BitsJob
@@ -296,7 +295,10 @@ Function osdcloud-RunHPIA {
             {
                 CMTraceLog –Message "Failed to start a BITS transfer for the HPIA: $($_.Exception.Message)" –Component "Download" –Type 3
                 Write-Host "Failed to start a BITS transfer for the HPIA: $($_.Exception.Message)" -ForegroundColor Red
-                throw
+            }
+            if (!(Test-Path -Path $TempWorkFolder\$HPIAFileName)){
+                write-host "Failed to download HPIA using BITS, trying WebRequest"  -ForegroundColor yellow
+                Invoke-WebRequest -UseBasicParsing -uri $HPIADownloadURL -OutFile $TempWorkFolder\$HPIAFileName -ErrorAction Stop
             }
         }
         else
