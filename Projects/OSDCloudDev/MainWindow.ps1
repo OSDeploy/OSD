@@ -320,6 +320,16 @@ if ($Manufacturer -match "Dell"){$Manufacturer = "Dell"}
 if ($HPEnterprise){
     $TPM = osdcloud-DetermineHPTPM
     $BIOS = osdcloud-DetermineHPBIOSUpdateAvailable
+    $formMainWindowControlHPFunction.Visibility = 'Visible'
+}
+else{
+    $formMainWindowControlHPFunction.Visibility = 'Hidden'
+    $formMainWindowControlHPFunction.IsEnabled = $false
+    $formMainWindowControlHPIADrivers.IsChecked = $false
+    $formMainWindowControlHPIAFirmware.IsChecked = $false
+    $formMainWindowControlHPIASoftware.IsChecked = $false
+    $formMainWindowControlHPTPMUpdate.IsChecked = $false
+    $formMainWindowControlHPBIOSUpdate.IsChecked = $false
 }
 
 
@@ -734,6 +744,11 @@ $formMainWindowControlStartButton.add_Click({
         MSCatalogNetDrivers         = $formMainWindowControlMSCatalogNetDrivers.IsChecked
         MSCatalogScsiDrivers        = $formMainWindowControlMSCatalogScsiDrivers.IsChecked
         MSCatalogFirmware           = $formMainWindowControlMSCatalogFirmware.IsChecked
+        HPIADrivers                 = $formMainWindowControlHPIADrivers.IsChecked
+        HPIAFirmware                = $formMainWindowControlHPIAFirmware.IsChecked
+        HPIASoftware                = $formMainWindowControlHPIASoftware.IsChecked
+        HPTPMUpdate                 = $formMainWindowControlHPTPMUpdate.IsChecked
+        HPBIOSUpdate                = $formMainWindowControlHPBIOSUpdate.IsChecked
         OOBEDeployJsonChildItem     = $OOBEDeployJsonChildItem
         OOBEDeployJsonItem          = $OOBEDeployJsonItem
         OOBEDeployJsonName          = $OOBEDeployJsonName
