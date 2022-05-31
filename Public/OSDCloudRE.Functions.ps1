@@ -1,24 +1,3 @@
-function Set-OSDCloudRE {
-    <#
-    .SYNOPSIS
-    Builds OSDCloudRE
-    
-    .DESCRIPTION
-    Builds OSDCloudRE
-    
-    .EXAMPLE
-    Install-OSDCloudRE
-    
-    .LINK
-    https://github.com/OSDeploy/OSD/tree/master/Docs
-    #>
-    
-    [CmdletBinding()]
-    param ()
-
-    Invoke-Expression (Invoke-RestMethod 'https://re.osdcloud.com' -UseBasicParsing)
-
-}
 function Get-OSDCloudREPartition {
     <#
     .SYNOPSIS

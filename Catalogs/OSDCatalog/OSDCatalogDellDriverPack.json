@@ -694,7 +694,7 @@
     },
     {
         "CatalogVersion":  "22.05.01",
-        "Status":  "Failed",
+        "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "22.05.06",
         "Manufacturer":  "Dell",
@@ -832,7 +832,7 @@
     },
     {
         "CatalogVersion":  "22.05.01",
-        "Status":  null,
+        "Status":  "Failed",
         "Component":  "DriverPack",
         "ReleaseDate":  "22.05.05",
         "Manufacturer":  "Dell",
