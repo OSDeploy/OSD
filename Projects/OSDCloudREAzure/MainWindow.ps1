@@ -392,8 +392,8 @@ Hide-PowershellWindow
 ############################
 ###### DISPLAY DIALOG ######
 ############################
+$Global:StartOSDCloudRE = $null
 [void]$formMainWindow.ShowDialog()
-$Global:AzOSDCloudBootImage = @()
 
 ##########################
 ##### SCRIPT CLEANUP #####

@@ -1,50 +1,4 @@
-function Start-OSDCloudREAzure {
-    <#
-    .SYNOPSIS
-    Start OSDCloudRE Azure
-
-    .DESCRIPTION
-    Start OSDCloudRE Azure
-
-    .EXAMPLE
-    Start-OSDCloudREAzure
-
-    .LINK
-    https://github.com/OSDeploy/OSD/tree/master/Docs
-    #>
-
-    [CmdletBinding()]
-    param (
-        [System.Management.Automation.SwitchParameter]
-        #Forces a reconnection to azgui.osdcloud.com
-        $Force
-    )
-
-    if ($Force) {
-        $Force = $false
-        $Global:AzOSDCloudBlobBootImage = $null
-    }
-
-    if ($Global:AzOSDCloudBlobBootImage) {
-        Write-Host -ForegroundColor DarkGray "========================================================================="
-        Write-Host -ForegroundColor Green "Start-OSDCloudREAzure"
-        & "$($MyInvocation.MyCommand.Module.ModuleBase)\Projects\OSDCloudREAzure\MainWindow.ps1"
-        Start-Sleep -Seconds 2
-
-        if ($Global:StartOSDCloudRE.AzOSDCloudBootImage) {
-            Write-Host -ForegroundColor DarkGray "========================================================================="
-            Write-Host -ForegroundColor Green "Invoke-OSDCloudRE ... Starting in 5 seconds..."
-            Start-Sleep -Seconds 5
-            Invoke-OSDCloudRE
-        }
-        else {
-            Write-Warning "Unable to get an ISO Boot Image from Start-OSDCloudREAzure"
-        }
-    }
-    else {
-        Invoke-Expression (Invoke-RestMethod azgui.osdcloud.com)
-    }
-}
+#This function is not exposed
 function Invoke-OSDCloudRE {
     <#
     .SYNOPSIS
@@ -115,6 +69,11 @@ function Invoke-OSDCloudRE {
     $Global:OSDCloudRE.DownloadName = $(Split-Path $Global:OSDCloudRE.AzOSDCloudBootImage.Name -Leaf)
     $Global:OSDCloudRE.DownloadFullName = "$($Global:OSDCloudRE.DownloadDirectory)\$($Global:OSDCloudRE.DownloadName)"
     #endregion
+    #=================================================
+    if ($Global:OSDCloudRE.AzOSDCloudBootImage -eq $false) {
+        Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) A Boot Image is required to fun this function"
+        Break
+    }
     #=================================================
     #region Test Admin Rights
     Write-Host -ForegroundColor DarkGray "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Test Admin Rights"
@@ -288,6 +247,12 @@ function Invoke-OSDCloudRE {
     Write-Host -ForegroundColor DarkGray "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Set OSDCloudRE to restart on next boot: Set-OSDCloudREBootmgr -BootToOSDCloudRE"
     Set-OSDCloudREBootmgr -BootToOSDCloudRE
     Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) OSDCloudRE setup is complete"
+    if ($Global:OSDCloudRE.Restart) {
+        Write-Warning "Windows is restarting in 10 seconds"
+        Write-Warning "Press CTRL + C to cancel"
+        Start-Sleep -Seconds 10
+        Restart-Computer -Force
+    }
     #endregion
     #============================================
 }

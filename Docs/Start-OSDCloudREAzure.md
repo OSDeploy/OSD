@@ -8,7 +8,7 @@ schema: 2.0.0
 # Start-OSDCloudREAzure
 
 ## SYNOPSIS
-Start OSDCloudRE Azure
+OSDCloudRE: Creates a new OSDCloudRE Volume from Azure
 
 ## SYNTAX
 
@@ -17,7 +17,7 @@ Start-OSDCloudREAzure [-Force] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-Start OSDCloudRE Azure
+OSDCloudRE: Creates a new OSDCloudRE Volume from Azure
 
 ## EXAMPLES
 
@@ -29,7 +29,7 @@ Start-OSDCloudREAzure
 ## PARAMETERS
 
 ### -Force
-Forces a reconnection to azgui.osdcloud.com
+Clears previous variables
 
 ```yaml
 Type: SwitchParameter

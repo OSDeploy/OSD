@@ -4,7 +4,7 @@
 
 @{
     RootModule              = 'OSD.psm1'
-    ModuleVersion           = '22.5.30.1'
+    ModuleVersion           = '22.5.31.1'
     CompatiblePSEditions    = @('Desktop')
     GUID                    = '9fe5b9b6-0224-4d87-9018-a8978529f6f5'
     Author                  = 'David Segura . Damien Van Robaeys . Gary Blok . Jérôme Bezet-Torres . Mike Marable . Dean Ellerby . Doug McGee'
@@ -128,9 +128,6 @@
         'Get-MyWindowsPackage',
         'Get-OSD',
         'Get-OSDClass',
-        'Get-OSDCloudREPSDrive',
-        'Get-OSDCloudREPartition',
-        'Get-OSDCloudREVolume',
         'Get-OSDCloudTemplate',
         'Get-OSDCloudWorkspace',
         'Get-OSDDriver',
@@ -161,7 +158,6 @@
         'Get-WSUSXML',
         'Get-WinREPartition',
         'Get-WinREWiFi',
-        'Hide-OSDCloudREDrive',
         'Install-SystemFirmwareUpdate',
         'Invoke-Exe',
         'Invoke-MSCatalogParseDate',
@@ -179,7 +175,6 @@
         'New-CAB',
         'New-CabDevelopment',
         'New-OSDCloudISO',
-        'New-OSDCloudREVolume',
         'New-OSDCloudTemplate',
         'New-OSDCloudUSB',
         'New-OSDCloudWorkspace',
@@ -218,7 +213,6 @@
         'Set-BootmgrTimeout',
         'Set-ClipboardScreenshot',
         'Set-DisRes',
-        'Set-OSDCloudREBootmgr',
         'Set-OSDCloudUnattendAuditMode',
         'Set-OSDCloudUnattendAuditModeAutopilot',
         'Set-OSDCloudUnattendSpecialize',
@@ -228,7 +222,6 @@
         'Set-WinREWiFi',
         'Set-WindowsImageExecutionPolicy',
         'Show-MsSettings',
-        'Show-OSDCloudREDrive',
         'Show-RegistryXML',
         'Start-DiskImageGUI',
         'Start-OOBEDeploy',
