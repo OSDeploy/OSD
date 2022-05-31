@@ -46,49 +46,49 @@ Function osdcloud-InstallDCU {
             {
             $Expand = expand $CabPathIndexModel $DellCabExtractPath\CatalogIndexPCModel.xml
             [xml]$XMLIndexCAB = Get-Content "$DellCabExtractPath\CatalogIndexPCModel.xml" -Verbose
-            $DCUAvailable = $XMLIndexCAB.Manifest.SoftwareComponent | Where-Object {$_.ComponentType.value -eq ""}
             $DCUAppsAvailable = $XMLIndexCAB.Manifest.SoftwareComponent | Where-Object {$_.ComponentType.value -eq "APAC"}
             #This is using the x86 Windows version, not the UWP app.  You can change this if you like
             $AppDCUVersion = ([Version[]]$Version = ($DCUAppsAvailable | Where-Object {$_.path -match 'command-update' -and $_.SupportedOperatingSystems.OperatingSystem.osArch -match "x64" -and $_.Description.Display.'#cdata-section' -notmatch "UWP"}).vendorVersion) | Sort-Object | Select-Object -Last 1
             $AppDCU = $DCUAppsAvailable | Where-Object {$_.path -match 'command-update' -and $_.SupportedOperatingSystems.OperatingSystem.osArch -match "x64" -and $_.Description.Display.'#cdata-section' -notmatch "UWP" -and $_.Description.Display.'#cdata-section' -notmatch "Universal" -and $_.vendorVersion -eq $AppDCUVersion}
-            $AppDCMVersion = ([Version[]]$Version = ($DCUAppsAvailable | Where-Object {$_.path -match 'Command-Monitor' -and $_.SupportedOperatingSystems.OperatingSystem.osArch -match "x64"} | Select-Object -Property vendorVersion).vendorVersion) | Sort-Object | Select-Object -last 1
-            
-            #Lets CHeck DCU First
-            $DellItem = $AppDCU
+            if ($AppDCU){
+                $DellItem = $AppDCU
+                [Version]$DCUVersion = $DellItem.vendorVersion
+                $DCUReleaseDate = $(Get-Date $DellItem.releaseDate -Format 'yyyy-MM-dd')               
+                $TargetLink = "http://downloads.dell.com/$($DellItem.path)"
+                $TargetFileName = ($DellItem.path).Split("/") | Select-Object -Last 1
 
-            [Version]$DCUVersion = $DellItem.vendorVersion
-            $DCUReleaseDate = $(Get-Date $DellItem.releaseDate -Format 'yyyy-MM-dd')               
-            $TargetLink = "http://downloads.dell.com/$($DellItem.path)"
-            $TargetFileName = ($DellItem.path).Split("/") | Select-Object -Last 1
+                Write-Host " New Update available: Installed = $CurrentVersion DCU = $DCUVersion" -ForegroundColor Yellow 
+                Write-Output "  Title: $($DellItem.Name.Display.'#cdata-section')"
+                Write-Host "  ----------------------------" -ForegroundColor Cyan
+                Write-Output "   Severity: $($DellItem.Criticality.Display.'#cdata-section')"
+                Write-Output "   FileName: $TargetFileName"
+                Write-Output "    Release Date: $DCUReleaseDate"
+                Write-Output "   KB: $($DellItem.releaseID)"
+                Write-Output "   Link: $TargetLink"
+                Write-Output "   Info: $($DellItem.ImportantInfo.URL)"
+                Write-Output "    Version: $DCUVersion "
 
-            Write-Host " New Update available: Installed = $CurrentVersion DCU = $DCUVersion" -ForegroundColor Yellow 
-            Write-Output "  Title: $($DellItem.Name.Display.'#cdata-section')"
-            Write-Host "  ----------------------------" -ForegroundColor Cyan
-            Write-Output "   Severity: $($DellItem.Criticality.Display.'#cdata-section')"
-            Write-Output "   FileName: $TargetFileName"
-            Write-Output "    Release Date: $DCUReleaseDate"
-            Write-Output "   KB: $($DellItem.releaseID)"
-            Write-Output "   Link: $TargetLink"
-            Write-Output "   Info: $($DellItem.ImportantInfo.URL)"
-            Write-Output "    Version: $DCUVersion "
+                #Build Required Info to Download and Update CM Package
+                $TargetFilePathName = "$($DellCabExtractPath)\$($TargetFileName)"
+                Invoke-WebRequest -Uri $TargetLink -OutFile $TargetFilePathName -UseBasicParsing -Verbose -Proxy $ProxyServer
 
-            #Build Required Info to Download and Update CM Package
-            $TargetFilePathName = "$($DellCabExtractPath)\$($TargetFileName)"
-            Invoke-WebRequest -Uri $TargetLink -OutFile $TargetFilePathName -UseBasicParsing -Verbose -Proxy $ProxyServer
-
-            #Confirm Download
-            if (Test-Path $TargetFilePathName)
-                {
-                $LogFileName = $TargetFilePathName.replace(".exe",".log")
-                $Arguments = "/s /l=$LogFileName"
-                Write-Output "Starting Update"
-                write-output "Log file = $LogFileName"
-                $Process = Start-Process "$TargetFilePathName" $Arguments -Wait -PassThru
-                write-output "Update Complete with Exitcode: $($Process.ExitCode)"
+                #Confirm Download
+                if (Test-Path $TargetFilePathName)
+                    {
+                    $LogFileName = $TargetFilePathName.replace(".exe",".log")
+                    $Arguments = "/s /l=$LogFileName"
+                    Write-Output "Starting Update"
+                    write-output "Log file = $LogFileName"
+                    $Process = Start-Process "$TargetFilePathName" $Arguments -Wait -PassThru
+                    write-output "Update Complete with Exitcode: $($Process.ExitCode)"
+                    }
+                else
+                    {
+                    Write-Host " FAILED TO DOWNLOAD Update" -ForegroundColor Red
+                    }
                 }
-            else
-                {
-                Write-Host " FAILED TO DOWNLOAD Update" -ForegroundColor Red
+            else{
+            Write-Host "NO DCU Found in XML to download"
                 }
             }
         else
@@ -123,8 +123,13 @@ function osdcloud-RunDCU {
     @{ReturnCode = "1002";  Description = "An error occurred while downloading a file during the apply updates operation."; Resolution = "Check your network connection, ensure there is Internet connectivity, and retry the command."}
 
     )
+    $LogFolder = "c:\OSDCloud\Logs"
+    $LogFile = "$LogFolder\DCU.log"
     $ProcessPath = 'C:\Program Files (x86)\Dell\CommandUpdate\dcu-cli.exe'
-    $ProcessArgs = '/applyUpdates -updateType=bios,firmware,drivers'
+    $ProcessArgs = "/applyUpdates -updateType=firmware,driver -outputLog=$logfile -reboot=enable"
+
+    try {[void][System.IO.Directory]::CreateDirectory($LogFolder)}
+    catch {throw}
 
     $DCU = Start-Process -FilePath $ProcessPath -ArgumentList $ProcessArgs -Wait -PassThru -NoNewWindow
     $DCUReturn = $DCUReturnTablet | Where-Object {$_.ReturnCode -eq $DCU.ExitCode}
