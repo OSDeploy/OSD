@@ -35,7 +35,7 @@ function Start-OSDCloudGUI {
     Start-Sleep -Seconds 2
     #================================================
 }
-function Start-HPOSDCloudGUI {
+function Start-OSDCloudGUIDev {
     <#
     .SYNOPSIS
     OSDCloud imaging using the command line
@@ -54,7 +54,7 @@ function Start-HPOSDCloudGUI {
     param (
         #The custom Brand for OSDCloudGUI
         [Alias('BrandingTitle')]
-        [System.String]$Brand = 'HPOSDCloud',
+        [System.String]$Brand = 'OSDCloudDev',
         
         #Color for the OSDCloudGUI Brand
         [Alias('BrandingColor')]
@@ -68,7 +68,7 @@ function Start-HPOSDCloudGUI {
         Color   = $Color
     }
     #================================================
-    & "$($MyInvocation.MyCommand.Module.ModuleBase)\Projects\OSDCloudHP\MainWindow.ps1"
+    & "$($MyInvocation.MyCommand.Module.ModuleBase)\Projects\OSDCloudDev\MainWindow.ps1"
     Start-Sleep -Seconds 2
     #================================================
 }

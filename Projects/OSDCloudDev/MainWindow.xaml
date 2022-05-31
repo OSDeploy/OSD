@@ -1,0 +1,421 @@
+﻿<Window x:Class="OSDCloudGUI.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:OSDCloudGUI"
+        mc:Ignorable="d"
+        BorderThickness="0"
+        RenderTransformOrigin="0.5,0.5"
+        ResizeMode="NoResize"
+        WindowStartupLocation = "CenterScreen"
+        Title="OSDCloudGUI version on Manufacturer Model Product" Height="380" Width="820">
+    <Window.Resources>
+        <ResourceDictionary>
+            <Style TargetType="{x:Type Button}">
+                <Setter Property="Background"
+                        Value="{DynamicResource FlatButtonBackgroundBrush}" />
+                <Setter Property="BorderThickness"
+                        Value="0" />
+                <Setter Property="FontSize"
+                        Value="{DynamicResource FlatButtonFontSize}" />
+                <Setter Property="Foreground"
+                        Value="{DynamicResource FlatButtonForegroundBrush}" />
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="{x:Type Button}">
+                            <Border x:Name="Border"
+                                    Margin="0"
+                                    Background="{TemplateBinding Background}"
+                                    BorderBrush="{TemplateBinding BorderBrush}"
+                                    CornerRadius="5"
+                                    BorderThickness="{TemplateBinding BorderThickness}"
+                                    SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}">
+                                <ContentPresenter x:Name="ContentPresenter"
+                                                  ContentTemplate="{TemplateBinding ContentTemplate}"
+                                                  Content="{TemplateBinding Content}"
+                                                  HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                                  Margin="{TemplateBinding Padding}"
+                                                  VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
+                            </Border>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+                <Style.Triggers>
+                    <Trigger Property="IsMouseOver"
+                             Value="True">
+                        <!-- Windows 11 Theme Dark Blue -->
+                        <Setter Property="Background"
+                                Value="#003E92" />
+                    </Trigger>
+                    <Trigger Property="IsMouseOver"
+                             Value="False">
+                        <!-- Windows 11 Theme Blue -->
+                        <Setter Property="Background"
+                                Value="#0067C0" />
+                    </Trigger>
+                    <Trigger Property="IsPressed"
+                             Value="True">
+                        <Setter Property="Background"
+                                Value="{DynamicResource FlatButtonPressedBackgroundBrush}" />
+                        <Setter Property="Foreground"
+                                Value="{DynamicResource FlatButtonPressedForegroundBrush}" />
+                    </Trigger>
+                    <Trigger Property="IsEnabled"
+                             Value="False">
+                        <Setter Property="Foreground"
+                                Value="{DynamicResource GrayBrush2}" />
+                    </Trigger>
+                </Style.Triggers>
+            </Style>
+            <Style TargetType="{x:Type ComboBox}">
+                <Setter Property="FontFamily"
+                        Value="Segoe UI" />
+            </Style>
+            <Style TargetType="{x:Type Label}">
+                <Setter Property="FontFamily"
+                        Value="Segoe UI" />
+            </Style>
+            <Style TargetType="{x:Type TextBox}">
+                <Setter Property="FontFamily"
+                        Value="Segoe UI" />
+            </Style>
+            <Style TargetType="{x:Type Window}">
+                <Setter Property="FontFamily"
+                        Value="Segoe UI" />
+                <Setter Property="FontSize"
+                        Value="16" />
+                <Setter Property="Background"
+                        Value="White" />
+                <Setter Property="Foreground"
+                        Value="Black" />
+            </Style>
+        </ResourceDictionary>
+    </Window.Resources>
+    <Window.Background>
+        <RadialGradientBrush GradientOrigin="0.2,0.2"
+                             Center="0.4,0.1"
+                             RadiusX="0.7"
+                             RadiusY="0.8">
+            <RadialGradientBrush.RelativeTransform>
+                <TransformGroup>
+                    <ScaleTransform CenterY="0.5"
+                                    CenterX="0.5" />
+                    <SkewTransform CenterY="0.5"
+                                   CenterX="0.5" />
+                    <RotateTransform Angle="-40.601"
+                                     CenterY="0.5"
+                                     CenterX="0.5" />
+                    <TranslateTransform />
+                </TransformGroup>
+            </RadialGradientBrush.RelativeTransform>
+            <GradientStop Color="White" />
+            <GradientStop Color="#FFF9FFFE"
+                          Offset="0.056" />
+            <GradientStop Color="#FFF8FEFF"
+                          Offset="0.776" />
+            <GradientStop Color="#FFF4FAFF"
+                          Offset="0.264" />
+            <GradientStop Color="White"
+                          Offset="0.506" />
+            <GradientStop Color="AliceBlue"
+                          Offset="1" />
+        </RadialGradientBrush>
+    </Window.Background>
+    <DockPanel>
+        <Menu DockPanel.Dock="Top">
+            <MenuItem Header="Deployment Options">
+                <MenuItem Name="ZTI"
+                          Header="Clear-Disk skip confirmation"
+                          IsCheckable="True"
+                          IsChecked="False" />
+                <MenuItem Name="Restart"
+                          Header="Restart-Computer when complete"
+                          IsCheckable="True"
+                          IsChecked="True" />
+                <MenuItem Name="ScreenshotCapture"
+                          Header="Screenshot Capture"
+                          IsCheckable="True"
+                          IsChecked="False" />
+            </MenuItem>
+            <MenuItem Header="Microsoft Update Catalog">
+                <MenuItem Name="MSCatalogDiskDrivers"
+                          Header="Disk Drivers"
+                          IsCheckable="True"
+                          IsChecked="True" />
+                <MenuItem Name="MSCatalogNetDrivers"
+                          Header="Network Drivers"
+                          IsCheckable="True"
+                          IsChecked="True" />
+                <MenuItem Name="MSCatalogScsiDrivers"
+                          Header="SCSIAdapter Drivers"
+                          IsCheckable="True"
+                          IsChecked="True" />
+                <MenuItem Name="MSCatalogFirmware"
+                          Header="System Firmware"
+                          IsCheckable="True"
+                          IsChecked="False" />
+            </MenuItem>
+        </Menu>
+    <Grid Margin="10,0,10,10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="1" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="1" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="1" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <!-- Row 0 Title -->
+        <Label Grid.Row="0"
+               Name="BrandingTitleControl"
+               Content="OSDCloud"
+               FlowDirection="RightToLeft"
+               FontSize="24"
+               FontWeight="Bold"
+               Foreground="#003E92"
+               HorizontalAlignment="Right"
+               VerticalAlignment="Top" />
+
+        <!-- Row 1 Gridline -->
+        <Line Grid.Row="1"
+              X1="0"
+              Y1="0"
+              X2="1"
+              Y2="0"
+              Stroke="Gainsboro"
+              StrokeThickness="1"
+              Stretch="Uniform"></Line>
+
+        <!-- Row 2 OperatingSystem -->
+        <StackPanel Grid.Row="2"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Top">
+            <!-- Operating System -->
+            <StackPanel Orientation="Horizontal"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Top">
+                <Label Name="OperatingSystemLabel"
+                       Content="Operating System"
+                       FontSize="18"
+                       FontWeight="Bold"
+                       Foreground="#003E92"
+                       Margin="5"
+                       Padding="2"
+                       Width="155"
+                       FlowDirection="RightToLeft" />
+                <ComboBox Name="OperatingSystemCombobox"
+                          FontSize="16"
+                          Margin="5"
+                          Padding="2"
+                          SelectedIndex="0" >
+                        <ComboBoxItem Content="OSDCloud Windows 10 x64"/>
+                        <ComboBoxItem Content="OSDCloud Windows 11 x64"/>
+                </ComboBox>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Top">
+                <Label Name="OperatingSystemDetailsLabel"
+                       Content=""
+                       FontSize="18"
+                       FontWeight="Bold"
+                       Foreground="#003E92"
+                       Margin="5"
+                       Padding="2"
+                       Width="155" />
+                <ComboBox Name="OSBuildCombobox"
+                          FontSize="16"
+                          Margin="5"
+                          Padding="2" />
+                <ComboBox Name="OSEditionCombobox"
+                          FontSize="16"
+                          Margin="5"
+                          Padding="2" />
+                <ComboBox Name="OSLanguageCombobox"
+                          FontSize="16"
+                          Margin="5"
+                          Padding="2" />
+                <ComboBox Name="OSLicenseCombobox"
+                          FontSize="16"
+                          Margin="5"
+                          Padding="2" />
+                <ComboBox Name="ImageNameCombobox"
+                          FontSize="16"
+                          Margin="5"
+                          Padding="2" />
+                <Label Name="ImageIndexLabel"
+                       Content="Index"
+                       FontSize="18"
+                       FontWeight="Bold"
+                       Foreground="#003E92"
+                       Margin="5"
+                       Padding="2" />
+                <TextBox Name="ImageIndexTextbox"
+                         FontSize="16"
+                         Margin="5"
+                         Padding="2"
+                         Text="Auto" />
+            </StackPanel>
+            <StackPanel HorizontalAlignment="Left"
+                        VerticalAlignment="Top">
+            </StackPanel>
+        </StackPanel>
+
+        <!-- Row 3 Gridline -->
+        <Line Grid.Row="3"
+              X1="0"
+              Y1="0"
+              X2="1"
+              Y2="0"
+              Stroke="Gainsboro"
+              StrokeThickness="1"
+              Stretch="Uniform">
+        </Line>
+
+        <!-- Row 4 Driver Pack -->
+        <StackPanel Grid.Row="4"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Top">
+            <!-- Driver Pack -->
+            <StackPanel Orientation="Horizontal"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Top">
+                <Label Name="DriverPackLabel"
+                       Content="Driver Pack"
+                       FontSize="18"
+                       FontWeight="Bold"
+                       Foreground="#003E92"
+                       Margin="5"
+                       Padding="2"
+                       Width="155"
+                       FlowDirection="RightToLeft" />
+                <ComboBox Name="DriverPackCombobox"
+                          FontSize="16"
+                          Margin="5"
+                          Padding="2"
+                          SelectedIndex="1" >
+                    <ComboBoxItem Content="None"/>
+                    <ComboBoxItem Content="Microsoft Update Catalog"/>
+                </ComboBox>
+            </StackPanel>
+        </StackPanel>
+
+        <!-- Row 5 Gridline -->
+        <Line Grid.Row="5"
+              X1="0"
+              Y1="0"
+              X2="1"
+              Y2="0"
+              Stroke="Gainsboro"
+              StrokeThickness="1"
+              Stretch="Uniform">
+        </Line>
+
+        <!-- Row 6 Options -->
+        <StackPanel Grid.Row="6"
+                    Orientation="Horizontal"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Top">
+            <Label Name="DeploymentOptionsLabel"
+                   Content=""
+                   FontSize="18"
+                   FontWeight="Bold"
+                   Foreground="#003E92"
+                   HorizontalAlignment="Left"
+                   Margin="5"
+                   Padding="2"
+                   Width="155"
+                   FlowDirection="RightToLeft" />
+        </StackPanel>
+        <StackPanel Grid.Row="6"
+                    Orientation="Vertical"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Top">
+            <!-- AutopilotJson -->
+            <StackPanel HorizontalAlignment="Left"
+                        VerticalAlignment="Center"
+                        Orientation="Horizontal"
+                        Margin="125,5,5,0">
+                <Label Name="AutopilotJsonLabel"
+                       Content="Autopilot JSON"
+                       FontSize="15"
+                       Foreground="Black"
+                       HorizontalAlignment="Right"
+                       Margin="5"
+                       Padding="2"
+                       VerticalAlignment="Center"
+                       Width="145"
+                       FlowDirection="RightToLeft" />
+                <ComboBox Name="AutopilotJsonCombobox"
+                          FontSize="14"
+                          Margin="5"
+                          Padding="2" />
+            </StackPanel>
+            <!-- OOBEDeployJson -->
+            <StackPanel HorizontalAlignment="Left"
+                        VerticalAlignment="Center"
+                        Orientation="Horizontal"
+                        Margin="125,5,5,0">
+                <Label Name="OOBEDeployLabel"
+                       Content="OOBEDeploy"
+                       FontSize="15"
+                       Foreground="Black"
+                       Margin="5"
+                       Padding="2"
+                       VerticalAlignment="Center"
+                       Width="145"
+                       FlowDirection="RightToLeft" />
+                <ComboBox Name="OOBEDeployCombobox"
+                          FontSize="14"
+                          Margin="5"
+                          Padding="2" />
+            </StackPanel>
+            <!-- AutopilotOOBEJson -->
+            <StackPanel HorizontalAlignment="Left"
+                        VerticalAlignment="Center"
+                        Orientation="Horizontal"
+                        Margin="125,5,5,0">
+                <Label Name="AutopilotOOBELabel"
+                       Content="AutopilotOOBE"
+                       FontSize="15"
+                       Foreground="Black"
+                       Margin="5"
+                       Padding="2"
+                       VerticalAlignment="Center"
+                       Width="145"
+                       FlowDirection="RightToLeft" />
+                <ComboBox Name="AutopilotOOBECombobox"
+                          FontSize="14"
+                          Margin="5"
+                          Padding="2" />
+            </StackPanel>
+        </StackPanel>
+
+        <!-- Row 7 Gridline -->
+        <Line Grid.Row="7"
+              X1="0"
+              Y1="0"
+              X2="1"
+              Y2="0"
+              Stroke="Gainsboro"
+              StrokeThickness="1"
+              Stretch="Uniform"></Line>
+        
+        <!-- Row 8 Start -->
+        <Button Grid.Row="8"
+                Name="StartButton"
+                Content="Start"
+                FontSize="18"
+                Foreground="White"
+                Height="40"
+                Width="130"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Bottom" />
+        </Grid>
+    </DockPanel>
+</Window>
