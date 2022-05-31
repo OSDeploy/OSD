@@ -260,13 +260,6 @@ function Show-PowershellWindow() {
 #================================================
 #   StorageAccounts
 #================================================
-if ($Global:AzOSDCloudBlobBootImage) {
-
-}
-else {
-    Break
-}
-
 $formMainWindowControlStorageAccountCombobox.Items.Clear()
 $GuiStorageAccounts = @()
 foreach ($Item in $Global:AzOSDCloudBlobBootImage) {
@@ -343,11 +336,6 @@ $formMainWindowControlContainerCombobox.add_SelectionChanged({
 #================================================
 $formMainWindowControlStartButton.add_Click({
 
-    if ($formMainWindowControlScreenshotCapture.IsChecked) {
-        Start-ScreenPNGProcess -Directory "$env:TEMP\Screenshots"
-        Start-Sleep -Seconds 3
-    }
-
     $formMainWindow.Close()
     Show-PowershellWindow
     #================================================
@@ -362,17 +350,14 @@ $formMainWindowControlStartButton.add_Click({
     #================================================
     #   Global Variables
     #================================================
-    $Global:StartOSDCloud = $null
-    $Global:StartOSDCloud = [ordered]@{
+    $Global:StartOSDCloudRE = $null
+    $Global:StartOSDCloudRE = [ordered]@{
         AzOSDCloudBlobBootImage     = $Global:AzOSDCloudBlobBootImage
-        AzOSDCloudBootImage             = $Global:AzOSDCloudBootImage
-        OSImageIndex                = $formMainWindowControlImageIndexCombobox.Text
+        AzOSDCloudBootImage         = $Global:AzOSDCloudBootImage
         Restart                     = $formMainWindowControlRestart.IsChecked
-        ScreenshotCapture           = $formMainWindowControlScreenshotCapture.IsChecked
-        ZTI                         = $formMainWindowControlZTI.IsChecked
     }
-    $Global:StartOSDCloud | Out-Host
-    #Call Invoke-OSDCloud at this point
+    $Global:StartOSDCloudRE | Out-Host
+    #Call Invoke-OSDCloudRE at this point
 })
 #================================================
 #   Customizations

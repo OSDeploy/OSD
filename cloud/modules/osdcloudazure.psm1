@@ -291,11 +291,11 @@ function Get-OSDCloudAzureResources {
         Break
     }
 }
-function Get-OSDCloudREAzureResources {
+function Get-OSDCloudREAzure {
     [CmdletBinding()]
     param ()
     Write-Host -ForegroundColor DarkGray "========================================================================="
-    Write-Host -ForegroundColor Green "Get-OSDCloudREAzureResources"
+    Write-Host -ForegroundColor Green "Get-OSDCloudREAzure"
 
     if ($env:SystemDrive -eq 'X:') {
         $OSDCloudLogs = "$env:SystemDrive\OSDCloud\Logs"
