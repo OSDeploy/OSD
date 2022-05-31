@@ -229,7 +229,7 @@
                     </ComboBox>
                 </StackPanel>
 
-            <!-- Blob -->
+            <!-- Container -->
             <StackPanel Orientation="Horizontal"
                     HorizontalAlignment="Left"
                     VerticalAlignment="Top">
@@ -273,29 +273,29 @@
                 </ComboBox>
             </StackPanel>
             
-                <!-- Index -->
-                <StackPanel Orientation="Horizontal"
-                        HorizontalAlignment="Left"
-                        VerticalAlignment="Top">
-                    <Label Name="ImageIndexLabel"
-                       Content="Index"
-                       FontSize="18"
-                       FontWeight="Bold"
-                       Foreground="#003E92"
-                       Margin="5"
-                       Padding="2"
-                       Width="150"
-                       FlowDirection="RightToLeft" />
-                    <ComboBox Name="ImageIndexCombobox"
-                          IsEditable="True"
-                          FontSize="16"
-                          Margin="5"
-                          Padding="2"
-                          SelectedIndex="0" >
-                        <ComboBoxItem Content="Auto"/>
-                    </ComboBox>
-                </StackPanel>
+            <!-- Index -->
+            <StackPanel Orientation="Horizontal"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Top">
+                <Label Name="ImageIndexLabel"
+                    Content="Index"
+                    FontSize="18"
+                    FontWeight="Bold"
+                    Foreground="#003E92"
+                    Margin="5"
+                    Padding="2"
+                    Width="150"
+                    FlowDirection="RightToLeft" />
+                <ComboBox Name="ImageIndexCombobox"
+                        IsEditable="True"
+                        FontSize="16"
+                        Margin="5"
+                        Padding="2"
+                        SelectedIndex="0" >
+                    <ComboBoxItem Content="Auto"/>
+                </ComboBox>
             </StackPanel>
+        </StackPanel>
 
         <!-- Row 3 Gridline -->
         <Line Grid.Row="3"

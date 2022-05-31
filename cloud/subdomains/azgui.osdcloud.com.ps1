@@ -95,7 +95,7 @@ if ($WindowsPhase -eq 'OOBE') {
 #region Windows
 if ($WindowsPhase -eq 'Windows') {
     Connect-OSDCloudAzure
-    Get-OSDCloudREAzureResources
+    Get-OSDCloudREAzure
     $null = Stop-Transcript -ErrorAction Ignore
     Start-OSDCloudREAzure
 }
