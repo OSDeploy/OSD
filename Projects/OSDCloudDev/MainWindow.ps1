@@ -321,6 +321,27 @@ if ($HPEnterprise){
     $TPM = osdcloud-DetermineHPTPM
     $BIOS = osdcloud-DetermineHPBIOSUpdateAvailable
     $formMainWindowControlHPFunction.Visibility = 'Visible'
+    if ($TPM -eq $false){
+        $formMainWindowControlHPTPMUpdate.Header = "HP TPM Firmware Already Current"
+        $formMainWindowControlHPTPMUpdate.IsEnabled = $false
+        }
+    else
+        {
+        $formMainWindowControlHPTPMUpdate.Visibility = 'Visible'
+        $formMainWindowControlHPTPMUpdate.Header = "HP Update TPM Firmware: $TPM"
+        }
+    if ($BIOS -eq $false){
+        $CurrentVer = Get-HPBIOSVersion
+        $formMainWindowControlHPBIOSUpdate.Header = "HP System Firmware already Current: $CurrentVer"
+        $formMainWindowControlHPBIOSUpdate.IsEnabled = $false
+        }
+    else
+        {
+        $LatestVer = (Get-HPBIOSUpdates -Latest).ver
+        $CurrentVer = Get-HPBIOSVersion
+        $formMainWindowControlHPBIOSUpdate.Visibility = 'Visible'
+        $formMainWindowControlHPBIOSUpdate.Header = "HP Update System Firmwware from $CurrentVer to $LatestVer"
+        }
 }
 else{
     $formMainWindowControlHPFunction.Visibility = 'Hidden'
