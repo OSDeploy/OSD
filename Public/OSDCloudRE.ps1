@@ -181,7 +181,7 @@ function Invoke-OSDCloudRE {
     #============================================
     #region Creating a new OSDCloudRE volume
     Write-Host -ForegroundColor DarkGray "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Creating a new OSDCloudRE volume"
-    $Global:OSDCloudRE.Volume = New-OSDCloudREVolume -Verbose -ErrorAction Stop
+    $Global:OSDCloudRE.Volume = New-OSDCloudREVolume -IsoSize $Global:OSDCloudRE.AzOSDCloudBootImage.Length -Verbose -ErrorAction Stop
     #endregion
     #============================================
     #region Test OSDCloudRE PSDrive

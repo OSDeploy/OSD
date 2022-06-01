@@ -121,7 +121,9 @@ function New-OSDCloudREVolume {
     [CmdletBinding()]
     [OutputType([Microsoft.Management.Infrastructure.CimInstance])]
     [OutputType('Microsoft.Management.Infrastructure.CimInstance#ROOT/Microsoft/Windows/Storage/MSFT_Volume')]
-    param ()
+    param (
+        [int32]$IsoSize = 1038090240
+    )
     Write-Verbose $MyInvocation.MyCommand
 
     Block-StandardUser
@@ -129,7 +131,7 @@ function New-OSDCloudREVolume {
     $WindowsPartition = Get-Partition | Where-Object {$env:SystemDrive -match $_.DriveLetter}
     $WindowsDiskNumber = $WindowsPartition.DiskNumber
     $WindowsSizeMax = $WindowsPartition | Get-PartitionSupportedSize | Select-Object -ExpandProperty SizeMax
-    $WindowsShrinkSize = $WindowsSizeMax - 990MB
+    $WindowsShrinkSize = $WindowsSizeMax - $IsoSize - 200MB
     $OSDCloudREVolume = Get-OSDCloudREVolume
     #============================================
     #	Test WindowsPartition
@@ -146,7 +148,7 @@ function New-OSDCloudREVolume {
                 #============================================
                 #	Shrink Windows Partition
                 #============================================
-                Write-Verbose "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Shrinking Windows partition 990MB"
+                Write-Verbose "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Shrinking Windows partition"
                 $WindowsPartition | Resize-Partition -Size $WindowsShrinkSize
                 #============================================
                 #	Test WindowsPartition
