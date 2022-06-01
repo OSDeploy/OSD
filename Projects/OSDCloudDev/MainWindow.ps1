@@ -359,7 +359,8 @@ if ($HPEnterprise){
     $formMainWindowControlOption_Name_6.IsEnabled = $false 
     $formMainWindowControlOption_Name_6.Visibility = "Hidden" 
 }
-<#elseif ($DellEnterprise){
+
+elseif ($DellEnterprise){
     $formMainWindowControlManufacturerFunction.Header = "Dell Functions"
     $formMainWindowControlManufacturerFunction.Visibility = 'Visible'
 
@@ -382,7 +383,7 @@ if ($HPEnterprise){
     $formMainWindowControlOption_Name_6.Visibility = "Hidden"
 
 }
-#>
+
 else{
     $formMainWindowControlManufacturerFunction.Visibility = 'Hidden'
     $formMainWindowControlManufacturerFunction.IsEnabled = $false
