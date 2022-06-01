@@ -4,7 +4,7 @@
 .DESCRIPTION
     OSDCloud Cloud Module for functions.osdcloud.com
 .NOTES
-    Version 22.5.31.1
+    Version 22.6.1.1
 .LINK
     https://raw.githubusercontent.com/OSDeploy/OSD/master/cloud/modules/_winpestartup.psm1
 .EXAMPLE
