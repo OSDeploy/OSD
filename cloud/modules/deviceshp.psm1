@@ -548,6 +548,52 @@ Function osdcloud-RunHPIA {
         }
     }
 
+function osdcloud-downloadHPIA {
+    $HPIAWebUrl = "https://ftp.hp.com/pub/caps-softpaq/cmit/HPIA.html"
+    $script:TempWorkFolder = "c:\windows\temp\HPIA"
+    [void][System.IO.Directory]::CreateDirectory($TempWorkFolder)
+    $HTML = Invoke-WebRequest –Uri $HPIAWebUrl –ErrorAction Stop
+            
+    $HPIASoftPaqNumber = ($HTML.Links | Where {$_.href -match "hp-hpia-"}).outerText
+    $HPIADownloadURL = ($HTML.Links | Where {$_.href -match "hp-hpia-"}).href
+    $HPIAFileName = $HPIADownloadURL.Split('/')[-1]
+    Write-Host "Download URL is $HPIADownloadURL" -ForegroundColor Green
+    
+    Write-Host "Downloading HPIA" -ForegroundColor Green
+    if (!(Test-Path -Path "$TempWorkFolder\$HPIAFileName")){
+        try 
+        {
+            $ExistingBitsJob = Get-BitsTransfer –Name "$HPIAFileName" –AllUsers –ErrorAction SilentlyContinue
+            If ($ExistingBitsJob)
+            {
+                Remove-BitsTransfer –BitsJob $ExistingBitsJob
+            }
+            $BitsJob = Start-BitsTransfer –Source $HPIADownloadURL –Destination $TempWorkFolder\$HPIAFileName –Asynchronous –DisplayName "$HPIAFileName" –Description "HPIA download" –RetryInterval 60 –ErrorAction Stop 
+            do {
+                Start-Sleep –Seconds 5
+                $Progress = [Math]::Round((100 * ($BitsJob.BytesTransferred / $BitsJob.BytesTotal)),2)
+            } until ($BitsJob.JobState -in ("Transferred","Error"))
+            If ($BitsJob.JobState -eq "Error")
+            {
+                CMTraceLog –Message "BITS tranfer failed: $($BitsJob.ErrorDescription)" –Component "Download" –Type 3
+            }
+            Complete-BitsTransfer –BitsJob $BitsJob
+            Write-Host "BITS transfer is complete" -ForegroundColor Green
+        }
+        catch 
+        {
+            Write-Host "Failed to start a BITS transfer for the HPIA: $($_.Exception.Message)" -ForegroundColor Red
+        }
+        if (!(Test-Path -Path $TempWorkFolder\$HPIAFileName)){
+            write-host "Failed to download HPIA using BITS, trying WebRequest"  -ForegroundColor yellow
+            Invoke-WebRequest -UseBasicParsing -uri $HPIADownloadURL -OutFile $TempWorkFolder\$HPIAFileName -ErrorAction Stop
+        }
+    }
+    else
+        {
+        Write-Host "$HPIAFileName already downloaded, skipping step" -ForegroundColor Green
+        }
+    }    
 
 #endregion
 #=================================================

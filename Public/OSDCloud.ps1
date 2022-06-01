@@ -1048,6 +1048,7 @@ function Invoke-OSDCloud {
         try {[void][System.IO.Directory]::CreateDirectory($ConfigPath)}
         catch {}
         $HPHashVar | Out-File $ConfigFile
+        osdcloud-downloadHPIA
     }
     <#
     #Stage Firmware Update for Next Reboot
