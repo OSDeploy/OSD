@@ -777,11 +777,11 @@ $formMainWindowControlStartButton.add_Click({
         MSCatalogNetDrivers         = $formMainWindowControlMSCatalogNetDrivers.IsChecked
         MSCatalogScsiDrivers        = $formMainWindowControlMSCatalogScsiDrivers.IsChecked
         MSCatalogFirmware           = $formMainWindowControlMSCatalogFirmware.IsChecked
-        HPIADrivers                 = $formMainWindowControlHPIADrivers.IsChecked
-        HPIAFirmware                = $formMainWindowControlHPIAFirmware.IsChecked
-        HPIASoftware                = $formMainWindowControlHPIASoftware.IsChecked
-        HPTPMUpdate                 = $formMainWindowControlHPTPMUpdate.IsChecked
-        HPBIOSUpdate                = $formMainWindowControlHPBIOSUpdate.IsChecked
+        HPIADrivers                 = $formMainWindowControlOption_Name_1.IsChecked
+        HPIAFirmware                = $formMainWindowControlOption_Name_2.IsChecked
+        HPIASoftware                = $formMainWindowControlOption_Name_3.IsChecked
+        HPTPMUpdate                 = $formMainWindowControlOption_Name_4.IsChecked
+        HPBIOSUpdate                = $formMainWindowControlOption_Name_5.IsChecked
         OOBEDeployJsonChildItem     = $OOBEDeployJsonChildItem
         OOBEDeployJsonItem          = $OOBEDeployJsonItem
         OOBEDeployJsonName          = $OOBEDeployJsonName
