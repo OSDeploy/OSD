@@ -9,7 +9,7 @@
         RenderTransformOrigin="0.5,0.5"
         ResizeMode="NoResize"
         WindowStartupLocation = "CenterScreen"
-        Title="OSDCloudREAzure version on Manufacturer Model Product" Height="270" Width="500">
+        Title="OSDCloudREAzure version on Manufacturer Model Product" Height="270" Width="620">
     <Window.Resources>
         <ResourceDictionary>
             <Style TargetType="{x:Type Button}">

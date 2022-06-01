@@ -181,7 +181,7 @@ function Invoke-OSDCloudRE {
     #============================================
     #region Creating a new OSDCloudRE volume
     Write-Host -ForegroundColor DarkGray "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Creating a new OSDCloudRE volume"
-    $Global:OSDCloudRE.Volume = New-OSDCloudREVolume -IsoSize $Global:OSDCloudRE.AzOSDCloudBootImage.Length -Verbose -ErrorAction Stop
+    $Global:OSDCloudRE.Volume = New-OSDCloudREVolume -IsoSize $Global:OSDCloudRE.AzOSDCloudBootImage.Length -ErrorAction Stop
     #endregion
     #============================================
     #region Test OSDCloudRE PSDrive
@@ -215,7 +215,7 @@ function Invoke-OSDCloudRE {
     #endregion
     #============================================
     #region Remove Read-Only Attribute
-    Write-Host -ForegroundColor DarkGray "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Removing Read Only attributes in ($Global:OSDCloudRE.PSDriveRoot)"
+    Write-Host -ForegroundColor DarkGray "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Removing Read Only attributes in $($Global:OSDCloudRE.PSDriveRoot)"
     Get-ChildItem -Path $Global:OSDCloudRE.PSDriveRoot -File -Recurse -Force -ErrorAction Ignore | foreach {
         Set-ItemProperty -Path $_.FullName -Name IsReadOnly -Value $false -Force -ErrorAction Ignore
     }
