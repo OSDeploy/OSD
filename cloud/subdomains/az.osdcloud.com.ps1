@@ -35,6 +35,7 @@ param()
 #Script Information
 $ScriptName = 'az.osdcloud.com'
 $ScriptVersion = '22.5.31.1'
+#TODO: Exclude Windows Images smaller than 3GB
 #=================================================
 #region Initialize
 
@@ -67,7 +68,7 @@ if ($WindowsPhase -eq 'WinPE') {
     Get-OSDCloudAzureResources
     #Stop the startup Transcript.  OSDCloud will create its own
     $null = Stop-Transcript -ErrorAction Ignore
-    Start-OSDCloudAzureCLI
+    Start-OSDCloudAzure
 }
 #endregion
 #=================================================
@@ -94,7 +95,9 @@ if ($WindowsPhase -eq 'OOBE') {
 #region Windows
 if ($WindowsPhase -eq 'Windows') {
     Connect-OSDCloudAzure
+    Get-OSDCloudAzureResources
     $null = Stop-Transcript -ErrorAction Ignore
+    Start-OSDCloudAzure
 }
 #endregion
 #=================================================
