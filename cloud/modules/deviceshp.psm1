@@ -549,10 +549,13 @@ Function osdcloud-RunHPIA {
     }
 
 function osdcloud-downloadHPIA {
+    $null = New-Item –Path "HKLM:\SOFTWARE\Policies\Microsoft" –Name "Internet Explorer" –Force
+    $null = New-Item –Path "HKLM:\SOFTWARE\Policies\Microsoft\Internet Explorer" –Name "Main" –Force
+    $null = New-ItemProperty –Path "HKLM:\SOFTWARE\Policies\Microsoft\Internet Explorer\Main" –Name "DisableFirstRunCustomize" –PropertyType DWORD –Value 1 –Force
     $HPIAWebUrl = "https://ftp.hp.com/pub/caps-softpaq/cmit/HPIA.html"
     $script:TempWorkFolder = "c:\windows\temp\HPIA"
     [void][System.IO.Directory]::CreateDirectory($TempWorkFolder)
-    $HTML = Invoke-WebRequest –Uri $HPIAWebUrl –ErrorAction Stop
+    $HTML = Invoke-WebRequest –Uri $HPIAWebUrl –ErrorAction Stop -UseBasicParsing
             
     $HPIASoftPaqNumber = ($HTML.Links | Where {$_.href -match "hp-hpia-"}).outerText
     $HPIADownloadURL = ($HTML.Links | Where {$_.href -match "hp-hpia-"}).href
