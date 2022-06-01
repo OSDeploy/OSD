@@ -822,6 +822,7 @@ $formMainWindowControlStartButton.add_Click({
         HPIASoftware                = $formMainWindowControlOption_Name_3.IsChecked
         HPTPMUpdate                 = $formMainWindowControlOption_Name_4.IsChecked
         HPBIOSUpdate                = $formMainWindowControlOption_Name_5.IsChecked
+        DCUDrivers                  = $formMainWindowControlOption_Name_1.IsChecked
         OOBEDeployJsonChildItem     = $OOBEDeployJsonChildItem
         OOBEDeployJsonItem          = $OOBEDeployJsonItem
         OOBEDeployJsonName          = $OOBEDeployJsonName
