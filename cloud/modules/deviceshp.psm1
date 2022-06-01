@@ -249,7 +249,7 @@ Function osdcloud-RunHPIA {
         CMTraceLog –Message "Finding info for latest version of HP Image Assistant (HPIA)" –Component "Download"
         try
         {
-            $HTML = Invoke-WebRequest –Uri $HPIAWebUrl –ErrorAction Stop
+            $HTML = Invoke-WebRequest –Uri $HPIAWebUrl –ErrorAction Stop -UseBasicParsing
         }
         catch 
         {
@@ -339,7 +339,7 @@ Function osdcloud-RunHPIA {
         Write-Host "Running HPIA With Args: /Operation:$Operation /Category:$Category /Selection:$Selection /Action:$Action /Silent /ReportFolder:$ReportsFolder /LogFolder:$ReportsFolder" -ForegroundColor Green
         try 
         {
-            $Process = Start-Process –FilePath $TempWorkFolder\HPIA\HPImageAssistant.exe –WorkingDirectory $TempWorkFolder –ArgumentList "/Operation:$Operation /Category:$Category /Selection:$Selection /Action:$Action /Silent /ReportFolder:$ReportsFolder /LogFolder:$ReportsFolder" –NoNewWindow –PassThru –Wait –ErrorAction Stop
+            $Process = Start-Process –FilePath $TempWorkFolder\HPIA\HPImageAssistant.exe –WorkingDirectory $TempWorkFolder –ArgumentList "/Operation:$Operation /Category:$Category /Selection:$Selection /Action:$Action /Noninteractive /Silent /Debug /ReportFolder:$ReportsFolder /LogFolder:$ReportsFolder" –NoNewWindow –PassThru –Wait –ErrorAction Stop
             If ($Process.ExitCode -eq 0)
             {
                 CMTraceLog –Message "Analysis complete" –Component "Update"

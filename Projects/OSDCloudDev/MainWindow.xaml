@@ -210,7 +210,7 @@
                FontWeight="Bold"
                Foreground="#003E92"
                HorizontalAlignment="Left"
-               VerticalAlignment="Center" Grid.Column="2" Margin="261,0,0,0" Width="190" />
+               VerticalAlignment="Center" Grid.Column="2" Margin="240,0,0,0" Width="200" />
 
             <!-- Row 1 Gridline -->
             <Line Grid.Row="1"
@@ -446,6 +446,7 @@
                 Width="130"
                 HorizontalAlignment="Left"
                 VerticalAlignment="Center" Grid.Column="2" Margin="321,0,0,0" />
+            <CheckBox x:Name="DebugCheckBox" Content="Debug Mode" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Row="8"/>
         </Grid>
     </DockPanel>
 </Window>

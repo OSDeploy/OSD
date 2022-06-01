@@ -811,6 +811,7 @@ $formMainWindowControlStartButton.add_Click({
         AutopilotOOBEJsonItem       = $AutopilotOOBEJsonItem
         AutopilotOOBEJsonName       = $AutopilotOOBEJsonName
         AutopilotOOBEJsonObject     = $AutopilotOOBEJsonObject
+        DebugMode                   = $formMainWindowControlDebugCheckBox.IsChecked
         DriverPackName              = $formMainWindowControlDriverPackCombobox.Text
         ImageFileFullName           = $ImageFileFullName
         ImageFileItem               = $ImageFileItem
@@ -844,6 +845,9 @@ $formMainWindowControlStartButton.add_Click({
         ZTI                         = $formMainWindowControlZTI.IsChecked
     }
     #$Global:StartOSDCloudGUI | Out-Host
+    if ($formMainWindowControlDebugCheckBox.IsChecked -eq $true){
+        Invoke-Expression (Invoke-RestMethod -Uri 'https://raw.githubusercontent.com/OSDeploy/OSD/master/cloud/modules/debugmode.psm1')
+    }
     if ($formMainWindowControlScreenshotCapture.IsChecked) {
         $Params = @{
             Screenshot = $true
