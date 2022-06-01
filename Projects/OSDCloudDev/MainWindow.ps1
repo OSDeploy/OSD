@@ -320,28 +320,40 @@ if ($Manufacturer -match "Dell"){$Manufacturer = "Dell"}
 if ($HPEnterprise){
     $TPM = osdcloud-DetermineHPTPM
     $BIOS = osdcloud-DetermineHPBIOSUpdateAvailable
-    $formMainWindowControlHPFunction.Visibility = 'Visible'
+    $formMainWindowControlManufacturerFunction.Header = "HP Functions"
+    $formMainWindowControlManufacturerFunction.Visibility = 'Visible'
+
+    $formMainWindowControlOption_Name_1.Header = "HPIA Drivers"
+    $formMainWindowControlOption_Name_1.IsChecked = $true 
+    $formMainWindowControlOption_Name_2.Header = "HPIA Firmware"
+    $formMainWindowControlOption_Name_2.IsChecked = $true 
+    $formMainWindowControlOption_Name_3.Header = "HPIA Software"
+    $formMainWindowControlOption_Name_3.IsChecked = $false 
+
     if ($TPM -eq $false){
-        $formMainWindowControlHPTPMUpdate.Header = "HP TPM Firmware Already Current"
-        $formMainWindowControlHPTPMUpdate.IsEnabled = $false
+        $formMainWindowControlOption_Name_4.Header = "HP TPM Firmware Already Current"
+        $formMainWindowControlOption_Name_4.IsEnabled = $false
         }
     else
         {
-        $formMainWindowControlHPTPMUpdate.Visibility = 'Visible'
-        $formMainWindowControlHPTPMUpdate.Header = "HP Update TPM Firmware: $TPM"
+        $formMainWindowControlOption_Name_4.Visibility = 'Visible'
+        $formMainWindowControlOption_Name_4.Header = "HP Update TPM Firmware: $TPM"
         }
     if ($BIOS -eq $false){
         $CurrentVer = Get-HPBIOSVersion
-        $formMainWindowControlHPBIOSUpdate.Header = "HP System Firmware already Current: $CurrentVer"
-        $formMainWindowControlHPBIOSUpdate.IsEnabled = $false
+        $formMainWindowControlOption_Name_5.Header = "HP System Firmware already Current: $CurrentVer"
+        $formMainWindowControlOption_Name_5.IsEnabled = $false
         }
     else
         {
         $LatestVer = (Get-HPBIOSUpdates -Latest).ver
         $CurrentVer = Get-HPBIOSVersion
-        $formMainWindowControlHPBIOSUpdate.Visibility = 'Visible'
-        $formMainWindowControlHPBIOSUpdate.Header = "HP Update System Firmwware from $CurrentVer to $LatestVer"
+        $formMainWindowControlOption_Name_5.Visibility = 'Visible'
+        $formMainWindowControlOption_Name_5.Header = "HP Update System Firmwware from $CurrentVer to $LatestVer"
         }
+    
+    $formMainWindowControlOption_Name_6.IsEnabled = $false 
+    $formMainWindowControlOption_Name_6.Visibility = "Hidden" 
 }
 else{
     $formMainWindowControlHPFunction.Visibility = 'Hidden'
