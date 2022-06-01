@@ -356,13 +356,14 @@ if ($HPEnterprise){
     $formMainWindowControlOption_Name_6.Visibility = "Hidden" 
 }
 else{
-    $formMainWindowControlHPFunction.Visibility = 'Hidden'
-    $formMainWindowControlHPFunction.IsEnabled = $false
-    $formMainWindowControlHPIADrivers.IsChecked = $false
-    $formMainWindowControlHPIAFirmware.IsChecked = $false
-    $formMainWindowControlHPIASoftware.IsChecked = $false
-    $formMainWindowControlHPTPMUpdate.IsChecked = $false
-    $formMainWindowControlHPBIOSUpdate.IsChecked = $false
+    $formMainWindowControlManufacturerFunction.Visibility = 'Hidden'
+    $formMainWindowControlManufacturerFunction.IsEnabled = $false
+    $formMainWindowControlOption_Name_1.IsChecked = $false
+    $formMainWindowControlOption_Name_2.IsChecked = $false
+    $formMainWindowControlOption_Name_3.IsChecked = $false
+    $formMainWindowControlOption_Name_4.IsChecked = $false
+    $formMainWindowControlOption_Name_5.IsChecked = $false
+    $formMainWindowControlOption_Name_6.IsChecked = $false
 }
 
 
