@@ -1049,6 +1049,7 @@ function Invoke-OSDCloud {
         catch {}
         $HPHashVar | Out-File $ConfigFile
     }
+    <#
     #Stage Firmware Update for Next Reboot
     if ($Global:OSDCloud.HPBIOSUpdate -eq $true){
     Write-Host -ForegroundColor DarkGray "========================================================================="
@@ -1061,7 +1062,66 @@ function Invoke-OSDCloud {
         Get-HPBIOSUpdates -Flash -Yes -Offline -BitLocker Ignore
         }
     }
+    #>
+    $ConfigPath = "c:\osdcloud\configs"
+    if (Test-Path $ConfigPath){
+        $JSONConfigs = Get-ChildItem -path $ConfigPath -Filter "*.json"
+        if ($JSONConfigs.name -contains "HP.JSON"){
+            $HPJson = Get-Content -Path "$ConfigPath\HP.JSON" |ConvertFrom-Json
+            }
+        }
     
+    $ScriptsPath = "C:\Windows\Setup\scripts"
+    if (!(Test-Path -Path $ScriptsPath)){New-Item -Path $ScriptsPath} 
+    
+    $RunScriptTable = @(
+        @{ Script = "SetupComplete"; BatFile = 'SetupComplete.cmd'; ps1file = 'SetupComplete.ps1';Type = 'Setup'; Path = "$ScriptsPath"}
+    )
+    
+    ForEach ($RunScript in $RunScriptTable)
+        {
+        Write-Output $RunScript.Script
+    
+        $BatFilePath = "$($RunScript.Path)\$($RunScript.batFile)"
+        $PSFilePath = "$($RunScript.Path)\$($RunScript.ps1File)"
+            
+        #Create Batch File to Call PowerShell File
+            
+        New-Item -Path $BatFilePath -ItemType File -Force
+        $CustomActionContent = New-Object system.text.stringbuilder
+        [void]$CustomActionContent.Append('%windir%\System32\WindowsPowerShell\v1.0\powershell.exe -ExecutionPolicy ByPass -File')
+        [void]$CustomActionContent.Append(" $PSFilePath")
+        Add-Content -Path $BatFilePath -Value $CustomActionContent.ToString()
+    
+        #Create PowerShell File to do actions
+            
+        New-Item -Path $PSFilePath -ItemType File -Force
+        if ($HPJson){
+            Add-Content -Path $PSFilePath "Invoke-Expression (Invoke-RestMethod -Uri 'https://raw.githubusercontent.com/OSDeploy/OSD/master/cloud/modules/deviceshp.psm1')"
+            if ($HPJson.HPUpdates.HPIADrivers -eq $true){
+                Add-Content -Path $PSFilePath 'Write-Host "Running HPIA for Drivers" -ForegroundColor Magenta'
+                Add-Content -Path $PSFilePath "osdcloud-RunHPIA -Category Drivers"
+            }
+            if ($HPJson.HPUpdates.HPIAFirmware -eq $true){
+                Add-Content -Path $PSFilePath 'Write-Host "Running HPIA for Firmware" -ForegroundColor Magenta'
+                Add-Content -Path $PSFilePath "osdcloud-RunHPIA -Category Firmware"
+            } 
+            if ($HPJson.HPUpdates.HPIASoftware -eq $true){
+                Add-Content -Path $PSFilePath 'Write-Host "Running HPIA for Software" -ForegroundColor Magenta'
+                Add-Content -Path $PSFilePath "osdcloud-RunHPIA -Category Software"
+            } 
+            if ($HPJson.HPUpdates.HPTPMUpdate -eq $true){
+                Add-Content -Path $PSFilePath 'Write-Host "Updating TPM Firmware" -ForegroundColor Magenta'
+                Add-Content -Path $PSFilePath "osdcloud-UpdateHPTPM"
+            } 
+            if ($HPJson.HPUpdates.HPBIOSUpdate -eq $true){
+                Add-Content -Path $PSFilePath 'Write-Host "Running HP System Firmware" -ForegroundColor Magenta'
+                Add-Content -Path $PSFilePath "osdcloud-UpdateHPTPM"
+            }
+            Add-Content -Path $PSFilePath "Restart-Computer -Force"
+        }
+    }
+
     #=================================================
     #   AutopilotConfigurationFile.json
     #=================================================
