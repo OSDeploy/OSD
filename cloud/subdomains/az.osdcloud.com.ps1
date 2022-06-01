@@ -1,5 +1,5 @@
 <#PSScriptInfo
-.VERSION 22.5.31.1
+.VERSION 22.6.1.1
 .GUID aa123d2c-3cd3-4ef4-91f0-0c2139473991
 .AUTHOR David Segura @SeguraOSD
 .COMPANYNAME osdcloud.com
@@ -23,7 +23,7 @@ powershell iex (irm az.osdcloud.com)
 .DESCRIPTION
     PSCloudScript at az.osdcloud.com
 .NOTES
-    Version 22.5.31.1
+    Version 22.6.1.1
 .LINK
     https://raw.githubusercontent.com/OSDeploy/OSD/master/cloud/az.osdcloud.com.ps1
 .EXAMPLE
@@ -34,7 +34,8 @@ param()
 #=================================================
 #Script Information
 $ScriptName = 'az.osdcloud.com'
-$ScriptVersion = '22.5.31.1'
+$ScriptVersion = '22.6.1.1'
+#TODO: Exclude Windows Images smaller than 3GB
 #=================================================
 #region Initialize
 
@@ -67,7 +68,7 @@ if ($WindowsPhase -eq 'WinPE') {
     Get-OSDCloudAzureResources
     #Stop the startup Transcript.  OSDCloud will create its own
     $null = Stop-Transcript -ErrorAction Ignore
-    Start-OSDCloudAzureCLI
+    Start-OSDCloudAzure
 }
 #endregion
 #=================================================
@@ -94,7 +95,9 @@ if ($WindowsPhase -eq 'OOBE') {
 #region Windows
 if ($WindowsPhase -eq 'Windows') {
     Connect-OSDCloudAzure
+    Get-OSDCloudAzureResources
     $null = Stop-Transcript -ErrorAction Ignore
+    Start-OSDCloudAzure
 }
 #endregion
 #=================================================
