@@ -315,7 +315,11 @@ if ($Manufacturer -match "HP" -or $Manufacturer -match "Hewlett-Packard"){
     $Manufacturer = "HP"
     $HPEnterprise = Test-HPIASupport
     }
-if ($Manufacturer -match "Dell"){$Manufacturer = "Dell"}    
+if ($Manufacturer -match "Dell"){
+    $Manufacturer = "Dell"
+    $DellEnterprise = Test-DCUSupport 
+
+}    
 
 if ($HPEnterprise){
     $TPM = osdcloud-DetermineHPTPM
@@ -355,15 +359,50 @@ if ($HPEnterprise){
     $formMainWindowControlOption_Name_6.IsEnabled = $false 
     $formMainWindowControlOption_Name_6.Visibility = "Hidden" 
 }
+elseif ($DellEnterprise){
+    $formMainWindowControlManufacturerFunction.Header = "Dell Functions"
+    $formMainWindowControlManufacturerFunction.Visibility = 'Visible'
+
+    $formMainWindowControlOption_Name_1.Header = "DCU Drivers"
+    $formMainWindowControlOption_Name_1.IsChecked = $true 
+    $formMainWindowControlOption_Name_2.IsChecked = $false
+    $formMainWindowControlOption_Name_2.IsEnabled = $false 
+    $formMainWindowControlOption_Name_2.Visibility = "Hidden"
+    $formMainWindowControlOption_Name_3.IsChecked = $false
+    $formMainWindowControlOption_Name_3.IsEnabled = $false 
+    $formMainWindowControlOption_Name_3.Visibility = "Hidden"
+    $formMainWindowControlOption_Name_4.IsChecked = $false
+    $formMainWindowControlOption_Name_4.IsEnabled = $false 
+    $formMainWindowControlOption_Name_4.Visibility = "Hidden"
+    $formMainWindowControlOption_Name_5.IsChecked = $false
+    $formMainWindowControlOption_Name_5.IsEnabled = $false 
+    $formMainWindowControlOption_Name_5.Visibility = "Hidden"
+    $formMainWindowControlOption_Name_6.IsChecked = $false
+    $formMainWindowControlOption_Name_6.IsEnabled = $false 
+    $formMainWindowControlOption_Name_6.Visibility = "Hidden"
+
+}
 else{
     $formMainWindowControlManufacturerFunction.Visibility = 'Hidden'
     $formMainWindowControlManufacturerFunction.IsEnabled = $false
     $formMainWindowControlOption_Name_1.IsChecked = $false
+    $formMainWindowControlOption_Name_1.IsEnabled = $false 
+    $formMainWindowControlOption_Name_1.Visibility = "Hidden"
     $formMainWindowControlOption_Name_2.IsChecked = $false
+    $formMainWindowControlOption_Name_2.IsEnabled = $false 
+    $formMainWindowControlOption_Name_2.Visibility = "Hidden"
     $formMainWindowControlOption_Name_3.IsChecked = $false
+    $formMainWindowControlOption_Name_3.IsEnabled = $false 
+    $formMainWindowControlOption_Name_3.Visibility = "Hidden"
     $formMainWindowControlOption_Name_4.IsChecked = $false
+    $formMainWindowControlOption_Name_4.IsEnabled = $false 
+    $formMainWindowControlOption_Name_4.Visibility = "Hidden"
     $formMainWindowControlOption_Name_5.IsChecked = $false
+    $formMainWindowControlOption_Name_5.IsEnabled = $false 
+    $formMainWindowControlOption_Name_5.Visibility = "Hidden"
     $formMainWindowControlOption_Name_6.IsChecked = $false
+    $formMainWindowControlOption_Name_6.IsEnabled = $false 
+    $formMainWindowControlOption_Name_6.Visibility = "Hidden"
 }
 
 
