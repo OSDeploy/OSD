@@ -1058,7 +1058,7 @@ function Invoke-OSDCloud {
         Write-Host -ForegroundColor DarkGray "Current Firmware: $(Get-HPBIOSVersion)"
         Write-Host -ForegroundColor DarkGray "Staging Update: $((Get-HPBIOSUpdates -Latest).ver) "
         #Details: https://developers.hp.com/hp-client-management/doc/Get-HPBiosUpdates
-        Get-HPBIOSUpdates -Flash -Yes -Offline -BitLocker Suspend
+        Get-HPBIOSUpdates -Flash -Yes -Offline -BitLocker Ignore
         }
     }
     
