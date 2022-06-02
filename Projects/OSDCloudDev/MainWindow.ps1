@@ -797,7 +797,12 @@ $formMainWindowControlStartButton.add_Click({
             $ImageFileName = $null
         }
     }
-
+    #================================================
+    #   Debug Settings
+    #================================================
+    if ($formMainWindowControlDebugCheckBox.IsChecked -eq $true){
+        $formMainWindowControlRestart.IsChecked = $false
+    }  
     #================================================
     #   Global Variables
     #================================================
