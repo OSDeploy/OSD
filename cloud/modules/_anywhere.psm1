@@ -69,7 +69,7 @@ function osdcloud-UpdateModuleFilesManually {
     Import-Module -Name OSD -Force
     if ($WindowsPhase -eq 'WinPE') {
         if (Test-Path -Path "C:\Program Files\WindowsPowerShell\Modules\osd"){
-            $ModulePath = (Get-ChildItem -Path "C:\WindowsPowerShell\Modules\osd" | Where-Object {$_.Attributes -match "Directory"} | select -Last 1).fullname
+            $ModulePath = (Get-ChildItem -Path "C:\Program Files\WindowsPowerShell\Modules\osd" | Where-Object {$_.Attributes -match "Directory"} | select -Last 1).fullname
             write-host "Updating Files in $ModulePath"
             Invoke-WebRequest -UseBasicParsing -uri "$GitHubURI/$OSDCloudFunctionsPath/Invoke-OSDSpecialize.ps1" -OutFile "$ModulePath/$OSDCloudFunctionsPath/Invoke-OSDSpecialize.ps1" -Verbose
         }
