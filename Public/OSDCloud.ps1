@@ -1101,6 +1101,7 @@ function Invoke-OSDCloud {
         New-Item -Path $PSFilePath -ItemType File -Force
         if ($HPJson){
             Add-Content -Path $PSFilePath "Invoke-Expression (Invoke-RestMethod -Uri 'https://raw.githubusercontent.com/OSDeploy/OSD/master/cloud/modules/deviceshp.psm1')"
+            Add-Content -Path $PSFilePath 'Write-Host "Running HP Tools in SetupComplete" -ForegroundColor Green'
             if ($HPJson.HPUpdates.HPIADrivers -eq $true){
                 Add-Content -Path $PSFilePath 'Write-Host "Running HPIA for Drivers" -ForegroundColor Magenta'
                 Add-Content -Path $PSFilePath "osdcloud-RunHPIA -Category Drivers"
