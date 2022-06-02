@@ -445,7 +445,7 @@
                 Height="40"
                 Width="130"
                 HorizontalAlignment="Left"
-                VerticalAlignment="Center" Grid.Column="2" Margin="321,0,0,0" />
+                VerticalAlignment="Center" Grid.Column="2" Margin="310,0,0,0" />
             <CheckBox x:Name="DebugCheckBox" Content="Debug Mode" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Row="8"/>
         </Grid>
     </DockPanel>
