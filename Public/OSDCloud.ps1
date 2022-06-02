@@ -1064,6 +1064,8 @@ function Invoke-OSDCloud {
         }
     }
     #>
+
+    #Leverage SetupComplete.cmd to run HP Tools
     $ConfigPath = "c:\osdcloud\configs"
     if (Test-Path $ConfigPath){
         $JSONConfigs = Get-ChildItem -path $ConfigPath -Filter "*.json"
@@ -1121,6 +1123,14 @@ function Invoke-OSDCloud {
             }
             Add-Content -Path $PSFilePath "Restart-Computer -Force"
         }
+    }
+    #=================================================
+    #   Debug Mode
+    #=================================================
+    if ($Global:OSDCloud.DebugMode -eq $true){
+        Invoke-Expression (Invoke-RestMethod -Uri 'https://raw.githubusercontent.com/OSDeploy/OSD/master/cloud/modules/debugmode.psm1')
+        osdcloud-addcmtrace
+        osdcloud-addmouseoobe
     }
 
     #=================================================
