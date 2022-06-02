@@ -11,15 +11,6 @@
     Invoke-Expression (Invoke-RestMethod -Uri 'https://raw.githubusercontent.com/OSDeploy/OSD/master/cloud/modules/_anywhere.psm1')
 #>
 #=================================================
-#Determine the proper Windows environment
-if ($env:SystemDrive -eq 'X:') {$WindowsPhase = 'WinPE'}
-else {
-    $ImageState = (Get-ItemProperty -Path 'HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Setup\State' -ErrorAction Ignore).ImageState
-    if ($env:UserName -eq 'defaultuser0') {$WindowsPhase = 'OOBE'}
-    elseif ($ImageState -eq 'IMAGE_STATE_SPECIALIZE_RESEAL_TO_OOBE') {$WindowsPhase = 'Specialize'}
-    elseif ($ImageState -eq 'IMAGE_STATE_SPECIALIZE_RESEAL_TO_AUDIT') {$WindowsPhase = 'AuditMode'}
-    else {$WindowsPhase = 'Windows'}
-}
 
 #region Functions
 function osdcloud-InstallPackageManagement {
@@ -77,7 +68,7 @@ function osdcloud-UpdateModuleFilesManually {
     Invoke-WebRequest -UseBasicParsing -uri "$GitHubURI/OSD.psd1" -OutFile "$ModulePath/OSD.psd1"
     Import-Module -Name OSD -Force
     if ($WindowsPhase -eq 'WinPE') {
-        if (Test-Path -Path "C:\WindowsPowerShell\Modules\osd"){
+        if (Test-Path -Path "C:\Program Files\WindowsPowerShell\Modules\osd"){
             $ModulePath = (Get-ChildItem -Path "C:\WindowsPowerShell\Modules\osd" | Where-Object {$_.Attributes -match "Directory"} | select -Last 1).fullname
             write-host "Updating Files in $ModulePath"
             Invoke-WebRequest -UseBasicParsing -uri "$GitHubURI/$OSDCloudFunctionsPath/Invoke-OSDSpecialize.ps1" -OutFile "$ModulePath/$OSDCloudFunctionsPath/Invoke-OSDSpecialize.ps1" -Verbose
