@@ -56,6 +56,7 @@ function osdcloud-EjectCD {
 function osdcloud-UpdateModuleFilesManually {
     #Custom Testing - Overwrites files in module with updated ones in GitHub
     $ModulePath = (Get-ChildItem -Path "$($Env:ProgramFiles)\WindowsPowerShell\Modules\osd" | Where-Object {$_.Attributes -match "Directory"} | select -Last 1).fullname
+    write-host "Updating Files in $ModulePath"
     $OSDCloudGUIDevProjectPath = "Projects\OSDCloudDev"
     $OSDCloudFunctionsPath = "Public\Functions\OSDCloud"
     $GitHubURI = "https://raw.githubusercontent.com/OSDeploy/OSD/master"
@@ -68,7 +69,8 @@ function osdcloud-UpdateModuleFilesManually {
     if ($WindowsPhase -eq 'WinPE') {
         if (Test-Path -Path "C:\WindowsPowerShell\Modules\osd"){
             $ModulePath = (Get-ChildItem -Path "C:\WindowsPowerShell\Modules\osd" | Where-Object {$_.Attributes -match "Directory"} | select -Last 1).fullname
-            Invoke-WebRequest -UseBasicParsing -uri "$GitHubURI/$OSDCloudFunctionsPath/Invoke-OSDSpecialize.ps1" -OutFile "$ModulePath/$OSDCloudFunctionsPath/Invoke-OSDSpecialize.ps1"
+            write-host "Updating Files in $ModulePath"
+            Invoke-WebRequest -UseBasicParsing -uri "$GitHubURI/$OSDCloudFunctionsPath/Invoke-OSDSpecialize.ps1" -OutFile "$ModulePath/$OSDCloudFunctionsPath/Invoke-OSDSpecialize.ps1" -Verbose
         }
     }
 }
