@@ -1029,10 +1029,11 @@ function Invoke-OSDCloud {
     #   HP Updates Config for Specialize Phase
     #=================================================
     #Set Specialize JSON
-    if (($Global:OSDCloud.HPIARun -eq $true) -or ($Global:OSDCloud.HPTPMUpdate -eq $true) -or ($Global:OSDCloud.HPBIOSUpdate -eq $true)){
-    Write-Host -ForegroundColor DarkGray "========================================================================="
-    Write-Host -ForegroundColor Cyan "Adding HP Tasks into JSON Config File for Action during Specialize" 
-    Write-Host -ForegroundColor DarkGray "HPIADrivers = $($Global:OSDCloud.HPIADrivers) | HPIAFirmware = $($Global:OSDCloud.HPIAFirmware) |HPTPMUpdate = $($Global:OSDCloud.HPTPMUpdate) | HPBIOSUpdate = $($Global:OSDCloud.HPBIOSUpdate)" 
+    if (($Global:OSDCloud.HPIADrivers -eq $true) -or ($Global:OSDCloud.HPIAFirmware -eq $true) -or ($Global:OSDCloud.HPIASoftware -eq $true) -or ($Global:OSDCloud.HPTPMUpdate -eq $true) -or ($Global:OSDCloud.HPBIOSUpdate -eq $true)){
+        $HPFeaturesEnabled = $true
+        Write-Host -ForegroundColor DarkGray "========================================================================="
+        Write-Host -ForegroundColor Cyan "Adding HP Tasks into JSON Config File for Action during Specialize" 
+        Write-Host -ForegroundColor DarkGray "HPIADrivers = $($Global:OSDCloud.HPIADrivers) | HPIAFirmware = $($Global:OSDCloud.HPIAFirmware) |HPTPMUpdate = $($Global:OSDCloud.HPTPMUpdate) | HPBIOSUpdate = $($Global:OSDCloud.HPBIOSUpdate)" 
         $HPHashTable = @{
             'HPUpdates' = @{
                 'HPIADrivers' = $Global:OSDCloud.HPIADrivers
@@ -1279,6 +1280,14 @@ exit
             catch {
                 Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Unable to Save-Script Get-WindowsAutopilotInfo to $PowerShellSavePath\Scripts"
             }
+            if ($HPFeaturesEnabled){
+                try {
+                    Save-Module -Name HPCMSL -Path "$PowerShellSavePath\Modules" -Force -ErrorAction Stop
+                }
+                catch {
+                    Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Unable to Save-Module HPCMSL to $PowerShellSavePath\Modules"
+                }
+            }
         }
         else {
             Write-Verbose -Verbose "Copy-PSModuleToFolder -Name OSD to $PowerShellSavePath\Modules"
@@ -1286,7 +1295,7 @@ exit
             Copy-PSModuleToFolder -Name PackageManagement -Destination "$PowerShellSavePath\Modules"
             Copy-PSModuleToFolder -Name PowerShellGet -Destination "$PowerShellSavePath\Modules"
             Copy-PSModuleToFolder -Name WindowsAutopilotIntune -Destination "$PowerShellSavePath\Modules"
-        
+            if ($HPFeaturesEnabled){Copy-PSModuleToFolder -Name HPCMSL -Destination "$PowerShellSavePath\Modules"}
             $OSDCloudOfflinePath = Find-OSDCloudOfflinePath
         
             foreach ($Item in $OSDCloudOfflinePath) {
