@@ -32,6 +32,7 @@ function osdcloud-TestHPIASupport {
 function osdcloud-InstallModuleHPCMSL {
     [CmdletBinding()]
     param ()
+    osdcloud-SetExecutionPolicy
     $InstallModule = $false
     $PSModuleName = 'HPCMSL'
     if (-not (Get-Module -Name PowerShellGet -ListAvailable | Where-Object {$_.Version -ge '2.2.5'})) {

@@ -163,6 +163,8 @@ function Invoke-OSDSpecialize {
             write-host "Specialize Stage - HP Devices" -ForegroundColor Green
             Invoke-Expression (Invoke-RestMethod -Uri 'functions.osdcloud.com')
             Invoke-Expression (Invoke-RestMethod -Uri 'https://raw.githubusercontent.com/OSDeploy/OSD/master/cloud/modules/deviceshp.psm1')
+            osdcloud-SetExecutionPolicy
+            osdcloud-InstallPackageManagement
             osdcloud-InstallModuleHPCMSL
             if ($HPJson.HPUpdates.HPIADrivers -eq $true){
                 #osdcloud-RunHPIA -Category Drivers
