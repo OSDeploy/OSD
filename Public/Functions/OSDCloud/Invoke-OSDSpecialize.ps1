@@ -160,17 +160,26 @@ function Invoke-OSDSpecialize {
             }
         }
         if ($HPJson){
+            Invoke-Expression (Invoke-RestMethod -Uri 'https://raw.githubusercontent.com/OSDeploy/OSD/master/cloud/modules/deviceshp.psm1')
             if ($HPJson.HPUpdates.HPIADrivers -eq $true){
-                Invoke-Expression (Invoke-RestMethod -Uri 'https://raw.githubusercontent.com/OSDeploy/OSD/master/cloud/modules/deviceshp.psm1')
-                osdcloud-RunHPIA -Category Drivers
+                #osdcloud-RunHPIA -Category Drivers
             }
             if ($HPJson.HPUpdates.HPIAFirmware -eq $true){
-                Invoke-Expression (Invoke-RestMethod -Uri 'https://raw.githubusercontent.com/OSDeploy/OSD/master/cloud/modules/deviceshp.psm1')
-                osdcloud-RunHPIA -Category Firmware
+                #osdcloud-RunHPIA -Category Firmware
             } 
             if ($HPJson.HPUpdates.HPIASoftware -eq $true){
-                Invoke-Expression (Invoke-RestMethod -Uri 'https://raw.githubusercontent.com/OSDeploy/OSD/master/cloud/modules/deviceshp.psm1')
-                osdcloud-RunHPIA -Category Software
+               # osdcloud-RunHPIA -Category Software
+            if ($HPJson.HPUpdates.HPBIOSUpdate -eq $true){
+                #Stage Firmware Update for Next Reboot
+                Write-Host -ForegroundColor DarkGray "========================================================================="
+                Write-Host -ForegroundColor Cyan "Updating HP System Firmware"
+                if (Get-HPBIOSSetupPasswordIsSet){Write-Host -ForegroundColor Red "Device currently has BIOS Setup Password, Please Update BIOS via different method"}
+                else{
+                    Write-Host -ForegroundColor DarkGray "Current Firmware: $(Get-HPBIOSVersion)"
+                    Write-Host -ForegroundColor DarkGray "Staging Update: $((Get-HPBIOSUpdates -Latest).ver) "
+                    #Details: https://developers.hp.com/hp-client-management/doc/Get-HPBiosUpdates
+                    Get-HPBIOSUpdates -Flash -Yes -Offline -BitLocker Ignore
+                }
             } 
         }
     #=================================================
