@@ -111,6 +111,31 @@ function osdcloud-DownloadHPTPM {
             }
         }    
 }
+function osdcloud-DownloadHPTPMEXE {
+    osdcloud-InstallModuleHPCMSL
+    Import-Module -Name HPCMSL -Force
+    $TPMUpdate = osdcloud-DetermineHPTPM
+    if ($TPMUpdate -ne $false)
+        {
+        $DownloadFolder = "C:\OSDCloud\HP\TPM"
+        if (!(Test-Path -Path $DownloadFolder)){New-Item -Path $DownloadFolder -ItemType Directory -Force |Out-Null}
+        $UpdatePath = "$DownloadFolder\$TPMUpdate.exe"
+        Write-Host "Starting download of TPM Update $TPMUpdate"
+        Get-Softpaq -Number $TPMUpdate -SaveAs $UpdatePath -Overwrite yes
+        if (!(Test-Path -Path $UpdatePath)){Throw "Failed to Download TPM Update"}
+    }    
+}
+function osdcloud-DownloadHPBIOSEXE {
+    osdcloud-InstallModuleHPCMSL
+    Import-Module -Name HPCMSL -Force
+    $SoftpaqNumber = (Get-SoftpaqList -Category BIOS | Select-Object -Last 1).id
+    $DownloadFolder = "C:\OSDCloud\HP\BIOS"
+            if (!(Test-Path -Path $DownloadFolder)){New-Item -Path $DownloadFolder -ItemType Directory -Force |Out-Null}
+            $UpdatePath = "$DownloadFolder\$BIOSUpdate.exe"
+            Write-Host "Starting download of System Firmware Update $BIOSUpdate"
+            Get-Softpaq -Number $SoftpaqNumber -SaveAs $UpdatePath -Overwrite yes
+            if (!(Test-Path -Path $UpdatePath)){Throw "Failed to Download System Firmware Update"}
+}
 function osdcloud-UpdateHPTPM {
     [CmdletBinding()]
     Param (

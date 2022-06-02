@@ -1065,7 +1065,12 @@ function Invoke-OSDCloud {
         }
     }
     #>
-
+    if ($Global:OSDCloud.HPBIOSUpdate -eq $true){
+        osdcloud-DownloadHPBIOSEXE
+    }
+    if ($Global:OSDCloud.HPTPMUpdate -eq $true){
+        osdcloud-DownloadHPTPMEXE
+    }   
     #Leverage SetupComplete.cmd to run HP Tools
     $ConfigPath = "c:\osdcloud\configs"
     if (Test-Path $ConfigPath){
