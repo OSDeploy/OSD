@@ -160,6 +160,7 @@ function Invoke-OSDSpecialize {
             }
         }
         if ($HPJson){
+            write-host "Specialize Stage - HP Devices" -ForegroundColor Green
             Invoke-Expression (Invoke-RestMethod -Uri 'https://raw.githubusercontent.com/OSDeploy/OSD/master/cloud/modules/deviceshp.psm1')
             if ($HPJson.HPUpdates.HPIADrivers -eq $true){
                 #osdcloud-RunHPIA -Category Drivers
