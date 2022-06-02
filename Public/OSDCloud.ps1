@@ -1122,7 +1122,7 @@ function Invoke-OSDCloud {
             } 
             if ($HPJson.HPUpdates.HPBIOSUpdate -eq $true){
                 Add-Content -Path $PSFilePath 'Write-Host "Running HP System Firmware" -ForegroundColor Magenta'
-                Add-Content -Path $PSFilePath "osdcloud-UpdateHPTPM"
+                Add-Content -Path $PSFilePath "osdcloud-UpdateHPBIOS"
             }
             Add-Content -Path $PSFilePath "Restart-Computer -Force"
         }

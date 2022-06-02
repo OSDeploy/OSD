@@ -596,5 +596,18 @@ function osdcloud-downloadHPIA {
         }
     }    
 
+function osdcloud-UpdateHPBIOS {
+    #Stage Firmware Update for Next Reboot
+    Write-Host -ForegroundColor DarkGray "========================================================================="
+    osdcloud-InstallModuleHPCMSL
+    Write-Host -ForegroundColor Cyan "Updating HP System Firmware"
+    if (Get-HPBIOSSetupPasswordIsSet){Write-Host -ForegroundColor Red "Device currently has BIOS Setup Password, Please Update BIOS via different method"}
+    else{
+        Write-Host -ForegroundColor DarkGray "Current Firmware: $(Get-HPBIOSVersion)"
+        Write-Host -ForegroundColor DarkGray "Staging Update: $((Get-HPBIOSUpdates -Latest).ver) "
+        #Details: https://developers.hp.com/hp-client-management/doc/Get-HPBiosUpdates
+        Get-HPBIOSUpdates -Flash -Yes -Offline -BitLocker Ignore
+    }
+}
 #endregion
 #=================================================
