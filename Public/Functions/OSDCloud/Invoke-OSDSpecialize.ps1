@@ -162,7 +162,7 @@ function Invoke-OSDSpecialize {
         if ($HPJson){
             write-host "Specialize Stage - HP Devices" -ForegroundColor Green
             Invoke-Expression (Invoke-RestMethod -Uri 'functions.osdcloud.com')
-            Invoke-Expression (Invoke-RestMethod -Uri 'https://raw.githubusercontent.com/OSDeploy/OSD/master/cloud/modules/deviceshp.psm1')
+            #Invoke-Expression (Invoke-RestMethod -Uri 'https://raw.githubusercontent.com/OSDeploy/OSD/master/cloud/modules/deviceshp.psm1')
             osdcloud-SetExecutionPolicy
             osdcloud-InstallPackageManagement
             osdcloud-InstallModuleHPCMSL
@@ -176,7 +176,10 @@ function Invoke-OSDSpecialize {
                # osdcloud-RunHPIA -Category Software
             }
             if ($HPJson.HPUpdates.HPTPMUpdate -eq $true){
+                Write-Host -ForegroundColor DarkGray "========================================================================="
+                Write-Host "Updating TPM" -ForegroundColor Cyan
                 osdcloud-UpdateHPTPM
+                start-sleep -Seconds 15
             }
             if ($HPJson.HPUpdates.HPBIOSUpdate -eq $true){
                 #Stage Firmware Update for Next Reboot
@@ -189,6 +192,7 @@ function Invoke-OSDSpecialize {
                     #Details: https://developers.hp.com/hp-client-management/doc/Get-HPBiosUpdates
                     Get-HPBIOSUpdates -Flash -Yes -Offline -BitLocker Ignore
                 }
+                start-sleep -Seconds 600
             } 
         }
     #=================================================
