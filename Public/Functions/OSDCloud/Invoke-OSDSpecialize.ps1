@@ -169,6 +169,7 @@ function Invoke-OSDSpecialize {
             } 
             if ($HPJson.HPUpdates.HPIASoftware -eq $true){
                # osdcloud-RunHPIA -Category Software
+            }
             if ($HPJson.HPUpdates.HPBIOSUpdate -eq $true){
                 #Stage Firmware Update for Next Reboot
                 Write-Host -ForegroundColor DarkGray "========================================================================="
