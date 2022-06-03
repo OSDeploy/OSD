@@ -340,7 +340,7 @@
             <StackPanel HorizontalAlignment="Left"
                         VerticalAlignment="Center"
                         Orientation="Horizontal"
-                        Margin="125,5,5,0">
+                        Margin="10,5,5,0">
                 <Label Name="AutopilotJsonLabel"
                        Content="Autopilot JSON"
                        FontSize="15"
@@ -360,7 +360,7 @@
             <StackPanel HorizontalAlignment="Left"
                         VerticalAlignment="Center"
                         Orientation="Horizontal"
-                        Margin="125,5,5,0">
+                        Margin="10,5,5,0">
                 <Label Name="OOBEDeployLabel"
                        Content="OOBEDeploy"
                        FontSize="15"
@@ -379,7 +379,7 @@
             <StackPanel HorizontalAlignment="Left"
                         VerticalAlignment="Center"
                         Orientation="Horizontal"
-                        Margin="125,5,5,0">
+                        Margin="10,5,5,0">
                 <Label Name="AutopilotOOBELabel"
                        Content="AutopilotOOBE"
                        FontSize="15"
