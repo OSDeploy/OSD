@@ -73,6 +73,11 @@ function osdcloud-DetermineHPTPM{
     elseif ($SP94937){Return "SP94937"}
     else{Return $false}
 }
+function osdcloud-SetTPMBIOSSettings {
+    osdcloud-SetHPBIOSSetting -SettingName 'TPM Device' -Value 'Available'
+    osdcloud-SetHPBIOSSetting -SettingName 'TPM State' -Value 'Enable'
+    osdcloud-SetHPBIOSSetting -SettingName 'TPM Activation Policy' -Value 'No Prompts'
+}
 function osdcloud-DetermineHPBIOSUpdateAvailable{
     [CmdletBinding()]
     param ([Switch]$Details)
@@ -113,6 +118,7 @@ function osdcloud-DownloadHPTPM {
 }
 function osdcloud-DownloadHPTPMEXE {
     osdcloud-InstallModuleHPCMSL
+    osdcloud-SetHPBIOSSetting -SettingName 'Virtualization Technology (VTx)' -Value 'Disable'
     Import-Module -Name HPCMSL -Force
     $TPMUpdate = osdcloud-DetermineHPTPM
     if ($TPMUpdate -ne $false)
@@ -124,6 +130,38 @@ function osdcloud-DownloadHPTPMEXE {
         Get-Softpaq -Number $TPMUpdate -SaveAs $UpdatePath -Overwrite yes
         if (!(Test-Path -Path $UpdatePath)){Throw "Failed to Download TPM Update"}
     }    
+}
+function osdcloud-InstallTPMEXE {
+    [CmdletBinding()]
+    Param (
+        [Parameter(Mandatory=$false)]
+        $path,
+        [Parameter(Mandatory=$false)]
+        $filename,
+        [Parameter(Mandatory=$false)]
+        $spec,
+        [Parameter(Mandatory=$false)]
+        $logsuffix,
+        [Parameter(Mandatory=$false)]
+        $WorkingFolder
+        )
+    $DownloadFolder = "C:\OSDCloud\HP\TPM"
+    $TPMUpdate = (Get-ChildItem -Path $DownloadFolder -Filter *.exe).FullName
+    if (Test-Path $TPMUpdate){
+        Start-Process -FilePath $TPMUpdate -ArgumentList "/s /e /f $DownloadFolder" -Wait
+        if (!(Test-Path -Path "$DownloadFolder\TPMConfig64.exe")){Throw "Failed to Extract TPM Update"}
+        $Process = "$DownloadFolder\TPMConfig64.exe"
+        #Create Argument List
+        if ($filename -and $spec){$TPMArg = "-s -f$filename -a$spec -l$($env:temp)\TPMConfig.log"}
+        elseif ($filename -and !($spec)) { $TPMArg = "-s -f$filename -l$($env:temp)\TPMConfig.log"}
+        elseif (!($filename) -and $spec) { $TPMArg = "-s -a$spec -l$($env:temp)\TPMConfig.log"}
+        elseif (!($filename) -and !($spec)) { $TPMArg = "-s -l$($env:temp)\TPMConfig.log"}
+        
+        Write-Output "Running Command: Start-Process -FilePath $Process -ArgumentList $TPMArg -PassThru -Wait"
+        $TPMUpdate = Start-Process -FilePath $Process -ArgumentList $TPMArg -PassThru -Wait
+        write-output "TPMUpdate Exit Code: $($TPMUpdate.exitcode)"
+    }
+    else {Throw "Failed to Locate Update Path"}
 }
 #does not work in pe
 function osdcloud-DownloadHPBIOSEXE {
@@ -156,6 +194,7 @@ function osdcloud-UpdateHPTPM {
         write-output "Determined TPM Update $logsuffix required"
         if ((Get-BitLockerVolume -MountPoint $env:SystemDrive -ErrorAction SilentlyContinue).ProtectionStatus -eq "ON"){
             Suspend-BitLocker -MountPoint $env:SystemDrive -RebootCount 2 | Out-Null}
+        osdcloud-SetHPBIOSSetting -SettingName 'Virtualization Technology (VTx)' -Value 'Disable'
         $extractPath = osdcloud-DownloadHPTPM -WorkingFolder $WorkingFolder
         if (!(Test-Path -Path $extractPath)){Throw "Failed to Locate Update Path"}
         $Process = "$extractPath\TPMConfig64.exe"
@@ -170,6 +209,7 @@ function osdcloud-UpdateHPTPM {
         write-output "TPMUpdate Exit Code: $($TPMUpdate.exitcode)"
     }
     else {
+        osdcloud-SetHPBIOSSetting -SettingName 'Virtualization Technology (VTx)' -Value 'Enable'
         return "No TPM Update Available"
     }
     }
@@ -635,6 +675,61 @@ function osdcloud-UpdateHPBIOS {
         #Details: https://developers.hp.com/hp-client-management/doc/Get-HPBiosUpdates
         Get-HPBIOSUpdates -Flash -Yes -Offline -BitLocker Ignore
     }
+}
+
+function osdcloud-SetHPBIOSSetting {
+    [CmdletBinding()]
+Param (
+	[Parameter(Mandatory=$true)]
+	$SettingName,
+	[Parameter(Mandatory=$true)]
+	$Value,
+	[Parameter(Mandatory=$false)]
+	$BIOSPW
+	)
+
+<# Testing
+$SettingName = "SVM CPU Virtualization"
+$Value = "Enable"
+$BIOSPW = 'P@ssw0rd'
+#>
+
+$BIOS= Get-WmiObject -class hp_biossettinginterface -Namespace "root\hp\instrumentedbios"
+$BIOSSetting = Get-CimInstance -class hp_biossetting -Namespace "root\hp\instrumentedbios"
+$CurrentValue = ($BIOSSetting | ?{ $_.Name -eq $SettingName }).CurrentValue
+
+if ($CurrentValue -ne $Null)
+    {
+    if ($CurrentValue -eq $Value)
+        {
+        Write-Output "BIOS Setting: $SettingName already configured to Requested Value: $Value"
+        }
+    else
+        {
+        If (($BIOSSetting | ?{ $_.Name -eq 'Setup Password' }).IsSet -eq 0){
+            $Result = $BIOS.SetBIOSSetting($SettingName,$Value)
+            }
+        else{
+            $PW = "<utf-16/>$BIOSPW"
+            $Result = $BIOS.SetBIOSSetting($SettingName,$Value,$PW)
+            }
+        if ($Result.Return -eq 0){
+            Write-Output "Successfully Updated: $SettingName to: $Value"
+            }
+        else{
+            $BIOSSetting = Get-CimInstance -class hp_biossetting -Namespace "root\hp\instrumentedbios"
+            $CurrentValue = ($BIOSSetting | ?{ $_.Name -eq $SettingName }).CurrentValue
+            Write-Output "Failed to Update BIOS Setting: $SettingName to: $Value"
+            Write-Output "Current Value: $CurrentValue"
+            }
+        }
+    }
+else
+    {
+    Write-Output "BIOS Setting: $SettingName is NOT Available on this Hardware"
+    }
+
+
 }
 #endregion
 #=================================================

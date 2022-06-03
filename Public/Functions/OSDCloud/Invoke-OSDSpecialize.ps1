@@ -181,20 +181,11 @@ function Invoke-OSDSpecialize {
             osdcloud-SetExecutionPolicy
             osdcloud-InstallPackageManagement
             osdcloud-InstallModuleHPCMSL
-            if ($HPJson.HPUpdates.HPIADrivers -eq $true){
-                #osdcloud-RunHPIA -Category Drivers
-            }
-            if ($HPJson.HPUpdates.HPIAFirmware -eq $true){
-                #osdcloud-RunHPIA -Category Firmware
-            } 
-            if ($HPJson.HPUpdates.HPIASoftware -eq $true){
-               # osdcloud-RunHPIA -Category Software
-            }
             if ($HPJson.HPUpdates.HPTPMUpdate -eq $true){
                 Write-Host -ForegroundColor DarkGray "========================================================================="
                 Write-Host "Updating TPM" -ForegroundColor Cyan
-                osdcloud-UpdateHPTPM
-                start-sleep -Seconds 15
+                osdcloud-InstallTPMEXE
+                start-sleep -Seconds 120
             }
             if ($HPJson.HPUpdates.HPBIOSUpdate -eq $true){
                 #Stage Firmware Update for Next Reboot

@@ -1066,6 +1066,7 @@ function Invoke-OSDCloud {
     }
     #>
     if ($Global:OSDCloud.HPTPMUpdate -eq $true){
+        osdcloud-SetTPMBIOSSettings
         osdcloud-DownloadHPTPMEXE
     }   
     #Leverage SetupComplete.cmd to run HP Tools
@@ -1120,8 +1121,8 @@ function Invoke-OSDCloud {
                 Add-Content -Path $PSFilePath "osdcloud-RunHPIA -Category Software"
             } 
             if ($HPJson.HPUpdates.HPTPMUpdate -eq $true){
-                Add-Content -Path $PSFilePath 'Write-Host "Updating TPM Firmware" -ForegroundColor Magenta'
-                Add-Content -Path $PSFilePath "osdcloud-UpdateHPTPM"
+                #Add-Content -Path $PSFilePath 'Write-Host "Updating TPM Firmware" -ForegroundColor Magenta'
+                #Add-Content -Path $PSFilePath "osdcloud-InstallTPMEXE"
             } 
             if ($HPJson.HPUpdates.HPBIOSUpdate -eq $true){
                 Add-Content -Path $PSFilePath 'Write-Host "Running HP System Firmware" -ForegroundColor Magenta'
