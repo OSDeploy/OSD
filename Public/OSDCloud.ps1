@@ -1137,6 +1137,7 @@ function Invoke-OSDCloud {
         Invoke-Expression (Invoke-RestMethod -Uri 'https://raw.githubusercontent.com/OSDeploy/OSD/master/cloud/modules/debugmode.psm1')
         osdcloud-addcmtrace
         osdcloud-addmouseoobe
+        osdcloud-UpdateModuleFilesManually
     }
 
     #=================================================
@@ -1308,6 +1309,7 @@ exit
             }
         }
     }
+
     #=================================================
     #	Deploy-OSDCloud Complete
     #=================================================
