@@ -1104,7 +1104,7 @@ function Invoke-OSDCloud {
             
         New-Item -Path $PSFilePath -ItemType File -Force
         if ($HPJson){
-            Add-Content -Path $PSFilePath "Start-Transcript -Path (Join-Path 'C:\OSDCloud\Logs\SetupComplete.log' -ErrorAction Ignore"
+            Add-Content -Path $PSFilePath "Start-Transcript -Path 'C:\OSDCloud\Logs\SetupComplete.log' -ErrorAction Ignore"
             Add-Content -Path $PSFilePath "Invoke-Expression (Invoke-RestMethod -Uri 'https://raw.githubusercontent.com/OSDeploy/OSD/master/cloud/modules/deviceshp.psm1')"
             Add-Content -Path $PSFilePath "Invoke-Expression (Invoke-RestMethod -Uri 'functions.osdcloud.com')"
             Add-Content -Path $PSFilePath "osdcloud-InstallModuleHPCMSL"

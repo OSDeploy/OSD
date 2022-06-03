@@ -179,9 +179,9 @@ function Invoke-OSDSpecialize {
             Invoke-Expression (Invoke-RestMethod -Uri 'functions.osdcloud.com')
             #Invoke-Expression (Invoke-RestMethod -Uri 'https://raw.githubusercontent.com/OSDeploy/OSD/master/cloud/modules/deviceshp.psm1')
             
-            osdcloud-SetExecutionPolicy -WarningAction SilentlyContinue
-            osdcloud-InstallPackageManagement -WarningAction SilentlyContinue
-            osdcloud-InstallModuleHPCMSL -WarningAction SilentlyContinue
+            #osdcloud-SetExecutionPolicy -WarningAction SilentlyContinue
+            #osdcloud-InstallPackageManagement -WarningAction SilentlyContinue
+            #osdcloud-InstallModuleHPCMSL -WarningAction SilentlyContinue
             if ($HPJson.HPUpdates.HPTPMUpdate -eq $true){
                 Write-Host -ForegroundColor DarkGray "========================================================================="
                 Write-Host "Updating TPM" -ForegroundColor Cyan
