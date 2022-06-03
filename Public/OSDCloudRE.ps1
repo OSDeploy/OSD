@@ -65,15 +65,15 @@ function Invoke-OSDCloudRE {
     #region Set Post-Merge Defaults
     $Global:OSDCloudRE.Version = [Version](Get-Module -Name OSD -ListAvailable | Sort-Object Version -Descending | Select-Object -First 1).Version
 
-    $Global:OSDCloudRE.DownloadDirectory = "$env:SystemDrive\OSDCloud\Azure\$($Global:OSDCloudRE.AzOSDCloudBootImage.BlobClient.AccountName)\$($Global:OSDCloudRE.AzOSDCloudBootImage.BlobClient.BlobContainerName)"
-    $Global:OSDCloudRE.DownloadName = $(Split-Path $Global:OSDCloudRE.AzOSDCloudBootImage.Name -Leaf)
-    $Global:OSDCloudRE.DownloadFullName = "$($Global:OSDCloudRE.DownloadDirectory)\$($Global:OSDCloudRE.DownloadName)"
-    #endregion
-    #=================================================
     if ($Global:OSDCloudRE.AzOSDCloudBootImage -eq $false) {
         Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) A Boot Image is required to fun this function"
         Break
     }
+
+    $Global:OSDCloudRE.DownloadDirectory = "$env:SystemDrive\OSDCloud\Azure\$($Global:OSDCloudRE.AzOSDCloudBootImage.BlobClient.AccountName)\$($Global:OSDCloudRE.AzOSDCloudBootImage.BlobClient.BlobContainerName)"
+    $Global:OSDCloudRE.DownloadName = $(Split-Path $Global:OSDCloudRE.AzOSDCloudBootImage.Name -Leaf)
+    $Global:OSDCloudRE.DownloadFullName = "$($Global:OSDCloudRE.DownloadDirectory)\$($Global:OSDCloudRE.DownloadName)"
+    #endregion
     #=================================================
     #region Test Admin Rights
     Write-Host -ForegroundColor DarkGray "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Test Admin Rights"
@@ -122,14 +122,45 @@ function Invoke-OSDCloudRE {
     #=================================================
     #region Azure Storage Image Download
     if ($Global:OSDCloudRE.AzOSDCloudBootImage) {
+
+        $GetAzStorageBlobContentParam = @{
+            CloudBlob = $Global:OSDCloudRE.AzOSDCloudBootImage.ICloudBlob
+            Context = $Global:OSDCloudRE.AzOSDCloudBootImage.Context
+            Destination = $Global:OSDCloudRE.DownloadFullName
+            Force = $true
+        }
+
+        $NewItemParam = @{
+            Force = $true
+            ItemType = 'Directory'
+            Path = $Global:OSDCloudRE.DownloadDirectory
+        }
+
         Write-Host -ForegroundColor DarkGray "========================================================================="
         Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) OSDCloud Azure Storage Boot Image Download"
+
         $Global:OSDCloudRE.AzOSDCloudBootImage | ConvertTo-Json | Out-File -FilePath "$OSDCloudLogs\AzOSDCloudBootImage.json" -Encoding ascii -Width 2000
 
-        $null = New-Item -Path $Global:OSDCloudRE.DownloadDirectory -ItemType Directory -Force -ErrorAction Ignore
+        if (Test-Path $Global:OSDCloudRE.DownloadFullName) {
+            Write-Host -ForegroundColor DarkGray "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) $($Global:OSDCloudRE.DownloadFullName) already exists"
 
-        Get-AzStorageBlobContent -CloudBlob $Global:OSDCloudRE.AzOSDCloudBootImage.ICloudBlob -Context $Global:OSDCloudRE.AzOSDCloudBootImage.Context -Destination $Global:OSDCloudRE.DownloadFullName -ErrorAction Ignore
-        $Global:OSDCloudRE.BootImage = Get-Item -Path $Global:OSDCloudRE.DownloadFullName -ErrorAction Ignore | Select-Object -First 1 | Select-Object -First 1
+            $Global:OSDCloudRE.BootImage = Get-Item -Path $Global:OSDCloudRE.DownloadFullName -ErrorAction Stop | Select-Object -First 1 | Select-Object -First 1
+
+            if ($Global:OSDCloudRE.AzOSDCloudBootImage.Length -eq ($Global:OSDCloudRE.BootImage.Length)) {
+                Write-Host -ForegroundColor DarkGray "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Destination file size matches Azure Storage, skipping previous download"
+            }
+            else {
+                Write-Host -ForegroundColor DarkGray "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Existing file does not match Azure Storage, downloading updated file"
+                Get-AzStorageBlobContent @GetAzStorageBlobContentParam -ErrorAction Stop
+            }
+        }
+        else {
+            if (-not (Test-Path "$($Global:OSDCloudRE.DownloadDirectory)")) {
+                Write-Host -ForegroundColor DarkGray "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Creating directory $($Global:OSDCloudRE.DownloadDirectory)"
+                $null = New-Item @NewItemParam -ErrorAction Ignore
+            }
+            Get-AzStorageBlobContent @GetAzStorageBlobContentParam -ErrorAction Stop
+        }
     }
     if (! $Global:OSDCloudRE.BootImage) {
         Break

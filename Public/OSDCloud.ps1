@@ -34,6 +34,9 @@ function Invoke-OSDCloud {
         AzStorageContext = $Global:AzStorageContext
         BuildName = 'OSDCloud'
         Debug = $false
+        DownloadDirectory = $null
+        DownloadName = $null
+        DownloadFullName = $null
         DriverPack = $null
         DriverPackBaseName = $null
         DriverPackExpand = [bool]$false
@@ -513,16 +516,53 @@ function Invoke-OSDCloud {
     }
     #endregion
     #=================================================
-    #region Azure Storage Image Download
+    #region Azure Storage Windows Image Download
     if ($Global:OSDCloud.AzOSDCloudImage) {
+
+        $Global:OSDCloud.DownloadDirectory = "C:\OSDCloud\Azure\$($Global:OSDCloud.AzOSDCloudImage.BlobClient.AccountName)\$($Global:OSDCloud.AzOSDCloudImage.BlobClient.BlobContainerName)"
+        $Global:OSDCloud.DownloadName = $(Split-Path $Global:OSDCloud.AzOSDCloudImage.Name -Leaf)
+        $Global:OSDCloud.DownloadFullName = "$($Global:OSDCloud.DownloadDirectory)\$($Global:OSDCloud.DownloadName)"
+
+        $GetAzStorageBlobContentParam = @{
+            CloudBlob = $Global:OSDCloud.AzOSDCloudImage.ICloudBlob
+            Context = $Global:OSDCloud.AzOSDCloudImage.Context
+            Destination = $Global:OSDCloud.DownloadFullName
+            Force = $true
+        }
+
+        $NewItemParam = @{
+            Force = $true
+            ItemType = 'Directory'
+            Path = $Global:OSDCloud.DownloadDirectory
+        }
+
         Write-Host -ForegroundColor DarkGray "========================================================================="
-        Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) OSDCloud Azure Storage Image Download"
+        Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) OSDCloud Azure Storage Windows Image Download"
+
         $Global:OSDCloud.AzOSDCloudImage | ConvertTo-Json | Out-File -FilePath "$OSDCloudLogs\AzOSDCloudImage.json" -Encoding ascii -Width 2000
 
-        $null = New-Item -Path 'C:\OSDCloud\OS' -ItemType Directory -Force -ErrorAction Ignore
+        if (Test-Path $Global:OSDCloud.DownloadFullName) {
+            Write-Host -ForegroundColor DarkGray "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) $($Global:OSDCloud.DownloadFullName) already exists"
 
-        Get-AzStorageBlobContent -CloudBlob $Global:OSDCloud.AzOSDCloudImage.ICloudBlob -Context $Global:OSDCloud.AzOSDCloudImage.Context -Destination "C:\OSDCloud\OS\$(Split-Path $Global:OSDCloud.AzOSDCloudImage.Name -Leaf)"
-        $Global:OSDCloud.ImageFileDestination = Get-ChildItem -Path 'C:\OSDCloud\OS\*' -Include *.wim,*.esd,*.iso | Select-Object -First 1
+            $Global:OSDCloud.ImageFileDestination = Get-Item -Path $Global:OSDCloud.DownloadFullName -ErrorAction Stop | Select-Object -First 1 | Select-Object -First 1
+
+            if ($Global:OSDCloud.AzOSDCloudImage.Length -eq $Global:OSDCloud.ImageFileDestination.Length) {
+                Write-Host -ForegroundColor DarkGray "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Destination file size matches Azure Storage, skipping previous download"
+            }
+            else {
+                Write-Host -ForegroundColor DarkGray "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Existing file does not match Azure Storage, downloading updated file"
+                Get-AzStorageBlobContent @GetAzStorageBlobContentParam -ErrorAction Stop
+            }
+        }
+        else {
+            if (-not (Test-Path "$($Global:OSDCloud.DownloadDirectory)")) {
+                Write-Host -ForegroundColor DarkGray "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Creating directory $($Global:OSDCloud.DownloadDirectory)"
+                $null = New-Item @NewItemParam -ErrorAction Ignore
+            }
+            Get-AzStorageBlobContent @GetAzStorageBlobContentParam -ErrorAction Stop
+        }
+        
+        $Global:OSDCloud.ImageFileDestination = Get-Item -Path $Global:OSDCloud.DownloadFullName -ErrorAction Stop | Select-Object -First 1 | Select-Object -First 1
     }
     #endregion
     #=================================================
