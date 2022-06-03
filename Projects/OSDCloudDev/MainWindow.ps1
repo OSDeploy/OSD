@@ -798,12 +798,6 @@ $formMainWindowControlStartButton.add_Click({
         }
     }
     #================================================
-    #   Debug Settings
-    #================================================
-    if ($formMainWindowControlDebugCheckBox.IsChecked -eq $true){
-        $formMainWindowControlRestart.IsChecked = $false
-    }  
-    #================================================
     #   Global Variables
     #================================================
     $Global:StartOSDCloudGUI = $null
