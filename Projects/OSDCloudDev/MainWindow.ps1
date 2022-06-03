@@ -327,37 +327,35 @@ if ($HPEnterprise){
     $formMainWindowControlManufacturerFunction.Header = "HP Functions"
     $formMainWindowControlManufacturerFunction.Visibility = 'Visible'
 
-    $formMainWindowControlOption_Name_1.Header = "HPIA Drivers"
+    $formMainWindowControlOption_Name_1.Header = "HPIA Drivers - Adds approx 20 minutes"
     $formMainWindowControlOption_Name_1.IsChecked = $true 
-    $formMainWindowControlOption_Name_2.Header = "HPIA Firmware"
+    $formMainWindowControlOption_Name_2.Header = "HPIA Firmware - Adds approx 5 minutes"
     $formMainWindowControlOption_Name_2.IsChecked = $true 
-    $formMainWindowControlOption_Name_3.Header = "HPIA Software"
+    $formMainWindowControlOption_Name_3.Header = "HPIA Software - Adds approx 10 minutes"
     $formMainWindowControlOption_Name_3.IsChecked = $false 
-
+    $formMainWindowControlOption_Name_4.Header = "HPIA All Options - Adds approx 25 minutes"
+    $formMainWindowControlOption_Name_4.IsChecked = $false 
     if ($TPM -eq $false){
-        $formMainWindowControlOption_Name_4.Header = "HP TPM Firmware Already Current"
-        $formMainWindowControlOption_Name_4.IsEnabled = $false
+        $formMainWindowControlOption_Name_5.Header = "HP TPM Firmware Already Current"
+        $formMainWindowControlOption_Name_5.IsEnabled = $false
         }
     else
         {
-        $formMainWindowControlOption_Name_4.Visibility = 'Visible'
-        $formMainWindowControlOption_Name_4.Header = "HP Update TPM Firmware: $TPM"
+        $formMainWindowControlOption_Name_5.Visibility = 'Visible'
+        $formMainWindowControlOption_Name_5.Header = "HP Update TPM Firmware: $TPM"
         }
     if ($BIOS -eq $false){
         $CurrentVer = Get-HPBIOSVersion
-        $formMainWindowControlOption_Name_5.Header = "HP System Firmware already Current: $CurrentVer"
-        $formMainWindowControlOption_Name_5.IsEnabled = $false
+        $formMainWindowControlOption_Name_6.Header = "HP System Firmware already Current: $CurrentVer"
+        $formMainWindowControlOption_Name_6.IsEnabled = $false
         }
     else
         {
         $LatestVer = (Get-HPBIOSUpdates -Latest).ver
         $CurrentVer = Get-HPBIOSVersion
-        $formMainWindowControlOption_Name_5.Visibility = 'Visible'
-        $formMainWindowControlOption_Name_5.Header = "HP Update System Firmwware from $CurrentVer to $LatestVer"
+        $formMainWindowControlOption_Name_6.Visibility = 'Visible'
+        $formMainWindowControlOption_Name_6.Header = "HP Update System Firmwware from $CurrentVer to $LatestVer"
         }
-    
-    $formMainWindowControlOption_Name_6.IsEnabled = $false 
-    $formMainWindowControlOption_Name_6.Visibility = "Hidden" 
 }
 
 elseif ($DellEnterprise){
@@ -822,8 +820,9 @@ $formMainWindowControlStartButton.add_Click({
         HPIADrivers                 = $formMainWindowControlOption_Name_1.IsChecked
         HPIAFirmware                = $formMainWindowControlOption_Name_2.IsChecked
         HPIASoftware                = $formMainWindowControlOption_Name_3.IsChecked
-        HPTPMUpdate                 = $formMainWindowControlOption_Name_4.IsChecked
-        HPBIOSUpdate                = $formMainWindowControlOption_Name_5.IsChecked
+        HPIAAll                     = $formMainWindowControlOption_Name_4.IsChecked
+        HPTPMUpdate                 = $formMainWindowControlOption_Name_5.IsChecked
+        HPBIOSUpdate                = $formMainWindowControlOption_Name_6.IsChecked
         DCUDrivers                  = $formMainWindowControlOption_Name_1.IsChecked
         OOBEDeployJsonChildItem     = $OOBEDeployJsonChildItem
         OOBEDeployJsonItem          = $OOBEDeployJsonItem

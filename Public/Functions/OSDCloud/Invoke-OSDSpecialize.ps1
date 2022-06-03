@@ -176,8 +176,9 @@ function Invoke-OSDSpecialize {
         }
         if ($HPJson){
             write-host "Specialize Stage - HP Devices" -ForegroundColor Green
-            Invoke-Expression (Invoke-RestMethod -Uri 'functions.osdcloud.com')
-            #Invoke-Expression (Invoke-RestMethod -Uri 'https://raw.githubusercontent.com/OSDeploy/OSD/master/cloud/modules/deviceshp.psm1')
+            $WarningPreference = "SilentlyContinue"
+            #Invoke-Expression (Invoke-RestMethod -Uri 'functions.osdcloud.com')
+            Invoke-Expression (Invoke-RestMethod -Uri 'https://raw.githubusercontent.com/OSDeploy/OSD/master/cloud/modules/deviceshp.psm1')
             
             #osdcloud-SetExecutionPolicy -WarningAction SilentlyContinue
             #osdcloud-InstallPackageManagement -WarningAction SilentlyContinue
@@ -188,8 +189,9 @@ function Invoke-OSDSpecialize {
                 osdcloud-InstallTPMEXE
                 start-sleep -Seconds 10
             }
-            if ($HPJson.HPUpdates.HPBIOSUpdate -eq $true){
+            if (($HPJson.HPUpdates.HPBIOSUpdate -eq $true) -and ($HPJson.HPUpdates.HPTPMUpdate -ne $true)){
                 #Stage Firmware Update for Next Reboot
+                Import-Module 
                 Write-Host -ForegroundColor DarkGray "========================================================================="
                 Write-Host -ForegroundColor Cyan "Updating HP System Firmware"
                 if (Get-HPBIOSSetupPasswordIsSet){Write-Host -ForegroundColor Red "Device currently has BIOS Setup Password, Please Update BIOS via different method"}

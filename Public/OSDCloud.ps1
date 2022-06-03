@@ -1029,16 +1029,18 @@ function Invoke-OSDCloud {
     #   HP Updates Config for Specialize Phase
     #=================================================
     #Set Specialize JSON
-    if (($Global:OSDCloud.HPIADrivers -eq $true) -or ($Global:OSDCloud.HPIAFirmware -eq $true) -or ($Global:OSDCloud.HPIASoftware -eq $true) -or ($Global:OSDCloud.HPTPMUpdate -eq $true) -or ($Global:OSDCloud.HPBIOSUpdate -eq $true)){
+    if (($Global:OSDCloud.HPIAAll -eq $true) -or $Global:OSDCloud.HPIADrivers -eq $true) -or ($Global:OSDCloud.HPIAFirmware -eq $true) -or ($Global:OSDCloud.HPIASoftware -eq $true) -or ($Global:OSDCloud.HPTPMUpdate -eq $true) -or ($Global:OSDCloud.HPBIOSUpdate -eq $true)){
         $HPFeaturesEnabled = $true
         Write-Host -ForegroundColor DarkGray "========================================================================="
         Write-Host -ForegroundColor Cyan "Adding HP Tasks into JSON Config File for Action during Specialize" 
-        Write-Host -ForegroundColor DarkGray "HPIADrivers = $($Global:OSDCloud.HPIADrivers) | HPIAFirmware = $($Global:OSDCloud.HPIAFirmware) |HPTPMUpdate = $($Global:OSDCloud.HPTPMUpdate) | HPBIOSUpdate = $($Global:OSDCloud.HPBIOSUpdate)" 
+        Write-Host -ForegroundColor DarkGray "HPIA Drivers = $($Global:OSDCloud.HPIADrivers) | HPIA Firmware = $($Global:OSDCloud.HPIAFirmware) | HPIA Software = $($Global:OSDCloud.HPIADrivers) | HPIA All = $($Global:OSDCloud.HPIAFirmware) "
+        Write-Host -ForegroundColor DarkGray "HP TPM Update = $($Global:OSDCloud.HPTPMUpdate) | HP BIOS Update = $($Global:OSDCloud.HPBIOSUpdate)" 
         $HPHashTable = @{
             'HPUpdates' = @{
                 'HPIADrivers' = $Global:OSDCloud.HPIADrivers
                 'HPIAFirmware' = $Global:OSDCloud.HPIAFirmware
                 'HPIASoftware' = $Global:OSDCloud.HPIASoftware
+                'HPIAAll' = $Global:OSDCloud.HPIASoftware
                 'HPTPMUpdate' = $Global:OSDCloud.HPTPMUpdate
                 'HPBIOSUpdate' = $Global:OSDCloud.HPBIOSUpdate
             }
@@ -1106,28 +1108,32 @@ function Invoke-OSDCloud {
         if ($HPJson){
             Add-Content -Path $PSFilePath "Start-Transcript -Path 'C:\OSDCloud\Logs\SetupComplete.log' -ErrorAction Ignore"
             Add-Content -Path $PSFilePath "Invoke-Expression (Invoke-RestMethod -Uri 'https://raw.githubusercontent.com/OSDeploy/OSD/master/cloud/modules/deviceshp.psm1')"
-            Add-Content -Path $PSFilePath "Invoke-Expression (Invoke-RestMethod -Uri 'functions.osdcloud.com')"
-            Add-Content -Path $PSFilePath "osdcloud-InstallModuleHPCMSL"
+            Add-Content -Path $PSFilePath "Invoke-Expression (Invoke-RestMethod -Uri 'functions.osdcloud.com' -ErrorAction SilentlyContinue)"
+            Add-Content -Path $PSFilePath "osdcloud-InstallModuleHPCMSL -ErrorAction SilentlyContinue"
             Add-Content -Path $PSFilePath 'Write-Host "Running HP Tools in SetupComplete" -ForegroundColor Green'
-            if ($HPJson.HPUpdates.HPIADrivers -eq $true){
+            if ($HPJson.HPUpdates.HPIADrivers -eq $true -and $HPJson.HPUpdates.HPIAAll -ne $true){
                 Add-Content -Path $PSFilePath 'Write-Host "Running HPIA for Drivers" -ForegroundColor Magenta'
                 Add-Content -Path $PSFilePath "osdcloud-RunHPIA -Category Drivers"
             }
-            if ($HPJson.HPUpdates.HPIAFirmware -eq $true){
+            if ($HPJson.HPUpdates.HPIAFirmware -eq $true -and $HPJson.HPUpdates.HPIAAll -ne $true){
                 Add-Content -Path $PSFilePath 'Write-Host "Running HPIA for Firmware" -ForegroundColor Magenta'
                 Add-Content -Path $PSFilePath "osdcloud-RunHPIA -Category Firmware"
             } 
-            if ($HPJson.HPUpdates.HPIASoftware -eq $true){
+            if ($HPJson.HPUpdates.HPIASoftware -eq $true -and $HPJson.HPUpdates.HPIAAll -ne $true){
                 Add-Content -Path $PSFilePath 'Write-Host "Running HPIA for Software" -ForegroundColor Magenta'
                 Add-Content -Path $PSFilePath "osdcloud-RunHPIA -Category Software"
             } 
+            if ($HPJson.HPUpdates.HPIAAll -eq $true){
+                Add-Content -Path $PSFilePath 'Write-Host "Running HPIA for Software" -ForegroundColor Magenta'
+                Add-Content -Path $PSFilePath "osdcloud-RunHPIA -Category All"
+            }            
             if ($HPJson.HPUpdates.HPTPMUpdate -eq $true){
                 #Add-Content -Path $PSFilePath 'Write-Host "Updating TPM Firmware" -ForegroundColor Magenta'
                 #Add-Content -Path $PSFilePath "osdcloud-InstallTPMEXE"
             } 
             if ($HPJson.HPUpdates.HPBIOSUpdate -eq $true){
-                Add-Content -Path $PSFilePath 'Write-Host "Running HP System Firmware" -ForegroundColor Magenta'
-                Add-Content -Path $PSFilePath "osdcloud-UpdateHPBIOS"
+                #Add-Content -Path $PSFilePath 'Write-Host "Running HP System Firmware" -ForegroundColor Magenta'
+                #Add-Content -Path $PSFilePath "osdcloud-UpdateHPBIOS"
             }
             Add-Content -Path $PSFilePath "Stop-Transcript"
             Add-Content -Path $PSFilePath "Restart-Computer -Force"
