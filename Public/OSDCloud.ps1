@@ -1111,15 +1111,8 @@ function Invoke-OSDCloud {
         osdcloud-SetTPMBIOSSettings
         osdcloud-DownloadHPTPMEXE
     }   
+    #=================================================
     #Leverage SetupComplete.cmd to run HP Tools
-    $ConfigPath = "c:\osdcloud\configs"
-    if (Test-Path $ConfigPath){
-        $JSONConfigs = Get-ChildItem -path $ConfigPath -Filter "*.json"
-        if ($JSONConfigs.name -contains "HP.JSON"){
-            $HPJson = Get-Content -Path "$ConfigPath\HP.JSON" |ConvertFrom-Json
-            }
-        }
-    
     $ScriptsPath = "C:\Windows\Setup\scripts"
     if (!(Test-Path -Path $ScriptsPath)){New-Item -Path $ScriptsPath} 
     
@@ -1146,34 +1139,35 @@ function Invoke-OSDCloud {
             
         New-Item -Path $PSFilePath -ItemType File -Force
         if ($HPJson){
+            Add-Content -path $PSFilePath "Set-ExecutionPolicy Bypass -Force | out-null"
             Add-Content -Path $PSFilePath "Start-Transcript -Path 'C:\OSDCloud\Logs\SetupComplete.log' -ErrorAction Ignore"
             Add-Content -Path $PSFilePath "Invoke-Expression (Invoke-RestMethod -Uri 'https://raw.githubusercontent.com/OSDeploy/OSD/master/cloud/modules/deviceshp.psm1')"
             Add-Content -Path $PSFilePath "Invoke-Expression (Invoke-RestMethod -Uri 'functions.osdcloud.com' -ErrorAction SilentlyContinue)"
             Add-Content -Path $PSFilePath "osdcloud-InstallModuleHPCMSL -ErrorAction SilentlyContinue"
             Add-Content -Path $PSFilePath 'Write-Host "Running HP Tools in SetupComplete" -ForegroundColor Green'
-            if ($HPJson.HPUpdates.HPIADrivers -eq $true -and $HPJson.HPUpdates.HPIAAll -ne $true){
+            if (($Global:OSDCloud.HPIADrivers -eq $true) -and ($Global:OSDCloud.HPIAAll -ne $true)){
                 Add-Content -Path $PSFilePath 'Write-Host "Running HPIA for Drivers" -ForegroundColor Magenta'
                 Add-Content -Path $PSFilePath "osdcloud-RunHPIA -Category Drivers"
             }
-            if ($HPJson.HPUpdates.HPIAFirmware -eq $true -and $HPJson.HPUpdates.HPIAAll -ne $true){
+            if (($Global:OSDCloud.HPIAFirmware -eq $true) -and ($Global:OSDCloud.HPIAAll  -ne $true)){
                 Add-Content -Path $PSFilePath 'Write-Host "Running HPIA for Firmware" -ForegroundColor Magenta'
                 Add-Content -Path $PSFilePath "osdcloud-RunHPIA -Category Firmware"
             } 
-            if ($HPJson.HPUpdates.HPIASoftware -eq $true -and $HPJson.HPUpdates.HPIAAll -ne $true){
+            if (($Global:OSDCloud.HPIASoftware -eq $true) -and ($Global:OSDCloud.HPIAAll  -ne $true)){
                 Add-Content -Path $PSFilePath 'Write-Host "Running HPIA for Software" -ForegroundColor Magenta'
                 Add-Content -Path $PSFilePath "osdcloud-RunHPIA -Category Software"
             } 
-            if ($HPJson.HPUpdates.HPIAAll -eq $true){
+            if ($Global:OSDCloud.HPIAAll  -eq $true){
                 Add-Content -Path $PSFilePath 'Write-Host "Running HPIA for Software" -ForegroundColor Magenta'
                 Add-Content -Path $PSFilePath "osdcloud-RunHPIA -Category All"
             }            
-            if ($HPJson.HPUpdates.HPTPMUpdate -eq $true){
+            if ($Global:OSDCloud.HPTPMUpdate -eq $true){
                 #Add-Content -Path $PSFilePath 'Write-Host "Updating TPM Firmware" -ForegroundColor Magenta'
                 #Add-Content -Path $PSFilePath "osdcloud-InstallTPMEXE"
             } 
-            if ($HPJson.HPUpdates.HPBIOSUpdate -eq $true){
-                #Add-Content -Path $PSFilePath 'Write-Host "Running HP System Firmware" -ForegroundColor Magenta'
-                #Add-Content -Path $PSFilePath "osdcloud-UpdateHPBIOS"
+            if ($Global:OSDCloud.HPBIOSUpdate -eq $true){
+                Add-Content -Path $PSFilePath 'Write-Host "Running HP System Firmware" -ForegroundColor Magenta'
+                Add-Content -Path $PSFilePath "osdcloud-UpdateHPBIOS"
             }
             Add-Content -Path $PSFilePath "Stop-Transcript"
             Add-Content -Path $PSFilePath "Restart-Computer -Force"
