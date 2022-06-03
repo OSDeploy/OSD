@@ -40,7 +40,7 @@ function osdcloud-InstallModuleHPCMSL {
         Install-Package -Name PowerShellGet -MinimumVersion 2.2.5 -Force -Confirm:$false -Source PSGallery | Out-Null
 
         Write-Host -ForegroundColor DarkGray 'Import-Module PackageManagement,PowerShellGet [Global]'
-        Import-Module PackageManagement,PowerShellGet -Force -Scope Global
+        Import-Module PackageManagement,PowerShellGet -Force -Scope Global -WarningAction SilentlyContinue -ErrorAction SilentlyContinue
         }
     $InstalledModule = Get-InstalledModule $PSModuleName -ErrorAction Ignore | Select-Object -First 1
     $GalleryPSModule = Find-Module -Name $PSModuleName -ErrorAction Ignore
@@ -57,14 +57,14 @@ function osdcloud-InstallModuleHPCMSL {
     if ($InstallModule) {
         if ($WindowsPhase -eq 'WinPE') {
             Write-Host -ForegroundColor DarkGray "Install-Module $PSModuleName $($GalleryPSModule.Version) [AllUsers]"
-            Install-Module $PSModuleName -SkipPublisherCheck -Scope AllUsers -Force -AcceptLicense
+            Install-Module $PSModuleName -SkipPublisherCheck -Scope AllUsers -Force -AcceptLicense -ErrorAction SilentlyContinue -WarningAction SilentlyContinue
         }
         else {
             Write-Host -ForegroundColor DarkGray "Install-Module $PSModuleName $($GalleryPSModule.Version) [AllUsers]"
-            Install-Module $PSModuleName -SkipPublisherCheck -AcceptLicense -Scope AllUsers -Force
+            Install-Module $PSModuleName -SkipPublisherCheck -AcceptLicense -Scope AllUsers -Force -ErrorAction SilentlyContinue -WarningAction SilentlyContinue
         }
     }
-    Import-Module -Name $PSModuleName -Force -Global -ErrorAction SilentlyContinue
+    Import-Module -Name $PSModuleName -Force -Global -ErrorAction SilentlyContinue -WarningAction SilentlyContinue
 }
 function osdcloud-DetermineHPTPM{
     $SP87753 = Get-CimInstance  -Namespace "root\cimv2\security\MicrosoftTPM" -query "select * from win32_tpm where IsEnabled_InitialValue = 'True' and ((ManufacturerVersion like '7.%' and ManufacturerVersion < '7.63.3353') or (ManufacturerVersion like '5.1%') or (ManufacturerVersion like '5.60%') or (ManufacturerVersion like '5.61%') or (ManufacturerVersion like '4.4%') or (ManufacturerVersion like '6.40%') or (ManufacturerVersion like '6.41%') or (ManufacturerVersion like '6.43.243.0') or (ManufacturerVersion like '6.43.244.0'))"
