@@ -1065,9 +1065,6 @@ function Invoke-OSDCloud {
         }
     }
     #>
-    if ($Global:OSDCloud.HPBIOSUpdate -eq $true){
-        osdcloud-DownloadHPBIOSEXE
-    }
     if ($Global:OSDCloud.HPTPMUpdate -eq $true){
         osdcloud-DownloadHPTPMEXE
     }   

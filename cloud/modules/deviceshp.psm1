@@ -125,6 +125,7 @@ function osdcloud-DownloadHPTPMEXE {
         if (!(Test-Path -Path $UpdatePath)){Throw "Failed to Download TPM Update"}
     }    
 }
+#does not work in pe
 function osdcloud-DownloadHPBIOSEXE {
     osdcloud-InstallModuleHPCMSL
     Import-Module -Name HPCMSL -Force
