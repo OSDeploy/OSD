@@ -191,7 +191,7 @@ function Invoke-OSDSpecialize {
             }
             if (($HPJson.HPUpdates.HPBIOSUpdate -eq $true) -and ($HPJson.HPUpdates.HPTPMUpdate -ne $true)){
                 #Stage Firmware Update for Next Reboot
-                Import-Module 
+                Import-Module HPCMSL -ErrorAction SilentlyContinue | out-null
                 Write-Host -ForegroundColor DarkGray "========================================================================="
                 Write-Host -ForegroundColor Cyan "Updating HP System Firmware"
                 if (Get-HPBIOSSetupPasswordIsSet){Write-Host -ForegroundColor Red "Device currently has BIOS Setup Password, Please Update BIOS via different method"}
