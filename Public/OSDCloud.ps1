@@ -1284,7 +1284,7 @@ exit
             }
             if ($HPFeaturesEnabled){
                 try {
-                    Save-Module -Name HPCMSL -Path "$PowerShellSavePath\Modules" -Force -ErrorAction Stop
+                    Save-Module -Name HPCMSL -AcceptLicense -Path "$PowerShellSavePath\Modules" -Force -ErrorAction Stop
                 }
                 catch {
                     Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Unable to Save-Module HPCMSL to $PowerShellSavePath\Modules"
