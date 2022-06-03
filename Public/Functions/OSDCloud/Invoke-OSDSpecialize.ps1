@@ -22,8 +22,8 @@ function Invoke-OSDSpecialize {
         New-Item -Path 'C:\OSDCloud\Logs' -ItemType Directory -Force -ErrorAction Stop | Out-Null
     }
     
-    $Global:OSDCloud.Transcript = "$((Get-Date).ToString('yyyy-MM-dd-HHmmss'))-Deploy-OSDCloud.log"
-    Start-Transcript -Path (Join-Path 'C:\OSDCloud\Logs' $Global:OSDCloud.Transcript) -ErrorAction Ignore
+    $Global:Transcript = "$((Get-Date).ToString('yyyy-MM-dd-HHmmss'))-Deploy-OSDCloud-Specialize.log"
+    Start-Transcript -Path (Join-Path 'C:\OSDCloud\Logs' $Global:Transcript) -ErrorAction Ignore
     #endregion
 
     #=================================================
@@ -247,9 +247,8 @@ function Invoke-OSDSpecialize {
     #=================================================
     #	Stop-Transcript
     #=================================================
-    if ($OSDCloud.Test -eq $true) {
-        Stop-Transcript
-    }
+    Stop-Transcript
+    
     #=================================================
     #=================================================
     #   Complete
