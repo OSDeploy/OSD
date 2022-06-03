@@ -1131,15 +1131,7 @@ function Invoke-OSDCloud {
             Add-Content -Path $PSFilePath "Restart-Computer -Force"
         }
     }
-    #=================================================
-    #   Debug Mode
-    #=================================================
-    if ($Global:OSDCloud.DebugMode -eq $true){
-        Invoke-Expression (Invoke-RestMethod -Uri 'https://raw.githubusercontent.com/OSDeploy/OSD/master/cloud/modules/debugmode.psm1')
-        osdcloud-addcmtrace
-        osdcloud-addmouseoobe
-        osdcloud-UpdateModuleFilesManually
-    }
+
 
     #=================================================
     #   AutopilotConfigurationFile.json
@@ -1311,6 +1303,15 @@ exit
         }
     }
 
+    #=================================================
+    #   Debug Mode
+    #=================================================
+    if ($Global:OSDCloud.DebugMode -eq $true){
+        Invoke-Expression (Invoke-RestMethod -Uri 'https://raw.githubusercontent.com/OSDeploy/OSD/master/cloud/modules/debugmode.psm1')
+        osdcloud-addcmtrace
+        osdcloud-addmouseoobe
+        osdcloud-UpdateModuleFilesManually
+    }
     #=================================================
     #	Deploy-OSDCloud Complete
     #=================================================
