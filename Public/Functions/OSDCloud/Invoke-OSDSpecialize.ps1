@@ -186,7 +186,7 @@ function Invoke-OSDSpecialize {
                 Write-Host -ForegroundColor DarkGray "========================================================================="
                 Write-Host "Updating TPM" -ForegroundColor Cyan
                 osdcloud-InstallTPMEXE
-                start-sleep -Seconds 120
+                start-sleep -Seconds 10
             }
             if ($HPJson.HPUpdates.HPBIOSUpdate -eq $true){
                 #Stage Firmware Update for Next Reboot
@@ -199,7 +199,7 @@ function Invoke-OSDSpecialize {
                     #Details: https://developers.hp.com/hp-client-management/doc/Get-HPBiosUpdates
                     Get-HPBIOSUpdates -Flash -Yes -Offline -BitLocker Ignore
                 }
-                start-sleep -Seconds 600
+                start-sleep -Seconds 10
             } 
         }
     #=================================================
