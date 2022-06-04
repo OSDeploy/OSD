@@ -25,11 +25,11 @@ function invoke-AzOSDAzureBicepConfig {
         
         New-AzRoleAssignment -ObjectID (Get-AzADUser -StartsWith "$AzOSDUserNameStart").Id `
         -RoleDefinitionName "Storage Blob Data Reader" `
-        -Scope  "/subscriptions/9b288c1f-ce3f-4769-8d64-b9daa3ceb471/resourceGroups/$ResourceGroupName/providers/Microsoft.Storage/storageAccounts/osdcloudbicepdemo2" | out-null
+        -Scope  "/subscriptions/$Script:AzOSDSubscription/resourceGroups/$ResourceGroupName/providers/Microsoft.Storage/storageAccounts/osdcloudbicepdemo2" | out-null
     
         New-AzRoleAssignment -ObjectID (Get-AzADUser -StartsWith "$AzOSDUserNameStart").Id `
         -RoleDefinitionName "Storage Blob Data Reader" `
-        -Scope  "/subscriptions/9b288c1f-ce3f-4769-8d64-b9daa3ceb471/resourceGroups/$ResourceGroupName/providers/Microsoft.Storage/storageAccounts/osdscripts2" | out-null
+        -Scope  "/subscriptions/$Script:AzOSDSubscription/resourceGroups/$ResourceGroupName/providers/Microsoft.Storage/storageAccounts/osdscripts2" | out-null
             
     $containersImages = @(
         "server",
