@@ -63,6 +63,7 @@ function Invoke-OSDCloud {
         AzOSDCloudBlobPackage = $Global:AzOSDCloudBlobPackage
         AzOSDCloudDriverPack = $null
         AzOSDCloudImage = $Global:AzOSDCloudImage
+        AzOSDCloudPackage = $null
         AzStorageAccounts = $Global:AzStorageAccounts
         AzStorageContext = $Global:AzStorageContext
         BuildName = 'OSDCloud'
@@ -878,8 +879,9 @@ function Invoke-OSDCloud {
     #endregion
     #=================================================
     #region Packages
-    if ($Global:OSDCloud.AzOSDCloudBlobPackage) {
-        foreach ($Item in $Global:OSDCloud.AzOSDCloudBlobPackage) {
+    Write-SectionHeader 'OSDCloud Azure Container as a Task Sequence'
+    if ($Global:OSDCloud.AzOSDCloudPackage) {
+        foreach ($Item in $Global:OSDCloud.AzOSDCloudPackage) {
 
             if (!(Test-Path 'C:\OSDCloud\Packages')) {
                 $null = New-Item 'C:\OSDCloud\Packages' -ItemType Directory -Force
@@ -898,12 +900,12 @@ function Invoke-OSDCloud {
         $Packages = Get-ChildItem -Path 'C:\OSDCloud\Packages\' *.ppkg -Recurse -ErrorAction Ignore
 
         foreach ($Item in $Packages) {
+            Write-DarkGrayDate
+            Write-Host -ForegroundColor DarkGray "Add-ProvisioningPackage $($Item.FullName)"
             $Dism = "dism.exe"
             $ArgumentList = "/Image=C:\ /Add-ProvisioningPackage /PackagePath:$($Item.FullName)"
-            Start-Process -FilePath 'dism.exe' -ArgumentList $ArgumentList -Wait
+            $null = Start-Process -FilePath 'dism.exe' -ArgumentList $ArgumentList -Wait -NoNewWindow
         }
-
-        pause
     }
     #endregion
     #=================================================
