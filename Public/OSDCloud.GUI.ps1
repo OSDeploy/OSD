@@ -116,6 +116,6 @@ function Start-OSDCloudAzure {
         }
     }
     else {
-        Invoke-Expression (Invoke-RestMethod azgui.osdcloud.com)
+        Invoke-Expression (Invoke-RestMethod az.osdcloud.com)
     }
 }
