@@ -318,7 +318,7 @@ function Invoke-OSDCloud {
     #endregion
     #=================================================
     #region Clear-Disk
-    if ($Global:OSDCloud.SkipFormat -eq $true){
+    if ($Global:OSDCloud.SkipFormat -ne $true){
         Write-Host -ForegroundColor DarkGray "========================================================================="
         Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Clear-Disk"
         Write-Verbose -Message "https://docs.microsoft.com/en-us/powershell/module/storage/clear-disk"
@@ -340,7 +340,7 @@ function Invoke-OSDCloud {
     #endregion
     #=================================================
     #region New-OSDisk
-    if ($Global:OSDCloud.SkipFormat -eq $true){
+    if ($Global:OSDCloud.SkipFormat -ne $true){
         Write-Host -ForegroundColor DarkGray "========================================================================="
         Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) New-OSDisk"
         Write-Verbose -Message "New Partitions will be created using Microsoft Standard Layout"
