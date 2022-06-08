@@ -224,6 +224,7 @@ function Get-OSDCloudAzureResources {
         $Global:AzOSDCloudBootImage = @()
         $Global:AzOSDCloudBlobImage = @()
         $Global:AzOSDCloudBlobDriverPack = @()
+        $Global:AzOSDCloudBlobPackage = @()
     
         if ($Global:AzOSDCloudStorageAccounts) {
             #Write-Host -ForegroundColor DarkGray    'Storage Contexts:          $Global:AzStorageContext'
@@ -261,6 +262,8 @@ function Get-OSDCloudAzureResources {
                             $Global:AzOSDCloudBlobImage += Get-AzStorageBlob -Context $Global:AzCurrentStorageContext -Container $Container.Name -Blob *.esd -ErrorAction Ignore | Where-Object {$_.Length -gt 3000000000}
                             $Global:AzOSDCloudBlobImage += Get-AzStorageBlob -Context $Global:AzCurrentStorageContext -Container $Container.Name -Blob *.iso -ErrorAction Ignore | Where-Object {$_.Length -gt 3000000000}
                             $Global:AzOSDCloudBlobImage += Get-AzStorageBlob -Context $Global:AzCurrentStorageContext -Container $Container.Name -Blob *.wim -ErrorAction Ignore | Where-Object {$_.Length -gt 3000000000}
+                            
+                            $Global:AzOSDCloudBlobPackage += Get-AzStorageBlob -Context $Global:AzCurrentStorageContext -Container $Container.Name -Blob *.ppkg -ErrorAction Ignore | Where-Object {$_.Length -gt 3000000000}
                         }
                     }
                 }
@@ -270,6 +273,7 @@ function Get-OSDCloudAzureResources {
                 $Global:AzOSDCloudBlobImage | ConvertTo-Json | Out-File -FilePath "$OSDCloudLogs\AzOSDCloudBlobImage.json" -Encoding ascii -Width 2000 -Force
                 $Global:AzOSDCloudBlobBootImage| ConvertTo-Json | Out-File -FilePath "$OSDCloudLogs\AzOSDCloudBlobDriverPack.json" -Encoding ascii -Width 2000 -Force
                 $Global:AzOSDCloudBlobDriverPack | ConvertTo-Json | Out-File -FilePath "$OSDCloudLogs\AzOSDCloudBlobDriverPack.json" -Encoding ascii -Width 2000 -Force
+                $Global:AzOSDCloudBlobPackage | ConvertTo-Json | Out-File -FilePath "$OSDCloudLogs\AzOSDCloudBlobPackage.json" -Encoding ascii -Width 2000 -Force
             }
             if ($null -eq $Global:AzOSDCloudBlobImage) {
                 Write-Warning 'Unable to find a WIM on any of the OSDCloud Azure Storage Containers'
