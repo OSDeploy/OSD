@@ -102,6 +102,7 @@ function Invoke-OSDCloud {
         Shutdown = [bool]$false
         SkipAutopilot = [bool]$false
         SkipAutopilotOOBE = [bool]$false
+        SkipFormat = [bool]$false
         SkipODT = [bool]$false
         SkipOOBEDeploy = [bool]$false
         RecoveryPartition = [bool]$true
@@ -317,59 +318,63 @@ function Invoke-OSDCloud {
     #endregion
     #=================================================
     #region Clear-Disk
-    Write-Host -ForegroundColor DarkGray "========================================================================="
-    Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Clear-Disk"
-    Write-Verbose -Message "https://docs.microsoft.com/en-us/powershell/module/storage/clear-disk"
-    Write-Verbose -Message "Fixed Disks must be cleared before new partitions can be created"
+    if ($Global:OSDCloud.SkipFormat -eq $true){
+        Write-Host -ForegroundColor DarkGray "========================================================================="
+        Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Clear-Disk"
+        Write-Verbose -Message "https://docs.microsoft.com/en-us/powershell/module/storage/clear-disk"
+        Write-Verbose -Message "Fixed Disks must be cleared before new partitions can be created"
 
-    if (($Global:OSDCloud.ZTI -eq $true) -and (($Global:OSDCloud.GetDiskFixed | Measure-Object).Count -lt 2)) {
-        Write-Verbose -Message "Clear-Disk.fixed -Force -NoResults -Confirm:$false"
-        if ($Global:OSDCloud.Test -eq $false) {
-            Clear-Disk.fixed -Force -NoResults -Confirm:$false -ErrorAction Stop
+        if (($Global:OSDCloud.ZTI -eq $true) -and (($Global:OSDCloud.GetDiskFixed | Measure-Object).Count -lt 2)) {
+            Write-Verbose -Message "Clear-Disk.fixed -Force -NoResults -Confirm:$false"
+            if ($Global:OSDCloud.Test -eq $false) {
+                Clear-Disk.fixed -Force -NoResults -Confirm:$false -ErrorAction Stop
+            }
         }
-    }
-    else {
-        Write-Verbose -Message "Clear-Disk.fixed -Force -NoResults"
-        if ($Global:OSDCloud.Test -eq $false) {
-            Clear-Disk.fixed -Force -NoResults -ErrorAction Stop
+        else {
+            Write-Verbose -Message "Clear-Disk.fixed -Force -NoResults"
+            if ($Global:OSDCloud.Test -eq $false) {
+                Clear-Disk.fixed -Force -NoResults -ErrorAction Stop
+            }
         }
     }
     #endregion
     #=================================================
     #region New-OSDisk
-    Write-Host -ForegroundColor DarkGray "========================================================================="
-    Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) New-OSDisk"
-    Write-Verbose -Message "New Partitions will be created using Microsoft Standard Layout"
-    Write-Verbose -Message "https://docs.microsoft.com/en-us/windows-hardware/manufacture/desktop/configure-uefigpt-based-hard-drive-partitions"
-    if ($Global:OSDCloud.RecoveryPartition -eq $false) {
-        Write-Verbose -Message "New-OSDisk -NoRecoveryPartition -Force"
-        if ($Global:OSDCloud.Test -eq $false) {
-            New-OSDisk -PartitionStyle GPT -NoRecoveryPartition -Force -ErrorAction Stop
-        }
-        Write-Host "=========================================================================" -ForegroundColor Cyan
-        Write-Host "| SYSTEM | MSR |                    WINDOWS                             |" -ForegroundColor Cyan
-        Write-Host "=========================================================================" -ForegroundColor Cyan
-    }
-    else {
-        Write-Verbose -Message "New-OSDisk -Force"
-        if ($Global:OSDCloud.Test -eq $false) {
-            New-OSDisk -PartitionStyle GPT -Force -ErrorAction Stop
-        }
-        Write-Host "=========================================================================" -ForegroundColor Cyan
-        Write-Host "| SYSTEM | MSR |                    WINDOWS                  | RECOVERY |" -ForegroundColor Cyan
-        Write-Host "=========================================================================" -ForegroundColor Cyan
-    }
-    #Wait a few seconds to make sure the Disk is set
-    Start-Sleep -Seconds 5
-
-    #Make sure that there is a PSDrive 
-    if (-NOT (Get-PSDrive -Name 'C')) {
+    if ($Global:OSDCloud.SkipFormat -eq $true){
         Write-Host -ForegroundColor DarkGray "========================================================================="
-        Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) OSDCloud Failed"
-        Write-Warning "New-OSDisk didn't work. There is no PSDrive FileSystem at C:\"
-        Write-Warning "Press Ctrl+C to exit"
-        Start-Sleep -Seconds 86400
-        Exit
+        Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) New-OSDisk"
+        Write-Verbose -Message "New Partitions will be created using Microsoft Standard Layout"
+        Write-Verbose -Message "https://docs.microsoft.com/en-us/windows-hardware/manufacture/desktop/configure-uefigpt-based-hard-drive-partitions"
+        if ($Global:OSDCloud.RecoveryPartition -eq $false) {
+            Write-Verbose -Message "New-OSDisk -NoRecoveryPartition -Force"
+            if ($Global:OSDCloud.Test -eq $false) {
+                New-OSDisk -PartitionStyle GPT -NoRecoveryPartition -Force -ErrorAction Stop
+            }
+            Write-Host "=========================================================================" -ForegroundColor Cyan
+            Write-Host "| SYSTEM | MSR |                    WINDOWS                             |" -ForegroundColor Cyan
+            Write-Host "=========================================================================" -ForegroundColor Cyan
+        }
+        else {
+            Write-Verbose -Message "New-OSDisk -Force"
+            if ($Global:OSDCloud.Test -eq $false) {
+                New-OSDisk -PartitionStyle GPT -Force -ErrorAction Stop
+            }
+            Write-Host "=========================================================================" -ForegroundColor Cyan
+            Write-Host "| SYSTEM | MSR |                    WINDOWS                  | RECOVERY |" -ForegroundColor Cyan
+            Write-Host "=========================================================================" -ForegroundColor Cyan
+        }
+        #Wait a few seconds to make sure the Disk is set
+        Start-Sleep -Seconds 5
+
+        #Make sure that there is a PSDrive 
+        if (-NOT (Get-PSDrive -Name 'C')) {
+            Write-Host -ForegroundColor DarkGray "========================================================================="
+            Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) OSDCloud Failed"
+            Write-Warning "New-OSDisk didn't work. There is no PSDrive FileSystem at C:\"
+            Write-Warning "Press Ctrl+C to exit"
+            Start-Sleep -Seconds 86400
+            Exit
+        }
     }
     #endregion
     #=================================================
