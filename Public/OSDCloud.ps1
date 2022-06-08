@@ -1,35 +1,3 @@
-function Write-SectionHeader {
-    [CmdletBinding()]
-    param (
-        [Parameter(Mandatory=$true, Position=0)]
-        [System.String]
-        $Message
-    )
-    Write-DarkGrayLine
-    Write-DarkGrayDate
-    Write-Host -ForegroundColor Cyan $Message
-}
-function Write-SectionSuccess {
-    [CmdletBinding()]
-    param (
-        [Parameter(Position=0)]
-        [System.String]
-        $Message = 'Success!'
-    )
-    Write-DarkGrayDate
-    Write-Host -ForegroundColor Green $Message
-}
-
-function Write-DarkGrayDate {
-    [CmdletBinding()]
-    param ()
-    Write-Host -ForegroundColor DarkGray "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) " -NoNewline
-}
-function Write-DarkGrayLine {
-    [CmdletBinding()]
-    param ()
-    Write-Host -ForegroundColor DarkGray "========================================================================="
-}
 function Invoke-OSDCloud {
     <#
     .SYNOPSIS
@@ -134,11 +102,14 @@ function Invoke-OSDCloud {
         ScreenshotPath = "$env:TEMP\Screenshots"
         SectionPassed = $true
         Shutdown = [bool]$false
+        SkipAllDiskSteps = [bool]$false
         SkipAutopilot = [bool]$false
         SkipAutopilotOOBE = [bool]$false
-        SkipFormat = [bool]$false
+        SkipClearDisk = [bool]$false
+        SkipClearDiskConfirm = [bool]$false
         SkipODT = [bool]$false
         SkipOOBEDeploy = [bool]$false
+        SkipNewOSDisk = [bool]$false
         RecoveryPartition = [bool]$true
         Test = [bool]$false
         TimeEnd = $null
@@ -176,6 +147,56 @@ function Invoke-OSDCloud {
     #=================================================
     #region Set Post-Merge Defaults
     $Global:OSDCloud.Version = [Version](Get-Module -Name OSD -ListAvailable | Sort-Object Version -Descending | Select-Object -First 1).Version
+
+    if ($Global:OSDCloud.SkipAllDiskSteps -eq $true) {
+        $Global:OSDCloud.SkipClearDisk = $true
+        $Global:OSDCloud.SkipNewOSDisk = $true
+    }
+
+    if ($Global:OSDCloud.Test -eq $true) {
+        Write-Host -ForegroundColor DarkGray '$OSDCloud.Test = $true'
+        $Global:OSDCloud.SkipClearDisk = $true
+        $Global:OSDCloud.SkipNewOSDisk = $true
+    }
+
+    if ($Global:OSDCloud.ZTI -eq $true) {
+        Write-Host -ForegroundColor DarkGray '$OSDCloud.ZTI = $true'
+        $Global:OSDCloud.SkipClearDiskConfirm = $true
+    }
+    #endregion
+    #=================================================
+    #region Helper Functions
+    function Write-DarkGrayDate {
+        [CmdletBinding()]
+        param ()
+        Write-Host -ForegroundColor DarkGray "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) " -NoNewline
+    }
+    function Write-DarkGrayLine {
+        [CmdletBinding()]
+        param ()
+        Write-Host -ForegroundColor DarkGray "========================================================================="
+    }
+    function Write-SectionHeader {
+        [CmdletBinding()]
+        param (
+            [Parameter(Mandatory=$true, Position=0)]
+            [System.String]
+            $Message
+        )
+        Write-DarkGrayLine
+        Write-DarkGrayDate
+        Write-Host -ForegroundColor Cyan $Message
+    }
+    function Write-SectionSuccess {
+        [CmdletBinding()]
+        param (
+            [Parameter(Position=0)]
+            [System.String]
+            $Message = 'Success!'
+        )
+        Write-DarkGrayDate
+        Write-Host -ForegroundColor Green $Message
+    }
     #endregion
     #=================================================
     #region OSDCloudLogs
@@ -369,19 +390,24 @@ function Invoke-OSDCloud {
     #>
     Write-SectionHeader "Clear-Disk"
 
-    if ($Global:OSDCloud.SkipFormat -eq $true) {
-        Write-Host -ForegroundColor DarkGray '$OSDCloud.SkipFormat = $true'
+    if ($Global:OSDCloud.SkipClearDisk -eq $true) {
+        Write-Host -ForegroundColor DarkGray '$OSDCloud.SkipClearDisk = $true'
     }
-    else {
-        if (($Global:OSDCloud.ZTI -eq $true) -and (($Global:OSDCloud.GetDiskFixed | Measure-Object).Count -lt 2)) {
-            if ($Global:OSDCloud.Test -eq $false) {
-                Clear-Disk.fixed -Force -NoResults -Confirm:$false -ErrorAction Stop
-            }
-            else {
-                if ($Global:OSDCloud.Test -eq $false) {
-                    Clear-Disk.fixed -Force -NoResults -ErrorAction Stop
-                }
-            }
+
+    if ($Global:OSDCloud.SkipClearDisk -eq $false) {
+        Write-Host -ForegroundColor DarkGray '$OSDCloud.SkipClearDisk = $false'
+
+        if (($Global:OSDCloud.GetDiskFixed | Measure-Object).Count -ge 2) {
+            Write-Host -ForegroundColor DarkGray 'More than 1 Fixed Disk is present, Clear-Disk Confirm is required'
+            Write-Host -ForegroundColor DarkGray '$OSDCloud.SkipClearDiskConfirm = $false'
+            $Global:OSDCloud.SkipClearDiskConfirm = $false
+        }
+
+        if ($Global:OSDCloud.SkipClearDiskConfirm -eq $true) {
+            Clear-Disk.fixed -Force -NoResults -Confirm:$false -ErrorAction Stop
+        }
+        else {
+            Clear-Disk.fixed -Force -NoResults -ErrorAction Stop
         }
     }
     #endregion
@@ -391,8 +417,8 @@ function Invoke-OSDCloud {
     https://docs.microsoft.com/en-us/windows-hardware/manufacture/desktop/configure-uefigpt-based-hard-drive-partitions
     New Partitions will be created using Microsoft Standard Layout
     #>
-    if ($Global:OSDCloud.SkipFormat -eq $true) {
-        Write-Host -ForegroundColor DarkGray '$OSDCloud.SkipFormat = $true'
+    if ($Global:OSDCloud.SkipAllDiskSteps -eq $true) {
+        Write-Host -ForegroundColor DarkGray '$OSDCloud.SkipAllDiskSteps = $true'
     }
     else {
         Write-SectionHeader "New-OSDisk"
