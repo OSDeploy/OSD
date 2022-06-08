@@ -894,7 +894,7 @@ function Invoke-OSDCloud {
                 Force = $true
             }
 
-            Get-AzStorageBlobContent @GetAzStorageBlobContent -ErrorAction Stop
+            $null = Get-AzStorageBlobContent @GetAzStorageBlobContent -ErrorAction Ignore
         }
 
         $Packages = Get-ChildItem -Path 'C:\OSDCloud\Packages\' *.ppkg -Recurse -ErrorAction Ignore
