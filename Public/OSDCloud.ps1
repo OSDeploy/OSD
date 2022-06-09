@@ -375,7 +375,6 @@ function Invoke-OSDCloud {
                     AccessPath = "$($USBPartition.DriveLetter):"
                     DiskNumber = $USBPartition.DiskNumber
                     PartitionNumber = $USBPartition.PartitionNumber
-                    Path = $Global:OSDCloud.DownloadDirectory
                 }
 
                 Remove-PartitionAccessPath @RemovePartitionAccessPath -ErrorAction Stop
