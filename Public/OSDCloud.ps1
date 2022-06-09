@@ -1170,7 +1170,7 @@ function Invoke-OSDCloud {
                 'HPIADrivers' = $Global:OSDCloud.HPIADrivers
                 'HPIAFirmware' = $Global:OSDCloud.HPIAFirmware
                 'HPIASoftware' = $Global:OSDCloud.HPIASoftware
-                'HPIAAll' = $Global:OSDCloud.HPIASoftware
+                'HPIAAll' = $Global:OSDCloud.HPIAALL
                 'HPTPMUpdate' = $Global:OSDCloud.HPTPMUpdate
                 'HPBIOSUpdate' = $Global:OSDCloud.HPBIOSUpdate
             }
