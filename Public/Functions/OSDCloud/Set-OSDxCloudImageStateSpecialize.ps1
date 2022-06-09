@@ -62,6 +62,31 @@ if (Test-Path 'C:\Drivers') {
             Continue
         }
         #=================================================
+        #   Dell
+        #=================================================
+        if ($Item.Extension -eq '.exe') {
+            if ($Item.VersionInfo.FileDescription -match 'Dell') {
+                Write-Verbose -Verbose "FileDescription: $($Item.VersionInfo.FileDescription)"
+                Write-Verbose -Verbose "ProductVersion: $($Item.VersionInfo.ProductVersion)"
+
+                $DestinationPath = Join-Path $Item.Directory $Item.BaseName
+
+                if (-NOT (Test-Path "$DestinationPath")) {
+                    Write-Verbose -Verbose "Expanding Dell Driver Pack to $DestinationPath"
+                    $null = New-Item -Path $DestinationPath -ItemType Directory -Force -ErrorAction Ignore | Out-Null
+                    Start-Process -FilePath $ExpandFile -ArgumentList "/s /e=`"$DestinationPath`"" -Wait
+
+                    if ($Apply) {
+                        New-Item -Path "HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\UnattendSettings\PnPUnattend\DriverPaths" -Name 1 -Force
+                        New-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\UnattendSettings\PnPUnattend\DriverPaths\1" -Name Path -Value $DestinationPath -Force
+                        pnpunattend.exe AuditSystem /L
+                        Remove-Item -Path "HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\UnattendSettings\PnPUnattend\DriverPaths\1" -Recurse -Force
+                    }
+                }
+                Continue
+            }
+        }
+        #=================================================
         #   HP
         #=================================================
         if ($Item.Extension -eq '.exe') {

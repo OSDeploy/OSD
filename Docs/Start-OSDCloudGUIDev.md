@@ -5,28 +5,58 @@ online version: https://github.com/OSDeploy/OSD/tree/master/Docs
 schema: 2.0.0
 ---
 
-# Get-OSDCloudREVolume
+# Start-OSDCloudGUIDev
 
 ## SYNOPSIS
-OSDCloudRE: Gets the OSDCloudRE Volume object
+OSDCloud imaging using the command line
 
 ## SYNTAX
 
 ```
-Get-OSDCloudREVolume [<CommonParameters>]
+Start-OSDCloudGUIDev [[-Brand] <String>] [[-Color] <String>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-OSDCloudRE: Gets the OSDCloudRE Volume object
+OSDCloud imaging using the command line
 
 ## EXAMPLES
 
 ### EXAMPLE 1
 ```
-Get-OSDCloudREVolume
+Start-OSDCloudGUI
 ```
 
 ## PARAMETERS
+
+### -Brand
+The custom Brand for OSDCloudGUI
+
+```yaml
+Type: String
+Parameter Sets: (All)
+Aliases: BrandingTitle
+
+Required: False
+Position: 1
+Default value: OSDCloudDev
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -Color
+Color for the OSDCloudGUI Brand
+
+```yaml
+Type: String
+Parameter Sets: (All)
+Aliases: BrandingColor
+
+Required: False
+Position: 2
+Default value: #003E92
+Accept pipeline input: False
+Accept wildcard characters: False
+```
 
 ### CommonParameters
 This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see [about_CommonParameters](http://go.microsoft.com/fwlink/?LinkID=113216).
@@ -35,8 +65,6 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## OUTPUTS
 
-### Microsoft.Management.Infrastructure.CimInstance
-### Microsoft.Management.Infrastructure.CimInstance#ROOT/Microsoft/Windows/Storage/MSFT_Volume
 ## NOTES
 
 ## RELATED LINKS
