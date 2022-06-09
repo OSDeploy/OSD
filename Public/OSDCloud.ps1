@@ -35,6 +35,7 @@ function Invoke-OSDCloud {
         AzStorageAccounts = $Global:AzStorageAccounts
         AzStorageContext = $Global:AzStorageContext
         BuildName = 'OSDCloud'
+        ClearDiskConfirm = [bool]$true
         Debug = $false
         DownloadDirectory = $null
         DownloadName = $null
@@ -106,11 +107,11 @@ function Invoke-OSDCloud {
         SkipAutopilot = [bool]$false
         SkipAutopilotOOBE = [bool]$false
         SkipClearDisk = [bool]$false
-        SkipClearDiskConfirm = [bool]$false
         SkipODT = [bool]$false
         SkipOOBEDeploy = [bool]$false
         SkipNewOSDisk = [bool]$false
-        RecoveryPartition = [bool]$true
+        SkipRecoveryPartition = [bool]$false
+        RecoveryPartition = $null
         Test = [bool]$false
         TimeEnd = $null
         TimeSpan = $null
@@ -124,12 +125,8 @@ function Invoke-OSDCloud {
     #=================================================
     #region Set Pre-Merge Defaults
     if ($Global:OSDCloud.IsVirtualMachine) {
-        $Global:OSDCloud.RecoveryPartition = $false
+        $Global:OSDCloud.SkipRecoveryPartition = $true
     }
-
-    <# if ($Global:OSDCloud.ZTI -eq $true) {
-        $Global:OSDCloud.ClearDiskConfirm = $false
-    } #>
     #endregion
     #=================================================
     #region Merge Parameters
@@ -148,7 +145,12 @@ function Invoke-OSDCloud {
     #region Set Post-Merge Defaults
     $Global:OSDCloud.Version = [Version](Get-Module -Name OSD -ListAvailable | Sort-Object Version -Descending | Select-Object -First 1).Version
 
+    if ($Global:OSDCloud.RecoveryPartition -eq $true) {
+        $Global:OSDCloud.SkipRecoveryPartition = [bool]$false
+    }
+
     if ($Global:OSDCloud.SkipAllDiskSteps -eq $true) {
+        Write-Host -ForegroundColor DarkGray '$OSDCloud.SkipAllDiskSteps = $true'
         $Global:OSDCloud.SkipClearDisk = $true
         $Global:OSDCloud.SkipNewOSDisk = $true
     }
@@ -161,7 +163,7 @@ function Invoke-OSDCloud {
 
     if ($Global:OSDCloud.ZTI -eq $true) {
         Write-Host -ForegroundColor DarkGray '$OSDCloud.ZTI = $true'
-        $Global:OSDCloud.SkipClearDiskConfirm = $true
+        $Global:OSDCloud.ClearDiskConfirm = $false
     }
     #endregion
     #=================================================
@@ -399,15 +401,16 @@ function Invoke-OSDCloud {
 
         if (($Global:OSDCloud.GetDiskFixed | Measure-Object).Count -ge 2) {
             Write-Host -ForegroundColor DarkGray 'More than 1 Fixed Disk is present, Clear-Disk Confirm is required'
-            Write-Host -ForegroundColor DarkGray '$OSDCloud.SkipClearDiskConfirm = $false'
-            $Global:OSDCloud.SkipClearDiskConfirm = $false
+            $Global:OSDCloud.ClearDiskConfirm = $true
         }
 
-        if ($Global:OSDCloud.SkipClearDiskConfirm -eq $true) {
-            Clear-Disk.fixed -Force -NoResults -Confirm:$false -ErrorAction Stop
+        if ($Global:OSDCloud.ClearDiskConfirm -eq $true) {
+            Write-Host -ForegroundColor DarkGray '$OSDCloud.ClearDiskConfirm = $true'
+            Clear-Disk.fixed -Force -NoResults -ErrorAction Stop
         }
         else {
-            Clear-Disk.fixed -Force -NoResults -ErrorAction Stop
+            Write-Host -ForegroundColor DarkGray '$OSDCloud.ClearDiskConfirm = $false'
+            Clear-Disk.fixed -Force -NoResults -Confirm:$false -ErrorAction Stop
         }
     }
     #endregion
@@ -417,27 +420,28 @@ function Invoke-OSDCloud {
     https://docs.microsoft.com/en-us/windows-hardware/manufacture/desktop/configure-uefigpt-based-hard-drive-partitions
     New Partitions will be created using Microsoft Standard Layout
     #>
-    if ($Global:OSDCloud.SkipAllDiskSteps -eq $true) {
-        Write-Host -ForegroundColor DarkGray '$OSDCloud.SkipAllDiskSteps = $true'
-    }
-    else {
-        Write-SectionHeader "New-OSDisk"
+    Write-SectionHeader "New-OSDisk"
 
-        if ($Global:OSDCloud.RecoveryPartition -eq $false) {
-            if ($Global:OSDCloud.Test -eq $false) {
-                New-OSDisk -PartitionStyle GPT -NoRecoveryPartition -Force -ErrorAction Stop
-            }
+    if ($Global:OSDCloud.SkipNewOSDisk -eq $true) {
+        Write-Host -ForegroundColor DarkGray '$OSDCloud.SkipNewOSDisk = $true'
+    }
+
+    if ($Global:OSDCloud.SkipNewOSDisk -eq $false) {
+        if ($Global:OSDCloud.SkipRecoveryPartition -eq $true) {
+            New-OSDisk -PartitionStyle GPT -NoRecoveryPartition -Force -ErrorAction Stop
             Write-Host "=========================================================================" -ForegroundColor Cyan
             Write-Host "| SYSTEM | MSR |                    WINDOWS                             |" -ForegroundColor Cyan
             Write-Host "=========================================================================" -ForegroundColor Cyan
         }
         else {
-            if ($Global:OSDCloud.Test -eq $false) {
-                New-OSDisk -PartitionStyle GPT -Force -ErrorAction Stop
-            }
+            New-OSDisk -PartitionStyle GPT -Force -ErrorAction Stop
+            Write-Host "=========================================================================" -ForegroundColor Cyan
+            Write-Host "| SYSTEM | MSR |                    WINDOWS                  | RECOVERY |" -ForegroundColor Cyan
+            Write-Host "=========================================================================" -ForegroundColor Cyan
             #Wait a few seconds to make sure the Disk is set
             Start-Sleep -Seconds 5
         }
+
         #Make sure that there is a PSDrive 
         if (-NOT (Get-PSDrive -Name 'C')) {
             Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) OSDCloud Failed"
