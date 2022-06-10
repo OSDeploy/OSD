@@ -211,7 +211,7 @@ function Invoke-OSDSpecialize {
             if ($HPJson.HPUpdates.HPTPMUpdate -eq $true){
                 Write-Host -ForegroundColor DarkGray "========================================================================="
                 Write-Host "Updating TPM" -ForegroundColor Cyan
-                osdcloud-InstallTPMEXE
+                osdcloud-InstallHPTPMEXE
                 start-sleep -Seconds 10
             }
             if (($HPJson.HPUpdates.HPBIOSUpdate -eq $true) -and ($HPJson.HPUpdates.HPTPMUpdate -ne $true)){
