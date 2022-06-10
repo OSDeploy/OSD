@@ -407,7 +407,8 @@ Function osdcloud-RunHPIA {
         try 
         {
             $Process = Start-Process –FilePath $TempWorkFolder\HPIA\HPImageAssistant.exe –WorkingDirectory $TempWorkFolder –ArgumentList "/Operation:$Operation /Category:$Category /Selection:$Selection /Action:$Action /Noninteractive /Debug /ReportFolder:$ReportsFolder /LogFolder:$ReportsFolder" –NoNewWindow –PassThru –Wait –ErrorAction Stop
-            If ($Process.ExitCode -eq 0)
+            (New-Object -ComObject WScript.Shell).AppActivate((get-process HPImageAssistant.dll).Description)
+	    If ($Process.ExitCode -eq 0)
             {
                 CMTraceLog –Message "Analysis complete" –Component "Update"
                 Write-Host "Analysis complete" -ForegroundColor Green
