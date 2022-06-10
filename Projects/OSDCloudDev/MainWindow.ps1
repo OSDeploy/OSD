@@ -846,6 +846,8 @@ $formMainWindowControlStartButton.add_Click({
     if ($formMainWindowControlDebugCheckBox.IsChecked -eq $true){
         Invoke-Expression (Invoke-RestMethod -Uri 'https://raw.githubusercontent.com/OSDeploy/OSD/master/cloud/modules/debugmode.psm1')
         osdcloud-addcmtrace
+        $Global:StartOSDCloudGUI.restart = $false
+        $Global:StartOSDCloudGUI.ClearDiskConfirm = $false
     }
     if ($formMainWindowControlScreenshotCapture.IsChecked) {
         $Params = @{
