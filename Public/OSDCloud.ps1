@@ -1181,85 +1181,85 @@ function Invoke-OSDCloud {
         catch {}
         $HPHashVar | Out-File $ConfigFile
         osdcloud-downloadHPIA
-    }
-    <#
-    #Stage Firmware Update for Next Reboot
-    if ($Global:OSDCloud.HPBIOSUpdate -eq $true){
-    Write-Host -ForegroundColor Cyan "Updating HP System Firmware"
-    if (Get-HPBIOSSetupPasswordIsSet){Write-Host -ForegroundColor Red "Device currently has BIOS Setup Password, Please Update BIOS via different method"}
-    else{
-        Write-Host -ForegroundColor DarkGray "Current Firmware: $(Get-HPBIOSVersion)"
-        Write-Host -ForegroundColor DarkGray "Staging Update: $((Get-HPBIOSUpdates -Latest).ver) "
-        #Details: https://developers.hp.com/hp-client-management/doc/Get-HPBiosUpdates
-        Get-HPBIOSUpdates -Flash -Yes -Offline -BitLocker Ignore
-        }
-    }
-    #>
-    if ($Global:OSDCloud.HPTPMUpdate -eq $true){
-        osdcloud-SetTPMBIOSSettings
-        osdcloud-DownloadHPTPMEXE
-    }   
-    #=================================================
-    #Leverage SetupComplete.cmd to run HP Tools
-    $ScriptsPath = "C:\Windows\Setup\scripts"
-    if (!(Test-Path -Path $ScriptsPath)){New-Item -Path $ScriptsPath} 
-    
-    $RunScriptTable = @(
-        @{ Script = "SetupComplete"; BatFile = 'SetupComplete.cmd'; ps1file = 'SetupComplete.ps1';Type = 'Setup'; Path = "$ScriptsPath"}
-    )
-    
-    ForEach ($RunScript in $RunScriptTable)
-        {
-        Write-Output $RunScript.Script
-    
-        $BatFilePath = "$($RunScript.Path)\$($RunScript.batFile)"
-        $PSFilePath = "$($RunScript.Path)\$($RunScript.ps1File)"
-            
-        #Create Batch File to Call PowerShell File
-            
-        New-Item -Path $BatFilePath -ItemType File -Force
-        $CustomActionContent = New-Object system.text.stringbuilder
-        [void]$CustomActionContent.Append('%windir%\System32\WindowsPowerShell\v1.0\powershell.exe -ExecutionPolicy ByPass -File')
-        [void]$CustomActionContent.Append(" $PSFilePath")
-        Add-Content -Path $BatFilePath -Value $CustomActionContent.ToString()
-    
-        #Create PowerShell File to do actions
-            
-        New-Item -Path $PSFilePath -ItemType File -Force
-        Add-Content -path $PSFilePath "Set-ExecutionPolicy Bypass -Force | out-null"
-        Add-Content -Path $PSFilePath "Start-Transcript -Path 'C:\OSDCloud\Logs\SetupComplete.log' -ErrorAction Ignore"
-        Add-Content -Path $PSFilePath "Invoke-Expression (Invoke-RestMethod -Uri 'https://raw.githubusercontent.com/OSDeploy/OSD/master/cloud/modules/deviceshp.psm1')"
-        Add-Content -Path $PSFilePath "Invoke-Expression (Invoke-RestMethod -Uri 'functions.osdcloud.com' -ErrorAction SilentlyContinue)"
-        Add-Content -Path $PSFilePath "osdcloud-InstallModuleHPCMSL -ErrorAction SilentlyContinue"
-        Add-Content -Path $PSFilePath 'Write-Host "Running HP Tools in SetupComplete" -ForegroundColor Green'
-        if (($Global:OSDCloud.HPIADrivers -eq $true) -and ($Global:OSDCloud.HPIAAll -ne $true)){
-            Add-Content -Path $PSFilePath 'Write-Host "Running HPIA for Drivers" -ForegroundColor Magenta'
-            Add-Content -Path $PSFilePath "osdcloud-RunHPIA -Category Drivers"
-        }
-        if (($Global:OSDCloud.HPIAFirmware -eq $true) -and ($Global:OSDCloud.HPIAAll  -ne $true)){
-            Add-Content -Path $PSFilePath 'Write-Host "Running HPIA for Firmware" -ForegroundColor Magenta'
-            Add-Content -Path $PSFilePath "osdcloud-RunHPIA -Category Firmware"
-        } 
-        if (($Global:OSDCloud.HPIASoftware -eq $true) -and ($Global:OSDCloud.HPIAAll  -ne $true)){
-            Add-Content -Path $PSFilePath 'Write-Host "Running HPIA for Software" -ForegroundColor Magenta'
-            Add-Content -Path $PSFilePath "osdcloud-RunHPIA -Category Software"
-        } 
-        if ($Global:OSDCloud.HPIAAll -eq $true){
-            Add-Content -Path $PSFilePath 'Write-Host "Running HPIA for Software" -ForegroundColor Magenta'
-            Add-Content -Path $PSFilePath "osdcloud-RunHPIA -Category All"
-        }            
-        if ($Global:OSDCloud.HPTPMUpdate -eq $true){
-            #Add-Content -Path $PSFilePath 'Write-Host "Updating TPM Firmware" -ForegroundColor Magenta'
-            #Add-Content -Path $PSFilePath "osdcloud-InstallTPMEXE"
-        } 
+        
+        <#
+        #Stage Firmware Update for Next Reboot
         if ($Global:OSDCloud.HPBIOSUpdate -eq $true){
-            Add-Content -Path $PSFilePath 'Write-Host "Running HP System Firmware" -ForegroundColor Magenta'
-            Add-Content -Path $PSFilePath "osdcloud-UpdateHPBIOS"
+        Write-Host -ForegroundColor Cyan "Updating HP System Firmware"
+        if (Get-HPBIOSSetupPasswordIsSet){Write-Host -ForegroundColor Red "Device currently has BIOS Setup Password, Please Update BIOS via different method"}
+        else{
+            Write-Host -ForegroundColor DarkGray "Current Firmware: $(Get-HPBIOSVersion)"
+            Write-Host -ForegroundColor DarkGray "Staging Update: $((Get-HPBIOSUpdates -Latest).ver) "
+            #Details: https://developers.hp.com/hp-client-management/doc/Get-HPBiosUpdates
+            Get-HPBIOSUpdates -Flash -Yes -Offline -BitLocker Ignore
+            }
         }
-        Add-Content -Path $PSFilePath "Stop-Transcript"
-        Add-Content -Path $PSFilePath "Restart-Computer -Force"
+        #>
+        if ($Global:OSDCloud.HPTPMUpdate -eq $true){
+            osdcloud-SetTPMBIOSSettings
+            osdcloud-DownloadHPTPMEXE
+        }   
+        #=================================================
+        #Leverage SetupComplete.cmd to run HP Tools
+        $ScriptsPath = "C:\Windows\Setup\scripts"
+        if (!(Test-Path -Path $ScriptsPath)){New-Item -Path $ScriptsPath} 
+        
+        $RunScriptTable = @(
+            @{ Script = "SetupComplete"; BatFile = 'SetupComplete.cmd'; ps1file = 'SetupComplete.ps1';Type = 'Setup'; Path = "$ScriptsPath"}
+        )
+        
+        ForEach ($RunScript in $RunScriptTable)
+            {
+            Write-Output $RunScript.Script
+        
+            $BatFilePath = "$($RunScript.Path)\$($RunScript.batFile)"
+            $PSFilePath = "$($RunScript.Path)\$($RunScript.ps1File)"
+                
+            #Create Batch File to Call PowerShell File
+                
+            New-Item -Path $BatFilePath -ItemType File -Force
+            $CustomActionContent = New-Object system.text.stringbuilder
+            [void]$CustomActionContent.Append('%windir%\System32\WindowsPowerShell\v1.0\powershell.exe -ExecutionPolicy ByPass -File')
+            [void]$CustomActionContent.Append(" $PSFilePath")
+            Add-Content -Path $BatFilePath -Value $CustomActionContent.ToString()
+        
+            #Create PowerShell File to do actions
+                
+            New-Item -Path $PSFilePath -ItemType File -Force
+            Add-Content -path $PSFilePath "Set-ExecutionPolicy Bypass -Force | out-null"
+            Add-Content -Path $PSFilePath "Start-Transcript -Path 'C:\OSDCloud\Logs\SetupComplete.log' -ErrorAction Ignore"
+            Add-Content -Path $PSFilePath "Invoke-Expression (Invoke-RestMethod -Uri 'https://raw.githubusercontent.com/OSDeploy/OSD/master/cloud/modules/deviceshp.psm1')"
+            Add-Content -Path $PSFilePath "Invoke-Expression (Invoke-RestMethod -Uri 'functions.osdcloud.com' -ErrorAction SilentlyContinue)"
+            Add-Content -Path $PSFilePath "osdcloud-InstallModuleHPCMSL -ErrorAction SilentlyContinue"
+            Add-Content -Path $PSFilePath 'Write-Host "Running HP Tools in SetupComplete" -ForegroundColor Green'
+            if (($Global:OSDCloud.HPIADrivers -eq $true) -and ($Global:OSDCloud.HPIAAll -ne $true)){
+                Add-Content -Path $PSFilePath 'Write-Host "Running HPIA for Drivers" -ForegroundColor Magenta'
+                Add-Content -Path $PSFilePath "osdcloud-RunHPIA -Category Drivers"
+            }
+            if (($Global:OSDCloud.HPIAFirmware -eq $true) -and ($Global:OSDCloud.HPIAAll  -ne $true)){
+                Add-Content -Path $PSFilePath 'Write-Host "Running HPIA for Firmware" -ForegroundColor Magenta'
+                Add-Content -Path $PSFilePath "osdcloud-RunHPIA -Category Firmware"
+            } 
+            if (($Global:OSDCloud.HPIASoftware -eq $true) -and ($Global:OSDCloud.HPIAAll  -ne $true)){
+                Add-Content -Path $PSFilePath 'Write-Host "Running HPIA for Software" -ForegroundColor Magenta'
+                Add-Content -Path $PSFilePath "osdcloud-RunHPIA -Category Software"
+            } 
+            if ($Global:OSDCloud.HPIAAll -eq $true){
+                Add-Content -Path $PSFilePath 'Write-Host "Running HPIA for Software" -ForegroundColor Magenta'
+                Add-Content -Path $PSFilePath "osdcloud-RunHPIA -Category All"
+            }            
+            if ($Global:OSDCloud.HPTPMUpdate -eq $true){
+                #Add-Content -Path $PSFilePath 'Write-Host "Updating TPM Firmware" -ForegroundColor Magenta'
+                #Add-Content -Path $PSFilePath "osdcloud-InstallTPMEXE"
+            } 
+            if ($Global:OSDCloud.HPBIOSUpdate -eq $true){
+                Add-Content -Path $PSFilePath 'Write-Host "Running HP System Firmware" -ForegroundColor Magenta'
+                Add-Content -Path $PSFilePath "osdcloud-UpdateHPBIOS"
+            }
+            Add-Content -Path $PSFilePath "Stop-Transcript"
+            Add-Content -Path $PSFilePath "Restart-Computer -Force"
+        }
     }
-
 
     #=================================================
     #   AutopilotConfigurationFile.json
