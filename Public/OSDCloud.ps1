@@ -1199,6 +1199,14 @@ function Invoke-OSDCloud {
             osdcloud-SetTPMBIOSSettings
             osdcloud-DownloadHPTPMEXE
         }   
+
+        if (($Global:OSDCloud.HPIADrivers -eq $true) -or ($Global:OSDCloud.HPIAAll -eq $true)){
+            if ($Global:OSDCloud.OSVersion -eq "Windows 10"){$OS = "Win10"}
+            if ($Global:OSDCloud.OSVersion -eq "Windows 11"){$OS = "Win11"}
+            $Release = $Global:OSDCloud.GetFeatureUpdate.UpdateBuild
+            osdcloud-HPIAOfflineSync -Category Driver -OS $OS -Release $Release
+        }
+
         #=================================================
         #Leverage SetupComplete.cmd to run HP Tools
         $ScriptsPath = "C:\Windows\Setup\scripts"
@@ -1227,6 +1235,7 @@ function Invoke-OSDCloud {
                 
             New-Item -Path $PSFilePath -ItemType File -Force
             Add-Content -path $PSFilePath "Set-ExecutionPolicy Bypass -Force | out-null"
+            Add-Content -Path $PSFilePath "Start-Sleep -Seconds 10"
             Add-Content -Path $PSFilePath "Start-Transcript -Path 'C:\OSDCloud\Logs\SetupComplete.log' -ErrorAction Ignore"
             Add-Content -Path $PSFilePath "Invoke-Expression (Invoke-RestMethod -Uri 'https://raw.githubusercontent.com/OSDeploy/OSD/master/cloud/modules/deviceshp.psm1')"
             Add-Content -Path $PSFilePath "Invoke-Expression (Invoke-RestMethod -Uri 'functions.osdcloud.com' -ErrorAction SilentlyContinue)"

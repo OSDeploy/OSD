@@ -213,8 +213,40 @@ function osdcloud-UpdateHPTPM {
         return "No TPM Update Available"
     }
     }
+Function osdcloud-HPIAOfflineSync {
+    [CmdletBinding()]
+    Param (
+        [Parameter(Mandatory=$false)]
+        [ValidateSet("All", "BIOS", "Driver", "Software", "Firmware", "UWPPack")]
+        $Category = "Driver",
+        [Parameter(Mandatory=$false)]
+        $OS = "win10",
+        [Parameter(Mandatory=$false)]
+        $Release = "21H2"
+        )
+    
+    #Create HPIA Repo & Sync for this Platform (EXE / Online)
+    $LogFolder = "C:\OSDCloud\Logs"
+    $HPIARepoFolder = "C:\OSDCloud\HPIA\Repo"
+    $PlatformCode = Get-HPDeviceProductID
+
+    Write-Host "Starting HPCMSL to create HPIA Repo for $($PlatformCode) with Drivers" -ForegroundColor Green
+    write-host " This process can take several minutes to download all drivers" -ForegroundColor Gray
+    write-host " Writing Progress Log to $LogFolder" -ForegroundColor Gray
+    write-host " Downloading to $HPIARepoFolder" -ForegroundColor Gray
+    New-Item -Path $LogFolder -ItemType Directory -Force | Out-Null
+    New-Item -Path $HPIARepoFolder -ItemType Directory -Force | Out-Null
+    $CurrentLocation = Get-Location
+    Set-Location -Path $HPIARepoFolder
+    Initialize-Repository
+    Set-RepositoryConfiguration -Setting OfflineCacheMode -CacheValue Enable
+    Add-RepositoryFilter -Os $OS -OsVer $Release -Category $Category -Platform $PlatformCode
+    Invoke-RepositorySync -Verbose 4> "$LogFolder\HPIAOfflineSync.log"
+    Set-Location $CurrentLocation
+    Write-Host "Completed Driver Download for HP Device to be applied in OOBE" -ForegroundColor Green
+}
 Function osdcloud-RunHPIA {
-    <#
+<#
     Update HP Drivers via HPIA - Gary Blok - @gwblok
     Several Code Snips taken from: https://smsagent.blog/2021/03/30/deploying-hp-bios-updates-a-real-world-example/
     
