@@ -356,7 +356,13 @@ if ($HPEnterprise){
         $formMainWindowControlOption_Name_6.Visibility = 'Visible'
         $formMainWindowControlOption_Name_6.Header = "HP Update System Firmwware from $CurrentVer to $LatestVer"
         }
-}
+    # When HPIA All is selected, unselect Firmware & Software
+    $formMainWindowControlOption_Name_4.add_Checked({$formMainWindowControlOption_Name_2.IsChecked = $false})
+    $formMainWindowControlOption_Name_4.add_Checked({$formMainWindowControlOption_Name_3.IsChecked = $false})
+    $formMainWindowControlOption_Name_2.add_Checked({$formMainWindowControlOption_Name_4.IsChecked = $false})
+    $formMainWindowControlOption_Name_3.add_Checked({$formMainWindowControlOption_Name_4.IsChecked = $false})
+
+    }
 
 elseif ($DellEnterprise){
     $formMainWindowControlManufacturerFunction.Header = "Dell Functions"
@@ -404,6 +410,14 @@ else{
     #$formMainWindowControlOption_Name_6.IsEnabled = $false 
     #$formMainWindowControlOption_Name_6.Visibility = "Hidden"
 }
+
+
+#================================================
+#   DebugMode
+#================================================
+
+$formMainWindowControlDebugCheckBox.add_Checked({$formMainWindowControlRestart.IsChecked = $false})
+$formMainWindowControlDebugCheckBox.add_Checked({$formMainWindowControlZTI.IsChecked = $true})
 
 
 #================================================
@@ -846,8 +860,8 @@ $formMainWindowControlStartButton.add_Click({
     if ($formMainWindowControlDebugCheckBox.IsChecked -eq $true){
         Invoke-Expression (Invoke-RestMethod -Uri 'https://raw.githubusercontent.com/OSDeploy/OSD/master/cloud/modules/debugmode.psm1')
         osdcloud-addcmtrace
-        $Global:StartOSDCloudGUI.restart = $false
-        $Global:StartOSDCloudGUI.ClearDiskConfirm = $false
+        #$Global:StartOSDCloudGUI.restart = $false
+        #$Global:StartOSDCloudGUI.ClearDiskConfirm = $false
     }
     if ($formMainWindowControlScreenshotCapture.IsChecked) {
         $Params = @{
