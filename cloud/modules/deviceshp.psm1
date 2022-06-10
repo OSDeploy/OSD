@@ -131,7 +131,7 @@ function osdcloud-DownloadHPTPMEXE {
         if (!(Test-Path -Path $UpdatePath)){Throw "Failed to Download TPM Update"}
     }    
 }
-function osdcloud-InstallTPMEXE {
+function osdcloud-InstallHPTPMEXE {
     [CmdletBinding()]
     Param (
         [Parameter(Mandatory=$false)]
@@ -228,7 +228,7 @@ Function osdcloud-HPIAOfflineSync {
     #Create HPIA Repo & Sync for this Platform (EXE / Online)
     $LogFolder = "C:\OSDCloud\Logs"
     $HPIARepoFolder = "C:\OSDCloud\HPIA\Repo"
-    $PlatformCode = Get-HPDeviceProductID
+    $PlatformCode = (Get-CimInstance -Namespace root/cimv2 -ClassName Win32_BaseBoard).Product
 
     Write-Host "Starting HPCMSL to create HPIA Repo for $($PlatformCode) with Drivers" -ForegroundColor Green
     write-host " This process can take several minutes to download all drivers" -ForegroundColor Gray
