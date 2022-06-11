@@ -154,7 +154,7 @@ function osdcloud-DCUAutoUpdate {
     #>
 
     $ProcessPath = 'C:\Program Files (x86)\Dell\CommandUpdate\dcu-cli.exe'
-    $ProcessArgs = "/configure -scheduleAuto -seheduleAction=DownloadInstallAndNotify -scheduledReboot=60 -silent"
+    $ProcessArgs = "/configure -scheduleAuto -seheduleAction=DownloadInstallAndNotify -scheduledReboot=60 -silent -scheduleWeekly=Sun,23:45"
     if (!(test-path $ProcessPath -ErrorAction SilentlyContinue)){throw "No DCU Installed"}
 
     $DCU = Start-Process -FilePath $ProcessPath -ArgumentList $ProcessArgs -Wait -PassThru -NoNewWindow
