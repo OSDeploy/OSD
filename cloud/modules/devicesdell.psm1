@@ -136,7 +136,7 @@ function osdcloud-RunDCU {
     $LogFolder = "c:\OSDCloud\Logs"
     $LogFile = "$LogFolder\DCU.log"
     $ProcessPath = 'C:\Program Files (x86)\Dell\CommandUpdate\dcu-cli.exe'
-    $ProcessArgs = "/applyUpdates -updateType=$UpdateType -outputLog=$logfile -reboot=enable -autoSuspendBitLocker"
+    $ProcessArgs = "/applyUpdates -updateType=$UpdateType -outputLog=$logfile -reboot=enable"
     if (!(test-path $ProcessPath -ErrorAction SilentlyContinue)){throw "No DCU Installed"}
     try {[void][System.IO.Directory]::CreateDirectory($LogFolder)}
     catch {throw}
