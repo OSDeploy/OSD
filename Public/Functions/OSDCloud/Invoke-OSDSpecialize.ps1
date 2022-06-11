@@ -246,19 +246,19 @@ function Invoke-OSDSpecialize {
             if ($DellJSON.Updates.DCUDrivers -eq $true){
                 Write-Host -ForegroundColor DarkGray "========================================================================="
                 Write-Host "Running Dell Command Update - Drivers" -ForegroundColor Cyan
-                osdcloud-RunDCU -Category driver
+                osdcloud-RunDCU -updateType driver
                 start-sleep -Seconds 10
             }    
             if ($DellJSON.Updates.DCUFirmware -eq $true){
                 Write-Host -ForegroundColor DarkGray "========================================================================="
                 Write-Host "Running Dell Command Update - Firmware" -ForegroundColor Cyan
-                osdcloud-RunDCU -Category firmware
+                osdcloud-RunDCU -updateType firmware
                 start-sleep -Seconds 10
             }    
             if ($DellJSON.Updates.DCUBIOS -eq $true){
                 Write-Host -ForegroundColor DarkGray "========================================================================="
                 Write-Host "Running Dell Command Update - BIOS" -ForegroundColor Cyan
-                osdcloud-RunDCU -Category bios
+                osdcloud-RunDCU -updateType bios
                 start-sleep -Seconds 10
             }    
             if ($DellJSON.Updates.DCUAutoUpdateEnable -eq $true){
