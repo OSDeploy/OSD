@@ -373,23 +373,24 @@ elseif ($DellEnterprise){
     $formMainWindowControlManufacturerFunction.Header = "Dell Functions"
     $formMainWindowControlManufacturerFunction.Visibility = 'Visible'
 
-    $formMainWindowControlOption_Name_1.Header = "DCU Drivers"
+    $formMainWindowControlOption_Name_1.Header = "Dell Command Update"
     $formMainWindowControlOption_Name_1.IsChecked = $true 
+    $formMainWindowControlOption_Name_2.Header = "DCU Drivers"
     $formMainWindowControlOption_Name_2.IsChecked = $false
-    #$formMainWindowControlOption_Name_2.IsEnabled = $false 
-    $formMainWindowControlOption_Name_2.Visibility = "Hidden"
+    $formMainWindowControlOption_Name_3.Header = "DCU Firmware"
     $formMainWindowControlOption_Name_3.IsChecked = $false
-    #$formMainWindowControlOption_Name_3.IsEnabled = $false 
-    $formMainWindowControlOption_Name_3.Visibility = "Hidden"
+    $formMainWindowControlOption_Name_4.Header = "DCU BIOS"
     $formMainWindowControlOption_Name_4.IsChecked = $false
-    #$formMainWindowControlOption_Name_4.IsEnabled = $false 
-    $formMainWindowControlOption_Name_4.Visibility = "Hidden"
+    $formMainWindowControlOption_Name_5.Header = "DCU Enable Auto Updates"
     $formMainWindowControlOption_Name_5.IsChecked = $false
-    #$formMainWindowControlOption_Name_5.IsEnabled = $false 
-    $formMainWindowControlOption_Name_5.Visibility = "Hidden"
+    $formMainWindowControlOption_Name_6.Header = "Dell TPM Update"
     $formMainWindowControlOption_Name_6.IsChecked = $false
-    #$formMainWindowControlOption_Name_6.IsEnabled = $false 
     $formMainWindowControlOption_Name_6.Visibility = "Hidden"
+
+    $formMainWindowControlOption_Name_2.add_Checked({$formMainWindowControlOption_Name_1.IsChecked = $true})
+    $formMainWindowControlOption_Name_3.add_Checked({$formMainWindowControlOption_Name_1.IsChecked = $true})
+    $formMainWindowControlOption_Name_4.add_Checked({$formMainWindowControlOption_Name_1.IsChecked = $true})
+    $formMainWindowControlOption_Name_5.add_Checked({$formMainWindowControlOption_Name_1.IsChecked = $true})
 
 }
 
@@ -870,12 +871,12 @@ $formMainWindowControlStartButton.add_Click({
     }
 
     if ($DellEnterprise){
-        $Global:StartOSDCloudGUI.DCU = $formMainWindowControlOption_Name_1.IsChecked
-        $Global:StartOSDCloudGUI.DCM = $formMainWindowControlOption_Name_2.IsChecked
-        $Global:StartOSDCloudGUI.DCUDrivers = $formMainWindowControlOption_Name_3.IsChecked
-        $Global:StartOSDCloudGUI.HPIAAll = $formMainWindowControlOption_Name_4.IsChecked
-        $Global:StartOSDCloudGUI.DellTPMUpdate = $formMainWindowControlOption_Name_5.IsChecked
-        $Global:StartOSDCloudGUI.DellBIOSUpdate = $formMainWindowControlOption_Name_6.IsChecked
+        $Global:StartOSDCloudGUI.DCUInstall = $formMainWindowControlOption_Name_1.IsChecked
+        $Global:StartOSDCloudGUI.DCUDrivers = $formMainWindowControlOption_Name_2.IsChecked
+        $Global:StartOSDCloudGUI.DCUFirmware = $formMainWindowControlOption_Name_3.IsChecked
+        $Global:StartOSDCloudGUI.DCUBIOS = $formMainWindowControlOption_Name_4.IsChecked
+        $Global:StartOSDCloudGUI.DCUAutoUpdateEnable = $formMainWindowControlOption_Name_5.IsChecked
+        $Global:StartOSDCloudGUI.DellTPMUpdate = $formMainWindowControlOption_Name_6.IsChecked
     }
     #$Global:StartOSDCloudGUI | Out-Host
     if ($formMainWindowControlDebugCheckBox.IsChecked -eq $true){

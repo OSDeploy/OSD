@@ -190,15 +190,18 @@ function Invoke-OSDSpecialize {
         }
     }
     #=================================================
-    #   Specialize Config HP JSON
+    #   Specialize Config HP & Dell JSON
     #=================================================
     $ConfigPath = "c:\osdcloud\configs"
     if (Test-Path $ConfigPath){
         $JSONConfigs = Get-ChildItem -path $ConfigPath -Filter "*.json"
         if ($JSONConfigs.name -contains "HP.JSON"){
             $HPJson = Get-Content -Path "$ConfigPath\HP.JSON" |ConvertFrom-Json
-            }
         }
+        if ($JSONConfigs.name -contains "Dell.JSON"){
+            $DellJSON = Get-Content -Path "$ConfigPath\DELL.JSON" |ConvertFrom-Json
+        }
+    }
         if ($HPJson){
             write-host "Specialize Stage - HP Devices" -ForegroundColor Green
             $WarningPreference = "SilentlyContinue"
@@ -229,26 +232,43 @@ function Invoke-OSDSpecialize {
                 start-sleep -Seconds 10
             } 
         }
-    #=================================================
-    #   Specialize Config Dell JSON
-    #=================================================
-    $ConfigPath = "c:\osdcloud\configs"
-    if (Test-Path $ConfigPath){
-        $JSONConfigs = Get-ChildItem -path $ConfigPath -Filter "*.json"
-        if ($JSONConfigs.name -contains "Dell.JSON"){
-            $DellJson = Get-Content -Path "$ConfigPath\Dell.JSON" |ConvertFrom-Json
-            }
-        }
-        if ($DellJson){
-            if ($HPJson.DellUpdates.DCUInstall -eq $true){
-                Invoke-Expression (Invoke-RestMethod -Uri 'https://raw.githubusercontent.com/OSDeploy/OSD/master/cloud/modules/devicesdell.psm1')
+        if ($DellJSON){
+            write-host "Specialize Stage - Dell Devices" -ForegroundColor Green
+            $WarningPreference = "SilentlyContinue"
+            #Invoke-Expression (Invoke-RestMethod -Uri 'functions.osdcloud.com')
+            Invoke-Expression (Invoke-RestMethod -Uri 'https://raw.githubusercontent.com/OSDeploy/OSD/master/cloud/modules/devicesdell.psm1')
+            if ($DellJSON.Updates.DCUInstall -eq $true){
+                Write-Host -ForegroundColor DarkGray "========================================================================="
+                Write-Host "Installing Dell Command Update" -ForegroundColor Cyan
                 osdcloud-InstallDCU
-            }
-            if ($DellJson.DellUpdates.DCURun -eq $true){
-                Invoke-Expression (Invoke-RestMethod -Uri 'https://raw.githubusercontent.com/OSDeploy/OSD/master/cloud/modules/devicesdell.psm1')
-                osdcloud-RunDCU
-            } 
-        }    
+                start-sleep -Seconds 10
+            }            
+            if ($DellJSON.Updates.DCUDrivers -eq $true){
+                Write-Host -ForegroundColor DarkGray "========================================================================="
+                Write-Host "Running Dell Command Update - Drivers" -ForegroundColor Cyan
+                osdcloud-RunDCU -Category driver
+                start-sleep -Seconds 10
+            }    
+            if ($DellJSON.Updates.DCUFirmware -eq $true){
+                Write-Host -ForegroundColor DarkGray "========================================================================="
+                Write-Host "Running Dell Command Update - Firmware" -ForegroundColor Cyan
+                osdcloud-RunDCU -Category firmware
+                start-sleep -Seconds 10
+            }    
+            if ($DellJSON.Updates.DCUBIOS -eq $true){
+                Write-Host -ForegroundColor DarkGray "========================================================================="
+                Write-Host "Running Dell Command Update - BIOS" -ForegroundColor Cyan
+                osdcloud-RunDCU -Category bios
+                start-sleep -Seconds 10
+            }    
+            if ($DellJSON.Updates.DCUAutoUpdateEnable -eq $true){
+                Write-Host -ForegroundColor DarkGray "========================================================================="
+                Write-Host "Running Dell Command Update - Set Auto Update Enabled" -ForegroundColor Cyan
+                osdcloud-DCUAutoUpdate
+                start-sleep -Seconds 10
+            }    
+        }
+
     #=================================================
     #   Specialize ODT
     #=================================================
