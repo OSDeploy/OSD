@@ -161,7 +161,10 @@ function Invoke-OSDCloudRE {
             }
             Get-AzStorageBlobContent @GetAzStorageBlobContentParam -ErrorAction Stop
         }
+
+        $Global:OSDCloudRE.BootImage = Get-Item -Path $Global:OSDCloudRE.DownloadFullName -ErrorAction Stop | Select-Object -First 1 | Select-Object -First 1
     }
+    
     if (! $Global:OSDCloudRE.BootImage) {
         Break
     }
