@@ -1215,6 +1215,7 @@ function Invoke-OSDCloud {
         osdcloud-downloadHPIA
         
         <#
+        #This feature does not work in OSDCloud due to Get-Volume not returning the System Volume, potentail bug with OSDCloud New-Disk Function
         #Stage Firmware Update for Next Reboot
         if ($Global:OSDCloud.HPBIOSUpdate -eq $true){
         Write-Host -ForegroundColor Cyan "Updating HP System Firmware"
@@ -1227,17 +1228,20 @@ function Invoke-OSDCloud {
             }
         }
         #>
+        #Stage HP TPM Update EXE
         if ($Global:OSDCloud.HPTPMUpdate -eq $true){
             osdcloud-SetTPMBIOSSettings
             osdcloud-DownloadHPTPMEXE
         }   
-
+        <#
+        #This feature is not currently supported in WnePE due to the dependany on Get-HPDevceInfo
         if (($Global:OSDCloud.HPIADrivers -eq $true) -or ($Global:OSDCloud.HPIAAll -eq $true)){
             if ($Global:OSDCloud.OSVersion -eq "Windows 10"){$OS = "Win10"}
             if ($Global:OSDCloud.OSVersion -eq "Windows 11"){$OS = "Win11"}
             $Release = $Global:OSDCloud.GetFeatureUpdate.UpdateBuild
             osdcloud-HPIAOfflineSync -Category Driver -OS $OS -Release $Release
         }
+        #>
 
         #=================================================
         #Leverage SetupComplete.cmd to run HP Tools
