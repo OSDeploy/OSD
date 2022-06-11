@@ -836,13 +836,12 @@ $formMainWindowControlStartButton.add_Click({
         MSCatalogNetDrivers         = $formMainWindowControlMSCatalogNetDrivers.IsChecked
         MSCatalogScsiDrivers        = $formMainWindowControlMSCatalogScsiDrivers.IsChecked
         MSCatalogFirmware           = $formMainWindowControlMSCatalogFirmware.IsChecked
-        HPIADrivers                 = $formMainWindowControlOption_Name_1.IsChecked
-        HPIAFirmware                = $formMainWindowControlOption_Name_2.IsChecked
-        HPIASoftware                = $formMainWindowControlOption_Name_3.IsChecked
-        HPIAAll                     = $formMainWindowControlOption_Name_4.IsChecked
-        HPTPMUpdate                 = $formMainWindowControlOption_Name_5.IsChecked
-        HPBIOSUpdate                = $formMainWindowControlOption_Name_6.IsChecked
-        DCUDrivers                  = $formMainWindowControlOption_Name_1.IsChecked
+        VendorOption1               = $formMainWindowControlOption_Name_1.IsChecked
+        VendorOption2               = $formMainWindowControlOption_Name_2.IsChecked
+        VendorOption3               = $formMainWindowControlOption_Name_3.IsChecked
+        VendorOption4               = $formMainWindowControlOption_Name_4.IsChecked
+        VendorOption5               = $formMainWindowControlOption_Name_5.IsChecked
+        VendorOption6               = $formMainWindowControlOption_Name_6.IsChecked
         OOBEDeployJsonChildItem     = $OOBEDeployJsonChildItem
         OOBEDeployJsonItem          = $OOBEDeployJsonItem
         OOBEDeployJsonName          = $OOBEDeployJsonName
@@ -860,6 +859,23 @@ $formMainWindowControlStartButton.add_Click({
         SkipODT                     = $true
         SkipOOBEDeploy              = $SkipOOBEDeploy
         ZTI                         = $formMainWindowControlZTI.IsChecked
+    }
+    if ($HPEnterprise){
+        $Global:StartOSDCloudGUI.HPIADrivers = $formMainWindowControlOption_Name_1.IsChecked
+        $Global:StartOSDCloudGUI.HPIAFirmware = $formMainWindowControlOption_Name_2.IsChecked
+        $Global:StartOSDCloudGUI.HPIASoftware = $formMainWindowControlOption_Name_3.IsChecked
+        $Global:StartOSDCloudGUI.HPIAAll = $formMainWindowControlOption_Name_4.IsChecked
+        $Global:StartOSDCloudGUI.HPTPMUpdate = $formMainWindowControlOption_Name_5.IsChecked
+        $Global:StartOSDCloudGUI.HPBIOSUpdate = $formMainWindowControlOption_Name_6.IsChecked
+    }
+
+    if ($DellEnterprise){
+        $Global:StartOSDCloudGUI.DCU = $formMainWindowControlOption_Name_1.IsChecked
+        $Global:StartOSDCloudGUI.DCM = $formMainWindowControlOption_Name_2.IsChecked
+        $Global:StartOSDCloudGUI.DCUDrivers = $formMainWindowControlOption_Name_3.IsChecked
+        $Global:StartOSDCloudGUI.HPIAAll = $formMainWindowControlOption_Name_4.IsChecked
+        $Global:StartOSDCloudGUI.DellTPMUpdate = $formMainWindowControlOption_Name_5.IsChecked
+        $Global:StartOSDCloudGUI.DellBIOSUpdate = $formMainWindowControlOption_Name_6.IsChecked
     }
     #$Global:StartOSDCloudGUI | Out-Host
     if ($formMainWindowControlDebugCheckBox.IsChecked -eq $true){

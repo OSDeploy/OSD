@@ -107,7 +107,17 @@ Function osdcloud-InstallDCU {
 
 #Function to Run DCU to install drivers, BIOS and firmware updates.
 function osdcloud-RunDCU {
+    <#
+    https://dl.dell.com/content/manual13608255-dell-command-update-version-4-x-reference-guide.pdf
+    #Update Type: bios, firmware, driver, apps, and others
+    #>
 
+    [CmdletBinding()]
+    Param (
+        [Parameter(Mandatory=$false)]
+        [ValidateSet("bios", "firmware", "driver", "apps", "other")]
+        $UpdateType = "driver"
+        )
     $DCUReturnTablet = @(
     @{ReturnCode = "0";  Description = "Command execution was successful."; Resolution = "None"}
     @{ReturnCode = "1";  Description = "A reboot was required from the execution of an operation."; Resolution = "Reboot the system to complete the operation."}
@@ -126,8 +136,8 @@ function osdcloud-RunDCU {
     $LogFolder = "c:\OSDCloud\Logs"
     $LogFile = "$LogFolder\DCU.log"
     $ProcessPath = 'C:\Program Files (x86)\Dell\CommandUpdate\dcu-cli.exe'
-    $ProcessArgs = "/applyUpdates -updateType=firmware,driver -outputLog=$logfile -reboot=enable"
-
+    $ProcessArgs = "/applyUpdates -updateType=$UpdateType -outputLog=$logfile -reboot=enable -autoSuspendBitLocker"
+    if (!(test-path $ProcessPath -ErrorAction SilentlyContinue)){throw "No DCU Installed"}
     try {[void][System.IO.Directory]::CreateDirectory($LogFolder)}
     catch {throw}
 
@@ -136,6 +146,23 @@ function osdcloud-RunDCU {
 
     Write-Host "DCU Finished with Code: $($DCU.ExitCode): $($DCUReturn.Description)"
 }
+
+
+function osdcloud-DCUAutoUpdate {
+    <#
+    Enables DCU Auto Update
+    #>
+
+    $ProcessPath = 'C:\Program Files (x86)\Dell\CommandUpdate\dcu-cli.exe'
+    $ProcessArgs = "/configure -scheduleAuto -silent"
+    if (!(test-path $ProcessPath -ErrorAction SilentlyContinue)){throw "No DCU Installed"}
+
+    $DCU = Start-Process -FilePath $ProcessPath -ArgumentList $ProcessArgs -Wait -PassThru -NoNewWindow
+    $DCUReturn = $DCUReturnTablet | Where-Object {$_.ReturnCode -eq $DCU.ExitCode}
+
+    Write-Host "DCU Finished with Code: $($DCU.ExitCode): $($DCUReturn.Description)"
+}
+
 
 #endregion
 #=================================================
