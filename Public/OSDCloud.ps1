@@ -47,6 +47,7 @@ function Invoke-OSDCloud {
         DriverPackOffline = $null
         DriverPackSource = $null
         DriverPackUrl = $null
+        ExpandWindowsImage = $null
         Function = $MyInvocation.MyCommand.Name
         GetDiskFixed = $null
         GetFeatureUpdate = $null
@@ -56,7 +57,6 @@ function Invoke-OSDCloud {
         HPIASoftware = $null
         HPTPMUpdate = $null
         HPBIOSUpdate = $null
-        ImageCount = $null
         ImageFileFullName = $null
         ImageFileItem = $null
         ImageFileName = $null
@@ -119,6 +119,8 @@ function Invoke-OSDCloud {
         Transcript = $null
         USBPartitions = $null
         Version = [Version](Get-Module -Name OSD -ListAvailable | Sort-Object Version -Descending | Select-Object -First 1).Version
+        WindowsImage = $null
+        WindowsImageCount = $null
         ZTI = [bool]$false
     }
     #endregion
@@ -142,36 +144,29 @@ function Invoke-OSDCloud {
     }
     #endregion
     #=================================================
-    #region Set Post-Merge Defaults
-    $Global:OSDCloud.Version = [Version](Get-Module -Name OSD -ListAvailable | Sort-Object Version -Descending | Select-Object -First 1).Version
-
-    if ($Global:OSDCloud.RecoveryPartition -eq $true) {
-        $Global:OSDCloud.SkipRecoveryPartition = [bool]$false
-    }
-
-    if ($Global:OSDCloud.SkipAllDiskSteps -eq $true) {
-        Write-Host -ForegroundColor DarkGray '$OSDCloud.SkipAllDiskSteps = $true'
-        $Global:OSDCloud.SkipClearDisk = $true
-        $Global:OSDCloud.SkipNewOSDisk = $true
-    }
-
-    if ($Global:OSDCloud.Test -eq $true) {
-        Write-Host -ForegroundColor DarkGray '$OSDCloud.Test = $true'
-        $Global:OSDCloud.SkipClearDisk = $true
-        $Global:OSDCloud.SkipNewOSDisk = $true
-    }
-
-    if ($Global:OSDCloud.ZTI -eq $true) {
-        Write-Host -ForegroundColor DarkGray '$OSDCloud.ZTI = $true'
-        $Global:OSDCloud.ClearDiskConfirm = $false
-    }
-    #endregion
-    #=================================================
     #region Helper Functions
     function Write-DarkGrayDate {
         [CmdletBinding()]
-        param ()
-        Write-Host -ForegroundColor DarkGray "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) " -NoNewline
+        param (
+            [Parameter(Position=0)]
+            [System.String]
+            $Message
+        )
+        if ($Message) {
+            Write-Host -ForegroundColor DarkGray "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) $Message"
+        }
+        else {
+            Write-Host -ForegroundColor DarkGray "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) " -NoNewline
+        }
+    }
+    function Write-DarkGrayHost {
+        [CmdletBinding()]
+        param (
+            [Parameter(Mandatory=$true, Position=0)]
+            [System.String]
+            $Message
+        )
+        Write-Host -ForegroundColor DarkGray $Message
     }
     function Write-DarkGrayLine {
         [CmdletBinding()]
@@ -198,6 +193,31 @@ function Invoke-OSDCloud {
         )
         Write-DarkGrayDate
         Write-Host -ForegroundColor Green $Message
+    }
+    #endregion
+    #=================================================
+    #region Set Post-Merge Defaults
+    $Global:OSDCloud.Version = [Version](Get-Module -Name OSD -ListAvailable | Sort-Object Version -Descending | Select-Object -First 1).Version
+
+    if ($Global:OSDCloud.RecoveryPartition -eq $true) {
+        $Global:OSDCloud.SkipRecoveryPartition = [bool]$false
+    }
+
+    if ($Global:OSDCloud.SkipAllDiskSteps -eq $true) {
+        Write-DarkGrayHost '$OSDCloud.SkipAllDiskSteps = $true'
+        $Global:OSDCloud.SkipClearDisk = $true
+        $Global:OSDCloud.SkipNewOSDisk = $true
+    }
+
+    if ($Global:OSDCloud.Test -eq $true) {
+        Write-DarkGrayHost '$OSDCloud.Test = $true'
+        $Global:OSDCloud.SkipClearDisk = $true
+        $Global:OSDCloud.SkipNewOSDisk = $true
+    }
+
+    if ($Global:OSDCloud.ZTI -eq $true) {
+        Write-DarkGrayHost '$OSDCloud.ZTI = $true'
+        $Global:OSDCloud.ClearDiskConfirm = $false
     }
     #endregion
     #=================================================
@@ -270,10 +290,10 @@ function Invoke-OSDCloud {
         Write-SectionHeader "Validate Autopilot Configuration"
 
         if ($Global:OSDCloud.AutopilotJsonObject) {
-            Write-Host -ForegroundColor DarkGray 'Importing AutopilotJsonObject'
+            Write-DarkGrayHost 'Importing AutopilotJsonObject'
         }
         elseif ($Global:OSDCloud.AutopilotJsonUrl) {
-            Write-Host -ForegroundColor DarkGray "Importing Autopilot Configuration $($Global:OSDCloud.AutopilotJsonUrl)"
+            Write-DarkGrayHost "Importing Autopilot Configuration $($Global:OSDCloud.AutopilotJsonUrl)"
             if (Test-WebConnection -Uri $Global:OSDCloud.AutopilotJsonUrl) {
                 $Global:OSDCloud.AutopilotJsonObject = (Invoke-WebRequest -Uri $Global:OSDCloud.AutopilotJsonUrl).Content | ConvertFrom-Json
             }
@@ -314,7 +334,7 @@ function Invoke-OSDCloud {
         }
 
         if ($Global:OSDCloud.AutopilotJsonObject) {
-            Write-Host -ForegroundColor DarkGray "OSDCloud will apply the following Autopilot Configuration as AutopilotConfigurationFile.json"
+            Write-DarkGrayHost "OSDCloud will apply the following Autopilot Configuration as AutopilotConfigurationFile.json"
             $($Global:OSDCloud.AutopilotJsonObject) | Out-Host | Format-List
         }
         else {
@@ -332,7 +352,7 @@ function Invoke-OSDCloud {
         
             $Global:OSDCloud.ODTFile = Select-OSDCloudODTFile
             if ($Global:OSDCloud.ODTFile) {
-                Write-Host -ForegroundColor DarkGray "Office Config: $($Global:OSDCloud.ODTFile.FullName)"
+                Write-DarkGrayHost "Office Config: $($Global:OSDCloud.ODTFile.FullName)"
             } 
             else {
                 Write-Warning "OSDCloud Office Config will not be configured for this deployment"
@@ -392,23 +412,23 @@ function Invoke-OSDCloud {
     Write-SectionHeader "Clear-Disk"
 
     if ($Global:OSDCloud.SkipClearDisk -eq $true) {
-        Write-Host -ForegroundColor DarkGray '$OSDCloud.SkipClearDisk = $true'
+        Write-DarkGrayHost '$OSDCloud.SkipClearDisk = $true'
     }
 
     if ($Global:OSDCloud.SkipClearDisk -eq $false) {
-        Write-Host -ForegroundColor DarkGray '$OSDCloud.SkipClearDisk = $false'
+        Write-DarkGrayHost '$OSDCloud.SkipClearDisk = $false'
 
         if (($Global:OSDCloud.GetDiskFixed | Measure-Object).Count -ge 2) {
-            Write-Host -ForegroundColor DarkGray 'More than 1 Fixed Disk is present, Clear-Disk Confirm is required'
+            Write-DarkGrayHost 'More than 1 Fixed Disk is present, Clear-Disk Confirm is required'
             $Global:OSDCloud.ClearDiskConfirm = $true
         }
 
         if ($Global:OSDCloud.ClearDiskConfirm -eq $true) {
-            Write-Host -ForegroundColor DarkGray '$OSDCloud.ClearDiskConfirm = $true'
+            Write-DarkGrayHost '$OSDCloud.ClearDiskConfirm = $true'
             Clear-Disk.fixed -Force -NoResults -ErrorAction Stop
         }
         else {
-            Write-Host -ForegroundColor DarkGray '$OSDCloud.ClearDiskConfirm = $false'
+            Write-DarkGrayHost '$OSDCloud.ClearDiskConfirm = $false'
             Clear-Disk.fixed -Force -NoResults -Confirm:$false -ErrorAction Stop
         }
     }
@@ -422,7 +442,7 @@ function Invoke-OSDCloud {
     Write-SectionHeader "New-OSDisk"
 
     if ($Global:OSDCloud.SkipNewOSDisk -eq $true) {
-        Write-Host -ForegroundColor DarkGray '$OSDCloud.SkipNewOSDisk = $true'
+        Write-DarkGrayHost '$OSDCloud.SkipNewOSDisk = $true'
     }
 
     if ($Global:OSDCloud.SkipNewOSDisk -eq $false) {
@@ -504,16 +524,16 @@ function Invoke-OSDCloud {
     Write-SectionHeader "Powercfg High Performance"
 
     if ($Global:OSDCloud.IsOnBattery -eq $true) {
-        Write-Host -ForegroundColor DarkGray "Device is on battery power. Performance will not be adjusted"
+        Write-DarkGrayHost "Device is on battery power. Performance will not be adjusted"
     }
     elseif ($Global:OSDCloud.Test -eq $true) {
-        Write-Host -ForegroundColor DarkGray "Device is running in test mode. Performance will not be adjusted"
+        Write-DarkGrayHost "Device is running in test mode. Performance will not be adjusted"
     }
     elseif ($Global:OSDCloud.Debug -eq $true) {
-        Write-Host -ForegroundColor DarkGray "Device is running in debug mode. Performance will not be adjusted"
+        Write-DarkGrayHost "Device is running in debug mode. Performance will not be adjusted"
     }
     else {
-        Write-Host -ForegroundColor DarkGray "Enable powercfg High Performance"
+        Write-DarkGrayHost "Enable powercfg High Performance"
         Invoke-Exe powercfg.exe -SetActive 8c5e7fda-e8bf-4a96-9a85-a6e23a8c635c
     }
     #endregion
@@ -542,7 +562,7 @@ function Invoke-OSDCloud {
 
         #Now that we have an ImageFileSource, everything is good
         if ($Global:OSDCloud.ImageFileSource) {
-            Write-Host -ForegroundColor DarkGray "-Source $($Global:OSDCloud.ImageFileSource.FullName)"
+            Write-DarkGrayHost "-Source $($Global:OSDCloud.ImageFileSource.FullName)"
             if (!(Test-Path 'C:\OSDCloud\OS')) {
                 New-Item -Path 'C:\OSDCloud\OS' -ItemType Directory -Force -ErrorAction Stop | Out-Null
             }
@@ -552,7 +572,7 @@ function Invoke-OSDCloud {
             }
         }
         if ($Global:OSDCloud.ImageFileDestination) {
-            Write-Host -ForegroundColor DarkGray "-Destination $($Global:OSDCloud.ImageFileDestination.FullName)"
+            Write-DarkGrayHost "-Destination $($Global:OSDCloud.ImageFileDestination.FullName)"
             $Global:OSDCloud.ImageFileUrl = $null
         }
         else {
@@ -607,48 +627,55 @@ function Invoke-OSDCloud {
         #Export Image Information
         $Global:OSDCloud.AzOSDCloudImage | ConvertTo-Json | Out-File -FilePath "$OSDCloudLogs\AzOSDCloudImage.json" -Encoding ascii -Width 2000
 
-        $GetAzStorageBlobContent = @{
+        $ParamGetAzStorageBlobContent = @{
             CloudBlob = $Global:OSDCloud.AzOSDCloudImage.ICloudBlob
             Context = $Global:OSDCloud.AzOSDCloudImage.Context
             Destination = $Global:OSDCloud.DownloadFullName
             Force = $true
+            ErrorAction = 'Stop'
         }
 
-        $NewItem = @{
-            Force = $true
-            ItemType = 'Directory'
+        $ParamGetItem = @{
+            Path = $Global:OSDCloud.DownloadFullName
+            ErrorAction = 'Stop'
+        }
+
+        $ParamNewItem = @{
             Path = $Global:OSDCloud.DownloadDirectory
+            ItemType = 'Directory'
+            Force = $true
+            ErrorAction = 'Stop'
         }
 
         if (Test-Path $Global:OSDCloud.DownloadFullName) {
-            Write-Host -ForegroundColor DarkGray "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) $($Global:OSDCloud.DownloadFullName) already exists"
+            Write-DarkGrayHost -Message "$($Global:OSDCloud.DownloadFullName) already exists"
 
-            $Global:OSDCloud.ImageFileDestination = Get-Item -Path $Global:OSDCloud.DownloadFullName -ErrorAction Stop | Select-Object -First 1 | Select-Object -First 1
+            $Global:OSDCloud.ImageFileDestination = Get-Item @ParamGetItem | Select-Object -First 1 | Select-Object -First 1
 
             if ($Global:OSDCloud.AzOSDCloudImage.Length -eq $Global:OSDCloud.ImageFileDestination.Length) {
-                Write-Host -ForegroundColor DarkGray "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Destination file size matches Azure Storage, skipping previous download"
+                Write-DarkGrayHost -Message "Destination file size matches Azure Storage, skipping previous download"
             }
             else {
-                Write-Host -ForegroundColor DarkGray "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Existing file does not match Azure Storage, downloading updated file"
-                Get-AzStorageBlobContent @GetAzStorageBlobContent -ErrorAction Stop
+                Write-DarkGrayHost -Message "Existing file does not match Azure Storage, downloading updated file"
+                Get-AzStorageBlobContent @ParamGetAzStorageBlobContent
             }
         }
         else {
             if (-not (Test-Path "$($Global:OSDCloud.DownloadDirectory)")) {
-                Write-Host -ForegroundColor DarkGray "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Creating directory $($Global:OSDCloud.DownloadDirectory)"
-                $null = New-Item @NewItem -ErrorAction Ignore
+                Write-DarkGrayHost -Message "Creating directory $($Global:OSDCloud.DownloadDirectory)"
+                $null = New-Item @ParamNewItem
             }
-            Get-AzStorageBlobContent @GetAzStorageBlobContent -ErrorAction Stop
+            Get-AzStorageBlobContent @ParamGetAzStorageBlobContent
         }
         
-        $Global:OSDCloud.ImageFileDestination = Get-Item -Path $Global:OSDCloud.DownloadFullName -ErrorAction Stop | Select-Object -First 1 | Select-Object -First 1
+        $Global:OSDCloud.ImageFileDestination = Get-Item @ParamGetItem | Select-Object -First 1 | Select-Object -First 1
     }
     #endregion
     #=================================================
     #region Image Download
     if (!($Global:OSDCloud.ImageFileDestination) -and ($Global:OSDCloud.ImageFileUrl)) {
         Write-SectionHeader "Download Operating System"
-        Write-Host -ForegroundColor DarkGray "$($Global:OSDCloud.ImageFileUrl)"
+        Write-DarkGrayHost "$($Global:OSDCloud.ImageFileUrl)"
 
         $null = New-Item -Path 'C:\OSDCloud\OS' -ItemType Directory -Force -ErrorAction Ignore
 
@@ -716,17 +743,17 @@ function Invoke-OSDCloud {
         #ISO is already mounted (which should not be happening)
         if ($Global:OSDCloud.IsoGetDiskImage.Attached) {
             $Global:OSDCloud.IsoGetVolume = $Global:OSDCloud.IsoGetDiskImage | Get-Volume
-            Write-Host -ForegroundColor DarkGray "Windows ISO is attached to Drive Letter $($Global:OSDCloud.IsoGetVolume.DriveLetter)"
+            Write-DarkGrayHost "Windows ISO is attached to Drive Letter $($Global:OSDCloud.IsoGetVolume.DriveLetter)"
         }
         else {
-            Write-Host -ForegroundColor DarkGray "Mounting Windows ISO $($Global:OSDCloud.ImageFileDestination.FullName)"
+            Write-DarkGrayHost "Mounting Windows ISO $($Global:OSDCloud.ImageFileDestination.FullName)"
             $Global:OSDCloud.IsoMountDiskImage = Mount-DiskImage -ImagePath $Global:OSDCloud.ImageFileDestination.FullName -PassThru -ErrorAction Stop
 
             if ($Global:OSDCloud.IsoMountDiskImage.Attached) {
                 Start-Sleep -Seconds 10
                 $Global:OSDCloud.IsoGetVolume = $Global:OSDCloud.IsoMountDiskImage | Get-Volume
 
-                Write-Host -ForegroundColor DarkGray "Windows ISO is attached to Drive Letter $($Global:OSDCloud.IsoGetVolume.DriveLetter)"
+                Write-DarkGrayHost "Windows ISO is attached to Drive Letter $($Global:OSDCloud.IsoGetVolume.DriveLetter)"
             }
             else {
                 Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) OSDCloud Failed"
@@ -748,36 +775,28 @@ function Invoke-OSDCloud {
     }
     #endregion
     #=================================================
-    #region ImageIndex
-    Write-SectionHeader "Validate Windows Image Index"
+    #region Validate WindowsImage Index
+    Write-SectionHeader "Validate WindowsImage Index"
 
-    if (-NOT (Test-Path 'C:\OSDCloud\Temp')) {
-        New-Item 'C:\OSDCloud\Temp' -ItemType Directory -Force | Out-Null
-    }
-    #=================================================
-    #	Make sure the Windows Image exists
-    #=================================================
     if (Test-Path $Global:OSDCloud.ImageFileDestination.FullName) {
-        $Global:OSDCloud.ImageCount = (Get-WindowsImage -ImagePath $Global:OSDCloud.ImageFileDestination.FullName).Count
-        #=================================================
-        #	Bad Image
-        #=================================================
-        if ($null -eq $Global:OSDCloud.ImageCount) {
+        $Global:OSDCloud.WindowsImage = Get-WindowsImage -ImagePath $Global:OSDCloud.ImageFileDestination.FullName -ErrorAction Stop
+        $Global:OSDCloud.WindowsImageCount = ($Global:OSDCloud.WindowsImage).Count
+
+        #Bad Image
+        if ($null -eq $Global:OSDCloud.WindowsImageCount) {
             Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) OSDCloud Failed"
             Write-Warning "Could not read the Windows Image properly"
             Start-Sleep -Seconds 86400
             Stop-Computer -Force
             Exit
         }
-        #=================================================
+
         #TODO: Make sure the ImageIndex is 1
-        #=================================================
-        elseif ($Global:OSDCloud.ImageCount -eq 1) {
+        elseif ($Global:OSDCloud.WindowsImageCount -eq 1) {
             $Global:OSDCloud.OSImageIndex = 1
         }
-        #=================================================
-        #	AUTO ImageIndex
-        #=================================================
+
+        #AUTO ImageIndex
         elseif ($Global:OSDCloud.OSImageIndex -match 'AUTO') {
             $Global:OSDCloud.OSImageIndex = 'AUTO'
         }
@@ -787,22 +806,24 @@ function Invoke-OSDCloud {
         elseif ($null -eq $Global:OSDCloud.OSImageIndex) {
             $Global:OSDCloud.OSImageIndex = 'AUTO'
         }
-        #=================================================
-        #	Home Single Language Correction
-        #=================================================
-        if (($OSLicense -eq 'Retail') -and ($Global:OSDCloud.ImageCount -eq 9)) {
-            if ($OSEdition -eq 'Home Single Language') {
-                Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) OSDCloud Failed"
-                Write-Warning "This ESD does not contain a Home Single Edition Index"
-                Write-Warning "Restart OSDCloud and select a different Edition"
-                Start-Sleep -Seconds 86400
-                Stop-Computer -Force
-                Exit
-            }
-            if ($OSEdition -notmatch 'Home') {
-                Write-Warning "This ESD does not contain a Home Single Edition Index"
-                Write-Warning "Adjusting selected ImageIndex by -1"
-                $Global:OSDCloud.OSImageIndex = ($Global:OSDCloud.OSImageIndex - 1)
+
+        if ($Global:OSDCloud.OSImageIndex -ne 'AUTO') {
+            #Home Single Language Correction
+            if (($OSLicense -eq 'Retail') -and ($Global:OSDCloud.WindowsImageCount -eq 9)) {
+                if ($OSEdition -eq 'Home Single Language') {
+                    Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) OSDCloud Failed"
+                    Write-Warning "This ESD does not contain a Home Single Edition Index"
+                    Write-Warning "Restart OSDCloud and select a different Edition"
+                    Start-Sleep -Seconds 86400
+                    Stop-Computer -Force
+                    Exit
+                }
+                if ($OSEdition -notmatch 'Home') {
+                    Write-DarkGrayHost "This ESD does not contain a Home Single Edition Index"
+                    Write-DarkGrayHost "Adjusting selected ImageIndex by -1"
+                    $Global:OSDCloud.OSImageIndex = ($Global:OSDCloud.OSImageIndex - 1)
+                    Write-DarkGrayHost "ImageIndex: $($Global:OSDCloud.OSImageIndex)"
+                }
             }
         }
     }
@@ -819,7 +840,7 @@ function Invoke-OSDCloud {
 
     if ($Global:OSDCloud.OSImageIndex -eq 'AUTO') {
         Write-SectionHeader "Select the Windows Image to expand"
-        $SelectedWindowsImage = Get-WindowsImage -ImagePath $Global:OSDCloud.ImageFileDestination.FullName | Where-Object {$_.ImageSize -gt 3000000000}
+        $SelectedWindowsImage = $Global:OSDCloud.WindowsImage | Where-Object {$_.ImageSize -gt 3000000000}
 
         if ($SelectedWindowsImage) {
             $SelectedWindowsImage | Select-Object -Property ImageIndex, ImageName | Format-Table | Out-Host
@@ -833,77 +854,112 @@ function Invoke-OSDCloud {
             $Global:OSDCloud.OSImageIndex = $SelectReadHost
         }
     }
+    else {
+        $Global:OSDCloud.WindowsImage | Where-Object {$_.ImageSize -gt 3000000000} | Select-Object -Property ImageIndex, ImageName | Format-Table | Out-Host
+    }
     #endregion
     #=================================================
     #region Expand-WindowsImage
     Write-SectionHeader "Expand-WindowsImage"
-    #Write-Verbose -Message "https://docs.microsoft.com/en-us/powershell/module/dism/expand-windowsimage"
 
+    #Expand-WindowsImage
+    Write-DarkGrayHost "ApplyPath: 'C:\'"
+    Write-DarkGrayHost "ImagePath: $($Global:OSDCloud.ImageFileDestination.FullName)"
+    Write-DarkGrayHost "Index: $($Global:OSDCloud.OSImageIndex)"
+    Write-DarkGrayHost "ScratchDirectory: 'C:\OSDCloud\Temp'"
+
+    #Scratch Directory
+    $ParamNewItem = @{
+        Path = 'C:\OSDCloud\Temp'
+        ItemType = 'Directory'
+        Force = $true
+        ErrorAction = 'Stop'
+    }
     if (-NOT (Test-Path 'C:\OSDCloud\Temp')) {
-        New-Item 'C:\OSDCloud\Temp' -ItemType Directory -Force | Out-Null
+        Write-DarkGrayHost -Message 'Creating ScratchDirectory C:\OSDCloud\Temp'
+        $null = New-Item @ParamNewItem
     }
 
-    if (Test-Path $Global:OSDCloud.ImageFileDestination.FullName) {
-        $Global:OSDCloud.ImageCount = (Get-WindowsImage -ImagePath $Global:OSDCloud.ImageFileDestination.FullName).Count
-
-        if ($null -eq $Global:OSDCloud.ImageCount) {
-            Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) OSDCloud Failed"
-            Write-Warning "Could not read the Windows Image properly"
-            Start-Sleep -Seconds 86400
-            Stop-Computer -Force
-            Exit
-        }
-        elseif ($Global:OSDCloud.ImageCount -eq 1) {
-            $Global:OSDCloud.OSImageIndex = 1
-        }
-        elseif ((!($Global:OSDCloud.OSImageIndex)) -or ($Global:OSDCloud.OSImageIndex -eq 'Auto')) {
-            Write-Warning "No ImageIndex is specified, setting ImageIndex = 1"
-            $Global:OSDCloud.OSImageIndex = 1
-        }
-        #=================================================
-        #	FAILED
-        #=================================================
-        if (($OSLicense -eq 'Retail') -and ($Global:OSDCloud.ImageCount -eq 9)) {
-            if ($OSEdition -eq 'Home Single Language') {
-                Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) OSDCloud Failed"
-                Write-Warning "This ESD does not contain a Home Single Edition Index"
-                Write-Warning "Restart OSDCloud and select a different Edition"
-                Start-Sleep -Seconds 86400
-                Stop-Computer -Force
-                Exit
-            }
-            if ($OSEdition -notmatch 'Home') {
-                Write-Warning "This ESD does not contain a Home Single Edition Index"
-                Write-Warning "Adjusting selected ImageIndex by -1"
-                $Global:OSDCloud.OSImageIndex = ($Global:OSDCloud.OSImageIndex - 1)
-            }
-        }
-
-        Write-Host -ForegroundColor DarkGray "-ApplyPath 'C:\'"
-        Write-Host -ForegroundColor DarkGray "-ImagePath $($Global:OSDCloud.ImageFileDestination.FullName)"
-        Write-Host -ForegroundColor DarkGray "-Index $($Global:OSDCloud.OSImageIndex)"
-        Write-Host -ForegroundColor DarkGray "-ScratchDirectory 'C:\OSDCloud\Temp'"
-        if ($Global:OSDCloud.Test -eq $false) {
-            Expand-WindowsImage -ApplyPath 'C:\' -ImagePath $Global:OSDCloud.ImageFileDestination.FullName -Index $Global:OSDCloud.OSImageIndex -ScratchDirectory 'C:\OSDCloud\Temp' -ErrorAction Stop
-
-            $SystemDrive = Get-Partition | Where-Object {$_.Type -eq 'System'} | Select-Object -First 1
-            if (-NOT (Get-PSDrive -Name S)) {
-                $SystemDrive | Set-Partition -NewDriveLetter 'S'
-            }
-            bcdboot C:\Windows /s S: /f ALL
-            Start-Sleep -Seconds 10
-            $SystemDrive | Remove-PartitionAccessPath -AccessPath "S:\"
-        }
+    #Expand-WindowsImage Params
+    $ExpandWindowsImage = @{
+        ApplyPath = 'C:\'
+        ImagePath = $Global:OSDCloud.ImageFileDestination.FullName
+        Index = $Global:OSDCloud.OSImageIndex
+        ScratchDirectory = 'C:\OSDCloud\Temp'
+        ErrorAction = 'Stop'
     }
-    else {
-        #=================================================
-        #	FAILED
-        #=================================================
-        Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) OSDCloud Failed"
-        Write-Warning "Could not find a proper Windows Image for deployment"
-        Start-Sleep -Seconds 86400
-        Stop-Computer -Force
-        Exit
+    $Global:OSDCloud.ExpandWindowsImage = $ExpandWindowsImage
+
+    if ($Global:OSDCloud.Test -eq $false) {
+        Expand-WindowsImage @ExpandWindowsImage
+
+        $SystemDrive = Get-Partition | Where-Object {$_.Type -eq 'System'} | Select-Object -First 1
+        if (-NOT (Get-PSDrive -Name S)) {
+            $SystemDrive | Set-Partition -NewDriveLetter 'S'
+        }
+        bcdboot C:\Windows /s S: /f ALL
+        Start-Sleep -Seconds 10
+        $SystemDrive | Remove-PartitionAccessPath -AccessPath "S:\"
+    }
+    #endregion
+    #=================================================
+    #region Get-WindowsEdition
+    Write-SectionHeader 'Get-WindowsEdition'
+    Get-WindowsEdition -Path 'C:\' | Out-Host
+    #endregion
+    #=================================================
+    #region Content Directories
+    Write-SectionHeader 'Create Content Directories'
+
+    if (-NOT (Test-Path 'C:\Drivers')) {
+        $ParamNewItem = @{
+            Path = 'C:\Drivers'
+            ItemType = 'Directory'
+            Force = $true
+            ErrorAction = 'Stop'
+        }
+        Write-DarkGrayHost -Message 'Creating C:\Drivers'
+        $null = New-Item @ParamNewItem
+    }
+    if (-NOT (Test-Path 'C:\OSDCloud\Packages')) {
+        $ParamNewItem = @{
+            Path = 'C:\OSDCloud\Packages'
+            ItemType = 'Directory'
+            Force = $true
+            ErrorAction = 'Stop'
+        }
+        Write-DarkGrayHost -Message 'Creating C:\OSDCloud\Packages'
+        $null = New-Item @ParamNewItem
+    }
+    if (-NOT (Test-Path 'C:\Windows\Panther')) {
+        $ParamNewItem = @{
+            Path = 'C:\Windows\Panther'
+            ItemType = 'Directory'
+            Force = $true
+            ErrorAction = 'Stop'
+        }
+        Write-DarkGrayHost -Message 'Creating C:\Windows\Panther'
+        $null = New-Item @ParamNewItem
+    }
+    if (-NOT (Test-Path 'C:\Windows\Provisioning\Autopilot')) {
+        $ParamNewItem = @{
+            Path = 'C:\Windows\Provisioning\Autopilot'
+            ItemType = 'Directory'
+            Force = $true
+            ErrorAction = 'Stop'
+        }
+        Write-DarkGrayHost -Message 'Creating C:\Windows\Provisioning\Autopilot'
+        $null = New-Item @ParamNewItem
+    }
+    if (-NOT (Test-Path 'C:\Windows\Setup\Scripts')) {
+        $ParamNewItem = @{
+            Path = 'C:\Windows\Setup\Scripts'
+            ItemType = 'Directory'
+            Force = $true
+            ErrorAction = 'Stop'
+        }
+        Write-DarkGrayHost -Message 'Creating C:\Windows\Setup\Scripts'
+        $null = New-Item @ParamNewItem
     }
     #endregion
     #=================================================
@@ -911,26 +967,19 @@ function Invoke-OSDCloud {
     Write-SectionHeader 'OSDCloud Azure Container as a Task Sequence'
     if ($Global:OSDCloud.AzOSDCloudPackage) {
         foreach ($Item in $Global:OSDCloud.AzOSDCloudPackage) {
-
-            if (!(Test-Path 'C:\OSDCloud\Packages')) {
-                $null = New-Item 'C:\OSDCloud\Packages' -ItemType Directory -Force
-            }
-
-            $GetAzStorageBlobContent = @{
+            $ParamGetAzStorageBlobContent = @{
                 CloudBlob = $Item.ICloudBlob
                 Context = $Item.Context
                 Destination = 'C:\OSDCloud\Packages\'
                 Force = $true
+                ErrorAction = 'Stop'
             }
-
-            $null = Get-AzStorageBlobContent @GetAzStorageBlobContent -ErrorAction Ignore
+            $null = Get-AzStorageBlobContent @ParamGetAzStorageBlobContent
         }
 
         $Packages = Get-ChildItem -Path 'C:\OSDCloud\Packages\' *.ppkg -Recurse -ErrorAction Ignore
-
         foreach ($Item in $Packages) {
-            Write-DarkGrayDate
-            Write-Host -ForegroundColor DarkGray "Add-ProvisioningPackage $($Item.FullName)"
+            Write-DarkGrayHost "Add-ProvisioningPackage $($Item.FullName)"
             $Dism = "dism.exe"
             $ArgumentList = "/Image=C:\ /Add-ProvisioningPackage /PackagePath:$($Item.FullName)"
             $null = Start-Process -FilePath 'dism.exe' -ArgumentList $ArgumentList -Wait -NoNewWindow
@@ -938,30 +987,15 @@ function Invoke-OSDCloud {
     }
     #endregion
     #=================================================
-    #region Required Directories
-    if (-NOT (Test-Path 'C:\Drivers')) {
-        New-Item -Path 'C:\Drivers' -ItemType Directory -Force -ErrorAction Stop | Out-Null
-    }
-    if (-NOT (Test-Path 'C:\Windows\Panther')) {
-        New-Item -Path 'C:\Windows\Panther' -ItemType Directory -Force -ErrorAction Stop | Out-Null
-    }
-    if (-NOT (Test-Path 'C:\Windows\Provisioning\Autopilot')) {
-        New-Item -Path 'C:\Windows\Provisioning\Autopilot' -ItemType Directory -Force -ErrorAction Stop | Out-Null
-    }
-    if (-NOT (Test-Path 'C:\Windows\Setup\Scripts')) {
-        New-Item -Path 'C:\Windows\Setup\Scripts' -ItemType Directory -Force -ErrorAction Stop | Out-Null
-    }
-    #endregion
-    #=================================================
     #region Validate OSDCloud Driver Pack
     Write-SectionHeader "OSDCloud DriverPack"
     if ($Global:OSDCloud.DriverPackName) {
         if ($Global:OSDCloud.DriverPackName -match 'None') {
-            Write-Host -ForegroundColor DarkGray "DriverPack is set to None"
+            Write-DarkGrayHost "DriverPack is set to None"
             $Global:OSDCloud.DriverPack = $null
         }
         elseif ($Global:OSDCloud.DriverPackName -match 'Microsoft Update Catalog') {
-            Write-Host -ForegroundColor DarkGray "DriverPack is set to Microsoft Update Catalog"
+            Write-DarkGrayHost "DriverPack is set to Microsoft Update Catalog"
             $Global:OSDCloud.DriverPack = $null
         }
         else {
@@ -973,16 +1007,16 @@ function Invoke-OSDCloud {
     }
 
     if ($Global:OSDCloud.DriverPack) {
-        Write-Host -ForegroundColor DarkGray "DriverPack has been matched to $($Global:OSDCloud.DriverPack.Name)"
+        Write-DarkGrayHost "DriverPack has been matched to $($Global:OSDCloud.DriverPack.Name)"
         $Global:OSDCloud.DriverPackBaseName = ($Global:OSDCloud.DriverPack.FileName).Split('.')[0]
     }
 
     if ($Global:OSDCloud.AzOSDCloudBlobDriverPack -and $Global:OSDCloud.DriverPackBaseName) {
-        Write-Host -ForegroundColor DarkGray "Searching for DriverPack in Azure Storage"
+        Write-DarkGrayHost "Searching for DriverPack in Azure Storage"
         $Global:OSDCloud.AzOSDCloudDriverPack = $Global:OSDCloud.AzOSDCloudBlobDriverPack | Where-Object {$_.Name -match $Global:OSDCloud.DriverPackBaseName} | Select-Object -First 1
 
         if ($Global:OSDCloud.AzOSDCloudDriverPack) {
-            Write-Host -ForegroundColor DarkGray "DriverPack has been located in Azure Storage"
+            Write-DarkGrayHost "DriverPack has been located in Azure Storage"
             $Global:OSDCloud.AzOSDCloudDriverPack | ConvertTo-Json | Out-File -FilePath "$OSDCloudLogs\AzOSDCloudDriverPack.json" -Encoding ascii -Width 2000
         }
     }
@@ -990,29 +1024,28 @@ function Invoke-OSDCloud {
     if ($Global:OSDCloud.DriverPack) {
         $SaveMyDriverPack = $null
         $Global:OSDCloud.DriverPackBaseName = ($Global:OSDCloud.DriverPack.FileName).Split('.')[0]
-        Write-Host -ForegroundColor DarkGray "Matching DriverPack identified"
-        Write-Host -ForegroundColor DarkGray "-Name $($Global:OSDCloud.DriverPack.Name)"
-        Write-Host -ForegroundColor DarkGray "-BaseName $($Global:OSDCloud.DriverPackBaseName)"
-        Write-Host -ForegroundColor DarkGray "-Product $($Global:OSDCloud.DriverPack.Product)"
-        Write-Host -ForegroundColor DarkGray "-FileName $($Global:OSDCloud.DriverPack.FileName)"
-        Write-Host -ForegroundColor DarkGray "-Url $($Global:OSDCloud.DriverPack.Url)"
+        Write-DarkGrayHost "Matching DriverPack identified"
+        Write-DarkGrayHost "-Name $($Global:OSDCloud.DriverPack.Name)"
+        Write-DarkGrayHost "-BaseName $($Global:OSDCloud.DriverPackBaseName)"
+        Write-DarkGrayHost "-Product $($Global:OSDCloud.DriverPack.Product)"
+        Write-DarkGrayHost "-FileName $($Global:OSDCloud.DriverPack.FileName)"
+        Write-DarkGrayHost "-Url $($Global:OSDCloud.DriverPack.Url)"
         $Global:OSDCloud.DriverPackOffline = Find-OSDCloudFile -Name $Global:OSDCloud.DriverPack.FileName -Path '\OSDCloud\DriverPacks\' | Sort-Object FullName
         $Global:OSDCloud.DriverPackOffline = $Global:OSDCloud.DriverPackOffline | Where-Object {$_.FullName -notlike "C*"} | Where-Object {$_.FullName -notlike "X*"} | Select-Object -First 1
         if ($Global:OSDCloud.DriverPackOffline) {
-            Write-Host -ForegroundColor DarkGray "DriverPack is available on OSDCloudUSB and will not be downloaded"
-            Write-Host -ForegroundColor DarkGray $Global:OSDCloud.DriverPack.Name
-            Write-Host -ForegroundColor DarkGray $Global:OSDCloud.DriverPackOffline.FullName
+            Write-DarkGrayHost "DriverPack is available on OSDCloudUSB and will not be downloaded"
+            Write-DarkGrayHost $Global:OSDCloud.DriverPack.Name
+            Write-DarkGrayHost $Global:OSDCloud.DriverPackOffline.FullName
             #$Global:OSDCloud.DriverPackSource = Find-OSDCloudFile -Name (Split-Path -Path $Global:OSDCloud.DriverPackOffline -Leaf) -Path (Split-Path -Path (Split-Path -Path $Global:OSDCloud.DriverPackOffline.FullName -Parent) -NoQualifier) | Select-Object -First 1
             $Global:OSDCloud.DriverPackSource = $Global:OSDCloud.DriverPackOffline
         }
         if ($Global:OSDCloud.DriverPackSource) {
-            Write-Host -ForegroundColor DarkGray "DriverPack is being copied from OSDCloudUSB at $($Global:OSDCloud.DriverPackSource.FullName) to C:\Drivers"
+            Write-DarkGrayHost "DriverPack is being copied from OSDCloudUSB at $($Global:OSDCloud.DriverPackSource.FullName) to C:\Drivers"
             Copy-Item -Path $Global:OSDCloud.DriverPackSource.FullName -Destination 'C:\Drivers' -Force
             $Global:OSDCloud.DriverPackExpand = $true
         }
         elseif ($Global:OSDCloud.AzOSDCloudDriverPack) {
-            Write-Host -ForegroundColor DarkGray "DriverPack is being downloaded from Azure Storage to C:\Drivers"
-            $null = New-Item -Path 'C:\OSDCloud\Drivers' -ItemType Directory -Force -ErrorAction Ignore
+            Write-DarkGrayHost "DriverPack is being downloaded from Azure Storage to C:\Drivers"
             Get-AzStorageBlobContent -CloudBlob $Global:OSDCloud.AzOSDCloudDriverPack.ICloudBlob -Context $Global:OSDCloud.AzOSDCloudDriverPack.Context -Destination "C:\Drivers\$(Split-Path $Global:OSDCloud.AzOSDCloudDriverPack.Name -Leaf)"
             $Global:OSDCloud.DriverPackExpand = $true
         }
@@ -1034,7 +1067,7 @@ function Invoke-OSDCloud {
         
                     if (-NOT (Test-Path "$DestinationPath")) {
                         New-Item $DestinationPath -ItemType Directory -Force -ErrorAction Ignore | Out-Null
-                        Write-Host -ForegroundColor DarkGray "DriverPack CAB is being expanded to $DestinationPath"
+                        Write-DarkGrayHost "DriverPack CAB is being expanded to $DestinationPath"
                         Expand -R "$ExpandFile" -F:* "$DestinationPath" | Out-Null
                     }
                     Continue
@@ -1046,7 +1079,7 @@ function Invoke-OSDCloud {
                     $DestinationPath = Join-Path $Item.Directory $Item.BaseName
     
                     if (-NOT (Test-Path "$DestinationPath")) {
-                        Write-Host -ForegroundColor DarkGray "DriverPack ZIP is being expanded to $DestinationPath"
+                        Write-DarkGrayHost "DriverPack ZIP is being expanded to $DestinationPath"
                         Expand-Archive -Path $ExpandFile -DestinationPath $DestinationPath -Force
                     }
                     Continue
@@ -1078,19 +1111,19 @@ function Invoke-OSDCloud {
     Write-SectionHeader "Microsoft Update Catalog Firmware"
 
     if ($OSDCloud.IsOnBattery -eq $true) {
-        Write-Host -ForegroundColor DarkGray "Microsoft Update Catalog Firmware is not enabled for devices on battery power"
+        Write-DarkGrayHost "Microsoft Update Catalog Firmware is not enabled for devices on battery power"
     }
     elseif ($OSDCloud.IsVirtualMachine) {
-        Write-Host -ForegroundColor DarkGray "Microsoft Update Catalog Firmware is not enabled for Virtual Machines"
+        Write-DarkGrayHost "Microsoft Update Catalog Firmware is not enabled for Virtual Machines"
     }
     elseif ($Global:OSDCloud.MSCatalogFirmware -eq $false) {
-        Write-Host -ForegroundColor DarkGray "Microsoft Update Catalog Firmware is not enabled for this deployment"
+        Write-DarkGrayHost "Microsoft Update Catalog Firmware is not enabled for this deployment"
     }
     else {
         if (Test-MicrosoftUpdateCatalog) {
-            Write-Host -ForegroundColor DarkGray "Firmware Updates will be downloaded from Microsoft Update Catalog to C:\Drivers\Firmware"
-            Write-Host -ForegroundColor DarkGray "Some systems do not support a driver Firmware Update"
-            Write-Host -ForegroundColor DarkGray "You may have to enable this setting in your BIOS or Firmware Settings"
+            Write-DarkGrayHost "Firmware Updates will be downloaded from Microsoft Update Catalog to C:\Drivers\Firmware"
+            Write-DarkGrayHost "Some systems do not support a driver Firmware Update"
+            Write-DarkGrayHost "You may have to enable this setting in your BIOS or Firmware Settings"
     
             Save-SystemFirmwareUpdate -DestinationDirectory 'C:\Drivers\Firmware'
         }
@@ -1104,29 +1137,29 @@ function Invoke-OSDCloud {
     Write-SectionHeader "Microsoft Update Catalog Drivers"
 
     if ($Global:OSDCloud.DriverPackName -eq 'None') {
-        Write-Host -ForegroundColor DarkGray "Drivers from Microsoft Update Catalog will not be applied for this deployment"
+        Write-DarkGrayHost "Drivers from Microsoft Update Catalog will not be applied for this deployment"
     }
     else {
         if (Test-MicrosoftUpdateCatalog) {
             if ($Global:OSDCloud.DriverPackName -eq 'Microsoft Update Catalog') {
-                Write-Host -ForegroundColor DarkGray "Drivers for all devices will be downloaded from Microsoft Update Catalog to C:\Drivers"
+                Write-DarkGrayHost "Drivers for all devices will be downloaded from Microsoft Update Catalog to C:\Drivers"
                 Save-MsUpCatDriver -DestinationDirectory 'C:\Drivers'
             }
             elseif ($null -eq $SaveMyDriverPack) {
-                Write-Host -ForegroundColor DarkGray "Drivers for all devices will be downloaded from Microsoft Update Catalog to C:\Drivers"
+                Write-DarkGrayHost "Drivers for all devices will be downloaded from Microsoft Update Catalog to C:\Drivers"
                 Save-MsUpCatDriver -DestinationDirectory 'C:\Drivers'
             }
             else {
                 if ($OSDCloud.MSCatalogDiskDrivers) {
-                    Write-Host -ForegroundColor DarkGray "Drivers for PNPClass DiskDrive will be downloaded from Microsoft Update Catalog to C:\Drivers"
+                    Write-DarkGrayHost "Drivers for PNPClass DiskDrive will be downloaded from Microsoft Update Catalog to C:\Drivers"
                     Save-MsUpCatDriver -DestinationDirectory 'C:\Drivers' -PNPClass 'DiskDrive'
                 }
                 if ($OSDCloud.MSCatalogNetDrivers) {
-                    Write-Host -ForegroundColor DarkGray "Drivers for PNPClass Net will be downloaded from Microsoft Update Catalog to C:\Drivers"
+                    Write-DarkGrayHost "Drivers for PNPClass Net will be downloaded from Microsoft Update Catalog to C:\Drivers"
                     Save-MsUpCatDriver -DestinationDirectory 'C:\Drivers' -PNPClass 'Net'
                 }
                 if ($OSDCloud.MSCatalogScsiDrivers) {
-                    Write-Host -ForegroundColor DarkGray "Drivers for PNPClass SCSIAdapter will be downloaded from Microsoft Update Catalog to C:\Drivers"
+                    Write-DarkGrayHost "Drivers for PNPClass SCSIAdapter will be downloaded from Microsoft Update Catalog to C:\Drivers"
                     Save-MsUpCatDriver -DestinationDirectory 'C:\Drivers' -PNPClass 'SCSIAdapter'
                 }
             }
@@ -1134,36 +1167,35 @@ function Invoke-OSDCloud {
     }
     #endregion
     #=================================================
-    #   Add-OfflineServicingWindowsDriver
-    #=================================================
+    #region Add-OfflineServicingWindowsDriver
     Write-SectionHeader "Add Windows Driver with Offline Servicing (Add-OfflineServicingWindowsDriver)"
     Write-Verbose -Message "https://docs.microsoft.com/en-us/powershell/module/dism/add-windowsdriver"
-    Write-Host -ForegroundColor DarkGray "Drivers in C:\Drivers are being added to the offline Windows Image"
-    Write-Host -ForegroundColor DarkGray "This process can take up to 20 minutes"
+    Write-DarkGrayHost "Drivers in C:\Drivers are being added to the offline Windows Image"
+    Write-DarkGrayHost "This process can take up to 20 minutes"
     Write-Verbose -Message "Add-OfflineServicingWindowsDriver"
     if ($Global:OSDCloud.Test -eq $false) {
         Add-OfflineServicingWindowsDriver
     }
+    #endregion
     #=================================================
-    #   Set-OSDCloudUnattendSpecialize
-    #=================================================
+    #region Set-OSDCloudUnattendSpecialize
     Write-SectionHeader "Set Specialize Unattend.xml (Set-OSDCloudUnattendSpecialize)"
-    Write-Host -ForegroundColor DarkGray "C:\Windows\Panther\Invoke-OSDSpecialize.xml is being applied as an Unattend file"
-    Write-Host -ForegroundColor DarkGray "This will enable the extraction and installation of HP, Lenovo, and Microsoft Surface Drivers if necessary"
+    Write-DarkGrayHost "C:\Windows\Panther\Invoke-OSDSpecialize.xml is being applied as an Unattend file"
+    Write-DarkGrayHost "This will enable the extraction and installation of HP, Lenovo, and Microsoft Surface Drivers if necessary"
     Write-Verbose -Message "Set-OSDCloudUnattendSpecialize"
     if ($Global:OSDCloud.Test -eq $false) {
         Set-OSDCloudUnattendSpecialize
         #Set-OSDxCloudUnattendSpecialize -Verbose
     }
+    #endregion
     #=================================================
-    #   HP Updates Config for Specialize Phase
-    #=================================================
+    #region HP Updates Config for Specialize Phase
     #Set Specialize JSON
     if (($Global:OSDCloud.HPIAAll -eq $true) -or ($Global:OSDCloud.HPIADrivers -eq $true) -or ($Global:OSDCloud.HPIAFirmware -eq $true) -or ($Global:OSDCloud.HPIASoftware -eq $true) -or ($Global:OSDCloud.HPTPMUpdate -eq $true) -or ($Global:OSDCloud.HPBIOSUpdate -eq $true)){
         $HPFeaturesEnabled = $true
         Write-Host -ForegroundColor Cyan "Adding HP Tasks into JSON Config File for Action during Specialize" 
-        Write-Host -ForegroundColor DarkGray "HPIA Drivers = $($Global:OSDCloud.HPIADrivers) | HPIA Firmware = $($Global:OSDCloud.HPIAFirmware) | HPIA Software = $($Global:OSDCloud.HPIADrivers) | HPIA All = $($Global:OSDCloud.HPIAFirmware) "
-        Write-Host -ForegroundColor DarkGray "HP TPM Update = $($Global:OSDCloud.HPTPMUpdate) | HP BIOS Update = $($Global:OSDCloud.HPBIOSUpdate)" 
+        Write-DarkGrayHost "HPIA Drivers = $($Global:OSDCloud.HPIADrivers) | HPIA Firmware = $($Global:OSDCloud.HPIAFirmware) | HPIA Software = $($Global:OSDCloud.HPIADrivers) | HPIA All = $($Global:OSDCloud.HPIAFirmware) "
+        Write-DarkGrayHost "HP TPM Update = $($Global:OSDCloud.HPTPMUpdate) | HP BIOS Update = $($Global:OSDCloud.HPBIOSUpdate)" 
         $HPHashTable = @{
             'HPUpdates' = @{
                 'HPIADrivers' = $Global:OSDCloud.HPIADrivers
@@ -1188,8 +1220,8 @@ function Invoke-OSDCloud {
         Write-Host -ForegroundColor Cyan "Updating HP System Firmware"
         if (Get-HPBIOSSetupPasswordIsSet){Write-Host -ForegroundColor Red "Device currently has BIOS Setup Password, Please Update BIOS via different method"}
         else{
-            Write-Host -ForegroundColor DarkGray "Current Firmware: $(Get-HPBIOSVersion)"
-            Write-Host -ForegroundColor DarkGray "Staging Update: $((Get-HPBIOSUpdates -Latest).ver) "
+            Write-DarkGrayHost "Current Firmware: $(Get-HPBIOSVersion)"
+            Write-DarkGrayHost "Staging Update: $((Get-HPBIOSUpdates -Latest).ver) "
             #Details: https://developers.hp.com/hp-client-management/doc/Get-HPBiosUpdates
             Get-HPBIOSUpdates -Flash -Yes -Offline -BitLocker Ignore
             }
@@ -1270,21 +1302,20 @@ function Invoke-OSDCloud {
             Add-Content -Path $PSFilePath "Restart-Computer -Force"
         }
     }
-
+    #endregion
     #=================================================
-    #   AutopilotConfigurationFile.json
-    #=================================================
+    #region AutopilotConfigurationFile.json
     if ($Global:OSDCloud.AutopilotJsonObject) {
         Write-SectionHeader "Applying AutopilotConfigurationFile.json"
-        Write-Host -ForegroundColor DarkGray 'C:\Windows\Provisioning\Autopilot\AutopilotConfigurationFile.json'
+        Write-DarkGrayHost 'C:\Windows\Provisioning\Autopilot\AutopilotConfigurationFile.json'
         $Global:OSDCloud.AutopilotJsonObject | ConvertTo-Json | Out-File -FilePath 'C:\Windows\Provisioning\Autopilot\AutopilotConfigurationFile.json' -Encoding ascii -Width 2000 -Force
     }
+    #endregion
     #=================================================
-    #   OSDeploy.OOBEDeploy.json
-    #=================================================
+    #region OSDeploy.OOBEDeploy.json
     if ($Global:OSDCloud.OOBEDeployJsonObject) {
         Write-SectionHeader "Applying OSDeploy.OOBEDeploy.json"
-        Write-Host -ForegroundColor DarkGray 'C:\ProgramData\OSDeploy\OSDeploy.OOBEDeploy.json'
+        Write-DarkGrayHost 'C:\ProgramData\OSDeploy\OSDeploy.OOBEDeploy.json'
 
         If (!(Test-Path "C:\ProgramData\OSDeploy")) {
             New-Item "C:\ProgramData\OSDeploy" -ItemType Directory -Force | Out-Null
@@ -1317,21 +1348,21 @@ exit
 '@
         $SetCommand | Out-File -FilePath "C:\Windows\OOBEDeploy.cmd" -Encoding ascii -Width 2000 -Force
     }
+    #endregion
     #=================================================
-    #   OSDeploy.AutopilotOOBE.json
-    #=================================================
+    #region OSDeploy.AutopilotOOBE.json
     if ($Global:OSDCloud.AutopilotOOBEJsonObject) {
         Write-SectionHeader "Applying OSDeploy.AutopilotOOBE.json"
-        Write-Host -ForegroundColor DarkGray 'C:\ProgramData\OSDeploy\OSDeploy.AutopilotOOBE.json'
+        Write-DarkGrayHost 'C:\ProgramData\OSDeploy\OSDeploy.AutopilotOOBE.json'
 
         If (!(Test-Path "C:\ProgramData\OSDeploy")) {
             New-Item "C:\ProgramData\OSDeploy" -ItemType Directory -Force | Out-Null
         }
         $Global:OSDCloud.AutopilotOOBEJsonObject | ConvertTo-Json | Out-File -FilePath 'C:\ProgramData\OSDeploy\OSDeploy.AutopilotOOBE.json' -Encoding ascii -Width 2000 -Force
     }
+    #endregion
     #=================================================
-    #   Stage Office Config
-    #=================================================
+    #region Stage Office Config
     if ($Global:OSDCloud.ODTFile) {
         Write-SectionHeader "Stage Office Config"
 
@@ -1355,9 +1386,9 @@ exit
             Invoke-Exe robocopy "$($Global:OSDCloud.ODTSource)" "$($Global:OSDCloud.ODTTargetData)" *.* /s /ndl /nfl /z /b
         }
     }
+    #endregion
     #=================================================
-    #   Save PowerShell Modules to OSDisk
-    #=================================================
+    #region Save PowerShell Modules to OSDisk
     Write-SectionHeader "Saving PowerShell Modules and Scripts"
     if ($Global:OSDCloud.Test -eq $false) {
         $PowerShellSavePath = 'C:\Program Files\WindowsPowerShell'
@@ -1435,30 +1466,30 @@ exit
             }
         }
     }
-
+    #endregion
     #=================================================
-    #   Debug Mode
-    #=================================================
+    #region Debug Mode
     if ($Global:OSDCloud.DebugMode -eq $true){
         Invoke-Expression (Invoke-RestMethod -Uri 'https://raw.githubusercontent.com/OSDeploy/OSD/master/cloud/modules/debugmode.psm1')
         osdcloud-addcmtrace
         osdcloud-addmouseoobe
         osdcloud-UpdateModuleFilesManually
     }
+    #endregion
     #=================================================
-    #	Deploy-OSDCloud Complete
-    #=================================================
+    #region Deploy-OSDCloud Complete
     $Global:OSDCloud.TimeEnd = Get-Date
     $Global:OSDCloud.TimeSpan = New-TimeSpan -Start $Global:OSDCloud.TimeStart -End $Global:OSDCloud.TimeEnd
     
     $Global:OSDCloud | ConvertTo-Json | Out-File -FilePath 'C:\OSDCloud\Logs\OSDCloud.json' -Encoding ascii -Width 2000 -Force
     Write-SectionHeader "OSDCloud Finished"
-    Write-Host -ForegroundColor DarkGray "Completed in $($Global:OSDCloud.TimeSpan.ToString("mm' minutes 'ss' seconds'"))"
+    Write-DarkGrayHost "Completed in $($Global:OSDCloud.TimeSpan.ToString("mm' minutes 'ss' seconds'"))"
+    #endregion
     #=================================================
     if ($Global:OSDCloud.Screenshot) {
         Start-Sleep 5
         Stop-ScreenPNGProcess
-        Write-Host -ForegroundColor DarkGray "Screenshots: $($Global:OSDCloud.Screenshot)"
+        Write-DarkGrayHost "Screenshots: $($Global:OSDCloud.Screenshot)"
     }
     #=================================================
     if ($Global:OSDCloud.Restart) {
