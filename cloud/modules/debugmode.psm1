@@ -30,6 +30,14 @@ function osdcloud-addcmtrace {
     }
 }
 
+function osdcloud-addserviceui {
+    [CmdletBinding()]
+    param ()
+    $EXEName = "ServiceUI.exe"
+    $EXEURL = "https://github.com/gwblok/garytown/raw/master/OSD/CloudOSD/$EXEName"
+    Invoke-WebRequest -UseBasicParsing -Uri $EXEURL -OutFile "$env:TEMP\$EXEName"
+}
+
 function osdcloud-addmouseoobe {
     #cmd.exe /c reg load HKLM\Offline c:\windows\system32\config\software & cmd.exe /c REG ADD "HKLM\Offline\Microsoft\Windows\CurrentVersion\Policies\System" /v EnableCursorSuppression /t REG_DWORD /d 0 /f & cmd.exe /c reg unload HKLM\Offline
     Invoke-Exe cmd.exe -Arguments "/c reg load HKLM\Offline c:\windows\system32\config\software"

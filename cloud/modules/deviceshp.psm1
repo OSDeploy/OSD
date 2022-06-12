@@ -14,6 +14,14 @@
 #=================================================
 #region Functions
 
+
+function osdcloud-addserviceui {
+    [CmdletBinding()]
+    param ()
+    $EXEName = "ServiceUI.exe"
+    $EXEURL = "https://github.com/gwblok/garytown/raw/master/OSD/CloudOSD/$EXEName"
+    Invoke-WebRequest -UseBasicParsing -Uri $EXEURL -OutFile "$env:TEMP\$EXEName"
+}
 function osdcloud-TestHPIASupport {
     $CabPath = "$env:TEMP\platformList.cab"
     $XMLPath = "$env:TEMP\platformList.xml"
@@ -441,9 +449,19 @@ Function osdcloud-RunHPIA {
         ##############################################
         CMTraceLog –Message "/Operation:$Operation /Category:$Category /Selection:$Selection /Action:$Action  /Noninteractive /Debug /ReportFolder:$ReportsFolder /LogFolder:$ReportsFolder" –Component "Update"
         Write-Host "Running HPIA With Args: /Operation:$Operation /Category:$Category /Selection:$Selection /Action:$Action  /Noninteractive /Debug /ReportFolder:$ReportsFolder /LogFolder:$ReportsFolder" -ForegroundColor Green
+        osdcloud-addserviceui
         try 
         {
             if ($OfflineMode -eq $false){
+                if (Test-Path -path $env:temp\ServiceUI.exe)
+                    {
+                    $Process = Start-Process –FilePath $env:temp\ServiceUI.exe  –ArgumentList $TempWorkFolder\HPIA\HPImageAssistant.exe –WorkingDirectory $TempWorkFolder "/Operation:$Operation /Category:$Category /Selection:$Selection /Action:$Action /Noninteractive /Debug /ReportFolder:$ReportsFolder /LogFolder:$ReportsFolder" –NoNewWindow –PassThru –Wait –ErrorAction Stop
+
+                        ServiceUI.exe -process:Explorer.exe
+                }
+                else {                
+                    $Process = Start-Process –FilePath $TempWorkFolder\HPIA\HPImageAssistant.exe –WorkingDirectory $TempWorkFolder –ArgumentList "/Operation:$Operation /Category:$Category /Selection:$Selection /Action:$Action /Noninteractive /Debug /ReportFolder:$ReportsFolder /LogFolder:$ReportsFolder" –NoNewWindow –PassThru –Wait –ErrorAction Stop
+                }
                 CMTraceLog –Message "/Operation:$Operation /Category:$Category /Selection:$Selection /Action:$Action  /Noninteractive /Debug /ReportFolder:$ReportsFolder /LogFolder:$ReportsFolder" –Component "Update"
                 Write-Host "Running HPIA With Args: /Operation:$Operation /Category:$Category /Selection:$Selection /Action:$Action  /Noninteractive /Debug /ReportFolder:$ReportsFolder /LogFolder:$ReportsFolder" -ForegroundColor Green
                 $Process = Start-Process –FilePath $TempWorkFolder\HPIA\HPImageAssistant.exe –WorkingDirectory $TempWorkFolder –ArgumentList "/Operation:$Operation /Category:$Category /Selection:$Selection /Action:$Action /Noninteractive /Debug /ReportFolder:$ReportsFolder /LogFolder:$ReportsFolder" –NoNewWindow –PassThru –Wait –ErrorAction Stop
