@@ -455,8 +455,8 @@ Function osdcloud-RunHPIA {
             if ($OfflineMode -eq $false){
                 if (Test-Path -path $env:temp\ServiceUI.exe)
                     {
-                    Write-Host "Running HPIA With Args: $env:temp\ServiceUI.exe $TempWorkFolder\HPIA\HPImageAssistant.exe –WorkingDirectory $TempWorkFolder /Operation:$Operation /Category:$Category /Selection:$Selection /Action:$Action  /Noninteractive /Debug /ReportFolder:$ReportsFolder /LogFolder:$ReportsFolder" -ForegroundColor Green                   
-                    $Process = Start-Process –FilePath $env:temp\ServiceUI.exe  –ArgumentList $TempWorkFolder\HPIA\HPImageAssistant.exe –WorkingDirectory $TempWorkFolder "/Operation:$Operation /Category:$Category /Selection:$Selection /Action:$Action /Noninteractive /Debug /ReportFolder:$ReportsFolder /LogFolder:$ReportsFolder" –NoNewWindow –PassThru –Wait –ErrorAction Stop
+                    Write-Host "Running HPIA With Args: $env:temp\ServiceUI.exe -process:Explorer.exe $TempWorkFolder\HPIA\HPImageAssistant.exe –WorkingDirectory $TempWorkFolder /Operation:$Operation /Category:$Category /Selection:$Selection /Action:$Action  /Noninteractive /Debug /ReportFolder:$ReportsFolder /LogFolder:$ReportsFolder" -ForegroundColor Green                   
+                    $Process = Start-Process –FilePath $env:temp\ServiceUI.exe –ArgumentList "-process:Explorer.exe $TempWorkFolder\HPIA\HPImageAssistant.exe –WorkingDirectory $TempWorkFolder /Operation:$Operation /Category:$Category /Selection:$Selection /Action:$Action /Noninteractive /Debug /ReportFolder:$ReportsFolder /LogFolder:$ReportsFolder" –NoNewWindow –PassThru –Wait –ErrorAction Stop
                 }
                 else {                
                     Write-Host "Running HPIA With Args: /Operation:$Operation /Category:$Category /Selection:$Selection /Action:$Action  /Noninteractive /Debug /ReportFolder:$ReportsFolder /LogFolder:$ReportsFolder" -ForegroundColor Green                   
