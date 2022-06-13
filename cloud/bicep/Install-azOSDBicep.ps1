@@ -9,5 +9,5 @@ $currentPath = (Get-Item -path "HKCU:\Environment" ).GetValue('Path', '', 'DoNot
 if (-not $currentPath.Contains("%USERPROFILE%\.bicep")) { setx PATH ($currentPath + ";%USERPROFILE%\.bicep") }
 if (-not $env:path.Contains($installPath)) { $env:path += ";$installPath" }
 # Verify you can now access the 'bicep' command.
-bicep --help
+bicep --version
 # Done!
