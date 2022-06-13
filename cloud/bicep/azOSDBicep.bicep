@@ -34,7 +34,6 @@ param containers object = {
   }
 
 }
-
 @description('Specifies container object list for powershell scripts, packages, unattend.')
 param scripts object = {
   c1:{
@@ -54,6 +53,15 @@ param scripts object = {
     type: 'Container'
   }
 }
+
+@description('This is the built-in Storage Blob Data Reader.')
+resource StorageBlobDataReaderDefinition 'Microsoft.Authorization/roleDefinitions@2018-01-01-preview' existing = {
+  scope: subscription()
+  name: 'b7e6dc6d-f1e8-4753-8033-0f276bb0955b'
+}
+@description('This is the ID for the AzureADAccount who can access.')
+param principalId string = '1618bbc9-bdce-45af-a3bd-a86c224d8094'
+
 resource AzStorage 'Microsoft.Storage/storageAccounts@2021-06-01' = {
   name: storageAccountName
   location: location
@@ -73,7 +81,7 @@ resource AzStorage 'Microsoft.Storage/storageAccounts@2021-06-01' = {
     
   }
 }
-resource AzSscripts 'Microsoft.Storage/storageAccounts@2021-06-01' = {
+resource AzScripts 'Microsoft.Storage/storageAccounts@2021-06-01' = {
   name: StorageAccuntList
   location: location
   tags : {
@@ -106,7 +114,7 @@ resource containerlist 'Microsoft.Storage/storageAccounts/blobServices/container
 }]
 
 resource containerscriptlist 'Microsoft.Storage/storageAccounts/blobServices/containers@2021-06-01' =[for cont in items(scripts):{
-  name:'${AzSscripts.name}/default/${cont.value.name}'
+  name:'${AzScripts.name}/default/${cont.value.name}'
   properties: {
     publicAccess: cont.value.type
 }
@@ -123,7 +131,7 @@ resource ActivateFeedStorage 'Microsoft.Storage/storageAccounts/blobServices@202
 }
 resource ActivateFeedScript 'Microsoft.Storage/storageAccounts/blobServices@2021-09-01' = {
   name: 'default'
-  parent: AzSscripts
+  parent: AzScripts
   properties: {
     changeFeed: {
       enabled: true
@@ -131,3 +139,21 @@ resource ActivateFeedScript 'Microsoft.Storage/storageAccounts/blobServices@2021
   }
 }
 
+resource roleAssignmentAzStorage 'Microsoft.Authorization/roleAssignments@2020-10-01-preview' = {
+  scope: AzStorage
+  name: guid(AzStorage.id, principalId, StorageBlobDataReaderDefinition.id)
+  properties: {
+    roleDefinitionId: StorageBlobDataReaderDefinition.id
+    principalId: principalId
+    principalType: 'User'
+  }
+}
+resource roleAssignmentAzSScripts 'Microsoft.Authorization/roleAssignments@2020-10-01-preview' = {
+  scope: AzScripts
+  name: guid(AzScripts.id, principalId, StorageBlobDataReaderDefinition.id)
+  properties: {
+    roleDefinitionId: StorageBlobDataReaderDefinition.id
+    principalId: principalId
+    principalType: 'User'
+  }
+}

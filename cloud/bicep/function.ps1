@@ -23,40 +23,6 @@ function invoke-AzOSDAzureBicepConfig {
         $Script:AzOSDSubscription = ($global:AzOSDressourceGroup.ResourceId.split('/'))[2]
         $global:AzOSDressourceGroupDeployment=New-AzResourceGroupDeployment -Name OSDdemo -ResourceGroupName $ResourceGroupName -TemplateFile .\azOSDBicep.bicep  -location $Location
         
-        New-AzRoleAssignment -ObjectID (Get-AzADUser -StartsWith "$AzOSDUserNameStart").Id `
-        -RoleDefinitionName "Storage Blob Data Reader" `
-        -Scope  "/subscriptions/$Script:AzOSDSubscription/resourceGroups/$ResourceGroupName/providers/Microsoft.Storage/storageAccounts/osdcloudbicepdemo2" | out-null
-    
-        New-AzRoleAssignment -ObjectID (Get-AzADUser -StartsWith "$AzOSDUserNameStart").Id `
-        -RoleDefinitionName "Storage Blob Data Reader" `
-        -Scope  "/subscriptions/$Script:AzOSDSubscription/resourceGroups/$ResourceGroupName/providers/Microsoft.Storage/storageAccounts/osdscripts2" | out-null
-            
-    $containersImages = @(
-        "server",
-        "retail",
-        "insiders",
-        "driverpack",
-        "bootimage"
-    )
-    $containerScripts = @(
-        "scripts",
-        "packages",
-        "unattend",
-        "others"
-    )
-    foreach ($container in $containersImages) {
-        New-AzRoleAssignment -ObjectID (Get-AzADUser -StartsWith "$AzOSDUserNameStart").Id `
-        -RoleDefinitionName "Storage Blob Data Reader" `
-        -Scope  "/subscriptions/$Script:AzOSDSubscription/resourceGroups/$ResourceGroupName/providers/Microsoft.Storage/storageAccounts/osdcloudbicepdemo2/blobServices/default/containers/$container" | out-null
-
-    }
-
-    foreach ($container in $containerScripts) {
-        New-AzRoleAssignment -ObjectID (Get-AzADUser -StartsWith "$AzOSDUserNameStart").Id `
-        -RoleDefinitionName "Storage Blob Data Reader" `
-        -Scope  "/subscriptions/$Script:AzOSDSubscription/resourceGroups/$ResourceGroupName/providers/Microsoft.Storage/storageAccounts/osdscripts2/blobServices/default/containers/$container" | out-null
-
-    }
 
 }
     end {
