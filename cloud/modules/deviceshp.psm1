@@ -296,6 +296,10 @@ Function osdcloud-RunHPIA {
         $HPIAWebUrl = "https://ftp.hp.com/pub/caps-softpaq/cmit/HPIA.html" # Static web page of the HP Image Assistant
         $script:FolderPath = "HP_Updates" # the subfolder to put logs into in the storage container
         $ProgressPreference = 'SilentlyContinue' # to speed up web requests
+        
+        #Record currently running Processes:
+        Get-Process | Select-Object -Property Name, Description | Out-File C:\osdcloud\Logs\HPIA-RunningProcesses.txt
+        
         ################################
         ## Create Directory Structure ##
         ################################
@@ -445,7 +449,7 @@ Function osdcloud-RunHPIA {
         ##############################################
         #CMTraceLog –Message "/Operation:$Operation /Category:$Category /Selection:$Selection /Action:$Action  /Noninteractive /Debug /ReportFolder:$ReportsFolder /LogFolder:$ReportsFolder" –Component "Update"
         #Write-Host "Running HPIA With Args: /Operation:$Operation /Category:$Category /Selection:$Selection /Action:$Action  /Noninteractive /Debug /ReportFolder:$ReportsFolder /LogFolder:$ReportsFolder" -ForegroundColor Green
-        osdcloud-addserviceui
+        osdcloud-addserviceui -ErrorAction SilentlyContinue
         try 
         {
             if ($OfflineMode -eq $false){
