@@ -472,12 +472,13 @@ Function osdcloud-RunHPIA {
             
             #Bring Progress Bar to Front
             start-sleep -Seconds 10
+            write-host "Attempting to bring HPIA Progress bar to top"
             (New-Object -ComObject WScript.Shell).AppActivate((get-process HPImageAssistant.dll).Description)
             
             #Wait for Process to Finish
-            $HPIAProcess = Get-Process -name "HPImageAssistant" -ErrorAction SilentlyContinue
-            if ($HPIAProcess -ne $null){
-                $HPIAProcess.WaitForExit()
+            $Process = Get-Process -name "HPImageAssistant" -ErrorAction SilentlyContinue
+            if ($Process -ne $null){
+                $Process.WaitForExit()
             }
             
             #$Process = Start-Process –FilePath $TempWorkFolder\HPIA\HPImageAssistant.exe –WorkingDirectory $TempWorkFolder –ArgumentList "/Operation:$Operation /Category:$Category /Selection:$Selection /Action:$Action /Noninteractive /Debug /LogFolder:$ReportsFolder" –NoNewWindow –PassThru –Wait –ErrorAction Stop
