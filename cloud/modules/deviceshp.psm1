@@ -478,48 +478,49 @@ Function osdcloud-RunHPIA {
             #Wait for Process to Finish
             $Process = Get-Process -name "HPImageAssistant" -ErrorAction SilentlyContinue -PassThru
             if ($Process -ne $null){
+                write-host "Waiting for HPIA Process to Finish"
                 $Process.WaitForExit()
             }
-            
+            $ExitCode = $process.GetType().GetField('exitCode', 'NonPublic, Instance').GetValue($process)
             #$Process = Start-Process –FilePath $TempWorkFolder\HPIA\HPImageAssistant.exe –WorkingDirectory $TempWorkFolder –ArgumentList "/Operation:$Operation /Category:$Category /Selection:$Selection /Action:$Action /Noninteractive /Debug /LogFolder:$ReportsFolder" –NoNewWindow –PassThru –Wait –ErrorAction Stop
 
-            If ($Process.ExitCode -eq 0)
+            If ($ExitCode -eq 0)
             {
                 CMTraceLog –Message "Analysis complete" –Component "Update"
                 Write-Host "Analysis complete" -ForegroundColor Green
             }
-            elseif ($Process.ExitCode -eq 256) 
+            elseif ($ExitCode -eq 256) 
             {
-                CMTraceLog –Message "Exit $($Process.ExitCode) - The analysis returned no recommendation." –Component "Update" –Type 2
-                Write-Host "Exit $($Process.ExitCode) - The analysis returned no recommendation." -ForegroundColor Green
+                CMTraceLog –Message "Exit $($ExitCode) - The analysis returned no recommendation." –Component "Update" –Type 2
+                Write-Host "Exit $($ExitCode) - The analysis returned no recommendation." -ForegroundColor Green
                 Exit 0
             }
-                elseif ($Process.ExitCode -eq 257) 
+                elseif ($ExitCode -eq 257) 
             {
-                CMTraceLog –Message "Exit $($Process.ExitCode) - There were no recommendations selected for the analysis." –Component "Update" –Type 2
-                Write-Host "Exit $($Process.ExitCode) - There were no recommendations selected for the analysis." -ForegroundColor Green
+                CMTraceLog –Message "Exit $($ExitCode) - There were no recommendations selected for the analysis." –Component "Update" –Type 2
+                Write-Host "Exit $($ExitCode) - There were no recommendations selected for the analysis." -ForegroundColor Green
                 Exit 0
             }
-            elseif ($Process.ExitCode -eq 3010) 
+            elseif ($ExitCode -eq 3010) 
             {
-                CMTraceLog –Message "Exit $($Process.ExitCode) - HPIA Complete, requires Restart" –Component "Update" –Type 2
-                Write-Host "Exit $($Process.ExitCode) - HPIA Complete, requires Restart" -ForegroundColor Yellow
+                CMTraceLog –Message "Exit $($ExitCode) - HPIA Complete, requires Restart" –Component "Update" –Type 2
+                Write-Host "Exit $($ExitCode) - HPIA Complete, requires Restart" -ForegroundColor Yellow
             }
-            elseif ($Process.ExitCode -eq 3020) 
+            elseif ($ExitCode -eq 3020) 
             {
-                CMTraceLog –Message "Exit $($Process.ExitCode) - Install failed — One or more SoftPaq installations failed." –Component "Update" –Type 2
-                Write-Host "Exit $($Process.ExitCode) - Install failed — One or more SoftPaq installations failed." -ForegroundColor Yellow
+                CMTraceLog –Message "Exit $($ExitCode) - Install failed — One or more SoftPaq installations failed." –Component "Update" –Type 2
+                Write-Host "Exit $($ExitCode) - Install failed — One or more SoftPaq installations failed." -ForegroundColor Yellow
             }
-            elseif ($Process.ExitCode -eq 4096) 
+            elseif ($ExitCode -eq 4096) 
             {
-                CMTraceLog –Message "Exit $($Process.ExitCode) - This platform is not supported!" –Component "Update" –Type 2
-                Write-Host "Exit $($Process.ExitCode) - This platform is not supported!" -ForegroundColor Yellow
+                CMTraceLog –Message "Exit $($ExitCode) - This platform is not supported!" –Component "Update" –Type 2
+                Write-Host "Exit $($ExitCode) - This platform is not supported!" -ForegroundColor Yellow
                 throw
             }
             Else
             {
-                CMTraceLog –Message "Process exited with code $($Process.ExitCode). Expecting 0." –Component "Update" –Type 3
-                Write-Host "Process exited with code $($Process.ExitCode). Expecting 0." -ForegroundColor Yellow
+                CMTraceLog –Message "Process exited with code $($ExitCode). Expecting 0." –Component "Update" –Type 3
+                Write-Host "Process exited with code $($ExitCode). Expecting 0." -ForegroundColor Yellow
                 throw
             }
         }
