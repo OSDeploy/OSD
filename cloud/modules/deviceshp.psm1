@@ -476,7 +476,7 @@ Function osdcloud-RunHPIA {
             (New-Object -ComObject WScript.Shell).AppActivate((get-process HPImageAssistant.dll).Description)
             
             #Wait for Process to Finish
-            $Process = Get-Process -name "HPImageAssistant" -ErrorAction SilentlyContinue
+            $Process = Get-Process -name "HPImageAssistant" -ErrorAction SilentlyContinue -PassThru
             if ($Process -ne $null){
                 $Process.WaitForExit()
             }
