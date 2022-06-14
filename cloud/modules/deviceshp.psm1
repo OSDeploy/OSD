@@ -299,14 +299,10 @@ Function osdcloud-RunHPIA {
         ################################
         ## Create Directory Structure ##
         ################################
-        #$RootFolder = $env:systemdrive
-        #$ParentFolderName = "OSDCloud"
-        #$ChildFolderName = "HP_Updates"
         $DateTime = Get-Date –Format "yyyyMMdd-HHmmss"
         $ReportsFolder = "$ReportsFolder\$DateTime"
         $HPIALogFile = "$LogFolder\Run-HPIA.log"
-        #$script:WorkingDirectory = "$RootFolder\$ParentFolderName\$ChildFolderName\$ChildFolderName2"
-        $script:TempWorkFolder = "$env:temp\HPIA"
+        $script:TempWorkFolder = "C:\Windows\Temp\HPIA"
         try 
         {
             [void][System.IO.Directory]::CreateDirectory($LogFolder)
