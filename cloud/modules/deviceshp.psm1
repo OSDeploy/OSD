@@ -447,31 +447,42 @@ Function osdcloud-RunHPIA {
         ##############################################
         ## Install Updates with HPIA ##
         ##############################################
-        CMTraceLog –Message "/Operation:$Operation /Category:$Category /Selection:$Selection /Action:$Action  /Noninteractive /Debug /ReportFolder:$ReportsFolder /LogFolder:$ReportsFolder" –Component "Update"
-        Write-Host "Running HPIA With Args: /Operation:$Operation /Category:$Category /Selection:$Selection /Action:$Action  /Noninteractive /Debug /ReportFolder:$ReportsFolder /LogFolder:$ReportsFolder" -ForegroundColor Green
+        #CMTraceLog –Message "/Operation:$Operation /Category:$Category /Selection:$Selection /Action:$Action  /Noninteractive /Debug /ReportFolder:$ReportsFolder /LogFolder:$ReportsFolder" –Component "Update"
+        #Write-Host "Running HPIA With Args: /Operation:$Operation /Category:$Category /Selection:$Selection /Action:$Action  /Noninteractive /Debug /ReportFolder:$ReportsFolder /LogFolder:$ReportsFolder" -ForegroundColor Green
         osdcloud-addserviceui
         try 
         {
             if ($OfflineMode -eq $false){
                 if (Test-Path -path $env:temp\ServiceUI.exe)
                     {
-                    Write-Host "Running HPIA With Args: $env:temp\ServiceUI.exe -process:Explorer.exe $TempWorkFolder\HPIA\HPImageAssistant.exe –WorkingDirectory $TempWorkFolder /Operation:$Operation /Category:$Category /Selection:$Selection /Action:$Action  /Noninteractive /Debug /ReportFolder:$ReportsFolder /LogFolder:$ReportsFolder" -ForegroundColor Green                   
-                    $Process = Start-Process –FilePath $env:temp\ServiceUI.exe –ArgumentList "-process:Explorer.exe $TempWorkFolder\HPIA\HPImageAssistant.exe –WorkingDirectory $TempWorkFolder /Operation:$Operation /Category:$Category /Selection:$Selection /Action:$Action /Noninteractive /Debug /ReportFolder:$ReportsFolder /LogFolder:$ReportsFolder" –NoNewWindow –PassThru –Wait –ErrorAction Stop
+                        CMTraceLog –Message "Running HPIA With Args: $env:temp\ServiceUI.exe -process:Explorer.exe $TempWorkFolder\HPIA\HPImageAssistant.exe –WorkingDirectory $TempWorkFolder /Operation:$Operation /Category:$Category /Selection:$Selection /Action:$Action  /Noninteractive /Debug /ReportFolder:$ReportsFolder /LogFolder:$ReportsFolder" –Component "Update"
+                        Write-Host "Running HPIA With Args: $env:temp\ServiceUI.exe -process:Explorer.exe $TempWorkFolder\HPIA\HPImageAssistant.exe –WorkingDirectory $TempWorkFolder /Operation:$Operation /Category:$Category /Selection:$Selection /Action:$Action  /Noninteractive /Debug /ReportFolder:$ReportsFolder /LogFolder:$ReportsFolder" -ForegroundColor Green                   
+                    $Process = Start-Process –FilePath $env:temp\ServiceUI.exe –ArgumentList "-process:Explorer.exe $TempWorkFolder\HPIA\HPImageAssistant.exe –WorkingDirectory $TempWorkFolder /Operation:$Operation /Category:$Category /Selection:$Selection /Action:$Action /Noninteractive /Debug /ReportFolder:$ReportsFolder /LogFolder:$ReportsFolder" –NoNewWindow –PassThru –ErrorAction Stop
                 }
                 else {                
+                    CMTraceLog –Message "Running HPIA With Args: /Operation:$Operation /Category:$Category /Selection:$Selection /Action:$Action  /Noninteractive /Debug /ReportFolder:$ReportsFolder /LogFolder:$ReportsFolder" –Component "Update"
                     Write-Host "Running HPIA With Args: /Operation:$Operation /Category:$Category /Selection:$Selection /Action:$Action  /Noninteractive /Debug /ReportFolder:$ReportsFolder /LogFolder:$ReportsFolder" -ForegroundColor Green                   
-                    $Process = Start-Process –FilePath $TempWorkFolder\HPIA\HPImageAssistant.exe –WorkingDirectory $TempWorkFolder –ArgumentList "/Operation:$Operation /Category:$Category /Selection:$Selection /Action:$Action /Noninteractive /Debug /ReportFolder:$ReportsFolder /LogFolder:$ReportsFolder" –NoNewWindow –PassThru –Wait –ErrorAction Stop
+                    $Process = Start-Process –FilePath $TempWorkFolder\HPIA\HPImageAssistant.exe –WorkingDirectory $TempWorkFolder –ArgumentList "/Operation:$Operation /Category:$Category /Selection:$Selection /Action:$Action /Noninteractive /Debug /ReportFolder:$ReportsFolder /LogFolder:$ReportsFolder" –NoNewWindow –PassThru –ErrorAction Stop
                 }
-                CMTraceLog –Message "/Operation:$Operation /Category:$Category /Selection:$Selection /Action:$Action  /Noninteractive /Debug /ReportFolder:$ReportsFolder /LogFolder:$ReportsFolder" –Component "Update"
-                Write-Host "Running HPIA With Args: /Operation:$Operation /Category:$Category /Selection:$Selection /Action:$Action  /Noninteractive /Debug /ReportFolder:$ReportsFolder /LogFolder:$ReportsFolder" -ForegroundColor Green
-                $Process = Start-Process –FilePath $TempWorkFolder\HPIA\HPImageAssistant.exe –WorkingDirectory $TempWorkFolder –ArgumentList "/Operation:$Operation /Category:$Category /Selection:$Selection /Action:$Action /Noninteractive /Debug /ReportFolder:$ReportsFolder /LogFolder:$ReportsFolder" –NoNewWindow –PassThru –Wait –ErrorAction Stop
+                #CMTraceLog –Message "/Operation:$Operation /Category:$Category /Selection:$Selection /Action:$Action  /Noninteractive /Debug /ReportFolder:$ReportsFolder /LogFolder:$ReportsFolder" –Component "Update"
+                #Write-Host "Running HPIA With Args: /Operation:$Operation /Category:$Category /Selection:$Selection /Action:$Action  /Noninteractive /Debug /ReportFolder:$ReportsFolder /LogFolder:$ReportsFolder" -ForegroundColor Green
+                #$Process = Start-Process –FilePath $TempWorkFolder\HPIA\HPImageAssistant.exe –WorkingDirectory $TempWorkFolder –ArgumentList "/Operation:$Operation /Category:$Category /Selection:$Selection /Action:$Action /Noninteractive /Debug /ReportFolder:$ReportsFolder /LogFolder:$ReportsFolder" –NoNewWindow –PassThru –Wait –ErrorAction Stop
                 }
             if ($OfflineMode -eq $true){
                 CMTraceLog –Message "/Offlinemode:$Offlinefolder /Operation:$Operation /Category:$Category /Selection:$Selection /Action:$Action  /Noninteractive /Debug /ReportFolder:$ReportsFolder /LogFolder:$ReportsFolder" –Component "Update"
                 Write-Host "Running HPIA With Args: /Offlinemode:$Offlinefolder /Operation:$Operation /Category:$Category /Selection:$Selection /Action:$Action  /Noninteractive /Debug /ReportFolder:$ReportsFolder /LogFolder:$ReportsFolder" -ForegroundColor Green 
-                $Process = Start-Process –FilePath $TempWorkFolder\HPIA\HPImageAssistant.exe –WorkingDirectory $TempWorkFolder –ArgumentList "/Offlinemode:$Offlinefolder /Operation:$Operation /Category:$Category /Selection:$Selection /Action:$Action /Noninteractive /Debug /ReportFolder:$ReportsFolder /LogFolder:$ReportsFolder" –NoNewWindow –PassThru –Wait –ErrorAction Stop
+                $Process = Start-Process –FilePath $TempWorkFolder\HPIA\HPImageAssistant.exe –WorkingDirectory $TempWorkFolder –ArgumentList "/Offlinemode:$Offlinefolder /Operation:$Operation /Category:$Category /Selection:$Selection /Action:$Action /Noninteractive /Debug /ReportFolder:$ReportsFolder /LogFolder:$ReportsFolder" –NoNewWindow –PassThru –ErrorAction Stop
                 }
+            
+            #Bring Progress Bar to Front
+            start-sleep -Seconds 10
             (New-Object -ComObject WScript.Shell).AppActivate((get-process HPImageAssistant.dll).Description)
+            
+            #Wait for Process to Finish
+            $HPIAProcess = Get-Process -name "HPImageAssistant" -ErrorAction SilentlyContinue
+            if ($HPIAProcess -ne $null){
+                $HPIAProcess.WaitForExit()
+            }
             
             #$Process = Start-Process –FilePath $TempWorkFolder\HPIA\HPImageAssistant.exe –WorkingDirectory $TempWorkFolder –ArgumentList "/Operation:$Operation /Category:$Category /Selection:$Selection /Action:$Action /Noninteractive /Debug /LogFolder:$ReportsFolder" –NoNewWindow –PassThru –Wait –ErrorAction Stop
 
