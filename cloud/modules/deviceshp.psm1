@@ -241,9 +241,9 @@ Function osdcloud-HPIAOfflineSync {
     New-Item -Path $HPIARepoFolder -ItemType Directory -Force | Out-Null
     $CurrentLocation = Get-Location
     Set-Location -Path $HPIARepoFolder
-    Initialize-Repository
-    Set-RepositoryConfiguration -Setting OfflineCacheMode -CacheValue Enable
-    Add-RepositoryFilter -Os $OS -OsVer $Release -Category $Category -Platform $PlatformCode
+    Initialize-Repository | out-null
+    Set-RepositoryConfiguration -Setting OfflineCacheMode -CacheValue Enable | out-null
+    Add-RepositoryFilter -Os $OS -OsVer $Release -Category $Category -Platform $PlatformCode | out-null
     Write-Host "Starting HPCMSL to create HPIA Repo for $($PlatformCode) with Drivers" -ForegroundColor Green
     write-host " This process can take several minutes to download all drivers" -ForegroundColor Gray
     write-host " Writing Progress Log to $LogFolder" -ForegroundColor Gray
