@@ -262,6 +262,11 @@ function Show-PowershellWindow() {
 #================================================
 $localOSDCloudParams = (Get-Command Start-OSDCloud).Parameters
 
+$localOSDCloudParams["OSName"].Attributes.ValidValues | ForEach-Object {
+    $formMainWindowControlOperatingSystemCombobox.Items.Add($_) | Out-Null
+}
+$formMainWindowControlOperatingSystemCombobox.SelectedIndex = 1
+
 <# $localOSDCloudParams["OSBuild"].Attributes.ValidValues | ForEach-Object {
     $formMainWindowControlOSBuildCombobox.Items.Add($_) | Out-Null
 } #>
@@ -292,14 +297,7 @@ if ($DriverPack) {
 #================================================
 #   SetDefaultWin
 #================================================
-function SetDefaultWin10 {
-    $formMainWindowControlOSBuildCombobox.Items.Clear()
-    $localOSDCloudParams["OSBuild"].Attributes.ValidValues | ForEach-Object {
-        $formMainWindowControlOSBuildCombobox.Items.Add($_) | Out-Null
-    }
-    
-    $formMainWindowControlOperatingSystemCombobox.SelectedIndex = 0 #Windows 10
-    $formMainWindowControlOSBuildCombobox.SelectedIndex = 0      #21H2
+function SetDefaultWinX {
     $formMainWindowControlOSLanguageCombobox.SelectedIndex = 7   #en-us
     $formMainWindowControlOSEditionCombobox.SelectedIndex = 5    #Enterprise
     $formMainWindowControlOSLicenseCombobox.SelectedIndex = 1    #Volume
@@ -307,7 +305,7 @@ function SetDefaultWin10 {
     $formMainWindowControlAutopilotJsonCombobox.SelectedIndex = 1    #OOBE
     $formMainWindowControlImageIndexTextbox.Text = 6             #Enterprise
 
-    $formMainWindowControlOSBuildCombobox.IsEnabled = $true
+    #$formMainWindowControlOSBuildCombobox.IsEnabled = $true
     $formMainWindowControlOSEditionCombobox.IsEnabled = $true
     $formMainWindowControlOSLanguageCombobox.IsEnabled = $true
     $formMainWindowControlOSLicenseCombobox.IsEnabled = $false
@@ -317,41 +315,12 @@ function SetDefaultWin10 {
     $formMainWindowControlImageNameCombobox.Items.Clear()
     $formMainWindowControlImageNameCombobox.Visibility = "Collapsed"
     
-    $formMainWindowControlOSBuildCombobox.Visibility = "Visible"
+    #$formMainWindowControlOSBuildCombobox.Visibility = "Visible"
     $formMainWindowControlOSEditionCombobox.Visibility = "Visible"
     $formMainWindowControlOSLanguageCombobox.Visibility = "Visible"
     $formMainWindowControlOSLicenseCombobox.Visibility = "Visible"
 }
-function SetDefaultWin11 {
-    $formMainWindowControlOperatingSystemCombobox.SelectedIndex = 1 #Windows 11
-
-    $formMainWindowControlOSBuildCombobox.Items.Clear()
-    $formMainWindowControlOSBuildCombobox.Items.Add("21H2") | Out-Null
-    
-    $formMainWindowControlOSBuildCombobox.SelectedIndex = 0      #21H2
-    $formMainWindowControlOSLanguageCombobox.SelectedIndex = 7   #en-us
-    $formMainWindowControlOSEditionCombobox.SelectedIndex = 5    #Enterprise
-    $formMainWindowControlOSLicenseCombobox.SelectedIndex = 1    #Volume
-
-    $formMainWindowControlAutopilotJsonCombobox.SelectedIndex = 1    #OOBE
-    $formMainWindowControlImageIndexTextbox.Text = 6             #Enterprise
-
-    $formMainWindowControlOSBuildCombobox.IsEnabled = $true
-    $formMainWindowControlOSEditionCombobox.IsEnabled = $true
-    $formMainWindowControlOSLanguageCombobox.IsEnabled = $true
-    $formMainWindowControlOSLicenseCombobox.IsEnabled = $false
-    $formMainWindowControlImageIndexTextbox.IsEnabled = $false
-    $formMainWindowControlAutopilotJsonCombobox.IsEnabled = $true
-
-    $formMainWindowControlImageNameCombobox.Items.Clear()
-    $formMainWindowControlImageNameCombobox.Visibility = "Collapsed"
-    
-    $formMainWindowControlOSBuildCombobox.Visibility = "Visible"
-    $formMainWindowControlOSEditionCombobox.Visibility = "Visible"
-    $formMainWindowControlOSLanguageCombobox.Visibility = "Visible"
-    $formMainWindowControlOSLicenseCombobox.Visibility = "Visible"
-}
-SetDefaultWin11
+SetDefaultWinX
 #================================================
 #   CustomImage
 #================================================
@@ -535,14 +504,11 @@ $formMainWindowControlOSLicenseCombobox.add_SelectionChanged({
 #   OperatingSystemCombobox
 #================================================
 $formMainWindowControlOperatingSystemCombobox.add_SelectionChanged({
-    if ($formMainWindowControlOperatingSystemCombobox.SelectedIndex -eq 0) {
-        SetDefaultWin10
-    }
-    elseif ($formMainWindowControlOperatingSystemCombobox.SelectedIndex -eq 1) {
-        SetDefaultWin11
+    if ($formMainWindowControlOperatingSystemCombobox.SelectedValue -like 'Windows 1*') {
+        SetDefaultWinX
     }
     else {
-        $formMainWindowControlOSBuildCombobox.Visibility = "Collapsed"
+        #$formMainWindowControlOSBuildCombobox.Visibility = "Collapsed"
         $formMainWindowControlOSEditionCombobox.Visibility = "Collapsed"
         $formMainWindowControlOSLanguageCombobox.Visibility = "Collapsed"
         $formMainWindowControlOSLicenseCombobox.Visibility = "Collapsed"
@@ -572,16 +538,13 @@ $formMainWindowControlStartButton.add_Click({
     #================================================
     #   Variables
     #================================================
-    if ($formMainWindowControlOperatingSystemCombobox.SelectedIndex -eq 0) {
-        $OSVersion = 'Windows 10'
-    }
-    elseif ($formMainWindowControlOperatingSystemCombobox.SelectedIndex -eq 1) {
-        $OSVersion = 'Windows 11'
+    if ($formMainWindowControlOperatingSystemCombobox.SelectedValue -like 'Windows 1*') {
+        $OSName = $formMainWindowControlOperatingSystemCombobox.Text
     }
     else {
-        $OSVersion = $null
+        $OSName = $null
     }
-    $OSBuild = $formMainWindowControlOSBuildCombobox.SelectedItem
+    #$OSBuild = $formMainWindowControlOSBuildCombobox.SelectedItem
     $OSEdition = $formMainWindowControlOSEditionCombobox.SelectedItem
     $OSLanguage = $formMainWindowControlOSLanguageCombobox.SelectedItem
     $OSLicense = $formMainWindowControlOSLicenseCombobox.SelectedItem
@@ -649,7 +612,7 @@ $formMainWindowControlStartButton.add_Click({
     #================================================
     #   ImageFile
     #================================================
-    if ($formMainWindowControlOperatingSystemCombobox.SelectedIndex -ge 2) {
+    if ($null -eq $OSName) {
         $ImageFileFullName = $formMainWindowControlOperatingSystemCombobox.SelectedValue
         if ($ImageFileFullName) {
             $ImageFileItem = $CustomImageChildItem | Where-Object {$_.FullName -eq "$ImageFileFullName"}
@@ -666,7 +629,6 @@ $formMainWindowControlStartButton.add_Click({
             $ImageFileName = $null
         }
     }
-
     #================================================
     #   Global Variables
     #================================================
@@ -697,6 +659,7 @@ $formMainWindowControlStartButton.add_Click({
         OSImageIndex                = $OSImageIndex
         OSLanguage                  = $OSLanguage
         OSLicense                   = $OSLicense
+        OSName                      = $OSName
         OSVersion                   = $OSVersion
         Restart                     = $formMainWindowControlRestart.IsChecked
         ScreenshotCapture           = $formMainWindowControlScreenshotCapture.IsChecked

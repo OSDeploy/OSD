@@ -72,10 +72,10 @@ foreach ($Result in $Results) {
     #   Name
     #=================================================
     if ($Result.Activation -eq 'Volume') {
-        $Result.Name = $Result.OS + ' ' + $Result.Version + ' x64 ' + $Result.Language + ' business editions'
+        $Result.Name = $Result.OS + ' ' + $Result.Version + ' x64 ' + $Result.Language + ' business editions ' + $Result.Build
     }
     else {
-        $Result.Name = $Result.OS + ' ' + $Result.Version + ' x64 ' + $Result.Language + ' consumer editions'
+        $Result.Name = $Result.OS + ' ' + $Result.Version + ' x64 ' + $Result.Language + ' consumer editions ' + $Result.Build
     }
     #=================================================
 }

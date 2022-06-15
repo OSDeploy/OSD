@@ -48,15 +48,29 @@ function Start-OSDCloud {
         [System.Management.Automation.SwitchParameter]
         $ZTI,
 
-        #Operating System Version of the Windows installation
         [Parameter(ParameterSetName = 'Default')]
+        [ValidateSet(
+            'Windows 11 22H2 x64 Insider Preview',
+            'Windows 11 21H2 x64',
+            'Windows 10 21H2 x64',
+            'Windows 10 21H1 x64',
+            'Windows 10 20H2 x64',
+            'Windows 10 2004 x64',
+            'Windows 10 1909 x64',
+            'Windows 10 1903 x64',
+            'Windows 10 1809 x64')]
+        [System.String]
+        $OSName,
+
+        #Operating System Version of the Windows installation
+        [Parameter(ParameterSetName = 'Legacy')]
         [ValidateSet('Windows 11','Windows 10')]
         [System.String]
         $OSVersion,
 
         #Operating System Build of the Windows installation
         #Alias = Build
-        [Parameter(ParameterSetName = 'Default')]
+        [Parameter(ParameterSetName = 'Legacy')]
         [ValidateSet('21H2','21H1','20H2','2004','1909','1903','1809')]
         [Alias('Build')]
         [System.String]
@@ -65,6 +79,7 @@ function Start-OSDCloud {
         #Operating System Edition of the Windows installation
         #Alias = Edition
         [Parameter(ParameterSetName = 'Default')]
+        [Parameter(ParameterSetName = 'Legacy')]
         [ValidateSet('Home','Home N','Home Single Language','Education','Education N','Enterprise','Enterprise N','Pro','Pro N')]
         [Alias('Edition')]
         [System.String]
@@ -73,6 +88,7 @@ function Start-OSDCloud {
         #Operating System Language of the Windows installation
         #Alias = Culture, OSCulture
         [Parameter(ParameterSetName = 'Default')]
+        [Parameter(ParameterSetName = 'Legacy')]
         [ValidateSet (
             'ar-sa','bg-bg','cs-cz','da-dk','de-de','el-gr',
             'en-gb','en-us','es-es','es-mx','et-ee','fi-fi',
@@ -88,6 +104,7 @@ function Start-OSDCloud {
 
         #License of the Windows Operating System
         [Parameter(ParameterSetName = 'Default')]
+        [Parameter(ParameterSetName = 'Legacy')]
         [ValidateSet('Retail','Volume')]
         [System.String]
         $OSLicense,
@@ -151,6 +168,9 @@ function Start-OSDCloud {
         OSLanguageMenu = $null
         OSLanguageNames = $null
         OSLicense = $OSLicense
+        OSName = $OSName
+        OSNameMenu = $null
+        OSNames = @('Windows 11 22H2 x64 Insider Preview','Windows 11 21H2 x64','Windows 10 21H2 x64','Windows 10 21H1 x64','Windows 10 20H2 x64','Windows 10 2004 x64','Windows 10 1909 x64','Windows 10 1903 x64','Windows 10 1809 x64')
         OSVersion = $OSVersion
         OSVersionMenu = $null
         OSVersionNames = @('Windows 11','Windows 10')
@@ -288,12 +308,47 @@ function Start-OSDCloud {
     #=================================================
     elseif ($PSCmdlet.ParameterSetName -eq 'Default') {
         #=================================================
+        #	OSName
+        #=================================================
+        if ($Global:StartOSDCloud.OSName) {
+        }
+        elseif ($Global:StartOSDCloud.ZTI) {
+            $Global:StartOSDCloud.OSName = 'Windows 11 21H2 x64'
+        }
+        else {
+            Write-Host -ForegroundColor DarkGray "========================================================================="
+            Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Select an Operating System"
+            
+            $i = $null
+            $Global:StartOSDCloud.OSNameMenu = foreach ($Item in $Global:StartOSDCloud.OSNames) {
+                $i++
+            
+                $ObjectProperties = @{
+                    Selection   = $i
+                    Name     = $Item
+                }
+                New-Object -TypeName PSObject -Property $ObjectProperties
+            }
+            
+            $Global:StartOSDCloud.OSNameMenu | Select-Object -Property Selection, Name | Format-Table | Out-Host
+            
+            do {
+                $SelectReadHost = Read-Host -Prompt "Enter the Selection Number"
+            }
+            until (((($SelectReadHost -ge 0) -and ($SelectReadHost -in $Global:StartOSDCloud.OSNameMenu.Selection))))
+            
+            $Global:StartOSDCloud.OSName = $Global:StartOSDCloud.OSNameMenu | Where-Object {$_.Selection -eq $SelectReadHost} | Select-Object -ExpandProperty Name
+        }
+        $OSName = $Global:StartOSDCloud.OSName
+    }
+    elseif ($PSCmdlet.ParameterSetName -eq 'Legacy') {
+        #=================================================
         #	OSVersion
         #=================================================
         if ($Global:StartOSDCloud.OSVersion) {
         }
         elseif ($Global:StartOSDCloud.ZTI) {
-            $Global:StartOSDCloud.OSVersion = 'Windows 10'
+            $Global:StartOSDCloud.OSVersion = 'Windows 11'
         }
         else {
             Write-Host -ForegroundColor DarkGray "========================================================================="
@@ -322,15 +377,12 @@ function Start-OSDCloud {
         }
         $OSVersion = $Global:StartOSDCloud.OSVersion
         #=================================================
-        #	Defaults
-        #=================================================
-        if ($Global:StartOSDCloud.OSVersion -eq 'Windows 11') {
-            $Global:StartOSDCloud.OSBuild = '21H2'
-        }
-        #=================================================
         #	OSBuild
         #=================================================
         if ($Global:StartOSDCloud.OSBuild) {
+        }
+        elseif ($Global:StartOSDCloud.OSVersion -eq 'Windows 11') {
+            $Global:StartOSDCloud.OSBuild = '21H2'
         }
         elseif ($Global:StartOSDCloud.ZTI) {
             $Global:StartOSDCloud.OSBuild = '21H2'
@@ -361,9 +413,11 @@ function Start-OSDCloud {
             $Global:StartOSDCloud.OSBuild = $Global:StartOSDCloud.OSBuildMenu | Where-Object {$_.Selection -eq $SelectReadHost} | Select-Object -ExpandProperty Name
         }
         $OSBuild = $Global:StartOSDCloud.OSBuild
+    }
         #=================================================
         #	OSEdition
         #=================================================
+    if (($PSCmdlet.ParameterSetName -eq 'Default') -or ($PSCmdlet.ParameterSetName -eq 'Legacy')) {
         if ($Global:StartOSDCloud.OSEdition) {
         }
         elseif ($ZTI) {
@@ -371,7 +425,7 @@ function Start-OSDCloud {
         }
         else {
             Write-Host -ForegroundColor DarkGray "========================================================================="
-            Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Select an Edition for $OSVersion x64 $OSBuild"
+            Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Select an Operating System Edition"
             $Global:StartOSDCloud.OSEditionNames = @('Home','Home N','Home Single Language','Education','Education N','Enterprise','Enterprise N','Pro','Pro N')
 
             $i = $null
@@ -433,7 +487,7 @@ function Start-OSDCloud {
         }
         else {
             Write-Host -ForegroundColor DarkGray "========================================================================="
-            Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Select a License for $OSVersion x64 $OSBuild $OSEdition"
+            Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Select an Operating System License"
             $Global:StartOSDCloud.OSLicenseNames = @('Retail Windows Consumer Editions','Volume Windows Business Editions')
             
             $i = $null
@@ -502,7 +556,7 @@ function Start-OSDCloud {
         }
         else {
             Write-Host -ForegroundColor DarkGray "========================================================================="
-            Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Select a Language for $OSVersion x64 $OSBuild $OSEdition $OSLicense"
+            Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Select an Operating System Language"
             $Global:StartOSDCloud.OSLanguageNames = @('ar-sa','bg-bg','cs-cz','da-dk','de-de','el-gr','en-gb','en-us','es-es','es-mx','et-ee','fi-fi','fr-ca','fr-fr','he-il','hr-hr','hu-hu','it-it','ja-jp','ko-kr','lt-lt','lv-lv','nb-no','nl-nl','pl-pl','pt-br','pt-pt','ro-ro','ru-ru','sk-sk','sl-si','sr-latn-rs','sv-se','th-th','tr-tr','uk-ua','zh-cn','zh-tw')
             
             $i = $null
@@ -526,11 +580,26 @@ function Start-OSDCloud {
             $Global:StartOSDCloud.OSLanguage = $Global:StartOSDCloud.OSLanguageMenu | Where-Object {$_.Selection -eq $SelectReadHost} | Select-Object -ExpandProperty Name
         }
         $OSLanguage = $Global:StartOSDCloud.OSLanguage
-        #=================================================
-        #	Get-FeatureUpdate
-        #   This is where we take the OSB OSE OSL information and get the
-        #   Feature Update.  Global Variables will be set for Deploy-OSDCloud
-        #=================================================
+    }
+    #=================================================
+    #	Default
+    #=================================================
+    if ($PSCmdlet.ParameterSetName -eq 'Default') {
+        Write-Host -ForegroundColor DarkGray "========================================================================="
+        Write-Host -ForegroundColor Cyan "Get-FeatureUpdate " -NoNewline
+        Write-Host -ForegroundColor DarkGray "-OSName '$OSName' -OSLicense $OSLicense -OSLanguage $OSLanguage"
+
+        $Params = @{
+            OSName      = $OSName
+            OSLicense   = $OSLicense
+            OSLanguage  = $OSLanguage
+        }
+        $Global:StartOSDCloud.GetFeatureUpdate = Get-FeatureUpdate @Params
+    }
+    #=================================================
+    #	Legacy
+    #=================================================
+    if ($PSCmdlet.ParameterSetName -eq 'Legacy') {
         Write-Host -ForegroundColor DarkGray "========================================================================="
         Write-Host -ForegroundColor Cyan "Get-FeatureUpdate " -NoNewline
         Write-Host -ForegroundColor DarkGray "-OSVersion '$OSVersion' -OSBuild $OSBuild -OSLicense $OSLicense -OSLanguage $OSLanguage"
@@ -542,7 +611,11 @@ function Start-OSDCloud {
             OSLanguage  = $OSLanguage
         }
         $Global:StartOSDCloud.GetFeatureUpdate = Get-FeatureUpdate @Params
-
+    }
+    #=================================================
+    #	Default or Legacy
+    #=================================================
+    if ($PSCmdlet.ParameterSetName -ne 'CustomImage') {
         if ($Global:StartOSDCloud.GetFeatureUpdate) {
             $Global:StartOSDCloud.GetFeatureUpdate = $Global:StartOSDCloud.GetFeatureUpdate | Select-Object -Property CreationDate,KBNumber,Title,UpdateOS,UpdateBuild,UpdateArch,FileName, @{Name='SizeMB';Expression={[int]($_.Size /1024/1024)}},FileUri,Hash,AdditionalHash
             $Global:StartOSDCloud.ImageFileName = $Global:StartOSDCloud.GetFeatureUpdate.FileName
@@ -553,11 +626,7 @@ function Start-OSDCloud {
             Write-Warning "OSDCloud cannot continue"
             Break
         }
-        #=================================================
-        #	Get-FeatureUpdate Offline
-        #   Determine if the OS is Offline
-        #   Need to bail if the file is Online is not valid or not Offline
-        #=================================================
+
         $Global:StartOSDCloud.ImageFileItem = Find-OSDCloudFile -Name $Global:StartOSDCloud.GetFeatureUpdate.FileName -Path '\OSDCloud\OS\' | Sort-Object FullName | Where-Object {$_.Length -gt 3GB}
         $Global:StartOSDCloud.ImageFileItem = $Global:StartOSDCloud.ImageFileItem | Where-Object {$_.FullName -notlike "C*"} | Where-Object {$_.FullName -notlike "X*"} | Select-Object -First 1
 

@@ -211,10 +211,7 @@
                 <ComboBox Name="OperatingSystemCombobox"
                           FontSize="16"
                           Margin="5"
-                          Padding="2"
-                          SelectedIndex="0" >
-                        <ComboBoxItem Content="OSDCloud Windows 10 x64"/>
-                        <ComboBoxItem Content="OSDCloud Windows 11 x64"/>
+                          Padding="2" >
                 </ComboBox>
             </StackPanel>
             <StackPanel Orientation="Horizontal"
@@ -228,10 +225,6 @@
                        Margin="5"
                        Padding="2"
                        Width="155" />
-                <ComboBox Name="OSBuildCombobox"
-                          FontSize="16"
-                          Margin="5"
-                          Padding="2" />
                 <ComboBox Name="OSEditionCombobox"
                           FontSize="16"
                           Margin="5"
