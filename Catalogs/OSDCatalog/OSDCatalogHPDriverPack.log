@@ -1,13 +1,13 @@
 ﻿**********************
 Windows PowerShell transcript start
-Start time: 20220609102858
+Start time: 20220615022325
 Username: OSDCODE\David
 RunAs User: OSDCODE\David
 Configuration Name: 
 Machine: OSDCODE (Microsoft Windows NT 10.0.22000.0)
 Host Application: C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe -NoProfile -ExecutionPolicy Bypass -Command Import-Module 'c:\Users\David\.vscode\extensions\ms-vscode.powershell-2022.5.1\modules\PowerShellEditorServices\PowerShellEditorServices.psd1'; Start-EditorServices -HostName 'Visual Studio Code Host' -HostProfileId 'Microsoft.VSCode' -HostVersion '2022.5.1' -AdditionalModules @('PowerShellEditorServices.VSCode') -BundledModulesPath 'c:\Users\David\.vscode\extensions\ms-vscode.powershell-2022.5.1\modules' -EnableConsoleRepl -StartupBanner '=====> PowerShell Integrated Console v2022.5.1 <=====
-' -LogLevel 'Normal' -LogPath 'c:\Users\David\.vscode\extensions\ms-vscode.powershell-2022.5.1\logs\1654786907-bcbd1805-a50f-4617-98b8-e9b70758244e1654786905710\EditorServices.log' -SessionDetailsPath 'c:\Users\David\.vscode\extensions\ms-vscode.powershell-2022.5.1\sessions\PSES-VSCode-22556-853428' -FeatureFlags @() 
-Process ID: 16712
+' -LogLevel 'Normal' -LogPath 'c:\Users\David\.vscode\extensions\ms-vscode.powershell-2022.5.1\logs\1655277418-4063ab77-298f-4c60-bc95-27dc1e0a95cf1655277417370\EditorServices.log' -SessionDetailsPath 'c:\Users\David\.vscode\extensions\ms-vscode.powershell-2022.5.1\sessions\PSES-VSCode-17744-765139' -FeatureFlags @() 
+Process ID: 31416
 PSVersion: 5.1.22000.653
 PSEdition: Desktop
 PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1.22000.653
@@ -18,6 +18,8 @@ PSRemotingProtocolVersion: 2.3
 SerializationVersion: 1.1.0.1
 **********************
 Transcript started, output file is D:\GitHub\MyModules\OSD\Catalogs\OSDCatalog\OSDCatalogHPDriverPack.log
+VERBOSE: Build Catalog already created at C:\Users\David\AppData\Local\Temp\OSD\OSDCatalogHPDriverPack.xml
+VERBOSE: Removing previous Build Catalog
 VERBOSE: Test-WebConnection OK: http://ftp.hp.com/pub/caps-softpaq/cmit/HPClientDriverPackCatalog.cab
 VERBOSE: HEAD with 0-byte payload
 VERBOSE: received 179660-byte response of content type application/vnd.ms-cab-compressed
@@ -30,5 +32,5 @@ WARNING: Building Catalog content, please wait ...
 VERBOSE: Exporting Build Catalog to C:\Users\David\AppData\Local\Temp\OSD\OSDCatalogHPDriverPack.xml
 **********************
 Windows PowerShell transcript end
-End time: 20220609103001
+End time: 20220615022455
 **********************

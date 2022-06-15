@@ -15,6 +15,13 @@ Starts the OSDCloud Windows 10 or 11 Build Process from the OSD Module or a GitH
 ### Default (Default)
 ```
 Start-OSDCloud [-Manufacturer <String>] [-Product <String>] [-Firmware] [-Restart] [-Shutdown] [-Screenshot]
+ [-SkipAutopilot] [-SkipODT] [-ZTI] [-OSName <String>] [-OSEdition <String>] [-OSLanguage <String>]
+ [-OSLicense <String>] [<CommonParameters>]
+```
+
+### Legacy
+```
+Start-OSDCloud [-Manufacturer <String>] [-Product <String>] [-Firmware] [-Restart] [-Shutdown] [-Screenshot]
  [-SkipAutopilot] [-SkipODT] [-ZTI] [-OSVersion <String>] [-OSBuild <String>] [-OSEdition <String>]
  [-OSLanguage <String>] [-OSLicense <String>] [<CommonParameters>]
 ```
@@ -175,12 +182,27 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
+### -OSName
+{{ Fill OSName Description }}
+
+```yaml
+Type: String
+Parameter Sets: Default
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
 ### -OSVersion
 Operating System Version of the Windows installation
 
 ```yaml
 Type: String
-Parameter Sets: Default
+Parameter Sets: Legacy
 Aliases:
 
 Required: False
@@ -196,7 +218,7 @@ Alias = Build
 
 ```yaml
 Type: String
-Parameter Sets: Default
+Parameter Sets: Legacy
 Aliases: Build
 
 Required: False
@@ -212,7 +234,7 @@ Alias = Edition
 
 ```yaml
 Type: String
-Parameter Sets: Default
+Parameter Sets: Default, Legacy
 Aliases: Edition
 
 Required: False
@@ -228,7 +250,7 @@ Alias = Culture, OSCulture
 
 ```yaml
 Type: String
-Parameter Sets: Default
+Parameter Sets: Default, Legacy
 Aliases: Culture, OSCulture
 
 Required: False
@@ -243,7 +265,7 @@ License of the Windows Operating System
 
 ```yaml
 Type: String
-Parameter Sets: Default
+Parameter Sets: Default, Legacy
 Aliases:
 
 Required: False

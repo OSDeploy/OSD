@@ -14,8 +14,7 @@ Returns a Windows Client Feature Update
 
 ### v2 (Default)
 ```
-Get-FeatureUpdate [-OSName <String>] [-OSArch <String>] [-OSLicense <String>] [-OSLanguage <String>]
- [<CommonParameters>]
+Get-FeatureUpdate [-OSName <String>] [-OSLicense <String>] [-OSLanguage <String>] [<CommonParameters>]
 ```
 
 ### v1
@@ -47,7 +46,7 @@ Aliases:
 
 Required: False
 Position: Named
-Default value: Windows 11 21H2
+Default value: Windows 11 21H2 x64
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
@@ -90,7 +89,7 @@ Default = x64
 
 ```yaml
 Type: String
-Parameter Sets: (All)
+Parameter Sets: v1
 Aliases:
 
 Required: False
