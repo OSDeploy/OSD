@@ -81,6 +81,22 @@ function osdcloud-DetermineHPTPM{
     elseif ($SP94937){Return "SP94937"}
     else{Return $false}
 }
+function osdcloud-HPTPMDowngrade{
+    [CmdletBinding()]
+    Param (
+        [Parameter(Mandatory=$false)]
+        [ValidateSet("SP87753", "SP94937")]
+        $SPNumber = "SP94937"
+        )
+    if ((!($WorkingFolder))-or ($null -eq $WorkingFolder)){$WorkingFolder = "$env:TEMP\TPM"}
+    if (!(Test-Path -Path $WorkingFolder)){New-Item -Path $WorkingFolder -ItemType Directory -Force |Out-Null}
+    $UpdatePath = "$WorkingFolder\$TPMUpdate.exe"
+    $extractPath = "$WorkingFolder\$TPMUpdate"
+    Write-Host "Starting downlaod & Install of TPM Update $TPMUpdate"
+    Get-Softpaq -Number $TPMUpdate -SaveAs $UpdatePath -Overwrite yes
+    Start-Process -FilePath $UpdatePath -ArgumentList "/s /e /f $extractPath" -Wait
+
+}
 function osdcloud-SetTPMBIOSSettings {
     osdcloud-SetHPBIOSSetting -SettingName 'TPM Device' -Value 'Available'
     osdcloud-SetHPBIOSSetting -SettingName 'TPM State' -Value 'Enable'
