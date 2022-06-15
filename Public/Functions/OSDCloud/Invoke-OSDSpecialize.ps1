@@ -205,6 +205,7 @@ function Invoke-OSDSpecialize {
         if ($HPJson){
             write-host "Specialize Stage - HP Enterprise Devices" -ForegroundColor Green
             $WarningPreference = "SilentlyContinue"
+            $VerbosePreference = "SilentlyContinue"
             #Invoke-Expression (Invoke-RestMethod -Uri 'functions.osdcloud.com')
             Invoke-Expression (Invoke-RestMethod -Uri 'https://raw.githubusercontent.com/OSDeploy/OSD/master/cloud/modules/deviceshp.psm1')
             
