@@ -448,7 +448,7 @@ Function osdcloud-RunHPIA {
         ##############################################
         #CMTraceLog –Message "/Operation:$Operation /Category:$Category /Selection:$Selection /Action:$Action  /Noninteractive /Debug /ReportFolder:$ReportsFolder /LogFolder:$ReportsFolder" –Component "Update"
         #Write-Host "Running HPIA With Args: /Operation:$Operation /Category:$Category /Selection:$Selection /Action:$Action  /Noninteractive /Debug /ReportFolder:$ReportsFolder /LogFolder:$ReportsFolder" -ForegroundColor Green
-        osdcloud-addserviceui -ErrorAction SilentlyContinue
+        #osdcloud-addserviceui -ErrorAction SilentlyContinue
         try 
         {
             if ($OfflineMode -eq $false){
