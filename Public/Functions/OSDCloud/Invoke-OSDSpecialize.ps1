@@ -232,6 +232,7 @@ function Invoke-OSDSpecialize {
                 }
                 start-sleep -Seconds 10
             }
+            <#
             if ($HPJson.HPUpdates.HPIADrivers -eq $true){
                 Write-Host -ForegroundColor DarkGray "========================================================================="
                 Write-Host "Running HPIA Drivers" -ForegroundColor Cyan
@@ -239,6 +240,7 @@ function Invoke-OSDSpecialize {
                 osdcloud-RunHPIA -OfflineMode $true
                 start-sleep -Seconds 10
             }
+            #>
         }
         if ($DellJSON){
             write-host "Specialize Stage - Dell Enterprise Devices" -ForegroundColor Green
