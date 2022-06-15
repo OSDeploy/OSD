@@ -95,6 +95,8 @@ function osdcloud-HPTPMDowngrade{
     Write-Host "Starting downlaod & Install of TPM Update $SPNumber"
     Get-Softpaq -Number $SPNumber -SaveAs $UpdatePath -Overwrite yes
     Start-Process -FilePath $UpdatePath -ArgumentList "/s /e /f $extractPath" -Wait
+    Suspend-BitLocker -MountPoint c: -RebootCount 2 -ErrorAction SilentlyContinue
+    Start-Process -FilePath "$extractPath\TPMConfig64.exe"
 
 }
 function osdcloud-SetTPMBIOSSettings {
