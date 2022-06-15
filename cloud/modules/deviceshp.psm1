@@ -237,11 +237,6 @@ Function osdcloud-HPIAOfflineSync {
     $LogFolder = "C:\OSDCloud\Logs"
     $HPIARepoFolder = "C:\OSDCloud\HPIA\Repo"
     $PlatformCode = (Get-CimInstance -Namespace root/cimv2 -ClassName Win32_BaseBoard).Product
-
-    Write-Host "Starting HPCMSL to create HPIA Repo for $($PlatformCode) with Drivers" -ForegroundColor Green
-    write-host " This process can take several minutes to download all drivers" -ForegroundColor Gray
-    write-host " Writing Progress Log to $LogFolder" -ForegroundColor Gray
-    write-host " Downloading to $HPIARepoFolder" -ForegroundColor Gray
     New-Item -Path $LogFolder -ItemType Directory -Force | Out-Null
     New-Item -Path $HPIARepoFolder -ItemType Directory -Force | Out-Null
     $CurrentLocation = Get-Location
@@ -249,6 +244,10 @@ Function osdcloud-HPIAOfflineSync {
     Initialize-Repository
     Set-RepositoryConfiguration -Setting OfflineCacheMode -CacheValue Enable
     Add-RepositoryFilter -Os $OS -OsVer $Release -Category $Category -Platform $PlatformCode
+    Write-Host "Starting HPCMSL to create HPIA Repo for $($PlatformCode) with Drivers" -ForegroundColor Green
+    write-host " This process can take several minutes to download all drivers" -ForegroundColor Gray
+    write-host " Writing Progress Log to $LogFolder" -ForegroundColor Gray
+    write-host " Downloading to $HPIARepoFolder" -ForegroundColor Gray
     Invoke-RepositorySync -Verbose 4> "$LogFolder\HPIAOfflineSync.log"
     Set-Location $CurrentLocation
     Write-Host "Completed Driver Download for HP Device to be applied in OOBE" -ForegroundColor Green
