@@ -111,7 +111,7 @@ function Invoke-OSDSpecialize {
             #   Lenovo
             #=================================================
             if ($Item.Extension -eq '.exe') {
-                if (($GetItemOutFile.VersionInfo.FileDescription -match 'Lenovo') -or ($GetItemOutFile.Name -match 'tc_') -or ($GetItemOutFile.Name -match 'tp_') -or ($GetItemOutFile.Name -match 'ts_') -or ($GetItemOutFile.Name -match '500w') -or ($GetItemOutFile.Name -match 'sccm_') -or ($GetItemOutFile.Name -match 'm710e') -or ($GetItemOutFile.Name -match 'tp10') -or ($GetItemOutFile.Name -match 'tp8') -or ($GetItemOutFile.Name -match 'yoga')) {
+                if (($Item.VersionInfo.FileDescription -match 'Lenovo') -or ($Item.Name -match 'tc_') -or ($Item.Name -match 'tp_') -or ($Item.Name -match 'ts_') -or ($Item.Name -match '500w') -or ($Item.Name -match 'sccm_') -or ($Item.Name -match 'm710e') -or ($Item.Name -match 'tp10') -or ($Item.Name -match 'tp8') -or ($Item.Name -match 'yoga')) {
                     Write-Verbose -Verbose "FileDescription: $($Item.VersionInfo.FileDescription)"
                     Write-Verbose -Verbose "ProductVersion: $($Item.VersionInfo.ProductVersion)"
 
