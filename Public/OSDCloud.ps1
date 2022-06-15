@@ -1306,6 +1306,7 @@ function Invoke-OSDCloud {
             Add-Content -Path $PSFilePath "osdcloud-WinpeSetEnvironmentVariables"
             Add-Content -Path $PSFilePath "osdcloud-InstallModuleHPCMSL -ErrorAction SilentlyContinue"
             Add-Content -Path $PSFilePath 'Write-Host "Running HP Tools in SetupComplete" -ForegroundColor Green'
+            Add-Content -Path $PSFilePath "osdcloud-SetHPBIOSSetting -SettingName 'Virtualization Technology (VTx)' -Value 'Enable'"
             if ($Global:OSDCloud.HPIADrivers -eq $true){
                 Add-Content -Path $PSFilePath 'Write-Host "Running HPIA for Drivers" -ForegroundColor Magenta'
                 if (Test-Path -path "C:\OSDCloud\HPIA\Repo"){Add-Content -Path $PSFilePath "osdcloud-RunHPIA -OfflineMode True -Category Drivers"}
