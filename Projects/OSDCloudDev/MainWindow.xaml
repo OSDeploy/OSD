@@ -183,12 +183,8 @@
                     IsChecked="False" />
             </MenuItem>
         </Menu>
+        
         <Grid Margin="10,0,10,10">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="307*"/>
-                <ColumnDefinition Width="42*"/>
-                <ColumnDefinition Width="451*"/>
-            </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="1" />
@@ -202,15 +198,15 @@
             </Grid.RowDefinitions>
 
             <!-- Row 0 Title -->
-            <Label
+            <Label Grid.Row="0"
                Name="BrandingTitleControl"
-               Content="OSDCloudDev"
+               Content="OSDCloud"
                FlowDirection="RightToLeft"
                FontSize="24"
                FontWeight="Bold"
                Foreground="#003E92"
-               HorizontalAlignment="Left"
-               VerticalAlignment="Center" Grid.Column="2" Margin="240,0,0,0" Width="200" />
+               HorizontalAlignment="Right"
+               VerticalAlignment="Top" />
 
             <!-- Row 1 Gridline -->
             <Line Grid.Row="1"
@@ -220,12 +216,12 @@
               Y2="0"
               Stroke="Gainsboro"
               StrokeThickness="1"
-              Stretch="Uniform" Grid.ColumnSpan="3"/>
+              Stretch="Uniform"></Line>
 
             <!-- Row 2 OperatingSystem -->
             <StackPanel Grid.Row="2"
                     HorizontalAlignment="Left"
-                    VerticalAlignment="Center" Grid.ColumnSpan="3">
+                    VerticalAlignment="Top">
                 <!-- Operating System -->
                 <StackPanel Orientation="Horizontal"
                         HorizontalAlignment="Left"
@@ -242,10 +238,7 @@
                     <ComboBox Name="OperatingSystemCombobox"
                           FontSize="16"
                           Margin="5"
-                          Padding="2"
-                          SelectedIndex="0" >
-                        <ComboBoxItem Content="OSDCloud Windows 10 x64"/>
-                        <ComboBoxItem Content="OSDCloud Windows 11 x64"/>
+                          Padding="2" >
                     </ComboBox>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal"
@@ -259,10 +252,6 @@
                        Margin="5"
                        Padding="2"
                        Width="155" />
-                    <ComboBox Name="OSBuildCombobox"
-                          FontSize="16"
-                          Margin="5"
-                          Padding="2" />
                     <ComboBox Name="OSEditionCombobox"
                           FontSize="16"
                           Margin="5"
@@ -305,13 +294,13 @@
               Y2="0"
               Stroke="Gainsboro"
               StrokeThickness="1"
-              Stretch="Uniform" Grid.ColumnSpan="3" Margin="0,0,0,38" Grid.RowSpan="2">
+              Stretch="Uniform">
             </Line>
 
             <!-- Row 4 Driver Pack -->
             <StackPanel Grid.Row="4"
                     HorizontalAlignment="Left"
-                    VerticalAlignment="Center" Grid.ColumnSpan="3">
+                    VerticalAlignment="Top">
                 <!-- Driver Pack -->
                 <StackPanel Orientation="Horizontal"
                         HorizontalAlignment="Left"
@@ -344,13 +333,14 @@
               Y2="0"
               Stroke="Gainsboro"
               StrokeThickness="1"
-              Stretch="Uniform" Grid.ColumnSpan="3"/>
+              Stretch="Uniform">
+            </Line>
 
             <!-- Row 6 Options -->
-            <StackPanel Grid.Row="5"
+            <StackPanel Grid.Row="6"
                     Orientation="Horizontal"
                     HorizontalAlignment="Left"
-                    VerticalAlignment="Top" Margin="0,1,0,0" Grid.RowSpan="2">
+                    VerticalAlignment="Top">
                 <Label Name="DeploymentOptionsLabel"
                    Content=""
                    FontSize="18"
@@ -365,12 +355,12 @@
             <StackPanel Grid.Row="6"
                     Orientation="Vertical"
                     HorizontalAlignment="Left"
-                    VerticalAlignment="Center" Grid.ColumnSpan="2">
+                    VerticalAlignment="Top">
                 <!-- AutopilotJson -->
                 <StackPanel HorizontalAlignment="Left"
                         VerticalAlignment="Center"
                         Orientation="Horizontal"
-                        Margin="125,5,5,0">
+                        Margin="10,5,5,0">
                     <Label Name="AutopilotJsonLabel"
                        Content="Autopilot JSON"
                        FontSize="15"
@@ -390,7 +380,7 @@
                 <StackPanel HorizontalAlignment="Left"
                         VerticalAlignment="Center"
                         Orientation="Horizontal"
-                        Margin="125,5,5,0">
+                        Margin="10,5,5,0">
                     <Label Name="OOBEDeployLabel"
                        Content="OOBEDeploy"
                        FontSize="15"
@@ -409,7 +399,7 @@
                 <StackPanel HorizontalAlignment="Left"
                         VerticalAlignment="Center"
                         Orientation="Horizontal"
-                        Margin="125,5,5,0">
+                        Margin="10,5,5,0">
                     <Label Name="AutopilotOOBELabel"
                        Content="AutopilotOOBE"
                        FontSize="15"
@@ -434,7 +424,7 @@
               Y2="0"
               Stroke="Gainsboro"
               StrokeThickness="1"
-              Stretch="Uniform" Grid.ColumnSpan="3"></Line>
+              Stretch="Uniform"></Line>
 
             <!-- Row 8 Start -->
             <Button Grid.Row="8"
@@ -444,8 +434,8 @@
                 Foreground="White"
                 Height="40"
                 Width="130"
-                HorizontalAlignment="Left"
-                VerticalAlignment="Center" Grid.Column="2" Margin="310,0,0,0" />
+                HorizontalAlignment="Right"
+                VerticalAlignment="Bottom" />
             <CheckBox x:Name="DebugCheckBox" Content="Debug Mode" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Row="8"/>
         </Grid>
     </DockPanel>
