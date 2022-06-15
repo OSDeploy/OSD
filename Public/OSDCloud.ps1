@@ -64,10 +64,13 @@ function Invoke-OSDCloud {
         ImageFileDestination = $null
         ImageFileUrl = $null
         IsOnBattery = $(Get-OSDGather -Property IsOnBattery)
+        IsTest = ($env:SystemDrive -ne 'X:')
         IsVirtualMachine = $(Test-IsVM)
+        IsWinPE = ($env:SystemDrive -eq 'X:')
         IsoMountDiskImage = $null
         IsoGetDiskImage = $null
         IsoGetVolume = $null
+        Logs = "$env:SystemDrive\OSDCloud\Logs"
         Manufacturer = Get-MyComputerManufacturer -Brief
         MSCatalogFirmware = $true
         MSCatalogDiskDrivers = $true
@@ -112,7 +115,6 @@ function Invoke-OSDCloud {
         SkipNewOSDisk = [bool]$false
         SkipRecoveryPartition = [bool]$false
         RecoveryPartition = $null
-        Test = [bool]$false
         TimeEnd = $null
         TimeSpan = $null
         TimeStart = Get-Date
@@ -209,8 +211,8 @@ function Invoke-OSDCloud {
         $Global:OSDCloud.SkipNewOSDisk = $true
     }
 
-    if ($Global:OSDCloud.Test -eq $true) {
-        Write-DarkGrayHost '$OSDCloud.Test = $true'
+    if ($Global:OSDCloud.IsWinPE -eq $false) {
+        Write-DarkGrayHost '$OSDCloud.IsWinPE = $false'
         $Global:OSDCloud.SkipClearDisk = $true
         $Global:OSDCloud.SkipNewOSDisk = $true
     }
@@ -221,17 +223,26 @@ function Invoke-OSDCloud {
     }
     #endregion
     #=================================================
-    #region OSDCloudLogs
-    if ($env:SystemDrive -eq 'X:') {
-        $OSDCloudLogs = "$env:SystemDrive\OSDCloud\Logs"
-        if (-not (Test-Path $OSDCloudLogs)) {
-            New-Item $OSDCloudLogs -ItemType Directory -Force | Out-Null
+    #region OSDCloud Logs
+    Write-SectionHeader 'OSDCloud Logs'
+
+    $ParamNewItem = @{
+        Path = $Global:OSDCloud.Logs
+        ItemType = 'Directory'
+        Force = $true
+        ErrorAction = 'Stop'
+    }
+
+    if ($Global:OSDCloud.IsWinPE) {
+        if (-not (Test-Path $Global:OSDCloud.Logs)) {
+            $null = New-Item @ParamNewItem
         }
     }
     #endregion
     #=================================================
     #region Fixed Disks
-    Write-SectionHeader "Validate Fixed Disks"
+    Write-SectionHeader 'Validate Fixed Disks'
+
     $Global:OSDCloud.SectionPassed = $false
 
     $Global:OSDCloud.GetDiskFixed = Get-Disk.fixed | Where-Object {$_.IsBoot -eq $false} | Sort-Object Number
@@ -364,14 +375,7 @@ function Invoke-OSDCloud {
     #region Require WinPE
     Write-SectionHeader "Validate WinPE"
 
-    if ($env:SystemDrive -eq 'X:') {
-        $Global:OSDCloud.Test = $false
-    }
-    else {
-        $Global:OSDCloud.Test = $true
-    }
-
-    if ($Global:OSDCloud.Test -eq $true) {
+    if ($Global:OSDCloud.IsWinPE -eq $false) {
         Write-Warning "OSDCloud can only be run from WinPE"
         Write-Warning "OSDCloud is running in Test mode"
         Start-Sleep -Seconds 5
@@ -388,7 +392,7 @@ function Invoke-OSDCloud {
     if ($Global:OSDCloud.USBPartitions) {
         Write-SectionHeader "Removing USB drive letters"
 
-        if ($Global:OSDCloud.Test -eq $false) {
+        if ($Global:OSDCloud.IsWinPE -eq $true) {
             foreach ($USBPartition in $Global:OSDCloud.USBPartitions) {
 
                 $RemovePartitionAccessPath = @{
@@ -472,24 +476,20 @@ function Invoke-OSDCloud {
     }
     #endregion
     #=================================================
-    #region USB Add Partition Access Path
-    <#
-    https://docs.microsoft.com/en-us/powershell/module/storage/add-partitionaccesspath
-    #>
-    if ($Global:OSDCloud.USBPartitions) {
-        Write-SectionHeader "Restoring USB Drive Letters"
+    #region Add-PartitionAccessPath
 
-        if ($Global:OSDCloud.Test -eq $false) {
+    if ($Global:OSDCloud.USBPartitions) {
+        Write-SectionHeader 'Restoring USB Drive Letters'
+
+        if ($Global:OSDCloud.IsWinPE -eq $true) {
             foreach ($USBPartition in $Global:OSDCloud.USBPartitions) {
 
-                $AddPartitionAccessPath = @{
+                $ParamAddPartitionAccessPath = @{
                     AssignDriveLetter = $true
                     DiskNumber = $USBPartition.DiskNumber
                     PartitionNumber = $USBPartition.PartitionNumber
                 }
-
-                Add-PartitionAccessPath @AddPartitionAccessPath
-                Start-Sleep -Seconds 5
+                Add-PartitionAccessPath @ParamAddPartitionAccessPath; Start-Sleep -Seconds 5
             }
         }
     }
@@ -526,8 +526,8 @@ function Invoke-OSDCloud {
     if ($Global:OSDCloud.IsOnBattery -eq $true) {
         Write-DarkGrayHost "Device is on battery power. Performance will not be adjusted"
     }
-    elseif ($Global:OSDCloud.Test -eq $true) {
-        Write-DarkGrayHost "Device is running in test mode. Performance will not be adjusted"
+    elseif ($Global:OSDCloud.IsWinPE -eq $false) {
+        Write-DarkGrayHost "Device is not running in WinPE. Performance will not be adjusted"
     }
     elseif ($Global:OSDCloud.Debug -eq $true) {
         Write-DarkGrayHost "Device is running in debug mode. Performance will not be adjusted"
@@ -890,7 +890,7 @@ function Invoke-OSDCloud {
     }
     $Global:OSDCloud.ExpandWindowsImage = $ExpandWindowsImage
 
-    if ($Global:OSDCloud.Test -eq $false) {
+    if ($Global:OSDCloud.IsWinPE -eq $true) {
         Expand-WindowsImage @ExpandWindowsImage
 
         $SystemDrive = Get-Partition | Where-Object {$_.Type -eq 'System'} | Select-Object -First 1
@@ -1173,7 +1173,7 @@ function Invoke-OSDCloud {
     Write-DarkGrayHost "Drivers in C:\Drivers are being added to the offline Windows Image"
     Write-DarkGrayHost "This process can take up to 20 minutes"
     Write-Verbose -Message "Add-OfflineServicingWindowsDriver"
-    if ($Global:OSDCloud.Test -eq $false) {
+    if ($Global:OSDCloud.IsWinPE -eq $true) {
         Add-OfflineServicingWindowsDriver
     }
     #endregion
@@ -1183,7 +1183,7 @@ function Invoke-OSDCloud {
     Write-DarkGrayHost "C:\Windows\Panther\Invoke-OSDSpecialize.xml is being applied as an Unattend file"
     Write-DarkGrayHost "This will enable the extraction and installation of HP, Lenovo, and Microsoft Surface Drivers if necessary"
     Write-Verbose -Message "Set-OSDCloudUnattendSpecialize"
-    if ($Global:OSDCloud.Test -eq $false) {
+    if ($Global:OSDCloud.IsWinPE -eq $true) {
         Set-OSDCloudUnattendSpecialize
         #Set-OSDxCloudUnattendSpecialize -Verbose
     }
@@ -1422,7 +1422,7 @@ exit
     #=================================================
     #region Save PowerShell Modules to OSDisk
     Write-SectionHeader "Saving PowerShell Modules and Scripts"
-    if ($Global:OSDCloud.Test -eq $false) {
+    if ($Global:OSDCloud.IsWinPE -eq $true) {
         $PowerShellSavePath = 'C:\Program Files\WindowsPowerShell'
 
         if (-NOT (Test-Path "$PowerShellSavePath\Configuration")) {
@@ -1528,7 +1528,7 @@ exit
         Write-Warning "WinPE is restarting in 30 seconds"
         Write-Warning "Press CTRL + C to cancel"
         Start-Sleep -Seconds 30
-        if ($Global:OSDCloud.Test -eq $false) {
+        if ($Global:OSDCloud.IsWinPE -eq $true) {
             Restart-Computer
         }
     }
@@ -1537,7 +1537,7 @@ exit
         Write-Warning "WinPE will shutdown in 30 seconds"
         Write-Warning "Press CTRL + C to cancel"
         Start-Sleep -Seconds 30
-        if ($Global:OSDCloud.Test -eq $false) {
+        if ($Global:OSDCloud.IsWinPE -eq $true) {
             Stop-Computer
         }
     }
