@@ -234,7 +234,8 @@ function Invoke-OSDSpecialize {
             if ($HPJson.HPUpdates.HPIADrivers -eq $true){
                 Write-Host -ForegroundColor DarkGray "========================================================================="
                 Write-Host "Running HPIA Drivers" -ForegroundColor Cyan
-                osdcloud-RunHPIA
+                osdcloud-HPIAOfflineSync
+                osdcloud-RunHPIA -OfflineMode
                 start-sleep -Seconds 10
             }
         }
