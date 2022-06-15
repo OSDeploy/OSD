@@ -90,10 +90,10 @@ function osdcloud-HPTPMDowngrade{
         )
     if ((!($WorkingFolder))-or ($null -eq $WorkingFolder)){$WorkingFolder = "$env:TEMP\TPM"}
     if (!(Test-Path -Path $WorkingFolder)){New-Item -Path $WorkingFolder -ItemType Directory -Force |Out-Null}
-    $UpdatePath = "$WorkingFolder\$TPMUpdate.exe"
-    $extractPath = "$WorkingFolder\$TPMUpdate"
-    Write-Host "Starting downlaod & Install of TPM Update $TPMUpdate"
-    Get-Softpaq -Number $TPMUpdate -SaveAs $UpdatePath -Overwrite yes
+    $UpdatePath = "$WorkingFolder\$SPNumber.exe"
+    $extractPath = "$WorkingFolder\$SPNumber"
+    Write-Host "Starting downlaod & Install of TPM Update $SPNumber"
+    Get-Softpaq -Number $SPNumber -SaveAs $UpdatePath -Overwrite yes
     Start-Process -FilePath $UpdatePath -ArgumentList "/s /e /f $extractPath" -Wait
 
 }
