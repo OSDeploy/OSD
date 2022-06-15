@@ -235,7 +235,7 @@ function Invoke-OSDSpecialize {
                 Write-Host -ForegroundColor DarkGray "========================================================================="
                 Write-Host "Running HPIA Drivers" -ForegroundColor Cyan
                 osdcloud-HPIAOfflineSync
-                osdcloud-RunHPIA -OfflineMode
+                osdcloud-RunHPIA -OfflineMode $true
                 start-sleep -Seconds 10
             }
         }
