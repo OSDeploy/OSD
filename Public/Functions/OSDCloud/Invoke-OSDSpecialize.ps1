@@ -203,7 +203,7 @@ function Invoke-OSDSpecialize {
         }
     }
         if ($HPJson){
-            write-host "Specialize Stage - HP Devices" -ForegroundColor Green
+            write-host "Specialize Stage - HP Enterprise Devices" -ForegroundColor Green
             $WarningPreference = "SilentlyContinue"
             #Invoke-Expression (Invoke-RestMethod -Uri 'functions.osdcloud.com')
             Invoke-Expression (Invoke-RestMethod -Uri 'https://raw.githubusercontent.com/OSDeploy/OSD/master/cloud/modules/deviceshp.psm1')
@@ -230,10 +230,16 @@ function Invoke-OSDSpecialize {
                     Get-HPBIOSUpdates -Flash -Yes -Offline -BitLocker Ignore
                 }
                 start-sleep -Seconds 10
-            } 
+            }
+            if ($HPJson.HPUpdates.HPIADrivers -eq $true){
+                Write-Host -ForegroundColor DarkGray "========================================================================="
+                Write-Host "Running HPIA Drivers" -ForegroundColor Cyan
+                osdcloud-RunHPIA
+                start-sleep -Seconds 10
+            }
         }
         if ($DellJSON){
-            write-host "Specialize Stage - Dell Devices" -ForegroundColor Green
+            write-host "Specialize Stage - Dell Enterprise Devices" -ForegroundColor Green
             $WarningPreference = "SilentlyContinue"
             #Invoke-Expression (Invoke-RestMethod -Uri 'functions.osdcloud.com')
             Invoke-Expression (Invoke-RestMethod -Uri 'https://raw.githubusercontent.com/OSDeploy/OSD/master/cloud/modules/devicesdell.psm1')
