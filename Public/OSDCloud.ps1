@@ -1337,13 +1337,15 @@ function Invoke-OSDCloud {
             Add-Content -Path $PSFilePath "Restart-Computer -Force"
         }
 
-        #region Set-OSDCloudUnattendSpecialize
+        #region Set-OSDCloudUnattendSpecialize - THIS IDEA FAILED... DON'T DO THIS... Leaving it here as a reminder that this idea was no good.
+        <#
         Write-SectionHeader "Set Specialize Unattend.xml (Set-OSDCloudUnattendAuditModeHPDevices)"
         Write-DarkGrayHost "This replaces (includes everything as before, but adds additional options) the standard unattend created by OSDCloudUnattendSpecialize"
         Write-Verbose -Message "Set-OSDCloudUnattendAuditModeHPDevices"
         if ($Global:OSDCloud.IsWinPE -eq $true) {
             Set-OSDCloudUnattendAuditModeHPDevices
-    }
+        }
+        #>
     #endregion
     }
     #endregion
