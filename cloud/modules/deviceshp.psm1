@@ -144,9 +144,9 @@ function osdcloud-HPTPMDownload {
 }
 function osdcloud-HPTPMEXEDownload {
     osdcloud-InstallModuleHPCMSL
-    osdcloud-SetHPBIOSSetting -SettingName 'Virtualization Technology (VTx)' -Value 'Disable'
+    osdcloud-HPBIOSSetSetting -SettingName 'Virtualization Technology (VTx)' -Value 'Disable'
     Import-Module -Name HPCMSL -Force
-    $TPMUpdate = osdcloud-DetermineHPTPM
+    $TPMUpdate = osdcloud-HPTPMDetermine
     if ($TPMUpdate -ne $false)
         {
         $DownloadFolder = "C:\OSDCloud\HP\TPM"
@@ -220,7 +220,7 @@ function osdcloud-HPTPMUpdate {
         write-output "Determined TPM Update $logsuffix required"
         if ((Get-BitLockerVolume -MountPoint $env:SystemDrive -ErrorAction SilentlyContinue).ProtectionStatus -eq "ON"){
             Suspend-BitLocker -MountPoint $env:SystemDrive -RebootCount 2 | Out-Null}
-        osdcloud-SetHPBIOSSetting -SettingName 'Virtualization Technology (VTx)' -Value 'Disable'
+        osdcloud-HPBIOSSetSetting -SettingName 'Virtualization Technology (VTx)' -Value 'Disable'
         $extractPath = osdcloud-HPTPMDownload -WorkingFolder $WorkingFolder
         if (!(Test-Path -Path $extractPath)){Throw "Failed to Locate Update Path"}
         $Process = "$extractPath\TPMConfig64.exe"
@@ -235,7 +235,7 @@ function osdcloud-HPTPMUpdate {
         write-output "TPMUpdate Exit Code: $($TPMUpdate.exitcode)"
     }
     else {
-        osdcloud-SetHPBIOSSetting -SettingName 'Virtualization Technology (VTx)' -Value 'Enable'
+        osdcloud-HPBIOSSetSetting -SettingName 'Virtualization Technology (VTx)' -Value 'Enable'
         return "No TPM Update Available"
     }
     }
