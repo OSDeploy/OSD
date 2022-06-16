@@ -329,8 +329,8 @@ if ($Manufacturer -match "Dell"){
 }    
 
 if ($HPEnterprise){
-    $TPM = osdcloud-DetermineHPTPM
-    $BIOS = osdcloud-DetermineHPBIOSUpdateAvailable
+    $TPM = osdcloud-HPTPMDetermine
+    $BIOS = osdcloud-HPBIOSDetermine
     $formMainWindowControlManufacturerFunction.Header = "HP Functions"
     $formMainWindowControlManufacturerFunction.Visibility = 'Visible'
 

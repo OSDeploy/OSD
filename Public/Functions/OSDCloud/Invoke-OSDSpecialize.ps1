@@ -215,7 +215,7 @@ function Invoke-OSDSpecialize {
             if ($HPJson.HPUpdates.HPTPMUpdate -eq $true){
                 Write-Host -ForegroundColor DarkGray "========================================================================="
                 Write-Host "Updating TPM" -ForegroundColor Cyan
-                osdcloud-InstallHPTPMEXE
+                osdcloud-HPTPMEXEInstall
                 start-sleep -Seconds 10
             }
             if (($HPJson.HPUpdates.HPBIOSUpdate -eq $true) -and ($HPJson.HPUpdates.HPTPMUpdate -ne $true)){
@@ -237,7 +237,7 @@ function Invoke-OSDSpecialize {
                 Write-Host -ForegroundColor DarkGray "========================================================================="
                 Write-Host "Running HPIA Drivers" -ForegroundColor Cyan
                 osdcloud-HPIAOfflineSync
-                osdcloud-RunHPIA -OfflineMode $true
+                osdcloud-HPIAExecute -OfflineMode $true
                 start-sleep -Seconds 10
             }
             #>

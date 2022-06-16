@@ -74,7 +74,7 @@ function osdcloud-InstallModuleHPCMSL {
     }
     Import-Module -Name $PSModuleName -Force -Global -ErrorAction SilentlyContinue -WarningAction SilentlyContinue
 }
-function osdcloud-DetermineHPTPM{
+function osdcloud-HPTPMDetermine{
     $SP87753 = Get-CimInstance  -Namespace "root\cimv2\security\MicrosoftTPM" -query "select * from win32_tpm where IsEnabled_InitialValue = 'True' and ((ManufacturerVersion like '7.%' and ManufacturerVersion < '7.63.3353') or (ManufacturerVersion like '5.1%') or (ManufacturerVersion like '5.60%') or (ManufacturerVersion like '5.61%') or (ManufacturerVersion like '4.4%') or (ManufacturerVersion like '6.40%') or (ManufacturerVersion like '6.41%') or (ManufacturerVersion like '6.43.243.0') or (ManufacturerVersion like '6.43.244.0'))"
     $SP94937 = Get-CimInstance  -Namespace "root\cimv2\security\MicrosoftTPM" -query "select * from win32_tpm where IsEnabled_InitialValue = 'True' and ((ManufacturerVersion like '7.62%') or (ManufacturerVersion like '7.63%') or (ManufacturerVersion like '7.83%') or (ManufacturerVersion like '6.43%') )"
     if ($SP87753){Return "SP87753"}
@@ -96,15 +96,15 @@ function osdcloud-HPTPMDowngrade{
     Get-Softpaq -Number $SPNumber -SaveAs $UpdatePath -Overwrite yes
     Start-Process -FilePath $UpdatePath -ArgumentList "/s /e /f $extractPath" -Wait
     Suspend-BitLocker -MountPoint c: -RebootCount 2 -ErrorAction SilentlyContinue
-    Start-Process -FilePath "$extractPath\TPMConfig64.exe"
+    Start-Process -FilePath "$extractPath\TPMConfig64.exe" -ArgumentList "-xVTx"
 
 }
-function osdcloud-SetTPMBIOSSettings {
-    osdcloud-SetHPBIOSSetting -SettingName 'TPM Device' -Value 'Available'
-    osdcloud-SetHPBIOSSetting -SettingName 'TPM State' -Value 'Enable'
-    osdcloud-SetHPBIOSSetting -SettingName 'TPM Activation Policy' -Value 'No Prompts'
+function osdcloud-HPTPMBIOSSettings {
+    osdcloud-HPBIOSSetSetting -SettingName 'TPM Device' -Value 'Available'
+    osdcloud-HPBIOSSetSetting -SettingName 'TPM State' -Value 'Enable'
+    osdcloud-HPBIOSSetSetting -SettingName 'TPM Activation Policy' -Value 'No Prompts'
 }
-function osdcloud-DetermineHPBIOSUpdateAvailable{
+function osdcloud-HPBIOSDetermine{
     [CmdletBinding()]
     param ([Switch]$Details)
     osdcloud-InstallModuleHPCMSL
@@ -120,12 +120,12 @@ function osdcloud-DetermineHPBIOSUpdateAvailable{
         else {Return $true}
         }
 }
-function osdcloud-DownloadHPTPM {
+function osdcloud-HPTPMDownload {
     [CmdletBinding()]
     param ($WorkingFolder)
     osdcloud-InstallModuleHPCMSL
     Import-Module -Name HPCMSL -Force
-    $TPMUpdate = osdcloud-DetermineHPTPM
+    $TPMUpdate = osdcloud-HPTPMDetermine    
     if ($TPMUpdate -ne $false)
         {
         if ((!($WorkingFolder))-or ($null -eq $WorkingFolder)){$WorkingFolder = "$env:TEMP\TPM"}
@@ -142,7 +142,7 @@ function osdcloud-DownloadHPTPM {
             }
         }    
 }
-function osdcloud-DownloadHPTPMEXE {
+function osdcloud-HPTPMEXEDownload {
     osdcloud-InstallModuleHPCMSL
     osdcloud-SetHPBIOSSetting -SettingName 'Virtualization Technology (VTx)' -Value 'Disable'
     Import-Module -Name HPCMSL -Force
@@ -157,7 +157,7 @@ function osdcloud-DownloadHPTPMEXE {
         if (!(Test-Path -Path $UpdatePath)){Throw "Failed to Download TPM Update"}
     }    
 }
-function osdcloud-InstallHPTPMEXE {
+function osdcloud-HPTPMEXEInstall {
     [CmdletBinding()]
     Param (
         [Parameter(Mandatory=$false)]
@@ -190,7 +190,7 @@ function osdcloud-InstallHPTPMEXE {
     else {Throw "Failed to Locate Update Path"}
 }
 #does not work in pe
-function osdcloud-DownloadHPBIOSEXE {
+function osdcloud-HPBIOSEXEDownload {
     osdcloud-InstallModuleHPCMSL
     Import-Module -Name HPCMSL -Force
     $SoftpaqNumber = (Get-SoftpaqList -Category BIOS | Select-Object -Last 1).id
@@ -201,7 +201,7 @@ function osdcloud-DownloadHPBIOSEXE {
             Get-Softpaq -Number $SoftpaqNumber -SaveAs $UpdatePath -Overwrite yes
             if (!(Test-Path -Path $UpdatePath)){Throw "Failed to Download System Firmware Update"}
 }
-function osdcloud-UpdateHPTPM {
+function osdcloud-HPTPMUpdate {
     [CmdletBinding()]
     Param (
         [Parameter(Mandatory=$false)]
@@ -215,13 +215,13 @@ function osdcloud-UpdateHPTPM {
         [Parameter(Mandatory=$false)]
         $WorkingFolder
         )
-    $logsuffix = osdcloud-DetermineHPTPM
+    $logsuffix = osdcloud-HPTPMDetermine
     if ($logsuffix -ne $false){
         write-output "Determined TPM Update $logsuffix required"
         if ((Get-BitLockerVolume -MountPoint $env:SystemDrive -ErrorAction SilentlyContinue).ProtectionStatus -eq "ON"){
             Suspend-BitLocker -MountPoint $env:SystemDrive -RebootCount 2 | Out-Null}
         osdcloud-SetHPBIOSSetting -SettingName 'Virtualization Technology (VTx)' -Value 'Disable'
-        $extractPath = osdcloud-DownloadHPTPM -WorkingFolder $WorkingFolder
+        $extractPath = osdcloud-HPTPMDownload -WorkingFolder $WorkingFolder
         if (!(Test-Path -Path $extractPath)){Throw "Failed to Locate Update Path"}
         $Process = "$extractPath\TPMConfig64.exe"
         #Create Argument List
@@ -270,7 +270,7 @@ Function osdcloud-HPIAOfflineSync {
     Set-Location $CurrentLocation
     Write-Host "Completed Driver Download for HP Device to be applied in OOBE" -ForegroundColor Green
 }
-Function osdcloud-RunHPIA {
+Function osdcloud-HPIAExecute {
 <#
     Update HP Drivers via HPIA - Gary Blok - @gwblok
     Several Code Snips taken from: https://smsagent.blog/2021/03/30/deploying-hp-bios-updates-a-real-world-example/
@@ -713,7 +713,7 @@ Function osdcloud-RunHPIA {
         }
     }
 
-function osdcloud-downloadHPIA {
+function osdcloud-HPIADownload {
     $null = New-Item –Path "HKLM:\SOFTWARE\Policies\Microsoft" –Name "Internet Explorer" –Force
     $null = New-Item –Path "HKLM:\SOFTWARE\Policies\Microsoft\Internet Explorer" –Name "Main" –Force
     $null = New-ItemProperty –Path "HKLM:\SOFTWARE\Policies\Microsoft\Internet Explorer\Main" –Name "DisableFirstRunCustomize" –PropertyType DWORD –Value 1 –Force
@@ -761,7 +761,7 @@ function osdcloud-downloadHPIA {
         }
     }    
 
-function osdcloud-UpdateHPBIOS {
+function osdcloud-HPBIOSUpdate {
     #Stage Firmware Update for Next Reboot
     Write-Host -ForegroundColor DarkGray "========================================================================="
     osdcloud-InstallModuleHPCMSL
@@ -775,7 +775,7 @@ function osdcloud-UpdateHPBIOS {
     }
 }
 
-function osdcloud-SetHPBIOSSetting {
+function osdcloud-HPBIOSSetSetting {
     [CmdletBinding()]
 Param (
 	[Parameter(Mandatory=$true)]

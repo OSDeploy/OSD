@@ -1240,7 +1240,7 @@ function Invoke-OSDCloud {
         try {[void][System.IO.Directory]::CreateDirectory($ConfigPath)}
         catch {}
         $HPHashVar | Out-File $ConfigFile
-        osdcloud-downloadHPIA
+        osdcloud-HPIADownload
         
         <#
         #This feature does not work in OSDCloud due to Get-Volume not returning the System Volume, potentail bug with OSDCloud New-Disk Function
@@ -1258,8 +1258,8 @@ function Invoke-OSDCloud {
         #>
         #Stage HP TPM Update EXE
         if ($Global:OSDCloud.HPTPMUpdate -eq $true){
-            osdcloud-SetTPMBIOSSettings
-            osdcloud-DownloadHPTPMEXE
+            osdcloud-HPTPMBIOSSettings
+            osdcloud-HPTPMEXEDownload
         }   
         <#
         #This feature is not currently supported in WnePE due to the dependany on Get-HPDevceInfo
@@ -1306,31 +1306,31 @@ function Invoke-OSDCloud {
             Add-Content -Path $PSFilePath "osdcloud-WinpeSetEnvironmentVariables"
             Add-Content -Path $PSFilePath "osdcloud-InstallModuleHPCMSL -ErrorAction SilentlyContinue"
             Add-Content -Path $PSFilePath 'Write-Host "Running HP Tools in SetupComplete" -ForegroundColor Green'
-            Add-Content -Path $PSFilePath "osdcloud-SetHPBIOSSetting -SettingName 'Virtualization Technology (VTx)' -Value 'Enable'"
+            Add-Content -Path $PSFilePath "osdcloud-HPBIOSSetSetting -SettingName 'Virtualization Technology (VTx)' -Value 'Enable'"
             if ($Global:OSDCloud.HPIADrivers -eq $true){
                 Add-Content -Path $PSFilePath 'Write-Host "Running HPIA for Drivers" -ForegroundColor Magenta'
                 if (Test-Path -path "C:\OSDCloud\HPIA\Repo"){Add-Content -Path $PSFilePath "osdcloud-RunHPIA -OfflineMode True -Category Drivers"}
-                else {Add-Content -Path $PSFilePath "osdcloud-RunHPIA -Category Drivers"}
+                else {Add-Content -Path $PSFilePath "osdcloud-HPIAExecute -Category Drivers"}
             }
             if (($Global:OSDCloud.HPIAFirmware -eq $true) -and ($Global:OSDCloud.HPIAAll  -ne $true)){
                 Add-Content -Path $PSFilePath 'Write-Host "Running HPIA for Firmware" -ForegroundColor Magenta'
-                Add-Content -Path $PSFilePath "osdcloud-RunHPIA -Category Firmware"
+                Add-Content -Path $PSFilePath "osdcloud-HPIAExecute -Category Firmware"
             } 
             if (($Global:OSDCloud.HPIASoftware -eq $true) -and ($Global:OSDCloud.HPIAAll  -ne $true)){
                 Add-Content -Path $PSFilePath 'Write-Host "Running HPIA for Software" -ForegroundColor Magenta'
-                Add-Content -Path $PSFilePath "osdcloud-RunHPIA -Category Software"
+                Add-Content -Path $PSFilePath "osdcloud-HPIAExecute -Category Software"
             } 
             if ($Global:OSDCloud.HPIAAll -eq $true){
                 Add-Content -Path $PSFilePath 'Write-Host "Running HPIA for Software" -ForegroundColor Magenta'
-                Add-Content -Path $PSFilePath "osdcloud-RunHPIA -Category All"
+                Add-Content -Path $PSFilePath "osdcloud-HPIAExecute -Category All"
             }            
             if ($Global:OSDCloud.HPTPMUpdate -eq $true){
                 #Add-Content -Path $PSFilePath 'Write-Host "Updating TPM Firmware" -ForegroundColor Magenta'
-                #Add-Content -Path $PSFilePath "osdcloud-InstallTPMEXE"
+                #Add-Content -Path $PSFilePath "osdcloud-TPMEXEInstall"
             } 
             if ($Global:OSDCloud.HPBIOSUpdate -eq $true){
                 Add-Content -Path $PSFilePath 'Write-Host "Running HP System Firmware" -ForegroundColor Magenta'
-                Add-Content -Path $PSFilePath "osdcloud-UpdateHPBIOS"
+                Add-Content -Path $PSFilePath "osdcloud-HPBIOSUpdate"
             }
             Add-Content -Path $PSFilePath "Stop-Transcript"
             Add-Content -Path $PSFilePath "Restart-Computer -Force"
