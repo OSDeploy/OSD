@@ -1221,7 +1221,7 @@ function Invoke-OSDCloud {
     #Set Specialize JSON
     if (($Global:OSDCloud.HPIAAll -eq $true) -or ($Global:OSDCloud.HPIADrivers -eq $true) -or ($Global:OSDCloud.HPIAFirmware -eq $true) -or ($Global:OSDCloud.HPIASoftware -eq $true) -or ($Global:OSDCloud.HPTPMUpdate -eq $true) -or ($Global:OSDCloud.HPBIOSUpdate -eq $true)){
         $HPFeaturesEnabled = $true
-        Write-Host -ForegroundColor Cyan "Adding HP Tasks into JSON Config File for Action during Specialize" 
+        Write-Host -ForegroundColor Cyan "Adding HP Tasks into JSON Config File for Action during Specialize"
         Write-DarkGrayHost "HPIA Drivers = $($Global:OSDCloud.HPIADrivers) | HPIA Firmware = $($Global:OSDCloud.HPIAFirmware) | HPIA Software = $($Global:OSDCloud.HPIADrivers) | HPIA All = $($Global:OSDCloud.HPIAAll) "
         Write-DarkGrayHost "HP TPM Update = $($Global:OSDCloud.HPTPMUpdate) | HP BIOS Update = $($Global:OSDCloud.HPBIOSUpdate)" 
         $HPHashTable = @{
@@ -1336,6 +1336,15 @@ function Invoke-OSDCloud {
             Add-Content -Path $PSFilePath "Stop-Transcript"
             Add-Content -Path $PSFilePath "Restart-Computer -Force"
         }
+
+        #region Set-OSDCloudUnattendSpecialize
+        Write-SectionHeader "Set Specialize Unattend.xml (Set-OSDCloudUnattendAuditModeHPDevices)"
+        Write-DarkGrayHost "This replaces (includes everything as before, but adds additional options) the standard unattend created by OSDCloudUnattendSpecialize"
+        Write-Verbose -Message "Set-OSDCloudUnattendAuditModeHPDevices"
+        if ($Global:OSDCloud.IsWinPE -eq $true) {
+            Set-OSDCloudUnattendAuditModeHPDevices
+    }
+    #endregion
     }
     #endregion
     #=================================================
