@@ -714,7 +714,7 @@ Function osdcloud-HPIAExecute {
     }
 
 function osdcloud-HPIADownload {
-    Write-Host "Pre-Caching HPIA to Device"  -ForegroundColor Cyan
+    Write-Host "Pre-Caching HPIA to Device"  -ForegroundColor DarkGray
     $null = New-Item –Path "HKLM:\SOFTWARE\Policies\Microsoft" –Name "Internet Explorer" –Force
     $null = New-Item –Path "HKLM:\SOFTWARE\Policies\Microsoft\Internet Explorer" –Name "Main" –Force
     $null = New-ItemProperty –Path "HKLM:\SOFTWARE\Policies\Microsoft\Internet Explorer\Main" –Name "DisableFirstRunCustomize" –PropertyType DWORD –Value 1 –Force
