@@ -114,6 +114,18 @@ function osdcloud-WinpeUpdateDefender {
             throw ($messages.ERR_INVALID_SIGNATURE -f $PackageFile)
         }
     }
+    function Show-Update {
+                # Check if there exists any update already applied.
+                $installedPkgXml = Join-Path -Path "$WorkingDir\Cab" -ChildPath $PackageXml
+                if (!(Test-Path -Path $installedPkgXml)) {
+                    Write-Host ($messages.INFO_NO_UPDATE_IN_IMAGE) -ForegroundColor Yellow
+                } else {
+                    # Get package details to output.
+                    $pkgDetails = Get-PackageDetailsFromXml -XmlPath $installedPkgXml
+                    Write-Host ($messages.INFO_PACKAGE_DETAILS -f $pkgDetails.PackageVersion, $pkgDetails.SignatureVersion, $pkgDetails.EngineVersion, $pkgDetails.CampVersion) -ForegroundColor Yellow
+                }
+
+    }
     function Add-Update([string]$WorkingDir, [string]$Image, [string]$PkgFile)
     {
         # Validate DISM package Code signing information
@@ -235,6 +247,7 @@ function osdcloud-WinpeUpdateDefender {
     if(Test-Path -Path $Dest) {
         Expand-Archive -Path $Dest -DestinationPath "$Intermediate\Extract" -Force
         Add-Update -WorkingDir $WorkingDir -Image $Image -PkgFile $PackageFile
+        Show-Update
     }
     else {Write-Output "Failed Defender Kit Download"}
 }
