@@ -95,6 +95,7 @@ function osdcloud-WinpeUpdateDefender {
     https://support.microsoft.com/en-us/topic/microsoft-defender-update-for-windows-operating-system-installation-images-1c89630b-61ff-00a1-04e2-2d1f3865450d
 
     #>
+    Write-Host "Updating Defender Kit" -ForegroundColor Cyan
     function Get-PackageDetailsFromXml([string]$XmlPath)
     {
         if (!(Test-Path -Path $XmlPath)) {

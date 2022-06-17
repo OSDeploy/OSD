@@ -17,6 +17,7 @@
 function osdcloud-addcmtrace {
     [CmdletBinding()]
     param ()
+    Write-Host "Adding CMTrace to System" -ForegroundColor DarkGray
     $CMTraceURL = "https://github.com/gwblok/garytown/raw/master/OSD/CloudOSD/CMTrace.exe"
     Invoke-WebRequest -UseBasicParsing -Uri $CMTraceURL -OutFile "$env:TEMP\CMTrace.exe"
     if (Test-Path -Path "$env:TEMP\CMTrace.exe"){
@@ -39,11 +40,12 @@ function osdcloud-addserviceui {
 }
 
 function osdcloud-addmouseoobe {
+    Write-Host "Disable Cursor Suppression" -ForegroundColor DarkGray
     #cmd.exe /c reg load HKLM\Offline c:\windows\system32\config\software & cmd.exe /c REG ADD "HKLM\Offline\Microsoft\Windows\CurrentVersion\Policies\System" /v EnableCursorSuppression /t REG_DWORD /d 0 /f & cmd.exe /c reg unload HKLM\Offline
-    Invoke-Exe cmd.exe -Arguments "/c reg load HKLM\Offline c:\windows\system32\config\software"
-    New-ItemProperty -Path HKLM:\Offline\Microsoft\Windows\CurrentVersion\Policies\System -Name EnableCursorSuppression -Value 0 -Force
+    Invoke-Exe cmd.exe -Arguments "/c reg load HKLM\Offline c:\windows\system32\config\software" | out-null
+    New-ItemProperty -Path HKLM:\Offline\Microsoft\Windows\CurrentVersion\Policies\System -Name EnableCursorSuppression -Value 0 -Force | out-null
     #Invoke-Exe cmd.exe -Arguments "/c REG ADD 'HKLM\Offline\Microsoft\Windows\CurrentVersion\Policies\System' /v EnableCursorSuppression /t REG_DWORD /d 0 /f "
-    Invoke-Exe cmd.exe -Arguments "/c reg unload HKLM\Offline"
+    Invoke-Exe cmd.exe -Arguments "/c reg unload HKLM\Offline" | out-null
 }
 
 
