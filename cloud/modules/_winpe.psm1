@@ -128,7 +128,7 @@ function osdcloud-WinpeUpdateDefender {
         }
 
 
-        $mountPoint = "c:\"
+        $mountPoint = $Image
 
         try {
             # Extract Cab
@@ -187,6 +187,7 @@ function osdcloud-WinpeUpdateDefender {
     $WindowsTemp                = "Windows\Temp"
     $PackageXml                 = "package-defender.xml"
     $PackageFile                = "$Intermediate\Extract\defender-dism-x64.cab"
+    $Image                      = "C:\"
     $messages =
     @{
         #error messages
@@ -231,10 +232,8 @@ function osdcloud-WinpeUpdateDefender {
     $wc.DownloadFile($uri, $Dest)
     
     if(Test-Path -Path $Dest) {
-        Expand-Archive -Path $Dest -DestinationPath "$Intermediate\Extract"
-        if (Test-Path "$Intermediate\Extract\DefenderUpdateWinImage.ps1"){
-            & "$Intermediate\Extract\DefenderUpdateWinImage.ps1" -WorkingDirectory $WorkingDir -Action AddUpdate -ImagePath C:\ -Package
-        }
+        Expand-Archive -Path $Dest -DestinationPath "$Intermediate\Extract" -Force
+        Add-Update -WorkingDir $WorkingDir -Image $Image -PkgFile $PackageFile
         else {Write-Output "Failed Defender Kit Extract"}
     }
     else {Write-Output "Failed Defender Kit Download"}
