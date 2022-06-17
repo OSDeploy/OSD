@@ -36,7 +36,7 @@ $DriverPacks = Invoke-RestMethod -Uri $DriverPackCatalog
 
 foreach ($DriverPack in $DriverPacks) {
     try {
-        $null = Invoke-WebRequest -Method Head $DriverPack.Url -ErrorAction Stop
+        $null = Invoke-WebRequest -UseBasicParsing -Method Head $DriverPack.Url -ErrorAction Stop
     }
     catch {
         Write-Host -ForegroundColor Red "FAILED: " -NoNewline

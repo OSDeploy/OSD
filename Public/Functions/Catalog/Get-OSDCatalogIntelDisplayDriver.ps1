@@ -52,7 +52,7 @@ function Get-OSDCatalogIntelDisplayDriver {
             #=================================================
             #   WebRequest
             #=================================================
-            $DriverInfoWebRequest = Invoke-WebRequest -Uri $OSDCatalogItem.DriverInfo -Method Get
+            $DriverInfoWebRequest = Invoke-WebRequest -Uri $OSDCatalogItem.DriverInfo -Method Get -UseBasicParsing
             $DriverInfoWebRequestContent = $DriverInfoWebRequest.Content
 
             $DriverInfoHTML = $DriverInfoWebRequest.ParsedHtml.childNodes | Where-Object {$_.nodename -eq 'HTML'} 
