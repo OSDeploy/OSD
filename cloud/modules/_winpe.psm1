@@ -115,15 +115,15 @@ function osdcloud-WinpeUpdateDefender {
         }
     }
     function Show-Update {
-                # Check if there exists any update already applied.
-                $installedPkgXml = Join-Path -Path "$WorkingDir\Cab" -ChildPath $PackageXml
-                if (!(Test-Path -Path $installedPkgXml)) {
-                    Write-Host ($messages.INFO_NO_UPDATE_IN_IMAGE) -ForegroundColor Yellow
-                } else {
-                    # Get package details to output.
-                    $pkgDetails = Get-PackageDetailsFromXml -XmlPath $installedPkgXml
-                    Write-Host ($messages.INFO_PACKAGE_DETAILS -f $pkgDetails.PackageVersion, $pkgDetails.SignatureVersion, $pkgDetails.EngineVersion, $pkgDetails.CampVersion) -ForegroundColor Yellow
-                }
+        # Check if there exists any update already applied.
+        $installedPkgXml = Join-Path -Path $mountPoint -ChildPath $WindowsTemp | Join-Path -ChildPath $PackageXml
+        if (!(Test-Path -Path $installedPkgXml)) {
+            Write-Host ($messages.INFO_NO_UPDATE_IN_IMAGE) -ForegroundColor Yellow
+        } else {
+            # Get package details to output.
+            $pkgDetails = Get-PackageDetailsFromXml -XmlPath $installedPkgXml
+            Write-Host ($messages.INFO_PACKAGE_DETAILS -f $pkgDetails.PackageVersion, $pkgDetails.SignatureVersion, $pkgDetails.EngineVersion, $pkgDetails.CampVersion) -ForegroundColor Yellow
+        }
 
     }
     function Add-Update([string]$WorkingDir, [string]$Image, [string]$PkgFile)
@@ -159,14 +159,14 @@ function osdcloud-WinpeUpdateDefender {
             $defSrc     = Join-Path -Path $cabContent -ChildPath "Definition Updates\Updates"
             $defTarget  = Join-Path -Path $mountPoint -ChildPath $DefinitionsUpdatesLocation
             if (!(Test-Path -Path $defTarget)) { New-Item -itemtype directory -path $defTarget | Out-Null }
-            Copy-Item -Path "$defSrc\*" -Destination $defTarget -Recurse
+            Copy-Item -Path "$defSrc\*" -Destination $defTarget -Recurse -Force
 
             # Platform updates
             Write-Host ($messages.INFO_UPDATE_CAMP) -ForegroundColor Yellow
             $campSrc    = Join-Path -Path $cabContent -ChildPath "Platform"
             $campTarget = Join-Path -Path $mountPoint -ChildPath $PlatformLocation
             if (!(Test-Path -Path $campTarget)) { New-Item -itemtype directory -path $campTarget | Out-Null }
-            Copy-Item -Path "$campSrc\*" -Destination $campTarget -Recurse
+            Copy-Item -Path "$campSrc\*" -Destination $campTarget -Recurse -Force
 
             $campVersionFolder = Join-Path -Path $cabContent -ChildPath "Platform"
             $campVersionFolder = Get-ChildItem -Path $campVersionFolder -Directory -Name
@@ -174,7 +174,7 @@ function osdcloud-WinpeUpdateDefender {
             # Add Package Xml to Windows\Temp.
             $temp = Join-Path -Path $mountPoint -ChildPath $WindowsTemp
             $pkgXmlPath = Join-Path -Path $cabContent -ChildPath $PackageXml
-            Copy-Item -Path $pkgXmlPath -Destination $temp
+            Copy-Item -Path $pkgXmlPath -Destination $temp -Force
 
             $global:LASTEXITCODE = $S_OK
         } catch {
