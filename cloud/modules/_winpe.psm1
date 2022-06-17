@@ -243,7 +243,7 @@ function osdcloud-WinpeUpdateDefender {
     #Download Defender Kit File
     Write-Output "Starting Defender Kit Download"
     #Invoke-WebRequest -Uri $uri -OutFile $Dest -UseBasicParsing
-    Save-WebFile -SourceUrl $uri -DestinationDirectory $Intermediate -DestinationName 'defender-update-kit-x64.zip'
+    $DefenderDef = Save-WebFile -SourceUrl $uri -DestinationDirectory $Intermediate -DestinationName 'defender-update-kit-x64.zip'
     #$wc.DownloadFile($uri, $Dest)
     
     if(Test-Path -Path $Dest) {
