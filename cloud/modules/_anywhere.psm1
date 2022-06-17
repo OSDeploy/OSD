@@ -56,6 +56,7 @@ function osdcloud-EjectCD {
 
 function osdcloud-UpdateModuleFilesManually {
     #Custom Testing - Overwrites files in module with updated ones in GitHub
+    write-host "Manually Updating Several Module Files directly from GitHub" -ForegroundColor Cyan
     $ModulePath = (Get-ChildItem -Path "$($Env:ProgramFiles)\WindowsPowerShell\Modules\osd" | Where-Object {$_.Attributes -match "Directory"} | select -Last 1).fullname
     write-host "Updating Files in $ModulePath"
     $OSDCloudGUIDevProjectPath = "Projects\OSDCloudDev"

@@ -714,6 +714,7 @@ Function osdcloud-HPIAExecute {
     }
 
 function osdcloud-HPIADownload {
+    Write-Host "Pre-Caching HPIA to Device"  -ForegroundColor Cyan
     $null = New-Item –Path "HKLM:\SOFTWARE\Policies\Microsoft" –Name "Internet Explorer" –Force
     $null = New-Item –Path "HKLM:\SOFTWARE\Policies\Microsoft\Internet Explorer" –Name "Main" –Force
     $null = New-ItemProperty –Path "HKLM:\SOFTWARE\Policies\Microsoft\Internet Explorer\Main" –Name "DisableFirstRunCustomize" –PropertyType DWORD –Value 1 –Force
@@ -725,9 +726,9 @@ function osdcloud-HPIADownload {
     $HPIASoftPaqNumber = ($HTML.Links | Where {$_.href -match "hp-hpia-"}).outerText
     $HPIADownloadURL = ($HTML.Links | Where {$_.href -match "hp-hpia-"}).href
     $HPIAFileName = $HPIADownloadURL.Split('/')[-1]
-    Write-Host "Download URL is $HPIADownloadURL" -ForegroundColor Green
+    Write-Host " Download URL is $HPIADownloadURL" -ForegroundColor DarkGray
     
-    Write-Host "Downloading HPIA" -ForegroundColor Green
+    Write-Host " Downloading HPIA" -ForegroundColor Green
     if (!(Test-Path -Path "$TempWorkFolder\$HPIAFileName")){
         try 
         {
@@ -742,7 +743,7 @@ function osdcloud-HPIADownload {
                 $Progress = [Math]::Round((100 * ($BitsJob.BytesTransferred / $BitsJob.BytesTotal)),2)
             } until ($BitsJob.JobState -in ("Transferred","Error"))
             Complete-BitsTransfer –BitsJob $BitsJob
-            Write-Host "BITS transfer is complete" -ForegroundColor Green
+            Write-Host " BITS transfer is complete" -ForegroundColor DarkGray
         }
         catch 
         {
@@ -751,13 +752,13 @@ function osdcloud-HPIADownload {
             Invoke-WebRequest -UseBasicParsing -uri $HPIADownloadURL -OutFile $TempWorkFolder\$HPIAFileName -ErrorAction Stop
         }
         if (Test-Path -Path "$TempWorkFolder\$HPIAFileName"){
-            Write-Host "HPIA download is complete" -ForegroundColor Green
+            Write-Host " HPIA download is complete" -ForegroundColor DarkGray
         }
-        else {Write-Host "HPIA download failed" -ForegroundColor red}
+        else {Write-Host " HPIA download failed" -ForegroundColor red}
     }
     else
         {
-        Write-Host "$HPIAFileName already downloaded, skipping step" -ForegroundColor Green
+        Write-Host " $HPIAFileName already downloaded, skipping step" -ForegroundColor DarkGray
         }
     }    
 
