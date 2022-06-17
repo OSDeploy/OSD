@@ -116,6 +116,7 @@ function osdcloud-WinpeUpdateDefender {
     }
     function Show-Update {
         # Check if there exists any update already applied.
+        $mountPoint = $Image
         $installedPkgXml = Join-Path -Path $mountPoint -ChildPath $WindowsTemp | Join-Path -ChildPath $PackageXml
         if (!(Test-Path -Path $installedPkgXml)) {
             Write-Host ($messages.INFO_NO_UPDATE_IN_IMAGE) -ForegroundColor Yellow
@@ -241,7 +242,8 @@ function osdcloud-WinpeUpdateDefender {
     
     #Download Defender Kit File
     Write-Output "Starting Defender Kit Download"
-    Invoke-WebRequest -Uri $uri -OutFile $Dest -UseBasicParsing
+    #Invoke-WebRequest -Uri $uri -OutFile $Dest -UseBasicParsing
+    Save-WebFile -SourceUrl $uri -DestinationDirectory $Intermediate -DestinationName 'defender-update-kit-x64.zip'
     #$wc.DownloadFile($uri, $Dest)
     
     if(Test-Path -Path $Dest) {
