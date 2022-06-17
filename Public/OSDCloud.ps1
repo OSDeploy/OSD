@@ -1520,6 +1520,7 @@ exit
         osdcloud-addcmtrace
         osdcloud-addmouseoobe
         osdcloud-UpdateModuleFilesManually
+        osdcloud-WinpeUpdateDefender
     }
     #endregion
     #=================================================

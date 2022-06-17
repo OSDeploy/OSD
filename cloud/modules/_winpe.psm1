@@ -89,6 +89,12 @@ function osdcloud-WinpeSetEnvironmentVariables {
 
 
 function osdcloud-WinpeUpdateDefender {
+    <#
+    Downloads the Defender Offline Update Kit, and applies to the OS.  Functions adopted from the PowerShell File embedded in the zip file: DefenderUpdateWinImage.ps1
+    Orginal Script designed to work with WIM file, I've adopted it to work with Offline OS
+    https://support.microsoft.com/en-us/topic/microsoft-defender-update-for-windows-operating-system-installation-images-1c89630b-61ff-00a1-04e2-2d1f3865450d
+
+    #>
     function Get-PackageDetailsFromXml([string]$XmlPath)
     {
         if (!(Test-Path -Path $XmlPath)) {
@@ -237,14 +243,12 @@ function osdcloud-WinpeUpdateDefender {
     if(!(Test-Path -Path "$WorkingDir")) {
         $Null = New-Item -Path "$Intermediate" -Name "WorkingFolder" -ItemType Directory -Force
     }
-    #$wc = New-Object System.Net.WebClient
-    $Dest = "$Intermediate\" + 'defender-update-kit-x64.zip'
-    
+
     #Download Defender Kit File
     Write-Output "Starting Defender Kit Download"
-    #Invoke-WebRequest -Uri $uri -OutFile $Dest -UseBasicParsing
+
+    $Dest = "$Intermediate\" + 'defender-update-kit-x64.zip'
     $DefenderDef = Save-WebFile -SourceUrl $uri -DestinationDirectory $Intermediate -DestinationName 'defender-update-kit-x64.zip'
-    #$wc.DownloadFile($uri, $Dest)
     
     if(Test-Path -Path $Dest) {
         Expand-Archive -Path $Dest -DestinationPath "$Intermediate\Extract" -Force
