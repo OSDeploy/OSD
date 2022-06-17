@@ -224,12 +224,13 @@ function osdcloud-WinpeUpdateDefender {
     if(!(Test-Path -Path "$WorkingDir")) {
         $Null = New-Item -Path "$Intermediate" -Name "WorkingFolder" -ItemType Directory -Force
     }
-    $wc = New-Object System.Net.WebClient
+    #$wc = New-Object System.Net.WebClient
     $Dest = "$Intermediate\" + 'defender-update-kit-x64.zip'
     
     #Download Defender Kit File
     Write-Output "Starting Defender Kit Download"
-    $wc.DownloadFile($uri, $Dest)
+    Invoke-WebRequest -Uri $uri -OutFile $Dest -UseBasicParsing
+    #$wc.DownloadFile($uri, $Dest)
     
     if(Test-Path -Path $Dest) {
         Expand-Archive -Path $Dest -DestinationPath "$Intermediate\Extract" -Force
