@@ -85,5 +85,28 @@ function osdcloud-WinpeSetEnvironmentVariables {
         [System.Environment]::SetEnvironmentVariable('LOCALAPPDATA',"$Env:UserProfile\AppData\Local",[System.EnvironmentVariableTarget]::Process)
     }
 }
+
+function osdcloud-WinpeUpdateDefender {
+    $uri = "https://go.microsoft.com/fwlink/?linkid=2144531"
+    $Intermediate = "$env:TEMP\DefenderScratchSpace"
+    if(!(Test-Path -Path "$Intermediate")) {
+        $Null = New-Item -Path "$env:TEMP" -Name "DefenderScratchSpace" -ItemType Directory -Force
+    }
+    $wc = New-Object System.Net.WebClient
+    $Dest = "$Intermediate\" + 'defender-update-kit-x64.zip'
+    
+    #Download Defender Kit File
+    Write-Output "Starting Defender Kit Download"
+    $wc.DownloadFile($uri, $Dest)
+    
+    if(Test-Path -Path $Dest) {
+        Expand-Archive -Path $Dest -DestinationPath "$Intermediate\Extract"
+        if (Test-Path "$Intermediate\Extract\DefenderUpdateWinImage.ps1"){
+            & "$Intermediate\Extract\DefenderUpdateWinImage.ps1" -WorkingDirectory $Intermediate -Action AddUpdate -ImagePath C:\ -Package
+        }
+        else {Write-Output "Failed Defender Kit Extract"}
+    }
+    else {Write-Output "Failed Defender Kit Download"}
+}
 #endregion
 #=================================================
