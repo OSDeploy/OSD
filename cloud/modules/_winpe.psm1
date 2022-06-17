@@ -134,7 +134,7 @@ function osdcloud-WinpeUpdateDefender {
             # Extract Cab
             $cabContent = Join-Path -Path $WorkingDir -ChildPath "cab"
             New-Item -itemtype directory -path $cabContent -Force | Out-Null
-            expand $PkgFile -F:* $cabContent
+            $Expand = expand $PkgFile -F:* $cabContent | Out-Null
         } catch {
             Write-Host "Failed to Extract Cab" -ForegroundColor Red
             throw
@@ -234,7 +234,6 @@ function osdcloud-WinpeUpdateDefender {
     if(Test-Path -Path $Dest) {
         Expand-Archive -Path $Dest -DestinationPath "$Intermediate\Extract" -Force
         Add-Update -WorkingDir $WorkingDir -Image $Image -PkgFile $PackageFile
-        else {Write-Output "Failed Defender Kit Extract"}
     }
     else {Write-Output "Failed Defender Kit Download"}
 }
