@@ -6,14 +6,21 @@ function Start-OSDPad {
         [string]$RepoOwner,
         
         [Parameter(ParameterSetName = 'GitHub', Mandatory = $true, Position = 1)]
+        [Parameter(ParameterSetName = 'GitLab', Mandatory = $true, Position = 0)]        
         [Alias('Repository','GitRepo')]
         [string]$RepoName,
         
         [Parameter(ParameterSetName = 'GitHub', Position = 2)]
+        [Parameter(ParameterSetName = 'GitLab', Position = 1)]
         [Alias('GitPath','Folder')]
         [string]$RepoFolder,
         
+        [Parameter(ParameterSetName = 'GitLab', Mandatory = $true)]
+        [Alias('GitLabUri')]
+        [string]$RepoDomain,
+
         [Parameter(ParameterSetName = 'GitHub')]
+        [Parameter(ParameterSetName = 'GitLab')]
         [Alias('OAuthToken')]
         [string]$OAuth,
 
@@ -139,6 +146,105 @@ function Start-OSDPad {
         }
         $Global:OSDPad = $Results
         
+    }
+    #================================================
+    #   GitLab
+    #================================================
+    elseif ($PSCmdlet.ParameterSetName -eq ('GitLab')) {    
+        $RestAPI = "api/v4/projects/$RepoName/repository/tree?path=$RepoFolder&recursive=true"
+        $Uri = "https://$RepoDomain/$RestAPI"       
+        Write-Host -ForegroundColor DarkCyan $Uri
+        
+        $Params = @{
+            Method          = 'GET'
+            Uri             = $Uri
+            UseBasicParsing = $true
+        }
+        IF ($OAuth) { 
+            $Params.add("Headers", @{"PRIVATE-TOKEN" = "$OAuth" }) 
+        }  
+        
+        $GitLabApiContent = @()
+        try {
+            $GitLabApiContent = Invoke-RestMethod @Params -ErrorAction Stop
+        }
+        catch {
+            Write-Warning $_
+            Break
+        }      
+
+        $GitLabApiContent = $GitLabApiContent | Where-Object { ($_.name -like "*.md") -or ($_.name -like "*.ps1") }
+        
+        Write-Host -ForegroundColor DarkGray "========================================================================="
+        $Results = foreach ($Item in $GitLabApiContent) {
+            #$FileContent = Invoke-RestMethod -UseBasicParsing -Uri $Item.git_url
+            if ($Item.type -eq 'tree') {
+                Write-Host -ForegroundColor DarkCyan "Directory: Start-OSDPad $RepoDomain $RepoName $($Item.name)"
+                
+                $ObjectProperties = @{
+                    RepoOwner  = $RepoOwner
+                    RepoName   = $RepoName
+                    RepoFolder = $RepoFolder
+                    Name       = $Item.name
+                    Type       = $Item.type
+                    Guid       = New-Guid
+                    Path       = $Item.path
+                    Size       = $Item.size
+                    SHA        = $Item.sha
+                    Git        = $Item.git_url
+                    Download   = $Item.download_url
+                    ContentRAW = $null
+                    #NodeId         = $FileContent.node_id
+                    #Content        = $FileContent.content
+                    #Encoding       = $FileContent.encoding
+                }
+                #New-Object -TypeName PSObject -Property $ObjectProperties
+            }
+            else {
+                $filePath = [System.Web.HttpUtility]::UrlEncode($Item.path)
+                $RestAPI = "api/v4/projects/$RepoName/repository/files/$filePath/raw?ref=main"
+                $Uri = "https://$RepoDomain/$RestAPI"
+                Write-Host -ForegroundColor DarkGray $Uri
+                
+                $Params = @{
+                    Method          = 'GET'
+                    Uri             = $Uri
+                    UseBasicParsing = $true
+                }
+                IF ($OAuth) { 
+                    $Params.add("Headers", @{"PRIVATE-TOKEN" = "$OAuth" }) 
+                }                
+
+                try {
+                    $ScriptWebRequest = Invoke-RestMethod @Params -ErrorAction Ignore
+                }
+                catch {
+                    Write-Warning $_
+                    $ScriptWebRequest = $null
+                    Continue
+                }
+        
+                $ObjectProperties = @{
+                    #RepoOwner  = $RepoOwner
+                    RepoName   = $RepoName
+                    RepoFolder = $RepoFolder
+                    Name       = $Item.name
+                    Type       = $Item.type
+                    Guid       = $Item.id
+                    Path       = $Item.path
+                    #Size       = $Item.size
+                    #SHA        = $Item.sha
+                    #Git        = $Item.git_url
+                    #Download   = $Item.download_url
+                    ContentRAW = $ScriptWebRequest
+                    #NodeId         = $FileContent.node_id
+                    #Content        = $FileContent.content
+                    #Encoding       = $FileContent.encoding
+                }
+                New-Object -TypeName PSObject -Property $ObjectProperties
+            }
+        }
+        $Global:OSDPad = $Results
     }
     else {
         $Global:OSDPad = $null
