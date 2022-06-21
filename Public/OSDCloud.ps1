@@ -145,6 +145,20 @@ function Invoke-OSDCloud {
         }
     }
     #endregion
+
+
+    #=================================================
+    #region Debug Mode
+    if ($Global:OSDCloud.DebugMode -eq $true){
+        Write-SectionHeader "DebugMode Write OSDCloud Vars"
+        foreach ($Key in $Global:OSDCloud.Keys) {
+            Write-DarkGrayHost  "$($Global:OSDCloud.$Key)"
+        }
+    }
+    #endregion
+    #=================================================
+
+
     #=================================================
     #region Helper Functions
     function Write-DarkGrayDate {
