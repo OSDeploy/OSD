@@ -9,7 +9,7 @@
         RenderTransformOrigin="0.5,0.5"
         ResizeMode="NoResize"
         WindowStartupLocation = "CenterScreen"
-        Title="OSDCloudGUI" Height="580" Width="800">
+        Title="OSDCloudGUI version on Manufacturer Model Product" Height="380" Width="820">
     <Window.Resources>
         <ResourceDictionary>
             <Style TargetType="{x:Type Button}">
@@ -122,6 +122,41 @@
                           Offset="1" />
         </RadialGradientBrush>
     </Window.Background>
+    <DockPanel>
+        <Menu DockPanel.Dock="Top">
+            <MenuItem Header="Deployment Options">
+                <MenuItem Name="ZTI"
+                          Header="Clear-Disk skip confirmation"
+                          IsCheckable="True"
+                          IsChecked="False" />
+                <MenuItem Name="Restart"
+                          Header="Restart-Computer when complete"
+                          IsCheckable="True"
+                          IsChecked="True" />
+                <MenuItem Name="ScreenshotCapture"
+                          Header="Screenshot Capture"
+                          IsCheckable="True"
+                          IsChecked="False" />
+            </MenuItem>
+            <MenuItem Header="Microsoft Update Catalog">
+                <MenuItem Name="MSCatalogDiskDrivers"
+                          Header="Disk Drivers"
+                          IsCheckable="True"
+                          IsChecked="True" />
+                <MenuItem Name="MSCatalogNetDrivers"
+                          Header="Network Drivers"
+                          IsCheckable="True"
+                          IsChecked="True" />
+                <MenuItem Name="MSCatalogScsiDrivers"
+                          Header="SCSIAdapter Drivers"
+                          IsCheckable="True"
+                          IsChecked="True" />
+                <MenuItem Name="MSCatalogFirmware"
+                          Header="System Firmware"
+                          IsCheckable="True"
+                          IsChecked="False" />
+            </MenuItem>
+        </Menu>
     <Grid Margin="10,0,10,10">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
@@ -134,6 +169,7 @@
             <RowDefinition Height="*" />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
+
         <!-- Row 0 Title -->
         <Label Grid.Row="0"
                Name="BrandingTitleControl"
@@ -144,6 +180,7 @@
                Foreground="#003E92"
                HorizontalAlignment="Right"
                VerticalAlignment="Top" />
+
         <!-- Row 1 Gridline -->
         <Line Grid.Row="1"
               X1="0"
@@ -153,6 +190,7 @@
               Stroke="Gainsboro"
               StrokeThickness="1"
               Stretch="Uniform"></Line>
+
         <!-- Row 2 OperatingSystem -->
         <StackPanel Grid.Row="2"
                     HorizontalAlignment="Left"
@@ -173,10 +211,7 @@
                 <ComboBox Name="OperatingSystemCombobox"
                           FontSize="16"
                           Margin="5"
-                          Padding="2"
-                          SelectedIndex="0" >
-                        <ComboBoxItem Content="OSDCloud Windows 10 x64"/>
-                        <ComboBoxItem Content="OSDCloud Windows 11 x64"/>
+                          Padding="2" >
                 </ComboBox>
             </StackPanel>
             <StackPanel Orientation="Horizontal"
@@ -190,10 +225,6 @@
                        Margin="5"
                        Padding="2"
                        Width="155" />
-                <ComboBox Name="OSBuildCombobox"
-                          FontSize="16"
-                          Margin="5"
-                          Padding="2" />
                 <ComboBox Name="OSEditionCombobox"
                           FontSize="16"
                           Margin="5"
@@ -211,7 +242,7 @@
                           Margin="5"
                           Padding="2" />
                 <Label Name="ImageIndexLabel"
-                       Content="ImageIndex"
+                       Content="Index"
                        FontSize="18"
                        FontWeight="Bold"
                        Foreground="#003E92"
@@ -227,6 +258,7 @@
                         VerticalAlignment="Top">
             </StackPanel>
         </StackPanel>
+
         <!-- Row 3 Gridline -->
         <Line Grid.Row="3"
               X1="0"
@@ -237,6 +269,7 @@
               StrokeThickness="1"
               Stretch="Uniform">
         </Line>
+
         <!-- Row 4 Driver Pack -->
         <StackPanel Grid.Row="4"
                     HorizontalAlignment="Left"
@@ -263,19 +296,8 @@
                     <ComboBoxItem Content="Microsoft Update Catalog"/>
                 </ComboBox>
             </StackPanel>
-            <StackPanel HorizontalAlignment="Left"
-                        VerticalAlignment="Top">
-                <CheckBox Name="CatalogFirmwareCheckbox"
-                      BorderBrush="Black"
-                      BorderThickness="2"
-                      FontSize="15"
-                      Foreground="Black"
-                      IsChecked="False"
-                      Padding="5,-2,5,10"
-                      VerticalAlignment="Center"
-                      Margin="170,5,0,0">Update Firmware from Microsoft Update Catalog</CheckBox>
-            </StackPanel>
         </StackPanel>
+
         <!-- Row 5 Gridline -->
         <Line Grid.Row="5"
               X1="0"
@@ -284,14 +306,16 @@
               Y2="0"
               Stroke="Gainsboro"
               StrokeThickness="1"
-              Stretch="Uniform"></Line>
+              Stretch="Uniform">
+        </Line>
+
         <!-- Row 6 Options -->
         <StackPanel Grid.Row="6"
                     Orientation="Horizontal"
                     HorizontalAlignment="Left"
                     VerticalAlignment="Top">
             <Label Name="DeploymentOptionsLabel"
-                   Content="Options"
+                   Content=""
                    FontSize="18"
                    FontWeight="Bold"
                    Foreground="#003E92"
@@ -305,37 +329,11 @@
                     Orientation="Vertical"
                     HorizontalAlignment="Left"
                     VerticalAlignment="Top">
-            <CheckBox Name="ZTICheckbox"
-                      BorderBrush="Crimson"
-                      BorderThickness="2"
-                      FontSize="15"
-                      FontWeight="Bold"
-                      Foreground="Crimson"
-                      Padding="5,-2,5,10"
-                      VerticalAlignment="Center"
-                      Margin="170,10,0,0">Clear-Disk without confirm prompt</CheckBox>
-            <CheckBox Name="RestartCheckbox"
-                      BorderBrush="Black"
-                      BorderThickness="2"
-                      FontSize="15"
-                      Foreground="Black"
-                      IsChecked="True"
-                      Padding="5,-2,5,10"
-                      VerticalAlignment="Center"
-                      Margin="170,0,0,0">Restart Device</CheckBox>
-            <CheckBox Name="ScreenshotCheckbox"
-                      BorderBrush="Black"
-                      BorderThickness="2"
-                      FontSize="15"
-                      Foreground="Black"
-                      Padding="5,-2,5,10"
-                      VerticalAlignment="Center"
-                      Margin="170,0,0,0">Capture Screenshots C:\OSDCloud\ScreenPNG</CheckBox>
             <!-- AutopilotJson -->
             <StackPanel HorizontalAlignment="Left"
                         VerticalAlignment="Center"
                         Orientation="Horizontal"
-                        Margin="0,5,5,0">
+                        Margin="10,5,5,0">
                 <Label Name="AutopilotJsonLabel"
                        Content="Autopilot JSON"
                        FontSize="15"
@@ -355,7 +353,7 @@
             <StackPanel HorizontalAlignment="Left"
                         VerticalAlignment="Center"
                         Orientation="Horizontal"
-                        Margin="0,5,5,0">
+                        Margin="10,5,5,0">
                 <Label Name="OOBEDeployLabel"
                        Content="OOBEDeploy"
                        FontSize="15"
@@ -374,7 +372,7 @@
             <StackPanel HorizontalAlignment="Left"
                         VerticalAlignment="Center"
                         Orientation="Horizontal"
-                        Margin="0,5,5,0">
+                        Margin="10,5,5,0">
                 <Label Name="AutopilotOOBELabel"
                        Content="AutopilotOOBE"
                        FontSize="15"
@@ -390,6 +388,7 @@
                           Padding="2" />
             </StackPanel>
         </StackPanel>
+
         <!-- Row 7 Gridline -->
         <Line Grid.Row="7"
               X1="0"
@@ -399,6 +398,7 @@
               Stroke="Gainsboro"
               StrokeThickness="1"
               Stretch="Uniform"></Line>
+        
         <!-- Row 8 Start -->
         <Button Grid.Row="8"
                 Name="StartButton"
@@ -409,5 +409,6 @@
                 Width="130"
                 HorizontalAlignment="Right"
                 VerticalAlignment="Bottom" />
-    </Grid>
+        </Grid>
+    </DockPanel>
 </Window>

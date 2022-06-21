@@ -1,14 +1,14 @@
 function Save-MsUpCatDriver {
     [CmdletBinding(DefaultParameterSetName = 'ByPNPClass')]
     param (
-        [string]$DestinationDirectory,
+        [System.String]$DestinationDirectory,
 
         [Parameter(ParameterSetName = 'ByHardwareID')]
-        [string[]]$HardwareID,
+        [System.String[]]$HardwareID,
 
         [Parameter(ParameterSetName = 'ByPNPClass')]
-        [ValidateSet('Display','Net','USB')]
-        [string]$PNPClass
+        [ValidateSet('DiskDrive','Display','Net','SCSIAdapter','SecurityDevices','USB')]
+        [System.String]$PNPClass
     )
     #=================================================
     if (!($DestinationDirectory)) {
@@ -43,8 +43,11 @@ function Save-MsUpCatDriver {
             if ($PNPClass -match 'Display') {
                 $Devices = $Devices | Where-Object {($_.Name -match 'Video') -or ($_.PNPClass -match 'Display')}
             }
-            if ($PNPClass -match 'Net') {
+            elseif ($PNPClass -match 'Net') {
                 $Devices = $Devices | Where-Object {($_.Name -match 'Network') -or ($_.PNPClass -match 'Net')}
+            }
+            elseif ($PNPClass) {
+                $Devices = $Devices | Where-Object {$_.PNPClass -match $PNPClass}
             }
 
             foreach ($Item in $Devices) {
@@ -59,8 +62,22 @@ function Save-MsUpCatDriver {
     
                 if ($FindHardwareID) {
                     $SearchString = "$FindHardwareID".Replace('&',"`%26")
-                    $WindowsUpdateDriver = Get-MsUpCat -Search "1903+$SearchString" -Descending | Select-Object LastUpdated,Title,Version,Size,Guid -First 1 -ErrorAction Ignore
-        
+
+                    $WindowsUpdateDriver = Get-MsUpCat -Search "21H2+$PNPClass+$SearchString" -Descending | Select-Object LastUpdated,Title,Version,Size,Guid -First 1 -ErrorAction Ignore
+
+                    if (-not ($WindowsUpdateDriver)) {
+                        $WindowsUpdateDriver = Get-MsUpCat -Search "Vibranium+$PNPClass+$SearchString" -Descending | Select-Object LastUpdated,Title,Version,Size,Guid -First 1 -ErrorAction Ignore
+                    }
+                    if (-not ($WindowsUpdateDriver)) {
+                        $WindowsUpdateDriver = Get-MsUpCat -Search "1903+$PNPClass+$SearchString" -Descending | Select-Object LastUpdated,Title,Version,Size,Guid -First 1 -ErrorAction Ignore
+                    }
+                    if (-not ($WindowsUpdateDriver)) {
+                        $WindowsUpdateDriver = Get-MsUpCat -Search "1809+$PNPClass+$SearchString" -Descending | Select-Object LastUpdated,Title,Version,Size,Guid -First 1 -ErrorAction Ignore
+                    }
+                    if (-not ($WindowsUpdateDriver)) {
+                        $WindowsUpdateDriver = Get-MsUpCat -Search "$SearchString" -Descending | Select-Object LastUpdated,Title,Version,Size,Guid -First 1 -ErrorAction Ignore
+                    }
+
                     if ($WindowsUpdateDriver.Guid) {
                         if ($Item.Name -and $Item.PNPClass) {
                             Write-Host -ForegroundColor Cyan "$($Item.PNPClass) $($Item.Name)"
@@ -80,20 +97,21 @@ function Save-MsUpCatDriver {
                         Write-Host -ForegroundColor DarkGray "UpdateID: $($WindowsUpdateDriver.Guid)"
     
                         if ($DestinationDirectory) {
-                            if ($Item.PNPClass) {
-                                $DestinationPath = Join-Path $DestinationDirectory (Join-Path $Item.PNPClass $WindowsUpdateDriver.Guid)
+                            $DestinationPath = Join-Path $DestinationDirectory $WindowsUpdateDriver.Guid
+
+                            if (Test-Path $DestinationPath) {
+                                Write-Host -ForegroundColor DarkGray "Driver already expanded at $DestinationPath"
                             }
                             else {
-                                $DestinationPath = Join-Path $DestinationDirectory $WindowsUpdateDriver.Guid
-                            }
-                            Write-Host -ForegroundColor DarkGray "DestinationPath: $DestinationPath"
-                            $WindowsUpdateDriverFile = Save-UpdateCatalog -Guid $WindowsUpdateDriver.Guid -DestinationDirectory $DestinationPath
-                            if ($WindowsUpdateDriverFile) {
-                                expand.exe "$($WindowsUpdateDriverFile.FullName)" -F:* "$DestinationPath" | Out-Null
-                                Remove-Item $WindowsUpdateDriverFile.FullName | Out-Null
-                            }
-                            else {
-                                Write-Warning "Save-MsUpCatDriver: Could not find a Driver for this HardwareID"
+                                Write-Host -ForegroundColor DarkGray "Downloading and expanding to $DestinationPath"
+                                $WindowsUpdateDriverFile = Save-UpdateCatalog -Guid $WindowsUpdateDriver.Guid -DestinationDirectory $DestinationPath
+                                if ($WindowsUpdateDriverFile) {
+                                    expand.exe "$($WindowsUpdateDriverFile.FullName)" -F:* "$DestinationPath" | Out-Null
+                                    Remove-Item $WindowsUpdateDriverFile.FullName | Out-Null
+                                }
+                                else {
+                                    Write-Warning "Save-MsUpCatDriver: Could not find a Driver for this HardwareID"
+                                }
                             }
                         }
                     }
@@ -115,7 +133,6 @@ function Save-MsUpCatDriver {
         if ($PSCmdlet.ParameterSetName -eq 'ByHardwareID') {
             foreach ($Item in $HardwareID) {
                 Write-Verbose $Item
-
 
                 $WindowsUpdateDriver = $null
 
@@ -152,14 +169,20 @@ function Save-MsUpCatDriver {
     
                         if ($DestinationDirectory) {
                             $DestinationPath = Join-Path $DestinationDirectory $WindowsUpdateDriver.Guid
-                            $WindowsUpdateDriverFile = Save-UpdateCatalog -Guid $WindowsUpdateDriver.Guid -DestinationDirectory $DestinationPath
-                            if ($WindowsUpdateDriverFile) {
-                                Write-Host -ForegroundColor DarkGray "Complete: $DestinationPath"
-                                expand.exe "$($WindowsUpdateDriverFile.FullName)" -F:* "$DestinationPath" | Out-Null
-                                Remove-Item $WindowsUpdateDriverFile.FullName | Out-Null
+
+                            if (Test-Path $DestinationPath) {
+                                Write-Host -ForegroundColor DarkGray "Driver already expanded at $DestinationPath"
                             }
                             else {
-                                Write-Warning "Save-MsUpCatDriver: Could not find a Driver for this HardwareID"
+                                Write-Host -ForegroundColor DarkGray "Downloading and expanding to $DestinationPath"
+                                $WindowsUpdateDriverFile = Save-UpdateCatalog -Guid $WindowsUpdateDriver.Guid -DestinationDirectory $DestinationPath
+                                if ($WindowsUpdateDriverFile) {
+                                    expand.exe "$($WindowsUpdateDriverFile.FullName)" -F:* "$DestinationPath" | Out-Null
+                                    Remove-Item $WindowsUpdateDriverFile.FullName | Out-Null
+                                }
+                                else {
+                                    Write-Warning "Save-MsUpCatDriver: Could not find a Driver for this HardwareID"
+                                }
                             }
                         }
                     }

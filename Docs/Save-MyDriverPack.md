@@ -14,7 +14,7 @@ schema: 2.0.0
 
 ```
 Save-MyDriverPack [[-DownloadPath] <String>] [-Expand] [[-Manufacturer] <String>] [[-Product] <String>]
- [-Guid <String>] [<CommonParameters>]
+ [[-Guid] <String>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -61,6 +61,21 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
+### -Guid
+{{ Fill Guid Description }}
+
+```yaml
+Type: String
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 3
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
 ### -Manufacturer
 {{ Fill Manufacturer Description }}
 
@@ -86,21 +101,6 @@ Aliases:
 
 Required: False
 Position: 2
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -Guid
-{{ Fill Guid Description }}
-
-```yaml
-Type: String
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: Named
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False

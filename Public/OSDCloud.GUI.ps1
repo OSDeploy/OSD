@@ -35,7 +35,7 @@ function Start-OSDCloudGUI {
     Start-Sleep -Seconds 2
     #================================================
 }
-function Start-HPOSDCloudGUI {
+function Start-OSDCloudGUIDev {
     <#
     .SYNOPSIS
     OSDCloud imaging using the command line
@@ -54,7 +54,7 @@ function Start-HPOSDCloudGUI {
     param (
         #The custom Brand for OSDCloudGUI
         [Alias('BrandingTitle')]
-        [System.String]$Brand = 'HPOSDCloud',
+        [System.String]$Brand = 'OSDCloudDev',
         
         #Color for the OSDCloudGUI Brand
         [Alias('BrandingColor')]
@@ -68,20 +68,20 @@ function Start-HPOSDCloudGUI {
         Color   = $Color
     }
     #================================================
-    & "$($MyInvocation.MyCommand.Module.ModuleBase)\Projects\HPOSDCloudGUI\MainWindow.ps1"
+    & "$($MyInvocation.MyCommand.Module.ModuleBase)\Projects\OSDCloudDev\MainWindow.ps1"
     Start-Sleep -Seconds 2
     #================================================
 }
-function Start-AzOSDCloudGUI {
+function Start-OSDCloudAzure {
     <#
     .SYNOPSIS
-    AzOSDCloudGUI imaging using the command line
+    Start OSDCloud Azure
 
     .DESCRIPTION
-    AzOSDCloudGUI imaging using the command line
+    Start OSDCloud Azure
 
     .EXAMPLE
-    Start-AzOSDCloudGUI
+    Start-OSDCloudAzure
 
     .LINK
     https://github.com/OSDeploy/OSD/tree/master/Docs
@@ -101,22 +101,21 @@ function Start-AzOSDCloudGUI {
 
     if ($Global:AzOSDCloudBlobImage) {
         Write-Host -ForegroundColor DarkGray "========================================================================="
-        Write-Host -ForegroundColor Green "Start-AzOSDCloudGUI"
-        & "$($MyInvocation.MyCommand.Module.ModuleBase)\Projects\AzOSDCloudGUI\MainWindow.ps1"
+        Write-Host -ForegroundColor Green "Start-OSDCloudAzure"
+        & "$($MyInvocation.MyCommand.Module.ModuleBase)\Projects\OSDCloudAzure\MainWindow.ps1"
         Start-Sleep -Seconds 2
 
-        if ($Global:AzOSDCloudImage) {
+        if ($Global:StartOSDCloud.AzOSDCloudImage) {
+            Write-Host -ForegroundColor DarkGray "========================================================================="
+            Write-Host -ForegroundColor Green "Invoke-OSDCloud ... Starting in 5 seconds..."
+            Start-Sleep -Seconds 5
             Invoke-OSDCloud
         }
         else {
-            Write-Warning "Unable to get a Windows Image from Start-AzOSDCloudGUI to handoff to Invoke-OSDCloud"
+            Write-Warning "Unable to get a Windows Image from Start-OSDCloudAzure to handoff to Invoke-OSDCloud"
         }
     }
     else {
-        Invoke-Expression (Invoke-RestMethod azgui.osdcloud.com)
-        #Write-Warning 'Unable to find a WIM on any of the OSDCloud Azure Storage Containers'
-        #Write-Warning 'Make sure you have a WIM Windows Image in the OSDCloud Azure Storage Container'
-        #Write-Warning 'Make sure this user has the Azure Storage Blob Data Reader role to the OSDCloud Container'
-        #Write-Warning 'You may need to execute Get-AzOSDCloudBlobImage then Start-AzOSDCloud'
+        Invoke-Expression (Invoke-RestMethod az.osdcloud.com)
     }
 }

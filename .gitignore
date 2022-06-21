@@ -8,8 +8,10 @@
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs
 
-# Build results
-Projects/OSDCloudGUI/obj/Debug/
+# Build Objects
+Projects/*/bin/
+Projects/*/obj/
+Projects/*/obj/Debug/MainWindow.g.cs
 
 # Visual Studio 2015/2017 cache/options directory
 .vs/
@@ -19,4 +21,3 @@ Projects/OSDCloudGUI/obj/Debug/
 *.[Cc]ache
 # but keep track of directories ending in .cache
 !*.[Cc]ache/
-MainWindow.g.i.cs

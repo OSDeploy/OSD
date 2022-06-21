@@ -1,5 +1,5 @@
 <#PSScriptInfo
-.VERSION 22.5.23.1
+.VERSION 22.6.9.1
 .GUID aa123d2c-3cd3-4ef4-91f0-0c2139473991
 .AUTHOR David Segura @SeguraOSD
 .COMPANYNAME osdcloud.com
@@ -23,7 +23,7 @@ powershell iex (irm azgui.osdcloud.com)
 .DESCRIPTION
     PSCloudScript at azgui.osdcloud.com
 .NOTES
-    Version 22.5.23.1
+    Version 22.6.9.1
 .LINK
     https://raw.githubusercontent.com/OSDeploy/OSD/master/cloud/azgui.osdcloud.com.ps1
 .EXAMPLE
@@ -34,7 +34,7 @@ param()
 #=================================================
 #Script Information
 $ScriptName = 'azgui.osdcloud.com'
-$ScriptVersion = '22.5.23.1'
+$ScriptVersion = '22.6.9.1'
 #TODO: Exclude Windows Images smaller than 3GB
 #=================================================
 #region Initialize
@@ -64,11 +64,11 @@ Invoke-Expression -Command (Invoke-RestMethod -Uri functions.osdcloud.com)
 #region WinPE
 if ($WindowsPhase -eq 'WinPE') {
     osdcloud-StartWinPE -OSDCloud -Azure
-    Connect-AzOSDCloud
-    Get-AzOSDCloudBlobImage
+    Connect-OSDCloudAzure
+    Get-OSDCloudAzureResources
     #Stop the startup Transcript.  OSDCloud will create its own
     $null = Stop-Transcript -ErrorAction Ignore
-    Start-AzOSDCloudGUI
+    Start-OSDCloudAzure
 }
 #endregion
 #=================================================
@@ -87,15 +87,17 @@ if ($WindowsPhase -eq 'AuditMode') {
 #region OOBE
 if ($WindowsPhase -eq 'OOBE') {
     osdcloud-StartOOBE -Display -Language -DateTime -Autopilot -KeyVault
-    Connect-AzOSDCloud
+    Connect-OSDCloudAzure
     $null = Stop-Transcript -ErrorAction Ignore
 }
 #endregion
 #=================================================
 #region Windows
 if ($WindowsPhase -eq 'Windows') {
-    Connect-AzOSDCloud
+    Connect-OSDCloudAzure
+    Get-OSDCloudAzureResources
     $null = Stop-Transcript -ErrorAction Ignore
+    Start-OSDCloudAzure
 }
 #endregion
 #=================================================

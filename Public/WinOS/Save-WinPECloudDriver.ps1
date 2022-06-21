@@ -141,8 +141,8 @@ function Save-WinPECloudDriver {
                                         'MSHW0146' #Battery
                                         'MSHW0153' #HotPlug
                                         'MSHW0184' #Light Sensor
-                                        'VEN_8086&DEV_A0D0 VEN_8086&DEV_43D0 VEN_8086&DEV_A0D1 VEN_8086&DEV_43D1' #Touch
                                         )
+                                        #'VEN_8086&DEV_A0D0 VEN_8086&DEV_43D0 VEN_8086&DEV_A0D1 VEN_8086&DEV_43D1' #Touch
     
     $UsbDongleHwidsText                 = 'USB Dongle Driver Pack [Microsoft Catalog]'
     $UsbDongleHwids                     = @(

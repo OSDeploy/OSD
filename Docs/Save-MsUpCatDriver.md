@@ -73,7 +73,7 @@ Accept wildcard characters: False
 Type: String
 Parameter Sets: ByPNPClass
 Aliases:
-Accepted values: Display, Net, USB
+Accepted values: DiskDrive, Display, Net, SCSIAdapter, SecurityDevices, USB
 
 Required: False
 Position: Named
