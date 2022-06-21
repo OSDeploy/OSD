@@ -2,17 +2,17 @@ function Start-OSDPad {
     [CmdletBinding(DefaultParameterSetName = 'Standalone')]
     param (
         [Parameter(ParameterSetName = 'GitHub', Mandatory = $true, Position = 0)]
-        [Alias('Owner','GitOwner')]
+        [Alias('Owner', 'GitOwner')]
         [string]$RepoOwner,
         
         [Parameter(ParameterSetName = 'GitHub', Mandatory = $true, Position = 1)]
         [Parameter(ParameterSetName = 'GitLab', Mandatory = $true, Position = 0)]        
-        [Alias('Repository','GitRepo')]
+        [Alias('Repository', 'GitRepo')]
         [string]$RepoName,
         
         [Parameter(ParameterSetName = 'GitHub', Position = 2)]
         [Parameter(ParameterSetName = 'GitLab', Position = 1)]
-        [Alias('GitPath','Folder')]
+        [Alias('GitPath', 'Folder')]
         [string]$RepoFolder,
         
         [Parameter(ParameterSetName = 'GitLab', Mandatory = $true)]
@@ -29,7 +29,7 @@ function Start-OSDPad {
         [Alias('BrandingColor')]
         [string]$Color = '#01786A',
         
-        [ValidateSet('Branding','Script')]
+        [ValidateSet('Branding', 'Script')]
         [string[]]$Hide
     )
     #================================================
@@ -37,8 +37,8 @@ function Start-OSDPad {
     #================================================
     $Global:OSDPadBranding = $null
     $Global:OSDPadBranding = @{
-        Title   = $Brand
-        Color   = $Color
+        Title = $Brand
+        Color = $Color
     }
     #================================================
     #   GitHub
@@ -49,9 +49,9 @@ function Start-OSDPad {
 
         if ($OAuth) {
             $Params = @{
-                Headers = @{Authorization = "Bearer $OAuth"}
-                Method = 'GET'
-                Uri = $Uri
+                Headers         = @{Authorization = "Bearer $OAuth" }
+                Method          = 'GET'
+                Uri             = $Uri
                 UseBasicParsing = $true
             }
         }
@@ -61,8 +61,8 @@ function Start-OSDPad {
             Write-Host -ForegroundColor DarkGray "You can create an OAuth Token at https://github.com/settings/tokens"
             Write-Host -ForegroundColor DarkGray 'Use the OAuth parameter to enable OSDPad Child-Item support'
             $Params = @{
-                Method = 'GET'
-                Uri = $Uri
+                Method          = 'GET'
+                Uri             = $Uri
                 UseBasicParsing = $true
             }
         }
@@ -86,7 +86,7 @@ function Start-OSDPad {
         }
 
         #$GitHubApiContent = $GitHubApiContent | Where-Object {$_.type -eq 'file'} | Where-Object {($_.name -match 'README.md') -or ($_.name -like "*.ps1")}
-        $GitHubApiContent = $GitHubApiContent | Where-Object {($_.type -eq 'dir') -or ($_.name -like "*.md") -or ($_.name -like "*.ps1")}
+        $GitHubApiContent = $GitHubApiContent | Where-Object { ($_.type -eq 'dir') -or ($_.name -like "*.md") -or ($_.name -like "*.ps1") }
 
         Write-Host -ForegroundColor DarkGray "========================================================================="
         $Results = foreach ($Item in $GitHubApiContent) {
@@ -95,18 +95,18 @@ function Start-OSDPad {
                 Write-Host -ForegroundColor DarkCyan "Directory: Start-OSDPad $RepoOwner $RepoName $($Item.name)"
                 
                 $ObjectProperties = @{
-                    RepoOwner       = $RepoOwner
-                    RepoName        = $RepoName
-                    RepoFolder      = $RepoFolder
-                    Name            = $Item.name
-                    Type            = $Item.type
-                    Guid            = New-Guid
-                    Path            = $Item.path
-                    Size            = $Item.size
-                    SHA             = $Item.sha
-                    Git             = $Item.git_url
-                    Download        = $Item.download_url
-                    ContentRAW      = $null
+                    RepoOwner  = $RepoOwner
+                    RepoName   = $RepoName
+                    RepoFolder = $RepoFolder
+                    Name       = $Item.name
+                    Type       = $Item.type
+                    Guid       = New-Guid
+                    Path       = $Item.path
+                    Size       = $Item.size
+                    SHA        = $Item.sha
+                    Git        = $Item.git_url
+                    Download   = $Item.download_url
+                    ContentRAW = $null
                     #NodeId         = $FileContent.node_id
                     #Content        = $FileContent.content
                     #Encoding       = $FileContent.encoding
@@ -125,18 +125,19 @@ function Start-OSDPad {
                 }
         
                 $ObjectProperties = @{
-                    RepoOwner       = $RepoOwner
-                    RepoName        = $RepoName
-                    RepoFolder      = $RepoFolder
-                    Name            = $Item.name
-                    Type            = $Item.type
-                    Guid            = New-Guid
-                    Path            = $Item.path
-                    Size            = $Item.size
-                    SHA             = $Item.sha
-                    Git             = $Item.git_url
-                    Download        = $Item.download_url
-                    ContentRAW      = $ScriptWebRequest.Content
+                    RepoType   = 'GitHub'
+                    RepoOwner  = $RepoOwner
+                    RepoName   = $RepoName
+                    RepoFolder = $RepoFolder
+                    Name       = $Item.name
+                    Type       = $Item.type
+                    Guid       = New-Guid
+                    Path       = $Item.path
+                    Size       = $Item.size
+                    SHA        = $Item.sha
+                    Git        = $Item.git_url
+                    Download   = $Item.download_url
+                    ContentRAW = $ScriptWebRequest.Content
                     #NodeId         = $FileContent.node_id
                     #Content        = $FileContent.content
                     #Encoding       = $FileContent.encoding
@@ -225,6 +226,8 @@ function Start-OSDPad {
                 }
         
                 $ObjectProperties = @{
+                    RepoType   = 'GitLab'
+                    RepoDomain = $RepoDomain
                     #RepoOwner  = $RepoOwner
                     RepoName   = $RepoName
                     RepoFolder = $RepoFolder
