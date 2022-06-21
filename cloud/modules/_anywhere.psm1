@@ -11,6 +11,7 @@
     Invoke-Expression (Invoke-RestMethod -Uri 'https://raw.githubusercontent.com/OSDeploy/OSD/master/cloud/modules/_anywhere.psm1')
 #>
 #=================================================
+
 #region Functions
 function osdcloud-InstallPackageManagement {
     [CmdletBinding()]
@@ -51,7 +52,37 @@ function osdcloud-EjectCD {
     [CmdletBinding()]
     param ()   
     (New-Object -ComObject 'Shell.Application').Namespace(17).Items() | Where-Object { $_.Type -eq 'CD Drive' } | ForEach-Object { $_.InvokeVerb('Eject') }
-} 
+}
+
+function osdcloud-UpdateModuleFilesManually {
+    #Custom Testing - Overwrites files in module with updated ones in GitHub
+    write-host "Manually Updating Several Module Files directly from GitHub" -ForegroundColor Cyan
+    $ModulePath = (Get-ChildItem -Path "$($Env:ProgramFiles)\WindowsPowerShell\Modules\osd" | Where-Object {$_.Attributes -match "Directory"} | select -Last 1).fullname
+    write-host "Updating Files in $ModulePath"
+    $OSDCloudGUIDevProjectPath = "Projects\OSDCloudDev"
+    $OSDCloudFunctionsPath = "Public\Functions\OSDCloud"
+    $GitHubURI = "https://raw.githubusercontent.com/OSDeploy/OSD/master"
+    Invoke-WebRequest -UseBasicParsing -uri "$GitHubURI/$OSDCloudGUIDevProjectPath/MainWindow.ps1" -OutFile "$ModulePath/$OSDCloudGUIDevProjectPath/MainWindow.ps1"
+    Invoke-WebRequest -UseBasicParsing -uri "$GitHubURI/$OSDCloudGUIDevProjectPath/MainWindow.xaml" -OutFile "$ModulePath/$OSDCloudGUIDevProjectPath/MainWindow.xaml"
+    Invoke-WebRequest -UseBasicParsing -uri "$GitHubURI/$OSDCloudFunctionsPath/Invoke-OSDSpecialize.ps1" -OutFile "$ModulePath/$OSDCloudFunctionsPath/Invoke-OSDSpecialize.ps1"
+    Invoke-WebRequest -UseBasicParsing -uri "$GitHubURI/$OSDCloudFunctionsPath/Invoke-OSDAuditMode.ps1" -OutFile "$ModulePath/$OSDCloudFunctionsPath/Invoke-OSDAuditMode.ps1"
+    Invoke-WebRequest -UseBasicParsing -uri "$GitHubURI/$OSDCloudFunctionsPath/Set-OSDCloudUnattendAuditModeHPDevices.ps1" -OutFile "$ModulePath/$OSDCloudFunctionsPath/Set-OSDCloudUnattendAuditModeHPDevices.ps1"
+    Invoke-WebRequest -UseBasicParsing -uri "$GitHubURI/Public/OSDCloud.ps1" -OutFile "$ModulePath/Public/OSDCloud.ps1"
+    Invoke-WebRequest -UseBasicParsing -uri "$GitHubURI/OSD.psd1" -OutFile "$ModulePath/OSD.psd1"
+    import-module "$ModulePath/OSD.psd1" -Force
+    if ($WindowsPhase -eq 'WinPE') {
+        if (Test-Path -Path "C:\Program Files\WindowsPowerShell\Modules\osd"){
+            $ModulePath = (Get-ChildItem -Path "C:\Program Files\WindowsPowerShell\Modules\osd" | Where-Object {$_.Attributes -match "Directory"} | select -Last 1).fullname
+            write-host "Updating Files in $ModulePath"
+            Invoke-WebRequest -UseBasicParsing -uri "$GitHubURI/$OSDCloudFunctionsPath/Invoke-OSDSpecialize.ps1" -OutFile "$ModulePath/$OSDCloudFunctionsPath/Invoke-OSDSpecialize.ps1"
+            Invoke-WebRequest -UseBasicParsing -uri "$GitHubURI/$OSDCloudFunctionsPath/Invoke-OSDAuditMode.ps1" -OutFile "$ModulePath/$OSDCloudFunctionsPath/Invoke-OSDAuditMode.ps1"
+            Invoke-WebRequest -UseBasicParsing -uri "$GitHubURI/$OSDCloudFunctionsPath/Set-OSDCloudUnattendAuditModeHPDevices.ps1" -OutFile "$ModulePath/$OSDCloudFunctionsPath/Set-OSDCloudUnattendAuditModeHPDevices.ps1"
+            Invoke-WebRequest -UseBasicParsing -uri "$GitHubURI/OSD.psd1" -OutFile "$ModulePath/OSD.psd1"
+        }
+    }
+    if (Test-HPIASupport -eq $true){Invoke-Expression (Invoke-RestMethod -Uri 'https://raw.githubusercontent.com/OSDeploy/OSD/master/cloud/modules/deviceshp.psm1')}
+}
+    
 function osdcloud-InstallModuleAzAccounts {
     [CmdletBinding()]
     param ()
@@ -288,29 +319,16 @@ function osdcloud-InstallModuleOSD {
     param ()
     $InstallModule = $false
     $PSModuleName = 'OSD'
-    $InstalledModule = Get-InstalledModule $PSModuleName -ErrorAction Ignore | Select-Object -First 1
-    $GalleryPSModule = Find-Module -Name $PSModuleName -ErrorAction Ignore
+    $InstalledModule = Get-Module -Name $PSModuleName -ListAvailable -ErrorAction Ignore | Sort-Object Version -Descending | Select-Object -First 1
+    $GalleryPSModule = Find-Module -Name $PSModuleName -ErrorAction Ignore -WarningAction Ignore
 
-    if ($InstalledModule) {
+    if ($GalleryPSModule) {
         if (($GalleryPSModule.Version -as [version]) -gt ($InstalledModule.Version -as [version])) {
-            $InstallModule = $true
-        }
-    }
-    else {
-        $InstallModule = $true
-    }
-
-    if ($InstallModule) {
-        if ($WindowsPhase -eq 'WinPE') {
-            Write-Host -ForegroundColor DarkGray "Install-Module $PSModuleName $($GalleryPSModule.Version) [AllUsers]"
+            Write-Host -ForegroundColor DarkGray "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) $PSModuleName $($GalleryPSModule.Version) [AllUsers]"
             Install-Module $PSModuleName -Scope AllUsers -Force
-        }
-        else {
-            Write-Host -ForegroundColor DarkGray "Install-Module $PSModuleName $($GalleryPSModule.Version) [AllUsers]"
-            Install-Module $PSModuleName -Scope AllUsers -Force
+            Import-Module $PSModuleName -Force
         }
     }
-    Import-Module $PSModuleName -Force
 }
 function osdcloud-RestartComputer {
     [CmdletBinding()]

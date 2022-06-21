@@ -1,5 +1,5 @@
 <#PSScriptInfo
-.VERSION 22.5.23.1
+.VERSION 22.6.9.1
 .GUID c480a6f6-f482-45af-9ba6-28b2a409101d
 .AUTHOR David Segura @SeguraOSD
 .COMPANYNAME osdeploy.com
@@ -23,7 +23,7 @@ powershell iex (irm go.osdcloud.com/hash)
 .DESCRIPTION
     PSCloudScript at go.osdcloud.com/hash
 .NOTES
-    Version 22.5.23.1
+    Version 22.6.9.1
 .LINK
     https://raw.githubusercontent.com/OSDeploy/OSD/master/cloud/examples/hash.ps1
 .EXAMPLE

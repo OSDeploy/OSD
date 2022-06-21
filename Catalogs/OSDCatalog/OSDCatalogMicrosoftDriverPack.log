@@ -1,13 +1,13 @@
 ﻿**********************
 Windows PowerShell transcript start
-Start time: 20220521230541
+Start time: 20220531132525
 Username: OSDCODE\David
 RunAs User: OSDCODE\David
 Configuration Name: 
 Machine: OSDCODE (Microsoft Windows NT 10.0.22000.0)
 Host Application: C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe -NoProfile -ExecutionPolicy Bypass -Command Import-Module 'c:\Users\David\.vscode\extensions\ms-vscode.powershell-2022.5.1\modules\PowerShellEditorServices\PowerShellEditorServices.psd1'; Start-EditorServices -HostName 'Visual Studio Code Host' -HostProfileId 'Microsoft.VSCode' -HostVersion '2022.5.1' -AdditionalModules @('PowerShellEditorServices.VSCode') -BundledModulesPath 'c:\Users\David\.vscode\extensions\ms-vscode.powershell-2022.5.1\modules' -EnableConsoleRepl -StartupBanner '=====> PowerShell Integrated Console v2022.5.1 <=====
-' -LogLevel 'Normal' -LogPath 'c:\Users\David\.vscode\extensions\ms-vscode.powershell-2022.5.1\logs\1653116965-b3ebfed4-8af5-468e-80ea-e4390a67b4dd1653116962490\EditorServices.log' -SessionDetailsPath 'c:\Users\David\.vscode\extensions\ms-vscode.powershell-2022.5.1\sessions\PSES-VSCode-20280-434106' -FeatureFlags @() 
-Process ID: 13108
+' -LogLevel 'Normal' -LogPath 'c:\Users\David\.vscode\extensions\ms-vscode.powershell-2022.5.1\logs\1654019218-cba9bd6d-0279-49be-bb45-3a641d9cc5dd1654019217188\EditorServices.log' -SessionDetailsPath 'c:\Users\David\.vscode\extensions\ms-vscode.powershell-2022.5.1\sessions\PSES-VSCode-15956-355298' -FeatureFlags @() 
+Process ID: 8396
 PSVersion: 5.1.22000.653
 PSEdition: Desktop
 PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1.22000.653
@@ -19,6 +19,7 @@ SerializationVersion: 1.1.0.1
 **********************
 Transcript started, output file is D:\GitHub\MyModules\OSD\Catalogs\OSDCatalog\OSDCatalogMicrosoftDriverPack.log
 VERBOSE: Build Catalog already created at C:\Users\David\AppData\Local\Temp\OSD\OSDCatalogMicrosoftDriverPack.json
+VERBOSE: Removing previous Build Catalog
 VERBOSE: Test-WebConnection OK: https://support.microsoft.com/en-us/surface/download-drivers-and-firmware-for-surface-09bb2e09-2a4b-cb69-0951-078a7739e120
 VERBOSE: HEAD with 0-byte payload
 VERBOSE: received 0-byte response of content type text/html; charset=utf-8
@@ -130,21 +131,21 @@ VERBOSE: received 1521811456-byte response of content type application/octet-str
 VERBOSE: Processing Surface Book 3 13
 VERBOSE: GET with 0-byte payload
 VERBOSE: received -1-byte response of content type text/html
-VERBOSE: Testing Download File at https://download.microsoft.com/download/6/1/3/6139ef9d-d467-4fc4-94f2-8ebbf705110c/SurfaceBook3_Win10_19041_22.033.31558.0.msi
+VERBOSE: Testing Download File at https://download.microsoft.com/download/6/1/3/6139ef9d-d467-4fc4-94f2-8ebbf705110c/SurfaceBook3_Win10_19041_22.034.40281.0.msi
 VERBOSE: HEAD with 0-byte payload
-VERBOSE: received 1697730560-byte response of content type application/octet-stream
-VERBOSE: Testing Download File at https://download.microsoft.com/download/6/1/3/6139ef9d-d467-4fc4-94f2-8ebbf705110c/SurfaceBook3_Win11_22000_22.042.20166.0.msi
+VERBOSE: received 1697763328-byte response of content type application/octet-stream
+VERBOSE: Testing Download File at https://download.microsoft.com/download/6/1/3/6139ef9d-d467-4fc4-94f2-8ebbf705110c/SurfaceBook3_Win11_22000_22.050.4264.0.msi
 VERBOSE: HEAD with 0-byte payload
-VERBOSE: received 1697824768-byte response of content type application/octet-stream
+VERBOSE: received 1697853440-byte response of content type application/octet-stream
 VERBOSE: Processing Surface Book 3 15
 VERBOSE: GET with 0-byte payload
 VERBOSE: received -1-byte response of content type text/html
-VERBOSE: Testing Download File at https://download.microsoft.com/download/6/1/3/6139ef9d-d467-4fc4-94f2-8ebbf705110c/SurfaceBook3_Win10_19041_22.033.31558.0.msi
+VERBOSE: Testing Download File at https://download.microsoft.com/download/6/1/3/6139ef9d-d467-4fc4-94f2-8ebbf705110c/SurfaceBook3_Win10_19041_22.034.40281.0.msi
 VERBOSE: HEAD with 0-byte payload
-VERBOSE: received 1697730560-byte response of content type application/octet-stream
-VERBOSE: Testing Download File at https://download.microsoft.com/download/6/1/3/6139ef9d-d467-4fc4-94f2-8ebbf705110c/SurfaceBook3_Win11_22000_22.042.20166.0.msi
+VERBOSE: received 1697763328-byte response of content type application/octet-stream
+VERBOSE: Testing Download File at https://download.microsoft.com/download/6/1/3/6139ef9d-d467-4fc4-94f2-8ebbf705110c/SurfaceBook3_Win11_22000_22.050.4264.0.msi
 VERBOSE: HEAD with 0-byte payload
-VERBOSE: received 1697824768-byte response of content type application/octet-stream
+VERBOSE: received 1697853440-byte response of content type application/octet-stream
 VERBOSE: Processing Surface Go Commercial
 VERBOSE: GET with 0-byte payload
 VERBOSE: received -1-byte response of content type text/html
@@ -400,12 +401,12 @@ VERBOSE: received 639029248-byte response of content type application/octet-stre
 VERBOSE: Processing Surface Laptop Studio
 VERBOSE: GET with 0-byte payload
 VERBOSE: received -1-byte response of content type text/html
-VERBOSE: Testing Download File at https://download.microsoft.com/download/b/3/0/b30ecc34-3bab-4c68-a5b3-0d258d73e747/SurfaceLaptopStudio_Win10_19042_22.023.33423.0.msi
+VERBOSE: Testing Download File at https://download.microsoft.com/download/b/3/0/b30ecc34-3bab-4c68-a5b3-0d258d73e747/SurfaceLaptopStudio_Win10_19042_22.052.22843.0.msi
 VERBOSE: HEAD with 0-byte payload
-VERBOSE: received 1624571904-byte response of content type application/octet-stream
-VERBOSE: Testing Download File at https://download.microsoft.com/download/b/3/0/b30ecc34-3bab-4c68-a5b3-0d258d73e747/SurfaceLaptopStudio_Win11_22000_22.034.41310.0.msi
+VERBOSE: received 1715486720-byte response of content type application/octet-stream
+VERBOSE: Testing Download File at https://download.microsoft.com/download/b/3/0/b30ecc34-3bab-4c68-a5b3-0d258d73e747/SurfaceLaptopStudio_Win11_22000_22.052.22842.0.msi
 VERBOSE: HEAD with 0-byte payload
-VERBOSE: received 1624567808-byte response of content type application/octet-stream
+VERBOSE: received 1715486720-byte response of content type application/octet-stream
 VERBOSE: Processing Surface Pro
 VERBOSE: GET with 0-byte payload
 VERBOSE: received -1-byte response of content type text/html
@@ -553,30 +554,30 @@ VERBOSE: received 793047040-byte response of content type application/octet-stre
 VERBOSE: Processing Surface Pro 8
 VERBOSE: GET with 0-byte payload
 VERBOSE: received -1-byte response of content type text/html
-VERBOSE: Testing Download File at https://download.microsoft.com/download/9/1/3/9133dbd3-799a-4766-bb9e-f67697159c02/SurfacePro8_Win10_19042_22.011.9738.0.msi
+VERBOSE: Testing Download File at https://download.microsoft.com/download/9/1/3/9133dbd3-799a-4766-bb9e-f67697159c02/SurfacePro8_Win10_19042_22.041.6912.0.msi
 VERBOSE: HEAD with 0-byte payload
-VERBOSE: received 779796480-byte response of content type application/octet-stream
-VERBOSE: Testing Download File at https://download.microsoft.com/download/9/1/3/9133dbd3-799a-4766-bb9e-f67697159c02/SurfacePro8_Win11_22000_22.011.9739.0.msi
+VERBOSE: received 781365248-byte response of content type application/octet-stream
+VERBOSE: Testing Download File at https://download.microsoft.com/download/9/1/3/9133dbd3-799a-4766-bb9e-f67697159c02/SurfacePro8_Win11_22000_22.041.6912.0.msi
 VERBOSE: HEAD with 0-byte payload
-VERBOSE: received 779796480-byte response of content type application/octet-stream
+VERBOSE: received 781365248-byte response of content type application/octet-stream
 VERBOSE: Processing Surface Pro 8 Consumer
 VERBOSE: GET with 0-byte payload
 VERBOSE: received -1-byte response of content type text/html
-VERBOSE: Testing Download File at https://download.microsoft.com/download/9/1/3/9133dbd3-799a-4766-bb9e-f67697159c02/SurfacePro8_Win10_19042_22.011.9738.0.msi
+VERBOSE: Testing Download File at https://download.microsoft.com/download/9/1/3/9133dbd3-799a-4766-bb9e-f67697159c02/SurfacePro8_Win10_19042_22.041.6912.0.msi
 VERBOSE: HEAD with 0-byte payload
-VERBOSE: received 779796480-byte response of content type application/octet-stream
-VERBOSE: Testing Download File at https://download.microsoft.com/download/9/1/3/9133dbd3-799a-4766-bb9e-f67697159c02/SurfacePro8_Win11_22000_22.011.9739.0.msi
+VERBOSE: received 781365248-byte response of content type application/octet-stream
+VERBOSE: Testing Download File at https://download.microsoft.com/download/9/1/3/9133dbd3-799a-4766-bb9e-f67697159c02/SurfacePro8_Win11_22000_22.041.6912.0.msi
 VERBOSE: HEAD with 0-byte payload
-VERBOSE: received 779796480-byte response of content type application/octet-stream
+VERBOSE: received 781365248-byte response of content type application/octet-stream
 VERBOSE: Processing Surface Pro 8 LTE
 VERBOSE: GET with 0-byte payload
 VERBOSE: received -1-byte response of content type text/html
-VERBOSE: Testing Download File at https://download.microsoft.com/download/9/1/3/9133dbd3-799a-4766-bb9e-f67697159c02/SurfacePro8_Win10_19042_22.011.9738.0.msi
+VERBOSE: Testing Download File at https://download.microsoft.com/download/9/1/3/9133dbd3-799a-4766-bb9e-f67697159c02/SurfacePro8_Win10_19042_22.041.6912.0.msi
 VERBOSE: HEAD with 0-byte payload
-VERBOSE: received 779796480-byte response of content type application/octet-stream
-VERBOSE: Testing Download File at https://download.microsoft.com/download/9/1/3/9133dbd3-799a-4766-bb9e-f67697159c02/SurfacePro8_Win11_22000_22.011.9739.0.msi
+VERBOSE: received 781365248-byte response of content type application/octet-stream
+VERBOSE: Testing Download File at https://download.microsoft.com/download/9/1/3/9133dbd3-799a-4766-bb9e-f67697159c02/SurfacePro8_Win11_22000_22.041.6912.0.msi
 VERBOSE: HEAD with 0-byte payload
-VERBOSE: received 779796480-byte response of content type application/octet-stream
+VERBOSE: received 781365248-byte response of content type application/octet-stream
 VERBOSE: Processing Surface Studio
 VERBOSE: GET with 0-byte payload
 VERBOSE: received -1-byte response of content type text/html
@@ -607,5 +608,5 @@ VERBOSE: received 656039936-byte response of content type application/octet-stre
 VERBOSE: Importing the Build Catalog at C:\Users\David\AppData\Local\Temp\OSD\OSDCatalogMicrosoftDriverPack.json
 **********************
 Windows PowerShell transcript end
-End time: 20220521231357
+End time: 20220531133330
 **********************

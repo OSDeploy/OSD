@@ -1,7 +1,7 @@
 ---
 external help file: OSD-help.xml
 Module Name: OSD
-online version: https://osd.osdeploy.com/module/functions/cim
+online version: https://osd.osdeploy.com
 schema: 2.0.0
 ---
 

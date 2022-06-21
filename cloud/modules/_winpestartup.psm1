@@ -4,20 +4,39 @@
 .DESCRIPTION
     OSDCloud Cloud Module for functions.osdcloud.com
 .NOTES
-    Version 22.5.23.1
+    Version 22.6.9.1
 .LINK
     https://raw.githubusercontent.com/OSDeploy/OSD/master/cloud/modules/_winpestartup.psm1
 .EXAMPLE
     Invoke-Expression (Invoke-RestMethod -Uri 'https://raw.githubusercontent.com/OSDeploy/OSD/master/cloud/modules/_winpestartup.psm1')
 #>
 #=================================================
+$Manufacturer = (Get-CimInstance -Class:Win32_ComputerSystem).Manufacturer
+$Model = (Get-CimInstance -Class:Win32_ComputerSystem).Model
+if ($Manufacturer -match "HP" -or $Manufacturer -match "Hewlett-Packard"){$Manufacturer = "HP"}
+if ($Manufacturer -match "Dell"){$Manufacturer = "Dell"}
+
 #region Functions
+function Test-HPIASupport {
+    $CabPath = "$env:TEMP\platformList.cab"
+    $XMLPath = "$env:TEMP\platformList.xml"
+    $PlatformListCabURL = "https://hpia.hpcloud.hp.com/ref/platformList.cab"
+    Invoke-WebRequest -Uri $PlatformListCabURL -OutFile $CabPath -UseBasicParsing
+    $Expand = expand $CabPath $XMLPath
+    [xml]$XML = Get-Content $XMLPath
+    $Platforms = $XML.ImagePal.Platform.SystemID
+    $MachinePlatform = (Get-CimInstance -Namespace root/cimv2 -ClassName Win32_BaseBoard).Product
+    if ($MachinePlatform -in $Platforms){$HPIASupport = $true}
+    else {$HPIASupport = $false}
+    return $HPIASupport
+    }
+    
 function AzOSD {
     [CmdletBinding()]
     param ()
-    Connect-AzOSDCloud
-    Get-AzOSDCloudBlobImage
-    Start-AzOSDCloud
+    Connect-OSDCloudAzure
+    Get-OSDCloudAzureResources
+    Start-OSDCloudAzure
 }
 function osdcloud-StartWinPE {
     [CmdletBinding()]
@@ -63,6 +82,12 @@ function osdcloud-StartWinPE {
         if ($KeyVault) {
             osdcloud-InstallModuleAzAccounts
             osdcloud-InstallModuleAzKeyVault
+        }
+        if ($Manufacturer -eq "HP") {
+            $HPEnterprise = Test-HPIASupport
+            if ($HPEnterprise -eq $true) {
+                osdcloud-InstallModuleHPCMSL
+            }
         }
     }
     else {
