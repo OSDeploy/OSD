@@ -84,7 +84,7 @@ if ($Global:OSDPad) {
             $ScriptSelectionControl.SelectedValue = $_.Path
         }
         if ($Global:OSDPadBranding.Title -eq 'OSDPad') {
-            switch ($PSCmdlet.ParameterSetName -eq 'GitLab') {
+            switch ($PSCmdlet.ParameterSetName) {
                 'GitHub' {
                     $Global:OSDPadBranding.Title = "github.com/$RepoOwner/$RepoName/"
                 }
