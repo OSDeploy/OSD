@@ -54,7 +54,7 @@ function LoadForm {
 
     # Add WPF and Windows Forms assemblies
     try {
-        Add-Type -AssemblyName PresentationCore,PresentationFramework,WindowsBase,system.windows.forms
+        Add-Type -AssemblyName PresentationCore, PresentationFramework, WindowsBase, system.windows.forms
     } 
     catch {
         throw "Failed to load Windows Presentation Framework assemblies."
@@ -84,7 +84,14 @@ if ($Global:OSDPad) {
             $ScriptSelectionControl.SelectedValue = $_.Path
         }
         if ($Global:OSDPadBranding.Title -eq 'OSDPad') {
-            $Global:OSDPadBranding.Title = "github.com/$RepoOwner/$RepoName/"
+            switch ($PSCmdlet.ParameterSetName -eq 'GitLab') {
+                'GitHub' {
+                    $Global:OSDPadBranding.Title = "github.com/$RepoOwner/$RepoName/"
+                }
+                'GitLab' {
+                    $Global:OSDPadBranding.Title = "$RepoDomain/$RepoName/"
+                }
+            }
         }
     }
 }
@@ -112,7 +119,7 @@ function Set-OSDPadContent {
     }
     else {
         #$BrandingTitleControl.Visibility = "Visible"
-        $Global:WorkingScript = $Global:OSDPad | Where-Object {$_.Path -eq $ScriptSelectionControl.SelectedValue} | Select-Object -First 1
+        $Global:WorkingScript = $Global:OSDPad | Where-Object { $_.Path -eq $ScriptSelectionControl.SelectedValue } | Select-Object -First 1
         Write-Host -ForegroundColor Cyan $Global:WorkingScript.Path
         Write-Host -ForegroundColor DarkGray $Global:WorkingScript.Git
         Write-Host -ForegroundColor DarkGray $Global:WorkingScript.Download
@@ -133,9 +140,9 @@ function Set-OSDPadContent {
         $BrandingTitleControl.Content = $Global:OSDPadBranding.Title
     }
     foreach ($Item in $Hide) {
-        if ($Item -eq 'Branding') {$BrandingTitleControl.Visibility = "Collapsed"}
+        if ($Item -eq 'Branding') { $BrandingTitleControl.Visibility = "Collapsed" }
         if ($Item -eq 'Script') {
-            $Global:XamlWindow.Height="140"
+            $Global:XamlWindow.Height = "140"
             $ScriptTextControl.Visibility = "Collapsed"
         }
     }
@@ -150,45 +157,45 @@ Set-OSDPadContent
     Set-OSDPadContent
 }) #>
 $ScriptSelectionControl.add_SelectionChanged({
-    Set-OSDPadContent
-})
+        Set-OSDPadContent
+    })
 $ScriptTextControl.add_TextChanged({
-    if ($ScriptSelectionControl.SelectedValue -eq 'New PowerShell Script.ps1') {
-        Set-Variable -Name 'New PowerShell Script.ps1' -Value $($ScriptTextControl.Text) -Scope Global -Force
-    }
-    else {
-        Set-Variable -Name $($Global:WorkingScript.Guid) -Value $($ScriptTextControl.Text) -Scope Global -Force
-    }
-})
+        if ($ScriptSelectionControl.SelectedValue -eq 'New PowerShell Script.ps1') {
+            Set-Variable -Name 'New PowerShell Script.ps1' -Value $($ScriptTextControl.Text) -Scope Global -Force
+        }
+        else {
+            Set-Variable -Name $($Global:WorkingScript.Guid) -Value $($ScriptTextControl.Text) -Scope Global -Force
+        }
+    })
 #================================================
 #   GO
 #================================================
 $StartButtonControl.add_Click({
-    Write-Host -ForegroundColor Cyan "Start-Process"
-    $Global:OSDPadScriptBlock = [scriptblock]::Create($ScriptTextControl.Text)
+        Write-Host -ForegroundColor Cyan "Start-Process"
+        $Global:OSDPadScriptBlock = [scriptblock]::Create($ScriptTextControl.Text)
 
-    if ($Global:OSDPadScriptBlock) {
-        if ($ScriptSelectionControl.SelectedValue -eq 'New PowerShell Script.ps1') {
-            $ScriptFile = 'New PowerShell Script.ps1'
-        }
-        else {
-            $ScriptFile = $Global:WorkingScript.Name
-        }
-        if (!(Test-Path "$env:Temp\OSDPad")) {New-Item "$env:Temp\OSDPad" -ItemType Directory}
+        if ($Global:OSDPadScriptBlock) {
+            if ($ScriptSelectionControl.SelectedValue -eq 'New PowerShell Script.ps1') {
+                $ScriptFile = 'New PowerShell Script.ps1'
+            }
+            else {
+                $ScriptFile = $Global:WorkingScript.Name
+            }
+            if (!(Test-Path "$env:Temp\OSDPad")) { New-Item "$env:Temp\OSDPad" -ItemType Directory }
         
-        $ScriptPath = "$env:Temp\OSDPad\$ScriptFile"
-        Write-Host -ForegroundColor DarkGray "Saving contents of `$Global:OSDPadScriptBlock` to $ScriptPath"
-        $Global:OSDPadScriptBlock | Out-File $ScriptPath -Encoding utf8 -Width 2000 -Force
+            $ScriptPath = "$env:Temp\OSDPad\$ScriptFile"
+            Write-Host -ForegroundColor DarkGray "Saving contents of `$Global:OSDPadScriptBlock` to $ScriptPath"
+            $Global:OSDPadScriptBlock | Out-File $ScriptPath -Encoding utf8 -Width 2000 -Force
 
-        #$Global:XamlWindow.Close()
-        #Invoke-Command $Global:OSDPadScriptBlock
-        #Start-Process PowerShell.exe -ArgumentList "-NoExit Invoke-Command -ScriptBlock {$Global:OSDPadScriptBlock}"
+            #$Global:XamlWindow.Close()
+            #Invoke-Command $Global:OSDPadScriptBlock
+            #Start-Process PowerShell.exe -ArgumentList "-NoExit Invoke-Command -ScriptBlock {$Global:OSDPadScriptBlock}"
 
-        Write-Host -ForegroundColor DarkCyan "Start-Process -WorkingDirectory `"$env:Temp\OSDPad`" -FilePath PowerShell.exe -ArgumentList '-NoLogo -NoExit',`"-File `"$ScriptFile`"`""
-        Start-Process -WorkingDirectory "$env:Temp\OSDPad" -FilePath PowerShell.exe -ArgumentList '-NoLogo -NoExit',"-File `"$ScriptFile`""
-    }
-    #Write-Host -ForegroundColor DarkGray "========================================================================="
-})
+            Write-Host -ForegroundColor DarkCyan "Start-Process -WorkingDirectory `"$env:Temp\OSDPad`" -FilePath PowerShell.exe -ArgumentList '-NoLogo -NoExit',`"-File `"$ScriptFile`"`""
+            Start-Process -WorkingDirectory "$env:Temp\OSDPad" -FilePath PowerShell.exe -ArgumentList '-NoLogo -NoExit', "-File `"$ScriptFile`""
+        }
+        #Write-Host -ForegroundColor DarkGray "========================================================================="
+    })
 #================================================
 #   Customizations
 #================================================
