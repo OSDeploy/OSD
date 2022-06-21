@@ -147,16 +147,7 @@ function Invoke-OSDCloud {
     #endregion
 
 
-    #=================================================
-    #region Debug Mode
-    if ($Global:OSDCloud.DebugMode -eq $true){
-        Write-SectionHeader "DebugMode Write OSDCloud Vars"
-        foreach ($Key in $Global:OSDCloud.Keys) {
-            Write-Host -ForegroundColor DarkGray  "$($Global:OSDCloud.$Key)"
-        }
-    }
-    #endregion
-    #=================================================
+
 
 
     #=================================================
@@ -211,6 +202,20 @@ function Invoke-OSDCloud {
         Write-Host -ForegroundColor Green $Message
     }
     #endregion
+
+
+        #=================================================
+    #region Debug Mode
+    if ($Global:OSDCloud.DebugMode -eq $true){
+        Write-SectionHeader "DebugMode Write OSDCloud Vars"
+        foreach ($Key in $Global:OSDCloud.Keys) {
+            Write-Host -ForegroundColor DarkGray  "$($Global:OSDCloud.$Key)"
+        }
+    }
+    #endregion
+    #=================================================
+
+    
     #=================================================
     #region Set Post-Merge Defaults
     $Global:OSDCloud.Version = [Version](Get-Module -Name OSD -ListAvailable | Sort-Object Version -Descending | Select-Object -First 1).Version
