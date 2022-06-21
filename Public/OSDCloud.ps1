@@ -208,7 +208,7 @@ function Invoke-OSDCloud {
     #region Debug Mode
     if ($Global:OSDCloud.DebugMode -eq $true){
         Write-SectionHeader "DebugMode Write OSDCloud Vars"
-        Write-Host -ForegroundColor DarkGray  "$($Global:OSDCloud)"
+        Foreach ($Item in $Global:OSDCloud){write-output $item}
     }
     #endregion
     #=================================================
