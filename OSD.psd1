@@ -10,7 +10,7 @@
     Author                  = 'David Segura . Damien Van Robaeys . Gary Blok . Jérôme Bezet-Torres . Mike Marable . Dean Ellerby . Doug McGee'
     CompanyName             = 'OSD Community'
     Copyright               = '(c) 2022 OSD Community'
-    Description             = 'MVP Edition - The OSD PowerShell Module is a collection of functions and catalogs that make OSDCloud work'
+    Description             = 'Gary Blok MVP Edition - The OSD PowerShell Module is a collection of functions and catalogs that make OSDCloud work'
     PowerShellVersion       = '5.1'
     FormatsToProcess        = @(
         '.\Format\MsUpCat.Format.ps1xml'
