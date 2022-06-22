@@ -8349,7 +8349,7 @@ Original credit to Mike Robbins http://mikefrobbins.com/2018/01/18/use-powershel
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>OSName</maml:name>
           <maml:description>
-            <maml:para>Operating System Name Default = Windows 11 21H2</maml:para>
+            <maml:para>{{ Fill OSName Description }}</maml:para>
           </maml:description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -8451,7 +8451,7 @@ Original credit to Mike Robbins http://mikefrobbins.com/2018/01/18/use-powershel
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
         <maml:name>OSName</maml:name>
         <maml:description>
-          <maml:para>Operating System Name Default = Windows 11 21H2</maml:para>
+          <maml:para>{{ Fill OSName Description }}</maml:para>
         </maml:description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>

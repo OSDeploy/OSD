@@ -12,7 +12,7 @@ Returns a Windows Client Feature Update
 
 ## SYNTAX
 
-### v2 (Default)
+### ByOSName (Default)
 ```
 Get-FeatureUpdate [-OSName <String>] [-OSLicense <String>] [-OSLanguage <String>] [<CommonParameters>]
 ```
@@ -36,12 +36,11 @@ Get-FeatureUpdate
 ## PARAMETERS
 
 ### -OSName
-Operating System Name
-Default = Windows 11 21H2
+{{ Fill OSName Description }}
 
 ```yaml
 Type: String
-Parameter Sets: v2
+Parameter Sets: ByOSName
 Aliases:
 
 Required: False
