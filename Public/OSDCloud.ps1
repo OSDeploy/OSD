@@ -1208,6 +1208,29 @@ function Invoke-OSDCloud {
     #endregion
     
     #=================================================
+    #region HyperV Config for Specialize Phase
+    if (($Global:OSDCloud.DCUInstall -eq $true) -or ($Global:OSDCloud.DCUDrivers -eq $true) -or ($Global:OSDCloud.DCUFirmware -eq $true) -or ($Global:OSDCloud.DCUBIOS -eq $true) -or ($Global:OSDCloud.DCUAutoUpdateEnable -eq $true) -or ($Global:OSDCloud.DellTPMUpdate -eq $true)){
+        $DellFeaturesEnabled = $true
+        Write-Host -ForegroundColor Cyan "Adding HyperV Tasks into JSON Config File for Action during Specialize" 
+        Write-DarkGrayHost "HJyperV Set Computer Name= $($Global:OSDCloud.HyperVSetName)
+
+        $HashTable = @{
+            'Updates' = @{
+                'HyperVSetName' = $Global:OSDCloud.HyperVSetName
+            }
+        }
+        $HashVar = $HashTable | ConvertTo-Json
+        $ConfigPath = "c:\osdcloud\configs"
+        $ConfigFile = "$ConfigPath\HYPERV.JSON"
+        try {[void][System.IO.Directory]::CreateDirectory($ConfigPath)}
+        catch {}
+        $HashVar | Out-File $ConfigFile
+    }
+
+    #endregion
+    
+    
+    #=================================================
     #region Dell Updates Config for Specialize Phase
     if (($Global:OSDCloud.DCUInstall -eq $true) -or ($Global:OSDCloud.DCUDrivers -eq $true) -or ($Global:OSDCloud.DCUFirmware -eq $true) -or ($Global:OSDCloud.DCUBIOS -eq $true) -or ($Global:OSDCloud.DCUAutoUpdateEnable -eq $true) -or ($Global:OSDCloud.DellTPMUpdate -eq $true)){
         $DellFeaturesEnabled = $true
@@ -1224,7 +1247,7 @@ function Invoke-OSDCloud {
                 'DellTPMUpdate' = $Global:OSDCloud.DellTPMUpdate
             }
         }
-        $HashVar = $HPHashTable | ConvertTo-Json
+        $HashVar = $HashTable | ConvertTo-Json
         $ConfigPath = "c:\osdcloud\configs"
         $ConfigFile = "$ConfigPath\DELL.JSON"
         try {[void][System.IO.Directory]::CreateDirectory($ConfigPath)}

@@ -325,7 +325,11 @@ if ($Manufacturer -match "HP" -or $Manufacturer -match "Hewlett-Packard"){
 if ($Manufacturer -match "Dell"){
     $Manufacturer = "Dell"
     $DellEnterprise = Test-DCUSupport 
-
+}    
+if ($Manufacturer -match "Microsoft"){
+    if ($Model -eq "Virtual Machine"){
+        $HyperV = $true
+    } 
 }    
 
 if ($HPEnterprise){
@@ -400,7 +404,17 @@ elseif ($DellEnterprise){
     $formMainWindowControlOption_Name_5.add_Checked({$formMainWindowControlOption_Name_1.IsChecked = $true})
 
 }
-
+elseif ($HyperV){
+    $formMainWindowControlManufacturerFunction.Header = "HyperV Functions"
+    $formMainWindowControlManufacturerFunction.Visibility = 'Visible'    
+    $formMainWindowControlOption_Name_1.Header = "Set PC Name to HyperV VM Name"
+    $formMainWindowControlOption_Name_1.IsChecked = $true
+    $formMainWindowControlOption_Name_2.Visibility = "Hidden"
+    $formMainWindowControlOption_Name_3.Visibility = "Hidden"
+    $formMainWindowControlOption_Name_4.Visibility = "Hidden"
+    $formMainWindowControlOption_Name_5.Visibility = "Hidden"
+    $formMainWindowControlOption_Name_6.Visibility = "Hidden"
+}
 else{
     $formMainWindowControlManufacturerFunction.Visibility = 'Hidden'
     $formMainWindowControlManufacturerFunction.IsEnabled = $false
@@ -841,6 +855,9 @@ $formMainWindowControlStartButton.add_Click({
         $Global:StartOSDCloudGUI.DCUBIOS = $formMainWindowControlOption_Name_4.IsChecked
         $Global:StartOSDCloudGUI.DCUAutoUpdateEnable = $formMainWindowControlOption_Name_5.IsChecked
         $Global:StartOSDCloudGUI.DellTPMUpdate = $formMainWindowControlOption_Name_6.IsChecked
+    }
+    if ($HyperV){
+        $Global:StartOSDCloudGUI.HyperVSetName = $formMainWindowControlOption_Name_1.IsChecked
     }
     #$Global:StartOSDCloudGUI | Out-Host
     if ($formMainWindowControlDebugCheckBox.IsChecked -eq $true){
