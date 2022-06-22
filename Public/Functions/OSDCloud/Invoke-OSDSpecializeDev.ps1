@@ -289,7 +289,8 @@ function Invoke-OSDSpecialize {
                 Write-Host -ForegroundColor DarkGray "========================================================================="
                 Write-Host "Setting Name to $HyperVName" -ForegroundColor Cyan
                 rename-computer -NewName $HyperVName -Force
-            }    
+            } 
+        }
     #=================================================
     #   Specialize ODT
     #=================================================
