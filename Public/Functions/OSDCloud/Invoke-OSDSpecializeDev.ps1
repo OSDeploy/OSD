@@ -201,6 +201,9 @@ function Invoke-OSDSpecialize {
         if ($JSONConfigs.name -contains "Dell.JSON"){
             $DellJSON = Get-Content -Path "$ConfigPath\DELL.JSON" |ConvertFrom-Json
         }
+        if ($JSONConfigs.name -contains "HyperV.JSON"){
+            $HyperVJSON = Get-Content -Path "$ConfigPath\HyperV.JSON" |ConvertFrom-Json
+        }
     }
         if ($HPJson){
             write-host "Specialize Stage - HP Enterprise Devices" -ForegroundColor Green
@@ -278,7 +281,15 @@ function Invoke-OSDSpecialize {
                 start-sleep -Seconds 10
             }    
         }
-
+        if ($HyperVJSON){
+            write-host "Specialize Stage - Microsoft HyperV Devices" -ForegroundColor Green
+            $WarningPreference = "SilentlyContinue"
+            if ($HyperVJSON.Updates.HyperVSetName -eq $true){
+                $HyperVName = Get-ItemPropertyValue -Path 'HKLM:\SOFTWARE\Microsoft\Virtual Machine\Guest\Parameters' -Name "VirtualMachineName" -ErrorAction SilentlyContinue
+                Write-Host -ForegroundColor DarkGray "========================================================================="
+                Write-Host "Setting Name to $HyperVName" -ForegroundColor Cyan
+                rename-computer -NewName $HyperVName -Force
+            }    
     #=================================================
     #   Specialize ODT
     #=================================================
@@ -311,6 +322,7 @@ function Invoke-OSDSpecialize {
     #If not, need to register the device using the Enterprise GroupTag and Assign it
     elseif ($TestAutopilotProfile -eq $false) {
         $AutopilotRegisterCommand = 'Get-WindowsAutopilotInfo -Online -GroupTag Enterprise -Assign'
+        if ($HyperVJSON.Updates.HyperVSetName -eq $true){$AutopilotRegisterCommand = 'Get-WindowsAutopilotInfo -Online -GroupTag Enterprise -Assign -AssignedComputerName $HyperVName'}
         $AutopilotRegisterProcess = osdcloud-AutopilotRegisterCommand -Command $AutopilotRegisterCommand;Start-Sleep -Seconds 30
     }
     #Or maybe we just can't figure it out
