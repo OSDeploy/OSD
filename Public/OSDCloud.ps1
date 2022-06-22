@@ -1209,8 +1209,7 @@ function Invoke-OSDCloud {
     
     #=================================================
     #region HyperV Config for Specialize Phase
-    if (($Global:OSDCloud.DCUInstall -eq $true) -or ($Global:OSDCloud.DCUDrivers -eq $true) -or ($Global:OSDCloud.DCUFirmware -eq $true) -or ($Global:OSDCloud.DCUBIOS -eq $true) -or ($Global:OSDCloud.DCUAutoUpdateEnable -eq $true) -or ($Global:OSDCloud.DellTPMUpdate -eq $true)){
-        $DellFeaturesEnabled = $true
+    if ($Global:OSDCloud.HyperVSetName -eq $true){
         Write-Host -ForegroundColor Cyan "Adding HyperV Tasks into JSON Config File for Action during Specialize" 
         Write-DarkGrayHost "HJyperV Set Computer Name= $($Global:OSDCloud.HyperVSetName)"
 
