@@ -208,7 +208,7 @@ function Invoke-OSDCloud {
     #region Debug Mode
     if ($Global:OSDCloud.DebugMode -eq $true){
         Write-SectionHeader "DebugMode Write OSDCloud Vars"
-        write-output $OSDCloud
+        Write-DarkGrayHost "Writing OSDCloud Variables to $($env:temp)\OSDCloudVars.log"
         $OSDCloud | Out-File $env:temp\OSDCloudVars.log
     }
     #endregion
