@@ -208,7 +208,8 @@ function Invoke-OSDCloud {
     #region Debug Mode
     if ($Global:OSDCloud.DebugMode -eq $true){
         Write-SectionHeader "DebugMode Write OSDCloud Vars"
-        Foreach ($Item in $Global:OSDCloud){write-output $item}
+        write-output $OSDCloud
+        $OSDCloud | Out-File $env:temp\OSDCloudVars.log
     }
     #endregion
     #=================================================
