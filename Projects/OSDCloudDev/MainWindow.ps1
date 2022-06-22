@@ -870,6 +870,9 @@ $formMainWindowControlStartButton.add_Click({
     # Manufacturer Enhancements - END
     #-----------------------------------------
     
+    #Since this is Dev GUI, setting DevMode
+    $Global:StartOSDCloudGUI.DevMode = $true
+
     #$Global:StartOSDCloudGUI | Out-Host
     if ($formMainWindowControlScreenshotCapture.IsChecked) {
         $Params = @{

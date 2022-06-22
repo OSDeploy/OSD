@@ -37,6 +37,7 @@ function Invoke-OSDCloud {
         BuildName = 'OSDCloud'
         ClearDiskConfirm = [bool]$true
         Debug = $false
+        DevMode = $false
         DownloadDirectory = $null
         DownloadName = $null
         DownloadFullName = $null
@@ -1204,6 +1205,9 @@ function Invoke-OSDCloud {
     if ($Global:OSDCloud.IsWinPE -eq $true) {
         Set-OSDCloudUnattendSpecialize
         #Set-OSDxCloudUnattendSpecialize -Verbose
+        if ($Global:OSDCloud.DevMode -eq $true){
+            Set-OSDCloudUnattendSpecializeDev
+        }
     }
     #endregion
     
@@ -1555,7 +1559,7 @@ exit
     }
     #endregion
     #=================================================
-    #region Debug Mode
+    #region Debug & Dev Mode
     if ($Global:OSDCloud.DebugMode -eq $true){
         Write-SectionHeader "DebugMode Enabled"
         Invoke-Expression (Invoke-RestMethod -Uri 'https://raw.githubusercontent.com/OSDeploy/OSD/master/cloud/modules/debugmode.psm1')
@@ -1563,6 +1567,20 @@ exit
         osdcloud-addmouseoobe
         osdcloud-UpdateModuleFilesManually
         osdcloud-WinpeUpdateDefender
+    }
+    if ($Global:OSDCloud.DevMode -eq $true){
+        Write-SectionHeader "DevMode Enabled"
+        if ($Global:OSDCloud.DebugMode -eq $true){
+            osdcloud-UpdateModuleFilesManually -DEVMode $true
+        }
+        else{
+            Invoke-Expression (Invoke-RestMethod -Uri 'https://raw.githubusercontent.com/OSDeploy/OSD/master/cloud/modules/debugmode.psm1')
+            osdcloud-addcmtrace
+            osdcloud-addmouseoobe
+            osdcloud-UpdateModuleFilesManually -DEVMode $true
+            osdcloud-WinpeUpdateDefender
+        }
+
     }
     #endregion
     #=================================================
