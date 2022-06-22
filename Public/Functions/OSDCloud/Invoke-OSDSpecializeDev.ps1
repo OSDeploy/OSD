@@ -300,6 +300,7 @@ function Invoke-OSDSpecialize {
     Invoke-Expression -Command (Invoke-RestMethod -Uri functions.osdcloud.com)
     Invoke-Expression (Invoke-RestMethod -Uri 'https://raw.githubusercontent.com/OSDeploy/OSD/master/cloud/modules/autopilot.psm1')
     Invoke-Expression (Invoke-RestMethod -Uri 'https://raw.githubusercontent.com/OSDeploy/OSD/master/cloud/modules/_winpeoobe.psm1')
+    Invoke-Expression (Invoke-RestMethod -Uri 'https://raw.githubusercontent.com/OSDeploy/OSD/master/cloud/modules/_oobe.psm1')
     #Get Autopilot information from the device
     $TestAutopilotProfile = osdcloud-TestAutopilotProfile
 
