@@ -217,6 +217,7 @@
         'Set-OSDCloudUnattendAuditMode',
         'Set-OSDCloudUnattendAuditModeAutopilot',
         'Set-OSDCloudUnattendSpecialize',
+        'Set-OSDCloudUnattendSpecializeDev',
         'Set-OSDCloudWorkspace',
         'Set-OSDxCloudUnattendSpecialize',
         'Set-WimExecutionPolicy',
