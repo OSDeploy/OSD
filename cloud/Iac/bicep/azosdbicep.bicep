@@ -1,8 +1,8 @@
 @description('Specifies the name of the Azure Storage account.')
-param storageAccountName string ='osdcloudbicepdemo2'
+param storageAccountName string ='azosdcloud'
 
 @description('Specifies the name of the Azure Storage account.')
-param StorageAccuntList string ='osdscripts2'
+param StorageAccuntList string ='azosdscripts'
 
 @description('Specifies the name of the blob for logs container.')
 param containerName string = 'logs'
@@ -60,7 +60,7 @@ resource StorageBlobDataReaderDefinition 'Microsoft.Authorization/roleDefinition
   name: 'b7e6dc6d-f1e8-4753-8033-0f276bb0955b'
 }
 @description('This is the ID for the AzureADAccount who can access.')
-param principalId string = '1618bbc9-bdce-45af-a3bd-a86c224d8094'
+param principalId string = ''
 
 resource AzStorage 'Microsoft.Storage/storageAccounts@2021-06-01' = {
   name: storageAccountName
