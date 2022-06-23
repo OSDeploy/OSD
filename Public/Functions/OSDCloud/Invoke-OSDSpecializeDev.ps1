@@ -316,28 +316,21 @@ function Invoke-OSDSpecializeDev {
     #Get Autopilot information from the device
     $TestAutopilotProfile = osdcloud-TestAutopilotProfile
 
-    function osdcloud-AutopilotRegisterCommandDev {
-        [CmdletBinding()]
-        param (
-            [System.String]
-            $Command = 'Get-WindowsAutopilotInfo -Online -Assign'
-        )
-        Write-Host -ForegroundColor Cyan 'Registering Device in Autopilot in new PowerShell window ' -NoNewline
-        Set-Location -Path 'C:\Program Files\WindowsPowerShell\Scripts'
-        $AutopilotProcess = Start-Process PowerShell.exe -ArgumentList "-Command $Command" -PassThru
-        Write-Host -ForegroundColor Green "(Process Id $($AutopilotProcess.Id))"
-        Return $AutopilotProcess
-    }
-
     #If the device has an Autopilot Profile
     if ($TestAutopilotProfile -eq $true) {
         #osdcloud-ShowAutopilotProfile
     }
     #If not, need to register the device using the Enterprise GroupTag and Assign it
     elseif ($TestAutopilotProfile -eq $false) {
-        $AutopilotRegisterCommand = 'Get-WindowsAutopilotInfo -Online -GroupTag Enterprise -Assign'
-        if ($HyperVJSON.Updates.HyperVSetName -eq $true){$AutopilotRegisterCommand = 'Get-WindowsAutopilotInfo -Online -GroupTag Enterprise -Assign -AssignedComputerName $HyperVName'}
-        $AutopilotRegisterProcess = osdcloud-AutopilotRegisterCommand -Command $AutopilotRegisterCommand;Start-Sleep -Seconds 30
+        Set-Location -Path 'C:\Program Files\WindowsPowerShell\Scripts'
+        if ($HyperVJSON.Updates.HyperVSetName -eq $true){
+            $Command = '.\Get-WindowsAutopilotInfo.ps1 -Online -GroupTag Enterprise -Assign -AssignedComputerName $HyperVName'
+            $AutopilotRegisterProcess = Start-Process PowerShell.exe -ArgumentList "-Command $Command" -PassThru
+            }
+        else {
+            $Command = '.\Get-WindowsAutopilotInfo.ps1 -Online -GroupTag Enterprise -Assign'
+            $AutopilotRegisterProcess = Start-Process PowerShell.exe -ArgumentList "-Command $Command" -PassThru
+        }
     }
     #Or maybe we just can't figure it out
     else {
