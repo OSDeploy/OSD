@@ -201,9 +201,6 @@ function Invoke-OSDSpecializeDev {
         if ($JSONConfigs.name -contains "Dell.JSON"){
             $DellJSON = Get-Content -Path "$ConfigPath\DELL.JSON" |ConvertFrom-Json
         }
-        if ($JSONConfigs.name -contains "HyperV.JSON"){
-            $HyperVJSON = Get-Content -Path "$ConfigPath\HyperV.JSON" |ConvertFrom-Json
-        }
     }
         if ($HPJson){
             write-host "Specialize Stage - HP Enterprise Devices" -ForegroundColor Green
@@ -281,16 +278,7 @@ function Invoke-OSDSpecializeDev {
                 start-sleep -Seconds 10
             }    
         }
-        if ($HyperVJSON){
-            write-host "Specialize Stage - Microsoft HyperV Devices" -ForegroundColor Green
-            $WarningPreference = "SilentlyContinue"
-            if ($HyperVJSON.Updates.HyperVSetName -eq $true){
-                $HyperVName = Get-ItemPropertyValue -Path 'HKLM:\SOFTWARE\Microsoft\Virtual Machine\Guest\Parameters' -Name "VirtualMachineName" -ErrorAction SilentlyContinue
-                Write-Host -ForegroundColor DarkGray "========================================================================="
-                Write-Host "Setting Name to $HyperVName" -ForegroundColor Cyan
-                rename-computer -NewName $HyperVName -Force
-            } 
-        }
+
     #=================================================
     #   Specialize ODT
     #=================================================
@@ -305,45 +293,6 @@ function Invoke-OSDSpecializeDev {
         Write-Verbose "ODT: Enable Telemetry"
         reg add HKCU\Software\Policies\Microsoft\Office\Common\ClientTelemetry /v DisableTelemetry /t REG_DWORD /d 0 /f
     }
-    #=================================================
-    #	Start-IntuneAutoPilotConnection
-    #=================================================
-    #Load OSDCloud Functions
-    Invoke-Expression -Command (Invoke-RestMethod -Uri functions.osdcloud.com)
-    Invoke-Expression (Invoke-RestMethod -Uri 'https://raw.githubusercontent.com/OSDeploy/OSD/master/cloud/modules/autopilot.psm1')
-    Invoke-Expression (Invoke-RestMethod -Uri 'https://raw.githubusercontent.com/OSDeploy/OSD/master/cloud/modules/_winpeoobe.psm1')
-    Invoke-Expression (Invoke-RestMethod -Uri 'https://raw.githubusercontent.com/OSDeploy/OSD/master/cloud/modules/_oobe.psm1')
-    #Get Autopilot information from the device
-    $TestAutopilotProfile = osdcloud-TestAutopilotProfile
-
-    #If the device has an Autopilot Profile
-    if ($TestAutopilotProfile -eq $true) {
-        #osdcloud-ShowAutopilotProfile
-    }
-    #If not, need to register the device using the Enterprise GroupTag and Assign it
-    elseif ($TestAutopilotProfile -eq $false) {
-        Set-Location -Path 'C:\Program Files\WindowsPowerShell\Scripts'
-        if ($HyperVJSON.Updates.HyperVSetName -eq $true){
-            $Command = '.\Get-WindowsAutopilotInfo.ps1 -Online -GroupTag Enterprise -Assign -AssignedComputerName $HyperVName'
-            $AutopilotRegisterProcess = Start-Process PowerShell.exe -ArgumentList "-Command $Command" -PassThru
-            }
-        else {
-            $Command = '.\Get-WindowsAutopilotInfo.ps1 -Online -GroupTag Enterprise -Assign'
-            $AutopilotRegisterProcess = Start-Process PowerShell.exe -ArgumentList "-Command $Command" -PassThru
-        }
-    }
-    #Or maybe we just can't figure it out
-    else {
-        Write-Warning 'Unable to determine if device is Autopilot registered'
-    }
-    if ($AutopilotRegisterProcess) {
-        Write-Host -ForegroundColor Cyan 'Waiting for Autopilot Registration to complete'
-        #$AutopilotRegisterProcess.WaitForExit()
-        if (Get-Process -Id $AutopilotRegisterProcess.Id -ErrorAction Ignore) {
-            Wait-Process -Id $AutopilotRegisterProcess.Id
-        }
-    }
-    
     #=================================================
     #	Stop-Transcript
     #=================================================
