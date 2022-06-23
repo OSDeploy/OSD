@@ -15,7 +15,7 @@ function invoke-AzOSDAzureConfig {
     )
     
     begin {
-
+        Install-azOSDIacTools
         if(   $PSCmdlet.ParameterSetName -eq 'Bicep'){
 
             $global:Connect=Connect-AzAccount
