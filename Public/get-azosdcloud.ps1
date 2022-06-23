@@ -1,8 +1,30 @@
 function get-AzOSDCloud {
     [CmdletBinding()]
     param (
-        
+        [switch]$edit
     )
+    Write-Host "============================================================" -ForegroundColor Gray
+    Write-Host "Initialize OSDCLOUD system $env:COMPUTERNAME" -ForegroundColor Green
+    Write-Host "============================================================" -ForegroundColor Gray
+    write-host ""
+    Write-Host "This function create this folder structure" -ForegroundColor Green
+    write-host ""
+    write-host "├───bicep" -ForegroundColor Cyan
+    write-host "    └───azosdbicep.bicep" -ForegroundColor Cyan
+    write-host "└───terraform" -ForegroundColor Cyan
+    write-host "    └───maint.tf" -ForegroundColor Cyan
+    write-host "    └───provider.tf" -ForegroundColor Cyan
+    write-host "    └───terraform.tfvars" -ForegroundColor Cyan
+    write-host "    └───variables.tf" -ForegroundColor Cyan
+    if ($edit.IsPresent){
+
+        Write-Host "The Folder OSDCloud will be open with Visual Code" -ForegroundColor Green
+   }
+
+
+    Start-Sleep -Seconds 5
+
+
     $Folders = @('bicep', 'terraform')
     $BaseNamefolder = Get-CurrentModuleBase
     if (!(Test-Path c:\OSDcloud)){
@@ -26,7 +48,16 @@ function get-AzOSDCloud {
     Copy-Item -LiteralPath "$BaseNamefolder\cloud\Iac\bicep\$item" -Destination C:\OSDcloud\bicep\$item -force
 
    }
+   if ($edit.IsPresent){
 
-   code C:\OSDcloud
+    try {
+        code C:\OSDCloud
+
+    }
+    catch {
+        Write-Warning "the Program Visual Code isn't available"
+    }
+
+   }
 
 }
