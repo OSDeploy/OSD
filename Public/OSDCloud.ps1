@@ -1203,10 +1203,13 @@ function Invoke-OSDCloud {
     Write-DarkGrayHost "This will enable the extraction and installation of HP, Lenovo, and Microsoft Surface Drivers if necessary"
     Write-Verbose -Message "Set-OSDCloudUnattendSpecialize"
     if ($Global:OSDCloud.IsWinPE -eq $true) {
-        Set-OSDCloudUnattendSpecialize
-        #Set-OSDxCloudUnattendSpecialize -Verbose
         if ($Global:OSDCloud.DevMode -eq $true){
+            Write-DarkGrayHost "Running in DEV Mode, running Set-OSDCloudUnattendSpecializeDEV instead"
             Set-OSDCloudUnattendSpecializeDev
+        }
+        else {
+            Set-OSDCloudUnattendSpecialize
+            #Set-OSDxCloudUnattendSpecialize -Verbose
         }
     }
     #endregion
@@ -1287,34 +1290,11 @@ function Invoke-OSDCloud {
         $HPHashVar | Out-File $ConfigFile
         osdcloud-HPIADownload
         
-        <#
-        #This feature does not work in OSDCloud due to Get-Volume not returning the System Volume, potentail bug with OSDCloud New-Disk Function
-        #Stage Firmware Update for Next Reboot
-        if ($Global:OSDCloud.HPBIOSUpdate -eq $true){
-        Write-Host -ForegroundColor Cyan "Updating HP System Firmware"
-        if (Get-HPBIOSSetupPasswordIsSet){Write-Host -ForegroundColor Red "Device currently has BIOS Setup Password, Please Update BIOS via different method"}
-        else{
-            Write-DarkGrayHost "Current Firmware: $(Get-HPBIOSVersion)"
-            Write-DarkGrayHost "Staging Update: $((Get-HPBIOSUpdates -Latest).ver) "
-            #Details: https://developers.hp.com/hp-client-management/doc/Get-HPBiosUpdates
-            Get-HPBIOSUpdates -Flash -Yes -Offline -BitLocker Ignore
-            }
-        }
-        #>
         #Stage HP TPM Update EXE
         if ($Global:OSDCloud.HPTPMUpdate -eq $true){
             osdcloud-HPTPMBIOSSettings
             osdcloud-HPTPMEXEDownload
         }   
-        <#
-        #This feature is not currently supported in WnePE due to the dependany on Get-HPDevceInfo
-        if (($Global:OSDCloud.HPIADrivers -eq $true) -or ($Global:OSDCloud.HPIAAll -eq $true)){
-            if ($Global:OSDCloud.OSVersion -eq "Windows 10"){$OS = "Win10"}
-            if ($Global:OSDCloud.OSVersion -eq "Windows 11"){$OS = "Win11"}
-            $Release = $Global:OSDCloud.GetFeatureUpdate.UpdateBuild
-            osdcloud-HPIAOfflineSync -Category Driver -OS $OS -Release $Release
-        }
-        #>
 
         #=================================================
         #Leverage SetupComplete.cmd to run HP Tools
@@ -1382,15 +1362,6 @@ function Invoke-OSDCloud {
             Add-Content -Path $PSFilePath "Restart-Computer -Force"
         }
 
-        #region Set-OSDCloudUnattendSpecialize - THIS IDEA FAILED... DON'T DO THIS... Leaving it here as a reminder that this idea was no good.
-        <#
-        Write-SectionHeader "Set Specialize Unattend.xml (Set-OSDCloudUnattendAuditModeHPDevices)"
-        Write-DarkGrayHost "This replaces (includes everything as before, but adds additional options) the standard unattend created by OSDCloudUnattendSpecialize"
-        Write-Verbose -Message "Set-OSDCloudUnattendAuditModeHPDevices"
-        if ($Global:OSDCloud.IsWinPE -eq $true) {
-            Set-OSDCloudUnattendAuditModeHPDevices
-        }
-        #>
     #endregion
     }
     #endregion
