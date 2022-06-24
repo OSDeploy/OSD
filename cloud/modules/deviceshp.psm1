@@ -14,6 +14,8 @@
 #=================================================
 #region Functions
 
+#Some Dependancies on these Functions
+Invoke-Expression (Invoke-RestMethod -Uri 'https://raw.githubusercontent.com/OSDeploy/OSD/master/cloud/modules/_anywhere.psm1')
 
 function osdcloud-addserviceui {
     [CmdletBinding()]
