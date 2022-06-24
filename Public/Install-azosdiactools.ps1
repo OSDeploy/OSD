@@ -5,8 +5,9 @@ function Install-azOSDIacTools {
     )
     
     begin {
+        Block-StandardUser
         Write-Host "============================================================" -ForegroundColor Gray
-        Write-Host "Searching for IacTools on your system $env:COMPUTERNAME" -ForegroundColor Green
+        Write-Host "Searching for #Iac Tools on your system $env:COMPUTERNAME" -ForegroundColor Green
         Write-Host "============================================================" -ForegroundColor Gray
         write-host ""
 
@@ -40,6 +41,7 @@ function Install-azOSDIacTools {
         }
         catch {
             Write-Warning "AzureCli is not installed on your system $env:COMPUTERNAME"
+            Write-Host ""
             $Needinstallazcli = $true
         }
     
@@ -101,7 +103,11 @@ function Install-azOSDIacTools {
     }
     
     end {
-        
+        Write-Host "============================================================" -ForegroundColor Gray
+        Write-Host "End all #Iac Tools are present on your system $env:COMPUTERNAME" -ForegroundColor Green
+        Write-Host "============================================================" -ForegroundColor Gray
+        write-host ""
+
     }
 }
 
