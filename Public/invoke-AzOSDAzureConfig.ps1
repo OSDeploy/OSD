@@ -15,12 +15,15 @@ function invoke-AzOSDAzureConfig {
     )
     
     begin {
+        $initialFolder = Get-Location
+        $OSDCLOUDWorkspace = Set-Location C:\OSDCloud 
+        
         Install-azOSDIacTools
         if(   $PSCmdlet.ParameterSetName -eq 'Bicep'){
 
-            $global:Connect=Connect-AzAccount
+            $global:Connect=Connect-AzAccount -UseDeviceAuthentication  -ErrorAction Stop            
            
-           }
+        }
         elseif ( $PSCmdlet.ParameterSetName -eq 'Terraform') {
             $global:Connect = az login --use-device-code
         }
@@ -73,6 +76,8 @@ function invoke-AzOSDAzureConfig {
         elseif ( $PSCmdlet.ParameterSetName -eq 'Terraform') {
             az logout
         }
+
+        set-location $initialFolder
 
     }
     

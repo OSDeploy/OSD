@@ -5,8 +5,9 @@ function Install-azOSDIacTools {
     )
     
     begin {
+        Block-StandardUser
         Write-Host "============================================================" -ForegroundColor Gray
-        Write-Host "Searching for IacTools on your system $env:COMPUTERNAME" -ForegroundColor Green
+        Write-Host "Searching for #Iac Tools on your system $env:COMPUTERNAME" -ForegroundColor Green
         Write-Host "============================================================" -ForegroundColor Gray
         write-host ""
 
@@ -39,7 +40,8 @@ function Install-azOSDIacTools {
             write-host ""
         }
         catch {
-            Write-Warning "AzureCli is not installed on your system $env:COMPUTERNAME"
+            Write-Warning "Azure Cli is not installed on your system $env:COMPUTERNAME"
+            Write-Host ""
             $Needinstallazcli = $true
         }
     
@@ -74,9 +76,10 @@ function Install-azOSDIacTools {
             $currentPath = (Get-Item -path "HKCU:\Environment" ).GetValue('Path', '', 'DoNotExpandEnvironmentNames')
             if (-not $currentPath.Contains("C:\Program Files (x86)\Microsoft SDKs\Azure\CLI2\wbin")) { setx PATH ($currentPath + "; 'C:\Program Files (x86)\Microsoft SDKs\Azure\CLI2\wbin'") }
             if (-not $env:path.Contains( "C:\Program Files (x86)\Microsoft SDKs\Azure\CLI2\wbin")) { $env:path += "; 'C:\Program Files (x86)\Microsoft SDKs\Azure\CLI2\wbin'" }
+            $resultazcli =  az --version
+            $Azcliversion = $az[0].split(" ")[$az[0].split(" ").count -1]
+            Write-Host "Found Azure Cli on your system $env:COMPUTERNAME with the version $($Azcliversion)" -ForegroundColor Cyan
             write-host ""
-            Write-Warning "You need to restart Powershell session."
-
         }
 
         if ($Needinstallterraform -eq $true) {
@@ -101,7 +104,16 @@ function Install-azOSDIacTools {
     }
     
     end {
-        
+        Write-Host "============================================================" -ForegroundColor Gray
+        Write-Host "Searching PowerShellModule  for #Iac on your system $env:COMPUTERNAME" -ForegroundColor Green
+        Write-Host "============================================================" -ForegroundColor Gray
+        write-host ""
+        Get-AzOSDModules
+        Write-Host "============================================================" -ForegroundColor Gray
+        Write-Host "End all #Iac Tools are present on your system $env:COMPUTERNAME" -ForegroundColor Green
+        Write-Host "============================================================" -ForegroundColor Gray
+        write-host ""
+
     }
 }
 
