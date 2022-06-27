@@ -283,6 +283,164 @@ $localOSDCloudParams["OSLanguage"].Attributes.ValidValues | ForEach-Object {
     $formMainWindowControlOSLanguageCombobox.Items.Add($_) | Out-Null
 }
 #================================================
+#   Manufacturer Enhacements
+#================================================
+function Test-HPIASupport {
+    $CabPath = "$env:TEMP\platformList.cab"
+    $XMLPath = "$env:TEMP\platformList.xml"
+    $PlatformListCabURL = "https://hpia.hpcloud.hp.com/ref/platformList.cab"
+    Invoke-WebRequest -Uri $PlatformListCabURL -OutFile $CabPath -UseBasicParsing
+    $Expand = expand $CabPath $XMLPath
+    [xml]$XML = Get-Content $XMLPath
+    $Platforms = $XML.ImagePal.Platform.SystemID
+    $MachinePlatform = (Get-CimInstance -Namespace root/cimv2 -ClassName Win32_BaseBoard).Product
+    if ($MachinePlatform -in $Platforms){$HPIASupport = $true}
+    else {$HPIASupport = $false}
+    return $HPIASupport
+    }
+
+function Test-DCUSupport {
+    $SystemSKUNumber = (Get-CimInstance -ClassName Win32_ComputerSystem).SystemSKUNumber
+    $CabPathIndex = "$env:temp\DellCabDownloads\CatalogIndexPC.cab"
+    $DellCabExtractPath = "$env:temp\DellCabDownloads\DellCabExtract"
+    # Pull down Dell XML CAB used in Dell Command Update ,extract and Load
+    if (!(Test-Path $DellCabExtractPath)){$newfolder = New-Item -Path $DellCabExtractPath -ItemType Directory -Force}
+    Invoke-WebRequest -Uri "https://downloads.dell.com/catalog/CatalogIndexPC.cab" -OutFile $CabPathIndex -UseBasicParsing -ErrorAction SilentlyContinue
+    New-Item -Path $DellCabExtractPath -ItemType Directory -Force | Out-Null
+    $Expand = expand $CabPathIndex $DellCabExtractPath\CatalogIndexPC.xml
+    [xml]$XMLIndex = Get-Content "$DellCabExtractPath\CatalogIndexPC.xml" -ErrorAction SilentlyContinue
+    #Dig Through Dell XML to find Model of THIS Computer (Based on System SKU)
+    $XMLModel = $XMLIndex.ManifestIndex.GroupManifest | Where-Object {$_.SupportedSystems.Brand.Model.systemID -match $SystemSKUNumber}
+    if ($XMLModel){$DCUSupportedDevice = $true}
+    else {$DCUSupportedDevice = $false}
+    Return $DCUSupportedDevice
+    }
+
+$Manufacturer = (Get-CimInstance -Class:Win32_ComputerSystem).Manufacturer
+$Model = (Get-CimInstance -Class:Win32_ComputerSystem).Model
+if ($Manufacturer -match "HP" -or $Manufacturer -match "Hewlett-Packard"){
+    $Manufacturer = "HP"
+    $HPEnterprise = Test-HPIASupport
+    }
+if ($Manufacturer -match "Dell"){
+    $Manufacturer = "Dell"
+    $DellEnterprise = Test-DCUSupport 
+}    
+if ($Manufacturer -match "Microsoft"){
+    if ($Model -eq "Virtual Machine"){
+        $HyperV = $true
+    } 
+}    
+
+if ($HPEnterprise){
+    $TPM = osdcloud-HPTPMDetermine
+    $BIOS = osdcloud-HPBIOSDetermine
+    $formMainWindowControlManufacturerFunction.Header = "HP Functions"
+    $formMainWindowControlManufacturerFunction.Visibility = 'Visible'
+
+    $formMainWindowControlOption_Name_1.Header = "HPIA Drivers - Adds approx 20 minutes"
+    $formMainWindowControlOption_Name_1.IsChecked = $true 
+    $formMainWindowControlOption_Name_2.Header = "HPIA Firmware - Adds approx 5 minutes"
+    $formMainWindowControlOption_Name_2.IsChecked = $true 
+    $formMainWindowControlOption_Name_3.Header = "HPIA Software - Adds approx 10 minutes"
+    $formMainWindowControlOption_Name_3.IsChecked = $false 
+    $formMainWindowControlOption_Name_4.Header = "HPIA All Options - Adds approx 25 minutes"
+    $formMainWindowControlOption_Name_4.IsChecked = $false 
+    if ($TPM -eq $false){
+        $formMainWindowControlOption_Name_5.Header = "HP TPM Firmware Already Current"
+        $formMainWindowControlOption_Name_5.IsEnabled = $false
+        }
+    else
+        {
+        $formMainWindowControlOption_Name_5.Visibility = 'Visible'
+        $formMainWindowControlOption_Name_5.Header = "HP Update TPM Firmware: $TPM - Requires Interaction"
+        }
+    if ($BIOS -eq $false){
+        $CurrentVer = Get-HPBIOSVersion
+        $formMainWindowControlOption_Name_6.Header = "HP System Firmware already Current: $CurrentVer"
+        $formMainWindowControlOption_Name_6.IsEnabled = $false
+        }
+    else
+        {
+        $LatestVer = (Get-HPBIOSUpdates -Latest).ver
+        $CurrentVer = Get-HPBIOSVersion
+        $formMainWindowControlOption_Name_6.Visibility = 'Visible'
+        $formMainWindowControlOption_Name_6.Header = "HP Update System Firmwware from $CurrentVer to $LatestVer"
+        }
+    # When HPIA All is selected, unselect Firmware & Software
+    
+    #If HPIA All is selected, deselect other options
+    $formMainWindowControlOption_Name_4.add_Checked({$formMainWindowControlOption_Name_1.IsChecked = $false})
+    $formMainWindowControlOption_Name_4.add_Checked({$formMainWindowControlOption_Name_2.IsChecked = $false})
+    $formMainWindowControlOption_Name_4.add_Checked({$formMainWindowControlOption_Name_3.IsChecked = $false})
+    #If other options are selected, make sure HPIAAll is NOT selected
+    $formMainWindowControlOption_Name_1.add_Checked({$formMainWindowControlOption_Name_4.IsChecked = $false})
+    $formMainWindowControlOption_Name_2.add_Checked({$formMainWindowControlOption_Name_4.IsChecked = $false})
+    $formMainWindowControlOption_Name_3.add_Checked({$formMainWindowControlOption_Name_4.IsChecked = $false})
+
+    }
+<#
+elseif ($DellEnterprise){
+    $formMainWindowControlManufacturerFunction.Header = "Dell Functions"
+    $formMainWindowControlManufacturerFunction.Visibility = 'Visible'
+
+    $formMainWindowControlOption_Name_1.Header = "Dell Command Update"
+    $formMainWindowControlOption_Name_1.IsChecked = $true 
+    $formMainWindowControlOption_Name_2.Header = "DCU Drivers"
+    $formMainWindowControlOption_Name_2.IsChecked = $false
+    $formMainWindowControlOption_Name_3.Header = "DCU Firmware"
+    $formMainWindowControlOption_Name_3.IsChecked = $false
+    $formMainWindowControlOption_Name_4.Header = "DCU BIOS"
+    $formMainWindowControlOption_Name_4.IsChecked = $false
+    $formMainWindowControlOption_Name_5.Header = "DCU Enable Auto Updates"
+    $formMainWindowControlOption_Name_5.IsChecked = $false
+    $formMainWindowControlOption_Name_6.Header = "Dell TPM Update"
+    $formMainWindowControlOption_Name_6.IsChecked = $false
+    $formMainWindowControlOption_Name_6.Visibility = "Hidden"
+
+    $formMainWindowControlOption_Name_2.add_Checked({$formMainWindowControlOption_Name_1.IsChecked = $true})
+    $formMainWindowControlOption_Name_3.add_Checked({$formMainWindowControlOption_Name_1.IsChecked = $true})
+    $formMainWindowControlOption_Name_4.add_Checked({$formMainWindowControlOption_Name_1.IsChecked = $true})
+    $formMainWindowControlOption_Name_5.add_Checked({$formMainWindowControlOption_Name_1.IsChecked = $true})
+
+}
+elseif ($HyperV){
+    $formMainWindowControlManufacturerFunction.Header = "HyperV Functions"
+    $formMainWindowControlManufacturerFunction.Visibility = 'Visible'    
+    $formMainWindowControlOption_Name_1.Header = "Set PC Name to HyperV VM Name"
+    $formMainWindowControlOption_Name_1.IsChecked = $true
+    $formMainWindowControlOption_Name_2.Visibility = "Hidden"
+    $formMainWindowControlOption_Name_3.Visibility = "Hidden"
+    $formMainWindowControlOption_Name_4.Visibility = "Hidden"
+    $formMainWindowControlOption_Name_5.Visibility = "Hidden"
+    $formMainWindowControlOption_Name_6.Visibility = "Hidden"
+}
+#>
+else{
+    $formMainWindowControlManufacturerFunction.Visibility = 'Hidden'
+    $formMainWindowControlManufacturerFunction.IsEnabled = $false
+    $formMainWindowControlOption_Name_1.IsChecked = $false
+    #$formMainWindowControlOption_Name_1.IsEnabled = $false 
+    #$formMainWindowControlOption_Name_1.Visibility = "Hidden"
+    $formMainWindowControlOption_Name_2.IsChecked = $false
+    #$formMainWindowControlOption_Name_2.IsEnabled = $false 
+    #$formMainWindowControlOption_Name_2.Visibility = "Hidden"
+    $formMainWindowControlOption_Name_3.IsChecked = $false
+    #$formMainWindowControlOption_Name_3.IsEnabled = $false 
+    #$formMainWindowControlOption_Name_3.Visibility = "Hidden"
+    $formMainWindowControlOption_Name_4.IsChecked = $false
+    #$formMainWindowControlOption_Name_4.IsEnabled = $false 
+    #$formMainWindowControlOption_Name_4.Visibility = "Hidden"
+    $formMainWindowControlOption_Name_5.IsChecked = $false
+    #$formMainWindowControlOption_Name_5.IsEnabled = $false 
+    #$formMainWindowControlOption_Name_5.Visibility = "Hidden"
+    $formMainWindowControlOption_Name_6.IsChecked = $false
+    #$formMainWindowControlOption_Name_6.IsEnabled = $false 
+    #$formMainWindowControlOption_Name_6.Visibility = "Hidden"
+}
+
+
+#================================================
 #   DriverPack
 #================================================
 $DriverPack = Get-OSDCloudDriverPack
@@ -669,6 +827,42 @@ $formMainWindowControlStartButton.add_Click({
         SkipOOBEDeploy              = $SkipOOBEDeploy
         ZTI                         = $formMainWindowControlZTI.IsChecked
     }
+    #-----------------------------------------
+    # Manufacturer Enhancements - START
+    #-----------------------------------------
+    if ($HPEnterprise){
+        $Global:StartOSDCloudGUI.HPIADrivers = $formMainWindowControlOption_Name_1.IsChecked
+        $Global:StartOSDCloudGUI.HPIAFirmware = $formMainWindowControlOption_Name_2.IsChecked
+        $Global:StartOSDCloudGUI.HPIASoftware = $formMainWindowControlOption_Name_3.IsChecked
+        $Global:StartOSDCloudGUI.HPIAAll = $formMainWindowControlOption_Name_4.IsChecked
+        $Global:StartOSDCloudGUI.HPTPMUpdate = $formMainWindowControlOption_Name_5.IsChecked
+        $Global:StartOSDCloudGUI.HPBIOSUpdate = $formMainWindowControlOption_Name_6.IsChecked
+    }
+    
+    if ($DellEnterprise){
+        $Global:StartOSDCloudGUI.DCUInstall = $formMainWindowControlOption_Name_1.IsChecked
+        $Global:StartOSDCloudGUI.DCUDrivers = $formMainWindowControlOption_Name_2.IsChecked
+        $Global:StartOSDCloudGUI.DCUFirmware = $formMainWindowControlOption_Name_3.IsChecked
+        $Global:StartOSDCloudGUI.DCUBIOS = $formMainWindowControlOption_Name_4.IsChecked
+        $Global:StartOSDCloudGUI.DCUAutoUpdateEnable = $formMainWindowControlOption_Name_5.IsChecked
+        $Global:StartOSDCloudGUI.DellTPMUpdate = $formMainWindowControlOption_Name_6.IsChecked
+    }
+    if ($HyperV){
+        $Global:StartOSDCloudGUI.HyperVSetName = $formMainWindowControlOption_Name_1.IsChecked
+    }
+    <#
+    #$Global:StartOSDCloudGUI | Out-Host
+    if ($formMainWindowControlDebugCheckBox.IsChecked -eq $true){
+        Invoke-Expression (Invoke-RestMethod -Uri 'https://raw.githubusercontent.com/OSDeploy/OSD/master/cloud/modules/debugmode.psm1')
+        osdcloud-addcmtrace
+        #$Global:StartOSDCloudGUI.restart = $false
+        #$Global:StartOSDCloudGUI.ClearDiskConfirm = $false
+    }
+    #>
+    #-----------------------------------------
+    # Manufacturer Enhancements - END
+    #-----------------------------------------
+    
     #$Global:StartOSDCloudGUI | Out-Host
     if ($formMainWindowControlScreenshotCapture.IsChecked) {
         $Params = @{

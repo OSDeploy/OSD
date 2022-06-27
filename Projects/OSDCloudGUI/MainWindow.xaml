@@ -156,6 +156,32 @@
                           IsCheckable="True"
                           IsChecked="False" />
             </MenuItem>
+            <MenuItem x:Name="ManufacturerFunction" Header="Manufacturer Functions">
+                <MenuItem x:Name="Option_Name_1"
+                    Header="Option_Header_1"
+                    IsCheckable="True"
+                    IsChecked="False" />
+                <MenuItem x:Name="Option_Name_2"
+                    Header="Option_Header_1"
+                    IsCheckable="True"
+                    IsChecked="False" />
+                <MenuItem x:Name="Option_Name_3"
+                    Header="Option_Header_3"
+                    IsCheckable="True"
+                    IsChecked="False" />
+                <MenuItem x:Name="Option_Name_4"
+                    Header="Option_Header_4"
+                    IsCheckable="True"
+                    IsChecked="False" />
+                <MenuItem x:Name="Option_Name_5"
+                    Header="Option_Header_5"
+                    IsCheckable="True"
+                    IsChecked="False" />
+                <MenuItem x:Name="Option_Name_6"
+                    Header="Option_Header_6"
+                    IsCheckable="True"
+                    IsChecked="False" />
+            </MenuItem>
         </Menu>
     <Grid Margin="10,0,10,10">
         <Grid.RowDefinitions>
