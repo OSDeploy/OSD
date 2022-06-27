@@ -104,6 +104,11 @@ function Install-azOSDIacTools {
     
     end {
         Write-Host "============================================================" -ForegroundColor Gray
+        Write-Host "Searching PowerShellModule  for #Iac on your system $env:COMPUTERNAME" -ForegroundColor Green
+        Write-Host "============================================================" -ForegroundColor Gray
+        write-host ""
+        Get-AzOSDModules
+        Write-Host "============================================================" -ForegroundColor Gray
         Write-Host "End all #Iac Tools are present on your system $env:COMPUTERNAME" -ForegroundColor Green
         Write-Host "============================================================" -ForegroundColor Gray
         write-host ""
