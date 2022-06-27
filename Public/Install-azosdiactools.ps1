@@ -40,7 +40,7 @@ function Install-azOSDIacTools {
             write-host ""
         }
         catch {
-            Write-Warning "AzureCli is not installed on your system $env:COMPUTERNAME"
+            Write-Warning "Azure Cli is not installed on your system $env:COMPUTERNAME"
             Write-Host ""
             $Needinstallazcli = $true
         }
