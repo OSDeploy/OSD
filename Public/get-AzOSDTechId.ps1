@@ -37,7 +37,6 @@ function get-azOSDTechId {
             $Global:AzContext = Get-AzContext
         }
         }
-    }
     
     process {
        $AzOSDUser = Get-AzADUser -StartsWith $AzureAdUserName | select-object -Property DisplayName,Id
