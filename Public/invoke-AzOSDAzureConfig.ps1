@@ -15,6 +15,9 @@ function invoke-AzOSDAzureConfig {
     )
     
     begin {
+        $initialFolder = Get-Location
+        $OSDCLOUDWorkspace = Set-Location C:\OSDCloud 
+        
         Install-azOSDIacTools
         if(   $PSCmdlet.ParameterSetName -eq 'Bicep'){
 
@@ -73,6 +76,8 @@ function invoke-AzOSDAzureConfig {
         elseif ( $PSCmdlet.ParameterSetName -eq 'Terraform') {
             az logout
         }
+
+        set-location $initialFolder
 
     }
     
