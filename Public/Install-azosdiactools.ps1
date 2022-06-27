@@ -76,9 +76,10 @@ function Install-azOSDIacTools {
             $currentPath = (Get-Item -path "HKCU:\Environment" ).GetValue('Path', '', 'DoNotExpandEnvironmentNames')
             if (-not $currentPath.Contains("C:\Program Files (x86)\Microsoft SDKs\Azure\CLI2\wbin")) { setx PATH ($currentPath + "; 'C:\Program Files (x86)\Microsoft SDKs\Azure\CLI2\wbin'") }
             if (-not $env:path.Contains( "C:\Program Files (x86)\Microsoft SDKs\Azure\CLI2\wbin")) { $env:path += "; 'C:\Program Files (x86)\Microsoft SDKs\Azure\CLI2\wbin'" }
+            $resultazcli =  az --version
+            $Azcliversion = $az[0].split(" ")[$az[0].split(" ").count -1]
+            Write-Host "Found Azure Cli on your system $env:COMPUTERNAME with the version $($Azcliversion)" -ForegroundColor Cyan
             write-host ""
-            Write-Warning "You need to restart Powershell session."
-
         }
 
         if ($Needinstallterraform -eq $true) {
