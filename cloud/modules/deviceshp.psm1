@@ -14,6 +14,8 @@
 #=================================================
 #region Functions
 
+#Some Dependancies on these Functions
+Invoke-Expression (Invoke-RestMethod -Uri 'https://raw.githubusercontent.com/OSDeploy/OSD/master/cloud/modules/_anywhere.psm1')
 
 function osdcloud-addserviceui {
     [CmdletBinding()]
@@ -315,7 +317,7 @@ Function osdcloud-HPIAExecute {
         $ProgressPreference = 'SilentlyContinue' # to speed up web requests
         
         #Record currently running Processes:
-        Get-Process | Select-Object -Property Name, Description | Out-File C:\osdcloud\Logs\HPIA-RunningProcesses.txt
+        #Get-Process | Select-Object -Property Name, Description | Out-File C:\osdcloud\Logs\HPIA-RunningProcesses.txt
         
         ################################
         ## Create Directory Structure ##
