@@ -14,4 +14,4 @@
  - Jérôme Bezet-Torres  | Twitter: @JM2K69             | Blog: [https://jm2k69.github.io/](https://jm2k69.github.io/)
  - Mike Marable         | Twitter: @mike_marable       | Blog: [https://mikemarable.net/](https://mikemarable.net/)
  - Dean Ellerby         | Twitter: @dean_ellerby       | Blog: [YouTube - Cloud Management](https://www.youtube.com/c/cloudmanagementcommunity)
- - Doug McGee           | Twitter:                     | Blog: 
+ - Doug McGee           | Twitter: @DouglasM2c         | Blog: 
