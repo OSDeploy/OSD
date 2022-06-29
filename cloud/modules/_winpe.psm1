@@ -299,11 +299,6 @@ function osdcloud-SetupCompleteCreateFinish {
     if (!(Test-Path -Path $ScriptsPath)){New-Item -Path $ScriptsPath} 
 
     $RunScript = @(@{ Script = "SetupComplete"; BatFile = 'SetupComplete.cmd'; ps1file = 'SetupComplete.ps1';Type = 'Setup'; Path = "$ScriptsPath"})
-
-
-    Write-Output "Creating $($RunScript.Script) Files"
-
-    $BatFilePath = "$($RunScript.Path)\$($RunScript.batFile)"
     $PSFilePath = "$($RunScript.Path)\$($RunScript.ps1File)"
 
     if (Test-Path -Path $PSFilePath){
