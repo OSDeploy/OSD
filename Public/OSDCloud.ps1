@@ -1233,7 +1233,7 @@ function Invoke-OSDCloud {
     if (($Global:OSDCloud.HyperVSetName -eq $true) -or ($Global:OSDCloud.HyperVEjectISO -eq $true) ){
         Write-DarkGrayHost "Starting HyperV Modifications"
         if ($Global:OSDCloud.HyperVSetName -eq $true){
-            Write-DarkGrayHost"Adding HyperV Tasks into JSON Config File for Action during Specialize" 
+            Write-DarkGrayHost "Adding HyperV Tasks into JSON Config File for Action during Specialize" 
             $HashTable = @{
                 'Updates' = @{
                     'HyperVSetName' = $Global:OSDCloud.HyperVSetName                   
