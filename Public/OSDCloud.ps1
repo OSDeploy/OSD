@@ -1219,6 +1219,7 @@ function Invoke-OSDCloud {
     
     #=================================================
     #region Create SetupComplete Files.
+    Write-SectionHeader "Creating SetupComplete Files and populating with requested tasks."
     osdcloud-SetupCompleteCreateStart
 
     if ($Global:OSDCloud.IsWinPE -eq $true) {

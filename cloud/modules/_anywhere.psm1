@@ -359,7 +359,8 @@ function Get-HyperVName {
 function Set-HyperVName {
     [CmdletBinding()]
     param ()
-    $HyperVName = Get-ItemPropertyValue -Path 'HKLM:\SOFTWARE\Microsoft\Virtual Machine\Guest\Parameters' -Name "VirtualMachineName" -ErrorAction SilentlyContinue
+    $HyperVName = Get-HyperVName
+    Write-Output "Renaming Computer to $HyperVName"
     Rename-Computer -NewName $HyperVName -Force 
 }
 function osdcloud-RestartComputer {
