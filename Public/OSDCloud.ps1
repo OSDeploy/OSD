@@ -1248,6 +1248,8 @@ function Invoke-OSDCloud {
 
         #Leverage SetupComplete.cmd to run HP Tools
         osdcloud-HyperVSetupCompleteAppend
+        
+        
     }
 
     #endregion

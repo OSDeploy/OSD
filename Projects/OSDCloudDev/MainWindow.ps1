@@ -409,7 +409,8 @@ elseif ($HyperV){
     $formMainWindowControlManufacturerFunction.Visibility = 'Visible'    
     $formMainWindowControlOption_Name_1.Header = "Set PC Name to HyperV VM Name"
     $formMainWindowControlOption_Name_1.IsChecked = $true
-    $formMainWindowControlOption_Name_2.Visibility = "Hidden"
+    $formMainWindowControlOption_Name_2.Header = "Eject CD ISO"
+    $formMainWindowControlOption_Name_2.IsChecked = $true
     $formMainWindowControlOption_Name_3.Visibility = "Hidden"
     $formMainWindowControlOption_Name_4.Visibility = "Hidden"
     $formMainWindowControlOption_Name_5.Visibility = "Hidden"
@@ -859,6 +860,7 @@ $formMainWindowControlStartButton.add_Click({
     }
     if ($HyperV){
         $Global:StartOSDCloudGUI.HyperVSetName = $formMainWindowControlOption_Name_1.IsChecked
+        $Global:StartOSDCloudGUI.HyperVEjectISO = $formMainWindowControlOption_Name_2.IsChecked
     }
     #$Global:StartOSDCloudGUI | Out-Host
     if ($formMainWindowControlDebugCheckBox.IsChecked -eq $true){
