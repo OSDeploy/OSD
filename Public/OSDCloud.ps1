@@ -1194,7 +1194,7 @@ function Invoke-OSDCloud {
     Write-Verbose -Message "osdcloud-WinpeUpdateDefender "
     if ($Global:OSDCloud.IsWinPE -eq $true) {
         if ($Global:OSDCloud.WindowsDefenderUpdate -eq $true){
-            osdcloud-WinpeUpdateDefender 
+            #osdcloud-WinpeUpdateDefender 
         }
     }
     #endregion
