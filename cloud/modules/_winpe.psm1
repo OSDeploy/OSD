@@ -285,6 +285,8 @@ function osdcloud-SetupCompleteCreateStart {
             
     New-Item -Path $PSFilePath -ItemType File -Force
     Add-Content -path $PSFilePath "Write-Output 'Starting SetupComplete Script Process'"
+    Add-Content -path $PSFilePath "Invoke-Expression (Invoke-RestMethod -Uri 'https://raw.githubusercontent.com/OSDeploy/OSD/master/cloud/modules/_anywhere.psm1')"
+    Add-Content -path $PSFilePath "Invoke-Expression (Invoke-RestMethod -Uri 'https://raw.githubusercontent.com/OSDeploy/OSD/master/cloud/modules/_winpe.psm1')"
     Add-Content -Path $PSFilePath "Start-Sleep -Seconds 10"
     Add-Content -Path $PSFilePath "Start-Transcript -Path 'C:\OSDCloud\Logs\SetupComplete.log' -ErrorAction Ignore"
     #Add-Content -Path $PSFilePath "Stop-Transcript"
