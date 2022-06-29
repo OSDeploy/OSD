@@ -1185,7 +1185,7 @@ function Invoke-OSDCloud {
         }
     }
     #endregion
-    
+    <# - Found that when you update Defender Offline... it hangs specialize phase... no idea why
     #=================================================
     #region osdcloud-WinpeUpdateDefender
     Write-SectionHeader "Updates Windows Defender Offline (osdcloud-WinpeUpdateDefender)"
@@ -1194,10 +1194,11 @@ function Invoke-OSDCloud {
     Write-Verbose -Message "osdcloud-WinpeUpdateDefender "
     if ($Global:OSDCloud.IsWinPE -eq $true) {
         if ($Global:OSDCloud.WindowsDefenderUpdate -eq $true){
-            #osdcloud-WinpeUpdateDefender 
+            osdcloud-WinpeUpdateDefender 
         }
     }
     #endregion
+    #>
     #=================================================
     #region Set-OSDCloudUnattendSpecialize
     Write-SectionHeader "Set Specialize Unattend.xml (Set-OSDCloudUnattendSpecialize)"
