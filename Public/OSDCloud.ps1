@@ -1193,7 +1193,7 @@ function Invoke-OSDCloud {
     Write-DarkGrayHost "This process can take up to 5 minutes"
     Write-Verbose -Message "osdcloud-WinpeUpdateDefender "
     if ($Global:OSDCloud.IsWinPE -eq $true) {
-        if (WindowsDefenderUpdate){
+        if ($Global:OSDCloud.WindowsDefenderUpdate -eq $true){
             osdcloud-WinpeUpdateDefender 
         }
     }
