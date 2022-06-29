@@ -1220,6 +1220,12 @@ function Invoke-OSDCloud {
     #=================================================
     #region Create SetupComplete Files.
     osdcloud-SetupCompleteCreateStart
+
+    if ($Global:OSDCloud.IsWinPE -eq $true) {
+        if ($Global:OSDCloud.WindowsDefenderUpdate -eq $true){
+            osdcloud-SetupCompleteDefenderUpdate
+        }
+    }
     #endregion
 
     #=================================================
