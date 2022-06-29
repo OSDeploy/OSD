@@ -258,5 +258,62 @@ function osdcloud-WinpeUpdateDefender {
     }
     else {Write-Output "Failed Defender Kit Download"}
 }
+
+function osdcloud-SetupCompleteCreateStart {
+    
+    $ScriptsPath = "C:\Windows\Setup\scripts"
+    $ScriptsPath = "C:\HYperV"
+
+    if (!(Test-Path -Path $ScriptsPath)){New-Item -Path $ScriptsPath} 
+
+    $RunScript = @(@{ Script = "SetupComplete"; BatFile = 'SetupComplete.cmd'; ps1file = 'SetupComplete.ps1';Type = 'Setup'; Path = "$ScriptsPath"})
+
+
+    Write-Output "Creating $($RunScript.Script) Files"
+
+    $BatFilePath = "$($RunScript.Path)\$($RunScript.batFile)"
+    $PSFilePath = "$($RunScript.Path)\$($RunScript.ps1File)"
+            
+    #Create Batch File to Call PowerShell File
+            
+    New-Item -Path $BatFilePath -ItemType File -Force
+    $CustomActionContent = New-Object system.text.stringbuilder
+    [void]$CustomActionContent.Append('%windir%\System32\WindowsPowerShell\v1.0\powershell.exe -ExecutionPolicy ByPass -File')
+    [void]$CustomActionContent.Append(" $PSFilePath")
+    Add-Content -Path $BatFilePath -Value $CustomActionContent.ToString()
+
+    #Create PowerShell File to do actions
+            
+    New-Item -Path $PSFilePath -ItemType File -Force
+    Add-Content -path $PSFilePath "Write-Output 'Starting SetupComplete Script Process'"
+    Add-Content -Path $PSFilePath "Start-Sleep -Seconds 10"
+    Add-Content -Path $PSFilePath "Start-Transcript -Path 'C:\OSDCloud\Logs\SetupComplete.log' -ErrorAction Ignore"
+    #Add-Content -Path $PSFilePath "Stop-Transcript"
+    #Add-Content -Path $PSFilePath "Restart-Computer -Force"
+
+}
+function osdcloud-SetupCompleteCreateFinish {
+
+    $ScriptsPath = "C:\Windows\Setup\scripts"
+    $ScriptsPath = "C:\HYperV"
+    if (!(Test-Path -Path $ScriptsPath)){New-Item -Path $ScriptsPath} 
+
+    $RunScript = @(@{ Script = "SetupComplete"; BatFile = 'SetupComplete.cmd'; ps1file = 'SetupComplete.ps1';Type = 'Setup'; Path = "$ScriptsPath"})
+
+
+    Write-Output "Creating $($RunScript.Script) Files"
+
+    $BatFilePath = "$($RunScript.Path)\$($RunScript.batFile)"
+    $PSFilePath = "$($RunScript.Path)\$($RunScript.ps1File)"
+
+    if (Test-Path -Path $PSFilePath){
+        Add-Content -Path $PSFilePath "Stop-Transcript"
+        Add-Content -Path $PSFilePath "Restart-Computer -Force"
+    }
+    else {
+    Write-Output "$PSFilePath - Not Found"
+    }
+
+}
 #endregion
 #=================================================
