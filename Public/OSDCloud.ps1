@@ -1232,7 +1232,7 @@ function Invoke-OSDCloud {
     #region HyperV Config for Specialize Phase
     if ($Global:OSDCloud.HyperVSetName -eq $true){
         Write-Host -ForegroundColor Cyan "Adding HyperV Tasks into JSON Config File for Action during Specialize" 
-        Write-DarkGrayHost "HJyperV Set Computer Name= $($Global:OSDCloud.HyperVSetName)"
+        Write-DarkGrayHost "HyperV Set Computer Name= $($Global:OSDCloud.HyperVSetName)"
 
         $HashTable = @{
             'Updates' = @{
