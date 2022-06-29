@@ -1218,6 +1218,11 @@ function Invoke-OSDCloud {
     #endregion
     
     #=================================================
+    #region Create SetupComplete Files.
+    osdcloud-SetupCompleteCreateStart
+    #endregion
+
+    #=================================================
     #region HyperV Config for Specialize Phase
     if ($Global:OSDCloud.HyperVSetName -eq $true){
         Write-Host -ForegroundColor Cyan "Adding HyperV Tasks into JSON Config File for Action during Specialize" 
@@ -1234,6 +1239,9 @@ function Invoke-OSDCloud {
         try {[void][System.IO.Directory]::CreateDirectory($ConfigPath)}
         catch {}
         $HashVar | Out-File $ConfigFile
+
+        #Leverage SetupComplete.cmd to run HP Tools
+        osdcloud-HyperVSetupCompleteAppend
     }
 
     #endregion
@@ -1299,73 +1307,9 @@ function Invoke-OSDCloud {
             osdcloud-HPTPMEXEDownload
         }   
 
-        #=================================================
-        #Leverage SetupComplete.cmd to run HP Tools
-        $ScriptsPath = "C:\Windows\Setup\scripts"
-        if (!(Test-Path -Path $ScriptsPath)){New-Item -Path $ScriptsPath} 
-        
-        $RunScriptTable = @(
-            @{ Script = "SetupComplete"; BatFile = 'SetupComplete.cmd'; ps1file = 'SetupComplete.ps1';Type = 'Setup'; Path = "$ScriptsPath"}
-        )
-        
-        ForEach ($RunScript in $RunScriptTable)
-            {
-            Write-Output $RunScript.Script
-        
-            $BatFilePath = "$($RunScript.Path)\$($RunScript.batFile)"
-            $PSFilePath = "$($RunScript.Path)\$($RunScript.ps1File)"
-                
-            #Create Batch File to Call PowerShell File
-                
-            New-Item -Path $BatFilePath -ItemType File -Force
-            $CustomActionContent = New-Object system.text.stringbuilder
-            [void]$CustomActionContent.Append('%windir%\System32\WindowsPowerShell\v1.0\powershell.exe -ExecutionPolicy ByPass -File')
-            [void]$CustomActionContent.Append(" $PSFilePath")
-            Add-Content -Path $BatFilePath -Value $CustomActionContent.ToString()
-        
-            #Create PowerShell File to do actions
-                
-            New-Item -Path $PSFilePath -ItemType File -Force
-            Add-Content -path $PSFilePath "Set-ExecutionPolicy Bypass -Force | out-null"
-            Add-Content -Path $PSFilePath "Start-Sleep -Seconds 10"
-            Add-Content -Path $PSFilePath "Start-Transcript -Path 'C:\OSDCloud\Logs\SetupComplete.log' -ErrorAction Ignore"
-            Add-Content -Path $PSFilePath "Invoke-Expression (Invoke-RestMethod -Uri 'https://raw.githubusercontent.com/OSDeploy/OSD/master/cloud/modules/deviceshp.psm1')"
-            Add-Content -Path $PSFilePath "Invoke-Expression (Invoke-RestMethod -Uri 'https://raw.githubusercontent.com/OSDeploy/OSD/master/cloud/modules/_winpe.psm1')"
-            Add-Content -Path $PSFilePath "Invoke-Expression (Invoke-RestMethod -Uri 'functions.osdcloud.com' -ErrorAction SilentlyContinue)"
-            Add-Content -Path $PSFilePath "osdcloud-WinpeSetEnvironmentVariables"
-            Add-Content -Path $PSFilePath "osdcloud-InstallModuleHPCMSL -ErrorAction SilentlyContinue"
-            Add-Content -Path $PSFilePath 'Write-Host "Running HP Tools in SetupComplete" -ForegroundColor Green'
-            Add-Content -Path $PSFilePath "osdcloud-HPBIOSSetSetting -SettingName 'Virtualization Technology (VTx)' -Value 'Enable'"
-            if ($Global:OSDCloud.HPIADrivers -eq $true){
-                Add-Content -Path $PSFilePath 'Write-Host "Running HPIA for Drivers" -ForegroundColor Magenta'
-                if (Test-Path -path "C:\OSDCloud\HPIA\Repo"){Add-Content -Path $PSFilePath "osdcloud-RunHPIA -OfflineMode True -Category Drivers"}
-                else {Add-Content -Path $PSFilePath "osdcloud-HPIAExecute -Category Drivers"}
-            }
-            if (($Global:OSDCloud.HPIAFirmware -eq $true) -and ($Global:OSDCloud.HPIAAll  -ne $true)){
-                Add-Content -Path $PSFilePath 'Write-Host "Running HPIA for Firmware" -ForegroundColor Magenta'
-                Add-Content -Path $PSFilePath "osdcloud-HPIAExecute -Category Firmware"
-            } 
-            if (($Global:OSDCloud.HPIASoftware -eq $true) -and ($Global:OSDCloud.HPIAAll  -ne $true)){
-                Add-Content -Path $PSFilePath 'Write-Host "Running HPIA for Software" -ForegroundColor Magenta'
-                Add-Content -Path $PSFilePath "osdcloud-HPIAExecute -Category Software"
-            } 
-            if ($Global:OSDCloud.HPIAAll -eq $true){
-                Add-Content -Path $PSFilePath 'Write-Host "Running HPIA for Software" -ForegroundColor Magenta'
-                Add-Content -Path $PSFilePath "osdcloud-HPIAExecute -Category All"
-            }            
-            if ($Global:OSDCloud.HPTPMUpdate -eq $true){
-                #Add-Content -Path $PSFilePath 'Write-Host "Updating TPM Firmware" -ForegroundColor Magenta'
-                #Add-Content -Path $PSFilePath "osdcloud-TPMEXEInstall"
-            } 
-            if ($Global:OSDCloud.HPBIOSUpdate -eq $true){
-                Add-Content -Path $PSFilePath 'Write-Host "Running HP System Firmware" -ForegroundColor Magenta'
-                Add-Content -Path $PSFilePath "osdcloud-HPBIOSUpdate"
-            }
-            Add-Content -Path $PSFilePath "Stop-Transcript"
-            Add-Content -Path $PSFilePath "Restart-Computer -Force"
-        }
 
-    #endregion
+        #Leverage SetupComplete.cmd to run HP Tools
+        osdcloud-HPSetupCompleteAppend
     }
     #endregion
     #=================================================
@@ -1556,6 +1500,11 @@ exit
         }
 
     }
+    #endregion
+    #=================================================
+    #region Finish SetupComplete Files.
+    #This appends the two lines at the end of SetupComplete Script to Stop Transcription and to Restart Computer
+    osdcloud-SetupCompleteCreateFinish
     #endregion
     #=================================================
     #region Deploy-OSDCloud Complete

@@ -834,7 +834,6 @@ else
 function osdcloud-HPSetupCompleteAppend {
 
     $ScriptsPath = "C:\Windows\Setup\scripts"
-    $ScriptsPath = "C:\HYperV"
     if (!(Test-Path -Path $ScriptsPath)){New-Item -Path $ScriptsPath} 
 
     $RunScript = @(@{ Script = "SetupComplete"; BatFile = 'SetupComplete.cmd'; ps1file = 'SetupComplete.ps1';Type = 'Setup'; Path = "$ScriptsPath"})
