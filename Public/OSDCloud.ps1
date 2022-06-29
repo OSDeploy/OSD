@@ -1230,26 +1230,31 @@ function Invoke-OSDCloud {
 
     #=================================================
     #region HyperV Config for Specialize Phase
-    if ($Global:OSDCloud.HyperVSetName -eq $true){
-        Write-Host -ForegroundColor Cyan "Adding HyperV Tasks into JSON Config File for Action during Specialize" 
-        Write-DarkGrayHost "HyperV Set Computer Name= $($Global:OSDCloud.HyperVSetName)"
-
-        $HashTable = @{
-            'Updates' = @{
-                'HyperVSetName' = $Global:OSDCloud.HyperVSetName
+    if (($Global:OSDCloud.HyperVSetName -eq $true) -or ($Global:OSDCloud.HyperVEjectISO -eq $true) ){
+        Write-DarkGrayHost "Starting HyperV Modifications"
+        if ($Global:OSDCloud.HyperVSetName -eq $true){
+            Write-DarkGrayHost"Adding HyperV Tasks into JSON Config File for Action during Specialize" 
+            $HashTable = @{
+                'Updates' = @{
+                    'HyperVSetName' = $Global:OSDCloud.HyperVSetName                   
+                }
             }
-        }
-        $HashVar = $HashTable | ConvertTo-Json
-        $ConfigPath = "c:\osdcloud\configs"
-        $ConfigFile = "$ConfigPath\HYPERV.JSON"
-        try {[void][System.IO.Directory]::CreateDirectory($ConfigPath)}
-        catch {}
-        $HashVar | Out-File $ConfigFile
+            $HashVar = $HashTable | ConvertTo-Json
+            $ConfigPath = "c:\osdcloud\configs"
+            $ConfigFile = "$ConfigPath\HYPERV.JSON"
+            try {[void][System.IO.Directory]::CreateDirectory($ConfigPath)}
+            catch {}
+            $HashVar | Out-File $ConfigFile
 
-        #Leverage SetupComplete.cmd to run HP Tools
-        osdcloud-HyperVSetupCompleteAppend
-        
-        
+            #Leverage SetupComplete.cmd to run HP Tools
+            Write-DarkGrayHost "HyperV Set Computer Name = $($Global:OSDCloud.HyperVSetName)"
+            Write-DarkGrayHost "Adding Function to Rename Computer to HyperV VM Name into SetupComplete"
+            osdcloud-HyperVSetupComplete
+        }        
+        if ($Global:OSDCloud.HyperVEjectISO -eq $true){
+            Write-DarkGrayHost "Ejecting ISO from VM"
+            osdcloud-EjectCD
+        }
     }
 
     #endregion
