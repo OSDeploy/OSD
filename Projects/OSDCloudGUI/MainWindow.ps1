@@ -404,6 +404,7 @@ elseif ($DellEnterprise){
     $formMainWindowControlOption_Name_5.add_Checked({$formMainWindowControlOption_Name_1.IsChecked = $true})
 
 }
+#>
 elseif ($HyperV){
     $formMainWindowControlManufacturerFunction.Header = "HyperV Functions"
     $formMainWindowControlManufacturerFunction.Visibility = 'Visible'    
@@ -415,7 +416,6 @@ elseif ($HyperV){
     $formMainWindowControlOption_Name_5.Visibility = "Hidden"
     $formMainWindowControlOption_Name_6.Visibility = "Hidden"
 }
-#>
 else{
     $formMainWindowControlManufacturerFunction.Visibility = 'Hidden'
     $formMainWindowControlManufacturerFunction.IsEnabled = $false
