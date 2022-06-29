@@ -137,6 +137,10 @@
                           Header="Screenshot Capture"
                           IsCheckable="True"
                           IsChecked="False" />
+                <MenuItem Name="WindowsDefenderUpdate"
+                          Header="Update Windows Defender"
+                          IsCheckable="True"
+                          IsChecked="True" />
             </MenuItem>
             <MenuItem Header="Microsoft Update Catalog">
                 <MenuItem Name="MSCatalogDiskDrivers"

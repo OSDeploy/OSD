@@ -137,6 +137,10 @@
                           Header="Screenshot Capture"
                           IsCheckable="True"
                           IsChecked="False" />
+                <MenuItem Name="WindowsDefenderUpdate"
+                          Header="Update Windows Defender"
+                          IsCheckable="True"
+                          IsChecked="True" />
             </MenuItem>
             <MenuItem Header="Microsoft Update Catalog">
                 <MenuItem Name="MSCatalogDiskDrivers"
@@ -153,6 +157,16 @@
                           IsChecked="True" />
                 <MenuItem Name="MSCatalogFirmware"
                           Header="System Firmware"
+                          IsCheckable="True"
+                          IsChecked="False" />
+            </MenuItem>
+            <MenuItem Header="Custom">
+                <MenuItem Name="ScriptsSpecialize"
+                          Header="Run YOUR Script in Specialize"
+                          IsCheckable="True"
+                          IsChecked="False" />
+                <MenuItem Name="ScriptSetupComplete"
+                          Header="Run YOUR Script in SetupComplete"
                           IsCheckable="True"
                           IsChecked="False" />
             </MenuItem>
@@ -183,8 +197,12 @@
                     IsChecked="False" />
             </MenuItem>
         </Menu>
-        
+
         <Grid Margin="10,0,10,10">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="169*"/>
+                <ColumnDefinition Width="231*"/>
+            </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="1" />
@@ -198,15 +216,15 @@
             </Grid.RowDefinitions>
 
             <!-- Row 0 Title -->
-            <Label Grid.Row="0"
+            <Label
                Name="BrandingTitleControl"
                Content="OSDCloud"
                FlowDirection="RightToLeft"
                FontSize="24"
                FontWeight="Bold"
                Foreground="#003E92"
-               HorizontalAlignment="Right"
-               VerticalAlignment="Top" />
+               HorizontalAlignment="Left"
+               VerticalAlignment="Center" Grid.Column="1" Margin="337,0,0,0" />
 
             <!-- Row 1 Gridline -->
             <Line Grid.Row="1"
@@ -216,12 +234,12 @@
               Y2="0"
               Stroke="Gainsboro"
               StrokeThickness="1"
-              Stretch="Uniform"></Line>
+              Stretch="Uniform" Grid.ColumnSpan="2" Margin="0,0,0,76" Grid.RowSpan="2"></Line>
 
             <!-- Row 2 OperatingSystem -->
             <StackPanel Grid.Row="2"
                     HorizontalAlignment="Left"
-                    VerticalAlignment="Top">
+                    VerticalAlignment="Center" Grid.ColumnSpan="2">
                 <!-- Operating System -->
                 <StackPanel Orientation="Horizontal"
                         HorizontalAlignment="Left"
@@ -294,13 +312,13 @@
               Y2="0"
               Stroke="Gainsboro"
               StrokeThickness="1"
-              Stretch="Uniform">
+              Stretch="Uniform" Grid.ColumnSpan="2" Margin="0,0,0,38" Grid.RowSpan="2">
             </Line>
 
             <!-- Row 4 Driver Pack -->
             <StackPanel Grid.Row="4"
                     HorizontalAlignment="Left"
-                    VerticalAlignment="Top">
+                    VerticalAlignment="Center" Grid.ColumnSpan="2">
                 <!-- Driver Pack -->
                 <StackPanel Orientation="Horizontal"
                         HorizontalAlignment="Left"
@@ -333,7 +351,7 @@
               Y2="0"
               Stroke="Gainsboro"
               StrokeThickness="1"
-              Stretch="Uniform">
+              Stretch="Uniform" Grid.ColumnSpan="2" Margin="0,0,0,117" Grid.RowSpan="2">
             </Line>
 
             <!-- Row 6 Options -->
@@ -355,7 +373,7 @@
             <StackPanel Grid.Row="6"
                     Orientation="Vertical"
                     HorizontalAlignment="Left"
-                    VerticalAlignment="Top">
+                    VerticalAlignment="Center">
                 <!-- AutopilotJson -->
                 <StackPanel HorizontalAlignment="Left"
                         VerticalAlignment="Center"
@@ -424,7 +442,7 @@
               Y2="0"
               Stroke="Gainsboro"
               StrokeThickness="1"
-              Stretch="Uniform"></Line>
+              Stretch="Uniform" Grid.ColumnSpan="2"></Line>
 
             <!-- Row 8 Start -->
             <Button Grid.Row="8"
@@ -434,8 +452,8 @@
                 Foreground="White"
                 Height="40"
                 Width="130"
-                HorizontalAlignment="Right"
-                VerticalAlignment="Bottom" />
+                HorizontalAlignment="Left"
+                VerticalAlignment="Center" Grid.Column="1" Margin="332,0,0,0" />
             <CheckBox x:Name="DebugCheckBox" Content="Debug Mode" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Row="8"/>
         </Grid>
     </DockPanel>

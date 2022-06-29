@@ -1185,15 +1185,17 @@ function Invoke-OSDCloud {
         }
     }
     #endregion
+    
     #=================================================
-    #region Add-OfflineServicingWindowsDriver
-    Write-SectionHeader "Add Windows Driver with Offline Servicing (Add-OfflineServicingWindowsDriver)"
-    Write-Verbose -Message "https://docs.microsoft.com/en-us/powershell/module/dism/add-windowsdriver"
-    Write-DarkGrayHost "Drivers in C:\Drivers are being added to the offline Windows Image"
-    Write-DarkGrayHost "This process can take up to 20 minutes"
-    Write-Verbose -Message "Add-OfflineServicingWindowsDriver"
+    #region osdcloud-WinpeUpdateDefender
+    Write-SectionHeader "Updates Windows Defender Offline (osdcloud-WinpeUpdateDefender)"
+    Write-DarkGrayHost "Defender Platform & Defs are being updated in Offline Image"
+    Write-DarkGrayHost "This process can take up to 5 minutes"
+    Write-Verbose -Message "osdcloud-WinpeUpdateDefender "
     if ($Global:OSDCloud.IsWinPE -eq $true) {
-        Add-OfflineServicingWindowsDriver
+        if (WindowsDefenderUpdate){
+            osdcloud-WinpeUpdateDefender 
+        }
     }
     #endregion
     #=================================================
@@ -1537,7 +1539,7 @@ exit
         osdcloud-addcmtrace
         osdcloud-addmouseoobe
         osdcloud-UpdateModuleFilesManually
-        osdcloud-WinpeUpdateDefender
+        #osdcloud-WinpeUpdateDefender
     }
     if ($Global:OSDCloud.DevMode -eq $true){
         Write-SectionHeader "DevMode Enabled"
@@ -1549,7 +1551,7 @@ exit
             osdcloud-addcmtrace
             osdcloud-addmouseoobe
             osdcloud-UpdateModuleFilesManually -DEVMode $true
-            osdcloud-WinpeUpdateDefender
+            #osdcloud-WinpeUpdateDefender
         }
 
     }
