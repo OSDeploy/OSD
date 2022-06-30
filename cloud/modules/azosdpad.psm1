@@ -71,6 +71,8 @@ function Start-AzOSDPADbeta {
     param ()
     Write-Host -ForegroundColor DarkGray "========================================================================="
     Write-Host -ForegroundColor Green "Start-AzOSDPAD"
+    Write-Host -ForegroundColor DarkGray "========================================================================="
+
     if ($Global:AzOSDCloudBlobScript) {
         $i = $null
         $Results = foreach ($Item in $Global:AzOSDCloudBlobScript) {

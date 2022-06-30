@@ -77,17 +77,11 @@ function Start-Scan {
     begin
         {
             $dummyNode = $null
-            ## real mode
-            #$AllNodes =$Global:AzOSDCloudBlobScript.BlobClient.BlobContainerName
             
             # test
             
             $AllNodes = $Global:AzOSDCloudGlobalScripts | Group-Object Container
             
-            ## offline test
-
-            #$AllNode = Import-Clixml -path $Global:MyScriptDir\work.xml
-            #$AllNodes = $AllNode.BlobClient.BlobContainerName |Group-Object
         }
     process
         {
@@ -157,7 +151,7 @@ function Get-AzOSDCloudBlobScriptFile {
 }
 $WPF_ListBoxControl.Add_MouseRightButtonUp({
 
-    $WPF_ListBoxControl.SelectedIndex = $args[0].Source.SelectedIndex
+    $WPF_ListBoxControl.SelectedIndex =  $WPF_ListBoxControl.Items.IndexOf($WPF_ListBoxControl.SelectedItem)
 
    Write-Host $WPF_ListBoxControl.SelectedValue 
 
@@ -168,10 +162,18 @@ $WPF_ListBoxControl.Add_MouseRightButtonUp({
     }
 
    }
-   Get-AzStorageBlobContent -CloudBlob $file  -Context $Global:AzCurrentStorageContext.Context -Destination d:\ -CheckMd5 
+   Get-AzStorageBlobContent -CloudBlob $file  -Context $Global:AzCurrentStorageContext.Context -Destination $Global:MyScriptDir\  -AsJob
 
 })
 
+$WPF_ListBoxControl.Add_MouseLeftButtonUp({
+
+
+$WPF_ListBoxControl.selectedIndex = 
+
+write-host $WPF_ListBoxControl.selectedIndex
+
+})
 
 #########################################################################
 #                        Stuff                                          #
