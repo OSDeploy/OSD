@@ -316,6 +316,7 @@ function Test-DCUSupport {
     Return $DCUSupportedDevice
     }
 
+$Win11Readiness = osdcloud-GetWin11Readiness
 $Manufacturer = (Get-CimInstance -Class:Win32_ComputerSystem).Manufacturer
 $Model = (Get-CimInstance -Class:Win32_ComputerSystem).Model
 if ($Manufacturer -match "HP" -or $Manufacturer -match "Hewlett-Packard"){

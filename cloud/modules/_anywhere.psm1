@@ -966,9 +966,14 @@ Storage = $null
     $Global:Readiness.Return = $outObject.returnResult
     if ($outObject.returnReason)
         {
-        #Write-Output "HR_ReturnReason = $($outObject.returnReason)"
-        $Global:Readiness.Reason = $outObject.returnReason
+        if ($outObject.returnResult -eq $NOT_CAPABLE_CAPS_STRING){
+            $Reason = $outObject.returnReason
+            $Reason = $Reason.Substring(0,$Reason.Length-2)
         }
+        else {$Reason = $outObject.returnReason}
+        #Write-Output "HR_ReturnReason = $($outObject.returnReason)"
+        $Global:Readiness.Reason = $Reason 
+    }
     #Write-Output "HR_SecureBoot = $HR_SecureBoot"
     $Global:Readiness.SecureBoot = $HR_SecureBoot
     #Write-Output "HR_CPU = $HR_CPU"
