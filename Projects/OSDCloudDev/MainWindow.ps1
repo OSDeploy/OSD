@@ -333,6 +333,40 @@ if ($Manufacturer -match "Microsoft"){
     } 
 }    
 
+#Windows 11 Readiness
+if ($Win11Readiness){
+    $Return = $Win11Readiness.Return
+    
+    $formMainWindowControlLabelWin11Label.Content = "Win 11: $Return"
+    if ($Return -eq "NOT CAPABLE"){
+        $Reason = $Win11Readiness.Reason
+        $formMainWindowControlLabelWin11Reason.Content = "Reason: $Reason"
+        $formMainWindowControlLabelWin11Reason.Visibility = 'Visible'
+    }
+    else{
+        $formMainWindowControlLabelWin11Reason.Visibility = 'Hidden'
+    }
+}
+
+# Custom Scripts
+if ($formMainWindowControlScriptSetupComplete.IsChecked -eq $true){
+    $formMainWindowControlTextBoxSetupComplete.Visibility = 'Visible'
+}
+else{
+    $formMainWindowControlTextBoxSetupComplete.Visibility = 'Hidden'
+}
+if ($formMainWindowControlScriptSpecialize.IsChecked -eq $true){
+    $formMainWindowControlTextBoxSpecialize.Visibility = 'Visible'
+}
+else{
+    $formMainWindowControlTextBoxSpecialize.Visibility = 'Hidden'
+}
+$formMainWindowControlScriptSpecialize.add_Checked({$formMainWindowControlTextBoxSpecialize.Visibility = 'Visible'})
+$formMainWindowControlTextBoxSetupComplete.add_Checked({$formMainWindowControlTextBoxSetupComplete.Visibility = 'Visible'})
+$formMainWindowControlScriptSpecialize.add_Checked({$formMainWindowControlLabelSpecialize.Visibility = 'Visible'})
+$formMainWindowControlTextBoxSetupComplete.add_Checked({$formMainWindowControlLabelSetupComplete.Visibility = 'Visible'})
+
+#HP Enterprise 
 if ($HPEnterprise){
     $TPM = osdcloud-HPTPMDetermine
     $BIOS = osdcloud-HPBIOSDetermine
