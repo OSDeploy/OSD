@@ -1220,111 +1220,114 @@ function Invoke-OSDCloud {
     
     #=================================================
     #region Create SetupComplete Files.
-    Write-SectionHeader "Creating SetupComplete Files and populating with requested tasks."
-    osdcloud-SetupCompleteCreateStart
+    if ($Global:OSDCloud.DevMode -eq $true){
+        Write-SectionHeader "Creating SetupComplete Files and populating with requested tasks."
+    
+        osdcloud-SetupCompleteCreateStart
 
-    if ($Global:OSDCloud.IsWinPE -eq $true) {
-        if ($Global:OSDCloud.WindowsDefenderUpdate -eq $true){
-            osdcloud-SetupCompleteDefenderUpdate
+        if ($Global:OSDCloud.IsWinPE -eq $true) {
+            if ($Global:OSDCloud.WindowsDefenderUpdate -eq $true){
+                osdcloud-SetupCompleteDefenderUpdate
+            }
         }
-    }
-    #endregion
+        #endregion
 
-    #=================================================
-    #region HyperV Config for Specialize Phase
-    if (($Global:OSDCloud.HyperVSetName -eq $true) -or ($Global:OSDCloud.HyperVEjectISO -eq $true) ){
-        Write-DarkGrayHost "Starting HyperV Modifications"
-        if ($Global:OSDCloud.HyperVSetName -eq $true){
-            Write-DarkGrayHost "Adding HyperV Tasks into JSON Config File for Action during Specialize" 
+        #=================================================
+        #region HyperV Config for Specialize Phase
+        if (($Global:OSDCloud.HyperVSetName -eq $true) -or ($Global:OSDCloud.HyperVEjectISO -eq $true) ){
+            Write-DarkGrayHost "Starting HyperV Modifications"
+            if ($Global:OSDCloud.HyperVSetName -eq $true){
+                Write-DarkGrayHost "Adding HyperV Tasks into JSON Config File for Action during Specialize" 
+                $HashTable = @{
+                    'Updates' = @{
+                        'HyperVSetName' = $Global:OSDCloud.HyperVSetName                   
+                    }
+                }
+                $HashVar = $HashTable | ConvertTo-Json
+                $ConfigPath = "c:\osdcloud\configs"
+                $ConfigFile = "$ConfigPath\HYPERV.JSON"
+                try {[void][System.IO.Directory]::CreateDirectory($ConfigPath)}
+                catch {}
+                $HashVar | Out-File $ConfigFile
+
+                #Leverage SetupComplete.cmd to run HP Tools
+                Write-DarkGrayHost "HyperV Set Computer Name = $($Global:OSDCloud.HyperVSetName)"
+                Write-DarkGrayHost "Adding Function to Rename Computer to HyperV VM Name into SetupComplete"
+                osdcloud-HyperVSetupComplete
+            }        
+            if ($Global:OSDCloud.HyperVEjectISO -eq $true){
+                Write-DarkGrayHost "Ejecting ISO from VM"
+                osdcloud-EjectCD
+            }
+        }
+
+        #endregion
+        
+        
+        #=================================================
+        #region Dell Updates Config for Specialize Phase
+        if (($Global:OSDCloud.DCUInstall -eq $true) -or ($Global:OSDCloud.DCUDrivers -eq $true) -or ($Global:OSDCloud.DCUFirmware -eq $true) -or ($Global:OSDCloud.DCUBIOS -eq $true) -or ($Global:OSDCloud.DCUAutoUpdateEnable -eq $true) -or ($Global:OSDCloud.DellTPMUpdate -eq $true)){
+            $DellFeaturesEnabled = $true
+            Write-Host -ForegroundColor Cyan "Adding Dell Tasks into JSON Config File for Action during Specialize" 
+            Write-DarkGrayHost "Install Dell Command Update = $($Global:OSDCloud.DCUInstall) | Run DCU Drivers = $($Global:OSDCloud.DCUDrivers) | Run DCU Firmware = $($Global:OSDCloud.DCUFirmware)"
+            Write-DarkGrayHost "Run DCU BIOS = $($Global:OSDCloud.DCUBIOS) | Enable DCU Auto Update = $($Global:OSDCloud.DCUAutoUpdateEnable) | DCU TPM Update = $($Global:OSDCloud.DellTPMUpdate) " 
             $HashTable = @{
                 'Updates' = @{
-                    'HyperVSetName' = $Global:OSDCloud.HyperVSetName                   
+                    'DCUInstall' = $Global:OSDCloud.DCUInstall
+                    'DCUDrivers' = $Global:OSDCloud.DCUDrivers
+                    'DCUFirmware' = $Global:OSDCloud.DCUFirmware
+                    'DCUBIOS' = $Global:OSDCloud.DCUBIOS
+                    'DCUAutoUpdateEnable' = $Global:OSDCloud.DCUAutoUpdateEnable
+                    'DellTPMUpdate' = $Global:OSDCloud.DellTPMUpdate
                 }
             }
             $HashVar = $HashTable | ConvertTo-Json
             $ConfigPath = "c:\osdcloud\configs"
-            $ConfigFile = "$ConfigPath\HYPERV.JSON"
+            $ConfigFile = "$ConfigPath\DELL.JSON"
             try {[void][System.IO.Directory]::CreateDirectory($ConfigPath)}
             catch {}
             $HashVar | Out-File $ConfigFile
+        }
+
+        #endregion
+
+        #=================================================
+        #region HP Updates Config for Specialize Phase
+        #Set Specialize JSON
+        if (($Global:OSDCloud.HPIAAll -eq $true) -or ($Global:OSDCloud.HPIADrivers -eq $true) -or ($Global:OSDCloud.HPIAFirmware -eq $true) -or ($Global:OSDCloud.HPIASoftware -eq $true) -or ($Global:OSDCloud.HPTPMUpdate -eq $true) -or ($Global:OSDCloud.HPBIOSUpdate -eq $true)){
+            Write-SectionHeader "HP Enterprise Options Setup"
+            $HPFeaturesEnabled = $true
+            Write-Host -ForegroundColor DarkGray "Adding HP Tasks into JSON Config File for Action during Specialize"
+            Write-DarkGrayHost "HPIA Drivers = $($Global:OSDCloud.HPIADrivers) | HPIA Firmware = $($Global:OSDCloud.HPIAFirmware) | HPIA Software = $($Global:OSDCloud.HPIADrivers) | HPIA All = $($Global:OSDCloud.HPIAAll) "
+            Write-DarkGrayHost "HP TPM Update = $($Global:OSDCloud.HPTPMUpdate) | HP BIOS Update = $($Global:OSDCloud.HPBIOSUpdate)" 
+            $HPHashTable = @{
+                'HPUpdates' = @{
+                    'HPIADrivers' = $Global:OSDCloud.HPIADrivers
+                    'HPIAFirmware' = $Global:OSDCloud.HPIAFirmware
+                    'HPIASoftware' = $Global:OSDCloud.HPIASoftware
+                    'HPIAAll' = $Global:OSDCloud.HPIAALL
+                    'HPTPMUpdate' = $Global:OSDCloud.HPTPMUpdate
+                    'HPBIOSUpdate' = $Global:OSDCloud.HPBIOSUpdate
+                }
+            }
+            $HPHashVar = $HPHashTable | ConvertTo-Json
+            $ConfigPath = "c:\osdcloud\configs"
+            $ConfigFile = "$ConfigPath\HP.JSON"
+            try {[void][System.IO.Directory]::CreateDirectory($ConfigPath)}
+            catch {}
+            $HPHashVar | Out-File $ConfigFile
+            osdcloud-HPIADownload
+            
+            #Stage HP TPM Update EXE
+            if ($Global:OSDCloud.HPTPMUpdate -eq $true){
+                osdcloud-HPTPMBIOSSettings
+                osdcloud-HPTPMEXEDownload
+            }   
+
 
             #Leverage SetupComplete.cmd to run HP Tools
-            Write-DarkGrayHost "HyperV Set Computer Name = $($Global:OSDCloud.HyperVSetName)"
-            Write-DarkGrayHost "Adding Function to Rename Computer to HyperV VM Name into SetupComplete"
-            osdcloud-HyperVSetupComplete
-        }        
-        if ($Global:OSDCloud.HyperVEjectISO -eq $true){
-            Write-DarkGrayHost "Ejecting ISO from VM"
-            osdcloud-EjectCD
+            osdcloud-HPSetupCompleteAppend
         }
-    }
-
-    #endregion
-    
-    
-    #=================================================
-    #region Dell Updates Config for Specialize Phase
-    if (($Global:OSDCloud.DCUInstall -eq $true) -or ($Global:OSDCloud.DCUDrivers -eq $true) -or ($Global:OSDCloud.DCUFirmware -eq $true) -or ($Global:OSDCloud.DCUBIOS -eq $true) -or ($Global:OSDCloud.DCUAutoUpdateEnable -eq $true) -or ($Global:OSDCloud.DellTPMUpdate -eq $true)){
-        $DellFeaturesEnabled = $true
-        Write-Host -ForegroundColor Cyan "Adding Dell Tasks into JSON Config File for Action during Specialize" 
-        Write-DarkGrayHost "Install Dell Command Update = $($Global:OSDCloud.DCUInstall) | Run DCU Drivers = $($Global:OSDCloud.DCUDrivers) | Run DCU Firmware = $($Global:OSDCloud.DCUFirmware)"
-        Write-DarkGrayHost "Run DCU BIOS = $($Global:OSDCloud.DCUBIOS) | Enable DCU Auto Update = $($Global:OSDCloud.DCUAutoUpdateEnable) | DCU TPM Update = $($Global:OSDCloud.DellTPMUpdate) " 
-        $HashTable = @{
-            'Updates' = @{
-                'DCUInstall' = $Global:OSDCloud.DCUInstall
-                'DCUDrivers' = $Global:OSDCloud.DCUDrivers
-                'DCUFirmware' = $Global:OSDCloud.DCUFirmware
-                'DCUBIOS' = $Global:OSDCloud.DCUBIOS
-                'DCUAutoUpdateEnable' = $Global:OSDCloud.DCUAutoUpdateEnable
-                'DellTPMUpdate' = $Global:OSDCloud.DellTPMUpdate
-            }
-        }
-        $HashVar = $HashTable | ConvertTo-Json
-        $ConfigPath = "c:\osdcloud\configs"
-        $ConfigFile = "$ConfigPath\DELL.JSON"
-        try {[void][System.IO.Directory]::CreateDirectory($ConfigPath)}
-        catch {}
-        $HashVar | Out-File $ConfigFile
-    }
-
-    #endregion
-
-    #=================================================
-    #region HP Updates Config for Specialize Phase
-    #Set Specialize JSON
-    if (($Global:OSDCloud.HPIAAll -eq $true) -or ($Global:OSDCloud.HPIADrivers -eq $true) -or ($Global:OSDCloud.HPIAFirmware -eq $true) -or ($Global:OSDCloud.HPIASoftware -eq $true) -or ($Global:OSDCloud.HPTPMUpdate -eq $true) -or ($Global:OSDCloud.HPBIOSUpdate -eq $true)){
-        Write-SectionHeader "HP Enterprise Options Setup"
-        $HPFeaturesEnabled = $true
-        Write-Host -ForegroundColor DarkGray "Adding HP Tasks into JSON Config File for Action during Specialize"
-        Write-DarkGrayHost "HPIA Drivers = $($Global:OSDCloud.HPIADrivers) | HPIA Firmware = $($Global:OSDCloud.HPIAFirmware) | HPIA Software = $($Global:OSDCloud.HPIADrivers) | HPIA All = $($Global:OSDCloud.HPIAAll) "
-        Write-DarkGrayHost "HP TPM Update = $($Global:OSDCloud.HPTPMUpdate) | HP BIOS Update = $($Global:OSDCloud.HPBIOSUpdate)" 
-        $HPHashTable = @{
-            'HPUpdates' = @{
-                'HPIADrivers' = $Global:OSDCloud.HPIADrivers
-                'HPIAFirmware' = $Global:OSDCloud.HPIAFirmware
-                'HPIASoftware' = $Global:OSDCloud.HPIASoftware
-                'HPIAAll' = $Global:OSDCloud.HPIAALL
-                'HPTPMUpdate' = $Global:OSDCloud.HPTPMUpdate
-                'HPBIOSUpdate' = $Global:OSDCloud.HPBIOSUpdate
-            }
-        }
-        $HPHashVar = $HPHashTable | ConvertTo-Json
-        $ConfigPath = "c:\osdcloud\configs"
-        $ConfigFile = "$ConfigPath\HP.JSON"
-        try {[void][System.IO.Directory]::CreateDirectory($ConfigPath)}
-        catch {}
-        $HPHashVar | Out-File $ConfigFile
-        osdcloud-HPIADownload
-        
-        #Stage HP TPM Update EXE
-        if ($Global:OSDCloud.HPTPMUpdate -eq $true){
-            osdcloud-HPTPMBIOSSettings
-            osdcloud-HPTPMEXEDownload
-        }   
-
-
-        #Leverage SetupComplete.cmd to run HP Tools
-        osdcloud-HPSetupCompleteAppend
     }
     #endregion
     #=================================================
@@ -1519,7 +1522,9 @@ exit
     #=================================================
     #region Finish SetupComplete Files.
     #This appends the two lines at the end of SetupComplete Script to Stop Transcription and to Restart Computer
-    osdcloud-SetupCompleteCreateFinish
+    if ($Global:OSDCloud.DevMode -eq $true){
+        osdcloud-SetupCompleteCreateFinish
+    }
     #endregion
     #=================================================
     #region Deploy-OSDCloud Complete
