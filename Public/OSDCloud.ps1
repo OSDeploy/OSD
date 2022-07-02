@@ -122,7 +122,7 @@ function Invoke-OSDCloud {
         Transcript = $null
         USBPartitions = $null
         Version = [Version](Get-Module -Name OSD -ListAvailable | Sort-Object Version -Descending | Select-Object -First 1).Version
-        WindowsDefenderUpdate  = $true
+        WindowsDefenderUpdate  = $null
         WindowsImage = $null
         WindowsImageCount = $null
         ZTI = [bool]$false
