@@ -347,24 +347,43 @@ if ($Win11Readiness){
         $formMainWindowControlLabelWin11Reason.Visibility = 'Hidden'
     }
 }
-
+<#
 # Custom Scripts
 if ($formMainWindowControlScriptSetupComplete.IsChecked -eq $true){
     $formMainWindowControlTextBoxSetupComplete.Visibility = 'Visible'
 }
 else{
+    $formMainWindowControlLabelSetupComplete.Visibility = 'Hidden'
     $formMainWindowControlTextBoxSetupComplete.Visibility = 'Hidden'
 }
 if ($formMainWindowControlScriptSpecialize.IsChecked -eq $true){
     $formMainWindowControlTextBoxSpecialize.Visibility = 'Visible'
 }
 else{
+    $formMainWindowControlLabelSpecialize.Visibility = 'Hidden'
     $formMainWindowControlTextBoxSpecialize.Visibility = 'Hidden'
 }
-$formMainWindowControlScriptSpecialize.add_Checked({$formMainWindowControlTextBoxSpecialize.Visibility = 'Visible'})
-$formMainWindowControlTextBoxSetupComplete.add_Checked({$formMainWindowControlTextBoxSetupComplete.Visibility = 'Visible'})
-$formMainWindowControlScriptSpecialize.add_Checked({$formMainWindowControlLabelSpecialize.Visibility = 'Visible'})
-$formMainWindowControlTextBoxSetupComplete.add_Checked({$formMainWindowControlLabelSetupComplete.Visibility = 'Visible'})
+#>
+$formMainWindowControlScriptSpecialize.add_Checked({
+    $formMainWindowControlTextBoxSpecialize.Visibility = 'Visible'
+    $formMainWindowControlLabelSpecialize.Visibility = 'Visible' 
+})
+$formMainWindowControlScriptSpecialize.add_Unchecked({
+    $formMainWindowControlTextBoxSpecialize.Visibility = 'Hidden'
+    $formMainWindowControlLabelSpecialize.Visibility = 'Hidden' 
+})
+
+
+$formMainWindowControlScriptSetupComplete.add_Checked({
+    $formMainWindowControlTextBoxSetupComplete.Visibility = 'Visible'
+    $formMainWindowControlLabelSetupComplete.Visibility = 'Visible'
+})
+$formMainWindowControlScriptSetupComplete.add_unchecked({
+    $formMainWindowControlTextBoxSetupComplete.Visibility = 'Hidden'
+    $formMainWindowControlLabelSetupComplete.Visibility = 'Hidden'
+})
+
+
 
 #HP Enterprise 
 if ($HPEnterprise){
@@ -914,7 +933,7 @@ $formMainWindowControlStartButton.add_Click({
     #$Global:StartOSDCloudGUI | Out-Host
     if ($formMainWindowControlScreenshotCapture.IsChecked) {
         $Params = @{
-            Screenshot = $true
+        Screenshot = $true
         }
         Start-OSDCloud @Params
     }
