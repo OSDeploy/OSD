@@ -285,6 +285,8 @@ $localOSDCloudParams["OSLanguage"].Attributes.ValidValues | ForEach-Object {
 #================================================
 #   Manufacturer Enhacements
 #================================================
+<#   DISABLING VENDOR FEATURES UNTIL OFFLINE SOLUTION CREATED - 22.07.01 - GARY
+
 function Test-HPIASupport {
     $CabPath = "$env:TEMP\platformList.cab"
     $XMLPath = "$env:TEMP\platformList.xml"
@@ -379,7 +381,7 @@ if ($HPEnterprise){
     $formMainWindowControlOption_Name_3.add_Checked({$formMainWindowControlOption_Name_4.IsChecked = $false})
 
     }
-<#
+
 elseif ($DellEnterprise){
     $formMainWindowControlManufacturerFunction.Header = "Dell Functions"
     $formMainWindowControlManufacturerFunction.Visibility = 'Visible'
@@ -404,7 +406,7 @@ elseif ($DellEnterprise){
     $formMainWindowControlOption_Name_5.add_Checked({$formMainWindowControlOption_Name_1.IsChecked = $true})
 
 }
-#>
+
 elseif ($HyperV){
     $formMainWindowControlManufacturerFunction.Header = "HyperV Functions"
     $formMainWindowControlManufacturerFunction.Visibility = 'Visible'    
@@ -439,8 +441,12 @@ else{
     #$formMainWindowControlOption_Name_6.IsEnabled = $false 
     #$formMainWindowControlOption_Name_6.Visibility = "Hidden"
 }
-
-
+#>
+#Disabling Vendor Features for now.
+$formMainWindowControlManufacturerFunction.Visibility = 'Hidden'
+$formMainWindowControlManufacturerFunction.IsEnabled = $false
+$formMainWindowControlWindowsDefenderUpdate.Visibility = 'Hidden'
+$formMainWindowControlWindowsDefenderUpdate.IsEnabled = $false
 #================================================
 #   DriverPack
 #================================================
