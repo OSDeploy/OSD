@@ -18,6 +18,25 @@ function Hide-PowershellWindow() {
 function Show-PowershellWindow() {
     $null = $showWindowAsync::ShowWindowAsync((Get-Process -Id $pid).MainWindowHandle, 10)
 }
+function Convert-ByteArrayToHex{
+
+    [CmdletBinding()]
+    param(
+        [parameter(Mandatory=$true)]
+        [Byte[]]
+        $Bytes
+    )
+    
+    $HextString = [System.Text.StringBuilder]::new($Bytes.Length * 2)
+    
+    foreach ($byte in $Bytes) {
+        $HextString.AppendFormat("{0:x2}", $byte) | Out-Null
+    }
+    
+    $HextString.ToString()
+    
+    }
+    
 Hide-CmdWindow
 Hide-PowershellWindow
 #================================================
@@ -34,7 +53,7 @@ $Global:MyScriptDir = [System.IO.Path]::GetDirectoryName($myInvocation.MyCommand
 #================================================
 #   Set PowerShell Window Title
 #================================================
-#$host.ui.RawUI.WindowTitle = "OSDCloudGUI"
+$host.ui.RawUI.WindowTitle = "AzOSDPad"
 #================================================
 #   Test-InWinPE
 #================================================
@@ -62,7 +81,7 @@ if ($global:ReadmeDisplay -ne $true){Write-host "If you need to reference this d
 write-host "Found the following interactable elements from our form" -ForegroundColor Cyan
 get-variable *WPF*
 }
-Get-FormVariables
+#Get-FormVariables
 
 #================================================
 #   Initialize
@@ -77,8 +96,6 @@ function Start-Scan {
     begin
         {
             $dummyNode = $null
-            
-            # test
             
             $AllNodes = $Global:AzOSDCloudGlobalScripts | Group-Object Container
             
@@ -103,7 +120,16 @@ function Start-Scan {
                     [System.Windows.Controls.TreeViewItem]$sender = $args[0]
                     [System.Windows.RoutedEventArgs]$e = $args[1]  
                     
-                    $WPF_tt.Content = $($sender.Tag[1].Name)
+                    # Set all properties to the same value null
+                        $WPF_Name.Content = " "
+                        $WPF_UrL.Content =  " "
+                        $WPF_LastModified.Content = " "
+                        $WPF_SHA.content = " "                       
+                        if ($WPF_ScriptTextControl.Text -notlike '#This is the azOSDPad Script PowerShell') {
+
+                            $WPF_ScriptTextControl.Text = " "
+                        }
+                        
                    
                     $global:Object= Get-AzOSDCloudBlobScriptFile -Container  $sender.Header
                     
@@ -119,10 +145,9 @@ function Start-Scan {
                             $TempArray.Add($global:Object[$i].Name)
                         }
                         $WPF_ListBoxControl.ItemsSource = $TempArray
+                        $WPF_CObjects.Content = $($global:Object).count
                     }
-                    
     })
-
             $WPF_TreeView.Items.Add($treeViewItem) | Out-Null
             }
         }
@@ -151,32 +176,82 @@ function Get-AzOSDCloudBlobScriptFile {
 }
 $WPF_ListBoxControl.Add_MouseRightButtonUp({
 
-    $WPF_ListBoxControl.SelectedIndex =  $WPF_ListBoxControl.Items.IndexOf($WPF_ListBoxControl.SelectedItem)
-
-   Write-Host $WPF_ListBoxControl.SelectedValue 
-
-   foreach ($item in $Global:AzOSDCloudBlobScript) {
-    if ($item.Name -eq $WPF_ListBoxControl.SelectedValue) {
-        <# Action to perform if the condition is true #>
-       $File =  $item.ICloudBlob
-    }
-
-   }
-   Get-AzStorageBlobContent -CloudBlob $file  -Context $Global:AzCurrentStorageContext.Context -Destination $Global:MyScriptDir\  -AsJob
 
 })
 
 $WPF_ListBoxControl.Add_MouseLeftButtonUp({
 
+    $WPF_ListBoxControl.SelectedIndex =  $WPF_ListBoxControl.Items.IndexOf($WPF_ListBoxControl.SelectedItem)
 
-$WPF_ListBoxControl.selectedIndex = 
+   foreach ($item in $Global:AzOSDCloudBlobScript) {
+    if ($item.Name -eq $WPF_ListBoxControl.SelectedValue) {
+        <# Action to perform if the condition is true #>
+       $File =  $item.ICloudBlob
+       $WPF_Name.Content = $File.Name
+       $WPF_UrL.Content =  $File.Uri.AbsoluteUri
+       $WPF_LastModified.Content = $File.Properties.LastModified
+       $WPF_SHA.content = Convert-ByteArrayToHex -Bytes $( $item.BlobProperties.ContentHash -split " ")
+    }
+    if (!(Test-Path "$env:Temp\azOSDPad")) {New-Item "$env:Temp\azOSDPad" -ItemType Directory |Out-Null}
 
-write-host $WPF_ListBoxControl.selectedIndex
+   }
+   if ($WPF_ListBoxControl.SelectedValue -like "*.xml" -or $WPF_ListBoxControl.SelectedValue -like "*.ppkg") {
+     $WPF_runfile.IsEnabled = $false
+     $WPF_StartButtonControl.IsEnabled = $false
+   }
+   elseif ($WPF_ListBoxControl.SelectedValue -like "*.ps1") {
+     $WPF_runfile.IsEnabled = $true
+     $WPF_StartButtonControl.IsEnabled = $true
+
+   }
+   $global:File = $File
+  # Get-AzStorageBlobContent -CloudBlob $file  -Context $Global:AzCurrentStorageContext.Context -Destination $Global:MyScriptDir\  -AsJob
 
 })
 
-#########################################################################
+$WPF_ViewFile.add_Click({
+
+  Get-AzStorageBlobContent -CloudBlob $global:File  -Context $Global:AzCurrentStorageContext.Context -Destination "$env:Temp\azOSDPad\"  -AsJob
+    $name = "$env:Temp\azOSDPad\" + $global:File.Name
+  Start-Sleep -Seconds 2
+    $WPF_ScriptTextControl.Text = Get-content -Path $name
+
+})
+
+$WPF_RunFile.add_Click({
+
+    Get-AzStorageBlobContent -CloudBlob $global:File  -Context $Global:AzCurrentStorageContext.Context -Destination "$env:Temp\azOSDPad\"  -AsJob
+      $name = "$env:Temp\azOSDPad\" + $global:File.Name
+    
+      Start-Sleep -Seconds 2
+    
+      & "$name"
+  
+  })
+
+  $WPF_StartButtonControl.add_Click({
+    
+    $Global:azOSDPadScriptBlock = [scriptblock]::Create($WPF_ScriptTextControl.Text)
+
+    if ($Global:azOSDPadScriptBlock) {
+        if ($ScriptSelectionControl.SelectedValue -like '#This is the azOSDPad Script PowerShell*') {
+            $ScriptFile = 'New PowerShell Script.ps1'
+        }
+        else {
+            $ScriptFile = $global:File.Name
+        }
+    }
+    $ScriptPath = "$env:Temp\OSDPad\$ScriptFile"
+    $Global:azOSDPadScriptBlock | Out-File $ScriptPath -Encoding utf8 -Width 2000 -Force
+
+    Start-Process -WorkingDirectory "$env:Temp\OSDPad" -FilePath PowerShell.exe -ArgumentList '-NoLogo -NoExit',"-File `"$ScriptFile`""
+
+  })
+  #########################################################################
 #                        Stuff                                          #
 #########################################################################
 Start-Scan
+$WPF_CObjects.Content = ""
+$WPF_StorageAccountName.content = $Global:AzOSDCloudStorageAccounts.StorageAccountName
+$WPF_ResourceGroup.Content = $Global:AzOSDCloudStorageAccounts.ResourceGroupName
 $Form.ShowDialog() | Out-Null
