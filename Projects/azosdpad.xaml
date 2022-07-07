@@ -4,9 +4,11 @@
    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
    xmlns:sys="clr-namespace:dev4sys.Tree;assembly=dev4sys.Tree"
    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-   SizeToContent="WidthAndHeight"
+   
    Title="AzOSDPAD"
    Topmost="False"
+   Width="860"
+   Height="770"
    WindowStartupLocation="CenterScreen">
    <Window.Resources>
       <ResourceDictionary>
@@ -239,6 +241,27 @@
                </DrawingGroup>
             </DrawingImage.Drawing>
          </DrawingImage>
+          <DrawingImage x:Key="Resource_Groups">
+         <DrawingImage.Drawing>
+    <DrawingGroup ClipGeometry="M0,0 V18 H18 V0 H0 Z">
+      <DrawingGroup Opacity="1">
+        <DrawingGroup Opacity="1">
+          <GeometryDrawing Brush="#FF949494" Geometry="F1 M18,18z M0,0z M0.5,15.08A0.16,0.16,0,0,0,0.58,15.22L1.74,15.87 3.7,17A0.17,0.17,0,0,0,3.93,16.94L4.59,15.82A0.16,0.16,0,0,0,4.53,15.61L2.23,14.31A0.17,0.17,0,0,1,2.15,14.17L2.15,3.85A0.16,0.16,0,0,1,2.23,3.71L4.53,2.41A0.16,0.16,0,0,0,4.59,2.2L3.93,1.08A0.17,0.17,0,0,0,3.7,1L1.78,2.11 0.58,2.78A0.16,0.16,0,0,0,0.5,2.92L0.5,15.08z" />
+          <GeometryDrawing Brush="#FFA3A3A3" Geometry="F1 M18,18z M0,0z M2.14,3.77L2.2,3.71 4.5,2.41A0.14,0.14,0,0,0,4.56,2.2L3.9,1.08A0.15,0.15,0,0,0,3.68,1L1.75,2.11 0.56,2.78C0.56,2.78,0.51,2.78,0.5,2.84L1.4,3.35z" />
+          <GeometryDrawing Brush="#FFA3A3A3" Geometry="F1 M18,18z M0,0z M4.5,15.59L2.2,14.29A0.22,0.22,0,0,1,2.13,14.2L0.51,15.2 0.56,15.2 1.71,15.85 3.71,16.96A0.15,0.15,0,0,0,3.93,16.9L4.59,15.78A0.14,0.14,0,0,0,4.5,15.59z" />
+        </DrawingGroup>
+        <GeometryDrawing Brush="#FF949494" Geometry="F1 M18,18z M0,0z M17.5,15.08A0.16,0.16,0,0,1,17.42,15.22L16.26,15.87 14.3,17A0.17,0.17,0,0,1,14.07,16.94L13.41,15.82A0.16,0.16,0,0,1,13.47,15.61L15.77,14.31A0.17,0.17,0,0,0,15.85,14.17L15.85,3.85A0.16,0.16,0,0,0,15.77,3.71L13.47,2.41A0.16,0.16,0,0,1,13.41,2.2L14.07,1.08A0.17,0.17,0,0,1,14.3,1L16.22,2.09 17.42,2.76A0.16,0.16,0,0,1,17.5,2.9L17.5,15.08z" />
+        <GeometryDrawing Brush="#FFA3A3A3" Geometry="F1 M18,18z M0,0z M15.86,3.77L15.8,3.71 13.5,2.41A0.14,0.14,0,0,1,13.44,2.2L14.1,1.08A0.15,0.15,0,0,1,14.32,1L16.25,2.09 17.44,2.76C17.44,2.76,17.44,2.76,17.5,2.82L16.6,3.33z" />
+        <GeometryDrawing Brush="#FFA3A3A3" Geometry="F1 M18,18z M0,0z M13.5,15.59L15.8,14.29A0.22,0.22,0,0,0,15.87,14.2L17.49,15.2 17.49,15.2 16.34,15.85 14.34,16.96A0.15,0.15,0,0,1,14.12,16.9L13.46,15.78A0.14,0.14,0,0,1,13.5,15.59z" />
+        <GeometryDrawing Brush="#FF32BEDD" Geometry="F1 M18,18z M0,0z M14.31,5.93L14.31,5.93 14.31,12.07 8.99,15.16 8.99,9.01 14.31,5.93z" />
+        <GeometryDrawing Brush="#FF9CEBFF" Geometry="F1 M18,18z M0,0z M14.31,5.93L14.31,5.93 9,9.02 3.68,5.93 9,2.84 14.31,5.93z" />
+        <GeometryDrawing Brush="#FF50E6FF" Geometry="F1 M18,18z M0,0z M8.99,9.02L8.99,9.02 8.99,15.16 3.68,12.07 3.68,5.93 8.99,9.02z" />
+        <GeometryDrawing Brush="#FF9CEBFF" Geometry="F1 M18,18z M0,0z M3.68,12.07L3.68,12.07 8.99,9.01 8.99,15.16 3.68,12.07z" />
+        <GeometryDrawing Brush="#FF50E6FF" Geometry="F1 M18,18z M0,0z M14.31,12.07L14.31,12.07 8.99,9.01 8.99,15.16 14.31,12.07z" />
+      </DrawingGroup>
+    </DrawingGroup>
+  </DrawingImage.Drawing>
+         </DrawingImage>
          <Style TargetType="{x:Type Button}">
             <Setter Property="Background" Value="{DynamicResource FlatButtonBackgroundBrush}"/>
             <Setter Property="BorderThickness" Value="0"/>
@@ -325,7 +348,7 @@
             <StackPanel HorizontalAlignment="Right" Margin="20,0,0,0" Orientation="Horizontal">
                <Image Height="30" Source="{StaticResource Microsoft_Azure}"/>
                <Label
-                  Margin="5 0 0 0 "
+                  Margin="5 0 10 0 "
                   Content="AzOSDPAD"
                   FontSize="20"
                   FontWeight="Bold"
@@ -344,16 +367,49 @@
                      Padding="2">
                   </Label>
                   <Label
+                     Name="StorageAccountName"
                      Width="165"
                      Margin="0 10 0 0 "
-                     Content="osdscript"
+                     Content=""
+                     FontSize="13"
+                     FontWeight="Bold"
+                     Padding="2">
+                  </Label>
+               </StackPanel>
+               
+            </StackPanel>
+             <StackPanel HorizontalAlignment="Left" Margin="10,0,0,0" Orientation="Horizontal">
+               <Image Height="30" Source="{StaticResource Resource_Groups}"/>
+               <StackPanel Orientation="Horizontal">
+                  <Label
+                     Margin="5"
+                     Content="Resource Group"
+                     FontSize="18"
+                     FontWeight="Bold"
+                     Foreground="#003E92"
+                     Padding="2">
+                  </Label>
+                  <Label
+                     Name="ResourceGroup"
+                     Width="165"
+                     Margin="0 10 0 0 "
+                     Content=""
                      FontSize="13"
                      FontWeight="Bold"
                      Padding="2">
                   </Label>
                </StackPanel>
             </StackPanel>
-           
+              <Line
+              Margin="0 10 0 10"
+              Width="800" 
+              X1="0"
+              Y1="0"
+              X2="2"
+              Y2="0"
+              Stroke="Gainsboro"
+              StrokeThickness="1"
+              Stretch="Uniform"></Line>
          </StackPanel>
          <StackPanel
             x:Name="StackElements"
@@ -362,10 +418,10 @@
             Orientation="Horizontal">
             <Border
                Width="290"
-               Height="347"
-               Margin="-10 0 0 0 "
+               Height="210"
+               Margin="-10 0 90 0 "
                BorderBrush="{DynamicResource MahApps.Brushes.Accent}"
-               BorderThickness="2">
+               BorderThickness="3">
                <StackPanel>
                   <StackPanel Background="{DynamicResource MahApps.Brushes.Accent}" Orientation="Horizontal">
                      <Label
@@ -382,7 +438,7 @@
                         Foreground="Black">
                      </Label>
                   </StackPanel>
-                  <TreeView Name="TreeView" Width="250" Height="300">
+                  <TreeView Name="TreeView" Width="250" Height="170">
                      <TreeView.Resources>
                         <Style TargetType="{x:Type TreeViewItem}">
                            <Setter Property="HeaderTemplate">
@@ -406,13 +462,14 @@
                </StackPanel>
             </Border>
             <Border
-               Width="320"
+               Width="300"
+               Height="210"
                Margin="5,0,0,0"
                BorderBrush="{DynamicResource MahApps.Brushes.Accent}"
-               BorderThickness="2">
+               BorderThickness="3">
                <StackPanel HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Orientation="Vertical">
                   <StackPanel Background="{DynamicResource MahApps.Brushes.Accent}" Orientation="Horizontal">
-                     <Label HorizontalAlignment="Stretch" Content="Objects:" Foreground="Black"/>
+                     <Label HorizontalAlignment="Stretch" Margin="7 0 0 0" Content="Objects:" Foreground="Black"/>
                      <Label
                         Name="CObjects"
                         HorizontalAlignment="Stretch"
@@ -422,12 +479,13 @@
                   </StackPanel>
                   <Grid
                      x:Name="Destination"
-                     Height="300"
+                     Height="200"
                      HorizontalAlignment="Stretch"
+                     VerticalAlignment="Top"
                      Background="#FFFFFF">
                      <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
    <!-- LISTBOX -->
-                        <ListBox Name="ListBoxControl" Height="300" HorizontalContentAlignment="Stretch">
+                        <ListBox  Name="ListBoxControl" Height="170" Width="290" HorizontalContentAlignment="Stretch" VerticalAlignment="Top">
                            <ListBox.ItemTemplate>
                               <DataTemplate>
                                  <StackPanel Orientation="Horizontal">
@@ -450,13 +508,13 @@
                                     <MenuItem.Icon>
                                        <Image Height="45" Margin=" 0 2 5 0 " Source="{StaticResource Service_Blob}"/>
                                     </MenuItem.Icon>
-                                    <MenuItem Header="View">
+                                    <MenuItem Name="ViewFile" Header="View">
                                        <MenuItem.Icon>
                                           <Image Height="45" Margin=" 0 2 5 0 " Source="{StaticResource Service_Detonation}"/>
                                        </MenuItem.Icon>
                                     </MenuItem>
                                     <Separator/>
-                                    <MenuItem Header="Run">
+                                    <MenuItem Name="RunFile" Header="Run">
                                        <MenuItem.Icon>
                                           <Image Height="45" Margin=" 0 2 5 0 " Source="{StaticResource Service_RTOS}"/>
                                        </MenuItem.Icon>
@@ -470,26 +528,127 @@
                </StackPanel>
             </Border>
          </StackPanel>
+          <Line
+              Margin="0 10 0 10"
+              Width="800" 
+              X1="0"
+              Y1="0"
+              X2="2"
+              Y2="0"
+              Stroke="Gainsboro"
+              StrokeThickness="1"
+              Stretch="Uniform"></Line>
+         <StackPanel Margin="15" Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Top">
          <Expander
             Name="SObjects"
-            Width="767"
-            Height="170"
-            Margin="4,10,0,10"
+            Width="400"
+            Height="210"
+            Margin="10,10,0,10"
             Header="Objects selected"
             IsExpanded="true">
             <StackPanel
-               Height="150"
+               Height="170"
                Margin="5,10,5,10"
                Background="#A7F5F5F5"
                Orientation="Vertical">
-               <Label
-                  Name="tt"
+               <StackPanel Orientation="Horizontal" Margin="8">
+              <Label
+                  HorizontalAlignment="Left"
+                  Content="Name :"
+                  FontSize="13"
+                  FontWeight="Bold"/>
+                  <Label
+                  Name="Name"
+                  Width="200"
+                  HorizontalAlignment="Left"
+                  Content="...."
+                  FontSize="13"/>
+                  </StackPanel>
+                   <StackPanel Orientation="Horizontal"  Margin="8">
+              <Label
+                  HorizontalAlignment="Left"
+                  Content="Last Modified :"
+                  FontSize="13"
+                  FontWeight="Bold"/>
+                  <Label
+                  Name="LastModified"
                   Width="150"
                   HorizontalAlignment="Left"
                   Content="...."
                   FontSize="13"/>
+                  </StackPanel>
+                  <StackPanel Orientation="Horizontal"  Margin="8">
+              <Label
+                  HorizontalAlignment="Left"
+                  Content="URI :"
+                  FontSize="13"
+                  FontWeight="Bold"/>
+                  <Label
+                  Name="URL"
+                  Width="390"
+                  HorizontalAlignment="Left"
+                  Content="...."
+                  FontSize="11"/>
+                  </StackPanel>
+                                    <StackPanel Orientation="Horizontal"  Margin="8">
+              <Label
+                  HorizontalAlignment="Left"
+                  Content="Sha256 :"
+                  FontSize="13"
+                  FontWeight="Bold"/>
+                  <Label
+                  Name="SHA"
+                  Width="390"
+                  HorizontalAlignment="Left"
+                  Content="...."
+                  FontSize="11"/>
+                  </StackPanel>
+
             </StackPanel>
          </Expander>
+           <Expander
+            Name="Content"
+            Width="450"
+            Height="210"
+            Margin="10,10,0,10"
+            Header="Content"
+            IsExpanded="true">
+            <StackPanel
+               Height="250"
+               Margin="5,10,5,10"
+               Background="#A7F5F5F5"
+               Orientation="Vertical">
+               <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                <TextBox 
+                 Width="387"
+                 Height="165"
+                 Name="ScriptTextControl"
+                 Text="#This is the azOSDPad Script PowerShell"
+                 AcceptsReturn="True"
+                 AcceptsTab="True"
+                 TextWrapping="Wrap"
+                 Background="Gainsboro"
+                 FontFamily="Consolas"
+                 FontSize="13"
+                 Foreground="Blue"
+                 HorizontalAlignment="Center"
+                 ScrollViewer.HorizontalScrollBarVisibility="Visible"
+                 ScrollViewer.VerticalScrollBarVisibility="Visible"
+                 VerticalAlignment="Top"/>
+               </StackPanel>
+            </StackPanel>
+         </Expander>
+      </StackPanel>
+      <Button 
+                Name="StartButtonControl"
+                Margin="0 0 10 0"
+                Content="Execute"
+                FontSize="18"
+                Foreground="White"
+                Height="40"
+                Width="130"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Bottom" />
       </StackPanel>
    </Grid>
 </Window>
