@@ -1,0 +1,654 @@
+
+<Window
+   Name="MainPanel"
+   xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+   xmlns:sys="clr-namespace:dev4sys.Tree;assembly=dev4sys.Tree"
+   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+   
+   Title="AzOSDPAD"
+   Topmost="False"
+   Width="860"
+   Height="770"
+   WindowStartupLocation="CenterScreen">
+   <Window.Resources>
+      <ResourceDictionary>
+         <DrawingImage x:Key="Microsoft_Azure">
+            <DrawingImage.Drawing>
+               <DrawingGroup ClipGeometry="M0,0 V256 H256 V0 H0 Z">
+                  <GeometryDrawing Geometry="F1 M256,256z M0,0z M89.158,18.266L158.396,18.266 86.523,231.224A11.041,11.041,0,0,1,76.062,238.734L22.179,238.734A11.023,11.023,0,0,1,11.734,224.186L78.697,25.776A11.04,11.04,0,0,1,89.158,18.266z">
+                     <GeometryDrawing.Brush>
+                        <LinearGradientBrush StartPoint="-960.606,283.397" EndPoint="-1032.511,70.972" MappingMode="Absolute" Opacity="1" SpreadMethod="Pad" Transform="1,0,0,-1,1075,318">
+                           <GradientStop Offset="0" Color="#FF114A8B"/>
+                           <GradientStop Offset="1" Color="#FF0669BC"/>
+                        </LinearGradientBrush>
+                     </GeometryDrawing.Brush>
+                  </GeometryDrawing>
+                  <GeometryDrawing Brush="#FF0078D4" Geometry="F1 M256,256z M0,0z M189.77,161.104L79.976,161.104A5.083,5.083,0,0,0,76.508,169.904L147.06,235.751A11.091,11.091,0,0,0,154.627,238.734L216.794,238.734z"/>
+                  <GeometryDrawing Geometry="F1 M256,256z M0,0z M89.158,18.266A10.95,10.95,0,0,0,78.675,25.92L11.817,224.006A11.01,11.01,0,0,0,22.21,238.734L77.484,238.734A11.814,11.814,0,0,0,86.553,231.02L99.883,191.73 147.508,236.148A11.267,11.267,0,0,0,154.597,238.734L216.534,238.734 189.368,161.104 110.178,161.122 158.648,18.266z">
+                     <GeometryDrawing.Brush>
+                        <LinearGradientBrush StartPoint="-938.144,184.402" EndPoint="-954.778,178.778" MappingMode="Absolute" Opacity="1" SpreadMethod="Pad" Transform="1,0,0,-1,1075,318">
+                           <GradientStop Offset="0" Color="#4C000000"/>
+                           <GradientStop Offset="0.071" Color="#33000000"/>
+                           <GradientStop Offset="0.321" Color="#1A000000"/>
+                           <GradientStop Offset="0.623" Color="#0D000000"/>
+                           <GradientStop Offset="1" Color="#00000000"/>
+                        </LinearGradientBrush>
+                     </GeometryDrawing.Brush>
+                  </GeometryDrawing>
+                  <GeometryDrawing Geometry="F1 M256,256z M0,0z M177.592,25.764A11.023,11.023,0,0,0,167.148,18.266L89.984,18.266A11.024,11.024,0,0,1,100.429,25.764L167.396,224.185A11.024,11.024,0,0,1,156.951,238.734L234.115,238.734A11.024,11.024,0,0,0,244.559,224.185z">
+                     <GeometryDrawing.Brush>
+                        <LinearGradientBrush StartPoint="-947.292,289.594" EndPoint="-868.363,79.308" MappingMode="Absolute" Opacity="1" SpreadMethod="Pad" Transform="1,0,0,-1,1075,318">
+                           <GradientStop Offset="0" Color="#FF3CCBF4"/>
+                           <GradientStop Offset="1" Color="#FF2892DF"/>
+                        </LinearGradientBrush>
+                     </GeometryDrawing.Brush>
+                  </GeometryDrawing>
+               </DrawingGroup>
+            </DrawingImage.Drawing>
+         </DrawingImage>
+         <DrawingImage x:Key="Storage_Accounts">
+            <DrawingImage.Drawing>
+               <DrawingGroup ClipGeometry="M0,0 V18 H18 V0 H0 Z">
+                  <GeometryDrawing Geometry="F1 M18,18z M0,0z M0.5,5.79L17.5,5.79A0,0,0,0,1,17.5,5.79L17.5,15.27A0.57,0.57,0,0,1,16.93,15.84L1.07,15.84A0.57,0.57,0,0,1,0.5,15.27L0.5,5.79A0,0,0,0,1,0.5,5.79z">
+                     <GeometryDrawing.Brush>
+                        <LinearGradientBrush StartPoint="9,15.83" EndPoint="9,5.79" MappingMode="Absolute" Opacity="1" SpreadMethod="Pad">
+                           <GradientStop Offset="0" Color="#FFB3B3B3"/>
+                           <GradientStop Offset="0.26" Color="#FFC1C1C1"/>
+                           <GradientStop Offset="1" Color="#FFE6E6E6"/>
+                        </LinearGradientBrush>
+                     </GeometryDrawing.Brush>
+                  </GeometryDrawing>
+                  <GeometryDrawing Brush="#FF37C2B1" Geometry="F1 M18,18z M0,0z M1.07,2.17L16.93,2.17A0.57,0.57,0,0,1,17.5,2.74L17.5,5.79A0,0,0,0,1,17.5,5.79L0.5,5.79A0,0,0,0,1,0.5,5.79L0.5,2.73A0.57,0.57,0,0,1,1.07,2.17z"/>
+                  <GeometryDrawing Brush="#FFFFFFFF" Geometry="F1 M18,18z M0,0z M2.81,6.89L15.18,6.89A0.27,0.27,0,0,1,15.44,7.16L15.44,8.56A0.27,0.27,0,0,1,15.18,8.83L2.81,8.83A0.27,0.27,0,0,1,2.55,8.56L2.55,7.16A0.27,0.27,0,0,1,2.81,6.89z"/>
+                  <GeometryDrawing Brush="#FF37C2B1" Geometry="F1 M18,18z M0,0z M2.82,9.68L15.19,9.68A0.27,0.27,0,0,1,15.45,9.95L15.45,11.36A0.27,0.27,0,0,1,15.19,11.63L2.82,11.63A0.27,0.27,0,0,1,2.56,11.36L2.56,10A0.27,0.27,0,0,1,2.82,9.68z"/>
+                  <GeometryDrawing Brush="#FF258277" Geometry="F1 M18,18z M0,0z M2.82,12.5L15.19,12.5A0.27,0.27,0,0,1,15.45,12.77L15.45,14.18A0.27,0.27,0,0,1,15.19,14.45L2.82,14.45A0.27,0.27,0,0,1,2.56,14.18L2.56,12.77A0.27,0.27,0,0,1,2.82,12.5z"/>
+               </DrawingGroup>
+            </DrawingImage.Drawing>
+         </DrawingImage>
+         <DrawingImage x:Key="Service_Blob">
+            <DrawingImage.Drawing>
+               <DrawingGroup ClipGeometry="M0,0 V18 H18 V0 H0 Z">
+                  <DrawingGroup Opacity="1">
+                     <DrawingGroup Opacity="1">
+                        <GeometryDrawing Geometry="F1 M18,18z M0,0z M0.5,5.788L17.5,5.788A0,0,0,0,1,17.5,5.788L17.5,15.266A0.568,0.568,0,0,1,16.932,15.834L1.068,15.834A0.568,0.568,0,0,1,0.5,15.266L0.5,5.788A0,0,0,0,1,0.5,5.788z">
+                           <GeometryDrawing.Brush>
+                              <LinearGradientBrush StartPoint="9,15.834" EndPoint="9,5.788" MappingMode="Absolute" Opacity="1" SpreadMethod="Pad">
+                                 <GradientStop Offset="0" Color="#FF32BEDD"/>
+                                 <GradientStop Offset="0.775" Color="#FF32D4F5"/>
+                              </LinearGradientBrush>
+                           </GeometryDrawing.Brush>
+                        </GeometryDrawing>
+                        <GeometryDrawing Brush="#FF198AB3" Geometry="F1 M18,18z M0,0z M1.071,2.166L16.929,2.166A0.568,0.568,0,0,1,17.497,2.734L17.497,5.788A0,0,0,0,1,17.497,5.788L0.5,5.788A0,0,0,0,1,0.5,5.788L0.5,2.734A0.568,0.568,0,0,1,1.071,2.166z"/>
+                        <GeometryDrawing Brush="#FFFFFFFF" Geometry="F1 M18,18z M0,0z M12.818,6.945L9.737,6.945A0.243,0.243,0,0,0,9.494,7.188L9.494,13.834A0.243,0.243,0,0,0,9.737,14.077L15.077,14.077A0.243,0.243,0,0,0,15.321,13.834L15.321,9.434A0.244,0.244,0,0,0,15.077,9.19L13.305,9.19A0.243,0.243,0,0,1,13.062,8.946L13.062,7.188A0.243,0.243,0,0,0,12.818,6.945z"/>
+                        <GeometryDrawing Brush="#FFC3F1FF" Geometry="F1 M18,18z M0,0z M12.706,7.256L12.706,8.925A0.613,0.613,0,0,0,13.318,9.537L15,9.537 15,13.766 9.815,13.766 9.815,7.256 12.706,7.256 M12.824,6.891L9.7,6.891A0.247,0.247,0,0,0,9.453,7.138L9.453,13.884A0.247,0.247,0,0,0,9.7,14.131L15.12,14.131A0.247,0.247,0,0,0,15.367,13.884L15.367,9.419A0.248,0.248,0,0,0,15.12,9.172L13.32,9.172A0.247,0.247,0,0,1,13.073,8.925L13.073,7.138A0.247,0.247,0,0,0,12.826,6.891z"/>
+                        <GeometryDrawing Brush="#FF50E6FF" Geometry="F1 M18,18z M0,0z M15.27,9.221L12.986,6.945 12.986,8.8A0.418,0.418,0,0,0,13.402,9.221z"/>
+                        <DrawingGroup Opacity="1">
+                           <GeometryDrawing Brush="#FFFFFFFF" Geometry="F1 M18,18z M0,0z M6.251,6.945L3.169,6.945A0.243,0.243,0,0,0,2.926,7.188L2.926,13.834A0.243,0.243,0,0,0,3.169,14.077L8.51,14.077A0.243,0.243,0,0,0,8.753,13.834L8.753,9.434A0.243,0.243,0,0,0,8.51,9.19L6.737,9.19A0.243,0.243,0,0,1,6.494,8.946L6.494,7.188A0.243,0.243,0,0,0,6.251,6.945z"/>
+                           <GeometryDrawing Brush="#FFC3F1FF" Geometry="F1 M18,18z M0,0z M6.138,7.256L6.138,8.925A0.613,0.613,0,0,0,6.75,9.537L8.432,9.537 8.432,13.766 3.248,13.766 3.248,7.256 6.138,7.256 M6.256,6.891L3.13,6.891A0.246,0.246,0,0,0,2.883,7.138L2.883,13.884A0.246,0.246,0,0,0,3.13,14.131L8.549,14.131A0.246,0.246,0,0,0,8.796,13.884L8.796,9.419A0.247,0.247,0,0,0,8.549,9.172L6.75,9.172A0.248,0.248,0,0,1,6.5,8.925L6.5,7.138A0.246,0.246,0,0,0,6.253,6.891z"/>
+                           <GeometryDrawing Brush="#FF50E6FF" Geometry="F1 M18,18z M0,0z M8.7,9.221L6.418,6.945 6.418,8.8A0.418,0.418,0,0,0,6.834,9.221z"/>
+                        </DrawingGroup>
+                     </DrawingGroup>
+                  </DrawingGroup>
+               </DrawingGroup>
+            </DrawingImage.Drawing>
+         </DrawingImage>
+         <DrawingImage x:Key="Service_User_Subscriptions">
+            <DrawingImage.Drawing>
+               <DrawingGroup ClipGeometry="M0,0 V18 H18 V0 H0 Z">
+                  <DrawingGroup Opacity="1">
+                     <DrawingGroup Opacity="1">
+                        <DrawingGroup Opacity="1">
+                           <GeometryDrawing Geometry="F1 M18,18z M0,0z M14.05,17.11A1.34,1.34,0,0,0,15.39,15.78A0.81,0.81,0,0,0,15.39,15.62C14.86,11.42 12.47,8 7.9,8 3.33,8 0.86,10.9 0.4,15.63A1.34,1.34,0,0,0,1.59,17.1L14.05,17.1z">
+                              <GeometryDrawing.Brush>
+                                 <LinearGradientBrush StartPoint="7.89,6.9" EndPoint="7.89,19.35" MappingMode="Absolute" Opacity="1" SpreadMethod="Pad">
+                                    <GradientStop Offset="0.22" Color="#FF32D4F5"/>
+                                    <GradientStop Offset="1" Color="#FF198AB3"/>
+                                 </LinearGradientBrush>
+                              </GeometryDrawing.Brush>
+                           </GeometryDrawing>
+                           <GeometryDrawing Geometry="F1 M18,18z M0,0z M7.9,9A4.09,4.09,0,0,1,5.63,8.33L7.88,14.22 10.12,8.37A4.17,4.17,0,0,1,7.9,9z">
+                              <GeometryDrawing.Brush>
+                                 <SolidColorBrush Color="#FFFFFFFF" Opacity="0.8"/>
+                              </GeometryDrawing.Brush>
+                           </GeometryDrawing>
+                           <GeometryDrawing>
+                              <GeometryDrawing.Brush>
+                                 <LinearGradientBrush StartPoint="7.53,0.22" EndPoint="8.44,11.53" MappingMode="Absolute" Opacity="1" SpreadMethod="Pad">
+                                    <GradientStop Offset="0.22" Color="#FF32D4F5"/>
+                                    <GradientStop Offset="1" Color="#FF198AB3"/>
+                                 </LinearGradientBrush>
+                              </GeometryDrawing.Brush>
+                              <GeometryDrawing.Geometry>
+                                 <EllipseGeometry Center="7.9,4.8" RadiusX="4.21" RadiusY="4.21"/>
+                              </GeometryDrawing.Geometry>
+                           </GeometryDrawing>
+                        </DrawingGroup>
+                        <DrawingGroup Opacity="1">
+                           <GeometryDrawing Geometry="F1 M18,18z M0,0z M17.27,11.45A1.13,1.13,0,0,0,17.27,9.85L17.27,9.85 15.33,7.85A1.12,1.12,0,0,0,13.73,7.85L13.73,7.85 11.73,9.79A1.14,1.14,0,0,0,11.73,11.4L13.34,13.04A0.31,0.31,0,0,1,13.43,13.26L13.43,16.26A0.36,0.36,0,0,0,13.55,16.54L14.28,17.29A0.27,0.27,0,0,0,14.65,17.29L15.37,16.57 15.37,16.57 15.79,16.14A0.14,0.14,0,0,0,15.79,15.94L15.48,15.63A0.17,0.17,0,0,1,15.48,15.4L15.79,15.09A0.13,0.13,0,0,0,15.79,14.89L15.49,14.58A0.17,0.17,0,0,1,15.49,14.35L15.8,14.04A0.14,0.14,0,0,0,15.8,13.84L15.38,13.41 15.38,13.3z M14.54,8.34A0.66,0.66,0,0,1,15.18,8.99A0.63,0.63,0,0,1,14.53,9.63A0.65,0.65,0,0,1,14.53,8.34z">
+                              <GeometryDrawing.Brush>
+                                 <RadialGradientBrush Center="-19.24,6.51" GradientOrigin="-19.24,6.51" MappingMode="Absolute" Opacity="1" RadiusX="6.13" RadiusY="6.13" SpreadMethod="Pad" Transform="0.94,0.01,-0.01,0.94,32.03,6.26">
+                                    <GradientStop Offset="0.27" Color="#FFFFD70F"/>
+                                    <GradientStop Offset="1" Color="#FFFEA11B"/>
+                                 </RadialGradientBrush>
+                              </GeometryDrawing.Brush>
+                           </GeometryDrawing>
+                           <GeometryDrawing Geometry="F1 M18,18z M0,0z M14,16.38L14,16.38A0.14,0.14,0,0,0,14.24,16.28L14.24,13.83A0.16,0.16,0,0,0,14.18,13.7L14.18,13.7A0.14,0.14,0,0,0,13.96,13.82L13.96,16.28A0.13,0.13,0,0,0,14,16.38z">
+                              <GeometryDrawing.Brush>
+                                 <SolidColorBrush Color="#FFFF9300" Opacity="0.75"/>
+                              </GeometryDrawing.Brush>
+                           </GeometryDrawing>
+                           <DrawingGroup Transform="0.006,-0.999,0.999,0.006,3.8,25.17">
+                              <GeometryDrawing>
+                                 <GeometryDrawing.Brush>
+                                    <SolidColorBrush Color="#FFFF9300" Opacity="0.75"/>
+                                 </GeometryDrawing.Brush>
+                                 <GeometryDrawing.Geometry>
+                                    <RectangleGeometry RadiusX="0.17" RadiusY="0.17" Rect="14.38,9.07,0.38,3.21"/>
+                                 </GeometryDrawing.Geometry>
+                              </GeometryDrawing>
+                           </DrawingGroup>
+                           <DrawingGroup Transform="0.006,-0.999,0.999,0.006,3.18,25.78">
+                              <GeometryDrawing>
+                                 <GeometryDrawing.Brush>
+                                    <SolidColorBrush Color="#FFFF9300" Opacity="0.75"/>
+                                 </GeometryDrawing.Brush>
+                                 <GeometryDrawing.Geometry>
+                                    <RectangleGeometry RadiusX="0.17" RadiusY="0.17" Rect="14.37,9.68,0.38,3.21"/>
+                                 </GeometryDrawing.Geometry>
+                              </GeometryDrawing>
+                           </DrawingGroup>
+                        </DrawingGroup>
+                     </DrawingGroup>
+                  </DrawingGroup>
+               </DrawingGroup>
+            </DrawingImage.Drawing>
+         </DrawingImage>
+         <DrawingImage x:Key="Service_Detonation">
+            <DrawingImage.Drawing>
+               <DrawingGroup ClipGeometry="M0,0 V18 H18 V0 H0 Z">
+                  <DrawingGroup.Transform>
+                     <TranslateTransform X="0.293" Y="0"/>
+                  </DrawingGroup.Transform>
+                  <GeometryDrawing Brush="#FFFFFFFF">
+                     <GeometryDrawing.Geometry>
+                        <EllipseGeometry Center="10.646,7.013" RadiusX="5.167" RadiusY="5.167"/>
+                     </GeometryDrawing.Geometry>
+                  </GeometryDrawing>
+                  <DrawingGroup Transform="0.707,-0.707,0.707,0.707,-8.375,7.198">
+                     <GeometryDrawing Brush="#FF767676">
+                        <GeometryDrawing.Geometry>
+                           <RectangleGeometry RadiusX="1.021" RadiusY="1.021" Rect="-0.293,12.617,9.59,2.184"/>
+                        </GeometryDrawing.Geometry>
+                     </GeometryDrawing>
+                  </DrawingGroup>
+                  <GeometryDrawing Brush="#FFA3A3A3">
+                     <GeometryDrawing.Geometry>
+                        <EllipseGeometry Center="10.659,7.13" RadiusX="6.579" RadiusY="6.579"/>
+                     </GeometryDrawing.Geometry>
+                  </GeometryDrawing>
+                  <GeometryDrawing>
+                     <GeometryDrawing.Brush>
+                        <LinearGradientBrush StartPoint="10.646,12.18" EndPoint="10.646,1.846" MappingMode="Absolute" Opacity="1" SpreadMethod="Pad">
+                           <GradientStop Offset="0" Color="#FF005BA1"/>
+                           <GradientStop Offset="0.192" Color="#FF1E71B5"/>
+                           <GradientStop Offset="0.567" Color="#FF5598DA"/>
+                           <GradientStop Offset="0.848" Color="#FF76B0F0"/>
+                           <GradientStop Offset="1" Color="#FF83B9F9"/>
+                        </LinearGradientBrush>
+                     </GeometryDrawing.Brush>
+                     <GeometryDrawing.Geometry>
+                        <EllipseGeometry Center="10.646,7.013" RadiusX="5.167" RadiusY="5.167"/>
+                     </GeometryDrawing.Geometry>
+                  </GeometryDrawing>
+                  <GeometryDrawing Brush="#FFF2F2F2" Geometry="F1 M18,18z M0,0z M14.55,5.973A1.575,1.575,0,1,1,11.598,7.073z"/>
+                  <GeometryDrawing Brush="#FFF2F2F2" Geometry="F1 M18,18z M0,0z M9.7,7.073A1.575,1.575,0,0,1,6.748,5.973z"/>
+               </DrawingGroup>
+            </DrawingImage.Drawing>
+         </DrawingImage>
+         <DrawingImage x:Key="Service_RTOS">
+            <DrawingImage.Drawing>
+               <DrawingGroup ClipGeometry="M0,0 V18 H18 V0 H0 Z">
+                  <DrawingGroup Opacity="1">
+                     <GeometryDrawing Brush="#FF74CFEB" Geometry="F1 M18,18z M0,0z M11.167,17.718L1.088,13.183A1.52,1.52,0,0,1,0.282,11.167L4.817,1.088A1.52,1.52,0,0,1,6.833,0.282L16.912,4.817A1.52,1.52,0,0,1,17.718,6.833L13.183,16.912A1.52,1.52,0,0,1,11.167,17.718z"/>
+                     <GeometryDrawing Geometry="F1 M18,18z M0,0z M15.9,5.12L13.183,2.4A1.294,1.294,0,0,0,12.175,2L3.608,2A1.378,1.378,0,0,0,2.2,3.406L2.2,14.594A1.378,1.378,0,0,0,3.611,16.005L14.9,16.005A1.378,1.378,0,0,0,16.311,14.594L16.311,6.128A1.54,1.54,0,0,0,15.911,5.12z">
+                        <GeometryDrawing.Brush>
+                           <LinearGradientBrush StartPoint="9.252,14.005" EndPoint="9.252,-0.028" MappingMode="Absolute" Opacity="1" SpreadMethod="Pad" Transform="1,0,0,1,0,2">
+                              <GradientStop Offset="0" Color="#FFB3B4B4"/>
+                              <GradientStop Offset="0.33" Color="#FFB3B4B4"/>
+                              <GradientStop Offset="0.82" Color="#FFCCCCCB"/>
+                              <GradientStop Offset="1" Color="#FFCCCCCB"/>
+                           </LinearGradientBrush>
+                        </GeometryDrawing.Brush>
+                     </GeometryDrawing>
+                     <GeometryDrawing Geometry="F1 M18,18z M0,0z M7.449,16.005L11.149,17.657C12.315,18.338,13.288,16.88,13.579,16.005">
+                        <GeometryDrawing.Brush>
+                           <LinearGradientBrush StartPoint="10.558,15.244" EndPoint="10.439,17.218" MappingMode="Absolute" Opacity="1" SpreadMethod="Pad">
+                              <GradientStop Offset="0.317" Color="#FF33BEDD"/>
+                              <GradientStop Offset="1" Color="#FF74CFEB"/>
+                           </LinearGradientBrush>
+                        </GeometryDrawing.Brush>
+                     </GeometryDrawing>
+                     <GeometryDrawing Geometry="F1 M18,18z M0,0z M14.087,9.575L14.087,8.415 13.925,8.354 12.683,7.947 12.358,7.153 12.988,5.81 12.174,5 12.012,5.081 10.852,5.672 10.058,5.346 9.549,3.946 8.39,3.946 8.328,4.1 7.921,5.342 7.128,5.668 5.805,5.037 4.991,5.851 5.073,6.014 5.663,7.173 5.337,7.967 3.913,8.476 3.913,9.636 4.075,9.697 5.317,10.104 5.642,10.897 5.012,12.24 5.826,13.054 5.988,12.973 7.148,12.383 7.942,12.708 8.451,14.108 9.61,14.108 9.672,13.945 10.079,12.703 10.872,12.378 12.215,13.009 13.029,12.195 12.948,12.032 12.358,10.872 12.683,10.078z">
+                        <GeometryDrawing.Brush>
+                           <LinearGradientBrush StartPoint="9,14.113" EndPoint="9,3.938" MappingMode="Absolute" Opacity="1" SpreadMethod="Pad">
+                              <GradientStop Offset="0" Color="#FF616261"/>
+                              <GradientStop Offset="1" Color="#FFB6B8BA"/>
+                           </LinearGradientBrush>
+                        </GeometryDrawing.Brush>
+                     </GeometryDrawing>
+                     <GeometryDrawing Brush="#FFFFFFFF" Geometry="F1 M18,18z M0,0z M9.652,6.292A0.1,0.1,0,0,0,9.6,6.279A0.139,0.139,0,0,0,9.506,6.332L7.2,9.687A0.129,0.129,0,0,0,7.187,9.808A0.137,0.137,0,0,0,7.294,9.875L8.672,9.875 8.055,11.9A0.1,0.1,0,0,0,8.109,12.035A0.081,0.081,0,0,0,8.162,12.048A0.133,0.133,0,0,0,8.256,12L10.632,8.6C10.645,8.573,10.658,8.56,10.658,8.533A0.12,0.12,0,0,0,10.538,8.412L9.115,8.412 9.706,6.426A0.1,0.1,0,0,0,9.652,6.292z"/>
+                  </DrawingGroup>
+               </DrawingGroup>
+            </DrawingImage.Drawing>
+         </DrawingImage>
+          <DrawingImage x:Key="Resource_Groups">
+         <DrawingImage.Drawing>
+    <DrawingGroup ClipGeometry="M0,0 V18 H18 V0 H0 Z">
+      <DrawingGroup Opacity="1">
+        <DrawingGroup Opacity="1">
+          <GeometryDrawing Brush="#FF949494" Geometry="F1 M18,18z M0,0z M0.5,15.08A0.16,0.16,0,0,0,0.58,15.22L1.74,15.87 3.7,17A0.17,0.17,0,0,0,3.93,16.94L4.59,15.82A0.16,0.16,0,0,0,4.53,15.61L2.23,14.31A0.17,0.17,0,0,1,2.15,14.17L2.15,3.85A0.16,0.16,0,0,1,2.23,3.71L4.53,2.41A0.16,0.16,0,0,0,4.59,2.2L3.93,1.08A0.17,0.17,0,0,0,3.7,1L1.78,2.11 0.58,2.78A0.16,0.16,0,0,0,0.5,2.92L0.5,15.08z" />
+          <GeometryDrawing Brush="#FFA3A3A3" Geometry="F1 M18,18z M0,0z M2.14,3.77L2.2,3.71 4.5,2.41A0.14,0.14,0,0,0,4.56,2.2L3.9,1.08A0.15,0.15,0,0,0,3.68,1L1.75,2.11 0.56,2.78C0.56,2.78,0.51,2.78,0.5,2.84L1.4,3.35z" />
+          <GeometryDrawing Brush="#FFA3A3A3" Geometry="F1 M18,18z M0,0z M4.5,15.59L2.2,14.29A0.22,0.22,0,0,1,2.13,14.2L0.51,15.2 0.56,15.2 1.71,15.85 3.71,16.96A0.15,0.15,0,0,0,3.93,16.9L4.59,15.78A0.14,0.14,0,0,0,4.5,15.59z" />
+        </DrawingGroup>
+        <GeometryDrawing Brush="#FF949494" Geometry="F1 M18,18z M0,0z M17.5,15.08A0.16,0.16,0,0,1,17.42,15.22L16.26,15.87 14.3,17A0.17,0.17,0,0,1,14.07,16.94L13.41,15.82A0.16,0.16,0,0,1,13.47,15.61L15.77,14.31A0.17,0.17,0,0,0,15.85,14.17L15.85,3.85A0.16,0.16,0,0,0,15.77,3.71L13.47,2.41A0.16,0.16,0,0,1,13.41,2.2L14.07,1.08A0.17,0.17,0,0,1,14.3,1L16.22,2.09 17.42,2.76A0.16,0.16,0,0,1,17.5,2.9L17.5,15.08z" />
+        <GeometryDrawing Brush="#FFA3A3A3" Geometry="F1 M18,18z M0,0z M15.86,3.77L15.8,3.71 13.5,2.41A0.14,0.14,0,0,1,13.44,2.2L14.1,1.08A0.15,0.15,0,0,1,14.32,1L16.25,2.09 17.44,2.76C17.44,2.76,17.44,2.76,17.5,2.82L16.6,3.33z" />
+        <GeometryDrawing Brush="#FFA3A3A3" Geometry="F1 M18,18z M0,0z M13.5,15.59L15.8,14.29A0.22,0.22,0,0,0,15.87,14.2L17.49,15.2 17.49,15.2 16.34,15.85 14.34,16.96A0.15,0.15,0,0,1,14.12,16.9L13.46,15.78A0.14,0.14,0,0,1,13.5,15.59z" />
+        <GeometryDrawing Brush="#FF32BEDD" Geometry="F1 M18,18z M0,0z M14.31,5.93L14.31,5.93 14.31,12.07 8.99,15.16 8.99,9.01 14.31,5.93z" />
+        <GeometryDrawing Brush="#FF9CEBFF" Geometry="F1 M18,18z M0,0z M14.31,5.93L14.31,5.93 9,9.02 3.68,5.93 9,2.84 14.31,5.93z" />
+        <GeometryDrawing Brush="#FF50E6FF" Geometry="F1 M18,18z M0,0z M8.99,9.02L8.99,9.02 8.99,15.16 3.68,12.07 3.68,5.93 8.99,9.02z" />
+        <GeometryDrawing Brush="#FF9CEBFF" Geometry="F1 M18,18z M0,0z M3.68,12.07L3.68,12.07 8.99,9.01 8.99,15.16 3.68,12.07z" />
+        <GeometryDrawing Brush="#FF50E6FF" Geometry="F1 M18,18z M0,0z M14.31,12.07L14.31,12.07 8.99,9.01 8.99,15.16 14.31,12.07z" />
+      </DrawingGroup>
+    </DrawingGroup>
+  </DrawingImage.Drawing>
+         </DrawingImage>
+         <Style TargetType="{x:Type Button}">
+            <Setter Property="Background" Value="{DynamicResource FlatButtonBackgroundBrush}"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="FontSize" Value="{DynamicResource FlatButtonFontSize}"/>
+            <Setter Property="Foreground" Value="{DynamicResource FlatButtonForegroundBrush}"/>
+            <Setter Property="Template">
+               <Setter.Value>
+                  <ControlTemplate TargetType="{x:Type Button}">
+                     <Border
+                        x:Name="Border"
+                        Margin="0"
+                        Background="{TemplateBinding Background}"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="{TemplateBinding BorderThickness}"
+                        CornerRadius="5"
+                        SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}">
+                        <ContentPresenter
+                           x:Name="ContentPresenter"
+                           HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                           Margin="{TemplateBinding Padding}"
+                           VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                           Content="{TemplateBinding Content}"
+                           ContentTemplate="{TemplateBinding ContentTemplate}"/>
+                     </Border>
+                  </ControlTemplate>
+               </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+               <Trigger Property="IsMouseOver" Value="True">
+   <!-- Windows 11 Theme Dark Blue -->
+                  <Setter Property="Background" Value="#003E92"/>
+               </Trigger>
+               <Trigger Property="IsMouseOver" Value="False">
+   <!-- Windows 11 Theme Blue -->
+                  <Setter Property="Background" Value="#0067C0"/>
+               </Trigger>
+               <Trigger Property="IsPressed" Value="True">
+                  <Setter Property="Background" Value="{DynamicResource FlatButtonPressedBackgroundBrush}"/>
+                  <Setter Property="Foreground" Value="{DynamicResource FlatButtonPressedForegroundBrush}"/>
+               </Trigger>
+               <Trigger Property="IsEnabled" Value="False">
+                  <Setter Property="Foreground" Value="{DynamicResource GrayBrush2}"/>
+               </Trigger>
+            </Style.Triggers>
+         </Style>
+         <Style TargetType="{x:Type ComboBox}">
+            <Setter Property="FontFamily" Value="Segoe UI"/>
+         </Style>
+         <Style TargetType="{x:Type Label}">
+            <Setter Property="FontFamily" Value="Segoe UI"/>
+         </Style>
+         <Style TargetType="{x:Type TextBox}">
+            <Setter Property="FontFamily" Value="Segoe UI"/>
+         </Style>
+         <Style TargetType="{x:Type Window}">
+            <Setter Property="FontFamily" Value="Segoe UI"/>
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="Background" Value="Black"/>
+            <Setter Property="Foreground" Value="Black"/>
+         </Style>
+      </ResourceDictionary>
+   </Window.Resources>
+   <Window.Background>
+      <RadialGradientBrush Center="0.4,0.1" GradientOrigin="0.2,0.2" RadiusX="0.7" RadiusY="0.8">
+         <RadialGradientBrush.RelativeTransform>
+            <TransformGroup>
+               <ScaleTransform CenterX="0.5" CenterY="0.5"/>
+               <SkewTransform CenterX="0.5" CenterY="0.5"/>
+               <RotateTransform Angle="-40.601" CenterX="0.5" CenterY="0.5"/>
+               <TranslateTransform/>
+            </TransformGroup>
+         </RadialGradientBrush.RelativeTransform>
+         <GradientStop Color="White"/>
+         <GradientStop Offset="0.056" Color="#FFF9FFFE"/>
+         <GradientStop Offset="0.776" Color="#FFF8FEFF"/>
+         <GradientStop Offset="0.264" Color="#FFF4FAFF"/>
+         <GradientStop Offset="0.506" Color="White"/>
+         <GradientStop Offset="1" Color="AliceBlue"/>
+      </RadialGradientBrush>
+   </Window.Background>
+   <Grid Name="RootGrid">
+      <StackPanel Margin="0,10,0,10" Orientation="Vertical">
+         <StackPanel Margin="0,10,0,10" Orientation="Vertical">
+            <StackPanel HorizontalAlignment="Right" Margin="20,0,0,0" Orientation="Horizontal">
+               <Image Height="30" Source="{StaticResource Microsoft_Azure}"/>
+               <Label
+                  Margin="5 0 10 0 "
+                  Content="AzOSDPAD"
+                  FontSize="20"
+                  FontWeight="Bold"
+                  Foreground="#01786A">
+               </Label>
+            </StackPanel>
+            <StackPanel HorizontalAlignment="Left" Margin="10,0,0,0" Orientation="Horizontal">
+               <Image Height="30" Source="{StaticResource Storage_Accounts}"/>
+               <StackPanel Orientation="Horizontal">
+                  <Label
+                     Margin="5"
+                     Content="Storage Account"
+                     FontSize="18"
+                     FontWeight="Bold"
+                     Foreground="#003E92"
+                     Padding="2">
+                  </Label>
+                  <Label
+                     Name="StorageAccountName"
+                     Width="165"
+                     Margin="0 10 0 0 "
+                     Content=""
+                     FontSize="13"
+                     FontWeight="Bold"
+                     Padding="2">
+                  </Label>
+               </StackPanel>
+               
+            </StackPanel>
+             <StackPanel HorizontalAlignment="Left" Margin="10,0,0,0" Orientation="Horizontal">
+               <Image Height="30" Source="{StaticResource Resource_Groups}"/>
+               <StackPanel Orientation="Horizontal">
+                  <Label
+                     Margin="5"
+                     Content="Resource Group"
+                     FontSize="18"
+                     FontWeight="Bold"
+                     Foreground="#003E92"
+                     Padding="2">
+                  </Label>
+                  <Label
+                     Name="ResourceGroup"
+                     Width="165"
+                     Margin="0 10 0 0 "
+                     Content=""
+                     FontSize="13"
+                     FontWeight="Bold"
+                     Padding="2">
+                  </Label>
+               </StackPanel>
+            </StackPanel>
+              <Line
+              Margin="0 10 0 10"
+              Width="800" 
+              X1="0"
+              Y1="0"
+              X2="2"
+              Y2="0"
+              Stroke="Gainsboro"
+              StrokeThickness="1"
+              Stretch="Uniform"></Line>
+         </StackPanel>
+         <StackPanel
+            x:Name="StackElements"
+            HorizontalAlignment="Center"
+            Margin="0,25,0,0"
+            Orientation="Horizontal">
+            <Border
+               Width="290"
+               Height="210"
+               Margin="-10 0 90 0 "
+               BorderBrush="{DynamicResource MahApps.Brushes.Accent}"
+               BorderThickness="3">
+               <StackPanel>
+                  <StackPanel Background="{DynamicResource MahApps.Brushes.Accent}" Orientation="Horizontal">
+                     <Label
+                        HorizontalAlignment="Stretch"
+                        Margin="15 0 0 0"
+                        Content="Containters:"
+                        Foreground="Black">
+                     </Label>
+                     <Label
+                        Name="Domain"
+                        HorizontalAlignment="Stretch"
+                        Margin="-7 0 0 0 "
+                        Content=""
+                        Foreground="Black">
+                     </Label>
+                  </StackPanel>
+                  <TreeView Name="TreeView" Width="250" Height="170">
+                     <TreeView.Resources>
+                        <Style TargetType="{x:Type TreeViewItem}">
+                           <Setter Property="HeaderTemplate">
+                              <Setter.Value>
+                                 <HierarchicalDataTemplate>
+                                    <StackPanel Orientation="Horizontal">
+                                       <Image
+                                          Name="img"
+                                          Width="25"
+                                          Height="25"
+                                          Source="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type TreeViewItem}}, Path=Tag, Converter={sys:ObjectTagToImageConverter}}"
+                                          Stretch="Fill"/>
+                                       <TextBlock Margin="5,0" Text="{Binding}"/>
+                                    </StackPanel>
+                                 </HierarchicalDataTemplate>
+                              </Setter.Value>
+                           </Setter>
+                        </Style>
+                     </TreeView.Resources>
+                  </TreeView>
+               </StackPanel>
+            </Border>
+            <Border
+               Width="300"
+               Height="210"
+               Margin="5,0,0,0"
+               BorderBrush="{DynamicResource MahApps.Brushes.Accent}"
+               BorderThickness="3">
+               <StackPanel HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Orientation="Vertical">
+                  <StackPanel Background="{DynamicResource MahApps.Brushes.Accent}" Orientation="Horizontal">
+                     <Label HorizontalAlignment="Stretch" Margin="7 0 0 0" Content="Objects:" Foreground="Black"/>
+                     <Label
+                        Name="CObjects"
+                        HorizontalAlignment="Stretch"
+                        Margin="-5 0 0 0 "
+                        Content="2"
+                        Foreground="Black"/>
+                  </StackPanel>
+                  <Grid
+                     x:Name="Destination"
+                     Height="200"
+                     HorizontalAlignment="Stretch"
+                     VerticalAlignment="Top"
+                     Background="#FFFFFF">
+                     <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
+   <!-- LISTBOX -->
+                        <ListBox  Name="ListBoxControl" Height="170" Width="290" HorizontalContentAlignment="Stretch" VerticalAlignment="Top">
+                           <ListBox.ItemTemplate>
+                              <DataTemplate>
+                                 <StackPanel Orientation="Horizontal">
+                                    <Image
+                                       Height="25"
+                                       Margin=" 0 2 5 0 "
+                                       Source="{StaticResource Service_Blob}"
+                                       Stretch="Fill"/>
+                                    <TextBlock
+                                       Width="280"
+                                       Margin="5,0"
+                                       Foreground="Black"
+                                       Text="{Binding}"/>
+                                 </StackPanel>
+                              </DataTemplate>
+                           </ListBox.ItemTemplate>
+                           <ListBox.ContextMenu>
+                              <ContextMenu>
+                                 <MenuItem Name="Files" Header="Files" IsEnabled="True">
+                                    <MenuItem.Icon>
+                                       <Image Height="45" Margin=" 0 2 5 0 " Source="{StaticResource Service_Blob}"/>
+                                    </MenuItem.Icon>
+                                    <MenuItem Name="ViewFile" Header="View">
+                                       <MenuItem.Icon>
+                                          <Image Height="45" Margin=" 0 2 5 0 " Source="{StaticResource Service_Detonation}"/>
+                                       </MenuItem.Icon>
+                                    </MenuItem>
+                                    <Separator/>
+                                    <MenuItem Name="RunFile" Header="Run">
+                                       <MenuItem.Icon>
+                                          <Image Height="45" Margin=" 0 2 5 0 " Source="{StaticResource Service_RTOS}"/>
+                                       </MenuItem.Icon>
+                                    </MenuItem>
+                                 </MenuItem>
+                              </ContextMenu>
+                           </ListBox.ContextMenu>
+                        </ListBox>
+                     </ScrollViewer>
+                  </Grid>
+               </StackPanel>
+            </Border>
+         </StackPanel>
+          <Line
+              Margin="0 10 0 10"
+              Width="800" 
+              X1="0"
+              Y1="0"
+              X2="2"
+              Y2="0"
+              Stroke="Gainsboro"
+              StrokeThickness="1"
+              Stretch="Uniform"></Line>
+         <StackPanel Margin="15" Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Top">
+         <Expander
+            Name="SObjects"
+            Width="400"
+            Height="210"
+            Margin="10,10,0,10"
+            Header="Objects selected"
+            IsExpanded="true">
+            <StackPanel
+               Height="170"
+               Margin="5,10,5,10"
+               Background="#A7F5F5F5"
+               Orientation="Vertical">
+               <StackPanel Orientation="Horizontal" Margin="8">
+              <Label
+                  HorizontalAlignment="Left"
+                  Content="Name :"
+                  FontSize="13"
+                  FontWeight="Bold"/>
+                  <Label
+                  Name="Name"
+                  Width="200"
+                  HorizontalAlignment="Left"
+                  Content="...."
+                  FontSize="13"/>
+                  </StackPanel>
+                   <StackPanel Orientation="Horizontal"  Margin="8">
+              <Label
+                  HorizontalAlignment="Left"
+                  Content="Last Modified :"
+                  FontSize="13"
+                  FontWeight="Bold"/>
+                  <Label
+                  Name="LastModified"
+                  Width="150"
+                  HorizontalAlignment="Left"
+                  Content="...."
+                  FontSize="13"/>
+                  </StackPanel>
+                  <StackPanel Orientation="Horizontal"  Margin="8">
+              <Label
+                  HorizontalAlignment="Left"
+                  Content="URI :"
+                  FontSize="13"
+                  FontWeight="Bold"/>
+                  <Label
+                  Name="URL"
+                  Width="390"
+                  HorizontalAlignment="Left"
+                  Content="...."
+                  FontSize="11"/>
+                  </StackPanel>
+                                    <StackPanel Orientation="Horizontal"  Margin="8">
+              <Label
+                  HorizontalAlignment="Left"
+                  Content="Sha256 :"
+                  FontSize="13"
+                  FontWeight="Bold"/>
+                  <Label
+                  Name="SHA"
+                  Width="390"
+                  HorizontalAlignment="Left"
+                  Content="...."
+                  FontSize="11"/>
+                  </StackPanel>
+
+            </StackPanel>
+         </Expander>
+           <Expander
+            Name="Content"
+            Width="450"
+            Height="210"
+            Margin="10,10,0,10"
+            Header="Content"
+            IsExpanded="true">
+            <StackPanel
+               Height="250"
+               Margin="5,10,5,10"
+               Background="#A7F5F5F5"
+               Orientation="Vertical">
+               <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                <TextBox 
+                 Width="387"
+                 Height="165"
+                 Name="ScriptTextControl"
+                 Text="#This is the azOSDPad Script PowerShell"
+                 AcceptsReturn="True"
+                 AcceptsTab="True"
+                 TextWrapping="Wrap"
+                 Background="Gainsboro"
+                 FontFamily="Consolas"
+                 FontSize="13"
+                 Foreground="Blue"
+                 HorizontalAlignment="Center"
+                 ScrollViewer.HorizontalScrollBarVisibility="Visible"
+                 ScrollViewer.VerticalScrollBarVisibility="Visible"
+                 VerticalAlignment="Top"/>
+               </StackPanel>
+            </StackPanel>
+         </Expander>
+      </StackPanel>
+      <Button 
+                Name="StartButtonControl"
+                Margin="0 0 10 0"
+                Content="Execute"
+                FontSize="18"
+                Foreground="White"
+                Height="40"
+                Width="130"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Bottom" />
+      </StackPanel>
+   </Grid>
+</Window>

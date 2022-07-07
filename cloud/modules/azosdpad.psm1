@@ -21,7 +21,7 @@ function Get-AzOSDCloudScript {
     if ($Global:AzureAD -or $Global:MgGraph) {
         Write-Host -ForegroundColor DarkGray    'Storage Accounts:          $Global:AzStorageAccounts'
         $Global:AzStorageAccounts = Get-AzStorageAccount
-    
+  
         Write-Host -ForegroundColor DarkGray    'OSDCloud Storage Accounts: $Global:AzOSDCloudStorageAccounts'
         $Global:AzOSDCloudStorageAccounts = Get-AzStorageAccount | Where-Object {$_.Tags.ContainsKey('OSDScripts')}
     
@@ -35,14 +35,14 @@ function Get-AzOSDCloudScript {
             Write-Host -ForegroundColor Cyan "Scanning for PowerShell Script"
             foreach ($Item in $Global:AzOSDCloudStorageAccounts) {
                 $Global:AzCurrentStorageContext = New-AzStorageContext -StorageAccountName $Item.StorageAccountName
+                $Global:StorageContainers = Get-AzStorageContainer -Context $Global:AzCurrentStorageContext
                 $Global:AzStorageContext."$($Item.StorageAccountName)" = $Global:AzCurrentStorageContext      
-                $StorageContainers = Get-AzStorageContainer -Context $Global:AzCurrentStorageContext
                 if ($StorageContainers) {
                     foreach ($Container in $StorageContainers) {
                         Write-Host -ForegroundColor DarkGray "Storage Account: $($Item.StorageAccountName) Container: $($Container.Name)"
                         $Global:AzOSDCloudBlobScript += Get-AzStorageBlob -Context $Global:AzCurrentStorageContext -Container $Container.Name -Blob *.ps1 -ErrorAction Ignore
-                        #$Global:AzOSDCloudBlobScript += Get-AzStorageBlob -Context $Global:AzCurrentStorageContext -Container $Container.Name -Blob *.ppkg -ErrorAction Ignore
-                        #$Global:AzOSDCloudBlobScript += Get-AzStorageBlob -Context $Global:AzCurrentStorageContext -Container $Container.Name -Blob *.xml -ErrorAction Ignore
+                        $Global:AzOSDCloudBlobScript += Get-AzStorageBlob -Context $Global:AzCurrentStorageContext -Container $Container.Name -Blob *.ppkg -ErrorAction Ignore
+                        $Global:AzOSDCloudBlobScript += Get-AzStorageBlob -Context $Global:AzCurrentStorageContext -Container $Container.Name -Blob *.xml -ErrorAction Ignore
 
                     }
                 }
@@ -71,6 +71,8 @@ function Start-AzOSDPADbeta {
     param ()
     Write-Host -ForegroundColor DarkGray "========================================================================="
     Write-Host -ForegroundColor Green "Start-AzOSDPAD"
+    Write-Host -ForegroundColor DarkGray "========================================================================="
+
     if ($Global:AzOSDCloudBlobScript) {
         $i = $null
         $Results = foreach ($Item in $Global:AzOSDCloudBlobScript) {
@@ -87,6 +89,8 @@ function Start-AzOSDPADbeta {
                 Location        = $BlobClient | Select-Object -ExpandProperty Location
                 ResourceGroup   = $BlobClient | Select-Object -ExpandProperty ResourceGroupName
                 URL             = $Item.BlobClient.Uri
+                ContentHash     = $Item.BlobProperties.ContentHash
+                LastModified    = $Item.ICloudBlob.Properties.LastModified
                 
             }
             New-Object -TypeName PSObject -Property $ObjectProperties
@@ -95,28 +99,13 @@ function Start-AzOSDPADbeta {
         $Results | Select-Object -Property Number, StorageAccount, Tag, Container, Blob, Location, ResourceGroup, URL | Format-Table | Out-Host
 
         $Global:AzOSDCloudGlobalScripts = $Results
-        <#
-            $($Global:AzOSDCloudBlobScript.ICloudBlob[0]).Properties.Lenght
-            $($Global:AzOSDCloudBlobScript.ICloudBlob[0]).Properties.ContentMD5
-            $($Global:AzOSDCloudBlobScript.ICloudBlob[0]).Properties.LastModified
-      do {
-            $SelectReadHost = Read-Host -Prompt "Select a Windows Image to apply by Number"
-        }
-        until (((($SelectReadHost -ge 0) -and ($SelectReadHost -in $Results.Number))))
+        Write-Host -ForegroundColor DarkGray "========================================================================="
+        Write-Host -ForegroundColor Green "Start-AzOSDPad"
+        Write-Host -ForegroundColor DarkGray "========================================================================="
+        & "C:\Users\$env:username\Documents\github\OSD\\Projects\azosdpad.ps1" 
+        Start-Sleep -Seconds 2
 
-        $Results | Where-Object {$_.Number -eq $SelectReadHost}
-        
-        $Global:AzOSDCloudGlobalScripts = $Global:AzOSDCloudBlobScript | Where-Object {$_.Name -eq $Results.Blob}
-        $Global:AzOSDCloudGlobalScripts = $Global:AzOSDCloudGlobalScripts | Where-Object {$_.BlobClient.BlobContainerName -eq $Results.Container}
-        $Global:AzOSDCloudGlobalScripts = $Global:AzOSDCloudGlobalScripts | Where-Object {$_.BlobClient.AccountName -eq $Results.StorageAccount}
-            # Path for Test only
-        $Global:AzOSDCloudGlobalScripts | Select-Object * | Export-Clixml "d:\OSD\AzOSDCloudScript.xml"
-        $Global:AzOSDCloudGlobalScripts | Select-Object * | ConvertTo-Json | Out-File "d:\OSD\AzOSDCloudScripts.json"
-        #=================================================
-        #   Invoke-OSDCloud.ps1
-        #=================================================
-        #>
-       Write-Host -ForegroundColor DarkGray "========================================================================="
+        # & "$($MyInvocation.MyCommand.Module.ModuleBase)\Projects\AzOSDCloudGUI\MainWindow.ps1"
 
     }
     else {
@@ -126,5 +115,6 @@ function Start-AzOSDPADbeta {
         Write-Warning 'You may need to execute Get-AzOSDCloudBScript'
     }
 }
+
 #endregion
 #=================================================
