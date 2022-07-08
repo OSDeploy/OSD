@@ -29,6 +29,7 @@ function Invoke-OSDSpecializeDev {
     #=================================================
     #   Specialize DriverPacks
     #=================================================
+    Write-Verbose -Verbose "Variable Apply Status: $Apply"
     if (Test-Path 'C:\Drivers') {
         $DriverPacks = Get-ChildItem -Path 'C:\Drivers' -File
 
