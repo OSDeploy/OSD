@@ -30,7 +30,7 @@ Function osdcloud-InstallDCU {
     Start-Sleep -Seconds 1
     if (test-path $DellCabExtractPath){Remove-Item -Path $DellCabExtractPath -Force -Recurse}
     $NewFolder = New-Item -Path $DellCabExtractPath -ItemType Directory
-    Write-Host "Expanding the Cab File..... takes FOREVER...." -ForegroundColor Yellow
+    Write-Host "Expanding the Cab File..." -ForegroundColor Yellow
     $Expand = expand $CabPathIndex $DellCabExtractPath\CatalogIndexPC.xml
 
     write-host "Loading Dell Catalog XML.... can take awhile" -ForegroundColor Yellow
