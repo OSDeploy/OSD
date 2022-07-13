@@ -227,7 +227,7 @@
                FontWeight="Bold"
                Foreground="#003E92"
                HorizontalAlignment="Left"
-               VerticalAlignment="Center" Grid.Column="4" Margin="282,0,0,0" />
+               VerticalAlignment="Center" Grid.Column="4" Margin="266,0,0,0" />
 
             <!-- Row 1 Gridline -->
             <Line Grid.Row="1"
@@ -455,7 +455,7 @@
                 Height="40"
                 Width="130"
                 HorizontalAlignment="Left"
-                VerticalAlignment="Center" Grid.Column="4" Margin="332,0,0,0" />
+                VerticalAlignment="Center" Grid.Column="4" Margin="321,0,0,0" />
             <CheckBox x:Name="DebugCheckBox" Content="Debug Mode" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.ColumnSpan="2"/>
             <Line Grid.Row="7"
             X1="0"
@@ -469,8 +469,8 @@
             <TextBox x:Name="TextBoxSetupComplete" HorizontalAlignment="Left" Margin="0,105,0,0" Grid.Row="7" TextWrapping="Wrap" Text="https://raw.githubusercontent.com/gwblok/garytown/master/Dev/CloudScripts/SetupCompleteDEV.ps1" VerticalAlignment="Top" Width="818" Grid.ColumnSpan="5" Visibility="Collapsed"/>
             <Label x:Name="LabelSpecialize" Content="Specialize Script URL" HorizontalAlignment="Left" Margin="0,5,0,0" Grid.Row="7" VerticalAlignment="Top" Grid.ColumnSpan="2" Visibility="Collapsed"/>
             <Label x:Name="LabelSetupComplete" Content="SetupComplete Script URL" HorizontalAlignment="Left" Margin="0,74,0,0" Grid.Row="7" VerticalAlignment="Top" Grid.ColumnSpan="2" Visibility="Collapsed"/>
-            <Label x:Name="LabelWin11Label" Content="Win 11 Ready:" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Center" RenderTransformOrigin="-0.663,0.713" Grid.Row="8" Grid.ColumnSpan="2"/>
-            <Label x:Name="LabelWin11Reason" Content="Reason:" HorizontalAlignment="Left" Margin="141,0,0,0" VerticalAlignment="Center" RenderTransformOrigin="-0.663,0.713" Grid.Row="8" Grid.Column="1" Visibility="Hidden" Grid.ColumnSpan="2"/>
+            <Label x:Name="LabelWin11Label" Content="Win 11 Ready:" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Center" RenderTransformOrigin="-0.663,0.713" Grid.Row="8" Grid.ColumnSpan="2" Width="242"/>
+            <Label x:Name="LabelWin11Reason" Content="Reason:" HorizontalAlignment="Left" Margin="141,0,0,0" VerticalAlignment="Center" RenderTransformOrigin="-0.663,0.713" Grid.Row="8" Grid.Column="1" Visibility="Hidden" Grid.ColumnSpan="4" Width="342"/>
 
         </Grid>
     </DockPanel>

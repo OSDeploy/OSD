@@ -1223,7 +1223,7 @@ function Invoke-OSDCloud {
     if ($Global:OSDCloud.DevMode -eq $true){
         Write-SectionHeader "Creating SetupComplete Files and populating with requested tasks."
     
-        osdcloud-SetupCompleteCreateStart
+        Set-SetupCompleteCreateStart
 
         if ($Global:OSDCloud.IsWinPE -eq $true) {
             if ($Global:OSDCloud.WindowsDefenderUpdate -eq $true){
@@ -1253,11 +1253,11 @@ function Invoke-OSDCloud {
                 #Leverage SetupComplete.cmd to run HP Tools
                 Write-DarkGrayHost "HyperV Set Computer Name = $($Global:OSDCloud.HyperVSetName)"
                 Write-DarkGrayHost "Adding Function to Rename Computer to HyperV VM Name into SetupComplete"
-                osdcloud-HyperVSetupComplete
+                Set-SetupCompleteHyperVName
             }        
             if ($Global:OSDCloud.HyperVEjectISO -eq $true){
                 Write-DarkGrayHost "Ejecting ISO from VM"
-                osdcloud-EjectCD
+                Run-EjectCD
             }
         }
 
@@ -1523,7 +1523,7 @@ exit
     #region Finish SetupComplete Files.
     #This appends the two lines at the end of SetupComplete Script to Stop Transcription and to Restart Computer
     if ($Global:OSDCloud.DevMode -eq $true){
-        osdcloud-SetupCompleteCreateFinish
+        Set-SetupCompleteCreateFinish
     }
     #endregion
     #=================================================

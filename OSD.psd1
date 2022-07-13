@@ -4,7 +4,7 @@
 
 @{
     RootModule              = 'OSD.psm1'
-    ModuleVersion           = '22.6.30.1'
+    ModuleVersion           = '22.7.12.1'
     CompatiblePSEditions    = @('Desktop')
     GUID                    = '9fe5b9b6-0224-4d87-9018-a8978529f6f5'
     Author                  = 'David Segura . Damien Van Robaeys . Gary Blok . Jérôme Bezet-Torres . Mike Marable . Dean Ellerby . Doug McGee'
@@ -98,6 +98,7 @@
         'Get-GithubRawUrl',
         'Get-HpDriverPack',
         'Get-HpWinPEDriverPack',
+        'Get-HyperVName',
         'Get-LenovoDriverPack',
         'Get-OSDCatalogDellDriverPack',
         'Get-OSDCatalogDellSystem',
@@ -156,6 +157,7 @@
         'Get-Volume.osd',
         'Get-Volume.usb',
         'Get-WSUSXML',
+        'Get-Windows11Readiness',
         'Get-WinREPartition',
         'Get-WinREWiFi',
         'Install-SystemFirmwareUpdate',
@@ -213,6 +215,7 @@
         'Select-Volume.usb',
         'Set-BootmgrTimeout',
         'Set-ClipboardScreenshot',
+        'Set-HyperVName',
         'Set-DisRes',
         'Set-OSDCloudUnattendAuditMode',
         'Set-OSDCloudUnattendAuditModeAutopilot',
