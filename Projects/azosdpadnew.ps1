@@ -68,7 +68,7 @@ function LoadXaml ($filename){
     $XamlLoader.Load($filename)
     return $XamlLoader
 }
-$XamlMainWindow=LoadXaml("$Global:MyScriptDir\azosdpad.xaml")
+$XamlMainWindow=LoadXaml("$Global:MyScriptDir\azosdpadnew.xaml")
 $reader = (New-Object System.Xml.XmlNodeReader $XamlMainWindow)
 $Form = [Windows.Markup.XamlReader]::Load($reader)
 $XamlMainWindow.SelectNodes("//*[@Name]") | %{
