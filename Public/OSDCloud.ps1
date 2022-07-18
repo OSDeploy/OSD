@@ -1257,7 +1257,7 @@ function Invoke-OSDCloud {
             }        
             if ($Global:OSDCloud.HyperVEjectISO -eq $true){
                 Write-DarkGrayHost "Ejecting ISO from VM"
-                Run-EjectCD
+                Start-EjectCD
             }
         }
 

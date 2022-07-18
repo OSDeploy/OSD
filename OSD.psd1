@@ -229,6 +229,7 @@
         'Show-MsSettings',
         'Show-RegistryXML',
         'Start-DiskImageGUI',
+        'Start-EjectCD',
         'Start-OOBEDeploy',
         'Start-OSDCloud',
         'Start-OSDCloudGUI',
