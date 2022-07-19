@@ -202,83 +202,98 @@ function Invoke-OSDSpecializeDev {
         if ($JSONConfigs.name -contains "Dell.JSON"){
             $DellJSON = Get-Content -Path "$ConfigPath\DELL.JSON" |ConvertFrom-Json
         }
+        if ($JSONConfigs.name -contains "Extras.JSON"){
+            $ExtrasJSON = Get-Content -Path "$ConfigPath\Extras.JSON" |ConvertFrom-Json
+        }
     }
-        if ($HPJson){
-            write-host "Specialize Stage - HP Enterprise Devices" -ForegroundColor Green
-            $WarningPreference = "SilentlyContinue"
-            $VerbosePreference = "SilentlyContinue"
-            #Invoke-Expression (Invoke-RestMethod -Uri 'functions.osdcloud.com')
-            Invoke-Expression (Invoke-RestMethod -Uri 'https://raw.githubusercontent.com/OSDeploy/OSD/master/cloud/modules/deviceshp.psm1')
-            
-            #osdcloud-SetExecutionPolicy -WarningAction SilentlyContinue
-            #osdcloud-InstallPackageManagement -WarningAction SilentlyContinue
-            #osdcloud-InstallModuleHPCMSL -WarningAction SilentlyContinue
-            if ($HPJson.HPUpdates.HPTPMUpdate -eq $true){
-                Write-Host -ForegroundColor DarkGray "========================================================================="
-                Write-Host "Updating TPM" -ForegroundColor Cyan
-                osdcloud-HPTPMEXEInstall
-                start-sleep -Seconds 10
-            }
-            if (($HPJson.HPUpdates.HPBIOSUpdate -eq $true) -and ($HPJson.HPUpdates.HPTPMUpdate -ne $true)){
-                #Stage Firmware Update for Next Reboot
-                Import-Module HPCMSL -ErrorAction SilentlyContinue | out-null
-                Write-Host -ForegroundColor DarkGray "========================================================================="
-                Write-Host -ForegroundColor Cyan "Updating HP System Firmware"
-                if (Get-HPBIOSSetupPasswordIsSet){Write-Host -ForegroundColor Red "Device currently has BIOS Setup Password, Please Update BIOS via different method"}
-                else{
-                    Write-Host -ForegroundColor DarkGray "Current Firmware: $(Get-HPBIOSVersion)"
-                    Write-Host -ForegroundColor DarkGray "Staging Update: $((Get-HPBIOSUpdates -Latest).ver) "
-                    #Details: https://developers.hp.com/hp-client-management/doc/Get-HPBiosUpdates
-                    Get-HPBIOSUpdates -Flash -Yes -Offline -BitLocker Ignore
-                }
-                start-sleep -Seconds 10
-            }
-            <#
-            if ($HPJson.HPUpdates.HPIADrivers -eq $true){
-                Write-Host -ForegroundColor DarkGray "========================================================================="
-                Write-Host "Running HPIA Drivers" -ForegroundColor Cyan
-                osdcloud-HPIAOfflineSync
-                osdcloud-HPIAExecute -OfflineMode $true
-                start-sleep -Seconds 10
-            }
-            #>
+    if ($ExtrasJSON){
+        write-host "Specialize Stage - Extra Addons" -ForegroundColor Green
+        $WarningPreference = "SilentlyContinue"
+        $VerbosePreference = "SilentlyContinue"
+        #Invoke-Expression (Invoke-RestMethod -Uri 'functions.osdcloud.com')
+        if ($ExtrasJSON.Addons.NetFx3 -eq $true){
+            Write-Host -ForegroundColor DarkGray "========================================================================="
+            Write-Host -ForegroundColor DarkGray "Installing NetFX3"
+            Invoke-Expression (Invoke-RestMethod -Uri 'https://raw.githubusercontent.com/OSDeploy/OSD/master/cloud/modules/_oobe.psm1')
+            osdcloud-NetFX
         }
-        if ($DellJSON){
-            write-host "Specialize Stage - Dell Enterprise Devices" -ForegroundColor Green
-            $WarningPreference = "SilentlyContinue"
-            #Invoke-Expression (Invoke-RestMethod -Uri 'functions.osdcloud.com')
-            Invoke-Expression (Invoke-RestMethod -Uri 'https://raw.githubusercontent.com/OSDeploy/OSD/master/cloud/modules/devicesdell.psm1')
-            if ($DellJSON.Updates.DCUInstall -eq $true){
-                Write-Host -ForegroundColor DarkGray "========================================================================="
-                Write-Host "Installing Dell Command Update" -ForegroundColor Cyan
-                osdcloud-InstallDCU
-                start-sleep -Seconds 10
-            }            
-            if ($DellJSON.Updates.DCUDrivers -eq $true){
-                Write-Host -ForegroundColor DarkGray "========================================================================="
-                Write-Host "Running Dell Command Update - Drivers" -ForegroundColor Cyan
-                osdcloud-RunDCU -updateType driver
-                start-sleep -Seconds 10
-            }    
-            if ($DellJSON.Updates.DCUFirmware -eq $true){
-                Write-Host -ForegroundColor DarkGray "========================================================================="
-                Write-Host "Running Dell Command Update - Firmware" -ForegroundColor Cyan
-                osdcloud-RunDCU -updateType firmware
-                start-sleep -Seconds 10
-            }    
-            if ($DellJSON.Updates.DCUBIOS -eq $true){
-                Write-Host -ForegroundColor DarkGray "========================================================================="
-                Write-Host "Running Dell Command Update - BIOS" -ForegroundColor Cyan
-                osdcloud-RunDCU -updateType bios
-                start-sleep -Seconds 10
-            }    
-            if ($DellJSON.Updates.DCUAutoUpdateEnable -eq $true){
-                Write-Host -ForegroundColor DarkGray "========================================================================="
-                Write-Host "Running Dell Command Update - Set Auto Update Enabled" -ForegroundColor Cyan
-                osdcloud-DCUAutoUpdate
-                start-sleep -Seconds 10
-            }    
+    }
+    if ($HPJson){
+        write-host "Specialize Stage - HP Enterprise Devices" -ForegroundColor Green
+        $WarningPreference = "SilentlyContinue"
+        $VerbosePreference = "SilentlyContinue"
+        #Invoke-Expression (Invoke-RestMethod -Uri 'functions.osdcloud.com')
+        Invoke-Expression (Invoke-RestMethod -Uri 'https://raw.githubusercontent.com/OSDeploy/OSD/master/cloud/modules/deviceshp.psm1')
+        
+        #osdcloud-SetExecutionPolicy -WarningAction SilentlyContinue
+        #osdcloud-InstallPackageManagement -WarningAction SilentlyContinue
+        #osdcloud-InstallModuleHPCMSL -WarningAction SilentlyContinue
+        if ($HPJson.HPUpdates.HPTPMUpdate -eq $true){
+            Write-Host -ForegroundColor DarkGray "========================================================================="
+            Write-Host "Updating TPM" -ForegroundColor Cyan
+            osdcloud-HPTPMEXEInstall
+            start-sleep -Seconds 10
         }
+        if (($HPJson.HPUpdates.HPBIOSUpdate -eq $true) -and ($HPJson.HPUpdates.HPTPMUpdate -ne $true)){
+            #Stage Firmware Update for Next Reboot
+            Import-Module HPCMSL -ErrorAction SilentlyContinue | out-null
+            Write-Host -ForegroundColor DarkGray "========================================================================="
+            Write-Host -ForegroundColor Cyan "Updating HP System Firmware"
+            if (Get-HPBIOSSetupPasswordIsSet){Write-Host -ForegroundColor Red "Device currently has BIOS Setup Password, Please Update BIOS via different method"}
+            else{
+                Write-Host -ForegroundColor DarkGray "Current Firmware: $(Get-HPBIOSVersion)"
+                Write-Host -ForegroundColor DarkGray "Staging Update: $((Get-HPBIOSUpdates -Latest).ver) "
+                #Details: https://developers.hp.com/hp-client-management/doc/Get-HPBiosUpdates
+                Get-HPBIOSUpdates -Flash -Yes -Offline -BitLocker Ignore
+            }
+            start-sleep -Seconds 10
+        }
+        <#
+        if ($HPJson.HPUpdates.HPIADrivers -eq $true){
+            Write-Host -ForegroundColor DarkGray "========================================================================="
+            Write-Host "Running HPIA Drivers" -ForegroundColor Cyan
+            osdcloud-HPIAOfflineSync
+            osdcloud-HPIAExecute -OfflineMode $true
+            start-sleep -Seconds 10
+        }
+        #>
+    }
+    if ($DellJSON){
+        write-host "Specialize Stage - Dell Enterprise Devices" -ForegroundColor Green
+        $WarningPreference = "SilentlyContinue"
+        #Invoke-Expression (Invoke-RestMethod -Uri 'functions.osdcloud.com')
+        Invoke-Expression (Invoke-RestMethod -Uri 'https://raw.githubusercontent.com/OSDeploy/OSD/master/cloud/modules/devicesdell.psm1')
+        if ($DellJSON.Updates.DCUInstall -eq $true){
+            Write-Host -ForegroundColor DarkGray "========================================================================="
+            Write-Host "Installing Dell Command Update" -ForegroundColor Cyan
+            osdcloud-InstallDCU
+            start-sleep -Seconds 10
+        }            
+        if ($DellJSON.Updates.DCUDrivers -eq $true){
+            Write-Host -ForegroundColor DarkGray "========================================================================="
+            Write-Host "Running Dell Command Update - Drivers" -ForegroundColor Cyan
+            osdcloud-RunDCU -updateType driver
+            start-sleep -Seconds 10
+        }    
+        if ($DellJSON.Updates.DCUFirmware -eq $true){
+            Write-Host -ForegroundColor DarkGray "========================================================================="
+            Write-Host "Running Dell Command Update - Firmware" -ForegroundColor Cyan
+            osdcloud-RunDCU -updateType firmware
+            start-sleep -Seconds 10
+        }    
+        if ($DellJSON.Updates.DCUBIOS -eq $true){
+            Write-Host -ForegroundColor DarkGray "========================================================================="
+            Write-Host "Running Dell Command Update - BIOS" -ForegroundColor Cyan
+            osdcloud-RunDCU -updateType bios
+            start-sleep -Seconds 10
+        }    
+        if ($DellJSON.Updates.DCUAutoUpdateEnable -eq $true){
+            Write-Host -ForegroundColor DarkGray "========================================================================="
+            Write-Host "Running Dell Command Update - Set Auto Update Enabled" -ForegroundColor Cyan
+            osdcloud-DCUAutoUpdate
+            start-sleep -Seconds 10
+        }    
+    }
 
     #=================================================
     #   Specialize ODT

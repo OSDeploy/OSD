@@ -138,7 +138,11 @@
                           IsCheckable="True"
                           IsChecked="False" />
                 <MenuItem Name="DefenderUpdates"
-                          Header="DefenderUpdates"
+                          Header="Defender Updates"
+                          IsCheckable="True"
+                          IsChecked="True" />
+                <MenuItem Name="NetFx3"
+                          Header="Enable NetFx3"
                           IsCheckable="True"
                           IsChecked="True" />
             </MenuItem>

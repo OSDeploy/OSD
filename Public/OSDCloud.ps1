@@ -1250,7 +1250,7 @@ function Invoke-OSDCloud {
                 catch {}
                 $HashVar | Out-File $ConfigFile
 
-                #Leverage SetupComplete.cmd to run HP Tools
+                #Leverage SetupComplete.cmd to run Tools
                 Write-DarkGrayHost "HyperV Set Computer Name = $($Global:OSDCloud.HyperVSetName)"
                 Write-DarkGrayHost "Adding Function to Rename Computer to HyperV VM Name into SetupComplete"
                 Set-SetupCompleteHyperVName
@@ -1327,6 +1327,22 @@ function Invoke-OSDCloud {
 
             #Leverage SetupComplete.cmd to run HP Tools
             osdcloud-HPSetupCompleteAppend
+        }
+        #region Extra Items Config for Specialize Phase
+        if ($Global:OSDCloud.NetFx3 -eq $true){
+
+            Write-Host -ForegroundColor Cyan "Adding Extra Tasks into JSON Config File for Action during Specialize" 
+            $HashTable = @{
+                'Addons' = @{
+                    'NetFX3' = $Global:OSDCloud.NetFx3
+                }
+            }
+            $HashVar = $HashTable | ConvertTo-Json
+            $ConfigPath = "c:\osdcloud\configs"
+            $ConfigFile = "$ConfigPath\Extras.JSON"
+            try {[void][System.IO.Directory]::CreateDirectory($ConfigPath)}
+            catch {}
+            $HashVar | Out-File $ConfigFile
         }
     }
     #endregion

@@ -872,6 +872,7 @@ $formMainWindowControlStartButton.add_Click({
         MSCatalogNetDrivers         = $formMainWindowControlMSCatalogNetDrivers.IsChecked
         MSCatalogScsiDrivers        = $formMainWindowControlMSCatalogScsiDrivers.IsChecked
         MSCatalogFirmware           = $formMainWindowControlMSCatalogFirmware.IsChecked
+        NetFx3                      = $formMainWindowControlNetFx3.IsChecked
         OOBEDeployJsonChildItem     = $OOBEDeployJsonChildItem
         OOBEDeployJsonItem          = $OOBEDeployJsonItem
         OOBEDeployJsonName          = $OOBEDeployJsonName
@@ -889,7 +890,7 @@ $formMainWindowControlStartButton.add_Click({
         SkipAutopilotOOBE           = $SkipAutopilotOOBE
         SkipODT                     = $true
         SkipOOBEDeploy              = $SkipOOBEDeploy
-        WindowsDefenderUpdate       = $formMainWindowControlWindowsDefenderUpdate.IsChecked
+        WindowsDefenderUpdate       = $formMainWindowControlDefenderUpdate.IsChecked
         ZTI                         = $formMainWindowControlZTI.IsChecked
     }
     #-----------------------------------------
