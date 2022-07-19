@@ -1232,6 +1232,9 @@ function Invoke-OSDCloud {
             if ($Global:OSDCloud.NetFx3 -eq $true){
                 osdcloud-SetupCompleteNetFX
             }
+            if ($Global:OSDCloud.Bitlocker -eq $true){
+                New-BitLockerRegValues
+            }
         }
         #endregion
 
