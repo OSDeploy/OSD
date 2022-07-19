@@ -891,7 +891,7 @@ $formMainWindowControlStartButton.add_Click({
         SkipAutopilotOOBE           = $SkipAutopilotOOBE
         SkipODT                     = $true
         SkipOOBEDeploy              = $SkipOOBEDeploy
-        WindowsDefenderUpdate       = $formMainWindowControlDefenderUpdate.IsChecked
+        WindowsDefenderUpdate       = $formMainWindowControlDefenderUpdates.IsChecked
         ZTI                         = $formMainWindowControlZTI.IsChecked
     }
     #-----------------------------------------
