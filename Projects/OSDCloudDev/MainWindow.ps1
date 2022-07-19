@@ -465,7 +465,8 @@ elseif ($HyperV){
     $formMainWindowControlOption_Name_1.IsChecked = $true
     $formMainWindowControlOption_Name_2.Header = "Eject CD ISO"
     $formMainWindowControlOption_Name_2.IsChecked = $true
-    $formMainWindowControlOption_Name_3.Visibility = "Hidden"
+    $formMainWindowControlOption_Name_3.Header = "Create Recovery Partition"
+    $formMainWindowControlOption_Name_3.IsChecked = $true
     $formMainWindowControlOption_Name_4.Visibility = "Hidden"
     $formMainWindowControlOption_Name_5.Visibility = "Hidden"
     $formMainWindowControlOption_Name_6.Visibility = "Hidden"
@@ -916,6 +917,8 @@ $formMainWindowControlStartButton.add_Click({
     if ($HyperV){
         $Global:StartOSDCloudGUI.HyperVSetName = $formMainWindowControlOption_Name_1.IsChecked
         $Global:StartOSDCloudGUI.HyperVEjectISO = $formMainWindowControlOption_Name_2.IsChecked
+        $Global:StartOSDCloudGUI.RecoveryPartition = $formMainWindowControlOption_Name_3.IsChecked
+        
     }
     #$Global:StartOSDCloudGUI | Out-Host
     if ($formMainWindowControlDebugCheckBox.IsChecked -eq $true){
