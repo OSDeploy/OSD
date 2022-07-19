@@ -268,6 +268,7 @@ function osdcloud-SetupCompleteDefenderUpdate {
     $PSFilePath = "$($RunScript.Path)\$($RunScript.ps1File)"
 
     if (Test-Path -Path $PSFilePath){
+        Add-Content -Path $PSFilePath "Write-Output 'Running Defender Update Stack Function'"
         Add-Content -Path $PSFilePath "Invoke-Expression (Invoke-RestMethod -Uri 'https://raw.githubusercontent.com/OSDeploy/OSD/master/cloud/modules/defender.psm1')"
         Add-Content -Path $PSFilePath "osdcloud-UpdateDefenderStack"
     }
@@ -285,6 +286,7 @@ function osdcloud-SetupCompleteNetFX {
     $PSFilePath = "$($RunScript.Path)\$($RunScript.ps1File)"
 
     if (Test-Path -Path $PSFilePath){
+        Add-Content -Path $PSFilePath "Write-Output 'Running Enable NetFX Function'"
         Add-Content -Path $PSFilePath "Invoke-Expression (Invoke-RestMethod -Uri 'https://raw.githubusercontent.com/OSDeploy/OSD/master/cloud/modules/_oobe.psm1')"
         Add-Content -Path $PSFilePath "osdcloud-NetFX"
     }
