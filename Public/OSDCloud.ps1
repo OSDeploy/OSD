@@ -1229,6 +1229,9 @@ function Invoke-OSDCloud {
             if ($Global:OSDCloud.WindowsDefenderUpdate -eq $true){
                 osdcloud-SetupCompleteDefenderUpdate
             }
+            if ($Global:OSDCloud.NetFx3 -eq $true){
+                osdcloud-SetupCompleteNetFX
+            }
         }
         #endregion
 

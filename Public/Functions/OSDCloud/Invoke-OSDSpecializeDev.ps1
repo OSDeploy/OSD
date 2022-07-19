@@ -206,6 +206,7 @@ function Invoke-OSDSpecializeDev {
             $ExtrasJSON = Get-Content -Path "$ConfigPath\Extras.JSON" |ConvertFrom-Json
         }
     }
+    <# Didn't work in Specialize
     if ($ExtrasJSON){
         write-host "Specialize Stage - Extra Addons" -ForegroundColor Green
         $WarningPreference = "SilentlyContinue"
@@ -218,6 +219,7 @@ function Invoke-OSDSpecializeDev {
             osdcloud-NetFX
         }
     }
+    #>
     if ($HPJson){
         write-host "Specialize Stage - HP Enterprise Devices" -ForegroundColor Green
         $WarningPreference = "SilentlyContinue"
