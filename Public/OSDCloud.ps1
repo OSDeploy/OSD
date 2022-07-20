@@ -1234,6 +1234,7 @@ function Invoke-OSDCloud {
             }
             if ($Global:OSDCloud.Bitlocker -eq $true){
                 New-BitLockerRegValues
+                Set-SetupCompleteBitlocker
             }
         }
         #endregion

@@ -145,6 +145,10 @@
                           Header="Enable NetFx3"
                           IsCheckable="True"
                           IsChecked="True" />
+                <MenuItem Name="Bitlocker"
+                          Header="Enable Bitlocker"
+                          IsCheckable="True"
+                          IsChecked="False" />
             </MenuItem>
             <MenuItem Header="Microsoft Update Catalog">
                 <MenuItem Name="MSCatalogDiskDrivers"

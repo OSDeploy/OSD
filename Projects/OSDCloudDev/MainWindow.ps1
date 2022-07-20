@@ -892,6 +892,7 @@ $formMainWindowControlStartButton.add_Click({
         SkipODT                     = $true
         SkipOOBEDeploy              = $SkipOOBEDeploy
         WindowsDefenderUpdate       = $formMainWindowControlDefenderUpdates.IsChecked
+        Bitlocker                   = $formMainWindowControlBitlocker.IsChecked
         ZTI                         = $formMainWindowControlZTI.IsChecked
     }
     #-----------------------------------------
