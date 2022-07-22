@@ -285,6 +285,11 @@ $localOSDCloudParams["OSLanguage"].Attributes.ValidValues | ForEach-Object {
 #================================================
 #   Manufacturer Enhacements
 #================================================
+
+if ((Test-Connection -ComputerName github.com -Quiet) -eq $true){
+    $InternetConnection = $true
+}
+
 function Test-HPIASupport {
     $CabPath = "$env:TEMP\platformList.cab"
     $XMLPath = "$env:TEMP\platformList.xml"
@@ -321,12 +326,16 @@ $Manufacturer = (Get-CimInstance -Class:Win32_ComputerSystem).Manufacturer
 $Model = (Get-CimInstance -Class:Win32_ComputerSystem).Model
 if ($Manufacturer -match "HP" -or $Manufacturer -match "Hewlett-Packard"){
     $Manufacturer = "HP"
-    $HPEnterprise = Test-HPIASupport
+    if ($InternetConnection){
+        $HPEnterprise = Test-HPIASupport
     }
+}
 if ($Manufacturer -match "Dell"){
     $Manufacturer = "Dell"
-    $DellEnterprise = Test-DCUSupport 
-}    
+    if ($InternetConnection){
+        $DellEnterprise = Test-DCUSupport
+    }
+}
 if ($Manufacturer -match "Microsoft"){
     if ($Model -eq "Virtual Machine"){
         $HyperV = $true
