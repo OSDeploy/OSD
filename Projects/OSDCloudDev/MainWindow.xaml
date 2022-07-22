@@ -236,7 +236,15 @@
                Foreground="#003E92"
                HorizontalAlignment="Left"
                VerticalAlignment="Center" Grid.Column="4" Margin="266,0,0,0" />
-
+            <Label
+               Name="InternetConnection"
+               Content="*"
+               FlowDirection="RightToLeft"
+               FontSize="24"
+               FontWeight="Bold"
+               Foreground="Green"
+               HorizontalAlignment="Left"
+               VerticalAlignment="Top" Grid.Column="4" Margin="430,1,0,0" Grid.RowSpan="3" />
             <!-- Row 1 Gridline -->
             <Line Grid.Row="1"
               X1="0"
