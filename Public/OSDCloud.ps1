@@ -1232,10 +1232,6 @@ function Invoke-OSDCloud {
             if ($Global:OSDCloud.NetFx3 -eq $true){
                 osdcloud-SetupCompleteNetFX
             }
-            if ($Global:OSDCloud.Bitlocker -eq $true){
-                New-BitLockerRegValues
-                Set-SetupCompleteBitlocker
-            }
         }
         #endregion
 
@@ -1350,6 +1346,12 @@ function Invoke-OSDCloud {
             try {[void][System.IO.Directory]::CreateDirectory($ConfigPath)}
             catch {}
             $HashVar | Out-File $ConfigFile
+        }
+        
+        #Bitlocker Stuff
+        if ($Global:OSDCloud.Bitlocker -eq $true){
+            New-BitLockerRegValues
+            Set-SetupCompleteBitlocker
         }
     }
     #endregion
