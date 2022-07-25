@@ -157,7 +157,7 @@
         'Get-Volume.osd',
         'Get-Volume.usb',
         'Get-WSUSXML',
-        'Get-Windows11Readiness',
+        'Get-Win11Readiness',
         'Get-WinREPartition',
         'Get-WinREWiFi',
         'Install-SystemFirmwareUpdate',
