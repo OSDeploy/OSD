@@ -290,6 +290,7 @@ if ((Test-Connection -ComputerName github.com -Quiet) -eq $true){
     $InternetConnection = $true
 }
 
+
 function Test-HPIASupport {
     $CabPath = "$env:TEMP\platformList.cab"
     $XMLPath = "$env:TEMP\platformList.xml"
@@ -895,6 +896,7 @@ $formMainWindowControlStartButton.add_Click({
         OSName                      = $OSName
         OSVersion                   = $OSVersion
         Restart                     = $formMainWindowControlRestart.IsChecked
+        SetTimeZone                 = $formMainWindowControlTimeZone.IsChecked
         ScreenshotCapture           = $formMainWindowControlScreenshotCapture.IsChecked
         SkipAutopilot               = $SkipAutopilot
         SkipAutopilotOOBE           = $SkipAutopilotOOBE
@@ -929,6 +931,17 @@ $formMainWindowControlStartButton.add_Click({
         $Global:StartOSDCloudGUI.HyperVEjectISO = $formMainWindowControlOption_Name_2.IsChecked
         $Global:StartOSDCloudGUI.RecoveryPartition = $formMainWindowControlOption_Name_3.IsChecked
         
+    }
+    if ($formMainWindowControlTimeZone.IsChecked -eq $true){
+        Function Get-TimeZoneFromIP {
+            $URIRequest = "https://timezoneapi.io/api/ip/?token=aZuNiKeSCzxosgrJGmCK"
+            $TimeZoneAPI =  (Invoke-WebRequest -Uri $URIRequest -UseBasicParsing).Content
+            $TimeZoneInfo = $TimeZoneAPI  | ConvertFrom-Json
+            $TimeZoneOffSet = $TimeZoneInfo.data.datetime.offset_tzfull
+            if ($TimeZoneOffSet -match "Daylight"){$TimeZoneOffSet = $TimeZoneOffSet.Replace("Daylight","Standard")}
+            return $TimeZoneOffSet
+        }
+        $Global:StartOSDCloudGUI.TimeZone = Get-TimeZoneFromIP
     }
     #$Global:StartOSDCloudGUI | Out-Host
     if ($formMainWindowControlDebugCheckBox.IsChecked -eq $true){

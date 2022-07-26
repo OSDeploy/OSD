@@ -149,6 +149,10 @@
                           Header="Enable Bitlocker"
                           IsCheckable="True"
                           IsChecked="False" />
+                <MenuItem Name="TimeZone"
+                          Header="Set Timezone based on IP"
+                          IsCheckable="True"
+                          IsChecked="False" />
             </MenuItem>
             <MenuItem Header="Microsoft Update Catalog">
                 <MenuItem Name="MSCatalogDiskDrivers"
@@ -208,7 +212,8 @@
 
         <Grid Margin="10,0,10,10">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="85*"/>
+                <ColumnDefinition Width="23*"/>
+                <ColumnDefinition Width="62*"/>
                 <ColumnDefinition Width="204*"/>
                 <ColumnDefinition Width="13*"/>
                 <ColumnDefinition Width="44*"/>
@@ -235,7 +240,7 @@
                FontWeight="Bold"
                Foreground="#003E92"
                HorizontalAlignment="Left"
-               VerticalAlignment="Center" Grid.Column="4" Margin="266,0,0,0" />
+               VerticalAlignment="Center" Grid.Column="5" Margin="266,0,0,0" />
             <Label
                Name="InternetConnection"
                Content="*"
@@ -244,7 +249,7 @@
                FontWeight="Bold"
                Foreground="Green"
                HorizontalAlignment="Left"
-               VerticalAlignment="Top" Grid.Column="4" Margin="430,1,0,0" Grid.RowSpan="3" />
+               VerticalAlignment="Top" Grid.Column="5" Margin="430,1,0,0" Grid.RowSpan="3" />
             <!-- Row 1 Gridline -->
             <Line Grid.Row="1"
               X1="0"
@@ -253,12 +258,12 @@
               Y2="0"
               Stroke="Gainsboro"
               StrokeThickness="1"
-              Stretch="Uniform" Grid.ColumnSpan="5"/>
+              Stretch="Uniform" Grid.ColumnSpan="6" Margin="0,0,0,76" Grid.RowSpan="2"/>
 
             <!-- Row 2 OperatingSystem -->
             <StackPanel Grid.Row="2"
                     HorizontalAlignment="Left"
-                    VerticalAlignment="Center" Grid.ColumnSpan="5">
+                    VerticalAlignment="Center" Grid.ColumnSpan="6">
                 <!-- Operating System -->
                 <StackPanel Orientation="Horizontal"
                         HorizontalAlignment="Left"
@@ -331,13 +336,13 @@
               Y2="0"
               Stroke="Gainsboro"
               StrokeThickness="1"
-              Stretch="Uniform" Grid.ColumnSpan="5" Margin="0,0,0,38" Grid.RowSpan="2">
+              Stretch="Uniform" Grid.ColumnSpan="6" Margin="0,0,0,38" Grid.RowSpan="2">
             </Line>
 
             <!-- Row 4 Driver Pack -->
             <StackPanel Grid.Row="4"
                     HorizontalAlignment="Left"
-                    VerticalAlignment="Center" Grid.ColumnSpan="5">
+                    VerticalAlignment="Center" Grid.ColumnSpan="6">
                 <!-- Driver Pack -->
                 <StackPanel Orientation="Horizontal"
                         HorizontalAlignment="Left"
@@ -370,13 +375,13 @@
               Y2="0"
               Stroke="Gainsboro"
               StrokeThickness="1"
-              Stretch="Uniform" Grid.ColumnSpan="5"/>
+              Stretch="Uniform" Grid.ColumnSpan="6" Margin="0,0,0,117" Grid.RowSpan="2"/>
 
             <!-- Row 6 Options -->
-            <StackPanel Grid.Row="5"
+            <StackPanel Grid.Row="6"
                     Orientation="Horizontal"
                     HorizontalAlignment="Left"
-                    VerticalAlignment="Top" Grid.ColumnSpan="2" Margin="0,1,0,0" Grid.RowSpan="2">
+                    VerticalAlignment="Top" Grid.ColumnSpan="3">
                 <Label Name="DeploymentOptionsLabel"
                    Content=""
                    FontSize="18"
@@ -391,7 +396,7 @@
             <StackPanel Grid.Row="6"
                     Orientation="Vertical"
                     HorizontalAlignment="Left"
-                    VerticalAlignment="Center" Grid.ColumnSpan="2">
+                    VerticalAlignment="Center" Grid.ColumnSpan="3">
                 <!-- AutopilotJson -->
                 <StackPanel HorizontalAlignment="Left"
                         VerticalAlignment="Center"
@@ -460,7 +465,7 @@
               Y2="0"
               Stroke="Gainsboro"
               StrokeThickness="1"
-              Stretch="Uniform" Grid.ColumnSpan="5" Margin="0,0,0,149"/>
+              Stretch="Uniform" Grid.ColumnSpan="6" Margin="0,0,0,149"/>
 
             <!-- Row 8 Start -->
             <Button Grid.Row="8"
@@ -471,8 +476,8 @@
                 Height="40"
                 Width="130"
                 HorizontalAlignment="Left"
-                VerticalAlignment="Center" Grid.Column="4" Margin="321,0,0,0" />
-            <CheckBox x:Name="DebugCheckBox" Content="Debug Mode" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.ColumnSpan="2"/>
+                VerticalAlignment="Center" Grid.Column="5" Margin="321,0,0,0" />
+            <CheckBox x:Name="DebugCheckBox" Content="Debug Mode" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.ColumnSpan="3"/>
             <Line Grid.Row="7"
             X1="0"
               Y1="0"
@@ -480,13 +485,13 @@
               Y2="0"
               Stroke="Gainsboro"
               StrokeThickness="1"
-              Stretch="Uniform" Grid.ColumnSpan="5" Margin="0,159,0,10"/>
-            <TextBox x:Name="TextBoxSpecialize" HorizontalAlignment="Left" Margin="0,35,0,0" Grid.Row="7" TextWrapping="Wrap" Text="https://raw.githubusercontent.com/gwblok/garytown/master/Dev/CloudScripts/SpecializeDEV.ps1" VerticalAlignment="Top" Width="818" Grid.ColumnSpan="5" Visibility="Collapsed"/>
-            <TextBox x:Name="TextBoxSetupComplete" HorizontalAlignment="Left" Margin="0,105,0,0" Grid.Row="7" TextWrapping="Wrap" Text="https://raw.githubusercontent.com/gwblok/garytown/master/Dev/CloudScripts/SetupCompleteDEV.ps1" VerticalAlignment="Top" Width="818" Grid.ColumnSpan="5" Visibility="Collapsed"/>
-            <Label x:Name="LabelSpecialize" Content="Specialize Script URL" HorizontalAlignment="Left" Margin="0,5,0,0" Grid.Row="7" VerticalAlignment="Top" Grid.ColumnSpan="2" Visibility="Collapsed"/>
-            <Label x:Name="LabelSetupComplete" Content="SetupComplete Script URL" HorizontalAlignment="Left" Margin="0,74,0,0" Grid.Row="7" VerticalAlignment="Top" Grid.ColumnSpan="2" Visibility="Collapsed"/>
-            <Label x:Name="LabelWin11Label" Content="Win 11 Ready:" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Center" RenderTransformOrigin="-0.663,0.713" Grid.Row="8" Grid.ColumnSpan="2" Width="242"/>
-            <Label x:Name="LabelWin11Reason" Content="Reason:" HorizontalAlignment="Left" Margin="141,0,0,0" VerticalAlignment="Center" RenderTransformOrigin="-0.663,0.713" Grid.Row="8" Grid.Column="1" Visibility="Hidden" Grid.ColumnSpan="4" Width="342"/>
+              Stretch="Uniform" Grid.ColumnSpan="6" Margin="0,159,0,10"/>
+            <TextBox x:Name="TextBoxSpecialize" HorizontalAlignment="Left" Margin="0,35,0,0" Grid.Row="7" TextWrapping="Wrap" Text="https://raw.githubusercontent.com/gwblok/garytown/master/Dev/CloudScripts/SpecializeDEV.ps1" VerticalAlignment="Top" Width="818" Grid.ColumnSpan="6" Visibility="Collapsed"/>
+            <TextBox x:Name="TextBoxSetupComplete" HorizontalAlignment="Left" Margin="0,105,0,0" Grid.Row="7" TextWrapping="Wrap" Text="https://raw.githubusercontent.com/gwblok/garytown/master/Dev/CloudScripts/SetupCompleteDEV.ps1" VerticalAlignment="Top" Width="818" Grid.ColumnSpan="6" Visibility="Collapsed"/>
+            <Label x:Name="LabelSpecialize" Content="Specialize Script URL" HorizontalAlignment="Left" Margin="0,5,0,0" Grid.Row="7" VerticalAlignment="Top" Visibility="Collapsed"/>
+            <Label x:Name="LabelSetupComplete" Content="SetupComplete Script URL" HorizontalAlignment="Left" Margin="0,74,0,0" Grid.Row="7" VerticalAlignment="Top" Visibility="Collapsed"/>
+            <Label x:Name="LabelWin11Label" Content="Win 11 Ready:" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Center" RenderTransformOrigin="-0.663,0.713" Grid.Row="8" Grid.ColumnSpan="3" Width="242"/>
+            <Label x:Name="LabelWin11Reason" Content="Reason:" HorizontalAlignment="Left" Margin="141,0,0,0" VerticalAlignment="Center" RenderTransformOrigin="-0.663,0.713" Grid.Row="8" Grid.Column="2" Visibility="Hidden" Grid.ColumnSpan="4" Width="342"/>
 
         </Grid>
     </DockPanel>
