@@ -217,6 +217,7 @@
         'Set-ClipboardScreenshot',
         'Set-HyperVName',
         'Set-DisRes',
+        'Set-WindowsOEMActivation',
         'Set-OSDCloudUnattendAuditMode',
         'Set-OSDCloudUnattendAuditModeAutopilot',
         'Set-OSDCloudUnattendSpecialize',
