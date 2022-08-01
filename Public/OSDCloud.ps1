@@ -1237,6 +1237,10 @@ function Invoke-OSDCloud {
                 Write-DarkGrayHost "Setting Timezone to $TimeZone"
                 DISM.EXE /image:C:\ /Set-TimeZone:"$TimeZone"
             }
+            if ($Global:OSDCloud.OEMActivation -eq $true){
+                Set-SetupCompleteOEMActivation
+            }
+            
         }
         #endregion
 

@@ -153,6 +153,10 @@
                           Header="Set Timezone based on IP"
                           IsCheckable="True"
                           IsChecked="False" />
+                <MenuItem Name="OEMActivation"
+                          Header="Apply OEM Activation Code"
+                          IsCheckable="True"
+                          IsChecked="False" />
             </MenuItem>
             <MenuItem Header="Microsoft Update Catalog">
                 <MenuItem Name="MSCatalogDiskDrivers"

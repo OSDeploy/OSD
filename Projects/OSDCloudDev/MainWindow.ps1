@@ -884,6 +884,7 @@ $formMainWindowControlStartButton.add_Click({
         MSCatalogScsiDrivers        = $formMainWindowControlMSCatalogScsiDrivers.IsChecked
         MSCatalogFirmware           = $formMainWindowControlMSCatalogFirmware.IsChecked
         NetFx3                      = $formMainWindowControlNetFx3.IsChecked
+        OEMActivation               = $formMainWindowControlOEMActivation.IsChecked
         OOBEDeployJsonChildItem     = $OOBEDeployJsonChildItem
         OOBEDeployJsonItem          = $OOBEDeployJsonItem
         OOBEDeployJsonName          = $OOBEDeployJsonName
