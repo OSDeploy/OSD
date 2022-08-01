@@ -127,6 +127,7 @@
         'Get-MyDriverPack',
         'Get-MyWindowsCapability',
         'Get-MyWindowsPackage',
+        'Get-WindowsOEMProductKey',
         'Get-OSD',
         'Get-OSDClass',
         'Get-OSDCloudTemplate',
