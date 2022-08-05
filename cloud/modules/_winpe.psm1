@@ -280,8 +280,6 @@ function osdcloud-SetupCompleteDefenderUpdate {
 function osdcloud-SetupCompleteNetFX {
 
     $ScriptsPath = "C:\Windows\Setup\scripts"
-    if (!(Test-Path -Path $ScriptsPath)){New-Item -Path $ScriptsPath} 
-
     $RunScript = @(@{ Script = "SetupComplete"; BatFile = 'SetupComplete.cmd'; ps1file = 'SetupComplete.ps1';Type = 'Setup'; Path = "$ScriptsPath"})
     $PSFilePath = "$($RunScript.Path)\$($RunScript.ps1File)"
 
@@ -289,6 +287,21 @@ function osdcloud-SetupCompleteNetFX {
         Add-Content -Path $PSFilePath "Write-Output 'Running Enable NetFX Function'"
         Add-Content -Path $PSFilePath "Invoke-Expression (Invoke-RestMethod -Uri 'https://raw.githubusercontent.com/OSDeploy/OSD/master/cloud/modules/_oobe.psm1')"
         Add-Content -Path $PSFilePath "osdcloud-NetFX"
+    }
+    else {
+    Write-Output "$PSFilePath - Not Found"
+    }
+}
+function osdcloud-SetupCompleteMS365Install {
+
+    $ScriptsPath = "C:\Windows\Setup\scripts"
+    $RunScript = @(@{ Script = "SetupComplete"; BatFile = 'SetupComplete.cmd'; ps1file = 'SetupComplete.ps1';Type = 'Setup'; Path = "$ScriptsPath"})
+    $PSFilePath = "$($RunScript.Path)\$($RunScript.ps1File)"
+
+    if (Test-Path -Path $PSFilePath){
+        Add-Content -Path $PSFilePath "Write-Output 'Running M365 Install'"
+        Add-Content -Path $PSFilePath "Invoke-Expression (Invoke-RestMethod -Uri 'https://raw.githubusercontent.com/OSDeploy/OSD/master/cloud/modules/m365.psm1')"
+        Add-Content -Path $PSFilePath "osdcloud-InstallM365 -CompanyName 'Organization' -Channel 'MonthlyEnterprise'"
     }
     else {
     Write-Output "$PSFilePath - Not Found"

@@ -175,6 +175,10 @@
                           Header="System Firmware"
                           IsCheckable="True"
                           IsChecked="False" />
+                <MenuItem Name="MS365Install"
+                          Header="Install M365 Apps"
+                          IsCheckable="True"
+                          IsChecked="False" />
             </MenuItem>
             <MenuItem Header="Addons">
                 <MenuItem Name="ScriptSpecialize"
