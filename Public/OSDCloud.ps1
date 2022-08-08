@@ -220,7 +220,7 @@ function Invoke-OSDCloud {
     if ($Global:OSDCloud.SetWiFi -eq $true){
         Write-SectionHeader "Gathering WiFi Information"
         Write-Host -ForegroundColor Magenta "Please Supply the SSID & Press Enter - CASE SENSITIVE"
-        if (!($SSID)){$SSID = Read-Host -AsSecureString}
+        if (!($SSID)){$SSID = Read-Host}
         Write-Host -ForegroundColor Magenta "Please Supply the Password & Press Enter - CASE SENSITIVE"
         if (!($PSK)){$PSK = Read-Host -AsSecureString}
     }
@@ -1378,7 +1378,7 @@ function Invoke-OSDCloud {
             Write-Host -ForegroundColor Cyan "Adding WiFi Tasks into JSON Config File for Action during Specialize" 
             $HashTable = @{
                 'Addons' = @{
-                    'SSID' = ConvertFrom-SecureString -SecureString $SSID -AsPlainText
+                    'SSID' = $SSID
                     'PSK' = ConvertFrom-SecureString -SecureString $PSK -AsPlainText
                 }
             }
