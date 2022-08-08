@@ -1376,10 +1376,11 @@ function Invoke-OSDCloud {
         if ($Global:OSDCloud.SetWiFi -eq $true){
 
             Write-Host -ForegroundColor Cyan "Adding WiFi Tasks into JSON Config File for Action during Specialize" 
+            $PSKText = [System.Net.NetworkCredential]::new("", $PSK).Password
             $HashTable = @{
                 'Addons' = @{
                     'SSID' = $SSID
-                    'PSK' = ConvertFrom-SecureString -SecureString $PSK -AsPlainText
+                    'PSK' = $PSKText 
                 }
             }
             $HashVar = $HashTable | ConvertTo-Json
