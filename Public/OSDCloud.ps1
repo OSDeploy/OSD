@@ -206,7 +206,7 @@ function Invoke-OSDCloud {
     #endregion
 
 
-        #=================================================
+    #=================================================
     #region Debug Mode
     if ($Global:OSDCloud.DebugMode -eq $true){
         Write-SectionHeader "DebugMode Write OSDCloud Vars"
@@ -215,6 +215,17 @@ function Invoke-OSDCloud {
     }
     #endregion
     #=================================================
+    #=================================================
+    #region WiFi Mode
+    if ($Global:OSDCloud.SetWiFi -eq $true){
+        Write-SectionHeader "Gathering WiFi Information"
+        Write-DarkGrayHost "Please Supply the SSID & Password - CASE SENSITIVE"
+        if (!($SSID)){$SSID = Read-Host -AsSecureString}
+        if (!($PSK)){$PSK = Read-Host -AsSecureString}
+    }
+    #endregion
+    #=================================================
+   
 
 
     #=================================================
@@ -1359,7 +1370,25 @@ function Invoke-OSDCloud {
             catch {}
             $HashVar | Out-File $ConfigFile
         }
-        
+
+        #region Extra Items Config for Specialize Phase
+        if ($Global:OSDCloud.WiFi -eq $true){
+
+            Write-Host -ForegroundColor Cyan "Adding WiFi Tasks into JSON Config File for Action during Specialize" 
+            $HashTable = @{
+                'Addons' = @{
+                    'SSID' = $SSID
+                    'PSK' = $PSK
+                }
+            }
+            $HashVar = $HashTable | ConvertTo-Json
+            $ConfigPath = "c:\osdcloud\configs"
+            $ConfigFile = "$ConfigPath\Extras.JSON"
+            try {[void][System.IO.Directory]::CreateDirectory($ConfigPath)}
+            catch {}
+            $HashVar | Out-File $ConfigFile
+        }
+
         #Bitlocker Stuff
         if ($Global:OSDCloud.Bitlocker -eq $true){
             New-BitLockerRegValues

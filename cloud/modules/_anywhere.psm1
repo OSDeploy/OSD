@@ -79,9 +79,11 @@ function osdcloud-UpdateModuleFilesManually {
     Invoke-WebRequest -UseBasicParsing -uri "$GitHubURI/$OSDCloudFunctionsPath/Set-SetupCompleteHyperVName.ps1" -OutFile "$ModulePath/$OSDCloudFunctionsPath/Set-SetupCompleteHyperVName.ps1"
     Invoke-WebRequest -UseBasicParsing -uri "$GitHubURI/$OSDCloudFunctionsPath/Set-SetupCompleteBitlocker.ps1" -OutFile "$ModulePath/$OSDCloudFunctionsPath/Set-SetupCompleteBitlocker.ps1"
     Invoke-WebRequest -UseBasicParsing -uri "$GitHubURI/$OSDCloudFunctionsPath/Set-SetupCompleteOEMActivation.ps1" -OutFile "$ModulePath/$OSDCloudFunctionsPath/Set-SetupCompleteOEMActivation.ps1"
+    Invoke-WebRequest -UseBasicParsing -uri "$GitHubURI/$OSDCloudFunctionsPath/Set-SetupCompleteSetWiFi.ps1" -OutFile "$ModulePath/$OSDCloudFunctionsPath/Set-SetupCompleteSetWiFi.ps1"
     Invoke-WebRequest -UseBasicParsing -uri "$GitHubURI/$OSDCloudFunctionsPath/Start-EjectCD.ps1" -OutFile "$ModulePath/$OSDCloudFunctionsPath/Start-EjectCD.ps1"
     Invoke-WebRequest -UseBasicParsing -uri "$GitHubURI/$OSDCloudFunctionsPath/Set-WindowsOEMActivation.ps1" -OutFile "$ModulePath/$OSDCloudFunctionsPath/Set-WindowsOEMActivation.ps1"
     Invoke-WebRequest -UseBasicParsing -uri "$GitHubURI/$OSDCloudFunctionsPath/Invoke-OSDAuditMode.ps1" -OutFile "$ModulePath/$OSDCloudFunctionsPath/Invoke-OSDAuditMode.ps1"
+    Invoke-WebRequest -UseBasicParsing -uri "$GitHubURI/$OSDCloudFunctionsPath/Set-WiFi.ps1" -OutFile "$ModulePath/$OSDCloudFunctionsPath/Set-WiFi.ps1"
     Invoke-WebRequest -UseBasicParsing -uri "$GitHubURI/Public/OSDCloud.ps1" -OutFile "$ModulePath/Public/OSDCloud.ps1"
     Invoke-WebRequest -UseBasicParsing -uri "$GitHubURI/OSD.psd1" -OutFile "$ModulePath/OSD.psd1"
     import-module "$ModulePath/OSD.psd1" -Force
@@ -99,9 +101,11 @@ function osdcloud-UpdateModuleFilesManually {
             Invoke-WebRequest -UseBasicParsing -uri "$GitHubURI/$OSDCloudFunctionsPath/Set-SetupCompleteHyperVName.ps1" -OutFile "$ModulePath/$OSDCloudFunctionsPath/Set-SetupCompleteHyperVName.ps1"
             Invoke-WebRequest -UseBasicParsing -uri "$GitHubURI/$OSDCloudFunctionsPath/Set-SetupCompleteBitlocker.ps1" -OutFile "$ModulePath/$OSDCloudFunctionsPath/Set-SetupCompleteBitlocker.ps1"
             Invoke-WebRequest -UseBasicParsing -uri "$GitHubURI/$OSDCloudFunctionsPath/Set-SetupCompleteOEMActivation.ps1" -OutFile "$ModulePath/$OSDCloudFunctionsPath/Set-SetupCompleteOEMActivation.ps1"
+            Invoke-WebRequest -UseBasicParsing -uri "$GitHubURI/$OSDCloudFunctionsPath/Set-SetupCompleteSetWiFi.ps1" -OutFile "$ModulePath/$OSDCloudFunctionsPath/Set-SetupCompleteSetWiFi.ps1"
             Invoke-WebRequest -UseBasicParsing -uri "$GitHubURI/$OSDCloudFunctionsPath/Start-EjectCD.ps1" -OutFile "$ModulePath/$OSDCloudFunctionsPath/Start-EjectCD.ps1"
             Invoke-WebRequest -UseBasicParsing -uri "$GitHubURI/$OSDCloudFunctionsPath/Set-WindowsOEMActivation.ps1" -OutFile "$ModulePath/$OSDCloudFunctionsPath/Set-WindowsOEMActivation.ps1"
             Invoke-WebRequest -UseBasicParsing -uri "$GitHubURI/$OSDCloudFunctionsPath/Invoke-OSDAuditMode.ps1" -OutFile "$ModulePath/$OSDCloudFunctionsPath/Invoke-OSDAuditMode.ps1"
+            Invoke-WebRequest -UseBasicParsing -uri "$GitHubURI/$OSDCloudFunctionsPath/Set-WiFi.ps1" -OutFile "$ModulePath/$OSDCloudFunctionsPath/Set-WiFi.ps1"
             Invoke-WebRequest -UseBasicParsing -uri "$GitHubURI/OSD.psd1" -OutFile "$ModulePath/OSD.psd1"
         }
     }

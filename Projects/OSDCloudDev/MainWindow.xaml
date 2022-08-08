@@ -157,6 +157,10 @@
                           Header="Apply OEM Activation Code"
                           IsCheckable="True"
                           IsChecked="False" />
+                <MenuItem Name="SetWiFi"
+                          Header="Configure WiFi"
+                          IsCheckable="True"
+                          IsChecked="False" />
             </MenuItem>
             <MenuItem Header="Microsoft Update Catalog">
                 <MenuItem Name="MSCatalogDiskDrivers"
