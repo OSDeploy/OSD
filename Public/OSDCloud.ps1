@@ -1378,8 +1378,8 @@ function Invoke-OSDCloud {
             Write-Host -ForegroundColor Cyan "Adding WiFi Tasks into JSON Config File for Action during Specialize" 
             $HashTable = @{
                 'Addons' = @{
-                    'SSID' = $SSID
-                    'PSK' = $PSK
+                    'SSID' = ConvertFrom-SecureString -SecureString $SSID -AsPlainText
+                    'PSK' = ConvertFrom-SecureString -SecureString $PSK -AsPlainText
                 }
             }
             $HashVar = $HashTable | ConvertTo-Json
