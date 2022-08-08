@@ -219,8 +219,9 @@ function Invoke-OSDCloud {
     #region WiFi Mode
     if ($Global:OSDCloud.SetWiFi -eq $true){
         Write-SectionHeader "Gathering WiFi Information"
-        Write-DarkGrayHost "Please Supply the SSID & Password - CASE SENSITIVE"
+        Write-DarkGrayHost "Please Supply the SSID & Press Enter - CASE SENSITIVE"
         if (!($SSID)){$SSID = Read-Host -AsSecureString}
+        Write-DarkGrayHost "Please Supply the Password & Press Enter - CASE SENSITIVE"
         if (!($PSK)){$PSK = Read-Host -AsSecureString}
     }
     #endregion
@@ -1372,7 +1373,7 @@ function Invoke-OSDCloud {
         }
 
         #region Extra Items Config for Specialize Phase
-        if ($Global:OSDCloud.WiFi -eq $true){
+        if ($Global:OSDCloud.SetWiFi -eq $true){
 
             Write-Host -ForegroundColor Cyan "Adding WiFi Tasks into JSON Config File for Action during Specialize" 
             $HashTable = @{
@@ -1383,7 +1384,7 @@ function Invoke-OSDCloud {
             }
             $HashVar = $HashTable | ConvertTo-Json
             $ConfigPath = "c:\osdcloud\configs"
-            $ConfigFile = "$ConfigPath\Extras.JSON"
+            $ConfigFile = "$ConfigPath\WiFi.JSON"
             try {[void][System.IO.Directory]::CreateDirectory($ConfigPath)}
             catch {}
             $HashVar | Out-File $ConfigFile
