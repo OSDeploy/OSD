@@ -1388,6 +1388,7 @@ function Invoke-OSDCloud {
             try {[void][System.IO.Directory]::CreateDirectory($ConfigPath)}
             catch {}
             $HashVar | Out-File $ConfigFile
+            Set-SetupCompleteSetWiFi
         }
 
         #Bitlocker Stuff
