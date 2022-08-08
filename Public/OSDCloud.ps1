@@ -219,9 +219,9 @@ function Invoke-OSDCloud {
     #region WiFi Mode
     if ($Global:OSDCloud.SetWiFi -eq $true){
         Write-SectionHeader "Gathering WiFi Information"
-        Write-DarkGrayHost "Please Supply the SSID & Press Enter - CASE SENSITIVE"
+        Write-Host -ForegroundColor Magenta "Please Supply the SSID & Press Enter - CASE SENSITIVE"
         if (!($SSID)){$SSID = Read-Host -AsSecureString}
-        Write-DarkGrayHost "Please Supply the Password & Press Enter - CASE SENSITIVE"
+        Write-Host -ForegroundColor Magenta "Please Supply the Password & Press Enter - CASE SENSITIVE"
         if (!($PSK)){$PSK = Read-Host -AsSecureString}
     }
     #endregion
