@@ -1,7 +1,7 @@
 [
     {
         "Catalog":  "Windows 11 Dynamic Update",
-        "OSDVersion":  "22.8.8.1",
+        "OSDVersion":  "22.8.9.1",
         "OSDStatus":  "",
         "UpdateOS":  "Windows 11",
         "UpdateBuild":  "21H2",
@@ -47,13 +47,13 @@
         "AdditionalHash":  "246 112 156 191 92 0 242 235 183 206 70 93 235 237 144 148 102 49 219 250 226 190 14 141 197 25 168 142 20 146 220 240",
         "OSDCore":  "",
         "OSDWinPE":  "",
-        "OSDGuid":  "b79cfdbf-a252-4e5d-a7bc-7ebc2e39b282",
+        "OSDGuid":  "99159731-f6ea-4c3a-9c7e-1b217d7596b6",
         "PartitionKey":  "Windows 11 Dynamic Update",
-        "RowKey":  "b79cfdbf-a252-4e5d-a7bc-7ebc2e39b282"
+        "RowKey":  "99159731-f6ea-4c3a-9c7e-1b217d7596b6"
     },
     {
         "Catalog":  "Windows 11 Dynamic Update",
-        "OSDVersion":  "22.8.8.1",
+        "OSDVersion":  "22.8.9.1",
         "OSDStatus":  "",
         "UpdateOS":  "Windows 11",
         "UpdateBuild":  "21H2",
@@ -99,8 +99,8 @@
         "AdditionalHash":  "91 243 3 47 116 15 13 36 24 3 127 216 98 213 36 254 61 160 117 226 106 9 120 126 4 178 52 119 99 237 124 148",
         "OSDCore":  "",
         "OSDWinPE":  "",
-        "OSDGuid":  "459d992a-1653-4159-9c6b-4f8d70270953",
+        "OSDGuid":  "67a2c2d4-dece-42c2-b135-4cf559ab8918",
         "PartitionKey":  "Windows 11 Dynamic Update",
-        "RowKey":  "459d992a-1653-4159-9c6b-4f8d70270953"
+        "RowKey":  "67a2c2d4-dece-42c2-b135-4cf559ab8918"
     }
 ]
