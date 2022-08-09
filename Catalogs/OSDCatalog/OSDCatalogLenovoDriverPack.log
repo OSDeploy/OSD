@@ -1,32 +1,36 @@
 ﻿**********************
 Windows PowerShell transcript start
-Start time: 20220622105517
-Username: OSDCODE\David
-RunAs User: OSDCODE\David
+Start time: 20220809030859
+Username: OSDCODE\david
+RunAs User: OSDCODE\david
 Configuration Name: 
-Machine: OSDCODE (Microsoft Windows NT 10.0.22000.0)
-Host Application: C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe -NoProfile -ExecutionPolicy Bypass -Command Import-Module 'c:\Users\David\.vscode\extensions\ms-vscode.powershell-2022.5.1\modules\PowerShellEditorServices\PowerShellEditorServices.psd1'; Start-EditorServices -HostName 'Visual Studio Code Host' -HostProfileId 'Microsoft.VSCode' -HostVersion '2022.5.1' -AdditionalModules @('PowerShellEditorServices.VSCode') -BundledModulesPath 'c:\Users\David\.vscode\extensions\ms-vscode.powershell-2022.5.1\modules' -EnableConsoleRepl -StartupBanner '=====> PowerShell Integrated Console v2022.5.1 <=====
-' -LogLevel 'Normal' -LogPath 'c:\Users\David\.vscode\extensions\ms-vscode.powershell-2022.5.1\logs\1655911285-41cb3950-bcef-498d-96c6-5748ac05e8e91655911245658\EditorServices.log' -SessionDetailsPath 'c:\Users\David\.vscode\extensions\ms-vscode.powershell-2022.5.1\sessions\PSES-VSCode-12028-390030' -FeatureFlags @() 
-Process ID: 13332
-PSVersion: 5.1.22000.653
+Machine: OSDCODE (Microsoft Windows NT 10.0.22621.0)
+Host Application: C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe -NoProfile -ExecutionPolicy Bypass -Command Import-Module 'c:\Users\david\.vscode\extensions\ms-vscode.powershell-preview-2022.8.0\modules\PowerShellEditorServices\PowerShellEditorServices.psd1'; Start-EditorServices -HostName 'Visual Studio Code Host' -HostProfileId 'Microsoft.VSCode' -HostVersion '2022.8.0' -AdditionalModules @('PowerShellEditorServices.VSCode') -BundledModulesPath 'c:\Users\david\.vscode\extensions\ms-vscode.powershell-preview-2022.8.0\modules' -EnableConsoleRepl -StartupBanner "PowerShell Preview Extension v2022.8.0
+Copyright (c) Microsoft Corporation.
+
+https://aka.ms/vscode-powershell
+Type 'help' to get help.
+" -LogLevel 'Normal' -LogPath 'c:\Users\david\AppData\Roaming\Code\User\globalStorage\ms-vscode.powershell-preview\logs\1660032074-ed24129c-c90f-4520-8d7d-8b441421d1111660032072595\EditorServices.log' -SessionDetailsPath 'c:\Users\david\AppData\Roaming\Code\User\globalStorage\ms-vscode.powershell-preview\sessions\PSES-VSCode-16556-647378.json' -FeatureFlags @() 
+Process ID: 4620
+PSVersion: 5.1.22621.169
 PSEdition: Desktop
-PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1.22000.653
-BuildVersion: 10.0.22000.653
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1.22621.169
+BuildVersion: 10.0.22621.169
 CLRVersion: 4.0.30319.42000
 WSManStackVersion: 3.0
 PSRemotingProtocolVersion: 2.3
 SerializationVersion: 1.1.0.1
 **********************
-Transcript started, output file is D:\GitHub\MyModules\OSD\Catalogs\OSDCatalog\OSDCatalogLenovoDriverPack.log
+Transcript started, output file is C:\Users\david\OneDrive\GitHub\MyModules\OSD\Catalogs\OSDCatalog\OSDCatalogLenovoDriverPack.log
 VERBOSE: GET with 0-byte payload
-VERBOSE: received 518930-byte response of content type text/xml
+VERBOSE: received 527251-byte response of content type text/xml
 VERBOSE: Cloud Catalog https://download.lenovo.com/cdrt/td/catalogv2.xml
-VERBOSE: Saving Cloud Catalog to C:\Users\David\AppData\Local\Temp\OSD\catalogv2.xml
-VERBOSE: Catalog saved to C:\Users\David\AppData\Local\Temp\OSD\catalogv2.xml
-VERBOSE: Reading the Raw Catalog at C:\Users\David\AppData\Local\Temp\OSD\catalogv2.xml
-VERBOSE: Testing Download File at https://download.lenovo.com/consumer/mobiles/500w_w1064_20h2_0601.exe
+VERBOSE: Saving Cloud Catalog to C:\Users\david\AppData\Local\Temp\OSD\catalogv2.xml
+VERBOSE: Catalog saved to C:\Users\david\AppData\Local\Temp\OSD\catalogv2.xml
+VERBOSE: Reading the Raw Catalog at C:\Users\david\AppData\Local\Temp\OSD\catalogv2.xml
+VERBOSE: Testing Download File at https://download.lenovo.com/consumer/mobiles/lnv_500w_gen3_w1164_202207.exe
 VERBOSE: HEAD with 0-byte payload
-VERBOSE: received 282860576-byte response of content type application/octet-stream
+VERBOSE: received 417340688-byte response of content type application/octet-stream
 VERBOSE: Testing Download File at https://download.lenovo.com/pccbbs/mobiles/tp_11e_3rd_gen_w1064_1909_202012.exe
 VERBOSE: HEAD with 0-byte payload
 VERBOSE: received 761338472-byte response of content type application/octet-stream
@@ -96,24 +100,27 @@ VERBOSE: received 232620520-byte response of content type application/octet-stre
 VERBOSE: Testing Download File at https://download.lenovo.com/pccbbs/mobiles/tp_helix_mt20cg-20ch_w1064_201706.exe
 VERBOSE: HEAD with 0-byte payload
 VERBOSE: received 194843320-byte response of content type application/octet-stream
-VERBOSE: Testing Download File at https://download.lenovo.com/pccbbs/mobiles/tp_l13-gen-3_l13-yoga-gen-3_s2-gen-7_s2-yoga-gen-7_amd_w10_21H2_202205.exe
+VERBOSE: Testing Download File at https://download.lenovo.com/pccbbs/mobiles/tp_l13-gen-3_l13-yoga-gen-3_s2-gen-7_s2-yoga-gen-7_amd_w10_21h2_202206.exe
 VERBOSE: HEAD with 0-byte payload
-VERBOSE: received 493415616-byte response of content type application/octet-stream
-VERBOSE: Testing Download File at https://download.lenovo.com/pccbbs/mobiles/tp_l13-gen-3_s2-gen-7_l13-yoga-gen-3_s2-yoga-gen-7_intel_w10_21H2_202205.exe
+VERBOSE: received 586476512-byte response of content type application/octet-stream
+VERBOSE: Testing Download File at https://download.lenovo.com/pccbbs/mobiles/tp_l13-gen-3_s2-gen-7_l13-yoga-gen-3_s2-yoga-gen-7_intel_w10_21H2_202206.exe
 VERBOSE: HEAD with 0-byte payload
-VERBOSE: received 876420512-byte response of content type application/octet-stream
-VERBOSE: Testing Download File at https://download.lenovo.com/pccbbs/mobiles/tp_l14_mt21c1_mt21c2_l15_mt21c3_mt21c4_w10_21h2_202205.exe
+VERBOSE: received 939545840-byte response of content type application/octet-stream
+VERBOSE: Testing Download File at https://download.lenovo.com/pccbbs/mobiles/tp_l13-gen-3_s2-gen-7_l13-yoga-gen-3_s2-yoga-gen-7_intel_w11_202206.exe
 VERBOSE: HEAD with 0-byte payload
-VERBOSE: received 1472051832-byte response of content type application/octet-stream
-VERBOSE: Testing Download File at https://download.lenovo.com/pccbbs/mobiles/tp_l14_mt21c5_mt21c6_l15_mt21c7_mt21c8_w10_21h2_202205.exe
+VERBOSE: received 931669424-byte response of content type application/octet-stream
+VERBOSE: Testing Download File at https://download.lenovo.com/pccbbs/mobiles/tp_l14_mt21c1_mt21c2_l15_mt21c3_mt21c4_w10_21h2_202206.exe
 VERBOSE: HEAD with 0-byte payload
-VERBOSE: received 503834720-byte response of content type application/octet-stream
-VERBOSE: Testing Download File at https://download.lenovo.com/pccbbs/mobiles/tp_l14_mt21c5_mt21c6_l15_mt21c7_mt21c8_w11_21_202205.exe
+VERBOSE: received 1539468736-byte response of content type application/octet-stream
+VERBOSE: Testing Download File at https://download.lenovo.com/pccbbs/mobiles/tp_l14_mt21c5_mt21c6_l15_mt21c7_mt21c8_w10_21h2_202206.exe
 VERBOSE: HEAD with 0-byte payload
-VERBOSE: received 503696584-byte response of content type application/octet-stream
+VERBOSE: received 585230304-byte response of content type application/octet-stream
 VERBOSE: Testing Download File at https://download.lenovo.com/pccbbs/mobiles/tp_l14gen1_l15gen1_amd_w11_21_202112.exe
 VERBOSE: HEAD with 0-byte payload
 VERBOSE: received 502741656-byte response of content type application/octet-stream
+VERBOSE: Testing Download File at https://download.lenovo.com/pccbbs/mobiles/tp_l14gen1_mt20u1-20u2-l15gen1_mt20u3-20u4_w1064_21h2_202201.exe
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 865706568-byte response of content type application/octet-stream
 VERBOSE: Testing Download File at https://download.lenovo.com/pccbbs/mobiles/tp_l14gen1_mt20u1-20u2-l15gen1_mt20u3-20u4_w11_21_202110.exe
 VERBOSE: HEAD with 0-byte payload
 VERBOSE: received 782964232-byte response of content type application/octet-stream
@@ -138,9 +145,6 @@ VERBOSE: received 1126545352-byte response of content type application/octet-str
 VERBOSE: Testing Download File at https://download.lenovo.com/pccbbs/mobiles/tp_l480_l580_w1064_21h2_202201.exe
 VERBOSE: HEAD with 0-byte payload
 VERBOSE: received 507475856-byte response of content type application/octet-stream
-VERBOSE: Testing Download File at https://download.lenovo.com/pccbbs/mobiles/tp_l490_l590_w1064_21h2_202201.exe
-VERBOSE: HEAD with 0-byte payload
-VERBOSE: received 674546056-byte response of content type application/octet-stream
 VERBOSE: Testing Download File at https://download.lenovo.com/pccbbs/mobiles/tp_L490_L590_W11_21_202110.exe
 VERBOSE: HEAD with 0-byte payload
 VERBOSE: received 631588136-byte response of content type application/octet-stream
@@ -162,6 +166,9 @@ VERBOSE: received 849586040-byte response of content type application/octet-stre
 VERBOSE: Testing Download File at https://download.lenovo.com/pccbbs/mobiles/tp_p15_mt20st-20su-p17_mt20sn-20sq-t15g_mt20ur-20us_w1064_21h2_202201.exe
 VERBOSE: HEAD with 0-byte payload
 VERBOSE: received 1408667584-byte response of content type application/octet-stream
+VERBOSE: Testing Download File at https://download.lenovo.com/pccbbs/mobiles/tp_p15_mt20st-20su-p17_mt20sn-20sq-t15g_mt20ur-20us_w11_21_202110.exe
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 1316984080-byte response of content type application/octet-stream
 VERBOSE: Testing Download File at https://download.lenovo.com/pccbbs/mobiles/tp_p15g2_mt20yq-20yr-t15gg2_mt20ys-20yt-p17g2_mt20yu-20yv_w1064_21h2_202201.exe
 VERBOSE: HEAD with 0-byte payload
 VERBOSE: received 1442280960-byte response of content type application/octet-stream
@@ -171,9 +178,9 @@ VERBOSE: received 1470059272-byte response of content type application/octet-str
 VERBOSE: Testing Download File at https://download.lenovo.com/pccbbs/mobiles/tp_p15v_mt20tq-20tr-t15p_mt20tn-20tm_w1064_21h2_202201.exe
 VERBOSE: HEAD with 0-byte payload
 VERBOSE: received 1211142728-byte response of content type application/octet-stream
-VERBOSE: Testing Download File at https://download.lenovo.com/pccbbs/mobiles/tp_p15vg2_mt21a9-21aa-t15pg2_mt21a7-21a8_w1064_21h2_202201.exe
+VERBOSE: Testing Download File at https://download.lenovo.com/pccbbs/mobiles/tp_p15v_mt20tq-20tr-t15p_mt20tn-20tm_w11_21_202110.exe
 VERBOSE: HEAD with 0-byte payload
-VERBOSE: received 1440505912-byte response of content type application/octet-stream
+VERBOSE: received 1119458144-byte response of content type application/octet-stream
 VERBOSE: Testing Download File at https://download.lenovo.com/pccbbs/mobiles/tp_p15vg2_mt21a9-21aa-t15pg2_mt21a7-21a8_w11_21_202112.exe
 VERBOSE: HEAD with 0-byte payload
 VERBOSE: received 1468397424-byte response of content type application/octet-stream
@@ -192,9 +199,12 @@ VERBOSE: received 1319195304-byte response of content type application/octet-str
 VERBOSE: Testing Download File at https://download.lenovo.com/pccbbs/mobiles/tp_p52_p72_w1064_21h2_202201.exe
 VERBOSE: HEAD with 0-byte payload
 VERBOSE: received 1019621424-byte response of content type application/octet-stream
-VERBOSE: Testing Download File at https://download.lenovo.com/pccbbs/mobiles/tp_p53_p73_w1064_21h2_202201.exe
+VERBOSE: Testing Download File at https://download.lenovo.com/pccbbs/mobiles/tp_p52_p72_w11_21_202110.exe
 VERBOSE: HEAD with 0-byte payload
-VERBOSE: received 1179539624-byte response of content type application/octet-stream
+VERBOSE: received 861948264-byte response of content type application/octet-stream
+VERBOSE: Testing Download File at https://download.lenovo.com/pccbbs/mobiles/tp_p53_p73_w11_21_202110.exe
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 1098890384-byte response of content type application/octet-stream
 VERBOSE: Testing Download File at https://download.lenovo.com/pccbbs/mobiles/tp_s1_yoga_12_w1064_201705.exe
 VERBOSE: HEAD with 0-byte payload
 VERBOSE: received 381556328-byte response of content type application/octet-stream
@@ -213,9 +223,9 @@ VERBOSE: received 390938920-byte response of content type application/octet-stre
 VERBOSE: Testing Download File at https://download.lenovo.com/pccbbs/mobiles/tp_s2-5th-gen_s2-yoga-5th-gen_l13_l13yoga_l13-gen-1_l13yogagen-1_w11_21_202111.exe
 VERBOSE: HEAD with 0-byte payload
 VERBOSE: received 535360952-byte response of content type application/octet-stream
-VERBOSE: Testing Download File at https://download.lenovo.com/pccbbs/mobiles/tp_s2-gen-6_s2-yoga-gen-6_l13-gen-2_l13-yoga-gen-2_w11_21_202202.exe
+VERBOSE: Testing Download File at https://download.lenovo.com/pccbbs/mobiles/tp_s2-gen-6_s2-yoga-gen-6_l13-gen-2_l13-yoga-gen-2_w11_21_202206.exe
 VERBOSE: HEAD with 0-byte payload
-VERBOSE: received 571419536-byte response of content type application/octet-stream
+VERBOSE: received 655516528-byte response of content type application/octet-stream
 VERBOSE: Testing Download File at https://download.lenovo.com/pccbbs/mobiles/tp_s2-gen-6a_s2-yoga-gen-6a_l13-gen-2a_l13-yoga-gen-2a_w11_21_202206.exe
 VERBOSE: HEAD with 0-byte payload
 VERBOSE: received 387043936-byte response of content type application/octet-stream
@@ -225,24 +235,24 @@ VERBOSE: received 789741696-byte response of content type application/octet-stre
 VERBOSE: Testing Download File at https://download.lenovo.com/pccbbs/mobiles/tp_s5yoga15_w1064_201706.exe
 VERBOSE: HEAD with 0-byte payload
 VERBOSE: received 584623856-byte response of content type application/octet-stream
-VERBOSE: Testing Download File at https://download.lenovo.com/pccbbs/mobiles/tp_t14_1809_1903_1909_2004_20h2_21h1_21h2_w1064_202201.exe
-VERBOSE: HEAD with 0-byte payload
-VERBOSE: received 457959648-byte response of content type application/octet-stream
-VERBOSE: Testing Download File at https://download.lenovo.com/pccbbs/mobiles/tp_t14_gen_3-t16-p16s_gen_1_amd_mt21cf-21cg-21ch-21cj-21ck-21cl_w1064_202206.exe
-VERBOSE: HEAD with 0-byte payload
-VERBOSE: received 538969968-byte response of content type application/octet-stream
 VERBOSE: Testing Download File at https://download.lenovo.com/pccbbs/mobiles/tp_t14_gen_3-t16-p16s_gen_1_amd_mt21cf-21cg-21ch-21cj-21ck-21cl_w11_21h2_202206.exe
 VERBOSE: HEAD with 0-byte payload
 VERBOSE: received 539159432-byte response of content type application/octet-stream
-VERBOSE: Testing Download File at https://download.lenovo.com/pccbbs/mobiles/tp_t14_gen2_w1164_202112.exe
+VERBOSE: Testing Download File at https://download.lenovo.com/pccbbs/mobiles/tp_t14_gen2_2004_20h2_21h1_21h2_w1064_202201.exe
 VERBOSE: HEAD with 0-byte payload
-VERBOSE: received 687705552-byte response of content type application/octet-stream
+VERBOSE: received 671879328-byte response of content type application/octet-stream
+VERBOSE: Testing Download File at https://download.lenovo.com/pccbbs/mobiles/tp_t14_w1164_202112.exe
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 503871360-byte response of content type application/octet-stream
 VERBOSE: Testing Download File at https://download.lenovo.com/pccbbs/mobiles/tp_t14-p14s-gen3-t16-p16s-gen1_w10_21h2_202203.exe
 VERBOSE: HEAD with 0-byte payload
 VERBOSE: received 1371439384-byte response of content type application/octet-stream
 VERBOSE: Testing Download File at https://download.lenovo.com/pccbbs/mobiles/tp_t14-p14s-gen3-t16-p16s-gen1_w11_21_202203.exe
 VERBOSE: HEAD with 0-byte payload
 VERBOSE: received 1370597352-byte response of content type application/octet-stream
+VERBOSE: Testing Download File at https://download.lenovo.com/pccbbs/mobiles/tp_t14s_gen2_mt20wm-20wn-x13_gen2_mt20wk-20wl_w1064_21h2_202201.exe
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 1106699320-byte response of content type application/octet-stream
 VERBOSE: Testing Download File at https://download.lenovo.com/pccbbs/mobiles/tp_t14s_gen2_mt20wm-20wn-x13_gen2_mt20wk-20wl_w11_21_202112.exe
 VERBOSE: HEAD with 0-byte payload
 VERBOSE: received 1045655456-byte response of content type application/octet-stream
@@ -252,18 +262,24 @@ VERBOSE: received 739952968-byte response of content type application/octet-stre
 VERBOSE: Testing Download File at https://download.lenovo.com/pccbbs/mobiles/tp_t14s_gen3_mt21br-21bs-x13_gen3_mt21bn-21bq_w11_21_202203.exe
 VERBOSE: HEAD with 0-byte payload
 VERBOSE: received 739036256-byte response of content type application/octet-stream
-VERBOSE: Testing Download File at https://download.lenovo.com/pccbbs/mobiles/tp_t14s_mt20t0-20t1-x13_mt20t2-20t3_w1064_21h2_202201.exe
+VERBOSE: Testing Download File at https://download.lenovo.com/pccbbs/mobiles/tp_t14s_mt20t0-20t1-x13_mt20t2-20t3_w1064_21h2_202206.exe
 VERBOSE: HEAD with 0-byte payload
-VERBOSE: received 920670736-byte response of content type application/octet-stream
-VERBOSE: Testing Download File at https://download.lenovo.com/pccbbs/mobiles/tp_t14s_mt20t0-20t1-x13_mt20t2-20t3_w11_21_202110.exe
+VERBOSE: received 931203984-byte response of content type application/octet-stream
+VERBOSE: Testing Download File at https://download.lenovo.com/pccbbs/mobiles/tp_t14s_mt20t0-20t1-x13_mt20t2-20t3_w11_21_202206.exe
 VERBOSE: HEAD with 0-byte payload
-VERBOSE: received 1026338688-byte response of content type application/octet-stream
+VERBOSE: received 931203888-byte response of content type application/octet-stream
 VERBOSE: Testing Download File at https://download.lenovo.com/pccbbs/mobiles/tp_t14s_x13_1809_1903_1909_2004_20h2_21h1_21h2_w1064_202201.exe
 VERBOSE: HEAD with 0-byte payload
 VERBOSE: received 453115584-byte response of content type application/octet-stream
+VERBOSE: Testing Download File at https://download.lenovo.com/pccbbs/mobiles/tp_t14s_x13_gen_3_amd_mt21cq-21cr-21cm-21cn_w11_21h2_202206.exe
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 677913104-byte response of content type application/octet-stream
 VERBOSE: Testing Download File at https://download.lenovo.com/pccbbs/mobiles/tp_t14s_x13_gen2_2004_20h2_21h1_21h2_w1064_202204.exe
 VERBOSE: HEAD with 0-byte payload
 VERBOSE: received 781374320-byte response of content type application/octet-stream
+VERBOSE: Testing Download File at https://download.lenovo.com/pccbbs/mobiles/tp_t14s_x13_gen2_w1164_202204.exe
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 797261856-byte response of content type application/octet-stream
 VERBOSE: Testing Download File at https://download.lenovo.com/pccbbs/mobiles/tp_t14s_x13_w1164_202112.exe
 VERBOSE: HEAD with 0-byte payload
 VERBOSE: received 499128488-byte response of content type application/octet-stream
@@ -348,21 +364,21 @@ VERBOSE: received 74709312-byte response of content type application/octet-strea
 VERBOSE: Testing Download File at https://download.lenovo.com/pccbbs/mobiles/tp_thinkpad25_t470_w1064_21h1_202105.exe
 VERBOSE: HEAD with 0-byte payload
 VERBOSE: received 1364478312-byte response of content type application/octet-stream
-VERBOSE: Testing Download File at https://download.lenovo.com/pccbbs/mobiles/tp_x12-detachable-gen-1_w11_21_202202.exe
+VERBOSE: Testing Download File at https://download.lenovo.com/pccbbs/mobiles/tp_x12-detachable-gen-1_w11_21_202206.exe
 VERBOSE: HEAD with 0-byte payload
-VERBOSE: received 697557632-byte response of content type application/octet-stream
-VERBOSE: Testing Download File at https://download.lenovo.com/pccbbs/mobiles/tp_x13s_mt21bx-21by_w11_21_202205.exe
+VERBOSE: received 940012184-byte response of content type application/octet-stream
+VERBOSE: Testing Download File at https://download.lenovo.com/pccbbs/mobiles/tp_x13s_mt21bx-21by_w11_21_202206.exe
 VERBOSE: HEAD with 0-byte payload
-VERBOSE: received 193357896-byte response of content type application/octet-stream
+VERBOSE: received 232907992-byte response of content type application/octet-stream
 VERBOSE: Testing Download File at https://download.lenovo.com/pccbbs/mobiles/tp_x13yoga_20sx-20sy_w11_21_202110.exe
 VERBOSE: HEAD with 0-byte payload
 VERBOSE: received 779395568-byte response of content type application/octet-stream
-VERBOSE: Testing Download File at https://download.lenovo.com/pccbbs/mobiles/tp_x13yoga_gen2-mt20w8-20w9_w11_21_202203.exe
+VERBOSE: Testing Download File at https://download.lenovo.com/pccbbs/mobiles/tp_x13yoga_gen2-mt20w8-20w9_w1064_21h2_202204.exe
 VERBOSE: HEAD with 0-byte payload
-VERBOSE: received 910018472-byte response of content type application/octet-stream
-VERBOSE: Testing Download File at https://download.lenovo.com/pccbbs/mobiles/tp_x13-yoga-g3_x13-yoga-g3-lte_x13-yoga-g3-lte2_w11_21_202205.exe
+VERBOSE: received 910020704-byte response of content type application/octet-stream
+VERBOSE: Testing Download File at https://download.lenovo.com/pccbbs/mobiles/tp_x13-yoga-g3_x13-yoga-g3-lte_x13-yoga-g3-lte2_w11_21_202206.exe
 VERBOSE: HEAD with 0-byte payload
-VERBOSE: received 858790536-byte response of content type application/octet-stream
+VERBOSE: received 866228024-byte response of content type application/octet-stream
 VERBOSE: Testing Download File at https://download.lenovo.com/pccbbs/mobiles/tp_x140e_w1064_201509.exe
 VERBOSE: HEAD with 0-byte payload
 VERBOSE: received 266422512-byte response of content type application/octet-stream
@@ -387,51 +403,54 @@ VERBOSE: received 890153280-byte response of content type application/octet-stre
 VERBOSE: Testing Download File at https://download.lenovo.com/pccbbs/mobiles/tp_x1carbon_mt20u9-20ua-x1yoga_mt20ub-20uc_w1064_21h2_202201.exe
 VERBOSE: HEAD with 0-byte payload
 VERBOSE: received 891300048-byte response of content type application/octet-stream
-VERBOSE: Testing Download File at https://download.lenovo.com/pccbbs/mobiles/tp_x1carbon_mt20u9-20ua-x1yoga_mt20ub-20uc_w11_21_202110.exe
+VERBOSE: Testing Download File at https://download.lenovo.com/pccbbs/mobiles/tp_x1carbon_mt20xw-20xx-x1yoga_mt20xy-20y0_w1064_21h2_202206.exe
 VERBOSE: HEAD with 0-byte payload
-VERBOSE: received 807574928-byte response of content type application/octet-stream
-VERBOSE: Testing Download File at https://download.lenovo.com/pccbbs/mobiles/tp_x1carbon_mt20xw-20xx-x1yoga_mt20xy-20y0_w1064_21h2_202203.exe
+VERBOSE: received 965997184-byte response of content type application/octet-stream
+VERBOSE: Testing Download File at https://download.lenovo.com/pccbbs/mobiles/tp_x1carbon_mt20xw-20xx-x1yoga_mt20xy-20y0_w11_21_202206.exe
 VERBOSE: HEAD with 0-byte payload
-VERBOSE: received 954959552-byte response of content type application/octet-stream
-VERBOSE: Testing Download File at https://download.lenovo.com/pccbbs/mobiles/tp_x1carbon_mt21cb-21cc-x1yoga_mt21cd-21ce_w11_21_202205.exe
+VERBOSE: received 965909016-byte response of content type application/octet-stream
+VERBOSE: Testing Download File at https://download.lenovo.com/pccbbs/mobiles/tp_x1carbon_mt21cb-21cc-x1yoga_mt21cd-21ce_w1064_21h2_202206.exe
 VERBOSE: HEAD with 0-byte payload
-VERBOSE: received 1091126984-byte response of content type application/octet-stream
+VERBOSE: received 1069069384-byte response of content type application/octet-stream
+VERBOSE: Testing Download File at https://download.lenovo.com/pccbbs/mobiles/tp_x1carbon_mt21cb-21cc-x1yoga_mt21cd-21ce_w11_21_202206.exe
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 1068002856-byte response of content type application/octet-stream
 VERBOSE: Testing Download File at https://download.lenovo.com/pccbbs/mobiles/tp_x1extreme_mt20mf-20mg-p1_mt20md-20me_w11_21_202110.exe
 VERBOSE: HEAD with 0-byte payload
 VERBOSE: received 852706672-byte response of content type application/octet-stream
 VERBOSE: Testing Download File at https://download.lenovo.com/pccbbs/mobiles/tp_x1extreme_mt20qv-20qw-p1_mt20qt-20qu_w11_21_202110.exe
 VERBOSE: HEAD with 0-byte payload
 VERBOSE: received 836968704-byte response of content type application/octet-stream
-VERBOSE: Testing Download File at https://download.lenovo.com/pccbbs/mobiles/tp_x1extreme_mt20tk-20tl-p1_mt20th-20tj_w11_21_202110.exe
+VERBOSE: Testing Download File at https://download.lenovo.com/pccbbs/mobiles/tp_x1extreme_mt20tk-20tl-p1_mt20th-20tj_w1064_21h2_202204.exe
 VERBOSE: HEAD with 0-byte payload
-VERBOSE: received 1077658232-byte response of content type application/octet-stream
-VERBOSE: Testing Download File at https://download.lenovo.com/pccbbs/mobiles/tp_x1extreme_mt20y5-20y6-p1_mt20y3-20y4_w11_21_202203.exe
+VERBOSE: received 1237822304-byte response of content type application/octet-stream
+VERBOSE: Testing Download File at https://download.lenovo.com/pccbbs/mobiles/tp_x1extreme_mt20y5-20y6-p1_mt20y3-20y4_w1064_21h2_202204.exe
 VERBOSE: HEAD with 0-byte payload
-VERBOSE: received 1411686096-byte response of content type application/octet-stream
-VERBOSE: Testing Download File at https://download.lenovo.com/pccbbs/mobiles/tp_x1extreme_mt21de-21df-p1_mt21dc-21dd_w1064_21h2_202205.exe
+VERBOSE: received 1411688304-byte response of content type application/octet-stream
+VERBOSE: Testing Download File at https://download.lenovo.com/pccbbs/mobiles/tp_x1extreme_mt21de-21df-p1_mt21dc-21dd_w1064_21h2_202206.exe
 VERBOSE: HEAD with 0-byte payload
-VERBOSE: received 1391022632-byte response of content type application/octet-stream
-VERBOSE: Testing Download File at https://download.lenovo.com/pccbbs/mobiles/tp_x1fold_mt20rk-20rl_w11_21_202203.exe
+VERBOSE: received 1387198456-byte response of content type application/octet-stream
+VERBOSE: Testing Download File at https://download.lenovo.com/pccbbs/mobiles/tp_x1fold_mt20rk-20rl_w11_21_202206.exe
 VERBOSE: HEAD with 0-byte payload
-VERBOSE: received 607176112-byte response of content type application/octet-stream
-VERBOSE: Testing Download File at https://download.lenovo.com/pccbbs/mobiles/tp_x1nano_gen1_mt20un-20uq_w1064_21h2_202203.exe
+VERBOSE: received 607463144-byte response of content type application/octet-stream
+VERBOSE: Testing Download File at https://download.lenovo.com/pccbbs/mobiles/tp_x1nano_gen1_mt20un_20uq_w11_21_202206.exe
 VERBOSE: HEAD with 0-byte payload
-VERBOSE: received 920992128-byte response of content type application/octet-stream
-VERBOSE: Testing Download File at https://download.lenovo.com/pccbbs/mobiles/tp_x1nano_gen2_mt21e8-21e9_w1064_21h2_202205.exe
+VERBOSE: received 937861504-byte response of content type application/octet-stream
+VERBOSE: Testing Download File at https://download.lenovo.com/pccbbs/mobiles/tp_x1nano_gen2_mt21e8-21e9_w11_21_202206.exe
 VERBOSE: HEAD with 0-byte payload
-VERBOSE: received 925947416-byte response of content type application/octet-stream
+VERBOSE: received 924971032-byte response of content type application/octet-stream
 VERBOSE: Testing Download File at https://download.lenovo.com/pccbbs/mobiles/tp_x1tablet_gen2_w1064_20h2_202011.exe
 VERBOSE: HEAD with 0-byte payload
 VERBOSE: received 1099994080-byte response of content type application/octet-stream
-VERBOSE: Testing Download File at https://download.lenovo.com/pccbbs/mobiles/tp_x1tablet_gen3_w11_21_202110.exe
+VERBOSE: Testing Download File at https://download.lenovo.com/pccbbs/mobiles/tp_x1tablet_gen3_w1064_21h2_202204.exe
 VERBOSE: HEAD with 0-byte payload
-VERBOSE: received 1183999632-byte response of content type application/octet-stream
+VERBOSE: received 1180505416-byte response of content type application/octet-stream
 VERBOSE: Testing Download File at https://download.lenovo.com/pccbbs/mobiles/tp_x1tablet_w1064_1903_201904.exe
 VERBOSE: HEAD with 0-byte payload
 VERBOSE: received 737952760-byte response of content type application/octet-stream
-VERBOSE: Testing Download File at https://download.lenovo.com/pccbbs/mobiles/tp_x1titanium_mt20qa-20qb_w11_21_202203.exe
+VERBOSE: Testing Download File at https://download.lenovo.com/pccbbs/mobiles/tp_x1titanium_mt20qa-20qb_w1064_21h2_202204.exe
 VERBOSE: HEAD with 0-byte payload
-VERBOSE: received 726499816-byte response of content type application/octet-stream
+VERBOSE: received 726502120-byte response of content type application/octet-stream
 VERBOSE: Testing Download File at https://download.lenovo.com/pccbbs/mobiles/tp_x1yoga_mt20jd-20je-20jf-20jg_w1064_20h2_202011.exe
 VERBOSE: HEAD with 0-byte payload
 VERBOSE: received 1029575264-byte response of content type application/octet-stream
@@ -579,9 +598,9 @@ VERBOSE: received 640980480-byte response of content type application/octet-stre
 VERBOSE: Testing Download File at https://download.lenovo.com/pccbbs/thinkcentre_drivers/tc_m90a_gen3_w10w1164_21_202203.exe
 VERBOSE: HEAD with 0-byte payload
 VERBOSE: received 557874808-byte response of content type application/octet-stream
-VERBOSE: Testing Download File at https://download.lenovo.com/pccbbs/thinkcentre_drivers/tc_m90a_w11_21_202110.exe
+VERBOSE: Testing Download File at https://download.lenovo.com/pccbbs/thinkcentre_drivers/tc_m90a_w1064_20h2_21h2_202203.exe
 VERBOSE: HEAD with 0-byte payload
-VERBOSE: received 896568352-byte response of content type application/octet-stream
+VERBOSE: received 593473736-byte response of content type application/octet-stream
 VERBOSE: Testing Download File at https://download.lenovo.com/pccbbs/thinkcentre_drivers/tc_m90n-1_w1064_21h1_202111.exe
 VERBOSE: HEAD with 0-byte payload
 VERBOSE: received 367328448-byte response of content type application/octet-stream
@@ -615,18 +634,21 @@ VERBOSE: received 1358514728-byte response of content type application/octet-str
 VERBOSE: Testing Download File at https://download.lenovo.com/pccbbs/thinkcentre_drivers/ts_p330_w1064_1809_20190124.exe
 VERBOSE: HEAD with 0-byte payload
 VERBOSE: received 1041937488-byte response of content type application/octet-stream
-VERBOSE: Testing Download File at https://download.lenovo.com/pccbbs/thinkcentre_drivers/ts_p340_w1064_21h2_202201.exe
+VERBOSE: Testing Download File at https://download.lenovo.com/pccbbs/thinkcentre_drivers/ts_p340_w11_21_202201.exe
 VERBOSE: HEAD with 0-byte payload
-VERBOSE: received 1611375912-byte response of content type application/octet-stream
+VERBOSE: received 1725817488-byte response of content type application/octet-stream
 VERBOSE: Testing Download File at https://download.lenovo.com/pccbbs/thinkcentre_drivers/ts_p348_w11_21_202201.exe
 VERBOSE: HEAD with 0-byte payload
 VERBOSE: received 1733124432-byte response of content type application/octet-stream
 VERBOSE: Testing Download File at https://download.lenovo.com/pccbbs/thinkcentre_drivers/ts_p350_w1064_2004_20h2_21h1_202111.exe
 VERBOSE: HEAD with 0-byte payload
 VERBOSE: received 1736135840-byte response of content type application/octet-stream
-VERBOSE: Testing Download File at https://download.lenovo.com/pccbbs/thinkcentre_drivers/ts_p360_w1064_21h2_202203.exe
+VERBOSE: Testing Download File at https://download.lenovo.com/pccbbs/thinkcentre_drivers/ts_p360_ultra_w11_21_202205.exe
 VERBOSE: HEAD with 0-byte payload
-VERBOSE: received 1613987816-byte response of content type application/octet-stream
+VERBOSE: received 1849027056-byte response of content type application/octet-stream
+VERBOSE: Testing Download File at https://download.lenovo.com/pccbbs/thinkcentre_drivers/ts_p360_w11_21_202203.exe
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 1614190864-byte response of content type application/octet-stream
 VERBOSE: Testing Download File at https://download.lenovo.com/pccbbs/thinkcentre_drivers/ts_p410p510p710p910_w1064_201706.exe
 VERBOSE: HEAD with 0-byte payload
 VERBOSE: received 542885168-byte response of content type application/octet-stream
@@ -636,20 +658,17 @@ VERBOSE: received 402560496-byte response of content type application/octet-stre
 VERBOSE: Testing Download File at https://download.lenovo.com/pccbbs/thinkcentre_drivers/ts_p520-p520c_w1064_21h2_202203.exe
 VERBOSE: HEAD with 0-byte payload
 VERBOSE: received 1734977712-byte response of content type application/octet-stream
-VERBOSE: Testing Download File at https://download.lenovo.com/pccbbs/thinkcentre_drivers/ts_p520-p520c_w1164_21h2_202203.exe
+VERBOSE: Testing Download File at https://download.lenovo.com/pccbbs/thinkcentre_drivers/ts_p620_w1064_21h2_202203.exe
 VERBOSE: HEAD with 0-byte payload
-VERBOSE: received 1923759368-byte response of content type application/octet-stream
-VERBOSE: Testing Download File at https://download.lenovo.com/pccbbs/thinkcentre_drivers/ts_p620_w11_21_202203.exe
-VERBOSE: HEAD with 0-byte payload
-VERBOSE: received 1343659720-byte response of content type application/octet-stream
+VERBOSE: received 1340725752-byte response of content type application/octet-stream
 VERBOSE: Testing Download File at https://download.lenovo.com/pccbbs/thinkcentre_drivers/ts_p920-p720_w1064_21h2_202203.exe
 VERBOSE: HEAD with 0-byte payload
 VERBOSE: received 1734977728-byte response of content type application/octet-stream
 VERBOSE: Testing Download File at https://download.lenovo.com/pccbbs/thinkcentre_drivers/ts_p920-p720_w1164_21h2_202203.exe
 VERBOSE: HEAD with 0-byte payload
 VERBOSE: received 1923759368-byte response of content type application/octet-stream
-VERBOSE: Exporting Build Catalog to C:\Users\David\AppData\Local\Temp\OSD\OSDCatalogLenovoDriverPack.xml
+VERBOSE: Exporting Build Catalog to C:\Users\david\AppData\Local\Temp\OSD\OSDCatalogLenovoDriverPack.xml
 **********************
 Windows PowerShell transcript end
-End time: 20220622105948
+End time: 20220809031332
 **********************
