@@ -163,7 +163,7 @@ $SemiAnnual = "http://officecdn.microsoft.com/pr/7ffbc6bf-bc32-4f92-8982-f9dd17f
     <User Key="software\microsoft\office\16.0\powerpoint\options" Name="defaultformat" Value="27" Type="REG_DWORD" App="ppt16" Id="L_SavePowerPointfilesas" />
     <User Key="software\microsoft\office\16.0\word\options" Name="defaultformat" Value="" Type="REG_SZ" App="word16" Id="L_SaveWordfilesas" />
     </AppSettings>
-    <Display Level="Full" AcceptEULA="TRUE" />
+    <Display Level="None" AcceptEULA="TRUE" />
 </Configuration>
 "@
 
