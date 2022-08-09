@@ -486,10 +486,10 @@ if (!($BuildConfigXMLOnly))
         {
         Write-CMTraceLog -Message "End User Clicked Cancel when prompted to close applications" -Type 1 -Component "o365script"
         Write-CMTraceLog -Message "Exit Script with code: $OfficeInstallCode" -Type 1 -Component "o365script"
-        ExitWithCode -exitcode $OfficeInstallCode
+        #ExitWithCode -exitcode $OfficeInstallCode
         } 
     Write-CMTraceLog -Message "Exit Script with code: $OfficeInstallCode" -Type 1 -Component "o365script"
-    ExitWithCode -exitcode $OfficeInstallCode
+    #ExitWithCode -exitcode $OfficeInstallCode
 
     }
 }
