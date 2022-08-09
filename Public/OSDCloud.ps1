@@ -226,8 +226,16 @@ function Invoke-OSDCloud {
     }
     #endregion
     #=================================================
-   
-
+    #=================================================
+    #region M365 Mode - Eventually Make this a better GUI Experience with Channel Selection
+    if ($Global:OSDCloud.MS365Install -eq $true){
+        Write-SectionHeader "Gathering M365 Information"
+        Write-Host -ForegroundColor Magenta "Please Supply the CompanyName & Press Enter - CASE SENSITIVE"
+        if (!($M365CompanyName)){$M365CompanyName = Read-Host}
+        if ($M365CompanyName -eq ""){$M365CompanyName = "Organization"}
+    }
+    #endregion
+    #=================================================v
 
     #=================================================
     #region Set Post-Merge Defaults
@@ -1253,7 +1261,7 @@ function Invoke-OSDCloud {
                 Set-SetupCompleteOEMActivation
             }
             if ($Global:OSDCloud.MS365Install -eq $true){
-                osdcloud-SetupCompleteMS365Install
+                osdcloud-SetupCompleteMS365Install -CompanyValue $M365CompanyName
             }
         }
         #endregion

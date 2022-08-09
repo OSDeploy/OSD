@@ -293,7 +293,10 @@ function osdcloud-SetupCompleteNetFX {
     }
 }
 function osdcloud-SetupCompleteMS365Install {
-
+    [CmdletBinding(DefaultParameterSetName="Office Options")] 
+    param (
+        [Parameter(Mandatory=$true)][ValidateNotNullOrEmpty()][string]$CompanyValue
+    )
     $ScriptsPath = "C:\Windows\Setup\scripts"
     $RunScript = @(@{ Script = "SetupComplete"; BatFile = 'SetupComplete.cmd'; ps1file = 'SetupComplete.ps1';Type = 'Setup'; Path = "$ScriptsPath"})
     $PSFilePath = "$($RunScript.Path)\$($RunScript.ps1File)"
@@ -301,7 +304,7 @@ function osdcloud-SetupCompleteMS365Install {
     if (Test-Path -Path $PSFilePath){
         Add-Content -Path $PSFilePath "Write-Output 'Running M365 Install'"
         Add-Content -Path $PSFilePath "Invoke-Expression (Invoke-RestMethod -Uri 'https://raw.githubusercontent.com/OSDeploy/OSD/master/cloud/modules/m365.psm1')"
-        Add-Content -Path $PSFilePath "osdcloud-InstallM365 -CompanyValue 'Organization' -Channel 'MonthlyEnterprise'"
+        Add-Content -Path $PSFilePath "osdcloud-InstallM365 -CompanyValue $CompanyValue -Channel 'MonthlyEnterprise'"
     }
     else {
     Write-Output "$PSFilePath - Not Found"
