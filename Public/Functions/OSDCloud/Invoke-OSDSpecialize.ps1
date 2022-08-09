@@ -193,7 +193,6 @@ function Invoke-OSDSpecialize {
     #=================================================
     #   Specialize Config HP & Dell JSON
     #=================================================
-    $ConfigPath = "c:\osdcloud\configs"
     if (Test-Path $ConfigPath){
         $JSONConfigs = Get-ChildItem -path $ConfigPath -Filter "*.json"
         if ($JSONConfigs.name -contains "HP.JSON"){
@@ -201,6 +200,16 @@ function Invoke-OSDSpecialize {
         }
         if ($JSONConfigs.name -contains "Dell.JSON"){
             $DellJSON = Get-Content -Path "$ConfigPath\DELL.JSON" |ConvertFrom-Json
+        }
+        if ($JSONConfigs.name -contains "Extras.JSON"){
+            $ExtrasJSON = Get-Content -Path "$ConfigPath\Extras.JSON" |ConvertFrom-Json
+        }
+        if ($JSONConfigs.name -contains "WiFi.JSON"){
+            $WiFiJSON = Get-Content -Path "$ConfigPath\WiFi.JSON" |ConvertFrom-Json
+            $SSID = $WiFiJSON.Addons.SSID
+            $PSK = $WiFiJSON.Addons.PSK
+            Write-Host "Setting WiFi Profile in Specialize Phase"
+            Set-WiFi -SSID $SSID -PSK $PSK
         }
     }
         if ($HPJson){
