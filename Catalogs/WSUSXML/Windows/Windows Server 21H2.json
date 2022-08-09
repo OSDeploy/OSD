@@ -1,7 +1,7 @@
 [
     {
         "Catalog":  "Windows Server 21H2",
-        "OSDVersion":  "22.7.12.1",
+        "OSDVersion":  "22.8.8.1",
         "OSDStatus":  "",
         "UpdateOS":  "Windows Server",
         "UpdateBuild":  "21H2",
@@ -47,13 +47,13 @@
         "AdditionalHash":  "186 49 147 192 2 181 34 187 105 55 210 160 250 32 235 92 37 30 32 191 226 177 11 106 122 250 252 48 34 173 67 141",
         "OSDCore":  "",
         "OSDWinPE":  "",
-        "OSDGuid":  "296f8e08-e997-4c11-90b3-daa7610f4d87",
+        "OSDGuid":  "e6b592b2-7dc2-4065-845b-fceab5f092ba",
         "PartitionKey":  "Windows Server 21H2",
-        "RowKey":  "296f8e08-e997-4c11-90b3-daa7610f4d87"
+        "RowKey":  "e6b592b2-7dc2-4065-845b-fceab5f092ba"
     },
     {
         "Catalog":  "Windows Server 21H2",
-        "OSDVersion":  "22.7.12.1",
+        "OSDVersion":  "22.8.8.1",
         "OSDStatus":  "",
         "UpdateOS":  "Windows Server",
         "UpdateBuild":  "21H2",
@@ -99,13 +99,13 @@
         "AdditionalHash":  "239 249 142 98 45 223 62 162 220 40 31 1 131 179 244 235 96 141 147 58 199 3 204 230 65 191 249 218 220 190 176 95",
         "OSDCore":  "",
         "OSDWinPE":  "",
-        "OSDGuid":  "f4e762a8-6e1c-4da9-96e2-f403e756c1bf",
+        "OSDGuid":  "9622773c-a94a-4d2a-81ca-f4d045a20907",
         "PartitionKey":  "Windows Server 21H2",
-        "RowKey":  "f4e762a8-6e1c-4da9-96e2-f403e756c1bf"
+        "RowKey":  "9622773c-a94a-4d2a-81ca-f4d045a20907"
     },
     {
         "Catalog":  "Windows Server 21H2",
-        "OSDVersion":  "22.7.12.1",
+        "OSDVersion":  "22.8.8.1",
         "OSDStatus":  "",
         "UpdateOS":  "Windows Server",
         "UpdateBuild":  "21H2",
@@ -151,8 +151,8 @@
         "AdditionalHash":  "222 235 39 178 69 221 225 49 77 89 74 113 142 208 107 100 41 20 137 26 20 76 92 72 124 217 14 117 107 143 13 176",
         "OSDCore":  "",
         "OSDWinPE":  "",
-        "OSDGuid":  "0bd82176-0adb-4611-bab7-b32e4178a313",
+        "OSDGuid":  "f77c28d8-9e45-4d7e-a0ab-032e89ac185a",
         "PartitionKey":  "Windows Server 21H2",
-        "RowKey":  "0bd82176-0adb-4611-bab7-b32e4178a313"
+        "RowKey":  "f77c28d8-9e45-4d7e-a0ab-032e89ac185a"
     }
 ]
