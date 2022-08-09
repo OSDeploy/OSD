@@ -1244,9 +1244,6 @@ function Invoke-OSDCloud {
             if ($Global:OSDCloud.NetFx3 -eq $true){
                 osdcloud-SetupCompleteNetFX
             }
-            if ($Global:OSDCloud.MS365Install -eq $true){
-                osdcloud-SetupCompleteMS365Install
-            }
             if ($Global:OSDCloud.SetTimeZone -eq $true){
                 $TimeZone= $Global:OSDCloud.TimeZone
                 Write-DarkGrayHost "Setting Timezone to $TimeZone"
@@ -1255,7 +1252,9 @@ function Invoke-OSDCloud {
             if ($Global:OSDCloud.OEMActivation -eq $true){
                 Set-SetupCompleteOEMActivation
             }
-            
+            if ($Global:OSDCloud.MS365Install -eq $true){
+                osdcloud-SetupCompleteMS365Install
+            }
         }
         #endregion
 

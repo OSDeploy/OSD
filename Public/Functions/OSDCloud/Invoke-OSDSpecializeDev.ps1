@@ -205,6 +205,13 @@ function Invoke-OSDSpecializeDev {
         if ($JSONConfigs.name -contains "Extras.JSON"){
             $ExtrasJSON = Get-Content -Path "$ConfigPath\Extras.JSON" |ConvertFrom-Json
         }
+        if ($JSONConfigs.name -contains "WiFi.JSON"){
+            $WiFiJSON = Get-Content -Path "$ConfigPath\WiFi.JSON" |ConvertFrom-Json
+            $SSID = $WiFiJSON.Addons.SSID
+            $PSK = $WiFiJSON.Addons.PSK
+            Write-Host "Setting WiFi Profile in Specialize Phase"
+            Set-WiFi -SSID $SSID -PSK $PSK
+        }
     }
     <# Didn't work in Specialize
     if ($ExtrasJSON){
