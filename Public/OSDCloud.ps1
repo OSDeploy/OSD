@@ -1240,6 +1240,8 @@ function Invoke-OSDCloud {
     
     #=================================================
     #region Create SetupComplete Files.
+    if (Test-WebConnection -Uri "google.com") {$WebConnection = $True}
+    if ($Global:OSDCloud.SetWiFi -eq $true){$SetWiFi = $True}
     if ($Global:OSDCloud.DevMode -eq $true){
         Write-SectionHeader "Creating SetupComplete Files and populating with requested tasks."
     
@@ -1247,21 +1249,38 @@ function Invoke-OSDCloud {
 
         if ($Global:OSDCloud.IsWinPE -eq $true) {
             if ($Global:OSDCloud.WindowsDefenderUpdate -eq $true){
-                osdcloud-SetupCompleteDefenderUpdate
+                if ($WebConnection -eq $True -or $SetWiFi -eq $True){
+                    Write-DarkGrayHost "Configuring Defender Updates for during SetupComplete"
+                    Set-SetupCompleteDefenderUpdate
+                }
+                else {Write-DarkGrayHost "No Internet or Future WiFi Configured, disabling Defender Updates"}
             }
             if ($Global:OSDCloud.NetFx3 -eq $true){
-                osdcloud-SetupCompleteNetFX
+                if ($WebConnection -eq $True -or $SetWiFi -eq $True){
+                    Write-DarkGrayHost "Configuring NetFX Install for during SetupComplete"
+                    Set-SetupCompleteNetFX
+                }
+                else {Write-DarkGrayHost "No Internet or Future WiFi Configured, disabling NetFX Install"}
             }
             if ($Global:OSDCloud.SetTimeZone -eq $true){
-                $TimeZone= $Global:OSDCloud.TimeZone
-                Write-DarkGrayHost "Setting Timezone to $TimeZone"
-                DISM.EXE /image:C:\ /Set-TimeZone:"$TimeZone"
+                if ($WebConnection -eq $true){
+                    Set-TimeZoneFromIP
+                }
+                else {
+                    Write-DarkGrayHost "Configuring TimeZone Settings for during SetupComplete"
+                    Set-SetupCompleteTimeZone
+                }
             }
             if ($Global:OSDCloud.OEMActivation -eq $true){
+                Write-DarkGrayHost "Configuring OEM Activation for during SetupComplete"
                 Set-SetupCompleteOEMActivation
             }
             if ($Global:OSDCloud.MS365Install -eq $true){
-                osdcloud-SetupCompleteMS365Install -CompanyValue $M365CompanyName
+                if ($WebConnection -eq $True -or $SetWiFi -eq $True){
+                    Write-DarkGrayHost "Configuring M365 Install during SetupComplete"
+                    osdcloud-SetupCompleteMS365Install -CompanyValue $M365CompanyName
+                }
+                else {Write-DarkGrayHost "No Internet or Future WiFi Configured, disabling M365 Install"}
             }
         }
         #endregion
@@ -1350,13 +1369,15 @@ function Invoke-OSDCloud {
             try {[void][System.IO.Directory]::CreateDirectory($ConfigPath)}
             catch {}
             $HPHashVar | Out-File $ConfigFile
-            osdcloud-HPIADownload
+            if ($WebConnection){osdcloud-HPIADownload} 
             
             #Stage HP TPM Update EXE
             if ($Global:OSDCloud.HPTPMUpdate -eq $true){
-                osdcloud-HPTPMBIOSSettings
-                osdcloud-HPTPMEXEDownload
-            }   
+                if ($WebConnection){osdcloud-HPTPMBIOSSettings}
+                if ($WebConnection){osdcloud-HPTPMEXEDownload}
+                else { Write-DarkGrayHost "No Interent Found, Skipping TPM Download & Update"
+                }
+            }
 
 
             #Leverage SetupComplete.cmd to run HP Tools
@@ -1364,19 +1385,20 @@ function Invoke-OSDCloud {
         }
         #region Extra Items Config for Specialize Phase
         if ($Global:OSDCloud.NetFx3 -eq $true){
-
-            Write-Host -ForegroundColor Cyan "Adding Extra Tasks into JSON Config File for Action during Specialize" 
-            $HashTable = @{
-                'Addons' = @{
-                    'NetFX3' = $Global:OSDCloud.NetFx3
+            if ($WebConnection){
+                Write-Host -ForegroundColor Cyan "Adding Extra Tasks into JSON Config File for Action during Specialize" 
+                $HashTable = @{
+                    'Addons' = @{
+                        'NetFX3' = $Global:OSDCloud.NetFx3
+                    }
                 }
+                $HashVar = $HashTable | ConvertTo-Json
+                $ConfigPath = "c:\osdcloud\configs"
+                $ConfigFile = "$ConfigPath\Extras.JSON"
+                try {[void][System.IO.Directory]::CreateDirectory($ConfigPath)}
+                catch {}
+                $HashVar | Out-File $ConfigFile
             }
-            $HashVar = $HashTable | ConvertTo-Json
-            $ConfigPath = "c:\osdcloud\configs"
-            $ConfigFile = "$ConfigPath\Extras.JSON"
-            try {[void][System.IO.Directory]::CreateDirectory($ConfigPath)}
-            catch {}
-            $HashVar | Out-File $ConfigFile
         }
 
         #region Extra Items Config for Specialize Phase
@@ -1401,7 +1423,7 @@ function Invoke-OSDCloud {
 
         #Bitlocker Stuff
         if ($Global:OSDCloud.Bitlocker -eq $true){
-            New-BitLockerRegValues
+            Set-BitlockerRegValuesXTS256
             Set-SetupCompleteBitlocker
         }
     }

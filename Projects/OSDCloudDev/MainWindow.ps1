@@ -935,17 +935,6 @@ $formMainWindowControlStartButton.add_Click({
         $Global:StartOSDCloudGUI.RecoveryPartition = $formMainWindowControlOption_Name_3.IsChecked
         
     }
-    if ($formMainWindowControlTimeZone.IsChecked -eq $true){
-        Function Get-TimeZoneFromIP {
-            $URIRequest = "https://timezoneapi.io/api/ip/?token=aZuNiKeSCzxosgrJGmCK"
-            $TimeZoneAPI =  (Invoke-WebRequest -Uri $URIRequest -UseBasicParsing).Content
-            $TimeZoneInfo = $TimeZoneAPI  | ConvertFrom-Json
-            $TimeZoneOffSet = $TimeZoneInfo.data.datetime.offset_tzfull
-            if ($TimeZoneOffSet -match "Daylight"){$TimeZoneOffSet = $TimeZoneOffSet.Replace("Daylight","Standard")}
-            return $TimeZoneOffSet
-        }
-        $Global:StartOSDCloudGUI.TimeZone = Get-TimeZoneFromIP
-    }
     #$Global:StartOSDCloudGUI | Out-Host
     if ($formMainWindowControlDebugCheckBox.IsChecked -eq $true){
         Invoke-Expression (Invoke-RestMethod -Uri 'https://raw.githubusercontent.com/OSDeploy/OSD/master/cloud/modules/debugmode.psm1')
