@@ -84,22 +84,24 @@ function osdcloud-HPTPMDetermine{
     else{Return $false}
 }
 function osdcloud-HPTPMDowngrade{
-    [CmdletBinding()]
-    Param (
-        [Parameter(Mandatory=$false)]
-        [ValidateSet("SP87753", "SP94937")]
-        $SPNumber = "SP94937"
-        )
-    if ((!($WorkingFolder))-or ($null -eq $WorkingFolder)){$WorkingFolder = "$env:TEMP\TPM"}
-    if (!(Test-Path -Path $WorkingFolder)){New-Item -Path $WorkingFolder -ItemType Directory -Force |Out-Null}
-    $UpdatePath = "$WorkingFolder\$SPNumber.exe"
-    $extractPath = "$WorkingFolder\$SPNumber"
-    Write-Host "Starting downlaod & Install of TPM Update $SPNumber"
-    Get-Softpaq -Number $SPNumber -SaveAs $UpdatePath -Overwrite yes
-    Start-Process -FilePath $UpdatePath -ArgumentList "/s /e /f $extractPath" -Wait
-    Suspend-BitLocker -MountPoint c: -RebootCount 2 -ErrorAction SilentlyContinue
-    Start-Process -FilePath "$extractPath\TPMConfig64.exe" -ArgumentList "-xVTx"
-
+    [String]$TPMVer = (Get-CimInstance  -Namespace "root\cimv2\security\MicrosoftTPM" -ClassName win32_tpm).ManufacturerVersion
+    if ($TPMVer -eq "7.85.4555.0"){$SPNumber = "SP94937"}
+    if ($TPMVer -eq "6.43"){$SPNumber = "SP87753"}
+    if ($SPNumber -ne $null){
+        if ((!($WorkingFolder))-or ($null -eq $WorkingFolder)){$WorkingFolder = "$env:TEMP\TPM"}
+        if (!(Test-Path -Path $WorkingFolder)){New-Item -Path $WorkingFolder -ItemType Directory -Force |Out-Null}
+        $UpdatePath = "$WorkingFolder\$SPNumber.exe"
+        $extractPath = "$WorkingFolder\$SPNumber"
+        Write-Host "Starting downlaod & Install of TPM Update $SPNumber"
+        Get-Softpaq -Number $SPNumber -SaveAs $UpdatePath -Overwrite yes
+        Start-Process -FilePath $UpdatePath -ArgumentList "/s /e /f $extractPath" -Wait
+        Suspend-BitLocker -MountPoint c: -RebootCount 2 -ErrorAction SilentlyContinue
+        Start-Process -FilePath "$extractPath\TPMConfig64.exe" -ArgumentList "-xVTx"
+    }
+    else
+        {
+        Write-Host "No Downgrade SP available"
+    }
 }
 function osdcloud-HPTPMBIOSSettings {
     osdcloud-HPBIOSSetSetting -SettingName 'TPM Device' -Value 'Available'
