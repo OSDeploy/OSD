@@ -23432,7 +23432,7 @@ Original credit to Mike Robbins http://mikefrobbins.com/2018/01/18/use-powershel
             <maml:name>String</maml:name>
             <maml:uri />
           </dev:type>
-          <dev:defaultValue>#003E92</dev:defaultValue>
+          <dev:defaultValue>#0096D6</dev:defaultValue>
         </command:parameter>
       </command:syntaxItem>
     </command:syntax>
@@ -23459,7 +23459,7 @@ Original credit to Mike Robbins http://mikefrobbins.com/2018/01/18/use-powershel
           <maml:name>String</maml:name>
           <maml:uri />
         </dev:type>
-        <dev:defaultValue>#003E92</dev:defaultValue>
+        <dev:defaultValue>#0096D6</dev:defaultValue>
       </command:parameter>
     </command:parameters>
     <command:inputTypes />
@@ -23522,7 +23522,7 @@ Original credit to Mike Robbins http://mikefrobbins.com/2018/01/18/use-powershel
             <maml:name>String</maml:name>
             <maml:uri />
           </dev:type>
-          <dev:defaultValue>#003E92</dev:defaultValue>
+          <dev:defaultValue>#0096D6</dev:defaultValue>
         </command:parameter>
       </command:syntaxItem>
     </command:syntax>
@@ -23549,7 +23549,7 @@ Original credit to Mike Robbins http://mikefrobbins.com/2018/01/18/use-powershel
           <maml:name>String</maml:name>
           <maml:uri />
         </dev:type>
-        <dev:defaultValue>#003E92</dev:defaultValue>
+        <dev:defaultValue>#0096D6</dev:defaultValue>
       </command:parameter>
     </command:parameters>
     <command:inputTypes />

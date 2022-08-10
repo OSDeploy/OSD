@@ -1043,7 +1043,12 @@ function Invoke-OSDCloud {
         }
     }
     else {
-        $Global:OSDCloud.DriverPack = Get-OSDCloudDriverPack | Select-Object -First 1
+        if ($Global:OSDCloud.Product) {
+            $Global:OSDCloud.DriverPack = Get-OSDCloudDriverPack -Product $Global:OSDCloud.Product | Select-Object -First 1
+        }
+        else {
+            $Global:OSDCloud.DriverPack = Get-OSDCloudDriverPack | Select-Object -First 1
+        }
     }
 
     if ($Global:OSDCloud.DriverPack) {

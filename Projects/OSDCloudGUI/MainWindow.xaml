@@ -46,7 +46,7 @@
                              Value="True">
                         <!-- Windows 11 Theme Dark Blue -->
                         <Setter Property="Background"
-                                Value="#003E92" />
+                                Value="#0096D6" />
                     </Trigger>
                     <Trigger Property="IsMouseOver"
                              Value="False">
@@ -207,7 +207,7 @@
                FlowDirection="RightToLeft"
                FontSize="24"
                FontWeight="Bold"
-               Foreground="#003E92"
+               Foreground="#0096D6"
                HorizontalAlignment="Right"
                VerticalAlignment="Top" />
 
@@ -233,7 +233,7 @@
                        Content="Operating System"
                        FontSize="18"
                        FontWeight="Bold"
-                       Foreground="#003E92"
+                       Foreground="#0096D6"
                        Margin="5"
                        Padding="2"
                        Width="155"
@@ -251,7 +251,7 @@
                        Content=""
                        FontSize="18"
                        FontWeight="Bold"
-                       Foreground="#003E92"
+                       Foreground="#0096D6"
                        Margin="5"
                        Padding="2"
                        Width="155" />
@@ -275,7 +275,7 @@
                        Content="Index"
                        FontSize="18"
                        FontWeight="Bold"
-                       Foreground="#003E92"
+                       Foreground="#0096D6"
                        Margin="5"
                        Padding="2" />
                 <TextBox Name="ImageIndexTextbox"
@@ -312,7 +312,7 @@
                        Content="Driver Pack"
                        FontSize="18"
                        FontWeight="Bold"
-                       Foreground="#003E92"
+                       Foreground="#0096D6"
                        Margin="5"
                        Padding="2"
                        Width="155"
@@ -348,7 +348,7 @@
                    Content=""
                    FontSize="18"
                    FontWeight="Bold"
-                   Foreground="#003E92"
+                   Foreground="#0096D6"
                    HorizontalAlignment="Left"
                    Margin="5"
                    Padding="2"

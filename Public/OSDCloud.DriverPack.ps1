@@ -10,7 +10,6 @@ function Get-OSDCloudDriverPack {
     .LINK
     https://github.com/OSDeploy/OSD/tree/master/Docs
     #>
-    
     [CmdletBinding()]
     param (
         [System.String]
@@ -41,7 +40,6 @@ function Get-OSDCloudDriverPacks {
     .LINK
     https://github.com/OSDeploy/OSD/tree/master/Docs
     #>
-    
     [CmdletBinding()]
     param ()
     $Results = Get-Content -Path (Join-Path (Get-Module OSD).ModuleBase "Catalogs\driverpacks.json") | ConvertFrom-Json
@@ -58,13 +56,12 @@ function Save-OSDCloudDriverPack {
     .LINK
     https://github.com/OSDeploy/OSD/tree/master/Docs
     #>
-    
     [CmdletBinding()]
     param (
         [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
         [System.String[]]
         $Guid,
-        
+
         [System.String]
         $DownloadPath = 'C:\Drivers',
 
@@ -103,9 +100,9 @@ function Save-OSDCloudDriverPack {
                     Write-Verbose -Message "HashMD5: $($DriverPack.HashMD5)"
                 }
                 Write-Verbose -Message "OutFile: $OutFile"
-        
+
                 Save-WebFile -SourceUrl $DriverPack.Url -DestinationDirectory $DownloadPath -DestinationName $DriverPack.FileName
-        
+
                 if (! (Test-Path $OutFile)) {
                     Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Driver Pack failed to download"
                 }

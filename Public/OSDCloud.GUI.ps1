@@ -21,7 +21,7 @@ function Start-OSDCloudGUI {
         
         #Color for the OSDCloudGUI Brand
         [Alias('BrandingColor')]
-        [System.String]$Color = '#003E92'
+        [System.String]$Color = '#0096D6'
     )
     #================================================
     #   Branding
@@ -58,7 +58,7 @@ function Start-OSDCloudGUIDev {
         
         #Color for the OSDCloudGUI Brand
         [Alias('BrandingColor')]
-        [System.String]$Color = '#003E92'
+        [System.String]$Color = '#0096D6'
     )
     #================================================
     #   Branding

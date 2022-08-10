@@ -368,7 +368,7 @@
             <Style.Triggers>
                <Trigger Property="IsMouseOver" Value="True">
    <!-- Windows 11 Theme Dark Blue -->
-                  <Setter Property="Background" Value="#003E92"/>
+                  <Setter Property="Background" Value="#0096D6"/>
                </Trigger>
                <Trigger Property="IsMouseOver" Value="False">
    <!-- Windows 11 Theme Blue -->
@@ -501,7 +501,7 @@
                      Content="Storage Account :"
                      FontSize="18"
                      FontWeight="Bold"
-                     Foreground="#003E92"
+                     Foreground="#0096D6"
                      Padding="2">
                   </Label>
                   <Label
@@ -523,7 +523,7 @@
                      Content="Resource Group :"
                      FontSize="18"
                      FontWeight="Bold"
-                     Foreground="#003E92"
+                     Foreground="#0096D6"
                      Padding="2">
                   </Label>
                   <Label
@@ -567,7 +567,7 @@
                      Content="Containters :"
                      FontSize="15"
                      FontWeight="Bold"
-                     Foreground="#003E92"
+                     Foreground="#0096D6"
                      Padding="2">
                   </Label>
                   <TreeView Name="TreeView" Width="290" Height="178">
@@ -607,14 +607,14 @@
                         Content="Objects:"
                         FontSize="15"
                         FontWeight="Bold"
-                        Foreground="#003E92"
+                        Foreground="#0096D6"
                         Padding="2"/>
                      <Label
                         Name="CObjects"
                         HorizontalAlignment="Stretch"
                         Content="2"
                         FontWeight="Bold"
-                        Foreground="#003E92"
+                        Foreground="#0096D6"
                         Padding="2"/>
                   </StackPanel>
                   <Grid
