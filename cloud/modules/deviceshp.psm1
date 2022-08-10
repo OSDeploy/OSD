@@ -96,7 +96,8 @@ function osdcloud-HPTPMDowngrade{
         Get-Softpaq -Number $SPNumber -SaveAs $UpdatePath -Overwrite yes
         Start-Process -FilePath $UpdatePath -ArgumentList "/s /e /f $extractPath" -Wait
         Suspend-BitLocker -MountPoint c: -RebootCount 2 -ErrorAction SilentlyContinue
-        Start-Process -FilePath "$extractPath\TPMConfig64.exe" -ArgumentList "-xVTx"
+        if ($TPMVer -eq "7.85.4555.0"){Start-Process -FilePath "$extractPath\TPMConfig64.exe" -ArgumentList "-xVTx"}
+        if ($TPMVer -eq "6.43"){Start-Process -FilePath "$extractPath\TPMConfig64.exe" -ArgumentList "-s"}
     }
     else
         {
