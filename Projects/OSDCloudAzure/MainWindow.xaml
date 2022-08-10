@@ -46,7 +46,7 @@
                              Value="True">
                         <!-- Windows 11 Theme Dark Blue -->
                         <Setter Property="Background"
-                                Value="#003E92" />
+                                Value="#0096D6" />
                     </Trigger>
                     <Trigger Property="IsMouseOver"
                              Value="False">
@@ -180,7 +180,7 @@
                FlowDirection="RightToLeft"
                FontSize="24"
                FontWeight="Bold"
-               Foreground="#003E92"
+               Foreground="#0096D6"
                HorizontalAlignment="Right"
                VerticalAlignment="Top" />
         <Label Name="AzureBrandLabel"
@@ -215,7 +215,7 @@
                        Content="Storage Account"
                        FontSize="18"
                        FontWeight="Bold"
-                       Foreground="#003E92"
+                       Foreground="#0096D6"
                        Margin="5"
                        Padding="2"
                        Width="150"
@@ -237,7 +237,7 @@
                        Content="Container"
                        FontSize="18"
                        FontWeight="Bold"
-                       Foreground="#003E92"
+                       Foreground="#0096D6"
                        Margin="5"
                        Padding="2"
                        Width="150"
@@ -259,7 +259,7 @@
                        Content="Blob"
                        FontSize="18"
                        FontWeight="Bold"
-                       Foreground="#003E92"
+                       Foreground="#0096D6"
                        Margin="5"
                        Padding="2"
                        Width="150"
@@ -281,7 +281,7 @@
                     Content="Index"
                     FontSize="18"
                     FontWeight="Bold"
-                    Foreground="#003E92"
+                    Foreground="#0096D6"
                     Margin="5"
                     Padding="2"
                     Width="150"
@@ -320,7 +320,7 @@
                        Content="Driver Pack"
                        FontSize="18"
                        FontWeight="Bold"
-                       Foreground="#003E92"
+                       Foreground="#0096D6"
                        Margin="5"
                        Padding="2"
                        Width="150"

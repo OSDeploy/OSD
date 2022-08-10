@@ -46,7 +46,7 @@
                              Value="True">
                         <!-- Windows 11 Theme Dark Blue -->
                         <Setter Property="Background"
-                                Value="#003E92" />
+                                Value="#0096D6" />
                     </Trigger>
                     <Trigger Property="IsMouseOver"
                              Value="False">

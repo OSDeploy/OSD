@@ -53,7 +53,7 @@ Aliases: BrandingColor
 
 Required: False
 Position: 2
-Default value: #003E92
+Default value: #0096D6
 Accept pipeline input: False
 Accept wildcard characters: False
 ```

@@ -110,7 +110,7 @@
                              Value="True">
                         <!-- Windows 11 Theme Dark Blue -->
                         <Setter Property="Background"
-                                Value="#003E92" />
+                                Value="#0096D6" />
                     </Trigger>
                     <Trigger Property="IsMouseOver"
                              Value="False">
@@ -214,7 +214,7 @@
       			<StackPanel Orientation="Horizontal" Margin="10,0,0,0" HorizontalAlignment="Left">
               <Image Source="{StaticResource Storage_Accounts}" Height="30"/>
       				  <StackPanel Orientation="Horizontal">  
-      				    <Label  Content="Storage Account" FontSize="18" FontWeight="Bold" Foreground="#003E92" Margin="5" Padding="2" ></Label>
+      				    <Label  Content="Storage Account" FontSize="18" FontWeight="Bold" Foreground="#0096D6" Margin="5" Padding="2" ></Label>
       				    <Label  Content="osdscript" FontSize="13" FontWeight="Bold"  Margin="0 10 0 0 " Padding="2" Width="165"></Label>
       			    </StackPanel>
       			</StackPanel>

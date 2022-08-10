@@ -15,7 +15,7 @@ function Start-OSDCloud {
         #Automatically populated from Get-MyComputerManufacturer -Brief
         [System.String]
         $Manufacturer = (Get-MyComputerManufacturer -Brief),
-        
+
         #Automatically populated from Get-MyComputerProduct
         [System.String]
         $Product = (Get-MyComputerProduct),
@@ -31,19 +31,19 @@ function Start-OSDCloud {
         #Shutdown the computer after Invoke-OSDCloud
         [System.Management.Automation.SwitchParameter]
         $Shutdown,
-        
+
         #Captures screenshots during OSDCloud WinPE
         [System.Management.Automation.SwitchParameter]
         $Screenshot,
-        
+
         #Skips the Autopilot Task routine
         [System.Management.Automation.SwitchParameter]
         $SkipAutopilot,
-        
+
         #Skips the ODT Task routine
         [System.Management.Automation.SwitchParameter]
         $SkipODT,
-        
+
         #Skip prompting to wipe Disks
         [System.Management.Automation.SwitchParameter]
         $ZTI,
@@ -52,6 +52,7 @@ function Start-OSDCloud {
         [ValidateSet(
             'Windows 11 22H2 x64 Insider Preview 22621.1',
             'Windows 11 21H2 x64',
+            'Windows 10 22H2 x64 Insider Preview 19045.1826',
             'Windows 10 21H2 x64',
             'Windows 10 21H1 x64',
             'Windows 10 20H2 x64',
@@ -71,7 +72,7 @@ function Start-OSDCloud {
         #Operating System Build of the Windows installation
         #Alias = Build
         [Parameter(ParameterSetName = 'Legacy')]
-        [ValidateSet('21H2','21H1','20H2','2004','1909','1903','1809')]
+        [ValidateSet('22H2','21H2','21H1','20H2','2004','1909','1903','1809')]
         [Alias('Build')]
         [System.String]
         $OSBuild,
@@ -170,7 +171,7 @@ function Start-OSDCloud {
         OSLicense = $OSLicense
         OSName = $OSName
         OSNameMenu = $null
-        OSNames = @('Windows 11 22H2 x64 Insider Preview 22621.1','Windows 11 21H2 x64','Windows 10 21H2 x64','Windows 10 21H1 x64','Windows 10 20H2 x64','Windows 10 2004 x64','Windows 10 1909 x64','Windows 10 1903 x64','Windows 10 1809 x64')
+        OSNames = @('Windows 11 22H2 x64 Insider Preview 22621.1','Windows 11 21H2 x64','Windows 10 22H2 x64 Insider Preview 19045.1826','Windows 10 21H2 x64','Windows 10 21H1 x64','Windows 10 20H2 x64','Windows 10 2004 x64','Windows 10 1909 x64','Windows 10 1903 x64','Windows 10 1809 x64')
         OSVersion = $OSVersion
         OSVersionMenu = $null
         OSVersionNames = @('Windows 11','Windows 10')
@@ -238,7 +239,7 @@ function Start-OSDCloud {
             $Global:StartOSDCloud.GetDiskFixed | Select-Object -Property Number, BusType, MediaType,`
             FriendlyName, PartitionStyle, NumberOfPartitions,`
             @{Name='SizeGB';Expression={[int]($_.Size / 1000000000)}} | Format-Table
-    
+
             Write-Warning "OSDCloud will continue in 5 seconds"
             Start-Sleep -Seconds 5
         }
@@ -286,7 +287,7 @@ function Start-OSDCloud {
         }
         if ($PSBoundParameters.ContainsKey('FindImageFile')) {
             $Global:StartOSDCloud.ImageFileItem = Select-OSDCloudFileWim
-        
+
             if ($Global:StartOSDCloud.ImageFileItem) {
                 $Global:StartOSDCloud.OSImageIndex = Select-OSDCloudImageIndex -ImagePath $Global:StartOSDCloud.ImageFileItem.FullName
 
@@ -318,25 +319,25 @@ function Start-OSDCloud {
         else {
             Write-Host -ForegroundColor DarkGray "========================================================================="
             Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Select an Operating System"
-            
+
             $i = $null
             $Global:StartOSDCloud.OSNameMenu = foreach ($Item in $Global:StartOSDCloud.OSNames) {
                 $i++
-            
+
                 $ObjectProperties = @{
                     Selection   = $i
                     Name     = $Item
                 }
                 New-Object -TypeName PSObject -Property $ObjectProperties
             }
-            
+
             $Global:StartOSDCloud.OSNameMenu | Select-Object -Property Selection, Name | Format-Table | Out-Host
-            
+
             do {
                 $SelectReadHost = Read-Host -Prompt "Enter the Selection Number"
             }
             until (((($SelectReadHost -ge 0) -and ($SelectReadHost -in $Global:StartOSDCloud.OSNameMenu.Selection))))
-            
+
             $Global:StartOSDCloud.OSName = $Global:StartOSDCloud.OSNameMenu | Where-Object {$_.Selection -eq $SelectReadHost} | Select-Object -ExpandProperty Name
         }
         $OSName = $Global:StartOSDCloud.OSName
@@ -354,25 +355,25 @@ function Start-OSDCloud {
             Write-Host -ForegroundColor DarkGray "========================================================================="
             Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Select an Operating System"
             $Global:StartOSDCloud.OSVersionNames = @('Windows 11','Windows 10')
-            
+
             $i = $null
             $Global:StartOSDCloud.OSVersionMenu = foreach ($Item in $Global:StartOSDCloud.OSVersionNames) {
                 $i++
-            
+
                 $ObjectProperties = @{
                     Selection   = $i
                     Name     = $Item
                 }
                 New-Object -TypeName PSObject -Property $ObjectProperties
             }
-            
+
             $Global:StartOSDCloud.OSVersionMenu | Select-Object -Property Selection, Name | Format-Table | Out-Host
-            
+
             do {
                 $SelectReadHost = Read-Host -Prompt "Enter the Selection Number"
             }
             until (((($SelectReadHost -ge 0) -and ($SelectReadHost -in $Global:StartOSDCloud.OSVersionMenu.Selection))))
-            
+
             $Global:StartOSDCloud.OSVersion = $Global:StartOSDCloud.OSVersionMenu | Where-Object {$_.Selection -eq $SelectReadHost} | Select-Object -ExpandProperty Name
         }
         $OSVersion = $Global:StartOSDCloud.OSVersion
