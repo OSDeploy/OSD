@@ -244,11 +244,79 @@ function Invoke-OSDSpecializeDev {
                         } -begin { $networks = @() } -end { $networks|% { new-object psobject -property $_ } }
                     }
                 }
-            
+                $SSIDS = Get-WifiNetwork | select ssid
+
+                <#
                 $SSID = Get-WifiNetwork | Select-Object ssid | Out-GridView -Title "Select Wireless Network To Connect to" -PassThru
                 $SSID = $SSID.SSID
                 $PSK = Read-Host -Prompt "Enter WiFi Password" -AsSecureString
                 $PSKText = [System.Net.NetworkCredential]::new("", $PSK).Password
+                #>
+                # Original example posted at http://technet.microsoft.com/en-us/library/ff730949.aspx
+
+                Add-Type -AssemblyName System.Windows.Forms
+                Add-Type -AssemblyName System.Drawing
+
+                $form = New-Object System.Windows.Forms.Form 
+                $form.Text = "Select a Computer"
+                $form.Size = New-Object System.Drawing.Size(300,300) 
+                $form.StartPosition = "CenterScreen"
+
+                $OKButton = New-Object System.Windows.Forms.Button
+                $OKButton.Location = New-Object System.Drawing.Point(75,220)
+                $OKButton.Size = New-Object System.Drawing.Size(75,23)
+                $OKButton.Text = "OK"
+                $OKButton.DialogResult = [System.Windows.Forms.DialogResult]::OK
+                $form.AcceptButton = $OKButton
+                $form.Controls.Add($OKButton)
+
+                $CancelButton = New-Object System.Windows.Forms.Button
+                $CancelButton.Location = New-Object System.Drawing.Point(150,220)
+                $CancelButton.Size = New-Object System.Drawing.Size(75,23)
+                $CancelButton.Text = "Cancel"
+                $CancelButton.DialogResult = [System.Windows.Forms.DialogResult]::Cancel
+                $form.CancelButton = $CancelButton
+                $form.Controls.Add($CancelButton)
+
+                $label = New-Object System.Windows.Forms.Label
+                $label.Location = New-Object System.Drawing.Point(10,20) 
+                $label.Size = New-Object System.Drawing.Size(280,20) 
+                $label.Text = "Please select a wireless network:"
+                $form.Controls.Add($label) 
+
+                $listBox = New-Object System.Windows.Forms.ListBox 
+                $listBox.Location = New-Object System.Drawing.Point(10,40) 
+                $listBox.Size = New-Object System.Drawing.Size(260,20) 
+                $listBox.Height = 80
+
+
+                ForEach ($SSID in $SSIDS) {
+                [void] $listBox.Items.Add("$($SSID.SSID)")
+                }
+                $form.Controls.Add($listBox) 
+
+                $label = New-Object System.Windows.Forms.Label
+                $label.Location = New-Object System.Drawing.Point(10,140) 
+                $label.Size = New-Object System.Drawing.Size(280,20) 
+                $label.Text = "Please enter Network Password:"
+                $form.Controls.Add($label) 
+
+                $textBox = New-Object System.Windows.Forms.TextBox 
+                $textBox.Location = New-Object System.Drawing.Point(10,160) 
+                $textBox.Size = New-Object System.Drawing.Size(260,20) 
+                $form.Controls.Add($textBox) 
+
+                $form.Topmost = $True
+
+                $result = $form.ShowDialog()
+
+                if ($result -eq [System.Windows.Forms.DialogResult]::OK)
+                {
+                    $SSID = $listBox.SelectedItem
+                    $PSKTest = $textBox.Text
+                    
+}
+
                 Set-WiFi -SSID $SSID -PSK $PSKText
                 Restart-Service -Name WlanSvc
                 Start-Sleep -Seconds 10
