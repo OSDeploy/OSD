@@ -213,6 +213,49 @@ function Invoke-OSDSpecializeDev {
             Set-WiFi -SSID $SSID -PSK $PSK
         }
     }
+
+    #TESTING WIFI!!!!
+
+    $WirelessAdapters = Get-NetAdapter | Where-Object {($_.PhysicalMediaType -eq 'Native 802.11') -or ($_.PhysicalMediaType -eq 'Wireless LAN')}
+    if ($WirelessAdapters){
+    
+        Get-Service -Name WlanSvc | Start-Service
+        Start-Sleep -Seconds 5
+    
+        #[CmdletBinding()] Param ([Parameter(Mandatory=$true)][ValidateSet('Off', 'On')][string]$WifiStatus)
+        # https://www.reddit.com/r/sysadmin/comments/9az53e/need_help_controlling_wifi/
+        $WifiStatus = "On"
+        Add-Type -AssemblyName System.Runtime.WindowsRuntime
+        $asTaskGeneric = ([System.WindowsRuntimeSystemExtensions].GetMethods() | ? {$_.Name -eq 'AsTask' -and $_.GetParameters().Count -eq 1 -and $_.GetParameters()[0].ParameterType.Name -eq 'IAsyncOperation`1'})[0]
+    
+        Function Await($WinRtTask, $ResultType)
+        {
+            $asTask = $asTaskGeneric.MakeGenericMethod($ResultType)
+            $netTask = $asTask.Invoke($null, @($WinRtTask))
+            $netTask.Wait(-1) | Out-Null
+            $netTask.Result
+        }
+    
+        [Windows.Devices.Radios.Radio,Windows.System.Devices,ContentType=WindowsRuntime] | Out-Null
+        [Windows.Devices.Radios.RadioAccessStatus,Windows.System.Devices,ContentType=WindowsRuntime] | Out-Null
+        Await ([Windows.Devices.Radios.Radio]::RequestAccessAsync()) ([Windows.Devices.Radios.RadioAccessStatus]) | Out-Null
+        $radios = Await ([Windows.Devices.Radios.Radio]::GetRadiosAsync())([System.Collections.Generic.IReadOnlyList[Windows.Devices.Radios.Radio]])
+        $wifi = $radios | ? { $_.Kind -eq 'WiFi' }
+        [Windows.Devices.Radios.RadioState,Windows.System.Devices,ContentType=WindowsRuntime] | Out-Null
+    
+        # necessary since Windows will automatically enable the status of a wifi device when the wired connection is lost
+        # Start-Sleep -Seconds 10
+        # Await ($wifi.SetStateAsync($WifiStatus)) ([Windows.Devices.Radios.RadioAccessStatus])
+        if ($wifi.State -eq "On") {
+          [Windows.Devices.WiFi.WiFiAdapter,Windows.System.Devices,Contenttype=WindowsRuntime] | Out-Null
+          $Res=Await ([Windows.Devices.WiFi.WiFiAdapter]::FindAllAdaptersAsync())([System.Collections.Generic.IReadOnlyList[Windows.Devices.WiFi.WiFiAdapter]])
+          $SSID = $res.NetworkReport.AvailableNetworks | Select Ssid -Unique
+        }
+    
+    
+        $Network = $SSID | Out-GridView -Title "Pick your WiFi network" -PassThru
+    }
+
     <# Didn't work in Specialize
     if ($ExtrasJSON){
         write-host "Specialize Stage - Extra Addons" -ForegroundColor Green
