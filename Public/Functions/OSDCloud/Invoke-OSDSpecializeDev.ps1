@@ -313,9 +313,9 @@ function Invoke-OSDSpecializeDev {
                 if ($result -eq [System.Windows.Forms.DialogResult]::OK)
                 {
                     $SSID = $listBox.SelectedItem
-                    $PSKTest = $textBox.Text
+                    $PSKText = $textBox.Text
                     
-}
+                }
 
                 Set-WiFi -SSID $SSID -PSK $PSKText
                 Restart-Service -Name WlanSvc
