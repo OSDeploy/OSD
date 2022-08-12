@@ -79,9 +79,9 @@ if (Test-WebConnection -Uri "google.com") {
         }
     else {Write-Output "Failed Update Platform Download"}
     }
-    
+else {Write-Output "No Internet Connection, Skipping Defender Updates"}   
     New-Alias -Name 'UpdateDefenderStack' -Value 'osdcloud-UpdateDefenderStack' -Description 'OSDCloud' -Force
 }
-else {Write-Output "No Internet Connection, Skipping Defender Updates"}
+
 #endregion
 #=================================================
