@@ -218,13 +218,15 @@ function Invoke-OSDSpecializeDev {
     }
 
     #TESTING WIFI!!!!
-    if (!(Test-WebConnection google.com)){
+    if (Test-WebConnection -Uri google.com){Write-Output "Device is online via Ethernet Connection"}
+    else {
         $WirelessAdapters = Get-NetAdapter | Where-Object {($_.PhysicalMediaType -eq 'Native 802.11') -or ($_.PhysicalMediaType -eq 'Wireless LAN')}
         if ($WirelessAdapters){
-        
+            Write-Output "Found Wireless Adapters on Device, attempting to Enable"
             Get-Service -Name WlanSvc | Start-Service
             Start-Sleep -Seconds 10
-            if (!(Test-WebConnection google.com)){
+            if (Test-WebConnection google.com){ Write-Output "Device detected to be online from intial WiFi setup"}
+            else {
                 function Get-WifiNetwork {
                     end {
                     netsh wlan sh net mode=bssid | % -process {
@@ -257,14 +259,9 @@ function Invoke-OSDSpecializeDev {
                     Write-Output "Unable to connect Device to Internet"
                 }
             }
-            else {
-                Write-Output "Device detected to be online from intial WiFi setup"
-            }
         }
     }
-    else {
-        Write-Output "Device is online via Ethernet Connection"
-    }
+
 
     <# Didn't work in Specialize
     if ($ExtrasJSON){
