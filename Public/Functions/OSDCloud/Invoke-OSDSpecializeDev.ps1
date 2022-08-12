@@ -193,6 +193,7 @@ function Invoke-OSDSpecializeDev {
     #=================================================
     #   Specialize Config HP & Dell JSON
     #=================================================
+    $WirelessAdapters = Get-NetAdapter | Where-Object {($_.PhysicalMediaType -eq 'Native 802.11') -or ($_.PhysicalMediaType -eq 'Wireless LAN')}
     $ConfigPath = "c:\osdcloud\configs"
     if (Test-Path $ConfigPath){
         $JSONConfigs = Get-ChildItem -path $ConfigPath -Filter "*.json"
@@ -205,55 +206,64 @@ function Invoke-OSDSpecializeDev {
         if ($JSONConfigs.name -contains "Extras.JSON"){
             $ExtrasJSON = Get-Content -Path "$ConfigPath\Extras.JSON" |ConvertFrom-Json
         }
-        if ($JSONConfigs.name -contains "WiFi.JSON"){
-            $WiFiJSON = Get-Content -Path "$ConfigPath\WiFi.JSON" |ConvertFrom-Json
-            $SSID = $WiFiJSON.Addons.SSID
-            $PSK = $WiFiJSON.Addons.PSK
-            Write-Host "Setting WiFi Profile in Specialize"
-            Set-WiFi -SSID $SSID -PSK $PSK
+        if ($WirelessAdapters){
+            if ($JSONConfigs.name -contains "WiFi.JSON"){
+                $WiFiJSON = Get-Content -Path "$ConfigPath\WiFi.JSON" |ConvertFrom-Json
+                $SSID = $WiFiJSON.Addons.SSID
+                $PSK = $WiFiJSON.Addons.PSK
+                Write-Host "Setting WiFi Profile in Specialize"
+                Set-WiFi -SSID $SSID -PSK $PSK
+            }
         }
     }
 
     #TESTING WIFI!!!!
-
-    $WirelessAdapters = Get-NetAdapter | Where-Object {($_.PhysicalMediaType -eq 'Native 802.11') -or ($_.PhysicalMediaType -eq 'Wireless LAN')}
-    if ($WirelessAdapters){
-    
-        Get-Service -Name WlanSvc | Start-Service
-        Start-Sleep -Seconds 5
-    
-        #[CmdletBinding()] Param ([Parameter(Mandatory=$true)][ValidateSet('Off', 'On')][string]$WifiStatus)
-        # https://www.reddit.com/r/sysadmin/comments/9az53e/need_help_controlling_wifi/
-        $WifiStatus = "On"
-        Add-Type -AssemblyName System.Runtime.WindowsRuntime
-        $asTaskGeneric = ([System.WindowsRuntimeSystemExtensions].GetMethods() | ? {$_.Name -eq 'AsTask' -and $_.GetParameters().Count -eq 1 -and $_.GetParameters()[0].ParameterType.Name -eq 'IAsyncOperation`1'})[0]
-    
-        Function Await($WinRtTask, $ResultType)
-        {
-            $asTask = $asTaskGeneric.MakeGenericMethod($ResultType)
-            $netTask = $asTask.Invoke($null, @($WinRtTask))
-            $netTask.Wait(-1) | Out-Null
-            $netTask.Result
+    if (!(Test-WebConnection google.com)){
+        $WirelessAdapters = Get-NetAdapter | Where-Object {($_.PhysicalMediaType -eq 'Native 802.11') -or ($_.PhysicalMediaType -eq 'Wireless LAN')}
+        if ($WirelessAdapters){
+        
+            Get-Service -Name WlanSvc | Start-Service
+            Start-Sleep -Seconds 10
+            if (!(Test-WebConnection google.com)){
+                function Get-WifiNetwork {
+                    end {
+                    netsh wlan sh net mode=bssid | % -process {
+                        if ($_ -match '^SSID (\d+) : (.*)$') {
+                            $current = @{}
+                            $networks += $current
+                            $current.Index = $matches[1].trim()
+                            $current.SSID = $matches[2].trim()
+                        } 
+                        else {
+                            if ($_ -match '^\s+(.*)\s+:\s+(.*)\s*$') {
+                                $current[$matches[1].trim()] = $matches[2].trim()
+                            }
+                        }
+                        } -begin { $networks = @() } -end { $networks|% { new-object psobject -property $_ } }
+                    }
+                }
+            
+                $SSID = Get-WifiNetwork | Select-Object ssid | Out-GridView -Title "Select Wireless Network To Connect to" -PassThru
+                $SSID = $SSID.SSID
+                $PSK = Read-Host -Prompt "Enter WiFi Password" -AsSecureString
+                $PSKText = [System.Net.NetworkCredential]::new("", $PSK).Password
+                Set-WiFi -SSID $SSID -PSK $PSKText
+                Restart-Service -Name WlanSvc
+                Start-Sleep -Seconds 10
+                if (Test-WebConnection google.com){
+                    Write-Output "Device is now online via WiFi"
+                }
+                else {
+                    Write-Output "Unable to connect Device to Internet"
+                }
+            }
+            else {
+                Write-Output "Device detected to be online from intial WiFi setup"
+            }
         }
-    
-        [Windows.Devices.Radios.Radio,Windows.System.Devices,ContentType=WindowsRuntime] | Out-Null
-        [Windows.Devices.Radios.RadioAccessStatus,Windows.System.Devices,ContentType=WindowsRuntime] | Out-Null
-        Await ([Windows.Devices.Radios.Radio]::RequestAccessAsync()) ([Windows.Devices.Radios.RadioAccessStatus]) | Out-Null
-        $radios = Await ([Windows.Devices.Radios.Radio]::GetRadiosAsync())([System.Collections.Generic.IReadOnlyList[Windows.Devices.Radios.Radio]])
-        $wifi = $radios | ? { $_.Kind -eq 'WiFi' }
-        [Windows.Devices.Radios.RadioState,Windows.System.Devices,ContentType=WindowsRuntime] | Out-Null
-    
-        # necessary since Windows will automatically enable the status of a wifi device when the wired connection is lost
-        # Start-Sleep -Seconds 10
-        # Await ($wifi.SetStateAsync($WifiStatus)) ([Windows.Devices.Radios.RadioAccessStatus])
-        if ($wifi.State -eq "On") {
-          [Windows.Devices.WiFi.WiFiAdapter,Windows.System.Devices,Contenttype=WindowsRuntime] | Out-Null
-          $Res=Await ([Windows.Devices.WiFi.WiFiAdapter]::FindAllAdaptersAsync())([System.Collections.Generic.IReadOnlyList[Windows.Devices.WiFi.WiFiAdapter]])
-          $SSID = $res.NetworkReport.AvailableNetworks | Select Ssid -Unique
-        }
-    
-    
-        $Network = $SSID | Out-GridView -Title "Pick your WiFi network" -PassThru
+    }
+    else {
+        Write-Output "Device is online via Ethernet Connection"
     }
 
     <# Didn't work in Specialize
