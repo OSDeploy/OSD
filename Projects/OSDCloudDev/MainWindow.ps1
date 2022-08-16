@@ -397,6 +397,8 @@ $formMainWindowControlScriptSetupComplete.add_unchecked({
 
 #HP Enterprise 
 if ($HPEnterprise){
+    Invoke-Expression (Invoke-RestMethod -Uri 'https://raw.githubusercontent.com/OSDeploy/OSD/master/cloud/modules/deviceshp.psm1')
+    osdcloud-InstallModuleHPCMSL
     $TPM = osdcloud-HPTPMDetermine
     $BIOS = osdcloud-HPBIOSDetermine
     $formMainWindowControlManufacturerFunction.Header = "HP Functions"
