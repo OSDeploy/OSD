@@ -246,6 +246,7 @@
         'Start-EjectCD',
         'Start-OOBEDeploy',
         'Start-OSDCloud',
+        'Start-OSDCloudDiskPart',
         'Start-OSDCloudGUI',
         'Start-OSDCloudGUIDev',
         'Start-OSDPad',
