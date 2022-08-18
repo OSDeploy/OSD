@@ -365,8 +365,12 @@ PowerShell -Nol -C Initialize-OSDCloudStartnet
                 Copy-Item -Path "$env:SystemRoot\System32\vcruntime140_1.dll" -Destination "$MountPath\System32" -Force | Out-Null
             }
         }
+        
         Write-Host -ForegroundColor DarkGray "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Saving $Module to $MountPath\Program Files\WindowsPowerShell\Modules"
-        Save-Module -Name $Module -Path "$MountPath\Program Files\WindowsPowerShell\Modules" -Force
+        if ($Module -eq 'HPCSML'){
+            Save-Module -Name $Module -Path "$MountPath\Program Files\WindowsPowerShell\Modules" -Force -AcceptLicense
+        }
+        else {Save-Module -Name $Module -Path "$MountPath\Program Files\WindowsPowerShell\Modules" -Force} 
     }
     #=================================================
     #   PSModuleCopy
