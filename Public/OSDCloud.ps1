@@ -490,19 +490,24 @@ function Invoke-OSDCloud {
     }
 
     if ($Global:OSDCloud.SkipNewOSDisk -eq $false) {
-        if ($Global:OSDCloud.SkipRecoveryPartition -eq $true) {
-            New-OSDisk -PartitionStyle GPT -NoRecoveryPartition -Force -ErrorAction Stop
-            Write-Host "=========================================================================" -ForegroundColor Cyan
-            Write-Host "| SYSTEM | MSR |                    WINDOWS                             |" -ForegroundColor Cyan
-            Write-Host "=========================================================================" -ForegroundColor Cyan
+        if ($Global:OSDCloud.DiskPart -eq $true) {
+            Start-OSDDiskPart
         }
         else {
-            New-OSDisk -PartitionStyle GPT -Force -ErrorAction Stop
-            Write-Host "=========================================================================" -ForegroundColor Cyan
-            Write-Host "| SYSTEM | MSR |                    WINDOWS                  | RECOVERY |" -ForegroundColor Cyan
-            Write-Host "=========================================================================" -ForegroundColor Cyan
-            #Wait a few seconds to make sure the Disk is set
-            Start-Sleep -Seconds 5
+            if ($Global:OSDCloud.SkipRecoveryPartition -eq $true) {
+                New-OSDisk -PartitionStyle GPT -NoRecoveryPartition -Force -ErrorAction Stop
+                Write-Host "=========================================================================" -ForegroundColor Cyan
+                Write-Host "| SYSTEM | MSR |                    WINDOWS                             |" -ForegroundColor Cyan
+                Write-Host "=========================================================================" -ForegroundColor Cyan
+            }
+            else {
+                New-OSDisk -PartitionStyle GPT -Force -ErrorAction Stop
+                Write-Host "=========================================================================" -ForegroundColor Cyan
+                Write-Host "| SYSTEM | MSR |                    WINDOWS                  | RECOVERY |" -ForegroundColor Cyan
+                Write-Host "=========================================================================" -ForegroundColor Cyan
+                #Wait a few seconds to make sure the Disk is set
+                Start-Sleep -Seconds 5
+            }
         }
 
         #Make sure that there is a PSDrive 

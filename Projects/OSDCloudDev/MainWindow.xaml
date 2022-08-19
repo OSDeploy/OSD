@@ -129,6 +129,10 @@
                           Header="Clear-Disk skip confirmation"
                           IsCheckable="True"
                           IsChecked="False" />
+                <MenuItem Name="DiskPart"
+                          Header="Use DiskPart vs Native PS"
+                          IsCheckable="True"
+                          IsChecked="False" />
                 <MenuItem Name="Restart"
                           Header="Restart-Computer when complete"
                           IsCheckable="True"
