@@ -492,6 +492,11 @@ function Invoke-OSDCloud {
     if ($Global:OSDCloud.SkipNewOSDisk -eq $false) {
         if ($Global:OSDCloud.DiskPart -eq $true) {
             Start-OSDDiskPart
+            Write-Host "=========================================================================" -ForegroundColor Cyan
+            Write-Host "| SYSTEM | MSR |                    WINDOWS                  | RECOVERY |" -ForegroundColor Cyan
+            Write-Host "=========================================================================" -ForegroundColor Cyan
+            $LocalVolumes = Get-Volume | Where-Object {$_.DriveType -eq "Fixed"}
+            Write-Output $LocalVolumes
         }
         else {
             if ($Global:OSDCloud.SkipRecoveryPartition -eq $true) {
@@ -945,7 +950,7 @@ function Invoke-OSDCloud {
         bcdboot C:\Windows /s S: /f ALL
         Start-Sleep -Seconds 10
         if ($Global:OSDCloud.DiskPart -eq $true) {
-            if (Get-Volume -DriveLetter S -ErrorAction Continue){
+            if (Get-Volume | Where-Object {$_.DriverLetter -eq "S"}){
                 $SystemDrive | Remove-PartitionAccessPath -AccessPath "S:\"
             }
         }
