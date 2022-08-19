@@ -944,7 +944,14 @@ function Invoke-OSDCloud {
         }
         bcdboot C:\Windows /s S: /f ALL
         Start-Sleep -Seconds 10
-        $SystemDrive | Remove-PartitionAccessPath -AccessPath "S:\"
+        if ($Global:OSDCloud.DiskPart -eq $true) {
+            if (Get-Volume -DriveLetter S -ErrorAction Continue){
+                $SystemDrive | Remove-PartitionAccessPath -AccessPath "S:\"
+            }
+        }
+        else {
+            $SystemDrive | Remove-PartitionAccessPath -AccessPath "S:\"
+        }
     }
     #endregion
     #=================================================
@@ -1330,7 +1337,6 @@ function Invoke-OSDCloud {
         #=================================================
         #region Dell Updates Config for Specialize Phase
         if (($Global:OSDCloud.DCUInstall -eq $true) -or ($Global:OSDCloud.DCUDrivers -eq $true) -or ($Global:OSDCloud.DCUFirmware -eq $true) -or ($Global:OSDCloud.DCUBIOS -eq $true) -or ($Global:OSDCloud.DCUAutoUpdateEnable -eq $true) -or ($Global:OSDCloud.DellTPMUpdate -eq $true)){
-            $DellFeaturesEnabled = $true
             Write-Host -ForegroundColor Cyan "Adding Dell Tasks into JSON Config File for Action during Specialize" 
             Write-DarkGrayHost "Install Dell Command Update = $($Global:OSDCloud.DCUInstall) | Run DCU Drivers = $($Global:OSDCloud.DCUDrivers) | Run DCU Firmware = $($Global:OSDCloud.DCUFirmware)"
             Write-DarkGrayHost "Run DCU BIOS = $($Global:OSDCloud.DCUBIOS) | Enable DCU Auto Update = $($Global:OSDCloud.DCUAutoUpdateEnable) | DCU TPM Update = $($Global:OSDCloud.DellTPMUpdate) " 
