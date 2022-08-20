@@ -1243,6 +1243,16 @@ function Invoke-OSDCloud {
     #endregion
     #>
     #=================================================
+    #region Add-OfflineServicingWindowsDriver
+    Write-SectionHeader "Add Windows Driver with Offline Servicing (Add-OfflineServicingWindowsDriver)"
+    Write-Verbose -Message "https://docs.microsoft.com/en-us/powershell/module/dism/add-windowsdriver"
+    Write-DarkGrayHost "Drivers in C:\Drivers are being added to the offline Windows Image"
+    Write-DarkGrayHost "This process can take up to 20 minutes"
+    Write-Verbose -Message "Add-OfflineServicingWindowsDriver"
+    if ($Global:OSDCloud.IsWinPE -eq $true) {
+        Add-OfflineServicingWindowsDriver
+    }
+    #=================================================
     #region Set-OSDCloudUnattendSpecialize
     Write-SectionHeader "Set Specialize Unattend.xml (Set-OSDCloudUnattendSpecialize)"
     Write-DarkGrayHost "C:\Windows\Panther\Invoke-OSDSpecialize.xml is being applied as an Unattend file"
