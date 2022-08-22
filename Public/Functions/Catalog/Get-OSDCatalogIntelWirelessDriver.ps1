@@ -130,11 +130,13 @@ function Get-OSDCatalogIntelWirelessDriver {
                 $LastUpdateRaw = $DriverInfoMETA | Where-Object {$_.name -eq 'LastUpdate'} | Select-Object -ExpandProperty Content
                 Write-Verbose "LastUpdateRaw: $LastUpdateRaw"
 
-                $LastUpdateSplit = ($LastUpdateRaw -split (' '))[0]
-                Write-Verbose "LastUpdateSplit: $LastUpdateSplit"
-
-                $LastUpdate = [datetime]::Parse($LastUpdateSplit)
-                Write-Verbose "LastUpdate: $LastUpdate"
+                if ($LastUpdateRaw) {
+                    $LastUpdateSplit = ($LastUpdateRaw -split (' '))[0]
+                    Write-Verbose "LastUpdateSplit: $LastUpdateSplit"
+    
+                    $LastUpdate = [datetime]::Parse($LastUpdateSplit)
+                    Write-Verbose "LastUpdate: $LastUpdate"
+                }
                 #=================================================
                 #   DriverVersion
                 #=================================================

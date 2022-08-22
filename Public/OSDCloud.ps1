@@ -1045,7 +1045,9 @@ function Invoke-OSDCloud {
     #endregion
     #=================================================
     #region Validate OSDCloud Driver Pack
-    Write-SectionHeader "OSDCloud DriverPack"
+    Write-SectionHeader 'OSDCloud DriverPack'
+
+    #Check the Global Variables for a Driver Pack name
     if ($Global:OSDCloud.DriverPackName) {
         if ($Global:OSDCloud.DriverPackName -match 'None') {
             Write-DarkGrayHost "DriverPack is set to None"
