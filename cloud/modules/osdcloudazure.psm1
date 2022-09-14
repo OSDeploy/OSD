@@ -230,6 +230,7 @@ function Get-OSDCloudAzureResources {
             #Write-Host -ForegroundColor DarkGray    'Storage Contexts:          $Global:AzStorageContext'
             #Write-Host -ForegroundColor DarkGray    'Blob Windows Images:       $Global:AzOSDCloudBlobImage'
             #Write-Host ''
+            Update-AzConfig -DisplayBreakingChangeWarning $false
             Write-Host -ForegroundColor Cyan "Searching Azure Storage for OSDCloud Resources"
             foreach ($Item in $Global:AzOSDCloudStorageAccounts) {
                 $Global:AzCurrentStorageContext = New-AzStorageContext -StorageAccountName $Item.StorageAccountName

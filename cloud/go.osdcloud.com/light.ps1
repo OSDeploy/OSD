@@ -1,5 +1,5 @@
 <#PSScriptInfo
-.VERSION 22.6.9.1
+.VERSION 22.9.13.1
 .GUID b9c79000-c271-464e-839a-605b3b384c4e
 .AUTHOR David Segura @SeguraOSD
 .COMPANYNAME osdcloud.com
@@ -23,7 +23,7 @@ powershell iex (irm raw.osdcloud.com/tasksequences/light.ps1)
 .DESCRIPTION
     PSCloudScript at raw.osdcloud.com/tasksequences/light.ps1
 .NOTES
-    Version 22.6.9.1
+    Version 22.9.13.1
 .LINK
     https://raw.githubusercontent.com/OSDeploy/OSD/master/cloud/tasksequences/light.ps1
 .EXAMPLE
@@ -34,7 +34,7 @@ param()
 #=================================================
 #Script Information
 $ScriptName = 'raw.osdcloud.com/tasksequences/light.ps1'
-$ScriptVersion = '22.6.9.1'
+$ScriptVersion = '22.9.13.1'
 #=================================================
 #region Initialize
 
