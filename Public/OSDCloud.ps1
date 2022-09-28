@@ -1151,7 +1151,7 @@ function Invoke-OSDCloud {
                 #=================================================
                 #   Dell Update Package
                 #=================================================
-                if ($Item.Extension -eq '.exe' -and $Item.FullName -like '*_A*') {
+                if ($Item.Extension -eq '.exe' -and $Global:OSDCloud.Manufacturer -eq 'Dell') {
                     $DestinationPath = Join-Path $Item.Directory $Item.BaseName
                     if (-NOT (Test-Path "$DestinationPath")) {
                         Write-DarkGrayHost "Dell Update Package is being expanded to $DestinationPath"
