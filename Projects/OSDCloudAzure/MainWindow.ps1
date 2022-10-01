@@ -379,8 +379,10 @@ $formMainWindowControlStartButton.add_Click({
         AzOSDCloudBlobImage         = $Global:AzOSDCloudBlobImage
         AzOSDCloudBlobDriverPack    = $Global:AzOSDCloudBlobDriverPack
         AzOSDCloudBlobPackage       = $Global:AzOSDCloudBlobPackage
+        AzOSDCloudBlobScript        = $Global:AzOSDCloudBlobScript
         AzOSDCloudImage             = $Global:AzOSDCloudImage
-        AzOSDCloudPackage           = $Global:AzOSDCloudBlobPackage | Where-Object {$_.BlobClient.BlobContainerName -eq $formMainWindowControlContainerCombobox.SelectedValue}
+        AzOSDCloudPackage           = $Global:AzOSDCloudBlobPackage | Where-Object {($_.BlobClient.BlobContainerName -eq 'bin') -or ($_.BlobClient.BlobContainerName -eq $formMainWindowControlContainerCombobox.SelectedValue)}
+        AzOSDCloudScript            = $Global:AzOSDCloudBlobScript | Where-Object {($_.BlobClient.BlobContainerName -eq 'bin') -or ($_.BlobClient.BlobContainerName -eq $formMainWindowControlContainerCombobox.SelectedValue)}
         DriverPackName              = $formMainWindowControlDriverPackCombobox.Text
         MSCatalogDiskDrivers        = $formMainWindowControlMSCatalogDiskDrivers.IsChecked
         MSCatalogNetDrivers         = $formMainWindowControlMSCatalogNetDrivers.IsChecked
