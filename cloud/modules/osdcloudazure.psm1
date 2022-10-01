@@ -253,7 +253,7 @@ function Get-OSDCloudAzureResources {
                             $Global:AzOSDCloudBlobPackage += Get-AzStorageBlob -Context $Global:AzCurrentStorageContext -Container $Container.Name -Blob *.ppkg -ErrorAction Ignore
                             $Global:AzOSDCloudBlobScript += Get-AzStorageBlob -Context $Global:AzCurrentStorageContext -Container $Container.Name -Blob *.ps1 -ErrorAction Ignore
                         }
-                        if ($Container.Name -eq 'bootimage') {
+                        elseif ($Container.Name -eq 'bootimage') {
                             Write-Host -ForegroundColor DarkGray "BootImage Container: $($Item.StorageAccountName)/$($Container.Name)"
                             $Global:AzOSDCloudBlobBootImage += Get-AzStorageBlob -Context $Global:AzCurrentStorageContext -Container $Container.Name -Blob *.iso -ErrorAction Ignore
                         }
