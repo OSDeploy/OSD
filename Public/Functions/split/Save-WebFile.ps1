@@ -78,14 +78,14 @@ function Save-WebFile {
     #=================================================
     #	WebFileFullName
     #=================================================
-    $DestinationDirectoryItem = (Get-Item $DestinationDirectory).FullName
+    $DestinationDirectoryItem = (Get-Item $DestinationDirectory -Force).FullName
     $DestinationFullName = Join-Path $DestinationDirectoryItem $DestinationName
     #=================================================
     #	OverWrite
     #=================================================
     if ((-NOT ($PSBoundParameters['Overwrite'])) -and (Test-Path $DestinationFullName)) {
         Write-Verbose "DestinationFullName already exists"
-        Get-Item $DestinationFullName
+        Get-Item $DestinationFullName -Force
     }
     else {
         #=================================================
@@ -129,7 +129,7 @@ function Save-WebFile {
         #	Return
         #=================================================
         if (Test-Path $DestinationFullName) {
-            Get-Item $DestinationFullName
+            Get-Item $DestinationFullName -Force
         }
         else {
             Write-Warning "Could not download $DestinationFullName"
