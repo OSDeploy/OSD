@@ -11,7 +11,6 @@ function Invoke-OSDSpecialize {
         $Apply = $true
         reg delete HKLM\System\Setup /v UnattendFile /f
     }
-    
     #=================================================
     #region Transcript
     Write-Host -ForegroundColor DarkGray "========================================================================="
@@ -25,7 +24,6 @@ function Invoke-OSDSpecialize {
     $Global:Transcript = "$((Get-Date).ToString('yyyy-MM-dd-HHmmss'))-Deploy-OSDCloud-Specialize.log"
     Start-Transcript -Path (Join-Path 'C:\OSDCloud\Logs' $Global:Transcript) -ErrorAction Ignore
     #endregion
-
     #=================================================
     #   Specialize DriverPacks
     #=================================================
