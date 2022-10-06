@@ -165,6 +165,10 @@
                           Header="Configure WiFi"
                           IsCheckable="True"
                           IsChecked="False" />
+                <MenuItem Name="OSDCloudBeta"
+                          Header="Enable OSDCloud Beta Features"
+                          IsCheckable="True"
+                          IsChecked="False" />
             </MenuItem>
             <MenuItem Header="Microsoft Update Catalog">
                 <MenuItem Name="MSCatalogDiskDrivers"

@@ -903,6 +903,7 @@ $formMainWindowControlStartButton.add_Click({
         Restart                     = $formMainWindowControlRestart.IsChecked
         SetTimeZone                 = $formMainWindowControlTimeZone.IsChecked
         SetWiFi                     = $formMainWindowControlSetWiFi.IsChecked
+        OSDCloudBeta                = $formMainWindowControlOSDCloudBeta.IsChecked
         ScreenshotCapture           = $formMainWindowControlScreenshotCapture.IsChecked
         SkipAutopilot               = $SkipAutopilot
         SkipAutopilotOOBE           = $SkipAutopilotOOBE
