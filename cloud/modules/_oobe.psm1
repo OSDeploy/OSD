@@ -141,7 +141,7 @@ function osdcloud-UpdateDrivers {
     Write-Host -ForegroundColor Cyan 'Updating Windows Drivers in a minimized window'
     if (!(Get-Module PSWindowsUpdate -ListAvailable -ErrorAction Ignore)) {
         try {
-            Install-Module PSWindowsUpdate -Force -Scope CurrentUser
+            Install-Module PSWindowsUpdate -Force -Scope CurrentUser -SkipPublisherCheck
             Import-Module PSWindowsUpdate -Force -Scope Global
         }
         catch {
@@ -159,7 +159,7 @@ function osdcloud-UpdateWindows {
     Write-Host -ForegroundColor Cyan 'Updating Windows in a minimized window'
     if (!(Get-Module PSWindowsUpdate -ListAvailable)) {
         try {
-            Install-Module PSWindowsUpdate -Force -Scope CurrentUser
+            Install-Module PSWindowsUpdate -Force -Scope CurrentUser -SkipPublisherCheck
             Import-Module PSWindowsUpdate -Force -Scope Global
         }
         catch {

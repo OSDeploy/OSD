@@ -45,7 +45,7 @@ function osdcloud-InstallModuleAutopilot {
     $InstalledModule = Import-Module WindowsAutopilotIntune -PassThru -ErrorAction Ignore
     if (-not $InstalledModule) {
         Write-Host -ForegroundColor DarkGray 'Install-Module AzureAD,Microsoft.Graph.Intune,WindowsAutopilotIntune [CurrentUser]'
-        Install-Module WindowsAutopilotIntune -Force -Scope CurrentUser
+        Install-Module WindowsAutopilotIntune -Force -Scope CurrentUser -SkipPublisherCheck
     }
 }
 
@@ -150,11 +150,11 @@ function osdcloud-InstallModuleAzAccounts {
     else {
         if ($WindowsPhase -eq 'WinPE') {
             Write-Host -ForegroundColor DarkGray "Install-Module $PSModuleName $($GalleryPSModule.Version) [AllUsers]"
-            Install-Module $PSModuleName -Scope AllUsers
+            Install-Module $PSModuleName -Scope AllUsers -SkipPublisherCheck
         }
         else {
             Write-Host -ForegroundColor DarkGray "Install-Module $PSModuleName $($GalleryPSModule.Version) [CurrentUser]"
-            Install-Module $PSModuleName -Scope CurrentUser
+            Install-Module $PSModuleName -Scope CurrentUser -SkipPublisherCheck
         }
     }
     Import-Module $PSModuleName -Force
@@ -183,11 +183,11 @@ function osdcloud-InstallModuleAzKeyVault {
     else {
         if ($WindowsPhase -eq 'WinPE') {
             Write-Host -ForegroundColor DarkGray "Install-Module $PSModuleName $($GalleryPSModule.Version) [AllUsers]"
-            Install-Module $PSModuleName -Scope AllUsers
+            Install-Module $PSModuleName -Scope AllUsers -SkipPublisherCheck
         }
         else {
             Write-Host -ForegroundColor DarkGray "Install-Module $PSModuleName $($GalleryPSModule.Version) [CurrentUser]"
-            Install-Module $PSModuleName -Scope CurrentUser
+            Install-Module $PSModuleName -Scope CurrentUser -SkipPublisherCheck
         }
     }
     Import-Module $PSModuleName -Force
@@ -217,11 +217,11 @@ function osdcloud-InstallModuleAzResources {
     else {
         if ($WindowsPhase -eq 'WinPE') {
             Write-Host -ForegroundColor DarkGray "Install-Module $PSModuleName $($GalleryPSModule.Version) [AllUsers]"
-            Install-Module $PSModuleName -Scope AllUsers
+            Install-Module $PSModuleName -Scope AllUsers -SkipPublisherCheck
         }
         else {
             Write-Host -ForegroundColor DarkGray "Install-Module $PSModuleName $($GalleryPSModule.Version) [CurrentUser]"
-            Install-Module $PSModuleName -Scope CurrentUser
+            Install-Module $PSModuleName -Scope CurrentUser -SkipPublisherCheck
         }
     }
     Import-Module $PSModuleName -Force
@@ -250,11 +250,11 @@ function osdcloud-InstallModuleAzStorage {
     else {
         if ($WindowsPhase -eq 'WinPE') {
             Write-Host -ForegroundColor DarkGray "Install-Module $PSModuleName $($GalleryPSModule.Version) [AllUsers]"
-            Install-Module $PSModuleName -Scope AllUsers
+            Install-Module $PSModuleName -Scope AllUsers -SkipPublisherCheck
         }
         else {
             Write-Host -ForegroundColor DarkGray "Install-Module $PSModuleName $($GalleryPSModule.Version) [CurrentUser]"
-            Install-Module $PSModuleName -Scope CurrentUser
+            Install-Module $PSModuleName -Scope CurrentUser -SkipPublisherCheck
         }
     }
     Import-Module $PSModuleName -Force
@@ -283,11 +283,11 @@ function osdcloud-InstallModuleAzureAD {
     else {
         if ($WindowsPhase -eq 'WinPE') {
             Write-Host -ForegroundColor DarkGray "Install-Module $PSModuleName $($GalleryPSModule.Version) [AllUsers]"
-            Install-Module $PSModuleName -Scope AllUsers
+            Install-Module $PSModuleName -Scope AllUsers -SkipPublisherCheck
         }
         else {
             Write-Host -ForegroundColor DarkGray "Install-Module $PSModuleName $($GalleryPSModule.Version) [CurrentUser]"
-            Install-Module $PSModuleName -Scope CurrentUser
+            Install-Module $PSModuleName -Scope CurrentUser -SkipPublisherCheck
         }
     }
     Import-Module $PSModuleName -Force
@@ -316,11 +316,11 @@ function osdcloud-InstallModuleMSGraphAuthentication {
     else {
         if ($WindowsPhase -eq 'WinPE') {
             Write-Host -ForegroundColor DarkGray "Install-Module $PSModuleName $($GalleryPSModule.Version) [AllUsers]"
-            Install-Module $PSModuleName -Scope AllUsers
+            Install-Module $PSModuleName -Scope AllUsers -SkipPublisherCheck
         }
         else {
             Write-Host -ForegroundColor DarkGray "Install-Module $PSModuleName $($GalleryPSModule.Version) [CurrentUser]"
-            Install-Module $PSModuleName -Scope CurrentUser
+            Install-Module $PSModuleName -Scope CurrentUser -SkipPublisherCheck
         }
     }
     Import-Module $PSModuleName -Force
@@ -349,11 +349,11 @@ function osdcloud-InstallModuleMSGraphDeviceManagement {
     else {
         if ($WindowsPhase -eq 'WinPE') {
             Write-Host -ForegroundColor DarkGray "Install-Module $PSModuleName $($GalleryPSModule.Version) [AllUsers]"
-            Install-Module $PSModuleName -Scope AllUsers
+            Install-Module $PSModuleName -Scope AllUsers -SkipPublisherCheck
         }
         else {
             Write-Host -ForegroundColor DarkGray "Install-Module $PSModuleName $($GalleryPSModule.Version) [CurrentUser]"
-            Install-Module $PSModuleName -Scope CurrentUser
+            Install-Module $PSModuleName -Scope CurrentUser -SkipPublisherCheck
         }
     }
     Import-Module $PSModuleName -Force
@@ -369,7 +369,7 @@ function osdcloud-InstallModuleOSD {
     if ($GalleryPSModule) {
         if (($GalleryPSModule.Version -as [version]) -gt ($InstalledModule.Version -as [version])) {
             Write-Host -ForegroundColor DarkGray "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) $PSModuleName $($GalleryPSModule.Version) [AllUsers]"
-            Install-Module $PSModuleName -Scope AllUsers -Force
+            Install-Module $PSModuleName -Scope AllUsers -Force -SkipPublisherCheck
             Import-Module $PSModuleName -Force
         }
     }

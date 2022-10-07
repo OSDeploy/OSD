@@ -96,7 +96,7 @@ if ($WindowsPhase -eq 'Windows') {
     
         if ($InstallModule) {
             Write-Host -ForegroundColor DarkGray "Install-Module $PSModuleName $($GalleryPSModule.Version) [AllUsers]"
-            Install-Module $PSModuleName -Scope AllUsers -Force
+            Install-Module $PSModuleName -Scope AllUsers -Force -SkipPublisherCheck
             Import-Module $PSModuleName -Force
         }
         #============================================
