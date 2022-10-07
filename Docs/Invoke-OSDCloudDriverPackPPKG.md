@@ -5,24 +5,24 @@ online version: https://github.com/OSDeploy/OSD/tree/master/Docs
 schema: 2.0.0
 ---
 
-# Get-HyperVName
+# Invoke-OSDCloudDriverPackPPKG
 
 ## SYNOPSIS
-{{ Fill in the Synopsis }}
+Uses DISM in WinPE to expand and apply Driver Packs
 
 ## SYNTAX
 
 ```
-Get-HyperVName [<CommonParameters>]
+Invoke-OSDCloudDriverPackPPKG [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-{{ Fill in the Description }}
+Uses DISM in WinPE to expand and apply Driver Packs
 
 ## EXAMPLES
 
 ### Example 1
-```
+```powershell
 PS C:\> {{ Add example code here }}
 ```
 
@@ -35,10 +35,11 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## INPUTS
 
-### None
 ## OUTPUTS
 
-### System.Object
 ## NOTES
 
 ## RELATED LINKS
+
+[https://github.com/OSDeploy/OSD/tree/master/Docs](https://github.com/OSDeploy/OSD/tree/master/Docs)
+
