@@ -1,0 +1,27 @@
+;==================================================================================================
+;   David Segura
+;   https://www.osdeploy.com
+;==================================================================================================
+;   Purpose: Set JscriptReplacement for MDT
+;==================================================================================================
+;   Compatibility: WinPE 10 x86 and x64
+;==================================================================================================
+[Version]
+Signature   = "$WINDOWS NT$"
+Class       = System
+ClassGuid   = {4D36E97d-E325-11CE-BFC1-08002BE10318}
+Provider    = OSDeploy
+DriverVer   = 10/6/2022,2022.10.6.1
+
+[DefaultInstall]
+AddReg      = AddReg
+
+[AddReg]
+;rootkey,[subkey],[value],[flags],[data]
+;0x00000    REG_SZ
+;0x00001    REG_BINARY
+;0x10000    REG_MULTI_SZ
+;0x20000    REG_EXPAND_SZ
+;0x10001    REG_DWORD
+;0x20001    REG_NONE
+HKLM,"SOFTWARE\Microsoft\Internet Explorer\Main",JscriptReplacement,0x10001,0

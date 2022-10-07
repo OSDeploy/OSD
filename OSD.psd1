@@ -4,7 +4,7 @@
 
 @{
     RootModule              = 'OSD.psm1'
-    ModuleVersion           = '22.9.30.2'
+    ModuleVersion           = '22.10.6.1'
     CompatiblePSEditions    = @('Desktop')
     GUID                    = '9fe5b9b6-0224-4d87-9018-a8978529f6f5'
     Author                  = 'David Segura . Damien Van Robaeys . Gary Blok . Jérôme Bezet-Torres . Mike Marable . Dean Ellerby . Doug McGee'
@@ -283,7 +283,9 @@
         'Initialize-OSDCloudStartnet',
         'Get-AzClipboard',
         'Set-AzClipboard',
-        'Start-OSDCloudREAzure'
+        'Start-OSDCloudREAzure',
+        'Invoke-OSDCloudDriverPackPPKG',
+        'Invoke-OSDCloudDriverPackMDT'
     )
     CmdletsToExport = @()
     VariablesToExport = @()

@@ -149,11 +149,6 @@ function Invoke-OSDCloud {
         }
     }
     #endregion
-
-
-
-
-
     #=================================================
     #region Helper Functions
     function Write-DarkGrayDate {
@@ -990,6 +985,16 @@ function Invoke-OSDCloud {
         Write-DarkGrayHost -Message 'Creating C:\OSDCloud\Packages'
         $null = New-Item @ParamNewItem
     }
+    if (-NOT (Test-Path 'C:\OSDCloud\Scripts')) {
+        $ParamNewItem = @{
+            Path = 'C:\OSDCloud\Scripts'
+            ItemType = 'Directory'
+            Force = $true
+            ErrorAction = 'Stop'
+        }
+        Write-DarkGrayHost -Message 'Creating C:\OSDCloud\Scripts'
+        $null = New-Item @ParamNewItem
+    }
     if (-NOT (Test-Path 'C:\Windows\Panther')) {
         $ParamNewItem = @{
             Path = 'C:\Windows\Panther'
@@ -1022,9 +1027,11 @@ function Invoke-OSDCloud {
     }
     #endregion
     #=================================================
-    #region Packages
+    #region OSDCloud Azure Provisioning Packages
     if ($Global:OSDCloud.AzOSDCloudPackage) {
         Write-SectionHeader 'OSDCloud Azure Provisioning Packages'
+        Write-DarkGrayHost 'Provisioning Packages will be downloaded to C:\OSDCloud\Packages'
+
         foreach ($Item in $Global:OSDCloud.AzOSDCloudPackage) {
             $ParamGetAzStorageBlobContent = @{
                 CloudBlob = $Item.ICloudBlob
@@ -1035,13 +1042,18 @@ function Invoke-OSDCloud {
             }
             $null = Get-AzStorageBlobContent @ParamGetAzStorageBlobContent
         }
-
         $Packages = Get-ChildItem -Path 'C:\OSDCloud\Packages\' *.ppkg -Recurse -ErrorAction Ignore
-        foreach ($Item in $Packages) {
-            Write-DarkGrayHost "Add-ProvisioningPackage $($Item.FullName)"
-            $Dism = "dism.exe"
-            $ArgumentList = "/Image=C:\ /Add-ProvisioningPackage /PackagePath:`"$($Item.FullName)`""
-            $null = Start-Process -FilePath 'dism.exe' -ArgumentList $ArgumentList -Wait -NoNewWindow
+
+        if ($Global:OSDCloudBeta -eq $true) {
+            if ($Packages) {
+                Write-DarkGrayHost 'BETA Feature: Adding Provisioning Packages from C:\OSDCloud\Packages'
+                foreach ($Item in $Packages) {
+                    Write-DarkGrayHost "$($Item.FullName)"
+                    $Dism = "dism.exe"
+                    $ArgumentList = "/Image=C:\ /Add-ProvisioningPackage /PackagePath:`"$($Item.FullName)`""
+                    $null = Start-Process -FilePath 'dism.exe' -ArgumentList $ArgumentList -Wait -NoNewWindow
+                }
+            }
         }
     }
     #endregion
@@ -1257,23 +1269,28 @@ function Invoke-OSDCloud {
         Add-OfflineServicingWindowsDriver
     }
     #=================================================
-    #region Set-OSDCloudUnattendSpecialize
-    Write-SectionHeader "Set Specialize Unattend.xml (Set-OSDCloudUnattendSpecialize)"
-    Write-DarkGrayHost "C:\Windows\Panther\Invoke-OSDSpecialize.xml is being applied as an Unattend file"
-    Write-DarkGrayHost "This will enable the extraction and installation of HP, Lenovo, and Microsoft Surface Drivers if necessary"
-    Write-Verbose -Message "Set-OSDCloudUnattendSpecialize"
-    if ($Global:OSDCloud.IsWinPE -eq $true) {
-        if ($Global:OSDCloud.DevMode -eq $true){
-            Write-DarkGrayHost "Running in DEV Mode, running Set-OSDCloudUnattendSpecializeDEV instead"
-            Set-OSDCloudUnattendSpecializeDev
-        }
-        else {
-            Set-OSDCloudUnattendSpecialize
-            #Set-OSDxCloudUnattendSpecialize -Verbose
+    #region BETA Add OSDCloud DriverPack
+    if ($Global:OSDCloudBeta -eq $true) {
+        Write-SectionHeader "BETA Feature: OSDCloud DriverPack Provisioning Package"
+        Write-DarkGrayHost "This will enable the extraction and installation of HP, Dell, Lenovo, and Microsoft Surface Drivers"
+        Invoke-OSDCloudDriverPackPPKG
+    }
+    else {
+        Write-SectionHeader "Set Specialize Unattend.xml (Set-OSDCloudUnattendSpecialize)"
+        Write-DarkGrayHost "C:\Windows\Panther\Invoke-OSDSpecialize.xml is being applied as an Unattend file"
+        Write-DarkGrayHost "This will enable the extraction and installation of HP, Lenovo, and Microsoft Surface Drivers if necessary"
+        if ($Global:OSDCloud.IsWinPE -eq $true) {
+            if ($Global:OSDCloud.DevMode -eq $true){
+                Write-DarkGrayHost "Running in DEV Mode, running Set-OSDCloudUnattendSpecializeDEV instead"
+                Set-OSDCloudUnattendSpecializeDev
+            }
+            else {
+                Set-OSDCloudUnattendSpecialize
+                #Set-OSDxCloudUnattendSpecialize -Verbose
+            }
         }
     }
     #endregion
-    
     #=================================================
     #region Create SetupComplete Files.
     if (Test-WebConnection -Uri "google.com") {$WebConnection = $True}
@@ -1320,7 +1337,6 @@ function Invoke-OSDCloud {
             }
         }
         #endregion
-
         #=================================================
         #region HyperV Config for Specialize Phase
         if (($Global:OSDCloud.HyperVSetName -eq $true) -or ($Global:OSDCloud.HyperVEjectISO -eq $true) ){
@@ -1349,10 +1365,7 @@ function Invoke-OSDCloud {
                 Start-EjectCD
             }
         }
-
         #endregion
-        
-        
         #=================================================
         #region Dell Updates Config for Specialize Phase
         if (($Global:OSDCloud.DCUInstall -eq $true) -or ($Global:OSDCloud.DCUDrivers -eq $true) -or ($Global:OSDCloud.DCUFirmware -eq $true) -or ($Global:OSDCloud.DCUBIOS -eq $true) -or ($Global:OSDCloud.DCUAutoUpdateEnable -eq $true) -or ($Global:OSDCloud.DellTPMUpdate -eq $true)){
@@ -1376,9 +1389,7 @@ function Invoke-OSDCloud {
             catch {}
             $HashVar | Out-File $ConfigFile
         }
-
         #endregion
-
         #=================================================
         #region HP Updates Config for Specialize Phase
         #Set Specialize JSON
@@ -1628,7 +1639,7 @@ exit
     }
     #endregion
     #=================================================
-    #region Debug & Dev Mode
+    #region Debug and Dev Mode
     if ($Global:OSDCloud.DebugMode -eq $true){
         Write-SectionHeader "DebugMode Enabled"
         Invoke-Expression (Invoke-RestMethod -Uri 'https://raw.githubusercontent.com/OSDeploy/OSD/master/cloud/modules/debugmode.psm1')
@@ -1649,7 +1660,6 @@ exit
             osdcloud-UpdateModuleFilesManually -DEVMode $true
             #osdcloud-WinpeUpdateDefender
         }
-
     }
     #endregion
     #=================================================
@@ -1657,6 +1667,27 @@ exit
     #This appends the two lines at the end of SetupComplete Script to Stop Transcription and to Restart Computer
     if ($Global:OSDCloud.DevMode -eq $true){
         Set-SetupCompleteCreateFinish
+    }
+    #endregion
+    #=================================================
+    #region OSDCloud Azure Script
+    if ($Global:OSDCloud.AzOSDCloudScript) {
+        Write-SectionHeader 'OSDCloud Azure Shutdown Scripts'
+        foreach ($Item in $Global:OSDCloud.AzOSDCloudScript) {
+            $ParamGetAzStorageBlobContent = @{
+                CloudBlob = $Item.ICloudBlob
+                Context = $Item.Context
+                Destination = 'C:\OSDCloud\Scripts\'
+                Force = $true
+                ErrorAction = 'Stop'
+            }
+            $null = Get-AzStorageBlobContent @ParamGetAzStorageBlobContent
+        }
+        $AzOSDCloudPostScript = Get-ChildItem -Path 'C:\OSDCloud\Scripts\' AzOSDShutdown*.ps1 -Recurse -ErrorAction Ignore
+        foreach ($Item in $AzOSDCloudPostScript) {
+            Write-DarkGrayHost "$($Item.FullName)"
+            & "$($Item.FullName)"
+        }
     }
     #endregion
     #=================================================

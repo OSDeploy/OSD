@@ -1,7 +1,7 @@
 #=================================================
 #region Start Transcript
 if (Test-Path "$env:Windir\debug") {
-    $Global:Transcript = "$((Get-Date).ToString('yyyy-MM-dd-HHmmss'))-Add-OSDCloudDriverPack.log"
+    $Global:Transcript = "$((Get-Date).ToString('yyyy-MM-dd-HHmmss'))-Invoke-OSDCloudDriverPack.log"
     Start-Transcript -Path (Join-Path "$env:Windir\debug" $Global:Transcript) -ErrorAction Ignore
 }
 #endregion

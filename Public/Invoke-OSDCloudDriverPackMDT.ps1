@@ -1,4 +1,4 @@
-function Save-ZTIDriverPack {
+function Invoke-OSDCloudDriverPackMDT {
     [CmdletBinding()]
     param (
         [string]$Manufacturer = (Get-MyComputerManufacturer -Brief),
@@ -52,14 +52,6 @@ function Save-ZTIDriverPack {
     #	Start-Transcript
     #=================================================
     Start-Transcript -OutputDirectory $OSDiskDrivers
-    #=================================================
-    #	Copy-PSModuleToFolder
-    #   The OSD Module needs to be available on the next boot for Specialize
-    #   Drivers to work
-    #=================================================
-    if ($env:SystemDrive -eq 'X:'){
-        Copy-PSModuleToFolder -Name OSD -Destination "$OSDISK\Program Files\WindowsPowerShell\Modules"
-    }
     #=================================================
     #	Get-MyDriverPack
     #=================================================
@@ -125,6 +117,15 @@ function Save-ZTIDriverPack {
     Save-WebFile -SourceUrl $GetMyDriverPack.Url -DestinationDirectory $OSDiskDrivers -DestinationName $GetMyDriverPack.FileName
 
     if (Test-Path $OSDiskDriversFile) {
+        $OSDCloudDriverPackPPKG = Join-Path (Get-Module OSD).ModuleBase "Provisioning\Invoke-OSDCloudDriverPack.ppkg"
+    
+        if (Test-Path $OSDCloudDriverPackPPKG) {
+            Write-Host -ForegroundColor DarkGray "dism.exe /Image=$OSDISK\ /Add-ProvisioningPackage /PackagePath:`"$OSDCloudDriverPackPPKG`""
+            $Dism = "dism.exe"
+            $ArgumentList = "/Image=$OSDISK\ /Add-ProvisioningPackage /PackagePath:`"$OSDCloudDriverPackPPKG`""
+            $null = Start-Process -FilePath 'dism.exe' -ArgumentList $ArgumentList -Wait -NoNewWindow
+        }
+
         Write-Verbose -Verbose "DriverPack is in place and ready to go"
         Stop-Transcript
     }
@@ -132,5 +133,6 @@ function Save-ZTIDriverPack {
         Write-Warning "Could not download the DriverPack.  Sorry!"
         Stop-Transcript
     }
+    Start-Sleep -Seconds 5
     #=================================================
 }
