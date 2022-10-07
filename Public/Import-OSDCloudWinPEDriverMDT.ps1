@@ -54,19 +54,19 @@ function Import-OSDCloudWinPEDriverMDT {
 
         #Set-ItemProperty -Path OSDCloudMDT: -Name Boot.x64.GenerateLiteTouchISO -Value 'True'
 
-        #Set-ItemProperty -Path OSDCloudMDT: -Name Boot.x64.SelectionProfile -Value 'WinPE x64 OSDCloud'
+        #Set-ItemProperty -Path OSDCloudMDT: -Name Boot.x64.SelectionProfile -Value 'OSDCloud WinPE x64'
         #Set-ItemProperty -Path OSDCloudMDT: -Name Boot.x64.SupportUEFI -Value 'True'
         #=================================================
         #   Create Selection Profile
         #=================================================
-        if (! (Test-Path 'OSDCloudMDT:\Selection Profiles\WinPE x64 OSDCloud')) {
-            New-Item -Path 'OSDCloudMDT:\Selection Profiles' -Enable 'True' -Name 'WinPE x64 OSDCloud' -Comments 'WinPE x64 OSDCloud' -Definition "<SelectionProfile><Include path=`"Out-of-Box Drivers\WinPE x64 OSDCloud`" ></Include></SelectionProfile>" -ReadOnly 'False' -Verbose
+        if (! (Test-Path 'OSDCloudMDT:\Selection Profiles\OSDCloud WinPE x64')) {
+            New-Item -Path 'OSDCloudMDT:\Selection Profiles' -Enable 'True' -Name 'OSDCloud WinPE x64' -Comments 'OSDCloud WinPE x64' -Definition "<SelectionProfile><Include path=`"Out-of-Box Drivers\OSDCloud WinPE x64`" ></Include></SelectionProfile>" -ReadOnly 'False' -Verbose
         }
         #=================================================
         #   Create Directory for CloudDrivers
         #=================================================
-        if (! (Test-Path 'OSDCloudMDT:\Out-of-Box Drivers\WinPE x64 OSDCloud')) {
-            New-Item -Path 'OSDCloudMDT:\Out-of-Box Drivers' -Enable 'True' -Name 'WinPE x64 OSDCloud' -Comments 'WinPE x64 OSDCloud' -ItemType Folder -Verbose
+        if (! (Test-Path 'OSDCloudMDT:\Out-of-Box Drivers\OSDCloud WinPE x64')) {
+            New-Item -Path 'OSDCloudMDT:\Out-of-Box Drivers' -Enable 'True' -Name 'OSDCloud WinPE x64' -Comments 'OSDCloud WinPE x64' -ItemType Folder -Verbose
         }
         #=================================================
         #   DriverHWID
@@ -77,7 +77,7 @@ function Import-OSDCloudWinPEDriverMDT {
                 Save-MsUpCatDriver -HardwareID $Item -DestinationDirectory $AddWindowsDriverPath
             }
             try {
-                Import-MDTDriver -Path 'OSDCloudMDT:\Out-of-Box Drivers\WinPE x64 OSDCloud' -SourcePath $AddWindowsDriverPath -Verbose
+                Import-MDTDriver -Path 'OSDCloudMDT:\Out-of-Box Drivers\OSDCloud WinPE x64' -SourcePath $AddWindowsDriverPath -Verbose
             }
             catch {
                 Write-Warning "Unable to find a driver for $Item"
@@ -90,11 +90,11 @@ function Import-OSDCloudWinPEDriverMDT {
             $Driver = @('Dell','HP','IntelNet','LenovoDock','Nutanix','Surface','USB','VMware','WiFi')
         }
         foreach ($DriverName in $Driver) {
-            if (! (Test-Path "OSDCloudMDT:\Out-of-Box Drivers\WinPE x64 OSDCloud\$DriverName")) {
-                New-Item -Path 'OSDCloudMDT:\Out-of-Box Drivers\WinPE x64 OSDCloud' -Enable 'True' -Name $DriverName -Comments '' -ItemType Folder -Verbose
+            if (! (Test-Path "OSDCloudMDT:\Out-of-Box Drivers\OSDCloud WinPE x64\$DriverName")) {
+                New-Item -Path 'OSDCloudMDT:\Out-of-Box Drivers\OSDCloud WinPE x64' -Enable 'True' -Name $DriverName -Comments '' -ItemType Folder -Verbose
             }
             $WinPECloudDriver = Save-WinPECloudDriver -CloudDriver $DriverName
-            Import-MDTDriver -Path "OSDCloudMDT:\Out-of-Box Drivers\WinPE x64 OSDCloud\$DriverName" -SourcePath $WinPECloudDriver.FullName -Verbose
+            Import-MDTDriver -Path "OSDCloudMDT:\Out-of-Box Drivers\OSDCloud WinPE x64\$DriverName" -SourcePath $WinPECloudDriver.FullName -Verbose
         }
         Remove-PSDrive -Name 'OSDCloudMDT' -ErrorAction Ignore
     }
