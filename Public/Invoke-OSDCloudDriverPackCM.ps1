@@ -1,4 +1,4 @@
-function Invoke-OSDCloudDriverPackMDT {
+function Invoke-OSDCloudDriverPackCM {
     [CmdletBinding()]
     param (
         [string]$Manufacturer = (Get-MyComputerManufacturer -Brief),
