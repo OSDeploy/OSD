@@ -1044,15 +1044,13 @@ function Invoke-OSDCloud {
         }
         $Packages = Get-ChildItem -Path 'C:\OSDCloud\Packages\' *.ppkg -Recurse -ErrorAction Ignore
 
-        if ($Global:OSDCloudBeta -eq $true) {
-            if ($Packages) {
-                Write-DarkGrayHost 'BETA Feature: Adding Provisioning Packages from C:\OSDCloud\Packages'
-                foreach ($Item in $Packages) {
-                    Write-DarkGrayHost "$($Item.FullName)"
-                    $Dism = "dism.exe"
-                    $ArgumentList = "/Image=C:\ /Add-ProvisioningPackage /PackagePath:`"$($Item.FullName)`""
-                    $null = Start-Process -FilePath 'dism.exe' -ArgumentList $ArgumentList -Wait -NoNewWindow
-                }
+        if ($Packages) {
+            Write-DarkGrayHost 'Adding Provisioning Packages from C:\OSDCloud\Packages'
+            foreach ($Item in $Packages) {
+                Write-DarkGrayHost "$($Item.FullName)"
+                $Dism = "dism.exe"
+                $ArgumentList = "/Image=C:\ /Add-ProvisioningPackage /PackagePath:`"$($Item.FullName)`""
+                $null = Start-Process -FilePath 'dism.exe' -ArgumentList $ArgumentList -Wait -NoNewWindow
             }
         }
     }
@@ -1269,13 +1267,8 @@ function Invoke-OSDCloud {
         Add-OfflineServicingWindowsDriver
     }
     #=================================================
-    #region BETA Add OSDCloud DriverPack
-    if ($Global:OSDCloudBeta -eq $true) {
-        Write-SectionHeader "BETA Feature: OSDCloud DriverPack Provisioning Package"
-        Write-DarkGrayHost "This will enable the extraction and installation of HP, Dell, Lenovo, and Microsoft Surface Drivers"
-        Invoke-OSDCloudDriverPackPPKG
-    }
-    else {
+    #region Add OSDCloud DriverPack
+    if ($Global:OSDCloudUnattend -eq $true) {
         Write-SectionHeader "Set Specialize Unattend.xml (Set-OSDCloudUnattendSpecialize)"
         Write-DarkGrayHost "C:\Windows\Panther\Invoke-OSDSpecialize.xml is being applied as an Unattend file"
         Write-DarkGrayHost "This will enable the extraction and installation of HP, Lenovo, and Microsoft Surface Drivers if necessary"
@@ -1289,6 +1282,11 @@ function Invoke-OSDCloud {
                 #Set-OSDxCloudUnattendSpecialize -Verbose
             }
         }
+    }
+    else {
+        Write-SectionHeader "OSDCloud DriverPack Provisioning Package"
+        Write-DarkGrayHost "This will enable the extraction and installation of HP, Dell, Lenovo, and Microsoft Surface Drivers"
+        Invoke-OSDCloudDriverPackPPKG
     }
     #endregion
     #=================================================
