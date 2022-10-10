@@ -1,4 +1,14 @@
 function Invoke-OSDCloudDriverPackCM {
+    <#
+    .SYNOPSIS
+    Downloads a matching DriverPack to %OSDisk%\Drivers
+
+    .DESCRIPTION
+    Downloads a matching DriverPack to %OSDisk%\Drivers
+
+    .LINK
+    https://github.com/OSDeploy/OSD/tree/master/Docs
+    #>
     [CmdletBinding()]
     param (
         [string]$Manufacturer = (Get-MyComputerManufacturer -Brief),
@@ -30,16 +40,27 @@ function Invoke-OSDCloudDriverPackCM {
     $OSDANSWERFILEPATH = $TSEnv.Value("OSDANSWERFILEPATH") # E:\MININT\Unattend.xml
     $TARGETPARTITIONIDENTIFIER = $TSEnv.Value("TARGETPARTITIONIDENTIFIER") # [SELECT * FROM Win32_LogicalDisk WHERE Size = '134343553024' and VolumeName = 'Windows' and VolumeSerialNumber = '90D39B87']
     #=================================================
-    #	Set some Variables
-    #   DeployRootDriverPacks are where DriverPacks must be staged
-    #   This is not working out so great at the moment, so I would suggest
-    #   not doing this yet
+    #   Windows Debug Transcript
     #=================================================
-    $DeployRootDriverPacks = Join-Path $DEPLOYROOT 'DriverPacks'
+    $OSDiskWindowsDebug = Join-Path $OSDISK 'Windows\Debug'
+
+    if (-NOT (Test-Path -Path $OSDiskWindowsDebug)) {
+        New-Item -Path $OSDiskWindowsDebug -ItemType Directory -Force -ErrorAction Ignore | Out-Null
+    }
+    if (-NOT (Test-Path -Path $OSDiskWindowsDebug)) {
+        Write-Warning "Could not create $OSDiskWindowsDebug"
+        Start-Sleep -Seconds 5
+        Continue
+    }
+
+    $Transcript = "$((Get-Date).ToString('yyyy-MM-dd-HHmmss'))-Invoke-OSDCloudDriverPackMDT.log"
+    Start-Transcript -Path (Join-Path $OSDiskWindowsDebug $Transcript) -ErrorAction Ignore
+    #=================================================
+    #	OSDisk Drivers
+    #=================================================
     $OSDiskDrivers = Join-Path $OSDISK 'Drivers'
-    #=================================================
-    #	Create $OSDiskDrivers
-    #=================================================
+    Write-Host -ForegroundColor DarkGray "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) DriverPacks will be downloaded to $OSDiskDrivers"
+
     if (-NOT (Test-Path -Path $OSDiskDrivers)) {
         New-Item -Path $OSDiskDrivers -ItemType Directory -Force -ErrorAction Ignore | Out-Null
     }
@@ -49,89 +70,74 @@ function Invoke-OSDCloudDriverPackCM {
         Continue
     }
     #=================================================
-    #	Start-Transcript
-    #=================================================
-    Start-Transcript -OutputDirectory $OSDiskDrivers
-    #=================================================
     #	Get-MyDriverPack
     #=================================================
-    Write-Verbose -Verbose "Processing function Get-MyDriverPack"
+    Write-Host -ForegroundColor DarkGray "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Processing function Get-MyDriverPack"
+    Write-Host
     if ($Manufacturer -in ('Dell','HP','Lenovo','Microsoft')) {
         $GetMyDriverPack = Get-MyDriverPack -Manufacturer $Manufacturer -Product $Product
     }
     else {
         $GetMyDriverPack = Get-MyDriverPack -Product $Product
     }
-    if (-NOT ($GetMyDriverPack)) {
-        Write-Warning "There are no DriverPacks for this computer"
-        Start-Sleep -Seconds 5
-        Continue
-    }
-    #=================================================
-    #	Get-MyDriverPack
-    #=================================================
-    Write-Verbose -Verbose "Name: $($GetMyDriverPack.Name)"
-    Write-Verbose -Verbose "Product: $($GetMyDriverPack.Product)"
-    Write-Verbose -Verbose "FileName: $($GetMyDriverPack.FileName)"
-    Write-Verbose -Verbose "Url: $($GetMyDriverPack.Url)"
-    $OSDiskDriversFile = Join-Path $OSDiskDrivers $GetMyDriverPack.FileName
-    #=================================================
-    #	MDT DeployRoot DriverPacks
-    #   See if the DriverPack we need exists in $DeployRootDriverPacks
-    #=================================================
-    $DeployRootDriverPack = @()
-    $DeployRootDriverPack = Get-ChildItem "$DeployRootDriverPacks\" -Include $GetMyDriverPack.FileName -File -Recurse -Force -ErrorAction Ignore | Select-Object -First 1
-    if ($DeployRootDriverPack) {
-        Write-Verbose -Verbose "Source: $($DeployRootDriverPack.FullName)"
-        Write-Verbose -Verbose "Destination: $OSDiskDriversFile"
-        Copy-Item -Path $($DeployRootDriverPack.FullName) -Destination $OSDiskDrivers -Force
-    }
 
-    if (Test-Path $OSDiskDriversFile) {
-        Write-Verbose -Verbose "DriverPack is in place and ready to go"
-        Stop-Transcript
-        Continue
-    }
-    #=================================================
-    #	Curl
-    #   Make sure Curl is available
-    #=================================================
-    if ((-NOT (Test-Path "$env:SystemRoot\System32\curl.exe")) -and (-NOT (Test-Path "$OSDISK\Windows\System32\curl.exe"))) {
-        Write-Warning "Curl is required for this to function"
-        Start-Sleep -Seconds 5
-        Continue
-    }
-    if ((-NOT (Test-Path "$env:SystemRoot\System32\curl.exe")) -and (Test-Path "$OSDISK\Windows\System32\curl.exe")) {
-        Copy-Item -Path "$OSDISK\Windows\System32\curl.exe" -Destination "$env:SystemRoot\System32\curl.exe" -Force
-    }
-
-    if (-NOT (Test-Path "$env:SystemRoot\System32\curl.exe")) {
-        Write-Warning "Curl is required for this to function"
-        Start-Sleep -Seconds 5
-        Continue
-    }
-    #=================================================
-    #	OSDCloud DriverPacks
-    #   Finally, let's download the file and see where this goes
-    #=================================================
-    Save-WebFile -SourceUrl $GetMyDriverPack.Url -DestinationDirectory $OSDiskDrivers -DestinationName $GetMyDriverPack.FileName
-
-    if (Test-Path $OSDiskDriversFile) {
-        $OSDCloudDriverPackPPKG = Join-Path (Get-Module OSD).ModuleBase "Provisioning\Invoke-OSDCloudDriverPack.ppkg"
-    
-        if (Test-Path $OSDCloudDriverPackPPKG) {
-            Write-Host -ForegroundColor DarkGray "dism.exe /Image=$OSDISK\ /Add-ProvisioningPackage /PackagePath:`"$OSDCloudDriverPackPPKG`""
-            $ArgumentList = "/Image=$OSDISK\ /Add-ProvisioningPackage /PackagePath:`"$OSDCloudDriverPackPPKG`""
-            $null = Start-Process -FilePath 'dism.exe' -ArgumentList $ArgumentList -Wait -NoNewWindow
-        }
-
-        Write-Verbose -Verbose "DriverPack is in place and ready to go"
-        Stop-Transcript
+    if ($GetMyDriverPack) {     
+        $GetMyDriverPackBaseName = ($GetMyDriverPack.FileName).Split('.')[0]
+        Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Matching DriverPack identified"
+        Write-Host -ForegroundColor DarkGray "-Name $($GetMyDriverPack.Name)"
+        Write-Host -ForegroundColor DarkGray "-BaseName $GetMyDriverPackBaseName"
+        Write-Host -ForegroundColor DarkGray "-Product $($GetMyDriverPack.Product)"
+        Write-Host -ForegroundColor DarkGray "-FileName $($GetMyDriverPack.FileName)"
+        Write-Host -ForegroundColor DarkGray "-Url $($GetMyDriverPack.Url)"
+        Write-Host
+        $OSDiskDriversFile = Join-Path $OSDiskDrivers $GetMyDriverPack.FileName
     }
     else {
-        Write-Warning "Could not download the DriverPack.  Sorry!"
-        Stop-Transcript
+        Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) There are no DriverPacks for this computer"
+        Start-Sleep -Seconds 5
+        Continue
     }
-    Start-Sleep -Seconds 5
     #=================================================
+    #	Get the DriverPack
+    #=================================================
+    if ($GetMyDriverPack) {
+        $ReadyDriverPack = Get-ChildItem -Path $OSDiskDrivers -File -Force -ErrorAction Ignore | Where-Object {$_.Name -match $GetMyDriverPackBaseName} | Where-Object {$_.Extension -in ('.cab','.zip','.exe')}
+
+        if (-Not ($ReadyDriverPack)) {
+            if ((-NOT (Test-Path "$env:SystemRoot\System32\curl.exe")) -and (-NOT (Test-Path "$OSDISK\Windows\System32\curl.exe"))) {
+                Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Curl is required for this to function"
+                Start-Sleep -Seconds 5
+                Continue
+            }
+            if ((-NOT (Test-Path "$env:SystemRoot\System32\curl.exe")) -and (Test-Path "$OSDISK\Windows\System32\curl.exe")) {
+                Copy-Item -Path "$OSDISK\Windows\System32\curl.exe" -Destination "$env:SystemRoot\System32\curl.exe" -Force
+            }
+            if (-NOT (Test-Path "$env:SystemRoot\System32\curl.exe")) {
+                Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Curl is required for this to function"
+                Start-Sleep -Seconds 5
+                Continue
+            }
+            Save-WebFile -SourceUrl $GetMyDriverPack.Url -DestinationDirectory $OSDiskDrivers -DestinationName $GetMyDriverPack.FileName
+        }
+
+        $ReadyDriverPack = Get-ChildItem -Path $OSDiskDrivers -File -Force -ErrorAction Ignore | Where-Object {$_.Name -match $GetMyDriverPackBaseName} | Where-Object {$_.Extension -in ('.cab','.zip','.exe')}
+        if ($ReadyDriverPack) {
+            Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) DriverPack has been copied to $OSDiskDrivers"
+
+            $OSDCloudDriverPackPPKG = Join-Path (Get-Module OSD).ModuleBase "Provisioning\Invoke-OSDCloudDriverPack.ppkg"
+        
+            if (Test-Path $OSDCloudDriverPackPPKG) {
+                Write-Host
+                Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Applying first boot Specialize Provisioning Package"
+                Write-Host -ForegroundColor DarkGray "dism.exe /Image=$OSDISK\ /Add-ProvisioningPackage /PackagePath:`"$OSDCloudDriverPackPPKG`""
+                $ArgumentList = "/Image=$OSDISK\ /Add-ProvisioningPackage /PackagePath:`"$OSDCloudDriverPackPPKG`""
+                $null = Start-Process -FilePath 'dism.exe' -ArgumentList $ArgumentList -Wait -NoNewWindow
+            }
+        }
+        else {
+            Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Could not download the DriverPack"
+        }
+        Stop-Transcript
+        Start-Sleep -Seconds 5
+    }
 }

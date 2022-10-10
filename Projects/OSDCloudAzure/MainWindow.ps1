@@ -370,7 +370,7 @@ $formMainWindowControlStartButton.add_Click({
         Where-Object {$_.BlobClient.BlobContainerName -eq $formMainWindowControlContainerCombobox.SelectedValue} | `
         Where-Object {$_.BlobClient.AccountName -eq $formMainWindowControlStorageAccountCombobox.SelectedValue}
     $Global:AzOSDCloudImage | Select-Object * | Export-Clixml "$env:SystemDrive\AzOSDCloudImage.xml"
-    $Global:AzOSDCloudImage | Select-Object * | ConvertTo-Json | Out-File "$env:SystemDrive\AzOSDCloudImage.json"
+    $Global:AzOSDCloudImage | Select-Object * | ConvertTo-Json | Out-File "$env:SystemDrive\AzOSDCloudImage.json" -Encoding ascii -Width 2000 -Force
     #================================================
     #   Global Variables
     #================================================

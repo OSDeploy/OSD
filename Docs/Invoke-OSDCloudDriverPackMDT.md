@@ -8,7 +8,7 @@ schema: 2.0.0
 # Invoke-OSDCloudDriverPackMDT
 
 ## SYNOPSIS
-{{ Fill in the Synopsis }}
+Downloads a matching DriverPack to %OSDisk%\Drivers
 
 ## SYNTAX
 
@@ -17,7 +17,7 @@ Invoke-OSDCloudDriverPackMDT [[-Manufacturer] <String>] [[-Product] <String>] [<
 ```
 
 ## DESCRIPTION
-{{ Fill in the Description }}
+Downloads a matching DriverPack to %OSDisk%\Drivers
 
 ## EXAMPLES
 
@@ -39,8 +39,8 @@ Parameter Sets: (All)
 Aliases:
 
 Required: False
-Position: 0
-Default value: None
+Position: 1
+Default value: (Get-MyComputerManufacturer -Brief)
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
@@ -54,8 +54,8 @@ Parameter Sets: (All)
 Aliases:
 
 Required: False
-Position: 1
-Default value: None
+Position: 2
+Default value: (Get-MyComputerProduct)
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
@@ -65,11 +65,11 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## INPUTS
 
-### None
-
 ## OUTPUTS
 
-### System.Object
 ## NOTES
 
 ## RELATED LINKS
+
+[https://github.com/OSDeploy/OSD/tree/master/Docs](https://github.com/OSDeploy/OSD/tree/master/Docs)
+

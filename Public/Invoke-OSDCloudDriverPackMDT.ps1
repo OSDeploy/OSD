@@ -106,7 +106,7 @@ function Invoke-OSDCloudDriverPackMDT {
         $DeployRootDriverPack = @()
         $DeployRootDriverPack = Get-ChildItem $DeployRootDriverPacks -File -Recurse -Force -ErrorAction Ignore | Where-Object {$_.Name -match $GetMyDriverPackBaseName} | Where-Object {$_.Extension -in ('.cab','.zip','.exe')} | Select-Object -First 1
         if ($DeployRootDriverPack) {
-            Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Copying existing DriverPack from MDT DeployRoot"
+            Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Copying existing DriverPack from the MDT DeploymentShare"
             Write-Host -ForegroundColor DarkGray "-Source $($DeployRootDriverPack.FullName)"
             Write-Host -ForegroundColor DarkGray "-Destination $OSDiskDriversFile"
             Copy-Item -Path $($DeployRootDriverPack.FullName) -Destination $OSDiskDrivers -Force

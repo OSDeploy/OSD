@@ -139,7 +139,7 @@ function Invoke-OSDCloudRE {
         Write-Host -ForegroundColor DarkGray "========================================================================="
         Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) OSDCloud Azure Storage Boot Image Download"
 
-        $Global:OSDCloudRE.AzOSDCloudBootImage | ConvertTo-Json | Out-File -FilePath "$OSDCloudLogs\AzOSDCloudBootImage.json" -Encoding ascii -Width 2000
+        $Global:OSDCloudRE.AzOSDCloudBootImage | ConvertTo-Json | Out-File -FilePath "$OSDCloudLogs\AzOSDCloudBootImage.json" -Encoding ascii -Width 2000 -Force
 
         if (Test-Path $Global:OSDCloudRE.DownloadFullName) {
             Write-Host -ForegroundColor DarkGray "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) $($Global:OSDCloudRE.DownloadFullName) already exists"

@@ -229,7 +229,7 @@ function Get-OSDCatalogIntelEthernetDriver {
     #   Sort-Object
     #=================================================
     $DriverResults = $DriverResults | Sort-Object -Property LastUpdate -Descending
-    $DriverResults | ConvertTo-Json | Out-File "$env:TEMP\OSDCatalogIntelEthernetDriver.json"
+    $DriverResults | ConvertTo-Json | Out-File "$env:TEMP\OSDCatalogIntelEthernetDriver.json" -Encoding ascii -Width 2000 -Force
     #=================================================
     #   Filter
     #=================================================

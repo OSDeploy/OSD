@@ -244,7 +244,7 @@ function Get-OSDCatalogIntelWirelessDriver {
     #   Sort-Object
     #=================================================
     $DriverResults = $DriverResults | Sort-Object -Property LastUpdate -Descending
-    $DriverResults | ConvertTo-Json | Out-File "$env:TEMP\OSDCatalogIntelWirelessDriver.json"
+    $DriverResults | ConvertTo-Json | Out-File "$env:TEMP\OSDCatalogIntelWirelessDriver.json" -Encoding ascii -Width 2000 -Force
     #=================================================
     #   Filter
     #=================================================

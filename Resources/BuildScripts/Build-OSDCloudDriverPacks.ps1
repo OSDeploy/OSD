@@ -11,7 +11,7 @@ $Destination = Join-Path (Get-Module OSD).ModuleBase "Catalogs\OSDCatalog\OSDCat
 if (Test-Path $Source) {
     Copy-Item $Source $Destination -Force
 }
-Import-Clixml -Path $Destination | ConvertTo-Json | Out-File -FilePath (Join-Path (Get-Module OSD).ModuleBase "Catalogs\OSDCatalog\OSDCatalogDellDriverPack.json") -Force -Encoding ascii
+Import-Clixml -Path $Destination | ConvertTo-Json | Out-File -FilePath (Join-Path (Get-Module OSD).ModuleBase "Catalogs\OSDCatalog\OSDCatalogDellDriverPack.json") -Encoding ascii -Width 2000 -Force
 Stop-Transcript
 #=================================================
 #   LenovoDriverPackCatalog
@@ -25,7 +25,7 @@ $Destination = Join-Path (Get-Module OSD).ModuleBase "Catalogs\OSDCatalog\OSDCat
 if (Test-Path $Source) {
     Copy-Item $Source $Destination -Force
 }
-Import-Clixml -Path $Destination | ConvertTo-Json | Out-File -FilePath (Join-Path (Get-Module OSD).ModuleBase "Catalogs\OSDCatalog\OSDCatalogLenovoDriverPack.json") -Force -Encoding ascii
+Import-Clixml -Path $Destination | ConvertTo-Json | Out-File -FilePath (Join-Path (Get-Module OSD).ModuleBase "Catalogs\OSDCatalog\OSDCatalogLenovoDriverPack.json") -Encoding ascii -Width 2000 -Force
 Stop-Transcript
 #=================================================
 #   MicrosoftDriverPackCatalog
@@ -51,7 +51,7 @@ $Destination = Join-Path (Get-Module OSD).ModuleBase "Catalogs\OSDCatalog\OSDCat
 if (Test-Path $Source) {
     Copy-Item $Source $Destination -Force
 }
-Import-Clixml -Path $Destination | ConvertTo-Json | Out-File -FilePath (Join-Path (Get-Module OSD).ModuleBase "Catalogs\OSDCatalog\OSDCatalogHPDriverPack.json") -Force -Encoding ascii
+Import-Clixml -Path $Destination | ConvertTo-Json | Out-File -FilePath (Join-Path (Get-Module OSD).ModuleBase "Catalogs\OSDCatalog\OSDCatalogHPDriverPack.json") -Encoding ascii -Width 2000 -Force
 $MasterDriverPacks += Get-Content (Join-Path (Get-Module OSD).ModuleBase "Catalogs\OSDCatalog\OSDCatalogHPDriverPack.json") | ConvertFrom-Json
 Stop-Transcript
 #=================================================
@@ -73,5 +73,5 @@ HashMD5, `
 @{Name='Guid';Expression={([guid]((New-Guid).ToString()))}}
 
 $Results | Export-Clixml -Path (Join-Path (Get-Module OSD).ModuleBase "Catalogs\driverpacks.xml") -Force
-Import-Clixml -Path (Join-Path (Get-Module OSD).ModuleBase "Catalogs\driverpacks.xml") | ConvertTo-Json | Out-File (Join-Path (Get-Module OSD).ModuleBase "Catalogs\driverpacks.json") -Force -Encoding ascii
+Import-Clixml -Path (Join-Path (Get-Module OSD).ModuleBase "Catalogs\driverpacks.xml") | ConvertTo-Json | Out-File (Join-Path (Get-Module OSD).ModuleBase "Catalogs\driverpacks.json") -Encoding ascii -Width 2000 -Force
 #================================================

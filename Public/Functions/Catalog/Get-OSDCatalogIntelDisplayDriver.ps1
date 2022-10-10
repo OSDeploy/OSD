@@ -246,7 +246,7 @@ function Get-OSDCatalogIntelDisplayDriver {
     #   Sort-Object
     #=================================================
     $DriverResults = $DriverResults | Sort-Object -Property LastUpdate -Descending
-    $DriverResults | ConvertTo-Json | Out-File "$env:TEMP\OSDCatalogIntelDisplayDriver.json"
+    $DriverResults | ConvertTo-Json | Out-File "$env:TEMP\OSDCatalogIntelDisplayDriver.json" -Encoding ascii -Width 2000 -Force
     #=================================================
     #   Return
     #=================================================

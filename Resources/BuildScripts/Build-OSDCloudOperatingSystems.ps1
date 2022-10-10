@@ -81,5 +81,5 @@ foreach ($Result in $Results) {
 }
 $Results = $Results | Sort-Object -Property Name
 $Results | Export-Clixml -Path (Join-Path (Get-Module OSD).ModuleBase "Catalogs\operatingsystems.xml") -Force
-Import-Clixml -Path (Join-Path (Get-Module OSD).ModuleBase "Catalogs\operatingsystems.xml") | ConvertTo-Json | Out-File (Join-Path (Get-Module OSD).ModuleBase "Catalogs\operatingsystems.json") -Force -Encoding ascii
+Import-Clixml -Path (Join-Path (Get-Module OSD).ModuleBase "Catalogs\operatingsystems.xml") | ConvertTo-Json | Out-File (Join-Path (Get-Module OSD).ModuleBase "Catalogs\operatingsystems.json") -Encoding ascii -Width 2000 -Force
 #================================================
