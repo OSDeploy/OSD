@@ -140,7 +140,7 @@ function Invoke-OSDCloudDriverPackMDT {
         if ($ReadyDriverPack) {
             Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) DriverPack has been copied to $OSDiskDrivers"
 
-            $OSDCloudDriverPackPPKG = Join-Path (Get-Module OSD).ModuleBase "Provisioning\Invoke-OSDCloudDriverPack.ppkg"
+            $OSDCloudDriverPackPPKG = Join-Path (Get-Module -Name OSD -ListAvailable | Sort-Object Version -Descending | Select-Object -First 1).ModuleBase "Provisioning\Invoke-OSDCloudDriverPack.ppkg"
         
             if (Test-Path $OSDCloudDriverPackPPKG) {
                 Write-Host

@@ -4,7 +4,7 @@ Import-Module -Name OSD -Force
 #=================================================
 $null = Get-OSDCatalogDellSystem -Verbose
 $Source = Join-Path $env:TEMP (Join-Path 'OSD' 'OSDCatalogDellSystem.xml')
-$Destination = Join-Path (Get-Module OSD).ModuleBase "Catalogs\OSDCatalog\OSDCatalogDellSystem.xml"
+$Destination = Join-Path (Get-Module -Name OSD -ListAvailable | Sort-Object Version -Descending | Select-Object -First 1).ModuleBase "Catalogs\OSDCatalog\OSDCatalogDellSystem.xml"
 if (Test-Path $Source) {
     Copy-Item $Source $Destination -Force
 }
@@ -13,7 +13,7 @@ if (Test-Path $Source) {
 #=================================================
 $null = Get-OSDCatalogHPPlatformList -Verbose
 $Source = Join-Path $env:TEMP (Join-Path 'OSD' 'OSDCatalogHPPlatformList.xml')
-$Destination = Join-Path (Get-Module OSD).ModuleBase "Catalogs\OSDCatalog\OSDCatalogHPPlatformList.xml"
+$Destination = Join-Path (Get-Module -Name OSD -ListAvailable | Sort-Object Version -Descending | Select-Object -First 1).ModuleBase "Catalogs\OSDCatalog\OSDCatalogHPPlatformList.xml"
 if (Test-Path $Source) {
     Copy-Item $Source $Destination -Force
 }
@@ -22,7 +22,7 @@ if (Test-Path $Source) {
 #=================================================
 $null = Get-OSDCatalogHPSystem -Verbose
 $Source = Join-Path $env:TEMP (Join-Path 'OSD' 'OSDCatalogHPSystem.xml')
-$Destination = Join-Path (Get-Module OSD).ModuleBase "Catalogs\OSDCatalog\OSDCatalogHPSystem.xml"
+$Destination = Join-Path (Get-Module -Name OSD -ListAvailable | Sort-Object Version -Descending | Select-Object -First 1).ModuleBase "Catalogs\OSDCatalog\OSDCatalogHPSystem.xml"
 if (Test-Path $Source) {
     Copy-Item $Source $Destination -Force
 }
@@ -31,7 +31,7 @@ if (Test-Path $Source) {
 #=================================================
 $null = Get-OSDCatalogLenovoBios -Verbose
 $Source = Join-Path $env:TEMP (Join-Path 'OSD' 'OSDCatalogLenovoBios.xml')
-$Destination = Join-Path (Get-Module OSD).ModuleBase "Catalogs\OSDCatalog\OSDCatalogLenovoBios.xml"
+$Destination = Join-Path (Get-Module -Name OSD -ListAvailable | Sort-Object Version -Descending | Select-Object -First 1).ModuleBase "Catalogs\OSDCatalog\OSDCatalogLenovoBios.xml"
 if (Test-Path $Source) {
     Copy-Item $Source $Destination -Force
 }
@@ -40,7 +40,7 @@ if (Test-Path $Source) {
 #=================================================
 $null = Get-OSDCatalogIntelDisplayDriver -Verbose
 $Source = Join-Path $env:TEMP 'OSDCatalogIntelDisplayDriver.json'
-$Destination = Join-Path (Get-Module OSD).ModuleBase "Catalogs\OSDCatalog\OSDCatalogIntelDisplayDriver.json"
+$Destination = Join-Path (Get-Module -Name OSD -ListAvailable | Sort-Object Version -Descending | Select-Object -First 1).ModuleBase "Catalogs\OSDCatalog\OSDCatalogIntelDisplayDriver.json"
 if (Test-Path $Source) {
     Copy-Item $Source $Destination -Force
 }
@@ -49,7 +49,7 @@ if (Test-Path $Source) {
 #=================================================
 $null = Get-OSDCatalogIntelRadeonDisplayDriver -Verbose
 $Source = Join-Path $env:TEMP 'OSDCatalogIntelRadeonDisplayDriver.json'
-$Destination = Join-Path (Get-Module OSD).ModuleBase "Catalogs\OSDCatalog\OSDCatalogIntelRadeonDisplayDriver.json"
+$Destination = Join-Path (Get-Module -Name OSD -ListAvailable | Sort-Object Version -Descending | Select-Object -First 1).ModuleBase "Catalogs\OSDCatalog\OSDCatalogIntelRadeonDisplayDriver.json"
 if (Test-Path $Source) {
     Copy-Item $Source $Destination -Force
 }
@@ -58,7 +58,7 @@ if (Test-Path $Source) {
 #=================================================
 $null = Get-OSDCatalogIntelWirelessDriver -Verbose
 $Source = Join-Path $env:TEMP 'OSDCatalogIntelWirelessDriver.json'
-$Destination = Join-Path (Get-Module OSD).ModuleBase "Catalogs\OSDCatalog\OSDCatalogIntelWirelessDriver.json"
+$Destination = Join-Path (Get-Module -Name OSD -ListAvailable | Sort-Object Version -Descending | Select-Object -First 1).ModuleBase "Catalogs\OSDCatalog\OSDCatalogIntelWirelessDriver.json"
 if (Test-Path $Source) {
     Copy-Item $Source $Destination -Force
 }
@@ -67,7 +67,7 @@ if (Test-Path $Source) {
 #=================================================
 $null = Get-OSDCatalogIntelEthernetDriver -Verbose
 $Source = Join-Path $env:TEMP 'OSDCatalogIntelEthernetDriver.json'
-$Destination = Join-Path (Get-Module OSD).ModuleBase "Catalogs\OSDCatalog\OSDCatalogIntelEthernetDriver.json"
+$Destination = Join-Path (Get-Module -Name OSD -ListAvailable | Sort-Object Version -Descending | Select-Object -First 1).ModuleBase "Catalogs\OSDCatalog\OSDCatalogIntelEthernetDriver.json"
 if (Test-Path $Source) {
     Copy-Item $Source $Destination -Force
 }

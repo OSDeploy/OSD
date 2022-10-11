@@ -317,7 +317,7 @@ PowerShell -Nol -C Initialize-OSDCloudStartnet
     #   Wallpaper
     #=================================================
     if ($UseDefaultWallpaper) {
-        $Wallpaper = Join-Path (Get-Module OSD).ModuleBase "Resources\Images\OSDCloud.jpg"
+        $Wallpaper = Join-Path (Get-Module -Name OSD -ListAvailable | Sort-Object Version -Descending | Select-Object -First 1).ModuleBase "Resources\Images\OSDCloud.jpg"
     }
     if ($Wallpaper) {
         Write-Host -ForegroundColor DarkGray "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Wallpaper: $Wallpaper"

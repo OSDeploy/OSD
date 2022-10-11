@@ -11,7 +11,7 @@ function Invoke-OSDCloudDriverPackPPKG {
     #>
     [CmdletBinding()]
     param ()
-    $OSDCloudDriverPackPPKG = Join-Path (Get-Module OSD).ModuleBase "Provisioning\Invoke-OSDCloudDriverPack.ppkg"
+    $OSDCloudDriverPackPPKG = Join-Path (Get-Module -Name OSD -ListAvailable | Sort-Object Version -Descending | Select-Object -First 1).ModuleBase "Provisioning\Invoke-OSDCloudDriverPack.ppkg"
 
     if (Test-Path $OSDCloudDriverPackPPKG) {
         Write-Host -ForegroundColor DarkGray "dism.exe /Image=C:\ /Add-ProvisioningPackage /PackagePath:`"$OSDCloudDriverPackPPKG`""
