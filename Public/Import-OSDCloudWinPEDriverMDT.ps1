@@ -18,7 +18,10 @@ function Import-OSDCloudWinPEDriverMDT {
 
         #WinPE Driver: HardwareID of the Driver to add to WinPE
         [Alias('HardwareID')]
-        [System.String[]]$DriverHWID
+        [System.String[]]$DriverHWID,
+
+        [Alias('Share')]
+        [System.String]$ShareName
     )
 
     try {
@@ -29,10 +32,15 @@ function Import-OSDCloudWinPEDriverMDT {
         Break
     }
 
-    $MDTPersistentDrive = Get-MDTPersistentDrive
+    if ((Get-MDTPersistentDrive).Length -lt 2){
+        $MDTPersistentDrive = (Get-MDTPersistentDrive).Path
+    }
+    else{
+        $MDTPersistentDrive = $ShareName
+    }
 
     if ($MDTPersistentDrive) {
-        $MDTPSDrive = New-PSDrive -Name 'OSDCloudMDT' -PSProvider MDTProvider -Root $MDTPersistentDrive.Path -ErrorAction Ignore
+        $MDTPSDrive = New-PSDrive -Name 'OSDCloudMDT' -PSProvider MDTProvider -Root $MDTPersistentDrive -ErrorAction Ignore
     }
 
     if ($MDTPSDrive) {
