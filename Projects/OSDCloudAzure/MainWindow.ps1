@@ -380,6 +380,7 @@ $formMainWindowControlStartButton.add_Click({
         AzOSDCloudBlobDriverPack    = $Global:AzOSDCloudBlobDriverPack
         AzOSDCloudBlobPackage       = $Global:AzOSDCloudBlobPackage
         AzOSDCloudBlobScript        = $Global:AzOSDCloudBlobScript
+        AzOSDCloudAutopilotFile     = $Global:AzOSDCloudAutopilotFile | Where-Object {($_.BlobClient.BlobContainerName -eq 'bin') -or ($_.BlobClient.BlobContainerName -eq $formMainWindowControlContainerCombobox.SelectedValue)} | Select-Object -First 1
         AzOSDCloudImage             = $Global:AzOSDCloudImage
         AzOSDCloudPackage           = $Global:AzOSDCloudBlobPackage | Where-Object {($_.BlobClient.BlobContainerName -eq 'bin') -or ($_.BlobClient.BlobContainerName -eq $formMainWindowControlContainerCombobox.SelectedValue)}
         AzOSDCloudScript            = $Global:AzOSDCloudBlobScript | Where-Object {($_.BlobClient.BlobContainerName -eq 'bin') -or ($_.BlobClient.BlobContainerName -eq $formMainWindowControlContainerCombobox.SelectedValue)}

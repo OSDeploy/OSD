@@ -30,6 +30,7 @@ function Invoke-OSDCloud {
         AzOSDCloudBlobDriverPack = $Global:AzOSDCloudBlobDriverPack
         AzOSDCloudBlobPackage = $Global:AzOSDCloudBlobPackage
         AzOSDCloudBlobScript = $Global:AzOSDCloudBlobScript
+        AzOSDCloudAutopilotFile = $Global:AzOSDCloudAutopilotFile
         AzOSDCloudDriverPack = $null
         AzOSDCloudImage = $Global:AzOSDCloudImage
         AzOSDCloudPackage = $null
@@ -679,7 +680,7 @@ function Invoke-OSDCloud {
             Context = $Global:OSDCloud.AzOSDCloudImage.Context
             Destination = $Global:OSDCloud.DownloadFullName
             Force = $true
-            ErrorAction = 'Stop'
+            ErrorAction = 'Ignore'
         }
 
         $ParamGetItem = @{
@@ -1038,7 +1039,7 @@ function Invoke-OSDCloud {
                 Context = $Item.Context
                 Destination = 'C:\OSDCloud\Packages\'
                 Force = $true
-                ErrorAction = 'Stop'
+                ErrorAction = 'Ignore'
             }
             $null = Get-AzStorageBlobContent @ParamGetAzStorageBlobContent
         }
@@ -1481,6 +1482,23 @@ function Invoke-OSDCloud {
     }
     #endregion
     #=================================================
+    #region OSDCloud Azure Autopilot Configuration File
+    if ($Global:OSDCloud.AzOSDCloudAutopilotFile) {
+        Write-SectionHeader 'OSDCloud Azure Autopilot Configuration File'
+        Write-DarkGrayHost 'Autopilot Configuration File will be downloaded to C:\Windows\Provisioning\Autopilot'
+
+        foreach ($Item in $Global:OSDCloud.AzOSDCloudAutopilotFile) {
+            $ParamGetAzStorageBlobContent = @{
+                CloudBlob = $Item.ICloudBlob
+                Context = $Item.Context
+                Destination = 'C:\Windows\Provisioning\Autopilot\'
+                Force = $true
+                ErrorAction = 'Ignore'
+            }
+            $null = Get-AzStorageBlobContent @ParamGetAzStorageBlobContent
+        }
+    }
+    #=================================================
     #region OSDeploy.OOBEDeploy.json
     if ($Global:OSDCloud.OOBEDeployJsonObject) {
         Write-SectionHeader "Applying OSDeploy.OOBEDeploy.json"
@@ -1677,7 +1695,7 @@ exit
                 Context = $Item.Context
                 Destination = 'C:\OSDCloud\Scripts\'
                 Force = $true
-                ErrorAction = 'Stop'
+                ErrorAction = 'Ignore'
             }
             $null = Get-AzStorageBlobContent @ParamGetAzStorageBlobContent
         }
