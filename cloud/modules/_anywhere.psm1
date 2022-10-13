@@ -48,8 +48,6 @@ function osdcloud-InstallModuleAutopilot {
         Install-Module WindowsAutopilotIntune -Force -Scope CurrentUser -SkipPublisherCheck
     }
 }
-
-
 function osdcloud-UpdateModuleFilesManually {
     #Custom Testing - Overwrites files in module with updated ones in GitHub
     [CmdletBinding()]
