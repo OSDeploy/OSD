@@ -221,8 +221,8 @@ function Get-OSDCloudAzureResources {
         }
     
         $Global:AzStorageContext = @{}
-        $Global:AzOSDCloudAutopilotFile = @()
-        $Global:AzOSDCloudBootImage = @()
+        $Global:AzOSDCloudBlobAutopilotFile = @()
+        $Global:AzOSDCloudBlobBootImage = @()
         $Global:AzOSDCloudBlobImage = @()
         $Global:AzOSDCloudBlobDriverPack = @()
         $Global:AzOSDCloudBlobPackage = @()
@@ -248,9 +248,9 @@ function Get-OSDCloudAzureResources {
             
                 if ($AzOSDCloudStorageContainers) {
                     foreach ($Container in $AzOSDCloudStorageContainers) {
-                        if ($Container.Name -eq 'bin') {
-                            #Container is for Scripts and Provisioning
-                            Write-Host -ForegroundColor DarkGray "OSDCloud Global Container: $($Item.StorageAccountName)/$($Container.Name)"
+                        if ($Container.Name -eq 'default') {
+                            Write-Host -ForegroundColor DarkGray "OSDCloud Azure Default Settings: $($Item.StorageAccountName)/$($Container.Name)"
+                            $Global:AzOSDCloudBlobAutopilotFile += Get-AzStorageBlob -Context $Global:AzCurrentStorageContext -Container $Container.Name -Blob AutoPilotConfigurationFile.json -ErrorAction Ignore
                             $Global:AzOSDCloudBlobPackage += Get-AzStorageBlob -Context $Global:AzCurrentStorageContext -Container $Container.Name -Blob *.ppkg -ErrorAction Ignore
                             $Global:AzOSDCloudBlobScript += Get-AzStorageBlob -Context $Global:AzCurrentStorageContext -Container $Container.Name -Blob *.ps1 -ErrorAction Ignore
                         }
@@ -271,7 +271,7 @@ function Get-OSDCloudAzureResources {
                             $Global:AzOSDCloudBlobImage += Get-AzStorageBlob -Context $Global:AzCurrentStorageContext -Container $Container.Name -Blob *.iso -ErrorAction Ignore | Where-Object {$_.Length -gt 3000000000}
                             $Global:AzOSDCloudBlobImage += Get-AzStorageBlob -Context $Global:AzCurrentStorageContext -Container $Container.Name -Blob *.wim -ErrorAction Ignore | Where-Object {$_.Length -gt 3000000000}
 
-                            $Global:AzOSDCloudAutopilotFile += Get-AzStorageBlob -Context $Global:AzCurrentStorageContext -Container $Container.Name -Blob AutoPilotConfigurationFile.json -ErrorAction Ignore
+                            $Global:AzOSDCloudBlobAutopilotFile += Get-AzStorageBlob -Context $Global:AzCurrentStorageContext -Container $Container.Name -Blob AutoPilotConfigurationFile.json -ErrorAction Ignore
                             $Global:AzOSDCloudBlobPackage += Get-AzStorageBlob -Context $Global:AzCurrentStorageContext -Container $Container.Name -Blob *.ppkg -ErrorAction Ignore
                             $Global:AzOSDCloudBlobScript += Get-AzStorageBlob -Context $Global:AzCurrentStorageContext -Container $Container.Name -Blob *.ps1 -ErrorAction Ignore
                         }
@@ -280,10 +280,10 @@ function Get-OSDCloudAzureResources {
             }
             if ($OSDCloudLogs) {
                 $Global:AzStorageContext | ConvertTo-Json | Out-File -FilePath "$OSDCloudLogs\AzStorageContext.json" -Encoding ascii -Width 2000 -Force
-                $Global:AzOSDCloudAutopilotFile | ConvertTo-Json | Out-File -FilePath "$OSDCloudLogs\AzOSDCloudAutopilotFile.json" -Encoding ascii -Width 2000 -Force
-                $Global:AzOSDCloudBlobImage | ConvertTo-Json | Out-File -FilePath "$OSDCloudLogs\AzOSDCloudBlobImage.json" -Encoding ascii -Width 2000 -Force
-                $Global:AzOSDCloudBlobBootImage| ConvertTo-Json | Out-File -FilePath "$OSDCloudLogs\AzOSDCloudBlobDriverPack.json" -Encoding ascii -Width 2000 -Force
+                $Global:AzOSDCloudBlobAutopilotFile | ConvertTo-Json | Out-File -FilePath "$OSDCloudLogs\AzOSDCloudBlobAutopilotFile.json" -Encoding ascii -Width 2000 -Force
+                $Global:AzOSDCloudBlobBootImage| ConvertTo-Json | Out-File -FilePath "$OSDCloudLogs\AzOSDCloudBlobBootImage.json" -Encoding ascii -Width 2000 -Force
                 $Global:AzOSDCloudBlobDriverPack | ConvertTo-Json | Out-File -FilePath "$OSDCloudLogs\AzOSDCloudBlobDriverPack.json" -Encoding ascii -Width 2000 -Force
+                $Global:AzOSDCloudBlobImage | ConvertTo-Json | Out-File -FilePath "$OSDCloudLogs\AzOSDCloudBlobImage.json" -Encoding ascii -Width 2000 -Force
                 $Global:AzOSDCloudBlobPackage | ConvertTo-Json | Out-File -FilePath "$OSDCloudLogs\AzOSDCloudBlobPackage.json" -Encoding ascii -Width 2000 -Force
                 $Global:AzOSDCloudBlobScript | ConvertTo-Json | Out-File -FilePath "$OSDCloudLogs\AzOSDCloudBlobScript.json" -Encoding ascii -Width 2000 -Force
             }
