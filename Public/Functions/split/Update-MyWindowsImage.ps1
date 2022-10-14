@@ -92,10 +92,10 @@ function Update-MyWindowsImage {
             $global:GetWSUSXML = Get-WSUSXML -Catalog Windows -Silent | Sort-Object UpdateGroup -Descending
 
             if ($global:GetRegCurrentVersion.ReleaseId -gt 0) {
-                $global:GetWSUSXML = $global:GetWSUSXML | Where-Object {$_.UpdateBuild -eq $global:GetRegCurrentVersion.DisplayVersion}
+                $global:GetWSUSXML = $global:GetWSUSXML | Where-Object {$_.UpdateBuild -eq $global:GetRegCurrentVersion.ReleaseId}
             }
             else {
-                $global:GetWSUSXML = $global:GetWSUSXML | Where-Object {$_.UpdateBuild -eq $global:GetRegCurrentVersion.ReleaseId}
+                $global:GetWSUSXML = $global:GetWSUSXML | Where-Object {$_.UpdateBuild -eq $global:GetRegCurrentVersion.DisplayVersion}
             }
 
             if ($global:GetRegCurrentVersion.BuildLabEx -match 'amd64') {
