@@ -26,15 +26,18 @@ function Invoke-OSDCloud {
         AutopilotOOBEJsonName = $null
         AutopilotOOBEJsonObject = $null
         AzContext = $Global:AzContext
-        AzOSDCloudBlobImage = $Global:AzOSDCloudBlobImage
+        AzOSDCloudBlobAutopilotFile = $Global:AzOSDCloudBlobAutopilotFile
         AzOSDCloudBlobDriverPack = $Global:AzOSDCloudBlobDriverPack
+        AzOSDCloudBlobImage = $Global:AzOSDCloudBlobImage
         AzOSDCloudBlobPackage = $Global:AzOSDCloudBlobPackage
         AzOSDCloudBlobScript = $Global:AzOSDCloudBlobScript
+        AzOSDCloudBlobTextFile = $Global:AzOSDCloudBlobTextFile
         AzOSDCloudAutopilotFile = $Global:AzOSDCloudAutopilotFile
         AzOSDCloudDriverPack = $null
         AzOSDCloudImage = $Global:AzOSDCloudImage
         AzOSDCloudPackage = $null
         AzOSDCloudScript = $null
+        AzOSDCloudTextFile = $null
         AzStorageAccounts = $Global:AzStorageAccounts
         AzStorageContext = $Global:AzStorageContext
         BuildName = 'OSDCloud'
@@ -202,8 +205,6 @@ function Invoke-OSDCloud {
         Write-Host -ForegroundColor Green $Message
     }
     #endregion
-
-
     #=================================================
     #region Debug Mode
     if ($Global:OSDCloud.DebugMode -eq $true){
@@ -212,7 +213,6 @@ function Invoke-OSDCloud {
         $OSDCloud | Out-File $env:temp\OSDCloudVars.log
     }
     #endregion
-    #=================================================
     #=================================================
     #region WiFi Mode
     if ($Global:OSDCloud.SetWiFi -eq $true){
@@ -224,7 +224,6 @@ function Invoke-OSDCloud {
     }
     #endregion
     #=================================================
-    #=================================================
     #region M365 Mode - Eventually Make this a better GUI Experience with Channel Selection
     if ($Global:OSDCloud.MS365Install -eq $true){
         Write-SectionHeader "Gathering M365 Information"
@@ -233,8 +232,6 @@ function Invoke-OSDCloud {
         if ($M365CompanyName -eq ""){$M365CompanyName = "Organization"}
     }
     #endregion
-    #=================================================v
-
     #=================================================
     #region Set Post-Merge Defaults
     $Global:OSDCloud.Version = [Version](Get-Module -Name OSD -ListAvailable | Sort-Object Version -Descending | Select-Object -First 1).Version
@@ -680,7 +677,7 @@ function Invoke-OSDCloud {
             Context = $Global:OSDCloud.AzOSDCloudImage.Context
             Destination = $Global:OSDCloud.DownloadFullName
             Force = $true
-            ErrorAction = 'Ignore'
+            ErrorAction = 'Stop'
         }
 
         $ParamGetItem = @{
@@ -705,7 +702,13 @@ function Invoke-OSDCloud {
             }
             else {
                 Write-DarkGrayHost -Message "Existing file does not match Azure Storage, downloading updated file"
-                Get-AzStorageBlobContent @ParamGetAzStorageBlobContent
+
+                try {
+                    Get-AzStorageBlobContent @ParamGetAzStorageBlobContent
+                }
+                catch {
+                    Get-AzStorageBlobContent @ParamGetAzStorageBlobContent
+                }
             }
         }
         else {
@@ -713,7 +716,13 @@ function Invoke-OSDCloud {
                 Write-DarkGrayHost -Message "Creating directory $($Global:OSDCloud.DownloadDirectory)"
                 $null = New-Item @ParamNewItem
             }
-            Get-AzStorageBlobContent @ParamGetAzStorageBlobContent
+
+            try {
+                Get-AzStorageBlobContent @ParamGetAzStorageBlobContent
+            }
+            catch {
+                Get-AzStorageBlobContent @ParamGetAzStorageBlobContent
+            }
         }
         
         $Global:OSDCloud.ImageFileDestination = Get-Item @ParamGetItem | Select-Object -First 1 | Select-Object -First 1
@@ -1039,9 +1048,15 @@ function Invoke-OSDCloud {
                 Context = $Item.Context
                 Destination = 'C:\OSDCloud\Packages\'
                 Force = $true
-                ErrorAction = 'Ignore'
+                ErrorAction = 'Stop'
             }
-            $null = Get-AzStorageBlobContent @ParamGetAzStorageBlobContent
+
+            try {
+                Get-AzStorageBlobContent @ParamGetAzStorageBlobContent
+            }
+            catch {
+                Get-AzStorageBlobContent @ParamGetAzStorageBlobContent
+            }
         }
         $Packages = Get-ChildItem -Path 'C:\OSDCloud\Packages\' *.ppkg -Recurse -ErrorAction Ignore
 
@@ -1123,7 +1138,14 @@ function Invoke-OSDCloud {
         }
         elseif ($Global:OSDCloud.AzOSDCloudDriverPack) {
             Write-DarkGrayHost "DriverPack is being downloaded from Azure Storage to C:\Drivers"
-            Get-AzStorageBlobContent -CloudBlob $Global:OSDCloud.AzOSDCloudDriverPack.ICloudBlob -Context $Global:OSDCloud.AzOSDCloudDriverPack.Context -Destination "C:\Drivers\$(Split-Path $Global:OSDCloud.AzOSDCloudDriverPack.Name -Leaf)"
+
+            try {
+                Get-AzStorageBlobContent -CloudBlob $Global:OSDCloud.AzOSDCloudDriverPack.ICloudBlob -Context $Global:OSDCloud.AzOSDCloudDriverPack.Context -Destination "C:\Drivers\$(Split-Path $Global:OSDCloud.AzOSDCloudDriverPack.Name -Leaf)"
+            }
+            catch {
+                Get-AzStorageBlobContent -CloudBlob $Global:OSDCloud.AzOSDCloudDriverPack.ICloudBlob -Context $Global:OSDCloud.AzOSDCloudDriverPack.Context -Destination "C:\Drivers\$(Split-Path $Global:OSDCloud.AzOSDCloudDriverPack.Name -Leaf)"
+            }
+            
             $Global:OSDCloud.DriverPackExpand = $true
         }
         elseif ($Global:OSDCloud.DriverPack.Guid) {
@@ -1493,9 +1515,15 @@ function Invoke-OSDCloud {
                 Context = $Item.Context
                 Destination = 'C:\Windows\Provisioning\Autopilot\'
                 Force = $true
-                ErrorAction = 'Ignore'
+                ErrorAction = 'Stop'
             }
-            $null = Get-AzStorageBlobContent @ParamGetAzStorageBlobContent
+
+            try {
+                Get-AzStorageBlobContent @ParamGetAzStorageBlobContent
+            }
+            catch {
+                Get-AzStorageBlobContent @ParamGetAzStorageBlobContent
+            }
         }
     }
     #=================================================
@@ -1572,6 +1600,28 @@ exit
         if (Test-Path $Global:OSDCloud.ODTSource) {
             Invoke-Exe robocopy "$($Global:OSDCloud.ODTSource)" "$($Global:OSDCloud.ODTTargetData)" *.* /s /ndl /nfl /z /b
         }
+    }
+    #endregion
+    #=================================================
+    #region Export Useful Information
+    if (Get-Command Get-AppxProvisionedPackage -ErrorAction Ignore) {
+        Write-SectionHeader "OSDCloud Export Useful Information"
+
+        Get-AppxProvisionedPackage -Path C:\ | `
+        Select-Object * | `
+        Sort-Object DisplayName | `
+        ConvertTo-Json | `
+        Out-File -FilePath 'C:\OSDCloud\Logs\Get-AppxProvisionedPackage.json' -Force -Encoding ascii
+
+        Get-AppxProvisionedPackage -Path C:\ | `
+        Select-Object DisplayName | `
+        Sort-Object DisplayName | `
+        Out-File -FilePath 'C:\OSDCloud\Logs\Get-AppxProvisionedPackage.txt' -Force -Encoding ascii
+
+        Get-Command | `
+        Where-Object {$_.CommandType -eq 'Cmdlet'} | `
+        Sort-Object Name | `
+        Out-File -FilePath 'C:\OSDCloud\Logs\Get-CommandWinPE.txt' -Force -Encoding ascii
     }
     #endregion
     #=================================================
@@ -1695,11 +1745,17 @@ exit
                 Context = $Item.Context
                 Destination = 'C:\OSDCloud\Scripts\'
                 Force = $true
-                ErrorAction = 'Ignore'
+                ErrorAction = 'Stop'
             }
-            $null = Get-AzStorageBlobContent @ParamGetAzStorageBlobContent
+
+            try {
+                Get-AzStorageBlobContent @ParamGetAzStorageBlobContent
+            }
+            catch {
+                Get-AzStorageBlobContent @ParamGetAzStorageBlobContent
+            }
         }
-        $AzOSDCloudPostScript = Get-ChildItem -Path 'C:\OSDCloud\Scripts\' AzOSDShutdown*.ps1 -Recurse -ErrorAction Ignore
+        $AzOSDCloudPostScript = Get-ChildItem -Path 'C:\OSDCloud\Scripts\' Invoke-WinPEShutdown*.ps1 -Recurse -ErrorAction Ignore
         foreach ($Item in $AzOSDCloudPostScript) {
             Write-DarkGrayHost "$($Item.FullName)"
             & "$($Item.FullName)"
