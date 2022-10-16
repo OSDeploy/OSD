@@ -1601,25 +1601,30 @@ exit
     }
     #endregion
     #=================================================
-    #region Export Useful Information
+    #region OSDCloud OS Configuration Export
     if (Get-Command Get-AppxProvisionedPackage -ErrorAction Ignore) {
-        Write-SectionHeader "OSDCloud Export Useful Information"
+        Write-SectionHeader "OSDCloud OS Configuration Export"
 
-        Get-AppxProvisionedPackage -Path C:\ | `
-        Select-Object * | `
-        Sort-Object DisplayName | `
-        ConvertTo-Json | `
-        Out-File -FilePath 'C:\OSDCloud\Logs\Get-AppxProvisionedPackage.json' -Force -Encoding ascii
-
-        Get-AppxProvisionedPackage -Path C:\ | `
-        Select-Object DisplayName | `
-        Sort-Object DisplayName | `
-        Out-File -FilePath 'C:\OSDCloud\Logs\Get-AppxProvisionedPackage.txt' -Force -Encoding ascii
-
+        Write-DarkGrayHost 'Exporting WinPE PowerShell Cmdlets to C:\OSDCloud\Logs\Get-CommandWinPE.txt'
         Get-Command | `
         Where-Object {$_.CommandType -eq 'Cmdlet'} | `
         Sort-Object Name | `
         Out-File -FilePath 'C:\OSDCloud\Logs\Get-CommandWinPE.txt' -Force -Encoding ascii
+
+        if (Get-Command Get-AppxProvisionedPackage) {
+            Write-DarkGrayHost 'Exporting AppxProvisionedPackage information to C:\OSDCloud\Logs\Get-AppxProvisionedPackage.json'
+            Get-AppxProvisionedPackage -Path C:\ | `
+            Select-Object * | `
+            Sort-Object DisplayName | `
+            ConvertTo-Json | `
+            Out-File -FilePath 'C:\OSDCloud\Logs\Get-AppxProvisionedPackage.json' -Force -Encoding ascii
+    
+            Write-DarkGrayHost 'Exporting AppxProvisionedPackage information to C:\OSDCloud\Logs\Get-AppxProvisionedPackage.txt'
+            Get-AppxProvisionedPackage -Path C:\ | `
+            Select-Object DisplayName | `
+            Sort-Object DisplayName | `
+            Out-File -FilePath 'C:\OSDCloud\Logs\Get-AppxProvisionedPackage.txt' -Force -Encoding ascii
+        }
     }
     #endregion
     #=================================================
