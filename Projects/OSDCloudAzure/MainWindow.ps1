@@ -384,10 +384,6 @@ $formMainWindowControlStartButton.add_Click({
     $Global:AzOSDCloudScript = $Global:AzOSDCloudBlobScript | `
     Where-Object {$_.BlobClient.AccountName -eq $formMainWindowControlStorageAccountCombobox.SelectedValue} | `
     Where-Object {($_.BlobClient.BlobContainerName -like "provision*") -or ($_.BlobClient.BlobContainerName -eq $formMainWindowControlContainerCombobox.SelectedValue)}
-
-    $Global:AzOSDCloudTextFile = $Global:AzOSDCloudBlobTextFile | `
-    Where-Object {$_.BlobClient.AccountName -eq $formMainWindowControlStorageAccountCombobox.SelectedValue} | `
-    Where-Object {($_.BlobClient.BlobContainerName -like "provision*") -or ($_.BlobClient.BlobContainerName -eq $formMainWindowControlContainerCombobox.SelectedValue)}
     #================================================
     #   Global Variables
     #================================================
@@ -398,13 +394,11 @@ $formMainWindowControlStartButton.add_Click({
         AzOSDCloudBlobImage         = $Global:AzOSDCloudBlobImage
         AzOSDCloudBlobPackage       = $Global:AzOSDCloudBlobPackage
         AzOSDCloudBlobScript        = $Global:AzOSDCloudBlobScript
-        AzOSDCloudBlobTextFile      = $Global:AzOSDCloudBlobTextFile
         AzOSDCloudAutopilotFile     = $Global:AzOSDCloudAutopilotFile
         AzOSDCloudDriverPack        = $Global:AzOSDCloudBlobDriverPack
         AzOSDCloudImage             = $Global:AzOSDCloudImage
         AzOSDCloudPackage           = $Global:AzOSDCloudPackage
         AzOSDCloudScript            = $Global:AzOSDCloudScript
-        AzOSDCloudTextFile          = $Global:AzOSDCloudTextFile
         DriverPackName              = $formMainWindowControlDriverPackCombobox.Text
         MSCatalogDiskDrivers        = $formMainWindowControlMSCatalogDiskDrivers.IsChecked
         MSCatalogNetDrivers         = $formMainWindowControlMSCatalogNetDrivers.IsChecked

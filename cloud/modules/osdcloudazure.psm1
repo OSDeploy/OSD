@@ -227,7 +227,6 @@ function Get-OSDCloudAzureResources {
         $Global:AzOSDCloudBlobDriverPack = @()
         $Global:AzOSDCloudBlobPackage = @()
         $Global:AzOSDCloudBlobScript = @()
-        $Global:AzOSDCloudBlobTextFile = @()
     
         if ($Global:AzOSDCloudStorageAccounts) {
             #Write-Host -ForegroundColor DarkGray    'Storage Contexts:          $Global:AzStorageContext'
@@ -255,7 +254,6 @@ function Get-OSDCloudAzureResources {
                             $Global:AzOSDCloudBlobAutopilotFile += Get-AzStorageBlob -Context $Global:AzCurrentStorageContext -Container $Container.Name -Blob AutoPilotConfigurationFile.json -ErrorAction Ignore
                             $Global:AzOSDCloudBlobPackage += Get-AzStorageBlob -Context $Global:AzCurrentStorageContext -Container $Container.Name -Blob *.ppkg -ErrorAction Ignore
                             $Global:AzOSDCloudBlobScript += Get-AzStorageBlob -Context $Global:AzCurrentStorageContext -Container $Container.Name -Blob Invoke*.ps1 -ErrorAction Ignore
-                            $Global:AzOSDCloudBlobTextFile += Get-AzStorageBlob -Context $Global:AzCurrentStorageContext -Container $Container.Name -Blob *.txt -ErrorAction Ignore
                         }
                         elseif ($Container.Name -like "bootimage*") {
                             Write-Host -ForegroundColor DarkGray "OSDCloud BootImage Container: $($Item.StorageAccountName)/$($Container.Name)"
@@ -281,7 +279,6 @@ function Get-OSDCloudAzureResources {
                             $Global:AzOSDCloudBlobAutopilotFile += Get-AzStorageBlob -Context $Global:AzCurrentStorageContext -Container $Container.Name -Blob AutoPilotConfigurationFile.json -ErrorAction Ignore
                             $Global:AzOSDCloudBlobPackage += Get-AzStorageBlob -Context $Global:AzCurrentStorageContext -Container $Container.Name -Blob *.ppkg -ErrorAction Ignore
                             $Global:AzOSDCloudBlobScript += Get-AzStorageBlob -Context $Global:AzCurrentStorageContext -Container $Container.Name -Blob Invoke*.ps1 -ErrorAction Ignore
-                            $Global:AzOSDCloudBlobTextFile += Get-AzStorageBlob -Context $Global:AzCurrentStorageContext -Container $Container.Name -Blob *.txt -ErrorAction Ignore
                         }
                     }
                 }
@@ -294,7 +291,6 @@ function Get-OSDCloudAzureResources {
                 $Global:AzOSDCloudBlobImage | ConvertTo-Json | Out-File -FilePath "$OSDCloudLogs\AzOSDCloudBlobImage.json" -Encoding ascii -Width 2000 -Force
                 $Global:AzOSDCloudBlobPackage | ConvertTo-Json | Out-File -FilePath "$OSDCloudLogs\AzOSDCloudBlobPackage.json" -Encoding ascii -Width 2000 -Force
                 $Global:AzOSDCloudBlobScript | ConvertTo-Json | Out-File -FilePath "$OSDCloudLogs\AzOSDCloudBlobScript.json" -Encoding ascii -Width 2000 -Force
-                $Global:AzOSDCloudBlobTextFile | ConvertTo-Json | Out-File -FilePath "$OSDCloudLogs\AzOSDCloudBlobTextFile.json" -Encoding ascii -Width 2000 -Force
             }
             if ($null -eq $Global:AzOSDCloudBlobImage) {
                 Write-Warning 'Unable to find a WIM on any of the OSDCloud Azure Storage Containers'

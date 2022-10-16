@@ -31,13 +31,11 @@ function Invoke-OSDCloud {
         AzOSDCloudBlobImage = $Global:AzOSDCloudBlobImage
         AzOSDCloudBlobPackage = $Global:AzOSDCloudBlobPackage
         AzOSDCloudBlobScript = $Global:AzOSDCloudBlobScript
-        AzOSDCloudBlobTextFile = $Global:AzOSDCloudBlobTextFile
         AzOSDCloudAutopilotFile = $Global:AzOSDCloudAutopilotFile
         AzOSDCloudDriverPack = $null
         AzOSDCloudImage = $Global:AzOSDCloudImage
         AzOSDCloudPackage = $null
         AzOSDCloudScript = $null
-        AzOSDCloudTextFile = $null
         AzStorageAccounts = $Global:AzStorageAccounts
         AzStorageContext = $Global:AzStorageContext
         BuildName = 'OSDCloud'
