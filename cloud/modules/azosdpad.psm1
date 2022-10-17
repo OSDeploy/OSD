@@ -104,10 +104,7 @@ function Start-AzOSDPADbeta {
         Write-Host -ForegroundColor DarkGray "========================================================================="
         
         #wrong Path just for me
-        #& "C:\Users\$env:username\Documents\github\OSD\\Projects\azosdpad.ps1" 
-        $path = Get-CurrentModuleBase
-        Write-Host $path
-        & "$path\azosdpad.ps1"
+        & "C:\Users\$env:username\Documents\github\OSD\\Projects\azosdpadnew.ps1" 
         # & "$($MyInvocation.MyCommand.Module.ModuleBase)\Projects\azosdpad.ps1"
          Start-Sleep -Seconds 2
 
