@@ -668,7 +668,7 @@ function Invoke-OSDCloud {
         $Global:OSDCloud.DownloadFullName = "$($Global:OSDCloud.DownloadDirectory)\$($Global:OSDCloud.DownloadName)"
 
         #Export Image Information
-        $Global:OSDCloud.AzOSDCloudImage | ConvertTo-Json | Out-File -FilePath "$OSDCloudLogs\AzOSDCloudImage.json" -Encoding ascii -Width 2000
+        $Global:OSDCloud.AzOSDCloudImage | ConvertTo-Json | Out-File -FilePath 'C:\OSDCloud\Logs\AzOSDCloudImage.json' -Encoding ascii -Width 2000
 
         $ParamGetAzStorageBlobContent = @{
             CloudBlob = $Global:OSDCloud.AzOSDCloudImage.ICloudBlob
@@ -1107,7 +1107,7 @@ function Invoke-OSDCloud {
 
         if ($Global:OSDCloud.AzOSDCloudDriverPack) {
             Write-DarkGrayHost "DriverPack has been located in Azure Storage"
-            $Global:OSDCloud.AzOSDCloudDriverPack | ConvertTo-Json | Out-File -FilePath "$OSDCloudLogs\AzOSDCloudDriverPack.json" -Encoding ascii -Width 2000
+            $Global:OSDCloud.AzOSDCloudDriverPack | ConvertTo-Json | Out-File -FilePath 'C:\OSDCloud\Logs\AzOSDCloudDriverPack.json' -Encoding ascii -Width 2000
         }
     }
 
