@@ -102,10 +102,11 @@ function Start-AzOSDPADbeta {
         Write-Host -ForegroundColor DarkGray "========================================================================="
         Write-Host -ForegroundColor Green "Start-AzOSDPad"
         Write-Host -ForegroundColor DarkGray "========================================================================="
-        & "C:\Users\$env:username\Documents\github\OSD\\Projects\azosdpad.ps1" 
-        Start-Sleep -Seconds 2
+        #& "C:\Users\$env:username\Documents\github\OSD\\Projects\azosdpad.ps1" 
 
-        # & "$($MyInvocation.MyCommand.Module.ModuleBase)\Projects\AzOSDCloudGUI\MainWindow.ps1"
+         & "$($MyInvocation.MyCommand.Module.ModuleBase)\Projects\azosdpad.ps1"
+         Start-Sleep -Seconds 2
+
 
     }
     else {
