@@ -73,7 +73,7 @@ function Start-AzOSDPAD {
 
    # Connect to AzureAD Tennant 
     Connect-OSDcloudAzure
-    
+
     # Get OSDCloud Scripts from Azure Storage Account with OSDScripts Tag
     Get-AzOSDCloudScript
 
@@ -106,7 +106,7 @@ function Start-AzOSDPAD {
 
         $Results | Select-Object -Property Number, StorageAccount, Tag, Container, Blob, Location, ResourceGroup, URL | Format-Table | Out-Host
 
-       # $Global:AzOSDCloudGlobalScripts = $Results
+        $Global:AzOSDCloudGlobalScripts = $Results
         Write-Host -ForegroundColor DarkGray "========================================================================="
         Write-Host -ForegroundColor Green "Start-AzOSDPad"
         Write-Host -ForegroundColor DarkGray "========================================================================="
