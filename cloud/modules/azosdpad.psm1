@@ -17,6 +17,7 @@ function Get-AzOSDCloudScript {
     param ()
     Write-Host -ForegroundColor DarkGray "========================================================================="
     Write-Host -ForegroundColor Green "Get-AzOSDCloudScript"
+    Write-Host -ForegroundColor DarkGray "========================================================================="
 
     if ($Global:AzureAD -or $Global:MgGraph) {
         Write-Host -ForegroundColor DarkGray    'Storage Accounts:          $Global:AzStorageAccounts'
@@ -66,9 +67,16 @@ function Get-AzOSDCloudScript {
         Write-Warning 'You may need to execute Connect-OSDCloudAzure '
     }
 }
-function Start-AzOSDPADbeta {
+function Start-AzOSDPAD {
     [CmdletBinding()]
     param ()
+
+   # Connect to AzureAD Tennant 
+   # Connect-OSDcloudAzure
+
+    # Get OSDCloud Scripts from Azure Storage Account with OSDScripts Tag
+   # Get-AzOSDCloudScript
+
     Write-Host -ForegroundColor DarkGray "========================================================================="
     Write-Host -ForegroundColor Green "Start-AzOSDPAD"
     Write-Host -ForegroundColor DarkGray "========================================================================="
@@ -100,14 +108,11 @@ function Start-AzOSDPADbeta {
 
         $Global:AzOSDCloudGlobalScripts = $Results
         Write-Host -ForegroundColor DarkGray "========================================================================="
-        Write-Host -ForegroundColor Green "Start-AzOSDPad"
+        Write-Host -ForegroundColor Green "Start-AzOSDPadGUI"
         Write-Host -ForegroundColor DarkGray "========================================================================="
         
         #wrong Path just for me
-        #& "C:\Users\$env:username\Documents\github\OSD\\Projects\azosdpad.ps1" 
-        $path = Get-CurrentModuleBase
-        Write-Host $path
-        & "$path\azosdpad.ps1"
+        & "C:\Users\$env:username\Documents\github\OSD\\Projects\azosdpadnew.ps1" 
         # & "$($MyInvocation.MyCommand.Module.ModuleBase)\Projects\azosdpad.ps1"
          Start-Sleep -Seconds 2
 
