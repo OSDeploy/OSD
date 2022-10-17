@@ -265,7 +265,7 @@ $localOSDCloudParams = (Get-Command Start-OSDCloud).Parameters
 $localOSDCloudParams["OSName"].Attributes.ValidValues | ForEach-Object {
     $formMainWindowControlOperatingSystemCombobox.Items.Add($_) | Out-Null
 }
-$formMainWindowControlOperatingSystemCombobox.SelectedIndex = 1
+$formMainWindowControlOperatingSystemCombobox.SelectedIndex = 0
 
 <# $localOSDCloudParams["OSBuild"].Attributes.ValidValues | ForEach-Object {
     $formMainWindowControlOSBuildCombobox.Items.Add($_) | Out-Null
