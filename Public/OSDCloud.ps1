@@ -1287,6 +1287,7 @@ function Invoke-OSDCloud {
     if ($Global:OSDCloud.IsWinPE -eq $true) {
         Add-OfflineServicingWindowsDriver
     }
+    #endregion
     #=================================================
     #region Add OSDCloud DriverPack
     if ($Global:OSDCloudUnattend -eq $true) {
@@ -1524,6 +1525,7 @@ function Invoke-OSDCloud {
             }
         }
     }
+    #endregion
     #=================================================
     #region OSDeploy.OOBEDeploy.json
     if ($Global:OSDCloud.OOBEDeployJsonObject) {
@@ -1576,6 +1578,12 @@ exit
     #endregion
     #=================================================
     #region Stage Office Config
+    <#
+    This region was added to enble installing Office in the Specialize phase
+    It is probably not recommended to run this section, just showing that it is possible
+    Recommended to remove this region by end of 2022
+    David Segura
+    #>
     if ($Global:OSDCloud.ODTFile) {
         Write-SectionHeader "Stage Office Config"
 
@@ -1601,29 +1609,50 @@ exit
     }
     #endregion
     #=================================================
-    #region OSDCloud OS Configuration Export
+    #region Export Operating System Information
+    <#
+    The goal of this section is to export TXT files that contain information about the deployed Operating System
+    This information can then be reviewed after deployment in C:\OSDCloud\Logs
+    You can use this information to write scripts to remove AppxProvisionedPackage, or perform other tasks
+    
+    This region has no dependencies with anything else in OSDCloud and can be removed if needed
+    David Segura
+    #>
     if (Get-Command Get-AppxProvisionedPackage -ErrorAction Ignore) {
-        Write-SectionHeader "OSDCloud OS Configuration Export"
+        Write-SectionHeader "Export Operating System Information"
 
-        Write-DarkGrayHost 'Exporting WinPE PowerShell Cmdlets to C:\OSDCloud\Logs\Get-CommandWinPE.txt'
-        Get-Command | `
-        Where-Object {$_.CommandType -eq 'Cmdlet'} | `
-        Sort-Object Name | `
-        Out-File -FilePath 'C:\OSDCloud\Logs\Get-CommandWinPE.txt' -Force -Encoding ascii
+        Write-DarkGrayHost 'Export WinPE PowerShell Commands to C:\OSDCloud\Logs\Get-CommandWinPE.txt'
+        $Report = Get-Command -ErrorAction Ignore | Select-Object * | Sort-Object ModuleName, Name, Version
+        $Report | Select-Object ModuleName, Name, Version | Where-Object {$_.ModuleName -gt 0} | Out-File -FilePath 'C:\OSDCloud\Logs\Get-CommandWinPE.txt' -Force -Encoding ascii
 
         if (Get-Command Get-AppxProvisionedPackage) {
-            Write-DarkGrayHost 'Exporting AppxProvisionedPackage information to C:\OSDCloud\Logs\Get-AppxProvisionedPackage.json'
-            Get-AppxProvisionedPackage -Path C:\ | `
-            Select-Object * | `
-            Sort-Object DisplayName | `
-            ConvertTo-Json | `
-            Out-File -FilePath 'C:\OSDCloud\Logs\Get-AppxProvisionedPackage.json' -Force -Encoding ascii
-    
-            Write-DarkGrayHost 'Exporting AppxProvisionedPackage information to C:\OSDCloud\Logs\Get-AppxProvisionedPackage.txt'
-            Get-AppxProvisionedPackage -Path C:\ | `
-            Select-Object DisplayName | `
-            Sort-Object DisplayName | `
-            Out-File -FilePath 'C:\OSDCloud\Logs\Get-AppxProvisionedPackage.txt' -Force -Encoding ascii
+            Write-DarkGrayHost 'Export Appx Provisioned Packages to C:\OSDCloud\Logs\Get-AppxProvisionedPackage.txt'
+            $Report = Get-AppxProvisionedPackage -Path C:\ -ErrorAction Ignore | Select-Object * | Sort-Object DisplayName
+            $Report | Select-Object DisplayName | Out-File -FilePath 'C:\OSDCloud\Logs\Get-AppxProvisionedPackage.txt' -Force -Encoding ascii
+        }
+
+        if (Get-Command Get-WindowsCapability) {
+            Write-DarkGrayHost 'Export Windows Capability to C:\OSDCloud\Logs\Get-WindowsCapability.txt'
+            $Report = Get-WindowsCapability -Path C:\ -ErrorAction Ignore | Select-Object * | Sort-Object Name
+            $Report | Select-Object Name, State | Out-File -FilePath 'C:\OSDCloud\Logs\Get-WindowsCapability.txt' -Force -Encoding ascii
+        }
+
+        if (Get-Command Get-WindowsEdition) {
+            Write-DarkGrayHost 'Export Windows Edition to C:\OSDCloud\Logs\Get-WindowsEdition.txt'
+            $Report = Get-WindowsEdition -Path C:\ -ErrorAction Ignore | Select-Object * | Sort-Object Edition
+            $Report | Select-Object Edition | Out-File -FilePath 'C:\OSDCloud\Logs\Get-WindowsEdition.txt' -Force -Encoding ascii
+        }
+
+        if (Get-Command Get-WindowsOptionalFeature) {
+            Write-DarkGrayHost 'Export Windows Optional Features to C:\OSDCloud\Logs\Get-WindowsOptionalFeature.txt'
+            $Report = Get-WindowsOptionalFeature -Path C:\ -ErrorAction Ignore | Select-Object * | Sort-Object FeatureName
+            $Report | Select-Object FeatureName, State | Out-File -FilePath 'C:\OSDCloud\Logs\Get-WindowsOptionalFeature.txt' -Force -Encoding ascii
+        }
+
+        if (Get-Command Get-WindowsPackage) {
+            Write-DarkGrayHost 'Export Windows Packages to C:\OSDCloud\Logs\Get-WindowsPackage.txt'
+            $Report = Get-WindowsPackage -Path C:\ -ErrorAction Ignore | Select-Object * | Sort-Object PackageName
+            $Report | Select-Object PackageName, PackageState, ReleaseType | Out-File -FilePath 'C:\OSDCloud\Logs\Get-WindowsPackage.txt' -Force -Encoding ascii
         }
     }
     #endregion
@@ -1680,7 +1709,7 @@ exit
             catch {
                 Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Unable to Save-Script Get-WindowsAutopilotInfo to $PowerShellSavePath\Scripts"
             }
-            if ($HPFeaturesEnabled){
+            if ($HPFeaturesEnabled) {
                 try {
                     Save-Module -Name HPCMSL -AcceptLicense -Path "$PowerShellSavePath\Modules" -Force -ErrorAction Stop
                 }
@@ -1695,7 +1724,9 @@ exit
             Copy-PSModuleToFolder -Name PackageManagement -Destination "$PowerShellSavePath\Modules"
             Copy-PSModuleToFolder -Name PowerShellGet -Destination "$PowerShellSavePath\Modules"
             Copy-PSModuleToFolder -Name WindowsAutopilotIntune -Destination "$PowerShellSavePath\Modules"
-            if ($HPFeaturesEnabled){Copy-PSModuleToFolder -Name HPCMSL -Destination "$PowerShellSavePath\Modules"}
+            if ($HPFeaturesEnabled) {
+                Copy-PSModuleToFolder -Name HPCMSL -Destination "$PowerShellSavePath\Modules"
+            }
             $OSDCloudOfflinePath = Find-OSDCloudOfflinePath
         
             foreach ($Item in $OSDCloudOfflinePath) {
@@ -1739,7 +1770,7 @@ exit
     }
     #endregion
     #=================================================
-    #region OSDCloud Azure Script
+    #region OSDCloud Azure Shutdown Scripts
     if ($Global:OSDCloud.AzOSDCloudScript) {
         Write-SectionHeader 'OSDCloud Azure Shutdown Scripts'
         foreach ($Item in $Global:OSDCloud.AzOSDCloudScript) {
@@ -1766,21 +1797,19 @@ exit
     }
     #endregion
     #=================================================
-    #region Deploy-OSDCloud Complete
+    #region OSDCloud Finished
+    Write-SectionHeader "OSDCloud Finished"
     $Global:OSDCloud.TimeEnd = Get-Date
     $Global:OSDCloud.TimeSpan = New-TimeSpan -Start $Global:OSDCloud.TimeStart -End $Global:OSDCloud.TimeEnd
-    
     $Global:OSDCloud | ConvertTo-Json | Out-File -FilePath 'C:\OSDCloud\Logs\OSDCloud.json' -Encoding ascii -Width 2000 -Force
-    Write-SectionHeader "OSDCloud Finished"
     Write-DarkGrayHost "Completed in $($Global:OSDCloud.TimeSpan.ToString("mm' minutes 'ss' seconds'"))"
-    #endregion
-    #=================================================
+
     if ($Global:OSDCloud.Screenshot) {
-        Start-Sleep 5
+        Start-Sleep -Seconds 5
         Stop-ScreenPNGProcess
         Write-DarkGrayHost "Screenshots: $($Global:OSDCloud.Screenshot)"
     }
-    #=================================================
+
     if ($Global:OSDCloud.Restart) {
         Write-Warning "WinPE is restarting in 30 seconds"
         Write-Warning "Press CTRL + C to cancel"
@@ -1789,7 +1818,7 @@ exit
             Restart-Computer
         }
     }
-    #=================================================
+
     if ($Global:OSDCloud.Shutdown) {
         Write-Warning "WinPE will shutdown in 30 seconds"
         Write-Warning "Press CTRL + C to cancel"
@@ -1798,11 +1827,10 @@ exit
             Stop-Computer
         }
     }
-    #=================================================
-    #	Stop-Transcript
-    #=================================================
+
     if ($OSDCloud.Test -eq $true) {
         Stop-Transcript
     }
+    #endregion
     #=================================================
 }
