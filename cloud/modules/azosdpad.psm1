@@ -54,7 +54,7 @@ function Get-AzOSDCloudScript {
             write-host -ForegroundColor Cyan "$($Global:AzOSDCloudStorageAccounts.StorageAccountName)"
             Write-Host -ForegroundColor DarkGray "========================================================================="
 
-            # return $Global:AzOSDCloudBlobScript
+             return $Global:AzOSDCloudBlobScript
         }
         else {
             Write-Warning 'Unable to find any Azure Storage Accounts'
@@ -72,10 +72,10 @@ function Start-AzOSDPAD {
     param ()
 
    # Connect to AzureAD Tennant 
-   # Connect-OSDcloudAzure
+   Connect-OSDcloudAzure
 
     # Get OSDCloud Scripts from Azure Storage Account with OSDScripts Tag
-   # Get-AzOSDCloudScript
+    Get-AzOSDCloudScript
 
     Write-Host -ForegroundColor DarkGray "========================================================================="
     Write-Host -ForegroundColor Green "Start-AzOSDPAD"
@@ -104,7 +104,7 @@ function Start-AzOSDPAD {
             New-Object -TypeName PSObject -Property $ObjectProperties
         }
 
-        $Results | Select-Object -Property Number, StorageAccount, Tag, Container, Blob, Location, ResourceGroup, URL | Format-Table | Out-Host
+        $Results | Select-Object -Property Number, StorageAccount, Tag, Container, Blob, Location, ResourceGroup, URL | Format-Table #| Out-Host
 
         $Global:AzOSDCloudGlobalScripts = $Results
         Write-Host -ForegroundColor DarkGray "========================================================================="
