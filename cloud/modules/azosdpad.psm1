@@ -17,6 +17,7 @@ function Get-AzOSDCloudScript {
     param ()
     Write-Host -ForegroundColor DarkGray "========================================================================="
     Write-Host -ForegroundColor Green "Get-AzOSDCloudScript"
+    Write-Host -ForegroundColor DarkGray "========================================================================="
 
     if ($Global:AzureAD -or $Global:MgGraph) {
         Write-Host -ForegroundColor DarkGray    'Storage Accounts:          $Global:AzStorageAccounts'
@@ -66,9 +67,16 @@ function Get-AzOSDCloudScript {
         Write-Warning 'You may need to execute Connect-OSDCloudAzure '
     }
 }
-function Start-AzOSDPADbeta {
+function Start-AzOSDPAD {
     [CmdletBinding()]
     param ()
+
+   # Connect to AzureAD Tennant 
+    Connect-OSDcloudAzure
+    
+    # Get OSDCloud Scripts from Azure Storage Account with OSDScripts Tag
+    Get-AzOSDCloudScript
+
     Write-Host -ForegroundColor DarkGray "========================================================================="
     Write-Host -ForegroundColor Green "Start-AzOSDPAD"
     Write-Host -ForegroundColor DarkGray "========================================================================="
@@ -98,7 +106,7 @@ function Start-AzOSDPADbeta {
 
         $Results | Select-Object -Property Number, StorageAccount, Tag, Container, Blob, Location, ResourceGroup, URL | Format-Table | Out-Host
 
-        $Global:AzOSDCloudGlobalScripts = $Results
+       # $Global:AzOSDCloudGlobalScripts = $Results
         Write-Host -ForegroundColor DarkGray "========================================================================="
         Write-Host -ForegroundColor Green "Start-AzOSDPad"
         Write-Host -ForegroundColor DarkGray "========================================================================="
