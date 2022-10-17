@@ -72,10 +72,10 @@ function Start-AzOSDPAD {
     param ()
 
    # Connect to AzureAD Tennant 
-    Connect-OSDcloudAzure
+   # Connect-OSDcloudAzure
 
     # Get OSDCloud Scripts from Azure Storage Account with OSDScripts Tag
-    Get-AzOSDCloudScript
+   # Get-AzOSDCloudScript
 
     Write-Host -ForegroundColor DarkGray "========================================================================="
     Write-Host -ForegroundColor Green "Start-AzOSDPAD"
@@ -108,7 +108,7 @@ function Start-AzOSDPAD {
 
         $Global:AzOSDCloudGlobalScripts = $Results
         Write-Host -ForegroundColor DarkGray "========================================================================="
-        Write-Host -ForegroundColor Green "Start-AzOSDPad"
+        Write-Host -ForegroundColor Green "Start-AzOSDPadGUI"
         Write-Host -ForegroundColor DarkGray "========================================================================="
         
         #wrong Path just for me
