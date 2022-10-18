@@ -1622,8 +1622,8 @@ exit
         Write-SectionHeader "Export Operating System Information"
 
         Write-DarkGrayHost 'Export WinPE PowerShell Commands to C:\OSDCloud\Logs\Get-CommandWinPE.txt'
-        $Report = Get-Command -ErrorAction Ignore | Select-Object * | Sort-Object ModuleName, Name, Version
-        $Report | Select-Object ModuleName, Name, Version | Where-Object {$_.ModuleName -gt 0} | Out-File -FilePath 'C:\OSDCloud\Logs\Get-CommandWinPE.txt' -Force -Encoding ascii
+        $Report = Get-Command -ErrorAction Ignore | Where-Object {($_.CommandType -eq 'Cmdlet') -or ($_.CommandType -eq 'Function')} | Where-Object {$_.ModuleName -gt 0} | Sort-Object ModuleName, Name, Version
+        $Report | Select-Object ModuleName, Name, Version | Out-File -FilePath 'C:\OSDCloud\Logs\Get-CommandWinPE.txt' -Force -Encoding ascii
 
         if (Get-Command Get-AppxProvisionedPackage) {
             Write-DarkGrayHost 'Export Appx Provisioned Packages to C:\OSDCloud\Logs\Get-AppxProvisionedPackage.txt'
