@@ -130,7 +130,7 @@ function Start-OSDCloud {
     #=================================================
     $Global:StartOSDCloud = $null
     $Global:StartOSDCloud = [ordered]@{
-        LaunchMethod = 'OSDCloudCL'
+        LaunchMethod = 'OSDCloudCLI'
         AutopilotJsonChildItem = $null
         AutopilotJsonItem = $null
         AutopilotJsonName = $null
