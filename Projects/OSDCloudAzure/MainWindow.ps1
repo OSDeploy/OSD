@@ -389,6 +389,7 @@ $formMainWindowControlStartButton.add_Click({
     #================================================
     $Global:StartOSDCloud = $null
     $Global:StartOSDCloud = [ordered]@{
+        LaunchMethod                = 'OSDCloudAzure'
         AzOSDCloudBlobAutopilotFile = $Global:AzOSDCloudBlobAutopilotFile
         AzOSDCloudBlobDriverPack    = $Global:AzOSDCloudBlobDriverPack
         AzOSDCloudBlobImage         = $Global:AzOSDCloudBlobImage

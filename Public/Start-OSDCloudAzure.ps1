@@ -23,31 +23,38 @@ function Start-OSDCloudAzure {
         $Force
     )
     if ($env:SystemDrive -eq 'X:') {
-        $PSModuleName = 'OSDCloudAzure'
-
-        if (-not (Get-Module -ListAvailable -Name $PSModuleName)) {
-            $InstalledModule = Get-InstalledModule $PSModuleName -ErrorAction Ignore | Select-Object -First 1
-            $GalleryPSModule = Find-Module -Name $PSModuleName -ErrorAction Ignore
-        
-            if ($InstalledModule) {
-                if (($GalleryPSModule.Version -as [version]) -gt ($InstalledModule.Version -as [version])) {
-                    Write-Host -ForegroundColor DarkGray "Update-Module $PSModuleName $($GalleryPSModule.Version) [AllUsers]"
-                    Update-Module -Name $PSModuleName -Scope AllUsers -Force -ErrorAction Stop
-                    Import-Module $PSModuleName -Force
-                }
-            }
-            else {
-                Write-Host -ForegroundColor DarkGray "Install-Module $PSModuleName $($GalleryPSModule.Version) [AllUsers]"
-                Install-Module $PSModuleName -Scope AllUsers -SkipPublisherCheck -Force -ErrorAction Stop
-            }
-        }
-        Import-Module $PSModuleName -Force
-
         if ($Force) {
             $Force = $false
             $Global:AzOSDCloudBlobImage = $null
         }
-        Initialize-OSDCloudAzure
+
+        $Transcript = "$((Get-Date).ToString('yyyy-MM-dd-HHmmss'))-OSDCloud.log"
+        $null = Start-Transcript -Path (Join-Path "$env:SystemRoot\Temp" $Transcript) -ErrorAction Ignore
+        Invoke-Expression -Command (Invoke-RestMethod -Uri functions.osdcloud.com)
+        osdcloud-StartWinPE -OSDCloud -Azure
+        Connect-OSDCloudAzure
+        Get-OSDCloudAzureResources
+        $null = Stop-Transcript -ErrorAction Ignore
+
+        if ($Global:AzOSDCloudBlobImage) {
+            Write-Host -ForegroundColor DarkGray '========================================================================='
+            Write-Host -ForegroundColor Green 'Start-OSDCloudAzure'
+            & "$($MyInvocation.MyCommand.Module.ModuleBase)\Projects\OSDCloudAzure\MainWindow.ps1"
+            Start-Sleep -Seconds 2
+    
+            if ($Global:StartOSDCloud.AzOSDCloudImage) {
+                Write-Host -ForegroundColor DarkGray '========================================================================='
+                Write-Host -ForegroundColor Green "Invoke-OSDCloud ... Starting in 5 seconds..."
+                Start-Sleep -Seconds 5
+                Invoke-OSDCloud
+            }
+            else {
+                Write-Warning "Unable to get a Windows Image from OSDCloudAzure to handoff to Invoke-OSDCloud"
+            }
+        }
+        else {
+            Write-Warning 'Unable to find resources to OSDCloudAzure'
+        }
     }
     else {
         Write-Warning "OSDCloudAzure must be run from WinPE"

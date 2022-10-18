@@ -15,6 +15,7 @@ function Invoke-OSDCloud {
     #region Master Parameters
     $Global:OSDCloud = $null
     $Global:OSDCloud = [ordered]@{
+        LaunchMethod = $null
         AutopilotJsonChildItem = $null
         AutopilotJsonItem = $null
         AutopilotJsonName = $null
@@ -149,6 +150,12 @@ function Invoke-OSDCloud {
         foreach ($Key in $Global:MyOSDCloud.Keys) {
             $Global:OSDCloud.$Key = $Global:MyOSDCloud.$Key
         }
+    }
+    #endregion
+    #=================================================
+    #region LaunchMethod
+    if ($Global:OSDCloud.LaunchMethod) {
+        $null = Install-Module -Name $Global:OSDCloud.LaunchMethod -Force -ErrorAction Ignore -WarningAction Ignore
     }
     #endregion
     #=================================================

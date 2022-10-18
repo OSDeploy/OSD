@@ -799,6 +799,7 @@ $formMainWindowControlStartButton.add_Click({
     #================================================
     $Global:StartOSDCloudGUI = $null
     $Global:StartOSDCloudGUI = [ordered]@{
+        LaunchMethod                = 'OSDCloudGUI'
         AutopilotJsonChildItem      = $AutopilotJsonChildItem
         AutopilotJsonItem           = $AutopilotJsonItem
         AutopilotJsonName           = $AutopilotJsonName
