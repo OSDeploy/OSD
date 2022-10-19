@@ -28,6 +28,7 @@ function Save-FeatureUpdate {
         [ValidateSet(
             'Windows 11 22H2',
             'Windows 11 21H2',
+            'Windows 10 22H2',
             'Windows 10 21H2',
             'Windows 10 21H1',
             'Windows 10 20H2',
@@ -114,6 +115,7 @@ function Save-FeatureUpdate {
         switch ($OSName) {
             'Windows 11 22H2'   {$Results = $Results | Where-Object {$_.UpdateOS -match 'Windows 11'} | Where-Object {$_.UpdateBuild -eq '22H2'}}
             'Windows 11 21H2'   {$Results = $Results | Where-Object {$_.UpdateOS -match 'Windows 11'} | Where-Object {$_.UpdateBuild -eq '21H2'}}
+            'Windows 10 22H2'   {$Results = $Results | Where-Object {$_.UpdateOS -match 'Windows 10'} | Where-Object {$_.UpdateBuild -eq '22H2'}}
             'Windows 10 21H2'   {$Results = $Results | Where-Object {$_.UpdateOS -match 'Windows 10'} | Where-Object {$_.UpdateBuild -eq '21H2'}}
             'Windows 10 21H1'   {$Results = $Results | Where-Object {$_.UpdateOS -match 'Windows 10'} | Where-Object {$_.UpdateBuild -eq '21H1'}}
             'Windows 10 20H2'   {$Results = $Results | Where-Object {$_.UpdateOS -match 'Windows 10'} | Where-Object {$_.UpdateBuild -eq '20H2'}}

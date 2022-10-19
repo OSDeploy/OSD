@@ -19,8 +19,7 @@ function Get-FeatureUpdate {
         [ValidateSet(
             'Windows 11 22H2 x64',
             'Windows 11 21H2 x64',
-            'Windows 10 22H2 x64 Insider Preview 19045.1826',
-            'Windows 10 22H2 x64 Insider Preview',
+            'Windows 10 22H2 x64',
             'Windows 10 21H2 x64',
             'Windows 10 21H1 x64',
             'Windows 10 20H2 x64',
@@ -39,7 +38,7 @@ function Get-FeatureUpdate {
         $OSVersion = 'Windows 11',
 
         #Operating System Build
-        #Default = 21H2
+        #Default = 22H2
         [Parameter(ParameterSetName = 'v1')]
         [ValidateSet('22H2','21H2','21H1','20H2','2004','1909','1903','1809')]
         [Alias('Build')]
