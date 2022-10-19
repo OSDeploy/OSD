@@ -1,8 +1,8 @@
 # PoSHPF - Version 1.2
 # Grab all resources (MahApps, etc), all XAML files, and any potential static resources
-$Global:resources = Get-ChildItem -Path "$PSScriptRoot\Resources\*.dll" -ErrorAction SilentlyContinue
+#$Global:resources = Get-ChildItem -Path "$PSScriptRoot\Resources\*.dll" -ErrorAction SilentlyContinue
 $Global:XAML = Get-ChildItem -Path "$PSScriptRoot\*.xaml" | Where-Object {$_.Name -ne 'App.xaml'} -ErrorAction SilentlyContinue #Changed path and exclude App.xaml
-$Global:MediaResources = Get-ChildItem -Path "$PSScriptRoot\Media" -ErrorAction SilentlyContinue
+#$Global:MediaResources = Get-ChildItem -Path "$PSScriptRoot\Media" -ErrorAction SilentlyContinue
 
 # This class allows the synchronized hashtable to be available across threads,
 # but also passes a couple of methods along with it to do GUI things via the
@@ -363,26 +363,43 @@ $formMainWindowControlStartButton.add_Click({
     $formMainWindow.Close()
     Show-PowershellWindow
     #================================================
-    #   AzOSDCloudImage
+    #   Set Selection
     #================================================
+    $Global:AzOSDCloudAutopilotFile = $Global:AzOSDCloudBlobAutopilotFile | `
+    Where-Object {$_.BlobClient.AccountName -eq $formMainWindowControlStorageAccountCombobox.SelectedValue} | `
+    Where-Object {($_.BlobClient.BlobContainerName -like "provision*") -or ($_.BlobClient.BlobContainerName -eq $formMainWindowControlContainerCombobox.SelectedValue)} | `
+    Select-Object -First 1
+
     $Global:AzOSDCloudImage = $Global:AzOSDCloudBlobImage | `
-        Where-Object {$_.Name -eq $formMainWindowControlBlobCombobox.SelectedValue} | `
-        Where-Object {$_.BlobClient.BlobContainerName -eq $formMainWindowControlContainerCombobox.SelectedValue} | `
-        Where-Object {$_.BlobClient.AccountName -eq $formMainWindowControlStorageAccountCombobox.SelectedValue}
+    Where-Object {$_.BlobClient.AccountName -eq $formMainWindowControlStorageAccountCombobox.SelectedValue} | `
+    Where-Object {$_.BlobClient.BlobContainerName -eq $formMainWindowControlContainerCombobox.SelectedValue} | `
+    Where-Object {$_.Name -eq $formMainWindowControlBlobCombobox.SelectedValue}
     $Global:AzOSDCloudImage | Select-Object * | Export-Clixml "$env:SystemDrive\AzOSDCloudImage.xml"
     $Global:AzOSDCloudImage | Select-Object * | ConvertTo-Json | Out-File "$env:SystemDrive\AzOSDCloudImage.json" -Encoding ascii -Width 2000 -Force
+
+    $Global:AzOSDCloudPackage = $Global:AzOSDCloudBlobPackage | `
+    Where-Object {$_.BlobClient.AccountName -eq $formMainWindowControlStorageAccountCombobox.SelectedValue} | `
+    Where-Object {($_.BlobClient.BlobContainerName -like "provision*") -or ($_.BlobClient.BlobContainerName -eq $formMainWindowControlContainerCombobox.SelectedValue)}
+
+    $Global:AzOSDCloudScript = $Global:AzOSDCloudBlobScript | `
+    Where-Object {$_.BlobClient.AccountName -eq $formMainWindowControlStorageAccountCombobox.SelectedValue} | `
+    Where-Object {($_.BlobClient.BlobContainerName -like "provision*") -or ($_.BlobClient.BlobContainerName -eq $formMainWindowControlContainerCombobox.SelectedValue)}
     #================================================
     #   Global Variables
     #================================================
     $Global:StartOSDCloud = $null
     $Global:StartOSDCloud = [ordered]@{
-        AzOSDCloudBlobImage         = $Global:AzOSDCloudBlobImage
+        LaunchMethod                = 'OSDCloudAzure'
+        AzOSDCloudBlobAutopilotFile = $Global:AzOSDCloudBlobAutopilotFile
         AzOSDCloudBlobDriverPack    = $Global:AzOSDCloudBlobDriverPack
+        AzOSDCloudBlobImage         = $Global:AzOSDCloudBlobImage
         AzOSDCloudBlobPackage       = $Global:AzOSDCloudBlobPackage
         AzOSDCloudBlobScript        = $Global:AzOSDCloudBlobScript
+        AzOSDCloudAutopilotFile     = $Global:AzOSDCloudAutopilotFile
+        AzOSDCloudDriverPack        = $Global:AzOSDCloudBlobDriverPack
         AzOSDCloudImage             = $Global:AzOSDCloudImage
-        AzOSDCloudPackage           = $Global:AzOSDCloudBlobPackage | Where-Object {($_.BlobClient.BlobContainerName -eq 'bin') -or ($_.BlobClient.BlobContainerName -eq $formMainWindowControlContainerCombobox.SelectedValue)}
-        AzOSDCloudScript            = $Global:AzOSDCloudBlobScript | Where-Object {($_.BlobClient.BlobContainerName -eq 'bin') -or ($_.BlobClient.BlobContainerName -eq $formMainWindowControlContainerCombobox.SelectedValue)}
+        AzOSDCloudPackage           = $Global:AzOSDCloudPackage
+        AzOSDCloudScript            = $Global:AzOSDCloudScript
         DriverPackName              = $formMainWindowControlDriverPackCombobox.Text
         MSCatalogDiskDrivers        = $formMainWindowControlMSCatalogDiskDrivers.IsChecked
         MSCatalogNetDrivers         = $formMainWindowControlMSCatalogNetDrivers.IsChecked

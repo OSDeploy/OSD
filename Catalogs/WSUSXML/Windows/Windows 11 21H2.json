@@ -1,7 +1,7 @@
 [
     {
         "Catalog":  "Windows 11 21H2",
-        "OSDVersion":  "22.10.11.1",
+        "OSDVersion":  "22.10.18.1",
         "OSDStatus":  "",
         "UpdateOS":  "Windows 11",
         "UpdateBuild":  "21H2",
@@ -47,13 +47,13 @@
         "AdditionalHash":  "212 165 196 121 65 25 31 164 166 139 135 231 8 197 23 30 112 66 238 9 198 176 128 117 223 124 191 220 107 185 195 108",
         "OSDCore":  "",
         "OSDWinPE":  "",
-        "OSDGuid":  "c17c237e-9485-462c-b555-daece7785083",
+        "OSDGuid":  "f0f3ab71-7a6f-4f43-a394-c1ad0498b375",
         "PartitionKey":  "Windows 11 21H2",
-        "RowKey":  "c17c237e-9485-462c-b555-daece7785083"
+        "RowKey":  "f0f3ab71-7a6f-4f43-a394-c1ad0498b375"
     },
     {
         "Catalog":  "Windows 11 21H2",
-        "OSDVersion":  "22.10.11.1",
+        "OSDVersion":  "22.10.18.1",
         "OSDStatus":  "",
         "UpdateOS":  "Windows 11",
         "UpdateBuild":  "21H2",
@@ -99,13 +99,13 @@
         "AdditionalHash":  "11 39 162 164 1 224 204 33 148 153 195 89 164 13 173 56 248 203 238 42 125 125 218 187 226 171 16 52 46 197 70 157",
         "OSDCore":  "",
         "OSDWinPE":  "",
-        "OSDGuid":  "0fd17833-ac49-424c-a92d-a5e2b1f1fdd4",
+        "OSDGuid":  "f27cab6f-4524-4940-985e-6629578d90af",
         "PartitionKey":  "Windows 11 21H2",
-        "RowKey":  "0fd17833-ac49-424c-a92d-a5e2b1f1fdd4"
+        "RowKey":  "f27cab6f-4524-4940-985e-6629578d90af"
     },
     {
         "Catalog":  "Windows 11 21H2",
-        "OSDVersion":  "22.10.11.1",
+        "OSDVersion":  "22.10.18.1",
         "OSDStatus":  "",
         "UpdateOS":  "Windows 11",
         "UpdateBuild":  "21H2",
@@ -151,13 +151,13 @@
         "AdditionalHash":  "104 208 119 137 193 153 252 175 225 133 14 121 178 99 11 70 187 1 49 227 143 249 100 83 41 58 0 209 64 26 28 228",
         "OSDCore":  "",
         "OSDWinPE":  "",
-        "OSDGuid":  "b82c3ecc-4737-42d3-a724-086155791ee3",
+        "OSDGuid":  "3c5634a3-7e06-49e6-bfcb-1784a9c4c7e3",
         "PartitionKey":  "Windows 11 21H2",
-        "RowKey":  "b82c3ecc-4737-42d3-a724-086155791ee3"
+        "RowKey":  "3c5634a3-7e06-49e6-bfcb-1784a9c4c7e3"
     },
     {
         "Catalog":  "Windows 11 21H2",
-        "OSDVersion":  "22.10.11.1",
+        "OSDVersion":  "22.10.18.1",
         "OSDStatus":  "",
         "UpdateOS":  "Windows 11",
         "UpdateBuild":  "21H2",
@@ -203,8 +203,8 @@
         "AdditionalHash":  "220 73 207 214 34 185 195 67 243 103 131 108 67 233 130 207 123 222 192 204 91 18 225 250 248 106 98 235 74 102 212 42",
         "OSDCore":  "",
         "OSDWinPE":  "",
-        "OSDGuid":  "85c26ac2-a3bc-4443-911f-900fb23dba29",
+        "OSDGuid":  "f701a31e-48be-4de4-949d-c25f6b12c971",
         "PartitionKey":  "Windows 11 21H2",
-        "RowKey":  "85c26ac2-a3bc-4443-911f-900fb23dba29"
+        "RowKey":  "f701a31e-48be-4de4-949d-c25f6b12c971"
     }
 ]

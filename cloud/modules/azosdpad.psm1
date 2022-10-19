@@ -17,6 +17,7 @@ function Get-AzOSDCloudScript {
     param ()
     Write-Host -ForegroundColor DarkGray "========================================================================="
     Write-Host -ForegroundColor Green "Get-AzOSDCloudScript"
+    Write-Host -ForegroundColor DarkGray "========================================================================="
 
     if ($Global:AzureAD -or $Global:MgGraph) {
         Write-Host -ForegroundColor DarkGray    'Storage Accounts:          $Global:AzStorageAccounts'
@@ -53,7 +54,7 @@ function Get-AzOSDCloudScript {
             write-host -ForegroundColor Cyan "$($Global:AzOSDCloudStorageAccounts.StorageAccountName)"
             Write-Host -ForegroundColor DarkGray "========================================================================="
 
-            # return $Global:AzOSDCloudBlobScript
+             return $Global:AzOSDCloudBlobScript
         }
         else {
             Write-Warning 'Unable to find any Azure Storage Accounts'
@@ -66,9 +67,16 @@ function Get-AzOSDCloudScript {
         Write-Warning 'You may need to execute Connect-OSDCloudAzure '
     }
 }
-function Start-AzOSDPADbeta {
+function Start-AzOSDPAD {
     [CmdletBinding()]
     param ()
+
+   # Connect to AzureAD Tennant 
+   Connect-OSDcloudAzure
+
+    # Get OSDCloud Scripts from Azure Storage Account with OSDScripts Tag
+    Get-AzOSDCloudScript
+
     Write-Host -ForegroundColor DarkGray "========================================================================="
     Write-Host -ForegroundColor Green "Start-AzOSDPAD"
     Write-Host -ForegroundColor DarkGray "========================================================================="
@@ -96,16 +104,18 @@ function Start-AzOSDPADbeta {
             New-Object -TypeName PSObject -Property $ObjectProperties
         }
 
-        $Results | Select-Object -Property Number, StorageAccount, Tag, Container, Blob, Location, ResourceGroup, URL | Format-Table | Out-Host
+        $Results | Select-Object -Property Number, StorageAccount, Tag, Container, Blob, Location, ResourceGroup, URL | Format-Table #| Out-Host
 
         $Global:AzOSDCloudGlobalScripts = $Results
         Write-Host -ForegroundColor DarkGray "========================================================================="
-        Write-Host -ForegroundColor Green "Start-AzOSDPad"
+        Write-Host -ForegroundColor Green "Start-AzOSDPadGUI"
         Write-Host -ForegroundColor DarkGray "========================================================================="
-        & "C:\Users\$env:username\Documents\github\OSD\\Projects\azosdpad.ps1" 
-        Start-Sleep -Seconds 2
+        
+        #wrong Path just for me
+        & "C:\Users\$env:username\Documents\github\OSD\\Projects\azosdpadnew.ps1" 
+        # & "$($MyInvocation.MyCommand.Module.ModuleBase)\Projects\azosdpad.ps1"
+         Start-Sleep -Seconds 2
 
-        # & "$($MyInvocation.MyCommand.Module.ModuleBase)\Projects\AzOSDCloudGUI\MainWindow.ps1"
 
     }
     else {

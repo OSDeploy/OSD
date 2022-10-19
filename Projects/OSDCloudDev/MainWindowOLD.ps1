@@ -453,7 +453,7 @@ function SetDefaultWin10 {
     }
     
     $formMainWindowControlOperatingSystemCombobox.SelectedIndex = 0 #Windows 10
-    $formMainWindowControlOSBuildCombobox.SelectedIndex = 0      #21H2
+    $formMainWindowControlOSBuildCombobox.SelectedIndex = 0      #22H2
     $formMainWindowControlOSLanguageCombobox.SelectedIndex = 7   #en-us
     $formMainWindowControlOSEditionCombobox.SelectedIndex = 5    #Enterprise
     $formMainWindowControlOSLicenseCombobox.SelectedIndex = 1    #Volume
@@ -480,9 +480,9 @@ function SetDefaultWin11 {
     $formMainWindowControlOperatingSystemCombobox.SelectedIndex = 1 #Windows 11
 
     $formMainWindowControlOSBuildCombobox.Items.Clear()
-    $formMainWindowControlOSBuildCombobox.Items.Add("21H2") | Out-Null
+    $formMainWindowControlOSBuildCombobox.Items.Add("22H2") | Out-Null
     
-    $formMainWindowControlOSBuildCombobox.SelectedIndex = 0      #21H2
+    $formMainWindowControlOSBuildCombobox.SelectedIndex = 0      #22H2
     $formMainWindowControlOSLanguageCombobox.SelectedIndex = 7   #en-us
     $formMainWindowControlOSEditionCombobox.SelectedIndex = 5    #Enterprise
     $formMainWindowControlOSLicenseCombobox.SelectedIndex = 1    #Volume

@@ -10,7 +10,7 @@ function Edit-OSDCloudWinPE {
     Edit-OSDCloudWinPE -StartOSDCloudGUI
 
     .EXAMPLE
-    Edit-OSDCloudWinPE -StartOSDCloud '-OSBuild 21H2 -OSEdition Pro -OSLanguage en-us -OSLicense Retail'
+    Edit-OSDCloudWinPE -StartOSDCloud '-OSBuild 22H2 -OSEdition Pro -OSLanguage en-us -OSLicense Retail'
 
     .EXAMPLE
     Edit-OSDCloudWinPE –StartURL 'https://sandbox.osdcloud.com'
@@ -2093,11 +2093,11 @@ function Update-OSDCloudUSB {
 
         #Optional. Selects an Operating System to download
         #If this parameter is not used, any Operating Systems can be downloaded
-        #'Windows 11 21H2','Windows 10 21H2','Windows 10 21H1','Windows 10 20H2','Windows 10 2004','Windows 10 1909','Windows 10 1903','Windows 10 1809'
+        #'Windows 11 22H2','Windows 11 21H2','Windows 10 22H2','Windows 10 21H2','Windows 10 21H1','Windows 10 20H2','Windows 10 2004','Windows 10 1909','Windows 10 1903','Windows 10 1809'
         [ValidateSet(
-            'Windows 11 21H2',
-            'Windows 10 21H2','Windows 10 21H1','Windows 10 20H2','Windows 10 2004',
-            'Windows 10 1909','Windows 10 1903',
+            'Windows 11 22H2','Windows 11 21H2',
+            'Windows 10 22H2','Windows 10 21H2','Windows 10 21H1','Windows 10 20H2','Windows 10 2004',
+            'Windows 10 1909H','Windows 10 1903',
             'Windows 10 1809'
             )]
         [System.String]$OSName
@@ -2514,7 +2514,7 @@ function Update-OSDCloudUSB {
     Write-Host -ForegroundColor DarkGray "========================================================================="
     Write-Host -ForegroundColor Yellow "Download an Operating System to OSDCloud USB:"
     Write-Host -ForegroundColor Gray "Update-OSDCloudUSB -OS"
-    Write-Host -ForegroundColor Gray "Update-OSDCloudUSB -OSName 'Windows 11 21H2'"
+    Write-Host -ForegroundColor Gray "Update-OSDCloudUSB -OSName 'Windows 11 22H2'"
     Write-Host -ForegroundColor Gray "Update-OSDCloudUSB -OSLanguage en-us"
     Write-Host -ForegroundColor Gray "Update-OSDCloudUSB -OSLicense Volume"
     Write-Host -ForegroundColor Gray "Update-OSDCloudUSB -OSName 'Windows 10 21H2' -OSLanguage en-us"

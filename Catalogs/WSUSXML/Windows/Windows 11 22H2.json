@@ -1,7 +1,7 @@
 [
     {
         "Catalog":  "Windows 11 22H2",
-        "OSDVersion":  "22.10.11.1",
+        "OSDVersion":  "22.10.18.1",
         "OSDStatus":  "",
         "UpdateOS":  "Windows 11",
         "UpdateBuild":  "22H2",
@@ -47,13 +47,13 @@
         "AdditionalHash":  "166 106 32 239 158 70 248 145 49 41 7 87 245 17 54 12 16 54 226 173 174 129 150 55 18 146 46 195 48 68 252 208",
         "OSDCore":  "",
         "OSDWinPE":  "",
-        "OSDGuid":  "40a5e756-b83b-4c2d-8e3b-8b2fb6c5d269",
+        "OSDGuid":  "24994efa-992a-462c-b3fa-ce80becb1656",
         "PartitionKey":  "Windows 11 22H2",
-        "RowKey":  "40a5e756-b83b-4c2d-8e3b-8b2fb6c5d269"
+        "RowKey":  "24994efa-992a-462c-b3fa-ce80becb1656"
     },
     {
         "Catalog":  "Windows 11 22H2",
-        "OSDVersion":  "22.10.11.1",
+        "OSDVersion":  "22.10.18.1",
         "OSDStatus":  "",
         "UpdateOS":  "Windows 11",
         "UpdateBuild":  "22H2",
@@ -99,13 +99,13 @@
         "AdditionalHash":  "127 106 226 234 188 168 63 41 53 75 170 221 239 112 217 229 26 23 151 152 99 208 63 103 64 49 16 67 65 107 53 30",
         "OSDCore":  "",
         "OSDWinPE":  "",
-        "OSDGuid":  "82464e01-d6d5-4600-a818-d2d2ad274e14",
+        "OSDGuid":  "b50f5ae9-7791-4a25-a757-c6dc75c7ed93",
         "PartitionKey":  "Windows 11 22H2",
-        "RowKey":  "82464e01-d6d5-4600-a818-d2d2ad274e14"
+        "RowKey":  "b50f5ae9-7791-4a25-a757-c6dc75c7ed93"
     },
     {
         "Catalog":  "Windows 11 22H2",
-        "OSDVersion":  "22.10.11.1",
+        "OSDVersion":  "22.10.18.1",
         "OSDStatus":  "",
         "UpdateOS":  "Windows 11",
         "UpdateBuild":  "22H2",
@@ -151,13 +151,13 @@
         "AdditionalHash":  "104 208 119 137 193 153 252 175 225 133 14 121 178 99 11 70 187 1 49 227 143 249 100 83 41 58 0 209 64 26 28 228",
         "OSDCore":  "",
         "OSDWinPE":  "",
-        "OSDGuid":  "edd1e002-a6e2-40b7-997e-1643390a1715",
+        "OSDGuid":  "7fd64a58-a6ed-4c60-aa72-73a88102ee22",
         "PartitionKey":  "Windows 11 22H2",
-        "RowKey":  "edd1e002-a6e2-40b7-997e-1643390a1715"
+        "RowKey":  "7fd64a58-a6ed-4c60-aa72-73a88102ee22"
     },
     {
         "Catalog":  "Windows 11 22H2",
-        "OSDVersion":  "22.10.11.1",
+        "OSDVersion":  "22.10.18.1",
         "OSDStatus":  "",
         "UpdateOS":  "Windows 11",
         "UpdateBuild":  "22H2",
@@ -203,13 +203,13 @@
         "AdditionalHash":  "11 39 162 164 1 224 204 33 148 153 195 89 164 13 173 56 248 203 238 42 125 125 218 187 226 171 16 52 46 197 70 157",
         "OSDCore":  "",
         "OSDWinPE":  "",
-        "OSDGuid":  "3ffdf693-5640-43f9-9ca0-4f16bbf6da93",
+        "OSDGuid":  "0b2d156f-bca4-497b-b2dc-88c1d91db95c",
         "PartitionKey":  "Windows 11 22H2",
-        "RowKey":  "3ffdf693-5640-43f9-9ca0-4f16bbf6da93"
+        "RowKey":  "0b2d156f-bca4-497b-b2dc-88c1d91db95c"
     },
     {
         "Catalog":  "Windows 11 22H2",
-        "OSDVersion":  "22.10.11.1",
+        "OSDVersion":  "22.10.18.1",
         "OSDStatus":  "",
         "UpdateOS":  "Windows 11",
         "UpdateBuild":  "22H2",
@@ -255,8 +255,8 @@
         "AdditionalHash":  "220 144 196 97 219 214 211 22 167 97 216 220 7 23 228 17 247 197 211 45 196 206 158 223 18 144 98 237 58 71 88 192",
         "OSDCore":  "",
         "OSDWinPE":  "",
-        "OSDGuid":  "d2f062f0-f8af-42d3-9715-2c4212517d51",
+        "OSDGuid":  "70211dfe-5b76-45f5-8dfd-0d243cfcdbc6",
         "PartitionKey":  "Windows 11 22H2",
-        "RowKey":  "d2f062f0-f8af-42d3-9715-2c4212517d51"
+        "RowKey":  "70211dfe-5b76-45f5-8dfd-0d243cfcdbc6"
     }
 ]
