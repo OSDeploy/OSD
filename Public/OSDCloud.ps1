@@ -1545,7 +1545,7 @@ function Invoke-OSDCloud {
     #endregion
     #=================================================
     #region Set OOBE EULA
-    Write-Verbose "Set SetupDisplayedEula Registry for TPM"
+    Write-SectionHeader "Set SetupDisplayedEula Registry for TPM"
     Invoke-Exe reg load HKLM\TempSOFTWARE "C:\Windows\System32\Config\SOFTWARE"
     Invoke-Exe reg add HKLM\TempSOFTWARE\Microsoft\Windows\CurrentVersion\Setup\OOBE /v SetupDisplayedEula /t REG_DWORD /d 0x00000001 /f
     Invoke-Exe reg unload HKLM\TempSOFTWARE
