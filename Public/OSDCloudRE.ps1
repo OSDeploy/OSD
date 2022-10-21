@@ -151,7 +151,12 @@ function Invoke-OSDCloudRE {
             }
             else {
                 Write-Host -ForegroundColor DarkGray "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Existing file does not match Azure Storage, downloading updated file"
-                Get-AzStorageBlobContent @GetAzStorageBlobContentParam -ErrorAction Stop
+                try {
+                    Get-AzStorageBlobContent @GetAzStorageBlobContentParam -ErrorAction Stop
+                }
+                catch {
+                    Get-AzStorageBlobContent @GetAzStorageBlobContentParam -ErrorAction Stop
+                }
             }
         }
         else {
@@ -159,7 +164,12 @@ function Invoke-OSDCloudRE {
                 Write-Host -ForegroundColor DarkGray "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Creating directory $($Global:OSDCloudRE.DownloadDirectory)"
                 $null = New-Item @NewItemParam -ErrorAction Ignore
             }
-            Get-AzStorageBlobContent @GetAzStorageBlobContentParam -ErrorAction Stop
+            try {
+                Get-AzStorageBlobContent @GetAzStorageBlobContentParam -ErrorAction Stop
+            }
+            catch {
+                Get-AzStorageBlobContent @GetAzStorageBlobContentParam -ErrorAction Stop
+            }
         }
 
         $Global:OSDCloudRE.BootImage = Get-Item -Path $Global:OSDCloudRE.DownloadFullName -ErrorAction Stop | Select-Object -First 1 | Select-Object -First 1
