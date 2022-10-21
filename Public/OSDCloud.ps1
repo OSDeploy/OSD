@@ -1069,7 +1069,6 @@ function Invoke-OSDCloud {
             Write-DarkGrayHost 'Adding Provisioning Packages from C:\OSDCloud\Packages'
             foreach ($Item in $Packages) {
                 Write-DarkGrayHost "$($Item.FullName)"
-                $Dism = "dism.exe"
                 $ArgumentList = "/Image=C:\ /Add-ProvisioningPackage /PackagePath:`"$($Item.FullName)`""
                 $null = Start-Process -FilePath 'dism.exe' -ArgumentList $ArgumentList -Wait -NoNewWindow
             }
@@ -1543,6 +1542,13 @@ function Invoke-OSDCloud {
             }
         }
     }
+    #endregion
+    #=================================================
+    #region Set OOBE EULA
+    Write-Verbose "Set SetupDisplayedEula Registry for TPM"
+    Invoke-Exe reg load HKLM\TempSOFTWARE "C:\Windows\System32\Config\SOFTWARE"
+    Invoke-Exe reg add HKLM\TempSOFTWARE\Microsoft\Windows\CurrentVersion\Setup\OOBE /v SetupDisplayedEula /t REG_DWORD /d 0x00000001 /f
+    Invoke-Exe reg unload HKLM\TempSOFTWARE
     #endregion
     #=================================================
     #region OSDeploy.OOBEDeploy.json
