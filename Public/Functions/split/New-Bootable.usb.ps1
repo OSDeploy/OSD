@@ -80,6 +80,11 @@ function New-Bootable.usb {
         Write-Verbose '$GetUSBDisk | Initialize-Disk -PartitionStyle MBR'
         $GetUSBDisk | Initialize-Disk -PartitionStyle MBR -ErrorAction Stop
     }
+    
+    if ($GetUSBDisk.PartitionStyle -eq 'GPT') {
+        Write-Verbose '$GetUSBDisk | Set-Disk -PartitionStyle MBR'
+        $GetUSBDisk | Set-Disk -PartitionStyle MBR -ErrorAction Stop
+    }
 
     if ($GetUSBDisk.SizeGB -le 2000) {
         Write-Verbose '$DataDisk = $GetUSBDisk | New-Partition -Size ($GetUSBDisk.Size - 2GB) -AssignDriveLetter | Format-Volume -FileSystem NTFS -NewFileSystemLabel $DataLabel'
