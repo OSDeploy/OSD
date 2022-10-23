@@ -4,7 +4,7 @@
 
 @{
     RootModule              = 'OSD.psm1'
-    ModuleVersion           = '22.10.21.1'
+    ModuleVersion           = '22.10.23.2'
     CompatiblePSEditions    = @('Desktop')
     GUID                    = '9fe5b9b6-0224-4d87-9018-a8978529f6f5'
     Author                  = 'David Segura . Damien Van Robaeys . Gary Blok . Jérôme Bezet-Torres . Mike Marable . Dean Ellerby . Doug McGee'
@@ -62,6 +62,8 @@
         'Find-TextInModule',
         'Get-AdkPaths',
         'Get-AzClipboard',
+        'Get-AzOSDCloud',
+        'Get-AzOSDTechId',
         'Get-CatalogDellApplication',
         'Get-CatalogDellBios',
         'Get-CatalogDellDriver',
@@ -166,7 +168,9 @@
         'Get-WinREWiFi',
         'Get-WindowsOEMProductKey',
         'Initialize-OSDCloudStartnet',
+        'Install-AzOSDIacTools',
         'Install-SystemFirmwareUpdate',
+        'Invoke-AzOSDAzureConfig',
         'Invoke-CloudSecret',
         'Invoke-Exe',
         'Invoke-MSCatalogParseDate',
