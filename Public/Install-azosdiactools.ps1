@@ -1,4 +1,4 @@
-function Install-azOSDIacTools {
+function Install-AzOSDIacTools {
     [CmdletBinding()]
     param (
         

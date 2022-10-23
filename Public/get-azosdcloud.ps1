@@ -1,4 +1,4 @@
-function get-AzOSDCloud {
+function Get-AzOSDCloud {
     [CmdletBinding()]
     param (
         [switch]$edit

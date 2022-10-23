@@ -1,4 +1,4 @@
-function get-azOSDTechId {
+function Get-AzOSDTechId {
     [CmdletBinding()]
     param (
         [Parameter(Mandatory=$true, Position=0)]

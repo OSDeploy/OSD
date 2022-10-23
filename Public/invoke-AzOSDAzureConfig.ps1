@@ -1,4 +1,4 @@
-function invoke-AzOSDAzureConfig {
+function Invoke-AzOSDAzureConfig {
     [CmdletBinding()]
     param (
        [Parameter(ParameterSetName = 'Bicep')]
