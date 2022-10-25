@@ -1,21 +1,21 @@
 ﻿**********************
 Windows PowerShell transcript start
-Start time: 20221010144218
+Start time: 20221024222532
 Username: OSDCODE\david
 RunAs User: OSDCODE\david
 Configuration Name: 
 Machine: OSDCODE (Microsoft Windows NT 10.0.22621.0)
-Host Application: C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe -NoProfile -ExecutionPolicy Bypass -Command Import-Module 'c:\Users\david\.vscode\extensions\ms-vscode.powershell-preview-2022.10.0\modules\PowerShellEditorServices\PowerShellEditorServices.psd1'; Start-EditorServices -HostName 'Visual Studio Code Host' -HostProfileId 'Microsoft.VSCode' -HostVersion '2022.10.0' -AdditionalModules @('PowerShellEditorServices.VSCode') -BundledModulesPath 'c:\Users\david\.vscode\extensions\ms-vscode.powershell-preview-2022.10.0\modules' -EnableConsoleRepl -StartupBanner "PowerShell Preview Extension v2022.10.0
+Host Application: C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe -NoProfile -ExecutionPolicy Bypass -Command Import-Module 'c:\Users\david\.vscode\extensions\ms-vscode.powershell-preview-2022.10.1\modules\PowerShellEditorServices\PowerShellEditorServices.psd1'; Start-EditorServices -HostName 'Visual Studio Code Host' -HostProfileId 'Microsoft.VSCode' -HostVersion '2022.10.1' -AdditionalModules @('PowerShellEditorServices.VSCode') -BundledModulesPath 'c:\Users\david\.vscode\extensions\ms-vscode.powershell-preview-2022.10.1\modules' -EnableConsoleRepl -StartupBanner "PowerShell Preview Extension v2022.10.1
 Copyright (c) Microsoft Corporation.
 
 https://aka.ms/vscode-powershell
 Type 'help' to get help.
-" -LogLevel 'Normal' -LogPath 'c:\Users\david\AppData\Roaming\Code\User\globalStorage\ms-vscode.powershell-preview\logs\1665412466-bd0bd431-505a-44ea-8122-2ceafe74f7841665412464899\EditorServices.log' -SessionDetailsPath 'c:\Users\david\AppData\Roaming\Code\User\globalStorage\ms-vscode.powershell-preview\sessions\PSES-VSCode-20568-690405.json' -FeatureFlags @() 
-Process ID: 21276
-PSVersion: 5.1.22621.169
+" -LogLevel 'Normal' -LogPath 'c:\Users\david\AppData\Roaming\Code\User\globalStorage\ms-vscode.powershell-preview\logs\1666667951-f926bcf0-7008-4d52-bbf8-3df837fc7a5d1666667949885\EditorServices.log' -SessionDetailsPath 'c:\Users\david\AppData\Roaming\Code\User\globalStorage\ms-vscode.powershell-preview\sessions\PSES-VSCode-12560-499007.json' -FeatureFlags @() 
+Process ID: 14764
+PSVersion: 5.1.22621.608
 PSEdition: Desktop
-PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1.22621.169
-BuildVersion: 10.0.22621.169
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1.22621.608
+BuildVersion: 10.0.22621.608
 CLRVersion: 4.0.30319.42000
 WSManStackVersion: 3.0
 PSRemotingProtocolVersion: 2.3
@@ -216,7 +216,8 @@ VERBOSE: HEAD with 0-byte payload
 VERBOSE: received 1245164136-byte response of content type application/octet-stream
 VERBOSE: Testing Download File at https://download.lenovo.com/pccbbs/mobiles/tp_p16g1_mt21d6-21d7_w10_21h1_21h2_sccm.exe
 VERBOSE: HEAD with 0-byte payload
-VERBOSE: received 1983296264-byte response of content type application/octet-stream
+>> TerminatingError(Invoke-WebRequest): "The remote server returned an error: (404) Not Found."
+WARNING: Failed: https://download.lenovo.com/pccbbs/mobiles/tp_p16g1_mt21d6-21d7_w10_21h1_21h2_sccm.exe
 VERBOSE: Testing Download File at https://download.lenovo.com/pccbbs/mobiles/tp_p50-p70_w1064_1909_201911.exe
 VERBOSE: HEAD with 0-byte payload
 VERBOSE: received 2001727648-byte response of content type application/octet-stream
@@ -706,5 +707,5 @@ VERBOSE: received 2079291016-byte response of content type application/octet-str
 VERBOSE: Exporting Build Catalog to C:\Users\david\AppData\Local\Temp\OSD\OSDCatalogLenovoDriverPack.xml
 **********************
 Windows PowerShell transcript end
-End time: 20221010144943
+End time: 20221024223210
 **********************

@@ -1,21 +1,21 @@
 ﻿**********************
 Windows PowerShell transcript start
-Start time: 20221010144943
+Start time: 20221024223211
 Username: OSDCODE\david
 RunAs User: OSDCODE\david
 Configuration Name: 
 Machine: OSDCODE (Microsoft Windows NT 10.0.22621.0)
-Host Application: C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe -NoProfile -ExecutionPolicy Bypass -Command Import-Module 'c:\Users\david\.vscode\extensions\ms-vscode.powershell-preview-2022.10.0\modules\PowerShellEditorServices\PowerShellEditorServices.psd1'; Start-EditorServices -HostName 'Visual Studio Code Host' -HostProfileId 'Microsoft.VSCode' -HostVersion '2022.10.0' -AdditionalModules @('PowerShellEditorServices.VSCode') -BundledModulesPath 'c:\Users\david\.vscode\extensions\ms-vscode.powershell-preview-2022.10.0\modules' -EnableConsoleRepl -StartupBanner "PowerShell Preview Extension v2022.10.0
+Host Application: C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe -NoProfile -ExecutionPolicy Bypass -Command Import-Module 'c:\Users\david\.vscode\extensions\ms-vscode.powershell-preview-2022.10.1\modules\PowerShellEditorServices\PowerShellEditorServices.psd1'; Start-EditorServices -HostName 'Visual Studio Code Host' -HostProfileId 'Microsoft.VSCode' -HostVersion '2022.10.1' -AdditionalModules @('PowerShellEditorServices.VSCode') -BundledModulesPath 'c:\Users\david\.vscode\extensions\ms-vscode.powershell-preview-2022.10.1\modules' -EnableConsoleRepl -StartupBanner "PowerShell Preview Extension v2022.10.1
 Copyright (c) Microsoft Corporation.
 
 https://aka.ms/vscode-powershell
 Type 'help' to get help.
-" -LogLevel 'Normal' -LogPath 'c:\Users\david\AppData\Roaming\Code\User\globalStorage\ms-vscode.powershell-preview\logs\1665412466-bd0bd431-505a-44ea-8122-2ceafe74f7841665412464899\EditorServices.log' -SessionDetailsPath 'c:\Users\david\AppData\Roaming\Code\User\globalStorage\ms-vscode.powershell-preview\sessions\PSES-VSCode-20568-690405.json' -FeatureFlags @() 
-Process ID: 21276
-PSVersion: 5.1.22621.169
+" -LogLevel 'Normal' -LogPath 'c:\Users\david\AppData\Roaming\Code\User\globalStorage\ms-vscode.powershell-preview\logs\1666667951-f926bcf0-7008-4d52-bbf8-3df837fc7a5d1666667949885\EditorServices.log' -SessionDetailsPath 'c:\Users\david\AppData\Roaming\Code\User\globalStorage\ms-vscode.powershell-preview\sessions\PSES-VSCode-12560-499007.json' -FeatureFlags @() 
+Process ID: 14764
+PSVersion: 5.1.22621.608
 PSEdition: Desktop
-PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1.22621.169
-BuildVersion: 10.0.22621.169
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1.22621.608
+BuildVersion: 10.0.22621.608
 CLRVersion: 4.0.30319.42000
 WSManStackVersion: 3.0
 PSRemotingProtocolVersion: 2.3
@@ -53,8 +53,8 @@ VERBOSE: Processing Surface 3 LTE Rest of World
 VERBOSE: GET with 0-byte payload
 >> TerminatingError(Invoke-WebRequest): "Error 404 - Not Found/**/Warning: This site requires the use of scripts, which your browser does not currently allow.See how to enable scriptsSkip to main contentMicrosoftDownload CenterDownload Center
                             Download Center
-                         Home WindowsOfficeWeb browsersDeveloper toolsXboxWindows PhoneMoreAll MicrosoftMicrosoft 365TeamsWindowsSurfaceXboxDealsSmall BusinessSupportSoftwareSoftwareWindows AppsOneDriveOutlookSkypeOneNoteMicrosoft TeamsMicrosoft EdgePCs &amp; Devices  PCs &amp; Devices  ComputersShop XboxAccessoriesVR &amp; mixed realityPhonesEntertainmentEntertainmentXbox Game Pass UltimatePC Game PassXbox gamesPC gamesWindows digital gamesMovies &amp; TVBusinessBusinessMicrosoft CloudMicrosoft SecurityDynamics 365Microsoft 365 for businessMicrosoft Power PlatformWindows 365Microsoft IndustrySmall BusinessDeveloper &amp; IT  Developer &amp; IT  AzureDeveloper CenterDocumentationMicrosoft LearnMicrosoft Tech CommunityAzure MarketplaceAppSourceVisual StudioOtherOtherMicrosoft Rewards Free downloads &amp; securityEducationVirtual workshops and trainingGift cardsHoliday giftsLicensingMicrosoft Experience CenterView SitemapSearchSearch Microsoft.comCancel0Cart0 items in shopping cartSign in
-            /**//*<![CDATA[*/function MscomLoadOptions(){var t="",n=document.createElement("meta"),i;n.name="ms.auth";n.content=isUserSignedIn;document.head&&document.head.appendChild(n);i={meControlOptions:{rpData:{msaInfo:{signInUrl:mscomSignInUrl,signOutUrl:mscomSignOutUrl},aadInfo:{signInUrl:mscomSignInUrl,signOutUrl:mscomSignOutUrl}},userData:{idp:authenticationType==="RPS"?window.msCommonShell.SupportedAuthIdp.MSA:window.msCommonShell.SupportedAuthIdp.AAD,firstName:typeof aFirstName=="undefined"?"":aFirstName,lastName:typeof aLastName=="undefined"?"":aLastName,memberName:typeof aMemberName=="undefined"?"":aMemberName,cid:typeof aCid=="undefined"?"":aCid,authenticatedState:typeof aAuthenticatedState=="undefined"?window.msCommonShell.AuthState.NotSignedIn:aAuthenticatedState}},events:{onSearch:function(){},onEventLog:function(n){if(typeof ms!="undefined")switch(n){case"MeControl_SignIn":if(t!==""){var i="//microsoftwindows.112.2o7.net/b/ss/msstores1-cmstest-prod/1/H.24.4/",e=((1+Math.random())*65536|0).toString(16).substring(1),u=encodeURIComponent(window.location.pathname.toLowerCase()),o=e+"?ns=microsoftwindows%26pageName=sitemuse%26v1=sitemuse%26events=event2%26c2=ToReplacepth1%26v2=ToReplacepth2%26pe=lnk_o%26pev2=click_sitemuse%26c3=signInClick%26v3=signInClick%26c4=no%26v4=no",s=new Image(0,0);i=i+decodeURIComponent(o);i=i.replace("ToReplacepth1",u);i=i.replace("ToReplacepth2",u);s.src=i}break;case"MeControl_SignOutAll":if(t!==""){var r="//microsoftwindows.112.2o7.net/b/ss/msstores1-cmstest-prod/1/H.24.4/",h=((1+Math.random())*65536|0).toString(16).substring(1),f=encodeURIComponent(window.location.pathname.toLowerCase()),c=h+"?ns=microsoftwindows%26pageName=sitemuse%26v1=sitemuse%26events=event2%26c2=ToReplacepth1%26v2=ToReplacepth2%26pe=lnk_o%26pev2=click_sitemuse%26c3=signOutClick%26v3=signOutClick%26c4=no%26v4=no",l=new Image(0,0);r=r+decodeURIComponent(c);r=r.replace("ToReplacepth1",f);r=r.replace("ToReplacepth2",f);l.src=i}break;case"MeControl_DropdownReady":console.log($(".msame_Header_chev").text());$(".msame_Header_chev").length&&($(".msame_Header_chev").text()?$(".msame_Header_chev").html($(".msame_Header_chev").text()).show():$(".msame_Header_chev").hide())}}}};window.msCommonShell.load(i)}var isUserSignedIn="0",href=encod"
+                         Home WindowsOfficeWeb browsersDeveloper toolsXboxWindows PhoneMoreAll MicrosoftMicrosoft 365TeamsWindowsSurfaceXboxDealsSmall BusinessSupportSoftwareSoftwareWindows AppsOneDriveOutlookSkypeOneNoteMicrosoft TeamsMicrosoft EdgePCs &amp; Devices  PCs &amp; Devices  ComputersShop XboxAccessoriesVR &amp; mixed realityPhonesEntertainmentEntertainmentXbox Game Pass UltimatePC Game PassXbox gamesPC gamesWindows digital gamesMovies &amp; TVBusinessBusinessMicrosoft CloudMicrosoft SecurityDynamics 365Microsoft 365 for businessMicrosoft Power PlatformWindows 365Microsoft IndustrySmall BusinessDeveloper &amp; IT  Developer &amp; IT  AzureDeveloper CenterDocumentationMicrosoft LearnMicrosoft Tech CommunityAzure MarketplaceAppSourceVisual StudioOtherOtherMicrosoft Rewards Free downloads &amp; securityEducationVirtual workshops and trainingGift cardsHoliday giftsLicensingMicrosoft Experience CenterView SitemapSearchSearch Microsoft.comNo resultsCancel0Cart0 items in shopping cartSign in
+            /**//*<![CDATA[*/function MscomLoadOptions(){var t="",n=document.createElement("meta"),i;n.name="ms.auth";n.content=isUserSignedIn;document.head&&document.head.appendChild(n);i={meControlOptions:{rpData:{msaInfo:{signInUrl:mscomSignInUrl,signOutUrl:mscomSignOutUrl},aadInfo:{signInUrl:mscomSignInUrl,signOutUrl:mscomSignOutUrl}},userData:{idp:authenticationType==="RPS"?window.msCommonShell.SupportedAuthIdp.MSA:window.msCommonShell.SupportedAuthIdp.AAD,firstName:typeof aFirstName=="undefined"?"":aFirstName,lastName:typeof aLastName=="undefined"?"":aLastName,memberName:typeof aMemberName=="undefined"?"":aMemberName,cid:typeof aCid=="undefined"?"":aCid,authenticatedState:typeof aAuthenticatedState=="undefined"?window.msCommonShell.AuthState.NotSignedIn:aAuthenticatedState}},events:{onSearch:function(){},onEventLog:function(n){if(typeof ms!="undefined")switch(n){case"MeControl_SignIn":if(t!==""){var i="//microsoftwindows.112.2o7.net/b/ss/msstores1-cmstest-prod/1/H.24.4/",e=((1+Math.random())*65536|0).toString(16).substring(1),u=encodeURIComponent(window.location.pathname.toLowerCase()),o=e+"?ns=microsoftwindows%26pageName=sitemuse%26v1=sitemuse%26events=event2%26c2=ToReplacepth1%26v2=ToReplacepth2%26pe=lnk_o%26pev2=click_sitemuse%26c3=signInClick%26v3=signInClick%26c4=no%26v4=no",s=new Image(0,0);i=i+decodeURIComponent(o);i=i.replace("ToReplacepth1",u);i=i.replace("ToReplacepth2",u);s.src=i}break;case"MeControl_SignOutAll":if(t!==""){var r="//microsoftwindows.112.2o7.net/b/ss/msstores1-cmstest-prod/1/H.24.4/",h=((1+Math.random())*65536|0).toString(16).substring(1),f=encodeURIComponent(window.location.pathname.toLowerCase()),c=h+"?ns=microsoftwindows%26pageName=sitemuse%26v1=sitemuse%26events=event2%26c2=ToReplacepth1%26v2=ToReplacepth2%26pe=lnk_o%26pev2=click_sitemuse%26c3=signOutClick%26v3=signOutClick%26c4=no%26v4=no",l=new Image(0,0);r=r+decodeURIComponent(c);r=r.replace("ToReplacepth1",f);r=r.replace("ToReplacepth2",f);l.src=i}break;case"MeControl_DropdownReady":console.log($(".msame_Header_chev").text());$("."
 Invoke-WebRequest : Error 404 - Not Found/**/Warning: This site requires the use of scripts, which your browser does 
 not currently allow.See how to enable scriptsSkip to main contentMicrosoftDownload CenterDownload Center
                             Download Center
@@ -66,7 +66,7 @@ realityPhonesEntertainmentEntertainmentXbox Game Pass UltimatePC Game PassXbox g
 PlatformWindows 365Microsoft IndustrySmall BusinessDeveloper &amp; IT  Developer &amp; IT  AzureDeveloper 
 CenterDocumentationMicrosoft LearnMicrosoft Tech CommunityAzure MarketplaceAppSourceVisual StudioOtherOtherMicrosoft 
 Rewards Free downloads &amp; securityEducationVirtual workshops and trainingGift cardsHoliday giftsLicensingMicrosoft 
-Experience CenterView SitemapSearchSearch Microsoft.comCancel0Cart0 items in shopping cartSign in
+Experience CenterView SitemapSearchSearch Microsoft.comNo resultsCancel0Cart0 items in shopping cartSign in
             /**//*<![CDATA[*/function MscomLoadOptions(){var t="",n=document.createElement("meta"),i;n.name="ms.auth";n.
 content=isUserSignedIn;document.head&&document.head.appendChild(n);i={meControlOptions:{rpData:{msaInfo:{signInUrl:mscom
 SignInUrl,signOutUrl:mscomSignOutUrl},aadInfo:{signInUrl:mscomSignInUrl,signOutUrl:mscomSignOutUrl}},userData:{idp:authe
@@ -84,9 +84,7 @@ MeControl_SignOutAll":if(t!==""){var r="//microsoftwindows.112.2o7.net/b/ss/msst
 osoftwindows%26pageName=sitemuse%26v1=sitemuse%26events=event2%26c2=ToReplacepth1%26v2=ToReplacepth2%26pe=lnk_o%26pev2=c
 lick_sitemuse%26c3=signOutClick%26v3=signOutClick%26c4=no%26v4=no",l=new Image(0,0);r=r+decodeURIComponent(c);r=r.replac
 e("ToReplacepth1",f);r=r.replace("ToReplacepth2",f);l.src=i}break;case"MeControl_DropdownReady":console.log($(".msame_He
-ader_chev").text());$(".msame_Header_chev").length&&($(".msame_Header_chev").text()?$(".msame_Header_chev").html($(".msa
-me_Header_chev").text()).show():$(".msame_Header_chev").hide())}}}};window.msCommonShell.load(i)}var 
-isUserSignedIn="0",href=encod
+ader_chev").text());$(".
 At C:\Users\david\OneDrive\GitHub\MyModules\OSD\Public\Functions\Catalog\Get-OSDCatalogMicrosoftDriverPack.ps1:397 
 char:27
 + ... ownloads = (Invoke-WebRequest -Uri $DriverPage -UseBasicParsing).Link ...
@@ -96,16 +94,21 @@ WebException
     + FullyQualifiedErrorId : WebCmdletWebResponseException,Microsoft.PowerShell.Commands.InvokeWebRequestCommand
 Invoke-WebRequest : Error 404 - Not Found/**/Warning: This site requires the use of scripts, which your browser does not currently allow.See how to enable scriptsSkip to main contentMicrosoftDownload CenterDownload Center
                             Download Center
-                         Home WindowsOfficeWeb browsersDeveloper toolsXboxWindows PhoneMoreAll MicrosoftMicrosoft 365TeamsWindowsSurfaceXboxDealsSmall BusinessSupportSoftwareSoftwareWindows AppsOneDriveOutlookSkypeOneNoteMicrosoft TeamsMicrosoft EdgePCs &amp; Devices  PCs &amp; Devices  ComputersShop XboxAccessoriesVR &amp; mixed
-realityPhonesEntertainmentEntertainmentXbox Game Pass UltimatePC Game PassXbox gamesPC gamesWindows digital gamesMovies &amp; TVBusinessBusinessMicrosoft CloudMicrosoft SecurityDynamics 365Microsoft 365 for businessMicrosoft Power PlatformWindows 365Microsoft IndustrySmall BusinessDeveloper &amp; IT  Developer &amp; IT  AzureDeveloper CenterDocumentationMicrosoft
-LearnMicrosoft Tech CommunityAzure MarketplaceAppSourceVisual StudioOtherOtherMicrosoft Rewards Free downloads &amp; securityEducationVirtual workshops and trainingGift cardsHoliday giftsLicensingMicrosoft Experience CenterView SitemapSearchSearch Microsoft.comCancel0Cart0 items in shopping cartSign in
-            /**//*<![CDATA[*/function MscomLoadOptions(){var t="",n=document.createElement("meta"),i;n.name="ms.auth";n.content=isUserSignedIn;document.head&&document.head.appendChild(n);i={meControlOptions:{rpData:{msaInfo:{signInUrl:mscomSignInUrl,signOutUrl:mscomSignOutUrl},aadInfo:{signInUrl:mscomSignInUrl,signOutUrl:mscomSignOutUrl}},userData:{idp:authenticationT
-ype==="RPS"?window.msCommonShell.SupportedAuthIdp.MSA:window.msCommonShell.SupportedAuthIdp.AAD,firstName:typeof aFirstName=="undefined"?"":aFirstName,lastName:typeof aLastName=="undefined"?"":aLastName,memberName:typeof aMemberName=="undefined"?"":aMemberName,cid:typeof aCid=="undefined"?"":aCid,authenticatedState:typeof
-aAuthenticatedState=="undefined"?window.msCommonShell.AuthState.NotSignedIn:aAuthenticatedState}},events:{onSearch:function(){},onEventLog:function(n){if(typeof ms!="undefined")switch(n){case"MeControl_SignIn":if(t!==""){var i="//microsoftwindows.112.2o7.net/b/ss/msstores1-cmstest-prod/1/H.24.4/",e=((1+Math.random())*65536|0).toString(16).substring(1),u=encodeURICompo
-nent(window.location.pathname.toLowerCase()),o=e+"?ns=microsoftwindows%26pageName=sitemuse%26v1=sitemuse%26events=event2%26c2=ToReplacepth1%26v2=ToReplacepth2%26pe=lnk_o%26pev2=click_sitemuse%26c3=signInClick%26v3=signInClick%26c4=no%26v4=no",s=new
-Image(0,0);i=i+decodeURIComponent(o);i=i.replace("ToReplacepth1",u);i=i.replace("ToReplacepth2",u);s.src=i}break;case"MeControl_SignOutAll":if(t!==""){var r="//microsoftwindows.112.2o7.net/b/ss/msstores1-cmstest-prod/1/H.24.4/",h=((1+Math.random())*65536|0).toString(16).substring(1),f=encodeURIComponent(window.location.pathname.toLowerCase()),c=h+"?ns=microsoftwindows
-%26pageName=sitemuse%26v1=sitemuse%26events=event2%26c2=ToReplacepth1%26v2=ToReplacepth2%26pe=lnk_o%26pev2=click_sitemuse%26c3=signOutClick%26v3=signOutClick%26c4=no%26v4=no",l=new Image(0,0);r=r+decodeURIComponent(c);r=r.replace("ToReplacepth1",f);r=r.replace("ToReplacepth2",f);l.src=i}break;case"MeControl_DropdownReady":console.log($(".msame_Header_chev").text());$(
-".msame_Header_chev").length&&($(".msame_Header_chev").text()?$(".msame_Header_chev").html($(".msame_Header_chev").text()).show():$(".msame_Header_chev").hide())}}}};window.msCommonShell.load(i)}var isUserSignedIn="0",href=encod
+                         Home WindowsOfficeWeb browsersDeveloper toolsXboxWindows PhoneMoreAll MicrosoftMicrosoft 365TeamsWindowsSurfaceXboxDealsSmall BusinessSupportSoftwareSoftwareWindows AppsOneDriveOutlookSkypeOneNoteMicrosoft
+TeamsMicrosoft EdgePCs &amp; Devices  PCs &amp; Devices  ComputersShop XboxAccessoriesVR &amp; mixed realityPhonesEntertainmentEntertainmentXbox Game Pass UltimatePC Game PassXbox gamesPC gamesWindows digital gamesMovies &amp;
+TVBusinessBusinessMicrosoft CloudMicrosoft SecurityDynamics 365Microsoft 365 for businessMicrosoft Power PlatformWindows 365Microsoft IndustrySmall BusinessDeveloper &amp; IT  Developer &amp; IT  AzureDeveloper CenterDocumentationMicrosoft
+LearnMicrosoft Tech CommunityAzure MarketplaceAppSourceVisual StudioOtherOtherMicrosoft Rewards Free downloads &amp; securityEducationVirtual workshops and trainingGift cardsHoliday giftsLicensingMicrosoft Experience CenterView
+SitemapSearchSearch Microsoft.comNo resultsCancel0Cart0 items in shopping cartSign in
+            /**//*<![CDATA[*/function MscomLoadOptions(){var t="",n=document.createElement("meta"),i;n.name="ms.auth";n.content=isUserSignedIn;document.head&&document.head.appendChild(n);i={meControlOptions:{rpData:{msaInfo:{signInUrl:mscomSign
+InUrl,signOutUrl:mscomSignOutUrl},aadInfo:{signInUrl:mscomSignInUrl,signOutUrl:mscomSignOutUrl}},userData:{idp:authenticationType==="RPS"?window.msCommonShell.SupportedAuthIdp.MSA:window.msCommonShell.SupportedAuthIdp.AAD,firstName:typeof
+aFirstName=="undefined"?"":aFirstName,lastName:typeof aLastName=="undefined"?"":aLastName,memberName:typeof aMemberName=="undefined"?"":aMemberName,cid:typeof aCid=="undefined"?"":aCid,authenticatedState:typeof
+aAuthenticatedState=="undefined"?window.msCommonShell.AuthState.NotSignedIn:aAuthenticatedState}},events:{onSearch:function(){},onEventLog:function(n){if(typeof ms!="undefined")switch(n){case"MeControl_SignIn":if(t!==""){var i="//microsoftwindo
+ws.112.2o7.net/b/ss/msstores1-cmstest-prod/1/H.24.4/",e=((1+Math.random())*65536|0).toString(16).substring(1),u=encodeURIComponent(window.location.pathname.toLowerCase()),o=e+"?ns=microsoftwindows%26pageName=sitemuse%26v1=sitemuse%26events=even
+t2%26c2=ToReplacepth1%26v2=ToReplacepth2%26pe=lnk_o%26pev2=click_sitemuse%26c3=signInClick%26v3=signInClick%26c4=no%26v4=no",s=new
+Image(0,0);i=i+decodeURIComponent(o);i=i.replace("ToReplacepth1",u);i=i.replace("ToReplacepth2",u);s.src=i}break;case"MeControl_SignOutAll":if(t!==""){var r="//microsoftwindows.112.2o7.net/b/ss/msstores1-cmstest-prod/1/H.24.4/",h=((1+Math.rando
+m())*65536|0).toString(16).substring(1),f=encodeURIComponent(window.location.pathname.toLowerCase()),c=h+"?ns=microsoftwindows%26pageName=sitemuse%26v1=sitemuse%26events=event2%26c2=ToReplacepth1%26v2=ToReplacepth2%26pe=lnk_o%26pev2=click_sitem
+use%26c3=signOutClick%26v3=signOutClick%26c4=no%26v4=no",l=new
+Image(0,0);r=r+decodeURIComponent(c);r=r.replace("ToReplacepth1",f);r=r.replace("ToReplacepth2",f);l.src=i}break;case"MeControl_DropdownReady":console.log($(".msame_Header_chev").text());$(".
 At C:\Users\david\OneDrive\GitHub\MyModules\OSD\Public\Functions\Catalog\Get-OSDCatalogMicrosoftDriverPack.ps1:397 char:27
 + ... ownloads = (Invoke-WebRequest -Uri $DriverPage -UseBasicParsing).Link ...
 +                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -270,12 +273,12 @@ VERBOSE: received 648482816-byte response of content type application/octet-stre
 VERBOSE: Processing Surface Laptop 4 13 AMD
 VERBOSE: GET with 0-byte payload
 VERBOSE: received -1-byte response of content type text/html
-VERBOSE: Testing Download File at https://download.microsoft.com/download/c/2/8/c2840704-6c0e-4457-82ca-68502b1803b5/SurfaceLaptop4_Win10_19042_22.030.2730.0.msi
+VERBOSE: Testing Download File at https://download.microsoft.com/download/c/2/8/c2840704-6c0e-4457-82ca-68502b1803b5/SurfaceLaptop4_Win10_19042_22.093.29929.0.msi
 VERBOSE: HEAD with 0-byte payload
-VERBOSE: received 893796352-byte response of content type application/octet-stream
-VERBOSE: Testing Download File at https://download.microsoft.com/download/c/2/8/c2840704-6c0e-4457-82ca-68502b1803b5/SurfaceLaptop4_Win11_22000_22.030.2733.0.msi
+VERBOSE: received 469536768-byte response of content type application/octet-stream
+VERBOSE: Testing Download File at https://download.microsoft.com/download/c/2/8/c2840704-6c0e-4457-82ca-68502b1803b5/SurfaceLaptop4_Win11_22000_22.093.29929.0.msi
 VERBOSE: HEAD with 0-byte payload
-VERBOSE: received 893849600-byte response of content type application/octet-stream
+VERBOSE: received 469577728-byte response of content type application/octet-stream
 VERBOSE: Processing Surface Laptop 4 13 Intel
 VERBOSE: GET with 0-byte payload
 VERBOSE: received -1-byte response of content type text/html
@@ -288,12 +291,12 @@ VERBOSE: received 650514432-byte response of content type application/octet-stre
 VERBOSE: Processing Surface Laptop 4 15 AMD
 VERBOSE: GET with 0-byte payload
 VERBOSE: received -1-byte response of content type text/html
-VERBOSE: Testing Download File at https://download.microsoft.com/download/c/2/8/c2840704-6c0e-4457-82ca-68502b1803b5/SurfaceLaptop4_Win10_19042_22.030.2730.0.msi
+VERBOSE: Testing Download File at https://download.microsoft.com/download/c/2/8/c2840704-6c0e-4457-82ca-68502b1803b5/SurfaceLaptop4_Win10_19042_22.093.29929.0.msi
 VERBOSE: HEAD with 0-byte payload
-VERBOSE: received 893796352-byte response of content type application/octet-stream
-VERBOSE: Testing Download File at https://download.microsoft.com/download/c/2/8/c2840704-6c0e-4457-82ca-68502b1803b5/SurfaceLaptop4_Win11_22000_22.030.2733.0.msi
+VERBOSE: received 469536768-byte response of content type application/octet-stream
+VERBOSE: Testing Download File at https://download.microsoft.com/download/c/2/8/c2840704-6c0e-4457-82ca-68502b1803b5/SurfaceLaptop4_Win11_22000_22.093.29929.0.msi
 VERBOSE: HEAD with 0-byte payload
-VERBOSE: received 893849600-byte response of content type application/octet-stream
+VERBOSE: received 469577728-byte response of content type application/octet-stream
 VERBOSE: Processing Surface Laptop 4 15 Intel
 VERBOSE: GET with 0-byte payload
 VERBOSE: received -1-byte response of content type text/html
@@ -372,30 +375,30 @@ VERBOSE: received 400912384-byte response of content type application/octet-stre
 VERBOSE: Processing Surface Pro 7
 VERBOSE: GET with 0-byte payload
 VERBOSE: received -1-byte response of content type text/html
-VERBOSE: Testing Download File at https://download.microsoft.com/download/0/8/b/08b0f0ba-1571-41c0-9b8a-9af8a43681ae/SurfacePro7_Win10_19041_22.032.19761.0.msi
+VERBOSE: Testing Download File at https://download.microsoft.com/download/0/8/b/08b0f0ba-1571-41c0-9b8a-9af8a43681ae/SurfacePro7_Win10_19041_22.094.40075.0.msi
 VERBOSE: HEAD with 0-byte payload
-VERBOSE: received 689561600-byte response of content type application/octet-stream
-VERBOSE: Testing Download File at https://download.microsoft.com/download/0/8/b/08b0f0ba-1571-41c0-9b8a-9af8a43681ae/SurfacePro7_Win11_22000_22.032.19761.0.msi
+VERBOSE: received 705781760-byte response of content type application/octet-stream
+VERBOSE: Testing Download File at https://download.microsoft.com/download/0/8/b/08b0f0ba-1571-41c0-9b8a-9af8a43681ae/SurfacePro7_Win11_22000_22.094.40075.0.msi
 VERBOSE: HEAD with 0-byte payload
-VERBOSE: received 689688576-byte response of content type application/octet-stream
+VERBOSE: received 705888256-byte response of content type application/octet-stream
 VERBOSE: Processing Surface Pro 7+
 VERBOSE: GET with 0-byte payload
 VERBOSE: received -1-byte response of content type text/html
-VERBOSE: Testing Download File at https://download.microsoft.com/download/1/b/4/1b4bdd09-a704-4bf5-bed6-6693a0ac848a/SurfacePro7+_Win10_18363_22.032.21313.0.msi
+VERBOSE: Testing Download File at https://download.microsoft.com/download/1/b/4/1b4bdd09-a704-4bf5-bed6-6693a0ac848a/SurfacePro7+_Win10_19041_22.093.32677.0.msi
 VERBOSE: HEAD with 0-byte payload
-VERBOSE: received 793001984-byte response of content type application/octet-stream
-VERBOSE: Testing Download File at https://download.microsoft.com/download/1/b/4/1b4bdd09-a704-4bf5-bed6-6693a0ac848a/SurfacePro7+_Win11_22000_22.032.21313.0.msi
+VERBOSE: received 1107267584-byte response of content type application/octet-stream
+VERBOSE: Testing Download File at https://download.microsoft.com/download/1/b/4/1b4bdd09-a704-4bf5-bed6-6693a0ac848a/SurfacePro7+_Win11_22000_22.093.33213.0.msi
 VERBOSE: HEAD with 0-byte payload
-VERBOSE: received 793047040-byte response of content type application/octet-stream
+VERBOSE: received 1107324928-byte response of content type application/octet-stream
 VERBOSE: Processing Surface Pro 7+ LTE
 VERBOSE: GET with 0-byte payload
 VERBOSE: received -1-byte response of content type text/html
-VERBOSE: Testing Download File at https://download.microsoft.com/download/1/b/4/1b4bdd09-a704-4bf5-bed6-6693a0ac848a/SurfacePro7+_Win10_18363_22.032.21313.0.msi
+VERBOSE: Testing Download File at https://download.microsoft.com/download/1/b/4/1b4bdd09-a704-4bf5-bed6-6693a0ac848a/SurfacePro7+_Win10_19041_22.093.32677.0.msi
 VERBOSE: HEAD with 0-byte payload
-VERBOSE: received 793001984-byte response of content type application/octet-stream
-VERBOSE: Testing Download File at https://download.microsoft.com/download/1/b/4/1b4bdd09-a704-4bf5-bed6-6693a0ac848a/SurfacePro7+_Win11_22000_22.032.21313.0.msi
+VERBOSE: received 1107267584-byte response of content type application/octet-stream
+VERBOSE: Testing Download File at https://download.microsoft.com/download/1/b/4/1b4bdd09-a704-4bf5-bed6-6693a0ac848a/SurfacePro7+_Win11_22000_22.093.33213.0.msi
 VERBOSE: HEAD with 0-byte payload
-VERBOSE: received 793047040-byte response of content type application/octet-stream
+VERBOSE: received 1107324928-byte response of content type application/octet-stream
 VERBOSE: Processing Surface Pro 8
 VERBOSE: GET with 0-byte payload
 VERBOSE: received -1-byte response of content type text/html
@@ -438,5 +441,5 @@ VERBOSE: received 656039936-byte response of content type application/octet-stre
 VERBOSE: Importing the Build Catalog at C:\Users\david\AppData\Local\Temp\OSD\OSDCatalogMicrosoftDriverPack.json
 **********************
 Windows PowerShell transcript end
-End time: 20221010145815
+End time: 20221024224041
 **********************
