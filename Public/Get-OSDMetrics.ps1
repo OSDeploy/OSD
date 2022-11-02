@@ -27,7 +27,7 @@ function Get-OSDMetrics {
     $DevicesPerWeek = [math]::Round(($DevicesPerHour * 24 * 7))
     $DevicesPerMonth = [math]::Round(($DevicesPerHour * 24 * 365) / 12)
     $DevicesPerYear = [math]::Round($DevicesPerHour * 24 * 365)
-    Write-Host -ForegroundColor Cyan "OSDCloud Azure (Start-OSDCloudAzure)"
+    Write-Host -ForegroundColor Cyan "OSDCloud CLI (Start-OSDCloud)"
     Write-Host "Deployment Count started $PublishedHoursAgo hours ago at " -NoNewline; Write-Host -ForegroundColor Green "$OSDCloudDatePublished UTC"
     Write-Host -ForegroundColor Green $OSDCloudDownloadCount -NoNewline; Write-Host " devices have been deployed using this method"
     Write-Host "Current usage rate is " -NoNewline; Write-Host -ForegroundColor Green "$DevicesPerHour " -NoNewline; Write-Host "devices per hour"
@@ -44,7 +44,7 @@ function Get-OSDMetrics {
     $DevicesPerWeek = [math]::Round(($DevicesPerHour * 24 * 7))
     $DevicesPerMonth = [math]::Round(($DevicesPerHour * 24 * 365) / 12)
     $DevicesPerYear = [math]::Round($DevicesPerHour * 24 * 365)
-    Write-Host -ForegroundColor Cyan "OSDCloud Azure (Start-OSDCloudAzure)"
+    Write-Host -ForegroundColor Cyan "OSDCloud GUI (Start-OSDCloudGUI)"
     Write-Host "Deployment Count started $PublishedHoursAgo hours ago at " -NoNewline; Write-Host -ForegroundColor Green "$OSDCloudDatePublished UTC"
     Write-Host -ForegroundColor Green $OSDCloudDownloadCount -NoNewline; Write-Host " devices have been deployed using this method"
     Write-Host "Current usage rate is " -NoNewline; Write-Host -ForegroundColor Green "$DevicesPerHour " -NoNewline; Write-Host "devices per hour"
