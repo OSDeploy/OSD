@@ -45,6 +45,6 @@ function Get-LenovoDriverPack {
         }
     }
     else {
-        $Results
+        $Results | Sort-Object Name
     }
 }

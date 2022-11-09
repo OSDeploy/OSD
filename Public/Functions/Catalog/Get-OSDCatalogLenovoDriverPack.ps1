@@ -95,38 +95,61 @@ function Get-OSDCatalogLenovoDriverPack {
         $Results = foreach ($Model in $ModelList) {
             foreach ($Item in $Model.SCCM) {
                 $DownloadUrl = $Item.'#text'
-
                 $ReleaseDate = $null
 
-                $ObjectProperties = [Ordered]@{
-                    CatalogVersion 	= Get-Date -Format yy.MM.dd
-                    Status          = $null
-                    Component       = 'DriverPack'
-                    ReleaseDate     = $ReleaseDate
-                    Manufacturer    = 'Lenovo'
-                    Model           = $Model.name
-                    Product			= [array]$Model.Types.Type.split(',').Trim()
-                    Name			= "Lenovo $($Model.name)"
-                    PackageID       = $null
-                    FileName        = $DownloadUrl | Split-Path -Leaf
-                    Url             = $DownloadUrl
-                    OSVersion       = $Item.version
-                    HashMD5         = $null
+                if ($Item.os -eq 'win10') {
+                    if ($Item.version -eq '*') {
+                        $NewName = "Lenovo $($Model.name) Win10"
+                    }
+                    else {
+                        $NewName = "Lenovo $($Model.name) Win10 $($Item.version)"
+                    }
+                    $ObjectProperties = [Ordered]@{
+                        CatalogVersion 	= Get-Date -Format yy.MM.dd
+                        Status          = $null
+                        Component       = 'DriverPack'
+                        ReleaseDate     = $ReleaseDate
+                        Manufacturer    = 'Lenovo'
+                        Model           = $Model.name
+                        Product			= [array]$Model.Types.Type.split(',').Trim()
+                        Name			= $NewName
+                        PackageID       = $null
+                        FileName        = $DownloadUrl | Split-Path -Leaf
+                        Url             = $DownloadUrl
+                        OSVersion       = 'Windows 10 x64'
+                        HashMD5         = $null
+                    }
+                    New-Object -TypeName PSObject -Property $ObjectProperties
                 }
-                New-Object -TypeName PSObject -Property $ObjectProperties
+
+                if ($Item.os -eq 'win11') {
+                    if ($Item.version -eq '*') {
+                        $NewName = "Lenovo $($Model.name) Win11"
+                    }
+                    else {
+                        $NewName = "Lenovo $($Model.name) Win11 $($Item.version)"
+                    }
+                    $ObjectProperties = [Ordered]@{
+                        CatalogVersion 	= Get-Date -Format yy.MM.dd
+                        Status          = $null
+                        Component       = 'DriverPack'
+                        ReleaseDate     = $ReleaseDate
+                        Manufacturer    = 'Lenovo'
+                        Model           = $Model.name
+                        Product			= [array]$Model.Types.Type.split(',').Trim()
+                        Name			= $NewName
+                        PackageID       = $null
+                        FileName        = $DownloadUrl | Split-Path -Leaf
+                        Url             = $DownloadUrl
+                        OSVersion       = 'Windows 11 x64'
+                        HashMD5         = $null
+                    }
+                    New-Object -TypeName PSObject -Property $ObjectProperties
+                }
             }
         }
         $Results = $Results | Sort-Object Name, OSVersion -Descending | Group-Object Name | ForEach-Object {$_.Group | Select-Object -First 1}
         $Results = $Results | Sort-Object Name, OSVersion -Descending
-
-        foreach ($Result in $Results) {
-            if ($Result.FileName -match 'w11') {
-                $Result.Name = $Result.Name + ' Win11'
-            }
-            else {
-                $Result.Name = $Result.Name + ' Win10'
-            }
-        }
 
         if ($TestUrl) {
             $Results = $Results | Sort-Object Url
