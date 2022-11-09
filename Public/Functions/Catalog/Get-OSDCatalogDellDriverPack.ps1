@@ -128,7 +128,18 @@ function Get-OSDCatalogDellDriverPack {
                 Continue
             }
 
-            $Name = "$($Item.SupportedSystems.Brand.Model.name | Select-Object -Unique) $osShortName $($Item.dellVersion)"
+            $Name = "Dell $($Item.SupportedSystems.Brand.Model.name | Select-Object -Unique) $osShortName $($Item.dellVersion)"
+            $Name = $Name -replace '  ',' '
+            $Model = ($Item.SupportedSystems.Brand.Model.name | Select-Object -Unique)
+            if ($Model -match '3650 Tower') {
+                $Model = 'Precision 3650 Tower'
+            }
+
+            $ModelID = ($Item.SupportedSystems.Brand.Model.Display.'#cdata-section'.Trim() | Select-Object -Unique)
+            if ($Model -eq 'Precision 3650 Tower') {
+                $ModelID = 'Precision 3650 Tower'
+            }
+
             $Generation = $Item.SupportedSystems.Brand.Model.generation | Select-Object -Unique
             if ($Generation -notmatch 'X') {
                 $Generation = 'XX'
@@ -140,7 +151,7 @@ function Get-OSDCatalogDellDriverPack {
                 Component		    = "DriverPack"
                 ReleaseDate		    = Get-Date $Item.dateTime -Format "yy.MM.dd"
                 Manufacturer        = 'Dell'
-                Name		        = "Dell $Name"
+                Name		        = $Name
                 #Description		= ($Item.Description.Display.'#cdata-section'.Trim())
                 DellVersion		    = $Item.dellVersion
                 Url		            = -join ($DownloadsBaseUrl, $Item.path)
@@ -151,8 +162,8 @@ function Get-OSDCatalogDellDriverPack {
                 Brand		        = ($Item.SupportedSystems.Brand.Display.'#cdata-section'.Trim() | Select-Object -Unique)
                 Key		            = ($Item.SupportedSystems.Brand.key | Select-Object -Unique)
                 Prefix		        = ($Item.SupportedSystems.Brand.prefix | Select-Object -Unique)
-                Model		        = ($Item.SupportedSystems.Brand.Model.name | Select-Object -Unique)
-                ModelID		        = ($Item.SupportedSystems.Brand.Model.Display.'#cdata-section'.Trim() | Select-Object -Unique)
+                Model		        = $Model
+                ModelID		        = $ModelID
                 SystemID		    = ($Item.SupportedSystems.Brand.Model.systemID | Select-Object -Unique)
                 RtsDate		        = ($Item.SupportedSystems.Brand.Model.rtsDate | Select-Object -Unique)
                 Generation		    = $Generation

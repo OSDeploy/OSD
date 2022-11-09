@@ -53,7 +53,7 @@ function Get-DellWinPEDriverPack {
     }
 
     Write-Verbose "Trying last known good Dell WinPE Driver Pack"
-    $LastKnownGood = 'https://downloads.dell.com/FOLDER07703466M/1/WinPE10.0-Drivers-A25-F0XPX.CAB'
+    $LastKnownGood = 'https://downloads.dell.com/FOLDER08854593M/1/WinPE10.0-Drivers-A28-PX32F.CAB'
     try {
         $null = Invoke-WebRequest -Uri $LastKnownGood -Method Head -UseBasicParsing -ErrorAction Stop
         Write-Verbose "Online: $LastKnownGood"
