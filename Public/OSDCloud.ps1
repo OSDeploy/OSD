@@ -130,6 +130,7 @@ function Invoke-OSDCloud {
         WindowsDefenderUpdate  = $null
         WindowsImage = $null
         WindowsImageCount = $null
+        WinPEShutdownScript = $null
         ZTI = [bool]$false
     }
     #endregion
@@ -1787,16 +1788,48 @@ exit
     }
     #endregion
     #=================================================
-    #region Finish SetupComplete Files.
-    #This appends the two lines at the end of SetupComplete Script to Stop Transcription and to Restart Computer
-    if ($Global:OSDCloud.DevMode -eq $true){
+    #region BETA Finish SetupComplete Files
+    <#  Gary Blok
+        This appends the two lines at the end of SetupComplete Script to Stop Transcription and to Restart Computer
+    #>
+    if ($Global:OSDCloud.DevMode -eq $true) {
         Set-SetupCompleteCreateFinish
     }
     #endregion
     #=================================================
-    #region OSDCloud Azure Shutdown Scripts
+    #region BETA OSDCloud WinPE Shutdown Scripts
+    <#
+        David Segura
+        Adding PowerShell WinPE custom script functionality
+        These are executed at the end of Invoke-OSDCloud
+        The PowerShell scripts can exist on any PSDrive (except C:) in the following path
+        <DriveLetter>:\OSDCloud\Config\Scripts\WinPEShutdown
+        Variable: $Global:OSDCloud.WinPEShutdownScript
+        
+        22.11.4 - Beta release
+    #>
+    $Global:OSDCloud.WinPEShutdownScript = Get-PSDrive -PSProvider FileSystem | Where-Object {$_.Name -ne 'C'} | ForEach-Object {
+        Get-ChildItem "$($_.Root)OSDCloud\Config\Scripts\WinPEShutdown\" -Include "*.ps1" -File -Recurse -Force -ErrorAction Ignore
+    }
+    if ($Global:OSDCloud.WinPEShutdownScript) {
+        Write-SectionHeader 'OSDCloud WinPE Shutdown Scripts'
+        $Global:OSDCloud.WinPEShutdownScript = $Global:OSDCloud.WinPEShutdownScript | Sort-Object -Property FullName
+        foreach ($Item in $Global:OSDCloud.WinPEShutdownScript) {
+            Write-DarkGrayHost "$($Item.FullName)"
+            & "$($Item.FullName)"
+        }
+    }
+    #endregion
+    #=================================================
+    #region BETA OSDCloud Azure Shutdown Scripts
+    <#
+        David Segura
+        Variable: $Global:OSDCloud.AzOSDCloudScript
+        
+        22.11.4 - Beta release
+    #>
     if ($Global:OSDCloud.AzOSDCloudScript) {
-        Write-SectionHeader 'OSDCloud Azure Shutdown Scripts'
+        Write-SectionHeader 'OSDCloud Azure WinPE Shutdown Scripts'
         foreach ($Item in $Global:OSDCloud.AzOSDCloudScript) {
             $ParamGetAzStorageBlobContent = @{
                 CloudBlob = $Item.ICloudBlob

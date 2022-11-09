@@ -260,16 +260,31 @@ function Show-PowershellWindow() {
 #================================================
 #   Initialize
 #================================================
-$localOSDCloudParams = (Get-Command Start-OSDCloud).Parameters
+if (-Not ($Global:OSDCloudOSNames)) {
+    $Global:OSDCloudOSNames = Get-OSDCloudOSNames
+}
 
-$localOSDCloudParams["OSName"].Attributes.ValidValues | ForEach-Object {
+$Global:OSDCloudOSNames | ForEach-Object {
     $formMainWindowControlOperatingSystemCombobox.Items.Add($_) | Out-Null
 }
 $formMainWindowControlOperatingSystemCombobox.SelectedIndex = 0
 
-<# $localOSDCloudParams["OSBuild"].Attributes.ValidValues | ForEach-Object {
+
+
+
+$localOSDCloudParams = (Get-Command Start-OSDCloud).Parameters
+<# 
+$localOSDCloudParams["OSName"].Attributes.ValidValues | ForEach-Object {
+    $formMainWindowControlOperatingSystemCombobox.Items.Add($_) | Out-Null
+}
+$formMainWindowControlOperatingSystemCombobox.SelectedIndex = 0
+#>
+
+<#
+$localOSDCloudParams["OSBuild"].Attributes.ValidValues | ForEach-Object {
     $formMainWindowControlOSBuildCombobox.Items.Add($_) | Out-Null
-} #>
+}
+#>
 
 $localOSDCloudParams["OSEdition"].Attributes.ValidValues | ForEach-Object {
     $formMainWindowControlOSEditionCombobox.Items.Add($_) | Out-Null
