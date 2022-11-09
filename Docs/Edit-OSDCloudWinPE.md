@@ -32,7 +32,7 @@ Edit-OSDCloudWinPE -StartOSDCloudGUI
 
 ### EXAMPLE 2
 ```
-Edit-OSDCloudWinPE -StartOSDCloud '-OSBuild 21H2 -OSEdition Pro -OSLanguage en-us -OSLicense Retail'
+Edit-OSDCloudWinPE -StartOSDCloud '-OSBuild 22H2 -OSEdition Pro -OSLanguage en-us -OSLicense Retail'
 ```
 
 ### EXAMPLE 3

@@ -54,7 +54,7 @@ Accept wildcard characters: False
 
 ### -OSName
 Operating System Name
-Default = Windows 11 21H2
+Default = Windows 11 22H2
 
 ```yaml
 Type: String
@@ -63,7 +63,7 @@ Aliases:
 
 Required: False
 Position: Named
-Default value: Windows 11 21H2
+Default value: Windows 11 22H2
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
@@ -86,7 +86,7 @@ Accept wildcard characters: False
 
 ### -OSBuild
 Operating System Build
-Default = 21H2
+Default = 22H2
 
 ```yaml
 Type: String
@@ -95,7 +95,7 @@ Aliases: Build
 
 Required: False
 Position: Named
-Default value: 21H2
+Default value: 22H2
 Accept pipeline input: False
 Accept wildcard characters: False
 ```

@@ -23,6 +23,12 @@ Start-OSDPad [-RepoOwner] <String> [-RepoName] <String> [[-RepoFolder] <String>]
  [-Brand <String>] [-Color <String>] [-Hide <String[]>] [<CommonParameters>]
 ```
 
+### GitLab
+```
+Start-OSDPad [-RepoName] <String> [[-RepoFolder] <String>] -RepoDomain <String> [-OAuth <String>]
+ [-Brand <String>] [-Color <String>] [-Hide <String[]>] [<CommonParameters>]
+```
+
 ## DESCRIPTION
 {{ Fill in the Description }}
 
@@ -88,7 +94,7 @@ Accept wildcard characters: False
 
 ```yaml
 Type: String
-Parameter Sets: GitHub
+Parameter Sets: GitHub, GitLab
 Aliases: OAuthToken
 
 Required: False
@@ -103,7 +109,7 @@ Accept wildcard characters: False
 
 ```yaml
 Type: String
-Parameter Sets: GitHub
+Parameter Sets: GitHub, GitLab
 Aliases: GitPath, Folder
 
 Required: False
@@ -118,7 +124,7 @@ Accept wildcard characters: False
 
 ```yaml
 Type: String
-Parameter Sets: GitHub
+Parameter Sets: GitHub, GitLab
 Aliases: Repository, GitRepo
 
 Required: True
@@ -138,6 +144,21 @@ Aliases: Owner, GitOwner
 
 Required: True
 Position: 0
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -RepoDomain
+{{ Fill RepoDomain Description }}
+
+```yaml
+Type: String
+Parameter Sets: GitLab
+Aliases: GitLabUri
+
+Required: True
+Position: Named
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False

@@ -8,7 +8,7 @@ schema: 2.0.0
 # Start-OSDCloudAzure
 
 ## SYNOPSIS
-Start OSDCloud Azure
+Installs the OSDCloudAzure Module and starts OS Deployment from Azure Storage
 
 ## SYNTAX
 
@@ -17,7 +17,7 @@ Start-OSDCloudAzure [-Force] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-Start OSDCloud Azure
+Installs the OSDCloudAzure Module and starts OS Deployment from Azure Storage
 
 ## EXAMPLES
 
@@ -26,10 +26,15 @@ Start OSDCloud Azure
 Start-OSDCloudAzure
 ```
 
+### EXAMPLE 2
+```
+Start-OSDCloudAzure -Force
+```
+
 ## PARAMETERS
 
 ### -Force
-Forces a reconnection to azgui.osdcloud.com
+Resets everything to initial settings
 
 ```yaml
 Type: SwitchParameter

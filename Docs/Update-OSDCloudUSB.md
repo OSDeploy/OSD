@@ -118,7 +118,7 @@ Accept wildcard characters: False
 Optional.
 Selects an Operating System to download
 If this parameter is not used, any Operating Systems can be downloaded
-'Windows 11 21H2','Windows 10 21H2','Windows 10 21H1','Windows 10 20H2','Windows 10 2004','Windows 10 1909','Windows 10 1903','Windows 10 1809'
+'Windows 11 22H2','Windows 11 21H2','Windows 10 22H2','Windows 10 21H2','Windows 10 21H1','Windows 10 20H2','Windows 10 2004','Windows 10 1909','Windows 10 1903','Windows 10 1809'
 
 ```yaml
 Type: String

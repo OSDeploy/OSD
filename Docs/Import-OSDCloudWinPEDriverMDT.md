@@ -13,7 +13,8 @@ Imports OSDCloud CloudDrivers into an MDT Deployment Share
 ## SYNTAX
 
 ```
-Import-OSDCloudWinPEDriverMDT [[-Driver] <String[]>] [[-DriverHWID] <String[]>] [<CommonParameters>]
+Import-OSDCloudWinPEDriverMDT [[-Driver] <String[]>] [[-DriverHWID] <String[]>] [[-ShareName] <String>]
+ [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -55,6 +56,21 @@ Aliases: HardwareID
 
 Required: False
 Position: 2
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -ShareName
+{{ Fill ShareName Description }}
+
+```yaml
+Type: String
+Parameter Sets: (All)
+Aliases: Share
+
+Required: False
+Position: 3
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False

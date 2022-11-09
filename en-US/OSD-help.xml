@@ -1887,6 +1887,89 @@
   </command:command>
   <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
     <command:details>
+      <command:name>Connect-OSDCloudAzure</command:name>
+      <command:verb>Connect</command:verb>
+      <command:noun>OSDCloudAzure</command:noun>
+      <maml:description>
+        <maml:para>{{ Fill in the Synopsis }}</maml:para>
+      </maml:description>
+    </command:details>
+    <maml:description>
+      <maml:para>{{ Fill in the Description }}</maml:para>
+    </maml:description>
+    <command:syntax>
+      <command:syntaxItem>
+        <maml:name>Connect-OSDCloudAzure</maml:name>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+          <maml:name>UseDeviceAuthentication</maml:name>
+          <maml:description>
+            <maml:para>{{ Fill UseDeviceAuthentication Description }}</maml:para>
+          </maml:description>
+          <dev:type>
+            <maml:name>SwitchParameter</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>False</dev:defaultValue>
+        </command:parameter>
+      </command:syntaxItem>
+    </command:syntax>
+    <command:parameters>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+        <maml:name>UseDeviceAuthentication</maml:name>
+        <maml:description>
+          <maml:para>{{ Fill UseDeviceAuthentication Description }}</maml:para>
+        </maml:description>
+        <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
+        <dev:type>
+          <maml:name>SwitchParameter</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>False</dev:defaultValue>
+      </command:parameter>
+    </command:parameters>
+    <command:inputTypes>
+      <command:inputType>
+        <dev:type>
+          <maml:name>None</maml:name>
+        </dev:type>
+        <maml:description>
+          <maml:para></maml:para>
+        </maml:description>
+      </command:inputType>
+    </command:inputTypes>
+    <command:returnValues>
+      <command:returnValue>
+        <dev:type>
+          <maml:name>System.Object</maml:name>
+        </dev:type>
+        <maml:description>
+          <maml:para></maml:para>
+        </maml:description>
+      </command:returnValue>
+    </command:returnValues>
+    <maml:alertSet>
+      <maml:alert>
+        <maml:para></maml:para>
+      </maml:alert>
+    </maml:alertSet>
+    <command:examples>
+      <command:example>
+        <maml:title>-------------------------- Example 1 --------------------------</maml:title>
+        <dev:code>PS C:\&gt; {{ Add example code here }}</dev:code>
+        <dev:remarks>
+          <maml:para>{{ Add example description here }}</maml:para>
+        </dev:remarks>
+      </command:example>
+    </command:examples>
+    <command:relatedLinks>
+      <maml:navigationLink>
+        <maml:linkText>Online Version:</maml:linkText>
+        <maml:uri>https://docs.microsoft.com/en-us/windows-hardware/manufacture/desktop/deploy-windows-using-full-flash-update--ffu</maml:uri>
+      </maml:navigationLink>
+    </command:relatedLinks>
+  </command:command>
+  <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
+    <command:details>
       <command:name>Convert-EsdToFolder</command:name>
       <command:verb>Convert</command:verb>
       <command:noun>EsdToFolder</command:noun>
@@ -4777,7 +4860,7 @@ Original credit to Mike Robbins http://mikefrobbins.com/2018/01/18/use-powershel
       </command:example>
       <command:example>
         <maml:title>-------------------------- EXAMPLE 2 --------------------------</maml:title>
-        <dev:code>Edit-OSDCloudWinPE -StartOSDCloud '-OSBuild 21H2 -OSEdition Pro -OSLanguage en-us -OSLicense Retail'</dev:code>
+        <dev:code>Edit-OSDCloudWinPE -StartOSDCloud '-OSBuild 22H2 -OSEdition Pro -OSLanguage en-us -OSLicense Retail'</dev:code>
         <dev:remarks>
           <maml:para></maml:para>
         </dev:remarks>
@@ -5972,6 +6055,173 @@ Original credit to Mike Robbins http://mikefrobbins.com/2018/01/18/use-powershel
         <maml:name>Name</maml:name>
         <maml:description>
           <maml:para>{{ Fill Name Description }}</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+    </command:parameters>
+    <command:inputTypes>
+      <command:inputType>
+        <dev:type>
+          <maml:name>None</maml:name>
+        </dev:type>
+        <maml:description>
+          <maml:para></maml:para>
+        </maml:description>
+      </command:inputType>
+    </command:inputTypes>
+    <command:returnValues>
+      <command:returnValue>
+        <dev:type>
+          <maml:name>System.Object</maml:name>
+        </dev:type>
+        <maml:description>
+          <maml:para></maml:para>
+        </maml:description>
+      </command:returnValue>
+    </command:returnValues>
+    <maml:alertSet>
+      <maml:alert>
+        <maml:para></maml:para>
+      </maml:alert>
+    </maml:alertSet>
+    <command:examples>
+      <command:example>
+        <maml:title>-------------------------- Example 1 --------------------------</maml:title>
+        <dev:code>PS C:\&gt; {{ Add example code here }}</dev:code>
+        <dev:remarks>
+          <maml:para>{{ Add example description here }}</maml:para>
+        </dev:remarks>
+      </command:example>
+    </command:examples>
+    <command:relatedLinks>
+      <maml:navigationLink>
+        <maml:linkText>Online Version:</maml:linkText>
+        <maml:uri>https://osd.osdeploy.com/module/functions/adk</maml:uri>
+      </maml:navigationLink>
+    </command:relatedLinks>
+  </command:command>
+  <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
+    <command:details>
+      <command:name>Get-AzOSDCloud</command:name>
+      <command:verb>Get</command:verb>
+      <command:noun>AzOSDCloud</command:noun>
+      <maml:description>
+        <maml:para>{{ Fill in the Synopsis }}</maml:para>
+      </maml:description>
+    </command:details>
+    <maml:description>
+      <maml:para>{{ Fill in the Description }}</maml:para>
+    </maml:description>
+    <command:syntax>
+      <command:syntaxItem>
+        <maml:name>Get-AzOSDCloud</maml:name>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+          <maml:name>edit</maml:name>
+          <maml:description>
+            <maml:para>{{ Fill edit Description }}</maml:para>
+          </maml:description>
+          <dev:type>
+            <maml:name>SwitchParameter</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>False</dev:defaultValue>
+        </command:parameter>
+      </command:syntaxItem>
+    </command:syntax>
+    <command:parameters>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+        <maml:name>edit</maml:name>
+        <maml:description>
+          <maml:para>{{ Fill edit Description }}</maml:para>
+        </maml:description>
+        <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
+        <dev:type>
+          <maml:name>SwitchParameter</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>False</dev:defaultValue>
+      </command:parameter>
+    </command:parameters>
+    <command:inputTypes>
+      <command:inputType>
+        <dev:type>
+          <maml:name>None</maml:name>
+        </dev:type>
+        <maml:description>
+          <maml:para></maml:para>
+        </maml:description>
+      </command:inputType>
+    </command:inputTypes>
+    <command:returnValues>
+      <command:returnValue>
+        <dev:type>
+          <maml:name>System.Object</maml:name>
+        </dev:type>
+        <maml:description>
+          <maml:para></maml:para>
+        </maml:description>
+      </command:returnValue>
+    </command:returnValues>
+    <maml:alertSet>
+      <maml:alert>
+        <maml:para></maml:para>
+      </maml:alert>
+    </maml:alertSet>
+    <command:examples>
+      <command:example>
+        <maml:title>-------------------------- Example 1 --------------------------</maml:title>
+        <dev:code>PS C:\&gt; {{ Add example code here }}</dev:code>
+        <dev:remarks>
+          <maml:para>{{ Add example description here }}</maml:para>
+        </dev:remarks>
+      </command:example>
+    </command:examples>
+    <command:relatedLinks>
+      <maml:navigationLink>
+        <maml:linkText>Online Version:</maml:linkText>
+        <maml:uri>https://osd.osdeploy.com/module/functions/adk</maml:uri>
+      </maml:navigationLink>
+    </command:relatedLinks>
+  </command:command>
+  <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
+    <command:details>
+      <command:name>Get-AzOSDTechId</command:name>
+      <command:verb>Get</command:verb>
+      <command:noun>AzOSDTechId</command:noun>
+      <maml:description>
+        <maml:para>{{ Fill in the Synopsis }}</maml:para>
+      </maml:description>
+    </command:details>
+    <maml:description>
+      <maml:para>{{ Fill in the Description }}</maml:para>
+    </maml:description>
+    <command:syntax>
+      <command:syntaxItem>
+        <maml:name>Get-AzOSDTechId</maml:name>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="0" aliases="none">
+          <maml:name>AzureAdUserName</maml:name>
+          <maml:description>
+            <maml:para>{{ Fill AzureAdUserName Description }}</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+      </command:syntaxItem>
+    </command:syntax>
+    <command:parameters>
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="0" aliases="none">
+        <maml:name>AzureAdUserName</maml:name>
+        <maml:description>
+          <maml:para>{{ Fill AzureAdUserName Description }}</maml:para>
         </maml:description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
@@ -8356,7 +8606,7 @@ Original credit to Mike Robbins http://mikefrobbins.com/2018/01/18/use-powershel
             <maml:name>String</maml:name>
             <maml:uri />
           </dev:type>
-          <dev:defaultValue>Windows 11 21H2 x64</dev:defaultValue>
+          <dev:defaultValue>Windows 11 22H2 x64</dev:defaultValue>
         </command:parameter>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="License">
           <maml:name>OSLicense</maml:name>
@@ -8400,14 +8650,14 @@ Original credit to Mike Robbins http://mikefrobbins.com/2018/01/18/use-powershel
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="Build">
           <maml:name>OSBuild</maml:name>
           <maml:description>
-            <maml:para>Operating System Build Default = 21H2</maml:para>
+            <maml:para>Operating System Build Default = 22H2</maml:para>
           </maml:description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
             <maml:name>String</maml:name>
             <maml:uri />
           </dev:type>
-          <dev:defaultValue>21H2</dev:defaultValue>
+          <dev:defaultValue>22H2</dev:defaultValue>
         </command:parameter>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>OSArch</maml:name>
@@ -8458,7 +8708,7 @@ Original credit to Mike Robbins http://mikefrobbins.com/2018/01/18/use-powershel
           <maml:name>String</maml:name>
           <maml:uri />
         </dev:type>
-        <dev:defaultValue>Windows 11 21H2 x64</dev:defaultValue>
+        <dev:defaultValue>Windows 11 22H2 x64</dev:defaultValue>
       </command:parameter>
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
         <maml:name>OSVersion</maml:name>
@@ -8475,14 +8725,14 @@ Original credit to Mike Robbins http://mikefrobbins.com/2018/01/18/use-powershel
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="Build">
         <maml:name>OSBuild</maml:name>
         <maml:description>
-          <maml:para>Operating System Build Default = 21H2</maml:para>
+          <maml:para>Operating System Build Default = 22H2</maml:para>
         </maml:description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
           <maml:name>String</maml:name>
           <maml:uri />
         </dev:type>
-        <dev:defaultValue>21H2</dev:defaultValue>
+        <dev:defaultValue>22H2</dev:defaultValue>
       </command:parameter>
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
         <maml:name>OSArch</maml:name>
@@ -12184,6 +12434,65 @@ Original credit to Mike Robbins http://mikefrobbins.com/2018/01/18/use-powershel
   </command:command>
   <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
     <command:details>
+      <command:name>Get-OSDCloudAzureResources</command:name>
+      <command:verb>Get</command:verb>
+      <command:noun>OSDCloudAzureResources</command:noun>
+      <maml:description>
+        <maml:para>{{ Fill in the Synopsis }}</maml:para>
+      </maml:description>
+    </command:details>
+    <maml:description>
+      <maml:para>{{ Fill in the Description }}</maml:para>
+    </maml:description>
+    <command:syntax>
+      <command:syntaxItem>
+        <maml:name>Get-OSDCloudAzureResources</maml:name>
+      </command:syntaxItem>
+    </command:syntax>
+    <command:parameters />
+    <command:inputTypes>
+      <command:inputType>
+        <dev:type>
+          <maml:name>None</maml:name>
+        </dev:type>
+        <maml:description>
+          <maml:para></maml:para>
+        </maml:description>
+      </command:inputType>
+    </command:inputTypes>
+    <command:returnValues>
+      <command:returnValue>
+        <dev:type>
+          <maml:name>System.Object</maml:name>
+        </dev:type>
+        <maml:description>
+          <maml:para></maml:para>
+        </maml:description>
+      </command:returnValue>
+    </command:returnValues>
+    <maml:alertSet>
+      <maml:alert>
+        <maml:para></maml:para>
+      </maml:alert>
+    </maml:alertSet>
+    <command:examples>
+      <command:example>
+        <maml:title>-------------------------- Example 1 --------------------------</maml:title>
+        <dev:code>PS C:\&gt; {{ Add example code here }}</dev:code>
+        <dev:remarks>
+          <maml:para>{{ Add example description here }}</maml:para>
+        </dev:remarks>
+      </command:example>
+    </command:examples>
+    <command:relatedLinks>
+      <maml:navigationLink>
+        <maml:linkText>Online Version:</maml:linkText>
+        <maml:uri>https://osd.osdeploy.com/module/functions/general/get-osdclass</maml:uri>
+      </maml:navigationLink>
+    </command:relatedLinks>
+  </command:command>
+  <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
+    <command:details>
       <command:name>Get-OSDCloudDriverPack</command:name>
       <command:verb>Get</command:verb>
       <command:noun>OSDCloudDriverPack</command:noun>
@@ -12304,6 +12613,47 @@ Original credit to Mike Robbins http://mikefrobbins.com/2018/01/18/use-powershel
     <command:syntax>
       <command:syntaxItem>
         <maml:name>Get-OSDCloudOSList</maml:name>
+      </command:syntaxItem>
+    </command:syntax>
+    <command:parameters />
+    <command:inputTypes />
+    <command:returnValues />
+    <maml:alertSet>
+      <maml:alert>
+        <maml:para></maml:para>
+      </maml:alert>
+    </maml:alertSet>
+    <command:examples>
+      <command:example>
+        <maml:title>-------------------------- Example 1 --------------------------</maml:title>
+        <dev:code>PS C:\&gt; {{ Add example code here }}</dev:code>
+        <dev:remarks>
+          <maml:para>{{ Add example description here }}</maml:para>
+        </dev:remarks>
+      </command:example>
+    </command:examples>
+    <command:relatedLinks>
+      <maml:navigationLink>
+        <maml:linkText>https://github.com/OSDeploy/OSD/tree/master/Docs</maml:linkText>
+        <maml:uri>https://github.com/OSDeploy/OSD/tree/master/Docs</maml:uri>
+      </maml:navigationLink>
+    </command:relatedLinks>
+  </command:command>
+  <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
+    <command:details>
+      <command:name>Get-OSDCloudOSNames</command:name>
+      <command:verb>Get</command:verb>
+      <command:noun>OSDCloudOSNames</command:noun>
+      <maml:description>
+        <maml:para>Returns the Operating Systems names used by OSDCloud</maml:para>
+      </maml:description>
+    </command:details>
+    <maml:description>
+      <maml:para>Returns the Operating Systems names used by OSDCloud</maml:para>
+    </maml:description>
+    <command:syntax>
+      <command:syntaxItem>
+        <maml:name>Get-OSDCloudOSNames</maml:name>
       </command:syntaxItem>
     </command:syntax>
     <command:parameters />
@@ -12983,6 +13333,65 @@ Original credit to Mike Robbins http://mikefrobbins.com/2018/01/18/use-powershel
         <dev:defaultValue>None</dev:defaultValue>
       </command:parameter>
     </command:parameters>
+    <command:inputTypes>
+      <command:inputType>
+        <dev:type>
+          <maml:name>None</maml:name>
+        </dev:type>
+        <maml:description>
+          <maml:para></maml:para>
+        </maml:description>
+      </command:inputType>
+    </command:inputTypes>
+    <command:returnValues>
+      <command:returnValue>
+        <dev:type>
+          <maml:name>System.Object</maml:name>
+        </dev:type>
+        <maml:description>
+          <maml:para></maml:para>
+        </maml:description>
+      </command:returnValue>
+    </command:returnValues>
+    <maml:alertSet>
+      <maml:alert>
+        <maml:para></maml:para>
+      </maml:alert>
+    </maml:alertSet>
+    <command:examples>
+      <command:example>
+        <maml:title>-------------------------- Example 1 --------------------------</maml:title>
+        <dev:code>PS C:\&gt; {{ Add example code here }}</dev:code>
+        <dev:remarks>
+          <maml:para>{{ Add example description here }}</maml:para>
+        </dev:remarks>
+      </command:example>
+    </command:examples>
+    <command:relatedLinks>
+      <maml:navigationLink>
+        <maml:linkText>Online Version:</maml:linkText>
+        <maml:uri>https://osd.osdeploy.com/module/functions/general/get-osdgather</maml:uri>
+      </maml:navigationLink>
+    </command:relatedLinks>
+  </command:command>
+  <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
+    <command:details>
+      <command:name>Get-OSDMetrics</command:name>
+      <command:verb>Get</command:verb>
+      <command:noun>OSDMetrics</command:noun>
+      <maml:description>
+        <maml:para>{{ Fill in the Synopsis }}</maml:para>
+      </maml:description>
+    </command:details>
+    <maml:description>
+      <maml:para>{{ Fill in the Description }}</maml:para>
+    </maml:description>
+    <command:syntax>
+      <command:syntaxItem>
+        <maml:name>Get-OSDMetrics</maml:name>
+      </command:syntaxItem>
+    </command:syntax>
+    <command:parameters />
     <command:inputTypes>
       <command:inputType>
         <dev:type>
@@ -15348,6 +15757,18 @@ Original credit to Mike Robbins http://mikefrobbins.com/2018/01/18/use-powershel
           </dev:type>
           <dev:defaultValue>None</dev:defaultValue>
         </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="3" aliases="Share">
+          <maml:name>ShareName</maml:name>
+          <maml:description>
+            <maml:para>{{ Fill ShareName Description }}</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
       </command:syntaxItem>
     </command:syntax>
     <command:parameters>
@@ -15371,6 +15792,18 @@ Original credit to Mike Robbins http://mikefrobbins.com/2018/01/18/use-powershel
         <command:parameterValue required="true" variableLength="false">String[]</command:parameterValue>
         <dev:type>
           <maml:name>String[]</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="3" aliases="Share">
+        <maml:name>ShareName</maml:name>
+        <maml:description>
+          <maml:para>{{ Fill ShareName Description }}</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
           <maml:uri />
         </dev:type>
         <dev:defaultValue>None</dev:defaultValue>
@@ -15460,6 +15893,65 @@ Original credit to Mike Robbins http://mikefrobbins.com/2018/01/18/use-powershel
   </command:command>
   <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
     <command:details>
+      <command:name>Install-AzOSDIacTools</command:name>
+      <command:verb>Install</command:verb>
+      <command:noun>AzOSDIacTools</command:noun>
+      <maml:description>
+        <maml:para>{{ Fill in the Synopsis }}</maml:para>
+      </maml:description>
+    </command:details>
+    <maml:description>
+      <maml:para>{{ Fill in the Description }}</maml:para>
+    </maml:description>
+    <command:syntax>
+      <command:syntaxItem>
+        <maml:name>Install-AzOSDIacTools</maml:name>
+      </command:syntaxItem>
+    </command:syntax>
+    <command:parameters />
+    <command:inputTypes>
+      <command:inputType>
+        <dev:type>
+          <maml:name>None</maml:name>
+        </dev:type>
+        <maml:description>
+          <maml:para></maml:para>
+        </maml:description>
+      </command:inputType>
+    </command:inputTypes>
+    <command:returnValues>
+      <command:returnValue>
+        <dev:type>
+          <maml:name>System.Object</maml:name>
+        </dev:type>
+        <maml:description>
+          <maml:para></maml:para>
+        </maml:description>
+      </command:returnValue>
+    </command:returnValues>
+    <maml:alertSet>
+      <maml:alert>
+        <maml:para></maml:para>
+      </maml:alert>
+    </maml:alertSet>
+    <command:examples>
+      <command:example>
+        <maml:title>-------------------------- Example 1 --------------------------</maml:title>
+        <dev:code>PS C:\&gt; {{ Add example code here }}</dev:code>
+        <dev:remarks>
+          <maml:para>{{ Add example description here }}</maml:para>
+        </dev:remarks>
+      </command:example>
+    </command:examples>
+    <command:relatedLinks>
+      <maml:navigationLink>
+        <maml:linkText>Online Version:</maml:linkText>
+        <maml:uri>https://github.com/OSDeploy/OSD/tree/master/Docs</maml:uri>
+      </maml:navigationLink>
+    </command:relatedLinks>
+  </command:command>
+  <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
+    <command:details>
       <command:name>Install-SystemFirmwareUpdate</command:name>
       <command:verb>Install</command:verb>
       <command:noun>SystemFirmwareUpdate</command:noun>
@@ -15496,6 +15988,196 @@ Original credit to Mike Robbins http://mikefrobbins.com/2018/01/18/use-powershel
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
           <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+    </command:parameters>
+    <command:inputTypes>
+      <command:inputType>
+        <dev:type>
+          <maml:name>None</maml:name>
+        </dev:type>
+        <maml:description>
+          <maml:para></maml:para>
+        </maml:description>
+      </command:inputType>
+    </command:inputTypes>
+    <command:returnValues>
+      <command:returnValue>
+        <dev:type>
+          <maml:name>System.Object</maml:name>
+        </dev:type>
+        <maml:description>
+          <maml:para></maml:para>
+        </maml:description>
+      </command:returnValue>
+    </command:returnValues>
+    <maml:alertSet>
+      <maml:alert>
+        <maml:para></maml:para>
+      </maml:alert>
+    </maml:alertSet>
+    <command:examples>
+      <command:example>
+        <maml:title>-------------------------- Example 1 --------------------------</maml:title>
+        <dev:code>PS C:\&gt; {{ Add example code here }}</dev:code>
+        <dev:remarks>
+          <maml:para>{{ Add example description here }}</maml:para>
+        </dev:remarks>
+      </command:example>
+    </command:examples>
+    <command:relatedLinks>
+      <maml:navigationLink>
+        <maml:linkText>Online Version:</maml:linkText>
+        <maml:uri>https://github.com/OSDeploy/OSD/tree/master/Docs</maml:uri>
+      </maml:navigationLink>
+    </command:relatedLinks>
+  </command:command>
+  <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
+    <command:details>
+      <command:name>Invoke-AzOSDAzureConfig</command:name>
+      <command:verb>Invoke</command:verb>
+      <command:noun>AzOSDAzureConfig</command:noun>
+      <maml:description>
+        <maml:para>{{ Fill in the Synopsis }}</maml:para>
+      </maml:description>
+    </command:details>
+    <maml:description>
+      <maml:para>{{ Fill in the Description }}</maml:para>
+    </maml:description>
+    <command:syntax>
+      <command:syntaxItem>
+        <maml:name>Invoke-AzOSDAzureConfig</maml:name>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+          <maml:name>AzOSDUserNameStart</maml:name>
+          <maml:description>
+            <maml:para>{{ Fill AzOSDUserNameStart Description }}</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+          <maml:name>Location</maml:name>
+          <maml:description>
+            <maml:para>{{ Fill Location Description }}</maml:para>
+          </maml:description>
+          <command:parameterValueGroup>
+            <command:parameterValue required="false" command:variableLength="false">eastasia</command:parameterValue>
+            <command:parameterValue required="false" command:variableLength="false">southeastasia</command:parameterValue>
+            <command:parameterValue required="false" command:variableLength="false">centralus</command:parameterValue>
+            <command:parameterValue required="false" command:variableLength="false">eastus</command:parameterValue>
+            <command:parameterValue required="false" command:variableLength="false">eastus2</command:parameterValue>
+            <command:parameterValue required="false" command:variableLength="false">westus</command:parameterValue>
+            <command:parameterValue required="false" command:variableLength="false">northcentralus</command:parameterValue>
+            <command:parameterValue required="false" command:variableLength="false">southcentralus</command:parameterValue>
+            <command:parameterValue required="false" command:variableLength="false">northeurope</command:parameterValue>
+            <command:parameterValue required="false" command:variableLength="false">westeurope</command:parameterValue>
+            <command:parameterValue required="false" command:variableLength="false">japanwest</command:parameterValue>
+            <command:parameterValue required="false" command:variableLength="false">japaneast</command:parameterValue>
+            <command:parameterValue required="false" command:variableLength="false">brazilsouth</command:parameterValue>
+            <command:parameterValue required="false" command:variableLength="false">australiaeast</command:parameterValue>
+            <command:parameterValue required="false" command:variableLength="false">australiasoutheast</command:parameterValue>
+            <command:parameterValue required="false" command:variableLength="false">southindia</command:parameterValue>
+            <command:parameterValue required="false" command:variableLength="false">centralindia</command:parameterValue>
+            <command:parameterValue required="false" command:variableLength="false">westindia</command:parameterValue>
+            <command:parameterValue required="false" command:variableLength="false">canadacentral</command:parameterValue>
+            <command:parameterValue required="false" command:variableLength="false">canadaeast</command:parameterValue>
+            <command:parameterValue required="false" command:variableLength="false">uksouth</command:parameterValue>
+            <command:parameterValue required="false" command:variableLength="false">ukwest</command:parameterValue>
+            <command:parameterValue required="false" command:variableLength="false">westcentralus</command:parameterValue>
+            <command:parameterValue required="false" command:variableLength="false">germanywestcentral</command:parameterValue>
+            <command:parameterValue required="false" command:variableLength="false">norwaywest</command:parameterValue>
+            <command:parameterValue required="false" command:variableLength="false">norwayeast</command:parameterValue>
+            <command:parameterValue required="false" command:variableLength="false">brazilsoutheast</command:parameterValue>
+            <command:parameterValue required="false" command:variableLength="false">westus3</command:parameterValue>
+            <command:parameterValue required="false" command:variableLength="false">swedencentral</command:parameterValue>
+          </command:parameterValueGroup>
+          <command:parameterValue required="true" variableLength="false">Object</command:parameterValue>
+          <dev:type>
+            <maml:name>Object</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+          <maml:name>ResourceGroupName</maml:name>
+          <maml:description>
+            <maml:para>{{ Fill ResourceGroupName Description }}</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+      </command:syntaxItem>
+      <command:syntaxItem>
+        <maml:name>Invoke-AzOSDAzureConfig</maml:name>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+          <maml:name>UseTerraform</maml:name>
+          <maml:description>
+            <maml:para>{{ Fill UseTerraform Description }}</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">Boolean</command:parameterValue>
+          <dev:type>
+            <maml:name>Boolean</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+      </command:syntaxItem>
+    </command:syntax>
+    <command:parameters>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+        <maml:name>AzOSDUserNameStart</maml:name>
+        <maml:description>
+          <maml:para>{{ Fill AzOSDUserNameStart Description }}</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+        <maml:name>Location</maml:name>
+        <maml:description>
+          <maml:para>{{ Fill Location Description }}</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">Object</command:parameterValue>
+        <dev:type>
+          <maml:name>Object</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+        <maml:name>ResourceGroupName</maml:name>
+        <maml:description>
+          <maml:para>{{ Fill ResourceGroupName Description }}</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+        <maml:name>UseTerraform</maml:name>
+        <maml:description>
+          <maml:para>{{ Fill UseTerraform Description }}</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">Boolean</command:parameterValue>
+        <dev:type>
+          <maml:name>Boolean</maml:name>
           <maml:uri />
         </dev:type>
         <dev:defaultValue>None</dev:defaultValue>
@@ -18318,14 +19000,14 @@ Original credit to Mike Robbins http://mikefrobbins.com/2018/01/18/use-powershel
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>OSName</maml:name>
           <maml:description>
-            <maml:para>Operating System Name Default = Windows 11 21H2</maml:para>
+            <maml:para>Operating System Name Default = Windows 11 22H2</maml:para>
           </maml:description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
             <maml:name>String</maml:name>
             <maml:uri />
           </dev:type>
-          <dev:defaultValue>Windows 11 21H2</dev:defaultValue>
+          <dev:defaultValue>Windows 11 22H2</dev:defaultValue>
         </command:parameter>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>OSArch</maml:name>
@@ -18393,14 +19075,14 @@ Original credit to Mike Robbins http://mikefrobbins.com/2018/01/18/use-powershel
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="Build">
           <maml:name>OSBuild</maml:name>
           <maml:description>
-            <maml:para>Operating System Build Default = 21H2</maml:para>
+            <maml:para>Operating System Build Default = 22H2</maml:para>
           </maml:description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
             <maml:name>String</maml:name>
             <maml:uri />
           </dev:type>
-          <dev:defaultValue>21H2</dev:defaultValue>
+          <dev:defaultValue>22H2</dev:defaultValue>
         </command:parameter>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>OSArch</maml:name>
@@ -18456,14 +19138,14 @@ Original credit to Mike Robbins http://mikefrobbins.com/2018/01/18/use-powershel
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
         <maml:name>OSName</maml:name>
         <maml:description>
-          <maml:para>Operating System Name Default = Windows 11 21H2</maml:para>
+          <maml:para>Operating System Name Default = Windows 11 22H2</maml:para>
         </maml:description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
           <maml:name>String</maml:name>
           <maml:uri />
         </dev:type>
-        <dev:defaultValue>Windows 11 21H2</dev:defaultValue>
+        <dev:defaultValue>Windows 11 22H2</dev:defaultValue>
       </command:parameter>
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
         <maml:name>OSVersion</maml:name>
@@ -18480,14 +19162,14 @@ Original credit to Mike Robbins http://mikefrobbins.com/2018/01/18/use-powershel
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="Build">
         <maml:name>OSBuild</maml:name>
         <maml:description>
-          <maml:para>Operating System Build Default = 21H2</maml:para>
+          <maml:para>Operating System Build Default = 22H2</maml:para>
         </maml:description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
           <maml:name>String</maml:name>
           <maml:uri />
         </dev:type>
-        <dev:defaultValue>21H2</dev:defaultValue>
+        <dev:defaultValue>22H2</dev:defaultValue>
       </command:parameter>
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
         <maml:name>OSArch</maml:name>
@@ -24758,11 +25440,11 @@ Original credit to Mike Robbins http://mikefrobbins.com/2018/01/18/use-powershel
       <command:verb>Start</command:verb>
       <command:noun>OSDCloudAzure</command:noun>
       <maml:description>
-        <maml:para>Start OSDCloud Azure</maml:para>
+        <maml:para>Installs the OSDCloudAzure Module and starts OS Deployment from Azure Storage</maml:para>
       </maml:description>
     </command:details>
     <maml:description>
-      <maml:para>Start OSDCloud Azure</maml:para>
+      <maml:para>Installs the OSDCloudAzure Module and starts OS Deployment from Azure Storage</maml:para>
     </maml:description>
     <command:syntax>
       <command:syntaxItem>
@@ -24770,7 +25452,7 @@ Original credit to Mike Robbins http://mikefrobbins.com/2018/01/18/use-powershel
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>Force</maml:name>
           <maml:description>
-            <maml:para>Forces a reconnection to azgui.osdcloud.com</maml:para>
+            <maml:para>Resets everything to initial settings</maml:para>
           </maml:description>
           <dev:type>
             <maml:name>SwitchParameter</maml:name>
@@ -24784,7 +25466,7 @@ Original credit to Mike Robbins http://mikefrobbins.com/2018/01/18/use-powershel
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
         <maml:name>Force</maml:name>
         <maml:description>
-          <maml:para>Forces a reconnection to azgui.osdcloud.com</maml:para>
+          <maml:para>Resets everything to initial settings</maml:para>
         </maml:description>
         <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
         <dev:type>
@@ -24805,6 +25487,13 @@ Original credit to Mike Robbins http://mikefrobbins.com/2018/01/18/use-powershel
       <command:example>
         <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
         <dev:code>Start-OSDCloudAzure</dev:code>
+        <dev:remarks>
+          <maml:para></maml:para>
+        </dev:remarks>
+      </command:example>
+      <command:example>
+        <maml:title>-------------------------- EXAMPLE 2 --------------------------</maml:title>
+        <dev:code>Start-OSDCloudAzure -Force</dev:code>
         <dev:remarks>
           <maml:para></maml:para>
         </dev:remarks>
@@ -25333,6 +26022,97 @@ Original credit to Mike Robbins http://mikefrobbins.com/2018/01/18/use-powershel
           <dev:defaultValue>None</dev:defaultValue>
         </command:parameter>
       </command:syntaxItem>
+      <command:syntaxItem>
+        <maml:name>Start-OSDPad</maml:name>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="Repository, GitRepo">
+          <maml:name>RepoName</maml:name>
+          <maml:description>
+            <maml:para>{{ Fill RepoName Description }}</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="2" aliases="GitPath, Folder">
+          <maml:name>RepoFolder</maml:name>
+          <maml:description>
+            <maml:para>{{ Fill RepoFolder Description }}</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="BrandingTitle">
+          <maml:name>Brand</maml:name>
+          <maml:description>
+            <maml:para>{{ Fill Brand Description }}</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="BrandingColor">
+          <maml:name>Color</maml:name>
+          <maml:description>
+            <maml:para>{{ Fill Color Description }}</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+          <maml:name>Hide</maml:name>
+          <maml:description>
+            <maml:para>{{ Fill Hide Description }}</maml:para>
+          </maml:description>
+          <command:parameterValueGroup>
+            <command:parameterValue required="false" command:variableLength="false">Branding</command:parameterValue>
+            <command:parameterValue required="false" command:variableLength="false">Script</command:parameterValue>
+          </command:parameterValueGroup>
+          <command:parameterValue required="true" variableLength="false">String[]</command:parameterValue>
+          <dev:type>
+            <maml:name>String[]</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="OAuthToken">
+          <maml:name>OAuth</maml:name>
+          <maml:description>
+            <maml:para>{{ Fill OAuth Description }}</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="GitLabUri">
+          <maml:name>RepoDomain</maml:name>
+          <maml:description>
+            <maml:para>{{ Fill RepoDomain Description }}</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+      </command:syntaxItem>
     </command:syntax>
     <command:parameters>
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="BrandingTitle">
@@ -25411,6 +26191,18 @@ Original credit to Mike Robbins http://mikefrobbins.com/2018/01/18/use-powershel
         <maml:name>RepoOwner</maml:name>
         <maml:description>
           <maml:para>{{ Fill RepoOwner Description }}</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="GitLabUri">
+        <maml:name>RepoDomain</maml:name>
+        <maml:description>
+          <maml:para>{{ Fill RepoDomain Description }}</maml:para>
         </maml:description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
@@ -26929,7 +27721,7 @@ Original credit to Mike Robbins http://mikefrobbins.com/2018/01/18/use-powershel
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="4" aliases="none">
           <maml:name>OSName</maml:name>
           <maml:description>
-            <maml:para>Optional. Selects an Operating System to download If this parameter is not used, any Operating Systems can be downloaded 'Windows 11 21H2','Windows 10 21H2','Windows 10 21H1','Windows 10 20H2','Windows 10 2004','Windows 10 1909','Windows 10 1903','Windows 10 1809'</maml:para>
+            <maml:para>Optional. Selects an Operating System to download If this parameter is not used, any Operating Systems can be downloaded 'Windows 11 22H2','Windows 11 21H2','Windows 10 22H2','Windows 10 21H2','Windows 10 21H1','Windows 10 20H2','Windows 10 2004','Windows 10 1909','Windows 10 1903','Windows 10 1809'</maml:para>
           </maml:description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -27026,7 +27818,7 @@ Original credit to Mike Robbins http://mikefrobbins.com/2018/01/18/use-powershel
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="4" aliases="none">
         <maml:name>OSName</maml:name>
         <maml:description>
-          <maml:para>Optional. Selects an Operating System to download If this parameter is not used, any Operating Systems can be downloaded 'Windows 11 21H2','Windows 10 21H2','Windows 10 21H1','Windows 10 20H2','Windows 10 2004','Windows 10 1909','Windows 10 1903','Windows 10 1809'</maml:para>
+          <maml:para>Optional. Selects an Operating System to download If this parameter is not used, any Operating Systems can be downloaded 'Windows 11 22H2','Windows 11 21H2','Windows 10 22H2','Windows 10 21H2','Windows 10 21H1','Windows 10 20H2','Windows 10 2004','Windows 10 1909','Windows 10 1903','Windows 10 1809'</maml:para>
         </maml:description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
