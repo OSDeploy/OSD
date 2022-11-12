@@ -600,7 +600,7 @@ function Start-OSDCloud {
     #=================================================
     if ($PSCmdlet.ParameterSetName -eq 'Legacy') {
         Write-Host -ForegroundColor DarkGray "========================================================================="
-        Write-Host -ForegroundColor Cyan "Get-FeatureUpdate " -NoNewline
+        Write-Host -ForegroundColor Cyan "Get-FeatureUpdate Legacy" -NoNewline
         Write-Host -ForegroundColor DarkGray "-OSVersion '$OSVersion' -OSBuild $OSBuild -OSLicense $OSLicense -OSLanguage $OSLanguage"
 
         $Params = @{

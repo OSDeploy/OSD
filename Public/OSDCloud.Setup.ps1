@@ -1320,7 +1320,9 @@ Windows Registry Editor Version 5.00
     $CreateDirectories = @(
         'Config\AutopilotJSON',
         'Config\AutopilotOOBE',
-        'Config\OOBEDeploy'
+        'Config\OOBEDeploy',
+        'Config\Scripts\Shutdown',
+        'Config\Scripts\Startup'
     )
     
     if ($Name -match 'public') {
@@ -1824,10 +1826,12 @@ function New-OSDCloudWorkspace {
         #=================================================
         Write-Verbose "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Mirroring OSDCloud Template Media using Robocopy"
         Write-Verbose "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Mirroring will replace any previous WinPE with a new Template WinPE"
+        Write-Verbose "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Directories named OSDCloud are updated"
         Write-Verbose "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Source: $OSDCloudTemplate\Media"
         Write-Verbose "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Destination: $WorkspacePath\Media"
-    
-        $null = robocopy "$OSDCloudTemplate\Media" "$WorkspacePath\Media" *.* /mir /b /ndl /np /r:0 /w:0 /xj /LOG+:$WorkspaceLogs\Robocopy.log
+
+        $null = robocopy "$OSDCloudTemplate\Media\OSDCloud" "$WorkspacePath\Media\OSDCloud" *.* /e /b /ndl /np /r:0 /w:0 /xj /LOG+:$WorkspaceLogs\Robocopy.log
+        $null = robocopy "$OSDCloudTemplate\Media" "$WorkspacePath\Media" *.* /mir /b /ndl /np /r:0 /w:0 /xj /LOG+:$WorkspaceLogs\Robocopy.log /XD OSDCloud
     }
     elseif ($PSCmdlet.ParameterSetName -eq 'fromUsbDrive') {
         #=================================================
