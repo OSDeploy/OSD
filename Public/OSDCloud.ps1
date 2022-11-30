@@ -1382,13 +1382,14 @@ function Invoke-OSDCloud {
     if (Test-WebConnection -Uri "google.com") {
         $WebConnection = $True
     }
-    if ($Global:OSDCloud.SetWiFi -eq $true) {
-        $SetWiFi = $true
-    }
+
     if ($Global:OSDCloud.DevMode -eq $true) {
         Write-SectionHeader "Creating SetupComplete Files and populating with requested tasks."
         Set-SetupCompleteCreateStart
-
+        if ($Global:OSDCloud.SetWiFi -eq $true) {
+            $SetWiFi = $true
+            Set-SetupCompleteSetWiFi
+        }
         if ($Global:OSDCloud.IsWinPE -eq $true) {
             if ($Global:OSDCloud.WindowsDefenderUpdate -eq $true){
                 if ($WebConnection -eq $True -or $SetWiFi -eq $True){
@@ -1552,7 +1553,6 @@ function Invoke-OSDCloud {
             try {[void][System.IO.Directory]::CreateDirectory($ConfigPath)}
             catch {}
             $HashVar | Out-File $ConfigFile
-            Set-SetupCompleteSetWiFi
         }
 
         #Bitlocker Stuff
@@ -1791,25 +1791,27 @@ exit
     #endregion
     #=================================================
     #region Debug and Dev Mode
-    if ($Global:OSDCloud.DebugMode -eq $true){
-        Write-SectionHeader "DebugMode Enabled"
-        Invoke-Expression (Invoke-RestMethod -Uri 'https://raw.githubusercontent.com/OSDeploy/OSD/master/cloud/modules/debugmode.psm1')
-        osdcloud-addcmtrace
-        osdcloud-addmouseoobe
-        osdcloud-UpdateModuleFilesManually
-        #osdcloud-WinpeUpdateDefender
-    }
-    if ($Global:OSDCloud.DevMode -eq $true){
-        Write-SectionHeader "DevMode Enabled"
+    if ($WebConnection -eq $True){
         if ($Global:OSDCloud.DebugMode -eq $true){
-            osdcloud-UpdateModuleFilesManually -DEVMode $true
-        }
-        else{
+            Write-SectionHeader "DebugMode Enabled"
             Invoke-Expression (Invoke-RestMethod -Uri 'https://raw.githubusercontent.com/OSDeploy/OSD/master/cloud/modules/debugmode.psm1')
             osdcloud-addcmtrace
             osdcloud-addmouseoobe
-            osdcloud-UpdateModuleFilesManually -DEVMode $true
+            osdcloud-UpdateModuleFilesManually
             #osdcloud-WinpeUpdateDefender
+        }
+        if ($Global:OSDCloud.DevMode -eq $true){
+            Write-SectionHeader "DevMode Enabled"
+            if ($Global:OSDCloud.DebugMode -eq $true){
+                osdcloud-UpdateModuleFilesManually -DEVMode $true
+            }
+            else{
+                Invoke-Expression (Invoke-RestMethod -Uri 'https://raw.githubusercontent.com/OSDeploy/OSD/master/cloud/modules/debugmode.psm1')
+                osdcloud-addcmtrace
+                osdcloud-addmouseoobe
+                osdcloud-UpdateModuleFilesManually -DEVMode $true
+                #osdcloud-WinpeUpdateDefender
+            }
         }
     }
     #endregion

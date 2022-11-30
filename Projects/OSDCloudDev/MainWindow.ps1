@@ -894,6 +894,7 @@ $formMainWindowControlStartButton.add_Click({
         OOBEDeployJsonName          = $OOBEDeployJsonName
         OOBEDeployJsonObject        = $OOBEDeployJsonObject
         OSBuild                     = $OSBuild
+        OSDCloudUnattend            = $True
         OSEdition                   = $OSEdition
         OSImageIndex                = $OSImageIndex
         OSLanguage                  = $OSLanguage
