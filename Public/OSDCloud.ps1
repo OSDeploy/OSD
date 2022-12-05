@@ -1356,7 +1356,7 @@ function Invoke-OSDCloud {
     #endregion
     #=================================================
     #region Add OSDCloud DriverPack
-    if ($Global:OSDCloudUnattend -eq $true) {
+    if ($Global:OSDCloud.OSDCloudUnattend -eq $true) {
         Write-SectionHeader "Set Specialize Unattend.xml (Set-OSDCloudUnattendSpecialize)"
         Write-DarkGrayHost "C:\Windows\Panther\Invoke-OSDSpecialize.xml is being applied as an Unattend file"
         Write-DarkGrayHost "This will enable the extraction and installation of HP, Lenovo, and Microsoft Surface Drivers if necessary"
