@@ -1535,7 +1535,22 @@ function Invoke-OSDCloud {
                 $HashVar | Out-File $ConfigFile
             }
         }
-
+        if ($Global:OSDCloud.PauseSpecialize -eq $true){
+            if ($WebConnection){
+                Write-Host -ForegroundColor Cyan "Adding Pause Tasks into JSON Config File for Action during Specialize" 
+                $HashTable = @{
+                    'Addons' = @{
+                        'Pause' = $Global:OSDCloud.PauseSpecialize
+                    }
+                }
+                $HashVar = $HashTable | ConvertTo-Json
+                $ConfigPath = "c:\osdcloud\configs"
+                $ConfigFile = "$ConfigPath\Extras.JSON"
+                try {[void][System.IO.Directory]::CreateDirectory($ConfigPath)}
+                catch {}
+                $HashVar | Out-File $ConfigFile
+            }
+        }
         #Extra Items Config for Specialize Phase
         if ($Global:OSDCloud.SetWiFi -eq $true){
 

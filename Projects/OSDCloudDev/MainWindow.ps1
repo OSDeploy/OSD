@@ -901,6 +901,7 @@ $formMainWindowControlStartButton.add_Click({
         OSLicense                   = $OSLicense
         OSName                      = $OSName
         OSVersion                   = $OSVersion
+        PauseSpecialize             = $formMainWindowControlPauseSpecialize.IsChecked
         Restart                     = $formMainWindowControlRestart.IsChecked
         SetTimeZone                 = $formMainWindowControlTimeZone.IsChecked
         SetWiFi                     = $formMainWindowControlSetWiFi.IsChecked

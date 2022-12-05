@@ -345,6 +345,17 @@ function Invoke-OSDSpecializeDev {
         }
     }
     #>
+    if ($ExtrasJSON){
+        write-host "Specialize Stage - Extra Addons" -ForegroundColor Green
+        $WarningPreference = "SilentlyContinue"
+        $VerbosePreference = "SilentlyContinue"
+        #Invoke-Expression (Invoke-RestMethod -Uri 'functions.osdcloud.com')
+        if ($ExtrasJSON.Addons.Pause -eq $true){
+            Write-Host -ForegroundColor DarkGray "========================================================================="
+            Write-Host -ForegroundColor DarkGray "Pausing Specialize"
+            Start-Process "cmd.exe" -ArgumentList "start /wait cmd.exe" -wait
+        }
+    }   
     if (Test-WebConnection -Uri "google.com") {
         Write-Host -ForegroundColor Green "Internet Connection Confirmed"
         Write-Host -ForegroundColor Green "Enabling Vendor Addon Tools"

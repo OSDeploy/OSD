@@ -169,6 +169,10 @@
                           Header="Enable OSDCloud Beta Features"
                           IsCheckable="True"
                           IsChecked="False" />
+                <MenuItem Name="PauseSpecialize"
+                          Header="Pause for Testing in Specialize"
+                          IsCheckable="True"
+                          IsChecked="False" />
             </MenuItem>
             <MenuItem Header="Microsoft Update Catalog">
                 <MenuItem Name="MSCatalogDiskDrivers"
