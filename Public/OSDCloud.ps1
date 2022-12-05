@@ -1993,11 +1993,11 @@ exit
     #>
     #=================================================
     #region OSDCloud Finished
-    Write-Output "OSDCloud Finished"
+    Write-SectionHeader "OSDCloud Finished"
     $Global:OSDCloud.TimeEnd = Get-Date
     $Global:OSDCloud.TimeSpan = New-TimeSpan -Start $Global:OSDCloud.TimeStart -End $Global:OSDCloud.TimeEnd
     $Global:OSDCloud | ConvertTo-Json | Out-File -FilePath 'C:\OSDCloud\Logs\OSDCloud.json' -Encoding ascii -Width 2000 -Force
-    Write-Output "Completed in $($Global:OSDCloud.TimeSpan.ToString("mm' minutes 'ss' seconds'"))"
+    Write-DarkGrayHost "Completed in $($Global:OSDCloud.TimeSpan.ToString("mm' minutes 'ss' seconds'"))"
 
     if ($Global:OSDCloud.Screenshot) {
         Start-Sleep -Seconds 5
