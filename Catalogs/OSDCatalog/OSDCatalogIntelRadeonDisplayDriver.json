@@ -1,6 +1,6 @@
 {
-    "OSDVersion":  "22.11.8.1",
-    "LastUpdate":  "\/Date(1667966544705)\/",
+    "OSDVersion":  "22.12.13.1",
+    "LastUpdate":  "\/Date(1670967133649)\/",
     "OSDStatus":  "",
     "OSDType":  "Driver",
     "OSDGroup":  "IntelRadeonDisplay",
@@ -23,7 +23,7 @@
     "DriverUrl":  "https://downloadmirror.intel.com/709947/gfx_radeon_21.30.37.04.zip",
     "DriverInfo":  "https://intel.com/content/www/us/en/download/19282/radeon-rx-vega-m-graphics.html",
     "DriverDescription":  null,
-    "OSDGuid":  "447db3ea-970f-4823-89b6-09a6c30c89d4",
+    "OSDGuid":  "d77ad865-8828-44e5-853f-ae06bc0bee55",
     "OSDPnpClass":  "Display",
     "OSDPnpClassGuid":  "{4D36E968-E325-11CE-BFC1-08002BE10318}"
 }
