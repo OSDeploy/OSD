@@ -1,7 +1,7 @@
 [
     {
         "Catalog":  "Windows Server 20H2",
-        "OSDVersion":  "22.11.8.1",
+        "OSDVersion":  "22.12.13.1",
         "OSDStatus":  "",
         "UpdateOS":  "Windows Server",
         "UpdateBuild":  "20H2",
@@ -47,13 +47,13 @@
         "AdditionalHash":  "89 182 148 163 5 79 30 154 106 201 31 87 1 240 43 143 219 6 67 105 111 57 44 226 230 44 246 198 191 104 123 153",
         "OSDCore":  "",
         "OSDWinPE":  "",
-        "OSDGuid":  "01e26168-e962-4205-8eff-09529e8d0e12",
+        "OSDGuid":  "5feb3e36-ff2a-4e16-9c0f-5335bba48f08",
         "PartitionKey":  "Windows Server 20H2",
-        "RowKey":  "01e26168-e962-4205-8eff-09529e8d0e12"
+        "RowKey":  "5feb3e36-ff2a-4e16-9c0f-5335bba48f08"
     },
     {
         "Catalog":  "Windows Server 20H2",
-        "OSDVersion":  "22.11.8.1",
+        "OSDVersion":  "22.12.13.1",
         "OSDStatus":  "",
         "UpdateOS":  "Windows Server",
         "UpdateBuild":  "20H2",
@@ -99,13 +99,13 @@
         "AdditionalHash":  "105 149 50 78 234 243 222 76 117 96 156 226 38 135 72 99 236 246 105 212 119 48 40 43 79 233 162 92 212 190 240 76",
         "OSDCore":  "",
         "OSDWinPE":  "",
-        "OSDGuid":  "37a63557-6ffe-4fe6-8076-5cd646ca3143",
+        "OSDGuid":  "7eff3496-f9aa-4b31-8803-741c87bb7f16",
         "PartitionKey":  "Windows Server 20H2",
-        "RowKey":  "37a63557-6ffe-4fe6-8076-5cd646ca3143"
+        "RowKey":  "7eff3496-f9aa-4b31-8803-741c87bb7f16"
     },
     {
         "Catalog":  "Windows Server 20H2",
-        "OSDVersion":  "22.11.8.1",
+        "OSDVersion":  "22.12.13.1",
         "OSDStatus":  "",
         "UpdateOS":  "Windows Server",
         "UpdateBuild":  "20H2",
@@ -151,13 +151,13 @@
         "AdditionalHash":  "82 36 173 110 141 157 46 145 171 222 203 216 195 166 161 41 193 234 1 180 52 216 52 28 135 49 151 168 99 186 83 174",
         "OSDCore":  "",
         "OSDWinPE":  "",
-        "OSDGuid":  "f539b6b4-8bc6-4ed6-b22c-dce5a5302275",
+        "OSDGuid":  "bc9667b7-47a6-4548-b9d8-bab8e94e7c67",
         "PartitionKey":  "Windows Server 20H2",
-        "RowKey":  "f539b6b4-8bc6-4ed6-b22c-dce5a5302275"
+        "RowKey":  "bc9667b7-47a6-4548-b9d8-bab8e94e7c67"
     },
     {
         "Catalog":  "Windows Server 20H2",
-        "OSDVersion":  "22.11.8.1",
+        "OSDVersion":  "22.12.13.1",
         "OSDStatus":  "",
         "UpdateOS":  "Windows Server",
         "UpdateBuild":  "20H2",
@@ -203,13 +203,13 @@
         "AdditionalHash":  "33 157 140 14 33 244 108 11 170 86 213 251 54 141 45 98 55 2 2 196 188 183 115 21 59 223 48 240 4 38 61 209",
         "OSDCore":  "",
         "OSDWinPE":  "",
-        "OSDGuid":  "2eef2b07-cedd-47d3-88bb-41422d7f39e6",
+        "OSDGuid":  "d484ce27-ad15-4c75-b33c-31de6f0fcfe3",
         "PartitionKey":  "Windows Server 20H2",
-        "RowKey":  "2eef2b07-cedd-47d3-88bb-41422d7f39e6"
+        "RowKey":  "d484ce27-ad15-4c75-b33c-31de6f0fcfe3"
     },
     {
         "Catalog":  "Windows Server 20H2",
-        "OSDVersion":  "22.11.8.1",
+        "OSDVersion":  "22.12.13.1",
         "OSDStatus":  "",
         "UpdateOS":  "Windows Server",
         "UpdateBuild":  "20H2",
@@ -255,13 +255,13 @@
         "AdditionalHash":  "245 122 50 15 38 85 33 65 29 17 50 107 95 44 165 204 197 167 111 138 83 47 198 106 195 181 128 115 157 0 229 251",
         "OSDCore":  "",
         "OSDWinPE":  "",
-        "OSDGuid":  "b52310f9-c1da-45b4-8bb1-5ea29ad38b59",
+        "OSDGuid":  "45564800-eb47-455e-824b-3acf65097bd2",
         "PartitionKey":  "Windows Server 20H2",
-        "RowKey":  "b52310f9-c1da-45b4-8bb1-5ea29ad38b59"
+        "RowKey":  "45564800-eb47-455e-824b-3acf65097bd2"
     },
     {
         "Catalog":  "Windows Server 20H2",
-        "OSDVersion":  "22.11.8.1",
+        "OSDVersion":  "22.12.13.1",
         "OSDStatus":  "",
         "UpdateOS":  "Windows Server",
         "UpdateBuild":  "20H2",
@@ -307,13 +307,13 @@
         "AdditionalHash":  "52 29 27 152 180 81 96 15 35 106 209 159 255 8 124 88 228 101 73 235 171 35 118 224 61 89 117 224 61 202 134 18",
         "OSDCore":  "",
         "OSDWinPE":  "",
-        "OSDGuid":  "a568b009-99ff-4dca-9019-ed54a2af6c95",
+        "OSDGuid":  "8085c21a-7764-469a-ac54-2af9d28fe759",
         "PartitionKey":  "Windows Server 20H2",
-        "RowKey":  "a568b009-99ff-4dca-9019-ed54a2af6c95"
+        "RowKey":  "8085c21a-7764-469a-ac54-2af9d28fe759"
     },
     {
         "Catalog":  "Windows Server 20H2",
-        "OSDVersion":  "22.11.8.1",
+        "OSDVersion":  "22.12.13.1",
         "OSDStatus":  "",
         "UpdateOS":  "Windows Server",
         "UpdateBuild":  "20H2",
@@ -359,13 +359,13 @@
         "AdditionalHash":  "178 155 36 105 138 29 18 20 38 155 198 248 51 29 52 14 47 3 8 67 13 153 152 233 194 232 96 239 105 40 185 125",
         "OSDCore":  "",
         "OSDWinPE":  "",
-        "OSDGuid":  "2a63228b-806a-4542-849a-f612cdb67551",
+        "OSDGuid":  "71c4a5ad-5d08-4bf7-8c7f-7bf18827dc9a",
         "PartitionKey":  "Windows Server 20H2",
-        "RowKey":  "2a63228b-806a-4542-849a-f612cdb67551"
+        "RowKey":  "71c4a5ad-5d08-4bf7-8c7f-7bf18827dc9a"
     },
     {
         "Catalog":  "Windows Server 20H2",
-        "OSDVersion":  "22.11.8.1",
+        "OSDVersion":  "22.12.13.1",
         "OSDStatus":  "",
         "UpdateOS":  "Windows Server",
         "UpdateBuild":  "20H2",
@@ -411,8 +411,8 @@
         "AdditionalHash":  "83 187 11 64 41 232 156 150 164 222 85 65 186 112 76 34 52 253 142 229 85 67 211 252 20 42 55 116 224 227 245 221",
         "OSDCore":  "",
         "OSDWinPE":  "",
-        "OSDGuid":  "dd17d176-4164-47df-a56f-e03211924f87",
+        "OSDGuid":  "afd59c80-54d5-4809-906e-6b324ab6a5d3",
         "PartitionKey":  "Windows Server 20H2",
-        "RowKey":  "dd17d176-4164-47df-a56f-e03211924f87"
+        "RowKey":  "afd59c80-54d5-4809-906e-6b324ab6a5d3"
     }
 ]
