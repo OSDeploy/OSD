@@ -1809,6 +1809,7 @@ exit
     if ($WebConnection -eq $True){
         if ($Global:OSDCloud.DebugMode -eq $true){
             Write-SectionHeader "DebugMode Enabled"
+            Invoke-Expression (Invoke-RestMethod -Uri 'https://raw.githubusercontent.com/OSDeploy/OSD/master/cloud/modules/_anywhere.psm1')
             Invoke-Expression (Invoke-RestMethod -Uri 'https://raw.githubusercontent.com/OSDeploy/OSD/master/cloud/modules/debugmode.psm1')
             osdcloud-addcmtrace
             osdcloud-addmouseoobe
@@ -1818,9 +1819,11 @@ exit
         if ($Global:OSDCloud.DevMode -eq $true){
             Write-Output "DevMode Enabled"
             if ($Global:OSDCloud.DebugMode -eq $true){
+                Invoke-Expression (Invoke-RestMethod -Uri 'https://raw.githubusercontent.com/OSDeploy/OSD/master/cloud/modules/_anywhere.psm1')
                 osdcloud-UpdateModuleFilesManually -DEVMode $true
             }
             else{
+                Invoke-Expression (Invoke-RestMethod -Uri 'https://raw.githubusercontent.com/OSDeploy/OSD/master/cloud/modules/_anywhere.psm1')
                 Invoke-Expression (Invoke-RestMethod -Uri 'https://raw.githubusercontent.com/OSDeploy/OSD/master/cloud/modules/debugmode.psm1')
                 osdcloud-addcmtrace
                 osdcloud-addmouseoobe
