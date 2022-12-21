@@ -367,7 +367,7 @@ PowerShell -Nol -C Initialize-OSDCloudStartnet
         }
         
         Write-Host -ForegroundColor DarkGray "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Saving $Module to $MountPath\Program Files\WindowsPowerShell\Modules"
-        if ($Module -eq 'HPCSML'){
+        if ($Module -eq 'HPCMSL'){
             Save-Module -Name $Module -Path "$MountPath\Program Files\WindowsPowerShell\Modules" -Force -AcceptLicense
         }
         else {Save-Module -Name $Module -Path "$MountPath\Program Files\WindowsPowerShell\Modules" -Force} 
