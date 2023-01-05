@@ -327,6 +327,30 @@ $OSDCatalog = @'
         "Model":  "Surface Studio 2",
         "Product":  "Surface_Studio_2_1707_Commercial",
         "PackageID": "57593"
+    },
+    {
+        "Name":  "Surface Pro 9 Consumer",
+        "Model":  "Surface Pro 9",
+        "Product":  "Surface_Pro_9_2038",
+        "PackageID": "104680"
+    },
+    {
+        "Name":  "Surface Pro 9 Commercial",
+        "Model":  "Surface Pro 9",
+        "Product":  "Surface_Pro_9_for_Business_2038",
+        "PackageID": "104680"
+    },
+    {
+        "Name":  "Surface Pro 9 with 5G (U.S.)",
+        "Model":  "Surface Pro 9",
+        "Product":  "Surface_Pro_9_With_5G_1997",
+        "PackageID": "104680"
+    },
+    {
+        "Name":  "Surface Pro 9 with 5G (outside of U.S.)",
+        "Model":  "Surface Pro 9",
+        "Product":  "Surface_Pro_9_With_5G_1996",
+        "PackageID": "104680"
     }
 ]
 '@
