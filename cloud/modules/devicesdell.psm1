@@ -115,7 +115,7 @@ function osdcloud-RunDCU {
     [CmdletBinding()]
     Param (
         [Parameter(Mandatory=$false)]
-        [ValidateSet("bios", "firmware", "driver", "apps", "other")]
+        [ValidateSet("bios", "firmware", "driver", "application", "other", "CleanImage")]
         $UpdateType = "driver"
         )
     $DCUReturnTablet = @(
@@ -147,10 +147,16 @@ function osdcloud-RunDCU {
     else {
         throw "No DCU Installed"
     }
-    $ProcessArgs = "/applyUpdates -updateType=$UpdateType -outputLog=$logfile -reboot=enable"
+
+    if ($UpdateType -eq "CleanImage"){
+        $ProcessArgs = "/DriverInstall -outputLog=$logfile -reboot=enable"
+    }
+    else {
+        $ProcessArgs = "/applyUpdates -updateType=$UpdateType -outputLog=$logfile -reboot=enable"
+    }
     try {[void][System.IO.Directory]::CreateDirectory($LogFolder)}
     catch {throw}
-
+   
     $DCU = Start-Process -FilePath $ProcessPath -ArgumentList $ProcessArgs -Wait -PassThru -NoNewWindow
     $DCUReturn = $DCUReturnTablet | Where-Object {$_.ReturnCode -eq $DCU.ExitCode}
 
