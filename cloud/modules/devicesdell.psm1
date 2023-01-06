@@ -138,9 +138,16 @@ function osdcloud-RunDCU {
     )
     $LogFolder = "c:\OSDCloud\Logs"
     $LogFile = "$LogFolder\DCU.log"
-    $ProcessPath = 'C:\Program Files (x86)\Dell\CommandUpdate\dcu-cli.exe'
+    if (Test-path -Path 'C:\Program Files (x86)\Dell\CommandUpdate\dcu-cli.exe'){
+        $ProcessPath = 'C:\Program Files (x86)\Dell\CommandUpdate\dcu-cli.exe'
+    }
+    if (Test-path -Path 'C:\Program Files\Dell\CommandUpdate\dcu-cli.exe'){
+        $ProcessPath = 'C:\Program Files\Dell\CommandUpdate\dcu-cli.exe'
+    }
+    else {
+        throw "No DCU Installed"
+    }
     $ProcessArgs = "/applyUpdates -updateType=$UpdateType -outputLog=$logfile -reboot=enable"
-    if (!(test-path $ProcessPath -ErrorAction SilentlyContinue)){throw "No DCU Installed"}
     try {[void][System.IO.Directory]::CreateDirectory($LogFolder)}
     catch {throw}
 
@@ -155,11 +162,16 @@ function osdcloud-DCUAutoUpdate {
     <#
     Enables DCU Auto Update
     #>
-
-    $ProcessPath = 'C:\Program Files (x86)\Dell\CommandUpdate\dcu-cli.exe'
+    if (Test-path -Path 'C:\Program Files (x86)\Dell\CommandUpdate\dcu-cli.exe'){
+        $ProcessPath = 'C:\Program Files (x86)\Dell\CommandUpdate\dcu-cli.exe'
+    }
+    if (Test-path -Path 'C:\Program Files\Dell\CommandUpdate\dcu-cli.exe'){
+        $ProcessPath = 'C:\Program Files\Dell\CommandUpdate\dcu-cli.exe'
+    }
+    else {
+        throw "No DCU Installed"
+    }
     $ProcessArgs = "/configure -scheduleAuto -scheduleAction=DownloadInstallAndNotify -scheduledReboot=60"
-    if (!(test-path $ProcessPath -ErrorAction SilentlyContinue)){throw "No DCU Installed"}
-
     $DCU = Start-Process -FilePath $ProcessPath -ArgumentList $ProcessArgs -Wait -PassThru -NoNewWindow
     $DCUReturn = $DCUReturnTablet | Where-Object {$_.ReturnCode -eq $DCU.ExitCode}
 
