@@ -49,7 +49,7 @@ Function osdcloud-InstallDCU {
             $DCUAppsAvailable = $XMLIndexCAB.Manifest.SoftwareComponent | Where-Object {$_.ComponentType.value -eq "APAC"}
             #This is using the x86 Windows version, not the UWP app.  You can change this if you like
             $AppDCUVersion = ([Version[]]$Version = ($DCUAppsAvailable | Where-Object {$_.path -match 'command-update' -and $_.SupportedOperatingSystems.OperatingSystem.osArch -match "x64" -and $_.Description.Display.'#cdata-section' -notmatch "UWP"}).vendorVersion) | Sort-Object | Select-Object -Last 1
-            $AppDCU = $DCUAppsAvailable | Where-Object {$_.path -match 'command-update' -and $_.SupportedOperatingSystems.OperatingSystem.osArch -match "x64" -and $_.Description.Display.'#cdata-section' -notmatch "UWP" -and $_.Description.Display.'#cdata-section' -notmatch "Universal" -and $_.vendorVersion -eq $AppDCUVersion}
+            $AppDCU = $DCUAppsAvailable | Where-Object {$_.path -match 'command-update' -and $_.SupportedOperatingSystems.OperatingSystem.osArch -match "x64" -and $_.Description.Display.'#cdata-section' -notmatch "UWP" -and $_.vendorVersion -eq $AppDCUVersion}
             if ($AppDCU){
                 $DellItem = $AppDCU
                 [Version]$DCUVersion = $DellItem.vendorVersion
