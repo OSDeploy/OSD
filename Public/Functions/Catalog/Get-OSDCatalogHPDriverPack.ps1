@@ -137,11 +137,16 @@ function Get-OSDCatalogHPDriverPack {
             $UniqueName = $UniqueName.Replace('Windows 10 64-bit,', 'Win10')
             $UniqueName = $UniqueName.Replace('Windows 11 64-bit,', 'Win11')
 
+            $template = "M/d/yyyy hh:mm:ss tt"
+            $timeinfo = $HpSoftPaq.DateReleased
+            $dtReleaseDate = [datetime]::ParseExact($timeinfo, $template, $null)
+
+
             $ObjectProperties = [Ordered]@{
                 CatalogVersion 	= Get-Date -Format yy.MM.dd
                 Status          = $null
                 Component       = 'DriverPack'
-                ReleaseDate     = (Get-Date $HpSoftPaq.DateReleased -Format "yy.MM.dd")
+                ReleaseDate     = $dtReleaseDate.ToString("yy.MM.dd")
                 Manufacturer    = 'HP'
                 Name            = $UniqueName
                 Model           = $Item.SystemName

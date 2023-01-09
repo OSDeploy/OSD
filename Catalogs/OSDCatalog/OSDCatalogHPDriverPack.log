@@ -1,30 +1,27 @@
 ﻿**********************
 Windows PowerShell transcript start
-Start time: 20221213155409
+Start time: 20230108212206
 Username: OSDCODE\david
 RunAs User: OSDCODE\david
 Configuration Name: 
 Machine: OSDCODE (Microsoft Windows NT 10.0.22621.0)
-Host Application: C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe -NoProfile -ExecutionPolicy Bypass -Command Import-Module 'c:\Users\david\.vscode\extensions\ms-vscode.powershell-preview-2022.12.1\modules\PowerShellEditorServices\PowerShellEditorServices.psd1'; Start-EditorServices -HostName 'Visual Studio Code Host' -HostProfileId 'Microsoft.VSCode' -HostVersion '2022.12.1' -AdditionalModules @('PowerShellEditorServices.VSCode') -BundledModulesPath 'c:\Users\david\.vscode\extensions\ms-vscode.powershell-preview-2022.12.1\modules' -EnableConsoleRepl -StartupBanner "PowerShell Preview Extension v2022.12.1
-Copyright (c) Microsoft Corporation.
-
-https://aka.ms/vscode-powershell
-Type 'help' to get help.
-" -LogLevel 'Normal' -LogPath 'c:\Users\david\AppData\Roaming\Code\User\globalStorage\ms-vscode.powershell-preview\logs\1670966915-062f79df-0ff1-4636-bb6a-ab6aee3cf6801670966906938\EditorServices.log' -SessionDetailsPath 'c:\Users\david\AppData\Roaming\Code\User\globalStorage\ms-vscode.powershell-preview\sessions\PSES-VSCode-11468-575199.json' -FeatureFlags @() 
-Process ID: 13180
-PSVersion: 5.1.22621.608
+Host Application: C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe -noexit -command try { . "c:\Program Files\Microsoft VS Code\resources\app\out\vs\workbench\contrib\terminal\browser\media\shellIntegration.ps1" } catch {}
+Process ID: 8428
+PSVersion: 5.1.22621.963
 PSEdition: Desktop
-PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1.22621.608
-BuildVersion: 10.0.22621.608
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1.22621.963
+BuildVersion: 10.0.22621.963
 CLRVersion: 4.0.30319.42000
 WSManStackVersion: 3.0
 PSRemotingProtocolVersion: 2.3
 SerializationVersion: 1.1.0.1
 **********************
 Transcript started, output file is C:\Users\david\OneDrive\GitHub\MyModules\OSD\Catalogs\OSDCatalog\OSDCatalogHPDriverPack.log
+PS C:\Users\david\OneDrive\GitHub\MyModules\OSD> $null = Get-OSDCatalogHPDriverPack -Force -Verbose
+VERBOSE: Build Catalog already created at C:\Users\david\AppData\Local\Temp\OSD\OSDCatalogHPDriverPack.xml
 VERBOSE: Test-WebConnection OK: http://ftp.hp.com/pub/caps-softpaq/cmit/HPClientDriverPackCatalog.cab
 VERBOSE: HEAD with 0-byte payload
-VERBOSE: received 192090-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: received 193409-byte response of content type application/vnd.ms-cab-compressed
 VERBOSE: Source: http://ftp.hp.com/pub/caps-softpaq/cmit/HPClientDriverPackCatalog.cab
 VERBOSE: Destination: C:\Users\david\AppData\Local\Temp\OSD\HPClientDriverPackCatalog.cab
 VERBOSE: Expand: C:\Users\david\AppData\Local\Temp\OSD\HPClientDriverPackCatalog.cab
@@ -32,7 +29,15 @@ VERBOSE: Using Raw Catalog at C:\Users\david\AppData\Local\Temp\OSD\HPClientDriv
 VERBOSE: Reading the Raw Catalog at C:\Users\david\AppData\Local\Temp\OSD\HPClientDriverPackCatalog.xml
 WARNING: Building Catalog content, please wait ...
 VERBOSE: Exporting Build Catalog to C:\Users\david\AppData\Local\Temp\OSD\OSDCatalogHPDriverPack.xml
+PS C:\Users\david\OneDrive\GitHub\MyModules\OSD> $Source = Join-Path $env:TEMP (Join-Path 'OSD' 'OSDCatalogHPDriverPack.xml')
+PS C:\Users\david\OneDrive\GitHub\MyModules\OSD> $Destination = Join-Path (Get-Module -Name OSD -ListAvailable | Sort-Object Version -Descending | Select-Object -First 1).ModuleBase "Catalogs\OSDCatalog\OSDCatalogHPDriverPack.xml"
+PS C:\Users\david\OneDrive\GitHub\MyModules\OSD> if (Test-Path $Source) {
+    Copy-Item $Source $Destination -Force
+}
+PS C:\Users\david\OneDrive\GitHub\MyModules\OSD> Import-Clixml -Path $Destination | ConvertTo-Json | Out-File -FilePath (Join-Path (Get-Module -Name OSD -ListAvailable | Sort-Object Version -Descending | Select-Object -First 1).ModuleBase "Catalogs\OSDCatalog\OSDCatalogHPDriverPack.json") -Encoding ascii -Width 2000 -Force
+PS C:\Users\david\OneDrive\GitHub\MyModules\OSD> $MasterDriverPacks += Get-Content (Join-Path (Get-Module -Name OSD -ListAvailable | Sort-Object Version -Descending | Select-Object -First 1).ModuleBase "Catalogs\OSDCatalog\OSDCatalogHPDriverPack.json") | ConvertFrom-Json
+PS C:\Users\david\OneDrive\GitHub\MyModules\OSD> Stop-Transcript
 **********************
 Windows PowerShell transcript end
-End time: 20221213155459
+End time: 20230108212325
 **********************

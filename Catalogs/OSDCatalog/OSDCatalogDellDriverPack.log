@@ -1,30 +1,26 @@
 ﻿**********************
 Windows PowerShell transcript start
-Start time: 20221213153613
+Start time: 20230108204031
 Username: OSDCODE\david
 RunAs User: OSDCODE\david
 Configuration Name: 
 Machine: OSDCODE (Microsoft Windows NT 10.0.22621.0)
-Host Application: C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe -NoProfile -ExecutionPolicy Bypass -Command Import-Module 'c:\Users\david\.vscode\extensions\ms-vscode.powershell-preview-2022.12.1\modules\PowerShellEditorServices\PowerShellEditorServices.psd1'; Start-EditorServices -HostName 'Visual Studio Code Host' -HostProfileId 'Microsoft.VSCode' -HostVersion '2022.12.1' -AdditionalModules @('PowerShellEditorServices.VSCode') -BundledModulesPath 'c:\Users\david\.vscode\extensions\ms-vscode.powershell-preview-2022.12.1\modules' -EnableConsoleRepl -StartupBanner "PowerShell Preview Extension v2022.12.1
-Copyright (c) Microsoft Corporation.
-
-https://aka.ms/vscode-powershell
-Type 'help' to get help.
-" -LogLevel 'Normal' -LogPath 'c:\Users\david\AppData\Roaming\Code\User\globalStorage\ms-vscode.powershell-preview\logs\1670966915-062f79df-0ff1-4636-bb6a-ab6aee3cf6801670966906938\EditorServices.log' -SessionDetailsPath 'c:\Users\david\AppData\Roaming\Code\User\globalStorage\ms-vscode.powershell-preview\sessions\PSES-VSCode-11468-575199.json' -FeatureFlags @() 
-Process ID: 13180
-PSVersion: 5.1.22621.608
+Host Application: C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe -noexit -command try { . "c:\Program Files\Microsoft VS Code\resources\app\out\vs\workbench\contrib\terminal\browser\media\shellIntegration.ps1" } catch {}
+Process ID: 8428
+PSVersion: 5.1.22621.963
 PSEdition: Desktop
-PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1.22621.608
-BuildVersion: 10.0.22621.608
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1.22621.963
+BuildVersion: 10.0.22621.963
 CLRVersion: 4.0.30319.42000
 WSManStackVersion: 3.0
 PSRemotingProtocolVersion: 2.3
 SerializationVersion: 1.1.0.1
 **********************
 Transcript started, output file is C:\Users\david\OneDrive\GitHub\MyModules\OSD\Catalogs\OSDCatalog\OSDCatalogDellDriverPack.log
+PS C:\Users\david\OneDrive\GitHub\MyModules\OSD> $null = Get-OSDCatalogDellDriverPack -Force -Verbose -TestUrl
 VERBOSE: Test-WebConnection OK: https://downloads.dell.com/catalog/DriverPackCatalog.cab
 VERBOSE: HEAD with 0-byte payload
-VERBOSE: received 272912-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: received 273241-byte response of content type application/vnd.ms-cab-compressed
 VERBOSE: Source: https://downloads.dell.com/catalog/DriverPackCatalog.cab
 VERBOSE: Destination: C:\Users\david\AppData\Local\Temp\OSD\DriverPackCatalog.cab
 VERBOSE: Expand: C:\Users\david\AppData\Local\Temp\OSD\DriverPackCatalog.cab
@@ -492,9 +488,6 @@ VERBOSE: received 1688080902-byte response of content type text/plain
 VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER07340616M/1/5290 2-IN-1-win10-A15-V8N0D.CAB
 VERBOSE: HEAD with 0-byte payload
 VERBOSE: received 737176767-byte response of content type text/plain
-VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER07340632M/1/XE3-win10-A12-0K2NN.CAB
-VERBOSE: HEAD with 0-byte payload
-VERBOSE: received 1688763617-byte response of content type text/plain
 VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER07340652M/1/5491-win10-A13-M714V.CAB
 VERBOSE: HEAD with 0-byte payload
 VERBOSE: received 1293477191-byte response of content type text/plain
@@ -555,9 +548,6 @@ VERBOSE: received 935216432-byte response of content type text/plain
 VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER07772029M/1/7390 2in1-win11-A00-4PY3P.CAB
 VERBOSE: HEAD with 0-byte payload
 VERBOSE: received 906379213-byte response of content type text/plain
-VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER07795749M/1/3450-win11-A00-5CKY9.CAB
-VERBOSE: HEAD with 0-byte payload
-VERBOSE: received 1703574505-byte response of content type text/plain
 VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER07936715M/1/9380-win10-A14-18WFG.CAB
 VERBOSE: HEAD with 0-byte payload
 VERBOSE: received 960748950-byte response of content type text/plain
@@ -615,33 +605,18 @@ VERBOSE: received 1794798163-byte response of content type text/plain
 VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER07982913M/1/OptiPlex 7071 Tower-win10-A09-FX82J.CAB
 VERBOSE: HEAD with 0-byte payload
 VERBOSE: received 1305308059-byte response of content type text/plain
-VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER07982920M/1/7220EX-win10-A08-WP0FH.CAB
-VERBOSE: HEAD with 0-byte payload
-VERBOSE: received 1203624510-byte response of content type text/plain
 VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER08061388M/1/9410-win11-A00-FPN41.CAB
 VERBOSE: HEAD with 0-byte payload
 VERBOSE: received 1747130502-byte response of content type text/plain
 VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER08061416M/1/3550-win11-A00-P2MTX.CAB
 VERBOSE: HEAD with 0-byte payload
 VERBOSE: received 2030834636-byte response of content type text/plain
-VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER08079817M/1/5480 AIO-win11-A00-MGPDH.CAB
-VERBOSE: HEAD with 0-byte payload
-VERBOSE: received 1867547638-byte response of content type text/plain
-VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER08080094M/1/7780 AIO-win11-A00-F6WXH.CAB
-VERBOSE: HEAD with 0-byte payload
-VERBOSE: received 1867490278-byte response of content type text/plain
-VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER08080168M/1/7480 AIO-win11-A00-1612X.CAB
-VERBOSE: HEAD with 0-byte payload
-VERBOSE: received 1867492628-byte response of content type text/plain
 VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER08080634M/1/3541-win11-A00-HT8FH.CAB
 VERBOSE: HEAD with 0-byte payload
 VERBOSE: received 1501533820-byte response of content type text/plain
 VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER08085661M/1/3440-win11-A00-YKWF5.CAB
 VERBOSE: HEAD with 0-byte payload
 VERBOSE: received 1943505546-byte response of content type text/plain
-VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER08091689M/1/5750-win11-A00-N27XC.CAB
-VERBOSE: HEAD with 0-byte payload
-VERBOSE: received 1771272949-byte response of content type text/plain
 VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER08091982M/1/9700-win11-A00-7WDM1.CAB
 VERBOSE: HEAD with 0-byte payload
 VERBOSE: received 1830996555-byte response of content type text/plain
@@ -669,9 +644,6 @@ VERBOSE: received 1187585888-byte response of content type text/plain
 VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER08131764M/1/7400 2-IN-1-win11-A00-9GP3G.CAB
 VERBOSE: HEAD with 0-byte payload
 VERBOSE: received 1190102823-byte response of content type text/plain
-VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER08146814M/1/Precision 3640 Tower-win11-A00-HYT2W.CAB
-VERBOSE: HEAD with 0-byte payload
-VERBOSE: received 1678415708-byte response of content type text/plain
 VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER08162223M/1/OptiPlex 7071 Tower-win11-A00-8XVFC.CAB
 VERBOSE: HEAD with 0-byte payload
 VERBOSE: received 1526092489-byte response of content type text/plain
@@ -696,30 +668,18 @@ VERBOSE: received 1640391887-byte response of content type text/plain
 VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER08165790M/1/5540-win11-A00-H0FP3.CAB
 VERBOSE: HEAD with 0-byte payload
 VERBOSE: received 1582505187-byte response of content type text/plain
-VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER08171865M/1/3310 2-IN-1-win10-A11-GXXFT.CAB
-VERBOSE: HEAD with 0-byte payload
-VERBOSE: received 1442751545-byte response of content type text/plain
 VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER08179366M/1/3630-win11-A00-T7F59.CAB
 VERBOSE: HEAD with 0-byte payload
 VERBOSE: received 1878657037-byte response of content type text/plain
-VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER08189746M/1/Precision 3640 Tower-win10-A08-9JFMF.CAB
-VERBOSE: HEAD with 0-byte payload
-VERBOSE: received 1679742507-byte response of content type text/plain
 VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER08194025M/1/Precision 7920 Rack-win11-A00-R16HC.CAB
 VERBOSE: HEAD with 0-byte payload
 VERBOSE: received 927300345-byte response of content type text/plain
 VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER08202191M/1/3440-win10-A08-HP0VK.CAB
 VERBOSE: HEAD with 0-byte payload
 VERBOSE: received 1954606810-byte response of content type text/plain
-VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER08221702M/1/7220EX-win11-A00-41DPR.CAB
-VERBOSE: HEAD with 0-byte payload
-VERBOSE: received 1207719343-byte response of content type text/plain
 VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER08240801M/1/7220-win11-A00-RHWKP.CAB
 VERBOSE: HEAD with 0-byte payload
 VERBOSE: received 1338079296-byte response of content type text/plain
-VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER08261017M/1/3310 2-IN-1-win11-A00-3WYWR.CAB
-VERBOSE: HEAD with 0-byte payload
-VERBOSE: received 1431552527-byte response of content type text/plain
 VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER08321679M/1/Precision 3930 Rack-win11-A00-5VKT9.CAB
 VERBOSE: HEAD with 0-byte payload
 VERBOSE: received 1738944760-byte response of content type text/plain
@@ -738,9 +698,6 @@ VERBOSE: received 1028236645-byte response of content type text/plain
 VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER08634583M/1/5590-win10-A18-4045F.CAB
 VERBOSE: HEAD with 0-byte payload
 VERBOSE: received 1599519200-byte response of content type text/plain
-VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER08635308M/1/Precision-3450-SFF-0Y1R9_Win10_1.0_A05.exe
-VERBOSE: HEAD with 0-byte payload
-VERBOSE: received 2363272000-byte response of content type application/octet-stream
 VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER08639458M/1/5300-win10-A14-N7F30.CAB
 VERBOSE: HEAD with 0-byte payload
 VERBOSE: received 1301568820-byte response of content type text/plain
@@ -777,15 +734,6 @@ VERBOSE: received 2226443928-byte response of content type application/octet-str
 VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER08684092M/1/Precision-3470-2DTM5_Win11_1.0_A01.exe
 VERBOSE: HEAD with 0-byte payload
 VERBOSE: received 1375416952-byte response of content type application/octet-stream
-VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER08685564M/1/5480-AIO-MYW9M_Win10_1.0_A09.exe
-VERBOSE: HEAD with 0-byte payload
-VERBOSE: received 2059893104-byte response of content type application/octet-stream
-VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER08685940M/1/5750-3X6YR_Win10_1.0_A10.exe
-VERBOSE: HEAD with 0-byte payload
-VERBOSE: received 2130708384-byte response of content type application/octet-stream
-VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER08687468M/1/7480-AIO-K06NR_Win10_64Bit_1.0_A10.exe
-VERBOSE: HEAD with 0-byte payload
-VERBOSE: received 2061537048-byte response of content type application/octet-stream
 VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER08691968M/1/7390-2in1-WGJHF_Win10_1.0_A11.exe
 VERBOSE: HEAD with 0-byte payload
 VERBOSE: received 1271873088-byte response of content type application/octet-stream
@@ -828,9 +776,6 @@ VERBOSE: received 2332752592-byte response of content type application/octet-str
 VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER08819289M/1/9510-6939W_Win10_1.0_A11.exe
 VERBOSE: HEAD with 0-byte payload
 VERBOSE: received 1938417616-byte response of content type application/octet-stream
-VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER08819356M/1/9410-G2D64_Win10_1.0_A12.exe
-VERBOSE: HEAD with 0-byte payload
-VERBOSE: received 2180518048-byte response of content type application/octet-stream
 VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER08819938M/1/5511-WWCMM_Win10_1.0_A11.exe
 VERBOSE: HEAD with 0-byte payload
 VERBOSE: received 2743590008-byte response of content type application/octet-stream
@@ -861,9 +806,6 @@ VERBOSE: received 1869872968-byte response of content type application/octet-str
 VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER08837219M/1/5270-AIO-KRJXH_Win10_1.0_A11.exe
 VERBOSE: HEAD with 0-byte payload
 VERBOSE: received 1170717392-byte response of content type application/octet-stream
-VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER08837257M/1/7780-AIO-DTG2G_Win10_1.0_A10.exe
-VERBOSE: HEAD with 0-byte payload
-VERBOSE: received 2061521464-byte response of content type application/octet-stream
 VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER08839167M/1/3080-1DPP1_Win10_1.0_A10.exe
 VERBOSE: HEAD with 0-byte payload
 VERBOSE: received 2492476832-byte response of content type application/octet-stream
@@ -876,27 +818,15 @@ VERBOSE: received 2123294776-byte response of content type application/octet-str
 VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER08841677M/1/9500-8TXJH_Win10_1.0_A12.exe
 VERBOSE: HEAD with 0-byte payload
 VERBOSE: received 3251071856-byte response of content type application/octet-stream
-VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER08842657M/1/Precision-3460-SFF-8GNRP_Win10_1.0_A01.exe
-VERBOSE: HEAD with 0-byte payload
-VERBOSE: received 2087693288-byte response of content type application/octet-stream
-VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER08842838M/1/3120-R64J4_Win10_1.0_A09.exe
-VERBOSE: HEAD with 0-byte payload
-VERBOSE: received 1135431736-byte response of content type application/octet-stream
 VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER08842866M/1/7310-7P7XM_Win10_1.0_A12.exe
 VERBOSE: HEAD with 0-byte payload
 VERBOSE: received 1924697984-byte response of content type application/octet-stream
-VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER08842877M/1/3120-FWDY2_Win11_1.0_A02.exe
-VERBOSE: HEAD with 0-byte payload
-VERBOSE: received 1116803504-byte response of content type application/octet-stream
 VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER08843565M/1/5550-6H1FF_Win10_1.0_A11.exe
 VERBOSE: HEAD with 0-byte payload
 VERBOSE: received 2386538160-byte response of content type application/octet-stream
 VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER08843999M/1/7310-K3H6K_Win11_1.0_A02.exe
 VERBOSE: HEAD with 0-byte payload
 VERBOSE: received 1919711408-byte response of content type application/octet-stream
-VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER08844343M/1/7410-47MW9_Win10_1.0_A12.exe
-VERBOSE: HEAD with 0-byte payload
-VERBOSE: received 1924697992-byte response of content type application/octet-stream
 VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER08844423M/1/7410-G61MH_Win11_1.0_A02.exe
 VERBOSE: HEAD with 0-byte payload
 VERBOSE: received 1919711408-byte response of content type application/octet-stream
@@ -912,12 +842,6 @@ VERBOSE: received 1988112888-byte response of content type application/octet-str
 VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER08863656M/1/3561-H0WRM_Win11_1.0_A01.exe
 VERBOSE: HEAD with 0-byte payload
 VERBOSE: received 1983134904-byte response of content type application/octet-stream
-VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER08867303M/1/9710-MN57F_Win10_1.0_A06.exe
-VERBOSE: HEAD with 0-byte payload
-VERBOSE: received 1979292120-byte response of content type application/octet-stream
-VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER08868018M/1/9710-VD0JT_Win11_1.0_A04.exe
-VERBOSE: HEAD with 0-byte payload
-VERBOSE: received 1974024192-byte response of content type application/octet-stream
 VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER08869393M/1/Dell-Precision-7760-KFT51_Win10_1.0_A04.exe
 VERBOSE: HEAD with 0-byte payload
 VERBOSE: received 2147642720-byte response of content type application/octet-stream
@@ -927,15 +851,6 @@ VERBOSE: received 1999603576-byte response of content type application/octet-str
 VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER08876769M/1/5421-4F1G2_Win11_1.0_A01.exe
 VERBOSE: HEAD with 0-byte payload
 VERBOSE: received 1994620416-byte response of content type application/octet-stream
-VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER08883750M/1/9520-MHK2D_Win11_1.0_A02.exe
-VERBOSE: HEAD with 0-byte payload
-VERBOSE: received 1875372464-byte response of content type application/octet-stream
-VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER08895338M/1/Latitude-7330-Rugged-Extreme-YRVN8_Win10_1.0_A04.exe
-VERBOSE: HEAD with 0-byte payload
-VERBOSE: received 1621584952-byte response of content type application/octet-stream
-VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER08899452M/1/Latitude-5430-Rugged-MM6G8_Win10_1.0_A02.exe
-VERBOSE: HEAD with 0-byte payload
-VERBOSE: received 2385061960-byte response of content type application/octet-stream
 VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER08900956M/1/3520-JY4KK_Win10_1.0_A08.exe
 VERBOSE: HEAD with 0-byte payload
 VERBOSE: received 2576606160-byte response of content type application/octet-stream
@@ -948,18 +863,15 @@ VERBOSE: received 2562983504-byte response of content type application/octet-str
 VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER08928048M/1/Dell-Precision-7560-M1P91_Win11_1.0_A01.exe
 VERBOSE: HEAD with 0-byte payload
 VERBOSE: received 1985907864-byte response of content type application/octet-stream
-VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER08937985M/1/Precision-3260-Compact-VWC0G_Win10_1.0_A03.exe
-VERBOSE: HEAD with 0-byte payload
-VERBOSE: received 1969704040-byte response of content type application/octet-stream
-VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER08938152M/1/Precision-3260-Compact-6V27X_Win11_1.0_A02.exe
-VERBOSE: HEAD with 0-byte payload
-VERBOSE: received 1969709576-byte response of content type application/octet-stream
 VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER08941532M/1/Latitude-5530-TGD6W_Win10_1.0_A04.exe
 VERBOSE: HEAD with 0-byte payload
 VERBOSE: received 2104717752-byte response of content type application/octet-stream
 VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER08941774M/1/Latitude-5530-TP07J_Win11_1.0_A04.exe
 VERBOSE: HEAD with 0-byte payload
 VERBOSE: received 2099734832-byte response of content type application/octet-stream
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER08946763M/1/Precision-3460-SFF-MV551_Win10_1.0_A02.exe
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 2363472984-byte response of content type application/octet-stream
 VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER08963785M/1/5320-43YN4_Win10_1.0_A11.exe
 VERBOSE: HEAD with 0-byte payload
 VERBOSE: received 1763021584-byte response of content type application/octet-stream
@@ -969,57 +881,18 @@ VERBOSE: received 1740588880-byte response of content type application/octet-str
 VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER08965263M/1/5320-00HT1_Win11_1.0_A04.exe
 VERBOSE: HEAD with 0-byte payload
 VERBOSE: received 1758041344-byte response of content type application/octet-stream
-VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER08966873M/1/7320-M3K75_Win11_1.0_A02.exe
-VERBOSE: HEAD with 0-byte payload
-VERBOSE: received 1586822424-byte response of content type application/octet-stream
 VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER08999268M/1/Precision-3460-SFF-HHM02_Win11_1.0_A01.exe
 VERBOSE: HEAD with 0-byte payload
 VERBOSE: received 2363516944-byte response of content type application/octet-stream
-VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER09000733M/1/Latitude-9330-1PXCH_Win10_1.0_A02.exe
-VERBOSE: HEAD with 0-byte payload
-VERBOSE: received 1806032560-byte response of content type application/octet-stream
 VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER09000979M/1/3420-X58Y6_Win11_1.0_A04.exe
 VERBOSE: HEAD with 0-byte payload
 VERBOSE: received 2539821200-byte response of content type application/octet-stream
-VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER09001290M/1/Latitude-9330-5HM9G_Win11_1.0_A02.exe
-VERBOSE: HEAD with 0-byte payload
-VERBOSE: received 1801046944-byte response of content type application/octet-stream
 VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER09016504M/1/Precision-3470-DJF1F_Win10_1.0_A02.exe
 VERBOSE: HEAD with 0-byte payload
 VERBOSE: received 2160563440-byte response of content type application/octet-stream
-VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER09023528M/1/9520-1V8HD_Win10_1.0_A05.exe
-VERBOSE: HEAD with 0-byte payload
-VERBOSE: received 1999176488-byte response of content type application/octet-stream
-VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER09023870M/1/Latitude-5430-H2VD7_Win10_1.0_A05.exe
-VERBOSE: HEAD with 0-byte payload
-VERBOSE: received 1307365400-byte response of content type application/octet-stream
-VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER09023941M/1/Latitude-5430-0K0J8_Win11_1.0_A05.exe
-VERBOSE: HEAD with 0-byte payload
-VERBOSE: received 1302384824-byte response of content type application/octet-stream
-VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER09024277M/1/7420-N2WM0_Win10_1.0_A10.exe
-VERBOSE: HEAD with 0-byte payload
-VERBOSE: received 1595605504-byte response of content type application/octet-stream
-VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER09025127M/1/7420-RP7VJ_Win11_1.0_A04.exe
-VERBOSE: HEAD with 0-byte payload
-VERBOSE: received 1590623336-byte response of content type application/octet-stream
 VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER09025265M/1/5420-8YPJK_Win10_1.0_A09.exe
 VERBOSE: HEAD with 0-byte payload
 VERBOSE: received 1789857816-byte response of content type application/octet-stream
-VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER09026958M/1/XPS-9315-7V8WV_Win11_1.0_A01.exe
-VERBOSE: HEAD with 0-byte payload
-VERBOSE: received 1354200064-byte response of content type application/octet-stream
-VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER09034481M/1/Precision-7820-Tower-2RW1H_Win11_1.0_A01.exe
-VERBOSE: HEAD with 0-byte payload
-VERBOSE: received 2837503808-byte response of content type application/octet-stream
-VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER09041765M/1/Precision-3570-YVCDK_Win11_1.0_A04.exe
-VERBOSE: HEAD with 0-byte payload
-VERBOSE: received 2049508808-byte response of content type application/octet-stream
-VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER09042269M/1/Precision-7820-Tower-F6Y0Y_Win10_1.0_A17.exe
-VERBOSE: HEAD with 0-byte payload
-VERBOSE: received 2840307136-byte response of content type application/octet-stream
-VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER09042465M/1/Precision-7920-Tower-JX0PJ_Win10_1.0_A17.exe
-VERBOSE: HEAD with 0-byte payload
-VERBOSE: received 2840474408-byte response of content type application/octet-stream
 VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER09044654M/1/5420-DFF4R_Win11_1.0_A04.exe
 VERBOSE: HEAD with 0-byte payload
 VERBOSE: received 1784959064-byte response of content type application/octet-stream
@@ -1035,72 +908,24 @@ VERBOSE: received 2019760504-byte response of content type application/octet-str
 VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER09047140M/1/3320-VNK9C_Win11_1.0_A02.exe
 VERBOSE: HEAD with 0-byte payload
 VERBOSE: received 2014778856-byte response of content type application/octet-stream
-VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER09047418M/1/Precision-5760-1C45H_Win10_1.0_A05.exe
-VERBOSE: HEAD with 0-byte payload
-VERBOSE: received 1945583824-byte response of content type application/octet-stream
 VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER09047959M/1/Dell-Precision-7760-YKD73_Win11_1.0_A01.exe
 VERBOSE: HEAD with 0-byte payload
 VERBOSE: received 2010266800-byte response of content type application/octet-stream
-VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER09048164M/1/Latitude-7330-Rugged-Extreme-W4MX5_Win11_1.0_A03.exe
-VERBOSE: HEAD with 0-byte payload
-VERBOSE: received 1555963672-byte response of content type application/octet-stream
 VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER09048262M/1/OptiPlex-5400-All-in-One-3XCV6_Win10_1.0_A03.exe
 VERBOSE: HEAD with 0-byte payload
 VERBOSE: received 1044387048-byte response of content type application/octet-stream
-VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER09048588M/1/3090-ULTRA-M9DT8_Win10_1.0_A09.exe
-VERBOSE: HEAD with 0-byte payload
-VERBOSE: received 1120312264-byte response of content type application/octet-stream
-VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER09048616M/1/Precision-5760-4NPM7_Win11_1.0_A02.exe
-VERBOSE: HEAD with 0-byte payload
-VERBOSE: received 1940620704-byte response of content type application/octet-stream
-VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER09048732M/1/3090-ULTRA-J23M1_Win11_1.0_A01.exe
-VERBOSE: HEAD with 0-byte payload
-VERBOSE: received 1111365176-byte response of content type application/octet-stream
-VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER09048838M/1/7090-ULTRA-8062X_Win10_1.0_A08.exe
-VERBOSE: HEAD with 0-byte payload
-VERBOSE: received 1115652600-byte response of content type application/octet-stream
 VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER09048927M/1/OptiPlex-5400-All-in-One-MMNRJ_Win11_1.0_A03.exe
 VERBOSE: HEAD with 0-byte payload
 VERBOSE: received 1044383872-byte response of content type application/octet-stream
-VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER09048961M/1/7090-ULTRA-GMHCK_Win11_1.0_A01.exe
-VERBOSE: HEAD with 0-byte payload
-VERBOSE: received 1110642352-byte response of content type application/octet-stream
 VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER09049032M/1/OptiPlex-7400-All-in-One-DWGHH_Win10_1.0_A04.exe
 VERBOSE: HEAD with 0-byte payload
 VERBOSE: received 1425229880-byte response of content type application/octet-stream
-VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER09049125M/1/Precision-3240-Compact-CG2TG_Win10_1.0_A10.exe
-VERBOSE: HEAD with 0-byte payload
-VERBOSE: received 1841060784-byte response of content type application/octet-stream
 VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER09049133M/1/OptiPlex-7400-All-in-One-2X00T_Win11_1.0_A05.exe
 VERBOSE: HEAD with 0-byte payload
 VERBOSE: received 1425226672-byte response of content type application/octet-stream
-VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER09049242M/1/Precision-3240-Compact-R1XN4_Win11_1.0_A00.exe
-VERBOSE: HEAD with 0-byte payload
-VERBOSE: received 1832688424-byte response of content type application/octet-stream
-VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER09049256M/1/3560-FY97D_Win11_1.0_A02.exe
-VERBOSE: HEAD with 0-byte payload
-VERBOSE: received 3320814456-byte response of content type application/octet-stream
-VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER09049307M/1/3560-HN0CW_Win10_1.0_A10.exe
-VERBOSE: HEAD with 0-byte payload
-VERBOSE: received 3325939448-byte response of content type application/octet-stream
-VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER09049357M/1/Latitude-5430-Rugged-XD5N5_Win11_1.0_A03.exe
-VERBOSE: HEAD with 0-byte payload
-VERBOSE: received 2319431880-byte response of content type application/octet-stream
 VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER09049427M/1/5520-PW9X0_Win11_1.0_A02.exe
 VERBOSE: HEAD with 0-byte payload
 VERBOSE: received 3333383064-byte response of content type application/octet-stream
-VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER09049512M/1/5521-97K1W_Win10_1.0_A08.exe
-VERBOSE: HEAD with 0-byte payload
-VERBOSE: received 2812438288-byte response of content type application/octet-stream
-VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER09049561M/1/5521-H7C8V_Win11_1.0_A03.exe
-VERBOSE: HEAD with 0-byte payload
-VERBOSE: received 2807462800-byte response of content type application/octet-stream
-VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER09066428M/1/Precision-7920-Tower-P2M1X_Win11_1.0_A00.exe
-VERBOSE: HEAD with 0-byte payload
-VERBOSE: received 2834335368-byte response of content type application/octet-stream
-VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER09071896M/1/7520-HY6H5_Win10_1.0_A08.exe
-VERBOSE: HEAD with 0-byte payload
-VERBOSE: received 1710993704-byte response of content type application/octet-stream
 VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER09072599M/1/9320-W419T_Win10_1.0_A05.exe
 VERBOSE: HEAD with 0-byte payload
 VERBOSE: received 1437048976-byte response of content type application/octet-stream
@@ -1134,21 +959,18 @@ VERBOSE: received 1481965864-byte response of content type application/octet-str
 VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER09101331M/1/7390-2JP94_Win11_1.0_A01.exe
 VERBOSE: HEAD with 0-byte payload
 VERBOSE: received 1476976664-byte response of content type application/octet-stream
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER09104204M/1/3310-2-IN-1-80V7J_Win10_1.0_A12.exe
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 1824564280-byte response of content type application/octet-stream
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER09106303M/1/3310-2-IN-1-MKK45_Win11_1.0_A01.exe
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 1819573976-byte response of content type application/octet-stream
 VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER09113235M/1/9300-NW6F1_Win10_1.0_A12.exe
 VERBOSE: HEAD with 0-byte payload
 VERBOSE: received 1441367728-byte response of content type application/octet-stream
-VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER09124341M/1/3280-AIO-8KJ9T_Win10_1.0_A12.exe
-VERBOSE: HEAD with 0-byte payload
-VERBOSE: received 1427983992-byte response of content type application/octet-stream
-VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER09124445M/1/3280-AIO-JX3RV_Win11_1.0_A02.exe
-VERBOSE: HEAD with 0-byte payload
-VERBOSE: received 1422757624-byte response of content type application/octet-stream
 VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER09133554M/1/7490-AIO-KVKDM_Win11_1.0_A02.exe
 VERBOSE: HEAD with 0-byte payload
 VERBOSE: received 1698256648-byte response of content type application/octet-stream
-VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER09133687M/1/7520-DT8W8_Win11_1.0_A02.exe
-VERBOSE: HEAD with 0-byte payload
-VERBOSE: received 1706012048-byte response of content type application/octet-stream
 VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER09134255M/1/5490-AIO-7D15G_Win10_1.0_A08.exe
 VERBOSE: HEAD with 0-byte payload
 VERBOSE: received 1698327536-byte response of content type application/octet-stream
@@ -1164,43 +986,69 @@ VERBOSE: received 1698333728-byte response of content type application/octet-str
 VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER09137992M/1/7490-AIO-XN50R_Win10_1.0_A08.exe
 VERBOSE: HEAD with 0-byte payload
 VERBOSE: received 1698250456-byte response of content type application/octet-stream
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER09138423M/1/7480-AIO-0RDRY_Win11_1.0_A01.exe
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 2357590624-byte response of content type application/octet-stream
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER09138566M/1/7480-AIO-CN6M7_Win10_1.0_A11.exe
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 2357590184-byte response of content type application/octet-stream
 VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER09138806M/1/Precision-5560-XR80X_Win11_1.0_A01.exe
 VERBOSE: HEAD with 0-byte payload
 VERBOSE: received 1985754160-byte response of content type application/octet-stream
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER09139093M/1/7780-AIO-RPV4M_Win11_1.0_A01.exe
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 2357590624-byte response of content type application/octet-stream
 VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER09139203M/1/Precision-5560-704KG_Win10_1.0_A08.exe
 VERBOSE: HEAD with 0-byte payload
 VERBOSE: received 1991354456-byte response of content type application/octet-stream
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER09139283M/1/7780-AIO-5VVNV_Win10_1.0_A11.exe
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 2357590184-byte response of content type application/octet-stream
 VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER09139663M/1/9300-9D17K_Win11_1.0_A01.exe
 VERBOSE: HEAD with 0-byte payload
 VERBOSE: received 1436393016-byte response of content type application/octet-stream
-VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER09139912M/1/Latitude-5330-4X7RV_Win10_1.0_A04.exe
-VERBOSE: HEAD with 0-byte payload
-VERBOSE: received 1437150104-byte response of content type application/octet-stream
 VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER09140098M/1/5080-Y8FY0_Win10_1.0_A10.exe
 VERBOSE: HEAD with 0-byte payload
 VERBOSE: received 3203935088-byte response of content type application/octet-stream
 VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER09140213M/1/5080-6FR3J_Win11_1.0_A01.exe
 VERBOSE: HEAD with 0-byte payload
 VERBOSE: received 2440634168-byte response of content type application/octet-stream
-VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER09142008M/1/Latitude-5330-2Y9NV_Win11_1.0_A03.exe
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER09142177M/1/3280-AIO-W6HHH_Win10_1.0_A13.exe
 VERBOSE: HEAD with 0-byte payload
-VERBOSE: received 1432170184-byte response of content type application/octet-stream
+VERBOSE: received 1427987440-byte response of content type application/octet-stream
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER09142335M/1/5480-AIO-NV54V_Win10_1.0_A10.exe
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 2357562768-byte response of content type application/octet-stream
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER09142364M/1/3280-AIO-1GPM7_Win11_1.0_A03.exe
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 1422757624-byte response of content type application/octet-stream
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER09142467M/1/5480-AIO-WVD0R_Win11_1.0_A01.exe
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 2357563208-byte response of content type application/octet-stream
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER09142951M/1/Precision-3640-Tower-T0FN1_Win10_1.0_A09.exe
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 2136519712-byte response of content type application/octet-stream
 VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER09143220M/1/7750-0P76N_Win11_1.0_A01.exe
 VERBOSE: HEAD with 0-byte payload
 VERBOSE: received 2750801304-byte response of content type application/octet-stream
 VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER09143286M/1/3310-0VPV5_Win10_1.0_A13.exe
 VERBOSE: HEAD with 0-byte payload
 VERBOSE: received 1420280888-byte response of content type application/octet-stream
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER09143334M/1/Precision-3640-Tower-HM4HM_Win11_1.0_A01.exe
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 2222994344-byte response of content type application/octet-stream
 VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER09143352M/1/7750-PV1D1_Win10_1.0_A10.exe
 VERBOSE: HEAD with 0-byte payload
->> TerminatingError(Invoke-WebRequest): "The remote server returned an error: (404) Not Found."
-WARNING: Failed: http://downloads.dell.com/FOLDER09143352M/1/7750-PV1D1_Win10_1.0_A10.exe
+VERBOSE: received 2755842072-byte response of content type application/octet-stream
 VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER09143715M/1/3541-15XV1_Win10_1.0_A15.exe
 VERBOSE: HEAD with 0-byte payload
 VERBOSE: received 2063519072-byte response of content type application/octet-stream
-VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER09159236M/1/Precision-3570-38V49_Win10_1.0_A05.exe
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER09148808M/1/5750-7J9F3_Win10_1.0_A11.exe
 VERBOSE: HEAD with 0-byte payload
-VERBOSE: received 2106828624-byte response of content type application/octet-stream
+VERBOSE: received 2190813024-byte response of content type application/octet-stream
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER09152555M/1/5750-8584N_Win11_1.0_A01.exe
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 2193142856-byte response of content type application/octet-stream
 VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER09160431M/1/3070-PCGHP_Win11_1.0_A00.exe
 VERBOSE: HEAD with 0-byte payload
 VERBOSE: received 2602195296-byte response of content type application/octet-stream
@@ -1219,9 +1067,6 @@ VERBOSE: received 2114581688-byte response of content type application/octet-str
 VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER09168074M/1/7550-8737H_Win10_1.0_A10.exe
 VERBOSE: HEAD with 0-byte payload
 VERBOSE: received 3385461832-byte response of content type application/octet-stream
-VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER09168127M/1/7320-V81TK_Win10_1.0_A08.exe
-VERBOSE: HEAD with 0-byte payload
-VERBOSE: received 1591804600-byte response of content type application/octet-stream
 VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER09168212M/1/Latitude-9430-JD053_Win11_1.0_A04.exe
 VERBOSE: HEAD with 0-byte payload
 VERBOSE: received 1714696264-byte response of content type application/octet-stream
@@ -1237,6 +1082,12 @@ VERBOSE: received 2325979360-byte response of content type application/octet-str
 VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER09169698M/1/Latitude-5431-24WJK_Win11_1.0_A03.exe
 VERBOSE: HEAD with 0-byte payload
 VERBOSE: received 2193818208-byte response of content type application/octet-stream
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER09169770M/1/Precision-3240-Compact-04C1C_Win10_1.0_A11.exe
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 1845860568-byte response of content type application/octet-stream
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER09169827M/1/Precision-3240-Compact-97HMH_Win11_1.0_A01.exe
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 1845748536-byte response of content type application/octet-stream
 VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER09169835M/1/7550-C6NYF_Win11_1.0_A01.exe
 VERBOSE: HEAD with 0-byte payload
 VERBOSE: received 2759422128-byte response of content type application/octet-stream
@@ -1249,12 +1100,6 @@ VERBOSE: received 2820215000-byte response of content type application/octet-str
 VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER09175005M/1/7090-03M8K_Win10_1.0_A08.exe
 VERBOSE: HEAD with 0-byte payload
 VERBOSE: received 2820209824-byte response of content type application/octet-stream
-VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER09179576M/1/Precision-5820-Tower-KGH4P_Win10_1.0_A16.exe
-VERBOSE: HEAD with 0-byte payload
-VERBOSE: received 2845000016-byte response of content type application/octet-stream
-VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER09183275M/1/Precision-5820-Tower-P49CD_Win11_1.0_A01.exe
-VERBOSE: HEAD with 0-byte payload
-VERBOSE: received 2843711160-byte response of content type application/octet-stream
 VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER09188151M/1/Latitude-7530-06XYK_Win11_1.0_A03.exe
 VERBOSE: HEAD with 0-byte payload
 VERBOSE: received 1719106168-byte response of content type application/octet-stream
@@ -1288,12 +1133,30 @@ VERBOSE: received 3817573536-byte response of content type application/octet-str
 VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER09202948M/1/Precision-3660-Tower-XWRGK_Win11_1.0_A02.exe
 VERBOSE: HEAD with 0-byte payload
 VERBOSE: received 3471661408-byte response of content type application/octet-stream
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER09208542M/1/XPS-9315-CP8GK_Win11_1.0_A02.exe
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 1468607032-byte response of content type application/octet-stream
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER09215195M/1/Precision-3570-DC84F_Win10_1.0_A06.exe
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 2206806816-byte response of content type application/octet-stream
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER09215228M/1/Precision-3570-H3TG8_Win11_1.0_A05.exe
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 2199790200-byte response of content type application/octet-stream
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER09217045M/1/Latitude-9330-5F0JM_Win10_1.0_A03.exe
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 1987711592-byte response of content type application/octet-stream
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER09217106M/1/Latitude-9330-YMRV9_Win11_1.0_A03.exe
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 1982671048-byte response of content type application/octet-stream
 VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER09219097M/1/5510-JWYC1_Win11_1.0_A00.exe
 VERBOSE: HEAD with 0-byte payload
 VERBOSE: received 2325132960-byte response of content type application/octet-stream
 VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER09219168M/1/Latitude-9430-74WP7_Win10_1.0_A04.exe
 VERBOSE: HEAD with 0-byte payload
 VERBOSE: received 1872793704-byte response of content type application/octet-stream
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER09219354M/1/Precision-3260-Compact-7GM79_Win11_1.0_A03.exe
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 2020740632-byte response of content type application/octet-stream
 VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER09228483M/1/Latitude-7320-Detachable-H80KX_Win10_1.0_A10.exe
 VERBOSE: HEAD with 0-byte payload
 VERBOSE: received 2281719984-byte response of content type application/octet-stream
@@ -1342,12 +1205,6 @@ VERBOSE: received 2792150112-byte response of content type application/octet-str
 VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER09234473M/1/Precision-5770-F7WJ4_Win10_1.0_A02.exe
 VERBOSE: HEAD with 0-byte payload
 VERBOSE: received 2075775880-byte response of content type application/octet-stream
-VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER09234496M/1/Optiplex-3090-00PW2_Win10_1.0_A05.exe
-VERBOSE: HEAD with 0-byte payload
-VERBOSE: received 2003805128-byte response of content type application/octet-stream
-VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER09234626M/1/Optiplex-3090-9YTFD_Win11_1.0_A03.exe
-VERBOSE: HEAD with 0-byte payload
-VERBOSE: received 1998574888-byte response of content type application/octet-stream
 VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER09234908M/1/9310-2n1-NTYJG_Win11_1.0_A04.exe
 VERBOSE: HEAD with 0-byte payload
 VERBOSE: received 2304729720-byte response of content type application/octet-stream
@@ -1360,18 +1217,6 @@ VERBOSE: received 2869936672-byte response of content type application/octet-str
 VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER09236889M/1/9420-31T21_Win11_1.0_A04.exe
 VERBOSE: HEAD with 0-byte payload
 VERBOSE: received 2732565304-byte response of content type application/octet-stream
-VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER09241452M/1/Latitude-5531-X73W2_Win10_1.0_A04.exe
-VERBOSE: HEAD with 0-byte payload
-VERBOSE: received 2427929208-byte response of content type application/octet-stream
-VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER09241617M/1/Latitude-5531-F9G7R_Win11_1.0_A04.exe
-VERBOSE: HEAD with 0-byte payload
-VERBOSE: received 2422880600-byte response of content type application/octet-stream
-VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER09241899M/1/Precision-3571-G7M5T_Win10_1.0_A04.exe
-VERBOSE: HEAD with 0-byte payload
-VERBOSE: received 2429988040-byte response of content type application/octet-stream
-VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER09241917M/1/Precision-3571-3H8DY_Win11_1.0_A04.exe
-VERBOSE: HEAD with 0-byte payload
-VERBOSE: received 2424940632-byte response of content type application/octet-stream
 VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER09242225M/1/Precision-3650-Tower-M2KT8_Win10_1.0_A07.exe
 VERBOSE: HEAD with 0-byte payload
 VERBOSE: received 2219348040-byte response of content type application/octet-stream
@@ -1390,23 +1235,184 @@ VERBOSE: received 2070972664-byte response of content type application/octet-str
 VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER09267371M/1/9510-Y4K9H_Win10_1.0_A09.exe
 VERBOSE: HEAD with 0-byte payload
 VERBOSE: received 2797687840-byte response of content type application/octet-stream
-VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER09272494M/1/7080-DXCHN_Win11_1.0_A02.exe
-VERBOSE: HEAD with 0-byte payload
-VERBOSE: received 1811895512-byte response of content type application/octet-stream
 VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER09277383M/1/5511-13W64_Win11_1.0_A01.exe
 VERBOSE: HEAD with 0-byte payload
 VERBOSE: received 2573064536-byte response of content type application/octet-stream
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER09304765M/1/Latitude-5430-XJMHF_Win10_1.0_A06.exe
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 1452131840-byte response of content type application/octet-stream
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER09304775M/1/Latitude-5430-5NF1J_Win11_1.0_A06.exe
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 1452923160-byte response of content type application/octet-stream
 VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER09313782M/1/OptiPlex-7000-4TH02_Win10_1.0_A04.exe
 VERBOSE: HEAD with 0-byte payload
 VERBOSE: received 2335570560-byte response of content type application/octet-stream
 VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER09313797M/1/OptiPlex-7000-MH1RF_Win11_1.0_A03.exe
 VERBOSE: HEAD with 0-byte payload
 VERBOSE: received 2335577200-byte response of content type application/octet-stream
-VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER09315625M/1/7080-HYGG2_Win10_1.0_A11.exe
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER09358960M/1/7410-YGGNG_Win10_1.0_A13.exe
 VERBOSE: HEAD with 0-byte payload
-VERBOSE: received 1811886536-byte response of content type application/octet-stream
+VERBOSE: received 1955574320-byte response of content type application/octet-stream
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER09359081M/1/9410-CKR53_Win10_1.0_A13.exe
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 2190468560-byte response of content type application/octet-stream
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER09359701M/1/Precision-5820-Tower-X4JRH_Win11_1.0_A02.exe
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 2825953096-byte response of content type application/octet-stream
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER09359702M/1/Precision-5820-Tower-N7RNN_Win10_1.0_A17.exe
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 2827239992-byte response of content type application/octet-stream
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER09359769M/1/Precision-7820-Tower-TYXT2_Win11_1.0_A02.exe
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 2824293248-byte response of content type application/octet-stream
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER09359770M/1/Precision-7820-Tower-KRKC9_Win10_1.0_A18.exe
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 2825582184-byte response of content type application/octet-stream
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER09359799M/1/Precision-7920-Tower-FF3TK_Win11_1.0_A01.exe
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 2819611736-byte response of content type application/octet-stream
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER09359800M/1/Precision-7920-Tower-KXFXW_Win10_1.0_A18.exe
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 2825749464-byte response of content type application/octet-stream
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER09363067M/1/7320-M5G6K_Win11_1.0_A03.exe
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 1760957256-byte response of content type application/octet-stream
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER09363069M/1/7320-WGNCX_Win10_1.0_A09.exe
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 1760166192-byte response of content type application/octet-stream
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER09363070M/1/7420-N1VPH_Win11_1.0_A05.exe
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 1745807096-byte response of content type application/octet-stream
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER09363071M/1/7420-2NH19_Win10_1.0_A11.exe
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 1745016048-byte response of content type application/octet-stream
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER09363074M/1/Precision-5760-DPWGR_Win11_1.0_A03.exe
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 2115851392-byte response of content type application/octet-stream
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER09363075M/1/Precision-5760-CCCN6_Win10_1.0_A06.exe
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 2115349992-byte response of content type application/octet-stream
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER09363257M/1/3120-M3GRT_Win11_1.0_A03.exe
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 1085416000-byte response of content type application/octet-stream
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER09363258M/1/3120-Y3G10_Win10_1.0_A10.exe
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 1084629952-byte response of content type application/octet-stream
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER09365923M/1/Latitude-5330-TMT1Y_Win11_1.0_A04.exe
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 1456053456-byte response of content type application/octet-stream
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER09365938M/1/Latitude-5330-GYJ51_Win10_1.0_A05.exe
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 1455327264-byte response of content type application/octet-stream
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER09366197M/1/Latitude-5430-Rugged-Y1HNG_Win10_1.0_A03.exe
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 2531311936-byte response of content type application/octet-stream
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER09366531M/1/Latitude-5430-Rugged-WTGPR_Win11_1.0_A04.exe
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 2399654264-byte response of content type application/octet-stream
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER09366594M/1/7220EX-0R5DH_Win10_1.0_A10.exe
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 1463938960-byte response of content type application/octet-stream
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER09366642M/1/7220EX-DKNFW_Win11_1.0_A01.exe
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 1456953328-byte response of content type application/octet-stream
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER09366684M/1/Latitude-7330-Rugged-Extreme-2W5PY_Win10_1.0_A05.exe
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 1760560264-byte response of content type application/octet-stream
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER09366704M/1/Latitude-7330-Rugged-Extreme-MYKGC_Win11_1.0_A04.exe
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 1628903104-byte response of content type application/octet-stream
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER09366897M/1/7520-89H09_Win10_1.0_A09.exe
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 1745003056-byte response of content type application/octet-stream
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER09366899M/1/7520-K1J9X_Win11_1.0_A03.exe
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 1745794000-byte response of content type application/octet-stream
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER09368323M/1/9520-VCFDT_Win10_1.0_A06.exe
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 2015150528-byte response of content type application/octet-stream
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER09368343M/1/9520-7VR0J_Win11_1.0_A03.exe
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 1898625736-byte response of content type application/octet-stream
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER09368359M/1/XE3-2TKHM_Win10_1.0_A13.exe
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 2737072816-byte response of content type application/octet-stream
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER09368364M/1/9710-KWMK9_Win10_1.0_A07.exe
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 2123177136-byte response of content type application/octet-stream
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER09368397M/1/XE3-6M8K0_Win11_1.0_A00.exe
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 2737077832-byte response of content type application/octet-stream
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER09368404M/1/9710-PXR1M_Win11_1.0_A05.exe
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 2123680848-byte response of content type application/octet-stream
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER09368444M/1/Optiplex-3090-G1V63_Win11_1.0_A04.exe
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 2001578096-byte response of content type application/octet-stream
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER09368453M/1/Optiplex-3090-RK3RV_Win10_1.0_A06.exe
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 2006807536-byte response of content type application/octet-stream
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER09368545M/1/7090-ULTRA-YMWXY_Win10_1.0_A09.exe
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 1855594200-byte response of content type application/octet-stream
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER09368562M/1/7090-ULTRA-RYWV7_Win11_1.0_A02.exe
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 1856353304-byte response of content type application/octet-stream
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER09368684M/1/3090-ULTRA-5FTKH_Win10_1.0_A10.exe
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 1863992976-byte response of content type application/octet-stream
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER09368692M/1/3090-ULTRA-4X43K_Win11_1.0_A02.exe
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 1859520832-byte response of content type application/octet-stream
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER09374811M/1/Latitude-5531-GC2DG_Win11_1.0_A05.exe
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 2462678936-byte response of content type application/octet-stream
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER09374944M/1/Latitude-5531-24NRP_Win10_1.0_A05.exe
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 2461952664-byte response of content type application/octet-stream
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER09375800M/1/Precision-3571-22C8X_Win10_1.0_A05.exe
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 2464012128-byte response of content type application/octet-stream
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER09375831M/1/Precision-3571-HYRKM_Win11_1.0_A05.exe
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 2464739752-byte response of content type application/octet-stream
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER09375889M/1/5521-GRP1X_Win10_1.0_A09.exe
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 2837324816-byte response of content type application/octet-stream
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER09375968M/1/5521-TTKFJ_Win11_1.0_A04.exe
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 2832340840-byte response of content type application/octet-stream
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER09377676M/1/7080-KVYJR_Win10_1.0_A12.exe
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 2586566888-byte response of content type application/octet-stream
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER09377750M/1/7080-FDWR9_Win11_1.0_A03.exe
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 2586575952-byte response of content type application/octet-stream
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER09377811M/1/3560-5TVH6_Win10_1.0_A11.exe
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 3350715056-byte response of content type application/octet-stream
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER09377875M/1/3560-66GFR_Win11_1.0_A03.exe
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 3345746224-byte response of content type application/octet-stream
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER09384820M/1/Precision-3260-Compact-5MJC2_Win10_1.0_A04.exe
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 2020727096-byte response of content type application/octet-stream
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER09384973M/1/Precision-3450-SFF-P03T2_Win10_1.0_A06.exe
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 2429080696-byte response of content type application/octet-stream
+VERBOSE: Testing Download File at http://downloads.dell.com/FOLDER09384974M/1/Precision-3450-SFF-KCTHW_Win11_1.0_A01.exe
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 2429028456-byte response of content type application/octet-stream
 VERBOSE: Exporting Build Catalog to C:\Users\david\AppData\Local\Temp\OSD\OSDCatalogDellDriverPack.xml
+PS C:\Users\david\OneDrive\GitHub\MyModules\OSD> #$null = Get-OSDCatalogDellDriverPack -Force -Verbose
+PS C:\Users\david\OneDrive\GitHub\MyModules\OSD> $Source = Join-Path $env:TEMP (Join-Path 'OSD' 'OSDCatalogDellDriverPack.xml')
+PS C:\Users\david\OneDrive\GitHub\MyModules\OSD> $Destination = Join-Path (Get-Module -Name OSD -ListAvailable | Sort-Object Version -Descending | Select-Object -First 1).ModuleBase "Catalogs\OSDCatalog\OSDCatalogDellDriverPack.xml"
+PS C:\Users\david\OneDrive\GitHub\MyModules\OSD> if (Test-Path $Source) {
+    Copy-Item $Source $Destination -Force
+}
+PS C:\Users\david\OneDrive\GitHub\MyModules\OSD> Import-Clixml -Path $Destination | ConvertTo-Json | Out-File -FilePath (Join-Path (Get-Module -Name OSD -ListAvailable | Sort-Object Version -Descending | Select-Object -First 1).ModuleBase "Catalogs\OSDCatalog\OSDCatalogDellDriverPack.json") -Encoding ascii -Width 2000 -Force
+PS C:\Users\david\OneDrive\GitHub\MyModules\OSD> Stop-Transcript
 **********************
 Windows PowerShell transcript end
-End time: 20221213153820
+End time: 20230108204324
 **********************
