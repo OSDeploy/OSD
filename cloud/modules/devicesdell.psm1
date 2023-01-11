@@ -18,6 +18,9 @@
 #Function to Install DCU from Dell's website.
 Function osdcloud-InstallDCU {
     $SystemSKUNumber = (Get-CimInstance -ClassName Win32_ComputerSystem).SystemSKUNumber
+    $Model  = (Get-CimInstance -ClassName Win32_ComputerSystem).Model
+    $Model0 = $Model.Split(" ")[0]
+    $Model1 = $Model.Split(" ")[1]
     $CabPathIndex = "$env:temp\DellCabDownloads\CatalogIndexPC.cab"
     $CabPathIndexModel = "$env:temp\DellCabDownloads\CatalogIndexModel.cab"
     $DellCabExtractPath = "$env:temp\DellCabDownloads\DellCabExtract"
@@ -39,6 +42,10 @@ Function osdcloud-InstallDCU {
 
     #Dig Through Dell XML to find Model of THIS Computer (Based on System SKU)
     $XMLModel = $XMLIndex.ManifestIndex.GroupManifest | Where-Object {$_.SupportedSystems.Brand.Model.systemID -match $SystemSKUNumber}
+    if (!($XMLModel)){
+        $XMLModel = $XMLIndex.ManifestIndex.GroupManifest | Where-Object {$_.SupportedSystems.Brand.Model.Display.'#cdata-section' -match $Model1}
+
+    }
     if ($XMLModel)
         {
         Invoke-WebRequest -Uri "http://downloads.dell.com/$($XMLModel.ManifestInformation.path)" -OutFile $CabPathIndexModel -UseBasicParsing -Verbose -Proxy $ProxyServer
