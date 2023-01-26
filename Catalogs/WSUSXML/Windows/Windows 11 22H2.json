@@ -1,7 +1,7 @@
 [
     {
         "Catalog":  "Windows 11 22H2",
-        "OSDVersion":  "22.12.13.1",
+        "OSDVersion":  "23.1.10.1",
         "OSDStatus":  "",
         "UpdateOS":  "Windows 11",
         "UpdateBuild":  "22H2",
@@ -47,13 +47,13 @@
         "AdditionalHash":  "166 106 32 239 158 70 248 145 49 41 7 87 245 17 54 12 16 54 226 173 174 129 150 55 18 146 46 195 48 68 252 208",
         "OSDCore":  "",
         "OSDWinPE":  "",
-        "OSDGuid":  "32925656-d3d4-43ce-8e66-5f4f2ffd02f6",
+        "OSDGuid":  "c5349c85-4e89-4e31-8fbb-54c85df50a0c",
         "PartitionKey":  "Windows 11 22H2",
-        "RowKey":  "32925656-d3d4-43ce-8e66-5f4f2ffd02f6"
+        "RowKey":  "c5349c85-4e89-4e31-8fbb-54c85df50a0c"
     },
     {
         "Catalog":  "Windows 11 22H2",
-        "OSDVersion":  "22.12.13.1",
+        "OSDVersion":  "23.1.10.1",
         "OSDStatus":  "",
         "UpdateOS":  "Windows 11",
         "UpdateBuild":  "22H2",
@@ -99,13 +99,13 @@
         "AdditionalHash":  "70 68 14 140 167 193 14 112 36 179 17 57 24 143 159 92 111 24 220 88 211 11 103 100 92 79 223 89 219 248 90 184",
         "OSDCore":  "",
         "OSDWinPE":  "",
-        "OSDGuid":  "6a96e23a-a30d-4d08-91ce-41b387d06e63",
+        "OSDGuid":  "de3925a0-64a6-4119-a3cf-fd83bf5b846c",
         "PartitionKey":  "Windows 11 22H2",
-        "RowKey":  "6a96e23a-a30d-4d08-91ce-41b387d06e63"
+        "RowKey":  "de3925a0-64a6-4119-a3cf-fd83bf5b846c"
     },
     {
         "Catalog":  "Windows 11 22H2",
-        "OSDVersion":  "22.12.13.1",
+        "OSDVersion":  "23.1.10.1",
         "OSDStatus":  "",
         "UpdateOS":  "Windows 11",
         "UpdateBuild":  "22H2",
@@ -151,13 +151,13 @@
         "AdditionalHash":  "218 174 144 241 237 230 80 119 64 143 212 205 190 251 61 89 34 252 240 195 59 83 44 22 228 200 246 193 231 132 174 2",
         "OSDCore":  "",
         "OSDWinPE":  "",
-        "OSDGuid":  "9ab4dd85-2f53-45e1-af61-91d903a38c78",
+        "OSDGuid":  "a512bb27-6ddd-41ab-8b3e-bb48d8720b3d",
         "PartitionKey":  "Windows 11 22H2",
-        "RowKey":  "9ab4dd85-2f53-45e1-af61-91d903a38c78"
+        "RowKey":  "a512bb27-6ddd-41ab-8b3e-bb48d8720b3d"
     },
     {
         "Catalog":  "Windows 11 22H2",
-        "OSDVersion":  "22.12.13.1",
+        "OSDVersion":  "23.1.10.1",
         "OSDStatus":  "",
         "UpdateOS":  "Windows 11",
         "UpdateBuild":  "22H2",
@@ -203,27 +203,27 @@
         "AdditionalHash":  "174 146 90 13 211 33 175 96 156 62 184 45 243 88 60 91 191 123 47 236 203 187 10 226 0 122 78 245 19 182 49 180",
         "OSDCore":  "",
         "OSDWinPE":  "",
-        "OSDGuid":  "c728c570-aace-440d-b007-272ee864daf5",
+        "OSDGuid":  "71ad00a4-74a8-4ffe-a0ea-00d7a6d8c790",
         "PartitionKey":  "Windows 11 22H2",
-        "RowKey":  "c728c570-aace-440d-b007-272ee864daf5"
+        "RowKey":  "71ad00a4-74a8-4ffe-a0ea-00d7a6d8c790"
     },
     {
         "Catalog":  "Windows 11 22H2",
-        "OSDVersion":  "22.12.13.1",
+        "OSDVersion":  "23.1.10.1",
         "OSDStatus":  "",
         "UpdateOS":  "Windows 11",
         "UpdateBuild":  "22H2",
         "UpdateArch":  "x64",
         "UpdateGroup":  "LCU",
-        "CreationDate":  "\/Date(1670954406000)\/",
-        "KBNumber":  "5021255",
-        "FileKBNumber":  "5021255",
-        "Title":  "2022-12 Cumulative Update for Windows 11 for x64-based Systems (KB5021255)",
-        "UpdateId":  "a2ad31d6-a64b-452a-b100-577ff49846bc",
-        "LegacyName":  "KB5021255-Windows1122H2-RTM-UnifiedCumulativeSecurity-X64-TSL-World",
+        "CreationDate":  "\/Date(1673373606000)\/",
+        "KBNumber":  "5022303",
+        "FileKBNumber":  "5022303",
+        "Title":  "2023-01 Cumulative Update for Windows 11 for x64-based Systems (KB5022303)",
+        "UpdateId":  "c15579c0-e061-4f81-b415-6fe2d624775d",
+        "LegacyName":  "KB5022303-Windows1122H2-RTM-UnifiedCumulativeSecurity-X64-TSL-World",
         "Type":  "SelfContained",
-        "FileName":  "Windows11.0-KB5021255-x64.cab",
-        "Size":  280014480,
+        "FileName":  "Windows11.0-KB5022303-x64.cab",
+        "Size":  286187579,
         "CompanyTitles":  "Microsoft",
         "ProductFamilyTitles":  "Windows",
         "Category":  "Windows 11",
@@ -246,17 +246,17 @@
         "IsWsusInfrastructureUpdate":  false,
         "IsEditable":  false,
         "UpdateSource":  "MicrosoftUpdate",
-        "AdditionalInformationUrls":  "https://support.microsoft.com/help/5021255",
+        "AdditionalInformationUrls":  "https://support.microsoft.com/help/5022303",
         "Description":  "Install this update to resolve issues in Windows. For a complete listing of the issues that are included in this update, see the associated Microsoft Knowledge Base article for more information. After you install this item, you may have to restart your computer.",
         "ReleaseNotes":  "",
-        "FileUri":  "http://download.windowsupdate.com/d/msdownload/update/software/secu/2022/12/windows11.0-kb5021255-x64_fdeac73086fbc36f8f72d7691a131c866d48338a.cab",
-        "OriginUri":  "http://download.windowsupdate.com/d/msdownload/update/software/secu/2022/12/windows11.0-kb5021255-x64_fdeac73086fbc36f8f72d7691a131c866d48338a.cab",
-        "Hash":  "253 234 199 48 134 251 195 111 143 114 215 105 26 19 28 134 109 72 51 138",
-        "AdditionalHash":  "218 80 207 252 49 248 143 44 5 238 110 97 201 70 250 3 32 116 187 58 218 10 71 179 118 83 22 206 141 239 57 138",
+        "FileUri":  "http://download.windowsupdate.com/d/msdownload/update/software/secu/2023/01/windows11.0-kb5022303-x64_6c6b72341d678eda0f92c52f05be6ebfef0bf498.cab",
+        "OriginUri":  "http://download.windowsupdate.com/d/msdownload/update/software/secu/2023/01/windows11.0-kb5022303-x64_6c6b72341d678eda0f92c52f05be6ebfef0bf498.cab",
+        "Hash":  "108 107 114 52 29 103 142 218 15 146 197 47 5 190 110 191 239 11 244 152",
+        "AdditionalHash":  "56 183 86 189 244 27 95 215 182 176 122 239 14 51 189 204 249 198 11 90 80 90 242 63 162 244 25 87 39 15 193 152",
         "OSDCore":  "",
         "OSDWinPE":  "",
-        "OSDGuid":  "0d522125-60db-4c3d-80ec-53637a6bce08",
+        "OSDGuid":  "f055a9dc-7681-476f-b0ca-36c48e53cc24",
         "PartitionKey":  "Windows 11 22H2",
-        "RowKey":  "0d522125-60db-4c3d-80ec-53637a6bce08"
+        "RowKey":  "f055a9dc-7681-476f-b0ca-36c48e53cc24"
     }
 ]

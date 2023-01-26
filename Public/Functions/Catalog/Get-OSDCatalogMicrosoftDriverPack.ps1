@@ -221,10 +221,40 @@ $OSDCatalog = @'
         "PackageID": "102924"
     },
     {
+        "Name":  "Surface Laptop 5 13 Consumer",
+        "Model":  "Surface Laptop 5",
+        "Product":  "Surface_Laptop_5_1950:1951",
+        "PackageID": "104679"
+    },
+    {
+        "Name":  "Surface Laptop 5 13 Commercial",
+        "Model":  "Surface Laptop 5",
+        "Product":  "Surface_Laptop_5_for_Business_1950:1951",
+        "PackageID": "104679"
+    },
+    {
+        "Name":  "Surface Laptop 5 15 Consumer",
+        "Model":  "Surface Laptop 5",
+        "Product":  "Surface_Laptop_5_1979",
+        "PackageID": "104679"
+    },
+    {
+        "Name":  "Surface Laptop 5 15 Commercial",
+        "Model":  "Surface Laptop 5",
+        "Product":  "Surface_Laptop_5_for_Business_1979",
+        "PackageID": "104679"
+    },
+    {
         "Name":  "Surface Laptop Go",
         "Model":  "Surface Laptop Go",
         "Product":  "Surface_Laptop_Go_1943",
         "PackageID": "102261"
+    },
+    {
+        "Name":  "Surface Laptop Go 2",
+        "Model":  "Surface Laptop Go 2",
+        "Product":  "Surface_Laptop_Go_2_2013",
+        "PackageID": "104251"
     },
     {
         "Name":  "Surface Laptop Studio",
@@ -315,6 +345,30 @@ $OSDCatalog = @'
         "Model":  "Surface Pro 8",
         "Product":  "Surface_Pro_8_for_Business_with_LTE_Advanced_1982",
         "PackageID": "103503"
+    },
+    {
+        "Name":  "Surface Pro 9 Consumer",
+        "Model":  "Surface Pro 9",
+        "Product":  "Surface_Pro_9_2038",
+        "PackageID": "104680"
+    },
+    {
+        "Name":  "Surface Pro 9 Commercial",
+        "Model":  "Surface Pro 9",
+        "Product":  "Surface_Pro_9_for_Business_2038",
+        "PackageID": "104680"
+    },
+    {
+        "Name":  "Surface Pro 9 5G US",
+        "Model":  "Surface Pro 9",
+        "Product":  "Surface_Pro_9_With_5G_1997",
+        "PackageID": "104680"
+    },
+    {
+        "Name":  "Surface Pro 9 5G ROW",
+        "Model":  "Surface Pro 9",
+        "Product":  "Surface_Pro_9_With_5G_1996",
+        "PackageID": "104680"
     },
     {
         "Name":  "Surface Studio",
