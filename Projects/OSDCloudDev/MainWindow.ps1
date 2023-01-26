@@ -286,10 +286,10 @@ $localOSDCloudParams["OSLanguage"].Attributes.ValidValues | ForEach-Object {
 #   Manufacturer Enhacements
 #================================================
 
-if ((Test-Connection -ComputerName github.com -Quiet) -eq $true){
-    $InternetConnection = $true
-}
 
+if (Test-WebConnection -Uri "google.com") {
+    $InternetConnection = $True
+}
 
 function Test-HPIASupport {
     $CabPath = "$env:TEMP\platformList.cab"
@@ -943,10 +943,10 @@ $formMainWindowControlStartButton.add_Click({
     }
     #$Global:StartOSDCloudGUI | Out-Host
     if ($formMainWindowControlDebugCheckBox.IsChecked -eq $true){
-        Invoke-Expression (Invoke-RestMethod -Uri 'https://raw.githubusercontent.com/OSDeploy/OSD/master/cloud/modules/debugmode.psm1')
-        osdcloud-addcmtrace
-        #$Global:StartOSDCloudGUI.restart = $false
-        #$Global:StartOSDCloudGUI.ClearDiskConfirm = $false
+            if ($InternetConnection -eq $true){
+            Invoke-Expression (Invoke-RestMethod -Uri 'https://raw.githubusercontent.com/OSDeploy/OSD/master/cloud/modules/debugmode.psm1')
+            osdcloud-addcmtrace
+            }
     }
     #-----------------------------------------
     # Manufacturer Enhancements - END
