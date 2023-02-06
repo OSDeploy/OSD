@@ -191,7 +191,8 @@ $XMLProfile = @"
     function Start-WinREWiFi {
         [CmdletBinding()]
         param (
-            [string] $wifiProfile
+            [string] $wifiProfile,
+            [switch] $WirelessConnect
         )
         #=================================================
         #	Block
@@ -372,30 +373,35 @@ $XMLProfile = @"
                 }
                 else {
                     # show list of available SSID to make interactive connection
-                    $SSIDList = Get-WinREWiFi
-                    if ($SSIDList) {
-                        #show list of available SSID
-                        $SSIDList | Sort-Object Signal -Descending | Select-Object Signal, Index, SSID, Authentication, Encryption, NetworkType | Format-Table
-            
-                        $SSIDListIndex = $SSIDList.index
-                        $SSIDIndex = ""
-                        while ($SSIDIndex -notin $SSIDListIndex) {
-                            $SSIDIndex = Read-Host "Select the Index of Wi-Fi Network to connect or CTRL+C to quit"
+                    if (($WirelessConnect) -and (Test-Path -path $ENV:SystemRoot\WirelessConnect.exe)) {
+                        Start-Process -FilePath  $ENV:SystemRoot\WirelessConnect.exe -Wait
+                    }
+                    else {
+                        $SSIDList = Get-WinREWiFi
+                        if ($SSIDList) {
+                            #show list of available SSID
+                            $SSIDList | Sort-Object Signal -Descending | Select-Object Signal, Index, SSID, Authentication, Encryption, NetworkType | Format-Table
+                
+                            $SSIDListIndex = $SSIDList.index
+                            $SSIDIndex = ""
+                            while ($SSIDIndex -notin $SSIDListIndex) {
+                                $SSIDIndex = Read-Host "Select the Index of Wi-Fi Network to connect or CTRL+C to quit"
+                            }
+                
+                            $SSID = $SSIDList | Where-Object { $_.index -eq $SSIDIndex } | Select-Object -exp SSID
+                
+                            # connect to selected Wi-Fi
+                            Write-Host -ForegroundColor DarkGray "========================================================================="
+                            Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Establishing a connection to SSID $SSID"
+                            try {
+                                Connect-WinREWiFi $SSID -ErrorAction Stop
+                            } catch {
+                                Write-Warning $_
+                                continue
+                            }
+                        } else {
+                            Write-Warning "No Wi-Fi network found. Move closer to AP or use ethernet cable instead."
                         }
-            
-                        $SSID = $SSIDList | Where-Object { $_.index -eq $SSIDIndex } | Select-Object -exp SSID
-            
-                        # connect to selected Wi-Fi
-                        Write-Host -ForegroundColor DarkGray "========================================================================="
-                        Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Establishing a connection to SSID $SSID"
-                        try {
-                            Connect-WinREWiFi $SSID -ErrorAction Stop
-                        } catch {
-                            Write-Warning $_
-                            continue
-                        }
-                    } else {
-                        Write-Warning "No Wi-Fi network found. Move closer to AP or use ethernet cable instead."
                     }
                 }
 

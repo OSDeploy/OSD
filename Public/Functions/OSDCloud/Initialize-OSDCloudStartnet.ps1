@@ -1,6 +1,8 @@
 function Initialize-OSDCloudStartnet {
     [CmdletBinding()]
-    param ()
+    param (
+        [switch] $WirelessConnect
+    )
     if ($env:SystemDrive -eq 'X:') {
         #=================================================
         #   Initialize Hardware Devices
@@ -12,7 +14,12 @@ function Initialize-OSDCloudStartnet {
         #=================================================
         if (Test-Path "$env:SystemRoot\System32\dmcmnutils.dll") {
             Write-Host -ForegroundColor DarkGray "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Wireless Network"
-            Start-Process PowerShell Start-WinREWiFi -Wait
+            if ($WirelessConnect){
+                Start-Process PowerShell -ArgumentList 'Start-WinREWiFi -WirelessConnect' -Wait
+            }
+            else {
+                Start-Process PowerShell Start-WinREWiFi -Wait
+            }
         }
         #=================================================
         #   Initialize Network Connections

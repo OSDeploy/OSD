@@ -101,7 +101,11 @@ function Edit-OSDCloudWinPE {
         [System.String]
         #Directory for the OSDCloudWorkspace which contains Media directory
         #This is optional as the OSDCloudWorkspace is returned by Get-OSDCloudWorkspace automatically
-        $WorkspacePath
+        $WorkspacePath,
+
+        [Switch]
+        #Will leverage WirelessConnect.EXE instead of the Commandline Tools to connect to WiFi
+        $WirelessConnect
     )
     #=================================================
     #	Start the Clock
@@ -225,13 +229,21 @@ function Edit-OSDCloudWinPE {
     #   Drop initial Startnet.cmd
     #=================================================
     $OSDVersion = (Get-Module -Name OSD -ListAvailable | Sort-Object Version -Descending | Select-Object -First 1).Version
+    if ($WirelessConnect){
+        $InitializeOSDCloudStartnetCommand = "Initialize-OSDCloudStartnet -WirelessConnect"
+    }
+    else {
+        $InitializeOSDCloudStartnetCommand = "Initialize-OSDCloudStartnet"
+    }
+    
+    
     Write-Host -ForegroundColor DarkGray "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Startnet.cmd: wpeinit"
 $StartnetCMD = @"
 @ECHO OFF
 wpeinit
 cd\
 title OSD $OSDVersion
-PowerShell -Nol -C Initialize-OSDCloudStartnet
+PowerShell -Nol -C $InitializeOSDCloudStartnetCommand 
 "@
     $StartnetCMD | Out-File -FilePath "$MountPath\Windows\System32\Startnet.cmd" -Encoding ascii -Width 2000 -Force
     #=================================================
