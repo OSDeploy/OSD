@@ -162,6 +162,8 @@
         'Get-Volume.fixed',
         'Get-Volume.osd',
         'Get-Volume.usb',
+        'Get-WiFiActiveProfileSSID',
+        'Get-WiFiProfileKey',
         'Get-WSUSXML',
         'Get-Win11Readiness',
         'Get-WinREPartition',
