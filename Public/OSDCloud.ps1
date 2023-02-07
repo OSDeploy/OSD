@@ -1553,7 +1553,7 @@ function Invoke-OSDCloud {
         }
         #Extra Items Config for Specialize Phase
         if (!($SSID)){
-            $SSID = Get-ActiveWiFiProfileSSID
+            $SSID = Get-WiFiActiveProfileSSID
             if ($SSID){
                 $PSK = Get-WiFiProfileKey -SSID $SSID
                 if ($PSK){
