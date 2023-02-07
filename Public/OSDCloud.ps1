@@ -1552,6 +1552,15 @@ function Invoke-OSDCloud {
             }
         }
         #Extra Items Config for Specialize Phase
+        if (!($SSID)){
+            $SSID = Get-ActiveWiFiProfileSSID
+            if ($SSID){
+                $PSK = Get-WiFiProfileKey -SSID $SSID
+                if ($PSK){
+                    $Global:OSDCloud.SetWiFi = $true
+                }
+            }
+        }
         if ($Global:OSDCloud.SetWiFi -eq $true){
 
             Write-Host -ForegroundColor Cyan "Adding WiFi Tasks into JSON Config File for Action during Specialize" 
