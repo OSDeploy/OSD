@@ -113,6 +113,7 @@ function Invoke-OSDCloud {
         ScriptStartup = $null
         ScriptShutdown = $null
         SectionPassed = $true
+        SetWiFi = $null
         Shutdown = [bool]$false
         SkipAllDiskSteps = [bool]$false
         SkipAutopilot = [bool]$false
@@ -1391,6 +1392,24 @@ function Invoke-OSDCloud {
             }
         }
     }
+    if ($Global:OSDCloud.SetWiFi -eq $true){
+
+        Write-Host -ForegroundColor Cyan "Adding WiFi Tasks into JSON Config File for Action during Specialize" 
+        $PSKText = [System.Net.NetworkCredential]::new("", $PSK).Password
+        $HashTable = @{
+            'Addons' = @{
+                'SSID' = $SSID
+                'PSK' = $PSKText 
+            }
+        }
+        $HashVar = $HashTable | ConvertTo-Json
+        $ConfigPath = "c:\osdcloud\configs"
+        $ConfigFile = "$ConfigPath\WiFi.JSON"
+        try {[void][System.IO.Directory]::CreateDirectory($ConfigPath)}
+        catch {}
+        $HashVar | Out-File $ConfigFile
+    }
+    
     if ($Global:OSDCloud.DevMode -eq $true) {
         Write-SectionHeader "Creating SetupComplete Files and populating with requested tasks."
         Set-SetupCompleteCreateStart
@@ -1561,23 +1580,7 @@ function Invoke-OSDCloud {
         }
         #Extra Items Config for Specialize Phase
 
-        if ($Global:OSDCloud.SetWiFi -eq $true){
 
-            Write-Host -ForegroundColor Cyan "Adding WiFi Tasks into JSON Config File for Action during Specialize" 
-            $PSKText = [System.Net.NetworkCredential]::new("", $PSK).Password
-            $HashTable = @{
-                'Addons' = @{
-                    'SSID' = $SSID
-                    'PSK' = $PSKText 
-                }
-            }
-            $HashVar = $HashTable | ConvertTo-Json
-            $ConfigPath = "c:\osdcloud\configs"
-            $ConfigFile = "$ConfigPath\WiFi.JSON"
-            try {[void][System.IO.Directory]::CreateDirectory($ConfigPath)}
-            catch {}
-            $HashVar | Out-File $ConfigFile
-        }
 
         #Bitlocker Stuff
         if ($Global:OSDCloud.Bitlocker -eq $true){
