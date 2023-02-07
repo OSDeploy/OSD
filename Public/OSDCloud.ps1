@@ -1382,7 +1382,15 @@ function Invoke-OSDCloud {
     if (Test-WebConnection -Uri "google.com") {
         $WebConnection = $True
     }
-
+    if (!($SSID)){
+        $SSID = Get-WiFiActiveProfileSSID
+        if ($SSID){
+            $PSK = Get-WiFiProfileKey -SSID $SSID
+            if ($PSK){
+                $Global:OSDCloud.SetWiFi = $true
+            }
+        }
+    }
     if ($Global:OSDCloud.DevMode -eq $true) {
         Write-SectionHeader "Creating SetupComplete Files and populating with requested tasks."
         Set-SetupCompleteCreateStart
@@ -1552,15 +1560,7 @@ function Invoke-OSDCloud {
             }
         }
         #Extra Items Config for Specialize Phase
-        if (!($SSID)){
-            $SSID = Get-WiFiActiveProfileSSID
-            if ($SSID){
-                $PSK = Get-WiFiProfileKey -SSID $SSID
-                if ($PSK){
-                    $Global:OSDCloud.SetWiFi = $true
-                }
-            }
-        }
+
         if ($Global:OSDCloud.SetWiFi -eq $true){
 
             Write-Host -ForegroundColor Cyan "Adding WiFi Tasks into JSON Config File for Action during Specialize" 
