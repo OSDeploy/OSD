@@ -16,15 +16,19 @@ https://osd.osdeploy.com
 function Get-OSDCatalogDellDriverPack {
     [CmdletBinding()]
     param (
-        [System.Management.Automation.SwitchParameter]$Compatible,
-        [System.String]$DownloadPath,
-        [System.Management.Automation.SwitchParameter]$Force,
-        [System.Management.Automation.SwitchParameter]$TestUrl
+        [System.Management.Automation.SwitchParameter]
+        $Compatible,
+        [System.String]
+        $DownloadPath,
+        [System.Management.Automation.SwitchParameter]
+        $Force,
+        [System.Management.Automation.SwitchParameter]
+        $TestUrl
     )
     #=================================================
     #   Paths
     #=================================================
-    $UseCatalog				= 'Cloud'
+    $UseCatalog				= 'Offline'
     $CloudCatalogUri		= 'https://downloads.dell.com/catalog/DriverPackCatalog.cab'
     $RawCatalogFile			= Join-Path $env:TEMP (Join-Path 'OSD' 'DriverPackCatalog.xml')
     $BuildCatalogFile		= Join-Path $env:TEMP (Join-Path 'OSD' 'OSDCatalogDellDriverPack.xml')

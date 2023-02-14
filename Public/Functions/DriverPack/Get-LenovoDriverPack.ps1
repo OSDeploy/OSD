@@ -12,7 +12,7 @@ function Get-LenovoDriverPack {
     Name, PackageID, FileName, `
     @{Name='DriverPackUrl';Expression={($_.Url)}}, `
     @{Name='DriverPackOS';Expression={($null)}}, `
-    HashMD5
+    OSReleaseId,OSBuild,HashMD5
 
     foreach ($Result in $Results) {
         if ($Result.FileName -match 'w11') {

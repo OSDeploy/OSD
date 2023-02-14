@@ -39,14 +39,14 @@ if (Test-Path $Source) {
     Copy-Item $Source $Destination -Force
 }
 Import-Clixml -Path $Destination | ConvertTo-Json | Out-File -FilePath (Join-Path (Get-Module -Name OSD -ListAvailable | Sort-Object Version -Descending | Select-Object -First 1).ModuleBase "Catalogs\OSDCatalog\OSDCatalogHPDriverPack.json") -Encoding ascii -Width 2000 -Force
-$MasterDriverPacks += Get-Content (Join-Path (Get-Module -Name OSD -ListAvailable | Sort-Object Version -Descending | Select-Object -First 1).ModuleBase "Catalogs\OSDCatalog\OSDCatalogHPDriverPack.json") | ConvertFrom-Json
+#$MasterDriverPacks += Get-Content (Join-Path (Get-Module -Name OSD -ListAvailable | Sort-Object Version -Descending | Select-Object -First 1).ModuleBase "Catalogs\OSDCatalog\OSDCatalogHPDriverPack.json") | ConvertFrom-Json
 Stop-Transcript
 #=================================================
 #   MicrosoftDriverPackCatalog
 #=================================================
 Import-Module -Name OSD -Force
 Start-Transcript -Path (Join-Path (Get-Module -Name OSD -ListAvailable | Sort-Object Version -Descending | Select-Object -First 1).ModuleBase "Catalogs\OSDCatalog\OSDCatalogMicrosoftDriverPack.log")
-$MasterDriverPacks = @()
+#$MasterDriverPacks = @()
 $null = Get-OSDCatalogMicrosoftDriverPack -Force -Verbose
 $Source = Join-Path $env:TEMP (Join-Path 'OSD' 'OSDCatalogMicrosoftDriverPack.json')
 $Destination = Join-Path (Get-Module -Name OSD -ListAvailable | Sort-Object Version -Descending | Select-Object -First 1).ModuleBase "Catalogs\OSDCatalog\OSDCatalogMicrosoftDriverPack.json"

@@ -22,9 +22,10 @@ function Get-OSDCatalogLenovoDriverPack {
         [System.Management.Automation.SwitchParameter]$TestUrl
     )
     #=================================================
-    #   Paths
+    #   Variables
     #=================================================
-    $UseCatalog           	= 'Cloud'
+    $UTF8ByteOrderMark      = [System.Text.Encoding]::UTF8.GetString(@(195, 175, 194, 187, 194, 191))
+    $UseCatalog           	= 'Offline'
     $CloudCatalogUri		= 'https://download.lenovo.com/cdrt/td/catalogv2.xml'
     $RawCatalogFile			= Join-Path $env:TEMP (Join-Path 'OSD' 'catalogv2.xml')
     $BuildCatalogFile       = Join-Path $env:TEMP (Join-Path 'OSD' 'OSDCatalogLenovoDriverPack.xml')
@@ -60,6 +61,7 @@ function Get-OSDCatalogLenovoDriverPack {
     }
     if ($UseCatalog -eq 'Cloud') {
         try {
+            #[xml]$XmlCatalog = $RawDriverPackCatalog -replace "^$UTF8ByteOrderMark"
             $CatalogCloudRaw = Invoke-RestMethod -Uri $CloudCatalogUri -UseBasicParsing
             Write-Verbose "Cloud Catalog $CloudCatalogUri"
             Write-Verbose "Saving Cloud Catalog to $RawCatalogFile"		
@@ -96,6 +98,66 @@ function Get-OSDCatalogLenovoDriverPack {
             foreach ($Item in $Model.SCCM) {
                 $DownloadUrl = $Item.'#text'
                 $ReleaseDate = $null
+                
+                $OSReleaseId = $Item.version
+                if ($OSReleaseId -eq '*') {
+                    $OSReleaseId = $null
+                }
+
+                $OSBuild = $null
+                if ($OSReleaseId -eq '22H2') {
+                    if ($Item.os -eq 'win10') {
+                        $OSBuild = '19045'
+                    }
+                    if ($Item.os -eq 'win11') {
+                        $OSBuild = '22621'
+                    }
+                }
+                elseif ($OSReleaseId -eq '21H2') {
+                    if ($Item.os -eq 'win10') {
+                        $OSBuild = '19044'
+                    }
+                    if ($Item.os -eq 'win11') {
+                        $OSBuild = '22000'
+                    }
+                }
+                elseif ($OSReleaseId -eq '21H1') {
+                    $OSBuild = '19043'
+                }
+                elseif ($OSReleaseId -eq '20H2') {
+                    $OSBuild = '19042'
+                }
+                elseif ($OSReleaseId -eq '2004') {
+                    $OSBuild = '19041'
+                }
+                elseif ($OSReleaseId -eq '1909') {
+                    $OSBuild = '18363'
+                }
+                elseif ($OSReleaseId -eq '1903') {
+                    $OSBuild = '18362'
+                }
+                elseif ($OSReleaseId -eq '1809') {
+                    $OSBuild = '17763'
+                }
+                elseif ($OSReleaseId -eq '1803') {
+                    $OSBuild = '17134'
+                }
+                elseif ($OSReleaseId -eq '1709') {
+                    $OSBuild = '16299'
+                }
+                elseif ($OSReleaseId -eq '1703') {
+                    $OSBuild = '15063'
+                }
+                elseif ($OSReleaseId -eq '1607') {
+                    $OSBuild = '14393'
+                }
+                elseif ($OSReleaseId -eq '1511') {
+                    $OSBuild = '10586'
+                }
+                elseif ($OSReleaseId -eq '1507') {
+                    $OSBuild = '10240'
+                }
+                $HashMD5 = $Item.crc
 
                 if ($Item.os -eq 'win10') {
                     if ($Item.version -eq '*') {
@@ -117,7 +179,9 @@ function Get-OSDCatalogLenovoDriverPack {
                         FileName        = $DownloadUrl | Split-Path -Leaf
                         Url             = $DownloadUrl
                         OSVersion       = 'Windows 10 x64'
-                        HashMD5         = $null
+                        OSReleaseId     = $OSReleaseId
+                        OSBuild         = $OSBuild
+                        HashMD5         = $HashMD5
                     }
                     New-Object -TypeName PSObject -Property $ObjectProperties
                 }
@@ -142,7 +206,9 @@ function Get-OSDCatalogLenovoDriverPack {
                         FileName        = $DownloadUrl | Split-Path -Leaf
                         Url             = $DownloadUrl
                         OSVersion       = 'Windows 11 x64'
-                        HashMD5         = $null
+                        OSReleaseId     = $OSReleaseId
+                        OSBuild         = $OSBuild
+                        HashMD5         = $HashMD5
                     }
                     New-Object -TypeName PSObject -Property $ObjectProperties
                 }
@@ -151,26 +217,37 @@ function Get-OSDCatalogLenovoDriverPack {
         $Results = $Results | Sort-Object Name, OSVersion -Descending | Group-Object Name | ForEach-Object {$_.Group | Select-Object -First 1}
         $Results = $Results | Sort-Object Name, OSVersion -Descending
 
+        #Need to test each of the downloads to see if they are valid
         if ($TestUrl) {
             $Results = $Results | Sort-Object Url
-            $PreviousUrl = $null
+            $LastItem = $null
+
             foreach ($Item in $Results) {
-                $CurrentUrl = $Item.Url
-                if ($CurrentUrl -ne $PreviousUrl) {
-                    Write-Verbose "Testing Download File at $CurrentUrl"
+                if ($Item.Url -eq $LastItem.Url) {
+                    $Item.Status = $LastItem.Status
+                    $Item.ReleaseDate = $LastItem.ReleaseDate
+                }
+                else {
+                    $DownloadHeaders = $null
                     try {
-                        $DownloadHeaders = (Invoke-WebRequest -Method Head -Uri $CurrentUrl -UseBasicParsing).Headers
-                        $Item.ReleaseDate = Get-Date ($DownloadHeaders['Last-Modified']) -Format "yy.MM.dd"
+                        $DownloadHeaders = (Invoke-WebRequest -Method Head -Uri $Item.Url -UseBasicParsing).Headers
                     }
                     catch {
-                        Write-Warning "Failed: $CurrentUrl"
+                        Write-Warning "Failed: $($Item.Url)"
+                        Write-Warning ""
+                    }
+
+                    if ($DownloadHeaders) {
+                        $Item.ReleaseDate = Get-Date ($DownloadHeaders['Last-Modified'])[0] -Format "yy.MM.dd"
+                        Write-Verbose "Success: $($Item.Url)"
+                        Write-Verbose "Release Date: $($Item.ReleaseDate)"
+                        Write-Verbose ""
+                    }
+                    else {
                         $Item.Status = 'Failed'
                     }
                 }
-                else {
-                    $Item.ReleaseDate = Get-Date ($DownloadHeaders['Last-Modified']) -Format "yy.MM.dd"
-                }
-                $PreviousUrl = $CurrentUrl
+                $LastItem = $Item
             }
         }
 

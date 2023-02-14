@@ -23,7 +23,7 @@ function Get-OSDCatalogHPDriverPack {
     #=================================================
     #   Paths
     #=================================================
-    $UseCatalog             = 'Cloud'
+    $UseCatalog             = 'Offline'
     $CloudCatalogUri        = 'http://ftp.hp.com/pub/caps-softpaq/cmit/HPClientDriverPackCatalog.cab'
     $RawCatalogFile			= Join-Path $env:TEMP (Join-Path 'OSD' 'HPClientDriverPackCatalog.xml')
     $BuildCatalogFile		= Join-Path $env:TEMP (Join-Path 'OSD' 'OSDCatalogHPDriverPack.xml')

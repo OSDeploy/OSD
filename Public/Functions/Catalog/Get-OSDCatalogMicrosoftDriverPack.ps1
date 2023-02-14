@@ -467,9 +467,12 @@ $OSDCatalog = @'
                 $DownloadUrl = $Download.href
                 Write-Verbose "Testing Download File at $DownloadUrl"
 
-                $DownloadHeaders = (Invoke-WebRequest -Method Head -Uri $DownloadUrl -UseBasicParsing).Headers
+                $GetUrl = Invoke-WebRequest -Method Head -Uri $DownloadUrl -UseBasicParsing
+                $GetHeaders = $GetUrl.Headers
+                $GetLastModified = $GetHeaders['Last-Modified']
+                Write-Verbose "Last Modified: $GetLastModified"
 
-                $ReleaseDate = Get-Date ($DownloadHeaders['Last-Modified']) -Format "yy.MM.dd"
+                $ReleaseDate = (Get-Date $GetLastModified).ToString('yy.MM.dd')
                 $FileName = Split-Path $DownloadUrl -Leaf
 
                 if ($FileName -match 'Win11') {
@@ -479,7 +482,7 @@ $OSDCatalog = @'
                     $OSVersion = 'Windows 10 x64'
                 }
                 
-                $ByteArray = [System.Convert]::FromBase64String($DownloadHeaders['Content-MD5'])
+                $ByteArray = [System.Convert]::FromBase64String($GetHeaders['Content-MD5'])
                 $HexObject = $ByteArray | Format-Hex
                 $HashMD5 = ($HexObject.Bytes | ForEach-Object {"{0:X}" -f $_}) -join ''
 
