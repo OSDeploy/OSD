@@ -161,22 +161,27 @@ function Get-OSDCatalogHPSystem {
             #There's always a version in the description so far, let's hope HP stays consistent...
             $DescriptionMatchInfo = $Item.LocalizedProperties | Where-Object{$_.Language -eq 'en'} | Select-Object -ExpandProperty Description | Select-String -Pattern "^\[(.*)\] (.*)$"
 
-            $Component = $Item.Properties.ProductName
+            $DeviceComponent = $Item.Properties.ProductName
             
             if ($Title -match 'System BIOS') {
-                $Component = 'BIOS'
+                $DeviceComponent = 'BIOS'
             }
             elseif ($Title -match 'HP BIOS and System Firmware') {
-                $Component = 'BIOS'
+                $DeviceComponent = 'BIOS'
             }
             elseif ($Title -match 'HP Firmware Pack') {
-                $Component = 'BIOS'
+                $DeviceComponent = 'BIOS'
             }
+
+            if ($DeviceComponent -eq 'Firmware' -and $_.Description -like "*NOTE: THIS BIOS UPDATE*") {
+                $DeviceComponent = 'BIOS'
+            }
+
 
             $ObjectProperties = [Ordered]@{
                 CatalogVersion      = $CatalogVersion
                 Status              = $null
-                Component           = $Component
+                Component           = $DeviceComponent
                 CreationDate        = ($Item.Properties.CreationDate) | Get-Date -Format yy.MM.dd
                 Title               = $Title
                 Version             = ($DescriptionMatchInfo.Matches.Groups[1].Value).Trim('.')
@@ -225,12 +230,12 @@ function Get-OSDCatalogHPSystem {
         Write-Verbose "Filtering Catalog for $Component"
         switch ($Component) {
             'BIOS'{
-                $Results = $Results | Where-Object{$_.Component -eq 'Firmware' -and $_.Description -like "*NOTE: THIS BIOS UPDATE*"}
+                $Results = $Results | Where-Object {$_.Component -eq 'BIOS'}
             }
             'Firmware'{
                 $Results = $Results | Where-Object{$_.Component -eq 'Firmware' -and $_.Description -notlike "*NOTE: THIS BIOS UPDATE*"}
             }
-            default{
+            default {
                 $Results = $Results | Where-Object {$_.Component -eq $Component}
             }
         }

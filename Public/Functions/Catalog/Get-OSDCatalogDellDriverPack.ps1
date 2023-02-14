@@ -103,9 +103,12 @@ function Get-OSDCatalogDellDriverPack {
     if ($UseCatalog -eq 'Raw') {
         Write-Verbose "Reading the Raw Catalog at $RawCatalogFile"
         [xml]$XmlCatalogContent = Get-Content $RawCatalogFile -ErrorAction Stop
-        $CatalogVersion = (Get-Date $XmlCatalogContent.DriverPackManifest.version).ToString('yy.MM.dd')
-        $DellDriverPackXml = $XmlCatalogContent.DriverPackManifest.DriverPackage
 
+        #$CatalogVersion = (Get-Date $XmlCatalogContent.DriverPackManifest.version).ToString('yy.MM.dd')
+        $RawCatalogVersion = $XmlCatalogContent.DriverPackManifest.version -replace '.00','.01'
+        $CatalogVersion = (Get-Date $RawCatalogVersion).ToString('yy.MM.dd')
+
+        $DellDriverPackXml = $XmlCatalogContent.DriverPackManifest.DriverPackage
         $DellDriverPackXml = $DellDriverPackXml | Where-Object {($_.SupportedOperatingSystems.OperatingSystem.osCode.Trim() | Select-Object -Unique) -notmatch 'winpe'}
 
         #=================================================
