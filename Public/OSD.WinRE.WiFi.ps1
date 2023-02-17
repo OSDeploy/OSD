@@ -213,6 +213,12 @@ $XMLProfile = @"
         Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) $($MyInvocation.MyCommand.Name) " -NoNewline
         Write-Host -ForegroundColor Green 'OK'
         #=================================================
+        #	Transcript
+        #=================================================        
+        $TranscriptPath = "$env:windir\OSDCloud\Logs"
+        if (!(Test-Path -path $TranscriptPath)){new-item -Path $TranscriptPath -ItemType Directory -Force | Out-Null}
+        Start-Transcript -Path "TranscriptPath\WinREWiFi"
+        #=================================================
         #	Test Internet Connection
         #=================================================
         Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Test-WebConnection google.com " -NoNewline
@@ -328,20 +334,23 @@ $XMLProfile = @"
         if ($StartWinREWiFi){
             $Module = Import-Module UEFIv2 -PassThru -ErrorAction SilentlyContinue
             if ($Module) {
-                $WiFiProfile = Get-UEFIVariable -Namespace "{43B9C282-A6F5-4C36-B8DE-C8738F979C65}" -VariableName PrebootWiFiProfile
-                if ($WiFiProfile){
+                $UEFIWiFiProfile = Get-UEFIVariable -Namespace "{43B9C282-A6F5-4C36-B8DE-C8738F979C65}" -VariableName PrebootWiFiProfile
+                if ($UEFIWiFiProfile){
                     Write-Host "Found WiFi Profile in HP UEFI" -ForegroundColor Gray
-                    $WiFiProfile = $WiFiProfile -Replace "`0",""
+                    $UEFIWiFiProfile = $UEFIWiFiProfile -Replace "`0",""
 
-                    $SSIDString = $WiFiProfile.Split(",") | Where-Object {$_ -match "SSID"}
+                    $SSIDString = $UEFIWiFiProfile.Split(",") | Where-Object {$_ -match "SSID"}
                     $SSID = ($SSIDString.Split(":") | Where-Object {$_ -notmatch "SSID"}).Replace("`"","")
 
-                    $KeyString = $WiFiProfile.Split(",") | Where-Object {$_ -match "Password"}
+                    $KeyString = $UEFIWiFiProfile.Split(",") | Where-Object {$_ -match "Password"}
                     $Key = ($KeyString.Split(":") | Where-Object {$_ -notmatch "Password"}).Replace("`"","")
                     if ($SSID){
                         Write-Host "Found $SSID in UEFI, Attepting to Create Profile and Connect..." -ForegroundColor Gray
                         Set-WinREWiFi -WLanName $SSID -Passwd $Key -outfile "$env:TEMP\UEFIWiFiProfile.XML"
-                        if (!($wifiProfile)){$wifiProfile = "$env:TEMP\UEFIWiFiProfile.XML"}
+                        if (!($wifiProfile)){
+                                Write-Host "Setting wifiprofile var to $env:TEMP\UEFIWiFiProfile.XML" -ForegroundColor Gray
+                                $wifiProfile = "$env:TEMP\UEFIWiFiProfile.XML"
+                            }
                     }
                 }
             }
@@ -386,7 +395,14 @@ $XMLProfile = @"
 
                 $StartWinREWiFi = 0
                 # make checks on start of evert cycle because in case of failure, profile will be deleted
-                if ($wifiProfile -and (Test-Path $wifiProfile)) { ++$StartWinREWiFi }
+                if ($wifiProfile -and (Test-Path $wifiProfile)) { 
+                    ++$StartWinREWiFi 
+                    Write-Host -ForegroundColor Gray "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Found WiFi Profile"
+                }
+                else {
+                    Write-Host -ForegroundColor Gray "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) No Found WiFi Profile"
+
+                }
         
                 if ($StartWinREWiFi) {
                     # use saved wi-fi profile to make the unattended connection
@@ -457,6 +473,7 @@ $XMLProfile = @"
             }
             Get-SmbClientNetworkInterface | Where-Object {($_.FriendlyName -eq 'Wi-Fi') -or ($_.FriendlyName -eq 'WiFi') -or ($_.FriendlyName -eq 'WLAN')} | Format-List
         }
+        Stop-Transcript
         Start-Sleep -Seconds 5
     }
 }
