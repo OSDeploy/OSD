@@ -217,7 +217,7 @@ $XMLProfile = @"
         #=================================================        
         $TranscriptPath = "$env:SystemDrive\OSDCloud\Logs"
         if (!(Test-Path -path $TranscriptPath)){new-item -Path $TranscriptPath -ItemType Directory -Force | Out-Null}
-        Start-Transcript -Path "TranscriptPath\WinREWiFi.log"
+        Start-Transcript -Path "$TranscriptPath\WinREWiFi.log"
         #=================================================
         #	Test Internet Connection
         #=================================================
@@ -402,6 +402,7 @@ $XMLProfile = @"
                     try {
                         Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Establishing a connection using $wifiProfile"
                         Connect-WinREWiFiByXMLProfile $wifiProfile -ErrorAction Stop
+                        Start-Sleep -Seconds 10
                     }
                     catch {
                         Write-Warning $_
