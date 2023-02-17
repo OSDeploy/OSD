@@ -215,9 +215,9 @@ $XMLProfile = @"
         #=================================================
         #	Transcript
         #=================================================        
-        $TranscriptPath = "$env:windir\OSDCloud\Logs"
+        $TranscriptPath = "$env:SystemDrive\OSDCloud\Logs"
         if (!(Test-Path -path $TranscriptPath)){new-item -Path $TranscriptPath -ItemType Directory -Force | Out-Null}
-        Start-Transcript -Path "TranscriptPath\WinREWiFi"
+        Start-Transcript -Path "TranscriptPath\WinREWiFi.log"
         #=================================================
         #	Test Internet Connection
         #=================================================
@@ -395,14 +395,7 @@ $XMLProfile = @"
 
                 $StartWinREWiFi = 0
                 # make checks on start of evert cycle because in case of failure, profile will be deleted
-                if ($wifiProfile -and (Test-Path $wifiProfile)) { 
-                    ++$StartWinREWiFi 
-                    Write-Host -ForegroundColor Gray "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Found WiFi Profile"
-                }
-                else {
-                    Write-Host -ForegroundColor Gray "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) No Found WiFi Profile"
-
-                }
+                if ($wifiProfile -and (Test-Path $wifiProfile)) { ++$StartWinREWiFi }
         
                 if ($StartWinREWiFi) {
                     # use saved wi-fi profile to make the unattended connection
