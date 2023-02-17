@@ -106,7 +106,11 @@ if ($env:SystemDrive -eq 'X:') {
             
             [Parameter(Mandatory = $false, HelpMessage = "This switch will generate a WPA profile instead of WPA2")]
             [System.Management.Automation.SwitchParameter]
-            $WPA = $false
+            $WPA = $false,
+
+            [Parameter(Mandatory = $false, HelpMessage = "This switch will generate XML Profile File")]
+            [System.String]
+            $OutFile = "$env:TEMP/WiFiProfile.xml"
         )
 
         if ($Passwd) {
@@ -181,6 +185,9 @@ $XMLProfile = @"
         $WLanName = $WLanName -replace "\s+"
         $WlanConfig = "$env:TEMP\$WLanName.xml"
         $XMLProfile | Set-Content $WlanConfig
+        if ($OutFile){
+            Copy-Item $WlanConfig -Destination $OutFile
+        }
         $result = Netsh WLAN add profile filename=$WlanConfig
         Remove-Item $WlanConfig -ErrorAction SilentlyContinue
         if ($result -notmatch "is added on interface") {
@@ -313,6 +320,30 @@ $XMLProfile = @"
                     Write-Warning "Drivers may need to be added to WinPE"
                 }
                 $StartWinREWiFi = $false
+            }
+        }
+        #=================================================
+        #   Test UEFI WiFi Profile
+        #=================================================
+        if ($StartWinREWiFi){
+            $Module = Import-Module UEFIv2 -PassThru -ErrorAction SilentlyContinue
+            if ($Module) {
+                $WiFiProfile = Get-UEFIVariable -Namespace "{43B9C282-A6F5-4C36-B8DE-C8738F979C65}" -VariableName PrebootWiFiProfile
+                if ($WiFiProfile){
+                    Write-Host "Found WiFi Profile in HP UEFI" -ForegroundColor Gray
+                    $WiFiProfile = $WiFiProfile -Replace "`0",""
+
+                    $SSIDString = $WiFiProfile.Split(",") | Where-Object {$_ -match "SSID"}
+                    $SSID = ($SSIDString.Split(":") | Where-Object {$_ -notmatch "SSID"}).Replace("`"","")
+
+                    $KeyString = $WiFiProfile.Split(",") | Where-Object {$_ -match "Password"}
+                    $Key = ($KeyString.Split(":") | Where-Object {$_ -notmatch "Password"}).Replace("`"","")
+                    if ($SSID){
+                        Write-Host "Found $SSID in UEFI, Attepting to Create Profile and Connect..." -ForegroundColor Gray
+                        Set-WinREWiFi -WLanName $SSID -Passwd $Key -outfile "$env:TEMP\UEFIWiFiProfile.XML"
+                        if (!($wifiProfile)){$wifiProfile = "$env:TEMP\UEFIWiFiProfile.XML"}
+                    }
+                }
             }
         }
         #=================================================
