@@ -1335,6 +1335,7 @@ Windows Registry Editor Version 5.00
         'Config\OOBEDeploy',
         'Config\Scripts\Shutdown',
         'Config\Scripts\Startup'
+        'Config\Scripts\StartNet'
     )
     
     if ($Name -match 'public') {

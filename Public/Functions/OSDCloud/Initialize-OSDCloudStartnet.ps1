@@ -4,6 +4,31 @@ function Initialize-OSDCloudStartnet {
         [switch] $WirelessConnect
     )
     if ($env:SystemDrive -eq 'X:') {
+        #region
+        #==================================================================================================
+        #OSDCloud Config Startup Scripts
+        #==================================================================================================
+
+        <#
+        David Segura
+        22.11.11.1
+        These scripts will be in the OSDCloud Workspace in Config\Scripts\StartNet
+        When Edit-OSDCloudWinPE is executed then these files should be copied to the mounted WinPE
+        In WinPE, the scripts will exist in X:\OSDCloud\Config\Scripts\*
+        #>
+        $Global:OSDCloud.ScriptStartNet = Get-PSDrive -PSProvider FileSystem | Where-Object {$_.Name -ne 'C'} | ForEach-Object {
+            Get-ChildItem "$($_.Root)OSDCloud\Config\Scripts\StartNet\" -Include "*.ps1" -File -Recurse -Force -ErrorAction Ignore
+        }
+        if ($Global:OSDCloud.ScriptStartNet) {
+            Write-SectionHeader 'OSDCloud Config StartNet Scripts'
+            $Global:OSDCloud.ScriptStartNet = $Global:OSDCloud.ScriptStartNet | Sort-Object -Property FullName
+            foreach ($Item in $Global:OSDCloud.ScriptStartNet) {
+                Write-DarkGrayHost "$($Item.FullName)"
+                & "$($Item.FullName)"
+            }
+        }
+        #endregion
+        
         #=================================================
         #   Initialize Hardware Devices
         #=================================================
