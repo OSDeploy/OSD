@@ -20,10 +20,10 @@ function Initialize-OSDCloudStartnet {
             Get-ChildItem "$($_.Root)OSDCloud\Config\Scripts\StartNet\" -Include "*.ps1" -File -Recurse -Force -ErrorAction Ignore
         }
         if ($Global:ScriptStartNet) {
-            Write-SectionHeader 'OSDCloud Config StartNet Scripts'
+            Write-Host -ForegroundColor Gray 'OSDCloud Config StartNet Scripts'
             $Global:ScriptStartNet = $Global:ScriptStartNet | Sort-Object -Property FullName
             foreach ($Item in $Global:ScriptStartNet) {
-                Write-DarkGrayHost "$($Item.FullName)"
+                Write-Host -ForegroundColor Gray "$($Item.FullName)"
                 & "$($Item.FullName)"
             }
         }
