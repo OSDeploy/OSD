@@ -16,13 +16,13 @@ function Initialize-OSDCloudStartnet {
         When Edit-OSDCloudWinPE is executed then these files should be copied to the mounted WinPE
         In WinPE, the scripts will exist in X:\OSDCloud\Config\Scripts\*
         #>
-        $Global:OSDCloud.ScriptStartNet = Get-PSDrive -PSProvider FileSystem | Where-Object {$_.Name -ne 'C'} | ForEach-Object {
+        $Global:ScriptStartNet = Get-PSDrive -PSProvider FileSystem | Where-Object {$_.Name -ne 'C'} | ForEach-Object {
             Get-ChildItem "$($_.Root)OSDCloud\Config\Scripts\StartNet\" -Include "*.ps1" -File -Recurse -Force -ErrorAction Ignore
         }
-        if ($Global:OSDCloud.ScriptStartNet) {
+        if ($Global:ScriptStartNet) {
             Write-SectionHeader 'OSDCloud Config StartNet Scripts'
-            $Global:OSDCloud.ScriptStartNet = $Global:OSDCloud.ScriptStartNet | Sort-Object -Property FullName
-            foreach ($Item in $Global:OSDCloud.ScriptStartNet) {
+            $Global:ScriptStartNet = $Global:ScriptStartNet | Sort-Object -Property FullName
+            foreach ($Item in $Global:ScriptStartNet) {
                 Write-DarkGrayHost "$($Item.FullName)"
                 & "$($Item.FullName)"
             }
