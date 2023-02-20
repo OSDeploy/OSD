@@ -50,10 +50,7 @@ function Initialize-OSDCloudStartnet {
             Start-Transcript -Path "x:\OSDCloud\Logs\Deploy-OSDCloud.log"
             if (!($Global:ModuleBase = (Get-Module -Name OSD).ModuleBase)){Import-Module -Name OSD}
             if ($Global:ModuleBase = (Get-Module -Name OSD).ModuleBase){
-                #$Global:MahAppsPath = "$Global:ModuleBase\Projects\assembly2\MahApps.Metro.dll"
-                #$Global:InteractivityPath = "$Global:ModuleBase\Projects\assembly2\System.Windows.Interactivity.dll"
                 Write-Host -ForegroundColor Gray "Starting $Global:ModuleBase\Resources\SplashScreen\Show-Background.ps1"
-                #start-process powershell.exe -ArgumentList "-ExecutionPolicy Bypass -WindowStyle Hidden -File $Global:ModuleBase\Resources\SplashScreen\Show-Background.ps1"
                 & $Global:ModuleBase\Resources\SplashScreen\Show-Background.ps1
             }
         }
