@@ -15,9 +15,7 @@ Function Get-LogLastHeading {
         if (Test-Path "C:\OSDCloud\Logs"){$LogsPath = "C:\OSDCloud\Logs"}
         else {$LogsPath = "X:\OSDCloud\Logs"}
         $OSDLogFile = Get-ChildItem -Path "$LogsPath\*.log" | Where-Object {$_.Name -match "Deploy-OSDCloud.log"}
-    
         }
-
     $RAWContent = Get-Content $OSDLogFile -ReadCount 1
     $StartPoint = $RAWContent | Select-String -SimpleMatch "Transcript started, output" | Select-Object -Property LineNumber
     $LastRow = $RAWContent | Select-Object -Last 1

@@ -1469,6 +1469,9 @@ function Invoke-OSDCloud {
         }
         #=================================================
         #region HyperV Config for Specialize Phase
+        if (((Get-CimInstance Win32_ComputerSystem).Model -eq "Virtual Machine") -and ((Get-CimInstance Win32_ComputerSystem).Manufacturer -eq "Microsoft Corporation")){
+            $Global:OSDCloud.HyperVEjectISO = $true
+        }
         if (($Global:OSDCloud.HyperVSetName -eq $true) -or ($Global:OSDCloud.HyperVEjectISO -eq $true) ){
             Write-DarkGrayHost "Starting HyperV Modifications"
             if ($Global:OSDCloud.HyperVSetName -eq $true){
