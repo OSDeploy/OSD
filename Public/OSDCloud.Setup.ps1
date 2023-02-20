@@ -1334,7 +1334,7 @@ Windows Registry Editor Version 5.00
         'Config\AutopilotOOBE',
         'Config\OOBEDeploy',
         'Config\Scripts\Shutdown',
-        'Config\Scripts\Startup'
+        'Config\Scripts\Startup',
         'Config\Scripts\StartNet'
     )
     

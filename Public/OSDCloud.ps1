@@ -123,6 +123,7 @@ function Invoke-OSDCloud {
         SkipOOBEDeploy = [bool]$false
         SkipNewOSDisk = [bool]$false
         SkipRecoveryPartition = [bool]$false
+        SplashScreen = [bool]$false
         RecoveryPartition = $null
         TimeEnd = $null
         TimeSpan = $null
@@ -225,6 +226,19 @@ function Invoke-OSDCloud {
         $OSDCloud | Out-File $env:temp\OSDCloudVars.log
     }
     #endregion
+    #=================================================
+    #region SplashScreen
+    if ($Global:OSDCloud.SplashScreen -eq $true){
+        Write-SectionHeader "Setup SplashScreen"
+        $RegPath = "HKLM:\SOFTWARE\OSDCloud"
+        if (!(Test-Path -Path $RegPath)){New-Item -Path $RegPath -Force}
+        New-ItemProperty -Path $RegPath -Name "OSVersion" -Value $Global:OSDCloud.OSVersion
+        New-ItemProperty -Path $RegPath -Name "OSBuild" -Value $Global:OSDCloud.OSBuild
+        New-ItemProperty -Path $RegPath -Name "OSEdition" -Value $Global:OSDCloud.OSEdition
+        New-ItemProperty -Path $RegPath -Name "OSLicense" -Value $Global:OSDCloud.OSLicense
+    }
+    #endregion
+    
     #=================================================
     #region WiFi Mode
     if ($Global:OSDCloud.SetWiFi -eq $true){

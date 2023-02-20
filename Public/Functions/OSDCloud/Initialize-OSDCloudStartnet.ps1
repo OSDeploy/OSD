@@ -28,7 +28,35 @@ function Initialize-OSDCloudStartnet {
             }
         }
         #endregion
-        
+        #=================================================
+        #   Initialize Splash Screen
+        #=================================================  
+        #Looks for SPLASH.JSON files in OSDCloud\Config, if found, it will run a splash screen.
+        $Global:SplashScreen = Get-PSDrive -PSProvider FileSystem | Where-Object {$_.Name -ne 'C'} | ForEach-Object {
+            Get-ChildItem "$($_.Root)OSDCloud\Config\" -Include "SPLASH.JSON" -File -Recurse -Force -ErrorAction Ignore
+        }
+        if ($Global:SplashScreen) {
+            Write-Host -ForegroundColor Gray 'OSDCloud Config StartNet Scripts'
+            $Global:SplashScreen = $Global:SplashScreen | Sort-Object -Property FullName
+            foreach ($Item in $Global:SplashScreen) {
+                Write-Host -ForegroundColor DarkGray "Found: $($Item.FullName)"
+            }
+            if ($Global:SplashScreen.count -gt 1){
+                $SplashJson = $Global:SplashScreen | Select-Object -Last 1
+                Write-Host -ForegroundColor Gray "Using $($SplashJson.FullName)"
+            }
+            if (Test-Path -Path "C:\OSDCloud\Logs"){Remove-Item -Path "C:\OSDCloud\Logs" -Recurse -Force}
+            if (!(Test-Path -Path "x:\OSDCloud\Logs")){New-Item -Path "x:\OSDCloud\Logs" -ItemType directory -Force | Out-Null}
+            Start-Transcript -Path "x:\OSDCloud\Logs\Deploy-OSDCloud.log"
+            if (!($Global:ModuleBase = (Get-Module -Name OSD).ModuleBase)){Import-Module -Name OSD}
+            if ($Global:ModuleBase = (Get-Module -Name OSD).ModuleBase){
+                #$Global:MahAppsPath = "$Global:ModuleBase\Projects\assembly2\MahApps.Metro.dll"
+                #$Global:InteractivityPath = "$Global:ModuleBase\Projects\assembly2\System.Windows.Interactivity.dll"
+                Write-Host -ForegroundColor Gray "Starting $Global:ModuleBase\Resources\SplashScreen\Show-Background.ps1"
+                #start-process powershell.exe -ArgumentList "-ExecutionPolicy Bypass -WindowStyle Hidden -File $Global:ModuleBase\Resources\SplashScreen\Show-Background.ps1"
+                & $Global:ModuleBase\Resources\SplashScreen\Show-Background.ps1
+            }
+        }
         #=================================================
         #   Initialize Hardware Devices
         #=================================================
