@@ -50,7 +50,7 @@ function Initialize-OSDCloudStartnet {
             Start-Transcript -Path "x:\OSDCloud\Logs\Deploy-OSDCloud.log"
             if (!($Global:ModuleBase = (Get-Module -Name OSD).ModuleBase)){Import-Module -Name OSD}
             if ($Global:ModuleBase = (Get-Module -Name OSD).ModuleBase){
-                Write-Host -ForegroundColor Gray "Starting $Global:ModuleBase\Resources\SplashScreen\Show-Background.ps1"
+                #Write-Host -ForegroundColor Gray "Starting $Global:ModuleBase\Resources\SplashScreen\Show-Background.ps1"
                 & $Global:ModuleBase\Resources\SplashScreen\Show-Background.ps1
             }
         }
