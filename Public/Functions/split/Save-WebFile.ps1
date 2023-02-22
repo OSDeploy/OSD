@@ -118,11 +118,11 @@ function Save-WebFile {
             Write-Verbose "Destination: $DestinationFullName"
             if ($Global:SplashScreen){
                 if ($host.name -match 'ConsoleHost') {
-                    Invoke-Expression "& curl.exe --progress-bar --insecure --location --output `"$DestinationFullName`" --url `"$SourceUrl`" 2>&1" | Out-File c:\windows\temp\curl.log
+                    Invoke-Expression "& curl.exe --progress-bar --insecure --location --output `"$DestinationFullName`" --url `"$SourceUrl`" 2>&1" | Out-File c:\OSDcloud\Logs\curl.log
                 }
                 else {
                     #PowerShell ISE will display a NativeCommandError, so progress will not be displayed
-                    $Quiet = Invoke-Expression "& curl.exe --progress-bar --insecure --location --output `"$DestinationFullName`" --url `"$SourceUrl`" 2>&1" | Out-File c:\windows\temp\curl.log
+                    $Quiet = Invoke-Expression "& curl.exe --progress-bar --insecure --location --output `"$DestinationFullName`" --url `"$SourceUrl`" 2>&1" | Out-File c:\OSDcloud\Logs\curl.log
                 }
             }
             else {
