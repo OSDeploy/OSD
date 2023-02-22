@@ -116,13 +116,23 @@ function Save-WebFile {
         else {
             Write-Verbose "cURL Source: $SourceUrl"
             Write-Verbose "Destination: $DestinationFullName"
-    
-            if ($host.name -match 'ConsoleHost') {
-                Invoke-Expression "& curl.exe --insecure --location --output `"$DestinationFullName`" --url `"$SourceUrl`""
+            if ($Global:SplashScreen){
+                if ($host.name -match 'ConsoleHost') {
+                    Invoke-Expression "& curl.exe --progress-bar --insecure --location --output `"$DestinationFullName`" --url `"$SourceUrl`" 2>&1" | Out-File c:\windows\temp\curl.log
+                }
+                else {
+                    #PowerShell ISE will display a NativeCommandError, so progress will not be displayed
+                    $Quiet = Invoke-Expression "& curl.exe --progress-bar --insecure --location --output `"$DestinationFullName`" --url `"$SourceUrl`" 2>&1" | Out-File c:\windows\temp\curl.log
+                }
             }
             else {
-                #PowerShell ISE will display a NativeCommandError, so progress will not be displayed
-                $Quiet = Invoke-Expression "& curl.exe --insecure --location --output `"$DestinationFullName`" --url `"$SourceUrl`" 2>&1"
+                if ($host.name -match 'ConsoleHost') {
+                    Invoke-Expression "& curl.exe --insecure --location --output `"$DestinationFullName`" --url `"$SourceUrl`""
+                }
+                else {
+                    #PowerShell ISE will display a NativeCommandError, so progress will not be displayed
+                    $Quiet = Invoke-Expression "& curl.exe --insecure --location --output `"$DestinationFullName`" --url `"$SourceUrl`" 2>&1"
+                }
             }
         }
         #=================================================
