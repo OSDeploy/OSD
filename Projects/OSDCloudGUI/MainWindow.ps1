@@ -258,45 +258,35 @@ function Show-PowershellWindow() {
     $null = $showWindowAsync::ShowWindowAsync((Get-Process -Id $pid).MainWindowHandle, 10)
 }
 #================================================
-#   Initialize
+#   Initialize OSNames
 #================================================
 if (-Not ($Global:OSDCloudOSNames)) {
-    $Global:OSDCloudOSNames = Get-OSDCloudOSNames
+    $Global:OSDCloudOSNames = $Global:OSDModuleResource.OSDCloud.Options.FriendlyName
 }
 
 $Global:OSDCloudOSNames | ForEach-Object {
     $formMainWindowControlOperatingSystemCombobox.Items.Add($_) | Out-Null
 }
 $formMainWindowControlOperatingSystemCombobox.SelectedIndex = 0
-
-
-
-
-$localOSDCloudParams = (Get-Command Start-OSDCloud).Parameters
-<# 
-$localOSDCloudParams["OSName"].Attributes.ValidValues | ForEach-Object {
-    $formMainWindowControlOperatingSystemCombobox.Items.Add($_) | Out-Null
-}
-$formMainWindowControlOperatingSystemCombobox.SelectedIndex = 0
-#>
-
-<#
-$localOSDCloudParams["OSBuild"].Attributes.ValidValues | ForEach-Object {
-    $formMainWindowControlOSBuildCombobox.Items.Add($_) | Out-Null
-}
-#>
-
-$localOSDCloudParams["OSEdition"].Attributes.ValidValues | ForEach-Object {
+#================================================
+#   Initialize OSEditionNames
+#================================================
+$Global:OSDModuleResource.OSDCloud.Options.Edition | ForEach-Object {
     $formMainWindowControlOSEditionCombobox.Items.Add($_) | Out-Null
 }
-
-$localOSDCloudParams["OSLicense"].Attributes.ValidValues | ForEach-Object {
+#================================================
+#   Initialize OSActivationNames
+#================================================
+$Global:OSDModuleResource.OSDCloud.Options.Activation | ForEach-Object {
     $formMainWindowControlOSLicenseCombobox.Items.Add($_) | Out-Null
 }
-
-$localOSDCloudParams["OSLanguage"].Attributes.ValidValues | ForEach-Object {
+#================================================
+#   Initialize OSLanguageNames
+#================================================
+$Global:OSDModuleResource.OSDCloud.Options.Language | ForEach-Object {
     $formMainWindowControlOSLanguageCombobox.Items.Add($_) | Out-Null
 }
+$formMainWindowControlOSLanguageCombobox.SelectedValue = $Global:OSDModuleResource.OSDCloud.Default.Language
 #================================================
 #   Manufacturer Enhacements
 #================================================
@@ -478,7 +468,7 @@ if ($DriverPack) {
 #   SetDefaultWin
 #================================================
 function SetDefaultWinX {
-    $formMainWindowControlOSLanguageCombobox.SelectedIndex = 7   #en-us
+    #$formMainWindowControlOSLanguageCombobox.SelectedIndex = 7   #en-us
     $formMainWindowControlOSEditionCombobox.SelectedIndex = 5    #Enterprise
     $formMainWindowControlOSLicenseCombobox.SelectedIndex = 1    #Volume
 
