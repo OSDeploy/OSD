@@ -13,8 +13,8 @@ function Get-HpWinPEDriverPack {
     [CmdletBinding()]
     param ()
 
-    $LastKnownGood = 'https://ftp.ext.hp.com/pub/softpaq/sp142501-143000/sp142621.exe'
-    $DriverPackInfoUrl = 'http://ftp.ext.hp.com/pub/caps-softpaq/cmit/softpaq/WinPE10.html'
+    $LastKnownGood = $Global:ModuleResourceOSD.WinPEDriverPack.HP.LastKnownGood
+    $DriverPackInfoUrl = $Global:ModuleResourceOSD.WinPEDriverPack.HP.Info
 
     Write-Verbose $DriverPackInfoUrl
 

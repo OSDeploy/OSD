@@ -19,7 +19,7 @@ function Get-DellWinPEDriverPack {
     [CmdletBinding()]
     param ()
 
-    $WinPEDriverPacks = 'https://www.dell.com/support/kbdoc/en-us/000107478/dell-command-deploy-winpe-driver-packs'
+    $WinPEDriverPacks = $Global:ModuleResourceOSD.WinPEDriverPack.Dell.Info
     try {
         $null = Invoke-WebRequest -Uri $WinPEDriverPacks -Method Head -UseBasicParsing -ErrorAction Stop
         Write-Verbose "Online: $WinPEDriverPacks"
@@ -53,7 +53,7 @@ function Get-DellWinPEDriverPack {
     }
 
     Write-Verbose "Trying last known good Dell WinPE Driver Pack"
-    $LastKnownGood = 'https://dl.dell.com/FOLDER09376210M/1/WinPE10.0-Drivers-A29-6FYG2.CAB'
+    $LastKnownGood = $Global:ModuleResourceOSD.WinPEDriverPack.Dell.LastKnownGood
     try {
         $null = Invoke-WebRequest -Uri $LastKnownGood -Method Head -UseBasicParsing -ErrorAction Stop
         Write-Verbose "Online: $LastKnownGood"

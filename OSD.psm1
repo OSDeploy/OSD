@@ -94,3 +94,6 @@ New-Alias -Name Update-WindowsImageOSD -Value Update-MyWindowsImage -Force -Erro
 #=================================================
 #Export-ModuleMember
 Export-ModuleMember -Function * -Alias *
+
+# Get module strings
+$Global:ModuleResourceOSD = Get-ModuleResource
