@@ -19,7 +19,7 @@ function Get-DellWinPEDriverPack {
     [CmdletBinding()]
     param ()
 
-    $WinPEDriverPacks = $Global:ModuleResourceOSD.WinPEDriverPack.Dell.Info
+    $WinPEDriverPacks = $Global:OSDModuleResource.WinPEDriverPack.Dell.Info
     try {
         $null = Invoke-WebRequest -Uri $WinPEDriverPacks -Method Head -UseBasicParsing -ErrorAction Stop
         Write-Verbose "Online: $WinPEDriverPacks"
@@ -53,7 +53,7 @@ function Get-DellWinPEDriverPack {
     }
 
     Write-Verbose "Trying last known good Dell WinPE Driver Pack"
-    $LastKnownGood = $Global:ModuleResourceOSD.WinPEDriverPack.Dell.LastKnownGood
+    $LastKnownGood = $Global:OSDModuleResource.WinPEDriverPack.Dell.LastKnownGood
     try {
         $null = Invoke-WebRequest -Uri $LastKnownGood -Method Head -UseBasicParsing -ErrorAction Stop
         Write-Verbose "Online: $LastKnownGood"

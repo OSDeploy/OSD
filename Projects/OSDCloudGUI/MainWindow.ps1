@@ -261,7 +261,7 @@ function Show-PowershellWindow() {
 #   Initialize OSNames
 #================================================
 if (-Not ($Global:OSDCloudOSNames)) {
-    $Global:OSDCloudOSNames = $Global:ModuleResourceOSD.OSDCloud.OSNames
+    $Global:OSDCloudOSNames = $Global:OSDModuleResource.OSDCloud.Options.FriendlyName
 }
 
 $Global:OSDCloudOSNames | ForEach-Object {
@@ -271,21 +271,22 @@ $formMainWindowControlOperatingSystemCombobox.SelectedIndex = 0
 #================================================
 #   Initialize OSEditionNames
 #================================================
-$Global:ModuleResourceOSD.OSDCloud.OSEditionNames | ForEach-Object {
+$Global:OSDModuleResource.OSDCloud.Options.Edition | ForEach-Object {
     $formMainWindowControlOSEditionCombobox.Items.Add($_) | Out-Null
 }
 #================================================
 #   Initialize OSActivationNames
 #================================================
-$Global:ModuleResourceOSD.OSDCloud.OSActivationNames | ForEach-Object {
+$Global:OSDModuleResource.OSDCloud.Options.Activation | ForEach-Object {
     $formMainWindowControlOSLicenseCombobox.Items.Add($_) | Out-Null
 }
 #================================================
 #   Initialize OSLanguageNames
 #================================================
-$Global:ModuleResourceOSD.OSDCloud.OSLanguageNames | ForEach-Object {
+$Global:OSDModuleResource.OSDCloud.Options.Language | ForEach-Object {
     $formMainWindowControlOSLanguageCombobox.Items.Add($_) | Out-Null
 }
+$formMainWindowControlOSLanguageCombobox.SelectedValue = $Global:OSDModuleResource.OSDCloud.Default.Language
 #================================================
 #   Manufacturer Enhacements
 #================================================
@@ -467,7 +468,7 @@ if ($DriverPack) {
 #   SetDefaultWin
 #================================================
 function SetDefaultWinX {
-    $formMainWindowControlOSLanguageCombobox.SelectedIndex = 7   #en-us
+    #$formMainWindowControlOSLanguageCombobox.SelectedIndex = 7   #en-us
     $formMainWindowControlOSEditionCombobox.SelectedIndex = 5    #Enterprise
     $formMainWindowControlOSLicenseCombobox.SelectedIndex = 1    #Volume
 

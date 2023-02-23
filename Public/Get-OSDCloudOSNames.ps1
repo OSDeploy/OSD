@@ -13,7 +13,7 @@ function Get-OSDCloudOSNames {
     [CmdletBinding()]
     param ()
 
-    $Global:OSDCloudOSNames = $Global:ModuleResourceOSD.OSDCloud.OSNames
+    $Global:OSDCloudOSNames = $Global:OSDModuleResource.OSDCloud.Options.FriendlyName
 
     $Global:OSDCloudOSNames
 }

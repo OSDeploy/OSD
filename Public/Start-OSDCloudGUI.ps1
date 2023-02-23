@@ -17,11 +17,11 @@ function Start-OSDCloudGUI {
     param (
         #The custom Brand for OSDCloudGUI
         [Alias('BrandingTitle')]
-        [System.String]$Brand = $Global:ModuleResourceOSD.StartOSDCloudGUI.Brand,
+        [System.String]$Brand = $Global:OSDModuleResource.StartOSDCloudGUI.Brand,
         
         #Color for the OSDCloudGUI Brand
         [Alias('BrandingColor')]
-        [System.String]$Color = $Global:ModuleResourceOSD.StartOSDCloudGUI.Color
+        [System.String]$Color = $Global:OSDModuleResource.StartOSDCloudGUI.Color
     )
     #================================================
     #   Branding

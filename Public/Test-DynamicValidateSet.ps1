@@ -1,7 +1,7 @@
 function Test-DynamicValidateSet {
   [CmdletBinding()]
-  Param(
-      # Any other parameters can go here
+  param(
+      #No parameters are hard coded!
   )
 
   DynamicParam {
@@ -23,7 +23,7 @@ function Test-DynamicValidateSet {
           $AttributeCollection.Add($ParameterAttribute)
 
           # Generate and set the ValidateSet 
-          $arrSet = $Global:ModuleResourceOSD.OSDCloud.OSNames
+          $arrSet = $Global:OSDModuleResource.OSDCloud.Options.FriendlyName
           $ValidateSetAttribute = New-Object System.Management.Automation.ValidateSetAttribute($arrSet)
 
           # Add the ValidateSet to the attributes collection
@@ -36,13 +36,11 @@ function Test-DynamicValidateSet {
   }
 
   begin {
-      # Bind the parameter to a friendly variable
+      # Bind the parameter
       $OSName = $PsBoundParameters[$ParameterName]
   }
 
   process {
-      # Your code goes here
-      
+      # rest of the function in here
   }
-
 }

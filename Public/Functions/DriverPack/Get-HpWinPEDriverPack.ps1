@@ -13,8 +13,8 @@ function Get-HpWinPEDriverPack {
     [CmdletBinding()]
     param ()
 
-    $LastKnownGood = $Global:ModuleResourceOSD.WinPEDriverPack.HP.LastKnownGood
-    $DriverPackInfoUrl = $Global:ModuleResourceOSD.WinPEDriverPack.HP.Info
+    $LastKnownGood = $Global:OSDModuleResource.WinPEDriverPack.HP.LastKnownGood
+    $DriverPackInfoUrl = $Global:OSDModuleResource.WinPEDriverPack.HP.Info
 
     Write-Verbose $DriverPackInfoUrl
 
