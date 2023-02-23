@@ -258,43 +258,32 @@ function Show-PowershellWindow() {
     $null = $showWindowAsync::ShowWindowAsync((Get-Process -Id $pid).MainWindowHandle, 10)
 }
 #================================================
-#   Initialize
+#   Initialize OSNames
 #================================================
 if (-Not ($Global:OSDCloudOSNames)) {
-    $Global:OSDCloudOSNames = Get-OSDCloudOSNames
+    $Global:OSDCloudOSNames = $Global:ModuleResourceOSD.OSDCloud.OSNames
 }
 
 $Global:OSDCloudOSNames | ForEach-Object {
     $formMainWindowControlOperatingSystemCombobox.Items.Add($_) | Out-Null
 }
 $formMainWindowControlOperatingSystemCombobox.SelectedIndex = 0
-
-
-
-
-$localOSDCloudParams = (Get-Command Start-OSDCloud).Parameters
-<# 
-$localOSDCloudParams["OSName"].Attributes.ValidValues | ForEach-Object {
-    $formMainWindowControlOperatingSystemCombobox.Items.Add($_) | Out-Null
-}
-$formMainWindowControlOperatingSystemCombobox.SelectedIndex = 0
-#>
-
-<#
-$localOSDCloudParams["OSBuild"].Attributes.ValidValues | ForEach-Object {
-    $formMainWindowControlOSBuildCombobox.Items.Add($_) | Out-Null
-}
-#>
-
-$localOSDCloudParams["OSEdition"].Attributes.ValidValues | ForEach-Object {
+#================================================
+#   Initialize OSEditionNames
+#================================================
+$Global:ModuleResourceOSD.OSDCloud.OSEditionNames | ForEach-Object {
     $formMainWindowControlOSEditionCombobox.Items.Add($_) | Out-Null
 }
-
-$localOSDCloudParams["OSLicense"].Attributes.ValidValues | ForEach-Object {
+#================================================
+#   Initialize OSActivationNames
+#================================================
+$Global:ModuleResourceOSD.OSDCloud.OSActivationNames | ForEach-Object {
     $formMainWindowControlOSLicenseCombobox.Items.Add($_) | Out-Null
 }
-
-$localOSDCloudParams["OSLanguage"].Attributes.ValidValues | ForEach-Object {
+#================================================
+#   Initialize OSLanguageNames
+#================================================
+$Global:ModuleResourceOSD.OSDCloud.OSLanguageNames | ForEach-Object {
     $formMainWindowControlOSLanguageCombobox.Items.Add($_) | Out-Null
 }
 #================================================
