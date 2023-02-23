@@ -36,6 +36,17 @@ Function Get-LogLastHeading {
         }
     }
 }
+function Get-NetworkStat {
+
+    $ActiveAdapter = Get-NetAdapter | Where-Object {$_.Status -eq "Up"} | Select-Object -First 1
+    [int]$LinkSpeed = $ActiveAdapter.TransmitLinkSpeed
+    $Sample = Get-Counter "\Network Interface(*)\Bytes Total/sec"
+    $SampleValue = ($Sample.CounterSamples | Select-Object -Property CookedValue).CookedValue | Sort-Object -Descending | Select-Object -First 1
+    $PercentUtil = [math]::round($SampleValue/($LinkSpeed / 8) * 100)
+    $MBps = [math]::round($SampleValue / 1000000)
+
+    Write-Output "MB/s: $MBps | %Util: $PercentUtil"
+    }
 
 if (!($Global:ModuleBase = (Get-Module -Name OSD).ModuleBase)){Import-Module -Name OSD}
 if ($Global:ModuleBase = (Get-Module -Name OSD).ModuleBase){
