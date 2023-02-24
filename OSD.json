@@ -10,7 +10,7 @@
 		"Production": "https://go.microsoft.com/fwlink/?linkid=844652"
 	},
 	"OSDCloud": {
-        "Default": {
+        "Defaults": {
             "Activation": "Volume",
             "Edition": "Enterprise",
             "FriendlyName": "Windows 11 22H2 x64",

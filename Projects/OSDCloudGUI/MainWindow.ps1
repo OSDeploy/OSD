@@ -286,7 +286,7 @@ $Global:OSDModuleResource.OSDCloud.Options.Activation | ForEach-Object {
 $Global:OSDModuleResource.OSDCloud.Options.Language | ForEach-Object {
     $formMainWindowControlOSLanguageCombobox.Items.Add($_) | Out-Null
 }
-$formMainWindowControlOSLanguageCombobox.SelectedValue = $Global:OSDModuleResource.OSDCloud.Default.Language
+$formMainWindowControlOSLanguageCombobox.SelectedValue = $Global:OSDModuleResource.OSDCloud.Defaults.Language
 #================================================
 #   Manufacturer Enhacements
 #================================================
