@@ -337,11 +337,18 @@ $DispatcherTimerTS.Add_Tick($TimerCodeTS)
 #Timer for Upgrade % - Should be inactivate until activated in the Main Text Timer when it reaches the upgrade step.    
 $TimerCodeUpgrade = {
         
-        
+        $CurlProcess = Get-Process -name Curl -ErrorAction SilentlyContinue
+        if ($CurlProcess){
+            
+            $TextBlock4.Text = "Downloading Process: $(Get-NetworkStat) "
+
+        }
+        else {$TextBlock4.Text = ""}
+        <#
         $TestInfoUpgrade = Get-ItemPropertyValue -Path "HKLM:\SYSTEM\Setup\MoSetup\Volatile" -Name "SetupProgress"
         if ($TestInfoUpgrade) {$TextBlock4.Text = "Windows Setup Engine: $($TestInfoUpgrade) %"}
         else {$TextBlock4.Text = "Windows Setup Engine: Initializing"}
-
+        #>
 
 }
 $DispatcherTimerUpgrade = New-Object -TypeName System.Windows.Threading.DispatcherTimer
