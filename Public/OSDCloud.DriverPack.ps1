@@ -13,14 +13,40 @@ function Get-OSDCloudDriverPack {
     param (
         [System.String]
         #Product is determined automatically by Get-MyComputerProduct
-        $Product = (Get-MyComputerProduct)
+        $Product = (Get-MyComputerProduct),
+
+        [System.String]
+        [ValidateSet('Windows 11','Windows 10')]
+        $OSVersion,
+
+        [System.String]
+        $OSReleaseID
     )
-    $Results = Get-OSDCloudDriverPacks | Where-Object {($_.Product -contains $Product)}
+    $ProductDriverPacks = Get-OSDCloudDriverPacks | Where-Object {($_.Product -contains $Product)}
     #=================================================
     #   Results
     #=================================================
-    if ($Results) {
-        $Results = $Results | Sort-Object -Property OS -Descending
+    if ($ProductDriverPacks) {
+        if ($OSVersion) {
+            $OSVersionDriverPacks = $ProductDriverPacks | Where-Object { $_.OS -match $OSVersion}
+            if (-NOT $OSVersionDriverPacks) {
+                $OSVersionDriverPacks = $ProductDriverPacks
+            }
+        }
+        else {
+            $OSVersionDriverPacks = $ProductDriverPacks
+        }
+
+        if ($OSReleaseID) {
+            $OSReleaseIDDriverPacks = $OSVersionDriverPacks | Where-Object { $_.Name -match $OSReleaseID}
+            if (-NOT $OSReleaseIDDriverPacks) {
+                $OSReleaseIDDriverPacks = $OSVersionDriverPacks
+            }
+        }
+        else {
+            $OSReleaseIDDriverPacks = $OSVersionDriverPacks
+        }
+        $Results = $OSReleaseIDDriverPacks | Sort-Object -Property Name -Descending
         $Results[0]
     }
     else {
