@@ -258,36 +258,6 @@ function Show-PowershellWindow() {
     $null = $showWindowAsync::ShowWindowAsync((Get-Process -Id $pid).MainWindowHandle, 10)
 }
 #================================================
-#   Initialize OSNames
-#================================================
-if (-Not ($Global:OSDCloudOSNames)) {
-    $Global:OSDCloudOSNames = $Global:OSDModuleResource.OSDCloud.Options.FriendlyName
-}
-
-$Global:OSDCloudOSNames | ForEach-Object {
-    $formMainWindowControlOperatingSystemCombobox.Items.Add($_) | Out-Null
-}
-$formMainWindowControlOperatingSystemCombobox.SelectedIndex = 0
-#================================================
-#   Initialize OSEditionNames
-#================================================
-$Global:OSDModuleResource.OSDCloud.Options.Edition | ForEach-Object {
-    $formMainWindowControlOSEditionCombobox.Items.Add($_) | Out-Null
-}
-#================================================
-#   Initialize OSActivationNames
-#================================================
-$Global:OSDModuleResource.OSDCloud.Options.Activation | ForEach-Object {
-    $formMainWindowControlOSLicenseCombobox.Items.Add($_) | Out-Null
-}
-#================================================
-#   Initialize OSLanguageNames
-#================================================
-$Global:OSDModuleResource.OSDCloud.Options.Language | ForEach-Object {
-    $formMainWindowControlOSLanguageCombobox.Items.Add($_) | Out-Null
-}
-$formMainWindowControlOSLanguageCombobox.SelectedValue = $Global:OSDModuleResource.OSDCloud.Defaults.Language
-#================================================
 #   Manufacturer Enhacements
 #================================================
 <#   DISABLING VENDOR FEATURES UNTIL OFFLINE SOLUTION CREATED - 22.07.01 - GARY
@@ -453,44 +423,75 @@ $formMainWindowControlManufacturerFunction.IsEnabled = $false
 $formMainWindowControlWindowsDefenderUpdate.Visibility = 'Hidden'
 $formMainWindowControlWindowsDefenderUpdate.IsEnabled = $false
 #================================================
+#   Menu Options
+#================================================
+$formMainWindowControlcaptureScreenshots.IsChecked = $Global:OSDCloudGUI.captureScreenshots
+$formMainWindowControlClearDiskConfirm.IsChecked = $Global:OSDCloudGUI.ClearDiskConfirm
+$formMainWindowControlrestartComputer.IsChecked = $Global:OSDCloudGUI.restartComputer
+$formMainWindowControlupdateDiskDrivers.IsChecked = $Global:OSDCloudGUI.updateDiskDrivers
+$formMainWindowControlupdateFirmware.IsChecked = $Global:OSDCloudGUI.updateFirmware
+$formMainWindowControlupdateNetworkDrivers.IsChecked = $Global:OSDCloudGUI.updateNetworkDrivers
+$formMainWindowControlupdateSCSIDrivers.IsChecked = $Global:OSDCloudGUI.updateSCSIDrivers
+#================================================
+#   OS Name Combobox
+#================================================
+$Global:OSDCloudGUI.OSNameValues | ForEach-Object {
+    $formMainWindowControlOSNameCombobox.Items.Add($_) | Out-Null
+}
+$formMainWindowControlOSNameCombobox.SelectedValue = $Global:OSDCloudGUI.OSName
+#================================================
+#   OS Edition Combobox
+#================================================
+$Global:OSDCloudGUI.OSEditionValues | ForEach-Object {
+    $formMainWindowControlOSEditionCombobox.Items.Add($_) | Out-Null
+}
+#================================================
+#   OS Language Combobox
+#================================================
+$Global:OSDCloudGUI.OSLanguageValues | ForEach-Object {
+    $formMainWindowControlOSLanguageCombobox.Items.Add($_) | Out-Null
+}
+#================================================
+#   OS Activation Combobox
+#================================================
+$Global:OSDCloudGUI.OSActivationValues | ForEach-Object {
+    $formMainWindowControlOSActivationCombobox.Items.Add($_) | Out-Null
+}
+#================================================
 #   DriverPack
 #================================================
-$DriverPack = Get-OSDCloudDriverPack
-$DriverPacks = @()
-$DriverPacks = Get-OSDCloudDriverPacks
-$DriverPacks | ForEach-Object {
+$Global:OSDCloudGUI.DriverPacks | ForEach-Object {
     $formMainWindowControlDriverPackCombobox.Items.Add($_.Name) | Out-Null
 }
-if ($DriverPack) {
-    $formMainWindowControlDriverPackCombobox.SelectedValue = $DriverPack.Name
+if ($Global:OSDCloudGUI.DriverPackName) {
+    $formMainWindowControlDriverPackCombobox.SelectedValue = $Global:OSDCloudGUI.DriverPackName
 }
 #================================================
-#   SetDefaultWin
+#   Set-OSDCloudGUIDefaultOptions
 #================================================
-function SetDefaultWinX {
-    #$formMainWindowControlOSLanguageCombobox.SelectedIndex = 7   #en-us
-    $formMainWindowControlOSEditionCombobox.SelectedIndex = 5    #Enterprise
-    $formMainWindowControlOSLicenseCombobox.SelectedIndex = 1    #Volume
-
-    $formMainWindowControlAutopilotJsonCombobox.SelectedIndex = 1    #OOBE
-    $formMainWindowControlImageIndexTextbox.Text = 6             #Enterprise
-
-    #$formMainWindowControlOSBuildCombobox.IsEnabled = $true
+function Set-OSDCloudGUIDefaultOptions {
     $formMainWindowControlOSEditionCombobox.IsEnabled = $true
+    $formMainWindowControlOSEditionCombobox.Visibility = "Visible"
+    $formMainWindowControlOSEditionCombobox.SelectedValue = $Global:OSDCloudGUI.OSEdition
+
     $formMainWindowControlOSLanguageCombobox.IsEnabled = $true
-    $formMainWindowControlOSLicenseCombobox.IsEnabled = $false
-    $formMainWindowControlImageIndexTextbox.IsEnabled = $false
-    $formMainWindowControlAutopilotJsonCombobox.IsEnabled = $true
+    $formMainWindowControlOSLanguageCombobox.Visibility = "Visible"
+    $formMainWindowControlOSLanguageCombobox.SelectedValue = $Global:OSDCloudGUI.OSLanguage
+
+    $formMainWindowControlOSActivationCombobox.IsEnabled = $false
+    $formMainWindowControlOSActivationCombobox.Visibility = "Visible"
+    $formMainWindowControlOSActivationCombobox.SelectedValue = $Global:OSDCloudGUI.OSActivation
 
     $formMainWindowControlImageNameCombobox.Items.Clear()
     $formMainWindowControlImageNameCombobox.Visibility = "Collapsed"
-    
-    #$formMainWindowControlOSBuildCombobox.Visibility = "Visible"
-    $formMainWindowControlOSEditionCombobox.Visibility = "Visible"
-    $formMainWindowControlOSLanguageCombobox.Visibility = "Visible"
-    $formMainWindowControlOSLicenseCombobox.Visibility = "Visible"
+
+    $formMainWindowControlImageIndexTextbox.Text = $Global:OSDCloudGUI.ImageIndex
+    $formMainWindowControlImageIndexTextbox.IsEnabled = $false
+
+    $formMainWindowControlAutopilotJsonCombobox.IsEnabled = $true
+    $formMainWindowControlAutopilotJsonCombobox.SelectedIndex = 1   #OOBE
 }
-SetDefaultWinX
+Set-OSDCloudGUIDefaultOptions
 #================================================
 #   CustomImage
 #================================================
@@ -515,7 +516,7 @@ $CustomImageChildItem = $CustomImageChildItem | Sort-Object -Property Length -Un
         
 if ($CustomImageChildItem) {
     $CustomImageChildItem | ForEach-Object {
-        $formMainWindowControlOperatingSystemCombobox.Items.Add($_) | Out-Null
+        $formMainWindowControlOSNameCombobox.Items.Add($_) | Out-Null
     }
 }
 #================================================
@@ -575,77 +576,80 @@ else {
     $formMainWindowControlAutopilotOOBECombobox.Visibility = "Collapsed"  
 }
 #================================================
-#   OSEditionCombobox
+#   OS Edition Combobox to ImageIndex
 #================================================
 $formMainWindowControlOSEditionCombobox.add_SelectionChanged({
-    #Home
-    if ($formMainWindowControlOSEditionCombobox.SelectedIndex -eq 0) {
-        $formMainWindowControlImageIndexTextbox.Text = 4
+
+    if ($formMainWindowControlOSEditionCombobox.SelectedValue -eq 'Home') {
+        #Retail edition only and disable Activation combobox
+        $formMainWindowControlOSActivationCombobox.SelectedValue = 'Retail'
+        $formMainWindowControlOSActivationCombobox.IsEnabled = $false
+
         $formMainWindowControlImageIndexLabel.IsEnabled = $false
-        $formMainWindowControlImageIndexTextbox.IsEnabled = $false   #Disable
-        $formMainWindowControlOSLicenseCombobox.SelectedIndex = 0    #Retail
-        $formMainWindowControlOSLicenseCombobox.IsEnabled = $false   #Disable
+
+        $formMainWindowControlImageIndexTextbox.Text = 4
+        $formMainWindowControlImageIndexTextbox.IsEnabled = $false
     }
-    #Home N
-    if ($formMainWindowControlOSEditionCombobox.SelectedIndex -eq 1) {
+    elseif ($formMainWindowControlOSEditionCombobox.SelectedValue -eq 'Home N') {
+        #Retail edition only and disable Activation combobox
+        $formMainWindowControlOSActivationCombobox.SelectedValue = 'Retail'
+        $formMainWindowControlOSActivationCombobox.IsEnabled = $false
+
+        $formMainWindowControlImageIndexLabel.IsEnabled = $false
+
         $formMainWindowControlImageIndexTextbox.Text = 5
-        $formMainWindowControlImageIndexTextbox.IsEnabled = $false   #Disable
-        $formMainWindowControlOSLicenseCombobox.SelectedIndex = 0    #Retail
-        $formMainWindowControlOSLicenseCombobox.IsEnabled = $false   #Disable
+        $formMainWindowControlImageIndexTextbox.IsEnabled = $false
     }
-    #Home Single Language
-    if ($formMainWindowControlOSEditionCombobox.SelectedIndex -eq 2) {
+    elseif ($formMainWindowControlOSEditionCombobox.SelectedValue -eq 'Home Single Language') {
+        #Retail edition only and disable Activation combobox
+        $formMainWindowControlOSActivationCombobox.SelectedValue = 'Retail'
+        $formMainWindowControlOSActivationCombobox.IsEnabled = $false
+
+        $formMainWindowControlImageIndexLabel.IsEnabled = $false
+
         $formMainWindowControlImageIndexTextbox.Text = 6
-        $formMainWindowControlImageIndexTextbox.IsEnabled = $false   #Disable
-        $formMainWindowControlOSLicenseCombobox.SelectedIndex = 0    #Retail
-        $formMainWindowControlOSLicenseCombobox.IsEnabled = $false   #Disable
+        $formMainWindowControlImageIndexTextbox.IsEnabled = $false
     }
-    #Education
-    if ($formMainWindowControlOSEditionCombobox.SelectedIndex -eq 3) {
-        $formMainWindowControlOSLicenseCombobox.IsEnabled = $true
-        if ($formMainWindowControlOSLicenseCombobox.SelectedIndex -eq 0) {
+    elseif ($formMainWindowControlOSEditionCombobox.SelectedValue -eq 'Education') {
+        $formMainWindowControlOSActivationCombobox.IsEnabled = $true
+        if ($formMainWindowControlOSActivationCombobox.SelectedValue -eq 'Retail') {
             $formMainWindowControlImageIndexTextbox.Text = 7
         }
         else {
             $formMainWindowControlImageIndexTextbox.Text = 4
         }
     }
-    #Education N
-    if ($formMainWindowControlOSEditionCombobox.SelectedIndex -eq 4) {
-        $formMainWindowControlOSLicenseCombobox.IsEnabled = $true
-        if ($formMainWindowControlOSLicenseCombobox.SelectedIndex -eq 0) {
+    elseif ($formMainWindowControlOSEditionCombobox.SelectedValue -eq 'Education N') {
+        $formMainWindowControlOSActivationCombobox.IsEnabled = $true
+        if ($formMainWindowControlOSActivationCombobox.SelectedValue -eq 'Retail') {
             $formMainWindowControlImageIndexTextbox.Text = 8
         }
         else {
             $formMainWindowControlImageIndexTextbox.Text = 5
         }
     }
-    #Enterprise
-    if ($formMainWindowControlOSEditionCombobox.SelectedIndex -eq 5) {
-        $formMainWindowControlOSLicenseCombobox.SelectedIndex = 1
-        $formMainWindowControlOSLicenseCombobox.IsEnabled = $false
+    elseif ($formMainWindowControlOSEditionCombobox.SelectedValue -eq 'Enterprise') {
+        $formMainWindowControlOSActivationCombobox.SelectedValue = 'Volume'
+        $formMainWindowControlOSActivationCombobox.IsEnabled = $false
         $formMainWindowControlImageIndexTextbox.Text = 6
     }
-    #Enterprise N
-    if ($formMainWindowControlOSEditionCombobox.SelectedIndex -eq 6) {
-        $formMainWindowControlOSLicenseCombobox.SelectedIndex = 1
-        $formMainWindowControlOSLicenseCombobox.IsEnabled = $false
+    elseif ($formMainWindowControlOSEditionCombobox.SelectedValue -eq 'Enterprise N') {
+        $formMainWindowControlOSActivationCombobox.SelectedValue = 'Volume'
+        $formMainWindowControlOSActivationCombobox.IsEnabled = $false
         $formMainWindowControlImageIndexTextbox.Text = 7
     }
-    #Pro
-    if ($formMainWindowControlOSEditionCombobox.SelectedIndex -eq 7) {
-        $formMainWindowControlOSLicenseCombobox.IsEnabled = $true
-        if ($formMainWindowControlOSLicenseCombobox.SelectedIndex -eq 0) {
+    elseif ($formMainWindowControlOSEditionCombobox.SelectedValue -eq 'Pro') {
+        $formMainWindowControlOSActivationCombobox.IsEnabled = $true
+        if ($formMainWindowControlOSActivationCombobox.SelectedValue -eq 'Retail') {
             $formMainWindowControlImageIndexTextbox.Text = 9
         }
         else {
             $formMainWindowControlImageIndexTextbox.Text = 8
         }
     }
-    #Pro N
-    if ($formMainWindowControlOSEditionCombobox.SelectedIndex -eq 8) {
-        $formMainWindowControlOSLicenseCombobox.IsEnabled = $true
-        if ($formMainWindowControlOSLicenseCombobox.SelectedIndex -eq 0) {
+    elseif ($formMainWindowControlOSEditionCombobox.SelectedValue -eq 'Pro N') {
+        $formMainWindowControlOSActivationCombobox.IsEnabled = $true
+        if ($formMainWindowControlOSActivationCombobox.SelectedValue -eq 'Retail') {
             $formMainWindowControlImageIndexTextbox.Text = 10
         }
         else {
@@ -654,41 +658,40 @@ $formMainWindowControlOSEditionCombobox.add_SelectionChanged({
     }
 })
 #================================================
-#   OSLicenseCombobox
+#   OS Activation Combobox
 #================================================
-$formMainWindowControlOSLicenseCombobox.add_SelectionChanged({
-    if ($formMainWindowControlOSLicenseCombobox.SelectedIndex -eq 0) {
-        if ($formMainWindowControlOSEditionCombobox.SelectedIndex -eq 3) {$formMainWindowControlImageIndexTextbox.Text = 7}
-        if ($formMainWindowControlOSEditionCombobox.SelectedIndex -eq 4) {$formMainWindowControlImageIndexTextbox.Text = 8}
-        if ($formMainWindowControlOSEditionCombobox.SelectedIndex -eq 7) {$formMainWindowControlImageIndexTextbox.Text = 9}
-        if ($formMainWindowControlOSEditionCombobox.SelectedIndex -eq 8) {$formMainWindowControlImageIndexTextbox.Text = 10}
+$formMainWindowControlOSActivationCombobox.add_SelectionChanged({
+    if ($formMainWindowControlOSActivationCombobox.SelectedValue -eq 'Retail') {
+        if ($formMainWindowControlOSEditionCombobox.SelectedValue -eq 'Education') {$formMainWindowControlImageIndexTextbox.Text = 7}
+        if ($formMainWindowControlOSEditionCombobox.SelectedValue -eq 'Education N') {$formMainWindowControlImageIndexTextbox.Text = 8}
+        if ($formMainWindowControlOSEditionCombobox.SelectedValue -eq 'Pro') {$formMainWindowControlImageIndexTextbox.Text = 9}
+        if ($formMainWindowControlOSEditionCombobox.SelectedValue -eq 'Pro N') {$formMainWindowControlImageIndexTextbox.Text = 10}
     }
-    if ($formMainWindowControlOSLicenseCombobox.SelectedIndex -eq 1) {
-        if ($formMainWindowControlOSEditionCombobox.SelectedIndex -eq 3) {$formMainWindowControlImageIndexTextbox.Text = 4}
-        if ($formMainWindowControlOSEditionCombobox.SelectedIndex -eq 4) {$formMainWindowControlImageIndexTextbox.Text = 5}
-        if ($formMainWindowControlOSEditionCombobox.SelectedIndex -eq 7) {$formMainWindowControlImageIndexTextbox.Text = 8}
-        if ($formMainWindowControlOSEditionCombobox.SelectedIndex -eq 8) {$formMainWindowControlImageIndexTextbox.Text = 9}
+    if ($formMainWindowControlOSActivationCombobox.SelectedValue -eq 'Volume') {
+        if ($formMainWindowControlOSEditionCombobox.SelectedValue -eq 'Education') {$formMainWindowControlImageIndexTextbox.Text = 4}
+        if ($formMainWindowControlOSEditionCombobox.SelectedValue -eq 'Education N') {$formMainWindowControlImageIndexTextbox.Text = 5}
+        if ($formMainWindowControlOSEditionCombobox.SelectedValue -eq 'Pro') {$formMainWindowControlImageIndexTextbox.Text = 8}
+        if ($formMainWindowControlOSEditionCombobox.SelectedValue -eq 'Pro N') {$formMainWindowControlImageIndexTextbox.Text = 9}
     }
 })
 #================================================
-#   OperatingSystemCombobox
+#   OS Name Combobox
 #================================================
-$formMainWindowControlOperatingSystemCombobox.add_SelectionChanged({
-    if ($formMainWindowControlOperatingSystemCombobox.SelectedValue -like 'Windows 1*') {
-        SetDefaultWinX
+$formMainWindowControlOSNameCombobox.add_SelectionChanged({
+    if ($formMainWindowControlOSNameCombobox.SelectedValue -like 'Windows 1*') {
+        Set-OSDCloudGUIDefaultOptions
     }
     else {
-        #$formMainWindowControlOSBuildCombobox.Visibility = "Collapsed"
         $formMainWindowControlOSEditionCombobox.Visibility = "Collapsed"
         $formMainWindowControlOSLanguageCombobox.Visibility = "Collapsed"
-        $formMainWindowControlOSLicenseCombobox.Visibility = "Collapsed"
+        $formMainWindowControlOSActivationCombobox.Visibility = "Collapsed"
         $formMainWindowControlImageIndexTextbox.IsEnabled = $false
         $formMainWindowControlImageIndexTextbox.Text = 1
 
         $formMainWindowControlImageNameCombobox.Visibility = "Visible"
         $formMainWindowControlImageNameCombobox.Items.Clear()
         $formMainWindowControlImageNameCombobox.IsEnabled = $true
-        $GetWindowsImageOptions = Get-WindowsImage -ImagePath $formMainWindowControlOperatingSystemCombobox.SelectedValue
+        $GetWindowsImageOptions = Get-WindowsImage -ImagePath $formMainWindowControlOSNameCombobox.SelectedValue
         $GetWindowsImageOptions | ForEach-Object {
             $formMainWindowControlImageNameCombobox.Items.Add($_.ImageName) | Out-Null
         }
@@ -705,20 +708,6 @@ $formMainWindowControlImageNameCombobox.add_SelectionChanged({
 $formMainWindowControlStartButton.add_Click({
     $formMainWindow.Close()
     Show-PowershellWindow
-    #================================================
-    #   Variables
-    #================================================
-    if ($formMainWindowControlOperatingSystemCombobox.SelectedValue -like 'Windows 1*') {
-        $OSName = $formMainWindowControlOperatingSystemCombobox.Text
-    }
-    else {
-        $OSName = $null
-    }
-    #$OSBuild = $formMainWindowControlOSBuildCombobox.SelectedItem
-    $OSEdition = $formMainWindowControlOSEditionCombobox.SelectedItem
-    $OSLanguage = $formMainWindowControlOSLanguageCombobox.SelectedItem
-    $OSLicense = $formMainWindowControlOSLicenseCombobox.SelectedItem
-    $OSImageIndex = $formMainWindowControlImageIndexTextbox.Text
     #================================================
     #   AutopilotJson
     #================================================
@@ -782,16 +771,35 @@ $formMainWindowControlStartButton.add_Click({
     #================================================
     #   ImageFile
     #================================================
-    if ($null -eq $OSName) {
-        $ImageFileFullName = $formMainWindowControlOperatingSystemCombobox.SelectedValue
+    $OSActivation = $formMainWindowControlOSActivationCombobox.SelectedValue
+    $OSEdition = $formMainWindowControlOSEditionCombobox.SelectedValue
+    $OSLanguage = $formMainWindowControlOSLanguageCombobox.SelectedValue
+    $OSImageIndex = $formMainWindowControlImageIndexTextbox.Text
+
+    if ($formMainWindowControlOSNameCombobox.SelectedValue -like 'Windows 1*') {
+        $OSName = $formMainWindowControlOSNameCombobox.SelectedValue
+        
+        $OSDCloudOperatingSystem = Get-OSDCloudOperatingSystems | Where-Object {$_.Name -match $OSName} | Where-Object {$_.Activation -eq $OSActivation} | Where-Object {$_.Language -eq $OSLanguage}
+        $OSBuild = $OSDCloudOperatingSystem.Build
+        $OSReleaseID = $OSDCloudOperatingSystem.ReleaseID
+        $OSVersion = $OSDCloudOperatingSystem.Version
+        
+        $ImageFileName = $OSDCloudOperatingSystem.FileName
+        $ImageFileUrl = $OSDCloudOperatingSystem.Url
+    }
+    else {
+        $OSName = $null
+        $ImageFileFullName = $formMainWindowControlOSNameCombobox.SelectedValue
         if ($ImageFileFullName) {
             $ImageFileItem = $CustomImageChildItem | Where-Object {$_.FullName -eq "$ImageFileFullName"}
             $ImageFileName = Split-Path -Path $ImageFileItem.FullName -Leaf
-            $OSVersion = $null
+
+            $OSActivation = $null
             $OSBuild = $null
             $OSEdition = $null
             $OSLanguage = $null
-            $OSLicense = $null
+            $OSReleaseID = $null
+            $OSVersion = $null
         }
         else {
             $ImageFileItem = $null
@@ -800,11 +808,49 @@ $formMainWindowControlStartButton.add_Click({
         }
     }
     #================================================
+    #   DriverPack
+    #================================================
+    if ($formMainWindowControlDriverPackCombobox.Text) {
+        $DriverPackName = $formMainWindowControlDriverPackCombobox.Text
+        $DriverPack = $Global:OSDCloudGUI.DriverPacks | Where-Object {$_.Name -eq $DriverPackName}
+    }
+    #================================================
     #   Global Variables
     #================================================
-    $Global:StartOSDCloudGUI = $null
-    $Global:StartOSDCloudGUI = [ordered]@{
-        LaunchMethod                = 'OSDCloudGUI'
+    $Global:InvokeOSDCloud = $null
+    $Global:InvokeOSDCloud = [ordered]@{
+        Function                    = [System.String]'Start-OSDCloudGUI'
+        LaunchMethod                = [System.String]$Global:OSDCloudGUI.LaunchMethod
+        BrandName                   = [System.String]$Global:OSDCloudGUI.BrandName
+        BrandColor                  = [System.String]$Global:OSDCloudGUI.BrandColor
+        ComputerManufacturer        = [System.String]$Global:OSDCloudGUI.ComputerManufacturer
+        ComputerModel               = [System.String]$Global:OSDCloudGUI.ComputerModel
+        ComputerProduct             = [System.String]$Global:OSDCloudGUI.ComputerProduct
+        DriverPack                  = [System.Object]$DriverPack
+        DriverPacks                 = [array]$Global:OSDCloudGUI.DriverPacks
+        DriverPackName              = [System.String]$DriverPackName
+        IsOnBattery                 = [System.Boolean]$Global:OSDCloudGUI.IsOnBattery
+        OSActivation                = [System.String]$OSActivation
+        OSBuild                     = [System.String]$OSBuild
+        OSEdition                   = [System.String]$OSEdition
+        OSImageIndex                = [System.Int32]$OSImageIndex
+        OSLanguage                  = [System.String]$OSLanguage
+        OSName                      = [System.String]$OSName
+        OSReleaseID                 = [System.String]$OSReleaseID
+        OSVersion                   = [System.String]$OSVersion
+        OSActivationValues          = [array]$Global:OSDCloudGUI.OSActivationValues
+        OSEditionValues             = [array]$Global:OSDCloudGUI.OSEditionValues
+        OSLanguageValues            = [array]$Global:OSDCloudGUI.OSLanguageValues
+        OSNameValues                = [array]$Global:OSDCloudGUI.OSNameValues
+        OSReleaseIDValues           = [array]$Global:OSDCloudGUI.OSReleaseIDValues
+        OSVersionValues             = [array]$Global:OSDCloudGUI.OSVersionValues
+        captureScreenshots          = [System.Boolean]$formMainWindowControlScreenshotCapture.IsChecked
+        ClearDiskConfirm            = [System.Boolean]$formMainWindowControlClearDiskConfirm.IsChecked
+        restartComputer             = [System.Boolean]$formMainWindowControlRestartComputer.IsChecked
+        updateDiskDrivers           = [System.Boolean]$formMainWindowControlupdateDiskDrivers.IsChecked
+        updateFirmware              = [System.Boolean]$formMainWindowControlupdateFirmware.IsChecked
+        updateNetworkDrivers        = [System.Boolean]$formMainWindowControlupdateNetworkDrivers.IsChecked
+        updateSCSIDrivers           = [System.Boolean]$formMainWindowControlupdateSCSIDrivers.IsChecked
         AutopilotJsonChildItem      = $AutopilotJsonChildItem
         AutopilotJsonItem           = $AutopilotJsonItem
         AutopilotJsonName           = $AutopilotJsonName
@@ -813,87 +859,83 @@ $formMainWindowControlStartButton.add_Click({
         AutopilotOOBEJsonItem       = $AutopilotOOBEJsonItem
         AutopilotOOBEJsonName       = $AutopilotOOBEJsonName
         AutopilotOOBEJsonObject     = $AutopilotOOBEJsonObject
-        DriverPackName              = $formMainWindowControlDriverPackCombobox.Text
+        ImageFileDestination        = $null
         ImageFileFullName           = $ImageFileFullName
         ImageFileItem               = $ImageFileItem
         ImageFileName               = $ImageFileName
-        MSCatalogDiskDrivers        = $formMainWindowControlMSCatalogDiskDrivers.IsChecked
-        MSCatalogNetDrivers         = $formMainWindowControlMSCatalogNetDrivers.IsChecked
-        MSCatalogScsiDrivers        = $formMainWindowControlMSCatalogScsiDrivers.IsChecked
-        MSCatalogFirmware           = $formMainWindowControlMSCatalogFirmware.IsChecked
+        ImageFileSource             = $null
+        ImageFileUrl                = $ImageFileUrl
         OOBEDeployJsonChildItem     = $OOBEDeployJsonChildItem
         OOBEDeployJsonItem          = $OOBEDeployJsonItem
         OOBEDeployJsonName          = $OOBEDeployJsonName
         OOBEDeployJsonObject        = $OOBEDeployJsonObject
-        OSBuild                     = $OSBuild
-        OSEdition                   = $OSEdition
-        OSImageIndex                = $OSImageIndex
-        OSLanguage                  = $OSLanguage
-        OSLicense                   = $OSLicense
-        OSName                      = $OSName
-        OSVersion                   = $OSVersion
-        Restart                     = $formMainWindowControlRestart.IsChecked
-        ScreenshotCapture           = $formMainWindowControlScreenshotCapture.IsChecked
         SkipAutopilot               = $SkipAutopilot
         SkipAutopilotOOBE           = $SkipAutopilotOOBE
         SkipODT                     = $true
         SkipOOBEDeploy              = $SkipOOBEDeploy
         WindowsDefenderUpdate       = $formMainWindowControlWindowsDefenderUpdate.IsChecked
-        ZTI                         = $formMainWindowControlZTI.IsChecked
     }
     #-----------------------------------------
     # Manufacturer Enhancements - START
     #-----------------------------------------
     if ($HPEnterprise){
-        $Global:StartOSDCloudGUI.HPIADrivers = $formMainWindowControlOption_Name_1.IsChecked
-        $Global:StartOSDCloudGUI.HPIAFirmware = $formMainWindowControlOption_Name_2.IsChecked
-        $Global:StartOSDCloudGUI.HPIASoftware = $formMainWindowControlOption_Name_3.IsChecked
-        $Global:StartOSDCloudGUI.HPIAAll = $formMainWindowControlOption_Name_4.IsChecked
-        $Global:StartOSDCloudGUI.HPTPMUpdate = $formMainWindowControlOption_Name_5.IsChecked
-        $Global:StartOSDCloudGUI.HPBIOSUpdate = $formMainWindowControlOption_Name_6.IsChecked
+        $Global:InvokeOSDCloud.HPIADrivers = $formMainWindowControlOption_Name_1.IsChecked
+        $Global:InvokeOSDCloud.HPIAFirmware = $formMainWindowControlOption_Name_2.IsChecked
+        $Global:InvokeOSDCloud.HPIASoftware = $formMainWindowControlOption_Name_3.IsChecked
+        $Global:InvokeOSDCloud.HPIAAll = $formMainWindowControlOption_Name_4.IsChecked
+        $Global:InvokeOSDCloud.HPTPMUpdate = $formMainWindowControlOption_Name_5.IsChecked
+        $Global:InvokeOSDCloud.HPBIOSUpdate = $formMainWindowControlOption_Name_6.IsChecked
     }
-    
     if ($DellEnterprise){
-        $Global:StartOSDCloudGUI.DCUInstall = $formMainWindowControlOption_Name_1.IsChecked
-        $Global:StartOSDCloudGUI.DCUDrivers = $formMainWindowControlOption_Name_2.IsChecked
-        $Global:StartOSDCloudGUI.DCUFirmware = $formMainWindowControlOption_Name_3.IsChecked
-        $Global:StartOSDCloudGUI.DCUBIOS = $formMainWindowControlOption_Name_4.IsChecked
-        $Global:StartOSDCloudGUI.DCUAutoUpdateEnable = $formMainWindowControlOption_Name_5.IsChecked
-        $Global:StartOSDCloudGUI.DellTPMUpdate = $formMainWindowControlOption_Name_6.IsChecked
+        $Global:InvokeOSDCloud.DCUInstall = $formMainWindowControlOption_Name_1.IsChecked
+        $Global:InvokeOSDCloud.DCUDrivers = $formMainWindowControlOption_Name_2.IsChecked
+        $Global:InvokeOSDCloud.DCUFirmware = $formMainWindowControlOption_Name_3.IsChecked
+        $Global:InvokeOSDCloud.DCUBIOS = $formMainWindowControlOption_Name_4.IsChecked
+        $Global:InvokeOSDCloud.DCUAutoUpdateEnable = $formMainWindowControlOption_Name_5.IsChecked
+        $Global:InvokeOSDCloud.DellTPMUpdate = $formMainWindowControlOption_Name_6.IsChecked
     }
     if ($HyperV){
-        $Global:StartOSDCloudGUI.HyperVSetName = $formMainWindowControlOption_Name_1.IsChecked
-        $Global:StartOSDCloudGUI.HyperVEjectISO = $formMainWindowControlOption_Name_2.IsChecked
+        $Global:InvokeOSDCloud.HyperVSetName = $formMainWindowControlOption_Name_1.IsChecked
+        $Global:InvokeOSDCloud.HyperVEjectISO = $formMainWindowControlOption_Name_2.IsChecked
     }
     <#
-    #$Global:StartOSDCloudGUI | Out-Host
+    #$Global:InvokeOSDCloud | Out-Host
     if ($formMainWindowControlDebugCheckBox.IsChecked -eq $true){
         Invoke-Expression (Invoke-RestMethod -Uri 'https://raw.githubusercontent.com/OSDeploy/OSD/master/cloud/modules/debugmode.psm1')
         osdcloud-addcmtrace
-        #$Global:StartOSDCloudGUI.restart = $false
-        #$Global:StartOSDCloudGUI.ClearDiskConfirm = $false
+        #$Global:InvokeOSDCloud.restart = $false
+        #$Global:InvokeOSDCloud.ClearDiskConfirm = $false
     }
     #>
     #-----------------------------------------
     # Manufacturer Enhancements - END
     #-----------------------------------------
-    
-    #$Global:StartOSDCloudGUI | Out-Host
     if ($formMainWindowControlScreenshotCapture.IsChecked) {
         $Params = @{
             Screenshot = $true
         }
-        Start-OSDCloud @Params
+        #Start-OSDCloud @Params
     }
     else {
-        Start-OSDCloud 
+        #Start-OSDCloud
     }
+    #=================================================
+    #   Invoke-OSDCloud.ps1
+    #=================================================
+    Write-Host -ForegroundColor DarkGray "========================================================================="
+    Write-Host -ForegroundColor Green "Invoke-OSDCloud Configuration"
+    $Global:InvokeOSDCloud | Out-Host
+    Write-Host -ForegroundColor DarkGray "========================================================================="
+    Write-Host -ForegroundColor Green "Invoke-OSDCloud ... Starting in 5 seconds..."
+    Start-Sleep -Seconds 5
+    Invoke-OSDCloud
+    #=================================================
 })
 #================================================
 #   Customizations
 #================================================
 [string]$ModuleVersion = Get-Module -Name OSD | Sort-Object -Property Version | Select-Object -ExpandProperty Version -Last 1
-$formMainWindow.Title = "OSDCloudGUI $ModuleVersion on $(Get-MyComputerManufacturer -Brief) $(Get-MyComputerModel -Brief) $(Get-MyComputerProduct)"
+$formMainWindow.Title = "OSDCloudGUI $ModuleVersion on $($Global:OSDCloudGUI.ComputerManufacturer) $($Global:OSDCloudGUI.ComputerModel) product $($Global:OSDCloudGUI.ComputerProduct)"
 #================================================
 #   Branding
 #================================================

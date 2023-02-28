@@ -10,15 +10,16 @@
 		"Production": "https://go.microsoft.com/fwlink/?linkid=844652"
 	},
 	"OSDCloud": {
-        "Defaults": {
+        "Default": {
             "Activation": "Volume",
             "Edition": "Enterprise",
-            "FriendlyName": "Windows 11 22H2 x64",
             "Language": "en-us",
-            "OperatingSystem": "Windows 11",
-            "Version": "22H2"
+            "Name": "Windows 11 22H2 x64",
+            "ReleaseID": "22H2",
+            "Version": "Windows 11",
+            "ImageIndex": "6"
         },
-        "Options": {
+        "Values": {
             "Activation": [
                 "Retail",
                 "Volume"
@@ -74,7 +75,7 @@
                 "zh-cn",
                 "zh-tw"
             ],
-            "FriendlyName": [
+            "Name": [
                 "Windows 11 22H2 x64",
                 "Windows 11 21H2 x64",
                 "Windows 10 22H2 x64",
@@ -86,19 +87,36 @@
                 "Windows 10 1903 x64",
                 "Windows 10 1809 x64"
             ],
-            "OperatingSystem": [
+            "ReleaseID": [
+                "22H2",
+                "21H2",
+                "21H1",
+                "20H2",
+                "2004",
+                "1909",
+                "1903",
+                "1809"
+            ],
+            "Version": [
                 "Windows 11",
                 "Windows 10"
             ]
         }
 	},
 	"StartOSDCloudGUI": {
-		"Brand": "OSDCloud",
-		"Color": "#0096D6"
+		"BrandName": "OSDCloud",
+		"BrandColor": "#0096D6",
+        "ClearDiskConfirm": true,
+        "captureScreenshots": false,
+        "restartComputer": true,
+        "updateDiskDrivers": true,
+        "updateFirmware": false,
+        "updateNetworkDrivers": true,
+        "updateSCSIDrivers": true
 	},
 	"StartOSDCloudGUIDev": {
-		"Brand": "OSDCloudDev",
-		"Color": "#0096D6"
+		"BrandName": "OSDCloudDev",
+		"BrandColor": "#0096D6"
 	},
 	"WinPEDriverPack": {
 		"Dell": {
