@@ -1,5 +1,5 @@
 <#PSScriptInfo
-.VERSION 22.9.13.1
+.VERSION 23.2.28.1
 .GUID ebeeafaa-b49e-4bb2-b9d1-73f5702e0dda
 .AUTHOR David Segura @SeguraOSD
 .COMPANYNAME osdcloud.com
@@ -23,7 +23,7 @@ powershell iex (irm bh.osdcloud.com)
 .DESCRIPTION
     PSCloudScript at bh.osdcloud.com
 .NOTES
-    Version 22.9.13.1
+    Version 23.2.28.1
 .LINK
     https://raw.githubusercontent.com/OSDeploy/OSD/master/cloud/subdomains/bh.osdcloud.com.ps1
 .EXAMPLE
@@ -34,7 +34,7 @@ param()
 #=================================================
 #Script Information
 $ScriptName = 'bh.osdcloud.com'
-$ScriptVersion = '22.9.13.1'
+$ScriptVersion = '23.2.28.1'
 #=================================================
 #region Initialize
 
@@ -72,7 +72,7 @@ if ($WindowsPhase -eq 'WinPE') {
     $null = Stop-Transcript -ErrorAction Ignore
 
     #Start OSDCloud and pass all the parameters except the Language to allow for prompting
-    Start-OSDCloud -OSVersion 'Windows 10' -OSBuild 21H2 -OSEdition Enterprise -OSLicense Volume -SkipAutopilot -SkipODT -Restart
+    Start-OSDCloud -OSVersion 'Windows 10' -OSBuild 22H2 -OSEdition Enterprise -OSLicense Volume -SkipAutopilot -SkipODT -Restart
 }
 #endregion
 #=================================================
