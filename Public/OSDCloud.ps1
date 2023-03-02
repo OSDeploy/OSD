@@ -161,6 +161,11 @@ function Invoke-OSDCloud {
             $Global:OSDCloud.$Key = $Global:StartOSDCloud.$Key
         }
     }
+    if ($Global:StartOSDCloudCLI) {
+        foreach ($Key in $Global:StartOSDCloudCLI.Keys) {
+            $Global:OSDCloud.$Key = $Global:StartOSDCloudCLI.$Key
+        }
+    }
     if ($Global:InvokeOSDCloud) {
         foreach ($Key in $Global:InvokeOSDCloud.Keys) {
             $Global:OSDCloud.$Key = $Global:InvokeOSDCloud.$Key

@@ -60,7 +60,7 @@ function Start-OSDCloudGUI {
         OSActivation                = [System.String]$Global:OSDModuleResource.OSDCloud.Default.Activation
         OSEdition                   = [System.String]$Global:OSDModuleResource.OSDCloud.Default.Edition
         OSLanguage                  = [System.String]$Global:OSDModuleResource.OSDCloud.Default.Language
-        OSImageIndex                = [System.Int32]$Global:OSDModuleResource.OSDCloud.Default.ImageIndex
+        OSImageIndex                = [System.Int32]$Global:OSDModuleResource.OSDCloud.Default.OSImageIndex
         OSName                      = [System.String]$Global:OSDModuleResource.OSDCloud.Default.Name
         OSReleaseID                 = [System.String]$Global:OSDModuleResource.OSDCloud.Default.ReleaseID
         OSVersion                   = [System.String]$Global:OSDModuleResource.OSDCloud.Default.Version
