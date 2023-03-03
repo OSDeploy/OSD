@@ -123,7 +123,10 @@ function Start-OSDCloud {
         #Images using the specified Image Index
         [Parameter(ParameterSetName = 'CustomImage')]
         [System.String]
-        $ImageIndex = 'AUTO'
+        $ImageIndex = 'AUTO',
+
+        [System.Management.Automation.SwitchParameter]
+        $Preview
     )
     #=================================================
     #	$Global:StartOSDCloud
@@ -652,6 +655,7 @@ function Start-OSDCloud {
     #=================================================
     Write-Host -ForegroundColor DarkGray "========================================================================="
     Write-Host -ForegroundColor Green "Invoke-OSDCloud ... Starting in 5 seconds..."
+    if ($Preview) {Break}
     Start-Sleep -Seconds 5
     Invoke-OSDCloud
     #=================================================

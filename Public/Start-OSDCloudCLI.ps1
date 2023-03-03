@@ -126,7 +126,10 @@ function Start-OSDCloudCLI {
         #Images using the specified Image Index
         [Parameter(ParameterSetName = 'CustomImage')]
         [System.String]
-        $ImageIndex = 'AUTO'
+        $ImageIndex = 'AUTO',
+
+        [System.Management.Automation.SwitchParameter]
+        $Preview
     )
     #=================================================
     #	$Global:StartOSDCloudCLI
@@ -669,9 +672,13 @@ function Start-OSDCloudCLI {
     #   New logic added to Get-OSDCloudDriverPack
     #   This should match the proper OS Version ReleaseID
     #================================================
+    Write-Host -ForegroundColor DarkGray "========================================================================="
+    Write-Host -ForegroundColor Cyan "Get-OSDCloudDriverPack"
     $Global:StartOSDCloudCLI.DriverPack = Get-OSDCloudDriverPack -Product $ComputerProduct -OSVersion $Global:StartOSDCloudCLI.OSVersion -OSReleaseID $Global:StartOSDCloudCLI.OSReleaseID
     if ($Global:StartOSDCloudCLI.DriverPack) {
         $Global:StartOSDCloudCLI.DriverPackName = $Global:StartOSDCloudCLI.DriverPack.Name
+        Write-Host -ForegroundColor Yellow $Global:StartOSDCloudCLI.DriverPack.Name
+        Write-Host -ForegroundColor Yellow $Global:StartOSDCloudCLI.DriverPack.Url
     }
     #=================================================
     #   Invoke-OSDCloud.ps1
@@ -681,6 +688,7 @@ function Start-OSDCloudCLI {
     $Global:StartOSDCloudCLI | Out-Host
     Write-Host -ForegroundColor DarkGray "========================================================================="
     Write-Host -ForegroundColor Green "Invoke-OSDCloud ... Starting in 5 seconds..."
+    if ($Preview) {Break}
     Start-Sleep -Seconds 5
     Invoke-OSDCloud
 }
