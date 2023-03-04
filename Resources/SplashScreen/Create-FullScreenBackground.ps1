@@ -37,15 +37,15 @@ Function Get-LogLastHeading {
     }
 }
 function Get-NetworkStat {
-
-    $ActiveAdapter = Get-NetAdapter | Where-Object {$_.Status -eq "Up"} | Select-Object -First 1
-    [int]$LinkSpeed = $ActiveAdapter.TransmitLinkSpeed
-    $Sample = Get-Counter "\Network Interface(*)\Bytes Total/sec"
+    #Get-Adapter doesn't work in WinPE properly
+    #$ActiveAdapter = Get-NetAdapter | Where-Object {$_.Status -eq "Up"} | Select-Object -First 1
+    #[int]$LinkSpeed = $ActiveAdapter.TransmitLinkSpeed
+    $Sample = Get-Counter "\Network Interface(*)\Bytes Total/sec" #needs Windows\System32\pdh.dll added to Boot Media.
     $SampleValue = ($Sample.CounterSamples | Select-Object -Property CookedValue).CookedValue | Sort-Object -Descending | Select-Object -First 1
-    $PercentUtil = [math]::round($SampleValue/($LinkSpeed / 8) * 100)
+    #$PercentUtil = [math]::round($SampleValue/($LinkSpeed / 8) * 100)
     $MBps = [math]::round($SampleValue / 1000000)
-
-    Write-Output "MB/s: $MBps | %Util: $PercentUtil"
+    #Write-Output "MB/s: $MBps | %Util: $PercentUtil"
+    Write-Output "MB/s: $MBps"
     }
 
 if (!($Global:ModuleBase = (Get-Module -Name OSD).ModuleBase)){Import-Module -Name OSD}
@@ -58,8 +58,10 @@ if ($Global:ModuleBase = (Get-Module -Name OSD).ModuleBase){
 Add-Type -AssemblyName PresentationFramework,PresentationCore,WindowsBase,System.Windows.Forms,System.Drawing
 Add-Type -AssemblyName System.DirectoryServices.AccountManagement
 #Add-Type -Path "$PSSCriptRoot\bin\MahApps.Metro.dll"
+Write-Host "Adding Type MahApps: $Global:MahAppsPath"
 Add-Type -Path $Global:MahAppsPath
 #Add-Type -Path "$PSSCriptRoot\bin\System.Windows.Interactivity.dll"
+Write-Host "Adding Type Interactivity: $Global:InteractivityPath"
 Add-Type -Path $Global:InteractivityPath
 
 # Find screen by DeviceName
@@ -213,7 +215,7 @@ $TextBlock3.SetValue([System.Windows.Controls.Grid]::RowProperty,4)
 # Add a textblock (@gwblok Change)
 $TextBlock4 = New-Object System.Windows.Controls.TextBlock
 $TextBlock4.Margin = "0,0,60,60"
-$TextBlock4.Text = "Windows Setup Engine: 0%"
+$TextBlock4.Text = "Downloading..."
 $TextBlock4.TextWrapping = [System.Windows.TextWrapping]::Wrap
 $TextBlock4.MaxWidth = $Bounds.Width
 $TextBlock4.FontSize = 20
@@ -339,11 +341,14 @@ $TimerCodeUpgrade = {
         
         $CurlProcess = Get-Process -name Curl -ErrorAction SilentlyContinue
         if ($CurlProcess){
-            
+            $TextBlock4.Visibility = 'Visible'
             $TextBlock4.Text = "Downloading Process: $(Get-NetworkStat) "
 
         }
-        else {$TextBlock4.Text = ""}
+        else {
+            $TextBlock4.Visibility = 'Hidden'
+            $TextBlock4.Text = ""
+        }
         <#
         $TestInfoUpgrade = Get-ItemPropertyValue -Path "HKLM:\SYSTEM\Setup\MoSetup\Volatile" -Name "SetupProgress"
         if ($TestInfoUpgrade) {$TextBlock4.Text = "Windows Setup Engine: $($TestInfoUpgrade) %"}
