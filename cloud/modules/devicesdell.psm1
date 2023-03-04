@@ -148,7 +148,7 @@ function osdcloud-RunDCU {
     if (Test-path -Path 'C:\Program Files (x86)\Dell\CommandUpdate\dcu-cli.exe'){
         $ProcessPath = 'C:\Program Files (x86)\Dell\CommandUpdate\dcu-cli.exe'
     }
-    if (Test-path -Path 'C:\Program Files\Dell\CommandUpdate\dcu-cli.exe'){
+    elseif (Test-path -Path 'C:\Program Files\Dell\CommandUpdate\dcu-cli.exe'){
         $ProcessPath = 'C:\Program Files\Dell\CommandUpdate\dcu-cli.exe'
     }
     else {
