@@ -23,7 +23,7 @@ function Test-DynamicValidateSet {
           $AttributeCollection.Add($ParameterAttribute)
 
           # Generate and set the ValidateSet 
-          $arrSet = $Global:OSDModuleResource.OSDCloud.Options.FriendlyName
+          $arrSet = $Global:OSDModuleResource.OSDCloud.Values.Name
           $ValidateSetAttribute = New-Object System.Management.Automation.ValidateSetAttribute($arrSet)
 
           # Add the ValidateSet to the attributes collection

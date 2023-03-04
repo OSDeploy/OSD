@@ -8,9 +8,9 @@ $Results = $Results | Select-Object `
 @{Name='Status';Expression={($null)}}, `
 @{Name='ReleaseDate';Expression={(Get-Date $_.CreationDate -Format "yyyy-MM-dd")}}, `
 @{Name='Name';Expression={($_.Title)}}, `
-@{Name='OS';Expression={($null)}}, `
-@{Name='Version';Expression={($_.UpdateBuild)}}, `
-@{Name='Arch';Expression={($_.UpdateArch)}}, `
+@{Name='Version';Expression={($null)}}, `
+@{Name='ReleaseID';Expression={($_.UpdateBuild)}}, `
+@{Name='Architecture';Expression={($_.UpdateArch)}}, `
 @{Name='Language';Expression={($null)}}, `
 @{Name='Activation';Expression={($null)}}, `
 @{Name='Build';Expression={($null)}}, `
@@ -45,10 +45,10 @@ foreach ($Result in $Results) {
     #   OS
     #=================================================
     if ($Result.Name -match 'Windows 10') {
-        $Result.OS = 'Windows 10'
+        $Result.Version = 'Windows 10'
     }
     if ($Result.Name -match 'Windows 11') {
-        $Result.OS = 'Windows 11'
+        $Result.Version = 'Windows 11'
     }
     #=================================================
     #   Build
@@ -64,14 +64,14 @@ foreach ($Result in $Results) {
     #   Name
     #=================================================
     if ($Result.Activation -eq 'Volume') {
-        $Result.Name = $Result.OS + ' ' + $Result.Version + ' x64 ' + $Result.Language + ' Volume ' + $Result.Build
+        $Result.Name = $Result.Version + ' ' + $Result.ReleaseID + ' x64 ' + $Result.Language + ' Volume ' + $Result.Build
     }
     else {
-        $Result.Name = $Result.OS + ' ' + $Result.Version + ' x64 ' + $Result.Language + ' Retail ' + $Result.Build
+        $Result.Name = $Result.Version + ' ' + $Result.ReleaseID + ' x64 ' + $Result.Language + ' Retail ' + $Result.Build
     }
     #=================================================
 }
 $Results = $Results | Sort-Object -Property Name
-$Results | Export-Clixml -Path (Join-Path (Get-Module -Name OSD -ListAvailable | Sort-Object Version -Descending | Select-Object -First 1).ModuleBase "Catalogs\operatingsystemsv2.xml") -Force
-Import-Clixml -Path (Join-Path (Get-Module -Name OSD -ListAvailable | Sort-Object Version -Descending | Select-Object -First 1).ModuleBase "Catalogs\operatingsystemsv2.xml") | ConvertTo-Json | Out-File (Join-Path (Get-Module -Name OSD -ListAvailable | Sort-Object Version -Descending | Select-Object -First 1).ModuleBase "Catalogs\operatingsystemsv2.json") -Encoding ascii -Width 2000 -Force
+$Results | Export-Clixml -Path (Join-Path (Get-Module -Name OSD -ListAvailable | Sort-Object Version -Descending | Select-Object -First 1).ModuleBase "Catalogs\operatingsystems.xml") -Force
+Import-Clixml -Path (Join-Path (Get-Module -Name OSD -ListAvailable | Sort-Object Version -Descending | Select-Object -First 1).ModuleBase "Catalogs\operatingsystems.xml") | ConvertTo-Json | Out-File (Join-Path (Get-Module -Name OSD -ListAvailable | Sort-Object Version -Descending | Select-Object -First 1).ModuleBase "Catalogs\operatingsystems.json") -Encoding ascii -Width 2000 -Force
 #================================================

@@ -93,13 +93,14 @@ function Invoke-OSDCloud {
         ODTSource = $null
         ODTTarget = 'C:\OSDCloud\ODT'
         ODTTargetData = 'C:\OSDCloud\ODT\Office'
+        OperatingSystems = [array](Get-OSDCloudOperatingSystems)
         OSBuild = $null
         OSBuildMenu = $null
         OSBuildNames = $null
         OSEdition = $null
         OSEditionId = $null
         OSEditionMenu = $null
-        OSEditionNames = $null
+        OSEditionValues = $null
         OSImageIndex = 1
         OSLanguage = $null
         OSLanguageMenu = $null
@@ -127,7 +128,7 @@ function Invoke-OSDCloud {
         RecoveryPartition = $null
         TimeEnd = $null
         TimeSpan = $null
-        TimeStart = Get-Date
+        TimeStart = [datetime](Get-Date)
         Transcript = $null
         TSAutopilotConfig = $null
         TSProvisioning = $null
@@ -143,15 +144,31 @@ function Invoke-OSDCloud {
     #endregion
     #=================================================
     #region Set Pre-Merge Defaults
+    #Skip Recovery Partition for Virtual Machines
     if ($Global:OSDCloud.IsVirtualMachine) {
         $Global:OSDCloud.SkipRecoveryPartition = $true
     }
     #endregion
     #=================================================
     #region Merge Parameters
+    if ($Global:InvokeOSDCloud) {
+        foreach ($Key in $Global:InvokeOSDCloud.Keys) {
+            $Global:OSDCloud.$Key = $Global:InvokeOSDCloud.$Key
+        }
+    }
     if ($Global:StartOSDCloud) {
         foreach ($Key in $Global:StartOSDCloud.Keys) {
             $Global:OSDCloud.$Key = $Global:StartOSDCloud.$Key
+        }
+    }
+    if ($Global:StartOSDCloudCLI) {
+        foreach ($Key in $Global:StartOSDCloudCLI.Keys) {
+            $Global:OSDCloud.$Key = $Global:StartOSDCloudCLI.$Key
+        }
+    }
+    if ($Global:InvokeOSDCloud) {
+        foreach ($Key in $Global:InvokeOSDCloud.Keys) {
+            $Global:OSDCloud.$Key = $Global:InvokeOSDCloud.$Key
         }
     }
     if ($Global:MyOSDCloud) {
@@ -238,7 +255,6 @@ function Invoke-OSDCloud {
         New-ItemProperty -Path $RegPath -Name "OSLicense" -Value $Global:OSDCloud.OSLicense
     }
     #endregion
-    
     #=================================================
     #region WiFi Mode
     if ($Global:OSDCloud.SetWiFi -eq $true){
@@ -686,7 +702,7 @@ function Invoke-OSDCloud {
     }
     #endregion
     #=================================================
-    #region Image File Offline
+    #region Offline Image
     if ($Global:OSDCloud.ImageFileItem) {
         Write-SectionHeader "Copy Offline Windows Image (Copy-Item)"
         Write-Verbose -Message "Copying Microsoft Windows Image from Offline Source"
@@ -733,12 +749,12 @@ function Invoke-OSDCloud {
     }
     #endregion
     #=================================================
-    #region Get Image File
+    #region Get-OSDCloudOperatingSystems
     if ($Global:OSDCloud.AzOSDCloudImage) {
         #AzOSDCloud
     }
     elseif (!($Global:OSDCloud.ImageFileDestination) -and (!($Global:OSDCloud.ImageFileUrl))) {
-        Write-SectionHeader "Get-FeatureUpdate"
+        Write-SectionHeader "Get-OSDCloudOperatingSystems"
         Write-Warning "Invoke-OSDCloud was not set properly with an OS to Download"
         Write-Warning "You should be using Start-OSDCloud or Start-OSDCloudGUI"
         Write-Warning "Invoke-OSDCloud should not be run directly unless you know what you are doing"
@@ -838,7 +854,6 @@ function Invoke-OSDCloud {
         Write-DarkGrayHost "$($Global:OSDCloud.ImageFileUrl)"
 
         $null = New-Item -Path 'C:\OSDCloud\OS' -ItemType Directory -Force -ErrorAction Ignore
-
         if (Test-WebConnection -Uri $Global:OSDCloud.ImageFileUrl) {
             if ($Global:OSDCloud.ImageFileName) {
                 #=================================================

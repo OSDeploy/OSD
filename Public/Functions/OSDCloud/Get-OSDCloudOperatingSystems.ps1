@@ -1,4 +1,4 @@
-function Get-OSDCloudOSList {
+function Get-OSDCloudOperatingSystems {
     <#
     .SYNOPSIS
     Returns the Operating Systems used by OSDCloud
