@@ -23,7 +23,15 @@ function Start-OSDCloudGUI {
         #Color for the OSDCloudGUI Brand
         [Alias('Color')]
         [System.String]
-        $BrandColor = $Global:OSDModuleResource.StartOSDCloudGUI.BrandColor
+        $BrandColor = $Global:OSDModuleResource.StartOSDCloudGUI.BrandColor,
+
+        #Temporary Parameter
+        [System.String]
+        $ComputerManufacturer = (Get-MyComputerManufacturer -Brief),
+
+        #Temporary Parameter
+        [System.String]
+        $ComputerProduct = (Get-MyComputerProduct)
     )
     #================================================
     #   Defaults
@@ -47,9 +55,9 @@ function Start-OSDCloudGUI {
         BrandName                   = [System.String]$BrandName
         BrandColor                  = [System.String]$BrandColor
         
-        ComputerManufacturer        = [System.String](Get-MyComputerManufacturer -Brief)
+        ComputerManufacturer        = [System.String]$ComputerManufacturer
         ComputerModel               = [System.String](Get-MyComputerModel -Brief)
-        ComputerProduct             = [System.String](Get-MyComputerProduct)
+        ComputerProduct             = [System.String]$ComputerProduct
         
         DriverPack                  = $null
         DriverPacks                 = [array](Get-OSDCloudDriverPacks)
@@ -87,7 +95,7 @@ function Start-OSDCloudGUI {
     #   New logic added to Get-OSDCloudDriverPack
     #   This should match the proper OS Version ReleaseID
     #================================================
-    $Global:OSDCloudGUI.DriverPack = Get-OSDCloudDriverPack -OSVersion $Global:OSDCloudGUI.OSVersion -OSReleaseID $Global:OSDCloudGUI.OSReleaseID
+    $Global:OSDCloudGUI.DriverPack = Get-OSDCloudDriverPack -Product $ComputerProduct -OSVersion $Global:OSDCloudGUI.OSVersion -OSReleaseID $Global:OSDCloudGUI.OSReleaseID
     if ($Global:OSDCloudGUI.DriverPack) {
         $Global:OSDCloudGUI.DriverPackName = $Global:OSDCloudGUI.DriverPack.Name
     }

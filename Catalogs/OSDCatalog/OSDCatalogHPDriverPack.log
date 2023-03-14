@@ -1,23 +1,23 @@
 **********************
 PowerShell transcript start
-Start time: 20230214145703
+Start time: 20230314144213
 Username: OSDCODE\david
 RunAs User: OSDCODE\david
 Configuration Name: 
 Machine: OSDCODE (Microsoft Windows NT 10.0.22621.0)
-Host Application: C:\Program Files\WindowsApps\Microsoft.PowerShell_7.3.2.0_x64__8wekyb3d8bbwe\pwsh.dll -NoProfile -ExecutionPolicy Bypass -Command Import-Module 'c:\Users\david\.vscode\extensions\ms-vscode.powershell-preview-2023.2.0\modules\PowerShellEditorServices\PowerShellEditorServices.psd1'; Start-EditorServices -HostName 'Visual Studio Code Host' -HostProfileId 'Microsoft.VSCode' -HostVersion '2023.2.0' -AdditionalModules @('PowerShellEditorServices.VSCode') -BundledModulesPath 'c:\Users\david\.vscode\extensions\ms-vscode.powershell-preview-2023.2.0\modules' -EnableConsoleRepl -StartupBanner "PowerShell Preview Extension v2023.2.0
+Host Application: C:\Program Files\WindowsApps\Microsoft.PowerShell_7.3.3.0_x64__8wekyb3d8bbwe\pwsh.dll -NoProfile -ExecutionPolicy Bypass -Command Import-Module 'c:\Users\david\.vscode\extensions\ms-vscode.powershell-preview-2023.3.0\modules\PowerShellEditorServices\PowerShellEditorServices.psd1'; Start-EditorServices -HostName 'Visual Studio Code Host' -HostProfileId 'Microsoft.VSCode' -HostVersion '2023.3.0' -AdditionalModules @('PowerShellEditorServices.VSCode') -BundledModulesPath 'c:\Users\david\.vscode\extensions\ms-vscode.powershell-preview-2023.3.0\modules' -EnableConsoleRepl -StartupBanner "PowerShell Preview Extension v2023.3.0
 Copyright (c) Microsoft Corporation.
 
 https://aka.ms/vscode-powershell
 Type 'help' to get help.
-" -LogLevel 'Normal' -LogPath 'c:\Users\david\AppData\Roaming\Code\User\globalStorage\ms-vscode.powershell-preview\logs\1676406115-6c8be55c-2017-4501-a38c-da3d3f506cfa1676406114177\EditorServices.log' -SessionDetailsPath 'c:\Users\david\AppData\Roaming\Code\User\globalStorage\ms-vscode.powershell-preview\sessions\PSES-VSCode-10040-552587.json' -FeatureFlags @() 
-Process ID: 19820
-PSVersion: 7.3.2
+" -LogLevel 'Normal' -LogPath 'c:\Users\david\AppData\Roaming\Code\User\globalStorage\ms-vscode.powershell-preview\logs\1678818847-17d75b7e-f190-4fc0-aba9-8ca15e0003cd1678818738282\EditorServices.log' -SessionDetailsPath 'c:\Users\david\AppData\Roaming\Code\User\globalStorage\ms-vscode.powershell-preview\sessions\PSES-VSCode-11812-478847.json' -FeatureFlags @() 
+Process ID: 24972
+PSVersion: 7.3.3
 PSEdition: Core
-GitCommitId: 7.3.2
+GitCommitId: 7.3.3
 OS: Microsoft Windows 10.0.22621
 Platform: Win32NT
-PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1.10032.0, 6.0.0, 6.1.0, 6.2.0, 7.0.0, 7.1.0, 7.2.0, 7.3.2
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1.10032.0, 6.0.0, 6.1.0, 6.2.0, 7.0.0, 7.1.0, 7.2.0, 7.3.3
 PSRemotingProtocolVersion: 2.3
 SerializationVersion: 1.1.0.1
 WSManStackVersion: 3.0
@@ -25,7 +25,7 @@ WSManStackVersion: 3.0
 Transcript started, output file is C:\Users\david\OneDrive\GitHub\MyModules\OSD\Catalogs\OSDCatalog\OSDCatalogHPDriverPack.log
 VERBOSE: Test-WebConnection OK: http://ftp.hp.com/pub/caps-softpaq/cmit/HPClientDriverPackCatalog.cab
 VERBOSE: HTTP/1.1 HEAD with 0-byte payload
-VERBOSE: received 203391-byte response of content type application/vnd.ms-cab-compressed
+VERBOSE: received 163056-byte response of content type application/vnd.ms-cab-compressed
 VERBOSE: Source: http://ftp.hp.com/pub/caps-softpaq/cmit/HPClientDriverPackCatalog.cab
 VERBOSE: Destination: C:\Users\david\AppData\Local\Temp\OSD\HPClientDriverPackCatalog.cab
 VERBOSE: Expand: C:\Users\david\AppData\Local\Temp\OSD\HPClientDriverPackCatalog.cab
@@ -35,5 +35,5 @@ WARNING: Building Catalog content, please wait ...
 VERBOSE: Exporting Build Catalog to C:\Users\david\AppData\Local\Temp\OSD\OSDCatalogHPDriverPack.xml
 **********************
 PowerShell transcript end
-End time: 20230214145748
+End time: 20230314144239
 **********************

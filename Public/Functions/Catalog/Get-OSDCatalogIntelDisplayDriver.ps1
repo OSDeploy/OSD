@@ -47,14 +47,14 @@ function Get-OSDCatalogIntelDisplayDriver {
         $ZipFileResults = @()
         $DriverResults = @()
         $DriverResults = foreach ($OSDCatalogItem in $OSDCatalog) {
-            Write-Verbose "$($OSDCatalogItem.DriverGrouping) $($OSDCatalogItem.OsArch)"
-            Write-Verbose "     $($OSDCatalogItem.DriverInfo)"
+            Write-Verbose "DriverGrouping: $($OSDCatalogItem.DriverGrouping)"
+            Write-Verbose "OsArch: $($OSDCatalogItem.OsArch)"
+            Write-Verbose "DriverInfo: $($OSDCatalogItem.DriverInfo)"
             #=================================================
             #   WebRequest
             #=================================================
-            $DriverInfoWebRequest = Invoke-WebRequest -Uri $OSDCatalogItem.DriverInfo -Method Get -UseBasicParsing
+            $DriverInfoWebRequest = Invoke-WebRequest -Uri $OSDCatalogItem.DriverInfo -Method Get -UseBasicParsing -Verbose
             $DriverInfoWebRequestContent = $DriverInfoWebRequest.Content
-
             $DriverInfoHTML = $DriverInfoWebRequest.ParsedHtml.childNodes | Where-Object {$_.nodename -eq 'HTML'} 
             $DriverInfoHEAD = $DriverInfoHTML.childNodes | Where-Object {$_.nodename -eq 'HEAD'}
             $DriverInfoMETA = $DriverInfoHEAD.childNodes | Where-Object {$_.nodename -like "meta*"} | Select-Object -Property Name, Content
@@ -74,7 +74,7 @@ function Get-OSDCatalogIntelDisplayDriver {
             #   Driver Details
             #=================================================
             foreach ($DriverZipFile in $ZipFileResults) {
-                Write-Verbose "     $DriverZipFile"
+                Write-Verbose "Zip File: $DriverZipFile"
                 #=================================================
                 #   Defaults
                 #=================================================
@@ -128,8 +128,12 @@ function Get-OSDCatalogIntelDisplayDriver {
                 #=================================================
                 #   LastUpdate
                 #=================================================
+
+
                 #$LastUpdateRaw = $DriverInfoMETA | Where-Object {$_.name -eq 'LastUpdate'} | Select-Object -ExpandProperty Content
                 #$LastUpdate = [datetime]::ParseExact($LastUpdateRaw, "MM/dd/yyyy HH:mm:ss", $null)
+
+                $DriverInfoMETA | ogv -wait
 
                 $LastUpdateRaw = $DriverInfoMETA | Where-Object {$_.name -eq 'LastUpdate'} | Select-Object -ExpandProperty Content
                 Write-Verbose "LastUpdateRaw: $LastUpdateRaw"

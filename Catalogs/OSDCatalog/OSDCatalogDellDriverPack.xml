@@ -6,7 +6,7 @@
       <T>System.Object</T>
     </TN>
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">19.01.25</S>
@@ -42,7 +42,7 @@
   <Obj RefId="1">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">19.01.25</S>
@@ -78,7 +78,7 @@
   <Obj RefId="2">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">18.04.10</S>
@@ -114,7 +114,7 @@
   <Obj RefId="3">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">18.03.27</S>
@@ -150,7 +150,7 @@
   <Obj RefId="4">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">18.04.10</S>
@@ -186,7 +186,7 @@
   <Obj RefId="5">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">18.04.10</S>
@@ -222,7 +222,7 @@
   <Obj RefId="6">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">22.12.22</S>
@@ -258,7 +258,7 @@
   <Obj RefId="7">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">23.01.23</S>
@@ -294,7 +294,7 @@
   <Obj RefId="8">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">17.05.09</S>
@@ -330,7 +330,7 @@
   <Obj RefId="9">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">17.05.09</S>
@@ -366,7 +366,7 @@
   <Obj RefId="10">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">20.04.28</S>
@@ -402,7 +402,7 @@
   <Obj RefId="11">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">20.04.28</S>
@@ -438,7 +438,7 @@
   <Obj RefId="12">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">21.06.17</S>
@@ -474,7 +474,7 @@
   <Obj RefId="13">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">21.06.17</S>
@@ -510,7 +510,7 @@
   <Obj RefId="14">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">22.05.06</S>
@@ -546,7 +546,7 @@
   <Obj RefId="15">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">22.06.13</S>
@@ -582,7 +582,7 @@
   <Obj RefId="16">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">22.05.06</S>
@@ -618,7 +618,7 @@
   <Obj RefId="17">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">22.12.22</S>
@@ -654,7 +654,7 @@
   <Obj RefId="18">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">22.12.22</S>
@@ -690,7 +690,7 @@
   <Obj RefId="19">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">23.02.09</S>
@@ -726,7 +726,7 @@
   <Obj RefId="20">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">23.02.09</S>
@@ -762,7 +762,7 @@
   <Obj RefId="21">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">23.02.09</S>
@@ -798,7 +798,7 @@
   <Obj RefId="22">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">23.02.09</S>
@@ -834,7 +834,7 @@
   <Obj RefId="23">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">16.11.07</S>
@@ -886,7 +886,7 @@
   <Obj RefId="26">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">23.01.23</S>
@@ -928,7 +928,7 @@
   <Obj RefId="28">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">23.01.23</S>
@@ -970,7 +970,7 @@
   <Obj RefId="30">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">18.04.10</S>
@@ -1018,7 +1018,7 @@
   <Obj RefId="33">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">19.01.07</S>
@@ -1054,7 +1054,7 @@
   <Obj RefId="34">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">19.01.07</S>
@@ -1090,7 +1090,7 @@
   <Obj RefId="35">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">20.05.12</S>
@@ -1126,7 +1126,7 @@
   <Obj RefId="36">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">21.07.08</S>
@@ -1162,7 +1162,7 @@
   <Obj RefId="37">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">22.02.03</S>
@@ -1204,7 +1204,7 @@
   <Obj RefId="39">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">22.05.06</S>
@@ -1246,7 +1246,7 @@
   <Obj RefId="41">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">22.10.10</S>
@@ -1288,7 +1288,7 @@
   <Obj RefId="43">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">22.07.22</S>
@@ -1330,7 +1330,7 @@
   <Obj RefId="45">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">22.09.23</S>
@@ -1374,7 +1374,7 @@
   <Obj RefId="47">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">22.09.26</S>
@@ -1418,7 +1418,7 @@
   <Obj RefId="49">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">23.01.24</S>
@@ -1454,7 +1454,7 @@
   <Obj RefId="50">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">23.01.24</S>
@@ -1490,7 +1490,7 @@
   <Obj RefId="51">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">18.03.27</S>
@@ -1538,7 +1538,7 @@
   <Obj RefId="54">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">19.01.07</S>
@@ -1574,7 +1574,7 @@
   <Obj RefId="55">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">19.01.07</S>
@@ -1610,7 +1610,7 @@
   <Obj RefId="56">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">20.04.28</S>
@@ -1646,7 +1646,7 @@
   <Obj RefId="57">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">21.07.08</S>
@@ -1694,7 +1694,7 @@
   <Obj RefId="60">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">22.02.03</S>
@@ -1736,7 +1736,7 @@
   <Obj RefId="62">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">22.05.06</S>
@@ -1778,7 +1778,7 @@
   <Obj RefId="64">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">22.10.10</S>
@@ -1820,7 +1820,7 @@
   <Obj RefId="66">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">22.07.22</S>
@@ -1862,18 +1862,18 @@
   <Obj RefId="68">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
-      <S N="ReleaseDate">22.09.23</S>
+      <S N="ReleaseDate">23.03.02</S>
       <S N="Manufacturer">Dell</S>
-      <S N="Name">Dell Latitude 3520 Win10 A08</S>
-      <S N="DellVersion">A08</S>
-      <S N="Url">http://downloads.dell.com/FOLDER08900956M/1/3520-JY4KK_Win10_1.0_A08.exe</S>
+      <S N="Name">Dell Latitude 3520 Win10 A09</S>
+      <S N="DellVersion">A09</S>
+      <S N="Url">http://downloads.dell.com/FOLDER09645319M/1/3520-6MNFY_Win10_1.0_A09.exe</S>
       <S N="VendorVersion">1.0</S>
-      <S N="FileName">3520-JY4KK_Win10_1.0_A08.exe</S>
-      <S N="SizeMB">2457.24</S>
-      <S N="ReleaseID">JY4KK</S>
+      <S N="FileName">3520-6MNFY_Win10_1.0_A09.exe</S>
+      <S N="SizeMB">3231.01</S>
+      <S N="ReleaseID">6MNFY</S>
       <S N="Brand">Latitude</S>
       <S N="Key">4</S>
       <S N="Prefix">LAT</S>
@@ -1898,25 +1898,25 @@
       <S N="minorVersion">0</S>
       <S N="spMajorVersion">0</S>
       <S N="spMinorVersion">0</S>
-      <S N="ImportantInfoUrl">http://www.dell.com/support/home/us/en/04/Drivers/DriversDetails?driverId=JY4KK</S>
-      <S N="HashMD5">BA8FFBAC051EF9162CFE1FB8F8FF641B</S>
+      <S N="ImportantInfoUrl">http://www.dell.com/support/home/us/en/04/Drivers/DriversDetails?driverId=6MNFY</S>
+      <S N="HashMD5">8D1FAB25A8501AFB9AC52E90FE484126</S>
     </MS>
   </Obj>
   <Obj RefId="70">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
-      <S N="ReleaseDate">22.09.26</S>
+      <S N="ReleaseDate">23.03.02</S>
       <S N="Manufacturer">Dell</S>
-      <S N="Name">Dell Latitude 3520 Win11 A01</S>
-      <S N="DellVersion">A01</S>
-      <S N="Url">http://downloads.dell.com/FOLDER08902046M/1/3520-K81KM_Win11_1.0_A01.exe</S>
+      <S N="Name">Dell Latitude 3520 Win11 A02</S>
+      <S N="DellVersion">A02</S>
+      <S N="Url">http://downloads.dell.com/FOLDER09645344M/1/3520-W32TP_Win11_1.0_A02.exe</S>
       <S N="VendorVersion">1.0</S>
-      <S N="FileName">3520-K81KM_Win11_1.0_A01.exe</S>
-      <S N="SizeMB">2447.50</S>
-      <S N="ReleaseID">K81KM</S>
+      <S N="FileName">3520-W32TP_Win11_1.0_A02.exe</S>
+      <S N="SizeMB">3226.79</S>
+      <S N="ReleaseID">W32TP</S>
       <S N="Brand">Latitude</S>
       <S N="Key">4</S>
       <S N="Prefix">LAT</S>
@@ -1941,14 +1941,14 @@
       <S N="minorVersion">0</S>
       <S N="spMajorVersion">0</S>
       <S N="spMinorVersion">0</S>
-      <S N="ImportantInfoUrl">http://www.dell.com/support/home/us/en/04/Drivers/DriversDetails?driverId=K81KM</S>
-      <S N="HashMD5">49ACF0598073037605C6F41C2C966388</S>
+      <S N="ImportantInfoUrl">http://www.dell.com/support/home/us/en/04/Drivers/DriversDetails?driverId=W32TP</S>
+      <S N="HashMD5">40D9B87D7FB8AAD4DEEAA79F4EAA4C05</S>
     </MS>
   </Obj>
   <Obj RefId="72">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">23.01.24</S>
@@ -1984,7 +1984,7 @@
   <Obj RefId="73">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">23.01.24</S>
@@ -2020,7 +2020,7 @@
   <Obj RefId="74">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">18.03.27</S>
@@ -2068,7 +2068,7 @@
   <Obj RefId="77">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">19.01.07</S>
@@ -2104,7 +2104,7 @@
   <Obj RefId="78">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">19.01.07</S>
@@ -2140,7 +2140,7 @@
   <Obj RefId="79">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">20.04.28</S>
@@ -2176,7 +2176,7 @@
   <Obj RefId="80">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">21.07.08</S>
@@ -2224,7 +2224,7 @@
   <Obj RefId="83">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">20.09.18</S>
@@ -2260,7 +2260,7 @@
   <Obj RefId="84">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">19.02.12</S>
@@ -2296,7 +2296,7 @@
   <Obj RefId="85">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">20.09.18</S>
@@ -2332,7 +2332,7 @@
   <Obj RefId="86">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">20.04.28</S>
@@ -2368,7 +2368,7 @@
   <Obj RefId="87">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">20.09.18</S>
@@ -2404,7 +2404,7 @@
   <Obj RefId="88">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">21.07.08</S>
@@ -2440,7 +2440,7 @@
   <Obj RefId="89">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">22.06.27</S>
@@ -2476,7 +2476,7 @@
   <Obj RefId="90">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">22.03.21</S>
@@ -2512,7 +2512,7 @@
   <Obj RefId="91">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">22.03.04</S>
@@ -2548,7 +2548,7 @@
   <Obj RefId="92">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">22.06.27</S>
@@ -2584,7 +2584,7 @@
   <Obj RefId="93">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">22.02.19</S>
@@ -2620,7 +2620,7 @@
   <Obj RefId="94">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">22.10.10</S>
@@ -2656,7 +2656,7 @@
   <Obj RefId="95">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">22.07.22</S>
@@ -2692,7 +2692,7 @@
   <Obj RefId="96">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">22.10.10</S>
@@ -2728,7 +2728,7 @@
   <Obj RefId="97">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">22.07.22</S>
@@ -2764,7 +2764,7 @@
   <Obj RefId="98">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">23.01.23</S>
@@ -2806,7 +2806,7 @@
   <Obj RefId="100">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">23.01.23</S>
@@ -2848,7 +2848,7 @@
   <Obj RefId="102">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">23.01.23</S>
@@ -2890,7 +2890,7 @@
   <Obj RefId="104">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">23.01.23</S>
@@ -2932,7 +2932,7 @@
   <Obj RefId="106">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">22.03.04</S>
@@ -2974,7 +2974,7 @@
   <Obj RefId="108">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">22.10.27</S>
@@ -3016,7 +3016,7 @@
   <Obj RefId="110">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">22.07.12</S>
@@ -3052,7 +3052,7 @@
   <Obj RefId="111">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">22.10.10</S>
@@ -3094,7 +3094,7 @@
   <Obj RefId="113">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">22.10.27</S>
@@ -3136,7 +3136,7 @@
   <Obj RefId="115">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">22.10.10</S>
@@ -3172,7 +3172,7 @@
   <Obj RefId="116">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">22.07.22</S>
@@ -3208,7 +3208,7 @@
   <Obj RefId="117">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">19.03.26</S>
@@ -3244,7 +3244,7 @@
   <Obj RefId="118">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">21.08.05</S>
@@ -3280,18 +3280,18 @@
   <Obj RefId="119">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
-      <S N="ReleaseDate">23.01.23</S>
+      <S N="ReleaseDate">23.03.02</S>
       <S N="Manufacturer">Dell</S>
-      <S N="Name">Dell Latitude 5420 Win10 A10</S>
-      <S N="DellVersion">A10</S>
-      <S N="Url">http://downloads.dell.com/FOLDER09495351M/1/5420-M9N0X_Win10_1.0_A10.exe</S>
+      <S N="Name">Dell Latitude 5420 Win10 A11</S>
+      <S N="DellVersion">A11</S>
+      <S N="Url">http://downloads.dell.com/FOLDER09646566M/1/5420-J81V2_Win10_1.0_A11.exe</S>
       <S N="VendorVersion">1.0</S>
-      <S N="FileName">5420-M9N0X_Win10_1.0_A10.exe</S>
-      <S N="SizeMB">2422.92</S>
-      <S N="ReleaseID">M9N0X</S>
+      <S N="FileName">5420-J81V2_Win10_1.0_A11.exe</S>
+      <S N="SizeMB">2435.93</S>
+      <S N="ReleaseID">J81V2</S>
       <S N="Brand">Latitude</S>
       <S N="Key">4</S>
       <S N="Prefix">LAT</S>
@@ -3315,25 +3315,25 @@
       <S N="minorVersion">0</S>
       <S N="spMajorVersion">0</S>
       <S N="spMinorVersion">0</S>
-      <S N="ImportantInfoUrl">http://www.dell.com/support/home/us/en/04/Drivers/DriversDetails?driverId=M9N0X</S>
-      <S N="HashMD5">97A41D348BB7048ABF1A98A769280BB0</S>
+      <S N="ImportantInfoUrl">http://www.dell.com/support/home/us/en/04/Drivers/DriversDetails?driverId=J81V2</S>
+      <S N="HashMD5">579FE0AE4BF222F35EFB38A901FEB70F</S>
     </MS>
   </Obj>
   <Obj RefId="121">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
-      <S N="ReleaseDate">23.01.23</S>
+      <S N="ReleaseDate">23.03.03</S>
       <S N="Manufacturer">Dell</S>
-      <S N="Name">Dell Latitude 5420 Win11 A05</S>
-      <S N="DellVersion">A05</S>
-      <S N="Url">http://downloads.dell.com/FOLDER09495413M/1/5420-YT7D8_Win11_1.0_A05.exe</S>
+      <S N="Name">Dell Latitude 5420 Win11 A06</S>
+      <S N="DellVersion">A06</S>
+      <S N="Url">http://downloads.dell.com/FOLDER09646634M/1/5420-05NJ4_Win11_1.0_A06.exe</S>
       <S N="VendorVersion">1.0</S>
-      <S N="FileName">5420-YT7D8_Win11_1.0_A05.exe</S>
-      <S N="SizeMB">2423.70</S>
-      <S N="ReleaseID">YT7D8</S>
+      <S N="FileName">5420-05NJ4_Win11_1.0_A06.exe</S>
+      <S N="SizeMB">2436.71</S>
+      <S N="ReleaseID">05NJ4</S>
       <S N="Brand">Latitude</S>
       <S N="Key">4</S>
       <S N="Prefix">LAT</S>
@@ -3357,25 +3357,25 @@
       <S N="minorVersion">0</S>
       <S N="spMajorVersion">0</S>
       <S N="spMinorVersion">0</S>
-      <S N="ImportantInfoUrl">http://www.dell.com/support/home/us/en/04/Drivers/DriversDetails?driverId=YT7D8</S>
-      <S N="HashMD5">B3D3448BDA5ED99D4357C87964294AD0</S>
+      <S N="ImportantInfoUrl">http://www.dell.com/support/home/us/en/04/Drivers/DriversDetails?driverId=05NJ4</S>
+      <S N="HashMD5">6B8495C78545114CDC21D1B8D5E9F798</S>
     </MS>
   </Obj>
   <Obj RefId="123">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
-      <S N="ReleaseDate">23.01.23</S>
+      <S N="ReleaseDate">23.03.03</S>
       <S N="Manufacturer">Dell</S>
-      <S N="Name">Dell Latitude 5421 Win10 A07</S>
-      <S N="DellVersion">A07</S>
-      <S N="Url">http://downloads.dell.com/FOLDER09498577M/1/5421-57R97_Win10_1.0_A07.exe</S>
+      <S N="Name">Dell Latitude 5421 Win10 A08</S>
+      <S N="DellVersion">A08</S>
+      <S N="Url">http://downloads.dell.com/FOLDER09650558M/1/5421-0Y02K_Win10_1.0_A08.exe</S>
       <S N="VendorVersion">1.0</S>
-      <S N="FileName">5421-57R97_Win10_1.0_A07.exe</S>
-      <S N="SizeMB">2048.19</S>
-      <S N="ReleaseID">57R97</S>
+      <S N="FileName">5421-0Y02K_Win10_1.0_A08.exe</S>
+      <S N="SizeMB">2045.48</S>
+      <S N="ReleaseID">0Y02K</S>
       <S N="Brand">Latitude</S>
       <S N="Key">4</S>
       <S N="Prefix">LAT</S>
@@ -3393,25 +3393,25 @@
       <S N="minorVersion">0</S>
       <S N="spMajorVersion">0</S>
       <S N="spMinorVersion">0</S>
-      <S N="ImportantInfoUrl">http://www.dell.com/support/home/us/en/04/Drivers/DriversDetails?driverId=57R97</S>
-      <S N="HashMD5">BF5FB5BD80E8EDF434AF687F2701076D</S>
+      <S N="ImportantInfoUrl">http://www.dell.com/support/home/us/en/04/Drivers/DriversDetails?driverId=0Y02K</S>
+      <S N="HashMD5">5495E926BABEB35F5979C0FB25B75B97</S>
     </MS>
   </Obj>
   <Obj RefId="124">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
-      <S N="ReleaseDate">23.01.23</S>
+      <S N="ReleaseDate">23.03.03</S>
       <S N="Manufacturer">Dell</S>
-      <S N="Name">Dell Latitude 5421 Win11 A03</S>
-      <S N="DellVersion">A03</S>
-      <S N="Url">http://downloads.dell.com/FOLDER09498576M/1/5421-HF6PN_Win11_1.0_A03.exe</S>
+      <S N="Name">Dell Latitude 5421 Win11 A04</S>
+      <S N="DellVersion">A04</S>
+      <S N="Url">http://downloads.dell.com/FOLDER09650604M/1/5421-26XGM_Win11_1.0_A04.exe</S>
       <S N="VendorVersion">1.0</S>
-      <S N="FileName">5421-HF6PN_Win11_1.0_A03.exe</S>
-      <S N="SizeMB">2048.95</S>
-      <S N="ReleaseID">HF6PN</S>
+      <S N="FileName">5421-26XGM_Win11_1.0_A04.exe</S>
+      <S N="SizeMB">2046.24</S>
+      <S N="ReleaseID">26XGM</S>
       <S N="Brand">Latitude</S>
       <S N="Key">4</S>
       <S N="Prefix">LAT</S>
@@ -3429,14 +3429,14 @@
       <S N="minorVersion">0</S>
       <S N="spMajorVersion">0</S>
       <S N="spMinorVersion">0</S>
-      <S N="ImportantInfoUrl">http://www.dell.com/support/home/us/en/04/Drivers/DriversDetails?driverId=HF6PN</S>
-      <S N="HashMD5">1802C894A931FE6346215A7C886D60EA</S>
+      <S N="ImportantInfoUrl">http://www.dell.com/support/home/us/en/04/Drivers/DriversDetails?driverId=26XGM</S>
+      <S N="HashMD5">6E5D4EF2F5513530F28F74C37FC67B34</S>
     </MS>
   </Obj>
   <Obj RefId="125">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">21.08.05</S>
@@ -3472,18 +3472,18 @@
   <Obj RefId="126">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
-      <S N="ReleaseDate">23.01.23</S>
+      <S N="ReleaseDate">23.03.06</S>
       <S N="Manufacturer">Dell</S>
-      <S N="Name">Dell Latitude 5430 Rugged Win10 A04</S>
-      <S N="DellVersion">A04</S>
-      <S N="Url">http://downloads.dell.com/FOLDER09498769M/1/Latitude-5430-Rugged-Y4FTC_Win10_1.0_A04.exe</S>
+      <S N="Name">Dell Latitude 5430 Rugged Win10 A05</S>
+      <S N="DellVersion">A05</S>
+      <S N="Url">http://downloads.dell.com/FOLDER09645288M/1/Latitude-5430-Rugged-Y9G8N_Win10_1.0_A05.exe</S>
       <S N="VendorVersion">1.0</S>
-      <S N="FileName">Latitude-5430-Rugged-Y4FTC_Win10_1.0_A04.exe</S>
-      <S N="SizeMB">2414.05</S>
-      <S N="ReleaseID">Y4FTC</S>
+      <S N="FileName">Latitude-5430-Rugged-Y9G8N_Win10_1.0_A05.exe</S>
+      <S N="SizeMB">2410.35</S>
+      <S N="ReleaseID">Y9G8N</S>
       <S N="Brand">Latitude</S>
       <S N="Key">4</S>
       <S N="Prefix">LAT</S>
@@ -3501,25 +3501,25 @@
       <S N="minorVersion">0</S>
       <S N="spMajorVersion">0</S>
       <S N="spMinorVersion">0</S>
-      <S N="ImportantInfoUrl">http://www.dell.com/support/home/us/en/04/Drivers/DriversDetails?driverId=Y4FTC</S>
-      <S N="HashMD5">CACE6843A2BCD60D2615A11C445B7754</S>
+      <S N="ImportantInfoUrl">http://www.dell.com/support/home/us/en/04/Drivers/DriversDetails?driverId=Y9G8N</S>
+      <S N="HashMD5">8B22FF9AAF2DB8F2EC3F57B72551EA20</S>
     </MS>
   </Obj>
   <Obj RefId="127">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
-      <S N="ReleaseDate">23.01.23</S>
+      <S N="ReleaseDate">23.03.06</S>
       <S N="Manufacturer">Dell</S>
-      <S N="Name">Dell Latitude 5430 Rugged Win11 A05</S>
-      <S N="DellVersion">A05</S>
-      <S N="Url">http://downloads.dell.com/FOLDER09498671M/1/Latitude-5430-Rugged-YXVGC_Win11_1.0_A05.exe</S>
+      <S N="Name">Dell Latitude 5430 Rugged Win11 A06</S>
+      <S N="DellVersion">A06</S>
+      <S N="Url">http://downloads.dell.com/FOLDER09645294M/1/Latitude-5430-Rugged-3TKPH_Win11_1.0_A06.exe</S>
       <S N="VendorVersion">1.0</S>
-      <S N="FileName">Latitude-5430-Rugged-YXVGC_Win11_1.0_A05.exe</S>
-      <S N="SizeMB">2288.49</S>
-      <S N="ReleaseID">YXVGC</S>
+      <S N="FileName">Latitude-5430-Rugged-3TKPH_Win11_1.0_A06.exe</S>
+      <S N="SizeMB">2284.87</S>
+      <S N="ReleaseID">3TKPH</S>
       <S N="Brand">Latitude</S>
       <S N="Key">4</S>
       <S N="Prefix">LAT</S>
@@ -3537,14 +3537,14 @@
       <S N="minorVersion">0</S>
       <S N="spMajorVersion">0</S>
       <S N="spMinorVersion">0</S>
-      <S N="ImportantInfoUrl">http://www.dell.com/support/home/us/en/04/Drivers/DriversDetails?driverId=YXVGC</S>
-      <S N="HashMD5">9DFD7FEBD0E8DCD01510B4AE240B4A82</S>
+      <S N="ImportantInfoUrl">http://www.dell.com/support/home/us/en/04/Drivers/DriversDetails?driverId=3TKPH</S>
+      <S N="HashMD5">239DD62555CBCEBFA16C50A46FA9776D</S>
     </MS>
   </Obj>
   <Obj RefId="128">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">22.12.22</S>
@@ -3586,7 +3586,7 @@
   <Obj RefId="130">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">22.12.22</S>
@@ -3628,18 +3628,18 @@
   <Obj RefId="132">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
-      <S N="ReleaseDate">22.12.07</S>
+      <S N="ReleaseDate">23.03.02</S>
       <S N="Manufacturer">Dell</S>
-      <S N="Name">Dell Latitude 5431 Win10 A03</S>
-      <S N="DellVersion">A03</S>
-      <S N="Url">http://downloads.dell.com/FOLDER09170131M/1/Latitude-5431-TNCV6_Win10_1.0_A03.exe</S>
+      <S N="Name">Dell Latitude 5431 Win10 A04</S>
+      <S N="DellVersion">A04</S>
+      <S N="Url">http://downloads.dell.com/FOLDER09645563M/1/Latitude-5431-VNX93_Win10_1.0_A04.exe</S>
       <S N="VendorVersion">1.0</S>
-      <S N="FileName">Latitude-5431-TNCV6_Win10_1.0_A03.exe</S>
-      <S N="SizeMB">2096.99</S>
-      <S N="ReleaseID">TNCV6</S>
+      <S N="FileName">Latitude-5431-VNX93_Win10_1.0_A04.exe</S>
+      <S N="SizeMB">2074.82</S>
+      <S N="ReleaseID">VNX93</S>
       <S N="Brand">Latitude</S>
       <S N="Key">4</S>
       <S N="Prefix">LAT</S>
@@ -3657,25 +3657,25 @@
       <S N="minorVersion">0</S>
       <S N="spMajorVersion">0</S>
       <S N="spMinorVersion">0</S>
-      <S N="ImportantInfoUrl">http://www.dell.com/support/home/us/en/04/Drivers/DriversDetails?driverId=TNCV6</S>
-      <S N="HashMD5">C6EDD1A75BCE571800508079F006ED71</S>
+      <S N="ImportantInfoUrl">http://www.dell.com/support/home/us/en/04/Drivers/DriversDetails?driverId=VNX93</S>
+      <S N="HashMD5">2E761159573E0CD78F4E119529300911</S>
     </MS>
   </Obj>
   <Obj RefId="133">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
-      <S N="ReleaseDate">22.12.07</S>
+      <S N="ReleaseDate">23.03.02</S>
       <S N="Manufacturer">Dell</S>
-      <S N="Name">Dell Latitude 5431 Win11 A03</S>
-      <S N="DellVersion">A03</S>
-      <S N="Url">http://downloads.dell.com/FOLDER09169698M/1/Latitude-5431-24WJK_Win11_1.0_A03.exe</S>
+      <S N="Name">Dell Latitude 5431 Win11 A04</S>
+      <S N="DellVersion">A04</S>
+      <S N="Url">http://downloads.dell.com/FOLDER09645571M/1/Latitude-5431-J2X8P_Win11_1.0_A04.exe</S>
       <S N="VendorVersion">1.0</S>
-      <S N="FileName">Latitude-5431-24WJK_Win11_1.0_A03.exe</S>
-      <S N="SizeMB">2092.19</S>
-      <S N="ReleaseID">24WJK</S>
+      <S N="FileName">Latitude-5431-J2X8P_Win11_1.0_A04.exe</S>
+      <S N="SizeMB">2075.56</S>
+      <S N="ReleaseID">J2X8P</S>
       <S N="Brand">Latitude</S>
       <S N="Key">4</S>
       <S N="Prefix">LAT</S>
@@ -3693,14 +3693,14 @@
       <S N="minorVersion">0</S>
       <S N="spMajorVersion">0</S>
       <S N="spMinorVersion">0</S>
-      <S N="ImportantInfoUrl">http://www.dell.com/support/home/us/en/04/Drivers/DriversDetails?driverId=24WJK</S>
-      <S N="HashMD5">A18A2C4D8866FACEA0950CCD0E30E0D8</S>
+      <S N="ImportantInfoUrl">http://www.dell.com/support/home/us/en/04/Drivers/DriversDetails?driverId=J2X8P</S>
+      <S N="HashMD5">E9F0A738CF7480C694F0B1AC033C4300</S>
     </MS>
   </Obj>
   <Obj RefId="134">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">20.09.08</S>
@@ -3742,7 +3742,7 @@
   <Obj RefId="136">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">21.07.08</S>
@@ -3778,7 +3778,7 @@
   <Obj RefId="137">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">21.07.08</S>
@@ -3814,7 +3814,7 @@
   <Obj RefId="138">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">20.05.12</S>
@@ -3850,7 +3850,7 @@
   <Obj RefId="139">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">22.07.12</S>
@@ -3898,7 +3898,7 @@
   <Obj RefId="142">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">22.07.12</S>
@@ -3934,7 +3934,7 @@
   <Obj RefId="143">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">22.10.10</S>
@@ -3970,7 +3970,7 @@
   <Obj RefId="144">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">22.11.21</S>
@@ -4006,7 +4006,7 @@
   <Obj RefId="145">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">22.10.10</S>
@@ -4042,7 +4042,7 @@
   <Obj RefId="146">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">22.11.30</S>
@@ -4078,18 +4078,18 @@
   <Obj RefId="147">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
-      <S N="ReleaseDate">23.02.09</S>
+      <S N="ReleaseDate">23.03.02</S>
       <S N="Manufacturer">Dell</S>
-      <S N="Name">Dell Latitude 5520 Win10 A12</S>
-      <S N="DellVersion">A12</S>
-      <S N="Url">http://downloads.dell.com/FOLDER09514812M/1/5520-XFP6X_Win10_1.0_A12.exe</S>
+      <S N="Name">Dell Latitude 5520 Win10 A13</S>
+      <S N="DellVersion">A13</S>
+      <S N="Url">http://downloads.dell.com/FOLDER09646483M/1/5520-TMH14_Win10_1.0_A13.exe</S>
       <S N="VendorVersion">1.0</S>
-      <S N="FileName">5520-XFP6X_Win10_1.0_A12.exe</S>
-      <S N="SizeMB">3176.07</S>
-      <S N="ReleaseID">XFP6X</S>
+      <S N="FileName">5520-TMH14_Win10_1.0_A13.exe</S>
+      <S N="SizeMB">3182.06</S>
+      <S N="ReleaseID">TMH14</S>
       <S N="Brand">Latitude</S>
       <S N="Key">4</S>
       <S N="Prefix">LAT</S>
@@ -4113,25 +4113,25 @@
       <S N="minorVersion">0</S>
       <S N="spMajorVersion">0</S>
       <S N="spMinorVersion">0</S>
-      <S N="ImportantInfoUrl">http://www.dell.com/support/home/us/en/04/Drivers/DriversDetails?driverId=XFP6X</S>
-      <S N="HashMD5">77E08B9F5426DB1F11B489BADFC62657</S>
+      <S N="ImportantInfoUrl">http://www.dell.com/support/home/us/en/04/Drivers/DriversDetails?driverId=TMH14</S>
+      <S N="HashMD5">D943A2CC3344C1F69F2BCCEC0295B4E5</S>
     </MS>
   </Obj>
   <Obj RefId="149">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
-      <S N="ReleaseDate">23.02.09</S>
+      <S N="ReleaseDate">23.03.02</S>
       <S N="Manufacturer">Dell</S>
-      <S N="Name">Dell Latitude 5520 Win11 A04</S>
-      <S N="DellVersion">A04</S>
-      <S N="Url">http://downloads.dell.com/FOLDER09560425M/1/5520-8X0GW_Win11_1.0_A04.exe</S>
+      <S N="Name">Dell Latitude 5520 Win11 A05</S>
+      <S N="DellVersion">A05</S>
+      <S N="Url">http://downloads.dell.com/FOLDER09646491M/1/5520-JV372_Win11_1.0_A05.exe</S>
       <S N="VendorVersion">1.0</S>
-      <S N="FileName">5520-8X0GW_Win11_1.0_A04.exe</S>
-      <S N="SizeMB">3175.41</S>
-      <S N="ReleaseID">8X0GW</S>
+      <S N="FileName">5520-JV372_Win11_1.0_A05.exe</S>
+      <S N="SizeMB">3177.33</S>
+      <S N="ReleaseID">JV372</S>
       <S N="Brand">Latitude</S>
       <S N="Key">4</S>
       <S N="Prefix">LAT</S>
@@ -4155,25 +4155,25 @@
       <S N="minorVersion">0</S>
       <S N="spMajorVersion">0</S>
       <S N="spMinorVersion">0</S>
-      <S N="ImportantInfoUrl">http://www.dell.com/support/home/us/en/04/Drivers/DriversDetails?driverId=8X0GW</S>
-      <S N="HashMD5">19C9FE70BE47ABAB1625F1B53A01D506</S>
+      <S N="ImportantInfoUrl">http://www.dell.com/support/home/us/en/04/Drivers/DriversDetails?driverId=JV372</S>
+      <S N="HashMD5">BD0FF19C9F89108C3E1BAAA6823D7892</S>
     </MS>
   </Obj>
   <Obj RefId="151">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
-      <S N="ReleaseDate">23.01.23</S>
+      <S N="ReleaseDate">23.03.02</S>
       <S N="Manufacturer">Dell</S>
-      <S N="Name">Dell Latitude 5521 Win10 A10</S>
-      <S N="DellVersion">A10</S>
-      <S N="Url">http://downloads.dell.com/FOLDER09498574M/1/5521-8J6M8_Win10_1.0_A10.exe</S>
+      <S N="Name">Dell Latitude 5521 Win10 A11</S>
+      <S N="DellVersion">A11</S>
+      <S N="Url">http://downloads.dell.com/FOLDER09645395M/1/5521-3N0NC_Win10_1.0_A11.exe</S>
       <S N="VendorVersion">1.0</S>
-      <S N="FileName">5521-8J6M8_Win10_1.0_A10.exe</S>
-      <S N="SizeMB">2672.46</S>
-      <S N="ReleaseID">8J6M8</S>
+      <S N="FileName">5521-3N0NC_Win10_1.0_A11.exe</S>
+      <S N="SizeMB">2669.63</S>
+      <S N="ReleaseID">3N0NC</S>
       <S N="Brand">Latitude</S>
       <S N="Key">4</S>
       <S N="Prefix">LAT</S>
@@ -4191,25 +4191,25 @@
       <S N="minorVersion">0</S>
       <S N="spMajorVersion">0</S>
       <S N="spMinorVersion">0</S>
-      <S N="ImportantInfoUrl">http://www.dell.com/support/home/us/en/04/Drivers/DriversDetails?driverId=8J6M8</S>
-      <S N="HashMD5">FCEB9EB7C16E32A9F8C76DF46CC81F01</S>
+      <S N="ImportantInfoUrl">http://www.dell.com/support/home/us/en/04/Drivers/DriversDetails?driverId=3N0NC</S>
+      <S N="HashMD5">BC8823AB5CE64C2246B146E0B0D78355</S>
     </MS>
   </Obj>
   <Obj RefId="152">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
-      <S N="ReleaseDate">23.01.23</S>
+      <S N="ReleaseDate">23.03.02</S>
       <S N="Manufacturer">Dell</S>
-      <S N="Name">Dell Latitude 5521 Win11 A05</S>
-      <S N="DellVersion">A05</S>
-      <S N="Url">http://downloads.dell.com/FOLDER09498575M/1/5521-TXXDG_Win11_1.0_A05.exe</S>
+      <S N="Name">Dell Latitude 5521 Win11 A06</S>
+      <S N="DellVersion">A06</S>
+      <S N="Url">http://downloads.dell.com/FOLDER09645565M/1/5521-DDFN1_Win11_1.0_A06.exe</S>
       <S N="VendorVersion">1.0</S>
-      <S N="FileName">5521-TXXDG_Win11_1.0_A05.exe</S>
-      <S N="SizeMB">2673.22</S>
-      <S N="ReleaseID">TXXDG</S>
+      <S N="FileName">5521-DDFN1_Win11_1.0_A06.exe</S>
+      <S N="SizeMB">2670.39</S>
+      <S N="ReleaseID">DDFN1</S>
       <S N="Brand">Latitude</S>
       <S N="Key">4</S>
       <S N="Prefix">LAT</S>
@@ -4227,25 +4227,25 @@
       <S N="minorVersion">0</S>
       <S N="spMajorVersion">0</S>
       <S N="spMinorVersion">0</S>
-      <S N="ImportantInfoUrl">http://www.dell.com/support/home/us/en/04/Drivers/DriversDetails?driverId=TXXDG</S>
-      <S N="HashMD5">9A082C297C3C6A21A18266477B1B84CD</S>
+      <S N="ImportantInfoUrl">http://www.dell.com/support/home/us/en/04/Drivers/DriversDetails?driverId=DDFN1</S>
+      <S N="HashMD5">7291A08D438AD160352CA3E9E8BAF97C</S>
     </MS>
   </Obj>
   <Obj RefId="153">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
-      <S N="ReleaseDate">23.01.23</S>
+      <S N="ReleaseDate">23.03.02</S>
       <S N="Manufacturer">Dell</S>
-      <S N="Name">Dell Latitude 5530 Win10 A05</S>
-      <S N="DellVersion">A05</S>
-      <S N="Url">http://downloads.dell.com/FOLDER09498995M/1/Latitude-5530-HCGDD_Win10_1.0_A05.exe</S>
+      <S N="Name">Dell Latitude 5530 Win10 A06</S>
+      <S N="DellVersion">A06</S>
+      <S N="Url">http://downloads.dell.com/FOLDER09646431M/1/Latitude-5530-56WXT_Win10_1.0_A06.exe</S>
       <S N="VendorVersion">1.0</S>
-      <S N="FileName">Latitude-5530-HCGDD_Win10_1.0_A05.exe</S>
-      <S N="SizeMB">2086.59</S>
-      <S N="ReleaseID">HCGDD</S>
+      <S N="FileName">Latitude-5530-56WXT_Win10_1.0_A06.exe</S>
+      <S N="SizeMB">2082.98</S>
+      <S N="ReleaseID">56WXT</S>
       <S N="Brand">Latitude</S>
       <S N="Key">4</S>
       <S N="Prefix">LAT</S>
@@ -4269,25 +4269,25 @@
       <S N="minorVersion">0</S>
       <S N="spMajorVersion">0</S>
       <S N="spMinorVersion">0</S>
-      <S N="ImportantInfoUrl">http://www.dell.com/support/home/us/en/04/Drivers/DriversDetails?driverId=HCGDD</S>
-      <S N="HashMD5">66507A8E1B541513780AB6784BE74471</S>
+      <S N="ImportantInfoUrl">http://www.dell.com/support/home/us/en/04/Drivers/DriversDetails?driverId=56WXT</S>
+      <S N="HashMD5">E1EA5D97062155A01AD038892E23F389</S>
     </MS>
   </Obj>
   <Obj RefId="155">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
-      <S N="ReleaseDate">23.01.23</S>
+      <S N="ReleaseDate">23.03.02</S>
       <S N="Manufacturer">Dell</S>
-      <S N="Name">Dell Latitude 5530 Win11 A05</S>
-      <S N="DellVersion">A05</S>
-      <S N="Url">http://downloads.dell.com/FOLDER09499102M/1/Latitude-5530-8DVR1_Win11_1.0_A05.exe</S>
+      <S N="Name">Dell Latitude 5530 Win11 A06</S>
+      <S N="DellVersion">A06</S>
+      <S N="Url">http://downloads.dell.com/FOLDER09646457M/1/Latitude-5530-0GWKY_Win11_1.0_A06.exe</S>
       <S N="VendorVersion">1.0</S>
-      <S N="FileName">Latitude-5530-8DVR1_Win11_1.0_A05.exe</S>
-      <S N="SizeMB">2087.28</S>
-      <S N="ReleaseID">8DVR1</S>
+      <S N="FileName">Latitude-5530-0GWKY_Win11_1.0_A06.exe</S>
+      <S N="SizeMB">2083.67</S>
+      <S N="ReleaseID">0GWKY</S>
       <S N="Brand">Latitude</S>
       <S N="Key">4</S>
       <S N="Prefix">LAT</S>
@@ -4311,25 +4311,25 @@
       <S N="minorVersion">0</S>
       <S N="spMajorVersion">0</S>
       <S N="spMinorVersion">0</S>
-      <S N="ImportantInfoUrl">http://www.dell.com/support/home/us/en/04/Drivers/DriversDetails?driverId=8DVR1</S>
-      <S N="HashMD5">EBDA54C583129749CF16F2D0017383EB</S>
+      <S N="ImportantInfoUrl">http://www.dell.com/support/home/us/en/04/Drivers/DriversDetails?driverId=0GWKY</S>
+      <S N="HashMD5">18E2DF45629D0898B8EEBF8BD894385D</S>
     </MS>
   </Obj>
   <Obj RefId="157">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
-      <S N="ReleaseDate">23.01.24</S>
+      <S N="ReleaseDate">23.03.02</S>
       <S N="Manufacturer">Dell</S>
-      <S N="Name">Dell Latitude 5531 Win10 A06</S>
-      <S N="DellVersion">A06</S>
-      <S N="Url">http://downloads.dell.com/FOLDER09501365M/1/Latitude-5531-024M9_Win10_1.0_A06.exe</S>
+      <S N="Name">Dell Latitude 5531 Win10 A07</S>
+      <S N="DellVersion">A07</S>
+      <S N="Url">http://downloads.dell.com/FOLDER09645366M/1/Latitude-5531-N8C1N_Win10_1.0_A07.exe</S>
       <S N="VendorVersion">1.0</S>
-      <S N="FileName">Latitude-5531-024M9_Win10_1.0_A06.exe</S>
-      <S N="SizeMB">2307.82</S>
-      <S N="ReleaseID">024M9</S>
+      <S N="FileName">Latitude-5531-N8C1N_Win10_1.0_A07.exe</S>
+      <S N="SizeMB">2305.13</S>
+      <S N="ReleaseID">N8C1N</S>
       <S N="Brand">Latitude</S>
       <S N="Key">4</S>
       <S N="Prefix">LAT</S>
@@ -4347,25 +4347,25 @@
       <S N="minorVersion">0</S>
       <S N="spMajorVersion">0</S>
       <S N="spMinorVersion">0</S>
-      <S N="ImportantInfoUrl">http://www.dell.com/support/home/us/en/04/Drivers/DriversDetails?driverId=024M9</S>
-      <S N="HashMD5">C42F311504B0B98A7DEA9F32F5256A39</S>
+      <S N="ImportantInfoUrl">http://www.dell.com/support/home/us/en/04/Drivers/DriversDetails?driverId=N8C1N</S>
+      <S N="HashMD5">7B7A8E182C406077C8B81A4B7E6655AD</S>
     </MS>
   </Obj>
   <Obj RefId="158">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
-      <S N="ReleaseDate">23.01.24</S>
+      <S N="ReleaseDate">23.03.02</S>
       <S N="Manufacturer">Dell</S>
-      <S N="Name">Dell Latitude 5531 Win11 A06</S>
-      <S N="DellVersion">A06</S>
-      <S N="Url">http://downloads.dell.com/FOLDER09501367M/1/Latitude-5531-2VX8X_Win11_1.0_A06.exe</S>
+      <S N="Name">Dell Latitude 5531 Win11 A07</S>
+      <S N="DellVersion">A07</S>
+      <S N="Url">http://downloads.dell.com/FOLDER09645376M/1/Latitude-5531-GMTPC_Win11_1.0_A07.exe</S>
       <S N="VendorVersion">1.0</S>
-      <S N="FileName">Latitude-5531-2VX8X_Win11_1.0_A06.exe</S>
-      <S N="SizeMB">2308.51</S>
-      <S N="ReleaseID">2VX8X</S>
+      <S N="FileName">Latitude-5531-GMTPC_Win11_1.0_A07.exe</S>
+      <S N="SizeMB">2305.82</S>
+      <S N="ReleaseID">GMTPC</S>
       <S N="Brand">Latitude</S>
       <S N="Key">4</S>
       <S N="Prefix">LAT</S>
@@ -4383,14 +4383,14 @@
       <S N="minorVersion">0</S>
       <S N="spMajorVersion">0</S>
       <S N="spMinorVersion">0</S>
-      <S N="ImportantInfoUrl">http://www.dell.com/support/home/us/en/04/Drivers/DriversDetails?driverId=2VX8X</S>
-      <S N="HashMD5">7B63A332FB143A8A9B1D75304804F23E</S>
+      <S N="ImportantInfoUrl">http://www.dell.com/support/home/us/en/04/Drivers/DriversDetails?driverId=GMTPC</S>
+      <S N="HashMD5">AF83C3E658403EB7CE31584914D9505A</S>
     </MS>
   </Obj>
   <Obj RefId="159">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">20.05.26</S>
@@ -4432,7 +4432,7 @@
   <Obj RefId="161">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">22.06.27</S>
@@ -4468,7 +4468,7 @@
   <Obj RefId="162">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">21.08.05</S>
@@ -4504,7 +4504,7 @@
   <Obj RefId="163">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">16.04.14</S>
@@ -4552,7 +4552,7 @@
   <Obj RefId="166">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">22.01.05</S>
@@ -4588,7 +4588,7 @@
   <Obj RefId="167">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">22.03.04</S>
@@ -4624,7 +4624,7 @@
   <Obj RefId="168">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">22.10.10</S>
@@ -4660,7 +4660,7 @@
   <Obj RefId="169">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">22.07.11</S>
@@ -4696,7 +4696,7 @@
   <Obj RefId="170">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">20.04.14</S>
@@ -4732,7 +4732,7 @@
   <Obj RefId="171">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">19.02.12</S>
@@ -4768,7 +4768,7 @@
   <Obj RefId="172">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">23.01.24</S>
@@ -4804,7 +4804,7 @@
   <Obj RefId="173">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">23.01.24</S>
@@ -4840,7 +4840,7 @@
   <Obj RefId="174">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">22.12.01</S>
@@ -4876,7 +4876,7 @@
   <Obj RefId="175">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">22.12.01</S>
@@ -4912,7 +4912,7 @@
   <Obj RefId="176">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">19.06.11</S>
@@ -4948,7 +4948,7 @@
   <Obj RefId="177">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">21.02.03</S>
@@ -4984,7 +4984,7 @@
   <Obj RefId="178">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">20.04.28</S>
@@ -5020,7 +5020,7 @@
   <Obj RefId="179">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">21.07.08</S>
@@ -5056,7 +5056,7 @@
   <Obj RefId="180">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">22.03.04</S>
@@ -5092,7 +5092,7 @@
   <Obj RefId="181">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">22.10.10</S>
@@ -5134,7 +5134,7 @@
   <Obj RefId="183">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">22.10.10</S>
@@ -5176,7 +5176,7 @@
   <Obj RefId="185">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">23.01.24</S>
@@ -5212,7 +5212,7 @@
   <Obj RefId="186">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">23.01.24</S>
@@ -5248,7 +5248,7 @@
   <Obj RefId="187">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">22.12.22</S>
@@ -5290,7 +5290,7 @@
   <Obj RefId="189">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">22.12.22</S>
@@ -5332,7 +5332,7 @@
   <Obj RefId="191">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">23.01.23</S>
@@ -5368,7 +5368,7 @@
   <Obj RefId="192">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">23.01.23</S>
@@ -5404,7 +5404,7 @@
   <Obj RefId="193">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">22.12.07</S>
@@ -5446,7 +5446,7 @@
   <Obj RefId="195">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">22.12.07</S>
@@ -5488,7 +5488,7 @@
   <Obj RefId="197">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">18.03.27</S>
@@ -5524,7 +5524,7 @@
   <Obj RefId="198">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">19.06.11</S>
@@ -5560,7 +5560,7 @@
   <Obj RefId="199">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">20.05.26</S>
@@ -5596,7 +5596,7 @@
   <Obj RefId="200">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">20.05.26</S>
@@ -5632,7 +5632,7 @@
   <Obj RefId="201">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">21.08.19</S>
@@ -5668,7 +5668,7 @@
   <Obj RefId="202">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">21.09.08</S>
@@ -5704,7 +5704,7 @@
   <Obj RefId="203">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">22.01.05</S>
@@ -5740,7 +5740,7 @@
   <Obj RefId="204">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">22.03.04</S>
@@ -5776,7 +5776,7 @@
   <Obj RefId="205">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">22.03.04</S>
@@ -5812,7 +5812,7 @@
   <Obj RefId="206">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">22.12.21</S>
@@ -5854,7 +5854,7 @@
   <Obj RefId="208">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">22.10.10</S>
@@ -5896,7 +5896,7 @@
   <Obj RefId="210">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">19.02.12</S>
@@ -5932,7 +5932,7 @@
   <Obj RefId="211">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">22.12.22</S>
@@ -5974,7 +5974,7 @@
   <Obj RefId="213">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">22.12.22</S>
@@ -6016,7 +6016,7 @@
   <Obj RefId="215">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">21.08.05</S>
@@ -6052,7 +6052,7 @@
   <Obj RefId="216">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">22.12.07</S>
@@ -6094,7 +6094,7 @@
   <Obj RefId="218">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">22.12.07</S>
@@ -6136,7 +6136,7 @@
   <Obj RefId="220">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">20.09.08</S>
@@ -6172,7 +6172,7 @@
   <Obj RefId="221">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">21.08.06</S>
@@ -6208,7 +6208,7 @@
   <Obj RefId="222">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">22.12.22</S>
@@ -6244,7 +6244,7 @@
   <Obj RefId="223">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">22.12.22</S>
@@ -6280,7 +6280,7 @@
   <Obj RefId="224">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">22.12.07</S>
@@ -6316,7 +6316,7 @@
   <Obj RefId="225">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">22.12.07</S>
@@ -6352,7 +6352,7 @@
   <Obj RefId="226">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">22.12.22</S>
@@ -6388,7 +6388,7 @@
   <Obj RefId="227">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">22.12.22</S>
@@ -6424,7 +6424,7 @@
   <Obj RefId="228">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">22.12.21</S>
@@ -6460,7 +6460,7 @@
   <Obj RefId="229">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">22.04.21</S>
@@ -6496,7 +6496,7 @@
   <Obj RefId="230">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">22.11.21</S>
@@ -6538,7 +6538,7 @@
   <Obj RefId="232">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">22.11.21</S>
@@ -6580,7 +6580,7 @@
   <Obj RefId="234">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">22.12.07</S>
@@ -6622,7 +6622,7 @@
   <Obj RefId="236">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">22.12.07</S>
@@ -6664,7 +6664,7 @@
   <Obj RefId="238">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">22.10.10</S>
@@ -6706,7 +6706,7 @@
   <Obj RefId="240">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">22.07.22</S>
@@ -6748,7 +6748,7 @@
   <Obj RefId="242">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">23.01.23</S>
@@ -6790,7 +6790,7 @@
   <Obj RefId="244">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">23.02.09</S>
@@ -6832,7 +6832,7 @@
   <Obj RefId="246">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">18.03.27</S>
@@ -6892,7 +6892,7 @@
   <Obj RefId="251">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">20.09.18</S>
@@ -6928,7 +6928,7 @@
   <Obj RefId="252">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">16.04.15</S>
@@ -6988,7 +6988,7 @@
   <Obj RefId="257">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">18.04.10</S>
@@ -7042,7 +7042,7 @@
   <Obj RefId="261">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">20.09.18</S>
@@ -7102,7 +7102,7 @@
   <Obj RefId="266">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">20.09.18</S>
@@ -7138,7 +7138,7 @@
   <Obj RefId="267">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">16.04.15</S>
@@ -7198,7 +7198,7 @@
   <Obj RefId="272">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">18.04.10</S>
@@ -7246,7 +7246,7 @@
   <Obj RefId="275">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">18.03.27</S>
@@ -7306,7 +7306,7 @@
   <Obj RefId="280">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">20.06.23</S>
@@ -7342,7 +7342,7 @@
   <Obj RefId="281">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">16.04.15</S>
@@ -7390,7 +7390,7 @@
   <Obj RefId="284">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">16.04.15</S>
@@ -7438,7 +7438,7 @@
   <Obj RefId="287">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">16.04.15</S>
@@ -7492,7 +7492,7 @@
   <Obj RefId="291">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">16.04.16</S>
@@ -7540,7 +7540,7 @@
   <Obj RefId="294">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">18.04.10</S>
@@ -7588,7 +7588,7 @@
   <Obj RefId="297">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">16.04.15</S>
@@ -7636,7 +7636,7 @@
   <Obj RefId="300">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">18.04.10</S>
@@ -7684,7 +7684,7 @@
   <Obj RefId="303">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">18.04.10</S>
@@ -7732,7 +7732,7 @@
   <Obj RefId="306">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">18.08.28</S>
@@ -7792,7 +7792,7 @@
   <Obj RefId="311">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">19.06.11</S>
@@ -7828,7 +7828,7 @@
   <Obj RefId="312">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">18.04.10</S>
@@ -7876,7 +7876,7 @@
   <Obj RefId="315">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">18.08.28</S>
@@ -7924,7 +7924,7 @@
   <Obj RefId="318">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">20.07.14</S>
@@ -7960,7 +7960,7 @@
   <Obj RefId="319">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">23.01.24</S>
@@ -7996,7 +7996,7 @@
   <Obj RefId="320">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">23.01.24</S>
@@ -8032,7 +8032,7 @@
   <Obj RefId="321">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">15.07.28</S>
@@ -8080,7 +8080,7 @@
   <Obj RefId="324">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">22.06.13</S>
@@ -8116,18 +8116,18 @@
   <Obj RefId="325">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
-      <S N="ReleaseDate">23.01.23</S>
+      <S N="ReleaseDate">23.03.06</S>
       <S N="Manufacturer">Dell</S>
-      <S N="Name">Dell OptiPlex 3000 Win10 A05</S>
-      <S N="DellVersion">A05</S>
-      <S N="Url">http://downloads.dell.com/FOLDER09478426M/1/OptiPlex-3000-H94X2_Win10_1.0_A05.exe</S>
+      <S N="Name">Dell OptiPlex 3000 Win10 A06</S>
+      <S N="DellVersion">A06</S>
+      <S N="Url">http://downloads.dell.com/FOLDER09676059M/1/OptiPlex-3000-7GN02_Win10_1.0_A06.exe</S>
       <S N="VendorVersion">1.0</S>
-      <S N="FileName">OptiPlex-3000-H94X2_Win10_1.0_A05.exe</S>
-      <S N="SizeMB">1779.08</S>
-      <S N="ReleaseID">H94X2</S>
+      <S N="FileName">OptiPlex-3000-7GN02_Win10_1.0_A06.exe</S>
+      <S N="SizeMB">1782.38</S>
+      <S N="ReleaseID">7GN02</S>
       <S N="Brand">Optiplex</S>
       <S N="Key">1</S>
       <S N="Prefix">OP</S>
@@ -8151,25 +8151,25 @@
       <S N="minorVersion">0</S>
       <S N="spMajorVersion">0</S>
       <S N="spMinorVersion">0</S>
-      <S N="ImportantInfoUrl">http://www.dell.com/support/home/us/en/04/Drivers/DriversDetails?driverId=H94X2</S>
-      <S N="HashMD5">CD264A9DE8B238D339D71D821FB98DEE</S>
+      <S N="ImportantInfoUrl">http://www.dell.com/support/home/us/en/04/Drivers/DriversDetails?driverId=7GN02</S>
+      <S N="HashMD5">326C1D34525A47CC3F2C197870B697C5</S>
     </MS>
   </Obj>
   <Obj RefId="327">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
-      <S N="ReleaseDate">23.01.23</S>
+      <S N="ReleaseDate">23.03.06</S>
       <S N="Manufacturer">Dell</S>
-      <S N="Name">Dell OptiPlex 3000 Win11 A04</S>
-      <S N="DellVersion">A04</S>
-      <S N="Url">http://downloads.dell.com/FOLDER09478430M/1/OptiPlex-3000-8N9TP_Win11_1.0_A04.exe</S>
+      <S N="Name">Dell OptiPlex 3000 Win11 A05</S>
+      <S N="DellVersion">A05</S>
+      <S N="Url">http://downloads.dell.com/FOLDER09676075M/1/OptiPlex-3000-9TWC7_Win11_1.0_A05.exe</S>
       <S N="VendorVersion">1.0</S>
-      <S N="FileName">OptiPlex-3000-8N9TP_Win11_1.0_A04.exe</S>
-      <S N="SizeMB">1761.87</S>
-      <S N="ReleaseID">8N9TP</S>
+      <S N="FileName">OptiPlex-3000-9TWC7_Win11_1.0_A05.exe</S>
+      <S N="SizeMB">1765.17</S>
+      <S N="ReleaseID">9TWC7</S>
       <S N="Brand">Optiplex</S>
       <S N="Key">1</S>
       <S N="Prefix">OP</S>
@@ -8193,14 +8193,14 @@
       <S N="minorVersion">0</S>
       <S N="spMajorVersion">0</S>
       <S N="spMinorVersion">0</S>
-      <S N="ImportantInfoUrl">http://www.dell.com/support/home/us/en/04/Drivers/DriversDetails?driverId=8N9TP</S>
-      <S N="HashMD5">B17F6FA71DD5BA6A2157DDF30F0776EC</S>
+      <S N="ImportantInfoUrl">http://www.dell.com/support/home/us/en/04/Drivers/DriversDetails?driverId=9TWC7</S>
+      <S N="HashMD5">5259243A1474E9900F8834159C94A18C</S>
     </MS>
   </Obj>
   <Obj RefId="329">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">16.04.15</S>
@@ -8248,7 +8248,7 @@
   <Obj RefId="332">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">16.02.08</S>
@@ -8296,7 +8296,7 @@
   <Obj RefId="335">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">18.04.10</S>
@@ -8344,7 +8344,7 @@
   <Obj RefId="338">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">18.04.10</S>
@@ -8392,7 +8392,7 @@
   <Obj RefId="341">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">18.04.10</S>
@@ -8440,7 +8440,7 @@
   <Obj RefId="344">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">20.09.18</S>
@@ -8476,7 +8476,7 @@
   <Obj RefId="345">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">19.01.07</S>
@@ -8512,7 +8512,7 @@
   <Obj RefId="346">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">20.05.26</S>
@@ -8548,7 +8548,7 @@
   <Obj RefId="347">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">20.09.18</S>
@@ -8584,7 +8584,7 @@
   <Obj RefId="348">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">21.07.08</S>
@@ -8632,7 +8632,7 @@
   <Obj RefId="351">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">22.06.13</S>
@@ -8674,7 +8674,7 @@
   <Obj RefId="353">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">22.10.28</S>
@@ -8716,7 +8716,7 @@
   <Obj RefId="355">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">22.10.21</S>
@@ -8758,7 +8758,7 @@
   <Obj RefId="357">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">22.11.07</S>
@@ -8800,7 +8800,7 @@
   <Obj RefId="359">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">23.01.23</S>
@@ -8842,7 +8842,7 @@
   <Obj RefId="361">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">23.01.23</S>
@@ -8884,23 +8884,23 @@
   <Obj RefId="363">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
-      <S N="ReleaseDate">22.12.22</S>
+      <S N="ReleaseDate">23.03.03</S>
       <S N="Manufacturer">Dell</S>
-      <S N="Name">Dell OptiPlex 3090 Win10 A06</S>
-      <S N="DellVersion">A06</S>
-      <S N="Url">http://downloads.dell.com/FOLDER09368453M/1/Optiplex-3090-RK3RV_Win10_1.0_A06.exe</S>
+      <S N="Name">Dell Optiplex 3090 Win10 A07</S>
+      <S N="DellVersion">A07</S>
+      <S N="Url">http://downloads.dell.com/FOLDER09650893M/1/Optiplex-3090-NF25M_Win10_1.0_A07.exe</S>
       <S N="VendorVersion">1.0</S>
-      <S N="FileName">Optiplex-3090-RK3RV_Win10_1.0_A06.exe</S>
-      <S N="SizeMB">1913.84</S>
-      <S N="ReleaseID">RK3RV</S>
+      <S N="FileName">Optiplex-3090-NF25M_Win10_1.0_A07.exe</S>
+      <S N="SizeMB">1913.87</S>
+      <S N="ReleaseID">NF25M</S>
       <S N="Brand">Optiplex</S>
       <S N="Key">1</S>
       <S N="Prefix">OP</S>
-      <S N="Model">OptiPlex 3090</S>
-      <S N="ModelID">OptiPlex 3090</S>
+      <S N="Model">Optiplex 3090</S>
+      <S N="ModelID">Optiplex 3090</S>
       <Obj N="SystemID" RefId="364">
         <TNRef RefId="1" />
         <LST>
@@ -8919,30 +8919,30 @@
       <S N="minorVersion">0</S>
       <S N="spMajorVersion">0</S>
       <S N="spMinorVersion">0</S>
-      <S N="ImportantInfoUrl">http://www.dell.com/support/home/us/en/04/Drivers/DriversDetails?driverId=RK3RV</S>
-      <S N="HashMD5">29613CCB245FBBEDDD7520E3701CDB98</S>
+      <S N="ImportantInfoUrl">http://www.dell.com/support/home/us/en/04/Drivers/DriversDetails?driverId=NF25M</S>
+      <S N="HashMD5">F659BC2C07A9520A84D06B30DA4E1BC9</S>
     </MS>
   </Obj>
   <Obj RefId="365">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
-      <S N="ReleaseDate">22.12.22</S>
+      <S N="ReleaseDate">23.03.03</S>
       <S N="Manufacturer">Dell</S>
-      <S N="Name">Dell OptiPlex 3090 Win11 A04</S>
-      <S N="DellVersion">A04</S>
-      <S N="Url">http://downloads.dell.com/FOLDER09368444M/1/Optiplex-3090-G1V63_Win11_1.0_A04.exe</S>
+      <S N="Name">Dell Optiplex 3090 Win11 A05</S>
+      <S N="DellVersion">A05</S>
+      <S N="Url">http://downloads.dell.com/FOLDER09663040M/1/Optiplex-3090-T2NDX_Win11_1.0_A05.exe</S>
       <S N="VendorVersion">1.0</S>
-      <S N="FileName">Optiplex-3090-G1V63_Win11_1.0_A04.exe</S>
-      <S N="SizeMB">1908.85</S>
-      <S N="ReleaseID">G1V63</S>
+      <S N="FileName">Optiplex-3090-T2NDX_Win11_1.0_A05.exe</S>
+      <S N="SizeMB">1908.89</S>
+      <S N="ReleaseID">T2NDX</S>
       <S N="Brand">Optiplex</S>
       <S N="Key">1</S>
       <S N="Prefix">OP</S>
-      <S N="Model">OptiPlex 3090</S>
-      <S N="ModelID">OptiPlex 3090</S>
+      <S N="Model">Optiplex 3090</S>
+      <S N="ModelID">Optiplex 3090</S>
       <Obj N="SystemID" RefId="366">
         <TNRef RefId="1" />
         <LST>
@@ -8961,14 +8961,14 @@
       <S N="minorVersion">0</S>
       <S N="spMajorVersion">0</S>
       <S N="spMinorVersion">0</S>
-      <S N="ImportantInfoUrl">http://www.dell.com/support/home/us/en/04/Drivers/DriversDetails?driverId=G1V63</S>
-      <S N="HashMD5">81FE2E22C4749838E5B122452A74ABE9</S>
+      <S N="ImportantInfoUrl">http://www.dell.com/support/home/us/en/04/Drivers/DriversDetails?driverId=T2NDX</S>
+      <S N="HashMD5">4BDC5707FD86FDB9D341B2D0A93D8A8A</S>
     </MS>
   </Obj>
   <Obj RefId="367">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">19.01.25</S>
@@ -9004,7 +9004,7 @@
   <Obj RefId="368">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">23.01.23</S>
@@ -9046,7 +9046,7 @@
   <Obj RefId="370">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">22.12.22</S>
@@ -9088,18 +9088,18 @@
   <Obj RefId="372">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
-      <S N="ReleaseDate">23.01.23</S>
+      <S N="ReleaseDate">23.03.06</S>
       <S N="Manufacturer">Dell</S>
-      <S N="Name">Dell OptiPlex 5000 Win10 A04</S>
-      <S N="DellVersion">A04</S>
-      <S N="Url">http://downloads.dell.com/FOLDER09498647M/1/OptiPlex-5000-7V592_Win10_1.0_A04.exe</S>
+      <S N="Name">Dell OptiPlex 5000 Win10 A05</S>
+      <S N="DellVersion">A05</S>
+      <S N="Url">http://downloads.dell.com/FOLDER09656795M/1/OptiPlex-5000-TX0D2_Win10_1.0_A05.exe</S>
       <S N="VendorVersion">1.0</S>
-      <S N="FileName">OptiPlex-5000-7V592_Win10_1.0_A04.exe</S>
-      <S N="SizeMB">2658.50</S>
-      <S N="ReleaseID">7V592</S>
+      <S N="FileName">OptiPlex-5000-TX0D2_Win10_1.0_A05.exe</S>
+      <S N="SizeMB">2658.49</S>
+      <S N="ReleaseID">TX0D2</S>
       <S N="Brand">Optiplex</S>
       <S N="Key">1</S>
       <S N="Prefix">OP</S>
@@ -9123,25 +9123,25 @@
       <S N="minorVersion">0</S>
       <S N="spMajorVersion">0</S>
       <S N="spMinorVersion">0</S>
-      <S N="ImportantInfoUrl">http://www.dell.com/support/home/us/en/04/Drivers/DriversDetails?driverId=7V592</S>
-      <S N="HashMD5">4126C34AF85FA926022F96879C1C773C</S>
+      <S N="ImportantInfoUrl">http://www.dell.com/support/home/us/en/04/Drivers/DriversDetails?driverId=TX0D2</S>
+      <S N="HashMD5">D2D490D905396A6C3173E59C4A55387E</S>
     </MS>
   </Obj>
   <Obj RefId="374">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
-      <S N="ReleaseDate">23.01.23</S>
+      <S N="ReleaseDate">23.03.06</S>
       <S N="Manufacturer">Dell</S>
-      <S N="Name">Dell OptiPlex 5000 Win11 A02</S>
-      <S N="DellVersion">A02</S>
-      <S N="Url">http://downloads.dell.com/FOLDER09498733M/1/OptiPlex-5000-8CTGG_Win11_1.0_A02.exe</S>
+      <S N="Name">Dell OptiPlex 5000 Win11 A03</S>
+      <S N="DellVersion">A03</S>
+      <S N="Url">http://downloads.dell.com/FOLDER09656791M/1/OptiPlex-5000-HD2KW_Win11_1.0_A03.exe</S>
       <S N="VendorVersion">1.0</S>
-      <S N="FileName">OptiPlex-5000-8CTGG_Win11_1.0_A02.exe</S>
-      <S N="SizeMB">2658.51</S>
-      <S N="ReleaseID">8CTGG</S>
+      <S N="FileName">OptiPlex-5000-HD2KW_Win11_1.0_A03.exe</S>
+      <S N="SizeMB">2658.50</S>
+      <S N="ReleaseID">HD2KW</S>
       <S N="Brand">Optiplex</S>
       <S N="Key">1</S>
       <S N="Prefix">OP</S>
@@ -9165,14 +9165,14 @@
       <S N="minorVersion">0</S>
       <S N="spMajorVersion">0</S>
       <S N="spMinorVersion">0</S>
-      <S N="ImportantInfoUrl">http://www.dell.com/support/home/us/en/04/Drivers/DriversDetails?driverId=8CTGG</S>
-      <S N="HashMD5">D89E2A894013E4505054E32978B54229</S>
+      <S N="ImportantInfoUrl">http://www.dell.com/support/home/us/en/04/Drivers/DriversDetails?driverId=HD2KW</S>
+      <S N="HashMD5">AEA65DC23E0BFC11780D65EE0A0CCEE7</S>
     </MS>
   </Obj>
   <Obj RefId="376">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">19.01.07</S>
@@ -9208,7 +9208,7 @@
   <Obj RefId="377">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">20.05.12</S>
@@ -9244,7 +9244,7 @@
   <Obj RefId="378">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">20.06.09</S>
@@ -9280,7 +9280,7 @@
   <Obj RefId="379">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">19.10.07</S>
@@ -9316,7 +9316,7 @@
   <Obj RefId="380">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">19.10.07</S>
@@ -9352,7 +9352,7 @@
   <Obj RefId="381">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">21.07.08</S>
@@ -9400,7 +9400,7 @@
   <Obj RefId="384">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">22.06.13</S>
@@ -9442,7 +9442,7 @@
   <Obj RefId="386">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">22.10.27</S>
@@ -9484,7 +9484,7 @@
   <Obj RefId="388">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">22.12.07</S>
@@ -9526,7 +9526,7 @@
   <Obj RefId="390">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">22.12.07</S>
@@ -9568,7 +9568,7 @@
   <Obj RefId="392">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">23.02.09</S>
@@ -9610,7 +9610,7 @@
   <Obj RefId="394">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">23.02.09</S>
@@ -9652,7 +9652,7 @@
   <Obj RefId="396">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">20.05.26</S>
@@ -9700,7 +9700,7 @@
   <Obj RefId="399">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">21.07.08</S>
@@ -9742,7 +9742,7 @@
   <Obj RefId="401">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">22.08.09</S>
@@ -9784,7 +9784,7 @@
   <Obj RefId="403">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">22.03.04</S>
@@ -9826,7 +9826,7 @@
   <Obj RefId="405">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">23.01.23</S>
@@ -9868,7 +9868,7 @@
   <Obj RefId="407">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">23.01.23</S>
@@ -9910,7 +9910,7 @@
   <Obj RefId="409">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">22.12.22</S>
@@ -9952,7 +9952,7 @@
   <Obj RefId="411">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">22.12.22</S>
@@ -9994,7 +9994,7 @@
   <Obj RefId="413">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">23.02.09</S>
@@ -10036,7 +10036,7 @@
   <Obj RefId="415">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">23.02.09</S>
@@ -10078,18 +10078,18 @@
   <Obj RefId="417">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
-      <S N="ReleaseDate">22.12.07</S>
+      <S N="ReleaseDate">23.03.08</S>
       <S N="Manufacturer">Dell</S>
-      <S N="Name">Dell OptiPlex 7000 Win10 A04</S>
-      <S N="DellVersion">A04</S>
-      <S N="Url">http://downloads.dell.com/FOLDER09313782M/1/OptiPlex-7000-4TH02_Win10_1.0_A04.exe</S>
+      <S N="Name">Dell OptiPlex 7000 Win10 A05</S>
+      <S N="DellVersion">A05</S>
+      <S N="Url">http://downloads.dell.com/FOLDER09439077M/1/OptiPlex-7000-0W9VM_Win10_1.0_A05.exe</S>
       <S N="VendorVersion">1.0</S>
-      <S N="FileName">OptiPlex-7000-4TH02_Win10_1.0_A04.exe</S>
-      <S N="SizeMB">2227.37</S>
-      <S N="ReleaseID">4TH02</S>
+      <S N="FileName">OptiPlex-7000-0W9VM_Win10_1.0_A05.exe</S>
+      <S N="SizeMB">2262.13</S>
+      <S N="ReleaseID">0W9VM</S>
       <S N="Brand">Optiplex</S>
       <S N="Key">1</S>
       <S N="Prefix">OP</S>
@@ -10113,25 +10113,25 @@
       <S N="minorVersion">0</S>
       <S N="spMajorVersion">0</S>
       <S N="spMinorVersion">0</S>
-      <S N="ImportantInfoUrl">http://www.dell.com/support/home/us/en/04/Drivers/DriversDetails?driverId=4TH02</S>
-      <S N="HashMD5">A855DA49A50818A0F997E4E93CE449B6</S>
+      <S N="ImportantInfoUrl">http://www.dell.com/support/home/us/en/04/Drivers/DriversDetails?driverId=0W9VM</S>
+      <S N="HashMD5">D2098B2D28C8316DBB52D5214E1666EE</S>
     </MS>
   </Obj>
   <Obj RefId="419">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
-      <S N="ReleaseDate">22.12.07</S>
+      <S N="ReleaseDate">23.03.08</S>
       <S N="Manufacturer">Dell</S>
-      <S N="Name">Dell OptiPlex 7000 Win11 A03</S>
-      <S N="DellVersion">A03</S>
-      <S N="Url">http://downloads.dell.com/FOLDER09313797M/1/OptiPlex-7000-MH1RF_Win11_1.0_A03.exe</S>
+      <S N="Name">Dell OptiPlex 7000 Win11 A04</S>
+      <S N="DellVersion">A04</S>
+      <S N="Url">http://downloads.dell.com/FOLDER09439110M/1/OptiPlex-7000-HR8MD_Win11_1.0_A04.exe</S>
       <S N="VendorVersion">1.0</S>
-      <S N="FileName">OptiPlex-7000-MH1RF_Win11_1.0_A03.exe</S>
-      <S N="SizeMB">2227.38</S>
-      <S N="ReleaseID">MH1RF</S>
+      <S N="FileName">OptiPlex-7000-HR8MD_Win11_1.0_A04.exe</S>
+      <S N="SizeMB">2262.14</S>
+      <S N="ReleaseID">HR8MD</S>
       <S N="Brand">Optiplex</S>
       <S N="Key">1</S>
       <S N="Prefix">OP</S>
@@ -10155,14 +10155,14 @@
       <S N="minorVersion">0</S>
       <S N="spMajorVersion">0</S>
       <S N="spMinorVersion">0</S>
-      <S N="ImportantInfoUrl">http://www.dell.com/support/home/us/en/04/Drivers/DriversDetails?driverId=MH1RF</S>
-      <S N="HashMD5">A4A348519D5B3AFB5BA9845475A00B4C</S>
+      <S N="ImportantInfoUrl">http://www.dell.com/support/home/us/en/04/Drivers/DriversDetails?driverId=HR8MD</S>
+      <S N="HashMD5">862A6D95FE11F6C6BBCBA9DB0B738319</S>
     </MS>
   </Obj>
   <Obj RefId="421">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">16.04.14</S>
@@ -10210,7 +10210,7 @@
   <Obj RefId="424">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">18.04.10</S>
@@ -10258,7 +10258,7 @@
   <Obj RefId="427">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">20.09.18</S>
@@ -10294,7 +10294,7 @@
   <Obj RefId="428">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">20.09.18</S>
@@ -10330,7 +10330,7 @@
   <Obj RefId="429">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">21.07.08</S>
@@ -10378,7 +10378,7 @@
   <Obj RefId="432">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">22.01.05</S>
@@ -10420,7 +10420,7 @@
   <Obj RefId="434">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">22.05.06</S>
@@ -10462,7 +10462,7 @@
   <Obj RefId="436">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">22.06.13</S>
@@ -10504,7 +10504,7 @@
   <Obj RefId="438">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">22.01.05</S>
@@ -10546,7 +10546,7 @@
   <Obj RefId="440">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">22.05.06</S>
@@ -10588,7 +10588,7 @@
   <Obj RefId="442">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">23.02.09</S>
@@ -10630,7 +10630,7 @@
   <Obj RefId="444">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">23.02.09</S>
@@ -10672,7 +10672,7 @@
   <Obj RefId="446">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">23.01.24</S>
@@ -10714,7 +10714,7 @@
   <Obj RefId="448">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">23.01.24</S>
@@ -10756,7 +10756,7 @@
   <Obj RefId="450">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">22.11.18</S>
@@ -10798,7 +10798,7 @@
   <Obj RefId="452">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">22.11.18</S>
@@ -10840,7 +10840,7 @@
   <Obj RefId="454">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">23.01.23</S>
@@ -10882,7 +10882,7 @@
   <Obj RefId="456">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">23.01.23</S>
@@ -10924,7 +10924,7 @@
   <Obj RefId="458">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">19.01.07</S>
@@ -10960,7 +10960,7 @@
   <Obj RefId="459">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">20.05.26</S>
@@ -10996,7 +10996,7 @@
   <Obj RefId="460">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">21.07.08</S>
@@ -11038,7 +11038,7 @@
   <Obj RefId="462">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">22.08.09</S>
@@ -11080,7 +11080,7 @@
   <Obj RefId="464">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">22.03.04</S>
@@ -11122,7 +11122,7 @@
   <Obj RefId="466">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">22.12.22</S>
@@ -11164,7 +11164,7 @@
   <Obj RefId="468">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">22.12.22</S>
@@ -11206,7 +11206,7 @@
   <Obj RefId="470">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">23.02.09</S>
@@ -11248,7 +11248,7 @@
   <Obj RefId="472">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">23.02.09</S>
@@ -11290,7 +11290,7 @@
   <Obj RefId="474">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">21.07.08</S>
@@ -11332,7 +11332,7 @@
   <Obj RefId="476">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">22.08.09</S>
@@ -11374,7 +11374,7 @@
   <Obj RefId="478">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">22.03.04</S>
@@ -11416,7 +11416,7 @@
   <Obj RefId="480">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">22.12.22</S>
@@ -11458,7 +11458,7 @@
   <Obj RefId="482">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">22.12.22</S>
@@ -11500,7 +11500,7 @@
   <Obj RefId="484">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">16.04.14</S>
@@ -11548,7 +11548,7 @@
   <Obj RefId="487">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">16.04.14</S>
@@ -11596,7 +11596,7 @@
   <Obj RefId="490">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">18.04.10</S>
@@ -11644,7 +11644,7 @@
   <Obj RefId="493">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">18.04.10</S>
@@ -11692,7 +11692,7 @@
   <Obj RefId="496">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">18.04.10</S>
@@ -11740,7 +11740,7 @@
   <Obj RefId="499">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">18.04.10</S>
@@ -11788,7 +11788,7 @@
   <Obj RefId="502">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">18.04.10</S>
@@ -11836,7 +11836,7 @@
   <Obj RefId="505">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">22.12.22</S>
@@ -11878,18 +11878,18 @@
   <Obj RefId="507">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
-      <S N="ReleaseDate">23.01.23</S>
+      <S N="ReleaseDate">23.03.06</S>
       <S N="Manufacturer">Dell</S>
-      <S N="Name">Dell OptiPlex XE3 Win11 A01</S>
-      <S N="DellVersion">A01</S>
-      <S N="Url">http://downloads.dell.com/FOLDER09499168M/1/XE3-9CY7G_Win11_1.0_A01.exe</S>
+      <S N="Name">Dell OptiPlex XE3 Win11 A02</S>
+      <S N="DellVersion">A02</S>
+      <S N="Url">http://downloads.dell.com/FOLDER09676087M/1/XE3-H30D2_Win11_1.0_A02.exe</S>
       <S N="VendorVersion">1.0</S>
-      <S N="FileName">XE3-9CY7G_Win11_1.0_A01.exe</S>
-      <S N="SizeMB">2972.07</S>
-      <S N="ReleaseID">9CY7G</S>
+      <S N="FileName">XE3-H30D2_Win11_1.0_A02.exe</S>
+      <S N="SizeMB">2960.13</S>
+      <S N="ReleaseID">H30D2</S>
       <S N="Brand">Optiplex</S>
       <S N="Key">1</S>
       <S N="Prefix">OP</S>
@@ -11913,14 +11913,14 @@
       <S N="minorVersion">0</S>
       <S N="spMajorVersion">0</S>
       <S N="spMinorVersion">0</S>
-      <S N="ImportantInfoUrl">http://www.dell.com/support/home/us/en/04/Drivers/DriversDetails?driverId=9CY7G</S>
-      <S N="HashMD5">01D20ACD68AB97C8E8814DCABBC8EA59</S>
+      <S N="ImportantInfoUrl">http://www.dell.com/support/home/us/en/04/Drivers/DriversDetails?driverId=H30D2</S>
+      <S N="HashMD5">A1FC6AF9853AF7947066DA0B784A2F5A</S>
     </MS>
   </Obj>
   <Obj RefId="509">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">22.11.18</S>
@@ -11962,7 +11962,7 @@
   <Obj RefId="511">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">22.11.18</S>
@@ -12004,18 +12004,18 @@
   <Obj RefId="513">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
-      <S N="ReleaseDate">22.12.22</S>
+      <S N="ReleaseDate">23.03.06</S>
       <S N="Manufacturer">Dell</S>
-      <S N="Name">Dell Precision 3240 Compact Win10 A11</S>
-      <S N="DellVersion">A11</S>
-      <S N="Url">http://downloads.dell.com/FOLDER09169770M/1/Precision-3240-Compact-04C1C_Win10_1.0_A11.exe</S>
+      <S N="Name">Dell Precision 3240 Compact Win10 A12</S>
+      <S N="DellVersion">A12</S>
+      <S N="Url">http://downloads.dell.com/FOLDER09635301M/1/Precision-3240-Compact-4DM3V_Win10_1.0_A12.exe</S>
       <S N="VendorVersion">1.0</S>
-      <S N="FileName">Precision-3240-Compact-04C1C_Win10_1.0_A11.exe</S>
-      <S N="SizeMB">1760.35</S>
-      <S N="ReleaseID">04C1C</S>
+      <S N="FileName">Precision-3240-Compact-4DM3V_Win10_1.0_A12.exe</S>
+      <S N="SizeMB">1790.36</S>
+      <S N="ReleaseID">4DM3V</S>
       <S N="Brand">Precision</S>
       <S N="Key">11</S>
       <S N="Prefix">PRE</S>
@@ -12033,25 +12033,25 @@
       <S N="minorVersion">0</S>
       <S N="spMajorVersion">0</S>
       <S N="spMinorVersion">0</S>
-      <S N="ImportantInfoUrl">http://www.dell.com/support/home/us/en/04/Drivers/DriversDetails?driverId=04C1C</S>
-      <S N="HashMD5">DF13CE8ABD90DA37B349B48CFDF95888</S>
+      <S N="ImportantInfoUrl">http://www.dell.com/support/home/us/en/04/Drivers/DriversDetails?driverId=4DM3V</S>
+      <S N="HashMD5">01049CEE37A0FEC5DC883E74114C7DA0</S>
     </MS>
   </Obj>
   <Obj RefId="514">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
-      <S N="ReleaseDate">22.12.22</S>
+      <S N="ReleaseDate">23.03.06</S>
       <S N="Manufacturer">Dell</S>
-      <S N="Name">Dell Precision 3240 Compact Win11 A01</S>
-      <S N="DellVersion">A01</S>
-      <S N="Url">http://downloads.dell.com/FOLDER09169827M/1/Precision-3240-Compact-97HMH_Win11_1.0_A01.exe</S>
+      <S N="Name">Dell Precision 3240 Compact Win11 A02</S>
+      <S N="DellVersion">A02</S>
+      <S N="Url">http://downloads.dell.com/FOLDER09635319M/1/Precision-3240-Compact-FGT54_Win11_1.0_A02.exe</S>
       <S N="VendorVersion">1.0</S>
-      <S N="FileName">Precision-3240-Compact-97HMH_Win11_1.0_A01.exe</S>
-      <S N="SizeMB">1760.24</S>
-      <S N="ReleaseID">97HMH</S>
+      <S N="FileName">Precision-3240-Compact-FGT54_Win11_1.0_A02.exe</S>
+      <S N="SizeMB">1790.25</S>
+      <S N="ReleaseID">FGT54</S>
       <S N="Brand">Precision</S>
       <S N="Key">11</S>
       <S N="Prefix">PRE</S>
@@ -12069,14 +12069,14 @@
       <S N="minorVersion">0</S>
       <S N="spMajorVersion">0</S>
       <S N="spMinorVersion">0</S>
-      <S N="ImportantInfoUrl">http://www.dell.com/support/home/us/en/04/Drivers/DriversDetails?driverId=97HMH</S>
-      <S N="HashMD5">72794993B6DD8F5644857CA419BFE46E</S>
+      <S N="ImportantInfoUrl">http://www.dell.com/support/home/us/en/04/Drivers/DriversDetails?driverId=FGT54</S>
+      <S N="HashMD5">112E96D6C788AD720090D8AF876D6849</S>
     </MS>
   </Obj>
   <Obj RefId="515">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">22.12.23</S>
@@ -12118,7 +12118,7 @@
   <Obj RefId="517">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">22.12.22</S>
@@ -12160,7 +12160,7 @@
   <Obj RefId="519">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">21.05.05</S>
@@ -12208,7 +12208,7 @@
   <Obj RefId="522">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">22.07.22</S>
@@ -12250,7 +12250,7 @@
   <Obj RefId="524">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">22.05.06</S>
@@ -12292,7 +12292,7 @@
   <Obj RefId="526">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">23.01.06</S>
@@ -12334,7 +12334,7 @@
   <Obj RefId="528">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">23.01.06</S>
@@ -12376,7 +12376,7 @@
   <Obj RefId="530">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">22.12.23</S>
@@ -12418,7 +12418,7 @@
   <Obj RefId="532">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">22.12.23</S>
@@ -12460,7 +12460,7 @@
   <Obj RefId="534">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">23.01.06</S>
@@ -12502,7 +12502,7 @@
   <Obj RefId="536">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">23.01.06</S>
@@ -12544,7 +12544,7 @@
   <Obj RefId="538">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">23.02.09</S>
@@ -12580,7 +12580,7 @@
   <Obj RefId="539">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">22.06.24</S>
@@ -12616,7 +12616,7 @@
   <Obj RefId="540">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">19.02.12</S>
@@ -12652,7 +12652,7 @@
   <Obj RefId="541">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">20.05.26</S>
@@ -12688,7 +12688,7 @@
   <Obj RefId="542">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">21.07.08</S>
@@ -12724,7 +12724,7 @@
   <Obj RefId="543">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">22.10.27</S>
@@ -12760,7 +12760,7 @@
   <Obj RefId="544">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">22.03.04</S>
@@ -12796,7 +12796,7 @@
   <Obj RefId="545">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">22.10.21</S>
@@ -12832,7 +12832,7 @@
   <Obj RefId="546">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">22.05.06</S>
@@ -12868,7 +12868,7 @@
   <Obj RefId="547">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">22.10.10</S>
@@ -12904,7 +12904,7 @@
   <Obj RefId="548">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">22.04.21</S>
@@ -12940,7 +12940,7 @@
   <Obj RefId="549">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">21.09.08</S>
@@ -12976,18 +12976,18 @@
   <Obj RefId="550">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
-      <S N="ReleaseDate">23.01.23</S>
+      <S N="ReleaseDate">23.03.02</S>
       <S N="Manufacturer">Dell</S>
-      <S N="Name">Dell Precision 3560 Win10 A12</S>
-      <S N="DellVersion">A12</S>
-      <S N="Url">http://downloads.dell.com/FOLDER09484462M/1/3560-HCGW7_Win10_1.0_A12.exe</S>
+      <S N="Name">Dell Precision 3560 Win10 A13</S>
+      <S N="DellVersion">A13</S>
+      <S N="Url">http://downloads.dell.com/FOLDER09646421M/1/3560-GKNT3_Win10_1.0_A13.exe</S>
       <S N="VendorVersion">1.0</S>
-      <S N="FileName">3560-HCGW7_Win10_1.0_A12.exe</S>
-      <S N="SizeMB">3162.63</S>
-      <S N="ReleaseID">HCGW7</S>
+      <S N="FileName">3560-GKNT3_Win10_1.0_A13.exe</S>
+      <S N="SizeMB">3163.18</S>
+      <S N="ReleaseID">GKNT3</S>
       <S N="Brand">Precision</S>
       <S N="Key">11</S>
       <S N="Prefix">PRE</S>
@@ -13005,25 +13005,25 @@
       <S N="minorVersion">0</S>
       <S N="spMajorVersion">0</S>
       <S N="spMinorVersion">0</S>
-      <S N="ImportantInfoUrl">http://www.dell.com/support/home/us/en/04/Drivers/DriversDetails?driverId=HCGW7</S>
-      <S N="HashMD5">24C5BE45E06CA288FF11DF25DD75687A</S>
+      <S N="ImportantInfoUrl">http://www.dell.com/support/home/us/en/04/Drivers/DriversDetails?driverId=GKNT3</S>
+      <S N="HashMD5">2104AC668E1072726EE27B65A08A2DB5</S>
     </MS>
   </Obj>
   <Obj RefId="551">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
-      <S N="ReleaseDate">23.01.23</S>
+      <S N="ReleaseDate">23.03.02</S>
       <S N="Manufacturer">Dell</S>
-      <S N="Name">Dell Precision 3560 Win11 A04</S>
-      <S N="DellVersion">A04</S>
-      <S N="Url">http://downloads.dell.com/FOLDER09484473M/1/3560-365M9_Win11_1.0_A04.exe</S>
+      <S N="Name">Dell Precision 3560 Win11 A05</S>
+      <S N="DellVersion">A05</S>
+      <S N="Url">http://downloads.dell.com/FOLDER09646434M/1/3560-1Y92X_Win11_1.0_A05.exe</S>
       <S N="VendorVersion">1.0</S>
-      <S N="FileName">3560-365M9_Win11_1.0_A04.exe</S>
-      <S N="SizeMB">3163.41</S>
-      <S N="ReleaseID">365M9</S>
+      <S N="FileName">3560-1Y92X_Win11_1.0_A05.exe</S>
+      <S N="SizeMB">3163.96</S>
+      <S N="ReleaseID">1Y92X</S>
       <S N="Brand">Precision</S>
       <S N="Key">11</S>
       <S N="Prefix">PRE</S>
@@ -13041,14 +13041,14 @@
       <S N="minorVersion">0</S>
       <S N="spMajorVersion">0</S>
       <S N="spMinorVersion">0</S>
-      <S N="ImportantInfoUrl">http://www.dell.com/support/home/us/en/04/Drivers/DriversDetails?driverId=365M9</S>
-      <S N="HashMD5">C129326E0192E0E98DAE32CE26886D1E</S>
+      <S N="ImportantInfoUrl">http://www.dell.com/support/home/us/en/04/Drivers/DriversDetails?driverId=1Y92X</S>
+      <S N="HashMD5">B02790E1FB1DEDB4CEF427F1AC8B581A</S>
     </MS>
   </Obj>
   <Obj RefId="552">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">23.01.06</S>
@@ -13084,7 +13084,7 @@
   <Obj RefId="553">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">23.01.06</S>
@@ -13120,18 +13120,18 @@
   <Obj RefId="554">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
-      <S N="ReleaseDate">23.02.09</S>
+      <S N="ReleaseDate">23.03.02</S>
       <S N="Manufacturer">Dell</S>
-      <S N="Name">Dell Precision 3570 Win10 A07</S>
-      <S N="DellVersion">A07</S>
-      <S N="Url">http://downloads.dell.com/FOLDER09505965M/1/Precision-3570-F8K35_Win10_1.0_A07.exe</S>
+      <S N="Name">Dell Precision 3570 Win10 A08</S>
+      <S N="DellVersion">A08</S>
+      <S N="Url">http://downloads.dell.com/FOLDER09646401M/1/Precision-3570-7W4R2_Win10_1.0_A08.exe</S>
       <S N="VendorVersion">1.0</S>
-      <S N="FileName">Precision-3570-F8K35_Win10_1.0_A07.exe</S>
-      <S N="SizeMB">2088.53</S>
-      <S N="ReleaseID">F8K35</S>
+      <S N="FileName">Precision-3570-7W4R2_Win10_1.0_A08.exe</S>
+      <S N="SizeMB">2080.67</S>
+      <S N="ReleaseID">7W4R2</S>
       <S N="Brand">Precision</S>
       <S N="Key">11</S>
       <S N="Prefix">PRE</S>
@@ -13149,25 +13149,25 @@
       <S N="minorVersion">0</S>
       <S N="spMajorVersion">0</S>
       <S N="spMinorVersion">0</S>
-      <S N="ImportantInfoUrl">http://www.dell.com/support/home/us/en/04/Drivers/DriversDetails?driverId=F8K35</S>
-      <S N="HashMD5">25DB93BC2A758762BE8D89B28D83BB67</S>
+      <S N="ImportantInfoUrl">http://www.dell.com/support/home/us/en/04/Drivers/DriversDetails?driverId=7W4R2</S>
+      <S N="HashMD5">14D2A691A03DFE0E53DB6370235FE6C4</S>
     </MS>
   </Obj>
   <Obj RefId="555">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
-      <S N="ReleaseDate">23.01.24</S>
+      <S N="ReleaseDate">23.03.02</S>
       <S N="Manufacturer">Dell</S>
-      <S N="Name">Dell Precision 3570 Win11 A06</S>
-      <S N="DellVersion">A06</S>
-      <S N="Url">http://downloads.dell.com/FOLDER09498735M/1/Precision-3570-FVP0V_Win11_1.0_A06.exe</S>
+      <S N="Name">Dell Precision 3570 Win11 A07</S>
+      <S N="DellVersion">A07</S>
+      <S N="Url">http://downloads.dell.com/FOLDER09646408M/1/Precision-3570-CFNW9_Win11_1.0_A07.exe</S>
       <S N="VendorVersion">1.0</S>
-      <S N="FileName">Precision-3570-FVP0V_Win11_1.0_A06.exe</S>
-      <S N="SizeMB">2088.32</S>
-      <S N="ReleaseID">FVP0V</S>
+      <S N="FileName">Precision-3570-CFNW9_Win11_1.0_A07.exe</S>
+      <S N="SizeMB">2085.62</S>
+      <S N="ReleaseID">CFNW9</S>
       <S N="Brand">Precision</S>
       <S N="Key">11</S>
       <S N="Prefix">PRE</S>
@@ -13185,25 +13185,25 @@
       <S N="minorVersion">0</S>
       <S N="spMajorVersion">0</S>
       <S N="spMinorVersion">0</S>
-      <S N="ImportantInfoUrl">http://www.dell.com/support/home/us/en/04/Drivers/DriversDetails?driverId=FVP0V</S>
-      <S N="HashMD5">2D67F77AE43290B74A1AF073D61F06D7</S>
+      <S N="ImportantInfoUrl">http://www.dell.com/support/home/us/en/04/Drivers/DriversDetails?driverId=CFNW9</S>
+      <S N="HashMD5">E219006CAB8CA31FC8781FE40A51E965</S>
     </MS>
   </Obj>
   <Obj RefId="556">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
-      <S N="ReleaseDate">23.01.24</S>
+      <S N="ReleaseDate">23.03.02</S>
       <S N="Manufacturer">Dell</S>
-      <S N="Name">Dell Precision 3571 Win10 A06</S>
-      <S N="DellVersion">A06</S>
-      <S N="Url">http://downloads.dell.com/FOLDER09499563M/1/Precision-3571-WF66P_Win10_1.0_A06.exe</S>
+      <S N="Name">Dell Precision 3571 Win10 A07</S>
+      <S N="DellVersion">A07</S>
+      <S N="Url">http://downloads.dell.com/FOLDER09645341M/1/Precision-3571-HRWM3_Win10_1.0_A07.exe</S>
       <S N="VendorVersion">1.0</S>
-      <S N="FileName">Precision-3571-WF66P_Win10_1.0_A06.exe</S>
-      <S N="SizeMB">2986.08</S>
-      <S N="ReleaseID">WF66P</S>
+      <S N="FileName">Precision-3571-HRWM3_Win10_1.0_A07.exe</S>
+      <S N="SizeMB">2307.09</S>
+      <S N="ReleaseID">HRWM3</S>
       <S N="Brand">Precision</S>
       <S N="Key">11</S>
       <S N="Prefix">PRE</S>
@@ -13221,25 +13221,25 @@
       <S N="minorVersion">0</S>
       <S N="spMajorVersion">0</S>
       <S N="spMinorVersion">0</S>
-      <S N="ImportantInfoUrl">http://www.dell.com/support/home/us/en/04/Drivers/DriversDetails?driverId=WF66P</S>
-      <S N="HashMD5">531D2DF84E5B5B632A77C1F19A74B323</S>
+      <S N="ImportantInfoUrl">http://www.dell.com/support/home/us/en/04/Drivers/DriversDetails?driverId=HRWM3</S>
+      <S N="HashMD5">61BE5F23F93B138346047BA2E10F964A</S>
     </MS>
   </Obj>
   <Obj RefId="557">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
-      <S N="ReleaseDate">23.01.24</S>
+      <S N="ReleaseDate">23.03.02</S>
       <S N="Manufacturer">Dell</S>
-      <S N="Name">Dell Precision 3571 Win11 A06</S>
-      <S N="DellVersion">A06</S>
-      <S N="Url">http://downloads.dell.com/FOLDER09499569M/1/Precision-3571-WR0D0_Win11_1.0_A06.exe</S>
+      <S N="Name">Dell Precision 3571 Win11 A07</S>
+      <S N="DellVersion">A07</S>
+      <S N="Url">http://downloads.dell.com/FOLDER09645353M/1/Precision-3571-14D6V_Win11_1.0_A07.exe</S>
       <S N="VendorVersion">1.0</S>
-      <S N="FileName">Precision-3571-WR0D0_Win11_1.0_A06.exe</S>
-      <S N="SizeMB">2252.82</S>
-      <S N="ReleaseID">WR0D0</S>
+      <S N="FileName">Precision-3571-14D6V_Win11_1.0_A07.exe</S>
+      <S N="SizeMB">2307.79</S>
+      <S N="ReleaseID">14D6V</S>
       <S N="Brand">Precision</S>
       <S N="Key">11</S>
       <S N="Prefix">PRE</S>
@@ -13257,14 +13257,14 @@
       <S N="minorVersion">0</S>
       <S N="spMajorVersion">0</S>
       <S N="spMinorVersion">0</S>
-      <S N="ImportantInfoUrl">http://www.dell.com/support/home/us/en/04/Drivers/DriversDetails?driverId=WR0D0</S>
-      <S N="HashMD5">0558D59662387D8D4C203B17DE4A9688</S>
+      <S N="ImportantInfoUrl">http://www.dell.com/support/home/us/en/04/Drivers/DriversDetails?driverId=14D6V</S>
+      <S N="HashMD5">B0042F948ADA19E0B7485F64D3089D09</S>
     </MS>
   </Obj>
   <Obj RefId="558">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">22.01.05</S>
@@ -13306,7 +13306,7 @@
   <Obj RefId="560">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">22.03.04</S>
@@ -13354,7 +13354,7 @@
   <Obj RefId="563">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">22.12.22</S>
@@ -13396,7 +13396,7 @@
   <Obj RefId="565">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">22.12.23</S>
@@ -13438,7 +13438,7 @@
   <Obj RefId="567">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">22.11.21</S>
@@ -13480,7 +13480,7 @@
   <Obj RefId="569">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">22.11.21</S>
@@ -13522,18 +13522,18 @@
   <Obj RefId="571">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
-      <S N="ReleaseDate">22.11.18</S>
+      <S N="ReleaseDate">23.03.08</S>
       <S N="Manufacturer">Dell</S>
-      <S N="Name">Dell Precision 3660 Tower Win10 A03</S>
-      <S N="DellVersion">A03</S>
-      <S N="Url">http://downloads.dell.com/FOLDER09202835M/1/Precision-3660-Tower-0R10V_Win10_1.0_A03.exe</S>
+      <S N="Name">Dell Precision 3660 Tower Win10 A04</S>
+      <S N="DellVersion">A04</S>
+      <S N="Url">http://downloads.dell.com/FOLDER09440931M/1/Precision-3660-Tower-TR8MY_Win10_1.0_A04.exe</S>
       <S N="VendorVersion">1.0</S>
-      <S N="FileName">Precision-3660-Tower-0R10V_Win10_1.0_A03.exe</S>
-      <S N="SizeMB">3640.72</S>
-      <S N="ReleaseID">0R10V</S>
+      <S N="FileName">Precision-3660-Tower-TR8MY_Win10_1.0_A04.exe</S>
+      <S N="SizeMB">3640.74</S>
+      <S N="ReleaseID">TR8MY</S>
       <S N="Brand">Precision</S>
       <S N="Key">11</S>
       <S N="Prefix">PRE</S>
@@ -13557,25 +13557,25 @@
       <S N="minorVersion">0</S>
       <S N="spMajorVersion">0</S>
       <S N="spMinorVersion">0</S>
-      <S N="ImportantInfoUrl">http://www.dell.com/support/home/us/en/04/Drivers/DriversDetails?driverId=0R10V</S>
-      <S N="HashMD5">A2FEFA2BFFC0766FA70F022F77312334</S>
+      <S N="ImportantInfoUrl">http://www.dell.com/support/home/us/en/04/Drivers/DriversDetails?driverId=TR8MY</S>
+      <S N="HashMD5">78BD36FA8FE0C14EC8D387D642F75B33</S>
     </MS>
   </Obj>
   <Obj RefId="573">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
-      <S N="ReleaseDate">22.11.18</S>
+      <S N="ReleaseDate">23.03.08</S>
       <S N="Manufacturer">Dell</S>
-      <S N="Name">Dell Precision 3660 Tower Win11 A02</S>
-      <S N="DellVersion">A02</S>
-      <S N="Url">http://downloads.dell.com/FOLDER09202948M/1/Precision-3660-Tower-XWRGK_Win11_1.0_A02.exe</S>
+      <S N="Name">Dell Precision 3660 Tower Win11 A03</S>
+      <S N="DellVersion">A03</S>
+      <S N="Url">http://downloads.dell.com/FOLDER09441122M/1/Precision-3660-Tower-G4JDV_Win11_1.0_A03.exe</S>
       <S N="VendorVersion">1.0</S>
-      <S N="FileName">Precision-3660-Tower-XWRGK_Win11_1.0_A02.exe</S>
-      <S N="SizeMB">3310.83</S>
-      <S N="ReleaseID">XWRGK</S>
+      <S N="FileName">Precision-3660-Tower-G4JDV_Win11_1.0_A03.exe</S>
+      <S N="SizeMB">3310.86</S>
+      <S N="ReleaseID">G4JDV</S>
       <S N="Brand">Precision</S>
       <S N="Key">11</S>
       <S N="Prefix">PRE</S>
@@ -13599,14 +13599,14 @@
       <S N="minorVersion">0</S>
       <S N="spMajorVersion">0</S>
       <S N="spMinorVersion">0</S>
-      <S N="ImportantInfoUrl">http://www.dell.com/support/home/us/en/04/Drivers/DriversDetails?driverId=XWRGK</S>
-      <S N="HashMD5">9D7F14CBD598D2DEA8E1FA04AA395A02</S>
+      <S N="ImportantInfoUrl">http://www.dell.com/support/home/us/en/04/Drivers/DriversDetails?driverId=G4JDV</S>
+      <S N="HashMD5">873E24509084D1E6FFE1DC05154288EE</S>
     </MS>
   </Obj>
   <Obj RefId="575">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">22.01.05</S>
@@ -13642,7 +13642,7 @@
   <Obj RefId="576">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">22.05.06</S>
@@ -13678,7 +13678,7 @@
   <Obj RefId="577">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">23.01.23</S>
@@ -13714,7 +13714,7 @@
   <Obj RefId="578">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">23.01.23</S>
@@ -13750,7 +13750,7 @@
   <Obj RefId="579">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">20.04.28</S>
@@ -13786,7 +13786,7 @@
   <Obj RefId="580">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">22.01.05</S>
@@ -13822,7 +13822,7 @@
   <Obj RefId="581">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">22.03.04</S>
@@ -13858,7 +13858,7 @@
   <Obj RefId="582">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">21.07.08</S>
@@ -13894,7 +13894,7 @@
   <Obj RefId="583">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">22.01.05</S>
@@ -13930,7 +13930,7 @@
   <Obj RefId="584">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">22.05.06</S>
@@ -13966,7 +13966,7 @@
   <Obj RefId="585">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">22.10.10</S>
@@ -14002,7 +14002,7 @@
   <Obj RefId="586">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">22.10.10</S>
@@ -14038,7 +14038,7 @@
   <Obj RefId="587">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">23.01.06</S>
@@ -14074,7 +14074,7 @@
   <Obj RefId="588">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">23.01.06</S>
@@ -14110,18 +14110,18 @@
   <Obj RefId="589">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
-      <S N="ReleaseDate">23.01.24</S>
+      <S N="ReleaseDate">23.03.02</S>
       <S N="Manufacturer">Dell</S>
-      <S N="Name">Dell Precision 5570 Win10 A05</S>
-      <S N="DellVersion">A05</S>
-      <S N="Url">http://downloads.dell.com/FOLDER09501384M/1/Precision-5570-C0KV8_Win10_1.0_A05.exe</S>
+      <S N="Name">Dell Precision 5570 Win10 A06</S>
+      <S N="DellVersion">A06</S>
+      <S N="Url">http://downloads.dell.com/FOLDER09648027M/1/Precision-5570-DT8T5_Win10_1.0_A06.exe</S>
       <S N="VendorVersion">1.0</S>
-      <S N="FileName">Precision-5570-C0KV8_Win10_1.0_A05.exe</S>
-      <S N="SizeMB">2557.66</S>
-      <S N="ReleaseID">C0KV8</S>
+      <S N="FileName">Precision-5570-DT8T5_Win10_1.0_A06.exe</S>
+      <S N="SizeMB">2588.12</S>
+      <S N="ReleaseID">DT8T5</S>
       <S N="Brand">Precision</S>
       <S N="Key">11</S>
       <S N="Prefix">PRE</S>
@@ -14139,14 +14139,14 @@
       <S N="minorVersion">0</S>
       <S N="spMajorVersion">0</S>
       <S N="spMinorVersion">0</S>
-      <S N="ImportantInfoUrl">http://www.dell.com/support/home/us/en/04/Drivers/DriversDetails?driverId=C0KV8</S>
-      <S N="HashMD5">1E0AEED19277E3E4238792CB8DF9F784</S>
+      <S N="ImportantInfoUrl">http://www.dell.com/support/home/us/en/04/Drivers/DriversDetails?driverId=DT8T5</S>
+      <S N="HashMD5">D8D6514AE09BBE8B4DC86715DDAFD7EA</S>
     </MS>
   </Obj>
   <Obj RefId="590">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">23.01.24</S>
@@ -14182,7 +14182,7 @@
   <Obj RefId="591">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">20.04.14</S>
@@ -14218,7 +14218,7 @@
   <Obj RefId="592">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">22.12.22</S>
@@ -14254,7 +14254,7 @@
   <Obj RefId="593">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">22.12.22</S>
@@ -14290,18 +14290,18 @@
   <Obj RefId="594">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
-      <S N="ReleaseDate">23.01.23</S>
+      <S N="ReleaseDate">23.03.02</S>
       <S N="Manufacturer">Dell</S>
-      <S N="Name">Dell Precision 5760 Win10 A07</S>
-      <S N="DellVersion">A07</S>
-      <S N="Url">http://downloads.dell.com/FOLDER09478527M/1/Precision-5760-1P5CT_Win10_1.0_A07.exe</S>
+      <S N="Name">Dell Precision 5760 Win10 A08</S>
+      <S N="DellVersion">A08</S>
+      <S N="Url">http://downloads.dell.com/FOLDER09646658M/1/Precision-5760-XTWNC_Win10_1.0_A08.exe</S>
       <S N="VendorVersion">1.0</S>
-      <S N="FileName">Precision-5760-1P5CT_Win10_1.0_A07.exe</S>
-      <S N="SizeMB">2055.31</S>
-      <S N="ReleaseID">1P5CT</S>
+      <S N="FileName">Precision-5760-XTWNC_Win10_1.0_A08.exe</S>
+      <S N="SizeMB">2057.11</S>
+      <S N="ReleaseID">XTWNC</S>
       <S N="Brand">Precision</S>
       <S N="Key">11</S>
       <S N="Prefix">PRE</S>
@@ -14319,25 +14319,25 @@
       <S N="minorVersion">0</S>
       <S N="spMajorVersion">0</S>
       <S N="spMinorVersion">0</S>
-      <S N="ImportantInfoUrl">http://www.dell.com/support/home/us/en/04/Drivers/DriversDetails?driverId=1P5CT</S>
-      <S N="HashMD5">921DD960C5FD5F7D85E932DCDAB0D201</S>
+      <S N="ImportantInfoUrl">http://www.dell.com/support/home/us/en/04/Drivers/DriversDetails?driverId=XTWNC</S>
+      <S N="HashMD5">6B446F9E1B844C29253BFE0E3B9C3DB7</S>
     </MS>
   </Obj>
   <Obj RefId="595">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
-      <S N="ReleaseDate">23.01.23</S>
+      <S N="ReleaseDate">23.03.02</S>
       <S N="Manufacturer">Dell</S>
-      <S N="Name">Dell Precision 5760 Win11 A04</S>
-      <S N="DellVersion">A04</S>
-      <S N="Url">http://downloads.dell.com/FOLDER09478658M/1/Precision-5760-YH8HM_Win11_1.0_A04.exe</S>
+      <S N="Name">Dell Precision 5760 Win11 A05</S>
+      <S N="DellVersion">A05</S>
+      <S N="Url">http://downloads.dell.com/FOLDER09646677M/1/Precision-5760-26TT2_Win11_1.0_A05.exe</S>
       <S N="VendorVersion">1.0</S>
-      <S N="FileName">Precision-5760-YH8HM_Win11_1.0_A04.exe</S>
-      <S N="SizeMB">2055.79</S>
-      <S N="ReleaseID">YH8HM</S>
+      <S N="FileName">Precision-5760-26TT2_Win11_1.0_A05.exe</S>
+      <S N="SizeMB">2057.66</S>
+      <S N="ReleaseID">26TT2</S>
       <S N="Brand">Precision</S>
       <S N="Key">11</S>
       <S N="Prefix">PRE</S>
@@ -14355,14 +14355,14 @@
       <S N="minorVersion">0</S>
       <S N="spMajorVersion">0</S>
       <S N="spMinorVersion">0</S>
-      <S N="ImportantInfoUrl">http://www.dell.com/support/home/us/en/04/Drivers/DriversDetails?driverId=YH8HM</S>
-      <S N="HashMD5">70C6A9CDC1E12D2B6BC4545804F7ADAF</S>
+      <S N="ImportantInfoUrl">http://www.dell.com/support/home/us/en/04/Drivers/DriversDetails?driverId=26TT2</S>
+      <S N="HashMD5">6EB48F092B2F5EBBF14498CB4F4F9373</S>
     </MS>
   </Obj>
   <Obj RefId="596">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">23.01.23</S>
@@ -14404,7 +14404,7 @@
   <Obj RefId="598">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">23.01.23</S>
@@ -14446,7 +14446,7 @@
   <Obj RefId="600">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">22.12.22</S>
@@ -14494,7 +14494,7 @@
   <Obj RefId="603">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">22.12.22</S>
@@ -14542,7 +14542,7 @@
   <Obj RefId="606">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">20.09.18</S>
@@ -14578,7 +14578,7 @@
   <Obj RefId="607">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">20.09.18</S>
@@ -14614,7 +14614,7 @@
   <Obj RefId="608">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">21.08.19</S>
@@ -14650,7 +14650,7 @@
   <Obj RefId="609">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">22.03.04</S>
@@ -14686,7 +14686,7 @@
   <Obj RefId="610">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">23.02.10</S>
@@ -14722,7 +14722,7 @@
   <Obj RefId="611">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">22.12.07</S>
@@ -14758,7 +14758,7 @@
   <Obj RefId="612">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">22.12.07</S>
@@ -14794,7 +14794,7 @@
   <Obj RefId="613">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">23.01.23</S>
@@ -14830,7 +14830,7 @@
   <Obj RefId="614">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">23.01.23</S>
@@ -14866,18 +14866,18 @@
   <Obj RefId="615">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
-      <Nil N="Status" />
+      <S N="CatalogVersion">23.03.01</S>
+      <S N="Status">Failed</S>
       <S N="Component">DriverPack</S>
-      <S N="ReleaseDate">22.12.07</S>
+      <S N="ReleaseDate">23.03.06</S>
       <S N="Manufacturer">Dell</S>
-      <S N="Name">Dell Precision 7670 Win10 A03</S>
-      <S N="DellVersion">A03</S>
-      <S N="Url">http://downloads.dell.com/FOLDER09166835M/1/Precision-7670-NP37V_Win10_1.0_A03.exe</S>
+      <S N="Name">Dell Precision 7670 Win10 A04</S>
+      <S N="DellVersion">A04</S>
+      <S N="Url">http://downloads.dell.com/FOLDER09666810M/1/Precision-7670-N43DN_Win10_1.0_A04.exe</S>
       <S N="VendorVersion">1.0</S>
-      <S N="FileName">Precision-7670-NP37V_Win10_1.0_A03.exe</S>
-      <S N="SizeMB">2149.57</S>
-      <S N="ReleaseID">NP37V</S>
+      <S N="FileName">Precision-7670-N43DN_Win10_1.0_A04.exe</S>
+      <S N="SizeMB">2910.67</S>
+      <S N="ReleaseID">N43DN</S>
       <S N="Brand">Precision</S>
       <S N="Key">11</S>
       <S N="Prefix">PRE</S>
@@ -14895,25 +14895,25 @@
       <S N="minorVersion">0</S>
       <S N="spMajorVersion">0</S>
       <S N="spMinorVersion">0</S>
-      <S N="ImportantInfoUrl">http://www.dell.com/support/home/us/en/04/Drivers/DriversDetails?driverId=NP37V</S>
-      <S N="HashMD5">10F1760EC88C674FDFBCD5D73DD29176</S>
+      <S N="ImportantInfoUrl">http://www.dell.com/support/home/us/en/04/Drivers/DriversDetails?driverId=N43DN</S>
+      <S N="HashMD5">E696EA175C57CA215E013D8CD87539F3</S>
     </MS>
   </Obj>
   <Obj RefId="616">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
-      <Nil N="Status" />
+      <S N="CatalogVersion">23.03.01</S>
+      <S N="Status">Failed</S>
       <S N="Component">DriverPack</S>
-      <S N="ReleaseDate">22.12.07</S>
+      <S N="ReleaseDate">23.03.06</S>
       <S N="Manufacturer">Dell</S>
-      <S N="Name">Dell Precision 7670 Win11 A02</S>
-      <S N="DellVersion">A02</S>
-      <S N="Url">http://downloads.dell.com/FOLDER09166896M/1/Precision-7670-WNKKD_Win11_1.0_A02.exe</S>
+      <S N="Name">Dell Precision 7670 Win11 A03</S>
+      <S N="DellVersion">A03</S>
+      <S N="Url">http://downloads.dell.com/FOLDER09666854M/1/Precision-7670-GW0M0_Win11_1.0_A03.exe</S>
       <S N="VendorVersion">1.0</S>
-      <S N="FileName">Precision-7670-WNKKD_Win11_1.0_A02.exe</S>
-      <S N="SizeMB">2016.62</S>
-      <S N="ReleaseID">WNKKD</S>
+      <S N="FileName">Precision-7670-GW0M0_Win11_1.0_A03.exe</S>
+      <S N="SizeMB">2049.32</S>
+      <S N="ReleaseID">GW0M0</S>
       <S N="Brand">Precision</S>
       <S N="Key">11</S>
       <S N="Prefix">PRE</S>
@@ -14931,14 +14931,14 @@
       <S N="minorVersion">0</S>
       <S N="spMajorVersion">0</S>
       <S N="spMinorVersion">0</S>
-      <S N="ImportantInfoUrl">http://www.dell.com/support/home/us/en/04/Drivers/DriversDetails?driverId=WNKKD</S>
-      <S N="HashMD5">6D9F882A2CE6B57C51790B4FB9B32F2B</S>
+      <S N="ImportantInfoUrl">http://www.dell.com/support/home/us/en/04/Drivers/DriversDetails?driverId=GW0M0</S>
+      <S N="HashMD5">3149C0413A7671D9556F233601095B20</S>
     </MS>
   </Obj>
   <Obj RefId="617">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">18.09.07</S>
@@ -14974,7 +14974,7 @@
   <Obj RefId="618">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">20.05.26</S>
@@ -15010,7 +15010,7 @@
   <Obj RefId="619">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">21.08.19</S>
@@ -15046,7 +15046,7 @@
   <Obj RefId="620">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">22.03.04</S>
@@ -15082,7 +15082,7 @@
   <Obj RefId="621">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">23.02.10</S>
@@ -15118,7 +15118,7 @@
   <Obj RefId="622">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">22.12.07</S>
@@ -15154,7 +15154,7 @@
   <Obj RefId="623">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">22.12.07</S>
@@ -15190,7 +15190,7 @@
   <Obj RefId="624">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">23.01.23</S>
@@ -15226,7 +15226,7 @@
   <Obj RefId="625">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">23.01.23</S>
@@ -15262,18 +15262,18 @@
   <Obj RefId="626">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
-      <Nil N="Status" />
+      <S N="CatalogVersion">23.03.01</S>
+      <S N="Status">Failed</S>
       <S N="Component">DriverPack</S>
-      <S N="ReleaseDate">22.12.07</S>
+      <S N="ReleaseDate">23.03.06</S>
       <S N="Manufacturer">Dell</S>
-      <S N="Name">Dell Precision 7770 Win10 A03</S>
-      <S N="DellVersion">A03</S>
-      <S N="Url">http://downloads.dell.com/FOLDER09192999M/1/Precision-7770-CYFTH_Win10_1.0_A03.exe</S>
+      <S N="Name">Dell Precision 7770 Win10 A04</S>
+      <S N="DellVersion">A04</S>
+      <S N="Url">http://downloads.dell.com/FOLDER09666725M/1/Precision-7770-WR3GH_Win10_1.0_A04.exe</S>
       <S N="VendorVersion">1.0</S>
-      <S N="FileName">Precision-7770-CYFTH_Win10_1.0_A03.exe</S>
-      <S N="SizeMB">2151.53</S>
-      <S N="ReleaseID">CYFTH</S>
+      <S N="FileName">Precision-7770-WR3GH_Win10_1.0_A04.exe</S>
+      <S N="SizeMB">2178.59</S>
+      <S N="ReleaseID">WR3GH</S>
       <S N="Brand">Precision</S>
       <S N="Key">11</S>
       <S N="Prefix">PRE</S>
@@ -15291,25 +15291,25 @@
       <S N="minorVersion">0</S>
       <S N="spMajorVersion">0</S>
       <S N="spMinorVersion">0</S>
-      <S N="ImportantInfoUrl">http://www.dell.com/support/home/us/en/04/Drivers/DriversDetails?driverId=CYFTH</S>
-      <S N="HashMD5">1E0A45FF89866650CC0441D409707F2D</S>
+      <S N="ImportantInfoUrl">http://www.dell.com/support/home/us/en/04/Drivers/DriversDetails?driverId=WR3GH</S>
+      <S N="HashMD5">D8751F8A783EA6C5498F967DEC23B982</S>
     </MS>
   </Obj>
   <Obj RefId="627">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
-      <Nil N="Status" />
+      <S N="CatalogVersion">23.03.01</S>
+      <S N="Status">Failed</S>
       <S N="Component">DriverPack</S>
-      <S N="ReleaseDate">22.12.07</S>
+      <S N="ReleaseDate">23.03.06</S>
       <S N="Manufacturer">Dell</S>
-      <S N="Name">Dell Precision 7770 Win11 A02</S>
-      <S N="DellVersion">A02</S>
-      <S N="Url">http://downloads.dell.com/FOLDER09193196M/1/Precision-7770-W5N4M_Win11_1.0_A02.exe</S>
+      <S N="Name">Dell Precision 7770 Win11 A03</S>
+      <S N="DellVersion">A03</S>
+      <S N="Url">http://downloads.dell.com/FOLDER09666757M/1/Precision-7770-XV8GD_Win11_1.0_A03.exe</S>
       <S N="VendorVersion">1.0</S>
-      <S N="FileName">Precision-7770-W5N4M_Win11_1.0_A02.exe</S>
-      <S N="SizeMB">2018.50</S>
-      <S N="ReleaseID">W5N4M</S>
+      <S N="FileName">Precision-7770-XV8GD_Win11_1.0_A03.exe</S>
+      <S N="SizeMB">2051.20</S>
+      <S N="ReleaseID">XV8GD</S>
       <S N="Brand">Precision</S>
       <S N="Key">11</S>
       <S N="Prefix">PRE</S>
@@ -15327,14 +15327,14 @@
       <S N="minorVersion">0</S>
       <S N="spMajorVersion">0</S>
       <S N="spMinorVersion">0</S>
-      <S N="ImportantInfoUrl">http://www.dell.com/support/home/us/en/04/Drivers/DriversDetails?driverId=W5N4M</S>
-      <S N="HashMD5">D333861CFE175C0299A32DCA696CF1E5</S>
+      <S N="ImportantInfoUrl">http://www.dell.com/support/home/us/en/04/Drivers/DriversDetails?driverId=XV8GD</S>
+      <S N="HashMD5">E781E7894AFB27EDBFCEEC9F5126BC86</S>
     </MS>
   </Obj>
   <Obj RefId="628">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">22.12.22</S>
@@ -15370,7 +15370,7 @@
   <Obj RefId="629">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">22.12.22</S>
@@ -15406,7 +15406,7 @@
   <Obj RefId="630">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">22.09.22</S>
@@ -15442,7 +15442,7 @@
   <Obj RefId="631">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">22.09.22</S>
@@ -15478,7 +15478,7 @@
   <Obj RefId="632">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">22.07.22</S>
@@ -15514,7 +15514,7 @@
   <Obj RefId="633">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">22.05.06</S>
@@ -15550,7 +15550,7 @@
   <Obj RefId="634">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">22.12.22</S>
@@ -15586,7 +15586,7 @@
   <Obj RefId="635">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">22.12.22</S>
@@ -15622,7 +15622,7 @@
   <Obj RefId="636">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">17.01.10</S>
@@ -15670,7 +15670,7 @@
   <Obj RefId="639">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">18.04.17</S>
@@ -15706,7 +15706,7 @@
   <Obj RefId="640">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">16.04.14</S>
@@ -15754,7 +15754,7 @@
   <Obj RefId="643">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">16.11.22</S>
@@ -15802,7 +15802,7 @@
   <Obj RefId="646">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">16.04.15</S>
@@ -15850,7 +15850,7 @@
   <Obj RefId="649">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">17.01.10</S>
@@ -15898,7 +15898,7 @@
   <Obj RefId="652">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">16.03.07</S>
@@ -15946,7 +15946,7 @@
   <Obj RefId="655">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">18.04.10</S>
@@ -15994,7 +15994,7 @@
   <Obj RefId="658">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">17.10.10</S>
@@ -16042,7 +16042,7 @@
   <Obj RefId="661">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">16.04.14</S>
@@ -16090,7 +16090,7 @@
   <Obj RefId="664">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">18.04.10</S>
@@ -16138,7 +16138,7 @@
   <Obj RefId="667">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">16.03.07</S>
@@ -16186,7 +16186,7 @@
   <Obj RefId="670">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">18.04.16</S>
@@ -16234,7 +16234,7 @@
   <Obj RefId="673">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">16.03.07</S>
@@ -16282,7 +16282,7 @@
   <Obj RefId="676">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">18.04.16</S>
@@ -16330,7 +16330,7 @@
   <Obj RefId="679">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">16.03.07</S>
@@ -16378,7 +16378,7 @@
   <Obj RefId="682">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">18.04.10</S>
@@ -16426,7 +16426,7 @@
   <Obj RefId="685">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">19.03.12</S>
@@ -16462,7 +16462,7 @@
   <Obj RefId="686">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">19.03.12</S>
@@ -16498,7 +16498,7 @@
   <Obj RefId="687">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">18.03.27</S>
@@ -16546,7 +16546,7 @@
   <Obj RefId="690">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">18.03.27</S>
@@ -16594,7 +16594,7 @@
   <Obj RefId="693">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">18.03.27</S>
@@ -16642,7 +16642,7 @@
   <Obj RefId="696">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">16.06.14</S>
@@ -16696,7 +16696,7 @@
   <Obj RefId="700">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">19.02.12</S>
@@ -16732,7 +16732,7 @@
   <Obj RefId="701">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">19.02.12</S>
@@ -16768,7 +16768,7 @@
   <Obj RefId="702">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">18.04.10</S>
@@ -16816,7 +16816,7 @@
   <Obj RefId="705">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">18.03.27</S>
@@ -16852,7 +16852,7 @@
   <Obj RefId="706">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">16.06.14</S>
@@ -16888,7 +16888,7 @@
   <Obj RefId="707">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">19.02.12</S>
@@ -16924,7 +16924,7 @@
   <Obj RefId="708">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">23.02.09</S>
@@ -16966,7 +16966,7 @@
   <Obj RefId="710">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">23.02.09</S>
@@ -17008,7 +17008,7 @@
   <Obj RefId="712">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">22.12.07</S>
@@ -17044,7 +17044,7 @@
   <Obj RefId="713">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">22.12.07</S>
@@ -17080,7 +17080,7 @@
   <Obj RefId="714">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">22.12.07</S>
@@ -17116,7 +17116,7 @@
   <Obj RefId="715">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">22.12.07</S>
@@ -17152,7 +17152,7 @@
   <Obj RefId="716">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">23.01.24</S>
@@ -17188,7 +17188,7 @@
   <Obj RefId="717">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">23.01.24</S>
@@ -17224,18 +17224,18 @@
   <Obj RefId="718">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
-      <S N="ReleaseDate">23.01.06</S>
+      <S N="ReleaseDate">23.03.06</S>
       <S N="Manufacturer">Dell</S>
-      <S N="Name">Dell XPS 13 9315 2-in-1 Win11 A02</S>
-      <S N="DellVersion">A02</S>
-      <S N="Url">http://downloads.dell.com/FOLDER09295507M/1/XPS-13-9315-2-in-1-62GNV_Win11_1.0_A02.exe</S>
+      <S N="Name">Dell XPS 13 9315 2-in-1 Win11 A03</S>
+      <S N="DellVersion">A03</S>
+      <S N="Url">http://downloads.dell.com/FOLDER09674022M/1/XPS-13-9315-2-in-1-2YW0D_Win11_1.0_A03.exe</S>
       <S N="VendorVersion">1.0</S>
-      <S N="FileName">XPS-13-9315-2-in-1-62GNV_Win11_1.0_A02.exe</S>
-      <S N="SizeMB">1241.00</S>
-      <S N="ReleaseID">62GNV</S>
+      <S N="FileName">XPS-13-9315-2-in-1-2YW0D_Win11_1.0_A03.exe</S>
+      <S N="SizeMB">1360.30</S>
+      <S N="ReleaseID">2YW0D</S>
       <S N="Brand">XPS Notebook</S>
       <S N="Key">72</S>
       <S N="Prefix">XPSNOTEBOOK</S>
@@ -17259,14 +17259,14 @@
       <S N="minorVersion">0</S>
       <S N="spMajorVersion">0</S>
       <S N="spMinorVersion">0</S>
-      <S N="ImportantInfoUrl">http://www.dell.com/support/home/us/en/04/Drivers/DriversDetails?driverId=62GNV</S>
-      <S N="HashMD5">AC2820DD05AAA01B4226EEE2C642988E</S>
+      <S N="ImportantInfoUrl">http://www.dell.com/support/home/us/en/04/Drivers/DriversDetails?driverId=2YW0D</S>
+      <S N="HashMD5">9E0285F7798B580DACBB2FA5C5E03A4B</S>
     </MS>
   </Obj>
   <Obj RefId="720">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">22.11.18</S>
@@ -17308,7 +17308,7 @@
   <Obj RefId="722">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">22.11.18</S>
@@ -17350,7 +17350,7 @@
   <Obj RefId="724">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">18.03.27</S>
@@ -17386,7 +17386,7 @@
   <Obj RefId="725">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">19.06.11</S>
@@ -17422,7 +17422,7 @@
   <Obj RefId="726">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">20.04.28</S>
@@ -17470,7 +17470,7 @@
   <Obj RefId="729">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">20.04.28</S>
@@ -17506,7 +17506,7 @@
   <Obj RefId="730">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">20.04.28</S>
@@ -17542,7 +17542,7 @@
   <Obj RefId="731">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">22.01.05</S>
@@ -17578,7 +17578,7 @@
   <Obj RefId="732">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">21.10.11</S>
@@ -17614,7 +17614,7 @@
   <Obj RefId="733">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">22.01.05</S>
@@ -17650,7 +17650,7 @@
   <Obj RefId="734">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">21.10.11</S>
@@ -17686,7 +17686,7 @@
   <Obj RefId="735">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">22.10.10</S>
@@ -17722,7 +17722,7 @@
   <Obj RefId="736">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">22.10.10</S>
@@ -17758,18 +17758,18 @@
   <Obj RefId="737">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
-      <S N="ReleaseDate">23.02.09</S>
+      <S N="ReleaseDate">23.03.02</S>
       <S N="Manufacturer">Dell</S>
-      <S N="Name">Dell XPS 15 9510 Win10 A10</S>
-      <S N="DellVersion">A10</S>
-      <S N="Url">http://downloads.dell.com/FOLDER09505966M/1/9510-G131V_Win10_1.0_A10.exe</S>
+      <S N="Name">Dell XPS 15 9510 Win10 A11</S>
+      <S N="DellVersion">A11</S>
+      <S N="Url">http://downloads.dell.com/FOLDER09645932M/1/9510-M1TT5_Win10_1.0_A11.exe</S>
       <S N="VendorVersion">1.0</S>
-      <S N="FileName">9510-G131V_Win10_1.0_A10.exe</S>
-      <S N="SizeMB">2624.89</S>
-      <S N="ReleaseID">G131V</S>
+      <S N="FileName">9510-M1TT5_Win10_1.0_A11.exe</S>
+      <S N="SizeMB">2651.41</S>
+      <S N="ReleaseID">M1TT5</S>
       <S N="Brand">XPS Notebook</S>
       <S N="Key">72</S>
       <S N="Prefix">XPSNOTEBOOK</S>
@@ -17787,25 +17787,25 @@
       <S N="minorVersion">0</S>
       <S N="spMajorVersion">0</S>
       <S N="spMinorVersion">0</S>
-      <S N="ImportantInfoUrl">http://www.dell.com/support/home/us/en/04/Drivers/DriversDetails?driverId=G131V</S>
-      <S N="HashMD5">93B01760EED7C49823CF1275C83A2403</S>
+      <S N="ImportantInfoUrl">http://www.dell.com/support/home/us/en/04/Drivers/DriversDetails?driverId=M1TT5</S>
+      <S N="HashMD5">E96ECBF25ACE7185692152102EB0D6FB</S>
     </MS>
   </Obj>
   <Obj RefId="738">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
-      <S N="ReleaseDate">23.02.09</S>
+      <S N="ReleaseDate">23.03.02</S>
       <S N="Manufacturer">Dell</S>
-      <S N="Name">Dell XPS 15 9510 Win11 A07</S>
-      <S N="DellVersion">A07</S>
-      <S N="Url">http://downloads.dell.com/FOLDER09505969M/1/9510-T2N7X_Win11_1.0_A07.exe</S>
+      <S N="Name">Dell XPS 15 9510 Win11 A08</S>
+      <S N="DellVersion">A08</S>
+      <S N="Url">http://downloads.dell.com/FOLDER09645917M/1/9510-K1DJG_Win11_1.0_A08.exe</S>
       <S N="VendorVersion">1.0</S>
-      <S N="FileName">9510-T2N7X_Win11_1.0_A07.exe</S>
-      <S N="SizeMB">2625.11</S>
-      <S N="ReleaseID">T2N7X</S>
+      <S N="FileName">9510-K1DJG_Win11_1.0_A08.exe</S>
+      <S N="SizeMB">2651.63</S>
+      <S N="ReleaseID">K1DJG</S>
       <S N="Brand">XPS Notebook</S>
       <S N="Key">72</S>
       <S N="Prefix">XPSNOTEBOOK</S>
@@ -17823,25 +17823,25 @@
       <S N="minorVersion">0</S>
       <S N="spMajorVersion">0</S>
       <S N="spMinorVersion">0</S>
-      <S N="ImportantInfoUrl">http://www.dell.com/support/home/us/en/04/Drivers/DriversDetails?driverId=T2N7X</S>
-      <S N="HashMD5">B41A5BBF25968E0845B1EFFFC6C803BB</S>
+      <S N="ImportantInfoUrl">http://www.dell.com/support/home/us/en/04/Drivers/DriversDetails?driverId=K1DJG</S>
+      <S N="HashMD5">EF21802FCF7D55207D668DCA4DFBB03E</S>
     </MS>
   </Obj>
   <Obj RefId="739">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
-      <S N="ReleaseDate">22.11.21</S>
+      <S N="ReleaseDate">23.03.02</S>
       <S N="Manufacturer">Dell</S>
-      <S N="Name">Dell XPS 15 9520 Win11 A04</S>
-      <S N="DellVersion">A04</S>
-      <S N="Url">http://downloads.dell.com/FOLDER09231371M/1/9520-D77NX_Win11_1.0_A04.exe</S>
+      <S N="Name">Dell XPS 15 9520 Win11 A05</S>
+      <S N="DellVersion">A05</S>
+      <S N="Url">http://downloads.dell.com/FOLDER09645260M/1/9520-YJFP3_Win11_1.0_A05.exe</S>
       <S N="VendorVersion">1.0</S>
-      <S N="FileName">9520-D77NX_Win11_1.0_A04.exe</S>
-      <S N="SizeMB">2031.23</S>
-      <S N="ReleaseID">D77NX</S>
+      <S N="FileName">9520-YJFP3_Win11_1.0_A05.exe</S>
+      <S N="SizeMB">2579.72</S>
+      <S N="ReleaseID">YJFP3</S>
       <S N="Brand">XPS Notebook</S>
       <S N="Key">72</S>
       <S N="Prefix">XPSNOTEBOOK</S>
@@ -17859,14 +17859,14 @@
       <S N="minorVersion">0</S>
       <S N="spMajorVersion">0</S>
       <S N="spMinorVersion">0</S>
-      <S N="ImportantInfoUrl">http://www.dell.com/support/home/us/en/04/Drivers/DriversDetails?driverId=D77NX</S>
-      <S N="HashMD5">23E066126D7ABFD046BA6BAA3B33CB84</S>
+      <S N="ImportantInfoUrl">http://www.dell.com/support/home/us/en/04/Drivers/DriversDetails?driverId=YJFP3</S>
+      <S N="HashMD5">9554A0A1CBF2886F1668C4B2AD57AD48</S>
     </MS>
   </Obj>
   <Obj RefId="740">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">19.02.12</S>
@@ -17902,7 +17902,7 @@
   <Obj RefId="741">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">20.04.28</S>
@@ -17938,7 +17938,7 @@
   <Obj RefId="742">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">21.07.08</S>
@@ -17974,7 +17974,7 @@
   <Obj RefId="743">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">20.04.28</S>
@@ -18010,7 +18010,7 @@
   <Obj RefId="744">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">22.06.27</S>
@@ -18046,7 +18046,7 @@
   <Obj RefId="745">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">22.05.06</S>
@@ -18082,18 +18082,18 @@
   <Obj RefId="746">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
-      <S N="ReleaseDate">23.01.23</S>
+      <S N="ReleaseDate">23.03.02</S>
       <S N="Manufacturer">Dell</S>
-      <S N="Name">Dell XPS 17 9710 Win10 A08</S>
-      <S N="DellVersion">A08</S>
-      <S N="Url">http://downloads.dell.com/FOLDER09484352M/1/9710-RV43C_Win10_1.0_A08.exe</S>
+      <S N="Name">Dell XPS 17 9710 Win10 A09</S>
+      <S N="DellVersion">A09</S>
+      <S N="Url">http://downloads.dell.com/FOLDER09646349M/1/9710-5946K_Win10_1.0_A09.exe</S>
       <S N="VendorVersion">1.0</S>
-      <S N="FileName">9710-RV43C_Win10_1.0_A08.exe</S>
-      <S N="SizeMB">2055.52</S>
-      <S N="ReleaseID">RV43C</S>
+      <S N="FileName">9710-5946K_Win10_1.0_A09.exe</S>
+      <S N="SizeMB">2057.32</S>
+      <S N="ReleaseID">5946K</S>
       <S N="Brand">XPS Notebook</S>
       <S N="Key">72</S>
       <S N="Prefix">XPSNOTEBOOK</S>
@@ -18111,25 +18111,25 @@
       <S N="minorVersion">0</S>
       <S N="spMajorVersion">0</S>
       <S N="spMinorVersion">0</S>
-      <S N="ImportantInfoUrl">http://www.dell.com/support/home/us/en/04/Drivers/DriversDetails?driverId=RV43C</S>
-      <S N="HashMD5">2F1342E1FA6C2681553C055F325CF3E6</S>
+      <S N="ImportantInfoUrl">http://www.dell.com/support/home/us/en/04/Drivers/DriversDetails?driverId=5946K</S>
+      <S N="HashMD5">84208BFC0B7CF27B41B98342D2A81FAB</S>
     </MS>
   </Obj>
   <Obj RefId="747">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
-      <S N="ReleaseDate">23.01.23</S>
+      <S N="ReleaseDate">23.03.02</S>
       <S N="Manufacturer">Dell</S>
-      <S N="Name">Dell XPS 17 9710 Win11 A06</S>
-      <S N="DellVersion">A06</S>
-      <S N="Url">http://downloads.dell.com/FOLDER09489767M/1/9710-343VV_Win11_1.0_A06.exe</S>
+      <S N="Name">Dell XPS 17 9710 Win11 A07</S>
+      <S N="DellVersion">A07</S>
+      <S N="Url">http://downloads.dell.com/FOLDER09646377M/1/9710-0Y8FW_Win11_1.0_A07.exe</S>
       <S N="VendorVersion">1.0</S>
-      <S N="FileName">9710-343VV_Win11_1.0_A06.exe</S>
-      <S N="SizeMB">2056.01</S>
-      <S N="ReleaseID">343VV</S>
+      <S N="FileName">9710-0Y8FW_Win11_1.0_A07.exe</S>
+      <S N="SizeMB">2057.81</S>
+      <S N="ReleaseID">0Y8FW</S>
       <S N="Brand">XPS Notebook</S>
       <S N="Key">72</S>
       <S N="Prefix">XPSNOTEBOOK</S>
@@ -18147,14 +18147,14 @@
       <S N="minorVersion">0</S>
       <S N="spMajorVersion">0</S>
       <S N="spMinorVersion">0</S>
-      <S N="ImportantInfoUrl">http://www.dell.com/support/home/us/en/04/Drivers/DriversDetails?driverId=343VV</S>
-      <S N="HashMD5">B059B0F6C932A923C55E981C888EADEF</S>
+      <S N="ImportantInfoUrl">http://www.dell.com/support/home/us/en/04/Drivers/DriversDetails?driverId=0Y8FW</S>
+      <S N="HashMD5">5B437BEB1FB0B4CD2B46C8ACC24F6CF4</S>
     </MS>
   </Obj>
   <Obj RefId="748">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">23.01.23</S>
@@ -18196,7 +18196,7 @@
   <Obj RefId="750">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">22.07.07</S>
@@ -18232,7 +18232,7 @@
   <Obj RefId="751">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">21.10.11</S>
@@ -18268,7 +18268,7 @@
   <Obj RefId="752">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
       <S N="ReleaseDate">23.01.23</S>
@@ -18304,18 +18304,18 @@
   <Obj RefId="753">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
-      <S N="ReleaseDate">22.11.21</S>
+      <S N="ReleaseDate">23.03.03</S>
       <S N="Manufacturer">Dell</S>
-      <S N="Name">Dell XPS Notebook 9310 Win10 A12</S>
-      <S N="DellVersion">A12</S>
-      <S N="Url">http://downloads.dell.com/FOLDER09232072M/1/9310-Y7DPD_Win10_1.0_A12.exe</S>
+      <S N="Name">Dell XPS Notebook 9310 Win10 A13</S>
+      <S N="DellVersion">A13</S>
+      <S N="Url">http://downloads.dell.com/FOLDER09662821M/1/9310-PCV5T_Win10_1.0_A13.exe</S>
       <S N="VendorVersion">1.0</S>
-      <S N="FileName">9310-Y7DPD_Win10_1.0_A12.exe</S>
-      <S N="SizeMB">2229.12</S>
-      <S N="ReleaseID">Y7DPD</S>
+      <S N="FileName">9310-PCV5T_Win10_1.0_A13.exe</S>
+      <S N="SizeMB">2197.87</S>
+      <S N="ReleaseID">PCV5T</S>
       <S N="Brand">XPS Notebook</S>
       <S N="Key">72</S>
       <S N="Prefix">XPSNOTEBOOK</S>
@@ -18340,25 +18340,25 @@
       <S N="minorVersion">0</S>
       <S N="spMajorVersion">0</S>
       <S N="spMinorVersion">0</S>
-      <S N="ImportantInfoUrl">http://www.dell.com/support/home/us/en/04/Drivers/DriversDetails?driverId=Y7DPD</S>
-      <S N="HashMD5">F0E01CB661972ED7D2FDE07B26BD44AA</S>
+      <S N="ImportantInfoUrl">http://www.dell.com/support/home/us/en/04/Drivers/DriversDetails?driverId=PCV5T</S>
+      <S N="HashMD5">1162F0D3E326692E6FA57F6C88F62410</S>
     </MS>
   </Obj>
   <Obj RefId="755">
     <TNRef RefId="0" />
     <MS>
-      <S N="CatalogVersion">23.02.01</S>
+      <S N="CatalogVersion">23.03.01</S>
       <Nil N="Status" />
       <S N="Component">DriverPack</S>
-      <S N="ReleaseDate">22.11.21</S>
+      <S N="ReleaseDate">23.03.03</S>
       <S N="Manufacturer">Dell</S>
-      <S N="Name">Dell XPS Notebook 9310 Win11 A06</S>
-      <S N="DellVersion">A06</S>
-      <S N="Url">http://downloads.dell.com/FOLDER09232037M/1/9310-6PM30_Win11_1.0_A06.exe</S>
+      <S N="Name">Dell XPS Notebook 9310 Win11 A07</S>
+      <S N="DellVersion">A07</S>
+      <S N="Url">http://downloads.dell.com/FOLDER09662795M/1/9310-MJT1C_Win11_1.0_A07.exe</S>
       <S N="VendorVersion">1.0</S>
-      <S N="FileName">9310-6PM30_Win11_1.0_A06.exe</S>
-      <S N="SizeMB">2224.37</S>
-      <S N="ReleaseID">6PM30</S>
+      <S N="FileName">9310-MJT1C_Win11_1.0_A07.exe</S>
+      <S N="SizeMB">2198.70</S>
+      <S N="ReleaseID">MJT1C</S>
       <S N="Brand">XPS Notebook</S>
       <S N="Key">72</S>
       <S N="Prefix">XPSNOTEBOOK</S>
@@ -18383,8 +18383,8 @@
       <S N="minorVersion">0</S>
       <S N="spMajorVersion">0</S>
       <S N="spMinorVersion">0</S>
-      <S N="ImportantInfoUrl">http://www.dell.com/support/home/us/en/04/Drivers/DriversDetails?driverId=6PM30</S>
-      <S N="HashMD5">B5881A56BFF1CD2B098A3C5BC98885BB</S>
+      <S N="ImportantInfoUrl">http://www.dell.com/support/home/us/en/04/Drivers/DriversDetails?driverId=MJT1C</S>
+      <S N="HashMD5">ECA7B6EF61F2F6D887968A71F07C773C</S>
     </MS>
   </Obj>
 </Objs>
