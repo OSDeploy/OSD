@@ -485,7 +485,7 @@ function Set-OSDCloudGUIDefaultOptions {
     $formMainWindowControlImageNameCombobox.Items.Clear()
     $formMainWindowControlImageNameCombobox.Visibility = "Collapsed"
 
-    $formMainWindowControlImageIndexTextbox.Text = $Global:OSDCloudGUI.ImageIndex
+    $formMainWindowControlImageIndexTextbox.Text = $Global:OSDCloudGUI.OSImageIndex
     $formMainWindowControlImageIndexTextbox.IsEnabled = $false
 
     $formMainWindowControlAutopilotJsonCombobox.IsEnabled = $true
