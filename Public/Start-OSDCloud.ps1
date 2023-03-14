@@ -122,8 +122,9 @@ function Start-OSDCloud {
 
         #Images using the specified Image Index
         [Parameter(ParameterSetName = 'CustomImage')]
+        [Alias('ImageIndex')]
         [System.String]
-        $ImageIndex = 'AUTO',
+        $OSImageIndex = 'AUTO',
 
         [System.Management.Automation.SwitchParameter]
         $Preview
@@ -168,7 +169,7 @@ function Start-OSDCloud {
         OSEditionId = $null
         OSEditionMenu = $null
         OSEditionNames = $null
-        OSImageIndex = $ImageIndex
+        OSImageIndex = $OSImageIndex
         OSLanguage = $OSLanguage
         OSLanguageMenu = $null
         OSLanguageNames = $null
@@ -287,7 +288,7 @@ function Start-OSDCloud {
 
         if ($Global:StartOSDCloud.ImageFileUrl) {
             Write-Host -ForegroundColor DarkGray "ImageFileUrl: $($Global:StartOSDCloud.ImageFileUrl)"
-            Write-Host -ForegroundColor DarkGray "ImageIndex: $($Global:StartOSDCloud.OSImageIndex)"
+            Write-Host -ForegroundColor DarkGray "OSImageIndex: $($Global:StartOSDCloud.OSImageIndex)"
         }
         if ($PSBoundParameters.ContainsKey('FindImageFile')) {
             $Global:StartOSDCloud.ImageFileItem = Select-OSDCloudFileWim
