@@ -1,7 +1,7 @@
 [
     {
         "Catalog":  "Windows 10 1803",
-        "OSDVersion":  "23.2.14.1",
+        "OSDVersion":  "23.3.14.1",
         "OSDStatus":  "",
         "UpdateOS":  "Windows 10",
         "UpdateBuild":  "1803",
@@ -47,13 +47,13 @@
         "AdditionalHash":  "209 237 24 195 221 2 211 254 50 106 134 111 208 209 152 40 173 121 5 33 22 250 24 41 248 249 224 145 158 117 213 164",
         "OSDCore":  "",
         "OSDWinPE":  "",
-        "OSDGuid":  "1d0482d3-b4d3-49b7-81ab-fd7d2ff2a639",
+        "OSDGuid":  "3395ca3d-3c21-4f61-a0b9-ce2a84350946",
         "PartitionKey":  "Windows 10 1803",
-        "RowKey":  "1d0482d3-b4d3-49b7-81ab-fd7d2ff2a639"
+        "RowKey":  "3395ca3d-3c21-4f61-a0b9-ce2a84350946"
     },
     {
         "Catalog":  "Windows 10 1803",
-        "OSDVersion":  "23.2.14.1",
+        "OSDVersion":  "23.3.14.1",
         "OSDStatus":  "",
         "UpdateOS":  "Windows 10",
         "UpdateBuild":  "1803",
@@ -99,13 +99,13 @@
         "AdditionalHash":  "235 157 58 158 196 53 17 110 168 86 19 253 109 65 52 152 44 155 247 156 95 23 255 118 164 184 44 64 219 168 19 155",
         "OSDCore":  "",
         "OSDWinPE":  "",
-        "OSDGuid":  "016fa22b-64fa-443c-b53c-047f562cc6b2",
+        "OSDGuid":  "73cab6bd-e480-4227-a99e-7c58f5c81289",
         "PartitionKey":  "Windows 10 1803",
-        "RowKey":  "016fa22b-64fa-443c-b53c-047f562cc6b2"
+        "RowKey":  "73cab6bd-e480-4227-a99e-7c58f5c81289"
     },
     {
         "Catalog":  "Windows 10 1803",
-        "OSDVersion":  "23.2.14.1",
+        "OSDVersion":  "23.3.14.1",
         "OSDStatus":  "",
         "UpdateOS":  "Windows 10",
         "UpdateBuild":  "1803",
@@ -151,13 +151,13 @@
         "AdditionalHash":  "242 95 156 67 16 17 156 126 245 10 29 231 93 110 196 143 103 184 255 243 248 211 20 227 34 116 58 224 159 2 169 121",
         "OSDCore":  "",
         "OSDWinPE":  "",
-        "OSDGuid":  "a27e6cd7-42ee-4da8-a103-9006f616ce0a",
+        "OSDGuid":  "c552710d-728c-4c1d-b959-68e487a0ae29",
         "PartitionKey":  "Windows 10 1803",
-        "RowKey":  "a27e6cd7-42ee-4da8-a103-9006f616ce0a"
+        "RowKey":  "c552710d-728c-4c1d-b959-68e487a0ae29"
     },
     {
         "Catalog":  "Windows 10 1803",
-        "OSDVersion":  "23.2.14.1",
+        "OSDVersion":  "23.3.14.1",
         "OSDStatus":  "",
         "UpdateOS":  "Windows 10",
         "UpdateBuild":  "1803",
@@ -203,13 +203,13 @@
         "AdditionalHash":  "178 194 195 20 165 212 108 181 193 212 162 52 125 66 185 81 115 113 248 35 55 41 99 130 203 202 46 223 180 226 122 185",
         "OSDCore":  "",
         "OSDWinPE":  "",
-        "OSDGuid":  "8822eb68-e388-4091-a070-b792bdae94be",
+        "OSDGuid":  "bbcc2956-8ea4-4c03-97a1-41696dfc8182",
         "PartitionKey":  "Windows 10 1803",
-        "RowKey":  "8822eb68-e388-4091-a070-b792bdae94be"
+        "RowKey":  "bbcc2956-8ea4-4c03-97a1-41696dfc8182"
     },
     {
         "Catalog":  "Windows 10 1803",
-        "OSDVersion":  "23.2.14.1",
+        "OSDVersion":  "23.3.14.1",
         "OSDStatus":  "",
         "UpdateOS":  "Windows 10",
         "UpdateBuild":  "1803",
@@ -255,13 +255,13 @@
         "AdditionalHash":  "137 248 240 201 78 3 245 5 249 99 33 252 228 149 37 32 57 129 147 52 65 124 247 216 44 5 191 28 107 175 89 18",
         "OSDCore":  "",
         "OSDWinPE":  "",
-        "OSDGuid":  "5da2c0c5-1be8-4e93-b7e7-2026f027e761",
+        "OSDGuid":  "11f5be0b-fa16-4673-b562-14cfe9b14cac",
         "PartitionKey":  "Windows 10 1803",
-        "RowKey":  "5da2c0c5-1be8-4e93-b7e7-2026f027e761"
+        "RowKey":  "11f5be0b-fa16-4673-b562-14cfe9b14cac"
     },
     {
         "Catalog":  "Windows 10 1803",
-        "OSDVersion":  "23.2.14.1",
+        "OSDVersion":  "23.3.14.1",
         "OSDStatus":  "",
         "UpdateOS":  "Windows 10",
         "UpdateBuild":  "1803",
@@ -307,13 +307,13 @@
         "AdditionalHash":  "230 249 17 184 208 81 43 188 106 16 90 149 169 119 246 236 216 99 4 144 156 71 27 12 147 2 14 89 83 17 116 253",
         "OSDCore":  "",
         "OSDWinPE":  "",
-        "OSDGuid":  "45417ba8-e4fb-45a3-90d2-b3bc2fa5ab43",
+        "OSDGuid":  "18b96f67-38fe-43b1-9c02-1658758d2e7d",
         "PartitionKey":  "Windows 10 1803",
-        "RowKey":  "45417ba8-e4fb-45a3-90d2-b3bc2fa5ab43"
+        "RowKey":  "18b96f67-38fe-43b1-9c02-1658758d2e7d"
     },
     {
         "Catalog":  "Windows 10 1803",
-        "OSDVersion":  "23.2.14.1",
+        "OSDVersion":  "23.3.14.1",
         "OSDStatus":  "",
         "UpdateOS":  "Windows 10",
         "UpdateBuild":  "1803",
@@ -359,13 +359,13 @@
         "AdditionalHash":  "237 153 249 172 77 79 17 85 119 129 40 4 177 254 125 170 209 198 209 74 84 161 140 156 99 194 190 142 81 43 226 129",
         "OSDCore":  "",
         "OSDWinPE":  "",
-        "OSDGuid":  "dfefac2c-77d2-4296-8730-407e1ddfd909",
+        "OSDGuid":  "3f7ca151-8f40-456d-8b1e-4e5d8fd3b171",
         "PartitionKey":  "Windows 10 1803",
-        "RowKey":  "dfefac2c-77d2-4296-8730-407e1ddfd909"
+        "RowKey":  "3f7ca151-8f40-456d-8b1e-4e5d8fd3b171"
     },
     {
         "Catalog":  "Windows 10 1803",
-        "OSDVersion":  "23.2.14.1",
+        "OSDVersion":  "23.3.14.1",
         "OSDStatus":  "",
         "UpdateOS":  "Windows 10",
         "UpdateBuild":  "1803",
@@ -411,13 +411,13 @@
         "AdditionalHash":  "2 162 170 218 76 244 243 112 125 86 205 226 53 213 197 182 226 128 238 7 40 217 201 17 80 86 1 4 98 119 179 204",
         "OSDCore":  "",
         "OSDWinPE":  "",
-        "OSDGuid":  "aa61f2dc-9319-41c9-98f0-9484b25d299f",
+        "OSDGuid":  "898c0ca1-eca1-4f3b-9c7d-29ae99db2608",
         "PartitionKey":  "Windows 10 1803",
-        "RowKey":  "aa61f2dc-9319-41c9-98f0-9484b25d299f"
+        "RowKey":  "898c0ca1-eca1-4f3b-9c7d-29ae99db2608"
     },
     {
         "Catalog":  "Windows 10 1803",
-        "OSDVersion":  "23.2.14.1",
+        "OSDVersion":  "23.3.14.1",
         "OSDStatus":  "",
         "UpdateOS":  "Windows 10",
         "UpdateBuild":  "1803",
@@ -463,13 +463,13 @@
         "AdditionalHash":  "180 9 234 252 220 167 151 71 116 56 118 36 195 98 29 2 218 171 37 182 31 226 78 143 206 209 24 70 105 86 142 1",
         "OSDCore":  "",
         "OSDWinPE":  "",
-        "OSDGuid":  "a5b8c7b2-798d-45f7-8969-cfc1ebb34273",
+        "OSDGuid":  "a072e819-124e-4a7e-9039-c0bdaf228d75",
         "PartitionKey":  "Windows 10 1803",
-        "RowKey":  "a5b8c7b2-798d-45f7-8969-cfc1ebb34273"
+        "RowKey":  "a072e819-124e-4a7e-9039-c0bdaf228d75"
     },
     {
         "Catalog":  "Windows 10 1803",
-        "OSDVersion":  "23.2.14.1",
+        "OSDVersion":  "23.3.14.1",
         "OSDStatus":  "",
         "UpdateOS":  "Windows 10",
         "UpdateBuild":  "1803",
@@ -515,13 +515,13 @@
         "AdditionalHash":  "109 158 232 43 179 102 255 200 83 131 106 173 81 33 248 71 168 137 66 211 197 218 92 63 86 13 208 225 161 162 109 93",
         "OSDCore":  "",
         "OSDWinPE":  "",
-        "OSDGuid":  "6c4279d1-e448-4db8-9ab0-b361b47de08b",
+        "OSDGuid":  "b9e0b32e-f456-4223-9701-741513f2670a",
         "PartitionKey":  "Windows 10 1803",
-        "RowKey":  "6c4279d1-e448-4db8-9ab0-b361b47de08b"
+        "RowKey":  "b9e0b32e-f456-4223-9701-741513f2670a"
     },
     {
         "Catalog":  "Windows 10 1803",
-        "OSDVersion":  "23.2.14.1",
+        "OSDVersion":  "23.3.14.1",
         "OSDStatus":  "",
         "UpdateOS":  "Windows 10",
         "UpdateBuild":  "1803",
@@ -567,13 +567,13 @@
         "AdditionalHash":  "167 60 171 206 87 200 174 251 160 148 205 88 98 90 14 204 202 70 164 125 198 85 201 70 100 116 15 244 184 46 202 171",
         "OSDCore":  "",
         "OSDWinPE":  "",
-        "OSDGuid":  "8a32f928-d52a-4582-9bca-f8d98ffb6e93",
+        "OSDGuid":  "c56ff72a-fd28-4d84-82ec-9b34db057945",
         "PartitionKey":  "Windows 10 1803",
-        "RowKey":  "8a32f928-d52a-4582-9bca-f8d98ffb6e93"
+        "RowKey":  "c56ff72a-fd28-4d84-82ec-9b34db057945"
     },
     {
         "Catalog":  "Windows 10 1803",
-        "OSDVersion":  "23.2.14.1",
+        "OSDVersion":  "23.3.14.1",
         "OSDStatus":  "",
         "UpdateOS":  "Windows 10",
         "UpdateBuild":  "1803",
@@ -619,13 +619,13 @@
         "AdditionalHash":  "57 158 151 6 78 169 7 41 233 131 212 18 183 70 149 170 45 161 231 8 74 232 82 140 83 232 247 188 33 17 68 141",
         "OSDCore":  "",
         "OSDWinPE":  "",
-        "OSDGuid":  "195d813e-5a47-42bf-8cb7-8dd2f2d47bf9",
+        "OSDGuid":  "5817de38-bf3f-4175-b6f7-234e862a2f7f",
         "PartitionKey":  "Windows 10 1803",
-        "RowKey":  "195d813e-5a47-42bf-8cb7-8dd2f2d47bf9"
+        "RowKey":  "5817de38-bf3f-4175-b6f7-234e862a2f7f"
     },
     {
         "Catalog":  "Windows 10 1803",
-        "OSDVersion":  "23.2.14.1",
+        "OSDVersion":  "23.3.14.1",
         "OSDStatus":  "",
         "UpdateOS":  "Windows 10",
         "UpdateBuild":  "1803",
@@ -671,13 +671,13 @@
         "AdditionalHash":  "184 32 12 162 154 56 185 95 179 234 123 114 186 157 150 186 129 199 178 50 135 151 252 143 31 145 181 74 250 154 255 26",
         "OSDCore":  "",
         "OSDWinPE":  "",
-        "OSDGuid":  "8b7291f2-492e-490a-bb82-f7a5753e6b4e",
+        "OSDGuid":  "dd3dca8f-d0d5-49d7-8014-32ec91243165",
         "PartitionKey":  "Windows 10 1803",
-        "RowKey":  "8b7291f2-492e-490a-bb82-f7a5753e6b4e"
+        "RowKey":  "dd3dca8f-d0d5-49d7-8014-32ec91243165"
     },
     {
         "Catalog":  "Windows 10 1803",
-        "OSDVersion":  "23.2.14.1",
+        "OSDVersion":  "23.3.14.1",
         "OSDStatus":  "",
         "UpdateOS":  "Windows 10",
         "UpdateBuild":  "1803",
@@ -723,13 +723,13 @@
         "AdditionalHash":  "66 66 48 213 68 54 60 218 41 156 178 235 67 9 69 37 101 24 149 223 168 55 167 156 114 155 206 81 98 142 249 167",
         "OSDCore":  "",
         "OSDWinPE":  "",
-        "OSDGuid":  "51548779-7d4e-40e4-9f25-aeb82b5edc72",
+        "OSDGuid":  "ce5b6f39-be82-4728-be12-49786a830eba",
         "PartitionKey":  "Windows 10 1803",
-        "RowKey":  "51548779-7d4e-40e4-9f25-aeb82b5edc72"
+        "RowKey":  "ce5b6f39-be82-4728-be12-49786a830eba"
     },
     {
         "Catalog":  "Windows 10 1803",
-        "OSDVersion":  "23.2.14.1",
+        "OSDVersion":  "23.3.14.1",
         "OSDStatus":  "",
         "UpdateOS":  "Windows 10",
         "UpdateBuild":  "1803",
@@ -775,13 +775,13 @@
         "AdditionalHash":  "139 131 40 102 195 171 82 237 107 89 120 18 36 89 1 8 102 53 213 84 189 145 112 252 54 25 152 130 84 176 241 127",
         "OSDCore":  "",
         "OSDWinPE":  "",
-        "OSDGuid":  "a6564d26-ef5b-42c7-bf5a-4a484948394f",
+        "OSDGuid":  "4a4bed90-e83f-41df-bea0-093cd43fc0ec",
         "PartitionKey":  "Windows 10 1803",
-        "RowKey":  "a6564d26-ef5b-42c7-bf5a-4a484948394f"
+        "RowKey":  "4a4bed90-e83f-41df-bea0-093cd43fc0ec"
     },
     {
         "Catalog":  "Windows 10 1803",
-        "OSDVersion":  "23.2.14.1",
+        "OSDVersion":  "23.3.14.1",
         "OSDStatus":  "",
         "UpdateOS":  "Windows 10",
         "UpdateBuild":  "1803",
@@ -827,8 +827,8 @@
         "AdditionalHash":  "38 132 150 58 238 210 83 156 252 15 223 198 50 158 201 194 194 177 71 201 234 158 166 255 249 48 229 208 39 118 196 197",
         "OSDCore":  "",
         "OSDWinPE":  "",
-        "OSDGuid":  "54c044c7-d897-4b24-b1b6-b3e42153f669",
+        "OSDGuid":  "61f31994-3005-4082-aab0-fece065852c4",
         "PartitionKey":  "Windows 10 1803",
-        "RowKey":  "54c044c7-d897-4b24-b1b6-b3e42153f669"
+        "RowKey":  "61f31994-3005-4082-aab0-fece065852c4"
     }
 ]
