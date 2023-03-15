@@ -68,6 +68,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ## OUTPUTS
 
 ## NOTES
+Requires CURL - typically I run this command first in a previous step, "iex (irm sandbox.osdcloud.com)", which will setup your WinPE environment with installing curl.
 
 ## RELATED LINKS
 
