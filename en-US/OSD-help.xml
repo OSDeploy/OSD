@@ -16934,7 +16934,7 @@ Option 2: Get-OSDPower -Property High</dev:code>
     <command:returnValues />
     <maml:alertSet>
       <maml:alert>
-        <maml:para></maml:para>
+        <maml:para>Requires CURL - typically I run this command first in a previous step, "iex (irm sandbox.osdcloud.com)", which will setup your WinPE environment with installing curl.</maml:para>
       </maml:alert>
     </maml:alertSet>
     <command:examples>

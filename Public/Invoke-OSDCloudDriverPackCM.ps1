@@ -8,6 +8,9 @@ function Invoke-OSDCloudDriverPackCM {
 
     .LINK
     https://github.com/OSDeploy/OSD/tree/master/Docs
+
+    .NOTES
+    Requires CURL - typically I run this command first in a previous step, "iex (irm sandbox.osdcloud.com)", which will setup your WinPE environment with installing curl.
     #>
     [CmdletBinding()]
     param (

@@ -301,7 +301,13 @@
         'Get-OSDCloudAzureResources',
         'Get-OSDMetrics',
         'Get-OSDCloudOSNames',
-        'Test-DynamicValidateSet'
+        'Test-DynamicValidateSet',
+        'Get-CloudDriverIntelEthernet',
+        'Get-CloudDriverIntelGraphics',
+        'Get-CloudDriverIntelWireless',
+        'Update-CloudDriverCatalogIntelEthernet',
+        'Update-CloudDriverCatalogIntelGraphics',
+        'Update-CloudDriverCatalogIntelWireless'
     )
     CmdletsToExport = @()
     VariablesToExport = @()

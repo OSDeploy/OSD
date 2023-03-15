@@ -217,7 +217,7 @@ $XMLProfile = @"
         #=================================================        
         $TranscriptPath = "$env:SystemDrive\OSDCloud\Logs"
         if (!(Test-Path -path $TranscriptPath)){new-item -Path $TranscriptPath -ItemType Directory -Force | Out-Null}
-        Start-Transcript -Path "$TranscriptPath\WinREWiFi.log"
+        $null = Start-Transcript -Path "$TranscriptPath\WinREWiFi.txt" -ErrorAction Ignore
         #=================================================
         #	Test Internet Connection
         #=================================================
@@ -467,7 +467,7 @@ $XMLProfile = @"
             }
             Get-SmbClientNetworkInterface | Where-Object {($_.FriendlyName -eq 'Wi-Fi') -or ($_.FriendlyName -eq 'WiFi') -or ($_.FriendlyName -eq 'WLAN')} | Format-List
         }
-        Stop-Transcript
+        $null = Stop-Transcript -ErrorAction Ignore
         Start-Sleep -Seconds 5
     }
 }
