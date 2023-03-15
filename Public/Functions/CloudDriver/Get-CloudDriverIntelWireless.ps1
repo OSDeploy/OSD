@@ -34,8 +34,8 @@ function Get-CloudDriverIntelWireless {
         #   ForEach
         #=================================================
         $ZipFileResults = @()
-        $DriverResults = @()
-        $DriverResults = foreach ($OfflineCloudDriverItem in $OfflineCloudDriver) {
+        $CloudDriver = @()
+        $CloudDriver = foreach ($OfflineCloudDriverItem in $OfflineCloudDriver) {
             #Write-Verbose "$($OfflineCloudDriverItem.DriverGrouping) $($OfflineCloudDriverItem.OsArch)" -Verbose
             #Write-Verbose "     $($OfflineCloudDriverItem.DriverInfo)" -Verbose
             #=================================================
@@ -223,16 +223,16 @@ function Get-CloudDriverIntelWireless {
     #=================================================
     else {
         Write-Verbose "Catalog is Offline"
-        $DriverResults = $OfflineCloudDriver
+        $CloudDriver = $OfflineCloudDriver
     }
     #=================================================
     #   Remove Duplicates
     #=================================================
-    $DriverResults = $DriverResults | Sort-Object DriverUrl -Unique
+    $CloudDriver = $CloudDriver | Sort-Object DriverUrl -Unique
     #=================================================
     #   Select-Object
     #=================================================
-    $DriverResults = $DriverResults | Select-Object OSDVersion, LastUpdate, OSDStatus, OSDType, OSDGroup,`
+    $CloudDriver = $CloudDriver | Select-Object OSDVersion, LastUpdate, OSDStatus, OSDType, OSDGroup,`
     DriverName, DriverVersion,`
     OsVersion, OsArch,`
     DriverGrouping,`
@@ -242,23 +242,23 @@ function Get-CloudDriverIntelWireless {
     #=================================================
     #   Sort-Object
     #=================================================
-    $DriverResults = $DriverResults | Sort-Object -Property LastUpdate -Descending
-    $DriverResults | ConvertTo-Json | Out-File "$env:TEMP\CloudDriverIntelWireless.json" -Encoding ascii -Width 2000 -Force
+    $CloudDriver = $CloudDriver | Sort-Object -Property LastUpdate -Descending
+    $CloudDriver | ConvertTo-Json | Out-File "$env:TEMP\CloudDriverIntelWireless.json" -Encoding ascii -Width 2000 -Force
     #=================================================
     #   Filter
     #=================================================
     switch ($CompatArch) {
-        'x64'   {$DriverResults = $DriverResults | Where-Object {$_.OSArch -match 'x64'}}
-        'x86'   {$DriverResults = $DriverResults | Where-Object {$_.OSArch -match 'x86'}}
+        'x64'   {$CloudDriver = $CloudDriver | Where-Object {$_.OSArch -match 'x64'}}
+        'x86'   {$CloudDriver = $CloudDriver | Where-Object {$_.OSArch -match 'x86'}}
     }
     switch ($CompatOS) {
-        'Win7'   {$DriverResults = $DriverResults | Where-Object {$_.OsVersion -match '6.0'}}
-        'Win8'   {$DriverResults = $DriverResults | Where-Object {$_.OsVersion -match '6.3'}}
-        'Win10'   {$DriverResults = $DriverResults | Where-Object {$_.OsVersion -match '10.0'}}
+        'Win7'   {$CloudDriver = $CloudDriver | Where-Object {$_.OsVersion -match '6.0'}}
+        'Win8'   {$CloudDriver = $CloudDriver | Where-Object {$_.OsVersion -match '6.3'}}
+        'Win10'   {$CloudDriver = $CloudDriver | Where-Object {$_.OsVersion -match '10.0'}}
     }
     #=================================================
     #   Return
     #=================================================
-    Return $DriverResults
+    Return $CloudDriver
     #=================================================
 }
