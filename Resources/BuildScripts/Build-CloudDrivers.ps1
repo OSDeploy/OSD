@@ -54,21 +54,8 @@ if (Test-Path $Source) {
     Copy-Item $Source $Destination -Force
 }
 #=================================================
-#   OSDCatalogIntelWirelessDriver
+#   Update-CloudDriverCatalogIntel
 #=================================================
-$null = Get-OSDCatalogIntelWirelessDriver -Verbose
-$Source = Join-Path $env:TEMP 'OSDCatalogIntelWirelessDriver.json'
-$Destination = Join-Path (Get-Module -Name OSD -ListAvailable | Sort-Object Version -Descending | Select-Object -First 1).ModuleBase "Catalogs\OSDCatalog\OSDCatalogIntelWirelessDriver.json"
-if (Test-Path $Source) {
-    Copy-Item $Source $Destination -Force
-}
-#=================================================
-#   OSDCatalogIntelEthernetDriver
-#=================================================
-$null = Get-OSDCatalogIntelEthernetDriver -Verbose
-$Source = Join-Path $env:TEMP 'OSDCatalogIntelEthernetDriver.json'
-$Destination = Join-Path (Get-Module -Name OSD -ListAvailable | Sort-Object Version -Descending | Select-Object -First 1).ModuleBase "Catalogs\OSDCatalog\OSDCatalogIntelEthernetDriver.json"
-if (Test-Path $Source) {
-    Copy-Item $Source $Destination -Force
-}
-#=================================================
+Update-CloudDriverCatalogIntelEthernet
+Update-CloudDriverCatalogIntelGraphics
+Update-CloudDriverCatalogIntelWireless
