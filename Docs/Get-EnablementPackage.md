@@ -22,7 +22,7 @@ Get-EnablementPackage [[-OSBuild] <String>] [[-OSArch] <String>] [<CommonParamet
 ## EXAMPLES
 
 ### Example 1
-```
+```powershell
 PS C:\> {{ Add example code here }}
 ```
 
@@ -53,7 +53,7 @@ Accept wildcard characters: False
 Type: String
 Parameter Sets: (All)
 Aliases: Build
-Accepted values: 21H2, 21H1, 20H2, 1909
+Accepted values: 22H2, 21H2, 21H1, 20H2, 1909
 
 Required: False
 Position: 0
@@ -68,6 +68,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ## INPUTS
 
 ### None
+
 ## OUTPUTS
 
 ### System.Object

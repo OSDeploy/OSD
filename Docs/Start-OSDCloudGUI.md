@@ -13,7 +13,8 @@ OSDCloud imaging using the command line
 ## SYNTAX
 
 ```
-Start-OSDCloudGUI [[-Brand] <String>] [[-Color] <String>] [<CommonParameters>]
+Start-OSDCloudGUI [[-BrandName] <String>] [[-BrandColor] <String>] [[-ComputerManufacturer] <String>]
+ [[-ComputerProduct] <String>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -28,32 +29,62 @@ Start-OSDCloudGUI
 
 ## PARAMETERS
 
-### -Brand
+### -BrandName
 The custom Brand for OSDCloudGUI
 
 ```yaml
 Type: String
 Parameter Sets: (All)
-Aliases: BrandingTitle
+Aliases: Brand
 
 Required: False
 Position: 1
-Default value: OSDCloud
+Default value: $Global:OSDModuleResource.StartOSDCloudGUI.BrandName
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -Color
+### -BrandColor
 Color for the OSDCloudGUI Brand
 
 ```yaml
 Type: String
 Parameter Sets: (All)
-Aliases: BrandingColor
+Aliases: Color
 
 Required: False
 Position: 2
-Default value: #0096D6
+Default value: $Global:OSDModuleResource.StartOSDCloudGUI.BrandColor
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -ComputerManufacturer
+Temporary Parameter
+
+```yaml
+Type: String
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 3
+Default value: (Get-MyComputerManufacturer -Brief)
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -ComputerProduct
+Temporary Parameter
+
+```yaml
+Type: String
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 4
+Default value: (Get-MyComputerProduct)
 Accept pipeline input: False
 Accept wildcard characters: False
 ```

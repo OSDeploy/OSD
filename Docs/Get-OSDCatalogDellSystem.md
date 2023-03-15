@@ -25,24 +25,20 @@ Requires Internet Access to download Dell CatalogPC.cab
 ### EXAMPLE 1
 ```
 Get-OSDCatalogDellSystem
-```
-
 Don't do this, you will get an almost endless list
+```
 
 ### EXAMPLE 2
 ```
 $Result = Get-OSDCatalogDellSystem
+Yes do this.  Save it in a Variable
 ```
-
-Yes do this. 
-Save it in a Variable
 
 ### EXAMPLE 3
 ```
 Get-OSDCatalogDellSystem -Component BIOS | Out-GridView
-```
-
 Displays all the Dell BIOS Updates in GridView
+```
 
 ## PARAMETERS
 

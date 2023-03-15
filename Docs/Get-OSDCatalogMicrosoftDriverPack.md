@@ -13,7 +13,7 @@ Returns the Microsoft Surface DriverPacks
 ## SYNTAX
 
 ```
-Get-OSDCatalogMicrosoftDriverPack [-Compatible] [[-DownloadPath] <String>] [-Force] [<CommonParameters>]
+Get-OSDCatalogMicrosoftDriverPack [[-DownloadPath] <String>] [-Compatible] [-Force] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -30,21 +30,6 @@ PS C:\> {{ Add example code here }}
 
 ## PARAMETERS
 
-### -Compatible
-Filters results based on your current Product
-
-```yaml
-Type: SwitchParameter
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: Named
-Default value: False
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
 ### -DownloadPath
 {{ Fill DownloadPath Description }}
 
@@ -56,6 +41,21 @@ Aliases:
 Required: False
 Position: 1
 Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -Compatible
+Filters results based on your current Product
+
+```yaml
+Type: SwitchParameter
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: False
 Accept pipeline input: False
 Accept wildcard characters: False
 ```

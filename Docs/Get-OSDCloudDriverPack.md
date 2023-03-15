@@ -13,7 +13,8 @@ Gets the OSDCloud DriverPack for the current or specified computer model
 ## SYNTAX
 
 ```
-Get-OSDCloudDriverPack [[-Product] <String>] [<CommonParameters>]
+Get-OSDCloudDriverPack [[-Product] <String>] [[-OSVersion] <String>] [[-OSReleaseID] <String>]
+ [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -41,6 +42,36 @@ Aliases:
 Required: False
 Position: 1
 Default value: (Get-MyComputerProduct)
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -OSVersion
+{{ Fill OSVersion Description }}
+
+```yaml
+Type: String
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 2
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -OSReleaseID
+{{ Fill OSReleaseID Description }}
+
+```yaml
+Type: String
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 3
+Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```

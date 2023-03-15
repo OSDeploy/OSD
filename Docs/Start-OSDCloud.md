@@ -16,21 +16,21 @@ Starts the OSDCloud Windows 10 or 11 Build Process from the OSD Module or a GitH
 ```
 Start-OSDCloud [-Manufacturer <String>] [-Product <String>] [-Firmware] [-Restart] [-Shutdown] [-Screenshot]
  [-SkipAutopilot] [-SkipODT] [-ZTI] [-OSName <String>] [-OSEdition <String>] [-OSLanguage <String>]
- [-OSLicense <String>] [<CommonParameters>]
+ [-OSLicense <String>] [-Preview] [<CommonParameters>]
 ```
 
 ### Legacy
 ```
 Start-OSDCloud [-Manufacturer <String>] [-Product <String>] [-Firmware] [-Restart] [-Shutdown] [-Screenshot]
  [-SkipAutopilot] [-SkipODT] [-ZTI] [-OSVersion <String>] [-OSBuild <String>] [-OSEdition <String>]
- [-OSLanguage <String>] [-OSLicense <String>] [<CommonParameters>]
+ [-OSLanguage <String>] [-OSLicense <String>] [-Preview] [<CommonParameters>]
 ```
 
 ### CustomImage
 ```
 Start-OSDCloud [-Manufacturer <String>] [-Product <String>] [-Firmware] [-Restart] [-Shutdown] [-Screenshot]
- [-SkipAutopilot] [-SkipODT] [-ZTI] [-FindImageFile] [-ImageFileUrl <String>] [-ImageIndex <String>]
- [<CommonParameters>]
+ [-SkipAutopilot] [-SkipODT] [-ZTI] [-FindImageFile] [-ImageFileUrl <String>] [-OSImageIndex <String>]
+ [-Preview] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -305,17 +305,32 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -ImageIndex
+### -OSImageIndex
 Images using the specified Image Index
 
 ```yaml
 Type: String
 Parameter Sets: CustomImage
-Aliases:
+Aliases: ImageIndex
 
 Required: False
 Position: Named
 Default value: AUTO
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -Preview
+{{ Fill Preview Description }}
+
+```yaml
+Type: SwitchParameter
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: False
 Accept pipeline input: False
 Accept wildcard characters: False
 ```

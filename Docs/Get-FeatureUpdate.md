@@ -14,13 +14,13 @@ Returns a Windows Client Feature Update
 
 ### ByOSName (Default)
 ```
-Get-FeatureUpdate [-OSName <String>] [-OSLicense <String>] [-OSLanguage <String>] [<CommonParameters>]
+Get-FeatureUpdate [-Name <String>] [-Activation <String>] [-Language <String>] [<CommonParameters>]
 ```
 
 ### v1
 ```
-Get-FeatureUpdate [-OSVersion <String>] [-OSBuild <String>] [-OSArch <String>] [-OSLicense <String>]
- [-OSLanguage <String>] [<CommonParameters>]
+Get-FeatureUpdate [-Version <String>] [-ReleaseID <String>] [-Architecture <String>] [-Activation <String>]
+ [-Language <String>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -35,13 +35,13 @@ Get-FeatureUpdate
 
 ## PARAMETERS
 
-### -OSName
-{{ Fill OSName Description }}
+### -Name
+{{ Fill Name Description }}
 
 ```yaml
 Type: String
 Parameter Sets: ByOSName
-Aliases:
+Aliases: OSName
 
 Required: False
 Position: Named
@@ -50,14 +50,14 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -OSVersion
+### -Version
 Operating System Version
 Default = Windows 11
 
 ```yaml
 Type: String
 Parameter Sets: v1
-Aliases:
+Aliases: OSVersion
 
 Required: False
 Position: Named
@@ -66,14 +66,14 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -OSBuild
+### -ReleaseID
 Operating System Build
 Default = 22H2
 
 ```yaml
 Type: String
 Parameter Sets: v1
-Aliases: Build
+Aliases: Build, OSBuild, OSReleaseID
 
 Required: False
 Position: Named
@@ -82,14 +82,14 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -OSArch
+### -Architecture
 Operating System Architecture
 Default = x64
 
 ```yaml
 Type: String
 Parameter Sets: v1
-Aliases:
+Aliases: Arch, OSArch
 
 Required: False
 Position: Named
@@ -98,14 +98,14 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -OSLicense
+### -Activation
 Operating System Licensing
 Default = Volume
 
 ```yaml
 Type: String
 Parameter Sets: (All)
-Aliases: License
+Aliases: License, OSLicense, OSActivation
 
 Required: False
 Position: Named
@@ -114,14 +114,14 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -OSLanguage
+### -Language
 Operating System Language
 Default = en-us
 
 ```yaml
 Type: String
 Parameter Sets: (All)
-Aliases: Culture, OSCulture
+Aliases: Culture, OSCulture, OSLanguage
 
 Required: False
 Position: Named

@@ -16,7 +16,7 @@ Edits WinPE in an OSDCloud Workspace for customization
 Edit-OSDCloudWinPE [-CloudDriver <String[]>] [-StartOSDCloudGUI] [-DriverHWID <String[]>]
  [-DriverPath <String[]>] [-PSModuleCopy <String[]>] [-PSModuleInstall <String[]>] [-Startnet <String>]
  [-StartOSDCloud <String>] [-StartOSDPad <String>] [-StartPSCommand <String>] [-StartURL <String>] [-UpdateUSB]
- [-Wallpaper <FileInfo>] [-UseDefaultWallpaper] [-Brand <String>] [-WorkspacePath <String>]
+ [-Wallpaper <FileInfo>] [-UseDefaultWallpaper] [-Brand <String>] [-WorkspacePath <String>] [-WirelessConnect]
  [<CommonParameters>]
 ```
 
@@ -37,7 +37,7 @@ Edit-OSDCloudWinPE -StartOSDCloud '-OSBuild 22H2 -OSEdition Pro -OSLanguage en-u
 
 ### EXAMPLE 3
 ```
-Edit-OSDCloudWinPE â€"StartURL 'https://sandbox.osdcloud.com'
+Edit-OSDCloudWinPE -StartURL 'https://sandbox.osdcloud.com'
 ```
 
 ## PARAMETERS
@@ -280,6 +280,21 @@ Aliases:
 Required: False
 Position: Named
 Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -WirelessConnect
+Will leverage WirelessConnect.EXE instead of the Commandline Tools to connect to WiFi
+
+```yaml
+Type: SwitchParameter
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: False
 Accept pipeline input: False
 Accept wildcard characters: False
 ```

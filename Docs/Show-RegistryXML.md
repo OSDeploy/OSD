@@ -24,9 +24,8 @@ Displays registry entries from all RegistryXML files in the Source Directory
 ### EXAMPLE 1
 ```
 Show-RegistryXML -SourceDirectory C:\DeploymentShare\OSDeploy\OSConfig\LocalPolicy\ImportGPO
-```
-
 Displays all RegistryXML entries found in Source Directory
+```
 
 ## PARAMETERS
 

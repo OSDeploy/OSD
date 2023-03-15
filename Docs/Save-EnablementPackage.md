@@ -23,7 +23,7 @@ Save-EnablementPackage [[-DownloadPath] <String>] [[-OSBuild] <String>] [[-OSArc
 ## EXAMPLES
 
 ### Example 1
-```
+```powershell
 PS C:\> {{ Add example code here }}
 ```
 
@@ -69,7 +69,7 @@ Accept wildcard characters: False
 Type: String
 Parameter Sets: (All)
 Aliases: Build
-Accepted values: 21H2, 21H1, 20H2, 1909
+Accepted values: 22H2, 21H2, 21H1, 20H2, 1909
 
 Required: False
 Position: 1
@@ -84,6 +84,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ## INPUTS
 
 ### System.String
+
 ## OUTPUTS
 
 ### System.Object

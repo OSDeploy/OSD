@@ -35,7 +35,7 @@ Start-OSDPad [-RepoName] <String> [[-RepoFolder] <String>] -RepoDomain <String> 
 ## EXAMPLES
 
 ### Example 1
-```
+```powershell
 PS C:\> {{ Add example code here }}
 ```
 
@@ -104,6 +104,21 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
+### -RepoDomain
+{{ Fill RepoDomain Description }}
+
+```yaml
+Type: String
+Parameter Sets: GitLab
+Aliases: GitLabUri
+
+Required: True
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
 ### -RepoFolder
 {{ Fill RepoFolder Description }}
 
@@ -113,7 +128,7 @@ Parameter Sets: GitHub, GitLab
 Aliases: GitPath, Folder
 
 Required: False
-Position: 2
+Position: 1
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -128,7 +143,7 @@ Parameter Sets: GitHub, GitLab
 Aliases: Repository, GitRepo
 
 Required: True
-Position: 1
+Position: 0
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -149,27 +164,13 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -RepoDomain
-{{ Fill RepoDomain Description }}
-
-```yaml
-Type: String
-Parameter Sets: GitLab
-Aliases: GitLabUri
-
-Required: True
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
 ### CommonParameters
 This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see [about_CommonParameters](http://go.microsoft.com/fwlink/?LinkID=113216).
 
 ## INPUTS
 
 ### None
+
 ## OUTPUTS
 
 ### System.Object
