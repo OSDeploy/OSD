@@ -1,11 +1,11 @@
 {
-    "OSDVersion":  "22.11.8.1",
-    "LastUpdate":  "\/Date(1667966546102)\/",
+    "OSDVersion":  "23.3.14.3",
+    "LastUpdate":  "\/Date(1676613600000)\/",
     "OSDStatus":  "",
     "OSDType":  "Driver",
     "OSDGroup":  "IntelEthernet",
-    "DriverName":  "Intel Ethernet x64 Release.27.6.1 10.0",
-    "DriverVersion":  "Release.27.6.1",
+    "DriverName":  "Intel Ethernet x64 Release.28.0 10.0",
+    "DriverVersion":  "Release.28.0",
     "OsVersion":  [
                       "10.0"
                   ],
@@ -13,11 +13,11 @@
                    "x64"
                ],
     "DriverGrouping":  "Intel Ethernet",
-    "DownloadFile":  "Release_27.6.1.zip",
-    "DriverUrl":  "https://downloadmirror.intel.com/742508/Release_27.6.1.zip",
+    "DownloadFile":  "Release_28.0.zip",
+    "DriverUrl":  "https://downloadmirror.intel.com/769266/Release_28.0.zip",
     "DriverInfo":  "https://www.intel.com/content/www/us/en/download/15084/intel-ethernet-adapter-complete-driver-pack.html",
-    "DriverDescription":  null,
-    "OSDGuid":  "0efe2695-d511-4da2-9b4c-c660c842b8ed",
+    "DriverDescription":  "This download installs version 28.0 of the Intel? Ethernet Adapter Complete Driver Pack for supported OS versions.",
+    "OSDGuid":  "23b7f2f1-96de-4f02-aff0-e8589dce3075",
     "OSDPnpClass":  "Net",
     "OSDPnpClassGuid":  "{4D36E972-E325-11CE-BFC1-08002BE10318}"
 }

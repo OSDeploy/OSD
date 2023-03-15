@@ -1,0 +1,94 @@
+[
+  {
+    "OSDVersion": "23.3.14.1",
+    "LastUpdate": "2023-03-14T14:20:45.1741022-05:00",
+    "OSDStatus": "",
+    "OSDType": "Driver",
+    "OSDGroup": "IntelWireless",
+    "DriverName": "Intel Wireless x86 21.40.5 6.0",
+    "DriverVersion": "21.40.5",
+    "OsVersion": [
+      "6.0"
+    ],
+    "OsArch": [
+      "x86"
+    ],
+    "DriverGrouping": "Intel Wireless",
+    "DownloadFile": "WiFi-21.40.5-Driver32-Win7.zip",
+    "DriverUrl": "https://downloadmirror.intel.com/772352/WiFi-21.40.5-Driver32-Win7.zip",
+    "DriverInfo": "https://www.intel.com/content/www/us/en/download/18231/intel-proset-wireless-software-and-drivers-for-it-admins.html",
+    "DriverDescription": null,
+    "OSDGuid": "458b48f4-709f-4305-a5d1-d9acaaaef891",
+    "OSDPnpClass": "Net",
+    "OSDPnpClassGuid": "{4D36E972-E325-11CE-BFC1-08002BE10318}"
+  },
+  {
+    "OSDVersion": "23.3.14.1",
+    "LastUpdate": "2023-03-14T14:20:45.1729569-05:00",
+    "OSDStatus": "",
+    "OSDType": "Driver",
+    "OSDGroup": "IntelWireless",
+    "DriverName": "Intel Wireless x86 22.160.0 10.0",
+    "DriverVersion": "22.160.0",
+    "OsVersion": [
+      "10.0"
+    ],
+    "OsArch": [
+      "x86"
+    ],
+    "DriverGrouping": "Intel Wireless",
+    "DownloadFile": "WiFi-22.160.0-Driver32-Win10.zip",
+    "DriverUrl": "https://downloadmirror.intel.com/772352/WiFi-22.160.0-Driver32-Win10.zip",
+    "DriverInfo": "https://www.intel.com/content/www/us/en/download/18231/intel-proset-wireless-software-and-drivers-for-it-admins.html",
+    "DriverDescription": null,
+    "OSDGuid": "c6b30643-dce8-4a27-9b14-887773000c79",
+    "OSDPnpClass": "Net",
+    "OSDPnpClassGuid": "{4D36E972-E325-11CE-BFC1-08002BE10318}"
+  },
+  {
+    "OSDVersion": "23.3.14.1",
+    "LastUpdate": "2023-03-14T14:20:45.171954-05:00",
+    "OSDStatus": "",
+    "OSDType": "Driver",
+    "OSDGroup": "IntelWireless",
+    "DriverName": "Intel Wireless x64 21.40.5 6.0",
+    "DriverVersion": "21.40.5",
+    "OsVersion": [
+      "6.0"
+    ],
+    "OsArch": [
+      "x64"
+    ],
+    "DriverGrouping": "Intel Wireless",
+    "DownloadFile": "WiFi-21.40.5-Driver64-Win7.zip",
+    "DriverUrl": "https://downloadmirror.intel.com/772352/WiFi-21.40.5-Driver64-Win7.zip",
+    "DriverInfo": "https://www.intel.com/content/www/us/en/download/18231/intel-proset-wireless-software-and-drivers-for-it-admins.html",
+    "DriverDescription": null,
+    "OSDGuid": "02808050-29d1-4fe9-a1cc-29244cd13e05",
+    "OSDPnpClass": "Net",
+    "OSDPnpClassGuid": "{4D36E972-E325-11CE-BFC1-08002BE10318}"
+  },
+  {
+    "OSDVersion": "23.3.14.1",
+    "LastUpdate": "2023-03-14T14:20:45.1696158-05:00",
+    "OSDStatus": "",
+    "OSDType": "Driver",
+    "OSDGroup": "IntelWireless",
+    "DriverName": "Intel Wireless x64 22.200.0 10.0",
+    "DriverVersion": "22.200.0",
+    "OsVersion": [
+      "10.0"
+    ],
+    "OsArch": [
+      "x64"
+    ],
+    "DriverGrouping": "Intel Wireless",
+    "DownloadFile": "WiFi-22.200.0-Driver64-Win10-Win11.zip",
+    "DriverUrl": "https://downloadmirror.intel.com/772352/WiFi-22.200.0-Driver64-Win10-Win11.zip",
+    "DriverInfo": "https://www.intel.com/content/www/us/en/download/18231/intel-proset-wireless-software-and-drivers-for-it-admins.html",
+    "DriverDescription": null,
+    "OSDGuid": "a1782f12-4834-4595-9b31-1e39313e93fa",
+    "OSDPnpClass": "Net",
+    "OSDPnpClassGuid": "{4D36E972-E325-11CE-BFC1-08002BE10318}"
+  }
+]
