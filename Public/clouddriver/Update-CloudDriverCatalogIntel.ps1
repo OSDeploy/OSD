@@ -3,7 +3,7 @@ function Update-CloudDriverCatalogIntelEthernet {
     param ()
     $null = Get-CloudDriverIntelEthernet -Verbose
     $Source = Join-Path $env:TEMP 'CloudDriverIntelEthernet.json'
-    $Destination = Join-Path (Get-Module -Name OSD -ListAvailable | Sort-Object Version -Descending | Select-Object -First 1).ModuleBase "CloudDriver\CloudDriverIntelEthernet.json"
+    $Destination = Join-Path (Get-Module -Name OSD -ListAvailable | Sort-Object Version -Descending | Select-Object -First 1).ModuleBase "clouddriver\CloudDriverIntelEthernet.json"
     if (Test-Path $Source) {
         Copy-Item $Source $Destination -Force -ErrorAction Ignore
     }
@@ -13,17 +13,17 @@ function Update-CloudDriverCatalogIntelGraphics {
     param ()
     $null = Get-CloudDriverIntelGraphics -Verbose
     $Source = Join-Path $env:TEMP 'CloudDriverIntelGraphics.json'
-    $Destination = Join-Path (Get-Module -Name OSD -ListAvailable | Sort-Object Version -Descending | Select-Object -First 1).ModuleBase "CloudDriver\CloudDriverIntelGraphics.json"
+    $Destination = Join-Path (Get-Module -Name OSD -ListAvailable | Sort-Object Version -Descending | Select-Object -First 1).ModuleBase "clouddriver\CloudDriverIntelGraphics.json"
     if (Test-Path $Source) {
         Copy-Item $Source $Destination -Force -ErrorAction Ignore
     }
 }
-function Update-CloudDriverCatalogIntelRadeon {
+function Update-CloudDriverCatalogIntelRadeonGraphics {
     [CmdletBinding()]
     param ()
-    $null = Get-CloudDriverIntelRadeon -Verbose
-    $Source = Join-Path $env:TEMP 'CloudDriverIntelRadeon.json'
-    $Destination = Join-Path (Get-Module -Name OSD -ListAvailable | Sort-Object Version -Descending | Select-Object -First 1).ModuleBase "CloudDriver\CloudDriverIntelRadeon.json"
+    $null = Get-CloudDriverIntelRadeonGraphics -Verbose
+    $Source = Join-Path $env:TEMP 'CloudDriverIntelRadeonGraphics.json'
+    $Destination = Join-Path (Get-Module -Name OSD -ListAvailable | Sort-Object Version -Descending | Select-Object -First 1).ModuleBase "clouddriver\CloudDriverIntelRadeonGraphics.json"
     if (Test-Path $Source) {
         Copy-Item $Source $Destination -Force -ErrorAction Ignore
     }
@@ -33,7 +33,7 @@ function Update-CloudDriverCatalogIntelWireless {
     param ()
     $null = Get-CloudDriverIntelWireless -Verbose
     $Source = Join-Path $env:TEMP 'CloudDriverIntelWireless.json'
-    $Destination = Join-Path (Get-Module -Name OSD -ListAvailable | Sort-Object Version -Descending | Select-Object -First 1).ModuleBase "CloudDriver\CloudDriverIntelWireless.json"
+    $Destination = Join-Path (Get-Module -Name OSD -ListAvailable | Sort-Object Version -Descending | Select-Object -First 1).ModuleBase "clouddriver\CloudDriverIntelWireless.json"
     if (Test-Path $Source) {
         Copy-Item $Source $Destination -Force -ErrorAction Ignore
     }

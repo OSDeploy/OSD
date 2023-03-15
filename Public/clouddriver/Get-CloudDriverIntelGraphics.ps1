@@ -1,21 +1,40 @@
 <#
 .SYNOPSIS
-Returns a Intel Wireless Driver Object
+Returns a Intel Graphics Driver Object
 
 .DESCRIPTION
-Returns a Intel Wireless Driver Object
+Returns a Intel Graphics Driver Object
+
+.LINK
 #>
-function Get-CloudDriverIntelEthernet {
+function Get-CloudDriverIntelGraphics {
     [CmdletBinding()]
-    param ()
+    param (
+        [ValidateSet('x64','x86')]
+        [string]$CompatArch,
+        [ValidateSet('Win7','Win10')]
+        [string]$CompatOS
+    )
     #=================================================
     #   Uri
     #=================================================
-    $Uri = 'https://www.intel.com/content/www/us/en/download/15084/intel-ethernet-adapter-complete-driver-pack.html'
+    $Uri = 'https://www.intel.com/content/www/us/en/download/19344/intel-graphics-windows-dch-drivers.html'
     #=================================================
-    #   Import Offline CloudDriver
+    #   Import Base Catalog
     #=================================================
-    $OfflineCloudDriver = Get-Content -Path "$($MyInvocation.MyCommand.Module.ModuleBase)\CloudDriver\CloudDriverIntelEthernet.json" -Raw | ConvertFrom-Json
+    $OfflineCloudDriver = Get-Content -Path "$($MyInvocation.MyCommand.Module.ModuleBase)\clouddriver\CloudDriverIntelGraphics.json" -Raw | ConvertFrom-Json
+    #=================================================
+    #   Filter
+    #=================================================
+    switch ($CompatArch) {
+        'x64'   {$OfflineCloudDriver = $OfflineCloudDriver | Where-Object {$_.OSArch -match 'x64'}}
+        'x86'   {$OfflineCloudDriver = $OfflineCloudDriver | Where-Object {$_.OSArch -match 'x86'}}
+    }
+    switch ($CompatOS) {
+        'Win7'   {$OfflineCloudDriver = $OfflineCloudDriver | Where-Object {$_.OsVersion -match '6.0'}}
+        'Win8'   {$OfflineCloudDriver = $OfflineCloudDriver | Where-Object {$_.OsVersion -match '6.3'}}
+        'Win10'   {$OfflineCloudDriver = $OfflineCloudDriver | Where-Object {$_.OsVersion -match '10.0'}}
+    }
     #=================================================
     #   Online
     #=================================================
@@ -23,42 +42,47 @@ function Get-CloudDriverIntelEthernet {
 
     if ($IsOnline) {
         Write-Verbose "Catalog is Online"
-        #All Drivers are from the same URL
-        $OfflineCloudDriver = $OfflineCloudDriver | Select-Object -First 1
         #=================================================
         #   ForEach
         #=================================================
         $ZipFileResults = @()
         $CloudDriver = @()
         $CloudDriver = foreach ($OfflineCloudDriverItem in $OfflineCloudDriver) {
+            Write-Verbose "DriverGrouping: $($OfflineCloudDriverItem.DriverGrouping)"
+            Write-Verbose "OsArch: $($OfflineCloudDriverItem.OsArch)"
+            Write-Verbose "DriverInfo: $($OfflineCloudDriverItem.DriverInfo)"
             #=================================================
             #   WebRequest
             #=================================================
-            $DriverInfoWebRequest = Invoke-WebRequest -Uri $OfflineCloudDriverItem.DriverInfo -Method Get
+            $DriverInfoWebRequest = Invoke-WebRequest -Uri $OfflineCloudDriverItem.DriverInfo -Method Get -Verbose
             $DriverInfoWebRequestContent = $DriverInfoWebRequest.Content
-
             $DriverInfoHTML = $DriverInfoWebRequest.ParsedHtml.childNodes | Where-Object {$_.nodename -eq 'HTML'} 
             $DriverInfoHEAD = $DriverInfoHTML.childNodes | Where-Object {$_.nodename -eq 'HEAD'}
             $DriverInfoMETA = $DriverInfoHEAD.childNodes | Where-Object {$_.nodename -like "meta*"} | Select-Object -Property Name, Content
-            $OSCompatibility = $DriverInfoMETA | Where-Object {$_.name -eq 'DownloadOSes'} | Select-Object -ExpandProperty Content
-            Write-Verbose "OSCompatibility: $OSCompatibility"
             #=================================================
             #   Driver Filter
             #=================================================
             $ZipFileResults = @($DriverInfoWebRequestContent -split " " -split '"' -match 'http' -match "downloadmirror" -match ".zip")
+
+            if ($OfflineCloudDriverItem.OsArch -match 'x64') {
+                $ZipFileResults = $ZipFileResults | Where-Object {$_ -notmatch 'win32'}
+            }
+            if ($OfflineCloudDriverItem.OsArch -match 'x86') {
+                $ZipFileResults = $ZipFileResults | Where-Object {$_ -notmatch 'win64'}
+            }
             $ZipFileResults = $ZipFileResults | Select-Object -Unique
             #=================================================
             #   Driver Details
             #=================================================
             foreach ($DriverZipFile in $ZipFileResults) {
-                Write-Verbose "Latest DriverPack: $DriverZipFile"
+                Write-Verbose "Zip File: $DriverZipFile"
                 #=================================================
                 #   Defaults
                 #=================================================
                 $OSDVersion = $(Get-Module -Name OSD | Sort-Object Version | Select-Object Version -Last 1).Version
                 $LastUpdate = [datetime] $(Get-Date)
                 $OSDStatus = $null
-                $OSDGroup = 'IntelEthernet'
+                $OSDGroup = 'IntelDisplay'
                 $OSDType = 'Driver'
 
                 $DriverName = $null
@@ -66,8 +90,9 @@ function Get-CloudDriverIntelEthernet {
                 $DriverReleaseId = $null
                 $DriverGrouping = $null
 
-                $OsVersion = '10.0'
-                $OsArch = 'x64'
+                $OperatingSystem = @()
+                $OsVersion = $OfflineCloudDriverItem.OsVersion
+                $OsArch = $OfflineCloudDriverItem.OsArch
                 $OsBuildMax = @()
                 $OsBuildMin = @()
         
@@ -76,7 +101,7 @@ function Get-CloudDriverIntelEthernet {
                 $MakeLike = @()
                 $MakeNotLike = @()
                 $MakeMatch = @()
-                $MakeNotMatch = @()
+                $MakeNotMatch = @('Microsoft')
         
                 $Generation = $null
                 $SystemFamily = $null
@@ -86,7 +111,7 @@ function Get-CloudDriverIntelEthernet {
                 $ModelLike = @()
                 $ModelNotLike = @()
                 $ModelMatch = @()
-                $ModelNotMatch = @()
+                $ModelNotMatch = @('Surface')
         
                 $SystemSku = @()
                 $SystemSkuNe = @()
@@ -108,7 +133,7 @@ function Get-CloudDriverIntelEthernet {
                 #$LastUpdate = [datetime]::ParseExact($LastUpdateMeta, "MM/dd/yyyy HH:mm:ss", $null)
 
                 $LastUpdateMeta = $DriverInfoMETA | Where-Object {$_.name -eq 'LastUpdate'} | Select-Object -ExpandProperty Content
-                Write-Verbose "LastUpdateMeta: $LastUpdateMeta"
+                Write-Verbose "LastUpdateRaw: $LastUpdateMeta"
 
                 if ($LastUpdateMeta) {
                     $LastUpdateSplit = ($LastUpdateMeta -split (' '))[0]
@@ -118,23 +143,22 @@ function Get-CloudDriverIntelEthernet {
                     #Write-Verbose "LastUpdate: $LastUpdate"
                 }
                 #=================================================
+                #   DriverVersion
+                #=================================================
+                $DriverVersion = $DriverInfoMETA | Where-Object {$_.name -eq 'DownloadVersion'} | Select-Object -ExpandProperty Content
+                #=================================================
                 #   DriverUrl
                 #=================================================
                 $DriverUrl = $DriverZipFile
-                $DownloadFile = Split-Path $DriverUrl -Leaf
-                #=================================================
-                #   DriverVersion
-                #=================================================
-                $DriverVersion = ($DownloadFile -split '.zip')[0]
-                $DriverVersion = $DriverVersion -replace '_', '.'
                 #=================================================
                 #   Values
                 #=================================================
                 $DriverGrouping = $OfflineCloudDriverItem.DriverGrouping
                 $DriverName = "$DriverGrouping $OsArch $DriverVersion $OsVersion"
                 $DriverDescription = $DriverInfoMETA | Where-Object {$_.name -eq 'Description'} | Select-Object -ExpandProperty Content
-                $OSDPnpClass = 'Net'
-                $OSDPnpClassGuid = '{4D36E972-E325-11CE-BFC1-08002BE10318}'
+                $DownloadFile = Split-Path $DriverUrl -Leaf
+                $OSDPnpClass = 'Display'
+                $OSDPnpClassGuid = '{4D36E968-E325-11CE-BFC1-08002BE10318}'
                 #=================================================
                 #   Create Object
                 #=================================================
@@ -216,7 +240,7 @@ function Get-CloudDriverIntelEthernet {
     #=================================================
     $CloudDriver = $CloudDriver | Select-Object OSDVersion, LastUpdate, OSDStatus, OSDType, OSDGroup,`
     DriverName, DriverVersion,`
-    OsVersion, OsArch,`
+    OsVersion, OsArch, MakeNotMatch, ModelNotMatch,`
     DriverGrouping,`
     DownloadFile, DriverUrl, DriverInfo, DriverDescription,`
     OSDGuid,`
@@ -225,19 +249,7 @@ function Get-CloudDriverIntelEthernet {
     #   Sort-Object
     #=================================================
     $CloudDriver = $CloudDriver | Sort-Object -Property LastUpdate -Descending
-    $CloudDriver | ConvertTo-Json | Out-File "$env:TEMP\CloudDriverIntelEthernet.json" -Encoding ascii -Width 2000 -Force
-    #=================================================
-    #   Filter
-    #=================================================
-    switch ($CompatArch) {
-        'x64'   {$CloudDriver = $CloudDriver | Where-Object {$_.OSArch -match 'x64'}}
-        'x86'   {$CloudDriver = $CloudDriver | Where-Object {$_.OSArch -match 'x86'}}
-    }
-    switch ($CompatOS) {
-        'Win7'   {$CloudDriver = $CloudDriver | Where-Object {$_.OsVersion -match '6.0'}}
-        'Win8'   {$CloudDriver = $CloudDriver | Where-Object {$_.OsVersion -match '6.3'}}
-        'Win10'   {$CloudDriver = $CloudDriver | Where-Object {$_.OsVersion -match '10.0'}}
-    }
+    $CloudDriver | ConvertTo-Json | Out-File "$env:TEMP\CloudDriverIntelGraphics.json" -Encoding ascii -Width 2000 -Force
     #=================================================
     #   Return
     #=================================================

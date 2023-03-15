@@ -304,9 +304,11 @@
         'Test-DynamicValidateSet',
         'Get-CloudDriverIntelEthernet',
         'Get-CloudDriverIntelGraphics',
+        'Get-CloudDriverIntelRadeonGraphics',
         'Get-CloudDriverIntelWireless',
         'Update-CloudDriverCatalogIntelEthernet',
         'Update-CloudDriverCatalogIntelGraphics',
+        'Update-CloudDriverCatalogIntelRadeonGraphics',
         'Update-CloudDriverCatalogIntelWireless'
     )
     CmdletsToExport = @()

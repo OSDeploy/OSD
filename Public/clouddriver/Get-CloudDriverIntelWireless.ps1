@@ -20,7 +20,7 @@ function Get-CloudDriverIntelWireless {
     #=================================================
     #   Import Offline CloudDriver
     #=================================================
-    $OfflineCloudDriver = Get-Content -Path "$($MyInvocation.MyCommand.Module.ModuleBase)\CloudDriver\CloudDriverIntelWireless.json" -Raw | ConvertFrom-Json
+    $OfflineCloudDriver = Get-Content -Path "$($MyInvocation.MyCommand.Module.ModuleBase)\clouddriver\CloudDriverIntelWireless.json" -Raw | ConvertFrom-Json
     #=================================================
     #   Online
     #=================================================
