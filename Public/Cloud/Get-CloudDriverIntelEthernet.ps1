@@ -1,14 +1,11 @@
 <#
 .SYNOPSIS
-Returns a Intel Radeon Graphics Driver Object
+Returns a Intel Wireless Driver Object
 
 .DESCRIPTION
-Returns a Intel Radeon Graphics Driver Object
-
-.LINK
-https://osddrivers.osdeploy.com
+Returns a Intel Wireless Driver Object
 #>
-function Get-CloudDriverIntelRadeonGraphics {
+function Get-CloudDriverIntelEthernet {
     [CmdletBinding()]
     param (
         [System.Management.Automation.SwitchParameter]
@@ -18,7 +15,7 @@ function Get-CloudDriverIntelRadeonGraphics {
     #   Online
     #=================================================
     $IsOnline = $false
-    $DriverUrl = 'https://www.intel.com/content/www/us/en/download/19282/radeon-rx-vega-m-graphics.html'
+    $DriverUrl = 'https://www.intel.com/content/www/us/en/download/15084/intel-ethernet-adapter-complete-driver-pack.html'
 
     if ($Force) {
         $IsOnline = Test-WebConnection $DriverUrl
@@ -26,54 +23,49 @@ function Get-CloudDriverIntelRadeonGraphics {
     #=================================================
     #   OfflineCloudDriver
     #=================================================
-    $OfflineCloudDriverPath = "$($MyInvocation.MyCommand.Module.ModuleBase)\clouddriver\CloudDriverIntelRadeonGraphics.json"
+    $OfflineCloudDriverPath = "$($MyInvocation.MyCommand.Module.ModuleBase)\Catalogs\CloudDriver\CloudDriverIntelEthernet.json"
     $OfflineCloudDriver = Get-Content -Path $OfflineCloudDriverPath -Raw | ConvertFrom-Json
     #=================================================
     #   IsOnline
     #=================================================
     if ($IsOnline) {
         Write-Verbose "CloudDriver Online"
+        #All Drivers are from the same URL
+        $OfflineCloudDriver = $OfflineCloudDriver | Select-Object -First 1
         #=================================================
         #   ForEach
         #=================================================
         $ZipFileResults = @()
         $CloudDriver = @()
         $CloudDriver = foreach ($OfflineCloudDriverItem in $OfflineCloudDriver) {
-            Write-Verbose "DriverGrouping: $($OfflineCloudDriverItem.DriverGrouping)"
-            Write-Verbose "OsArch: $($OfflineCloudDriverItem.OsArch)"
-            Write-Verbose "DriverInfo: $($OfflineCloudDriverItem.DriverInfo)"
             #=================================================
             #   WebRequest
             #=================================================
-            $DriverInfoWebRequest = Invoke-WebRequest -Uri $OfflineCloudDriverItem.DriverInfo -Method Get -Verbose
+            $DriverInfoWebRequest = Invoke-WebRequest -Uri $OfflineCloudDriverItem.DriverInfo -Method Get
             $DriverInfoWebRequestContent = $DriverInfoWebRequest.Content
+
             $DriverInfoHTML = $DriverInfoWebRequest.ParsedHtml.childNodes | Where-Object {$_.nodename -eq 'HTML'} 
             $DriverInfoHEAD = $DriverInfoHTML.childNodes | Where-Object {$_.nodename -eq 'HEAD'}
             $DriverInfoMETA = $DriverInfoHEAD.childNodes | Where-Object {$_.nodename -like "meta*"} | Select-Object -Property Name, Content
+            $OSCompatibility = $DriverInfoMETA | Where-Object {$_.name -eq 'DownloadOSes'} | Select-Object -ExpandProperty Content
+            Write-Verbose "OSCompatibility: $OSCompatibility"
             #=================================================
             #   Driver Filter
             #=================================================
             $ZipFileResults = @($DriverInfoWebRequestContent -split " " -split '"' -match 'http' -match "downloadmirror" -match ".zip")
-
-            if ($OfflineCloudDriverItem.OsArch -match 'x64') {
-                $ZipFileResults = $ZipFileResults | Where-Object {$_ -notmatch 'win32'}
-            }
-            if ($OfflineCloudDriverItem.OsArch -match 'x86') {
-                $ZipFileResults = $ZipFileResults | Where-Object {$_ -notmatch 'win64'}
-            }
             $ZipFileResults = $ZipFileResults | Select-Object -Unique
             #=================================================
             #   Driver Details
             #=================================================
             foreach ($DriverZipFile in $ZipFileResults) {
-                Write-Verbose "Zip File: $DriverZipFile"
+                Write-Verbose "Latest DriverPack: $DriverZipFile"
                 #=================================================
                 #   Defaults
                 #=================================================
                 $OSDVersion = $(Get-Module -Name OSD | Sort-Object Version | Select-Object Version -Last 1).Version
                 $LastUpdate = [datetime] $(Get-Date)
                 $OSDStatus = $null
-                $OSDGroup = 'IntelRadeonDisplay'
+                $OSDGroup = 'IntelEthernet'
                 $OSDType = 'Driver'
 
                 $DriverName = $null
@@ -81,9 +73,8 @@ function Get-CloudDriverIntelRadeonGraphics {
                 $DriverReleaseId = $null
                 $DriverGrouping = $null
 
-                $OperatingSystem = @()
-                $OsVersion = $OfflineCloudDriverItem.OsVersion
-                $OsArch = $OfflineCloudDriverItem.OsArch
+                $OsVersion = '10.0'
+                $OsArch = 'x64'
                 $OsBuildMax = @()
                 $OsBuildMin = @()
         
@@ -92,7 +83,7 @@ function Get-CloudDriverIntelRadeonGraphics {
                 $MakeLike = @()
                 $MakeNotLike = @()
                 $MakeMatch = @()
-                $MakeNotMatch = @('Microsoft')
+                $MakeNotMatch = @()
         
                 $Generation = $null
                 $SystemFamily = $null
@@ -102,7 +93,7 @@ function Get-CloudDriverIntelRadeonGraphics {
                 $ModelLike = @()
                 $ModelNotLike = @()
                 $ModelMatch = @()
-                $ModelNotMatch = @('Surface')
+                $ModelNotMatch = @()
         
                 $SystemSku = @()
                 $SystemSkuNe = @()
@@ -134,22 +125,23 @@ function Get-CloudDriverIntelRadeonGraphics {
                     #Write-Verbose "LastUpdate: $LastUpdate"
                 }
                 #=================================================
-                #   DriverVersion
-                #=================================================
-                $DriverVersion = $DriverInfoMETA | Where-Object {$_.name -eq 'DownloadVersion'} | Select-Object -ExpandProperty Content
-                #=================================================
                 #   DriverUrl
                 #=================================================
                 $DriverUrl = $DriverZipFile
+                $DownloadFile = Split-Path $DriverUrl -Leaf
+                #=================================================
+                #   DriverVersion
+                #=================================================
+                $DriverVersion = ($DownloadFile -split '.zip')[0]
+                $DriverVersion = $DriverVersion -replace '_', '.'
                 #=================================================
                 #   Values
                 #=================================================
                 $DriverGrouping = $OfflineCloudDriverItem.DriverGrouping
                 $DriverName = "$DriverGrouping $OsArch $DriverVersion $OsVersion"
                 $DriverDescription = $DriverInfoMETA | Where-Object {$_.name -eq 'Description'} | Select-Object -ExpandProperty Content
-                $DownloadFile = Split-Path $DriverUrl -Leaf
-                $OSDPnpClass = 'Display'
-                $OSDPnpClassGuid = '{4D36E968-E325-11CE-BFC1-08002BE10318}'
+                $OSDPnpClass = 'Net'
+                $OSDPnpClassGuid = '{4D36E972-E325-11CE-BFC1-08002BE10318}'
                 #=================================================
                 #   Create Object
                 #=================================================
@@ -219,7 +211,7 @@ function Get-CloudDriverIntelRadeonGraphics {
     #   Offline
     #=================================================
     else {
-        Write-Verbose "Catalog is Offline"
+        Write-Verbose "CloudDriver Offline"
         $CloudDriver = $OfflineCloudDriver
     }
     #=================================================
@@ -231,7 +223,7 @@ function Get-CloudDriverIntelRadeonGraphics {
     #=================================================
     $CloudDriver = $CloudDriver | Select-Object OSDVersion, LastUpdate, OSDStatus, OSDType, OSDGroup,`
     DriverName, DriverVersion,`
-    OsVersion, OsArch, MakeNotMatch, ModelNotMatch,`
+    OsVersion, OsArch,`
     DriverGrouping,`
     DownloadFile, DriverUrl, DriverInfo, DriverDescription,`
     OSDGuid,`
@@ -240,7 +232,19 @@ function Get-CloudDriverIntelRadeonGraphics {
     #   Sort-Object
     #=================================================
     $CloudDriver = $CloudDriver | Sort-Object -Property LastUpdate -Descending
-    $CloudDriver | ConvertTo-Json | Out-File "$env:TEMP\CloudDriverIntelRadeonGraphics.json" -Encoding ascii -Width 2000 -Force
+    $CloudDriver | ConvertTo-Json | Out-File "$env:TEMP\CloudDriverIntelEthernet.json" -Encoding ascii -Width 2000 -Force
+    #=================================================
+    #   Filter
+    #=================================================
+    switch ($CompatArch) {
+        'x64'   {$CloudDriver = $CloudDriver | Where-Object {$_.OSArch -match 'x64'}}
+        'x86'   {$CloudDriver = $CloudDriver | Where-Object {$_.OSArch -match 'x86'}}
+    }
+    switch ($CompatOS) {
+        'Win7'   {$CloudDriver = $CloudDriver | Where-Object {$_.OsVersion -match '6.0'}}
+        'Win8'   {$CloudDriver = $CloudDriver | Where-Object {$_.OsVersion -match '6.3'}}
+        'Win10'   {$CloudDriver = $CloudDriver | Where-Object {$_.OsVersion -match '10.0'}}
+    }
     #=================================================
     #   Return
     #=================================================

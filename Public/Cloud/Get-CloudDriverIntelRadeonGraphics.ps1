@@ -1,23 +1,16 @@
 <#
 .SYNOPSIS
-Returns a Intel Graphics Driver Object
+Returns a Intel Radeon Graphics Driver Object
 
 .DESCRIPTION
-Returns a Intel Graphics Driver Object
+Returns a Intel Radeon Graphics Driver Object
 
 .LINK
+https://osddrivers.osdeploy.com
 #>
-function Get-CloudDriverIntelGraphics {
+function Get-CloudDriverIntelRadeonGraphics {
     [CmdletBinding()]
     param (
-        [ValidateSet('x64','x86')]
-        [System.String]
-        $CompatArch,
-        
-        [ValidateSet('Win7','Win10')]
-        [System.String]
-        $CompatOS,
-        
         [System.Management.Automation.SwitchParameter]
         $Force
     )
@@ -25,7 +18,7 @@ function Get-CloudDriverIntelGraphics {
     #   Online
     #=================================================
     $IsOnline = $false
-    $DriverUrl = 'https://www.intel.com/content/www/us/en/download/19344/intel-graphics-windows-dch-drivers.html'
+    $DriverUrl = 'https://www.intel.com/content/www/us/en/download/19282/radeon-rx-vega-m-graphics.html'
 
     if ($Force) {
         $IsOnline = Test-WebConnection $DriverUrl
@@ -33,20 +26,8 @@ function Get-CloudDriverIntelGraphics {
     #=================================================
     #   OfflineCloudDriver
     #=================================================
-    $OfflineCloudDriverPath = "$($MyInvocation.MyCommand.Module.ModuleBase)\clouddriver\CloudDriverIntelGraphics.json"
+    $OfflineCloudDriverPath = "$($MyInvocation.MyCommand.Module.ModuleBase)\Catalogs\CloudDriver\CloudDriverIntelRadeonGraphics.json"
     $OfflineCloudDriver = Get-Content -Path $OfflineCloudDriverPath -Raw | ConvertFrom-Json
-    #=================================================
-    #   Filter
-    #=================================================
-    switch ($CompatArch) {
-        'x64'   {$OfflineCloudDriver = $OfflineCloudDriver | Where-Object {$_.OSArch -match 'x64'}}
-        'x86'   {$OfflineCloudDriver = $OfflineCloudDriver | Where-Object {$_.OSArch -match 'x86'}}
-    }
-    switch ($CompatOS) {
-        'Win7'   {$OfflineCloudDriver = $OfflineCloudDriver | Where-Object {$_.OsVersion -match '6.0'}}
-        'Win8'   {$OfflineCloudDriver = $OfflineCloudDriver | Where-Object {$_.OsVersion -match '6.3'}}
-        'Win10'   {$OfflineCloudDriver = $OfflineCloudDriver | Where-Object {$_.OsVersion -match '10.0'}}
-    }
     #=================================================
     #   IsOnline
     #=================================================
@@ -92,7 +73,7 @@ function Get-CloudDriverIntelGraphics {
                 $OSDVersion = $(Get-Module -Name OSD | Sort-Object Version | Select-Object Version -Last 1).Version
                 $LastUpdate = [datetime] $(Get-Date)
                 $OSDStatus = $null
-                $OSDGroup = 'IntelDisplay'
+                $OSDGroup = 'IntelRadeonDisplay'
                 $OSDType = 'Driver'
 
                 $DriverName = $null
@@ -143,7 +124,7 @@ function Get-CloudDriverIntelGraphics {
                 #$LastUpdate = [datetime]::ParseExact($LastUpdateMeta, "MM/dd/yyyy HH:mm:ss", $null)
 
                 $LastUpdateMeta = $DriverInfoMETA | Where-Object {$_.name -eq 'LastUpdate'} | Select-Object -ExpandProperty Content
-                Write-Verbose "LastUpdateRaw: $LastUpdateMeta"
+                Write-Verbose "LastUpdateMeta: $LastUpdateMeta"
 
                 if ($LastUpdateMeta) {
                     $LastUpdateSplit = ($LastUpdateMeta -split (' '))[0]
@@ -259,7 +240,7 @@ function Get-CloudDriverIntelGraphics {
     #   Sort-Object
     #=================================================
     $CloudDriver = $CloudDriver | Sort-Object -Property LastUpdate -Descending
-    $CloudDriver | ConvertTo-Json | Out-File "$env:TEMP\CloudDriverIntelGraphics.json" -Encoding ascii -Width 2000 -Force
+    $CloudDriver | ConvertTo-Json | Out-File "$env:TEMP\CloudDriverIntelRadeonGraphics.json" -Encoding ascii -Width 2000 -Force
     #=================================================
     #   Return
     #=================================================
