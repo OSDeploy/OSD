@@ -25,10 +25,6 @@ https://github.com/OSDeploy/OSD/tree/master/Docs
 function Get-DellSystemCatalog {
     [CmdletBinding()]
     param (
-        #Specifies a download path for matching results displayed in Out-GridView
-        [System.String]
-        $DownloadPath,
-
         #Limits the results to match the current system
         [System.Management.Automation.SwitchParameter]
         $Compatible,
@@ -38,11 +34,15 @@ function Get-DellSystemCatalog {
         [System.String]
         $Component,
 
+        #Specifies a download path for matching results displayed in Out-GridView
+        [System.String]
+        $DownloadPath,
+
         #Checks for the latest Online version
         [System.Management.Automation.SwitchParameter]
         $Online,
 
-        #Updates the local catalog in the OSD Module
+        #Updates the OSD Module Offline Catalog
         [System.Management.Automation.SwitchParameter]
         $UpdateModuleCatalog
     )

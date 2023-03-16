@@ -15,7 +15,7 @@ function Get-IntelRadeonDriverPack {
         [System.Management.Automation.SwitchParameter]
         $Online,
 
-        #Updates the local catalog in the OSD Module
+        #Updates the OSD Module Offline Catalog
         [System.Management.Automation.SwitchParameter]
         $UpdateModuleCatalog
     )

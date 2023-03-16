@@ -25,7 +25,7 @@ function Get-MicrosoftDriverPackCatalog {
         [System.Management.Automation.SwitchParameter]
         $Online,
 
-        #Updates the local catalog in the OSD Module
+        #Updates the OSD Module Offline Catalog
         [System.Management.Automation.SwitchParameter]
         $UpdateModuleCatalog
     )
