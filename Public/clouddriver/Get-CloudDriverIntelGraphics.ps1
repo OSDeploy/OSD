@@ -11,18 +11,30 @@ function Get-CloudDriverIntelGraphics {
     [CmdletBinding()]
     param (
         [ValidateSet('x64','x86')]
-        [string]$CompatArch,
+        [System.String]
+        $CompatArch,
+        
         [ValidateSet('Win7','Win10')]
-        [string]$CompatOS
+        [System.String]
+        $CompatOS,
+        
+        [System.Management.Automation.SwitchParameter]
+        $Force
     )
     #=================================================
-    #   Uri
+    #   Online
     #=================================================
-    $Uri = 'https://www.intel.com/content/www/us/en/download/19344/intel-graphics-windows-dch-drivers.html'
+    $IsOnline = $false
+    $DriverUrl = 'https://www.intel.com/content/www/us/en/download/19344/intel-graphics-windows-dch-drivers.html'
+
+    if ($Force) {
+        $IsOnline = Test-WebConnection $DriverUrl
+    }
     #=================================================
-    #   Import Base Catalog
+    #   OfflineCloudDriver
     #=================================================
-    $OfflineCloudDriver = Get-Content -Path "$($MyInvocation.MyCommand.Module.ModuleBase)\clouddriver\CloudDriverIntelGraphics.json" -Raw | ConvertFrom-Json
+    $OfflineCloudDriverPath = "$($MyInvocation.MyCommand.Module.ModuleBase)\clouddriver\CloudDriverIntelGraphics.json"
+    $OfflineCloudDriver = Get-Content -Path $OfflineCloudDriverPath -Raw | ConvertFrom-Json
     #=================================================
     #   Filter
     #=================================================
@@ -36,12 +48,10 @@ function Get-CloudDriverIntelGraphics {
         'Win10'   {$OfflineCloudDriver = $OfflineCloudDriver | Where-Object {$_.OsVersion -match '10.0'}}
     }
     #=================================================
-    #   Online
+    #   IsOnline
     #=================================================
-    $IsOnline = Test-WebConnection $Uri
-
     if ($IsOnline) {
-        Write-Verbose "Catalog is Online"
+        Write-Verbose "CloudDriver Online"
         #=================================================
         #   ForEach
         #=================================================

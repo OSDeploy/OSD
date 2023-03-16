@@ -11,38 +11,28 @@ https://osddrivers.osdeploy.com
 function Get-CloudDriverIntelRadeonGraphics {
     [CmdletBinding()]
     param (
-        [ValidateSet('x64','x86')]
-        [string]$CompatArch,
-        [ValidateSet('Win10')]
-        [string]$CompatOS
+        [System.Management.Automation.SwitchParameter]
+        $Force
     )
-    #=================================================
-    #   Uri
-    #=================================================
-    $Uri = 'https://www.intel.com/content/www/us/en/download/19282/radeon-rx-vega-m-graphics.html'
-    #=================================================
-    #   Import Base Catalog
-    #=================================================
-    $OfflineCloudDriver = Get-Content -Path "$($MyInvocation.MyCommand.Module.ModuleBase)\clouddriver\CloudDriverIntelRadeonGraphics.json" -Raw | ConvertFrom-Json
-    #=================================================
-    #   Filter
-    #=================================================
-    switch ($CompatArch) {
-        'x64'   {$OfflineCloudDriver = $OfflineCloudDriver | Where-Object {$_.OSArch -match 'x64'}}
-        'x86'   {$OfflineCloudDriver = $OfflineCloudDriver | Where-Object {$_.OSArch -match 'x86'}}
-    }
-    switch ($CompatOS) {
-        'Win7'   {$OfflineCloudDriver = $OfflineCloudDriver | Where-Object {$_.OsVersion -match '6.0'}}
-        'Win8'   {$OfflineCloudDriver = $OfflineCloudDriver | Where-Object {$_.OsVersion -match '6.3'}}
-        'Win10'   {$OfflineCloudDriver = $OfflineCloudDriver | Where-Object {$_.OsVersion -match '10.0'}}
-    }
     #=================================================
     #   Online
     #=================================================
-    $IsOnline = Test-WebConnection $Uri
+    $IsOnline = $false
+    $DriverUrl = 'https://www.intel.com/content/www/us/en/download/19282/radeon-rx-vega-m-graphics.html'
 
+    if ($Force) {
+        $IsOnline = Test-WebConnection $DriverUrl
+    }
+    #=================================================
+    #   OfflineCloudDriver
+    #=================================================
+    $OfflineCloudDriverPath = "$($MyInvocation.MyCommand.Module.ModuleBase)\clouddriver\CloudDriverIntelRadeonGraphics.json"
+    $OfflineCloudDriver = Get-Content -Path $OfflineCloudDriverPath -Raw | ConvertFrom-Json
+    #=================================================
+    #   IsOnline
+    #=================================================
     if ($IsOnline) {
-        Write-Verbose "Catalog is Online"
+        Write-Verbose "CloudDriver Online"
         #=================================================
         #   ForEach
         #=================================================

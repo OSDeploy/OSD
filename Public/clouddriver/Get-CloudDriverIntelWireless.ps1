@@ -9,25 +9,35 @@ function Get-CloudDriverIntelWireless {
     [CmdletBinding()]
     param (
         [ValidateSet('x64','x86')]
-        [string]$CompatArch,
+        [System.String]
+        $CompatArch,
+        
         [ValidateSet('Win7','Win10')]
-        [string]$CompatOS
+        [System.String]
+        $CompatOS,
+        
+        [System.Management.Automation.SwitchParameter]
+        $Force
     )
-    #=================================================
-    #   Uri
-    #=================================================
-    $Uri = 'https://www.intel.com/content/www/us/en/support/articles/000017246/network-and-i-o/wireless-networking.html'
-    #=================================================
-    #   Import Offline CloudDriver
-    #=================================================
-    $OfflineCloudDriver = Get-Content -Path "$($MyInvocation.MyCommand.Module.ModuleBase)\clouddriver\CloudDriverIntelWireless.json" -Raw | ConvertFrom-Json
     #=================================================
     #   Online
     #=================================================
-    $IsOnline = Test-WebConnection $Uri
+    $IsOnline = $false
+    $DriverUrl = 'https://www.intel.com/content/www/us/en/support/articles/000017246/network-and-i-o/wireless-networking.html'
 
+    if ($Force) {
+        $IsOnline = Test-WebConnection $DriverUrl
+    }
+    #=================================================
+    #   OfflineCloudDriver
+    #=================================================
+    $OfflineCloudDriverPath = "$($MyInvocation.MyCommand.Module.ModuleBase)\clouddriver\CloudDriverIntelWireless.json"
+    $OfflineCloudDriver = Get-Content -Path $OfflineCloudDriverPath -Raw | ConvertFrom-Json
+    #=================================================
+    #   IsOnline
+    #=================================================
     if ($IsOnline) {
-        Write-Verbose "Catalog is Online"
+        Write-Verbose "CloudDriver Online"
         #All Drivers are from the same URL
         $OfflineCloudDriver = $OfflineCloudDriver | Select-Object -First 1
         #=================================================

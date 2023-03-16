@@ -1,7 +1,7 @@
 function Update-CloudDriverCatalogIntelEthernet {
     [CmdletBinding()]
     param ()
-    $null = Get-CloudDriverIntelEthernet -Verbose
+    $null = Get-CloudDriverIntelEthernet -Force -Verbose
     $Source = Join-Path $env:TEMP 'CloudDriverIntelEthernet.json'
     $Destination = Join-Path (Get-Module -Name OSD -ListAvailable | Sort-Object Version -Descending | Select-Object -First 1).ModuleBase "clouddriver\CloudDriverIntelEthernet.json"
     if (Test-Path $Source) {
@@ -11,7 +11,7 @@ function Update-CloudDriverCatalogIntelEthernet {
 function Update-CloudDriverCatalogIntelGraphics {
     [CmdletBinding()]
     param ()
-    $null = Get-CloudDriverIntelGraphics -Verbose
+    $null = Get-CloudDriverIntelGraphics -Force -Verbose
     $Source = Join-Path $env:TEMP 'CloudDriverIntelGraphics.json'
     $Destination = Join-Path (Get-Module -Name OSD -ListAvailable | Sort-Object Version -Descending | Select-Object -First 1).ModuleBase "clouddriver\CloudDriverIntelGraphics.json"
     if (Test-Path $Source) {
@@ -21,7 +21,7 @@ function Update-CloudDriverCatalogIntelGraphics {
 function Update-CloudDriverCatalogIntelRadeonGraphics {
     [CmdletBinding()]
     param ()
-    $null = Get-CloudDriverIntelRadeonGraphics -Verbose
+    $null = Get-CloudDriverIntelRadeonGraphics -Force -Verbose
     $Source = Join-Path $env:TEMP 'CloudDriverIntelRadeonGraphics.json'
     $Destination = Join-Path (Get-Module -Name OSD -ListAvailable | Sort-Object Version -Descending | Select-Object -First 1).ModuleBase "clouddriver\CloudDriverIntelRadeonGraphics.json"
     if (Test-Path $Source) {
@@ -31,7 +31,7 @@ function Update-CloudDriverCatalogIntelRadeonGraphics {
 function Update-CloudDriverCatalogIntelWireless {
     [CmdletBinding()]
     param ()
-    $null = Get-CloudDriverIntelWireless -Verbose
+    $null = Get-CloudDriverIntelWireless -Force -Verbose
     $Source = Join-Path $env:TEMP 'CloudDriverIntelWireless.json'
     $Destination = Join-Path (Get-Module -Name OSD -ListAvailable | Sort-Object Version -Descending | Select-Object -First 1).ModuleBase "clouddriver\CloudDriverIntelWireless.json"
     if (Test-Path $Source) {

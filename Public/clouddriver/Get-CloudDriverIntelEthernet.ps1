@@ -7,22 +7,29 @@ Returns a Intel Wireless Driver Object
 #>
 function Get-CloudDriverIntelEthernet {
     [CmdletBinding()]
-    param ()
-    #=================================================
-    #   Uri
-    #=================================================
-    $Uri = 'https://www.intel.com/content/www/us/en/download/15084/intel-ethernet-adapter-complete-driver-pack.html'
-    #=================================================
-    #   Import Offline CloudDriver
-    #=================================================
-    $OfflineCloudDriver = Get-Content -Path "$($MyInvocation.MyCommand.Module.ModuleBase)\clouddriver\CloudDriverIntelEthernet.json" -Raw | ConvertFrom-Json
+    param (
+        [System.Management.Automation.SwitchParameter]
+        $Force
+    )
     #=================================================
     #   Online
     #=================================================
-    $IsOnline = Test-WebConnection $Uri
+    $IsOnline = $false
+    $DriverUrl = 'https://www.intel.com/content/www/us/en/download/15084/intel-ethernet-adapter-complete-driver-pack.html'
 
+    if ($Force) {
+        $IsOnline = Test-WebConnection $DriverUrl
+    }
+    #=================================================
+    #   OfflineCloudDriver
+    #=================================================
+    $OfflineCloudDriverPath = "$($MyInvocation.MyCommand.Module.ModuleBase)\clouddriver\CloudDriverIntelEthernet.json"
+    $OfflineCloudDriver = Get-Content -Path $OfflineCloudDriverPath -Raw | ConvertFrom-Json
+    #=================================================
+    #   IsOnline
+    #=================================================
     if ($IsOnline) {
-        Write-Verbose "Catalog is Online"
+        Write-Verbose "CloudDriver Online"
         #All Drivers are from the same URL
         $OfflineCloudDriver = $OfflineCloudDriver | Select-Object -First 1
         #=================================================
@@ -204,7 +211,7 @@ function Get-CloudDriverIntelEthernet {
     #   Offline
     #=================================================
     else {
-        Write-Verbose "Catalog is Offline"
+        Write-Verbose "CloudDriver Offline"
         $CloudDriver = $OfflineCloudDriver
     }
     #=================================================
