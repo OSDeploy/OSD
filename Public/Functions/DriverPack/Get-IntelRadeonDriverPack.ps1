@@ -26,7 +26,7 @@ function Get-IntelRadeonDriverPack {
     #=================================================
     #   OfflineCloudDriver
     #=================================================
-    $OfflineCloudDriverPath = "$($MyInvocation.MyCommand.Module.ModuleBase)\Catalogs\DriverPacks\IntelRadeonDriverPack.json"
+    $OfflineCloudDriverPath = "$($MyInvocation.MyCommand.Module.ModuleBase)\Catalogs\IntelRadeonDriverPack.json"
     $OfflineCloudDriver = Get-Content -Path $OfflineCloudDriverPath -Raw | ConvertFrom-Json
     #=================================================
     #   IsOnline

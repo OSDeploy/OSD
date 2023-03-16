@@ -6,7 +6,7 @@ function Get-HpDriverPack {
     #=================================================
     #   Get Catalog
     #=================================================
-    $Results = Get-OSDCatalogHPDriverPack | `
+    $Results = Get-HPDriverPackCatalog | `
     Select-Object CatalogVersion, Status, ReleaseDate, Manufacturer, Model, `
     @{Name='Product';Expression={([array]$_.SystemId)}}, `
     @{Name='Name';Expression={($_.Name)}}, `

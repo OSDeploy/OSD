@@ -6,7 +6,7 @@ function Get-DellDriverPack {
     #=================================================
     #   Get Catalog
     #=================================================
-    $Results = Get-OSDCatalogDellDriverPack | `
+    $Results = Get-DellDriverPackCatalog | `
     Select-Object CatalogVersion, Status, ReleaseDate, Manufacturer, Model, `
     @{Name='Product';Expression={([array]$_.SystemID)}}, `
     Name, `

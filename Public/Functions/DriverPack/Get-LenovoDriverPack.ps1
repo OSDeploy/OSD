@@ -6,7 +6,7 @@ function Get-LenovoDriverPack {
     #=================================================
     #   Get Catalog
     #=================================================
-    $Results = Get-OSDCatalogLenovoDriverPack | `
+    $Results = Get-LenovoDriverPackCatalog | `
     Select-Object CatalogVersion, Status, ReleaseDate, Manufacturer, Model, `
     @{Name='Product';Expression={([array]$_.Product)}}, `
     Name, PackageID, FileName, `

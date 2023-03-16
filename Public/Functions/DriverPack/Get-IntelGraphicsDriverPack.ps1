@@ -33,7 +33,7 @@ function Get-IntelGraphicsDriverPack {
     #=================================================
     #   OfflineCloudDriver
     #=================================================
-    $OfflineCloudDriverPath = "$($MyInvocation.MyCommand.Module.ModuleBase)\Catalogs\DriverPacks\IntelGraphicsDriverPack.json"
+    $OfflineCloudDriverPath = "$($MyInvocation.MyCommand.Module.ModuleBase)\Catalogs\IntelGraphicsDriverPack.json"
     $OfflineCloudDriver = Get-Content -Path $OfflineCloudDriverPath -Raw | ConvertFrom-Json
     #=================================================
     #   Filter

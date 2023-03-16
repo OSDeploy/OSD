@@ -31,7 +31,7 @@ function Get-IntelWirelessDriverPack {
     #=================================================
     #   OfflineCloudDriver
     #=================================================
-    $OfflineCloudDriverPath = "$($MyInvocation.MyCommand.Module.ModuleBase)\Catalogs\DriverPacks\IntelWirelessDriverPack.json"
+    $OfflineCloudDriverPath = "$($MyInvocation.MyCommand.Module.ModuleBase)\Catalogs\IntelWirelessDriverPack.json"
     $OfflineCloudDriver = Get-Content -Path $OfflineCloudDriverPath -Raw | ConvertFrom-Json
     #=================================================
     #   IsOnline

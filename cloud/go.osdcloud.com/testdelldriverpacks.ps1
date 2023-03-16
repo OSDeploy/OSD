@@ -30,7 +30,7 @@ powershell iex (irm go.osdcloud.com/testdelldriverpacks)
     powershell iex (irm go.osdcloud.com/testdelldriverpacks)
 #>
 
-$DriverPackCatalog = 'https://raw.githubusercontent.com/OSDeploy/OSD/master/Catalogs/OSDCatalog/OSDCatalogDellDriverPack.json'
+$DriverPackCatalog = 'https://raw.githubusercontent.com/OSDeploy/OSD/master/Catalogs/DellDriverPackCatalog.json'
 
 $DriverPacks = Invoke-RestMethod -Uri $DriverPackCatalog
 

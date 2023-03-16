@@ -12,15 +12,15 @@ function Get-MyBiosUpdate {
     #   Action
     #=================================================
     if ($Manufacturer -eq 'Dell') {
-        $Result = Get-CatalogDellBios | Where-Object {($_.SupportedSystemID -contains $Product)}
+        $Result = Get-DellBiosCatalog | Where-Object {($_.SupportedSystemID -contains $Product)}
         $Result[0]
     }
     elseif ($Manufacturer -eq 'HP') {
-        $Result = Get-CatalogHPBios | Where-Object {($_.SupportedSystemId -contains $Product)}
+        $Result = Get-HPBiosCatalog | Where-Object {($_.SupportedSystemId -contains $Product)}
         $Result[0]
     }
     elseif ($Manufacturer -eq 'Lenovo') {
-        $Result = Get-OSDCatalogLenovoBios | Where-Object {($_.SupportedProduct -contains $Product)}
+        $Result = Get-LenovoBiosCatalog | Where-Object {($_.SupportedProduct -contains $Product)}
         $Result[0]
     }
     else {

@@ -4,9 +4,9 @@ function Get-MicrosoftDriverPack {
         [System.String]$DownloadPath
     )
     #=================================================
-    #   Get-OSDCatalogMicrosoftDriverPack
+    #   Get-MicrosoftDriverPackCatalog
     #=================================================
-    $Results = Get-OSDCatalogMicrosoftDriverPack | `
+    $Results = Get-MicrosoftDriverPackCatalog | `
     Select-Object CatalogVersion, Status, ReleaseDate, Manufacturer, Model, Product, Name, PackageID, FileName, `
     @{Name='DriverPackUrl';Expression={($_.Url)}}, `
     @{Name='DriverPackOS';Expression={($_.OSVersion)}}, `
