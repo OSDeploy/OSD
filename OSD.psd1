@@ -298,14 +298,14 @@
         'Get-OSDMetrics',
         'Get-OSDCloudOSNames',
         'Test-DynamicValidateSet',
-        'Get-CloudDriverIntelEthernet',
-        'Get-CloudDriverIntelGraphics',
-        'Get-CloudDriverIntelRadeonGraphics',
-        'Get-CloudDriverIntelWireless',
-        'Update-CloudDriverCatalogIntelEthernet',
-        'Update-CloudDriverCatalogIntelGraphics',
-        'Update-CloudDriverCatalogIntelRadeonGraphics',
-        'Update-CloudDriverCatalogIntelWireless'
+        'Get-IntelEthernetDriverPack',
+        'Get-IntelGraphicsDriverPack',
+        'Get-IntelRadeonDriverPack',
+        'Get-IntelWirelessDriverPack',
+        'Update-IntelEthernetDriverPackCatalog',
+        'Update-IntelGraphicsDriverPackCatalog',
+        'Update-IntelRadeonDriverPackCatalog',
+        'Update-IntelWirelessDriverPackCatalog'
     )
     CmdletsToExport = @()
     VariablesToExport = @()

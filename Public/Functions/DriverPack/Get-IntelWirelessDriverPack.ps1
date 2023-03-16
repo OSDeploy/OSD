@@ -5,7 +5,7 @@ Returns a Intel Wireless Driver Object
 .DESCRIPTION
 Returns a Intel Wireless Driver Object
 #>
-function Get-CloudDriverIntelWireless {
+function Get-IntelWirelessDriverPack {
     [CmdletBinding()]
     param (
         [ValidateSet('x64','x86')]
@@ -31,7 +31,7 @@ function Get-CloudDriverIntelWireless {
     #=================================================
     #   OfflineCloudDriver
     #=================================================
-    $OfflineCloudDriverPath = "$($MyInvocation.MyCommand.Module.ModuleBase)\Catalogs\CloudDriver\CloudDriverIntelWireless.json"
+    $OfflineCloudDriverPath = "$($MyInvocation.MyCommand.Module.ModuleBase)\Catalogs\DriverPacks\IntelWirelessDriverPack.json"
     $OfflineCloudDriver = Get-Content -Path $OfflineCloudDriverPath -Raw | ConvertFrom-Json
     #=================================================
     #   IsOnline
@@ -253,7 +253,7 @@ function Get-CloudDriverIntelWireless {
     #   Sort-Object
     #=================================================
     $CloudDriver = $CloudDriver | Sort-Object -Property LastUpdate -Descending
-    $CloudDriver | ConvertTo-Json | Out-File "$env:TEMP\CloudDriverIntelWireless.json" -Encoding ascii -Width 2000 -Force
+    $CloudDriver | ConvertTo-Json | Out-File "$env:TEMP\IntelWirelessDriverPack.json" -Encoding ascii -Width 2000 -Force
     #=================================================
     #   Filter
     #=================================================

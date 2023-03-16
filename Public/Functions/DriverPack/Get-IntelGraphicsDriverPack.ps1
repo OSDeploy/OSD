@@ -7,7 +7,7 @@ Returns a Intel Graphics Driver Object
 
 .LINK
 #>
-function Get-CloudDriverIntelGraphics {
+function Get-IntelGraphicsDriverPack {
     [CmdletBinding()]
     param (
         [ValidateSet('x64','x86')]
@@ -33,7 +33,7 @@ function Get-CloudDriverIntelGraphics {
     #=================================================
     #   OfflineCloudDriver
     #=================================================
-    $OfflineCloudDriverPath = "$($MyInvocation.MyCommand.Module.ModuleBase)\Catalogs\CloudDriver\CloudDriverIntelGraphics.json"
+    $OfflineCloudDriverPath = "$($MyInvocation.MyCommand.Module.ModuleBase)\Catalogs\DriverPacks\IntelGraphicsDriverPack.json"
     $OfflineCloudDriver = Get-Content -Path $OfflineCloudDriverPath -Raw | ConvertFrom-Json
     #=================================================
     #   Filter
@@ -259,7 +259,7 @@ function Get-CloudDriverIntelGraphics {
     #   Sort-Object
     #=================================================
     $CloudDriver = $CloudDriver | Sort-Object -Property LastUpdate -Descending
-    $CloudDriver | ConvertTo-Json | Out-File "$env:TEMP\CloudDriverIntelGraphics.json" -Encoding ascii -Width 2000 -Force
+    $CloudDriver | ConvertTo-Json | Out-File "$env:TEMP\IntelGraphicsDriverPack.json" -Encoding ascii -Width 2000 -Force
     #=================================================
     #   Return
     #=================================================

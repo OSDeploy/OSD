@@ -39,7 +39,7 @@ if (Test-Path $Source) {
 #   Update-CloudDriverCatalog
 #=================================================
 Import-Module -Name OSD -Force
-Update-CloudDriverCatalogIntelEthernet
-Update-CloudDriverCatalogIntelGraphics
-Update-CloudDriverCatalogIntelRadeonGraphics
-Update-CloudDriverCatalogIntelWireless
+Update-IntelEthernetDriverPackCatalog
+Update-IntelGraphicsDriverPackCatalog
+Update-IntelRadeonDriverPackCatalog
+Update-IntelWirelessDriverPackCatalog
