@@ -4,11 +4,24 @@ function Initialize-OSDCloudStartnet {
         [switch] $WirelessConnect
     )
     if ($env:SystemDrive -eq 'X:') {
+        #=================================================
+        #   Generate CIM Logs
+        #=================================================
+        #Write-Host -ForegroundColor DarkGray "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Saving CIM Device Details"
+
+        if (-NOT (Test-Path -Path 'X:\OSDCloud\Logs')) {
+            New-Item -Path 'X:\OSDCloud\Logs' -ItemType Directory -Force | Out-Null
+        }
+
+        #Get-CimInstance -ClassName CIM_DiskDrive | Select-Object -Property * | Out-File X:\OSDCloud\Logs\CIM_DiskDrive.txt -Width 4096 -Force
+        #Get-CimInstance -ClassName CIM_LogicalDevice | Select-Object -Property * | Out-File X:\OSDCloud\Logs\CIM_LogicalDevice.txt -Width 4096 -Force
+        #Get-CimInstance -ClassName CIM_LogicalDisk | Select-Object -Property * | Out-File X:\OSDCloud\Logs\CIM_LogicalDisk.txt -Width 4096 -Force
+        #Get-CimInstance -ClassName CIM_OperatingSystem | Select-Object -Property * | Out-File X:\OSDCloud\Logs\CIM_OperatingSystem.txt -Width 4096 -Force
+        #Get-CimInstance -ClassName CIM_NetworkAdapter | Select-Object -Property * | Out-File X:\OSDCloud\Logs\CIM_NetworkAdapter.txt -Width 4096 -Force
         #region
         #==================================================================================================
         #OSDCloud Config Startup Scripts
         #==================================================================================================
-
         <#
         David Segura
         22.11.11.1
@@ -102,5 +115,7 @@ function Initialize-OSDCloudStartnet {
         Import-Module OSD -Force -ErrorAction Ignore -WarningAction Ignore
         $OSDVersion = (Get-Module -Name OSD -ListAvailable | Sort-Object Version -Descending | Select-Object -First 1).Version
         Write-Host -ForegroundColor Green "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) OSDCloud $OSDVersion Ready"
+
+
     }
 }
