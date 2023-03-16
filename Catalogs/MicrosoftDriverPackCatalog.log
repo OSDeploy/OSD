@@ -1,1295 +1,540 @@
-**********************
-PowerShell transcript start
-Start time: 20230314144239
+﻿**********************
+Windows PowerShell transcript start
+Start time: 20230315234052
 Username: OSDCODE\david
 RunAs User: OSDCODE\david
 Configuration Name: 
 Machine: OSDCODE (Microsoft Windows NT 10.0.22621.0)
-Host Application: C:\Program Files\WindowsApps\Microsoft.PowerShell_7.3.3.0_x64__8wekyb3d8bbwe\pwsh.dll -NoProfile -ExecutionPolicy Bypass -Command Import-Module 'c:\Users\david\.vscode\extensions\ms-vscode.powershell-preview-2023.3.0\modules\PowerShellEditorServices\PowerShellEditorServices.psd1'; Start-EditorServices -HostName 'Visual Studio Code Host' -HostProfileId 'Microsoft.VSCode' -HostVersion '2023.3.0' -AdditionalModules @('PowerShellEditorServices.VSCode') -BundledModulesPath 'c:\Users\david\.vscode\extensions\ms-vscode.powershell-preview-2023.3.0\modules' -EnableConsoleRepl -StartupBanner "PowerShell Preview Extension v2023.3.0
-Copyright (c) Microsoft Corporation.
-
-https://aka.ms/vscode-powershell
-Type 'help' to get help.
-" -LogLevel 'Normal' -LogPath 'c:\Users\david\AppData\Roaming\Code\User\globalStorage\ms-vscode.powershell-preview\logs\1678818847-17d75b7e-f190-4fc0-aba9-8ca15e0003cd1678818738282\EditorServices.log' -SessionDetailsPath 'c:\Users\david\AppData\Roaming\Code\User\globalStorage\ms-vscode.powershell-preview\sessions\PSES-VSCode-11812-478847.json' -FeatureFlags @() 
-Process ID: 24972
-PSVersion: 7.3.3
-PSEdition: Core
-GitCommitId: 7.3.3
-OS: Microsoft Windows 10.0.22621
-Platform: Win32NT
-PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1.10032.0, 6.0.0, 6.1.0, 6.2.0, 7.0.0, 7.1.0, 7.2.0, 7.3.3
+Host Application: C:\Windows\system32\WindowsPowerShell\v1.0\PowerShell_ISE.exe
+Process ID: 25952
+PSVersion: 5.1.22621.963
+PSEdition: Desktop
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1.22621.963
+BuildVersion: 10.0.22621.963
+CLRVersion: 4.0.30319.42000
+WSManStackVersion: 3.0
 PSRemotingProtocolVersion: 2.3
 SerializationVersion: 1.1.0.1
-WSManStackVersion: 3.0
 **********************
-Transcript started, output file is C:\Users\david\OneDrive\GitHub\MyModules\OSD\Catalogs\OSDCatalog\OSDCatalogMicrosoftDriverPack.log
+Transcript started, output file is C:\Users\david\OneDrive\GitHub\MyModules\OSD\Catalogs\MicrosoftDriverPackCatalog.log
 VERBOSE: Test-WebConnection OK: https://support.microsoft.com/en-us/surface/download-drivers-and-firmware-for-surface-09bb2e09-2a4b-cb69-0951-078a7739e120
-VERBOSE: HTTP/1.1 HEAD with 0-byte payload
-VERBOSE: received 0-byte response of content type text/html
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 0-byte response of content type text/html; charset=utf-8
 VERBOSE: Processing Surface 3 WiFi
-VERBOSE: HTTP/1.1 GET with 0-byte payload
-VERBOSE: received -byte response of content type text/html
+VERBOSE: GET with 0-byte payload
+VERBOSE: received -1-byte response of content type text/html
 VERBOSE: Testing Download File at https://download.microsoft.com/download/C/5/C/C5C75DC4-0807-44A8-BCC1-6064CFD150F2/Surface3_WiFi_Win10_18362_1902003_0.msi
-VERBOSE: HTTP/1.1 HEAD with 0-byte payload
+VERBOSE: HEAD with 0-byte payload
 VERBOSE: received 191369216-byte response of content type application/octet-stream
 VERBOSE: Last Modified: Thu, 06 May 2021 18:48:07 GMT
-PS>TerminatingError(Get-Date): "Cannot convert 'System.String[]' to the type 'System.DateTime' required by parameter 'Date'. Specified method is not supported."
-
-Get-Date: C:\Users\david\OneDrive\GitHub\MyModules\OSD\Public\Functions\Catalog\Get-OSDCatalogMicrosoftDriverPack.ps1:475:42
-Line |
- 475 |                  $ReleaseDate = (Get-Date $GetLastModified).ToString(' …
-     |                                           ~~~~~~~~~~~~~~~~
-     | Cannot convert 'System.String[]' to the type 'System.DateTime' required by parameter 'Date'. Specified method is not supported.
-
-Get-Date: C:\Users\david\OneDrive\GitHub\MyModules\OSD\Public\Functions\Catalog\Get-OSDCatalogMicrosoftDriverPack.ps1:475:42
-Line |
- 475 |                  $ReleaseDate = (Get-Date $GetLastModified).ToString(' …
-     |                                           ~~~~~~~~~~~~~~~~
-     | Cannot convert 'System.String[]' to the type 'System.DateTime' required by parameter 'Date'. Specified method is not supported.
-
 VERBOSE: Processing Surface 3 LTE ATT
-VERBOSE: HTTP/1.1 GET with 0-byte payload
-VERBOSE: received -byte response of content type text/html
+VERBOSE: GET with 0-byte payload
+VERBOSE: received -1-byte response of content type text/html
 VERBOSE: Testing Download File at https://download.microsoft.com/download/9/7/2/9728FCD1-A108-4EE6-ADFD-FB33C2320CCF/Surface3_4GLTE-ATT_Win10_18362_1902003_0.msi
-VERBOSE: HTTP/1.1 HEAD with 0-byte payload
+VERBOSE: HEAD with 0-byte payload
 VERBOSE: received 207015936-byte response of content type application/octet-stream
 VERBOSE: Last Modified: Thu, 06 May 2021 18:47:02 GMT
-PS>TerminatingError(Get-Date): "Cannot convert 'System.String[]' to the type 'System.DateTime' required by parameter 'Date'. Specified method is not supported."
-
-Get-Date: C:\Users\david\OneDrive\GitHub\MyModules\OSD\Public\Functions\Catalog\Get-OSDCatalogMicrosoftDriverPack.ps1:475:42
-Line |
- 475 |                  $ReleaseDate = (Get-Date $GetLastModified).ToString(' …
-     |                                           ~~~~~~~~~~~~~~~~
-     | Cannot convert 'System.String[]' to the type 'System.DateTime' required by parameter 'Date'. Specified method is not supported.
-
-Get-Date: C:\Users\david\OneDrive\GitHub\MyModules\OSD\Public\Functions\Catalog\Get-OSDCatalogMicrosoftDriverPack.ps1:475:42
-Line |
- 475 |                  $ReleaseDate = (Get-Date $GetLastModified).ToString(' …
-     |                                           ~~~~~~~~~~~~~~~~
-     | Cannot convert 'System.String[]' to the type 'System.DateTime' required by parameter 'Date'. Specified method is not supported.
-
 VERBOSE: Processing Surface 3 LTE Verizon
-VERBOSE: HTTP/1.1 GET with 0-byte payload
-VERBOSE: received -byte response of content type text/html
+VERBOSE: GET with 0-byte payload
+VERBOSE: received -1-byte response of content type text/html
 VERBOSE: Testing Download File at https://download.microsoft.com/download/7/5/7/757B0C6E-0C22-400B-90EA-D8AFBD64CC16/Surface3_4GLTE-NorthAmericaUnlocked_Win10_18362_1902003_0.msi
-VERBOSE: HTTP/1.1 HEAD with 0-byte payload
+VERBOSE: HEAD with 0-byte payload
 VERBOSE: received 207032320-byte response of content type application/octet-stream
 VERBOSE: Last Modified: Thu, 06 May 2021 18:47:17 GMT
-PS>TerminatingError(Get-Date): "Cannot convert 'System.String[]' to the type 'System.DateTime' required by parameter 'Date'. Specified method is not supported."
-
-Get-Date: C:\Users\david\OneDrive\GitHub\MyModules\OSD\Public\Functions\Catalog\Get-OSDCatalogMicrosoftDriverPack.ps1:475:42
-Line |
- 475 |                  $ReleaseDate = (Get-Date $GetLastModified).ToString(' …
-     |                                           ~~~~~~~~~~~~~~~~
-     | Cannot convert 'System.String[]' to the type 'System.DateTime' required by parameter 'Date'. Specified method is not supported.
-
-Get-Date: C:\Users\david\OneDrive\GitHub\MyModules\OSD\Public\Functions\Catalog\Get-OSDCatalogMicrosoftDriverPack.ps1:475:42
-Line |
- 475 |                  $ReleaseDate = (Get-Date $GetLastModified).ToString(' …
-     |                                           ~~~~~~~~~~~~~~~~
-     | Cannot convert 'System.String[]' to the type 'System.DateTime' required by parameter 'Date'. Specified method is not supported.
-
 VERBOSE: Processing Surface 3 LTE North America
-VERBOSE: HTTP/1.1 GET with 0-byte payload
-VERBOSE: received -byte response of content type text/html
+VERBOSE: GET with 0-byte payload
+VERBOSE: received -1-byte response of content type text/html
 VERBOSE: Testing Download File at https://download.microsoft.com/download/7/5/7/757B0C6E-0C22-400B-90EA-D8AFBD64CC16/Surface3_4GLTE-NorthAmericaUnlocked_Win10_18362_1902003_0.msi
-VERBOSE: HTTP/1.1 HEAD with 0-byte payload
+VERBOSE: HEAD with 0-byte payload
 VERBOSE: received 207032320-byte response of content type application/octet-stream
 VERBOSE: Last Modified: Thu, 06 May 2021 18:47:17 GMT
-PS>TerminatingError(Get-Date): "Cannot convert 'System.String[]' to the type 'System.DateTime' required by parameter 'Date'. Specified method is not supported."
-
-Get-Date: C:\Users\david\OneDrive\GitHub\MyModules\OSD\Public\Functions\Catalog\Get-OSDCatalogMicrosoftDriverPack.ps1:475:42
-Line |
- 475 |                  $ReleaseDate = (Get-Date $GetLastModified).ToString(' …
-     |                                           ~~~~~~~~~~~~~~~~
-     | Cannot convert 'System.String[]' to the type 'System.DateTime' required by parameter 'Date'. Specified method is not supported.
-
-Get-Date: C:\Users\david\OneDrive\GitHub\MyModules\OSD\Public\Functions\Catalog\Get-OSDCatalogMicrosoftDriverPack.ps1:475:42
-Line |
- 475 |                  $ReleaseDate = (Get-Date $GetLastModified).ToString(' …
-     |                                           ~~~~~~~~~~~~~~~~
-     | Cannot convert 'System.String[]' to the type 'System.DateTime' required by parameter 'Date'. Specified method is not supported.
-
 VERBOSE: Processing Surface 3 LTE Rest of World
-VERBOSE: HTTP/1.1 GET with 0-byte payload
-VERBOSE: received -byte response of content type text/html
+VERBOSE: GET with 0-byte payload
+VERBOSE: received -1-byte response of content type text/html
 VERBOSE: Testing Download File at https://download.microsoft.com/download/D/B/9/DB9AC338-1F7A-4CFE-97E1-B089DED46831/Surface3_4GLTE-RestOfTheWorld_Win10_18362_1902003_0.msi
-VERBOSE: HTTP/1.1 HEAD with 0-byte payload
+VERBOSE: HEAD with 0-byte payload
 VERBOSE: received 207028224-byte response of content type application/octet-stream
 VERBOSE: Last Modified: Thu, 06 May 2021 18:47:25 GMT
-PS>TerminatingError(Get-Date): "Cannot convert 'System.String[]' to the type 'System.DateTime' required by parameter 'Date'. Specified method is not supported."
-
-Get-Date: C:\Users\david\OneDrive\GitHub\MyModules\OSD\Public\Functions\Catalog\Get-OSDCatalogMicrosoftDriverPack.ps1:475:42
-Line |
- 475 |                  $ReleaseDate = (Get-Date $GetLastModified).ToString(' …
-     |                                           ~~~~~~~~~~~~~~~~
-     | Cannot convert 'System.String[]' to the type 'System.DateTime' required by parameter 'Date'. Specified method is not supported.
-
-Get-Date: C:\Users\david\OneDrive\GitHub\MyModules\OSD\Public\Functions\Catalog\Get-OSDCatalogMicrosoftDriverPack.ps1:475:42
-Line |
- 475 |                  $ReleaseDate = (Get-Date $GetLastModified).ToString(' …
-     |                                           ~~~~~~~~~~~~~~~~
-     | Cannot convert 'System.String[]' to the type 'System.DateTime' required by parameter 'Date'. Specified method is not supported.
-
 VERBOSE: Processing Surface Book
-VERBOSE: HTTP/1.1 GET with 0-byte payload
-VERBOSE: received -byte response of content type text/html
+VERBOSE: GET with 0-byte payload
+VERBOSE: received -1-byte response of content type text/html
 VERBOSE: Testing Download File at https://download.microsoft.com/download/D/8/B/D8BB7912-5DB3-4AFF-8554-8F2E0B4CAB41/SurfaceBook_Win10_18362_21.062.17202.0.msi
-VERBOSE: HTTP/1.1 HEAD with 0-byte payload
+VERBOSE: HEAD with 0-byte payload
 VERBOSE: received 1341702144-byte response of content type application/octet-stream
 VERBOSE: Last Modified: Thu, 29 Jul 2021 18:24:52 GMT
-PS>TerminatingError(Get-Date): "Cannot convert 'System.String[]' to the type 'System.DateTime' required by parameter 'Date'. Specified method is not supported."
-
-Get-Date: C:\Users\david\OneDrive\GitHub\MyModules\OSD\Public\Functions\Catalog\Get-OSDCatalogMicrosoftDriverPack.ps1:475:42
-Line |
- 475 |                  $ReleaseDate = (Get-Date $GetLastModified).ToString(' …
-     |                                           ~~~~~~~~~~~~~~~~
-     | Cannot convert 'System.String[]' to the type 'System.DateTime' required by parameter 'Date'. Specified method is not supported.
-
-Get-Date: C:\Users\david\OneDrive\GitHub\MyModules\OSD\Public\Functions\Catalog\Get-OSDCatalogMicrosoftDriverPack.ps1:475:42
-Line |
- 475 |                  $ReleaseDate = (Get-Date $GetLastModified).ToString(' …
-     |                                           ~~~~~~~~~~~~~~~~
-     | Cannot convert 'System.String[]' to the type 'System.DateTime' required by parameter 'Date'. Specified method is not supported.
-
 VERBOSE: Processing Surface Book 2 13
-VERBOSE: HTTP/1.1 GET with 0-byte payload
-VERBOSE: received -byte response of content type text/html
+VERBOSE: GET with 0-byte payload
+VERBOSE: received -1-byte response of content type text/html
 VERBOSE: Testing Download File at https://download.microsoft.com/download/9/4/F/94F7AED2-D3ED-4A60-AB94-A0D078FE6DF6/SurfaceBook2_Win10_19041_22.080.2839.0.msi
-VERBOSE: HTTP/1.1 HEAD with 0-byte payload
+VERBOSE: HEAD with 0-byte payload
 VERBOSE: received 1624727552-byte response of content type application/octet-stream
 VERBOSE: Last Modified: Fri, 26 Aug 2022 00:40:59 GMT
-PS>TerminatingError(Get-Date): "Cannot convert 'System.String[]' to the type 'System.DateTime' required by parameter 'Date'. Specified method is not supported."
-
-Get-Date: C:\Users\david\OneDrive\GitHub\MyModules\OSD\Public\Functions\Catalog\Get-OSDCatalogMicrosoftDriverPack.ps1:475:42
-Line |
- 475 |                  $ReleaseDate = (Get-Date $GetLastModified).ToString(' …
-     |                                           ~~~~~~~~~~~~~~~~
-     | Cannot convert 'System.String[]' to the type 'System.DateTime' required by parameter 'Date'. Specified method is not supported.
-
-Get-Date: C:\Users\david\OneDrive\GitHub\MyModules\OSD\Public\Functions\Catalog\Get-OSDCatalogMicrosoftDriverPack.ps1:475:42
-Line |
- 475 |                  $ReleaseDate = (Get-Date $GetLastModified).ToString(' …
-     |                                           ~~~~~~~~~~~~~~~~
-     | Cannot convert 'System.String[]' to the type 'System.DateTime' required by parameter 'Date'. Specified method is not supported.
-
 VERBOSE: Processing Surface Book 2 15
-VERBOSE: HTTP/1.1 GET with 0-byte payload
-VERBOSE: received -byte response of content type text/html
+VERBOSE: GET with 0-byte payload
+VERBOSE: received -1-byte response of content type text/html
 VERBOSE: Testing Download File at https://download.microsoft.com/download/9/4/F/94F7AED2-D3ED-4A60-AB94-A0D078FE6DF6/SurfaceBook2_Win10_19041_22.080.2839.0.msi
-VERBOSE: HTTP/1.1 HEAD with 0-byte payload
+VERBOSE: HEAD with 0-byte payload
 VERBOSE: received 1624727552-byte response of content type application/octet-stream
 VERBOSE: Last Modified: Fri, 26 Aug 2022 00:40:59 GMT
-PS>TerminatingError(Get-Date): "Cannot convert 'System.String[]' to the type 'System.DateTime' required by parameter 'Date'. Specified method is not supported."
-
-Get-Date: C:\Users\david\OneDrive\GitHub\MyModules\OSD\Public\Functions\Catalog\Get-OSDCatalogMicrosoftDriverPack.ps1:475:42
-Line |
- 475 |                  $ReleaseDate = (Get-Date $GetLastModified).ToString(' …
-     |                                           ~~~~~~~~~~~~~~~~
-     | Cannot convert 'System.String[]' to the type 'System.DateTime' required by parameter 'Date'. Specified method is not supported.
-
-Get-Date: C:\Users\david\OneDrive\GitHub\MyModules\OSD\Public\Functions\Catalog\Get-OSDCatalogMicrosoftDriverPack.ps1:475:42
-Line |
- 475 |                  $ReleaseDate = (Get-Date $GetLastModified).ToString(' …
-     |                                           ~~~~~~~~~~~~~~~~
-     | Cannot convert 'System.String[]' to the type 'System.DateTime' required by parameter 'Date'. Specified method is not supported.
-
 VERBOSE: Processing Surface Book 3 13
-VERBOSE: HTTP/1.1 GET with 0-byte payload
-VERBOSE: received -byte response of content type text/html
+VERBOSE: GET with 0-byte payload
+VERBOSE: received -1-byte response of content type text/html
 VERBOSE: Testing Download File at https://download.microsoft.com/download/6/1/3/6139ef9d-d467-4fc4-94f2-8ebbf705110c/SurfaceBook3_Win10_19041_22.100.5729.0.msi
-VERBOSE: HTTP/1.1 HEAD with 0-byte payload
+VERBOSE: HEAD with 0-byte payload
 VERBOSE: received 1859616768-byte response of content type application/octet-stream
 VERBOSE: Last Modified: Mon, 31 Oct 2022 22:00:24 GMT
-PS>TerminatingError(Get-Date): "Cannot convert 'System.String[]' to the type 'System.DateTime' required by parameter 'Date'. Specified method is not supported."
-
-Get-Date: C:\Users\david\OneDrive\GitHub\MyModules\OSD\Public\Functions\Catalog\Get-OSDCatalogMicrosoftDriverPack.ps1:475:42
-Line |
- 475 |                  $ReleaseDate = (Get-Date $GetLastModified).ToString(' …
-     |                                           ~~~~~~~~~~~~~~~~
-     | Cannot convert 'System.String[]' to the type 'System.DateTime' required by parameter 'Date'. Specified method is not supported.
-
-Get-Date: C:\Users\david\OneDrive\GitHub\MyModules\OSD\Public\Functions\Catalog\Get-OSDCatalogMicrosoftDriverPack.ps1:475:42
-Line |
- 475 |                  $ReleaseDate = (Get-Date $GetLastModified).ToString(' …
-     |                                           ~~~~~~~~~~~~~~~~
-     | Cannot convert 'System.String[]' to the type 'System.DateTime' required by parameter 'Date'. Specified method is not supported.
-
 VERBOSE: Testing Download File at https://download.microsoft.com/download/6/1/3/6139ef9d-d467-4fc4-94f2-8ebbf705110c/SurfaceBook3_Win11_22000_22.100.5730.0.msi
-VERBOSE: HTTP/1.1 HEAD with 0-byte payload
+VERBOSE: HEAD with 0-byte payload
 VERBOSE: received 1859706880-byte response of content type application/octet-stream
 VERBOSE: Last Modified: Mon, 31 Oct 2022 22:01:33 GMT
-PS>TerminatingError(Get-Date): "Cannot convert 'System.String[]' to the type 'System.DateTime' required by parameter 'Date'. Specified method is not supported."
-
-Get-Date: C:\Users\david\OneDrive\GitHub\MyModules\OSD\Public\Functions\Catalog\Get-OSDCatalogMicrosoftDriverPack.ps1:475:42
-Line |
- 475 |                  $ReleaseDate = (Get-Date $GetLastModified).ToString(' …
-     |                                           ~~~~~~~~~~~~~~~~
-     | Cannot convert 'System.String[]' to the type 'System.DateTime' required by parameter 'Date'. Specified method is not supported.
-
-Get-Date: C:\Users\david\OneDrive\GitHub\MyModules\OSD\Public\Functions\Catalog\Get-OSDCatalogMicrosoftDriverPack.ps1:475:42
-Line |
- 475 |                  $ReleaseDate = (Get-Date $GetLastModified).ToString(' …
-     |                                           ~~~~~~~~~~~~~~~~
-     | Cannot convert 'System.String[]' to the type 'System.DateTime' required by parameter 'Date'. Specified method is not supported.
-
 VERBOSE: Processing Surface Book 3 15
-VERBOSE: HTTP/1.1 GET with 0-byte payload
-VERBOSE: received -byte response of content type text/html
+VERBOSE: GET with 0-byte payload
+VERBOSE: received -1-byte response of content type text/html
 VERBOSE: Testing Download File at https://download.microsoft.com/download/6/1/3/6139ef9d-d467-4fc4-94f2-8ebbf705110c/SurfaceBook3_Win10_19041_22.100.5729.0.msi
-VERBOSE: HTTP/1.1 HEAD with 0-byte payload
+VERBOSE: HEAD with 0-byte payload
 VERBOSE: received 1859616768-byte response of content type application/octet-stream
 VERBOSE: Last Modified: Mon, 31 Oct 2022 22:00:24 GMT
-PS>TerminatingError(Get-Date): "Cannot convert 'System.String[]' to the type 'System.DateTime' required by parameter 'Date'. Specified method is not supported."
-
-Get-Date: C:\Users\david\OneDrive\GitHub\MyModules\OSD\Public\Functions\Catalog\Get-OSDCatalogMicrosoftDriverPack.ps1:475:42
-Line |
- 475 |                  $ReleaseDate = (Get-Date $GetLastModified).ToString(' …
-     |                                           ~~~~~~~~~~~~~~~~
-     | Cannot convert 'System.String[]' to the type 'System.DateTime' required by parameter 'Date'. Specified method is not supported.
-
-Get-Date: C:\Users\david\OneDrive\GitHub\MyModules\OSD\Public\Functions\Catalog\Get-OSDCatalogMicrosoftDriverPack.ps1:475:42
-Line |
- 475 |                  $ReleaseDate = (Get-Date $GetLastModified).ToString(' …
-     |                                           ~~~~~~~~~~~~~~~~
-     | Cannot convert 'System.String[]' to the type 'System.DateTime' required by parameter 'Date'. Specified method is not supported.
-
 VERBOSE: Testing Download File at https://download.microsoft.com/download/6/1/3/6139ef9d-d467-4fc4-94f2-8ebbf705110c/SurfaceBook3_Win11_22000_22.100.5730.0.msi
-VERBOSE: HTTP/1.1 HEAD with 0-byte payload
+VERBOSE: HEAD with 0-byte payload
 VERBOSE: received 1859706880-byte response of content type application/octet-stream
 VERBOSE: Last Modified: Mon, 31 Oct 2022 22:01:33 GMT
-PS>TerminatingError(Get-Date): "Cannot convert 'System.String[]' to the type 'System.DateTime' required by parameter 'Date'. Specified method is not supported."
-
-Get-Date: C:\Users\david\OneDrive\GitHub\MyModules\OSD\Public\Functions\Catalog\Get-OSDCatalogMicrosoftDriverPack.ps1:475:42
-Line |
- 475 |                  $ReleaseDate = (Get-Date $GetLastModified).ToString(' …
-     |                                           ~~~~~~~~~~~~~~~~
-     | Cannot convert 'System.String[]' to the type 'System.DateTime' required by parameter 'Date'. Specified method is not supported.
-
-Get-Date: C:\Users\david\OneDrive\GitHub\MyModules\OSD\Public\Functions\Catalog\Get-OSDCatalogMicrosoftDriverPack.ps1:475:42
-Line |
- 475 |                  $ReleaseDate = (Get-Date $GetLastModified).ToString(' …
-     |                                           ~~~~~~~~~~~~~~~~
-     | Cannot convert 'System.String[]' to the type 'System.DateTime' required by parameter 'Date'. Specified method is not supported.
-
 VERBOSE: Processing Surface Go Commercial
-VERBOSE: HTTP/1.1 GET with 0-byte payload
-VERBOSE: received -byte response of content type text/html
+VERBOSE: GET with 0-byte payload
+VERBOSE: received -1-byte response of content type text/html
 VERBOSE: Testing Download File at https://download.microsoft.com/download/1/9/2/19206AF7-09CE-4AA6-8966-051D2E79E62B/SurfaceGo_Win10_19042_22.104.24060_WiFi_0.msi
-VERBOSE: HTTP/1.1 HEAD with 0-byte payload
+VERBOSE: HEAD with 0-byte payload
 VERBOSE: received 376455168-byte response of content type application/octet-stream
 VERBOSE: Last Modified: Thu, 10 Nov 2022 21:14:30 GMT
-PS>TerminatingError(Get-Date): "Cannot convert 'System.String[]' to the type 'System.DateTime' required by parameter 'Date'. Specified method is not supported."
-
-Get-Date: C:\Users\david\OneDrive\GitHub\MyModules\OSD\Public\Functions\Catalog\Get-OSDCatalogMicrosoftDriverPack.ps1:475:42
-Line |
- 475 |                  $ReleaseDate = (Get-Date $GetLastModified).ToString(' …
-     |                                           ~~~~~~~~~~~~~~~~
-     | Cannot convert 'System.String[]' to the type 'System.DateTime' required by parameter 'Date'. Specified method is not supported.
-
-Get-Date: C:\Users\david\OneDrive\GitHub\MyModules\OSD\Public\Functions\Catalog\Get-OSDCatalogMicrosoftDriverPack.ps1:475:42
-Line |
- 475 |                  $ReleaseDate = (Get-Date $GetLastModified).ToString(' …
-     |                                           ~~~~~~~~~~~~~~~~
-     | Cannot convert 'System.String[]' to the type 'System.DateTime' required by parameter 'Date'. Specified method is not supported.
-
 VERBOSE: Processing Surface Go Consumer
-VERBOSE: HTTP/1.1 GET with 0-byte payload
-VERBOSE: received -byte response of content type text/html
+VERBOSE: GET with 0-byte payload
+VERBOSE: received -1-byte response of content type text/html
 VERBOSE: Testing Download File at https://download.microsoft.com/download/1/9/2/19206AF7-09CE-4AA6-8966-051D2E79E62B/SurfaceGo_Win10_19042_22.104.24060_WiFi_0.msi
-VERBOSE: HTTP/1.1 HEAD with 0-byte payload
+VERBOSE: HEAD with 0-byte payload
 VERBOSE: received 376455168-byte response of content type application/octet-stream
 VERBOSE: Last Modified: Thu, 10 Nov 2022 21:14:30 GMT
-PS>TerminatingError(Get-Date): "Cannot convert 'System.String[]' to the type 'System.DateTime' required by parameter 'Date'. Specified method is not supported."
-
-Get-Date: C:\Users\david\OneDrive\GitHub\MyModules\OSD\Public\Functions\Catalog\Get-OSDCatalogMicrosoftDriverPack.ps1:475:42
-Line |
- 475 |                  $ReleaseDate = (Get-Date $GetLastModified).ToString(' …
-     |                                           ~~~~~~~~~~~~~~~~
-     | Cannot convert 'System.String[]' to the type 'System.DateTime' required by parameter 'Date'. Specified method is not supported.
-
-Get-Date: C:\Users\david\OneDrive\GitHub\MyModules\OSD\Public\Functions\Catalog\Get-OSDCatalogMicrosoftDriverPack.ps1:475:42
-Line |
- 475 |                  $ReleaseDate = (Get-Date $GetLastModified).ToString(' …
-     |                                           ~~~~~~~~~~~~~~~~
-     | Cannot convert 'System.String[]' to the type 'System.DateTime' required by parameter 'Date'. Specified method is not supported.
-
 VERBOSE: Processing Surface Go LTE Commercial
-VERBOSE: HTTP/1.1 GET with 0-byte payload
-VERBOSE: received -byte response of content type text/html
+VERBOSE: GET with 0-byte payload
+VERBOSE: received -1-byte response of content type text/html
 VERBOSE: Testing Download File at https://download.microsoft.com/download/B/0/C/B0CD6C8E-5AE4-4072-BD43-B981209606E5/SurfaceGo_Win10_19042_22.104.24060_LTE_0.msi
-VERBOSE: HTTP/1.1 HEAD with 0-byte payload
+VERBOSE: HEAD with 0-byte payload
 VERBOSE: received 377819136-byte response of content type application/octet-stream
 VERBOSE: Last Modified: Thu, 10 Nov 2022 21:14:03 GMT
-PS>TerminatingError(Get-Date): "Cannot convert 'System.String[]' to the type 'System.DateTime' required by parameter 'Date'. Specified method is not supported."
-
-Get-Date: C:\Users\david\OneDrive\GitHub\MyModules\OSD\Public\Functions\Catalog\Get-OSDCatalogMicrosoftDriverPack.ps1:475:42
-Line |
- 475 |                  $ReleaseDate = (Get-Date $GetLastModified).ToString(' …
-     |                                           ~~~~~~~~~~~~~~~~
-     | Cannot convert 'System.String[]' to the type 'System.DateTime' required by parameter 'Date'. Specified method is not supported.
-
-Get-Date: C:\Users\david\OneDrive\GitHub\MyModules\OSD\Public\Functions\Catalog\Get-OSDCatalogMicrosoftDriverPack.ps1:475:42
-Line |
- 475 |                  $ReleaseDate = (Get-Date $GetLastModified).ToString(' …
-     |                                           ~~~~~~~~~~~~~~~~
-     | Cannot convert 'System.String[]' to the type 'System.DateTime' required by parameter 'Date'. Specified method is not supported.
-
 VERBOSE: Processing Surface Go 2 Commercial
-VERBOSE: HTTP/1.1 GET with 0-byte payload
-VERBOSE: received -byte response of content type text/html
+VERBOSE: GET with 0-byte payload
+VERBOSE: received -1-byte response of content type text/html
 VERBOSE: Testing Download File at https://download.microsoft.com/download/d/7/1/d71163b8-03a8-40c7-8a9f-fc2006c6bccb/SurfaceGo2_Win10_19042_22.104.24090_0.msi
-VERBOSE: HTTP/1.1 HEAD with 0-byte payload
+VERBOSE: HEAD with 0-byte payload
 VERBOSE: received 411967488-byte response of content type application/octet-stream
 VERBOSE: Last Modified: Thu, 10 Nov 2022 21:13:59 GMT
-PS>TerminatingError(Get-Date): "Cannot convert 'System.String[]' to the type 'System.DateTime' required by parameter 'Date'. Specified method is not supported."
-
-Get-Date: C:\Users\david\OneDrive\GitHub\MyModules\OSD\Public\Functions\Catalog\Get-OSDCatalogMicrosoftDriverPack.ps1:475:42
-Line |
- 475 |                  $ReleaseDate = (Get-Date $GetLastModified).ToString(' …
-     |                                           ~~~~~~~~~~~~~~~~
-     | Cannot convert 'System.String[]' to the type 'System.DateTime' required by parameter 'Date'. Specified method is not supported.
-
-Get-Date: C:\Users\david\OneDrive\GitHub\MyModules\OSD\Public\Functions\Catalog\Get-OSDCatalogMicrosoftDriverPack.ps1:475:42
-Line |
- 475 |                  $ReleaseDate = (Get-Date $GetLastModified).ToString(' …
-     |                                           ~~~~~~~~~~~~~~~~
-     | Cannot convert 'System.String[]' to the type 'System.DateTime' required by parameter 'Date'. Specified method is not supported.
-
 VERBOSE: Processing Surface Go 2 Consumer
-VERBOSE: HTTP/1.1 GET with 0-byte payload
-VERBOSE: received -byte response of content type text/html
+VERBOSE: GET with 0-byte payload
+VERBOSE: received -1-byte response of content type text/html
 VERBOSE: Testing Download File at https://download.microsoft.com/download/d/7/1/d71163b8-03a8-40c7-8a9f-fc2006c6bccb/SurfaceGo2_Win10_19042_22.104.24090_0.msi
-VERBOSE: HTTP/1.1 HEAD with 0-byte payload
+VERBOSE: HEAD with 0-byte payload
 VERBOSE: received 411967488-byte response of content type application/octet-stream
 VERBOSE: Last Modified: Thu, 10 Nov 2022 21:13:59 GMT
-PS>TerminatingError(Get-Date): "Cannot convert 'System.String[]' to the type 'System.DateTime' required by parameter 'Date'. Specified method is not supported."
-
-Get-Date: C:\Users\david\OneDrive\GitHub\MyModules\OSD\Public\Functions\Catalog\Get-OSDCatalogMicrosoftDriverPack.ps1:475:42
-Line |
- 475 |                  $ReleaseDate = (Get-Date $GetLastModified).ToString(' …
-     |                                           ~~~~~~~~~~~~~~~~
-     | Cannot convert 'System.String[]' to the type 'System.DateTime' required by parameter 'Date'. Specified method is not supported.
-
-Get-Date: C:\Users\david\OneDrive\GitHub\MyModules\OSD\Public\Functions\Catalog\Get-OSDCatalogMicrosoftDriverPack.ps1:475:42
-Line |
- 475 |                  $ReleaseDate = (Get-Date $GetLastModified).ToString(' …
-     |                                           ~~~~~~~~~~~~~~~~
-     | Cannot convert 'System.String[]' to the type 'System.DateTime' required by parameter 'Date'. Specified method is not supported.
-
 VERBOSE: Processing Surface Go 2 LTE
-VERBOSE: HTTP/1.1 GET with 0-byte payload
-VERBOSE: received -byte response of content type text/html
+VERBOSE: GET with 0-byte payload
+VERBOSE: received -1-byte response of content type text/html
 VERBOSE: Testing Download File at https://download.microsoft.com/download/d/7/1/d71163b8-03a8-40c7-8a9f-fc2006c6bccb/SurfaceGo2_Win10_19042_22.104.24090_0.msi
-VERBOSE: HTTP/1.1 HEAD with 0-byte payload
+VERBOSE: HEAD with 0-byte payload
 VERBOSE: received 411967488-byte response of content type application/octet-stream
 VERBOSE: Last Modified: Thu, 10 Nov 2022 21:13:59 GMT
-PS>TerminatingError(Get-Date): "Cannot convert 'System.String[]' to the type 'System.DateTime' required by parameter 'Date'. Specified method is not supported."
-
-Get-Date: C:\Users\david\OneDrive\GitHub\MyModules\OSD\Public\Functions\Catalog\Get-OSDCatalogMicrosoftDriverPack.ps1:475:42
-Line |
- 475 |                  $ReleaseDate = (Get-Date $GetLastModified).ToString(' …
-     |                                           ~~~~~~~~~~~~~~~~
-     | Cannot convert 'System.String[]' to the type 'System.DateTime' required by parameter 'Date'. Specified method is not supported.
-
-Get-Date: C:\Users\david\OneDrive\GitHub\MyModules\OSD\Public\Functions\Catalog\Get-OSDCatalogMicrosoftDriverPack.ps1:475:42
-Line |
- 475 |                  $ReleaseDate = (Get-Date $GetLastModified).ToString(' …
-     |                                           ~~~~~~~~~~~~~~~~
-     | Cannot convert 'System.String[]' to the type 'System.DateTime' required by parameter 'Date'. Specified method is not supported.
-
 VERBOSE: Processing Surface Go 3 Commercial
-VERBOSE: HTTP/1.1 GET with 0-byte payload
-VERBOSE: received -byte response of content type text/html
+VERBOSE: GET with 0-byte payload
+VERBOSE: received -1-byte response of content type text/html
 VERBOSE: Testing Download File at https://download.microsoft.com/download/e/8/2/e82f3029-e587-4c28-8ab4-ae1bf1e2c209/SurfaceGo3_Win10_19042_22.111.14054.0.msi
-VERBOSE: HTTP/1.1 HEAD with 0-byte payload
+VERBOSE: HEAD with 0-byte payload
 VERBOSE: received 549322752-byte response of content type application/octet-stream
 VERBOSE: Last Modified: Tue, 15 Nov 2022 19:55:57 GMT
-PS>TerminatingError(Get-Date): "Cannot convert 'System.String[]' to the type 'System.DateTime' required by parameter 'Date'. Specified method is not supported."
-
-Get-Date: C:\Users\david\OneDrive\GitHub\MyModules\OSD\Public\Functions\Catalog\Get-OSDCatalogMicrosoftDriverPack.ps1:475:42
-Line |
- 475 |                  $ReleaseDate = (Get-Date $GetLastModified).ToString(' …
-     |                                           ~~~~~~~~~~~~~~~~
-     | Cannot convert 'System.String[]' to the type 'System.DateTime' required by parameter 'Date'. Specified method is not supported.
-
-Get-Date: C:\Users\david\OneDrive\GitHub\MyModules\OSD\Public\Functions\Catalog\Get-OSDCatalogMicrosoftDriverPack.ps1:475:42
-Line |
- 475 |                  $ReleaseDate = (Get-Date $GetLastModified).ToString(' …
-     |                                           ~~~~~~~~~~~~~~~~
-     | Cannot convert 'System.String[]' to the type 'System.DateTime' required by parameter 'Date'. Specified method is not supported.
-
 VERBOSE: Processing Surface Go 3 Consumer
-VERBOSE: HTTP/1.1 GET with 0-byte payload
-VERBOSE: received -byte response of content type text/html
+VERBOSE: GET with 0-byte payload
+VERBOSE: received -1-byte response of content type text/html
 VERBOSE: Testing Download File at https://download.microsoft.com/download/e/8/2/e82f3029-e587-4c28-8ab4-ae1bf1e2c209/SurfaceGo3_Win10_19042_22.111.14054.0.msi
-VERBOSE: HTTP/1.1 HEAD with 0-byte payload
+VERBOSE: HEAD with 0-byte payload
 VERBOSE: received 549322752-byte response of content type application/octet-stream
 VERBOSE: Last Modified: Tue, 15 Nov 2022 19:55:57 GMT
-PS>TerminatingError(Get-Date): "Cannot convert 'System.String[]' to the type 'System.DateTime' required by parameter 'Date'. Specified method is not supported."
-
-Get-Date: C:\Users\david\OneDrive\GitHub\MyModules\OSD\Public\Functions\Catalog\Get-OSDCatalogMicrosoftDriverPack.ps1:475:42
-Line |
- 475 |                  $ReleaseDate = (Get-Date $GetLastModified).ToString(' …
-     |                                           ~~~~~~~~~~~~~~~~
-     | Cannot convert 'System.String[]' to the type 'System.DateTime' required by parameter 'Date'. Specified method is not supported.
-
-Get-Date: C:\Users\david\OneDrive\GitHub\MyModules\OSD\Public\Functions\Catalog\Get-OSDCatalogMicrosoftDriverPack.ps1:475:42
-Line |
- 475 |                  $ReleaseDate = (Get-Date $GetLastModified).ToString(' …
-     |                                           ~~~~~~~~~~~~~~~~
-     | Cannot convert 'System.String[]' to the type 'System.DateTime' required by parameter 'Date'. Specified method is not supported.
-
 VERBOSE: Processing Surface Go 3 LTE
-VERBOSE: HTTP/1.1 GET with 0-byte payload
-VERBOSE: received -byte response of content type text/html
+VERBOSE: GET with 0-byte payload
+VERBOSE: received -1-byte response of content type text/html
 VERBOSE: Testing Download File at https://download.microsoft.com/download/e/8/2/e82f3029-e587-4c28-8ab4-ae1bf1e2c209/SurfaceGo3_Win10_19042_22.111.14054.0.msi
-VERBOSE: HTTP/1.1 HEAD with 0-byte payload
+VERBOSE: HEAD with 0-byte payload
 VERBOSE: received 549322752-byte response of content type application/octet-stream
 VERBOSE: Last Modified: Tue, 15 Nov 2022 19:55:57 GMT
-PS>TerminatingError(Get-Date): "Cannot convert 'System.String[]' to the type 'System.DateTime' required by parameter 'Date'. Specified method is not supported."
-
-Get-Date: C:\Users\david\OneDrive\GitHub\MyModules\OSD\Public\Functions\Catalog\Get-OSDCatalogMicrosoftDriverPack.ps1:475:42
-Line |
- 475 |                  $ReleaseDate = (Get-Date $GetLastModified).ToString(' …
-     |                                           ~~~~~~~~~~~~~~~~
-     | Cannot convert 'System.String[]' to the type 'System.DateTime' required by parameter 'Date'. Specified method is not supported.
-
-Get-Date: C:\Users\david\OneDrive\GitHub\MyModules\OSD\Public\Functions\Catalog\Get-OSDCatalogMicrosoftDriverPack.ps1:475:42
-Line |
- 475 |                  $ReleaseDate = (Get-Date $GetLastModified).ToString(' …
-     |                                           ~~~~~~~~~~~~~~~~
-     | Cannot convert 'System.String[]' to the type 'System.DateTime' required by parameter 'Date'. Specified method is not supported.
-
 VERBOSE: Processing Surface Hub 2
-VERBOSE: HTTP/1.1 GET with 0-byte payload
-VERBOSE: received -byte response of content type text/html
+VERBOSE: GET with 0-byte payload
+VERBOSE: received -1-byte response of content type text/html
 VERBOSE: Testing Download File at https://download.microsoft.com/download/C/5/D/C5D16DE9-19E3-4A02-9483-B045EDC63A1E/SurfaceHub2S_Win10_19042_22.092.24417.0.msi
-VERBOSE: HTTP/1.1 HEAD with 0-byte payload
+VERBOSE: HEAD with 0-byte payload
 VERBOSE: received 475119616-byte response of content type application/octet-stream
 VERBOSE: Last Modified: Tue, 20 Sep 2022 21:18:07 GMT
-PS>TerminatingError(Get-Date): "Cannot convert 'System.String[]' to the type 'System.DateTime' required by parameter 'Date'. Specified method is not supported."
-
-Get-Date: C:\Users\david\OneDrive\GitHub\MyModules\OSD\Public\Functions\Catalog\Get-OSDCatalogMicrosoftDriverPack.ps1:475:42
-Line |
- 475 |                  $ReleaseDate = (Get-Date $GetLastModified).ToString(' …
-     |                                           ~~~~~~~~~~~~~~~~
-     | Cannot convert 'System.String[]' to the type 'System.DateTime' required by parameter 'Date'. Specified method is not supported.
-
-Get-Date: C:\Users\david\OneDrive\GitHub\MyModules\OSD\Public\Functions\Catalog\Get-OSDCatalogMicrosoftDriverPack.ps1:475:42
-Line |
- 475 |                  $ReleaseDate = (Get-Date $GetLastModified).ToString(' …
-     |                                           ~~~~~~~~~~~~~~~~
-     | Cannot convert 'System.String[]' to the type 'System.DateTime' required by parameter 'Date'. Specified method is not supported.
-
 VERBOSE: Processing Surface Hub 2S 50
-VERBOSE: HTTP/1.1 GET with 0-byte payload
-VERBOSE: received -byte response of content type text/html
+VERBOSE: GET with 0-byte payload
+VERBOSE: received -1-byte response of content type text/html
 VERBOSE: Testing Download File at https://download.microsoft.com/download/C/5/D/C5D16DE9-19E3-4A02-9483-B045EDC63A1E/SurfaceHub2S_Win10_19042_22.092.24417.0.msi
-VERBOSE: HTTP/1.1 HEAD with 0-byte payload
+VERBOSE: HEAD with 0-byte payload
 VERBOSE: received 475119616-byte response of content type application/octet-stream
 VERBOSE: Last Modified: Tue, 20 Sep 2022 21:18:07 GMT
-PS>TerminatingError(Get-Date): "Cannot convert 'System.String[]' to the type 'System.DateTime' required by parameter 'Date'. Specified method is not supported."
-
-Get-Date: C:\Users\david\OneDrive\GitHub\MyModules\OSD\Public\Functions\Catalog\Get-OSDCatalogMicrosoftDriverPack.ps1:475:42
-Line |
- 475 |                  $ReleaseDate = (Get-Date $GetLastModified).ToString(' …
-     |                                           ~~~~~~~~~~~~~~~~
-     | Cannot convert 'System.String[]' to the type 'System.DateTime' required by parameter 'Date'. Specified method is not supported.
-
-Get-Date: C:\Users\david\OneDrive\GitHub\MyModules\OSD\Public\Functions\Catalog\Get-OSDCatalogMicrosoftDriverPack.ps1:475:42
-Line |
- 475 |                  $ReleaseDate = (Get-Date $GetLastModified).ToString(' …
-     |                                           ~~~~~~~~~~~~~~~~
-     | Cannot convert 'System.String[]' to the type 'System.DateTime' required by parameter 'Date'. Specified method is not supported.
-
 VERBOSE: Processing Surface Hub 2S 85
-VERBOSE: HTTP/1.1 GET with 0-byte payload
-VERBOSE: received -byte response of content type text/html
+VERBOSE: GET with 0-byte payload
+VERBOSE: received -1-byte response of content type text/html
 VERBOSE: Testing Download File at https://download.microsoft.com/download/C/5/D/C5D16DE9-19E3-4A02-9483-B045EDC63A1E/SurfaceHub2S_Win10_19042_22.092.24417.0.msi
-VERBOSE: HTTP/1.1 HEAD with 0-byte payload
+VERBOSE: HEAD with 0-byte payload
 VERBOSE: received 475119616-byte response of content type application/octet-stream
 VERBOSE: Last Modified: Tue, 20 Sep 2022 21:18:07 GMT
-PS>TerminatingError(Get-Date): "Cannot convert 'System.String[]' to the type 'System.DateTime' required by parameter 'Date'. Specified method is not supported."
-
-Get-Date: C:\Users\david\OneDrive\GitHub\MyModules\OSD\Public\Functions\Catalog\Get-OSDCatalogMicrosoftDriverPack.ps1:475:42
-Line |
- 475 |                  $ReleaseDate = (Get-Date $GetLastModified).ToString(' …
-     |                                           ~~~~~~~~~~~~~~~~
-     | Cannot convert 'System.String[]' to the type 'System.DateTime' required by parameter 'Date'. Specified method is not supported.
-
-Get-Date: C:\Users\david\OneDrive\GitHub\MyModules\OSD\Public\Functions\Catalog\Get-OSDCatalogMicrosoftDriverPack.ps1:475:42
-Line |
- 475 |                  $ReleaseDate = (Get-Date $GetLastModified).ToString(' …
-     |                                           ~~~~~~~~~~~~~~~~
-     | Cannot convert 'System.String[]' to the type 'System.DateTime' required by parameter 'Date'. Specified method is not supported.
-
 VERBOSE: Processing Surface Laptop
-VERBOSE: HTTP/1.1 GET with 0-byte payload
-VERBOSE: received -byte response of content type text/html
+VERBOSE: GET with 0-byte payload
+VERBOSE: received -1-byte response of content type text/html
 VERBOSE: Testing Download File at https://download.microsoft.com/download/4/3/C/43C2BEA2-3C14-4DC1-B984-7556B389AC2E/SurfaceLaptop_Win10_18362_21.101.11476.0.msi
-VERBOSE: HTTP/1.1 HEAD with 0-byte payload
+VERBOSE: HEAD with 0-byte payload
 VERBOSE: received 437915648-byte response of content type application/octet-stream
 VERBOSE: Last Modified: Thu, 18 Nov 2021 22:36:49 GMT
-PS>TerminatingError(Get-Date): "Cannot convert 'System.String[]' to the type 'System.DateTime' required by parameter 'Date'. Specified method is not supported."
-
-Get-Date: C:\Users\david\OneDrive\GitHub\MyModules\OSD\Public\Functions\Catalog\Get-OSDCatalogMicrosoftDriverPack.ps1:475:42
-Line |
- 475 |                  $ReleaseDate = (Get-Date $GetLastModified).ToString(' …
-     |                                           ~~~~~~~~~~~~~~~~
-     | Cannot convert 'System.String[]' to the type 'System.DateTime' required by parameter 'Date'. Specified method is not supported.
-
-Get-Date: C:\Users\david\OneDrive\GitHub\MyModules\OSD\Public\Functions\Catalog\Get-OSDCatalogMicrosoftDriverPack.ps1:475:42
-Line |
- 475 |                  $ReleaseDate = (Get-Date $GetLastModified).ToString(' …
-     |                                           ~~~~~~~~~~~~~~~~
-     | Cannot convert 'System.String[]' to the type 'System.DateTime' required by parameter 'Date'. Specified method is not supported.
-
 VERBOSE: Processing Surface Laptop 2 Commercial
-VERBOSE: HTTP/1.1 GET with 0-byte payload
-VERBOSE: received -byte response of content type text/html
+VERBOSE: GET with 0-byte payload
+VERBOSE: received -1-byte response of content type text/html
 VERBOSE: Testing Download File at https://download.microsoft.com/download/E/7/5/E75E02DD-0ACF-4953-9F42-8408F96E0702/SurfaceLaptop2_Win10_19041_22.080.1424.0.msi
-VERBOSE: HTTP/1.1 HEAD with 0-byte payload
+VERBOSE: HEAD with 0-byte payload
 VERBOSE: received 568692736-byte response of content type application/octet-stream
 VERBOSE: Last Modified: Thu, 25 Aug 2022 23:16:16 GMT
-PS>TerminatingError(Get-Date): "Cannot convert 'System.String[]' to the type 'System.DateTime' required by parameter 'Date'. Specified method is not supported."
-
-Get-Date: C:\Users\david\OneDrive\GitHub\MyModules\OSD\Public\Functions\Catalog\Get-OSDCatalogMicrosoftDriverPack.ps1:475:42
-Line |
- 475 |                  $ReleaseDate = (Get-Date $GetLastModified).ToString(' …
-     |                                           ~~~~~~~~~~~~~~~~
-     | Cannot convert 'System.String[]' to the type 'System.DateTime' required by parameter 'Date'. Specified method is not supported.
-
-Get-Date: C:\Users\david\OneDrive\GitHub\MyModules\OSD\Public\Functions\Catalog\Get-OSDCatalogMicrosoftDriverPack.ps1:475:42
-Line |
- 475 |                  $ReleaseDate = (Get-Date $GetLastModified).ToString(' …
-     |                                           ~~~~~~~~~~~~~~~~
-     | Cannot convert 'System.String[]' to the type 'System.DateTime' required by parameter 'Date'. Specified method is not supported.
-
 VERBOSE: Processing Surface Laptop 2 Consumer
-VERBOSE: HTTP/1.1 GET with 0-byte payload
-VERBOSE: received -byte response of content type text/html
+VERBOSE: GET with 0-byte payload
+VERBOSE: received -1-byte response of content type text/html
 VERBOSE: Testing Download File at https://download.microsoft.com/download/E/7/5/E75E02DD-0ACF-4953-9F42-8408F96E0702/SurfaceLaptop2_Win10_19041_22.080.1424.0.msi
-VERBOSE: HTTP/1.1 HEAD with 0-byte payload
+VERBOSE: HEAD with 0-byte payload
 VERBOSE: received 568692736-byte response of content type application/octet-stream
 VERBOSE: Last Modified: Thu, 25 Aug 2022 23:16:16 GMT
-PS>TerminatingError(Get-Date): "Cannot convert 'System.String[]' to the type 'System.DateTime' required by parameter 'Date'. Specified method is not supported."
-
-Get-Date: C:\Users\david\OneDrive\GitHub\MyModules\OSD\Public\Functions\Catalog\Get-OSDCatalogMicrosoftDriverPack.ps1:475:42
-Line |
- 475 |                  $ReleaseDate = (Get-Date $GetLastModified).ToString(' …
-     |                                           ~~~~~~~~~~~~~~~~
-     | Cannot convert 'System.String[]' to the type 'System.DateTime' required by parameter 'Date'. Specified method is not supported.
-
-Get-Date: C:\Users\david\OneDrive\GitHub\MyModules\OSD\Public\Functions\Catalog\Get-OSDCatalogMicrosoftDriverPack.ps1:475:42
-Line |
- 475 |                  $ReleaseDate = (Get-Date $GetLastModified).ToString(' …
-     |                                           ~~~~~~~~~~~~~~~~
-     | Cannot convert 'System.String[]' to the type 'System.DateTime' required by parameter 'Date'. Specified method is not supported.
-
 VERBOSE: Processing Surface Laptop 3 13 Intel
-VERBOSE: HTTP/1.1 GET with 0-byte payload
-VERBOSE: received -byte response of content type text/html
+VERBOSE: GET with 0-byte payload
+VERBOSE: received -1-byte response of content type text/html
 VERBOSE: Testing Download File at https://download.microsoft.com/download/3/f/4/3f4f5dff-b6a9-4006-87aa-142a8e6f77cb/SurfaceLaptop3_Win10_19041_22.081.11638.0.msi
-VERBOSE: HTTP/1.1 HEAD with 0-byte payload
+VERBOSE: HEAD with 0-byte payload
 VERBOSE: received 648351744-byte response of content type application/octet-stream
 VERBOSE: Last Modified: Thu, 25 Aug 2022 23:46:37 GMT
-PS>TerminatingError(Get-Date): "Cannot convert 'System.String[]' to the type 'System.DateTime' required by parameter 'Date'. Specified method is not supported."
-
-Get-Date: C:\Users\david\OneDrive\GitHub\MyModules\OSD\Public\Functions\Catalog\Get-OSDCatalogMicrosoftDriverPack.ps1:475:42
-Line |
- 475 |                  $ReleaseDate = (Get-Date $GetLastModified).ToString(' …
-     |                                           ~~~~~~~~~~~~~~~~
-     | Cannot convert 'System.String[]' to the type 'System.DateTime' required by parameter 'Date'. Specified method is not supported.
-
-Get-Date: C:\Users\david\OneDrive\GitHub\MyModules\OSD\Public\Functions\Catalog\Get-OSDCatalogMicrosoftDriverPack.ps1:475:42
-Line |
- 475 |                  $ReleaseDate = (Get-Date $GetLastModified).ToString(' …
-     |                                           ~~~~~~~~~~~~~~~~
-     | Cannot convert 'System.String[]' to the type 'System.DateTime' required by parameter 'Date'. Specified method is not supported.
-
 VERBOSE: Testing Download File at https://download.microsoft.com/download/3/f/4/3f4f5dff-b6a9-4006-87aa-142a8e6f77cb/SurfaceLaptop3_Win11_22000_22.081.11638.0.msi
-VERBOSE: HTTP/1.1 HEAD with 0-byte payload
+VERBOSE: HEAD with 0-byte payload
 VERBOSE: received 648482816-byte response of content type application/octet-stream
 VERBOSE: Last Modified: Thu, 25 Aug 2022 23:47:16 GMT
-PS>TerminatingError(Get-Date): "Cannot convert 'System.String[]' to the type 'System.DateTime' required by parameter 'Date'. Specified method is not supported."
-
-Get-Date: C:\Users\david\OneDrive\GitHub\MyModules\OSD\Public\Functions\Catalog\Get-OSDCatalogMicrosoftDriverPack.ps1:475:42
-Line |
- 475 |                  $ReleaseDate = (Get-Date $GetLastModified).ToString(' …
-     |                                           ~~~~~~~~~~~~~~~~
-     | Cannot convert 'System.String[]' to the type 'System.DateTime' required by parameter 'Date'. Specified method is not supported.
-
-Get-Date: C:\Users\david\OneDrive\GitHub\MyModules\OSD\Public\Functions\Catalog\Get-OSDCatalogMicrosoftDriverPack.ps1:475:42
-Line |
- 475 |                  $ReleaseDate = (Get-Date $GetLastModified).ToString(' …
-     |                                           ~~~~~~~~~~~~~~~~
-     | Cannot convert 'System.String[]' to the type 'System.DateTime' required by parameter 'Date'. Specified method is not supported.
-
 VERBOSE: Processing Surface Laptop 3 13 AMD
-VERBOSE: HTTP/1.1 GET with 0-byte payload
-VERBOSE: received -byte response of content type text/html
+VERBOSE: GET with 0-byte payload
+VERBOSE: received -1-byte response of content type text/html
 VERBOSE: Testing Download File at https://download.microsoft.com/download/6/f/e/6fe2a0c9-7218-4e17-8628-229b89a8b650/SurfaceLaptop3_Win10_19042_22.020.5647.0.msi
-VERBOSE: HTTP/1.1 HEAD with 0-byte payload
+VERBOSE: HEAD with 0-byte payload
 VERBOSE: received 377167872-byte response of content type application/octet-stream
 VERBOSE: Last Modified: Thu, 17 Mar 2022 20:28:06 GMT
-PS>TerminatingError(Get-Date): "Cannot convert 'System.String[]' to the type 'System.DateTime' required by parameter 'Date'. Specified method is not supported."
-
-Get-Date: C:\Users\david\OneDrive\GitHub\MyModules\OSD\Public\Functions\Catalog\Get-OSDCatalogMicrosoftDriverPack.ps1:475:42
-Line |
- 475 |                  $ReleaseDate = (Get-Date $GetLastModified).ToString(' …
-     |                                           ~~~~~~~~~~~~~~~~
-     | Cannot convert 'System.String[]' to the type 'System.DateTime' required by parameter 'Date'. Specified method is not supported.
-
-Get-Date: C:\Users\david\OneDrive\GitHub\MyModules\OSD\Public\Functions\Catalog\Get-OSDCatalogMicrosoftDriverPack.ps1:475:42
-Line |
- 475 |                  $ReleaseDate = (Get-Date $GetLastModified).ToString(' …
-     |                                           ~~~~~~~~~~~~~~~~
-     | Cannot convert 'System.String[]' to the type 'System.DateTime' required by parameter 'Date'. Specified method is not supported.
-
 VERBOSE: Testing Download File at https://download.microsoft.com/download/6/f/e/6fe2a0c9-7218-4e17-8628-229b89a8b650/SurfaceLaptop3_Win11_22000_22.020.5648.0.msi
-VERBOSE: HTTP/1.1 HEAD with 0-byte payload
+VERBOSE: HEAD with 0-byte payload
 VERBOSE: received 377004032-byte response of content type application/octet-stream
 VERBOSE: Last Modified: Thu, 17 Mar 2022 20:27:39 GMT
-PS>TerminatingError(Get-Date): "Cannot convert 'System.String[]' to the type 'System.DateTime' required by parameter 'Date'. Specified method is not supported."
-
-Get-Date: C:\Users\david\OneDrive\GitHub\MyModules\OSD\Public\Functions\Catalog\Get-OSDCatalogMicrosoftDriverPack.ps1:475:42
-Line |
- 475 |                  $ReleaseDate = (Get-Date $GetLastModified).ToString(' …
-     |                                           ~~~~~~~~~~~~~~~~
-     | Cannot convert 'System.String[]' to the type 'System.DateTime' required by parameter 'Date'. Specified method is not supported.
-
-Get-Date: C:\Users\david\OneDrive\GitHub\MyModules\OSD\Public\Functions\Catalog\Get-OSDCatalogMicrosoftDriverPack.ps1:475:42
-Line |
- 475 |                  $ReleaseDate = (Get-Date $GetLastModified).ToString(' …
-     |                                           ~~~~~~~~~~~~~~~~
-     | Cannot convert 'System.String[]' to the type 'System.DateTime' required by parameter 'Date'. Specified method is not supported.
-
 VERBOSE: Processing Surface Laptop 3 15 Intel
-VERBOSE: HTTP/1.1 GET with 0-byte payload
-VERBOSE: received -byte response of content type text/html
+VERBOSE: GET with 0-byte payload
+VERBOSE: received -1-byte response of content type text/html
 VERBOSE: Testing Download File at https://download.microsoft.com/download/3/f/4/3f4f5dff-b6a9-4006-87aa-142a8e6f77cb/SurfaceLaptop3_Win10_19041_22.081.11638.0.msi
-VERBOSE: HTTP/1.1 HEAD with 0-byte payload
+VERBOSE: HEAD with 0-byte payload
 VERBOSE: received 648351744-byte response of content type application/octet-stream
 VERBOSE: Last Modified: Thu, 25 Aug 2022 23:46:37 GMT
-PS>TerminatingError(Get-Date): "Cannot convert 'System.String[]' to the type 'System.DateTime' required by parameter 'Date'. Specified method is not supported."
-
-Get-Date: C:\Users\david\OneDrive\GitHub\MyModules\OSD\Public\Functions\Catalog\Get-OSDCatalogMicrosoftDriverPack.ps1:475:42
-Line |
- 475 |                  $ReleaseDate = (Get-Date $GetLastModified).ToString(' …
-     |                                           ~~~~~~~~~~~~~~~~
-     | Cannot convert 'System.String[]' to the type 'System.DateTime' required by parameter 'Date'. Specified method is not supported.
-
-Get-Date: C:\Users\david\OneDrive\GitHub\MyModules\OSD\Public\Functions\Catalog\Get-OSDCatalogMicrosoftDriverPack.ps1:475:42
-Line |
- 475 |                  $ReleaseDate = (Get-Date $GetLastModified).ToString(' …
-     |                                           ~~~~~~~~~~~~~~~~
-     | Cannot convert 'System.String[]' to the type 'System.DateTime' required by parameter 'Date'. Specified method is not supported.
-
 VERBOSE: Testing Download File at https://download.microsoft.com/download/3/f/4/3f4f5dff-b6a9-4006-87aa-142a8e6f77cb/SurfaceLaptop3_Win11_22000_22.081.11638.0.msi
-VERBOSE: HTTP/1.1 HEAD with 0-byte payload
+VERBOSE: HEAD with 0-byte payload
 VERBOSE: received 648482816-byte response of content type application/octet-stream
 VERBOSE: Last Modified: Thu, 25 Aug 2022 23:47:16 GMT
-PS>TerminatingError(Get-Date): "Cannot convert 'System.String[]' to the type 'System.DateTime' required by parameter 'Date'. Specified method is not supported."
-
-Get-Date: C:\Users\david\OneDrive\GitHub\MyModules\OSD\Public\Functions\Catalog\Get-OSDCatalogMicrosoftDriverPack.ps1:475:42
-Line |
- 475 |                  $ReleaseDate = (Get-Date $GetLastModified).ToString(' …
-     |                                           ~~~~~~~~~~~~~~~~
-     | Cannot convert 'System.String[]' to the type 'System.DateTime' required by parameter 'Date'. Specified method is not supported.
-
-Get-Date: C:\Users\david\OneDrive\GitHub\MyModules\OSD\Public\Functions\Catalog\Get-OSDCatalogMicrosoftDriverPack.ps1:475:42
-Line |
- 475 |                  $ReleaseDate = (Get-Date $GetLastModified).ToString(' …
-     |                                           ~~~~~~~~~~~~~~~~
-     | Cannot convert 'System.String[]' to the type 'System.DateTime' required by parameter 'Date'. Specified method is not supported.
-
 VERBOSE: Processing Surface Laptop 4 13 AMD
-VERBOSE: HTTP/1.1 GET with 0-byte payload
-VERBOSE: received -byte response of content type text/html
+VERBOSE: GET with 0-byte payload
+VERBOSE: received -1-byte response of content type text/html
 VERBOSE: Testing Download File at https://download.microsoft.com/download/c/2/8/c2840704-6c0e-4457-82ca-68502b1803b5/SurfaceLaptop4_Win10_19042_22.101.7110.0.msi
-VERBOSE: HTTP/1.1 HEAD with 0-byte payload
+VERBOSE: HEAD with 0-byte payload
 VERBOSE: received 469622784-byte response of content type application/octet-stream
 VERBOSE: Last Modified: Tue, 17 Jan 2023 19:39:40 GMT
-PS>TerminatingError(Get-Date): "Cannot convert 'System.String[]' to the type 'System.DateTime' required by parameter 'Date'. Specified method is not supported."
-
-Get-Date: C:\Users\david\OneDrive\GitHub\MyModules\OSD\Public\Functions\Catalog\Get-OSDCatalogMicrosoftDriverPack.ps1:475:42
-Line |
- 475 |                  $ReleaseDate = (Get-Date $GetLastModified).ToString(' …
-     |                                           ~~~~~~~~~~~~~~~~
-     | Cannot convert 'System.String[]' to the type 'System.DateTime' required by parameter 'Date'. Specified method is not supported.
-
-Get-Date: C:\Users\david\OneDrive\GitHub\MyModules\OSD\Public\Functions\Catalog\Get-OSDCatalogMicrosoftDriverPack.ps1:475:42
-Line |
- 475 |                  $ReleaseDate = (Get-Date $GetLastModified).ToString(' …
-     |                                           ~~~~~~~~~~~~~~~~
-     | Cannot convert 'System.String[]' to the type 'System.DateTime' required by parameter 'Date'. Specified method is not supported.
-
 VERBOSE: Testing Download File at https://download.microsoft.com/download/c/2/8/c2840704-6c0e-4457-82ca-68502b1803b5/SurfaceLaptop4_Win11_22000_22.101.7108.0.msi
-VERBOSE: HTTP/1.1 HEAD with 0-byte payload
+VERBOSE: HEAD with 0-byte payload
 VERBOSE: received 469741568-byte response of content type application/octet-stream
 VERBOSE: Last Modified: Tue, 17 Jan 2023 19:40:09 GMT
-PS>TerminatingError(Get-Date): "Cannot convert 'System.String[]' to the type 'System.DateTime' required by parameter 'Date'. Specified method is not supported."
-
-Get-Date: C:\Users\david\OneDrive\GitHub\MyModules\OSD\Public\Functions\Catalog\Get-OSDCatalogMicrosoftDriverPack.ps1:475:42
-Line |
- 475 |                  $ReleaseDate = (Get-Date $GetLastModified).ToString(' …
-     |                                           ~~~~~~~~~~~~~~~~
-     | Cannot convert 'System.String[]' to the type 'System.DateTime' required by parameter 'Date'. Specified method is not supported.
-
-Get-Date: C:\Users\david\OneDrive\GitHub\MyModules\OSD\Public\Functions\Catalog\Get-OSDCatalogMicrosoftDriverPack.ps1:475:42
-Line |
- 475 |                  $ReleaseDate = (Get-Date $GetLastModified).ToString(' …
-     |                                           ~~~~~~~~~~~~~~~~
-     | Cannot convert 'System.String[]' to the type 'System.DateTime' required by parameter 'Date'. Specified method is not supported.
-
 VERBOSE: Processing Surface Laptop 4 13 Intel
-VERBOSE: HTTP/1.1 GET with 0-byte payload
->> TerminatingError(): "The pipeline has been stopped."
->> TerminatingError(): "The pipeline has been stopped."
->> TerminatingError(): "The pipeline has been stopped."
->> TerminatingError(): "The pipeline has been stopped."
-]633;E;. 'C:\x5cUsers\x5cdavid\x5cOneDrive\x5cGitHub\x5cMyModules\x5cOSD\x5cResources\x5cBuildScripts\x5cBuild-OSDCloudDriverPacks.ps1']633;D;0]633;A]633;P;Cwd=C:\x5cUsers\x5cdavid\x5cOneDrive\x5cGitHub\x5cMyModules\x5cOSDPS C:\Users\david\OneDrive\GitHub\MyModules\OSD> ]633;B
-]633;E]633;D]633;A]633;P;Cwd=C:\x5cUsers\x5cdavid\x5cOneDrive\x5cGitHub\x5cMyModules\x5cOSDPS C:\Users\david\OneDrive\GitHub\MyModules\OSD> ]633;B
-PS>Import-Module OSD -Force
-$MasterDriverPacks = @()
-$MasterDriverPacks += Get-DellDriverPack
-$MasterDriverPacks += Get-HpDriverPack
-$MasterDriverPacks += Get-LenovoDriverPack
-$MasterDriverPacks += Get-MicrosoftDriverPack
-
-$Results = $MasterDriverPacks | `
-Select-Object CatalogVersion, Status, ReleaseDate, Manufacturer, Model, `
-Product, Name, PackageID, FileName, `
-@{Name='Url';Expression={([array]$_.DriverPackUrl)}}, `
-@{Name='OS';Expression={([array]$_.DriverPackOS)}}, `
-HashMD5, `
-@{Name='Guid';Expression={([guid]((New-Guid).ToString()))}}
-
-$Results | Export-Clixml -Path (Join-Path (Get-Module -Name OSD -ListAvailable | Sort-Object Version -Descending | Select-Object -First 1).ModuleBase "Catalogs\driverpacks.xml") -Force
-Import-Clixml -Path (Join-Path (Get-Module -Name OSD -ListAvailable | Sort-Object Version -Descending | Select-Object -First 1).ModuleBase "Catalogs\driverpacks.xml") | ConvertTo-Json | Out-File (Join-Path (Get-Module -Name OSD -ListAvailable | Sort-Object Version -Descending | Select-Object -First 1).ModuleBase "Catalogs\driverpacks.json") -Encoding ascii -Width 2000 -Force
-#================================================
-]633;E;Import-Module OSD -Force\x0a$MasterDriverPacks = @()\x0a$MasterDriverPacks += Get-DellDriverPack\x0a$MasterDriverPacks += Get-HpDriverPack\x0a$MasterDriverPacks += Get-LenovoDriverPack\x0a$MasterDriverPacks += Get-MicrosoftDriverPack\x0a\x0a$Results = $MasterDriverPacks | `\x0aSelect-Object CatalogVersion, Status, ReleaseDate, Manufacturer, Model, `\x0aProduct, Name, PackageID, FileName, `\x0a@{Name='Url'\x3bExpression={([array]$_.DriverPackUrl)}}, `\x0a@{Name='OS'\x3bExpression={([array]$_.DriverPackOS)}}, `\x0aHashMD5, `\x0a@{Name='Guid'\x3bExpression={([guid]((New-Guid).ToString()))}}\x0a\x0a$Results | Export-Clixml -Path (Join-Path (Get-Module -Name OSD -ListAvailable | Sort-Object Version -Descending | Select-Object -First 1).ModuleBase "Catalogs\x5cdriverpacks.xml") -Force\x0aImport-Clixml -Path (Join-Path (Get-Module -Name OSD -ListAvailable | Sort-Object Version -Descending | Select-Object -First 1).ModuleBase "Catalogs\x5cdriverpacks.xml") | ConvertTo-Json | Out-File (Join-Path (Get-Module -Name OSD -ListAvailable | Sort-Object Version -Descending | Select-Object -First 1).ModuleBase "Catalogs\x5cdriverpacks.json") -Encoding ascii -Width 2000 -Force\x0a#================================================]633;D;0]633;A]633;P;Cwd=C:\x5cUsers\x5cdavid\x5cOneDrive\x5cGitHub\x5cMyModules\x5cOSDPS C:\Users\david\OneDrive\GitHub\MyModules\OSD> ]633;B
-]633;E]633;D]633;A]633;P;Cwd=C:\x5cUsers\x5cdavid\x5cOneDrive\x5cGitHub\x5cMyModules\x5cOSDPS C:\Users\david\OneDrive\GitHub\MyModules\OSD> ]633;B
-PS>. 'C:\Users\david\OneDrive\GitHub\MyModules\OSD\Catalogs\WSUSXML\Build-JsonUpdate.md.ps1'
-
-]633;E;. 'C:\x5cUsers\x5cdavid\x5cOneDrive\x5cGitHub\x5cMyModules\x5cOSD\x5cCatalogs\x5cWSUSXML\x5cBuild-JsonUpdate.md.ps1']633;D;0]633;A]633;P;Cwd=C:\x5cUsers\x5cdavid\x5cOneDrive\x5cGitHub\x5cMyModules\x5cOSDPS C:\Users\david\OneDrive\GitHub\MyModules\OSD> ]633;B
-PS>CommandInvocation(Get-Command): "Get-Command"
->> ParameterBinding(Get-Command): name="ListImported"; value="True"
->> ParameterBinding(Get-Command): name="CommandType"; value="Alias"
-
-CommandType     Name                                               Version    Source
------------     ----                                               -------    ------
-Alias           % -> ForEach-Object
-Alias           ? -> Where-Object
-Alias           ac -> Add-Content
-Alias           cat -> Get-Content
-Alias           cd -> Set-Location
-Alias           chdir -> Set-Location
-Alias           clc -> Clear-Content
-Alias           clear -> Clear-Host
-Alias           Clear-LocalDisk                                    23.3.14.1  OSD
-Alias           Clear-USBDisk                                      23.3.14.1  OSD
-Alias           clhy -> Clear-History
-Alias           cli -> Clear-Item
-Alias           clp -> Clear-ItemProperty
-Alias           cls -> Clear-Host
-Alias           clv -> Clear-Variable
-Alias           cnsn -> Connect-PSSession
-Alias           compare -> Compare-Object
-Alias           copy -> Copy-Item
-Alias           Copy-ModuleToFolder                                23.3.14.1  OSD
-Alias           cp -> Copy-Item
-Alias           cpi -> Copy-Item
-Alias           cpp -> Copy-ItemProperty
-Alias           cvpa -> Convert-Path
-Alias           dbp -> Disable-PSBreakpoint
-Alias           del -> Remove-Item
-Alias           diff -> Compare-Object
-Alias           dir -> Get-ChildItem
-Alias           Dismount-WindowsImageOSD                           23.3.14.1  OSD
-Alias           dnsn -> Disconnect-PSSession
-Alias           ebp -> Enable-PSBreakpoint
-Alias           echo -> Write-Output
-Alias           Edit-ADKwinpe.wim                                  23.3.14.1  OSD
-Alias           Edit-WindowsImageOSD                               23.3.14.1  OSD
-Alias           epal -> Export-Alias
-Alias           epcsv -> Export-Csv
-Alias           erase -> Remove-Item
-Alias           etsn -> Enter-PSSession
-Alias           exsn -> Exit-PSSession
-Alias           fc -> Format-Custom
-Alias           fhx -> Format-Hex                                  7.0.0.0    Microsoft.PowerShell.Utility
-Alias           Find-InOSDModule                                   23.3.14.1  OSD
-Alias           fl -> Format-List
-Alias           foreach -> ForEach-Object
-Alias           ft -> Format-Table
-Alias           fw -> Format-Wide
-Alias           gal -> Get-Alias
-Alias           gbp -> Get-PSBreakpoint
-Alias           gc -> Get-Content
-Alias           gcb -> Get-Clipboard                               7.0.0.0    Microsoft.PowerShell.Management
-Alias           gci -> Get-ChildItem
-Alias           gcm -> Get-Command
-Alias           gcs -> Get-PSCallStack
-Alias           gdr -> Get-PSDrive
-Alias           gerr -> Get-Error
-Alias           Get-LocalDisk                                      23.3.14.1  OSD
-Alias           Get-LocalPartition                                 23.3.14.1  OSD
-Alias           Get-LocalVolume                                    23.3.14.1  OSD
-Alias           Get-OSDDisk                                        23.3.14.1  OSD
-Alias           Get-OSDPartition                                   23.3.14.1  OSD
-Alias           Get-OSDSessions                                    23.3.14.1  OSD
-Alias           Get-OSDVolume                                      23.3.14.1  OSD
-Alias           Get-USBDisk                                        23.3.14.1  OSD
-Alias           Get-USBPartition                                   23.3.14.1  OSD
-Alias           Get-USBVolume                                      23.3.14.1  OSD
-Alias           ghy -> Get-History
-Alias           gi -> Get-Item
-Alias           gin -> Get-ComputerInfo                            7.0.0.0    Microsoft.PowerShell.Management
-Alias           gjb -> Get-Job
-Alias           gl -> Get-Location
-Alias           gm -> Get-Member
-Alias           gmo -> Get-Module
-Alias           gp -> Get-ItemProperty
-Alias           gps -> Get-Process
-Alias           gpv -> Get-ItemPropertyValue
-Alias           group -> Group-Object
-Alias           gsn -> Get-PSSession
-Alias           gsv -> Get-Service
-Alias           gtz -> Get-TimeZone                                7.0.0.0    Microsoft.PowerShell.Management
-Alias           gu -> Get-Unique
-Alias           gv -> Get-Variable
-Alias           h -> Get-History
-Alias           history -> Get-History
-Alias           icm -> Invoke-Command
-Alias           iex -> Invoke-Expression
-Alias           ihy -> Invoke-History
-Alias           ii -> Invoke-Item
-Alias           ipal -> Import-Alias
-Alias           ipcsv -> Import-Csv
-Alias           ipmo -> Import-Module
-Alias           irm -> Invoke-RestMethod
-Alias           iwr -> Invoke-WebRequest
-Alias           kill -> Stop-Process
-Alias           ls -> Get-ChildItem
-Alias           man -> help
-Alias           md -> mkdir
-Alias           measure -> Measure-Object
-Alias           mi -> Move-Item
-Alias           mount -> New-PSDrive
-Alias           Mount-OSDWindowsImage                              23.3.14.1  OSD
-Alias           Mount-WindowsImageOSD                              23.3.14.1  OSD
-Alias           move -> Move-Item
-Alias           mp -> Move-ItemProperty
-Alias           mv -> Move-Item
-Alias           nal -> New-Alias
-Alias           ndr -> New-PSDrive
-Alias           New-ADK.iso                                        23.3.14.1  OSD
-Alias           New-OSDBoot.usb                                    23.3.14.1  OSD
-Alias           ni -> New-Item
-Alias           nmo -> New-Module
-Alias           nsn -> New-PSSession
-Alias           nv -> New-Variable
-Alias           ogv -> Out-GridView
-Alias           oh -> Out-Host
-Alias           popd -> Pop-Location
-Alias           ps -> Get-Process
-Alias           psedit -> Open-EditorFile                          0.2.0      PowerShellEditorServices.Commands
-Alias           pushd -> Push-Location
-Alias           pwd -> Get-Location
-Alias           r -> Invoke-History
-Alias           rbp -> Remove-PSBreakpoint
-Alias           rcjb -> Receive-Job
-Alias           rcsn -> Receive-PSSession
-Alias           rd -> Remove-Item
-Alias           rdr -> Remove-PSDrive
-Alias           ren -> Rename-Item
-Alias           ri -> Remove-Item
-Alias           rjb -> Remove-Job
-Alias           rm -> Remove-Item
-Alias           rmdir -> Remove-Item
-Alias           rmo -> Remove-Module
-Alias           rni -> Rename-Item
-Alias           rnp -> Rename-ItemProperty
-Alias           rp -> Remove-ItemProperty
-Alias           rsn -> Remove-PSSession
-Alias           rv -> Remove-Variable
-Alias           rvpa -> Resolve-Path
-Alias           sajb -> Start-Job
-Alias           sal -> Set-Alias
-Alias           saps -> Start-Process
-Alias           sasv -> Start-Service
-Alias           sbp -> Set-PSBreakpoint
-Alias           scb -> Set-Clipboard                               7.0.0.0    Microsoft.PowerShell.Management
-Alias           select -> Select-Object
-Alias           Select-USBDisk                                     23.3.14.1  OSD
-Alias           Select-USBVolume                                   23.3.14.1  OSD
-Alias           set -> Set-Variable
-Alias           shcm -> Show-Command
-Alias           si -> Set-Item
-Alias           sl -> Set-Location
-Alias           sleep -> Start-Sleep
-Alias           sls -> Select-String
-Alias           sort -> Sort-Object
-Alias           sp -> Set-ItemProperty
-Alias           spjb -> Stop-Job
-Alias           spps -> Stop-Process
-Alias           spsv -> Stop-Service
-Alias           start -> Start-Process
-Alias           stz -> Set-TimeZone                                7.0.0.0    Microsoft.PowerShell.Management
-Alias           sv -> Set-Variable
-Alias           tee -> Tee-Object
-Alias           type -> Get-Content
-Alias           Update-OSDWindowsImage                             23.3.14.1  OSD
-Alias           Update-WindowsImageOSD                             23.3.14.1  OSD
-Alias           where -> Where-Object
-Alias           wjb -> Wait-Job
-Alias           write -> Write-Output
-
-PS>CommandInvocation(Get-Command): "Get-Command"
->> ParameterBinding(Get-Command): name="ListImported"; value="True"
->> ParameterBinding(Get-Command): name="CommandType"; value="Alias"
-
-CommandType     Name                                               Version    Source
------------     ----                                               -------    ------
-Alias           % -> ForEach-Object
-Alias           ? -> Where-Object
-Alias           ac -> Add-Content
-Alias           cat -> Get-Content
-Alias           cd -> Set-Location
-Alias           chdir -> Set-Location
-Alias           clc -> Clear-Content
-Alias           clear -> Clear-Host
-Alias           Clear-LocalDisk                                    23.3.14.1  OSD
-Alias           Clear-USBDisk                                      23.3.14.1  OSD
-Alias           clhy -> Clear-History
-Alias           cli -> Clear-Item
-Alias           clp -> Clear-ItemProperty
-Alias           cls -> Clear-Host
-Alias           clv -> Clear-Variable
-Alias           cnsn -> Connect-PSSession
-Alias           compare -> Compare-Object
-Alias           copy -> Copy-Item
-Alias           Copy-ModuleToFolder                                23.3.14.1  OSD
-Alias           cp -> Copy-Item
-Alias           cpi -> Copy-Item
-Alias           cpp -> Copy-ItemProperty
-Alias           cvpa -> Convert-Path
-Alias           dbp -> Disable-PSBreakpoint
-Alias           del -> Remove-Item
-Alias           diff -> Compare-Object
-Alias           dir -> Get-ChildItem
-Alias           Dismount-WindowsImageOSD                           23.3.14.1  OSD
-Alias           dnsn -> Disconnect-PSSession
-Alias           ebp -> Enable-PSBreakpoint
-Alias           echo -> Write-Output
-Alias           Edit-ADKwinpe.wim                                  23.3.14.1  OSD
-Alias           Edit-WindowsImageOSD                               23.3.14.1  OSD
-Alias           epal -> Export-Alias
-Alias           epcsv -> Export-Csv
-Alias           erase -> Remove-Item
-Alias           etsn -> Enter-PSSession
-Alias           exsn -> Exit-PSSession
-Alias           fc -> Format-Custom
-Alias           fhx -> Format-Hex                                  7.0.0.0    Microsoft.PowerShell.Utility
-Alias           Find-InOSDModule                                   23.3.14.1  OSD
-Alias           fl -> Format-List
-Alias           foreach -> ForEach-Object
-Alias           ft -> Format-Table
-Alias           fw -> Format-Wide
-Alias           gal -> Get-Alias
-Alias           gbp -> Get-PSBreakpoint
-Alias           gc -> Get-Content
-Alias           gcb -> Get-Clipboard                               7.0.0.0    Microsoft.PowerShell.Management
-Alias           gci -> Get-ChildItem
-Alias           gcm -> Get-Command
-Alias           gcs -> Get-PSCallStack
-Alias           gdr -> Get-PSDrive
-Alias           gerr -> Get-Error
-Alias           Get-LocalDisk                                      23.3.14.1  OSD
-Alias           Get-LocalPartition                                 23.3.14.1  OSD
-Alias           Get-LocalVolume                                    23.3.14.1  OSD
-Alias           Get-OSDDisk                                        23.3.14.1  OSD
-Alias           Get-OSDPartition                                   23.3.14.1  OSD
-Alias           Get-OSDSessions                                    23.3.14.1  OSD
-Alias           Get-OSDVolume                                      23.3.14.1  OSD
-Alias           Get-USBDisk                                        23.3.14.1  OSD
-Alias           Get-USBPartition                                   23.3.14.1  OSD
-Alias           Get-USBVolume                                      23.3.14.1  OSD
-Alias           ghy -> Get-History
-Alias           gi -> Get-Item
-Alias           gin -> Get-ComputerInfo                            7.0.0.0    Microsoft.PowerShell.Management
-Alias           gjb -> Get-Job
-Alias           gl -> Get-Location
-Alias           gm -> Get-Member
-Alias           gmo -> Get-Module
-Alias           gp -> Get-ItemProperty
-Alias           gps -> Get-Process
-Alias           gpv -> Get-ItemPropertyValue
-Alias           group -> Group-Object
-Alias           gsn -> Get-PSSession
-Alias           gsv -> Get-Service
-Alias           gtz -> Get-TimeZone                                7.0.0.0    Microsoft.PowerShell.Management
-Alias           gu -> Get-Unique
-Alias           gv -> Get-Variable
-Alias           h -> Get-History
-Alias           history -> Get-History
-Alias           icm -> Invoke-Command
-Alias           iex -> Invoke-Expression
-Alias           ihy -> Invoke-History
-Alias           ii -> Invoke-Item
-Alias           ipal -> Import-Alias
-Alias           ipcsv -> Import-Csv
-Alias           ipmo -> Import-Module
-Alias           irm -> Invoke-RestMethod
-Alias           iwr -> Invoke-WebRequest
-Alias           kill -> Stop-Process
-Alias           ls -> Get-ChildItem
-Alias           man -> help
-Alias           md -> mkdir
-Alias           measure -> Measure-Object
-Alias           mi -> Move-Item
-Alias           mount -> New-PSDrive
-Alias           Mount-OSDWindowsImage                              23.3.14.1  OSD
-Alias           Mount-WindowsImageOSD                              23.3.14.1  OSD
-Alias           move -> Move-Item
-Alias           mp -> Move-ItemProperty
-Alias           mv -> Move-Item
-Alias           nal -> New-Alias
-Alias           ndr -> New-PSDrive
-Alias           New-ADK.iso                                        23.3.14.1  OSD
-Alias           New-OSDBoot.usb                                    23.3.14.1  OSD
-Alias           ni -> New-Item
-Alias           nmo -> New-Module
-Alias           nsn -> New-PSSession
-Alias           nv -> New-Variable
-Alias           ogv -> Out-GridView
-Alias           oh -> Out-Host
-Alias           popd -> Pop-Location
-Alias           ps -> Get-Process
-Alias           psedit -> Open-EditorFile                          0.2.0      PowerShellEditorServices.Commands
-Alias           pushd -> Push-Location
-Alias           pwd -> Get-Location
-Alias           r -> Invoke-History
-Alias           rbp -> Remove-PSBreakpoint
-Alias           rcjb -> Receive-Job
-Alias           rcsn -> Receive-PSSession
-Alias           rd -> Remove-Item
-Alias           rdr -> Remove-PSDrive
-Alias           ren -> Rename-Item
-Alias           ri -> Remove-Item
-Alias           rjb -> Remove-Job
-Alias           rm -> Remove-Item
-Alias           rmdir -> Remove-Item
-Alias           rmo -> Remove-Module
-Alias           rni -> Rename-Item
-Alias           rnp -> Rename-ItemProperty
-Alias           rp -> Remove-ItemProperty
-Alias           rsn -> Remove-PSSession
-Alias           rv -> Remove-Variable
-Alias           rvpa -> Resolve-Path
-Alias           sajb -> Start-Job
-Alias           sal -> Set-Alias
-Alias           saps -> Start-Process
-Alias           sasv -> Start-Service
-Alias           sbp -> Set-PSBreakpoint
-Alias           scb -> Set-Clipboard                               7.0.0.0    Microsoft.PowerShell.Management
-Alias           select -> Select-Object
-Alias           Select-USBDisk                                     23.3.14.1  OSD
-Alias           Select-USBVolume                                   23.3.14.1  OSD
-Alias           set -> Set-Variable
-Alias           shcm -> Show-Command
-Alias           si -> Set-Item
-Alias           sl -> Set-Location
-Alias           sleep -> Start-Sleep
-Alias           sls -> Select-String
-Alias           sort -> Sort-Object
-Alias           sp -> Set-ItemProperty
-Alias           spjb -> Stop-Job
-Alias           spps -> Stop-Process
-Alias           spsv -> Stop-Service
-Alias           start -> Start-Process
-Alias           stz -> Set-TimeZone                                7.0.0.0    Microsoft.PowerShell.Management
-Alias           sv -> Set-Variable
-Alias           tee -> Tee-Object
-Alias           type -> Get-Content
-Alias           Update-OSDWindowsImage                             23.3.14.1  OSD
-Alias           Update-WindowsImageOSD                             23.3.14.1  OSD
-Alias           where -> Where-Object
-Alias           wjb -> Wait-Job
-Alias           write -> Write-Output
-
-PS>CommandInvocation(Get-Command): "Get-Command"
->> ParameterBinding(Get-Command): name="ListImported"; value="True"
->> ParameterBinding(Get-Command): name="CommandType"; value="Alias"
-
-CommandType     Name                                               Version    Source
------------     ----                                               -------    ------
-Alias           % -> ForEach-Object
-Alias           ? -> Where-Object
-Alias           ac -> Add-Content
-Alias           cat -> Get-Content
-Alias           cd -> Set-Location
-Alias           chdir -> Set-Location
-Alias           clc -> Clear-Content
-Alias           clear -> Clear-Host
-Alias           Clear-LocalDisk                                    23.3.14.1  OSD
-Alias           Clear-USBDisk                                      23.3.14.1  OSD
-Alias           clhy -> Clear-History
-Alias           cli -> Clear-Item
-Alias           clp -> Clear-ItemProperty
-Alias           cls -> Clear-Host
-Alias           clv -> Clear-Variable
-Alias           cnsn -> Connect-PSSession
-Alias           compare -> Compare-Object
-Alias           copy -> Copy-Item
-Alias           Copy-ModuleToFolder                                23.3.14.1  OSD
-Alias           cp -> Copy-Item
-Alias           cpi -> Copy-Item
-Alias           cpp -> Copy-ItemProperty
-Alias           cvpa -> Convert-Path
-Alias           dbp -> Disable-PSBreakpoint
-Alias           del -> Remove-Item
-Alias           diff -> Compare-Object
-Alias           dir -> Get-ChildItem
-Alias           Dismount-WindowsImageOSD                           23.3.14.1  OSD
-Alias           dnsn -> Disconnect-PSSession
-Alias           ebp -> Enable-PSBreakpoint
-Alias           echo -> Write-Output
-Alias           Edit-ADKwinpe.wim                                  23.3.14.1  OSD
-Alias           Edit-WindowsImageOSD                               23.3.14.1  OSD
-Alias           epal -> Export-Alias
-Alias           epcsv -> Export-Csv
-Alias           erase -> Remove-Item
-Alias           etsn -> Enter-PSSession
-Alias           exsn -> Exit-PSSession
-Alias           fc -> Format-Custom
-Alias           fhx -> Format-Hex                                  7.0.0.0    Microsoft.PowerShell.Utility
-Alias           Find-InOSDModule                                   23.3.14.1  OSD
-Alias           fl -> Format-List
-Alias           foreach -> ForEach-Object
-Alias           ft -> Format-Table
-Alias           fw -> Format-Wide
-Alias           gal -> Get-Alias
-Alias           gbp -> Get-PSBreakpoint
-Alias           gc -> Get-Content
-Alias           gcb -> Get-Clipboard                               7.0.0.0    Microsoft.PowerShell.Management
-Alias           gci -> Get-ChildItem
-Alias           gcm -> Get-Command
-Alias           gcs -> Get-PSCallStack
-Alias           gdr -> Get-PSDrive
-Alias           gerr -> Get-Error
-Alias           Get-LocalDisk                                      23.3.14.1  OSD
-Alias           Get-LocalPartition                                 23.3.14.1  OSD
-Alias           Get-LocalVolume                                    23.3.14.1  OSD
-Alias           Get-OSDDisk                                        23.3.14.1  OSD
-Alias           Get-OSDPartition                                   23.3.14.1  OSD
-Alias           Get-OSDSessions                                    23.3.14.1  OSD
-Alias           Get-OSDVolume                                      23.3.14.1  OSD
-Alias           Get-USBDisk                                        23.3.14.1  OSD
-Alias           Get-USBPartition                                   23.3.14.1  OSD
-Alias           Get-USBVolume                                      23.3.14.1  OSD
-Alias           ghy -> Get-History
-Alias           gi -> Get-Item
-Alias           gin -> Get-ComputerInfo                            7.0.0.0    Microsoft.PowerShell.Management
-Alias           gjb -> Get-Job
-Alias           gl -> Get-Location
-Alias           gm -> Get-Member
-Alias           gmo -> Get-Module
-Alias           gp -> Get-ItemProperty
-Alias           gps -> Get-Process
-Alias           gpv -> Get-ItemPropertyValue
-Alias           group -> Group-Object
-Alias           gsn -> Get-PSSession
-Alias           gsv -> Get-Service
-Alias           gtz -> Get-TimeZone                                7.0.0.0    Microsoft.PowerShell.Management
-Alias           gu -> Get-Unique
-Alias           gv -> Get-Variable
-Alias           h -> Get-History
-Alias           history -> Get-History
-Alias           icm -> Invoke-Command
-Alias           iex -> Invoke-Expression
-Alias           ihy -> Invoke-History
-Alias           ii -> Invoke-Item
-Alias           ipal -> Import-Alias
-Alias           ipcsv -> Import-Csv
-Alias           ipmo -> Import-Module
-Alias           irm -> Invoke-RestMethod
-Alias           iwr -> Invoke-WebRequest
-Alias           kill -> Stop-Process
-Alias           ls -> Get-ChildItem
-Alias           man -> help
-Alias           md -> mkdir
-Alias           measure -> Measure-Object
-Alias           mi -> Move-Item
-Alias           mount -> New-PSDrive
-Alias           Mount-OSDWindowsImage                              23.3.14.1  OSD
-Alias           Mount-WindowsImageOSD                              23.3.14.1  OSD
-Alias           move -> Move-Item
-Alias           mp -> Move-ItemProperty
-Alias           mv -> Move-Item
-Alias           nal -> New-Alias
-Alias           ndr -> New-PSDrive
-Alias           New-ADK.iso                                        23.3.14.1  OSD
-Alias           New-OSDBoot.usb                                    23.3.14.1  OSD
-Alias           ni -> New-Item
-Alias           nmo -> New-Module
-Alias           nsn -> New-PSSession
-Alias           nv -> New-Variable
-Alias           ogv -> Out-GridView
-Alias           oh -> Out-Host
-Alias           popd -> Pop-Location
-Alias           ps -> Get-Process
-Alias           psedit -> Open-EditorFile                          0.2.0      PowerShellEditorServices.Commands
-Alias           pushd -> Push-Location
-Alias           pwd -> Get-Location
-Alias           r -> Invoke-History
-Alias           rbp -> Remove-PSBreakpoint
-Alias           rcjb -> Receive-Job
-Alias           rcsn -> Receive-PSSession
-Alias           rd -> Remove-Item
-Alias           rdr -> Remove-PSDrive
-Alias           ren -> Rename-Item
-Alias           ri -> Remove-Item
-Alias           rjb -> Remove-Job
-Alias           rm -> Remove-Item
-Alias           rmdir -> Remove-Item
-Alias           rmo -> Remove-Module
-Alias           rni -> Rename-Item
-Alias           rnp -> Rename-ItemProperty
-Alias           rp -> Remove-ItemProperty
-Alias           rsn -> Remove-PSSession
-Alias           rv -> Remove-Variable
-Alias           rvpa -> Resolve-Path
-Alias           sajb -> Start-Job
-Alias           sal -> Set-Alias
-Alias           saps -> Start-Process
-Alias           sasv -> Start-Service
-Alias           sbp -> Set-PSBreakpoint
-Alias           scb -> Set-Clipboard                               7.0.0.0    Microsoft.PowerShell.Management
-Alias           select -> Select-Object
-Alias           Select-USBDisk                                     23.3.14.1  OSD
-Alias           Select-USBVolume                                   23.3.14.1  OSD
-Alias           set -> Set-Variable
-Alias           shcm -> Show-Command
-Alias           si -> Set-Item
-Alias           sl -> Set-Location
-Alias           sleep -> Start-Sleep
-Alias           sls -> Select-String
-Alias           sort -> Sort-Object
-Alias           sp -> Set-ItemProperty
-Alias           spjb -> Stop-Job
-Alias           spps -> Stop-Process
-Alias           spsv -> Stop-Service
-Alias           start -> Start-Process
-Alias           stz -> Set-TimeZone                                7.0.0.0    Microsoft.PowerShell.Management
-Alias           sv -> Set-Variable
-Alias           tee -> Tee-Object
-Alias           type -> Get-Content
-Alias           Update-OSDWindowsImage                             23.3.14.1  OSD
-Alias           Update-WindowsImageOSD                             23.3.14.1  OSD
-Alias           where -> Where-Object
-Alias           wjb -> Wait-Job
-Alias           write -> Write-Output
-
+VERBOSE: GET with 0-byte payload
+VERBOSE: received -1-byte response of content type text/html
+VERBOSE: Testing Download File at https://download.microsoft.com/download/f/7/0/f70b3d0a-59b1-4842-9130-0c152bb738ba/SurfaceLaptop4_Win10_19041_22.111.10120.0.msi
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 650502144-byte response of content type application/octet-stream
+VERBOSE: Last Modified: Sat, 11 Mar 2023 00:52:23 GMT
+VERBOSE: Testing Download File at https://download.microsoft.com/download/f/7/0/f70b3d0a-59b1-4842-9130-0c152bb738ba/SurfaceLaptop4_Win11_22000_22.111.10120.0.msi
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 650555392-byte response of content type application/octet-stream
+VERBOSE: Last Modified: Sat, 11 Mar 2023 00:53:03 GMT
+VERBOSE: Processing Surface Laptop 4 15 AMD
+VERBOSE: GET with 0-byte payload
+VERBOSE: received -1-byte response of content type text/html
+VERBOSE: Testing Download File at https://download.microsoft.com/download/c/2/8/c2840704-6c0e-4457-82ca-68502b1803b5/SurfaceLaptop4_Win10_19042_22.101.7110.0.msi
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 469622784-byte response of content type application/octet-stream
+VERBOSE: Last Modified: Tue, 17 Jan 2023 19:39:40 GMT
+VERBOSE: Testing Download File at https://download.microsoft.com/download/c/2/8/c2840704-6c0e-4457-82ca-68502b1803b5/SurfaceLaptop4_Win11_22000_22.101.7108.0.msi
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 469741568-byte response of content type application/octet-stream
+VERBOSE: Last Modified: Tue, 17 Jan 2023 19:40:09 GMT
+VERBOSE: Processing Surface Laptop 4 15 Intel
+VERBOSE: GET with 0-byte payload
+VERBOSE: received -1-byte response of content type text/html
+VERBOSE: Testing Download File at https://download.microsoft.com/download/f/7/0/f70b3d0a-59b1-4842-9130-0c152bb738ba/SurfaceLaptop4_Win10_19041_22.111.10120.0.msi
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 650502144-byte response of content type application/octet-stream
+VERBOSE: Last Modified: Sat, 11 Mar 2023 00:52:23 GMT
+VERBOSE: Testing Download File at https://download.microsoft.com/download/f/7/0/f70b3d0a-59b1-4842-9130-0c152bb738ba/SurfaceLaptop4_Win11_22000_22.111.10120.0.msi
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 650555392-byte response of content type application/octet-stream
+VERBOSE: Last Modified: Sat, 11 Mar 2023 00:53:03 GMT
+VERBOSE: Processing Surface Laptop 5 13 Consumer
+VERBOSE: GET with 0-byte payload
+VERBOSE: received -1-byte response of content type text/html
+VERBOSE: Testing Download File at https://download.microsoft.com/download/d/2/6/d26c7d69-ec2f-4dd6-95ab-7e1d2b5ee7ae/SurfaceLaptop5_Win10_19044_22.102.17126.0.msi
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 670584832-byte response of content type application/octet-stream
+VERBOSE: Last Modified: Tue, 25 Oct 2022 20:01:34 GMT
+VERBOSE: Testing Download File at https://download.microsoft.com/download/d/2/6/d26c7d69-ec2f-4dd6-95ab-7e1d2b5ee7ae/SurfaceLaptop5_Win11_22621_22.102.17243.0.msi
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 670584832-byte response of content type application/octet-stream
+VERBOSE: Last Modified: Tue, 25 Oct 2022 20:02:11 GMT
+VERBOSE: Processing Surface Laptop 5 13 Commercial
+VERBOSE: GET with 0-byte payload
+VERBOSE: received -1-byte response of content type text/html
+VERBOSE: Testing Download File at https://download.microsoft.com/download/d/2/6/d26c7d69-ec2f-4dd6-95ab-7e1d2b5ee7ae/SurfaceLaptop5_Win10_19044_22.102.17126.0.msi
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 670584832-byte response of content type application/octet-stream
+VERBOSE: Last Modified: Tue, 25 Oct 2022 20:01:34 GMT
+VERBOSE: Testing Download File at https://download.microsoft.com/download/d/2/6/d26c7d69-ec2f-4dd6-95ab-7e1d2b5ee7ae/SurfaceLaptop5_Win11_22621_22.102.17243.0.msi
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 670584832-byte response of content type application/octet-stream
+VERBOSE: Last Modified: Tue, 25 Oct 2022 20:02:11 GMT
+VERBOSE: Processing Surface Laptop 5 15 Consumer
+VERBOSE: GET with 0-byte payload
+VERBOSE: received -1-byte response of content type text/html
+VERBOSE: Testing Download File at https://download.microsoft.com/download/d/2/6/d26c7d69-ec2f-4dd6-95ab-7e1d2b5ee7ae/SurfaceLaptop5_Win10_19044_22.102.17126.0.msi
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 670584832-byte response of content type application/octet-stream
+VERBOSE: Last Modified: Tue, 25 Oct 2022 20:01:34 GMT
+VERBOSE: Testing Download File at https://download.microsoft.com/download/d/2/6/d26c7d69-ec2f-4dd6-95ab-7e1d2b5ee7ae/SurfaceLaptop5_Win11_22621_22.102.17243.0.msi
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 670584832-byte response of content type application/octet-stream
+VERBOSE: Last Modified: Tue, 25 Oct 2022 20:02:11 GMT
+VERBOSE: Processing Surface Laptop 5 15 Commercial
+VERBOSE: GET with 0-byte payload
+VERBOSE: received -1-byte response of content type text/html
+VERBOSE: Testing Download File at https://download.microsoft.com/download/d/2/6/d26c7d69-ec2f-4dd6-95ab-7e1d2b5ee7ae/SurfaceLaptop5_Win10_19044_22.102.17126.0.msi
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 670584832-byte response of content type application/octet-stream
+VERBOSE: Last Modified: Tue, 25 Oct 2022 20:01:34 GMT
+VERBOSE: Testing Download File at https://download.microsoft.com/download/d/2/6/d26c7d69-ec2f-4dd6-95ab-7e1d2b5ee7ae/SurfaceLaptop5_Win11_22621_22.102.17243.0.msi
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 670584832-byte response of content type application/octet-stream
+VERBOSE: Last Modified: Tue, 25 Oct 2022 20:02:11 GMT
+VERBOSE: Processing Surface Laptop Go
+VERBOSE: GET with 0-byte payload
+VERBOSE: received -1-byte response of content type text/html
+VERBOSE: Testing Download File at https://download.microsoft.com/download/5/9/4/594604a4-26c0-405c-ac04-b385d824c30c/SurfaceLaptopGo_Win10_19041_22.021.14345.0.msi
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 639029248-byte response of content type application/octet-stream
+VERBOSE: Last Modified: Wed, 02 Mar 2022 16:31:51 GMT
+VERBOSE: Testing Download File at https://download.microsoft.com/download/5/9/4/594604a4-26c0-405c-ac04-b385d824c30c/SurfaceLaptopGo_Win11_22000_22.021.14347.0.msi
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 639029248-byte response of content type application/octet-stream
+VERBOSE: Last Modified: Wed, 02 Mar 2022 16:32:31 GMT
+VERBOSE: Processing Surface Laptop Go 2
+VERBOSE: GET with 0-byte payload
+VERBOSE: received -1-byte response of content type text/html
+VERBOSE: Testing Download File at https://download.microsoft.com/download/c/7/d/c7d06901-77f2-44aa-9a58-293d069d19c6/SurfaceLaptopGo2_Win10_19044_22.074.40379.0.msi
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 478113792-byte response of content type application/octet-stream
+VERBOSE: Last Modified: Mon, 01 Aug 2022 21:19:07 GMT
+VERBOSE: Processing Surface Laptop Studio
+VERBOSE: GET with 0-byte payload
+VERBOSE: received -1-byte response of content type text/html
+VERBOSE: Testing Download File at https://download.microsoft.com/download/b/3/0/b30ecc34-3bab-4c68-a5b3-0d258d73e747/SurfaceLaptopStudio_Win10_19042_22.114.42840.0.msi
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 1733165056-byte response of content type application/octet-stream
+VERBOSE: Last Modified: Thu, 05 Jan 2023 20:07:05 GMT
+VERBOSE: Testing Download File at https://download.microsoft.com/download/b/3/0/b30ecc34-3bab-4c68-a5b3-0d258d73e747/SurfaceLaptopStudio_Win11_22000_22.114.42841.0.msi
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 1733165056-byte response of content type application/octet-stream
+VERBOSE: Last Modified: Thu, 05 Jan 2023 20:08:11 GMT
+VERBOSE: Processing Surface Pro
+VERBOSE: GET with 0-byte payload
+VERBOSE: received -1-byte response of content type text/html
+VERBOSE: Testing Download File at https://download.microsoft.com/download/B/D/A/BDA70A48-7447-463C-BD91-1DF6C6E5BF50/Surface Pro/SurfacePro_Win10_150723_0.zip
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 156853921-byte response of content type application/octet-stream
+VERBOSE: Last Modified: Fri, 23 Apr 2021 16:44:02 GMT
+VERBOSE: Processing Surface Pro 2
+VERBOSE: GET with 0-byte payload
+VERBOSE: received -1-byte response of content type text/html
+VERBOSE: Testing Download File at https://download.microsoft.com/download/A/D/F/ADF87383-7E81-4157-A1C3-D2CCE3446D7B/SurfacePro2_Win10_160501_2.zip
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 219583326-byte response of content type application/octet-stream
+VERBOSE: Last Modified: Fri, 23 Apr 2021 17:55:50 GMT
+VERBOSE: Processing Surface Pro 3
+VERBOSE: GET with 0-byte payload
+VERBOSE: received -1-byte response of content type text/html
+VERBOSE: Testing Download File at https://download.microsoft.com/download/2/0/7/2073C22F-2F31-4F4A-8059-E54C91C564A9/SurfacePro3_Win10_18362_1902002_0.msi
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 191889408-byte response of content type application/octet-stream
+VERBOSE: Last Modified: Fri, 07 May 2021 01:00:17 GMT
+VERBOSE: Processing Surface Pro 4
+VERBOSE: GET with 0-byte payload
+VERBOSE: received -1-byte response of content type text/html
+VERBOSE: Testing Download File at https://download.microsoft.com/download/6/A/C/6ACB37C4-E4C1-4E0E-BBAE-AC7A0C303593/SurfacePro4_Win10_18362_21.061.12819.0.msi
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 366424064-byte response of content type application/octet-stream
+VERBOSE: Last Modified: Thu, 29 Jul 2021 18:08:09 GMT
+VERBOSE: Processing Surface Pro (5th Gen)
+VERBOSE: GET with 0-byte payload
+VERBOSE: received -1-byte response of content type text/html
+VERBOSE: Testing Download File at https://download.microsoft.com/download/4/C/7/4C7DA85D-03DE-4B89-B8E0-386437331C46/SurfacePro_Win10_19041_22.074.40280.0.msi
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 578031616-byte response of content type application/octet-stream
+VERBOSE: Last Modified: Fri, 19 Aug 2022 01:23:09 GMT
+VERBOSE: Processing Surface Pro with LTE Advanced
+VERBOSE: GET with 0-byte payload
+VERBOSE: received -1-byte response of content type text/html
+VERBOSE: Testing Download File at https://download.microsoft.com/download/4/1/6/416D7D4F-64D9-4633-A5CC-922A941854FD/SurfacePro_Win10_19041_22.074.40280.0.msi
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 578031616-byte response of content type application/octet-stream
+VERBOSE: Last Modified: Fri, 19 Aug 2022 01:23:37 GMT
+VERBOSE: Processing Surface Pro 6 Commercial
+VERBOSE: GET with 0-byte payload
+VERBOSE: received -1-byte response of content type text/html
+VERBOSE: Testing Download File at https://download.microsoft.com/download/8/9/8/8986DE75-9E21-478A-B002-A7E92BA0F053/SurfacePro6_Win10_19041_22.074.41199.0.msi
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 400912384-byte response of content type application/octet-stream
+VERBOSE: Last Modified: Thu, 01 Sep 2022 20:52:52 GMT
+VERBOSE: Processing Surface Pro 6 Consumer
+VERBOSE: GET with 0-byte payload
+VERBOSE: received -1-byte response of content type text/html
+VERBOSE: Testing Download File at https://download.microsoft.com/download/8/9/8/8986DE75-9E21-478A-B002-A7E92BA0F053/SurfacePro6_Win10_19041_22.074.41199.0.msi
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 400912384-byte response of content type application/octet-stream
+VERBOSE: Last Modified: Thu, 01 Sep 2022 20:52:52 GMT
+VERBOSE: Processing Surface Pro 7
+VERBOSE: GET with 0-byte payload
+VERBOSE: received -1-byte response of content type text/html
+VERBOSE: Testing Download File at https://download.microsoft.com/download/0/8/b/08b0f0ba-1571-41c0-9b8a-9af8a43681ae/SurfacePro7_Win10_19042_23.013.33004.0.msi
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 696152064-byte response of content type application/octet-stream
+VERBOSE: Last Modified: Fri, 10 Feb 2023 01:35:21 GMT
+VERBOSE: Testing Download File at https://download.microsoft.com/download/0/8/b/08b0f0ba-1571-41c0-9b8a-9af8a43681ae/SurfacePro7_Win11_22000_23.013.33004.0.msi
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 696287232-byte response of content type application/octet-stream
+VERBOSE: Last Modified: Fri, 10 Feb 2023 01:34:42 GMT
+VERBOSE: Processing Surface Pro 7+
+VERBOSE: GET with 0-byte payload
+VERBOSE: received -1-byte response of content type text/html
+VERBOSE: Testing Download File at https://download.microsoft.com/download/1/b/4/1b4bdd09-a704-4bf5-bed6-6693a0ac848a/SurfacePro7+_Win10_19042_23.012.18720.0.msi
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 1084059648-byte response of content type application/octet-stream
+VERBOSE: Last Modified: Fri, 10 Feb 2023 01:42:05 GMT
+VERBOSE: Testing Download File at https://download.microsoft.com/download/1/b/4/1b4bdd09-a704-4bf5-bed6-6693a0ac848a/SurfacePro7+_Win11_22000_23.012.18721.0.msi
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 1084096512-byte response of content type application/octet-stream
+VERBOSE: Last Modified: Fri, 10 Feb 2023 01:42:57 GMT
+VERBOSE: Processing Surface Pro 7+ LTE
+VERBOSE: GET with 0-byte payload
+VERBOSE: received -1-byte response of content type text/html
+VERBOSE: Testing Download File at https://download.microsoft.com/download/1/b/4/1b4bdd09-a704-4bf5-bed6-6693a0ac848a/SurfacePro7+_Win10_19042_23.012.18720.0.msi
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 1084059648-byte response of content type application/octet-stream
+VERBOSE: Last Modified: Fri, 10 Feb 2023 01:42:05 GMT
+VERBOSE: Testing Download File at https://download.microsoft.com/download/1/b/4/1b4bdd09-a704-4bf5-bed6-6693a0ac848a/SurfacePro7+_Win11_22000_23.012.18721.0.msi
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 1084096512-byte response of content type application/octet-stream
+VERBOSE: Last Modified: Fri, 10 Feb 2023 01:42:57 GMT
+VERBOSE: Processing Surface Pro 8
+VERBOSE: GET with 0-byte payload
+VERBOSE: received -1-byte response of content type text/html
+VERBOSE: Testing Download File at https://download.microsoft.com/download/9/1/3/9133dbd3-799a-4766-bb9e-f67697159c02/SurfacePro8_Win10_19042_22.113.31418.0.msi
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 644505600-byte response of content type application/octet-stream
+VERBOSE: Last Modified: Wed, 04 Jan 2023 21:18:33 GMT
+VERBOSE: Testing Download File at https://download.microsoft.com/download/9/1/3/9133dbd3-799a-4766-bb9e-f67697159c02/SurfacePro8_Win11_22000_22.113.31419.0.msi
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 644505600-byte response of content type application/octet-stream
+VERBOSE: Last Modified: Wed, 04 Jan 2023 21:19:13 GMT
+VERBOSE: Processing Surface Pro 8 Consumer
+VERBOSE: GET with 0-byte payload
+VERBOSE: received -1-byte response of content type text/html
+VERBOSE: Testing Download File at https://download.microsoft.com/download/9/1/3/9133dbd3-799a-4766-bb9e-f67697159c02/SurfacePro8_Win10_19042_22.113.31418.0.msi
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 644505600-byte response of content type application/octet-stream
+VERBOSE: Last Modified: Wed, 04 Jan 2023 21:18:33 GMT
+VERBOSE: Testing Download File at https://download.microsoft.com/download/9/1/3/9133dbd3-799a-4766-bb9e-f67697159c02/SurfacePro8_Win11_22000_22.113.31419.0.msi
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 644505600-byte response of content type application/octet-stream
+VERBOSE: Last Modified: Wed, 04 Jan 2023 21:19:13 GMT
+VERBOSE: Processing Surface Pro 8 LTE
+VERBOSE: GET with 0-byte payload
+VERBOSE: received -1-byte response of content type text/html
+VERBOSE: Testing Download File at https://download.microsoft.com/download/9/1/3/9133dbd3-799a-4766-bb9e-f67697159c02/SurfacePro8_Win10_19042_22.113.31418.0.msi
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 644505600-byte response of content type application/octet-stream
+VERBOSE: Last Modified: Wed, 04 Jan 2023 21:18:33 GMT
+VERBOSE: Testing Download File at https://download.microsoft.com/download/9/1/3/9133dbd3-799a-4766-bb9e-f67697159c02/SurfacePro8_Win11_22000_22.113.31419.0.msi
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 644505600-byte response of content type application/octet-stream
+VERBOSE: Last Modified: Wed, 04 Jan 2023 21:19:13 GMT
+VERBOSE: Processing Surface Pro 9 Consumer
+VERBOSE: GET with 0-byte payload
+VERBOSE: received -1-byte response of content type text/html
+VERBOSE: Testing Download File at https://download.microsoft.com/download/e/9/a/e9a35d1b-7b4c-48d4-8619-5301d4c09f65/SurfacePro9_Win10_19044_22.101.15507.0.msi
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 753610752-byte response of content type application/octet-stream
+VERBOSE: Last Modified: Tue, 25 Oct 2022 21:04:59 GMT
+VERBOSE: Testing Download File at https://download.microsoft.com/download/e/9/a/e9a35d1b-7b4c-48d4-8619-5301d4c09f65/SurfacePro9_Win11_22621_22.101.15506.0.msi
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 753610752-byte response of content type application/octet-stream
+VERBOSE: Last Modified: Tue, 25 Oct 2022 21:05:45 GMT
+VERBOSE: Processing Surface Pro 9 Commercial
+VERBOSE: GET with 0-byte payload
+VERBOSE: received -1-byte response of content type text/html
+VERBOSE: Testing Download File at https://download.microsoft.com/download/e/9/a/e9a35d1b-7b4c-48d4-8619-5301d4c09f65/SurfacePro9_Win10_19044_22.101.15507.0.msi
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 753610752-byte response of content type application/octet-stream
+VERBOSE: Last Modified: Tue, 25 Oct 2022 21:04:59 GMT
+VERBOSE: Testing Download File at https://download.microsoft.com/download/e/9/a/e9a35d1b-7b4c-48d4-8619-5301d4c09f65/SurfacePro9_Win11_22621_22.101.15506.0.msi
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 753610752-byte response of content type application/octet-stream
+VERBOSE: Last Modified: Tue, 25 Oct 2022 21:05:45 GMT
+VERBOSE: Processing Surface Pro 9 5G US
+VERBOSE: GET with 0-byte payload
+VERBOSE: received -1-byte response of content type text/html
+VERBOSE: Testing Download File at https://download.microsoft.com/download/e/9/a/e9a35d1b-7b4c-48d4-8619-5301d4c09f65/SurfacePro9_Win10_19044_22.101.15507.0.msi
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 753610752-byte response of content type application/octet-stream
+VERBOSE: Last Modified: Tue, 25 Oct 2022 21:04:59 GMT
+VERBOSE: Testing Download File at https://download.microsoft.com/download/e/9/a/e9a35d1b-7b4c-48d4-8619-5301d4c09f65/SurfacePro9_Win11_22621_22.101.15506.0.msi
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 753610752-byte response of content type application/octet-stream
+VERBOSE: Last Modified: Tue, 25 Oct 2022 21:05:45 GMT
+VERBOSE: Processing Surface Pro 9 5G ROW
+VERBOSE: GET with 0-byte payload
+VERBOSE: received -1-byte response of content type text/html
+VERBOSE: Testing Download File at https://download.microsoft.com/download/e/9/a/e9a35d1b-7b4c-48d4-8619-5301d4c09f65/SurfacePro9_Win10_19044_22.101.15507.0.msi
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 753610752-byte response of content type application/octet-stream
+VERBOSE: Last Modified: Tue, 25 Oct 2022 21:04:59 GMT
+VERBOSE: Testing Download File at https://download.microsoft.com/download/e/9/a/e9a35d1b-7b4c-48d4-8619-5301d4c09f65/SurfacePro9_Win11_22621_22.101.15506.0.msi
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 753610752-byte response of content type application/octet-stream
+VERBOSE: Last Modified: Tue, 25 Oct 2022 21:05:45 GMT
+VERBOSE: Processing Surface Studio
+VERBOSE: GET with 0-byte payload
+VERBOSE: received -1-byte response of content type text/html
+VERBOSE: Testing Download File at https://download.microsoft.com/download/4/5/2/452A1A18-1584-423C-A2D0-D76249EA989A/SurfaceStudio_Win10_19041_21.093.33210.0.msi
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 729686016-byte response of content type application/octet-stream
+VERBOSE: Last Modified: Tue, 02 Nov 2021 22:06:39 GMT
+VERBOSE: Processing Surface Studio 2
+VERBOSE: GET with 0-byte payload
+VERBOSE: received -1-byte response of content type text/html
+VERBOSE: Testing Download File at https://download.microsoft.com/download/2/E/A/2EA15C93-3AEE-4627-A6B9-B2906A1AD192/SurfaceStudio2_Win10_19041_22.020.2939.0.msi
+VERBOSE: HEAD with 0-byte payload
+VERBOSE: received 656039936-byte response of content type application/octet-stream
+VERBOSE: Last Modified: Thu, 24 Mar 2022 21:05:53 GMT
+VERBOSE: Importing the Build Catalog at C:\Users\david\AppData\Local\Temp\OSD\MicrosoftDriverPackCatalog.json
+**********************
+Windows PowerShell transcript end
+End time: 20230315235051
+**********************

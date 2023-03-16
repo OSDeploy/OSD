@@ -452,7 +452,7 @@ $OSDCatalog = @'
         $MasterResults = foreach ($Item in $Results) {
             Write-Verbose "Processing $($Item.Name)"
             $DriverPage = $DownloadsBaseUrl + $Item.PackageID
-            $Downloads = (Invoke-WebRequest -Uri $DriverPage -UseBasicParsing).Links
+            $Downloads = (Invoke-WebRequest -Uri $DriverPage).Links
             $Downloads = $Downloads | Where-Object {$_.href -match 'download.microsoft.com'}
             $Downloads = $Downloads | Where-Object {($_.href -match 'Win11') -or ($_.href -match 'Win10')}
             $Downloads = $Downloads | Sort-Object href | Select-Object href -Unique
@@ -467,7 +467,7 @@ $OSDCatalog = @'
                 $DownloadUrl = $Download.href
                 Write-Verbose "Testing Download File at $DownloadUrl"
 
-                $GetUrl = Invoke-WebRequest -Method Head -Uri $DownloadUrl -UseBasicParsing
+                $GetUrl = Invoke-WebRequest -Method Head -Uri $DownloadUrl
                 $GetHeaders = $GetUrl.Headers
                 $GetLastModified = $GetHeaders['Last-Modified']
                 Write-Verbose "Last Modified: $GetLastModified"
