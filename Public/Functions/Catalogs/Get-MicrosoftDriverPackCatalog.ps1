@@ -409,10 +409,10 @@ $OSDCatalog = @'
     #   Paths
     #=================================================
     $UseCatalog             = 'Offline'
-    $CloudCatalogUri        = 'https://support.microsoft.com/en-us/surface/download-drivers-and-firmware-for-surface-09bb2e09-2a4b-cb69-0951-078a7739e120'
+    $OnlineCatalogUri        = 'https://support.microsoft.com/en-us/surface/download-drivers-and-firmware-for-surface-09bb2e09-2a4b-cb69-0951-078a7739e120'
     $TempCatalogFile		= Join-Path $env:TEMP (Join-Path 'OSD' 'MicrosoftDriverPackCatalog.json')
     $ModuleCatalogFile     = "$($MyInvocation.MyCommand.Module.ModuleBase)\Catalogs\MicrosoftDriverPackCatalog.json"
-    $DownloadsBaseUrl 		= 'https://www.microsoft.com/en-us/download/confirmation.aspx?id='
+    $OnlineBaseUri 		= 'https://www.microsoft.com/en-us/download/confirmation.aspx?id='
     #=================================================
     #   Create Paths
     #=================================================
@@ -443,7 +443,7 @@ $OSDCatalog = @'
         $UseCatalog = 'Cloud'
     }
     if ($UseCatalog -eq 'Cloud') {
-        if (Test-WebConnection -Uri $CloudCatalogUri) {
+        if (Test-WebConnection -Uri $OnlineCatalogUri) {
             #Catalog is Cloud and can be downloaded
         }
         else {
@@ -459,7 +459,7 @@ $OSDCatalog = @'
     
         $MasterResults = foreach ($Item in $Results) {
             Write-Verbose "Processing $($Item.Name)"
-            $DriverPage = $DownloadsBaseUrl + $Item.PackageID
+            $DriverPage = $OnlineBaseUri + $Item.PackageID
             $Downloads = (Invoke-WebRequest -Uri $DriverPage).Links
             $Downloads = $Downloads | Where-Object {$_.href -match 'download.microsoft.com'}
             $Downloads = $Downloads | Where-Object {($_.href -match 'Win11') -or ($_.href -match 'Win10')}

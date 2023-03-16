@@ -27,12 +27,12 @@ function Get-HPDriverPackCatalog {
     #   Paths
     #=================================================
     $UseCatalog             = 'Offline'
-    $CloudCatalogUri        = 'http://ftp.hp.com/pub/caps-softpaq/cmit/HPClientDriverPackCatalog.cab'
+    $OnlineCatalogUri        = 'http://ftp.hp.com/pub/caps-softpaq/cmit/HPClientDriverPackCatalog.cab'
     $RawCatalogFile			= Join-Path $env:TEMP (Join-Path 'OSD' 'HPClientDriverPackCatalog.xml')
     $TempCatalogFile		= Join-Path $env:TEMP (Join-Path 'OSD' 'HPDriverPackCatalog.xml')
     $ModuleCatalogFile     = "$($MyInvocation.MyCommand.Module.ModuleBase)\Catalogs\HPDriverPackCatalog.xml"
     
-    $RawCatalogCabName  	= [string]($CloudCatalogUri | Split-Path -Leaf)
+    $RawCatalogCabName  	= [string]($OnlineCatalogUri | Split-Path -Leaf)
     $RawCatalogCabPath 	    = Join-Path $env:TEMP (Join-Path 'OSD' $RawCatalogCabName)
     #=================================================
     #   Create Download Path
@@ -64,7 +64,7 @@ function Get-HPDriverPackCatalog {
         $UseCatalog = 'Cloud'
     }
     if ($UseCatalog -eq 'Cloud') {
-        if (Test-WebConnection -Uri $CloudCatalogUri) {
+        if (Test-WebConnection -Uri $OnlineCatalogUri) {
             $UseCatalog = 'Cloud'
         }
         else {
@@ -75,9 +75,9 @@ function Get-HPDriverPackCatalog {
     #   UseCatalog Cloud
     #=================================================
     if ($UseCatalog -eq 'Cloud') {
-        Write-Verbose "Source: $CloudCatalogUri"
+        Write-Verbose "Source: $OnlineCatalogUri"
         Write-Verbose "Destination: $RawCatalogCabPath"
-        (New-Object System.Net.WebClient).DownloadFile($CloudCatalogUri, $RawCatalogCabPath)
+        (New-Object System.Net.WebClient).DownloadFile($OnlineCatalogUri, $RawCatalogCabPath)
 
         if (Test-Path $RawCatalogCabPath) {
             Write-Verbose "Expand: $RawCatalogCabPath"

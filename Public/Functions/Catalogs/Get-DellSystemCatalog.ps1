@@ -50,9 +50,10 @@ function Get-DellSystemCatalog {
     #   Defaults
     #=================================================
     $UseCatalog = 'Offline'
-    $CatalogName = 'DellSystemCatalog.xml'
-    $DownloadsBaseUrl = 'http://downloads.dell.com/'
-    $CloudCatalogUri = 'http://downloads.dell.com/catalog/CatalogPC.cab'
+    $OfflineCatalogName = 'DellSystemCatalog.xml'
+    $OnlineCatalogName = 'CatalogPC.xml'
+    $OnlineBaseUri = 'http://downloads.dell.com/'
+    $OnlineCatalogUri = 'http://downloads.dell.com/catalog/CatalogPC.cab'
     #=================================================
     #   Initialize
     #=================================================
@@ -65,7 +66,7 @@ function Get-DellSystemCatalog {
         $UseCatalog = 'Cloud'
     }
     if ($Online) {
-        $IsOnline = Test-WebConnection $CloudCatalogUri
+        $IsOnline = Test-WebConnection $OnlineCatalogUri
     }
 
     if ($IsOnline -eq $false) {
@@ -77,21 +78,22 @@ function Get-DellSystemCatalog {
     #=================================================
     #   Additional Paths
     #=================================================
-    if (-not(Test-Path (Join-Path $env:TEMP 'OSD'))) {
-        $null = New-Item -Path (Join-Path $env:TEMP 'OSD') -ItemType Directory -Force
+    $CatalogBuildFolder = Join-Path $env:TEMP 'OSD'
+    if (-not(Test-Path $CatalogBuildFolder)) {
+        $null = New-Item -Path $CatalogBuildFolder -ItemType Directory -Force
     }
-    $RawCatalogFile			= Join-Path $env:TEMP (Join-Path 'OSD' 'CatalogPC.xml')
-    $RawCatalogCabName  	= [string]($CloudCatalogUri | Split-Path -Leaf)
+    $RawCatalogFile			= Join-Path $env:TEMP (Join-Path 'OSD' $OnlineCatalogName)
+    $RawCatalogCabName  	= [string]($OnlineCatalogUri | Split-Path -Leaf)
     $RawCatalogCabPath 		= Join-Path $env:TEMP (Join-Path 'OSD' $RawCatalogCabName)
-    $TempCatalogFile        = Join-Path $env:TEMP (Join-Path 'OSD' $CatalogName)
-    $ModuleCatalogFile      = "$($MyInvocation.MyCommand.Module.ModuleBase)\Catalogs\$CatalogName"
+    $TempCatalogFile        = Join-Path $env:TEMP (Join-Path 'OSD' $OfflineCatalogName)
+    $ModuleCatalogFile      = "$($MyInvocation.MyCommand.Module.ModuleBase)\Catalogs\$OfflineCatalogName"
     #=================================================
     #   UseCatalog Cloud
     #=================================================
     if ($UseCatalog -eq 'Cloud') {
-        Write-Verbose "Source: $CloudCatalogUri"
+        Write-Verbose "Source: $OnlineCatalogUri"
         Write-Verbose "Destination: $RawCatalogCabPath"
-        (New-Object System.Net.WebClient).DownloadFile($CloudCatalogUri, $RawCatalogCabPath)
+        (New-Object System.Net.WebClient).DownloadFile($OnlineCatalogUri, $RawCatalogCabPath)
 
         if (Test-Path $RawCatalogCabPath) {
             Write-Verbose "Expand: $RawCatalogCabPath"
@@ -128,7 +130,7 @@ function Get-DellSystemCatalog {
         @{Label="Name";Expression={($_.Name.Display.'#cdata-section'.Trim())};},
         #@{Label="Description";Expression={($_.Description.Display.'#cdata-section'.Trim())};},
         @{Label="DellVersion";Expression={$_.dellVersion};},
-        @{Label="Url";Expression={-join ($DownloadsBaseUrl, $_.path)};},
+        @{Label="Url";Expression={-join ($OnlineBaseUri, $_.path)};},
         @{Label="VendorVersion";Expression={$_.vendorVersion};},
         @{Label="Criticality";Expression={($_.Criticality.Display.'#cdata-section'.Trim())};},
         @{Label="FileName";Expression = {(split-path -leaf $_.path)};},

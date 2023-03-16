@@ -6,18 +6,6 @@ Converts the HP Client Catalog for Microsoft System Center Product to a PowerShe
 Converts the HP Client Catalog for Microsoft System Center Product to a PowerShell Object
 Requires Internet Access to download HpCatalogForSms.latest.cab
 
-.PARAMETER Component
-Filter the results based on these Components:
-Software
-Driver
-Firmware
-Accessories Firmware and Driver
-BIOS
-
-.PARAMETER Compatible
-If you have a HP System, this will filter the results based on your
-ComputerSystem Product (Win32_BaseBoard Product)
-
 .EXAMPLE
 Get-HPSystemCatalog
 Don't do this, you will get an almost endless list
@@ -38,6 +26,7 @@ https://github.com/OSDeploy/OSD/tree/master/Docs
 function Get-HPSystemCatalog {
     [CmdletBinding()]
     param (
+        #Specifies a download path for matching results displayed in Out-GridView
         [System.String]
         $DownloadPath,
 
@@ -45,8 +34,10 @@ function Get-HPSystemCatalog {
         [System.Management.Automation.SwitchParameter]
         $Compatible,
 
+        #Limits the results to a specified component
         [ValidateSet('Software','Firmware','Driver','Accessories Firmware and Driver','BIOS')]
-        [System.String]$Component,
+        [System.String]
+        $Component,
 
         #Checks for the latest Online version
         [System.Management.Automation.SwitchParameter]
@@ -57,64 +48,56 @@ function Get-HPSystemCatalog {
         $UpdateModuleCatalog
     )
     #=================================================
-    #   Paths
+    #   Defaults
     #=================================================
-    $UseCatalog             = 'Cloud'
-    $CloudCatalogUri        = 'https://hpia.hpcloud.hp.com/downloads/sccmcatalog/HpCatalogForSms.latest.cab'
-    $RawCatalogFileName     = 'HpCatalogForSms.xml'
-    $RawCatalogFile			= Join-Path $env:TEMP (Join-Path 'OSD' 'HpCatalogForSms.xml')
-    $TempCatalogFile		= Join-Path $env:TEMP (Join-Path 'OSD' 'HPSystemCatalog.xml')
-    $ModuleCatalogFile     = "$($MyInvocation.MyCommand.Module.ModuleBase)\Catalogs\HPSystemCatalog.xml"
+    $UseCatalog = 'Offline'
+    $OfflineCatalogName = 'HPSystemCatalog.xml'
+    $OnlineCatalogName = 'HpCatalogForSms.xml'
+    $OnlineCatalogUri = 'https://hpia.hpcloud.hp.com/downloads/sccmcatalog/HpCatalogForSms.latest.cab'
+    #=================================================
+    #   Initialize
+    #=================================================
+    $IsOnline = $false
 
-    $RawCatalogCabName  	= [string]($CloudCatalogUri | Split-Path -Leaf)
+    if ($UpdateModuleCatalog) {
+        $Online = $true
+    }
+    if ($Online) {
+        $UseCatalog = 'Cloud'
+    }
+    if ($Online) {
+        $IsOnline = Test-WebConnection $OnlineCatalogUri
+    }
+
+    if ($IsOnline -eq $false) {
+        $Online = $false
+        $UpdateModuleCatalog = $false
+        $UseCatalog = 'Offline'
+    }
+    Write-Verbose "$UseCatalog Catalog"
+    #=================================================
+    #   Additional Paths
+    #=================================================
+    $CatalogBuildFolder = Join-Path $env:TEMP 'OSD'
+    if (-not(Test-Path $CatalogBuildFolder)) {
+        $null = New-Item -Path $CatalogBuildFolder -ItemType Directory -Force
+    }
+    $RawCatalogFile			= Join-Path $env:TEMP (Join-Path 'OSD' $OnlineCatalogName)
+    $RawCatalogCabName  	= [string]($OnlineCatalogUri | Split-Path -Leaf)
     $RawCatalogCabPath 		= Join-Path $env:TEMP (Join-Path 'OSD' $RawCatalogCabName)
-
-    $CatalogBuildFolder     = Join-Path $env:TEMP 'OSD'
-    #=================================================
-    #   Create Download Path
-    #=================================================
-    if (-not(Test-Path (Join-Path $env:TEMP 'OSD'))) {
-        $null = New-Item -Path (Join-Path $env:TEMP 'OSD') -ItemType Directory -Force
-    }
-    #=================================================
-    #   Test Build Catalog
-    #=================================================
-    if (Test-Path $TempCatalogFile) {
-        Write-Verbose "Build Catalog already created at $TempCatalogFile"	
-
-        $GetItemBuildCatalogFile = Get-Item $TempCatalogFile
-
-        #If the Build Catalog is older than 12 hours, delete it
-        if (((Get-Date) - $GetItemBuildCatalogFile.LastWriteTime).TotalHours -gt 12) {
-            Write-Verbose "Removing previous Build Catalog"
-            $null = Remove-Item $GetItemBuildCatalogFile.FullName -Force
-        }
-        else {
-            $UseCatalog = 'Build'
-        }
-    }
-    #=================================================
-    #   Test Cloud Catalog
-    #=================================================
-    if ($UseCatalog -eq 'Cloud') {
-        if (Test-WebConnection -Uri $CloudCatalogUri) {
-            #Catalog is Cloud and can be downloaded
-        }
-        else {
-            $UseCatalog = 'Offline'
-        }
-    }
+    $TempCatalogFile        = Join-Path $env:TEMP (Join-Path 'OSD' $OfflineCatalogName)
+    $ModuleCatalogFile      = "$($MyInvocation.MyCommand.Module.ModuleBase)\Catalogs\$OfflineCatalogName"
     #=================================================
     #   UseCatalog Cloud
     #=================================================
     if ($UseCatalog -eq 'Cloud') {
-        Write-Verbose "Source: $CloudCatalogUri"
+        Write-Verbose "Source: $OnlineCatalogUri"
         Write-Verbose "Destination: $RawCatalogCabPath"
-        (New-Object System.Net.WebClient).DownloadFile($CloudCatalogUri, $RawCatalogCabPath)
+        (New-Object System.Net.WebClient).DownloadFile($OnlineCatalogUri, $RawCatalogCabPath)
 
         if (Test-Path $RawCatalogCabPath) {
             Write-Verbose "Expand: $RawCatalogCabPath"
-            $null = Expand "$RawCatalogCabPath" -F:"$($RawCatalogFileName)" "$CatalogBuildFolder"
+            $null = Expand "$RawCatalogCabPath" -F:"$($OnlineCatalogName)" "$CatalogBuildFolder"
 
             if (Test-Path $RawCatalogFile) {
                 Write-Verbose "Using Raw Catalog at $RawCatalogFile"
@@ -214,11 +197,13 @@ function Get-HPSystemCatalog {
         $Results | Export-Clixml -Path $TempCatalogFile
     }
     #=================================================
-    #   UseCatalog Build
+    #   UpdateModuleCatalog
     #=================================================
-    if ($UseCatalog -eq 'Build') {
-        Write-Verbose "Importing the Build Catalog at $TempCatalogFile"
-        $Results = Import-Clixml -Path $TempCatalogFile
+    if ($UpdateModuleCatalog) {
+        if (Test-Path $TempCatalogFile) {
+            Write-Verbose "Copying $TempCatalogFile to $ModuleCatalogFile"
+            Copy-Item $TempCatalogFile $ModuleCatalogFile -Force -ErrorAction Ignore
+        }
     }
     #=================================================
     #   UseCatalog Offline
@@ -265,6 +250,6 @@ function Get-HPSystemCatalog {
     #=================================================
     #   Complete
     #=================================================
-    $Results | Sort-Object -Property CreationDate -Descending
+    $Results
     #=================================================
 }

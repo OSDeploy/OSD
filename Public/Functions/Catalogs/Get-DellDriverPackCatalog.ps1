@@ -31,14 +31,14 @@ function Get-DellDriverPackCatalog {
     #   Paths
     #=================================================
     $UseCatalog				= 'Offline'
-    $CloudCatalogUri		= 'https://downloads.dell.com/catalog/DriverPackCatalog.cab'
+    $OnlineCatalogUri		= 'https://downloads.dell.com/catalog/DriverPackCatalog.cab'
     $RawCatalogFile			= Join-Path $env:TEMP (Join-Path 'OSD' 'DriverPackCatalog.xml')
     $TempCatalogFile		= Join-Path $env:TEMP (Join-Path 'OSD' 'DellDriverPackCatalog.xml')
     $ModuleCatalogFile		= "$($MyInvocation.MyCommand.Module.ModuleBase)\Catalogs\DellDriverPackCatalog.xml"
 
-    $RawCatalogCabName  	= [string]($CloudCatalogUri | Split-Path -Leaf)
+    $RawCatalogCabName  	= [string]($OnlineCatalogUri | Split-Path -Leaf)
     $RawCatalogCabPath 		= Join-Path $env:TEMP (Join-Path 'OSD' $RawCatalogCabName)
-    $DownloadsBaseUrl       = 'http://downloads.dell.com/'
+    $OnlineBaseUri       = 'http://downloads.dell.com/'
     #=================================================
     #   Create Download Path
     #=================================================
@@ -69,7 +69,7 @@ function Get-DellDriverPackCatalog {
         $UseCatalog = 'Cloud'
     }
     if ($UseCatalog -eq 'Cloud') {
-        if (Test-WebConnection -Uri $CloudCatalogUri) {
+        if (Test-WebConnection -Uri $OnlineCatalogUri) {
             $UseCatalog = 'Cloud'
         }
         else {
@@ -80,9 +80,9 @@ function Get-DellDriverPackCatalog {
     #   UseCatalog Cloud
     #=================================================
     if ($UseCatalog -eq 'Cloud') {
-        Write-Verbose "Source: $CloudCatalogUri"
+        Write-Verbose "Source: $OnlineCatalogUri"
         Write-Verbose "Destination: $RawCatalogCabPath"
-        (New-Object System.Net.WebClient).DownloadFile($CloudCatalogUri, $RawCatalogCabPath)
+        (New-Object System.Net.WebClient).DownloadFile($OnlineCatalogUri, $RawCatalogCabPath)
 
         if (Test-Path $RawCatalogCabPath) {
             Write-Verbose "Expand: $RawCatalogCabPath"
@@ -163,7 +163,7 @@ function Get-DellDriverPackCatalog {
                 Name		        = $Name
                 #Description		= ($Item.Description.Display.'#cdata-section'.Trim())
                 DellVersion		    = $Item.dellVersion
-                Url		            = -join ($DownloadsBaseUrl, $Item.path)
+                Url		            = -join ($OnlineBaseUri, $Item.path)
                 VendorVersion		= $Item.vendorVersion
                 FileName		    = (split-path -leaf $Item.path)
                 SizeMB		        = '{0:f2}' -f ($Item.size/1MB)

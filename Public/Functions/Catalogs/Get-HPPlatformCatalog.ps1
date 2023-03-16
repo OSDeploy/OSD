@@ -6,7 +6,6 @@ Converts the HP Platform list to a PowerShell Object. Useful to get the computer
 Converts the HP Platform list to a PowerShell Object. Useful to get the computer model name for System Ids
 Requires Internet Access to download platformList.cab
 
-
 .EXAMPLE
 Get-HPPlatformCatalog
 Don't do this, you will get a big list.
@@ -36,57 +35,52 @@ function Get-HPPlatformCatalog {
         $UpdateModuleCatalog
     )
     #=================================================
-    #   Paths
+    #   Defaults
     #=================================================
-    $UseCatalog             = 'Cloud'
-    $CloudCatalogUri        = 'https://ftp.hp.com/pub/caps-softpaq/cmit/imagepal/ref/platformList.cab'
-    $RawCatalogFile			= Join-Path $env:TEMP (Join-Path 'OSD' 'platformList.xml')
-    $TempCatalogFile		= Join-Path $env:TEMP (Join-Path 'OSD' 'HPPlatformCatalog.xml')
-    $ModuleCatalogFile     = "$($MyInvocation.MyCommand.Module.ModuleBase)\Catalogs\HPPlatformCatalog.xml"
+    $UseCatalog = 'Offline'
+    $OfflineCatalogName = 'HPPlatformCatalog.xml'
+    $OnlineCatalogName = 'platformList.xml'
+    $OnlineCatalogUri = 'https://ftp.hp.com/pub/caps-softpaq/cmit/imagepal/ref/platformList.cab'
+    #=================================================
+    #   Initialize
+    #=================================================
+    $IsOnline = $false
 
-    $RawCatalogCabName  	= [string]($CloudCatalogUri | Split-Path -Leaf)
-    $RawCatalogCabPath 	    = Join-Path $env:TEMP (Join-Path 'OSD' $RawCatalogCabName)
-    #=================================================
-    #   Create Download Path
-    #=================================================
-    if (-not(Test-Path (Join-Path $env:TEMP 'OSD'))) {
-        $null = New-Item -Path (Join-Path $env:TEMP 'OSD') -ItemType Directory -Force
+    if ($UpdateModuleCatalog) {
+        $Online = $true
     }
-    #=================================================
-    #   Test Build Catalog
-    #=================================================
-    if (Test-Path $TempCatalogFile) {
-        Write-Verbose "Build Catalog already created at $TempCatalogFile"	
+    if ($Online) {
+        $UseCatalog = 'Cloud'
+    }
+    if ($Online) {
+        $IsOnline = Test-WebConnection $OnlineCatalogUri
+    }
 
-        $GetItemBuildCatalogFile = Get-Item $TempCatalogFile
-
-        #If the Build Catalog is older than 12 hours, delete it
-        if (((Get-Date) - $GetItemBuildCatalogFile.LastWriteTime).TotalHours -gt 12) {
-            Write-Verbose "Removing previous Build Catalog"
-            $null = Remove-Item $GetItemBuildCatalogFile.FullName -Force
-        }
-        else {
-            $UseCatalog = 'Build'
-        }
+    if ($IsOnline -eq $false) {
+        $Online = $false
+        $UpdateModuleCatalog = $false
+        $UseCatalog = 'Offline'
     }
+    Write-Verbose "$UseCatalog Catalog"
     #=================================================
-    #   Test Cloud Catalog
+    #   Additional Paths
     #=================================================
-    if ($UseCatalog -eq 'Cloud') {
-        if (Test-WebConnection -Uri $CloudCatalogUri) {
-            $UseCatalog = 'Cloud'
-        }
-        else {
-            $UseCatalog = 'Offline'
-        }
+    $CatalogBuildFolder = Join-Path $env:TEMP 'OSD'
+    if (-not(Test-Path $CatalogBuildFolder)) {
+        $null = New-Item -Path $CatalogBuildFolder -ItemType Directory -Force
     }
+    $RawCatalogFile			= Join-Path $env:TEMP (Join-Path 'OSD' $OnlineCatalogName)
+    $RawCatalogCabName  	= [string]($OnlineCatalogUri | Split-Path -Leaf)
+    $RawCatalogCabPath 		= Join-Path $env:TEMP (Join-Path 'OSD' $RawCatalogCabName)
+    $TempCatalogFile        = Join-Path $env:TEMP (Join-Path 'OSD' $OfflineCatalogName)
+    $ModuleCatalogFile      = "$($MyInvocation.MyCommand.Module.ModuleBase)\Catalogs\$OfflineCatalogName"
     #=================================================
     #   UseCatalog Cloud
     #=================================================
     if ($UseCatalog -eq 'Cloud') {
-        Write-Verbose "Source: $CloudCatalogUri"
+        Write-Verbose "Source: $OnlineCatalogUri"
         Write-Verbose "Destination: $RawCatalogCabPath"
-        (New-Object System.Net.WebClient).DownloadFile($CloudCatalogUri, $RawCatalogCabPath)
+        (New-Object System.Net.WebClient).DownloadFile($OnlineCatalogUri, $RawCatalogCabPath)
 
         if (Test-Path $RawCatalogCabPath) {
             Write-Verbose "Expand: $RawCatalogCabPath"
@@ -134,11 +128,13 @@ function Get-HPPlatformCatalog {
         $Results | Export-Clixml -Path $TempCatalogFile
     }
     #=================================================
-    #   UseCatalog Build
+    #   UpdateModuleCatalog
     #=================================================
-    if ($UseCatalog -eq 'Build') {
-        Write-Verbose "Importing the Build Catalog at $TempCatalogFile"
-        $Results = Import-Clixml -Path $TempCatalogFile
+    if ($UpdateModuleCatalog) {
+        if (Test-Path $TempCatalogFile) {
+            Write-Verbose "Copying $TempCatalogFile to $ModuleCatalogFile"
+            Copy-Item $TempCatalogFile $ModuleCatalogFile -Force -ErrorAction Ignore
+        }
     }
     #=================================================
     #   UseCatalog Offline

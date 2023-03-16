@@ -22,7 +22,7 @@ function Get-IntelRadeonDriverPack {
     #=================================================
     #   Defaults
     #=================================================
-    $CatalogName = 'IntelRadeonDriverPack.json'
+    $OfflineCatalogName = 'IntelRadeonDriverPack.json'
     $DriverUrl = 'https://www.intel.com/content/www/us/en/download/19282/radeon-rx-vega-m-graphics.html'
     #=================================================
     #   Initialize
@@ -41,8 +41,8 @@ function Get-IntelRadeonDriverPack {
         $null = New-Item -Path (Join-Path $env:TEMP 'OSD') -ItemType Directory -Force
     }
 
-    $TempCatalogFile = Join-Path $env:TEMP (Join-Path 'OSD' $CatalogName)
-    $ModuleCatalogFile = "$($MyInvocation.MyCommand.Module.ModuleBase)\Catalogs\$CatalogName"
+    $TempCatalogFile = Join-Path $env:TEMP (Join-Path 'OSD' $OfflineCatalogName)
+    $ModuleCatalogFile = "$($MyInvocation.MyCommand.Module.ModuleBase)\Catalogs\$OfflineCatalogName"
     $ModuleCatalogContent = Get-Content -Path $ModuleCatalogFile -Raw | ConvertFrom-Json
     #=================================================
     #   IsOnline

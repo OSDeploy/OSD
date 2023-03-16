@@ -32,43 +32,52 @@ function Get-LenovoBiosCatalog {
         $UpdateModuleCatalog
     )
     #=================================================
-    #   Paths
+    #   Defaults
     #=================================================
-    $UseCatalog           	= 'Cloud'
-    $CloudCatalogUri		= 'https://download.lenovo.com/cdrt/td/catalogv2.xml'
-    $RawCatalogFile			= Join-Path $env:TEMP (Join-Path 'OSD' 'catalogv2.xml')
-    $TempCatalogFile		= Join-Path $env:TEMP (Join-Path 'OSD' 'LenovoBiosCatalog.xml')
-	$ModuleCatalogFile     = "$($MyInvocation.MyCommand.Module.ModuleBase)\Catalogs\LenovoBiosCatalog.xml"
+    $UseCatalog = 'Offline'
+    $OfflineCatalogName = 'LenovoBiosCatalog.xml'
+    $OnlineCatalogUri = 'https://download.lenovo.com/cdrt/td/catalogv2.xml'
+    $OnlineCatalogName = 'catalogv2.xml'
     #=================================================
-    #   Create Paths
+    #   Initialize
     #=================================================
-	if (-not(Test-Path (Join-Path $env:TEMP 'OSD'))) {
-		$null = New-Item -Path (Join-Path $env:TEMP 'OSD') -ItemType Directory -Force
-	}
-    #=================================================
-    #   Test Build Catalog
-    #=================================================
-    if (Test-Path $TempCatalogFile) {
-        Write-Verbose "Build Catalog already created at $TempCatalogFile"	
+    $IsOnline = $false
 
-        $GetItemBuildCatalogFile = Get-Item $TempCatalogFile
-
-        #If the Build Catalog is older than 12 hours, delete it
-        if (((Get-Date) - $GetItemBuildCatalogFile.LastWriteTime).TotalHours -gt 12) {
-            Write-Verbose "Removing previous Build Catalog"
-            $null = Remove-Item $GetItemBuildCatalogFile.FullName -Force
-        }
-        else {
-            $UseCatalog = 'Build'
-        }
+    if ($UpdateModuleCatalog) {
+        $Online = $true
     }
+    if ($Online) {
+        $UseCatalog = 'Cloud'
+    }
+    if ($Online) {
+        $IsOnline = Test-WebConnection $OnlineCatalogUri
+    }
+
+    if ($IsOnline -eq $false) {
+        $Online = $false
+        $UpdateModuleCatalog = $false
+        $UseCatalog = 'Offline'
+    }
+    Write-Verbose "$UseCatalog Catalog"
+    #=================================================
+    #   Additional Paths
+    #=================================================
+    $CatalogBuildFolder = Join-Path $env:TEMP 'OSD'
+    if (-not(Test-Path $CatalogBuildFolder)) {
+        $null = New-Item -Path $CatalogBuildFolder -ItemType Directory -Force
+    }
+    $RawCatalogFile			= Join-Path $env:TEMP (Join-Path 'OSD' $OnlineCatalogName)
+    $RawCatalogCabName  	= [string]($OnlineCatalogUri | Split-Path -Leaf)
+    $RawCatalogCabPath 		= Join-Path $env:TEMP (Join-Path 'OSD' $RawCatalogCabName)
+    $TempCatalogFile        = Join-Path $env:TEMP (Join-Path 'OSD' $OfflineCatalogName)
+    $ModuleCatalogFile      = "$($MyInvocation.MyCommand.Module.ModuleBase)\Catalogs\$OfflineCatalogName"
     #=================================================
     #   Test Cloud Catalog
     #=================================================
     if ($UseCatalog -eq 'Cloud') {
         try {
-            $CatalogCloudRaw = Invoke-RestMethod -Uri $CloudCatalogUri -UseBasicParsing
-            Write-Verbose "Cloud Catalog $CloudCatalogUri"
+            $CatalogCloudRaw = Invoke-RestMethod -Uri $OnlineCatalogUri -UseBasicParsing
+            Write-Verbose "Cloud Catalog $OnlineCatalogUri"
             Write-Verbose "Saving Cloud Catalog to $RawCatalogFile"		
             $CatalogCloudContent = $CatalogCloudRaw.Substring(3)
             $CatalogCloudContent | Out-File -FilePath $RawCatalogFile -Encoding utf8 -Force

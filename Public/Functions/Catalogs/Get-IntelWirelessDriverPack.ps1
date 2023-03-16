@@ -30,7 +30,7 @@ function Get-IntelWirelessDriverPack {
     #=================================================
     #   Defaults
     #=================================================
-    $CatalogName = 'IntelWirelessDriverPack.json'
+    $OfflineCatalogName = 'IntelWirelessDriverPack.json'
     $DriverUrl = 'https://www.intel.com/content/www/us/en/support/articles/000017246/network-and-i-o/wireless-networking.html'
     #=================================================
     #   Initialize
@@ -49,8 +49,8 @@ function Get-IntelWirelessDriverPack {
         $null = New-Item -Path (Join-Path $env:TEMP 'OSD') -ItemType Directory -Force
     }
 
-    $TempCatalogFile = Join-Path $env:TEMP (Join-Path 'OSD' $CatalogName)
-    $ModuleCatalogFile = "$($MyInvocation.MyCommand.Module.ModuleBase)\Catalogs\$CatalogName"
+    $TempCatalogFile = Join-Path $env:TEMP (Join-Path 'OSD' $OfflineCatalogName)
+    $ModuleCatalogFile = "$($MyInvocation.MyCommand.Module.ModuleBase)\Catalogs\$OfflineCatalogName"
     $ModuleCatalogContent = Get-Content -Path $ModuleCatalogFile -Raw | ConvertFrom-Json
     #=================================================
     #   IsOnline

@@ -30,7 +30,7 @@ function Get-IntelGraphicsDriverPack {
     #=================================================
     #   Defaults
     #=================================================
-    $CatalogName = 'IntelGraphicsDriverPack.json'
+    $OfflineCatalogName = 'IntelGraphicsDriverPack.json'
     $DriverUrl = 'https://www.intel.com/content/www/us/en/download/19344/intel-graphics-windows-dch-drivers.html'
     #=================================================
     #   Initialize
@@ -49,8 +49,8 @@ function Get-IntelGraphicsDriverPack {
         $null = New-Item -Path (Join-Path $env:TEMP 'OSD') -ItemType Directory -Force
     }
 
-    $TempCatalogFile = Join-Path $env:TEMP (Join-Path 'OSD' $CatalogName)
-    $ModuleCatalogFile = "$($MyInvocation.MyCommand.Module.ModuleBase)\Catalogs\$CatalogName"
+    $TempCatalogFile = Join-Path $env:TEMP (Join-Path 'OSD' $OfflineCatalogName)
+    $ModuleCatalogFile = "$($MyInvocation.MyCommand.Module.ModuleBase)\Catalogs\$OfflineCatalogName"
     $ModuleCatalogContent = Get-Content -Path $ModuleCatalogFile -Raw | ConvertFrom-Json
     #=================================================
     #   Filter

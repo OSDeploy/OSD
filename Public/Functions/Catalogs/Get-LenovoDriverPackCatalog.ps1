@@ -28,7 +28,7 @@ function Get-LenovoDriverPackCatalog {
     #=================================================
     $UTF8ByteOrderMark      = [System.Text.Encoding]::UTF8.GetString(@(195, 175, 194, 187, 194, 191))
     $UseCatalog           	= 'Offline'
-    $CloudCatalogUri		= 'https://download.lenovo.com/cdrt/td/catalogv2.xml'
+    $OnlineCatalogUri		= 'https://download.lenovo.com/cdrt/td/catalogv2.xml'
     $RawCatalogFile			= Join-Path $env:TEMP (Join-Path 'OSD' 'catalogv2.xml')
     $TempCatalogFile       = Join-Path $env:TEMP (Join-Path 'OSD' 'LenovoDriverPackCatalog.xml')
     $ModuleCatalogFile		= "$($MyInvocation.MyCommand.Module.ModuleBase)\Catalogs\LenovoDriverPackCatalog.xml"
@@ -64,8 +64,8 @@ function Get-LenovoDriverPackCatalog {
     if ($UseCatalog -eq 'Cloud') {
         try {
             #[xml]$XmlCatalog = $RawDriverPackCatalog -replace "^$UTF8ByteOrderMark"
-            $CatalogCloudRaw = Invoke-RestMethod -Uri $CloudCatalogUri -UseBasicParsing
-            Write-Verbose "Cloud Catalog $CloudCatalogUri"
+            $CatalogCloudRaw = Invoke-RestMethod -Uri $OnlineCatalogUri -UseBasicParsing
+            Write-Verbose "Cloud Catalog $OnlineCatalogUri"
             Write-Verbose "Saving Cloud Catalog to $RawCatalogFile"		
             $CatalogCloudContent = $CatalogCloudRaw.Substring(3)
             $CatalogCloudContent | Out-File -FilePath $RawCatalogFile -Encoding utf8 -Force
