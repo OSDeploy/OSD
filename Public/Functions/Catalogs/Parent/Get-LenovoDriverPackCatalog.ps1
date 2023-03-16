@@ -1,12 +1,9 @@
 <#
 .SYNOPSIS
-Returns the Lenovo DriverPacks downloads
+Builds the Lenovo DriverPack Catalog
 
 .DESCRIPTION
-Returns the Lenovo DriverPacks downloads
-
-.PARAMETER Compatible
-Filters results based on your current Product
+Builds the Lenovo DriverPack Catalog
 
 .LINK
 https://github.com/OSDeploy/OSD/tree/master/Docs
@@ -19,9 +16,16 @@ function Get-LenovoDriverPackCatalog {
         #Limits the results to match the current system
         [System.Management.Automation.SwitchParameter]
         $Compatible,
-        [System.String]$DownloadPath,
-        [System.Management.Automation.SwitchParameter]$Force,
-        [System.Management.Automation.SwitchParameter]$TestUrl
+
+        #Specifies a download path for matching results displayed in Out-GridView
+        [System.String]
+        $DownloadPath,
+
+        [System.Management.Automation.SwitchParameter]
+        $Force,
+
+        [System.Management.Automation.SwitchParameter]
+        $TestUrl
     )
     #=================================================
     #   Variables

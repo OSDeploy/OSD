@@ -1,7 +1,21 @@
+<#
+.SYNOPSIS
+Returns the Lenovo DriverPacks
+
+.DESCRIPTION
+Returns the Lenovo DriverPacks
+
+.LINK
+https://github.com/OSDeploy/OSD/tree/master/Docs
+
+.NOTES
+#>
 function Get-LenovoDriverPack {
     [CmdletBinding()]
     param (
-        [System.String]$DownloadPath
+        #Specifies a download path for matching results displayed in Out-GridView
+        [System.String]
+        $DownloadPath
     )
     #=================================================
     #   Get Catalog

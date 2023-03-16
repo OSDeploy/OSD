@@ -1,12 +1,9 @@
 <#
 .SYNOPSIS
-Returns the Lenovo BIOS downloads
+Builds the Lenovo Bios Catalog
 
 .DESCRIPTION
-Returns the Lenovo BIOS downloads
-
-.PARAMETER Compatible
-Filters results based on your current Product
+Builds the Lenovo Bios Catalog
 
 .LINK
 https://github.com/OSDeploy/OSD/tree/master/Docs
@@ -16,6 +13,7 @@ https://github.com/OSDeploy/OSD/tree/master/Docs
 function Get-LenovoBiosCatalog {
     [CmdletBinding()]
     param (
+        #Specifies a download path for matching results displayed in Out-GridView
         [System.String]
         $DownloadPath,
 

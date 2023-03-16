@@ -1,12 +1,9 @@
 <#
 .SYNOPSIS
-Returns the Microsoft Surface DriverPacks
+Builds the Microsoft Surface DriverPacks
 
 .DESCRIPTION
-Returns the Microsoft Surface DriverPacks
-
-.PARAMETER Compatible
-Filters results based on your current Product
+Builds the Microsoft Surface DriverPacks
 
 .LINK
 https://github.com/OSDeploy/OSD/tree/master/Docs
@@ -16,6 +13,7 @@ https://github.com/OSDeploy/OSD/tree/master/Docs
 function Get-MicrosoftDriverPackCatalog {
     [CmdletBinding()]
     param (
+        #Specifies a download path for matching results displayed in Out-GridView
         [System.String]
         $DownloadPath,
 

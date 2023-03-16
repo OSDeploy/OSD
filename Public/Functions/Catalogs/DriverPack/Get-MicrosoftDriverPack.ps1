@@ -1,7 +1,21 @@
+<#
+.SYNOPSIS
+Returns the Microsoft Surface DriverPacks
+
+.DESCRIPTION
+Returns the Microsoft Surface DriverPacks
+
+.LINK
+https://github.com/OSDeploy/OSD/tree/master/Docs
+
+.NOTES
+#>
 function Get-MicrosoftDriverPack {
     [CmdletBinding()]
     param (
-        [System.String]$DownloadPath
+        #Specifies a download path for matching results displayed in Out-GridView
+        [System.String]
+        $DownloadPath
     )
     #=================================================
     #   Get-MicrosoftDriverPackCatalog

@@ -5,10 +5,6 @@ Returns the 'Accessories Firmware and Driver' Component of the HP System Catalog
 .DESCRIPTION
 Returns the 'Accessories Firmware and Driver' Component of the HP System Catalog
 
-.PARAMETER Compatible
-If you have a HP System, this will filter the results based on your
-Baseboard Product value
-
 .LINK
 https://github.com/OSDeploy/OSD/tree/master/Docs
 
