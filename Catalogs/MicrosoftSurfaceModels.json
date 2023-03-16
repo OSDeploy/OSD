@@ -352,5 +352,11 @@
         "Model":  "Surface Studio 2",
         "Product":  "Surface_Studio_2_1707_Commercial",
         "PackageID": "57593"
+    },
+    {
+        "Name":  "Surface Studio 2+",
+        "Model":  "Surface Studio 2+",
+        "Product":  "Surface_Studio_2+_2028",
+        "PackageID": "104681"
     }
 ]

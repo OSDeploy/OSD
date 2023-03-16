@@ -45,6 +45,7 @@ function Get-DellDriverPackCatalog {
 
     if ($UpdateModuleCatalog) {
         $Online = $true
+        $TestUrl = $true
     }
     if ($Online) {
         $UseCatalog = 'Cloud'

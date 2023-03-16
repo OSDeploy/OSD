@@ -21,50 +21,61 @@ function Get-LenovoDriverPackCatalog {
         [System.String]
         $DownloadPath,
 
+        #Checks for the latest Online version
         [System.Management.Automation.SwitchParameter]
-        $Force,
+        $Online,
 
+        #Updates the OSD Module Offline Catalog
         [System.Management.Automation.SwitchParameter]
-        $TestUrl
+        $UpdateModuleCatalog
     )
     #=================================================
-    #   Variables
+    #   Defaults
     #=================================================
+    $UseCatalog = 'Offline'
+    $OfflineCatalogName = 'LenovoDriverPackCatalog.xml'
+
+    $OnlineCatalogName = 'catalogv2.xml'
+    $OnlineCatalogUri = 'https://download.lenovo.com/cdrt/td/catalogv2.xml'
+
     $UTF8ByteOrderMark      = [System.Text.Encoding]::UTF8.GetString(@(195, 175, 194, 187, 194, 191))
-    $UseCatalog           	= 'Offline'
-    $OnlineCatalogUri		= 'https://download.lenovo.com/cdrt/td/catalogv2.xml'
-    $RawCatalogFile			= Join-Path $env:TEMP (Join-Path 'OSD' 'catalogv2.xml')
-    $TempCatalogFile       = Join-Path $env:TEMP (Join-Path 'OSD' 'LenovoDriverPackCatalog.xml')
-    $ModuleCatalogFile		= "$($MyInvocation.MyCommand.Module.ModuleBase)\Catalogs\LenovoDriverPackCatalog.xml"
     #=================================================
-    #   Create Paths
+    #   Initialize
     #=================================================
-    if (-not(Test-Path (Join-Path $env:TEMP 'OSD'))) {
-        $null = New-Item -Path (Join-Path $env:TEMP 'OSD') -ItemType Directory -Force
-    }
-    #=================================================
-    #   Test Build Catalog
-    #=================================================
-    if (Test-Path $TempCatalogFile) {
-        Write-Verbose "Build Catalog already created at $TempCatalogFile"	
+    $IsOnline = $false
 
-        $GetItemBuildCatalogFile = Get-Item $TempCatalogFile
-
-        #If the Build Catalog is older than 12 hours, delete it
-        if (((Get-Date) - $GetItemBuildCatalogFile.LastWriteTime).TotalHours -gt 12) {
-            Write-Verbose "Removing previous Build Catalog"
-            $null = Remove-Item $GetItemBuildCatalogFile.FullName -Force
-        }
-        else {
-            $UseCatalog = 'Build'
-        }
+    if ($UpdateModuleCatalog) {
+        $Online = $true
+        $TestUrl = $true
     }
-    #=================================================
-    #   Test Cloud Catalog
-    #=================================================
-    if ($Force) {
+    if ($Online) {
         $UseCatalog = 'Cloud'
     }
+    if ($Online) {
+        $IsOnline = Test-WebConnection $OnlineCatalogUri
+    }
+
+    if ($IsOnline -eq $false) {
+        $Online = $false
+        $UpdateModuleCatalog = $false
+        $UseCatalog = 'Offline'
+    }
+    Write-Verbose "$UseCatalog Catalog"
+    #=================================================
+    #   Additional Paths
+    #=================================================
+    $CatalogBuildFolder = Join-Path $env:TEMP 'OSD'
+    if (-not(Test-Path $CatalogBuildFolder)) {
+        $null = New-Item -Path $CatalogBuildFolder -ItemType Directory -Force
+    }
+    $RawCatalogFile			= Join-Path $env:TEMP (Join-Path 'OSD' $OnlineCatalogName)
+    $RawCatalogCabName  	= [string]($OnlineCatalogUri | Split-Path -Leaf)
+    $RawCatalogCabPath 		= Join-Path $env:TEMP (Join-Path 'OSD' $RawCatalogCabName)
+    $TempCatalogFile        = Join-Path $env:TEMP (Join-Path 'OSD' $OfflineCatalogName)
+    $ModuleCatalogFile      = "$($MyInvocation.MyCommand.Module.ModuleBase)\Catalogs\$OfflineCatalogName"
+    #=================================================
+    #   UseCatalog Cloud
+    #=================================================
     if ($UseCatalog -eq 'Cloud') {
         try {
             #[xml]$XmlCatalog = $RawDriverPackCatalog -replace "^$UTF8ByteOrderMark"
@@ -262,11 +273,13 @@ function Get-LenovoDriverPackCatalog {
         $Results | Export-Clixml -Path $TempCatalogFile
     }
     #=================================================
-    #   UseCatalog Build
+    #   UpdateModuleCatalog
     #=================================================
-    if ($UseCatalog -eq 'Build') {
-        Write-Verbose "Importing the Build Catalog at $TempCatalogFile"
-        $Results = Import-Clixml -Path $TempCatalogFile
+    if ($UpdateModuleCatalog) {
+        if (Test-Path $TempCatalogFile) {
+            Write-Verbose "Copying $TempCatalogFile to $ModuleCatalogFile"
+            Copy-Item $TempCatalogFile $ModuleCatalogFile -Force -ErrorAction Ignore
+        }
     }
     #=================================================
     #   UseCatalog Offline
