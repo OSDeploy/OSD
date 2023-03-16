@@ -1,6 +1,6 @@
 [
     {
-        "OSDVersion":  "23.3.14.3",
+        "OSDVersion":  "23.3.15.1",
         "LastUpdate":  "\/Date(1678856400000)\/",
         "OSDStatus":  "",
         "OSDType":  "Driver",
@@ -24,12 +24,12 @@
         "DriverUrl":  "https://downloadmirror.intel.com/772016/GFX_win_101.4146.zip",
         "DriverInfo":  "https://www.intel.com/content/www/us/en/download/726609/intel-arc-graphics-windows-dch-driver.html",
         "DriverDescription":  "This download installs Intel? Graphics Driver 31.0.101.4146 for Intel? Arc? Graphics, 11th-13th Gen Intel? Core? processor graphics, and related Intel Pentium? and Celeron? processors",
-        "OSDGuid":  "5d525a6f-0a55-42d9-8ec4-d7f4d255df66",
+        "OSDGuid":  "ba16a696-f6d5-4200-b5a8-967e12be2285",
         "OSDPnpClass":  "Display",
         "OSDPnpClassGuid":  "{4D36E968-E325-11CE-BFC1-08002BE10318}"
     },
     {
-        "OSDVersion":  "23.3.14.3",
+        "OSDVersion":  "23.3.15.1",
         "LastUpdate":  "\/Date(1672293600000)\/",
         "OSDStatus":  "",
         "OSDType":  "Driver",
@@ -53,12 +53,12 @@
         "DriverUrl":  "https://downloadmirror.intel.com/764512/gfx_win_101.2115.zip",
         "DriverInfo":  "https://www.intel.com/content/www/us/en/download/762755/intel-6th-10th-gen-processor-graphics-windows.html",
         "DriverDescription":  "This download installs Intel? Graphics Driver 31.0.101.2115 for 6th-10th Gen Intel? Core? Processor Graphics, and related Intel Atom?, Pentium?, and Celeron? processors.",
-        "OSDGuid":  "8794a225-c286-4393-9867-f1d515eb0068",
+        "OSDGuid":  "9fb3f964-ad9a-4aa5-b641-4f114ef7114b",
         "OSDPnpClass":  "Display",
         "OSDPnpClassGuid":  "{4D36E968-E325-11CE-BFC1-08002BE10318}"
     },
     {
-        "OSDVersion":  "23.3.14.3",
+        "OSDVersion":  "23.3.15.1",
         "LastUpdate":  "\/Date(1618376400000)\/",
         "OSDStatus":  "",
         "OSDType":  "Driver",
@@ -83,12 +83,12 @@
         "DriverUrl":  "https://downloadmirror.intel.com/30382/a08/win32_15.36.5180.zip",
         "DriverInfo":  "https://intel.com/content/www/us/en/download/18424/intel-graphics-driver-for-windows-7-8-1-15-36.html",
         "DriverDescription":  "This download installs the Intel? Graphics Driver for 4th Gen.",
-        "OSDGuid":  "1e5afc21-34d8-4c75-b918-a0cbd0a7b4d5",
+        "OSDGuid":  "b5750a3e-55c9-4abc-92bb-e439ff8ec371",
         "OSDPnpClass":  "Display",
         "OSDPnpClassGuid":  "{4D36E968-E325-11CE-BFC1-08002BE10318}"
     },
     {
-        "OSDVersion":  "23.3.14.3",
+        "OSDVersion":  "23.3.15.1",
         "LastUpdate":  "\/Date(1618376400000)\/",
         "OSDStatus":  "",
         "OSDType":  "Driver",
@@ -113,12 +113,12 @@
         "DriverUrl":  "https://downloadmirror.intel.com/30382/a08/win64_15.36.5180.zip",
         "DriverInfo":  "https://intel.com/content/www/us/en/download/18424/intel-graphics-driver-for-windows-7-8-1-15-36.html",
         "DriverDescription":  "This download installs the Intel? Graphics Driver for 4th Gen.",
-        "OSDGuid":  "e3ffdfd6-c9c5-4fac-8622-2d0344ec7bbe",
+        "OSDGuid":  "5a23764f-6696-46ac-b07e-e538beb8f09c",
         "OSDPnpClass":  "Display",
         "OSDPnpClassGuid":  "{4D36E968-E325-11CE-BFC1-08002BE10318}"
     },
     {
-        "OSDVersion":  "23.3.14.3",
+        "OSDVersion":  "23.3.15.1",
         "LastUpdate":  "\/Date(1612504800000)\/",
         "OSDStatus":  "",
         "OSDType":  "Driver",
@@ -142,12 +142,12 @@
         "DriverUrl":  "https://downloadmirror.intel.com/30195/a08/win32_15.45.5174.zip",
         "DriverInfo":  "https://intel.com/content/www/us/en/download/18799/intel-graphics-driver-for-windows-15-45.html",
         "DriverDescription":  "This download installs the Intel? Graphics Driver for 6th Gen on Windows 7* and Windows 8.1*/10* 64-bit.",
-        "OSDGuid":  "1a7baaaf-b253-41e0-a24b-2215a22996dc",
+        "OSDGuid":  "5b4d37de-1fa8-43b6-818d-582f2914b40a",
         "OSDPnpClass":  "Display",
         "OSDPnpClassGuid":  "{4D36E968-E325-11CE-BFC1-08002BE10318}"
     },
     {
-        "OSDVersion":  "23.3.14.3",
+        "OSDVersion":  "23.3.15.1",
         "LastUpdate":  "\/Date(1612504800000)\/",
         "OSDStatus":  "",
         "OSDType":  "Driver",
@@ -173,12 +173,12 @@
         "DriverUrl":  "https://downloadmirror.intel.com/30195/a08/win64_15.45.5174.zip",
         "DriverInfo":  "https://intel.com/content/www/us/en/download/18799/intel-graphics-driver-for-windows-15-45.html",
         "DriverDescription":  "This download installs the Intel? Graphics Driver for 6th Gen on Windows 7* and Windows 8.1*/10* 64-bit.",
-        "OSDGuid":  "a866bf7a-81b8-4be4-a257-a006bc8434e8",
+        "OSDGuid":  "2d9e0570-29c6-4e55-b87c-959e105dda8e",
         "OSDPnpClass":  "Display",
         "OSDPnpClassGuid":  "{4D36E968-E325-11CE-BFC1-08002BE10318}"
     },
     {
-        "OSDVersion":  "23.3.14.3",
+        "OSDVersion":  "23.3.15.1",
         "LastUpdate":  "\/Date(1612504800000)\/",
         "OSDStatus":  "",
         "OSDType":  "Driver",
@@ -203,12 +203,12 @@
         "DriverUrl":  "https://downloadmirror.intel.com/30196/a08/win32_15.40.5171.zip",
         "DriverInfo":  "https://intel.com/content/www/us/en/download/18369/intel-graphics-driver-for-windows-15-40.html",
         "DriverDescription":  "This download installs the Intel? Graphics Driver for Braswell, 4th and 5th generations.",
-        "OSDGuid":  "3fafb90b-9290-4b71-bc4e-90ee29baf489",
+        "OSDGuid":  "66c7f7e6-c4de-46d9-ae92-9bdeefa0beb8",
         "OSDPnpClass":  "Display",
         "OSDPnpClassGuid":  "{4D36E968-E325-11CE-BFC1-08002BE10318}"
     },
     {
-        "OSDVersion":  "23.3.14.3",
+        "OSDVersion":  "23.3.15.1",
         "LastUpdate":  "\/Date(1612504800000)\/",
         "OSDStatus":  "",
         "OSDType":  "Driver",
@@ -233,12 +233,12 @@
         "DriverUrl":  "https://downloadmirror.intel.com/30196/a08/win64_15.40.5171.zip",
         "DriverInfo":  "https://intel.com/content/www/us/en/download/18369/intel-graphics-driver-for-windows-15-40.html",
         "DriverDescription":  "This download installs the Intel? Graphics Driver for Braswell, 4th and 5th generations.",
-        "OSDGuid":  "3d1882d4-e518-4b65-b2ce-910a65e1a4cc",
+        "OSDGuid":  "deaf8143-6fe5-4928-b5ec-b7d690ac4ef9",
         "OSDPnpClass":  "Display",
         "OSDPnpClassGuid":  "{4D36E968-E325-11CE-BFC1-08002BE10318}"
     },
     {
-        "OSDVersion":  "23.3.14.3",
+        "OSDVersion":  "23.3.15.1",
         "LastUpdate":  "\/Date(1603429200000)\/",
         "OSDStatus":  "",
         "OSDType":  "Driver",
@@ -264,12 +264,12 @@
         "DriverUrl":  "https://downloadmirror.intel.com/29969/a08/win32_15.33.53.5161.zip",
         "DriverInfo":  "https://intel.com/content/www/us/en/download/18606/intel-graphics-driver-for-windows-15-33.html",
         "DriverDescription":  "This download installs the Intel? Graphics Driver for Baytrail and 3rd generation.",
-        "OSDGuid":  "6f31b684-50a3-478e-825b-f6fad6d14500",
+        "OSDGuid":  "c7491003-bdbe-4bea-82e4-eac1f97ffd84",
         "OSDPnpClass":  "Display",
         "OSDPnpClassGuid":  "{4D36E968-E325-11CE-BFC1-08002BE10318}"
     },
     {
-        "OSDVersion":  "23.3.14.3",
+        "OSDVersion":  "23.3.15.1",
         "LastUpdate":  "\/Date(1603429200000)\/",
         "OSDStatus":  "",
         "OSDType":  "Driver",
@@ -295,12 +295,12 @@
         "DriverUrl":  "https://downloadmirror.intel.com/29969/a08/win64_15.33.53.5161.zip",
         "DriverInfo":  "https://intel.com/content/www/us/en/download/18606/intel-graphics-driver-for-windows-15-33.html",
         "DriverDescription":  "This download installs the Intel? Graphics Driver for Baytrail and 3rd generation.",
-        "OSDGuid":  "f28828bd-afac-487b-9fd1-f99a31d1ef10",
+        "OSDGuid":  "f1e3efe5-0290-4efa-b332-7700a15b038a",
         "OSDPnpClass":  "Display",
         "OSDPnpClassGuid":  "{4D36E968-E325-11CE-BFC1-08002BE10318}"
     },
     {
-        "OSDVersion":  "23.3.14.3",
+        "OSDVersion":  "23.3.15.1",
         "LastUpdate":  "\/Date(1450850400000)\/",
         "OSDStatus":  "",
         "OSDType":  "Driver",
@@ -324,12 +324,12 @@
         "DriverUrl":  "https://downloadmirror.intel.com/25620/a08/win32_154014.4352.zip",
         "DriverInfo":  "https://intel.com/content/www/us/en/download/18563/intel-graphics-driver-for-windows-7-8-1-15-40-6th-gen.html",
         "DriverDescription":  "This download installs the Intel? Graphics Driver for 6th Gen.",
-        "OSDGuid":  "2d0c532a-67d4-49c4-ae2a-0bed8ab303e4",
+        "OSDGuid":  "6afcbe44-d98a-4649-bcd9-8eb055a58520",
         "OSDPnpClass":  "Display",
         "OSDPnpClassGuid":  "{4D36E968-E325-11CE-BFC1-08002BE10318}"
     },
     {
-        "OSDVersion":  "23.3.14.3",
+        "OSDVersion":  "23.3.15.1",
         "LastUpdate":  "\/Date(1450850400000)\/",
         "OSDStatus":  "",
         "OSDType":  "Driver",
@@ -355,12 +355,12 @@
         "DriverUrl":  "https://downloadmirror.intel.com/25620/a08/win64_154014.4352.zip",
         "DriverInfo":  "https://intel.com/content/www/us/en/download/18563/intel-graphics-driver-for-windows-7-8-1-15-40-6th-gen.html",
         "DriverDescription":  "This download installs the Intel? Graphics Driver for 6th Gen.",
-        "OSDGuid":  "a73d8a7b-6f94-47a1-985d-1cc283013756",
+        "OSDGuid":  "dffca0c9-f2b2-48e9-987a-2fd82eaa1cdc",
         "OSDPnpClass":  "Display",
         "OSDPnpClassGuid":  "{4D36E968-E325-11CE-BFC1-08002BE10318}"
     },
     {
-        "OSDVersion":  "23.3.14.3",
+        "OSDVersion":  "23.3.15.1",
         "LastUpdate":  "\/Date(1438146000000)\/",
         "OSDStatus":  "",
         "OSDType":  "Driver",
@@ -384,12 +384,12 @@
         "DriverUrl":  "https://downloadmirror.intel.com/25149/eng/win32_154001.zip",
         "DriverInfo":  "https://intel.com/content/www/us/en/download/18301/intel-hd-graphics-production-driver-for-windows-10-32-bit-n-series.html",
         "DriverDescription":  "This download installs the Intel? Graphics Driver for Braswell.",
-        "OSDGuid":  "62a690ba-ab63-4f0a-b5ce-8056bf47185c",
+        "OSDGuid":  "965a74af-bd1d-4970-94c7-3d6cb6bec042",
         "OSDPnpClass":  "Display",
         "OSDPnpClassGuid":  "{4D36E968-E325-11CE-BFC1-08002BE10318}"
     },
     {
-        "OSDVersion":  "23.3.14.3",
+        "OSDVersion":  "23.3.15.1",
         "LastUpdate":  "\/Date(1361253600000)\/",
         "OSDStatus":  "",
         "OSDType":  "Driver",
@@ -413,12 +413,12 @@
         "DriverUrl":  "https://downloadmirror.intel.com/22518/a08/win7vista_152258.zip",
         "DriverInfo":  "https://www.intel.com/content/www/us/en/download/15567/intel-graphics-media-accelerator-driver-windows-7-and-windows-vista-zip.html",
         "DriverDescription":  "This download installs version 15.22.58.2993 of the Intel? Graphics Media Accelerator Driver for Windows* 7/Vista, 32-bit.",
-        "OSDGuid":  "11581170-0ec3-447c-b223-eacbd4cb6d13",
+        "OSDGuid":  "9c1e7eb6-a89e-4aba-8aac-ea0a50af194c",
         "OSDPnpClass":  "Display",
         "OSDPnpClassGuid":  "{4D36E968-E325-11CE-BFC1-08002BE10318}"
     },
     {
-        "OSDVersion":  "23.3.14.3",
+        "OSDVersion":  "23.3.15.1",
         "LastUpdate":  "\/Date(1361253600000)\/",
         "OSDStatus":  "",
         "OSDType":  "Driver",
@@ -442,7 +442,7 @@
         "DriverUrl":  "https://downloadmirror.intel.com/22520/a08/win7vista_64_152258.zip",
         "DriverInfo":  "https://www.intel.com/content/www/us/en/download/15568/intel-graphics-media-accelerator-driver-for-windows-7-windows-vista-64-bit-zip.html",
         "DriverDescription":  "This download installs version 15.22.58.64.2993 of the Intel? Graphics Media Accelerator driver for Windows 7* and Windows Vista 64-bit*.",
-        "OSDGuid":  "c383ee52-92d2-4e54-9096-0fedd75d385f",
+        "OSDGuid":  "2a9f4576-3e50-4112-8980-b8ba61bac105",
         "OSDPnpClass":  "Display",
         "OSDPnpClassGuid":  "{4D36E968-E325-11CE-BFC1-08002BE10318}"
     }

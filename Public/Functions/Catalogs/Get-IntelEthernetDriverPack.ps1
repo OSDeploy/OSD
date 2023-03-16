@@ -1,28 +1,33 @@
 <#
 .SYNOPSIS
-Returns a Intel Wireless Driver Object
+Returns the Intel Ethernet Driver Object
 
 .DESCRIPTION
-Returns a Intel Wireless Driver Object
+Returns the Intel Ethernet Driver Object
 #>
 function Get-IntelEthernetDriverPack {
     [CmdletBinding()]
     param (
+        #Forces the function to check for the latest Internet version
         [System.Management.Automation.SwitchParameter]
         $Force,
+
+        #Updates the local catalog in the OSD Module
         [System.Management.Automation.SwitchParameter]
         $UpdateModuleCatalog
     )
     #=================================================
     #   Defaults
     #=================================================
-    $IsOnline = $false
+    $CatalogName = 'IntelEthernetDriverPack.json'
     $DriverUrl = 'https://www.intel.com/content/www/us/en/download/15084/intel-ethernet-adapter-complete-driver-pack.html'
-
+    #=================================================
+    #   Initialize
+    #=================================================
+    $IsOnline = $false
     if ($UpdateModuleCatalog) {
         $Force = $true
     }
-
     if ($Force) {
         $IsOnline = Test-WebConnection $DriverUrl
     }
@@ -32,7 +37,6 @@ function Get-IntelEthernetDriverPack {
         $null = New-Item -Path (Join-Path $env:TEMP 'OSD') -ItemType Directory -Force
     }
 
-    $CatalogName = 'IntelEthernetDriverPack.json'
     $TempCatalogFile = Join-Path $env:TEMP (Join-Path 'OSD' $CatalogName)
     $ModuleCatalogFile = "$($MyInvocation.MyCommand.Module.ModuleBase)\Catalogs\$CatalogName"
     $ModuleCatalogContent = Get-Content -Path $ModuleCatalogFile -Raw | ConvertFrom-Json

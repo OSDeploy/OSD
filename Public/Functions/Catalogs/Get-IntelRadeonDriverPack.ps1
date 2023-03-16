@@ -1,9 +1,9 @@
 <#
 .SYNOPSIS
-Returns a Intel Radeon Graphics Driver Object
+Returns the Intel Radeon Graphics Driver Object
 
 .DESCRIPTION
-Returns a Intel Radeon Graphics Driver Object
+Returns the Intel Radeon Graphics Driver Object
 
 .LINK
 https://osddrivers.osdeploy.com
@@ -11,22 +11,37 @@ https://osddrivers.osdeploy.com
 function Get-IntelRadeonDriverPack {
     [CmdletBinding()]
     param (
+        #Forces the function to check for the latest Internet version
         [System.Management.Automation.SwitchParameter]
-        $Force
+        $Force,
+
+        #Updates the local catalog in the OSD Module
+        [System.Management.Automation.SwitchParameter]
+        $UpdateModuleCatalog
     )
     #=================================================
-    #   Online
+    #   Defaults
+    #=================================================
+    $CatalogName = 'IntelRadeonDriverPack.json'
+    $DriverUrl = 'https://www.intel.com/content/www/us/en/download/19282/radeon-rx-vega-m-graphics.html'
+    #=================================================
+    #   Initialize
     #=================================================
     $IsOnline = $false
-    $DriverUrl = 'https://www.intel.com/content/www/us/en/download/19282/radeon-rx-vega-m-graphics.html'
-
+    if ($UpdateModuleCatalog) {
+        $Force = $true
+    }
     if ($Force) {
         $IsOnline = Test-WebConnection $DriverUrl
     }
-    #=================================================
-    #   ModuleCatalogContent
-    #=================================================
-    $ModuleCatalogFile = "$($MyInvocation.MyCommand.Module.ModuleBase)\Catalogs\IntelRadeonDriverPack.json"
+
+    #Create Temporary Download Directory
+    if (-not(Test-Path (Join-Path $env:TEMP 'OSD'))) {
+        $null = New-Item -Path (Join-Path $env:TEMP 'OSD') -ItemType Directory -Force
+    }
+
+    $TempCatalogFile = Join-Path $env:TEMP (Join-Path 'OSD' $CatalogName)
+    $ModuleCatalogFile = "$($MyInvocation.MyCommand.Module.ModuleBase)\Catalogs\$CatalogName"
     $ModuleCatalogContent = Get-Content -Path $ModuleCatalogFile -Raw | ConvertFrom-Json
     #=================================================
     #   IsOnline
@@ -240,7 +255,15 @@ function Get-IntelRadeonDriverPack {
     #   Sort-Object
     #=================================================
     $CloudDriver = $CloudDriver | Sort-Object -Property LastUpdate -Descending
-    $CloudDriver | ConvertTo-Json | Out-File "$env:TEMP\IntelRadeonDriverPack.json" -Encoding ascii -Width 2000 -Force
+    $CloudDriver | ConvertTo-Json | Out-File $TempCatalogFile -Encoding ascii -Width 2000 -Force
+    #=================================================
+    #   UpdateModuleCatalog
+    #=================================================
+    if ($UpdateModuleCatalog) {
+        if (Test-Path $TempCatalogFile) {
+            Copy-Item $TempCatalogFile $ModuleCatalogFile -Force -ErrorAction Ignore
+        }
+    }
     #=================================================
     #   Return
     #=================================================

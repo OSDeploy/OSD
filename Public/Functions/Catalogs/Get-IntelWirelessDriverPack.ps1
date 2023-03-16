@@ -1,9 +1,9 @@
 <#
 .SYNOPSIS
-Returns a Intel Wireless Driver Object
+Returns the Intel Wireless Driver Object
 
 .DESCRIPTION
-Returns a Intel Wireless Driver Object
+Returns the Intel Wireless Driver Object
 #>
 function Get-IntelWirelessDriverPack {
     [CmdletBinding()]
@@ -16,22 +16,37 @@ function Get-IntelWirelessDriverPack {
         [System.String]
         $CompatOS,
         
+        #Forces the function to check for the latest Internet version
         [System.Management.Automation.SwitchParameter]
-        $Force
+        $Force,
+
+        #Updates the local catalog in the OSD Module
+        [System.Management.Automation.SwitchParameter]
+        $UpdateModuleCatalog
     )
     #=================================================
-    #   Online
+    #   Defaults
+    #=================================================
+    $CatalogName = 'IntelWirelessDriverPack.json'
+    $DriverUrl = 'https://www.intel.com/content/www/us/en/support/articles/000017246/network-and-i-o/wireless-networking.html'
+    #=================================================
+    #   Initialize
     #=================================================
     $IsOnline = $false
-    $DriverUrl = 'https://www.intel.com/content/www/us/en/support/articles/000017246/network-and-i-o/wireless-networking.html'
-
+    if ($UpdateModuleCatalog) {
+        $Force = $true
+    }
     if ($Force) {
         $IsOnline = Test-WebConnection $DriverUrl
     }
-    #=================================================
-    #   ModuleCatalogContent
-    #=================================================
-    $ModuleCatalogFile = "$($MyInvocation.MyCommand.Module.ModuleBase)\Catalogs\IntelWirelessDriverPack.json"
+
+    #Create Temporary Download Directory
+    if (-not(Test-Path (Join-Path $env:TEMP 'OSD'))) {
+        $null = New-Item -Path (Join-Path $env:TEMP 'OSD') -ItemType Directory -Force
+    }
+
+    $TempCatalogFile = Join-Path $env:TEMP (Join-Path 'OSD' $CatalogName)
+    $ModuleCatalogFile = "$($MyInvocation.MyCommand.Module.ModuleBase)\Catalogs\$CatalogName"
     $ModuleCatalogContent = Get-Content -Path $ModuleCatalogFile -Raw | ConvertFrom-Json
     #=================================================
     #   IsOnline
@@ -253,7 +268,7 @@ function Get-IntelWirelessDriverPack {
     #   Sort-Object
     #=================================================
     $CloudDriver = $CloudDriver | Sort-Object -Property LastUpdate -Descending
-    $CloudDriver | ConvertTo-Json | Out-File "$env:TEMP\IntelWirelessDriverPack.json" -Encoding ascii -Width 2000 -Force
+    $CloudDriver | ConvertTo-Json | Out-File $TempCatalogFile -Encoding ascii -Width 2000 -Force
     #=================================================
     #   Filter
     #=================================================
@@ -265,6 +280,14 @@ function Get-IntelWirelessDriverPack {
         'Win7'   {$CloudDriver = $CloudDriver | Where-Object {$_.OsVersion -match '6.0'}}
         'Win8'   {$CloudDriver = $CloudDriver | Where-Object {$_.OsVersion -match '6.3'}}
         'Win10'   {$CloudDriver = $CloudDriver | Where-Object {$_.OsVersion -match '10.0'}}
+    }
+    #=================================================
+    #   UpdateModuleCatalog
+    #=================================================
+    if ($UpdateModuleCatalog) {
+        if (Test-Path $TempCatalogFile) {
+            Copy-Item $TempCatalogFile $ModuleCatalogFile -Force -ErrorAction Ignore
+        }
     }
     #=================================================
     #   Return
