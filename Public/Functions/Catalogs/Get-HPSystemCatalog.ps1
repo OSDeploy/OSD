@@ -31,7 +31,7 @@ Get-HPSystemCatalog -Component BIOS | Out-GridView
 Displays all the HP BIOS updates in GridView
 
 .LINK
-https://osd.osdeploy.com
+https://github.com/OSDeploy/OSD/tree/master/Docs
 
 .NOTES
 #>
@@ -41,6 +41,7 @@ function Get-HPSystemCatalog {
         [System.String]
         $DownloadPath,
 
+        #Limits the results to match the current system
         [System.Management.Automation.SwitchParameter]
         $Compatible,
 

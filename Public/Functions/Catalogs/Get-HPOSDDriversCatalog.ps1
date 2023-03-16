@@ -6,7 +6,7 @@ Returns a PowerShell Object of the HP Model Driver Packs
 Returns a PowerShell Object of the HP Model Driver Packs by parsing the Catalog at https://ftp.hp.com/pub/caps-softpaq/cmit/HPClientDriverPackCatalog.cab"
 
 .LINK
-https://osd.osdeploy.com
+https://github.com/OSDeploy/OSD/tree/master/Docs
 #>
 function Get-HPOSDDriversCatalog {
     [CmdletBinding()]

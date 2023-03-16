@@ -1,21 +1,20 @@
+<#
+.SYNOPSIS
+Returns the URL of the latest Dell WinPE 10 Driver Pack 
+
+.DESCRIPTION
+Returns the URL of the latest Dell WinPE 10 Driver Pack 
+
+.EXAMPLE
+Get-DellWinPEDriverPack
+
+.EXAMPLE
+$DellWinPEDriverPack = Get-DellWinPEDriverPack
+
+.LINK
+https://github.com/OSDeploy/OSD/tree/master/Docs
+#>
 function Get-DellWinPEDriverPack {
-    <#
-    .SYNOPSIS
-    Returns the URL of the latest Dell WinPE 10 Driver Pack 
-
-    .DESCRIPTION
-    Download and expand WinPE Drivers
-
-    .EXAMPLE
-    Get-DellWinPEDriverPack
-
-    .EXAMPLE
-    $DellWinPEDriverPack = Get-DellWinPEDriverPack
-
-    .LINK
-    https://github.com/OSDeploy/OSD/tree/master/Docs
-    #>
-
     [CmdletBinding()]
     param ()
 

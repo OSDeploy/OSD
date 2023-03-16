@@ -4,6 +4,9 @@ Returns the Intel Wireless Driver Object
 
 .DESCRIPTION
 Returns the Intel Wireless Driver Object
+
+.LINK
+https://github.com/OSDeploy/OSD/tree/master/Docs
 #>
 function Get-IntelWirelessDriverPack {
     [CmdletBinding()]

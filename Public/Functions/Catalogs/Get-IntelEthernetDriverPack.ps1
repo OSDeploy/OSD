@@ -4,6 +4,9 @@ Returns the Intel Ethernet Driver Object
 
 .DESCRIPTION
 Returns the Intel Ethernet Driver Object
+
+.LINK
+https://github.com/OSDeploy/OSD/tree/master/Docs
 #>
 function Get-IntelEthernetDriverPack {
     [CmdletBinding()]

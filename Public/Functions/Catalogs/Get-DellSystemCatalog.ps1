@@ -1,21 +1,9 @@
 <#
 .SYNOPSIS
-Converts the Dell Catalog PC to a PowerShell Object
+Builds the Dell System Catalog
 
 .DESCRIPTION
-Converts the Dell Catalog PC to a PowerShell Object
-Requires Internet Access to download Dell CatalogPC.cab
-
-.PARAMETER Component
-Filter the results based on these Components:
-Application
-BIOS
-Driver
-Firmware
-
-.PARAMETER Compatible
-If you have a Dell System, this will filter the results based on your
-ComputerSystem SystemSKUNumber
+Builds the Dell System Catalog
 
 .EXAMPLE
 Get-DellSystemCatalog
@@ -30,19 +18,22 @@ Get-DellSystemCatalog -Component BIOS | Out-GridView
 Displays all the Dell BIOS Updates in GridView
 
 .LINK
-https://osd.osdeploy.com
+https://github.com/OSDeploy/OSD/tree/master/Docs
 
 .NOTES
 #>
 function Get-DellSystemCatalog {
     [CmdletBinding()]
     param (
+        #Specifies a download path for matching results displayed in Out-GridView
         [System.String]
         $DownloadPath,
 
+        #Limits the results to match the current system
         [System.Management.Automation.SwitchParameter]
         $Compatible,
 
+        #Limits the results to a specified component
         [ValidateSet('Application','BIOS','Driver','Firmware')]
         [System.String]
         $Component,

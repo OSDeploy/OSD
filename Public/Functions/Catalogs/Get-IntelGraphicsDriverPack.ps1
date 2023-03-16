@@ -6,6 +6,7 @@ Returns the Intel Graphics Driver Object
 Returns the Intel Graphics Driver Object
 
 .LINK
+https://github.com/OSDeploy/OSD/tree/master/Docs
 #>
 function Get-IntelGraphicsDriverPack {
     [CmdletBinding()]

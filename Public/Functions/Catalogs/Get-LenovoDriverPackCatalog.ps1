@@ -9,14 +9,16 @@ Returns the Lenovo DriverPacks downloads
 Filters results based on your current Product
 
 .LINK
-https://osd.osdeploy.com
+https://github.com/OSDeploy/OSD/tree/master/Docs
 
 .NOTES
 #>
 function Get-LenovoDriverPackCatalog {
     [CmdletBinding()]
     param (
-        [System.Management.Automation.SwitchParameter]$Compatible,
+        #Limits the results to match the current system
+        [System.Management.Automation.SwitchParameter]
+        $Compatible,
         [System.String]$DownloadPath,
         [System.Management.Automation.SwitchParameter]$Force,
         [System.Management.Automation.SwitchParameter]$TestUrl

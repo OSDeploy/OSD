@@ -9,7 +9,7 @@ Returns the Lenovo BIOS downloads
 Filters results based on your current Product
 
 .LINK
-https://osd.osdeploy.com
+https://github.com/OSDeploy/OSD/tree/master/Docs
 
 .NOTES
 #>
@@ -19,6 +19,7 @@ function Get-LenovoBiosCatalog {
         [System.String]
         $DownloadPath,
 
+        #Limits the results to match the current system
         [System.Management.Automation.SwitchParameter]
         $Compatible,
 

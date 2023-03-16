@@ -9,14 +9,17 @@ Returns the HP DriverPacks
 Filters results based on your current Product
 
 .LINK
-https://osd.osdeploy.com
+https://github.com/OSDeploy/OSD/tree/master/Docs
 
 .NOTES
 #>
 function Get-HPDriverPackCatalog {
     [CmdletBinding()]
     param (
-        [System.Management.Automation.SwitchParameter]$Compatible,
+        #Limits the results to match the current system
+        [System.Management.Automation.SwitchParameter]
+        $Compatible,
+        
         [System.String]$DownloadPath,
         [System.Management.Automation.SwitchParameter]$Force
     )

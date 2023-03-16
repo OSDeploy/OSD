@@ -9,7 +9,7 @@ Returns the Microsoft Surface DriverPacks
 Filters results based on your current Product
 
 .LINK
-https://osd.osdeploy.com
+https://github.com/OSDeploy/OSD/tree/master/Docs
 
 .NOTES
 #>
@@ -18,10 +18,18 @@ function Get-MicrosoftDriverPackCatalog {
     param (
         [System.String]
         $DownloadPath,
+
+        #Limits the results to match the current system
         [System.Management.Automation.SwitchParameter]
         $Compatible,
+
+        #Checks for the latest Online version
         [System.Management.Automation.SwitchParameter]
-        $Force
+        $Online,
+
+        #Updates the local catalog in the OSD Module
+        [System.Management.Automation.SwitchParameter]
+        $UpdateModuleCatalog
     )
 
 ### Reference

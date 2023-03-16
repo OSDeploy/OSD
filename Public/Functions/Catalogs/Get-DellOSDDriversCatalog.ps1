@@ -6,7 +6,7 @@ Returns a PowerShell Object of the Dell Model Driver Packs
 Returns a PowerShell Object of the Dell Model Driver Packs by parsing the Catalog at http://downloads.dell.com/catalog/DriverPackCatalog.cab"
 
 .LINK
-https://osd.osdeploy.com
+https://github.com/OSDeploy/OSD/tree/master/Docs
 #>
 function Get-DellOSDDriversCatalog {
     [CmdletBinding()]

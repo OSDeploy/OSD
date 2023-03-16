@@ -10,14 +10,16 @@ If you have a HP System, this will filter the results based on your
 Baseboard Product value
 
 .LINK
-https://osd.osdeploy.com
+https://github.com/OSDeploy/OSD/tree/master/Docs
 
 .NOTES
 #>
 function Get-HPDriverCatalog {
     [CmdletBinding()]
     param (
-		[System.Management.Automation.SwitchParameter]$Compatible
+        #Limits the results to match the current system
+        [System.Management.Automation.SwitchParameter]
+        $Compatible
     )
 	
     if ($PSBoundParameters.ContainsKey('Compatible')) {

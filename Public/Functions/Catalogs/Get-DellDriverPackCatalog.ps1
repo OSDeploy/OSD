@@ -1,27 +1,29 @@
 <#
 .SYNOPSIS
-Returns the Dell DriverPacks downloads
+Builds the Dell DriverPack Catalog
 
 .DESCRIPTION
-Returns the Dell DriverPacks downloads
-
-.PARAMETER Compatible
-Filters results based on your current Product
+Builds the Dell DriverPack Catalog
 
 .LINK
-https://osd.osdeploy.com
+https://github.com/OSDeploy/OSD/tree/master/Docs
 
 .NOTES
 #>
 function Get-DellDriverPackCatalog {
     [CmdletBinding()]
     param (
+        #Limits the results to match the current system
         [System.Management.Automation.SwitchParameter]
         $Compatible,
+
+        #Specifies a download path for matching results displayed in Out-GridView
         [System.String]
         $DownloadPath,
+
         [System.Management.Automation.SwitchParameter]
         $Force,
+
         [System.Management.Automation.SwitchParameter]
         $TestUrl
     )

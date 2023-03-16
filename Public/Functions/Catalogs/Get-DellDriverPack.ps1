@@ -1,3 +1,15 @@
+<#
+.SYNOPSIS
+Returns the Dell DriverPack Catalog
+
+.DESCRIPTION
+Returns the Dell DriverPack Catalog
+
+.LINK
+https://github.com/OSDeploy/OSD/tree/master/Docs
+
+.NOTES
+#>
 function Get-DellDriverPack {
     [CmdletBinding()]
     param (

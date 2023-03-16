@@ -5,19 +5,17 @@ Returns the Application Component of the Dell System Catalog
 .DESCRIPTION
 Returns the Application Component of the Dell System Catalog
 
-.PARAMETER Compatible
-If you have a Dell System, this will filter the results based on your
-ComputerSystem SystemSKUNumber
-
 .LINK
-https://osd.osdeploy.com
+https://github.com/OSDeploy/OSD/tree/master/Docs
 
 .NOTES
 #>
 function Get-DellApplicationCatalog {
     [CmdletBinding()]
     param (
-        [System.Management.Automation.SwitchParameter]$Compatible
+        #Limits the results to match the current system
+        [System.Management.Automation.SwitchParameter]
+        $Compatible
     )
 	
     if ($PSBoundParameters.ContainsKey('Compatible')) {
