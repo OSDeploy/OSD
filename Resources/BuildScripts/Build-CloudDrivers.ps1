@@ -35,11 +35,3 @@ $Destination = Join-Path (Get-Module -Name OSD -ListAvailable | Sort-Object Vers
 if (Test-Path $Source) {
     Copy-Item $Source $Destination -Force
 }
-#=================================================
-#   Update-CloudDriverCatalog
-#=================================================
-Import-Module -Name OSD -Force
-Update-IntelEthernetDriverPackCatalog
-Update-IntelGraphicsDriverPackCatalog
-Update-IntelRadeonDriverPackCatalog
-Update-IntelWirelessDriverPackCatalog

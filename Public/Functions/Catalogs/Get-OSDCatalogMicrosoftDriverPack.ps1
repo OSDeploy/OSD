@@ -402,8 +402,8 @@ $OSDCatalog = @'
     #=================================================
     $UseCatalog             = 'Offline'
     $CloudCatalogUri        = 'https://support.microsoft.com/en-us/surface/download-drivers-and-firmware-for-surface-09bb2e09-2a4b-cb69-0951-078a7739e120'
-    $BuildCatalogFile		= Join-Path $env:TEMP (Join-Path 'OSD' 'MicrosoftDriverPackCatalog.json')
-    $OfflineCatalogFile     = "$($MyInvocation.MyCommand.Module.ModuleBase)\Catalogs\MicrosoftDriverPackCatalog.json"
+    $TempCatalogFile		= Join-Path $env:TEMP (Join-Path 'OSD' 'MicrosoftDriverPackCatalog.json')
+    $ModuleCatalogFile     = "$($MyInvocation.MyCommand.Module.ModuleBase)\Catalogs\MicrosoftDriverPackCatalog.json"
     $DownloadsBaseUrl 		= 'https://www.microsoft.com/en-us/download/confirmation.aspx?id='
     #=================================================
     #   Create Paths
@@ -414,10 +414,10 @@ $OSDCatalog = @'
     #=================================================
     #   Test Build Catalog
     #=================================================
-    if (Test-Path $BuildCatalogFile) {
-        Write-Verbose "Build Catalog already created at $BuildCatalogFile"	
+    if (Test-Path $TempCatalogFile) {
+        Write-Verbose "Build Catalog already created at $TempCatalogFile"	
 
-        $GetItemBuildCatalogFile = Get-Item $BuildCatalogFile
+        $GetItemBuildCatalogFile = Get-Item $TempCatalogFile
 
         #If the Build Catalog is older than 12 hours, delete it
         if (((Get-Date) - $GetItemBuildCatalogFile.LastWriteTime).TotalHours -gt 12) {
@@ -513,13 +513,13 @@ $OSDCatalog = @'
                 New-Object -TypeName PSObject -Property $ObjectProperties
             }
         }
-        $MasterResults | ConvertTo-Json | Out-File $BuildCatalogFile -Encoding ascii -Width 2000 -Force
+        $MasterResults | ConvertTo-Json | Out-File $TempCatalogFile -Encoding ascii -Width 2000 -Force
 
-        if (Test-Path $BuildCatalogFile) {
+        if (Test-Path $TempCatalogFile) {
             $UseCatalog = 'Build'
         }
         else {
-            Write-Verbose "Could not locate $BuildCatalogFile"
+            Write-Verbose "Could not locate $TempCatalogFile"
             $UseCatalog = 'Offline'
         }
     }
@@ -527,15 +527,15 @@ $OSDCatalog = @'
     #   UseCatalog Build
     #=================================================
     if ($UseCatalog -eq 'Build') {
-        Write-Verbose "Importing the Build Catalog at $BuildCatalogFile"
-        $MasterResults = Get-Content -Path $BuildCatalogFile | ConvertFrom-Json
+        Write-Verbose "Importing the Build Catalog at $TempCatalogFile"
+        $MasterResults = Get-Content -Path $TempCatalogFile | ConvertFrom-Json
     }
     #=================================================
     #   UseCatalog Offline
     #=================================================
     if ($UseCatalog -eq 'Offline') {
-        Write-Verbose "Importing the Offline Catalog at $OfflineCatalogFile"
-        $MasterResults = Get-Content -Path $OfflineCatalogFile | ConvertFrom-Json
+        Write-Verbose "Importing the Offline Catalog at $ModuleCatalogFile"
+        $MasterResults = Get-Content -Path $ModuleCatalogFile | ConvertFrom-Json
     }
     #=================================================
     #   Compatible

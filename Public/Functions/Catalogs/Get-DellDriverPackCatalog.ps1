@@ -31,8 +31,8 @@ function Get-DellDriverPackCatalog {
     $UseCatalog				= 'Offline'
     $CloudCatalogUri		= 'https://downloads.dell.com/catalog/DriverPackCatalog.cab'
     $RawCatalogFile			= Join-Path $env:TEMP (Join-Path 'OSD' 'DriverPackCatalog.xml')
-    $BuildCatalogFile		= Join-Path $env:TEMP (Join-Path 'OSD' 'DellDriverPackCatalog.xml')
-    $OfflineCatalogFile		= "$($MyInvocation.MyCommand.Module.ModuleBase)\Catalogs\DellDriverPackCatalog.xml"
+    $TempCatalogFile		= Join-Path $env:TEMP (Join-Path 'OSD' 'DellDriverPackCatalog.xml')
+    $ModuleCatalogFile		= "$($MyInvocation.MyCommand.Module.ModuleBase)\Catalogs\DellDriverPackCatalog.xml"
 
     $RawCatalogCabName  	= [string]($CloudCatalogUri | Split-Path -Leaf)
     $RawCatalogCabPath 		= Join-Path $env:TEMP (Join-Path 'OSD' $RawCatalogCabName)
@@ -46,10 +46,10 @@ function Get-DellDriverPackCatalog {
     #=================================================
     #   Test Build Catalog
     #=================================================
-    if (Test-Path $BuildCatalogFile) {
-        Write-Verbose "Build Catalog already created at $BuildCatalogFile"	
+    if (Test-Path $TempCatalogFile) {
+        Write-Verbose "Build Catalog already created at $TempCatalogFile"	
 
-        $GetItemBuildCatalogFile = Get-Item $BuildCatalogFile
+        $GetItemBuildCatalogFile = Get-Item $TempCatalogFile
 
         #If the Build Catalog is older than 12 hours, delete it
         if (((Get-Date) - $GetItemBuildCatalogFile.LastWriteTime).TotalHours -gt 12) {
@@ -92,12 +92,12 @@ function Get-DellDriverPackCatalog {
             }
             else {
                 Write-Verbose "Could not expand $RawCatalogCabPath"
-                Write-Verbose "Using Offline Catalog at $OfflineCatalogFile"
+                Write-Verbose "Using Offline Catalog at $ModuleCatalogFile"
                 $UseCatalog = 'Offline'
             }
         }
         else {
-            Write-Verbose "Using Offline Catalog at $OfflineCatalogFile"
+            Write-Verbose "Using Offline Catalog at $ModuleCatalogFile"
             $UseCatalog = 'Offline'
         }
     }
@@ -214,23 +214,23 @@ function Get-DellDriverPackCatalog {
             }
         }
 
-        Write-Verbose "Exporting Build Catalog to $BuildCatalogFile"
+        Write-Verbose "Exporting Build Catalog to $TempCatalogFile"
         $Results = $Results | Sort-Object Name
-        $Results | Export-Clixml -Path $BuildCatalogFile
+        $Results | Export-Clixml -Path $TempCatalogFile
     }
     #=================================================
     #   UseCatalog Build
     #=================================================
     if ($UseCatalog -eq 'Build') {
-        Write-Verbose "Importing the Build Catalog at $BuildCatalogFile"
-        $Results = Import-Clixml -Path $BuildCatalogFile
+        Write-Verbose "Importing the Build Catalog at $TempCatalogFile"
+        $Results = Import-Clixml -Path $TempCatalogFile
     }
     #=================================================
     #   UseCatalog Offline
     #=================================================
     if ($UseCatalog -eq 'Offline') {
-        Write-Verbose "Importing the Offline Catalog at $OfflineCatalogFile"
-        $Results = Import-Clixml -Path $OfflineCatalogFile
+        Write-Verbose "Importing the Offline Catalog at $ModuleCatalogFile"
+        $Results = Import-Clixml -Path $ModuleCatalogFile
     }
     #=================================================
     #   Compatible

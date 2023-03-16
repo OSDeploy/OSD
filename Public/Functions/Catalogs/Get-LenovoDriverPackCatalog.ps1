@@ -28,8 +28,8 @@ function Get-LenovoDriverPackCatalog {
     $UseCatalog           	= 'Offline'
     $CloudCatalogUri		= 'https://download.lenovo.com/cdrt/td/catalogv2.xml'
     $RawCatalogFile			= Join-Path $env:TEMP (Join-Path 'OSD' 'catalogv2.xml')
-    $BuildCatalogFile       = Join-Path $env:TEMP (Join-Path 'OSD' 'LenovoDriverPackCatalog.xml')
-    $OfflineCatalogFile		= "$($MyInvocation.MyCommand.Module.ModuleBase)\Catalogs\LenovoDriverPackCatalog.xml"
+    $TempCatalogFile       = Join-Path $env:TEMP (Join-Path 'OSD' 'LenovoDriverPackCatalog.xml')
+    $ModuleCatalogFile		= "$($MyInvocation.MyCommand.Module.ModuleBase)\Catalogs\LenovoDriverPackCatalog.xml"
     #=================================================
     #   Create Paths
     #=================================================
@@ -39,10 +39,10 @@ function Get-LenovoDriverPackCatalog {
     #=================================================
     #   Test Build Catalog
     #=================================================
-    if (Test-Path $BuildCatalogFile) {
-        Write-Verbose "Build Catalog already created at $BuildCatalogFile"	
+    if (Test-Path $TempCatalogFile) {
+        Write-Verbose "Build Catalog already created at $TempCatalogFile"	
 
-        $GetItemBuildCatalogFile = Get-Item $BuildCatalogFile
+        $GetItemBuildCatalogFile = Get-Item $TempCatalogFile
 
         #If the Build Catalog is older than 12 hours, delete it
         if (((Get-Date) - $GetItemBuildCatalogFile.LastWriteTime).TotalHours -gt 12) {
@@ -74,12 +74,12 @@ function Get-LenovoDriverPackCatalog {
             }
             else {
                 Write-Verbose "Catalog was NOT downloaded to $RawCatalogFile"
-                Write-Verbose "Using Offline Catalog at $OfflineCatalogFile"
+                Write-Verbose "Using Offline Catalog at $ModuleCatalogFile"
                 $UseCatalog = 'Offline'
             }
         }
         catch {
-            Write-Verbose "Using Offline Catalog at $OfflineCatalogFile"
+            Write-Verbose "Using Offline Catalog at $ModuleCatalogFile"
             $UseCatalog = 'Offline'
         }
     }
@@ -251,23 +251,23 @@ function Get-LenovoDriverPackCatalog {
             }
         }
 
-        Write-Verbose "Exporting Build Catalog to $BuildCatalogFile"
+        Write-Verbose "Exporting Build Catalog to $TempCatalogFile"
         $Results = $Results | Sort-Object Name
-        $Results | Export-Clixml -Path $BuildCatalogFile
+        $Results | Export-Clixml -Path $TempCatalogFile
     }
     #=================================================
     #   UseCatalog Build
     #=================================================
     if ($UseCatalog -eq 'Build') {
-        Write-Verbose "Importing the Build Catalog at $BuildCatalogFile"
-        $Results = Import-Clixml -Path $BuildCatalogFile
+        Write-Verbose "Importing the Build Catalog at $TempCatalogFile"
+        $Results = Import-Clixml -Path $TempCatalogFile
     }
     #=================================================
     #   UseCatalog Offline
     #=================================================
     if ($UseCatalog -eq 'Offline') {
-        Write-Verbose "Importing the Offline Catalog at $OfflineCatalogFile"
-        $Results = Import-Clixml -Path $OfflineCatalogFile
+        Write-Verbose "Importing the Offline Catalog at $ModuleCatalogFile"
+        $Results = Import-Clixml -Path $ModuleCatalogFile
     }
     #=================================================
     #   Compatible

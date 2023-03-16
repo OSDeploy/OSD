@@ -9,39 +9,50 @@ function Get-IntelEthernetDriverPack {
     [CmdletBinding()]
     param (
         [System.Management.Automation.SwitchParameter]
-        $Force
+        $Force,
+        [System.Management.Automation.SwitchParameter]
+        $UpdateModuleCatalog
     )
     #=================================================
-    #   Online
+    #   Defaults
     #=================================================
     $IsOnline = $false
     $DriverUrl = 'https://www.intel.com/content/www/us/en/download/15084/intel-ethernet-adapter-complete-driver-pack.html'
 
+    if ($UpdateModuleCatalog) {
+        $Force = $true
+    }
+
     if ($Force) {
         $IsOnline = Test-WebConnection $DriverUrl
     }
-    #=================================================
-    #   OfflineCloudDriver
-    #=================================================
-    $OfflineCloudDriverPath = "$($MyInvocation.MyCommand.Module.ModuleBase)\Catalogs\IntelEthernetDriverPack.json"
-    $OfflineCloudDriver = Get-Content -Path $OfflineCloudDriverPath -Raw | ConvertFrom-Json
+
+    #Create Temporary Download Directory
+    if (-not(Test-Path (Join-Path $env:TEMP 'OSD'))) {
+        $null = New-Item -Path (Join-Path $env:TEMP 'OSD') -ItemType Directory -Force
+    }
+
+    $CatalogName = 'IntelEthernetDriverPack.json'
+    $TempCatalogFile = Join-Path $env:TEMP (Join-Path 'OSD' $CatalogName)
+    $ModuleCatalogFile = "$($MyInvocation.MyCommand.Module.ModuleBase)\Catalogs\$CatalogName"
+    $ModuleCatalogContent = Get-Content -Path $ModuleCatalogFile -Raw | ConvertFrom-Json
     #=================================================
     #   IsOnline
     #=================================================
     if ($IsOnline) {
         Write-Verbose "CloudDriver Online"
         #All Drivers are from the same URL
-        $OfflineCloudDriver = $OfflineCloudDriver | Select-Object -First 1
+        $ModuleCatalogContent = $ModuleCatalogContent | Select-Object -First 1
         #=================================================
         #   ForEach
         #=================================================
         $ZipFileResults = @()
         $CloudDriver = @()
-        $CloudDriver = foreach ($OfflineCloudDriverItem in $OfflineCloudDriver) {
+        $CloudDriver = foreach ($ModuleCatalogContentItem in $ModuleCatalogContent) {
             #=================================================
             #   WebRequest
             #=================================================
-            $DriverInfoWebRequest = Invoke-WebRequest -Uri $OfflineCloudDriverItem.DriverInfo -Method Get
+            $DriverInfoWebRequest = Invoke-WebRequest -Uri $ModuleCatalogContentItem.DriverInfo -Method Get
             $DriverInfoWebRequestContent = $DriverInfoWebRequest.Content
 
             $DriverInfoHTML = $DriverInfoWebRequest.ParsedHtml.childNodes | Where-Object {$_.nodename -eq 'HTML'} 
@@ -104,7 +115,7 @@ function Get-IntelEthernetDriverPack {
                 $DownloadFile = $null
                 $SizeMB = $null
                 $DriverUrl = $null
-                $DriverInfo = $OfflineCloudDriverItem.DriverInfo
+                $DriverInfo = $ModuleCatalogContentItem.DriverInfo
                 $DriverDescription = $null
                 $Hash = $null
                 $OSDGuid = $(New-Guid)
@@ -137,7 +148,7 @@ function Get-IntelEthernetDriverPack {
                 #=================================================
                 #   Values
                 #=================================================
-                $DriverGrouping = $OfflineCloudDriverItem.DriverGrouping
+                $DriverGrouping = $ModuleCatalogContentItem.DriverGrouping
                 $DriverName = "$DriverGrouping $OsArch $DriverVersion $OsVersion"
                 $DriverDescription = $DriverInfoMETA | Where-Object {$_.name -eq 'Description'} | Select-Object -ExpandProperty Content
                 $OSDPnpClass = 'Net'
@@ -212,7 +223,7 @@ function Get-IntelEthernetDriverPack {
     #=================================================
     else {
         Write-Verbose "CloudDriver Offline"
-        $CloudDriver = $OfflineCloudDriver
+        $CloudDriver = $ModuleCatalogContent
     }
     #=================================================
     #   Remove Duplicates
@@ -232,7 +243,7 @@ function Get-IntelEthernetDriverPack {
     #   Sort-Object
     #=================================================
     $CloudDriver = $CloudDriver | Sort-Object -Property LastUpdate -Descending
-    $CloudDriver | ConvertTo-Json | Out-File "$env:TEMP\IntelEthernetDriverPack.json" -Encoding ascii -Width 2000 -Force
+    $CloudDriver | ConvertTo-Json | Out-File $TempCatalogFile -Encoding ascii -Width 2000 -Force
     #=================================================
     #   Filter
     #=================================================
@@ -244,6 +255,14 @@ function Get-IntelEthernetDriverPack {
         'Win7'   {$CloudDriver = $CloudDriver | Where-Object {$_.OsVersion -match '6.0'}}
         'Win8'   {$CloudDriver = $CloudDriver | Where-Object {$_.OsVersion -match '6.3'}}
         'Win10'   {$CloudDriver = $CloudDriver | Where-Object {$_.OsVersion -match '10.0'}}
+    }
+    #=================================================
+    #   UpdateModuleCatalog
+    #=================================================
+    if ($UpdateModuleCatalog) {
+        if (Test-Path $TempCatalogFile) {
+            Copy-Item $TempCatalogFile $ModuleCatalogFile -Force -ErrorAction Ignore
+        }
     }
     #=================================================
     #   Return

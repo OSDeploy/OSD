@@ -1,13 +1,11 @@
 <#
 .SYNOPSIS
-Returns a Intel Graphics Driver Object
+Returns a Intel Wireless Driver Object
 
 .DESCRIPTION
-Returns a Intel Graphics Driver Object
-
-.LINK
+Returns a Intel Wireless Driver Object
 #>
-function Get-IntelGraphicsDriverPack {
+function Get-IntelWirelessDriverPack {
     [CmdletBinding()]
     param (
         [ValidateSet('x64','x86')]
@@ -25,59 +23,53 @@ function Get-IntelGraphicsDriverPack {
     #   Online
     #=================================================
     $IsOnline = $false
-    $DriverUrl = 'https://www.intel.com/content/www/us/en/download/19344/intel-graphics-windows-dch-drivers.html'
+    $DriverUrl = 'https://www.intel.com/content/www/us/en/support/articles/000017246/network-and-i-o/wireless-networking.html'
 
     if ($Force) {
         $IsOnline = Test-WebConnection $DriverUrl
     }
     #=================================================
-    #   OfflineCloudDriver
+    #   ModuleCatalogContent
     #=================================================
-    $OfflineCloudDriverPath = "$($MyInvocation.MyCommand.Module.ModuleBase)\Catalogs\IntelGraphicsDriverPack.json"
-    $OfflineCloudDriver = Get-Content -Path $OfflineCloudDriverPath -Raw | ConvertFrom-Json
-    #=================================================
-    #   Filter
-    #=================================================
-    switch ($CompatArch) {
-        'x64'   {$OfflineCloudDriver = $OfflineCloudDriver | Where-Object {$_.OSArch -match 'x64'}}
-        'x86'   {$OfflineCloudDriver = $OfflineCloudDriver | Where-Object {$_.OSArch -match 'x86'}}
-    }
-    switch ($CompatOS) {
-        'Win7'   {$OfflineCloudDriver = $OfflineCloudDriver | Where-Object {$_.OsVersion -match '6.0'}}
-        'Win8'   {$OfflineCloudDriver = $OfflineCloudDriver | Where-Object {$_.OsVersion -match '6.3'}}
-        'Win10'   {$OfflineCloudDriver = $OfflineCloudDriver | Where-Object {$_.OsVersion -match '10.0'}}
-    }
+    $ModuleCatalogFile = "$($MyInvocation.MyCommand.Module.ModuleBase)\Catalogs\IntelWirelessDriverPack.json"
+    $ModuleCatalogContent = Get-Content -Path $ModuleCatalogFile -Raw | ConvertFrom-Json
     #=================================================
     #   IsOnline
     #=================================================
     if ($IsOnline) {
         Write-Verbose "CloudDriver Online"
+        #All Drivers are from the same URL
+        $ModuleCatalogContent = $ModuleCatalogContent | Select-Object -First 1
         #=================================================
         #   ForEach
         #=================================================
         $ZipFileResults = @()
         $CloudDriver = @()
-        $CloudDriver = foreach ($OfflineCloudDriverItem in $OfflineCloudDriver) {
-            Write-Verbose "DriverGrouping: $($OfflineCloudDriverItem.DriverGrouping)"
-            Write-Verbose "OsArch: $($OfflineCloudDriverItem.OsArch)"
-            Write-Verbose "DriverInfo: $($OfflineCloudDriverItem.DriverInfo)"
+        $CloudDriver = foreach ($ModuleCatalogContentItem in $ModuleCatalogContent) {
+            #Write-Verbose "$($ModuleCatalogContentItem.DriverGrouping) $($ModuleCatalogContentItem.OsArch)" -Verbose
+            #Write-Verbose "     $($ModuleCatalogContentItem.DriverInfo)" -Verbose
             #=================================================
             #   WebRequest
             #=================================================
-            $DriverInfoWebRequest = Invoke-WebRequest -Uri $OfflineCloudDriverItem.DriverInfo -Method Get -Verbose
+            $DriverInfoWebRequest = Invoke-WebRequest -Uri $ModuleCatalogContentItem.DriverInfo -Method Get
             $DriverInfoWebRequestContent = $DriverInfoWebRequest.Content
+
             $DriverInfoHTML = $DriverInfoWebRequest.ParsedHtml.childNodes | Where-Object {$_.nodename -eq 'HTML'} 
             $DriverInfoHEAD = $DriverInfoHTML.childNodes | Where-Object {$_.nodename -eq 'HEAD'}
             $DriverInfoMETA = $DriverInfoHEAD.childNodes | Where-Object {$_.nodename -like "meta*"} | Select-Object -Property Name, Content
+            $OSCompatibility = $DriverInfoMETA | Where-Object {$_.name -eq 'DownloadOSes'} | Select-Object -ExpandProperty Content
+            Write-Verbose "OSCompatibility: $OSCompatibility"
             #=================================================
             #   Driver Filter
             #=================================================
             $ZipFileResults = @($DriverInfoWebRequestContent -split " " -split '"' -match 'http' -match "downloadmirror" -match ".zip")
 
-            if ($OfflineCloudDriverItem.OsArch -match 'x64') {
+            $ZipFileResults = $ZipFileResults | Where-Object {$_ -match 'Driver'}
+
+            if ($ModuleCatalogContentItem.OsArch -match 'x64') {
                 $ZipFileResults = $ZipFileResults | Where-Object {$_ -notmatch 'win32'}
             }
-            if ($OfflineCloudDriverItem.OsArch -match 'x86') {
+            if ($ModuleCatalogContentItem.OsArch -match 'x86') {
                 $ZipFileResults = $ZipFileResults | Where-Object {$_ -notmatch 'win64'}
             }
             $ZipFileResults = $ZipFileResults | Select-Object -Unique
@@ -85,14 +77,14 @@ function Get-IntelGraphicsDriverPack {
             #   Driver Details
             #=================================================
             foreach ($DriverZipFile in $ZipFileResults) {
-                Write-Verbose "Zip File: $DriverZipFile"
+                Write-Verbose "Latest DriverPack: $DriverZipFile"
                 #=================================================
                 #   Defaults
                 #=================================================
                 $OSDVersion = $(Get-Module -Name OSD | Sort-Object Version | Select-Object Version -Last 1).Version
                 $LastUpdate = [datetime] $(Get-Date)
                 $OSDStatus = $null
-                $OSDGroup = 'IntelDisplay'
+                $OSDGroup = 'IntelWireless'
                 $OSDType = 'Driver'
 
                 $DriverName = $null
@@ -100,9 +92,11 @@ function Get-IntelGraphicsDriverPack {
                 $DriverReleaseId = $null
                 $DriverGrouping = $null
 
-                $OperatingSystem = @()
-                $OsVersion = $OfflineCloudDriverItem.OsVersion
-                $OsArch = $OfflineCloudDriverItem.OsArch
+                if ($DriverZipFile -match 'Win7') {$OsVersion = '6.0'}
+                if ($DriverZipFile -match 'Win8') {$OsVersion = '6.3';Continue}
+                if ($DriverZipFile -match 'Win10') {$OsVersion = '10.0'}
+                if ($DriverZipFile -match 'Driver32') {$OsArch = 'x86'}
+                if ($DriverZipFile -match 'Driver64') {$OsArch = 'x64'}
                 $OsBuildMax = @()
                 $OsBuildMin = @()
         
@@ -111,7 +105,7 @@ function Get-IntelGraphicsDriverPack {
                 $MakeLike = @()
                 $MakeNotLike = @()
                 $MakeMatch = @()
-                $MakeNotMatch = @('Microsoft')
+                $MakeNotMatch = @()
         
                 $Generation = $null
                 $SystemFamily = $null
@@ -121,7 +115,7 @@ function Get-IntelGraphicsDriverPack {
                 $ModelLike = @()
                 $ModelNotLike = @()
                 $ModelMatch = @()
-                $ModelNotMatch = @('Surface')
+                $ModelNotMatch = @()
         
                 $SystemSku = @()
                 $SystemSkuNe = @()
@@ -132,7 +126,7 @@ function Get-IntelGraphicsDriverPack {
                 $DownloadFile = $null
                 $SizeMB = $null
                 $DriverUrl = $null
-                $DriverInfo = $OfflineCloudDriverItem.DriverInfo
+                $DriverInfo = $ModuleCatalogContentItem.DriverInfo
                 $DriverDescription = $null
                 $Hash = $null
                 $OSDGuid = $(New-Guid)
@@ -143,7 +137,7 @@ function Get-IntelGraphicsDriverPack {
                 #$LastUpdate = [datetime]::ParseExact($LastUpdateMeta, "MM/dd/yyyy HH:mm:ss", $null)
 
                 $LastUpdateMeta = $DriverInfoMETA | Where-Object {$_.name -eq 'LastUpdate'} | Select-Object -ExpandProperty Content
-                Write-Verbose "LastUpdateRaw: $LastUpdateMeta"
+                Write-Verbose "LastUpdateMeta: $LastUpdateMeta"
 
                 if ($LastUpdateMeta) {
                     $LastUpdateSplit = ($LastUpdateMeta -split (' '))[0]
@@ -155,7 +149,7 @@ function Get-IntelGraphicsDriverPack {
                 #=================================================
                 #   DriverVersion
                 #=================================================
-                $DriverVersion = $DriverInfoMETA | Where-Object {$_.name -eq 'DownloadVersion'} | Select-Object -ExpandProperty Content
+                $DriverVersion = ($DriverZipFile -split ('-'))[1]
                 #=================================================
                 #   DriverUrl
                 #=================================================
@@ -163,12 +157,12 @@ function Get-IntelGraphicsDriverPack {
                 #=================================================
                 #   Values
                 #=================================================
-                $DriverGrouping = $OfflineCloudDriverItem.DriverGrouping
+                $DriverGrouping = $ModuleCatalogContentItem.DriverGrouping
                 $DriverName = "$DriverGrouping $OsArch $DriverVersion $OsVersion"
                 $DriverDescription = $DriverInfoMETA | Where-Object {$_.name -eq 'Description'} | Select-Object -ExpandProperty Content
                 $DownloadFile = Split-Path $DriverUrl -Leaf
-                $OSDPnpClass = 'Display'
-                $OSDPnpClassGuid = '{4D36E968-E325-11CE-BFC1-08002BE10318}'
+                $OSDPnpClass = 'Net'
+                $OSDPnpClassGuid = '{4D36E972-E325-11CE-BFC1-08002BE10318}'
                 #=================================================
                 #   Create Object
                 #=================================================
@@ -239,7 +233,7 @@ function Get-IntelGraphicsDriverPack {
     #=================================================
     else {
         Write-Verbose "Catalog is Offline"
-        $CloudDriver = $OfflineCloudDriver
+        $CloudDriver = $ModuleCatalogContent
     }
     #=================================================
     #   Remove Duplicates
@@ -250,7 +244,7 @@ function Get-IntelGraphicsDriverPack {
     #=================================================
     $CloudDriver = $CloudDriver | Select-Object OSDVersion, LastUpdate, OSDStatus, OSDType, OSDGroup,`
     DriverName, DriverVersion,`
-    OsVersion, OsArch, MakeNotMatch, ModelNotMatch,`
+    OsVersion, OsArch,`
     DriverGrouping,`
     DownloadFile, DriverUrl, DriverInfo, DriverDescription,`
     OSDGuid,`
@@ -259,7 +253,19 @@ function Get-IntelGraphicsDriverPack {
     #   Sort-Object
     #=================================================
     $CloudDriver = $CloudDriver | Sort-Object -Property LastUpdate -Descending
-    $CloudDriver | ConvertTo-Json | Out-File "$env:TEMP\IntelGraphicsDriverPack.json" -Encoding ascii -Width 2000 -Force
+    $CloudDriver | ConvertTo-Json | Out-File "$env:TEMP\IntelWirelessDriverPack.json" -Encoding ascii -Width 2000 -Force
+    #=================================================
+    #   Filter
+    #=================================================
+    switch ($CompatArch) {
+        'x64'   {$CloudDriver = $CloudDriver | Where-Object {$_.OSArch -match 'x64'}}
+        'x86'   {$CloudDriver = $CloudDriver | Where-Object {$_.OSArch -match 'x86'}}
+    }
+    switch ($CompatOS) {
+        'Win7'   {$CloudDriver = $CloudDriver | Where-Object {$_.OsVersion -match '6.0'}}
+        'Win8'   {$CloudDriver = $CloudDriver | Where-Object {$_.OsVersion -match '6.3'}}
+        'Win10'   {$CloudDriver = $CloudDriver | Where-Object {$_.OsVersion -match '10.0'}}
+    }
     #=================================================
     #   Return
     #=================================================

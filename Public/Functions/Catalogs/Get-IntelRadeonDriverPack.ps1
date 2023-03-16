@@ -24,10 +24,10 @@ function Get-IntelRadeonDriverPack {
         $IsOnline = Test-WebConnection $DriverUrl
     }
     #=================================================
-    #   OfflineCloudDriver
+    #   ModuleCatalogContent
     #=================================================
-    $OfflineCloudDriverPath = "$($MyInvocation.MyCommand.Module.ModuleBase)\Catalogs\IntelRadeonDriverPack.json"
-    $OfflineCloudDriver = Get-Content -Path $OfflineCloudDriverPath -Raw | ConvertFrom-Json
+    $ModuleCatalogFile = "$($MyInvocation.MyCommand.Module.ModuleBase)\Catalogs\IntelRadeonDriverPack.json"
+    $ModuleCatalogContent = Get-Content -Path $ModuleCatalogFile -Raw | ConvertFrom-Json
     #=================================================
     #   IsOnline
     #=================================================
@@ -38,14 +38,14 @@ function Get-IntelRadeonDriverPack {
         #=================================================
         $ZipFileResults = @()
         $CloudDriver = @()
-        $CloudDriver = foreach ($OfflineCloudDriverItem in $OfflineCloudDriver) {
-            Write-Verbose "DriverGrouping: $($OfflineCloudDriverItem.DriverGrouping)"
-            Write-Verbose "OsArch: $($OfflineCloudDriverItem.OsArch)"
-            Write-Verbose "DriverInfo: $($OfflineCloudDriverItem.DriverInfo)"
+        $CloudDriver = foreach ($ModuleCatalogContentItem in $ModuleCatalogContent) {
+            Write-Verbose "DriverGrouping: $($ModuleCatalogContentItem.DriverGrouping)"
+            Write-Verbose "OsArch: $($ModuleCatalogContentItem.OsArch)"
+            Write-Verbose "DriverInfo: $($ModuleCatalogContentItem.DriverInfo)"
             #=================================================
             #   WebRequest
             #=================================================
-            $DriverInfoWebRequest = Invoke-WebRequest -Uri $OfflineCloudDriverItem.DriverInfo -Method Get -Verbose
+            $DriverInfoWebRequest = Invoke-WebRequest -Uri $ModuleCatalogContentItem.DriverInfo -Method Get -Verbose
             $DriverInfoWebRequestContent = $DriverInfoWebRequest.Content
             $DriverInfoHTML = $DriverInfoWebRequest.ParsedHtml.childNodes | Where-Object {$_.nodename -eq 'HTML'} 
             $DriverInfoHEAD = $DriverInfoHTML.childNodes | Where-Object {$_.nodename -eq 'HEAD'}
@@ -55,10 +55,10 @@ function Get-IntelRadeonDriverPack {
             #=================================================
             $ZipFileResults = @($DriverInfoWebRequestContent -split " " -split '"' -match 'http' -match "downloadmirror" -match ".zip")
 
-            if ($OfflineCloudDriverItem.OsArch -match 'x64') {
+            if ($ModuleCatalogContentItem.OsArch -match 'x64') {
                 $ZipFileResults = $ZipFileResults | Where-Object {$_ -notmatch 'win32'}
             }
-            if ($OfflineCloudDriverItem.OsArch -match 'x86') {
+            if ($ModuleCatalogContentItem.OsArch -match 'x86') {
                 $ZipFileResults = $ZipFileResults | Where-Object {$_ -notmatch 'win64'}
             }
             $ZipFileResults = $ZipFileResults | Select-Object -Unique
@@ -82,8 +82,8 @@ function Get-IntelRadeonDriverPack {
                 $DriverGrouping = $null
 
                 $OperatingSystem = @()
-                $OsVersion = $OfflineCloudDriverItem.OsVersion
-                $OsArch = $OfflineCloudDriverItem.OsArch
+                $OsVersion = $ModuleCatalogContentItem.OsVersion
+                $OsArch = $ModuleCatalogContentItem.OsArch
                 $OsBuildMax = @()
                 $OsBuildMin = @()
         
@@ -113,7 +113,7 @@ function Get-IntelRadeonDriverPack {
                 $DownloadFile = $null
                 $SizeMB = $null
                 $DriverUrl = $null
-                $DriverInfo = $OfflineCloudDriverItem.DriverInfo
+                $DriverInfo = $ModuleCatalogContentItem.DriverInfo
                 $DriverDescription = $null
                 $Hash = $null
                 $OSDGuid = $(New-Guid)
@@ -144,7 +144,7 @@ function Get-IntelRadeonDriverPack {
                 #=================================================
                 #   Values
                 #=================================================
-                $DriverGrouping = $OfflineCloudDriverItem.DriverGrouping
+                $DriverGrouping = $ModuleCatalogContentItem.DriverGrouping
                 $DriverName = "$DriverGrouping $OsArch $DriverVersion $OsVersion"
                 $DriverDescription = $DriverInfoMETA | Where-Object {$_.name -eq 'Description'} | Select-Object -ExpandProperty Content
                 $DownloadFile = Split-Path $DriverUrl -Leaf
@@ -220,7 +220,7 @@ function Get-IntelRadeonDriverPack {
     #=================================================
     else {
         Write-Verbose "Catalog is Offline"
-        $CloudDriver = $OfflineCloudDriver
+        $CloudDriver = $ModuleCatalogContent
     }
     #=================================================
     #   Remove Duplicates

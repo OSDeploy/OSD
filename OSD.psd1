@@ -302,10 +302,7 @@
         'Get-IntelGraphicsDriverPack',
         'Get-IntelRadeonDriverPack',
         'Get-IntelWirelessDriverPack',
-        'Update-IntelEthernetDriverPackCatalog',
-        'Update-IntelGraphicsDriverPackCatalog',
-        'Update-IntelRadeonDriverPackCatalog',
-        'Update-IntelWirelessDriverPackCatalog'
+        'Update-OSDModuleCatalog'
     )
     CmdletsToExport = @()
     VariablesToExport = @()
