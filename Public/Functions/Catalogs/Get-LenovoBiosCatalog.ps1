@@ -16,8 +16,19 @@ https://osd.osdeploy.com
 function Get-LenovoBiosCatalog {
     [CmdletBinding()]
     param (
-        [System.String]$DownloadPath,
-		[System.Management.Automation.SwitchParameter]$Compatible
+        [System.String]
+        $DownloadPath,
+
+        [System.Management.Automation.SwitchParameter]
+        $Compatible,
+
+        #Checks for the latest Online version
+        [System.Management.Automation.SwitchParameter]
+        $Online,
+
+        #Updates the local catalog in the OSD Module
+        [System.Management.Automation.SwitchParameter]
+        $UpdateModuleCatalog
     )
     #=================================================
     #   Paths

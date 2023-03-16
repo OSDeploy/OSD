@@ -11,9 +11,9 @@ https://osddrivers.osdeploy.com
 function Get-IntelRadeonDriverPack {
     [CmdletBinding()]
     param (
-        #Forces the function to check for the latest Internet version
+        #Checks for the latest Online version
         [System.Management.Automation.SwitchParameter]
-        $Force,
+        $Online,
 
         #Updates the local catalog in the OSD Module
         [System.Management.Automation.SwitchParameter]
@@ -28,10 +28,11 @@ function Get-IntelRadeonDriverPack {
     #   Initialize
     #=================================================
     $IsOnline = $false
+
     if ($UpdateModuleCatalog) {
-        $Force = $true
+        $Online = $true
     }
-    if ($Force) {
+    if ($Online) {
         $IsOnline = Test-WebConnection $DriverUrl
     }
 
@@ -47,7 +48,7 @@ function Get-IntelRadeonDriverPack {
     #   IsOnline
     #=================================================
     if ($IsOnline) {
-        Write-Verbose "CloudDriver Online"
+        Write-Verbose "Catalog is running Online"
         #=================================================
         #   ForEach
         #=================================================
@@ -81,7 +82,7 @@ function Get-IntelRadeonDriverPack {
             #   Driver Details
             #=================================================
             foreach ($DriverZipFile in $ZipFileResults) {
-                Write-Verbose "Zip File: $DriverZipFile"
+                Write-Verbose "Latest DriverPack: $DriverZipFile"
                 #=================================================
                 #   Defaults
                 #=================================================
@@ -234,7 +235,7 @@ function Get-IntelRadeonDriverPack {
     #   Offline
     #=================================================
     else {
-        Write-Verbose "Catalog is Offline"
+        Write-Verbose "Catalog is running Offline"
         $CloudDriver = $ModuleCatalogContent
     }
     #=================================================

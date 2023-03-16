@@ -26,7 +26,15 @@ https://osd.osdeploy.com
 #>
 function Get-HPPlatformCatalog {
     [CmdletBinding()]
-    param ()
+    param (
+        #Checks for the latest Online version
+        [System.Management.Automation.SwitchParameter]
+        $Online,
+
+        #Updates the local catalog in the OSD Module
+        [System.Management.Automation.SwitchParameter]
+        $UpdateModuleCatalog
+    )
     #=================================================
     #   Paths
     #=================================================

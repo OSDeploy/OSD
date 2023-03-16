@@ -8,9 +8,9 @@ Returns the Intel Ethernet Driver Object
 function Get-IntelEthernetDriverPack {
     [CmdletBinding()]
     param (
-        #Forces the function to check for the latest Internet version
+        #Checks for the latest Online version
         [System.Management.Automation.SwitchParameter]
-        $Force,
+        $Online,
 
         #Updates the local catalog in the OSD Module
         [System.Management.Automation.SwitchParameter]
@@ -25,10 +25,11 @@ function Get-IntelEthernetDriverPack {
     #   Initialize
     #=================================================
     $IsOnline = $false
+
     if ($UpdateModuleCatalog) {
-        $Force = $true
+        $Online = $true
     }
-    if ($Force) {
+    if ($Online) {
         $IsOnline = Test-WebConnection $DriverUrl
     }
 
@@ -44,8 +45,7 @@ function Get-IntelEthernetDriverPack {
     #   IsOnline
     #=================================================
     if ($IsOnline) {
-        Write-Verbose "CloudDriver Online"
-        #All Drivers are from the same URL
+        Write-Verbose "Catalog is running Online"
         $ModuleCatalogContent = $ModuleCatalogContent | Select-Object -First 1
         #=================================================
         #   ForEach
@@ -56,9 +56,8 @@ function Get-IntelEthernetDriverPack {
             #=================================================
             #   WebRequest
             #=================================================
-            $DriverInfoWebRequest = Invoke-WebRequest -Uri $ModuleCatalogContentItem.DriverInfo -Method Get
+            $DriverInfoWebRequest = Invoke-WebRequest -Uri $ModuleCatalogContentItem.DriverInfo -Method Get -Verbose
             $DriverInfoWebRequestContent = $DriverInfoWebRequest.Content
-
             $DriverInfoHTML = $DriverInfoWebRequest.ParsedHtml.childNodes | Where-Object {$_.nodename -eq 'HTML'} 
             $DriverInfoHEAD = $DriverInfoHTML.childNodes | Where-Object {$_.nodename -eq 'HEAD'}
             $DriverInfoMETA = $DriverInfoHEAD.childNodes | Where-Object {$_.nodename -like "meta*"} | Select-Object -Property Name, Content
@@ -226,7 +225,7 @@ function Get-IntelEthernetDriverPack {
     #   Offline
     #=================================================
     else {
-        Write-Verbose "CloudDriver Offline"
+        Write-Verbose "Catalog is running Offline"
         $CloudDriver = $ModuleCatalogContent
     }
     #=================================================

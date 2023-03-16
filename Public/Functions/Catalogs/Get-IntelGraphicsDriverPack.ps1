@@ -18,9 +18,9 @@ function Get-IntelGraphicsDriverPack {
         [System.String]
         $CompatOS,
         
-        #Forces the function to check for the latest Internet version
+        #Checks for the latest Online version
         [System.Management.Automation.SwitchParameter]
-        $Force,
+        $Online,
 
         #Updates the local catalog in the OSD Module
         [System.Management.Automation.SwitchParameter]
@@ -35,10 +35,11 @@ function Get-IntelGraphicsDriverPack {
     #   Initialize
     #=================================================
     $IsOnline = $false
+
     if ($UpdateModuleCatalog) {
-        $Force = $true
+        $Online = $true
     }
-    if ($Force) {
+    if ($Online) {
         $IsOnline = Test-WebConnection $DriverUrl
     }
 
@@ -66,7 +67,7 @@ function Get-IntelGraphicsDriverPack {
     #   IsOnline
     #=================================================
     if ($IsOnline) {
-        Write-Verbose "CloudDriver Online"
+        Write-Verbose "Catalog is running Online"
         #=================================================
         #   ForEach
         #=================================================
@@ -100,7 +101,7 @@ function Get-IntelGraphicsDriverPack {
             #   Driver Details
             #=================================================
             foreach ($DriverZipFile in $ZipFileResults) {
-                Write-Verbose "Zip File: $DriverZipFile"
+                Write-Verbose "Latest DriverPack: $DriverZipFile"
                 #=================================================
                 #   Defaults
                 #=================================================
@@ -158,7 +159,7 @@ function Get-IntelGraphicsDriverPack {
                 #$LastUpdate = [datetime]::ParseExact($LastUpdateMeta, "MM/dd/yyyy HH:mm:ss", $null)
 
                 $LastUpdateMeta = $DriverInfoMETA | Where-Object {$_.name -eq 'LastUpdate'} | Select-Object -ExpandProperty Content
-                Write-Verbose "LastUpdateRaw: $LastUpdateMeta"
+                Write-Verbose "LastUpdateMeta: $LastUpdateMeta"
 
                 if ($LastUpdateMeta) {
                     $LastUpdateSplit = ($LastUpdateMeta -split (' '))[0]
@@ -253,7 +254,7 @@ function Get-IntelGraphicsDriverPack {
     #   Offline
     #=================================================
     else {
-        Write-Verbose "Catalog is Offline"
+        Write-Verbose "Catalog is running Offline"
         $CloudDriver = $ModuleCatalogContent
     }
     #=================================================

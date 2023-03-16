@@ -38,11 +38,22 @@ https://osd.osdeploy.com
 function Get-HPSystemCatalog {
     [CmdletBinding()]
     param (
-        [System.String]$DownloadPath,
-        [System.Management.Automation.SwitchParameter]$Compatible,
+        [System.String]
+        $DownloadPath,
+
+        [System.Management.Automation.SwitchParameter]
+        $Compatible,
 
         [ValidateSet('Software','Firmware','Driver','Accessories Firmware and Driver','BIOS')]
-        [System.String]$Component
+        [System.String]$Component,
+
+        #Checks for the latest Online version
+        [System.Management.Automation.SwitchParameter]
+        $Online,
+
+        #Updates the local catalog in the OSD Module
+        [System.Management.Automation.SwitchParameter]
+        $UpdateModuleCatalog
     )
     #=================================================
     #   Paths

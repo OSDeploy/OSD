@@ -37,59 +37,63 @@ https://osd.osdeploy.com
 function Get-DellSystemCatalog {
     [CmdletBinding()]
     param (
-        [System.String]$DownloadPath,
-        [System.Management.Automation.SwitchParameter]$Compatible,
+        [System.String]
+        $DownloadPath,
+
+        [System.Management.Automation.SwitchParameter]
+        $Compatible,
 
         [ValidateSet('Application','BIOS','Driver','Firmware')]
-        [System.String]$Component
+        [System.String]
+        $Component,
+
+        #Checks for the latest Online version
+        [System.Management.Automation.SwitchParameter]
+        $Online,
+
+        #Updates the local catalog in the OSD Module
+        [System.Management.Automation.SwitchParameter]
+        $UpdateModuleCatalog
     )
     #=================================================
-    #   Paths
+    #   Defaults
     #=================================================
-    $UseCatalog				= 'Cloud'
-    $CloudCatalogUri		= 'http://downloads.dell.com/catalog/CatalogPC.cab'
-    $RawCatalogFile			= Join-Path $env:TEMP (Join-Path 'OSD' 'CatalogPC.xml')
-    $TempCatalogFile		= Join-Path $env:TEMP (Join-Path 'OSD' 'DellSystemCatalog.xml')
-    $ModuleCatalogFile		= "$($MyInvocation.MyCommand.Module.ModuleBase)\Catalogs\DellSystemCatalog.xml"
+    $UseCatalog = 'Offline'
+    $CatalogName = 'DellSystemCatalog.xml'
+    $DownloadsBaseUrl = 'http://downloads.dell.com/'
+    $CloudCatalogUri = 'http://downloads.dell.com/catalog/CatalogPC.cab'
+    #=================================================
+    #   Initialize
+    #=================================================
+    $IsOnline = $false
 
-    $RawCatalogCabName  	= [string]($CloudCatalogUri | Split-Path -Leaf)
-    $RawCatalogCabPath 		= Join-Path $env:TEMP (Join-Path 'OSD' $RawCatalogCabName)
-    
-    $DownloadsBaseUrl       = 'http://downloads.dell.com/'
+    if ($UpdateModuleCatalog) {
+        $Online = $true
+    }
+    if ($Online) {
+        $UseCatalog = 'Cloud'
+    }
+    if ($Online) {
+        $IsOnline = Test-WebConnection $CloudCatalogUri
+    }
+
+    if ($IsOnline -eq $false) {
+        $Online = $false
+        $UpdateModuleCatalog = $false
+        $UseCatalog = 'Offline'
+    }
+    Write-Verbose "$UseCatalog Catalog"
     #=================================================
-    #   Create Download Path
+    #   Additional Paths
     #=================================================
     if (-not(Test-Path (Join-Path $env:TEMP 'OSD'))) {
         $null = New-Item -Path (Join-Path $env:TEMP 'OSD') -ItemType Directory -Force
     }
-    #=================================================
-    #   Test Build Catalog
-    #=================================================
-    if (Test-Path $TempCatalogFile) {
-        Write-Verbose "Build Catalog already created at $TempCatalogFile"	
-
-        $GetItemBuildCatalogFile = Get-Item $TempCatalogFile
-
-        #If the Build Catalog is older than 12 hours, delete it
-        if (((Get-Date) - $GetItemBuildCatalogFile.LastWriteTime).TotalHours -gt 12) {
-            Write-Verbose "Removing previous Build Catalog"
-            $null = Remove-Item $GetItemBuildCatalogFile.FullName -Force
-        }
-        else {
-            $UseCatalog = 'Build'
-        }
-    }
-    #=================================================
-    #   Test Cloud Catalog
-    #=================================================
-    if ($UseCatalog -eq 'Cloud') {
-        if (Test-WebConnection -Uri $CloudCatalogUri) {
-            $UseCatalog = 'Cloud'
-        }
-        else {
-            $UseCatalog = 'Offline'
-        }
-    }
+    $RawCatalogFile			= Join-Path $env:TEMP (Join-Path 'OSD' 'CatalogPC.xml')
+    $RawCatalogCabName  	= [string]($CloudCatalogUri | Split-Path -Leaf)
+    $RawCatalogCabPath 		= Join-Path $env:TEMP (Join-Path 'OSD' $RawCatalogCabName)
+    $TempCatalogFile        = Join-Path $env:TEMP (Join-Path 'OSD' $CatalogName)
+    $ModuleCatalogFile      = "$($MyInvocation.MyCommand.Module.ModuleBase)\Catalogs\$CatalogName"
     #=================================================
     #   UseCatalog Cloud
     #=================================================
@@ -155,11 +159,13 @@ function Get-DellSystemCatalog {
         $Results | Export-Clixml -Path $TempCatalogFile
     }
     #=================================================
-    #   UseCatalog Build
+    #   UpdateModuleCatalog
     #=================================================
-    if ($UseCatalog -eq 'Build') {
-        Write-Verbose "Importing the Build Catalog at $TempCatalogFile"
-        $Results = Import-Clixml -Path $TempCatalogFile
+    if ($UpdateModuleCatalog) {
+        if (Test-Path $TempCatalogFile) {
+            Write-Verbose "Copying $TempCatalogFile to $ModuleCatalogFile"
+            Copy-Item $TempCatalogFile $ModuleCatalogFile -Force -ErrorAction Ignore
+        }
     }
     #=================================================
     #   UseCatalog Offline
@@ -196,6 +202,6 @@ function Get-DellSystemCatalog {
     #=================================================
     #   Complete
     #=================================================
-    $Results | Sort-Object -Property Name
+    $Results
     #=================================================
 }
