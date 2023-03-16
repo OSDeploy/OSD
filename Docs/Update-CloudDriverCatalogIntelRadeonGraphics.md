@@ -1,23 +1,23 @@
 ---
 external help file: OSD-help.xml
 Module Name: OSD
-online version: https://osddrivers.osdeploy.com
+online version: https://github.com/OSDeploy/OSD/tree/master/Docs
 schema: 2.0.0
 ---
 
-# Get-OSDCatalogIntelEthernetDriver
+# Update-CloudDriverCatalogIntelRadeonGraphics
 
 ## SYNOPSIS
-Returns a Intel Wireless Driver Object
+{{ Fill in the Synopsis }}
 
 ## SYNTAX
 
 ```
-Get-OSDCatalogIntelEthernetDriver [<CommonParameters>]
+Update-CloudDriverCatalogIntelRadeonGraphics [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-Returns a Intel Wireless Driver Object
+{{ Fill in the Description }}
 
 ## EXAMPLES
 
@@ -35,11 +35,11 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## INPUTS
 
+### None
+
 ## OUTPUTS
 
+### System.Object
 ## NOTES
 
 ## RELATED LINKS
-
-[https://osddrivers.osdeploy.com](https://osddrivers.osdeploy.com)
-

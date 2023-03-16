@@ -5,19 +5,19 @@ online version: https://osddrivers.osdeploy.com
 schema: 2.0.0
 ---
 
-# Get-OSDCatalogIntelDisplayDriver
+# Get-CloudDriverIntelRadeonGraphics
 
 ## SYNOPSIS
-Returns a Intel Display Driver Object
+Returns a Intel Radeon Graphics Driver Object
 
 ## SYNTAX
 
 ```
-Get-OSDCatalogIntelDisplayDriver [[-CompatArch] <String>] [[-CompatOS] <String>] [<CommonParameters>]
+Get-CloudDriverIntelRadeonGraphics [-Force] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-Returns a Intel Display Driver Object
+Returns a Intel Radeon Graphics Driver Object
 
 ## EXAMPLES
 
@@ -30,32 +30,17 @@ PS C:\> {{ Add example code here }}
 
 ## PARAMETERS
 
-### -CompatArch
-{{ Fill CompatArch Description }}
+### -Force
+{{ Fill Force Description }}
 
 ```yaml
-Type: String
+Type: SwitchParameter
 Parameter Sets: (All)
 Aliases:
 
 Required: False
-Position: 1
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -CompatOS
-{{ Fill CompatOS Description }}
-
-```yaml
-Type: String
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 2
-Default value: None
+Position: Named
+Default value: False
 Accept pipeline input: False
 Accept wildcard characters: False
 ```

@@ -48,7 +48,7 @@ function Save-WinPECloudDriver {
     $HpCloudDriverText                  = 'HP WinPE Driver Pack'
     $HpCloudDriverPack                  = Get-HpWinPEDriverPack
 
-    $OSDCatalogIntelEthernetDriver      = Get-OSDCatalogIntelEthernetDriver | `
+    $OSDCatalogIntelEthernetDriver      = Get-CloudDriverIntelEthernet | `
                                         Where-Object {($_.OSVersion -match '10.0')} | `
                                         Where-Object {($_.OSArch -match 'x64')} | `
                                         Select-Object -First 1
@@ -56,7 +56,7 @@ function Save-WinPECloudDriver {
     $IntelEthernetCloudDriverVersion    = $OSDCatalogIntelEthernetDriver.DriverVersion
     $IntelEthernetCloudDriverText       = "Intel Ethernet Driver Pack [$IntelEthernetCloudDriverVersion] $IntelEthernetCloudDriverUrl"
 
-    $OSDCatalogIntelWirelessDriver      = Get-OSDCatalogIntelWirelessDriver | `
+    $OSDCatalogIntelWirelessDriver      = Get-CloudDriverIntelWireless | `
                                         Where-Object {($_.OSVersion -match '10.0')} | `
                                         Where-Object {($_.OSArch -match 'x64')} | `
                                         Select-Object -First 1

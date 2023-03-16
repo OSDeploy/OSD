@@ -8,16 +8,16 @@ schema: 2.0.0
 # Get-CloudDriverIntelGraphics
 
 ## SYNOPSIS
-Returns a Intel Display Driver Object
+Returns a Intel Graphics Driver Object
 
 ## SYNTAX
 
 ```
-Get-CloudDriverIntelGraphics [[-CompatArch] <String>] [[-CompatOS] <String>] [<CommonParameters>]
+Get-CloudDriverIntelGraphics [[-CompatArch] <String>] [[-CompatOS] <String>] [-Force] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-Returns a Intel Display Driver Object
+Returns a Intel Graphics Driver Object
 
 ## EXAMPLES
 
@@ -56,6 +56,21 @@ Aliases:
 Required: False
 Position: 2
 Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -Force
+{{ Fill Force Description }}
+
+```yaml
+Type: SwitchParameter
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: False
 Accept pipeline input: False
 Accept wildcard characters: False
 ```

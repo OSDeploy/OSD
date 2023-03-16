@@ -23,7 +23,7 @@ Get-MsUpCatUpdate [[-OS] <String>] [[-Arch] <String>] [[-Build] <String>] [[-Cat
 ## EXAMPLES
 
 ### Example 1
-```
+```powershell
 PS C:\> {{ Add example code here }}
 ```
 
@@ -54,7 +54,7 @@ Accept wildcard characters: False
 Type: String
 Parameter Sets: (All)
 Aliases:
-Accepted values: 21H2, 21H1, 20H2, 2004, 1909, 1903, 1809, 1803, 1709, 1703, 1607, 1511, 1507
+Accepted values: 22H2, 21H2, 21H1, 20H2, 2004, 1909, 1903, 1809, 1803, 1709, 1703, 1607, 1511, 1507
 
 Required: False
 Position: 2
@@ -89,7 +89,7 @@ Aliases:
 
 Required: False
 Position: Named
-Default value: False
+Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
@@ -104,7 +104,7 @@ Aliases:
 
 Required: False
 Position: Named
-Default value: False
+Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
@@ -131,6 +131,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ## INPUTS
 
 ### None
+
 ## OUTPUTS
 
 ### System.Object

@@ -1,7 +1,7 @@
 ---
 external help file: OSD-help.xml
 Module Name: OSD
-online version:
+online version: https://osddrivers.osdeploy.com
 schema: 2.0.0
 ---
 
@@ -13,7 +13,7 @@ Returns a Intel Wireless Driver Object
 ## SYNTAX
 
 ```
-Get-CloudDriverIntelWireless [[-CompatArch] <String>] [[-CompatOS] <String>] [<CommonParameters>]
+Get-CloudDriverIntelWireless [[-CompatArch] <String>] [[-CompatOS] <String>] [-Force] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -56,6 +56,21 @@ Aliases:
 Required: False
 Position: 2
 Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -Force
+{{ Fill Force Description }}
+
+```yaml
+Type: SwitchParameter
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: False
 Accept pipeline input: False
 Accept wildcard characters: False
 ```

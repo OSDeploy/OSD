@@ -36,26 +36,10 @@ if (Test-Path $Source) {
     Copy-Item $Source $Destination -Force
 }
 #=================================================
-#   OSDCatalogIntelDisplayDriver
+#   Update-CloudDriverCatalog
 #=================================================
-$null = Get-OSDCatalogIntelDisplayDriver -Verbose
-$Source = Join-Path $env:TEMP 'OSDCatalogIntelDisplayDriver.json'
-$Destination = Join-Path (Get-Module -Name OSD -ListAvailable | Sort-Object Version -Descending | Select-Object -First 1).ModuleBase "Catalogs\OSDCatalog\OSDCatalogIntelDisplayDriver.json"
-if (Test-Path $Source) {
-    Copy-Item $Source $Destination -Force
-}
-#=================================================
-#   OSDCatalogIntelRadeonDisplayDriver
-#=================================================
-$null = Get-OSDCatalogIntelRadeonDisplayDriver -Verbose
-$Source = Join-Path $env:TEMP 'OSDCatalogIntelRadeonDisplayDriver.json'
-$Destination = Join-Path (Get-Module -Name OSD -ListAvailable | Sort-Object Version -Descending | Select-Object -First 1).ModuleBase "Catalogs\OSDCatalog\OSDCatalogIntelRadeonDisplayDriver.json"
-if (Test-Path $Source) {
-    Copy-Item $Source $Destination -Force
-}
-#=================================================
-#   Update-CloudDriverCatalogIntel
-#=================================================
+Import-Module -Name OSD -Force
 Update-CloudDriverCatalogIntelEthernet
 Update-CloudDriverCatalogIntelGraphics
+Update-CloudDriverCatalogIntelRadeonGraphics
 Update-CloudDriverCatalogIntelWireless
