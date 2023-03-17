@@ -5,7 +5,7 @@ online version: https://github.com/OSDeploy/OSD/tree/master/Docs
 schema: 2.0.0
 ---
 
-# Get-HpDriverPack
+# Get-HPDriverPack
 
 ## SYNOPSIS
 {{ Fill in the Synopsis }}
@@ -13,7 +13,7 @@ schema: 2.0.0
 ## SYNTAX
 
 ```
-Get-HpDriverPack [[-DownloadPath] <String>] [<CommonParameters>]
+Get-HPDriverPack [[-DownloadPath] <String>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION

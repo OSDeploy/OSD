@@ -34,6 +34,7 @@ function Get-HPDriverPackCatalog {
     #=================================================
     $UseCatalog = 'Offline'
     $OfflineCatalogName = 'HPDriverPackCatalog.xml'
+    $ModuleCatalogJsonFile = "$($MyInvocation.MyCommand.Module.ModuleBase)\Catalogs\HPDriverPackCatalog.json"
 
     $OnlineCatalogName = 'HPClientDriverPackCatalog.xml'
     $OnlineCatalogUri = 'http://ftp.hp.com/pub/caps-softpaq/cmit/HPClientDriverPackCatalog.cab'
@@ -112,7 +113,6 @@ function Get-HPDriverPackCatalog {
         $HpModelList = $HpModelList | Where-Object {$_.OSId -ge '4243'}
         $HpModelList = $HpModelList | Sort-Object OSId -Descending | Group-Object ProductId, SoftPaqId | ForEach-Object {$_.Group | Select-Object -First 1}
         $HpModelList = $HpModelList | Sort-Object OSId -Descending | Group-Object ProductId | ForEach-Object {$_.Group | Select-Object -First 1}
-
         #=================================================
         #   Create DriverPack Object
         #=================================================
@@ -157,6 +157,9 @@ function Get-HPDriverPackCatalog {
                 SoftPaqId       = $Item.SoftPaqId
                 OSId            = $Item.OSId
                 OSName          = $Item.OSName
+                OSVersion       = ''
+                OSReleaseId     = ''
+                OSBuild         = ''
                 Architecture    = $Item.Architecture
                 ProductType     = $Item.ProductType
                 SoftPaqName     = $HpSoftPaq.Name
@@ -176,20 +179,95 @@ function Get-HPDriverPackCatalog {
 
         foreach ($Item in $Results) {
             $Item.Model = $Item.Model -replace 'HP ', ''
+            if ($Item.OSName -match 'Windows 10') {
+                $Item.OSVersion = 'Windows 10 x64'
+            }
+            if ($Item.OSName -match 'Windows 11') {
+                $Item.OSVersion = 'Windows 11 x64'
+            }
+            if ($Item.OSId -match '4261') {
+                $Item.OSVersion = 'Windows 10 x64'
+            }
         }
 
+        foreach ($Item in $Results) {
+            if ($Item.OSName -match '22H2') {
+                if ($Item.OSName -match 'Windows 10') {
+                    $Item.OSReleaseId = '22H2'
+                    $Item.OSBuild = '19045'
+                }
+                if ($Item.OSName -match 'Windows 11') {
+                    $Item.OSReleaseId = '22H2'
+                    $Item.OSBuild = '22621'
+                }
+            }
+            elseif ($Item.OSName -match '21H2') {
+                if ($Item.OSName -match 'Windows 10') {
+                    $Item.OSReleaseId = '21H2'
+                    $Item.OSBuild = '19044'
+                }
+                if ($Item.OSName -match 'Windows 11') {
+                    $Item.OSReleaseId = '21H2'
+                    $Item.OSBuild = '22000'
+                }
+            }
+            elseif ($Item.OSName -match '21H1') {
+                $Item.OSReleaseId = '21H1'
+                $Item.OSBuild = '19043'
+            }
+            elseif ($Item.OSName -match '20H2') {
+                $Item.OSReleaseId = '20H2'
+                $Item.OSBuild = '19042'
+            }
+            elseif ($Item.OSName -match '2004') {
+                $Item.OSReleaseId = '2004'
+                $Item.OSBuild = '19041'
+            }
+            elseif ($Item.OSName -match '1909') {
+                $Item.OSReleaseId = '1909'
+                $Item.OSBuild = '18363'
+            }
+            elseif ($Item.OSName -match '1903') {
+                $Item.OSReleaseId = '1903'
+                $Item.OSBuild = '18362'
+            }
+            elseif ($Item.OSName -match '1809') {
+                $Item.OSReleaseId = '1809'
+                $Item.OSBuild = '17763'
+            }
+            elseif ($Item.OSName -match '1803') {
+                $Item.OSReleaseId = '1803'
+                $Item.OSBuild = '17134'
+            }
+            elseif ($Item.OSName -match '1709') {
+                $Item.OSReleaseId = '1709'
+                $Item.OSBuild = '16299'
+            }
+            elseif ($Item.OSName -match '1703') {
+                $Item.OSReleaseId = '1703'
+                $Item.OSBuild = '15063'
+            }
+            elseif ($Item.OSName -match '1607') {
+                $Item.OSReleaseId = '1607'
+                $Item.OSBuild = '14393'
+            }
+            elseif ($Item.OSName -match '1511') {
+                $Item.OSReleaseId = '1511'
+                $Item.OSBuild = '10586'
+            }
+            elseif ($Item.OSName -match '1507') {
+                $Item.OSReleaseId = '1507'
+                $Item.OSBuild = '10240'
+            }
+        }
         $Results = $Results | Sort-Object Model
-        Write-Verbose "Exporting Build Catalog to $TempCatalogFile"
-        $Results | Export-Clixml -Path $TempCatalogFile
     }
     #=================================================
     #   UpdateModuleCatalog
     #=================================================
     if ($UpdateModuleCatalog) {
-        if (Test-Path $TempCatalogFile) {
-            Write-Verbose "Copying $TempCatalogFile to $ModuleCatalogFile"
-            Copy-Item $TempCatalogFile $ModuleCatalogFile -Force -ErrorAction Ignore
-        }
+        $Results | Export-Clixml -Path $ModuleCatalogFile
+        $Results | ConvertTo-Json | Out-File -FilePath $ModuleCatalogJsonFile -Encoding ascii -Width 2000 -Force
     }
     #=================================================
     #   UseCatalog Offline

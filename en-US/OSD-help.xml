@@ -9340,7 +9340,7 @@ You will be prompted to select a USB Drive in GridView</dev:code>
   </command:command>
   <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
     <command:details>
-      <command:name>Get-HpDriverPack</command:name>
+      <command:name>Get-HPDriverPack</command:name>
       <command:verb>Get</command:verb>
       <command:noun>HpDriverPack</command:noun>
       <maml:description>
@@ -9352,7 +9352,7 @@ You will be prompted to select a USB Drive in GridView</dev:code>
     </maml:description>
     <command:syntax>
       <command:syntaxItem>
-        <maml:name>Get-HpDriverPack</maml:name>
+        <maml:name>Get-HPDriverPack</maml:name>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="0" aliases="none">
           <maml:name>DownloadPath</maml:name>
           <maml:description>

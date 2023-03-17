@@ -59,7 +59,7 @@ Stop-Transcript
 Import-Module OSD -Force
 $MasterDriverPacks = @()
 $MasterDriverPacks += Get-DellDriverPack
-$MasterDriverPacks += Get-HpDriverPack
+$MasterDriverPacks += Get-HPDriverPack
 $MasterDriverPacks += Get-LenovoDriverPack
 $MasterDriverPacks += Get-MicrosoftDriverPack
 

@@ -10,7 +10,7 @@ https://github.com/OSDeploy/OSD/tree/master/Docs
 
 .NOTES
 #>
-function Get-HpDriverPack {
+function Get-HPDriverPack {
     [CmdletBinding()]
     param (
         #Specifies a download path for matching results displayed in Out-GridView
@@ -28,7 +28,7 @@ function Get-HpDriverPack {
     FileName, `
     @{Name='DriverPackUrl';Expression={($_.Url)}}, `
     @{Name='DriverPackOS';Expression={($_.OSName)}}, `
-    @{Name='HashMD5';Expression={($_.MD5)}}
+    OSReleaseId,OSBuild,@{Name='HashMD5';Expression={($_.MD5)}}
 
     foreach ($Result in $Results) {
         if ($Result.DriverPackOS -match 'Windows 11') {

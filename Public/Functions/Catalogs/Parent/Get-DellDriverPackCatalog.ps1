@@ -34,6 +34,7 @@ function Get-DellDriverPackCatalog {
     #=================================================
     $UseCatalog = 'Offline'
     $OfflineCatalogName = 'DellDriverPackCatalog.xml'
+    $ModuleCatalogJsonFile = "$($MyInvocation.MyCommand.Module.ModuleBase)\Catalogs\DellDriverPackCatalog.json"
 
     $OnlineCatalogName = 'DriverPackCatalog.xml'
     $OnlineBaseUri = 'http://downloads.dell.com/'
@@ -211,19 +212,14 @@ function Get-DellDriverPackCatalog {
                 $PreviousUrl = $CurrentUrl
             }
         }
-
-        Write-Verbose "Exporting Build Catalog to $TempCatalogFile"
         $Results = $Results | Sort-Object Name
-        $Results | Export-Clixml -Path $TempCatalogFile
     }
     #=================================================
     #   UpdateModuleCatalog
     #=================================================
     if ($UpdateModuleCatalog) {
-        if (Test-Path $TempCatalogFile) {
-            Write-Verbose "Copying $TempCatalogFile to $ModuleCatalogFile"
-            Copy-Item $TempCatalogFile $ModuleCatalogFile -Force -ErrorAction Ignore
-        }
+        $Results | Export-Clixml -Path $ModuleCatalogFile
+        $Results | ConvertTo-Json | Out-File -FilePath $ModuleCatalogJsonFile -Encoding ascii -Width 2000 -Force
     }
     #=================================================
     #   UseCatalog Offline
