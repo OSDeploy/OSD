@@ -5,20 +5,19 @@ online version: https://github.com/OSDeploy/OSD/tree/master/Docs
 schema: 2.0.0
 ---
 
-# Get-HPDriverPackCatalog
+# Update-HPDriverPackCatalog
 
 ## SYNOPSIS
-Returns the HP DriverPacks
+Builds the HP DriverPack Catalog
 
 ## SYNTAX
 
 ```
-Get-HPDriverPackCatalog [-Compatible] [[-DownloadPath] <String>] [-Online] [-UpdateModuleCatalog]
- [<CommonParameters>]
+Update-HPDriverPackCatalog [-UpdateModule] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-Returns the HP DriverPacks
+Builds the HP DriverPack Catalog
 
 ## EXAMPLES
 
@@ -31,52 +30,7 @@ PS C:\> {{ Add example code here }}
 
 ## PARAMETERS
 
-### -Compatible
-Limits the results to match the current system
-
-```yaml
-Type: SwitchParameter
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: Named
-Default value: False
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -DownloadPath
-Specifies a download path for matching results displayed in Out-GridView
-
-```yaml
-Type: String
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 1
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -Online
-Checks for the latest Online version
-
-```yaml
-Type: SwitchParameter
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: Named
-Default value: False
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -UpdateModuleCatalog
+### -UpdateModule
 Updates the OSD Module Offline Catalog
 
 ```yaml

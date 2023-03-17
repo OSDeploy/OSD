@@ -8,16 +8,16 @@ schema: 2.0.0
 # Get-LenovoDriverPack
 
 ## SYNOPSIS
-Returns the Lenovo DriverPacks
+Returns the Lenovo DriverPack Catalog
 
 ## SYNTAX
 
 ```
-Get-LenovoDriverPack [[-DownloadPath] <String>] [<CommonParameters>]
+Get-LenovoDriverPack [-Compatible] [[-DownloadPath] <String>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-Returns the Lenovo DriverPacks
+Returns the Lenovo DriverPack Catalog
 
 ## EXAMPLES
 
@@ -29,6 +29,21 @@ PS C:\> {{ Add example code here }}
 {{ Add example description here }}
 
 ## PARAMETERS
+
+### -Compatible
+Limits the results to match the current system
+
+```yaml
+Type: SwitchParameter
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: False
+Accept pipeline input: False
+Accept wildcard characters: False
+```
 
 ### -DownloadPath
 Specifies a download path for matching results displayed in Out-GridView
