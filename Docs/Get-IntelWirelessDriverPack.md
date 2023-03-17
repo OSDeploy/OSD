@@ -1,49 +1,38 @@
 ---
 external help file: OSD-help.xml
 Module Name: OSD
-online version: https://osd.osdeploy.com
+online version: https://github.com/OSDeploy/OSD/tree/master/Docs
 schema: 2.0.0
 ---
 
-# Get-OSDCatalogDellSystem
+# Get-IntelWirelessDriverPack
 
 ## SYNOPSIS
-Converts the Dell Catalog PC to a PowerShell Object
+Returns the Intel Wireless Driver Object
 
 ## SYNTAX
 
 ```
-Get-OSDCatalogDellSystem [[-DownloadPath] <String>] [-Compatible] [[-Component] <String>] [<CommonParameters>]
+Get-IntelWirelessDriverPack [[-CompatArch] <String>] [[-CompatOS] <String>] [-Online] [-UpdateModuleCatalog]
+ [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-Converts the Dell Catalog PC to a PowerShell Object
-Requires Internet Access to download Dell CatalogPC.cab
+Returns the Intel Wireless Driver Object
 
 ## EXAMPLES
 
-### EXAMPLE 1
-```
-Get-OSDCatalogDellSystem
-Don't do this, you will get an almost endless list
-```
-
-### EXAMPLE 2
-```
-$Result = Get-OSDCatalogDellSystem
-Yes do this.  Save it in a Variable
+### Example 1
+```powershell
+PS C:\> {{ Add example code here }}
 ```
 
-### EXAMPLE 3
-```
-Get-OSDCatalogDellSystem -Component BIOS | Out-GridView
-Displays all the Dell BIOS Updates in GridView
-```
+{{ Add example description here }}
 
 ## PARAMETERS
 
-### -DownloadPath
-{{ Fill DownloadPath Description }}
+### -CompatArch
+{{ Fill CompatArch Description }}
 
 ```yaml
 Type: String
@@ -57,9 +46,23 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -Compatible
-If you have a Dell System, this will filter the results based on your
-ComputerSystem SystemSKUNumber
+### -CompatOS
+{{ Fill CompatOS Description }}
+
+```yaml
+Type: String
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 2
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -Online
+Checks for the latest Online version
 
 ```yaml
 Type: SwitchParameter
@@ -73,21 +76,17 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -Component
-Filter the results based on these Components:
-Application
-BIOS
-Driver
-Firmware
+### -UpdateModuleCatalog
+Updates the OSD Module Offline Catalog
 
 ```yaml
-Type: String
+Type: SwitchParameter
 Parameter Sets: (All)
 Aliases:
 
 Required: False
-Position: 2
-Default value: None
+Position: Named
+Default value: False
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
@@ -103,5 +102,5 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## RELATED LINKS
 
-[https://osd.osdeploy.com](https://osd.osdeploy.com)
+[https://github.com/OSDeploy/OSD/tree/master/Docs](https://github.com/OSDeploy/OSD/tree/master/Docs)
 

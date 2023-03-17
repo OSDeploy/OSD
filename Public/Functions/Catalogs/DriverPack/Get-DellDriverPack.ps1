@@ -28,7 +28,7 @@ function Get-DellDriverPack {
     FileName, `
     @{Name='DriverPackUrl';Expression={($_.Url)}}, `
     @{Name='DriverPackOS';Expression={($_.SupportedOS)}}, `
-    HashMD5
+    OSReleaseId,OSBuild,HashMD5
     
     $Results = $Results | Sort-Object -Property Model
     #=================================================

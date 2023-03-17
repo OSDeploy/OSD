@@ -24,7 +24,7 @@ function Get-MicrosoftDriverPack {
     Select-Object CatalogVersion, Status, ReleaseDate, Manufacturer, Model, Product, Name, PackageID, FileName, `
     @{Name='DriverPackUrl';Expression={($_.Url)}}, `
     @{Name='DriverPackOS';Expression={($_.OSVersion)}}, `
-    HashMD5
+    OSReleaseId,OSBuild,HashMD5
 
     $Results = $Results | Sort-Object -Property Model
     #=================================================

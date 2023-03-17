@@ -154,29 +154,90 @@ function Get-MicrosoftDriverPackCatalog {
                     FileName                = $FileName
                     Url                     = $DownloadUrl
                     OSVersion               = $OSVersion
+                    OSReleaseId             = ''
+                    OSBuild                 = ''    
                     HashMD5                 = $HashMD5
                 }
                 New-Object -TypeName PSObject -Property $ObjectProperties
             }
         }
-        $MasterResults | ConvertTo-Json | Out-File $TempCatalogFile -Encoding ascii -Width 2000 -Force
 
-        if (Test-Path $TempCatalogFile) {
-            $UseCatalog = 'Build'
+        foreach ($Item in $MasterResults) {
+            $Item.OSBuild = $Item.Name.Split(' ')[-1]
         }
-        else {
-            Write-Verbose "Could not locate $TempCatalogFile"
-            $UseCatalog = 'Offline'
+
+        foreach ($Item in $MasterResults) {
+            if ($Item.Name -match 'Win10 10240') {
+                $Item.OSReleaseId = '1507'
+                $Item.Name = $Item.Name -replace 'Win10 10240', 'Win10 1507'
+            }
+            if ($Item.Name -match 'Win10 10586') {
+                $Item.OSReleaseId = '1511'
+                $Item.Name = $Item.Name -replace 'Win10 10586', 'Win10 1511'
+            }
+            if ($Item.Name -match 'Win10 14393') {
+                $Item.OSReleaseId = '1607'
+                $Item.Name = $Item.Name -replace 'Win10 14393', 'Win10 1607'
+            }
+            if ($Item.Name -match 'Win10 15063') {  
+                $Item.OSReleaseId = '1703'
+                $Item.Name = $Item.Name -replace 'Win10 15063', 'Win10 1703'
+            }
+            if ($Item.Name -match 'Win10 16299') {
+                $Item.OSReleaseId = '1709'
+                $Item.Name = $Item.Name -replace 'Win10 16299', 'Win10 1709'
+            }
+            if ($Item.Name -match 'Win10 17134') {
+                $Item.OSReleaseId = '1803'
+                $Item.Name = $Item.Name -replace 'Win10 17134', 'Win10 1803'
+            }
+            if ($Item.Name -match 'Win10 17763') {
+                $Item.OSReleaseId = '1809'
+                $Item.Name = $Item.Name -replace 'Win10 17763', 'Win10 1809'
+            }
+            if ($Item.Name -match 'Win10 18362') {
+                $Item.OSReleaseId = '1903'
+                $Item.Name = $Item.Name -replace 'Win10 18362', 'Win10 1903'
+            }
+            if ($Item.Name -match 'Win10 18363') {
+                $Item.OSReleaseId = '1909'
+                $Item.Name = $Item.Name -replace 'Win10 18363', 'Win10 1909'
+            }
+            if ($Item.Name -match 'Win10 19041') {
+                $Item.OSReleaseId = '2004'
+                $Item.Name = $Item.Name -replace 'Win10 19041', 'Win10 2004'
+            }
+            if ($Item.Name -match 'Win10 19042') {
+                $Item.OSReleaseId = '20H2'
+                $Item.Name = $Item.Name -replace 'Win10 19042', 'Win10 20H2'
+            }
+            if ($Item.Name -match 'Win10 19043') {
+                $Item.OSReleaseId = '21H1'
+                $Item.Name = $Item.Name -replace 'Win10 19043', 'Win10 21H1'
+            }
+            if ($Item.Name -match 'Win10 19044') {
+                $Item.OSReleaseId = '21H2'
+                $Item.Name = $Item.Name -replace 'Win10 19044', 'Win10 21H2'
+            }
+            if ($Item.Name -match 'Win10 19045') {
+                $Item.OSReleaseId = '22H2'
+                $Item.Name = $Item.Name -replace 'Win10 19045', 'Win10 22H2'
+            }
+            if ($Item.Name -match 'Win11 22000') {
+                $Item.OSReleaseId = '21H2'
+                $Item.Name = $Item.Name -replace 'Win11 22000', 'Win11 21H2'
+            }
+            if ($Item.Name -match 'Win11 22621') {
+                $Item.OSReleaseId = '22H2'
+                $Item.Name = $Item.Name -replace 'Win11 22621', 'Win11 22H2'
+            }
         }
     }
     #=================================================
     #   UpdateModuleCatalog
     #=================================================
     if ($UpdateModuleCatalog) {
-        if (Test-Path $TempCatalogFile) {
-            Write-Verbose "Copying $TempCatalogFile to $ModuleCatalogFile"
-            Copy-Item $TempCatalogFile $ModuleCatalogFile -Force -ErrorAction Ignore
-        }
+        $MasterResults | ConvertTo-Json | Out-File -FilePath $ModuleCatalogFile -Encoding ascii -Width 2000 -Force
     }
     #=================================================
     #   UseCatalog Offline

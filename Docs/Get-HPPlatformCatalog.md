@@ -1,11 +1,11 @@
 ---
 external help file: OSD-help.xml
 Module Name: OSD
-online version: https://osd.osdeploy.com
+online version: https://github.com/OSDeploy/OSD/tree/master/Docs
 schema: 2.0.0
 ---
 
-# Get-OSDCatalogHPPlatformList
+# Get-HPPlatformCatalog
 
 ## SYNOPSIS
 Converts the HP Platform list to a PowerShell Object.
@@ -14,7 +14,7 @@ Useful to get the computer model name for System Ids
 ## SYNTAX
 
 ```
-Get-OSDCatalogHPPlatformList [<CommonParameters>]
+Get-HPPlatformCatalog [-Online] [-UpdateModuleCatalog] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -26,23 +26,53 @@ Requires Internet Access to download platformList.cab
 
 ### EXAMPLE 1
 ```
-Get-OSDCatalogHPPlatformList
+Get-HPPlatformCatalog
 Don't do this, you will get a big list.
 ```
 
 ### EXAMPLE 2
 ```
-$Results = Get-OSDCatalogHPPlatformList
+$Results = Get-HPPlatformCatalog
 Yes do this.  Save it in a Variable
 ```
 
 ### EXAMPLE 3
 ```
-Get-OSDCatalogHPPlatformList | Out-GridView
+Get-HPPlatformCatalog | Out-GridView
 Displays all the HP System Ids with the applicable computer model names in GridView
 ```
 
 ## PARAMETERS
+
+### -Online
+Checks for the latest Online version
+
+```yaml
+Type: SwitchParameter
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: False
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -UpdateModuleCatalog
+Updates the OSD Module Offline Catalog
+
+```yaml
+Type: SwitchParameter
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: False
+Accept pipeline input: False
+Accept wildcard characters: False
+```
 
 ### CommonParameters
 This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see [about_CommonParameters](http://go.microsoft.com/fwlink/?LinkID=113216).
@@ -55,5 +85,5 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## RELATED LINKS
 
-[https://osd.osdeploy.com](https://osd.osdeploy.com)
+[https://github.com/OSDeploy/OSD/tree/master/Docs](https://github.com/OSDeploy/OSD/tree/master/Docs)
 

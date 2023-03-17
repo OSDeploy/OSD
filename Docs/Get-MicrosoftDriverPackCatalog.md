@@ -1,23 +1,24 @@
 ---
 external help file: OSD-help.xml
 Module Name: OSD
-online version: https://osd.osdeploy.com
+online version: https://github.com/OSDeploy/OSD/tree/master/Docs
 schema: 2.0.0
 ---
 
-# Get-OSDCatalogMicrosoftDriverPack
+# Get-MicrosoftDriverPackCatalog
 
 ## SYNOPSIS
-Returns the Microsoft Surface DriverPacks
+Builds the Microsoft Surface DriverPacks
 
 ## SYNTAX
 
 ```
-Get-OSDCatalogMicrosoftDriverPack [[-DownloadPath] <String>] [-Compatible] [-Force] [<CommonParameters>]
+Get-MicrosoftDriverPackCatalog [[-DownloadPath] <String>] [-Compatible] [-Online] [-UpdateModuleCatalog]
+ [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-Returns the Microsoft Surface DriverPacks
+Builds the Microsoft Surface DriverPacks
 
 ## EXAMPLES
 
@@ -31,7 +32,7 @@ PS C:\> {{ Add example code here }}
 ## PARAMETERS
 
 ### -DownloadPath
-{{ Fill DownloadPath Description }}
+Specifies a download path for matching results displayed in Out-GridView
 
 ```yaml
 Type: String
@@ -46,7 +47,7 @@ Accept wildcard characters: False
 ```
 
 ### -Compatible
-Filters results based on your current Product
+Limits the results to match the current system
 
 ```yaml
 Type: SwitchParameter
@@ -60,8 +61,23 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -Force
-{{ Fill Force Description }}
+### -Online
+Checks for the latest Online version
+
+```yaml
+Type: SwitchParameter
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: False
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -UpdateModuleCatalog
+Updates the OSD Module Offline Catalog
 
 ```yaml
 Type: SwitchParameter
@@ -86,5 +102,5 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## RELATED LINKS
 
-[https://osd.osdeploy.com](https://osd.osdeploy.com)
+[https://github.com/OSDeploy/OSD/tree/master/Docs](https://github.com/OSDeploy/OSD/tree/master/Docs)
 

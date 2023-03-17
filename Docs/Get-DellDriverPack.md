@@ -1,14 +1,14 @@
 ---
 external help file: OSD-help.xml
 Module Name: OSD
-online version: https://osd.osdeploy.com
+online version: https://github.com/OSDeploy/OSD/tree/master/Docs
 schema: 2.0.0
 ---
 
 # Get-DellDriverPack
 
 ## SYNOPSIS
-{{ Fill in the Synopsis }}
+Returns the Dell DriverPack Catalog
 
 ## SYNTAX
 
@@ -17,7 +17,7 @@ Get-DellDriverPack [[-DownloadPath] <String>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-{{ Fill in the Description }}
+Returns the Dell DriverPack Catalog
 
 ## EXAMPLES
 
@@ -31,7 +31,7 @@ PS C:\> {{ Add example code here }}
 ## PARAMETERS
 
 ### -DownloadPath
-{{ Fill DownloadPath Description }}
+Specifies a download path for matching results displayed in Out-GridView
 
 ```yaml
 Type: String
@@ -39,7 +39,7 @@ Parameter Sets: (All)
 Aliases:
 
 Required: False
-Position: 0
+Position: 1
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -50,11 +50,11 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## INPUTS
 
-### None
-
 ## OUTPUTS
 
-### System.Object
 ## NOTES
 
 ## RELATED LINKS
+
+[https://github.com/OSDeploy/OSD/tree/master/Docs](https://github.com/OSDeploy/OSD/tree/master/Docs)
+

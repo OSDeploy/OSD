@@ -1,23 +1,24 @@
 ---
 external help file: OSD-help.xml
 Module Name: OSD
-online version:
+online version: https://github.com/OSDeploy/OSD/tree/master/Docs
 schema: 2.0.0
 ---
 
-# Get-CloudDriverIntelGraphics
+# Get-DellDriverPackCatalog
 
 ## SYNOPSIS
-Returns a Intel Graphics Driver Object
+Builds the Dell DriverPack Catalog
 
 ## SYNTAX
 
 ```
-Get-CloudDriverIntelGraphics [[-CompatArch] <String>] [[-CompatOS] <String>] [-Force] [<CommonParameters>]
+Get-DellDriverPackCatalog [-Compatible] [[-DownloadPath] <String>] [-Online] [-UpdateModuleCatalog]
+ [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-Returns a Intel Graphics Driver Object
+Builds the Dell DriverPack Catalog
 
 ## EXAMPLES
 
@@ -30,8 +31,23 @@ PS C:\> {{ Add example code here }}
 
 ## PARAMETERS
 
-### -CompatArch
-{{ Fill CompatArch Description }}
+### -Compatible
+Limits the results to match the current system
+
+```yaml
+Type: SwitchParameter
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: False
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -DownloadPath
+Specifies a download path for matching results displayed in Out-GridView
 
 ```yaml
 Type: String
@@ -45,23 +61,23 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -CompatOS
-{{ Fill CompatOS Description }}
+### -Online
+Checks for the latest Online version
 
 ```yaml
-Type: String
+Type: SwitchParameter
 Parameter Sets: (All)
 Aliases:
 
 Required: False
-Position: 2
-Default value: None
+Position: Named
+Default value: False
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -Force
-{{ Fill Force Description }}
+### -UpdateModuleCatalog
+Updates the OSD Module Offline Catalog
 
 ```yaml
 Type: SwitchParameter
@@ -85,3 +101,6 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ## NOTES
 
 ## RELATED LINKS
+
+[https://github.com/OSDeploy/OSD/tree/master/Docs](https://github.com/OSDeploy/OSD/tree/master/Docs)
+

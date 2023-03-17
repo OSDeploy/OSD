@@ -1,23 +1,23 @@
 ---
 external help file: OSD-help.xml
 Module Name: OSD
-online version: https://osddrivers.osdeploy.com
+online version: https://github.com/OSDeploy/OSD/tree/master/Docs
 schema: 2.0.0
 ---
 
-# Get-CloudDriverIntelRadeonGraphics
+# Get-HPFirmwareCatalog
 
 ## SYNOPSIS
-Returns a Intel Radeon Graphics Driver Object
+Returns the Firmware Component of the HP System Catalog
 
 ## SYNTAX
 
 ```
-Get-CloudDriverIntelRadeonGraphics [-Force] [<CommonParameters>]
+Get-HPFirmwareCatalog [-Compatible] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-Returns a Intel Radeon Graphics Driver Object
+Returns the Firmware Component of the HP System Catalog
 
 ## EXAMPLES
 
@@ -30,8 +30,9 @@ PS C:\> {{ Add example code here }}
 
 ## PARAMETERS
 
-### -Force
-{{ Fill Force Description }}
+### -Compatible
+If you have a HP System, this will filter the results based on your
+Baseboard Product value
 
 ```yaml
 Type: SwitchParameter
@@ -56,5 +57,5 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## RELATED LINKS
 
-[https://osddrivers.osdeploy.com](https://osddrivers.osdeploy.com)
+[https://github.com/OSDeploy/OSD/tree/master/Docs](https://github.com/OSDeploy/OSD/tree/master/Docs)
 

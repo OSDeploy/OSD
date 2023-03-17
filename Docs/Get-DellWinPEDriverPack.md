@@ -17,7 +17,7 @@ Get-DellWinPEDriverPack [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-Download and expand WinPE Drivers
+Returns the URL of the latest Dell WinPE 10 Driver Pack
 
 ## EXAMPLES
 

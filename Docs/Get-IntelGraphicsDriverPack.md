@@ -1,23 +1,24 @@
 ---
 external help file: OSD-help.xml
 Module Name: OSD
-online version: https://osddrivers.osdeploy.com
+online version: https://github.com/OSDeploy/OSD/tree/master/Docs
 schema: 2.0.0
 ---
 
-# Get-CloudDriverIntelWireless
+# Get-IntelGraphicsDriverPack
 
 ## SYNOPSIS
-Returns a Intel Wireless Driver Object
+Returns the Intel Graphics Driver Object
 
 ## SYNTAX
 
 ```
-Get-CloudDriverIntelWireless [[-CompatArch] <String>] [[-CompatOS] <String>] [-Force] [<CommonParameters>]
+Get-IntelGraphicsDriverPack [[-CompatArch] <String>] [[-CompatOS] <String>] [-Online] [-UpdateModuleCatalog]
+ [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-Returns a Intel Wireless Driver Object
+Returns the Intel Graphics Driver Object
 
 ## EXAMPLES
 
@@ -60,8 +61,23 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -Force
-{{ Fill Force Description }}
+### -Online
+Checks for the latest Online version
+
+```yaml
+Type: SwitchParameter
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: False
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -UpdateModuleCatalog
+Updates the OSD Module Offline Catalog
 
 ```yaml
 Type: SwitchParameter
@@ -85,3 +101,6 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ## NOTES
 
 ## RELATED LINKS
+
+[https://github.com/OSDeploy/OSD/tree/master/Docs](https://github.com/OSDeploy/OSD/tree/master/Docs)
+

@@ -1,38 +1,49 @@
 ---
 external help file: OSD-help.xml
 Module Name: OSD
-online version: https://osd.osdeploy.com
+online version: https://github.com/OSDeploy/OSD/tree/master/Docs
 schema: 2.0.0
 ---
 
-# Get-OSDCatalogLenovoDriverPack
+# Get-DellSystemCatalog
 
 ## SYNOPSIS
-Returns the Lenovo DriverPacks downloads
+Builds the Dell System Catalog
 
 ## SYNTAX
 
 ```
-Get-OSDCatalogLenovoDriverPack [-Compatible] [[-DownloadPath] <String>] [-Force] [-TestUrl]
- [<CommonParameters>]
+Get-DellSystemCatalog [-Compatible] [[-Component] <String>] [[-DownloadPath] <String>] [-Online]
+ [-UpdateModuleCatalog] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-Returns the Lenovo DriverPacks downloads
+Builds the Dell System Catalog
 
 ## EXAMPLES
 
-### Example 1
-```powershell
-PS C:\> {{ Add example code here }}
+### EXAMPLE 1
+```
+Get-DellSystemCatalog
+Don't do this, you will get an almost endless list
 ```
 
-{{ Add example description here }}
+### EXAMPLE 2
+```
+$Result = Get-DellSystemCatalog
+Yes do this.  Save it in a Variable
+```
+
+### EXAMPLE 3
+```
+Get-DellSystemCatalog -Component BIOS | Out-GridView
+Displays all the Dell BIOS Updates in GridView
+```
 
 ## PARAMETERS
 
 ### -Compatible
-Filters results based on your current Product
+Limits the results to match the current system
 
 ```yaml
 Type: SwitchParameter
@@ -46,8 +57,8 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -DownloadPath
-{{ Fill DownloadPath Description }}
+### -Component
+Limits the results to a specified component
 
 ```yaml
 Type: String
@@ -61,8 +72,23 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -Force
-{{ Fill Force Description }}
+### -DownloadPath
+Specifies a download path for matching results displayed in Out-GridView
+
+```yaml
+Type: String
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 2
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -Online
+Checks for the latest Online version
 
 ```yaml
 Type: SwitchParameter
@@ -76,8 +102,8 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -TestUrl
-{{ Fill TestUrl Description }}
+### -UpdateModuleCatalog
+Updates the OSD Module Offline Catalog
 
 ```yaml
 Type: SwitchParameter
@@ -102,5 +128,5 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## RELATED LINKS
 
-[https://osd.osdeploy.com](https://osd.osdeploy.com)
+[https://github.com/OSDeploy/OSD/tree/master/Docs](https://github.com/OSDeploy/OSD/tree/master/Docs)
 

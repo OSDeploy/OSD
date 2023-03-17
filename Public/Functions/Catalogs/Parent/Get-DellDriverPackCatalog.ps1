@@ -105,6 +105,7 @@ function Get-DellDriverPackCatalog {
     #=================================================
     if ($UseCatalog -eq 'Raw') {
         Write-Verbose "Reading the Raw Catalog at $RawCatalogFile"
+        Write-Warning "Building Catalog content, please wait ..."
         [xml]$XmlCatalogContent = Get-Content $RawCatalogFile -ErrorAction Stop
 
         #$CatalogVersion = (Get-Date $XmlCatalogContent.DriverPackManifest.version).ToString('yy.MM.dd')
@@ -128,6 +129,9 @@ function Get-DellDriverPackCatalog {
             }
             elseif ($osCode -match 'Windows7') {
                 $osShortName = 'Win7'
+                Continue
+            }
+            elseif ($ModelID -eq '0630') {
                 Continue
             }
             else {
@@ -186,9 +190,21 @@ function Get-DellDriverPackCatalog {
                 #Format		        = $Item.format
                 #Delta		        = $Item.delta
                 #Type		        = $Item.type
+                OSVersion           = $null
+                OSReleaseId         = $null
+                OSBuild             = $null
                 HashMD5		        = $Item.HashMD5
             }
             New-Object -TypeName PSObject -Property $ObjectProperties
+        }
+        
+        foreach ($Item in $Results) {
+            if ($Item.Name -match 'Win10') {
+                $Item.OSVersion = 'Windows 10 x64'
+            }
+            if ($Item.Name -match 'Win11') {
+                $Item.OSVersion = 'Windows 11 x64'
+            }
         }
 
         #Need to remove duplicates

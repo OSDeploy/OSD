@@ -7,11 +7,13 @@
         "Manufacturer":  "Microsoft",
         "Model":  "Surface 3",
         "Product":  "Surface_3",
-        "Name":  "Microsoft Surface 3 WiFi Win10 18362",
+        "Name":  "Microsoft Surface 3 WiFi Win10 1903",
         "PackageID":  "49040",
         "FileName":  "Surface3_WiFi_Win10_18362_1902003_0.msi",
         "Url":  "https://download.microsoft.com/download/C/5/C/C5C75DC4-0807-44A8-BCC1-6064CFD150F2/Surface3_WiFi_Win10_18362_1902003_0.msi",
         "OSVersion":  "Windows 10 x64",
+        "OSReleaseId":  "1903",
+        "OSBuild":  "18362",
         "HashMD5":  "C853F3908DA15E2CDFC03C6AAD70FBA0"
     },
     {
@@ -22,11 +24,13 @@
         "Manufacturer":  "Microsoft",
         "Model":  "Surface 3",
         "Product":  "Surface_3_US1",
-        "Name":  "Microsoft Surface 3 LTE ATT Win10 18362",
+        "Name":  "Microsoft Surface 3 LTE ATT Win10 1903",
         "PackageID":  "49039",
         "FileName":  "Surface3_4GLTE-ATT_Win10_18362_1902003_0.msi",
         "Url":  "https://download.microsoft.com/download/9/7/2/9728FCD1-A108-4EE6-ADFD-FB33C2320CCF/Surface3_4GLTE-ATT_Win10_18362_1902003_0.msi",
         "OSVersion":  "Windows 10 x64",
+        "OSReleaseId":  "1903",
+        "OSBuild":  "18362",
         "HashMD5":  "5F13B5E6A384999615E95C1EA63799"
     },
     {
@@ -37,11 +41,13 @@
         "Manufacturer":  "Microsoft",
         "Model":  "Surface 3",
         "Product":  "Surface_3_US2",
-        "Name":  "Microsoft Surface 3 LTE Verizon Win10 18362",
+        "Name":  "Microsoft Surface 3 LTE Verizon Win10 1903",
         "PackageID":  "49037",
         "FileName":  "Surface3_4GLTE-NorthAmericaUnlocked_Win10_18362_1902003_0.msi",
         "Url":  "https://download.microsoft.com/download/7/5/7/757B0C6E-0C22-400B-90EA-D8AFBD64CC16/Surface3_4GLTE-NorthAmericaUnlocked_Win10_18362_1902003_0.msi",
         "OSVersion":  "Windows 10 x64",
+        "OSReleaseId":  "1903",
+        "OSBuild":  "18362",
         "HashMD5":  "4725ED9879E6FC5FC5CADDB2D96FCC"
     },
     {
@@ -52,11 +58,13 @@
         "Manufacturer":  "Microsoft",
         "Model":  "Surface 3",
         "Product":  "Surface_3_NAG",
-        "Name":  "Microsoft Surface 3 LTE North America Win10 18362",
+        "Name":  "Microsoft Surface 3 LTE North America Win10 1903",
         "PackageID":  "49037",
         "FileName":  "Surface3_4GLTE-NorthAmericaUnlocked_Win10_18362_1902003_0.msi",
         "Url":  "https://download.microsoft.com/download/7/5/7/757B0C6E-0C22-400B-90EA-D8AFBD64CC16/Surface3_4GLTE-NorthAmericaUnlocked_Win10_18362_1902003_0.msi",
         "OSVersion":  "Windows 10 x64",
+        "OSReleaseId":  "1903",
+        "OSBuild":  "18362",
         "HashMD5":  "4725ED9879E6FC5FC5CADDB2D96FCC"
     },
     {
@@ -67,11 +75,13 @@
         "Manufacturer":  "Microsoft",
         "Model":  "Surface 3",
         "Product":  "Surface_3_ROW",
-        "Name":  "Microsoft Surface 3 LTE Rest of World Win10 18362",
+        "Name":  "Microsoft Surface 3 LTE Rest of World Win10 1903",
         "PackageID":  "49041",
         "FileName":  "Surface3_4GLTE-RestOfTheWorld_Win10_18362_1902003_0.msi",
         "Url":  "https://download.microsoft.com/download/D/B/9/DB9AC338-1F7A-4CFE-97E1-B089DED46831/Surface3_4GLTE-RestOfTheWorld_Win10_18362_1902003_0.msi",
         "OSVersion":  "Windows 10 x64",
+        "OSReleaseId":  "1903",
+        "OSBuild":  "18362",
         "HashMD5":  "C6656B42C46F6EE32CD3C6E7CE8F33D"
     },
     {
@@ -82,11 +92,13 @@
         "Manufacturer":  "Microsoft",
         "Model":  "Surface Book",
         "Product":  "Surface_Book",
-        "Name":  "Microsoft Surface Book Win10 18362",
+        "Name":  "Microsoft Surface Book Win10 1903",
         "PackageID":  "49497",
         "FileName":  "SurfaceBook_Win10_18362_21.062.17202.0.msi",
         "Url":  "https://download.microsoft.com/download/D/8/B/D8BB7912-5DB3-4AFF-8554-8F2E0B4CAB41/SurfaceBook_Win10_18362_21.062.17202.0.msi",
         "OSVersion":  "Windows 10 x64",
+        "OSReleaseId":  "1903",
+        "OSBuild":  "18362",
         "HashMD5":  "D88E5E0AE94EA80E317AD85B2867"
     },
     {
@@ -97,11 +109,13 @@
         "Manufacturer":  "Microsoft",
         "Model":  "Surface Book 2",
         "Product":  "Surface_Book_1832",
-        "Name":  "Microsoft Surface Book 2 13 Win10 19041",
+        "Name":  "Microsoft Surface Book 2 13 Win10 2004",
         "PackageID":  "56261",
         "FileName":  "SurfaceBook2_Win10_19041_22.080.2839.0.msi",
         "Url":  "https://download.microsoft.com/download/9/4/F/94F7AED2-D3ED-4A60-AB94-A0D078FE6DF6/SurfaceBook2_Win10_19041_22.080.2839.0.msi",
         "OSVersion":  "Windows 10 x64",
+        "OSReleaseId":  "2004",
+        "OSBuild":  "19041",
         "HashMD5":  "B82092A43228266C3747889B186BB22F"
     },
     {
@@ -112,11 +126,13 @@
         "Manufacturer":  "Microsoft",
         "Model":  "Surface Book 2",
         "Product":  "Surface_Book_1793",
-        "Name":  "Microsoft Surface Book 2 15 Win10 19041",
+        "Name":  "Microsoft Surface Book 2 15 Win10 2004",
         "PackageID":  "56261",
         "FileName":  "SurfaceBook2_Win10_19041_22.080.2839.0.msi",
         "Url":  "https://download.microsoft.com/download/9/4/F/94F7AED2-D3ED-4A60-AB94-A0D078FE6DF6/SurfaceBook2_Win10_19041_22.080.2839.0.msi",
         "OSVersion":  "Windows 10 x64",
+        "OSReleaseId":  "2004",
+        "OSBuild":  "19041",
         "HashMD5":  "B82092A43228266C3747889B186BB22F"
     },
     {
@@ -127,11 +143,13 @@
         "Manufacturer":  "Microsoft",
         "Model":  "Surface Book 3",
         "Product":  "Surface_Book_3_1900",
-        "Name":  "Microsoft Surface Book 3 13 Win10 19041",
+        "Name":  "Microsoft Surface Book 3 13 Win10 2004",
         "PackageID":  "101315",
         "FileName":  "SurfaceBook3_Win10_19041_22.100.5729.0.msi",
         "Url":  "https://download.microsoft.com/download/6/1/3/6139ef9d-d467-4fc4-94f2-8ebbf705110c/SurfaceBook3_Win10_19041_22.100.5729.0.msi",
         "OSVersion":  "Windows 10 x64",
+        "OSReleaseId":  "2004",
+        "OSBuild":  "19041",
         "HashMD5":  "816BDAF278DC912316FD76EA0E517D"
     },
     {
@@ -142,11 +160,13 @@
         "Manufacturer":  "Microsoft",
         "Model":  "Surface Book 3",
         "Product":  "Surface_Book_3_1900",
-        "Name":  "Microsoft Surface Book 3 13 Win11 22000",
+        "Name":  "Microsoft Surface Book 3 13 Win11 21H2",
         "PackageID":  "101315",
         "FileName":  "SurfaceBook3_Win11_22000_22.100.5730.0.msi",
         "Url":  "https://download.microsoft.com/download/6/1/3/6139ef9d-d467-4fc4-94f2-8ebbf705110c/SurfaceBook3_Win11_22000_22.100.5730.0.msi",
         "OSVersion":  "Windows 11 x64",
+        "OSReleaseId":  "21H2",
+        "OSBuild":  "22000",
         "HashMD5":  "DB19BCA90B92295A620A1BF7D90982E"
     },
     {
@@ -157,11 +177,13 @@
         "Manufacturer":  "Microsoft",
         "Model":  "Surface Book 3",
         "Product":  "Surface_Book_3_1899",
-        "Name":  "Microsoft Surface Book 3 15 Win10 19041",
+        "Name":  "Microsoft Surface Book 3 15 Win10 2004",
         "PackageID":  "101315",
         "FileName":  "SurfaceBook3_Win10_19041_22.100.5729.0.msi",
         "Url":  "https://download.microsoft.com/download/6/1/3/6139ef9d-d467-4fc4-94f2-8ebbf705110c/SurfaceBook3_Win10_19041_22.100.5729.0.msi",
         "OSVersion":  "Windows 10 x64",
+        "OSReleaseId":  "2004",
+        "OSBuild":  "19041",
         "HashMD5":  "816BDAF278DC912316FD76EA0E517D"
     },
     {
@@ -172,11 +194,13 @@
         "Manufacturer":  "Microsoft",
         "Model":  "Surface Book 3",
         "Product":  "Surface_Book_3_1899",
-        "Name":  "Microsoft Surface Book 3 15 Win11 22000",
+        "Name":  "Microsoft Surface Book 3 15 Win11 21H2",
         "PackageID":  "101315",
         "FileName":  "SurfaceBook3_Win11_22000_22.100.5730.0.msi",
         "Url":  "https://download.microsoft.com/download/6/1/3/6139ef9d-d467-4fc4-94f2-8ebbf705110c/SurfaceBook3_Win11_22000_22.100.5730.0.msi",
         "OSVersion":  "Windows 11 x64",
+        "OSReleaseId":  "21H2",
+        "OSBuild":  "22000",
         "HashMD5":  "DB19BCA90B92295A620A1BF7D90982E"
     },
     {
@@ -187,11 +211,13 @@
         "Manufacturer":  "Microsoft",
         "Model":  "Surface Go",
         "Product":  "Surface_Go_1824_Commercial",
-        "Name":  "Microsoft Surface Go Commercial Win10 19042",
+        "Name":  "Microsoft Surface Go Commercial Win10 20H2",
         "PackageID":  "57439",
         "FileName":  "SurfaceGo_Win10_19042_22.104.24060_WiFi_0.msi",
         "Url":  "https://download.microsoft.com/download/1/9/2/19206AF7-09CE-4AA6-8966-051D2E79E62B/SurfaceGo_Win10_19042_22.104.24060_WiFi_0.msi",
         "OSVersion":  "Windows 10 x64",
+        "OSReleaseId":  "20H2",
+        "OSBuild":  "19042",
         "HashMD5":  "A1E3DB6A90D460B58196284EF0F24622"
     },
     {
@@ -202,11 +228,13 @@
         "Manufacturer":  "Microsoft",
         "Model":  "Surface Go",
         "Product":  "Surface_Go_1824_Consumer",
-        "Name":  "Microsoft Surface Go Consumer Win10 19042",
+        "Name":  "Microsoft Surface Go Consumer Win10 20H2",
         "PackageID":  "57439",
         "FileName":  "SurfaceGo_Win10_19042_22.104.24060_WiFi_0.msi",
         "Url":  "https://download.microsoft.com/download/1/9/2/19206AF7-09CE-4AA6-8966-051D2E79E62B/SurfaceGo_Win10_19042_22.104.24060_WiFi_0.msi",
         "OSVersion":  "Windows 10 x64",
+        "OSReleaseId":  "20H2",
+        "OSBuild":  "19042",
         "HashMD5":  "A1E3DB6A90D460B58196284EF0F24622"
     },
     {
@@ -217,11 +245,13 @@
         "Manufacturer":  "Microsoft",
         "Model":  "Surface Go",
         "Product":  "Surface_Go_1825_Commercial",
-        "Name":  "Microsoft Surface Go LTE Commercial Win10 19042",
+        "Name":  "Microsoft Surface Go LTE Commercial Win10 20H2",
         "PackageID":  "57601",
         "FileName":  "SurfaceGo_Win10_19042_22.104.24060_LTE_0.msi",
         "Url":  "https://download.microsoft.com/download/B/0/C/B0CD6C8E-5AE4-4072-BD43-B981209606E5/SurfaceGo_Win10_19042_22.104.24060_LTE_0.msi",
         "OSVersion":  "Windows 10 x64",
+        "OSReleaseId":  "20H2",
+        "OSBuild":  "19042",
         "HashMD5":  "AA9FA1E0F756F03D17234FC3EBF974CB"
     },
     {
@@ -232,11 +262,13 @@
         "Manufacturer":  "Microsoft",
         "Model":  "Surface Go 2",
         "Product":  "Surface_Go_2_1926",
-        "Name":  "Microsoft Surface Go 2 Commercial Win10 19042",
+        "Name":  "Microsoft Surface Go 2 Commercial Win10 20H2",
         "PackageID":  "101304",
         "FileName":  "SurfaceGo2_Win10_19042_22.104.24090_0.msi",
         "Url":  "https://download.microsoft.com/download/d/7/1/d71163b8-03a8-40c7-8a9f-fc2006c6bccb/SurfaceGo2_Win10_19042_22.104.24090_0.msi",
         "OSVersion":  "Windows 10 x64",
+        "OSReleaseId":  "20H2",
+        "OSBuild":  "19042",
         "HashMD5":  "EC3C9F21C187D4DAD1336B8C412FB9A"
     },
     {
@@ -247,11 +279,13 @@
         "Manufacturer":  "Microsoft",
         "Model":  "Surface Go 2",
         "Product":  "Surface_Go_2_1901",
-        "Name":  "Microsoft Surface Go 2 Consumer Win10 19042",
+        "Name":  "Microsoft Surface Go 2 Consumer Win10 20H2",
         "PackageID":  "101304",
         "FileName":  "SurfaceGo2_Win10_19042_22.104.24090_0.msi",
         "Url":  "https://download.microsoft.com/download/d/7/1/d71163b8-03a8-40c7-8a9f-fc2006c6bccb/SurfaceGo2_Win10_19042_22.104.24090_0.msi",
         "OSVersion":  "Windows 10 x64",
+        "OSReleaseId":  "20H2",
+        "OSBuild":  "19042",
         "HashMD5":  "EC3C9F21C187D4DAD1336B8C412FB9A"
     },
     {
@@ -262,11 +296,13 @@
         "Manufacturer":  "Microsoft",
         "Model":  "Surface Go 2",
         "Product":  "Surface_Go_2_1927",
-        "Name":  "Microsoft Surface Go 2 LTE Win10 19042",
+        "Name":  "Microsoft Surface Go 2 LTE Win10 20H2",
         "PackageID":  "101304",
         "FileName":  "SurfaceGo2_Win10_19042_22.104.24090_0.msi",
         "Url":  "https://download.microsoft.com/download/d/7/1/d71163b8-03a8-40c7-8a9f-fc2006c6bccb/SurfaceGo2_Win10_19042_22.104.24090_0.msi",
         "OSVersion":  "Windows 10 x64",
+        "OSReleaseId":  "20H2",
+        "OSBuild":  "19042",
         "HashMD5":  "EC3C9F21C187D4DAD1336B8C412FB9A"
     },
     {
@@ -277,11 +313,13 @@
         "Manufacturer":  "Microsoft",
         "Model":  "Surface Go 3",
         "Product":  "Surface_Go_3_1926",
-        "Name":  "Microsoft Surface Go 3 Commercial Win10 19042",
+        "Name":  "Microsoft Surface Go 3 Commercial Win10 20H2",
         "PackageID":  "103504",
         "FileName":  "SurfaceGo3_Win10_19042_22.111.14054.0.msi",
         "Url":  "https://download.microsoft.com/download/e/8/2/e82f3029-e587-4c28-8ab4-ae1bf1e2c209/SurfaceGo3_Win10_19042_22.111.14054.0.msi",
         "OSVersion":  "Windows 10 x64",
+        "OSReleaseId":  "20H2",
+        "OSBuild":  "19042",
         "HashMD5":  "2DAAA2961984EA85E01E3E5A4A8A4"
     },
     {
@@ -292,11 +330,13 @@
         "Manufacturer":  "Microsoft",
         "Model":  "Surface Go 3",
         "Product":  "Surface_Go_3_1901",
-        "Name":  "Microsoft Surface Go 3 Consumer Win10 19042",
+        "Name":  "Microsoft Surface Go 3 Consumer Win10 20H2",
         "PackageID":  "103504",
         "FileName":  "SurfaceGo3_Win10_19042_22.111.14054.0.msi",
         "Url":  "https://download.microsoft.com/download/e/8/2/e82f3029-e587-4c28-8ab4-ae1bf1e2c209/SurfaceGo3_Win10_19042_22.111.14054.0.msi",
         "OSVersion":  "Windows 10 x64",
+        "OSReleaseId":  "20H2",
+        "OSBuild":  "19042",
         "HashMD5":  "2DAAA2961984EA85E01E3E5A4A8A4"
     },
     {
@@ -307,11 +347,13 @@
         "Manufacturer":  "Microsoft",
         "Model":  "Surface Go 3",
         "Product":  "Surface_Go_3_2022",
-        "Name":  "Microsoft Surface Go 3 LTE Win10 19042",
+        "Name":  "Microsoft Surface Go 3 LTE Win10 20H2",
         "PackageID":  "103504",
         "FileName":  "SurfaceGo3_Win10_19042_22.111.14054.0.msi",
         "Url":  "https://download.microsoft.com/download/e/8/2/e82f3029-e587-4c28-8ab4-ae1bf1e2c209/SurfaceGo3_Win10_19042_22.111.14054.0.msi",
         "OSVersion":  "Windows 10 x64",
+        "OSReleaseId":  "20H2",
+        "OSBuild":  "19042",
         "HashMD5":  "2DAAA2961984EA85E01E3E5A4A8A4"
     },
     {
@@ -322,11 +364,13 @@
         "Manufacturer":  "Microsoft",
         "Model":  "Surface Hub 2",
         "Product":  "Surface_Hub_2",
-        "Name":  "Microsoft Surface Hub 2 Win10 19042",
+        "Name":  "Microsoft Surface Hub 2 Win10 20H2",
         "PackageID":  "101974",
         "FileName":  "SurfaceHub2S_Win10_19042_22.092.24417.0.msi",
         "Url":  "https://download.microsoft.com/download/C/5/D/C5D16DE9-19E3-4A02-9483-B045EDC63A1E/SurfaceHub2S_Win10_19042_22.092.24417.0.msi",
         "OSVersion":  "Windows 10 x64",
+        "OSReleaseId":  "20H2",
+        "OSBuild":  "19042",
         "HashMD5":  "69D55D48B0A3148E285E3E49179AEDB6"
     },
     {
@@ -337,11 +381,13 @@
         "Manufacturer":  "Microsoft",
         "Model":  "Surface Hub 2S",
         "Product":  "Surface Hub 2S",
-        "Name":  "Microsoft Surface Hub 2S 50 Win10 19042",
+        "Name":  "Microsoft Surface Hub 2S 50 Win10 20H2",
         "PackageID":  "101974",
         "FileName":  "SurfaceHub2S_Win10_19042_22.092.24417.0.msi",
         "Url":  "https://download.microsoft.com/download/C/5/D/C5D16DE9-19E3-4A02-9483-B045EDC63A1E/SurfaceHub2S_Win10_19042_22.092.24417.0.msi",
         "OSVersion":  "Windows 10 x64",
+        "OSReleaseId":  "20H2",
+        "OSBuild":  "19042",
         "HashMD5":  "69D55D48B0A3148E285E3E49179AEDB6"
     },
     {
@@ -352,11 +398,13 @@
         "Manufacturer":  "Microsoft",
         "Model":  "Surface Hub 2S",
         "Product":  "Surface Hub 2S 85",
-        "Name":  "Microsoft Surface Hub 2S 85 Win10 19042",
+        "Name":  "Microsoft Surface Hub 2S 85 Win10 20H2",
         "PackageID":  "101974",
         "FileName":  "SurfaceHub2S_Win10_19042_22.092.24417.0.msi",
         "Url":  "https://download.microsoft.com/download/C/5/D/C5D16DE9-19E3-4A02-9483-B045EDC63A1E/SurfaceHub2S_Win10_19042_22.092.24417.0.msi",
         "OSVersion":  "Windows 10 x64",
+        "OSReleaseId":  "20H2",
+        "OSBuild":  "19042",
         "HashMD5":  "69D55D48B0A3148E285E3E49179AEDB6"
     },
     {
@@ -367,11 +415,13 @@
         "Manufacturer":  "Microsoft",
         "Model":  "Surface Laptop",
         "Product":  "Surface_Laptop",
-        "Name":  "Microsoft Surface Laptop Win10 18362",
+        "Name":  "Microsoft Surface Laptop Win10 1903",
         "PackageID":  "55489",
         "FileName":  "SurfaceLaptop_Win10_18362_21.101.11476.0.msi",
         "Url":  "https://download.microsoft.com/download/4/3/C/43C2BEA2-3C14-4DC1-B984-7556B389AC2E/SurfaceLaptop_Win10_18362_21.101.11476.0.msi",
         "OSVersion":  "Windows 10 x64",
+        "OSReleaseId":  "1903",
+        "OSBuild":  "18362",
         "HashMD5":  "F65EE1F58D5E4740573F581545E71053"
     },
     {
@@ -382,11 +432,13 @@
         "Manufacturer":  "Microsoft",
         "Model":  "Surface Laptop 2",
         "Product":  "Surface_Laptop_2_1769_Commercial",
-        "Name":  "Microsoft Surface Laptop 2 Commercial Win10 19041",
+        "Name":  "Microsoft Surface Laptop 2 Commercial Win10 2004",
         "PackageID":  "57515",
         "FileName":  "SurfaceLaptop2_Win10_19041_22.080.1424.0.msi",
         "Url":  "https://download.microsoft.com/download/E/7/5/E75E02DD-0ACF-4953-9F42-8408F96E0702/SurfaceLaptop2_Win10_19041_22.080.1424.0.msi",
         "OSVersion":  "Windows 10 x64",
+        "OSReleaseId":  "2004",
+        "OSBuild":  "19041",
         "HashMD5":  "DE56A911F66E1BE9BEB4ABAA0222055"
     },
     {
@@ -397,11 +449,13 @@
         "Manufacturer":  "Microsoft",
         "Model":  "Surface Laptop 2",
         "Product":  "Surface_Laptop_2_1769_Consumer",
-        "Name":  "Microsoft Surface Laptop 2 Consumer Win10 19041",
+        "Name":  "Microsoft Surface Laptop 2 Consumer Win10 2004",
         "PackageID":  "57515",
         "FileName":  "SurfaceLaptop2_Win10_19041_22.080.1424.0.msi",
         "Url":  "https://download.microsoft.com/download/E/7/5/E75E02DD-0ACF-4953-9F42-8408F96E0702/SurfaceLaptop2_Win10_19041_22.080.1424.0.msi",
         "OSVersion":  "Windows 10 x64",
+        "OSReleaseId":  "2004",
+        "OSBuild":  "19041",
         "HashMD5":  "DE56A911F66E1BE9BEB4ABAA0222055"
     },
     {
@@ -412,11 +466,13 @@
         "Manufacturer":  "Microsoft",
         "Model":  "Surface Laptop 3",
         "Product":  "Surface_Laptop_3_1867:1868",
-        "Name":  "Microsoft Surface Laptop 3 13 Intel Win10 19041",
+        "Name":  "Microsoft Surface Laptop 3 13 Intel Win10 2004",
         "PackageID":  "100429",
         "FileName":  "SurfaceLaptop3_Win10_19041_22.081.11638.0.msi",
         "Url":  "https://download.microsoft.com/download/3/f/4/3f4f5dff-b6a9-4006-87aa-142a8e6f77cb/SurfaceLaptop3_Win10_19041_22.081.11638.0.msi",
         "OSVersion":  "Windows 10 x64",
+        "OSReleaseId":  "2004",
+        "OSBuild":  "19041",
         "HashMD5":  "BC7CC41CFEA016FEA9FE152635ECCCC7"
     },
     {
@@ -427,11 +483,13 @@
         "Manufacturer":  "Microsoft",
         "Model":  "Surface Laptop 3",
         "Product":  "Surface_Laptop_3_1867:1868",
-        "Name":  "Microsoft Surface Laptop 3 13 Intel Win11 22000",
+        "Name":  "Microsoft Surface Laptop 3 13 Intel Win11 21H2",
         "PackageID":  "100429",
         "FileName":  "SurfaceLaptop3_Win11_22000_22.081.11638.0.msi",
         "Url":  "https://download.microsoft.com/download/3/f/4/3f4f5dff-b6a9-4006-87aa-142a8e6f77cb/SurfaceLaptop3_Win11_22000_22.081.11638.0.msi",
         "OSVersion":  "Windows 11 x64",
+        "OSReleaseId":  "21H2",
+        "OSBuild":  "22000",
         "HashMD5":  "3553FA4FAF88D489EE7E443562FF116F"
     },
     {
@@ -442,11 +500,13 @@
         "Manufacturer":  "Microsoft",
         "Model":  "Surface Laptop 3",
         "Product":  "Surface_Laptop_3_1873",
-        "Name":  "Microsoft Surface Laptop 3 13 AMD Win10 19042",
+        "Name":  "Microsoft Surface Laptop 3 13 AMD Win10 20H2",
         "PackageID":  "100428",
         "FileName":  "SurfaceLaptop3_Win10_19042_22.020.5647.0.msi",
         "Url":  "https://download.microsoft.com/download/6/f/e/6fe2a0c9-7218-4e17-8628-229b89a8b650/SurfaceLaptop3_Win10_19042_22.020.5647.0.msi",
         "OSVersion":  "Windows 10 x64",
+        "OSReleaseId":  "20H2",
+        "OSBuild":  "19042",
         "HashMD5":  "77EC8F427C96F629186A47D1A0A4741B"
     },
     {
@@ -457,11 +517,13 @@
         "Manufacturer":  "Microsoft",
         "Model":  "Surface Laptop 3",
         "Product":  "Surface_Laptop_3_1873",
-        "Name":  "Microsoft Surface Laptop 3 13 AMD Win11 22000",
+        "Name":  "Microsoft Surface Laptop 3 13 AMD Win11 21H2",
         "PackageID":  "100428",
         "FileName":  "SurfaceLaptop3_Win11_22000_22.020.5648.0.msi",
         "Url":  "https://download.microsoft.com/download/6/f/e/6fe2a0c9-7218-4e17-8628-229b89a8b650/SurfaceLaptop3_Win11_22000_22.020.5648.0.msi",
         "OSVersion":  "Windows 11 x64",
+        "OSReleaseId":  "21H2",
+        "OSBuild":  "22000",
         "HashMD5":  "4784A3B46FF5D315FCBCFADAC78E2B"
     },
     {
@@ -472,11 +534,13 @@
         "Manufacturer":  "Microsoft",
         "Model":  "Surface Laptop 3",
         "Product":  "Surface_Laptop_3_1872",
-        "Name":  "Microsoft Surface Laptop 3 15 Intel Win10 19041",
+        "Name":  "Microsoft Surface Laptop 3 15 Intel Win10 2004",
         "PackageID":  "100429",
         "FileName":  "SurfaceLaptop3_Win10_19041_22.081.11638.0.msi",
         "Url":  "https://download.microsoft.com/download/3/f/4/3f4f5dff-b6a9-4006-87aa-142a8e6f77cb/SurfaceLaptop3_Win10_19041_22.081.11638.0.msi",
         "OSVersion":  "Windows 10 x64",
+        "OSReleaseId":  "2004",
+        "OSBuild":  "19041",
         "HashMD5":  "BC7CC41CFEA016FEA9FE152635ECCCC7"
     },
     {
@@ -487,11 +551,13 @@
         "Manufacturer":  "Microsoft",
         "Model":  "Surface Laptop 3",
         "Product":  "Surface_Laptop_3_1872",
-        "Name":  "Microsoft Surface Laptop 3 15 Intel Win11 22000",
+        "Name":  "Microsoft Surface Laptop 3 15 Intel Win11 21H2",
         "PackageID":  "100429",
         "FileName":  "SurfaceLaptop3_Win11_22000_22.081.11638.0.msi",
         "Url":  "https://download.microsoft.com/download/3/f/4/3f4f5dff-b6a9-4006-87aa-142a8e6f77cb/SurfaceLaptop3_Win11_22000_22.081.11638.0.msi",
         "OSVersion":  "Windows 11 x64",
+        "OSReleaseId":  "21H2",
+        "OSBuild":  "22000",
         "HashMD5":  "3553FA4FAF88D489EE7E443562FF116F"
     },
     {
@@ -502,11 +568,13 @@
         "Manufacturer":  "Microsoft",
         "Model":  "Surface Laptop 4",
         "Product":  "Surface_Laptop_4_1958:1959",
-        "Name":  "Microsoft Surface Laptop 4 13 AMD Win10 19042",
+        "Name":  "Microsoft Surface Laptop 4 13 AMD Win10 20H2",
         "PackageID":  "102923",
         "FileName":  "SurfaceLaptop4_Win10_19042_22.101.7110.0.msi",
         "Url":  "https://download.microsoft.com/download/c/2/8/c2840704-6c0e-4457-82ca-68502b1803b5/SurfaceLaptop4_Win10_19042_22.101.7110.0.msi",
         "OSVersion":  "Windows 10 x64",
+        "OSReleaseId":  "20H2",
+        "OSBuild":  "19042",
         "HashMD5":  "9C85D771BED3C37342B990136A30F1A6"
     },
     {
@@ -517,11 +585,13 @@
         "Manufacturer":  "Microsoft",
         "Model":  "Surface Laptop 4",
         "Product":  "Surface_Laptop_4_1958:1959",
-        "Name":  "Microsoft Surface Laptop 4 13 AMD Win11 22000",
+        "Name":  "Microsoft Surface Laptop 4 13 AMD Win11 21H2",
         "PackageID":  "102923",
         "FileName":  "SurfaceLaptop4_Win11_22000_22.101.7108.0.msi",
         "Url":  "https://download.microsoft.com/download/c/2/8/c2840704-6c0e-4457-82ca-68502b1803b5/SurfaceLaptop4_Win11_22000_22.101.7108.0.msi",
         "OSVersion":  "Windows 11 x64",
+        "OSReleaseId":  "21H2",
+        "OSBuild":  "22000",
         "HashMD5":  "88DBBC7C90D6C7BF6FA1A9EE6A0E8F8"
     },
     {
@@ -532,11 +602,13 @@
         "Manufacturer":  "Microsoft",
         "Model":  "Surface Laptop 4",
         "Product":  "Surface_Laptop_4_1950:1951",
-        "Name":  "Microsoft Surface Laptop 4 13 Intel Win10 19041",
+        "Name":  "Microsoft Surface Laptop 4 13 Intel Win10 2004",
         "PackageID":  "102924",
         "FileName":  "SurfaceLaptop4_Win10_19041_22.111.10120.0.msi",
         "Url":  "https://download.microsoft.com/download/f/7/0/f70b3d0a-59b1-4842-9130-0c152bb738ba/SurfaceLaptop4_Win10_19041_22.111.10120.0.msi",
         "OSVersion":  "Windows 10 x64",
+        "OSReleaseId":  "2004",
+        "OSBuild":  "19041",
         "HashMD5":  "34E72453DD8226D53ECF7DEF827A"
     },
     {
@@ -547,11 +619,13 @@
         "Manufacturer":  "Microsoft",
         "Model":  "Surface Laptop 4",
         "Product":  "Surface_Laptop_4_1950:1951",
-        "Name":  "Microsoft Surface Laptop 4 13 Intel Win11 22000",
+        "Name":  "Microsoft Surface Laptop 4 13 Intel Win11 21H2",
         "PackageID":  "102924",
         "FileName":  "SurfaceLaptop4_Win11_22000_22.111.10120.0.msi",
         "Url":  "https://download.microsoft.com/download/f/7/0/f70b3d0a-59b1-4842-9130-0c152bb738ba/SurfaceLaptop4_Win11_22000_22.111.10120.0.msi",
         "OSVersion":  "Windows 11 x64",
+        "OSReleaseId":  "21H2",
+        "OSBuild":  "22000",
         "HashMD5":  "2CC3CA90F2D13BDC216E2C1D291CAE"
     },
     {
@@ -562,11 +636,13 @@
         "Manufacturer":  "Microsoft",
         "Model":  "Surface Laptop 4",
         "Product":  "Surface_Laptop_4_1952:1953",
-        "Name":  "Microsoft Surface Laptop 4 15 AMD Win10 19042",
+        "Name":  "Microsoft Surface Laptop 4 15 AMD Win10 20H2",
         "PackageID":  "102923",
         "FileName":  "SurfaceLaptop4_Win10_19042_22.101.7110.0.msi",
         "Url":  "https://download.microsoft.com/download/c/2/8/c2840704-6c0e-4457-82ca-68502b1803b5/SurfaceLaptop4_Win10_19042_22.101.7110.0.msi",
         "OSVersion":  "Windows 10 x64",
+        "OSReleaseId":  "20H2",
+        "OSBuild":  "19042",
         "HashMD5":  "9C85D771BED3C37342B990136A30F1A6"
     },
     {
@@ -577,11 +653,13 @@
         "Manufacturer":  "Microsoft",
         "Model":  "Surface Laptop 4",
         "Product":  "Surface_Laptop_4_1952:1953",
-        "Name":  "Microsoft Surface Laptop 4 15 AMD Win11 22000",
+        "Name":  "Microsoft Surface Laptop 4 15 AMD Win11 21H2",
         "PackageID":  "102923",
         "FileName":  "SurfaceLaptop4_Win11_22000_22.101.7108.0.msi",
         "Url":  "https://download.microsoft.com/download/c/2/8/c2840704-6c0e-4457-82ca-68502b1803b5/SurfaceLaptop4_Win11_22000_22.101.7108.0.msi",
         "OSVersion":  "Windows 11 x64",
+        "OSReleaseId":  "21H2",
+        "OSBuild":  "22000",
         "HashMD5":  "88DBBC7C90D6C7BF6FA1A9EE6A0E8F8"
     },
     {
@@ -592,11 +670,13 @@
         "Manufacturer":  "Microsoft",
         "Model":  "Surface Laptop 4",
         "Product":  "Surface_Laptop_4_1978:1979",
-        "Name":  "Microsoft Surface Laptop 4 15 Intel Win10 19041",
+        "Name":  "Microsoft Surface Laptop 4 15 Intel Win10 2004",
         "PackageID":  "102924",
         "FileName":  "SurfaceLaptop4_Win10_19041_22.111.10120.0.msi",
         "Url":  "https://download.microsoft.com/download/f/7/0/f70b3d0a-59b1-4842-9130-0c152bb738ba/SurfaceLaptop4_Win10_19041_22.111.10120.0.msi",
         "OSVersion":  "Windows 10 x64",
+        "OSReleaseId":  "2004",
+        "OSBuild":  "19041",
         "HashMD5":  "34E72453DD8226D53ECF7DEF827A"
     },
     {
@@ -607,11 +687,13 @@
         "Manufacturer":  "Microsoft",
         "Model":  "Surface Laptop 4",
         "Product":  "Surface_Laptop_4_1978:1979",
-        "Name":  "Microsoft Surface Laptop 4 15 Intel Win11 22000",
+        "Name":  "Microsoft Surface Laptop 4 15 Intel Win11 21H2",
         "PackageID":  "102924",
         "FileName":  "SurfaceLaptop4_Win11_22000_22.111.10120.0.msi",
         "Url":  "https://download.microsoft.com/download/f/7/0/f70b3d0a-59b1-4842-9130-0c152bb738ba/SurfaceLaptop4_Win11_22000_22.111.10120.0.msi",
         "OSVersion":  "Windows 11 x64",
+        "OSReleaseId":  "21H2",
+        "OSBuild":  "22000",
         "HashMD5":  "2CC3CA90F2D13BDC216E2C1D291CAE"
     },
     {
@@ -622,11 +704,13 @@
         "Manufacturer":  "Microsoft",
         "Model":  "Surface Laptop 5",
         "Product":  "Surface_Laptop_5_1950:1951",
-        "Name":  "Microsoft Surface Laptop 5 13 Consumer Win10 19044",
+        "Name":  "Microsoft Surface Laptop 5 13 Consumer Win10 21H2",
         "PackageID":  "104679",
         "FileName":  "SurfaceLaptop5_Win10_19044_22.102.17126.0.msi",
         "Url":  "https://download.microsoft.com/download/d/2/6/d26c7d69-ec2f-4dd6-95ab-7e1d2b5ee7ae/SurfaceLaptop5_Win10_19044_22.102.17126.0.msi",
         "OSVersion":  "Windows 10 x64",
+        "OSReleaseId":  "21H2",
+        "OSBuild":  "19044",
         "HashMD5":  "6F37A327BBCBB9EEB12BF831267C657"
     },
     {
@@ -637,11 +721,13 @@
         "Manufacturer":  "Microsoft",
         "Model":  "Surface Laptop 5",
         "Product":  "Surface_Laptop_5_1950:1951",
-        "Name":  "Microsoft Surface Laptop 5 13 Consumer Win11 22621",
+        "Name":  "Microsoft Surface Laptop 5 13 Consumer Win11 22H2",
         "PackageID":  "104679",
         "FileName":  "SurfaceLaptop5_Win11_22621_22.102.17243.0.msi",
         "Url":  "https://download.microsoft.com/download/d/2/6/d26c7d69-ec2f-4dd6-95ab-7e1d2b5ee7ae/SurfaceLaptop5_Win11_22621_22.102.17243.0.msi",
         "OSVersion":  "Windows 11 x64",
+        "OSReleaseId":  "22H2",
+        "OSBuild":  "22621",
         "HashMD5":  "C52CDE56B4285A8F97F7D1D8933C7A62"
     },
     {
@@ -652,11 +738,13 @@
         "Manufacturer":  "Microsoft",
         "Model":  "Surface Laptop 5",
         "Product":  "Surface_Laptop_5_for_Business_1950:1951",
-        "Name":  "Microsoft Surface Laptop 5 13 Commercial Win10 19044",
+        "Name":  "Microsoft Surface Laptop 5 13 Commercial Win10 21H2",
         "PackageID":  "104679",
         "FileName":  "SurfaceLaptop5_Win10_19044_22.102.17126.0.msi",
         "Url":  "https://download.microsoft.com/download/d/2/6/d26c7d69-ec2f-4dd6-95ab-7e1d2b5ee7ae/SurfaceLaptop5_Win10_19044_22.102.17126.0.msi",
         "OSVersion":  "Windows 10 x64",
+        "OSReleaseId":  "21H2",
+        "OSBuild":  "19044",
         "HashMD5":  "6F37A327BBCBB9EEB12BF831267C657"
     },
     {
@@ -667,11 +755,13 @@
         "Manufacturer":  "Microsoft",
         "Model":  "Surface Laptop 5",
         "Product":  "Surface_Laptop_5_for_Business_1950:1951",
-        "Name":  "Microsoft Surface Laptop 5 13 Commercial Win11 22621",
+        "Name":  "Microsoft Surface Laptop 5 13 Commercial Win11 22H2",
         "PackageID":  "104679",
         "FileName":  "SurfaceLaptop5_Win11_22621_22.102.17243.0.msi",
         "Url":  "https://download.microsoft.com/download/d/2/6/d26c7d69-ec2f-4dd6-95ab-7e1d2b5ee7ae/SurfaceLaptop5_Win11_22621_22.102.17243.0.msi",
         "OSVersion":  "Windows 11 x64",
+        "OSReleaseId":  "22H2",
+        "OSBuild":  "22621",
         "HashMD5":  "C52CDE56B4285A8F97F7D1D8933C7A62"
     },
     {
@@ -682,11 +772,13 @@
         "Manufacturer":  "Microsoft",
         "Model":  "Surface Laptop 5",
         "Product":  "Surface_Laptop_5_1979",
-        "Name":  "Microsoft Surface Laptop 5 15 Consumer Win10 19044",
+        "Name":  "Microsoft Surface Laptop 5 15 Consumer Win10 21H2",
         "PackageID":  "104679",
         "FileName":  "SurfaceLaptop5_Win10_19044_22.102.17126.0.msi",
         "Url":  "https://download.microsoft.com/download/d/2/6/d26c7d69-ec2f-4dd6-95ab-7e1d2b5ee7ae/SurfaceLaptop5_Win10_19044_22.102.17126.0.msi",
         "OSVersion":  "Windows 10 x64",
+        "OSReleaseId":  "21H2",
+        "OSBuild":  "19044",
         "HashMD5":  "6F37A327BBCBB9EEB12BF831267C657"
     },
     {
@@ -697,11 +789,13 @@
         "Manufacturer":  "Microsoft",
         "Model":  "Surface Laptop 5",
         "Product":  "Surface_Laptop_5_1979",
-        "Name":  "Microsoft Surface Laptop 5 15 Consumer Win11 22621",
+        "Name":  "Microsoft Surface Laptop 5 15 Consumer Win11 22H2",
         "PackageID":  "104679",
         "FileName":  "SurfaceLaptop5_Win11_22621_22.102.17243.0.msi",
         "Url":  "https://download.microsoft.com/download/d/2/6/d26c7d69-ec2f-4dd6-95ab-7e1d2b5ee7ae/SurfaceLaptop5_Win11_22621_22.102.17243.0.msi",
         "OSVersion":  "Windows 11 x64",
+        "OSReleaseId":  "22H2",
+        "OSBuild":  "22621",
         "HashMD5":  "C52CDE56B4285A8F97F7D1D8933C7A62"
     },
     {
@@ -712,11 +806,13 @@
         "Manufacturer":  "Microsoft",
         "Model":  "Surface Laptop 5",
         "Product":  "Surface_Laptop_5_for_Business_1979",
-        "Name":  "Microsoft Surface Laptop 5 15 Commercial Win10 19044",
+        "Name":  "Microsoft Surface Laptop 5 15 Commercial Win10 21H2",
         "PackageID":  "104679",
         "FileName":  "SurfaceLaptop5_Win10_19044_22.102.17126.0.msi",
         "Url":  "https://download.microsoft.com/download/d/2/6/d26c7d69-ec2f-4dd6-95ab-7e1d2b5ee7ae/SurfaceLaptop5_Win10_19044_22.102.17126.0.msi",
         "OSVersion":  "Windows 10 x64",
+        "OSReleaseId":  "21H2",
+        "OSBuild":  "19044",
         "HashMD5":  "6F37A327BBCBB9EEB12BF831267C657"
     },
     {
@@ -727,11 +823,13 @@
         "Manufacturer":  "Microsoft",
         "Model":  "Surface Laptop 5",
         "Product":  "Surface_Laptop_5_for_Business_1979",
-        "Name":  "Microsoft Surface Laptop 5 15 Commercial Win11 22621",
+        "Name":  "Microsoft Surface Laptop 5 15 Commercial Win11 22H2",
         "PackageID":  "104679",
         "FileName":  "SurfaceLaptop5_Win11_22621_22.102.17243.0.msi",
         "Url":  "https://download.microsoft.com/download/d/2/6/d26c7d69-ec2f-4dd6-95ab-7e1d2b5ee7ae/SurfaceLaptop5_Win11_22621_22.102.17243.0.msi",
         "OSVersion":  "Windows 11 x64",
+        "OSReleaseId":  "22H2",
+        "OSBuild":  "22621",
         "HashMD5":  "C52CDE56B4285A8F97F7D1D8933C7A62"
     },
     {
@@ -742,11 +840,13 @@
         "Manufacturer":  "Microsoft",
         "Model":  "Surface Laptop Go",
         "Product":  "Surface_Laptop_Go_1943",
-        "Name":  "Microsoft Surface Laptop Go Win10 19041",
+        "Name":  "Microsoft Surface Laptop Go Win10 2004",
         "PackageID":  "102261",
         "FileName":  "SurfaceLaptopGo_Win10_19041_22.021.14345.0.msi",
         "Url":  "https://download.microsoft.com/download/5/9/4/594604a4-26c0-405c-ac04-b385d824c30c/SurfaceLaptopGo_Win10_19041_22.021.14345.0.msi",
         "OSVersion":  "Windows 10 x64",
+        "OSReleaseId":  "2004",
+        "OSBuild":  "19041",
         "HashMD5":  "54D6324747768D04DB4613909B30AA"
     },
     {
@@ -757,11 +857,13 @@
         "Manufacturer":  "Microsoft",
         "Model":  "Surface Laptop Go",
         "Product":  "Surface_Laptop_Go_1943",
-        "Name":  "Microsoft Surface Laptop Go Win11 22000",
+        "Name":  "Microsoft Surface Laptop Go Win11 21H2",
         "PackageID":  "102261",
         "FileName":  "SurfaceLaptopGo_Win11_22000_22.021.14347.0.msi",
         "Url":  "https://download.microsoft.com/download/5/9/4/594604a4-26c0-405c-ac04-b385d824c30c/SurfaceLaptopGo_Win11_22000_22.021.14347.0.msi",
         "OSVersion":  "Windows 11 x64",
+        "OSReleaseId":  "21H2",
+        "OSBuild":  "22000",
         "HashMD5":  "13A36183279E6E3191607C7581C37B76"
     },
     {
@@ -772,11 +874,13 @@
         "Manufacturer":  "Microsoft",
         "Model":  "Surface Laptop Go 2",
         "Product":  "Surface_Laptop_Go_2_2013",
-        "Name":  "Microsoft Surface Laptop Go 2 Win10 19044",
+        "Name":  "Microsoft Surface Laptop Go 2 Win10 21H2",
         "PackageID":  "104251",
         "FileName":  "SurfaceLaptopGo2_Win10_19044_22.074.40379.0.msi",
         "Url":  "https://download.microsoft.com/download/c/7/d/c7d06901-77f2-44aa-9a58-293d069d19c6/SurfaceLaptopGo2_Win10_19044_22.074.40379.0.msi",
         "OSVersion":  "Windows 10 x64",
+        "OSReleaseId":  "21H2",
+        "OSBuild":  "19044",
         "HashMD5":  "C4D8443ECFDA381718EBA9443BAC8"
     },
     {
@@ -787,11 +891,13 @@
         "Manufacturer":  "Microsoft",
         "Model":  "Surface Laptop Studio",
         "Product":  "Surface_Laptop_Studio_1964",
-        "Name":  "Microsoft Surface Laptop Studio Win10 19042",
+        "Name":  "Microsoft Surface Laptop Studio Win10 20H2",
         "PackageID":  "103505",
         "FileName":  "SurfaceLaptopStudio_Win10_19042_22.114.42840.0.msi",
         "Url":  "https://download.microsoft.com/download/b/3/0/b30ecc34-3bab-4c68-a5b3-0d258d73e747/SurfaceLaptopStudio_Win10_19042_22.114.42840.0.msi",
         "OSVersion":  "Windows 10 x64",
+        "OSReleaseId":  "20H2",
+        "OSBuild":  "19042",
         "HashMD5":  "847AC7E80ACBC285782F9FBA187DC8B"
     },
     {
@@ -802,11 +908,13 @@
         "Manufacturer":  "Microsoft",
         "Model":  "Surface Laptop Studio",
         "Product":  "Surface_Laptop_Studio_1964",
-        "Name":  "Microsoft Surface Laptop Studio Win11 22000",
+        "Name":  "Microsoft Surface Laptop Studio Win11 21H2",
         "PackageID":  "103505",
         "FileName":  "SurfaceLaptopStudio_Win11_22000_22.114.42841.0.msi",
         "Url":  "https://download.microsoft.com/download/b/3/0/b30ecc34-3bab-4c68-a5b3-0d258d73e747/SurfaceLaptopStudio_Win11_22000_22.114.42841.0.msi",
         "OSVersion":  "Windows 11 x64",
+        "OSReleaseId":  "21H2",
+        "OSBuild":  "22000",
         "HashMD5":  "C362B250C0F88AE183E5DB68CB39AE75"
     },
     {
@@ -822,6 +930,8 @@
         "FileName":  "SurfacePro_Win10_150723_0.zip",
         "Url":  "https://download.microsoft.com/download/B/D/A/BDA70A48-7447-463C-BD91-1DF6C6E5BF50/Surface Pro/SurfacePro_Win10_150723_0.zip",
         "OSVersion":  "Windows 10 x64",
+        "OSReleaseId":  "",
+        "OSBuild":  "150723",
         "HashMD5":  "CE8A3CBD0D3B535DCAF789C6B1DBA4"
     },
     {
@@ -837,6 +947,8 @@
         "FileName":  "SurfacePro2_Win10_160501_2.zip",
         "Url":  "https://download.microsoft.com/download/A/D/F/ADF87383-7E81-4157-A1C3-D2CCE3446D7B/SurfacePro2_Win10_160501_2.zip",
         "OSVersion":  "Windows 10 x64",
+        "OSReleaseId":  "",
+        "OSBuild":  "160501",
         "HashMD5":  "30C2CF9A92E4709FB9D122AC375396D"
     },
     {
@@ -847,11 +959,13 @@
         "Manufacturer":  "Microsoft",
         "Model":  "Surface Pro 3",
         "Product":  "Surface_Pro_3",
-        "Name":  "Microsoft Surface Pro 3 Win10 18362",
+        "Name":  "Microsoft Surface Pro 3 Win10 1903",
         "PackageID":  "38826",
         "FileName":  "SurfacePro3_Win10_18362_1902002_0.msi",
         "Url":  "https://download.microsoft.com/download/2/0/7/2073C22F-2F31-4F4A-8059-E54C91C564A9/SurfacePro3_Win10_18362_1902002_0.msi",
         "OSVersion":  "Windows 10 x64",
+        "OSReleaseId":  "1903",
+        "OSBuild":  "18362",
         "HashMD5":  "CAD26E5A2ACB6590D0878DAD6E09F23"
     },
     {
@@ -862,11 +976,13 @@
         "Manufacturer":  "Microsoft",
         "Model":  "Surface Pro 4",
         "Product":  "Surface_Pro_4",
-        "Name":  "Microsoft Surface Pro 4 Win10 18362",
+        "Name":  "Microsoft Surface Pro 4 Win10 1903",
         "PackageID":  "49498",
         "FileName":  "SurfacePro4_Win10_18362_21.061.12819.0.msi",
         "Url":  "https://download.microsoft.com/download/6/A/C/6ACB37C4-E4C1-4E0E-BBAE-AC7A0C303593/SurfacePro4_Win10_18362_21.061.12819.0.msi",
         "OSVersion":  "Windows 10 x64",
+        "OSReleaseId":  "1903",
+        "OSBuild":  "18362",
         "HashMD5":  "E75291B1582DBF487C3BAC4EC968865"
     },
     {
@@ -877,11 +993,13 @@
         "Manufacturer":  "Microsoft",
         "Model":  "Surface Pro",
         "Product":  "Surface_Pro_1796",
-        "Name":  "Microsoft Surface Pro (5th Gen) Win10 19041",
+        "Name":  "Microsoft Surface Pro (5th Gen) Win10 2004",
         "PackageID":  "55484",
         "FileName":  "SurfacePro_Win10_19041_22.074.40280.0.msi",
         "Url":  "https://download.microsoft.com/download/4/C/7/4C7DA85D-03DE-4B89-B8E0-386437331C46/SurfacePro_Win10_19041_22.074.40280.0.msi",
         "OSVersion":  "Windows 10 x64",
+        "OSReleaseId":  "2004",
+        "OSBuild":  "19041",
         "HashMD5":  "C7231FA474EE8287B4A557313F0C280"
     },
     {
@@ -892,11 +1010,13 @@
         "Manufacturer":  "Microsoft",
         "Model":  "Surface Pro",
         "Product":  "Surface_Pro_1807",
-        "Name":  "Microsoft Surface Pro with LTE Advanced Win10 19041",
+        "Name":  "Microsoft Surface Pro with LTE Advanced Win10 2004",
         "PackageID":  "56278",
         "FileName":  "SurfacePro_Win10_19041_22.074.40280.0.msi",
         "Url":  "https://download.microsoft.com/download/4/1/6/416D7D4F-64D9-4633-A5CC-922A941854FD/SurfacePro_Win10_19041_22.074.40280.0.msi",
         "OSVersion":  "Windows 10 x64",
+        "OSReleaseId":  "2004",
+        "OSBuild":  "19041",
         "HashMD5":  "C7231FA474EE8287B4A557313F0C280"
     },
     {
@@ -907,11 +1027,13 @@
         "Manufacturer":  "Microsoft",
         "Model":  "Surface Pro 6",
         "Product":  "Surface_Pro_6_1796_Commercial",
-        "Name":  "Microsoft Surface Pro 6 Commercial Win10 19041",
+        "Name":  "Microsoft Surface Pro 6 Commercial Win10 2004",
         "PackageID":  "57514",
         "FileName":  "SurfacePro6_Win10_19041_22.074.41199.0.msi",
         "Url":  "https://download.microsoft.com/download/8/9/8/8986DE75-9E21-478A-B002-A7E92BA0F053/SurfacePro6_Win10_19041_22.074.41199.0.msi",
         "OSVersion":  "Windows 10 x64",
+        "OSReleaseId":  "2004",
+        "OSBuild":  "19041",
         "HashMD5":  "C3352682B8B5F773A45C276CFCF434"
     },
     {
@@ -922,11 +1044,13 @@
         "Manufacturer":  "Microsoft",
         "Model":  "Surface Pro 6",
         "Product":  "Surface_Pro_6_1796_Consumer",
-        "Name":  "Microsoft Surface Pro 6 Consumer Win10 19041",
+        "Name":  "Microsoft Surface Pro 6 Consumer Win10 2004",
         "PackageID":  "57514",
         "FileName":  "SurfacePro6_Win10_19041_22.074.41199.0.msi",
         "Url":  "https://download.microsoft.com/download/8/9/8/8986DE75-9E21-478A-B002-A7E92BA0F053/SurfacePro6_Win10_19041_22.074.41199.0.msi",
         "OSVersion":  "Windows 10 x64",
+        "OSReleaseId":  "2004",
+        "OSBuild":  "19041",
         "HashMD5":  "C3352682B8B5F773A45C276CFCF434"
     },
     {
@@ -937,11 +1061,13 @@
         "Manufacturer":  "Microsoft",
         "Model":  "Surface Pro 7",
         "Product":  "Surface_Pro_7_1866",
-        "Name":  "Microsoft Surface Pro 7 Win10 19042",
+        "Name":  "Microsoft Surface Pro 7 Win10 20H2",
         "PackageID":  "100419",
         "FileName":  "SurfacePro7_Win10_19042_23.013.33004.0.msi",
         "Url":  "https://download.microsoft.com/download/0/8/b/08b0f0ba-1571-41c0-9b8a-9af8a43681ae/SurfacePro7_Win10_19042_23.013.33004.0.msi",
         "OSVersion":  "Windows 10 x64",
+        "OSReleaseId":  "20H2",
+        "OSBuild":  "19042",
         "HashMD5":  "7E5821AB8D515046B334473E4839EE3"
     },
     {
@@ -952,11 +1078,13 @@
         "Manufacturer":  "Microsoft",
         "Model":  "Surface Pro 7",
         "Product":  "Surface_Pro_7_1866",
-        "Name":  "Microsoft Surface Pro 7 Win11 22000",
+        "Name":  "Microsoft Surface Pro 7 Win11 21H2",
         "PackageID":  "100419",
         "FileName":  "SurfacePro7_Win11_22000_23.013.33004.0.msi",
         "Url":  "https://download.microsoft.com/download/0/8/b/08b0f0ba-1571-41c0-9b8a-9af8a43681ae/SurfacePro7_Win11_22000_23.013.33004.0.msi",
         "OSVersion":  "Windows 11 x64",
+        "OSReleaseId":  "21H2",
+        "OSBuild":  "22000",
         "HashMD5":  "E2C899DFD45BBB9DBCF18CA646AA88"
     },
     {
@@ -967,11 +1095,13 @@
         "Manufacturer":  "Microsoft",
         "Model":  "Surface Pro 7+",
         "Product":  "Surface_Pro_7+_1960",
-        "Name":  "Microsoft Surface Pro 7+ Win10 19042",
+        "Name":  "Microsoft Surface Pro 7+ Win10 20H2",
         "PackageID":  "102633",
         "FileName":  "SurfacePro7+_Win10_19042_23.012.18720.0.msi",
         "Url":  "https://download.microsoft.com/download/1/b/4/1b4bdd09-a704-4bf5-bed6-6693a0ac848a/SurfacePro7+_Win10_19042_23.012.18720.0.msi",
         "OSVersion":  "Windows 10 x64",
+        "OSReleaseId":  "20H2",
+        "OSBuild":  "19042",
         "HashMD5":  "9CA08EC6B3130FF20A2BF763F38FEFC"
     },
     {
@@ -982,11 +1112,13 @@
         "Manufacturer":  "Microsoft",
         "Model":  "Surface Pro 7+",
         "Product":  "Surface_Pro_7+_1960",
-        "Name":  "Microsoft Surface Pro 7+ Win11 22000",
+        "Name":  "Microsoft Surface Pro 7+ Win11 21H2",
         "PackageID":  "102633",
         "FileName":  "SurfacePro7+_Win11_22000_23.012.18721.0.msi",
         "Url":  "https://download.microsoft.com/download/1/b/4/1b4bdd09-a704-4bf5-bed6-6693a0ac848a/SurfacePro7+_Win11_22000_23.012.18721.0.msi",
         "OSVersion":  "Windows 11 x64",
+        "OSReleaseId":  "21H2",
+        "OSBuild":  "22000",
         "HashMD5":  "36A8C2A6FF5B44494D16EAEEDE369391"
     },
     {
@@ -997,11 +1129,13 @@
         "Manufacturer":  "Microsoft",
         "Model":  "Surface Pro 7+",
         "Product":  "Surface_Pro_7+_with_LTE_Advanced_1961",
-        "Name":  "Microsoft Surface Pro 7+ LTE Win10 19042",
+        "Name":  "Microsoft Surface Pro 7+ LTE Win10 20H2",
         "PackageID":  "102633",
         "FileName":  "SurfacePro7+_Win10_19042_23.012.18720.0.msi",
         "Url":  "https://download.microsoft.com/download/1/b/4/1b4bdd09-a704-4bf5-bed6-6693a0ac848a/SurfacePro7+_Win10_19042_23.012.18720.0.msi",
         "OSVersion":  "Windows 10 x64",
+        "OSReleaseId":  "20H2",
+        "OSBuild":  "19042",
         "HashMD5":  "9CA08EC6B3130FF20A2BF763F38FEFC"
     },
     {
@@ -1012,11 +1146,13 @@
         "Manufacturer":  "Microsoft",
         "Model":  "Surface Pro 7+",
         "Product":  "Surface_Pro_7+_with_LTE_Advanced_1961",
-        "Name":  "Microsoft Surface Pro 7+ LTE Win11 22000",
+        "Name":  "Microsoft Surface Pro 7+ LTE Win11 21H2",
         "PackageID":  "102633",
         "FileName":  "SurfacePro7+_Win11_22000_23.012.18721.0.msi",
         "Url":  "https://download.microsoft.com/download/1/b/4/1b4bdd09-a704-4bf5-bed6-6693a0ac848a/SurfacePro7+_Win11_22000_23.012.18721.0.msi",
         "OSVersion":  "Windows 11 x64",
+        "OSReleaseId":  "21H2",
+        "OSBuild":  "22000",
         "HashMD5":  "36A8C2A6FF5B44494D16EAEEDE369391"
     },
     {
@@ -1027,11 +1163,13 @@
         "Manufacturer":  "Microsoft",
         "Model":  "Surface Pro 8",
         "Product":  "Surface_Pro_8_for_Business_1983",
-        "Name":  "Microsoft Surface Pro 8 Win10 19042",
+        "Name":  "Microsoft Surface Pro 8 Win10 20H2",
         "PackageID":  "103503",
         "FileName":  "SurfacePro8_Win10_19042_22.113.31418.0.msi",
         "Url":  "https://download.microsoft.com/download/9/1/3/9133dbd3-799a-4766-bb9e-f67697159c02/SurfacePro8_Win10_19042_22.113.31418.0.msi",
         "OSVersion":  "Windows 10 x64",
+        "OSReleaseId":  "20H2",
+        "OSBuild":  "19042",
         "HashMD5":  "C5A3813147B1C61AC6DC53B434B9344D"
     },
     {
@@ -1042,11 +1180,13 @@
         "Manufacturer":  "Microsoft",
         "Model":  "Surface Pro 8",
         "Product":  "Surface_Pro_8_for_Business_1983",
-        "Name":  "Microsoft Surface Pro 8 Win11 22000",
+        "Name":  "Microsoft Surface Pro 8 Win11 21H2",
         "PackageID":  "103503",
         "FileName":  "SurfacePro8_Win11_22000_22.113.31419.0.msi",
         "Url":  "https://download.microsoft.com/download/9/1/3/9133dbd3-799a-4766-bb9e-f67697159c02/SurfacePro8_Win11_22000_22.113.31419.0.msi",
         "OSVersion":  "Windows 11 x64",
+        "OSReleaseId":  "21H2",
+        "OSBuild":  "22000",
         "HashMD5":  "A5B3521970C82A4280DB8637E54BC5A3"
     },
     {
@@ -1057,11 +1197,13 @@
         "Manufacturer":  "Microsoft",
         "Model":  "Surface Pro 8",
         "Product":  "Surface_Pro_8_1983",
-        "Name":  "Microsoft Surface Pro 8 Consumer Win10 19042",
+        "Name":  "Microsoft Surface Pro 8 Consumer Win10 20H2",
         "PackageID":  "103503",
         "FileName":  "SurfacePro8_Win10_19042_22.113.31418.0.msi",
         "Url":  "https://download.microsoft.com/download/9/1/3/9133dbd3-799a-4766-bb9e-f67697159c02/SurfacePro8_Win10_19042_22.113.31418.0.msi",
         "OSVersion":  "Windows 10 x64",
+        "OSReleaseId":  "20H2",
+        "OSBuild":  "19042",
         "HashMD5":  "C5A3813147B1C61AC6DC53B434B9344D"
     },
     {
@@ -1072,11 +1214,13 @@
         "Manufacturer":  "Microsoft",
         "Model":  "Surface Pro 8",
         "Product":  "Surface_Pro_8_1983",
-        "Name":  "Microsoft Surface Pro 8 Consumer Win11 22000",
+        "Name":  "Microsoft Surface Pro 8 Consumer Win11 21H2",
         "PackageID":  "103503",
         "FileName":  "SurfacePro8_Win11_22000_22.113.31419.0.msi",
         "Url":  "https://download.microsoft.com/download/9/1/3/9133dbd3-799a-4766-bb9e-f67697159c02/SurfacePro8_Win11_22000_22.113.31419.0.msi",
         "OSVersion":  "Windows 11 x64",
+        "OSReleaseId":  "21H2",
+        "OSBuild":  "22000",
         "HashMD5":  "A5B3521970C82A4280DB8637E54BC5A3"
     },
     {
@@ -1087,11 +1231,13 @@
         "Manufacturer":  "Microsoft",
         "Model":  "Surface Pro 8",
         "Product":  "Surface_Pro_8_for_Business_with_LTE_Advanced_1982",
-        "Name":  "Microsoft Surface Pro 8 LTE Win10 19042",
+        "Name":  "Microsoft Surface Pro 8 LTE Win10 20H2",
         "PackageID":  "103503",
         "FileName":  "SurfacePro8_Win10_19042_22.113.31418.0.msi",
         "Url":  "https://download.microsoft.com/download/9/1/3/9133dbd3-799a-4766-bb9e-f67697159c02/SurfacePro8_Win10_19042_22.113.31418.0.msi",
         "OSVersion":  "Windows 10 x64",
+        "OSReleaseId":  "20H2",
+        "OSBuild":  "19042",
         "HashMD5":  "C5A3813147B1C61AC6DC53B434B9344D"
     },
     {
@@ -1102,11 +1248,13 @@
         "Manufacturer":  "Microsoft",
         "Model":  "Surface Pro 8",
         "Product":  "Surface_Pro_8_for_Business_with_LTE_Advanced_1982",
-        "Name":  "Microsoft Surface Pro 8 LTE Win11 22000",
+        "Name":  "Microsoft Surface Pro 8 LTE Win11 21H2",
         "PackageID":  "103503",
         "FileName":  "SurfacePro8_Win11_22000_22.113.31419.0.msi",
         "Url":  "https://download.microsoft.com/download/9/1/3/9133dbd3-799a-4766-bb9e-f67697159c02/SurfacePro8_Win11_22000_22.113.31419.0.msi",
         "OSVersion":  "Windows 11 x64",
+        "OSReleaseId":  "21H2",
+        "OSBuild":  "22000",
         "HashMD5":  "A5B3521970C82A4280DB8637E54BC5A3"
     },
     {
@@ -1117,11 +1265,13 @@
         "Manufacturer":  "Microsoft",
         "Model":  "Surface Pro 9",
         "Product":  "Surface_Pro_9_2038",
-        "Name":  "Microsoft Surface Pro 9 Consumer Win10 19044",
+        "Name":  "Microsoft Surface Pro 9 Consumer Win10 21H2",
         "PackageID":  "104680",
         "FileName":  "SurfacePro9_Win10_19044_22.101.15507.0.msi",
         "Url":  "https://download.microsoft.com/download/e/9/a/e9a35d1b-7b4c-48d4-8619-5301d4c09f65/SurfacePro9_Win10_19044_22.101.15507.0.msi",
         "OSVersion":  "Windows 10 x64",
+        "OSReleaseId":  "21H2",
+        "OSBuild":  "19044",
         "HashMD5":  "9CE1903CC01677A5DA996DAC25173352"
     },
     {
@@ -1132,11 +1282,13 @@
         "Manufacturer":  "Microsoft",
         "Model":  "Surface Pro 9",
         "Product":  "Surface_Pro_9_2038",
-        "Name":  "Microsoft Surface Pro 9 Consumer Win11 22621",
+        "Name":  "Microsoft Surface Pro 9 Consumer Win11 22H2",
         "PackageID":  "104680",
         "FileName":  "SurfacePro9_Win11_22621_22.101.15506.0.msi",
         "Url":  "https://download.microsoft.com/download/e/9/a/e9a35d1b-7b4c-48d4-8619-5301d4c09f65/SurfacePro9_Win11_22621_22.101.15506.0.msi",
         "OSVersion":  "Windows 11 x64",
+        "OSReleaseId":  "22H2",
+        "OSBuild":  "22621",
         "HashMD5":  "B9686896D71230FFFA75DDB54CFF7489"
     },
     {
@@ -1147,11 +1299,13 @@
         "Manufacturer":  "Microsoft",
         "Model":  "Surface Pro 9",
         "Product":  "Surface_Pro_9_for_Business_2038",
-        "Name":  "Microsoft Surface Pro 9 Commercial Win10 19044",
+        "Name":  "Microsoft Surface Pro 9 Commercial Win10 21H2",
         "PackageID":  "104680",
         "FileName":  "SurfacePro9_Win10_19044_22.101.15507.0.msi",
         "Url":  "https://download.microsoft.com/download/e/9/a/e9a35d1b-7b4c-48d4-8619-5301d4c09f65/SurfacePro9_Win10_19044_22.101.15507.0.msi",
         "OSVersion":  "Windows 10 x64",
+        "OSReleaseId":  "21H2",
+        "OSBuild":  "19044",
         "HashMD5":  "9CE1903CC01677A5DA996DAC25173352"
     },
     {
@@ -1162,11 +1316,13 @@
         "Manufacturer":  "Microsoft",
         "Model":  "Surface Pro 9",
         "Product":  "Surface_Pro_9_for_Business_2038",
-        "Name":  "Microsoft Surface Pro 9 Commercial Win11 22621",
+        "Name":  "Microsoft Surface Pro 9 Commercial Win11 22H2",
         "PackageID":  "104680",
         "FileName":  "SurfacePro9_Win11_22621_22.101.15506.0.msi",
         "Url":  "https://download.microsoft.com/download/e/9/a/e9a35d1b-7b4c-48d4-8619-5301d4c09f65/SurfacePro9_Win11_22621_22.101.15506.0.msi",
         "OSVersion":  "Windows 11 x64",
+        "OSReleaseId":  "22H2",
+        "OSBuild":  "22621",
         "HashMD5":  "B9686896D71230FFFA75DDB54CFF7489"
     },
     {
@@ -1177,11 +1333,13 @@
         "Manufacturer":  "Microsoft",
         "Model":  "Surface Pro 9",
         "Product":  "Surface_Pro_9_With_5G_1997",
-        "Name":  "Microsoft Surface Pro 9 5G US Win10 19044",
+        "Name":  "Microsoft Surface Pro 9 5G US Win10 21H2",
         "PackageID":  "104680",
         "FileName":  "SurfacePro9_Win10_19044_22.101.15507.0.msi",
         "Url":  "https://download.microsoft.com/download/e/9/a/e9a35d1b-7b4c-48d4-8619-5301d4c09f65/SurfacePro9_Win10_19044_22.101.15507.0.msi",
         "OSVersion":  "Windows 10 x64",
+        "OSReleaseId":  "21H2",
+        "OSBuild":  "19044",
         "HashMD5":  "9CE1903CC01677A5DA996DAC25173352"
     },
     {
@@ -1192,11 +1350,13 @@
         "Manufacturer":  "Microsoft",
         "Model":  "Surface Pro 9",
         "Product":  "Surface_Pro_9_With_5G_1997",
-        "Name":  "Microsoft Surface Pro 9 5G US Win11 22621",
+        "Name":  "Microsoft Surface Pro 9 5G US Win11 22H2",
         "PackageID":  "104680",
         "FileName":  "SurfacePro9_Win11_22621_22.101.15506.0.msi",
         "Url":  "https://download.microsoft.com/download/e/9/a/e9a35d1b-7b4c-48d4-8619-5301d4c09f65/SurfacePro9_Win11_22621_22.101.15506.0.msi",
         "OSVersion":  "Windows 11 x64",
+        "OSReleaseId":  "22H2",
+        "OSBuild":  "22621",
         "HashMD5":  "B9686896D71230FFFA75DDB54CFF7489"
     },
     {
@@ -1207,11 +1367,13 @@
         "Manufacturer":  "Microsoft",
         "Model":  "Surface Pro 9",
         "Product":  "Surface_Pro_9_With_5G_1996",
-        "Name":  "Microsoft Surface Pro 9 5G ROW Win10 19044",
+        "Name":  "Microsoft Surface Pro 9 5G ROW Win10 21H2",
         "PackageID":  "104680",
         "FileName":  "SurfacePro9_Win10_19044_22.101.15507.0.msi",
         "Url":  "https://download.microsoft.com/download/e/9/a/e9a35d1b-7b4c-48d4-8619-5301d4c09f65/SurfacePro9_Win10_19044_22.101.15507.0.msi",
         "OSVersion":  "Windows 10 x64",
+        "OSReleaseId":  "21H2",
+        "OSBuild":  "19044",
         "HashMD5":  "9CE1903CC01677A5DA996DAC25173352"
     },
     {
@@ -1222,11 +1384,13 @@
         "Manufacturer":  "Microsoft",
         "Model":  "Surface Pro 9",
         "Product":  "Surface_Pro_9_With_5G_1996",
-        "Name":  "Microsoft Surface Pro 9 5G ROW Win11 22621",
+        "Name":  "Microsoft Surface Pro 9 5G ROW Win11 22H2",
         "PackageID":  "104680",
         "FileName":  "SurfacePro9_Win11_22621_22.101.15506.0.msi",
         "Url":  "https://download.microsoft.com/download/e/9/a/e9a35d1b-7b4c-48d4-8619-5301d4c09f65/SurfacePro9_Win11_22621_22.101.15506.0.msi",
         "OSVersion":  "Windows 11 x64",
+        "OSReleaseId":  "22H2",
+        "OSBuild":  "22621",
         "HashMD5":  "B9686896D71230FFFA75DDB54CFF7489"
     },
     {
@@ -1237,11 +1401,13 @@
         "Manufacturer":  "Microsoft",
         "Model":  "Surface Studio",
         "Product":  "Surface_Studio",
-        "Name":  "Microsoft Surface Studio Win10 19041",
+        "Name":  "Microsoft Surface Studio Win10 2004",
         "PackageID":  "54311",
         "FileName":  "SurfaceStudio_Win10_19041_21.093.33210.0.msi",
         "Url":  "https://download.microsoft.com/download/4/5/2/452A1A18-1584-423C-A2D0-D76249EA989A/SurfaceStudio_Win10_19041_21.093.33210.0.msi",
         "OSVersion":  "Windows 10 x64",
+        "OSReleaseId":  "2004",
+        "OSBuild":  "19041",
         "HashMD5":  "E5B01B9C59A7C66113BF22C1F35EC77"
     },
     {
@@ -1252,11 +1418,13 @@
         "Manufacturer":  "Microsoft",
         "Model":  "Surface Studio 2",
         "Product":  "Surface_Studio_2_1707_Commercial",
-        "Name":  "Microsoft Surface Studio 2 Win10 19041",
+        "Name":  "Microsoft Surface Studio 2 Win10 2004",
         "PackageID":  "57593",
         "FileName":  "SurfaceStudio2_Win10_19041_22.020.2939.0.msi",
         "Url":  "https://download.microsoft.com/download/2/E/A/2EA15C93-3AEE-4627-A6B9-B2906A1AD192/SurfaceStudio2_Win10_19041_22.020.2939.0.msi",
         "OSVersion":  "Windows 10 x64",
+        "OSReleaseId":  "2004",
+        "OSBuild":  "19041",
         "HashMD5":  "DE4ADCB454A0A329465D3C1D1E8"
     },
     {
@@ -1267,11 +1435,13 @@
         "Manufacturer":  "Microsoft",
         "Model":  "Surface Studio 2+",
         "Product":  "Surface_Studio_2+_2028",
-        "Name":  "Microsoft Surface Studio 2+ Win11 22621",
+        "Name":  "Microsoft Surface Studio 2+ Win11 22H2",
         "PackageID":  "104681",
         "FileName":  "SurfaceStudio2+_Win11_22621_22.103.32476.0.msi",
         "Url":  "https://download.microsoft.com/download/8/d/9/8d9ebddf-5509-4162-877a-daa10bba4e12/SurfaceStudio2+_Win11_22621_22.103.32476.0.msi",
         "OSVersion":  "Windows 11 x64",
+        "OSReleaseId":  "22H2",
+        "OSBuild":  "22621",
         "HashMD5":  "E3B88DBF1143CA4A920C2475A3674FF"
     }
 ]

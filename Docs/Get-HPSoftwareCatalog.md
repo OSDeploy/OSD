@@ -1,23 +1,23 @@
 ---
 external help file: OSD-help.xml
 Module Name: OSD
-online version: https://osd.osdeploy.com
+online version: https://github.com/OSDeploy/OSD/tree/master/Docs
 schema: 2.0.0
 ---
 
-# Get-CatalogDellDriver
+# Get-HPSoftwareCatalog
 
 ## SYNOPSIS
-Returns the Driver Component of the Dell System Catalog
+Returns the Software Component of the HP System Catalog
 
 ## SYNTAX
 
 ```
-Get-CatalogDellDriver [-Compatible] [<CommonParameters>]
+Get-HPSoftwareCatalog [-Compatible] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-Returns the Driver Component of the Dell System Catalog
+Returns the Software Component of the HP System Catalog
 
 ## EXAMPLES
 
@@ -31,8 +31,8 @@ PS C:\> {{ Add example code here }}
 ## PARAMETERS
 
 ### -Compatible
-If you have a Dell System, this will filter the results based on your
-ComputerSystem SystemSKUNumber
+If you have a HP System, this will filter the results based on your
+Baseboard Product value
 
 ```yaml
 Type: SwitchParameter
@@ -57,5 +57,5 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## RELATED LINKS
 
-[https://osd.osdeploy.com](https://osd.osdeploy.com)
+[https://github.com/OSDeploy/OSD/tree/master/Docs](https://github.com/OSDeploy/OSD/tree/master/Docs)
 

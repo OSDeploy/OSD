@@ -1,23 +1,23 @@
 ---
 external help file: OSD-help.xml
 Module Name: OSD
-online version: https://osd.osdeploy.com
+online version: https://github.com/OSDeploy/OSD/tree/master/Docs
 schema: 2.0.0
 ---
 
-# Get-CatalogDellFirmware
+# Get-DellOSDDriversCatalog
 
 ## SYNOPSIS
-Returns the Firmware Component of the Dell System Catalog
+Returns a PowerShell Object of the Dell Model Driver Packs
 
 ## SYNTAX
 
 ```
-Get-CatalogDellFirmware [-Compatible] [<CommonParameters>]
+Get-DellOSDDriversCatalog [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-Returns the Firmware Component of the Dell System Catalog
+Returns a PowerShell Object of the Dell Model Driver Packs by parsing the Catalog at http://downloads.dell.com/catalog/DriverPackCatalog.cab"
 
 ## EXAMPLES
 
@@ -30,22 +30,6 @@ PS C:\> {{ Add example code here }}
 
 ## PARAMETERS
 
-### -Compatible
-If you have a Dell System, this will filter the results based on your
-ComputerSystem SystemSKUNumber
-
-```yaml
-Type: SwitchParameter
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: Named
-Default value: False
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
 ### CommonParameters
 This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see [about_CommonParameters](http://go.microsoft.com/fwlink/?LinkID=113216).
 
@@ -57,5 +41,5 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## RELATED LINKS
 
-[https://osd.osdeploy.com](https://osd.osdeploy.com)
+[https://github.com/OSDeploy/OSD/tree/master/Docs](https://github.com/OSDeploy/OSD/tree/master/Docs)
 

@@ -8,7 +8,7 @@ schema: 2.0.0
 # Get-LenovoDriverPack
 
 ## SYNOPSIS
-{{ Fill in the Synopsis }}
+Returns the Lenovo DriverPacks
 
 ## SYNTAX
 
@@ -17,7 +17,7 @@ Get-LenovoDriverPack [[-DownloadPath] <String>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-{{ Fill in the Description }}
+Returns the Lenovo DriverPacks
 
 ## EXAMPLES
 
@@ -31,7 +31,7 @@ PS C:\> {{ Add example code here }}
 ## PARAMETERS
 
 ### -DownloadPath
-{{ Fill DownloadPath Description }}
+Specifies a download path for matching results displayed in Out-GridView
 
 ```yaml
 Type: String
@@ -39,7 +39,7 @@ Parameter Sets: (All)
 Aliases:
 
 Required: False
-Position: 0
+Position: 1
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -50,11 +50,11 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## INPUTS
 
-### None
-
 ## OUTPUTS
 
-### System.Object
 ## NOTES
 
 ## RELATED LINKS
+
+[https://github.com/OSDeploy/OSD/tree/master/Docs](https://github.com/OSDeploy/OSD/tree/master/Docs)
+

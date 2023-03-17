@@ -1,11 +1,11 @@
 ---
 external help file: OSD-help.xml
 Module Name: OSD
-online version: https://osd.osdeploy.com
+online version: https://github.com/OSDeploy/OSD/tree/master/Docs
 schema: 2.0.0
 ---
 
-# Get-OSDCatalogHPSystem
+# Get-HPSystemCatalog
 
 ## SYNOPSIS
 Converts the HP Client Catalog for Microsoft System Center Product to a PowerShell Object
@@ -13,7 +13,8 @@ Converts the HP Client Catalog for Microsoft System Center Product to a PowerShe
 ## SYNTAX
 
 ```
-Get-OSDCatalogHPSystem [[-DownloadPath] <String>] [-Compatible] [[-Component] <String>] [<CommonParameters>]
+Get-HPSystemCatalog [[-DownloadPath] <String>] [-Compatible] [[-Component] <String>] [-Online]
+ [-UpdateModuleCatalog] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -24,26 +25,26 @@ Requires Internet Access to download HpCatalogForSms.latest.cab
 
 ### EXAMPLE 1
 ```
-Get-OSDCatalogHPSystem
+Get-HPSystemCatalog
 Don't do this, you will get an almost endless list
 ```
 
 ### EXAMPLE 2
 ```
-$Results = Get-OSDCatalogHPSystem
+$Results = Get-HPSystemCatalog
 Yes do this.  Save it in a Variable
 ```
 
 ### EXAMPLE 3
 ```
-Get-OSDCatalogHPSystem -Component BIOS | Out-GridView
+Get-HPSystemCatalog -Component BIOS | Out-GridView
 Displays all the HP BIOS updates in GridView
 ```
 
 ## PARAMETERS
 
 ### -DownloadPath
-{{ Fill DownloadPath Description }}
+Specifies a download path for matching results displayed in Out-GridView
 
 ```yaml
 Type: String
@@ -58,8 +59,7 @@ Accept wildcard characters: False
 ```
 
 ### -Compatible
-If you have a HP System, this will filter the results based on your
-ComputerSystem Product (Win32_BaseBoard Product)
+Limits the results to match the current system
 
 ```yaml
 Type: SwitchParameter
@@ -74,12 +74,7 @@ Accept wildcard characters: False
 ```
 
 ### -Component
-Filter the results based on these Components:
-Software
-Driver
-Firmware
-Accessories Firmware and Driver
-BIOS
+Limits the results to a specified component
 
 ```yaml
 Type: String
@@ -89,6 +84,36 @@ Aliases:
 Required: False
 Position: 2
 Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -Online
+Checks for the latest Online version
+
+```yaml
+Type: SwitchParameter
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: False
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -UpdateModuleCatalog
+Updates the OSD Module Offline Catalog
+
+```yaml
+Type: SwitchParameter
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: False
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
@@ -104,5 +129,5 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## RELATED LINKS
 
-[https://osd.osdeploy.com](https://osd.osdeploy.com)
+[https://github.com/OSDeploy/OSD/tree/master/Docs](https://github.com/OSDeploy/OSD/tree/master/Docs)
 

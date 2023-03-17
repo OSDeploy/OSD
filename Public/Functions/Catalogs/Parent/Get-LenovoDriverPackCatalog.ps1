@@ -104,7 +104,8 @@ function Get-LenovoDriverPackCatalog {
     #   UseCatalog Raw
     #=================================================
     if ($UseCatalog -eq 'Raw') {
-        Write-Verbose "Reading the Raw Catalog at $RawCatalogFile"	
+        Write-Verbose "Reading the Raw Catalog at $RawCatalogFile"
+        Write-Warning "Building Catalog content, please wait ..."
         [xml]$XmlCatalogContent = Get-Content -Path $RawCatalogFile -Raw
 
         $ModelList = $XmlCatalogContent.ModelList.Model

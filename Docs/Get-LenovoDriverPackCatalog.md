@@ -1,23 +1,24 @@
 ---
 external help file: OSD-help.xml
 Module Name: OSD
-online version: https://osd.osdeploy.com
+online version: https://github.com/OSDeploy/OSD/tree/master/Docs
 schema: 2.0.0
 ---
 
-# Get-OSDCatalogDellDriverPack
+# Get-LenovoDriverPackCatalog
 
 ## SYNOPSIS
-Returns the Dell DriverPacks downloads
+Builds the Lenovo DriverPack Catalog
 
 ## SYNTAX
 
 ```
-Get-OSDCatalogDellDriverPack [-Compatible] [[-DownloadPath] <String>] [-Force] [-TestUrl] [<CommonParameters>]
+Get-LenovoDriverPackCatalog [-Compatible] [[-DownloadPath] <String>] [-Online] [-UpdateModuleCatalog]
+ [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-Returns the Dell DriverPacks downloads
+Builds the Lenovo DriverPack Catalog
 
 ## EXAMPLES
 
@@ -31,7 +32,7 @@ PS C:\> {{ Add example code here }}
 ## PARAMETERS
 
 ### -Compatible
-Filters results based on your current Product
+Limits the results to match the current system
 
 ```yaml
 Type: SwitchParameter
@@ -46,7 +47,7 @@ Accept wildcard characters: False
 ```
 
 ### -DownloadPath
-{{ Fill DownloadPath Description }}
+Specifies a download path for matching results displayed in Out-GridView
 
 ```yaml
 Type: String
@@ -60,8 +61,8 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -Force
-{{ Fill Force Description }}
+### -Online
+Checks for the latest Online version
 
 ```yaml
 Type: SwitchParameter
@@ -75,8 +76,8 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -TestUrl
-{{ Fill TestUrl Description }}
+### -UpdateModuleCatalog
+Updates the OSD Module Offline Catalog
 
 ```yaml
 Type: SwitchParameter
@@ -101,5 +102,5 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## RELATED LINKS
 
-[https://osd.osdeploy.com](https://osd.osdeploy.com)
+[https://github.com/OSDeploy/OSD/tree/master/Docs](https://github.com/OSDeploy/OSD/tree/master/Docs)
 
