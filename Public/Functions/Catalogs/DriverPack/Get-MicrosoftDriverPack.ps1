@@ -13,20 +13,33 @@ https://github.com/OSDeploy/OSD/tree/master/Docs
 function Get-MicrosoftDriverPack {
     [CmdletBinding()]
     param (
+        #Limits the results to match the current system
+        [System.Management.Automation.SwitchParameter]
+        $Compatible,
+
         #Specifies a download path for matching results displayed in Out-GridView
         [System.String]
         $DownloadPath
     )
     #=================================================
-    #   Get-MicrosoftDriverPackCatalog
+    #   Import Catalog
     #=================================================
-    $Results = Get-MicrosoftDriverPackCatalog | `
+    $Results = Get-Content -Path (Join-Path (Get-Module -Name OSD -ListAvailable | Sort-Object Version -Descending | Select-Object -First 1).ModuleBase "Catalogs\MicrosoftDriverPackCatalog.json") | ConvertFrom-Json
+    $Results = $Results | `
     Select-Object CatalogVersion, Status, ReleaseDate, Manufacturer, Model, Product, Name, PackageID, FileName, `
     @{Name='DriverPackUrl';Expression={($_.Url)}}, `
     @{Name='DriverPackOS';Expression={($_.OSVersion)}}, `
     OSReleaseId,OSBuild,HashMD5
 
     $Results = $Results | Sort-Object -Property Model
+    #=================================================
+    #   Compatible
+    #=================================================
+    if ($PSBoundParameters.ContainsKey('Compatible')) {
+        $MyComputerProduct = Get-MyComputerProduct
+        Write-Verbose "Filtering Catalog for items compatible with Product $MyComputerProduct"
+        $Results = $Results | Where-Object {$_.Product -contains $MyComputerProduct}
+    }
     #=================================================
     #   DownloadPath
     #=================================================

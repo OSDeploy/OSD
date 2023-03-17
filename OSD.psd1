@@ -123,8 +123,6 @@
         'Get-HPPlatformCatalog',
         'Get-HPSystemCatalog',
         'Get-LenovoBiosCatalog',
-        'Get-LenovoDriverPackCatalog',
-        'Get-MicrosoftDriverPackCatalog',
         'Get-OSDClass',
         'Get-OSDCloudDriverPack',
         'Get-OSDCloudDriverPacks',
@@ -301,7 +299,9 @@
         'Get-IntelEthernetDriverPack',
         'Get-IntelGraphicsDriverPack',
         'Get-IntelRadeonDriverPack',
-        'Get-IntelWirelessDriverPack'
+        'Get-IntelWirelessDriverPack',
+        'Update-LenovoDriverPackCatalog',
+        'Update-MicrosoftDriverPackCatalog'
     )
     CmdletsToExport = @()
     VariablesToExport = @()

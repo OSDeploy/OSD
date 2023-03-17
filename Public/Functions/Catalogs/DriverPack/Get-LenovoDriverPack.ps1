@@ -13,20 +13,24 @@ https://github.com/OSDeploy/OSD/tree/master/Docs
 function Get-LenovoDriverPack {
     [CmdletBinding()]
     param (
+        #Limits the results to match the current system
+        [System.Management.Automation.SwitchParameter]
+        $Compatible,
+
         #Specifies a download path for matching results displayed in Out-GridView
         [System.String]
         $DownloadPath
     )
     #=================================================
-    #   Get Catalog
+    #   Import Catalog
     #=================================================
-    $Results = Get-LenovoDriverPackCatalog | `
-    Select-Object CatalogVersion, Status, ReleaseDate, Manufacturer, Model, `
-    @{Name='Product';Expression={([array]$_.Product)}}, `
-    Name, PackageID, FileName, `
-    @{Name='DriverPackUrl';Expression={($_.Url)}}, `
-    @{Name='DriverPackOS';Expression={($null)}}, `
-    OSReleaseId,OSBuild,HashMD5
+    $Results = Get-Content -Path (Join-Path (Get-Module -Name OSD -ListAvailable | Sort-Object Version -Descending | Select-Object -First 1).ModuleBase "Catalogs\LenovoDriverPackCatalog.json") | ConvertFrom-Json
+    $Results = $Results | Select-Object CatalogVersion, Status, ReleaseDate, Manufacturer, Model, `
+        @{Name='Product';Expression={([array]$_.Product)}}, `
+        Name, PackageID, FileName, `
+        @{Name='DriverPackUrl';Expression={($_.Url)}}, `
+        @{Name='DriverPackOS';Expression={($null)}}, `
+        OSReleaseId,OSBuild,HashMD5
 
     foreach ($Result in $Results) {
         if ($Result.FileName -match 'w11') {
@@ -38,6 +42,14 @@ function Get-LenovoDriverPack {
     }
 
     $Results = $Results | Sort-Object -Property Model
+    #=================================================
+    #   Compatible
+    #=================================================
+    if ($PSBoundParameters.ContainsKey('Compatible')) {
+        $MyComputerProduct = Get-MyComputerProduct
+        Write-Verbose "Filtering Catalog for items compatible with Product $MyComputerProduct"
+        $Results = $Results | Where-Object {$_.Product -contains $MyComputerProduct}
+    }
     #=================================================
     #   DownloadPath
     #=================================================
