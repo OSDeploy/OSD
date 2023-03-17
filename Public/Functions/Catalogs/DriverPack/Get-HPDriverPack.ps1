@@ -1,9 +1,9 @@
 <#
 .SYNOPSIS
-Returns the HP DriverPacks
+Returns the HP DriverPack Catalog
 
 .DESCRIPTION
-Returns the HP DriverPacks
+Returns the HP DriverPack Catalog
 
 .LINK
 https://github.com/OSDeploy/OSD/tree/master/Docs
@@ -13,14 +13,18 @@ https://github.com/OSDeploy/OSD/tree/master/Docs
 function Get-HPDriverPack {
     [CmdletBinding()]
     param (
+        #Limits the results to match the current system
+        [System.Management.Automation.SwitchParameter]
+        $Compatible,
+
         #Specifies a download path for matching results displayed in Out-GridView
         [System.String]
         $DownloadPath
     )
     #=================================================
-    #   Get Catalog
+    #   Import Catalog
     #=================================================
-    $Results = Get-HPDriverPackCatalog | `
+    $Results = Import-Clixml -Path "$($MyInvocation.MyCommand.Module.ModuleBase)\Catalogs\HPDriverPackCatalog.xml" | `
     Select-Object CatalogVersion, Status, ReleaseDate, Manufacturer, Model, `
     @{Name='Product';Expression={([array]$_.SystemId)}}, `
     @{Name='Name';Expression={($_.Name)}}, `
@@ -29,7 +33,9 @@ function Get-HPDriverPack {
     @{Name='DriverPackUrl';Expression={($_.Url)}}, `
     @{Name='DriverPackOS';Expression={($_.OSName)}}, `
     OSReleaseId,OSBuild,@{Name='HashMD5';Expression={($_.MD5)}}
-
+    #=================================================
+    #   Modify Results
+    #=================================================
     foreach ($Result in $Results) {
         if ($Result.DriverPackOS -match 'Windows 11') {
             $Result.DriverPackOS = 'Windows 11 x64'
@@ -41,10 +47,17 @@ function Get-HPDriverPack {
 
     $Results = $Results | Sort-Object -Property Model
     #=================================================
+    #   Filter Compatible
+    #=================================================
+    if ($PSBoundParameters.ContainsKey('Compatible')) {
+        $MyComputerProduct = Get-MyComputerProduct
+        Write-Verbose "Filtering Catalog for items compatible with Product $MyComputerProduct"
+        $Results = $Results | Where-Object {$_.Product -contains $MyComputerProduct}
+    }
+    #=================================================
     #   DownloadPath
     #=================================================
     if ($PSBoundParameters.ContainsKey('DownloadPath')) {
-
         if (Test-Path $DownloadPath) {
             $DownloadedFiles = Get-ChildItem -Path $DownloadPath *.* -Recurse -File | Select-Object -ExpandProperty Name
             foreach ($Item in $Results) {

@@ -1,9 +1,9 @@
 <#
 .SYNOPSIS
-Returns the Lenovo DriverPacks
+Returns the Lenovo DriverPack Catalog
 
 .DESCRIPTION
-Returns the Lenovo DriverPacks
+Returns the Lenovo DriverPack Catalog
 
 .LINK
 https://github.com/OSDeploy/OSD/tree/master/Docs
@@ -24,14 +24,16 @@ function Get-LenovoDriverPack {
     #=================================================
     #   Import Catalog
     #=================================================
-    $Results = Get-Content -Path (Join-Path (Get-Module -Name OSD -ListAvailable | Sort-Object Version -Descending | Select-Object -First 1).ModuleBase "Catalogs\LenovoDriverPackCatalog.json") | ConvertFrom-Json
-    $Results = $Results | Select-Object CatalogVersion, Status, ReleaseDate, Manufacturer, Model, `
-        @{Name='Product';Expression={([array]$_.Product)}}, `
-        Name, PackageID, FileName, `
-        @{Name='DriverPackUrl';Expression={($_.Url)}}, `
-        @{Name='DriverPackOS';Expression={($null)}}, `
-        OSReleaseId,OSBuild,HashMD5
-
+    $Results = Import-Clixml -Path "$($MyInvocation.MyCommand.Module.ModuleBase)\Catalogs\LenovoDriverPackCatalog.xml" | `
+    Select-Object CatalogVersion, Status, ReleaseDate, Manufacturer, Model, `
+    @{Name='Product';Expression={([array]$_.Product)}}, `
+    Name, PackageID, FileName, `
+    @{Name='DriverPackUrl';Expression={($_.Url)}}, `
+    @{Name='DriverPackOS';Expression={($null)}}, `
+    OSReleaseId,OSBuild,HashMD5
+    #=================================================
+    #   Modify Results
+    #=================================================
     foreach ($Result in $Results) {
         if ($Result.FileName -match 'w11') {
             $Result.DriverPackOS = 'Windows 11 x64'
@@ -43,7 +45,7 @@ function Get-LenovoDriverPack {
 
     $Results = $Results | Sort-Object -Property Model
     #=================================================
-    #   Compatible
+    #   Filter Compatible
     #=================================================
     if ($PSBoundParameters.ContainsKey('Compatible')) {
         $MyComputerProduct = Get-MyComputerProduct
@@ -54,7 +56,6 @@ function Get-LenovoDriverPack {
     #   DownloadPath
     #=================================================
     if ($PSBoundParameters.ContainsKey('DownloadPath')) {
-
         if (Test-Path $DownloadPath) {
             $DownloadedFiles = Get-ChildItem -Path $DownloadPath *.* -Recurse -File | Select-Object -ExpandProperty Name
             foreach ($Item in $Results) {

@@ -13,14 +13,18 @@ https://github.com/OSDeploy/OSD/tree/master/Docs
 function Get-DellDriverPack {
     [CmdletBinding()]
     param (
+        #Limits the results to match the current system
+        [System.Management.Automation.SwitchParameter]
+        $Compatible,
+
         #Specifies a download path for matching results displayed in Out-GridView
         [System.String]
         $DownloadPath
     )
     #=================================================
-    #   Get Catalog
+    #   Import Catalog
     #=================================================
-    $Results = Get-DellDriverPackCatalog | `
+    $Results = Import-Clixml -Path "$($MyInvocation.MyCommand.Module.ModuleBase)\Catalogs\DellDriverPackCatalog.xml" | `
     Select-Object CatalogVersion, Status, ReleaseDate, Manufacturer, Model, `
     @{Name='Product';Expression={([array]$_.SystemID)}}, `
     Name, `
@@ -29,13 +33,22 @@ function Get-DellDriverPack {
     @{Name='DriverPackUrl';Expression={($_.Url)}}, `
     @{Name='DriverPackOS';Expression={($_.SupportedOS)}}, `
     OSReleaseId,OSBuild,HashMD5
-    
+    #=================================================
+    #   Modify Results
+    #=================================================
     $Results = $Results | Sort-Object -Property Model
+    #=================================================
+    #   Filter Compatible
+    #=================================================
+    if ($PSBoundParameters.ContainsKey('Compatible')) {
+        $MyComputerProduct = Get-MyComputerProduct
+        Write-Verbose "Filtering Catalog for items compatible with Product $MyComputerProduct"
+        $Results = $Results | Where-Object {$_.Product -contains $MyComputerProduct}
+    }
     #=================================================
     #   DownloadPath
     #=================================================
     if ($PSBoundParameters.ContainsKey('DownloadPath')) {
-
         if (Test-Path $DownloadPath) {
             $DownloadedFiles = Get-ChildItem -Path $DownloadPath *.* -Recurse -File | Select-Object -ExpandProperty Name
             foreach ($Item in $Results) {

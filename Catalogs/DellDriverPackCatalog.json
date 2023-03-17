@@ -14128,7 +14128,7 @@
     },
     {
         "CatalogVersion":  "23.03.01",
-        "Status":  "Failed",
+        "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "23.03.06",
         "Manufacturer":  "Dell",
@@ -14164,7 +14164,7 @@
     },
     {
         "CatalogVersion":  "23.03.01",
-        "Status":  "Failed",
+        "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "23.03.06",
         "Manufacturer":  "Dell",
@@ -14524,7 +14524,7 @@
     },
     {
         "CatalogVersion":  "23.03.01",
-        "Status":  "Failed",
+        "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "23.03.06",
         "Manufacturer":  "Dell",
@@ -14560,7 +14560,7 @@
     },
     {
         "CatalogVersion":  "23.03.01",
-        "Status":  "Failed",
+        "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "23.03.06",
         "Manufacturer":  "Dell",

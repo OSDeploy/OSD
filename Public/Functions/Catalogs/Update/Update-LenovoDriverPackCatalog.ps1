@@ -1,9 +1,9 @@
 <#
 .SYNOPSIS
-Imports the Lenovo DriverPack Catalog
+Builds the Lenovo DriverPack Catalog
 
 .DESCRIPTION
-Imports the Lenovo DriverPack Catalog
+Builds the Lenovo DriverPack Catalog
 
 .LINK
 https://github.com/OSDeploy/OSD/tree/master/Docs
@@ -13,10 +13,6 @@ https://github.com/OSDeploy/OSD/tree/master/Docs
 function Update-LenovoDriverPackCatalog {
     [CmdletBinding()]
     param (
-        #Slower process that tests links and gets the DriverPack ReleaseDate
-        [System.Management.Automation.SwitchParameter]
-        $ExtendedInfo,
-
         #Updates the OSD Module Offline Catalog
         [System.Management.Automation.SwitchParameter]
         $UpdateModule
@@ -24,9 +20,13 @@ function Update-LenovoDriverPackCatalog {
     #=================================================
     #   Defaults
     #=================================================
-    $OfflineCatalogName = 'LenovoDriverPackCatalog.xml'
     $OnlineCatalogName = 'catalogv2.xml'
     $OnlineCatalogUri = 'https://download.lenovo.com/cdrt/td/catalogv2.xml'
+
+    $OfflineCatalogName = 'LenovoDriverPackCatalog.xml'
+
+    $ModuleCatalogXml      = "$($MyInvocation.MyCommand.Module.ModuleBase)\Catalogs\LenovoDriverPackCatalog.xml"
+    $ModuleCatalogJson      = "$($MyInvocation.MyCommand.Module.ModuleBase)\Catalogs\LenovoDriverPackCatalog.json"
 
     $UTF8ByteOrderMark      = [System.Text.Encoding]::UTF8.GetString(@(195, 175, 194, 187, 194, 191))
     #=================================================
@@ -39,11 +39,8 @@ function Update-LenovoDriverPackCatalog {
     $RawCatalogFile			= Join-Path $env:TEMP (Join-Path 'OSD' $OnlineCatalogName)
     $RawCatalogCabName  	= [string]($OnlineCatalogUri | Split-Path -Leaf)
     $RawCatalogCabPath 		= Join-Path $env:TEMP (Join-Path 'OSD' $RawCatalogCabName)
-    $TempCatalogFile        = Join-Path $env:TEMP (Join-Path 'OSD' $OfflineCatalogName)
-    $ModuleCatalogXml      = "$($MyInvocation.MyCommand.Module.ModuleBase)\Catalogs\LenovoDriverPackCatalog.xml"
-    $ModuleCatalogJson      = "$($MyInvocation.MyCommand.Module.ModuleBase)\Catalogs\LenovoDriverPackCatalog.json"
     #=================================================
-    #   Test Catalog
+    #   Get Online Catalog
     #=================================================
     try {
         #[xml]$XmlCatalog = $RawDriverPackCatalog -replace "^$UTF8ByteOrderMark"
@@ -59,8 +56,8 @@ function Update-LenovoDriverPackCatalog {
         }
         else {
             Write-Verbose -Verbose "Catalog was NOT downloaded to $RawCatalogFile"
-            Write-Verbose -Verbose "Using Offline Catalog at $ModuleCatalogXml"
-            $UseCatalog = 'Offline'
+            Write-Warning 'Unable to complete'
+            Break
         }
     }
     catch {
@@ -199,43 +196,42 @@ function Update-LenovoDriverPackCatalog {
     }
     $Results = $Results | Sort-Object Name, OSVersion -Descending | Group-Object Name | ForEach-Object {$_.Group | Select-Object -First 1}
     $Results = $Results | Sort-Object Name, OSVersion -Descending
+    #=================================================
+    #   Validate Results
+    #=================================================
+    Write-Warning "Testing each download link, please wait ..."
+    $Results = $Results | Sort-Object Url
+    $LastItem = $null
 
-    #Need to test each of the downloads to see if they are valid
-    if ($ExtendedInfo) {
-        Write-Warning "Testing each download link, please wait ..."
-        $Results = $Results | Sort-Object Url
-        $LastItem = $null
+    foreach ($Item in $Results) {
+        if ($Item.Url -eq $LastItem.Url) {
+            $Item.Status = $LastItem.Status
+            $Item.ReleaseDate = $LastItem.ReleaseDate
+        }
+        else {
+            $Global:DownloadHeaders = $null
+            try {
+                $Global:DownloadHeaders = (Invoke-WebRequest -Method Head -Uri $Item.Url -UseBasicParsing).Headers
+            }
+            catch {
+                Write-Warning "Failed: $($Item.Url)"
+            }
 
-        foreach ($Item in $Results) {
-            if ($Item.Url -eq $LastItem.Url) {
-                $Item.Status = $LastItem.Status
-                $Item.ReleaseDate = $LastItem.ReleaseDate
+            if ($Global:DownloadHeaders) {
+                $Item.ReleaseDate = Get-Date ($Global:DownloadHeaders.'Last-Modified') -Format "yy.MM.dd"
+                Write-Verbose -Verbose "Success: $($Item.Url)"
+                Write-Verbose -Verbose "ReleaseDate: $($Item.ReleaseDate)"
             }
             else {
-                $Global:DownloadHeaders = $null
-                try {
-                    $Global:DownloadHeaders = (Invoke-WebRequest -Method Head -Uri $Item.Url -UseBasicParsing).Headers
-                }
-                catch {
-                    Write-Warning "Failed: $($Item.Url)"
-                }
-
-                if ($Global:DownloadHeaders) {
-                    $Item.ReleaseDate = Get-Date ($Global:DownloadHeaders.'Last-Modified') -Format "yy.MM.dd"
-                    Write-Verbose -Verbose "Success: $($Item.Url)"
-                    Write-Verbose -Verbose "ReleaseDate: $($Item.ReleaseDate)"
-                }
-                else {
-                    $Item.Status = 'Failed'
-                }
+                $Item.Status = 'Failed'
             }
-            $LastItem = $Item
         }
+        $LastItem = $Item
     }
+    #=================================================
+    #   Sort Results
+    #=================================================
     $Results = $Results | Sort-Object Name
-
-    Write-Verbose -Verbose "Exporting to $TempCatalogFile"
-    $Results | Export-Clixml -Path $TempCatalogFile
     #=================================================
     #   UpdateModule
     #=================================================
@@ -246,7 +242,7 @@ function Update-LenovoDriverPackCatalog {
         $Results | ConvertTo-Json | Out-File $ModuleCatalogJson -Encoding ascii -Width 2000 -Force
     }
     #=================================================
-    #   Result
+    #   Complete
     #=================================================
     Write-Verbose -Verbose 'Complete: Results have been stored $Global:LenovoDriverPackCatalog'
     $Global:LenovoDriverPackCatalog = $Results | Sort-Object -Property Name

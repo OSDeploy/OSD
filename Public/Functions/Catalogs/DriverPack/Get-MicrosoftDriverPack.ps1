@@ -1,9 +1,9 @@
 <#
 .SYNOPSIS
-Returns the Microsoft Surface DriverPacks
+Returns the Microsoft Surface DriverPack Catalog
 
 .DESCRIPTION
-Returns the Microsoft Surface DriverPacks
+Returns the Microsoft Surface DriverPack Catalog
 
 .LINK
 https://github.com/OSDeploy/OSD/tree/master/Docs
@@ -24,16 +24,17 @@ function Get-MicrosoftDriverPack {
     #=================================================
     #   Import Catalog
     #=================================================
-    $Results = Get-Content -Path (Join-Path (Get-Module -Name OSD -ListAvailable | Sort-Object Version -Descending | Select-Object -First 1).ModuleBase "Catalogs\MicrosoftDriverPackCatalog.json") | ConvertFrom-Json
-    $Results = $Results | `
+    $Results = Import-Clixml -Path "$($MyInvocation.MyCommand.Module.ModuleBase)\Catalogs\MicrosoftDriverPackCatalog.xml" | `
     Select-Object CatalogVersion, Status, ReleaseDate, Manufacturer, Model, Product, Name, PackageID, FileName, `
     @{Name='DriverPackUrl';Expression={($_.Url)}}, `
     @{Name='DriverPackOS';Expression={($_.OSVersion)}}, `
     OSReleaseId,OSBuild,HashMD5
-
+    #=================================================
+    #   Modify Results
+    #=================================================
     $Results = $Results | Sort-Object -Property Model
     #=================================================
-    #   Compatible
+    #   Filter Compatible
     #=================================================
     if ($PSBoundParameters.ContainsKey('Compatible')) {
         $MyComputerProduct = Get-MyComputerProduct
@@ -44,7 +45,6 @@ function Get-MicrosoftDriverPack {
     #   DownloadPath
     #=================================================
     if ($PSBoundParameters.ContainsKey('DownloadPath')) {
-
         if (Test-Path $DownloadPath) {
             $DownloadedFiles = Get-ChildItem -Path $DownloadPath *.* -Recurse -File | Select-Object -ExpandProperty Name
             foreach ($Item in $Results) {

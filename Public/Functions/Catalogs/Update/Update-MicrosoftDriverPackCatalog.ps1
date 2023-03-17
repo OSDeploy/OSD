@@ -13,10 +13,6 @@ https://github.com/OSDeploy/OSD/tree/master/Docs
 function Update-MicrosoftDriverPackCatalog {
     [CmdletBinding()]
     param (
-        #Slower process that tests links and gets the DriverPack ReleaseDate
-        [System.Management.Automation.SwitchParameter]
-        $ExtendedInfo,
-
         #Updates the OSD Module Offline Catalog
         [System.Management.Automation.SwitchParameter]
         $UpdateModule
@@ -43,6 +39,7 @@ function Update-MicrosoftDriverPackCatalog {
 
     $OnlineCatalogName = 'MicrosoftDriverPackCatalog.json'
     $OnlineBaseUri = 'https://www.microsoft.com/en-us/download/details.aspx?id='
+    $OnlineDownloadUri = 'https://www.microsoft.com/en-us/download/confirmation.aspx?id='
     $OnlineCatalogUri = 'https://support.microsoft.com/en-us/surface/download-drivers-and-firmware-for-surface-09bb2e09-2a4b-cb69-0951-078a7739e120'
 
     $MicrosoftSurfaceModels = Get-Content -Path "$($MyInvocation.MyCommand.Module.ModuleBase)\Catalogs\MicrosoftSurfaceModels.json" -Raw
@@ -57,8 +54,8 @@ function Update-MicrosoftDriverPackCatalog {
     $RawCatalogCabName  	= [string]($OnlineCatalogUri | Split-Path -Leaf)
     $RawCatalogCabPath 		= Join-Path $env:TEMP (Join-Path 'OSD' $RawCatalogCabName)
     $TempCatalogFile        = Join-Path $env:TEMP (Join-Path 'OSD' $OfflineCatalogName)
-    $ModuleCatalogXml       = "$($MyInvocation.MyCommand.Module.ModuleBase)\Catalogs\LenovoDriverPackCatalog.xml"
-    $ModuleCatalogJson      = "$($MyInvocation.MyCommand.Module.ModuleBase)\Catalogs\LenovoDriverPackCatalog.json"
+    $ModuleCatalogXml       = "$($MyInvocation.MyCommand.Module.ModuleBase)\Catalogs\MicrosoftDriverPackCatalog.xml"
+    $ModuleCatalogJson      = "$($MyInvocation.MyCommand.Module.ModuleBase)\Catalogs\MicrosoftDriverPackCatalog.json"
     #=================================================
     #   UseCatalog Cloud
     #=================================================
@@ -67,7 +64,7 @@ function Update-MicrosoftDriverPackCatalog {
 
     $MasterResults = foreach ($Surface in $SurfaceModels) {
         Write-Verbose -Verbose "Processing $($Surface.Name)"
-        $DriverPage = $OnlineBaseUri + $Surface.PackageID
+        $DriverPage = $OnlineDownloadUri + $Surface.PackageID
         $Downloads = (Invoke-WebRequest -Uri $DriverPage).Links
         $Downloads = $Downloads | Where-Object {$_.href -match 'download.microsoft.com'}
         $Downloads = $Downloads | Where-Object {($_.href -match 'Win11') -or ($_.href -match 'Win10')}

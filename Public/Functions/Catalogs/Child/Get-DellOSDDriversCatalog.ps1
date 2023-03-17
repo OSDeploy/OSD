@@ -14,7 +14,8 @@ function Get-DellOSDDriversCatalog {
     #=================================================
     #   DriverPackCatalog
     #=================================================
-    $DriverPackCatalog = Get-DellDriverPackCatalog
+    #$DriverPackCatalog = Get-DellDriverPackCatalog
+    $DriverPackCatalog = Import-Clixml -Path "$($MyInvocation.MyCommand.Module.ModuleBase)\Catalogs\DellDriverPackCatalog.xml"
     #=================================================
     #   ForEach
     #=================================================

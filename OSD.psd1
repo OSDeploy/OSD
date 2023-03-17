@@ -117,9 +117,7 @@
         'Get-MyWindowsCapability',
         'Get-MyWindowsPackage',
         'Get-OSD',
-        'Get-DellDriverPackCatalog',
         'Get-DellSystemCatalog',
-        'Get-HPDriverPackCatalog',
         'Get-HPPlatformCatalog',
         'Get-HPSystemCatalog',
         'Get-LenovoBiosCatalog',
@@ -300,6 +298,8 @@
         'Get-IntelGraphicsDriverPack',
         'Get-IntelRadeonDriverPack',
         'Get-IntelWirelessDriverPack',
+        'Update-DellDriverPackCatalog',
+        'Update-HPDriverPackCatalog',
         'Update-LenovoDriverPackCatalog',
         'Update-MicrosoftDriverPackCatalog'
     )

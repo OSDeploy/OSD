@@ -1,8 +1,8 @@
 Import-Module -Name OSD -Force
-Get-DellDriverPackCatalog -UpdateModuleCatalog -Verbose | OGV
-Get-HPDriverPackCatalog -UpdateModuleCatalog -Verbose | OGV
-Update-LenovoDriverPackCatalog -ExtendedInfo -UpdateModule
-Update-MicrosoftDriverPackCatalog -ExtendedInfo -UpdateModule
+Update-DellDriverPackCatalog -UpdateModuleCatalog
+Update-HPDriverPackCatalog -UpdateModuleCatalog
+Update-LenovoDriverPackCatalog -UpdateModule -ExtendedInfo
+Update-MicrosoftDriverPackCatalog -UpdateModule
 #=================================================
 #   MasterDriverPack.json
 #=================================================
