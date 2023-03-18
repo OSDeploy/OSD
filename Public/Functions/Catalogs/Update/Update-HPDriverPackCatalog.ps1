@@ -1,9 +1,9 @@
 <#
 .SYNOPSIS
-Builds the HP DriverPack Catalog
+Updates the local HP DriverPack Catalog in the OSD Module
 
 .DESCRIPTION
-Builds the HP DriverPack Catalog
+Updates the local HP DriverPack Catalog in the OSD Module
 
 .LINK
 https://github.com/OSDeploy/OSD/tree/master/Docs
@@ -13,9 +13,13 @@ https://github.com/OSDeploy/OSD/tree/master/Docs
 function Update-HPDriverPackCatalog {
     [CmdletBinding()]
     param (
-        #Updates the OSD Module Offline Catalog
+        #Updates the OSD Module Offline Catalog. Requires Admin rights
         [System.Management.Automation.SwitchParameter]
-        $UpdateModule
+        $UpdateModuleCatalog,
+
+        #Verifies that the DriverPack is reachable. This will take some time to complete
+        [System.Management.Automation.SwitchParameter]
+        $Verify
     )
     #=================================================
     #   Custom Defaaults
@@ -40,19 +44,19 @@ function Update-HPDriverPackCatalog {
     #=================================================
     #   Get Online Cloud
     #=================================================
-    Write-Verbose "Source: $OnlineCatalogUri"
-    Write-Verbose "Destination: $RawCatalogCabPath"
+    Write-Verbose -Verbose "Source: $OnlineCatalogUri"
+    Write-Verbose -Verbose "Destination: $RawCatalogCabPath"
     (New-Object System.Net.WebClient).DownloadFile($OnlineCatalogUri, $RawCatalogCabPath)
 
     if (Test-Path $RawCatalogCabPath) {
-        Write-Verbose "Expand: $RawCatalogCabPath"
+        Write-Verbose -Verbose "Expand: $RawCatalogCabPath"
         $null = Expand "$RawCatalogCabPath" "$RawCatalogFile"
 
         if (Test-Path $RawCatalogFile) {
-            Write-Verbose "Using Raw Catalog at $RawCatalogFile"
+            Write-Verbose -Verbose "Using Raw Catalog at $RawCatalogFile"
         }
         else {
-            Write-Verbose "Could not expand $RawCatalogCabPath"
+            Write-Verbose -Verbose "Could not expand $RawCatalogCabPath"
             Write-Warning 'Unable to complete'
             Break
         }
@@ -64,7 +68,7 @@ function Update-HPDriverPackCatalog {
     #=================================================
     #   Read Catalog
     #=================================================
-    Write-Verbose "Reading the Raw Catalog at $RawCatalogFile"
+    Write-Verbose -Verbose "Reading the Raw Catalog at $RawCatalogFile"
     Write-Warning "Building Catalog content, please wait ..."
     [xml]$XmlCatalogContent = Get-Content $RawCatalogFile -ErrorAction Stop
 
@@ -224,23 +228,38 @@ function Update-HPDriverPackCatalog {
         }
     }
     #=================================================
-    #   Validate Results
+    #   Verify DriverPack is reachable
     #=================================================
-    $Results = $Results | Sort-Object Url
-    $PreviousUrl = $null
-    foreach ($Item in $Results) {
-        $CurrentUrl = $Item.Url
-        if ($CurrentUrl -ne $PreviousUrl) {
-            Write-Verbose -Verbose "Testing Download File at $CurrentUrl"
-            try {
-                $DownloadHeaders = (Invoke-WebRequest -Method Head -Uri $CurrentUrl -UseBasicParsing).Headers
+    if ($Verify) {
+        Write-Warning "Testing each download link, please wait..."
+        $Results = $Results | Sort-Object Url
+        $LastDriverPack = $null
+
+        foreach ($CurrentDriverPack in $Results) {
+            if ($CurrentDriverPack.Url -eq $LastDriverPack.Url) {
+                $CurrentDriverPack.Status = $LastDriverPack.Status
+                #$CurrentDriverPack.ReleaseDate = $LastDriverPack.ReleaseDate
             }
-            catch {
-                Write-Warning "Failed: $CurrentUrl"
-                $Item.Status = 'Failed'
+            else {
+                $Global:DownloadHeaders = $null
+                try {
+                    $Global:DownloadHeaders = (Invoke-WebRequest -Method Head -Uri $CurrentDriverPack.Url -UseBasicParsing).Headers
+                }
+                catch {
+                    Write-Warning "Failed: $($CurrentDriverPack.Url)"
+                }
+
+                if ($Global:DownloadHeaders) {
+                    Write-Verbose -Verbose "$($CurrentDriverPack.Url)"
+                    #$CurrentDriverPack.ReleaseDate = Get-Date ($Global:DownloadHeaders.'Last-Modified') -Format "yy.MM.dd"
+                    #Write-Verbose -Verbose "ReleaseDate: $($CurrentDriverPack.ReleaseDate)"
+                }
+                else {
+                    $CurrentDriverPack.Status = 'Failed'
+                }
             }
+            $LastDriverPack = $CurrentDriverPack
         }
-        $PreviousUrl = $CurrentUrl
     }
     #=================================================
     #   Sort Results
@@ -249,7 +268,7 @@ function Update-HPDriverPackCatalog {
     #=================================================
     #   UpdateModule
     #=================================================
-    if ($UpdateModule) {
+    if ($UpdateModuleCatalog) {
         Write-Verbose -Verbose "UpdateModule: Exporting to OSD Module Catalogs at $ModuleCatalogXml"
         $Results | Export-Clixml -Path $ModuleCatalogXml -Force
         Write-Verbose -Verbose "UpdateModule: Exporting to OSD Module Catalogs at $ModuleCatalogJson"

@@ -1,9 +1,9 @@
 <#
 .SYNOPSIS
-Builds the Lenovo DriverPack Catalog
+Updates the local Lenovo DriverPack Catalog in the OSD Module
 
 .DESCRIPTION
-Builds the Lenovo DriverPack Catalog
+Updates the local Lenovo DriverPack Catalog in the OSD Module
 
 .LINK
 https://github.com/OSDeploy/OSD/tree/master/Docs
@@ -13,9 +13,13 @@ https://github.com/OSDeploy/OSD/tree/master/Docs
 function Update-LenovoDriverPackCatalog {
     [CmdletBinding()]
     param (
-        #Updates the OSD Module Offline Catalog
+        #Updates the OSD Module Offline Catalog. Requires Admin rights
         [System.Management.Automation.SwitchParameter]
-        $UpdateModule
+        $UpdateModuleCatalog,
+
+        #Verifies that the DriverPack is reachable. This will take some time to complete
+        [System.Management.Automation.SwitchParameter]
+        $Verify
     )
     #=================================================
     #   Defaults
@@ -197,36 +201,38 @@ function Update-LenovoDriverPackCatalog {
     $Results = $Results | Sort-Object Name, OSVersion -Descending | Group-Object Name | ForEach-Object {$_.Group | Select-Object -First 1}
     $Results = $Results | Sort-Object Name, OSVersion -Descending
     #=================================================
-    #   Validate Results
+    #   Verify DriverPack is reachable
     #=================================================
-    Write-Warning "Testing each download link, please wait ..."
-    $Results = $Results | Sort-Object Url
-    $LastItem = $null
+    if ($Verify) {
+        Write-Warning "Testing each download link, please wait..."
+        $Results = $Results | Sort-Object Url
+        $LastDriverPack = $null
 
-    foreach ($Item in $Results) {
-        if ($Item.Url -eq $LastItem.Url) {
-            $Item.Status = $LastItem.Status
-            $Item.ReleaseDate = $LastItem.ReleaseDate
-        }
-        else {
-            $Global:DownloadHeaders = $null
-            try {
-                $Global:DownloadHeaders = (Invoke-WebRequest -Method Head -Uri $Item.Url -UseBasicParsing).Headers
-            }
-            catch {
-                Write-Warning "Failed: $($Item.Url)"
-            }
-
-            if ($Global:DownloadHeaders) {
-                $Item.ReleaseDate = Get-Date ($Global:DownloadHeaders.'Last-Modified') -Format "yy.MM.dd"
-                Write-Verbose -Verbose "Success: $($Item.Url)"
-                Write-Verbose -Verbose "ReleaseDate: $($Item.ReleaseDate)"
+        foreach ($CurrentDriverPack in $Results) {
+            if ($CurrentDriverPack.Url -eq $LastDriverPack.Url) {
+                $CurrentDriverPack.Status = $LastDriverPack.Status
+                $CurrentDriverPack.ReleaseDate = $LastDriverPack.ReleaseDate
             }
             else {
-                $Item.Status = 'Failed'
+                $Global:DownloadHeaders = $null
+                try {
+                    $Global:DownloadHeaders = (Invoke-WebRequest -Method Head -Uri $CurrentDriverPack.Url -UseBasicParsing).Headers
+                }
+                catch {
+                    Write-Warning "Failed: $($CurrentDriverPack.Url)"
+                }
+
+                if ($Global:DownloadHeaders) {
+                    $CurrentDriverPack.ReleaseDate = Get-Date ($Global:DownloadHeaders.'Last-Modified') -Format "yy.MM.dd"
+                    Write-Verbose -Verbose "$($CurrentDriverPack.Url)"
+                    Write-Verbose -Verbose "ReleaseDate: $($CurrentDriverPack.ReleaseDate)"
+                }
+                else {
+                    $CurrentDriverPack.Status = 'Failed'
+                }
             }
+            $LastDriverPack = $CurrentDriverPack
         }
-        $LastItem = $Item
     }
     #=================================================
     #   Sort Results
@@ -235,7 +241,7 @@ function Update-LenovoDriverPackCatalog {
     #=================================================
     #   UpdateModule
     #=================================================
-    if ($UpdateModule) {
+    if ($UpdateModuleCatalog) {
         Write-Verbose -Verbose "UpdateModule: Exporting to OSD Module Catalogs at $ModuleCatalogXml"
         $Results | Export-Clixml -Path $ModuleCatalogXml -Force
         Write-Verbose -Verbose "UpdateModule: Exporting to OSD Module Catalogs at $ModuleCatalogJson"

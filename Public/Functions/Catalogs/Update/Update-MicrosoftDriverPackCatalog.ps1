@@ -1,9 +1,9 @@
 <#
 .SYNOPSIS
-Builds the Microsoft Surface DriverPacks
+Updates the local Microsoft Surface DriverPacks in the OSD Module
 
 .DESCRIPTION
-Builds the Microsoft Surface DriverPacks
+Updates the local Microsoft Surface DriverPacks in the OSD Module
 
 .LINK
 https://github.com/OSDeploy/OSD/tree/master/Docs
@@ -13,9 +13,13 @@ https://github.com/OSDeploy/OSD/tree/master/Docs
 function Update-MicrosoftDriverPackCatalog {
     [CmdletBinding()]
     param (
-        #Updates the OSD Module Offline Catalog
+        #Updates the OSD Module Offline Catalog. Requires Admin rights
         [System.Management.Automation.SwitchParameter]
-        $UpdateModule
+        $UpdateModuleCatalog,
+
+        #Verifies that the DriverPack is reachable. This will take some time to complete
+        [System.Management.Automation.SwitchParameter]
+        $Verify
     )
     #=================================================
     #	Reference
@@ -77,7 +81,7 @@ function Update-MicrosoftDriverPackCatalog {
         #=================================================
         foreach ($Download in $Downloads) {
             $DownloadUrl = $Download.href
-            Write-Verbose -Verbose "Testing Download File at $DownloadUrl"
+            Write-Verbose -Verbose "Verify: $DownloadUrl"
 
             $GetUrl = Invoke-WebRequest -Method Head -Uri $DownloadUrl
             $GetHeaders = $GetUrl.Headers
@@ -202,7 +206,7 @@ function Update-MicrosoftDriverPackCatalog {
     #=================================================
     #   UpdateModule
     #=================================================
-    if ($UpdateModule) {
+    if ($UpdateModuleCatalog) {
         Write-Verbose -Verbose "UpdateModule: Exporting to OSD Module Catalogs at $ModuleCatalogXml"
         $MasterResults | Export-Clixml -Path $ModuleCatalogXml -Force
         Write-Verbose -Verbose "UpdateModule: Exporting to OSD Module Catalogs at $ModuleCatalogJson"
