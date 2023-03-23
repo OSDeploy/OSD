@@ -17,16 +17,16 @@ if ($env:SystemDrive -eq 'X:') {
 
         #TODO Add more modes like WEP or enterprise here:
         if ($network.Authentication -eq "WPA-Personal") {
-            $encmode = "WPAPSK"
-            $easmode = "AES"
+            $authmode = "WPAPSK"
+            $encmode = "AES"
         }
         if ($network.Authentication -eq "WPA2-Personal") {
-            $encmode = "WPA2PSK"
-            $easmode = "AES"
+            $authmode = "WPA2PSK"
+            $encmode = "AES"
         }
         if ($network.Authentication -eq "WPA3-Personal") {
-            $encmode = "WPA3SAE"
-            $easmode = "AES"
+            $authmode = "WPA3SAE"
+            $encmode = "AES"
         }
 
         # just for sure
@@ -37,7 +37,7 @@ if ($env:SystemDrive -eq 'X:') {
             WLanName = $SSID
         }
         if ($password) { $param.Passwd = $password }
-        if ($encmode) { $param.WPA = $true }
+        if ($authmode) { $param.WPA = $true }
         Set-WinREWiFi @param
 
         # connect to network
@@ -144,8 +144,8 @@ $XMLProfile = @"
      <MSM>
          <security>
              <authEncryption>
-                 <authentication>$encmode</authentication>
-                 <encryption>$easmode</encryption>
+                 <authentication>$authmode</authentication>
+                 <encryption>$encmode</encryption>
                  <useOneX>false</useOneX>
              </authEncryption>
              <sharedKey>
