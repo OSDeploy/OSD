@@ -9,13 +9,24 @@ if ($env:SystemDrive -eq 'X:') {
         $network = Get-WinREWiFi | Where-Object { $_.SSID -eq $SSID }
 
         $password = ""
-        $notWPA2 = ""
+
         if ($network.Authentication -ne "Open") {
             $cred = Get-Credential -Message "Enter password for WIFI network '$SSID'" -UserName $SSID
             $password = $cred.GetNetworkCredential().password
+        }
 
-            #TODO it can be WEP or enterprise ...but I don't know how Authentication value look like for them
-            $notWPA2 = $network | Where-Object { $_.Authentication -ne "WPA2-Personal" }
+        #TODO Add more modes like WEP or enterprise here:
+        if ($network.Authentication -eq "WPA-Personal") {
+            $encmode = "WPAPSK"
+            $easmode = "AES"
+        }
+        if ($network.Authentication -eq "WPA2-Personal") {
+            $encmode = "WPA2PSK"
+            $easmode = "AES"
+        }
+        if ($network.Authentication -eq "WPA3-Personal") {
+            $encmode = "WPA3SAE"
+            $easmode = "AES"
         }
 
         # just for sure
@@ -26,7 +37,7 @@ if ($env:SystemDrive -eq 'X:') {
             WLanName = $SSID
         }
         if ($password) { $param.Passwd = $password }
-        if ($notWPA2) { $param.WPA = $true }
+        if ($encmode) { $param.WPA = $true }
         Set-WinREWiFi @param
 
         # connect to network
@@ -118,13 +129,6 @@ if ($env:SystemDrive -eq 'X:') {
             $Passwd = [System.Security.SecurityElement]::Escape($Passwd)
         }
 
-        if ($WPA -eq $false) {
-            $WpaState = "WPA2PSK"
-            $EasState = "AES"
-        } else {
-            $WpaState = "WPAPSK"
-            $EasState = "AES"
-        }
 
 $XMLProfile = @"
 <?xml version="1.0"?>
@@ -140,8 +144,8 @@ $XMLProfile = @"
      <MSM>
          <security>
              <authEncryption>
-                 <authentication>$WpaState</authentication>
-                 <encryption>$EasState</encryption>
+                 <authentication>$encmode</authentication>
+                 <encryption>$easmode</encryption>
                  <useOneX>false</useOneX>
              </authEncryption>
              <sharedKey>
