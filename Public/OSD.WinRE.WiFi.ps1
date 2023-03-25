@@ -20,11 +20,11 @@ if ($env:SystemDrive -eq 'X:') {
             $authmode = "WPAPSK"
             $encmode = "AES"
         }
-        if ($network.Authentication -eq "WPA2-Personal") {
+        if (($network.Authentication -eq "WPA2-Personal") -or ($network.Authentication -eq "WPA3-Personal")) {
             $authmode = "WPA2PSK"
             $encmode = "AES"
         }
-        if ($network.Authentication -eq "WPA3-Personal") {
+        if (($network.Authentication -eq "WPA3-Personal") -and (netsh wlan show driver | Select-String -Pattern "WPA3-Personal")) {
             $authmode = "WPA3SAE"
             $encmode = "AES"
         }
