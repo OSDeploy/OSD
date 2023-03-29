@@ -154,7 +154,7 @@ function Start-OSDCloud {
         ImageFileUrl = $ImageFileUrl
         IsOnBattery = Get-OSDGather -Property IsOnBattery
         Manufacturer = $Manufacturer
-        MSCatalogFirmware = $true
+        MSCatalogFirmware = $false
         MSCatalogDiskDrivers = $true
         MSCatalogNetDrivers = $true
         MSCatalogScsiDrivers = $true

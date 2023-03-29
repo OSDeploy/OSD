@@ -10,7 +10,7 @@ function Start-OSDCloudCLI {
     https://github.com/OSDeploy/OSD/tree/master/Docs
     #>
 
-    [CmdletBinding(DefaultParameterSetName = 'Default')]
+    [CmdletBinding(SupportsShouldProcess,DefaultParameterSetName = 'Default')]
     param (
         #Automatically populated from Get-MyComputerManufacturer -Brief
         [Alias('Manufacturer')]
@@ -24,7 +24,7 @@ function Start-OSDCloudCLI {
 
         #$Global:StartOSDCloudCLI.MSCatalogFirmware = $true
         [System.Management.Automation.SwitchParameter]
-        $Firmware,
+        $Firmware = $Global:OSDModuleResource.StartOSDCloudGUI.updateFirmware,
 
         #Restart the computer after Invoke-OSDCloud to OOBE
         [System.Management.Automation.SwitchParameter]
@@ -127,10 +127,7 @@ function Start-OSDCloudCLI {
         [Parameter(ParameterSetName = 'CustomImage')]
         [Alias('ImageIndex')]
         [System.String]
-        $OSImageIndex = 'AUTO',
-
-        [System.Management.Automation.SwitchParameter]
-        $Preview
+        $OSImageIndex = 'AUTO'
     )
     #=================================================
     #	$Global:StartOSDCloudCLI
@@ -685,7 +682,7 @@ function Start-OSDCloudCLI {
     #   Invoke-OSDCloud.ps1
     #=================================================
     Write-Host -ForegroundColor DarkGray "========================================================================="
-    Write-Host -ForegroundColor Green "Start-OSDCloudCLI Configuration"
+    Write-Host -ForegroundColor Green "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Start-OSDCloudCLI Configuration"
     $Global:StartOSDCloudCLI | Out-Host
     Write-Host -ForegroundColor DarkGray "========================================================================="
     #================================================
@@ -734,8 +731,12 @@ function Start-OSDCloudCLI {
     #================================================
     #   Invoke-OSDCloud
     #================================================
-    Write-Host -ForegroundColor Green "Invoke-OSDCloud ... Starting in 5 seconds..."
-    if ($Preview) {Break}
-    Start-Sleep -Seconds 5
-    Invoke-OSDCloud
+    if ($PSCmdlet.ShouldProcess) {
+        Write-Host -ForegroundColor Green "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Start-OSDCloudCLI is complete"
+    }
+    else {
+        Write-Host -ForegroundColor Green "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Invoke-OSDCloud ... Starting in 5 seconds..."
+        Start-Sleep -Seconds 5
+        Invoke-OSDCloud
+    }
 }
