@@ -786,6 +786,10 @@ $formMainWindowControlStartButton.add_Click({
         
         $ImageFileName = $OSDCloudOperatingSystem.FileName
         $ImageFileUrl = $OSDCloudOperatingSystem.Url
+
+        $ImageFileItem = Find-OSDCloudFile -Name $OSDCloudOperatingSystem.FileName -Path '\OSDCloud\OS\' | Sort-Object FullName | Where-Object {$_.Length -gt 3GB}
+        $ImageFileItem = $ImageFileItem | Where-Object {$_.FullName -notlike "C*"} | Where-Object {$_.FullName -notlike "X*"} | Select-Object -First 1
+
     }
     else {
         $OSName = $null
