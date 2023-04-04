@@ -19,6 +19,7 @@ function Diskpart-FormatSystemPartition {
     Write-Verbose "DISKPART> select disk $DiskNumber"
     Write-Verbose "DISKPART> select partition $PartitionNumber"
     Write-Verbose "DISKPART> format fs=$FileSystem quick label='$LabelSystem'"
+    Write-Verbose "DISKPART> assign letter=S"
     Write-Verbose "DISKPART> exit"
     
     #Abort if not in WinPE
@@ -28,6 +29,7 @@ $null = @"
 select disk $DiskNumber
 select partition $PartitionNumber
 format fs=$FileSystem quick label="$LabelSystem"
+assign letter=S
 exit
 "@ | diskpart.exe
 }
