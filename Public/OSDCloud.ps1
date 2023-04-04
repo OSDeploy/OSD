@@ -250,7 +250,7 @@ function Invoke-OSDCloud {
         $RegPath = "HKLM:\SOFTWARE\OSDCloud"
         if (!(Test-Path -Path $RegPath)){New-Item -Path $RegPath -Force}
         New-ItemProperty -Path $RegPath -Name "OSVersion" -Value $Global:OSDCloud.OSVersion
-        New-ItemProperty -Path $RegPath -Name "OSBuild" -Value $Global:OSDCloud.OSBuild
+        New-ItemProperty -Path $RegPath -Name "OSReleaseID" -Value $Global:OSDCloud.OSReleaseID
         New-ItemProperty -Path $RegPath -Name "OSEdition" -Value $Global:OSDCloud.OSEdition
         New-ItemProperty -Path $RegPath -Name "OSLicense" -Value $Global:OSDCloud.OSLicense
     }
@@ -280,6 +280,10 @@ function Invoke-OSDCloud {
 
     if ($Global:OSDCloud.RecoveryPartition -eq $true) {
         $Global:OSDCloud.SkipRecoveryPartition = [bool]$false
+    }
+
+    if ($Global:OSDCloud.restartComputer -eq $true) {
+        $Global:OSDCloud.Restart = [bool]$true
     }
 
     if ($Global:OSDCloud.SkipAllDiskSteps -eq $true) {
@@ -688,7 +692,11 @@ function Invoke-OSDCloud {
     Write-SectionHeader "Powercfg High Performance"
 
     if ($Global:OSDCloud.IsOnBattery -eq $true) {
-        Write-DarkGrayHost "Device is on battery power. Performance will not be adjusted"
+        $Win32Battery = (Get-CimInstance -ClassName Win32_Battery -ErrorAction SilentlyContinue | Select-Object -Property *)
+        if ($Win32Battery.BatteryStatus -eq 1) {
+            Write-DarkGrayHost "Device has $($Win32Battery.EstimatedChargeRemaining)% battery remaining"
+        }
+        Write-DarkGrayHost "High Performance will not be enabled while on battery"
     }
     elseif ($Global:OSDCloud.IsWinPE -eq $false) {
         Write-DarkGrayHost "Device is not running in WinPE. Performance will not be adjusted"
@@ -861,8 +869,8 @@ function Invoke-OSDCloud {
                 #=================================================
                 $OSDCloudUSB = Get-Volume.usb | Where-Object {($_.FileSystemLabel -match 'OSDCloud') -or ($_.FileSystemLabel -match 'BHIMAGE')} | Where-Object {$_.SizeGB -ge 8} | Where-Object {$_.SizeRemainingGB -ge 5} | Select-Object -First 1
                 
-                if ($OSDCloudUSB -and $Global:OSDCloud.OSVersion -and $Global:OSDCloud.OSBuild) {
-                    $OSDownloadChildPath = "$($OSDCloudUSB.DriveLetter):\OSDCloud\OS\$($Global:OSDCloud.OSVersion) $($Global:OSDCloud.OSBuild)"
+                if ($OSDCloudUSB -and $Global:OSDCloud.OSVersion -and $Global:OSDCloud.OSReleaseID) {
+                    $OSDownloadChildPath = "$($OSDCloudUSB.DriveLetter):\OSDCloud\OS\$($Global:OSDCloud.OSVersion) $($Global:OSDCloud.OSReleaseID)"
                     Write-Host -ForegroundColor Yellow "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Downloading to OSDCloudUSB at $OSDownloadChildPath"
 
                     $OSDCloudUsbOS = Save-WebFile -SourceUrl $Global:OSDCloud.ImageFileUrl -DestinationDirectory "$OSDownloadChildPath" -DestinationName $Global:OSDCloud.ImageFileName

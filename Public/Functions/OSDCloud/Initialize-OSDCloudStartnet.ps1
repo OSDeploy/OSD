@@ -5,20 +5,11 @@ function Initialize-OSDCloudStartnet {
     )
     if ($env:SystemDrive -eq 'X:') {
         #=================================================
-        #   Generate CIM Logs
-        #=================================================
-        #Write-Host -ForegroundColor DarkGray "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Saving CIM Device Details"
-
+        #   Create Log Path
+        #================================================= 
         if (-NOT (Test-Path -Path 'X:\OSDCloud\Logs')) {
             New-Item -Path 'X:\OSDCloud\Logs' -ItemType Directory -Force | Out-Null
         }
-
-        #Get-CimInstance -ClassName CIM_DiskDrive | Select-Object -Property * | Out-File X:\OSDCloud\Logs\CIM_DiskDrive.txt -Width 4096 -Force
-        #Get-CimInstance -ClassName CIM_LogicalDevice | Select-Object -Property * | Out-File X:\OSDCloud\Logs\CIM_LogicalDevice.txt -Width 4096 -Force
-        #Get-CimInstance -ClassName CIM_LogicalDisk | Select-Object -Property * | Out-File X:\OSDCloud\Logs\CIM_LogicalDisk.txt -Width 4096 -Force
-        #Get-CimInstance -ClassName CIM_OperatingSystem | Select-Object -Property * | Out-File X:\OSDCloud\Logs\CIM_OperatingSystem.txt -Width 4096 -Force
-        #Get-CimInstance -ClassName CIM_NetworkAdapter | Select-Object -Property * | Out-File X:\OSDCloud\Logs\CIM_NetworkAdapter.txt -Width 4096 -Force
-        #region
         #==================================================================================================
         #OSDCloud Config Startup Scripts
         #==================================================================================================
@@ -59,8 +50,7 @@ function Initialize-OSDCloudStartnet {
                 Write-Host -ForegroundColor Gray "Using $($SplashJson.FullName)"
             }
             if (Test-Path -Path "C:\OSDCloud\Logs"){Remove-Item -Path "C:\OSDCloud\Logs" -Recurse -Force}
-            if (!(Test-Path -Path "x:\OSDCloud\Logs")){New-Item -Path "x:\OSDCloud\Logs" -ItemType directory -Force | Out-Null}
-            Start-Transcript -Path "x:\OSDCloud\Logs\Deploy-OSDCloud.log"
+            Start-Transcript -Path "X:\OSDCloud\Logs\Deploy-OSDCloud.log"
             if (!($Global:ModuleBase = (Get-Module -Name OSD).ModuleBase)){Import-Module -Name OSD}
             if ($Global:ModuleBase = (Get-Module -Name OSD).ModuleBase){
                 #Write-Host -ForegroundColor Gray "Starting $Global:ModuleBase\Resources\SplashScreen\Show-Background.ps1"
@@ -105,6 +95,16 @@ function Initialize-OSDCloudStartnet {
             }
         }
         #=================================================
+        #   Generate CIM Logs
+        #=================================================
+        #Write-Host -ForegroundColor DarkGray "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Logging to X:\OSDCloud\Logs"
+
+        #Get-CimInstance -ClassName CIM_DiskDrive -ErrorAction Ignore | Select-Object -Property * | Out-File X:\OSDCloud\Logs\CIM_DiskDrive.txt -Width 4096 -Force
+        #Get-CimInstance -ClassName CIM_LogicalDevice -ErrorAction Ignore | Select-Object -Property * | Out-File X:\OSDCloud\Logs\CIM_LogicalDevice.txt -Width 4096 -Force
+        #Get-CimInstance -ClassName CIM_LogicalDisk -ErrorAction Ignore | Select-Object -Property * | Out-File X:\OSDCloud\Logs\CIM_LogicalDisk.txt -Width 4096 -Force
+        #Get-CimInstance -ClassName CIM_OperatingSystem -ErrorAction Ignore | Select-Object -Property * | Out-File X:\OSDCloud\Logs\CIM_OperatingSystem.txt -Width 4096 -Force
+        #Get-CimInstance -ClassName CIM_NetworkAdapter -ErrorAction Ignore | Select-Object -Property * | Out-File X:\OSDCloud\Logs\CIM_NetworkAdapter.txt -Width 4096 -Force
+        #=================================================
         #   Start Minimized PowerShell Session
         #=================================================
         #Write-Host -ForegroundColor DarkGray "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Start Minimized PowerShell Session"
@@ -115,7 +115,5 @@ function Initialize-OSDCloudStartnet {
         Import-Module OSD -Force -ErrorAction Ignore -WarningAction Ignore
         $OSDVersion = (Get-Module -Name OSD -ListAvailable | Sort-Object Version -Descending | Select-Object -First 1).Version
         Write-Host -ForegroundColor Green "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) OSDCloud $OSDVersion Ready"
-
-
     }
 }

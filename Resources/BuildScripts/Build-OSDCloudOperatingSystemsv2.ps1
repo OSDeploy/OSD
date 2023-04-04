@@ -14,7 +14,7 @@ $Results = $Results | Select-Object `
 @{Name='Language';Expression={($null)}}, `
 @{Name='Activation';Expression={($null)}}, `
 @{Name='Build';Expression={($null)}}, `
-@{Name='FileName';Expression={((Split-Path -Leaf $_.FileUri))}}, `
+@{Name='FileName';Expression={($_.FileName)}}, `
 @{Name='ImageIndex';Expression={($null)}}, `
 @{Name='ImageName';Expression={($null)}}, `
 @{Name='Url';Expression={($_.FileUri)}}, `
@@ -59,7 +59,8 @@ foreach ($Result in $Results) {
     #   SHA1
     #=================================================
     $Regex = "[0-9a-f]{40}"
-    $Result.SHA1 = ($Result.FileName | Select-String -AllMatches -Pattern $Regex).Matches[0].Value
+    #$Result.SHA1 = ($Result.FileName | Select-String -AllMatches -Pattern $Regex).Matches[0].Value
+    $Result.SHA1 = ((Split-Path -Leaf $Result.Url) | Select-String -AllMatches -Pattern $Regex).Matches[0].Value
     #=================================================
     #   Name
     #=================================================

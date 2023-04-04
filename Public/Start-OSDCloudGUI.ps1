@@ -103,6 +103,52 @@ function Start-OSDCloudGUI {
     Write-Host -ForegroundColor DarkGray "========================================================================="
     Write-Host -ForegroundColor Green "OSDCloudGUI Configuration"
     $Global:OSDCloudGUI | Out-Host
+    #================================================
+    #   Test TPM
+    #================================================
+    try {
+        $Win32Tpm = Get-CimInstance -Namespace "ROOT\cimv2\Security\MicrosoftTpm" -ClassName Win32_Tpm
+
+        if ($null -eq $Win32Tpm) {
+            Write-Host -ForegroundColor Yellow "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) TPM: Not Supported"
+            Write-Host -ForegroundColor Yellow "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Autopilot: Not Supported"
+            Start-Sleep -Seconds 5
+        }
+        elseif ($Win32Tpm.SpecVersion) {
+            if ($null -eq $Win32Tpm.SpecVersion) {
+                Write-Host -ForegroundColor Yellow "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) TPM: Unable to detect the TPM Version"
+                Write-Host -ForegroundColor Yellow "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Autopilot: Not Supported"
+                Start-Sleep -Seconds 5
+            }
+
+            $majorVersion = $Win32Tpm.SpecVersion.Split(",")[0] -as [int]
+            if ($majorVersion -lt 2) {
+                Write-Host -ForegroundColor Yellow "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) TPM: Version is less than 2.0"
+                Write-Host -ForegroundColor Yellow "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Autopilot: Not Supported"
+                Start-Sleep -Seconds 5
+            }
+            else {
+                #Write-Host -ForegroundColor DarkGray "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) TPM IsActivated: $($Win32Tpm.IsActivated_InitialValue)"
+                #Write-Host -ForegroundColor DarkGray "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) TPM IsEnabled: $($Win32Tpm.IsEnabled_InitialValue)"
+                #Write-Host -ForegroundColor DarkGray "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) TPM IsOwned: $($Win32Tpm.IsOwned_InitialValue)"
+                #Write-Host -ForegroundColor DarkGray "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) TPM Manufacturer: $($Win32Tpm.ManufacturerIdTxt)"
+                #Write-Host -ForegroundColor DarkGray "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) TPM Manufacturer Version: $($Win32Tpm.ManufacturerVersion)"
+                #Write-Host -ForegroundColor DarkGray "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) TPM SpecVersion: $($Win32Tpm.SpecVersion)"
+                Write-Host -ForegroundColor Green "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) TPM 2.0: Supported"
+                Write-Host -ForegroundColor Green "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Autopilot: Supported"
+            }
+        }
+        else {
+            Write-Host -ForegroundColor Yellow "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) TPM: Not Supported"
+            Write-Host -ForegroundColor Yellow "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Autopilot: Not Supported"
+            Start-Sleep -Seconds 5
+        }
+    }
+    catch {
+    }
+    #================================================
+    #   Launch GUI
+    #================================================
     & "$($MyInvocation.MyCommand.Module.ModuleBase)\Projects\OSDCloudGUI\MainWindow.ps1"
     Start-Sleep -Seconds 2
     #================================================
