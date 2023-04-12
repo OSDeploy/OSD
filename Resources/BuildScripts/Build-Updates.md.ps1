@@ -1,5 +1,6 @@
+Import-Module OSD -Force
 $AllOSDUpdates = @()
-$AllUpdateCatalogs = Get-ChildItem -Path "$PSScriptRoot\*" -Include '*.xml' -Recurse
+$AllUpdateCatalogs = Get-ChildItem -Path "C:\Users\david\OneDrive\GitHub\MyModules\OSD\Catalogs\WSUSXML\*" -Include '*.xml' -Recurse
 foreach ($UpdateCatalog in $AllUpdateCatalogs) {$AllOSDUpdates += Import-Clixml -Path "$($UpdateCatalog.FullName)"}
 
 $AllOSDUpdates = $AllOSDUpdates | Select-Object -Property * | Sort-Object -Property Title -Unique | Sort-Object CreationDate -Descending #| Out-GridView -PassThru -Title "All OSDUpdates"

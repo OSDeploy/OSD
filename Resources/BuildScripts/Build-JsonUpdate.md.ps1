@@ -1,6 +1,6 @@
 Import-Module OSD -Force
 $AllUpdates = @()
-$AllCatalogs = Get-ChildItem -Path "$PSScriptRoot\*" -Include '*.json' -Recurse
+$AllCatalogs = Get-ChildItem -Path "C:\Users\david\OneDrive\GitHub\MyModules\OSD\Catalogs\WSUSXML\*" -Include '*.json' -Recurse
 foreach ($CatalogFile in $AllCatalogs) {
     $AllUpdates += Get-Content $CatalogFile.FullName | ConvertFrom-Json
 }
