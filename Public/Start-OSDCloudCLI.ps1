@@ -10,7 +10,10 @@ function Start-OSDCloudCLI {
     https://github.com/OSDeploy/OSD/tree/master/Docs
     #>
 
-    [CmdletBinding(SupportsShouldProcess,DefaultParameterSetName = 'Default')]
+    [CmdletBinding(
+        SupportsShouldProcess = $true,
+        DefaultParameterSetName = 'Default'
+    )]
     param (
         #Automatically populated from Get-MyComputerManufacturer -Brief
         [Alias('Manufacturer')]
@@ -41,10 +44,6 @@ function Start-OSDCloudCLI {
         #Skips the Autopilot Task routine
         [System.Management.Automation.SwitchParameter]
         $SkipAutopilot,
-
-        #Skips the ODT Task routine
-        [System.Management.Automation.SwitchParameter]
-        $SkipODT,
 
         #Skip prompting to wipe Disks
         [System.Management.Automation.SwitchParameter]
@@ -136,62 +135,40 @@ function Start-OSDCloudCLI {
     $Global:StartOSDCloudCLI = $null
     $Global:StartOSDCloudCLI = [ordered]@{
         LaunchMethod = 'OSDCloudCLI'
-        AutopilotJsonChildItem = $null
-        AutopilotJsonItem = $null
-        AutopilotJsonName = $null
-        AutopilotJsonObject = $null
-        AutopilotOOBEJsonChildItem = $null
-        AutopilotOOBEJsonItem = $null
-        AutopilotOOBEJsonName = $null
-        AutopilotOOBEJsonObject = $null
         ComputerManufacturer = $ComputerManufacturer
         ComputerModel = (Get-MyComputerModel)
         ComputerProduct = $ComputerProduct
+        DriverPack = $null
+        DriverPackName = $null
         Function = $MyInvocation.MyCommand.Name
-        GetDiskFixed = $null
-        ImageFileDestination = $null
-        ImageFileFullName = $null
         ImageFileItem = $null
         ImageFileName = $null
-        ImageFileSource = $null
         ImageFileUrl = $ImageFileUrl
         IsOnBattery = Get-OSDGather -Property IsOnBattery
         MSCatalogDiskDrivers = $true
         MSCatalogFirmware = $true
         MSCatalogNetDrivers = $true
         MSCatalogScsiDrivers = $true
-        OOBEDeployJsonChildItem = $null
-        OOBEDeployJsonItem = $null
-        OOBEDeployJsonName = $null
-        OOBEDeployJsonObject = $null
+        OperatingSystem = $null
         OSEdition = $OSEdition
         OSEditionId = $null
-        OSEditionMenu = $null
         OSEditionValues = $localOSDCloudParams["OSEdition"].Attributes.ValidValues
         OSImageIndex = $OSImageIndex
         OSLanguage = $OSLanguage
-        OSLanguageMenu = $null
         OSLanguageValues = $localOSDCloudParams["OSLanguage"].Attributes.ValidValues
         OSActivation = $OSActivation
-        OSActivationMenu = $null
         OSActivationValues = $localOSDCloudParams["OSActivation"].Attributes.ValidValues
         OSName = $OSName
-        OSNameMenu = $null
         OSNameValues = $localOSDCloudParams["OSName"].Attributes.ValidValues
         OSReleaseID = $OSReleaseID
-        OSReleaseIDMenu = $null
         OSReleaseIDValues = $localOSDCloudParams["OSReleaseID"].Attributes.ValidValues
         OSVersion = $OSVersion
-        OSVersionMenu = $null
         OSVersionValues = $localOSDCloudParams["OSVersion"].Attributes.ValidValues
         Restart = $Restart
         ScreenshotCapture = $false
         ScreenshotPath = "$env:TEMP\Screenshots"
         Shutdown = $Shutdown
         SkipAutopilot = $SkipAutopilot
-        SkipAutopilotOOBE = $null
-        SkipODT = $SkipODT
-        SkipOOBEDeploy = $null
         TimeStart = Get-Date
         ZTI = $ZTI
     }
@@ -670,10 +647,10 @@ function Start-OSDCloudCLI {
     #   New logic added to Get-OSDCloudDriverPack
     #   This should match the proper OS Version ReleaseID
     #================================================
-    Write-Host -ForegroundColor DarkGray "========================================================================="
-    Write-Host -ForegroundColor Cyan "Get-OSDCloudDriverPack"
     $Global:StartOSDCloudCLI.DriverPack = Get-OSDCloudDriverPack -Product $ComputerProduct -OSVersion $Global:StartOSDCloudCLI.OSVersion -OSReleaseID $Global:StartOSDCloudCLI.OSReleaseID
     if ($Global:StartOSDCloudCLI.DriverPack) {
+        Write-Host -ForegroundColor DarkGray "========================================================================="
+        Write-Host -ForegroundColor Cyan "Get-OSDCloudDriverPack"
         $Global:StartOSDCloudCLI.DriverPackName = $Global:StartOSDCloudCLI.DriverPack.Name
         Write-Host -ForegroundColor Yellow $Global:StartOSDCloudCLI.DriverPack.Name
         Write-Host -ForegroundColor Yellow $Global:StartOSDCloudCLI.DriverPack.Url
@@ -735,7 +712,7 @@ function Start-OSDCloudCLI {
         Write-Host -ForegroundColor Green "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Start-OSDCloudCLI is complete"
     }
     else {
-        Write-Host -ForegroundColor Green "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Invoke-OSDCloud ... Starting in 5 seconds..."
+        Write-Host -ForegroundColor Green "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Starting Invoke-OSDCloud in 5 seconds ..."
         Start-Sleep -Seconds 5
         Invoke-OSDCloud
     }

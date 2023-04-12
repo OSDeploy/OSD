@@ -1,7 +1,7 @@
 [
     {
         "Catalog":  "Windows 10 2004",
-        "OSDVersion":  "23.3.14.1",
+        "OSDVersion":  "23.4.11.1",
         "OSDStatus":  "",
         "UpdateOS":  "Windows 10",
         "UpdateBuild":  "2004",
@@ -47,13 +47,13 @@
         "AdditionalHash":  "29 86 156 46 52 165 151 246 46 245 104 63 172 40 168 21 93 167 175 211 113 194 146 198 106 194 42 76 226 26 197 156",
         "OSDCore":  "",
         "OSDWinPE":  "",
-        "OSDGuid":  "34b6ce44-5783-42e1-b8d1-bb9fc34a8b64",
+        "OSDGuid":  "d08b43da-2cd0-4bbb-924e-97fe08d964f9",
         "PartitionKey":  "Windows 10 2004",
-        "RowKey":  "34b6ce44-5783-42e1-b8d1-bb9fc34a8b64"
+        "RowKey":  "d08b43da-2cd0-4bbb-924e-97fe08d964f9"
     },
     {
         "Catalog":  "Windows 10 2004",
-        "OSDVersion":  "23.3.14.1",
+        "OSDVersion":  "23.4.11.1",
         "OSDStatus":  "",
         "UpdateOS":  "Windows 10",
         "UpdateBuild":  "2004",
@@ -99,13 +99,13 @@
         "AdditionalHash":  "108 220 103 147 116 237 87 78 187 110 195 94 148 87 228 27 44 70 93 35 135 86 208 159 35 176 202 31 58 173 76 200",
         "OSDCore":  "",
         "OSDWinPE":  "",
-        "OSDGuid":  "3bc1fcaf-6fec-4fdd-987e-8f06de3ded0b",
+        "OSDGuid":  "9b2e06f5-d5c2-4c6a-9111-e4d6f520285f",
         "PartitionKey":  "Windows 10 2004",
-        "RowKey":  "3bc1fcaf-6fec-4fdd-987e-8f06de3ded0b"
+        "RowKey":  "9b2e06f5-d5c2-4c6a-9111-e4d6f520285f"
     },
     {
         "Catalog":  "Windows 10 2004",
-        "OSDVersion":  "23.3.14.1",
+        "OSDVersion":  "23.4.11.1",
         "OSDStatus":  "",
         "UpdateOS":  "Windows 10",
         "UpdateBuild":  "2004",
@@ -151,13 +151,13 @@
         "AdditionalHash":  "134 106 134 212 89 25 18 57 42 145 161 34 182 171 113 178 37 144 25 44 150 156 145 83 155 152 63 3 75 179 222 63",
         "OSDCore":  "",
         "OSDWinPE":  "",
-        "OSDGuid":  "9cc71fe6-192f-4049-8764-492b464311f1",
+        "OSDGuid":  "efcecf23-2638-48dd-a7d6-c3e55561bd83",
         "PartitionKey":  "Windows 10 2004",
-        "RowKey":  "9cc71fe6-192f-4049-8764-492b464311f1"
+        "RowKey":  "efcecf23-2638-48dd-a7d6-c3e55561bd83"
     },
     {
         "Catalog":  "Windows 10 2004",
-        "OSDVersion":  "23.3.14.1",
+        "OSDVersion":  "23.4.11.1",
         "OSDStatus":  "",
         "UpdateOS":  "Windows 10",
         "UpdateBuild":  "2004",
@@ -203,13 +203,13 @@
         "AdditionalHash":  "179 64 249 81 34 121 67 177 208 232 26 96 32 53 5 52 61 81 131 88 41 113 0 249 218 140 155 56 25 105 62 170",
         "OSDCore":  "",
         "OSDWinPE":  "",
-        "OSDGuid":  "a9018670-dc78-4db0-9827-e1ef2d66f060",
+        "OSDGuid":  "01078bbb-6392-4157-8d43-75e9d2d6fff4",
         "PartitionKey":  "Windows 10 2004",
-        "RowKey":  "a9018670-dc78-4db0-9827-e1ef2d66f060"
+        "RowKey":  "01078bbb-6392-4157-8d43-75e9d2d6fff4"
     },
     {
         "Catalog":  "Windows 10 2004",
-        "OSDVersion":  "23.3.14.1",
+        "OSDVersion":  "23.4.11.1",
         "OSDStatus":  "",
         "UpdateOS":  "Windows 10",
         "UpdateBuild":  "2004",
@@ -255,13 +255,13 @@
         "AdditionalHash":  "62 11 75 240 119 169 224 219 208 1 73 163 61 198 7 167 48 58 34 124 6 115 196 170 22 188 251 122 159 10 154 213",
         "OSDCore":  "",
         "OSDWinPE":  "",
-        "OSDGuid":  "e0afbe2d-7d79-4525-8123-80c32403b98c",
+        "OSDGuid":  "56e5e8cc-b324-4889-ba0e-1a3f5494330c",
         "PartitionKey":  "Windows 10 2004",
-        "RowKey":  "e0afbe2d-7d79-4525-8123-80c32403b98c"
+        "RowKey":  "56e5e8cc-b324-4889-ba0e-1a3f5494330c"
     },
     {
         "Catalog":  "Windows 10 2004",
-        "OSDVersion":  "23.3.14.1",
+        "OSDVersion":  "23.4.11.1",
         "OSDStatus":  "",
         "UpdateOS":  "Windows 10",
         "UpdateBuild":  "2004",
@@ -307,13 +307,13 @@
         "AdditionalHash":  "0 68 139 164 146 203 228 116 195 96 39 251 87 1 212 80 147 211 172 160 187 115 74 89 194 116 103 193 46 100 238 49",
         "OSDCore":  "",
         "OSDWinPE":  "",
-        "OSDGuid":  "52addd6e-1172-449e-a297-52a414558db3",
+        "OSDGuid":  "55aaf46b-3343-4ab5-8072-cbd227aa711a",
         "PartitionKey":  "Windows 10 2004",
-        "RowKey":  "52addd6e-1172-449e-a297-52a414558db3"
+        "RowKey":  "55aaf46b-3343-4ab5-8072-cbd227aa711a"
     },
     {
         "Catalog":  "Windows 10 2004",
-        "OSDVersion":  "23.3.14.1",
+        "OSDVersion":  "23.4.11.1",
         "OSDStatus":  "",
         "UpdateOS":  "Windows 10",
         "UpdateBuild":  "2004",
@@ -359,13 +359,13 @@
         "AdditionalHash":  "95 199 156 137 190 203 115 21 206 164 227 67 77 222 243 191 220 83 146 86 79 152 102 223 17 179 162 82 89 87 229 59",
         "OSDCore":  "",
         "OSDWinPE":  "",
-        "OSDGuid":  "fa941e6a-f896-4553-9858-a0740f3bb34f",
+        "OSDGuid":  "77c7e0ec-ba19-426d-b580-573283351ec8",
         "PartitionKey":  "Windows 10 2004",
-        "RowKey":  "fa941e6a-f896-4553-9858-a0740f3bb34f"
+        "RowKey":  "77c7e0ec-ba19-426d-b580-573283351ec8"
     },
     {
         "Catalog":  "Windows 10 2004",
-        "OSDVersion":  "23.3.14.1",
+        "OSDVersion":  "23.4.11.1",
         "OSDStatus":  "",
         "UpdateOS":  "Windows 10",
         "UpdateBuild":  "2004",
@@ -411,13 +411,13 @@
         "AdditionalHash":  "96 156 71 36 185 226 110 196 197 200 188 241 190 182 26 133 157 191 52 10 163 248 110 29 62 138 127 201 40 16 124 97",
         "OSDCore":  "",
         "OSDWinPE":  "",
-        "OSDGuid":  "aefe6990-4dda-4f4b-80b9-337fbc05c25e",
+        "OSDGuid":  "1afdac53-118b-46a6-9ba2-ca7bb6757b0b",
         "PartitionKey":  "Windows 10 2004",
-        "RowKey":  "aefe6990-4dda-4f4b-80b9-337fbc05c25e"
+        "RowKey":  "1afdac53-118b-46a6-9ba2-ca7bb6757b0b"
     },
     {
         "Catalog":  "Windows 10 2004",
-        "OSDVersion":  "23.3.14.1",
+        "OSDVersion":  "23.4.11.1",
         "OSDStatus":  "",
         "UpdateOS":  "Windows 10",
         "UpdateBuild":  "2004",
@@ -463,13 +463,13 @@
         "AdditionalHash":  "89 182 148 163 5 79 30 154 106 201 31 87 1 240 43 143 219 6 67 105 111 57 44 226 230 44 246 198 191 104 123 153",
         "OSDCore":  "",
         "OSDWinPE":  "",
-        "OSDGuid":  "adbe200e-e8fc-4832-b70d-03327d61a169",
+        "OSDGuid":  "2fd0c7e4-6019-4531-84d1-7b3d89e9540d",
         "PartitionKey":  "Windows 10 2004",
-        "RowKey":  "adbe200e-e8fc-4832-b70d-03327d61a169"
+        "RowKey":  "2fd0c7e4-6019-4531-84d1-7b3d89e9540d"
     },
     {
         "Catalog":  "Windows 10 2004",
-        "OSDVersion":  "23.3.14.1",
+        "OSDVersion":  "23.4.11.1",
         "OSDStatus":  "",
         "UpdateOS":  "Windows 10",
         "UpdateBuild":  "2004",
@@ -515,13 +515,13 @@
         "AdditionalHash":  "186 48 120 152 31 198 16 9 27 218 173 235 78 48 165 104 105 229 233 185 4 61 236 103 85 134 117 112 55 5 85 140",
         "OSDCore":  "",
         "OSDWinPE":  "",
-        "OSDGuid":  "e4680212-ba59-42cb-a230-e8163d2ce3f4",
+        "OSDGuid":  "3fd3ef04-5d6e-4651-9102-04def5aa1f15",
         "PartitionKey":  "Windows 10 2004",
-        "RowKey":  "e4680212-ba59-42cb-a230-e8163d2ce3f4"
+        "RowKey":  "3fd3ef04-5d6e-4651-9102-04def5aa1f15"
     },
     {
         "Catalog":  "Windows 10 2004",
-        "OSDVersion":  "23.3.14.1",
+        "OSDVersion":  "23.4.11.1",
         "OSDStatus":  "",
         "UpdateOS":  "Windows 10",
         "UpdateBuild":  "2004",
@@ -567,13 +567,13 @@
         "AdditionalHash":  "105 149 50 78 234 243 222 76 117 96 156 226 38 135 72 99 236 246 105 212 119 48 40 43 79 233 162 92 212 190 240 76",
         "OSDCore":  "",
         "OSDWinPE":  "",
-        "OSDGuid":  "25238913-f77d-4ddf-83d9-49d3e2c49e00",
+        "OSDGuid":  "08e70737-f1b8-4a6b-9a05-9a0da409693c",
         "PartitionKey":  "Windows 10 2004",
-        "RowKey":  "25238913-f77d-4ddf-83d9-49d3e2c49e00"
+        "RowKey":  "08e70737-f1b8-4a6b-9a05-9a0da409693c"
     },
     {
         "Catalog":  "Windows 10 2004",
-        "OSDVersion":  "23.3.14.1",
+        "OSDVersion":  "23.4.11.1",
         "OSDStatus":  "",
         "UpdateOS":  "Windows 10",
         "UpdateBuild":  "2004",
@@ -619,13 +619,13 @@
         "AdditionalHash":  "208 56 201 112 56 165 42 254 216 230 40 98 67 96 167 121 78 228 103 210 51 72 236 205 255 20 255 28 139 224 152 65",
         "OSDCore":  "",
         "OSDWinPE":  "",
-        "OSDGuid":  "f5350d9b-3441-4bc0-87a0-a71cf44f51a7",
+        "OSDGuid":  "683f3e79-fd5f-4346-af31-8430c6a12314",
         "PartitionKey":  "Windows 10 2004",
-        "RowKey":  "f5350d9b-3441-4bc0-87a0-a71cf44f51a7"
+        "RowKey":  "683f3e79-fd5f-4346-af31-8430c6a12314"
     },
     {
         "Catalog":  "Windows 10 2004",
-        "OSDVersion":  "23.3.14.1",
+        "OSDVersion":  "23.4.11.1",
         "OSDStatus":  "",
         "UpdateOS":  "Windows 10",
         "UpdateBuild":  "2004",
@@ -671,13 +671,13 @@
         "AdditionalHash":  "82 36 173 110 141 157 46 145 171 222 203 216 195 166 161 41 193 234 1 180 52 216 52 28 135 49 151 168 99 186 83 174",
         "OSDCore":  "",
         "OSDWinPE":  "",
-        "OSDGuid":  "3e091640-d87b-4d8c-a0bc-cf46295268b4",
+        "OSDGuid":  "778506a6-46a3-4c46-a756-c9c2230814e3",
         "PartitionKey":  "Windows 10 2004",
-        "RowKey":  "3e091640-d87b-4d8c-a0bc-cf46295268b4"
+        "RowKey":  "778506a6-46a3-4c46-a756-c9c2230814e3"
     },
     {
         "Catalog":  "Windows 10 2004",
-        "OSDVersion":  "23.3.14.1",
+        "OSDVersion":  "23.4.11.1",
         "OSDStatus":  "",
         "UpdateOS":  "Windows 10",
         "UpdateBuild":  "2004",
@@ -723,13 +723,13 @@
         "AdditionalHash":  "126 158 109 16 201 203 177 164 126 88 129 24 18 43 251 198 196 34 251 59 15 137 42 23 184 13 105 50 197 19 172 92",
         "OSDCore":  "",
         "OSDWinPE":  "",
-        "OSDGuid":  "fe82b7e2-e82a-4ccb-b928-e16deae272c9",
+        "OSDGuid":  "ec336ffe-4a0a-4cc8-9685-c78a5de1e7e3",
         "PartitionKey":  "Windows 10 2004",
-        "RowKey":  "fe82b7e2-e82a-4ccb-b928-e16deae272c9"
+        "RowKey":  "ec336ffe-4a0a-4cc8-9685-c78a5de1e7e3"
     },
     {
         "Catalog":  "Windows 10 2004",
-        "OSDVersion":  "23.3.14.1",
+        "OSDVersion":  "23.4.11.1",
         "OSDStatus":  "",
         "UpdateOS":  "Windows 10",
         "UpdateBuild":  "2004",
@@ -775,13 +775,13 @@
         "AdditionalHash":  "149 140 210 67 45 235 51 119 33 251 94 20 247 27 18 63 39 70 3 170 231 78 96 189 128 96 19 169 222 206 96 95",
         "OSDCore":  "",
         "OSDWinPE":  "",
-        "OSDGuid":  "d3a787ec-294d-485e-a098-df54ada57062",
+        "OSDGuid":  "6acdb73a-b457-4aa6-895e-6288bd6b2c74",
         "PartitionKey":  "Windows 10 2004",
-        "RowKey":  "d3a787ec-294d-485e-a098-df54ada57062"
+        "RowKey":  "6acdb73a-b457-4aa6-895e-6288bd6b2c74"
     },
     {
         "Catalog":  "Windows 10 2004",
-        "OSDVersion":  "23.3.14.1",
+        "OSDVersion":  "23.4.11.1",
         "OSDStatus":  "",
         "UpdateOS":  "Windows 10",
         "UpdateBuild":  "2004",
@@ -827,13 +827,13 @@
         "AdditionalHash":  "34 237 203 33 137 199 254 36 147 159 14 246 91 56 190 88 132 242 122 188 161 129 127 194 5 134 224 171 89 1 12 86",
         "OSDCore":  "",
         "OSDWinPE":  "",
-        "OSDGuid":  "15180f4c-80d3-4708-a22b-1c2fbdf5cd5e",
+        "OSDGuid":  "64e490a1-d6c3-4e8b-9317-9628e2d91a6a",
         "PartitionKey":  "Windows 10 2004",
-        "RowKey":  "15180f4c-80d3-4708-a22b-1c2fbdf5cd5e"
+        "RowKey":  "64e490a1-d6c3-4e8b-9317-9628e2d91a6a"
     },
     {
         "Catalog":  "Windows 10 2004",
-        "OSDVersion":  "23.3.14.1",
+        "OSDVersion":  "23.4.11.1",
         "OSDStatus":  "",
         "UpdateOS":  "Windows 10",
         "UpdateBuild":  "2004",
@@ -879,13 +879,13 @@
         "AdditionalHash":  "209 35 190 33 226 187 107 83 58 147 63 150 114 156 135 30 188 235 243 66 27 234 208 42 178 179 247 29 90 13 197 137",
         "OSDCore":  "",
         "OSDWinPE":  "",
-        "OSDGuid":  "1f7f6563-fd1e-44a6-91b4-615b02210889",
+        "OSDGuid":  "331fbfc9-edb7-403b-940e-7243638d899d",
         "PartitionKey":  "Windows 10 2004",
-        "RowKey":  "1f7f6563-fd1e-44a6-91b4-615b02210889"
+        "RowKey":  "331fbfc9-edb7-403b-940e-7243638d899d"
     },
     {
         "Catalog":  "Windows 10 2004",
-        "OSDVersion":  "23.3.14.1",
+        "OSDVersion":  "23.4.11.1",
         "OSDStatus":  "",
         "UpdateOS":  "Windows 10",
         "UpdateBuild":  "2004",
@@ -931,8 +931,8 @@
         "AdditionalHash":  "61 193 129 85 205 84 254 61 160 177 149 104 177 213 223 127 182 181 200 129 150 106 218 168 225 20 95 252 246 89 58 83",
         "OSDCore":  "",
         "OSDWinPE":  "",
-        "OSDGuid":  "8badb3d4-8d1f-46fc-9e11-d93cba42b474",
+        "OSDGuid":  "1ad613d2-22ff-4081-a5b5-70f814e4065c",
         "PartitionKey":  "Windows 10 2004",
-        "RowKey":  "8badb3d4-8d1f-46fc-9e11-d93cba42b474"
+        "RowKey":  "1ad613d2-22ff-4081-a5b5-70f814e4065c"
     }
 ]
