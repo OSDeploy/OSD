@@ -1,6 +1,6 @@
 [
     {
-        "OSDVersion":  "23.4.11.1",
+        "OSDVersion":  "23.4.25.1",
         "LastUpdate":  "\/Date(1677564000000)\/",
         "OSDStatus":  "",
         "OSDType":  "Driver",
@@ -18,12 +18,12 @@
         "DriverUrl":  "https://downloadmirror.intel.com/774320/WiFi-21.40.5-Driver32-Win7.zip",
         "DriverInfo":  "https://www.intel.com/content/www/us/en/download/18231/intel-proset-wireless-software-and-drivers-for-it-admins.html",
         "DriverDescription":  "This download record is recommended for IT administrators, which includes driver-only and Intel? PROSet/Wireless Software version 22.200.2 distribution packages.",
-        "OSDGuid":  "589071e8-64ac-4df1-a1e9-b2351df52733",
+        "OSDGuid":  "1468ded4-0cb4-4e51-99d7-8cb3280e3c9e",
         "OSDPnpClass":  "Net",
         "OSDPnpClassGuid":  "{4D36E972-E325-11CE-BFC1-08002BE10318}"
     },
     {
-        "OSDVersion":  "23.4.11.1",
+        "OSDVersion":  "23.4.25.1",
         "LastUpdate":  "\/Date(1677564000000)\/",
         "OSDStatus":  "",
         "OSDType":  "Driver",
@@ -41,12 +41,12 @@
         "DriverUrl":  "https://downloadmirror.intel.com/774320/WiFi-21.40.5-Driver64-Win7.zip",
         "DriverInfo":  "https://www.intel.com/content/www/us/en/download/18231/intel-proset-wireless-software-and-drivers-for-it-admins.html",
         "DriverDescription":  "This download record is recommended for IT administrators, which includes driver-only and Intel? PROSet/Wireless Software version 22.200.2 distribution packages.",
-        "OSDGuid":  "99427d42-59eb-4e92-a32a-ceae3c034892",
+        "OSDGuid":  "1e3b459b-bbb8-465e-aec7-8dd07efac734",
         "OSDPnpClass":  "Net",
         "OSDPnpClassGuid":  "{4D36E972-E325-11CE-BFC1-08002BE10318}"
     },
     {
-        "OSDVersion":  "23.4.11.1",
+        "OSDVersion":  "23.4.25.1",
         "LastUpdate":  "\/Date(1677564000000)\/",
         "OSDStatus":  "",
         "OSDType":  "Driver",
@@ -64,12 +64,12 @@
         "DriverUrl":  "https://downloadmirror.intel.com/774320/WiFi-22.160.0-Driver32-Win10.zip",
         "DriverInfo":  "https://www.intel.com/content/www/us/en/download/18231/intel-proset-wireless-software-and-drivers-for-it-admins.html",
         "DriverDescription":  "This download record is recommended for IT administrators, which includes driver-only and Intel? PROSet/Wireless Software version 22.200.2 distribution packages.",
-        "OSDGuid":  "8899caaf-4376-46a2-9745-322875ad7d41",
+        "OSDGuid":  "da6700b0-44b2-4015-91ab-cf825f04d658",
         "OSDPnpClass":  "Net",
         "OSDPnpClassGuid":  "{4D36E972-E325-11CE-BFC1-08002BE10318}"
     },
     {
-        "OSDVersion":  "23.4.11.1",
+        "OSDVersion":  "23.4.25.1",
         "LastUpdate":  "\/Date(1677564000000)\/",
         "OSDStatus":  "",
         "OSDType":  "Driver",
@@ -87,7 +87,7 @@
         "DriverUrl":  "https://downloadmirror.intel.com/774320/WiFi-22.200.2-Driver64-Win10-Win11.zip",
         "DriverInfo":  "https://www.intel.com/content/www/us/en/download/18231/intel-proset-wireless-software-and-drivers-for-it-admins.html",
         "DriverDescription":  "This download record is recommended for IT administrators, which includes driver-only and Intel? PROSet/Wireless Software version 22.200.2 distribution packages.",
-        "OSDGuid":  "bfaec3c1-dc6a-4cef-af32-aabb99066edd",
+        "OSDGuid":  "f87541a6-9487-4056-ac53-efba91bf01d9",
         "OSDPnpClass":  "Net",
         "OSDPnpClassGuid":  "{4D36E972-E325-11CE-BFC1-08002BE10318}"
     }

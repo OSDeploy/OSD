@@ -1,5 +1,5 @@
 {
-    "OSDVersion":  "23.4.11.1",
+    "OSDVersion":  "23.4.25.1",
     "LastUpdate":  "\/Date(1676613600000)\/",
     "OSDStatus":  "",
     "OSDType":  "Driver",
@@ -17,7 +17,7 @@
     "DriverUrl":  "https://downloadmirror.intel.com/769266/Release_28.0.zip",
     "DriverInfo":  "https://www.intel.com/content/www/us/en/download/15084/intel-ethernet-adapter-complete-driver-pack.html",
     "DriverDescription":  "This download installs version 28.0 of the Intel? Ethernet Adapter Complete Driver Pack for supported OS versions.",
-    "OSDGuid":  "c3dd8457-438a-44fa-95e4-703b6d65d36d",
+    "OSDGuid":  "ec18264c-fbd4-4c45-a578-cd80cb53ca1f",
     "OSDPnpClass":  "Net",
     "OSDPnpClassGuid":  "{4D36E972-E325-11CE-BFC1-08002BE10318}"
 }

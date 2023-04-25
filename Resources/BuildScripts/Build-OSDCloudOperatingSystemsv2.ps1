@@ -1,6 +1,6 @@
 Import-Module -Name OSD -Force
 #=================================================
-#   Get-FeatureUpdates
+#   FeatureUpdates
 #=================================================
 $Results = Get-WSUSXML -Catalog FeatureUpdate -Silent
 $Results = $Results | Where-Object {$_.UpdateArch -eq 'x64'}
