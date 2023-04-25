@@ -84,8 +84,8 @@ $OSDCloudParams["OSEdition"].Attributes.ValidValues | ForEach-Object {
     $OSEditionControl.Items.Add($_) | Out-Null
 }
 
-$OSDCloudParams["OSLicense"].Attributes.ValidValues | ForEach-Object {
-    $OSLicenseControl.Items.Add($_) | Out-Null
+$OSDCloudParams["OSActivation"].Attributes.ValidValues | ForEach-Object {
+    $OSActivationControl.Items.Add($_) | Out-Null
 }
 
 $OSDCloudParams["OSLanguage"].Attributes.ValidValues | ForEach-Object {
@@ -102,7 +102,7 @@ function SetDefaultValues {
     $OSBuildControl.SelectedIndex = 1      #21H1
     $OSLanguageControl.SelectedIndex = 7   #en-us
     $OSEditionControl.SelectedIndex = 5    #Enterprise
-    $OSLicenseControl.SelectedIndex = 1    #Volume
+    $OSActivationControl.SelectedIndex = 1    #Volume
     $CustomImageControl.SelectedIndex = 0  #Nothing
     $AutopilotJsonControl.SelectedIndex = 1    #OOBE
     $ImageIndexControl.Text = 6             #Enterprise
@@ -110,7 +110,7 @@ function SetDefaultValues {
     $OSBuildControl.IsEnabled = $true
     $OSEditionControl.IsEnabled = $true
     $OSLanguageControl.IsEnabled = $true
-    $OSLicenseControl.IsEnabled = $false
+    $OSActivationControl.IsEnabled = $false
     $ImageIndexControl.IsEnabled = $false
     $CSModelControl.IsEnabled = $false
     $AutopilotJsonControl.IsEnabled = $true
@@ -123,7 +123,7 @@ function SetDefaultValues {
     $OSBuildControl.Visibility = "Visible"
     $OSEditionControl.Visibility = "Visible"
     $OSLanguageControl.Visibility = "Visible"
-    $OSLicenseControl.Visibility = "Visible"
+    $OSActivationControl.Visibility = "Visible"
 }
 SetDefaultValues
 #================================================
@@ -226,27 +226,27 @@ $OSEditionControl.add_SelectionChanged({
         $ImageIndexControl.Text = 4
         $ImageIndexLabel.IsEnabled = $false
         $ImageIndexControl.IsEnabled = $false   #Disable
-        $OSLicenseControl.SelectedIndex = 0    #Retail
-        $OSLicenseControl.IsEnabled = $false   #Disable
+        $OSActivationControl.SelectedIndex = 0    #Retail
+        $OSActivationControl.IsEnabled = $false   #Disable
     }
     #Home N
     if ($OSEditionControl.SelectedIndex -eq 1) {
         $ImageIndexControl.Text = 5
         $ImageIndexControl.IsEnabled = $false   #Disable
-        $OSLicenseControl.SelectedIndex = 0    #Retail
-        $OSLicenseControl.IsEnabled = $false   #Disable
+        $OSActivationControl.SelectedIndex = 0    #Retail
+        $OSActivationControl.IsEnabled = $false   #Disable
     }
     #Home Single Language
     if ($OSEditionControl.SelectedIndex -eq 2) {
         $ImageIndexControl.Text = 6
         $ImageIndexControl.IsEnabled = $false   #Disable
-        $OSLicenseControl.SelectedIndex = 0    #Retail
-        $OSLicenseControl.IsEnabled = $false   #Disable
+        $OSActivationControl.SelectedIndex = 0    #Retail
+        $OSActivationControl.IsEnabled = $false   #Disable
     }
     #Education
     if ($OSEditionControl.SelectedIndex -eq 3) {
-        $OSLicenseControl.IsEnabled = $true
-        if ($OSLicenseControl.SelectedIndex -eq 0) {
+        $OSActivationControl.IsEnabled = $true
+        if ($OSActivationControl.SelectedIndex -eq 0) {
             $ImageIndexControl.Text = 7
         }
         else {
@@ -255,8 +255,8 @@ $OSEditionControl.add_SelectionChanged({
     }
     #Education N
     if ($OSEditionControl.SelectedIndex -eq 4) {
-        $OSLicenseControl.IsEnabled = $true
-        if ($OSLicenseControl.SelectedIndex -eq 0) {
+        $OSActivationControl.IsEnabled = $true
+        if ($OSActivationControl.SelectedIndex -eq 0) {
             $ImageIndexControl.Text = 8
         }
         else {
@@ -265,20 +265,20 @@ $OSEditionControl.add_SelectionChanged({
     }
     #Enterprise
     if ($OSEditionControl.SelectedIndex -eq 5) {
-        $OSLicenseControl.SelectedIndex = 1
-        $OSLicenseControl.IsEnabled = $false
+        $OSActivationControl.SelectedIndex = 1
+        $OSActivationControl.IsEnabled = $false
         $ImageIndexControl.Text = 6
     }
     #Enterprise N
     if ($OSEditionControl.SelectedIndex -eq 6) {
-        $OSLicenseControl.SelectedIndex = 1
-        $OSLicenseControl.IsEnabled = $false
+        $OSActivationControl.SelectedIndex = 1
+        $OSActivationControl.IsEnabled = $false
         $ImageIndexControl.Text = 7
     }
     #Pro
     if ($OSEditionControl.SelectedIndex -eq 7) {
-        $OSLicenseControl.IsEnabled = $true
-        if ($OSLicenseControl.SelectedIndex -eq 0) {
+        $OSActivationControl.IsEnabled = $true
+        if ($OSActivationControl.SelectedIndex -eq 0) {
             $ImageIndexControl.Text = 9
         }
         else {
@@ -287,8 +287,8 @@ $OSEditionControl.add_SelectionChanged({
     }
     #Pro N
     if ($OSEditionControl.SelectedIndex -eq 8) {
-        $OSLicenseControl.IsEnabled = $true
-        if ($OSLicenseControl.SelectedIndex -eq 0) {
+        $OSActivationControl.IsEnabled = $true
+        if ($OSActivationControl.SelectedIndex -eq 0) {
             $ImageIndexControl.Text = 10
         }
         else {
@@ -297,16 +297,16 @@ $OSEditionControl.add_SelectionChanged({
     }
 })
 #================================================
-#   OSLicenseControl
+#   OSActivationControl
 #================================================
-$OSLicenseControl.add_SelectionChanged({
-    if ($OSLicenseControl.SelectedIndex -eq 0) {
+$OSActivationControl.add_SelectionChanged({
+    if ($OSActivationControl.SelectedIndex -eq 0) {
         if ($OSEditionControl.SelectedIndex -eq 3) {$ImageIndexControl.Text = 7}
         if ($OSEditionControl.SelectedIndex -eq 4) {$ImageIndexControl.Text = 8}
         if ($OSEditionControl.SelectedIndex -eq 7) {$ImageIndexControl.Text = 9}
         if ($OSEditionControl.SelectedIndex -eq 8) {$ImageIndexControl.Text = 10}
     }
-    if ($OSLicenseControl.SelectedIndex -eq 1) {
+    if ($OSActivationControl.SelectedIndex -eq 1) {
         if ($OSEditionControl.SelectedIndex -eq 3) {$ImageIndexControl.Text = 4}
         if ($OSEditionControl.SelectedIndex -eq 4) {$ImageIndexControl.Text = 5}
         if ($OSEditionControl.SelectedIndex -eq 7) {$ImageIndexControl.Text = 8}
@@ -326,7 +326,7 @@ $CustomImageControl.add_SelectionChanged({
         $OSBuildControl.Visibility = "Collapsed"
         $OSEditionControl.Visibility = "Collapsed"
         $OSLanguageControl.Visibility = "Collapsed"
-        $OSLicenseControl.Visibility = "Collapsed"
+        $OSActivationControl.Visibility = "Collapsed"
         $ImageIndexControl.IsEnabled = $true
         $ImageIndexControl.Text = 1
 
@@ -357,7 +357,7 @@ $StartButtonControl.add_Click({
     $OSBuild = $OSBuildControl.SelectedItem
     $OSEdition = $OSEditionControl.SelectedItem
     $OSLanguage = $OSLanguageControl.SelectedItem
-    $OSLicense = $OSLicenseControl.SelectedItem
+    $OSActivation = $OSActivationControl.SelectedItem
     #================================================
     #   AutopilotJson
     #================================================
@@ -428,7 +428,7 @@ $StartButtonControl.add_Click({
         $OSBuild = $null
         $OSEdition = $null
         $OSLanguage = $null
-        $OSLicense = $null
+        $OSActivation = $null
     }
     else {
         $ImageFileItem = $null
@@ -456,11 +456,11 @@ $StartButtonControl.add_Click({
         OOBEDeployJsonItem          = $OOBEDeployJsonItem
         OOBEDeployJsonName          = $OOBEDeployJsonName
         OOBEDeployJsonObject        = $OOBEDeployJsonObject
+        OSActivation                = $OSActivation
         OSBuild                     = $OSBuild
         OSEdition                   = $OSEdition
         OSImageIndex                = $OSImageIndex
         OSLanguage                  = $OSLanguage
-        OSLicense                   = $OSLicense
         Product                     = $CSProductControl.Text
         Restart                     = $RestartCheckbox.IsChecked
         SkipAutopilot               = $SkipAutopilot

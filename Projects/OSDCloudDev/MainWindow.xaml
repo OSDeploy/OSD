@@ -326,7 +326,7 @@
                           FontSize="16"
                           Margin="5"
                           Padding="2" />
-                    <ComboBox Name="OSLicenseCombobox"
+                    <ComboBox Name="OSActivationCombobox"
                           FontSize="16"
                           Margin="5"
                           Padding="2" />

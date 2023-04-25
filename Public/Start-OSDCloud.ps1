@@ -107,8 +107,9 @@ function Start-OSDCloud {
         [Parameter(ParameterSetName = 'Default')]
         [Parameter(ParameterSetName = 'Legacy')]
         [ValidateSet('Retail','Volume')]
+        [Alias('License','OSLicense','Activation')]
         [System.String]
-        $OSLicense,
+        $OSActivation,
 
         #Searches for the specified WIM file
         [Parameter(ParameterSetName = 'CustomImage')]
@@ -162,6 +163,7 @@ function Start-OSDCloud {
         OOBEDeployJsonItem = $null
         OOBEDeployJsonName = $null
         OOBEDeployJsonObject = $null
+        OSActivation = $OSActivation
         OSBuild = $OSBuild
         OSBuildMenu = $null
         OSBuildNames = $null
@@ -173,7 +175,6 @@ function Start-OSDCloud {
         OSLanguage = $OSLanguage
         OSLanguageMenu = $null
         OSLanguageNames = $null
-        OSLicense = $OSLicense
         OSName = $OSName
         OSNameMenu = $null
         OSNames = @('Windows 11 22H2 x64','Windows 11 21H2 x64','Windows 10 22H2 x64','Windows 10 21H2 x64','Windows 10 21H1 x64','Windows 10 20H2 x64','Windows 10 2004 x64','Windows 10 1909 x64','Windows 10 1903 x64','Windows 10 1809 x64')
@@ -205,6 +206,10 @@ function Start-OSDCloud {
         foreach ($Key in $Global:StartOSDCloudGUI.Keys) {
             $Global:StartOSDCloud.$Key = $Global:StartOSDCloudGUI.$Key
         }
+    }
+
+    if ($Global:StartOSDCloud.OSLicense) {
+        $Global:StartOSDCloud.OSActivation = $Global:StartOSDCloud.OSLicense
     }
     #=================================================
     #	Block
@@ -452,49 +457,49 @@ function Start-OSDCloud {
             $Global:StartOSDCloud.OSEdition = $Global:StartOSDCloud.OSEditionMenu | Where-Object {$_.Selection -eq $SelectReadHost} | Select-Object -ExpandProperty Name
         }
         #=================================================
-        #	OSEditionId and OSLicense
+        #	OSEditionId and OSActivation
         #=================================================
         if ($Global:StartOSDCloud.OSEdition -eq 'Home') {
             $Global:StartOSDCloud.OSEditionId = 'Core'
-            $Global:StartOSDCloud.OSLicense = 'Retail'
+            $Global:StartOSDCloud.OSActivation = 'Retail'
             $Global:StartOSDCloud.OSImageIndex = 4
         }
         if ($Global:StartOSDCloud.OSEdition -eq 'Home N') {
             $Global:StartOSDCloud.OSEditionId = 'CoreN'
-            $Global:StartOSDCloud.OSLicense = 'Retail'
+            $Global:StartOSDCloud.OSActivation = 'Retail'
             $Global:StartOSDCloud.OSImageIndex = 5
         }
         if ($Global:StartOSDCloud.OSEdition -eq 'Home Single Language') {
             $Global:StartOSDCloud.OSEditionId = 'CoreSingleLanguage'
-            $Global:StartOSDCloud.OSLicense = 'Retail'
+            $Global:StartOSDCloud.OSActivation = 'Retail'
             $Global:StartOSDCloud.OSImageIndex = 6
         }
         if ($Global:StartOSDCloud.OSEdition -eq 'Enterprise') {
             $Global:StartOSDCloud.OSEditionId = 'Enterprise'
-            $Global:StartOSDCloud.OSLicense = 'Volume'
+            $Global:StartOSDCloud.OSActivation = 'Volume'
             $Global:StartOSDCloud.OSImageIndex = 6
         }
         if ($Global:StartOSDCloud.OSEdition -eq 'Enterprise N') {
             $Global:StartOSDCloud.OSEditionId = 'EnterpriseN'
-            $Global:StartOSDCloud.OSLicense = 'Volume'
+            $Global:StartOSDCloud.OSActivation = 'Volume'
             $Global:StartOSDCloud.OSImageIndex = 7
         }
         $OSEdition = $Global:StartOSDCloud.OSEdition
         #=================================================
-        #	OSLicense
+        #	OSActivation
         #=================================================
-        if ($Global:StartOSDCloud.OSLicense) {
+        if ($Global:StartOSDCloud.OSActivation) {
         }
         elseif ($Global:StartOSDCloud.ZTI) {
-            $Global:StartOSDCloud.OSLicense = 'Volume'
+            $Global:StartOSDCloud.OSActivation = 'Volume'
         }
         else {
             Write-Host -ForegroundColor DarkGray "========================================================================="
             Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Select an Operating System License"
-            $Global:StartOSDCloud.OSLicenseNames = @('Retail Windows Consumer Editions','Volume Windows Business Editions')
+            $Global:StartOSDCloud.OSActivationNames = @('Retail Windows Consumer Editions','Volume Windows Business Editions')
             
             $i = $null
-            $Global:StartOSDCloud.OSLicenseMenu = foreach ($Item in $Global:StartOSDCloud.OSLicenseNames) {
+            $Global:StartOSDCloud.OSActivationMenu = foreach ($Item in $Global:StartOSDCloud.OSActivationNames) {
                 $i++
             
                 $ObjectProperties = @{
@@ -504,45 +509,45 @@ function Start-OSDCloud {
                 New-Object -TypeName PSObject -Property $ObjectProperties
             }
             
-            $Global:StartOSDCloud.OSLicenseMenu | Select-Object -Property Selection, Name | Format-Table | Out-Host
+            $Global:StartOSDCloud.OSActivationMenu | Select-Object -Property Selection, Name | Format-Table | Out-Host
             
             do {
                 $SelectReadHost = Read-Host -Prompt "Enter the Selection Number"
             }
-            until (((($SelectReadHost -ge 0) -and ($SelectReadHost -in $Global:StartOSDCloud.OSLicenseMenu.Selection))))
+            until (((($SelectReadHost -ge 0) -and ($SelectReadHost -in $Global:StartOSDCloud.OSActivationMenu.Selection))))
             
-            $Global:StartOSDCloud.OSLicenseMenu = $Global:StartOSDCloud.OSLicenseMenu | Where-Object {$_.Selection -eq $SelectReadHost} | Select-Object -ExpandProperty Name
+            $Global:StartOSDCloud.OSActivationMenu = $Global:StartOSDCloud.OSActivationMenu | Where-Object {$_.Selection -eq $SelectReadHost} | Select-Object -ExpandProperty Name
 
-            if ($Global:StartOSDCloud.OSLicenseMenu -match 'Retail') {
-                $Global:StartOSDCloud.OSLicense = 'Retail'
+            if ($Global:StartOSDCloud.OSActivationMenu -match 'Retail') {
+                $Global:StartOSDCloud.OSActivation = 'Retail'
             }
             else {
-                $Global:StartOSDCloud.OSLicense = 'Volume'
+                $Global:StartOSDCloud.OSActivation = 'Volume'
             }
-            #Write-Host -ForegroundColor Cyan "OSLicense: " -NoNewline
-            #Write-Host -ForegroundColor Green $Global:StartOSDCloud.OSLicense
+            #Write-Host -ForegroundColor Cyan "OSActivation: " -NoNewline
+            #Write-Host -ForegroundColor Green $Global:StartOSDCloud.OSActivation
         }
         if ($Global:StartOSDCloud.OSEdition -eq 'Education') {
             $Global:StartOSDCloud.OSEditionId = 'Education'
-            if ($Global:StartOSDCloud.OSLicense -eq 'Retail') {$Global:StartOSDCloud.OSImageIndex = 7}
-            if ($Global:StartOSDCloud.OSLicense -eq 'Volume') {$Global:StartOSDCloud.OSImageIndex = 4}
+            if ($Global:StartOSDCloud.OSActivation -eq 'Retail') {$Global:StartOSDCloud.OSImageIndex = 7}
+            if ($Global:StartOSDCloud.OSActivation -eq 'Volume') {$Global:StartOSDCloud.OSImageIndex = 4}
         }
         if ($Global:StartOSDCloud.OSEdition -eq 'Education N') {
             $Global:StartOSDCloud.OSEditionId = 'EducationN'
-            if ($Global:StartOSDCloud.OSLicense -eq 'Retail') {$Global:StartOSDCloud.OSImageIndex = 8}
-            if ($Global:StartOSDCloud.OSLicense -eq 'Volume') {$Global:StartOSDCloud.OSImageIndex = 5}
+            if ($Global:StartOSDCloud.OSActivation -eq 'Retail') {$Global:StartOSDCloud.OSImageIndex = 8}
+            if ($Global:StartOSDCloud.OSActivation -eq 'Volume') {$Global:StartOSDCloud.OSImageIndex = 5}
         }
         if ($Global:StartOSDCloud.OSEdition -eq 'Pro') {
             $Global:StartOSDCloud.OSEditionId = 'Professional'
-            if ($Global:StartOSDCloud.OSLicense -eq 'Retail') {$Global:StartOSDCloud.OSImageIndex = 9}
-            if ($Global:StartOSDCloud.OSLicense -eq 'Volume') {$Global:StartOSDCloud.OSImageIndex = 8}
+            if ($Global:StartOSDCloud.OSActivation -eq 'Retail') {$Global:StartOSDCloud.OSImageIndex = 9}
+            if ($Global:StartOSDCloud.OSActivation -eq 'Volume') {$Global:StartOSDCloud.OSImageIndex = 8}
         }
         if ($Global:StartOSDCloud.OSEdition -eq 'Pro N') {
             $Global:StartOSDCloud.OSEditionId = 'ProfessionalN'
-            if ($Global:StartOSDCloud.OSLicense -eq 'Retail') {$Global:StartOSDCloud.OSImageIndex = 10}
-            if ($Global:StartOSDCloud.OSLicense -eq 'Volume') {$Global:StartOSDCloud.OSImageIndex = 9}
+            if ($Global:StartOSDCloud.OSActivation -eq 'Retail') {$Global:StartOSDCloud.OSImageIndex = 10}
+            if ($Global:StartOSDCloud.OSActivation -eq 'Volume') {$Global:StartOSDCloud.OSImageIndex = 9}
         }
-        $OSLicense = $Global:StartOSDCloud.OSLicense
+        $OSActivation = $Global:StartOSDCloud.OSActivation
         Write-Host -ForegroundColor Cyan "OSEditionId: " -NoNewline
         Write-Host -ForegroundColor Green $Global:StartOSDCloud.OSEditionId
         Write-Host -ForegroundColor Cyan "OSImageIndex: " -NoNewline
@@ -590,12 +595,12 @@ function Start-OSDCloud {
     if ($PSCmdlet.ParameterSetName -eq 'Default') {
         Write-Host -ForegroundColor DarkGray "========================================================================="
         Write-Host -ForegroundColor Cyan "Get-FeatureUpdate " -NoNewline
-        Write-Host -ForegroundColor DarkGray "-OSName '$OSName' -OSLicense $OSLicense -OSLanguage $OSLanguage"
+        Write-Host -ForegroundColor DarkGray "-OSName '$OSName' -OSActivation $OSActivation -OSLanguage $OSLanguage"
 
         $Params = @{
-            OSName      = $OSName
-            OSLicense   = $OSLicense
-            OSLanguage  = $OSLanguage
+            OSName = $OSName
+            OSActivation = $OSActivation
+            OSLanguage = $OSLanguage
         }
         $Global:StartOSDCloud.GetFeatureUpdate = Get-FeatureUpdate @Params
     }
@@ -605,12 +610,12 @@ function Start-OSDCloud {
     if ($PSCmdlet.ParameterSetName -eq 'Legacy') {
         Write-Host -ForegroundColor DarkGray "========================================================================="
         Write-Host -ForegroundColor Cyan "Get-FeatureUpdate Legacy " -NoNewline
-        Write-Host -ForegroundColor DarkGray "-OSVersion '$OSVersion' -OSBuild $OSBuild -OSLicense $OSLicense -OSLanguage $OSLanguage"
+        Write-Host -ForegroundColor DarkGray "-OSVersion '$OSVersion' -OSBuild $OSBuild -OSActivation $OSActivation -OSLanguage $OSLanguage"
 
         $Params = @{
             OSVersion   = $OSVersion
             OSBuild     = $OSBuild
-            OSLicense   = $OSLicense
+            OSActivation   = $OSActivation
             OSLanguage  = $OSLanguage
         }
         $Global:StartOSDCloud.GetFeatureUpdate = Get-FeatureUpdate @Params

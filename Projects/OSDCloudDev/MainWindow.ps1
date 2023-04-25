@@ -275,8 +275,8 @@ $localOSDCloudParams["OSEdition"].Attributes.ValidValues | ForEach-Object {
     $formMainWindowControlOSEditionCombobox.Items.Add($_) | Out-Null
 }
 
-$localOSDCloudParams["OSLicense"].Attributes.ValidValues | ForEach-Object {
-    $formMainWindowControlOSLicenseCombobox.Items.Add($_) | Out-Null
+$localOSDCloudParams["OSActivation"].Attributes.ValidValues | ForEach-Object {
+    $formMainWindowControlOSActivationCombobox.Items.Add($_) | Out-Null
 }
 
 $localOSDCloudParams["OSLanguage"].Attributes.ValidValues | ForEach-Object {
@@ -534,7 +534,7 @@ if ($DriverPack) {
 function SetDefaultWinX {
     $formMainWindowControlOSLanguageCombobox.SelectedIndex = 7   #en-us
     $formMainWindowControlOSEditionCombobox.SelectedIndex = 5    #Enterprise
-    $formMainWindowControlOSLicenseCombobox.SelectedIndex = 1    #Volume
+    $formMainWindowControlOSActivationCombobox.SelectedIndex = 1    #Volume
 
     $formMainWindowControlAutopilotJsonCombobox.SelectedIndex = 1    #OOBE
     $formMainWindowControlImageIndexTextbox.Text = 6             #Enterprise
@@ -542,7 +542,7 @@ function SetDefaultWinX {
     #$formMainWindowControlOSBuildCombobox.IsEnabled = $true
     $formMainWindowControlOSEditionCombobox.IsEnabled = $true
     $formMainWindowControlOSLanguageCombobox.IsEnabled = $true
-    $formMainWindowControlOSLicenseCombobox.IsEnabled = $false
+    $formMainWindowControlOSActivationCombobox.IsEnabled = $false
     $formMainWindowControlImageIndexTextbox.IsEnabled = $false
     $formMainWindowControlAutopilotJsonCombobox.IsEnabled = $true
 
@@ -552,7 +552,7 @@ function SetDefaultWinX {
     #$formMainWindowControlOSBuildCombobox.Visibility = "Visible"
     $formMainWindowControlOSEditionCombobox.Visibility = "Visible"
     $formMainWindowControlOSLanguageCombobox.Visibility = "Visible"
-    $formMainWindowControlOSLicenseCombobox.Visibility = "Visible"
+    $formMainWindowControlOSActivationCombobox.Visibility = "Visible"
 }
 SetDefaultWinX
 #================================================
@@ -647,27 +647,27 @@ $formMainWindowControlOSEditionCombobox.add_SelectionChanged({
         $formMainWindowControlImageIndexTextbox.Text = 4
         $formMainWindowControlImageIndexLabel.IsEnabled = $false
         $formMainWindowControlImageIndexTextbox.IsEnabled = $false   #Disable
-        $formMainWindowControlOSLicenseCombobox.SelectedIndex = 0    #Retail
-        $formMainWindowControlOSLicenseCombobox.IsEnabled = $false   #Disable
+        $formMainWindowControlOSActivationCombobox.SelectedIndex = 0    #Retail
+        $formMainWindowControlOSActivationCombobox.IsEnabled = $false   #Disable
     }
     #Home N
     if ($formMainWindowControlOSEditionCombobox.SelectedIndex -eq 1) {
         $formMainWindowControlImageIndexTextbox.Text = 5
         $formMainWindowControlImageIndexTextbox.IsEnabled = $false   #Disable
-        $formMainWindowControlOSLicenseCombobox.SelectedIndex = 0    #Retail
-        $formMainWindowControlOSLicenseCombobox.IsEnabled = $false   #Disable
+        $formMainWindowControlOSActivationCombobox.SelectedIndex = 0    #Retail
+        $formMainWindowControlOSActivationCombobox.IsEnabled = $false   #Disable
     }
     #Home Single Language
     if ($formMainWindowControlOSEditionCombobox.SelectedIndex -eq 2) {
         $formMainWindowControlImageIndexTextbox.Text = 6
         $formMainWindowControlImageIndexTextbox.IsEnabled = $false   #Disable
-        $formMainWindowControlOSLicenseCombobox.SelectedIndex = 0    #Retail
-        $formMainWindowControlOSLicenseCombobox.IsEnabled = $false   #Disable
+        $formMainWindowControlOSActivationCombobox.SelectedIndex = 0    #Retail
+        $formMainWindowControlOSActivationCombobox.IsEnabled = $false   #Disable
     }
     #Education
     if ($formMainWindowControlOSEditionCombobox.SelectedIndex -eq 3) {
-        $formMainWindowControlOSLicenseCombobox.IsEnabled = $true
-        if ($formMainWindowControlOSLicenseCombobox.SelectedIndex -eq 0) {
+        $formMainWindowControlOSActivationCombobox.IsEnabled = $true
+        if ($formMainWindowControlOSActivationCombobox.SelectedIndex -eq 0) {
             $formMainWindowControlImageIndexTextbox.Text = 7
         }
         else {
@@ -676,8 +676,8 @@ $formMainWindowControlOSEditionCombobox.add_SelectionChanged({
     }
     #Education N
     if ($formMainWindowControlOSEditionCombobox.SelectedIndex -eq 4) {
-        $formMainWindowControlOSLicenseCombobox.IsEnabled = $true
-        if ($formMainWindowControlOSLicenseCombobox.SelectedIndex -eq 0) {
+        $formMainWindowControlOSActivationCombobox.IsEnabled = $true
+        if ($formMainWindowControlOSActivationCombobox.SelectedIndex -eq 0) {
             $formMainWindowControlImageIndexTextbox.Text = 8
         }
         else {
@@ -686,20 +686,20 @@ $formMainWindowControlOSEditionCombobox.add_SelectionChanged({
     }
     #Enterprise
     if ($formMainWindowControlOSEditionCombobox.SelectedIndex -eq 5) {
-        $formMainWindowControlOSLicenseCombobox.SelectedIndex = 1
-        $formMainWindowControlOSLicenseCombobox.IsEnabled = $false
+        $formMainWindowControlOSActivationCombobox.SelectedIndex = 1
+        $formMainWindowControlOSActivationCombobox.IsEnabled = $false
         $formMainWindowControlImageIndexTextbox.Text = 6
     }
     #Enterprise N
     if ($formMainWindowControlOSEditionCombobox.SelectedIndex -eq 6) {
-        $formMainWindowControlOSLicenseCombobox.SelectedIndex = 1
-        $formMainWindowControlOSLicenseCombobox.IsEnabled = $false
+        $formMainWindowControlOSActivationCombobox.SelectedIndex = 1
+        $formMainWindowControlOSActivationCombobox.IsEnabled = $false
         $formMainWindowControlImageIndexTextbox.Text = 7
     }
     #Pro
     if ($formMainWindowControlOSEditionCombobox.SelectedIndex -eq 7) {
-        $formMainWindowControlOSLicenseCombobox.IsEnabled = $true
-        if ($formMainWindowControlOSLicenseCombobox.SelectedIndex -eq 0) {
+        $formMainWindowControlOSActivationCombobox.IsEnabled = $true
+        if ($formMainWindowControlOSActivationCombobox.SelectedIndex -eq 0) {
             $formMainWindowControlImageIndexTextbox.Text = 9
         }
         else {
@@ -708,8 +708,8 @@ $formMainWindowControlOSEditionCombobox.add_SelectionChanged({
     }
     #Pro N
     if ($formMainWindowControlOSEditionCombobox.SelectedIndex -eq 8) {
-        $formMainWindowControlOSLicenseCombobox.IsEnabled = $true
-        if ($formMainWindowControlOSLicenseCombobox.SelectedIndex -eq 0) {
+        $formMainWindowControlOSActivationCombobox.IsEnabled = $true
+        if ($formMainWindowControlOSActivationCombobox.SelectedIndex -eq 0) {
             $formMainWindowControlImageIndexTextbox.Text = 10
         }
         else {
@@ -718,16 +718,16 @@ $formMainWindowControlOSEditionCombobox.add_SelectionChanged({
     }
 })
 #================================================
-#   OSLicenseCombobox
+#   OSActivationCombobox
 #================================================
-$formMainWindowControlOSLicenseCombobox.add_SelectionChanged({
-    if ($formMainWindowControlOSLicenseCombobox.SelectedIndex -eq 0) {
+$formMainWindowControlOSActivationCombobox.add_SelectionChanged({
+    if ($formMainWindowControlOSActivationCombobox.SelectedIndex -eq 0) {
         if ($formMainWindowControlOSEditionCombobox.SelectedIndex -eq 3) {$formMainWindowControlImageIndexTextbox.Text = 7}
         if ($formMainWindowControlOSEditionCombobox.SelectedIndex -eq 4) {$formMainWindowControlImageIndexTextbox.Text = 8}
         if ($formMainWindowControlOSEditionCombobox.SelectedIndex -eq 7) {$formMainWindowControlImageIndexTextbox.Text = 9}
         if ($formMainWindowControlOSEditionCombobox.SelectedIndex -eq 8) {$formMainWindowControlImageIndexTextbox.Text = 10}
     }
-    if ($formMainWindowControlOSLicenseCombobox.SelectedIndex -eq 1) {
+    if ($formMainWindowControlOSActivationCombobox.SelectedIndex -eq 1) {
         if ($formMainWindowControlOSEditionCombobox.SelectedIndex -eq 3) {$formMainWindowControlImageIndexTextbox.Text = 4}
         if ($formMainWindowControlOSEditionCombobox.SelectedIndex -eq 4) {$formMainWindowControlImageIndexTextbox.Text = 5}
         if ($formMainWindowControlOSEditionCombobox.SelectedIndex -eq 7) {$formMainWindowControlImageIndexTextbox.Text = 8}
@@ -745,7 +745,7 @@ $formMainWindowControlOperatingSystemCombobox.add_SelectionChanged({
         #$formMainWindowControlOSBuildCombobox.Visibility = "Collapsed"
         $formMainWindowControlOSEditionCombobox.Visibility = "Collapsed"
         $formMainWindowControlOSLanguageCombobox.Visibility = "Collapsed"
-        $formMainWindowControlOSLicenseCombobox.Visibility = "Collapsed"
+        $formMainWindowControlOSActivationCombobox.Visibility = "Collapsed"
         $formMainWindowControlImageIndexTextbox.IsEnabled = $false
         $formMainWindowControlImageIndexTextbox.Text = 1
 
@@ -781,7 +781,7 @@ $formMainWindowControlStartButton.add_Click({
     #$OSBuild = $formMainWindowControlOSBuildCombobox.SelectedItem
     $OSEdition = $formMainWindowControlOSEditionCombobox.SelectedItem
     $OSLanguage = $formMainWindowControlOSLanguageCombobox.SelectedItem
-    $OSLicense = $formMainWindowControlOSLicenseCombobox.SelectedItem
+    $OSActivation = $formMainWindowControlOSActivationCombobox.SelectedItem
     $OSImageIndex = $formMainWindowControlImageIndexTextbox.Text
     #================================================
     #   AutopilotJson
@@ -855,7 +855,7 @@ $formMainWindowControlStartButton.add_Click({
             $OSBuild = $null
             $OSEdition = $null
             $OSLanguage = $null
-            $OSLicense = $null
+            $OSActivation = $null
         }
         else {
             $ImageFileItem = $null
@@ -898,7 +898,7 @@ $formMainWindowControlStartButton.add_Click({
         OSEdition                   = $OSEdition
         OSImageIndex                = $OSImageIndex
         OSLanguage                  = $OSLanguage
-        OSLicense                   = $OSLicense
+        OSActivation                   = $OSActivation
         OSName                      = $OSName
         OSVersion                   = $OSVersion
         PauseSpecialize             = $formMainWindowControlPauseSpecialize.IsChecked

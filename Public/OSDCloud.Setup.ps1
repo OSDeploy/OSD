@@ -10,7 +10,7 @@ function Edit-OSDCloudWinPE {
     Edit-OSDCloudWinPE -StartOSDCloudGUI
 
     .EXAMPLE
-    Edit-OSDCloudWinPE -StartOSDCloud '-OSBuild 22H2 -OSEdition Pro -OSLanguage en-us -OSLicense Retail'
+    Edit-OSDCloudWinPE -StartOSDCloud '-OSBuild 22H2 -OSEdition Pro -OSLanguage en-us -OSActivation Retail'
 
     .EXAMPLE
     Edit-OSDCloudWinPE –StartURL 'https://sandbox.osdcloud.com'
@@ -808,7 +808,7 @@ Windows Registry Editor Version 5.00
         }
         if ((Get-RegCurrentVersion).CurrentBuild -gt 20000) {
             Write-Host -ForegroundColor DarkGray "========================================================================="
-            Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Windows 11 WinRE does not support booting Virtual Machines"
+            Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Windows 11 WinRE may not support booting some Virtual Machines"
             Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) It is recommended that you remove the -WinRE parameter if you need Virtual Machine support"
             Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Press Ctrl+C to cancel in the next 10 seconds"
             Start-Sleep -Seconds 10
@@ -2105,8 +2105,9 @@ function Update-OSDCloudUSB {
         #Optional. Selects the proper OS License
         #If this parameter is not used, Operating Systems with the specified License can be downloaded
         #'Retail','Volume'
+        [Alias('Activation','License','OSLicense')]
         [ValidateSet('Retail','Volume')]
-        [System.String]$OSLicense,
+        [System.String]$OSActivation,
 
         #Optional. Selects an Operating System to download
         #If this parameter is not used, any Operating Systems can be downloaded
@@ -2204,7 +2205,7 @@ function Update-OSDCloudUSB {
     #   Update OSDCloud Workspace PowerShell
     #=================================================
     if ($RobocopyWorkspace) {
-        if ($PSUpdate -or $DriverPack -or $OS -or $OSName -or $OSLicense -or $OSLanguage) {
+        if ($PSUpdate -or $DriverPack -or $OS -or $OSName -or $OSActivation -or $OSLanguage) {
             $PowerShellPath = "$WorkspacePath\PowerShell"
         
             if (! (Test-Path "$PowerShellPath")) {
@@ -2293,7 +2294,7 @@ function Update-OSDCloudUSB {
     #=================================================
     if ($RobocopyWorkspace -and $OSDCloudVolumes) {
         foreach ($volume in $OSDCloudVolumes) {
-            if ($IsOfflineReady -or $UpdateModules -or $PSUpdate -or $DriverPack -or $OS -or $OSName -or $OSLicense -or $OSLanguage) {
+            if ($IsOfflineReady -or $UpdateModules -or $PSUpdate -or $DriverPack -or $OS -or $OSName -or $OSActivation -or $OSLanguage) {
                 if (Test-Path "$WorkspacePath\Config") {
                     Write-Host -ForegroundColor DarkGray "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) ROBOCOPY $WorkspacePath\Config $($volume.DriveLetter):\OSDCloud\Config"
                     robocopy "$WorkspacePath\Config" "$($volume.DriveLetter):\OSDCloud\Config" *.* /e /mt /ndl /njh /njs /r:0 /w:0 /xd "$RECYCLE.BIN" "System Volume Information"
@@ -2324,7 +2325,7 @@ function Update-OSDCloudUSB {
     #   Single OSDCloudVolume
     #=================================================
     if ($OSDCloudVolumes) {
-        if ($DriverPack -or $OS -or $OSName -or $OSLicense -or $OSLanguage) {
+        if ($DriverPack -or $OS -or $OSName -or $OSActivation -or $OSLanguage) {
             if (! ($OSDCloudVolumes)) {
                 Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Unable to find an OSDCloud USB volume"
                 Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) The USB volume must be labeled OSDCloud and be at least 8GB in size"
@@ -2348,7 +2349,7 @@ function Update-OSDCloudUSB {
     #   OSDCloud OSName
     #=================================================
     if (($OSDCloudVolumes | Measure-Object).Count -eq 1) {
-        if ($OS -or $OSName -or $OSLicense -or $OSLanguage) {
+        if ($OS -or $OSName -or $OSActivation -or $OSLanguage) {
             $OSDownloadPath = "$($OSDCloudVolumes.DriveLetter):\OSDCloud\OS"
     
             $OSDCloudSavedOS = $null
@@ -2360,10 +2361,10 @@ function Update-OSDCloudUSB {
             if ($OSName) {
                 $OperatingSystems = $OperatingSystems | Where-Object {$_.Catalog -cmatch $OSName}
             }
-            if ($OSLicense -eq 'Retail') {
+            if ($OSActivation -eq 'Retail') {
                 $OperatingSystems = $OperatingSystems | Where-Object {$_.Title -match 'consumer'}
             }
-            if ($OSLicense -eq 'Volume') {
+            if ($OSActivation -eq 'Volume') {
                 $OperatingSystems = $OperatingSystems | Where-Object {$_.Title -match 'business'}
             }
             if ($OSLanguage){
@@ -2534,9 +2535,9 @@ function Update-OSDCloudUSB {
     Write-Host -ForegroundColor Gray "Update-OSDCloudUSB -OS"
     Write-Host -ForegroundColor Gray "Update-OSDCloudUSB -OSName 'Windows 11 22H2'"
     Write-Host -ForegroundColor Gray "Update-OSDCloudUSB -OSLanguage en-us"
-    Write-Host -ForegroundColor Gray "Update-OSDCloudUSB -OSLicense Volume"
+    Write-Host -ForegroundColor Gray "Update-OSDCloudUSB -OSActivation Volume"
     Write-Host -ForegroundColor Gray "Update-OSDCloudUSB -OSName 'Windows 10 21H2' -OSLanguage en-us"
-    Write-Host -ForegroundColor Gray "Update-OSDCloudUSB -OSName 'Windows 10 20H2' -OSLanguage de-de -OSLicense Volume"
+    Write-Host -ForegroundColor Gray "Update-OSDCloudUSB -OSName 'Windows 10 20H2' -OSLanguage de-de -OSActivation Volume"
     Write-Host -ForegroundColor DarkGray "========================================================================="
     Write-Host -ForegroundColor Yellow "Update Offline PowerShell Modules and Scripts:"
     Write-Host -ForegroundColor Gray "Update-OSDCloudUSB -PSUpdate"

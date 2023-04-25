@@ -94,6 +94,7 @@ function Invoke-OSDCloud {
         ODTTarget = 'C:\OSDCloud\ODT'
         ODTTargetData = 'C:\OSDCloud\ODT\Office'
         OperatingSystems = [array](Get-OSDCloudOperatingSystems)
+        OSActivation = $null
         OSBuild = $null
         OSBuildMenu = $null
         OSBuildNames = $null
@@ -105,7 +106,6 @@ function Invoke-OSDCloud {
         OSLanguage = $null
         OSLanguageMenu = $null
         OSLanguageNames = $null
-        OSLicense = $null
         OSVersion = 'Windows 10'
         Product = Get-MyComputerProduct
         Restart = [bool]$false
@@ -236,45 +236,6 @@ function Invoke-OSDCloud {
     }
     #endregion
     #=================================================
-    #region Debug Mode
-    if ($Global:OSDCloud.DebugMode -eq $true){
-        Write-SectionHeader "DebugMode Write OSDCloud Vars"
-        Write-DarkGrayHost "Writing OSDCloud Variables to $($env:temp)\OSDCloudVars.log"
-        $OSDCloud | Out-File $env:temp\OSDCloudVars.log
-    }
-    #endregion
-    #=================================================
-    #region SplashScreen
-    if ($Global:OSDCloud.SplashScreen -eq $true){
-        Write-SectionHeader "Setup SplashScreen"
-        $RegPath = "HKLM:\SOFTWARE\OSDCloud"
-        if (!(Test-Path -Path $RegPath)){New-Item -Path $RegPath -Force}
-        New-ItemProperty -Path $RegPath -Name "OSVersion" -Value $Global:OSDCloud.OSVersion
-        New-ItemProperty -Path $RegPath -Name "OSReleaseID" -Value $Global:OSDCloud.OSReleaseID
-        New-ItemProperty -Path $RegPath -Name "OSEdition" -Value $Global:OSDCloud.OSEdition
-        New-ItemProperty -Path $RegPath -Name "OSLicense" -Value $Global:OSDCloud.OSLicense
-    }
-    #endregion
-    #=================================================
-    #region WiFi Mode
-    if ($Global:OSDCloud.SetWiFi -eq $true){
-        Write-SectionHeader "Gathering WiFi Information"
-        Write-Host -ForegroundColor Yellow "Please Supply the SSID & Press Enter - CASE SENSITIVE"
-        if (!($SSID)){$SSID = Read-Host}
-        Write-Host -ForegroundColor Yellow "Please Supply the Password & Press Enter - CASE SENSITIVE"
-        if (!($PSK)){$PSK = Read-Host -AsSecureString}
-    }
-    #endregion
-    #=================================================
-    #region M365 Mode - Eventually Make this a better GUI Experience with Channel Selection
-    if ($Global:OSDCloud.MS365Install -eq $true){
-        Write-SectionHeader "Gathering M365 Information"
-        Write-Host -ForegroundColor Magenta "Please Supply the CompanyName & Press Enter - CASE SENSITIVE"
-        if (!($M365CompanyName)){$M365CompanyName = Read-Host}
-        if ($M365CompanyName -eq ""){$M365CompanyName = "Organization"}
-    }
-    #endregion
-    #=================================================
     #region Set Post-Merge Defaults
     $Global:OSDCloud.Version = [Version](Get-Module -Name OSD -ListAvailable | Sort-Object Version -Descending | Select-Object -First 1).Version
 
@@ -301,6 +262,46 @@ function Invoke-OSDCloud {
     if ($Global:OSDCloud.ZTI -eq $true) {
         Write-DarkGrayHost '$OSDCloud.ZTI = $true'
         $Global:OSDCloud.ClearDiskConfirm = $false
+    }
+    #endregion
+    #=================================================
+    #region Debug Mode
+    if ($Global:OSDCloud.DebugMode -eq $true){
+        Write-SectionHeader "DebugMode Write OSDCloud Vars"
+        Write-DarkGrayHost "Writing OSDCloud Variables to $($env:temp)\OSDCloudVars.log"
+        $OSDCloud | Out-File $env:temp\OSDCloudVars.log
+    }
+    #endregion
+    #=================================================
+    #region SplashScreen
+    if ($Global:OSDCloud.SplashScreen -eq $true){
+        Write-SectionHeader "Setup SplashScreen"
+        $RegPath = "HKLM:\SOFTWARE\OSDCloud"
+        if (!(Test-Path -Path $RegPath)){New-Item -Path $RegPath -Force}
+        New-ItemProperty -Path $RegPath -Name "OSVersion" -Value $Global:OSDCloud.OSVersion
+        New-ItemProperty -Path $RegPath -Name "OSReleaseID" -Value $Global:OSDCloud.OSReleaseID
+        New-ItemProperty -Path $RegPath -Name "OSEdition" -Value $Global:OSDCloud.OSEdition
+        New-ItemProperty -Path $RegPath -Name "OSLicense" -Value $Global:OSDCloud.OSActivation
+        New-ItemProperty -Path $RegPath -Name "OSActivation" -Value $Global:OSDCloud.OSActivation
+    }
+    #endregion
+    #=================================================
+    #region WiFi Mode
+    if ($Global:OSDCloud.SetWiFi -eq $true){
+        Write-SectionHeader "Gathering WiFi Information"
+        Write-Host -ForegroundColor Yellow "Please Supply the SSID & Press Enter - CASE SENSITIVE"
+        if (!($SSID)){$SSID = Read-Host}
+        Write-Host -ForegroundColor Yellow "Please Supply the Password & Press Enter - CASE SENSITIVE"
+        if (!($PSK)){$PSK = Read-Host -AsSecureString}
+    }
+    #endregion
+    #=================================================
+    #region M365 Mode - Eventually Make this a better GUI Experience with Channel Selection
+    if ($Global:OSDCloud.MS365Install -eq $true){
+        Write-SectionHeader "Gathering M365 Information"
+        Write-Host -ForegroundColor Magenta "Please Supply the CompanyName & Press Enter - CASE SENSITIVE"
+        if (!($M365CompanyName)){$M365CompanyName = Read-Host}
+        if ($M365CompanyName -eq ""){$M365CompanyName = "Organization"}
     }
     #endregion
     #==================================================================================================
@@ -992,7 +993,7 @@ function Invoke-OSDCloud {
 
         if ($Global:OSDCloud.OSImageIndex -ne 'AUTO') {
             #Home Single Language Correction
-            if (($OSLicense -eq 'Retail') -and ($Global:OSDCloud.WindowsImageCount -eq 9)) {
+            if (($OSActivation -eq 'Retail') -and ($Global:OSDCloud.WindowsImageCount -eq 9)) {
                 if ($OSEdition -eq 'Home Single Language') {
                     Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) OSDCloud Failed"
                     Write-Warning "This ESD does not contain a Home Single Edition Index"

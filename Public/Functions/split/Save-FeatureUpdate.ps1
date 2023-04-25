@@ -13,7 +13,7 @@ function Save-FeatureUpdate {
     https://github.com/OSDeploy/OSD/tree/master/Docs
     #>
 
-    [CmdletBinding(DefaultParameterSetName = 'v2')]
+    [CmdletBinding(DefaultParameterSetName = 'ByOSName')]
     param (
         #Path to save the Feature Update
         #Default = C:\OSDCloud\OS
@@ -23,49 +23,52 @@ function Save-FeatureUpdate {
         $DownloadPath = 'C:\OSDCloud\OS',
 
         #Operating System Name
-        #Default = Windows 11 22H2
-        [Parameter(ParameterSetName = 'v2')]
+        #Default = Windows 11 22H2 x64
+        [Parameter(ParameterSetName = 'ByOSName')]
         [ValidateSet(
-            'Windows 11 22H2',
-            'Windows 11 21H2',
-            'Windows 10 22H2',
-            'Windows 10 21H2',
-            'Windows 10 21H1',
-            'Windows 10 20H2',
-            'Windows 10 2004',
-            'Windows 10 1909',
-            'Windows 10 1903',
-            'Windows 10 1809')]
+            'Windows 11 22H2 x64',
+            'Windows 11 21H2 x64',
+            'Windows 10 22H2 x64',
+            'Windows 10 21H2 x64',
+            'Windows 10 21H1 x64',
+            'Windows 10 20H2 x64',
+            'Windows 10 2004 x64',
+            'Windows 10 1909 x64',
+            'Windows 10 1903 x64',
+            'Windows 10 1809 x64')]
+        [Alias('Name')]
         [System.String]
-        $OSName = 'Windows 11 22H2',
+        $OSName = 'Windows 11 22H2 x64',
 
         #Operating System Version
         #Default = Windows 11
         [Parameter(ParameterSetName = 'v1')]
         [ValidateSet('Windows 11','Windows 10')]
+        [Alias('Version')]
         [System.String]
         $OSVersion = 'Windows 11',
 
-        #Operating System Build
+        #Operating System ReleaseID
         #Default = 22H2
         [Parameter(ParameterSetName = 'v1')]
         [ValidateSet('22H2','21H2','21H1','20H2','2004','1909','1903','1809')]
-        [Alias('Build')]
+        [Alias('Build','OSBuild','ReleaseID')]
         [System.String]
-        $OSBuild = '22H2',
+        $OSReleaseID = '22H2',
 
         #Operating System Architecture
         #Default = x64
         [ValidateSet('x64','x86')]
+        [Alias('Arch','OSArch','Architecture')]
         [System.String]
-        $OSArch = 'x64',
+        $OSArchitecture = 'x64',
 
-        #Operating System Licensing
+        #Operating System Activation
         #Default = Volume
         [ValidateSet('Retail','Volume')]
-        [Alias('License')]
+        [Alias('License','OSLicense','Activation')]
         [System.String]
-        $OSLicense = 'Volume',
+        $OSActivation = 'Volume',
 
         #Operating System Language
         #Default = en-us
@@ -77,7 +80,7 @@ function Save-FeatureUpdate {
             'pl-pl','pt-br','pt-pt','ro-ro','ru-ru','sk-sk',
             'sl-si','sr-latn-rs','sv-se','th-th','tr-tr',
             'uk-ua','zh-cn','zh-tw')]
-        [Alias('Culture','OSCulture')]
+        [Alias('Culture','OSCulture','Language')]
         [System.String]
         $OSLanguage = 'en-us'
     )
@@ -86,17 +89,13 @@ function Save-FeatureUpdate {
     #=================================================
     $Results = Get-WSUSXML -Catalog FeatureUpdate -Silent
     #=================================================
-    #   OSArch
-    #=================================================
-    $Results = $Results | Where-Object {$_.UpdateArch -eq $OSArch}
-    #=================================================
     #   OSLanguage
     #=================================================
     $Results = $Results | Where-Object {$_.Title -match $OSLanguage}
     #=================================================
-    #   OSLicense
+    #   OSActivation
     #=================================================
-    switch ($OSLicense) {
+    switch ($OSActivation) {
         Retail  {$Results = $Results | Where-Object {$_.Title -match 'consumer'}}
         Volume  {$Results = $Results | Where-Object {$_.Title -match 'business'}}
     }
@@ -105,13 +104,14 @@ function Save-FeatureUpdate {
     #=================================================
     if ($PSCmdlet.ParameterSetName -eq 'v1') {
         Write-Verbose -Message 'v1'
+        $Results = $Results | Where-Object {$_.UpdateArch -eq $OSArchitecture}
         $Results = $Results | Where-Object {$_.UpdateOS -match $OSVersion}
-        $Results = $Results | Where-Object {$_.UpdateBuild -eq $OSBuild}
+        $Results = $Results | Where-Object {$_.UpdateBuild -eq $OSReleaseID}
     }
     #=================================================
-    #   v2
+    #   ByOSName
     #=================================================
-    if ($PSCmdlet.ParameterSetName -eq 'v2') {
+    if ($PSCmdlet.ParameterSetName -eq 'ByOSName') {
         switch ($OSName) {
             'Windows 11 22H2'   {$Results = $Results | Where-Object {$_.UpdateOS -match 'Windows 11'} | Where-Object {$_.UpdateBuild -eq '22H2'}}
             'Windows 11 21H2'   {$Results = $Results | Where-Object {$_.UpdateOS -match 'Windows 11'} | Where-Object {$_.UpdateBuild -eq '21H2'}}
