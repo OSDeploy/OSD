@@ -14,7 +14,7 @@ Updates an OSDCloud USB by downloading OS and Driver Packs from the internet
 
 ```
 Update-OSDCloudUSB [[-DriverPack] <String[]>] [-PSUpdate] [-OS] [[-OSLanguage] <String>]
- [[-OSLicense] <String>] [[-OSName] <String>] [<CommonParameters>]
+ [[-OSActivation] <String>] [[-OSName] <String>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -96,7 +96,7 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -OSLicense
+### -OSActivation
 Optional.
 Selects the proper OS License
 If this parameter is not used, Operating Systems with the specified License can be downloaded
@@ -105,7 +105,7 @@ If this parameter is not used, Operating Systems with the specified License can 
 ```yaml
 Type: String
 Parameter Sets: (All)
-Aliases:
+Aliases: Activation, License, OSLicense
 
 Required: False
 Position: 3

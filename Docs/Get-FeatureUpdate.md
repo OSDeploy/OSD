@@ -14,13 +14,14 @@ Returns a Windows Client Feature Update
 
 ### ByOSName (Default)
 ```
-Get-FeatureUpdate [-Name <String>] [-Activation <String>] [-Language <String>] [<CommonParameters>]
+Get-FeatureUpdate [-OSName <String>] [-OSArchitecture <String>] [-OSActivation <String>] [-OSLanguage <String>]
+ [<CommonParameters>]
 ```
 
 ### v1
 ```
-Get-FeatureUpdate [-Version <String>] [-ReleaseID <String>] [-Architecture <String>] [-Activation <String>]
- [-Language <String>] [<CommonParameters>]
+Get-FeatureUpdate [-OSVersion <String>] [-OSReleaseID <String>] [-OSArchitecture <String>]
+ [-OSActivation <String>] [-OSLanguage <String>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -35,13 +36,14 @@ Get-FeatureUpdate
 
 ## PARAMETERS
 
-### -Name
-{{ Fill Name Description }}
+### -OSName
+Operating System Name
+Default = Windows 11 22H2 x64
 
 ```yaml
 Type: String
 Parameter Sets: ByOSName
-Aliases: OSName
+Aliases: Name
 
 Required: False
 Position: Named
@@ -50,14 +52,14 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -Version
+### -OSVersion
 Operating System Version
 Default = Windows 11
 
 ```yaml
 Type: String
 Parameter Sets: v1
-Aliases: OSVersion
+Aliases: Version
 
 Required: False
 Position: Named
@@ -66,14 +68,14 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -ReleaseID
-Operating System Build
+### -OSReleaseID
+Operating System ReleaseID
 Default = 22H2
 
 ```yaml
 Type: String
 Parameter Sets: v1
-Aliases: Build, OSBuild, OSReleaseID
+Aliases: Build, OSBuild, ReleaseID
 
 Required: False
 Position: Named
@@ -82,14 +84,14 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -Architecture
+### -OSArchitecture
 Operating System Architecture
 Default = x64
 
 ```yaml
 Type: String
-Parameter Sets: v1
-Aliases: Arch, OSArch
+Parameter Sets: (All)
+Aliases: Arch, OSArch, Architecture
 
 Required: False
 Position: Named
@@ -98,14 +100,14 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -Activation
-Operating System Licensing
+### -OSActivation
+Operating System Activation
 Default = Volume
 
 ```yaml
 Type: String
 Parameter Sets: (All)
-Aliases: License, OSLicense, OSActivation
+Aliases: License, OSLicense, Activation
 
 Required: False
 Position: Named
@@ -114,14 +116,14 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -Language
+### -OSLanguage
 Operating System Language
 Default = en-us
 
 ```yaml
 Type: String
 Parameter Sets: (All)
-Aliases: Culture, OSCulture, OSLanguage
+Aliases: Culture, OSCulture, Language
 
 Required: False
 Position: Named

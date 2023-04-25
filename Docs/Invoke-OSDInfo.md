@@ -5,19 +5,19 @@ online version: https://github.com/OSDeploy/OSD/tree/master/Docs
 schema: 2.0.0
 ---
 
-# Update-MicrosoftDriverPackCatalog
+# Invoke-OSDInfo
 
 ## SYNOPSIS
-Updates the local Microsoft Surface DriverPacks in the OSD Module
+Displays OSD information, useful in an OS Deployment
 
 ## SYNTAX
 
 ```
-Update-MicrosoftDriverPackCatalog [-UpdateModuleCatalog] [-Verify] [<CommonParameters>]
+Invoke-OSDInfo [-Battery] [-TPM] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-Updates the local Microsoft Surface DriverPacks in the OSD Module
+Displays OSD information, useful in an OS Deployment
 
 ## EXAMPLES
 
@@ -30,9 +30,8 @@ PS C:\> {{ Add example code here }}
 
 ## PARAMETERS
 
-### -UpdateModuleCatalog
-Updates the OSD Module Offline Catalog.
-Requires Admin rights
+### -Battery
+{{ Fill Battery Description }}
 
 ```yaml
 Type: SwitchParameter
@@ -46,9 +45,8 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -Verify
-Verifies that the DriverPack is reachable.
-This will take some time to complete
+### -TPM
+{{ Fill TPM Description }}
 
 ```yaml
 Type: SwitchParameter

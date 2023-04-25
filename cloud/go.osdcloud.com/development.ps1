@@ -72,7 +72,7 @@ if ($WindowsPhase -eq 'WinPE') {
     $null = Stop-Transcript -ErrorAction Ignore
 
     #Start OSDCloud and pass all the parameters except the Language to allow for prompting
-    Start-OSDCloud -OSVersion 'Windows 10' -OSBuild 21H2 -OSEdition Development -OSLicense Volume -SkipAutopilot -SkipODT -Restart
+    Start-OSDCloud -OSVersion 'Windows 10' -OSBuild 21H2 -OSEdition Development -OSActivation Volume -SkipAutopilot -SkipODT -Restart
 }
 #endregion
 #=================================================

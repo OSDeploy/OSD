@@ -4884,7 +4884,7 @@ You will be prompted to select a USB Drive in GridView</dev:code>
       </command:example>
       <command:example>
         <maml:title>-------------------------- EXAMPLE 2 --------------------------</maml:title>
-        <dev:code>Edit-OSDCloudWinPE -StartOSDCloud '-OSBuild 22H2 -OSEdition Pro -OSLanguage en-us -OSLicense Retail'</dev:code>
+        <dev:code>Edit-OSDCloudWinPE -StartOSDCloud '-OSBuild 22H2 -OSEdition Pro -OSLanguage en-us -OSActivation Retail'</dev:code>
         <dev:remarks>
           <maml:para></maml:para>
         </dev:remarks>
@@ -8436,10 +8436,10 @@ Displays all the Dell BIOS Updates in GridView</dev:code>
     <command:syntax>
       <command:syntaxItem>
         <maml:name>Get-FeatureUpdate</maml:name>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="OSName">
-          <maml:name>Name</maml:name>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="Name">
+          <maml:name>OSName</maml:name>
           <maml:description>
-            <maml:para>{{ Fill Name Description }}</maml:para>
+            <maml:para>Operating System Name Default = Windows 11 22H2 x64</maml:para>
           </maml:description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -8448,10 +8448,22 @@ Displays all the Dell BIOS Updates in GridView</dev:code>
           </dev:type>
           <dev:defaultValue>Windows 11 22H2 x64</dev:defaultValue>
         </command:parameter>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="License, OSLicense, OSActivation">
-          <maml:name>Activation</maml:name>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="Arch, OSArch, Architecture">
+          <maml:name>OSArchitecture</maml:name>
           <maml:description>
-            <maml:para>Operating System Licensing Default = Volume</maml:para>
+            <maml:para>Operating System Architecture Default = x64</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>X64</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="License, OSLicense, Activation">
+          <maml:name>OSActivation</maml:name>
+          <maml:description>
+            <maml:para>Operating System Activation Default = Volume</maml:para>
           </maml:description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -8460,8 +8472,8 @@ Displays all the Dell BIOS Updates in GridView</dev:code>
           </dev:type>
           <dev:defaultValue>Volume</dev:defaultValue>
         </command:parameter>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="Culture, OSCulture, OSLanguage">
-          <maml:name>Language</maml:name>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="Culture, OSCulture, Language">
+          <maml:name>OSLanguage</maml:name>
           <maml:description>
             <maml:para>Operating System Language Default = en-us</maml:para>
           </maml:description>
@@ -8475,8 +8487,8 @@ Displays all the Dell BIOS Updates in GridView</dev:code>
       </command:syntaxItem>
       <command:syntaxItem>
         <maml:name>Get-FeatureUpdate</maml:name>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="OSVersion">
-          <maml:name>Version</maml:name>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="Version">
+          <maml:name>OSVersion</maml:name>
           <maml:description>
             <maml:para>Operating System Version Default = Windows 11</maml:para>
           </maml:description>
@@ -8487,10 +8499,10 @@ Displays all the Dell BIOS Updates in GridView</dev:code>
           </dev:type>
           <dev:defaultValue>Windows 11</dev:defaultValue>
         </command:parameter>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="Build, OSBuild, OSReleaseID">
-          <maml:name>ReleaseID</maml:name>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="Build, OSBuild, ReleaseID">
+          <maml:name>OSReleaseID</maml:name>
           <maml:description>
-            <maml:para>Operating System Build Default = 22H2</maml:para>
+            <maml:para>Operating System ReleaseID Default = 22H2</maml:para>
           </maml:description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -8499,8 +8511,8 @@ Displays all the Dell BIOS Updates in GridView</dev:code>
           </dev:type>
           <dev:defaultValue>22H2</dev:defaultValue>
         </command:parameter>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="Arch, OSArch">
-          <maml:name>Architecture</maml:name>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="Arch, OSArch, Architecture">
+          <maml:name>OSArchitecture</maml:name>
           <maml:description>
             <maml:para>Operating System Architecture Default = x64</maml:para>
           </maml:description>
@@ -8511,10 +8523,10 @@ Displays all the Dell BIOS Updates in GridView</dev:code>
           </dev:type>
           <dev:defaultValue>X64</dev:defaultValue>
         </command:parameter>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="License, OSLicense, OSActivation">
-          <maml:name>Activation</maml:name>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="License, OSLicense, Activation">
+          <maml:name>OSActivation</maml:name>
           <maml:description>
-            <maml:para>Operating System Licensing Default = Volume</maml:para>
+            <maml:para>Operating System Activation Default = Volume</maml:para>
           </maml:description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -8523,8 +8535,8 @@ Displays all the Dell BIOS Updates in GridView</dev:code>
           </dev:type>
           <dev:defaultValue>Volume</dev:defaultValue>
         </command:parameter>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="Culture, OSCulture, OSLanguage">
-          <maml:name>Language</maml:name>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="Culture, OSCulture, Language">
+          <maml:name>OSLanguage</maml:name>
           <maml:description>
             <maml:para>Operating System Language Default = en-us</maml:para>
           </maml:description>
@@ -8538,10 +8550,10 @@ Displays all the Dell BIOS Updates in GridView</dev:code>
       </command:syntaxItem>
     </command:syntax>
     <command:parameters>
-      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="OSName">
-        <maml:name>Name</maml:name>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="Name">
+        <maml:name>OSName</maml:name>
         <maml:description>
-          <maml:para>{{ Fill Name Description }}</maml:para>
+          <maml:para>Operating System Name Default = Windows 11 22H2 x64</maml:para>
         </maml:description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
@@ -8550,8 +8562,8 @@ Displays all the Dell BIOS Updates in GridView</dev:code>
         </dev:type>
         <dev:defaultValue>Windows 11 22H2 x64</dev:defaultValue>
       </command:parameter>
-      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="OSVersion">
-        <maml:name>Version</maml:name>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="Version">
+        <maml:name>OSVersion</maml:name>
         <maml:description>
           <maml:para>Operating System Version Default = Windows 11</maml:para>
         </maml:description>
@@ -8562,10 +8574,10 @@ Displays all the Dell BIOS Updates in GridView</dev:code>
         </dev:type>
         <dev:defaultValue>Windows 11</dev:defaultValue>
       </command:parameter>
-      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="Build, OSBuild, OSReleaseID">
-        <maml:name>ReleaseID</maml:name>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="Build, OSBuild, ReleaseID">
+        <maml:name>OSReleaseID</maml:name>
         <maml:description>
-          <maml:para>Operating System Build Default = 22H2</maml:para>
+          <maml:para>Operating System ReleaseID Default = 22H2</maml:para>
         </maml:description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
@@ -8574,8 +8586,8 @@ Displays all the Dell BIOS Updates in GridView</dev:code>
         </dev:type>
         <dev:defaultValue>22H2</dev:defaultValue>
       </command:parameter>
-      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="Arch, OSArch">
-        <maml:name>Architecture</maml:name>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="Arch, OSArch, Architecture">
+        <maml:name>OSArchitecture</maml:name>
         <maml:description>
           <maml:para>Operating System Architecture Default = x64</maml:para>
         </maml:description>
@@ -8586,10 +8598,10 @@ Displays all the Dell BIOS Updates in GridView</dev:code>
         </dev:type>
         <dev:defaultValue>X64</dev:defaultValue>
       </command:parameter>
-      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="License, OSLicense, OSActivation">
-        <maml:name>Activation</maml:name>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="License, OSLicense, Activation">
+        <maml:name>OSActivation</maml:name>
         <maml:description>
-          <maml:para>Operating System Licensing Default = Volume</maml:para>
+          <maml:para>Operating System Activation Default = Volume</maml:para>
         </maml:description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
@@ -8598,8 +8610,8 @@ Displays all the Dell BIOS Updates in GridView</dev:code>
         </dev:type>
         <dev:defaultValue>Volume</dev:defaultValue>
       </command:parameter>
-      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="Culture, OSCulture, OSLanguage">
-        <maml:name>Language</maml:name>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="Culture, OSCulture, Language">
+        <maml:name>OSLanguage</maml:name>
         <maml:description>
           <maml:para>Operating System Language Default = en-us</maml:para>
         </maml:description>
@@ -16936,6 +16948,94 @@ Option 2: Get-OSDPower -Property High</dev:code>
   </command:command>
   <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
     <command:details>
+      <command:name>Invoke-OSDInfo</command:name>
+      <command:verb>Invoke</command:verb>
+      <command:noun>OSDInfo</command:noun>
+      <maml:description>
+        <maml:para>Displays OSD information, useful in an OS Deployment</maml:para>
+      </maml:description>
+    </command:details>
+    <maml:description>
+      <maml:para>Displays OSD information, useful in an OS Deployment</maml:para>
+    </maml:description>
+    <command:syntax>
+      <command:syntaxItem>
+        <maml:name>Invoke-OSDInfo</maml:name>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+          <maml:name>Battery</maml:name>
+          <maml:description>
+            <maml:para>{{ Fill Battery Description }}</maml:para>
+          </maml:description>
+          <dev:type>
+            <maml:name>SwitchParameter</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>False</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+          <maml:name>TPM</maml:name>
+          <maml:description>
+            <maml:para>{{ Fill TPM Description }}</maml:para>
+          </maml:description>
+          <dev:type>
+            <maml:name>SwitchParameter</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>False</dev:defaultValue>
+        </command:parameter>
+      </command:syntaxItem>
+    </command:syntax>
+    <command:parameters>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+        <maml:name>Battery</maml:name>
+        <maml:description>
+          <maml:para>{{ Fill Battery Description }}</maml:para>
+        </maml:description>
+        <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
+        <dev:type>
+          <maml:name>SwitchParameter</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>False</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+        <maml:name>TPM</maml:name>
+        <maml:description>
+          <maml:para>{{ Fill TPM Description }}</maml:para>
+        </maml:description>
+        <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
+        <dev:type>
+          <maml:name>SwitchParameter</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>False</dev:defaultValue>
+      </command:parameter>
+    </command:parameters>
+    <command:inputTypes />
+    <command:returnValues />
+    <maml:alertSet>
+      <maml:alert>
+        <maml:para></maml:para>
+      </maml:alert>
+    </maml:alertSet>
+    <command:examples>
+      <command:example>
+        <maml:title>-------------------------- Example 1 --------------------------</maml:title>
+        <dev:code>PS C:\&gt; {{ Add example code here }}</dev:code>
+        <dev:remarks>
+          <maml:para>{{ Add example description here }}</maml:para>
+        </dev:remarks>
+      </command:example>
+    </command:examples>
+    <command:relatedLinks>
+      <maml:navigationLink>
+        <maml:linkText>https://github.com/OSDeploy/OSD/tree/master/Docs</maml:linkText>
+        <maml:uri>https://github.com/OSDeploy/OSD/tree/master/Docs</maml:uri>
+      </maml:navigationLink>
+    </command:relatedLinks>
+  </command:command>
+  <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
+    <command:details>
       <command:name>Invoke-OSDSpecialize</command:name>
       <command:verb>Invoke</command:verb>
       <command:noun>OSDSpecialize</command:noun>
@@ -19116,20 +19216,20 @@ Interactive.  Prompted to Confirm Clear-Disk for each Local Disk</dev:code>
           </dev:type>
           <dev:defaultValue>C:\OSDCloud\OS</dev:defaultValue>
         </command:parameter>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="Name">
           <maml:name>OSName</maml:name>
           <maml:description>
-            <maml:para>Operating System Name Default = Windows 11 22H2</maml:para>
+            <maml:para>Operating System Name Default = Windows 11 22H2 x64</maml:para>
           </maml:description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
             <maml:name>String</maml:name>
             <maml:uri />
           </dev:type>
-          <dev:defaultValue>Windows 11 22H2</dev:defaultValue>
+          <dev:defaultValue>Windows 11 22H2 x64</dev:defaultValue>
         </command:parameter>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
-          <maml:name>OSArch</maml:name>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="Arch, OSArch, Architecture">
+          <maml:name>OSArchitecture</maml:name>
           <maml:description>
             <maml:para>Operating System Architecture Default = x64</maml:para>
           </maml:description>
@@ -19140,10 +19240,10 @@ Interactive.  Prompted to Confirm Clear-Disk for each Local Disk</dev:code>
           </dev:type>
           <dev:defaultValue>X64</dev:defaultValue>
         </command:parameter>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="License">
-          <maml:name>OSLicense</maml:name>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="License, OSLicense, Activation">
+          <maml:name>OSActivation</maml:name>
           <maml:description>
-            <maml:para>Operating System Licensing Default = Volume</maml:para>
+            <maml:para>Operating System Activation Default = Volume</maml:para>
           </maml:description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -19152,7 +19252,7 @@ Interactive.  Prompted to Confirm Clear-Disk for each Local Disk</dev:code>
           </dev:type>
           <dev:defaultValue>Volume</dev:defaultValue>
         </command:parameter>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="Culture, OSCulture">
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="Culture, OSCulture, Language">
           <maml:name>OSLanguage</maml:name>
           <maml:description>
             <maml:para>Operating System Language Default = en-us</maml:para>
@@ -19179,7 +19279,7 @@ Interactive.  Prompted to Confirm Clear-Disk for each Local Disk</dev:code>
           </dev:type>
           <dev:defaultValue>C:\OSDCloud\OS</dev:defaultValue>
         </command:parameter>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="Version">
           <maml:name>OSVersion</maml:name>
           <maml:description>
             <maml:para>Operating System Version Default = Windows 11</maml:para>
@@ -19191,10 +19291,10 @@ Interactive.  Prompted to Confirm Clear-Disk for each Local Disk</dev:code>
           </dev:type>
           <dev:defaultValue>Windows 11</dev:defaultValue>
         </command:parameter>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="Build">
-          <maml:name>OSBuild</maml:name>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="Build, OSBuild, ReleaseID">
+          <maml:name>OSReleaseID</maml:name>
           <maml:description>
-            <maml:para>Operating System Build Default = 22H2</maml:para>
+            <maml:para>Operating System ReleaseID Default = 22H2</maml:para>
           </maml:description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -19203,8 +19303,8 @@ Interactive.  Prompted to Confirm Clear-Disk for each Local Disk</dev:code>
           </dev:type>
           <dev:defaultValue>22H2</dev:defaultValue>
         </command:parameter>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
-          <maml:name>OSArch</maml:name>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="Arch, OSArch, Architecture">
+          <maml:name>OSArchitecture</maml:name>
           <maml:description>
             <maml:para>Operating System Architecture Default = x64</maml:para>
           </maml:description>
@@ -19215,10 +19315,10 @@ Interactive.  Prompted to Confirm Clear-Disk for each Local Disk</dev:code>
           </dev:type>
           <dev:defaultValue>X64</dev:defaultValue>
         </command:parameter>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="License">
-          <maml:name>OSLicense</maml:name>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="License, OSLicense, Activation">
+          <maml:name>OSActivation</maml:name>
           <maml:description>
-            <maml:para>Operating System Licensing Default = Volume</maml:para>
+            <maml:para>Operating System Activation Default = Volume</maml:para>
           </maml:description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -19227,7 +19327,7 @@ Interactive.  Prompted to Confirm Clear-Disk for each Local Disk</dev:code>
           </dev:type>
           <dev:defaultValue>Volume</dev:defaultValue>
         </command:parameter>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="Culture, OSCulture">
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="Culture, OSCulture, Language">
           <maml:name>OSLanguage</maml:name>
           <maml:description>
             <maml:para>Operating System Language Default = en-us</maml:para>
@@ -19254,19 +19354,19 @@ Interactive.  Prompted to Confirm Clear-Disk for each Local Disk</dev:code>
         </dev:type>
         <dev:defaultValue>C:\OSDCloud\OS</dev:defaultValue>
       </command:parameter>
-      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="Name">
         <maml:name>OSName</maml:name>
         <maml:description>
-          <maml:para>Operating System Name Default = Windows 11 22H2</maml:para>
+          <maml:para>Operating System Name Default = Windows 11 22H2 x64</maml:para>
         </maml:description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
           <maml:name>String</maml:name>
           <maml:uri />
         </dev:type>
-        <dev:defaultValue>Windows 11 22H2</dev:defaultValue>
+        <dev:defaultValue>Windows 11 22H2 x64</dev:defaultValue>
       </command:parameter>
-      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="Version">
         <maml:name>OSVersion</maml:name>
         <maml:description>
           <maml:para>Operating System Version Default = Windows 11</maml:para>
@@ -19278,10 +19378,10 @@ Interactive.  Prompted to Confirm Clear-Disk for each Local Disk</dev:code>
         </dev:type>
         <dev:defaultValue>Windows 11</dev:defaultValue>
       </command:parameter>
-      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="Build">
-        <maml:name>OSBuild</maml:name>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="Build, OSBuild, ReleaseID">
+        <maml:name>OSReleaseID</maml:name>
         <maml:description>
-          <maml:para>Operating System Build Default = 22H2</maml:para>
+          <maml:para>Operating System ReleaseID Default = 22H2</maml:para>
         </maml:description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
@@ -19290,8 +19390,8 @@ Interactive.  Prompted to Confirm Clear-Disk for each Local Disk</dev:code>
         </dev:type>
         <dev:defaultValue>22H2</dev:defaultValue>
       </command:parameter>
-      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
-        <maml:name>OSArch</maml:name>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="Arch, OSArch, Architecture">
+        <maml:name>OSArchitecture</maml:name>
         <maml:description>
           <maml:para>Operating System Architecture Default = x64</maml:para>
         </maml:description>
@@ -19302,10 +19402,10 @@ Interactive.  Prompted to Confirm Clear-Disk for each Local Disk</dev:code>
         </dev:type>
         <dev:defaultValue>X64</dev:defaultValue>
       </command:parameter>
-      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="License">
-        <maml:name>OSLicense</maml:name>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="License, OSLicense, Activation">
+        <maml:name>OSActivation</maml:name>
         <maml:description>
-          <maml:para>Operating System Licensing Default = Volume</maml:para>
+          <maml:para>Operating System Activation Default = Volume</maml:para>
         </maml:description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
@@ -19314,7 +19414,7 @@ Interactive.  Prompted to Confirm Clear-Disk for each Local Disk</dev:code>
         </dev:type>
         <dev:defaultValue>Volume</dev:defaultValue>
       </command:parameter>
-      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="Culture, OSCulture">
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="Culture, OSCulture, Language">
         <maml:name>OSLanguage</maml:name>
         <maml:description>
           <maml:para>Operating System Language Default = en-us</maml:para>
@@ -24997,8 +25097,8 @@ Displays all RegistryXML entries found in Source Directory</dev:code>
           </dev:type>
           <dev:defaultValue>None</dev:defaultValue>
         </command:parameter>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
-          <maml:name>OSLicense</maml:name>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="License, OSLicense, Activation">
+          <maml:name>OSActivation</maml:name>
           <maml:description>
             <maml:para>License of the Windows Operating System</maml:para>
           </maml:description>
@@ -25172,8 +25272,8 @@ Displays all RegistryXML entries found in Source Directory</dev:code>
           </dev:type>
           <dev:defaultValue>None</dev:defaultValue>
         </command:parameter>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
-          <maml:name>OSLicense</maml:name>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="License, OSLicense, Activation">
+          <maml:name>OSActivation</maml:name>
           <maml:description>
             <maml:para>License of the Windows Operating System</maml:para>
           </maml:description>
@@ -25516,8 +25616,8 @@ Displays all RegistryXML entries found in Source Directory</dev:code>
         </dev:type>
         <dev:defaultValue>None</dev:defaultValue>
       </command:parameter>
-      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
-        <maml:name>OSLicense</maml:name>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="License, OSLicense, Activation">
+        <maml:name>OSActivation</maml:name>
         <maml:description>
           <maml:para>License of the Windows Operating System</maml:para>
         </maml:description>
@@ -25720,7 +25820,7 @@ Displays all RegistryXML entries found in Source Directory</dev:code>
             <maml:name>SwitchParameter</maml:name>
             <maml:uri />
           </dev:type>
-          <dev:defaultValue>False</dev:defaultValue>
+          <dev:defaultValue>$Global:OSDModuleResource.StartOSDCloudGUI.updateFirmware</dev:defaultValue>
         </command:parameter>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>Restart</maml:name>
@@ -25759,17 +25859,6 @@ Displays all RegistryXML entries found in Source Directory</dev:code>
           <maml:name>SkipAutopilot</maml:name>
           <maml:description>
             <maml:para>Skips the Autopilot Task routine</maml:para>
-          </maml:description>
-          <dev:type>
-            <maml:name>SwitchParameter</maml:name>
-            <maml:uri />
-          </dev:type>
-          <dev:defaultValue>False</dev:defaultValue>
-        </command:parameter>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
-          <maml:name>SkipODT</maml:name>
-          <maml:description>
-            <maml:para>Skips the ODT Task routine</maml:para>
           </maml:description>
           <dev:type>
             <maml:name>SwitchParameter</maml:name>
@@ -25836,10 +25925,21 @@ Displays all RegistryXML entries found in Source Directory</dev:code>
           </dev:type>
           <dev:defaultValue>None</dev:defaultValue>
         </command:parameter>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
-          <maml:name>Preview</maml:name>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="wi">
+          <maml:name>WhatIf</maml:name>
           <maml:description>
-            <maml:para>{{ Fill Preview Description }}</maml:para>
+            <maml:para>Shows what would happen if the cmdlet runs. The cmdlet is not run.</maml:para>
+          </maml:description>
+          <dev:type>
+            <maml:name>SwitchParameter</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>False</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="cf">
+          <maml:name>Confirm</maml:name>
+          <maml:description>
+            <maml:para>Prompts you for confirmation before running the cmdlet.</maml:para>
           </maml:description>
           <dev:type>
             <maml:name>SwitchParameter</maml:name>
@@ -25883,7 +25983,7 @@ Displays all RegistryXML entries found in Source Directory</dev:code>
             <maml:name>SwitchParameter</maml:name>
             <maml:uri />
           </dev:type>
-          <dev:defaultValue>False</dev:defaultValue>
+          <dev:defaultValue>$Global:OSDModuleResource.StartOSDCloudGUI.updateFirmware</dev:defaultValue>
         </command:parameter>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>Restart</maml:name>
@@ -25922,17 +26022,6 @@ Displays all RegistryXML entries found in Source Directory</dev:code>
           <maml:name>SkipAutopilot</maml:name>
           <maml:description>
             <maml:para>Skips the Autopilot Task routine</maml:para>
-          </maml:description>
-          <dev:type>
-            <maml:name>SwitchParameter</maml:name>
-            <maml:uri />
-          </dev:type>
-          <dev:defaultValue>False</dev:defaultValue>
-        </command:parameter>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
-          <maml:name>SkipODT</maml:name>
-          <maml:description>
-            <maml:para>Skips the ODT Task routine</maml:para>
           </maml:description>
           <dev:type>
             <maml:name>SwitchParameter</maml:name>
@@ -26011,10 +26100,21 @@ Displays all RegistryXML entries found in Source Directory</dev:code>
           </dev:type>
           <dev:defaultValue>None</dev:defaultValue>
         </command:parameter>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
-          <maml:name>Preview</maml:name>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="wi">
+          <maml:name>WhatIf</maml:name>
           <maml:description>
-            <maml:para>{{ Fill Preview Description }}</maml:para>
+            <maml:para>Shows what would happen if the cmdlet runs. The cmdlet is not run.</maml:para>
+          </maml:description>
+          <dev:type>
+            <maml:name>SwitchParameter</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>False</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="cf">
+          <maml:name>Confirm</maml:name>
+          <maml:description>
+            <maml:para>Prompts you for confirmation before running the cmdlet.</maml:para>
           </maml:description>
           <dev:type>
             <maml:name>SwitchParameter</maml:name>
@@ -26058,7 +26158,7 @@ Displays all RegistryXML entries found in Source Directory</dev:code>
             <maml:name>SwitchParameter</maml:name>
             <maml:uri />
           </dev:type>
-          <dev:defaultValue>False</dev:defaultValue>
+          <dev:defaultValue>$Global:OSDModuleResource.StartOSDCloudGUI.updateFirmware</dev:defaultValue>
         </command:parameter>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>Restart</maml:name>
@@ -26097,17 +26197,6 @@ Displays all RegistryXML entries found in Source Directory</dev:code>
           <maml:name>SkipAutopilot</maml:name>
           <maml:description>
             <maml:para>Skips the Autopilot Task routine</maml:para>
-          </maml:description>
-          <dev:type>
-            <maml:name>SwitchParameter</maml:name>
-            <maml:uri />
-          </dev:type>
-          <dev:defaultValue>False</dev:defaultValue>
-        </command:parameter>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
-          <maml:name>SkipODT</maml:name>
-          <maml:description>
-            <maml:para>Skips the ODT Task routine</maml:para>
           </maml:description>
           <dev:type>
             <maml:name>SwitchParameter</maml:name>
@@ -26161,10 +26250,21 @@ Displays all RegistryXML entries found in Source Directory</dev:code>
           </dev:type>
           <dev:defaultValue>AUTO</dev:defaultValue>
         </command:parameter>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
-          <maml:name>Preview</maml:name>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="wi">
+          <maml:name>WhatIf</maml:name>
           <maml:description>
-            <maml:para>{{ Fill Preview Description }}</maml:para>
+            <maml:para>Shows what would happen if the cmdlet runs. The cmdlet is not run.</maml:para>
+          </maml:description>
+          <dev:type>
+            <maml:name>SwitchParameter</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>False</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="cf">
+          <maml:name>Confirm</maml:name>
+          <maml:description>
+            <maml:para>Prompts you for confirmation before running the cmdlet.</maml:para>
           </maml:description>
           <dev:type>
             <maml:name>SwitchParameter</maml:name>
@@ -26209,7 +26309,7 @@ Displays all RegistryXML entries found in Source Directory</dev:code>
           <maml:name>SwitchParameter</maml:name>
           <maml:uri />
         </dev:type>
-        <dev:defaultValue>False</dev:defaultValue>
+        <dev:defaultValue>$Global:OSDModuleResource.StartOSDCloudGUI.updateFirmware</dev:defaultValue>
       </command:parameter>
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
         <maml:name>Restart</maml:name>
@@ -26251,18 +26351,6 @@ Displays all RegistryXML entries found in Source Directory</dev:code>
         <maml:name>SkipAutopilot</maml:name>
         <maml:description>
           <maml:para>Skips the Autopilot Task routine</maml:para>
-        </maml:description>
-        <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
-        <dev:type>
-          <maml:name>SwitchParameter</maml:name>
-          <maml:uri />
-        </dev:type>
-        <dev:defaultValue>False</dev:defaultValue>
-      </command:parameter>
-      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
-        <maml:name>SkipODT</maml:name>
-        <maml:description>
-          <maml:para>Skips the ODT Task routine</maml:para>
         </maml:description>
         <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
         <dev:type>
@@ -26391,10 +26479,22 @@ Displays all RegistryXML entries found in Source Directory</dev:code>
         </dev:type>
         <dev:defaultValue>AUTO</dev:defaultValue>
       </command:parameter>
-      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
-        <maml:name>Preview</maml:name>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="wi">
+        <maml:name>WhatIf</maml:name>
         <maml:description>
-          <maml:para>{{ Fill Preview Description }}</maml:para>
+          <maml:para>Shows what would happen if the cmdlet runs. The cmdlet is not run.</maml:para>
+        </maml:description>
+        <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
+        <dev:type>
+          <maml:name>SwitchParameter</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>False</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="cf">
+        <maml:name>Confirm</maml:name>
+        <maml:description>
+          <maml:para>Prompts you for confirmation before running the cmdlet.</maml:para>
         </maml:description>
         <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
         <dev:type>
@@ -28571,19 +28671,30 @@ Displays all RegistryXML entries found in Source Directory</dev:code>
       <command:verb>Update</command:verb>
       <command:noun>DellDriverPackCatalog</command:noun>
       <maml:description>
-        <maml:para>Builds the Dell DriverPack Catalog</maml:para>
+        <maml:para>Updates the local Dell DriverPack Catalog in the OSD Module</maml:para>
       </maml:description>
     </command:details>
     <maml:description>
-      <maml:para>Builds the Dell DriverPack Catalog</maml:para>
+      <maml:para>Updates the local Dell DriverPack Catalog in the OSD Module</maml:para>
     </maml:description>
     <command:syntax>
       <command:syntaxItem>
         <maml:name>Update-DellDriverPackCatalog</maml:name>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
-          <maml:name>UpdateModule</maml:name>
+          <maml:name>UpdateModuleCatalog</maml:name>
           <maml:description>
-            <maml:para>Updates the OSD Module Offline Catalog</maml:para>
+            <maml:para>Updates the OSD Module Offline Catalog. Requires Admin rights</maml:para>
+          </maml:description>
+          <dev:type>
+            <maml:name>SwitchParameter</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>False</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+          <maml:name>Verify</maml:name>
+          <maml:description>
+            <maml:para>Verifies that the DriverPack is reachable. This will take some time to complete</maml:para>
           </maml:description>
           <dev:type>
             <maml:name>SwitchParameter</maml:name>
@@ -28595,9 +28706,21 @@ Displays all RegistryXML entries found in Source Directory</dev:code>
     </command:syntax>
     <command:parameters>
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
-        <maml:name>UpdateModule</maml:name>
+        <maml:name>UpdateModuleCatalog</maml:name>
         <maml:description>
-          <maml:para>Updates the OSD Module Offline Catalog</maml:para>
+          <maml:para>Updates the OSD Module Offline Catalog. Requires Admin rights</maml:para>
+        </maml:description>
+        <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
+        <dev:type>
+          <maml:name>SwitchParameter</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>False</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+        <maml:name>Verify</maml:name>
+        <maml:description>
+          <maml:para>Verifies that the DriverPack is reachable. This will take some time to complete</maml:para>
         </maml:description>
         <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
         <dev:type>
@@ -28636,19 +28759,30 @@ Displays all RegistryXML entries found in Source Directory</dev:code>
       <command:verb>Update</command:verb>
       <command:noun>HPDriverPackCatalog</command:noun>
       <maml:description>
-        <maml:para>Builds the HP DriverPack Catalog</maml:para>
+        <maml:para>Updates the local HP DriverPack Catalog in the OSD Module</maml:para>
       </maml:description>
     </command:details>
     <maml:description>
-      <maml:para>Builds the HP DriverPack Catalog</maml:para>
+      <maml:para>Updates the local HP DriverPack Catalog in the OSD Module</maml:para>
     </maml:description>
     <command:syntax>
       <command:syntaxItem>
         <maml:name>Update-HPDriverPackCatalog</maml:name>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
-          <maml:name>UpdateModule</maml:name>
+          <maml:name>UpdateModuleCatalog</maml:name>
           <maml:description>
-            <maml:para>Updates the OSD Module Offline Catalog</maml:para>
+            <maml:para>Updates the OSD Module Offline Catalog. Requires Admin rights</maml:para>
+          </maml:description>
+          <dev:type>
+            <maml:name>SwitchParameter</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>False</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+          <maml:name>Verify</maml:name>
+          <maml:description>
+            <maml:para>Verifies that the DriverPack is reachable. This will take some time to complete</maml:para>
           </maml:description>
           <dev:type>
             <maml:name>SwitchParameter</maml:name>
@@ -28660,9 +28794,21 @@ Displays all RegistryXML entries found in Source Directory</dev:code>
     </command:syntax>
     <command:parameters>
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
-        <maml:name>UpdateModule</maml:name>
+        <maml:name>UpdateModuleCatalog</maml:name>
         <maml:description>
-          <maml:para>Updates the OSD Module Offline Catalog</maml:para>
+          <maml:para>Updates the OSD Module Offline Catalog. Requires Admin rights</maml:para>
+        </maml:description>
+        <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
+        <dev:type>
+          <maml:name>SwitchParameter</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>False</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+        <maml:name>Verify</maml:name>
+        <maml:description>
+          <maml:para>Verifies that the DriverPack is reachable. This will take some time to complete</maml:para>
         </maml:description>
         <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
         <dev:type>
@@ -28701,19 +28847,30 @@ Displays all RegistryXML entries found in Source Directory</dev:code>
       <command:verb>Update</command:verb>
       <command:noun>LenovoDriverPackCatalog</command:noun>
       <maml:description>
-        <maml:para>Builds the Lenovo DriverPack Catalog</maml:para>
+        <maml:para>Updates the local Lenovo DriverPack Catalog in the OSD Module</maml:para>
       </maml:description>
     </command:details>
     <maml:description>
-      <maml:para>Builds the Lenovo DriverPack Catalog</maml:para>
+      <maml:para>Updates the local Lenovo DriverPack Catalog in the OSD Module</maml:para>
     </maml:description>
     <command:syntax>
       <command:syntaxItem>
         <maml:name>Update-LenovoDriverPackCatalog</maml:name>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
-          <maml:name>UpdateModule</maml:name>
+          <maml:name>UpdateModuleCatalog</maml:name>
           <maml:description>
-            <maml:para>Updates the OSD Module Offline Catalog</maml:para>
+            <maml:para>Updates the OSD Module Offline Catalog. Requires Admin rights</maml:para>
+          </maml:description>
+          <dev:type>
+            <maml:name>SwitchParameter</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>False</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+          <maml:name>Verify</maml:name>
+          <maml:description>
+            <maml:para>Verifies that the DriverPack is reachable. This will take some time to complete</maml:para>
           </maml:description>
           <dev:type>
             <maml:name>SwitchParameter</maml:name>
@@ -28725,9 +28882,21 @@ Displays all RegistryXML entries found in Source Directory</dev:code>
     </command:syntax>
     <command:parameters>
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
-        <maml:name>UpdateModule</maml:name>
+        <maml:name>UpdateModuleCatalog</maml:name>
         <maml:description>
-          <maml:para>Updates the OSD Module Offline Catalog</maml:para>
+          <maml:para>Updates the OSD Module Offline Catalog. Requires Admin rights</maml:para>
+        </maml:description>
+        <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
+        <dev:type>
+          <maml:name>SwitchParameter</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>False</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+        <maml:name>Verify</maml:name>
+        <maml:description>
+          <maml:para>Verifies that the DriverPack is reachable. This will take some time to complete</maml:para>
         </maml:description>
         <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
         <dev:type>
@@ -28766,19 +28935,30 @@ Displays all RegistryXML entries found in Source Directory</dev:code>
       <command:verb>Update</command:verb>
       <command:noun>MicrosoftDriverPackCatalog</command:noun>
       <maml:description>
-        <maml:para>Builds the Microsoft Surface DriverPacks</maml:para>
+        <maml:para>Updates the local Microsoft Surface DriverPacks in the OSD Module</maml:para>
       </maml:description>
     </command:details>
     <maml:description>
-      <maml:para>Builds the Microsoft Surface DriverPacks</maml:para>
+      <maml:para>Updates the local Microsoft Surface DriverPacks in the OSD Module</maml:para>
     </maml:description>
     <command:syntax>
       <command:syntaxItem>
         <maml:name>Update-MicrosoftDriverPackCatalog</maml:name>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
-          <maml:name>UpdateModule</maml:name>
+          <maml:name>UpdateModuleCatalog</maml:name>
           <maml:description>
-            <maml:para>Updates the OSD Module Offline Catalog</maml:para>
+            <maml:para>Updates the OSD Module Offline Catalog. Requires Admin rights</maml:para>
+          </maml:description>
+          <dev:type>
+            <maml:name>SwitchParameter</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>False</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+          <maml:name>Verify</maml:name>
+          <maml:description>
+            <maml:para>Verifies that the DriverPack is reachable. This will take some time to complete</maml:para>
           </maml:description>
           <dev:type>
             <maml:name>SwitchParameter</maml:name>
@@ -28790,9 +28970,21 @@ Displays all RegistryXML entries found in Source Directory</dev:code>
     </command:syntax>
     <command:parameters>
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
-        <maml:name>UpdateModule</maml:name>
+        <maml:name>UpdateModuleCatalog</maml:name>
         <maml:description>
-          <maml:para>Updates the OSD Module Offline Catalog</maml:para>
+          <maml:para>Updates the OSD Module Offline Catalog. Requires Admin rights</maml:para>
+        </maml:description>
+        <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
+        <dev:type>
+          <maml:name>SwitchParameter</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>False</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+        <maml:name>Verify</maml:name>
+        <maml:description>
+          <maml:para>Verifies that the DriverPack is reachable. This will take some time to complete</maml:para>
         </maml:description>
         <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
         <dev:type>
@@ -29152,8 +29344,8 @@ Yes, this will update your BIOS silently, AND reboot when its done</dev:code>
           </dev:type>
           <dev:defaultValue>None</dev:defaultValue>
         </command:parameter>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="3" aliases="none">
-          <maml:name>OSLicense</maml:name>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="3" aliases="Activation, License, OSLicense">
+          <maml:name>OSActivation</maml:name>
           <maml:description>
             <maml:para>Optional. Selects the proper OS License If this parameter is not used, Operating Systems with the specified License can be downloaded 'Retail','Volume'</maml:para>
           </maml:description>
@@ -29249,8 +29441,8 @@ Yes, this will update your BIOS silently, AND reboot when its done</dev:code>
         </dev:type>
         <dev:defaultValue>None</dev:defaultValue>
       </command:parameter>
-      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="3" aliases="none">
-        <maml:name>OSLicense</maml:name>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="3" aliases="Activation, License, OSLicense">
+        <maml:name>OSActivation</maml:name>
         <maml:description>
           <maml:para>Optional. Selects the proper OS License If this parameter is not used, Operating Systems with the specified License can be downloaded 'Retail','Volume'</maml:para>
         </maml:description>

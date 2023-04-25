@@ -15,22 +15,23 @@ Starts the OSDCloud Windows 10 or 11 Build Process from the OSD Module or a GitH
 ### Default (Default)
 ```
 Start-OSDCloudCLI [-ComputerManufacturer <String>] [-ComputerProduct <String>] [-Firmware] [-Restart]
- [-Shutdown] [-Screenshot] [-SkipAutopilot] [-SkipODT] [-ZTI] [-OSName <String>] [-OSEdition <String>]
- [-OSLanguage <String>] [-OSActivation <String>] [-Preview] [<CommonParameters>]
+ [-Shutdown] [-Screenshot] [-SkipAutopilot] [-ZTI] [-OSName <String>] [-OSEdition <String>]
+ [-OSLanguage <String>] [-OSActivation <String>] [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 
 ### Legacy
 ```
 Start-OSDCloudCLI [-ComputerManufacturer <String>] [-ComputerProduct <String>] [-Firmware] [-Restart]
- [-Shutdown] [-Screenshot] [-SkipAutopilot] [-SkipODT] [-ZTI] [-OSVersion <String>] [-OSReleaseID <String>]
- [-OSEdition <String>] [-OSLanguage <String>] [-OSActivation <String>] [-Preview] [<CommonParameters>]
+ [-Shutdown] [-Screenshot] [-SkipAutopilot] [-ZTI] [-OSVersion <String>] [-OSReleaseID <String>]
+ [-OSEdition <String>] [-OSLanguage <String>] [-OSActivation <String>] [-WhatIf] [-Confirm]
+ [<CommonParameters>]
 ```
 
 ### CustomImage
 ```
 Start-OSDCloudCLI [-ComputerManufacturer <String>] [-ComputerProduct <String>] [-Firmware] [-Restart]
- [-Shutdown] [-Screenshot] [-SkipAutopilot] [-SkipODT] [-ZTI] [-FindImageFile] [-ImageFileUrl <String>]
- [-OSImageIndex <String>] [-Preview] [<CommonParameters>]
+ [-Shutdown] [-Screenshot] [-SkipAutopilot] [-ZTI] [-FindImageFile] [-ImageFileUrl <String>]
+ [-OSImageIndex <String>] [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -87,7 +88,7 @@ Aliases:
 
 Required: False
 Position: Named
-Default value: False
+Default value: $Global:OSDModuleResource.StartOSDCloudGUI.updateFirmware
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
@@ -139,21 +140,6 @@ Accept wildcard characters: False
 
 ### -SkipAutopilot
 Skips the Autopilot Task routine
-
-```yaml
-Type: SwitchParameter
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: Named
-Default value: False
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -SkipODT
-Skips the ODT Task routine
 
 ```yaml
 Type: SwitchParameter
@@ -320,17 +306,33 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -Preview
-{{ Fill Preview Description }}
+### -WhatIf
+Shows what would happen if the cmdlet runs.
+The cmdlet is not run.
 
 ```yaml
 Type: SwitchParameter
 Parameter Sets: (All)
-Aliases:
+Aliases: wi
 
 Required: False
 Position: Named
-Default value: False
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -Confirm
+Prompts you for confirmation before running the cmdlet.
+
+```yaml
+Type: SwitchParameter
+Parameter Sets: (All)
+Aliases: cf
+
+Required: False
+Position: Named
+Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```

@@ -8,16 +8,16 @@ schema: 2.0.0
 # Update-LenovoDriverPackCatalog
 
 ## SYNOPSIS
-Builds the Lenovo DriverPack Catalog
+Updates the local Lenovo DriverPack Catalog in the OSD Module
 
 ## SYNTAX
 
 ```
-Update-LenovoDriverPackCatalog [-UpdateModule] [<CommonParameters>]
+Update-LenovoDriverPackCatalog [-UpdateModuleCatalog] [-Verify] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-Builds the Lenovo DriverPack Catalog
+Updates the local Lenovo DriverPack Catalog in the OSD Module
 
 ## EXAMPLES
 
@@ -30,8 +30,25 @@ PS C:\> {{ Add example code here }}
 
 ## PARAMETERS
 
-### -UpdateModule
-Updates the OSD Module Offline Catalog
+### -UpdateModuleCatalog
+Updates the OSD Module Offline Catalog.
+Requires Admin rights
+
+```yaml
+Type: SwitchParameter
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: False
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -Verify
+Verifies that the DriverPack is reachable.
+This will take some time to complete
 
 ```yaml
 Type: SwitchParameter

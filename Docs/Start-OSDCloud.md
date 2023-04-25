@@ -16,14 +16,14 @@ Starts the OSDCloud Windows 10 or 11 Build Process from the OSD Module or a GitH
 ```
 Start-OSDCloud [-Manufacturer <String>] [-Product <String>] [-Firmware] [-Restart] [-Shutdown] [-Screenshot]
  [-SkipAutopilot] [-SkipODT] [-ZTI] [-OSName <String>] [-OSEdition <String>] [-OSLanguage <String>]
- [-OSLicense <String>] [-Preview] [<CommonParameters>]
+ [-OSActivation <String>] [-Preview] [<CommonParameters>]
 ```
 
 ### Legacy
 ```
 Start-OSDCloud [-Manufacturer <String>] [-Product <String>] [-Firmware] [-Restart] [-Shutdown] [-Screenshot]
  [-SkipAutopilot] [-SkipODT] [-ZTI] [-OSVersion <String>] [-OSBuild <String>] [-OSEdition <String>]
- [-OSLanguage <String>] [-OSLicense <String>] [-Preview] [<CommonParameters>]
+ [-OSLanguage <String>] [-OSActivation <String>] [-Preview] [<CommonParameters>]
 ```
 
 ### CustomImage
@@ -260,13 +260,13 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -OSLicense
+### -OSActivation
 License of the Windows Operating System
 
 ```yaml
 Type: String
 Parameter Sets: Default, Legacy
-Aliases:
+Aliases: License, OSLicense, Activation
 
 Required: False
 Position: Named
