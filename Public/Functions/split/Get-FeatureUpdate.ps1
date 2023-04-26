@@ -101,6 +101,9 @@ function Get-FeatureUpdate {
         $Results = $Results | Where-Object {$_.UpdateOS -match $OSVersion}
         $Results = $Results | Where-Object {$_.UpdateBuild -eq $OSReleaseID}
     }
+    else {
+        $Results = $Results | Where-Object {$_.UpdateArch -eq $OSArchitecture}
+    }
     #=================================================
     #   ByOSName
     #=================================================
