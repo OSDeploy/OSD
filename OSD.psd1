@@ -7,10 +7,10 @@
     ModuleVersion           = '23.5.1.1'
     CompatiblePSEditions    = @('Desktop')
     GUID                    = '9fe5b9b6-0224-4d87-9018-a8978529f6f5'
-    Author                  = 'David Segura . Gary Blok . Jérôme Bezet-Torres . Damien Van Robaeys'
+    Author                  = 'David Segura . Gary Blok . Jérôme Bezet-Torres . Damien Van Robaeys . Mike Marable'
     CompanyName             = 'OSD Community'
     Copyright               = '(c) 2023 OSDeploy'
-    Description             = 'The OSD PowerShell Module is a collection of functions and catalogs that make OSDCloud work'
+    Description             = 'MMSMOA Edition'
     PowerShellVersion       = '5.1'
     FormatsToProcess        = @(
         '.\Format\MsUpCat.Format.ps1xml'
