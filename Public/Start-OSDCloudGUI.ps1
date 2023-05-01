@@ -34,24 +34,16 @@ function Start-OSDCloudGUI {
         $ComputerProduct = (Get-MyComputerProduct)
     )
     #================================================
-    #   Defaults
-    #================================================
-
-    #================================================
-    #   Brand
-    #================================================
-    $Global:OSDCloudGuiBranding = @{
-        Title   = $BrandName
-        Color   = $BrandColor
-    }
-    #================================================
     #   Pass Variables to OSDCloudGUI
     #================================================
     $Global:OSDCloudGUI = $null
     $Global:OSDCloudGUI = [ordered]@{
         Function                    = [System.String]'Start-OSDCloudGUI'
         LaunchMethod                = [System.String]'OSDCloudGUI'
-        
+
+        AutomateConfiguration       = $null
+        AutomateJsonFile            = $null
+
         BrandName                   = [System.String]$BrandName
         BrandColor                  = [System.String]$BrandColor
         
@@ -89,6 +81,33 @@ function Start-OSDCloudGUI {
         updateSCSIDrivers           = [System.Boolean]$Global:OSDModuleResource.StartOSDCloudGUI.updateSCSIDrivers
         
         TimeStart                   = [datetime](Get-Date)
+    }
+    #================================================
+    #   OSDCloud Automate
+    #================================================
+    Write-Host -ForegroundColor DarkGray "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Exporting default configuration to $env:Temp\Start-OSDCloudGUI.json"
+    $Global:OSDCloudGUI | ConvertTo-Json -Depth 10 | Out-File -FilePath "$env:TEMP\Start-OSDCloudGUI.json" -Force
+    
+    $Global:OSDCloudGUI.AutomateJsonFile = Get-PSDrive -PSProvider FileSystem | Where-Object {$_.Name -ne 'C'} | ForEach-Object {
+        Get-ChildItem "$($_.Root)OSDCloud\Automate\Default" -Include "Start-OSDCloudGUI.json" -File -Force -Recurse -ErrorAction Ignore
+    }
+    if ($Global:OSDCloudGUI.AutomateJsonFile) {
+        foreach ($Item in $Global:OSDCloudGUI.AutomateJsonFile) {
+            Write-Host -ForegroundColor DarkGray "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) $($Item.FullName)"
+            $Global:OSDCloudGUI.AutomateConfiguration = Get-Content -Path "$($Item.FullName)" -Raw | ConvertFrom-Json -ErrorAction "Stop" | ConvertTo-Hashtable
+        }
+    }
+    if ($Global:OSDCloudGUI.AutomateConfiguration) {
+        foreach ($Key in $Global:OSDCloudGUI.AutomateConfiguration.Keys) {
+            $Global:OSDCloudGUI.$Key = $Global:OSDCloudGUI.AutomateConfiguration.$Key
+        }
+    }
+    #================================================
+    #   Brand
+    #================================================
+    $Global:OSDCloudGuiBranding = @{
+        Title = $Global:OSDCloudGUI.BrandName
+        Color = $Global:OSDCloudGUI.BrandColor
     }
     #================================================
     #   Set Driver Pack

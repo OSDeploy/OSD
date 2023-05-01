@@ -1,8 +1,8 @@
 Import-Module -Name OSD -Force
-#Update-DellDriverPackCatalog -UpdateModuleCatalog -Verify
-#Update-HPDriverPackCatalog -UpdateModuleCatalog -Verify
-#Update-LenovoDriverPackCatalog -UpdateModuleCatalog -Verify
-#Update-MicrosoftDriverPackCatalog -UpdateModuleCatalog
+Update-DellDriverPackCatalog -UpdateModuleCatalog -Verify
+Update-HPDriverPackCatalog -UpdateModuleCatalog -Verify
+Update-LenovoDriverPackCatalog -UpdateModuleCatalog -Verify
+Update-MicrosoftDriverPackCatalog -UpdateModuleCatalog
 #=================================================
 #   MasterDriverPack.json
 #=================================================
@@ -22,5 +22,9 @@ OSReleaseId,OSBuild,HashMD5, `
 @{Name='Guid';Expression={([guid]((New-Guid).ToString()))}}
 
 $Results | Export-Clixml -Path (Join-Path (Get-Module -Name OSD -ListAvailable | Sort-Object Version -Descending | Select-Object -First 1).ModuleBase "Catalogs\CloudDriverPacks.xml") -Force
-Import-Clixml -Path (Join-Path (Get-Module -Name OSD -ListAvailable | Sort-Object Version -Descending | Select-Object -First 1).ModuleBase "Catalogs\CloudDriverPacks.xml") | ConvertTo-Json | Out-File (Join-Path (Get-Module -Name OSD -ListAvailable | Sort-Object Version -Descending | Select-Object -First 1).ModuleBase "Catalogs\CloudDriverPacks.json") -Encoding ascii -Width 2000 -Force
+Import-Clixml -Path (Join-Path (Get-Module -Name OSD -ListAvailable | `
+Sort-Object Version -Descending | `
+Select-Object -First 1).ModuleBase "Catalogs\CloudDriverPacks.xml") | `
+ConvertTo-Json | `
+Out-File (Join-Path (Get-Module -Name OSD -ListAvailable | Sort-Object Version -Descending | Select-Object -First 1).ModuleBase "Catalogs\CloudDriverPacks.json") -Encoding ascii -Width 2000 -Force
 #================================================
