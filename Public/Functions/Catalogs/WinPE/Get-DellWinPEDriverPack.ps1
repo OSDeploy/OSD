@@ -32,7 +32,7 @@ function Get-DellWinPEDriverPack {
         try {
             $null = Invoke-WebRequest -Uri $CurrentDriverPackPage -Method Head -UseBasicParsing -ErrorAction Stop
             Write-Verbose "Online: $CurrentDriverPackPage"
-            $CurrentDriverPack = (Invoke-WebRequest -Uri $CurrentDriverPackPage -UseBasicParsing -Method Get).Links | Where-Object {$_.outerHTML -match 'Download Now'} | Select-Object -ExpandProperty href
+            $CurrentDriverPack = (Invoke-WebRequest -Uri $CurrentDriverPackPage -UseBasicParsing -Method Get).Links | Where-Object {$_.href -like 'https://*.dell.com/*/WinPE10*.CAB'} | Select-Object -ExpandProperty href
             $CurrentDriverPack = $CurrentDriverPack.Replace('dl.dell.com', 'downloads.dell.com')
         }
         catch {
