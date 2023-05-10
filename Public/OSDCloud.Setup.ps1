@@ -399,7 +399,7 @@ PowerShell -Nol -C $InitializeOSDCloudStartnetCommand
     #	UpdateUSB
     #=================================================
     if ($UpdateUSB) {
-        $WinpeVolumes = (Get-Volume.usb | Where-Object {$_.FileSystemLabel -eq 'WinPE'}).DriveLetter
+        $WinpeVolumes = (Get-USBVolume | Where-Object {$_.FileSystemLabel -eq 'WinPE'}).DriveLetter
     
         if ($WinpeVolumes) {
             foreach ($WinpeVolume in $WinpeVolumes) {
@@ -1556,19 +1556,19 @@ function New-OSDCloudUSB {
         Break
     }
     #=================================================
-    #	New-Bootable.usb
+    #	New-BootableUSBDrive
     #=================================================
-    $BootableUSB = New-Bootable.usb -BootLabel $BootLabel -DataLabel $DataLabel
+    $BootableUSBDrive = New-BootableUSBDrive -BootLabel $BootLabel -DataLabel $DataLabel
     #=================================================
     #	Test USB Volumes
     #=================================================
-    $WinPEPartition = Get-Partition.usb | Where-Object {($_.DiskNumber -eq $BootableUSB.DiskNumber) -and ($_.PartitionNumber -eq 2)}
+    $WinPEPartition = Get-USBPartition | Where-Object {($_.DiskNumber -eq $BootableUSBDrive.DiskNumber) -and ($_.PartitionNumber -eq 2)}
     if (-NOT ($WinPEPartition)) {
         Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Unable to create OSDCloud WinPE Partition"
         Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Something went very very wrong in this process"
         Break
     }
-    $OSDCloudPartition = Get-Partition.usb | Where-Object {($_.DiskNumber -eq $BootableUSB.DiskNumber) -and ($_.PartitionNumber -eq 1)}
+    $OSDCloudPartition = Get-USBPartition | Where-Object {($_.DiskNumber -eq $BootableUSBDrive.DiskNumber) -and ($_.PartitionNumber -eq 1)}
     if (-NOT ($OSDCloudPartition)) {
         Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Unable to create OSDCloud Data Partition"
         Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Something went very very wrong in this process"
@@ -1778,7 +1778,7 @@ function New-OSDCloudWorkspace {
         #=================================================
         #	USB Volumes
         #=================================================
-        $UsbVolumes = Get-Volume.usb
+        $UsbVolumes = Get-USBVolume
         if ($UsbVolumes) {
             Write-Host -ForegroundColor DarkGray "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) USB volumes found"
         }
@@ -1865,7 +1865,7 @@ function New-OSDCloudWorkspace {
             Break
         }
     
-        $OSDCloudVolumes = Get-Volume.usb | Where-Object {($_.FileSystemLabel -eq 'OSDCloud') -or ($_.FileSystemLabel -eq 'OSDCloudUSB')}
+        $OSDCloudVolumes = Get-USBVolume | Where-Object {($_.FileSystemLabel -eq 'OSDCloud') -or ($_.FileSystemLabel -eq 'OSDCloudUSB')}
     
         if ($OSDCloudVolumes) {
             foreach ($OSDCloudVolume in $OSDCloudVolumes) {
@@ -2128,7 +2128,7 @@ function Update-OSDCloudUSB {
     #=================================================
     #	Initialize
     #=================================================
-    $UsbVolumes = Get-Volume.usb
+    $UsbVolumes = Get-USBVolume
     $WorkspacePath = Get-OSDCloudWorkspace
     $IsAdmin = Get-OSDGather -Property IsAdmin
     #=================================================
@@ -2175,7 +2175,7 @@ function Update-OSDCloudUSB {
     #=================================================
     #	Set WinPE USB Volume Label
     #=================================================
-    $WinpeVolumes = Get-Volume.usb | Where-Object {($_.FileSystemLabel -eq 'USBBOOT') -or ($_.FileSystemLabel -eq 'OSDBOOT') -or ($_.FileSystemLabel -eq 'USB BOOT')}
+    $WinpeVolumes = Get-USBVolume | Where-Object {($_.FileSystemLabel -eq 'USBBOOT') -or ($_.FileSystemLabel -eq 'OSDBOOT') -or ($_.FileSystemLabel -eq 'USB BOOT')}
     if ($WinpeVolumes) {
         if ($IsAdmin) {
             Write-Host -ForegroundColor DarkGray "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Setting OSDCloud USB WinPE volume labels to WinPE"
@@ -2191,7 +2191,7 @@ function Update-OSDCloudUSB {
     #=================================================
     #	Update all WinPE volumes with Workspace
     #=================================================
-    $WinpeVolumes = Get-Volume.usb | Where-Object {($_.FileSystemLabel -eq 'USBBOOT') -or ($_.FileSystemLabel -eq 'OSDBOOT') -or ($_.FileSystemLabel -eq 'USB BOOT') -or ($_.FileSystemLabel -eq 'WinPE')}
+    $WinpeVolumes = Get-USBVolume | Where-Object {($_.FileSystemLabel -eq 'USBBOOT') -or ($_.FileSystemLabel -eq 'OSDBOOT') -or ($_.FileSystemLabel -eq 'USB BOOT') -or ($_.FileSystemLabel -eq 'WinPE')}
     if ($WinpeVolumes -and $RobocopyWorkspace) {
         foreach ($volume in $WinpeVolumes) {
             if (Test-Path -Path "$($volume.DriveLetter):\") {
@@ -2264,7 +2264,7 @@ function Update-OSDCloudUSB {
     #=================================================
     #   OSDCloudVolumes
     #=================================================
-    $OSDCloudVolumes = Get-Volume.usb | Where-Object {$_.FileSystemLabel -eq 'OSDCloud'} | Where-Object {$_.SizeGB -ge 8} | Sort-Object DriveLetter -Descending
+    $OSDCloudVolumes = Get-USBVolume | Where-Object {$_.FileSystemLabel -eq 'OSDCloud'} | Where-Object {$_.SizeGB -ge 8} | Sort-Object DriveLetter -Descending
     if ($OSDCloudVolumes) {
         if ($IsAdmin) {
             Write-Host -ForegroundColor DarkGray "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Setting OSDCloud USB volume labels to OSDCloudUSB"
@@ -2280,7 +2280,7 @@ function Update-OSDCloudUSB {
     #=================================================
     #   IsOfflineReady
     #=================================================
-    $OSDCloudVolumes = Get-Volume.usb | Where-Object {($_.FileSystemLabel -match 'OSDCloud') -or ($_.FileSystemLabel -match 'BHIMAGE')} | Where-Object {$_.SizeGB -ge 8} | Sort-Object DriveLetter -Descending
+    $OSDCloudVolumes = Get-USBVolume | Where-Object {($_.FileSystemLabel -match 'OSDCloud') -or ($_.FileSystemLabel -match 'BHIMAGE')} | Where-Object {$_.SizeGB -ge 8} | Sort-Object DriveLetter -Descending
     $IsOfflineReady = $false
     if ($RobocopyWorkspace -and $OSDCloudVolumes) {
         foreach ($volume in $OSDCloudVolumes) {

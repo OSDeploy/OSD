@@ -1,7 +1,7 @@
 [
     {
         "Catalog":  "Windows 11 Dynamic Update",
-        "OSDVersion":  "23.4.11.1",
+        "OSDVersion":  "23.5.9.1",
         "OSDStatus":  "",
         "UpdateOS":  "Windows 11",
         "UpdateBuild":  "21H2",
@@ -47,13 +47,13 @@
         "AdditionalHash":  "40 140 168 238 50 208 97 212 84 182 228 22 188 19 83 62 21 90 42 196 231 139 199 198 133 53 16 54 11 116 104 124",
         "OSDCore":  "",
         "OSDWinPE":  "",
-        "OSDGuid":  "d031f540-99f4-4bf3-99c5-43fb341f8a00",
+        "OSDGuid":  "c76e4689-030a-4f9f-b9cd-7f3cfd053c30",
         "PartitionKey":  "Windows 11 Dynamic Update",
-        "RowKey":  "d031f540-99f4-4bf3-99c5-43fb341f8a00"
+        "RowKey":  "c76e4689-030a-4f9f-b9cd-7f3cfd053c30"
     },
     {
         "Catalog":  "Windows 11 Dynamic Update",
-        "OSDVersion":  "23.4.11.1",
+        "OSDVersion":  "23.5.9.1",
         "OSDStatus":  "",
         "UpdateOS":  "Windows 11",
         "UpdateBuild":  "22H2",
@@ -99,13 +99,13 @@
         "AdditionalHash":  "155 232 132 19 192 229 226 23 216 215 178 0 240 206 18 251 58 240 81 111 33 35 118 38 9 44 54 228 164 193 238 122",
         "OSDCore":  "",
         "OSDWinPE":  "",
-        "OSDGuid":  "17a6aec0-4a4c-4d96-8eac-3089f186eb26",
+        "OSDGuid":  "17fc268c-bde0-470b-ac98-69607884c3da",
         "PartitionKey":  "Windows 11 Dynamic Update",
-        "RowKey":  "17a6aec0-4a4c-4d96-8eac-3089f186eb26"
+        "RowKey":  "17fc268c-bde0-470b-ac98-69607884c3da"
     },
     {
         "Catalog":  "Windows 11 Dynamic Update",
-        "OSDVersion":  "23.4.11.1",
+        "OSDVersion":  "23.5.9.1",
         "OSDStatus":  "",
         "UpdateOS":  "Windows 11",
         "UpdateBuild":  "22H2",
@@ -151,13 +151,13 @@
         "AdditionalHash":  "236 0 155 217 176 36 9 64 138 171 182 53 75 101 211 193 31 184 74 18 189 0 106 137 107 142 160 27 184 152 101 114",
         "OSDCore":  "",
         "OSDWinPE":  "",
-        "OSDGuid":  "b9592441-5312-48a1-ae22-51a6613fabfc",
+        "OSDGuid":  "cd686719-1311-4985-96a6-5bb2451dff64",
         "PartitionKey":  "Windows 11 Dynamic Update",
-        "RowKey":  "b9592441-5312-48a1-ae22-51a6613fabfc"
+        "RowKey":  "cd686719-1311-4985-96a6-5bb2451dff64"
     },
     {
         "Catalog":  "Windows 11 Dynamic Update",
-        "OSDVersion":  "23.4.11.1",
+        "OSDVersion":  "23.5.9.1",
         "OSDStatus":  "",
         "UpdateOS":  "Windows 11",
         "UpdateBuild":  "21H2",
@@ -203,8 +203,8 @@
         "AdditionalHash":  "37 39 234 126 139 178 240 239 103 89 41 210 137 133 224 207 201 150 237 171 72 229 229 214 48 182 209 220 248 142 47 51",
         "OSDCore":  "",
         "OSDWinPE":  "",
-        "OSDGuid":  "cd603a46-ca5c-44f0-9fb0-3abc51764c72",
+        "OSDGuid":  "ca6c7474-b0c5-4b0f-83bd-dca47e1fe7ca",
         "PartitionKey":  "Windows 11 Dynamic Update",
-        "RowKey":  "cd603a46-ca5c-44f0-9fb0-3abc51764c72"
+        "RowKey":  "ca6c7474-b0c5-4b0f-83bd-dca47e1fe7ca"
     }
 ]

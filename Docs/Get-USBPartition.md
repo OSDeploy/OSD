@@ -1,19 +1,18 @@
 ---
 external help file: OSD-help.xml
 Module Name: OSD
-online version: https://osd.osdeploy.com/module/functions/adk
+online version: https://osd.osdeploy.com/module/functions/general/get-osdsessions
 schema: 2.0.0
 ---
 
-# New-Bootable.usb
+# Get-USBPartition
 
 ## SYNOPSIS
-{{ Fill in the Synopsis }}
 
 ## SYNTAX
 
 ```
-New-Bootable.usb [[-BootLabel] <String>] [[-DataLabel] <String>] [<CommonParameters>]
+Get-USBPartition [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -29,36 +28,6 @@ PS C:\> {{ Add example code here }}
 {{ Add example description here }}
 
 ## PARAMETERS
-
-### -BootLabel
-{{ Fill BootLabel Description }}
-
-```yaml
-Type: String
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 0
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -DataLabel
-{{ Fill DataLabel Description }}
-
-```yaml
-Type: String
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 1
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
 
 ### CommonParameters
 This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see [about_CommonParameters](http://go.microsoft.com/fwlink/?LinkID=113216).

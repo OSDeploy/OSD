@@ -4,7 +4,7 @@
 
 @{
     RootModule              = 'OSD.psm1'
-    ModuleVersion           = '23.5.1.1'
+    ModuleVersion           = '23.5.9.1'
     CompatiblePSEditions    = @('Desktop')
     GUID                    = '9fe5b9b6-0224-4d87-9018-a8978529f6f5'
     Author                  = 'David Segura . Gary Blok . Jérôme Bezet-Torres . Damien Van Robaeys . Mike Marable'
@@ -142,7 +142,7 @@
         'Get-PSCloudScript',
         'Get-Partition.fixed',
         'Get-Partition.osd',
-        'Get-Partition.usb',
+        'Get-USBPartition',
         'Get-ReAgentXml',
         'Get-RegCurrentVersion',
         'Get-ScreenPNG',
@@ -153,7 +153,7 @@
         'Get-TimeZoneFromIP',
         'Get-Volume.fixed',
         'Get-Volume.osd',
-        'Get-Volume.usb',
+        'Get-USBVolume',
         'Get-WiFiActiveProfileSSID',
         'Get-WiFiProfileKey',
         'Get-WSUSXML',
@@ -177,7 +177,7 @@
         'Mount-MyWindowsImage',
         'New-AdkCopyPE',
         'New-AdkISO',
-        'New-Bootable.usb',
+        'New-BootableUSBDrive',
         'New-CAB',
         'New-CabDevelopment',
         'New-OSDCloudISO',
@@ -214,7 +214,7 @@
         'Select-OSDCloudODTFile',
         'Select-Volume.fixed',
         'Select-Volume.osd',
-        'Select-Volume.usb',
+        'Select-USBVolume',
         'Set-AzClipboard',
         'Set-BitlockerRegValuesXTS256',
         'Set-BootmgrTimeout',

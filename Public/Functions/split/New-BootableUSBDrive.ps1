@@ -1,4 +1,4 @@
-function New-Bootable.usb {
+function New-BootableUSBDrive {
     [CmdletBinding()]
     param (
         [ValidateLength(0,11)]
@@ -51,6 +51,8 @@ function New-Bootable.usb {
     #=================================================
     Write-Verbose '$GetUSBDisk = Get-Disk.osd -BusType USB -Number $SelectDisk.Number'
     $GetUSBDisk = Get-Disk.osd -BusType USB -Number $SelectDisk.Number
+
+    $GetUSBDisk
     #=================================================
     #	Clear-Disk
     #   Prompt for Confirmation
@@ -80,12 +82,10 @@ function New-Bootable.usb {
         Write-Verbose '$GetUSBDisk | Initialize-Disk -PartitionStyle MBR'
         $GetUSBDisk | Initialize-Disk -PartitionStyle MBR -ErrorAction Stop
     }
-    
     if ($GetUSBDisk.PartitionStyle -eq 'GPT') {
         Write-Verbose '$GetUSBDisk | Set-Disk -PartitionStyle MBR'
-        $GetUSBDisk | Set-Disk -PartitionStyle MBR -ErrorAction Stop
+        Set-Disk -Number $GetUSBDisk.Number -PartitionStyle MBR -ErrorAction Stop
     }
-
     if ($GetUSBDisk.SizeGB -le 2000) {
         Write-Verbose '$DataDisk = $GetUSBDisk | New-Partition -Size ($GetUSBDisk.Size - 2GB) -AssignDriveLetter | Format-Volume -FileSystem NTFS -NewFileSystemLabel $DataLabel'
         $DataDisk = $GetUSBDisk | New-Partition -Size ($GetUSBDisk.Size - 2GB) -AssignDriveLetter | Format-Volume -FileSystem NTFS -NewFileSystemLabel $DataLabel -ErrorAction Stop

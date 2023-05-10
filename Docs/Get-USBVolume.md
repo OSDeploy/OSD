@@ -1,11 +1,11 @@
 ---
 external help file: OSD-help.xml
 Module Name: OSD
-online version: https://osd.osdeploy.com/module/functions/general/get-osdpower
+online version: https://osd.osdeploy.com/module/functions/general/get-osdsessions
 schema: 2.0.0
 ---
 
-# Get-Partition.usb
+# Get-USBVolume
 
 ## SYNOPSIS
 {{ Fill in the Synopsis }}
@@ -13,7 +13,7 @@ schema: 2.0.0
 ## SYNTAX
 
 ```
-Get-Partition.usb [<CommonParameters>]
+Get-USBVolume [<CommonParameters>]
 ```
 
 ## DESCRIPTION
