@@ -1300,6 +1300,23 @@ Windows Registry Editor Version 5.00
     #Unload Registry
     Invoke-Exe reg unload HKLM\Default | Out-Null
     #=================================================
+    #   Apply Packages
+    #=================================================
+    if (Test-Path "$env:ProgramData\OSDCloud\Packages") {
+        $ApplyPackages = Get-ChildItem -Path "$env:ProgramData\OSDCloud\Packages" *.msu -Recurse
+
+        if ($ApplyPackages) {
+            Write-Host -ForegroundColor DarkGray "========================================================================="
+        }
+
+        foreach ($Package in $ApplyPackages) {
+            Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Applying Package $($Package.FullName)"
+            Add-WindowsPackage -Path $MountPath -PackagePath $Package.FullName -ErrorAction SilentlyContinue
+        }
+        DISM /Image:"$MountPath" /Cleanup-Image /StartComponentCleanup | Out-Null
+        Get-WindowsPackage -Path $MountPath | Sort-Object -Property InstallTime -Descending | Format-Table -AutoSize
+    }
+    #=================================================
     #   Save WIM
     #=================================================
     Write-Host -ForegroundColor DarkGray "========================================================================="
