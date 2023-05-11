@@ -67,7 +67,7 @@ LoadForm -XamlPath (Join-Path $Global:MyScriptDir 'DiskImageGUI.xaml')
 #================================================
 $Global:DiskImageGUI = @{
     BiosVersion = Get-MyBiosVersion
-    AvailableDisks = Get-Disk.fixed | Where-Object {$_.IsBoot -eq $false}
+    AvailableDisks = Get-LocalDisk | Where-Object {$_.IsBoot -eq $false}
     Manufacturer = Get-MyComputerManufacturer -Brief
     Model = Get-MyComputerModel -Brief
     RegCurrentVersion = Get-ItemProperty -Path 'HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion'
@@ -79,7 +79,7 @@ $Global:DiskImageGUI = @{
 #   RemovedDisks
 #================================================
 $RemovedDisks = @()
-$RemovedDisks = Get-Disk.fixed | Where-Object {$_.IsBoot -eq $true}
+$RemovedDisks = Get-LocalDisk | Where-Object {$_.IsBoot -eq $true}
 if ($RemovedDisks) {
     foreach ($Item in $RemovedDisks) {
         Write-Warning "Removing Disk $($Item.Number) $($Item.FriendlyName) as you cannot capture or apply to a running disk"
@@ -319,7 +319,7 @@ function Start-DestinationAction {
 
     if ($DismActionCombobox.SelectedValue -eq '/Apply-FFU') {
         #Determine the Selected Disk information
-        $Global:DiskImageGUI.SourceDiskNumber = (Get-Disk.fixed | Where-Object { $_.Number -eq $Global:ArrayOfDiskNumbers[$DismSourceCombobox.SelectedIndex] }).DiskNumber
+        $Global:DiskImageGUI.SourceDiskNumber = (Get-LocalDisk | Where-Object { $_.Number -eq $Global:ArrayOfDiskNumbers[$DismSourceCombobox.SelectedIndex] }).DiskNumber
         $Global:DiskImageGUI.PhysicalDrive = "\\.\PhysicalDrive$($Global:DiskImageGUI.SourceDiskNumber)"
 
         $DismCommandTextbox.Text = "Dism.exe /Apply-FFU /ApplyDrive:$($Global:DiskImageGUI.PhysicalDrive) /?"
@@ -327,7 +327,7 @@ function Start-DestinationAction {
         $DismDestinationCombobox.Items.Clear()
 
         $Global:DiskImageGUI.ApplyDrives = @()
-        $Global:DiskImageGUI.ApplyDrives = Get-Disk.storage | Where-Object {$_.DiskNumber -ne $($Global:DiskImageGUI.SourceDiskNumber)}
+        $Global:DiskImageGUI.ApplyDrives = Get-DataDisk | Where-Object {$_.DiskNumber -ne $($Global:DiskImageGUI.SourceDiskNumber)}
 
         if (!($Global:DiskImageGUI.ApplyDrives)) {
             $DismCommandTextbox.Background = "Pink"
@@ -360,7 +360,7 @@ function Start-DestinationAction {
     }
     if ($DismActionCombobox.SelectedValue -eq '/Capture-FFU') {
         #Determine the Selected Disk information
-        $Global:DiskImageGUI.SourceDiskNumber = (Get-Disk.fixed | Where-Object { $_.Number -eq $Global:ArrayOfDiskNumbers[$DismSourceCombobox.SelectedIndex] }).DiskNumber
+        $Global:DiskImageGUI.SourceDiskNumber = (Get-LocalDisk | Where-Object { $_.Number -eq $Global:ArrayOfDiskNumbers[$DismSourceCombobox.SelectedIndex] }).DiskNumber
         $Global:DiskImageGUI.PhysicalDrive = "\\.\PhysicalDrive$($Global:DiskImageGUI.SourceDiskNumber)"
 
         $DismCommandTextbox.Text = "Dism.exe /Capture-FFU /CaptureDrive:$($Global:DiskImageGUI.PhysicalDrive) /?"
@@ -368,7 +368,7 @@ function Start-DestinationAction {
         $DismDestinationCombobox.Items.Clear()
 
         $Global:DiskImageGUI.ApplyDrives = @()
-        $Global:DiskImageGUI.ApplyDrives = Get-Disk.storage | Where-Object {$_.DiskNumber -ne $Global:DiskImageGUI.SourceDiskNumber}
+        $Global:DiskImageGUI.ApplyDrives = Get-DataDisk | Where-Object {$_.DiskNumber -ne $Global:DiskImageGUI.SourceDiskNumber}
 
         if (!($Global:DiskImageGUI.ApplyDrives)) {
             $DismCommandTextbox.Background = "Pink"

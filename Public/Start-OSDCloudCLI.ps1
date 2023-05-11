@@ -206,7 +206,7 @@ function Start-OSDCloudCLI {
     #	-ZTI
     #=================================================
     if ($Global:StartOSDCloudCLI.ZTI) {
-        $Global:StartOSDCloudCLI.GetDiskFixed = Get-Disk.fixed | Where-Object {$_.IsBoot -eq $false} | Sort-Object Number
+        $Global:StartOSDCloudCLI.GetDiskFixed = Get-LocalDisk | Where-Object {$_.IsBoot -eq $false} | Sort-Object Number
 
         if (($Global:StartOSDCloudCLI.GetDiskFixed | Measure-Object).Count -lt 2) {
             Write-Host -ForegroundColor DarkGray "========================================================================="

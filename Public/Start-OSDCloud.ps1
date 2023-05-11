@@ -239,7 +239,7 @@ function Start-OSDCloud {
     #	-ZTI
     #=================================================
     if ($Global:StartOSDCloud.ZTI) {
-        $Global:StartOSDCloud.GetDiskFixed = Get-Disk.fixed | Where-Object {$_.IsBoot -eq $false} | Sort-Object Number
+        $Global:StartOSDCloud.GetDiskFixed = Get-LocalDisk | Where-Object {$_.IsBoot -eq $false} | Sort-Object Number
 
         if (($Global:StartOSDCloud.GetDiskFixed | Measure-Object).Count -lt 2) {
             Write-Host -ForegroundColor DarkGray "========================================================================="

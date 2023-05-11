@@ -75,7 +75,7 @@ function Initialize-OSDDisk {
     if ($InputObject) {
         $ClearDisks = $InputObject
     } else {
-        $ClearDisks = Get-Disk.osd -BusTypeNot USB,Virtual -PartitionStyle RAW | `
+        $ClearDisks = Get-OSDDisk -BusTypeNot USB,Virtual -PartitionStyle RAW | `
         #Where-Object {($_.Size -gt 15GB)} | `
         Sort-Object Number
     }

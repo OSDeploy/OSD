@@ -82,7 +82,7 @@ $TitleLabel.Content = 'Start-ApplyFFU'
 $Global:ArrayOfDiskNumbers = @()
 
 #Get all the ApplyDrives
-$Global:ApplyDrives = Get-Disk.fixed | Where-Object {$_.IsBoot -eq $false}
+$Global:ApplyDrives = Get-LocalDisk | Where-Object {$_.IsBoot -eq $false}
 
 # Populate the ComboBox
 $Global:ApplyDrives | foreach {
@@ -98,7 +98,7 @@ $ApplyDriveComboBox.SelectedIndex = 0
 #   Set-ApplyDriveComboBox
 #=======================================================================
 function Set-ApplyDriveComboBox {
-    $ApplyDrive = Get-Disk.fixed | Where-Object { $_.Number -eq $Global:ArrayOfDiskNumbers[$ApplyDriveComboBox.SelectedIndex] }
+    $ApplyDrive = Get-LocalDisk | Where-Object { $_.Number -eq $Global:ArrayOfDiskNumbers[$ApplyDriveComboBox.SelectedIndex] }
     
     # Work out if the size should be in GB or TB
     if ([math]::Round(($ApplyDrive.Size/1TB),2) -lt 1) {
@@ -126,7 +126,7 @@ $ApplyDriveSize $($ApplyDrive.PartitionStyle) $($ApplyDrive.NumberOfPartitions) 
 function Set-ImageFileComboBox {
 
     $Global:DestinationDrives = @()
-    $Global:DestinationDrives = Get-Disk.storage | Where-Object {$_.DiskNumber -ne $Global:DiskNumber}
+    $Global:DestinationDrives = Get-DataDisk | Where-Object {$_.DiskNumber -ne $Global:DiskNumber}
 
     $ImageFileComboBox.Items.Clear()
 

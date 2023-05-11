@@ -68,7 +68,7 @@ function Backup-DiskToFFU {
     #=================================================
     #	Gather
     #=================================================
-    $GetLocalDisk = Get-Disk.fixed | Where-Object {$_.NumberOfPartitions -ge '1'} | Where-Object {$_.OperationalStatus -eq 'Online'} | Where-Object {$_.Size -gt 0} | Where-Object {$_.IsOffline -eq $false}
+    $GetLocalDisk = Get-LocalDisk | Where-Object {$_.NumberOfPartitions -ge '1'} | Where-Object {$_.OperationalStatus -eq 'Online'} | Where-Object {$_.Size -gt 0} | Where-Object {$_.IsOffline -eq $false}
     $BootDisks = $GetLocalDisk | Where-Object {$_.IsBoot -eq $true}
     $SourceDisks = $GetLocalDisk | Where-Object {$_.IsBoot -eq $false}
     $DestinationDisks = $(Get-FFUDestinationDisks)

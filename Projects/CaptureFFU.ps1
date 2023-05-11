@@ -98,7 +98,7 @@ Write-Host -ForegroundColor Cyan "Compress:$Global:DismCompress"
 $Global:ArrayOfDiskNumbers = @()
 
 #Get all the CaptureDrives
-$Global:CaptureDrives = Get-Disk.fixed | Where-Object {$_.IsBoot -eq $false}
+$Global:CaptureDrives = Get-LocalDisk | Where-Object {$_.IsBoot -eq $false}
 
 # Populate the ComboBox
 $Global:CaptureDrives | foreach {
@@ -114,7 +114,7 @@ $CaptureDriveComboBox.SelectedIndex = 0
 #   Set-CaptureDriveComboBox
 #=======================================================================
 function Set-CaptureDriveComboBox {
-    $CaptureDrive = Get-Disk.fixed | Where-Object { $_.Number -eq $Global:ArrayOfDiskNumbers[$CaptureDriveComboBox.SelectedIndex] }
+    $CaptureDrive = Get-LocalDisk | Where-Object { $_.Number -eq $Global:ArrayOfDiskNumbers[$CaptureDriveComboBox.SelectedIndex] }
     
     # Work out if the size should be in GB or TB
     if ([math]::Round(($CaptureDrive.Size/1TB),2) -lt 1) {
@@ -142,7 +142,7 @@ $CaptureDriveSize $($CaptureDrive.PartitionStyle) $($CaptureDrive.NumberOfPartit
 function Set-ImageFileComboBox {
 
     $Global:DestinationDrives = @()
-    $Global:DestinationDrives = Get-Disk.storage | Where-Object {$_.DiskNumber -ne $Global:DiskNumber}
+    $Global:DestinationDrives = Get-DataDisk | Where-Object {$_.DiskNumber -ne $Global:DiskNumber}
 
     $ImageFile = $null
     

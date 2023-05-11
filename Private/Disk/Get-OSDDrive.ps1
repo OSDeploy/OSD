@@ -31,7 +31,7 @@ function Get-OSDDrive {
     #	Get Variables
     #=================================================
     $GetOSDDrive = Get-PSDrive | Select-Object -Property *
-    $GetOSDVolume = Get-Volume.osd | Select-Object -Property *
+    $GetOSDVolume = Get-OSDVolume | Select-Object -Property *
     #=================================================
     #	Add Property IsUSB
     #=================================================

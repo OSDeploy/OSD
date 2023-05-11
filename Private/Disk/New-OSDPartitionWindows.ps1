@@ -51,9 +51,9 @@ function New-OSDPartitionWindows {
     )
 
     #=================================================
-    #	Get-Disk.osd
+    #	Get-OSDDisk
     #=================================================
-    $GetOSDDisk = Get-Disk.osd -Number $DiskNumber
+    $GetOSDDisk = Get-OSDDisk -Number $DiskNumber
     #=================================================
     #	Failure: No Fixed Disks are present
     #=================================================

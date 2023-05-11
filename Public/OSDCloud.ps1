@@ -403,7 +403,7 @@ function Invoke-OSDCloud {
 
     $Global:OSDCloud.SectionPassed = $false
 
-    $Global:OSDCloud.GetDiskFixed = Get-Disk.fixed | Where-Object {$_.IsBoot -eq $false} | Sort-Object Number
+    $Global:OSDCloud.GetDiskFixed = Get-LocalDisk | Where-Object {$_.IsBoot -eq $false} | Sort-Object Number
 
     if ($Global:OSDCloud.GetDiskFixed) {
         $Global:OSDCloud.SectionPassed = $true
@@ -587,11 +587,11 @@ function Invoke-OSDCloud {
 
         if ($Global:OSDCloud.ClearDiskConfirm -eq $true) {
             Write-DarkGrayHost '$OSDCloud.ClearDiskConfirm = $true'
-            Clear-Disk.fixed -Force -NoResults -ErrorAction Stop
+            Clear-LocalDisk -Force -NoResults -ErrorAction Stop
         }
         else {
             Write-DarkGrayHost '$OSDCloud.ClearDiskConfirm = $false'
-            Clear-Disk.fixed -Force -NoResults -Confirm:$false -ErrorAction Stop
+            Clear-LocalDisk -Force -NoResults -Confirm:$false -ErrorAction Stop
         }
     }
     #endregion

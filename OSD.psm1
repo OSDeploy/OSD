@@ -55,31 +55,32 @@ if ($env:SystemDrive -eq 'X:') {
 }
 #=================================================
 #Alias
-New-Alias -Name Clear-LocalDisk -Value Clear-Disk.fixed -Force -ErrorAction SilentlyContinue
-New-Alias -Name Clear-USBDisk -Value Clear-Disk.usb -Force -ErrorAction SilentlyContinue
 New-Alias -Name Copy-ModuleToFolder -Value Copy-PSModuleToFolder -Force -ErrorAction SilentlyContinue
 New-Alias -Name Dismount-WindowsImageOSD -Value Dismount-MyWindowsImage -Force -ErrorAction SilentlyContinue
 New-Alias -Name Edit-ADKwinpe.wim -Value Edit-AdkWinPEWIM -Force -ErrorAction SilentlyContinue
 New-Alias -Name Edit-WindowsImageOSD -Value Edit-MyWindowsImage -Force -ErrorAction SilentlyContinue
 New-Alias -Name Find-InOSDModule -Value Find-TextInModule -Force -ErrorAction SilentlyContinue
-New-Alias -Name Get-LocalDisk -Value Get-Disk.fixed -Force -ErrorAction SilentlyContinue
-New-Alias -Name Get-LocalPartition -Value Get-Partition.fixed -Force -ErrorAction SilentlyContinue
-New-Alias -Name Get-LocalVolume -Value Get-Volume.fixed -Force -ErrorAction SilentlyContinue
-New-Alias -Name Get-OSDDisk -Value Get-Disk.osd -Force -ErrorAction SilentlyContinue
-New-Alias -Name Get-OSDPartition -Value Get-Partition.osd -Force -ErrorAction SilentlyContinue
 New-Alias -Name Get-OSDSessions -Value Get-SessionsXml -Force -ErrorAction SilentlyContinue
-New-Alias -Name Get-OSDVolume -Value Get-Volume.osd -Force -ErrorAction SilentlyContinue
-New-Alias -Name Get-USBDisk -Value Get-Disk.usb -Force -ErrorAction SilentlyContinue
-New-Alias -Name Get-Partition.usb -Value Get-USBPartition -Force -ErrorAction SilentlyContinue
-New-Alias -Name Get-Volume.usb -Value Get-USBVolume -Force -ErrorAction SilentlyContinue
 New-Alias -Name Mount-OSDWindowsImage -Value Mount-MyWindowsImage -Force -ErrorAction SilentlyContinue
 New-Alias -Name Mount-WindowsImageOSD -Value Mount-MyWindowsImage -Force -ErrorAction SilentlyContinue
 New-Alias -Name New-ADK.iso -Value New-AdkISO -Force -ErrorAction SilentlyContinue
-New-Alias -Name New-Bootable.usb -Value New-BootableUSBDrive -Force -ErrorAction SilentlyContinue
-New-Alias -Name Select-USBDisk -Value Select-Disk.usb -Force -ErrorAction SilentlyContinue
-New-Alias -Name Select-Volume.usb -Value Select-USBVolume -Force -ErrorAction SilentlyContinue
 New-Alias -Name Update-OSDWindowsImage -Value Update-MyWindowsImage -Force -ErrorAction SilentlyContinue
 New-Alias -Name Update-WindowsImageOSD -Value Update-MyWindowsImage -Force -ErrorAction SilentlyContinue
+
+New-Alias -Name Clear-Disk.usb -Value Clear-USBDisk -Force -ErrorAction SilentlyContinue
+New-Alias -Name Get-Disk.fixed -Value Get-LocalDisk -Force -ErrorAction SilentlyContinue
+New-Alias -Name Get-Partition.fixed -Value Get-LocalDiskPartition -Force -ErrorAction SilentlyContinue
+New-Alias -Name Get-Partition.osd -Value Get-OSDPartition -Force -ErrorAction SilentlyContinue
+New-Alias -Name Get-Disk.osd -Value Get-OSDDisk -Force -ErrorAction SilentlyContinue
+New-Alias -Name Get-Volume.fixed -Value Get-LocalDiskVolume -Force -ErrorAction SilentlyContinue
+New-Alias -Name Clear-Disk.fixed -Value Clear-LocalDisk -Force -ErrorAction SilentlyContinue
+New-Alias -Name Get-Volume.osd -Value Get-OSDVolume -Force -ErrorAction SilentlyContinue
+New-Alias -Name New-Bootable.usb -Value New-BootableUSBDrive -Force -ErrorAction SilentlyContinue
+New-Alias -Name Get-Partition.usb -Value Get-USBPartition -Force -ErrorAction SilentlyContinue
+New-Alias -Name Get-Volume.usb -Value Get-USBVolume -Force -ErrorAction SilentlyContinue
+New-Alias -Name Get-Disk.usb -Value Get-USBDisk -Force -ErrorAction SilentlyContinue
+New-Alias -Name Select-Disk.usb -Value Invoke-SelectUSBDisk -Force -ErrorAction SilentlyContinue
+New-Alias -Name Select-Volume.usb -Value Invoke-SelectUSBVolume -Force -ErrorAction SilentlyContinue
 #=================================================
 #Export-ModuleMember
 Export-ModuleMember -Function * -Alias *
