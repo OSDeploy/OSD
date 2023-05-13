@@ -1302,18 +1302,20 @@ Windows Registry Editor Version 5.00
     #=================================================
     #   Apply Packages
     #=================================================
-    if (Test-Path "$env:ProgramData\OSDCloud\Packages") {
-        $ApplyPackages = Get-ChildItem -Path "$env:ProgramData\OSDCloud\Packages" *.msu -Recurse
+    if (Test-Path "$env:ProgramData\OSDCloud\Packages\LCU") {
+        $PackagesLCU = Get-ChildItem -Path "$env:ProgramData\OSDCloud\Packages\LCU" *.msu -Recurse
 
-        if ($ApplyPackages) {
+        if ($PackagesLCU) {
             Write-Host -ForegroundColor DarkGray "========================================================================="
+            foreach ($Package in $PackagesLCU) {
+                Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Applying Package $($Package.FullName)"
+                Add-WindowsPackage -Path $MountPath -PackagePath $Package.FullName -ErrorAction SilentlyContinue
+            }
+            DISM /Image:"$MountPath" /Cleanup-Image /StartComponentCleanup | Out-Null
+            # Save serviced boot manager files later copy to the root media.
+            Copy-Item -Path "$MountPath\Windows\boot\efi\bootmgfw.efi" -Destination "$DestinationMedia\bootmgfw.efi" -Force -ErrorAction stop | Out-Null
+            Copy-Item -Path "$MountPath\Windows\boot\efi\bootmgr.efi" -Destination "$DestinationMedia\bootmgr.efi" -Force -ErrorAction stop | Out-Null
         }
-
-        foreach ($Package in $ApplyPackages) {
-            Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Applying Package $($Package.FullName)"
-            Add-WindowsPackage -Path $MountPath -PackagePath $Package.FullName -ErrorAction SilentlyContinue
-        }
-        DISM /Image:"$MountPath" /Cleanup-Image /StartComponentCleanup | Out-Null
         Get-WindowsPackage -Path $MountPath | Sort-Object -Property InstallTime -Descending | Format-Table -AutoSize
     }
     #=================================================
@@ -1326,9 +1328,9 @@ Windows Registry Editor Version 5.00
     #=================================================
     #   Save WIM
     #=================================================
+    Write-Host -ForegroundColor DarkGray "========================================================================="
+    Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Exporting Boot.wim"
     if ($PSBoundParameters.ContainsKey('WinRE')) {
-        Write-Host -ForegroundColor DarkGray "========================================================================="
-        Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Exporting WinRE Boot.wim"
         $BootWim = Join-Path $DestinationSources 'boot.wim'
         $WinREWim = Join-Path $DestinationSources 'winre.wim'
 
@@ -1339,6 +1341,19 @@ Windows Registry Editor Version 5.00
         $CurrentLog = "$TemplateLogs\$((Get-Date).ToString('yyyy-MM-dd-HHmmss'))-Export-WindowsImage.log"
         Export-WindowsImage -SourceImagePath $WinREWim -SourceIndex 1 -DestinationImagePath $BootWim -DestinationName 'Microsoft Windows PE (x64)' -LogPath $CurrentLog | Out-Null
         Remove-Item -Path $WinREWim -Force -ErrorAction Stop | Out-Null
+    }
+    else {
+        $SourceImage = Join-Path $DestinationSources 'boot.wim'
+        $DestinationImage = Join-Path $DestinationSources 'export.wim'
+
+        if (Test-Path $DestinationImage) {
+            Remove-Item -Path $DestinationImage -Force -ErrorAction Stop | Out-Null
+        }
+        Write-Host -ForegroundColor Yellow "Dism Function: Export-WindowsImage"
+        $CurrentLog = "$TemplateLogs\$((Get-Date).ToString('yyyy-MM-dd-HHmmss'))-Export-WindowsImage.log"
+        Export-WindowsImage -SourceImagePath $SourceImage -SourceIndex 1 -DestinationImagePath $DestinationImage -LogPath $CurrentLog | Out-Null
+        Remove-Item -Path $SourceImage -Force -ErrorAction Stop | Out-Null
+        Rename-Item -Path $DestinationImage -NewName 'boot.wim' -Force -ErrorAction Stop | Out-Null
     }
     #=================================================
     #   Directories
