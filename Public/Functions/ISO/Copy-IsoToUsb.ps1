@@ -33,13 +33,13 @@ function Copy-IsoToUsb {
         [Parameter(Mandatory)]
         [ValidateNotNullOrEmpty()]
         [ValidateScript({(Test-Path $_) -and ((Get-Item $_).Extension -eq '.iso')})]
-        [string]$ISOFile,
+        [System.String]$ISOFile,
         [System.Management.Automation.SwitchParameter]$MakeBootable,
         [System.Management.Automation.SwitchParameter]$NTFS,
         [System.Management.Automation.SwitchParameter]$SplitWim,
-        [string]$USBLabel
+        [System.String]$USBLabel
     )
-    BEGIN {
+    begin {
         #=================================================
         Write-Verbose "Validating Elevated Permissions ..."
         #=================================================
@@ -49,7 +49,7 @@ function Copy-IsoToUsb {
         }
     }
     
-    PROCESS {
+    process {
         #=================================================
         Write-Verbose "Selecting USB Drive ..."
         #=================================================
@@ -138,7 +138,7 @@ function Copy-IsoToUsb {
         #=================================================
         Dismount-DiskImage -ImagePath $ISOFile
     }
-    END {
+    end {
         #=================================================
         Write-Verbose "Complete"
         #=================================================
