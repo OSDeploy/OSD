@@ -8,7 +8,7 @@ schema: 2.0.0
 # Get-OSDCloudTemplateNames
 
 ## SYNOPSIS
-Returns valid OSDCloud Template Names
+Returns the names of the OSDCloud Templates
 
 ## SYNTAX
 
@@ -17,7 +17,7 @@ Get-OSDCloudTemplateNames [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-Returns valid OSDCloud Template Names
+Returns the names of the OSDCloud Templates
 
 ## EXAMPLES
 

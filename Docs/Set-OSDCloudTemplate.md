@@ -8,7 +8,7 @@ schema: 2.0.0
 # Set-OSDCloudTemplate
 
 ## SYNOPSIS
-Changes the path to the OSDCloud Template to $env:ProgramData\OSDCloud
+Sets the current OSDCloud Template to a valid OSDCloud Template returned by Get-OSDCloudTemplateNames
 
 ## SYNTAX
 
@@ -17,7 +17,7 @@ Set-OSDCloudTemplate [[-Name] <String>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-Changes the path to the OSDCloud Template to $env:ProgramData\OSDCloud
+Sets the current OSDCloud Template to a valid OSDCloud Template returned by Get-OSDCloudTemplateNames
 
 ## EXAMPLES
 

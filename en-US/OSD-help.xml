@@ -12304,11 +12304,11 @@ Option 3: Get-OSDClass -Class ComputerSystem</dev:code>
       <command:verb>Get</command:verb>
       <command:noun>OSDCloudTemplate</command:noun>
       <maml:description>
-        <maml:para>Returns the path to the OSDCloud Template.  This is typically $env:ProgramData\OSDCloud\Templates\Default</maml:para>
+        <maml:para>Returns the path to the current OSDCloud Template.  This is typically $env:ProgramData\OSDCloud\Templates\Default</maml:para>
       </maml:description>
     </command:details>
     <maml:description>
-      <maml:para>Returns the path to the OSDCloud Template.  This is typically $env:ProgramData\OSDCloud\Templates\Default</maml:para>
+      <maml:para>Returns the path to the current OSDCloud Template.  This is typically $env:ProgramData\OSDCloud\Templates\Default</maml:para>
     </maml:description>
     <command:syntax>
       <command:syntaxItem>
@@ -12345,11 +12345,11 @@ Option 3: Get-OSDClass -Class ComputerSystem</dev:code>
       <command:verb>Get</command:verb>
       <command:noun>OSDCloudTemplateNames</command:noun>
       <maml:description>
-        <maml:para>Returns valid OSDCloud Template Names</maml:para>
+        <maml:para>Returns the names of the OSDCloud Templates</maml:para>
       </maml:description>
     </command:details>
     <maml:description>
-      <maml:para>Returns valid OSDCloud Template Names</maml:para>
+      <maml:para>Returns the names of the OSDCloud Templates</maml:para>
     </maml:description>
     <command:syntax>
       <command:syntaxItem>
@@ -19138,6 +19138,18 @@ Saves file in Parent Directory C:\DeploymentShare\OSDeploy\OSConfig.cab</dev:cod
           <dev:defaultValue>None</dev:defaultValue>
         </command:parameter>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="3" aliases="none">
+          <maml:name>CumulativeUpdate</maml:name>
+          <maml:description>
+            <maml:para>Installs the specified Cumulative Update Package</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">FileInfo</command:parameterValue>
+          <dev:type>
+            <maml:name>FileInfo</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="4" aliases="none">
           <maml:name>SetAllIntl</maml:name>
           <maml:description>
             <maml:para>Sets all International settings in WinPE to the specified setting</maml:para>
@@ -19149,7 +19161,7 @@ Saves file in Parent Directory C:\DeploymentShare\OSDeploy\OSConfig.cab</dev:cod
           </dev:type>
           <dev:defaultValue>None</dev:defaultValue>
         </command:parameter>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="4" aliases="none">
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="5" aliases="none">
           <maml:name>SetInputLocale</maml:name>
           <maml:description>
             <maml:para>Sets the default InputLocale in WinPE to the specified Input Locale</maml:para>
@@ -19200,6 +19212,18 @@ Saves file in Parent Directory C:\DeploymentShare\OSDeploy\OSConfig.cab</dev:cod
         <dev:defaultValue>None</dev:defaultValue>
       </command:parameter>
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="3" aliases="none">
+        <maml:name>CumulativeUpdate</maml:name>
+        <maml:description>
+          <maml:para>Installs the specified Cumulative Update Package</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">FileInfo</command:parameterValue>
+        <dev:type>
+          <maml:name>FileInfo</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="4" aliases="none">
         <maml:name>SetAllIntl</maml:name>
         <maml:description>
           <maml:para>Sets all International settings in WinPE to the specified setting</maml:para>
@@ -19211,7 +19235,7 @@ Saves file in Parent Directory C:\DeploymentShare\OSDeploy\OSConfig.cab</dev:cod
         </dev:type>
         <dev:defaultValue>None</dev:defaultValue>
       </command:parameter>
-      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="4" aliases="none">
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="5" aliases="none">
         <maml:name>SetInputLocale</maml:name>
         <maml:description>
           <maml:para>Sets the default InputLocale in WinPE to the specified Input Locale</maml:para>
@@ -23074,11 +23098,11 @@ Interactive.  Prompted to Confirm Clear-Disk for each Local Disk</dev:code>
       <command:verb>Set</command:verb>
       <command:noun>OSDCloudTemplate</command:noun>
       <maml:description>
-        <maml:para>Changes the path to the OSDCloud Template to $env:ProgramData\OSDCloud</maml:para>
+        <maml:para>Sets the current OSDCloud Template to a valid OSDCloud Template returned by Get-OSDCloudTemplateNames</maml:para>
       </maml:description>
     </command:details>
     <maml:description>
-      <maml:para>Changes the path to the OSDCloud Template to $env:ProgramData\OSDCloud</maml:para>
+      <maml:para>Sets the current OSDCloud Template to a valid OSDCloud Template returned by Get-OSDCloudTemplateNames</maml:para>
     </maml:description>
     <command:syntax>
       <command:syntaxItem>

@@ -13,8 +13,8 @@ Creates an OSDCloud Template in $env:ProgramData\OSDCloud
 ## SYNTAX
 
 ```
-New-OSDCloudTemplate [[-Name] <String>] [[-Language] <String[]>] [[-SetAllIntl] <String>]
- [[-SetInputLocale] <String>] [-WinRE] [<CommonParameters>]
+New-OSDCloudTemplate [[-Name] <String>] [[-Language] <String[]>] [[-CumulativeUpdate] <FileInfo>]
+ [[-SetAllIntl] <String>] [[-SetInputLocale] <String>] [-WinRE] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -65,6 +65,21 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
+### -CumulativeUpdate
+Installs the specified Cumulative Update Package
+
+```yaml
+Type: FileInfo
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 3
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
 ### -SetAllIntl
 Sets all International settings in WinPE to the specified setting
 
@@ -74,7 +89,7 @@ Parameter Sets: (All)
 Aliases:
 
 Required: False
-Position: 3
+Position: 4
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -89,7 +104,7 @@ Parameter Sets: (All)
 Aliases:
 
 Required: False
-Position: 4
+Position: 5
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False

@@ -8,7 +8,7 @@ schema: 2.0.0
 # Get-OSDCloudTemplate
 
 ## SYNOPSIS
-Returns the path to the OSDCloud Template. 
+Returns the path to the current OSDCloud Template. 
 This is typically $env:ProgramData\OSDCloud\Templates\Default
 
 ## SYNTAX
@@ -18,7 +18,7 @@ Get-OSDCloudTemplate [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-Returns the path to the OSDCloud Template. 
+Returns the path to the current OSDCloud Template. 
 This is typically $env:ProgramData\OSDCloud\Templates\Default
 
 ## EXAMPLES
