@@ -507,9 +507,7 @@ Windows Registry Editor Version 5.00
         Write-Host -ForegroundColor DarkGray "Downloading https://github.com/okieselbach/Helpers/raw/master/WirelessConnect/WirelessConnect/bin/Release/WirelessConnect.exe"
         Save-WebFile -SourceUrl 'https://github.com/okieselbach/Helpers/raw/master/WirelessConnect/WirelessConnect/bin/Release/WirelessConnect.exe' -DestinationDirectory "$MountPath\Windows" | Out-Null
     }
-    #=================================================
-    #   ADK Packages
-    #=================================================
+    #region Set ADK Packages
     $ErrorActionPreference = 'Ignore'
     $WinPEOCs = $AdkPaths.WinPEOCs
 
@@ -533,9 +531,8 @@ Windows Registry Editor Version 5.00
         'StorageWMI'
         'WDS-Tools'
     )
-    #=================================================
-    #   Install Default en-us Language
-    #=================================================
+    #endregion
+    #region Install Default en-us Language
     Write-Host -ForegroundColor DarkGray "========================================================================="
     Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Adding default en-US ADK Packages"
     Write-Host -ForegroundColor Yellow "Dism Function: Add-WindowsPackage"
@@ -577,18 +574,16 @@ Windows Registry Editor Version 5.00
             Catch {Write-Host -ForegroundColor Red $CurrentLog}
         }
     }
-    #=================================================
-    #   Save-WindowsImage
-    #=================================================
+    #endregion
+    #region Save-WindowsImage
     Write-Host -ForegroundColor DarkGray "========================================================================="
     Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Save Windows Image"
     Write-Host -ForegroundColor Yellow "Dism Function: Save-WindowsImage"
 
     $CurrentLog = "$TemplateLogs\$((Get-Date).ToString('yyyy-MM-dd-HHmmss'))-Save-WindowsImage.log"
     Save-WindowsImage -Path $MountPath -LogPath $CurrentLog | Out-Null
-    #=================================================
-    #   Install Selected Language
-    #=================================================
+    #endregion
+    #region Install Selected Language
     if ($Language -contains '*') {
         $Language = Get-ChildItem $WinPEOCs -Directory | Where-Object {$_.Name -ne 'en-us'} | Select-Object -ExpandProperty Name
     }
@@ -628,6 +623,7 @@ Windows Registry Editor Version 5.00
         $CurrentLog = "$TemplateLogs\$((Get-Date).ToString('yyyy-MM-dd-HHmmss'))-Save-WindowsImage.log"
         Save-WindowsImage -Path $MountPath -LogPath $CurrentLog | Out-Null
     }
+    #endregion
     #region International Settings
     if ($SetAllIntl -or $SetInputLocale) {
         Write-Host -ForegroundColor DarkGray "========================================================================="
@@ -796,17 +792,33 @@ Windows Registry Editor Version 5.00
     #region Apply CumulativeUpdate
     if ($CumulativeUpdate) {
         Write-Host -ForegroundColor DarkGray "========================================================================="
-        Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Applying Cumulative Update $CumulativeUpdate"
-        Add-WindowsPackage -Path $MountPath -PackagePath $CumulativeUpdate -ErrorAction SilentlyContinue
+        Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Applying Cumulative Update"
 
-        Write-Host -ForegroundColor Yellow "Performing Dism Component Cleanup"
-        DISM /Image:"$MountPath" /Cleanup-Image /StartComponentCleanup | Out-Null
+        Write-Host -ForegroundColor Yellow $CumulativeUpdate
+        $CurrentLog = "$TemplateLogs\$((Get-Date).ToString('yyyy-MM-dd-HHmmss'))-CumulativeUpdate.log"
+        Write-Host -ForegroundColor DarkGray $CurrentLog
+        Try {
+            Add-WindowsPackage -Path $MountPath -PackagePath $CumulativeUpdate -LogPath "$CurrentLog" | Out-Null
+        }
+        Catch {
+            Write-Host -ForegroundColor Red $CurrentLog
+        }
 
-        Write-Host -ForegroundColor Yellow "Updating Boot Files"
-        Copy-Item -Path "$MountPath\Windows\boot\efi\bootmgfw.efi" -Destination "$DestinationMedia\bootmgfw.efi" -Force -ErrorAction stop | Out-Null
-        Copy-Item -Path "$MountPath\Windows\boot\efi\bootmgr.efi" -Destination "$DestinationMedia\bootmgr.efi" -Force -ErrorAction stop | Out-Null
+        Write-Host -ForegroundColor Yellow "Dism /Cleanup-Image /StartComponentCleanup"
+        $CurrentLog = "$TemplateLogs\$((Get-Date).ToString('yyyy-MM-dd-HHmmss'))-DismComponentCleanup.log"
+        Write-Host -ForegroundColor DarkGray $CurrentLog
+        DISM /Image:"$MountPath" /Cleanup-Image /StartComponentCleanup /LogPath:"$CurrentLog"
+
+        Write-Host -ForegroundColor Yellow "Updating $DestinationMedia\bootmgfw.efi"
+        Copy-Item -Path "$MountPath\Windows\boot\efi\bootmgfw.efi" -Destination "$DestinationMedia\bootmgfw.efi" -Force | Out-Null
+        Write-Host -ForegroundColor Yellow "Updating $DestinationMedia\bootmgr.efi"
+        Copy-Item -Path "$MountPath\Windows\boot\efi\bootmgr.efi" -Destination "$DestinationMedia\bootmgr.efi" -Force | Out-Null
     }
-    Get-WindowsPackage -Path $MountPath | Sort-Object -Property InstallTime -Descending | Format-Table -AutoSize
+    #region Windows Packages
+    Write-Host -ForegroundColor DarkGray "========================================================================="
+    Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Displaying Installed Windows Packages"
+    Get-WindowsPackage -Path $MountPath | Sort-Object -Property PackageName | Format-Table -AutoSize
+    #endregion
     #endregion
     #region Dismount Windows Image and Save
     Write-Host -ForegroundColor DarkGray "========================================================================="
