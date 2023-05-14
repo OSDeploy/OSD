@@ -18,7 +18,7 @@ Mount the Windows Image as Read Only
 Opens Windows Explorer to the Mount Directory
 
 .LINK
-https://osd.osdeploy.com/module/functions/mywindowsimage
+https://github.com/OSDeploy/OSD/tree/master/Docs
 
 .NOTES
 #>

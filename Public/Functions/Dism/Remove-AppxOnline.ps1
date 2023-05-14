@@ -6,7 +6,7 @@ Removes Appx Packages and Appx Provisioned Packages for All Users
 Removes Appx Packages and Appx Provisioned Packages for All Users
 
 .LINK
-https://osd.osdeploy.com/module/functions/appx/remove-appxonline
+https://github.com/OSDeploy/OSD/tree/master/Docs
 
 .NOTES
 19.12.20 David Segura @SeguraOSD

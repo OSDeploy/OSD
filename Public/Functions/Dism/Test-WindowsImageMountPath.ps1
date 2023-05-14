@@ -9,7 +9,7 @@ Returns True if Path is a Windows Image mount directory
 Full Path to a Windows Image mount directory
 
 .LINK
-https://osd.osdeploy.com/module/functions/windowsimage
+https://github.com/OSDeploy/OSD/tree/master/Docs
 
 .NOTES
 #>

@@ -6,7 +6,7 @@ Displays information about the OSD Module
 Displays information about the OSD Module
 
 .LINK
-https://osd.osdeploy.com/module/functions
+https://github.com/OSDeploy/OSD/tree/master/Docs
 
 .NOTES
 #>

@@ -7,7 +7,7 @@ This will return the latest compatible BIOS Update for your system as a PowerShe
 Shortcut for Get-DellSystemCatalog -Component BIOS -Compatible
 
 .LINK
-https://osd.osdeploy.com/module/functions/dell/get-mydellbios
+https://github.com/OSDeploy/OSD/tree/master/Docs
 
 .NOTES
 21.3.11 Pulling data from Local due to issues with the Dell site being down
@@ -119,7 +119,7 @@ Update-MyDellBios -Silent -Reboot
 Yes, this will update your BIOS silently, AND reboot when its done
 
 .LINK
-https://osd.osdeploy.com/module/functions/dell/update-mydellbios
+https://github.com/OSDeploy/OSD/tree/master/Docs
 
 .NOTES
 21.3.9  Started adding logic for WinPE

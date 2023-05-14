@@ -6,7 +6,7 @@ Returns the Default AU Service from Microsoft.Update.ServiceManager
 Returns the Default AU Service from Microsoft.Update.ServiceManager
 
 .LINK
-https://osd.osdeploy.com/module/functions/getmy
+https://github.com/OSDeploy/OSD/tree/master/Docs
 
 .LINK
 https://twitter.com/byteben/status/1356893619811155968

@@ -15,7 +15,7 @@ Index of the Windows Image
 Test if the File Extension is .esd or .wim
 
 .LINK
-https://osd.osdeploy.com/module/functions/windowsimage
+https://github.com/OSDeploy/OSD/tree/master/Docs
 
 .NOTES
 #>

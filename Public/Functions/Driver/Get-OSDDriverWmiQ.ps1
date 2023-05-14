@@ -6,7 +6,7 @@ Returns a Computer Model WMI Query that can be used in Task Sequences
 Returns a Computer Model WMI Query that can be used in Task Sequences
 
 .LINK
-https://osd.osdeploy.com/module/functions/driver/get-osddriverwmiq
+https://github.com/OSDeploy/OSD/tree/master/Docs
 
 .NOTES
 19.12.6     David Segura @SeguraOSD

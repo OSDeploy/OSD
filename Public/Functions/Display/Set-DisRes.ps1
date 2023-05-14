@@ -6,7 +6,7 @@ Sets the Primary Display Screen Resolution
 Sets the Primary Display Screen Resolution
 
 .LINK
-https://osd.osdeploy.com/module/functions/display/set-disres
+https://github.com/OSDeploy/OSD/tree/master/Docs
 
 .NOTES
 21.2.1 Initial Release

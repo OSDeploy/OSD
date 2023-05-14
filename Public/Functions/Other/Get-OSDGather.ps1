@@ -17,7 +17,7 @@ $OSDGather.ComputerInfo
 Returns the Gather Results saved in a Variable
 
 .LINK
-https://osd.osdeploy.com/module/functions/general/get-osdgather
+https://github.com/OSDeploy/OSD/tree/master/Docs
 
 .NOTES
 19.10.4.0   David Segura @SeguraOSD

@@ -4,7 +4,7 @@ Downloads a file from the internet and returns a Get-Item Object
 .DESCRIPTION
 Downloads a file from the internet and returns a Get-Item Object
 .LINK
-https://osd.osdeploy.com/module/functions/save-webfile
+https://github.com/OSDeploy/OSD/tree/master/Docs
 #>
 function Save-WebFile {
     [CmdletBinding()]

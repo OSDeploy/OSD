@@ -72,7 +72,7 @@ function New-OSDisk {
     Interactive.  Prompted to Confirm Clear-Disk for each Local Disk
 
     .LINK
-    https://osd.osdeploy.com/module/osddisk/new-osdisk
+    https://github.com/OSDeploy/OSD/tree/master/Docs
 
     .NOTES
     19.10.10    Created by David Segura @SeguraOSD

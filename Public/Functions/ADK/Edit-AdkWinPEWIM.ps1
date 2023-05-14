@@ -6,7 +6,7 @@ Adds PowerShell and PowerShell Gallery support to ADK's x64 winpe.wim
 Adds PowerShell and PowerShell Gallery support to ADK's x64 winpe.wim.  This will speed things up with MDT and MEM CM going forward
 
 .LINK
-https://osd.osdeploy.com/module/functions/adk
+https://github.com/OSDeploy/OSD/tree/master/Docs
 
 .NOTES
 21.3.15.2   Initial Release

@@ -6,7 +6,7 @@ Gets the Disk containing the SYSTEM partition
 Gets the Disk containing the SYSTEM partition
 
 .LINK
-https://osd.osdeploy.com/module/functions/storage/Get-DiskWithSystemPartition
+https://github.com/OSDeploy/OSD/tree/master/Docs
 
 .NOTES
 19.12.9    Created by David Segura @SeguraOSD

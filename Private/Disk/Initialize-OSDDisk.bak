@@ -26,7 +26,7 @@ Interactive = True
 Sandbox     = False
 
 .LINK
-https://osd.osdeploy.com/module/osddisk/initialize-osddisk
+https://github.com/OSDeploy/OSD/tree/master/Docs
 
 .NOTES
 21.2.14     Initial Release

@@ -6,7 +6,7 @@ Returns the Session.xml Updates that have been applied to an Operating System
 Returns the Session.xml Updates that have been applied to an Operating System
 
 .LINK
-https://osd.osdeploy.com/module/functions/general/get-osdsessions
+https://github.com/OSDeploy/OSD/tree/master/Docs
 #>
 function Get-SessionsXml {
     [CmdletBinding()]

@@ -6,7 +6,7 @@ Gets many Windows ADK Paths into a hash to easily use in your code
 Gets many Windows ADK Paths into a hash to easily use in your code
 
 .LINK
-https://osd.osdeploy.com/module/functions/adk
+https://github.com/OSDeploy/OSD/tree/master/Docs
 
 .NOTES
 21.3.15.2   Renamed to make it easier to understand what it does

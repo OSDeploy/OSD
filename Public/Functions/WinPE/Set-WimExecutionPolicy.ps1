@@ -22,7 +22,7 @@ Index of the WIM to Mount
 Default is 1
 
 .LINK
-https://osd.osdeploy.com/module/functions/dism/set-wimexecutionpolicy
+https://github.com/OSDeploy/OSD/tree/master/Docs
 
 .NOTES
 21.2.1  Initial Release

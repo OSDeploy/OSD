@@ -15,7 +15,7 @@ Discards the changes to a Windows image.
 Saves the changes to a Windows image.
 
 .LINK
-https://osd.osdeploy.com/module/functions/mywindowsimage
+https://github.com/OSDeploy/OSD/tree/master/Docs
 
 .INPUTS
 System.String[]

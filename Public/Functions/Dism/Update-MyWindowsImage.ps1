@@ -27,7 +27,7 @@ Updates are only installed if they are needed
 Force parameter will install the update even if it is already installed
 
 .LINK
-https://osd.osdeploy.com/module/functions
+https://github.com/OSDeploy/OSD/tree/master/Docs
 
 .NOTES
 #>

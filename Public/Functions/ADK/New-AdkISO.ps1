@@ -18,7 +18,7 @@ Label of the ISO.  Limited to 16 characters
 Opens Windows Explorer to the parent directory of the ISO File
 
 .LINK
-https://osd.osdeploy.com/module/functions/adk
+https://github.com/OSDeploy/OSD/tree/master/Docs
 
 .NOTES
 21.3.16     Initial Release

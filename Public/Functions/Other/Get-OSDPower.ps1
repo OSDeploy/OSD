@@ -19,7 +19,7 @@ Option 1: Get-OSDPower High
 Option 2: Get-OSDPower -Property High
 
 .LINK
-https://osd.osdeploy.com/module/functions/general/get-osdpower
+https://github.com/OSDeploy/OSD/tree/master/Docs
 
 .NOTES
 19.10.1     David Segura @SeguraOSD

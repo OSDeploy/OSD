@@ -6,7 +6,7 @@ Creates an ADK CopyPE Working Directory
 Creates an ADK CopyPE Working Directory
 
 .LINK
-https://osd.osdeploy.com/module/functions/adk
+https://github.com/OSDeploy/OSD/tree/master/Docs
 
 .NOTES
 21.5.27.2   Resolved issue with paths

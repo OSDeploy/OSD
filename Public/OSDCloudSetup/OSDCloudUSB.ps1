@@ -175,6 +175,7 @@ function New-OSDCloudUSB {
     #	New-BootableUSBDrive
     #=================================================
     $BootableUSBDrive = New-BootableUSBDrive -BootLabel $BootLabel -DataLabel $DataLabel
+    $BootableUSBDrive = $BootableUSBDrive | Select-Object -First 1
     #=================================================
     #	Test USB Volumes
     #=================================================

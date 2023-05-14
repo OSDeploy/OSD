@@ -7,7 +7,7 @@ if ($env:SystemDrive -eq 'X:') {
     Common WinPE Commands using wpeutil and Microsoft DaRT RemoteRecovery
 
     .LINK
-    https://osd.osdeploy.com/module/functions/winpe/get-osdwinpe
+    https://github.com/OSDeploy/OSD/tree/master/Docs
 
     .NOTES
     19.10.1     David Segura @SeguraOSD

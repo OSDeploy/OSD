@@ -4,7 +4,7 @@ Waits for an internet connection to the specified Uri
 .DESCRIPTION
 Waits for an internet connection to the specified Uri
 .LINK
-https://osd.osdeploy.com/module/functions/webconnection
+https://github.com/OSDeploy/OSD/tree/master/Docs
 #>
 function Wait-WebConnection
 {

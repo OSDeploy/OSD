@@ -7,7 +7,7 @@ Returns Driver information from Online and Local sources.  Used by OSDDrivers Mo
 Value is returned as Global Variable $GetOSDDriver
 
 .LINK
-https://osd.osdeploy.com/module/functions/driver/get-osddriver
+https://github.com/OSDeploy/OSD/tree/master/Docs
 #>
 function Get-OSDDriver {
     [CmdletBinding()]

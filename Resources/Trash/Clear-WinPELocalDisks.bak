@@ -43,7 +43,7 @@ Interactive = False
 Sandbox     = False
 
 .LINK
-https://osd.osdeploy.com/module/functions/winpe/clear-winpelocaldisks
+https://github.com/OSDeploy/OSD/tree/master/Docs
 
 .NOTES
 21.2.13     Initial Release

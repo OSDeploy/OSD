@@ -4,7 +4,7 @@ Allows you to execute a PowerShell Script as a URL Link
 .DESCRIPTION
 Allows you to execute a PowerShell Script as a URL Link
 .LINK
-https://osd.osdeploy.com/module/functions/webpsscript
+https://github.com/OSDeploy/OSD/tree/master/Docs
 #>
 function Invoke-WebPSScript
 {

@@ -19,7 +19,7 @@ Specifies the full path to the root directory of the offline Windows image that 
 If a Path is not specified, all mounted Windows Images will be modified
 
 .LINK
-https://osd.osdeploy.com/module/functions/dism/set-windowsimageexecutionpolicy
+https://github.com/OSDeploy/OSD/tree/master/Docs
 
 .NOTES
 21.2.1  Initial Release

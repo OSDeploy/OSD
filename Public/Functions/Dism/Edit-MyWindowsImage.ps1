@@ -6,7 +6,7 @@ Edits a mounted Windows Image
 Edits a mounted Windows Image
 
 .LINK
-https://osd.osdeploy.com/module/functions/mywindowsimage
+https://github.com/OSDeploy/OSD/tree/master/Docs
 
 .NOTES
 19.11.22 David Segura @SeguraOSD

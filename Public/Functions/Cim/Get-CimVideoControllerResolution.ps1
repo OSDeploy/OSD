@@ -6,7 +6,7 @@ Returns the CIM_VideoControllerResolution Properties for the Primary Screen
 Returns the CIM_VideoControllerResolution Properties for the Primary Screen
 
 .LINK
-https://osd.osdeploy.com/module/functions/cim
+https://github.com/OSDeploy/OSD/tree/master/Docs
 
 .NOTES
 21.2.1  Initial Release

@@ -4,7 +4,7 @@ Tests to see if a Uri by Invoke-WebRequest -Method Head
 .DESCRIPTION
 Tests to see if a Uri by Invoke-WebRequest -Method Head
 .LINK
-https://osd.osdeploy.com/module/functions/webconnection
+https://github.com/OSDeploy/OSD/tree/master/Docs
 #>
 function Test-WebConnection
 {
