@@ -628,7 +628,6 @@ Windows Registry Editor Version 5.00
         $CurrentLog = "$TemplateLogs\$((Get-Date).ToString('yyyy-MM-dd-HHmmss'))-Save-WindowsImage.log"
         Save-WindowsImage -Path $MountPath -LogPath $CurrentLog | Out-Null
     }
-    #=================================================
     #region International Settings
     if ($SetAllIntl -or $SetInputLocale) {
         Write-Host -ForegroundColor DarkGray "========================================================================="
@@ -651,7 +650,6 @@ Windows Registry Editor Version 5.00
         Dism /image:"$MountPath" /Get-Intl
     }
     #endregion
-    #=================================================
     #region Inject Additional Files
     Write-Host -ForegroundColor DarkGray "========================================================================="
     Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) WinPE Additional Files"
@@ -747,7 +745,6 @@ Windows Registry Editor Version 5.00
         Write-Warning "Could not find $SourceFile"
     }
     #endregion
-    #=================================================
     #region Save-WindowsImage
     Write-Host -ForegroundColor DarkGray "========================================================================="
     Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Save Windows Image"
@@ -756,23 +753,19 @@ Windows Registry Editor Version 5.00
     $CurrentLog = "$TemplateLogs\$((Get-Date).ToString('yyyy-MM-dd-HHmmss'))-Save-WindowsImage.log"
     Save-WindowsImage -Path $MountPath -LogPath $CurrentLog | Out-Null
     #endregion
-    #=================================================
-    #	PowerShell Execution Policy
-    #=================================================
+    #region Set PowerShell Execution Policy
     Write-Host -ForegroundColor DarkGray "========================================================================="
     Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Set WinPE PowerShell ExecutionPolicy to Bypass"
     Write-Host -ForegroundColor Yellow "OSD Function: Set-WindowsImageExecutionPolicy"
     Set-WindowsImageExecutionPolicy -Path $MountPath -ExecutionPolicy Bypass | Out-Null
-    #=================================================
-    #   Enable PowerShell Gallery
-    #=================================================
+    #endregion
+    #region Enable PowerShell Gallery
     Write-Host -ForegroundColor DarkGray "========================================================================="
     Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Enable WinPE PowerShell Gallery"
     Write-Host -ForegroundColor Yellow "OSD Function: Enable-PEWindowsImagePSGallery"
     Enable-PEWindowsImagePSGallery -Path $MountPath | Out-Null
-    #=================================================
-    #   Remove winpeshl
-    #=================================================
+    #endregion
+    #region Remove winpeshl.ini
     $SourceFile = "$MountPath\Windows\System32\winpeshl.ini"
     if (Test-Path $SourceFile) {
         Write-Host -ForegroundColor DarkGray "========================================================================="
@@ -780,7 +773,7 @@ Windows Registry Editor Version 5.00
         Write-Host -ForegroundColor Yellow "This file is present when using WinRE.wim and needs to be removed for WinPE compatibility"
         Remove-Item -Path $SourceFile -Force
     }
-    #=================================================
+    #endregion
     #region Registry Fixes
     Write-Host -ForegroundColor DarkGray "========================================================================="
     Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Modifying WinPE CMD and PowerShell Console settings"
@@ -800,7 +793,6 @@ Windows Registry Editor Version 5.00
     #Unload Registry
     Invoke-Exe reg unload HKLM\Default | Out-Null
     #endregion
-    #=================================================
     #region Apply CumulativeUpdate
     if ($CumulativeUpdate) {
         Write-Host -ForegroundColor DarkGray "========================================================================="
