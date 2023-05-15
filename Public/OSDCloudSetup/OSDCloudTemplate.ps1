@@ -300,12 +300,12 @@ Windows Registry Editor Version 5.00
             Break
         }
         if ((Get-RegCurrentVersion).CurrentBuild -gt 20000) {
-            Write-Host -ForegroundColor DarkGray "========================================================================="
-            Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Windows 11 WinRE may not support booting some Virtual Machines"
-            Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) It is recommended that you remove the -WinRE parameter if you need Virtual Machine support"
-            Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Press Ctrl+C to cancel in the next 10 seconds"
-            Start-Sleep -Seconds 10
-            Write-Host -ForegroundColor DarkGray "========================================================================="
+            #Write-Host -ForegroundColor DarkGray "========================================================================="
+            #Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Windows 11 WinRE may not support booting some Virtual Machines"
+            #Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) It is recommended that you remove the -WinRE parameter if you need Virtual Machine support"
+            #Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Press Ctrl+C to cancel in the next 10 seconds"
+            #Start-Sleep -Seconds 10
+            #Write-Host -ForegroundColor DarkGray "========================================================================="
         }
     }
     #endregion
@@ -934,12 +934,16 @@ Windows Registry Editor Version 5.00
     #endregion
 
     #region Create OSDCloud ISOs
+    Write-Host -ForegroundColor DarkGray "========================================================================="
+    Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Create OSDCloud Template ISOs"
     $isoFileName = 'OSDCloud.iso'
     $isoLabel = 'OSDCloud'
     $NewADKiso = New-AdkISO -MediaPath "$OSDCloudTemplate\Media" -isoFileName $isoFileName -isoLabel $isoLabel
     #endregion
 
     #region Set OSDCloud Template
+    Write-Host -ForegroundColor DarkGray "========================================================================="
+    Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Set-OSDCloudTemplate -Name $Name"
     $WinPE = [PSCustomObject]@{
         BuildDate = (Get-Date).ToString('yyyy.MM.dd.HHmmss')
         Version = [Version](Get-Module -Name OSD -ListAvailable | Sort-Object Version -Descending | Select-Object -First 1).Version
@@ -1021,4 +1025,6 @@ function Set-OSDCloudTemplate {
         $null = robocopy "$env:ProgramData\OSDCloud" "$OSDCloudTemplate" *.iso /move /np /njh /njs /r:0 /w:0
     } #>
 }
-Register-ArgumentCompleter -CommandName Set-OSDCloudTemplate -ParameterName Name -ScriptBlock {Get-OSDCloudTemplateNames}
+Register-ArgumentCompleter -CommandName Set-OSDCloudTemplate -ParameterName 'Name' -ScriptBlock {Get-OSDCloudTemplateNames | ForEach-Object {if ($_.Contains(' ')) {"'$_'"}else {$_}}}
+#https://github.com/PowerShell/PowerShell/issues/11330
+#https://github.com/SteveL-MSFT/NetConfiguration/blob/master/NetConfiguration/NetConfiguration.psm1#L29-L45
