@@ -1,20 +1,20 @@
 <#
 .SYNOPSIS
-Returns the URL of the latest Dell WinPE 11 Driver Pack 
+Returns the URL of the latest Dell WinPE 10 Driver Pack 
 
 .DESCRIPTION
-Returns the URL of the latest Dell WinPE 11 Driver Pack 
+Returns the URL of the latest Dell WinPE 10 Driver Pack 
 
 .EXAMPLE
-Get-DellWinPEDriverPack
+Get-DellWinPE10DriverPack
 
 .EXAMPLE
-$DellWinPEDriverPack = Get-DellWinPEDriverPack
+$DellWinPEDriverPack = Get-DellWinPE10DriverPack
 
 .LINK
 https://github.com/OSDeploy/OSD/tree/master/Docs
 #>
-function Get-DellWinPEDriverPack {
+function Get-DellWinPE10DriverPack {
     [CmdletBinding()]
     param ()
 
@@ -22,7 +22,7 @@ function Get-DellWinPEDriverPack {
     try {
         $null = Invoke-WebRequest -Uri $WinPEDriverPacks -Method Head -UseBasicParsing -ErrorAction Stop
         Write-Verbose "DriverPack Info Online: $WinPEDriverPacks"
-        $CurrentDriverPackPage = (Invoke-WebRequest -Uri $WinPEDriverPacks -UseBasicParsing -Method Get).Links | Where-Object {$_.href -like 'https://www.dell.com/support/kbdoc/*/winpe-11*driver*'} | Select-Object -ExpandProperty href
+        $CurrentDriverPackPage = (Invoke-WebRequest -Uri $WinPEDriverPacks -UseBasicParsing -Method Get).Links | Where-Object {$_.href -like 'https://www.dell.com/support/kbdoc/*/winpe-10*driver*'} | Select-Object -ExpandProperty href
     }
     catch {
         Write-Warning "DriverPack Info Offline: $WinPEDriverPacks"
@@ -52,7 +52,7 @@ function Get-DellWinPEDriverPack {
     }
 
     Write-Verbose "Trying last known good Dell WinPE Driver Pack"
-    $LastKnownGood = $Global:OSDModuleResource.WinPEDriverPack.Dell.LastKnownGood11
+    $LastKnownGood = $Global:OSDModuleResource.WinPEDriverPack.Dell.LastKnownGood10
     try {
         $null = Invoke-WebRequest -Uri $LastKnownGood -Method Head -UseBasicParsing -ErrorAction Stop
         Write-Verbose "DriverPack LastKnownGood Online: $LastKnownGood"
