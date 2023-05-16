@@ -806,7 +806,7 @@ Windows Registry Editor Version 5.00
     #region CumulativeUpdate
     if ($CumulativeUpdate) {
         Write-Host -ForegroundColor DarkGray "========================================================================="
-        Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Cumulative Update"
+        Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Apply Cumulative Update"
 
         $Params = @{
             ErrorAction = 'Stop'
@@ -817,9 +817,9 @@ Windows Registry Editor Version 5.00
             Verbose = $true
         }
 
-        Write-Host -ForegroundColor DarkGray "Path = " $Params.Path
-        Write-Host -ForegroundColor DarkGray "PackagePath = " $Params.PackagePath
-        Write-Host -ForegroundColor DarkGray "LogPath = " $Params.LogPath
+        Write-Host -ForegroundColor Yellow "Add-WindowsPackage -PackagePath" $Params.PackagePath
+        Write-Host -ForegroundColor DarkGray "-Path" $Params.Path
+        Write-Host -ForegroundColor DarkGray "-LogPath" $Params.LogPath
 
         try {
             Add-WindowsPackage @Params
@@ -846,19 +846,32 @@ Windows Registry Editor Version 5.00
         else {
             Write-Host -ForegroundColor DarkGray "========================================================================="
             Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Update Boot Files"
-            Write-Host -ForegroundColor Yellow "Updating $DestinationMedia\bootmgfw.efi"
-            Copy-Item -Path "$MountPath\Windows\boot\efi\bootmgfw.efi" -Destination "$DestinationMedia\bootmgfw.efi" -Force | Out-Null
-            Write-Host -ForegroundColor Yellow "Updating $DestinationMedia\bootmgr.efi"
-            Copy-Item -Path "$MountPath\Windows\boot\efi\bootmgr.efi" -Destination "$DestinationMedia\bootmgr.efi" -Force | Out-Null
+
+            #bootmgr.efi
+            Write-Host -ForegroundColor DarkGray "Source: $MountPath\Windows\boot\efi\bootmgr.efi"
+            Write-Host -ForegroundColor Yellow "Destination: $DestinationMedia\bootmgr.efi"
+            Copy-Item -Path "$MountPath\Windows\boot\efi\bootmgr.efi" -Destination "$DestinationMedia\bootmgr.efi" -Force
+
+            #bootmgfw.efi
+            Write-Host -ForegroundColor DarkGray "Source: $MountPath\Windows\boot\efi\bootmgfw.efi"
+            Write-Host -ForegroundColor Yellow "Destination: $DestinationMedia\EFI\Boot\bootx64.efi"
+            Copy-Item -Path "$MountPath\Windows\boot\efi\bootmgfw.efi" -Destination "$DestinationMedia\EFI\Boot\bootx64.efi" -Force
+
+            #bootmgfw.efi Microsoft Guidance: https://learn.microsoft.com/en-us/windows/deployment/update/media-dynamic-update#update-winpe
+            #Write-Host -ForegroundColor DarkGray "Source: $MountPath\Windows\boot\efi\bootmgfw.efi"
+            #Write-Host -ForegroundColor Yellow "Destination: $DestinationMedia\bootmgfw.efi"
+            #Copy-Item -Path "$MountPath\Windows\boot\efi\bootmgfw.efi" -Destination "$DestinationMedia\bootmgfw.efi" -Force
         }
 
         Write-Host -ForegroundColor DarkGray "========================================================================="
         Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Dism Component Cleanup"
 
         $CurrentLog = "$TemplateLogs\$((Get-Date).ToString('yyyy-MM-dd-HHmmss'))-DismComponentCleanup.log"
-        $CommandLine = "Dism /Image:`"$MountPath`" /Cleanup-Image /StartComponentCleanup /LogPath:`"$CurrentLog`""
-        
-        Write-Host -ForegroundColor Yellow $CommandLine
+        #$CommandLine = "Dism /Cleanup-Image /StartComponentCleanup /Image:`"$MountPath`" /LogPath:`"$CurrentLog`""
+        Write-Host -ForegroundColor Yellow "Dism /Image:`"$MountPath`""
+        Write-Host -ForegroundColor DarkGray "/Cleanup-Image /StartComponentCleanup"
+        Write-Host -ForegroundColor DarkGray "/LogPath:`"$CurrentLog`""
+
         DISM /Image:"$MountPath" /Cleanup-Image /StartComponentCleanup /LogPath:"$CurrentLog"
     }
     #endregion
@@ -938,7 +951,7 @@ Windows Registry Editor Version 5.00
     Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Create OSDCloud Template ISOs"
     $isoFileName = 'OSDCloud.iso'
     $isoLabel = 'OSDCloud'
-    $NewADKiso = New-AdkISO -MediaPath "$OSDCloudTemplate\Media" -isoFileName $isoFileName -isoLabel $isoLabel
+    $null = New-AdkISO -MediaPath "$OSDCloudTemplate\Media" -isoFileName $isoFileName -isoLabel $isoLabel
     #endregion
 
     #region Set OSDCloud Template
