@@ -5,30 +5,30 @@ online version: https://github.com/OSDeploy/OSD/tree/master/Docs
 schema: 2.0.0
 ---
 
-# Get-DellWinPEDriverPack
+# Get-DellWinPE10DriverPack
 
 ## SYNOPSIS
-Returns the URL of the latest Dell WinPE 11 Driver Pack
+Returns the URL of the latest Dell WinPE 10 Driver Pack
 
 ## SYNTAX
 
 ```
-Get-DellWinPEDriverPack [<CommonParameters>]
+Get-DellWinPE10DriverPack [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-Returns the URL of the latest Dell WinPE 11 Driver Pack
+Returns the URL of the latest Dell WinPE 10 Driver Pack
 
 ## EXAMPLES
 
 ### EXAMPLE 1
 ```
-Get-DellWinPEDriverPack
+Get-DellWinPE10DriverPack
 ```
 
 ### EXAMPLE 2
 ```
-$DellWinPEDriverPack = Get-DellWinPEDriverPack
+$DellWinPEDriverPack = Get-DellWinPE10DriverPack
 ```
 
 ## PARAMETERS
