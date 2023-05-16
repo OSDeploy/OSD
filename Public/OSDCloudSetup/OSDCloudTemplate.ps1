@@ -7,7 +7,7 @@ function Get-OSDCloudTemplate {
     Returns the path to the current OSDCloud Template.  This is typically $env:ProgramData\OSDCloud\Templates\Default
 
     .LINK
-    https://github.com/OSDeploy/OSD/tree/master/Docs
+    https://github.com/OSDeploy/OSD/tree/master/Docs/Get-OSDCloudTemplate.md
     #>
     
     [CmdletBinding()]
@@ -59,7 +59,7 @@ function Get-OSDCloudTemplateNames {
     Returns the names of the OSDCloud Templates
 
     .LINK
-    https://github.com/OSDeploy/OSD/tree/master/Docs
+    https://github.com/OSDeploy/OSD/tree/master/Docs/Get-OSDCloudTemplateNames.md
     #>
     
     [CmdletBinding()]
@@ -93,6 +93,9 @@ function New-OSDCloudTemplate {
     .EXAMPLE
     New-OSDCloudTemplate -WinRE
 
+    .LINK
+    https://github.com/OSDeploy/OSD/tree/master/Docs/New-OSDCloudTemplate.md
+    
     .LINK
     https://www.osdcloud.com/setup/osdcloud-template
     #>
@@ -1038,6 +1041,6 @@ function Set-OSDCloudTemplate {
         $null = robocopy "$env:ProgramData\OSDCloud" "$OSDCloudTemplate" *.iso /move /np /njh /njs /r:0 /w:0
     } #>
 }
-Register-ArgumentCompleter -CommandName Set-OSDCloudTemplate -ParameterName 'Name' -ScriptBlock {Get-OSDCloudTemplateNames | ForEach-Object {if ($_.Contains(' ')) {"'$_'"}else {$_}}}
+Register-ArgumentCompleter -CommandName Set-OSDCloudTemplate -ParameterName 'Name' -ScriptBlock {Get-OSDCloudTemplateNames | ForEach-Object {if ($_.Contains(' ')) {"'$_'"} else {$_}}}
 #https://github.com/PowerShell/PowerShell/issues/11330
 #https://github.com/SteveL-MSFT/NetConfiguration/blob/master/NetConfiguration/NetConfiguration.psm1#L29-L45
