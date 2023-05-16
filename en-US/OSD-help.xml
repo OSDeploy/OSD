@@ -12334,8 +12334,12 @@ Option 3: Get-OSDClass -Class ComputerSystem</dev:code>
     </command:examples>
     <command:relatedLinks>
       <maml:navigationLink>
-        <maml:linkText>https://github.com/OSDeploy/OSD/tree/master/Docs</maml:linkText>
-        <maml:uri>https://github.com/OSDeploy/OSD/tree/master/Docs</maml:uri>
+        <maml:linkText>https://github.com/OSDeploy/OSD/tree/master/Docs/Get-OSDCloudTemplate.md</maml:linkText>
+        <maml:uri>https://github.com/OSDeploy/OSD/tree/master/Docs/Get-OSDCloudTemplate.md</maml:uri>
+      </maml:navigationLink>
+      <maml:navigationLink>
+        <maml:linkText>https://www.osdcloud.com/setup/osdcloud-template/named-templates</maml:linkText>
+        <maml:uri>https://www.osdcloud.com/setup/osdcloud-template/named-templates</maml:uri>
       </maml:navigationLink>
     </command:relatedLinks>
   </command:command>
@@ -12375,8 +12379,12 @@ Option 3: Get-OSDClass -Class ComputerSystem</dev:code>
     </command:examples>
     <command:relatedLinks>
       <maml:navigationLink>
-        <maml:linkText>https://github.com/OSDeploy/OSD/tree/master/Docs</maml:linkText>
-        <maml:uri>https://github.com/OSDeploy/OSD/tree/master/Docs</maml:uri>
+        <maml:linkText>https://github.com/OSDeploy/OSD/tree/master/Docs/Get-OSDCloudTemplateNames.md</maml:linkText>
+        <maml:uri>https://github.com/OSDeploy/OSD/tree/master/Docs/Get-OSDCloudTemplateNames.md</maml:uri>
+      </maml:navigationLink>
+      <maml:navigationLink>
+        <maml:linkText>https://www.osdcloud.com/setup/osdcloud-template/named-templates</maml:linkText>
+        <maml:uri>https://www.osdcloud.com/setup/osdcloud-template/named-templates</maml:uri>
       </maml:navigationLink>
     </command:relatedLinks>
   </command:command>
@@ -12386,11 +12394,11 @@ Option 3: Get-OSDClass -Class ComputerSystem</dev:code>
       <command:verb>Get</command:verb>
       <command:noun>OSDCloudWorkspace</command:noun>
       <maml:description>
-        <maml:para>Returns the path to the OSDCloud Workspace by reading the path stored in $env:ProgramData\OSDCloud\workspace.json</maml:para>
+        <maml:para>Returns the path to the OSDCloud Workspace by reading the configuration file $env:ProgramData\OSDCloud\workspace.json</maml:para>
       </maml:description>
     </command:details>
     <maml:description>
-      <maml:para>Returns the path to the OSDCloud Workspace by reading the path stored in $env:ProgramData\OSDCloud\workspace.json</maml:para>
+      <maml:para>Returns the path to the OSDCloud Workspace by reading the configuration file $env:ProgramData\OSDCloud\workspace.json</maml:para>
     </maml:description>
     <command:syntax>
       <command:syntaxItem>
@@ -12416,8 +12424,12 @@ Option 3: Get-OSDClass -Class ComputerSystem</dev:code>
     </command:examples>
     <command:relatedLinks>
       <maml:navigationLink>
-        <maml:linkText>https://github.com/OSDeploy/OSD/tree/master/Docs</maml:linkText>
-        <maml:uri>https://github.com/OSDeploy/OSD/tree/master/Docs</maml:uri>
+        <maml:linkText>https://github.com/OSDeploy/OSD/tree/master/Docs/Get-OSDCloudWorkspace.md</maml:linkText>
+        <maml:uri>https://github.com/OSDeploy/OSD/tree/master/Docs/Get-OSDCloudWorkspace.md</maml:uri>
+      </maml:navigationLink>
+      <maml:navigationLink>
+        <maml:linkText>https://www.osdcloud.com/setup/osdcloud-workspace</maml:linkText>
+        <maml:uri>https://www.osdcloud.com/setup/osdcloud-workspace</maml:uri>
       </maml:navigationLink>
     </command:relatedLinks>
   </command:command>
@@ -19285,6 +19297,10 @@ Saves file in Parent Directory C:\DeploymentShare\OSDeploy\OSConfig.cab</dev:cod
     </command:examples>
     <command:relatedLinks>
       <maml:navigationLink>
+        <maml:linkText>https://github.com/OSDeploy/OSD/tree/master/Docs/New-OSDCloudTemplate.md</maml:linkText>
+        <maml:uri>https://github.com/OSDeploy/OSD/tree/master/Docs/New-OSDCloudTemplate.md</maml:uri>
+      </maml:navigationLink>
+      <maml:navigationLink>
         <maml:linkText>https://www.osdcloud.com/setup/osdcloud-template</maml:linkText>
         <maml:uri>https://www.osdcloud.com/setup/osdcloud-template</maml:uri>
       </maml:navigationLink>
@@ -19630,6 +19646,10 @@ Saves file in Parent Directory C:\DeploymentShare\OSDeploy\OSConfig.cab</dev:cod
       </command:example>
     </command:examples>
     <command:relatedLinks>
+      <maml:navigationLink>
+        <maml:linkText>https://github.com/OSDeploy/OSD/tree/master/Docs/Set-OSDCloudWorkspace.md</maml:linkText>
+        <maml:uri>https://github.com/OSDeploy/OSD/tree/master/Docs/Set-OSDCloudWorkspace.md</maml:uri>
+      </maml:navigationLink>
       <maml:navigationLink>
         <maml:linkText>https://www.osdcloud.com/setup/osdcloud-workspace</maml:linkText>
         <maml:uri>https://www.osdcloud.com/setup/osdcloud-workspace</maml:uri>
@@ -23153,8 +23173,12 @@ Interactive.  Prompted to Confirm Clear-Disk for each Local Disk</dev:code>
     </command:examples>
     <command:relatedLinks>
       <maml:navigationLink>
-        <maml:linkText>https://github.com/OSDeploy/OSD/tree/master/Docs</maml:linkText>
-        <maml:uri>https://github.com/OSDeploy/OSD/tree/master/Docs</maml:uri>
+        <maml:linkText>https://github.com/OSDeploy/OSD/tree/master/Docs/Set-OSDCloudTemplate.md</maml:linkText>
+        <maml:uri>https://github.com/OSDeploy/OSD/tree/master/Docs/Set-OSDCloudTemplate.md</maml:uri>
+      </maml:navigationLink>
+      <maml:navigationLink>
+        <maml:linkText>https://www.osdcloud.com/setup/osdcloud-template/named-templates</maml:linkText>
+        <maml:uri>https://www.osdcloud.com/setup/osdcloud-template/named-templates</maml:uri>
       </maml:navigationLink>
     </command:relatedLinks>
   </command:command>
@@ -23455,8 +23479,12 @@ Interactive.  Prompted to Confirm Clear-Disk for each Local Disk</dev:code>
     </command:examples>
     <command:relatedLinks>
       <maml:navigationLink>
-        <maml:linkText>https://github.com/OSDeploy/OSD/tree/master/Docs</maml:linkText>
-        <maml:uri>https://github.com/OSDeploy/OSD/tree/master/Docs</maml:uri>
+        <maml:linkText>https://github.com/OSDeploy/OSD/tree/master/Docs/Set-OSDCloudWorkspace.md</maml:linkText>
+        <maml:uri>https://github.com/OSDeploy/OSD/tree/master/Docs/Set-OSDCloudWorkspace.md</maml:uri>
+      </maml:navigationLink>
+      <maml:navigationLink>
+        <maml:linkText>https://www.osdcloud.com/setup/osdcloud-workspace</maml:linkText>
+        <maml:uri>https://www.osdcloud.com/setup/osdcloud-workspace</maml:uri>
       </maml:navigationLink>
     </command:relatedLinks>
   </command:command>

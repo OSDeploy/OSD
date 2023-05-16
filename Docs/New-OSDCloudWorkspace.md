@@ -1,7 +1,7 @@
 ---
 external help file: OSD-help.xml
 Module Name: OSD
-online version: https://www.osdcloud.com/setup/osdcloud-workspace
+online version: https://github.com/OSDeploy/OSD/tree/master/Docs/Set-OSDCloudWorkspace.md
 schema: 2.0.0
 ---
 
@@ -135,6 +135,8 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ## NOTES
 
 ## RELATED LINKS
+
+[https://github.com/OSDeploy/OSD/tree/master/Docs/Set-OSDCloudWorkspace.md](https://github.com/OSDeploy/OSD/tree/master/Docs/Set-OSDCloudWorkspace.md)
 
 [https://www.osdcloud.com/setup/osdcloud-workspace](https://www.osdcloud.com/setup/osdcloud-workspace)
 

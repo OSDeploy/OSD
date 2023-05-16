@@ -8,47 +8,50 @@ function Get-OSDCloudTemplate {
 
     .LINK
     https://github.com/OSDeploy/OSD/tree/master/Docs/Get-OSDCloudTemplate.md
+
+    .LINK
+    https://www.osdcloud.com/setup/osdcloud-template/named-templates
     #>
     
     [CmdletBinding()]
     param ()
-    #=================================================
-    #	Block
-    #=================================================
+    
+    #region Block
     Block-WinPE
     Block-StandardUser
     Block-WindowsVersionNe10
     Block-PowerShellVersionLt5
-    #=================================================
-    #   template.json
-    #=================================================
+    #endregion
+    
+    #region template.json
     if (Test-Path "$env:ProgramData\OSDCloud\template.json") {
         $TemplateSettings = Get-Content -Path "$env:ProgramData\OSDCloud\template.json" | ConvertFrom-Json
-        $OSDCloudTemplate = $TemplateSettings.TemplatePath
+        $TemplatePath = $TemplateSettings.TemplatePath
 
-        if (! (Test-Path "$OSDCloudTemplate\Media\sources\boot.wim")) {
-            $OSDCloudTemplate = "$env:ProgramData\OSDCloud"
+        if (! (Test-Path "$TemplatePath\Media\sources\boot.wim")) {
+            $TemplatePath = "$env:ProgramData\OSDCloud"
             $null = Remove-Item -Path "$env:ProgramData\OSDCloud\template.json" -Force
         }
     }
     else {
-        $OSDCloudTemplate = "$env:ProgramData\OSDCloud"
+        $TemplatePath = "$env:ProgramData\OSDCloud"
     }
-    #=================================================
-    #   Template is not complete
-    #=================================================
-    if (! (Test-Path "$OSDCloudTemplate\Media\sources\boot.wim")) {
+    #endregion
+
+    #region Incomplete Template
+    if (! (Test-Path "$TemplatePath\Media\sources\boot.wim")) {
         Return $null
     }
-    #=================================================
-    #   Return Template Path
-    #=================================================
+    #endregion
+
+    #return TemplatePath
     if (Test-Path "$env:ProgramData\OSDCloud\template.json") {
         $TemplateSettings = Get-Content -Path "$env:ProgramData\OSDCloud\template.json" | ConvertFrom-Json
-        $OSDCloudTemplate = $TemplateSettings.TemplatePath
+        $TemplatePath = $TemplateSettings.TemplatePath
         
     }
-    Return $OSDCloudTemplate
+    $TemplatePath
+    #endregion
 }
 function Get-OSDCloudTemplateNames {
     <#
@@ -60,24 +63,27 @@ function Get-OSDCloudTemplateNames {
 
     .LINK
     https://github.com/OSDeploy/OSD/tree/master/Docs/Get-OSDCloudTemplateNames.md
+
+    .LINK
+    https://www.osdcloud.com/setup/osdcloud-template/named-templates
     #>
     
     [CmdletBinding()]
     param ()
-    #=================================================
-    #	Block
-    #=================================================
+
+    #region Block
     Block-WinPE
     Block-StandardUser
     Block-WindowsVersionNe10
     Block-PowerShellVersionLt5
-    #=================================================
-    #   template.json
-    #=================================================
+    #endregion
+
+    #region Build Array
     $Results = @()
     [System.Array]$Results = 'default'
     [System.Array]$Results += Get-ChildItem -Path "$env:ProgramData\OSDCloud\Templates" | Where-Object {$_.PsIsContainer -eq $true} | Select-Object -ExpandProperty Name
     [System.Array]$Results
+    #endregion
 }
 function New-OSDCloudTemplate {
     <#
@@ -988,7 +994,10 @@ function Set-OSDCloudTemplate {
     Sets the current OSDCloud Template to a valid OSDCloud Template returned by Get-OSDCloudTemplateNames
 
     .LINK
-    https://github.com/OSDeploy/OSD/tree/master/Docs
+    https://github.com/OSDeploy/OSD/tree/master/Docs/Set-OSDCloudTemplate.md
+
+    .LINK
+    https://www.osdcloud.com/setup/osdcloud-template/named-templates
     #>
 
     [CmdletBinding()]
@@ -998,15 +1007,14 @@ function Set-OSDCloudTemplate {
         #Name of the OSDCloud Template
         $Name = 'default'
     )
-    #=================================================
-    #	Block
-    #=================================================
+    
+    #region Block
     Block-StandardUser
     Block-PowerShellVersionLt5
     Block-WinPE
-    #=================================================
-    #	Set Template Path
-    #=================================================
+    #endregion
+
+    #region Set Template Path
     if ($Name -ne 'default') {
         $OSDCloudTemplate = "$env:ProgramData\OSDCloud\Templates\$Name"
 
@@ -1028,9 +1036,10 @@ function Set-OSDCloudTemplate {
     
         $TemplateSettings | ConvertTo-Json | Out-File "$env:ProgramData\OSDCloud\template.json" -Encoding ascii -Width 2000 -Force
     }
-
     $OSDCloudTemplate
+    #endregion
 
+    #region DEV
 <#     if ((Test-Path "$env:ProgramData\OSDCloud\Config") -or (Test-Path "$env:ProgramData\OSDCloud\Logs") -or (Test-Path "$env:ProgramData\OSDCloud\Media")) {
         Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Migrating existing OSDCloud Template to $OSDCloudTemplate"
         $null = robocopy "$env:ProgramData\OSDCloud\Config" "$OSDCloudTemplate\Config" *.* /move /e /np /njh /njs /r:0 /w:0
@@ -1040,6 +1049,7 @@ function Set-OSDCloudTemplate {
         $null = robocopy "$env:ProgramData\OSDCloud" "$OSDCloudTemplate" winpe.json /move /np /njh /njs /r:0 /w:0
         $null = robocopy "$env:ProgramData\OSDCloud" "$OSDCloudTemplate" *.iso /move /np /njh /njs /r:0 /w:0
     } #>
+    #endregion
 }
 Register-ArgumentCompleter -CommandName Set-OSDCloudTemplate -ParameterName 'Name' -ScriptBlock {Get-OSDCloudTemplateNames | ForEach-Object {if ($_.Contains(' ')) {"'$_'"} else {$_}}}
 #https://github.com/PowerShell/PowerShell/issues/11330

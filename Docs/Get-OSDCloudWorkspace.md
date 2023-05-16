@@ -1,14 +1,14 @@
 ---
 external help file: OSD-help.xml
 Module Name: OSD
-online version: https://github.com/OSDeploy/OSD/tree/master/Docs
+online version: https://github.com/OSDeploy/OSD/tree/master/Docs/Get-OSDCloudWorkspace.md
 schema: 2.0.0
 ---
 
 # Get-OSDCloudWorkspace
 
 ## SYNOPSIS
-Returns the path to the OSDCloud Workspace by reading the path stored in $env:ProgramData\OSDCloud\workspace.json
+Returns the path to the OSDCloud Workspace by reading the configuration file $env:ProgramData\OSDCloud\workspace.json
 
 ## SYNTAX
 
@@ -17,7 +17,7 @@ Get-OSDCloudWorkspace [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-Returns the path to the OSDCloud Workspace by reading the path stored in $env:ProgramData\OSDCloud\workspace.json
+Returns the path to the OSDCloud Workspace by reading the configuration file $env:ProgramData\OSDCloud\workspace.json
 
 ## EXAMPLES
 
@@ -41,5 +41,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## RELATED LINKS
 
-[https://github.com/OSDeploy/OSD/tree/master/Docs](https://github.com/OSDeploy/OSD/tree/master/Docs)
+[https://github.com/OSDeploy/OSD/tree/master/Docs/Get-OSDCloudWorkspace.md](https://github.com/OSDeploy/OSD/tree/master/Docs/Get-OSDCloudWorkspace.md)
+
+[https://www.osdcloud.com/setup/osdcloud-workspace](https://www.osdcloud.com/setup/osdcloud-workspace)
 

@@ -1,18 +1,29 @@
 function Get-OSDCloudWorkspace {
     <#
     .SYNOPSIS
-    Returns the path to the OSDCloud Workspace by reading the path stored in $env:ProgramData\OSDCloud\workspace.json
+    Returns the path to the OSDCloud Workspace by reading the configuration file $env:ProgramData\OSDCloud\workspace.json
     
     .DESCRIPTION
-    Returns the path to the OSDCloud Workspace by reading the path stored in $env:ProgramData\OSDCloud\workspace.json
+    Returns the path to the OSDCloud Workspace by reading the configuration file $env:ProgramData\OSDCloud\workspace.json
     
     .LINK
-    https://github.com/OSDeploy/OSD/tree/master/Docs
+    https://github.com/OSDeploy/OSD/tree/master/Docs/Get-OSDCloudWorkspace.md
+    
+    .LINK
+    https://www.osdcloud.com/setup/osdcloud-workspace
     #>
 
     [CmdletBinding()]
     param ()
 
+    #region Block
+    Block-WinPE
+    #Block-StandardUser
+    Block-WindowsVersionNe10
+    Block-PowerShellVersionLt5
+    #endregion
+
+    #region workspace.json
     if (Test-Path "$env:ProgramData\OSDCloud\workspace.json") {
         $WorkspaceSettings = Get-Content -Path "$env:ProgramData\OSDCloud\workspace.json" | ConvertFrom-Json
         $WorkspacePath = $WorkspaceSettings.WorkspacePath
@@ -21,6 +32,7 @@ function Get-OSDCloudWorkspace {
     else {
         Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Unable to locate $env:ProgramData\OSDCloud\workspace.json"
     }
+    #endregion
 }
 function New-OSDCloudWorkspace {
     <#
@@ -30,6 +42,9 @@ function New-OSDCloudWorkspace {
     .DESCRIPTION
     Creates or updates an OSDCloud Workspace
 
+    .LINK
+    https://github.com/OSDeploy/OSD/tree/master/Docs/Set-OSDCloudWorkspace.md
+    
     .LINK
     https://www.osdcloud.com/setup/osdcloud-workspace
     #>
@@ -66,22 +81,21 @@ function New-OSDCloudWorkspace {
         #Prevents the copying of Private Config files
         $Public
     )
-    #=================================================
-    #	Blocks
-    #=================================================
+
+    #region Block
     Block-NoCurl
     Block-PowerShellVersionLt5
     Block-StandardUser
     Block-WindowsVersionNe10
     Block-WinPE
-    #=================================================
-    #	Initialize
-    #=================================================
+    #endregion
+
+    #region Preferences
     $ErrorActionPreference = 'Stop'
     $WinpeSourcePath = $null
-    #=================================================
-    #	Initialize Workspace
-    #=================================================
+    #endregion
+
+    #region Initialize Workspace from Template
     if ($PSCmdlet.ParameterSetName -eq 'fromTemplate') {
         #=================================================
         #	OSDCloudTemplate
@@ -111,9 +125,9 @@ function New-OSDCloudWorkspace {
             Break
         }
     }
-    #=================================================
-    #	Initialize fromIsoFile
-    #=================================================
+    #endregion
+
+    #region Initialize Workspace fromIsoFile
     if ($PSCmdlet.ParameterSetName -eq 'fromIsoFile') {
         $fromIsoFileGetItem = Get-Item -Path $fromIsoFile -ErrorAction Ignore
         $fromIsoFileFullName = $fromIsoFileGetItem.FullName
@@ -145,9 +159,9 @@ function New-OSDCloudWorkspace {
             Break
         }
     }
-    #=================================================
-    #	Initialize CloudISO
-    #=================================================
+    #endregion
+
+    #region Initialize Workspace fromIsoUrl
     if ($PSCmdlet.ParameterSetName -eq 'fromIsoUrl') {
         $ResolveUrl = Invoke-WebRequest -Uri $fromIsoUrl -Method Head -MaximumRedirection 0 -UseBasicParsing -ErrorAction SilentlyContinue
         if ($ResolveUrl.StatusCode -eq 302) {
@@ -184,9 +198,9 @@ function New-OSDCloudWorkspace {
             Break
         }
     }
-    #=================================================
-    #	Initialize fromUsbDrive
-    #=================================================
+    #endregion
+
+    #region Initialize fromUsbDrive
     if ($PSCmdlet.ParameterSetName -eq 'fromUsbDrive') {
         #=================================================
         #	USB Volumes
@@ -201,9 +215,9 @@ function New-OSDCloudWorkspace {
             Break
         }
     }
-    #=================================================
-    #	Workspace
-    #================================================
+    #endregion
+
+    #region Validate
     if (Test-Path $WorkspacePath) {
         Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) OSDCloud Workspace already exists at $WorkspacePath"
         Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Content will be merged and overwritten"
@@ -220,9 +234,9 @@ function New-OSDCloudWorkspace {
             Break
         }
     }
-    #=================================================
-    #   Logs
-    #=================================================
+    #endregion
+
+    #region Logs and Transcript
     $WorkspaceLogs = "$WorkspacePath\Logs\Workspace"
     Write-Verbose "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Creating OSDCloud Workspace Logs at $WorkspaceLogs"
 
@@ -235,9 +249,9 @@ function New-OSDCloudWorkspace {
 
     $Transcript = "$((Get-Date).ToString('yyyy-MM-dd-HHmmss'))-New-OSDCloudWorkspace.log"
     $null = Start-Transcript -Path (Join-Path $WorkspaceLogs $Transcript) -ErrorAction Ignore
-    #=================================================
-    #	Mirror Content
-    #=================================================
+    #endregion
+
+    #region Build Workspace
     if ($PSCmdlet.ParameterSetName -eq 'fromTemplate') {
         #=================================================
         #	Copy WorkspacePath
@@ -340,29 +354,29 @@ function New-OSDCloudWorkspace {
             robocopy "$WinpeSourcePath" "$WinpeDestinationPath" *.* /e /ndl /njh /njs /np /r:0 /w:0 /b /zb
         }
     }
-    #=================================================
-    #	Remove Read-Only Attribute
-    #=================================================
+    #endregion
+
+    #region Remove Read-Only Attribute
     if ($WinpeDestinationPath) {
         Get-ChildItem -Path $WinpeDestinationPath -File -Recurse -Force | foreach {
             Set-ItemProperty -Path $_.FullName -Name IsReadOnly -Value $false -Force -ErrorAction Ignore
         }
     }
-    #=================================================
-    #   Dismount OSDCloudISO
-    #=================================================
+    #endregion
+
+    #region Dismount OSDCloudISO
     if ($MountDiskImage) {
         Start-Sleep -Seconds 3
         Write-Host -ForegroundColor DarkGray "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Dismounting $($MountDiskImage.ImagePath)"
         $null = Dismount-DiskImage -ImagePath $MountDiskImage.ImagePath
     }
-    #=================================================
-    #	Set WorkspacePath
-    #=================================================
+    #endregion
+    
+    #region Set WorkspacePath
     Set-OSDCloudWorkspace -WorkspacePath $WorkspacePath -ErrorAction Stop | Out-Null
-    #=================================================
-    #   Complete
-    #=================================================
+    #endregion
+    
+    #region Complete
     Write-Host -ForegroundColor DarkGray "========================================================================="
     Write-Host -ForegroundColor Yellow "Find your current OSDCloud Workspace:   " -NoNewline
     Write-Host -ForegroundColor Gray "Get-OSDCloudWorkspace"
@@ -371,7 +385,7 @@ function New-OSDCloudWorkspace {
     Write-Host -ForegroundColor DarkGray "========================================================================="
     Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) New-OSDCloudWorkspace created at $WorkspacePath"
     $null = Stop-Transcript -ErrorAction Ignore
-    #=================================================
+    #endregion
 }
 function Set-OSDCloudWorkspace {
     <#
@@ -385,22 +399,24 @@ function Set-OSDCloudWorkspace {
     Directory for the OSDCloud Workspace to set.  Default is $env:SystemDrive\OSDCloud
 
     .LINK
-    https://github.com/OSDeploy/OSD/tree/master/Docs
+    https://github.com/OSDeploy/OSD/tree/master/Docs/Set-OSDCloudWorkspace.md
+    
+    .LINK
+    https://www.osdcloud.com/setup/osdcloud-workspace
     #>
     [CmdletBinding()]
     param (
         [Parameter(Position=0)]
         [System.String]$WorkspacePath = "$env:SystemDrive\OSDCloud"
     )
-    #=================================================
-    #	Block
-    #=================================================
+    
+    #region Block
     Block-StandardUser
     Block-PowerShellVersionLt5
     Block-WinPE
-    #=================================================
-    #	Set-OSDCloudWorkspace
-    #=================================================
+    #endregion
+
+    #region Set-OSDCloudWorkspace
     $WorkspaceSettings = [PSCustomObject]@{
         WorkspacePath = $WorkspacePath
     }
@@ -412,5 +428,5 @@ function Set-OSDCloudWorkspace {
     $WorkspaceSettings | ConvertTo-Json | Out-File "$env:ProgramData\OSDCloud\workspace.json" -Encoding ascii -Width 2000 -Force
 
     $WorkspacePath
-    #=================================================
+    #endregion
 }

@@ -45,3 +45,5 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 [https://github.com/OSDeploy/OSD/tree/master/Docs/Get-OSDCloudTemplate.md](https://github.com/OSDeploy/OSD/tree/master/Docs/Get-OSDCloudTemplate.md)
 
+[https://www.osdcloud.com/setup/osdcloud-template/named-templates](https://www.osdcloud.com/setup/osdcloud-template/named-templates)
+
