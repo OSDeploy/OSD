@@ -3827,8 +3827,8 @@ You will be prompted to select a USB Drive in GridView</dev:code>
     </command:examples>
     <command:relatedLinks>
       <maml:navigationLink>
-        <maml:linkText>https://osd.osdeploy.com/module/functions/mywindowsimage</maml:linkText>
-        <maml:uri>https://osd.osdeploy.com/module/functions/mywindowsimage</maml:uri>
+        <maml:linkText>https://github.com/OSDeploy/OSD/tree/master/Docs</maml:linkText>
+        <maml:uri>https://github.com/OSDeploy/OSD/tree/master/Docs</maml:uri>
       </maml:navigationLink>
     </command:relatedLinks>
   </command:command>
@@ -3868,8 +3868,8 @@ You will be prompted to select a USB Drive in GridView</dev:code>
     </command:examples>
     <command:relatedLinks>
       <maml:navigationLink>
-        <maml:linkText>https://osd.osdeploy.com/module/functions/adk</maml:linkText>
-        <maml:uri>https://osd.osdeploy.com/module/functions/adk</maml:uri>
+        <maml:linkText>https://github.com/OSDeploy/OSD/tree/master/Docs</maml:linkText>
+        <maml:uri>https://github.com/OSDeploy/OSD/tree/master/Docs</maml:uri>
       </maml:navigationLink>
     </command:relatedLinks>
   </command:command>
@@ -4135,8 +4135,8 @@ You will be prompted to select a USB Drive in GridView</dev:code>
     </command:examples>
     <command:relatedLinks>
       <maml:navigationLink>
-        <maml:linkText>https://osd.osdeploy.com/module/functions/mywindowsimage</maml:linkText>
-        <maml:uri>https://osd.osdeploy.com/module/functions/mywindowsimage</maml:uri>
+        <maml:linkText>https://github.com/OSDeploy/OSD/tree/master/Docs</maml:linkText>
+        <maml:uri>https://github.com/OSDeploy/OSD/tree/master/Docs</maml:uri>
       </maml:navigationLink>
     </command:relatedLinks>
   </command:command>
@@ -6040,8 +6040,8 @@ You will be prompted to select a USB Drive in GridView</dev:code>
     </command:examples>
     <command:relatedLinks>
       <maml:navigationLink>
-        <maml:linkText>https://osd.osdeploy.com/module/functions/adk</maml:linkText>
-        <maml:uri>https://osd.osdeploy.com/module/functions/adk</maml:uri>
+        <maml:linkText>https://github.com/OSDeploy/OSD/tree/master/Docs</maml:linkText>
+        <maml:uri>https://github.com/OSDeploy/OSD/tree/master/Docs</maml:uri>
       </maml:navigationLink>
     </command:relatedLinks>
   </command:command>
@@ -6356,8 +6356,8 @@ You will be prompted to select a USB Drive in GridView</dev:code>
     </command:examples>
     <command:relatedLinks>
       <maml:navigationLink>
-        <maml:linkText>https://osd.osdeploy.com/module/functions/cim</maml:linkText>
-        <maml:uri>https://osd.osdeploy.com/module/functions/cim</maml:uri>
+        <maml:linkText>https://github.com/OSDeploy/OSD/tree/master/Docs</maml:linkText>
+        <maml:uri>https://github.com/OSDeploy/OSD/tree/master/Docs</maml:uri>
       </maml:navigationLink>
     </command:relatedLinks>
   </command:command>
@@ -11121,8 +11121,8 @@ Displays all the HP BIOS updates in GridView</dev:code>
     </command:examples>
     <command:relatedLinks>
       <maml:navigationLink>
-        <maml:linkText>https://osd.osdeploy.com/module/functions/getmy</maml:linkText>
-        <maml:uri>https://osd.osdeploy.com/module/functions/getmy</maml:uri>
+        <maml:linkText>https://github.com/OSDeploy/OSD/tree/master/Docs</maml:linkText>
+        <maml:uri>https://github.com/OSDeploy/OSD/tree/master/Docs</maml:uri>
       </maml:navigationLink>
       <maml:navigationLink>
         <maml:linkText>https://twitter.com/byteben/status/1356893619811155968</maml:linkText>
@@ -11166,8 +11166,8 @@ Displays all the HP BIOS updates in GridView</dev:code>
     </command:examples>
     <command:relatedLinks>
       <maml:navigationLink>
-        <maml:linkText>https://osd.osdeploy.com/module/functions/dell/get-mydellbios</maml:linkText>
-        <maml:uri>https://osd.osdeploy.com/module/functions/dell/get-mydellbios</maml:uri>
+        <maml:linkText>https://github.com/OSDeploy/OSD/tree/master/Docs</maml:linkText>
+        <maml:uri>https://github.com/OSDeploy/OSD/tree/master/Docs</maml:uri>
       </maml:navigationLink>
     </command:relatedLinks>
   </command:command>
@@ -11927,8 +11927,8 @@ Displays all the HP BIOS updates in GridView</dev:code>
     </command:examples>
     <command:relatedLinks>
       <maml:navigationLink>
-        <maml:linkText>https://osd.osdeploy.com/module/functions</maml:linkText>
-        <maml:uri>https://osd.osdeploy.com/module/functions</maml:uri>
+        <maml:linkText>https://github.com/OSDeploy/OSD/tree/master/Docs</maml:linkText>
+        <maml:uri>https://github.com/OSDeploy/OSD/tree/master/Docs</maml:uri>
       </maml:navigationLink>
     </command:relatedLinks>
   </command:command>
@@ -11997,8 +11997,8 @@ Option 3: Get-OSDClass -Class ComputerSystem</dev:code>
     </command:examples>
     <command:relatedLinks>
       <maml:navigationLink>
-        <maml:linkText>https://osd.osdeploy.com/module/functions/general/get-osdclass</maml:linkText>
-        <maml:uri>https://osd.osdeploy.com/module/functions/general/get-osdclass</maml:uri>
+        <maml:linkText>https://github.com/OSDeploy/OSD/tree/master/Docs</maml:linkText>
+        <maml:uri>https://github.com/OSDeploy/OSD/tree/master/Docs</maml:uri>
       </maml:navigationLink>
     </command:relatedLinks>
   </command:command>
@@ -12893,8 +12893,8 @@ Option 3: Get-OSDClass -Class ComputerSystem</dev:code>
     </command:examples>
     <command:relatedLinks>
       <maml:navigationLink>
-        <maml:linkText>https://osd.osdeploy.com/module/functions/driver/get-osddriver</maml:linkText>
-        <maml:uri>https://osd.osdeploy.com/module/functions/driver/get-osddriver</maml:uri>
+        <maml:linkText>https://github.com/OSDeploy/OSD/tree/master/Docs</maml:linkText>
+        <maml:uri>https://github.com/OSDeploy/OSD/tree/master/Docs</maml:uri>
       </maml:navigationLink>
     </command:relatedLinks>
   </command:command>
@@ -13171,8 +13171,8 @@ Option 3: Get-OSDClass -Class ComputerSystem</dev:code>
     </command:examples>
     <command:relatedLinks>
       <maml:navigationLink>
-        <maml:linkText>https://osd.osdeploy.com/module/functions/driver/get-osddriverwmiq</maml:linkText>
-        <maml:uri>https://osd.osdeploy.com/module/functions/driver/get-osddriverwmiq</maml:uri>
+        <maml:linkText>https://github.com/OSDeploy/OSD/tree/master/Docs</maml:linkText>
+        <maml:uri>https://github.com/OSDeploy/OSD/tree/master/Docs</maml:uri>
       </maml:navigationLink>
     </command:relatedLinks>
   </command:command>
@@ -13272,8 +13272,8 @@ Returns the Gather Results saved in a Variable</dev:code>
     </command:examples>
     <command:relatedLinks>
       <maml:navigationLink>
-        <maml:linkText>https://osd.osdeploy.com/module/functions/general/get-osdgather</maml:linkText>
-        <maml:uri>https://osd.osdeploy.com/module/functions/general/get-osdgather</maml:uri>
+        <maml:linkText>https://github.com/OSDeploy/OSD/tree/master/Docs</maml:linkText>
+        <maml:uri>https://github.com/OSDeploy/OSD/tree/master/Docs</maml:uri>
       </maml:navigationLink>
     </command:relatedLinks>
   </command:command>
@@ -13810,8 +13810,8 @@ Option 2: Get-OSDPower -Property High</dev:code>
     </command:examples>
     <command:relatedLinks>
       <maml:navigationLink>
-        <maml:linkText>https://osd.osdeploy.com/module/functions/general/get-osdpower</maml:linkText>
-        <maml:uri>https://osd.osdeploy.com/module/functions/general/get-osdpower</maml:uri>
+        <maml:linkText>https://github.com/OSDeploy/OSD/tree/master/Docs</maml:linkText>
+        <maml:uri>https://github.com/OSDeploy/OSD/tree/master/Docs</maml:uri>
       </maml:navigationLink>
     </command:relatedLinks>
   </command:command>
@@ -14493,8 +14493,8 @@ Option 2: Get-OSDPower -Property High</dev:code>
     </command:examples>
     <command:relatedLinks>
       <maml:navigationLink>
-        <maml:linkText>https://osd.osdeploy.com/module/functions/general/get-regcurrentversion</maml:linkText>
-        <maml:uri>https://osd.osdeploy.com/module/functions/general/get-regcurrentversion</maml:uri>
+        <maml:linkText>https://github.com/OSDeploy/OSD/tree/master/Docs</maml:linkText>
+        <maml:uri>https://github.com/OSDeploy/OSD/tree/master/Docs</maml:uri>
       </maml:navigationLink>
     </command:relatedLinks>
   </command:command>
@@ -14785,8 +14785,8 @@ Option 2: Get-OSDPower -Property High</dev:code>
     </command:examples>
     <command:relatedLinks>
       <maml:navigationLink>
-        <maml:linkText>https://osd.osdeploy.com/module/functions/general/get-osdsessions</maml:linkText>
-        <maml:uri>https://osd.osdeploy.com/module/functions/general/get-osdsessions</maml:uri>
+        <maml:linkText>https://github.com/OSDeploy/OSD/tree/master/Docs</maml:linkText>
+        <maml:uri>https://github.com/OSDeploy/OSD/tree/master/Docs</maml:uri>
       </maml:navigationLink>
     </command:relatedLinks>
   </command:command>
@@ -18481,8 +18481,8 @@ Option 2: Get-OSDPower -Property High</dev:code>
     </command:examples>
     <command:relatedLinks>
       <maml:navigationLink>
-        <maml:linkText>https://osd.osdeploy.com/module/functions/webpsscript</maml:linkText>
-        <maml:uri>https://osd.osdeploy.com/module/functions/webpsscript</maml:uri>
+        <maml:linkText>https://github.com/OSDeploy/OSD/tree/master/Docs</maml:linkText>
+        <maml:uri>https://github.com/OSDeploy/OSD/tree/master/Docs</maml:uri>
       </maml:navigationLink>
     </command:relatedLinks>
   </command:command>
@@ -18617,8 +18617,8 @@ Option 2: Get-OSDPower -Property High</dev:code>
     </command:examples>
     <command:relatedLinks>
       <maml:navigationLink>
-        <maml:linkText>https://osd.osdeploy.com/module/functions/mywindowsimage</maml:linkText>
-        <maml:uri>https://osd.osdeploy.com/module/functions/mywindowsimage</maml:uri>
+        <maml:linkText>https://github.com/OSDeploy/OSD/tree/master/Docs</maml:linkText>
+        <maml:uri>https://github.com/OSDeploy/OSD/tree/master/Docs</maml:uri>
       </maml:navigationLink>
     </command:relatedLinks>
   </command:command>
@@ -18707,8 +18707,8 @@ Option 2: Get-OSDPower -Property High</dev:code>
     </command:examples>
     <command:relatedLinks>
       <maml:navigationLink>
-        <maml:linkText>https://osd.osdeploy.com/module/functions/adk</maml:linkText>
-        <maml:uri>https://osd.osdeploy.com/module/functions/adk</maml:uri>
+        <maml:linkText>https://github.com/OSDeploy/OSD/tree/master/Docs</maml:linkText>
+        <maml:uri>https://github.com/OSDeploy/OSD/tree/master/Docs</maml:uri>
       </maml:navigationLink>
     </command:relatedLinks>
   </command:command>
@@ -18844,8 +18844,8 @@ Option 2: Get-OSDPower -Property High</dev:code>
     </command:examples>
     <command:relatedLinks>
       <maml:navigationLink>
-        <maml:linkText>https://osd.osdeploy.com/module/functions/adk</maml:linkText>
-        <maml:uri>https://osd.osdeploy.com/module/functions/adk</maml:uri>
+        <maml:linkText>https://github.com/OSDeploy/OSD/tree/master/Docs</maml:linkText>
+        <maml:uri>https://github.com/OSDeploy/OSD/tree/master/Docs</maml:uri>
       </maml:navigationLink>
     </command:relatedLinks>
   </command:command>
@@ -20014,8 +20014,8 @@ Interactive.  Prompted to Confirm Clear-Disk for each Local Disk</dev:code>
     </command:examples>
     <command:relatedLinks>
       <maml:navigationLink>
-        <maml:linkText>https://osd.osdeploy.com/module/osddisk/new-osdisk</maml:linkText>
-        <maml:uri>https://osd.osdeploy.com/module/osddisk/new-osdisk</maml:uri>
+        <maml:linkText>https://github.com/OSDeploy/OSD/tree/master/Docs</maml:linkText>
+        <maml:uri>https://github.com/OSDeploy/OSD/tree/master/Docs</maml:uri>
       </maml:navigationLink>
     </command:relatedLinks>
   </command:command>
@@ -20126,8 +20126,8 @@ Interactive.  Prompted to Confirm Clear-Disk for each Local Disk</dev:code>
     </command:examples>
     <command:relatedLinks>
       <maml:navigationLink>
-        <maml:linkText>https://osd.osdeploy.com/module/functions/appx/remove-appxonline</maml:linkText>
-        <maml:uri>https://osd.osdeploy.com/module/functions/appx/remove-appxonline</maml:uri>
+        <maml:linkText>https://github.com/OSDeploy/OSD/tree/master/Docs</maml:linkText>
+        <maml:uri>https://github.com/OSDeploy/OSD/tree/master/Docs</maml:uri>
       </maml:navigationLink>
     </command:relatedLinks>
   </command:command>
@@ -21957,8 +21957,8 @@ Interactive.  Prompted to Confirm Clear-Disk for each Local Disk</dev:code>
     </command:examples>
     <command:relatedLinks>
       <maml:navigationLink>
-        <maml:linkText>https://osd.osdeploy.com/module/functions/save-webfile</maml:linkText>
-        <maml:uri>https://osd.osdeploy.com/module/functions/save-webfile</maml:uri>
+        <maml:linkText>https://github.com/OSDeploy/OSD/tree/master/Docs</maml:linkText>
+        <maml:uri>https://github.com/OSDeploy/OSD/tree/master/Docs</maml:uri>
       </maml:navigationLink>
     </command:relatedLinks>
   </command:command>
@@ -23028,8 +23028,8 @@ Interactive.  Prompted to Confirm Clear-Disk for each Local Disk</dev:code>
     </command:examples>
     <command:relatedLinks>
       <maml:navigationLink>
-        <maml:linkText>https://osd.osdeploy.com/module/functions/display/set-disres</maml:linkText>
-        <maml:uri>https://osd.osdeploy.com/module/functions/display/set-disres</maml:uri>
+        <maml:linkText>https://github.com/OSDeploy/OSD/tree/master/Docs</maml:linkText>
+        <maml:uri>https://github.com/OSDeploy/OSD/tree/master/Docs</maml:uri>
       </maml:navigationLink>
     </command:relatedLinks>
   </command:command>
@@ -24267,8 +24267,8 @@ Interactive.  Prompted to Confirm Clear-Disk for each Local Disk</dev:code>
     </command:examples>
     <command:relatedLinks>
       <maml:navigationLink>
-        <maml:linkText>https://osd.osdeploy.com/module/functions/dism/set-wimexecutionpolicy</maml:linkText>
-        <maml:uri>https://osd.osdeploy.com/module/functions/dism/set-wimexecutionpolicy</maml:uri>
+        <maml:linkText>https://github.com/OSDeploy/OSD/tree/master/Docs</maml:linkText>
+        <maml:uri>https://github.com/OSDeploy/OSD/tree/master/Docs</maml:uri>
       </maml:navigationLink>
     </command:relatedLinks>
   </command:command>
@@ -24357,8 +24357,8 @@ Interactive.  Prompted to Confirm Clear-Disk for each Local Disk</dev:code>
     </command:examples>
     <command:relatedLinks>
       <maml:navigationLink>
-        <maml:linkText>https://osd.osdeploy.com/module/functions/dism/set-windowsimageexecutionpolicy</maml:linkText>
-        <maml:uri>https://osd.osdeploy.com/module/functions/dism/set-windowsimageexecutionpolicy</maml:uri>
+        <maml:linkText>https://github.com/OSDeploy/OSD/tree/master/Docs</maml:linkText>
+        <maml:uri>https://github.com/OSDeploy/OSD/tree/master/Docs</maml:uri>
       </maml:navigationLink>
     </command:relatedLinks>
   </command:command>
@@ -28062,8 +28062,8 @@ Displays all RegistryXML entries found in Source Directory</dev:code>
     </command:examples>
     <command:relatedLinks>
       <maml:navigationLink>
-        <maml:linkText>https://osd.osdeploy.com/module/functions/webconnection</maml:linkText>
-        <maml:uri>https://osd.osdeploy.com/module/functions/webconnection</maml:uri>
+        <maml:linkText>https://github.com/OSDeploy/OSD/tree/master/Docs</maml:linkText>
+        <maml:uri>https://github.com/OSDeploy/OSD/tree/master/Docs</maml:uri>
       </maml:navigationLink>
     </command:relatedLinks>
   </command:command>
@@ -28176,8 +28176,8 @@ Displays all RegistryXML entries found in Source Directory</dev:code>
     </command:examples>
     <command:relatedLinks>
       <maml:navigationLink>
-        <maml:linkText>https://osd.osdeploy.com/module/functions/windowsimage</maml:linkText>
-        <maml:uri>https://osd.osdeploy.com/module/functions/windowsimage</maml:uri>
+        <maml:linkText>https://github.com/OSDeploy/OSD/tree/master/Docs</maml:linkText>
+        <maml:uri>https://github.com/OSDeploy/OSD/tree/master/Docs</maml:uri>
       </maml:navigationLink>
     </command:relatedLinks>
   </command:command>
@@ -28266,8 +28266,8 @@ Displays all RegistryXML entries found in Source Directory</dev:code>
     </command:examples>
     <command:relatedLinks>
       <maml:navigationLink>
-        <maml:linkText>https://osd.osdeploy.com/module/functions/windowsimage</maml:linkText>
-        <maml:uri>https://osd.osdeploy.com/module/functions/windowsimage</maml:uri>
+        <maml:linkText>https://github.com/OSDeploy/OSD/tree/master/Docs</maml:linkText>
+        <maml:uri>https://github.com/OSDeploy/OSD/tree/master/Docs</maml:uri>
       </maml:navigationLink>
     </command:relatedLinks>
   </command:command>
@@ -28332,8 +28332,8 @@ Displays all RegistryXML entries found in Source Directory</dev:code>
     </command:examples>
     <command:relatedLinks>
       <maml:navigationLink>
-        <maml:linkText>https://osd.osdeploy.com/module/functions/windowsimage</maml:linkText>
-        <maml:uri>https://osd.osdeploy.com/module/functions/windowsimage</maml:uri>
+        <maml:linkText>https://github.com/OSDeploy/OSD/tree/master/Docs</maml:linkText>
+        <maml:uri>https://github.com/OSDeploy/OSD/tree/master/Docs</maml:uri>
       </maml:navigationLink>
     </command:relatedLinks>
   </command:command>
@@ -29188,8 +29188,8 @@ Yes, this will update your BIOS silently, AND reboot when its done</dev:code>
     </command:examples>
     <command:relatedLinks>
       <maml:navigationLink>
-        <maml:linkText>https://osd.osdeploy.com/module/functions/dell/update-mydellbios</maml:linkText>
-        <maml:uri>https://osd.osdeploy.com/module/functions/dell/update-mydellbios</maml:uri>
+        <maml:linkText>https://github.com/OSDeploy/OSD/tree/master/Docs</maml:linkText>
+        <maml:uri>https://github.com/OSDeploy/OSD/tree/master/Docs</maml:uri>
       </maml:navigationLink>
     </command:relatedLinks>
   </command:command>
@@ -29324,8 +29324,8 @@ Yes, this will update your BIOS silently, AND reboot when its done</dev:code>
     </command:examples>
     <command:relatedLinks>
       <maml:navigationLink>
-        <maml:linkText>https://osd.osdeploy.com/module/functions</maml:linkText>
-        <maml:uri>https://osd.osdeploy.com/module/functions</maml:uri>
+        <maml:linkText>https://github.com/OSDeploy/OSD/tree/master/Docs</maml:linkText>
+        <maml:uri>https://github.com/OSDeploy/OSD/tree/master/Docs</maml:uri>
       </maml:navigationLink>
     </command:relatedLinks>
   </command:command>
@@ -29574,8 +29574,8 @@ Yes, this will update your BIOS silently, AND reboot when its done</dev:code>
     </command:examples>
     <command:relatedLinks>
       <maml:navigationLink>
-        <maml:linkText>https://osd.osdeploy.com/module/functions/webconnection</maml:linkText>
-        <maml:uri>https://osd.osdeploy.com/module/functions/webconnection</maml:uri>
+        <maml:linkText>https://github.com/OSDeploy/OSD/tree/master/Docs</maml:linkText>
+        <maml:uri>https://github.com/OSDeploy/OSD/tree/master/Docs</maml:uri>
       </maml:navigationLink>
     </command:relatedLinks>
   </command:command>
