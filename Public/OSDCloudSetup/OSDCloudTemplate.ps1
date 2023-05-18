@@ -632,6 +632,14 @@ Windows Registry Editor Version 5.00
                 Catch {Write-Host -ForegroundColor Red $CurrentLog}
             }
         }
+
+            # Generates a new Lang.ini file which is used to define the language packs inside the image
+        if ( (Test-Path -Path "$MountPath\sources\lang.ini") ) {
+            Write-Host -ForegroundColor DarkGray "Updating lang.ini"
+            $CurrentLog = "$TemplateLogs\$((Get-Date).ToString('yyyy-MM-dd-HHmmss'))-Gen-LangINI.log"
+            DISM /image:"$MountPath" /Gen-LangINI /distribution:"$MountPath" /LogPath:"$CurrentLog"
+        }
+        
         Write-Host -ForegroundColor DarkGray "========================================================================="
         Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Save Windows Image"
         Write-Host -ForegroundColor Yellow "Dism Function: Save-WindowsImage"
@@ -644,22 +652,26 @@ Windows Registry Editor Version 5.00
     if ($SetAllIntl -or $SetInputLocale) {
         Write-Host -ForegroundColor DarkGray "========================================================================="
         Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Current Get-Intl Settings"
-        Dism /image:"$MountPath" /Get-Intl
+        $CurrentLog = "$TemplateLogs\$((Get-Date).ToString('yyyy-MM-dd-HHmmss'))-Get-Intl.log"
+        Dism /image:"$MountPath" /Get-Intl /LogPath:"$CurrentLog"
     }
 
     if ($SetAllIntl) {
         Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Applying Set-AllIntl"
-        Dism /image:"$MountPath" /Set-AllIntl:$SetAllIntl
+        $CurrentLog = "$TemplateLogs\$((Get-Date).ToString('yyyy-MM-dd-HHmmss'))-Set-AllIntl.log"
+        Dism /image:"$MountPath" /Set-AllIntl:$SetAllIntl /LogPath:"$CurrentLog"
     }
 
     if ($SetInputLocale) {
         Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Applying Set-InputLocale"
-        Dism /image:"$MountPath" /Set-InputLocale:$SetInputLocale
+        $CurrentLog = "$TemplateLogs\$((Get-Date).ToString('yyyy-MM-dd-HHmmss'))-Set-InputLocale.log"
+        Dism /image:"$MountPath" /Set-InputLocale:$SetInputLocale /LogPath:"$CurrentLog"
     }
 
     if ($SetAllIntl -or $SetInputLocale) {
         Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Updated Get-Intl Settings"
-        Dism /image:"$MountPath" /Get-Intl
+        $CurrentLog = "$TemplateLogs\$((Get-Date).ToString('yyyy-MM-dd-HHmmss'))-Get-Intl.log"
+        Dism /image:"$MountPath" /Get-Intl /LogPath:"$CurrentLog"
     }
     #endregion
 
