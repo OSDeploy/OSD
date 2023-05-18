@@ -169,6 +169,15 @@ function Get-LenovoBiosCatalog {
 		$Results | Export-Clixml -Path $TempCatalogFile
 	}
     #=================================================
+    #   UpdateModuleCatalog
+    #=================================================
+    if ($UpdateModuleCatalog) {
+        if (Test-Path $TempCatalogFile) {
+            Write-Verbose "Copying $TempCatalogFile to $ModuleCatalogFile"
+            Copy-Item $TempCatalogFile $ModuleCatalogFile -Force -ErrorAction Ignore
+        }
+    }
+    #=================================================
     #   UseCatalog Build
     #=================================================
     if ($UseCatalog -eq 'Build') {

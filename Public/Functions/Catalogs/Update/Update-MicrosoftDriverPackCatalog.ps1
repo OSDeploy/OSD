@@ -220,7 +220,7 @@ function Update-MicrosoftDriverPackCatalog {
         $MasterDriverPacks += Get-LenovoDriverPack
         $MasterDriverPacks += Get-MicrosoftDriverPack
     
-        $Results = $MasterDriverPacks | `
+        $MasterResults = $MasterDriverPacks | `
         Select-Object CatalogVersion, Status, ReleaseDate, Manufacturer, Model, `
         Product, Name, PackageID, FileName, `
         @{Name='Url';Expression={([array]$_.DriverPackUrl)}}, `
@@ -228,7 +228,7 @@ function Update-MicrosoftDriverPackCatalog {
         OSReleaseId,OSBuild,HashMD5, `
         @{Name='Guid';Expression={([guid]((New-Guid).ToString()))}}
     
-        $Results | Export-Clixml -Path (Join-Path (Get-Module -Name OSD -ListAvailable | Sort-Object Version -Descending | Select-Object -First 1).ModuleBase "Catalogs\CloudDriverPacks.xml") -Force
+        $MasterResults | Export-Clixml -Path (Join-Path (Get-Module -Name OSD -ListAvailable | Sort-Object Version -Descending | Select-Object -First 1).ModuleBase "Catalogs\CloudDriverPacks.xml") -Force
         Import-Clixml -Path (Join-Path (Get-Module -Name OSD -ListAvailable | `
         Sort-Object Version -Descending | `
         Select-Object -First 1).ModuleBase "Catalogs\CloudDriverPacks.xml") | `

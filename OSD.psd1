@@ -10,7 +10,7 @@
     Author                  = 'David Segura . Gary Blok . Jérôme Bezet-Torres . Damien Van Robaeys . Mike Marable . Akos Bakos'
     CompanyName             = 'OSD Community'
     Copyright               = '(c) 2023 OSDeploy'
-    Description             = 'BlackLotus Edition'
+    Description             = 'Mike Sammons Surface DriverPack Edition'
     PowerShellVersion       = '5.1'
     FormatsToProcess        = @(
         '.\Format\MsUpCat.Format.ps1xml'
@@ -303,7 +303,8 @@
         'Update-HPDriverPackCatalog',
         'Update-LenovoDriverPackCatalog',
         'Update-MicrosoftDriverPackCatalog',
-        'Invoke-OSDInfo'
+        'Invoke-OSDInfo',
+        'Update-IntelDriversCatalog'
     )
     CmdletsToExport = @()
     VariablesToExport = @()

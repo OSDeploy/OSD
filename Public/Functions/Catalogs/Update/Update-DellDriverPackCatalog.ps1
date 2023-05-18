@@ -221,6 +221,31 @@ function Update-DellDriverPackCatalog {
         $Results | Export-Clixml -Path $ModuleCatalogXml -Force
         Write-Verbose -Verbose "UpdateModule: Exporting to OSD Module Catalogs at $ModuleCatalogJson"
         $Results | ConvertTo-Json | Out-File $ModuleCatalogJson -Encoding ascii -Width 2000 -Force
+        #=================================================
+        #   UpdateCatalog
+        #=================================================
+        Get-DellSystemCatalog -UpdateModuleCatalog
+        
+        $MasterDriverPacks = @()
+        $MasterDriverPacks += Get-DellDriverPack
+        $MasterDriverPacks += Get-HPDriverPack
+        $MasterDriverPacks += Get-LenovoDriverPack
+        $MasterDriverPacks += Get-MicrosoftDriverPack
+    
+        $MasterResults = $MasterDriverPacks | `
+        Select-Object CatalogVersion, Status, ReleaseDate, Manufacturer, Model, `
+        Product, Name, PackageID, FileName, `
+        @{Name='Url';Expression={([array]$_.DriverPackUrl)}}, `
+        @{Name='OS';Expression={([array]$_.DriverPackOS)}}, `
+        OSReleaseId,OSBuild,HashMD5, `
+        @{Name='Guid';Expression={([guid]((New-Guid).ToString()))}}
+    
+        $MasterResults | Export-Clixml -Path (Join-Path (Get-Module -Name OSD -ListAvailable | Sort-Object Version -Descending | Select-Object -First 1).ModuleBase "Catalogs\CloudDriverPacks.xml") -Force
+        Import-Clixml -Path (Join-Path (Get-Module -Name OSD -ListAvailable | `
+        Sort-Object Version -Descending | `
+        Select-Object -First 1).ModuleBase "Catalogs\CloudDriverPacks.xml") | `
+        ConvertTo-Json | `
+        Out-File (Join-Path (Get-Module -Name OSD -ListAvailable | Sort-Object Version -Descending | Select-Object -First 1).ModuleBase "Catalogs\CloudDriverPacks.json") -Encoding ascii -Width 2000 -Force
     }
     #=================================================
     #   Complete
