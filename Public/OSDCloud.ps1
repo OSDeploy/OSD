@@ -11,7 +11,7 @@ function Invoke-OSDCloud {
     #>
     [CmdletBinding()]
     param ()
-    #=================================================
+
     #region Master Parameters
     $Global:OSDCloud = $null
     $Global:OSDCloud = [ordered]@{
@@ -142,14 +142,14 @@ function Invoke-OSDCloud {
         ZTI = [bool]$false
     }
     #endregion
-    #=================================================
+
     #region Set Pre-Merge Defaults
     #Skip Recovery Partition for Virtual Machines
     if ($Global:OSDCloud.IsVirtualMachine) {
         $Global:OSDCloud.SkipRecoveryPartition = $true
     }
     #endregion
-    #=================================================
+
     #region Merge Parameters
     if ($Global:InvokeOSDCloud) {
         foreach ($Key in $Global:InvokeOSDCloud.Keys) {
@@ -177,13 +177,13 @@ function Invoke-OSDCloud {
         }
     }
     #endregion
-    #=================================================
+
     #region LaunchMethod
     if ($Global:OSDCloud.LaunchMethod) {
         $null = Install-Module -Name $Global:OSDCloud.LaunchMethod -Force -ErrorAction Ignore -WarningAction Ignore
     }
     #endregion
-    #=================================================
+
     #region Helper Functions
     function Write-DarkGrayDate {
         [CmdletBinding()]
@@ -235,7 +235,7 @@ function Invoke-OSDCloud {
         Write-Host -ForegroundColor Green $Message
     }
     #endregion
-    #=================================================
+
     #region Set Post-Merge Defaults
     $Global:OSDCloud.Version = [Version](Get-Module -Name OSD -ListAvailable | Sort-Object Version -Descending | Select-Object -First 1).Version
 
@@ -264,7 +264,7 @@ function Invoke-OSDCloud {
         $Global:OSDCloud.ClearDiskConfirm = $false
     }
     #endregion
-    #=================================================
+
     #region Debug Mode
     if ($Global:OSDCloud.DebugMode -eq $true){
         Write-SectionHeader "DebugMode Write OSDCloud Vars"
@@ -304,7 +304,7 @@ function Invoke-OSDCloud {
         if ($M365CompanyName -eq ""){$M365CompanyName = "Organization"}
     }
     #endregion
-    #==================================================================================================
+
     #region OSDCloud Config Startup Scripts
     <#
     David Segura
@@ -325,7 +325,7 @@ function Invoke-OSDCloud {
         }
     }
     #endregion
-    #==================================================================================================
+
     #region OSDCloud Automate Autopilot Configuration File
     $Global:OSDCloud.AutomateAutopilot = Get-PSDrive -PSProvider FileSystem | Where-Object {$_.Name -ne 'C'} | ForEach-Object {
         Get-ChildItem "$($_.Root)OSDCloud\Automate\Default" -Include "AutopilotConfigurationFile.json" -File -Recurse -Force -ErrorAction Ignore
@@ -380,7 +380,7 @@ function Invoke-OSDCloud {
         }
     }
     #endregion
-    #==================================================================================================
+
     #region OSDCloud Logs
     Write-SectionHeader 'OSDCloud Logs'
 
@@ -540,7 +540,7 @@ function Invoke-OSDCloud {
     }
     #endregion
     #=================================================
-    #region Remove USB Partition Access Path
+    #region Remove-PartitionAccessPath
     <#
     https://docs.microsoft.com/en-us/powershell/module/storage/remove-partitionaccesspath
     Partition Access Paths are being removed from USB Drive Letters
@@ -1040,17 +1040,8 @@ function Invoke-OSDCloud {
         $Global:OSDCloud.WindowsImage | Where-Object {$_.ImageSize -gt 3000000000} | Select-Object -Property ImageIndex, ImageName | Format-Table | Out-Host
     }
     #endregion
-    #=================================================
-    #region Expand-WindowsImage
-    Write-SectionHeader "Expand-WindowsImage"
 
-    #Expand-WindowsImage
-    Write-DarkGrayHost "ApplyPath: 'C:\'"
-    Write-DarkGrayHost "ImagePath: $($Global:OSDCloud.ImageFileDestination.FullName)"
-    Write-DarkGrayHost "Index: $($Global:OSDCloud.OSImageIndex)"
-    Write-DarkGrayHost "ScratchDirectory: 'C:\OSDCloud\Temp'"
-
-    #Scratch Directory
+    #region New-Item C:\OSDCloud\Temp
     $ParamNewItem = @{
         Path = 'C:\OSDCloud\Temp'
         ItemType = 'Directory'
@@ -1061,8 +1052,15 @@ function Invoke-OSDCloud {
         Write-DarkGrayHost -Message 'Creating ScratchDirectory C:\OSDCloud\Temp'
         $null = New-Item @ParamNewItem
     }
+    #endregion
 
-    #Expand-WindowsImage Params
+    #region Expand-WindowsImage
+    Write-SectionHeader "Expand-WindowsImage"
+    Write-DarkGrayHost "ApplyPath: 'C:\'"
+    Write-DarkGrayHost "ImagePath: $($Global:OSDCloud.ImageFileDestination.FullName)"
+    Write-DarkGrayHost "Index: $($Global:OSDCloud.OSImageIndex)"
+    Write-DarkGrayHost "ScratchDirectory: 'C:\OSDCloud\Temp'"
+
     $ExpandWindowsImage = @{
         ApplyPath = 'C:\'
         ImagePath = $Global:OSDCloud.ImageFileDestination.FullName
@@ -1071,28 +1069,34 @@ function Invoke-OSDCloud {
         ErrorAction = 'Stop'
     }
     $Global:OSDCloud.ExpandWindowsImage = $ExpandWindowsImage
-
     if ($Global:OSDCloud.IsWinPE -eq $true) {
         Write-DarkGrayHost -Message 'Expand-WindowsImage'
         Expand-WindowsImage @ExpandWindowsImage
+    }
+    #endregion
 
-        $SystemDrive = Get-Partition | Where-Object {$_.Type -eq 'System'} | Select-Object -First 1
+    #region bcdboot
+    if ($Global:OSDCloud.IsWinPE -eq $true) {
+        Write-SectionHeader 'C:\Windows\System32\bcdboot.exe C:\Windows /v /c'
+
+        <#$SystemDrive = Get-Partition | Where-Object {$_.Type -eq 'System'} | Select-Object -First 1
         if (-NOT (Get-PSDrive -Name S)) {
             Write-DarkGrayHost -Message 'Mount EFI System Partition to S:'
             Write-DarkGrayHost -Message 'Set-Partition -NewDriveLetter S'
             $SystemDrive | Set-Partition -NewDriveLetter 'S'
-        }
+        } #>
 
-        Write-DarkGrayHost -Message 'C:\Windows\System32\bcdboot.exe C:\Windows /s S: /f UEFI /v /c'
         #https://learn.microsoft.com/en-us/windows-hardware/manufacture/desktop/bcdboot-command-line-options-techref-di?view=windows-11
-        
+
         #Original configuration
         #bcdboot C:\Windows /s S: /f ALL
-        
-        #Updated configuration that should clear existing UEFI Boot entires and fix the Dell issue
-        C:\Windows\System32\bcdboot.exe C:\Windows /v /c
 
-        Start-Sleep -Seconds 10
+        #Updated configuration that should clear existing UEFI Boot entires and fix the Dell issue
+        $RunCommand = 'C:\Windows\System32\bcdboot.exe'
+        $RunParams = 'C:\Windows /v /c'
+        & $RunCommand $RunParams
+
+<#         Start-Sleep -Seconds 10
         Write-DarkGrayHost -Message 'Remove-PartitionAccessPath -AccessPath S:\'
         if ($Global:OSDCloud.DiskPart -eq $true) {
             if (Get-Volume | Where-Object {$_.DriverLetter -eq "S"}){
@@ -1101,16 +1105,16 @@ function Invoke-OSDCloud {
         }
         else {
             $SystemDrive | Remove-PartitionAccessPath -AccessPath "S:\"
-        }
+        } #>
     }
     #endregion
-    #=================================================
-    #region Get-WindowsEdition
+
+    #region David - Get-WindowsEdition
     Write-SectionHeader 'Get-WindowsEdition -Path C:\'
     Get-WindowsEdition -Path 'C:\' | Out-Host
     #endregion
-    #=================================================
-    #region Content Directories
+
+    #region David - Content Directories
     Write-SectionHeader 'Create Content Directories'
 
     if (-NOT (Test-Path 'C:\Drivers')) {
@@ -1174,8 +1178,8 @@ function Invoke-OSDCloud {
         $null = New-Item @ParamNewItem
     }
     #endregion
-    #=================================================
-    #region Validate OSDCloud Driver Pack
+
+    #region David - Get-OSDCloudDriverPack
     Write-SectionHeader 'OSDCloud DriverPack'
 
     #Check the Global Variables for a Driver Pack name
@@ -1320,7 +1324,7 @@ function Invoke-OSDCloud {
     }
     #endregion
     #=================================================
-    #region MSCatalogFirmware Final
+    #region David - Save-SystemFirmwareUpdate
     Write-SectionHeader "Microsoft Update Catalog Firmware"
 
     if ($OSDCloud.IsOnBattery -eq $true) {
@@ -1346,7 +1350,7 @@ function Invoke-OSDCloud {
     }
     #endregion
     #=================================================
-    #region MSCatalogDrivers Final
+    #region David - Save-MsUpCatDriver
     Write-SectionHeader "Microsoft Update Catalog Drivers"
 
     if ($Global:OSDCloud.DriverPackName -eq 'None') {
@@ -1379,8 +1383,9 @@ function Invoke-OSDCloud {
         }
     }
     #endregion
+    
+    #region Gary - osdcloud-WinpeUpdateDefender
     <# - Found that when you update Defender Offline... it hangs specialize phase... no idea why
-    #=================================================
     #region osdcloud-WinpeUpdateDefender
     Write-SectionHeader "Updates Windows Defender Offline (osdcloud-WinpeUpdateDefender)"
     Write-DarkGrayHost "Defender Platform & Defs are being updated in Offline Image"
@@ -1391,10 +1396,10 @@ function Invoke-OSDCloud {
             osdcloud-WinpeUpdateDefender 
         }
     }
-    #endregion
     #>
-    #=================================================
-    #region Add-OfflineServicingWindowsDriver
+    #endregion
+
+    #region David - Add-OfflineServicingWindowsDriver
     Write-SectionHeader "Add Windows Driver with Offline Servicing (Add-OfflineServicingWindowsDriver)"
     Write-Verbose -Message "https://docs.microsoft.com/en-us/powershell/module/dism/add-windowsdriver"
     Write-DarkGrayHost "Drivers in C:\Drivers are being added to the offline Windows Image"
@@ -1405,7 +1410,7 @@ function Invoke-OSDCloud {
     }
     #endregion
     #=================================================
-    #region Add OSDCloud DriverPack
+    #region David - Invoke-OSDCloudDriverPackPPKG
     if ($Global:OSDCloud.OSDCloudUnattend -eq $true) {
         Write-SectionHeader "Set Specialize Unattend.xml (Set-OSDCloudUnattendSpecialize)"
         Write-DarkGrayHost "C:\Windows\Panther\Invoke-OSDSpecialize.xml is being applied as an Unattend file"
@@ -1428,7 +1433,7 @@ function Invoke-OSDCloud {
     }
     #endregion
     #=================================================
-    #region Create SetupComplete Files.
+    #region Gary - Create SetupComplete Files.
     if (Test-WebConnection -Uri "google.com") {
         $WebConnection = $True
     }
@@ -1641,23 +1646,23 @@ function Invoke-OSDCloud {
         }
     }
     #endregion
-    #=================================================
-    #region AutopilotConfigurationFile.json
+
+    #region David - AutopilotConfigurationFile.json
     if ($Global:OSDCloud.AutopilotJsonObject) {
         Write-SectionHeader "Applying AutopilotConfigurationFile.json"
         Write-DarkGrayHost 'C:\Windows\Provisioning\Autopilot\AutopilotConfigurationFile.json'
         $Global:OSDCloud.AutopilotJsonObject | ConvertTo-Json | Out-File -FilePath 'C:\Windows\Provisioning\Autopilot\AutopilotConfigurationFile.json' -Encoding ascii -Width 2000 -Force
     }
     #endregion
-    #=================================================
-    #region Set OOBE EULA
+
+    #region David - SetupDisplayedEula
     Write-SectionHeader "Set SetupDisplayedEula Registry for TPM"
     Invoke-Exe reg load HKLM\TempSOFTWARE "C:\Windows\System32\Config\SOFTWARE"
     Invoke-Exe reg add HKLM\TempSOFTWARE\Microsoft\Windows\CurrentVersion\Setup\OOBE /v SetupDisplayedEula /t REG_DWORD /d 0x00000001 /f
     Invoke-Exe reg unload HKLM\TempSOFTWARE
     #endregion
-    #=================================================
-    #region OSDeploy.OOBEDeploy.json
+
+    #region David - OSDeploy.OOBEDeploy.json
     if ($Global:OSDCloud.OOBEDeployJsonObject) {
         Write-SectionHeader "Applying OSDeploy.OOBEDeploy.json"
         Write-DarkGrayHost 'C:\ProgramData\OSDeploy\OSDeploy.OOBEDeploy.json'
@@ -1694,8 +1699,8 @@ exit
         $SetCommand | Out-File -FilePath "C:\Windows\OOBEDeploy.cmd" -Encoding ascii -Width 2000 -Force
     }
     #endregion
-    #=================================================
-    #region OSDeploy.AutopilotOOBE.json
+
+    #region David - OSDeploy.AutopilotOOBE.json
     if ($Global:OSDCloud.AutopilotOOBEJsonObject) {
         Write-SectionHeader "Applying OSDeploy.AutopilotOOBE.json"
         Write-DarkGrayHost 'C:\ProgramData\OSDeploy\OSDeploy.AutopilotOOBE.json'
@@ -1706,8 +1711,8 @@ exit
         $Global:OSDCloud.AutopilotOOBEJsonObject | ConvertTo-Json | Out-File -FilePath 'C:\ProgramData\OSDeploy\OSDeploy.AutopilotOOBE.json' -Encoding ascii -Width 2000 -Force
     }
     #endregion
-    #=================================================
-    #region Stage Office Config
+
+    #region David - Stage Office Config
     <#
     This region was added to enble installing Office in the Specialize phase
     It is probably not recommended to run this section, just showing that it is possible
@@ -1738,8 +1743,8 @@ exit
         }
     }
     #endregion
-    #=================================================
-    #region Export Operating System Information
+
+    #region David - Export Operating System Information
     <#
     The goal of this section is to export TXT files that contain information about the deployed Operating System
     This information can then be reviewed after deployment in C:\OSDCloud\Logs
@@ -1787,7 +1792,7 @@ exit
     }
     #endregion
     #=================================================
-    #region Save PowerShell Modules to OSDisk
+    #region David - Save PowerShell Modules to OSDisk
     Write-SectionHeader "Saving PowerShell Modules and Scripts"
     if ($Global:OSDCloud.IsWinPE -eq $true) {
         $PowerShellSavePath = 'C:\Program Files\WindowsPowerShell'
@@ -1868,8 +1873,8 @@ exit
         }
     }
     #endregion
-    #=================================================
-    #region Debug and Dev Mode
+ 
+    #region Gary - Debug and Dev Mode
     if ($WebConnection -eq $True){
         if ($Global:OSDCloud.DebugMode -eq $true){
             Write-SectionHeader "DebugMode Enabled"
@@ -1897,8 +1902,8 @@ exit
         }
     }
     #endregion
-    #=================================================
-    #region BETA Finish SetupComplete Files
+
+    #region Gary - Finish SetupComplete Files
     <#  Gary Blok
         This appends the two lines at the end of SetupComplete Script to Stop Transcription and to Restart Computer
     #>
@@ -1906,8 +1911,8 @@ exit
         Set-SetupCompleteCreateFinish
     }
     #endregion
-    #==================================================================================================
-    #region OSDCloud Config Shutdown Scripts
+
+    #region David - OSDCloud Config Shutdown Scripts
     <#
     David Segura
     22.11.11.1
@@ -1927,8 +1932,8 @@ exit
         }
     }
     #endregion
-    #==================================================================================================
-    #region OSDCloud Automate Autopilot Configuration File
+
+    #region David - OSDCloud Automate Autopilot Configuration File
     $Global:OSDCloud.AutomateAutopilot = Get-PSDrive -PSProvider FileSystem | Where-Object {$_.Name -ne 'C'} | ForEach-Object {
         Get-ChildItem "$($_.Root)OSDCloud\Automate\Default" -Include "AutopilotConfigurationFile.json" -File -Recurse -Force -ErrorAction Ignore
     }
@@ -1941,8 +1946,8 @@ exit
         }
     }
     #endregion
-    #=================================================
-    #region OSDCloud Azure Autopilot Configuration File
+
+    #region David - OSDCloud Azure Autopilot Configuration File
     if ($Global:OSDCloud.AzOSDCloudAutopilotFile) {
         Write-SectionHeader 'OSDCloud Azure Autopilot Configuration File'
         Write-DarkGrayHost 'Autopilot Configuration File will be downloaded to C:\Windows\Provisioning\Autopilot'
@@ -1965,8 +1970,8 @@ exit
         }
     }
     #endregion
-    #=================================================
-    #region OSDCloud Automate Provisioning Package
+
+    #region David - OSDCloud Automate Provisioning Package
     #This is for testing only
     $Global:OSDCloud.AutomateProvisioning = Get-PSDrive -PSProvider FileSystem | Where-Object {$_.Name -ne 'C'} | ForEach-Object {
         Get-ChildItem "$($_.Root)OSDCloud\Automate\Default\Provisioning" -Include "*.ppkg" -File -Recurse -Force -ErrorAction Ignore
@@ -1981,8 +1986,8 @@ exit
         }
     }
     #endregion
-    #=================================================
-    #region OSDCloud Azure Provisioning Packages
+
+    #region David - OSDCloud Azure Provisioning Packages
     if ($Global:OSDCloud.AzOSDCloudPackage) {
         Write-SectionHeader 'OSDCloud Azure Provisioning Packages'
         Write-DarkGrayHost 'Provisioning Packages will be downloaded to C:\OSDCloud\Packages'
@@ -2015,8 +2020,8 @@ exit
         }
     }
     #endregion
-    #=================================================
-    #region OSDCloud Automate Shutdown Scripts
+
+    #region David - OSDCloud Automate Shutdown Scripts
     $Global:OSDCloud.AutomateShutdownScript = Get-PSDrive -PSProvider FileSystem | Where-Object {$_.Name -ne 'C'} | ForEach-Object {
         Get-ChildItem "$($_.Root)OSDCloud\Automate\Default\Shutdown" -Include "*.ps1" -File -Recurse -Force -ErrorAction Ignore
     }
@@ -2029,8 +2034,8 @@ exit
         }
     }
     #endregion
-    #=================================================
-    #region OSDCloud Automate Azure Shutdown Scripts
+
+    #region David - OSDCloud Automate Azure Shutdown Scripts
     if ($Global:OSDCloud.AzOSDCloudScript) {
         Write-SectionHeader 'OSDCloud Automate Azure WinPE Shutdown Scripts'
         foreach ($Item in $Global:OSDCloud.AzOSDCloudScript) {
@@ -2056,8 +2061,8 @@ exit
         }
     }
     #endregion
-    #=================================================
-    #region OSDCloud Finished
+
+    #region David - Complete
     Write-SectionHeader "OSDCloud Finished"
     $Global:OSDCloud.TimeEnd = Get-Date
     $Global:OSDCloud.TimeSpan = New-TimeSpan -Start $Global:OSDCloud.TimeStart -End $Global:OSDCloud.TimeEnd
@@ -2092,5 +2097,4 @@ exit
         Stop-Transcript
     }
     #endregion
-    #=================================================
 }
