@@ -395,6 +395,13 @@ PowerShell -Nol -C $InitializeOSDCloudStartnetCommand
     #   Save WIM
     #=================================================
     $MountMyWindowsImage | Dismount-MyWindowsImage -Save
+
+    #region Create OSDCloud ISOs
+    Write-Host -ForegroundColor DarkGray "========================================================================="
+    Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Create OSDCloud Workspace ISOs"
+    New-OSDCloudISO
+    #endregion
+
     #=================================================
     #	UpdateUSB
     #=================================================

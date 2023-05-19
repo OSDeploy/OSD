@@ -1073,14 +1073,27 @@ function Invoke-OSDCloud {
     $Global:OSDCloud.ExpandWindowsImage = $ExpandWindowsImage
 
     if ($Global:OSDCloud.IsWinPE -eq $true) {
+        Write-DarkGrayHost -Message 'Expand-WindowsImage'
         Expand-WindowsImage @ExpandWindowsImage
 
         $SystemDrive = Get-Partition | Where-Object {$_.Type -eq 'System'} | Select-Object -First 1
         if (-NOT (Get-PSDrive -Name S)) {
+            Write-DarkGrayHost -Message 'Mount EFI System Partition to S:'
+            Write-DarkGrayHost -Message 'Set-Partition -NewDriveLetter S'
             $SystemDrive | Set-Partition -NewDriveLetter 'S'
         }
-        bcdboot C:\Windows /s S: /f ALL
+
+        Write-DarkGrayHost -Message 'C:\Windows\System32\bcdboot.exe C:\Windows /s S: /f UEFI /v /c'
+        #https://learn.microsoft.com/en-us/windows-hardware/manufacture/desktop/bcdboot-command-line-options-techref-di?view=windows-11
+        
+        #Original configuration
+        #bcdboot C:\Windows /s S: /f ALL
+        
+        #Updated configuration that should clear existing UEFI Boot entires and fix the Dell issue
+        C:\Windows\System32\bcdboot.exe C:\Windows /v /c
+
         Start-Sleep -Seconds 10
+        Write-DarkGrayHost -Message 'Remove-PartitionAccessPath -AccessPath S:\'
         if ($Global:OSDCloud.DiskPart -eq $true) {
             if (Get-Volume | Where-Object {$_.DriverLetter -eq "S"}){
                 $SystemDrive | Remove-PartitionAccessPath -AccessPath "S:\"
@@ -1093,7 +1106,7 @@ function Invoke-OSDCloud {
     #endregion
     #=================================================
     #region Get-WindowsEdition
-    Write-SectionHeader 'Get-WindowsEdition'
+    Write-SectionHeader 'Get-WindowsEdition -Path C:\'
     Get-WindowsEdition -Path 'C:\' | Out-Host
     #endregion
     #=================================================
