@@ -814,6 +814,8 @@ Windows Registry Editor Version 5.00
     Invoke-Exe reg load HKLM\Default "$MountPath\Windows\System32\Config\DEFAULT"
     Invoke-Exe reg import "$env:TEMP\RegistryConsole.reg"
 
+    #reg add "HKLM\Default\Control Panel\Colors" /t REG_SZ /v Background /d "0 99 177" /f
+
     #Scaling
 <#     reg add "HKLM\Default\Software\Microsoft\Windows NT\CurrentVersion\AppCompatFlags\Layers" /t REG_SZ /v "X:\Windows\System32\WirelessConnect.exe" /d "~ HIGHDPIAWARE" /f
     reg add "HKLM\Default\Control Panel\Desktop" /t REG_DWORD /v LogPixels /d 96 /f

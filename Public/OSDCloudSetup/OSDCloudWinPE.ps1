@@ -185,49 +185,50 @@ function Edit-OSDCloudWinPE {
     #   Robocopy Config
     #=================================================
     if (Test-Path "$WorkspacePath\Config") {
+        Write-Host -ForegroundColor DarkGray "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Copying $WorkspacePath\Config to X:\OSDCloud\Config"
         robocopy "$WorkspacePath\Config" "$MountPath\OSDCloud\Config" *.* /mir /ndl /njh /njs /b /np
     }
     #=================================================
     #   Robocopy ODT Config
     #=================================================
     if (Test-Path "$WorkspacePath\ODT") {
+        Write-Host -ForegroundColor DarkGray "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Copying $WorkspacePath\ODT to X:\OSDCloud\ODT"
         robocopy "$WorkspacePath\ODT" "$MountPath\OSDCloud\ODT" *.xml /mir /ndl /njh /njs /b /np
         robocopy "$WorkspacePath\ODT" "$MountPath\OSDCloud\ODT" setup.exe /mir /ndl /njh /njs /b /np
     }
-    #=================================================
-    #   DriverHWID
-    #=================================================
+    
+    #region DriverHWID
     if ($DriverHWID) {
         $AddWindowsDriverPath = Join-Path $env:TEMP (Get-Random)
         foreach ($Item in $DriverHWID) {
             Save-MsUpCatDriver -HardwareID $Item -DestinationDirectory $AddWindowsDriverPath
         }
         try {
-            Add-WindowsDriver -Path "$MountPath" -Driver $AddWindowsDriverPath -Recurse -ForceUnsigned -Verbose | Out-Null
+            Add-WindowsDriver -Path "$MountPath" -Driver $AddWindowsDriverPath -Recurse -ForceUnsigned -Verbose
         }
         catch {
             Write-Warning "Unable to find a driver for $Item"
         }
     }
-    #=================================================
-    #   CloudDriver
-    #=================================================
+    #endregion
+
+    #region CloudDriver
     if ($CloudDriver) {
         foreach ($Driver in $CloudDriver) {
             $AddWindowsDriverPath = Save-WinPECloudDriver -CloudDriver $Driver -Path (Join-Path $env:TEMP (Get-Random))
-            Add-WindowsDriver -Path "$MountPath" -Driver "$AddWindowsDriverPath" -Recurse -ForceUnsigned -Verbose | Out-Null
+            Add-WindowsDriver -Path "$MountPath" -Driver "$AddWindowsDriverPath" -Recurse -ForceUnsigned -Verbose
         }
         $null = Save-WindowsImage -Path $MountPath
     }
-    #=================================================
-    #   DriverPath
-    #=================================================
+    #endregion
+
+    #region DriverPath
     foreach ($AddWindowsDriverPath in $DriverPath) {
         Add-WindowsDriver -Path "$MountPath" -Driver "$AddWindowsDriverPath" -Recurse -ForceUnsigned -Verbose
     }
-    #=================================================
-    #   Drop initial Startnet.cmd
-    #=================================================
+    #endregion
+
+    #region Default Startnet.cmd
     $OSDVersion = (Get-Module -Name OSD -ListAvailable | Sort-Object Version -Descending | Select-Object -First 1).Version
     if ($WirelessConnect){
         $InitializeOSDCloudStartnetCommand = "Initialize-OSDCloudStartnet -WirelessConnect"
@@ -236,8 +237,6 @@ function Edit-OSDCloudWinPE {
         $InitializeOSDCloudStartnetCommand = "Initialize-OSDCloudStartnet"
     }
     
-    
-    Write-Host -ForegroundColor DarkGray "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Startnet.cmd: wpeinit"
 $StartnetCMD = @"
 @ECHO OFF
 wpeinit
@@ -245,10 +244,12 @@ cd\
 title OSD $OSDVersion
 PowerShell -Nol -C $InitializeOSDCloudStartnetCommand 
 "@
+    Write-Host -ForegroundColor DarkGray "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Startnet.cmd: Reset to defaults"
+    $StartnetCMD
     $StartnetCMD | Out-File -FilePath "$MountPath\Windows\System32\Startnet.cmd" -Encoding ascii -Width 2000 -Force
-    #=================================================
-    #   StartPSCommand Wait
-    #=================================================
+    #endregion
+
+    #region StartPSCommand
     if ($StartPSCommand) {
         Write-Warning "The StartPSCommand parameter is adding your Cloud PowerShell script to Startnet.cmd"
         Write-Warning "This must be set every time you run Edit-OSDCloudWinPE or it will revert back to defaults"
@@ -256,48 +257,63 @@ PowerShell -Nol -C $InitializeOSDCloudStartnetCommand
         Write-Host -ForegroundColor DarkGray "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Startnet.cmd: start /wait PowerShell -NoL -C `"$StartPSCommand`""
         Add-Content -Path "$MountPath\Windows\System32\Startnet.cmd" -Value "start /wait PowerShell -NoL -C `"$StartPSCommand`"" -Force
     }
-    #=================================================
-    #   StartURL /wait
-    #=================================================
+    #endregion
+    
+    #region Startup Parameter: StartURL
     if ($StartURL) {
-        Write-Warning "The StartURL parameter is adding your Cloud PowerShell script to Startnet.cmd"
-        Write-Warning "This must be set every time you run Edit-OSDCloudWinPE or it will revert back to defaults"
+        Write-Host -ForegroundColor DarkGray "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Startnet.cmd: Launch URL on WinPE Startup"
 
-        Write-Host -ForegroundColor DarkGray "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Startnet.cmd: start /wait PowerShell -NoL -C Invoke-WebPSScript '$StartURL'"
+        Write-Host '@ECHO OFF'
         Add-Content -Path "$MountPath\Windows\System32\Startnet.cmd" -Value '@ECHO OFF' -Force
+
+        Write-Host '@ECHO OFF'
         Add-Content -Path "$MountPath\Windows\System32\Startnet.cmd" -Value 'ECHO Invoke-WebPSScript' -Force
+
+        Write-Host '@ECHO ON'
         Add-Content -Path "$MountPath\Windows\System32\Startnet.cmd" -Value '@ECHO ON' -Force
+
+        Write-Host "start /wait PowerShell -NoL -C Invoke-WebPSScript '$StartURL'"
         Add-Content -Path "$MountPath\Windows\System32\Startnet.cmd" -Value "start /wait PowerShell -NoL -C Invoke-WebPSScript '$StartURL'" -Force
     }
-    #=================================================
-    #   StartOSDCloud /wait
-    #=================================================
+    #endregion
+
+    #region Startup Parameter: StartOSDCloud
     if ($StartOSDCloud) {
-        Write-Warning "The StartOSDCloud parameter is adding Start-OSDCloud to Startnet.cmd"
-        Write-Warning "This must be set every time you run Edit-OSDCloudWinPE or it will revert back to defaults"
-        
-        Write-Host -ForegroundColor DarkGray "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Startnet.cmd: start /wait PowerShell -NoL -C Start-OSDCloud $StartOSDCloud"
+        Write-Host -ForegroundColor DarkGray "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Startnet.cmd: Launch Start-OSDCloud on WinPE Startup"
+
+        Write-Host '@ECHO OFF'
         Add-Content -Path "$MountPath\Windows\System32\Startnet.cmd" -Value '@ECHO OFF' -Force
+        
+        Write-Host 'ECHO Start-OSDCloud'        
         Add-Content -Path "$MountPath\Windows\System32\Startnet.cmd" -Value 'ECHO Start-OSDCloud' -Force
-        Add-Content -Path "$MountPath\Windows\System32\Startnet.cmd" -Value "start /wait PowerShell -NoL -C Start-OSDCloud $StartOSDCloud"
-        Add-Content -Path "$MountPath\Windows\System32\Startnet.cmd" -Value '@ECHO ON' -Force
-    }
-    #=================================================
-    #   StartOSDCloudGUI /wait
-    #=================================================
-    if ($StartOSDCloudGUI) {
-        Write-Warning "The StartOSDCloudGUI parameter is adding Start-OSDCloudGUI to Startnet.cmd"
-        Write-Warning "This must be set every time you run Edit-OSDCloudWinPE or it will revert back to defaults"
         
-        Write-Host -ForegroundColor DarkGray "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Startnet.cmd: start /wait PowerShell -NoL -W Mi -C Start-OSDCloudGUI -Brand '$Brand'"
-        Add-Content -Path "$MountPath\Windows\System32\Startnet.cmd" -Value '@ECHO OFF' -Force
-        Add-Content -Path "$MountPath\Windows\System32\Startnet.cmd" -Value 'ECHO Start-OSDCloudGUI' -Force
-        Add-Content -Path "$MountPath\Windows\System32\Startnet.cmd" -Value "start /wait PowerShell -NoL -W Mi -C Start-OSDCloudGUI -Brand '$Brand'"
+        Write-Host "start /wait PowerShell -NoL -C Start-OSDCloud $StartOSDCloud"
+        Add-Content -Path "$MountPath\Windows\System32\Startnet.cmd" -Value "start /wait PowerShell -NoL -C Start-OSDCloud $StartOSDCloud"
+        
+        Write-Host '@ECHO ON'
         Add-Content -Path "$MountPath\Windows\System32\Startnet.cmd" -Value '@ECHO ON' -Force
     }
-    #=================================================
-    #   StartOSDPad /wait
-    #=================================================
+    #endregion
+
+    #region Startup Parameter: StartOSDCloudGUI
+    if ($StartOSDCloudGUI) {
+        Write-Host -ForegroundColor DarkGray "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Startnet.cmd: Launch Start-OSDCloudGUI on WinPE Startup"
+
+        Write-Host '@ECHO OFF'
+        Add-Content -Path "$MountPath\Windows\System32\Startnet.cmd" -Value '@ECHO OFF' -Force
+
+        Write-Host 'ECHO Start-OSDCloudGUI'
+        Add-Content -Path "$MountPath\Windows\System32\Startnet.cmd" -Value 'ECHO Start-OSDCloudGUI' -Force
+
+        Write-Host "start /wait PowerShell -NoL -W Mi -C Start-OSDCloudGUI -Brand '$Brand'"
+        Add-Content -Path "$MountPath\Windows\System32\Startnet.cmd" -Value "start /wait PowerShell -NoL -W Mi -C Start-OSDCloudGUI -Brand '$Brand'"
+
+        Write-Host '@ECHO ON'
+        Add-Content -Path "$MountPath\Windows\System32\Startnet.cmd" -Value '@ECHO ON' -Force
+    }
+    #endregion
+
+    #region Startup Parameter: StartOSDPad
     if ($StartOSDPad) {
         Write-Warning "The StartOSDPad parameter is adding OSDPad to Startnet.cmd"
         Write-Warning "This must be set every time you run Edit-OSDCloudWinPE or it will revert back to defaults"
@@ -308,60 +324,71 @@ PowerShell -Nol -C $InitializeOSDCloudStartnetCommand
         Add-Content -Path "$MountPath\Windows\System32\Startnet.cmd" -Value '@ECHO ON' -Force
         Add-Content -Path "$MountPath\Windows\System32\Startnet.cmd" -Value "start /wait PowerShell -NoL -C OSDPad $StartOSDPad"
     }
+    #endregion
 
+    #region Startup Parameter: Startnet
     if ($Startnet) {
         Write-Warning "The Startnet string is added to Startnet.cmd"
         Write-Warning "This must be set every time you run Edit-OSDCloudWinPE or it will revert back to defaults"
 
         Add-Content -Path "$MountPath\Windows\System32\Startnet.cmd" -Value $Startnet -Force
     }
-    if ($StartOSDCloud -or $StartOSDCloudGUI -or $StartURL -or $StartOSDPad -or $Startnet){
+    #endregion
+
+    #region No Startup Parameter
+    if ($StartOSDCloud -or $StartOSDCloudGUI -or $StartURL -or $StartOSDPad -or $Startnet) {
         #Do Nothing
     }
     else {
-        Write-Host -ForegroundColor DarkGray "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Startnet.cmd: start PowerShell -NoL"
-
+        Write-Host -ForegroundColor DarkGray "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Startnet.cmd: Start PowerShell in new Window"
+        Write-Host '@ECHO OFF'
         Add-Content -Path "$MountPath\Windows\System32\Startnet.cmd" -Value '@ECHO OFF' -Force
-        #Add-Content -Path "$MountPath\Windows\System32\Startnet.cmd" -Value 'ECHO Start PowerShell' -Force
+        Write-Host 'start PowerShell -NoL'
         Add-Content -Path "$MountPath\Windows\System32\Startnet.cmd" -Value 'start PowerShell -NoL' -Force
     }
-    #=================================================
-    #   Wallpaper
-    #=================================================
+    #endregion
+
+    #region Wallpaper
     if ($UseDefaultWallpaper) {
         $Wallpaper = Join-Path (Get-Module -Name OSD -ListAvailable | Sort-Object Version -Descending | Select-Object -First 1).ModuleBase "Resources\Images\OSDCloud.jpg"
     }
     if ($Wallpaper) {
-        Write-Host -ForegroundColor DarkGray "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Wallpaper: $Wallpaper"
+        Write-Host -ForegroundColor DarkGray "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Adding Wallpaper $Wallpaper"
         Copy-Item -Path $Wallpaper -Destination "$env:TEMP\winpe.jpg" -Force | Out-Null
         Copy-Item -Path $Wallpaper -Destination "$env:TEMP\winre.jpg" -Force | Out-Null
         robocopy "$env:TEMP" "$MountPath\Windows\System32" winpe.jpg /ndl /njh /njs /b /np /r:0 /w:0
         robocopy "$env:TEMP" "$MountPath\Windows\System32" winre.jpg /ndl /njh /njs /b /np /r:0 /w:0
     }
-    #=================================================
-    #   Update OSD Module
-    #=================================================
-    Write-Host -ForegroundColor DarkGray "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Saving OSD Module to $MountPath\Program Files\WindowsPowerShell\Modules"
+    #endregion
+
+    #region OSD PowerShell Module
+    Write-Host -ForegroundColor DarkGray "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Saving OSD Module to X:\Program Files\WindowsPowerShell\Modules"
     Save-Module -Name OSD -Path "$MountPath\Program Files\WindowsPowerShell\Modules" -Force
+    #endregion
+
+    #region Azure PowerShell Modules
     if ($AddAzure.IsPresent) {
-        Write-Host -ForegroundColor DarkGray "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Saving Azure Modules to $MountPath\Program Files\WindowsPowerShell\Modules"
+        Write-Host -ForegroundColor DarkGray "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Saving Azure Modules to X:\Program Files\WindowsPowerShell\Modules"
         Save-Module -Name Az.Accounts -Path "$MountPath\Program Files\WindowsPowerShell\Modules" -Force
         Save-Module -Name Az.Storage -Path "$MountPath\Program Files\WindowsPowerShell\Modules" -Force
-        Write-Host -ForegroundColor DarkGray "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Saving AzCopy to $MountPath\Windows"
+        Write-Host -ForegroundColor DarkGray "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Saving AzCopy to X:\Windows"
         $AzCopy = Save-WebFile -SourceUrl (Invoke-WebRequest -UseBasicParsing 'https://aka.ms/downloadazcopy-v10-windows' -MaximumRedirection 0 -ErrorAction SilentlyContinue).headers.location
         if ($AzCopy) {
             Expand-Archive -Path $AzCopy.FullName -DestinationPath $env:windir\Temp\AzCopy -Force
             Get-ChildItem -Path $env:windir\Temp\AzCopy -Recurse -Include azcopy.exe | foreach {Copy-Item $_.FullName -Destination "$MountPath\Windows\azcopy.exe" -Force -ErrorAction SilentlyContinue}
         }
     }
+    #endregion
+
+    #region AWS PowerShell Modules
     if ($AddAws.IsPresent) {
-        Write-Host -ForegroundColor DarkGray "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Saving AWS Modules to $MountPath\Program Files\WindowsPowerShell\Modules"
+        Write-Host -ForegroundColor DarkGray "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Saving AWS Modules to X:\Program Files\WindowsPowerShell\Modules"
         Save-Module -Name AWS.Tools.Common "$MountPath\Program Files\WindowsPowerShell\Modules" -Force
         Save-Module -Name AWS.Tools.S3 -Path "$MountPath\Program Files\WindowsPowerShell\Modules" -Force
     }
-    #=================================================
-    #   PSModuleInstall
-    #=================================================
+    #endregion
+
+    #region PSModuleInstall
     foreach ($Module in $PSModuleInstall) {
         if ($Module -eq 'DellBiosProvider') {
             if (Test-Path "$env:SystemRoot\System32\msvcp140.dll") {
@@ -382,19 +409,22 @@ PowerShell -Nol -C $InitializeOSDCloudStartnetCommand
         if ($Module -eq 'HPCMSL'){
             Save-Module -Name $Module -Path "$MountPath\Program Files\WindowsPowerShell\Modules" -Force -AcceptLicense
         }
-        else {Save-Module -Name $Module -Path "$MountPath\Program Files\WindowsPowerShell\Modules" -Force} 
+        else {
+            Save-Module -Name $Module -Path "$MountPath\Program Files\WindowsPowerShell\Modules" -Force
+        } 
     }
-    #=================================================
-    #   PSModuleCopy
-    #=================================================
+    #endregion
+
+    #region PSModuleCopy
     foreach ($Module in $PSModuleCopy) {
         Write-Host -ForegroundColor DarkGray "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Copy-PSModuleToWindowsImage -Name $Module -Path $MountPath"
         Copy-PSModuleToWindowsImage -Name $Module -Path $MountPath
     }
-    #=================================================
-    #   Save WIM
-    #=================================================
+    #endregion
+
+    #region Dismount-MyWindowsImage
     $MountMyWindowsImage | Dismount-MyWindowsImage -Save
+    #endregion
 
     #region Create OSDCloud ISOs
     Write-Host -ForegroundColor DarkGray "========================================================================="
@@ -402,9 +432,7 @@ PowerShell -Nol -C $InitializeOSDCloudStartnetCommand
     New-OSDCloudISO
     #endregion
 
-    #=================================================
-    #	UpdateUSB
-    #=================================================
+    #region UpdateUSB
     if ($UpdateUSB) {
         $WinpeVolumes = (Get-USBVolume | Where-Object {$_.FileSystemLabel -eq 'WinPE'}).DriveLetter
     
@@ -415,13 +443,13 @@ PowerShell -Nol -C $InitializeOSDCloudStartnetCommand
             }
         }
     }
-    #=================================================
-    #	Complete
-    #=================================================
+    #endregion
+
+    #region Complete
     $WinpeEndTime = Get-Date
     $WinpeTimeSpan = New-TimeSpan -Start $WinpeStartTime -End $WinpeEndTime
     Write-Host -ForegroundColor DarkGray    "================================================"
     Write-Host -ForegroundColor Yellow      "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) $($MyInvocation.MyCommand.Name) " -NoNewline
     Write-Host -ForegroundColor Cyan        "Completed in $($WinpeTimeSpan.ToString("mm' minutes 'ss' seconds'"))"
-    #=================================================
+    #endregion
 }
