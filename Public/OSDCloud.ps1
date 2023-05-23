@@ -355,7 +355,7 @@ function Invoke-OSDCloud {
 
         #region Global:OSDCloud.AutomateAutopilot
         $Global:OSDCloud.AutomateAutopilot = Get-PSDrive -PSProvider FileSystem | Where-Object {$_.Name -ne 'C'} | ForEach-Object {
-            Get-ChildItem "$($_.Root)OSDCloud\Automate\Default" -Include "AutopilotConfigurationFile.json" -File -Recurse -Force -ErrorAction Ignore
+            Get-ChildItem "$($_.Root)OSDCloud\Automate" -Include "AutopilotConfigurationFile.json" -File -Recurse -Force -ErrorAction Ignore
         }
         if ($Global:OSDCloud.AutomateAutopilot) {
             Write-SectionHeader 'OSDCloud Automate Autopilot Configuration'
@@ -367,9 +367,8 @@ function Invoke-OSDCloud {
         #endregion
         
         #region Global:OSDCloud.AutomateProvisioning
-        #This is for testing only
         $Global:OSDCloud.AutomateProvisioning = Get-PSDrive -PSProvider FileSystem | Where-Object {$_.Name -ne 'C'} | ForEach-Object {
-            Get-ChildItem "$($_.Root)OSDCloud\Automate\Default\Provisioning" -Include "*.ppkg" -File -Recurse -Force -ErrorAction Ignore
+            Get-ChildItem "$($_.Root)OSDCloud\Automate\Provisioning" -Include "*.ppkg" -File -Recurse -Force -ErrorAction Ignore
         }
         if ($Global:OSDCloud.AutomateProvisioning) {
             Write-SectionHeader 'OSDCloud Automate Provisioning Packages'
@@ -383,7 +382,7 @@ function Invoke-OSDCloud {
         #region Global:OSDCloud.AutomateStartupScript
         #This is for testing only
         $Global:OSDCloud.AutomateStartupScript = Get-PSDrive -PSProvider FileSystem | Where-Object {$_.Name -ne 'C'} | ForEach-Object {
-            Get-ChildItem "$($_.Root)OSDCloud\Automate\Default\Startup" -Include "*.ps1" -File -Recurse -Force -ErrorAction Ignore
+            Get-ChildItem "$($_.Root)OSDCloud\Automate\Startup" -Include "*.ps1" -File -Recurse -Force -ErrorAction Ignore
         }
         if ($Global:OSDCloud.AutomateStartupScript) {
             Write-SectionHeader 'OSDCloud Automate Startup Scripts'
@@ -397,7 +396,7 @@ function Invoke-OSDCloud {
         #region Global:OSDCloud.AutomateShutdownScript
         #This is for testing only
         $Global:OSDCloud.AutomateShutdownScript = Get-PSDrive -PSProvider FileSystem | Where-Object {$_.Name -ne 'C'} | ForEach-Object {
-            Get-ChildItem "$($_.Root)OSDCloud\Automate\Default\Shutdown" -Include "*.ps1" -File -Recurse -Force -ErrorAction Ignore
+            Get-ChildItem "$($_.Root)OSDCloud\Automate\Shutdown" -Include "*.ps1" -File -Recurse -Force -ErrorAction Ignore
         }
         if ($Global:OSDCloud.AutomateShutdownScript) {
             Write-SectionHeader 'OSDCloud Automate Shutdown Scripts'
@@ -1934,7 +1933,7 @@ exit
 
     #region Global:OSDCloud.AutomateAutopilot
     $Global:OSDCloud.AutomateAutopilot = Get-PSDrive -PSProvider FileSystem | Where-Object {$_.Name -ne 'C'} | ForEach-Object {
-        Get-ChildItem "$($_.Root)OSDCloud\Automate\Default" -Include "AutopilotConfigurationFile.json" -File -Recurse -Force -ErrorAction Ignore
+        Get-ChildItem "$($_.Root)OSDCloud\Automate" -Include "AutopilotConfigurationFile.json" -File -Recurse -Force -ErrorAction Ignore
     }
     if ($Global:OSDCloud.AutomateAutopilot) {
         Write-SectionHeader 'OSDCloud Automate Autopilot Configuration'
@@ -1973,7 +1972,7 @@ exit
     #region Global:OSDCloud.AutomateProvisioning
     #This is for testing only
     $Global:OSDCloud.AutomateProvisioning = Get-PSDrive -PSProvider FileSystem | Where-Object {$_.Name -ne 'C'} | ForEach-Object {
-        Get-ChildItem "$($_.Root)OSDCloud\Automate\Default\Provisioning" -Include "*.ppkg" -File -Recurse -Force -ErrorAction Ignore
+        Get-ChildItem "$($_.Root)OSDCloud\Automate\Provisioning" -Include "*.ppkg" -File -Recurse -Force -ErrorAction Ignore
     }
     if ($Global:OSDCloud.AutomateProvisioning) {
         Write-SectionHeader 'OSDCloud Automate Provisioning Packages'
@@ -2022,7 +2021,7 @@ exit
 
     #region Global:OSDCloud.AutomateShutdownScript
     $Global:OSDCloud.AutomateShutdownScript = Get-PSDrive -PSProvider FileSystem | Where-Object {$_.Name -ne 'C'} | ForEach-Object {
-        Get-ChildItem "$($_.Root)OSDCloud\Automate\Default\Shutdown" -Include "*.ps1" -File -Recurse -Force -ErrorAction Ignore
+        Get-ChildItem "$($_.Root)OSDCloud\Automate\Shutdown" -Include "*.ps1" -File -Recurse -Force -ErrorAction Ignore
     }
     if ($Global:OSDCloud.AutomateShutdownScript) {
         Write-SectionHeader 'OSDCloud Automate Shutdown Scripts'

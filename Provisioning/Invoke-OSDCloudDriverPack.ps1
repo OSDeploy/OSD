@@ -11,6 +11,19 @@ if (Test-Path 'C:\Drivers') {
     $DriverPacks = Get-ChildItem -Path 'C:\Drivers' -File
 
     foreach ($Item in $DriverPacks) {
+        if ($Item.Extension -eq '.ppkg') {
+            Write-Host "Applying Provisioning Package at $($Item.FullName)"
+            #$ArgumentList = "/Online /Add-ProvisioningPackage /PackagePath:`"$($Item.FullName)`""
+            #Start-Process -FilePath 'dism.exe' -ArgumentList $ArgumentList -Wait -NoNewWindow
+
+            dism.exe /Online /Add-ProvisioningPackage /PackagePath:"$($Item.FullName)"
+
+            schtasks /Change /TN "Microsoft\Windows\Management\Provisioning\Retry" /Enable
+
+            schtasks /Query
+            Continue
+        }
+
         $ExpandFile = $Item.FullName
         Write-Verbose -Verbose "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Reviewing $ExpandFile"
 
