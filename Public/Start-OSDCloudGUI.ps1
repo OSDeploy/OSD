@@ -89,7 +89,7 @@ function Start-OSDCloudGUI {
     $Global:OSDCloudGUI | ConvertTo-Json -Depth 10 | Out-File -FilePath "$env:TEMP\Start-OSDCloudGUI.json" -Force
     
     $Global:OSDCloudGUI.AutomateJsonFile = Get-PSDrive -PSProvider FileSystem | Where-Object {$_.Name -ne 'C'} | ForEach-Object {
-        Get-ChildItem "$($_.Root)OSDCloud\Automate\Default" -Include "Start-OSDCloudGUI.json" -File -Force -Recurse -ErrorAction Ignore
+        Get-ChildItem "$($_.Root)OSDCloud\Automate" -Include "Start-OSDCloudGUI.json" -File -Force -Recurse -ErrorAction Ignore
     }
     if ($Global:OSDCloudGUI.AutomateJsonFile) {
         foreach ($Item in $Global:OSDCloudGUI.AutomateJsonFile) {
