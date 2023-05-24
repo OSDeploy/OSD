@@ -27,6 +27,7 @@ if ($env:SystemDrive -eq 'X:') {
         if (($network.Authentication -eq "WPA3-Personal") -and (netsh wlan show driver | Select-String -Pattern "WPA3-Personal")) {
             $authmode = "WPA3SAE"
             $encmode = "AES"
+	}
 
         # just for sure
         $null = Netsh WLAN delete profile "$SSID"
