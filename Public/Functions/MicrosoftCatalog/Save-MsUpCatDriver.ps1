@@ -54,6 +54,7 @@ function Save-MsUpCatDriver {
                 $FindHardwareID = $null
 
                 #See if DeviceID matches the pattern
+                Write-Host -ForegroundColor DarkGray "DeviceID: $($Item.DeviceID)"
                 $FindHardwareID = $Item.DeviceID | Select-String -Pattern $HardwareIDPattern -AllMatches | Select-Object -ExpandProperty Matches | Select-Object -ExpandProperty Value
 
                 if (($null -eq $FindHardwareID) -and ($Item.HardwareID)) {
@@ -61,10 +62,14 @@ function Save-MsUpCatDriver {
                 }
     
                 if ($FindHardwareID) {
+                    Write-Host -ForegroundColor Gray "Searching: $FindHardwareID"
                     $SearchString = "$FindHardwareID".Replace('&',"`%26")
 
-                    $WindowsUpdateDriver = Get-MsUpCat -Search "21H2+$PNPClass+$SearchString" -Descending | Select-Object LastUpdated,Title,Version,Size,Guid -First 1 -ErrorAction Ignore
-
+                    $WindowsUpdateDriver = Get-MsUpCat -Search "22H2+$PNPClass+$SearchString" -Descending | Select-Object LastUpdated,Title,Version,Size,Guid -First 1 -ErrorAction Ignore
+                    
+                    if (-not ($WindowsUpdateDriver)) {
+                        $WindowsUpdateDriver = Get-MsUpCat -Search "21H2+$PNPClass+$SearchString" -Descending | Select-Object LastUpdated,Title,Version,Size,Guid -First 1 -ErrorAction Ignore
+                    }
                     if (-not ($WindowsUpdateDriver)) {
                         $WindowsUpdateDriver = Get-MsUpCat -Search "Vibranium+$PNPClass+$SearchString" -Descending | Select-Object LastUpdated,Title,Version,Size,Guid -First 1 -ErrorAction Ignore
                     }
