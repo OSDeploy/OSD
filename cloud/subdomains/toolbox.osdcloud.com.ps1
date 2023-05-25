@@ -94,7 +94,7 @@ if ($WindowsPhase -eq 'OOBE') {
 #=================================================
 #region Windows
 if ($WindowsPhase -eq 'Windows') {
-    Start-OSDPad -RepoOwner OSDeploy -RepoName Toolbox -RepoFolder Windows
+    Start-OSDPad -RepoOwner OSDeploy -RepoName Toolbox -RepoFolder Windows -Brand 'OSDeploy Toolbox'
 
     #Stop the startup Transcript
     $null = Stop-Transcript -ErrorAction Ignore
