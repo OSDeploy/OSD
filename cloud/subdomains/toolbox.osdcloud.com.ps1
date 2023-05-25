@@ -55,49 +55,13 @@ else {
 #Finish initialization
 Write-Host -ForegroundColor DarkGray "$ScriptName $ScriptVersion $WindowsPhase"
 
-#Load OSDCloud Functions
-#Invoke-Expression -Command (Invoke-RestMethod -Uri functions.osdcloud.com)
+$OSDPadParams = @{
+    Brand           = "OSDCloud Toolbox - $RepoFolder"
+    RepoOwner       = 'OSDeploy'
+    RepoName        = 'OSDCloudToolbox'
+    RepoFolder      = $WindowsPhase
+}
+Start-OSDPad @OSDPadParams
 
-#endregion
-#=================================================
-#region WinPE
-if ($WindowsPhase -eq 'WinPE') {
-    Start-OSDPad -RepoOwner OSDeploy -RepoName Toolbox -RepoFolder WinPE
-    
-    #Stop the startup Transcript
-    $null = Stop-Transcript -ErrorAction Ignore
-}
-#endregion
-#=================================================
-#region Specialize
-if ($WindowsPhase -eq 'Specialize') {
-    #Stop the startup Transcript
-    $null = Stop-Transcript -ErrorAction Ignore
-}
-#endregion
-#=================================================
-#region AuditMode
-if ($WindowsPhase -eq 'AuditMode') {
-    #Stop the startup Transcript
-    $null = Stop-Transcript -ErrorAction Ignore
-}
-#endregion
-#=================================================
-#region OOBE
-if ($WindowsPhase -eq 'OOBE') {
-    Start-OSDPad -RepoOwner OSDeploy -RepoName Toolbox -RepoFolder OOBE
-
-    #Stop the startup Transcript
-    $null = Stop-Transcript -ErrorAction Ignore
-}
-#endregion
-#=================================================
-#region Windows
-if ($WindowsPhase -eq 'Windows') {
-    Start-OSDPad -RepoOwner OSDeploy -RepoName Toolbox -RepoFolder Windows -Brand 'OSDeploy Toolbox'
-
-    #Stop the startup Transcript
-    $null = Stop-Transcript -ErrorAction Ignore
-}
-#endregion
-#=================================================
+#Stop the startup Transcript
+$null = Stop-Transcript -ErrorAction Ignore
