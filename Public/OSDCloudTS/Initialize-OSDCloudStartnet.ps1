@@ -90,7 +90,7 @@ function Initialize-OSDCloudStartnet {
         if ($GalleryPSModule) {
             if (($GalleryPSModule.Version -as [version]) -gt ($InstalledModule.Version -as [version])) {
                 Write-Host -ForegroundColor DarkGray "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) $PSModuleName $($GalleryPSModule.Version) [AllUsers]"
-                Install-Module $PSModuleName -Scope AllUsers -Force
+                Install-Module $PSModuleName -Scope AllUsers -Force -SkipPublisherCheck
                 Import-Module $PSModuleName -Force
             }
         }
