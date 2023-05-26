@@ -305,7 +305,8 @@
         'Update-MicrosoftDriverPackCatalog',
         'Invoke-OSDInfo',
         'Update-IntelDriversCatalog',
-        'Start-OSDCloudToolbox'
+        'Start-OSDCloudToolbox',
+        'New-OSDCloudVM'
     )
     CmdletsToExport = @()
     VariablesToExport = @()
