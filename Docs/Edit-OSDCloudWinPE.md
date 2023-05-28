@@ -37,7 +37,7 @@ Edit-OSDCloudWinPE -StartOSDCloud '-OSBuild 22H2 -OSEdition Pro -OSLanguage en-u
 
 ### EXAMPLE 3
 ```
-Edit-OSDCloudWinPE -StartURL 'https://sandbox.osdcloud.com'
+Edit-OSDCloudWinPE â€"StartURL 'https://sandbox.osdcloud.com'
 ```
 
 ## PARAMETERS

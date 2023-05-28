@@ -5,43 +5,48 @@ online version: https://github.com/OSDeploy/OSD/tree/master/Docs
 schema: 2.0.0
 ---
 
-# Get-OSDGather
+# Start-OSDCloudToolbox
 
 ## SYNOPSIS
-Returns common OSD information as an ordered hash table
+{{ Fill in the Synopsis }}
 
 ## SYNTAX
 
 ```
-Get-OSDGather [[-Property] <String>] [-Full] [<CommonParameters>]
+Start-OSDCloudToolbox [[-RepoFolder] <String>] [-OAuth <String>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-Returns common OSD information as an ordered hash table
+{{ Fill in the Description }}
 
 ## EXAMPLES
 
-### EXAMPLE 1
+### Example 1
 ```
-OSDGather
-```
-
-Get-OSDGather
-Returns the Gather Results
-
-### EXAMPLE 2
-```
-$OSDGather = Get-OSDGather
+PS C:\> {{ Add example code here }}
 ```
 
-$OSDGather.IsAdmin
-$OSDGather.ComputerInfo
-Returns the Gather Results saved in a Variable
+{{ Add example description here }}
 
 ## PARAMETERS
 
-### -Property
-Returns the Name Value
+### -OAuth
+{{ Fill OAuth Description }}
+
+```yaml
+Type: String
+Parameter Sets: (All)
+Aliases: OAuthToken
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -RepoFolder
+{{ Fill RepoFolder Description }}
 
 ```yaml
 Type: String
@@ -49,23 +54,8 @@ Parameter Sets: (All)
 Aliases:
 
 Required: False
-Position: 1
+Position: 0
 Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -Full
-Returns additional CimInstance results
-
-```yaml
-Type: SwitchParameter
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: Named
-Default value: False
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
@@ -75,12 +65,10 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## INPUTS
 
+### None
 ## OUTPUTS
 
+### System.Object
 ## NOTES
-19.10.4.0   David Segura @SeguraOSD
 
 ## RELATED LINKS
-
-[https://github.com/OSDeploy/OSD/tree/master/Docs](https://github.com/OSDeploy/OSD/tree/master/Docs)
-
