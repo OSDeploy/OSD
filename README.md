@@ -7,6 +7,9 @@
 </p>
 
 
+OSD | <a href="https://www.powershellgallery.com/packages/OSD"><img src="https://img.shields.io/powershellgallery/v/OSD.svg?label=PSGallery&logo=powershell&ColorB=bluee"></a> | <a href="https://www.powershellgallery.com/packages/OSD"><img src="https://img.shields.io/powershellgallery/dt/OSD.svg?label=Total&color=blueviolet"></a>
+
+
 ##  Authors
  - David Segura         | Twitter: @SeguraOSD          | Blog: [https://www.osdeploy.com/](https://www.osdeploy.com/)
  - Damien Van Robaeys   | Twitter: @syst_and_deploy    | Blog: [https://www.systanddeploy.com/](https://www.systanddeploy.com/gary)
