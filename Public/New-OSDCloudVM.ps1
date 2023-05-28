@@ -82,7 +82,7 @@ function New-OSDCloudVM {
 
     # Import Custom Configuration
     $WorkspaceConfiguration = Join-Path (Get-OSDCloudWorkspace) 'Logs\NewOSDCloudVM.json'
-    $WorkspaceConfiguration
+
     if (Test-Path $WorkspaceConfiguration) {
         Write-Host -ForegroundColor DarkGray "Reading $WorkspaceConfiguration"
         $AutomateConfiguration = Get-Content -Path $WorkspaceConfiguration -Raw | ConvertFrom-Json -ErrorAction "Stop" | ConvertTo-Hashtable
