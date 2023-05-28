@@ -984,7 +984,7 @@ Windows Registry Editor Version 5.00
         BuildDate = (Get-Date).ToString('yyyy.MM.dd.HHmmss')
         Version = [Version](Get-Module -Name OSD -ListAvailable | Sort-Object Version -Descending | Select-Object -First 1).Version
     }
-    $WinPE | ConvertTo-Json | Out-File "$OSDCloudTemplate\winpe.json" -Encoding ascii -Width 2000 -Force
+    $WinPE | ConvertTo-Json | Out-File "$OSDCloudTemplate\Logs\winpe.json" -Encoding ascii -Width 2000 -Force
     Set-OSDCloudTemplate -Name $Name
     #endregion
 
