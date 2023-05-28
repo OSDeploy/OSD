@@ -7,7 +7,7 @@
 </p>
 
 
-OSD | <a href="https://www.powershellgallery.com/packages/OSD"><img src="https://img.shields.io/powershellgallery/v/OSD.svg?label=PSGallery&logo=powershell&ColorB=bluee"></a> | <a href="https://www.powershellgallery.com/packages/OSD"><img src="https://img.shields.io/powershellgallery/dt/OSD.svg?label=Total&color=blueviolet"></a>
+<a href="https://www.powershellgallery.com/packages/OSD"><img src="https://img.shields.io/powershellgallery/v/OSD.svg?label=PSGallery%20Version&logo=powershell&ColorB=bluee"></a> | <a href="https://www.powershellgallery.com/packages/OSD"><img src="https://img.shields.io/powershellgallery/dt/OSD.svg?label=Total&color=blueviolet"></a>
 
 
 ##  Authors
