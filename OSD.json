@@ -105,12 +105,12 @@
 	},
     "NewOSDCloudVM": {
         "CheckpointVM": true,
-        "NamePrefix": "OSDCloud",
         "Generation": 2,
         "MemoryStartupGB": 4,
+        "NamePrefix": "OSDCloud",
         "ProcessorCount": 1,
-        "SwitchName": null,
         "StartVM": true,
+        "SwitchName": null,
         "VHDSizeGB": 64
     },
 	"StartOSDCloudGUI": {
