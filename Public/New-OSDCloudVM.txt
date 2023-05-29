@@ -13,90 +13,92 @@ function New-OSDCloudVM {
     https://github.com/OSDeploy/OSD/tree/master/Docs
     #>
 
+    #Requires -RunAsAdministrator
+
     [CmdletBinding()]
     param (
         [System.Boolean]
-        $CheckpointVM,
+        $CheckpointVM = $Global:OSDModuleResource.NewOSDCloudVM.CheckpointVM,
 
         [ValidateSet('1','2')]
         [System.UInt16]
-        $Generation,
+        $Generation = $Global:OSDModuleResource.NewOSDCloudVM.Generation,
 
         [ValidateRange(2, 64)]
         [System.UInt16]
-        $MemoryStartupGB,
+        $MemoryStartupGB = $Global:OSDModuleResource.NewOSDCloudVM.MemoryStartupGB,
 
         [System.String]
-        $NamePrefix,
+        $NamePrefix = $Global:OSDModuleResource.NewOSDCloudVM.NamePrefix,
 
         [ValidateRange(2, 64)]
         [System.UInt16]
-        $ProcessorCount,
+        $ProcessorCount = $Global:OSDModuleResource.NewOSDCloudVM.ProcessorCount,
 
         [System.String]
-        $SwitchName,
+        $SwitchName = $Global:OSDModuleResource.NewOSDCloudVM.SwitchName,
 
         [System.Boolean]
-        $StartVM,
+        $StartVM = $Global:OSDModuleResource.NewOSDCloudVM.StartVM,
 
         [ValidateRange(8, 128)]
         [System.UInt16]
-        $VHDSizeGB
+        $VHDSizeGB = $Global:OSDModuleResource.NewOSDCloudVM.VHDSizeGB
     )
-
-    # This example will gather the defaults from the OSD Module Resource
-    # Default and Parameter Configuration
-    $Global:NewOSDCloudVM = $null
-    $Global:NewOSDCloudVM = [ordered]@{
-        CheckpointVM    = [System.Boolean]$Global:OSDModuleResource.NewOSDCloudVM.CheckpointVM
-        Generation      = [System.Int16]$Global:OSDModuleResource.NewOSDCloudVM.Generation
-        MemoryStartupGB = [System.Int64]$Global:OSDModuleResource.NewOSDCloudVM.MemoryStartupGB
-        NamePrefix      = [System.String]$Global:OSDModuleResource.NewOSDCloudVM.NamePrefix
-        ProcessorCount  = [System.Int64]$Global:OSDModuleResource.NewOSDCloudVM.ProcessorCount
-        SwitchName      = [System.String]$Global:OSDModuleResource.NewOSDCloudVM.SwitchName
-        StartVM         = [System.Boolean]$Global:OSDModuleResource.NewOSDCloudVM.StartVM
-        VHDSizeGB       = [System.Int64]$Global:OSDModuleResource.NewOSDCloudVM.VHDSizeGB
-    }
-
-    # Import Last Configuration
-    $WorkspaceConfigurationJson = Join-Path (Get-OSDCloudWorkspace) 'Logs\NewOSDCloudVM.json'
-    if (Test-Path $WorkspaceConfigurationJson) {
-        Write-Host -ForegroundColor DarkGray "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Importing existing configuration from $WorkspaceConfigurationJson"
-        $WorkspaceConfiguration = Get-Content -Path $WorkspaceConfigurationJson -Raw | ConvertFrom-Json -ErrorAction "Stop" | ConvertTo-Hashtable
-    }
-    if ($WorkspaceConfiguration) {
-        foreach ($Key in $WorkspaceConfiguration.Keys) {
-            $NewOSDCloudVM.$Key = $WorkspaceConfiguration.$Key
-        }
-    }
-
-    # Update Configuration from Parameters
-    if ($PSBoundParameters.ContainsKey('CheckpointVM')) {$Global:NewOSDCloudVM.CheckpointVM = $CheckpointVM}
-    if ($PSBoundParameters.ContainsKey('Generation')) {$Global:NewOSDCloudVM.Generation = $Generation}
-    if ($PSBoundParameters.ContainsKey('MemoryStartupGB')) {$Global:NewOSDCloudVM.MemoryStartupGB = $MemoryStartupGB}
-    if ($PSBoundParameters.ContainsKey('NamePrefix')) {$Global:NewOSDCloudVM.NamePrefix = $NamePrefix}
-    if ($PSBoundParameters.ContainsKey('ProcessorCount')) {$Global:NewOSDCloudVM.ProcessorCount = $ProcessorCount}
-    if ($PSBoundParameters.ContainsKey('SwitchName')) {$Global:NewOSDCloudVM.SwitchName = $SwitchName}
-    if ($PSBoundParameters.ContainsKey('StartVM')) {$Global:NewOSDCloudVM.StartVM = $StartVM}
-    if ($PSBoundParameters.ContainsKey('VHDSizeGB')) {$Global:NewOSDCloudVM.VHDSizeGB = $VHDSizeGB}
-
-    # Validate SwitchName
-    if ($Global:NewOSDCloudVM.SwitchName) {
-        $ValidateSwitch = Get-VMSwitch -Name $Global:NewOSDCloudVM.SwitchName -ErrorAction SilentlyContinue
-
-        if (-not ($ValidateSwitch)) {
-            Write-Warning "SwitchName value '$($Global:NewOSDCloudVM.SwitchName)' is not valid and will be set to Not connected."
-            $Global:NewOSDCloudVM.SwitchName = $null
-        }
-    }
-
-    # Export the updated configuration
-    Write-Host -ForegroundColor DarkGray "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Exporting updated configuration to $WorkspaceConfigurationJson"
-    $Global:NewOSDCloudVM | ConvertTo-Json -Depth 10 | Out-File -FilePath $WorkspaceConfigurationJson -Force
-
     # Get Hyper-V Defaults
     #$VMManagementService = Get-WmiObject -Namespace root\virtualization\v2 Msvm_VirtualSystemManagementService
     $VMManagementServiceSettingData = Get-WmiObject -Namespace root\virtualization\v2 Msvm_VirtualSystemManagementServiceSettingData
+
+    # Validate SwitchName
+    if (-not (Get-VMSwitch -Name $SwitchName -ErrorAction SilentlyContinue)) {
+        if ($SwitchName -eq $Global:OSDModuleResource.NewOSDCloudVM.SwitchName) {
+            # Default Switch does not exist.  Autoselect a Switch
+            $SwitchName = Get-VMSwitch | Select-Object -ExpandProperty Name -First 1
+        }
+        else {
+            # Specified Switch does not exist.  Autoselect a Switch
+            Write-Warning "SwitchName value '$SwitchName' is not valid."
+            $SwitchName = Get-VMSwitch | Select-Object -ExpandProperty Name -First 1
+            Write-Warning "SwitchName value will be set to '$SwitchName'"
+        }
+    }
+
+    # Default and Parameter Configuration
+    $Global:NewOSDCloudVM = $null
+    $Global:NewOSDCloudVM = [ordered]@{
+        CheckpointVM    = [System.Boolean]$CheckpointVM
+        NamePrefix      = [System.String]$NamePrefix
+        Generation      = [System.Int16]$Generation
+        MemoryStartupGB = [System.Int64]$MemoryStartupGB
+        ProcessorCount  = [System.Int64]$ProcessorCount
+        SwitchName      = [System.String]$SwitchName
+        StartVM         = [System.Boolean]$StartVM
+        VHDSizeGB       = [System.Int64]$VHDSizeGB
+    }
+
+    # Export Configuration
+    Write-Verbose "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Exporting default configuration to $env:Temp\NewOSDCloudVM.json"
+    $Global:NewOSDCloudVM | ConvertTo-Json -Depth 10 | Out-File -FilePath "$env:TEMP\NewOSDCloudVM.json" -Force
+
+    # Import Custom Configuration
+    $WorkspaceConfiguration = Join-Path (Get-OSDCloudWorkspace) 'Logs\NewOSDCloudVM.json'
+
+    if (Test-Path $WorkspaceConfiguration) {
+        Write-Host -ForegroundColor DarkGray "Reading $WorkspaceConfiguration"
+        $AutomateConfiguration = Get-Content -Path $WorkspaceConfiguration -Raw | ConvertFrom-Json -ErrorAction "Stop" | ConvertTo-Hashtable
+    }
+    if ($AutomateConfiguration) {
+        foreach ($Key in $AutomateConfiguration.Keys) {
+            $NewOSDCloudVM.$Key = $AutomateConfiguration.$Key
+        }
+    }
+
+    # Validate SwitchName
+    if (-not (Get-VMSwitch -Name $Global:NewOSDCloudVM.SwitchName -ErrorAction SilentlyContinue)) {
+        Write-Warning "SwitchName value '$($Global:NewOSDCloudVM.SwitchName)' is not valid."
+        $Global:NewOSDCloudVM.SwitchName = Get-VMSwitch | Select-Object -ExpandProperty Name -First 1
+        Write-Warning "SwitchName value will be set to '$($Global:NewOSDCloudVM.SwitchName)'"
+    }
 
     # Set VM Name
     $VmName = "$($NewOSDCloudVM.NamePrefix)$((Get-Date).ToString('yyMMddHHmmss'))"
@@ -106,11 +108,11 @@ function New-OSDCloudVM {
     $Global:OSDCloudVM = [ordered]@{
         CheckpointVM                = $NewOSDCloudVM.CheckpointVM
         DvdDrivePath                = Join-Path $(Get-OSDCloudWorkspace) 'OSDCloud_NoPrompt.iso'
+        Name                        = $VmName
+        NamePrefix                  = $NewOSDCloudVM.NamePrefix
         Generation                  = $NewOSDCloudVM.Generation
         MemoryStartupBytes          = ($NewOSDCloudVM.MemoryStartupGB * 1GB)
         MemoryStartupGB             = $NewOSDCloudVM.MemoryStartupGB
-        Name                        = $VmName
-        NamePrefix                  = $NewOSDCloudVM.NamePrefix
         ProcessorCount              = $NewOSDCloudVM.ProcessorCount
         SwitchName                  = $NewOSDCloudVM.SwitchName
         StartVM                     = $NewOSDCloudVM.StartVM
@@ -118,17 +120,10 @@ function New-OSDCloudVM {
         VHDSizeBytes                = ($NewOSDCloudVM.VHDSizeGB * 1GB)
         VHDSizeGB                   = [System.Int64]$Global:NewOSDCloudVM.VHDSizeGB
     }
-
-    # Display the current configuration
-    Write-Output $Global:OSDCloudVM
+    $Global:OSDCloudVM
 
     # Create VM VHD
-    if ($OSDCloudVM.SwitchName) {
-        $vm = New-VM -Name $OSDCloudVM.Name -Generation $OSDCloudVM.Generation -MemoryStartupBytes $OSDCloudVM.MemoryStartupBytes -NewVHDPath $OSDCloudVM.VHDPath -NewVHDSizeBytes $OSDCloudVM.VHDSizeBytes -SwitchName $OSDCloudVM.SwitchName -Verbose -ErrorAction Stop
-    }
-    else {
-        $vm = New-VM -Name $OSDCloudVM.Name -Generation $OSDCloudVM.Generation -MemoryStartupBytes $OSDCloudVM.MemoryStartupBytes -NewVHDPath $OSDCloudVM.VHDPath -NewVHDSizeBytes $OSDCloudVM.VHDSizeBytes -Verbose -ErrorAction Stop
-    }
+    $vm = New-VM -Name $OSDCloudVM.Name -Generation $OSDCloudVM.Generation -MemoryStartupBytes $OSDCloudVM.MemoryStartupBytes -NewVHDPath $OSDCloudVM.VHDPath -NewVHDSizeBytes $OSDCloudVM.VHDSizeBytes -SwitchName $OSDCloudVM.SwitchName -Verbose
     
     # Create DVD
     $OSDCloudVM.DvdDrive = $vm | Add-VMDvdDrive -Path $OSDCloudVM.DvdDrivePath -Passthru -Verbose

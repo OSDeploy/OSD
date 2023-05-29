@@ -109,7 +109,7 @@
         "Generation": 2,
         "MemoryStartupGB": 4,
         "ProcessorCount": 1,
-        "SwitchName": "Default Switch",
+        "SwitchName": null,
         "StartVM": true,
         "VHDSizeGB": 64
     },
