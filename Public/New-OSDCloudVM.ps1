@@ -85,7 +85,7 @@ function New-OSDCloudVM {
         }
     }
     else {
-        Write-Host -ForegroundColor Yellow "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Default OSDCloud VM settings will be saved in $WorkspaceConfigurationJson"
+        Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Default OSDCloud VM settings will be saved in $WorkspaceConfigurationJson"
     }
 
     # Update Configuration from Parameters
