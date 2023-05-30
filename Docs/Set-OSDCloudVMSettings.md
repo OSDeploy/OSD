@@ -5,27 +5,27 @@ online version: https://github.com/OSDeploy/OSD/tree/master/Docs
 schema: 2.0.0
 ---
 
-# New-OSDCloudVM
+# Set-OSDCloudVMSettings
 
 ## SYNOPSIS
-Creates a Hyper-V VM for use with OSDCloud
+Sets OSDCloudVM settings stored in the OSDCloud Template
 
 ## SYNTAX
 
 ```
-New-OSDCloudVM [[-CheckpointVM] <Boolean>] [[-Generation] <UInt16>] [[-MemoryStartupGB] <UInt16>]
+Set-OSDCloudVMSettings [[-CheckpointVM] <Boolean>] [[-Generation] <UInt16>] [[-MemoryStartupGB] <UInt16>]
  [[-NamePrefix] <String>] [[-ProcessorCount] <UInt16>] [[-StartVM] <Boolean>] [[-SwitchName] <String>]
  [[-VHDSizeGB] <UInt16>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-Creates a Hyper-V VM for use with OSDCloud
+Sets OSDCloudVM settings stored in the OSDCloud Template
 
 ## EXAMPLES
 
 ### EXAMPLE 1
 ```
-New-OSDCloudVM
+Set-OSDCloudVMSettings -ProcessorCount 2 -MemoryStartupGB 8
 ```
 
 ## PARAMETERS
