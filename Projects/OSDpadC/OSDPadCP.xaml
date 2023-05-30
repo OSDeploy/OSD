@@ -1,0 +1,217 @@
+<Page xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:controls="clr-namespace:BlackPearl.Controls.CoreLibrary;assembly=BlackPearl.Controls.CoreLibrary"
+        x:Name="XamlWindow"
+        Title="OSDPad"
+        Width="840"
+        Height="580"
+        RenderTransformOrigin="0.5,0.5"
+        >
+    <Page.Resources>
+        <ResourceDictionary>
+            <Style TargetType="{x:Type Button}">
+                <Setter Property="Background"
+                        Value="{DynamicResource FlatButtonBackgroundBrush}" />
+                <Setter Property="BorderThickness"
+                        Value="0" />
+                <Setter Property="FontSize"
+                        Value="{DynamicResource FlatButtonFontSize}" />
+                <Setter Property="Foreground"
+                        Value="{DynamicResource FlatButtonForegroundBrush}" />
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="{x:Type Button}">
+                            <Border x:Name="Border"
+                                    Margin="0"
+                                    Background="{TemplateBinding Background}"
+                                    BorderBrush="{TemplateBinding BorderBrush}"
+                                    CornerRadius="5"
+                                    BorderThickness="{TemplateBinding BorderThickness}"
+                                    SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}">
+                                <ContentPresenter x:Name="ContentPresenter"
+                                                  ContentTemplate="{TemplateBinding ContentTemplate}"
+                                                  Content="{TemplateBinding Content}"
+                                                  HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                                  Margin="{TemplateBinding Padding}"
+                                                  VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
+                            </Border>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+                <Style.Triggers>
+                    <Trigger Property="IsMouseOver"
+                             Value="True">
+                        <!-- Windows 11 Theme Dark Blue -->
+                        <Setter Property="Background"
+                                Value="#0096D6" />
+                    </Trigger>
+                    <Trigger Property="IsMouseOver"
+                             Value="False">
+                        <!-- Windows 11 Theme Blue -->
+                        <Setter Property="Background"
+                                Value="#0067C0" />
+                    </Trigger>
+                    <Trigger Property="IsPressed"
+                             Value="True">
+                        <Setter Property="Background"
+                                Value="{DynamicResource FlatButtonPressedBackgroundBrush}" />
+                        <Setter Property="Foreground"
+                                Value="{DynamicResource FlatButtonPressedForegroundBrush}" />
+                    </Trigger>
+                    <Trigger Property="IsEnabled"
+                             Value="False">
+                        <Setter Property="Foreground"
+                                Value="{DynamicResource GrayBrush2}" />
+                    </Trigger>
+                </Style.Triggers>
+            </Style>
+            <Style TargetType="{x:Type ComboBox}">
+                <Setter Property="FontFamily"
+                        Value="Segoe UI" />
+            </Style>
+            <Style TargetType="{x:Type Label}">
+                <Setter Property="FontFamily"
+                        Value="Segoe UI" />
+            </Style>
+            <Style TargetType="{x:Type TextBox}">
+                <Setter Property="FontFamily"
+                        Value="Segoe UI" />
+            </Style>
+            <Style TargetType="{x:Type Window}">
+                <Setter Property="FontFamily"
+                        Value="Segoe UI" />
+                <Setter Property="FontSize"
+                        Value="16" />
+                <Setter Property="Background"
+                        Value="White" />
+                <Setter Property="Foreground"
+                        Value="Black" />
+            </Style>
+        </ResourceDictionary>
+    </Page.Resources>
+    <Page.Background>
+        <RadialGradientBrush GradientOrigin="0.2,0.2"
+                             Center="0.4,0.1"
+                             RadiusX="0.7"
+                             RadiusY="0.8">
+            <RadialGradientBrush.RelativeTransform>
+                <TransformGroup>
+                    <ScaleTransform CenterY="0.5"
+                                    CenterX="0.5" />
+                    <SkewTransform CenterY="0.5"
+                                   CenterX="0.5" />
+                    <RotateTransform Angle="-40.601"
+                                     CenterY="0.5"
+                                     CenterX="0.5" />
+                    <TranslateTransform />
+                </TransformGroup>
+            </RadialGradientBrush.RelativeTransform>
+            <GradientStop Color="White" />
+            <GradientStop Color="#FFF9FFFE"
+                          Offset="0.056" />
+            <GradientStop Color="#FFF8FEFF"
+                          Offset="0.776" />
+            <GradientStop Color="#FFF4FAFF"
+                          Offset="0.264" />
+            <GradientStop Color="White"
+                          Offset="0.506" />
+            <GradientStop Color="AliceBlue"
+                          Offset="1" />
+        </RadialGradientBrush>
+    </Page.Background>
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="40" />
+        </Grid.RowDefinitions>
+        <!-- ScriptSelectionControl -->
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0 0 0 5">
+          <StackPanel Orientation="Vertical" VerticalAlignment="Center" Margin="0 0 15 0">
+           <Label Grid.Row="0"
+               Name="OwnerUser"
+               Content="Owner"
+               FontSize="20"
+               Foreground="#01786A"
+               HorizontalAlignment="Center"
+               VerticalAlignment="Center"/>
+           <ComboBox Grid.Row="0" Width="150"
+                  Name="Owner"
+                  FontSize="16"
+                  SelectedIndex="0" />  
+          </StackPanel>
+           <StackPanel Orientation="Vertical" VerticalAlignment="Center" Margin="0 0 15 0">
+            <Label Grid.Row="0"
+               Name="RepossitoryUser"
+               Content="Repository"
+               FontSize="20"
+               Foreground="#01786A"
+               HorizontalAlignment="Center"
+               VerticalAlignment="Center"/>
+            <ComboBox Grid.Row="0" Width="150"
+                  Name="Repository"
+                  FontSize="16"
+                  SelectedIndex="0" />
+           </StackPanel>
+         <StackPanel Orientation="Vertical" VerticalAlignment="Center" Margin="0 0 15 0">
+          <Label Grid.Row="0"
+               Name="Scriptselection"
+               Content="Scripts"
+               FontSize="20"
+               Foreground="#01786A"
+               HorizontalAlignment="Center"
+               VerticalAlignment="Center"/>
+         <!--ComboBox Grid.Row="0"  Width="250"
+                  Name="ScriptSelectionControl"
+                  FontSize="16"
+                  SelectedIndex="0"/ -->
+         <controls:MultiSelectCombobox ItemSource="{Binding Source, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                       Name="ScriptSelectionControl"
+                                       SelectedItems="{Binding SelectedItems, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                       DisplayMemberPath="Name"
+                                       ItemSeparator=";"
+                                       Height="27"
+                                       Width="250"
+                                       Grid.Row="0"/>
+        </StackPanel>
+         
+         </StackPanel>
+        
+        
+        <!-- ScriptTextControl -->
+        <TextBox Grid.Row="1"
+                 Name="ScriptTextControl"
+                 Text="#This is the OSDPad for CMD and PowerShell"
+                 AcceptsReturn="True"
+                 AcceptsTab="True"
+                 Background="Gainsboro"
+                 FontFamily="Consolas"
+                 FontSize="16"
+                 Foreground="Blue"
+                 HorizontalAlignment="Stretch"
+                 ScrollViewer.HorizontalScrollBarVisibility="Visible"
+                 ScrollViewer.VerticalScrollBarVisibility="Visible"
+                 VerticalAlignment="Stretch"
+                 Margin="0,10" />
+        <!-- BrandingTitle -->
+        <Label Grid.Row="2"
+               Name="BrandingTitleControl"
+               Content="OSDPad"
+               FontSize="20"
+               Foreground="#01786A"
+               HorizontalAlignment="Left"
+               VerticalAlignment="Center"/>
+        <!-- StartButtonControl -->
+        <Button Grid.Row="2"
+                Name="StartButtonControl"
+                Content="RUN"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Center"
+                FontSize="16"
+                Foreground="White"
+                Height="40"
+                Width="130" />
+    </Grid>
+</Page>
