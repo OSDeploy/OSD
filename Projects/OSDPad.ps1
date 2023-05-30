@@ -175,6 +175,11 @@ $StartButtonControl.add_Click({
     $Global:OSDPadScriptBlock = [scriptblock]::Create($ScriptTextControl.Text)
 
     if ($Global:OSDPadScriptBlock) {
+       if ($ScriptSelectionControl.SelectedValue -like "*#Requires -PSEdition Core*")  {
+            Write-Host -ForegroundColor DarkCyan "PowerShell Core detected"
+            $global:PwshCore = $true
+        }
+       
         if ($ScriptSelectionControl.SelectedValue -eq 'New PowerShell Script.ps1') {
             $ScriptFile = 'New PowerShell Script.ps1'
         }
@@ -191,8 +196,16 @@ $StartButtonControl.add_Click({
         #Invoke-Command $Global:OSDPadScriptBlock
         #Start-Process PowerShell.exe -ArgumentList "-NoExit Invoke-Command -ScriptBlock {$Global:OSDPadScriptBlock}"
 
-        Write-Host -ForegroundColor DarkCyan "Start-Process -WorkingDirectory `"$env:Temp\OSDPad`" -FilePath PowerShell.exe -ArgumentList '-NoLogo -NoExit',`"-File `"$ScriptFile`"`""
-        Start-Process -WorkingDirectory "$env:Temp\OSDPad" -FilePath PowerShell.exe -ArgumentList '-NoLogo -NoExit',"-File `"$ScriptFile`""
+        if ($global:PwshCore -eq $true) {
+            Write-Host -ForegroundColor DarkCyan "Start-Process -WorkingDirectory `"$env:Temp\OSDPad`" -FilePath pwsh.exe -ArgumentList '-NoLogo -NoExit',`"-File `"$ScriptFile`"`""
+            Start-Process -WorkingDirectory "$env:Temp\OSDPad" -FilePath pwsh.exe -ArgumentList '-NoLogo -NoExit',"-File `"$ScriptFile`"" -Wait
+        }
+        else {
+            Write-Host -ForegroundColor DarkCyan "Start-Process -WorkingDirectory `"$env:Temp\OSDPad`" -FilePath PowerShell.exe -ArgumentList '-NoLogo -NoExit',`"-File `"$ScriptFile`"`""
+            Start-Process -WorkingDirectory "$env:Temp\OSDPad" -FilePath PowerShell.exe -ArgumentList '-NoLogo -NoExit',"-File `"$ScriptFile`"" -Wait
+        }
+        #Write-Host -ForegroundColor DarkCyan "Start-Process -WorkingDirectory `"$env:Temp\OSDPad`" -FilePath PowerShell.exe -ArgumentList '-NoLogo -NoExit',`"-File `"$ScriptFile`"`""
+        #Start-Process -WorkingDirectory "$env:Temp\OSDPad" -FilePath PowerShell.exe -ArgumentList '-NoLogo -NoExit',"-File `"$ScriptFile`""
     }
     #Write-Host -ForegroundColor DarkGray "========================================================================="
 })
