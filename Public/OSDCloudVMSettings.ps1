@@ -28,7 +28,7 @@ function Get-OSDCloudVMSettings {
     # Import Template Defaults
     $TemplateConfigurationJson = "$env:ProgramData\OSDCloud\Logs\NewOSDCloudVM.json"
     if (Test-Path $TemplateConfigurationJson) {
-        Write-Host -ForegroundColor DarkGray "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Importing OSDCloudVM Template settings at $TemplateConfigurationJson"
+        Write-Host -ForegroundColor DarkGray "Importing OSDCloudVM Template settings at $TemplateConfigurationJson"
         $TemplateConfiguration = Get-Content -Path $TemplateConfigurationJson -Raw | ConvertFrom-Json -ErrorAction "Stop" | ConvertTo-Hashtable
         if ($TemplateConfiguration) {
             foreach ($Key in $TemplateConfiguration.Keys) {
@@ -40,7 +40,7 @@ function Get-OSDCloudVMSettings {
     # Import Workspace Defaults
     $WorkspaceConfigurationJson = Join-Path (Get-OSDCloudWorkspace) 'Logs\NewOSDCloudVM.json'
     if (Test-Path $WorkspaceConfigurationJson) {
-        Write-Host -ForegroundColor DarkGray "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Importing OSDCloudVM Workspace settings at $WorkspaceConfigurationJson"
+        Write-Host -ForegroundColor DarkGray "Importing OSDCloudVM Workspace settings at $WorkspaceConfigurationJson"
         $WorkspaceConfiguration = Get-Content -Path $WorkspaceConfigurationJson -Raw | ConvertFrom-Json -ErrorAction "Stop" | ConvertTo-Hashtable
         if ($WorkspaceConfiguration) {
             foreach ($Key in $WorkspaceConfiguration.Keys) {
@@ -72,13 +72,13 @@ function Reset-OSDCloudVMSettings {
 
     $TemplateConfigurationJson = "$env:ProgramData\OSDCloud\Logs\NewOSDCloudVM.json"
     if (Test-Path $TemplateConfigurationJson) {
-        Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Removing OSDCloudVM Template configuration at $TemplateConfigurationJson"
+        Write-Warning "Removing OSDCloudVM Template configuration at $TemplateConfigurationJson"
         Remove-Item -Path $TemplateConfigurationJson -Force -ErrorAction SilentlyContinue | Out-Null
     }
 
     $WorkspaceConfigurationJson = Join-Path (Get-OSDCloudWorkspace) 'Logs\NewOSDCloudVM.json'
     if (Test-Path $WorkspaceConfigurationJson) {
-        Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Removing OSDCloudVM Workspace configuration at $WorkspaceConfigurationJson"
+        Write-Warning "Removing OSDCloudVM Workspace configuration at $WorkspaceConfigurationJson"
         Remove-Item -Path $WorkspaceConfigurationJson -Force -ErrorAction SilentlyContinue | Out-Null
     }
 
@@ -142,7 +142,7 @@ function Set-OSDCloudVMSettings {
     # Import Template Defaults
     $TemplateConfigurationJson = "$env:ProgramData\OSDCloud\Logs\NewOSDCloudVM.json"
     if (Test-Path $TemplateConfigurationJson) {
-        Write-Host -ForegroundColor DarkGray "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Importing OSDCloudVM Template settings at $TemplateConfigurationJson"
+        Write-Host -ForegroundColor DarkGray "Importing OSDCloudVM Template settings at $TemplateConfigurationJson"
         $TemplateConfiguration = Get-Content -Path $TemplateConfigurationJson -Raw | ConvertFrom-Json -ErrorAction "Stop" | ConvertTo-Hashtable
         if ($TemplateConfiguration) {
             foreach ($Key in $TemplateConfiguration.Keys) {
@@ -172,9 +172,10 @@ function Set-OSDCloudVMSettings {
     }
 
     # Export the updated configuration
-    Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Exporting updated configuration to $TemplateConfigurationJson"
+    Write-Host -ForegroundColor Cyan "Exporting updated configuration to $TemplateConfigurationJson"
     $OSDCloudVMSettings | ConvertTo-Json -Depth 10 | Out-File -FilePath $TemplateConfigurationJson -Force
 
     # Display the updated settings
     Return $OSDCloudVMSettings
 }
+Register-ArgumentCompleter -CommandName Set-OSDCloudVMSettings -ParameterName 'SwitchName' -ScriptBlock {Get-VMSwitch | Select-Object -ExpandProperty Name | ForEach-Object {if ($_.Contains(' ')) {"'$_'"} else {$_}}}

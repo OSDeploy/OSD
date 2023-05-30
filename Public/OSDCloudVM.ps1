@@ -44,39 +44,8 @@ function New-OSDCloudVM {
         $VHDSizeGB
     )
 
-    # OSDCloudVM Module Defaults
-    $Global:NewOSDCloudVM = $Global:OSDModuleResource.NewOSDCloudVM
-
-    # Import Template Defaults
-    $TemplateLogs = "$env:ProgramData\OSDCloud\Logs"
-    if (-NOT (Test-Path $TemplateLogs)) {
-        $null = New-Item -Path $TemplateLogs -ItemType Directory -Force | Out-Null
-    }
-    $TemplateConfigurationJson = "$env:ProgramData\OSDCloud\Logs\NewOSDCloudVM.json"
-    if (Test-Path $TemplateConfigurationJson) {
-        Write-Host -ForegroundColor DarkGray "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Importing OSDCloudVM Template settings at $TemplateConfigurationJson"
-        $TemplateConfiguration = Get-Content -Path $TemplateConfigurationJson -Raw | ConvertFrom-Json -ErrorAction "Stop" | ConvertTo-Hashtable
-        if ($TemplateConfiguration) {
-            foreach ($Key in $TemplateConfiguration.Keys) {
-                $NewOSDCloudVM.$Key = $TemplateConfiguration.$Key
-            }
-        }
-    }
-
-    # Import Workspace Defaults
-    $WorkspaceConfigurationJson = Join-Path (Get-OSDCloudWorkspace) 'Logs\NewOSDCloudVM.json'
-    if (Test-Path $WorkspaceConfigurationJson) {
-        Write-Host -ForegroundColor DarkGray "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Importing OSDCloudVM Workspace settings at $WorkspaceConfigurationJson"
-        $WorkspaceConfiguration = Get-Content -Path $WorkspaceConfigurationJson -Raw | ConvertFrom-Json -ErrorAction "Stop" | ConvertTo-Hashtable
-        if ($WorkspaceConfiguration) {
-            foreach ($Key in $WorkspaceConfiguration.Keys) {
-                $NewOSDCloudVM.$Key = $WorkspaceConfiguration.$Key
-            }
-        }
-    }
-    else {
-        Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) OSDCloudVM settings will be saved at $WorkspaceConfigurationJson"
-    }
+    # OSDCloudVM
+    $Global:NewOSDCloudVM = Get-OSDCloudVMSettings
 
     # Update Configuration from Parameters
     if ($PSBoundParameters.ContainsKey('CheckpointVM')) {$Global:NewOSDCloudVM.CheckpointVM = $CheckpointVM}
@@ -99,7 +68,8 @@ function New-OSDCloudVM {
     }
 
     # Export the updated configuration
-    Write-Host -ForegroundColor DarkGray "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Exporting updated configuration to $WorkspaceConfigurationJson"
+    $WorkspaceConfigurationJson = Join-Path (Get-OSDCloudWorkspace) 'Logs\NewOSDCloudVM.json'
+    Write-Host -ForegroundColor DarkGray "Exporting updated configuration to $WorkspaceConfigurationJson"
     $Global:NewOSDCloudVM | ConvertTo-Json -Depth 10 | Out-File -FilePath $WorkspaceConfigurationJson -Force
 
     if ($Reset) {
@@ -193,7 +163,7 @@ function New-OSDCloudVM {
 
         #Export Final Configuration
         $Global:OSDCloudVM.VM = $vm
-        Write-Verbose "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Exporting current configuration to $env:Temp\OSDCloudVM.json"
+        Write-Verbose "Exporting current configuration to $env:Temp\OSDCloudVM.json"
         $Global:OSDCloudVM | ConvertTo-Json -Depth 2 | Out-File -FilePath "$env:TEMP\OSDCloudVM.json" -Force
 
         if ($Global:OSDCloudVM.CheckpointVM -eq $true) {
