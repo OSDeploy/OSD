@@ -1,4 +1,4 @@
-function Start-OSDCloudToolbox {
+function Start-OSDCloudCommunity {
     [CmdletBinding()]
     param (
         [Parameter(Position = 0)]
@@ -52,6 +52,6 @@ function Start-OSDCloudToolbox {
             RepoFolder      = $RepoFolder
         }
     }
-    Start-OSDPad @OSDPadParams
+    Start-OSDPadC @OSDPadParams
     #endregion
 }
