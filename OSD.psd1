@@ -306,7 +306,11 @@
         'Invoke-OSDInfo',
         'Update-IntelDriversCatalog',
         'Start-OSDCloudToolbox',
-        'New-OSDCloudVM'
+        'Get-OSDCloudVMDefaults',
+        'Get-OSDCloudVMSettings',
+        'New-OSDCloudVM',
+        'Reset-OSDCloudVMSettings',
+        'Set-OSDCloudVMSettings'
     )
     CmdletsToExport = @()
     VariablesToExport = @()
