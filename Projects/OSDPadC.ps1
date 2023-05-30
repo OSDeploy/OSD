@@ -28,9 +28,7 @@ $Global:MyScriptDir = [System.IO.Path]::GetDirectoryName($myInvocation.MyCommand
 #   Load Assemblies
 #================================================
 [System.Reflection.Assembly]::LoadWithPartialName("presentationframework") | Out-Null
-[System.Reflection.Assembly]::LoadFrom("$Global:MyScriptDir\assembly\BlackPearl.Controls.Common.dll") | Out-Null
-[System.Reflection.Assembly]::LoadFrom("$Global:MyScriptDir\assembly\BlackPearl.Controls.CoreLibrary.dll") | Out-Null
-
+[System.Reflection.Assembly]::LoadFrom("$Global:MyScriptDir\assembly\System.Windows.Interactivity.dll") | Out-Null
 #================================================
 #   Set PowerShell Window Title
 #================================================
@@ -100,7 +98,7 @@ if ($Global:OSDPad) {
 #================================================
 #   Initialize Empty Script
 #================================================
-#$ScriptSelectionControl.Items.Add('New PowerShell Script.ps1') | Out-Null
+$ScriptSelectionControl.Items.Add('New PowerShell Script.ps1') | Out-Null
 
 if (-NOT (Get-Variable -Name 'New PowerShell Script.ps1' -Scope Global -ErrorAction Ignore)) {
     New-Variable -Name 'New PowerShell Script.ps1' -Value '#Paint on your blank canvas' -Scope Global -Force -ErrorAction Stop
@@ -116,7 +114,7 @@ function Set-OSDPadContent {
         $ScriptTextControl.IsReadOnly = $false
         $ScriptTextControl.Text = (Get-Variable -Name 'New PowerShell Script.ps1' -Scope Global).Value
         $StartButtonControl.Visibility = "Visible"
-        $BrandingTitleControl.Content = 'OSDPad'
+        $BrandingTitleControl.Content = 'OSDPad Community'
         #$BrandingTitleControl.Visibility = "Collapsed"
     }
     else {
@@ -127,7 +125,7 @@ function Set-OSDPadContent {
         Write-Host -ForegroundColor DarkGray $Global:WorkingScript.Download
         #Write-Host -ForegroundColor DarkCyan "Get-Variable -Name $($Global:WorkingScript.Guid)"
 
-        #$ScriptTextControl.Text = (Get-Variable -Name $Global:WorkingScript.Guid).Value
+        $ScriptTextControl.Text = (Get-Variable -Name $Global:WorkingScript.Guid).Value
 
         if ($Global:WorkingScript.Name -like "*.md") {
             $ScriptTextControl.Foreground = 'Black'

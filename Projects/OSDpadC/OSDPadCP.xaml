@@ -2,10 +2,9 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:controls="clr-namespace:BlackPearl.Controls.CoreLibrary;assembly=BlackPearl.Controls.CoreLibrary"
         x:Name="XamlWindow"
         Title="OSDPad"
-        Width="840"
+        Width="800"
         Height="580"
         RenderTransformOrigin="0.5,0.5"
         >
@@ -121,64 +120,67 @@
                           Offset="1" />
         </RadialGradientBrush>
     </Page.Background>
-    <Grid Margin="10">
+     <Grid Margin="10">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
             <RowDefinition Height="40" />
         </Grid.RowDefinitions>
         <!-- ScriptSelectionControl -->
-        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0 0 0 5">
-          <StackPanel Orientation="Vertical" VerticalAlignment="Center" Margin="0 0 15 0">
-           <Label Grid.Row="0"
-               Name="OwnerUser"
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0 5 0 5">
+         <StackPanel Orientation="Vertical" VerticalAlignment="Center" Margin="0 0 15 0">
+             <Label Grid.Row="0"
+               Name="Owner"
                Content="Owner"
                FontSize="20"
                Foreground="#01786A"
                HorizontalAlignment="Center"
                VerticalAlignment="Center"/>
-           <ComboBox Grid.Row="0" Width="150"
-                  Name="Owner"
-                  FontSize="16"
-                  SelectedIndex="0" />  
-          </StackPanel>
-           <StackPanel Orientation="Vertical" VerticalAlignment="Center" Margin="0 0 15 0">
-            <Label Grid.Row="0"
-               Name="RepossitoryUser"
+            <ComboBox Grid.Row="0" Width="150"
+                      Name="OwnerControl"
+                      FontSize="16"
+                      SelectedIndex="0" />
+           </StackPanel>
+          <StackPanel Orientation="Vertical" VerticalAlignment="Center" Margin="0 0 15 0">
+             <Label Grid.Row="0"
+               Name="Repository"
                Content="Repository"
                FontSize="20"
                Foreground="#01786A"
                HorizontalAlignment="Center"
                VerticalAlignment="Center"/>
             <ComboBox Grid.Row="0" Width="150"
-                  Name="Repository"
-                  FontSize="16"
-                  SelectedIndex="0" />
+                      Name="RepositoryControl"
+                      FontSize="16"
+                      SelectedIndex="0" />
+           </StackPanel>
+          <StackPanel Orientation="Vertical" VerticalAlignment="Center" Margin="0 0 15 0">
+             <Label Grid.Row="0"
+               Name="Category"
+               Content="Category"
+               FontSize="20"
+               Foreground="#01786A"
+               HorizontalAlignment="Center"
+               VerticalAlignment="Center"/>
+            <ComboBox Grid.Row="0" Width="150"
+                      Name="CategoryControl"
+                      FontSize="16"
+                      SelectedIndex="0" />
            </StackPanel>
          <StackPanel Orientation="Vertical" VerticalAlignment="Center" Margin="0 0 15 0">
-          <Label Grid.Row="0"
-               Name="Scriptselection"
+             <Label Grid.Row="0"
+               Name="ScriptSelect"
                Content="Scripts"
                FontSize="20"
                Foreground="#01786A"
                HorizontalAlignment="Center"
                VerticalAlignment="Center"/>
-         <!--ComboBox Grid.Row="0"  Width="250"
-                  Name="ScriptSelectionControl"
-                  FontSize="16"
-                  SelectedIndex="0"/ -->
-         <controls:MultiSelectCombobox ItemSource="{Binding Source, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                                       Name="ScriptSelectionControl"
-                                       SelectedItems="{Binding SelectedItems, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                                       DisplayMemberPath="Name"
-                                       ItemSeparator=";"
-                                       Height="27"
-                                       Width="250"
-                                       Grid.Row="0"/>
+            <ComboBox Grid.Row="0" Width="250"
+                      Name="ScriptSelectionControl"
+                      FontSize="16"
+                      SelectedIndex="0" />
+           </StackPanel>
         </StackPanel>
-         
-         </StackPanel>
-        
         
         <!-- ScriptTextControl -->
         <TextBox Grid.Row="1"
@@ -198,7 +200,7 @@
         <!-- BrandingTitle -->
         <Label Grid.Row="2"
                Name="BrandingTitleControl"
-               Content="OSDPad"
+               Content="OSDPad Community"
                FontSize="20"
                Foreground="#01786A"
                HorizontalAlignment="Left"
@@ -214,4 +216,4 @@
                 Height="40"
                 Width="130" />
     </Grid>
-</Page>
+   </Page>
