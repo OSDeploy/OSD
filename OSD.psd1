@@ -4,13 +4,13 @@
 
 @{
     RootModule              = 'OSD.psm1'
-    ModuleVersion           = '23.5.28.2'
+    ModuleVersion           = '23.5.31.1'
     CompatiblePSEditions    = @('Desktop')
     GUID                    = '9fe5b9b6-0224-4d87-9018-a8978529f6f5'
     Author                  = 'David Segura . Gary Blok . Jérôme Bezet-Torres . Damien Van Robaeys . Mike Marable . Akos Bakos'
     CompanyName             = 'OSD Community'
     Copyright               = '(c) 2023 OSDeploy'
-    Description             = 'OSDCloudVM Edition'
+    Description             = 'PwshHub Edition'
     PowerShellVersion       = '5.1'
     FormatsToProcess        = @(
         '.\Format\MsUpCat.Format.ps1xml'
@@ -310,7 +310,9 @@
         'Get-OSDCloudVMSettings',
         'New-OSDCloudVM',
         'Reset-OSDCloudVMSettings',
-        'Set-OSDCloudVMSettings'
+        'Set-OSDCloudVMSettings',
+        'Start-OSDPadCategories',
+        'Start-PwshHub'
     )
     CmdletsToExport = @()
     VariablesToExport = @()

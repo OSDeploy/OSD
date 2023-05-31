@@ -18,8 +18,8 @@ function Hide-PowershellWindow() {
 function Show-PowershellWindow() {
     $null = $showWindowAsync::ShowWindowAsync((Get-Process -Id $pid).MainWindowHandle, 10)
 }
-Hide-CmdWindow
-Hide-PowershellWindow
+#Hide-CmdWindow
+#Hide-PowershellWindow
 #================================================
 #   Get MyScriptDir
 #================================================
@@ -71,70 +71,133 @@ function LoadForm {
 #================================================
 #   LoadForm
 #================================================
-LoadForm -XamlPath (Join-Path $Global:MyScriptDir 'OSDPadC.xaml')
+LoadForm -XamlPath (Join-Path $Global:MyScriptDir 'OSDPadCategories.xaml')
 #================================================
-#   Initialize Script Selection
+#   Initialize Category Selection
 #================================================
-if ($Global:OSDPad) {
-    $Global:OSDPad | ForEach-Object {
-        $ScriptSelectionControl.Items.Add($_.Path) | Out-Null
-        New-Variable -Name $_.Guid -Value $($_.ContentRAW) -Force -Scope Global
+$ScriptLabel.Visibility = "Collapsed"
+$ScriptCombobox.Visibility = "Collapsed"
 
-        if ($_.Path -like "*Readme.md") {
-            $ScriptSelectionControl.SelectedValue = $_.Path
+if ($Global:OSDPadCategories) {
+    $Global:OSDPadCategories | ForEach-Object {
+        $CategoryCombobox.Items.Add($_.Name) | Out-Null
+    }
+}
+$Global:OSDPadScripts = $null
+$Global:OSDPadScriptsContent = $null
+#================================================
+#   Set-OSDPadScript
+#================================================
+function Set-OSDPadScript {
+    $Global:OSDPadScripts = $null
+    $Global:OSDPadScriptsContent = $null
+
+    $RepoOwner = $Global:OSDPadRepository.Owner
+    $RepoName = $Global:OSDPadRepository.Name
+    $RepoFolder = $CategoryCombobox.SelectedItem
+
+    if ($RepoFolder) {
+        $Params = @{
+            Method = 'GET'
+            Uri = "https://api.github.com/repos/$RepoOwner/$RepoName/contents/$RepoFolder"
+            UseBasicParsing = $true
         }
-        if ($Global:OSDPadBranding.Title -eq 'OSDPad') {
-            switch ($RepoType) {
-                'GitHub' {
-                    $Global:OSDPadBranding.Title = "github.com/$RepoOwner/$RepoName/"
-                }
-                'GitLab' {
-                    $Global:OSDPadBranding.Title = "$RepoDomain/$RepoName/"
-                }
+    
+        try {
+            $Global:OSDPadScripts = Invoke-RestMethod @Params -ErrorAction Stop
+        }
+        catch {
+            Write-Warning $_
+            Break
+        }
+        $Global:OSDPadScripts = $Global:OSDPadScripts | Where-Object {($_.name -like "*.md") -or ($_.name -like "*.ps1")} | Sort-Object Name
+        
+        $Global:OSDPadScriptsContent = foreach ($Item in $Global:OSDPadScripts) {
+            Write-Host -ForegroundColor DarkGray $Item.download_url
+            try {
+                $ScriptWebRequest = Invoke-WebRequest -Uri $Item.download_url -UseBasicParsing -ErrorAction Stop
+            }
+            catch {
+                Write-Warning $_
+                $ScriptWebRequest = $null
+                Continue
+            }
+
+            $ObjectProperties = @{
+                RepoOwner       = $RepoOwner
+                RepoName        = $RepoName
+                RepoFolder      = $RepoFolder
+                Name            = $Item.name
+                Type            = $Item.type
+                Path            = $Item.path
+                Size            = $Item.size
+                SHA             = $Item.sha
+                Git             = $Item.git_url
+                Download        = $Item.download_url
+                ContentRAW      = $ScriptWebRequest.Content
+                #NodeId         = $FileContent.node_id
+                #Content        = $FileContent.content
+                #Encoding       = $FileContent.encoding
+            }
+            New-Object -TypeName PSObject -Property $ObjectProperties
+        }
+    }
+    if ($Global:OSDPadScriptsContent) {  
+        # Clear existing content
+        $ScriptCombobox.Items.Clear()
+    
+        $Global:OSDPadScriptsContent | ForEach-Object {
+            $ScriptCombobox.Items.Add($_.Name) | Out-Null
+            New-Variable -Name $_.SHA -Value $($_.ContentRAW) -Force -Scope Global
+    
+            $ScriptLabel.Visibility = "Visible"
+            $ScriptCombobox.Visibility = "Visible"
+    
+            if ($_.Path -like "*Readme.md") {
+                $ScriptCombobox.SelectedValue = $_.Name
+            }
+            else {
+                $ScriptCombobox.SelectedIndex = 0
             }
         }
     }
+    else {
+        Write-Verbose "Results have NOT been gathered" -Verbose
+        $ScriptLabel.Visibility = "Collapsed"
+        $ScriptCombobox.Visibility = "Collapsed"
+    }
 }
-#================================================
-#   Initialize Empty Script
-#================================================
-$ScriptSelectionControl.Items.Add('New PowerShell Script.ps1') | Out-Null
-
-if (-NOT (Get-Variable -Name 'New PowerShell Script.ps1' -Scope Global -ErrorAction Ignore)) {
-    New-Variable -Name 'New PowerShell Script.ps1' -Value '#This script is empty' -Scope Global -Force -ErrorAction Stop
-}
-Write-Host -ForegroundColor DarkGray "========================================================================="
 #================================================
 #   Set-OSDPadContent
 #================================================
 function Set-OSDPadContent {
-    if ($ScriptSelectionControl.SelectedValue -eq 'New PowerShell Script.ps1') {
+    if ($ScriptCombobox.SelectedValue -eq 'New PowerShell Script.ps1') {
         Write-Host -ForegroundColor Cyan 'New PowerShell Script.ps1'
-        $ScriptTextControl.Foreground = 'Blue'
-        $ScriptTextControl.IsReadOnly = $false
-        $ScriptTextControl.Text = (Get-Variable -Name 'New PowerShell Script.ps1' -Scope Global).Value
+        $ScriptTextBox.Foreground = 'Blue'
+        $ScriptTextBox.IsReadOnly = $false
+        $ScriptTextBox.Text = (Get-Variable -Name 'New PowerShell Script.ps1' -Scope Global).Value
         $StartButtonControl.Visibility = "Visible"
-        $BrandingTitleControl.Content = 'OSDPad Community'
+        $BrandingTitleControl.Content = $Global:OSDPadBranding.RepoName
         #$BrandingTitleControl.Visibility = "Collapsed"
     }
     else {
-        #$BrandingTitleControl.Visibility = "Visible"
-        $Global:WorkingScript = $Global:OSDPad | Where-Object {$_.Path -eq $ScriptSelectionControl.SelectedValue} | Select-Object -First 1
-        Write-Host -ForegroundColor Cyan $Global:WorkingScript.Path
-        Write-Host -ForegroundColor DarkGray $Global:WorkingScript.Git
-        Write-Host -ForegroundColor DarkGray $Global:WorkingScript.Download
+        $Global:WorkingScript = $Global:OSDPadScriptsContent | Where-Object {$_.Name -eq $ScriptCombobox.SelectedValue} | Select-Object -First 1
+
+        #Write-Host -ForegroundColor Cyan $Global:WorkingScript.Path
+        #Write-Host -ForegroundColor DarkGray $Global:WorkingScript.Git
+        #Write-Host -ForegroundColor DarkGray $Global:WorkingScript.Download
         #Write-Host -ForegroundColor DarkCyan "Get-Variable -Name $($Global:WorkingScript.Guid)"
 
-        $ScriptTextControl.Text = (Get-Variable -Name $Global:WorkingScript.Guid).Value
+        $ScriptTextBox.Text = $Global:WorkingScript.ContentRAW
 
         if ($Global:WorkingScript.Name -like "*.md") {
-            $ScriptTextControl.Foreground = 'Black'
-            $ScriptTextControl.IsReadOnly = $true
+            $ScriptTextBox.Foreground = 'Black'
+            $ScriptTextBox.IsReadOnly = $true
             $StartButtonControl.Visibility = "Collapsed"
         }
         else {
-            $ScriptTextControl.Foreground = 'Blue'
-            $ScriptTextControl.IsReadOnly = $false
+            $ScriptTextBox.Foreground = 'Blue'
+            $ScriptTextBox.IsReadOnly = $false
             $StartButtonControl.Visibility = "Visible"
         }
         $BrandingTitleControl.Content = $Global:OSDPadBranding.Title
@@ -143,39 +206,36 @@ function Set-OSDPadContent {
         if ($Item -eq 'Branding') {$BrandingTitleControl.Visibility = "Collapsed"}
         if ($Item -eq 'Script') {
             $Global:XamlWindow.Height="140"
-            $ScriptTextControl.Visibility = "Collapsed"
+            $ScriptTextBox.Visibility = "Collapsed"
         }
     }
-    Write-Host -ForegroundColor DarkGray "========================================================================="
 }
 
-Set-OSDPadContent
+#Set-OSDPadContent
 #================================================
 #   Change Selection
 #================================================
-<# $ScriptSelectionControl.add_SelectionChanged({
-    Set-OSDPadContent
-}) #>
-$ScriptSelectionControl.add_SelectionChanged({
+$CategoryCombobox.add_SelectionChanged({
+    #Write-Verbose "Category Selection Changed" -Verbose
+    Set-OSDPadScript
+})
+$ScriptCombobox.add_SelectionChanged({
+    #Write-Verbose "Script Selection Changed" -Verbose
     Set-OSDPadContent
 })
-$ScriptTextControl.add_TextChanged({
-    if ($ScriptSelectionControl.SelectedValue -eq 'New PowerShell Script.ps1') {
-        Set-Variable -Name 'New PowerShell Script.ps1' -Value $($ScriptTextControl.Text) -Scope Global -Force
-    }
-    else {
-        Set-Variable -Name $($Global:WorkingScript.Guid) -Value $($ScriptTextControl.Text) -Scope Global -Force
-    }
+$ScriptTextBox.add_TextChanged({
+    #Write-Verbose "Script Text Changed" -Verbose
+    #Set-Variable -Name $($Global:WorkingScript.ContentRAW) -Value $($ScriptTextBox.Text) -Scope Global -Force -ErrorAction Ignore
 })
 #================================================
 #   GO
 #================================================
 $StartButtonControl.add_Click({
     Write-Host -ForegroundColor Cyan "Start-Process"
-    $Global:OSDPadScriptBlock = [scriptblock]::Create($ScriptTextControl.Text)
+    $Global:OSDPadScriptBlock = [scriptblock]::Create($ScriptTextBox.Text)
 
     if ($Global:OSDPadScriptBlock) {
-        if ($ScriptSelectionControl.SelectedValue -eq 'New PowerShell Script.ps1') {
+        if ($ScriptCombobox.SelectedValue -eq 'New PowerShell Script.ps1') {
             $ScriptFile = 'New PowerShell Script.ps1'
         }
         else {

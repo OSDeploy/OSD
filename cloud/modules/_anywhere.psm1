@@ -122,8 +122,6 @@ function osdcloud-UpdateModuleFilesManually {
     }
     if (Test-HPIASupport -eq $true){Invoke-Expression (Invoke-RestMethod -Uri 'https://raw.githubusercontent.com/OSDeploy/OSD/master/cloud/modules/deviceshp.psm1')}
 }
-
-
 function osdcloud-InstallModuleAzAccounts {
     [CmdletBinding()]
     param ()

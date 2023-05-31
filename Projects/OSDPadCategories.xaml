@@ -122,21 +122,48 @@
                           Offset="1" />
         </RadialGradientBrush>
     </Window.Background>
-    <Grid Margin="10">
+    <Grid Margin="5">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
             <RowDefinition Height="40" />
         </Grid.RowDefinitions>
         <!-- ScriptSelectionControl -->
-        <ComboBox Grid.Row="0"
-                  Name="ScriptSelectionControl"
-                  FontSize="14"
-                  SelectedIndex="0" />
-        <!-- ScriptTextControl -->
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="0 0 0 0">
+            <StackPanel Orientation="Vertical" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="0 0 0 0">
+             <Label Grid.Row="0"
+               Name="CategoryLabel"
+               Content="Category"
+               FontSize="16"
+               Foreground="#01786A"
+               Margin="0,0"
+               HorizontalAlignment="Left"
+               VerticalAlignment="Top"/>
+                <ComboBox Grid.Row="0"
+                        Name="CategoryCombobox"
+                        FontSize="14"
+                        Width = "175"
+                        SelectedIndex="-1" />
+            </StackPanel>
+            <StackPanel Orientation="Vertical" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="0 0 0 0">
+             <Label Grid.Row="0"
+               Name="ScriptLabel"
+               Content="Script"
+               FontSize="16"
+               Foreground="#01786A"
+               Margin="0,0"
+               HorizontalAlignment="Left"
+               VerticalAlignment="Top"/>
+                <ComboBox Grid.Row="0"
+                        Name="ScriptCombobox"
+                        FontSize="14"
+                        SelectedIndex="0" />
+            </StackPanel>
+        </StackPanel>
+        <!-- ScriptTextBox -->
         <TextBox Grid.Row="1"
-                 Name="ScriptTextControl"
-                 Text="#This is the OSDPad for CMD and PowerShell"
+                 Name="ScriptTextBox"
+                 Text="#Select a Category, then select a Script to run."
                  AcceptsReturn="True"
                  AcceptsTab="True"
                  Background="Gainsboro"

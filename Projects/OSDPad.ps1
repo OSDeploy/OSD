@@ -101,7 +101,7 @@ if ($Global:OSDPad) {
 $ScriptSelectionControl.Items.Add('New PowerShell Script.ps1') | Out-Null
 
 if (-NOT (Get-Variable -Name 'New PowerShell Script.ps1' -Scope Global -ErrorAction Ignore)) {
-    New-Variable -Name 'New PowerShell Script.ps1' -Value '#Paint on your blank canvas' -Scope Global -Force -ErrorAction Stop
+    New-Variable -Name 'New PowerShell Script.ps1' -Value '#This script is empty' -Scope Global -Force -ErrorAction Stop
 }
 Write-Host -ForegroundColor DarkGray "========================================================================="
 #================================================
