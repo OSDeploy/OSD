@@ -143,7 +143,7 @@ function osdcloud-TrustPSGallery {
         if ($PSRepository) {
             if ($PSRepository.InstallationPolicy -ne 'Trusted') {
                 Write-Host -ForegroundColor DarkGray 'Set-PSRepository PSGallery Trusted [CurrentUser]'
-                Set-PSRepository -Name PSGallery -InstallationPolicy Trusted
+                Set-PSRepository -Name PSGallery -InstallationPolicy Trusted -Scope CurrentUser
             }
         }
     }
