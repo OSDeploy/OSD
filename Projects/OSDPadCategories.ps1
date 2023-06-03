@@ -153,7 +153,7 @@ function Set-OSDPadScript {
             $ScriptLabel.Visibility = "Visible"
             $ScriptCombobox.Visibility = "Visible"
     
-            if ($_.Path -like "*Readme.md") {
+            if ($_.Path -match 'README.md') {
                 $ScriptCombobox.SelectedValue = $_.Name
             }
             else {
