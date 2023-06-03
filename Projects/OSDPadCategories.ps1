@@ -233,25 +233,38 @@ $StartButtonControl.add_Click({
     $Global:OSDPadScriptBlock = [scriptblock]::Create($ScriptTextBox.Text)
 
     if ($Global:OSDPadScriptBlock) {
-        if ($ScriptCombobox.SelectedValue -eq 'New PowerShell Script.ps1') {
-            $ScriptFile = 'New PowerShell Script.ps1'
-        }
-        else {
-            $ScriptFile = $Global:WorkingScript.Name
-        }
-        if (!(Test-Path "$env:Temp\OSDPad")) {New-Item "$env:Temp\OSDPad" -ItemType Directory}
+        if ($ScriptSelectionControl.SelectedValue -like "*#Requires -PSEdition Core*")  {
+             Write-Host -ForegroundColor DarkCyan "PowerShell Core detected"
+             $global:PwshCore = $true
+         }
         
-        $ScriptPath = "$env:Temp\OSDPad\$ScriptFile"
-        Write-Host -ForegroundColor DarkGray "Saving contents of `$Global:OSDPadScriptBlock` to $ScriptPath"
-        $Global:OSDPadScriptBlock | Out-File $ScriptPath -Encoding utf8 -Width 2000 -Force
-
-        #$Global:XamlWindow.Close()
-        #Invoke-Command $Global:OSDPadScriptBlock
-        #Start-Process PowerShell.exe -ArgumentList "-NoExit Invoke-Command -ScriptBlock {$Global:OSDPadScriptBlock}"
-
-        Write-Host -ForegroundColor DarkCyan "Start-Process -WorkingDirectory `"$env:Temp\OSDPad`" -FilePath PowerShell.exe -ArgumentList '-NoLogo -NoExit',`"-File `"$ScriptFile`"`""
-        Start-Process -WorkingDirectory "$env:Temp\OSDPad" -FilePath PowerShell.exe -ArgumentList '-NoLogo -NoExit',"-File `"$ScriptFile`""
-    }
+         if ($ScriptSelectionControl.SelectedValue -eq 'New PowerShell Script.ps1') {
+             $ScriptFile = 'New PowerShell Script.ps1'
+         }
+         else {
+             $ScriptFile = $Global:WorkingScript.Name
+         }
+         if (!(Test-Path "$env:Temp\OSDPad")) {New-Item "$env:Temp\OSDPad" -ItemType Directory}
+         
+         $ScriptPath = "$env:Temp\OSDPad\$ScriptFile"
+         Write-Host -ForegroundColor DarkGray "Saving contents of `$Global:OSDPadScriptBlock` to $ScriptPath"
+         $Global:OSDPadScriptBlock | Out-File $ScriptPath -Encoding utf8 -Width 2000 -Force
+ 
+         #$Global:XamlWindow.Close()
+         #Invoke-Command $Global:OSDPadScriptBlock
+         #Start-Process PowerShell.exe -ArgumentList "-NoExit Invoke-Command -ScriptBlock {$Global:OSDPadScriptBlock}"
+ 
+         if ($global:PwshCore -eq $true) {
+             Write-Host -ForegroundColor DarkCyan "Start-Process -WorkingDirectory `"$env:Temp\OSDPad`" -FilePath pwsh.exe -ArgumentList '-NoLogo -NoExit',`"-File `"$ScriptFile`"`""
+             Start-Process -WorkingDirectory "$env:Temp\OSDPad" -FilePath pwsh.exe -ArgumentList '-NoLogo -NoExit',"-File `"$ScriptFile`"" -Wait
+         }
+         else {
+             Write-Host -ForegroundColor DarkCyan "Start-Process -WorkingDirectory `"$env:Temp\OSDPad`" -FilePath PowerShell.exe -ArgumentList '-NoLogo -NoExit',`"-File `"$ScriptFile`"`""
+             Start-Process -WorkingDirectory "$env:Temp\OSDPad" -FilePath PowerShell.exe -ArgumentList '-NoLogo -NoExit',"-File `"$ScriptFile`"" -Wait
+         }
+         #Write-Host -ForegroundColor DarkCyan "Start-Process -WorkingDirectory `"$env:Temp\OSDPad`" -FilePath PowerShell.exe -ArgumentList '-NoLogo -NoExit',`"-File `"$ScriptFile`"`""
+         #Start-Process -WorkingDirectory "$env:Temp\OSDPad" -FilePath PowerShell.exe -ArgumentList '-NoLogo -NoExit',"-File `"$ScriptFile`""
+     }
     #Write-Host -ForegroundColor DarkGray "========================================================================="
 })
 #================================================
