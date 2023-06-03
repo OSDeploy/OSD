@@ -145,7 +145,8 @@ function Set-OSDPadScript {
     if ($Global:OSDPadScriptsContent) {  
         # Clear existing content
         $ScriptCombobox.Items.Clear()
-    
+        $ScriptCombobox.SelectedIndex = 0
+
         $Global:OSDPadScriptsContent | ForEach-Object {
             $ScriptCombobox.Items.Add($_.Name) | Out-Null
             New-Variable -Name $_.SHA -Value $($_.ContentRAW) -Force -Scope Global
@@ -153,11 +154,8 @@ function Set-OSDPadScript {
             $ScriptLabel.Visibility = "Visible"
             $ScriptCombobox.Visibility = "Visible"
     
-            if ($_.Path -match 'README.md') {
+            if ($_.Name -match 'README.md') {
                 $ScriptCombobox.SelectedValue = $_.Name
-            }
-            else {
-                $ScriptCombobox.SelectedIndex = 0
             }
         }
     }
