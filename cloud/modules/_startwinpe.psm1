@@ -38,7 +38,7 @@ function osdcloud-StartWinPE {
         osdcloud-SetExecutionPolicy
         osdcloud-WinpeSetEnvironmentVariables
         osdcloud-SetPowerShellProfile
-        #osdcloud-WinpeInstallNuget
+        #osdcloud-InstallNuget
         osdcloud-InstallPackageManagement
         osdcloud-WinpeInstallPowerShellGet
         osdcloud-TrustPSGallery

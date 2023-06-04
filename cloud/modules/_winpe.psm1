@@ -32,38 +32,12 @@ function osdcloud-WinpeInstallCurl {
         Write-Host -ForegroundColor Green "[+] Curl $($GetItemCurl.VersionInfo.FileVersion)"
     }
 }
-function osdcloud-WinpeInstallNuget {
-    [CmdletBinding()]
-    param ()
-    Write-Host -ForegroundColor DarkGray 'Install Nuget'
-    $NuGetClientSourceURL = 'https://nuget.org/nuget.exe'
-    $NuGetExeName = 'NuGet.exe'
-
-    $PSGetProgramDataPath = Join-Path -Path $env:ProgramData -ChildPath 'Microsoft\Windows\PowerShell\PowerShellGet\'
-    $nugetExeBasePath = $PSGetProgramDataPath
-    if (-not (Test-Path -Path $nugetExeBasePath))
-    {
-        $null = New-Item -Path $nugetExeBasePath -ItemType Directory -Force -ErrorAction SilentlyContinue -WarningAction SilentlyContinue
-    }
-    $nugetExeFilePath = Join-Path -Path $nugetExeBasePath -ChildPath $NuGetExeName
-    $null = Invoke-WebRequest -UseBasicParsing -Uri $NuGetClientSourceURL -OutFile $nugetExeFilePath
-
-    $PSGetAppLocalPath = Join-Path -Path $env:LOCALAPPDATA -ChildPath 'Microsoft\Windows\PowerShell\PowerShellGet\'
-    $nugetExeBasePath = $PSGetAppLocalPath
-
-    if (-not (Test-Path -Path $nugetExeBasePath))
-    {
-        $null = New-Item -Path $nugetExeBasePath -ItemType Directory -Force -ErrorAction SilentlyContinue -WarningAction SilentlyContinue
-    }
-    $nugetExeFilePath = Join-Path -Path $nugetExeBasePath -ChildPath $NuGetExeName
-    $null = Invoke-WebRequest -UseBasicParsing -Uri $NuGetClientSourceURL -OutFile $nugetExeFilePath
-}
 function osdcloud-WinpeInstallPowerShellGet {
     [CmdletBinding()]
     param ()
     $InstalledModule = Import-Module PowerShellGet -PassThru -ErrorAction Ignore
     if (-not (Get-Module -Name PowerShellGet -ListAvailable | Where-Object {$_.Version -ge '2.2.5'})) {
-        Write-Host -ForegroundColor DarkGray 'Install PowerShellGet'
+        Write-Host -ForegroundColor Yellow "[-] Install PowerShellGet 2.2.5"
         $PowerShellGetURL = "https://psg-prod-eastus.azureedge.net/packages/powershellget.2.2.5.nupkg"
         Invoke-WebRequest -UseBasicParsing -Uri $PowerShellGetURL -OutFile "$env:TEMP\powershellget.2.2.5.zip"
         $null = New-Item -Path "$env:TEMP\2.2.5" -ItemType Directory -Force

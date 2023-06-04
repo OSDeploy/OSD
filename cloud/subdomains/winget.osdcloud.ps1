@@ -76,7 +76,7 @@ if ($WindowsPhase -eq 'WinPE') {
     osdcloud-SetExecutionPolicy
     osdcloud-WinpeSetEnvironmentVariables
     osdcloud-SetPowerShellProfile
-    #osdcloud-WinpeInstallNuget
+    #osdcloud-InstallNuget
     osdcloud-InstallPackageManagement
     osdcloud-WinpeInstallPowerShellGet
     osdcloud-TrustPSGallery
@@ -121,121 +121,6 @@ if ($WindowsPhase -eq 'Windows') {
     osdcloud-TrustPSGallery
     osdcloud-InstallModuleOSD
     $null = Stop-Transcript -ErrorAction Ignore
-}
-#endregion
-
-
-
-#region Nuget
-if ($WindowsPhase -eq 'WinPE') {
-    $NuGetClientSourceURL = 'https://nuget.org/nuget.exe'
-    $NuGetExeName = 'NuGet.exe'
-    $PSGetProgramDataPath = Join-Path -Path $env:ProgramData -ChildPath 'Microsoft\Windows\PowerShell\PowerShellGet\'
-    $nugetExeBasePath = $PSGetProgramDataPath
-    $nugetExeFilePath = Join-Path -Path $nugetExeBasePath -ChildPath $NuGetExeName
-
-    if (-not (Test-Path -Path $nugetExeFilePath)) {
-        if (-not (Test-Path -Path $nugetExeBasePath)) {
-            $null = New-Item -Path $nugetExeBasePath -ItemType Directory -Force -ErrorAction SilentlyContinue -WarningAction SilentlyContinue
-        }
-        Write-Host -ForegroundColor Yellow "[-] Downloading NuGet to $nugetExeFilePath"
-        $null = Invoke-WebRequest -UseBasicParsing -Uri $NuGetClientSourceURL -OutFile $nugetExeFilePath
-    }
-
-    $PSGetAppLocalPath = Join-Path -Path $env:LOCALAPPDATA -ChildPath 'Microsoft\Windows\PowerShell\PowerShellGet\'
-    $nugetExeBasePath = $PSGetAppLocalPath
-    $nugetExeFilePath = Join-Path -Path $nugetExeBasePath -ChildPath $NuGetExeName
-    if (-not (Test-Path -Path $nugetExeFilePath)) {
-        if (-not (Test-Path -Path $nugetExeBasePath)) {
-            $null = New-Item -Path $nugetExeBasePath -ItemType Directory -Force -ErrorAction SilentlyContinue -WarningAction SilentlyContinue
-        }
-        Write-Host -ForegroundColor Yellow "[-] Downloading NuGet to $nugetExeFilePath"
-        $null = Invoke-WebRequest -UseBasicParsing -Uri $NuGetClientSourceURL -OutFile $nugetExeFilePath
-    }
-}
-else {
-    if (Test-Path "$env:ProgramFiles\PackageManagement\ProviderAssemblies\nuget\2.8.5.208\Microsoft.PackageManagement.NuGetProvider.dll") {
-        #Write-Host -ForegroundColor Green "[+] Nuget 2.8.5.208+"
-    }
-    else {
-        Write-Host -ForegroundColor Yellow "[-] Install-PackageProvider NuGet -MinimumVersion 2.8.5.201"
-        Install-PackageProvider -Name NuGet -MinimumVersion 2.8.5.201 -Force -Scope AllUsers | Out-Null
-    }
-    $InstalledModule = Get-PackageProvider -Name NuGet | Where-Object {$_.Version -ge '2.8.5.201'} | Sort-Object Version -Descending | Select-Object -First 1
-    if ($InstalledModule) {
-        Write-Host -ForegroundColor Green "[+] NuGet $([string]$InstalledModule.Version)"
-    }
-}
-#endregion
-
-#region PowerShellGet PackageManagement (OOBE and Windows)
-if ($WindowsPhase -ne 'WinPE') {
-    $InstalledModule = Get-PackageProvider -Name PowerShellGet | Where-Object {$_.Version -ge '2.2.5'} | Sort-Object Version -Descending | Select-Object -First 1
-    if (-not ($InstalledModule)) {
-        Write-Host -ForegroundColor Yellow "[-] Install-PackageProvider PowerShellGet -MinimumVersion 2.2.5"
-        Install-PackageProvider -Name PowerShellGet -MinimumVersion 2.2.5 -Force -Scope AllUsers | Out-Null
-        Import-Module PowerShellGet -Force -Scope Global -ErrorAction SilentlyContinue
-        Start-Sleep -Seconds 5
-    }
-
-    $InstalledModule = Get-Module -Name PackageManagement -ListAvailable | Where-Object {$_.Version -ge '1.4.8.1'} | Sort-Object Version -Descending | Select-Object -First 1
-    if (-not ($InstalledModule)) {
-        Write-Host -ForegroundColor Yellow "[-] Install-Module PackageManagement -MinimumVersion 1.4.8.1"
-        Install-Module -Name PackageManagement -MinimumVersion 1.4.8.1 -Force -Confirm:$false -Source PSGallery -Scope AllUsers
-        Import-Module PackageManagement -Force -Scope Global -ErrorAction SilentlyContinue
-        Start-Sleep -Seconds 5
-    }
-
-    Import-Module PackageManagement -Force -Scope Global -ErrorAction SilentlyContinue
-    $InstalledModule = Get-Module -Name PackageManagement -ListAvailable | Where-Object {$_.Version -ge '1.4.8.1'} | Sort-Object Version -Descending | Select-Object -First 1
-    if ($InstalledModule) {
-        Write-Host -ForegroundColor Green "[+] PackageManagement $([string]$InstalledModule.Version)"
-    }
-    Import-Module PowerShellGet -Force -Scope Global -ErrorAction SilentlyContinue
-    $InstalledModule = Get-PackageProvider -Name PowerShellGet | Where-Object {$_.Version -ge '2.2.5'} | Sort-Object Version -Descending | Select-Object -First 1
-    if ($InstalledModule) {
-        Write-Host -ForegroundColor Green "[+] PowerShellGet $([string]$InstalledModule.Version)"
-    }
-}
-#endregion
-
-#region PowerShellGet PackageManagement (WinPE)
-if ($WindowsPhase -eq 'WinPE') {
-    $InstalledModule = Import-Module PackageManagement -PassThru -ErrorAction Ignore
-    if (-not $InstalledModule) {
-        Write-Host -ForegroundColor Yellow "[-] Install PackageManagement 1.4.8.1"
-        $PackageManagementURL = "https://psg-prod-eastus.azureedge.net/packages/packagemanagement.1.4.8.1.nupkg"
-        Invoke-WebRequest -UseBasicParsing -Uri $PackageManagementURL -OutFile "$env:TEMP\packagemanagement.1.4.8.1.zip"
-        $null = New-Item -Path "$env:TEMP\1.4.8.1" -ItemType Directory -Force
-        Expand-Archive -Path "$env:TEMP\packagemanagement.1.4.8.1.zip" -DestinationPath "$env:TEMP\1.4.8.1"
-        $null = New-Item -Path "$env:ProgramFiles\WindowsPowerShell\Modules\PackageManagement" -ItemType Directory -ErrorAction SilentlyContinue
-        Move-Item -Path "$env:TEMP\1.4.8.1" -Destination "$env:ProgramFiles\WindowsPowerShell\Modules\PackageManagement\1.4.8.1"
-        Import-Module PackageManagement -Force -Scope Global
-    }
-
-    $InstalledModule = Import-Module PowerShellGet -PassThru -ErrorAction Ignore
-    if (-not (Get-Module -Name PowerShellGet -ListAvailable | Where-Object {$_.Version -ge '2.2.5'})) {
-        Write-Host -ForegroundColor Yellow "[-] Install PowerShellGet 2.2.5"
-        $PowerShellGetURL = "https://psg-prod-eastus.azureedge.net/packages/powershellget.2.2.5.nupkg"
-        Invoke-WebRequest -UseBasicParsing -Uri $PowerShellGetURL -OutFile "$env:TEMP\powershellget.2.2.5.zip"
-        $null = New-Item -Path "$env:TEMP\2.2.5" -ItemType Directory -Force
-        Expand-Archive -Path "$env:TEMP\powershellget.2.2.5.zip" -DestinationPath "$env:TEMP\2.2.5"
-        $null = New-Item -Path "$env:ProgramFiles\WindowsPowerShell\Modules\PowerShellGet" -ItemType Directory -ErrorAction SilentlyContinue
-        Move-Item -Path "$env:TEMP\2.2.5" -Destination "$env:ProgramFiles\WindowsPowerShell\Modules\PowerShellGet\2.2.5"
-        Import-Module PowerShellGet -Force -Scope Global
-    }
-}
-#endregion
-
-#region Nuget
-if ($WindowsPhase -eq 'WinPE') {
-    if (Test-Path "$env:ProgramFiles\PackageManagement\ProviderAssemblies\nuget\2.8.5.208\Microsoft.PackageManagement.NuGetProvider.dll") {
-        Write-Host -ForegroundColor Green "[+] Nuget 2.8.5.208+"
-    }
-    else {
-        Write-Host -ForegroundColor Yellow "[-] Install-PackageProvider NuGet -MinimumVersion 2.8.5.201"
-        Install-PackageProvider -Name NuGet -MinimumVersion 2.8.5.201 -Force -Scope AllUsers | Out-Null
-    }
 }
 #endregion
 
