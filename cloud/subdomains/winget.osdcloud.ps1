@@ -255,23 +255,6 @@ if ($WindowsPhase -eq 'WinPE') {
 }
 #endregion
 
-#region PowerShell Gallery
-
-#endregion
-
-#region Install Curl
-if (-not (Get-Command 'curl.exe' -ErrorAction SilentlyContinue)) {
-    Write-Host -ForegroundColor Yellow "[-] Install Curl 8.1.2 for Windows"
-    $Uri = 'https://curl.se/windows/dl-8.1.2_2/curl-8.1.2_2-win64-mingw.zip'
-    Invoke-WebRequest -UseBasicParsing -Uri $Uri -OutFile "$env:TEMP\curl.zip"
-
-    $null = New-Item -Path "$env:TEMP\Curl" -ItemType Directory -Force
-    Expand-Archive -Path "$env:TEMP\curl.zip" -DestinationPath "$env:TEMP\curl"
-
-    Get-ChildItem "$env:TEMP\curl" -Include 'curl.exe' -Recurse | foreach {Copy-Item $_ -Destination "$env:SystemRoot\System32\curl.exe"}
-}
-#endregion
-
 #region WinPE PowerShell Module OSD
 if ($WindowsPhase -eq 'WinPE') {
     $InstallModule = $false
