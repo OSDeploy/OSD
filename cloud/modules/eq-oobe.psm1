@@ -6,9 +6,9 @@
 .NOTES
     This module is designed for OOBE
 .LINK
-    https://raw.githubusercontent.com/OSDeploy/OSD/master/cloud/modules/_eq_oobe.psm1
+    https://raw.githubusercontent.com/OSDeploy/OSD/master/cloud/modules/eq-oobe.psm1
 .EXAMPLE
-    Invoke-Expression (Invoke-RestMethod -Uri 'https://raw.githubusercontent.com/OSDeploy/OSD/master/cloud/modules/_eq_oobe.psm1')
+    Invoke-Expression (Invoke-RestMethod -Uri 'https://raw.githubusercontent.com/OSDeploy/OSD/master/cloud/modules/eq-oobe.psm1')
 #>
 #=================================================
 #region Windows Settings
