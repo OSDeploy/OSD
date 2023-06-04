@@ -12,6 +12,183 @@
 #>
 #=================================================
 #region Functions
+function osdcloud-RemoveAppx {
+    [CmdletBinding(DefaultParameterSetName='Default')]
+    param (
+        [Parameter(Mandatory,ParameterSetName='Basic')]
+        [System.Management.Automation.SwitchParameter]$Basic,
+
+        [Parameter(Mandatory,ParameterSetName='ByName',Position=0)]
+        [System.String[]]$Name
+    )
+    if ($WindowsPhase -eq 'WinPE') {
+        if (Get-Command Get-AppxProvisionedPackage) {
+            if ($Basic) {
+                $Name = @('CommunicationsApps','OfficeHub','People','Skype','Solitaire','Xbox','ZuneMusic','ZuneVideo')
+            }
+            elseif ($Name) {
+                #Do Nothing
+            }
+            if ($Name) {
+                Write-Host -ForegroundColor Cyan "Remove-AppxProvisionedPackage -Path 'C:\' -PackageName"
+                foreach ($Item in $Name) {
+                    Get-AppxProvisionedPackage -Path 'C:\' | Where-Object {$_.DisplayName -Match $Item} | ForEach-Object {
+                        Write-Host -ForegroundColor DarkGray $_.DisplayName
+                        Try {
+                            $null = Remove-AppxProvisionedPackage -Path 'C:\' -PackageName $_.PackageName
+                        }
+                        Catch {
+                            Write-Warning "Appx Provisioned Package $($_.PackageName) did not remove successfully"
+                        }
+                    }
+                }
+            }
+        }
+    }
+    if ($WindowsPhase -eq 'OOBE') {
+        if (Get-Command Get-AppxProvisionedPackage) {
+            if ($Basic) {
+                $Name = @('CommunicationsApps','OfficeHub','People','Skype','Solitaire','Xbox','ZuneMusic','ZuneVideo')
+            }
+            elseif ($Name) {
+                #Do Nothing
+            }
+            else {
+                $Name = Get-AppxProvisionedPackage -Online -ErrorAction SilentlyContinue | `
+                Select-Object -Property DisplayName, PackageName | `
+                Out-GridView -PassThru -Title 'Select one or more Appx Provisioned Packages to remove' | `
+                Select-Object -ExpandProperty DisplayName
+            }
+            if ($Name) {
+                Write-Host -ForegroundColor Cyan 'Remove-AppxProvisionedPackage -Online -AllUsers -PackageName'
+                foreach ($Item in $Name) {
+                    Get-AppxProvisionedPackage -Online | Where-Object {$_.DisplayName -Match $Item} | ForEach-Object {
+                        Write-Host -ForegroundColor DarkGray $_.DisplayName
+                        if ((Get-Command Remove-AppxProvisionedPackage).Parameters.ContainsKey('AllUsers')) {
+                            Try {
+                                $null = Remove-AppxProvisionedPackage -Online -AllUsers -PackageName $_.PackageName
+                            }
+                            Catch {
+                                Write-Warning "AllUsers Appx Provisioned Package $($_.PackageName) did not remove successfully"
+                            }
+                        }
+                        else {
+                            Try {
+                                $null = Remove-AppxProvisionedPackage -Online -PackageName $_.PackageName
+                            }
+                            Catch {
+                                Write-Warning "Appx Provisioned Package $($_.PackageName) did not remove successfully"
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+New-Alias -Name 'RemoveAppx' -Value 'osdcloud-RemoveAppx' -Description 'OSDCloud' -Force
+function osdcloud-SetPowerShellProfile {
+    [CmdletBinding()]
+    param ()
+$winpePowerShellProfile = @'
+[Net.ServicePointManager]::SecurityProtocol = [Net.ServicePointManager]::SecurityProtocol -bor [Net.SecurityProtocolType]::Tls12
+[System.Environment]::SetEnvironmentVariable('APPDATA',"$Env:UserProfile\AppData\Roaming",[System.EnvironmentVariableTarget]::Process)
+[System.Environment]::SetEnvironmentVariable('HOMEDRIVE',"$Env:SystemDrive",[System.EnvironmentVariableTarget]::Process)
+[System.Environment]::SetEnvironmentVariable('HOMEPATH',"$Env:UserProfile",[System.EnvironmentVariableTarget]::Process)
+[System.Environment]::SetEnvironmentVariable('LOCALAPPDATA',"$Env:UserProfile\AppData\Local",[System.EnvironmentVariableTarget]::Process)
+'@
+$oobePowerShellProfile = @'
+[Net.ServicePointManager]::SecurityProtocol = [Net.ServicePointManager]::SecurityProtocol -bor [Net.SecurityProtocolType]::Tls12
+[System.Environment]::SetEnvironmentVariable('Path',$Env:Path + ";$Env:ProgramFiles\WindowsPowerShell\Scripts",'Process')
+'@
+
+    if ($WindowsPhase -eq 'WinPE') {
+        if (-not (Test-Path "$env:UserProfile\Documents\WindowsPowerShell")) {
+            $null = New-Item -Path "$env:UserProfile\Documents\WindowsPowerShell" -ItemType Directory -Force -ErrorAction SilentlyContinue -WarningAction SilentlyContinue
+        }
+        Write-Host -ForegroundColor Green "[+] Set LocalAppData in PowerShell Profile"
+        $winpePowerShellProfile | Set-Content -Path "$env:UserProfile\Documents\WindowsPowerShell\Microsoft.PowerShell_profile.ps1" -Force -Encoding Unicode
+    }
+    if ($WindowsPhase -eq 'OOBE') {
+        if (-not (Test-Path $Profile.CurrentUserAllHosts)) {
+            Write-Host -ForegroundColor Green "[+] Set LocalAppData in PowerShell Profile [CurrentUserAllHosts]"
+            $null = New-Item $Profile.CurrentUserAllHosts -ItemType File -Force
+            #[System.Environment]::SetEnvironmentVariable('Path',"$Env:LocalAppData\Microsoft\WindowsApps;$Env:ProgramFiles\WindowsPowerShell\Scripts;",'User')
+            #[System.Environment]::SetEnvironmentVariable('Path',$Env:Path + ";$Env:ProgramFiles\WindowsPowerShell\Scripts")
+            #[Environment]::SetEnvironmentVariable("Path", $env:Path, [System.EnvironmentVariableTarget]::Machine)
+            $oobePowerShellProfile | Set-Content -Path $Profile.CurrentUserAllHosts -Force -Encoding Unicode
+        }
+    }
+}
+function osdcloud-TrustPSGallery {
+    [CmdletBinding()]
+    param ()
+    $PowerShellGallery = Get-PSRepository -Name PSGallery -ErrorAction Ignore
+    if ($PowerShellGallery.InstallationPolicy -ne 'Trusted') {
+        Write-Host -ForegroundColor Yellow "[-] Set-PSRepository PSGallery Trusted"
+        Set-PSRepository -Name PSGallery -InstallationPolicy Trusted
+    }
+
+    $PowerShellGallery = Get-PSRepository -Name PSGallery -ErrorAction Ignore
+    if ($PowerShellGallery.InstallationPolicy -eq 'Trusted') {
+        Write-Host -ForegroundColor Green "[+] PSRepository PSGallery Trusted"
+    }
+}
+function osdcloud-SetExecutionPolicy {
+    [CmdletBinding()]
+    param ()
+    if ($WindowsPhase -eq 'WinPE') {
+        if ((Get-ExecutionPolicy) -ne 'Bypass') {
+            Write-Host -ForegroundColor Yellow "[-] Set-ExecutionPolicy Bypass -Force"
+            Set-ExecutionPolicy Bypass -Force
+        }
+        if ((Get-ExecutionPolicy) -eq 'Bypass') {
+            Write-Host -ForegroundColor Green "[+] Get-ExecutionPolicy Bypass"
+        }
+    }
+    if ($WindowsPhase -eq 'OOBE') {
+        if ((Get-ExecutionPolicy -Scope CurrentUser) -ne 'RemoteSigned') {
+            Write-Host -ForegroundColor Yellow "[-] Set-ExecutionPolicy -Scope CurrentUser RemoteSigned"
+            Set-ExecutionPolicy RemoteSigned -Force -Scope CurrentUser
+        }
+        if ((Get-ExecutionPolicy -Scope CurrentUser) -eq 'RemoteSigned') {
+            Write-Host -ForegroundColor Green "[+] Get-ExecutionPolicy RemoteSigned [CurrentUser]"
+        }
+    }
+    if ($WindowsPhase -eq 'Windows') {
+        # We should not be messing with ExecutionPolicy in Windows Phase
+        # Display information only
+        Write-Host -ForegroundColor Gray "[i] Get-ExecutionPolicy $(Get-ExecutionPolicy -Scope Process) [Process]"
+        Write-Host -ForegroundColor Gray "[i] Get-ExecutionPolicy $(Get-ExecutionPolicy -Scope CurrentUser) [CurrentUser]"
+        Write-Host -ForegroundColor Gray "[i] Get-ExecutionPolicy $(Get-ExecutionPolicy -Scope LocalMachine) [LocalMachine]"
+    }
+}
+function osdcloud-InstallPackageManagement {
+    [CmdletBinding()]
+    param ()
+    if ($WindowsPhase -eq 'WinPE') {
+        $InstalledModule = Import-Module PackageManagement -PassThru -ErrorAction Ignore
+        if (-not $InstalledModule) {
+            Write-Host -ForegroundColor DarkGray 'Install PackageManagement'
+            $PackageManagementURL = "https://psg-prod-eastus.azureedge.net/packages/packagemanagement.1.4.8.1.nupkg"
+            Invoke-WebRequest -UseBasicParsing -Uri $PackageManagementURL -OutFile "$env:TEMP\packagemanagement.1.4.8.1.zip"
+            $null = New-Item -Path "$env:TEMP\1.4.8.1" -ItemType Directory -Force
+            Expand-Archive -Path "$env:TEMP\packagemanagement.1.4.8.1.zip" -DestinationPath "$env:TEMP\1.4.8.1"
+            $null = New-Item -Path "$env:ProgramFiles\WindowsPowerShell\Modules\PackageManagement" -ItemType Directory -ErrorAction SilentlyContinue
+            Move-Item -Path "$env:TEMP\1.4.8.1" -Destination "$env:ProgramFiles\WindowsPowerShell\Modules\PackageManagement\1.4.8.1"
+            Import-Module PackageManagement -Force -Scope Global
+        }
+    }
+    else {
+        if (-not (Get-Module -Name PowerShellGet -ListAvailable | Where-Object {$_.Version -ge '2.2.5'})) {
+            Write-Host -ForegroundColor DarkGray 'Install-Package PackageManagement,PowerShellGet [AllUsers]'
+            Install-Package -Name PowerShellGet -MinimumVersion 2.2.5 -Force -Confirm:$false -Source PSGallery | Out-Null
+    
+            Write-Host -ForegroundColor DarkGray 'Import-Module PackageManagement,PowerShellGet [Global]'
+            Import-Module PackageManagement,PowerShellGet -Force -Scope Global
+        }
+    }
+}
 function osdcloud-InstallModuleAutopilot {
     [CmdletBinding()]
     param ()

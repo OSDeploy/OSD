@@ -127,21 +127,6 @@ if ($WindowsPhase -eq 'Windows') {
 
 
 
-#region Set Environment Variables
-if ($WindowsPhase -eq 'WinPE') {
-    if (Get-Item env:LocalAppData -ErrorAction Ignore) {
-        Write-Host -ForegroundColor Green "[+] LocalAppData is set to $((Get-Item env:LOCALAPPDATA).Value)"
-    }
-    else {
-        Write-Host -ForegroundColor Yellow "[-] Setting LocalAppData in System Environment"
-        [System.Environment]::SetEnvironmentVariable('APPDATA',"$Env:UserProfile\AppData\Roaming",[System.EnvironmentVariableTarget]::Process)
-        [System.Environment]::SetEnvironmentVariable('HOMEDRIVE',"$Env:SystemDrive",[System.EnvironmentVariableTarget]::Process)
-        [System.Environment]::SetEnvironmentVariable('HOMEPATH',"$Env:UserProfile",[System.EnvironmentVariableTarget]::Process)
-        [System.Environment]::SetEnvironmentVariable('LOCALAPPDATA',"$Env:UserProfile\AppData\Local",[System.EnvironmentVariableTarget]::Process)
-    }
-}
-#endregion
-
 #region Nuget
 if ($WindowsPhase -eq 'WinPE') {
     $NuGetClientSourceURL = 'https://nuget.org/nuget.exe'
