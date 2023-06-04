@@ -6,9 +6,9 @@
 .NOTES
     This module is designed for OOBE
 .LINK
-    https://raw.githubusercontent.com/OSDeploy/OSD/master/cloud/modules/_oobestartup.psm1
+    https://raw.githubusercontent.com/OSDeploy/OSD/master/cloud/modules/eq-oobe-startup.psm1
 .EXAMPLE
-    Invoke-Expression (Invoke-RestMethod -Uri 'https://raw.githubusercontent.com/OSDeploy/OSD/master/cloud/modules/_oobestartup.psm1')
+    Invoke-Expression (Invoke-RestMethod -Uri 'https://raw.githubusercontent.com/OSDeploy/OSD/master/cloud/modules/eq-oobe-startup.psm1')
 #>
 #=================================================
 #region Functions
@@ -52,7 +52,10 @@ function osdcloud-StartOOBE {
     osdcloud-SetPowerShellProfile
     osdcloud-InstallPackageManagement
     osdcloud-TrustPSGallery
+    osdcloud-InstallModulePester
+    osdcloud-InstallModulePSReadLine
     osdcloud-InstallModuleOSD
+    osdcloud-InstallWinGet
 
     #Add Azure KeuVault Support
     if ($Azure) {

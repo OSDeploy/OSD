@@ -1,10 +1,10 @@
 <#PSScriptInfo
 .VERSION 23.6.3.1
-.GUID 9670c013-d1b1-4f5d-9bd0-0fa185b9f203
+.GUID 0c0cd2be-1a2d-4be4-8401-a869f4f104b0
 .AUTHOR David Segura @SeguraOSD
 .COMPANYNAME osdcloud.com
 .COPYRIGHT (c) 2023 David Segura osdcloud.com. All rights reserved.
-.TAGS OSDeploy OSDCloud WinPE OOBE Windows AutoPilot
+.TAGS OSDeploy OSDCloud WinGet PowerShell
 .LICENSEURI 
 .PROJECTURI https://github.com/OSDeploy/OSD
 .ICONURI 
@@ -13,26 +13,26 @@
 .EXTERNALSCRIPTDEPENDENCIES 
 .RELEASENOTES
 Script should be executed in a Command Prompt using the following command
-powershell Invoke-Expression -Command (Invoke-RestMethod -Uri sandbox.osdcloud.com)
+powershell Invoke-Expression -Command (Invoke-RestMethod -Uri pwsh.osdcloud.com)
 This is abbreviated as
-powershell iex (irm sandbox.osdcloud.com)
+powershell iex (irm pwsh.osdcloud.com)
 #>
 #Requires -RunAsAdministrator
 <#
 .SYNOPSIS
-    PowerShell Script which supports the OSDCloud environment
+    PowerShell Script which supports WinGet and PowerShell 7
 .DESCRIPTION
-    PowerShell Script which supports the OSDCloud environment
+    PowerShell Script which supports WinGet and PowerShell 7
 .NOTES
     Version 23.6.3.1
 .LINK
-    https://raw.githubusercontent.com/OSDeploy/OSD/master/cloud/sandbox.osdcloud.com.ps1
+    https://raw.githubusercontent.com/OSDeploy/OSD/master/cloud/subdomains/pwsh.osdcloud.com.ps1
 .EXAMPLE
-    powershell iex (irm sandbox.osdcloud.com)
+    powershell iex (irm pwsh.osdcloud.com)
 #>
 [CmdletBinding()]
 param()
-$ScriptName = 'sandbox.osdcloud.com'
+$ScriptName = 'pwsh.osdcloud.com'
 $ScriptVersion = '23.6.3.1'
 
 #region Initialize
@@ -73,15 +73,10 @@ Write-Host -ForegroundColor Green "[+] Transport Layer Security (TLS) 1.2"
 
 #region WinPE
 if ($WindowsPhase -eq 'WinPE') {
-    #Process OSDCloud startup and load Azure KeyVault dependencies
-    osdcloud-StartWinPE -OSDCloud -KeyVault
-    Write-Host -ForegroundColor Cyan "To start a new PowerShell session, type 'start powershell' and press enter"
-    Write-Host -ForegroundColor Cyan "Start-OSDCloud or Start-OSDCloudGUI can be run in the new PowerShell session"
-    #Stop the startup Transcript.  OSDCloud will create its own
+    Write-Host -ForegroundColor Red "[!] David Segura hasn't completed the PowerShell 7 WinPE installation"
     $null = Stop-Transcript -ErrorAction Ignore
 }
 #endregion
-
 
 #region Specialize
 if ($WindowsPhase -eq 'Specialize') {
@@ -89,26 +84,38 @@ if ($WindowsPhase -eq 'Specialize') {
 }
 #endregion
 
-
 #region AuditMode
 if ($WindowsPhase -eq 'AuditMode') {
     $null = Stop-Transcript -ErrorAction Ignore
 }
 #endregion
 
-
 #region OOBE
 if ($WindowsPhase -eq 'OOBE') {
-    #Load everything needed to run AutoPilot and Azure KeyVault
-    osdcloud-StartOOBE -Display -Language -DateTime -Autopilot -KeyVault
+    osdcloud-SetExecutionPolicy
+    osdcloud-SetPowerShellProfile
+    osdcloud-InstallPackageManagement
+    osdcloud-TrustPSGallery
+    osdcloud-InstallModulePester
+    osdcloud-InstallModulePSReadLine
+    osdcloud-InstallWinGet
+    osdcloud-InstallPwsh
+    Write-Host -ForegroundColor Green "[+] pwsh.osdcloud.com Complete"
     $null = Stop-Transcript -ErrorAction Ignore
 }
 #endregion
 
-
 #region Windows
 if ($WindowsPhase -eq 'Windows') {
-    #Load OSD and Azure stuff
+    osdcloud-SetExecutionPolicy
+    osdcloud-SetPowerShellProfile
+    osdcloud-InstallPackageManagement
+    osdcloud-TrustPSGallery
+    osdcloud-InstallModulePester
+    osdcloud-InstallModulePSReadLine
+    osdcloud-InstallWinGet
+    osdcloud-InstallPwsh
+    Write-Host -ForegroundColor Green "[+] pwsh.osdcloud.com Complete"
     $null = Stop-Transcript -ErrorAction Ignore
 }
 #endregion

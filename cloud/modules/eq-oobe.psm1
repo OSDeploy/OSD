@@ -6,12 +6,12 @@
 .NOTES
     This module is designed for OOBE
 .LINK
-    https://raw.githubusercontent.com/OSDeploy/OSD/master/cloud/modules/_oobe.psm1
+    https://raw.githubusercontent.com/OSDeploy/OSD/master/cloud/modules/eq-oobe.psm1
 .EXAMPLE
-    Invoke-Expression (Invoke-RestMethod -Uri 'https://raw.githubusercontent.com/OSDeploy/OSD/master/cloud/modules/_oobe.psm1')
+    Invoke-Expression (Invoke-RestMethod -Uri 'https://raw.githubusercontent.com/OSDeploy/OSD/master/cloud/modules/eq-oobe.psm1')
 #>
 #=================================================
-#region Functions
+#region Windows Settings
 function osdcloud-SetWindowsDateTime {
     [CmdletBinding()]
     param ()
@@ -43,6 +43,9 @@ function osdcloud-SetWindowsLanguage {
         Wait-Process $ProcessId
     }
 }
+#endregion
+#=================================================
+#region Autopilot Functions
 function osdcloud-AutopilotRegisterCommand {
     [CmdletBinding()]
     param (
@@ -54,6 +57,9 @@ function osdcloud-AutopilotRegisterCommand {
     Write-Host -ForegroundColor Green "(Process Id $($AutopilotProcess.Id))"
     Return $AutopilotProcess
 }
+#endregion
+#=================================================
+#region Windows Functions
 function osdcloud-AddCapability {
     [CmdletBinding(DefaultParameterSetName='Default')]
     param (
@@ -135,6 +141,9 @@ function osdcloud-Rsat {
     }
 }
 New-Alias -Name 'Rsat' -Value 'osdcloud-Rsat' -Description 'OSDCloud' -Force
+#endregion
+#=================================================
+#region Update Functions
 function osdcloud-UpdateDrivers {
     [CmdletBinding()]
     param ()
