@@ -520,28 +520,6 @@ function osdcloud-InstallModuleOSD {
         }
     }
 }
-function osdcloud-InstallModulePester {
-    [CmdletBinding()]
-    param ()
-    $InstallModule = $false
-    $PSModuleName = 'Pester'
-    $InstalledModule = Get-Module -Name $PSModuleName -ListAvailable -ErrorAction Ignore | Sort-Object Version -Descending | Select-Object -First 1
-    $GalleryPSModule = Find-Module -Name $PSModuleName -ErrorAction Ignore -WarningAction Ignore
-    
-    if ($GalleryPSModule) {
-        if (($GalleryPSModule.Version -as [version]) -gt ($InstalledModule.Version -as [version])) {
-            Write-Host -ForegroundColor Yellow "[-] Install-Module $PSModuleName $($GalleryPSModule.Version)"
-            Install-Module $PSModuleName -Scope AllUsers -Force -SkipPublisherCheck -AllowClobber
-            #Import-Module $PSModuleName -Force
-        }
-    }
-    $InstalledModule = Get-Module -Name $PSModuleName -ListAvailable -ErrorAction Ignore | Sort-Object Version -Descending | Select-Object -First 1
-    if ($GalleryPSModule) {
-        if (($InstalledModule.Version -as [version]) -ge ($GalleryPSModule.Version -as [version])) {
-            Write-Host -ForegroundColor Green "[+] $PSModuleName $($GalleryPSModule.Version)"
-        }
-    }
-}
 function osdcloud-InstallModulePSReadLine {
     [CmdletBinding()]
     param ()
@@ -563,20 +541,6 @@ function osdcloud-InstallModulePSReadLine {
             Write-Host -ForegroundColor Green "[+] $PSModuleName $($GalleryPSModule.Version)"
         }
     }
-}
-function osdcloud-InstallPowerShell7 {
-    [CmdletBinding()]
-    param ()
-    if ($WindowsPhase -ne 'WinPE') {
-
-    }
-
-}
-function osdcloud-InstallWinGet {
-    [CmdletBinding()]
-    param ()
-
-
 }
 function osdcloud-RestartComputer {
     [CmdletBinding()]

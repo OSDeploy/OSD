@@ -10,8 +10,52 @@
 .EXAMPLE
     Invoke-Expression (Invoke-RestMethod -Uri 'https://raw.githubusercontent.com/OSDeploy/OSD/master/cloud/modules/_ne_winpe.psm1')
 #>
-#=================================================
+
 #region Functions
+function osdcloud-InstallModulePester {
+    [CmdletBinding()]
+    param ()
+    $InstallModule = $false
+    $PSModuleName = 'Pester'
+    $InstalledModule = Get-Module -Name $PSModuleName -ListAvailable -ErrorAction Ignore | Sort-Object Version -Descending | Select-Object -First 1
+    $GalleryPSModule = Find-Module -Name $PSModuleName -ErrorAction Ignore -WarningAction Ignore
+    
+    if ($GalleryPSModule) {
+        if (($GalleryPSModule.Version -as [version]) -gt ($InstalledModule.Version -as [version])) {
+            Write-Host -ForegroundColor Yellow "[-] Install-Module $PSModuleName $($GalleryPSModule.Version)"
+            Install-Module $PSModuleName -Scope AllUsers -Force -SkipPublisherCheck -AllowClobber
+            #Import-Module $PSModuleName -Force
+        }
+    }
+    $InstalledModule = Get-Module -Name $PSModuleName -ListAvailable -ErrorAction Ignore | Sort-Object Version -Descending | Select-Object -First 1
+    if ($GalleryPSModule) {
+        if (($InstalledModule.Version -as [version]) -ge ($GalleryPSModule.Version -as [version])) {
+            Write-Host -ForegroundColor Green "[+] $PSModuleName $($GalleryPSModule.Version)"
+        }
+    }
+}
+function osdcloud-InstallPwsh {
+    [CmdletBinding()]
+    param ()
+    $PowerShellSeven = Get-ChildItem -Path "$env:ProgramFiles" pwsh.exe -Recurse -ErrorAction SilentlyContinue | Select-Object -First 1
+    if ($PowerShellSeven) {
+        Write-Host -ForegroundColor Green "[+] PowerShell $($PowerShellSeven.VersionInfo.FileVersion)"
+    }
+    else {
+        if ($WinGetEXE) {
+            Write-Host -ForegroundColor Yellow "[-] winget install --id Microsoft.PowerShell --exact --scope machine --override '/quiet ADD_EXPLORER_CONTEXT_MENU_OPENPOWERSHELL=1 ADD_FILE_CONTEXT_MENU_RUNPOWERSHELL=1 ADD_PATH=1' --accept-source-agreements --accept-package-agreements"
+            winget install --id Microsoft.PowerShell --exact --scope machine --override '/quiet ADD_EXPLORER_CONTEXT_MENU_OPENPOWERSHELL=1 ADD_FILE_CONTEXT_MENU_RUNPOWERSHELL=1 ADD_PATH=1' --accept-source-agreements --accept-package-agreements
+        }
+        else {
+            Write-Host -ForegroundColor Yellow "[-] Invoke-Expression (Invoke-RestMethod https://aka.ms/install-powershell.ps1)"
+            Invoke-Expression "& { $(Invoke-RestMethod https://aka.ms/install-powershell.ps1) } -UseMSI"
+        }
+        $PowerShellSeven = Get-ChildItem -Path "$env:ProgramFiles" pwsh.exe -Recurse -ErrorAction SilentlyContinue | Select-Object -First 1
+        if ($PowerShellSeven) {
+            Write-Host -ForegroundColor Green "[+] PowerShell $($PowerShellSeven.VersionInfo.FileVersion)"
+        }
+    }
+}
 function osdcloud-InstallScriptAutopilot {
     [CmdletBinding()]
     param ()
@@ -21,6 +65,38 @@ function osdcloud-InstallScriptAutopilot {
         Install-Script -Name Get-WindowsAutoPilotInfo -Force -Scope AllUsers
     }
 }
+function osdcloud-InstallWinGet {
+    [CmdletBinding()]
+    param ()
+    if (-not (Get-Command 'WinGet' -ErrorAction SilentlyContinue)) {
+
+        # Test if Microsoft.DesktopAppInstaller is present and install it
+        if (Get-AppxPackage -Name Microsoft.DesktopAppInstaller) {
+            Write-Host -ForegroundColor Yellow "[-] Add-AppxPackage Microsoft.DesktopAppInstaller_8wekyb3d8bbwe"
+            Add-AppxPackage -RegisterByFamilyName -MainPackage Microsoft.DesktopAppInstaller_8wekyb3d8bbwe -ErrorAction SilentlyContinue
+        }
+    }
+    
+    # Get Microsoft.DesktopAppInstaller version
+    $AppxPkg = Get-AppxPackage -Name 'Microsoft.DesktopAppInstaller' -ErrorAction SilentlyContinue | Select-Object -First 1
+    if ($AppxPkg.Version) {
+        Write-Host -ForegroundColor Green "[+] Microsoft.DesktopAppInstaller $([string]$AppxPkg.Version)"
+    }
+    
+    # Success
+    $WinGetEXE = Get-Command -Type Application -Name 'winget.exe' -ErrorAction SilentlyContinue | Select-Object -First 1
+    if ($WinGetEXE) {
+        $WinGetVer = & winget.exe --version
+        $WinGetVer = $WinGetVer -replace '[a-zA-Z\-]'
+        Write-Host -ForegroundColor Green "[+] WinGet $([string]$WinGetVer)"
+    }
+    else {
+        Write-Host -ForegroundColor Red "[!] WinGet"
+    }
+}
+#endregion
+
+#region Gary Blok
 function osdcloud-RenamePC {
     [CmdletBinding()]
     param ()
@@ -101,4 +177,3 @@ function osdcloud-RenamePC {
     Write-Output "====================================================="
 }
 #endregion
-#=================================================
