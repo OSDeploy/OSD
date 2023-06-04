@@ -81,11 +81,13 @@ if ($WindowsPhase -eq 'WinPE') {
     osdcloud-WinpeInstallPowerShellGet
     osdcloud-TrustPSGallery
     osdcloud-WinpeInstallCurl
-    Write-Host -ForegroundColor Cyan "To start a new PowerShell session, type 'start powershell' and press enter"
+    osdcloud-InstallModuleOSD
+    osdcloud-InstallModulePSReadLine
+    #Write-Host -ForegroundColor Cyan "To start a new PowerShell session, type 'start powershell' and press enter"
+    Start PowerShell
     $null = Stop-Transcript -ErrorAction Ignore
 }
 #endregion
-
 
 #region Specialize
 if ($WindowsPhase -eq 'Specialize') {
@@ -93,13 +95,11 @@ if ($WindowsPhase -eq 'Specialize') {
 }
 #endregion
 
-
 #region AuditMode
 if ($WindowsPhase -eq 'AuditMode') {
     $null = Stop-Transcript -ErrorAction Ignore
 }
 #endregion
-
 
 #region OOBE
 if ($WindowsPhase -eq 'OOBE') {
@@ -108,10 +108,11 @@ if ($WindowsPhase -eq 'OOBE') {
     osdcloud-InstallPackageManagement
     osdcloud-TrustPSGallery
     osdcloud-InstallModuleOSD
+    osdcloud-InstallModulePester
+    osdcloud-InstallModulePSReadLine
     $null = Stop-Transcript -ErrorAction Ignore
 }
 #endregion
-
 
 #region Windows
 if ($WindowsPhase -eq 'Windows') {
@@ -119,89 +120,16 @@ if ($WindowsPhase -eq 'Windows') {
     osdcloud-SetPowerShellProfile
     osdcloud-InstallPackageManagement
     osdcloud-TrustPSGallery
-    osdcloud-InstallModuleOSD
+    osdcloud-InstallModulePester
+    osdcloud-InstallModulePSReadLine
     $null = Stop-Transcript -ErrorAction Ignore
 }
 #endregion
 
-#region WinPE PowerShell Module OSD
-if ($WindowsPhase -eq 'WinPE') {
-    $InstallModule = $false
-    $PSModuleName = 'OSD'
-    $InstalledModule = Get-Module -Name $PSModuleName -ListAvailable -ErrorAction Ignore | Sort-Object Version -Descending | Select-Object -First 1
-    $GalleryPSModule = Find-Module -Name $PSModuleName -ErrorAction Ignore -WarningAction Ignore
 
-    if ($GalleryPSModule) {
-        if (($GalleryPSModule.Version -as [version]) -gt ($InstalledModule.Version -as [version])) {
-            Write-Host -ForegroundColor Yellow "[-] Install-Module $PSModuleName $($GalleryPSModule.Version)"
-            Install-Module $PSModuleName -Scope AllUsers -Force -SkipPublisherCheck
-            Import-Module $PSModuleName -Force
-        }
-    }
-    $InstalledModule = Get-Module -Name $PSModuleName -ListAvailable -ErrorAction Ignore | Sort-Object Version -Descending | Select-Object -First 1
-    if ($GalleryPSModule) {
-        if (($InstalledModule.Version -as [version]) -ge ($GalleryPSModule.Version -as [version])) {
-            Write-Host -ForegroundColor Green "[+] $PSModuleName $($GalleryPSModule.Version)"
-        }
-    }
-}
-#endregion
+if (($WindowsPhase -eq 'OOBE') -or ($WindowsPhase -eq 'Windows')) {
 
-#region PowerShell Module Pester
-if ($WindowsPhase -eq 'WinPE') {
-    #do nothing
 }
-else {
-    $InstallModule = $false
-    $PSModuleName = 'Pester'
-    $InstalledModule = Get-Module -Name $PSModuleName -ListAvailable -ErrorAction Ignore | Sort-Object Version -Descending | Select-Object -First 1
-    $GalleryPSModule = Find-Module -Name $PSModuleName -ErrorAction Ignore -WarningAction Ignore
-    
-    if ($GalleryPSModule) {
-        if (($GalleryPSModule.Version -as [version]) -gt ($InstalledModule.Version -as [version])) {
-            Write-Host -ForegroundColor Yellow "[-] Install-Module $PSModuleName $($GalleryPSModule.Version)"
-            Install-Module $PSModuleName -Scope AllUsers -Force -SkipPublisherCheck -AllowClobber
-            #Import-Module $PSModuleName -Force
-        }
-    }
-    $InstalledModule = Get-Module -Name $PSModuleName -ListAvailable -ErrorAction Ignore | Sort-Object Version -Descending | Select-Object -First 1
-    if ($GalleryPSModule) {
-        if (($InstalledModule.Version -as [version]) -ge ($GalleryPSModule.Version -as [version])) {
-            Write-Host -ForegroundColor Green "[+] $PSModuleName $($GalleryPSModule.Version)"
-        }
-    }
-}
-#endregion
-
-#region PowerShell Module PSReadLine
-$InstallModule = $false
-$PSModuleName = 'PSReadLine'
-$InstalledModule = Get-Module -Name $PSModuleName -ListAvailable -ErrorAction Ignore | Sort-Object Version -Descending | Select-Object -First 1
-$GalleryPSModule = Find-Module -Name $PSModuleName -ErrorAction Ignore -WarningAction Ignore
-
-if ($GalleryPSModule) {
-    if (($GalleryPSModule.Version -as [version]) -gt ($InstalledModule.Version -as [version])) {
-        Write-Host -ForegroundColor Yellow "[-] Install-Module $PSModuleName $($GalleryPSModule.Version)"
-        Install-Module $PSModuleName -Scope AllUsers -Force -SkipPublisherCheck -AllowClobber
-        #Import-Module $PSModuleName -Force
-    }
-}
-$InstalledModule = Get-Module -Name $PSModuleName -ListAvailable -ErrorAction Ignore | Sort-Object Version -Descending | Select-Object -First 1
-if ($GalleryPSModule) {
-    if (($InstalledModule.Version -as [version]) -ge ($GalleryPSModule.Version -as [version])) {
-        Write-Host -ForegroundColor Green "[+] $PSModuleName $($GalleryPSModule.Version)"
-    }
-}
-#endregion
-
-#WinPE Exit
-if ($WindowsPhase -eq 'WinPE') {
-    Start PowerShell
-    Stop-Transcript
-    Break
-}
-#endregion
-
 #region WinGet
 # WinGet is not installed
 if (-not (Get-Command 'WinGet' -ErrorAction SilentlyContinue)) {

@@ -6,9 +6,9 @@
 .NOTES
     Version 23.6.4.1
 .LINK
-    https://raw.githubusercontent.com/OSDeploy/OSD/master/cloud/modules/_winpe.psm1
+    https://raw.githubusercontent.com/OSDeploy/OSD/master/cloud/modules/_eq_winpe.psm1
 .EXAMPLE
-    Invoke-Expression (Invoke-RestMethod -Uri 'https://raw.githubusercontent.com/OSDeploy/OSD/master/cloud/modules/_winpe.psm1')
+    Invoke-Expression (Invoke-RestMethod -Uri 'https://raw.githubusercontent.com/OSDeploy/OSD/master/cloud/modules/_eq_winpe.psm1')
 #>
 #=================================================
 #region Functions
@@ -283,7 +283,7 @@ function osdcloud-SetupCompleteNetFX {
 
     if (Test-Path -Path $PSFilePath){
         Add-Content -Path $PSFilePath "Write-Output 'Running Enable NetFX Function'"
-        Add-Content -Path $PSFilePath "Invoke-Expression (Invoke-RestMethod -Uri 'https://raw.githubusercontent.com/OSDeploy/OSD/master/cloud/modules/_oobe.psm1')"
+        Add-Content -Path $PSFilePath "Invoke-Expression (Invoke-RestMethod -Uri 'https://raw.githubusercontent.com/OSDeploy/OSD/master/cloud/modules/_eq_oobe.psm1')"
         Add-Content -Path $PSFilePath "osdcloud-NetFX"
     }
     else {
