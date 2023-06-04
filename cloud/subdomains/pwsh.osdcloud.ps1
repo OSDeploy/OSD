@@ -50,7 +50,7 @@ else {
     elseif ($ImageState -eq 'IMAGE_STATE_SPECIALIZE_RESEAL_TO_AUDIT') {$WindowsPhase = 'AuditMode'}
     else {$WindowsPhase = 'Windows'}
 }
-Write-Host -ForegroundColor Green "[+] $ScriptName $ScriptVersion (Windows Phase $WindowsPhase)"
+Write-Host -ForegroundColor Green "[+] $ScriptName $ScriptVersion ($WindowsPhase Phase)"
 Invoke-Expression -Command (Invoke-RestMethod -Uri functions.osdcloud.com)
 #endregion
 
@@ -66,6 +66,21 @@ else {
     Break
 }
 #endregion
+
+
+#region Transport Layer Security (TLS) 1.2
+Write-Host -ForegroundColor Green "[+] Transport Layer Security (TLS) 1.2"
+$script:securityProtocol = [Net.ServicePointManager]::SecurityProtocol
+[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
+#endregion
+
+
+
+
+
+
+
+
 
 #region WinPE
 if ($WindowsPhase -eq 'WinPE') {
@@ -121,11 +136,6 @@ if ($WindowsPhase -eq 'Windows') {
 
 
 
-#region Transport Layer Security (TLS) 1.2
-Write-Host -ForegroundColor Green "[+] Transport Layer Security (TLS) 1.2"
-$script:securityProtocol = [Net.ServicePointManager]::SecurityProtocol
-[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
-#endregion
 
 #region Set Environment Variables
 if ($WindowsPhase -eq 'WinPE') {
