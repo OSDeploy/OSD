@@ -1,48 +1,44 @@
 <#PSScriptInfo
-.VERSION 23.6.1.1
-.GUID e3841793-c9a3-4694-8624-fc35bbe4d74f
-.AUTHOR pwsh.live
-.COMPANYNAME pwsh.live
-.COPYRIGHT (c) 2023 pwsh.live. All rights reserved.
-.TAGS pwsh.live
+.VERSION 23.6.3.1
+.GUID 8aa84227-ddb5-4276-95fb-ffb2d6121bf8
+.AUTHOR David Segura @SeguraOSD
+.COMPANYNAME osdcloud.com
+.COPYRIGHT (c) 2023 David Segura osdcloud.com. All rights reserved.
+.TAGS OSDeploy OSDCloud WinGet PowerShell
 .LICENSEURI 
-.PROJECTURI pwsh.live
+.PROJECTURI https://github.com/OSDeploy/OSD
 .ICONURI 
 .EXTERNALMODULEDEPENDENCIES 
 .REQUIREDSCRIPTS 
 .EXTERNALSCRIPTDEPENDENCIES 
 .RELEASENOTES
 Script should be executed in a Command Prompt using the following command
-powershell Invoke-Expression -Command (Invoke-RestMethod -Uri pwsh.live)
+powershell Invoke-Expression -Command (Invoke-RestMethod -Uri winget.osdcloud.com)
 This is abbreviated as
-powershell iex (irm pwsh.live)
+powershell iex (irm winget.osdcloud.com)
 #>
+#Requires -RunAsAdministrator
 <#
 .SYNOPSIS
-    PowerShell Script at pwsh.live
+    PowerShell Script which supports WinGet
 .DESCRIPTION
-    PowerShell Script at pwsh.live
+    PowerShell Script which supports WinGet
 .NOTES
-    Version 23.6.1.1
+    Version 23.6.3.1
 .LINK
-    https://gist.githubusercontent.com/OSDeploy/73b100190c329c5cce10b39b745ca70c/raw/pwsh.live.ps1
+    https://raw.githubusercontent.com/OSDeploy/OSD/master/cloud/subdomains/winget.osdcloud.ps1
 .EXAMPLE
-    powershell iex (irm pwsh.live)
+    powershell iex (irm winget.osdcloud.com)
 #>
 [CmdletBinding()]
 param()
-#=================================================
-#Script Information
-$ScriptName = 'pwsh.live'
-$ScriptVersion = '23.6.1.2'
-#=================================================
-#region Initialize
+$ScriptName = 'winget.osdcloud.com'
+$ScriptVersion = '23.6.3.1'
 
-# Start the Transcript
-$Transcript = "$((Get-Date).ToString('yyyy-MM-dd-HHmmss'))-OSDCloud.log"
+#region Initialize
+$Transcript = "$((Get-Date).ToString('yyyy-MM-dd-HHmmss'))-$ScriptName.log"
 $null = Start-Transcript -Path (Join-Path "$env:SystemRoot\Temp" $Transcript) -ErrorAction Ignore
 
-# Determine the proper Windows environment
 if ($env:SystemDrive -eq 'X:') {
     $WindowsPhase = 'WinPE'
 }
@@ -54,53 +50,82 @@ else {
     else {$WindowsPhase = 'Windows'}
 }
 
-# Finish initialization
-Write-Host -ForegroundColor Green "[+] $ScriptName $ScriptVersion"
+Write-Host -ForegroundColor Green "[+] $ScriptName $ScriptVersion ($WindowsPhase Phase)"
+Invoke-Expression -Command (Invoke-RestMethod -Uri functions.osdcloud.com)
 #endregion
 
 #region Admin Elevation
 $whoiam = [system.security.principal.windowsidentity]::getcurrent().name
 $isElevated = ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] "Administrator")
 if ($isElevated) {
-    Write-Host -ForegroundColor Green "[+] Running as $whoiam and IS Admin Elevated"
+    Write-Host -ForegroundColor Green "[+] Running as $whoiam (Admin Elevated)"
 }
 else {
-    Write-Warning "[-] Running as $whoiam and is NOT Admin Elevated"
+    Write-Host -ForegroundColor Red "[!] Running as $whoiam (NOT Admin Elevated)"
     Break
-}
-#endregion
-
-#region Set-ExecutionPolicy
-if ($WindowsPhase -eq 'WinPE') {
-    if ((Get-ExecutionPolicy) -ne 'Bypass') {
-        Write-Host -ForegroundColor Yellow "[-] Set-ExecutionPolicy Bypass -Force"
-        Set-ExecutionPolicy Bypass -Force
-    }
-    if ((Get-ExecutionPolicy) -eq 'Bypass') {
-        Write-Host -ForegroundColor Green "[+] Get-ExecutionPolicy Bypass"
-    }
-}
-if ($WindowsPhase -eq 'OOBE') {
-    if ((Get-ExecutionPolicy -Scope CurrentUser) -ne 'RemoteSigned') {
-        Write-Host -ForegroundColor Yellow "[-] Set-ExecutionPolicy -Scope CurrentUser RemoteSigned"
-        Set-ExecutionPolicy RemoteSigned -Force -Scope CurrentUser
-    }
-    if ((Get-ExecutionPolicy -Scope CurrentUser) -eq 'RemoteSigned') {
-        Write-Host -ForegroundColor Green "[+] Get-ExecutionPolicy RemoteSigned [CurrentUser]"
-    }
-}
-if ($WindowsPhase -eq 'Windows') {
-    Write-Host -ForegroundColor Gray "[i] Get-ExecutionPolicy $(Get-ExecutionPolicy -Scope Process) [Process]"
-    Write-Host -ForegroundColor Gray "[i] Get-ExecutionPolicy $(Get-ExecutionPolicy -Scope CurrentUser) [CurrentUser]"
-    Write-Host -ForegroundColor Gray "[i] Get-ExecutionPolicy $(Get-ExecutionPolicy -Scope LocalMachine) [LocalMachine]"
 }
 #endregion
 
 #region Transport Layer Security (TLS) 1.2
 Write-Host -ForegroundColor Green "[+] Transport Layer Security (TLS) 1.2"
-$script:securityProtocol = [Net.ServicePointManager]::SecurityProtocol
-[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
+[Net.ServicePointManager]::SecurityProtocol = [Net.ServicePointManager]::SecurityProtocol -bor [Net.SecurityProtocolType]::Tls12
 #endregion
+
+#region WinPE
+if ($WindowsPhase -eq 'WinPE') {
+    osdcloud-SetExecutionPolicy
+    osdcloud-WinpeSetEnvironmentVariables
+    osdcloud-SetPowerShellProfile
+    #osdcloud-WinpeInstallNuget
+    osdcloud-InstallPackageManagement
+    osdcloud-WinpeInstallPowerShellGet
+    osdcloud-TrustPSGallery
+    Write-Host -ForegroundColor Cyan "To start a new PowerShell session, type 'start powershell' and press enter"
+    $null = Stop-Transcript -ErrorAction Ignore
+}
+#endregion
+
+
+#region Specialize
+if ($WindowsPhase -eq 'Specialize') {
+    $null = Stop-Transcript -ErrorAction Ignore
+}
+#endregion
+
+
+#region AuditMode
+if ($WindowsPhase -eq 'AuditMode') {
+    $null = Stop-Transcript -ErrorAction Ignore
+}
+#endregion
+
+
+#region OOBE
+if ($WindowsPhase -eq 'OOBE') {
+    osdcloud-SetExecutionPolicy
+    osdcloud-SetPowerShellProfile
+    osdcloud-InstallPackageManagement
+    osdcloud-TrustPSGallery
+    osdcloud-InstallModuleOSD
+    $null = Stop-Transcript -ErrorAction Ignore
+}
+#endregion
+
+
+#region Windows
+if ($WindowsPhase -eq 'Windows') {
+    osdcloud-SetExecutionPolicy
+    osdcloud-SetPowerShellProfile
+    osdcloud-InstallPackageManagement
+    osdcloud-TrustPSGallery
+    osdcloud-InstallModuleOSD
+    $null = Stop-Transcript -ErrorAction Ignore
+}
+#endregion
+
+
+
+
 
 #region Set Environment Variables
 if ($WindowsPhase -eq 'WinPE') {
@@ -113,37 +138,6 @@ if ($WindowsPhase -eq 'WinPE') {
         [System.Environment]::SetEnvironmentVariable('HOMEDRIVE',"$Env:SystemDrive",[System.EnvironmentVariableTarget]::Process)
         [System.Environment]::SetEnvironmentVariable('HOMEPATH',"$Env:UserProfile",[System.EnvironmentVariableTarget]::Process)
         [System.Environment]::SetEnvironmentVariable('LOCALAPPDATA',"$Env:UserProfile\AppData\Local",[System.EnvironmentVariableTarget]::Process)
-    }
-}
-#endregion
-
-#region PowerShellProfile
-$winpePowerShellProfile = @'
-[Net.ServicePointManager]::SecurityProtocol = [Net.ServicePointManager]::SecurityProtocol -bor [Net.SecurityProtocolType]::Tls12
-[System.Environment]::SetEnvironmentVariable('APPDATA',"$Env:UserProfile\AppData\Roaming",[System.EnvironmentVariableTarget]::Process)
-[System.Environment]::SetEnvironmentVariable('HOMEDRIVE',"$Env:SystemDrive",[System.EnvironmentVariableTarget]::Process)
-[System.Environment]::SetEnvironmentVariable('HOMEPATH',"$Env:UserProfile",[System.EnvironmentVariableTarget]::Process)
-[System.Environment]::SetEnvironmentVariable('LOCALAPPDATA',"$Env:UserProfile\AppData\Local",[System.EnvironmentVariableTarget]::Process)
-'@
-$oobePowerShellProfile = @'
-[Net.ServicePointManager]::SecurityProtocol = [Net.ServicePointManager]::SecurityProtocol -bor [Net.SecurityProtocolType]::Tls12
-[System.Environment]::SetEnvironmentVariable('Path',$Env:Path + ";$Env:ProgramFiles\WindowsPowerShell\Scripts",'Process')
-'@
-if ($WindowsPhase -eq 'WinPE') {
-    if (-not (Test-Path "$env:UserProfile\Documents\WindowsPowerShell")) {
-        $null = New-Item -Path "$env:UserProfile\Documents\WindowsPowerShell" -ItemType Directory -Force -ErrorAction SilentlyContinue -WarningAction SilentlyContinue
-    }
-    Write-Host -ForegroundColor Green "[+] Set LocalAppData in PowerShell Profile"
-    $winpePowerShellProfile | Set-Content -Path "$env:UserProfile\Documents\WindowsPowerShell\Microsoft.PowerShell_profile.ps1" -Force -Encoding Unicode
-}
-if ($WindowsPhase -eq 'OOBE') {
-    if (-not (Test-Path $Profile.CurrentUserAllHosts)) {
-        Write-Host -ForegroundColor Green "[+] Set LocalAppData in PowerShell Profile [CurrentUserAllHosts]"
-        $null = New-Item $Profile.CurrentUserAllHosts -ItemType File -Force
-        #[System.Environment]::SetEnvironmentVariable('Path',"$Env:LocalAppData\Microsoft\WindowsApps;$Env:ProgramFiles\WindowsPowerShell\Scripts;",'User')
-        #[System.Environment]::SetEnvironmentVariable('Path',$Env:Path + ";$Env:ProgramFiles\WindowsPowerShell\Scripts")
-        #[Environment]::SetEnvironmentVariable("Path", $env:Path, [System.EnvironmentVariableTarget]::Machine)
-        $oobePowerShellProfile | Set-Content -Path $Profile.CurrentUserAllHosts -Force -Encoding Unicode
     }
 }
 #endregion
@@ -262,16 +256,7 @@ if ($WindowsPhase -eq 'WinPE') {
 #endregion
 
 #region PowerShell Gallery
-$PowerShellGallery = Get-PSRepository -Name PSGallery -ErrorAction Ignore
-if ($PowerShellGallery.InstallationPolicy -ne 'Trusted') {
-    Write-Host -ForegroundColor Yellow "[-] Set-PSRepository PSGallery Trusted"
-    Set-PSRepository -Name PSGallery -InstallationPolicy Trusted
-}
 
-$PowerShellGallery = Get-PSRepository -Name PSGallery -ErrorAction Ignore
-if ($PowerShellGallery.InstallationPolicy -eq 'Trusted') {
-    Write-Host -ForegroundColor Green "[+] PSRepository PSGallery Trusted"
-}
 #endregion
 
 #region Install Curl
@@ -430,5 +415,5 @@ if ($PowerShellSeven) {
     #start $($PowerShellSeven.FullName)
 }
 
-Write-Host -ForegroundColor Green "[+] pwsh.live Complete"
+Write-Host -ForegroundColor Green "[+] pwsh.osdcloud.com Complete"
 Stop-Transcript

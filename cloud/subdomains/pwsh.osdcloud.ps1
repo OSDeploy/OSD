@@ -26,20 +26,19 @@ powershell iex (irm pwsh.osdcloud.com)
 .NOTES
     Version 23.6.3.1
 .LINK
-    https://raw.githubusercontent.com/OSDeploy/OSD/master/cloud/pwsh.osdcloud.com.ps1
+    https://raw.githubusercontent.com/OSDeploy/OSD/master/cloud/subdomains/pwsh.osdcloud.ps1
 .EXAMPLE
     powershell iex (irm pwsh.osdcloud.com)
 #>
 [CmdletBinding()]
 param()
-
 $ScriptName = 'pwsh.osdcloud.com'
 $ScriptVersion = '23.6.3.1'
-
 
 #region Initialize
 $Transcript = "$((Get-Date).ToString('yyyy-MM-dd-HHmmss'))-$ScriptName.log"
 $null = Start-Transcript -Path (Join-Path "$env:SystemRoot\Temp" $Transcript) -ErrorAction Ignore
+
 if ($env:SystemDrive -eq 'X:') {
     $WindowsPhase = 'WinPE'
 }
@@ -50,10 +49,10 @@ else {
     elseif ($ImageState -eq 'IMAGE_STATE_SPECIALIZE_RESEAL_TO_AUDIT') {$WindowsPhase = 'AuditMode'}
     else {$WindowsPhase = 'Windows'}
 }
+
 Write-Host -ForegroundColor Green "[+] $ScriptName $ScriptVersion ($WindowsPhase Phase)"
 Invoke-Expression -Command (Invoke-RestMethod -Uri functions.osdcloud.com)
 #endregion
-
 
 #region Admin Elevation
 $whoiam = [system.security.principal.windowsidentity]::getcurrent().name
@@ -67,20 +66,10 @@ else {
 }
 #endregion
 
-
 #region Transport Layer Security (TLS) 1.2
 Write-Host -ForegroundColor Green "[+] Transport Layer Security (TLS) 1.2"
-$script:securityProtocol = [Net.ServicePointManager]::SecurityProtocol
-[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
+[Net.ServicePointManager]::SecurityProtocol = [Net.ServicePointManager]::SecurityProtocol -bor [Net.SecurityProtocolType]::Tls12
 #endregion
-
-
-
-
-
-
-
-
 
 #region WinPE
 if ($WindowsPhase -eq 'WinPE') {
@@ -91,6 +80,7 @@ if ($WindowsPhase -eq 'WinPE') {
     osdcloud-InstallPackageManagement
     osdcloud-WinpeInstallPowerShellGet
     osdcloud-TrustPSGallery
+    Write-Host -ForegroundColor Cyan "To start a new PowerShell session, type 'start powershell' and press enter"
     $null = Stop-Transcript -ErrorAction Ignore
 }
 #endregion
@@ -148,37 +138,6 @@ if ($WindowsPhase -eq 'WinPE') {
         [System.Environment]::SetEnvironmentVariable('HOMEDRIVE',"$Env:SystemDrive",[System.EnvironmentVariableTarget]::Process)
         [System.Environment]::SetEnvironmentVariable('HOMEPATH',"$Env:UserProfile",[System.EnvironmentVariableTarget]::Process)
         [System.Environment]::SetEnvironmentVariable('LOCALAPPDATA',"$Env:UserProfile\AppData\Local",[System.EnvironmentVariableTarget]::Process)
-    }
-}
-#endregion
-
-#region PowerShellProfile
-$winpePowerShellProfile = @'
-[Net.ServicePointManager]::SecurityProtocol = [Net.ServicePointManager]::SecurityProtocol -bor [Net.SecurityProtocolType]::Tls12
-[System.Environment]::SetEnvironmentVariable('APPDATA',"$Env:UserProfile\AppData\Roaming",[System.EnvironmentVariableTarget]::Process)
-[System.Environment]::SetEnvironmentVariable('HOMEDRIVE',"$Env:SystemDrive",[System.EnvironmentVariableTarget]::Process)
-[System.Environment]::SetEnvironmentVariable('HOMEPATH',"$Env:UserProfile",[System.EnvironmentVariableTarget]::Process)
-[System.Environment]::SetEnvironmentVariable('LOCALAPPDATA',"$Env:UserProfile\AppData\Local",[System.EnvironmentVariableTarget]::Process)
-'@
-$oobePowerShellProfile = @'
-[Net.ServicePointManager]::SecurityProtocol = [Net.ServicePointManager]::SecurityProtocol -bor [Net.SecurityProtocolType]::Tls12
-[System.Environment]::SetEnvironmentVariable('Path',$Env:Path + ";$Env:ProgramFiles\WindowsPowerShell\Scripts",'Process')
-'@
-if ($WindowsPhase -eq 'WinPE') {
-    if (-not (Test-Path "$env:UserProfile\Documents\WindowsPowerShell")) {
-        $null = New-Item -Path "$env:UserProfile\Documents\WindowsPowerShell" -ItemType Directory -Force -ErrorAction SilentlyContinue -WarningAction SilentlyContinue
-    }
-    Write-Host -ForegroundColor Green "[+] Set LocalAppData in PowerShell Profile"
-    $winpePowerShellProfile | Set-Content -Path "$env:UserProfile\Documents\WindowsPowerShell\Microsoft.PowerShell_profile.ps1" -Force -Encoding Unicode
-}
-if ($WindowsPhase -eq 'OOBE') {
-    if (-not (Test-Path $Profile.CurrentUserAllHosts)) {
-        Write-Host -ForegroundColor Green "[+] Set LocalAppData in PowerShell Profile [CurrentUserAllHosts]"
-        $null = New-Item $Profile.CurrentUserAllHosts -ItemType File -Force
-        #[System.Environment]::SetEnvironmentVariable('Path',"$Env:LocalAppData\Microsoft\WindowsApps;$Env:ProgramFiles\WindowsPowerShell\Scripts;",'User')
-        #[System.Environment]::SetEnvironmentVariable('Path',$Env:Path + ";$Env:ProgramFiles\WindowsPowerShell\Scripts")
-        #[Environment]::SetEnvironmentVariable("Path", $env:Path, [System.EnvironmentVariableTarget]::Machine)
-        $oobePowerShellProfile | Set-Content -Path $Profile.CurrentUserAllHosts -Force -Encoding Unicode
     }
 }
 #endregion
