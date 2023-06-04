@@ -80,6 +80,7 @@ if ($WindowsPhase -eq 'WinPE') {
     osdcloud-InstallPackageManagement
     osdcloud-WinpeInstallPowerShellGet
     osdcloud-TrustPSGallery
+    osdcloud-WinpeInstallCurl
     Write-Host -ForegroundColor Cyan "To start a new PowerShell session, type 'start powershell' and press enter"
     $null = Stop-Transcript -ErrorAction Ignore
 }
