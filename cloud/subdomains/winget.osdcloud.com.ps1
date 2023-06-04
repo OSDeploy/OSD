@@ -76,7 +76,7 @@ if ($WindowsPhase -eq 'WinPE') {
     osdcloud-SetExecutionPolicy
     osdcloud-WinpeSetEnvironmentVariables
     osdcloud-SetPowerShellProfile
-    #osdcloud-InstallNuget
+    osdcloud-InstallNuget
     osdcloud-InstallPackageManagement
     osdcloud-WinpeInstallPowerShellGet
     osdcloud-TrustPSGallery
