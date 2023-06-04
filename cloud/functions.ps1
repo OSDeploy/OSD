@@ -255,30 +255,15 @@ New-Alias -Name 'RemoveAppx' -Value 'osdcloud-RemoveAppx' -Description 'OSDCloud
 function osdcloud-TrustPSGallery {
     [CmdletBinding()]
     param ()
-
-    if ($WindowsPhase -eq 'WinPE') {
-        $PowerShellGallery = Get-PSRepository -Name PSGallery -ErrorAction Ignore
-        if ($PowerShellGallery.InstallationPolicy -ne 'Trusted') {
-            Write-Host -ForegroundColor Yellow "[-] Set-PSRepository PSGallery Trusted"
-            Set-PSRepository -Name PSGallery -InstallationPolicy Trusted
-        }
-
-        $PowerShellGallery = Get-PSRepository -Name PSGallery -ErrorAction Ignore
-        if ($PowerShellGallery.InstallationPolicy -eq 'Trusted') {
-            Write-Host -ForegroundColor Green "[+] PSRepository PSGallery Trusted"
-        }
+    $PowerShellGallery = Get-PSRepository -Name PSGallery -ErrorAction Ignore
+    if ($PowerShellGallery.InstallationPolicy -ne 'Trusted') {
+        Write-Host -ForegroundColor Yellow "[-] Set-PSRepository PSGallery Trusted"
+        Set-PSRepository -Name PSGallery -InstallationPolicy Trusted
     }
-    else {
-        $PowerShellGallery = Get-PSRepository -Name PSGallery -Scope CurrentUser -ErrorAction Ignore
-        if ($PowerShellGallery.InstallationPolicy -ne 'Trusted') {
-            Write-Host -ForegroundColor Yellow "[-] Set-PSRepository PSGallery Trusted [CurrentUser]"
-            Set-PSRepository -Name PSGallery -InstallationPolicy Trusted -Scope CurrentUser
-        }
 
-        $PowerShellGallery = Get-PSRepository -Name PSGallery -Scope CurrentUser -ErrorAction Ignore
-        if ($PowerShellGallery.InstallationPolicy -eq 'Trusted') {
-            Write-Host -ForegroundColor Green "[+] PSRepository PSGallery Trusted Trusted [CurrentUser]"
-        }
+    $PowerShellGallery = Get-PSRepository -Name PSGallery -ErrorAction Ignore
+    if ($PowerShellGallery.InstallationPolicy -eq 'Trusted') {
+        Write-Host -ForegroundColor Green "[+] PSRepository PSGallery Trusted"
     }
 }
 #endregion
