@@ -270,68 +270,66 @@ function osdcloud-InstallModuleAutopilot {
 function osdcloud-InstallModuleAzAccounts {
     [CmdletBinding()]
     param ()
+    $InstallModule = $false
     $PSModuleName = 'Az.Accounts'
-    $InstalledModule = Get-InstalledModule $PSModuleName -ErrorAction Ignore | Select-Object -First 1
-    $GalleryPSModule = Find-Module -Name $PSModuleName -ErrorAction Ignore
+    $InstalledModule = Get-Module -Name $PSModuleName -ListAvailable -ErrorAction Ignore | Sort-Object Version -Descending | Select-Object -First 1
+    $GalleryPSModule = Find-Module -Name $PSModuleName -ErrorAction Ignore -WarningAction Ignore
 
-    if ($InstalledModule) {
+    if ($GalleryPSModule) {
         if (($GalleryPSModule.Version -as [version]) -gt ($InstalledModule.Version -as [version])) {
             if ($WindowsPhase -eq 'WinPE') {
-                Write-Host -ForegroundColor DarkGray "Update-Module $PSModuleName $($GalleryPSModule.Version) [AllUsers]"
-                Update-Module -Name $PSModuleName -Scope AllUsers -Force
+                Write-Host -ForegroundColor Yellow "[-] Install-Module $PSModuleName $($GalleryPSModule.Version) [AllUsers]"
+                Install-Module $PSModuleName -Scope AllUsers -Force -SkipPublisherCheck
                 Import-Module $PSModuleName -Force
             }
             else {
-                Write-Host -ForegroundColor DarkGray "Update-Module $PSModuleName $($GalleryPSModule.Version) [CurrentUser]"
-                Update-Module -Name $PSModuleName -Scope CurrentUser -Force
+                Write-Host -ForegroundColor Yellow "[-] Install-Module $PSModuleName $($GalleryPSModule.Version) [CurrentUser]"
+                Install-Module $PSModuleName -Scope CurrentUser -Force -SkipPublisherCheck
                 Import-Module $PSModuleName -Force
-            } 
+            }
+
         }
     }
-    else {
-        if ($WindowsPhase -eq 'WinPE') {
-            Write-Host -ForegroundColor DarkGray "Install-Module $PSModuleName $($GalleryPSModule.Version) [AllUsers]"
-            Install-Module $PSModuleName -Scope AllUsers -SkipPublisherCheck
-        }
-        else {
-            Write-Host -ForegroundColor DarkGray "Install-Module $PSModuleName $($GalleryPSModule.Version) [CurrentUser]"
-            Install-Module $PSModuleName -Scope CurrentUser -SkipPublisherCheck
+
+    $InstalledModule = Get-Module -Name $PSModuleName -ListAvailable -ErrorAction Ignore | Sort-Object Version -Descending | Select-Object -First 1
+    if ($GalleryPSModule) {
+        if (($InstalledModule.Version -as [version]) -ge ($GalleryPSModule.Version -as [version])) {
+            Write-Host -ForegroundColor Green "[+] $PSModuleName $($GalleryPSModule.Version)"
+            Import-Module $PSModuleName -Force
         }
     }
-    Import-Module $PSModuleName -Force
 }
 function osdcloud-InstallModuleAzKeyVault {
     [CmdletBinding()]
     param ()
+    $InstallModule = $false
     $PSModuleName = 'Az.KeyVault'
-    $InstalledModule = Get-InstalledModule $PSModuleName -ErrorAction Ignore | Select-Object -First 1
-    $GalleryPSModule = Find-Module -Name $PSModuleName -ErrorAction Ignore
+    $InstalledModule = Get-Module -Name $PSModuleName -ListAvailable -ErrorAction Ignore | Sort-Object Version -Descending | Select-Object -First 1
+    $GalleryPSModule = Find-Module -Name $PSModuleName -ErrorAction Ignore -WarningAction Ignore
 
-    if ($InstalledModule) {
+    if ($GalleryPSModule) {
         if (($GalleryPSModule.Version -as [version]) -gt ($InstalledModule.Version -as [version])) {
             if ($WindowsPhase -eq 'WinPE') {
-                Write-Host -ForegroundColor DarkGray "Update-Module $PSModuleName $($GalleryPSModule.Version) [AllUsers]"
-                Update-Module -Name $PSModuleName -Scope AllUsers -Force
+                Write-Host -ForegroundColor Yellow "[-] Install-Module $PSModuleName $($GalleryPSModule.Version) [AllUsers]"
+                Install-Module $PSModuleName -Scope AllUsers -Force -SkipPublisherCheck
                 Import-Module $PSModuleName -Force
             }
             else {
-                Write-Host -ForegroundColor DarkGray "Update-Module $PSModuleName $($GalleryPSModule.Version) [CurrentUser]"
-                Update-Module -Name $PSModuleName -Scope CurrentUser -Force
+                Write-Host -ForegroundColor Yellow "[-] Install-Module $PSModuleName $($GalleryPSModule.Version) [CurrentUser]"
+                Install-Module $PSModuleName -Scope CurrentUser -Force -SkipPublisherCheck
                 Import-Module $PSModuleName -Force
-            } 
+            }
+
         }
     }
-    else {
-        if ($WindowsPhase -eq 'WinPE') {
-            Write-Host -ForegroundColor DarkGray "Install-Module $PSModuleName $($GalleryPSModule.Version) [AllUsers]"
-            Install-Module $PSModuleName -Scope AllUsers -SkipPublisherCheck
-        }
-        else {
-            Write-Host -ForegroundColor DarkGray "Install-Module $PSModuleName $($GalleryPSModule.Version) [CurrentUser]"
-            Install-Module $PSModuleName -Scope CurrentUser -SkipPublisherCheck
+
+    $InstalledModule = Get-Module -Name $PSModuleName -ListAvailable -ErrorAction Ignore | Sort-Object Version -Descending | Select-Object -First 1
+    if ($GalleryPSModule) {
+        if (($InstalledModule.Version -as [version]) -ge ($GalleryPSModule.Version -as [version])) {
+            Write-Host -ForegroundColor Green "[+] $PSModuleName $($GalleryPSModule.Version)"
+            Import-Module $PSModuleName -Force
         }
     }
-    Import-Module $PSModuleName -Force
 }
 function osdcloud-InstallModuleAzResources {
     [CmdletBinding()]
