@@ -26,7 +26,7 @@ powershell iex (irm pwsh.osdcloud.com)
 .NOTES
     Version 23.6.3.1
 .LINK
-    https://raw.githubusercontent.com/OSDeploy/OSD/master/cloud/sandbox.osdcloud.com.ps1
+    https://raw.githubusercontent.com/OSDeploy/OSD/master/cloud/pwsh.osdcloud.com.ps1
 .EXAMPLE
     powershell iex (irm pwsh.osdcloud.com)
 #>
@@ -37,37 +37,37 @@ $ScriptName = 'pwsh.osdcloud.com'
 $ScriptVersion = '23.6.3.1'
 
 #region Initialize
-    # Start the Transcript
-    $Transcript = "$((Get-Date).ToString('yyyy-MM-dd-HHmmss'))-$ScriptName.log"
-    $null = Start-Transcript -Path (Join-Path "$env:SystemRoot\Temp" $Transcript) -ErrorAction Ignore
+# Start the Transcript
+$Transcript = "$((Get-Date).ToString('yyyy-MM-dd-HHmmss'))-$ScriptName.log"
+$null = Start-Transcript -Path (Join-Path "$env:SystemRoot\Temp" $Transcript) -ErrorAction Ignore
 
-    # Determine the proper Windows environment
-    if ($env:SystemDrive -eq 'X:') {
-        $WindowsPhase = 'WinPE'
-    }
-    else {
-        $ImageState = (Get-ItemProperty -Path 'HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Setup\State' -ErrorAction Ignore).ImageState
-        if ($env:UserName -eq 'defaultuser0') {$WindowsPhase = 'OOBE'}
-        elseif ($ImageState -eq 'IMAGE_STATE_SPECIALIZE_RESEAL_TO_OOBE') {$WindowsPhase = 'Specialize'}
-        elseif ($ImageState -eq 'IMAGE_STATE_SPECIALIZE_RESEAL_TO_AUDIT') {$WindowsPhase = 'AuditMode'}
-        else {$WindowsPhase = 'Windows'}
-    }
+# Determine the proper Windows environment
+if ($env:SystemDrive -eq 'X:') {
+    $WindowsPhase = 'WinPE'
+}
+else {
+    $ImageState = (Get-ItemProperty -Path 'HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Setup\State' -ErrorAction Ignore).ImageState
+    if ($env:UserName -eq 'defaultuser0') {$WindowsPhase = 'OOBE'}
+    elseif ($ImageState -eq 'IMAGE_STATE_SPECIALIZE_RESEAL_TO_OOBE') {$WindowsPhase = 'Specialize'}
+    elseif ($ImageState -eq 'IMAGE_STATE_SPECIALIZE_RESEAL_TO_AUDIT') {$WindowsPhase = 'AuditMode'}
+    else {$WindowsPhase = 'Windows'}
+}
 
-    # Finish initialization
-    Write-Host -ForegroundColor Green "[+] $ScriptName $ScriptVersion (Windows Phase $WindowsPhase)"
+# Finish initialization
+Write-Host -ForegroundColor Green "[+] $ScriptName $ScriptVersion (Windows Phase $WindowsPhase)"
 
-    # Load OSDCloud Functions
-    Invoke-Expression -Command (Invoke-RestMethod -Uri functions.osdcloud.com)
+# Load OSDCloud Functions
+Invoke-Expression -Command (Invoke-RestMethod -Uri functions.osdcloud.com)
 #endregion
 
 #region Admin Elevation
 $whoiam = [system.security.principal.windowsidentity]::getcurrent().name
 $isElevated = ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] "Administrator")
 if ($isElevated) {
-    Write-Host -ForegroundColor Green "[+] Running as $whoiam and IS Admin Elevated"
+    Write-Host -ForegroundColor Green "[+] Running as $whoiam and Admin Elevated"
 }
 else {
-    Write-Warning "[-] Running as $whoiam and is NOT Admin Elevated"
+    Write-Host -ForegroundColor Red "[!] Running as $whoiam and NOT Admin Elevated"
     Break
 }
 #endregion
