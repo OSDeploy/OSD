@@ -36,12 +36,10 @@ param()
 $ScriptName = 'sandbox.osdcloud.com'
 $ScriptVersion = '23.6.3.1'
 
+
 #region Initialize
-# Start the Transcript
 $Transcript = "$((Get-Date).ToString('yyyy-MM-dd-HHmmss'))-$ScriptName.log"
 $null = Start-Transcript -Path (Join-Path "$env:SystemRoot\Temp" $Transcript) -ErrorAction Ignore
-
-# Determine the proper Windows environment
 if ($env:SystemDrive -eq 'X:') {
     $WindowsPhase = 'WinPE'
 }
@@ -52,73 +50,62 @@ else {
     elseif ($ImageState -eq 'IMAGE_STATE_SPECIALIZE_RESEAL_TO_AUDIT') {$WindowsPhase = 'AuditMode'}
     else {$WindowsPhase = 'Windows'}
 }
-
-# Finish initialization
 Write-Host -ForegroundColor Green "[+] $ScriptName $ScriptVersion (Windows Phase $WindowsPhase)"
-
-# Load OSDCloud Functions
 Invoke-Expression -Command (Invoke-RestMethod -Uri functions.osdcloud.com)
 #endregion
+
 
 #region Admin Elevation
 $whoiam = [system.security.principal.windowsidentity]::getcurrent().name
 $isElevated = ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] "Administrator")
 if ($isElevated) {
-    Write-Host -ForegroundColor Green "[+] Running as $whoiam and Admin Elevated"
+    Write-Host -ForegroundColor Green "[+] Running as $whoiam (Admin Elevated)"
 }
 else {
-    Write-Host -ForegroundColor Red "[!] Running as $whoiam and NOT Admin Elevated"
+    Write-Host -ForegroundColor Red "[!] Running as $whoiam (NOT Admin Elevated)"
     Break
 }
 #endregion
 
 
-
-
-
-
-#=================================================
 #region WinPE
 if ($WindowsPhase -eq 'WinPE') {
-
     #Process OSDCloud startup and load Azure KeyVault dependencies
     osdcloud-StartWinPE -OSDCloud -KeyVault
     Write-Host -ForegroundColor Cyan "To start a new PowerShell session, type 'start powershell' and press enter"
     Write-Host -ForegroundColor Cyan "Start-OSDCloud or Start-OSDCloudGUI can be run in the new PowerShell session"
-    
     #Stop the startup Transcript.  OSDCloud will create its own
     $null = Stop-Transcript -ErrorAction Ignore
 }
 #endregion
-#=================================================
+
+
 #region Specialize
 if ($WindowsPhase -eq 'Specialize') {
     $null = Stop-Transcript -ErrorAction Ignore
 }
 #endregion
-#=================================================
+
+
 #region AuditMode
 if ($WindowsPhase -eq 'AuditMode') {
     $null = Stop-Transcript -ErrorAction Ignore
 }
 #endregion
-#=================================================
+
+
 #region OOBE
 if ($WindowsPhase -eq 'OOBE') {
-
     #Load everything needed to run AutoPilot and Azure KeyVault
     osdcloud-StartOOBE -Display -Language -DateTime -Autopilot -KeyVault
-
     $null = Stop-Transcript -ErrorAction Ignore
 }
 #endregion
-#=================================================
+
+
 #region Windows
 if ($WindowsPhase -eq 'Windows') {
-
     #Load OSD and Azure stuff
-
     $null = Stop-Transcript -ErrorAction Ignore
 }
 #endregion
-#=================================================

@@ -379,22 +379,8 @@ function osdcloud-RestartComputer {
     Start-Sleep -Seconds 30
     Restart-Computer
 }
-function osdcloud-SetExecutionPolicy {
-    [CmdletBinding()]
-    param ()
-    if ($WindowsPhase -eq 'WinPE') {
         if ((Get-ExecutionPolicy) -ne 'Bypass') {
-            Write-Host -ForegroundColor DarkGray 'Set-ExecutionPolicy Bypass'
-            Set-ExecutionPolicy Bypass -Force
-        }
-    }
-    else {
-        if ((Get-ExecutionPolicy -Scope CurrentUser) -ne 'RemoteSigned') {
-            Write-Host -ForegroundColor DarkGray 'Set-ExecutionPolicy RemoteSigned [CurrentUser]'
-            Set-ExecutionPolicy RemoteSigned -Force -Scope CurrentUser
-        }
-    }
-}
+
 function osdcloud-StopComputer {
     [CmdletBinding()]
     param ()

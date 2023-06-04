@@ -36,12 +36,10 @@ param()
 $ScriptName = 'pwsh.osdcloud.com'
 $ScriptVersion = '23.6.3.1'
 
+
 #region Initialize
-# Start the Transcript
 $Transcript = "$((Get-Date).ToString('yyyy-MM-dd-HHmmss'))-$ScriptName.log"
 $null = Start-Transcript -Path (Join-Path "$env:SystemRoot\Temp" $Transcript) -ErrorAction Ignore
-
-# Determine the proper Windows environment
 if ($env:SystemDrive -eq 'X:') {
     $WindowsPhase = 'WinPE'
 }
@@ -52,51 +50,76 @@ else {
     elseif ($ImageState -eq 'IMAGE_STATE_SPECIALIZE_RESEAL_TO_AUDIT') {$WindowsPhase = 'AuditMode'}
     else {$WindowsPhase = 'Windows'}
 }
-
-# Finish initialization
 Write-Host -ForegroundColor Green "[+] $ScriptName $ScriptVersion (Windows Phase $WindowsPhase)"
-
-# Load OSDCloud Functions
 Invoke-Expression -Command (Invoke-RestMethod -Uri functions.osdcloud.com)
 #endregion
+
 
 #region Admin Elevation
 $whoiam = [system.security.principal.windowsidentity]::getcurrent().name
 $isElevated = ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] "Administrator")
 if ($isElevated) {
-    Write-Host -ForegroundColor Green "[+] Running as $whoiam and Admin Elevated"
+    Write-Host -ForegroundColor Green "[+] Running as $whoiam (Admin Elevated)"
 }
 else {
-    Write-Host -ForegroundColor Red "[!] Running as $whoiam and NOT Admin Elevated"
+    Write-Host -ForegroundColor Red "[!] Running as $whoiam (NOT Admin Elevated)"
     Break
 }
 #endregion
 
-#region Set-ExecutionPolicy
+#region WinPE
 if ($WindowsPhase -eq 'WinPE') {
-    if ((Get-ExecutionPolicy) -ne 'Bypass') {
-        Write-Host -ForegroundColor Yellow "[-] Set-ExecutionPolicy Bypass -Force"
-        Set-ExecutionPolicy Bypass -Force
-    }
-    if ((Get-ExecutionPolicy) -eq 'Bypass') {
-        Write-Host -ForegroundColor Green "[+] Get-ExecutionPolicy Bypass"
-    }
-}
-if ($WindowsPhase -eq 'OOBE') {
-    if ((Get-ExecutionPolicy -Scope CurrentUser) -ne 'RemoteSigned') {
-        Write-Host -ForegroundColor Yellow "[-] Set-ExecutionPolicy -Scope CurrentUser RemoteSigned"
-        Set-ExecutionPolicy RemoteSigned -Force -Scope CurrentUser
-    }
-    if ((Get-ExecutionPolicy -Scope CurrentUser) -eq 'RemoteSigned') {
-        Write-Host -ForegroundColor Green "[+] Get-ExecutionPolicy RemoteSigned [CurrentUser]"
-    }
-}
-if ($WindowsPhase -eq 'Windows') {
-    Write-Host -ForegroundColor Gray "[i] Get-ExecutionPolicy $(Get-ExecutionPolicy -Scope Process) [Process]"
-    Write-Host -ForegroundColor Gray "[i] Get-ExecutionPolicy $(Get-ExecutionPolicy -Scope CurrentUser) [CurrentUser]"
-    Write-Host -ForegroundColor Gray "[i] Get-ExecutionPolicy $(Get-ExecutionPolicy -Scope LocalMachine) [LocalMachine]"
+    osdcloud-SetExecutionPolicy
+    osdcloud-WinpeSetEnvironmentVariables
+    osdcloud-SetPowerShellProfile
+    #osdcloud-WinpeInstallNuget
+    osdcloud-InstallPackageManagement
+    osdcloud-WinpeInstallPowerShellGet
+    osdcloud-TrustPSGallery
+    $null = Stop-Transcript -ErrorAction Ignore
 }
 #endregion
+
+
+#region Specialize
+if ($WindowsPhase -eq 'Specialize') {
+    $null = Stop-Transcript -ErrorAction Ignore
+}
+#endregion
+
+
+#region AuditMode
+if ($WindowsPhase -eq 'AuditMode') {
+    $null = Stop-Transcript -ErrorAction Ignore
+}
+#endregion
+
+
+#region OOBE
+if ($WindowsPhase -eq 'OOBE') {
+    osdcloud-SetExecutionPolicy
+    osdcloud-SetPowerShellProfile
+    osdcloud-InstallPackageManagement
+    osdcloud-TrustPSGallery
+    osdcloud-InstallModuleOSD
+    $null = Stop-Transcript -ErrorAction Ignore
+}
+#endregion
+
+
+#region Windows
+if ($WindowsPhase -eq 'Windows') {
+    osdcloud-SetExecutionPolicy
+    osdcloud-SetPowerShellProfile
+    osdcloud-InstallPackageManagement
+    osdcloud-TrustPSGallery
+    osdcloud-InstallModuleOSD
+    $null = Stop-Transcript -ErrorAction Ignore
+}
+#endregion
+
+
+
 
 #region Transport Layer Security (TLS) 1.2
 Write-Host -ForegroundColor Green "[+] Transport Layer Security (TLS) 1.2"
