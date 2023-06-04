@@ -30,15 +30,12 @@ powershell iex (irm functions.osdcloud.com)
     powershell iex (irm functions.osdcloud.com)
     Invoke-Expression (Invoke-RestMethod -Uri 'https://raw.githubusercontent.com/OSDeploy/OSD/master/cloud/functions.ps1')
 #>
-#=================================================
-#Script Information
+[CmdletBinding()]
+param()
 $ScriptName = 'functions.osdcloud.com'
-$ScriptVersion = '22.9.13.1'
-#=================================================
-#region Initialize Functions
-[Net.ServicePointManager]::SecurityProtocol = [Net.ServicePointManager]::SecurityProtocol -bor [Net.SecurityProtocolType]::Tls12
+$ScriptVersion = '23.6.3.1'
 
-#region Environment
+#region Initialize
 if ($env:SystemDrive -eq 'X:') {
     $WindowsPhase = 'WinPE'
 }
@@ -49,6 +46,13 @@ else {
     elseif ($ImageState -eq 'IMAGE_STATE_SPECIALIZE_RESEAL_TO_AUDIT') {$WindowsPhase = 'AuditMode'}
     else {$WindowsPhase = 'Windows'}
 }
+
+Write-Host -ForegroundColor Green "[+] $ScriptName $ScriptVersion ($WindowsPhase Phase)"
+#endregion
+
+#region Transport Layer Security (TLS) 1.2
+#Write-Host -ForegroundColor Green "[+] Transport Layer Security (TLS) 1.2"
+[Net.ServicePointManager]::SecurityProtocol = [Net.ServicePointManager]::SecurityProtocol -bor [Net.SecurityProtocolType]::Tls12
 #endregion
 
 #region PowerShell Profile
@@ -285,7 +289,7 @@ if ($Manufacturer -match "Dell"){
 #endregion
 
 #region Finish Initialization
-Write-Host -ForegroundColor DarkGray "$ScriptName $ScriptVersion $WindowsPhase"
+Write-Host -ForegroundColor Green "[+] $ScriptName $ScriptVersion ($WindowsPhase Phase)"
 
 if ($WindowsPhase -eq 'WinPE') {
     Invoke-Expression (Invoke-RestMethod -Uri 'https://raw.githubusercontent.com/OSDeploy/OSD/master/cloud/modules/_anywhere.psm1')

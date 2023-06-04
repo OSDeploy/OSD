@@ -32,14 +32,13 @@ powershell iex (irm sandbox.osdcloud.com)
 #>
 [CmdletBinding()]
 param()
-
 $ScriptName = 'sandbox.osdcloud.com'
 $ScriptVersion = '23.6.3.1'
-
 
 #region Initialize
 $Transcript = "$((Get-Date).ToString('yyyy-MM-dd-HHmmss'))-$ScriptName.log"
 $null = Start-Transcript -Path (Join-Path "$env:SystemRoot\Temp" $Transcript) -ErrorAction Ignore
+
 if ($env:SystemDrive -eq 'X:') {
     $WindowsPhase = 'WinPE'
 }
@@ -50,10 +49,10 @@ else {
     elseif ($ImageState -eq 'IMAGE_STATE_SPECIALIZE_RESEAL_TO_AUDIT') {$WindowsPhase = 'AuditMode'}
     else {$WindowsPhase = 'Windows'}
 }
+
 Write-Host -ForegroundColor Green "[+] $ScriptName $ScriptVersion ($WindowsPhase Phase)"
 Invoke-Expression -Command (Invoke-RestMethod -Uri functions.osdcloud.com)
 #endregion
-
 
 #region Admin Elevation
 $whoiam = [system.security.principal.windowsidentity]::getcurrent().name
@@ -67,11 +66,9 @@ else {
 }
 #endregion
 
-
 #region Transport Layer Security (TLS) 1.2
 Write-Host -ForegroundColor Green "[+] Transport Layer Security (TLS) 1.2"
-$script:securityProtocol = [Net.ServicePointManager]::SecurityProtocol
-[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
+[Net.ServicePointManager]::SecurityProtocol = [Net.ServicePointManager]::SecurityProtocol -bor [Net.SecurityProtocolType]::Tls12
 #endregion
 
 
