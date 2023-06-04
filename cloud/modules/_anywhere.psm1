@@ -288,15 +288,12 @@ function osdcloud-InstallModuleAzAccounts {
         }
     }
 
-<#
     $InstalledModule = Get-Module -Name $PSModuleName -ListAvailable -ErrorAction Ignore | Sort-Object Version -Descending | Select-Object -First 1
     if ($GalleryPSModule) {
         if (($InstalledModule.Version -as [version]) -ge ($GalleryPSModule.Version -as [version])) {
             Write-Host -ForegroundColor Green "[+] $PSModuleName $($GalleryPSModule.Version)"
-            Import-Module $PSModuleName -Force
         }
     }
-#>
 }
 function osdcloud-InstallModuleAzKeyVault {
     [CmdletBinding()]
@@ -318,15 +315,13 @@ function osdcloud-InstallModuleAzKeyVault {
             }
         }
     }
-<#
+
     $InstalledModule = Get-Module -Name $PSModuleName -ListAvailable -ErrorAction Ignore | Sort-Object Version -Descending | Select-Object -First 1
     if ($GalleryPSModule) {
         if (($InstalledModule.Version -as [version]) -ge ($GalleryPSModule.Version -as [version])) {
             Write-Host -ForegroundColor Green "[+] $PSModuleName $($GalleryPSModule.Version)"
-            Import-Module $PSModuleName -Force
         }
     }
-#>
 }
 function osdcloud-InstallModuleAzResources {
     [CmdletBinding()]
