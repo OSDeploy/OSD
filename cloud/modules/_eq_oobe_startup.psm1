@@ -52,7 +52,10 @@ function osdcloud-StartOOBE {
     osdcloud-SetPowerShellProfile
     osdcloud-InstallPackageManagement
     osdcloud-TrustPSGallery
+    osdcloud-InstallModulePester
+    osdcloud-InstallModulePSReadLine
     osdcloud-InstallModuleOSD
+    osdcloud-InstallWinGet
 
     #Add Azure KeuVault Support
     if ($Azure) {

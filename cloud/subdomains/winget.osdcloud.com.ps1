@@ -26,7 +26,7 @@ powershell iex (irm winget.osdcloud.com)
 .NOTES
     Version 23.6.3.1
 .LINK
-    https://raw.githubusercontent.com/OSDeploy/OSD/master/cloud/subdomains/winget.osdcloud.ps1
+    https://raw.githubusercontent.com/OSDeploy/OSD/master/cloud/subdomains/winget.osdcloud.com.ps1
 .EXAMPLE
     powershell iex (irm winget.osdcloud.com)
 #>
