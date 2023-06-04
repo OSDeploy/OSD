@@ -145,7 +145,7 @@
                         Width = "175"
                         SelectedIndex="-1" />
             </StackPanel>
-            <StackPanel Orientation="Vertical" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="0 0 0 0">
+            <StackPanel Orientation="Vertical" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5 0 0 0">
              <Label Grid.Row="0"
                Name="ScriptLabel"
                Content="Script"
