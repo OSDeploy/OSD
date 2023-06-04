@@ -379,7 +379,6 @@ function osdcloud-RestartComputer {
     Start-Sleep -Seconds 30
     Restart-Computer
 }
-        if ((Get-ExecutionPolicy) -ne 'Bypass') {
 
 function osdcloud-StopComputer {
     [CmdletBinding()]
