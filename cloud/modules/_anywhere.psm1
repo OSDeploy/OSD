@@ -280,12 +280,10 @@ function osdcloud-InstallModuleAzAccounts {
             if ($WindowsPhase -eq 'WinPE') {
                 Write-Host -ForegroundColor Yellow "[-] Install-Module $PSModuleName $($GalleryPSModule.Version) [AllUsers]"
                 Install-Module $PSModuleName -Scope AllUsers -Force -SkipPublisherCheck
-                Import-Module $PSModuleName -Force
             }
             else {
                 Write-Host -ForegroundColor Yellow "[-] Install-Module $PSModuleName $($GalleryPSModule.Version) [CurrentUser]"
                 Install-Module $PSModuleName -Scope CurrentUser -Force -SkipPublisherCheck
-                Import-Module $PSModuleName -Force
             }
         }
     }
@@ -313,12 +311,10 @@ function osdcloud-InstallModuleAzKeyVault {
             if ($WindowsPhase -eq 'WinPE') {
                 Write-Host -ForegroundColor Yellow "[-] Install-Module $PSModuleName $($GalleryPSModule.Version) [AllUsers]"
                 Install-Module $PSModuleName -Scope AllUsers -Force -SkipPublisherCheck
-                Import-Module $PSModuleName -Force
             }
             else {
                 Write-Host -ForegroundColor Yellow "[-] Install-Module $PSModuleName $($GalleryPSModule.Version) [CurrentUser]"
                 Install-Module $PSModuleName -Scope CurrentUser -Force -SkipPublisherCheck
-                Import-Module $PSModuleName -Force
             }
         }
     }
