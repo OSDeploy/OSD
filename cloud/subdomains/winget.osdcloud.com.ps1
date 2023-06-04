@@ -96,12 +96,11 @@ if ($WindowsPhase -eq 'OOBE') {
     osdcloud-SetPowerShellProfile
     osdcloud-InstallPackageManagement
     osdcloud-TrustPSGallery
-    osdcloud-InstallModuleOSD
     osdcloud-InstallModulePester
     osdcloud-InstallModulePSReadLine
     osdcloud-InstallWinGet
     osdcloud-InstallPwsh
-    if ($WinGetEXE) {
+    if (Get-Command 'WinGet' -ErrorAction SilentlyContinue) {
         Write-Host -ForegroundColor Green "[+] winget upgrade --all --accept-source-agreements --accept-package-agreements"
         winget upgrade --all --accept-source-agreements --accept-package-agreements
     }
@@ -120,7 +119,7 @@ if ($WindowsPhase -eq 'Windows') {
     osdcloud-InstallModulePSReadLine
     osdcloud-InstallWinGet
     osdcloud-InstallPwsh
-    if ($WinGetEXE) {
+    if (Get-Command 'WinGet' -ErrorAction SilentlyContinue) {
         Write-Host -ForegroundColor Green "[+] winget upgrade --all --accept-source-agreements --accept-package-agreements"
         winget upgrade --all --accept-source-agreements --accept-package-agreements
     }
