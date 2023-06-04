@@ -6,9 +6,9 @@
 .NOTES
     This module should be loaded in OOBE and Windows
 .LINK
-    https://raw.githubusercontent.com/OSDeploy/OSD/master/cloud/modules/_oobewin.psm1
+    https://raw.githubusercontent.com/OSDeploy/OSD/master/cloud/modules/_oobe_and_windows.psm1
 .EXAMPLE
-    Invoke-Expression (Invoke-RestMethod -Uri 'https://raw.githubusercontent.com/OSDeploy/OSD/master/cloud/modules/_oobewin.psm1')
+    Invoke-Expression (Invoke-RestMethod -Uri 'https://raw.githubusercontent.com/OSDeploy/OSD/master/cloud/modules/_oobe_and_windows.psm1')
 #>
 #=================================================
 #region Functions
@@ -21,7 +21,6 @@ function osdcloud-InstallScriptAutopilot {
         Install-Script -Name Get-WindowsAutoPilotInfo -Force -Scope AllUsers
     }
 }
-
 function osdcloud-RenamePC {
     [CmdletBinding()]
     param ()
@@ -101,5 +100,5 @@ function osdcloud-RenamePC {
     Rename-Computer -NewName $ComputerName
     Write-Output "====================================================="
 }
-    #endregion
+#endregion
 #=================================================

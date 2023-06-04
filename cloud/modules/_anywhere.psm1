@@ -11,9 +11,7 @@
     Invoke-Expression (Invoke-RestMethod -Uri 'https://raw.githubusercontent.com/OSDeploy/OSD/master/cloud/modules/_anywhere.psm1')
 #>
 #=================================================
-
 #region Functions
-
 function osdcloud-InstallModuleAutopilot {
     [CmdletBinding()]
     param ()
@@ -22,80 +20,6 @@ function osdcloud-InstallModuleAutopilot {
         Write-Host -ForegroundColor DarkGray 'Install-Module AzureAD,Microsoft.Graph.Intune,WindowsAutopilotIntune [CurrentUser]'
         Install-Module WindowsAutopilotIntune -Force -Scope CurrentUser -SkipPublisherCheck
     }
-}
-function osdcloud-UpdateModuleFilesManually {
-    #Custom Testing - Overwrites files in module with updated ones in GitHub
-    [CmdletBinding()]
-    Param (
-        [Parameter(Mandatory=$false)]
-        [ValidateSet($true, $false)]
-        $DEVMode = $false
-        ) 
-    write-host "Manually Updating Several Module Files directly from GitHub" -ForegroundColor Cyan
-    $ModulePath = (Get-ChildItem -Path "$($Env:ProgramFiles)\WindowsPowerShell\Modules\osd" | Where-Object {$_.Attributes -match "Directory"} | select -Last 1).fullname
-    write-host "Updating Files in $ModulePath"
-    $OSDCloudGUIDevProjectPath = "Projects\OSDCloudDev"
-    $OSDCloudGUIProjectPath = "Projects\OSDCloudGUI"
-    $OSDCloudFunctionsPath = "Public\Functions\OSDCloud"
-    $GitHubURI = "https://raw.githubusercontent.com/OSDeploy/OSD/master"
-    Invoke-WebRequest -UseBasicParsing -uri "$GitHubURI/$OSDCloudGUIDevProjectPath/MainWindow.ps1" -OutFile "$ModulePath/$OSDCloudGUIDevProjectPath/MainWindow.ps1"
-    Invoke-WebRequest -UseBasicParsing -uri "$GitHubURI/$OSDCloudGUIDevProjectPath/MainWindow.xaml" -OutFile "$ModulePath/$OSDCloudGUIDevProjectPath/MainWindow.xaml"
-    Invoke-WebRequest -UseBasicParsing -uri "$GitHubURI/$OSDCloudGUIProjectPath/MainWindow.ps1" -OutFile "$ModulePath/$OSDCloudGUIProjectPath/MainWindow.ps1"
-    Invoke-WebRequest -UseBasicParsing -uri "$GitHubURI/$OSDCloudGUIProjectPath/MainWindow.xaml" -OutFile "$ModulePath/$OSDCloudGUIProjectPath/MainWindow.xaml"
-    if ($DevMode -eq $true){Invoke-WebRequest -UseBasicParsing -uri "$GitHubURI/$OSDCloudFunctionsPath/Invoke-OSDSpecializeDev.ps1" -OutFile "$ModulePath/$OSDCloudFunctionsPath/Invoke-OSDSpecializeDev.ps1"}
-    else{Invoke-WebRequest -UseBasicParsing -uri "$GitHubURI/$OSDCloudFunctionsPath/Invoke-OSDSpecialize.ps1" -OutFile "$ModulePath/$OSDCloudFunctionsPath/Invoke-OSDSpecialize.ps1"}
-    Invoke-WebRequest -UseBasicParsing -uri "$GitHubURI/$OSDCloudFunctionsPath/Get-Win11Readiness.ps1" -OutFile "$ModulePath/$OSDCloudFunctionsPath/Get-Win11Readiness.ps1"
-    Invoke-WebRequest -UseBasicParsing -uri "$GitHubURI/$OSDCloudFunctionsPath/Get-HyperVName.ps1" -OutFile "$ModulePath/$OSDCloudFunctionsPath/Get-HyperVName.ps1"
-    Invoke-WebRequest -UseBasicParsing -uri "$GitHubURI/$OSDCloudFunctionsPath/Set-HyperVName.ps1" -OutFile "$ModulePath/$OSDCloudFunctionsPath/Set-HyperVName.ps1"
-    Invoke-WebRequest -UseBasicParsing -uri "$GitHubURI/$OSDCloudFunctionsPath/Set-SetupCompleteCreateFinish.ps1" -OutFile "$ModulePath/$OSDCloudFunctionsPath/Set-SetupCompleteCreateFinish.ps1"
-    Invoke-WebRequest -UseBasicParsing -uri "$GitHubURI/$OSDCloudFunctionsPath/Set-SetupCompleteCreateStart.ps1" -OutFile "$ModulePath/$OSDCloudFunctionsPath/Set-SetupCompleteCreateStart.ps1"
-    Invoke-WebRequest -UseBasicParsing -uri "$GitHubURI/$OSDCloudFunctionsPath/Set-SetupCompleteHyperVName.ps1" -OutFile "$ModulePath/$OSDCloudFunctionsPath/Set-SetupCompleteHyperVName.ps1"
-    Invoke-WebRequest -UseBasicParsing -uri "$GitHubURI/$OSDCloudFunctionsPath/Set-SetupCompleteBitlocker.ps1" -OutFile "$ModulePath/$OSDCloudFunctionsPath/Set-SetupCompleteBitlocker.ps1"
-    Invoke-WebRequest -UseBasicParsing -uri "$GitHubURI/$OSDCloudFunctionsPath/Set-SetupCompleteOEMActivation.ps1" -OutFile "$ModulePath/$OSDCloudFunctionsPath/Set-SetupCompleteOEMActivation.ps1"
-    Invoke-WebRequest -UseBasicParsing -uri "$GitHubURI/$OSDCloudFunctionsPath/Set-SetupCompleteSetWiFi.ps1" -OutFile "$ModulePath/$OSDCloudFunctionsPath/Set-SetupCompleteSetWiFi.ps1"
-    Invoke-WebRequest -UseBasicParsing -uri "$GitHubURI/$OSDCloudFunctionsPath/Start-EjectCD.ps1" -OutFile "$ModulePath/$OSDCloudFunctionsPath/Start-EjectCD.ps1"
-    Invoke-WebRequest -UseBasicParsing -uri "$GitHubURI/$OSDCloudFunctionsPath/Update-DefenderStack.ps1" -OutFile "$ModulePath/$OSDCloudFunctionsPath/Update-DefenderStack.ps1"
-    Invoke-WebRequest -UseBasicParsing -uri "$GitHubURI/$OSDCloudFunctionsPath/Get-TimeZoneFromIP.ps1" -OutFile "$ModulePath/$OSDCloudFunctionsPath/Get-TimeZoneFromIP.ps1"
-    Invoke-WebRequest -UseBasicParsing -uri "$GitHubURI/$OSDCloudFunctionsPath/Set-BitlockerRegValuesXTS256.ps1" -OutFile "$ModulePath/$OSDCloudFunctionsPath/Set-BitlockerRegValuesXTS256.ps1"
-    Invoke-WebRequest -UseBasicParsing -uri "$GitHubURI/$OSDCloudFunctionsPath/Set-SetupCompleteDefenderUpdate.ps1" -OutFile "$ModulePath/$OSDCloudFunctionsPath/Set-SetupCompleteDefenderUpdate.ps1"
-    Invoke-WebRequest -UseBasicParsing -uri "$GitHubURI/$OSDCloudFunctionsPath/Set-SetupCompleteNetFX.ps1" -OutFile "$ModulePath/$OSDCloudFunctionsPath/Set-SetupCompleteNetFX.ps1"
-    Invoke-WebRequest -UseBasicParsing -uri "$GitHubURI/$OSDCloudFunctionsPath/Set-SetupCompleteTimeZone.ps1" -OutFile "$ModulePath/$OSDCloudFunctionsPath/Set-SetupCompleteTimeZone.ps1"
-    Invoke-WebRequest -UseBasicParsing -uri "$GitHubURI/$OSDCloudFunctionsPath/Set-WindowsOEMActivation.ps1" -OutFile "$ModulePath/$OSDCloudFunctionsPath/Set-WindowsOEMActivation.ps1"
-    Invoke-WebRequest -UseBasicParsing -uri "$GitHubURI/$OSDCloudFunctionsPath/Invoke-OSDAuditMode.ps1" -OutFile "$ModulePath/$OSDCloudFunctionsPath/Invoke-OSDAuditMode.ps1"
-    Invoke-WebRequest -UseBasicParsing -uri "$GitHubURI/$OSDCloudFunctionsPath/Set-WiFi.ps1" -OutFile "$ModulePath/$OSDCloudFunctionsPath/Set-WiFi.ps1"
-    Invoke-WebRequest -UseBasicParsing -uri "$GitHubURI/$OSDCloudFunctionsPath/Start-OSDDiskPart.ps1" -OutFile "$ModulePath/$OSDCloudFunctionsPath/Start-OSDDiskPart.ps1"
-    Invoke-WebRequest -UseBasicParsing -uri "$GitHubURI/Public/OSDCloud.ps1" -OutFile "$ModulePath/Public/OSDCloud.ps1"
-    Invoke-WebRequest -UseBasicParsing -uri "$GitHubURI/OSD.psd1" -OutFile "$ModulePath/OSD.psd1"
-    import-module "$ModulePath/OSD.psd1" -Force
-    if ($WindowsPhase -eq 'WinPE') {
-        if (Test-Path -Path "C:\Program Files\WindowsPowerShell\Modules\osd"){
-            $ModulePath = (Get-ChildItem -Path "C:\Program Files\WindowsPowerShell\Modules\osd" | Where-Object {$_.Attributes -match "Directory"} | select -Last 1).fullname
-            write-host "Updating Files in $ModulePath"
-            if ($DevMode -eq $true){Invoke-WebRequest -UseBasicParsing -uri "$GitHubURI/$OSDCloudFunctionsPath/Invoke-OSDSpecializeDev.ps1" -OutFile "$ModulePath/$OSDCloudFunctionsPath/Invoke-OSDSpecializeDev.ps1"}
-            else{Invoke-WebRequest -UseBasicParsing -uri "$GitHubURI/$OSDCloudFunctionsPath/Invoke-OSDSpecialize.ps1" -OutFile "$ModulePath/$OSDCloudFunctionsPath/Invoke-OSDSpecialize.ps1"}
-            Invoke-WebRequest -UseBasicParsing -uri "$GitHubURI/$OSDCloudFunctionsPath/Get-Win11Readiness.ps1" -OutFile "$ModulePath/$OSDCloudFunctionsPath/Get-Win11Readiness.ps1"
-            Invoke-WebRequest -UseBasicParsing -uri "$GitHubURI/$OSDCloudFunctionsPath/Get-HyperVName.ps1" -OutFile "$ModulePath/$OSDCloudFunctionsPath/Get-HyperVName.ps1"
-            Invoke-WebRequest -UseBasicParsing -uri "$GitHubURI/$OSDCloudFunctionsPath/Set-HyperVName.ps1" -OutFile "$ModulePath/$OSDCloudFunctionsPath/Set-HyperVName.ps1"
-            Invoke-WebRequest -UseBasicParsing -uri "$GitHubURI/$OSDCloudFunctionsPath/Set-SetupCompleteCreateFinish.ps1" -OutFile "$ModulePath/$OSDCloudFunctionsPath/Set-SetupCompleteCreateFinish.ps1"
-            Invoke-WebRequest -UseBasicParsing -uri "$GitHubURI/$OSDCloudFunctionsPath/Set-SetupCompleteCreateStart.ps1" -OutFile "$ModulePath/$OSDCloudFunctionsPath/Set-SetupCompleteCreateStart.ps1"
-            Invoke-WebRequest -UseBasicParsing -uri "$GitHubURI/$OSDCloudFunctionsPath/Set-SetupCompleteHyperVName.ps1" -OutFile "$ModulePath/$OSDCloudFunctionsPath/Set-SetupCompleteHyperVName.ps1"
-            Invoke-WebRequest -UseBasicParsing -uri "$GitHubURI/$OSDCloudFunctionsPath/Set-SetupCompleteBitlocker.ps1" -OutFile "$ModulePath/$OSDCloudFunctionsPath/Set-SetupCompleteBitlocker.ps1"
-            Invoke-WebRequest -UseBasicParsing -uri "$GitHubURI/$OSDCloudFunctionsPath/Set-SetupCompleteOEMActivation.ps1" -OutFile "$ModulePath/$OSDCloudFunctionsPath/Set-SetupCompleteOEMActivation.ps1"
-            Invoke-WebRequest -UseBasicParsing -uri "$GitHubURI/$OSDCloudFunctionsPath/Set-SetupCompleteSetWiFi.ps1" -OutFile "$ModulePath/$OSDCloudFunctionsPath/Set-SetupCompleteSetWiFi.ps1"
-            Invoke-WebRequest -UseBasicParsing -uri "$GitHubURI/$OSDCloudFunctionsPath/Start-EjectCD.ps1" -OutFile "$ModulePath/$OSDCloudFunctionsPath/Start-EjectCD.ps1"
-            Invoke-WebRequest -UseBasicParsing -uri "$GitHubURI/$OSDCloudFunctionsPath/Update-DefenderStack.ps1" -OutFile "$ModulePath/$OSDCloudFunctionsPath/Update-DefenderStack.ps1"
-            Invoke-WebRequest -UseBasicParsing -uri "$GitHubURI/$OSDCloudFunctionsPath/Get-TimeZoneFromIP.ps1" -OutFile "$ModulePath/$OSDCloudFunctionsPath/Get-TimeZoneFromIP.ps1"
-            Invoke-WebRequest -UseBasicParsing -uri "$GitHubURI/$OSDCloudFunctionsPath/Set-BitlockerRegValuesXTS256.ps1" -OutFile "$ModulePath/$OSDCloudFunctionsPath/Set-BitlockerRegValuesXTS256.ps1"
-            Invoke-WebRequest -UseBasicParsing -uri "$GitHubURI/$OSDCloudFunctionsPath/Set-SetupCompleteDefenderUpdate.ps1" -OutFile "$ModulePath/$OSDCloudFunctionsPath/Set-SetupCompleteDefenderUpdate.ps1"
-            Invoke-WebRequest -UseBasicParsing -uri "$GitHubURI/$OSDCloudFunctionsPath/Set-SetupCompleteNetFX.ps1" -OutFile "$ModulePath/$OSDCloudFunctionsPath/Set-SetupCompleteNetFX.ps1"
-            Invoke-WebRequest -UseBasicParsing -uri "$GitHubURI/$OSDCloudFunctionsPath/Set-SetupCompleteTimeZone.ps1" -OutFile "$ModulePath/$OSDCloudFunctionsPath/Set-SetupCompleteTimeZone.ps1"
-            Invoke-WebRequest -UseBasicParsing -uri "$GitHubURI/$OSDCloudFunctionsPath/Set-WindowsOEMActivation.ps1" -OutFile "$ModulePath/$OSDCloudFunctionsPath/Set-WindowsOEMActivation.ps1"
-            Invoke-WebRequest -UseBasicParsing -uri "$GitHubURI/$OSDCloudFunctionsPath/Invoke-OSDAuditMode.ps1" -OutFile "$ModulePath/$OSDCloudFunctionsPath/Invoke-OSDAuditMode.ps1"
-            Invoke-WebRequest -UseBasicParsing -uri "$GitHubURI/$OSDCloudFunctionsPath/Set-WiFi.ps1" -OutFile "$ModulePath/$OSDCloudFunctionsPath/Set-WiFi.ps1"
-            Invoke-WebRequest -UseBasicParsing -uri "$GitHubURI/OSD.psd1" -OutFile "$ModulePath/OSD.psd1"
-        }
-    }
-    if (Test-HPIASupport -eq $true){Invoke-Expression (Invoke-RestMethod -Uri 'https://raw.githubusercontent.com/OSDeploy/OSD/master/cloud/modules/deviceshp.psm1')}
 }
 function osdcloud-InstallModuleAzAccounts {
     [CmdletBinding()]
@@ -163,7 +87,6 @@ function osdcloud-InstallModuleAzKeyVault {
     }
     Import-Module $PSModuleName -Force
 }
-
 function osdcloud-InstallModuleAzResources {
     [CmdletBinding()]
     param ()
@@ -345,7 +268,6 @@ function osdcloud-InstallModuleOSD {
         }
     }
 }
-
 function osdcloud-RestartComputer {
     [CmdletBinding()]
     param ()
@@ -354,7 +276,6 @@ function osdcloud-RestartComputer {
     Start-Sleep -Seconds 30
     Restart-Computer
 }
-
 function osdcloud-StopComputer {
     [CmdletBinding()]
     param ()
@@ -365,3 +286,79 @@ function osdcloud-StopComputer {
 }
 #endregion
 #=================================================
+#region Gary Blok
+function osdcloud-UpdateModuleFilesManually {
+    #Custom Testing - Overwrites files in module with updated ones in GitHub
+    [CmdletBinding()]
+    Param (
+        [Parameter(Mandatory=$false)]
+        [ValidateSet($true, $false)]
+        $DEVMode = $false
+        ) 
+    write-host "Manually Updating Several Module Files directly from GitHub" -ForegroundColor Cyan
+    $ModulePath = (Get-ChildItem -Path "$($Env:ProgramFiles)\WindowsPowerShell\Modules\osd" | Where-Object {$_.Attributes -match "Directory"} | select -Last 1).fullname
+    write-host "Updating Files in $ModulePath"
+    $OSDCloudGUIDevProjectPath = "Projects\OSDCloudDev"
+    $OSDCloudGUIProjectPath = "Projects\OSDCloudGUI"
+    $OSDCloudFunctionsPath = "Public\Functions\OSDCloud"
+    $GitHubURI = "https://raw.githubusercontent.com/OSDeploy/OSD/master"
+    Invoke-WebRequest -UseBasicParsing -uri "$GitHubURI/$OSDCloudGUIDevProjectPath/MainWindow.ps1" -OutFile "$ModulePath/$OSDCloudGUIDevProjectPath/MainWindow.ps1"
+    Invoke-WebRequest -UseBasicParsing -uri "$GitHubURI/$OSDCloudGUIDevProjectPath/MainWindow.xaml" -OutFile "$ModulePath/$OSDCloudGUIDevProjectPath/MainWindow.xaml"
+    Invoke-WebRequest -UseBasicParsing -uri "$GitHubURI/$OSDCloudGUIProjectPath/MainWindow.ps1" -OutFile "$ModulePath/$OSDCloudGUIProjectPath/MainWindow.ps1"
+    Invoke-WebRequest -UseBasicParsing -uri "$GitHubURI/$OSDCloudGUIProjectPath/MainWindow.xaml" -OutFile "$ModulePath/$OSDCloudGUIProjectPath/MainWindow.xaml"
+    if ($DevMode -eq $true){Invoke-WebRequest -UseBasicParsing -uri "$GitHubURI/$OSDCloudFunctionsPath/Invoke-OSDSpecializeDev.ps1" -OutFile "$ModulePath/$OSDCloudFunctionsPath/Invoke-OSDSpecializeDev.ps1"}
+    else{Invoke-WebRequest -UseBasicParsing -uri "$GitHubURI/$OSDCloudFunctionsPath/Invoke-OSDSpecialize.ps1" -OutFile "$ModulePath/$OSDCloudFunctionsPath/Invoke-OSDSpecialize.ps1"}
+    Invoke-WebRequest -UseBasicParsing -uri "$GitHubURI/$OSDCloudFunctionsPath/Get-Win11Readiness.ps1" -OutFile "$ModulePath/$OSDCloudFunctionsPath/Get-Win11Readiness.ps1"
+    Invoke-WebRequest -UseBasicParsing -uri "$GitHubURI/$OSDCloudFunctionsPath/Get-HyperVName.ps1" -OutFile "$ModulePath/$OSDCloudFunctionsPath/Get-HyperVName.ps1"
+    Invoke-WebRequest -UseBasicParsing -uri "$GitHubURI/$OSDCloudFunctionsPath/Set-HyperVName.ps1" -OutFile "$ModulePath/$OSDCloudFunctionsPath/Set-HyperVName.ps1"
+    Invoke-WebRequest -UseBasicParsing -uri "$GitHubURI/$OSDCloudFunctionsPath/Set-SetupCompleteCreateFinish.ps1" -OutFile "$ModulePath/$OSDCloudFunctionsPath/Set-SetupCompleteCreateFinish.ps1"
+    Invoke-WebRequest -UseBasicParsing -uri "$GitHubURI/$OSDCloudFunctionsPath/Set-SetupCompleteCreateStart.ps1" -OutFile "$ModulePath/$OSDCloudFunctionsPath/Set-SetupCompleteCreateStart.ps1"
+    Invoke-WebRequest -UseBasicParsing -uri "$GitHubURI/$OSDCloudFunctionsPath/Set-SetupCompleteHyperVName.ps1" -OutFile "$ModulePath/$OSDCloudFunctionsPath/Set-SetupCompleteHyperVName.ps1"
+    Invoke-WebRequest -UseBasicParsing -uri "$GitHubURI/$OSDCloudFunctionsPath/Set-SetupCompleteBitlocker.ps1" -OutFile "$ModulePath/$OSDCloudFunctionsPath/Set-SetupCompleteBitlocker.ps1"
+    Invoke-WebRequest -UseBasicParsing -uri "$GitHubURI/$OSDCloudFunctionsPath/Set-SetupCompleteOEMActivation.ps1" -OutFile "$ModulePath/$OSDCloudFunctionsPath/Set-SetupCompleteOEMActivation.ps1"
+    Invoke-WebRequest -UseBasicParsing -uri "$GitHubURI/$OSDCloudFunctionsPath/Set-SetupCompleteSetWiFi.ps1" -OutFile "$ModulePath/$OSDCloudFunctionsPath/Set-SetupCompleteSetWiFi.ps1"
+    Invoke-WebRequest -UseBasicParsing -uri "$GitHubURI/$OSDCloudFunctionsPath/Start-EjectCD.ps1" -OutFile "$ModulePath/$OSDCloudFunctionsPath/Start-EjectCD.ps1"
+    Invoke-WebRequest -UseBasicParsing -uri "$GitHubURI/$OSDCloudFunctionsPath/Update-DefenderStack.ps1" -OutFile "$ModulePath/$OSDCloudFunctionsPath/Update-DefenderStack.ps1"
+    Invoke-WebRequest -UseBasicParsing -uri "$GitHubURI/$OSDCloudFunctionsPath/Get-TimeZoneFromIP.ps1" -OutFile "$ModulePath/$OSDCloudFunctionsPath/Get-TimeZoneFromIP.ps1"
+    Invoke-WebRequest -UseBasicParsing -uri "$GitHubURI/$OSDCloudFunctionsPath/Set-BitlockerRegValuesXTS256.ps1" -OutFile "$ModulePath/$OSDCloudFunctionsPath/Set-BitlockerRegValuesXTS256.ps1"
+    Invoke-WebRequest -UseBasicParsing -uri "$GitHubURI/$OSDCloudFunctionsPath/Set-SetupCompleteDefenderUpdate.ps1" -OutFile "$ModulePath/$OSDCloudFunctionsPath/Set-SetupCompleteDefenderUpdate.ps1"
+    Invoke-WebRequest -UseBasicParsing -uri "$GitHubURI/$OSDCloudFunctionsPath/Set-SetupCompleteNetFX.ps1" -OutFile "$ModulePath/$OSDCloudFunctionsPath/Set-SetupCompleteNetFX.ps1"
+    Invoke-WebRequest -UseBasicParsing -uri "$GitHubURI/$OSDCloudFunctionsPath/Set-SetupCompleteTimeZone.ps1" -OutFile "$ModulePath/$OSDCloudFunctionsPath/Set-SetupCompleteTimeZone.ps1"
+    Invoke-WebRequest -UseBasicParsing -uri "$GitHubURI/$OSDCloudFunctionsPath/Set-WindowsOEMActivation.ps1" -OutFile "$ModulePath/$OSDCloudFunctionsPath/Set-WindowsOEMActivation.ps1"
+    Invoke-WebRequest -UseBasicParsing -uri "$GitHubURI/$OSDCloudFunctionsPath/Invoke-OSDAuditMode.ps1" -OutFile "$ModulePath/$OSDCloudFunctionsPath/Invoke-OSDAuditMode.ps1"
+    Invoke-WebRequest -UseBasicParsing -uri "$GitHubURI/$OSDCloudFunctionsPath/Set-WiFi.ps1" -OutFile "$ModulePath/$OSDCloudFunctionsPath/Set-WiFi.ps1"
+    Invoke-WebRequest -UseBasicParsing -uri "$GitHubURI/$OSDCloudFunctionsPath/Start-OSDDiskPart.ps1" -OutFile "$ModulePath/$OSDCloudFunctionsPath/Start-OSDDiskPart.ps1"
+    Invoke-WebRequest -UseBasicParsing -uri "$GitHubURI/Public/OSDCloud.ps1" -OutFile "$ModulePath/Public/OSDCloud.ps1"
+    Invoke-WebRequest -UseBasicParsing -uri "$GitHubURI/OSD.psd1" -OutFile "$ModulePath/OSD.psd1"
+    import-module "$ModulePath/OSD.psd1" -Force
+    if ($WindowsPhase -eq 'WinPE') {
+        if (Test-Path -Path "C:\Program Files\WindowsPowerShell\Modules\osd"){
+            $ModulePath = (Get-ChildItem -Path "C:\Program Files\WindowsPowerShell\Modules\osd" | Where-Object {$_.Attributes -match "Directory"} | select -Last 1).fullname
+            write-host "Updating Files in $ModulePath"
+            if ($DevMode -eq $true){Invoke-WebRequest -UseBasicParsing -uri "$GitHubURI/$OSDCloudFunctionsPath/Invoke-OSDSpecializeDev.ps1" -OutFile "$ModulePath/$OSDCloudFunctionsPath/Invoke-OSDSpecializeDev.ps1"}
+            else{Invoke-WebRequest -UseBasicParsing -uri "$GitHubURI/$OSDCloudFunctionsPath/Invoke-OSDSpecialize.ps1" -OutFile "$ModulePath/$OSDCloudFunctionsPath/Invoke-OSDSpecialize.ps1"}
+            Invoke-WebRequest -UseBasicParsing -uri "$GitHubURI/$OSDCloudFunctionsPath/Get-Win11Readiness.ps1" -OutFile "$ModulePath/$OSDCloudFunctionsPath/Get-Win11Readiness.ps1"
+            Invoke-WebRequest -UseBasicParsing -uri "$GitHubURI/$OSDCloudFunctionsPath/Get-HyperVName.ps1" -OutFile "$ModulePath/$OSDCloudFunctionsPath/Get-HyperVName.ps1"
+            Invoke-WebRequest -UseBasicParsing -uri "$GitHubURI/$OSDCloudFunctionsPath/Set-HyperVName.ps1" -OutFile "$ModulePath/$OSDCloudFunctionsPath/Set-HyperVName.ps1"
+            Invoke-WebRequest -UseBasicParsing -uri "$GitHubURI/$OSDCloudFunctionsPath/Set-SetupCompleteCreateFinish.ps1" -OutFile "$ModulePath/$OSDCloudFunctionsPath/Set-SetupCompleteCreateFinish.ps1"
+            Invoke-WebRequest -UseBasicParsing -uri "$GitHubURI/$OSDCloudFunctionsPath/Set-SetupCompleteCreateStart.ps1" -OutFile "$ModulePath/$OSDCloudFunctionsPath/Set-SetupCompleteCreateStart.ps1"
+            Invoke-WebRequest -UseBasicParsing -uri "$GitHubURI/$OSDCloudFunctionsPath/Set-SetupCompleteHyperVName.ps1" -OutFile "$ModulePath/$OSDCloudFunctionsPath/Set-SetupCompleteHyperVName.ps1"
+            Invoke-WebRequest -UseBasicParsing -uri "$GitHubURI/$OSDCloudFunctionsPath/Set-SetupCompleteBitlocker.ps1" -OutFile "$ModulePath/$OSDCloudFunctionsPath/Set-SetupCompleteBitlocker.ps1"
+            Invoke-WebRequest -UseBasicParsing -uri "$GitHubURI/$OSDCloudFunctionsPath/Set-SetupCompleteOEMActivation.ps1" -OutFile "$ModulePath/$OSDCloudFunctionsPath/Set-SetupCompleteOEMActivation.ps1"
+            Invoke-WebRequest -UseBasicParsing -uri "$GitHubURI/$OSDCloudFunctionsPath/Set-SetupCompleteSetWiFi.ps1" -OutFile "$ModulePath/$OSDCloudFunctionsPath/Set-SetupCompleteSetWiFi.ps1"
+            Invoke-WebRequest -UseBasicParsing -uri "$GitHubURI/$OSDCloudFunctionsPath/Start-EjectCD.ps1" -OutFile "$ModulePath/$OSDCloudFunctionsPath/Start-EjectCD.ps1"
+            Invoke-WebRequest -UseBasicParsing -uri "$GitHubURI/$OSDCloudFunctionsPath/Update-DefenderStack.ps1" -OutFile "$ModulePath/$OSDCloudFunctionsPath/Update-DefenderStack.ps1"
+            Invoke-WebRequest -UseBasicParsing -uri "$GitHubURI/$OSDCloudFunctionsPath/Get-TimeZoneFromIP.ps1" -OutFile "$ModulePath/$OSDCloudFunctionsPath/Get-TimeZoneFromIP.ps1"
+            Invoke-WebRequest -UseBasicParsing -uri "$GitHubURI/$OSDCloudFunctionsPath/Set-BitlockerRegValuesXTS256.ps1" -OutFile "$ModulePath/$OSDCloudFunctionsPath/Set-BitlockerRegValuesXTS256.ps1"
+            Invoke-WebRequest -UseBasicParsing -uri "$GitHubURI/$OSDCloudFunctionsPath/Set-SetupCompleteDefenderUpdate.ps1" -OutFile "$ModulePath/$OSDCloudFunctionsPath/Set-SetupCompleteDefenderUpdate.ps1"
+            Invoke-WebRequest -UseBasicParsing -uri "$GitHubURI/$OSDCloudFunctionsPath/Set-SetupCompleteNetFX.ps1" -OutFile "$ModulePath/$OSDCloudFunctionsPath/Set-SetupCompleteNetFX.ps1"
+            Invoke-WebRequest -UseBasicParsing -uri "$GitHubURI/$OSDCloudFunctionsPath/Set-SetupCompleteTimeZone.ps1" -OutFile "$ModulePath/$OSDCloudFunctionsPath/Set-SetupCompleteTimeZone.ps1"
+            Invoke-WebRequest -UseBasicParsing -uri "$GitHubURI/$OSDCloudFunctionsPath/Set-WindowsOEMActivation.ps1" -OutFile "$ModulePath/$OSDCloudFunctionsPath/Set-WindowsOEMActivation.ps1"
+            Invoke-WebRequest -UseBasicParsing -uri "$GitHubURI/$OSDCloudFunctionsPath/Invoke-OSDAuditMode.ps1" -OutFile "$ModulePath/$OSDCloudFunctionsPath/Invoke-OSDAuditMode.ps1"
+            Invoke-WebRequest -UseBasicParsing -uri "$GitHubURI/$OSDCloudFunctionsPath/Set-WiFi.ps1" -OutFile "$ModulePath/$OSDCloudFunctionsPath/Set-WiFi.ps1"
+            Invoke-WebRequest -UseBasicParsing -uri "$GitHubURI/OSD.psd1" -OutFile "$ModulePath/OSD.psd1"
+        }
+    }
+    if (Test-HPIASupport -eq $true){Invoke-Expression (Invoke-RestMethod -Uri 'https://raw.githubusercontent.com/OSDeploy/OSD/master/cloud/modules/deviceshp.psm1')}
+}
+#endregion
