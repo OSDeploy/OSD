@@ -287,10 +287,9 @@ function osdcloud-InstallModuleAzAccounts {
                 Install-Module $PSModuleName -Scope CurrentUser -Force -SkipPublisherCheck
                 Import-Module $PSModuleName -Force
             }
-
         }
     }
-
+    Start-Sleep -Seconds 1
     $InstalledModule = Get-Module -Name $PSModuleName -ListAvailable -ErrorAction Ignore | Sort-Object Version -Descending | Select-Object -First 1
     if ($GalleryPSModule) {
         if (($InstalledModule.Version -as [version]) -ge ($GalleryPSModule.Version -as [version])) {
@@ -319,10 +318,10 @@ function osdcloud-InstallModuleAzKeyVault {
                 Install-Module $PSModuleName -Scope CurrentUser -Force -SkipPublisherCheck
                 Import-Module $PSModuleName -Force
             }
-
         }
     }
 
+    Start-Sleep -Seconds 1
     $InstalledModule = Get-Module -Name $PSModuleName -ListAvailable -ErrorAction Ignore | Sort-Object Version -Descending | Select-Object -First 1
     if ($GalleryPSModule) {
         if (($InstalledModule.Version -as [version]) -ge ($GalleryPSModule.Version -as [version])) {
