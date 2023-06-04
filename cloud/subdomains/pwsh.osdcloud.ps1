@@ -297,16 +297,7 @@ if ($WindowsPhase -eq 'WinPE') {
 #endregion
 
 #region PowerShell Gallery
-$PowerShellGallery = Get-PSRepository -Name PSGallery -ErrorAction Ignore
-if ($PowerShellGallery.InstallationPolicy -ne 'Trusted') {
-    Write-Host -ForegroundColor Yellow "[-] Set-PSRepository PSGallery Trusted"
-    Set-PSRepository -Name PSGallery -InstallationPolicy Trusted
-}
 
-$PowerShellGallery = Get-PSRepository -Name PSGallery -ErrorAction Ignore
-if ($PowerShellGallery.InstallationPolicy -eq 'Trusted') {
-    Write-Host -ForegroundColor Green "[+] PSRepository PSGallery Trusted"
-}
 #endregion
 
 #region Install Curl
