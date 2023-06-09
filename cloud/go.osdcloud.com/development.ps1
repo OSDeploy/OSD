@@ -136,7 +136,7 @@ if ($WindowsPhase -eq 'Windows') {
     osdcloud-InstallPackageManagement
     osdcloud-InstallModuleKeyVault
     osdcloud-InstallModuleOSD
-    osdcloud-InstallModuleAzureAD
+    osdcloud-InstallPowerShellModule -Name 'AzureAD'
     $null = Stop-Transcript -ErrorAction Ignore
 }
 #endregion

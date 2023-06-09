@@ -59,14 +59,14 @@ function osdcloud-StartOOBE {
 
     #Add Azure KeuVault Support
     if ($Azure) {
-        osdcloud-InstallModuleAzAccounts
-        osdcloud-InstallModuleAzKeyVault
+        osdcloud-InstallPowerShellModule -Name 'Az.Accounts'
+        osdcloud-InstallPowerShellModule -Name 'Az.KeyVault'
     }
 
     #Add Azure KeuVault Support
     if ($KeyVault) {
-        osdcloud-InstallModuleAzAccounts
-        osdcloud-InstallModuleAzKeyVault
+        osdcloud-InstallPowerShellModule -Name 'Az.Accounts'
+        osdcloud-InstallPowerShellModule -Name 'Az.KeyVault'
     }
 
     #Get Autopilot information from the device
@@ -82,7 +82,7 @@ function osdcloud-StartOOBE {
     if ($Autopilot) {
         if ($TestAutopilotProfile -eq $false) {
             osdcloud-InstallModuleAutopilot
-            osdcloud-InstallModuleAzureAD
+            osdcloud-InstallPowerShellModule -Name 'AzureAD'
             osdcloud-InstallScriptAutopilot
         }
     }

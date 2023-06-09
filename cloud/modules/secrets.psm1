@@ -20,8 +20,8 @@ function osdcloud-GetKeyVaultSecretList {
         # Specifies the name of the key vault to which the secret belongs. This cmdlet constructs the fully qualified domain name (FQDN) of a key vault based on the name that this parameter specifies and your current environment.
         $VaultName
     )
-    osdcloud-InstallModuleAzAccounts
-    osdcloud-InstallModuleAzKeyVault
+    osdcloud-InstallPowerShellModule -Name 'Az.Accounts'
+    osdcloud-InstallPowerShellModule -Name 'Az.KeyVault'
 
     if (!(Get-AzContext -ErrorAction Ignore)) {
         Connect-AzAccount -DeviceCode
@@ -48,8 +48,8 @@ function osdcloud-InvokeKeyVaultSecret {
         # Specifies the name of the secret to get the content to use as a PSCloudScript
         $Name
     )
-    osdcloud-InstallModuleAzAccounts
-    osdcloud-InstallModuleAzKeyVault
+    osdcloud-InstallPowerShellModule -Name 'Az.Accounts'
+    osdcloud-InstallPowerShellModule -Name 'Az.KeyVault'
 
     if (!(Get-AzContext -ErrorAction Ignore)) {
         Connect-AzAccount -DeviceCode

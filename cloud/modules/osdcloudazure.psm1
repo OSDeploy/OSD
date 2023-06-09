@@ -29,18 +29,18 @@ function Connect-OSDCloudAzure {
         }
     }
 
-    osdcloud-InstallModuleAzureAD
-    osdcloud-InstallModuleAzAccounts
+    osdcloud-InstallPowerShellModule -Name 'AzureAD'
+    osdcloud-InstallPowerShellModule -Name 'Az.Accounts'
         #Connect-AzAccount
         #Get-AzSubscription
         #Set-AzContext
         #Get-AzContext
         #Get-AzAccessToken
-    osdcloud-InstallModuleAzKeyVault
-    osdcloud-InstallModuleAzResources
-    osdcloud-InstallModuleAzStorage
-    osdcloud-InstallModuleMSGraphAuthentication
-    osdcloud-InstallModuleMSGraphDeviceManagement
+    osdcloud-InstallPowerShellModule -Name 'Az.KeyVault'
+    osdcloud-InstallPowerShellModule -Name 'Az.Resources'
+    osdcloud-InstallPowerShellModule -Name 'Az.Storage'
+    osdcloud-InstallPowerShellModule -Name 'Microsoft.Graph.Authentication'
+    osdcloud-InstallPowerShellModule -Name 'Microsoft.Graph.DeviceManagement'
 
     if ($UseDeviceAuthentication) {
         Connect-AzAccount -UseDeviceAuthentication -AuthScope Storage -ErrorAction Stop

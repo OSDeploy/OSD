@@ -54,16 +54,16 @@ function osdcloud-StartWinPE {
         }
         if ($Azure) {
             $KeyVault = $false
-            osdcloud-InstallModuleAzureAD
-            osdcloud-InstallModuleAzAccounts
-            osdcloud-InstallModuleAzKeyVault
-            osdcloud-InstallModuleAzResources
-            osdcloud-InstallModuleAzStorage
-            osdcloud-InstallModuleMSGraphDeviceManagement
+            osdcloud-InstallPowerShellModule -Name 'AzureAD'
+            osdcloud-InstallPowerShellModule -Name 'Az.Accounts'
+            osdcloud-InstallPowerShellModule -Name 'Az.KeyVault'
+            osdcloud-InstallPowerShellModule -Name 'Az.Resources'
+            osdcloud-InstallPowerShellModule -Name 'Az.Storage'
+            osdcloud-InstallPowerShellModule -Name 'Microsoft.Graph.DeviceManagement'
         }
         if ($KeyVault) {
-            osdcloud-InstallModuleAzAccounts
-            osdcloud-InstallModuleAzKeyVault
+            osdcloud-InstallPowerShellModule -Name 'Az.Accounts'
+            osdcloud-InstallPowerShellModule -Name 'Az.KeyVault'
         }
         if ($Manufacturer -eq "HP") {
             $HPEnterprise = Test-HPIASupport
