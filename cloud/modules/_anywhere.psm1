@@ -273,32 +273,46 @@ function osdcloud-InstallPowerShellModule {
         [Parameter(Mandatory = $true)]
         [string]$Name
     )
+    # Do not install the Module by default
     $InstallModule = $false
-    $InstalledModule = Get-Module -Name $Name -ListAvailable -ErrorAction Ignore | Sort-Object Version -Descending | Select-Object -First 1
-    $GalleryPSModule = Find-Module -Name $Name -ErrorAction Ignore -WarningAction Ignore
 
-    if ($GalleryPSModule) {
+    # Get the version from the local machine
+    $InstalledModule = Get-Module -Name $Name -ListAvailable -ErrorAction Ignore | Sort-Object Version -Descending | Select-Object -First 1
+
+    if ($InstalledModule) {
+        # Get the version from PowerShell Gallery
+        $GalleryPSModule = Find-Module -Name $Name -ErrorAction Ignore -WarningAction Ignore
+
         if (($GalleryPSModule.Version -as [version]) -gt ($InstalledModule.Version -as [version])) {
-            if ($WindowsPhase -eq 'WinPE') {
-                Write-Host -ForegroundColor Yellow "[-] Install-Module $Name $($GalleryPSModule.Version) [AllUsers]"
-                Install-Module $Name -Scope AllUsers -Force -SkipPublisherCheck
-            }
-            else {
-                Write-Host -ForegroundColor Yellow "[-] Install-Module $Name $($GalleryPSModule.Version) [CurrentUser]"
-                Install-Module $Name -Scope CurrentUser -Force -SkipPublisherCheck
-            }
+            # The version in the gallery is newer than the installed version, so we need to install it
+            $InstallModule = $true
         }
     }
     else {
-        if (($InstalledModule.Version -as [version]) -ge ($GalleryPSModule.Version -as [version])) {
-            Write-Host -ForegroundColor Green "[+] $Name $($GalleryPSModule.Version)"
+        # Get-Module did not find the module, so we need to install it
+        $InstallModule = $true
+    }
+
+    if ($InstallModule) {
+        if ($WindowsPhase -eq 'WinPE') {
+            # Install the PowerShell Module in WinPE
+            Write-Host -ForegroundColor Yellow "[-] Install-Module $Name $($GalleryPSModule.Version) [AllUsers]"
+            Install-Module $Name -Scope AllUsers -Force -SkipPublisherCheck
         }
+        else {
+            # Install the PowerShell Module in the OS
+            Write-Host -ForegroundColor Yellow "[-] Install-Module $Name $($GalleryPSModule.Version) [CurrentUser]"
+            Install-Module $Name -Scope CurrentUser -Force -SkipPublisherCheck
+        }
+    }
+    else {
+        # The module is already installed and up to date
+        Write-Host -ForegroundColor Green "[+] $Name $($InstalledModule.Version)"
     }
 }
 function osdcloud-InstallModuleOSD {
     [CmdletBinding()]
     param ()
-    $InstallModule = $false
     $PSModuleName = 'OSD'
     $InstalledModule = Get-Module -Name $PSModuleName -ListAvailable -ErrorAction Ignore | Sort-Object Version -Descending | Select-Object -First 1
     $GalleryPSModule = Find-Module -Name $PSModuleName -ErrorAction Ignore -WarningAction Ignore
