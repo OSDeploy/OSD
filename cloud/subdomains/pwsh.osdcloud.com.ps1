@@ -1,5 +1,5 @@
 <#PSScriptInfo
-.VERSION 23.6.3.1
+.VERSION 23.6.10.1
 .GUID 0c0cd2be-1a2d-4be4-8401-a869f4f104b0
 .AUTHOR David Segura @SeguraOSD
 .COMPANYNAME osdcloud.com
@@ -24,7 +24,7 @@ powershell iex (irm pwsh.osdcloud.com)
 .DESCRIPTION
     PowerShell Script which supports WinGet and PowerShell 7
 .NOTES
-    Version 23.6.3.1
+    Version 23.6.10.1
 .LINK
     https://raw.githubusercontent.com/OSDeploy/OSD/master/cloud/subdomains/pwsh.osdcloud.com.ps1
 .EXAMPLE
@@ -33,7 +33,7 @@ powershell iex (irm pwsh.osdcloud.com)
 [CmdletBinding()]
 param()
 $ScriptName = 'pwsh.osdcloud.com'
-$ScriptVersion = '23.6.3.1'
+$ScriptVersion = '23.6.10.1'
 
 #region Initialize
 $Transcript = "$((Get-Date).ToString('yyyy-MM-dd-HHmmss'))-$ScriptName.log"

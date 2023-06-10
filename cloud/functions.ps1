@@ -33,7 +33,7 @@ powershell iex (irm functions.osdcloud.com)
 [CmdletBinding()]
 param()
 $ScriptName = 'functions.osdcloud.com'
-$ScriptVersion = '23.6.3.1'
+$ScriptVersion = '23.6.10.1'
 
 #region Initialize
 if ($env:SystemDrive -eq 'X:') {

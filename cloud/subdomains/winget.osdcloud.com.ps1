@@ -1,5 +1,5 @@
 <#PSScriptInfo
-.VERSION 23.6.3.1
+.VERSION 23.6.10.1
 .GUID 8aa84227-ddb5-4276-95fb-ffb2d6121bf8
 .AUTHOR David Segura @SeguraOSD
 .COMPANYNAME osdcloud.com
@@ -24,7 +24,7 @@ powershell iex (irm winget.osdcloud.com)
 .DESCRIPTION
     PowerShell Script which supports WinGet
 .NOTES
-    Version 23.6.3.1
+    Version 23.6.10.1
 .LINK
     https://raw.githubusercontent.com/OSDeploy/OSD/master/cloud/subdomains/winget.osdcloud.com.ps1
 .EXAMPLE
@@ -33,7 +33,7 @@ powershell iex (irm winget.osdcloud.com)
 [CmdletBinding()]
 param()
 $ScriptName = 'winget.osdcloud.com'
-$ScriptVersion = '23.6.3.1'
+$ScriptVersion = '23.6.10.1'
 
 #region Initialize
 $Transcript = "$((Get-Date).ToString('yyyy-MM-dd-HHmmss'))-$ScriptName.log"
