@@ -1,5 +1,5 @@
 <#PSScriptInfo
-.VERSION 23.6.3.1
+.VERSION 23.6.9.1
 .GUID 9670c013-d1b1-4f5d-9bd0-0fa185b9f203
 .AUTHOR David Segura @SeguraOSD
 .COMPANYNAME osdcloud.com
@@ -24,7 +24,7 @@ powershell iex (irm sandbox.osdcloud.com)
 .DESCRIPTION
     PowerShell Script which supports the OSDCloud environment
 .NOTES
-    Version 23.6.3.1
+    Version 23.6.9.1
 .LINK
     https://raw.githubusercontent.com/OSDeploy/OSD/master/cloud/sandbox.osdcloud.com.ps1
 .EXAMPLE
@@ -33,7 +33,7 @@ powershell iex (irm sandbox.osdcloud.com)
 [CmdletBinding()]
 param()
 $ScriptName = 'sandbox.osdcloud.com'
-$ScriptVersion = '23.6.3.1'
+$ScriptVersion = '23.6.9.1'
 
 #region Initialize
 $Transcript = "$((Get-Date).ToString('yyyy-MM-dd-HHmmss'))-$ScriptName.log"
@@ -76,12 +76,12 @@ if ($WindowsPhase -eq 'WinPE') {
     #Process OSDCloud startup and load Azure KeyVault dependencies
     osdcloud-StartWinPE -OSDCloud -KeyVault
     Write-Host -ForegroundColor Cyan "To start a new PowerShell session, type 'start powershell' and press enter"
-    Write-Host -ForegroundColor Cyan "Start-OSDCloud or Start-OSDCloudGUI can be run in the new PowerShell session"
+    Write-Host -ForegroundColor Cyan "Start-OSDCloud, Start-OSDCloudGUI, or Start-OSDCloudAzure, can be run in the new PowerShell window"
+    
     #Stop the startup Transcript.  OSDCloud will create its own
     $null = Stop-Transcript -ErrorAction Ignore
 }
 #endregion
-
 
 #region Specialize
 if ($WindowsPhase -eq 'Specialize') {
@@ -89,13 +89,11 @@ if ($WindowsPhase -eq 'Specialize') {
 }
 #endregion
 
-
 #region AuditMode
 if ($WindowsPhase -eq 'AuditMode') {
     $null = Stop-Transcript -ErrorAction Ignore
 }
 #endregion
-
 
 #region OOBE
 if ($WindowsPhase -eq 'OOBE') {
@@ -104,7 +102,6 @@ if ($WindowsPhase -eq 'OOBE') {
     $null = Stop-Transcript -ErrorAction Ignore
 }
 #endregion
-
 
 #region Windows
 if ($WindowsPhase -eq 'Windows') {

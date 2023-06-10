@@ -310,27 +310,6 @@ function osdcloud-InstallPowerShellModule {
         Write-Host -ForegroundColor Green "[+] $Name $($InstalledModule.Version)"
     }
 }
-function osdcloud-InstallModuleOSD {
-    [CmdletBinding()]
-    param ()
-    $PSModuleName = 'OSD'
-    $InstalledModule = Get-Module -Name $PSModuleName -ListAvailable -ErrorAction Ignore | Sort-Object Version -Descending | Select-Object -First 1
-    $GalleryPSModule = Find-Module -Name $PSModuleName -ErrorAction Ignore -WarningAction Ignore
-
-    if ($GalleryPSModule) {
-        if (($GalleryPSModule.Version -as [version]) -gt ($InstalledModule.Version -as [version])) {
-            Write-Host -ForegroundColor Yellow "[-] Install-Module $PSModuleName $($GalleryPSModule.Version)"
-            Install-Module $PSModuleName -Scope AllUsers -Force -SkipPublisherCheck
-            Import-Module $PSModuleName -Force
-        }
-    }
-    $InstalledModule = Get-Module -Name $PSModuleName -ListAvailable -ErrorAction Ignore | Sort-Object Version -Descending | Select-Object -First 1
-    if ($GalleryPSModule) {
-        if (($InstalledModule.Version -as [version]) -ge ($GalleryPSModule.Version -as [version])) {
-            Write-Host -ForegroundColor Green "[+] $PSModuleName $($GalleryPSModule.Version)"
-        }
-    }
-}
 function osdcloud-InstallModulePSReadLine {
     [CmdletBinding()]
     param ()
@@ -670,5 +649,26 @@ function osdcloud-InstallModuleMSGraphDeviceManagement {
         }
     }
     Import-Module $PSModuleName -Force
+}
+function osdcloud-InstallModuleOSD {
+    [CmdletBinding()]
+    param ()
+    $PSModuleName = 'OSD'
+    $InstalledModule = Get-Module -Name $PSModuleName -ListAvailable -ErrorAction Ignore | Sort-Object Version -Descending | Select-Object -First 1
+    $GalleryPSModule = Find-Module -Name $PSModuleName -ErrorAction Ignore -WarningAction Ignore
+
+    if ($GalleryPSModule) {
+        if (($GalleryPSModule.Version -as [version]) -gt ($InstalledModule.Version -as [version])) {
+            Write-Host -ForegroundColor Yellow "[-] Install-Module $PSModuleName $($GalleryPSModule.Version)"
+            Install-Module $PSModuleName -Scope AllUsers -Force -SkipPublisherCheck
+            Import-Module $PSModuleName -Force
+        }
+    }
+    $InstalledModule = Get-Module -Name $PSModuleName -ListAvailable -ErrorAction Ignore | Sort-Object Version -Descending | Select-Object -First 1
+    if ($GalleryPSModule) {
+        if (($InstalledModule.Version -as [version]) -ge ($GalleryPSModule.Version -as [version])) {
+            Write-Host -ForegroundColor Green "[+] $PSModuleName $($GalleryPSModule.Version)"
+        }
+    }
 }
 #endregion

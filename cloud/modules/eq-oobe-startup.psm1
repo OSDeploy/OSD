@@ -54,7 +54,7 @@ function osdcloud-StartOOBE {
     osdcloud-TrustPSGallery
     osdcloud-InstallModulePester
     osdcloud-InstallModulePSReadLine
-    osdcloud-InstallModuleOSD
+    osdcloud-InstallPowerShellModule -Name OSD
     osdcloud-InstallWinGet
 
     #Add Azure KeuVault Support
