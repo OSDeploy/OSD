@@ -289,9 +289,7 @@ function osdcloud-InstallPowerShellModule {
             }
         }
     }
-
-    $InstalledModule = Get-Module -Name $Name -ListAvailable -ErrorAction Ignore | Sort-Object Version -Descending | Select-Object -First 1
-    if ($GalleryPSModule) {
+    else {
         if (($InstalledModule.Version -as [version]) -ge ($GalleryPSModule.Version -as [version])) {
             Write-Host -ForegroundColor Green "[+] $Name $($GalleryPSModule.Version)"
         }
