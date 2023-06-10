@@ -59,6 +59,7 @@ function osdcloud-StartWinPE {
             osdcloud-InstallPowerShellModule -Name 'Az.KeyVault'
             osdcloud-InstallPowerShellModule -Name 'Az.Resources'
             osdcloud-InstallPowerShellModule -Name 'Az.Storage'
+            osdcloud-InstallPowerShellModule -Name 'Microsoft.Graph.Authentication'
             osdcloud-InstallPowerShellModule -Name 'Microsoft.Graph.DeviceManagement'
         }
         if ($KeyVault) {

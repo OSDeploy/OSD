@@ -307,6 +307,7 @@ function osdcloud-InstallPowerShellModule {
     }
     else {
         # The module is already installed and up to date
+        Import-Module -Name $Name -Force
         Write-Host -ForegroundColor Green "[+] $Name $($InstalledModule.Version)"
     }
 }
