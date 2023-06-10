@@ -28,7 +28,7 @@ function Start-OSDCloudAzure {
             $Global:AzOSDCloudBlobImage = $null
         }
 
-        $Transcript = "$((Get-Date).ToString('yyyy-MM-dd-HHmmss'))-OSDCloud.log"
+        $Transcript = "$((Get-Date).ToString('yyyy-MM-dd-HHmmss'))-Start-OSDCloudAzure.log"
         $null = Start-Transcript -Path (Join-Path "$env:SystemRoot\Temp" $Transcript) -ErrorAction Ignore
         Invoke-Expression -Command (Invoke-RestMethod -Uri functions.osdcloud.com)
         osdcloud-StartWinPE -OSDCloud -Azure
