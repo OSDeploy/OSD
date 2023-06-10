@@ -63,7 +63,7 @@ Invoke-Expression -Command (Invoke-RestMethod -Uri functions.osdcloud.com)
 #=================================================
 #region WinPE
 if ($WindowsPhase -eq 'WinPE') {
-    osdcloud-StartWinPE -OSDCloud -Azure
+    osdcloud-StartWinPE -OSDCloud
     Connect-OSDCloudAzure
     Get-OSDCloudAzureResources
     #Stop the startup Transcript.  OSDCloud will create its own

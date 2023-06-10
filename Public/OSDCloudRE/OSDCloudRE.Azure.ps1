@@ -11,7 +11,7 @@ function Get-OSDCloudREAzureResources {
         }
     }
 
-    if ($Global:AzureAD -or $Global:MgGraph) {
+    if ($Global:AzContext) {
         #Write-Host -ForegroundColor DarkGray    'Storage Accounts:          $Global:AzStorageAccounts'
         $Global:AzStorageAccounts = Get-AzStorageAccount
         if ($OSDCloudLogs) {

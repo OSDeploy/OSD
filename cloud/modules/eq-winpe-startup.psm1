@@ -79,5 +79,4 @@ function osdcloud-StartWinPE {
         Write-Warning 'Function is not supported in this Windows Phase'
     }
 }
-New-Alias -Name 'Start-WinPE' -Value 'osdcloud-StartWinPE' -Description 'OSDCloud' -Force
 #endregion
