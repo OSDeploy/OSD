@@ -276,11 +276,11 @@ function osdcloud-InstallPowerShellModule {
 
     # Get the version from the local machine
     $InstalledModule = Get-Module -Name $Name -ListAvailable -ErrorAction Ignore | Sort-Object Version -Descending | Select-Object -First 1
+    
+    # Get the version from PowerShell Gallery
+    $GalleryPSModule = Find-Module -Name $Name -ErrorAction Ignore -WarningAction Ignore
 
     if ($InstalledModule) {
-        # Get the version from PowerShell Gallery
-        $GalleryPSModule = Find-Module -Name $Name -ErrorAction Ignore -WarningAction Ignore
-
         if (($GalleryPSModule.Version -as [version]) -gt ($InstalledModule.Version -as [version])) {
             # The version in the gallery is newer than the installed version, so we need to install it
             $InstallModule = $true
@@ -294,12 +294,12 @@ function osdcloud-InstallPowerShellModule {
     if ($InstallModule) {
         if ($WindowsPhase -eq 'WinPE') {
             # Install the PowerShell Module in WinPE
-            Write-Host -ForegroundColor Yellow "[-] Install-Module $Name $($GalleryPSModule.Version) [AllUsers]"
+            Write-Host -ForegroundColor Yellow "[-] $Name $($GalleryPSModule.Version) [AllUsers]"
             Install-Module $Name -Scope AllUsers -Force -SkipPublisherCheck
         }
         else {
             # Install the PowerShell Module in the OS
-            Write-Host -ForegroundColor Yellow "[-] Install-Module $Name $($GalleryPSModule.Version) [CurrentUser]"
+            Write-Host -ForegroundColor Yellow "[-] $Name $($GalleryPSModule.Version) [CurrentUser]"
             Install-Module $Name -Scope CurrentUser -Force -SkipPublisherCheck
         }
     }
@@ -307,28 +307,6 @@ function osdcloud-InstallPowerShellModule {
         # The module is already installed and up to date
         Import-Module -Name $Name -Force
         Write-Host -ForegroundColor Green "[+] $Name $($InstalledModule.Version)"
-    }
-}
-function osdcloud-InstallModulePSReadLine {
-    [CmdletBinding()]
-    param ()
-    $InstallModule = $false
-    $PSModuleName = 'PSReadLine'
-    $InstalledModule = Get-Module -Name $PSModuleName -ListAvailable -ErrorAction Ignore | Sort-Object Version -Descending | Select-Object -First 1
-    $GalleryPSModule = Find-Module -Name $PSModuleName -ErrorAction Ignore -WarningAction Ignore
-    
-    if ($GalleryPSModule) {
-        if (($GalleryPSModule.Version -as [version]) -gt ($InstalledModule.Version -as [version])) {
-            Write-Host -ForegroundColor Yellow "[-] Install-Module $PSModuleName $($GalleryPSModule.Version)"
-            Install-Module $PSModuleName -Scope AllUsers -Force -SkipPublisherCheck -AllowClobber
-            #Import-Module $PSModuleName -Force
-        }
-    }
-    $InstalledModule = Get-Module -Name $PSModuleName -ListAvailable -ErrorAction Ignore | Sort-Object Version -Descending | Select-Object -First 1
-    if ($GalleryPSModule) {
-        if (($InstalledModule.Version -as [version]) -ge ($GalleryPSModule.Version -as [version])) {
-            Write-Host -ForegroundColor Green "[+] $PSModuleName $($GalleryPSModule.Version)"
-        }
     }
 }
 function osdcloud-RestartComputer {
