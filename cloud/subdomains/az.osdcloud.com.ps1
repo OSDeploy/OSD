@@ -1,5 +1,5 @@
 <#PSScriptInfo
-.VERSION 23.6.9.1
+.VERSION 23.6.10.1
 .GUID aa123d2c-3cd3-4ef4-91f0-0c2139473991
 .AUTHOR David Segura @SeguraOSD
 .COMPANYNAME osdcloud.com
@@ -24,7 +24,7 @@ powershell iex (irm az.osdcloud.com)
 .DESCRIPTION
     PowerShell Script which supports the OSDCloud Azure environment
 .NOTES
-    Version 23.6.9.1
+    Version 23.6.10.1
 .LINK
     https://raw.githubusercontent.com/OSDeploy/OSD/master/cloud/az.osdcloud.com.ps1
 .EXAMPLE
@@ -33,7 +33,7 @@ powershell iex (irm az.osdcloud.com)
 [CmdletBinding()]
 param()
 $ScriptName = 'az.osdcloud.com'
-$ScriptVersion = '23.6.9.1'
+$ScriptVersion = '23.6.10.1'
 
 #region Initialize
 $Transcript = "$((Get-Date).ToString('yyyy-MM-dd-HHmmss'))-$ScriptName.log"
