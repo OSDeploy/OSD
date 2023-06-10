@@ -295,12 +295,12 @@ function osdcloud-InstallPowerShellModule {
         if ($WindowsPhase -eq 'WinPE') {
             # Install the PowerShell Module in WinPE
             Write-Host -ForegroundColor Yellow "[-] $Name $($GalleryPSModule.Version) [AllUsers]"
-            Install-Module $Name -Scope AllUsers -Force -SkipPublisherCheck
+            Install-Module $Name -Scope AllUsers -Force -SkipPublisherCheck -AllowClobber
         }
         else {
             # Install the PowerShell Module in the OS
             Write-Host -ForegroundColor Yellow "[-] $Name $($GalleryPSModule.Version) [CurrentUser]"
-            Install-Module $Name -Scope CurrentUser -Force -SkipPublisherCheck
+            Install-Module $Name -Scope CurrentUser -Force -SkipPublisherCheck -AllowClobber
         }
     }
     else {
