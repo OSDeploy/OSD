@@ -27,7 +27,7 @@ function osdcloud-WinpeInstallCurl {
     
         Get-ChildItem "$env:TEMP\curl" -Include 'curl.exe' -Recurse | foreach {Copy-Item $_ -Destination "$env:SystemRoot\System32\curl.exe"}
     }
-    if (Get-Command 'curl.exe' -ErrorAction SilentlyContinue) {
+    else {
         $GetItemCurl = Get-Item -Path "$env:SystemRoot\System32\curl.exe" -ErrorAction SilentlyContinue
         Write-Host -ForegroundColor Green "[+] Curl $($GetItemCurl.VersionInfo.FileVersion)"
     }
