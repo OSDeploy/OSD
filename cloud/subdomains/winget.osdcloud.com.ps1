@@ -97,7 +97,7 @@ if ($WindowsPhase -eq 'OOBE') {
     osdcloud-InstallPackageManagement
     osdcloud-TrustPSGallery
     osdcloud-InstallModulePester
-    osdcloud-InstallModulePSReadLine
+    osdcloud-InstallPowerShellModule -Name PSReadLine
     osdcloud-InstallWinGet
     osdcloud-InstallPwsh
     if (Get-Command 'WinGet' -ErrorAction SilentlyContinue) {
@@ -116,7 +116,7 @@ if ($WindowsPhase -eq 'Windows') {
     osdcloud-InstallPackageManagement
     osdcloud-TrustPSGallery
     osdcloud-InstallModulePester
-    osdcloud-InstallModulePSReadLine
+    osdcloud-InstallPowerShellModule -Name PSReadLine
     osdcloud-InstallWinGet
     osdcloud-InstallPwsh
     if (Get-Command 'WinGet' -ErrorAction SilentlyContinue) {

@@ -128,8 +128,6 @@ function osdcloud-TrustPSGallery {
         Write-Host -ForegroundColor Yellow "[-] Set-PSRepository PSGallery Trusted"
         Set-PSRepository -Name PSGallery -InstallationPolicy Trusted
     }
-
-    $PowerShellGallery = Get-PSRepository -Name PSGallery -ErrorAction Ignore
     if ($PowerShellGallery.InstallationPolicy -eq 'Trusted') {
         Write-Host -ForegroundColor Green "[+] PSRepository PSGallery Trusted"
     }
@@ -142,7 +140,7 @@ function osdcloud-SetExecutionPolicy {
             Write-Host -ForegroundColor Yellow "[-] Set-ExecutionPolicy Bypass -Force"
             Set-ExecutionPolicy Bypass -Force
         }
-        if ((Get-ExecutionPolicy) -eq 'Bypass') {
+        else {
             Write-Host -ForegroundColor Green "[+] Get-ExecutionPolicy Bypass"
         }
     }
@@ -151,7 +149,7 @@ function osdcloud-SetExecutionPolicy {
             Write-Host -ForegroundColor Yellow "[-] Set-ExecutionPolicy -Scope CurrentUser RemoteSigned"
             Set-ExecutionPolicy RemoteSigned -Force -Scope CurrentUser
         }
-        if ((Get-ExecutionPolicy -Scope CurrentUser) -eq 'RemoteSigned') {
+        else {
             Write-Host -ForegroundColor Green "[+] Get-ExecutionPolicy RemoteSigned [CurrentUser]"
         }
     }

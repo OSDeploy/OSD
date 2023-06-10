@@ -53,7 +53,7 @@ function osdcloud-StartOOBE {
     osdcloud-InstallPackageManagement
     osdcloud-TrustPSGallery
     osdcloud-InstallModulePester
-    osdcloud-InstallModulePSReadLine
+    osdcloud-InstallPowerShellModule -Name PSReadLine
     osdcloud-InstallPowerShellModule -Name OSD
     osdcloud-InstallWinGet
 
