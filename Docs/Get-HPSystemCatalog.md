@@ -26,20 +26,24 @@ Requires Internet Access to download HpCatalogForSms.latest.cab
 ### EXAMPLE 1
 ```
 Get-HPSystemCatalog
-Don't do this, you will get an almost endless list
 ```
+
+Don't do this, you will get an almost endless list
 
 ### EXAMPLE 2
 ```
 $Results = Get-HPSystemCatalog
-Yes do this.  Save it in a Variable
 ```
+
+Yes do this. 
+Save it in a Variable
 
 ### EXAMPLE 3
 ```
 Get-HPSystemCatalog -Component BIOS | Out-GridView
-Displays all the HP BIOS updates in GridView
 ```
+
+Displays all the HP BIOS updates in GridView
 
 ## PARAMETERS
 
