@@ -241,7 +241,6 @@ function Update-OSDCloudUSB {
     [CmdletBinding()]
     param (
         #Optional. Select one or more of the following Driver Packs to download
-        #'*','ThisPC','Dell','HP','Lenovo','Microsoft'
         [ValidateSet('*','ThisPC','Dell','HP','Lenovo','Microsoft')]
         [System.String[]]$DriverPack,
 
@@ -251,8 +250,7 @@ function Update-OSDCloudUSB {
         #Optional. Allows the selection of an Operating System to add to the USB
         [System.Management.Automation.SwitchParameter]$OS,
 
-        #Optional. Allows the selection of Driver Packs to download
-        #If this parameter is not used, any language can be downloaded downloaded
+        #Optional. Allows the selection of Driver Packs to download.  If this parameter is not used, any language can be downloaded downloaded
         [ValidateSet (
             'ar-sa','bg-bg','cs-cz','da-dk','de-de','el-gr',
             'en-gb','en-us','es-es','es-mx','et-ee','fi-fi',
@@ -264,9 +262,7 @@ function Update-OSDCloudUSB {
         )]
         [System.String]$OSLanguage,
 
-        #Optional. Selects the proper OS License
-        #If this parameter is not used, Operating Systems with the specified License can be downloaded
-        #'Retail','Volume'
+        #Optional. Selects the proper OS License. If this parameter is not used, Operating Systems with the specified License can be downloaded
         [Alias('Activation','License','OSLicense')]
         [ValidateSet('Retail','Volume')]
         [System.String]$OSActivation,
