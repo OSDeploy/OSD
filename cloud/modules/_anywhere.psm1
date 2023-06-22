@@ -269,7 +269,11 @@ function osdcloud-InstallPowerShellModule {
     [CmdletBinding()]
     param (
         [Parameter(Mandatory = $true)]
-        [string]$Name
+        [System.String]
+        $Name,
+
+        [System.Management.Automation.SwitchParameter]
+        $Force
     )
     # Do not install the Module by default
     $InstallModule = $false

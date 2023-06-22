@@ -96,7 +96,7 @@ if ($WindowsPhase -eq 'OOBE') {
     osdcloud-SetPowerShellProfile
     osdcloud-InstallPackageManagement
     osdcloud-TrustPSGallery
-    osdcloud-InstallModulePester
+    osdcloud-InstallPowerShellModule -Name Pester
     osdcloud-InstallPowerShellModule -Name PSReadLine
     osdcloud-InstallWinGet
     osdcloud-InstallPwsh
@@ -115,7 +115,7 @@ if ($WindowsPhase -eq 'Windows') {
     osdcloud-SetPowerShellProfile
     osdcloud-InstallPackageManagement
     osdcloud-TrustPSGallery
-    osdcloud-InstallModulePester
+    osdcloud-InstallPowerShellModule -Name Pester
     osdcloud-InstallPowerShellModule -Name PSReadLine
     osdcloud-InstallWinGet
     osdcloud-InstallPwsh
