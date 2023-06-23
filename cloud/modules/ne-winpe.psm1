@@ -12,7 +12,7 @@
 #>
 
 #region Functions
-function osdcloud-InstallPowerShellModule -Name Pester {
+function osdcloud-InstallModulePester {
     [CmdletBinding()]
     param ()
     $InstallModule = $false
