@@ -37,7 +37,19 @@ function osdcloud-StartOOBE {
 
         [System.Management.Automation.SwitchParameter]
         #Install Azure KeyVault support
-        $KeyVault
+        $KeyVault,
+
+        [System.Management.Automation.SwitchParameter]
+        $InstallWinGet,
+
+        [System.Management.Automation.SwitchParameter]
+        $WinGetUpgrade,
+
+        [System.Management.Automation.SwitchParameter]
+        $WinGetPwsh,
+
+        [System.Management.Automation.SwitchParameter]
+        $SkipOSD
     )
     if ($Display) {
         osdcloud-SetWindowsDisplay
@@ -54,36 +66,55 @@ function osdcloud-StartOOBE {
     osdcloud-TrustPSGallery
     osdcloud-InstallPowerShellModule -Name Pester
     osdcloud-InstallPowerShellModule -Name PSReadLine
-    osdcloud-InstallPowerShellModule -Name OSD
-    osdcloud-InstallWinGet
 
-    #Add Azure KeuVault Support
-    if ($Azure) {
-        osdcloud-InstallPowerShellModule -Name 'Az.Accounts'
-        osdcloud-InstallPowerShellModule -Name 'Az.KeyVault'
+    if ($InstallWinGet) {
+        osdcloud-InstallWinGet
+
+        if ($WinGetUpgrade) {
+            if (Get-Command 'WinGet' -ErrorAction SilentlyContinue) {
+                Write-Host -ForegroundColor Green "[+] winget upgrade --all --accept-source-agreements --accept-package-agreements"
+                winget upgrade --all --accept-source-agreements --accept-package-agreements
+            }
+        }
+
+        if ($WinGetPwsh) {
+            osdcloud-InstallPwsh
+        }
     }
 
-    #Add Azure KeuVault Support
-    if ($KeyVault) {
-        osdcloud-InstallPowerShellModule -Name 'Az.Accounts'
-        osdcloud-InstallPowerShellModule -Name 'Az.KeyVault'
+    if ($SkipOSD) {
+        # do nothing
     }
-
-    #Get Autopilot information from the device
-    $TestAutopilotProfile = osdcloud-TestAutopilotProfile
-
-    #If the device has an Autopilot Profile, show the information
-    if ($TestAutopilotProfile -eq $true) {
-        osdcloud-ShowAutopilotProfile
-        $Autopilot = $false
-    }
+    else {
+        osdcloud-InstallPowerShellModule -Name OSD
+        #Add Azure KeuVault Support
+        if ($Azure) {
+            osdcloud-InstallPowerShellModule -Name 'Az.Accounts'
+            osdcloud-InstallPowerShellModule -Name 'Az.KeyVault'
+        }
     
-    #Install the required Autopilot Modules
-    if ($Autopilot) {
-        if ($TestAutopilotProfile -eq $false) {
-            osdcloud-InstallModuleAutopilot
-            osdcloud-InstallPowerShellModule -Name 'AzureAD'
-            osdcloud-InstallScriptAutopilot
+        #Add Azure KeuVault Support
+        if ($KeyVault) {
+            osdcloud-InstallPowerShellModule -Name 'Az.Accounts'
+            osdcloud-InstallPowerShellModule -Name 'Az.KeyVault'
+        }
+    
+        #Get Autopilot information from the device
+        $TestAutopilotProfile = osdcloud-TestAutopilotProfile
+    
+        #If the device has an Autopilot Profile, show the information
+        if ($TestAutopilotProfile -eq $true) {
+            osdcloud-ShowAutopilotProfile
+            $Autopilot = $false
+        }
+        
+        #Install the required Autopilot Modules
+        if ($Autopilot) {
+            if ($TestAutopilotProfile -eq $false) {
+                osdcloud-InstallModuleAutopilot
+                osdcloud-InstallPowerShellModule -Name 'AzureAD'
+                osdcloud-InstallScriptAutopilot
+            }
         }
     }
 }

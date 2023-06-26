@@ -1,0 +1,18 @@
+Microsoft.PowerShell.PSResourceGet Cmdlets
+
+Find-PSResource
+Get-InstalledPSResource
+Get-PSResourceRepository
+Get-PSScriptFileInfo
+Install-PSResource
+New-PSScriptFileInfo
+Publish-PSResource
+Register-PSResourceRepository
+Save-PSResource
+Set-PSResourceRepository
+Test-PSScriptFileInfo
+Uninstall-PSResource
+Unregister-PSResourceRepository
+Update-PSModuleManifest
+Update-PSResource
+Update-PSScriptFileInfo

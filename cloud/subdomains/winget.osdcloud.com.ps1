@@ -92,18 +92,7 @@ if ($WindowsPhase -eq 'AuditMode') {
 
 #region OOBE
 if ($WindowsPhase -eq 'OOBE') {
-    osdcloud-SetExecutionPolicy
-    osdcloud-SetPowerShellProfile
-    osdcloud-InstallPackageManagement
-    osdcloud-TrustPSGallery
-    osdcloud-InstallPowerShellModule -Name Pester
-    osdcloud-InstallPowerShellModule -Name PSReadLine
-    osdcloud-InstallWinGet
-    osdcloud-InstallPwsh
-    if (Get-Command 'WinGet' -ErrorAction SilentlyContinue) {
-        Write-Host -ForegroundColor Green "[+] winget upgrade --all --accept-source-agreements --accept-package-agreements"
-        winget upgrade --all --accept-source-agreements --accept-package-agreements
-    }
+    osdcloud-StartOOBE -InstallWinGet -WinGetUpgrade -WinGetPwsh -SkipOSD
     Write-Host -ForegroundColor Green "[+] winget.osdcloud.com Complete"
     $null = Stop-Transcript -ErrorAction Ignore
 }
@@ -111,18 +100,7 @@ if ($WindowsPhase -eq 'OOBE') {
 
 #region Windows
 if ($WindowsPhase -eq 'Windows') {
-    osdcloud-SetExecutionPolicy
-    osdcloud-SetPowerShellProfile
-    osdcloud-InstallPackageManagement
-    osdcloud-TrustPSGallery
-    osdcloud-InstallPowerShellModule -Name Pester
-    osdcloud-InstallPowerShellModule -Name PSReadLine
-    osdcloud-InstallWinGet
-    osdcloud-InstallPwsh
-    if (Get-Command 'WinGet' -ErrorAction SilentlyContinue) {
-        Write-Host -ForegroundColor Green "[+] winget upgrade --all --accept-source-agreements --accept-package-agreements"
-        winget upgrade --all --accept-source-agreements --accept-package-agreements
-    }
+    osdcloud-StartOOBE -InstallWinGet -WinGetUpgrade -WinGetPwsh -SkipOSD
     Write-Host -ForegroundColor Green "[+] winget.osdcloud.com Complete"
     $null = Stop-Transcript -ErrorAction Ignore
 }
