@@ -3015,9 +3015,10 @@ Original credit to Mike Robbins http://mikefrobbins.com/2018/01/18/use-powershel
     <command:examples>
       <command:example>
         <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
-        <dev:code>Copy-IsoToUsb -ISOFile "C:\Temp\SW_DVD5_Win_Pro_Ent_Edu_N_10_1709_64BIT_English_MLF_X21-50143.ISO" -MakeBootable -USBDriveLabel WIN10X64</dev:code>
+        <dev:code>Copy-IsoToUsb -ISOFile "C:\Temp\SW_DVD5_Win_Pro_Ent_Edu_N_10_1709_64BIT_English_MLF_X21-50143.ISO" -MakeBootable -USBDriveLabel WIN10X64
+You will be prompted to select a USB Drive in GridView</dev:code>
         <dev:remarks>
-          <maml:para>You will be prompted to select a USB Drive in GridView</maml:para>
+          <maml:para></maml:para>
         </dev:remarks>
       </command:example>
     </command:examples>
@@ -4890,7 +4891,7 @@ Original credit to Mike Robbins http://mikefrobbins.com/2018/01/18/use-powershel
       </command:example>
       <command:example>
         <maml:title>-------------------------- EXAMPLE 3 --------------------------</maml:title>
-        <dev:code>Edit-OSDCloudWinPE â€"StartURL 'https://sandbox.osdcloud.com'</dev:code>
+        <dev:code>Edit-OSDCloudWinPE -StartURL 'https://sandbox.osdcloud.com'</dev:code>
         <dev:remarks>
           <maml:para></maml:para>
         </dev:remarks>
@@ -7332,23 +7333,26 @@ Original credit to Mike Robbins http://mikefrobbins.com/2018/01/18/use-powershel
     <command:examples>
       <command:example>
         <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
-        <dev:code>Get-DellSystemCatalog</dev:code>
+        <dev:code>Get-DellSystemCatalog
+Don't do this, you will get an almost endless list</dev:code>
         <dev:remarks>
-          <maml:para>Don't do this, you will get an almost endless list</maml:para>
+          <maml:para></maml:para>
         </dev:remarks>
       </command:example>
       <command:example>
         <maml:title>-------------------------- EXAMPLE 2 --------------------------</maml:title>
-        <dev:code>$Result = Get-DellSystemCatalog</dev:code>
+        <dev:code>$Result = Get-DellSystemCatalog
+Yes do this.  Save it in a Variable</dev:code>
         <dev:remarks>
-          <maml:para>Yes do this.  Save it in a Variable</maml:para>
+          <maml:para></maml:para>
         </dev:remarks>
       </command:example>
       <command:example>
         <maml:title>-------------------------- EXAMPLE 3 --------------------------</maml:title>
-        <dev:code>Get-DellSystemCatalog -Component BIOS | Out-GridView</dev:code>
+        <dev:code>Get-DellSystemCatalog -Component BIOS | Out-GridView
+Displays all the Dell BIOS Updates in GridView</dev:code>
         <dev:remarks>
-          <maml:para>Displays all the Dell BIOS Updates in GridView</maml:para>
+          <maml:para></maml:para>
         </dev:remarks>
       </command:example>
     </command:examples>
@@ -8817,23 +8821,26 @@ Original credit to Mike Robbins http://mikefrobbins.com/2018/01/18/use-powershel
     <command:examples>
       <command:example>
         <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
-        <dev:code>Get-HPPlatformCatalog</dev:code>
+        <dev:code>Get-HPPlatformCatalog
+Don't do this, you will get a big list.</dev:code>
         <dev:remarks>
-          <maml:para>Don't do this, you will get a big list.</maml:para>
+          <maml:para></maml:para>
         </dev:remarks>
       </command:example>
       <command:example>
         <maml:title>-------------------------- EXAMPLE 2 --------------------------</maml:title>
-        <dev:code>$Results = Get-HPPlatformCatalog</dev:code>
+        <dev:code>$Results = Get-HPPlatformCatalog
+Yes do this.  Save it in a Variable</dev:code>
         <dev:remarks>
-          <maml:para>Yes do this.  Save it in a Variable</maml:para>
+          <maml:para></maml:para>
         </dev:remarks>
       </command:example>
       <command:example>
         <maml:title>-------------------------- EXAMPLE 3 --------------------------</maml:title>
-        <dev:code>Get-HPPlatformCatalog | Out-GridView</dev:code>
+        <dev:code>Get-HPPlatformCatalog | Out-GridView
+Displays all the HP System Ids with the applicable computer model names in GridView</dev:code>
         <dev:remarks>
-          <maml:para>Displays all the HP System Ids with the applicable computer model names in GridView</maml:para>
+          <maml:para></maml:para>
         </dev:remarks>
       </command:example>
     </command:examples>
@@ -9055,23 +9062,26 @@ Original credit to Mike Robbins http://mikefrobbins.com/2018/01/18/use-powershel
     <command:examples>
       <command:example>
         <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
-        <dev:code>Get-HPSystemCatalog</dev:code>
+        <dev:code>Get-HPSystemCatalog
+Don't do this, you will get an almost endless list</dev:code>
         <dev:remarks>
-          <maml:para>Don't do this, you will get an almost endless list</maml:para>
+          <maml:para></maml:para>
         </dev:remarks>
       </command:example>
       <command:example>
         <maml:title>-------------------------- EXAMPLE 2 --------------------------</maml:title>
-        <dev:code>$Results = Get-HPSystemCatalog</dev:code>
+        <dev:code>$Results = Get-HPSystemCatalog
+Yes do this.  Save it in a Variable</dev:code>
         <dev:remarks>
-          <maml:para>Yes do this.  Save it in a Variable</maml:para>
+          <maml:para></maml:para>
         </dev:remarks>
       </command:example>
       <command:example>
         <maml:title>-------------------------- EXAMPLE 3 --------------------------</maml:title>
-        <dev:code>Get-HPSystemCatalog -Component BIOS | Out-GridView</dev:code>
+        <dev:code>Get-HPSystemCatalog -Component BIOS | Out-GridView
+Displays all the HP BIOS updates in GridView</dev:code>
         <dev:remarks>
-          <maml:para>Displays all the HP BIOS updates in GridView</maml:para>
+          <maml:para></maml:para>
         </dev:remarks>
       </command:example>
     </command:examples>
@@ -12023,9 +12033,13 @@ Original credit to Mike Robbins http://mikefrobbins.com/2018/01/18/use-powershel
     <command:examples>
       <command:example>
         <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
-        <dev:code>OSDClass</dev:code>
+        <dev:code>OSDClass
+Returns CimInstance Win32_ComputerSystem properties
+Option 1: Get-OSDClass
+Option 2: Get-OSDClass ComputerSystem
+Option 3: Get-OSDClass -Class ComputerSystem</dev:code>
         <dev:remarks>
-          <maml:para>Returns CimInstance Win32_ComputerSystem properties Option 1: Get-OSDClass Option 2: Get-OSDClass ComputerSystem Option 3: Get-OSDClass -Class ComputerSystem</maml:para>
+          <maml:para></maml:para>
         </dev:remarks>
       </command:example>
     </command:examples>
@@ -13380,16 +13394,21 @@ Original credit to Mike Robbins http://mikefrobbins.com/2018/01/18/use-powershel
     <command:examples>
       <command:example>
         <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
-        <dev:code>OSDGather</dev:code>
+        <dev:code>OSDGather
+Get-OSDGather
+Returns the Gather Results</dev:code>
         <dev:remarks>
-          <maml:para>Get-OSDGather Returns the Gather Results</maml:para>
+          <maml:para></maml:para>
         </dev:remarks>
       </command:example>
       <command:example>
         <maml:title>-------------------------- EXAMPLE 2 --------------------------</maml:title>
-        <dev:code>$OSDGather = Get-OSDGather</dev:code>
+        <dev:code>$OSDGather = Get-OSDGather
+$OSDGather.IsAdmin
+$OSDGather.ComputerInfo
+Returns the Gather Results saved in a Variable</dev:code>
         <dev:remarks>
-          <maml:para>$OSDGather.IsAdmin $OSDGather.ComputerInfo Returns the Gather Results saved in a Variable</maml:para>
+          <maml:para></maml:para>
         </dev:remarks>
       </command:example>
     </command:examples>
@@ -13911,16 +13930,23 @@ Original credit to Mike Robbins http://mikefrobbins.com/2018/01/18/use-powershel
     <command:examples>
       <command:example>
         <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
-        <dev:code>OSDPower</dev:code>
+        <dev:code>OSDPower
+Returns Power Plan information using powercfg /LIST
+Option 1: Get-OSDPower
+Option 2: Get-OSDPower LIST
+Option 3: Get-OSDPower -Property LIST</dev:code>
         <dev:remarks>
-          <maml:para>Returns Power Plan information using powercfg /LIST Option 1: Get-OSDPower Option 2: Get-OSDPower LIST Option 3: Get-OSDPower -Property LIST</maml:para>
+          <maml:para></maml:para>
         </dev:remarks>
       </command:example>
       <command:example>
         <maml:title>-------------------------- EXAMPLE 2 --------------------------</maml:title>
-        <dev:code>OSDPower High</dev:code>
+        <dev:code>OSDPower High
+Sets the active Power Plan to High Performance
+Option 1: Get-OSDPower High
+Option 2: Get-OSDPower -Property High</dev:code>
         <dev:remarks>
-          <maml:para>Sets the active Power Plan to High Performance Option 1: Get-OSDPower High Option 2: Get-OSDPower -Property High</maml:para>
+          <maml:para></maml:para>
         </dev:remarks>
       </command:example>
     </command:examples>
@@ -19126,9 +19152,11 @@ Original credit to Mike Robbins http://mikefrobbins.com/2018/01/18/use-powershel
     <command:examples>
       <command:example>
         <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
-        <dev:code>New-CAB -SourceDirectory C:\DeploymentShare\OSDeploy\OSConfig</dev:code>
+        <dev:code>New-CAB -SourceDirectory C:\DeploymentShare\OSDeploy\OSConfig
+Creates LZX High Compression CAB from of C:\DeploymentShare\OSDeploy\OSConfig
+Saves file in Parent Directory C:\DeploymentShare\OSDeploy\OSConfig.cab</dev:code>
         <dev:remarks>
-          <maml:para>Creates LZX High Compression CAB from of C:\DeploymentShare\OSDeploy\OSConfig Saves file in Parent Directory C:\DeploymentShare\OSDeploy\OSConfig.cab</maml:para>
+          <maml:para></maml:para>
         </dev:remarks>
       </command:example>
     </command:examples>
@@ -20353,16 +20381,18 @@ Original credit to Mike Robbins http://mikefrobbins.com/2018/01/18/use-powershel
     <command:examples>
       <command:example>
         <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
-        <dev:code>New-OSDisk</dev:code>
+        <dev:code>New-OSDisk
+Displays Get-Help New-OSDisk</dev:code>
         <dev:remarks>
-          <maml:para>Displays Get-Help New-OSDisk</maml:para>
+          <maml:para></maml:para>
         </dev:remarks>
       </command:example>
       <command:example>
         <maml:title>-------------------------- EXAMPLE 2 --------------------------</maml:title>
-        <dev:code>New-OSDisk -Force</dev:code>
+        <dev:code>New-OSDisk -Force
+Interactive.  Prompted to Confirm Clear-Disk for each Local Disk</dev:code>
         <dev:remarks>
-          <maml:para>Interactive.  Prompted to Confirm Clear-Disk for each Local Disk</maml:para>
+          <maml:para></maml:para>
         </dev:remarks>
       </command:example>
     </command:examples>
@@ -25200,9 +25230,10 @@ Original credit to Mike Robbins http://mikefrobbins.com/2018/01/18/use-powershel
     <command:examples>
       <command:example>
         <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
-        <dev:code>Show-RegistryXML -SourceDirectory C:\DeploymentShare\OSDeploy\OSConfig\LocalPolicy\ImportGPO</dev:code>
+        <dev:code>Show-RegistryXML -SourceDirectory C:\DeploymentShare\OSDeploy\OSConfig\LocalPolicy\ImportGPO
+Displays all RegistryXML entries found in Source Directory</dev:code>
         <dev:remarks>
-          <maml:para>Displays all RegistryXML entries found in Source Directory</maml:para>
+          <maml:para></maml:para>
         </dev:remarks>
       </command:example>
     </command:examples>
@@ -28224,6 +28255,65 @@ Original credit to Mike Robbins http://mikefrobbins.com/2018/01/18/use-powershel
   </command:command>
   <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
     <command:details>
+      <command:name>Start-OSDScriptsBeta</command:name>
+      <command:verb>Start</command:verb>
+      <command:noun>OSDScriptsBeta</command:noun>
+      <maml:description>
+        <maml:para>{{ Fill in the Synopsis }}</maml:para>
+      </maml:description>
+    </command:details>
+    <maml:description>
+      <maml:para>{{ Fill in the Description }}</maml:para>
+    </maml:description>
+    <command:syntax>
+      <command:syntaxItem>
+        <maml:name>Start-OSDScriptsBeta</maml:name>
+      </command:syntaxItem>
+    </command:syntax>
+    <command:parameters />
+    <command:inputTypes>
+      <command:inputType>
+        <dev:type>
+          <maml:name>None</maml:name>
+        </dev:type>
+        <maml:description>
+          <maml:para></maml:para>
+        </maml:description>
+      </command:inputType>
+    </command:inputTypes>
+    <command:returnValues>
+      <command:returnValue>
+        <dev:type>
+          <maml:name>System.Object</maml:name>
+        </dev:type>
+        <maml:description>
+          <maml:para></maml:para>
+        </maml:description>
+      </command:returnValue>
+    </command:returnValues>
+    <maml:alertSet>
+      <maml:alert>
+        <maml:para></maml:para>
+      </maml:alert>
+    </maml:alertSet>
+    <command:examples>
+      <command:example>
+        <maml:title>-------------------------- Example 1 --------------------------</maml:title>
+        <dev:code>PS C:\&gt; {{ Add example code here }}</dev:code>
+        <dev:remarks>
+          <maml:para>{{ Add example description here }}</maml:para>
+        </dev:remarks>
+      </command:example>
+    </command:examples>
+    <command:relatedLinks>
+      <maml:navigationLink>
+        <maml:linkText>Online Version:</maml:linkText>
+        <maml:uri>https://github.com/OSDeploy/OSD/tree/master/Docs</maml:uri>
+      </maml:navigationLink>
+    </command:relatedLinks>
+  </command:command>
+  <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
+    <command:details>
       <command:name>Start-PwshHub</command:name>
       <command:verb>Start</command:verb>
       <command:noun>PwshHub</command:noun>
@@ -30164,23 +30254,26 @@ Original credit to Mike Robbins http://mikefrobbins.com/2018/01/18/use-powershel
     <command:examples>
       <command:example>
         <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
-        <dev:code>Update-MyDellBios</dev:code>
+        <dev:code>Update-MyDellBios
+Downloads and launches the Dell BIOS Update.  Does not automatically install the BIOS Update</dev:code>
         <dev:remarks>
-          <maml:para>Downloads and launches the Dell BIOS Update.  Does not automatically install the BIOS Update</maml:para>
+          <maml:para></maml:para>
         </dev:remarks>
       </command:example>
       <command:example>
         <maml:title>-------------------------- EXAMPLE 2 --------------------------</maml:title>
-        <dev:code>Update-MyDellBios -Silent</dev:code>
+        <dev:code>Update-MyDellBios -Silent
+Yes, this will update your BIOS silently, and NOT reboot when its done</dev:code>
         <dev:remarks>
-          <maml:para>Yes, this will update your BIOS silently, and NOT reboot when its done</maml:para>
+          <maml:para></maml:para>
         </dev:remarks>
       </command:example>
       <command:example>
         <maml:title>-------------------------- EXAMPLE 3 --------------------------</maml:title>
-        <dev:code>Update-MyDellBios -Silent -Reboot</dev:code>
+        <dev:code>Update-MyDellBios -Silent -Reboot
+Yes, this will update your BIOS silently, AND reboot when its done</dev:code>
         <dev:remarks>
-          <maml:para>Yes, this will update your BIOS silently, AND reboot when its done</maml:para>
+          <maml:para></maml:para>
         </dev:remarks>
       </command:example>
     </command:examples>
@@ -30345,7 +30438,7 @@ Original credit to Mike Robbins http://mikefrobbins.com/2018/01/18/use-powershel
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="none">
           <maml:name>DriverPack</maml:name>
           <maml:description>
-            <maml:para>Optional. Select one or more of the following Driver Packs to download '*','ThisPC','Dell','HP','Lenovo','Microsoft'</maml:para>
+            <maml:para>Optional. Select one or more of the following Driver Packs to download</maml:para>
           </maml:description>
           <command:parameterValue required="true" variableLength="false">String[]</command:parameterValue>
           <dev:type>
@@ -30357,7 +30450,7 @@ Original credit to Mike Robbins http://mikefrobbins.com/2018/01/18/use-powershel
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="2" aliases="none">
           <maml:name>OSLanguage</maml:name>
           <maml:description>
-            <maml:para>Optional. Allows the selection of Driver Packs to download If this parameter is not used, any language can be downloaded downloaded</maml:para>
+            <maml:para>Optional. Allows the selection of Driver Packs to download.  If this parameter is not used, any language can be downloaded downloaded</maml:para>
           </maml:description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -30369,7 +30462,7 @@ Original credit to Mike Robbins http://mikefrobbins.com/2018/01/18/use-powershel
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="3" aliases="Activation, License, OSLicense">
           <maml:name>OSActivation</maml:name>
           <maml:description>
-            <maml:para>Optional. Selects the proper OS License If this parameter is not used, Operating Systems with the specified License can be downloaded 'Retail','Volume'</maml:para>
+            <maml:para>Optional. Selects the proper OS License. If this parameter is not used, Operating Systems with the specified License can be downloaded</maml:para>
           </maml:description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -30418,7 +30511,7 @@ Original credit to Mike Robbins http://mikefrobbins.com/2018/01/18/use-powershel
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="none">
         <maml:name>DriverPack</maml:name>
         <maml:description>
-          <maml:para>Optional. Select one or more of the following Driver Packs to download '*','ThisPC','Dell','HP','Lenovo','Microsoft'</maml:para>
+          <maml:para>Optional. Select one or more of the following Driver Packs to download</maml:para>
         </maml:description>
         <command:parameterValue required="true" variableLength="false">String[]</command:parameterValue>
         <dev:type>
@@ -30454,7 +30547,7 @@ Original credit to Mike Robbins http://mikefrobbins.com/2018/01/18/use-powershel
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="2" aliases="none">
         <maml:name>OSLanguage</maml:name>
         <maml:description>
-          <maml:para>Optional. Allows the selection of Driver Packs to download If this parameter is not used, any language can be downloaded downloaded</maml:para>
+          <maml:para>Optional. Allows the selection of Driver Packs to download.  If this parameter is not used, any language can be downloaded downloaded</maml:para>
         </maml:description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
@@ -30466,7 +30559,7 @@ Original credit to Mike Robbins http://mikefrobbins.com/2018/01/18/use-powershel
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="3" aliases="Activation, License, OSLicense">
         <maml:name>OSActivation</maml:name>
         <maml:description>
-          <maml:para>Optional. Selects the proper OS License If this parameter is not used, Operating Systems with the specified License can be downloaded 'Retail','Volume'</maml:para>
+          <maml:para>Optional. Selects the proper OS License. If this parameter is not used, Operating Systems with the specified License can be downloaded</maml:para>
         </maml:description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>

@@ -34,7 +34,6 @@ PS C:\> {{ Add example code here }}
 ### -DriverPack
 Optional.
 Select one or more of the following Driver Packs to download
-'*','ThisPC','Dell','HP','Lenovo','Microsoft'
 
 ```yaml
 Type: String[]
@@ -81,7 +80,7 @@ Accept wildcard characters: False
 
 ### -OSLanguage
 Optional.
-Allows the selection of Driver Packs to download
+Allows the selection of Driver Packs to download. 
 If this parameter is not used, any language can be downloaded downloaded
 
 ```yaml
@@ -98,9 +97,8 @@ Accept wildcard characters: False
 
 ### -OSActivation
 Optional.
-Selects the proper OS License
+Selects the proper OS License.
 If this parameter is not used, Operating Systems with the specified License can be downloaded
-'Retail','Volume'
 
 ```yaml
 Type: String

@@ -25,21 +25,19 @@ Optionally Set an Active Power Plan
 ### EXAMPLE 1
 ```
 OSDPower
-```
-
 Returns Power Plan information using powercfg /LIST
 Option 1: Get-OSDPower
 Option 2: Get-OSDPower LIST
 Option 3: Get-OSDPower -Property LIST
+```
 
 ### EXAMPLE 2
 ```
 OSDPower High
-```
-
 Sets the active Power Plan to High Performance
 Option 1: Get-OSDPower High
 Option 2: Get-OSDPower -Property High
+```
 
 ## PARAMETERS
 

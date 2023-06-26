@@ -1,6 +1,10 @@
 function Start-OSDScriptsBeta {
     [CmdletBinding()]
-    param ()
+    param (
+        [Parameter(Mandatory = $false)]
+        [ValidateScript({Test-Path -Path $_ -PathType Container})]
+        [string]$Path = "$($MyInvocation.MyCommand.Module.ModuleBase)\Projects\OSDScripts\Scripts"
+    )
     #================================================
     #   Set Global Variables
     #================================================
@@ -11,7 +15,6 @@ function Start-OSDScriptsBeta {
     #=================================================
     #   Parameters
     #=================================================
-    $Path = "$($MyInvocation.MyCommand.Module.ModuleBase)\Projects\OSDScripts\Scripts"
     $ScriptFiles = Get-ChildItem -Path $Path -Recurse -File
     $ScriptFiles = $ScriptFiles | Where-Object {($_.Name -match '.ps1') -or ($_.Name -match '.md') -or ($_.Name -match '.json')}
     #=================================================
