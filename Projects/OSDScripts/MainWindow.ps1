@@ -299,7 +299,12 @@ function Set-ScriptContent {
         $formMainWindowControlStartButton.Visibility = "Collapsed"
     }
     
-    if ($Global:CurrentScript.Script -like "*.md") {
+    if ($Global:CurrentScript.Script -like "*.json") {
+        $formMainWindowControlScriptContent.Foreground = 'Black'
+        $formMainWindowControlScriptContent.IsReadOnly = $false
+        $formMainWindowControlStartButton.Visibility = "Collapsed"
+    }
+    elseif ($Global:CurrentScript.Script -like "*.md") {
         $formMainWindowControlScriptContent.Foreground = 'Black'
         $formMainWindowControlScriptContent.IsReadOnly = $true
         $formMainWindowControlStartButton.Visibility = "Collapsed"

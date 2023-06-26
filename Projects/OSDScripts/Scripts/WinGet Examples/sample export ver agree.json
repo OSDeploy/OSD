@@ -1,0 +1,140 @@
+{
+	"$schema" : "https://aka.ms/winget-packages.schema.2.0.json",
+	"CreationDate" : "2023-06-25T23:43:27.520-00:00",
+	"Sources" : 
+	[
+		{
+			"Packages" : 
+			[
+				{
+					"PackageIdentifier" : "Microsoft.VisualStudio.2022.Enterprise",
+					"Version" : "17.6.4"
+				},
+				{
+					"PackageIdentifier" : "PrimateLabs.Geekbench.6",
+					"Version" : "Unknown"
+				},
+				{
+					"PackageIdentifier" : "GitHub.GitHubDesktop",
+					"Version" : "3.2.3"
+				},
+				{
+					"PackageIdentifier" : "Git.Git",
+					"Version" : "2.41.0"
+				},
+				{
+					"PackageIdentifier" : "Microsoft.Edge",
+					"Version" : "114.0.1823.58"
+				},
+				{
+					"PackageIdentifier" : "Microsoft.EdgeWebView2Runtime",
+					"Version" : "114.0.1823.58"
+				},
+				{
+					"PackageIdentifier" : "Microsoft.WinDbg",
+					"Version" : "1.2303.30001.0"
+				},
+				{
+					"PackageIdentifier" : "Microsoft.WindowsTerminal",
+					"Version" : "1.16.10261.0"
+				},
+				{
+					"PackageIdentifier" : "Notepad++.Notepad++",
+					"Version" : "8.5.4"
+				},
+				{
+					"PackageIdentifier" : "Microsoft.OneDrive",
+					"Version" : "23.114.0530.0001"
+				},
+				{
+					"PackageIdentifier" : "Microsoft.PowerShell",
+					"Version" : "7.3.4.0"
+				},
+				{
+					"PackageIdentifier" : "TechSmith.Snagit.2023",
+					"Version" : "23.1.1.27519"
+				},
+				{
+					"PackageIdentifier" : "Microsoft.ADKPEAddon",
+					"Version" : "10.1.22621.1"
+				},
+				{
+					"PackageIdentifier" : "7zip.7zip",
+					"Version" : "22.01.00.0"
+				},
+				{
+					"PackageIdentifier" : "Microsoft.DotNet.SDK.7",
+					"Version" : "7.3.423.27513"
+				},
+				{
+					"PackageIdentifier" : "Microsoft.DeploymentToolkit",
+					"Version" : "6.3.8456.1000"
+				},
+				{
+					"PackageIdentifier" : "Microsoft.WindowsADK",
+					"Version" : "10.1.22621.1"
+				},
+				{
+					"PackageIdentifier" : "Microsoft.WindowsAdminCenter",
+					"Version" : "1.3.53858.0"
+				},
+				{
+					"PackageIdentifier" : "Microsoft.CLRTypesSQLServer.2019",
+					"Version" : "15.0.2000.5"
+				},
+				{
+					"PackageIdentifier" : "Microsoft.VCRedist.2015+.x64",
+					"Version" : "14.22.27821.0"
+				},
+				{
+					"PackageIdentifier" : "Microsoft.VisualStudioCode",
+					"Version" : "1.79.2"
+				},
+				{
+					"PackageIdentifier" : "Logitech.OptionsPlus",
+					"Version" : "1.44.415782"
+				},
+				{
+					"PackageIdentifier" : "Microsoft.VCRedist.2015+.x64",
+					"Version" : "14.36.32532.0"
+				},
+				{
+					"PackageIdentifier" : "Microsoft.PowerToys",
+					"Version" : "0.70.1"
+				},
+				{
+					"PackageIdentifier" : "Google.Chrome",
+					"Version" : "114.0.5735.134"
+				},
+				{
+					"PackageIdentifier" : "Microsoft.VisualStudioCode",
+					"Version" : "1.79.2"
+				}
+			],
+			"SourceDetails" : 
+			{
+				"Argument" : "https://winget.azureedge.net/cache",
+				"Identifier" : "Microsoft.Winget.Source_8wekyb3d8bbwe",
+				"Name" : "winget",
+				"Type" : "Microsoft.PreIndexed.Package"
+			}
+		},
+		{
+			"Packages" : 
+			[
+				{
+					"PackageIdentifier" : "9NBLGGH4TX22",
+					"Version" : "2022.1118.0.0"
+				}
+			],
+			"SourceDetails" : 
+			{
+				"Argument" : "https://storeedgefd.dsx.mp.microsoft.com/v9.0",
+				"Identifier" : "StoreEdgeFD",
+				"Name" : "msstore",
+				"Type" : "Microsoft.Rest"
+			}
+		}
+	],
+	"WinGetVersion" : "1.2.10691"
+}

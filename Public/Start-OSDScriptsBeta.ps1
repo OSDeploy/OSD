@@ -13,7 +13,7 @@ function Start-OSDScriptsBeta {
     #=================================================
     $Path = "$($MyInvocation.MyCommand.Module.ModuleBase)\Projects\OSDScripts\Scripts"
     $ScriptFiles = Get-ChildItem -Path $Path -Recurse -File
-    $ScriptFiles = $ScriptFiles | Where-Object {($_.Name -match '.ps1') -or ($_.Name -match '.md')}
+    $ScriptFiles = $ScriptFiles | Where-Object {($_.Name -match '.ps1') -or ($_.Name -match '.md') -or ($_.Name -match '.json')}
     #=================================================
     #   Create Object
     #=================================================
