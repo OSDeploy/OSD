@@ -41,7 +41,7 @@ function Start-OSDScriptsBeta {
         $ObjectProperties = [ordered]@{
             Category = $Category
             Script = $Script
-            Content = Get-Content -Path $Item.FullName -Raw
+            Content = Get-Content -Path $Item.FullName -Raw -Encoding utf8
             DirectoryName = $DirectoryName
             RelativePath = $RelativePath
             Name = $Item.Name
