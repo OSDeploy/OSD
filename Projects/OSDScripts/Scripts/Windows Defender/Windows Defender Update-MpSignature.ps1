@@ -1,1 +1,0 @@
-Update-MpSignature -UpdateSource MicrosoftUpdateServer -Verbose
