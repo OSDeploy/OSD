@@ -71,6 +71,13 @@ else {
     Write-Host -ForegroundColor Red "[!] ScriptRepoGUI could not be downloaded"
     Break
 }
+# Set-ExcutionPolicy
+$policyexecution = Get-ExecutionPolicy
+if ($policyexecution -ne 'RemoteSigned') {
+    Write-Host -ForegroundColor Yellow "[-] PowerShell PolicyExecition i set to $policyexecution "
+    Write-Host -ForegroundColor Green "[+] Change PowerShell PolicyExecition to RemoteSigned"
+    Set-ExecutionPolicy -ExecutionPolicy RemoteSigned  -Force
+}
 
 # Expand Zip file
 $CurrentFile = Get-Item -Path $OutFile
