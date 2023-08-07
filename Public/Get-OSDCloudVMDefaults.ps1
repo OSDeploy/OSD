@@ -1,4 +1,4 @@
-function Get-OSDCloudVMDefaults {
+﻿function Get-OSDCloudVMDefaults {
     <#
     .SYNOPSIS
     Gets the OSDCloudVM Module defaults from $Global:OSDModuleResource.NewOSDCloudVM

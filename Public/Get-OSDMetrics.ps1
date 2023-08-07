@@ -1,4 +1,4 @@
-<#
+﻿<#
 .SYNOPSIS
 Retrieves metrics for the OSD PowerShell module and OSDCloud deployment methods.
 

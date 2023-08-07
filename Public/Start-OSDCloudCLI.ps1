@@ -1,4 +1,4 @@
-function Start-OSDCloudCLI {
+﻿function Start-OSDCloudCLI {
     <#
     .SYNOPSIS
     Starts the OSDCloud Windows 10 or 11 Build Process from the OSD Module or a GitHub Repository
