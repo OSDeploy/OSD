@@ -1,4 +1,4 @@
-function Edit-OSDCloudWinPE {
+﻿function Edit-OSDCloudWinPE {
     <#
     .SYNOPSIS
     Edits WinPE in an OSDCloud Workspace for customization
@@ -242,7 +242,8 @@ $StartnetCMD = @"
 wpeinit
 cd\
 title OSD $OSDVersion
-PowerShell -Nol -C $InitializeOSDCloudStartnetCommand 
+PowerShell -Nol -C $InitializeOSDCloudStartnetCommand
+PowerShell -Nol -C Initialize-OSDCloudStartnetUpdate
 "@
     Write-Host -ForegroundColor DarkGray "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Startnet.cmd: Reset to defaults"
     $StartnetCMD
