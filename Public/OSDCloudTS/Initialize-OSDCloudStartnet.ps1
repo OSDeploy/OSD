@@ -44,8 +44,8 @@ function Initialize-OSDCloudStartnet {
         $TimeSpan = New-TimeSpan -Start $Global:StartnetStart -End (Get-Date)
         Write-Host -ForegroundColor DarkGray "$($TimeSpan.ToString("mm':'ss")) Initialize-OSDCloudStartnet"
 
-        # Delay for 10 seconds to allow the hardware to initialize
-        Start-Sleep -Seconds 10
+        # Delay for 5 seconds to allow the hardware to initialize
+        Start-Sleep -Seconds 5
 
         <#
         OSDCloud Config Startup Scripts
@@ -109,9 +109,9 @@ function Initialize-OSDCloudStartnet {
         }
 
         # Initialize Network Connections
-        $TimeSpan = New-TimeSpan -Start $Global:StartnetStart -End (Get-Date)
-        Write-Host -ForegroundColor DarkGray "$($TimeSpan.ToString("mm':'ss")) Initialize Network Connections"
-        Start-Sleep -Seconds 10
+        # $TimeSpan = New-TimeSpan -Start $Global:StartnetStart -End (Get-Date)
+        # Write-Host -ForegroundColor DarkGray "$($TimeSpan.ToString("mm':'ss")) Initialize Network Connections"
+        Start-Sleep -Seconds 5
 
         # Check if the OSD Module in the PowerShell Gallery is newer than the installed version
         $TimeSpan = New-TimeSpan -Start $Global:StartnetStart -End (Get-Date)
