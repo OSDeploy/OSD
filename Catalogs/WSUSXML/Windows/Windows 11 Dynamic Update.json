@@ -47,9 +47,9 @@
         "AdditionalHash":  "155 232 132 19 192 229 226 23 216 215 178 0 240 206 18 251 58 240 81 111 33 35 118 38 9 44 54 228 164 193 238 122",
         "OSDCore":  "",
         "OSDWinPE":  "",
-        "OSDGuid":  "e469e0ae-08d1-47bb-be1d-1b6bd1e6a423",
+        "OSDGuid":  "bccd314c-a7c2-4062-9f7e-f09e95c961cd",
         "PartitionKey":  "Windows 11 Dynamic Update",
-        "RowKey":  "e469e0ae-08d1-47bb-be1d-1b6bd1e6a423"
+        "RowKey":  "bccd314c-a7c2-4062-9f7e-f09e95c961cd"
     },
     {
         "Catalog":  "Windows 11 Dynamic Update",
@@ -99,9 +99,9 @@
         "AdditionalHash":  "236 0 155 217 176 36 9 64 138 171 182 53 75 101 211 193 31 184 74 18 189 0 106 137 107 142 160 27 184 152 101 114",
         "OSDCore":  "",
         "OSDWinPE":  "",
-        "OSDGuid":  "656907da-4292-4c93-8633-c8eaf99d031e",
+        "OSDGuid":  "cace77c1-4e4e-4099-872d-edba728fe243",
         "PartitionKey":  "Windows 11 Dynamic Update",
-        "RowKey":  "656907da-4292-4c93-8633-c8eaf99d031e"
+        "RowKey":  "cace77c1-4e4e-4099-872d-edba728fe243"
     },
     {
         "Catalog":  "Windows 11 Dynamic Update",
@@ -151,9 +151,9 @@
         "AdditionalHash":  "147 177 121 163 245 113 207 128 248 31 99 49 202 13 189 105 200 33 5 181 216 21 56 179 238 201 191 21 77 6 211 184",
         "OSDCore":  "",
         "OSDWinPE":  "",
-        "OSDGuid":  "168f683f-4ff3-4d77-b9ea-7c91bcf1a3bd",
+        "OSDGuid":  "835959bb-2520-427b-ba0b-872c8ea47faf",
         "PartitionKey":  "Windows 11 Dynamic Update",
-        "RowKey":  "168f683f-4ff3-4d77-b9ea-7c91bcf1a3bd"
+        "RowKey":  "835959bb-2520-427b-ba0b-872c8ea47faf"
     },
     {
         "Catalog":  "Windows 11 Dynamic Update",
@@ -203,8 +203,8 @@
         "AdditionalHash":  "15 21 26 131 183 150 120 48 204 96 26 122 76 9 76 222 63 34 133 74 174 91 205 97 214 176 166 119 112 18 153 126",
         "OSDCore":  "",
         "OSDWinPE":  "",
-        "OSDGuid":  "51af56d4-3e02-423f-8e19-135c50a96ba5",
+        "OSDGuid":  "88a483d4-936e-4ec5-aa04-fe4ee8a0fc17",
         "PartitionKey":  "Windows 11 Dynamic Update",
-        "RowKey":  "51af56d4-3e02-423f-8e19-135c50a96ba5"
+        "RowKey":  "88a483d4-936e-4ec5-aa04-fe4ee8a0fc17"
     }
 ]

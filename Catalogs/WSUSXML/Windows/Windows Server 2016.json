@@ -47,9 +47,9 @@
         "AdditionalHash":  "138 175 36 155 49 103 188 219 119 40 158 46 162 240 164 59 106 215 144 136 165 216 7 129 31 246 135 58 206 139 87 237",
         "OSDCore":  "",
         "OSDWinPE":  "",
-        "OSDGuid":  "5599178f-92ef-4e9c-a71b-d03007e43f9f",
+        "OSDGuid":  "cba3f77b-4edf-4db8-a57a-e0423dce81fc",
         "PartitionKey":  "Windows Server 2016",
-        "RowKey":  "5599178f-92ef-4e9c-a71b-d03007e43f9f"
+        "RowKey":  "cba3f77b-4edf-4db8-a57a-e0423dce81fc"
     },
     {
         "Catalog":  "Windows Server 2016",
@@ -99,9 +99,9 @@
         "AdditionalHash":  "136 247 230 6 149 58 206 92 111 177 5 9 182 27 23 32 15 53 147 41 34 80 251 43 50 235 53 85 29 71 137 38",
         "OSDCore":  "",
         "OSDWinPE":  "",
-        "OSDGuid":  "8117bc6c-3711-48e2-9a14-10a0a9a2230f",
+        "OSDGuid":  "0e00b899-9f15-4856-b2f7-d9b2fe5b3cdb",
         "PartitionKey":  "Windows Server 2016",
-        "RowKey":  "8117bc6c-3711-48e2-9a14-10a0a9a2230f"
+        "RowKey":  "0e00b899-9f15-4856-b2f7-d9b2fe5b3cdb"
     },
     {
         "Catalog":  "Windows Server 2016",
@@ -151,9 +151,9 @@
         "AdditionalHash":  "221 96 195 53 243 208 90 15 231 212 161 121 62 218 225 168 129 201 222 185 7 204 100 202 185 249 58 101 100 78 93 32",
         "OSDCore":  "",
         "OSDWinPE":  "",
-        "OSDGuid":  "02d37858-2003-456a-90cb-20a2eb514620",
+        "OSDGuid":  "594a4f98-18ac-4ee5-95a6-4c8f60c77b0e",
         "PartitionKey":  "Windows Server 2016",
-        "RowKey":  "02d37858-2003-456a-90cb-20a2eb514620"
+        "RowKey":  "594a4f98-18ac-4ee5-95a6-4c8f60c77b0e"
     },
     {
         "Catalog":  "Windows Server 2016",
@@ -203,9 +203,9 @@
         "AdditionalHash":  "88 225 86 188 222 55 6 126 53 135 79 174 34 183 236 114 53 82 141 207 151 55 206 227 58 135 83 26 77 241 70 204",
         "OSDCore":  "",
         "OSDWinPE":  "",
-        "OSDGuid":  "98e89348-aedd-4aa1-bade-1794baf4050a",
+        "OSDGuid":  "28b7eb79-15e5-4799-a42a-a2e5f2239a65",
         "PartitionKey":  "Windows Server 2016",
-        "RowKey":  "98e89348-aedd-4aa1-bade-1794baf4050a"
+        "RowKey":  "28b7eb79-15e5-4799-a42a-a2e5f2239a65"
     },
     {
         "Catalog":  "Windows Server 2016",
@@ -255,9 +255,9 @@
         "AdditionalHash":  "58 12 14 59 39 224 20 74 214 200 20 11 128 111 162 57 181 224 211 41 157 171 85 24 51 246 133 21 156 87 182 43",
         "OSDCore":  "",
         "OSDWinPE":  "",
-        "OSDGuid":  "9294d716-0048-4f64-8147-2541fd831420",
+        "OSDGuid":  "041b9d7c-7c27-48f7-b9aa-f6c82fb2faee",
         "PartitionKey":  "Windows Server 2016",
-        "RowKey":  "9294d716-0048-4f64-8147-2541fd831420"
+        "RowKey":  "041b9d7c-7c27-48f7-b9aa-f6c82fb2faee"
     },
     {
         "Catalog":  "Windows Server 2016",
@@ -307,9 +307,9 @@
         "AdditionalHash":  "99 88 114 146 122 67 69 93 103 137 253 90 145 130 134 179 115 68 168 78 85 155 154 170 124 27 128 140 61 83 36 92",
         "OSDCore":  "",
         "OSDWinPE":  "",
-        "OSDGuid":  "8c800869-00e7-45fd-b74a-56908c06c124",
+        "OSDGuid":  "540d3c84-571f-46eb-96c3-c0827b998d20",
         "PartitionKey":  "Windows Server 2016",
-        "RowKey":  "8c800869-00e7-45fd-b74a-56908c06c124"
+        "RowKey":  "540d3c84-571f-46eb-96c3-c0827b998d20"
     },
     {
         "Catalog":  "Windows Server 2016",
@@ -359,9 +359,9 @@
         "AdditionalHash":  "48 73 46 99 138 198 132 28 161 182 159 12 110 230 245 188 44 46 219 7 128 97 94 40 57 110 31 28 237 153 93 40",
         "OSDCore":  "",
         "OSDWinPE":  "",
-        "OSDGuid":  "dbc1dd60-6ed1-4ae4-bed4-0453616c4ecc",
+        "OSDGuid":  "70556a3e-254a-4012-979a-cc84193b4238",
         "PartitionKey":  "Windows Server 2016",
-        "RowKey":  "dbc1dd60-6ed1-4ae4-bed4-0453616c4ecc"
+        "RowKey":  "70556a3e-254a-4012-979a-cc84193b4238"
     },
     {
         "Catalog":  "Windows Server 2016",
@@ -411,9 +411,9 @@
         "AdditionalHash":  "8 107 75 200 170 235 28 246 99 12 20 39 175 136 64 82 162 50 63 191 147 40 105 9 223 72 177 3 52 48 97 18",
         "OSDCore":  "",
         "OSDWinPE":  "",
-        "OSDGuid":  "19be3d78-6a2d-47ab-b038-c4bb056de2c1",
+        "OSDGuid":  "2f31ef33-f0dd-49c8-baad-3067b0464d5b",
         "PartitionKey":  "Windows Server 2016",
-        "RowKey":  "19be3d78-6a2d-47ab-b038-c4bb056de2c1"
+        "RowKey":  "2f31ef33-f0dd-49c8-baad-3067b0464d5b"
     },
     {
         "Catalog":  "Windows Server 2016",
@@ -463,9 +463,9 @@
         "AdditionalHash":  "67 138 186 172 63 240 115 29 112 97 86 125 94 183 62 196 208 72 95 28 170 2 195 134 185 96 31 44 130 113 161 69",
         "OSDCore":  "",
         "OSDWinPE":  "",
-        "OSDGuid":  "279df9ae-2203-42a0-af36-fe600e42dc2a",
+        "OSDGuid":  "5676b948-95a1-4921-b203-9dea7e05d92c",
         "PartitionKey":  "Windows Server 2016",
-        "RowKey":  "279df9ae-2203-42a0-af36-fe600e42dc2a"
+        "RowKey":  "5676b948-95a1-4921-b203-9dea7e05d92c"
     },
     {
         "Catalog":  "Windows Server 2016",
@@ -515,9 +515,9 @@
         "AdditionalHash":  "230 249 17 184 208 81 43 188 106 16 90 149 169 119 246 236 216 99 4 144 156 71 27 12 147 2 14 89 83 17 116 253",
         "OSDCore":  "",
         "OSDWinPE":  "",
-        "OSDGuid":  "0643eb9a-2402-48e7-b526-5bb0a9708dd3",
+        "OSDGuid":  "8576c8bf-8202-42d3-bcb7-297aff6a2ce6",
         "PartitionKey":  "Windows Server 2016",
-        "RowKey":  "0643eb9a-2402-48e7-b526-5bb0a9708dd3"
+        "RowKey":  "8576c8bf-8202-42d3-bcb7-297aff6a2ce6"
     },
     {
         "Catalog":  "Windows Server 2016",
@@ -567,9 +567,9 @@
         "AdditionalHash":  "88 86 206 71 216 77 222 78 246 188 250 223 218 200 30 131 183 149 23 163 46 62 122 8 15 104 110 10 15 194 51 155",
         "OSDCore":  "",
         "OSDWinPE":  "",
-        "OSDGuid":  "e08fcead-38f8-4e82-a893-b369128b22f9",
+        "OSDGuid":  "dfc78198-ba4b-4245-adc7-80db05cc55e2",
         "PartitionKey":  "Windows Server 2016",
-        "RowKey":  "e08fcead-38f8-4e82-a893-b369128b22f9"
+        "RowKey":  "dfc78198-ba4b-4245-adc7-80db05cc55e2"
     },
     {
         "Catalog":  "Windows Server 2016",
@@ -619,9 +619,9 @@
         "AdditionalHash":  "100 196 82 210 218 123 102 75 58 133 132 27 92 150 233 147 217 190 47 178 40 176 145 253 24 238 20 47 62 127 70 200",
         "OSDCore":  "",
         "OSDWinPE":  "",
-        "OSDGuid":  "fa848ffe-3dae-4ca7-9d33-38a41855b464",
+        "OSDGuid":  "7f22cce0-6152-44f3-b570-e673bac5f55c",
         "PartitionKey":  "Windows Server 2016",
-        "RowKey":  "fa848ffe-3dae-4ca7-9d33-38a41855b464"
+        "RowKey":  "7f22cce0-6152-44f3-b570-e673bac5f55c"
     },
     {
         "Catalog":  "Windows Server 2016",
@@ -671,9 +671,9 @@
         "AdditionalHash":  "57 158 151 6 78 169 7 41 233 131 212 18 183 70 149 170 45 161 231 8 74 232 82 140 83 232 247 188 33 17 68 141",
         "OSDCore":  "",
         "OSDWinPE":  "",
-        "OSDGuid":  "af16c621-e0fe-4209-adb4-064caced9ae0",
+        "OSDGuid":  "12a52f0e-ca1a-48be-b625-fb2ec02d5be8",
         "PartitionKey":  "Windows Server 2016",
-        "RowKey":  "af16c621-e0fe-4209-adb4-064caced9ae0"
+        "RowKey":  "12a52f0e-ca1a-48be-b625-fb2ec02d5be8"
     },
     {
         "Catalog":  "Windows Server 2016",
@@ -723,9 +723,9 @@
         "AdditionalHash":  "37 168 231 75 151 33 37 89 82 116 79 221 66 88 232 79 136 96 59 179 232 109 195 116 150 2 184 155 2 208 186 20",
         "OSDCore":  "",
         "OSDWinPE":  "",
-        "OSDGuid":  "2e38bcca-742b-4f9e-b756-ce1fbd22bfbb",
+        "OSDGuid":  "1d1b79b3-2a2b-4a7a-bb98-3b9911d997d7",
         "PartitionKey":  "Windows Server 2016",
-        "RowKey":  "2e38bcca-742b-4f9e-b756-ce1fbd22bfbb"
+        "RowKey":  "1d1b79b3-2a2b-4a7a-bb98-3b9911d997d7"
     },
     {
         "Catalog":  "Windows Server 2016",
@@ -775,9 +775,9 @@
         "AdditionalHash":  "187 19 69 222 223 195 192 27 248 33 233 77 72 248 143 171 9 246 164 125 232 206 90 178 182 73 95 190 229 28 26 70",
         "OSDCore":  "",
         "OSDWinPE":  "",
-        "OSDGuid":  "31dfaaf1-f900-4d41-bf3f-d8e324e339a8",
+        "OSDGuid":  "697b305f-97ff-4b84-8c61-b0968c471545",
         "PartitionKey":  "Windows Server 2016",
-        "RowKey":  "31dfaaf1-f900-4d41-bf3f-d8e324e339a8"
+        "RowKey":  "697b305f-97ff-4b84-8c61-b0968c471545"
     },
     {
         "Catalog":  "Windows Server 2016",
@@ -787,15 +787,15 @@
         "UpdateBuild":  "1607",
         "UpdateArch":  "x64",
         "UpdateGroup":  "DotNetCU",
-        "CreationDate":  "\/Date(1686675600000)\/",
-        "KBNumber":  "5027123",
-        "FileKBNumber":  "5027123",
-        "Title":  "2023-06 Cumulative Update for .NET Framework 4.8 for Windows Server 2016 for x64 (KB5027123)",
-        "UpdateId":  "ab03ae8a-8d5f-4197-b8c3-9211fa702834",
-        "LegacyName":  "KB5027123-DotNetCumulative-RS1-Server-x64-Retail",
+        "CreationDate":  "\/Date(1691514000000)\/",
+        "KBNumber":  "5028952",
+        "FileKBNumber":  "5028952",
+        "Title":  "2023-08 Cumulative Update for .NET Framework 4.8 for Windows Server 2016 for x64 (KB5028952)",
+        "UpdateId":  "d219294e-821e-43ba-9aca-cda4f55b5521",
+        "LegacyName":  "KB5028952-DotNetCumulative-RS1-Server-x64-Retail",
         "Type":  "SelfContained",
-        "FileName":  "Windows10.0-KB5027123-x64-NDP48.cab",
-        "Size":  59501706,
+        "FileName":  "Windows10.0-KB5028952-x64.cab",
+        "Size":  58791807,
         "CompanyTitles":  "Microsoft",
         "ProductFamilyTitles":  "Windows",
         "Category":  "Windows Server 2016",
@@ -818,70 +818,18 @@
         "IsWsusInfrastructureUpdate":  false,
         "IsEditable":  false,
         "UpdateSource":  "MicrosoftUpdate",
-        "AdditionalInformationUrls":  "http://support.microsoft.com/kb/5027123",
+        "AdditionalInformationUrls":  "http://support.microsoft.com/kb/5028952",
         "Description":  "A security issue has been identified in a Microsoft software product that could affect your system. You can help protect your system by installing this update from Microsoft. For a complete listing of the issues that are included in this update, see the associated Microsoft Knowledge Base article. After you install this update, you may have to restart your system.",
         "ReleaseNotes":  "",
-        "FileUri":  "http://download.windowsupdate.com/d/msdownload/update/software/secu/2023/05/windows10.0-kb5027123-x64-ndp48_67fae767a979fb86de34d3d7a93b3edfc983efd4.cab",
-        "OriginUri":  "http://download.windowsupdate.com/d/msdownload/update/software/secu/2023/05/windows10.0-kb5027123-x64-ndp48_67fae767a979fb86de34d3d7a93b3edfc983efd4.cab",
-        "Hash":  "103 250 231 103 169 121 251 134 222 52 211 215 169 59 62 223 201 131 239 212",
-        "AdditionalHash":  "138 203 145 177 174 120 25 230 132 172 85 103 3 5 139 99 50 109 110 51 196 136 63 70 70 108 38 254 180 153 207 37",
+        "FileUri":  "http://download.windowsupdate.com/d/msdownload/update/software/secu/2023/07/windows10.0-kb5028952-x64_777e7bc608ce29e69b77b886631825f129c95691.cab",
+        "OriginUri":  "http://download.windowsupdate.com/d/msdownload/update/software/secu/2023/07/windows10.0-kb5028952-x64_777e7bc608ce29e69b77b886631825f129c95691.cab",
+        "Hash":  "119 126 123 198 8 206 41 230 155 119 184 134 99 24 37 241 41 201 86 145",
+        "AdditionalHash":  "230 7 161 180 190 195 126 201 43 109 2 160 15 182 94 176 132 58 105 214 74 253 40 225 150 152 134 102 51 200 181 104",
         "OSDCore":  "",
         "OSDWinPE":  "",
-        "OSDGuid":  "a35d26c2-451a-4c32-b921-829f0470f4c1",
+        "OSDGuid":  "14e90111-3b8e-4f88-8b80-eb81727e669d",
         "PartitionKey":  "Windows Server 2016",
-        "RowKey":  "a35d26c2-451a-4c32-b921-829f0470f4c1"
-    },
-    {
-        "Catalog":  "Windows Server 2016",
-        "OSDVersion":  "23.7.16.1",
-        "OSDStatus":  "",
-        "UpdateOS":  "Windows Server",
-        "UpdateBuild":  "1607",
-        "UpdateArch":  "x64",
-        "UpdateGroup":  "DotNetCU",
-        "CreationDate":  "\/Date(1689094800000)\/",
-        "KBNumber":  "5028854",
-        "FileKBNumber":  "5028854",
-        "Title":  "2023-07 Cumulative Update for .NET Framework 4.8 for Windows Server 2016 for x64 (KB5028854)",
-        "UpdateId":  "a648e7b5-0d02-49f1-8462-f9888abfd30a",
-        "LegacyName":  "KB5028854-DotNetCumulative-RS1-Server-x64-Retail",
-        "Type":  "SelfContained",
-        "FileName":  "Windows10.0-KB5028854-x64-NDP48.cab",
-        "Size":  59482978,
-        "CompanyTitles":  "Microsoft",
-        "ProductFamilyTitles":  "Windows",
-        "Category":  "Windows Server 2016",
-        "UpdateClassificationTitle":  "Updates",
-        "MsrcSeverity":  "Unspecified",
-        "SecurityBulletins":  "",
-        "UpdateType":  "Software",
-        "PublicationState":  "Published",
-        "HasLicenseAgreement":  false,
-        "RequiresLicenseAgreementAcceptance":  false,
-        "State":  "Ready",
-        "IsLatestRevision":  true,
-        "HasEarlierRevision":  false,
-        "IsBeta":  false,
-        "HasStaleUpdateApprovals":  false,
-        "IsApproved":  false,
-        "IsDeclined":  false,
-        "HasSupersededUpdates":  true,
-        "IsSuperseded":  false,
-        "IsWsusInfrastructureUpdate":  false,
-        "IsEditable":  false,
-        "UpdateSource":  "MicrosoftUpdate",
-        "AdditionalInformationUrls":  "http://support.microsoft.com/kb/5028854",
-        "Description":  "Install this update to resolve issues in Windows. For a complete listing of the issues that are included in this update, see the associated Microsoft Knowledge Base article for more information. After you install this item, you may have to restart your computer.",
-        "ReleaseNotes":  "",
-        "FileUri":  "http://download.windowsupdate.com/c/msdownload/update/software/updt/2023/06/windows10.0-kb5028854-x64-ndp48_d5d17d1461f47fcdd21fed4ffaf94e75c71c7c86.cab",
-        "OriginUri":  "http://download.windowsupdate.com/c/msdownload/update/software/updt/2023/06/windows10.0-kb5028854-x64-ndp48_d5d17d1461f47fcdd21fed4ffaf94e75c71c7c86.cab",
-        "Hash":  "213 209 125 20 97 244 127 205 210 31 237 79 250 249 78 117 199 28 124 134",
-        "AdditionalHash":  "44 50 187 117 64 79 156 156 96 3 181 117 94 235 127 135 218 112 198 171 167 111 193 241 178 129 240 54 26 48 163 185",
-        "OSDCore":  "",
-        "OSDWinPE":  "",
-        "OSDGuid":  "fadb047c-1ca3-48e1-8eb1-856df5685a62",
-        "PartitionKey":  "Windows Server 2016",
-        "RowKey":  "fadb047c-1ca3-48e1-8eb1-856df5685a62"
+        "RowKey":  "14e90111-3b8e-4f88-8b80-eb81727e669d"
     },
     {
         "Catalog":  "Windows Server 2016",
@@ -891,15 +839,15 @@
         "UpdateBuild":  "1607",
         "UpdateArch":  "x64",
         "UpdateGroup":  "LCU",
-        "CreationDate":  "\/Date(1689094806000)\/",
-        "KBNumber":  "5028169",
-        "FileKBNumber":  "5028169",
-        "Title":  "2023-07 Cumulative Update for Windows Server 2016 for x64-based Systems (KB5028169)",
-        "UpdateId":  "9db95304-8fab-4e60-bd3a-fa5b5a2508f3",
-        "LegacyName":  "KB5028169-Windows10Rs1Server-RTM-X64-TSL-World",
+        "CreationDate":  "\/Date(1691514006000)\/",
+        "KBNumber":  "5029242",
+        "FileKBNumber":  "5029242",
+        "Title":  "2023-08 Cumulative Update for Windows Server 2016 for x64-based Systems (KB5029242)",
+        "UpdateId":  "b56dcd2e-b407-4f4c-84bc-90752e2d3aca",
+        "LegacyName":  "KB5029242-Windows10Rs1Server-RTM-X64-TSL-World",
         "Type":  "SelfContained",
-        "FileName":  "windows10.0-kb5028169-x64.cab",
-        "Size":  1720199866,
+        "FileName":  "windows10.0-kb5029242-x64.cab",
+        "Size":  1699595075,
         "CompanyTitles":  "Microsoft",
         "ProductFamilyTitles":  "Windows",
         "Category":  "Windows Server 2016",
@@ -922,17 +870,17 @@
         "IsWsusInfrastructureUpdate":  false,
         "IsEditable":  false,
         "UpdateSource":  "MicrosoftUpdate",
-        "AdditionalInformationUrls":  "https://support.microsoft.com/help/5028169",
+        "AdditionalInformationUrls":  "https://support.microsoft.com/help/5029242",
         "Description":  "A security issue has been identified in a Microsoft software product that could affect your system. You can help protect your system by installing this update from Microsoft. For a complete listing of the issues that are included in this update, see the associated Microsoft Knowledge Base article. After you install this update, you may have to restart your system.",
         "ReleaseNotes":  "",
-        "FileUri":  "http://download.windowsupdate.com/d/msdownload/update/software/secu/2023/07/windows10.0-kb5028169-x64_7ce23c81360e24514dda5ec5343dc4871785936e.cab",
-        "OriginUri":  "http://download.windowsupdate.com/d/msdownload/update/software/secu/2023/07/windows10.0-kb5028169-x64_7ce23c81360e24514dda5ec5343dc4871785936e.cab",
-        "Hash":  "124 226 60 129 54 14 36 81 77 218 94 197 52 61 196 135 23 133 147 110",
-        "AdditionalHash":  "12 253 125 144 84 105 225 222 70 239 203 69 170 230 203 157 17 85 7 206 59 213 200 4 102 241 249 115 20 69 1 194",
+        "FileUri":  "http://download.windowsupdate.com/c/msdownload/update/software/secu/2023/08/windows10.0-kb5029242-x64_a1c6fef272afcff6c410e984f64c5c495713e7ab.cab",
+        "OriginUri":  "http://download.windowsupdate.com/c/msdownload/update/software/secu/2023/08/windows10.0-kb5029242-x64_a1c6fef272afcff6c410e984f64c5c495713e7ab.cab",
+        "Hash":  "161 198 254 242 114 175 207 246 196 16 233 132 246 76 92 73 87 19 231 171",
+        "AdditionalHash":  "253 98 104 49 45 41 212 108 102 216 191 24 76 186 218 243 11 122 2 33 68 115 65 127 55 103 57 61 66 109 20 57",
         "OSDCore":  "",
         "OSDWinPE":  "",
-        "OSDGuid":  "6e4633cd-b4a8-4e5d-80d7-e8b4692c1169",
+        "OSDGuid":  "8cd671e3-6179-4f47-aa49-29375f8b9bdd",
         "PartitionKey":  "Windows Server 2016",
-        "RowKey":  "6e4633cd-b4a8-4e5d-80d7-e8b4692c1169"
+        "RowKey":  "8cd671e3-6179-4f47-aa49-29375f8b9bdd"
     }
 ]

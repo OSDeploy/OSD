@@ -47,9 +47,9 @@
         "AdditionalHash":  "82 36 173 110 141 157 46 145 171 222 203 216 195 166 161 41 193 234 1 180 52 216 52 28 135 49 151 168 99 186 83 174",
         "OSDCore":  "",
         "OSDWinPE":  "",
-        "OSDGuid":  "7a8f66a3-39b8-4648-b127-0ef437bce4d5",
+        "OSDGuid":  "7a5fe2f3-3e60-4e2d-9194-be68c4b57f50",
         "PartitionKey":  "Windows 10 21H1",
-        "RowKey":  "7a8f66a3-39b8-4648-b127-0ef437bce4d5"
+        "RowKey":  "7a5fe2f3-3e60-4e2d-9194-be68c4b57f50"
     },
     {
         "Catalog":  "Windows 10 21H1",
@@ -99,9 +99,9 @@
         "AdditionalHash":  "126 158 109 16 201 203 177 164 126 88 129 24 18 43 251 198 196 34 251 59 15 137 42 23 184 13 105 50 197 19 172 92",
         "OSDCore":  "",
         "OSDWinPE":  "",
-        "OSDGuid":  "c03a5649-ecd1-4804-aa8d-7961a1208177",
+        "OSDGuid":  "3ea95376-14d6-4143-ac0a-1dc58239882b",
         "PartitionKey":  "Windows 10 21H1",
-        "RowKey":  "c03a5649-ecd1-4804-aa8d-7961a1208177"
+        "RowKey":  "3ea95376-14d6-4143-ac0a-1dc58239882b"
     },
     {
         "Catalog":  "Windows 10 21H1",
@@ -151,9 +151,9 @@
         "AdditionalHash":  "245 122 50 15 38 85 33 65 29 17 50 107 95 44 165 204 197 167 111 138 83 47 198 106 195 181 128 115 157 0 229 251",
         "OSDCore":  "",
         "OSDWinPE":  "",
-        "OSDGuid":  "f69f79f0-22ba-4f0c-8bcf-4263de8f6164",
+        "OSDGuid":  "3de9ce0c-9b94-4fac-8ac6-6b18cfa3a7b0",
         "PartitionKey":  "Windows 10 21H1",
-        "RowKey":  "f69f79f0-22ba-4f0c-8bcf-4263de8f6164"
+        "RowKey":  "3de9ce0c-9b94-4fac-8ac6-6b18cfa3a7b0"
     },
     {
         "Catalog":  "Windows 10 21H1",
@@ -203,9 +203,9 @@
         "AdditionalHash":  "34 10 65 196 69 98 70 108 110 205 101 31 147 238 0 62 188 18 88 226 50 224 185 208 178 121 147 238 25 106 110 130",
         "OSDCore":  "",
         "OSDWinPE":  "",
-        "OSDGuid":  "1d224915-95a9-4a85-b4eb-37012ee935b4",
+        "OSDGuid":  "5de4c646-0c7b-4f23-8661-849901ff837c",
         "PartitionKey":  "Windows 10 21H1",
-        "RowKey":  "1d224915-95a9-4a85-b4eb-37012ee935b4"
+        "RowKey":  "5de4c646-0c7b-4f23-8661-849901ff837c"
     },
     {
         "Catalog":  "Windows 10 21H1",
@@ -255,9 +255,9 @@
         "AdditionalHash":  "158 167 6 8 198 86 200 72 3 90 224 19 88 212 94 144 252 230 116 141 92 161 11 88 123 6 187 69 10 89 222 107",
         "OSDCore":  "",
         "OSDWinPE":  "",
-        "OSDGuid":  "76a364b3-f62f-4f59-bae8-ddcae72f4dfb",
+        "OSDGuid":  "dc8afa96-3607-4f2c-a436-b5fc83dda230",
         "PartitionKey":  "Windows 10 21H1",
-        "RowKey":  "76a364b3-f62f-4f59-bae8-ddcae72f4dfb"
+        "RowKey":  "dc8afa96-3607-4f2c-a436-b5fc83dda230"
     },
     {
         "Catalog":  "Windows 10 21H1",
@@ -307,9 +307,9 @@
         "AdditionalHash":  "83 187 11 64 41 232 156 150 164 222 85 65 186 112 76 34 52 253 142 229 85 67 211 252 20 42 55 116 224 227 245 221",
         "OSDCore":  "",
         "OSDWinPE":  "",
-        "OSDGuid":  "fd003208-496f-46b8-a531-f90e693429fc",
+        "OSDGuid":  "e31ac59d-870c-4480-bb80-ceaa6c5fc26a",
         "PartitionKey":  "Windows 10 21H1",
-        "RowKey":  "fd003208-496f-46b8-a531-f90e693429fc"
+        "RowKey":  "e31ac59d-870c-4480-bb80-ceaa6c5fc26a"
     },
     {
         "Catalog":  "Windows 10 21H1",
@@ -359,9 +359,9 @@
         "AdditionalHash":  "186 173 11 77 144 56 235 124 231 148 64 170 116 30 189 222 92 50 138 24 204 25 65 93 221 2 136 153 1 12 117 34",
         "OSDCore":  "",
         "OSDWinPE":  "",
-        "OSDGuid":  "0d85f8c6-fdb9-404e-8f7f-03d358a0cfb8",
+        "OSDGuid":  "a320eaba-908b-44d4-b47a-afdc119ab2e2",
         "PartitionKey":  "Windows 10 21H1",
-        "RowKey":  "0d85f8c6-fdb9-404e-8f7f-03d358a0cfb8"
+        "RowKey":  "a320eaba-908b-44d4-b47a-afdc119ab2e2"
     },
     {
         "Catalog":  "Windows 10 21H1",
@@ -411,9 +411,9 @@
         "AdditionalHash":  "166 66 180 0 1 253 79 170 33 39 67 239 100 73 71 95 41 4 86 121 244 147 2 211 141 18 142 130 29 95 11 164",
         "OSDCore":  "",
         "OSDWinPE":  "",
-        "OSDGuid":  "9665ad23-2817-4d41-bbf9-7f0d6560ef2d",
+        "OSDGuid":  "1e1f3422-e6d1-44b7-8d76-795a58f73f54",
         "PartitionKey":  "Windows 10 21H1",
-        "RowKey":  "9665ad23-2817-4d41-bbf9-7f0d6560ef2d"
+        "RowKey":  "1e1f3422-e6d1-44b7-8d76-795a58f73f54"
     },
     {
         "Catalog":  "Windows 10 21H1",
@@ -463,9 +463,9 @@
         "AdditionalHash":  "246 20 12 11 25 243 123 219 181 36 84 106 76 128 51 204 75 115 5 205 224 27 226 57 169 4 193 74 95 64 42 200",
         "OSDCore":  "",
         "OSDWinPE":  "",
-        "OSDGuid":  "fb28caed-86a7-4ff8-9cab-a90f9b721ec6",
+        "OSDGuid":  "113e265a-ccdd-463d-9e4d-e8d1d0f88354",
         "PartitionKey":  "Windows 10 21H1",
-        "RowKey":  "fb28caed-86a7-4ff8-9cab-a90f9b721ec6"
+        "RowKey":  "113e265a-ccdd-463d-9e4d-e8d1d0f88354"
     },
     {
         "Catalog":  "Windows 10 21H1",
@@ -515,9 +515,9 @@
         "AdditionalHash":  "123 181 67 9 54 70 196 110 193 82 219 192 240 22 149 40 33 39 88 30 176 109 121 168 112 251 80 125 43 196 97 15",
         "OSDCore":  "",
         "OSDWinPE":  "",
-        "OSDGuid":  "2c2b9517-5e56-42d0-9ad0-fc9a89f9f373",
+        "OSDGuid":  "68d964e8-d320-41cd-8e89-385c72bb68c8",
         "PartitionKey":  "Windows 10 21H1",
-        "RowKey":  "2c2b9517-5e56-42d0-9ad0-fc9a89f9f373"
+        "RowKey":  "68d964e8-d320-41cd-8e89-385c72bb68c8"
     },
     {
         "Catalog":  "Windows 10 21H1",
@@ -567,9 +567,9 @@
         "AdditionalHash":  "238 215 214 217 177 98 91 25 171 166 68 16 204 88 137 200 222 187 144 239 219 172 226 251 114 186 18 246 193 143 189 233",
         "OSDCore":  "",
         "OSDWinPE":  "",
-        "OSDGuid":  "79c07ff9-bd53-4ef5-a381-b3b506e28dc7",
+        "OSDGuid":  "33ddcf60-b662-4faf-82c8-2630790beacc",
         "PartitionKey":  "Windows 10 21H1",
-        "RowKey":  "79c07ff9-bd53-4ef5-a381-b3b506e28dc7"
+        "RowKey":  "33ddcf60-b662-4faf-82c8-2630790beacc"
     },
     {
         "Catalog":  "Windows 10 21H1",
@@ -619,8 +619,8 @@
         "AdditionalHash":  "181 128 92 205 108 143 44 224 5 122 241 190 92 87 216 183 34 83 104 48 135 12 214 33 9 66 131 93 183 32 238 252",
         "OSDCore":  "",
         "OSDWinPE":  "",
-        "OSDGuid":  "af8e4cb3-7986-431f-9d5a-288c7d0d1bbc",
+        "OSDGuid":  "d72adf74-87e9-499f-9c32-0257a6bd440a",
         "PartitionKey":  "Windows 10 21H1",
-        "RowKey":  "af8e4cb3-7986-431f-9d5a-288c7d0d1bbc"
+        "RowKey":  "d72adf74-87e9-499f-9c32-0257a6bd440a"
     }
 ]

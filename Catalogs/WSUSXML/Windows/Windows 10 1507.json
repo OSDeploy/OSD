@@ -47,9 +47,9 @@
         "AdditionalHash":  "74 154 125 226 239 13 234 242 0 178 81 254 56 177 236 169 201 120 100 248 12 66 175 213 197 147 146 167 67 67 154 70",
         "OSDCore":  "",
         "OSDWinPE":  "",
-        "OSDGuid":  "bba73a34-ff07-4942-aa9b-223f87a6c258",
+        "OSDGuid":  "3a47961f-49c2-425b-b89a-24ae1a1be4d1",
         "PartitionKey":  "Windows 10 1507",
-        "RowKey":  "bba73a34-ff07-4942-aa9b-223f87a6c258"
+        "RowKey":  "3a47961f-49c2-425b-b89a-24ae1a1be4d1"
     },
     {
         "Catalog":  "Windows 10 1507",
@@ -99,9 +99,9 @@
         "AdditionalHash":  "100 95 14 132 210 206 245 157 211 49 18 59 250 120 79 229 114 152 143 96 66 141 171 157 49 45 1 199 121 222 79 181",
         "OSDCore":  "",
         "OSDWinPE":  "",
-        "OSDGuid":  "0cb27ba6-22c2-42ff-94cc-bfd66968e0a0",
+        "OSDGuid":  "c63deacb-2f59-4d80-bc01-47e74e4b1c99",
         "PartitionKey":  "Windows 10 1507",
-        "RowKey":  "0cb27ba6-22c2-42ff-94cc-bfd66968e0a0"
+        "RowKey":  "c63deacb-2f59-4d80-bc01-47e74e4b1c99"
     },
     {
         "Catalog":  "Windows 10 1507",
@@ -151,9 +151,9 @@
         "AdditionalHash":  "14 8 87 183 193 12 127 72 204 36 140 118 125 223 30 193 178 136 144 99 179 254 131 68 195 35 5 154 69 138 226 159",
         "OSDCore":  "",
         "OSDWinPE":  "",
-        "OSDGuid":  "ea3612cd-af6c-480e-835f-42b0a8890808",
+        "OSDGuid":  "06564498-ddaa-4265-804c-3ba0f4d3dea5",
         "PartitionKey":  "Windows 10 1507",
-        "RowKey":  "ea3612cd-af6c-480e-835f-42b0a8890808"
+        "RowKey":  "06564498-ddaa-4265-804c-3ba0f4d3dea5"
     },
     {
         "Catalog":  "Windows 10 1507",
@@ -203,9 +203,9 @@
         "AdditionalHash":  "115 232 204 85 141 36 30 67 16 13 143 95 127 192 209 180 251 209 113 170 25 16 69 88 12 169 12 226 109 203 199 131",
         "OSDCore":  "",
         "OSDWinPE":  "",
-        "OSDGuid":  "3c9b4548-881b-4d01-b5c8-6e3445358e40",
+        "OSDGuid":  "f5e1984a-b5ec-4355-98fb-b7586261ce42",
         "PartitionKey":  "Windows 10 1507",
-        "RowKey":  "3c9b4548-881b-4d01-b5c8-6e3445358e40"
+        "RowKey":  "f5e1984a-b5ec-4355-98fb-b7586261ce42"
     },
     {
         "Catalog":  "Windows 10 1507",
@@ -255,9 +255,9 @@
         "AdditionalHash":  "76 26 90 200 192 41 209 22 80 197 135 75 228 180 197 56 121 109 240 161 232 18 30 213 185 200 134 236 189 132 187 188",
         "OSDCore":  "",
         "OSDWinPE":  "",
-        "OSDGuid":  "09eb92c7-ae78-4ecf-bfc4-350f677c3ab8",
+        "OSDGuid":  "6df0a262-a32d-4813-9dd5-57a4823f0e22",
         "PartitionKey":  "Windows 10 1507",
-        "RowKey":  "09eb92c7-ae78-4ecf-bfc4-350f677c3ab8"
+        "RowKey":  "6df0a262-a32d-4813-9dd5-57a4823f0e22"
     },
     {
         "Catalog":  "Windows 10 1507",
@@ -307,9 +307,9 @@
         "AdditionalHash":  "197 51 156 179 212 160 179 74 153 173 16 224 195 181 170 80 171 187 242 224 233 95 50 26 175 60 160 131 147 5 112 214",
         "OSDCore":  "",
         "OSDWinPE":  "",
-        "OSDGuid":  "1b1d34a2-1020-4139-ba84-e548b7a3e230",
+        "OSDGuid":  "36bf5e65-6629-495a-ae72-9b6b0549d3e5",
         "PartitionKey":  "Windows 10 1507",
-        "RowKey":  "1b1d34a2-1020-4139-ba84-e548b7a3e230"
+        "RowKey":  "36bf5e65-6629-495a-ae72-9b6b0549d3e5"
     },
     {
         "Catalog":  "Windows 10 1507",
@@ -359,9 +359,9 @@
         "AdditionalHash":  "55 198 254 2 216 42 0 107 207 254 123 25 68 131 246 16 134 53 240 254 186 205 220 242 172 60 75 237 236 41 182 252",
         "OSDCore":  "",
         "OSDWinPE":  "",
-        "OSDGuid":  "1251c5c1-5494-4ad8-aa35-055c62ff09e0",
+        "OSDGuid":  "ac4d4b2d-0632-4824-ab36-5953579a7b0e",
         "PartitionKey":  "Windows 10 1507",
-        "RowKey":  "1251c5c1-5494-4ad8-aa35-055c62ff09e0"
+        "RowKey":  "ac4d4b2d-0632-4824-ab36-5953579a7b0e"
     },
     {
         "Catalog":  "Windows 10 1507",
@@ -411,9 +411,9 @@
         "AdditionalHash":  "121 212 156 40 14 235 196 36 167 202 84 201 114 108 146 51 235 86 56 243 78 49 143 9 237 186 51 74 216 100 165 228",
         "OSDCore":  "",
         "OSDWinPE":  "",
-        "OSDGuid":  "012d7937-99be-490c-9c0f-1bc6d579328f",
+        "OSDGuid":  "7031b65e-f6be-4124-b2c3-f206aaa31e24",
         "PartitionKey":  "Windows 10 1507",
-        "RowKey":  "012d7937-99be-490c-9c0f-1bc6d579328f"
+        "RowKey":  "7031b65e-f6be-4124-b2c3-f206aaa31e24"
     },
     {
         "Catalog":  "Windows 10 1507",
@@ -423,15 +423,15 @@
         "UpdateBuild":  "1507",
         "UpdateArch":  "x64",
         "UpdateGroup":  "LCU",
-        "CreationDate":  "\/Date(1689094806000)\/",
-        "KBNumber":  "5028186",
-        "FileKBNumber":  "5028186",
-        "Title":  "2023-07 Cumulative Update for Windows 10 Version 1507 for x64-based Systems (KB5028186)",
-        "UpdateId":  "34160e08-c225-4358-a966-7dd53a67a7c8",
-        "LegacyName":  "KB5028186-Win10-TH1-RTM-X64-TSL-World",
+        "CreationDate":  "\/Date(1691514006000)\/",
+        "KBNumber":  "5029259",
+        "FileKBNumber":  "5029259",
+        "Title":  "2023-08 Cumulative Update for Windows 10 Version 1507 for x64-based Systems (KB5029259)",
+        "UpdateId":  "d1915eea-cbdc-47aa-b013-d52bb2115cc3",
+        "LegacyName":  "KB5029259-Win10-TH1-RTM-X64-TSL-World",
         "Type":  "SelfContained",
-        "FileName":  "windows10.0-kb5028186-x64.cab",
-        "Size":  1296967864,
+        "FileName":  "windows10.0-kb5029259-x64.cab",
+        "Size":  1269176206,
         "CompanyTitles":  "Microsoft",
         "ProductFamilyTitles":  "Windows",
         "Category":  "Windows 10 LTSB",
@@ -454,18 +454,18 @@
         "IsWsusInfrastructureUpdate":  false,
         "IsEditable":  false,
         "UpdateSource":  "MicrosoftUpdate",
-        "AdditionalInformationUrls":  "https://support.microsoft.com/help/5028186",
+        "AdditionalInformationUrls":  "https://support.microsoft.com/help/5029259",
         "Description":  "A security issue has been identified in a Microsoft software product that could affect your system. You can help protect your system by installing this update from Microsoft. For a complete listing of the issues that are included in this update, see the associated Microsoft Knowledge Base article. After you install this update, you may have to restart your system.",
         "ReleaseNotes":  "",
-        "FileUri":  "http://download.windowsupdate.com/d/msdownload/update/software/secu/2023/07/windows10.0-kb5028186-x64_f07d0f95912b651edb1a0cf68d511b6e1159abe2.cab",
-        "OriginUri":  "http://download.windowsupdate.com/d/msdownload/update/software/secu/2023/07/windows10.0-kb5028186-x64_f07d0f95912b651edb1a0cf68d511b6e1159abe2.cab",
-        "Hash":  "240 125 15 149 145 43 101 30 219 26 12 246 141 81 27 110 17 89 171 226",
-        "AdditionalHash":  "177 235 18 79 50 26 142 70 20 153 108 69 99 96 130 33 139 99 125 87 40 64 22 93 154 194 91 9 109 137 148 58",
+        "FileUri":  "http://download.windowsupdate.com/d/msdownload/update/software/secu/2023/08/windows10.0-kb5029259-x64_500695f0b21f9637bec124749c94c3a680d111df.cab",
+        "OriginUri":  "http://download.windowsupdate.com/d/msdownload/update/software/secu/2023/08/windows10.0-kb5029259-x64_500695f0b21f9637bec124749c94c3a680d111df.cab",
+        "Hash":  "80 6 149 240 178 31 150 55 190 193 36 116 156 148 195 166 128 209 17 223",
+        "AdditionalHash":  "119 61 36 141 250 159 31 203 7 218 28 160 180 27 84 21 54 182 237 109 43 99 53 228 74 48 186 42 209 41 236 130",
         "OSDCore":  "",
         "OSDWinPE":  "",
-        "OSDGuid":  "fc29cde2-db40-438f-8a2f-f42256b127a6",
+        "OSDGuid":  "618379fc-5b1f-403a-bdee-547c3441167d",
         "PartitionKey":  "Windows 10 1507",
-        "RowKey":  "fc29cde2-db40-438f-8a2f-f42256b127a6"
+        "RowKey":  "618379fc-5b1f-403a-bdee-547c3441167d"
     },
     {
         "Catalog":  "Windows 10 1507",
@@ -475,15 +475,15 @@
         "UpdateBuild":  "1507",
         "UpdateArch":  "x86",
         "UpdateGroup":  "LCU",
-        "CreationDate":  "\/Date(1689094806000)\/",
-        "KBNumber":  "5028186",
-        "FileKBNumber":  "5028186",
-        "Title":  "2023-07 Cumulative Update for Windows 10 Version 1507 for x86-based Systems (KB5028186)",
-        "UpdateId":  "f21d845f-ddbe-464f-8add-4b3ec12d7dd9",
-        "LegacyName":  "KB5028186-Win10-TH1-RTM-X86-TSL-World",
+        "CreationDate":  "\/Date(1691514006000)\/",
+        "KBNumber":  "5029259",
+        "FileKBNumber":  "5029259",
+        "Title":  "2023-08 Cumulative Update for Windows 10 Version 1507 for x86-based Systems (KB5029259)",
+        "UpdateId":  "3f1355f5-b84b-402d-8b83-6a5f326c783b",
+        "LegacyName":  "KB5029259-Win10-TH1-RTM-X86-TSL-World",
         "Type":  "SelfContained",
-        "FileName":  "windows10.0-kb5028186-x86.cab",
-        "Size":  759261020,
+        "FileName":  "windows10.0-kb5029259-x86.cab",
+        "Size":  759828926,
         "CompanyTitles":  "Microsoft",
         "ProductFamilyTitles":  "Windows",
         "Category":  "Windows 10 LTSB",
@@ -506,17 +506,17 @@
         "IsWsusInfrastructureUpdate":  false,
         "IsEditable":  false,
         "UpdateSource":  "MicrosoftUpdate",
-        "AdditionalInformationUrls":  "https://support.microsoft.com/help/5028186",
+        "AdditionalInformationUrls":  "https://support.microsoft.com/help/5029259",
         "Description":  "A security issue has been identified in a Microsoft software product that could affect your system. You can help protect your system by installing this update from Microsoft. For a complete listing of the issues that are included in this update, see the associated Microsoft Knowledge Base article. After you install this update, you may have to restart your system.",
         "ReleaseNotes":  "",
-        "FileUri":  "http://download.windowsupdate.com/d/msdownload/update/software/secu/2023/07/windows10.0-kb5028186-x86_2bca527d3b0055bfe61dfe19b6c803c873f58262.cab",
-        "OriginUri":  "http://download.windowsupdate.com/d/msdownload/update/software/secu/2023/07/windows10.0-kb5028186-x86_2bca527d3b0055bfe61dfe19b6c803c873f58262.cab",
-        "Hash":  "43 202 82 125 59 0 85 191 230 29 254 25 182 200 3 200 115 245 130 98",
-        "AdditionalHash":  "102 249 246 202 12 252 185 92 140 96 154 199 102 169 210 9 209 207 131 164 101 129 95 163 221 24 1 26 168 101 132 186",
+        "FileUri":  "http://download.windowsupdate.com/d/msdownload/update/software/secu/2023/08/windows10.0-kb5029259-x86_98ed43c986e77527271ecd60883292d361177850.cab",
+        "OriginUri":  "http://download.windowsupdate.com/d/msdownload/update/software/secu/2023/08/windows10.0-kb5029259-x86_98ed43c986e77527271ecd60883292d361177850.cab",
+        "Hash":  "152 237 67 201 134 231 117 39 39 30 205 96 136 50 146 211 97 23 120 80",
+        "AdditionalHash":  "104 88 184 226 250 72 74 176 191 173 112 45 243 49 165 7 147 175 23 159 14 148 182 203 140 31 229 73 78 108 211 239",
         "OSDCore":  "",
         "OSDWinPE":  "",
-        "OSDGuid":  "35a3932e-a4b0-4d8f-b9bb-1d43e1673bbf",
+        "OSDGuid":  "6bdcec79-de4b-48df-a4bf-f1a570d0f464",
         "PartitionKey":  "Windows 10 1507",
-        "RowKey":  "35a3932e-a4b0-4d8f-b9bb-1d43e1673bbf"
+        "RowKey":  "6bdcec79-de4b-48df-a4bf-f1a570d0f464"
     }
 ]
