@@ -1,7 +1,7 @@
 [
     {
         "Catalog":  "Windows 11 Dynamic Update",
-        "OSDVersion":  "23.7.16.1",
+        "OSDVersion":  "23.8.8.1",
         "OSDStatus":  "",
         "UpdateOS":  "Windows 11",
         "UpdateBuild":  "22H2",
@@ -53,7 +53,7 @@
     },
     {
         "Catalog":  "Windows 11 Dynamic Update",
-        "OSDVersion":  "23.7.16.1",
+        "OSDVersion":  "23.8.8.1",
         "OSDStatus":  "",
         "UpdateOS":  "Windows 11",
         "UpdateBuild":  "22H2",
@@ -105,7 +105,7 @@
     },
     {
         "Catalog":  "Windows 11 Dynamic Update",
-        "OSDVersion":  "23.7.16.1",
+        "OSDVersion":  "23.8.8.1",
         "OSDStatus":  "",
         "UpdateOS":  "Windows 11",
         "UpdateBuild":  "21H2",
@@ -157,7 +157,7 @@
     },
     {
         "Catalog":  "Windows 11 Dynamic Update",
-        "OSDVersion":  "23.7.16.1",
+        "OSDVersion":  "23.8.8.1",
         "OSDStatus":  "",
         "UpdateOS":  "Windows 11",
         "UpdateBuild":  "21H2",

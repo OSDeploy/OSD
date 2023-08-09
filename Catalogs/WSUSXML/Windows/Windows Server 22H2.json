@@ -1,7 +1,7 @@
 [
     {
         "Catalog":  "Windows Server 22H2",
-        "OSDVersion":  "23.7.16.1",
+        "OSDVersion":  "23.8.8.1",
         "OSDStatus":  "",
         "UpdateOS":  "Windows Server",
         "UpdateBuild":  "22H2",
@@ -53,7 +53,7 @@
     },
     {
         "Catalog":  "Windows Server 22H2",
-        "OSDVersion":  "23.7.16.1",
+        "OSDVersion":  "23.8.8.1",
         "OSDStatus":  "",
         "UpdateOS":  "Windows Server",
         "UpdateBuild":  "22H2",

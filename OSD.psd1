@@ -4,13 +4,13 @@
 
 @{
     RootModule              = 'OSD.psm1'
-    ModuleVersion           = '23.8.7.1'
+    ModuleVersion           = '23.8.8.1'
     CompatiblePSEditions    = @('Desktop')
     GUID                    = '9fe5b9b6-0224-4d87-9018-a8978529f6f5'
     Author                  = 'David Segura . Gary Blok . Jérôme Bezet-Torres . Damien Van Robaeys . Mike Marable . Akos Bakos'
     CompanyName             = 'OSD Community'
     Copyright               = '(c) 2023 OSDeploy'
-    Description             = 'OSD Day Prep Edition'
+    Description             = 'Hot August Edition'
     PowerShellVersion       = '5.1'
     FormatsToProcess        = @(
         '.\Format\MsUpCat.Format.ps1xml'

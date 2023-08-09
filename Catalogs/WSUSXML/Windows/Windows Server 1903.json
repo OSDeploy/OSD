@@ -1,7 +1,7 @@
 [
     {
         "Catalog":  "Windows Server 1903",
-        "OSDVersion":  "23.7.16.1",
+        "OSDVersion":  "23.8.8.1",
         "OSDStatus":  "",
         "UpdateOS":  "Windows Server",
         "UpdateBuild":  "1903",
@@ -53,7 +53,7 @@
     },
     {
         "Catalog":  "Windows Server 1903",
-        "OSDVersion":  "23.7.16.1",
+        "OSDVersion":  "23.8.8.1",
         "OSDStatus":  "",
         "UpdateOS":  "Windows Server",
         "UpdateBuild":  "1903",
@@ -105,7 +105,7 @@
     },
     {
         "Catalog":  "Windows Server 1903",
-        "OSDVersion":  "23.7.16.1",
+        "OSDVersion":  "23.8.8.1",
         "OSDStatus":  "",
         "UpdateOS":  "Windows Server",
         "UpdateBuild":  "1903",
@@ -157,7 +157,7 @@
     },
     {
         "Catalog":  "Windows Server 1903",
-        "OSDVersion":  "23.7.16.1",
+        "OSDVersion":  "23.8.8.1",
         "OSDStatus":  "",
         "UpdateOS":  "Windows Server",
         "UpdateBuild":  "1903",
@@ -209,7 +209,7 @@
     },
     {
         "Catalog":  "Windows Server 1903",
-        "OSDVersion":  "23.7.16.1",
+        "OSDVersion":  "23.8.8.1",
         "OSDStatus":  "",
         "UpdateOS":  "Windows Server",
         "UpdateBuild":  "1903",
@@ -261,7 +261,7 @@
     },
     {
         "Catalog":  "Windows Server 1903",
-        "OSDVersion":  "23.7.16.1",
+        "OSDVersion":  "23.8.8.1",
         "OSDStatus":  "",
         "UpdateOS":  "Windows Server",
         "UpdateBuild":  "1903",
