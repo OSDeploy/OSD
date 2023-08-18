@@ -132,7 +132,6 @@ function Initialize-OSDCloudStartnetUpdate {
             }
             else {
                 Write-Host -ForegroundColor Green "TPM 2.0 and Autopilot: Supported"
-                #Write-Host -ForegroundColor Green "Autopilot: Supported"
                 #Write-Host -ForegroundColor DarkGray "TPM IsActivated: $($Win32Tpm.IsActivated_InitialValue)"
                 #Write-Host -ForegroundColor DarkGray "TPM IsEnabled: $($Win32Tpm.IsEnabled_InitialValue)"
                 #Write-Host -ForegroundColor DarkGray "TPM IsOwned: $($Win32Tpm.IsOwned_InitialValue)"
