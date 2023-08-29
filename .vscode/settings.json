@@ -1,3 +1,4 @@
 {
-    "files.autoGuessEncoding": true
+    "files.autoGuessEncoding": true,
+    "dotnet.defaultSolution": "disable"
 }

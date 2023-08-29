@@ -25,8 +25,9 @@ Creates a Bootable FAT32 USB (32GB or smaller) and copies a Mounted ISO.
 ### EXAMPLE 1
 ```
 Copy-IsoToUsb -ISOFile "C:\Temp\SW_DVD5_Win_Pro_Ent_Edu_N_10_1709_64BIT_English_MLF_X21-50143.ISO" -MakeBootable -USBDriveLabel WIN10X64
-You will be prompted to select a USB Drive in GridView
 ```
+
+You will be prompted to select a USB Drive in GridView
 
 ## PARAMETERS
 

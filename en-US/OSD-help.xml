@@ -3015,10 +3015,9 @@ Original credit to Mike Robbins http://mikefrobbins.com/2018/01/18/use-powershel
     <command:examples>
       <command:example>
         <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
-        <dev:code>Copy-IsoToUsb -ISOFile "C:\Temp\SW_DVD5_Win_Pro_Ent_Edu_N_10_1709_64BIT_English_MLF_X21-50143.ISO" -MakeBootable -USBDriveLabel WIN10X64
-You will be prompted to select a USB Drive in GridView</dev:code>
+        <dev:code>Copy-IsoToUsb -ISOFile "C:\Temp\SW_DVD5_Win_Pro_Ent_Edu_N_10_1709_64BIT_English_MLF_X21-50143.ISO" -MakeBootable -USBDriveLabel WIN10X64</dev:code>
         <dev:remarks>
-          <maml:para></maml:para>
+          <maml:para>You will be prompted to select a USB Drive in GridView</maml:para>
         </dev:remarks>
       </command:example>
     </command:examples>
@@ -7333,26 +7332,23 @@ You will be prompted to select a USB Drive in GridView</dev:code>
     <command:examples>
       <command:example>
         <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
-        <dev:code>Get-DellSystemCatalog
-Don't do this, you will get an almost endless list</dev:code>
+        <dev:code>Get-DellSystemCatalog</dev:code>
         <dev:remarks>
-          <maml:para></maml:para>
+          <maml:para>Don't do this, you will get an almost endless list</maml:para>
         </dev:remarks>
       </command:example>
       <command:example>
         <maml:title>-------------------------- EXAMPLE 2 --------------------------</maml:title>
-        <dev:code>$Result = Get-DellSystemCatalog
-Yes do this.  Save it in a Variable</dev:code>
+        <dev:code>$Result = Get-DellSystemCatalog</dev:code>
         <dev:remarks>
-          <maml:para></maml:para>
+          <maml:para>Yes do this.  Save it in a Variable</maml:para>
         </dev:remarks>
       </command:example>
       <command:example>
         <maml:title>-------------------------- EXAMPLE 3 --------------------------</maml:title>
-        <dev:code>Get-DellSystemCatalog -Component BIOS | Out-GridView
-Displays all the Dell BIOS Updates in GridView</dev:code>
+        <dev:code>Get-DellSystemCatalog -Component BIOS | Out-GridView</dev:code>
         <dev:remarks>
-          <maml:para></maml:para>
+          <maml:para>Displays all the Dell BIOS Updates in GridView</maml:para>
         </dev:remarks>
       </command:example>
     </command:examples>
@@ -8821,26 +8817,23 @@ Displays all the Dell BIOS Updates in GridView</dev:code>
     <command:examples>
       <command:example>
         <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
-        <dev:code>Get-HPPlatformCatalog
-Don't do this, you will get a big list.</dev:code>
+        <dev:code>Get-HPPlatformCatalog</dev:code>
         <dev:remarks>
-          <maml:para></maml:para>
+          <maml:para>Don't do this, you will get a big list.</maml:para>
         </dev:remarks>
       </command:example>
       <command:example>
         <maml:title>-------------------------- EXAMPLE 2 --------------------------</maml:title>
-        <dev:code>$Results = Get-HPPlatformCatalog
-Yes do this.  Save it in a Variable</dev:code>
+        <dev:code>$Results = Get-HPPlatformCatalog</dev:code>
         <dev:remarks>
-          <maml:para></maml:para>
+          <maml:para>Yes do this.  Save it in a Variable</maml:para>
         </dev:remarks>
       </command:example>
       <command:example>
         <maml:title>-------------------------- EXAMPLE 3 --------------------------</maml:title>
-        <dev:code>Get-HPPlatformCatalog | Out-GridView
-Displays all the HP System Ids with the applicable computer model names in GridView</dev:code>
+        <dev:code>Get-HPPlatformCatalog | Out-GridView</dev:code>
         <dev:remarks>
-          <maml:para></maml:para>
+          <maml:para>Displays all the HP System Ids with the applicable computer model names in GridView</maml:para>
         </dev:remarks>
       </command:example>
     </command:examples>
@@ -9062,26 +9055,23 @@ Displays all the HP System Ids with the applicable computer model names in GridV
     <command:examples>
       <command:example>
         <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
-        <dev:code>Get-HPSystemCatalog
-Don't do this, you will get an almost endless list</dev:code>
+        <dev:code>Get-HPSystemCatalog</dev:code>
         <dev:remarks>
-          <maml:para></maml:para>
+          <maml:para>Don't do this, you will get an almost endless list</maml:para>
         </dev:remarks>
       </command:example>
       <command:example>
         <maml:title>-------------------------- EXAMPLE 2 --------------------------</maml:title>
-        <dev:code>$Results = Get-HPSystemCatalog
-Yes do this.  Save it in a Variable</dev:code>
+        <dev:code>$Results = Get-HPSystemCatalog</dev:code>
         <dev:remarks>
-          <maml:para></maml:para>
+          <maml:para>Yes do this.  Save it in a Variable</maml:para>
         </dev:remarks>
       </command:example>
       <command:example>
         <maml:title>-------------------------- EXAMPLE 3 --------------------------</maml:title>
-        <dev:code>Get-HPSystemCatalog -Component BIOS | Out-GridView
-Displays all the HP BIOS updates in GridView</dev:code>
+        <dev:code>Get-HPSystemCatalog -Component BIOS | Out-GridView</dev:code>
         <dev:remarks>
-          <maml:para></maml:para>
+          <maml:para>Displays all the HP BIOS updates in GridView</maml:para>
         </dev:remarks>
       </command:example>
     </command:examples>
@@ -12033,13 +12023,9 @@ Displays all the HP BIOS updates in GridView</dev:code>
     <command:examples>
       <command:example>
         <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
-        <dev:code>OSDClass
-Returns CimInstance Win32_ComputerSystem properties
-Option 1: Get-OSDClass
-Option 2: Get-OSDClass ComputerSystem
-Option 3: Get-OSDClass -Class ComputerSystem</dev:code>
+        <dev:code>OSDClass</dev:code>
         <dev:remarks>
-          <maml:para></maml:para>
+          <maml:para>Returns CimInstance Win32_ComputerSystem properties Option 1: Get-OSDClass Option 2: Get-OSDClass ComputerSystem Option 3: Get-OSDClass -Class ComputerSystem</maml:para>
         </dev:remarks>
       </command:example>
     </command:examples>
@@ -13394,21 +13380,16 @@ Option 3: Get-OSDClass -Class ComputerSystem</dev:code>
     <command:examples>
       <command:example>
         <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
-        <dev:code>OSDGather
-Get-OSDGather
-Returns the Gather Results</dev:code>
+        <dev:code>OSDGather</dev:code>
         <dev:remarks>
-          <maml:para></maml:para>
+          <maml:para>Get-OSDGather Returns the Gather Results</maml:para>
         </dev:remarks>
       </command:example>
       <command:example>
         <maml:title>-------------------------- EXAMPLE 2 --------------------------</maml:title>
-        <dev:code>$OSDGather = Get-OSDGather
-$OSDGather.IsAdmin
-$OSDGather.ComputerInfo
-Returns the Gather Results saved in a Variable</dev:code>
+        <dev:code>$OSDGather = Get-OSDGather</dev:code>
         <dev:remarks>
-          <maml:para></maml:para>
+          <maml:para>$OSDGather.IsAdmin $OSDGather.ComputerInfo Returns the Gather Results saved in a Variable</maml:para>
         </dev:remarks>
       </command:example>
     </command:examples>
@@ -13533,11 +13514,11 @@ Returns the Gather Results saved in a Variable</dev:code>
       <command:verb>Get</command:verb>
       <command:noun>OSDMetrics</command:noun>
       <maml:description>
-        <maml:para>{{ Fill in the Synopsis }}</maml:para>
+        <maml:para>Retrieves metrics for the OSD PowerShell module and OSDCloud deployment methods.</maml:para>
       </maml:description>
     </command:details>
     <maml:description>
-      <maml:para>{{ Fill in the Description }}</maml:para>
+      <maml:para>The Get-OSDMetrics script retrieves metrics for the OSD PowerShell module and OSDCloud deployment methods. It displays the latest version of the OSD PowerShell module, the date it was published, and the number of times it has been installed or saved. It also displays metrics for OSDCloud CLI, OSDCloud GUI, and OSDCloud Azure deployment methods, including the number of devices deployed, the current usage rate, and the number of devices deployed per day, week, month, and year.</maml:para>
     </maml:description>
     <command:syntax>
       <command:syntaxItem>
@@ -13545,37 +13526,19 @@ Returns the Gather Results saved in a Variable</dev:code>
       </command:syntaxItem>
     </command:syntax>
     <command:parameters />
-    <command:inputTypes>
-      <command:inputType>
-        <dev:type>
-          <maml:name>None</maml:name>
-        </dev:type>
-        <maml:description>
-          <maml:para></maml:para>
-        </maml:description>
-      </command:inputType>
-    </command:inputTypes>
-    <command:returnValues>
-      <command:returnValue>
-        <dev:type>
-          <maml:name>System.Object</maml:name>
-        </dev:type>
-        <maml:description>
-          <maml:para></maml:para>
-        </maml:description>
-      </command:returnValue>
-    </command:returnValues>
+    <command:inputTypes />
+    <command:returnValues />
     <maml:alertSet>
       <maml:alert>
-        <maml:para></maml:para>
+        <maml:para>This script requires the OSD PowerShell module and the OSDCloudCLI, OSDCloudGUI, and OSDCloudAzure modules to be installed.</maml:para>
       </maml:alert>
     </maml:alertSet>
     <command:examples>
       <command:example>
-        <maml:title>-------------------------- Example 1 --------------------------</maml:title>
-        <dev:code>PS C:\&gt; {{ Add example code here }}</dev:code>
+        <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
+        <dev:code>Get-OSDMetrics</dev:code>
         <dev:remarks>
-          <maml:para>{{ Add example description here }}</maml:para>
+          <maml:para>This example retrieves metrics for the OSD PowerShell module and OSDCloud deployment methods.</maml:para>
         </dev:remarks>
       </command:example>
     </command:examples>
@@ -13930,23 +13893,16 @@ Returns the Gather Results saved in a Variable</dev:code>
     <command:examples>
       <command:example>
         <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
-        <dev:code>OSDPower
-Returns Power Plan information using powercfg /LIST
-Option 1: Get-OSDPower
-Option 2: Get-OSDPower LIST
-Option 3: Get-OSDPower -Property LIST</dev:code>
+        <dev:code>OSDPower</dev:code>
         <dev:remarks>
-          <maml:para></maml:para>
+          <maml:para>Returns Power Plan information using powercfg /LIST Option 1: Get-OSDPower Option 2: Get-OSDPower LIST Option 3: Get-OSDPower -Property LIST</maml:para>
         </dev:remarks>
       </command:example>
       <command:example>
         <maml:title>-------------------------- EXAMPLE 2 --------------------------</maml:title>
-        <dev:code>OSDPower High
-Sets the active Power Plan to High Performance
-Option 1: Get-OSDPower High
-Option 2: Get-OSDPower -Property High</dev:code>
+        <dev:code>OSDPower High</dev:code>
         <dev:remarks>
-          <maml:para></maml:para>
+          <maml:para>Sets the active Power Plan to High Performance Option 1: Get-OSDPower High Option 2: Get-OSDPower -Property High</maml:para>
         </dev:remarks>
       </command:example>
     </command:examples>
@@ -16082,11 +16038,17 @@ Option 2: Get-OSDPower -Property High</dev:code>
       <command:verb>Initialize</command:verb>
       <command:noun>OSDCloudStartnet</command:noun>
       <maml:description>
-        <maml:para>{{ Fill in the Synopsis }}</maml:para>
+        <maml:para>Initializes the OSDCloud startnet environment.</maml:para>
       </maml:description>
     </command:details>
     <maml:description>
-      <maml:para>{{ Fill in the Description }}</maml:para>
+      <maml:para>This function initializes the OSDCloud startnet environment by performing the following tasks: - Creates a log path if it does not already exist.</maml:para>
+      <maml:para>- Copies OSDCloud config startup scripts to the mounted WinPE.</maml:para>
+      <maml:para>- Initializes a splash screen if a SPLASH.JSON file is found in OSDCloud\Config.</maml:para>
+      <maml:para>- Initializes hardware devices.</maml:para>
+      <maml:para>- Initializes wireless network (optional).</maml:para>
+      <maml:para>- Initializes network connections.</maml:para>
+      <maml:para>- Updates PowerShell modules.</maml:para>
     </maml:description>
     <command:syntax>
       <command:syntaxItem>
@@ -16094,7 +16056,7 @@ Option 2: Get-OSDPower -Property High</dev:code>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>WirelessConnect</maml:name>
           <maml:description>
-            <maml:para>{{ Fill WirelessConnect Description }}</maml:para>
+            <maml:para>Specifies whether to connect to a wireless network. If this switch is specified, the function will attempt to connect to a wireless network using the Start-WinREWiFi function.</maml:para>
           </maml:description>
           <dev:type>
             <maml:name>SwitchParameter</maml:name>
@@ -16108,7 +16070,7 @@ Option 2: Get-OSDPower -Property High</dev:code>
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
         <maml:name>WirelessConnect</maml:name>
         <maml:description>
-          <maml:para>{{ Fill WirelessConnect Description }}</maml:para>
+          <maml:para>Specifies whether to connect to a wireless network. If this switch is specified, the function will attempt to connect to a wireless network using the Start-WinREWiFi function.</maml:para>
         </maml:description>
         <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
         <dev:type>
@@ -16118,6 +16080,47 @@ Option 2: Get-OSDPower -Property High</dev:code>
         <dev:defaultValue>False</dev:defaultValue>
       </command:parameter>
     </command:parameters>
+    <command:inputTypes />
+    <command:returnValues />
+    <maml:alertSet>
+      <maml:alert>
+        <maml:para></maml:para>
+      </maml:alert>
+    </maml:alertSet>
+    <command:examples>
+      <command:example>
+        <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
+        <dev:code>Initialize-OSDCloudStartnet -WirelessConnect</dev:code>
+        <dev:remarks>
+          <maml:para>Initializes the OSDCloud startnet environment and attempts to connect to a wireless network.</maml:para>
+        </dev:remarks>
+      </command:example>
+    </command:examples>
+    <command:relatedLinks>
+      <maml:navigationLink>
+        <maml:linkText>Online Version:</maml:linkText>
+        <maml:uri>https://github.com/OSDeploy/OSD/tree/master/Docs</maml:uri>
+      </maml:navigationLink>
+    </command:relatedLinks>
+  </command:command>
+  <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
+    <command:details>
+      <command:name>Initialize-OSDCloudStartnetUpdate</command:name>
+      <command:verb>Initialize</command:verb>
+      <command:noun>OSDCloudStartnetUpdate</command:noun>
+      <maml:description>
+        <maml:para>{{ Fill in the Synopsis }}</maml:para>
+      </maml:description>
+    </command:details>
+    <maml:description>
+      <maml:para>{{ Fill in the Description }}</maml:para>
+    </maml:description>
+    <command:syntax>
+      <command:syntaxItem>
+        <maml:name>Initialize-OSDCloudStartnetUpdate</maml:name>
+      </command:syntaxItem>
+    </command:syntax>
+    <command:parameters />
     <command:inputTypes>
       <command:inputType>
         <dev:type>
@@ -19152,11 +19155,9 @@ Option 2: Get-OSDPower -Property High</dev:code>
     <command:examples>
       <command:example>
         <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
-        <dev:code>New-CAB -SourceDirectory C:\DeploymentShare\OSDeploy\OSConfig
-Creates LZX High Compression CAB from of C:\DeploymentShare\OSDeploy\OSConfig
-Saves file in Parent Directory C:\DeploymentShare\OSDeploy\OSConfig.cab</dev:code>
+        <dev:code>New-CAB -SourceDirectory C:\DeploymentShare\OSDeploy\OSConfig</dev:code>
         <dev:remarks>
-          <maml:para></maml:para>
+          <maml:para>Creates LZX High Compression CAB from of C:\DeploymentShare\OSDeploy\OSConfig Saves file in Parent Directory C:\DeploymentShare\OSDeploy\OSConfig.cab</maml:para>
         </dev:remarks>
       </command:example>
     </command:examples>
@@ -20381,18 +20382,16 @@ Saves file in Parent Directory C:\DeploymentShare\OSDeploy\OSConfig.cab</dev:cod
     <command:examples>
       <command:example>
         <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
-        <dev:code>New-OSDisk
-Displays Get-Help New-OSDisk</dev:code>
+        <dev:code>New-OSDisk</dev:code>
         <dev:remarks>
-          <maml:para></maml:para>
+          <maml:para>Displays Get-Help New-OSDisk</maml:para>
         </dev:remarks>
       </command:example>
       <command:example>
         <maml:title>-------------------------- EXAMPLE 2 --------------------------</maml:title>
-        <dev:code>New-OSDisk -Force
-Interactive.  Prompted to Confirm Clear-Disk for each Local Disk</dev:code>
+        <dev:code>New-OSDisk -Force</dev:code>
         <dev:remarks>
-          <maml:para></maml:para>
+          <maml:para>Interactive.  Prompted to Confirm Clear-Disk for each Local Disk</maml:para>
         </dev:remarks>
       </command:example>
     </command:examples>
@@ -25230,10 +25229,9 @@ Interactive.  Prompted to Confirm Clear-Disk for each Local Disk</dev:code>
     <command:examples>
       <command:example>
         <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
-        <dev:code>Show-RegistryXML -SourceDirectory C:\DeploymentShare\OSDeploy\OSConfig\LocalPolicy\ImportGPO
-Displays all RegistryXML entries found in Source Directory</dev:code>
+        <dev:code>Show-RegistryXML -SourceDirectory C:\DeploymentShare\OSDeploy\OSConfig\LocalPolicy\ImportGPO</dev:code>
         <dev:remarks>
-          <maml:para></maml:para>
+          <maml:para>Displays all RegistryXML entries found in Source Directory</maml:para>
         </dev:remarks>
       </command:example>
     </command:examples>
@@ -28255,149 +28253,6 @@ Displays all RegistryXML entries found in Source Directory</dev:code>
   </command:command>
   <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
     <command:details>
-      <command:name>Start-OSDScriptsBeta</command:name>
-      <command:verb>Start</command:verb>
-      <command:noun>OSDScriptsBeta</command:noun>
-      <maml:description>
-        <maml:para>{{ Fill in the Synopsis }}</maml:para>
-      </maml:description>
-    </command:details>
-    <maml:description>
-      <maml:para>{{ Fill in the Description }}</maml:para>
-    </maml:description>
-    <command:syntax>
-      <command:syntaxItem>
-        <maml:name>Start-OSDScriptsBeta</maml:name>
-      </command:syntaxItem>
-    </command:syntax>
-    <command:parameters />
-    <command:inputTypes>
-      <command:inputType>
-        <dev:type>
-          <maml:name>None</maml:name>
-        </dev:type>
-        <maml:description>
-          <maml:para></maml:para>
-        </maml:description>
-      </command:inputType>
-    </command:inputTypes>
-    <command:returnValues>
-      <command:returnValue>
-        <dev:type>
-          <maml:name>System.Object</maml:name>
-        </dev:type>
-        <maml:description>
-          <maml:para></maml:para>
-        </maml:description>
-      </command:returnValue>
-    </command:returnValues>
-    <maml:alertSet>
-      <maml:alert>
-        <maml:para></maml:para>
-      </maml:alert>
-    </maml:alertSet>
-    <command:examples>
-      <command:example>
-        <maml:title>-------------------------- Example 1 --------------------------</maml:title>
-        <dev:code>PS C:\&gt; {{ Add example code here }}</dev:code>
-        <dev:remarks>
-          <maml:para>{{ Add example description here }}</maml:para>
-        </dev:remarks>
-      </command:example>
-    </command:examples>
-    <command:relatedLinks>
-      <maml:navigationLink>
-        <maml:linkText>Online Version:</maml:linkText>
-        <maml:uri>https://github.com/OSDeploy/OSD/tree/master/Docs</maml:uri>
-      </maml:navigationLink>
-    </command:relatedLinks>
-  </command:command>
-  <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
-    <command:details>
-      <command:name>Start-PwshHub</command:name>
-      <command:verb>Start</command:verb>
-      <command:noun>PwshHub</command:noun>
-      <maml:description>
-        <maml:para>{{ Fill in the Synopsis }}</maml:para>
-      </maml:description>
-    </command:details>
-    <maml:description>
-      <maml:para>{{ Fill in the Description }}</maml:para>
-    </maml:description>
-    <command:syntax>
-      <command:syntaxItem>
-        <maml:name>Start-PwshHub</maml:name>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="0" aliases="OAuthToken">
-          <maml:name>OAuth</maml:name>
-          <maml:description>
-            <maml:para>{{ Fill OAuth Description }}</maml:para>
-          </maml:description>
-          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
-          <dev:type>
-            <maml:name>String</maml:name>
-            <maml:uri />
-          </dev:type>
-          <dev:defaultValue>None</dev:defaultValue>
-        </command:parameter>
-      </command:syntaxItem>
-    </command:syntax>
-    <command:parameters>
-      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="0" aliases="OAuthToken">
-        <maml:name>OAuth</maml:name>
-        <maml:description>
-          <maml:para>{{ Fill OAuth Description }}</maml:para>
-        </maml:description>
-        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
-        <dev:type>
-          <maml:name>String</maml:name>
-          <maml:uri />
-        </dev:type>
-        <dev:defaultValue>None</dev:defaultValue>
-      </command:parameter>
-    </command:parameters>
-    <command:inputTypes>
-      <command:inputType>
-        <dev:type>
-          <maml:name>None</maml:name>
-        </dev:type>
-        <maml:description>
-          <maml:para></maml:para>
-        </maml:description>
-      </command:inputType>
-    </command:inputTypes>
-    <command:returnValues>
-      <command:returnValue>
-        <dev:type>
-          <maml:name>System.Object</maml:name>
-        </dev:type>
-        <maml:description>
-          <maml:para></maml:para>
-        </maml:description>
-      </command:returnValue>
-    </command:returnValues>
-    <maml:alertSet>
-      <maml:alert>
-        <maml:para></maml:para>
-      </maml:alert>
-    </maml:alertSet>
-    <command:examples>
-      <command:example>
-        <maml:title>-------------------------- Example 1 --------------------------</maml:title>
-        <dev:code>PS C:\&gt; {{ Add example code here }}</dev:code>
-        <dev:remarks>
-          <maml:para>{{ Add example description here }}</maml:para>
-        </dev:remarks>
-      </command:example>
-    </command:examples>
-    <command:relatedLinks>
-      <maml:navigationLink>
-        <maml:linkText>Online Version:</maml:linkText>
-        <maml:uri>https://github.com/OSDeploy/OSD/tree/master/Docs</maml:uri>
-      </maml:navigationLink>
-    </command:relatedLinks>
-  </command:command>
-  <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
-    <command:details>
       <command:name>Start-ScreenPNGProcess</command:name>
       <command:verb>Start</command:verb>
       <command:noun>ScreenPNGProcess</command:noun>
@@ -30254,26 +30109,23 @@ Displays all RegistryXML entries found in Source Directory</dev:code>
     <command:examples>
       <command:example>
         <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
-        <dev:code>Update-MyDellBios
-Downloads and launches the Dell BIOS Update.  Does not automatically install the BIOS Update</dev:code>
+        <dev:code>Update-MyDellBios</dev:code>
         <dev:remarks>
-          <maml:para></maml:para>
+          <maml:para>Downloads and launches the Dell BIOS Update.  Does not automatically install the BIOS Update</maml:para>
         </dev:remarks>
       </command:example>
       <command:example>
         <maml:title>-------------------------- EXAMPLE 2 --------------------------</maml:title>
-        <dev:code>Update-MyDellBios -Silent
-Yes, this will update your BIOS silently, and NOT reboot when its done</dev:code>
+        <dev:code>Update-MyDellBios -Silent</dev:code>
         <dev:remarks>
-          <maml:para></maml:para>
+          <maml:para>Yes, this will update your BIOS silently, and NOT reboot when its done</maml:para>
         </dev:remarks>
       </command:example>
       <command:example>
         <maml:title>-------------------------- EXAMPLE 3 --------------------------</maml:title>
-        <dev:code>Update-MyDellBios -Silent -Reboot
-Yes, this will update your BIOS silently, AND reboot when its done</dev:code>
+        <dev:code>Update-MyDellBios -Silent -Reboot</dev:code>
         <dev:remarks>
-          <maml:para></maml:para>
+          <maml:para>Yes, this will update your BIOS silently, AND reboot when its done</maml:para>
         </dev:remarks>
       </command:example>
     </command:examples>

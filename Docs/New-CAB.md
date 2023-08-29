@@ -24,9 +24,10 @@ Creates a CAB file from a Directory
 ### EXAMPLE 1
 ```
 New-CAB -SourceDirectory C:\DeploymentShare\OSDeploy\OSConfig
+```
+
 Creates LZX High Compression CAB from of C:\DeploymentShare\OSDeploy\OSConfig
 Saves file in Parent Directory C:\DeploymentShare\OSDeploy\OSConfig.cab
-```
 
 ## PARAMETERS
 

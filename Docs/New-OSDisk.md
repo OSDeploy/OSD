@@ -27,14 +27,17 @@ Creates System | OS | Recovery Partitions for MBR or UEFI Drives in WinPE
 ### EXAMPLE 1
 ```
 New-OSDisk
-Displays Get-Help New-OSDisk
 ```
+
+Displays Get-Help New-OSDisk
 
 ### EXAMPLE 2
 ```
 New-OSDisk -Force
-Interactive.  Prompted to Confirm Clear-Disk for each Local Disk
 ```
+
+Interactive. 
+Prompted to Confirm Clear-Disk for each Local Disk
 
 ## PARAMETERS
 

@@ -27,20 +27,24 @@ Requires Internet Access to download platformList.cab
 ### EXAMPLE 1
 ```
 Get-HPPlatformCatalog
-Don't do this, you will get a big list.
 ```
+
+Don't do this, you will get a big list.
 
 ### EXAMPLE 2
 ```
 $Results = Get-HPPlatformCatalog
-Yes do this.  Save it in a Variable
 ```
+
+Yes do this. 
+Save it in a Variable
 
 ### EXAMPLE 3
 ```
 Get-HPPlatformCatalog | Out-GridView
-Displays all the HP System Ids with the applicable computer model names in GridView
 ```
+
+Displays all the HP System Ids with the applicable computer model names in GridView
 
 ## PARAMETERS
 

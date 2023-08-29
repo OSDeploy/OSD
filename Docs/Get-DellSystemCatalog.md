@@ -25,20 +25,24 @@ Builds the Dell System Catalog
 ### EXAMPLE 1
 ```
 Get-DellSystemCatalog
-Don't do this, you will get an almost endless list
 ```
+
+Don't do this, you will get an almost endless list
 
 ### EXAMPLE 2
 ```
 $Result = Get-DellSystemCatalog
-Yes do this.  Save it in a Variable
 ```
+
+Yes do this. 
+Save it in a Variable
 
 ### EXAMPLE 3
 ```
 Get-DellSystemCatalog -Component BIOS | Out-GridView
-Displays all the Dell BIOS Updates in GridView
 ```
+
+Displays all the Dell BIOS Updates in GridView
 
 ## PARAMETERS
 
