@@ -23,6 +23,6 @@ Import-Module OSD -Force -ErrorAction Stop
 
 # DriverPack Catalogs
 Update-DellDriverPackCatalog -UpdateModuleCatalog -Verify
-Update-LenovoDriverPackCatalog -UpdateModuleCatalog -Verify
 Update-HPDriverPackCatalog -UpdateModuleCatalog -Verify
+Update-LenovoDriverPackCatalog -UpdateModuleCatalog -Verify
 Update-MicrosoftDriverPackCatalog -UpdateModuleCatalog -Verify

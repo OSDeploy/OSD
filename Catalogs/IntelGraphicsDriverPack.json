@@ -94,35 +94,6 @@
         "OSDStatus":  "",
         "OSDType":  "Driver",
         "OSDGroup":  "IntelDisplay",
-        "DriverName":  "Intel Graphics 15.45 x86 15.45.34.5174 6.1",
-        "DriverVersion":  "15.45.34.5174",
-        "OsVersion":  [
-                          "6.1"
-                      ],
-        "OsArch":  [
-                       "x86"
-                   ],
-        "MakeNotMatch":  [
-                             "Microsoft"
-                         ],
-        "ModelNotMatch":  [
-                              "Surface"
-                          ],
-        "DriverGrouping":  "Intel Graphics 15.45",
-        "DownloadFile":  "win32_15.45.5174.zip",
-        "DriverUrl":  "https://downloadmirror.intel.com/30195/a08/win32_15.45.5174.zip",
-        "DriverInfo":  "https://intel.com/content/www/us/en/download/18799/intel-graphics-driver-for-windows-15-45.html",
-        "DriverDescription":  "This download installs the Intel? Graphics Driver for 6th Gen on Windows 7* and Windows 8.1*/10* 64-bit.",
-        "OSDGuid":  "8ce39c1a-4369-454f-a866-203cd7ff0a3d",
-        "OSDPnpClass":  "Display",
-        "OSDPnpClassGuid":  "{4D36E968-E325-11CE-BFC1-08002BE10318}"
-    },
-    {
-        "OSDVersion":  "23.6.25.1",
-        "LastUpdate":  "\/Date(1612504800000)\/",
-        "OSDStatus":  "",
-        "OSDType":  "Driver",
-        "OSDGroup":  "IntelDisplay",
         "DriverName":  "Intel Graphics 15.45 x64 15.45.34.5174 6.1 6.3 10.0",
         "DriverVersion":  "15.45.34.5174",
         "OsVersion":  [
@@ -154,11 +125,10 @@
         "OSDStatus":  "",
         "OSDType":  "Driver",
         "OSDGroup":  "IntelDisplay",
-        "DriverName":  "Intel Graphics 15.40 x86 15.40.48.5171 6.1 6.3",
-        "DriverVersion":  "15.40.48.5171",
+        "DriverName":  "Intel Graphics 15.45 x86 15.45.34.5174 6.1",
+        "DriverVersion":  "15.45.34.5174",
         "OsVersion":  [
-                          "6.1",
-                          "6.3"
+                          "6.1"
                       ],
         "OsArch":  [
                        "x86"
@@ -169,12 +139,12 @@
         "ModelNotMatch":  [
                               "Surface"
                           ],
-        "DriverGrouping":  "Intel Graphics 15.40",
-        "DownloadFile":  "win32_15.40.5171.zip",
-        "DriverUrl":  "https://downloadmirror.intel.com/30196/a08/win32_15.40.5171.zip",
-        "DriverInfo":  "https://intel.com/content/www/us/en/download/18369/intel-graphics-driver-for-windows-15-40.html",
-        "DriverDescription":  "This download installs the Intel? Graphics Driver for Braswell, 4th and 5th generations.",
-        "OSDGuid":  "5fd57300-1a14-46a7-a03a-52de9d42fd9a",
+        "DriverGrouping":  "Intel Graphics 15.45",
+        "DownloadFile":  "win32_15.45.5174.zip",
+        "DriverUrl":  "https://downloadmirror.intel.com/30195/a08/win32_15.45.5174.zip",
+        "DriverInfo":  "https://intel.com/content/www/us/en/download/18799/intel-graphics-driver-for-windows-15-45.html",
+        "DriverDescription":  "This download installs the Intel? Graphics Driver for 6th Gen on Windows 7* and Windows 8.1*/10* 64-bit.",
+        "OSDGuid":  "8ce39c1a-4369-454f-a866-203cd7ff0a3d",
         "OSDPnpClass":  "Display",
         "OSDPnpClassGuid":  "{4D36E968-E325-11CE-BFC1-08002BE10318}"
     },
@@ -205,6 +175,36 @@
         "DriverInfo":  "https://intel.com/content/www/us/en/download/18369/intel-graphics-driver-for-windows-15-40.html",
         "DriverDescription":  "This download installs the Intel? Graphics Driver for Braswell, 4th and 5th generations.",
         "OSDGuid":  "346f4279-35e0-4227-9a7d-499afa05bbe7",
+        "OSDPnpClass":  "Display",
+        "OSDPnpClassGuid":  "{4D36E968-E325-11CE-BFC1-08002BE10318}"
+    },
+    {
+        "OSDVersion":  "23.6.25.1",
+        "LastUpdate":  "\/Date(1612504800000)\/",
+        "OSDStatus":  "",
+        "OSDType":  "Driver",
+        "OSDGroup":  "IntelDisplay",
+        "DriverName":  "Intel Graphics 15.40 x86 15.40.48.5171 6.1 6.3",
+        "DriverVersion":  "15.40.48.5171",
+        "OsVersion":  [
+                          "6.1",
+                          "6.3"
+                      ],
+        "OsArch":  [
+                       "x86"
+                   ],
+        "MakeNotMatch":  [
+                             "Microsoft"
+                         ],
+        "ModelNotMatch":  [
+                              "Surface"
+                          ],
+        "DriverGrouping":  "Intel Graphics 15.40",
+        "DownloadFile":  "win32_15.40.5171.zip",
+        "DriverUrl":  "https://downloadmirror.intel.com/30196/a08/win32_15.40.5171.zip",
+        "DriverInfo":  "https://intel.com/content/www/us/en/download/18369/intel-graphics-driver-for-windows-15-40.html",
+        "DriverDescription":  "This download installs the Intel? Graphics Driver for Braswell, 4th and 5th generations.",
+        "OSDGuid":  "5fd57300-1a14-46a7-a03a-52de9d42fd9a",
         "OSDPnpClass":  "Display",
         "OSDPnpClassGuid":  "{4D36E968-E325-11CE-BFC1-08002BE10318}"
     },

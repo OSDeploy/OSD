@@ -3,9 +3,6 @@
 # Import OSD Module
 Import-Module OSD -Force -ErrorAction Stop
 
-
-
-
 # Master DriverPacks
 $MasterDriverPacks = @()
 $MasterDriverPacks += Get-DellDriverPack
