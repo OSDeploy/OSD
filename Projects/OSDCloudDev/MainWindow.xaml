@@ -9,7 +9,7 @@
         RenderTransformOrigin="0.5,0.5"
         ResizeMode="NoResize"
         WindowStartupLocation = "CenterScreen"
-        Title="OSDCloudGUI version on Manufacturer Model Product" Height="552" Width="840">
+        Title="OSDCloudGUI version on Manufacturer Model Product" Height="380" Width="820">
     <Window.Resources>
         <ResourceDictionary>
             <Style TargetType="{x:Type Button}">
@@ -125,86 +125,33 @@
     <DockPanel>
         <Menu DockPanel.Dock="Top">
             <MenuItem Header="Deployment Options">
-                <MenuItem Name="ZTI"
-                          Header="Clear-Disk skip confirmation"
-                          IsCheckable="True"
-                          IsChecked="False" />
-                <MenuItem Name="DiskPart"
-                          Header="Use DiskPart vs Native PS"
-                          IsCheckable="True"
-                          IsChecked="False" />
-                <MenuItem Name="Restart"
-                          Header="Restart-Computer when complete"
-                          IsCheckable="True"
-                          IsChecked="True" />
-                <MenuItem Name="ScreenshotCapture"
-                          Header="Screenshot Capture"
-                          IsCheckable="True"
-                          IsChecked="False" />
-                <MenuItem Name="DefenderUpdates"
-                          Header="Defender Updates"
+                <MenuItem Name="captureScreenshots"
+                          Header="capture Screenshots"
+                          IsCheckable="True"/>
+                <MenuItem Name="ClearDiskConfirm"
+                          Header="Clear-Disk Confirm Prompt"
+                          IsCheckable="True" />
+                <MenuItem Name="restartComputer"
+                          Header="restart Computer after WinPE"
+                          IsCheckable="True" />
+                <MenuItem Name="WindowsDefenderUpdate"
+                          Header="update Windows Defender"
                           IsCheckable="True"
                           IsChecked="True" />
-                <MenuItem Name="NetFx3"
-                          Header="Enable NetFx3"
-                          IsCheckable="True"
-                          IsChecked="True" />
-                <MenuItem Name="Bitlocker"
-                          Header="Enable Bitlocker"
-                          IsCheckable="True"
-                          IsChecked="False" />
-                <MenuItem Name="TimeZone"
-                          Header="Set Timezone based on IP"
-                          IsCheckable="True"
-                          IsChecked="False" />
-                <MenuItem Name="OEMActivation"
-                          Header="Apply OEM Activation Code"
-                          IsCheckable="True"
-                          IsChecked="False" />
-                <MenuItem Name="SetWiFi"
-                          Header="Configure WiFi"
-                          IsCheckable="True"
-                          IsChecked="False" />
-                <MenuItem Name="OSDCloudBeta"
-                          Header="Enable OSDCloud Beta Features"
-                          IsCheckable="True"
-                          IsChecked="False" />
-                <MenuItem Name="PauseSpecialize"
-                          Header="Pause for Testing in Specialize"
-                          IsCheckable="True"
-                          IsChecked="False" />
             </MenuItem>
             <MenuItem Header="Microsoft Update Catalog">
-                <MenuItem Name="MSCatalogDiskDrivers"
-                          Header="Disk Drivers"
-                          IsCheckable="True"
-                          IsChecked="True" />
-                <MenuItem Name="MSCatalogNetDrivers"
-                          Header="Network Drivers"
-                          IsCheckable="True"
-                          IsChecked="True" />
-                <MenuItem Name="MSCatalogScsiDrivers"
-                          Header="SCSIAdapter Drivers"
-                          IsCheckable="True"
-                          IsChecked="True" />
-                <MenuItem Name="MSCatalogFirmware"
-                          Header="System Firmware"
-                          IsCheckable="True"
-                          IsChecked="False" />
-                <MenuItem Name="MS365Install"
-                          Header="Install M365 Apps"
-                          IsCheckable="True"
-                          IsChecked="False" />
-            </MenuItem>
-            <MenuItem Header="Addons">
-                <MenuItem Name="ScriptSpecialize"
-                          Header="Run YOUR Script in Specialize"
-                          IsCheckable="True"
-                          IsChecked="False" />
-                <MenuItem Name="ScriptSetupComplete"
-                          Header="Run YOUR Script in SetupComplete"
-                          IsCheckable="True"
-                          IsChecked="False" />
+                <MenuItem Name="updateDiskDrivers"
+                          Header="update Disk Drivers"
+                          IsCheckable="True" />
+                <MenuItem Name="updateFirmware"
+                          Header="update System Firmware"
+                          IsCheckable="True" />
+                <MenuItem Name="updateNetworkDrivers"
+                          Header="update Network Drivers"
+                          IsCheckable="True" />
+                <MenuItem Name="updateSCSIDrivers"
+                          Header="update SCSIAdapter Drivers"
+                          IsCheckable="True" />
             </MenuItem>
             <MenuItem x:Name="ManufacturerFunction" Header="Manufacturer Functions">
                 <MenuItem x:Name="Option_Name_1"
@@ -233,66 +180,49 @@
                     IsChecked="False" />
             </MenuItem>
         </Menu>
+    <Grid Margin="10,0,10,10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="1" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="1" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="1" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
 
-        <Grid Margin="10,0,10,10">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="23*"/>
-                <ColumnDefinition Width="62*"/>
-                <ColumnDefinition Width="204*"/>
-                <ColumnDefinition Width="13*"/>
-                <ColumnDefinition Width="44*"/>
-                <ColumnDefinition Width="472*"/>
-            </Grid.ColumnDefinitions>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="1" />
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="1" />
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="1" />
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="*" />
-                <RowDefinition Height="Auto" />
-            </Grid.RowDefinitions>
-
-            <!-- Row 0 Title -->
-            <Label
+        <!-- Row 0 Title -->
+        <Label Grid.Row="0"
                Name="BrandingTitleControl"
-               Content="OSDCloudDEV"
+               Content="OSDCloud"
                FlowDirection="RightToLeft"
                FontSize="24"
                FontWeight="Bold"
                Foreground="#0096D6"
-               HorizontalAlignment="Left"
-               VerticalAlignment="Center" Grid.Column="5" Margin="266,0,0,0" />
-            <Label
-               Name="InternetConnection"
-               Content="*"
-               FlowDirection="RightToLeft"
-               FontSize="24"
-               FontWeight="Bold"
-               Foreground="Green"
-               HorizontalAlignment="Left"
-               VerticalAlignment="Top" Grid.Column="5" Margin="430,1,0,0" Grid.RowSpan="3" />
-            <!-- Row 1 Gridline -->
-            <Line Grid.Row="1"
+               HorizontalAlignment="Right"
+               VerticalAlignment="Top" />
+
+        <!-- Row 1 Gridline -->
+        <Line Grid.Row="1"
               X1="0"
               Y1="0"
               X2="1"
               Y2="0"
               Stroke="Gainsboro"
               StrokeThickness="1"
-              Stretch="Uniform" Grid.ColumnSpan="6" Margin="0,0,0,76" Grid.RowSpan="2"/>
+              Stretch="Uniform"></Line>
 
-            <!-- Row 2 OperatingSystem -->
-            <StackPanel Grid.Row="2"
+        <!-- Row 2 OperatingSystem -->
+        <StackPanel Grid.Row="2"
                     HorizontalAlignment="Left"
-                    VerticalAlignment="Center" Grid.ColumnSpan="6">
-                <!-- Operating System -->
-                <StackPanel Orientation="Horizontal"
+                    VerticalAlignment="Top">
+            <!-- Operating System -->
+            <StackPanel Orientation="Horizontal"
                         HorizontalAlignment="Left"
                         VerticalAlignment="Top">
-                    <Label Name="OperatingSystemLabel"
+                <Label Name="OperatingSystemLabel"
                        Content="Operating System"
                        FontSize="18"
                        FontWeight="Bold"
@@ -301,16 +231,16 @@
                        Padding="2"
                        Width="155"
                        FlowDirection="RightToLeft" />
-                    <ComboBox Name="OperatingSystemCombobox"
+                <ComboBox Name="OSNameCombobox"
                           FontSize="16"
                           Margin="5"
                           Padding="2" >
-                    </ComboBox>
-                </StackPanel>
-                <StackPanel Orientation="Horizontal"
+                </ComboBox>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal"
                         HorizontalAlignment="Left"
                         VerticalAlignment="Top">
-                    <Label Name="OperatingSystemDetailsLabel"
+                <Label Name="OperatingSystemDetailsLabel"
                        Content=""
                        FontSize="18"
                        FontWeight="Bold"
@@ -318,60 +248,60 @@
                        Margin="5"
                        Padding="2"
                        Width="155" />
-                    <ComboBox Name="OSEditionCombobox"
+                <ComboBox Name="OSEditionCombobox"
                           FontSize="16"
                           Margin="5"
                           Padding="2" />
-                    <ComboBox Name="OSLanguageCombobox"
+                <ComboBox Name="OSLanguageCombobox"
                           FontSize="16"
                           Margin="5"
                           Padding="2" />
-                    <ComboBox Name="OSActivationCombobox"
+                <ComboBox Name="OSActivationCombobox"
                           FontSize="16"
                           Margin="5"
                           Padding="2" />
-                    <ComboBox Name="ImageNameCombobox"
+                <ComboBox Name="ImageNameCombobox"
                           FontSize="16"
                           Margin="5"
                           Padding="2" />
-                    <Label Name="ImageIndexLabel"
+                <Label Name="ImageIndexLabel"
                        Content="Index"
                        FontSize="18"
                        FontWeight="Bold"
                        Foreground="#0096D6"
                        Margin="5"
                        Padding="2" />
-                    <TextBox Name="ImageIndexTextbox"
+                <TextBox Name="ImageIndexTextbox"
                          FontSize="16"
                          Margin="5"
                          Padding="2"
                          Text="Auto" />
-                </StackPanel>
-                <StackPanel HorizontalAlignment="Left"
-                        VerticalAlignment="Top">
-                </StackPanel>
             </StackPanel>
+            <StackPanel HorizontalAlignment="Left"
+                        VerticalAlignment="Top">
+            </StackPanel>
+        </StackPanel>
 
-            <!-- Row 3 Gridline -->
-            <Line Grid.Row="3"
+        <!-- Row 3 Gridline -->
+        <Line Grid.Row="3"
               X1="0"
               Y1="0"
               X2="1"
               Y2="0"
               Stroke="Gainsboro"
               StrokeThickness="1"
-              Stretch="Uniform" Grid.ColumnSpan="6" Margin="0,0,0,38" Grid.RowSpan="2">
-            </Line>
+              Stretch="Uniform">
+        </Line>
 
-            <!-- Row 4 Driver Pack -->
-            <StackPanel Grid.Row="4"
+        <!-- Row 4 Driver Pack -->
+        <StackPanel Grid.Row="4"
                     HorizontalAlignment="Left"
-                    VerticalAlignment="Center" Grid.ColumnSpan="6">
-                <!-- Driver Pack -->
-                <StackPanel Orientation="Horizontal"
+                    VerticalAlignment="Top">
+            <!-- Driver Pack -->
+            <StackPanel Orientation="Horizontal"
                         HorizontalAlignment="Left"
                         VerticalAlignment="Top">
-                    <Label Name="DriverPackLabel"
+                <Label Name="DriverPackLabel"
                        Content="Driver Pack"
                        FontSize="18"
                        FontWeight="Bold"
@@ -380,33 +310,34 @@
                        Padding="2"
                        Width="155"
                        FlowDirection="RightToLeft" />
-                    <ComboBox Name="DriverPackCombobox"
+                <ComboBox Name="DriverPackCombobox"
                           FontSize="16"
                           Margin="5"
                           Padding="2"
                           SelectedIndex="1" >
-                        <ComboBoxItem Content="None"/>
-                        <ComboBoxItem Content="Microsoft Update Catalog"/>
-                    </ComboBox>
-                </StackPanel>
+                    <ComboBoxItem Content="None"/>
+                    <ComboBoxItem Content="Microsoft Update Catalog"/>
+                </ComboBox>
             </StackPanel>
+        </StackPanel>
 
-            <!-- Row 5 Gridline -->
-            <Line Grid.Row="5"
+        <!-- Row 5 Gridline -->
+        <Line Grid.Row="5"
               X1="0"
               Y1="0"
               X2="1"
               Y2="0"
               Stroke="Gainsboro"
               StrokeThickness="1"
-              Stretch="Uniform" Grid.ColumnSpan="6" Margin="0,0,0,117" Grid.RowSpan="2"/>
+              Stretch="Uniform">
+        </Line>
 
-            <!-- Row 6 Options -->
-            <StackPanel Grid.Row="6"
+        <!-- Row 6 Options -->
+        <StackPanel Grid.Row="6"
                     Orientation="Horizontal"
                     HorizontalAlignment="Left"
-                    VerticalAlignment="Top" Grid.ColumnSpan="3">
-                <Label Name="DeploymentOptionsLabel"
+                    VerticalAlignment="Top">
+            <Label Name="DeploymentOptionsLabel"
                    Content=""
                    FontSize="18"
                    FontWeight="Bold"
@@ -416,17 +347,17 @@
                    Padding="2"
                    Width="155"
                    FlowDirection="RightToLeft" />
-            </StackPanel>
-            <StackPanel Grid.Row="6"
+        </StackPanel>
+        <StackPanel Grid.Row="6"
                     Orientation="Vertical"
                     HorizontalAlignment="Left"
-                    VerticalAlignment="Center" Grid.ColumnSpan="3">
-                <!-- AutopilotJson -->
-                <StackPanel HorizontalAlignment="Left"
+                    VerticalAlignment="Top">
+            <!-- AutopilotJson -->
+            <StackPanel HorizontalAlignment="Left"
                         VerticalAlignment="Center"
                         Orientation="Horizontal"
                         Margin="10,5,5,0">
-                    <Label Name="AutopilotJsonLabel"
+                <Label Name="AutopilotJsonLabel"
                        Content="Autopilot JSON"
                        FontSize="15"
                        Foreground="Black"
@@ -436,17 +367,17 @@
                        VerticalAlignment="Center"
                        Width="145"
                        FlowDirection="RightToLeft" />
-                    <ComboBox Name="AutopilotJsonCombobox"
+                <ComboBox Name="AutopilotJsonCombobox"
                           FontSize="14"
                           Margin="5"
                           Padding="2" />
-                </StackPanel>
-                <!-- OOBEDeployJson -->
-                <StackPanel HorizontalAlignment="Left"
+            </StackPanel>
+            <!-- OOBEDeployJson -->
+            <StackPanel HorizontalAlignment="Left"
                         VerticalAlignment="Center"
                         Orientation="Horizontal"
                         Margin="10,5,5,0">
-                    <Label Name="OOBEDeployLabel"
+                <Label Name="OOBEDeployLabel"
                        Content="OOBEDeploy"
                        FontSize="15"
                        Foreground="Black"
@@ -455,17 +386,17 @@
                        VerticalAlignment="Center"
                        Width="145"
                        FlowDirection="RightToLeft" />
-                    <ComboBox Name="OOBEDeployCombobox"
+                <ComboBox Name="OOBEDeployCombobox"
                           FontSize="14"
                           Margin="5"
                           Padding="2" />
-                </StackPanel>
-                <!-- AutopilotOOBEJson -->
-                <StackPanel HorizontalAlignment="Left"
+            </StackPanel>
+            <!-- AutopilotOOBEJson -->
+            <StackPanel HorizontalAlignment="Left"
                         VerticalAlignment="Center"
                         Orientation="Horizontal"
                         Margin="10,5,5,0">
-                    <Label Name="AutopilotOOBELabel"
+                <Label Name="AutopilotOOBELabel"
                        Content="AutopilotOOBE"
                        FontSize="15"
                        Foreground="Black"
@@ -474,49 +405,33 @@
                        VerticalAlignment="Center"
                        Width="145"
                        FlowDirection="RightToLeft" />
-                    <ComboBox Name="AutopilotOOBECombobox"
+                <ComboBox Name="AutopilotOOBECombobox"
                           FontSize="14"
                           Margin="5"
                           Padding="2" />
-                </StackPanel>
             </StackPanel>
+        </StackPanel>
 
-            <!-- Row 7 Gridline -->
-            <Line Grid.Row="7"
+        <!-- Row 7 Gridline -->
+        <Line Grid.Row="7"
               X1="0"
               Y1="0"
               X2="1"
               Y2="0"
               Stroke="Gainsboro"
               StrokeThickness="1"
-              Stretch="Uniform" Grid.ColumnSpan="6" Margin="0,0,0,149"/>
-
-            <!-- Row 8 Start -->
-            <Button Grid.Row="8"
+              Stretch="Uniform"></Line>
+        
+        <!-- Row 8 Start -->
+        <Button Grid.Row="8"
                 Name="StartButton"
                 Content="Start"
                 FontSize="18"
                 Foreground="White"
                 Height="40"
                 Width="130"
-                HorizontalAlignment="Left"
-                VerticalAlignment="Center" Grid.Column="5" Margin="321,0,0,0" />
-            <CheckBox x:Name="DebugCheckBox" Content="Debug Mode" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.ColumnSpan="3"/>
-            <Line Grid.Row="7"
-            X1="0"
-              Y1="0"
-              X2="1"
-              Y2="0"
-              Stroke="Gainsboro"
-              StrokeThickness="1"
-              Stretch="Uniform" Grid.ColumnSpan="6" Margin="0,159,0,10"/>
-            <TextBox x:Name="TextBoxSpecialize" HorizontalAlignment="Left" Margin="0,35,0,0" Grid.Row="7" TextWrapping="Wrap" Text="https://raw.githubusercontent.com/gwblok/garytown/master/Dev/CloudScripts/SpecializeDEV.ps1" VerticalAlignment="Top" Width="818" Grid.ColumnSpan="6" Visibility="Collapsed"/>
-            <TextBox x:Name="TextBoxSetupComplete" HorizontalAlignment="Left" Margin="0,105,0,0" Grid.Row="7" TextWrapping="Wrap" Text="https://raw.githubusercontent.com/gwblok/garytown/master/Dev/CloudScripts/SetupCompleteDEV.ps1" VerticalAlignment="Top" Width="818" Grid.ColumnSpan="6" Visibility="Collapsed"/>
-            <Label x:Name="LabelSpecialize" Content="Specialize Script URL" HorizontalAlignment="Left" Margin="0,5,0,0" Grid.Row="7" VerticalAlignment="Top" Visibility="Collapsed"/>
-            <Label x:Name="LabelSetupComplete" Content="SetupComplete Script URL" HorizontalAlignment="Left" Margin="0,74,0,0" Grid.Row="7" VerticalAlignment="Top" Visibility="Collapsed"/>
-            <Label x:Name="LabelWin11Label" Content="Win 11 Ready:" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Center" RenderTransformOrigin="-0.663,0.713" Grid.Row="8" Grid.ColumnSpan="3" Width="242"/>
-            <Label x:Name="LabelWin11Reason" Content="Reason:" HorizontalAlignment="Left" Margin="141,0,0,0" VerticalAlignment="Center" RenderTransformOrigin="-0.663,0.713" Grid.Row="8" Grid.Column="2" Visibility="Hidden" Grid.ColumnSpan="4" Width="342"/>
-
+                HorizontalAlignment="Right"
+                VerticalAlignment="Bottom" />
         </Grid>
     </DockPanel>
 </Window>
