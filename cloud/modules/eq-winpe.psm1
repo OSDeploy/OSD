@@ -19,7 +19,8 @@ function osdcloud-WinpeInstallCurl {
         Write-Host -ForegroundColor Yellow "[-] Install Curl 8.1.2 for Windows"
         #$Uri = 'https://curl.se/windows/dl-7.81.0/curl-7.81.0-win64-mingw.zip'
         #$Uri = 'https://curl.se/windows/dl-7.88.1_2/curl-7.88.1_2-win64-mingw.zip'
-        $Uri = 'https://curl.se/windows/dl-8.1.2_2/curl-8.1.2_2-win64-mingw.zip'
+        #$Uri = 'https://curl.se/windows/dl-8.1.2_2/curl-8.1.2_2-win64-mingw.zip'
+        $Uri = 'https://curl.se/windows/dl-8.3.0_1/curl-8.3.0_1-win64-mingw.zip'
         Invoke-WebRequest -UseBasicParsing -Uri $Uri -OutFile "$env:TEMP\curl.zip"
     
         $null = New-Item -Path "$env:TEMP\Curl" -ItemType Directory -Force
