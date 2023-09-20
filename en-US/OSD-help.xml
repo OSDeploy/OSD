@@ -27369,8 +27369,8 @@ Original credit to Mike Robbins http://mikefrobbins.com/2018/01/18/use-powershel
     <command:syntax>
       <command:syntaxItem>
         <maml:name>Start-OSDCloudGUIDev</maml:name>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="BrandingTitle">
-          <maml:name>Brand</maml:name>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="Brand">
+          <maml:name>BrandName</maml:name>
           <maml:description>
             <maml:para>The custom Brand for OSDCloudGUI</maml:para>
           </maml:description>
@@ -27379,10 +27379,10 @@ Original credit to Mike Robbins http://mikefrobbins.com/2018/01/18/use-powershel
             <maml:name>String</maml:name>
             <maml:uri />
           </dev:type>
-          <dev:defaultValue>$Global:OSDModuleResource.StartOSDCloudGUIDev.Brand</dev:defaultValue>
+          <dev:defaultValue>$Global:OSDModuleResource.StartOSDCloudGUI.BrandName</dev:defaultValue>
         </command:parameter>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="2" aliases="BrandingColor">
-          <maml:name>Color</maml:name>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="2" aliases="Color">
+          <maml:name>BrandColor</maml:name>
           <maml:description>
             <maml:para>Color for the OSDCloudGUI Brand</maml:para>
           </maml:description>
@@ -27391,13 +27391,37 @@ Original credit to Mike Robbins http://mikefrobbins.com/2018/01/18/use-powershel
             <maml:name>String</maml:name>
             <maml:uri />
           </dev:type>
-          <dev:defaultValue>$Global:OSDModuleResource.StartOSDCloudGUIDev.Color</dev:defaultValue>
+          <dev:defaultValue>$Global:OSDModuleResource.StartOSDCloudGUI.BrandColor</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="3" aliases="none">
+          <maml:name>ComputerManufacturer</maml:name>
+          <maml:description>
+            <maml:para>Temporary Parameter</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>(Get-MyComputerManufacturer -Brief)</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="4" aliases="none">
+          <maml:name>ComputerProduct</maml:name>
+          <maml:description>
+            <maml:para>Temporary Parameter</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>(Get-MyComputerProduct)</dev:defaultValue>
         </command:parameter>
       </command:syntaxItem>
     </command:syntax>
     <command:parameters>
-      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="BrandingTitle">
-        <maml:name>Brand</maml:name>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="Brand">
+        <maml:name>BrandName</maml:name>
         <maml:description>
           <maml:para>The custom Brand for OSDCloudGUI</maml:para>
         </maml:description>
@@ -27406,10 +27430,10 @@ Original credit to Mike Robbins http://mikefrobbins.com/2018/01/18/use-powershel
           <maml:name>String</maml:name>
           <maml:uri />
         </dev:type>
-        <dev:defaultValue>$Global:OSDModuleResource.StartOSDCloudGUIDev.Brand</dev:defaultValue>
+        <dev:defaultValue>$Global:OSDModuleResource.StartOSDCloudGUI.BrandName</dev:defaultValue>
       </command:parameter>
-      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="2" aliases="BrandingColor">
-        <maml:name>Color</maml:name>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="2" aliases="Color">
+        <maml:name>BrandColor</maml:name>
         <maml:description>
           <maml:para>Color for the OSDCloudGUI Brand</maml:para>
         </maml:description>
@@ -27418,7 +27442,31 @@ Original credit to Mike Robbins http://mikefrobbins.com/2018/01/18/use-powershel
           <maml:name>String</maml:name>
           <maml:uri />
         </dev:type>
-        <dev:defaultValue>$Global:OSDModuleResource.StartOSDCloudGUIDev.Color</dev:defaultValue>
+        <dev:defaultValue>$Global:OSDModuleResource.StartOSDCloudGUI.BrandColor</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="3" aliases="none">
+        <maml:name>ComputerManufacturer</maml:name>
+        <maml:description>
+          <maml:para>Temporary Parameter</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>(Get-MyComputerManufacturer -Brief)</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="4" aliases="none">
+        <maml:name>ComputerProduct</maml:name>
+        <maml:description>
+          <maml:para>Temporary Parameter</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>(Get-MyComputerProduct)</dev:defaultValue>
       </command:parameter>
     </command:parameters>
     <command:inputTypes />
@@ -27431,7 +27479,7 @@ Original credit to Mike Robbins http://mikefrobbins.com/2018/01/18/use-powershel
     <command:examples>
       <command:example>
         <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
-        <dev:code>Start-OSDCloudGUI</dev:code>
+        <dev:code>Start-OSDCloudGUIDev</dev:code>
         <dev:remarks>
           <maml:para></maml:para>
         </dev:remarks>
