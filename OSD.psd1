@@ -218,6 +218,7 @@
         'Invoke-SelectOSDVolume',
         'Invoke-SelectUSBVolume',
         'Run-WindowsUpdate',
+        'Run-WindowsUpdateDriver',
         'Set-AzClipboard',
         'Set-BitlockerRegValuesXTS256',
         'Set-BootmgrTimeout',
