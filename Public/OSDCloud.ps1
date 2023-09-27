@@ -146,13 +146,19 @@
         #endregion
 
         #region Set Pre-Merge Defaults
-        #Skip Recovery Partition for Virtual Machines
+        <#  If this is a Virtual Machine and Skip Recovery Partition 
+            OVERRIDE:
+            $Global:MyOSDCloud.RecoveryPartition = $true
+        #>
         if ($Global:OSDCloud.IsVirtualMachine) {
             $Global:OSDCloud.SkipRecoveryPartition = $true
         }
         #endregion
 
         #region Merge Global Variables
+        <#  Overwrite the defaults from Invoke-OSDCloud by using custom variables
+            MyOSDCloud is the last and final customization variable
+        #>
         if ($Global:InvokeOSDCloud) {
             foreach ($Key in $Global:InvokeOSDCloud.Keys) {
                 $Global:OSDCloud.$Key = $Global:InvokeOSDCloud.$Key
