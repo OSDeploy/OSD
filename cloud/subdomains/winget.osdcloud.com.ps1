@@ -111,7 +111,6 @@ if ($WindowsPhase -eq 'OOBE') {
 
 #region Windows
 if ($WindowsPhase -eq 'Windows') {
-    Set-ExecutionPolicy RemoteSigned -Force -Scope Process
     osdcloud-SetExecutionPolicy
     osdcloud-SetPowerShellProfile
     osdcloud-InstallPackageManagement

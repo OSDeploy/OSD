@@ -154,8 +154,8 @@ function osdcloud-SetExecutionPolicy {
         }
     }
     if ($WindowsPhase -eq 'Windows') {
-        # We should not be messing with ExecutionPolicy in Windows Phase
-        # Display information only
+        # We should not be messing with ExecutionPolicy in Windows Phase so set for Process
+        Set-ExecutionPolicy RemoteSigned -Force -Scope Process
         Write-Host -ForegroundColor Gray "[i] Get-ExecutionPolicy $(Get-ExecutionPolicy -Scope Process) [Process]"
         Write-Host -ForegroundColor Gray "[i] Get-ExecutionPolicy $(Get-ExecutionPolicy -Scope CurrentUser) [CurrentUser]"
         Write-Host -ForegroundColor Gray "[i] Get-ExecutionPolicy $(Get-ExecutionPolicy -Scope LocalMachine) [LocalMachine]"
