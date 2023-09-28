@@ -111,6 +111,12 @@ if ($WindowsPhase -eq 'OOBE') {
 
 #region Windows
 if ($WindowsPhase -eq 'Windows') {
+    
+    if (((Get-ExecutionPolicy -Scope CurrentUser) -eq 'Restricted') -or ((Get-ExecutionPolicy -Scope CurrentUser) -eq 'Undefined')) {
+        Write-Warning "You must set the PowerShell ExecutionPolicy to RemoteSigned or Unrestricted in the Windows Phase for this function to work properly"
+        Write-Warning "Set-ExecutionPolicy RemoteSigned -Force -Scope CurrentUser"
+        Set-ExecutionPolicy RemoteSigned -Force -Scope Process
+    }
     osdcloud-SetExecutionPolicy
     osdcloud-SetPowerShellProfile
     osdcloud-InstallPackageManagement
