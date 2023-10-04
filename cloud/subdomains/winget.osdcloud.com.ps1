@@ -24,7 +24,7 @@ powershell iex (irm winget.osdcloud.com)
 .DESCRIPTION
     PowerShell Script which supports WinGet
 .NOTES
-    Version 23.6.10.1
+    Version 23.9.28.1
 .LINK
     https://raw.githubusercontent.com/OSDeploy/OSD/master/cloud/subdomains/winget.osdcloud.com.ps1
 .EXAMPLE
@@ -33,7 +33,7 @@ powershell iex (irm winget.osdcloud.com)
 [CmdletBinding()]
 param()
 $ScriptName = 'winget.osdcloud.com'
-$ScriptVersion = '23.6.10.1'
+$ScriptVersion = '23.9.28.1'
 
 #region Initialize
 $Transcript = "$((Get-Date).ToString('yyyy-MM-dd-HHmmss'))-$ScriptName.log"
@@ -92,7 +92,18 @@ if ($WindowsPhase -eq 'AuditMode') {
 
 #region OOBE
 if ($WindowsPhase -eq 'OOBE') {
-    osdcloud-StartOOBE -InstallWinGet -WinGetUpgrade -WinGetPwsh -SkipOSD
+    osdcloud-SetExecutionPolicy
+    osdcloud-SetPowerShellProfile
+    osdcloud-InstallPackageManagement
+    osdcloud-TrustPSGallery
+    osdcloud-InstallPowerShellModule -Name Pester
+    osdcloud-InstallPowerShellModule -Name PSReadLine
+    osdcloud-InstallWinGet
+    if (Get-Command 'WinGet' -ErrorAction SilentlyContinue) {
+        Write-Host -ForegroundColor Green "[+] winget upgrade --all --accept-source-agreements --accept-package-agreements"
+        winget upgrade --all --accept-source-agreements --accept-package-agreements
+    }
+    osdcloud-InstallPwsh
     Write-Host -ForegroundColor Green "[+] winget.osdcloud.com Complete"
     $null = Stop-Transcript -ErrorAction Ignore
 }
@@ -100,7 +111,18 @@ if ($WindowsPhase -eq 'OOBE') {
 
 #region Windows
 if ($WindowsPhase -eq 'Windows') {
-    osdcloud-StartOOBE -InstallWinGet -WinGetUpgrade -WinGetPwsh -SkipOSD
+    osdcloud-SetExecutionPolicy
+    osdcloud-SetPowerShellProfile
+    osdcloud-InstallPackageManagement
+    osdcloud-TrustPSGallery
+    osdcloud-InstallPowerShellModule -Name Pester
+    osdcloud-InstallPowerShellModule -Name PSReadLine
+    osdcloud-InstallWinGet
+    if (Get-Command 'WinGet' -ErrorAction SilentlyContinue) {
+        Write-Host -ForegroundColor Green '[+] winget upgrade --all --accept-source-agreements --accept-package-agreements'
+        winget upgrade --all --accept-source-agreements --accept-package-agreements
+    }
+    osdcloud-InstallPwsh
     Write-Host -ForegroundColor Green "[+] winget.osdcloud.com Complete"
     $null = Stop-Transcript -ErrorAction Ignore
 }
