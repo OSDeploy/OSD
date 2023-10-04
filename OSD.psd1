@@ -263,6 +263,8 @@
         'Start-ScreenPNGProcess',
         'Start-WinREWiFi',
         'Stop-ScreenPNGProcess',
+        'Start-DISMFromOSDCloudUSB',
+        'Test-DISMFromOSDCloudUSB',
         'Test-DCUSupport',
         'Test-FolderToIso',
         'Test-HPIASupport',
