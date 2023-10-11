@@ -14826,7 +14826,7 @@
     },
     {
         "CatalogVersion":  "23.09.02",
-        "Status":  "Failed",
+        "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "23.09.08",
         "Manufacturer":  "Dell",
