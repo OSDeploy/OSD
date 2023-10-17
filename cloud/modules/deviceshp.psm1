@@ -107,7 +107,7 @@ function osdcloud-HPTPMDowngrade{
 function osdcloud-HPTPMBIOSSettings {
     osdcloud-HPBIOSSetSetting -SettingName 'TPM Device' -Value 'Available'
     osdcloud-HPBIOSSetSetting -SettingName 'TPM State' -Value 'Enable'
-    osdcloud-HPBIOSSetSetting -SettingName 'TPM Activation Policy' -Value 'No Prompts'
+    osdcloud-HPBIOSSetSetting -SettingName 'TPM Activation Policy' -Value 'No prompts'
 }
 function osdcloud-HPBIOSDetermine{
     [CmdletBinding()]
