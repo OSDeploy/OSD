@@ -49,7 +49,7 @@ function Invoke-HPTPMDownload {
     param ($WorkingFolder)
     Install-ModuleHPCMSL
     Import-Module -Name HPCMSL -Force
-    $TPMUpdate = osdcloud-HPTPMDetermine    
+    $TPMUpdate = Get-HPTPMDetermine    
     if ($TPMUpdate -ne $false)
         {
         if ((!($WorkingFolder))-or ($null -eq $WorkingFolder)){$WorkingFolder = "$env:TEMP\TPM"}
@@ -70,7 +70,7 @@ function Invoke-HPTPMEXEDownload {
     Install-ModuleHPCMSL
     Set-HPBIOSSetting -SettingName 'Virtualization Technology (VTx)' -Value 'Disable'
     Import-Module -Name HPCMSL -Force
-    $TPMUpdate = Set-HPTPMDetermine
+    $TPMUpdate = Get-HPTPMDetermine
     if ($TPMUpdate -ne $false)
         {
         $DownloadFolder = "C:\OSDCloud\HP\TPM"
@@ -95,8 +95,8 @@ function Invoke-HPTPMEXEInstall {
         [Parameter(Mandatory=$false)]
         $WorkingFolder
         )
-    $TPMUpdate = Set-HPTPMDetermine
-    if ($TPMUpdate){
+    $TPM = Get-HPTPMDetermine
+    if ($TPM){
         $DownloadFolder = "C:\OSDCloud\HP\TPM"
         $TPMUpdate = (Get-ChildItem -Path $DownloadFolder -Filter *.exe).FullName
         if (Test-Path $TPMUpdate){
