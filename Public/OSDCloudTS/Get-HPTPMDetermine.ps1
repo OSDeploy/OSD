@@ -72,7 +72,7 @@ function Invoke-HPTPMEXEDownload {
     Set-HPBIOSSetting -SettingName 'Virtualization Technology (VTx)' -Value 'Disable'
     Import-Module -Name HPCMSL -Force
     $TPMUpdate = Get-HPTPMDetermine
-    if ($TPMUpdate -ne $false)
+    if (!(($TPMUpdate -eq $false) -or ($TPMUpdate -eq "False")))
         {
         $DownloadFolder = "C:\OSDCloud\HP\TPM"
         if (!(Test-Path -Path $DownloadFolder)){New-Item -Path $DownloadFolder -ItemType Directory -Force |Out-Null}
