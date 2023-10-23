@@ -1,4 +1,4 @@
-function osdcloud-HPBIOSSetSetting {
+function Set-HPBIOSSetting {
     [CmdletBinding()]
 Param (
 	[Parameter(Mandatory=$true)]
