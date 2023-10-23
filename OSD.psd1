@@ -150,6 +150,7 @@
         'Get-RegCurrentVersion',
         'Get-ScreenPNG',
         'Get-SessionsXml',
+        'Get-SetupCompleteOSDCloudUSB',
         'Get-SystemFirmwareDevice',
         'Get-SystemFirmwareResource',
         'Get-SystemFirmwareUpdate',

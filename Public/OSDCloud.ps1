@@ -139,6 +139,8 @@
             USBPartitions = $null
             Version = [Version](Get-Module -Name OSD -ListAvailable | Sort-Object Version -Descending | Select-Object -First 1).Version
             WindowsDefenderUpdate  = $null
+            WindowsUpdate  = $null
+            WindowsUpdateDrivers  = $null
             WindowsImage = $null
             WindowsImageCount = $null
             ZTI = [bool]$false
@@ -1470,7 +1472,8 @@
         $HashVar | Out-File $ConfigFile
     }
     
-    if ($Global:OSDCloud.DevMode -eq $true) {
+
+    if (($Global:OSDCloud.DevMode -eq $true)-or (Get-SetupCompleteOSDCloudUSB -eq $true)) {
         Write-SectionHeader "Creating SetupComplete Files and populating with requested tasks."
         Set-SetupCompleteCreateStart
         if ($Global:OSDCloud.SetWiFi -eq $true) {
@@ -1484,6 +1487,20 @@
                     Set-SetupCompleteDefenderUpdate
                 }
                 else {Write-DarkGrayHost "No Internet or Future WiFi Configured, disabling Defender Updates"}
+            }
+            if ($Global:OSDCloud.WindowsUpdate -eq $true){
+                if ($WebConnection -eq $True -or $SetWiFi -eq $True){
+                    Write-DarkGrayHost "Configuring Windows Updates for running during SetupComplete"
+                    Set-SetupCompleteStartWindowsUpdate
+                }
+                else {Write-DarkGrayHost "No Internet or Future WiFi Configured, disabling Windows Updates"}
+            }
+            if ($Global:OSDCloud.WindowsUpdateDrivers -eq $true){
+                if ($WebConnection -eq $True -or $SetWiFi -eq $True){
+                    Write-DarkGrayHost "Configuring Windows Update Drivers for running during SetupComplete"
+                    Set-SetupCompleteStartWindowsUpdateDriver
+                }
+                else {Write-DarkGrayHost "No Internet or Future WiFi Configured, disabling Windows Update Driver Updates"}
             }
             if ($Global:OSDCloud.NetFx3 -eq $true){
                 if ($WebConnection -eq $True -or $SetWiFi -eq $True){
@@ -1505,6 +1522,7 @@
                 Write-DarkGrayHost "Configuring OEM Activation for during SetupComplete"
                 Set-SetupCompleteOEMActivation
             }
+            <# Plan to remove in future - Noted 23.10.23
             if ($Global:OSDCloud.MS365Install -eq $true){
                 if ($WebConnection -eq $True -or $SetWiFi -eq $True){
                     Write-DarkGrayHost "Configuring M365 Install during SetupComplete"
@@ -1512,6 +1530,11 @@
                 }
                 else {Write-DarkGrayHost "No Internet or Future WiFi Configured, disabling M365 Install"}
             }
+            #>
+            if (Get-SetupCompleteOSDCloudUSB -eq $true){
+                Set-SetupCompleteOSDCloudUSB
+            }
+            
         }
         #=================================================
         #region HyperV Config for Specialize Phase
