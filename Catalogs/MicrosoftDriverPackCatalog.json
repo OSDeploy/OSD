@@ -1,6 +1,6 @@
 [
     {
-        "CatalogVersion":  "23.10.11",
+        "CatalogVersion":  "23.10.19",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "21.05.06",
@@ -18,7 +18,7 @@
         "HashMD5":  "C853F3908DA15E2CDFC03C6AAD70FBA0"
     },
     {
-        "CatalogVersion":  "23.10.11",
+        "CatalogVersion":  "23.10.19",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "21.05.06",
@@ -36,7 +36,7 @@
         "HashMD5":  "5F13B5E6A384999615E95C1EA63799"
     },
     {
-        "CatalogVersion":  "23.10.11",
+        "CatalogVersion":  "23.10.19",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "21.05.06",
@@ -54,7 +54,7 @@
         "HashMD5":  "4725ED9879E6FC5FC5CADDB2D96FCC"
     },
     {
-        "CatalogVersion":  "23.10.11",
+        "CatalogVersion":  "23.10.19",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "21.05.06",
@@ -72,7 +72,7 @@
         "HashMD5":  "4725ED9879E6FC5FC5CADDB2D96FCC"
     },
     {
-        "CatalogVersion":  "23.10.11",
+        "CatalogVersion":  "23.10.19",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "21.05.06",
@@ -90,7 +90,7 @@
         "HashMD5":  "C6656B42C46F6EE32CD3C6E7CE8F33D"
     },
     {
-        "CatalogVersion":  "23.10.11",
+        "CatalogVersion":  "23.10.19",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "21.07.29",
@@ -108,7 +108,7 @@
         "HashMD5":  "D88E5E0AE94EA80E317AD85B2867"
     },
     {
-        "CatalogVersion":  "23.10.11",
+        "CatalogVersion":  "23.10.19",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "23.09.20",
@@ -126,7 +126,7 @@
         "HashMD5":  "871C3CD5CFBDFD2DB7625EAB23555C"
     },
     {
-        "CatalogVersion":  "23.10.11",
+        "CatalogVersion":  "23.10.19",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "23.09.20",
@@ -144,7 +144,7 @@
         "HashMD5":  "C734A093ACDF34BABBA5A107DCBEBB2"
     },
     {
-        "CatalogVersion":  "23.10.11",
+        "CatalogVersion":  "23.10.19",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "23.09.20",
@@ -162,7 +162,7 @@
         "HashMD5":  "871C3CD5CFBDFD2DB7625EAB23555C"
     },
     {
-        "CatalogVersion":  "23.10.11",
+        "CatalogVersion":  "23.10.19",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "23.09.20",
@@ -180,79 +180,79 @@
         "HashMD5":  "C734A093ACDF34BABBA5A107DCBEBB2"
     },
     {
-        "CatalogVersion":  "23.10.11",
+        "CatalogVersion":  "23.10.19",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  "23.09.28",
+        "ReleaseDate":  "23.10.12",
         "Manufacturer":  "Microsoft",
         "Model":  "Surface Book 3",
         "Product":  "Surface_Book_3_1900",
         "Name":  "Microsoft Surface Book 3 13 Win10 21H2",
         "PackageID":  "101315",
-        "FileName":  "SurfaceBook3_Win10_19044_23.092.28627.0.msi",
-        "Url":  "https://download.microsoft.com/download/6/1/3/6139ef9d-d467-4fc4-94f2-8ebbf705110c/SurfaceBook3_Win10_19044_23.092.28627.0.msi",
+        "FileName":  "SurfaceBook3_Win10_19044_23.101.6769.0.msi",
+        "Url":  "https://download.microsoft.com/download/6/1/3/6139ef9d-d467-4fc4-94f2-8ebbf705110c/SurfaceBook3_Win10_19044_23.101.6769.0.msi",
         "DownloadCenter":  "https://www.microsoft.com/en-us/download/details.aspx?id=101315",
         "OSVersion":  "Windows 10 x64",
         "OSReleaseId":  "21H2",
         "OSBuild":  "19044",
-        "HashMD5":  "CDAEE2924EACE4170F4406C40F29C5"
+        "HashMD5":  "436569EFADFAC553D1A26AD07ADA887A"
     },
     {
-        "CatalogVersion":  "23.10.11",
+        "CatalogVersion":  "23.10.19",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  "23.09.28",
+        "ReleaseDate":  "23.10.12",
         "Manufacturer":  "Microsoft",
         "Model":  "Surface Book 3",
         "Product":  "Surface_Book_3_1900",
         "Name":  "Microsoft Surface Book 3 13 Win11 21H2",
         "PackageID":  "101315",
-        "FileName":  "SurfaceBook3_Win11_22000_23.092.28628.0.msi",
-        "Url":  "https://download.microsoft.com/download/6/1/3/6139ef9d-d467-4fc4-94f2-8ebbf705110c/SurfaceBook3_Win11_22000_23.092.28628.0.msi",
+        "FileName":  "SurfaceBook3_Win11_22000_23.101.6769.0.msi",
+        "Url":  "https://download.microsoft.com/download/6/1/3/6139ef9d-d467-4fc4-94f2-8ebbf705110c/SurfaceBook3_Win11_22000_23.101.6769.0.msi",
         "DownloadCenter":  "https://www.microsoft.com/en-us/download/details.aspx?id=101315",
         "OSVersion":  "Windows 11 x64",
         "OSReleaseId":  "21H2",
         "OSBuild":  "22000",
-        "HashMD5":  "9DDB8831D31FC52BC32AFDA612F955B"
+        "HashMD5":  "EDF728E4FE7CFA6E5B588DE5C3D8AC69"
     },
     {
-        "CatalogVersion":  "23.10.11",
+        "CatalogVersion":  "23.10.19",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  "23.09.28",
+        "ReleaseDate":  "23.10.12",
         "Manufacturer":  "Microsoft",
         "Model":  "Surface Book 3",
         "Product":  "Surface_Book_3_1899",
         "Name":  "Microsoft Surface Book 3 15 Win10 21H2",
         "PackageID":  "101315",
-        "FileName":  "SurfaceBook3_Win10_19044_23.092.28627.0.msi",
-        "Url":  "https://download.microsoft.com/download/6/1/3/6139ef9d-d467-4fc4-94f2-8ebbf705110c/SurfaceBook3_Win10_19044_23.092.28627.0.msi",
+        "FileName":  "SurfaceBook3_Win10_19044_23.101.6769.0.msi",
+        "Url":  "https://download.microsoft.com/download/6/1/3/6139ef9d-d467-4fc4-94f2-8ebbf705110c/SurfaceBook3_Win10_19044_23.101.6769.0.msi",
         "DownloadCenter":  "https://www.microsoft.com/en-us/download/details.aspx?id=101315",
         "OSVersion":  "Windows 10 x64",
         "OSReleaseId":  "21H2",
         "OSBuild":  "19044",
-        "HashMD5":  "CDAEE2924EACE4170F4406C40F29C5"
+        "HashMD5":  "436569EFADFAC553D1A26AD07ADA887A"
     },
     {
-        "CatalogVersion":  "23.10.11",
+        "CatalogVersion":  "23.10.19",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  "23.09.28",
+        "ReleaseDate":  "23.10.12",
         "Manufacturer":  "Microsoft",
         "Model":  "Surface Book 3",
         "Product":  "Surface_Book_3_1899",
         "Name":  "Microsoft Surface Book 3 15 Win11 21H2",
         "PackageID":  "101315",
-        "FileName":  "SurfaceBook3_Win11_22000_23.092.28628.0.msi",
-        "Url":  "https://download.microsoft.com/download/6/1/3/6139ef9d-d467-4fc4-94f2-8ebbf705110c/SurfaceBook3_Win11_22000_23.092.28628.0.msi",
+        "FileName":  "SurfaceBook3_Win11_22000_23.101.6769.0.msi",
+        "Url":  "https://download.microsoft.com/download/6/1/3/6139ef9d-d467-4fc4-94f2-8ebbf705110c/SurfaceBook3_Win11_22000_23.101.6769.0.msi",
         "DownloadCenter":  "https://www.microsoft.com/en-us/download/details.aspx?id=101315",
         "OSVersion":  "Windows 11 x64",
         "OSReleaseId":  "21H2",
         "OSBuild":  "22000",
-        "HashMD5":  "9DDB8831D31FC52BC32AFDA612F955B"
+        "HashMD5":  "EDF728E4FE7CFA6E5B588DE5C3D8AC69"
     },
     {
-        "CatalogVersion":  "23.10.11",
+        "CatalogVersion":  "23.10.19",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "22.11.10",
@@ -270,7 +270,7 @@
         "HashMD5":  "A1E3DB6A90D460B58196284EF0F24622"
     },
     {
-        "CatalogVersion":  "23.10.11",
+        "CatalogVersion":  "23.10.19",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "22.11.10",
@@ -288,7 +288,7 @@
         "HashMD5":  "A1E3DB6A90D460B58196284EF0F24622"
     },
     {
-        "CatalogVersion":  "23.10.11",
+        "CatalogVersion":  "23.10.19",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "22.11.10",
@@ -306,7 +306,7 @@
         "HashMD5":  "AA9FA1E0F756F03D17234FC3EBF974CB"
     },
     {
-        "CatalogVersion":  "23.10.11",
+        "CatalogVersion":  "23.10.19",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "23.10.06",
@@ -324,7 +324,7 @@
         "HashMD5":  "87C0196D6D86F49629416B29B6ABE998"
     },
     {
-        "CatalogVersion":  "23.10.11",
+        "CatalogVersion":  "23.10.19",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "23.10.06",
@@ -342,7 +342,7 @@
         "HashMD5":  "87C0196D6D86F49629416B29B6ABE998"
     },
     {
-        "CatalogVersion":  "23.10.11",
+        "CatalogVersion":  "23.10.19",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "23.10.06",
@@ -360,7 +360,7 @@
         "HashMD5":  "87C0196D6D86F49629416B29B6ABE998"
     },
     {
-        "CatalogVersion":  "23.10.11",
+        "CatalogVersion":  "23.10.19",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "23.09.28",
@@ -378,7 +378,7 @@
         "HashMD5":  "149A5E691D96F8831C15787A738DD15"
     },
     {
-        "CatalogVersion":  "23.10.11",
+        "CatalogVersion":  "23.10.19",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "23.09.28",
@@ -396,7 +396,7 @@
         "HashMD5":  "336E1C1216584B98C5BD7F3AA5AEF29C"
     },
     {
-        "CatalogVersion":  "23.10.11",
+        "CatalogVersion":  "23.10.19",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "23.09.28",
@@ -414,7 +414,7 @@
         "HashMD5":  "149A5E691D96F8831C15787A738DD15"
     },
     {
-        "CatalogVersion":  "23.10.11",
+        "CatalogVersion":  "23.10.19",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "23.09.28",
@@ -432,7 +432,7 @@
         "HashMD5":  "336E1C1216584B98C5BD7F3AA5AEF29C"
     },
     {
-        "CatalogVersion":  "23.10.11",
+        "CatalogVersion":  "23.10.19",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "23.09.28",
@@ -450,7 +450,7 @@
         "HashMD5":  "149A5E691D96F8831C15787A738DD15"
     },
     {
-        "CatalogVersion":  "23.10.11",
+        "CatalogVersion":  "23.10.19",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "23.09.28",
@@ -468,7 +468,7 @@
         "HashMD5":  "336E1C1216584B98C5BD7F3AA5AEF29C"
     },
     {
-        "CatalogVersion":  "23.10.11",
+        "CatalogVersion":  "23.10.19",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "23.08.18",
@@ -486,7 +486,7 @@
         "HashMD5":  "17FA186D7A23702D2ADAD5B5C7DC4432"
     },
     {
-        "CatalogVersion":  "23.10.11",
+        "CatalogVersion":  "23.10.19",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "23.08.18",
@@ -504,7 +504,7 @@
         "HashMD5":  "17FA186D7A23702D2ADAD5B5C7DC4432"
     },
     {
-        "CatalogVersion":  "23.10.11",
+        "CatalogVersion":  "23.10.19",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "23.08.18",
@@ -522,7 +522,7 @@
         "HashMD5":  "17FA186D7A23702D2ADAD5B5C7DC4432"
     },
     {
-        "CatalogVersion":  "23.10.11",
+        "CatalogVersion":  "23.10.19",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "21.11.18",
@@ -540,7 +540,7 @@
         "HashMD5":  "F65EE1F58D5E4740573F581545E71053"
     },
     {
-        "CatalogVersion":  "23.10.11",
+        "CatalogVersion":  "23.10.19",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "22.08.25",
@@ -558,7 +558,7 @@
         "HashMD5":  "DE56A911F66E1BE9BEB4ABAA0222055"
     },
     {
-        "CatalogVersion":  "23.10.11",
+        "CatalogVersion":  "23.10.19",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "22.08.25",
@@ -576,43 +576,43 @@
         "HashMD5":  "DE56A911F66E1BE9BEB4ABAA0222055"
     },
     {
-        "CatalogVersion":  "23.10.11",
+        "CatalogVersion":  "23.10.19",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  "23.09.14",
+        "ReleaseDate":  "23.10.12",
         "Manufacturer":  "Microsoft",
         "Model":  "Surface Laptop 3",
         "Product":  "Surface_Laptop_3_1867:1868",
         "Name":  "Microsoft Surface Laptop 3 13 Intel Win10 21H2",
         "PackageID":  "100429",
-        "FileName":  "SurfaceLaptop3_Intel_Win10_19044_23.091.15598.0.msi",
-        "Url":  "https://download.microsoft.com/download/3/f/4/3f4f5dff-b6a9-4006-87aa-142a8e6f77cb/SurfaceLaptop3_Intel_Win10_19044_23.091.15598.0.msi",
+        "FileName":  "SurfaceLaptop3_Intel_Win10_19044_23.101.7164.0.msi",
+        "Url":  "https://download.microsoft.com/download/3/f/4/3f4f5dff-b6a9-4006-87aa-142a8e6f77cb/SurfaceLaptop3_Intel_Win10_19044_23.101.7164.0.msi",
         "DownloadCenter":  "https://www.microsoft.com/en-us/download/details.aspx?id=100429",
         "OSVersion":  "Windows 10 x64",
         "OSReleaseId":  "21H2",
         "OSBuild":  "19044",
-        "HashMD5":  "1CE2832873DEC15BDD9FD0A9402E44"
+        "HashMD5":  "793ED7617D63EFB24785DC252C79A70"
     },
     {
-        "CatalogVersion":  "23.10.11",
+        "CatalogVersion":  "23.10.19",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  "23.09.14",
+        "ReleaseDate":  "23.10.12",
         "Manufacturer":  "Microsoft",
         "Model":  "Surface Laptop 3",
         "Product":  "Surface_Laptop_3_1867:1868",
         "Name":  "Microsoft Surface Laptop 3 13 Intel Win11 21H2",
         "PackageID":  "100429",
-        "FileName":  "SurfaceLaptop3_Intel_Win11_22000_23.091.15598.0.msi",
-        "Url":  "https://download.microsoft.com/download/3/f/4/3f4f5dff-b6a9-4006-87aa-142a8e6f77cb/SurfaceLaptop3_Intel_Win11_22000_23.091.15598.0.msi",
+        "FileName":  "SurfaceLaptop3_Intel_Win11_22000_23.101.7094.0.msi",
+        "Url":  "https://download.microsoft.com/download/3/f/4/3f4f5dff-b6a9-4006-87aa-142a8e6f77cb/SurfaceLaptop3_Intel_Win11_22000_23.101.7094.0.msi",
         "DownloadCenter":  "https://www.microsoft.com/en-us/download/details.aspx?id=100429",
         "OSVersion":  "Windows 11 x64",
         "OSReleaseId":  "21H2",
         "OSBuild":  "22000",
-        "HashMD5":  "B1ECE3CC04E25808B48F874FD3BD46A"
+        "HashMD5":  "1AFB64EFE1A149BD5116A618BD5634"
     },
     {
-        "CatalogVersion":  "23.10.11",
+        "CatalogVersion":  "23.10.19",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "22.03.17",
@@ -630,7 +630,7 @@
         "HashMD5":  "77EC8F427C96F629186A47D1A0A4741B"
     },
     {
-        "CatalogVersion":  "23.10.11",
+        "CatalogVersion":  "23.10.19",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "22.03.17",
@@ -648,43 +648,43 @@
         "HashMD5":  "4784A3B46FF5D315FCBCFADAC78E2B"
     },
     {
-        "CatalogVersion":  "23.10.11",
+        "CatalogVersion":  "23.10.19",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  "23.09.14",
+        "ReleaseDate":  "23.10.12",
         "Manufacturer":  "Microsoft",
         "Model":  "Surface Laptop 3",
         "Product":  "Surface_Laptop_3_1872",
         "Name":  "Microsoft Surface Laptop 3 15 Intel Win10 21H2",
         "PackageID":  "100429",
-        "FileName":  "SurfaceLaptop3_Intel_Win10_19044_23.091.15598.0.msi",
-        "Url":  "https://download.microsoft.com/download/3/f/4/3f4f5dff-b6a9-4006-87aa-142a8e6f77cb/SurfaceLaptop3_Intel_Win10_19044_23.091.15598.0.msi",
+        "FileName":  "SurfaceLaptop3_Intel_Win10_19044_23.101.7164.0.msi",
+        "Url":  "https://download.microsoft.com/download/3/f/4/3f4f5dff-b6a9-4006-87aa-142a8e6f77cb/SurfaceLaptop3_Intel_Win10_19044_23.101.7164.0.msi",
         "DownloadCenter":  "https://www.microsoft.com/en-us/download/details.aspx?id=100429",
         "OSVersion":  "Windows 10 x64",
         "OSReleaseId":  "21H2",
         "OSBuild":  "19044",
-        "HashMD5":  "1CE2832873DEC15BDD9FD0A9402E44"
+        "HashMD5":  "793ED7617D63EFB24785DC252C79A70"
     },
     {
-        "CatalogVersion":  "23.10.11",
+        "CatalogVersion":  "23.10.19",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  "23.09.14",
+        "ReleaseDate":  "23.10.12",
         "Manufacturer":  "Microsoft",
         "Model":  "Surface Laptop 3",
         "Product":  "Surface_Laptop_3_1872",
         "Name":  "Microsoft Surface Laptop 3 15 Intel Win11 21H2",
         "PackageID":  "100429",
-        "FileName":  "SurfaceLaptop3_Intel_Win11_22000_23.091.15598.0.msi",
-        "Url":  "https://download.microsoft.com/download/3/f/4/3f4f5dff-b6a9-4006-87aa-142a8e6f77cb/SurfaceLaptop3_Intel_Win11_22000_23.091.15598.0.msi",
+        "FileName":  "SurfaceLaptop3_Intel_Win11_22000_23.101.7094.0.msi",
+        "Url":  "https://download.microsoft.com/download/3/f/4/3f4f5dff-b6a9-4006-87aa-142a8e6f77cb/SurfaceLaptop3_Intel_Win11_22000_23.101.7094.0.msi",
         "DownloadCenter":  "https://www.microsoft.com/en-us/download/details.aspx?id=100429",
         "OSVersion":  "Windows 11 x64",
         "OSReleaseId":  "21H2",
         "OSBuild":  "22000",
-        "HashMD5":  "B1ECE3CC04E25808B48F874FD3BD46A"
+        "HashMD5":  "1AFB64EFE1A149BD5116A618BD5634"
     },
     {
-        "CatalogVersion":  "23.10.11",
+        "CatalogVersion":  "23.10.19",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "23.09.22",
@@ -702,7 +702,7 @@
         "HashMD5":  "96743A62D71AF5F4BD17EE3113D79A8D"
     },
     {
-        "CatalogVersion":  "23.10.11",
+        "CatalogVersion":  "23.10.19",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "23.09.22",
@@ -720,43 +720,43 @@
         "HashMD5":  "635A58E2CB328FD5E539F7FBB81DEBF6"
     },
     {
-        "CatalogVersion":  "23.10.11",
+        "CatalogVersion":  "23.10.19",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  "23.09.14",
+        "ReleaseDate":  "23.10.16",
         "Manufacturer":  "Microsoft",
         "Model":  "Surface Laptop 4",
         "Product":  "Surface_Laptop_4_1950:1951",
         "Name":  "Microsoft Surface Laptop 4 13 Intel Win10 21H2",
         "PackageID":  "102924",
-        "FileName":  "SurfaceLaptop4_Intel_Win10_19044_23.091.11395.0.msi",
-        "Url":  "https://download.microsoft.com/download/f/7/0/f70b3d0a-59b1-4842-9130-0c152bb738ba/SurfaceLaptop4_Intel_Win10_19044_23.091.11395.0.msi",
+        "FileName":  "SurfaceLaptop4_Intel_Win10_19044_23.101.15702.0.msi",
+        "Url":  "https://download.microsoft.com/download/f/7/0/f70b3d0a-59b1-4842-9130-0c152bb738ba/SurfaceLaptop4_Intel_Win10_19044_23.101.15702.0.msi",
         "DownloadCenter":  "https://www.microsoft.com/en-us/download/details.aspx?id=102924",
         "OSVersion":  "Windows 10 x64",
         "OSReleaseId":  "21H2",
         "OSBuild":  "19044",
-        "HashMD5":  "D6B820EB0B6D479182CEFA8B32EB2C4"
+        "HashMD5":  "7770BCB7471AE16BD026F03EC577279B"
     },
     {
-        "CatalogVersion":  "23.10.11",
+        "CatalogVersion":  "23.10.19",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  "23.09.14",
+        "ReleaseDate":  "23.10.16",
         "Manufacturer":  "Microsoft",
         "Model":  "Surface Laptop 4",
         "Product":  "Surface_Laptop_4_1950:1951",
         "Name":  "Microsoft Surface Laptop 4 13 Intel Win11 21H2",
         "PackageID":  "102924",
-        "FileName":  "SurfaceLaptop4_Intel_Win11_22000_23.091.11396.0.msi",
-        "Url":  "https://download.microsoft.com/download/f/7/0/f70b3d0a-59b1-4842-9130-0c152bb738ba/SurfaceLaptop4_Intel_Win11_22000_23.091.11396.0.msi",
+        "FileName":  "SurfaceLaptop4_Intel_Win11_22000_23.101.15703.0.msi",
+        "Url":  "https://download.microsoft.com/download/f/7/0/f70b3d0a-59b1-4842-9130-0c152bb738ba/SurfaceLaptop4_Intel_Win11_22000_23.101.15703.0.msi",
         "DownloadCenter":  "https://www.microsoft.com/en-us/download/details.aspx?id=102924",
         "OSVersion":  "Windows 11 x64",
         "OSReleaseId":  "21H2",
         "OSBuild":  "22000",
-        "HashMD5":  "75C1F8A610621B7AE16AAA9A2254758D"
+        "HashMD5":  "8B3B83409D24C65EAC184987E28AE8"
     },
     {
-        "CatalogVersion":  "23.10.11",
+        "CatalogVersion":  "23.10.19",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "23.09.22",
@@ -774,7 +774,7 @@
         "HashMD5":  "96743A62D71AF5F4BD17EE3113D79A8D"
     },
     {
-        "CatalogVersion":  "23.10.11",
+        "CatalogVersion":  "23.10.19",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "23.09.22",
@@ -792,43 +792,43 @@
         "HashMD5":  "635A58E2CB328FD5E539F7FBB81DEBF6"
     },
     {
-        "CatalogVersion":  "23.10.11",
+        "CatalogVersion":  "23.10.19",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  "23.09.14",
+        "ReleaseDate":  "23.10.16",
         "Manufacturer":  "Microsoft",
         "Model":  "Surface Laptop 4",
         "Product":  "Surface_Laptop_4_1978:1979",
         "Name":  "Microsoft Surface Laptop 4 15 Intel Win10 21H2",
         "PackageID":  "102924",
-        "FileName":  "SurfaceLaptop4_Intel_Win10_19044_23.091.11395.0.msi",
-        "Url":  "https://download.microsoft.com/download/f/7/0/f70b3d0a-59b1-4842-9130-0c152bb738ba/SurfaceLaptop4_Intel_Win10_19044_23.091.11395.0.msi",
+        "FileName":  "SurfaceLaptop4_Intel_Win10_19044_23.101.15702.0.msi",
+        "Url":  "https://download.microsoft.com/download/f/7/0/f70b3d0a-59b1-4842-9130-0c152bb738ba/SurfaceLaptop4_Intel_Win10_19044_23.101.15702.0.msi",
         "DownloadCenter":  "https://www.microsoft.com/en-us/download/details.aspx?id=102924",
         "OSVersion":  "Windows 10 x64",
         "OSReleaseId":  "21H2",
         "OSBuild":  "19044",
-        "HashMD5":  "D6B820EB0B6D479182CEFA8B32EB2C4"
+        "HashMD5":  "7770BCB7471AE16BD026F03EC577279B"
     },
     {
-        "CatalogVersion":  "23.10.11",
+        "CatalogVersion":  "23.10.19",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  "23.09.14",
+        "ReleaseDate":  "23.10.16",
         "Manufacturer":  "Microsoft",
         "Model":  "Surface Laptop 4",
         "Product":  "Surface_Laptop_4_1978:1979",
         "Name":  "Microsoft Surface Laptop 4 15 Intel Win11 21H2",
         "PackageID":  "102924",
-        "FileName":  "SurfaceLaptop4_Intel_Win11_22000_23.091.11396.0.msi",
-        "Url":  "https://download.microsoft.com/download/f/7/0/f70b3d0a-59b1-4842-9130-0c152bb738ba/SurfaceLaptop4_Intel_Win11_22000_23.091.11396.0.msi",
+        "FileName":  "SurfaceLaptop4_Intel_Win11_22000_23.101.15703.0.msi",
+        "Url":  "https://download.microsoft.com/download/f/7/0/f70b3d0a-59b1-4842-9130-0c152bb738ba/SurfaceLaptop4_Intel_Win11_22000_23.101.15703.0.msi",
         "DownloadCenter":  "https://www.microsoft.com/en-us/download/details.aspx?id=102924",
         "OSVersion":  "Windows 11 x64",
         "OSReleaseId":  "21H2",
         "OSBuild":  "22000",
-        "HashMD5":  "75C1F8A610621B7AE16AAA9A2254758D"
+        "HashMD5":  "8B3B83409D24C65EAC184987E28AE8"
     },
     {
-        "CatalogVersion":  "23.10.11",
+        "CatalogVersion":  "23.10.19",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "23.10.09",
@@ -846,7 +846,7 @@
         "HashMD5":  "37D5996A58F854E233D6BB438DA63C54"
     },
     {
-        "CatalogVersion":  "23.10.11",
+        "CatalogVersion":  "23.10.19",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "23.10.09",
@@ -864,7 +864,7 @@
         "HashMD5":  "A1EB9B717F407E6E2271E92C7A6282"
     },
     {
-        "CatalogVersion":  "23.10.11",
+        "CatalogVersion":  "23.10.19",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "23.10.09",
@@ -882,7 +882,7 @@
         "HashMD5":  "37D5996A58F854E233D6BB438DA63C54"
     },
     {
-        "CatalogVersion":  "23.10.11",
+        "CatalogVersion":  "23.10.19",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "23.10.09",
@@ -900,7 +900,7 @@
         "HashMD5":  "A1EB9B717F407E6E2271E92C7A6282"
     },
     {
-        "CatalogVersion":  "23.10.11",
+        "CatalogVersion":  "23.10.19",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "23.10.09",
@@ -918,7 +918,7 @@
         "HashMD5":  "37D5996A58F854E233D6BB438DA63C54"
     },
     {
-        "CatalogVersion":  "23.10.11",
+        "CatalogVersion":  "23.10.19",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "23.10.09",
@@ -936,7 +936,7 @@
         "HashMD5":  "A1EB9B717F407E6E2271E92C7A6282"
     },
     {
-        "CatalogVersion":  "23.10.11",
+        "CatalogVersion":  "23.10.19",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "23.10.09",
@@ -954,7 +954,7 @@
         "HashMD5":  "37D5996A58F854E233D6BB438DA63C54"
     },
     {
-        "CatalogVersion":  "23.10.11",
+        "CatalogVersion":  "23.10.19",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "23.10.09",
@@ -972,7 +972,7 @@
         "HashMD5":  "A1EB9B717F407E6E2271E92C7A6282"
     },
     {
-        "CatalogVersion":  "23.10.11",
+        "CatalogVersion":  "23.10.19",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "23.08.21",
@@ -990,7 +990,7 @@
         "HashMD5":  "F8E56CB3D2FF9BE1179AC19C4FD7FB5"
     },
     {
-        "CatalogVersion":  "23.10.11",
+        "CatalogVersion":  "23.10.19",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "23.08.21",
@@ -1008,7 +1008,7 @@
         "HashMD5":  "37B5A25856FBDBEAA95C9CB8E7C74E7E"
     },
     {
-        "CatalogVersion":  "23.10.11",
+        "CatalogVersion":  "23.10.19",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "23.05.17",
@@ -1026,7 +1026,7 @@
         "HashMD5":  "26DCD8937788796116C56614DCE2E72B"
     },
     {
-        "CatalogVersion":  "23.10.11",
+        "CatalogVersion":  "23.10.19",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "23.10.05",
@@ -1044,7 +1044,7 @@
         "HashMD5":  "85F2C71E3C3BB736C9AF967042C4B14"
     },
     {
-        "CatalogVersion":  "23.10.11",
+        "CatalogVersion":  "23.10.19",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "23.10.05",
@@ -1062,7 +1062,7 @@
         "HashMD5":  "7C42B55FA7C0B08CD5C49C4A560ADEC"
     },
     {
-        "CatalogVersion":  "23.10.11",
+        "CatalogVersion":  "23.10.19",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "21.04.23",
@@ -1080,7 +1080,7 @@
         "HashMD5":  "CE8A3CBD0D3B535DCAF789C6B1DBA4"
     },
     {
-        "CatalogVersion":  "23.10.11",
+        "CatalogVersion":  "23.10.19",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "21.04.23",
@@ -1098,7 +1098,7 @@
         "HashMD5":  "30C2CF9A92E4709FB9D122AC375396D"
     },
     {
-        "CatalogVersion":  "23.10.11",
+        "CatalogVersion":  "23.10.19",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "21.05.06",
@@ -1116,7 +1116,7 @@
         "HashMD5":  "CAD26E5A2ACB6590D0878DAD6E09F23"
     },
     {
-        "CatalogVersion":  "23.10.11",
+        "CatalogVersion":  "23.10.19",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "21.07.29",
@@ -1134,7 +1134,7 @@
         "HashMD5":  "E75291B1582DBF487C3BAC4EC968865"
     },
     {
-        "CatalogVersion":  "23.10.11",
+        "CatalogVersion":  "23.10.19",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "23.09.28",
@@ -1152,7 +1152,7 @@
         "HashMD5":  "EE29DE89335983624AC0F8B8FAE198"
     },
     {
-        "CatalogVersion":  "23.10.11",
+        "CatalogVersion":  "23.10.19",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "23.09.28",
@@ -1170,7 +1170,7 @@
         "HashMD5":  "294C1B5B3EB50F2B024F55397341967"
     },
     {
-        "CatalogVersion":  "23.10.11",
+        "CatalogVersion":  "23.10.19",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "23.09.28",
@@ -1188,7 +1188,7 @@
         "HashMD5":  "EE29DE89335983624AC0F8B8FAE198"
     },
     {
-        "CatalogVersion":  "23.10.11",
+        "CatalogVersion":  "23.10.19",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "23.09.28",
@@ -1206,7 +1206,7 @@
         "HashMD5":  "294C1B5B3EB50F2B024F55397341967"
     },
     {
-        "CatalogVersion":  "23.10.11",
+        "CatalogVersion":  "23.10.19",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "23.09.28",
@@ -1224,7 +1224,7 @@
         "HashMD5":  "B331596D6815FEBA63777DBBF398D1BF"
     },
     {
-        "CatalogVersion":  "23.10.11",
+        "CatalogVersion":  "23.10.19",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "23.09.28",
@@ -1242,7 +1242,7 @@
         "HashMD5":  "B2D03FD42038DBBEE6D4EC4D12E49C74"
     },
     {
-        "CatalogVersion":  "23.10.11",
+        "CatalogVersion":  "23.10.19",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "23.09.28",
@@ -1260,7 +1260,7 @@
         "HashMD5":  "B331596D6815FEBA63777DBBF398D1BF"
     },
     {
-        "CatalogVersion":  "23.10.11",
+        "CatalogVersion":  "23.10.19",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "23.09.28",
@@ -1278,7 +1278,7 @@
         "HashMD5":  "B2D03FD42038DBBEE6D4EC4D12E49C74"
     },
     {
-        "CatalogVersion":  "23.10.11",
+        "CatalogVersion":  "23.10.19",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "23.10.09",
@@ -1296,7 +1296,7 @@
         "HashMD5":  "FAEE6EE420AF81512CA4A5A25DFACF"
     },
     {
-        "CatalogVersion":  "23.10.11",
+        "CatalogVersion":  "23.10.19",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "23.10.09",
@@ -1314,7 +1314,7 @@
         "HashMD5":  "7FD23D528A621DFB501D714AC3BF87F5"
     },
     {
-        "CatalogVersion":  "23.10.11",
+        "CatalogVersion":  "23.10.19",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "23.09.14",
@@ -1332,7 +1332,7 @@
         "HashMD5":  "CA75853DA6BE9DF95CD5C579E2C80"
     },
     {
-        "CatalogVersion":  "23.10.11",
+        "CatalogVersion":  "23.10.19",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "23.09.14",
@@ -1350,7 +1350,7 @@
         "HashMD5":  "F289A63D3C7F2681A4F3A9A5DB6E26"
     },
     {
-        "CatalogVersion":  "23.10.11",
+        "CatalogVersion":  "23.10.19",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "23.09.14",
@@ -1368,7 +1368,7 @@
         "HashMD5":  "CA75853DA6BE9DF95CD5C579E2C80"
     },
     {
-        "CatalogVersion":  "23.10.11",
+        "CatalogVersion":  "23.10.19",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "23.09.14",
@@ -1386,7 +1386,7 @@
         "HashMD5":  "F289A63D3C7F2681A4F3A9A5DB6E26"
     },
     {
-        "CatalogVersion":  "23.10.11",
+        "CatalogVersion":  "23.10.19",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "23.10.04",
@@ -1404,7 +1404,7 @@
         "HashMD5":  "7CBE243426B1BEAD368E864FBF8E012"
     },
     {
-        "CatalogVersion":  "23.10.11",
+        "CatalogVersion":  "23.10.19",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "23.10.04",
@@ -1422,7 +1422,7 @@
         "HashMD5":  "D6727C2573AC78DE2A53EB9FA47F3C92"
     },
     {
-        "CatalogVersion":  "23.10.11",
+        "CatalogVersion":  "23.10.19",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "23.10.04",
@@ -1440,7 +1440,7 @@
         "HashMD5":  "7CBE243426B1BEAD368E864FBF8E012"
     },
     {
-        "CatalogVersion":  "23.10.11",
+        "CatalogVersion":  "23.10.19",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "23.10.04",
@@ -1458,7 +1458,7 @@
         "HashMD5":  "D6727C2573AC78DE2A53EB9FA47F3C92"
     },
     {
-        "CatalogVersion":  "23.10.11",
+        "CatalogVersion":  "23.10.19",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "23.10.04",
@@ -1476,7 +1476,7 @@
         "HashMD5":  "7CBE243426B1BEAD368E864FBF8E012"
     },
     {
-        "CatalogVersion":  "23.10.11",
+        "CatalogVersion":  "23.10.19",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "23.10.04",
@@ -1494,7 +1494,7 @@
         "HashMD5":  "D6727C2573AC78DE2A53EB9FA47F3C92"
     },
     {
-        "CatalogVersion":  "23.10.11",
+        "CatalogVersion":  "23.10.19",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "23.07.17",
@@ -1512,7 +1512,7 @@
         "HashMD5":  "EA80AEE28528CD986D8A4E6E432D55"
     },
     {
-        "CatalogVersion":  "23.10.11",
+        "CatalogVersion":  "23.10.19",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "23.07.17",
@@ -1530,7 +1530,7 @@
         "HashMD5":  "EA80AEE28528CD986D8A4E6E432D55"
     },
     {
-        "CatalogVersion":  "23.10.11",
+        "CatalogVersion":  "23.10.19",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "23.07.17",
@@ -1548,7 +1548,7 @@
         "HashMD5":  "EA80AEE28528CD986D8A4E6E432D55"
     },
     {
-        "CatalogVersion":  "23.10.11",
+        "CatalogVersion":  "23.10.19",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "23.07.17",
@@ -1566,7 +1566,7 @@
         "HashMD5":  "EA80AEE28528CD986D8A4E6E432D55"
     },
     {
-        "CatalogVersion":  "23.10.11",
+        "CatalogVersion":  "23.10.19",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "21.11.02",
@@ -1584,7 +1584,7 @@
         "HashMD5":  "E5B01B9C59A7C66113BF22C1F35EC77"
     },
     {
-        "CatalogVersion":  "23.10.11",
+        "CatalogVersion":  "23.10.19",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "23.09.18",
@@ -1602,7 +1602,7 @@
         "HashMD5":  "10DC63A263ADC15C3AEA98D0A3967B"
     },
     {
-        "CatalogVersion":  "23.10.11",
+        "CatalogVersion":  "23.10.19",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "23.09.18",
@@ -1620,7 +1620,7 @@
         "HashMD5":  "D78E5CE55E3BB744767EAB84A26238B"
     },
     {
-        "CatalogVersion":  "23.10.11",
+        "CatalogVersion":  "23.10.19",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "23.10.03",
