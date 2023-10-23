@@ -50,7 +50,7 @@ function Invoke-HPTPMDownload {
     Install-ModuleHPCMSL
     Import-Module -Name HPCMSL -Force
     $TPMUpdate = Get-HPTPMDetermine    
-    if ($TPMUpdate -ne $false)
+    if (!(($TPMUpdate -eq $false) -or ($TPMUpdate -eq "False")))
         {
         if ((!($WorkingFolder))-or ($null -eq $WorkingFolder)){$WorkingFolder = "$env:TEMP\TPM"}
         if (!(Test-Path -Path $WorkingFolder)){New-Item -Path $WorkingFolder -ItemType Directory -Force |Out-Null}
@@ -64,7 +64,8 @@ function Invoke-HPTPMDownload {
         else {
             Return $extractPath
             }
-        }    
+        }
+    else {Write-Host "No TPM Softpaq to Download"}
 }
 function Invoke-HPTPMEXEDownload {
     Install-ModuleHPCMSL
