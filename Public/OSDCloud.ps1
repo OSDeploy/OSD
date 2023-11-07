@@ -1571,6 +1571,10 @@
         #=================================================
         #region Dell Updates Config for Specialize Phase
         if (($Global:OSDCloud.DCUInstall -eq $true) -or ($Global:OSDCloud.DCUDrivers -eq $true) -or ($Global:OSDCloud.DCUFirmware -eq $true) -or ($Global:OSDCloud.DCUBIOS -eq $true) -or ($Global:OSDCloud.DCUAutoUpdateEnable -eq $true) -or ($Global:OSDCloud.DellTPMUpdate -eq $true)){
+            
+            #Set Enable Specialize to be triggered later
+            $EnableSpecialize = $true
+
             Write-Host -ForegroundColor Cyan "Adding Dell Tasks into JSON Config File for Action during Specialize" 
             Write-DarkGrayHost "Install Dell Command Update = $($Global:OSDCloud.DCUInstall) | Run DCU Drivers = $($Global:OSDCloud.DCUDrivers) | Run DCU Firmware = $($Global:OSDCloud.DCUFirmware)"
             Write-DarkGrayHost "Run DCU BIOS = $($Global:OSDCloud.DCUBIOS) | Enable DCU Auto Update = $($Global:OSDCloud.DCUAutoUpdateEnable) | DCU TPM Update = $($Global:OSDCloud.DellTPMUpdate) " 
@@ -1596,6 +1600,11 @@
         #region HP Updates Config for Specialize Phase
         #Set Specialize JSON
         if (($Global:OSDCloud.HPIAAll -eq $true) -or ($Global:OSDCloud.HPIADrivers -eq $true) -or ($Global:OSDCloud.HPIAFirmware -eq $true) -or ($Global:OSDCloud.HPIASoftware -eq $true) -or ($Global:OSDCloud.HPTPMUpdate -eq $true) -or ($Global:OSDCloud.HPBIOSUpdate -eq $true)){
+            
+
+            #Set Enable Specialize to be triggered later
+            $EnableSpecialize = $true
+
             Write-SectionHeader "HP Enterprise Options Setup"
             $HPFeaturesEnabled = $true
             Write-Host -ForegroundColor DarkGray "Adding HP Tasks into JSON Config File for Action during Specialize"
@@ -1632,7 +1641,7 @@
         #endregion
         #=================================================
         #Extra Items Config for Specialize Phase
-        if ($Global:OSDCloud.NetFx3 -eq $true){
+        if ($Global:OSDCloud.NetFx3 -eq $true){ #This doesn't work... Will remove this block in future
             if ($WebConnection){
                 Write-Host -ForegroundColor Cyan "Adding Extra Tasks into JSON Config File for Action during Specialize" 
                 $HashTable = @{
@@ -1649,6 +1658,10 @@
             }
         }
         if ($Global:OSDCloud.PauseSpecialize -eq $true){
+            
+            #Set Enable Specialize to be triggered later
+            $EnableSpecialize = $true
+
             if ($WebConnection){
                 Write-Host -ForegroundColor Cyan "Adding Pause Tasks into JSON Config File for Action during Specialize" 
                 $HashTable = @{
@@ -1662,6 +1675,13 @@
                 try {[void][System.IO.Directory]::CreateDirectory($ConfigPath)}
                 catch {}
                 $HashVar | Out-File $ConfigFile
+            }
+        }
+        
+        if ($EnableSpecialize -eq $true){
+            if ($Global:OSDCloud.IsWinPE -eq $true) {
+                Write-DarkGrayHost  "Set-OSDCloudUnattendSpecializeDEV"
+                Set-OSDCloudUnattendSpecializeDev
             }
         }
         #Extra Items Config for Specialize Phase
