@@ -307,6 +307,7 @@
         'Import-MDTWinPECloudDriver',
         'Invoke-OSDSpecialize',
         'Invoke-OSDSpecializeDev',
+        'Invoke-HPDriverUpdate',
         'Save-ZTIDriverPack',
         'Set-OSDCloudUnattendAuditMode',
         'Set-OSDCloudUnattendAuditModeAutopilot',
