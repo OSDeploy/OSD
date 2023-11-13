@@ -1636,7 +1636,7 @@
                 }
             }
             #Leverage SetupComplete.cmd to run HP Tools
-            osdcloud-HPSetupCompleteAppend
+            if ($WebConnection){osdcloud-HPSetupCompleteAppend}
         }
         #endregion
         #=================================================
