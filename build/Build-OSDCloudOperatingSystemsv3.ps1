@@ -175,19 +175,20 @@ foreach ($Result in $Results) {
         $Result.Activation = 'Retail'
     }
     #=================================================
-    #   OS Version
-    #=================================================
-    if ($Result.Build -lt 22000) {
-        $Result.Version = 'Windows 10'
-    }
-    if ($Result.Name -ge 22000) {
-        $Result.Version = 'Windows 11'
-    }
-    #=================================================
     #   Build
     #=================================================
     $Regex = "[0-9]*\.[0-9]+"
     $Result.Build = ($Result.FileName | Select-String -AllMatches -Pattern $Regex).Matches[0].Value
+
+    #=================================================
+    #   OS Version
+    #=================================================
+    if ($Result.Build -lt 22000) {
+      $Result.Version = 'Windows 10'
+    }
+    if ($Result.Build -ge 22000) {
+        $Result.Version = 'Windows 11'
+    }
     #=================================================
     #   ReleaseID
     #=================================================
