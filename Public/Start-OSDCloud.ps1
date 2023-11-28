@@ -392,7 +392,7 @@
         else {
             Write-Host -ForegroundColor DarkGray "========================================================================="
             Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Select a Build for $OSVersion x64"
-            $Global:StartOSDCloud.OSBuildNames = @('22H2','21H2','21H1','20H2','2004','1909','1903','1809')
+            $Global:StartOSDCloud.OSBuildNames = @('23H2','22H2','21H2')
             
             $i = $null
             $Global:StartOSDCloud.OSBuildMenu = foreach ($Item in $Global:StartOSDCloud.OSBuildNames) {
@@ -641,7 +641,8 @@
             Write-Host -ForegroundColor DarkGray $Global:StartOSDCloud.GetFeatureUpdate.Name
             Write-Host -ForegroundColor DarkGray $Global:StartOSDCloud.ImageFileItem.FullName
         }
-        elseif (Test-WebConnection -Uri $Global:StartOSDCloud.GetFeatureUpdate.FileUri) {
+        #elseif (Test-WebConnection -Uri $Global:StartOSDCloud.GetFeatureUpdate.FileUri) {
+        elseif (Test-WebConnection -Uri $Global:StartOSDCloud.GetFeatureUpdate.Url) {
             #Write-Host -ForegroundColor Yellow "Download"
             #Write-Host -ForegroundColor Yellow $Global:StartOSDCloud.GetFeatureUpdate.Title
             Write-Host -ForegroundColor Yellow $Global:StartOSDCloud.GetFeatureUpdate.Name
