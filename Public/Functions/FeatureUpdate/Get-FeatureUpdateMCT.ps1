@@ -82,14 +82,15 @@ function Get-FeatureUpdateMCT {
     #   OSLanguage
     #=================================================
     #$Results = $Results | Where-Object {$_.Title -match $OSLanguage}
-    $Results = $Results | Where-Object {$_.TitLanguagele -match $OSLanguage}
+    $Results = $Results | Where-Object {$_.Language -match $OSLanguage}
     #=================================================
     #   OSActivation
     #=================================================
-    switch ($OSActivation) {
-        Retail  {$Results = $Results | Where-Object {$_.Title -match 'consumer'}}
-        Volume  {$Results = $Results | Where-Object {$_.Title -match 'business'}}
-    }
+    #switch ($OSActivation) {
+    #    Retail  {$Results = $Results | Where-Object {$_.Title -match 'consumer'}}
+    #    Volume  {$Results = $Results | Where-Object {$_.Title -match 'business'}}
+    #}
+    $Results = $Results | Where-Object {$_.Activation -match $OSActivation}
     #=================================================
     #   v1
     #=================================================
