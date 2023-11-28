@@ -642,18 +642,18 @@
             Write-Host -ForegroundColor DarkGray $Global:StartOSDCloud.ImageFileItem.FullName
         }
         #elseif (Test-WebConnection -Uri $Global:StartOSDCloud.GetFeatureUpdate.FileUri) {
-        elseif (Test-WebConnection -Uri $Global:StartOSDCloud.GetFeatureUpdate.Url) {
+        elseif (Test-WebConnection -Uri $Global:StartOSDCloud.ImageFileUrl) {
             #Write-Host -ForegroundColor Yellow "Download"
             #Write-Host -ForegroundColor Yellow $Global:StartOSDCloud.GetFeatureUpdate.Title
             Write-Host -ForegroundColor Yellow $Global:StartOSDCloud.GetFeatureUpdate.Name
             #Write-Host -ForegroundColor Yellow $Global:StartOSDCloud.GetFeatureUpdate.FileUri
-            Write-Host -ForegroundColor Yellow $Global:StartOSDCloud.GetFeatureUpdate.Url
+            Write-Host -ForegroundColor Yellow $Global:StartOSDCloud.ImageFileUrl
         }
         else {
             #Write-Warning $Global:StartOSDCloud.GetFeatureUpdate.Title
             #Write-Warning $Global:StartOSDCloud.GetFeatureUpdate.FileUri
             Write-Warning $Global:StartOSDCloud.GetFeatureUpdate.Name
-            Write-Warning $Global:StartOSDCloud.GetFeatureUpdate.Url
+            Write-Warning $Global:StartOSDCloud.ImageFileUrl
             Write-Warning "Could not verify an Internet connection for Windows Feature Update"
             Write-Warning "OSDCloud cannot continue"
             Break
