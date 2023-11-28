@@ -116,10 +116,11 @@ ForEach ($Option in $WindowsTable){
     $ESDInfo += $XML.MCT.Catalogs.Catalog.PublishedMedia.Files.File
     }
 
+    #Remove Dups
+$UniqueESDInfo = $ESDInfo | Group-Object -Property FileName | %{$_.Group[0]}
 #Clean Up Results
-$x64ESDInfo = $ESDInfo | Where-Object {$_.Architecture -eq "x64"}
+$x64ESDInfo = $UniqueESDInfo | Where-Object {$_.Architecture -eq "x64"}
 $x64ESDInfo = $x64ESDInfo | Where-Object {$_.Edition -eq "Professional" -or $_.Edition -eq "Education" -or $_.Edition -eq "Enterprise" -or $_.Edition -eq "Professional" -or $_.Edition -eq "HomePremium"}
-
 
 
 Import-Module -Name OSD -Force
