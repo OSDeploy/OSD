@@ -1599,45 +1599,55 @@
         #=================================================
         #region HP Updates Config for Specialize Phase
         #Set Specialize JSON
-        if (($Global:OSDCloud.HPIAAll -eq $true) -or ($Global:OSDCloud.HPIADrivers -eq $true) -or ($Global:OSDCloud.HPIAFirmware -eq $true) -or ($Global:OSDCloud.HPIASoftware -eq $true) -or ($Global:OSDCloud.HPTPMUpdate -eq $true) -or ($Global:OSDCloud.HPBIOSUpdate -eq $true)){
-            
+        if ($WebConnection) {  #This all requires the device to be online to download updates
+            if (($Global:OSDCloud.HPIAAll -eq $true) -or ($Global:OSDCloud.HPIADrivers -eq $true) -or ($Global:OSDCloud.HPIAFirmware -eq $true) -or ($Global:OSDCloud.HPIASoftware -eq $true) -or ($Global:OSDCloud.HPTPMUpdate -eq $true) -or ($Global:OSDCloud.HPBIOSUpdate -eq $true)){
+                
 
-            #Set Enable Specialize to be triggered later
-            $EnableSpecialize = $true
+                #Set Enable Specialize to be triggered later
+                $EnableSpecialize = $true
 
-            Write-SectionHeader "HP Enterprise Options Setup"
-            $HPFeaturesEnabled = $true
-            Write-Host -ForegroundColor DarkGray "Adding HP Tasks into JSON Config File for Action during Specialize"
-            Write-DarkGrayHost "HPIA Drivers = $($Global:OSDCloud.HPIADrivers) | HPIA Firmware = $($Global:OSDCloud.HPIAFirmware) | HPIA Software = $($Global:OSDCloud.HPIADrivers) | HPIA All = $($Global:OSDCloud.HPIAAll) "
-            Write-DarkGrayHost "HP TPM Update = $($Global:OSDCloud.HPTPMUpdate) | HP BIOS Update = $($Global:OSDCloud.HPBIOSUpdate)" 
-            $HPHashTable = @{
-                'HPUpdates' = @{
-                    'HPIADrivers' = $Global:OSDCloud.HPIADrivers
-                    'HPIAFirmware' = $Global:OSDCloud.HPIAFirmware
-                    'HPIASoftware' = $Global:OSDCloud.HPIASoftware
-                    'HPIAAll' = $Global:OSDCloud.HPIAALL
-                    'HPTPMUpdate' = $Global:OSDCloud.HPTPMUpdate
-                    'HPBIOSUpdate' = $Global:OSDCloud.HPBIOSUpdate
+                Write-SectionHeader "HP Enterprise Options Setup"
+                $HPFeaturesEnabled = $true
+                Write-Host -ForegroundColor DarkGray "Adding HP Tasks into JSON Config File for Action during Specialize"
+                Write-DarkGrayHost "HPIA Drivers = $($Global:OSDCloud.HPIADrivers) | HPIA Firmware = $($Global:OSDCloud.HPIAFirmware) | HPIA Software = $($Global:OSDCloud.HPIADrivers) | HPIA All = $($Global:OSDCloud.HPIAAll) "
+                Write-DarkGrayHost "HP TPM Update = $($Global:OSDCloud.HPTPMUpdate) | HP BIOS Update = $($Global:OSDCloud.HPBIOSUpdate)" 
+                
+                if ($Global:OSDCloud.HPTPMUpdate -eq $true){
+                    if (Get-HPTPMDetermine -ne "False"){
+                        Set-HPTPMBIOSSettings
+                        Invoke-HPTPMEXEDownload
+                    }
+                    else {
+                        $Global:OSDCloud.HPTPMUpdate = $false
+                    }
                 }
+
+                
+                $HPHashTable = @{
+                    'HPUpdates' = @{
+                        'HPIADrivers' = $Global:OSDCloud.HPIADrivers
+                        'HPIAFirmware' = $Global:OSDCloud.HPIAFirmware
+                        'HPIASoftware' = $Global:OSDCloud.HPIASoftware
+                        'HPIAAll' = $Global:OSDCloud.HPIAALL
+                        'HPTPMUpdate' = $Global:OSDCloud.HPTPMUpdate
+                        'HPBIOSUpdate' = $Global:OSDCloud.HPBIOSUpdate
+                    }
+                }
+
+                $HPHashVar = $HPHashTable | ConvertTo-Json
+                $ConfigPath = "c:\osdcloud\configs"
+                $ConfigFile = "$ConfigPath\HP.JSON"
+                try {[void][System.IO.Directory]::CreateDirectory($ConfigPath)}
+                catch {}
+                $HPHashVar | Out-File $ConfigFile
+                
+                #Leverage SetupComplete.cmd to run HP Tools
+                Set-SetupCompleteHPAppend
             }
-            $HPHashVar = $HPHashTable | ConvertTo-Json
-            $ConfigPath = "c:\osdcloud\configs"
-            $ConfigFile = "$ConfigPath\HP.JSON"
-            try {[void][System.IO.Directory]::CreateDirectory($ConfigPath)}
-            catch {}
-            $HPHashVar | Out-File $ConfigFile
-            if ($WebConnection){osdcloud-HPIADownload} 
             
-            #Stage HP TPM Update EXE
-            if ($Global:OSDCloud.HPTPMUpdate -eq $true){
-                if ($WebConnection){osdcloud-HPTPMBIOSSettings}
-                if ($WebConnection){osdcloud-HPTPMEXEDownload}
-                else { Write-DarkGrayHost "No Interent Found, Skipping TPM Download & Update"
-                }
-            }
-            #Leverage SetupComplete.cmd to run HP Tools
-            if ($WebConnection){osdcloud-HPSetupCompleteAppend}
         }
+        else { Write-DarkGrayHost "No Interent Found, Skipping HP Device Updates"}
+                        
         #endregion
         #=================================================
         #Extra Items Config for Specialize Phase

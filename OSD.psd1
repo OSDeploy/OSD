@@ -247,6 +247,7 @@
         'Set-SetupCompleteCreateStart',
         'Set-SetupCompleteDefenderUpdate',
         'Set-SetupCompleteHyperVName',
+        'Set-SetupCompleteHPAppend',
         'Set-SetupCompleteNetFX',
         'Set-SetupCompleteOEMActivation',
         'Set-SetupCompleteStartWindowsUpdate',
