@@ -44,7 +44,7 @@ function Get-HPTPMDetermine{
     else{Return $false}
 }
 
-function Invoke-HPTPMDownload {
+function Invoke-HPTPMDownload { #Used when you want to manually download and test, as it will extract for you.
     [CmdletBinding()]
     param ($WorkingFolder)
     Install-ModuleHPCMSL
@@ -67,7 +67,7 @@ function Invoke-HPTPMDownload {
         }
     else {Write-Host "No TPM Softpaq to Download"}
 }
-function Invoke-HPTPMEXEDownload {
+function Invoke-HPTPMEXEDownload { #This will download just the TPM Softpaq needed and place in C:\OSDCloud\HP\TPM
     Install-ModuleHPCMSL
     Set-HPBIOSSetting -SettingName 'Virtualization Technology (VTx)' -Value 'Disable'
     Import-Module -Name HPCMSL -Force
@@ -96,23 +96,62 @@ function Invoke-HPTPMEXEInstall {
         [Parameter(Mandatory=$false)]
         $WorkingFolder
         )
-    $TPM = Get-HPTPMDetermine
+
+        $TPM = Get-HPTPMDetermine
     if ($TPM){
         $DownloadFolder = "C:\OSDCloud\HP\TPM"
+        $LogFolder = "C:\OSDCloud\Logs"
         $TPMUpdate = (Get-ChildItem -Path $DownloadFolder -Filter *.exe).FullName
         if (Test-Path $TPMUpdate){
             Start-Process -FilePath $TPMUpdate -ArgumentList "/s /e /f $DownloadFolder" -Wait
             if (!(Test-Path -Path "$DownloadFolder\TPMConfig64.exe")){Throw "Failed to Extract TPM Update"}
             $Process = "$DownloadFolder\TPMConfig64.exe"
             #Create Argument List
-            if ($filename -and $spec){$TPMArg = "-s -f$filename -a$spec -l$($env:temp)\TPMConfig.log"}
-            elseif ($filename -and !($spec)) { $TPMArg = "-s -f$filename -l$($env:temp)\TPMConfig.log"}
-            elseif (!($filename) -and $spec) { $TPMArg = "-s -a$spec -l$($env:temp)\TPMConfig.log"}
-            elseif (!($filename) -and !($spec)) { $TPMArg = "-s -l$($env:temp)\TPMConfig.log"}
+            if ($filename -and $spec){$TPMArg = "-s -f$filename -a$spec -l$($LogFolder)\TPMConfig.log"}
+            elseif ($filename -and !($spec)) { $TPMArg = "-s -f$filename -l$($LogFolder)\TPMConfig.log"}
+            elseif (!($filename) -and $spec) { $TPMArg = "-s -a$spec -l$($LogFolder)\TPMConfig.log"}
+            elseif (!($filename) -and !($spec)) { $TPMArg = "-s -l$($LogFolder)\TPMConfig.log"}
             
             Write-Output "Running Command: Start-Process -FilePath $Process -ArgumentList $TPMArg -PassThru -Wait"
             $TPMUpdate = Start-Process -FilePath $Process -ArgumentList $TPMArg -PassThru -Wait
             write-output "TPMUpdate Exit Code: $($TPMUpdate.exitcode)"
+            If ($TPMUpdate.ExitCode -eq 3010){
+                write-output "$($TPMUpdate.exitcode): Success, Reboot Required"
+            }
+            else {
+                Switch ($TPMUpdate.ExitCode)
+                {   
+                    0 {$ErrorDescription = "Success"}
+                    128 {$ErrorDescription = " Invalid command line option"}
+                    256 {$ErrorDescription = "No BIOS support"}
+                    257 {$ErrorDescription = "No TPM firmware bin file"}
+                    258 {$ErrorDescription = " Failed to create HP_TOOLS partition"}
+                    259 {$ErrorDescription = "Failed to flash the firmware"}
+                    260 {$ErrorDescription = "No EFI partition (for GPT)"}
+                    261 {$ErrorDescription = "Bad EFI partition"}
+                    262 {$ErrorDescription = "Cannot create HP_TOOLS partition (because the maximum number of partitions has been reached)"}
+                    263 {$ErrorDescription = "Not enough space partition (when the size of the firmware binary file is greater than the free space of EFI or HP_TOOLS partition)"}
+                    264 {$ErrorDescription = " Unsupported operating system"}
+                    265 {$ErrorDescription = "Elevated (administrator) privileges are required"}
+                    273 {$ErrorDescription = "Not supported chipset"}
+                    274 {$ErrorDescription = "No more firmware upgrade is allowed"}
+                    275 {$ErrorDescription = "Invalid firmware binary file "}
+                    290 {$ErrorDescription = "BitLocker is currently enabled."}
+                    291 {$ErrorDescription = "Unknown BitLocker status"}
+                    292 {$ErrorDescription = "WinMagic encryption is currently enabled"}
+                    293 {$ErrorDescription = "WinMagic SecureDoc is currently enabled"}
+                    296 {$ErrorDescription = "No system information"}
+                    305 {$ErrorDescription = "Intel TXT is currently enabled."}
+                    306 {$ErrorDescription = "VTx is currently enabled."}
+                    307 {$ErrorDescription = "SGX is currently enabled."}
+                    1602 {$ErrorDescription = "User cancelled the operation"}
+                    3010 {$ErrorDescription = "Success reboot required"}
+                    3011 {$ErrorDescription = "Success rollback"}
+                    3012 {$ErrorDescription = "Failed rollback"}
+
+                }
+                write-output "$($TPMUpdate.exitcode): $ErrorDescription"
+            }
         }
         else {Throw "Failed to Locate Update Path"}
     }
