@@ -1,4 +1,4 @@
-Function Invoke-HPAnalyzer {
+﻿Function Invoke-HPAnalyzer {
     <#
     .Name
         Analyzer.ps1
