@@ -1,4 +1,4 @@
-﻿Function Install-BuildUpdatesFromOSCloudUSB {
+Function Install-BuildUpdatesFromOSCloudUSB {
     ﻿Function Get-UBR {
         if ($env:SystemDrive -eq "X:"){
             $Info = DISM.exe /image:c:\ /Get-CurrentEdition
