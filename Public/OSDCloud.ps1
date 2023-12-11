@@ -1392,21 +1392,6 @@
     }
     #endregion
     
-    #region GaryB - osdcloud-WinpeUpdateDefender
-    <# - Found that when you update Defender Offline... it hangs specialize phase... no idea why
-    #region osdcloud-WinpeUpdateDefender
-    Write-SectionHeader "Updates Windows Defender Offline (osdcloud-WinpeUpdateDefender)"
-    Write-DarkGrayHost "Defender Platform & Defs are being updated in Offline Image"
-    Write-DarkGrayHost "This process can take up to 5 minutes"
-    Write-Verbose -Message "osdcloud-WinpeUpdateDefender "
-    if ($Global:OSDCloud.IsWinPE -eq $true) {
-        if ($Global:OSDCloud.WindowsDefenderUpdate -eq $true){
-            osdcloud-WinpeUpdateDefender 
-        }
-    }
-    #>
-    #endregion
-
     #region Add-OfflineServicingWindowsDriver
     Write-SectionHeader "Add Windows Driver with Offline Servicing (Add-OfflineServicingWindowsDriver)"
     Write-Verbose -Message "https://docs.microsoft.com/en-us/powershell/module/dism/add-windowsdriver"
@@ -1473,35 +1458,45 @@
     }
     
 
-    if (($Global:OSDCloud.DevMode -eq $true)-or (Get-SetupCompleteOSDCloudUSB -eq $true)) {
-        Write-SectionHeader "Creating SetupComplete Files and populating with requested tasks."
-        Set-SetupCompleteCreateStart
-        if ($Global:OSDCloud.SetWiFi -eq $true) {
-            $SetWiFi = $true
-            Set-SetupCompleteSetWiFi
+
+    Write-SectionHeader "Creating SetupComplete Files and populating with requested tasks."
+    Set-SetupCompleteCreateStart
+    
+    #Checks for SetupComplete.cmd file on USB Drive, if finds one, sets OSD process to run the SetupComplete
+    #Flashdrive\OSDCloud\Config\Scripts\SetupComplete
+    if (Get-SetupCompleteOSDCloudUSB -eq $true){
+        Set-SetupCompleteOSDCloudUSB
+    }
+    
+    if ($Global:OSDCloud.SetWiFi -eq $true) {
+        $SetWiFi = $true
+        Set-SetupCompleteSetWiFi
+    }
+    if ($Global:OSDCloud.IsWinPE -eq $true) {
+        if ($Global:OSDCloud.WindowsDefenderUpdate -eq $true){
+            if ($WebConnection -eq $True -or $SetWiFi -eq $True){
+                Write-DarkGrayHost "Configuring Defender Updates for during SetupComplete"
+                Set-SetupCompleteDefenderUpdate
+            }
+            else {Write-DarkGrayHost "No Internet or Future WiFi Configured, disabling Defender Updates"}
         }
-        if ($Global:OSDCloud.IsWinPE -eq $true) {
-            if ($Global:OSDCloud.WindowsDefenderUpdate -eq $true){
-                if ($WebConnection -eq $True -or $SetWiFi -eq $True){
-                    Write-DarkGrayHost "Configuring Defender Updates for during SetupComplete"
-                    Set-SetupCompleteDefenderUpdate
-                }
-                else {Write-DarkGrayHost "No Internet or Future WiFi Configured, disabling Defender Updates"}
+        if ($Global:OSDCloud.WindowsUpdate -eq $true){
+            if ($WebConnection -eq $True -or $SetWiFi -eq $True){
+                Write-DarkGrayHost "Configuring Windows Updates for running during SetupComplete"
+                Set-SetupCompleteStartWindowsUpdate
             }
-            if ($Global:OSDCloud.WindowsUpdate -eq $true){
-                if ($WebConnection -eq $True -or $SetWiFi -eq $True){
-                    Write-DarkGrayHost "Configuring Windows Updates for running during SetupComplete"
-                    Set-SetupCompleteStartWindowsUpdate
-                }
-                else {Write-DarkGrayHost "No Internet or Future WiFi Configured, disabling Windows Updates"}
+            else {Write-DarkGrayHost "No Internet or Future WiFi Configured, disabling Windows Updates"}
+        }
+        if ($Global:OSDCloud.WindowsUpdateDrivers -eq $true){
+            if ($WebConnection -eq $True -or $SetWiFi -eq $True){
+                Write-DarkGrayHost "Configuring Windows Update Drivers for running during SetupComplete"
+                Set-SetupCompleteStartWindowsUpdateDriver
             }
-            if ($Global:OSDCloud.WindowsUpdateDrivers -eq $true){
-                if ($WebConnection -eq $True -or $SetWiFi -eq $True){
-                    Write-DarkGrayHost "Configuring Windows Update Drivers for running during SetupComplete"
-                    Set-SetupCompleteStartWindowsUpdateDriver
-                }
-                else {Write-DarkGrayHost "No Internet or Future WiFi Configured, disabling Windows Update Driver Updates"}
-            }
+            else {Write-DarkGrayHost "No Internet or Future WiFi Configured, disabling Windows Update Driver Updates"}
+        }
+        
+        #Under Development
+        if ($Global:OSDCloud.DevMode -eq $true){
             if ($Global:OSDCloud.NetFx3 -eq $true){
                 if ($WebConnection -eq $True -or $SetWiFi -eq $True){
                     Write-DarkGrayHost "Configuring NetFX Install for during SetupComplete"
@@ -1522,54 +1517,11 @@
                 Write-DarkGrayHost "Configuring OEM Activation for during SetupComplete"
                 Set-SetupCompleteOEMActivation
             }
-            <# Plan to remove in future - Noted 23.10.23
-            if ($Global:OSDCloud.MS365Install -eq $true){
-                if ($WebConnection -eq $True -or $SetWiFi -eq $True){
-                    Write-DarkGrayHost "Configuring M365 Install during SetupComplete"
-                    osdcloud-SetupCompleteMS365Install -CompanyValue $M365CompanyName
-                }
-                else {Write-DarkGrayHost "No Internet or Future WiFi Configured, disabling M365 Install"}
-            }
-            #>
-            if (Get-SetupCompleteOSDCloudUSB -eq $true){
-                Set-SetupCompleteOSDCloudUSB
-            }
-            
         }
-        #=================================================
-        #region HyperV Config for Specialize Phase
-        if (((Get-CimInstance Win32_ComputerSystem).Model -eq "Virtual Machine") -and ((Get-CimInstance Win32_ComputerSystem).Manufacturer -eq "Microsoft Corporation")){
-            $Global:OSDCloud.HyperVEjectISO = $true
-        }
-        if (($Global:OSDCloud.HyperVSetName -eq $true) -or ($Global:OSDCloud.HyperVEjectISO -eq $true) ){
-            Write-DarkGrayHost "Starting HyperV Modifications"
-            if ($Global:OSDCloud.HyperVSetName -eq $true){
-                Write-DarkGrayHost "Adding HyperV Tasks into JSON Config File for Action during Specialize" 
-                $HashTable = @{
-                    'Updates' = @{
-                        'HyperVSetName' = $Global:OSDCloud.HyperVSetName                   
-                    }
-                }
-                $HashVar = $HashTable | ConvertTo-Json
-                $ConfigPath = "c:\osdcloud\configs"
-                $ConfigFile = "$ConfigPath\HYPERV.JSON"
-                try {[void][System.IO.Directory]::CreateDirectory($ConfigPath)}
-                catch {}
-                $HashVar | Out-File $ConfigFile
-
-                #Leverage SetupComplete.cmd to run Tools
-                Write-DarkGrayHost "HyperV Set Computer Name = $($Global:OSDCloud.HyperVSetName)"
-                Write-DarkGrayHost "Adding Function to Rename Computer to HyperV VM Name into SetupComplete"
-                Set-SetupCompleteHyperVName
-            }        
-            if ($Global:OSDCloud.HyperVEjectISO -eq $true){
-                Write-DarkGrayHost "Ejecting ISO from VM"
-                Start-EjectCD
-            }
-        }
-        #endregion
-        #=================================================
-        #region Dell Updates Config for Specialize Phase
+    }
+    #=================================================
+    #region Dell Updates Config for Specialize Phase
+    if (($Global:OSDCloud.DevMode -eq $true) -and ($WebConnection -eq $true)){
         if (($Global:OSDCloud.DCUInstall -eq $true) -or ($Global:OSDCloud.DCUDrivers -eq $true) -or ($Global:OSDCloud.DCUFirmware -eq $true) -or ($Global:OSDCloud.DCUBIOS -eq $true) -or ($Global:OSDCloud.DCUAutoUpdateEnable -eq $true) -or ($Global:OSDCloud.DellTPMUpdate -eq $true)){
             
             #Set Enable Specialize to be triggered later
@@ -1595,14 +1547,15 @@
             catch {}
             $HashVar | Out-File $ConfigFile
         }
-        #endregion
-        #=================================================
-        #region HP Updates Config for Specialize Phase
-        #Set Specialize JSON
+    }
+    #endregion
+    #=================================================
+    #region HP Updates Config for Specialize Phase
+    #Set Specialize JSON
+    
+    if (($Global:OSDCloud.HPIAAll -eq $true) -or ($Global:OSDCloud.HPIADrivers -eq $true) -or ($Global:OSDCloud.HPIAFirmware -eq $true) -or ($Global:OSDCloud.HPIASoftware -eq $true) -or ($Global:OSDCloud.HPTPMUpdate -eq $true) -or ($Global:OSDCloud.HPBIOSUpdate -eq $true)){
         if ($WebConnection) {  #This all requires the device to be online to download updates
-            if (($Global:OSDCloud.HPIAAll -eq $true) -or ($Global:OSDCloud.HPIADrivers -eq $true) -or ($Global:OSDCloud.HPIAFirmware -eq $true) -or ($Global:OSDCloud.HPIASoftware -eq $true) -or ($Global:OSDCloud.HPTPMUpdate -eq $true) -or ($Global:OSDCloud.HPBIOSUpdate -eq $true)){
-                
-
+            if (Test-HPIASupport){
                 #Set Enable Specialize to be triggered later
                 $EnableSpecialize = $true
 
@@ -1612,6 +1565,44 @@
                 Write-DarkGrayHost "HPIA Drivers = $($Global:OSDCloud.HPIADrivers) | HPIA Firmware = $($Global:OSDCloud.HPIAFirmware) | HPIA Software = $($Global:OSDCloud.HPIADrivers) | HPIA All = $($Global:OSDCloud.HPIAAll) "
                 Write-DarkGrayHost "HP TPM Update = $($Global:OSDCloud.HPTPMUpdate) | HP BIOS Update = $($Global:OSDCloud.HPBIOSUpdate)" 
                 
+                if (($Global:OSDCloud.HPTPMUpdate -eq $true) -or ($Global:OSDCloud.HPBIOSUpdate -eq $true)){
+                    if ((Get-HPSureAdminState).SureAdminMode -eq "On"){
+                        Write-Host "HP Sure Admin Enabled, Unable to Modify HP BIOS Settings or Perform HP BIOS / TPM Updates" -ForegroundColor Yellow
+                        if ($Global:OSDCloud.HPBIOSUpdate -eq $true){
+                            $Global:OSDCloud.HPBIOSUpdate = $false
+                            $HPBIOSWinUpdate = $true
+                        }
+                        $Global:OSDCloud.HPTPMUpdate = $false
+                    }
+                    else {
+                        if ($Global:OSDCloud.HPBIOSUpdate -eq $true){
+                            [version]$HPBIOSVersion = Get-HPBIOSVersion
+                            [version]$Latest = $((Get-HPBIOSUpdates -Latest).ver)
+                        
+                            if ($Latest -gt $HPBIOSVersion){
+                                
+                                if (Get-HPBIOSSetupPasswordIsSet){
+                                    Write-Host -ForegroundColor Yellow "Device currently has BIOS Setup Password, Please Update BIOS via different method"
+                                    $HPBIOSWinUpdate = $true
+                                }
+                                else{
+                                    Write-Host -ForegroundColor DarkGray "Current Firmware: $(Get-HPBIOSVersion)"
+                                    Write-Host -ForegroundColor DarkGray "Staging Update: $((Get-HPBIOSUpdates -Latest).ver) "
+                                    #Details: https://developers.hp.com/hp-client-management/doc/Get-HPBiosUpdates
+                                    Get-HPBIOSUpdates -Flash -Yes -Offline -BitLocker Ignore
+                                    $Global:OSDCloud.HPBIOSUpdate = $false
+                                    $HPBIOSUpdateNotes = "Attempted in WinPE - Update to $((Get-HPBIOSUpdates -Latest).ver)"
+                                }
+                            }
+                            else {
+                                $Global:OSDCloud.HPBIOSUpdate = $false
+                                $HPBIOSWinUpdate = $false
+                            }
+                        }
+                    }
+
+                }
+
                 if ($Global:OSDCloud.HPTPMUpdate -eq $true){
                     if (Get-HPTPMDetermine -ne "False"){
                         Set-HPTPMBIOSSettings
@@ -1622,7 +1613,19 @@
                     }
                 }
 
-                
+                if ($Global:OSDCloud.HPBIOSUpdate -eq $true){
+                    [version]$HPBIOSVersion = Get-HPBIOSVersion
+                    [version]$Latest = $((Get-HPBIOSUpdates -Latest).ver)
+                    
+                    if ($Latest -gt $HPBIOSVersion){
+                        $HPBIOSUpdate -eq $true
+                    }
+                    else {
+                        $HPBIOSUpdate -eq $false
+                    }
+
+                }
+
                 $HPHashTable = @{
                     'HPUpdates' = @{
                         'HPIADrivers' = $Global:OSDCloud.HPIADrivers
@@ -1631,6 +1634,8 @@
                         'HPIAAll' = $Global:OSDCloud.HPIAALL
                         'HPTPMUpdate' = $Global:OSDCloud.HPTPMUpdate
                         'HPBIOSUpdate' = $Global:OSDCloud.HPBIOSUpdate
+                        'HPBIOSWinUpdate' = $HPBIOSWinUpdate
+                        'HPBIOSUpdateNotes' = $HPBIOSUpdateNotes
                     }
                 }
 
@@ -1644,66 +1649,50 @@
                 #Leverage SetupComplete.cmd to run HP Tools
                 Set-SetupCompleteHPAppend
             }
-            
+            else { Write-DarkGrayHost "Failed Function Test-HPIASupport Function:This is Not a Supported HP Device, Skipping HP Enterprise Functions"}
         }
         else { Write-DarkGrayHost "No Interent Found, Skipping HP Device Updates"}
-                        
-        #endregion
-        #=================================================
-        #Extra Items Config for Specialize Phase
-        if ($Global:OSDCloud.NetFx3 -eq $true){ #This doesn't work... Will remove this block in future
-            if ($WebConnection){
-                Write-Host -ForegroundColor Cyan "Adding Extra Tasks into JSON Config File for Action during Specialize" 
-                $HashTable = @{
-                    'Addons' = @{
-                        'NetFX3' = $Global:OSDCloud.NetFx3
-                    }
-                }
-                $HashVar = $HashTable | ConvertTo-Json
-                $ConfigPath = "c:\osdcloud\configs"
-                $ConfigFile = "$ConfigPath\Extras.JSON"
-                try {[void][System.IO.Directory]::CreateDirectory($ConfigPath)}
-                catch {}
-                $HashVar | Out-File $ConfigFile
-            }
-        }
-        if ($Global:OSDCloud.PauseSpecialize -eq $true){
-            
-            #Set Enable Specialize to be triggered later
-            $EnableSpecialize = $true
-
-            if ($WebConnection){
-                Write-Host -ForegroundColor Cyan "Adding Pause Tasks into JSON Config File for Action during Specialize" 
-                $HashTable = @{
-                    'Addons' = @{
-                        'Pause' = $Global:OSDCloud.PauseSpecialize
-                    }
-                }
-                $HashVar = $HashTable | ConvertTo-Json
-                $ConfigPath = "c:\osdcloud\configs"
-                $ConfigFile = "$ConfigPath\Extras.JSON"
-                try {[void][System.IO.Directory]::CreateDirectory($ConfigPath)}
-                catch {}
-                $HashVar | Out-File $ConfigFile
-            }
-        }
+    }
+    
+                    
+    #endregion
+    #=================================================
+    #Extra Items Config for Specialize Phase
+    if (($Global:OSDCloud.PauseSpecialize -eq $true) -and ($Global:OSDCloud.DevMode -eq $true)){
         
-        if ($EnableSpecialize -eq $true){
-            if ($Global:OSDCloud.IsWinPE -eq $true) {
-                Write-DarkGrayHost  "Set-OSDCloudUnattendSpecializeDEV"
-                Set-OSDCloudUnattendSpecializeDev
+        #Set Enable Specialize to be triggered later
+        $EnableSpecialize = $true
+
+        if ($WebConnection){
+            Write-Host -ForegroundColor Cyan "Adding Pause Tasks into JSON Config File for Action during Specialize" 
+            $HashTable = @{
+                'Addons' = @{
+                    'Pause' = $Global:OSDCloud.PauseSpecialize
+                }
             }
-        }
-        #Extra Items Config for Specialize Phase
-
-
-
-        #Bitlocker Stuff
-        if ($Global:OSDCloud.Bitlocker -eq $true){
-            Set-BitlockerRegValuesXTS256
-            Set-SetupCompleteBitlocker
+            $HashVar = $HashTable | ConvertTo-Json
+            $ConfigPath = "c:\osdcloud\configs"
+            $ConfigFile = "$ConfigPath\Extras.JSON"
+            try {[void][System.IO.Directory]::CreateDirectory($ConfigPath)}
+            catch {}
+            $HashVar | Out-File $ConfigFile
         }
     }
+    
+    #Required for some HP & Dell Updates - Will get set to True in the Dell / HP sections if needed
+    if ($EnableSpecialize -eq $true){
+        if ($Global:OSDCloud.IsWinPE -eq $true) {
+            Write-DarkGrayHost  "Set-OSDCloudUnattendSpecializeDEV"
+            Set-OSDCloudUnattendSpecializeDev
+        }
+    }
+    #Bitlocker Stuff
+    if ($Global:OSDCloud.Bitlocker -eq $true){
+        Set-BitlockerRegValuesXTS256
+        Set-SetupCompleteBitlocker
+        }
+
+    # HERE
     #endregion
 
     #region AutopilotConfigurationFile.json
@@ -1919,6 +1908,7 @@ exit
             Copy-PSModuleToFolder -Name PowerShellGet -Destination "$PowerShellSavePath\Modules"
             Copy-PSModuleToFolder -Name WindowsAutopilotIntune -Destination "$PowerShellSavePath\Modules"
             if ($HPFeaturesEnabled) {
+                Write-Verbose -Verbose "Copy-PSModuleToFolder -Name HPCMSL to $PowerShellSavePath\Modules"
                 Copy-PSModuleToFolder -Name HPCMSL -Destination "$PowerShellSavePath\Modules"
             }
             $OSDCloudOfflinePath = Find-OSDCloudOfflinePath
@@ -1949,9 +1939,7 @@ exit
 
     #region GaryB - Finish SetupComplete.cmd
     #This appends the two lines at the end of SetupComplete Script to Stop Transcription and to Restart Computer
-    if ($Global:OSDCloud.DevMode -eq $true) {
-        Set-SetupCompleteCreateFinish
-    }
+    Set-SetupCompleteCreateFinish
     #endregion
 
     #region Global:OSDCloud.ScriptShutdown

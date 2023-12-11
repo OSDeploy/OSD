@@ -203,8 +203,10 @@ function Invoke-OSDSpecializeDev {
             write-host "Specialize Stage - HP Enterprise Devices" -ForegroundColor Green
             $WarningPreference = "SilentlyContinue"
             $VerbosePreference = "SilentlyContinue"
+            import-module -name "HPCMSL"
+            get-module -Name "HPCMSL"
             #Invoke-Expression (Invoke-RestMethod -Uri 'functions.osdcloud.com')
-            Invoke-Expression (Invoke-RestMethod -Uri 'https://raw.githubusercontent.com/OSDeploy/OSD/master/cloud/modules/deviceshp.psm1')
+            #Invoke-Expression (Invoke-RestMethod -Uri 'https://raw.githubusercontent.com/OSDeploy/OSD/master/cloud/modules/deviceshp.psm1')
             
             #osdcloud-SetExecutionPolicy -WarningAction SilentlyContinue
             #osdcloud-InstallPackageManagement -WarningAction SilentlyContinue
@@ -212,10 +214,10 @@ function Invoke-OSDSpecializeDev {
             if ($HPJson.HPUpdates.HPTPMUpdate -eq $true){
                 Write-Host -ForegroundColor DarkGray "========================================================================="
                 Write-Host "Updating TPM" -ForegroundColor Cyan
-                osdcloud-HPTPMEXEInstall
+                Invoke-HPTPMEXEInstall
                 start-sleep -Seconds 10
             }
-            if (($HPJson.HPUpdates.HPBIOSUpdate -eq $true) -and ($HPJson.HPUpdates.HPTPMUpdate -ne $true)){
+            if (($HPJson.HPUpdates.HPBIOSUpdate -eq $true) -and ($HPJson.HPUpdates.HPTPMUpdate -ne $true)){ #Don't Upgrade BIOS if TPM is updating
                 #Stage Firmware Update for Next Reboot
                 Import-Module HPCMSL -ErrorAction SilentlyContinue | out-null
                 Write-Host -ForegroundColor DarkGray "========================================================================="
@@ -229,10 +231,13 @@ function Invoke-OSDSpecializeDev {
                 }
                 start-sleep -Seconds 10
             }
+            if ($HPJson.HPUpdates.HPBIOSWinUpdate -eq $true){
+                Get-HPBIOSWindowsUpdate -Yes -Flash
+            }
 
-            if ($HPJson.HPUpdates.HPIADrivers -eq $true){
+            if (($HPJson.HPUpdates.HPIADrivers -eq $true) -or ($HPJson.HPUpdates.HPIAAll -eq $true)){
                 Write-Host -ForegroundColor DarkGray "========================================================================="
-                Write-Host "Running Invoke-HPDriverUpdate Funciton" -ForegroundColor Cyan
+                Write-Host "Running Invoke-HPDriverUpdate Function" -ForegroundColor Cyan
                 Invoke-HPDriverUpdate -OSVerOverride -Details
                 start-sleep -Seconds 10
             }
