@@ -1,4 +1,4 @@
-﻿function Get-SetupCompleteOSDCloudUSB {
+Function Get-SetupCompleteOSDCloudUSB {
 
     $OSDCloudUSB = Get-Volume.usb | Where-Object {($_.FileSystemLabel -match 'OSDCloud') -or ($_.FileSystemLabel -match 'BHIMAGE')} | Select-Object -First 1
     $SetupCompletePath = "$($OSDCloudUSB.DriveLetter):\OSDCloud\Config\Scripts\SetupComplete"
