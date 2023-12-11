@@ -1,4 +1,4 @@
-function Set-HPBIOSSetting {
+Function Set-HPBIOSSetting {
     [CmdletBinding()]
 Param (
 	[Parameter(Mandatory=$true)]
