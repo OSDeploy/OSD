@@ -1,4 +1,4 @@
-﻿function Get-PowerSettingSleepAfter {
+Function Get-PowerSettingSleepAfter {
 # Get active plan
     # Get-CimInstance won't work due to Get-CimInstance -Namespace root\cimv2\power -ClassName Win32_PowerPlan doesn't have the "Activate" trigger as Get-WmiObject does
     $CurrentPlan = Get-WmiObject -Namespace root\cimv2\power -ClassName Win32_PowerPlan | Where-Object -FilterScript {$_.IsActive}
