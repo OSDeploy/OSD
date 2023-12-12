@@ -1568,10 +1568,10 @@
                 if ($Global:OSDCloud.HPBIOSUpdate -eq $true){
                     [version]$HPBIOSVersion = Get-HPBIOSVersion
                     [version]$Latest = $((Get-HPBIOSUpdates -Latest).ver)
-                    wrote-output "Checking HP BIOS Version via HPCMSL"
+                    Write-Output "Checking HP BIOS Version via HPCMSL"
                     Write-Output " HP BIOS Ver Available: $Latest"
                     Write-Output " Installed BIOS Ver: $HPBIOSVersion"
-                    if ($Latest -gt $HPBIOSVersion){
+                    if ($Latest -ge $HPBIOSVersion){
                         $Global:OSDCloud.HPBIOSUpdate = $false
                     }
                 }
