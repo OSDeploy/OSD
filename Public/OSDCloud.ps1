@@ -1561,48 +1561,47 @@
 
                 Write-SectionHeader "HP Enterprise Options Setup"
                 $HPFeaturesEnabled = $true
-                Write-Host -ForegroundColor DarkGray "Adding HP Tasks into JSON Config File for Action during Specialize"
-                Write-DarkGrayHost "HPIA Drivers = $($Global:OSDCloud.HPIADrivers) | HPIA Firmware = $($Global:OSDCloud.HPIAFirmware) | HPIA Software = $($Global:OSDCloud.HPIADrivers) | HPIA All = $($Global:OSDCloud.HPIAAll) "
-                Write-DarkGrayHost "HP TPM Update = $($Global:OSDCloud.HPTPMUpdate) | HP BIOS Update = $($Global:OSDCloud.HPBIOSUpdate)" 
                 
+                #If BIOS Update Desired, Confirm Update Available, if Not, set to False
+                if ($Global:OSDCloud.HPBIOSUpdate -eq $true){
+                    [version]$HPBIOSVersion = Get-HPBIOSVersion
+                    [version]$Latest = $((Get-HPBIOSUpdates -Latest).ver)
+                    if ($Latest -gt $HPBIOSVersion){
+                        $Global:OSDCloud.HPBIOSUpdate -eq $false
+                    }
+                }
+
+
+
                 if (($Global:OSDCloud.HPTPMUpdate -eq $true) -or ($Global:OSDCloud.HPBIOSUpdate -eq $true)){
                     if ((Get-HPSureAdminState).SureAdminMode -eq "On"){
                         Write-Host "HP Sure Admin Enabled, Unable to Modify HP BIOS Settings or Perform HP BIOS / TPM Updates" -ForegroundColor Yellow
                         if ($Global:OSDCloud.HPBIOSUpdate -eq $true){
-                            $Global:OSDCloud.HPBIOSUpdate = $false
-                            $HPBIOSWinUpdate = $true
+                            $Global:OSDCloud.HPBIOSUpdate = $false  #Set to False if Sure Admin Enable
+                            $HPBIOSWinUpdate = $true #Attempt to use Windows Update Version Instead
                         }
                         $Global:OSDCloud.HPTPMUpdate = $false
                     }
-                    else {
-                        if ($Global:OSDCloud.HPBIOSUpdate -eq $true){
-                            [version]$HPBIOSVersion = Get-HPBIOSVersion
-                            [version]$Latest = $((Get-HPBIOSUpdates -Latest).ver)
-                        
-                            if ($Latest -gt $HPBIOSVersion){
-                                
-                                if (Get-HPBIOSSetupPasswordIsSet){
-                                    Write-Host -ForegroundColor Yellow "Device currently has BIOS Setup Password, Please Update BIOS via different method"
-                                    $HPBIOSWinUpdate = $true
-                                }
-                                else{
-                                    Write-Host -ForegroundColor DarkGray "Current Firmware: $(Get-HPBIOSVersion)"
-                                    Write-Host -ForegroundColor DarkGray "Staging Update: $((Get-HPBIOSUpdates -Latest).ver) "
-                                    #Details: https://developers.hp.com/hp-client-management/doc/Get-HPBiosUpdates
-                                    Get-HPBIOSUpdates -Flash -Yes -Offline -BitLocker Ignore
-                                    $Global:OSDCloud.HPBIOSUpdate = $false
-                                    $HPBIOSUpdateNotes = "Attempted in WinPE - Update to $((Get-HPBIOSUpdates -Latest).ver)"
-                                }
+                    else { #Sure Admin Mode is Off
+                        if ($Global:OSDCloud.HPBIOSUpdate -eq $true){   
+                            if (Get-HPBIOSSetupPasswordIsSet){ #Test for BIOS Password
+                                Write-Host -ForegroundColor Yellow "Device currently has BIOS Setup Password, Attempting to use Get-HPBIOSWindowsUpdate Later in Process"
+                                $HPBIOSWinUpdate = $true
                             }
-                            else {
+                            else{ #No Password & No Sure Recover and there must be an update, so lets try to update it.
+                                Write-Host -ForegroundColor DarkGray "Current Firmware: $(Get-HPBIOSVersion)"
+                                Write-Host -ForegroundColor DarkGray "Staging Update: $((Get-HPBIOSUpdates -Latest).ver) "
+                                #Details: https://developers.hp.com/hp-client-management/doc/Get-HPBiosUpdates
+                                Get-HPBIOSUpdates -Flash -Yes -Offline -BitLocker Ignore
                                 $Global:OSDCloud.HPBIOSUpdate = $false
-                                $HPBIOSWinUpdate = $false
+                                $HPBIOSUpdateNotes = "Attempted in WinPE - Update to $((Get-HPBIOSUpdates -Latest).ver)"
                             }
                         }
                     }
-
                 }
-
+                Write-Host -ForegroundColor DarkGray "Adding HP Tasks into JSON Config File for Action during Specialize"
+                Write-DarkGrayHost "HPIA Drivers = $($Global:OSDCloud.HPIADrivers) | HPIA Firmware = $($Global:OSDCloud.HPIAFirmware) | HPIA Software = $($Global:OSDCloud.HPIADrivers) | HPIA All = $($Global:OSDCloud.HPIAAll) "
+                Write-DarkGrayHost "HP TPM Update = $($Global:OSDCloud.HPTPMUpdate) | HP BIOS Update = $($Global:OSDCloud.HPBIOSUpdate) | HP BIOS WU Update = $HPBIOSWinUpdate" 
                 if ($Global:OSDCloud.HPTPMUpdate -eq $true){
                     if (Get-HPTPMDetermine -ne "False"){
                         Set-HPTPMBIOSSettings
@@ -1611,19 +1610,6 @@
                     else {
                         $Global:OSDCloud.HPTPMUpdate = $false
                     }
-                }
-
-                if ($Global:OSDCloud.HPBIOSUpdate -eq $true){
-                    [version]$HPBIOSVersion = Get-HPBIOSVersion
-                    [version]$Latest = $((Get-HPBIOSUpdates -Latest).ver)
-                    
-                    if ($Latest -gt $HPBIOSVersion){
-                        $HPBIOSUpdate -eq $true
-                    }
-                    else {
-                        $HPBIOSUpdate -eq $false
-                    }
-
                 }
 
                 $HPHashTable = @{

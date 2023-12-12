@@ -234,14 +234,14 @@ function Invoke-OSDSpecializeDev {
             if ($HPJson.HPUpdates.HPBIOSWinUpdate -eq $true){
                 Get-HPBIOSWindowsUpdate -Yes -Flash
             }
-
+            <# Seems to choke on win32_PnpSignedDriver 
             if (($HPJson.HPUpdates.HPIADrivers -eq $true) -or ($HPJson.HPUpdates.HPIAAll -eq $true)){
                 Write-Host -ForegroundColor DarkGray "========================================================================="
                 Write-Host "Running Invoke-HPDriverUpdate Function" -ForegroundColor Cyan
                 Invoke-HPDriverUpdate -OSVerOverride -Details
                 start-sleep -Seconds 10
             }
-
+            #>
         }
         if ($DellJSON){
             write-host "Specialize Stage - Dell Enterprise Devices" -ForegroundColor Green
