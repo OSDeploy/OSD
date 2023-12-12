@@ -309,6 +309,7 @@
         'Invoke-OSDSpecialize',
         'Invoke-OSDSpecializeDev',
         'Invoke-HPDriverUpdate',
+        'Invoke-HPAnalyzer',
         'Save-ZTIDriverPack',
         'Set-OSDCloudUnattendAuditMode',
         'Set-OSDCloudUnattendAuditModeAutopilot',
