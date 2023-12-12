@@ -1560,19 +1560,21 @@
                 $EnableSpecialize = $true
 
                 Write-SectionHeader "HP Enterprise Options Setup"
+                Write-Host -ForegroundColor DarkGray " Confirmed Internet Connectivity"
+                Write-Host -ForegroundColor DarkGray " Confirmed HP Tools Supported [Test-HPIASupport]"
                 $HPFeaturesEnabled = $true
                 
                 #If BIOS Update Desired, Confirm Update Available, if Not, set to False
                 if ($Global:OSDCloud.HPBIOSUpdate -eq $true){
                     [version]$HPBIOSVersion = Get-HPBIOSVersion
                     [version]$Latest = $((Get-HPBIOSUpdates -Latest).ver)
+                    wrote-output "Checking HP BIOS Version via HPCMSL"
+                    Write-Output " HP BIOS Ver Available: $Latest"
+                    Write-Output " Installed BIOS Ver: $HPBIOSVersion"
                     if ($Latest -gt $HPBIOSVersion){
-                        $Global:OSDCloud.HPBIOSUpdate -eq $false
+                        $Global:OSDCloud.HPBIOSUpdate = $false
                     }
                 }
-
-
-
                 if (($Global:OSDCloud.HPTPMUpdate -eq $true) -or ($Global:OSDCloud.HPBIOSUpdate -eq $true)){
                     if ((Get-HPSureAdminState).SureAdminMode -eq "On"){
                         Write-Host "HP Sure Admin Enabled, Unable to Modify HP BIOS Settings or Perform HP BIOS / TPM Updates" -ForegroundColor Yellow
@@ -1599,9 +1601,7 @@
                         }
                     }
                 }
-                Write-Host -ForegroundColor DarkGray "Adding HP Tasks into JSON Config File for Action during Specialize"
-                Write-DarkGrayHost "HPIA Drivers = $($Global:OSDCloud.HPIADrivers) | HPIA Firmware = $($Global:OSDCloud.HPIAFirmware) | HPIA Software = $($Global:OSDCloud.HPIADrivers) | HPIA All = $($Global:OSDCloud.HPIAAll) "
-                Write-DarkGrayHost "HP TPM Update = $($Global:OSDCloud.HPTPMUpdate) | HP BIOS Update = $($Global:OSDCloud.HPBIOSUpdate) | HP BIOS WU Update = $HPBIOSWinUpdate" 
+
                 if ($Global:OSDCloud.HPTPMUpdate -eq $true){
                     if (Get-HPTPMDetermine -ne "False"){
                         Set-HPTPMBIOSSettings
@@ -1611,6 +1611,17 @@
                         $Global:OSDCloud.HPTPMUpdate = $false
                     }
                 }
+                
+                if ($Null -eq $Global:OSDCloud.HPIADrivers){$Global:OSDCloud.HPIADrivers = $false}
+                if ($Null -eq $Global:OSDCloud.HPIAFirmware){$Global:OSDCloud.HPIAFirmware = $false}
+                if ($Null -eq $Global:OSDCloud.HPIASoftware){$Global:OSDCloud.HPIASoftware = $false}
+                if ($Null -eq $Global:OSDCloud.HPIAALL){$Global:OSDCloud.HPIAALL = $false}
+                if ($Null -eq $Global:OSDCloud.HPTPMUpdate){$Global:OSDCloud.HPTPMUpdate = $false}
+                if ($Null -eq $Global:OSDCloud.HPBIOSUpdate){$Global:OSDCloud.HPBIOSUpdate = $false}
+
+                Write-Host -ForegroundColor DarkGray "Adding HP Tasks into JSON Config File for Action during Specialize and Setup Complete"
+                Write-DarkGrayHost "HPIA Drivers = $($Global:OSDCloud.HPIADrivers) | HPIA Firmware = $($Global:OSDCloud.HPIAFirmware) | HPIA Software = $($Global:OSDCloud.HPIADrivers) | HPIA All = $($Global:OSDCloud.HPIAAll) "
+                Write-DarkGrayHost "HP TPM Update = $($Global:OSDCloud.HPTPMUpdate) | HP BIOS Update = $($Global:OSDCloud.HPBIOSUpdate) | HP BIOS WU Update = $HPBIOSWinUpdate" 
 
                 $HPHashTable = @{
                     'HPUpdates' = @{
@@ -1624,7 +1635,11 @@
                         'HPBIOSUpdateNotes' = $HPBIOSUpdateNotes
                     }
                 }
+                if (($Global:OSDCloud.HPIAALL -eq $true) -or ($Global:OSDCloud.HPIADrivers -eq $true) -or ($Global:OSDCloud.HPIASoftware -eq $true) -or ($Global:OSDCloud.HPIAFirmware -eq $true)){
+                    Write-Host -ForegroundColor Yellow "Running HPIA during Setup Complete will add about 20 Minutes to OOBE (Just a moment...)"
+                }
 
+                
                 $HPHashVar = $HPHashTable | ConvertTo-Json
                 $ConfigPath = "c:\osdcloud\configs"
                 $ConfigFile = "$ConfigPath\HP.JSON"

@@ -34,6 +34,7 @@ function Set-SetupCompleteOSDCloudUSB {
             Add-Content -Path $PSFilePath '$SetupCompletePath = "C:\OSDCloud\Scripts\SetupComplete\SetupComplete.cmd"'
             Add-Content -Path $PSFilePath 'if (Test-Path $SetupCompletePath){$SetupComplete = Get-ChildItem $SetupCompletePath -Filter SetupComplete.cmd}'
             Add-Content -Path $PSFilePath 'if ($SetupComplete){cmd.exe /start /wait /c $SetupComplete.FullName}'
+            Add-Content -Path $PSFilePath "Write-Output '-------------------------------------------------------------'"
         }
         else {
         Write-Output "$PSFilePath - Not Found"

@@ -7,38 +7,42 @@
     $PSFilePath = "$($RunScript.Path)\$($RunScript.ps1File)"
 
     if (Test-Path -Path $PSFilePath){
-        Add-Content -Path $PSFilePath "Invoke-Expression (Invoke-RestMethod -Uri 'https://raw.githubusercontent.com/OSDeploy/OSD/master/cloud/modules/deviceshp.psm1')"
-        #Add-Content -Path $PSFilePath "Invoke-Expression (Invoke-RestMethod -Uri 'https://raw.githubusercontent.com/OSDeploy/OSD/master/cloud/modules/eq-winpe.psm1')"
-        #Add-Content -Path $PSFilePath "Invoke-Expression (Invoke-RestMethod -Uri 'functions.osdcloud.com' -ErrorAction SilentlyContinue)"
-        #Add-Content -Path $PSFilePath "osdcloud-WinpeSetEnvironmentVariables"
-        #Add-Content -Path $PSFilePath "osdcloud-InstallModuleHPCMSL -ErrorAction SilentlyContinue"
+        #Add-Content -Path $PSFilePath "Invoke-Expression (Invoke-RestMethod -Uri 'https://raw.githubusercontent.com/OSDeploy/OSD/master/cloud/modules/deviceshp.psm1')"
         Add-Content -Path $PSFilePath 'Write-Host "Running HP Tools in SetupComplete" -ForegroundColor Green'
         if ($Global:OSDCloud.HPIADrivers -eq $true){
-            Add-Content -Path $PSFilePath 'Write-Host "Running HPIA for Drivers" -ForegroundColor Magenta'
-            if (Test-Path -path "C:\OSDCloud\HPIA\Repo"){Add-Content -Path $PSFilePath "osdcloud-RunHPIA -OfflineMode True -Category Drivers"}
-            else {Add-Content -Path $PSFilePath "osdcloud-HPIAExecute -Category Drivers"}
+            Add-Content -Path $PSFilePath 'Write-Host "Running HPIA for Drivers [Invoke-HPIA]" -ForegroundColor Magenta'
+            if (Test-Path -path "C:\OSDCloud\HPIA\Repo"){Add-Content -Path $PSFilePath "Invoke-HPIA -OfflineMode True -Category Drivers"}
+            else {Add-Content -Path $PSFilePath "Invoke-HPIA -Category Drivers"}
+            Add-Content -Path $PSFilePath "Write-Output '-------------------------------------------------------------'"
         }
         if (($Global:OSDCloud.HPIAFirmware -eq $true) -and ($Global:OSDCloud.HPIAAll  -ne $true)){
-            Add-Content -Path $PSFilePath 'Write-Host "Running HPIA for Firmware" -ForegroundColor Magenta'
-            Add-Content -Path $PSFilePath "osdcloud-HPIAExecute -Category Firmware"
+            Add-Content -Path $PSFilePath 'Write-Host "Running HPIA for Firmware [Invoke-HPIA]" -ForegroundColor Magenta'
+            Add-Content -Path $PSFilePath "Invoke-HPIA -Category Firmware"
+            Add-Content -Path $PSFilePath "Write-Output '-------------------------------------------------------------'"
         } 
         if (($Global:OSDCloud.HPIASoftware -eq $true) -and ($Global:OSDCloud.HPIAAll  -ne $true)){
-            Add-Content -Path $PSFilePath 'Write-Host "Running HPIA for Software" -ForegroundColor Magenta'
-            Add-Content -Path $PSFilePath "osdcloud-HPIAExecute -Category Software"
+            Add-Content -Path $PSFilePath 'Write-Host "Running HPIA for Software [Invoke-HPIA]" -ForegroundColor Magenta'
+            Add-Content -Path $PSFilePath "Invoke-HPIA -Category Software"
+            Add-Content -Path $PSFilePath "Write-Output '-------------------------------------------------------------'"
         } 
         if ($Global:OSDCloud.HPIAAll -eq $true){
-            Add-Content -Path $PSFilePath 'Write-Host "Running HPIA for Software" -ForegroundColor Magenta'
-            Add-Content -Path $PSFilePath "osdcloud-HPIAExecute -Category All"
+            Add-Content -Path $PSFilePath 'Write-Host "Running HPIA for All Items [Invoke-HPIA]" -ForegroundColor Magenta'
+            Add-Content -Path $PSFilePath "Invoke-HPIA -Category All"
+            Add-Content -Path $PSFilePath "Write-Output '-------------------------------------------------------------'"
         }            
         if ($Global:OSDCloud.HPTPMUpdate -eq $true){
-            Add-Content -Path $PSFilePath 'if (Get-HPTPMDetermine -ne "False"){Write-Host "Updating TPM Firmware" -ForegroundColor Magenta}'
-            Add-Content -Path $PSFilePath 'if (Get-HPTPMDetermine -ne "False"){osdcloud-HPTPMUpdate}'
+            #Add-Content -Path $PSFilePath 'if (Get-HPTPMDetermine -ne "False"){Write-Host "Updating TPM Firmware" -ForegroundColor Magenta}'
+            #Add-Content -Path $PSFilePath 'if (Get-HPTPMDetermine -ne "False"){osdcloud-HPTPMUpdate}'
+            #Add-Content -Path $PSFilePath "Write-Output '-------------------------------------------------------------'"
         } 
         if ($Global:OSDCloud.HPBIOSUpdate -eq $true){
-            Add-Content -Path $PSFilePath 'Write-Host "Running HP System Firmware" -ForegroundColor Magenta'
-            Add-Content -Path $PSFilePath "osdcloud-HPBIOSUpdate"
+            Add-Content -Path $PSFilePath 'Write-Host "Running HP System Firmware [Get-HPBIOSUpdates]" -ForegroundColor Magenta'
+            Add-Content -Path $PSFilePath "Get-HPBIOSUpdates -Flash -Yes -Offline -BitLocker Ignore"
+            Add-Content -Path $PSFilePath "Write-Output '-------------------------------------------------------------'"
         }
-        Add-Content -Path $PSFilePath "osdcloud-HPBIOSSetSetting -SettingName 'Virtualization Technology (VTx)' -Value 'Enable'"
+        Add-Content -Path $PSFilePath "Set-HPBIOSSetting -SettingName 'Virtualization Technology (VTx)' -Value 'Enable'"
+        Add-Content -Path $PSFilePath "Write-Output 'Completed HP Device Update Section'"
+        Add-Content -Path $PSFilePath "Write-Output '-------------------------------------------------------------'"
     }
     else {
     Write-Output "$PSFilePath - Not Found"

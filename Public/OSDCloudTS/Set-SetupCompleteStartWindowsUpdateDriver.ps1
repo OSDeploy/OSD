@@ -8,6 +8,9 @@ Function Set-SetupCompleteStartWindowsUpdateDriver {
     if (Test-Path -Path $PSFilePath){
         Add-Content -Path $PSFilePath "Write-Output 'Running Windows Update Drivers Function [Start-WindowsUpdateDriver]'"
         Add-Content -Path $PSFilePath "Start-WindowsUpdateDriver"
+        Add-Content -Path $PSFilePath "Write-Output 'Completed Section [Start-WindowsUpdateDriver]'"
+
+        Add-Content -Path $PSFilePath "Write-Output '-------------------------------------------------------------'"
     }
     else {
     Write-Output "$PSFilePath - Not Found"

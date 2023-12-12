@@ -6,6 +6,8 @@ Function Set-SetupCompleteStartWindowsUpdate {
     if (Test-Path -Path $PSFilePath){
         Add-Content -Path $PSFilePath "Write-Output 'Running Windows Update [Start-WindowsUpdate]'"
         Add-Content -Path $PSFilePath "Start-WindowsUpdate"
+        Add-Content -Path $PSFilePath "Write-Output 'Completed Section [Start-WindowsUpdate]'"
+        Add-Content -Path $PSFilePath "Write-Output '-------------------------------------------------------------'"
     }
     else {
     Write-Output "$PSFilePath - Not Found"

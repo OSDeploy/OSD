@@ -311,6 +311,7 @@
         'Invoke-HPDriverUpdate',
         'Invoke-HPAnalyzer',
         'Invoke-HPIA',
+        'Invoke-HPIAOfflineSync',
         'Save-ZTIDriverPack',
         'Set-OSDCloudUnattendAuditMode',
         'Set-OSDCloudUnattendAuditModeAutopilot',
