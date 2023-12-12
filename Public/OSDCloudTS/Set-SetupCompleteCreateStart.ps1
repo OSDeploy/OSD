@@ -25,6 +25,7 @@
     New-Item -Path $PSFilePath -ItemType File -Force
     Add-Content -path $PSFilePath "Write-Output 'Starting SetupComplete Script Process'"
     Add-Content -path $PSFilePath "Set-ExecutionPolicy RemoteSigned -Force -Scope CurrentUser"
+    Add-Content -path $PSFilePath '$StartTime = Get-Date; Write-Host "Start Time: $($StartTime.ToString("hh:mm:ss"))"'
     Add-Content -path $PSFilePath '$ModulePath = (Get-ChildItem -Path "$($Env:ProgramFiles)\WindowsPowerShell\Modules\osd" | Where-Object {$_.Attributes -match "Directory"} | select -Last 1).fullname'
     Add-Content -path $PSFilePath 'import-module "$ModulePath\OSD.psd1" -Force'
     Add-Content -path $PSFilePath "Invoke-Expression (Invoke-RestMethod -Uri 'https://raw.githubusercontent.com/OSDeploy/OSD/master/cloud/modules/_anywhere.psm1')"

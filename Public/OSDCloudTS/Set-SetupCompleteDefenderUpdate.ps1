@@ -6,8 +6,10 @@ Function Set-SetupCompleteDefenderUpdate {
     $PSFilePath = "$($RunScript.Path)\$($RunScript.ps1File)"
 
     if (Test-Path -Path $PSFilePath){
-        Add-Content -Path $PSFilePath "Write-Output 'Running Defender Update Stack Function [Update-DefenderStack]'"
+        Add-Content -Path $PSFilePath 'Write-Output "Running Defender Update Stack Function [Update-DefenderStack] | Time: $($(Get-Date).ToString("hh:mm:ss"))"'
         Add-Content -Path $PSFilePath "Update-DefenderStack"
+        Add-Content -Path $PSFilePath 'Write-Output "Completed Section [Update-DefenderStack] | Time: $($(Get-Date).ToString("hh:mm:ss"))"'
+        Add-Content -Path $PSFilePath "Write-Output '-------------------------------------------------------------'"
     }
     else {
     Write-Output "$PSFilePath - Not Found"

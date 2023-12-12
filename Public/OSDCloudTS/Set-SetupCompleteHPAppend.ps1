@@ -8,7 +8,7 @@
 
     if (Test-Path -Path $PSFilePath){
         #Add-Content -Path $PSFilePath "Invoke-Expression (Invoke-RestMethod -Uri 'https://raw.githubusercontent.com/OSDeploy/OSD/master/cloud/modules/deviceshp.psm1')"
-        Add-Content -Path $PSFilePath 'Write-Host "Running HP Tools in SetupComplete" -ForegroundColor Green'
+        Add-Content -Path $PSFilePath 'Write-Output "Running HP Tools in Setup Complete | Time: $($(Get-Date).ToString("hh:mm:ss"))"'
         if ($Global:OSDCloud.HPIADrivers -eq $true){
             Add-Content -Path $PSFilePath 'Write-Host "Running HPIA for Drivers [Invoke-HPIA]" -ForegroundColor Magenta'
             if (Test-Path -path "C:\OSDCloud\HPIA\Repo"){Add-Content -Path $PSFilePath "Invoke-HPIA -OfflineMode True -Category Drivers"}
@@ -41,7 +41,7 @@
             Add-Content -Path $PSFilePath "Write-Output '-------------------------------------------------------------'"
         }
         Add-Content -Path $PSFilePath "Set-HPBIOSSetting -SettingName 'Virtualization Technology (VTx)' -Value 'Enable'"
-        Add-Content -Path $PSFilePath "Write-Output 'Completed HP Device Update Section'"
+        Add-Content -Path $PSFilePath 'Write-Output "Completed Section HP Enterprise Device Updates | Time: $($(Get-Date).ToString("hh:mm:ss"))"'
         Add-Content -Path $PSFilePath "Write-Output '-------------------------------------------------------------'"
     }
     else {
