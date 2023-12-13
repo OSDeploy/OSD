@@ -271,7 +271,7 @@ function Update-OSDCloudUSB {
         #If this parameter is not used, any Operating Systems can be downloaded
         #'Windows 11 22H2','Windows 11 21H2','Windows 10 22H2','Windows 10 21H2','Windows 10 21H1','Windows 10 20H2','Windows 10 2004','Windows 10 1909','Windows 10 1903','Windows 10 1809'
         [ValidateSet(
-            'Windows 11 22H2','Windows 11 21H2',
+            'Windows 11 23H2','Windows 11 22H2','Windows 11 21H2',
             'Windows 10 22H2','Windows 10 21H2','Windows 10 21H1','Windows 10 20H2','Windows 10 2004',
             'Windows 10 1909H','Windows 10 1903',
             'Windows 10 1809'
@@ -514,47 +514,59 @@ function Update-OSDCloudUSB {
             if (Test-Path $OSDownloadPath) {
                 $OSDCloudSavedOS = Get-ChildItem -Path $OSDownloadPath *.esd -Recurse -File | Select-Object -ExpandProperty Name
             }
-            $OperatingSystems = Get-WSUSXML -Catalog FeatureUpdate -UpdateArch 'x64' -Silent
+            #$OperatingSystems = Get-WSUSXML -Catalog FeatureUpdate -UpdateArch 'x64' -Silent
+            $OperatingSystems = Get-OSDCloudOperatingSystems
         
             if ($OSName) {
-                $OperatingSystems = $OperatingSystems | Where-Object {$_.Catalog -cmatch $OSName}
+                #$OperatingSystems = $OperatingSystems | Where-Object {$_.Catalog -cmatch $OSName}
+                $OperatingSystems = $OperatingSystems | Where-Object {$_.Name -cmatch $OSName}
             }
             if ($OSActivation -eq 'Retail') {
-                $OperatingSystems = $OperatingSystems | Where-Object {$_.Title -match 'consumer'}
+                #$OperatingSystems = $OperatingSystems | Where-Object {$_.Title -match 'consumer'}
+                $OperatingSystems = $OperatingSystems | Where-Object {$_.Activation -match 'Retail'}
             }
             if ($OSActivation -eq 'Volume') {
-                $OperatingSystems = $OperatingSystems | Where-Object {$_.Title -match 'business'}
+                #$OperatingSystems = $OperatingSystems | Where-Object {$_.Title -match 'business'}
+                $OperatingSystems = $OperatingSystems | Where-Object {$_.Activation -match 'Volume'}
             }
             if ($OSLanguage){
-                $OperatingSystems = $OperatingSystems | Where-Object {$_.Title -match $OSLanguage}
+                #$OperatingSystems = $OperatingSystems | Where-Object {$_.Title -match $OSLanguage}
+                $OperatingSystems = $OperatingSystems | Where-Object {$_.Language -match $OSLanguage}
             }
         
             if ($OperatingSystems) {
                 $OperatingSystems = $OperatingSystems | Sort-Object Title
     
                 foreach ($Item in $OperatingSystems) {
-                    $Item.Catalog = $Item.Catalog -replace 'FeatureUpdate ',''
+                    #$Item.Catalog = $Item.Catalog -replace 'FeatureUpdate ',''
                     if ($OSDCloudSavedOS) {
                         if ($Item.FileName -in $OSDCloudSavedOS) {
-                            $Item.OSDStatus = 'Downloaded'
+                            $Item.Status = 'Downloaded'
                         }
                     }
                 }
     
-                $OperatingSystems = $OperatingSystems | Select-Object -Property OSDVersion,OSDStatus,@{Name='OperatingSystem';Expression={($_.Catalog)}},Title,CreationDate,FileUri,FileName
-        
+                #$OperatingSystems = $OperatingSystems | Select-Object -Property OSDVersion,OSDStatus,@{Name='OperatingSystem';Expression={($_.Catalog)}},Title,CreationDate,FileUri,FileName
+                $OperatingSystems = $OperatingSystems | Select-Object -Property Version,ReleaseID,Status,Name,ReleaseDate,Url,FileName
+
                 Write-Host -ForegroundColor Yellow "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Select one or more Operating Systems to download in PowerShell GridView"
-                $OperatingSystems = $OperatingSystems | Sort-Object -Property @{Expression='OSDStatus';Descending=$true}, OperatingSystem -Descending | Out-GridView -Title 'Select one or more Operating Systems to download and press OK' -PassThru
-        
+                #$OperatingSystems = $OperatingSystems | Sort-Object -Property @{Expression='OSDStatus';Descending=$true}, OperatingSystem -Descending | Out-GridView -Title 'Select one or more Operating Systems to download and press OK' -PassThru
+                $OperatingSystems = $OperatingSystems | Sort-Object -Property @{Expression='Status';Descending=$true}, Name -Descending | Out-GridView -Title 'Select one or more Operating Systems to download and press OK' -PassThru
+
+                
                 foreach ($OperatingSystem in $OperatingSystems) {
-                    if ($OperatingSystem.OSDStatus -eq 'Downloaded') {
+                    if ($OperatingSystem.Status -eq 'Downloaded') {
                         Get-ChildItem -Path $OSDownloadPath -Recurse -Include $OperatingSystem.FileName | Select-Object -ExpandProperty FullName
                     }
-                    elseif (Test-WebConnection -Uri "$($OperatingSystem.FileUri)") {
+                    elseif (Test-WebConnection -Uri "$($OperatingSystem.Url)") {
                         #$OSDownloadChildPath = Join-Path $OSDownloadPath (($OperatingSystem.Catalog) -replace 'FeatureUpdate ','')
-                        $OSDownloadChildPath = Join-Path $OSDownloadPath $($OperatingSystem.OperatingSystem)
+                        #$OSDownloadChildPath = Join-Path $OSDownloadPath $($OperatingSystem.OperatingSystem)
+                        $FolderName = "$($OperatingSystem.Version) $($OperatingSystem.ReleaseID)"
+                        $OSDownloadChildPath = Join-Path $OSDownloadPath $FolderName
                         Write-Host -ForegroundColor DarkGray "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Downloading OSDCloud Operating System to $OSDownloadChildPath"
-                        $SaveWebFile = Save-WebFile -SourceUrl $OperatingSystem.FileUri -DestinationDirectory "$OSDownloadChildPath" -DestinationName $OperatingSystem.FileName
+                        #$SaveWebFile = Save-WebFile -SourceUrl $OperatingSystem.FileUri -DestinationDirectory "$OSDownloadChildPath" -DestinationName $OperatingSystem.FileName
+                        $SaveWebFile = Save-WebFile -SourceUrl $OperatingSystem.Url -DestinationDirectory "$OSDownloadChildPath" -DestinationName $OperatingSystem.FileName
+
                         
                         if (Test-Path $SaveWebFile.FullName) {
                             Get-Item $SaveWebFile.FullName

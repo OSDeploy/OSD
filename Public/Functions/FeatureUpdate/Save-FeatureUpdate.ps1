@@ -29,11 +29,15 @@ function Save-FeatureUpdate {
             'Windows 11 23H2 x64',    
             'Windows 11 22H2 x64',
             'Windows 11 21H2 x64',
-            'Windows 10 22H2 x64'
+            'Windows 10 22H2 x64',
+            'Windows 10 21H2 x64',
+            'Windows 10 20H2 x64',
+            'Windows 10 2004 x64',
+            'Windows 10 1909 x64'
             )]
         [Alias('Name')]
         [System.String]
-        $OSName = 'Windows 11 22H2 x64',
+        $OSName = 'Windows 11 23H2 x64',
 
         #Operating System Version
         #Default = Windows 11
@@ -46,10 +50,10 @@ function Save-FeatureUpdate {
         #Operating System ReleaseID
         #Default = 22H2
         [Parameter(ParameterSetName = 'v1')]
-        [ValidateSet('22H2','21H2','21H1','20H2','2004','1909','1903','1809')]
+        [ValidateSet('23H2','22H2','21H2','20H2','2004','1909')]
         [Alias('Build','OSBuild','ReleaseID')]
         [System.String]
-        $OSReleaseID = '22H2',
+        $OSReleaseID = '23H2',
 
         #Operating System Architecture
         #Default = x64
@@ -126,6 +130,10 @@ function Save-FeatureUpdate {
             'Windows 11 22H2 x64'   {$Results = $Results | Where-Object {$_.Version -match 'Windows 11'} | Where-Object {$_.ReleaseID -eq '22H2'}}
             'Windows 11 21H2 x64'   {$Results = $Results | Where-Object {$_.Version -match 'Windows 11'} | Where-Object {$_.ReleaseID -eq '21H2'}}
             'Windows 10 22H2 x64'   {$Results = $Results | Where-Object {$_.Version -match 'Windows 10'} | Where-Object {$_.ReleaseID -eq '22H2'}}
+            'Windows 10 21H2 x64'   {$Results = $Results | Where-Object {$_.Version -match 'Windows 10'} | Where-Object {$_.ReleaseID -eq '21H2'}}
+            'Windows 10 20H2 x64'   {$Results = $Results | Where-Object {$_.Version -match 'Windows 10'} | Where-Object {$_.ReleaseID -eq '20H2'}}
+            'Windows 10 2004 x64'   {$Results = $Results | Where-Object {$_.Version -match 'Windows 10'} | Where-Object {$_.ReleaseID -eq '2004'}}
+            'Windows 10 1909 x64'   {$Results = $Results | Where-Object {$_.Version -match 'Windows 10'} | Where-Object {$_.ReleaseID -eq '1909'}}
 
         }
     }

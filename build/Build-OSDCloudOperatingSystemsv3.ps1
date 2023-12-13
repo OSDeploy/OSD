@@ -2,7 +2,8 @@
 #This file needs to be updated for each release of Windows
 #This will create a table of all of the ESD files from MS, then create a "database" for OSDCloud
 #Gary Blok's attempt to help David
-
+# Import OSD Module
+Import-Module OSD -Force -ErrorAction Stop
 
 $StagingFolder = "$env:TEMP\OSDStaging"
 if (!(Test-Path -Path $StagingFolder)){
@@ -144,7 +145,9 @@ $Results = $Results | Select-Object `
 @{Name='ImageName';Expression={($null)}}, `
 @{Name='Url';Expression={($_.FilePath)}}, `
 @{Name='SHA1';Expression={($_.Sha1)}}, `
-@{Name='UpdateID';Expression={($_.UpdateID)}}
+@{Name='UpdateID';Expression={($_.UpdateID)}}, `
+@{Name='Win10';Expression={($null)}}, `
+@{Name='Win11';Expression={($null)}}
 
 foreach ($Result in $Results) {
     #=================================================
@@ -152,9 +155,13 @@ foreach ($Result in $Results) {
     #=================================================
     if ($Result.FileName -match 'Windows 10') {
         $Result.Version = 'Windows 10'
+        $Result.Win10 = $true
+        $Result.Win11 = $false
     }
     if ($Result.Name -match 'Windows 11') {
         $Result.Version = 'Windows 11'
+        $Result.Win10 = $false
+        $Result.Win11 = $true
     }
     #=================================================
     #   Language
@@ -223,7 +230,90 @@ foreach ($Result in $Results) {
     }
     #=================================================
 }
-$Results = $Results | Sort-Object -Property Name
-$Results | Export-Clixml -Path (Join-Path (Get-Module -Name OSD -ListAvailable | Sort-Object Version -Descending | Select-Object -First 1).ModuleBase "Catalogs\CloudOperatingSystems.xml") -Force
+
+$ResultsMCT = $Results | Sort-Object -Property Name
+
+
+#=================================================
+#   LEGACY FeatureUpdates
+#=================================================
+$WSUSResults = Get-WSUSXML -Catalog FeatureUpdate -Silent
+$WSUSResults = $WSUSResults | Where-Object {$_.UpdateArch -eq 'x64'}
+$WSUSResults = $WSUSResults | Select-Object `
+@{Name='Status';Expression={($_.OSDStatus)}}, `
+@{Name='ReleaseDate';Expression={(Get-Date $_.CreationDate -Format "yyyy-MM-dd")}}, `
+@{Name='Name';Expression={($_.Title)}}, `
+@{Name='Version';Expression={($_.UpdateOS)}}, `
+@{Name='ReleaseID';Expression={($_.UpdateBuild)}}, `
+@{Name='Architecture';Expression={($_.UpdateArch)}}, `
+@{Name='Language';Expression={($null)}}, `
+@{Name='Activation';Expression={($null)}}, `
+@{Name='Build';Expression={($null)}}, `
+@{Name='FileName';Expression={((Split-Path -Leaf $_.FileUri))}}, `
+@{Name='ImageIndex';Expression={($null)}}, `
+@{Name='ImageName';Expression={($null)}}, `
+@{Name='Url';Expression={($_.FileUri)}}, `
+@{Name='SHA1';Expression={($null)}}, `
+@{Name='UpdateID';Expression={($_.UpdateID)}}, `
+@{Name='Win10';Expression={($null)}}, `
+@{Name='Win11';Expression={($null)}}
+
+
+foreach ($WSUSResult in $WSUSResults) {
+    #=================================================
+    #   Language
+    #=================================================
+    if ($WSUSResult.FileName -match 'sr-latn-rs') {
+        $WSUSResult.Language = 'sr-latn-rs'
+    }
+    else {
+        $Regex = "[a-zA-Z]+-[a-zA-Z]+"
+        $WSUSResult.Language = ($WSUSResult.FileName | Select-String -AllMatches -Pattern $Regex).Matches[0].Value
+    }
+    #=================================================
+    #   Activation
+    #=================================================
+    if ($WSUSResult.Url -match 'business') {
+        $WSUSResult.Activation = 'Volume'
+    }
+    else {
+        $WSUSResult.Activation = 'Retail'
+    }
+    #=================================================
+    #   Version
+    #=================================================
+    if ($WSUSResult.Name -match 'Windows 10') {
+        $WSUSResult.Version = 'Windows 10'
+        $WSUSResult.Win10 = $true
+        $WSUSResult.Win11 = $false
+    }
+    if ($WSUSResult.Name -match 'Windows 11') {
+        $WSUSResult.Version = 'Windows 11'
+        $WSUSResult.Win10 = $false
+        $WSUSResult.Win11 = $true
+    }
+    #=================================================
+    #   Build
+    #=================================================
+    $Regex = "[0-9]*\.[0-9]+"
+    $WSUSResult.Build = ($WSUSResult.FileName | Select-String -AllMatches -Pattern $Regex).Matches[0].Value
+    #=================================================
+    #   SHA1
+    #=================================================
+    $Regex = "[0-9a-f]{40}"
+    $WSUSResult.SHA1 = ($WSUSResult.FileName | Select-String -AllMatches -Pattern $Regex).Matches[0].Value
+    #=================================================
+    #   Name
+    #=================================================
+
+    $WSUSResult.Name = $WSUSResult.Version + ' ' + $WSUSResult.ReleaseID + ' x64 ' + $WSUSResult.Language + ' ' + $WSUSResult.Activation + ' ' + $WSUSResult.Build
+
+    #=================================================
+}
+
+$ResultsWSUS = $WSUSResults | Where-Object {$_.Version -eq "Windows 10" -and ($_.ReleaseID -eq "21H2" -or $_.ReleaseID -eq "20H2" -or $_.ReleaseID -eq "2004" -or $_.ReleaseID -eq "1909")} | Sort-Object -Property Name
+$ResultsTotal += $ResultsMCT
+$ResultsTotal += $ResultsWSUS
+$ResultsTotal | Export-Clixml -Path (Join-Path (Get-Module -Name OSD -ListAvailable | Sort-Object Version -Descending | Select-Object -First 1).ModuleBase "Catalogs\CloudOperatingSystems.xml") -Force
 Import-Clixml -Path (Join-Path (Get-Module -Name OSD -ListAvailable | Sort-Object Version -Descending | Select-Object -First 1).ModuleBase "Catalogs\CloudOperatingSystems.xml") | ConvertTo-Json | Out-File (Join-Path (Get-Module -Name OSD -ListAvailable | Sort-Object Version -Descending | Select-Object -First 1).ModuleBase "Catalogs\CloudOperatingSystems.json") -Encoding ascii -Width 2000 -Force
 #================================================
