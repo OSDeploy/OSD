@@ -79,12 +79,17 @@
                 "Windows 11 23H2 x64",
 		        "Windows 11 22H2 x64",
                 "Windows 11 21H2 x64",
-                "Windows 10 22H2 x64"
+                "Windows 10 22H2 x64",
+                "Windows 10 21H2 x64",
+                "Windows 10 20H2 x64",
+                "Windows 10 1909 x64"
             ],
             "ReleaseID": [
                 "23H2",
 		        "22H2",
-                "21H2"
+                "21H2",
+                "20H2",
+                "1909"
             ],
             "Version": [
                 "Windows 11",
