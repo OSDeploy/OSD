@@ -833,7 +833,7 @@ Windows Registry Editor Version 5.00
 
         $Params = @{
             ErrorAction = 'Stop'
-            LogLevel = 'Debug'
+            LogLevel = 'WarningsInfo'
             LogPath = "$TemplateLogs\$((Get-Date).ToString('yyyy-MM-dd-HHmmss'))-CumulativeUpdate.log"
             PackagePath = $CumulativeUpdate
             Path = $MountPath
