@@ -1558,12 +1558,13 @@
             if (Test-HPIASupport){
                 #Set Enable Specialize to be triggered later
                 $EnableSpecialize = $true
-
+                
                 Write-SectionHeader "HP Enterprise Options Setup"
                 Write-Host -ForegroundColor DarkGray " Confirmed Internet Connectivity"
                 Write-Host -ForegroundColor DarkGray " Confirmed HP Tools Supported [Test-HPIASupport]"
                 $HPFeaturesEnabled = $true
-                
+                write-host -ForegroundColor DarkGray " Confirm HPCMSL Installed [Install-ModuleHPCMSL]"
+                Install-ModuleHPCMSL
                 #If BIOS Update Desired, Confirm Update Available, if Not, set to False
                 if ($Global:OSDCloud.HPBIOSUpdate -eq $true){
                     [version]$HPBIOSVersion = Get-HPBIOSVersion
