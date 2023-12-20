@@ -331,6 +331,8 @@ $XMLProfile = @"
         #=================================================
         #   Test UEFI WiFi Profile
         #=================================================
+        #Note, this ONLY Works if you're using OSDCloud as a Sure Recover Agent, and WinRE is triggered via Sure Recover (F11).
+        #Otherwise the UEFI Varaiable is not populated for you to access.  You know, security. :-)
         if ($StartWinREWiFi){
             $Module = Import-Module UEFIv2 -PassThru -ErrorAction SilentlyContinue
             if ($Module) {
