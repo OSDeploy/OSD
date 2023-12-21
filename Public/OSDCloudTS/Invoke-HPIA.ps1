@@ -93,137 +93,114 @@ Perhaps leverage Install-HPImageAssistant function in HPCMSL
 
 #>
 Function Install-HPIA{
-[CmdletBinding()]
-    Param (
-        [Parameter(Mandatory=$false)]
-        $HPIAInstallPath = "$env:ProgramFiles\HP\HPIA\bin"
-        )
-    $script:TempWorkFolder = "$env:windir\Temp\HPIA"
-    $ProgressPreference = 'SilentlyContinue' # to speed up web requests
-    $HPIACABUrl = "https://hpia.hpcloud.hp.com/HPIAMsg.cab"
-    
-    try {
-        [void][System.IO.Directory]::CreateDirectory($HPIAInstallPath)
-        [void][System.IO.Directory]::CreateDirectory($TempWorkFolder)
-    }
-    catch {throw}
-    $OutFile = "$TempWorkFolder\HPIAMsg.cab"
-    Invoke-WebRequest -Uri $HPIACABUrl -UseBasicParsing -OutFile $OutFile
-    if(test-path "$env:windir\System32\expand.exe"){
-        try { cmd.exe /c "C:\Windows\System32\expand.exe -F:* $OutFile $TempWorkFolder\HPIAMsg.xml"}
-        catch { Write-host "Nope, don't have that."}
-    }
-    if (Test-Path -Path "$TempWorkFolder\HPIAMsg.xml"){
-        [XML]$HPIAXML = Get-Content -Path "$TempWorkFolder\HPIAMsg.xml"
-        $HPIADownloadURL = $HPIAXML.ImagePal.HPIALatest.SoftpaqURL
-        $HPIAVersion = $HPIAXML.ImagePal.HPIALatest.Version
-        $HPIAFileName = $HPIADownloadURL.Split('/')[-1]
+    [CmdletBinding()]
+        Param (
+            [Parameter(Mandatory=$false)]
+            $HPIAInstallPath = "$env:ProgramFiles\HP\HPIA\bin"
+            )
+        $script:TempWorkFolder = "$env:windir\Temp\HPIA"
+        $ProgressPreference = 'SilentlyContinue' # to speed up web requests
+        $HPIACABUrl = "https://hpia.hpcloud.hp.com/HPIAMsg.cab"
         
-    }
-    else {
-        $HPIAWebUrl = "https://ftp.hp.com/pub/caps-softpaq/cmit/HPIA.html" # Static web page of the HP Image Assistant
-        try {$HTML = Invoke-WebRequest –Uri $HPIAWebUrl –ErrorAction Stop }
-        catch {Write-Output "Failed to download the HPIA web page. $($_.Exception.Message)" ;throw}
-        #$HPIASoftPaqNumber = ($HTML.Links | Where-Object {$_.href -match "hp-hpia-"}).outerText
-        $HPIADownloadURL = ($HTML.Links | Where-Object {$_.href -match "hp-hpia-"}).href
-        $HPIAFileName = $HPIADownloadURL.Split('/')[-1]
-        $HPIAVersion = ($HPIAFileName.Split("-") | Select-Object -Last 1).replace(".exe","")
-    }
-
-    Write-Output "HPIA Download URL is $HPIADownloadURL | Verison: $HPIAVersion"
-    If (Test-Path $HPIAInstallPath\HPImageAssistant.exe){
-        $HPIA = get-item -Path $HPIAInstallPath\HPImageAssistant.exe
-        $HPIAExtractedVersion = $HPIA.VersionInfo.FileVersion
-        if ($HPIAExtractedVersion -match $HPIAVersion){
-            Write-Host "HPIA $HPIAVersion already on Machine, Skipping Download" -ForegroundColor Green
-            $HPIAIsCurrent = $true
+        try {
+            [void][System.IO.Directory]::CreateDirectory($HPIAInstallPath)
+            [void][System.IO.Directory]::CreateDirectory($TempWorkFolder)
+        }
+        catch {throw}
+        $OutFile = "$TempWorkFolder\HPIAMsg.cab"
+        Invoke-WebRequest -Uri $HPIACABUrl -UseBasicParsing -OutFile $OutFile
+        if(test-path "$env:windir\System32\expand.exe"){
+            try { cmd.exe /c "C:\Windows\System32\expand.exe -F:* $OutFile $TempWorkFolder\HPIAMsg.xml"}
+            catch { Write-host "Nope, don't have that."}
+        }
+        if (Test-Path -Path "$TempWorkFolder\HPIAMsg.xml"){
+            [XML]$HPIAXML = Get-Content -Path "$TempWorkFolder\HPIAMsg.xml"
+            $HPIADownloadURL = $HPIAXML.ImagePal.HPIALatest.SoftpaqURL
+            $HPIAVersion = $HPIAXML.ImagePal.HPIALatest.Version
+            $HPIAFileName = $HPIADownloadURL.Split('/')[-1]
+            
+        }
+        else {
+            $HPIAWebUrl = "https://ftp.hp.com/pub/caps-softpaq/cmit/HPIA.html" # Static web page of the HP Image Assistant
+            try {$HTML = Invoke-WebRequest –Uri $HPIAWebUrl –ErrorAction Stop }
+            catch {Write-Output "Failed to download the HPIA web page. $($_.Exception.Message)" ;throw}
+            #$HPIASoftPaqNumber = ($HTML.Links | Where-Object {$_.href -match "hp-hpia-"}).outerText
+            $HPIADownloadURL = ($HTML.Links | Where-Object {$_.href -match "hp-hpia-"}).href
+            $HPIAFileName = $HPIADownloadURL.Split('/')[-1]
+            $HPIAVersion = ($HPIAFileName.Split("-") | Select-Object -Last 1).replace(".exe","")
+        }
+    
+        Write-Output "HPIA Download URL is $HPIADownloadURL | Verison: $HPIAVersion"
+        If (Test-Path $HPIAInstallPath\HPImageAssistant.exe){
+            $HPIA = get-item -Path $HPIAInstallPath\HPImageAssistant.exe
+            $HPIAExtractedVersion = $HPIA.VersionInfo.FileVersion
+            if ($HPIAExtractedVersion -match $HPIAVersion){
+                Write-Host "HPIA $HPIAVersion already on Machine, Skipping Download" -ForegroundColor Green
+                $HPIAIsCurrent = $true
+            }
+            else{$HPIAIsCurrent = $false}
         }
         else{$HPIAIsCurrent = $false}
-    }
-    else{$HPIAIsCurrent = $false}
-    #Download HPIA
-    if ($HPIAIsCurrent -eq $false){
-        Write-Host "Downloading HPIA" -ForegroundColor Green
-        if (!(Test-Path -Path "$TempWorkFolder\$HPIAFileName")){
+        #Download HPIA
+        if ($HPIAIsCurrent -eq $false){
+            Write-Host "Downloading HPIA" -ForegroundColor Green
+            if (!(Test-Path -Path "$TempWorkFolder\$HPIAFileName")){
+                Invoke-WebRequest -UseBasicParsing -Uri $HPIADownloadURL -OutFile "$TempWorkFolder\$HPIAFileName"
+            }
+            else{
+                Write-Host "$HPIAFileName already downloaded, skipping step" -ForegroundColor Green
+            }
+    
+            #Extract HPIA
+            Write-Host "Extracting HPIA" -ForegroundColor Green
             try {
-                $ExistingBitsJob = Get-BitsTransfer –Name "$HPIAFileName" –AllUsers –ErrorAction SilentlyContinue
-                If ($ExistingBitsJob){
-                    Write-Output "An existing BITS tranfer was found. Cleaning it up."
-                    Remove-BitsTransfer –BitsJob $ExistingBitsJob
+                $Process = Start-Process –FilePath $TempWorkFolder\$HPIAFileName –WorkingDirectory $HPIAInstallPath –ArgumentList '/s /f .\ /e' –NoNewWindow –PassThru –Wait –ErrorAction Stop
+                Start-Sleep –Seconds 5
+                If (Test-Path "$HPIAInstallPath\HPImageAssistant.exe"){
+                    Write-Host "Extraction complete" -ForegroundColor Green
                 }
-                $BitsJob = Start-BitsTransfer –Source $HPIADownloadURL –Destination $TempWorkFolder\$HPIAFileName –Asynchronous –DisplayName "$HPIAFileName" –Description "HPIA download" –RetryInterval 60 –ErrorAction Stop 
-                do {
-                    Start-Sleep –Seconds 5
-                    $Progress = [Math]::Round((100 * ($BitsJob.BytesTransferred / $BitsJob.BytesTotal)),2)
-                    Write-Output "Downloaded $Progress`%"
-                } until ($BitsJob.JobState -in ("Transferred","Error"))
-                If ($BitsJob.JobState -eq "Error"){
-                    Write-Output "BITS tranfer failed: $($BitsJob.ErrorDescription)"
+                Else{
+                    Write-Host "HPImageAssistant not found!" -ForegroundColor Red
+                    Stop-Transcript
                     throw
                 }
-                Complete-BitsTransfer –BitsJob $BitsJob
-                Write-Host "BITS transfer is complete" -ForegroundColor Green
             }
             catch {
-                Write-Host "Failed to start a BITS transfer for the HPIA: $($_.Exception.Message)" -ForegroundColor Red
+                Write-Host "Failed to extract the HPIA: $($_.Exception.Message)" -ForegroundColor Red
                 throw
             }
-        }
-        else{
-            Write-Host "$HPIAFileName already downloaded, skipping step" -ForegroundColor Green
-        }
-
-        #Extract HPIA
-        Write-Host "Extracting HPIA" -ForegroundColor Green
-        try {
-            $Process = Start-Process –FilePath $TempWorkFolder\$HPIAFileName –WorkingDirectory $HPIAInstallPath –ArgumentList "/s /f .\ /e" –NoNewWindow –PassThru –Wait –ErrorAction Stop
-            Start-Sleep –Seconds 5
-            If (Test-Path $HPIAInstallPath\HPImageAssistant.exe){
-                Write-Host "Extraction complete" -ForegroundColor Green
-            }
-            Else{
-                Write-Host "HPImageAssistant not found!" -ForegroundColor Red
-                Stop-Transcript
-                throw
-            }
-        }
-        catch {
-            Write-Host "Failed to extract the HPIA: $($_.Exception.Message)" -ForegroundColor Red
-            throw
         }
     }
-}
 
 ## Run-HPIA
-
 Function Invoke-HPIA {
 
-[CmdletBinding()]
-    Param (
-        [Parameter(Mandatory=$false)]
-        [ValidateSet("Analyze", "DownloadSoftPaqs")]
-        $Operation = "Analyze",
-        [Parameter(Mandatory=$false)]
-        [ValidateSet("All", "BIOS", "Drivers", "Software", "Firmware", "Accessories","BIOS,Drivers")]
-        $Category = "Drivers",
-        [Parameter(Mandatory=$false)]
-        [ValidateSet("All", "Critical", "Recommended", "Routine")]
-        $Selection = "All",
-        [Parameter(Mandatory=$false)]
-        [ValidateSet("List", "Download", "Extract", "Install", "UpdateCVA")]
-        $Action = "List",
-        [Parameter(Mandatory=$false)]
-        $LogFolder = "$env:systemdrive\ProgramData\HP\Logs",
-        [Parameter(Mandatory=$false)]
-        $ReportsFolder = "$env:systemdrive\ProgramData\HP\HPIA",
-        [Parameter(Mandatory=$false)]
-        $HPIAInstallPath = "$env:ProgramFiles\HP\HPIA\bin",
-        [Parameter(Mandatory=$false)]
-        $ReferenceFile
-        )
-    $DateTime = Get-Date –Format "yyyyMMdd-HHmmss"
-    $ReportsFolder = "$ReportsFolder\$DateTime"
-    $script:TempWorkFolder = "$env:temp\HPIA"
+    [CmdletBinding()]
+        Param (
+            [Parameter(Mandatory=$false)]
+            [ValidateSet("Analyze", "DownloadSoftPaqs")]
+            $Operation = "Analyze",
+            [Parameter(Mandatory=$false)]
+            [ValidateSet("All", "BIOS", "Drivers", "Software", "Firmware", "Accessories","BIOS,Drivers")]
+            $Category = "Drivers",
+            [Parameter(Mandatory=$false)]
+            [ValidateSet("All", "Critical", "Recommended", "Routine")]
+            $Selection = "All",
+            [Parameter(Mandatory=$false)]
+            [ValidateSet("List", "Download", "Extract", "Install", "UpdateCVA")]
+            $Action = "List",
+            [Parameter(Mandatory=$false)]
+            $LogFolder = "$env:systemdrive\ProgramData\HP\Logs",
+            [Parameter(Mandatory=$false)]
+            $ReportsFolder = "$env:systemdrive\ProgramData\HP\HPIA",
+            [Parameter(Mandatory=$false)]
+            $HPIAInstallPath = "$env:ProgramFiles\HP\HPIA\bin",
+            [Parameter(Mandatory=$false)]
+            $ReferenceFile
+            )
+    $DateTime = Get-Date -Format "yyyyMMdd-HHmm"
+    $ReportsFolder = "$($ReportsFolder)\$($DateTime)"
+    $script:TempWorkFolder = 'C:\OSDCloud\HPIA\TempWorkFolder'
     try{
         [void][System.IO.Directory]::CreateDirectory($LogFolder)
         [void][System.IO.Directory]::CreateDirectory($TempWorkFolder)
@@ -237,6 +214,7 @@ Function Invoke-HPIA {
     Install-HPIA -HPIAInstallPath $HPIAInstallPath
     if ($Action -eq "List"){$LogComp = "Scanning"}
     else {$LogComp = "Updating"}
+
     try {
 
         if ($ReferenceFile){
@@ -262,7 +240,7 @@ Function Invoke-HPIA {
             Stop-Transcript
             Exit 0
         }
-         elseif ($Process.ExitCode -eq 257){
+        elseif ($Process.ExitCode -eq 257){
             Write-CMTraceLog –Message "Exit $($Process.ExitCode) - There were no recommendations selected for the analysis." –Component "Update" –Type 2
             Write-Host "Exit $($Process.ExitCode) - There were no recommendations selected for the analysis." -ForegroundColor Green
             Write-CMTraceLog –Message "########################################" –Component "Complete"
@@ -315,18 +293,19 @@ Function Invoke-HPIA {
             throw
         }
         Else{
-            Write-CMTraceLog –Message "Process exited with code $($Process.ExitCode). Expecting 0." –Component "Update" –Type 3
-            Write-Host "Process exited with code $($Process.ExitCode). Expecting 0." -ForegroundColor Yellow
+            #Write-CMTraceLog –Message "Exit $($Process.ExitCode) - Expecting 0" –Component "Update" –Type 3
+            Write-Output "Exit $($Process.ExitCode) - Expecting 0" 
             Stop-Transcript
             throw
         }
     }
     catch {
-        Write-CMTraceLog –Message "Failed to start the HPImageAssistant.exe: $($_.Exception.Message)" –Component "Update" –Type 3
-        Write-Host "Failed to start the HPImageAssistant.exe: $($_.Exception.Message)" -ForegroundColor Red
+        #Write-CMTraceLog –Message "Exit $($Process.ExitCode) - Expecting 0" –Component "Update" –Type 3
+        Write-Output "Exit $($Process.ExitCode) - Expecting 0" 
         Stop-Transcript
         throw
     }
+
 }
 Function Get-HPIAXMLResult {
 <#  
@@ -452,20 +431,41 @@ Grabs the JSON output from a recent run of HPIA to see what was installed and Ex
     {
     $LatestReportFolder = (Get-ChildItem -Path $ReportsFolder | Where-Object {$_.Attributes -match 'Directory'} | Select-Object -Last 1).FullName
     $JSONFile = Get-ChildItem –Path $LatestReportFolder –Recurse –Include *.JSON –ErrorAction Stop
+
+    }
+    catch
+    {
+    Write-CMTraceLog -Message "NO JSON report." -Component "Report" -Type 1
+    }
+}
+Function Get-HPIAJSONResult {
+<#  
+Grabs the JSON output from a recent run of HPIA to see what was installed and Exit Codes per item
+#>
+[CmdletBinding()]
+    Param (
+        [Parameter(Mandatory=$false)]
+        $ReportsFolder = "$env:systemdrive\ProgramData\HP\HPIA"
+
+        )
+    try 
+    {
+    $LatestReportFolder = (Get-ChildItem -Path $ReportsFolder | Where-Object {$_.Attributes -match 'Directory'} | Select-Object -Last 1).FullName
+    $JSONFile = Get-ChildItem -Path $LatestReportFolder -Recurse -Include *.JSON -ErrorAction Stop
         If ($JSONFile)
         {
             Write-Host "Reporting Full HPIA Results" -ForegroundColor Green
-            Write-CMTraceLog –Message "JSON located at $($JSONFile.FullName)" –Component "Report"
+            Write-CMTraceLog -Message "JSON located at $($JSONFile.FullName)" -Component "Report"
             try 
             {
-            $JSON = Get-Content –Path $JSONFile.FullName  –ErrorAction Stop | ConvertFrom-Json
-            Write-CMTraceLog –Message "HPIAOpertaion: $($JSON.HPIA.HPIAOperation)" –Component "Report"
+            $JSON = Get-Content -Path $JSONFile.FullName  -ErrorAction Stop | ConvertFrom-Json
+            Write-CMTraceLog -Message "HPIAOpertaion: $($JSON.HPIA.HPIAOperation)" -Component "Report"
             Write-Host " HPIAOpertaion: $($JSON.HPIA.HPIAOperation)" -ForegroundColor Gray
-            Write-CMTraceLog –Message "ExitCode: $($JSON.HPIA.ExitCode)" –Component "Report"
+            Write-CMTraceLog -Message "ExitCode: $($JSON.HPIA.ExitCode)" -Component "Report"
             Write-Host " ExitCode: $($JSON.HPIA.ExitCode)" -ForegroundColor Gray
-            Write-CMTraceLog –Message "LastOperation: $($JSON.HPIA.LastOperation)" –Component "Report"
+            Write-CMTraceLog -Message "LastOperation: $($JSON.HPIA.LastOperation)" -Component "Report"
             Write-Host " LastOperation: $($JSON.HPIA.LastOperation)" -ForegroundColor Gray
-            Write-CMTraceLog –Message "LastOperationStatus: $($JSON.HPIA.LastOperationStatus)" –Component "Report"
+            Write-CMTraceLog -Message "LastOperationStatus: $($JSON.HPIA.LastOperationStatus)" -Component "Report"
             Write-Host " LastOperationStatus: $($JSON.HPIA.LastOperationStatus)" -ForegroundColor Gray
             $Recommendations = $JSON.HPIA.Recommendations
             if ($Recommendations) {
@@ -474,27 +474,27 @@ Grabs the JSON output from a recent run of HPIA to see what was installed and Ex
                     $ItemName = $Item.Name
                     $ItemRecommendationValue = $Item.RecommendationValue
                     $ItemSoftPaqID = $Item.SoftPaqID
-                    Write-CMTraceLog –Message " $ItemName $ItemRecommendationValue | $ItemSoftPaqID" –Component "Report"
+                    #Write-CMTraceLog -Message " $ItemName $ItemRecommendationValue | $ItemSoftPaqID" -Component "Report"
                     Write-Host " $ItemName $ItemRecommendationValue | $ItemSoftPaqID" -ForegroundColor Gray
-                    Write-CMTraceLog –Message "  URL: $($Item.ReleaseNotesUrl)" –Component "Report"
+                    Write-CMTraceLog -Message "  URL: $($Item.ReleaseNotesUrl)" -Component "Report"
                     write-host "  URL: $($Item.ReleaseNotesUrl)" -ForegroundColor Gray
-                    Write-CMTraceLog –Message "  Status: $($item.Remediation.Status)" –Component "Report"
+                    Write-CMTraceLog -Message "  Status: $($item.Remediation.Status)" -Component "Report"
                     Write-Host "  Status: $($item.Remediation.Status)" -ForegroundColor Gray
-                    Write-CMTraceLog –Message "  ReturnCode: $($item.Remediation.ReturnCode)" –Component "Report"
+                    Write-CMTraceLog -Message "  ReturnCode: $($item.Remediation.ReturnCode)" -Component "Report"
                     Write-Host "  ReturnCode: $($item.Remediation.ReturnCode)" -ForegroundColor Gray
-                    Write-CMTraceLog –Message "  ReturnDescription: $($item.Remediation.ReturnDescription)" –Component "Report"
+                    Write-CMTraceLog -Message "  ReturnDescription: $($item.Remediation.ReturnDescription)" -Component "Report"
                     Write-Host "  ReturnDescription: $($item.Remediation.ReturnDescription)" -ForegroundColor Gray
                     if ($($item.Remediation.ReturnCode) -eq 3010){$script:RebootRequired = $true}
                     }
                 }
             }
             catch {
-            Write-CMTraceLog –Message "Failed to parse the JSON file: $($_.Exception.Message)" –Component "Report" –Type 3
+            Write-CMTraceLog -Message "Failed to parse the JSON file: $($_.Exception.Message)" -Component "Report" -Type 3
             }
         }
     }
     catch
     {
-    Write-CMTraceLog –Message "NO JSON report." –Component "Report" –Type 1
+    Write-CMTraceLog -Message "NO JSON report." -Component "Report" -Type 1
     }
 }
