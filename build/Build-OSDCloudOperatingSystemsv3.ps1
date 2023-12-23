@@ -5,7 +5,9 @@ This will create a table of all of the ESD files from MS, then create a "databas
 Gary Blok's attempt to help David
 
 Changes
-23.12.23 - Updated Win11 23H2 CAB URL for newer ESD files
+23.12.23 - Several Updates
+ - Updated Win10 22H2 CAB URL for newer ESD files
+ - Updated Win11 23H2 CAB URL for newer ESD files
  - Started making modifications to support Win 11 22H2 GA ESD Files (22621.382)
 
 #>
@@ -19,7 +21,7 @@ if (!(Test-Path -Path $StagingFolder)){
 }
 
 $WindowsTable = @(
-@{ Version = 'Win1022H2';LocalCab = "Win1022H2.Cab"; URL = "https://download.microsoft.com/download/3/c/9/3c959fca-d288-46aa-b578-2a6c6c33137a/products_win10_20230510.cab.cab"}
+@{ Version = 'Win1022H2';LocalCab = "Win1022H2.Cab"; URL = "https://download.microsoft.com/download/7/9/c/79cbc22a-0eea-4a0d-89c0-054a1b3aa8e0/products.cab"}
 @{ Version = 'Win1121H2';LocalCab = "Win1121H2.Cab"; URL = "https://download.microsoft.com/download/1/b/4/1b4e06e2-767a-4c9a-9899-230fe94ba530/products_Win11_20211115.cab"}
 @{ Version = 'Win1122H2';LocalCab = "Win1122H2.Cab"; URL = "https://download.microsoft.com/download/b/1/9/b19bd7fd-78c4-4f88-8c40-3e52aee143c2/products_win11_20230510.cab.cab"}
 @{ Version = 'Win1123H2';LocalCab = "Win1123H2.Cab"; URL = "https://download.microsoft.com/download/6/2/b/62b47bc5-1b28-4bfa-9422-e7a098d326d4/products_win11_20231208.cab"}
