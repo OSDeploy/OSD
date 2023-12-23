@@ -6,6 +6,7 @@ Gary Blok's attempt to help David
 
 Changes
 23.12.23 - Updated Win11 23H2 CAB URL for newer ESD files
+ - Started making modifications to support Win 11 22H2 GA ESD Files (22621.382)
 
 #>
 
@@ -287,6 +288,12 @@ foreach ($WSUSResult in $WSUSResults) {
         $WSUSResult.Activation = 'Retail'
     }
     #=================================================
+    #   Support Win11 22H2 GA ESD
+    #=================================================
+    if (($WSUSResult.Version -match 'Windows 11') -and ($WSUSResult.ReleaseID -eq '22H2')) {
+        $WSUSResult.ReleaseID = '22H2-GA'
+    }
+    #=================================================
     #   Version
     #=================================================
     if ($WSUSResult.Name -match 'Windows 10') {
@@ -319,6 +326,9 @@ foreach ($WSUSResult in $WSUSResults) {
 }
 
 $ResultsWSUS = $WSUSResults | Where-Object {$_.Version -eq "Windows 10" -and ($_.ReleaseID -eq "21H2" -or $_.ReleaseID -eq "20H2" -or $_.ReleaseID -eq "2004" -or $_.ReleaseID -eq "1909")} | Sort-Object -Property Name
+#Working on Support for Win 11 22H2 GA ESD Files to support folks who still wanted that version of the ESD file.
+#$ResultsWSUS = $WSUSResults | Where-Object {(($_.Version -eq "Windows 10") -and ($_.ReleaseID -eq "21H2" -or $_.ReleaseID -eq "20H2" -or $_.ReleaseID -eq "2004" -or $_.ReleaseID -eq "1909")) -or $_.ReleaseID -eq "22H2-GA"} | Sort-Object -Property Name
+
 $ResultsTotal += $ResultsMCT
 $ResultsTotal += $ResultsWSUS
 $ResultsTotal | Export-Clixml -Path (Join-Path (Get-Module -Name OSD -ListAvailable | Sort-Object Version -Descending | Select-Object -First 1).ModuleBase "Catalogs\CloudOperatingSystems.xml") -Force
