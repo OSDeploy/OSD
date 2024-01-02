@@ -31,7 +31,7 @@
             Add-Content -Path $PSFilePath "Write-Output '-------------------------------------------------------------'"
         }            
         if ($Global:OSDCloud.HPTPMUpdate -eq $true){
-            Add-Content -Path $PSFilePath 'if (Get-HPTPMDetermine -ne "False"){Write-Host "Updating TPM Firmware" [Invoke-HPTPMEXEDownload & Invoke-HPTPMEXEInstall] -ForegroundColor Magenta}'
+            Add-Content -Path $PSFilePath 'if (Get-HPTPMDetermine -ne "False"){Write-Host "Updating TPM Firmware" [Invoke-HPTPMEXEDownload and Invoke-HPTPMEXEInstall] -ForegroundColor Magenta}'
             Add-Content -Path $PSFilePath 'if (Get-HPTPMDetermine -ne "False"){Invoke-HPTPMEXEDownload}'
             Add-Content -Path $PSFilePath 'if (Get-HPTPMDetermine -ne "False"){Invoke-HPTPMEXEInstall}'
             Add-Content -Path $PSFilePath "Write-Output '-------------------------------------------------------------'"
