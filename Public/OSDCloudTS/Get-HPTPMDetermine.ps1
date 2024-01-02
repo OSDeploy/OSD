@@ -15,11 +15,13 @@ function Install-ModuleHPCMSL {
     $GalleryPSModule = Find-Module -Name $PSModuleName -ErrorAction Ignore
 
     if ($InstalledModule) {
+        write-host "$PSModuleName in Gallery: $($GalleryPSModule.Version) vs Installed: $($InstalledModule.Version)"
         if (($GalleryPSModule.Version -as [version]) -gt ($InstalledModule.Version -as [version])) {
             $InstallModule = $true
         }
     }
     else {
+        Write-Host "$PSModuleName is not Installed"
         $InstallModule = $true
     }
 
@@ -75,7 +77,10 @@ function Invoke-HPTPMEXEDownload { #This will download just the TPM Softpaq need
     if (!(($TPMUpdate -eq $false) -or ($TPMUpdate -eq "False")))
         {
         $DownloadFolder = "C:\OSDCloud\HP\TPM"
-        if (!(Test-Path -Path $DownloadFolder)){New-Item -Path $DownloadFolder -ItemType Directory -Force |Out-Null}
+        if (Test-Path -Path $DownloadFolder){
+            Remove-Item -Path $DownloadFolder -Force -Recurse
+            New-Item -Path $DownloadFolder -ItemType Directory -Force |Out-Null
+        }
         $UpdatePath = "$DownloadFolder\$TPMUpdate.exe"
         Write-Host "Starting download of TPM Update $TPMUpdate"
         Get-Softpaq -Number $TPMUpdate -SaveAs $UpdatePath -Overwrite yes

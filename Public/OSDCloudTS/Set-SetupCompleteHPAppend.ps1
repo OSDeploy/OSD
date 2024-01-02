@@ -31,9 +31,10 @@
             Add-Content -Path $PSFilePath "Write-Output '-------------------------------------------------------------'"
         }            
         if ($Global:OSDCloud.HPTPMUpdate -eq $true){
-            #Add-Content -Path $PSFilePath 'if (Get-HPTPMDetermine -ne "False"){Write-Host "Updating TPM Firmware" -ForegroundColor Magenta}'
-            #Add-Content -Path $PSFilePath 'if (Get-HPTPMDetermine -ne "False"){osdcloud-HPTPMUpdate}'
-            #Add-Content -Path $PSFilePath "Write-Output '-------------------------------------------------------------'"
+            Add-Content -Path $PSFilePath 'if (Get-HPTPMDetermine -ne "False"){Write-Host "Updating TPM Firmware" [Invoke-HPTPMEXEDownload & Invoke-HPTPMEXEInstall] -ForegroundColor Magenta}'
+            Add-Content -Path $PSFilePath 'if (Get-HPTPMDetermine -ne "False"){Invoke-HPTPMEXEDownload}'
+            Add-Content -Path $PSFilePath 'if (Get-HPTPMDetermine -ne "False"){Invoke-HPTPMEXEInstall}'
+            Add-Content -Path $PSFilePath "Write-Output '-------------------------------------------------------------'"
         } 
         if ($Global:OSDCloud.HPBIOSUpdate -eq $true){
             Add-Content -Path $PSFilePath 'Write-Host "Running HP System Firmware [Get-HPBIOSUpdates]" -ForegroundColor Magenta'

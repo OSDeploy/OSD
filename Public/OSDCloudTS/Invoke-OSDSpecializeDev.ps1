@@ -214,6 +214,10 @@ function Invoke-OSDSpecializeDev {
             if ($HPJson.HPUpdates.HPTPMUpdate -eq $true){
                 Write-Host -ForegroundColor DarkGray "========================================================================="
                 Write-Host "Updating TPM" -ForegroundColor Cyan
+                $TPMUpdate = Get-HPTPMDetermine
+                $DownloadFolder = "C:\OSDCloud\HP\TPM"
+                $UpdatePath = "$DownloadFolder\$TPMUpdate.exe"
+                if (!(Test-Path $UpdatePath)){Invoke-HPTPMEXEDownload}
                 Invoke-HPTPMEXEInstall
                 start-sleep -Seconds 10
             }

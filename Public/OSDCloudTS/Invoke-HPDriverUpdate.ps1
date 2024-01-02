@@ -17,6 +17,9 @@
             - added OSVerOverride parameter
             - modified output to return only array of updates (or error code if errors)
             - modified method to get OSVer
+          12/31/2023
+          	- commented out: (line 347ish) if ( $gh_PnpDriverDate ) { $gh_PnpDriverDate = $gh_PnpDriverDate.ToString("MM-dd-yyyy") }
+      		 - it was throwing error: Cannot find an overload for "ToString" and the argument count: "1".
 
 
     .Dependencies
@@ -74,7 +77,14 @@
 
     ) # param
 
+
     $startTime = (Get-Date).DateTime
+
+    if (!($Script:LogFile)){
+        if ($LogFile){
+            $Script:LogFile = $LogFile
+        }
+    }
 
     $Script:RecommendedSWList = @(          # these are checked with '-r' option
         'HP Notifications', `
@@ -222,6 +232,8 @@
         } # else if ( $Script:LogFile )
     } # function TraceLog
 
+    #Write-Host "LogFile: $Script:LogFile"
+    #Write-Host "LogFile: $LogFile"
     TraceLog -Message "Analyzer: 2.01.02 -- $($startTime)"
     TraceLog -Message "-- Working Reference File: '$XmlFile'"
 
@@ -286,7 +298,13 @@
 
         if ( $pHexLine.contains('0x') ) {
             foreach ( $i in $pHexLine.split(',') ) {  ## create the driver string
-                if ( $i.contains('0x') ) { $dv_ReturnValue += ([int32]$i).Tostring() ; $dv_ReturnValue += '.' }
+                if ( $i.contains('0x') ) { 
+                    #Write-Host "$i"
+                    if ($i.contains('\')){
+                        $i = $i.split('\')[0]
+                    }
+                    $dv_ReturnValue += ([int32]$i).Tostring() ; $dv_ReturnValue += '.' 
+                }
             } # foreach ( $i in $pHexLine.split(',')
             $dv_ReturnValue = $dv_ReturnValue -replace ".$" # remove last added '.' from string 
         } # if ( $pHexLine.contains('0x') )  
@@ -335,7 +353,7 @@
                         $gh_PnPDriverVersion = $gh_iDriver.DriverVersion
                         $gh_PnpDriverDate = $gh_iDriver.DriverDate
                         $gh_DriverProvider = $gh_iDriver.DriverProviderName
-                        if ( $gh_PnpDriverDate ) { $gh_PnpDriverDate = $gh_PnpDriverDate.ToString("MM-dd-yyyy") }
+                        #if ( $gh_PnpDriverDate ) { $gh_PnpDriverDate = $gh_PnpDriverDate.ToString("MM-dd-yyyy") }
                         if ( $DebugOutput ) {
                             TraceLog -Message "  ... Matched CVA Device ID: $($gh_DevToMatch)"
                             TraceLog -Message "  ... Matched HWID : $($gh_MatchedHardwareID)"
@@ -431,7 +449,7 @@
                 $gd_iEntryOSVer = $gd_iEntry.Substring($gd_iEntry.Length-4) 
 
                 if ( ($gd_iEntryOSVer -match $pOSVerToMatch) -and ($gd_iEntry -match $pOSToMatch) ) {
-
+                    #Write-Output "$gd_iEntry"
                     $gd_CVADetailVersion = Decode_VersionHexString $gd_iEntry -ErrorAction SilentlyContinue
                     $gd_DriverName = $gd_iDriver
                     $gd_DriverPath = $gd_iEntry.split(',')[0]
@@ -951,7 +969,8 @@
 
     TraceLog -Message '-- Retrieving PnP Drivers list for analysis' 
     if ( -not $Script:TargetFile ) {
-        $PnpSignedDrivers = Get-CimInstance win32_PnpSignedDriver | where { $_.DriverVersion }
+        #$PnpSignedDrivers = Get-CimInstance win32_PnpSignedDriver | where { $_.DriverVersion }
+	$PnpSignedDrivers = Get-WMIObject win32_PnpSignedDriver | where { $_.DriverVersion }
     }
     TraceLog -Message '-- Linking to Registry entries (installed apps and UWP)'
     $InstalledApps = Get-ItemProperty 'HKLM:\Software\Microsoft\Windows\CurrentVersion\Uninstall\*'
@@ -1148,6 +1167,7 @@ Function Invoke-HPDriverUpdate {
     else {
         $UpdatesAvailable = Invoke-HPAnalyzer
     }
+
     
 
 
@@ -1158,9 +1178,20 @@ Function Invoke-HPDriverUpdate {
     if ( $WinOS.BuildNumber -lt 22000 ) { $OS = 'Win10' } else { $OS = 'Win11' }
 
 
+
+
     $Model = $((Get-CimInstance -ClassName Win32_ComputerSystem).Model)
     $Platform = $((Get-CimInstance -ClassName win32_baseboard).Product)
+    
+    
+    
     Write-Output "---------------------------------------------------------------"
+    if ($UpdatesAvailable -match "-2"){
+        Write-Host "Unable to Find Reference File for this Platform $Platform with this OS $OS $OSVer, if you'd like to try going unsupported, use the -OSVerOverride parameter" -ForegroundColor Red
+        break
+    }
+    
+    
     Write-Host "Device Info: Platform $Platform  | Model $Model" -ForegroundColor Green
     Write-Host "OS: $OS | OSVer: $OSVer | UBR: $UBR " -ForegroundColor green
     if ($OSVerOverride){

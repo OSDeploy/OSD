@@ -7,14 +7,30 @@ function Set-OSDCloudUnattendSpecializeDev {
 $UnattendXml = @'
 <?xml version="1.0" encoding="utf-8"?>
 <unattend xmlns="urn:schemas-microsoft-com:unattend">
-	<settings pass="specialize">
+    <settings pass="offlineServicing">
+    <component name="Microsoft-Windows-PnpCustomizationsNonWinPE" processorArchitecture="x86" publicKeyToken="31bf3856ad364e35" language="neutral" versionScope="nonSxS" xmlns:wcm="http://schemas.microsoft.com/WMIConfig/2002/State" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+        <DriverPaths>
+            <PathAndCredentials wcm:keyValue="1" wcm:action="add">
+                <Path>C:\Drivers</Path>
+            </PathAndCredentials>
+        </DriverPaths>
+    </component>
+    <component name="Microsoft-Windows-PnpCustomizationsNonWinPE" processorArchitecture="amd64" publicKeyToken="31bf3856ad364e35" language="neutral" versionScope="nonSxS" xmlns:wcm="http://schemas.microsoft.com/WMIConfig/2002/State" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+        <DriverPaths>
+            <PathAndCredentials wcm:keyValue="1" wcm:action="add">
+                <Path>C:\Drivers</Path>
+            </PathAndCredentials>
+        </DriverPaths>
+    </component>
+    </settings>	
+    <settings pass="specialize">
 		<component name="Microsoft-Windows-Deployment"
-		           processorArchitecture="amd64"
-		           publicKeyToken="31bf3856ad364e35"
-		           language="neutral"
-		           versionScope="nonSxS"
-		           xmlns:wcm="http://schemas.microsoft.com/WMIConfig/2002/State"
-		           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+                processorArchitecture="amd64"
+                publicKeyToken="31bf3856ad364e35"
+                language="neutral"
+                versionScope="nonSxS"
+                xmlns:wcm="http://schemas.microsoft.com/WMIConfig/2002/State"
+                xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 			<RunSynchronous>
 				<RunSynchronousCommand wcm:action="add">
 					<Order>1</Order>
