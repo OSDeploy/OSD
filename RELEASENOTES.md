@@ -10,10 +10,16 @@ Note, the changes I make won't go into effect until the next module release date
 
 ## Changes
 
+23.12.01
+- Moved ESD file references in catalog form using WSUS data to using Microsoft Creation Tool catalogs
+- Catalog File: https://github.com/OSDeploy/OSD/blob/master/Catalogs/CloudOperatingSystems.json
+- Process to create Catalog File: https://github.com/OSDeploy/OSD/blob/master/build/Build-OSDCloudOperatingSystemsv3.ps1
+
+
 24.01.02 
-- Modified Intel Wireless Function [Get-IntelWirelessDriverPack] to use Intel's Driver and Support Assistant Catalog after previous method has been blocked by Intel
+- Modified Intel Wireless Function [Get-IntelWirelessDriverPack] to use Intel's Driver and Support Assistant Catalog after previous method has been blocked by Intel, To resolve [Issue 101](https://github.com/OSDeploy/OSD/issues/101)
 - Modified IntelWirelessDriverPack.json catalog with updated drivers, removed support for older OSes and 32bit
-- Added support for custom ESD files on flash drive in OSDCloud\OS folder
+- Added support for custom ESD files on flash drive in OSDCloud\OS folder per Request [Issue 85](https://github.com/OSDeploy/OSD/issues/85)
   - They will show up in Start-OSDCloudGUIDev or use Variables
   - $Global:MyOSDCloud.ImageFileItem
   - $Global:MyOSDCloud.ImageFileName
