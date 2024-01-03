@@ -161,7 +161,6 @@ Function Install-HPIA{
                 }
                 Else{
                     Write-Host "HPImageAssistant not found!" -ForegroundColor Red
-                    Stop-Transcript
                     throw
                 }
             }
@@ -238,15 +237,12 @@ Function Invoke-HPIA {
             Write-CMTraceLog -LogFile $CMTraceLog -Message "Exit $($Process.ExitCode) - The analysis returned no recommendation." -Component "Update" -Type 2
             Write-Host "Exit $($Process.ExitCode) - The analysis returned no recommendation." -ForegroundColor Green
             Write-CMTraceLog -LogFile $CMTraceLog -Message "########################################" -Component "Complete"
-            Stop-Transcript
             Exit 0
         }
         elseif ($Process.ExitCode -eq 257){
             Write-CMTraceLog -LogFile $CMTraceLog -Message "Exit $($Process.ExitCode) - There were no recommendations selected for the analysis." -Component "Update" -Type 2
             Write-Host "Exit $($Process.ExitCode) - There were no recommendations selected for the analysis." -ForegroundColor Green
             Write-CMTraceLog -LogFile $CMTraceLog -Message "########################################" -Component "Complete"
-            
-            Stop-Transcript
             Exit 0
         }
         elseif ($Process.ExitCode -eq 3010){
