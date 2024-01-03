@@ -22,7 +22,7 @@ Get-HPIAXMLResult [[-Category] <Object>] [[-ReportsFolder] <Object>] [<CommonPar
 ## EXAMPLES
 
 ### Example 1
-```powershell
+```
 PS C:\> {{ Add example code here }}
 ```
 
@@ -37,7 +37,7 @@ PS C:\> {{ Add example code here }}
 Type: Object
 Parameter Sets: (All)
 Aliases:
-Accepted values: All, BIOS, Drivers, Software, Firmware, Accessories, BIOS,Drivers
+Accepted values: All, BIOS, Drivers, Software, Firmware, Accessories, BIOS, Drivers
 
 Required: False
 Position: 0
@@ -67,7 +67,6 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ## INPUTS
 
 ### None
-
 ## OUTPUTS
 
 ### System.Object

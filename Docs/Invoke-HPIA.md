@@ -24,7 +24,7 @@ Invoke-HPIA [[-Operation] <Object>] [[-Category] <Object>] [[-Selection] <Object
 ## EXAMPLES
 
 ### Example 1
-```powershell
+```
 PS C:\> {{ Add example code here }}
 ```
 
@@ -55,7 +55,7 @@ Accept wildcard characters: False
 Type: Object
 Parameter Sets: (All)
 Aliases:
-Accepted values: All, BIOS, Drivers, Software, Firmware, Accessories, BIOS,Drivers
+Accepted values: All, BIOS, Drivers, Software, Firmware, Accessories, BIOS, Drivers
 
 Required: False
 Position: 1
@@ -162,7 +162,6 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ## INPUTS
 
 ### None
-
 ## OUTPUTS
 
 ### System.Object

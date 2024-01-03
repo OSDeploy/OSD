@@ -9931,7 +9931,8 @@ Original credit to Mike Robbins http://mikefrobbins.com/2018/01/18/use-powershel
     <command:returnValues />
     <maml:alertSet>
       <maml:alert>
-        <maml:para></maml:para>
+        <maml:para>Modified 24.01.02 - Gary Blok     Changed method to download the Intel Driver &amp; Support Assistant Catalog Files and extract info from that.     Intel DSA: https://www.intel.com/content/www/us/en/support/intel-driver-support-assistant.html     Manual Downloads can be done from here: https://www.intel.com/content/www/us/en/download/18231/intel-proset-wireless-software-and-drivers-for-it-admins.html</maml:para>
+        <maml:para>Removed support for x86 (32bit) Removed support for older OSes.  Only Supports Win10 &amp; 11 now.</maml:para>
       </maml:alert>
     </maml:alertSet>
     <command:examples>
