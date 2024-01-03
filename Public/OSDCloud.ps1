@@ -768,7 +768,13 @@
                 if (!(Test-Path 'C:\OSDCloud\OS')) {
                     New-Item -Path 'C:\OSDCloud\OS' -ItemType Directory -Force -ErrorAction Stop | Out-Null
                 }
-                Copy-Item -Path $Global:OSDCloud.ImageFileSource.FullName -Destination 'C:\OSDCloud\OS' -Force
+                if ($Global:OSDCloud.ImageFileSource.FullName -match ".swm"){
+                    Copy-Item -Path "$($Global:OSDCloud.ImageFileSource.Directory.FullName)\*.swm" -Destination 'C:\OSDCloud\OS' -Force -Verbose
+                }
+                else {
+                    Copy-Item -Path $Global:OSDCloud.ImageFileSource.FullName -Destination 'C:\OSDCloud\OS' -Force
+                }
+                
                 if (Test-Path "C:\OSDCloud\OS\$($Global:OSDCloud.ImageFileSource.Name)") {
                     $Global:OSDCloud.ImageFileDestination = Get-Item -Path "C:\OSDCloud\OS\$($Global:OSDCloud.ImageFileSource.Name)"
                 }
@@ -1089,14 +1095,28 @@
             Write-DarkGrayHost -Message 'Creating ScratchDirectory C:\OSDCloud\Temp'
             $null = New-Item @ParamNewItem
         }
-
-        $ExpandWindowsImage = @{
-            ApplyPath = 'C:\'
-            ImagePath = $Global:OSDCloud.ImageFileDestination.FullName
-            Index = $Global:OSDCloud.OSImageIndex
-            ScratchDirectory = 'C:\OSDCloud\Temp'
-            ErrorAction = 'Stop'
+        if ($Global:OSDCloud.ImageFileDestination.FullName -match ".swm"){
+            $ExpandWindowsImage = @{
+                Name = (Get-WindowsImage -ImagePath $Global:OSDCloud.ImageFileDestination.FullName).ImageName
+                ApplyPath = 'C:\'
+                ImagePath = $Global:OSDCloud.ImageFileDestination.FullName
+                SplitImageFilePattern = ($Global:OSDCloud.ImageFileDestination.FullName).replace("install.swm","install*.swm")
+                ScratchDirectory = 'C:\OSDCloud\Temp'
+                ErrorAction = 'Stop'
+            }
+            Write-DarkGrayHost "SplitImageFilePattern: $(($Global:OSDCloud.ImageFileDestination.FullName).replace("install.swm","install*.swm"))"
+            Write-DarkGrayHost "Name: $((Get-WindowsImage -ImagePath $Global:OSDCloud.ImageFileDestination.FullName).ImageName)"
         }
+        else {
+            $ExpandWindowsImage = @{
+                ApplyPath = 'C:\'
+                ImagePath = $Global:OSDCloud.ImageFileDestination.FullName
+                Index = $Global:OSDCloud.OSImageIndex
+                ScratchDirectory = 'C:\OSDCloud\Temp'
+                ErrorAction = 'Stop'
+            }
+        }
+
         $Global:OSDCloud.ExpandWindowsImage = $ExpandWindowsImage
         if ($Global:OSDCloud.IsWinPE -eq $true) {
             Write-DarkGrayHost -Message 'Expand-WindowsImage'
