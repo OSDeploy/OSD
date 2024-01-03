@@ -251,8 +251,8 @@ Function Invoke-HPIA {
             $script:RebootRequired = $true
         }
         elseif ($Process.ExitCode -eq 3020){
-            Write-CMTraceLog -LogFile $CMTraceLog -Message "Exit $($Process.ExitCode) - Install failed — One or more SoftPaq installations failed." -Component "Update" -Type 2
-            Write-Host "Exit $($Process.ExitCode) - Install failed — One or more SoftPaq installations failed." -ForegroundColor Yellow
+            Write-CMTraceLog -LogFile $CMTraceLog -Message "Exit $($Process.ExitCode) - Install failed. One or more SoftPaq installations failed." -Component "Update" -Type 2
+            Write-Host "Exit $($Process.ExitCode) - Install failed. One or more SoftPaq installations failed." -ForegroundColor Yellow
         }
         elseif ($Process.ExitCode -eq 4096){
             Write-CMTraceLog -LogFile $CMTraceLog -Message "Exit $($Process.ExitCode) - This platform is not supported!" -Component "Update" -Type 2
