@@ -200,7 +200,7 @@ Function Invoke-HPIA {
     $DateTime = Get-Date -Format "yyyyMMdd-HHmm"
     $ReportsFolder = "$($ReportsFolder)\$($DateTime)"
     $CMTraceLog = "$ReportsFolder\HPIACustomLog.log"
-    $script:TempWorkFolder = 'C:\OSDCloud\HPIA\TempWorkFolder'
+    $script:TempWorkFolder = 'C:\windows\temp\HP\HPIA\TempWorkFolder'
     try{
         [void][System.IO.Directory]::CreateDirectory($LogFolder)
         [void][System.IO.Directory]::CreateDirectory($TempWorkFolder)
