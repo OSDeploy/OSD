@@ -10,13 +10,16 @@ Note, the changes I make won't go into effect until the next module release date
 
 ## Changes
 
-23.12.01
-- Moved ESD file references in catalog form using WSUS data to using Microsoft Creation Tool catalogs
-- Catalog File: https://github.com/OSDeploy/OSD/blob/master/Catalogs/CloudOperatingSystems.json
-- Process to create Catalog File: https://github.com/OSDeploy/OSD/blob/master/build/Build-OSDCloudOperatingSystemsv3.ps1
+### 24.01.03 (not in module yet, but github updated)
+- Added support for Split WIMS (.swm).  Tested with MS Surface Book 2 MS Recovery Media
+  - Download the Recovery Image, extract the swm files to OSDCloudUSB\OSDCloud\OS\%RecoveryImageName%
+  - Example 
+    - D:\OSDCloud\OS\SurfaceBook2_BMR_15_11.8.2\install.swm
+    - D:\OSDCloud\OS\SurfaceBook2_BMR_15_11.8.2\install2.swm
+    - D:\OSDCloud\OS\SurfaceBook2_BMR_15_11.8.2\install3.swm
+  - use Start-OSDCloud -FindImageFile or Start-OSDCloudGUIDev
 
-
-24.01.02 
+### 24.01.02 (implemented in OSD Module 24.1.3.1)
 - Modified Intel Wireless Function [Get-IntelWirelessDriverPack] to use Intel's Driver and Support Assistant Catalog after previous method has been blocked by Intel, To resolve [Issue 101](https://github.com/OSDeploy/OSD/issues/101)
 - Modified IntelWirelessDriverPack.json catalog with updated drivers, removed support for older OSes and 32bit
 - Added support for custom ESD files on flash drive in OSDCloud\OS folder per Request [Issue 85](https://github.com/OSDeploy/OSD/issues/85)
@@ -33,9 +36,9 @@ Note, the changes I make won't go into effect until the next module release date
 - SetupComplete Phase
   - OSDCloud by default creates SetupComplete.cmd & SetupComplete.ps1 to run addtional tasks during SetupComplete
   - OSDCloud will look for OSDCloudUSB\OSDCloud\Config\Scripts\SetupComplete\SetupComplete.cmd.  If found, the contents of that entire folder are copied to C:\OSDCloud\Scripts\SetupComplete and OSDCloud will trigger your custom SetupComplete.cmd file at the end of it's own SetupComplete processes
-  - Ability to Shutdown Computer at the end of SetupComplete Phase by setting variable
+  - Ability to Shutdown Computer at the end of SetupComplete Phase by setting variable [Issue 96](https://github.com/OSDeploy/OSD/issues/96)
     - ShutdownSetupComplete = [bool]$true 
-- ### HP Enterprise Class device specific updates
+- #### HP Enterprise Class device specific updates
   - These Updates happen in various phases
   - Update BIOS by setting Variable - WinPE Phase
     -  $Global:MyOSDCloud.HPBIOSUpdate
@@ -46,3 +49,8 @@ Note, the changes I make won't go into effect until the next module release date
     - $Global:MyOSDCloud.HPIADrivers | Runs HPIA in "Drivers" mode (Drivers Only)
   - Created & Updated serveral HP Specific functions to support these options
     - For complete list of Functions run: Get-Command -Module "OSD" | Where-Object {$_.Name -match "-HP"}
+
+### 23.12.01
+- Moved ESD file references in catalog form using WSUS data to using Microsoft Creation Tool catalogs
+- Catalog File: https://github.com/OSDeploy/OSD/blob/master/Catalogs/CloudOperatingSystems.json
+- Process to create Catalog File: https://github.com/OSDeploy/OSD/blob/master/build/Build-OSDCloudOperatingSystemsv3.ps1
