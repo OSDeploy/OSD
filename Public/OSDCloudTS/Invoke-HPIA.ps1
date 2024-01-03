@@ -156,6 +156,7 @@ Function Install-HPIA{
             try {
                 $Process = Start-Process -FilePath $TempWorkFolder\$HPIAFileName -WorkingDirectory $HPIAInstallPath -ArgumentList '/s /f .\ /e' -NoNewWindow -PassThru -Wait -ErrorAction Stop
                 Start-Sleep -Seconds 5
+                $null = $Process
                 If (Test-Path "$HPIAInstallPath\HPImageAssistant.exe"){
                     Write-Host "Extraction complete" -ForegroundColor Green
                 }
