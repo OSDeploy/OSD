@@ -11,7 +11,8 @@ Note, the changes I make won't go into effect until the next module release date
 ## Changes
 
 ### 24.01.03 (not in module yet, but github updated)
-- Added support for Split WIMS (.swm).  Tested with MS Surface Book 2 MS Recovery Media
+- Added support for Split WIMS (.swm). [Issue 99](https://github.com/OSDeploy/OSD/issues/99)  
+- Tested with MS Surface Book 2 MS Recovery Media
   - Download the Recovery Image, extract the swm files to OSDCloudUSB\OSDCloud\OS\%RecoveryImageName%
   - Example 
     - D:\OSDCloud\OS\SurfaceBook2_BMR_15_11.8.2\install.swm
