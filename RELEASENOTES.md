@@ -35,7 +35,7 @@ Note, the changes I make won't go into effect until the next module release date
     - SyncMSUpCatDriverUSB = [bool]$true
     - Note that default behavior as of now is disabled [$false] 
 - SetupComplete Phase
-  - OSDCloud by default creates SetupComplete.cmd & SetupComplete.ps1 to run addtional tasks during SetupComplete
+  - OSDCloud by default creates SetupComplete.cmd & SetupComplete.ps1 to run addtional tasks during SetupComplete in C:\Windows\Setup\scripts
   - OSDCloud will look for OSDCloudUSB\OSDCloud\Config\Scripts\SetupComplete\SetupComplete.cmd.  If found, the contents of that entire folder are copied to C:\OSDCloud\Scripts\SetupComplete and OSDCloud will trigger your custom SetupComplete.cmd file at the end of it's own SetupComplete processes
   - Ability to Shutdown Computer at the end of SetupComplete Phase by setting variable [Issue 96](https://github.com/OSDeploy/OSD/issues/96)
     - ShutdownSetupComplete = [bool]$true 
