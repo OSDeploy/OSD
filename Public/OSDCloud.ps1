@@ -1631,12 +1631,13 @@
                 }
 
                 if ($Global:OSDCloud.HPTPMUpdate -eq $true){
+                    Write-Host -ForegroundColor DarkGray "HP TPM Update: $(Get-HPTPMDetermine)"
                     Set-HPTPMBIOSSettings
                     if (Get-HPTPMDetermine -ne "False"){
                         Invoke-HPTPMEXEDownload
                     }
                     else {
-                        $Global:OSDCloud.HPTPMUpdate = $false
+                        #$Global:OSDCloud.HPTPMUpdate = $false
                     }
                 }
                 
