@@ -1067,4 +1067,3 @@ function Set-OSDCloudTemplate {
 }
 Register-ArgumentCompleter -CommandName Set-OSDCloudTemplate -ParameterName 'Name' -ScriptBlock {Get-OSDCloudTemplateNames | ForEach-Object {if ($_.Contains(' ')) {"'$_'"} else {$_}}}
 #https://github.com/PowerShell/PowerShell/issues/11330
-#https://github.com/SteveL-MSFT/NetConfiguration/blob/master/NetConfiguration/NetConfiguration.psm1#L29-L45
