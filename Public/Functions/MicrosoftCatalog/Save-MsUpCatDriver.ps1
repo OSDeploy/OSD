@@ -14,6 +14,16 @@ function Save-MsUpCatDriver {
     if (!($DestinationDirectory)) {
         Write-Warning 'Set the DestinationDirectory parameter to download the Drivers'
     }
+    else {
+        if (!(Test-Path $DestinationDirectory)){
+            New-Item -Path $DestinationDirectory -ItemType Directory -Force | Out-Null
+        }
+    }
+    #Grab OSDCloud USB Flash Drive Info
+    $OSDCloudUSB = Get-Volume.usb | Where-Object {($_.FileSystemLabel -match 'OSDCloud') -or ($_.FileSystemLabel -match 'BHIMAGE')} | Select-Object -First 1
+    if ($OSDCloudUSB){
+        $MSUpCatDriversOSDCloudUSBPath =  "$($OSDCloudUSB.DriveLetter):\OSDCloud\MsUpCatDrivers"
+    }
     #=================================================
     #	MSCatalog PowerShell Module
     #   Ryan-Jan
@@ -116,10 +126,19 @@ function Save-MsUpCatDriver {
         
                             if ($DestinationDirectory) {
                                 $DestinationPath = Join-Path $DestinationDirectory $WindowsUpdateDriver.Guid
-    
+                                #If OSDCloud USB Attached, Check for Driver in Cache and Copy ro Local Cache
+                                if ($OSDCloudUSB){
+                                    $USBCachePath = Join-Path $MSUpCatDriversOSDCloudUSBPath $WindowsUpdateDriver.Guid
+                                    if (Test-Path $USBCachePath){
+                                        Write-Host -ForegroundColor DarkGray "Driver already expanded at $USBCachePath, copying to $DestinationPath"
+                                        Copy-Item -Path $USBCachePath -Destination $DestinationPath -Recurse -Force
+                                    }
+                                }
+                                #Check if Driver is already Local Cache 
                                 if (Test-Path $DestinationPath) {
                                     Write-Host -ForegroundColor DarkGray "Driver already expanded at $DestinationPath"
                                 }
+                                #Download if not already found in Local Cache
                                 else {
                                     Write-Host -ForegroundColor DarkGray "Downloading and expanding to $DestinationPath"
                                     $WindowsUpdateDriverFile = Save-UpdateCatalog -Guid $WindowsUpdateDriver.Guid -DestinationDirectory $DestinationPath
@@ -194,7 +213,14 @@ function Save-MsUpCatDriver {
     
                         if ($DestinationDirectory) {
                             $DestinationPath = Join-Path $DestinationDirectory $WindowsUpdateDriver.Guid
-
+                            #If OSDCloud USB Attached, Check for Driver in Cache and Copy ro Local Cache
+                            if ($OSDCloudUSB){
+                                $USBCachePath = Join-Path $MSUpCatDriversOSDCloudUSBPath $WindowsUpdateDriver.Guid
+                                if (Test-Path $USBCachePath){
+                                    Write-Host -ForegroundColor DarkGray "Driver already expanded at $USBCachePath, copying to $DestinationPath"
+                                    Copy-Item -Path $USBCachePath -Destination $DestinationPath -Recurse -Force
+                                }
+                            }
                             if (Test-Path $DestinationPath) {
                                 Write-Host -ForegroundColor DarkGray "Driver already expanded at $DestinationPath"
                             }
@@ -218,6 +244,35 @@ function Save-MsUpCatDriver {
                 else {
                     Write-Host -ForegroundColor Gray "No Results: $FindHardwareID"
                 }
+            }
+        }
+        #=================================================
+        #	Sync Back to OSDCloudUSB
+        #=================================================
+        if ($Global:OSDCloud.SyncMSUpCatDriverUSB -eq $true){
+            if ($OSDCloudUSB){
+                #Get Size of Cached Drivers in Local Drive Cache
+                if (Test-Path $DestinationDirectory){
+                    $MsUpCatDriverCacheSizeGB = (Get-ChildItem $DestinationDirectory -Recurse | Measure-Object -Property Length -Sum).Sum /1GB
+                    #Get Free Space on OSDCloud USB Drive (with buffer)
+                    $OSDCloudUSBFree = ($OSDCloudUSB.SizeRemainingGB - 5) #Free Space with 5GB Buffer
+                    #If enough Free Space, cache files on Flash Drive
+                    if ($MsUpCatDriverCacheSizeGB -lt $OSDCloudUSBFree){
+                        $Source      = $DestinationDirectory #Yes this can seem confusing, remember Destination is where the Drivers were downloaded orginially
+                        $Destination = $MSUpCatDriversOSDCloudUSBPath #OSDCloud Flash Drive cache folder
+
+                        Write-Host -ForegroundColor Cyan "Syncing MS Update Catalog Drivers to OSDCloud USB Cache"
+                        Write-Host -ForegroundColor Gray "Transfering $([Math]::Round($MsUpCatDriverCacheSizeGB,2)) GB of MS Update Drivers to $Destination"
+                        Invoke-Exe robocopy $Source $Destination *.* /s /ndl /nfl /njh /njs
+                    }
+                    else {
+                        Write-Host -ForegroundColor Gray "Not enough Free Space on OSDCloudUSB to sync drivers"
+                        Write-Host -ForegroundColor Gray "Requires $([Math]::Round(($MsUpCatDriverCacheSizeGB + 5),2)) GB, but only $($OSDCloudUSB.SizeRemainingGB) GB available"
+                    }
+                }
+            }
+            else {
+                Write-Host -ForegroundColor Gray "OSDCloudUSB not detected to sync drivers back to, skipping sync"
             }
         }
     }

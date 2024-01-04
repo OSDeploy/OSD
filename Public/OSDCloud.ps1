@@ -122,6 +122,7 @@
             SectionPassed = $true
             SetWiFi = $null
             Shutdown = [bool]$false
+            ShutdownSetupComplete = [bool]$false
             SkipAllDiskSteps = [bool]$false
             SkipAutopilot = [bool]$false
             SkipAutopilotOOBE = [bool]$false
@@ -131,6 +132,7 @@
             SkipNewOSDisk = [bool]$false
             SkipRecoveryPartition = [bool]$false
             SplashScreen = [bool]$false
+            SyncMSUpCatDriverUSB = [bool]$false
             RecoveryPartition = $null
             TimeEnd = $null
             TimeSpan = $null
@@ -766,7 +768,13 @@
                 if (!(Test-Path 'C:\OSDCloud\OS')) {
                     New-Item -Path 'C:\OSDCloud\OS' -ItemType Directory -Force -ErrorAction Stop | Out-Null
                 }
-                Copy-Item -Path $Global:OSDCloud.ImageFileSource.FullName -Destination 'C:\OSDCloud\OS' -Force
+                if ($Global:OSDCloud.ImageFileSource.FullName -match ".swm"){
+                    Copy-Item -Path "$($Global:OSDCloud.ImageFileSource.Directory.FullName)\*.swm" -Destination 'C:\OSDCloud\OS' -Force -Verbose
+                }
+                else {
+                    Copy-Item -Path $Global:OSDCloud.ImageFileSource.FullName -Destination 'C:\OSDCloud\OS' -Force
+                }
+                
                 if (Test-Path "C:\OSDCloud\OS\$($Global:OSDCloud.ImageFileSource.Name)") {
                     $Global:OSDCloud.ImageFileDestination = Get-Item -Path "C:\OSDCloud\OS\$($Global:OSDCloud.ImageFileSource.Name)"
                 }
@@ -1087,14 +1095,28 @@
             Write-DarkGrayHost -Message 'Creating ScratchDirectory C:\OSDCloud\Temp'
             $null = New-Item @ParamNewItem
         }
-
-        $ExpandWindowsImage = @{
-            ApplyPath = 'C:\'
-            ImagePath = $Global:OSDCloud.ImageFileDestination.FullName
-            Index = $Global:OSDCloud.OSImageIndex
-            ScratchDirectory = 'C:\OSDCloud\Temp'
-            ErrorAction = 'Stop'
+        if ($Global:OSDCloud.ImageFileDestination.FullName -match ".swm"){
+            $ExpandWindowsImage = @{
+                Name = (Get-WindowsImage -ImagePath $Global:OSDCloud.ImageFileDestination.FullName).ImageName
+                ApplyPath = 'C:\'
+                ImagePath = $Global:OSDCloud.ImageFileDestination.FullName
+                SplitImageFilePattern = ($Global:OSDCloud.ImageFileDestination.FullName).replace("install.swm","install*.swm")
+                ScratchDirectory = 'C:\OSDCloud\Temp'
+                ErrorAction = 'Stop'
+            }
+            Write-DarkGrayHost "SplitImageFilePattern: $(($Global:OSDCloud.ImageFileDestination.FullName).replace("install.swm","install*.swm"))"
+            Write-DarkGrayHost "Name: $((Get-WindowsImage -ImagePath $Global:OSDCloud.ImageFileDestination.FullName).ImageName)"
         }
+        else {
+            $ExpandWindowsImage = @{
+                ApplyPath = 'C:\'
+                ImagePath = $Global:OSDCloud.ImageFileDestination.FullName
+                Index = $Global:OSDCloud.OSImageIndex
+                ScratchDirectory = 'C:\OSDCloud\Temp'
+                ErrorAction = 'Stop'
+            }
+        }
+
         $Global:OSDCloud.ExpandWindowsImage = $ExpandWindowsImage
         if ($Global:OSDCloud.IsWinPE -eq $true) {
             Write-DarkGrayHost -Message 'Expand-WindowsImage'
@@ -1366,26 +1388,27 @@
     }
     else {
         if (Test-MicrosoftUpdateCatalog) {
+            $DestinationDirectory = 'C:\Drivers\MsUpCatDrivers'
             if ($Global:OSDCloud.DriverPackName -eq 'Microsoft Update Catalog') {
-                Write-DarkGrayHost "Drivers for all devices will be downloaded from Microsoft Update Catalog to C:\Drivers"
-                Save-MsUpCatDriver -DestinationDirectory 'C:\Drivers'
+                Write-DarkGrayHost "Drivers for all devices will be downloaded from Microsoft Update Catalog to $DestinationDirectory"
+                Save-MsUpCatDriver -DestinationDirectory $DestinationDirectory
             }
             elseif ($null -eq $SaveMyDriverPack) {
-                Write-DarkGrayHost "Drivers for all devices will be downloaded from Microsoft Update Catalog to C:\Drivers"
-                Save-MsUpCatDriver -DestinationDirectory 'C:\Drivers'
+                Write-DarkGrayHost "Drivers for all devices will be downloaded from Microsoft Update Catalog to $DestinationDirectory"
+                Save-MsUpCatDriver -DestinationDirectory $DestinationDirectory
             }
             else {
                 if ($OSDCloud.MSCatalogDiskDrivers) {
-                    Write-DarkGrayHost "Drivers for PNPClass DiskDrive will be downloaded from Microsoft Update Catalog to C:\Drivers"
-                    Save-MsUpCatDriver -DestinationDirectory 'C:\Drivers' -PNPClass 'DiskDrive'
+                    Write-DarkGrayHost "Drivers for PNPClass DiskDrive will be downloaded from Microsoft Update Catalog to $DestinationDirectory"
+                    Save-MsUpCatDriver -DestinationDirectory $DestinationDirectory -PNPClass 'DiskDrive'
                 }
                 if ($OSDCloud.MSCatalogNetDrivers) {
-                    Write-DarkGrayHost "Drivers for PNPClass Net will be downloaded from Microsoft Update Catalog to C:\Drivers"
-                    Save-MsUpCatDriver -DestinationDirectory 'C:\Drivers' -PNPClass 'Net'
+                    Write-DarkGrayHost "Drivers for PNPClass Net will be downloaded from Microsoft Update Catalog to $DestinationDirectory"
+                    Save-MsUpCatDriver -DestinationDirectory $DestinationDirectory -PNPClass 'Net'
                 }
                 if ($OSDCloud.MSCatalogScsiDrivers) {
-                    Write-DarkGrayHost "Drivers for PNPClass SCSIAdapter will be downloaded from Microsoft Update Catalog to C:\Drivers"
-                    Save-MsUpCatDriver -DestinationDirectory 'C:\Drivers' -PNPClass 'SCSIAdapter'
+                    Write-DarkGrayHost "Drivers for PNPClass SCSIAdapter will be downloaded from Microsoft Update Catalog to $DestinationDirectory"
+                    Save-MsUpCatDriver -DestinationDirectory $DestinationDirectory -PNPClass 'SCSIAdapter'
                 }
             }
         }
@@ -1460,13 +1483,11 @@
 
 
     Write-SectionHeader "Creating SetupComplete Files and populating with requested tasks."
+    #Creates the SetupComplete.cmd & SetupComplete.ps1 files in C:\Windows\Setup\scripts
+    #SetupComplete.cmd calls SetupComplete.ps1, which does all of the actual work
     Set-SetupCompleteCreateStart
     
-    #Checks for SetupComplete.cmd file on USB Drive, if finds one, sets OSD process to run the SetupComplete
-    #Flashdrive\OSDCloud\Config\Scripts\SetupComplete
-    if (Get-SetupCompleteOSDCloudUSB -eq $true){
-        Set-SetupCompleteOSDCloudUSB
-    }
+
     
     if ($Global:OSDCloud.SetWiFi -eq $true) {
         $SetWiFi = $true
@@ -1559,11 +1580,13 @@
                 #Set Enable Specialize to be triggered later
                 $EnableSpecialize = $true
 
+
                 Write-SectionHeader "HP Enterprise Options Setup"
                 Write-Host -ForegroundColor DarkGray " Confirmed Internet Connectivity"
                 Write-Host -ForegroundColor DarkGray " Confirmed HP Tools Supported [Test-HPIASupport]"
                 $HPFeaturesEnabled = $true
-                
+                write-host -ForegroundColor DarkGray " Confirm HPCMSL Installed [Install-ModuleHPCMSL]"
+                Install-ModuleHPCMSL
                 #If BIOS Update Desired, Confirm Update Available, if Not, set to False
                 if ($Global:OSDCloud.HPBIOSUpdate -eq $true){
                     [version]$HPBIOSVersion = Get-HPBIOSVersion
@@ -1571,12 +1594,16 @@
                     Write-Output "Checking HP BIOS Version via HPCMSL"
                     Write-Output " HP BIOS Ver Available: $Latest"
                     Write-Output " Installed BIOS Ver: $HPBIOSVersion"
-                    if ($Latest -ge $HPBIOSVersion){
+                    #If Latest BIOS Available is Less than or Equal to Installed BIOS, Disable BIOS Update
+                    if ($Latest -le $HPBIOSVersion){
                         $Global:OSDCloud.HPBIOSUpdate = $false
                     }
                 }
+                #Get Sure Admin State
+                $HPSureAdminState = Get-HPSureAdminState -ErrorAction SilentlyContinue
+                if ($HPSureAdminState) {$HPSureAdminMode = $HPSureAdminState.SureAdminMode}
                 if (($Global:OSDCloud.HPTPMUpdate -eq $true) -or ($Global:OSDCloud.HPBIOSUpdate -eq $true)){
-                    if ((Get-HPSureAdminState).SureAdminMode -eq "On"){
+                    if ($HPSureAdminMode -eq "On"){
                         Write-Host "HP Sure Admin Enabled, Unable to Modify HP BIOS Settings or Perform HP BIOS / TPM Updates" -ForegroundColor Yellow
                         if ($Global:OSDCloud.HPBIOSUpdate -eq $true){
                             $Global:OSDCloud.HPBIOSUpdate = $false  #Set to False if Sure Admin Enable
@@ -1591,10 +1618,11 @@
                                 $HPBIOSWinUpdate = $true
                             }
                             else{ #No Password & No Sure Recover and there must be an update, so lets try to update it.
+                                Write-Host -ForegroundColor Gray "Starting HP BIOS Update Process using HPCMSL [Get-HPBIOSUpdates -Flash -Yes -Offline -BitLocker Ignore]"
                                 Write-Host -ForegroundColor DarkGray "Current Firmware: $(Get-HPBIOSVersion)"
                                 Write-Host -ForegroundColor DarkGray "Staging Update: $((Get-HPBIOSUpdates -Latest).ver) "
                                 #Details: https://developers.hp.com/hp-client-management/doc/Get-HPBiosUpdates
-                                Get-HPBIOSUpdates -Flash -Yes -Offline -BitLocker Ignore
+                                Get-HPBIOSUpdates -Flash -Yes -Offline -BitLocker Ignore -ErrorAction SilentlyContinue
                                 $Global:OSDCloud.HPBIOSUpdate = $false
                                 $HPBIOSUpdateNotes = "Attempted in WinPE - Update to $((Get-HPBIOSUpdates -Latest).ver)"
                             }
@@ -1603,12 +1631,13 @@
                 }
 
                 if ($Global:OSDCloud.HPTPMUpdate -eq $true){
+                    Write-Host -ForegroundColor DarkGray "HP TPM Update: $(Get-HPTPMDetermine)"
+                    Set-HPTPMBIOSSettings
                     if (Get-HPTPMDetermine -ne "False"){
-                        Set-HPTPMBIOSSettings
                         Invoke-HPTPMEXEDownload
                     }
                     else {
-                        $Global:OSDCloud.HPTPMUpdate = $false
+                        #$Global:OSDCloud.HPTPMUpdate = $false
                     }
                 }
                 
@@ -1618,6 +1647,8 @@
                 if ($Null -eq $Global:OSDCloud.HPIAALL){$Global:OSDCloud.HPIAALL = $false}
                 if ($Null -eq $Global:OSDCloud.HPTPMUpdate){$Global:OSDCloud.HPTPMUpdate = $false}
                 if ($Null -eq $Global:OSDCloud.HPBIOSUpdate){$Global:OSDCloud.HPBIOSUpdate = $false}
+                if ($Null -eq $HPBIOSUpdateNotes){$HPBIOSUpdateNotes = "NA"}
+                if ($Null -eq $HPBIOSWinUpdate){$HPBIOSWinUpdate = $false}
 
                 Write-Host -ForegroundColor DarkGray "Adding HP Tasks into JSON Config File for Action during Specialize and Setup Complete"
                 Write-DarkGrayHost "HPIA Drivers = $($Global:OSDCloud.HPIADrivers) | HPIA Firmware = $($Global:OSDCloud.HPIAFirmware) | HPIA Software = $($Global:OSDCloud.HPIADrivers) | HPIA All = $($Global:OSDCloud.HPIAAll) "
@@ -1938,7 +1969,15 @@ exit
     }
     #endregion
 
+
     #region GaryB - Finish SetupComplete.cmd
+
+    #Checks for SetupComplete.cmd file on USB Drive, if finds one, sets OSD process to run the SetupComplete
+    #Flashdrive\OSDCloud\Config\Scripts\SetupComplete
+    if (Get-SetupCompleteOSDCloudUSB -eq $true){
+        Set-SetupCompleteOSDCloudUSB
+    }
+
     #This appends the two lines at the end of SetupComplete Script to Stop Transcription and to Restart Computer
     Set-SetupCompleteCreateFinish
     #endregion

@@ -512,9 +512,13 @@ foreach ($Item in $OSDCloudOSIso) {
 $CustomImageChildItem = @()
 [array]$CustomImageChildItem = Find-OSDCloudFile -Name '*.wim' -Path '\OSDCloud\OS\'
 [array]$CustomImageChildItem += Find-OSDCloudFile -Name 'install.wim' -Path '\Sources\'
-$CustomImageChildItem = $CustomImageChildItem | Sort-Object -Property Length -Unique | Sort-Object FullName | Where-Object {$_.Length -gt 3GB}
+[array]$CustomImageChildItem += Find-OSDCloudFile -Name '*.esd' -Path '\OSDCloud\OS\'
+[array]$CustomImageChildItem += Find-OSDCloudFile -Name '*install.swm' -Path '\OSDCloud\OS\'
+$CustomImageChildItem = $CustomImageChildItem | Sort-Object -Property Length -Unique | Sort-Object FullName | Where-Object {$_.Length -gt 2GB}
         
 if ($CustomImageChildItem) {
+    $OSDCloudOperatingSystem = Get-OSDCloudOperatingSystems
+    $CustomImageChildItem = $CustomImageChildItem | Where-Object {$_.Name -notin $OSDCloudOperatingSystem.FileName}
     $CustomImageChildItem | ForEach-Object {
         $formMainWindowControlOSNameCombobox.Items.Add($_) | Out-Null
     }

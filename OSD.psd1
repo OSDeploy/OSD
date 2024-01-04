@@ -4,13 +4,13 @@
 
 @{
     RootModule              = 'OSD.psm1'
-    ModuleVersion           = '23.12.13.1'
+    ModuleVersion           = '24.1.3.1'
     CompatiblePSEditions    = @('Desktop')
     GUID                    = '9fe5b9b6-0224-4d87-9018-a8978529f6f5'
     Author                  = 'David Segura . Gary Blok . Jérôme Bezet-Torres . Damien Van Robaeys . Mike Marable . Akos Bakos'
     CompanyName             = 'OSD Community'
-    Copyright               = '(c) 2023 OSDeploy'
-    Description             = 'Gary Blok December Update 2023 Part 2'
+    Copyright               = '(c) 2024 OSDeploy'
+    Description             = 'January 2024 Update'
     PowerShellVersion       = '5.1'
     FormatsToProcess        = @(
         '.\Format\MsUpCat.Format.ps1xml'
@@ -310,8 +310,13 @@
         'Invoke-OSDSpecializeDev',
         'Invoke-HPDriverUpdate',
         'Invoke-HPAnalyzer',
-        'Invoke-HPIA',
         'Invoke-HPIAOfflineSync',
+        'Invoke-HPIA',
+        'Install-HPIA',
+        'Get-HPIAXMLResult',
+        'Get-HPIAJSONResult',
+        'Get-HPIALatestVersion',
+        'Write-CMTraceLog',
         'Save-ZTIDriverPack',
         'Set-OSDCloudUnattendAuditMode',
         'Set-OSDCloudUnattendAuditModeAutopilot',

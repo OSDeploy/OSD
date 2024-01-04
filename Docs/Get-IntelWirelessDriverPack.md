@@ -99,6 +99,14 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ## OUTPUTS
 
 ## NOTES
+Modified 24.01.02 - Gary Blok
+    Changed method to download the Intel Driver & Support Assistant Catalog Files and extract info from that.
+    Intel DSA: https://www.intel.com/content/www/us/en/support/intel-driver-support-assistant.html
+    Manual Downloads can be done from here: https://www.intel.com/content/www/us/en/download/18231/intel-proset-wireless-software-and-drivers-for-it-admins.html
+
+Removed support for x86 (32bit)
+Removed support for older OSes. 
+Only Supports Win10 & 11 now.
 
 ## RELATED LINKS
 

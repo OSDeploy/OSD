@@ -212,10 +212,20 @@ function Invoke-OSDSpecializeDev {
             #osdcloud-InstallPackageManagement -WarningAction SilentlyContinue
             #osdcloud-InstallModuleHPCMSL -WarningAction SilentlyContinue
             if ($HPJson.HPUpdates.HPTPMUpdate -eq $true){
-                Write-Host -ForegroundColor DarkGray "========================================================================="
-                Write-Host "Updating TPM" -ForegroundColor Cyan
-                Invoke-HPTPMEXEInstall
-                start-sleep -Seconds 10
+                if (Get-HPTPMDetermine -ne "False"){
+                    Write-Host -ForegroundColor DarkGray "========================================================================="
+                    Write-Host -ForegroundColor DarkGray "HP TPM Update: $(Get-HPTPMDetermine)"
+                    Write-Host "Updating TPM" -ForegroundColor Cyan
+                    $TPMUpdate = Get-HPTPMDetermine
+                    $DownloadFolder = "C:\OSDCloud\HP\TPM"
+                    $UpdatePath = "$DownloadFolder\$TPMUpdate.exe"
+                    if (!(Test-Path $UpdatePath)){Invoke-HPTPMEXEDownload}
+                    Invoke-HPTPMEXEInstall -spec "2.0"
+                    start-sleep -Seconds 10
+                }
+                else{
+                    $HPJson.HPUpdates.HPTPMUpdate = $false
+                }
             }
             if (($HPJson.HPUpdates.HPBIOSUpdate -eq $true) -and ($HPJson.HPUpdates.HPTPMUpdate -ne $true)){ #Don't Upgrade BIOS if TPM is updating
                 #Stage Firmware Update for Next Reboot

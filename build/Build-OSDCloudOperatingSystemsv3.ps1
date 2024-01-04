@@ -1,7 +1,17 @@
-#Get ESD files from the Microsoft Creation Tool's list
-#This file needs to be updated for each release of Windows
-#This will create a table of all of the ESD files from MS, then create a "database" for OSDCloud
-#Gary Blok's attempt to help David
+<#
+Get ESD files from the Microsoft Creation Tool's list
+This file needs to be updated for each release of Windows
+This will create a table of all of the ESD files from MS, then create a "database" for OSDCloud
+Gary Blok's attempt to help David
+
+Changes
+23.12.23 - Several Updates
+ - Updated Win10 22H2 CAB URL for newer ESD files
+ - Updated Win11 23H2 CAB URL for newer ESD files
+ - Started making modifications to support Win 11 22H2 GA ESD Files (22621.382)
+
+#>
+
 # Import OSD Module
 Import-Module OSD -Force -ErrorAction Stop
 
@@ -11,10 +21,10 @@ if (!(Test-Path -Path $StagingFolder)){
 }
 
 $WindowsTable = @(
-@{ Version = 'Win1022H2';LocalCab = "Win1022H2.Cab"; URL = "https://download.microsoft.com/download/3/c/9/3c959fca-d288-46aa-b578-2a6c6c33137a/products_win10_20230510.cab.cab"}
+@{ Version = 'Win1022H2';LocalCab = "Win1022H2.Cab"; URL = "https://download.microsoft.com/download/7/9/c/79cbc22a-0eea-4a0d-89c0-054a1b3aa8e0/products.cab"}
 @{ Version = 'Win1121H2';LocalCab = "Win1121H2.Cab"; URL = "https://download.microsoft.com/download/1/b/4/1b4e06e2-767a-4c9a-9899-230fe94ba530/products_Win11_20211115.cab"}
 @{ Version = 'Win1122H2';LocalCab = "Win1122H2.Cab"; URL = "https://download.microsoft.com/download/b/1/9/b19bd7fd-78c4-4f88-8c40-3e52aee143c2/products_win11_20230510.cab.cab"}
-@{ Version = 'Win1123H2';LocalCab = "Win1123H2.Cab"; URL = "https://download.microsoft.com/download/e/8/6/e86b4c6f-4ae8-40df-b983-3de63ea9502d/products_win11_202311109.cab"}
+@{ Version = 'Win1123H2';LocalCab = "Win1123H2.Cab"; URL = "https://download.microsoft.com/download/6/2/b/62b47bc5-1b28-4bfa-9422-e7a098d326d4/products_win11_20231208.cab"}
 )
 
 
@@ -280,6 +290,12 @@ foreach ($WSUSResult in $WSUSResults) {
         $WSUSResult.Activation = 'Retail'
     }
     #=================================================
+    #   Support Win11 22H2 GA ESD
+    #=================================================
+    if (($WSUSResult.Version -match 'Windows 11') -and ($WSUSResult.ReleaseID -eq '22H2')) {
+        $WSUSResult.ReleaseID = '22H2-GA'
+    }
+    #=================================================
     #   Version
     #=================================================
     if ($WSUSResult.Name -match 'Windows 10') {
@@ -312,6 +328,9 @@ foreach ($WSUSResult in $WSUSResults) {
 }
 
 $ResultsWSUS = $WSUSResults | Where-Object {$_.Version -eq "Windows 10" -and ($_.ReleaseID -eq "21H2" -or $_.ReleaseID -eq "20H2" -or $_.ReleaseID -eq "2004" -or $_.ReleaseID -eq "1909")} | Sort-Object -Property Name
+#Working on Support for Win 11 22H2 GA ESD Files to support folks who still wanted that version of the ESD file.
+#$ResultsWSUS = $WSUSResults | Where-Object {(($_.Version -eq "Windows 10") -and ($_.ReleaseID -eq "21H2" -or $_.ReleaseID -eq "20H2" -or $_.ReleaseID -eq "2004" -or $_.ReleaseID -eq "1909")) -or $_.ReleaseID -eq "22H2-GA"} | Sort-Object -Property Name
+
 $ResultsTotal += $ResultsMCT
 $ResultsTotal += $ResultsWSUS
 $ResultsTotal | Export-Clixml -Path (Join-Path (Get-Module -Name OSD -ListAvailable | Sort-Object Version -Descending | Select-Object -First 1).ModuleBase "Catalogs\CloudOperatingSystems.xml") -Force

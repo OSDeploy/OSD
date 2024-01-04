@@ -15,11 +15,13 @@ function Install-ModuleHPCMSL {
     $GalleryPSModule = Find-Module -Name $PSModuleName -ErrorAction Ignore
 
     if ($InstalledModule) {
+        write-host "$PSModuleName in Gallery: $($GalleryPSModule.Version) vs Installed: $($InstalledModule.Version)"
         if (($GalleryPSModule.Version -as [version]) -gt ($InstalledModule.Version -as [version])) {
             $InstallModule = $true
         }
     }
     else {
+        Write-Host "$PSModuleName is not Installed"
         $InstallModule = $true
     }
 
@@ -39,6 +41,12 @@ function Install-ModuleHPCMSL {
 function Get-HPTPMDetermine{
     $SP87753 = Get-CimInstance  -Namespace "root\cimv2\security\MicrosoftTPM" -query "select * from win32_tpm where IsEnabled_InitialValue = 'True' and ((ManufacturerVersion like '7.%' and ManufacturerVersion < '7.63.3353') or (ManufacturerVersion like '5.1%') or (ManufacturerVersion like '5.60%') or (ManufacturerVersion like '5.61%') or (ManufacturerVersion like '4.4%') or (ManufacturerVersion like '6.40%') or (ManufacturerVersion like '6.41%') or (ManufacturerVersion like '6.43.243.0') or (ManufacturerVersion like '6.43.244.0'))"
     $SP94937 = Get-CimInstance  -Namespace "root\cimv2\security\MicrosoftTPM" -query "select * from win32_tpm where IsEnabled_InitialValue = 'True' and ((ManufacturerVersion like '7.62%') or (ManufacturerVersion like '7.63%') or (ManufacturerVersion like '7.83%') or (ManufacturerVersion like '6.43%') )"
+    if (!($SP87753)){
+        $TPM = Get-CimInstance -Namespace "root\cimv2\security\MicrosoftTPM" -ClassName win32_tpm
+        if ($TPM.SpecVersion -match "1.2" -and $TPM.ManufacturerVersion -eq "6.43"){
+            $SP87753 = 'SP87753'
+        }
+    }
     if ($SP87753){Return "SP87753"}
     elseif ($SP94937){Return "SP94937"}
     else{Return $false}
@@ -75,7 +83,10 @@ function Invoke-HPTPMEXEDownload { #This will download just the TPM Softpaq need
     if (!(($TPMUpdate -eq $false) -or ($TPMUpdate -eq "False")))
         {
         $DownloadFolder = "C:\OSDCloud\HP\TPM"
-        if (!(Test-Path -Path $DownloadFolder)){New-Item -Path $DownloadFolder -ItemType Directory -Force |Out-Null}
+        if (Test-Path -Path $DownloadFolder){
+            Remove-Item -Path $DownloadFolder -Force -Recurse
+            New-Item -Path $DownloadFolder -ItemType Directory -Force |Out-Null
+        }
         $UpdatePath = "$DownloadFolder\$TPMUpdate.exe"
         Write-Host "Starting download of TPM Update $TPMUpdate"
         Get-Softpaq -Number $TPMUpdate -SaveAs $UpdatePath -Overwrite yes
