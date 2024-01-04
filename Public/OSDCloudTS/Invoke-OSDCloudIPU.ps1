@@ -1,4 +1,4 @@
-function Invoke-WindowsUpgrade {
+function Invoke-OSDCloudIPU {
     [CmdletBinding(DefaultParameterSetName = 'Default')]
     param (
 
@@ -11,25 +11,11 @@ function Invoke-WindowsUpgrade {
         [System.String]
         $OSName,
 
-        #Operating System Version of the Windows installation
-        [Parameter(ParameterSetName = 'Legacy')]
-        [ValidateSet('Windows 11','Windows 10')]
-        [System.String]
-        $OSVersion,
-
-        #Operating System Build of the Windows installation
-        #Alias = Build
-        [Parameter(ParameterSetName = 'Legacy')]
-        [ValidateSet('23H2','22H2','21H2')]
-        [Alias('Build')]
-        [System.String]
-        $OSBuild,
-
         #Operating System Edition of the Windows installation
         #Alias = Edition
         [Parameter(ParameterSetName = 'Default')]
         [Parameter(ParameterSetName = 'Legacy')]
-        [ValidateSet('Home','Home N','Home Single Language','Education','Education N','Enterprise','Enterprise N','Pro','Pro N')]
+        [ValidateSet('Home','HomeN','Home Single Language','Education','EducationN','Enterprise','EnterpriseN','Professional','ProfessionalN')]
         [Alias('Edition')]
         [System.String]
         $OSEdition,
@@ -59,8 +45,18 @@ function Invoke-WindowsUpgrade {
         [System.String]
         $OSActivation
     )
-
-
+    Write-Host -ForegroundColor DarkGray "========================================================================="
+    Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Starting Invoke-WindowsUpgrade"
+    Write-Host -ForegroundColor Gray "Looking of Details about this device...."
+    if (!($OSEdition)){
+        $OSEdition = Get-ItemPropertyValue -Path 'HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion' -Name "EditionID"
+    }
+    if (!($OSLanguage)){
+        $OSLanguage = (Get-WinSystemLocale).Name
+    }
+    if (!($OSActivation)){
+        $OSActivation = (Get-CimInstance SoftwareLicensingProduct -Filter "Name like 'Windows%'" | Where-Object { $_.PartialProductKey }).ProductKeyChannel
+    }
     #=================================================
     #	OSEditionId and OSActivation
     #=================================================
@@ -84,7 +80,7 @@ function Invoke-WindowsUpgrade {
         $OSActivation = 'Volume'
         $OSImageIndex = 6
     }
-    if ($OSEdition -eq 'Enterprise N') {
+    if (($OSEdition -eq 'Enterprise N') -or ($OSEdition -eq 'EnterpriseN')) {
         $OSEditionId = 'EnterpriseN'
         $OSActivation = 'Volume'
         $OSImageIndex = 7
@@ -94,21 +90,34 @@ function Invoke-WindowsUpgrade {
         if ($OSActivation -eq 'Retail') {$OSImageIndex = 7}
         if ($OSActivation -eq 'Volume') {$OSImageIndex = 4}
     }
-    if ($OSEdition -eq 'Education N') {
+    if (($OSEdition -eq 'Education N') -or ($OSEdition -eq 'EducationN')) {
         $OSEditionId = 'EducationN'
         if ($OSActivation -eq 'Retail') {$OSImageIndex = 8}
         if ($OSActivation -eq 'Volume') {$OSImageIndex = 5}
     }
-    if ($OSEdition -eq 'Pro') {
+    if (($OSEdition -eq 'Pro') -or ($OSEdition -eq 'Professional'))  {
         $OSEditionId = 'Professional'
         if ($OSActivation -eq 'Retail') {$OSImageIndex = 9}
         if ($OSActivation -eq 'Volume') {$OSImageIndex = 8}
     }
-    if ($OSEdition -eq 'Pro N') {
+    if (($OSEdition -eq 'Pro N') -or ($OSEdition -eq 'ProfessionalN')) {
         $OSEditionId = 'ProfessionalN'
         if ($OSActivation -eq 'Retail') {$OSImageIndex = 10}
         if ($OSActivation -eq 'Volume') {$OSImageIndex = 9}
     }
+    Write-Host -ForegroundColor DarkGray "========================================================================="
+    Write-Host -ForegroundColor Cyan "OSEditionId: " -NoNewline
+    Write-Host -ForegroundColor Green $OSEditionId
+    Write-Host -ForegroundColor Cyan "OSImageIndex: " -NoNewline
+    Write-Host -ForegroundColor Green $OSImageIndex
+    Write-Host -ForegroundColor Cyan "OSLanguage: " -NoNewline
+    Write-Host -ForegroundColor Green $OSLanguage
+    Write-Host -ForegroundColor Cyan "OSActivation: " -NoNewline
+    Write-Host -ForegroundColor Green $OSActivation
+ 
+    Write-Host -ForegroundColor DarkGray "========================================================================="
+    Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Starting Feature Update lookup and Download"
+
     $ScratchLocation = 'c:\windows\temp\IPU'
     $MediaLocation = "$ScratchLocation\Media"
     if (!(Test-Path -Path $ScratchLocation)){New-Item -Path $ScratchLocation -ItemType Directory -Force | Out-Null}
@@ -116,12 +125,28 @@ function Invoke-WindowsUpgrade {
     New-Item -Path $MediaLocation -ItemType Directory -Force | Out-Null
 
     $ESD = Get-FeatureUpdate -OSName $OSName -OSActivation $OSActivation -OSLanguage $OSLanguage 
+    Write-Host -ForegroundColor Cyan "Name: " -NoNewline
+    Write-Host -ForegroundColor Green $ESD.Name
+    Write-Host -ForegroundColor Cyan "Architecture: " -NoNewline
+    Write-Host -ForegroundColor Green $ESD.Architecture
+    Write-Host -ForegroundColor Cyan "Activation: " -NoNewline
+    Write-Host -ForegroundColor Green $ESD.Activation
+    Write-Host -ForegroundColor Cyan "Build: " -NoNewline
+    Write-Host -ForegroundColor Green $ESD.Build    
+    Write-Host -ForegroundColor Cyan "FileName: " -NoNewline
+    Write-Host -ForegroundColor Green $ESD.FileName   
+    Write-Host -ForegroundColor Cyan "Url: " -NoNewline
+    Write-Host -ForegroundColor Green $ESD.Url   
+    
+    Write-Host -ForegroundColor Gray "Starting Download to $ScratchLocation, this takes awhile"
     Save-WebFile -SourceUrl $ESD.Url -DestinationDirectory $ScratchLocation -DestinationName $ESD.FileName
 
 
     #Grab ESD File and create bootable ISO
     $ImagePath = "$ScratchLocation\$($ESD.FileName)"
     if ((Test-Path -Path $ImagePath) -and (Test-Path -Path $MediaLocation)){
+        Write-Host -ForegroundColor DarkGray "========================================================================="
+        Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Starting Extract of ESD file to create Setup Content"
         $ApplyPath = $MediaLocation
         Expand-WindowsImage -ImagePath $ImagePath -Index 1 -ApplyPath $ApplyPath
         #Export-WindowsImage -SourceImagePath $ImagePath -SourceIndex 2 -DestinationImagePath "$ApplyPath\Sources\boot.wim" -CompressionType max -CheckIntegrity
@@ -129,4 +154,5 @@ function Invoke-WindowsUpgrade {
         Export-WindowsImage -SourceImagePath $ImagePath -SourceIndex $OSImageIndex -DestinationImagePath "$ApplyPath\Sources\install.wim" -CompressionType max -CheckIntegrity
         #Export-WindowsImage -SourceImagePath $ImagePath -SourceIndex 5 -DestinationImagePath "$ApplyPath\Sources\install.wim" -CompressionType max -CheckIntegrity
     }
+    #>
 }
