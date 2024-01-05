@@ -184,12 +184,12 @@ function Invoke-OSDCloudIPU {
     #=================================================
     #	OSEditionId and OSActivation
     #=================================================
-    if ($OSEdition -eq 'Home') {
+    if (($OSEdition -eq 'Home') -or ($OSEdition -eq 'Core')) {
         $OSEditionId = 'Core'
         $OSActivation = 'Retail'
         $OSImageIndex = 4
     }
-    if ($OSEdition -eq 'Home N') {
+    if (($OSEdition -eq 'Home N') -or ($OSEdition -eq 'CoreN')) {
         $OSEditionId = 'CoreN'
         $OSActivation = 'Retail'
         $OSImageIndex = 5
