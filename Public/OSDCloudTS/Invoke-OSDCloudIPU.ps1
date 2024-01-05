@@ -1,4 +1,9 @@
 function Invoke-OSDCloudIPU {
+    <#
+    Log Files for IPU: https://learn.microsoft.com/en-us/windows/deployment/upgrade/log-files
+    Setup Command Line: https://learn.microsoft.com/en-us/windows-hardware/manufacture/desktop/windows-setup-command-line-options?view=windows-11
+    #>
+    
     [CmdletBinding(DefaultParameterSetName = 'Default')]
     param (
 
@@ -15,7 +20,14 @@ function Invoke-OSDCloudIPU {
         $Silent,
 
         [switch]
-        $SkipDriverPack
+        $SkipDriverPack,
+
+        [switch]
+        $NoReboot,
+
+        [switch]
+        $DiagnosticPrompt
+
 
         <#
         #Operating System Edition of the Windows installation
@@ -400,40 +412,58 @@ function Invoke-OSDCloudIPU {
     }
     Write-Host -ForegroundColor DarkGray "========================================================================="
     Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Triggering Windows Upgrade Setup"   
-    if (!($Silent)){
-        if (Test-Path -Path $DriverPackExpandPath){
-            $ParamStartProcess = @{
-                FilePath = "$MediaLocation\Setup.exe"
-                ArgumentList = "/Auto Upgrade /DynamicUpdate Enable /EULA accept /InstallDrivers $DriverPackExpandPath /Priority High"
-            }
-            
-        }
-        else {
-            $ParamStartProcess = @{
-                FilePath = "$MediaLocation\Setup.exe"
-                ArgumentList = "/Auto Upgrade /DynamicUpdate Enable /EULA accept /Priority High"
+    
+    #============================================================================
+    #region Creating Arguments based on Parameters
+    #============================================================================
+    #Driver Integration - Adds .inf-style drivers to the new Windows 10 installation.
+    if ($DriverPack){
+        if ($DriverPackPath){
+            if (Test-path -path $DriverPackPath){
+                $driverarg = "/InstallDrivers $DriverPackExpandPath"
             }
         }
     }
     else {
-        if (Test-Path -Path $DriverPackExpandPath){
-            $ParamStartProcess = @{
-                FilePath = "$MediaLocation\Setup.exe"
-                ArgumentList = "/Auto Upgrade /DynamicUpdate Enable /EULA accept /InstallDrivers $DriverPackExpandPath /Priority High /quiet"
-            }
-            
-        }
-        else {
-            $ParamStartProcess = @{
-                FilePath = "$MediaLocation\Setup.exe"
-                ArgumentList = "/Auto Upgrade /DynamicUpdate Enable /EULA accept /Priority High /quiet"
-            }
-        }
+        $DriverArg = ""
     }
+    
+    #Run Silently - This will suppress any Windows Setup user experience including the rollback user experience.
+    if ($Silent){
+        $SilentArg = "/quiet"
+    }
+    else{
+        $SilentArg = ""
+    }
+    
+    #Dynamic Updates - Specifies whether Windows Setup will perform Dynamic Update operations (search, download, and install updates).
+    if ($DynamicUpdate){
+        $DynamicUpdateArg = "/DynamicUpdate Enable"
+    }
+    else{
+        $DynamicUpdateArg = "/DynamicUpdate Disable"
+    }
+    
+    #Diagnostic Prompt - Specifies that the Command Prompt is available during Windows Setup.
+    if ($DiagnosticPrompt){
+        $DiagnosticPromptArg = "/diagnosticprompt enable"
+    }
+    else{
+        $DiagnosticPromptArg  = ""
+    }
+
+    $ParamStartProcess = @{
+        FilePath = "$MediaLocation\Setup.exe"
+        ArgumentList = "/Auto Upgrade $DynamicUpdateArg /EULA accept $DriverArg /Priority High $SilentArg $DiagnosticPromptArg"
+    } 
+
     Write-Host -ForegroundColor Cyan "Setup Path: " -NoNewline
     Write-Host -ForegroundColor Green $ParamStartProcess.FilePath
     Write-Host -ForegroundColor Cyan "Arguments: " -NoNewline
     Write-Host -ForegroundColor Green $ParamStartProcess.ArgumentList
+
+
+    #endregion Creating Arguments based on Parameters
 
     Start-Process @ParamStartProcess
 }
