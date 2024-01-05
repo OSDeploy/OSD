@@ -166,6 +166,7 @@
         'Get-WinREWiFi',
         'Get-WindowsOEMProductKey',
         'Get-HPTPMDetermine',
+        'Invoke-OSDCloudIPU',
         'Invoke-HPTPMDownload',
         'Invoke-HPTPMEXEDownload',
         'Invoke-HPTPMEXEInstall',
