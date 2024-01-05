@@ -330,7 +330,7 @@ function Invoke-OSDCloudIPU {
         ##Export-WindowsImage -SourceImagePath $ImagePath -SourceIndex 2 -DestinationImagePath "$ApplyPath\Sources\boot.wim" -CompressionType max -CheckIntegrity
         ##Export-WindowsImage -SourceImagePath $ImagePath -SourceIndex 3 -DestinationImagePath "$ApplyPath\Sources\boot.wim" -CompressionType max -CheckIntegrity -Setbootable
         Write-Host -ForegroundColor Gray "Expanding $ImagePath Index $OSImageIndex to $ApplyPath\Sources\install.wim"
-        $Expand = Export-WindowsImage -SourceImagePath $ImagePath -SourceIndex $OSImageIndex -DestinationImagePath "$ApplyPath\Sources\install.wim" -CompressionType max -CheckIntegrity
+        $Expand = Export-WindowsImage -SourceImagePath $ImagePath -SourceIndex $OSImageIndex -DestinationImagePath "$ApplyPath\Sources\install.wim" -CheckIntegrity
         ##Export-WindowsImage -SourceImagePath $ImagePath -SourceIndex 5 -DestinationImagePath "$ApplyPath\Sources\install.wim" -CompressionType max -CheckIntegrity
     }
     #endregion Extract of ESD file to create Setup Content
@@ -434,4 +434,6 @@ function Invoke-OSDCloudIPU {
     Write-Host -ForegroundColor Green $ParamStartProcess.FilePath
     Write-Host -ForegroundColor Cyan "Arguments: " -NoNewline
     Write-Host -ForegroundColor Green $ParamStartProcess.ArgumentList
+
+    Start-Process @ParamStartProcess
 }
