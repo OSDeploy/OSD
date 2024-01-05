@@ -9,7 +9,14 @@ function Invoke-OSDCloudIPU {
             'Windows 11 21H2 x64',
             'Windows 10 22H2 x64')]
         [System.String]
-        $OSName#,
+        $OSName,
+
+        [switch]
+        $Silent,
+
+        [switch]
+        $SkipDriverPack
+
         <#
         #Operating System Edition of the Windows installation
         #Alias = Edition
@@ -18,7 +25,7 @@ function Invoke-OSDCloudIPU {
         [ValidateSet('Home','HomeN','Home Single Language','Education','EducationN','Enterprise','EnterpriseN','Professional','ProfessionalN')]
         [Alias('Edition')]
         [System.String]
-        $OSEdition,
+        $OSEdition
         
         #Operating System Language of the Windows installation
         #Alias = Culture, OSCulture
@@ -35,7 +42,7 @@ function Invoke-OSDCloudIPU {
         )]
         [Alias('Culture','OSCulture')]
         [System.String]
-        $OSLanguage,
+        $OSLanguage
         
 
         #License of the Windows Operating System
@@ -78,9 +85,11 @@ function Invoke-OSDCloudIPU {
         }
     }
 
-    #============================================================================
     #endregion Functions
-    #============================================================================   
+    
+    #============================================================================
+    #region Device Info
+    #============================================================================
     Write-Host -ForegroundColor DarkGray "========================================================================="
     Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Starting Invoke-OSDCloudIPU"
     Write-Host -ForegroundColor Gray "Looking of Details about this device...."
@@ -108,7 +117,9 @@ function Invoke-OSDCloudIPU {
     if ($WindowsRelease -eq "2009"){$WindowsRelease = $CurrentOSInfo.GetValue('DisplayVersion')}
     $Build = $($CurrentOSInfo.GetValue('CurrentBuild'))
     $BuildUBR_CurrentOS = $Build +"."+$($CurrentOSInfo.GetValue('UBR'))
-    Write-Output "Windows $WindowsRelease | $BuildUBR_CurrentOS"
+    if ($Build -le 19045){$WinVer = "10"}
+    else {$WinVer = "11"}
+    Write-Output "Windows $WinVer $WindowsRelease | $BuildUBR_CurrentOS"
     Write-Output "Computer Model: $ComputerModel"
     Write-Output "Serial: $Serial"
     if ($Manufacturer -like "H*"){Write-Output "Computer Product Code: $HPProdCode"}
@@ -143,8 +154,20 @@ function Invoke-OSDCloudIPU {
     $OSVersion = "Windows $($OSName.split(" ")[1])"
     $OSReleaseID = $OSName.split(" ")[2]
     $Product = (Get-MyComputerProduct)
-    $DriverPack = Get-OSDCloudDriverPack -Product $Product -OSVersion $OSVersion -OSReleaseID $OSReleaseID
-    Write-host -ForegroundColor Gray "Recommended Driverpack for upgrade: $($DriverPack.Name)"
+    
+    $DriverPack = Get-OSDCloudDriverPack # -Product $Product -OSVersion $OSVersion -OSReleaseID $OSReleaseID
+    if ($DriverPack){
+        Write-host -ForegroundColor Gray "Recommended Driverpack for upgrade: $($DriverPack.Name)"
+        if ($SkipDriverPack){
+            write-host -ForegroundColor Yellow "Skipping Download and Integration [-SkipDriverPack]"
+        }
+    }
+
+    #endregion Device Info
+
+    #============================================================================
+    #region Current Activiation
+    #============================================================================
 
     if (!($OSEdition)){
         $OSEdition = Get-ItemPropertyValue -Path 'HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion' -Name "EditionID"
@@ -155,6 +178,8 @@ function Invoke-OSDCloudIPU {
     if (!($OSActivation)){
         $OSActivation = (Get-CimInstance SoftwareLicensingProduct -Filter "Name like 'Windows%'" | Where-Object { $_.PartialProductKey }).ProductKeyChannel
     }
+
+    #endregion Current Activiation
 
     #=================================================
     #	OSEditionId and OSActivation
@@ -218,6 +243,10 @@ function Invoke-OSDCloudIPU {
     Write-Host -ForegroundColor DarkGray "========================================================================="
     Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Starting Feature Update lookup and Download"
 
+    #============================================================================
+    #region Detect & Download ESD File
+    #============================================================================
+
     $ScratchLocation = 'c:\OSDCloud\IPU'
     $MediaLocation = "$ScratchLocation\Media"
     if (!(Test-Path -Path $ScratchLocation)){New-Item -Path $ScratchLocation -ItemType Directory -Force | Out-Null}
@@ -242,40 +271,52 @@ function Invoke-OSDCloudIPU {
     Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Getting Content for Upgrade Media"   
 
     $ImagePath = "$ScratchLocation\$($ESD.FileName)"
+    $ImageDownloadRequired = $true
+
     if (Test-path -path $ImagePath){
         Write-Host -ForegroundColor Gray "Found previously downloaded media, getting SHA1 Hash"
         $SHA1Hash = Get-FileHash $ImagePath -Algorithm SHA1
         if ($SHA1Hash.Hash -eq $esd.SHA1){
             Write-Host -ForegroundColor Gray "SHA1 Match on $ImagePath, skipping Download"
+            $ImageDownloadRequired = $false
         }
         else {
             Write-Host -ForegroundColor Gray "SHA1 Match Failed on $ImagePath, removing content"
-            #Save-WebFile -SourceUrl $ESD.Url -DestinationDirectory $ScratchLocation -DestinationName $ESD.FileName
-            Write-Host -ForegroundColor Gray "Starting Download to $ImagePath, this takes awhile"
-            
-            <# This was taking way too long for some files
-            #Get ESD Size
-            $req = [System.Net.HttpWebRequest]::Create("$($ESD.Url)")
-            $res = $req.GetResponse()
-            (Invoke-WebRequest $ESD.Url -Method Head).Headers.'Content-Length'
-            $ESDSizeMB = $([Math]::Round($res.ContentLength /1000000)) 
-            Write-Host "Total Size: $ESDSizeMB MB"
-            #>
-
-            #Clear Out any Previous Attempts
-            $ExistingBitsJob = Get-BitsTransfer -Name "$($ESD.FileName)" -AllUsers -ErrorAction SilentlyContinue
-            If ($ExistingBitsJob) {
-                Remove-BitsTransfer -BitsJob $ExistingBitsJob
-            }
-    
-            #Start Download using BITS
-            $BitsJob = Start-BitsTransfer -Source $ESD.Url -Destination $ImagePath -DisplayName "$($ESD.FileName)" -Description "Windows Media Download" -RetryInterval 60
-            If ($BitsJob.JobState -eq "Error"){
-                write-Host "BITS tranfer failed: $($BitsJob.ErrorDescription)"
-            }
         }
+        
+    }
+    if ($ImageDownloadRequired -eq $true){
+        #Save-WebFile -SourceUrl $ESD.Url -DestinationDirectory $ScratchLocation -DestinationName $ESD.FileName
+        Write-Host -ForegroundColor Gray "Starting Download to $ImagePath, this takes awhile"
+            
+        <# This was taking way too long for some files
+        #Get ESD Size
+        $req = [System.Net.HttpWebRequest]::Create("$($ESD.Url)")
+        $res = $req.GetResponse()
+        (Invoke-WebRequest $ESD.Url -Method Head).Headers.'Content-Length'
+        $ESDSizeMB = $([Math]::Round($res.ContentLength /1000000)) 
+        Write-Host "Total Size: $ESDSizeMB MB"
+        #>
+
+        #Clear Out any Previous Attempts
+        $ExistingBitsJob = Get-BitsTransfer -Name "$($ESD.FileName)" -AllUsers -ErrorAction SilentlyContinue
+        If ($ExistingBitsJob) {
+            Remove-BitsTransfer -BitsJob $ExistingBitsJob
+        }
+    
+        #Start Download using BITS
+        $BitsJob = Start-BitsTransfer -Source $ESD.Url -Destination $ImagePath -DisplayName "$($ESD.FileName)" -Description "Windows Media Download" -RetryInterval 60
+        If ($BitsJob.JobState -eq "Error"){
+            write-Host "BITS tranfer failed: $($BitsJob.ErrorDescription)"
+        }
+
     }
 
+    #endregion Detect & Download ESD File
+
+    #============================================================================
+    #region Extract of ESD file to create Setup Content
+    #============================================================================
 
 
     #Grab ESD File and create bootable ISO
@@ -286,11 +327,111 @@ function Invoke-OSDCloudIPU {
         $ApplyPath = $MediaLocation
         Write-Host -ForegroundColor Gray "Expanding $ImagePath Index 1 to $ApplyPath"
         $Expand = Expand-WindowsImage -ImagePath $ImagePath -Index 1 -ApplyPath $ApplyPath
-        #Export-WindowsImage -SourceImagePath $ImagePath -SourceIndex 2 -DestinationImagePath "$ApplyPath\Sources\boot.wim" -CompressionType max -CheckIntegrity
-        #Export-WindowsImage -SourceImagePath $ImagePath -SourceIndex 3 -DestinationImagePath "$ApplyPath\Sources\boot.wim" -CompressionType max -CheckIntegrity -Setbootable
+        ##Export-WindowsImage -SourceImagePath $ImagePath -SourceIndex 2 -DestinationImagePath "$ApplyPath\Sources\boot.wim" -CompressionType max -CheckIntegrity
+        ##Export-WindowsImage -SourceImagePath $ImagePath -SourceIndex 3 -DestinationImagePath "$ApplyPath\Sources\boot.wim" -CompressionType max -CheckIntegrity -Setbootable
         Write-Host -ForegroundColor Gray "Expanding $ImagePath Index $OSImageIndex to $ApplyPath\Sources\install.wim"
         $Expand = Export-WindowsImage -SourceImagePath $ImagePath -SourceIndex $OSImageIndex -DestinationImagePath "$ApplyPath\Sources\install.wim" -CompressionType max -CheckIntegrity
-        #Export-WindowsImage -SourceImagePath $ImagePath -SourceIndex 5 -DestinationImagePath "$ApplyPath\Sources\install.wim" -CompressionType max -CheckIntegrity
+        ##Export-WindowsImage -SourceImagePath $ImagePath -SourceIndex 5 -DestinationImagePath "$ApplyPath\Sources\install.wim" -CompressionType max -CheckIntegrity
     }
-    #>
+    #endregion Extract of ESD file to create Setup Content
+
+    if (!(Test-Path -Path "$MediaLocation\Setup.exe")){
+        Write-Host -ForegroundColor Red "Setup.exe not found, something went wrong"
+        throw
+    }
+    if (!(Test-Path -Path "$MediaLocation\sources\install.wim")){
+        Write-Host -ForegroundColor Red "install.wim not found, something went wrong"
+        throw
+    }
+
+
+    if (($DriverPack) -and (!($SkipDriverPack))){
+        Write-Host -ForegroundColor DarkGray "========================================================================="
+        Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Getting Driver Pack for IPU Integration"           
+        $DriverPackDownloadRequired = $true
+        if (!(Test-Path -Path "C:\Drivers")){New-Item -Path "C:\Drivers" -ItemType Directory -Force | Out-Null}
+        $DriverPackPath = "C:\Drivers\$($DriverPack.FileName)"
+        if (Test-path -path $DriverPackPath){
+            Write-Host -ForegroundColor Gray "Found previously downloaded DriverPack File, getting MD5 Hash"
+            $MD5Hash = Get-FileHash $DriverPackPath -Algorithm MD5
+            if ($MD5Hash.Hash -eq $DriverPack.HashMD5){
+                Write-Host -ForegroundColor Gray "MD5 Match on $DriverPackPath, skipping Download"
+                $DriverPackDownloadRequired = $false
+            }
+            else {
+                Write-Host -ForegroundColor Gray "MD5 Match Failed on $DriverPackPath, removing content"
+            }
+        }
+        
+        IF ($DriverPackDownloadRequired -eq $true){
+            Write-Host -ForegroundColor Gray "Starting Download to $DriverPackPath, this takes awhile"
+            <#
+            #Get DrivePack Size
+            $req = [System.Net.HttpWebRequest]::Create("$($DriverPack.Url)")
+            $res = $req.GetResponse()
+            (Invoke-WebRequest $ESD.Url -Method Head).Headers.'Content-Length'
+            $SizeMB = $([Math]::Round($res.ContentLength /1000000)) 
+            Write-Host "Total Size: $SizeMB MB"
+            #>
+
+            #Clear Out any Previous Attempts
+            $ExistingBitsJob = Get-BitsTransfer -Name "$($DriverPack.FileName)" -AllUsers -ErrorAction SilentlyContinue
+            If ($ExistingBitsJob) {
+                Remove-BitsTransfer -BitsJob $ExistingBitsJob
+            }
+    
+            #Start Download using BITS
+            $BitsJob = Start-BitsTransfer -Source $DriverPack.Url -Destination $DriverPackPath -DisplayName "$($DriverPack.FileName)" -Description "Driver Pack Download" -RetryInterval 60
+            If ($BitsJob.JobState -eq "Error"){
+                write-Host "BITS tranfer failed: $($BitsJob.ErrorDescription)"
+            }
+        }
+        #Expand Driver Pack
+        if (Test-path -path $DriverPackPath){
+            Write-Host -ForegroundColor DarkGray "========================================================================="
+            Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Expanding DriverPack for Upgrade Media"   
+            Expand-StagedDriverPack
+            $DriverPackFile = Get-ChildItem -Path $DriverPackPath -Filter $DriverPack.FileName
+            $DriverPackExpandPath = Join-Path $DriverPackFile.Directory $DriverPackFile.BaseName
+            if (Test-Path -Path $DriverPackExpandPath){
+
+            }
+        }
+    }
+    Write-Host -ForegroundColor DarkGray "========================================================================="
+    Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Triggering Windows Upgrade Setup"   
+    if (!($Silent)){
+        if (Test-Path -Path $DriverPackExpandPath){
+            $ParamStartProcess = @{
+                FilePath = "$MediaLocation\Setup.exe"
+                ArgumentList = "/Auto Upgrade /DynamicUpdate Enable /EULA accept /InstallDrivers $DriverPackExpandPath /Priority High"
+            }
+            
+        }
+        else {
+            $ParamStartProcess = @{
+                FilePath = "$MediaLocation\Setup.exe"
+                ArgumentList = "/Auto Upgrade /DynamicUpdate Enable /EULA accept /Priority High"
+            }
+        }
+    }
+    else {
+        if (Test-Path -Path $DriverPackExpandPath){
+            $ParamStartProcess = @{
+                FilePath = "$MediaLocation\Setup.exe"
+                ArgumentList = "/Auto Upgrade /DynamicUpdate Enable /EULA accept /InstallDrivers $DriverPackExpandPath /Priority High /quiet"
+            }
+            
+        }
+        else {
+            $ParamStartProcess = @{
+                FilePath = "$MediaLocation\Setup.exe"
+                ArgumentList = "/Auto Upgrade /DynamicUpdate Enable /EULA accept /Priority High /quiet"
+            }
+        }
+    }
+    Write-Host -ForegroundColor Cyan "Setup Path: " -NoNewline
+    Write-Host -ForegroundColor Green $ParamStartProcess.FilePath
+    Write-Host -ForegroundColor Cyan "Arguments: " -NoNewline
+    Write-Host -ForegroundColor Green $ParamStartProcess.ArgumentList
 }
