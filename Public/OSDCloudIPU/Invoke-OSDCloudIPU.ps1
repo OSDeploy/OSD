@@ -305,7 +305,16 @@ function Invoke-OSDCloudIPU {
 
 
     #Grab ESD File and create bootable ISO
-
+    if ((!(Test-Path -Path $ImagePath)) -or (!(Test-Path -Path $MediaLocation))){
+        if (!(Test-Path -Path $ImagePath)){
+            Write-Host -ForegroundColor Red "Missing $ImagePath, double check download process"
+            throw
+        }
+        if (!(Test-Path -Path $MediaLocation)){
+            Write-Host -ForegroundColor Red "Missing $MediaLocation, double check folder exist"
+            throw
+        }
+    }
     if ((Test-Path -Path $ImagePath) -and (Test-Path -Path $MediaLocation)){
         Write-Host -ForegroundColor DarkGray "========================================================================="
         Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Starting Extract of ESD file to create Setup Content"
@@ -318,6 +327,7 @@ function Invoke-OSDCloudIPU {
         $Expand = Export-WindowsImage -SourceImagePath $ImagePath -SourceIndex $OSImageIndex -DestinationImagePath "$ApplyPath\Sources\install.wim" -CheckIntegrity
         ##Export-WindowsImage -SourceImagePath $ImagePath -SourceIndex 5 -DestinationImagePath "$ApplyPath\Sources\install.wim" -CompressionType max -CheckIntegrity
     }
+    
     #endregion Extract of ESD file to create Setup Content
 
     if (!(Test-Path -Path "$MediaLocation\Setup.exe")){
