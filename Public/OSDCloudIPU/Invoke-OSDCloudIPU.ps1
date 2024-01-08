@@ -67,6 +67,17 @@ function Invoke-OSDCloudIPU {
         #>
     )
     
+    #region Admin Elevation
+    $whoiam = [system.security.principal.windowsidentity]::getcurrent().name
+    $isElevated = ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] "Administrator")
+    if ($isElevated) {
+        Write-Host -ForegroundColor Green "[+] Running as $whoiam and IS Admin Elevated"
+    }
+    else {
+        Write-Warning "[-] Running as $whoiam and is NOT Admin Elevated"
+        Break
+    }
+
     #============================================================================
     #region Functions
     #============================================================================
