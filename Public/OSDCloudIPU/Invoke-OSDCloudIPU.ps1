@@ -27,46 +27,7 @@ function Invoke-OSDCloudIPU {
 
         [switch]
         $DiagnosticPrompt
-
-
-        <#
-        #Operating System Edition of the Windows installation
-        #Alias = Edition
-        [Parameter(ParameterSetName = 'Default')]
-        [Parameter(ParameterSetName = 'Legacy')]
-        [ValidateSet('Home','HomeN','Home Single Language','Education','EducationN','Enterprise','EnterpriseN','Professional','ProfessionalN')]
-        [Alias('Edition')]
-        [System.String]
-        $OSEdition
-        
-        #Operating System Language of the Windows installation
-        #Alias = Culture, OSCulture
-        [Parameter(ParameterSetName = 'Default')]
-        [Parameter(ParameterSetName = 'Legacy')]
-        [ValidateSet (
-            'ar-sa','bg-bg','cs-cz','da-dk','de-de','el-gr',
-            'en-gb','en-us','es-es','es-mx','et-ee','fi-fi',
-            'fr-ca','fr-fr','he-il','hr-hr','hu-hu','it-it',
-            'ja-jp','ko-kr','lt-lt','lv-lv','nb-no','nl-nl',
-            'pl-pl','pt-br','pt-pt','ro-ro','ru-ru','sk-sk',
-            'sl-si','sr-latn-rs','sv-se','th-th','tr-tr',
-            'uk-ua','zh-cn','zh-tw'
-        )]
-        [Alias('Culture','OSCulture')]
-        [System.String]
-        $OSLanguage
-        
-
-        #License of the Windows Operating System
-        [Parameter(ParameterSetName = 'Default')]
-        [Parameter(ParameterSetName = 'Legacy')]
-        [ValidateSet('Retail','Volume')]
-        [Alias('License','OSLicense','Activation')]
-        [System.String]
-        $OSActivation
-        #>
     )
-    
     #region Admin Elevation
     $whoiam = [system.security.principal.windowsidentity]::getcurrent().name
     $isElevated = ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] "Administrator")
@@ -328,6 +289,7 @@ function Invoke-OSDCloudIPU {
         }
     
         #Start Download using BITS
+        Write-Host -ForegroundColor DarkGray "Start-BitsTransfer -Source $ESD.Url -Destination $ImagePath -DisplayName $($ESD.FileName) -Description 'Windows Media Download' -RetryInterval 60"
         $BitsJob = Start-BitsTransfer -Source $ESD.Url -Destination $ImagePath -DisplayName "$($ESD.FileName)" -Description "Windows Media Download" -RetryInterval 60
         If ($BitsJob.JobState -eq "Error"){
             write-Host "BITS tranfer failed: $($BitsJob.ErrorDescription)"
