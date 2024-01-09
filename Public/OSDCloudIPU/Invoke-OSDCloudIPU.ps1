@@ -288,6 +288,14 @@ function Invoke-OSDCloudIPU {
             Remove-BitsTransfer -BitsJob $ExistingBitsJob
         }
     
+        if ((Get-Service -name BITS).Status -ne "Running"){
+            Write-Host -ForegroundColor Yellow "BITS Service is not Running, which is required to download ESD File, attempting to Start"
+            $StartBITS = Start-Service -Name BITS -PassThru
+            Start-Sleep -Seconds 2
+            if ($StartBITS.Status -ne "Running"){
+
+            }
+        }
         #Start Download using BITS
         Write-Host -ForegroundColor DarkGray "Start-BitsTransfer -Source $ESD.Url -Destination $ImagePath -DisplayName $($ESD.FileName) -Description 'Windows Media Download' -RetryInterval 60"
         $BitsJob = Start-BitsTransfer -Source $ESD.Url -Destination $ImagePath -DisplayName "$($ESD.FileName)" -Description "Windows Media Download" -RetryInterval 60
@@ -308,11 +316,11 @@ function Invoke-OSDCloudIPU {
     if ((!(Test-Path -Path $ImagePath)) -or (!(Test-Path -Path $MediaLocation))){
         if (!(Test-Path -Path $ImagePath)){
             Write-Host -ForegroundColor Red "Missing $ImagePath, double check download process"
-            throw
+            throw "Failed to find $ImagePath, double check download process"
         }
         if (!(Test-Path -Path $MediaLocation)){
             Write-Host -ForegroundColor Red "Missing $MediaLocation, double check folder exist"
-            throw
+            throw "Faield to find $MediaLocation, double check folder exist"
         }
     }
     if ((Test-Path -Path $ImagePath) -and (Test-Path -Path $MediaLocation)){
