@@ -236,7 +236,9 @@ function Invoke-OSDCloudIPU {
     #============================================================================
 
     $ScratchLocation = 'c:\OSDCloud\IPU'
+    $OSMediaLocation = 'c:\OSDCloud\OS'
     $MediaLocation = "$ScratchLocation\Media"
+    if (!(Test-Path -Path $OSMediaLocation)){New-Item -Path $OSMediaLocation -ItemType Directory -Force | Out-Null}
     if (!(Test-Path -Path $ScratchLocation)){New-Item -Path $ScratchLocation -ItemType Directory -Force | Out-Null}
     if (Test-Path -Path $MediaLocation){Remove-Item -Path $MediaLocation -Force -Recurse}
     New-Item -Path $MediaLocation -ItemType Directory -Force | Out-Null
@@ -258,7 +260,7 @@ function Invoke-OSDCloudIPU {
     Write-Host -ForegroundColor DarkGray "========================================================================="
     Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Getting Content for Upgrade Media"   
 
-    $ImagePath = "$ScratchLocation\$($ESD.FileName)"
+    $ImagePath = "$OSMediaLocation\$($ESD.FileName)"
     $ImageDownloadRequired = $true
 
     if (Test-path -path $ImagePath){
