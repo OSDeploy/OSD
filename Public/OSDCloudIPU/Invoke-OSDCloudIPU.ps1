@@ -117,7 +117,9 @@ function Invoke-OSDCloudIPU {
     Write-Output "Time Zone: $(Get-TimeZone)"
     $Locale = Get-WinSystemLocale
     if ($Locale -ne "en-US"){Write-Output "WinSystemLocale: $locale"}
-    Get-WmiObject win32_LogicalDisk -Filter "DeviceID='C:'" | % { $FreeSpace = $_.FreeSpace/1GB -as [int] ; $DiskSize = $_.Size/1GB -as [int] }
+    $FreeSpace = (Get-CimInstance win32_LogicalDisk -Filter "DeviceID='C:'").FreeSpace/1GB -as [int]
+    $DiskSize = (Get-CimInstance win32_LogicalDisk -Filter "DeviceID='C:'").Size/1GB -as [int]
+    Write-Output "C:\ Drive Size: $DiskSize, Freespace: $FreeSpace"
 
     if ($Build -le 19045){
         $Win11 = Get-Win11Readiness
@@ -135,9 +137,9 @@ function Invoke-OSDCloudIPU {
         }
     }
 
-    $OSVersion = "Windows $($OSName.split(" ")[1])"
-    $OSReleaseID = $OSName.split(" ")[2]
-    $Product = (Get-MyComputerProduct)
+    #$OSVersion = "Windows $($OSName.split(" ")[1])"
+    #$OSReleaseID = $OSName.split(" ")[2]
+    #$Product = (Get-MyComputerProduct)
     
     $DriverPack = Get-OSDCloudDriverPack # -Product $Product -OSVersion $OSVersion -OSReleaseID $OSReleaseID
     if ($DriverPack){
@@ -256,11 +258,12 @@ function Invoke-OSDCloudIPU {
     Write-Host -ForegroundColor Green $ESD.FileName   
     Write-Host -ForegroundColor Cyan "Url: " -NoNewline
     Write-Host -ForegroundColor Green $ESD.Url   
-         
     Write-Host -ForegroundColor DarkGray "========================================================================="
     Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Getting Content for Upgrade Media"   
 
-    $ImagePath = "$OSMediaLocation\$($ESD.FileName)"
+    $SubFolderName = "$($ESD.Version) $($ESD.ReleaseId)"
+    $ImagePath = "$OSMediaLocation\$SubFolderName\$($ESD.FileName)"
+    if (!(Test-Path -Path $ImagePath)){New-Item -Path $ImagePath -ItemType Directory -Force | Out-Null}
     $ImageDownloadRequired = $true
 
     if (Test-path -path $ImagePath){
@@ -340,6 +343,7 @@ function Invoke-OSDCloudIPU {
         Write-Host -ForegroundColor Gray "Expanding $ImagePath Index $OSImageIndex to $ApplyPath\Sources\install.wim"
         $Expand = Export-WindowsImage -SourceImagePath $ImagePath -SourceIndex $OSImageIndex -DestinationImagePath "$ApplyPath\Sources\install.wim" -CheckIntegrity
         ##Export-WindowsImage -SourceImagePath $ImagePath -SourceIndex 5 -DestinationImagePath "$ApplyPath\Sources\install.wim" -CompressionType max -CheckIntegrity
+        $null = $Expand
     }
     
     #endregion Extract of ESD file to create Setup Content
