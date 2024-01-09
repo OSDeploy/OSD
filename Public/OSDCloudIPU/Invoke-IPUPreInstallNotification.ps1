@@ -1,4 +1,4 @@
-function {Invoke-IPUPreInstallNotifications {
+function Invoke-IPUPreInstallNotifications {
 <#
 .SYNOPSIS
     --.
