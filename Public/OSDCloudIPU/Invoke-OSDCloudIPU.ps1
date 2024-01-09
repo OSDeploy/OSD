@@ -162,6 +162,10 @@ function Invoke-OSDCloudIPU {
     if (!($OSActivation)){
         $OSActivation = (Get-CimInstance SoftwareLicensingProduct -Filter "Name like 'Windows%'" | Where-Object { $_.PartialProductKey }).ProductKeyChannel
     }
+    if ($OSActivation -match "OEM"){
+        $OSActivation = "Retail"
+    }
+    
 
     #endregion Current Activiation
 
