@@ -262,7 +262,8 @@ function Invoke-OSDCloudIPU {
     Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Getting Content for Upgrade Media"   
 
     $SubFolderName = "$($ESD.Version) $($ESD.ReleaseId)"
-    $ImagePath = "$OSMediaLocation\$SubFolderName\$($ESD.FileName)"
+    $ImageFolderPath = "$OSMediaLocation\$SubFolderName"
+    $ImagePath = "$ImageFolderPath\$($ESD.FileName)"
     if (!(Test-Path -Path $ImagePath)){New-Item -Path $ImagePath -ItemType Directory -Force | Out-Null}
     $ImageDownloadRequired = $true
 
@@ -306,8 +307,8 @@ function Invoke-OSDCloudIPU {
             }
         }
         #Start Download using BITS
-        Write-Host -ForegroundColor DarkGray "Start-BitsTransfer -Source $ESD.Url -Destination $ImagePath -DisplayName $($ESD.FileName) -Description 'Windows Media Download' -RetryInterval 60"
-        $BitsJob = Start-BitsTransfer -Source $ESD.Url -Destination $ImagePath -DisplayName "$($ESD.FileName)" -Description "Windows Media Download" -RetryInterval 60
+        Write-Host -ForegroundColor DarkGray "Start-BitsTransfer -Source $ESD.Url -Destination $ImageFolderPath -DisplayName $($ESD.FileName) -Description 'Windows Media Download' -RetryInterval 60"
+        $BitsJob = Start-BitsTransfer -Source $ESD.Url -Destination $ImageFolderPath -DisplayName "$($ESD.FileName)" -Description "Windows Media Download" -RetryInterval 60
         If ($BitsJob.JobState -eq "Error"){
             write-Host "BITS tranfer failed: $($BitsJob.ErrorDescription)"
         }
