@@ -267,8 +267,8 @@ function Invoke-OSDCloudIPU {
 
     $SubFolderName = "$($ESD.Version) $($ESD.ReleaseId)"
     $ImageFolderPath = "$OSMediaLocation\$SubFolderName"
+    if (!(Test-Path -Path $ImageFolderPath)){New-Item -Path $ImageFolderPath -ItemType Directory -Force | Out-Null}
     $ImagePath = "$ImageFolderPath\$($ESD.FileName)"
-    if (!(Test-Path -Path $ImagePath)){New-Item -Path $ImagePath -ItemType Directory -Force | Out-Null}
     $ImageDownloadRequired = $true
 
     if (Test-path -path $ImagePath){
