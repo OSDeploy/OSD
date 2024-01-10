@@ -14,7 +14,7 @@ function Invoke-OSDCloudIPU {
             'Windows 11 21H2 x64',
             'Windows 10 22H2 x64')]
         [System.String]
-        $OSName,
+        $OSName = 'Windows 11 23H2 x64',
 
         [switch]
         $Silent,
@@ -245,7 +245,11 @@ function Invoke-OSDCloudIPU {
     if (Test-Path -Path $MediaLocation){Remove-Item -Path $MediaLocation -Force -Recurse}
     New-Item -Path $MediaLocation -ItemType Directory -Force | Out-Null
 
-    $ESD = Get-FeatureUpdate -OSName $OSName -OSActivation $OSActivation -OSLanguage $OSLanguage 
+    $ESD = Get-FeatureUpdate -OSName $OSName -OSActivation $OSActivation -OSLanguage $OSLanguage
+    if (!(ESD)){
+        Write-Host -ForegroundColor Red "Unable to Determine proper ESD Upgrade File"
+        throw "Unable to Determine proper ESD Upgrade File"
+    }
     Write-Host -ForegroundColor Cyan "Name: " -NoNewline
     Write-Host -ForegroundColor Green $ESD.Name
     Write-Host -ForegroundColor Cyan "Architecture: " -NoNewline
