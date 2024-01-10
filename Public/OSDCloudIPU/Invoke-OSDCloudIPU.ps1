@@ -27,46 +27,18 @@ function Invoke-OSDCloudIPU {
 
         [switch]
         $DiagnosticPrompt
-
-
-        <#
-        #Operating System Edition of the Windows installation
-        #Alias = Edition
-        [Parameter(ParameterSetName = 'Default')]
-        [Parameter(ParameterSetName = 'Legacy')]
-        [ValidateSet('Home','HomeN','Home Single Language','Education','EducationN','Enterprise','EnterpriseN','Professional','ProfessionalN')]
-        [Alias('Edition')]
-        [System.String]
-        $OSEdition
-        
-        #Operating System Language of the Windows installation
-        #Alias = Culture, OSCulture
-        [Parameter(ParameterSetName = 'Default')]
-        [Parameter(ParameterSetName = 'Legacy')]
-        [ValidateSet (
-            'ar-sa','bg-bg','cs-cz','da-dk','de-de','el-gr',
-            'en-gb','en-us','es-es','es-mx','et-ee','fi-fi',
-            'fr-ca','fr-fr','he-il','hr-hr','hu-hu','it-it',
-            'ja-jp','ko-kr','lt-lt','lv-lv','nb-no','nl-nl',
-            'pl-pl','pt-br','pt-pt','ro-ro','ru-ru','sk-sk',
-            'sl-si','sr-latn-rs','sv-se','th-th','tr-tr',
-            'uk-ua','zh-cn','zh-tw'
-        )]
-        [Alias('Culture','OSCulture')]
-        [System.String]
-        $OSLanguage
-        
-
-        #License of the Windows Operating System
-        [Parameter(ParameterSetName = 'Default')]
-        [Parameter(ParameterSetName = 'Legacy')]
-        [ValidateSet('Retail','Volume')]
-        [Alias('License','OSLicense','Activation')]
-        [System.String]
-        $OSActivation
-        #>
     )
-    
+    #region Admin Elevation
+    $whoiam = [system.security.principal.windowsidentity]::getcurrent().name
+    $isElevated = ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] "Administrator")
+    if ($isElevated) {
+        Write-Host -ForegroundColor Green "[+] Running as $whoiam and IS Admin Elevated"
+    }
+    else {
+        Write-Warning "[-] Running as $whoiam and is NOT Admin Elevated"
+        Break
+    }
+
     #============================================================================
     #region Functions
     #============================================================================
@@ -145,7 +117,9 @@ function Invoke-OSDCloudIPU {
     Write-Output "Time Zone: $(Get-TimeZone)"
     $Locale = Get-WinSystemLocale
     if ($Locale -ne "en-US"){Write-Output "WinSystemLocale: $locale"}
-    Get-WmiObject win32_LogicalDisk -Filter "DeviceID='C:'" | % { $FreeSpace = $_.FreeSpace/1GB -as [int] ; $DiskSize = $_.Size/1GB -as [int] }
+    $FreeSpace = (Get-CimInstance win32_LogicalDisk -Filter "DeviceID='C:'").FreeSpace/1GB -as [int]
+    $DiskSize = (Get-CimInstance win32_LogicalDisk -Filter "DeviceID='C:'").Size/1GB -as [int]
+    Write-Output "C:\ Drive Size: $DiskSize, Freespace: $FreeSpace"
 
     if ($Build -le 19045){
         $Win11 = Get-Win11Readiness
@@ -163,9 +137,9 @@ function Invoke-OSDCloudIPU {
         }
     }
 
-    $OSVersion = "Windows $($OSName.split(" ")[1])"
-    $OSReleaseID = $OSName.split(" ")[2]
-    $Product = (Get-MyComputerProduct)
+    #$OSVersion = "Windows $($OSName.split(" ")[1])"
+    #$OSReleaseID = $OSName.split(" ")[2]
+    #$Product = (Get-MyComputerProduct)
     
     $DriverPack = Get-OSDCloudDriverPack # -Product $Product -OSVersion $OSVersion -OSReleaseID $OSReleaseID
     if ($DriverPack){
@@ -190,6 +164,10 @@ function Invoke-OSDCloudIPU {
     if (!($OSActivation)){
         $OSActivation = (Get-CimInstance SoftwareLicensingProduct -Filter "Name like 'Windows%'" | Where-Object { $_.PartialProductKey }).ProductKeyChannel
     }
+    if ($OSActivation -match "OEM"){
+        $OSActivation = "Retail"
+    }
+    
 
     #endregion Current Activiation
 
@@ -260,7 +238,9 @@ function Invoke-OSDCloudIPU {
     #============================================================================
 
     $ScratchLocation = 'c:\OSDCloud\IPU'
+    $OSMediaLocation = 'c:\OSDCloud\OS'
     $MediaLocation = "$ScratchLocation\Media"
+    if (!(Test-Path -Path $OSMediaLocation)){New-Item -Path $OSMediaLocation -ItemType Directory -Force | Out-Null}
     if (!(Test-Path -Path $ScratchLocation)){New-Item -Path $ScratchLocation -ItemType Directory -Force | Out-Null}
     if (Test-Path -Path $MediaLocation){Remove-Item -Path $MediaLocation -Force -Recurse}
     New-Item -Path $MediaLocation -ItemType Directory -Force | Out-Null
@@ -278,11 +258,12 @@ function Invoke-OSDCloudIPU {
     Write-Host -ForegroundColor Green $ESD.FileName   
     Write-Host -ForegroundColor Cyan "Url: " -NoNewline
     Write-Host -ForegroundColor Green $ESD.Url   
-         
     Write-Host -ForegroundColor DarkGray "========================================================================="
     Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Getting Content for Upgrade Media"   
 
-    $ImagePath = "$ScratchLocation\$($ESD.FileName)"
+    $SubFolderName = "$($ESD.Version) $($ESD.ReleaseId)"
+    $ImagePath = "$OSMediaLocation\$SubFolderName\$($ESD.FileName)"
+    if (!(Test-Path -Path $ImagePath)){New-Item -Path $ImagePath -ItemType Directory -Force | Out-Null}
     $ImageDownloadRequired = $true
 
     if (Test-path -path $ImagePath){
@@ -316,7 +297,16 @@ function Invoke-OSDCloudIPU {
             Remove-BitsTransfer -BitsJob $ExistingBitsJob
         }
     
+        if ((Get-Service -name BITS).Status -ne "Running"){
+            Write-Host -ForegroundColor Yellow "BITS Service is not Running, which is required to download ESD File, attempting to Start"
+            $StartBITS = Start-Service -Name BITS -PassThru
+            Start-Sleep -Seconds 2
+            if ($StartBITS.Status -ne "Running"){
+
+            }
+        }
         #Start Download using BITS
+        Write-Host -ForegroundColor DarkGray "Start-BitsTransfer -Source $ESD.Url -Destination $ImagePath -DisplayName $($ESD.FileName) -Description 'Windows Media Download' -RetryInterval 60"
         $BitsJob = Start-BitsTransfer -Source $ESD.Url -Destination $ImagePath -DisplayName "$($ESD.FileName)" -Description "Windows Media Download" -RetryInterval 60
         If ($BitsJob.JobState -eq "Error"){
             write-Host "BITS tranfer failed: $($BitsJob.ErrorDescription)"
@@ -332,7 +322,16 @@ function Invoke-OSDCloudIPU {
 
 
     #Grab ESD File and create bootable ISO
-
+    if ((!(Test-Path -Path $ImagePath)) -or (!(Test-Path -Path $MediaLocation))){
+        if (!(Test-Path -Path $ImagePath)){
+            Write-Host -ForegroundColor Red "Missing $ImagePath, double check download process"
+            throw "Failed to find $ImagePath, double check download process"
+        }
+        if (!(Test-Path -Path $MediaLocation)){
+            Write-Host -ForegroundColor Red "Missing $MediaLocation, double check folder exist"
+            throw "Faield to find $MediaLocation, double check folder exist"
+        }
+    }
     if ((Test-Path -Path $ImagePath) -and (Test-Path -Path $MediaLocation)){
         Write-Host -ForegroundColor DarkGray "========================================================================="
         Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Starting Extract of ESD file to create Setup Content"
@@ -344,7 +343,9 @@ function Invoke-OSDCloudIPU {
         Write-Host -ForegroundColor Gray "Expanding $ImagePath Index $OSImageIndex to $ApplyPath\Sources\install.wim"
         $Expand = Export-WindowsImage -SourceImagePath $ImagePath -SourceIndex $OSImageIndex -DestinationImagePath "$ApplyPath\Sources\install.wim" -CheckIntegrity
         ##Export-WindowsImage -SourceImagePath $ImagePath -SourceIndex 5 -DestinationImagePath "$ApplyPath\Sources\install.wim" -CompressionType max -CheckIntegrity
+        $null = $Expand
     }
+    
     #endregion Extract of ESD file to create Setup Content
 
     if (!(Test-Path -Path "$MediaLocation\Setup.exe")){

@@ -1,11 +1,25 @@
 ﻿Function Start-DISMFromOSDCloudUSB {
-    #region Initialize
+    [CmdletBinding()]
+    param (
+
+        [Parameter()]
+        [System.String]
+        $PackageID
+    )
     if ($env:SystemDrive -eq 'X:') {
         $OSDCloudUSB = Get-Volume.usb | Where-Object {($_.FileSystemLabel -match 'OSDCloud') -or ($_.FileSystemLabel -match 'BHIMAGE')} | Select-Object -First 1
         $ComputerProduct = (Get-MyComputerProduct)
+        if (!($PackageID)){
+            $PackageID = $DriverPack.PackageID
+            $DriverPack = Get-OSDCloudDriverPack -Product $ComputerProduct
+        }
         $ComputerManufacturer = (Get-MyComputerManufacturer -Brief)
-        $DriverPath = "$($OSDCloudUSB.DriveLetter):\OSDCloud\DriverPacks\DISM\$ComputerManufacturer\$ComputerProduct"
-        Write-Host "Checking location for Drivers: $DriverPath" -ForegroundColor Green
+        $DriverPathProduct = "$($OSDCloudUSB.DriveLetter):\OSDCloud\DriverPacks\DISM\$ComputerManufacturer\$ComputerProduct"
+        $DriverPathPackageID = "$($OSDCloudUSB.DriveLetter):\OSDCloud\DriverPacks\DISM\$ComputerManufacturer\$PackageID"
+        
+        Write-Host "Checking locations for Drivers" -ForegroundColor Green
+        if (Test-Path $DriverPathProduct){$DriverPath = $DriverPathProduct}
+        if (Test-Path $DriverPathPackageID){$DriverPath = $DriverPathPackageID}
         if (Test-Path $DriverPath){
             Write-Host "Found Drivers: $DriverPath" -ForegroundColor Green
             Write-Host "Starting DISM of drivers while Offline" -ForegroundColor Green
