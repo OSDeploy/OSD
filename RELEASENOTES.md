@@ -10,7 +10,21 @@ Note, the changes I make won't go into effect until the next module release date
 
 ## Changes
 
-### 24.01.03 (not in module yet, but github updated)
+### 24.1.9 (not in module yet, but github updated)
+- Integrated Test-DISMFromOSDCloudUSB & Start-DISMFromOSDCloudUSB into the main OSDCloud Process
+  - This will look at the OSDCloudUSB and if it detects the driverpack already expanded, proceeds to DISM the drivers into the Offline OS
+    - OSDCloudUSB\OSDCloud\DriverPacks\DISM\$ComputerManufacturer\$PackageID
+    - EX E:\OSDCloud\DriverPacks\DISM\HP\SP149133
+    - OSDCloudUSB\OSDCloud\DriverPacks\DISM\$ComputerManufacturer\$ComputerProduct
+    - EX E:\OSDCloud\DriverPacks\DISM\HP\8870
+  - This allows you to pre-download driver packs and extract to those locations before running OSDCloud providing a few benifits
+    - Saves time downloading driver pack over internet
+    - Saves storage on device, as drivers are not copied over to C:\
+    - Drivers are DISM in offline, so all drivers are present when the device reboots, reducing risk of missing storage / network
+    - Allows you to choose specific drivers by placing in the "ComputerProduct" folder for specific models of PCs
+- Dism log is copied from X:\Windows\Logs\DISM\dism.log to C:\OSDCloud\Logs\WinPE-DISM.log at the end of OSDCloud WinPE stage
+
+### 24.1.3 (not in module yet, but github updated)
 - Added support for Split WIMS (.swm). [Issue 99](https://github.com/OSDeploy/OSD/issues/99)  
 - Tested with MS Surface Book 2 MS Recovery Media
   - Download the Recovery Image, extract the swm files to OSDCloudUSB\OSDCloud\OS\%RecoveryImageName%
@@ -20,7 +34,7 @@ Note, the changes I make won't go into effect until the next module release date
     - D:\OSDCloud\OS\SurfaceBook2_BMR_15_11.8.2\install3.swm
   - use Start-OSDCloud -FindImageFile or Start-OSDCloudGUIDev
 
-### 24.01.02 (implemented in OSD Module 24.1.3.1)
+### 24.1.2 (implemented in OSD Module 24.1.3.1)
 - Modified Intel Wireless Function [Get-IntelWirelessDriverPack] to use Intel's Driver and Support Assistant Catalog after previous method has been blocked by Intel, To resolve [Issue 101](https://github.com/OSDeploy/OSD/issues/101)
 - Modified IntelWirelessDriverPack.json catalog with updated drivers, removed support for older OSes and 32bit
 - Added support for custom ESD files on flash drive in OSDCloud\OS folder per Request [Issue 85](https://github.com/OSDeploy/OSD/issues/85)
@@ -51,7 +65,7 @@ Note, the changes I make won't go into effect until the next module release date
   - Created & Updated serveral HP Specific functions to support these options
     - For complete list of Functions run: Get-Command -Module "OSD" | Where-Object {$_.Name -match "-HP"}
 
-### 23.12.01
+### 23.12.1
 - Moved ESD file references in catalog form using WSUS data to using Microsoft Creation Tool catalogs
 - Catalog File: https://github.com/OSDeploy/OSD/blob/master/Catalogs/CloudOperatingSystems.json
 - Process to create Catalog File: https://github.com/OSDeploy/OSD/blob/master/build/Build-OSDCloudOperatingSystemsv3.ps1

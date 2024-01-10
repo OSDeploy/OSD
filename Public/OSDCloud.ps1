@@ -1259,8 +1259,16 @@
         Write-DarkGrayHost "-Product $($Global:OSDCloud.DriverPack.Product)"
         Write-DarkGrayHost "-FileName $($Global:OSDCloud.DriverPack.FileName)"
         Write-DarkGrayHost "-Url $($Global:OSDCloud.DriverPack.Url)"
-        $Global:OSDCloud.DriverPackOffline = Find-OSDCloudFile -Name $Global:OSDCloud.DriverPack.FileName -Path '\OSDCloud\DriverPacks\' | Sort-Object FullName
-        $Global:OSDCloud.DriverPackOffline = $Global:OSDCloud.DriverPackOffline | Where-Object {$_.FullName -notlike "C*"} | Where-Object {$_.FullName -notlike "X*"} | Select-Object -First 1
+        if ((Test-DISMFromOSDCloudUSB -PackageID $Global:OSDCloud.DriverPack.PackageID) -eq $true){
+            $Global:OSDCloud.DriverPackDISM = $true
+            $Global:OSDCloud.DriverPackName = 'None'
+            Write-DarkGrayHost "Found expanded Driver Pack files on OSDCloudUSB, will DISM them into the Offline OS directly"
+            #Found Expanded Driver Package on OSDCloudUSB, will DISM Directly from that
+        }
+        else{
+            $Global:OSDCloud.DriverPackOffline = Find-OSDCloudFile -Name $Global:OSDCloud.DriverPack.FileName -Path '\OSDCloud\DriverPacks\' | Sort-Object FullName
+            $Global:OSDCloud.DriverPackOffline = $Global:OSDCloud.DriverPackOffline | Where-Object {$_.FullName -notlike "C*"} | Where-Object {$_.FullName -notlike "X*"} | Select-Object -First 1
+        }
         if ($Global:OSDCloud.DriverPackOffline) {
             Write-DarkGrayHost "DriverPack is available on OSDCloudUSB and will not be downloaded"
             Write-DarkGrayHost $Global:OSDCloud.DriverPack.Name
@@ -1272,6 +1280,10 @@
             Write-DarkGrayHost "DriverPack is being copied from OSDCloudUSB at $($Global:OSDCloud.DriverPackSource.FullName) to C:\Drivers"
             Copy-Item -Path $Global:OSDCloud.DriverPackSource.FullName -Destination 'C:\Drivers' -Force
             $Global:OSDCloud.DriverPackExpand = $true
+        }
+        elseif ($Global:OSDCloud.DriverPackDISM){
+            #Use the Expanded Drivers on the OSDCloudUSB drive
+            Start-DISMFromOSDCloudUSB -PackageID $Global:OSDCloud.DriverPack.PackageID
         }
         elseif ($Global:OSDCloud.AzOSDCloudDriverPack) {
             Write-DarkGrayHost "DriverPack is being downloaded from Azure Storage to C:\Drivers"
@@ -1963,7 +1975,7 @@ exit
             Invoke-Expression (Invoke-RestMethod -Uri 'https://raw.githubusercontent.com/OSDeploy/OSD/master/cloud/modules/debugmode.psm1')
             osdcloud-addcmtrace
             osdcloud-addmouseoobe
-            osdcloud-UpdateModuleFilesManually
+            #sdcloud-UpdateModuleFilesManually
             #osdcloud-WinpeUpdateDefender
         }
     }
@@ -2137,6 +2149,9 @@ exit
     $Global:OSDCloud.TimeEnd = Get-Date
     $Global:OSDCloud.TimeSpan = New-TimeSpan -Start $Global:OSDCloud.TimeStart -End $Global:OSDCloud.TimeEnd
     $Global:OSDCloud | ConvertTo-Json | Out-File -FilePath 'C:\OSDCloud\Logs\OSDCloud.json' -Encoding ascii -Width 2000 -Force
+    if (Test-Path x:\windows\logs\DISM\dism.log){
+        Copy-Item -Path x:\windows\logs\DISM\dism.log -Destination C:\OSDCloud\Logs\DISM-WinPE.log
+    }
     Write-DarkGrayHost "Completed in $($Global:OSDCloud.TimeSpan.ToString("mm' minutes 'ss' seconds'"))"
 
     if ($Global:OSDCloud.Screenshot) {
