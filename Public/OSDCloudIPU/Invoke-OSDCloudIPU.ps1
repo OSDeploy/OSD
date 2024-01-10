@@ -246,7 +246,7 @@ function Invoke-OSDCloudIPU {
     New-Item -Path $MediaLocation -ItemType Directory -Force | Out-Null
 
     $ESD = Get-FeatureUpdate -OSName $OSName -OSActivation $OSActivation -OSLanguage $OSLanguage
-    if (!(ESD)){
+    if (!($ESD)){
         Write-Host -ForegroundColor Red "Unable to Determine proper ESD Upgrade File"
         throw "Unable to Determine proper ESD Upgrade File"
     }
