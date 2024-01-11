@@ -68,8 +68,8 @@ function Get-IntelWirelessDriverPack {
     if (-not(Test-Path $TempDSADataExpand)) {
         $null = New-Item -Path $TempDSADataExpand -ItemType Directory -Force
     }
-    #$ModuleCatalogFile = "$($MyInvocation.MyCommand.Module.ModuleBase)\Catalogs\$OfflineCatalogName"
-    $ModuleCatalogFile = "$GitHubFolder\OSD\Catalogs\$OfflineCatalogName"
+    $ModuleCatalogFile = "$($MyInvocation.MyCommand.Module.ModuleBase)\Catalogs\$OfflineCatalogName"
+    #$ModuleCatalogFile = "$GitHubFolder\OSD\Catalogs\$OfflineCatalogName" #GARY's Test Machine
     $ModuleCatalogContent = Get-Content -Path $ModuleCatalogFile -Raw | ConvertFrom-Json
     #=================================================
     #   IsOnline
