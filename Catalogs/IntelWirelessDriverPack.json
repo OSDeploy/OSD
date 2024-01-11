@@ -1,11 +1,11 @@
 {
-    "OSDVersion":  "23.12.28.1",
-    "LastUpdate":  "\/Date(1701734400000)\/",
+    "OSDVersion":  "24.1.3.1",
+    "LastUpdate":  "\/Date(1704758400000)\/",
     "OSDStatus":  "",
     "OSDType":  "Driver",
     "OSDGroup":  "IntelWireless",
     "DriverName":  "Windows? 10 and Windows 11*  Wi-Fi Drivers for Intel? Wireless Adapters",
-    "DriverVersion":  "23.10.0",
+    "DriverVersion":  "23.20.0",
     "OsVersion":  [
                       "10.0"
                   ],
@@ -13,11 +13,11 @@
                    "x64"
                ],
     "DriverGrouping":  "Intel Wireless",
-    "DownloadFile":  "WiFi-23.10.0-Driver64-Win10-Win11.zip",
-    "DriverUrl":  "https://downloadmirror.intel.com/794468/WiFi-23.10.0-Driver64-Win10-Win11.zip",
+    "DownloadFile":  "WiFi-23.20.0-Driver64-Win10-Win11.zip",
+    "DriverUrl":  "https://downloadmirror.intel.com/812774/WiFi-23.20.0-Driver64-Win10-Win11.zip",
     "DriverInfo":  "https://www.intel.com/content/www/us/en/download/18231/intel-proset-wireless-software-and-drivers-for-it-admins.html",
-    "DriverDescription":  "This download record installs the Windows? 10 and Windows 11* WiFi package drivers 23.10.0 for the Intel? Wi-Fi 7/Wi-Fi 6E/Wi-Fi 6 and Intel? 9000 series Wireless Adapters.",
-    "OSDGuid":  "c9350558-fd6d-44e1-96ae-0d4528c0dc85",
+    "DriverDescription":  "This download record installs the Windows? 10 and Windows 11* WiFi package drivers 23.20.0 for the Intel? Wi-Fi 7/Wi-Fi 6E/Wi-Fi 6 and Intel? 9000 series Wireless Adapters.",
+    "OSDGuid":  "d865b5d8-a06b-49b7-8cf8-005845e86726",
     "OSDPnpClass":  "Net",
     "OSDPnpClassGuid":  "{4D36E972-E325-11CE-BFC1-08002BE10318}"
 }
