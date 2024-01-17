@@ -10,6 +10,15 @@ Note, the changes I make won't go into effect until the next module release date
 
 ## Changes
 
+### 24.1.17 (not implemented yet)
+- Fixed issue in Save-FeatureUpdate function [Issue 106](https://github.com/OSDeploy/OSD/issues/106)
+- Continue to deal with Intel's changing catalogs for WiFi drivers
+  - Modifications to Get-IntelWirelessDriverPack to GUESS the correct URL
+    - Thanks christiandekker for some ideas and code [Issue 101](https://github.com/OSDeploy/OSD/issues/101)
+- Update to OSDCloudGUI
+  - Added support to show ESD files & SWM files in the drop down list to choose from [Issue 99](https://github.com/OSDeploy/OSD/issues/99) [Issue 85](https://github.com/OSDeploy/OSD/issues/85) 
+  - promoted from DEV.  Was orginally in the 24.11.1 release (Start-OSDCLOUDGUIDev)
+
 ### 24.1.9 (implemented in OSD Module 24.11.1)
 - Integrated Test-DISMFromOSDCloudUSB & Start-DISMFromOSDCloudUSB into the main OSDCloud Process
   - This will look at the OSDCloudUSB and if it detects the driverpack already expanded, proceeds to DISM the drivers into the Offline OS
