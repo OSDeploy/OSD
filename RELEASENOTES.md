@@ -15,11 +15,11 @@ Note, the changes I make won't go into effect until the next module release date
 - Continue to deal with Intel's changing catalogs for WiFi drivers
   - Modifications to Get-IntelWirelessDriverPack to GUESS the correct URL
     - Thanks christiandekker for some ideas and code [Issue 101](https://github.com/OSDeploy/OSD/issues/101)
-- Update to OSDCloudGUI
+- Update to OSDCloudGUI (Start-OSDCLoudGUI)
   - Added support to show ESD files & SWM files in the drop down list to choose from [Issue 99](https://github.com/OSDeploy/OSD/issues/99) [Issue 85](https://github.com/OSDeploy/OSD/issues/85) 
-  - promoted from DEV.  Was orginally in the 24.11.1 release (Start-OSDCLOUDGUIDev)
+  - promoted from DEV.  Was orginally in the 24.1.11.1 release (Start-OSDCLOUDGUIDev)
 
-### 24.1.9 (implemented in OSD Module 24.11.1)
+### 24.1.9 (implemented in OSD Module 24.1.11.1)
 - Integrated Test-DISMFromOSDCloudUSB & Start-DISMFromOSDCloudUSB into the main OSDCloud Process
   - This will look at the OSDCloudUSB and if it detects the driverpack already expanded, proceeds to DISM the drivers into the Offline OS
     - OSDCloudUSB\OSDCloud\DriverPacks\DISM\$ComputerManufacturer\$PackageID
@@ -33,7 +33,7 @@ Note, the changes I make won't go into effect until the next module release date
     - Allows you to choose specific drivers by placing in the "ComputerProduct" folder for specific models of PCs
 - Dism log is copied from X:\Windows\Logs\DISM\dism.log to C:\OSDCloud\Logs\WinPE-DISM.log at the end of OSDCloud WinPE stage
 
-### 24.1.3 (implemented in OSD Module 24.11.1)
+### 24.1.3 (implemented in OSD Module 24.1.11.1)
 - Added support for Split WIMS (.swm). [Issue 99](https://github.com/OSDeploy/OSD/issues/99)  
 - Tested with MS Surface Book 2 MS Recovery Media
   - Download the Recovery Image, extract the swm files to OSDCloudUSB\OSDCloud\OS\%RecoveryImageName%
