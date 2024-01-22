@@ -10,6 +10,25 @@ Note, the changes I make won't go into effect until the next module release date
 
 ## Changes
 
+### 24.1.22
+- Added Function: New-OSDCloudUSBSetupCompleteTemplate
+  - This creates the Setup Complete files for you on your OSDCloudUSB drive (\OSDCloud\Config\Scripts\SetupComplete)
+  - You can then modify the SetupComplete.ps1 file to match your needs, or leave alone and look at the logs later to see how it worked.
+- Updated Start-OSDCloudGUIDev
+  - Include the HP Tools
+    - Using HPIA to Update Drivers, Firmware, Software, or All (During SetupComplete)
+    - Update TPM (During Specialize)
+    - Update BIOS (During WinPE)
+  - Include SetupComplete commands
+    - Windows Updates (No Drivers)
+    - Windows Update (Drivers Only)
+    - Windows Defender Updates
+    - Apply Key from UEFI
+      - This will attempt to lookup the Windows Code in UEFI and Apply to Windows
+    - Setup Complete Shutdown
+      - This will Shutdown the computer at the end of Setup Complete, leaving it at the OOBE the next time the device is turned on
+  - Please Note, all of these are already available today via variables you can call before triggering OSDCloud.  This is just adding to the GUI Dev front end for testing, then eventually be promoted into the production front end (Start-OSDCloudGUI)
+
 ### 24.1.17 (not implemented yet)
 - Fixed issue in Save-FeatureUpdate function [Issue 106](https://github.com/OSDeploy/OSD/issues/106)
 - Continue to deal with Intel's changing catalogs for WiFi drivers
