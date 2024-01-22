@@ -1646,6 +1646,7 @@
                     Write-Host -ForegroundColor DarkGray "HP TPM Update: $(Get-HPTPMDetermine)"
                     Set-HPTPMBIOSSettings
                     if (Get-HPTPMDetermine -ne "False"){
+                        Test-HPTPMFromOSDCloudUSB -TryToCopy
                         Invoke-HPTPMEXEDownload
                     }
                     else {

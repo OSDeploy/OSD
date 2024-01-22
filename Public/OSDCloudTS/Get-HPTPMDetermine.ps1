@@ -38,6 +38,77 @@ function Install-ModuleHPCMSL {
     Import-Module -Name $PSModuleName -Force -Global -ErrorAction SilentlyContinue -WarningAction SilentlyContinue
 }
 
+Function Test-HPTPMFromOSDCloudUSB {
+    [CmdletBinding()]
+    param (
+
+        [Parameter()]
+        [System.String]
+        $PackageID,
+        [switch]
+        $TryToCopy
+    )
+    $ComputerManufacturer = (Get-MyComputerManufacturer -Brief)
+    $OSDCloudUSB = Get-Volume.usb | Where-Object {($_.FileSystemLabel -match 'OSDCloud') -or ($_.FileSystemLabel -match 'BHIMAGE')} | Select-Object -First 1
+    if (!(Test-Path -Path "C:\OSDCloud")){
+        Write-Host -ForegroundColor Yellow "C:\OSDCloud does not exist, will be unable to copy TPM files local"
+    }
+    else {
+        if (!(Test-Path -Path "C:\OSDCloud\HP")){
+            New-Item -Path "C:\OSDCloud\HP" -ItemType Directory -Force | Out-Null
+        }
+    }
+    $HPTPMSP87753 = "$($OSDCloudUSB.DriveLetter):\OSDCloud\Firmware\$ComputerManufacturer\TPM\SP87753.exe"
+    $HPTPMSP94937 = "$($OSDCloudUSB.DriveLetter):\OSDCloud\Firmware\$ComputerManufacturer\TPM\SP94937.exe"
+    if ($PackageID){
+        if ($PackageID -eq 'SP87753'){
+            if (Test-Path -Path $HPTPMSP87753){
+                if (Test-Path -Path "C:\OSDCloud"){Copy-Item -Path $HPTPMSP87753 -Destination "C:\OSDCloud\HP\SP87753.exe" -Force}
+                return $true
+            }
+            else {
+                return $false
+            }
+        }
+        if ($PackageID -eq 'SP94937'){
+            if (Test-Path -Path $HPTPMSP94937){
+                if (Test-Path -Path "C:\OSDCloud"){Copy-Item -Path $HPTPMSP94937 -Destination "C:\OSDCloud\HP\SP94937.exe" -Force}
+                
+                return $true
+            }
+            else {
+                return $false
+            }
+        }
+    }
+    else {
+        if ((Test-Path -Path $HPTPMSP94937) -and (Test-Path -Path $HPTPMSP87753)){
+            if (Test-Path -Path "C:\OSDCloud"){Copy-Item -Path $HPTPMSP94937 -Destination "C:\OSDCloud\HP\SP94937.exe" -Force}
+            if (Test-Path -Path "C:\OSDCloud"){Copy-Item -Path $HPTPMSP87753 -Destination "C:\OSDCloud\HP\SP87753.exe" -Force}
+            return $true
+        }
+        else{
+            return $false
+        }
+    }
+    if ($TryToCopy){
+        if (Test-Path -Path $HPTPMSP94937){
+            if (Test-Path -Path "C:\OSDCloud"){
+                Write-Host "Copy-Item -Path $HPTPMSP94937 -Destination 'C:\OSDCloud\HP\SP94937.exe' -Force"
+                Copy-Item -Path $HPTPMSP94937 -Destination "C:\OSDCloud\HP\SP94937.exe" -Force
+            }
+        }  
+        if (Test-Path -Path $HPTPMSP87753){
+            if (Test-Path -Path "C:\OSDCloud"){
+                Write-Host "Copy-Item -Path $HPTPMSP87753 -Destination 'C:\OSDCloud\HP\SP87753.exe' -Force"
+                Copy-Item -Path $HPTPMSP87753 -Destination "C:\OSDCloud\HP\SP87753.exe" -Force
+            }
+        }   
+    }
+    
+}
+
+
 function Get-HPTPMDetermine{
     $SP87753 = Get-CimInstance  -Namespace "root\cimv2\security\MicrosoftTPM" -query "select * from win32_tpm where IsEnabled_InitialValue = 'True' and ((ManufacturerVersion like '7.%' and ManufacturerVersion < '7.63.3353') or (ManufacturerVersion like '5.1%') or (ManufacturerVersion like '5.60%') or (ManufacturerVersion like '5.61%') or (ManufacturerVersion like '4.4%') or (ManufacturerVersion like '6.40%') or (ManufacturerVersion like '6.41%') or (ManufacturerVersion like '6.43.243.0') or (ManufacturerVersion like '6.43.244.0'))"
     $SP94937 = Get-CimInstance  -Namespace "root\cimv2\security\MicrosoftTPM" -query "select * from win32_tpm where IsEnabled_InitialValue = 'True' and ((ManufacturerVersion like '7.62%') or (ManufacturerVersion like '7.63%') or (ManufacturerVersion like '7.83%') or (ManufacturerVersion like '6.43%') )"
@@ -76,9 +147,7 @@ function Invoke-HPTPMDownload { #Used when you want to manually download and tes
     else {Write-Host "No TPM Softpaq to Download"}
 }
 function Invoke-HPTPMEXEDownload { #This will download just the TPM Softpaq needed and place in C:\OSDCloud\HP\TPM
-    Install-ModuleHPCMSL
     Set-HPBIOSSetting -SettingName 'Virtualization Technology (VTx)' -Value 'Disable'
-    Import-Module -Name HPCMSL -Force
     $TPMUpdate = Get-HPTPMDetermine
     if (!(($TPMUpdate -eq $false) -or ($TPMUpdate -eq "False")))
         {
@@ -88,8 +157,18 @@ function Invoke-HPTPMEXEDownload { #This will download just the TPM Softpaq need
             New-Item -Path $DownloadFolder -ItemType Directory -Force |Out-Null
         }
         $UpdatePath = "$DownloadFolder\$TPMUpdate.exe"
-        Write-Host "Starting download of TPM Update $TPMUpdate"
-        Get-Softpaq -Number $TPMUpdate -SaveAs $UpdatePath -Overwrite yes
+        if ((Test-HPTPMFromOSDCloudUSB -PackageID $TPMUpdate) -eq $true){
+            if (Test-Path -Path "C:\OSDCloud\HP\$TPMUpdate.exe"){
+                "Found Local Copy of TPM Update $TPMUpdate, Copying to Staging Area"
+                Copy-Item -Path "C:\OSDCloud\HP\$TPMUpdate.exe" -Destination $UpdatePath -Force -Verbose
+            }
+        }
+        if (!(Test-Path -Path $UpdatePath)){
+            Write-Host "Starting download of TPM Update $TPMUpdate"
+            Install-ModuleHPCMSL
+            Import-Module -Name HPCMSL -Force
+            Get-Softpaq -Number $TPMUpdate -SaveAs $UpdatePath -Overwrite yes
+        }
         if (!(Test-Path -Path $UpdatePath)){Throw "Failed to Download TPM Update"}
     }    
 }

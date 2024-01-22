@@ -281,6 +281,7 @@
         'Stop-ScreenPNGProcess',
         'Start-DISMFromOSDCloudUSB',
         'Test-DISMFromOSDCloudUSB',
+        'Test-HPTPMFromOSDCloudUSB',
         'Test-DCUSupport',
         'Test-FolderToIso',
         'Test-HPIASupport',
