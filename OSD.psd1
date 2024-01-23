@@ -255,6 +255,7 @@
         'Set-SetupCompleteStartWindowsUpdate',
         'Set-SetupCompleteStartWindowsUpdateDriver',
         'Set-SetupCompleteOSDCloudUSB',
+        'Set-SetupCompleteOSDCloudCustom',
         'Set-SetupCompleteTimeZone',
         'Set-SetupCompleteSetWiFi',
         'Set-TimeZoneFromIP',

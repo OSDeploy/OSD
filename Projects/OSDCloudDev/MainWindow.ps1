@@ -316,7 +316,7 @@ if ($HPEnterprise){
         $formMainWindowControlOption_Name_5.Visibility = 'Visible'
         $formMainWindowControlOption_Name_5.Header = "HP Update TPM Firmware: $TPM"
         }
-    if ($BIOS -eq $false){
+    if ($BIOS -eq $true){
         $CurrentVer = Get-HPBIOSVersion
         $formMainWindowControlOption_Name_6.Header = "HP System Firmware already Current: $CurrentVer"
         $formMainWindowControlOption_Name_6.IsEnabled = $false

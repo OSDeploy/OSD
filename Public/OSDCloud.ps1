@@ -1990,6 +1990,10 @@ exit
     if (Get-SetupCompleteOSDCloudUSB -eq $true){
         Set-SetupCompleteOSDCloudUSB
     }
+    #Makes it so that if SetupComplete finds C:\OSDCloud\Scripts\SetupComplete\SetupComplete.cmd, it will run it.
+    else{
+        Set-SetupCompleteOSDCloudCustom
+    }
 
     #This appends the two lines at the end of SetupComplete Script to Stop Transcription and to Restart Computer
     Set-SetupCompleteCreateFinish
