@@ -10,7 +10,7 @@ Note, the changes I make won't go into effect until the next module release date
 
 ## Changes
 
-### 24.1.22
+### 24.1.22 (not implemented yet)
 - Added Function: New-OSDCloudUSBSetupCompleteTemplate
   - This creates the Setup Complete files for you on your OSDCloudUSB drive (\OSDCloud\Config\Scripts\SetupComplete)
   - You can then modify the SetupComplete.ps1 file to match your needs, or leave alone and look at the logs later to see how it worked.
