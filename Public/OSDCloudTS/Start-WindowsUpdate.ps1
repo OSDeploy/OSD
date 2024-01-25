@@ -35,7 +35,7 @@ Function Start-WindowsUpdate{
         }
         $InstallUpdateCount = $WUInstaller.Updates.count
         if ($InstallUpdateCount -ge 1){
-            Write-Output "Installing $InstallUpdateCount Updates"
+            Write-Output "Installing $InstallUpdateCount Updates | Time: $($(Get-Date).ToString("hh:mm:ss"))"
             $Install = $WUInstaller.Install()
             $ResultMeaning = ($Results | Where-Object {$_.ResultCode -eq $Install.ResultCode}).Meaning
             Write-Output $ResultMeaning
