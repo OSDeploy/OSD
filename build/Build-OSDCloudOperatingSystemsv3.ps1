@@ -133,10 +133,12 @@ $UniqueESDInfo = $ESDInfo | Group-Object -Property FileName | %{$_.Group[0]}
 $x64ESDInfo = $UniqueESDInfo | Where-Object {$_.Architecture -eq "x64"}
 $x64ESDInfo = $x64ESDInfo | Where-Object {$_.Edition -eq "Professional" -or $_.Edition -eq "Education" -or $_.Edition -eq "Enterprise" -or $_.Edition -eq "Professional" -or $_.Edition -eq "HomePremium"}
 
+$ARM64ESDInfo = $UniqueESDInfo | Where-Object {$_.Architecture -eq "ARM64"}
+$ARM64ESDInfo = $ARM64ESDInfo | Where-Object {$_.Edition -eq "Professional" -or $_.Edition -eq "Education" -or $_.Edition -eq "Enterprise" -or $_.Edition -eq "Professional" -or $_.Edition -eq "HomePremium"}
 
 Import-Module -Name OSD -Force
 #=================================================
-#   FeatureUpdates
+#   FeatureUpdates x64
 #=================================================
 
 $Results = $x64ESDInfo
@@ -160,19 +162,7 @@ $Results = $Results | Select-Object `
 @{Name='Win11';Expression={($null)}}
 
 foreach ($Result in $Results) {
-    #=================================================
-    #   
-    #=================================================
-    if ($Result.FileName -match 'Windows 10') {
-        $Result.Version = 'Windows 10'
-        $Result.Win10 = $true
-        $Result.Win11 = $false
-    }
-    if ($Result.Name -match 'Windows 11') {
-        $Result.Version = 'Windows 11'
-        $Result.Win10 = $false
-        $Result.Win11 = $true
-    }
+
     #=================================================
     #   Language
     #=================================================
@@ -203,9 +193,13 @@ foreach ($Result in $Results) {
     #=================================================
     if ($Result.Build -lt 22000) {
       $Result.Version = 'Windows 10'
+      $Result.Win10 = $true
+      $Result.Win11 = $false
     }
     if ($Result.Build -ge 22000) {
         $Result.Version = 'Windows 11'
+        $Result.Win10 = $false
+        $Result.Win11 = $true
     }
     #=================================================
     #   ReleaseID
@@ -245,7 +239,7 @@ $ResultsMCT = $Results | Sort-Object -Property Name
 
 
 #=================================================
-#   LEGACY FeatureUpdates
+#   LEGACY FeatureUpdates x64
 #=================================================
 $WSUSResults = Get-WSUSXML -Catalog FeatureUpdate -Silent
 $WSUSResults = $WSUSResults | Where-Object {$_.UpdateArch -eq 'x64'}
@@ -331,8 +325,114 @@ $ResultsWSUS = $WSUSResults | Where-Object {$_.Version -eq "Windows 10" -and ($_
 #Working on Support for Win 11 22H2 GA ESD Files to support folks who still wanted that version of the ESD file.
 #$ResultsWSUS = $WSUSResults | Where-Object {(($_.Version -eq "Windows 10") -and ($_.ReleaseID -eq "21H2" -or $_.ReleaseID -eq "20H2" -or $_.ReleaseID -eq "2004" -or $_.ReleaseID -eq "1909")) -or $_.ReleaseID -eq "22H2-GA"} | Sort-Object -Property Name
 
+#=================================================
+#   FeatureUpdates ARM64
+#=================================================
+
+$ARMResults = $ARM64ESDInfo
+$ARMResults = $ARMResults | Select-Object `
+@{Name='Status';Expression={($null)}}, `
+@{Name='ReleaseDate';Expression={($null)}}, `
+@{Name='Name';Expression={($_.Title)}}, `
+@{Name='Version';Expression={($null)}}, `
+@{Name='ReleaseID';Expression={($_.null)}}, `
+@{Name='Architecture';Expression={($_.Architecture)}}, `
+@{Name='Language';Expression={($_.LanguageCode)}}, `
+@{Name='Activation';Expression={($null)}}, `
+@{Name='Build';Expression={($null)}}, `
+@{Name='FileName';Expression={($_.FileName)}}, `
+@{Name='ImageIndex';Expression={($null)}}, `
+@{Name='ImageName';Expression={($null)}}, `
+@{Name='Url';Expression={($_.FilePath)}}, `
+@{Name='SHA1';Expression={($_.Sha1)}}, `
+@{Name='UpdateID';Expression={($_.UpdateID)}}, `
+@{Name='Win10';Expression={($null)}}, `
+@{Name='Win11';Expression={($null)}}
+
+foreach ($Result in $ARMResults) {
+
+    #=================================================
+    #   Language
+    #=================================================
+    #if ($Result.FileName -match 'sr-latn-rs') {
+    #    $Result.Language = 'sr-latn-rs'
+    #}
+    #else {
+    #    $Regex = "[a-zA-Z]+-[a-zA-Z]+"
+    #    $Result.Language = ($Result.FileName | Select-String -AllMatches -Pattern $Regex).Matches[0].Value
+    #}
+    #=================================================
+    #   Activation
+    #=================================================
+    if ($Result.Url -match 'business') {
+        $Result.Activation = 'Volume'
+    }
+    else {
+        $Result.Activation = 'Retail'
+    }
+    #=================================================
+    #   Build
+    #=================================================
+    $Regex = "[0-9]*\.[0-9]+"
+    $Result.Build = ($Result.FileName | Select-String -AllMatches -Pattern $Regex).Matches[0].Value
+
+    #=================================================
+    #   OS Version
+    #=================================================
+    if ($Result.Build -lt 22000) {
+      $Result.Version = 'Windows 10'
+      $Result.Win10 = $true
+      $Result.Win11 = $false
+    }
+    if ($Result.Build -ge 22000) {
+        $Result.Version = 'Windows 11'
+        $Result.Win10 = $false
+        $Result.Win11 = $true
+    }
+    #=================================================
+    #   ReleaseID
+    #=================================================
+    if ($Result.Build -match "19045"){$Result.ReleaseID = "22H2"}
+    if ($Result.Build -match "22000"){$Result.ReleaseID = "21H2"}
+    if ($Result.Build -match "22621"){$Result.ReleaseID = "22H2"}
+    if ($Result.Build -match "22631"){$Result.ReleaseID = "23H2"}
+    
+    #$Result.ReleaseID = (($Result.FileName).Split(".")[3]).Split("_")[0] #worked on some, not others
+
+    #=================================================
+    #   Date
+    #=================================================
+    $DateString = (($Result.FileName).Split(".")[2]).Split("-")[0]
+    $Date = [datetime]::parseexact($DateString, 'yyMMdd', $null)
+    $Result.ReleaseDate = (Get-Date $Date -Format "yyyy-MM-dd")
+    #=================================================
+    #   SHA1
+    #=================================================
+    #$Regex = "[0-9a-f]{40}"
+    #$Result.SHA1 = ($Result.FileName | Select-String -AllMatches -Pattern $Regex).Matches[0].Value
+    #$Result.SHA1 = ((Split-Path -Leaf $Result.Url) | Select-String -AllMatches -Pattern $Regex).Matches[0].Value
+    #=================================================
+    #   Name
+    #=================================================
+    if ($Result.Activation -eq 'Volume') {
+        $Result.Name = $Result.Version + ' ' + $Result.ReleaseID + ' ARM64 ' + $Result.Language + ' Volume ' + $Result.Build
+    }
+    else {
+        $Result.Name = $Result.Version + ' ' + $Result.ReleaseID + ' ARM64 ' + $Result.Language + ' Retail ' + $Result.Build
+    }
+    #=================================================
+}
+
+$ARMResultsMCT = $ARMResults | Sort-Object -Property Name
+
+# x64 Catalog File
 $ResultsTotal += $ResultsMCT
 $ResultsTotal += $ResultsWSUS
 $ResultsTotal | Export-Clixml -Path (Join-Path (Get-Module -Name OSD -ListAvailable | Sort-Object Version -Descending | Select-Object -First 1).ModuleBase "Catalogs\CloudOperatingSystems.xml") -Force
 Import-Clixml -Path (Join-Path (Get-Module -Name OSD -ListAvailable | Sort-Object Version -Descending | Select-Object -First 1).ModuleBase "Catalogs\CloudOperatingSystems.xml") | ConvertTo-Json | Out-File (Join-Path (Get-Module -Name OSD -ListAvailable | Sort-Object Version -Descending | Select-Object -First 1).ModuleBase "Catalogs\CloudOperatingSystems.json") -Encoding ascii -Width 2000 -Force
+
+# ARM64 Catalog File
+$ARMResultsMCT | Export-Clixml -Path (Join-Path (Get-Module -Name OSD -ListAvailable | Sort-Object Version -Descending | Select-Object -First 1).ModuleBase "Catalogs\CloudOperatingSystemsARM64.xml") -Force
+Import-Clixml -Path (Join-Path (Get-Module -Name OSD -ListAvailable | Sort-Object Version -Descending | Select-Object -First 1).ModuleBase "Catalogs\CloudOperatingSystemsARM64.xml") | ConvertTo-Json | Out-File (Join-Path (Get-Module -Name OSD -ListAvailable | Sort-Object Version -Descending | Select-Object -First 1).ModuleBase "Catalogs\CloudOperatingSystemsARM64.json") -Encoding ascii -Width 2000 -Force
+
 #================================================

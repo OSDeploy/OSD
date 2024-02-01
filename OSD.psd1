@@ -102,6 +102,7 @@
         'Get-HPWinPEDriverPack',
         'Get-HyperVName',
         'Get-LenovoDriverPack',
+        'Get-NativeMatchineImage',
         'Get-MicrosoftDriverPack',
         'Get-MsUpCat',
         'Get-MsUpCatUpdate',
