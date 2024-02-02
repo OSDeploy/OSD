@@ -13,6 +13,7 @@
         $DriverPack = Get-OSDCloudDriverPack -Product $ComputerProduct
     }
     $ComputerManufacturer = (Get-MyComputerManufacturer -Brief)
+    if ($ComputerManufacturer -match "Samsung"){$ComputerManufacturer = "Samsung"}
     $DriverPathProduct = "$($OSDCloudUSB.DriveLetter):\OSDCloud\DriverPacks\DISM\$ComputerManufacturer\$ComputerProduct"
     $DriverPathPackageID = "$($OSDCloudUSB.DriveLetter):\OSDCloud\DriverPacks\DISM\$ComputerManufacturer\$PackageID"
     if (Test-Path $DriverPathProduct){Return $true}
