@@ -19,6 +19,15 @@
             "Version": "Windows 11",
             "ImageIndex": "6"
         },
+        "DefaultARM64": {
+            "Activation": "Retail",
+            "Edition": "Pro",
+            "Language": "en-us",
+            "Name": "Windows 11 23H2 ARM64",
+            "ReleaseID": "23H2",
+            "Version": "Windows 11",
+            "ImageIndex": "9"
+        },
         "Values": {
             "Activation": [
                 "Retail",
@@ -83,6 +92,12 @@
                 "Windows 10 21H2 x64",
                 "Windows 10 20H2 x64",
                 "Windows 10 1909 x64"
+            ],
+            "NameARM64": [
+                "Windows 11 23H2 ARM64",
+		        "Windows 11 22H2 ARM64",
+                "Windows 11 21H2 ARM64",
+                "Windows 10 22H2 ARM64"
             ],
             "ReleaseID": [
                 "23H2",

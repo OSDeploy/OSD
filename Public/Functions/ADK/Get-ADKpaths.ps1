@@ -16,7 +16,7 @@ function Get-AdkPaths {
     [CmdletBinding()]
     param (
         [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
-        [ValidateSet('amd64','x86')]
+        [ValidateSet('amd64','x86','arm64')]
         [string]$Arch = $Env:PROCESSOR_ARCHITECTURE
     )
     

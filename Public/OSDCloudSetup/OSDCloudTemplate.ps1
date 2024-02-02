@@ -950,6 +950,7 @@ Windows Registry Editor Version 5.00
         'Config\AutopilotJSON',
         'Config\AutopilotOOBE',
         'Config\OOBEDeploy',
+        'Config\Scripts\SetupComplete',
         'Config\Scripts\Shutdown',
         'Config\Scripts\Startup',
         'Config\Scripts\StartNet'

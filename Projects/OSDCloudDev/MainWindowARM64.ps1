@@ -264,6 +264,7 @@ function Show-PowershellWindow() {
 if (Test-WebConnection -Uri "google.com") {
     $WebConnection = $True
 }
+<#
 if ($WebConnection -eq $true){
     function Test-HPIASupport {
         $CabPath = "$env:TEMP\platformList.cab"
@@ -279,19 +280,19 @@ if ($WebConnection -eq $true){
         return $HPIASupport
         }
     }
-
+#>
 $Manufacturer = (Get-CimInstance -Class:Win32_ComputerSystem).Manufacturer
 $Model = (Get-CimInstance -Class:Win32_ComputerSystem).Model
 if ($Manufacturer -match "HP" -or $Manufacturer -match "Hewlett-Packard"){
     $Manufacturer = "HP"
-    $HPEnterprise = Test-HPIASupport
+   #$HPEnterprise = Test-HPIASupport
     } 
 if ($Manufacturer -match "Microsoft"){
     if ($Model -eq "Virtual Machine"){
         $HyperV = $true
     } 
 }    
-
+<#
 if ($HPEnterprise){
     Install-ModuleHPCMSL
     $TPM = get-HPTPMDetermine
@@ -376,9 +377,10 @@ else{
     #$formMainWindowControlOption_Name_6.Visibility = "Hidden"
 }
 #>
+#>
 #Disabling Vendor Features for now.
-#$formMainWindowControlManufacturerFunction.Visibility = 'Hidden'
-#$formMainWindowControlManufacturerFunction.IsEnabled = $false
+$formMainWindowControlManufacturerFunction.Visibility = 'Hidden'
+$formMainWindowControlManufacturerFunction.IsEnabled = $false
 #$formMainWindowControlWindowsDefenderUpdate.Visibility = 'Hidden'
 #$formMainWindowControlWindowsDefenderUpdate.IsEnabled = $false
 #================================================
@@ -394,7 +396,7 @@ $formMainWindowControlupdateSCSIDrivers.IsChecked = $Global:OSDCloudGUI.updateSC
 #================================================
 #   OS Name Combobox
 #================================================
-$Global:OSDCloudGUI.OSNameValues | ForEach-Object {
+$Global:OSDCloudGUI.OSNameARM64Values | ForEach-Object {
     $formMainWindowControlOSNameCombobox.Items.Add($_) | Out-Null
 }
 $formMainWindowControlOSNameCombobox.SelectedValue = $Global:OSDCloudGUI.OSName
@@ -476,7 +478,7 @@ $CustomImageChildItem = @()
 $CustomImageChildItem = $CustomImageChildItem | Sort-Object -Property Length -Unique | Sort-Object FullName | Where-Object {$_.Length -gt 2GB}
         
 if ($CustomImageChildItem) {
-    $OSDCloudOperatingSystem = Get-OSDCloudOperatingSystems
+    $OSDCloudOperatingSystem = (Get-OSDCloudOperatingSystems -OSArch ARM64)
     $CustomImageChildItem = $CustomImageChildItem | Where-Object {$_.Name -notin $OSDCloudOperatingSystem.FileName}
     $CustomImageChildItem | ForEach-Object {
         $formMainWindowControlOSNameCombobox.Items.Add($_) | Out-Null
@@ -743,7 +745,7 @@ $formMainWindowControlStartButton.add_Click({
     if ($formMainWindowControlOSNameCombobox.SelectedValue -like 'Windows 1*') {
         $OSName = $formMainWindowControlOSNameCombobox.SelectedValue
         
-        $OSDCloudOperatingSystem = Get-OSDCloudOperatingSystems | Where-Object {$_.Name -match $OSName} | Where-Object {$_.Activation -eq $OSActivation} | Where-Object {$_.Language -eq $OSLanguage}
+        $OSDCloudOperatingSystem = (Get-OSDCloudOperatingSystems -OSArch ARM64) | Where-Object {$_.Name -match $OSName} | Where-Object {$_.Activation -eq $OSActivation} | Where-Object {$_.Language -eq $OSLanguage}
         $OSBuild = $OSDCloudOperatingSystem.Build
         $OSReleaseID = $OSDCloudOperatingSystem.ReleaseID
         $OSVersion = $OSDCloudOperatingSystem.Version
@@ -810,6 +812,7 @@ $formMainWindowControlStartButton.add_Click({
         OSEditionValues             = [array]$Global:OSDCloudGUI.OSEditionValues
         OSLanguageValues            = [array]$Global:OSDCloudGUI.OSLanguageValues
         OSNameValues                = [array]$Global:OSDCloudGUI.OSNameValues
+        OSNameARM64Values           = [array]$Global:OSDCloudGUI.OSNameARM64Values
         OSReleaseIDValues           = [array]$Global:OSDCloudGUI.OSReleaseIDValues
         OSVersionValues             = [array]$Global:OSDCloudGUI.OSVersionValues
         captureScreenshots          = [System.Boolean]$formMainWindowControlScreenshotCapture.IsChecked
