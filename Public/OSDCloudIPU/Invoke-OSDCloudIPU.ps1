@@ -9,7 +9,8 @@ function Invoke-OSDCloudIPU {
 
         [Parameter(ParameterSetName = 'Default')]
         [ValidateSet(
-            'Windows 11 23H2 x64',    
+            'Windows 11 23H2 x64',
+            'Windows 11 23H2 ARM64',    
             'Windows 11 22H2 x64',
             'Windows 11 21H2 x64',
             'Windows 10 22H2 x64')]
@@ -167,57 +168,78 @@ function Invoke-OSDCloudIPU {
     if ($OSActivation -match "OEM"){
         $OSActivation = "Retail"
     }
-    
+    $OSArch = $env:PROCESSOR_ARCHITECTURE   
 
     #endregion Current Activiation
-
-    #=================================================
-    #	OSEditionId and OSActivation
-    #=================================================
-    if (($OSEdition -eq 'Home') -or ($OSEdition -eq 'Core')) {
-        $OSEditionId = 'Core'
-        $OSActivation = 'Retail'
-        $OSImageIndex = 4
+    if ($OSArch -eq "ARM64"){
+#=================================================
+        #	OSEditionId and OSActivation
+        #=================================================
+        if (($OSEdition -eq 'Home') -or ($OSEdition -eq 'Core')) {
+            $OSEditionId = 'Core'
+            $OSActivation = 'Retail'
+            $OSImageIndex = 4
+        }
+        if ($OSEdition -eq 'Home Single Language') {
+            $OSEditionId = 'CoreSingleLanguage'
+            $OSActivation = 'Retail'
+            $OSImageIndex = 5
+        }
+        if (($OSEdition -eq 'Pro') -or ($OSEdition -eq 'Professional'))  {
+            $OSEditionId = 'Professional'
+            if ($OSActivation -eq 'Retail') {$OSImageIndex = 6}
+            if ($OSActivation -eq 'Volume') {$OSImageIndex = 8}
+        }
     }
-    if (($OSEdition -eq 'Home N') -or ($OSEdition -eq 'CoreN')) {
-        $OSEditionId = 'CoreN'
-        $OSActivation = 'Retail'
-        $OSImageIndex = 5
-    }
-    if ($OSEdition -eq 'Home Single Language') {
-        $OSEditionId = 'CoreSingleLanguage'
-        $OSActivation = 'Retail'
-        $OSImageIndex = 6
-    }
-    if ($OSEdition -eq 'Enterprise') {
-        $OSEditionId = 'Enterprise'
-        $OSActivation = 'Volume'
-        $OSImageIndex = 6
-    }
-    if (($OSEdition -eq 'Enterprise N') -or ($OSEdition -eq 'EnterpriseN')) {
-        $OSEditionId = 'EnterpriseN'
-        $OSActivation = 'Volume'
-        $OSImageIndex = 7
-    }
-    if ($OSEdition -eq 'Education') {
-        $OSEditionId = 'Education'
-        if ($OSActivation -eq 'Retail') {$OSImageIndex = 7}
-        if ($OSActivation -eq 'Volume') {$OSImageIndex = 4}
-    }
-    if (($OSEdition -eq 'Education N') -or ($OSEdition -eq 'EducationN')) {
-        $OSEditionId = 'EducationN'
-        if ($OSActivation -eq 'Retail') {$OSImageIndex = 8}
-        if ($OSActivation -eq 'Volume') {$OSImageIndex = 5}
-    }
-    if (($OSEdition -eq 'Pro') -or ($OSEdition -eq 'Professional'))  {
-        $OSEditionId = 'Professional'
-        if ($OSActivation -eq 'Retail') {$OSImageIndex = 9}
-        if ($OSActivation -eq 'Volume') {$OSImageIndex = 8}
-    }
-    if (($OSEdition -eq 'Pro N') -or ($OSEdition -eq 'ProfessionalN')) {
-        $OSEditionId = 'ProfessionalN'
-        if ($OSActivation -eq 'Retail') {$OSImageIndex = 10}
-        if ($OSActivation -eq 'Volume') {$OSImageIndex = 9}
+    else {
+        #=================================================
+        #	OSEditionId and OSActivation
+        #=================================================
+        if (($OSEdition -eq 'Home') -or ($OSEdition -eq 'Core')) {
+            $OSEditionId = 'Core'
+            $OSActivation = 'Retail'
+            $OSImageIndex = 4
+        }
+        if (($OSEdition -eq 'Home N') -or ($OSEdition -eq 'CoreN')) {
+            $OSEditionId = 'CoreN'
+            $OSActivation = 'Retail'
+            $OSImageIndex = 5
+        }
+        if ($OSEdition -eq 'Home Single Language') {
+            $OSEditionId = 'CoreSingleLanguage'
+            $OSActivation = 'Retail'
+            $OSImageIndex = 6
+        }
+        if ($OSEdition -eq 'Enterprise') {
+            $OSEditionId = 'Enterprise'
+            $OSActivation = 'Volume'
+            $OSImageIndex = 6
+        }
+        if (($OSEdition -eq 'Enterprise N') -or ($OSEdition -eq 'EnterpriseN')) {
+            $OSEditionId = 'EnterpriseN'
+            $OSActivation = 'Volume'
+            $OSImageIndex = 7
+        }
+        if ($OSEdition -eq 'Education') {
+            $OSEditionId = 'Education'
+            if ($OSActivation -eq 'Retail') {$OSImageIndex = 7}
+            if ($OSActivation -eq 'Volume') {$OSImageIndex = 4}
+        }
+        if (($OSEdition -eq 'Education N') -or ($OSEdition -eq 'EducationN')) {
+            $OSEditionId = 'EducationN'
+            if ($OSActivation -eq 'Retail') {$OSImageIndex = 8}
+            if ($OSActivation -eq 'Volume') {$OSImageIndex = 5}
+        }
+        if (($OSEdition -eq 'Pro') -or ($OSEdition -eq 'Professional'))  {
+            $OSEditionId = 'Professional'
+            if ($OSActivation -eq 'Retail') {$OSImageIndex = 9}
+            if ($OSActivation -eq 'Volume') {$OSImageIndex = 8}
+        }
+        if (($OSEdition -eq 'Pro N') -or ($OSEdition -eq 'ProfessionalN')) {
+            $OSEditionId = 'ProfessionalN'
+            if ($OSActivation -eq 'Retail') {$OSImageIndex = 10}
+            if ($OSActivation -eq 'Volume') {$OSImageIndex = 9}
+        }
     }
     Write-Host -ForegroundColor DarkGray "========================================================================="
     Write-Host -ForegroundColor DarkCyan "These are set automatically based on your current OS"
@@ -229,7 +251,9 @@ function Invoke-OSDCloudIPU {
     Write-Host -ForegroundColor Green $OSLanguage
     Write-Host -ForegroundColor Cyan "OSActivation: " -NoNewline
     Write-Host -ForegroundColor Green $OSActivation
- 
+    Write-Host -ForegroundColor Cyan "OSArch: " -NoNewline
+    Write-Host -ForegroundColor Green $OSArch
+
     Write-Host -ForegroundColor DarkGray "========================================================================="
     Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Starting Feature Update lookup and Download"
 
