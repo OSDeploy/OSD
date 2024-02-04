@@ -13,7 +13,8 @@ function Invoke-OSDCloudIPU {
             'Windows 11 23H2 ARM64',    
             'Windows 11 22H2 x64',
             'Windows 11 21H2 x64',
-            'Windows 10 22H2 x64')]
+            'Windows 10 22H2 x64',
+            'Windows 10 22H2 ARM64')]
         [System.String]
         $OSName = 'Windows 11 23H2 x64',
 
@@ -289,12 +290,24 @@ function Invoke-OSDCloudIPU {
     Write-Host -ForegroundColor DarkGray "========================================================================="
     Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Getting Content for Upgrade Media"   
 
+    #Build Media Paths
     $SubFolderName = "$($ESD.Version) $($ESD.ReleaseId)"
     $ImageFolderPath = "$OSMediaLocation\$SubFolderName"
     if (!(Test-Path -Path $ImageFolderPath)){New-Item -Path $ImageFolderPath -ItemType Directory -Force | Out-Null}
     $ImagePath = "$ImageFolderPath\$($ESD.FileName)"
     $ImageDownloadRequired = $true
 
+    #Check Flash Drive for Media
+    $OSDCloudUSB = Get-Volume.usb | Where-Object {($_.FileSystemLabel -match 'OSDCloud') -or ($_.FileSystemLabel -match 'BHIMAGE')} | Select-Object -First 1
+    if ($OSDCloudUSB){
+        $USBImagePath = "$($OSDCloudUSB.DriveLetter):\OSDCloud\OS\$SubFolderName\$($ESD.FileName)"
+        if ((Test-Path -path $USBImagePath) -and (!(Test-Path -path $ImagePath))){
+            Write-Host -ForegroundColor Green "Found media on OSDCloudUSB - Copying Local"
+            Copy-Item -Path $USBImagePath -Destination $ImagePath
+        }
+    }
+    
+    #Test for Media
     if (Test-path -path $ImagePath){
         Write-Host -ForegroundColor Gray "Found previously downloaded media, getting SHA1 Hash"
         $SHA1Hash = Get-FileHash $ImagePath -Algorithm SHA1
