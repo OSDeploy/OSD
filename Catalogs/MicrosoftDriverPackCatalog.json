@@ -1,6 +1,6 @@
 [
     {
-        "CatalogVersion":  "24.01.03",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "21.05.06",
@@ -15,10 +15,10 @@
         "OSVersion":  "Windows 10 x64",
         "OSReleaseId":  "1903",
         "OSBuild":  "18362",
-        "HashMD5":  "C853F3908DA15E2CDFC03C6AAD70FBA0"
+        "HashMD5":  ""
     },
     {
-        "CatalogVersion":  "24.01.03",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "21.05.06",
@@ -33,10 +33,10 @@
         "OSVersion":  "Windows 10 x64",
         "OSReleaseId":  "1903",
         "OSBuild":  "18362",
-        "HashMD5":  "5F13B5E6A384999615E95C1EA63799"
+        "HashMD5":  ""
     },
     {
-        "CatalogVersion":  "24.01.03",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "21.05.06",
@@ -51,10 +51,10 @@
         "OSVersion":  "Windows 10 x64",
         "OSReleaseId":  "1903",
         "OSBuild":  "18362",
-        "HashMD5":  "4725ED9879E6FC5FC5CADDB2D96FCC"
+        "HashMD5":  ""
     },
     {
-        "CatalogVersion":  "24.01.03",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "21.05.06",
@@ -69,10 +69,10 @@
         "OSVersion":  "Windows 10 x64",
         "OSReleaseId":  "1903",
         "OSBuild":  "18362",
-        "HashMD5":  "4725ED9879E6FC5FC5CADDB2D96FCC"
+        "HashMD5":  ""
     },
     {
-        "CatalogVersion":  "24.01.03",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "21.05.06",
@@ -87,10 +87,10 @@
         "OSVersion":  "Windows 10 x64",
         "OSReleaseId":  "1903",
         "OSBuild":  "18362",
-        "HashMD5":  "C6656B42C46F6EE32CD3C6E7CE8F33D"
+        "HashMD5":  ""
     },
     {
-        "CatalogVersion":  "24.01.03",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "21.07.29",
@@ -105,10 +105,10 @@
         "OSVersion":  "Windows 10 x64",
         "OSReleaseId":  "1903",
         "OSBuild":  "18362",
-        "HashMD5":  "D88E5E0AE94EA80E317AD85B2867"
+        "HashMD5":  ""
     },
     {
-        "CatalogVersion":  "24.01.03",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "23.09.20",
@@ -123,10 +123,10 @@
         "OSVersion":  "Windows 10 x64",
         "OSReleaseId":  "21H2",
         "OSBuild":  "19044",
-        "HashMD5":  "871C3CD5CFBDFD2DB7625EAB23555C"
+        "HashMD5":  ""
     },
     {
-        "CatalogVersion":  "24.01.03",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "23.09.20",
@@ -141,10 +141,10 @@
         "OSVersion":  "Windows 11 x64",
         "OSReleaseId":  "21H2",
         "OSBuild":  "22000",
-        "HashMD5":  "C734A093ACDF34BABBA5A107DCBEBB2"
+        "HashMD5":  ""
     },
     {
-        "CatalogVersion":  "24.01.03",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "23.09.20",
@@ -159,10 +159,10 @@
         "OSVersion":  "Windows 10 x64",
         "OSReleaseId":  "21H2",
         "OSBuild":  "19044",
-        "HashMD5":  "871C3CD5CFBDFD2DB7625EAB23555C"
+        "HashMD5":  ""
     },
     {
-        "CatalogVersion":  "24.01.03",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "23.09.20",
@@ -177,10 +177,10 @@
         "OSVersion":  "Windows 11 x64",
         "OSReleaseId":  "21H2",
         "OSBuild":  "22000",
-        "HashMD5":  "C734A093ACDF34BABBA5A107DCBEBB2"
+        "HashMD5":  ""
     },
     {
-        "CatalogVersion":  "24.01.03",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "23.12.14",
@@ -195,10 +195,10 @@
         "OSVersion":  "Windows 10 x64",
         "OSReleaseId":  "21H2",
         "OSBuild":  "19044",
-        "HashMD5":  "8B9465A5ED2A48E5BC9B8BAB47F686B"
+        "HashMD5":  ""
     },
     {
-        "CatalogVersion":  "24.01.03",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "23.12.14",
@@ -213,10 +213,10 @@
         "OSVersion":  "Windows 11 x64",
         "OSReleaseId":  "21H2",
         "OSBuild":  "22000",
-        "HashMD5":  "3C2B59AFF2545C44ABA8C42BC22C7"
+        "HashMD5":  ""
     },
     {
-        "CatalogVersion":  "24.01.03",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "23.12.14",
@@ -231,10 +231,10 @@
         "OSVersion":  "Windows 10 x64",
         "OSReleaseId":  "21H2",
         "OSBuild":  "19044",
-        "HashMD5":  "8B9465A5ED2A48E5BC9B8BAB47F686B"
+        "HashMD5":  ""
     },
     {
-        "CatalogVersion":  "24.01.03",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "23.12.14",
@@ -249,10 +249,10 @@
         "OSVersion":  "Windows 11 x64",
         "OSReleaseId":  "21H2",
         "OSBuild":  "22000",
-        "HashMD5":  "3C2B59AFF2545C44ABA8C42BC22C7"
+        "HashMD5":  ""
     },
     {
-        "CatalogVersion":  "24.01.03",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "22.11.10",
@@ -267,10 +267,10 @@
         "OSVersion":  "Windows 10 x64",
         "OSReleaseId":  "20H2",
         "OSBuild":  "19042",
-        "HashMD5":  "A1E3DB6A90D460B58196284EF0F24622"
+        "HashMD5":  ""
     },
     {
-        "CatalogVersion":  "24.01.03",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "22.11.10",
@@ -285,10 +285,10 @@
         "OSVersion":  "Windows 10 x64",
         "OSReleaseId":  "20H2",
         "OSBuild":  "19042",
-        "HashMD5":  "A1E3DB6A90D460B58196284EF0F24622"
+        "HashMD5":  ""
     },
     {
-        "CatalogVersion":  "24.01.03",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "22.11.10",
@@ -303,10 +303,10 @@
         "OSVersion":  "Windows 10 x64",
         "OSReleaseId":  "20H2",
         "OSBuild":  "19042",
-        "HashMD5":  "AA9FA1E0F756F03D17234FC3EBF974CB"
+        "HashMD5":  ""
     },
     {
-        "CatalogVersion":  "24.01.03",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "23.12.01",
@@ -321,10 +321,10 @@
         "OSVersion":  "Windows 10 x64",
         "OSReleaseId":  "21H2",
         "OSBuild":  "19044",
-        "HashMD5":  "2FA588D7741B9C1BDF5B49A55192B6"
+        "HashMD5":  ""
     },
     {
-        "CatalogVersion":  "24.01.03",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "23.12.01",
@@ -339,10 +339,10 @@
         "OSVersion":  "Windows 10 x64",
         "OSReleaseId":  "21H2",
         "OSBuild":  "19044",
-        "HashMD5":  "2FA588D7741B9C1BDF5B49A55192B6"
+        "HashMD5":  ""
     },
     {
-        "CatalogVersion":  "24.01.03",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "23.12.01",
@@ -357,10 +357,10 @@
         "OSVersion":  "Windows 10 x64",
         "OSReleaseId":  "21H2",
         "OSBuild":  "19044",
-        "HashMD5":  "2FA588D7741B9C1BDF5B49A55192B6"
+        "HashMD5":  ""
     },
     {
-        "CatalogVersion":  "24.01.03",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "23.11.17",
@@ -375,10 +375,10 @@
         "OSVersion":  "Windows 10 x64",
         "OSReleaseId":  "21H2",
         "OSBuild":  "19044",
-        "HashMD5":  "4D11963268FC2B12BC68CC8CB7EA898"
+        "HashMD5":  ""
     },
     {
-        "CatalogVersion":  "24.01.03",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "23.11.17",
@@ -393,10 +393,10 @@
         "OSVersion":  "Windows 11 x64",
         "OSReleaseId":  "21H2",
         "OSBuild":  "22000",
-        "HashMD5":  "8059D5ECF24E4FB4FF1D116EACDEE9"
+        "HashMD5":  ""
     },
     {
-        "CatalogVersion":  "24.01.03",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "23.11.17",
@@ -411,10 +411,10 @@
         "OSVersion":  "Windows 10 x64",
         "OSReleaseId":  "21H2",
         "OSBuild":  "19044",
-        "HashMD5":  "4D11963268FC2B12BC68CC8CB7EA898"
+        "HashMD5":  ""
     },
     {
-        "CatalogVersion":  "24.01.03",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "23.11.17",
@@ -429,10 +429,10 @@
         "OSVersion":  "Windows 11 x64",
         "OSReleaseId":  "21H2",
         "OSBuild":  "22000",
-        "HashMD5":  "8059D5ECF24E4FB4FF1D116EACDEE9"
+        "HashMD5":  ""
     },
     {
-        "CatalogVersion":  "24.01.03",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "23.11.17",
@@ -447,10 +447,10 @@
         "OSVersion":  "Windows 10 x64",
         "OSReleaseId":  "21H2",
         "OSBuild":  "19044",
-        "HashMD5":  "4D11963268FC2B12BC68CC8CB7EA898"
+        "HashMD5":  ""
     },
     {
-        "CatalogVersion":  "24.01.03",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "23.11.17",
@@ -465,10 +465,10 @@
         "OSVersion":  "Windows 11 x64",
         "OSReleaseId":  "21H2",
         "OSBuild":  "22000",
-        "HashMD5":  "8059D5ECF24E4FB4FF1D116EACDEE9"
+        "HashMD5":  ""
     },
     {
-        "CatalogVersion":  "24.01.03",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "23.12.19",
@@ -483,10 +483,10 @@
         "OSVersion":  "Windows 10 x64",
         "OSReleaseId":  "22H2",
         "OSBuild":  "19045",
-        "HashMD5":  "B4390F2386F57D5AD28F684B087FF7E"
+        "HashMD5":  ""
     },
     {
-        "CatalogVersion":  "24.01.03",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "23.12.01",
@@ -501,10 +501,10 @@
         "OSVersion":  "Windows 11 x64",
         "OSReleaseId":  "22H2",
         "OSBuild":  "22621",
-        "HashMD5":  "1A2795788BD86962D5A13D146A3B0CB"
+        "HashMD5":  ""
     },
     {
-        "CatalogVersion":  "24.01.03",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "23.12.19",
@@ -519,10 +519,10 @@
         "OSVersion":  "Windows 10 x64",
         "OSReleaseId":  "22H2",
         "OSBuild":  "19045",
-        "HashMD5":  "B4390F2386F57D5AD28F684B087FF7E"
+        "HashMD5":  ""
     },
     {
-        "CatalogVersion":  "24.01.03",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "23.12.01",
@@ -537,10 +537,10 @@
         "OSVersion":  "Windows 11 x64",
         "OSReleaseId":  "22H2",
         "OSBuild":  "22621",
-        "HashMD5":  "1A2795788BD86962D5A13D146A3B0CB"
+        "HashMD5":  ""
     },
     {
-        "CatalogVersion":  "24.01.03",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "23.12.19",
@@ -555,10 +555,10 @@
         "OSVersion":  "Windows 10 x64",
         "OSReleaseId":  "22H2",
         "OSBuild":  "19045",
-        "HashMD5":  "B4390F2386F57D5AD28F684B087FF7E"
+        "HashMD5":  ""
     },
     {
-        "CatalogVersion":  "24.01.03",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "23.12.01",
@@ -573,10 +573,10 @@
         "OSVersion":  "Windows 11 x64",
         "OSReleaseId":  "22H2",
         "OSBuild":  "22621",
-        "HashMD5":  "1A2795788BD86962D5A13D146A3B0CB"
+        "HashMD5":  ""
     },
     {
-        "CatalogVersion":  "24.01.03",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "21.11.18",
@@ -591,10 +591,10 @@
         "OSVersion":  "Windows 10 x64",
         "OSReleaseId":  "1903",
         "OSBuild":  "18362",
-        "HashMD5":  "F65EE1F58D5E4740573F581545E71053"
+        "HashMD5":  ""
     },
     {
-        "CatalogVersion":  "24.01.03",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "22.08.25",
@@ -609,10 +609,10 @@
         "OSVersion":  "Windows 10 x64",
         "OSReleaseId":  "2004",
         "OSBuild":  "19041",
-        "HashMD5":  "DE56A911F66E1BE9BEB4ABAA0222055"
+        "HashMD5":  ""
     },
     {
-        "CatalogVersion":  "24.01.03",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "22.08.25",
@@ -627,10 +627,10 @@
         "OSVersion":  "Windows 10 x64",
         "OSReleaseId":  "2004",
         "OSBuild":  "19041",
-        "HashMD5":  "DE56A911F66E1BE9BEB4ABAA0222055"
+        "HashMD5":  ""
     },
     {
-        "CatalogVersion":  "24.01.03",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "23.11.17",
@@ -645,10 +645,10 @@
         "OSVersion":  "Windows 10 x64",
         "OSReleaseId":  "21H2",
         "OSBuild":  "19044",
-        "HashMD5":  "EBB9B0652B2D524E6A124D753FE5A9D6"
+        "HashMD5":  ""
     },
     {
-        "CatalogVersion":  "24.01.03",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "23.11.17",
@@ -663,46 +663,46 @@
         "OSVersion":  "Windows 11 x64",
         "OSReleaseId":  "21H2",
         "OSBuild":  "22000",
-        "HashMD5":  "373F793139E59AF4EDEDC692BD6DD580"
+        "HashMD5":  ""
     },
     {
-        "CatalogVersion":  "24.01.03",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  "22.03.17",
+        "ReleaseDate":  "24.01.30",
         "Manufacturer":  "Microsoft",
         "Model":  "Surface Laptop 3",
         "Product":  "Surface_Laptop_3_1873",
-        "Name":  "Microsoft Surface Laptop 3 13 AMD Win10 20H2",
+        "Name":  "Microsoft Surface Laptop 3 13 AMD Win10 21H2",
         "PackageID":  "100428",
-        "FileName":  "SurfaceLaptop3_Win10_19042_22.020.5647.0.msi",
-        "Url":  "https://download.microsoft.com/download/6/f/e/6fe2a0c9-7218-4e17-8628-229b89a8b650/SurfaceLaptop3_Win10_19042_22.020.5647.0.msi",
+        "FileName":  "SurfaceLaptop3_AMD_Win10_19044_24.012.26170.0.msi",
+        "Url":  "https://download.microsoft.com/download/6/f/e/6fe2a0c9-7218-4e17-8628-229b89a8b650/SurfaceLaptop3_AMD_Win10_19044_24.012.26170.0.msi",
         "DownloadCenter":  "https://www.microsoft.com/en-us/download/details.aspx?id=100428",
         "OSVersion":  "Windows 10 x64",
-        "OSReleaseId":  "20H2",
-        "OSBuild":  "19042",
-        "HashMD5":  "77EC8F427C96F629186A47D1A0A4741B"
+        "OSReleaseId":  "21H2",
+        "OSBuild":  "19044",
+        "HashMD5":  ""
     },
     {
-        "CatalogVersion":  "24.01.03",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  "22.03.17",
+        "ReleaseDate":  "24.01.30",
         "Manufacturer":  "Microsoft",
         "Model":  "Surface Laptop 3",
         "Product":  "Surface_Laptop_3_1873",
         "Name":  "Microsoft Surface Laptop 3 13 AMD Win11 21H2",
         "PackageID":  "100428",
-        "FileName":  "SurfaceLaptop3_Win11_22000_22.020.5648.0.msi",
-        "Url":  "https://download.microsoft.com/download/6/f/e/6fe2a0c9-7218-4e17-8628-229b89a8b650/SurfaceLaptop3_Win11_22000_22.020.5648.0.msi",
+        "FileName":  "SurfaceLaptop3_AMD_Win11_22000_24.012.26136.0.msi",
+        "Url":  "https://download.microsoft.com/download/6/f/e/6fe2a0c9-7218-4e17-8628-229b89a8b650/SurfaceLaptop3_AMD_Win11_22000_24.012.26136.0.msi",
         "DownloadCenter":  "https://www.microsoft.com/en-us/download/details.aspx?id=100428",
         "OSVersion":  "Windows 11 x64",
         "OSReleaseId":  "21H2",
         "OSBuild":  "22000",
-        "HashMD5":  "4784A3B46FF5D315FCBCFADAC78E2B"
+        "HashMD5":  ""
     },
     {
-        "CatalogVersion":  "24.01.03",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "23.11.17",
@@ -717,10 +717,10 @@
         "OSVersion":  "Windows 10 x64",
         "OSReleaseId":  "21H2",
         "OSBuild":  "19044",
-        "HashMD5":  "EBB9B0652B2D524E6A124D753FE5A9D6"
+        "HashMD5":  ""
     },
     {
-        "CatalogVersion":  "24.01.03",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "23.11.17",
@@ -735,10 +735,10 @@
         "OSVersion":  "Windows 11 x64",
         "OSReleaseId":  "21H2",
         "OSBuild":  "22000",
-        "HashMD5":  "373F793139E59AF4EDEDC692BD6DD580"
+        "HashMD5":  ""
     },
     {
-        "CatalogVersion":  "24.01.03",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "23.12.15",
@@ -753,10 +753,10 @@
         "OSVersion":  "Windows 10 x64",
         "OSReleaseId":  "21H2",
         "OSBuild":  "19044",
-        "HashMD5":  "19294C806CE9A6A15EEB4DB238187271"
+        "HashMD5":  ""
     },
     {
-        "CatalogVersion":  "24.01.03",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "23.12.15",
@@ -771,10 +771,10 @@
         "OSVersion":  "Windows 11 x64",
         "OSReleaseId":  "21H2",
         "OSBuild":  "22000",
-        "HashMD5":  "7BC2EC0CA8C7F474F326E693C4BA59"
+        "HashMD5":  ""
     },
     {
-        "CatalogVersion":  "24.01.03",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "23.12.14",
@@ -789,10 +789,10 @@
         "OSVersion":  "Windows 10 x64",
         "OSReleaseId":  "21H2",
         "OSBuild":  "19044",
-        "HashMD5":  "69634CBFEE3E4C3B78BA2DB23EF586D5"
+        "HashMD5":  ""
     },
     {
-        "CatalogVersion":  "24.01.03",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "23.12.14",
@@ -807,10 +807,10 @@
         "OSVersion":  "Windows 11 x64",
         "OSReleaseId":  "21H2",
         "OSBuild":  "22000",
-        "HashMD5":  "59493C0CAE1D2A265C1DE078DC45FD"
+        "HashMD5":  ""
     },
     {
-        "CatalogVersion":  "24.01.03",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "23.12.15",
@@ -825,10 +825,10 @@
         "OSVersion":  "Windows 10 x64",
         "OSReleaseId":  "21H2",
         "OSBuild":  "19044",
-        "HashMD5":  "19294C806CE9A6A15EEB4DB238187271"
+        "HashMD5":  ""
     },
     {
-        "CatalogVersion":  "24.01.03",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "23.12.15",
@@ -843,10 +843,10 @@
         "OSVersion":  "Windows 11 x64",
         "OSReleaseId":  "21H2",
         "OSBuild":  "22000",
-        "HashMD5":  "7BC2EC0CA8C7F474F326E693C4BA59"
+        "HashMD5":  ""
     },
     {
-        "CatalogVersion":  "24.01.03",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "23.12.14",
@@ -861,10 +861,10 @@
         "OSVersion":  "Windows 10 x64",
         "OSReleaseId":  "21H2",
         "OSBuild":  "19044",
-        "HashMD5":  "69634CBFEE3E4C3B78BA2DB23EF586D5"
+        "HashMD5":  ""
     },
     {
-        "CatalogVersion":  "24.01.03",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "23.12.14",
@@ -879,10 +879,10 @@
         "OSVersion":  "Windows 11 x64",
         "OSReleaseId":  "21H2",
         "OSBuild":  "22000",
-        "HashMD5":  "59493C0CAE1D2A265C1DE078DC45FD"
+        "HashMD5":  ""
     },
     {
-        "CatalogVersion":  "24.01.03",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "23.12.14",
@@ -897,10 +897,10 @@
         "OSVersion":  "Windows 10 x64",
         "OSReleaseId":  "21H2",
         "OSBuild":  "19044",
-        "HashMD5":  "E134E8D91E9061628269E2C1C3956E34"
+        "HashMD5":  ""
     },
     {
-        "CatalogVersion":  "24.01.03",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "23.12.14",
@@ -915,10 +915,10 @@
         "OSVersion":  "Windows 11 x64",
         "OSReleaseId":  "22H2",
         "OSBuild":  "22621",
-        "HashMD5":  "2E2A1D3998E26951EACCDD8E4A79E49A"
+        "HashMD5":  ""
     },
     {
-        "CatalogVersion":  "24.01.03",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "23.12.14",
@@ -933,10 +933,10 @@
         "OSVersion":  "Windows 10 x64",
         "OSReleaseId":  "21H2",
         "OSBuild":  "19044",
-        "HashMD5":  "E134E8D91E9061628269E2C1C3956E34"
+        "HashMD5":  ""
     },
     {
-        "CatalogVersion":  "24.01.03",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "23.12.14",
@@ -951,10 +951,10 @@
         "OSVersion":  "Windows 11 x64",
         "OSReleaseId":  "22H2",
         "OSBuild":  "22621",
-        "HashMD5":  "2E2A1D3998E26951EACCDD8E4A79E49A"
+        "HashMD5":  ""
     },
     {
-        "CatalogVersion":  "24.01.03",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "23.12.14",
@@ -969,10 +969,10 @@
         "OSVersion":  "Windows 10 x64",
         "OSReleaseId":  "21H2",
         "OSBuild":  "19044",
-        "HashMD5":  "E134E8D91E9061628269E2C1C3956E34"
+        "HashMD5":  ""
     },
     {
-        "CatalogVersion":  "24.01.03",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "23.12.14",
@@ -987,10 +987,10 @@
         "OSVersion":  "Windows 11 x64",
         "OSReleaseId":  "22H2",
         "OSBuild":  "22621",
-        "HashMD5":  "2E2A1D3998E26951EACCDD8E4A79E49A"
+        "HashMD5":  ""
     },
     {
-        "CatalogVersion":  "24.01.03",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "23.12.14",
@@ -1005,10 +1005,10 @@
         "OSVersion":  "Windows 10 x64",
         "OSReleaseId":  "21H2",
         "OSBuild":  "19044",
-        "HashMD5":  "E134E8D91E9061628269E2C1C3956E34"
+        "HashMD5":  ""
     },
     {
-        "CatalogVersion":  "24.01.03",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "23.12.14",
@@ -1023,46 +1023,46 @@
         "OSVersion":  "Windows 11 x64",
         "OSReleaseId":  "22H2",
         "OSBuild":  "22621",
-        "HashMD5":  "2E2A1D3998E26951EACCDD8E4A79E49A"
+        "HashMD5":  ""
     },
     {
-        "CatalogVersion":  "24.01.03",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  "23.11.02",
+        "ReleaseDate":  "24.01.25",
         "Manufacturer":  "Microsoft",
         "Model":  "Surface Laptop Go",
         "Product":  "Surface_Laptop_Go_1943",
         "Name":  "Microsoft Surface Laptop Go Win10 21H2",
         "PackageID":  "102261",
-        "FileName":  "SurfaceLaptopGo_Win10_19044_23.103.36359.0.msi",
-        "Url":  "https://download.microsoft.com/download/5/9/4/594604a4-26c0-405c-ac04-b385d824c30c/SurfaceLaptopGo_Win10_19044_23.103.36359.0.msi",
+        "FileName":  "SurfaceLaptopGo_Win10_19044_24.011.14291.0.msi",
+        "Url":  "https://download.microsoft.com/download/5/9/4/594604a4-26c0-405c-ac04-b385d824c30c/SurfaceLaptopGo_Win10_19044_24.011.14291.0.msi",
         "DownloadCenter":  "https://www.microsoft.com/en-us/download/details.aspx?id=102261",
         "OSVersion":  "Windows 10 x64",
         "OSReleaseId":  "21H2",
         "OSBuild":  "19044",
-        "HashMD5":  "2D914DD86DEBCFF846D3F8620EA91C0"
+        "HashMD5":  ""
     },
     {
-        "CatalogVersion":  "24.01.03",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  "23.11.02",
+        "ReleaseDate":  "24.01.25",
         "Manufacturer":  "Microsoft",
         "Model":  "Surface Laptop Go",
         "Product":  "Surface_Laptop_Go_1943",
         "Name":  "Microsoft Surface Laptop Go Win11 21H2",
         "PackageID":  "102261",
-        "FileName":  "SurfaceLaptopGo_Win11_22000_23.103.36360.0.msi",
-        "Url":  "https://download.microsoft.com/download/5/9/4/594604a4-26c0-405c-ac04-b385d824c30c/SurfaceLaptopGo_Win11_22000_23.103.36360.0.msi",
+        "FileName":  "SurfaceLaptopGo_Win11_22000_24.012.15907.0.msi",
+        "Url":  "https://download.microsoft.com/download/5/9/4/594604a4-26c0-405c-ac04-b385d824c30c/SurfaceLaptopGo_Win11_22000_24.012.15907.0.msi",
         "DownloadCenter":  "https://www.microsoft.com/en-us/download/details.aspx?id=102261",
         "OSVersion":  "Windows 11 x64",
         "OSReleaseId":  "21H2",
         "OSBuild":  "22000",
-        "HashMD5":  "664EF4BC8412C9C8D8FE96E77317370"
+        "HashMD5":  ""
     },
     {
-        "CatalogVersion":  "24.01.03",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "23.12.13",
@@ -1077,46 +1077,46 @@
         "OSVersion":  "Windows 10 x64",
         "OSReleaseId":  "21H2",
         "OSBuild":  "19044",
-        "HashMD5":  "26DCD8937788796116C56614DCE2E72B"
+        "HashMD5":  ""
     },
     {
-        "CatalogVersion":  "24.01.03",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  "23.12.14",
+        "ReleaseDate":  "24.01.26",
         "Manufacturer":  "Microsoft",
         "Model":  "Surface Laptop Studio",
         "Product":  "Surface_Laptop_Studio_1964",
         "Name":  "Microsoft Surface Laptop Studio Win10 21H2",
         "PackageID":  "103505",
-        "FileName":  "SurfaceLaptopStudio_Win10_19044_23.120.39.0.msi",
-        "Url":  "https://download.microsoft.com/download/b/3/0/b30ecc34-3bab-4c68-a5b3-0d258d73e747/SurfaceLaptopStudio_Win10_19044_23.120.39.0.msi",
+        "FileName":  "SurfaceLaptopStudio_Win10_19044_23.122.28317.0.msi",
+        "Url":  "https://download.microsoft.com/download/b/3/0/b30ecc34-3bab-4c68-a5b3-0d258d73e747/SurfaceLaptopStudio_Win10_19044_23.122.28317.0.msi",
         "DownloadCenter":  "https://www.microsoft.com/en-us/download/details.aspx?id=103505",
         "OSVersion":  "Windows 10 x64",
         "OSReleaseId":  "21H2",
         "OSBuild":  "19044",
-        "HashMD5":  "D2F022A61267E0C768FB3B0EE832B93"
+        "HashMD5":  ""
     },
     {
-        "CatalogVersion":  "24.01.03",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  "23.12.14",
+        "ReleaseDate":  "24.01.26",
         "Manufacturer":  "Microsoft",
         "Model":  "Surface Laptop Studio",
         "Product":  "Surface_Laptop_Studio_1964",
         "Name":  "Microsoft Surface Laptop Studio Win11 21H2",
         "PackageID":  "103505",
-        "FileName":  "SurfaceLaptopStudio_Win11_22000_23.120.41.0.msi",
-        "Url":  "https://download.microsoft.com/download/b/3/0/b30ecc34-3bab-4c68-a5b3-0d258d73e747/SurfaceLaptopStudio_Win11_22000_23.120.41.0.msi",
+        "FileName":  "SurfaceLaptopStudio_Win11_22000_23.122.28323.0.msi",
+        "Url":  "https://download.microsoft.com/download/b/3/0/b30ecc34-3bab-4c68-a5b3-0d258d73e747/SurfaceLaptopStudio_Win11_22000_23.122.28323.0.msi",
         "DownloadCenter":  "https://www.microsoft.com/en-us/download/details.aspx?id=103505",
         "OSVersion":  "Windows 11 x64",
         "OSReleaseId":  "21H2",
         "OSBuild":  "22000",
-        "HashMD5":  "47AA234E4E4C666D32546B077F64C92"
+        "HashMD5":  ""
     },
     {
-        "CatalogVersion":  "24.01.03",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "21.04.23",
@@ -1131,10 +1131,10 @@
         "OSVersion":  "Windows 10 x64",
         "OSReleaseId":  "",
         "OSBuild":  "150723",
-        "HashMD5":  "CE8A3CBD0D3B535DCAF789C6B1DBA4"
+        "HashMD5":  ""
     },
     {
-        "CatalogVersion":  "24.01.03",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "21.04.23",
@@ -1149,10 +1149,10 @@
         "OSVersion":  "Windows 10 x64",
         "OSReleaseId":  "",
         "OSBuild":  "160501",
-        "HashMD5":  "30C2CF9A92E4709FB9D122AC375396D"
+        "HashMD5":  ""
     },
     {
-        "CatalogVersion":  "24.01.03",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "21.05.06",
@@ -1167,10 +1167,10 @@
         "OSVersion":  "Windows 10 x64",
         "OSReleaseId":  "1903",
         "OSBuild":  "18362",
-        "HashMD5":  "CAD26E5A2ACB6590D0878DAD6E09F23"
+        "HashMD5":  ""
     },
     {
-        "CatalogVersion":  "24.01.03",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "21.07.29",
@@ -1185,82 +1185,82 @@
         "OSVersion":  "Windows 10 x64",
         "OSReleaseId":  "1903",
         "OSBuild":  "18362",
-        "HashMD5":  "E75291B1582DBF487C3BAC4EC968865"
+        "HashMD5":  ""
     },
     {
-        "CatalogVersion":  "24.01.03",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  "23.12.15",
+        "ReleaseDate":  "24.01.12",
         "Manufacturer":  "Microsoft",
         "Model":  "Surface Pro",
         "Product":  "Surface_Pro_1796",
         "Name":  "Microsoft Surface Pro (5th Gen) Win10 21H2",
         "PackageID":  "55484",
-        "FileName":  "SurfacePro_Win10_19044_23.102.15869.0.msi",
-        "Url":  "https://download.microsoft.com/download/4/C/7/4C7DA85D-03DE-4B89-B8E0-386437331C46/SurfacePro_Win10_19044_23.102.15869.0.msi",
+        "FileName":  "SurfacePro_Win10_19044_24.010.4410.0.msi",
+        "Url":  "https://download.microsoft.com/download/4/C/7/4C7DA85D-03DE-4B89-B8E0-386437331C46/SurfacePro_Win10_19044_24.010.4410.0.msi",
         "DownloadCenter":  "https://www.microsoft.com/en-us/download/details.aspx?id=55484",
         "OSVersion":  "Windows 10 x64",
         "OSReleaseId":  "21H2",
         "OSBuild":  "19044",
-        "HashMD5":  "76F5283DEFC0ED161772637611A7D498"
+        "HashMD5":  ""
     },
     {
-        "CatalogVersion":  "24.01.03",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  "23.12.15",
+        "ReleaseDate":  "24.01.12",
         "Manufacturer":  "Microsoft",
         "Model":  "Surface Pro",
         "Product":  "Surface_Pro_1796",
         "Name":  "Microsoft Surface Pro (5th Gen) Win11 21H2",
         "PackageID":  "55484",
-        "FileName":  "SurfacePro_Win11_22000_23.102.15867.0.msi",
-        "Url":  "https://download.microsoft.com/download/4/C/7/4C7DA85D-03DE-4B89-B8E0-386437331C46/SurfacePro_Win11_22000_23.102.15867.0.msi",
+        "FileName":  "SurfacePro_Win11_22000_24.010.4410.0.msi",
+        "Url":  "https://download.microsoft.com/download/4/C/7/4C7DA85D-03DE-4B89-B8E0-386437331C46/SurfacePro_Win11_22000_24.010.4410.0.msi",
         "DownloadCenter":  "https://www.microsoft.com/en-us/download/details.aspx?id=55484",
         "OSVersion":  "Windows 11 x64",
         "OSReleaseId":  "21H2",
         "OSBuild":  "22000",
-        "HashMD5":  "C3CCB0A9973362F35DC98B176B638DDA"
+        "HashMD5":  ""
     },
     {
-        "CatalogVersion":  "24.01.03",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  "23.12.15",
+        "ReleaseDate":  "24.01.12",
         "Manufacturer":  "Microsoft",
         "Model":  "Surface Pro",
         "Product":  "Surface_Pro_1807",
         "Name":  "Microsoft Surface Pro with LTE Advanced Win10 21H2",
         "PackageID":  "56278",
-        "FileName":  "SurfacePro_Win10_19044_23.102.15869.0.msi",
-        "Url":  "https://download.microsoft.com/download/4/1/6/416D7D4F-64D9-4633-A5CC-922A941854FD/SurfacePro_Win10_19044_23.102.15869.0.msi",
+        "FileName":  "SurfacePro_Win10_19044_24.010.4410.0.msi",
+        "Url":  "https://download.microsoft.com/download/4/1/6/416D7D4F-64D9-4633-A5CC-922A941854FD/SurfacePro_Win10_19044_24.010.4410.0.msi",
         "DownloadCenter":  "https://www.microsoft.com/en-us/download/details.aspx?id=56278",
         "OSVersion":  "Windows 10 x64",
         "OSReleaseId":  "21H2",
         "OSBuild":  "19044",
-        "HashMD5":  "76F5283DEFC0ED161772637611A7D498"
+        "HashMD5":  ""
     },
     {
-        "CatalogVersion":  "24.01.03",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  "23.12.15",
+        "ReleaseDate":  "24.01.12",
         "Manufacturer":  "Microsoft",
         "Model":  "Surface Pro",
         "Product":  "Surface_Pro_1807",
         "Name":  "Microsoft Surface Pro with LTE Advanced Win11 21H2",
         "PackageID":  "56278",
-        "FileName":  "SurfacePro_Win11_22000_23.102.15867.0.msi",
-        "Url":  "https://download.microsoft.com/download/4/1/6/416D7D4F-64D9-4633-A5CC-922A941854FD/SurfacePro_Win11_22000_23.102.15867.0.msi",
+        "FileName":  "SurfacePro_Win11_22000_24.010.4410.0.msi",
+        "Url":  "https://download.microsoft.com/download/4/1/6/416D7D4F-64D9-4633-A5CC-922A941854FD/SurfacePro_Win11_22000_24.010.4410.0.msi",
         "DownloadCenter":  "https://www.microsoft.com/en-us/download/details.aspx?id=56278",
         "OSVersion":  "Windows 11 x64",
         "OSReleaseId":  "21H2",
         "OSBuild":  "22000",
-        "HashMD5":  "C3CCB0A9973362F35DC98B176B638DDA"
+        "HashMD5":  ""
     },
     {
-        "CatalogVersion":  "24.01.03",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "23.09.28",
@@ -1275,10 +1275,10 @@
         "OSVersion":  "Windows 10 x64",
         "OSReleaseId":  "21H2",
         "OSBuild":  "19044",
-        "HashMD5":  "B331596D6815FEBA63777DBBF398D1BF"
+        "HashMD5":  ""
     },
     {
-        "CatalogVersion":  "24.01.03",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "23.09.28",
@@ -1293,10 +1293,10 @@
         "OSVersion":  "Windows 11 x64",
         "OSReleaseId":  "21H2",
         "OSBuild":  "22000",
-        "HashMD5":  "B2D03FD42038DBBEE6D4EC4D12E49C74"
+        "HashMD5":  ""
     },
     {
-        "CatalogVersion":  "24.01.03",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "23.09.28",
@@ -1311,10 +1311,10 @@
         "OSVersion":  "Windows 10 x64",
         "OSReleaseId":  "21H2",
         "OSBuild":  "19044",
-        "HashMD5":  "B331596D6815FEBA63777DBBF398D1BF"
+        "HashMD5":  ""
     },
     {
-        "CatalogVersion":  "24.01.03",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "23.09.28",
@@ -1329,370 +1329,370 @@
         "OSVersion":  "Windows 11 x64",
         "OSReleaseId":  "21H2",
         "OSBuild":  "22000",
-        "HashMD5":  "B2D03FD42038DBBEE6D4EC4D12E49C74"
+        "HashMD5":  ""
     },
     {
-        "CatalogVersion":  "24.01.03",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  "23.12.14",
+        "ReleaseDate":  "24.01.25",
         "Manufacturer":  "Microsoft",
         "Model":  "Surface Pro 7",
         "Product":  "Surface_Pro_7_1866",
         "Name":  "Microsoft Surface Pro 7 Win10 21H2",
         "PackageID":  "100419",
-        "FileName":  "SurfacePro7_Win10_19044_23.114.41696.0.msi",
-        "Url":  "https://download.microsoft.com/download/0/8/b/08b0f0ba-1571-41c0-9b8a-9af8a43681ae/SurfacePro7_Win10_19044_23.114.41696.0.msi",
+        "FileName":  "SurfacePro7_Win10_19044_24.011.11304.0.msi",
+        "Url":  "https://download.microsoft.com/download/0/8/b/08b0f0ba-1571-41c0-9b8a-9af8a43681ae/SurfacePro7_Win10_19044_24.011.11304.0.msi",
         "DownloadCenter":  "https://www.microsoft.com/en-us/download/details.aspx?id=100419",
         "OSVersion":  "Windows 10 x64",
         "OSReleaseId":  "21H2",
         "OSBuild":  "19044",
-        "HashMD5":  "F5FCD931BAB42AFCF2CA6CDAB53921C2"
+        "HashMD5":  ""
     },
     {
-        "CatalogVersion":  "24.01.03",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  "23.12.14",
+        "ReleaseDate":  "24.01.25",
         "Manufacturer":  "Microsoft",
         "Model":  "Surface Pro 7",
         "Product":  "Surface_Pro_7_1866",
         "Name":  "Microsoft Surface Pro 7 Win11 21H2",
         "PackageID":  "100419",
-        "FileName":  "SurfacePro7_Win11_22000_23.120.32.0.msi",
-        "Url":  "https://download.microsoft.com/download/0/8/b/08b0f0ba-1571-41c0-9b8a-9af8a43681ae/SurfacePro7_Win11_22000_23.120.32.0.msi",
+        "FileName":  "SurfacePro7_Win11_22000_24.011.11304.0.msi",
+        "Url":  "https://download.microsoft.com/download/0/8/b/08b0f0ba-1571-41c0-9b8a-9af8a43681ae/SurfacePro7_Win11_22000_24.011.11304.0.msi",
         "DownloadCenter":  "https://www.microsoft.com/en-us/download/details.aspx?id=100419",
         "OSVersion":  "Windows 11 x64",
         "OSReleaseId":  "21H2",
         "OSBuild":  "22000",
-        "HashMD5":  "B1841441C8F11B886BFE53124294C4A"
+        "HashMD5":  ""
     },
     {
-        "CatalogVersion":  "24.01.03",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  "23.12.14",
+        "ReleaseDate":  "24.01.30",
         "Manufacturer":  "Microsoft",
         "Model":  "Surface Pro 7+",
         "Product":  "Surface_Pro_7+_1960",
         "Name":  "Microsoft Surface Pro 7+ Win10 21H2",
         "PackageID":  "102633",
-        "FileName":  "SurfacePro7+_Win10_19044_23.114.41652.0.msi",
-        "Url":  "https://download.microsoft.com/download/1/b/4/1b4bdd09-a704-4bf5-bed6-6693a0ac848a/SurfacePro7+_Win10_19044_23.114.41652.0.msi",
+        "FileName":  "SurfacePro7+_Win10_19044_24.011.15758.0.msi",
+        "Url":  "https://download.microsoft.com/download/1/b/4/1b4bdd09-a704-4bf5-bed6-6693a0ac848a/SurfacePro7+_Win10_19044_24.011.15758.0.msi",
         "DownloadCenter":  "https://www.microsoft.com/en-us/download/details.aspx?id=102633",
         "OSVersion":  "Windows 10 x64",
         "OSReleaseId":  "21H2",
         "OSBuild":  "19044",
-        "HashMD5":  "A86AE42A5A38DBDF3634991BCAF7FE1"
+        "HashMD5":  ""
     },
     {
-        "CatalogVersion":  "24.01.03",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  "23.12.14",
+        "ReleaseDate":  "24.01.30",
         "Manufacturer":  "Microsoft",
         "Model":  "Surface Pro 7+",
         "Product":  "Surface_Pro_7+_1960",
         "Name":  "Microsoft Surface Pro 7+ Win11 21H2",
         "PackageID":  "102633",
-        "FileName":  "SurfacePro7+_Win11_22000_23.114.41652.0.msi",
-        "Url":  "https://download.microsoft.com/download/1/b/4/1b4bdd09-a704-4bf5-bed6-6693a0ac848a/SurfacePro7+_Win11_22000_23.114.41652.0.msi",
+        "FileName":  "SurfacePro7+_Win11_22000_24.011.15758.0.msi",
+        "Url":  "https://download.microsoft.com/download/1/b/4/1b4bdd09-a704-4bf5-bed6-6693a0ac848a/SurfacePro7+_Win11_22000_24.011.15758.0.msi",
         "DownloadCenter":  "https://www.microsoft.com/en-us/download/details.aspx?id=102633",
         "OSVersion":  "Windows 11 x64",
         "OSReleaseId":  "21H2",
         "OSBuild":  "22000",
-        "HashMD5":  "F831833AA85DA74CC9FBC95AC7F7E9"
+        "HashMD5":  ""
     },
     {
-        "CatalogVersion":  "24.01.03",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  "23.12.14",
+        "ReleaseDate":  "24.01.30",
         "Manufacturer":  "Microsoft",
         "Model":  "Surface Pro 7+",
         "Product":  "Surface_Pro_7+_with_LTE_Advanced_1961",
         "Name":  "Microsoft Surface Pro 7+ LTE Win10 21H2",
         "PackageID":  "102633",
-        "FileName":  "SurfacePro7+_Win10_19044_23.114.41652.0.msi",
-        "Url":  "https://download.microsoft.com/download/1/b/4/1b4bdd09-a704-4bf5-bed6-6693a0ac848a/SurfacePro7+_Win10_19044_23.114.41652.0.msi",
+        "FileName":  "SurfacePro7+_Win10_19044_24.011.15758.0.msi",
+        "Url":  "https://download.microsoft.com/download/1/b/4/1b4bdd09-a704-4bf5-bed6-6693a0ac848a/SurfacePro7+_Win10_19044_24.011.15758.0.msi",
         "DownloadCenter":  "https://www.microsoft.com/en-us/download/details.aspx?id=102633",
         "OSVersion":  "Windows 10 x64",
         "OSReleaseId":  "21H2",
         "OSBuild":  "19044",
-        "HashMD5":  "A86AE42A5A38DBDF3634991BCAF7FE1"
+        "HashMD5":  ""
     },
     {
-        "CatalogVersion":  "24.01.03",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  "23.12.14",
+        "ReleaseDate":  "24.01.30",
         "Manufacturer":  "Microsoft",
         "Model":  "Surface Pro 7+",
         "Product":  "Surface_Pro_7+_with_LTE_Advanced_1961",
         "Name":  "Microsoft Surface Pro 7+ LTE Win11 21H2",
         "PackageID":  "102633",
-        "FileName":  "SurfacePro7+_Win11_22000_23.114.41652.0.msi",
-        "Url":  "https://download.microsoft.com/download/1/b/4/1b4bdd09-a704-4bf5-bed6-6693a0ac848a/SurfacePro7+_Win11_22000_23.114.41652.0.msi",
+        "FileName":  "SurfacePro7+_Win11_22000_24.011.15758.0.msi",
+        "Url":  "https://download.microsoft.com/download/1/b/4/1b4bdd09-a704-4bf5-bed6-6693a0ac848a/SurfacePro7+_Win11_22000_24.011.15758.0.msi",
         "DownloadCenter":  "https://www.microsoft.com/en-us/download/details.aspx?id=102633",
         "OSVersion":  "Windows 11 x64",
         "OSReleaseId":  "21H2",
         "OSBuild":  "22000",
-        "HashMD5":  "F831833AA85DA74CC9FBC95AC7F7E9"
+        "HashMD5":  ""
     },
     {
-        "CatalogVersion":  "24.01.03",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  "23.12.14",
+        "ReleaseDate":  "24.01.26",
         "Manufacturer":  "Microsoft",
         "Model":  "Surface Pro 8",
         "Product":  "Surface_Pro_8_for_Business_1983",
         "Name":  "Microsoft Surface Pro 8 Win10 21H2",
         "PackageID":  "103503",
-        "FileName":  "SurfacePro8_Win10_19044_23.120.2664.0.msi",
-        "Url":  "https://download.microsoft.com/download/9/1/3/9133dbd3-799a-4766-bb9e-f67697159c02/SurfacePro8_Win10_19044_23.120.2664.0.msi",
+        "FileName":  "SurfacePro8_Win10_19044_24.012.22802.0.msi",
+        "Url":  "https://download.microsoft.com/download/9/1/3/9133dbd3-799a-4766-bb9e-f67697159c02/SurfacePro8_Win10_19044_24.012.22802.0.msi",
         "DownloadCenter":  "https://www.microsoft.com/en-us/download/details.aspx?id=103503",
         "OSVersion":  "Windows 10 x64",
         "OSReleaseId":  "21H2",
         "OSBuild":  "19044",
-        "HashMD5":  "B6FF53B73B1DB6519D32E7914C8BB4"
+        "HashMD5":  ""
     },
     {
-        "CatalogVersion":  "24.01.03",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  "23.12.14",
+        "ReleaseDate":  "24.01.26",
         "Manufacturer":  "Microsoft",
         "Model":  "Surface Pro 8",
         "Product":  "Surface_Pro_8_for_Business_1983",
         "Name":  "Microsoft Surface Pro 8 Win11 21H2",
         "PackageID":  "103503",
-        "FileName":  "SurfacePro8_Win11_22000_23.120.2664.0.msi",
-        "Url":  "https://download.microsoft.com/download/9/1/3/9133dbd3-799a-4766-bb9e-f67697159c02/SurfacePro8_Win11_22000_23.120.2664.0.msi",
+        "FileName":  "SurfacePro8_Win11_22000_24.012.22802.0.msi",
+        "Url":  "https://download.microsoft.com/download/9/1/3/9133dbd3-799a-4766-bb9e-f67697159c02/SurfacePro8_Win11_22000_24.012.22802.0.msi",
         "DownloadCenter":  "https://www.microsoft.com/en-us/download/details.aspx?id=103503",
         "OSVersion":  "Windows 11 x64",
         "OSReleaseId":  "21H2",
         "OSBuild":  "22000",
-        "HashMD5":  "10EDCA76ECE9BEC25045FF682C5875B"
+        "HashMD5":  ""
     },
     {
-        "CatalogVersion":  "24.01.03",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  "23.12.14",
+        "ReleaseDate":  "24.01.26",
         "Manufacturer":  "Microsoft",
         "Model":  "Surface Pro 8",
         "Product":  "Surface_Pro_8_1983",
         "Name":  "Microsoft Surface Pro 8 Consumer Win10 21H2",
         "PackageID":  "103503",
-        "FileName":  "SurfacePro8_Win10_19044_23.120.2664.0.msi",
-        "Url":  "https://download.microsoft.com/download/9/1/3/9133dbd3-799a-4766-bb9e-f67697159c02/SurfacePro8_Win10_19044_23.120.2664.0.msi",
+        "FileName":  "SurfacePro8_Win10_19044_24.012.22802.0.msi",
+        "Url":  "https://download.microsoft.com/download/9/1/3/9133dbd3-799a-4766-bb9e-f67697159c02/SurfacePro8_Win10_19044_24.012.22802.0.msi",
         "DownloadCenter":  "https://www.microsoft.com/en-us/download/details.aspx?id=103503",
         "OSVersion":  "Windows 10 x64",
         "OSReleaseId":  "21H2",
         "OSBuild":  "19044",
-        "HashMD5":  "B6FF53B73B1DB6519D32E7914C8BB4"
+        "HashMD5":  ""
     },
     {
-        "CatalogVersion":  "24.01.03",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  "23.12.14",
+        "ReleaseDate":  "24.01.26",
         "Manufacturer":  "Microsoft",
         "Model":  "Surface Pro 8",
         "Product":  "Surface_Pro_8_1983",
         "Name":  "Microsoft Surface Pro 8 Consumer Win11 21H2",
         "PackageID":  "103503",
-        "FileName":  "SurfacePro8_Win11_22000_23.120.2664.0.msi",
-        "Url":  "https://download.microsoft.com/download/9/1/3/9133dbd3-799a-4766-bb9e-f67697159c02/SurfacePro8_Win11_22000_23.120.2664.0.msi",
+        "FileName":  "SurfacePro8_Win11_22000_24.012.22802.0.msi",
+        "Url":  "https://download.microsoft.com/download/9/1/3/9133dbd3-799a-4766-bb9e-f67697159c02/SurfacePro8_Win11_22000_24.012.22802.0.msi",
         "DownloadCenter":  "https://www.microsoft.com/en-us/download/details.aspx?id=103503",
         "OSVersion":  "Windows 11 x64",
         "OSReleaseId":  "21H2",
         "OSBuild":  "22000",
-        "HashMD5":  "10EDCA76ECE9BEC25045FF682C5875B"
+        "HashMD5":  ""
     },
     {
-        "CatalogVersion":  "24.01.03",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  "23.12.14",
+        "ReleaseDate":  "24.01.26",
         "Manufacturer":  "Microsoft",
         "Model":  "Surface Pro 8",
         "Product":  "Surface_Pro_8_for_Business_with_LTE_Advanced_1982",
         "Name":  "Microsoft Surface Pro 8 LTE Win10 21H2",
         "PackageID":  "103503",
-        "FileName":  "SurfacePro8_Win10_19044_23.120.2664.0.msi",
-        "Url":  "https://download.microsoft.com/download/9/1/3/9133dbd3-799a-4766-bb9e-f67697159c02/SurfacePro8_Win10_19044_23.120.2664.0.msi",
+        "FileName":  "SurfacePro8_Win10_19044_24.012.22802.0.msi",
+        "Url":  "https://download.microsoft.com/download/9/1/3/9133dbd3-799a-4766-bb9e-f67697159c02/SurfacePro8_Win10_19044_24.012.22802.0.msi",
         "DownloadCenter":  "https://www.microsoft.com/en-us/download/details.aspx?id=103503",
         "OSVersion":  "Windows 10 x64",
         "OSReleaseId":  "21H2",
         "OSBuild":  "19044",
-        "HashMD5":  "B6FF53B73B1DB6519D32E7914C8BB4"
+        "HashMD5":  ""
     },
     {
-        "CatalogVersion":  "24.01.03",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  "23.12.14",
+        "ReleaseDate":  "24.01.26",
         "Manufacturer":  "Microsoft",
         "Model":  "Surface Pro 8",
         "Product":  "Surface_Pro_8_for_Business_with_LTE_Advanced_1982",
         "Name":  "Microsoft Surface Pro 8 LTE Win11 21H2",
         "PackageID":  "103503",
-        "FileName":  "SurfacePro8_Win11_22000_23.120.2664.0.msi",
-        "Url":  "https://download.microsoft.com/download/9/1/3/9133dbd3-799a-4766-bb9e-f67697159c02/SurfacePro8_Win11_22000_23.120.2664.0.msi",
+        "FileName":  "SurfacePro8_Win11_22000_24.012.22802.0.msi",
+        "Url":  "https://download.microsoft.com/download/9/1/3/9133dbd3-799a-4766-bb9e-f67697159c02/SurfacePro8_Win11_22000_24.012.22802.0.msi",
         "DownloadCenter":  "https://www.microsoft.com/en-us/download/details.aspx?id=103503",
         "OSVersion":  "Windows 11 x64",
         "OSReleaseId":  "21H2",
         "OSBuild":  "22000",
-        "HashMD5":  "10EDCA76ECE9BEC25045FF682C5875B"
+        "HashMD5":  ""
     },
     {
-        "CatalogVersion":  "24.01.03",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  "23.12.01",
+        "ReleaseDate":  "24.02.02",
         "Manufacturer":  "Microsoft",
         "Model":  "Surface Pro 9",
         "Product":  "Surface_Pro_9_2038",
         "Name":  "Microsoft Surface Pro 9 Consumer Win10 21H2",
         "PackageID":  "104680",
-        "FileName":  "SurfacePro9_Win10_19044_23.111.10327.0.msi",
-        "Url":  "https://download.microsoft.com/download/e/9/a/e9a35d1b-7b4c-48d4-8619-5301d4c09f65/SurfacePro9_Win10_19044_23.111.10327.0.msi",
+        "FileName":  "SurfacePro9_Win10_19044_24.012.27594.0.msi",
+        "Url":  "https://download.microsoft.com/download/e/9/a/e9a35d1b-7b4c-48d4-8619-5301d4c09f65/SurfacePro9_Win10_19044_24.012.27594.0.msi",
         "DownloadCenter":  "https://www.microsoft.com/en-us/download/details.aspx?id=104680",
         "OSVersion":  "Windows 10 x64",
         "OSReleaseId":  "21H2",
         "OSBuild":  "19044",
-        "HashMD5":  "33CCB8E5298353CE31F09C2A12221DA9"
+        "HashMD5":  ""
     },
     {
-        "CatalogVersion":  "24.01.03",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  "23.12.01",
+        "ReleaseDate":  "24.02.02",
         "Manufacturer":  "Microsoft",
         "Model":  "Surface Pro 9",
         "Product":  "Surface_Pro_9_2038",
         "Name":  "Microsoft Surface Pro 9 Consumer Win11 22H2",
         "PackageID":  "104680",
-        "FileName":  "SurfacePro9_Win11_22621_23.111.10469.0.msi",
-        "Url":  "https://download.microsoft.com/download/e/9/a/e9a35d1b-7b4c-48d4-8619-5301d4c09f65/SurfacePro9_Win11_22621_23.111.10469.0.msi",
+        "FileName":  "SurfacePro9_Win11_22621_24.012.27601.0.msi",
+        "Url":  "https://download.microsoft.com/download/e/9/a/e9a35d1b-7b4c-48d4-8619-5301d4c09f65/SurfacePro9_Win11_22621_24.012.27601.0.msi",
         "DownloadCenter":  "https://www.microsoft.com/en-us/download/details.aspx?id=104680",
         "OSVersion":  "Windows 11 x64",
         "OSReleaseId":  "22H2",
         "OSBuild":  "22621",
-        "HashMD5":  "55475D8C338BF08695A0174CA20E265"
+        "HashMD5":  ""
     },
     {
-        "CatalogVersion":  "24.01.03",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  "23.12.01",
+        "ReleaseDate":  "24.02.02",
         "Manufacturer":  "Microsoft",
         "Model":  "Surface Pro 9",
         "Product":  "Surface_Pro_9_for_Business_2038",
         "Name":  "Microsoft Surface Pro 9 Commercial Win10 21H2",
         "PackageID":  "104680",
-        "FileName":  "SurfacePro9_Win10_19044_23.111.10327.0.msi",
-        "Url":  "https://download.microsoft.com/download/e/9/a/e9a35d1b-7b4c-48d4-8619-5301d4c09f65/SurfacePro9_Win10_19044_23.111.10327.0.msi",
+        "FileName":  "SurfacePro9_Win10_19044_24.012.27594.0.msi",
+        "Url":  "https://download.microsoft.com/download/e/9/a/e9a35d1b-7b4c-48d4-8619-5301d4c09f65/SurfacePro9_Win10_19044_24.012.27594.0.msi",
         "DownloadCenter":  "https://www.microsoft.com/en-us/download/details.aspx?id=104680",
         "OSVersion":  "Windows 10 x64",
         "OSReleaseId":  "21H2",
         "OSBuild":  "19044",
-        "HashMD5":  "33CCB8E5298353CE31F09C2A12221DA9"
+        "HashMD5":  ""
     },
     {
-        "CatalogVersion":  "24.01.03",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  "23.12.01",
+        "ReleaseDate":  "24.02.02",
         "Manufacturer":  "Microsoft",
         "Model":  "Surface Pro 9",
         "Product":  "Surface_Pro_9_for_Business_2038",
         "Name":  "Microsoft Surface Pro 9 Commercial Win11 22H2",
         "PackageID":  "104680",
-        "FileName":  "SurfacePro9_Win11_22621_23.111.10469.0.msi",
-        "Url":  "https://download.microsoft.com/download/e/9/a/e9a35d1b-7b4c-48d4-8619-5301d4c09f65/SurfacePro9_Win11_22621_23.111.10469.0.msi",
+        "FileName":  "SurfacePro9_Win11_22621_24.012.27601.0.msi",
+        "Url":  "https://download.microsoft.com/download/e/9/a/e9a35d1b-7b4c-48d4-8619-5301d4c09f65/SurfacePro9_Win11_22621_24.012.27601.0.msi",
         "DownloadCenter":  "https://www.microsoft.com/en-us/download/details.aspx?id=104680",
         "OSVersion":  "Windows 11 x64",
         "OSReleaseId":  "22H2",
         "OSBuild":  "22621",
-        "HashMD5":  "55475D8C338BF08695A0174CA20E265"
+        "HashMD5":  ""
     },
     {
-        "CatalogVersion":  "24.01.03",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  "23.12.01",
+        "ReleaseDate":  "24.02.02",
         "Manufacturer":  "Microsoft",
         "Model":  "Surface Pro 9",
         "Product":  "Surface_Pro_9_With_5G_1997",
         "Name":  "Microsoft Surface Pro 9 5G US Win10 21H2",
         "PackageID":  "104680",
-        "FileName":  "SurfacePro9_Win10_19044_23.111.10327.0.msi",
-        "Url":  "https://download.microsoft.com/download/e/9/a/e9a35d1b-7b4c-48d4-8619-5301d4c09f65/SurfacePro9_Win10_19044_23.111.10327.0.msi",
+        "FileName":  "SurfacePro9_Win10_19044_24.012.27594.0.msi",
+        "Url":  "https://download.microsoft.com/download/e/9/a/e9a35d1b-7b4c-48d4-8619-5301d4c09f65/SurfacePro9_Win10_19044_24.012.27594.0.msi",
         "DownloadCenter":  "https://www.microsoft.com/en-us/download/details.aspx?id=104680",
         "OSVersion":  "Windows 10 x64",
         "OSReleaseId":  "21H2",
         "OSBuild":  "19044",
-        "HashMD5":  "33CCB8E5298353CE31F09C2A12221DA9"
+        "HashMD5":  ""
     },
     {
-        "CatalogVersion":  "24.01.03",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  "23.12.01",
+        "ReleaseDate":  "24.02.02",
         "Manufacturer":  "Microsoft",
         "Model":  "Surface Pro 9",
         "Product":  "Surface_Pro_9_With_5G_1997",
         "Name":  "Microsoft Surface Pro 9 5G US Win11 22H2",
         "PackageID":  "104680",
-        "FileName":  "SurfacePro9_Win11_22621_23.111.10469.0.msi",
-        "Url":  "https://download.microsoft.com/download/e/9/a/e9a35d1b-7b4c-48d4-8619-5301d4c09f65/SurfacePro9_Win11_22621_23.111.10469.0.msi",
+        "FileName":  "SurfacePro9_Win11_22621_24.012.27601.0.msi",
+        "Url":  "https://download.microsoft.com/download/e/9/a/e9a35d1b-7b4c-48d4-8619-5301d4c09f65/SurfacePro9_Win11_22621_24.012.27601.0.msi",
         "DownloadCenter":  "https://www.microsoft.com/en-us/download/details.aspx?id=104680",
         "OSVersion":  "Windows 11 x64",
         "OSReleaseId":  "22H2",
         "OSBuild":  "22621",
-        "HashMD5":  "55475D8C338BF08695A0174CA20E265"
+        "HashMD5":  ""
     },
     {
-        "CatalogVersion":  "24.01.03",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  "23.12.01",
+        "ReleaseDate":  "24.02.02",
         "Manufacturer":  "Microsoft",
         "Model":  "Surface Pro 9",
         "Product":  "Surface_Pro_9_With_5G_1996",
         "Name":  "Microsoft Surface Pro 9 5G ROW Win10 21H2",
         "PackageID":  "104680",
-        "FileName":  "SurfacePro9_Win10_19044_23.111.10327.0.msi",
-        "Url":  "https://download.microsoft.com/download/e/9/a/e9a35d1b-7b4c-48d4-8619-5301d4c09f65/SurfacePro9_Win10_19044_23.111.10327.0.msi",
+        "FileName":  "SurfacePro9_Win10_19044_24.012.27594.0.msi",
+        "Url":  "https://download.microsoft.com/download/e/9/a/e9a35d1b-7b4c-48d4-8619-5301d4c09f65/SurfacePro9_Win10_19044_24.012.27594.0.msi",
         "DownloadCenter":  "https://www.microsoft.com/en-us/download/details.aspx?id=104680",
         "OSVersion":  "Windows 10 x64",
         "OSReleaseId":  "21H2",
         "OSBuild":  "19044",
-        "HashMD5":  "33CCB8E5298353CE31F09C2A12221DA9"
+        "HashMD5":  ""
     },
     {
-        "CatalogVersion":  "24.01.03",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  "23.12.01",
+        "ReleaseDate":  "24.02.02",
         "Manufacturer":  "Microsoft",
         "Model":  "Surface Pro 9",
         "Product":  "Surface_Pro_9_With_5G_1996",
         "Name":  "Microsoft Surface Pro 9 5G ROW Win11 22H2",
         "PackageID":  "104680",
-        "FileName":  "SurfacePro9_Win11_22621_23.111.10469.0.msi",
-        "Url":  "https://download.microsoft.com/download/e/9/a/e9a35d1b-7b4c-48d4-8619-5301d4c09f65/SurfacePro9_Win11_22621_23.111.10469.0.msi",
+        "FileName":  "SurfacePro9_Win11_22621_24.012.27601.0.msi",
+        "Url":  "https://download.microsoft.com/download/e/9/a/e9a35d1b-7b4c-48d4-8619-5301d4c09f65/SurfacePro9_Win11_22621_24.012.27601.0.msi",
         "DownloadCenter":  "https://www.microsoft.com/en-us/download/details.aspx?id=104680",
         "OSVersion":  "Windows 11 x64",
         "OSReleaseId":  "22H2",
         "OSBuild":  "22621",
-        "HashMD5":  "55475D8C338BF08695A0174CA20E265"
+        "HashMD5":  ""
     },
     {
-        "CatalogVersion":  "24.01.03",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "21.11.02",
@@ -1707,10 +1707,10 @@
         "OSVersion":  "Windows 10 x64",
         "OSReleaseId":  "2004",
         "OSBuild":  "19041",
-        "HashMD5":  "E5B01B9C59A7C66113BF22C1F35EC77"
+        "HashMD5":  ""
     },
     {
-        "CatalogVersion":  "24.01.03",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "23.11.09",
@@ -1725,10 +1725,10 @@
         "OSVersion":  "Windows 10 x64",
         "OSReleaseId":  "21H2",
         "OSBuild":  "19044",
-        "HashMD5":  "7E99CA591C8B6CB57FBEC412A69133"
+        "HashMD5":  ""
     },
     {
-        "CatalogVersion":  "24.01.03",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "23.11.09",
@@ -1743,10 +1743,10 @@
         "OSVersion":  "Windows 11 x64",
         "OSReleaseId":  "21H2",
         "OSBuild":  "22000",
-        "HashMD5":  "2B7A598A22B677A79EC180AB3694AEA9"
+        "HashMD5":  ""
     },
     {
-        "CatalogVersion":  "24.01.03",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "23.12.14",
@@ -1761,6 +1761,6 @@
         "OSVersion":  "Windows 11 x64",
         "OSReleaseId":  "22H2",
         "OSBuild":  "22621",
-        "HashMD5":  "FC02836301B7DA140EFAE217A7AE68B"
+        "HashMD5":  ""
     }
 ]

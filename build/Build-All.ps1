@@ -4,10 +4,10 @@
 Import-Module OSD -Force -ErrorAction Stop
 
 # Cloud Drivers
-Get-IntelEthernetDriverPack -UpdateModuleCatalog
-Get-IntelGraphicsDriverPack -UpdateModuleCatalog
-Get-IntelRadeonDriverPack -UpdateModuleCatalog
-Get-IntelWirelessDriverPack -UpdateModuleCatalog
+#Get-IntelEthernetDriverPack -UpdateModuleCatalog
+#Get-IntelGraphicsDriverPack -UpdateModuleCatalog
+#Get-IntelRadeonDriverPack -UpdateModuleCatalog
+#Get-IntelWirelessDriverPack -UpdateModuleCatalog
 
 # Import OSD Module
 Import-Module OSD -Force -ErrorAction Stop

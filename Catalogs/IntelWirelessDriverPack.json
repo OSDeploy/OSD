@@ -1,23 +1,23 @@
 {
-  "OSDVersion": "24.1.11.1",
-  "LastUpdate": "2024-01-09T00:00:00Z",
-  "OSDStatus": "",
-  "OSDType": "Driver",
-  "OSDGroup": "IntelWireless",
-  "DriverName": "Windows? 10 and Windows 11*  Wi-Fi Drivers for Intel? Wireless Adapters",
-  "DriverVersion": "23.20.0",
-  "OsVersion": [
-    "10.0"
-  ],
-  "OsArch": [
-    "x64"
-  ],
-  "DriverGrouping": "Intel Wireless",
-  "DownloadFile": "WiFi-23.20.0-Driver64-Win10-Win11.zip",
-  "DriverUrl": "https://downloadmirror.intel.com/812775/WiFi-23.20.0-Driver64-Win10-Win11.zip",
-  "DriverInfo": "https://www.intel.com/content/www/us/en/download/18231/intel-proset-wireless-software-and-drivers-for-it-admins.html",
-  "DriverDescription": "This download record installs the Windows? 10 and Windows 11* WiFi package drivers 23.20.0 for the Intel? Wi-Fi 7/Wi-Fi 6E/Wi-Fi 6 and Intel? 9000 series Wireless Adapters.",
-  "OSDGuid": "e060e77d-563b-43af-89f8-16bfb4e799c1",
-  "OSDPnpClass": "Net",
-  "OSDPnpClassGuid": "{4D36E972-E325-11CE-BFC1-08002BE10318}"
+    "OSDVersion":  "24.1.11.1",
+    "LastUpdate":  "\/Date(1704758400000)\/",
+    "OSDStatus":  "",
+    "OSDType":  "Driver",
+    "OSDGroup":  "IntelWireless",
+    "DriverName":  "Windows? 10 and Windows 11*  Wi-Fi Drivers for Intel? Wireless Adapters",
+    "DriverVersion":  "23.20.0",
+    "OsVersion":  [
+                      "10.0"
+                  ],
+    "OsArch":  [
+                   "x64"
+               ],
+    "DriverGrouping":  "Intel Wireless",
+    "DownloadFile":  "WiFi-23.20.0-Driver64-Win10-Win11.zip",
+    "DriverUrl":  "https://downloadmirror.intel.com/812775/WiFi-23.20.0-Driver64-Win10-Win11.zip",
+    "DriverInfo":  "https://www.intel.com/content/www/us/en/download/18231/intel-proset-wireless-software-and-drivers-for-it-admins.html",
+    "DriverDescription":  "This download record installs the Windows? 10 and Windows 11* WiFi package drivers 23.20.0 for the Intel? Wi-Fi 7/Wi-Fi 6E/Wi-Fi 6 and Intel? 9000 series Wireless Adapters.",
+    "OSDGuid":  "02ee5f83-0655-46ff-bcdf-bea8054a1eb9",
+    "OSDPnpClass":  "Net",
+    "OSDPnpClassGuid":  "{4D36E972-E325-11CE-BFC1-08002BE10318}"
 }
