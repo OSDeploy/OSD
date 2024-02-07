@@ -10,7 +10,13 @@ Note, the changes I make won't go into effect until the next module release date
 
 ## Changes
 
-### 24.1.22 (not implemented yet)
+### 24.2.7 (not yet implememnted)
+- Fixes for when you call OSDCloudGUI via command line with preset variables.  This was not a use case I had tested for and had totally missed implementing all of the ground work for the recent functions added to OSDCloudGUIDev to work in this manner.
+  - Thanks @PatrickThomasD2 for bringing this to my attention.
+- Started basic code updates to support ARM64.  No plans to go "production" for a very long time.
+  - Attempting to create the code requirements to have it create ARM64 WinPE with the OSDCloudTemplate functions
+
+### 24.1.22 (implemented in OSD Module 24.2.4.1)
 - Added Function: New-OSDCloudUSBSetupCompleteTemplate
   - This creates the Setup Complete files for you on your OSDCloudUSB drive (\OSDCloud\Config\Scripts\SetupComplete)
   - You can then modify the SetupComplete.ps1 file to match your needs, or leave alone and look at the logs later to see how it worked.
@@ -29,7 +35,7 @@ Note, the changes I make won't go into effect until the next module release date
       - This will Shutdown the computer at the end of Setup Complete, leaving it at the OOBE the next time the device is turned on
   - Please Note, all of these are already available today via variables you can call before triggering OSDCloud.  This is just adding to the GUI Dev front end for testing, then eventually be promoted into the production front end (Start-OSDCloudGUI)
 
-### 24.1.17 (not implemented yet)
+### 24.1.17 (implemented in OSD Module 24.2.4.1)
 - Fixed issue in Save-FeatureUpdate function [Issue 106](https://github.com/OSDeploy/OSD/issues/106)
 - Continue to deal with Intel's changing catalogs for WiFi drivers
   - Modifications to Get-IntelWirelessDriverPack to GUESS the correct URL
