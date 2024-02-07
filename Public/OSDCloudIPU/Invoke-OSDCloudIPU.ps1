@@ -106,6 +106,8 @@ function Invoke-OSDCloudIPU {
     if ($Build -le 19045){$WinVer = "10"}
     else {$WinVer = "11"}
     Write-Output "Windows $WinVer $WindowsRelease | $BuildUBR_CurrentOS"
+    Write-Output "Architecture ('env:PROCESSOR_ARCHITECTURE'): $env:PROCESSOR_ARCHITECTURE "
+    Write-Output "Architecture (Get-NativeMatchineImage): $((Get-NativeMatchineImage).NativeMachine)"
     Write-Output "Computer Model: $ComputerModel"
     Write-Output "Serial: $Serial"
     if ($Manufacturer -like "H*"){Write-Output "Computer Product Code: $HPProdCode"}

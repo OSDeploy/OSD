@@ -555,6 +555,7 @@ $formMainWindowControlOSEditionCombobox.add_SelectionChanged({
         $formMainWindowControlImageIndexTextbox.Text = 4
         $formMainWindowControlImageIndexTextbox.IsEnabled = $false
     }
+    <#
     elseif ($formMainWindowControlOSEditionCombobox.SelectedValue -eq 'Home N') {
         #Retail edition only and disable Activation combobox
         $formMainWindowControlOSActivationCombobox.SelectedValue = 'Retail'
@@ -565,6 +566,7 @@ $formMainWindowControlOSEditionCombobox.add_SelectionChanged({
         $formMainWindowControlImageIndexTextbox.Text = 5
         $formMainWindowControlImageIndexTextbox.IsEnabled = $false
     }
+    #>
     elseif ($formMainWindowControlOSEditionCombobox.SelectedValue -eq 'Home Single Language') {
         #Retail edition only and disable Activation combobox
         $formMainWindowControlOSActivationCombobox.SelectedValue = 'Retail'
@@ -572,9 +574,10 @@ $formMainWindowControlOSEditionCombobox.add_SelectionChanged({
 
         $formMainWindowControlImageIndexLabel.IsEnabled = $false
 
-        $formMainWindowControlImageIndexTextbox.Text = 6
+        $formMainWindowControlImageIndexTextbox.Text = 5
         $formMainWindowControlImageIndexTextbox.IsEnabled = $false
     }
+    <#
     elseif ($formMainWindowControlOSEditionCombobox.SelectedValue -eq 'Education') {
         $formMainWindowControlOSActivationCombobox.IsEnabled = $true
         if ($formMainWindowControlOSActivationCombobox.SelectedValue -eq 'Retail') {
@@ -603,15 +606,17 @@ $formMainWindowControlOSEditionCombobox.add_SelectionChanged({
         $formMainWindowControlOSActivationCombobox.IsEnabled = $false
         $formMainWindowControlImageIndexTextbox.Text = 7
     }
+    #>
     elseif ($formMainWindowControlOSEditionCombobox.SelectedValue -eq 'Pro') {
         $formMainWindowControlOSActivationCombobox.IsEnabled = $true
         if ($formMainWindowControlOSActivationCombobox.SelectedValue -eq 'Retail') {
-            $formMainWindowControlImageIndexTextbox.Text = 9
+            $formMainWindowControlImageIndexTextbox.Text = 6
         }
         else {
             $formMainWindowControlImageIndexTextbox.Text = 8
         }
     }
+    <#
     elseif ($formMainWindowControlOSEditionCombobox.SelectedValue -eq 'Pro N') {
         $formMainWindowControlOSActivationCombobox.IsEnabled = $true
         if ($formMainWindowControlOSActivationCombobox.SelectedValue -eq 'Retail') {
@@ -621,16 +626,16 @@ $formMainWindowControlOSEditionCombobox.add_SelectionChanged({
             $formMainWindowControlImageIndexTextbox.Text = 9
         }
     }
+    #>
 })
 #================================================
 #   OS Activation Combobox
 #================================================
 $formMainWindowControlOSActivationCombobox.add_SelectionChanged({
     if ($formMainWindowControlOSActivationCombobox.SelectedValue -eq 'Retail') {
-        if ($formMainWindowControlOSEditionCombobox.SelectedValue -eq 'Education') {$formMainWindowControlImageIndexTextbox.Text = 7}
-        if ($formMainWindowControlOSEditionCombobox.SelectedValue -eq 'Education N') {$formMainWindowControlImageIndexTextbox.Text = 8}
-        if ($formMainWindowControlOSEditionCombobox.SelectedValue -eq 'Pro') {$formMainWindowControlImageIndexTextbox.Text = 9}
-        if ($formMainWindowControlOSEditionCombobox.SelectedValue -eq 'Pro N') {$formMainWindowControlImageIndexTextbox.Text = 10}
+
+        if ($formMainWindowControlOSEditionCombobox.SelectedValue -eq 'Pro') {$formMainWindowControlImageIndexTextbox.Text = 6}
+
     }
     if ($formMainWindowControlOSActivationCombobox.SelectedValue -eq 'Volume') {
         if ($formMainWindowControlOSEditionCombobox.SelectedValue -eq 'Education') {$formMainWindowControlImageIndexTextbox.Text = 4}
