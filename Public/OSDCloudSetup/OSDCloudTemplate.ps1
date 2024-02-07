@@ -151,7 +151,11 @@ function New-OSDCloudTemplate {
 
         [System.Management.Automation.SwitchParameter]
         #Uses Windows 10 WinRE.wim instead of the ADK Boot.wim
-        $WinRE
+        $WinRE,
+
+        [System.Management.Automation.SwitchParameter]
+        #Uses Windows 10 WinRE.wim instead of the ADK Boot.wim
+        $ARM64
     )
 #=================================================
 #   WinREDriver
@@ -290,7 +294,12 @@ Windows Registry Editor Version 5.00
     #endregion
 
     #region Get Adk Paths
-    $AdkPaths = Get-AdkPaths
+    if ($PSBoundParameters.ContainsKey('ARM64')) {
+        $AdkPaths = Get-AdkPaths -Arch arm64
+    }
+    else {
+        $AdkPaths = Get-AdkPaths
+    }
 
     if ($null -eq $AdkPaths) {
         Write-Host -ForegroundColor DarkGray "========================================================================="
@@ -543,6 +552,10 @@ Windows Registry Editor Version 5.00
         'StorageWMI'
         'WDS-Tools'
     )
+    if ($PSBoundParameters.ContainsKey('ARM64')) {
+        # Require specific order of install of packages or it fails.
+        $OCPackages =@('Dot3Svc','EnhancedStorage','MDAC','NetFx','PowerShell','Scripting','SecureBootCmdlets','WinPE-WMI','StorageWMI','PmemCmdlets','DismCmdlets','SecureStartup','x64-Support','PlatformId')
+    }
     #endregion
 
     #region Install Default en-us Language

@@ -131,7 +131,18 @@
         "updateDiskDrivers": true,
         "updateFirmware": false,
         "updateNetworkDrivers": true,
-        "updateSCSIDrivers": true
+        "updateSCSIDrivers": true,
+        "OEMActivation": true,
+        "WindowsUpdate": false,
+        "WindowsUpdateDrivers": false,
+        "WindowsDefenderUpdate": false,
+        "SyncMSUpCatDriverUSB": true,
+        "HPIAALL": false,
+        "HPIADrivers": false,
+        "HPIAFirmware": false,
+        "HPIASoftware": false,
+        "HPTPMUpdate": false,
+        "HPBIOSUpdate": false
 	},
     "StartOSDCloudGUIDev": {
         "BrandName": "OSDCloudDev",

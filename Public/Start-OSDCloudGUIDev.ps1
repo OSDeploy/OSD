@@ -81,6 +81,19 @@
         updateNetworkDrivers        = [System.Boolean]$Global:OSDModuleResource.StartOSDCloudGUI.updateNetworkDrivers
         updateSCSIDrivers           = [System.Boolean]$Global:OSDModuleResource.StartOSDCloudGUI.updateSCSIDrivers
         
+        OEMActivation               = [System.Boolean]$Global:OSDModuleResource.StartOSDCloudGUI.OEMActivation
+        WindowsUpdate               = [System.Boolean]$Global:OSDModuleResource.StartOSDCloudGUI.WindowsUpdate
+        WindowsUpdateDrivers        = [System.Boolean]$Global:OSDModuleResource.StartOSDCloudGUI.WindowsUpdateDrivers
+        WindowsDefenderUpdate       = [System.Boolean]$Global:OSDModuleResource.StartOSDCloudGUI.WindowsDefenderUpdate
+        SyncMSUpCatDriverUSB        = [System.Boolean]$Global:OSDModuleResource.StartOSDCloudGUI.SyncMSUpCatDriverUSB
+
+        HPIAALL                     = [System.Boolean]$Global:OSDModuleResource.StartOSDCloudGUI.HPIAALL
+        HPIADrivers                 = [System.Boolean]$Global:OSDModuleResource.StartOSDCloudGUI.HPIADrivers
+        HPIAFirmware                = [System.Boolean]$Global:OSDModuleResource.StartOSDCloudGUI.HPIAFirmware
+        HPIASoftware                = [System.Boolean]$Global:OSDModuleResource.StartOSDCloudGUI.HPIASoftware
+        HPTPMUpdate                 = [System.Boolean]$Global:OSDModuleResource.StartOSDCloudGUI.HPTPMUpdate
+        HPBIOSUpdate                = [System.Boolean]$Global:OSDModuleResource.StartOSDCloudGUI.HPBIOSUpdate
+
         TimeStart                   = [datetime](Get-Date)
     }
     #================================================

@@ -300,13 +300,13 @@ if ($HPEnterprise){
     $formMainWindowControlManufacturerFunction.Visibility = 'Visible'
 
     $formMainWindowControlOption_Name_1.Header = "HPIA Drivers - Adds approx 20 minutes"
-    $formMainWindowControlOption_Name_1.IsChecked = $true 
+    $formMainWindowControlOption_Name_1.IsChecked = $Global:OSDCloudGUI.HPIADrivers 
     $formMainWindowControlOption_Name_2.Header = "HPIA Firmware - Adds approx 5 minutes"
-    $formMainWindowControlOption_Name_2.IsChecked = $true 
+    $formMainWindowControlOption_Name_2.IsChecked = $Global:OSDCloudGUI.HPIAFirmware
     $formMainWindowControlOption_Name_3.Header = "HPIA Software - Adds approx 10 minutes"
-    $formMainWindowControlOption_Name_3.IsChecked = $false 
+    $formMainWindowControlOption_Name_3.IsChecked = $Global:OSDCloudGUI.HPIASoftware  
     $formMainWindowControlOption_Name_4.Header = "HPIA All Options - Adds approx 25 minutes"
-    $formMainWindowControlOption_Name_4.IsChecked = $false 
+    $formMainWindowControlOption_Name_4.IsChecked = $Global:OSDCloudGUI.HPIAALL 
     if ($TPM -eq $false){
         $formMainWindowControlOption_Name_5.Header = "HP TPM Firmware Already Current"
         $formMainWindowControlOption_Name_5.IsEnabled = $false
@@ -315,6 +315,7 @@ if ($HPEnterprise){
         {
         $formMainWindowControlOption_Name_5.Visibility = 'Visible'
         $formMainWindowControlOption_Name_5.Header = "HP Update TPM Firmware: $TPM"
+        $formMainWindowControlOption_Name_5.IsChecked = $Global:OSDCloudGUI.HPTPMUpdate 
         }
     if ($BIOS -eq $true){
         $CurrentVer = Get-HPBIOSVersion
@@ -327,6 +328,8 @@ if ($HPEnterprise){
         $CurrentVer = Get-HPBIOSVersion
         $formMainWindowControlOption_Name_6.Visibility = 'Visible'
         $formMainWindowControlOption_Name_6.Header = "HP Update System Firmwware from $CurrentVer to $LatestVer"
+        $formMainWindowControlOption_Name_6.IsChecked = $Global:OSDCloudGUI.HPBIOSUpdate 
+        
         }
     # When HPIA All is selected, unselect Firmware & Software
     
@@ -391,6 +394,12 @@ $formMainWindowControlupdateDiskDrivers.IsChecked = $Global:OSDCloudGUI.updateDi
 $formMainWindowControlupdateFirmware.IsChecked = $Global:OSDCloudGUI.updateFirmware
 $formMainWindowControlupdateNetworkDrivers.IsChecked = $Global:OSDCloudGUI.updateNetworkDrivers
 $formMainWindowControlupdateSCSIDrivers.IsChecked = $Global:OSDCloudGUI.updateSCSIDrivers
+
+$formMainWindowControlWindowsDefenderUpdate.IsChecked = $Global:OSDCloudGUI.WindowsDefenderUpdate
+$formMainWindowControlWindowsUpdates.IsChecked = $Global:OSDCloudGUI.WindowsUpdate
+$formMainWindowControlWindowsUpdateDrivers.IsChecked = $Global:OSDCloudGUI.WindowsUpdateDrivers
+$formMainWindowControlOEMActivation.IsChecked = $Global:OSDCloudGUI.OEMActivation
+$formMainWindowControlShutdownSetupComplete.IsChecked = $Global:OSDCloudGUI.ShutdownSetupComplete
 #================================================
 #   OS Name Combobox
 #================================================

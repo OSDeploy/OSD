@@ -32,7 +32,7 @@
             Write-Host "Found Drivers: $DriverPath" -ForegroundColor Green
             Write-Host "Starting DISM of drivers while Offline" -ForegroundColor Green
             $DismPath = "$env:windir\System32\Dism.exe"
-            $DismProcess = Start-Process -FilePath $DismPath -ArgumentList "/image:c:\ /Add-Driver /driver:$($DriverPath) /recurse" -Wait -PassThru
+            $DismProcess = Start-Process -FilePath $DismPath -ArgumentList "/image:c:\ /Add-Driver /driver:`"$($DriverPath)`" /recurse" -Wait -PassThru
             Write-Host "Finished Process with Exit Code: $($DismProcess.ExitCode)"
         }
     }
