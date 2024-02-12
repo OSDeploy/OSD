@@ -28,6 +28,9 @@ function Invoke-OSDCloudIPU {
         $NoReboot,
 
         [switch]
+        $DownloadOnly,
+
+        [switch]
         $DiagnosticPrompt
     )
     #region Admin Elevation
@@ -172,11 +175,12 @@ function Invoke-OSDCloudIPU {
         $OSActivation = "Retail"
     }
     $OSArch = $env:PROCESSOR_ARCHITECTURE   
-
+    if ($OSArch -eq "AMD64"){$OSArch = 'x64'}
     #endregion Current Activiation
+    
     if ($OSArch -eq "ARM64"){
-#=================================================
-        #	OSEditionId and OSActivation
+        #=================================================
+        #	OSEditionId and OSActivation ARM64
         #=================================================
         if (($OSEdition -eq 'Home') -or ($OSEdition -eq 'Core')) {
             $OSEditionId = 'Core'
@@ -196,7 +200,7 @@ function Invoke-OSDCloudIPU {
     }
     else {
         #=================================================
-        #	OSEditionId and OSActivation
+        #	OSEditionId and OSActivation x64 (AMD64)
         #=================================================
         if (($OSEdition -eq 'Home') -or ($OSEdition -eq 'Core')) {
             $OSEditionId = 'Core'
@@ -458,57 +462,62 @@ function Invoke-OSDCloudIPU {
     Write-Host -ForegroundColor DarkGray "========================================================================="
     Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Triggering Windows Upgrade Setup"   
     
-    #============================================================================
-    #region Creating Arguments based on Parameters
-    #============================================================================
-    #Driver Integration - Adds .inf-style drivers to the new Windows 10 installation.
-    if ($DriverPack){
-        if ($DriverPackPath){
-            if (Test-path -path $DriverPackPath){
-                $driverarg = "/InstallDrivers $DriverPackExpandPath"
-            }
-        }
+    if ($DownloadOnly){
+        Write-Host -ForegroundColor Yellow "Download Complete, exiting script before install based on 'DownloadOnly' switch"
     }
     else {
-        $DriverArg = ""
-    }
-    
-    #Run Silently - This will suppress any Windows Setup user experience including the rollback user experience.
-    if ($Silent){
-        $SilentArg = "/quiet"
-    }
-    else{
-        $SilentArg = ""
-    }
-    
-    #Dynamic Updates - Specifies whether Windows Setup will perform Dynamic Update operations (search, download, and install updates).
-    if ($DynamicUpdate){
-        $DynamicUpdateArg = "/DynamicUpdate Enable"
-    }
-    else{
-        $DynamicUpdateArg = "/DynamicUpdate Disable"
-    }
-    
-    #Diagnostic Prompt - Specifies that the Command Prompt is available during Windows Setup.
-    if ($DiagnosticPrompt){
-        $DiagnosticPromptArg = "/diagnosticprompt enable"
-    }
-    else{
-        $DiagnosticPromptArg  = ""
-    }
+        #============================================================================
+        #region Creating Arguments based on Parameters
+        #============================================================================
+        #Driver Integration - Adds .inf-style drivers to the new Windows 10 installation.
+        if ($DriverPack){
+            if ($DriverPackPath){
+                if (Test-path -path $DriverPackPath){
+                    $driverarg = "/InstallDrivers $DriverPackExpandPath"
+                }
+            }
+        }
+        else {
+            $DriverArg = ""
+        }
+        
+        #Run Silently - This will suppress any Windows Setup user experience including the rollback user experience.
+        if ($Silent){
+            $SilentArg = "/quiet"
+        }
+        else{
+            $SilentArg = ""
+        }
+        
+        #Dynamic Updates - Specifies whether Windows Setup will perform Dynamic Update operations (search, download, and install updates).
+        if ($DynamicUpdate){
+            $DynamicUpdateArg = "/DynamicUpdate Enable"
+        }
+        else{
+            $DynamicUpdateArg = "/DynamicUpdate Disable"
+        }
+        
+        #Diagnostic Prompt - Specifies that the Command Prompt is available during Windows Setup.
+        if ($DiagnosticPrompt){
+            $DiagnosticPromptArg = "/diagnosticprompt enable"
+        }
+        else{
+            $DiagnosticPromptArg  = ""
+        }
 
-    $ParamStartProcess = @{
-        FilePath = "$MediaLocation\Setup.exe"
-        ArgumentList = "/Auto Upgrade $DynamicUpdateArg /EULA accept $DriverArg /Priority High $SilentArg $DiagnosticPromptArg"
-    } 
+        $ParamStartProcess = @{
+            FilePath = "$MediaLocation\Setup.exe"
+            ArgumentList = "/Auto Upgrade $DynamicUpdateArg /EULA accept $DriverArg /Priority High $SilentArg $DiagnosticPromptArg"
+        } 
 
-    Write-Host -ForegroundColor Cyan "Setup Path: " -NoNewline
-    Write-Host -ForegroundColor Green $ParamStartProcess.FilePath
-    Write-Host -ForegroundColor Cyan "Arguments: " -NoNewline
-    Write-Host -ForegroundColor Green $ParamStartProcess.ArgumentList
+        Write-Host -ForegroundColor Cyan "Setup Path: " -NoNewline
+        Write-Host -ForegroundColor Green $ParamStartProcess.FilePath
+        Write-Host -ForegroundColor Cyan "Arguments: " -NoNewline
+        Write-Host -ForegroundColor Green $ParamStartProcess.ArgumentList
 
 
-    #endregion Creating Arguments based on Parameters
+        #endregion Creating Arguments based on Parameters
 
-    Start-Process @ParamStartProcess
+        Start-Process @ParamStartProcess
+    }
 }

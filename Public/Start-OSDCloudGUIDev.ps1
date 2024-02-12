@@ -18,12 +18,12 @@
         #The custom Brand for OSDCloudGUI
         [Alias('Brand')]
         [System.String]
-        $BrandName = $Global:OSDModuleResource.StartOSDCloudGUI.BrandName,
+        $BrandName = $Global:OSDModuleResource.StartOSDCloudGUIDev.BrandName,
         
         #Color for the OSDCloudGUI Brand
         [Alias('Color')]
         [System.String]
-        $BrandColor = $Global:OSDModuleResource.StartOSDCloudGUI.BrandColor,
+        $BrandColor = $Global:OSDModuleResource.StartOSDCloudGUIDev.BrandColor,
 
         #Temporary Parameter
         [System.String]
