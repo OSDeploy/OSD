@@ -504,10 +504,17 @@ function Invoke-OSDCloudIPU {
         else{
             $DiagnosticPromptArg  = ""
         }
-
+        #Diagnostic Prompt - Specifies that the Command Prompt is available during Windows Setup.
+        if ($NoReboot){
+            $NoRebootArg = "/noreboot"
+        }
+        else{
+            $NoRebootArg  = ""
+        }
+        
         $ParamStartProcess = @{
             FilePath = "$MediaLocation\Setup.exe"
-            ArgumentList = "/Auto Upgrade $DynamicUpdateArg /EULA accept $DriverArg /Priority High $SilentArg $DiagnosticPromptArg"
+            ArgumentList = "/Auto Upgrade $DynamicUpdateArg /EULA accept $DriverArg /Priority High $SilentArg $DiagnosticPromptArg $NoRebootArg"
         } 
 
         Write-Host -ForegroundColor Cyan "Setup Path: " -NoNewline
