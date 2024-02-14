@@ -19198,6 +19198,17 @@ Original credit to Mike Robbins http://mikefrobbins.com/2018/01/18/use-powershel
           </dev:type>
           <dev:defaultValue>False</dev:defaultValue>
         </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+          <maml:name>DownloadOnly</maml:name>
+          <maml:description>
+            <maml:para>{{ Fill DownloadOnly Description }}</maml:para>
+          </maml:description>
+          <dev:type>
+            <maml:name>SwitchParameter</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>False</dev:defaultValue>
+        </command:parameter>
       </command:syntaxItem>
     </command:syntax>
     <command:parameters>
@@ -19253,6 +19264,18 @@ Original credit to Mike Robbins http://mikefrobbins.com/2018/01/18/use-powershel
         <maml:name>SkipDriverPack</maml:name>
         <maml:description>
           <maml:para>{{ Fill SkipDriverPack Description }}</maml:para>
+        </maml:description>
+        <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
+        <dev:type>
+          <maml:name>SwitchParameter</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>False</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+        <maml:name>DownloadOnly</maml:name>
+        <maml:description>
+          <maml:para>{{ Fill DownloadOnly Description }}</maml:para>
         </maml:description>
         <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
         <dev:type>
@@ -21539,6 +21562,17 @@ Original credit to Mike Robbins http://mikefrobbins.com/2018/01/18/use-powershel
           </dev:type>
           <dev:defaultValue>False</dev:defaultValue>
         </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+          <maml:name>ARM64</maml:name>
+          <maml:description>
+            <maml:para>Uses Windows 10 WinRE.wim instead of the ADK Boot.wim</maml:para>
+          </maml:description>
+          <dev:type>
+            <maml:name>SwitchParameter</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>False</dev:defaultValue>
+        </command:parameter>
       </command:syntaxItem>
     </command:syntax>
     <command:parameters>
@@ -21604,6 +21638,18 @@ Original credit to Mike Robbins http://mikefrobbins.com/2018/01/18/use-powershel
       </command:parameter>
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
         <maml:name>WinRE</maml:name>
+        <maml:description>
+          <maml:para>Uses Windows 10 WinRE.wim instead of the ADK Boot.wim</maml:para>
+        </maml:description>
+        <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
+        <dev:type>
+          <maml:name>SwitchParameter</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>False</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+        <maml:name>ARM64</maml:name>
         <maml:description>
           <maml:para>Uses Windows 10 WinRE.wim instead of the ADK Boot.wim</maml:para>
         </maml:description>
@@ -30562,7 +30608,7 @@ Original credit to Mike Robbins http://mikefrobbins.com/2018/01/18/use-powershel
             <maml:name>String</maml:name>
             <maml:uri />
           </dev:type>
-          <dev:defaultValue>$Global:OSDModuleResource.StartOSDCloudGUI.BrandName</dev:defaultValue>
+          <dev:defaultValue>$Global:OSDModuleResource.StartOSDCloudGUIDev.BrandName</dev:defaultValue>
         </command:parameter>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="2" aliases="Color">
           <maml:name>BrandColor</maml:name>
@@ -30574,7 +30620,7 @@ Original credit to Mike Robbins http://mikefrobbins.com/2018/01/18/use-powershel
             <maml:name>String</maml:name>
             <maml:uri />
           </dev:type>
-          <dev:defaultValue>$Global:OSDModuleResource.StartOSDCloudGUI.BrandColor</dev:defaultValue>
+          <dev:defaultValue>$Global:OSDModuleResource.StartOSDCloudGUIDev.BrandColor</dev:defaultValue>
         </command:parameter>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="3" aliases="none">
           <maml:name>ComputerManufacturer</maml:name>
@@ -30613,7 +30659,7 @@ Original credit to Mike Robbins http://mikefrobbins.com/2018/01/18/use-powershel
           <maml:name>String</maml:name>
           <maml:uri />
         </dev:type>
-        <dev:defaultValue>$Global:OSDModuleResource.StartOSDCloudGUI.BrandName</dev:defaultValue>
+        <dev:defaultValue>$Global:OSDModuleResource.StartOSDCloudGUIDev.BrandName</dev:defaultValue>
       </command:parameter>
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="2" aliases="Color">
         <maml:name>BrandColor</maml:name>
@@ -30625,7 +30671,7 @@ Original credit to Mike Robbins http://mikefrobbins.com/2018/01/18/use-powershel
           <maml:name>String</maml:name>
           <maml:uri />
         </dev:type>
-        <dev:defaultValue>$Global:OSDModuleResource.StartOSDCloudGUI.BrandColor</dev:defaultValue>
+        <dev:defaultValue>$Global:OSDModuleResource.StartOSDCloudGUIDev.BrandColor</dev:defaultValue>
       </command:parameter>
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="3" aliases="none">
         <maml:name>ComputerManufacturer</maml:name>
