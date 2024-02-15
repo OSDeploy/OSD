@@ -197,6 +197,7 @@
         'New-OSDCloudTemplate',
         'New-OSDCloudUSB',
         'New-OSDCloudUSBSetupCompleteTemplate',
+        'New-OSDCloudWorkSpaceSetupCompleteTemplate',
         'New-OSDCloudWorkspace',
         'New-OSDisk',
         'Remove-AppxOnline',
