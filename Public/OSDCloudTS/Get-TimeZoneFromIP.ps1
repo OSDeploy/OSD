@@ -1,4 +1,4 @@
-﻿<# OLD - API was blocked unless subscription paid
+<# OLD - API was blocked unless subscription paid
 Function Get-TimeZoneFromIP {
     $URIRequest = "https://timezoneapi.io/api/ip/?token=aZuNiKeSCzxosgrJGmCK"
     $TimeZoneAPI =  (Invoke-WebRequest -Uri $URIRequest -UseBasicParsing).Content
@@ -1461,5 +1461,12 @@ Function Get-TimeZoneFromIP {
     $TimeZoneAPI =  (Invoke-WebRequest -Uri $URIRequest -UseBasicParsing).Content
     $TimeZoneAPIInfo = $TimeZoneAPI  | ConvertFrom-Json
     $TimeZoneData = $TimeZones | ConvertFrom-Json
-    return ($TimeZoneData | Where-Object {$_.utc -match $TimeZoneAPIInfo.timezone}).value
+    $Matches = ($TimeZoneData | Where-Object {$_.utc -match $TimeZoneAPIInfo.timezone}).value
+    if ($Matches.count -gt 1){
+    $Out = $Matches | Where-Object {$_ -match "Standard"}
+    }
+    else {
+    $Out = $Matches
+    }
+    return $Out
 }
