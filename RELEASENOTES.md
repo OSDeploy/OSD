@@ -10,7 +10,15 @@ Note, the changes I make won't go into effect until the next module release date
 
 ## Changes
 
-### 24.2.7 (not yet implememnted)
+### 24.2.15 (not yet implemented)
+- Modifications to Function Set-TimeZoneFromIP - Due to prevous method using an API that is no longer free, had to completely change process.  Doing best to make it work for everyone when I can only test 1 timezone. 
+  - Bug fix thanks to @JHBDO [Issue 110](https://github.com/OSDeploy/OSD/issues/110)
+- Added Function: New-OSDCloudWorkSpaceSetupCompleteTemplate [Issue 107](https://github.com/OSDeploy/OSD/issues/107)
+  - This creates the Setup Complete files for you on your WorkSpace drive (%WorkSpace%\Config\Scripts\SetupComplete)
+  - You can then modify the SetupComplete.ps1 file to match your needs, or leave alone and look at the logs later to see how it worked.
+  - These will get automatically copied to your OSDCloud USB when you update your OSDCLoud USB drive, and be automatically applied during Setup Complete during OSD.
+
+### 24.2.7 (implemented in OSD Module 24.2.13.1)
 - Fixes for when you call OSDCloudGUI via command line with preset variables.  This was not a use case I had tested for and had totally missed implementing all of the ground work for the recent functions added to OSDCloudGUIDev to work in this manner.
   - Thanks @PatrickThomasD2 for bringing this to my attention.
 - Started basic code updates to support ARM64.  No plans to go "production" for a very long time.
