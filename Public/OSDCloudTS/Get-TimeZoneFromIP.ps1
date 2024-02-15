@@ -1461,9 +1461,13 @@ Function Get-TimeZoneFromIP {
     $TimeZoneAPI =  (Invoke-WebRequest -Uri $URIRequest -UseBasicParsing).Content
     $TimeZoneAPIInfo = $TimeZoneAPI  | ConvertFrom-Json
     $TimeZoneData = $TimeZones | ConvertFrom-Json
+    $offset = ($TimeZoneAPIInfo.utc_offset).Substring(0,3)
+    if ($offset.Substring(1,1) -eq "0") {
+        $offset = $offset.Substring(0,1) + $offset.Substring(2,1)
+    }
     $Matches = ($TimeZoneData | Where-Object {$_.utc -match $TimeZoneAPIInfo.timezone}).value
     if ($Matches.count -gt 1){
-    $Out = $Matches | Where-Object {$_ -match "Standard"}
+    $Out = ($Matches | Where-Object {$_.utc -match $TimeZoneAPIInfo.timezone -and $_.offset -match $offset}).value
     }
     else {
     $Out = $Matches
