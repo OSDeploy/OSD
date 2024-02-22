@@ -208,6 +208,21 @@ function Test-AzuretUrl {
     else {
         Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) $Message"
     }
+
+    $Uri = 'https://portal.manage.microsoft.com'
+    $Message = "Test URL $Uri"
+    try {
+        $response = Invoke-WebRequest -Uri $Uri
+    }
+    catch {
+        $response = $null
+    }
+    if ($response.StatusCode -eq 200) {
+        Write-Host "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) $Message" -ForegroundColor DarkGray
+    }
+    else {
+        Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) $Message"
+    }
 }
 function Test-TpmUrl {
     Write-Host -ForegroundColor DarkGray '========================================================================='
