@@ -110,17 +110,17 @@ PSComputerName              :
         $IsReady
         $IsReadyInformation = $IsReady.Information
         if ($IsReadyInformation -eq '0') {
-            Write-Host "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) IsReadyInformation $IsReadyInformation TPM is ready for attestation"
+            Write-Host "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) TPM is ready for attestation"
         }
         else {
-            Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) IsReadyInformation $IsReadyInformation TPM is not ready for attestation"
+            Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) TPM is not ready for attestation"
         }
         if ($IsReadyInformation -eq '16777216') {
-            Write-Warning 'The TPM has a Health Attestation related vulnerability'
+            Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) TPM has a Health Attestation related vulnerability"
         }
     }
     else {
-        Write-Warning 'Unable to get TPM information'
+        Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Unable to get TPM information"
     }
 }
 function Test-TpmRegistryEkCert {
