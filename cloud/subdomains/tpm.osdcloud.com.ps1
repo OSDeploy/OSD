@@ -105,7 +105,7 @@ PSComputerName              :
         }
 
         
-        if ($TPMversion.Win32Tpm -like '*2.0*') {
+        if ($Win32Tpm.SpecVersion -like '*2.0*') {
             Write-Host "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) TPM is 2.0 compliant and supports attestation" -ForegroundColor DarkGray
         }
         else {
