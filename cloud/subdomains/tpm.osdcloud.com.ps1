@@ -270,6 +270,13 @@ function Test-WindowsTimeService {
     }
     else {
         Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Windows Time Service is $($W32Time.Status)"
+        Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) To sync Windows Time, enter the following commands in an elevated PowerShell window"
+        Write-Host "Stop-Service W32Time" -ForegroundColor DarkGray
+        Write-Host "cmd /c 'w32tm /unregister' | out-null" -ForegroundColor DarkGray
+        Write-Host "cmd /c 'w32tm /register' | out-null" -ForegroundColor DarkGray
+        Write-Host "Start-Service W32Time" -ForegroundColor DarkGray
+        Write-Host "cmd /c 'w32tm /resync' | out-null" -ForegroundColor DarkGray
+        Write-Host "cmd /c 'w32tm /config /update /manualpeerlist:0.pool.ntp.org, 1.pool.ntp.org, 2.pool.ntp.org, 3.pool.ntp.org, 0x8 /syncfromflags:MANUAL /reliable:yes' | out-null" -ForegroundColor DarkGray
     }
 }
 #endregion
