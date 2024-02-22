@@ -119,7 +119,7 @@ PSComputerName              :
         $IsReady
         $IsReadyInformation = $IsReady.Information
         if ($IsReadyInformation -eq '0') {
-            Write-Host "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) TPM is ready for attestation"
+            Write-Host "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) TPM is ready for attestation" -ForegroundColor DarkGray
         }
         else {
             Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) TPM is not ready for attestation"
@@ -162,14 +162,17 @@ function Test-TpmRegistryWBCL {
         $WBCL | Format-List
 
         $WBCL = (Get-ItemProperty -Path $RegistryPath).WBCL
-        if ($null -eq $WBCL) {
+        if ($null -ne $WBCL) {
+            Write-Host "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) WBCL was found in the Registry" -ForegroundColor DarkGray
+        }
+        else {
             Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) WBCL was not found in the Registry"
-            Write-Warning 'Measured boot logs are missing.  Reboot may be required.'
+            Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Measured boot logs are missing.  A Reboot may be required"
         }
     }
     else {
         Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) IntegrityServices key was not found in the Registry"
-        Write-Warning 'Measured boot logs are missing.  A Reboot may be required.'
+        Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Measured boot logs are missing.  A Reboot may be required"
     }
 }
 function Test-AutopilotUrl {
