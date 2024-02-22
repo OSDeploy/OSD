@@ -135,7 +135,7 @@ function Test-GetTpmClass {
         }
         Write-Host -ForegroundColor DarkGray '========================================================================='
         Write-Host "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Get TPM CimMethod IsReadyInformation" -ForegroundColor Cyan
-        $Global:TpmCloud.GetTpmIsReadyInformation = $Global:TpmCloud.GetTpmClass | Invoke-CimMethod -MethodName 'IsReadyInformation'
+        $Global:TpmCloud.GetTpmIsReadyInformation = Get-CimInstance -Namespace $($Global:TpmCloud.TpmNamespace) -ClassName $($Global:TpmCloud.TpmClass) -ErrorAction SilentlyContinue | Invoke-CimMethod -MethodName 'IsReadyInformation'
         $Global:TpmCloud.GetTpmIsReadyInformation
         if ($Global:TpmCloud.GetTpmIsReadyInformation.Information -eq '0') {
             Write-Host "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) TPM is ready for attestation." -ForegroundColor DarkGray
