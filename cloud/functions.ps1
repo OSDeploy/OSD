@@ -1,9 +1,9 @@
 <#PSScriptInfo
-.VERSION 22.9.13.1
+.VERSION 24.2.22.1
 .GUID 7a3671f6-485b-443e-8e86-b60fdcea1419
 .AUTHOR David Segura @SeguraOSD
 .COMPANYNAME osdcloud.com
-.COPYRIGHT (c) 2022 David Segura osdcloud.com. All rights reserved.
+.COPYRIGHT (c) 2024 David Segura osdcloud.com. All rights reserved.
 .TAGS OSDeploy OSDCloud WinPE OOBE Windows AutoPilot
 .LICENSEURI 
 .PROJECTURI https://github.com/OSDeploy/OSD
@@ -23,7 +23,7 @@ powershell iex (irm functions.osdcloud.com)
 .DESCRIPTION
     PSCloudScript at functions.osdcloud.com
 .NOTES
-    Version 22.9.13.1
+    Version 24.2.22.1
 .LINK
     https://raw.githubusercontent.com/OSDeploy/OSD/master/cloud/functions.ps1
 .EXAMPLE
@@ -33,7 +33,7 @@ powershell iex (irm functions.osdcloud.com)
 [CmdletBinding()]
 param()
 $ScriptName = 'functions.osdcloud.com'
-$ScriptVersion = '23.6.10.1'
+$ScriptVersion = '24.2.22.1'
 
 #region Initialize
 if ($env:SystemDrive -eq 'X:') {
@@ -241,11 +241,6 @@ function Test-TpmRegistryWBCL {
         Write-Warning 'Measured boot logs are missing.  Reboot may be required.'
     }
 }
-
-
-
-
-
 #endregion
 
 
