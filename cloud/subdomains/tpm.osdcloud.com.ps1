@@ -74,7 +74,7 @@ Write-Host -ForegroundColor Green "[+] Transport Layer Security (TLS) 1.2"
 #region WinPE
 if ($WindowsPhase -eq 'WinPE') {
 
-    Write-Host -ForegroundColor DarkGray "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Get-CimInstance -Namespace 'root/cimv2/Security/MicrosoftTpm' -ClassName 'Win32_TPM'" 
+    Write-Host "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Get-CimInstance -Namespace 'root/cimv2/Security/MicrosoftTpm' -ClassName 'Win32_TPM'" -ForegroundColor DarkGray
     $Win32Tpm = Get-CimInstance -Namespace 'root/cimv2/Security/MicrosoftTpm' -ClassName 'Win32_TPM' -ErrorAction SilentlyContinue
     if ($Win32Tpm) {
         $Win32Tpm
@@ -82,30 +82,34 @@ if ($WindowsPhase -eq 'WinPE') {
             Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) TPM is not enabled"
         }
 
-        if ($Win32Tpm.IsActivated_InitialValue -ne $true) {
-            Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) TPM is currently activated"
+        if ($Win32Tpm.IsActivated_InitialValue -eq $true) {
+            Write-Host "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) TPM is activated" -ForegroundColor DarkGray
         }
     
-        if ($Win32Tpm.IsOwned_InitialValue -ne $true) {
-            Write-Host "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) TPM is currently owned"
+        if ($Win32Tpm.IsOwned_InitialValue -eq $true) {
+            Write-Host "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) TPM is owned" -ForegroundColor DarkGray
         }
 
-        Write-Host -ForegroundColor DarkGray "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Get-CimInstance -Namespace 'root/cimv2/Security/MicrosoftTpm' -ClassName 'Win32_TPM' | Invoke-CimMethod -MethodName 'IsReadyInformation'" 
+        Write-Host "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Get-CimInstance -Namespace 'root/cimv2/Security/MicrosoftTpm' -ClassName 'Win32_TPM'" -ForegroundColor DarkGray
+        Write-Host "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Invoke-CimMethod -MethodName 'IsReadyInformation'" -ForegroundColor DarkGray
         $IsReady = $Win32Tpm | Invoke-CimMethod -MethodName 'IsReadyInformation'
         $IsReady
 
         $IsReadyInformation = $IsReady.Information
         if ($IsReadyInformation -eq '0') {
-            Write-Host "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) IsReadyInformation $IsReadyInformation TPM is ready for attestation"
+            Write-Host "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) $($IsReadyInformation): TPM is ready for attestation" -ForegroundColor DarkGray
         }
         else {
-            Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) IsReadyInformation $IsReadyInformation TPM is not ready for attestation"
+            Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) $($IsReadyInformation): TPM is not ready for attestation"
         }
         if ($IsReadyInformation -eq '16777216') {
-            Write-Warning 'The TPM has a Health Attestation related vulnerability'
-        } 
-        If (!(Get-ItemProperty -Path $IntegrityServicesRegPath -Name $WBCL -ErrorAction Ignore)) {
-            Write-Warning 'Reason: Registervalue HKLM:\SYSTEM\CurrentControlSet\Control\IntegrityServices\WBCL does not exist! Measured boot logs are missing. Make sure your reboot your device!'
+            Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) TPM has a Health Attestation related vulnerability"
+        }
+
+
+        Write-Host "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Test HKLM:\SYSTEM\CurrentControlSet\Control\IntegrityServices\WBCL" -ForegroundColor DarkGray
+        if (!(Get-ItemProperty -Path $IntegrityServicesRegPath -Name $WBCL -ErrorAction Ignore)) {
+            Write-Warning "Registry value does not exist.  Measured boot logs are missing.  Reboot may be required."
         }
     }
     else {
