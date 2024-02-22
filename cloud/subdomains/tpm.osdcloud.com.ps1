@@ -95,16 +95,6 @@ $Global:TpmCloud = [ordered]@{
     GetTpmIsReadyInformation        = $null
     TpmNamespace                    = 'root/cimv2/Security/MicrosoftTpm'
     TpmClass                        = 'Win32_Tpm'
-    TpmIsActivated                  = $null
-    TpmIsEnabled                    = $null
-    TpmIsOwned                      = $null
-    TpmManufacturerId               = $null
-    TpmManufacturerIdTxt            = $null
-    TpmManufacturerVersion          = $null
-    TpmManufacturerVersionFull20    = $null
-    TpmManufacturerVersionInfo      = $null
-    TpmPhysicalPresenceVersionInfo  = $null
-    TpmSpecVersion                  = $null
 }
 #endregion
 
@@ -148,18 +138,24 @@ function Test-GetTpmClass {
         $GetTpmIsReadyInformation = $Global:TpmCloud.GetTpmClass | Invoke-CimMethod -MethodName 'IsReadyInformation'
         $GetTpmIsReadyInformation
         if ($GetTpmIsReadyInformation.Information -eq '0') {
-            Write-Host "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) TPM is ready for attestation" -ForegroundColor DarkGray
+            Write-Host "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) TPM is ready for attestation." -ForegroundColor DarkGray
         }
         else {
-            Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) TPM is not ready for attestation"
+            Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) TPM is not ready for attestation."
+            $Global:TpmCloud.IsTpmReady = [bool]$false
+            $Global:TpmCloud.IsAutopilotReady = [bool]$false
         }
         if ($GetTpmIsReadyInformation.Information -eq '16777216') {
-            Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) TPM has a Health Attestation related vulnerability"
-            Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Autopilot will not work"
+            Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) TPM has a Health Attestation related vulnerability."
+            Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Autopilot will fail."
+            $Global:TpmCloud.IsTpmReady = [bool]$false
+            $Global:TpmCloud.IsAutopilotReady = [bool]$false
         }
         if ($GetTpmIsReadyInformation.Information -eq '262144') {
-            Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) EK Certificate is missing or invalid"
-            Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Autopilot will not work"
+            Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) TPM EK Certificate is missing or invalid."
+            Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Autopilot will fail."
+            $Global:TpmCloud.IsTpmReady = [bool]$false
+            $Global:TpmCloud.IsAutopilotReady = [bool]$false
         }
     }
     else {
