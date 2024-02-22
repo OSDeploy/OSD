@@ -71,11 +71,7 @@ Write-Host -ForegroundColor Green "[+] Transport Layer Security (TLS) 1.2"
 [Net.ServicePointManager]::SecurityProtocol = [Net.ServicePointManager]::SecurityProtocol -bor [Net.SecurityProtocolType]::Tls12
 #endregion
 
-
-#region TPM and Autopilot
-function Test-TpmCimInstance {
-    Write-Host -ForegroundColor DarkGray '========================================================================='
-    <#
+<#
 IsActivated_InitialValue    : True
 IsEnabled_InitialValue      : True
 IsOwned_InitialValue        : True
@@ -88,24 +84,62 @@ PhysicalPresenceVersionInfo : 1.3
 SpecVersion                 : 2.0, 0, 1.59
 PSComputerName              : 
 #>
+
+#region Configuration
+$Global:TpmCloud = $null
+$Global:TpmCloud = [ordered]@{
+    TpmNamespace                    = 'root/cimv2/Security/MicrosoftTpm'
+    TpmClass                        = 'Win32_Tpm'
+    TpmCimInstance                  = $null
+    TpmIsActivated                  = $null
+    TpmIsEnabled                    = $null
+    TpmIsOwned                      = $null
+    TpmManufacturerId               = $null
+    TpmManufacturerIdTxt            = $null
+    TpmManufacturerVersion          = $null
+    TpmManufacturerVersionFull20    = $null
+    TpmManufacturerVersionInfo      = $null
+    TpmPhysicalPresenceVersionInfo  = $null
+    TpmSpecVersion                  = $null
+
+}
+#endregion
+
+#region TPM and Autopilot
+function Test-TpmCimInstance {
+    Write-Host -ForegroundColor DarkGray '========================================================================='
     Write-Host "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Test TPM CimInstance" -ForegroundColor Cyan
-    Write-Host "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Get-CimInstance -Namespace 'root/cimv2/Security/MicrosoftTpm' -ClassName 'Win32_TPM'" -ForegroundColor DarkGray
-    $Win32Tpm = Get-CimInstance -Namespace 'root/cimv2/Security/MicrosoftTpm' -ClassName 'Win32_TPM' -ErrorAction SilentlyContinue
-    if ($Win32Tpm) {
-        $Win32Tpm
-        if ($Win32Tpm.IsEnabled_InitialValue -ne $true) {
+    Write-Host "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Get-CimInstance -Namespace $($Global:TpmCloud.TpmNamespace) -ClassName $($Global:TpmCloud.TpmClass)" -ForegroundColor DarkGray
+
+    $Global:TpmCloud.TpmCimInstance = Get-CimInstance -Namespace $($Global:TpmCloud.TpmNamespace) -ClassName $($Global:TpmCloud.TpmClass) -ErrorAction SilentlyContinue
+    if ($Global:TpmCloud.TpmCimInstance) {
+        $Global:TpmCloud.TpmCimInstance
+
+        $Global:TpmCloud.TpmIsActivated = $Global:TpmCloud.TpmCimInstance.IsActivated_InitialValue
+        $Global:TpmCloud.TpmIsEnabled = $Global:TpmCloud.TpmCimInstance.IsEnabled_InitialValue
+        $Global:TpmCloud.TpmIsOwned = $Global:TpmCloud.TpmCimInstance.IsOwned_InitialValue
+        $Global:TpmCloud.TpmManufacturerId = $Global:TpmCloud.TpmCimInstance.ManufacturerId
+        $Global:TpmCloud.TpmManufacturerIdTxt = $Global:TpmCloud.TpmCimInstance.ManufacturerIdTxt
+        $Global:TpmCloud.TpmManufacturerVersion = $Global:TpmCloud.TpmCimInstance.ManufacturerVersion
+        $Global:TpmCloud.TpmManufacturerVersionFull20 = $Global:TpmCloud.TpmCimInstance.ManufacturerVersionFull20
+        $Global:TpmCloud.TpmManufacturerVersionInfo = $Global:TpmCloud.TpmCimInstance.ManufacturerVersionInfo
+        $Global:TpmCloud.TpmPhysicalPresenceVersionInfo = $Global:TpmCloud.TpmCimInstance.PhysicalPresenceVersionInfo
+        $Global:TpmCloud.TpmSpecVersion = $Global:TpmCloud.TpmCimInstance.SpecVersion
+        
+
+        if ($Global:TpmCloud.TpmCimInstance.IsEnabled_InitialValue -ne $true) {
             Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) TPM is not enabled"
             Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Autopilot will not work"
         }
-        if ($Win32Tpm.IsActivated_InitialValue -ne $true) {
+        if ($Global:TpmCloud.TpmCimInstance.IsActivated_InitialValue -ne $true) {
             Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) TPM is not activated"
         }
-        if ($Win32Tpm.IsOwned_InitialValue -ne $true) {
+        if ($Global:TpmCloud.TpmCimInstance.IsOwned_InitialValue -ne $true) {
             Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) TPM is not owned"
         }
 
         
-        if ($Win32Tpm.SpecVersion -like '*2.0*') {
+        if ($Global:TpmCloud.TpmCimInstance.SpecVersion -like '*2.0*') {
             Write-Host "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) TPM is 2.0 compliant and supports attestation" -ForegroundColor DarkGray
         }
         else {
@@ -115,7 +149,7 @@ PSComputerName              :
 
         Write-Host -ForegroundColor DarkGray '========================================================================='
         Write-Host "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Test TPM IsReady Information" -ForegroundColor Cyan
-        $IsReady = $Win32Tpm | Invoke-CimMethod -MethodName 'IsReadyInformation'
+        $IsReady = $Global:TpmCloud.TpmCimInstance | Invoke-CimMethod -MethodName 'IsReadyInformation'
         $IsReady
         $IsReadyInformation = $IsReady.Information
         if ($IsReadyInformation -eq '0') {
