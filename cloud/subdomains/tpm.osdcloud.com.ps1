@@ -73,27 +73,27 @@ Write-Host -ForegroundColor Green "[+] Transport Layer Security (TLS) 1.2"
 
 #region WinPE
 if ($WindowsPhase -eq 'WinPE') {
-    
+
     Write-Host -ForegroundColor DarkGray "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Get-CimInstance -Namespace 'root/cimv2/Security/MicrosoftTpm' -ClassName 'Win32_TPM'" 
     $Win32Tpm = Get-CimInstance -Namespace 'root/cimv2/Security/MicrosoftTpm' -ClassName 'Win32_TPM' -ErrorAction SilentlyContinue
     if ($Win32Tpm) {
         $Win32Tpm
         if ($Win32Tpm.IsEnabled_InitialValue -ne $true) {
-            Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) IsEnabled_InitialValue should be True for Autopilot to work properly"
+            Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) TPM is not enabled"
         }
 
         if ($Win32Tpm.IsActivated_InitialValue -ne $true) {
-            Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) IsActivated_InitialValue should be True"
+            Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) TPM is currently activated"
         }
     
         if ($Win32Tpm.IsOwned_InitialValue -ne $true) {
-            Write-Host "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) IsOwned_InitialValue should be True"
-        }
-        if (!(Get-Tpm | Select-Object tpmowned).TpmOwned -eq $true) {
-            Write-Warning 'Reason: TpmOwned is not owned!)'
+            Write-Host "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) TPM is currently owned"
         }
 
+        Write-Host -ForegroundColor DarkGray "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Get-CimInstance -Namespace 'root/cimv2/Security/MicrosoftTpm' -ClassName 'Win32_TPM' | Invoke-CimMethod -MethodName 'IsReadyInformation'" 
         $IsReady = $Win32Tpm | Invoke-CimMethod -MethodName 'IsReadyInformation'
+        $IsReady
+
         $IsReadyInformation = $IsReady.Information
         if ($IsReadyInformation -eq '0') {
             Write-Host "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) IsReadyInformation $IsReadyInformation TPM is ready for attestation"
