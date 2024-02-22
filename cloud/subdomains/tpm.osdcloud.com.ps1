@@ -73,6 +73,46 @@ Write-Host -ForegroundColor Green "[+] Transport Layer Security (TLS) 1.2"
 
 #region WinPE
 if ($WindowsPhase -eq 'WinPE') {
+    
+    Write-Host -ForegroundColor DarkGray "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Get-CimInstance -Namespace 'root/cimv2/Security/MicrosoftTpm' -ClassName 'Win32_TPM'" 
+    $Win32Tpm = Get-CimInstance -Namespace 'root/cimv2/Security/MicrosoftTpm' -ClassName 'Win32_TPM' -ErrorAction SilentlyContinue
+    if ($Win32Tpm) {
+        $Win32Tpm
+        if ($Win32Tpm.IsEnabled_InitialValue -ne $true) {
+            Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) IsEnabled_InitialValue should be True for Autopilot to work properly"
+        }
+
+        if ($Win32Tpm.IsActivated_InitialValue -ne $true) {
+            Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) IsActivated_InitialValue should be True"
+        }
+    
+        if ($Win32Tpm.IsOwned_InitialValue -ne $true) {
+            Write-Host "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) IsOwned_InitialValue should be True"
+        }
+        if (!(Get-Tpm | Select-Object tpmowned).TpmOwned -eq $true) {
+            Write-Warning 'Reason: TpmOwned is not owned!)'
+        }
+
+        $IsReady = $Win32Tpm | Invoke-CimMethod -MethodName 'IsReadyInformation'
+        $IsReadyInformation = $IsReady.Information
+        if ($IsReadyInformation -eq '0') {
+            Write-Host "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) IsReadyInformation $IsReadyInformation TPM is ready for attestation"
+        }
+        else {
+            Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) IsReadyInformation $IsReadyInformation TPM is not ready for attestation"
+        }
+        if ($IsReadyInformation -eq '16777216') {
+            Write-Warning 'The TPM has a Health Attestation related vulnerability'
+        } 
+        If (!(Get-ItemProperty -Path $IntegrityServicesRegPath -Name $WBCL -ErrorAction Ignore)) {
+            Write-Warning 'Reason: Registervalue HKLM:\SYSTEM\CurrentControlSet\Control\IntegrityServices\WBCL does not exist! Measured boot logs are missing. Make sure your reboot your device!'
+        }
+    }
+    else {
+        Write-Warning 'FAIL: Unable to get TPM information'
+    }
+
+    Write-Host -ForegroundColor Green '[+] tpm.osdcloud.com Complete'
     $null = Stop-Transcript -ErrorAction Ignore
 }
 #endregion
@@ -93,8 +133,48 @@ if ($WindowsPhase -eq 'AuditMode') {
 if ($WindowsPhase -eq 'OOBE') {
     osdcloud-SetExecutionPolicy
     osdcloud-SetPowerShellProfile
-    osdcloud-InstallPackageManagement
-    osdcloud-TrustPSGallery
+
+    Write-Host -ForegroundColor DarkGray "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Get-CimInstance -Namespace 'root/cimv2/Security/MicrosoftTpm' -ClassName 'Win32_TPM'" 
+    $Win32Tpm = Get-CimInstance -Namespace 'root/cimv2/Security/MicrosoftTpm' -ClassName 'Win32_TPM' -ErrorAction SilentlyContinue
+    if ($Win32Tpm) {
+        $Win32Tpm
+        if ($Win32Tpm.IsEnabled_InitialValue -ne $true) {
+            Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) IsEnabled_InitialValue should be True for Autopilot to work properly"
+        }
+
+        if ($Win32Tpm.IsActivated_InitialValue -ne $true) {
+            Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) IsActivated_InitialValue should be True"
+        }
+    
+        if ($Win32Tpm.IsOwned_InitialValue -ne $true) {
+            Write-Host "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) IsOwned_InitialValue should be True"
+        }
+        if (!(Get-Tpm | Select-Object tpmowned).TpmOwned -eq $true) {
+            Write-Warning 'Reason: TpmOwned is not owned!)'
+        }
+
+        $IsReady = $Win32Tpm | Invoke-CimMethod -MethodName 'IsReadyInformation'
+        $IsReadyInformation = $IsReady.Information
+        if ($IsReadyInformation -eq '0') {
+            Write-Host "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) IsReadyInformation $IsReadyInformation TPM is ready for attestation"
+        }
+        else {
+            Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) IsReadyInformation $IsReadyInformation TPM is not ready for attestation"
+        }
+        if ($IsReadyInformation -eq '16777216') {
+            Write-Warning 'The TPM has a Health Attestation related vulnerability'
+        } 
+        If (!(Get-ItemProperty -Path $IntegrityServicesRegPath -Name $WBCL -ErrorAction Ignore)) {
+            Write-Warning 'Reason: Registervalue HKLM:\SYSTEM\CurrentControlSet\Control\IntegrityServices\WBCL does not exist! Measured boot logs are missing. Make sure your reboot your device!'
+        }
+    }
+    else {
+        Write-Warning 'FAIL: Unable to get TPM information'
+    }
+
+
+
+
 
     Write-Host -ForegroundColor Green "[+] tpm.osdcloud.com Complete"
     $null = Stop-Transcript -ErrorAction Ignore
@@ -105,8 +185,8 @@ if ($WindowsPhase -eq 'OOBE') {
 if ($WindowsPhase -eq 'Windows') {
     osdcloud-SetExecutionPolicy
     osdcloud-SetPowerShellProfile
-    osdcloud-InstallPackageManagement
-    osdcloud-TrustPSGallery
+    #osdcloud-InstallPackageManagement
+    #osdcloud-TrustPSGallery
 
     Write-Host -ForegroundColor Green "[+] tpm.osdcloud.com Complete"
     $null = Stop-Transcript -ErrorAction Ignore
