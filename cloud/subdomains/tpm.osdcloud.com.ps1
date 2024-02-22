@@ -152,6 +152,82 @@ function Test-TpmRegistryWBCL {
         Write-Warning 'Measured boot logs are missing.  Reboot may be required.'
     }
 }
+
+function Test-AutopilotUrl {
+    Write-Host "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Test Autopilot URLs" -ForegroundColor Cyan
+    $Server = 'ztd.dds.microsoft.com'
+    $Port = 443
+    $Message = "Test port $Port on $Server"
+    $NetConnection = (Test-NetConnection -ComputerName $Server -Port $Port).TcpTestSucceeded
+    if ($NetConnection -eq $true) {
+        Write-Host "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) $Message" -ForegroundColor DarkGray
+    }
+    else {
+        Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) $Message"
+    }
+
+    $Server = 'cs.dds.microsoft.com'
+    $Port = 443
+    $Message = "Test port $Port on $Server"
+    $NetConnection = (Test-NetConnection -ComputerName $Server -Port $Port).TcpTestSucceeded
+    if ($NetConnection -eq $true) {
+        Write-Host "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) $Message" -ForegroundColor DarkGray
+    }
+    else {
+        Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) $Message"
+    }
+
+    $Server = 'login.live.com'
+    $Port = 443
+    $Message = "Test port $Port on $Server"
+    $NetConnection = (Test-NetConnection -ComputerName $Server -Port $Port).TcpTestSucceeded
+    if ($NetConnection -eq $true) {
+        Write-Host "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) $Message" -ForegroundColor DarkGray
+    }
+    else {
+        Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) $Message"
+    }
+}
+
+function Test-TpmUrl {
+    Write-Host "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Test TPM URLs" -ForegroundColor Cyan
+    $Server = 'ekop.intel.com'
+    $Port = 443
+    $Message = "Test Intel port $Port on $Server"
+    $NetConnection = (Test-NetConnection -ComputerName $Server -Port $Port).TcpTestSucceeded
+    if ($NetConnection -eq $true) {
+        Write-Host "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) $Message" -ForegroundColor DarkGray
+    }
+    else {
+        Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) $Message"
+    }
+
+    $Server = 'ekcert.spserv.microsoft.com'
+    $Port = 443
+    $Message = "Test Qualcomm port $Port on $Server"
+    $NetConnection = (Test-NetConnection -ComputerName $Server -Port $Port).TcpTestSucceeded
+    if ($NetConnection -eq $true) {
+        Write-Host "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) $Message" -ForegroundColor DarkGray
+    }
+    else {
+        Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) $Message"
+    }
+
+    $Server = 'ftpm.amd.com'
+    $Port = 443
+    $Message = "Test AMD port $Port on $Server"
+    $NetConnection = (Test-NetConnection -ComputerName $Server -Port $Port).TcpTestSucceeded
+    if ($NetConnection -eq $true) {
+        Write-Host "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) $Message" -ForegroundColor DarkGray
+    }
+    else {
+        Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) $Message"
+    }
+}
+
+
+
+
 #endregion
 
 
@@ -160,7 +236,10 @@ function Test-TpmRegistryWBCL {
 
 #region WinPE
 if ($WindowsPhase -eq 'WinPE') {
-
+    Write-Host -ForegroundColor DarkGray '========================================================================='
+    Test-AutopilotUrl
+    Write-Host -ForegroundColor DarkGray '========================================================================='
+    Test-TpmUrl
     Test-TpmCimInstance
     Test-TpmRegistryEkCert
     Test-TpmRegistryWBCL
@@ -198,6 +277,10 @@ if ($WindowsPhase -eq 'OOBE') {
 if ($WindowsPhase -eq 'Windows') {
     osdcloud-SetExecutionPolicy
     #osdcloud-SetPowerShellProfile
+    Write-Host -ForegroundColor DarkGray '========================================================================='
+    Test-AutopilotUrl
+    Write-Host -ForegroundColor DarkGray '========================================================================='
+    Test-TpmUrl
     Write-Host -ForegroundColor DarkGray "========================================================================="
     Test-TpmCimInstance
     Write-Host -ForegroundColor DarkGray '========================================================================='
