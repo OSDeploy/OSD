@@ -238,13 +238,13 @@ Function Invoke-HPIA {
             Write-CMTraceLog -LogFile $CMTraceLog -Message "Exit $($Process.ExitCode) - The analysis returned no recommendation." -Component "Update" -Type 2
             Write-Host "Exit $($Process.ExitCode) - The analysis returned no recommendation." -ForegroundColor Green
             Write-CMTraceLog -LogFile $CMTraceLog -Message "########################################" -Component "Complete"
-            Exit 0
+            #Exit 0
         }
         elseif ($Process.ExitCode -eq 257){
             Write-CMTraceLog -LogFile $CMTraceLog -Message "Exit $($Process.ExitCode) - There were no recommendations selected for the analysis." -Component "Update" -Type 2
             Write-Host "Exit $($Process.ExitCode) - There were no recommendations selected for the analysis." -ForegroundColor Green
             Write-CMTraceLog -LogFile $CMTraceLog -Message "########################################" -Component "Complete"
-            Exit 0
+            #Exit 0
         }
         elseif ($Process.ExitCode -eq 3010){
             Write-CMTraceLog -LogFile $CMTraceLog -Message "Exit $($Process.ExitCode) - HPIA Complete, requires Restart" -Component "Update" -Type 2
