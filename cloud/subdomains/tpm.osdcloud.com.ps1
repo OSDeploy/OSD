@@ -101,7 +101,7 @@ $Global:TpmCloud = [ordered]@{
     TpmManufacturerVersionInfo      = $null
     TpmPhysicalPresenceVersionInfo  = $null
     TpmSpecVersion                  = $null
-    TpmIsV2                         = $null
+    TpmIsSpec                       = $null
     TpmSuccess                      = $true
     AutopilotSuccess                = $true
 }
@@ -142,13 +142,13 @@ function Test-TpmCimInstance {
         }
         if ($Global:TpmCloud.TpmCimInstance.SpecVersion -like '*2.0*') {
             Write-Host "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) TPM is 2.0 compliant and supports attestation." -ForegroundColor DarkGray
-            $Global:TpmCloud.TpmCimInstance.TpmIsV2 = [bool]$true
+            $Global:TpmCloud.TpmIsSpec = [bool]$true
         }
         else {
             Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) TPM is not 2.0 compliant."
             Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) TPM does not support attestation."
             Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Autopilot will fail."
-            $Global:TpmCloud.TpmCimInstance.TpmIsV2 = [bool]$false
+            $Global:TpmCloud.TpmIsSpec = [bool]$false
             $Global:TpmCloud.TpmCimInstance.TpmSuccess = [bool]$false
             $Global:TpmCloud.TpmCimInstance.AutopilotSuccess = [bool]$false
         }
@@ -174,7 +174,10 @@ function Test-TpmCimInstance {
         }
     }
     else {
-        Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Unable to get TPM information"
+        Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Unable to get TPM information."
+        Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Autopilot will fail."
+        $Global:TpmCloud.TpmCimInstance.TpmSuccess = [bool]$false
+        $Global:TpmCloud.TpmCimInstance.AutopilotSuccess = [bool]$false
     }
 }
 function Test-TpmRegistryEkCert {
