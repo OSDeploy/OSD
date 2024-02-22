@@ -123,6 +123,7 @@
             SetWiFi = $null
             Shutdown = [bool]$false
             ShutdownSetupComplete = [bool]$false
+            Skipdriverpack = [bool]$false
             SkipAllDiskSteps = [bool]$false
             SkipAutopilot = [bool]$false
             SkipAutopilotOOBE = [bool]$false
@@ -1208,9 +1209,13 @@
         $null = New-Item @ParamNewItem
     }
     #endregion
-
+    
     #region Get-OSDCloudDriverPack
     Write-SectionHeader 'OSDCloud DriverPack'
+    if($Global:OSDCloud.Skipdriverpack -eq $true){
+    Write-DarkGrayHost '$OSDCloud.Skipdriverpack = $true'
+    }
+    else{
 
     #Check the Global Variables for a Driver Pack name
     if ($Global:OSDCloud.DriverPackName) {
@@ -1368,6 +1373,7 @@
                 }
             }
         }
+    }
     }
     #endregion
 
