@@ -78,7 +78,10 @@ if ($WindowsPhase -eq 'WinPE') {
     $Win32Tpm = Get-CimInstance -Namespace 'root/cimv2/Security/MicrosoftTpm' -ClassName 'Win32_TPM' -ErrorAction SilentlyContinue
     if ($Win32Tpm) {
         $Win32Tpm
-        if ($Win32Tpm.IsEnabled_InitialValue -ne $true) {
+        if ($Win32Tpm.IsEnabled_InitialValue -eq $true) {
+            Write-Host "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) TPM is enabled" -ForegroundColor DarkGray
+        }
+        else {
             Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) TPM is not enabled"
         }
 
@@ -108,7 +111,7 @@ if ($WindowsPhase -eq 'WinPE') {
 
 
         Write-Host "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Test HKLM:\SYSTEM\CurrentControlSet\Control\IntegrityServices\WBCL" -ForegroundColor DarkGray
-        if (!(Get-ItemProperty -Path $IntegrityServicesRegPath -Name $WBCL -ErrorAction Ignore)) {
+        if (!(Get-ItemProperty -Path $IntegrityServicesRegPath -Name $WBCL -ErrorAction SilentlyContinue)) {
             Write-Warning "Registry value does not exist.  Measured boot logs are missing.  Reboot may be required."
         }
     }
