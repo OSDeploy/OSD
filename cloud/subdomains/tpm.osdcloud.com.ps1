@@ -97,17 +97,17 @@ PSComputerName              :
         }
 
         if ($Win32Tpm.IsActivated_InitialValue -ne $true) {
-            Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) IsActivated_InitialValue should be True"
+            Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) TPM is not activated"
         }
     
         if ($Win32Tpm.IsOwned_InitialValue -ne $true) {
-            Write-Host "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) IsOwned_InitialValue should be True"
-        }
-        if (!(Get-Tpm | Select-Object tpmowned).TpmOwned -eq $true) {
-            Write-Warning 'Reason: TpmOwned is not owned!)'
+            Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) TPM is not owned"
         }
 
+        Write-Host -ForegroundColor DarkGray '========================================================================='
+        Write-Host "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Test TPM IsReady Information" -ForegroundColor Cyan
         $IsReady = $Win32Tpm | Invoke-CimMethod -MethodName 'IsReadyInformation'
+        $IsReady
         $IsReadyInformation = $IsReady.Information
         if ($IsReadyInformation -eq '0') {
             Write-Host "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) IsReadyInformation $IsReadyInformation TPM is ready for attestation"
@@ -120,12 +120,12 @@ PSComputerName              :
         }
     }
     else {
-        Write-Warning 'FAIL: Unable to get TPM information'
+        Write-Warning 'Unable to get TPM information'
     }
 }
 function Test-TpmRegistryEkCert {
     $RegistryPath = 'HKLM:\SYSTEM\CurrentControlSet\Services\Tpm\WMI\Endorsement\EKCertStore\Certificates\*'
-    Write-Host "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Registry Test: Windows EKCert" -ForegroundColor Cyan
+    Write-Host "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Test EKCert in the Registry" -ForegroundColor Cyan
     Write-Host "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) $RegistryPath" -ForegroundColor DarkGray
 
     if (Test-Path -Path $RegistryPath) {
@@ -138,7 +138,7 @@ function Test-TpmRegistryEkCert {
 }
 function Test-TpmRegistryWBCL {
     $RegistryPath = 'HKLM:\SYSTEM\CurrentControlSet\Control\IntegrityServices\*'
-    Write-Host "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Registry Test: Windows Boot Configuration Log" -ForegroundColor Cyan
+    Write-Host "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Test Windows Boot Configuration Log in the Registry" -ForegroundColor Cyan
     Write-Host "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) $RegistryPath -Value WBCL" -ForegroundColor DarkGray
 
     if (Test-Path -Path $RegistryPath) {
