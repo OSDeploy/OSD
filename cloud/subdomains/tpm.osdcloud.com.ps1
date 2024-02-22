@@ -94,15 +94,23 @@ PSComputerName              :
     if ($Win32Tpm) {
         $Win32Tpm
         if ($Win32Tpm.IsEnabled_InitialValue -ne $true) {
-            Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) IsEnabled_InitialValue should be True for Autopilot to work properly"
+            Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) TPM is not enabled"
+            Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Autopilot will not work"
         }
-
         if ($Win32Tpm.IsActivated_InitialValue -ne $true) {
             Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) TPM is not activated"
         }
-    
         if ($Win32Tpm.IsOwned_InitialValue -ne $true) {
             Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) TPM is not owned"
+        }
+
+        
+        if ($TPMversion.Win32Tpm -like '*2.0*') {
+            Write-Host "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) TPM is 2.0 compliant and supports attestation" -ForegroundColor DarkGray
+        }
+        else {
+            Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) TPM is not 2.0 compliant and does not support attestation"
+            Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Autopilot will not work"
         }
 
         Write-Host -ForegroundColor DarkGray '========================================================================='
@@ -118,6 +126,11 @@ PSComputerName              :
         }
         if ($IsReadyInformation -eq '16777216') {
             Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) TPM has a Health Attestation related vulnerability"
+            Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Autopilot will not work"
+        }
+        if ($IsReadyInformation -eq '262144') {
+            Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) EK Certificate is missing or invalid"
+            Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Autopilot will not work"
         }
     }
     else {
@@ -279,7 +292,6 @@ function Test-WindowsTimeService {
         Write-Host "cmd /c 'w32tm /config /update /manualpeerlist:0.pool.ntp.org;1.pool.ntp.org;2.pool.ntp.org;3.pool.ntp.org;0x8 /syncfromflags:MANUAL /reliable:yes'" -ForegroundColor DarkGray
     }
 }
-
 function Test-AutopilotWindowsLicense {
     Write-Host -ForegroundColor DarkGray '========================================================================='
     Write-Host "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Test Windows License for Autopilot" -ForegroundColor Cyan
@@ -362,14 +374,14 @@ if ($WindowsPhase -eq 'OOBE') {
 if ($WindowsPhase -eq 'Windows') {
     osdcloud-SetExecutionPolicy
     #osdcloud-SetPowerShellProfile
+    Test-WindowsTimeService
     Test-AutopilotUrl
+    Test-AutopilotWindowsLicense
     Test-AzuretUrl
     Test-TpmUrl
-    Test-TpmCimInstance
+    Test-TpmCimInstance 
     Test-TpmRegistryEkCert
     Test-TpmRegistryWBCL
-    Test-WindowsTimeService
-    Test-AutopilotWindowsLicense
     Write-Host -ForegroundColor Green "[+] tpm.osdcloud.com Complete"
     $null = Stop-Transcript -ErrorAction Ignore
 }
