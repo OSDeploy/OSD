@@ -109,8 +109,9 @@ if ($WindowsPhase -eq 'WinPE') {
             Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) TPM has a Health Attestation related vulnerability"
         }
 
-
-        Write-Host "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Test HKLM:\SYSTEM\CurrentControlSet\Control\IntegrityServices\WBCL" -ForegroundColor DarkGray
+        $IntegrityServicesRegPath = 'HKLM:\SYSTEM\CurrentControlSet\Control\IntegrityServices'
+        $WBCL = 'WBCL'
+        Write-Host "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Test $IntegrityServicesRegPath for $WBCL" -ForegroundColor DarkGray
         if (!(Get-ItemProperty -Path $IntegrityServicesRegPath -Name $WBCL -ErrorAction SilentlyContinue)) {
             Write-Warning "Registry value does not exist.  Measured boot logs are missing.  Reboot may be required."
         }
@@ -171,6 +172,9 @@ if ($WindowsPhase -eq 'OOBE') {
         if ($IsReadyInformation -eq '16777216') {
             Write-Warning 'The TPM has a Health Attestation related vulnerability'
         } 
+
+        $IntegrityServicesRegPath = 'HKLM:\SYSTEM\CurrentControlSet\Control\IntegrityServices'
+        $WBCL = 'WBCL'
         If (!(Get-ItemProperty -Path $IntegrityServicesRegPath -Name $WBCL -ErrorAction Ignore)) {
             Write-Warning 'Reason: Registervalue HKLM:\SYSTEM\CurrentControlSet\Control\IntegrityServices\WBCL does not exist! Measured boot logs are missing. Make sure your reboot your device!'
         }
