@@ -198,10 +198,13 @@ if ($WindowsPhase -eq 'OOBE') {
 if ($WindowsPhase -eq 'Windows') {
     osdcloud-SetExecutionPolicy
     #osdcloud-SetPowerShellProfile
-
+    Write-Host -ForegroundColor DarkGray "========================================================================="
     Test-TpmCimInstance
+    Write-Host -ForegroundColor DarkGray '========================================================================='
     Test-TpmRegistryEkCert
+    Write-Host -ForegroundColor DarkGray '========================================================================='
     Test-TpmRegistryWBCL
+    Write-Host -ForegroundColor DarkGray '========================================================================='
     Write-Host -ForegroundColor Green "[+] tpm.osdcloud.com Complete"
     $null = Stop-Transcript -ErrorAction Ignore
 }
