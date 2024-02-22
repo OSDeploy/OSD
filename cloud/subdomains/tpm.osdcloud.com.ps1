@@ -74,6 +74,7 @@ Write-Host -ForegroundColor Green "[+] Transport Layer Security (TLS) 1.2"
 
 #region TPM and Autopilot
 function Test-TpmCimInstance {
+    Write-Host -ForegroundColor DarkGray '========================================================================='
     <#
 IsActivated_InitialValue    : True
 IsEnabled_InitialValue      : True
@@ -124,7 +125,8 @@ PSComputerName              :
     }
 }
 function Test-TpmRegistryEkCert {
-    $RegistryPath = 'HKLM:\SYSTEM\CurrentControlSet\Services\Tpm\WMI\Endorsement\EKCertStore\Certificates\*'
+    Write-Host -ForegroundColor DarkGray '========================================================================='
+    $RegistryPath = 'HKLM:\SYSTEM\CurrentControlSet\Services\Tpm\WMI\Endorsement\EKCertStore\Certificates'
     Write-Host "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Test EKCert in the Registry" -ForegroundColor Cyan
     Write-Host "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) $RegistryPath" -ForegroundColor DarkGray
 
@@ -137,7 +139,8 @@ function Test-TpmRegistryEkCert {
     }
 }
 function Test-TpmRegistryWBCL {
-    $RegistryPath = 'HKLM:\SYSTEM\CurrentControlSet\Control\IntegrityServices\*'
+    Write-Host -ForegroundColor DarkGray '========================================================================='
+    $RegistryPath = 'HKLM:\SYSTEM\CurrentControlSet\Control\IntegrityServices'
     Write-Host "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Test Windows Boot Configuration Log in the Registry" -ForegroundColor Cyan
     Write-Host "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) $RegistryPath" -ForegroundColor DarkGray
 
@@ -145,20 +148,19 @@ function Test-TpmRegistryWBCL {
         $WBCL = Get-ItemProperty -Path $RegistryPath
         $WBCL | Format-List
 
-
-        <#$WBCL = (Get-ItemProperty -Path $RegistryPath).WBCL
-        if ($null -ne $WBCL) {
+        $WBCL = (Get-ItemProperty -Path $RegistryPath).WBCL
+        if ($null -eq $WBCL) {
             Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) WBCL was not found in the Registry"
             Write-Warning 'Measured boot logs are missing.  Reboot may be required.'
-        }#>
+        }
     }
     else {
-        Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) WBCL key was not found in the Registry"
+        Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) IntegrityServices key was not found in the Registry"
         Write-Warning 'Measured boot logs are missing.  A Reboot may be required.'
     }
 }
-
 function Test-AutopilotUrl {
+    Write-Host -ForegroundColor DarkGray '========================================================================='
     Write-Host "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Test Autopilot URLs" -ForegroundColor Cyan
     $Server = 'ztd.dds.microsoft.com'
     $Port = 443
@@ -193,8 +195,22 @@ function Test-AutopilotUrl {
         Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) $Message"
     }
 }
-
+function Test-AzuretUrl {
+    Write-Host -ForegroundColor DarkGray '========================================================================='
+    Write-Host "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Test Azure URLs" -ForegroundColor Cyan
+    $Server = 'azure.net'
+    $Port = 443
+    $Message = "Test port $Port on $Server"
+    $NetConnection = (Test-NetConnection -ComputerName $Server -Port $Port).TcpTestSucceeded
+    if ($NetConnection -eq $true) {
+        Write-Host "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) $Message" -ForegroundColor DarkGray
+    }
+    else {
+        Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) $Message"
+    }
+}
 function Test-TpmUrl {
+    Write-Host -ForegroundColor DarkGray '========================================================================='
     Write-Host "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Test TPM URLs" -ForegroundColor Cyan
     $Server = 'ekop.intel.com'
     $Port = 443
@@ -229,21 +245,12 @@ function Test-TpmUrl {
         Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) $Message"
     }
 }
-
-
-
-
 #endregion
-
-
-
-
 
 #region WinPE
 if ($WindowsPhase -eq 'WinPE') {
-    Write-Host -ForegroundColor DarkGray '========================================================================='
     Test-AutopilotUrl
-    Write-Host -ForegroundColor DarkGray '========================================================================='
+    Test-AzuretUrl
     Test-TpmUrl
     Test-TpmCimInstance
     Test-TpmRegistryEkCert
@@ -269,7 +276,9 @@ if ($WindowsPhase -eq 'AuditMode') {
 if ($WindowsPhase -eq 'OOBE') {
     osdcloud-SetExecutionPolicy
     #osdcloud-SetPowerShellProfile
-
+    Test-AutopilotUrl
+    Test-AzuretUrl
+    Test-TpmUrl
     Test-TpmCimInstance
     Test-TpmRegistryEkCert
     Test-TpmRegistryWBCL
@@ -282,17 +291,12 @@ if ($WindowsPhase -eq 'OOBE') {
 if ($WindowsPhase -eq 'Windows') {
     osdcloud-SetExecutionPolicy
     #osdcloud-SetPowerShellProfile
-    Write-Host -ForegroundColor DarkGray '========================================================================='
     Test-AutopilotUrl
-    Write-Host -ForegroundColor DarkGray '========================================================================='
+    Test-AzuretUrl
     Test-TpmUrl
-    Write-Host -ForegroundColor DarkGray "========================================================================="
     Test-TpmCimInstance
-    Write-Host -ForegroundColor DarkGray '========================================================================='
     Test-TpmRegistryEkCert
-    Write-Host -ForegroundColor DarkGray '========================================================================='
     Test-TpmRegistryWBCL
-    Write-Host -ForegroundColor DarkGray '========================================================================='
     Write-Host -ForegroundColor Green "[+] tpm.osdcloud.com Complete"
     $null = Stop-Transcript -ErrorAction Ignore
 }
