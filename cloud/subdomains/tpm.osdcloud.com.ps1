@@ -76,6 +76,19 @@ if ($WindowsPhase -eq 'WinPE') {
 
     Write-Host "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Get-CimInstance -Namespace 'root/cimv2/Security/MicrosoftTpm' -ClassName 'Win32_TPM'" -ForegroundColor DarkGray
     $Win32Tpm = Get-CimInstance -Namespace 'root/cimv2/Security/MicrosoftTpm' -ClassName 'Win32_TPM' -ErrorAction SilentlyContinue
+<#
+    IsActivated_InitialValue    : True
+    IsEnabled_InitialValue      : True
+    IsOwned_InitialValue        : True
+    ManufacturerId              : 1314145024
+    ManufacturerIdTxt           : NTC
+    ManufacturerVersion         : 7.2.3.1
+    ManufacturerVersionFull20   : 7.2.3.1
+    ManufacturerVersionInfo     : NPCT75x 
+    PhysicalPresenceVersionInfo : 1.3
+    SpecVersion                 : 2.0, 0, 1.59
+    PSComputerName              : 
+#>
     if ($Win32Tpm) {
         $Win32Tpm
         if ($Win32Tpm.IsEnabled_InitialValue -eq $true) {
@@ -109,12 +122,23 @@ if ($WindowsPhase -eq 'WinPE') {
             Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) TPM has a Health Attestation related vulnerability"
         }
 
-        $IntegrityServicesRegPath = 'HKLM:\SYSTEM\CurrentControlSet\Control\IntegrityServices'
-        $WBCL = 'WBCL'
-        Write-Host "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Test $IntegrityServicesRegPath for $WBCL" -ForegroundColor DarkGray
-        if (!(Get-ItemProperty -Path $IntegrityServicesRegPath -Name $WBCL -ErrorAction SilentlyContinue)) {
-            Write-Warning "Registry value does not exist.  Measured boot logs are missing.  Reboot may be required."
+        
+        $RegistryPath = 'HKLM:\SYSTEM\CurrentControlSet\Control\IntegrityServices\*'
+        Write-Host "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Registry Test: Windows Boot Configuration Log" -ForegroundColor DarkGray
+        Write-Host "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) $RegistryPath -Value WBCL" -ForegroundColor DarkGray
+
+        if (Test-Path -Path $RegistryPath) {
+            $WBCL = (Get-ItemProperty -Path $RegistryPath).WBCL
+            if ($null -ne $WBCL) {
+                Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) WBCL was not found in the Registry"
+                Write-Warning 'Measured boot logs are missing.  Reboot may be required.'
+            }
         }
+        else {
+            Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) WBCL was not found in the Registry"
+            Write-Warning 'Measured boot logs are missing.  Reboot may be required.'
+        }
+
     }
     else {
         Write-Warning 'FAIL: Unable to get TPM information'
