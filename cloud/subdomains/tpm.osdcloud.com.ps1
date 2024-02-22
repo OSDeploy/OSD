@@ -260,6 +260,18 @@ function Test-TpmUrl {
         Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) $Message"
     }
 }
+function Test-WindowsTimeService {
+    Write-Host -ForegroundColor DarkGray '========================================================================='
+    Write-Host "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Test Windows Time Service" -ForegroundColor Cyan
+    Write-Host "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Get-Service -Name W32time" -ForegroundColor DarkGray
+    $W32Time = Get-Service -Name W32time
+    if ($W32Time.Status -eq 'Running') {
+        Write-Host "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Windows Time Service is $($W32Time.Status)" -ForegroundColor DarkGray
+    }
+    else {
+        Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Windows Time Service is $($W32Time.Status)"
+    }
+}
 #endregion
 
 #region WinPE
@@ -270,6 +282,7 @@ if ($WindowsPhase -eq 'WinPE') {
     Test-TpmCimInstance
     Test-TpmRegistryEkCert
     Test-TpmRegistryWBCL
+    Test-WindowsTimeService
     Write-Host -ForegroundColor Green '[+] tpm.osdcloud.com Complete'
     $null = Stop-Transcript -ErrorAction Ignore
 }
@@ -312,6 +325,7 @@ if ($WindowsPhase -eq 'Windows') {
     Test-TpmCimInstance
     Test-TpmRegistryEkCert
     Test-TpmRegistryWBCL
+    Test-WindowsTimeService
     Write-Host -ForegroundColor Green "[+] tpm.osdcloud.com Complete"
     $null = Stop-Transcript -ErrorAction Ignore
 }
