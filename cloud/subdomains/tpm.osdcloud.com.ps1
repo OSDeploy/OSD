@@ -101,7 +101,9 @@ $Global:TpmCloud = [ordered]@{
     TpmManufacturerVersionInfo      = $null
     TpmPhysicalPresenceVersionInfo  = $null
     TpmSpecVersion                  = $null
-
+    TpmIsV2                         = $null
+    TpmSuccess                      = $true
+    AutopilotSuccess                = $true
 }
 #endregion
 
@@ -125,26 +127,30 @@ function Test-TpmCimInstance {
         $Global:TpmCloud.TpmManufacturerVersionInfo = $Global:TpmCloud.TpmCimInstance.ManufacturerVersionInfo
         $Global:TpmCloud.TpmPhysicalPresenceVersionInfo = $Global:TpmCloud.TpmCimInstance.PhysicalPresenceVersionInfo
         $Global:TpmCloud.TpmSpecVersion = $Global:TpmCloud.TpmCimInstance.SpecVersion
-        
 
         if ($Global:TpmCloud.TpmCimInstance.IsEnabled_InitialValue -ne $true) {
-            Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) TPM is not enabled"
-            Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Autopilot will not work"
+            Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) TPM is not enabled."
+            Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Autopilot will fail."
+            $Global:TpmCloud.TpmCimInstance.TpmSuccess = [bool]$false
+            $Global:TpmCloud.TpmCimInstance.AutopilotSuccess = [bool]$false
         }
         if ($Global:TpmCloud.TpmCimInstance.IsActivated_InitialValue -ne $true) {
-            Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) TPM is not activated"
+            Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) TPM is not yet activated."
         }
         if ($Global:TpmCloud.TpmCimInstance.IsOwned_InitialValue -ne $true) {
-            Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) TPM is not owned"
+            Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) TPM is not yet owned."
         }
-
-        
         if ($Global:TpmCloud.TpmCimInstance.SpecVersion -like '*2.0*') {
-            Write-Host "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) TPM is 2.0 compliant and supports attestation" -ForegroundColor DarkGray
+            Write-Host "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) TPM is 2.0 compliant and supports attestation." -ForegroundColor DarkGray
+            $Global:TpmCloud.TpmCimInstance.TpmIsV2 = [bool]$true
         }
         else {
-            Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) TPM is not 2.0 compliant and does not support attestation"
-            Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Autopilot will not work"
+            Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) TPM is not 2.0 compliant."
+            Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) TPM does not support attestation."
+            Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Autopilot will fail."
+            $Global:TpmCloud.TpmCimInstance.TpmIsV2 = [bool]$false
+            $Global:TpmCloud.TpmCimInstance.TpmSuccess = [bool]$false
+            $Global:TpmCloud.TpmCimInstance.AutopilotSuccess = [bool]$false
         }
 
         Write-Host -ForegroundColor DarkGray '========================================================================='
