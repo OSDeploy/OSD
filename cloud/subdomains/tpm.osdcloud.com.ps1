@@ -349,9 +349,11 @@ function Test-AutopilotWindowsLicense {
 }
 function Get-MDMDiagnosticsTool {
     Write-Host -ForegroundColor DarkGray '========================================================================='
-    Write-Host "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) MDMDiagnosticsTool export to C:\" -ForegroundColor Cyan
+    Write-Host "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) MDMDiagnosticsTool CollectLog" -ForegroundColor Cyan
     $MDMDiagnosticsFile = "$((Get-Date).ToString('yyyy-MM-dd-HHmmss'))-MDMDiagnosticsTool.cab"
+    Write-Host "MDMDiagnosticsTool.exe -area 'DeviceEnrollment;DeviceProvisioning;AutoPilot;TPM' -cab $(Join-Path "$env:SystemRoot\Temp" $MDMDiagnosticsFile)" -ForegroundColor DarkGray
     MDMDiagnosticsTool.exe -area 'DeviceEnrollment;DeviceProvisioning;AutoPilot;TPM' -cab (Join-Path "$env:SystemRoot\Temp" $MDMDiagnosticsFile)
+    explorer.exe "$env:SystemRoot\Temp\$MDMDiagnosticsFile"
 }
 
 #region TpmCloud Tests
