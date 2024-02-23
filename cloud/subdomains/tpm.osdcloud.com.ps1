@@ -252,7 +252,7 @@ function Test-RegistryEKCertificates {
     Write-Host -ForegroundColor DarkGray '========================================================================='
     $RegistryPath = $Global:TpmCloudConfig.EKCertificatesRegPath
     Write-Host "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Test EKCert in the Registry" -ForegroundColor Cyan
-    Write-Host "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) $RegistryPath" -ForegroundColor DarkGray
+    Write-Host "$RegistryPath" -ForegroundColor DarkGray
 
     if (Test-Path -Path $RegistryPath) {
         $EKCert = Get-ItemProperty -Path $RegistryPath
@@ -266,7 +266,7 @@ function Test-RegistryWBCL {
     Write-Host -ForegroundColor DarkGray '========================================================================='
     $RegistryPath = 'HKLM:\SYSTEM\CurrentControlSet\Control\IntegrityServices'
     Write-Host "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Test Windows Boot Configuration Log in the Registry" -ForegroundColor Cyan
-    Write-Host "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) $RegistryPath" -ForegroundColor DarkGray
+    Write-Host "$RegistryPath" -ForegroundColor DarkGray
 
     if (Test-Path -Path $RegistryPath) {
         $WBCL = Get-ItemProperty -Path $RegistryPath
@@ -274,7 +274,7 @@ function Test-RegistryWBCL {
 
         $WBCL = (Get-ItemProperty -Path $RegistryPath).WBCL
         if ($null -ne $WBCL) {
-            Write-Host "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) WBCL was found in the Registry" -ForegroundColor DarkGray
+            Write-Host "WBCL was found in the Registry" -ForegroundColor DarkGray
         }
         else {
             Write-Warning "WBCL was not found in the Registry"
@@ -290,7 +290,7 @@ function Test-RegistrySetupDisplayedEula {
     Write-Host -ForegroundColor DarkGray '========================================================================='
     $RegistryPath = 'HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Setup\OOBE'
     Write-Host "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Test Windows OOBE SetupDisplayedEula in the Registry" -ForegroundColor Cyan
-    Write-Host "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) $RegistryPath" -ForegroundColor DarkGray
+    Write-Host "$RegistryPath" -ForegroundColor DarkGray
 
     if (Test-Path -Path $RegistryPath) {
         $WBCL = Get-ItemProperty -Path $RegistryPath
@@ -319,20 +319,20 @@ function Test-AutopilotWindowsLicense {
     $WindowsProductKey = (Get-WmiObject -query 'select * from SoftwareLicensingService').OA3xOriginalProductKey
     $WindowsProductType = (Get-WmiObject -query 'select * from SoftwareLicensingService').OA3xOriginalProductKeyDescription
     if ($WindowsProductKey) {
-        Write-Host "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) PASS: BIOS OA3 Windows ProductKey is $WindowsProductKey" -ForegroundColor DarkGray
+        Write-Host "PASS: BIOS OA3 Windows ProductKey is $WindowsProductKey" -ForegroundColor DarkGray
     }
     else {
         Write-Warning "BIOS OA3 Windows ProductKey is not present"
     }
     if ($WindowsProductType) {
-        Write-Host "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) PASS: BIOS OA3 Windows ProductKeyDescription is $WindowsProductType" -ForegroundColor DarkGray
+        Write-Host "PASS: BIOS OA3 Windows ProductKeyDescription is $WindowsProductType" -ForegroundColor DarkGray
     }
     else {
         Write-Warning "FAIL: BIOS OA3 Windows ProductKeyDescription is $WindowsProductType"
     }
 
     if ($WindowsProductType -like '*Professional*' -or $WindowsProductType -eq 'Windows 10 Pro' -or $WindowsProductType -like '*Enterprise*') {
-        Write-Host "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) PASS: BIOS Windows license is valid for Microsoft 365" -ForegroundColor DarkGray
+        Write-Host "PASS: BIOS Windows license is valid for Microsoft 365" -ForegroundColor DarkGray
     }
     else {
         Write-Warning "FAIL: BIOS Windows license is not valid for Microsoft 365"
@@ -340,7 +340,7 @@ function Test-AutopilotWindowsLicense {
         $WindowsProductType = $WindowsProductType.WindowsProductName
     
         if ($WindowsProductType -like '*Professional*' -or $WindowsProductType -eq 'Windows 10 Pro' -or $WindowsProductType -like '*Enterprise*') {
-            Write-Host "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) PASS: Software Windows license is valid for Microsoft 365" -ForegroundColor DarkGray
+            Write-Host "PASS: Software Windows license is valid for Microsoft 365" -ForegroundColor DarkGray
         }
         else {
             Write-Warning "FAIL: Software Windows license is not valid for Microsoft 365"
@@ -349,7 +349,7 @@ function Test-AutopilotWindowsLicense {
 }
 
 
-
+reg add HKCU\Software\Policies\Microsoft\Office\Common\ClientTelemetry /v DisableTelemetry /t REG_DWORD /d 1 /f
 
 #region TpmCloud Tests
 function Test-MicrosoftConnection {
@@ -375,7 +375,7 @@ function Test-AutopilotUrl {
     $Message = "Test port $Port on $Server"
     $NetConnection = (Test-NetConnection -ComputerName $Server -Port $Port).TcpTestSucceeded
     if ($NetConnection -eq $true) {
-        Write-Host "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) $Message" -ForegroundColor DarkGray
+        Write-Host "$Message" -ForegroundColor DarkGray
     }
     else {
         Write-Warning "$Message"
@@ -386,7 +386,7 @@ function Test-AutopilotUrl {
     $Message = "Test port $Port on $Server"
     $NetConnection = (Test-NetConnection -ComputerName $Server -Port $Port).TcpTestSucceeded
     if ($NetConnection -eq $true) {
-        Write-Host "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) $Message" -ForegroundColor DarkGray
+        Write-Host "$Message" -ForegroundColor DarkGray
     }
     else {
         Write-Warning "$Message"
@@ -397,7 +397,7 @@ function Test-AutopilotUrl {
     $Message = "Test port $Port on $Server"
     $NetConnection = (Test-NetConnection -ComputerName $Server -Port $Port).TcpTestSucceeded
     if ($NetConnection -eq $true) {
-        Write-Host "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) $Message" -ForegroundColor DarkGray
+        Write-Host "$Message" -ForegroundColor DarkGray
     }
     else {
         Write-Warning "$Message"
@@ -411,7 +411,7 @@ function Test-AzuretUrl {
     $Message = "Test port $Port on $Server"
     $NetConnection = (Test-NetConnection -ComputerName $Server -Port $Port).TcpTestSucceeded
     if ($NetConnection -eq $true) {
-        Write-Host "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) $Message" -ForegroundColor DarkGray
+        Write-Host "$Message" -ForegroundColor DarkGray
     }
     else {
         Write-Warning "$Message"
@@ -426,7 +426,7 @@ function Test-AzuretUrl {
         $response = $null
     }
     if ($response.StatusCode -eq 200) {
-        Write-Host "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) $Message" -ForegroundColor DarkGray
+        Write-Host "$Message" -ForegroundColor DarkGray
     }
     else {
         Write-Warning "$Message"
@@ -440,7 +440,7 @@ function Test-TpmUrl {
     $Message = "Test Intel port $Port on $Server"
     $NetConnection = (Test-NetConnection -ComputerName $Server -Port $Port).TcpTestSucceeded
     if ($NetConnection -eq $true) {
-        Write-Host "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) $Message" -ForegroundColor DarkGray
+        Write-Host "$Message" -ForegroundColor DarkGray
     }
     else {
         Write-Warning "$Message"
@@ -451,7 +451,7 @@ function Test-TpmUrl {
     $Message = "Test Qualcomm port $Port on $Server"
     $NetConnection = (Test-NetConnection -ComputerName $Server -Port $Port).TcpTestSucceeded
     if ($NetConnection -eq $true) {
-        Write-Host "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) $Message" -ForegroundColor DarkGray
+        Write-Host "$Message" -ForegroundColor DarkGray
     }
     else {
         Write-Warning "$Message"
@@ -462,7 +462,7 @@ function Test-TpmUrl {
     $Message = "Test AMD port $Port on $Server"
     $NetConnection = (Test-NetConnection -ComputerName $Server -Port $Port).TcpTestSucceeded
     if ($NetConnection -eq $true) {
-        Write-Host "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) $Message" -ForegroundColor DarkGray
+        Write-Host "$Message" -ForegroundColor DarkGray
     }
     else {
         Write-Warning "$Message"
@@ -471,10 +471,10 @@ function Test-TpmUrl {
 function Test-WindowsTimeService {
     Write-Host -ForegroundColor DarkGray '========================================================================='
     Write-Host "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Test Windows Time Service" -ForegroundColor Cyan
-    Write-Host "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Get-Service -Name W32time" -ForegroundColor DarkGray
+    Write-Host "Get-Service -Name W32time" -ForegroundColor DarkGray
     $W32Time = Get-Service -Name W32time
     if ($W32Time.Status -eq 'Running') {
-        Write-Host "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Windows Time Service is $($W32Time.Status)" -ForegroundColor DarkGray
+        Write-Host "Windows Time Service is $($W32Time.Status)" -ForegroundColor DarkGray
     }
     else {
         Write-Warning "Windows Time Service is $($W32Time.Status)"
@@ -486,6 +486,12 @@ function Test-WindowsTimeService {
         Write-Host "cmd /c 'w32tm /resync'" -ForegroundColor DarkGray
         Write-Host "cmd /c 'w32tm /config /update /manualpeerlist:0.pool.ntp.org;1.pool.ntp.org;2.pool.ntp.org;3.pool.ntp.org;0x8 /syncfromflags:MANUAL /reliable:yes'" -ForegroundColor DarkGray
     }
+}
+function Get-MDMDiagnosticsTool {
+    Write-Host -ForegroundColor DarkGray '========================================================================='
+    Write-Host "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) MDMDiagnosticsTool export to C:\" -ForegroundColor Cyan
+    $MDMDiagnosticsFile = "$((Get-Date).ToString('yyyy-MM-dd-HHmmss'))-MDMDiagnosticsTool.cab"
+    MDMDiagnosticsTool.exe -area 'DeviceEnrollment;DeviceProvisioning;AutoPilot;TPM' -cab (Join-Path "$env:SystemRoot" $MDMDiagnosticsFile)
 }
 
 #endregion
@@ -534,6 +540,7 @@ if ($WindowsPhase -eq 'OOBE') {
         Test-RegistryWBCL
         Test-RegistrySetupDisplayedEula
         Test-AutopilotWindowsLicense
+        Get-MDMDiagnosticsTool
     }
     Write-Host -ForegroundColor DarkGray '========================================================================='
     Write-Host -ForegroundColor Green '[+] tpm.osdcloud.com Complete'
@@ -556,6 +563,7 @@ if ($WindowsPhase -eq 'Windows') {
         Test-RegistryWBCL
         Test-RegistrySetupDisplayedEula
         Test-AutopilotWindowsLicense
+        Get-MDMDiagnosticsTool
     }
     Write-Host -ForegroundColor DarkGray '========================================================================='
     Write-Host -ForegroundColor Green "[+] tpm.osdcloud.com Complete"
