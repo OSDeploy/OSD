@@ -128,8 +128,6 @@ $Global:TpmCloud = [ordered]@{
 
 
 
-Break
-
 #region TPM and Autopilot
 function Test-GetTpmClass {
     Write-Host -ForegroundColor DarkGray '========================================================================='
@@ -150,7 +148,9 @@ function Test-GetTpmClass {
             Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) TPM is not yet activated."
         }
         if ($Global:TpmCloud.GetTpmClass.IsOwned_InitialValue -ne $true) {
-            Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) TPM is not yet owned."
+            Write-Host "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) TPM is not owned." -ForegroundColor DarkGray
+            Write-Host "Windows automatically initializes and takes ownership of the TPM. There's no need for you to initialize the TPM and create an owner password." -ForegroundColor DarkGray
+            Write-Host 'https://learn.microsoft.com/en-us/windows/security/hardware-security/tpm/initialize-and-configure-ownership-of-the-tpm' -ForegroundColor DarkGray
         }
         if ($Global:TpmCloud.GetTpmClass.SpecVersion -like '*2.0*') {
             Write-Host "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) TPM version is 2.0." -ForegroundColor DarkGray
