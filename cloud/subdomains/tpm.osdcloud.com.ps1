@@ -304,7 +304,6 @@ function Test-RegistrySetupDisplayedEula {
             Write-Warning 'SetupDisplayedEula was not found in the Registry'
             Write-Warning 'Manually SetupDisplayedEula = 1 to HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Setup\OOBE'
             New-ItemProperty -Path 'HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Setup\OOBE' -Name 'SetupDisplayedEula' -Value 1
-            Get-ItemProperty 'HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Setup\OOBE'
         }
     }
     else {
