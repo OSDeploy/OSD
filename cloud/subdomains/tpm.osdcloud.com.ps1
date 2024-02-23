@@ -286,6 +286,31 @@ function Test-RegistryWBCL {
         Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Measured boot logs are missing.  A Reboot may be required"
     }
 }
+function Test-RegistrySetupDisplayedEula {
+    Write-Host -ForegroundColor DarkGray '========================================================================='
+    $RegistryPath = 'HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Setup\OOBE'
+    Write-Host "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Test Windows Boot Configuration Log in the Registry" -ForegroundColor Cyan
+    Write-Host "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) $RegistryPath" -ForegroundColor DarkGray
+
+    if (Test-Path -Path $RegistryPath) {
+        $WBCL = Get-ItemProperty -Path $RegistryPath
+        $WBCL | Format-List
+
+        $SetupDisplayedEulaValue = (Get-ItemProperty -Path $RegistryPath).SetupDisplayedEula
+        if ($null -ne $SetupDisplayedEulaValue) {
+            Write-Host 'SetupDisplayedEula was found in the Registry' -ForegroundColor DarkGray
+        }
+        else {
+            Write-Warning "SetupDisplayedEula was not found in the Registry"
+            
+        }
+    }
+    else {
+        Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) IntegrityServices key was not found in the Registry"
+        Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Measured boot logs are missing.  A Reboot may be required"
+    }
+    
+}
 function Test-AutopilotWindowsLicense {
     Write-Host -ForegroundColor DarkGray '========================================================================='
     Write-Host "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Test Windows License for Autopilot" -ForegroundColor Cyan
@@ -524,6 +549,7 @@ if ($WindowsPhase -eq 'Windows') {
         Test-TpmMaintenanceTaskComplete
         Test-RegistryEKCertificates
         Test-RegistryWBCL
+        Test-RegistrySetupDisplayedEula
         Test-AutopilotWindowsLicense
     }
     Write-Host -ForegroundColor DarkGray '========================================================================='
