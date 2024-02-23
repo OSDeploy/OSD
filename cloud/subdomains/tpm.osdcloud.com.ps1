@@ -117,6 +117,7 @@ $Global:TpmCloud = [ordered]@{
     TpmToolGetDeviceInformation     = $null
     GetTpmEndorsementKeyInfo        = $null
     Win32Tpm                        = $null
+    TpmMaintenanceTaskComplete      = $null
 }
 #endregion
 
@@ -214,43 +215,40 @@ function Test-Win32TpmIsReady {
     }
 }
 
+function Test-TpmToolGetDeviceInformation {
+    Write-Host -ForegroundColor DarkGray '========================================================================='
+    Write-Host "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Test tpmtool.exe GetDeviceInformation" -ForegroundColor Cyan
+    $Global:TpmCloud.TpmToolGetDeviceInformation = tpmtool.exe GetDeviceInformation
+    if ($Global:TpmCloud.TpmToolGetDeviceInformation) {
+        $Global:TpmCloud.TpmToolGetDeviceInformation
 
-
-
-
-
-
-
-#region TpmCloud Tests
-function Test-MicrosoftConnection {
-    try {
-        if ($null = Invoke-WebRequest -Uri 'http://www.msftconnecttest.com/connecttest.txt' -Method Head -UseBasicParsing -ErrorAction Stop) {
-            $true
+        if ($Global:TpmCloud.TpmToolGetDeviceInformation -match 'Maintenance Task Complete: True') {
+            $Global:TpmCloud.TpmMaintenanceTaskComplete = [bool]$true
         }
         else {
-            $false
+            $Global:TpmCloud.TpmMaintenanceTaskComplete = [bool]$false
         }
     }
-    catch {
-        $false
+    else {
+        Write-Warning "tpmtool.exe GetDeviceInformation failed"
     }
 }
-#endregion
-#region TPM and Autopilot
+function Test-TpmMaintenanceTaskComplete {
+    Write-Host -ForegroundColor DarkGray '========================================================================='
+    Write-Host "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Test TPM Maintenance Task Complete" -ForegroundColor Cyan
+    if ($Global:TpmCloud.TpmMaintenanceTaskComplete) {
+        Write-Host 'Maintenance Task Complete: True' -ForegroundColor DarkGray
+    }
+    else {
+        Write-Warning 'Maintenance Task Complete: False'
+        Write-Warning 'The TPM Maintenance Task is not complete.'
+        Write-Warning 'Autopilot will fail.'
+        $Global:TpmCloud.IsTpmReady = [bool]$false
+        $Global:TpmCloud.IsAutopilotReady = [bool]$false
+    }
+}
 
-
-
-
-
-
-
-
-
-
-
-
-
-function Test-EKCertificatesRegPath {
+function Test-RegistryEKCertificates {
     Write-Host -ForegroundColor DarkGray '========================================================================='
     $RegistryPath = $Global:TpmCloudConfig.EKCertificatesRegPath
     Write-Host "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Test EKCert in the Registry" -ForegroundColor Cyan
@@ -264,7 +262,7 @@ function Test-EKCertificatesRegPath {
         Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) EKCert key was not found in the Registry"
     }
 }
-function Test-TpmRegistryWBCL {
+function Test-RegistryWBCL {
     Write-Host -ForegroundColor DarkGray '========================================================================='
     $RegistryPath = 'HKLM:\SYSTEM\CurrentControlSet\Control\IntegrityServices'
     Write-Host "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Test Windows Boot Configuration Log in the Registry" -ForegroundColor Cyan
@@ -288,6 +286,61 @@ function Test-TpmRegistryWBCL {
         Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Measured boot logs are missing.  A Reboot may be required"
     }
 }
+function Test-AutopilotWindowsLicense {
+    Write-Host -ForegroundColor DarkGray '========================================================================='
+    Write-Host "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Test Windows License for Autopilot" -ForegroundColor Cyan
+
+    $WindowsProductKey = (Get-WmiObject -query 'select * from SoftwareLicensingService').OA3xOriginalProductKey
+    $WindowsProductType = (Get-WmiObject -query 'select * from SoftwareLicensingService').OA3xOriginalProductKeyDescription
+    if ($WindowsProductKey) {
+        Write-Host "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) PASS: BIOS OA3 Windows ProductKey is $WindowsProductKey" -ForegroundColor DarkGray
+    }
+    else {
+        Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) BIOS OA3 Windows ProductKey is not present"
+    }
+    if ($WindowsProductType) {
+        Write-Host "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) PASS: BIOS OA3 Windows ProductKeyDescription is $WindowsProductType" -ForegroundColor DarkGray
+    }
+    else {
+        Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) FAIL: BIOS OA3 Windows ProductKeyDescription is $WindowsProductType"
+    }
+
+    if ($WindowsProductType -like '*Professional*' -or $WindowsProductType -eq 'Windows 10 Pro' -or $WindowsProductType -like '*Enterprise*') {
+        Write-Host "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) PASS: BIOS Windows license is valid for Microsoft 365" -ForegroundColor DarkGray
+    }
+    else {
+        Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) FAIL: BIOS Windows license is not valid for Microsoft 365"
+        $WindowsProductType = Get-ComputerInfo | Select-Object WindowsProductName 
+        $WindowsProductType = $WindowsProductType.WindowsProductName
+    
+        if ($WindowsProductType -like '*Professional*' -or $WindowsProductType -eq 'Windows 10 Pro' -or $WindowsProductType -like '*Enterprise*') {
+            Write-Host "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) PASS: Software Windows license is valid for Microsoft 365" -ForegroundColor DarkGray
+        }
+        else {
+            Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) FAIL: Software Windows license is not valid for Microsoft 365"
+        }
+    }
+}
+
+
+
+
+#region TpmCloud Tests
+function Test-MicrosoftConnection {
+    try {
+        if ($null = Invoke-WebRequest -Uri 'http://www.msftconnecttest.com/connecttest.txt' -Method Head -UseBasicParsing -ErrorAction Stop) {
+            $true
+        }
+        else {
+            $false
+        }
+    }
+    catch {
+        $false
+    }
+}
+#endregion
+#region TPM and Autopilot
 function Test-AutopilotUrl {
     Write-Host -ForegroundColor DarkGray '========================================================================='
     Write-Host "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Test Autopilot URLs" -ForegroundColor Cyan
@@ -408,41 +461,7 @@ function Test-WindowsTimeService {
         Write-Host "cmd /c 'w32tm /config /update /manualpeerlist:0.pool.ntp.org;1.pool.ntp.org;2.pool.ntp.org;3.pool.ntp.org;0x8 /syncfromflags:MANUAL /reliable:yes'" -ForegroundColor DarkGray
     }
 }
-function Test-AutopilotWindowsLicense {
-    Write-Host -ForegroundColor DarkGray '========================================================================='
-    Write-Host "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Test Windows License for Autopilot" -ForegroundColor Cyan
 
-    $WindowsProductKey = (Get-WmiObject -query 'select * from SoftwareLicensingService').OA3xOriginalProductKey
-    $WindowsProductType = (Get-WmiObject -query 'select * from SoftwareLicensingService').OA3xOriginalProductKeyDescription
-    if ($WindowsProductKey) {
-        Write-Host "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) PASS: BIOS OA3 Windows ProductKey is $WindowsProductKey" -ForegroundColor DarkGray
-    }
-    else {
-        Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) BIOS OA3 Windows ProductKey is not present"
-    }
-    if ($WindowsProductType) {
-        Write-Host "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) PASS: BIOS OA3 Windows ProductKeyDescription is $WindowsProductType" -ForegroundColor DarkGray
-    }
-    else {
-        Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) FAIL: BIOS OA3 Windows ProductKeyDescription is $WindowsProductType"
-    }
-
-    if ($WindowsProductType -like '*Professional*' -or $WindowsProductType -eq 'Windows 10 Pro' -or $WindowsProductType -like '*Enterprise*') {
-        Write-Host "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) PASS: BIOS Windows license is valid for Microsoft 365" -ForegroundColor DarkGray
-    }
-    else {
-        Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) FAIL: BIOS Windows license is not valid for Microsoft 365"
-        $WindowsProductType = Get-ComputerInfo | Select-Object WindowsProductName 
-        $WindowsProductType = $WindowsProductType.WindowsProductName
-    
-        if ($WindowsProductType -like '*Professional*' -or $WindowsProductType -eq 'Windows 10 Pro' -or $WindowsProductType -like '*Enterprise*') {
-            Write-Host "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) PASS: Software Windows license is valid for Microsoft 365" -ForegroundColor DarkGray
-        }
-        else {
-            Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) FAIL: Software Windows license is not valid for Microsoft 365"
-        }
-    }
-}
 #endregion
 
 #region WinPE
@@ -453,10 +472,8 @@ if ($WindowsPhase -eq 'WinPE') {
     if ($Global:TpmCloud.IsTpmPresent) {
         Test-Win32Tpm
         Test-Win32TpmIsReady
-        $Global:TpmCloud.TpmToolGetDeviceInformation = tpmtool.exe GetDeviceInformation
-        if ($Global:TpmCloud.TpmToolGetDeviceInformation) {
-            $Global:TpmCloud.TpmToolGetDeviceInformation
-        }
+        Test-TpmToolGetDeviceInformation
+        Test-TpmMaintenanceTaskComplete
     }
     Write-Host -ForegroundColor DarkGray '========================================================================='
     Write-Host -ForegroundColor Green '[+] tpm.osdcloud.com Complete'
@@ -485,10 +502,8 @@ if ($WindowsPhase -eq 'OOBE') {
     if ($Global:TpmCloud.IsTpmPresent) {
         Test-Win32Tpm
         Test-Win32TpmIsReady
-        $Global:TpmCloud.TpmToolGetDeviceInformation = tpmtool.exe GetDeviceInformation
-        if ($Global:TpmCloud.TpmToolGetDeviceInformation) {
-            $Global:TpmCloud.TpmToolGetDeviceInformation
-        }
+        Test-TpmToolGetDeviceInformation
+        Test-TpmMaintenanceTaskComplete
     }
     Write-Host -ForegroundColor DarkGray '========================================================================='
     Write-Host -ForegroundColor Green '[+] tpm.osdcloud.com Complete'
@@ -505,10 +520,11 @@ if ($WindowsPhase -eq 'Windows') {
     if ($Global:TpmCloud.IsTpmPresent) {
         Test-Win32Tpm
         Test-Win32TpmIsReady
-        $Global:TpmCloud.TpmToolGetDeviceInformation = tpmtool.exe GetDeviceInformation
-        if ($Global:TpmCloud.TpmToolGetDeviceInformation) {
-            $Global:TpmCloud.TpmToolGetDeviceInformation
-        }
+        Test-TpmToolGetDeviceInformation
+        Test-TpmMaintenanceTaskComplete
+        Test-RegistryEKCertificates
+        Test-RegistryWBCL
+        Test-AutopilotWindowsLicense
     }
     Write-Host -ForegroundColor DarkGray '========================================================================='
     Write-Host -ForegroundColor Green "[+] tpm.osdcloud.com Complete"
