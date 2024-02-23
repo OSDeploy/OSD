@@ -85,8 +85,8 @@ SpecVersion                 : 2.0, 0, 1.59
 PSComputerName              : 
 #>
 
-#region TpmCloud Code
-function Test-MicrosoftConnectionCode {
+#region TpmCloud Tests
+function Test-MicrosoftConnection {
     try {
         if ($null = Invoke-WebRequest -Uri 'http://www.msftconnecttest.com/connecttest.txt' -Method Head -UseBasicParsing -ErrorAction Stop) {
             $true
@@ -113,8 +113,16 @@ $Global:TpmCloud = [ordered]@{
     GetTpmIsReadyInformation        = $null
     TpmNamespace                    = 'root/cimv2/Security/MicrosoftTpm'
     TpmClass                        = 'Win32_Tpm'
-    TestMicrosoftConnectionCode     = 'Test-MicrosoftConnectionCode'
-    TestMicrosoftConnectionResult   = (Test-MicrosoftConnectionCode)
+    MicrosoftConnectionUri          = 'http://www.msftconnecttest.com/connecttest.txt'
+    TestMicrosoftConnection         = $true
+    ResultMicrosoftConnection       = $null
+
+    EKCertificatesRegPath           = 'HKLM:\SYSTEM\CurrentControlSet\Services\Tpm\WMI\Endorsement\EKCertStore\Certificates\*'
+    EKCertificatesRegData           = $null
+
+    MeasuredBootRegPath         = 'HKLM:\SYSTEM\CurrentControlSet\Control\IntegrityServices'
+    MeasuredBootRegProperty     = 'WBCL'
+    MeasuredBootRegData         = $null
 }
 #endregion
 
@@ -189,9 +197,9 @@ function Test-GetTpmClass {
         $Global:TpmCloud.IsAutopilotReady = [bool]$false
     }
 }
-function Test-TpmRegistryEkCert {
+function Test-EKCertificatesRegPath {
     Write-Host -ForegroundColor DarkGray '========================================================================='
-    $RegistryPath = 'HKLM:\SYSTEM\CurrentControlSet\Services\Tpm\WMI\Endorsement\EKCertStore\Certificates\*'
+    $RegistryPath = $Global:TpmCloud.EKCertificatesRegPath
     Write-Host "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Test EKCert in the Registry" -ForegroundColor Cyan
     Write-Host "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) $RegistryPath" -ForegroundColor DarkGray
 
@@ -391,7 +399,7 @@ if ($WindowsPhase -eq 'WinPE') {
     Test-AzuretUrl
     Test-TpmUrl
     Test-GetTpmClass
-    Test-TpmRegistryEkCert
+    Test-RegKeyEKCert
     Test-TpmRegistryWBCL
     Test-WindowsTimeService
     Write-Host -ForegroundColor Green '[+] tpm.osdcloud.com Complete'
@@ -419,7 +427,7 @@ if ($WindowsPhase -eq 'OOBE') {
     Test-AzuretUrl
     Test-TpmUrl
     Test-GetTpmClass
-    Test-TpmRegistryEkCert
+    Test-RegKeyEKCert
     Test-TpmRegistryWBCL
     Write-Host -ForegroundColor Green '[+] tpm.osdcloud.com Complete'
     $null = Stop-Transcript -ErrorAction Ignore
@@ -436,7 +444,7 @@ if ($WindowsPhase -eq 'Windows') {
     Test-AzuretUrl
     Test-TpmUrl
     Test-GetTpmClass 
-    Test-TpmRegistryEkCert
+    Test-RegKeyEKCert
     Test-TpmRegistryWBCL
     Write-Host -ForegroundColor Green "[+] tpm.osdcloud.com Complete"
     $null = Stop-Transcript -ErrorAction Ignore
