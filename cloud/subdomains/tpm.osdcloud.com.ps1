@@ -531,6 +531,10 @@ if ($WindowsPhase -eq 'OOBE') {
         Test-Win32TpmIsReady
         Test-TpmToolGetDeviceInformation
         Test-TpmMaintenanceTaskComplete
+        Test-RegistryEKCertificates
+        Test-RegistryWBCL
+        Test-RegistrySetupDisplayedEula
+        Test-AutopilotWindowsLicense
     }
     Write-Host -ForegroundColor DarkGray '========================================================================='
     Write-Host -ForegroundColor Green '[+] tpm.osdcloud.com Complete'
