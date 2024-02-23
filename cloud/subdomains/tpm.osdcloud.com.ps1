@@ -131,7 +131,6 @@ function Get-Win32Tpm {
         $Global:TpmCloud.IsAutopilotReady = [bool]$false
     }
 }
-
 function Test-Win32Tpm {
     Write-Host -ForegroundColor DarkGray '========================================================================='
     Write-Host "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Test Win32_Tpm" -ForegroundColor Cyan
@@ -163,33 +162,33 @@ function Test-Win32Tpm {
         $Global:TpmCloud.IsTpmReady = [bool]$false
         $Global:TpmCloud.IsAutopilotReady = [bool]$false
     }
+}
+function Test-Win32TpmIsReady {
     Write-Host -ForegroundColor DarkGray '========================================================================='
     Write-Host "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Get Win32_Tpm IsReadyInformation" -ForegroundColor Cyan
     $Global:TpmCloud.GetTpmIsReadyInformation = Get-CimInstance -Namespace $($Global:TpmCloudConfig.TpmNamespace) -ClassName $($Global:TpmCloudConfig.TpmClass) -ErrorAction SilentlyContinue | Invoke-CimMethod -MethodName 'IsReadyInformation'
     $Global:TpmCloud.GetTpmIsReadyInformation
     if ($Global:TpmCloud.GetTpmIsReadyInformation.Information -eq '0') {
-        Write-Host "TPM is ready for attestation." -ForegroundColor DarkGray
+        Write-Host 'TPM is ready for attestation.' -ForegroundColor DarkGray
     }
     else {
-        Write-Warning "TPM is not ready for attestation."
+        Write-Warning 'TPM is not ready for attestation.'
         $Global:TpmCloud.IsTpmReady = [bool]$false
         $Global:TpmCloud.IsAutopilotReady = [bool]$false
     }
     if ($Global:TpmCloud.GetTpmIsReadyInformation.Information -eq '16777216') {
-        Write-Warning "TPM has a Health Attestation related vulnerability."
-        Write-Warning "Autopilot will fail."
+        Write-Warning 'TPM has a Health Attestation related vulnerability.'
+        Write-Warning 'Autopilot will fail.'
         $Global:TpmCloud.IsTpmReady = [bool]$false
         $Global:TpmCloud.IsAutopilotReady = [bool]$false
     }
     if ($Global:TpmCloud.GetTpmIsReadyInformation.Information -eq '262144') {
-        Write-Warning "TPM EK Certificate is missing or invalid."
-        Write-Warning "Autopilot will fail."
+        Write-Warning 'TPM EK Certificate is missing or invalid.'
+        Write-Warning 'Autopilot will fail.'
         $Global:TpmCloud.IsTpmReady = [bool]$false
         $Global:TpmCloud.IsAutopilotReady = [bool]$false
     }
 }
-
-
 
 
 
@@ -215,74 +214,7 @@ function Test-MicrosoftConnection {
 }
 #endregion
 #region TPM and Autopilot
-function Get-Win32Tpmss {
-    Write-Host -ForegroundColor DarkGray '========================================================================='
-    Write-Host "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Get TPM CimInstance" -ForegroundColor Cyan
-    Write-Host "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Get-CimInstance -Namespace $($Global:TpmCloudConfig.TpmNamespace) -ClassName $($Global:TpmCloudConfig.TpmClass)" -ForegroundColor DarkGray
 
-    $Global:TpmCloud.Win32Tpm = Get-CimInstance -Namespace $($Global:TpmCloudConfig.TpmNamespace) -ClassName $($Global:TpmCloudConfig.TpmClass) -ErrorAction SilentlyContinue
-    if ($Global:TpmCloud.Win32Tpm) {
-        $Global:TpmCloud.Win32Tpm
-
-        if ($Global:TpmCloud.Win32Tpm.IsEnabled_InitialValue -ne $true) {
-            Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) TPM is not enabled."
-            Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Autopilot will fail."
-            $Global:TpmCloud.Win32Tpm.IsTpmReady = [bool]$false
-            $Global:TpmCloud.Win32Tpm.IsAutopilotReady = [bool]$false
-        }
-        if ($Global:TpmCloud.Win32Tpm.IsActivated_InitialValue -ne $true) {
-            Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) TPM is not yet activated."
-        }
-        if ($Global:TpmCloud.Win32Tpm.IsOwned_InitialValue -ne $true) {
-            Write-Host "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) TPM is not owned." -ForegroundColor DarkGray
-            Write-Host "Windows automatically initializes and takes ownership of the TPM. There's no need for you to initialize the TPM and create an owner password." -ForegroundColor DarkGray
-            Write-Host 'https://learn.microsoft.com/en-us/windows/security/hardware-security/tpm/initialize-and-configure-ownership-of-the-tpm' -ForegroundColor DarkGray
-        }
-        if ($Global:TpmCloud.Win32Tpm.SpecVersion -like '*2.0*') {
-            Write-Host "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) TPM version is 2.0." -ForegroundColor DarkGray
-            Write-Host "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Attestation requires TPM 2.0." -ForegroundColor DarkGray
-            $Global:TpmCloud.IsTpmV2 = [bool]$true
-        }
-        else {
-            Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) TPM version is not 2.0."
-            Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Attestation requires TPM 2.0."
-            Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Autopilot will fail."
-            $Global:TpmCloud.IsTpmV2 = [bool]$false
-            $Global:TpmCloud.IsTpmReady = [bool]$false
-            $Global:TpmCloud.IsAutopilotReady = [bool]$false
-        }
-        Write-Host -ForegroundColor DarkGray '========================================================================='
-        Write-Host "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Get TPM CimMethod IsReadyInformation" -ForegroundColor Cyan
-        $Global:TpmCloud.GetTpmIsReadyInformation = Get-CimInstance -Namespace $($Global:TpmCloudConfig.TpmNamespace) -ClassName $($Global:TpmCloudConfig.TpmClass) -ErrorAction SilentlyContinue | Invoke-CimMethod -MethodName 'IsReadyInformation'
-        $Global:TpmCloud.GetTpmIsReadyInformation
-        if ($Global:TpmCloud.GetTpmIsReadyInformation.Information -eq '0') {
-            Write-Host "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) TPM is ready for attestation." -ForegroundColor DarkGray
-        }
-        else {
-            Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) TPM is not ready for attestation."
-            $Global:TpmCloud.IsTpmReady = [bool]$false
-            $Global:TpmCloud.IsAutopilotReady = [bool]$false
-        }
-        if ($Global:TpmCloud.GetTpmIsReadyInformation.Information -eq '16777216') {
-            Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) TPM has a Health Attestation related vulnerability."
-            Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Autopilot will fail."
-            $Global:TpmCloud.IsTpmReady = [bool]$false
-            $Global:TpmCloud.IsAutopilotReady = [bool]$false
-        }
-        if ($Global:TpmCloud.GetTpmIsReadyInformation.Information -eq '262144') {
-            Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) TPM EK Certificate is missing or invalid."
-            Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Autopilot will fail."
-            $Global:TpmCloud.IsTpmReady = [bool]$false
-            $Global:TpmCloud.IsAutopilotReady = [bool]$false
-        }
-    }
-    else {
-        Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Unable to get TPM information."
-        Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Autopilot will fail."
-        $Global:TpmCloud.IsTpmReady = [bool]$false
-        $Global:TpmCloud.IsAutopilotReady = [bool]$false
-    }
-}
 
 
 
@@ -497,7 +429,9 @@ if ($WindowsPhase -eq 'WinPE') {
     Get-Win32Tpm
     if ($Global:TpmCloud.IsTpmPresent) {
         Test-Win32Tpm
+        Test-Win32TpmIsReady
     }
+    Write-Host -ForegroundColor DarkGray '========================================================================='
     Write-Host -ForegroundColor Green '[+] tpm.osdcloud.com Complete'
     $null = Stop-Transcript -ErrorAction Ignore
 }
@@ -523,7 +457,9 @@ if ($WindowsPhase -eq 'OOBE') {
     Get-Win32Tpm
     if ($Global:TpmCloud.IsTpmPresent) {
         Test-Win32Tpm
+        Test-Win32TpmIsReady
     }
+    Write-Host -ForegroundColor DarkGray '========================================================================='
     Write-Host -ForegroundColor Green '[+] tpm.osdcloud.com Complete'
     $null = Stop-Transcript -ErrorAction Ignore
 }
@@ -537,7 +473,9 @@ if ($WindowsPhase -eq 'Windows') {
     Get-Win32Tpm
     if ($Global:TpmCloud.IsTpmPresent) {
         Test-Win32Tpm
+        Test-Win32TpmIsReady
     }
+    Write-Host -ForegroundColor DarkGray '========================================================================='
     Write-Host -ForegroundColor Green "[+] tpm.osdcloud.com Complete"
     $null = Stop-Transcript -ErrorAction Ignore
 }
