@@ -353,7 +353,7 @@ function Get-MDMDiagnosticsTool {
     $MDMDiagnosticsFile = "$((Get-Date).ToString('yyyy-MM-dd-HHmmss'))-MDMDiagnosticsTool.cab"
     Write-Host "MDMDiagnosticsTool.exe -area 'DeviceEnrollment;DeviceProvisioning;AutoPilot;TPM' -cab $(Join-Path "$env:SystemRoot\Temp" $MDMDiagnosticsFile)" -ForegroundColor DarkGray
     MDMDiagnosticsTool.exe -area 'DeviceEnrollment;DeviceProvisioning;AutoPilot;TPM' -cab (Join-Path "$env:SystemRoot\Temp" $MDMDiagnosticsFile)
-    explorer.exe "$env:SystemRoot\Temp\$MDMDiagnosticsFile"
+    explorer.exe "$env:SystemRoot\Temp"
 }
 
 #region TpmCloud Tests
