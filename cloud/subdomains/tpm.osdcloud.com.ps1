@@ -259,7 +259,7 @@ function Test-RegistryEKCertificates {
         $EKCert | Format-List
     }
     else {
-        Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) EKCert key was not found in the Registry"
+        Write-Warning "EKCert key was not found in the Registry"
     }
 }
 function Test-RegistryWBCL {
@@ -277,13 +277,13 @@ function Test-RegistryWBCL {
             Write-Host "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) WBCL was found in the Registry" -ForegroundColor DarkGray
         }
         else {
-            Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) WBCL was not found in the Registry"
-            Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Measured boot logs are missing.  A Reboot may be required"
+            Write-Warning "WBCL was not found in the Registry"
+            Write-Warning "Measured boot logs are missing.  A Reboot may be required"
         }
     }
     else {
-        Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) IntegrityServices key was not found in the Registry"
-        Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Measured boot logs are missing.  A Reboot may be required"
+        Write-Warning "IntegrityServices key was not found in the Registry"
+        Write-Warning "Measured boot logs are missing.  A Reboot may be required"
     }
 }
 function Test-RegistrySetupDisplayedEula {
@@ -304,11 +304,11 @@ function Test-RegistrySetupDisplayedEula {
             Write-Warning 'SetupDisplayedEula was not found in the Registry'
             Write-Warning 'Manually SetupDisplayedEula = 1 to HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Setup\OOBE'
             New-ItemProperty -Path 'HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Setup\OOBE' -Name 'SetupDisplayedEula' -Value 1
+            Write-Warning "A Reboot may be required to resolve this issue."
         }
     }
     else {
-        Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) IntegrityServices key was not found in the Registry"
-        Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Measured boot logs are missing.  A Reboot may be required"
+        Write-Warning "Setup OOBE key was not found in the Registry"
     }
     
 }
@@ -322,20 +322,20 @@ function Test-AutopilotWindowsLicense {
         Write-Host "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) PASS: BIOS OA3 Windows ProductKey is $WindowsProductKey" -ForegroundColor DarkGray
     }
     else {
-        Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) BIOS OA3 Windows ProductKey is not present"
+        Write-Warning "BIOS OA3 Windows ProductKey is not present"
     }
     if ($WindowsProductType) {
         Write-Host "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) PASS: BIOS OA3 Windows ProductKeyDescription is $WindowsProductType" -ForegroundColor DarkGray
     }
     else {
-        Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) FAIL: BIOS OA3 Windows ProductKeyDescription is $WindowsProductType"
+        Write-Warning "FAIL: BIOS OA3 Windows ProductKeyDescription is $WindowsProductType"
     }
 
     if ($WindowsProductType -like '*Professional*' -or $WindowsProductType -eq 'Windows 10 Pro' -or $WindowsProductType -like '*Enterprise*') {
         Write-Host "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) PASS: BIOS Windows license is valid for Microsoft 365" -ForegroundColor DarkGray
     }
     else {
-        Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) FAIL: BIOS Windows license is not valid for Microsoft 365"
+        Write-Warning "FAIL: BIOS Windows license is not valid for Microsoft 365"
         $WindowsProductType = Get-ComputerInfo | Select-Object WindowsProductName 
         $WindowsProductType = $WindowsProductType.WindowsProductName
     
@@ -343,7 +343,7 @@ function Test-AutopilotWindowsLicense {
             Write-Host "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) PASS: Software Windows license is valid for Microsoft 365" -ForegroundColor DarkGray
         }
         else {
-            Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) FAIL: Software Windows license is not valid for Microsoft 365"
+            Write-Warning "FAIL: Software Windows license is not valid for Microsoft 365"
         }
     }
 }
@@ -378,7 +378,7 @@ function Test-AutopilotUrl {
         Write-Host "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) $Message" -ForegroundColor DarkGray
     }
     else {
-        Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) $Message"
+        Write-Warning "$Message"
     }
 
     $Server = 'cs.dds.microsoft.com'
@@ -389,7 +389,7 @@ function Test-AutopilotUrl {
         Write-Host "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) $Message" -ForegroundColor DarkGray
     }
     else {
-        Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) $Message"
+        Write-Warning "$Message"
     }
 
     $Server = 'login.live.com'
@@ -400,7 +400,7 @@ function Test-AutopilotUrl {
         Write-Host "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) $Message" -ForegroundColor DarkGray
     }
     else {
-        Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) $Message"
+        Write-Warning "$Message"
     }
 }
 function Test-AzuretUrl {
@@ -414,7 +414,7 @@ function Test-AzuretUrl {
         Write-Host "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) $Message" -ForegroundColor DarkGray
     }
     else {
-        Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) $Message"
+        Write-Warning "$Message"
     }
 
     $Uri = 'https://portal.manage.microsoft.com'
@@ -429,7 +429,7 @@ function Test-AzuretUrl {
         Write-Host "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) $Message" -ForegroundColor DarkGray
     }
     else {
-        Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) $Message"
+        Write-Warning "$Message"
     }
 }
 function Test-TpmUrl {
@@ -443,7 +443,7 @@ function Test-TpmUrl {
         Write-Host "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) $Message" -ForegroundColor DarkGray
     }
     else {
-        Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) $Message"
+        Write-Warning "$Message"
     }
 
     $Server = 'ekcert.spserv.microsoft.com'
@@ -454,7 +454,7 @@ function Test-TpmUrl {
         Write-Host "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) $Message" -ForegroundColor DarkGray
     }
     else {
-        Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) $Message"
+        Write-Warning "$Message"
     }
 
     $Server = 'ftpm.amd.com'
@@ -465,7 +465,7 @@ function Test-TpmUrl {
         Write-Host "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) $Message" -ForegroundColor DarkGray
     }
     else {
-        Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) $Message"
+        Write-Warning "$Message"
     }
 }
 function Test-WindowsTimeService {
@@ -477,8 +477,8 @@ function Test-WindowsTimeService {
         Write-Host "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Windows Time Service is $($W32Time.Status)" -ForegroundColor DarkGray
     }
     else {
-        Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Windows Time Service is $($W32Time.Status)"
-        Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) To sync Windows Time, enter the following commands in an elevated PowerShell window"
+        Write-Warning "Windows Time Service is $($W32Time.Status)"
+        Write-Warning "To sync Windows Time, enter the following commands in an elevated PowerShell window"
         Write-Host "Stop-Service W32Time" -ForegroundColor DarkGray
         Write-Host "cmd /c 'w32tm /unregister'" -ForegroundColor DarkGray
         Write-Host "cmd /c 'w32tm /register'" -ForegroundColor DarkGray
