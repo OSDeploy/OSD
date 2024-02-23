@@ -85,7 +85,25 @@ SpecVersion                 : 2.0, 0, 1.59
 PSComputerName              : 
 #>
 
-#region Configuration
+#region TpmCloud Code
+function Test-MicrosoftConnectionCode {
+    try {
+        if ($null = Invoke-WebRequest -Uri 'http://www.msftconnecttest.com/connecttest.txt' -Method Head -UseBasicParsing -ErrorAction Stop) {
+            $true
+        }
+        else {
+            $false
+        }
+    }
+    catch {
+        $false
+    }
+}
+#endregion
+
+
+
+#region TpmCloud Configuration
 $Global:TpmCloud = $null
 $Global:TpmCloud = [ordered]@{
     IsAutopilotReady                = $true
@@ -95,8 +113,14 @@ $Global:TpmCloud = [ordered]@{
     GetTpmIsReadyInformation        = $null
     TpmNamespace                    = 'root/cimv2/Security/MicrosoftTpm'
     TpmClass                        = 'Win32_Tpm'
+    TestMicrosoftConnectionCode     = 'Test-MicrosoftConnectionCode'
+    TestMicrosoftConnectionResult   = (Test-MicrosoftConnectionCode)
 }
 #endregion
+
+
+
+Break
 
 #region TPM and Autopilot
 function Test-GetTpmClass {
@@ -203,6 +227,7 @@ function Test-TpmRegistryWBCL {
         Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Measured boot logs are missing.  A Reboot may be required"
     }
 }
+
 function Test-AutopilotUrl {
     Write-Host -ForegroundColor DarkGray '========================================================================='
     Write-Host "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Test Autopilot URLs" -ForegroundColor Cyan
