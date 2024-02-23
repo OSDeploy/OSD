@@ -349,7 +349,12 @@ function Test-AutopilotWindowsLicense {
 }
 
 
-reg add HKCU\Software\Policies\Microsoft\Office\Common\ClientTelemetry /v DisableTelemetry /t REG_DWORD /d 1 /f
+function Get-MDMDiagnosticsTool {
+    Write-Host -ForegroundColor DarkGray '========================================================================='
+    Write-Host "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) MDMDiagnosticsTool export to C:\" -ForegroundColor Cyan
+    $MDMDiagnosticsFile = "$((Get-Date).ToString('yyyy-MM-dd-HHmmss'))-MDMDiagnosticsTool.cab"
+    MDMDiagnosticsTool.exe -area 'DeviceEnrollment;DeviceProvisioning;AutoPilot;TPM' -cab (Join-Path "$env:SystemRoot" $MDMDiagnosticsFile)
+}
 
 #region TpmCloud Tests
 function Test-MicrosoftConnection {
@@ -486,12 +491,6 @@ function Test-WindowsTimeService {
         Write-Host "cmd /c 'w32tm /resync'" -ForegroundColor DarkGray
         Write-Host "cmd /c 'w32tm /config /update /manualpeerlist:0.pool.ntp.org;1.pool.ntp.org;2.pool.ntp.org;3.pool.ntp.org;0x8 /syncfromflags:MANUAL /reliable:yes'" -ForegroundColor DarkGray
     }
-}
-function Get-MDMDiagnosticsTool {
-    Write-Host -ForegroundColor DarkGray '========================================================================='
-    Write-Host "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) MDMDiagnosticsTool export to C:\" -ForegroundColor Cyan
-    $MDMDiagnosticsFile = "$((Get-Date).ToString('yyyy-MM-dd-HHmmss'))-MDMDiagnosticsTool.cab"
-    MDMDiagnosticsTool.exe -area 'DeviceEnrollment;DeviceProvisioning;AutoPilot;TPM' -cab (Join-Path "$env:SystemRoot" $MDMDiagnosticsFile)
 }
 
 #endregion
