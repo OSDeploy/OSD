@@ -289,7 +289,7 @@ function Test-RegistryWBCL {
 function Test-RegistrySetupDisplayedEula {
     Write-Host -ForegroundColor DarkGray '========================================================================='
     $RegistryPath = 'HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Setup\OOBE'
-    Write-Host "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Test Windows Boot Configuration Log in the Registry" -ForegroundColor Cyan
+    Write-Host "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Test Windows OOBE SetupDisplayedEula in the Registry" -ForegroundColor Cyan
     Write-Host "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) $RegistryPath" -ForegroundColor DarkGray
 
     if (Test-Path -Path $RegistryPath) {
