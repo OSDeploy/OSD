@@ -1,5 +1,5 @@
 <#PSScriptInfo
-.VERSION 24.2.21.1
+.VERSION 24.2.23.1
 .GUID 0bf5a9ca-9bc5-4c8a-8e58-b5759c99b33d
 .AUTHOR David Segura @SeguraOSD
 .COMPANYNAME osdcloud.com
@@ -24,7 +24,7 @@ powershell iex (irm tpm.osdcloud.com)
 .DESCRIPTION
     PowerShell Script which supports TPM (Trusted Platform Module)
 .NOTES
-    Version 24.2.21.1
+    Version 24.2.23.1
 .LINK
     https://raw.githubusercontent.com/OSDeploy/OSD/master/cloud/subdomains/tpm.osdcloud.com.ps1
 .EXAMPLE
@@ -33,7 +33,7 @@ powershell iex (irm tpm.osdcloud.com)
 [CmdletBinding()]
 param()
 $ScriptName = 'tpm.osdcloud.com'
-$ScriptVersion = '24.2.21.1'
+$ScriptVersion = '24.2.23.1'
 
 #region Initialize
 $Transcript = "$((Get-Date).ToString('yyyy-MM-dd-HHmmss'))-$ScriptName.log"
