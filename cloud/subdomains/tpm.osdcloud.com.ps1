@@ -154,8 +154,18 @@ function Test-Win32Tpm {
         Write-Host "Attestation requires TPM 2.0." -ForegroundColor DarkGray
         $Global:TpmCloud.IsTpmV2 = [bool]$true
     }
+    elseif ($Global:TpmCloud.Win32Tpm.SpecVersion -like '*1.2*') {
+        Write-Host "TPM version is 1.2." -ForegroundColor DarkGray
+        Write-Host "Attestation requires TPM 2.0." -ForegroundColor DarkGray
+        $Global:TpmCloud.IsTpmV2 = [bool]$true
+    }
+    elseif ($Global:TpmCloud.Win32Tpm.SpecVersion -like '*1.15*') {
+        Write-Host 'TPM version is 1.15.' -ForegroundColor DarkGray
+        Write-Host 'Attestation requires TPM 2.0.' -ForegroundColor DarkGray
+        $Global:TpmCloud.IsTpmV2 = [bool]$true
+    }
     else {
-        Write-Warning "TPM version is not 2.0."
+        Write-Warning "TPM version is not supported."
         Write-Warning "Attestation requires TPM 2.0."
         Write-Warning "Autopilot will fail."
         $Global:TpmCloud.IsTpmV2 = [bool]$false
@@ -194,7 +204,6 @@ function Test-Win32TpmIsReady {
 
 
 
-$Global:TpmCloud.TpmToolGetDeviceInformation = tpmtool.exe GetDeviceInformation
 
 
 
@@ -430,6 +439,10 @@ if ($WindowsPhase -eq 'WinPE') {
     if ($Global:TpmCloud.IsTpmPresent) {
         Test-Win32Tpm
         Test-Win32TpmIsReady
+        $Global:TpmCloud.TpmToolGetDeviceInformation = tpmtool.exe GetDeviceInformation
+        if ($Global:TpmCloud.TpmToolGetDeviceInformation) {
+            $Global:TpmCloud.TpmToolGetDeviceInformation
+        }
     }
     Write-Host -ForegroundColor DarkGray '========================================================================='
     Write-Host -ForegroundColor Green '[+] tpm.osdcloud.com Complete'
@@ -458,6 +471,10 @@ if ($WindowsPhase -eq 'OOBE') {
     if ($Global:TpmCloud.IsTpmPresent) {
         Test-Win32Tpm
         Test-Win32TpmIsReady
+        $Global:TpmCloud.TpmToolGetDeviceInformation = tpmtool.exe GetDeviceInformation
+        if ($Global:TpmCloud.TpmToolGetDeviceInformation) {
+            $Global:TpmCloud.TpmToolGetDeviceInformation
+        }
     }
     Write-Host -ForegroundColor DarkGray '========================================================================='
     Write-Host -ForegroundColor Green '[+] tpm.osdcloud.com Complete'
@@ -474,6 +491,10 @@ if ($WindowsPhase -eq 'Windows') {
     if ($Global:TpmCloud.IsTpmPresent) {
         Test-Win32Tpm
         Test-Win32TpmIsReady
+        $Global:TpmCloud.TpmToolGetDeviceInformation = tpmtool.exe GetDeviceInformation
+        if ($Global:TpmCloud.TpmToolGetDeviceInformation) {
+            $Global:TpmCloud.TpmToolGetDeviceInformation
+        }
     }
     Write-Host -ForegroundColor DarkGray '========================================================================='
     Write-Host -ForegroundColor Green "[+] tpm.osdcloud.com Complete"
