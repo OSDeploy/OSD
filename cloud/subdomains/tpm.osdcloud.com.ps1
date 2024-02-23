@@ -302,9 +302,9 @@ function Test-RegistrySetupDisplayedEula {
         }
         else {
             Write-Warning 'SetupDisplayedEula was not found in the Registry'
-            Write-Warning 'Manually SetupDisplayedEula = 1 to HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Setup\OOBE'
+            Write-Warning 'Adding SetupDisplayedEula = 1 to HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Setup\OOBE'
             New-ItemProperty -Path 'HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Setup\OOBE' -Name 'SetupDisplayedEula' -Value 1
-            Write-Warning "A Reboot may be required to resolve this issue."
+            Write-Warning "Reboot is required to resolve this issue."
         }
     }
     else {
@@ -347,13 +347,11 @@ function Test-AutopilotWindowsLicense {
         }
     }
 }
-
-
 function Get-MDMDiagnosticsTool {
     Write-Host -ForegroundColor DarkGray '========================================================================='
     Write-Host "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) MDMDiagnosticsTool export to C:\" -ForegroundColor Cyan
     $MDMDiagnosticsFile = "$((Get-Date).ToString('yyyy-MM-dd-HHmmss'))-MDMDiagnosticsTool.cab"
-    MDMDiagnosticsTool.exe -area 'DeviceEnrollment;DeviceProvisioning;AutoPilot;TPM' -cab (Join-Path "$env:SystemRoot" $MDMDiagnosticsFile)
+    MDMDiagnosticsTool.exe -area 'DeviceEnrollment;DeviceProvisioning;AutoPilot;TPM' -cab (Join-Path "$env:SystemRoot\Temp" $MDMDiagnosticsFile)
 }
 
 #region TpmCloud Tests
