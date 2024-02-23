@@ -83,6 +83,14 @@ ManufacturerVersionInfo     : NPCT75x
 PhysicalPresenceVersionInfo : 1.3
 SpecVersion                 : 2.0, 0, 1.59
 PSComputerName              : 
+
+Autopilot Known Issues
+https://learn.microsoft.com/en-us/autopilot/known-issues
+
+TPM Key Attestation
+https://learn.microsoft.com/en-us/windows-server/identity/ad-ds/manage/component-updates/tpm-key-attestation
+
+https://techcommunity.microsoft.com/t5/microsoft-intune/device-certificate-for-hybrid-azure-ad-join/m-p/3748571
 #>
 
 #region TpmCloud Configuration
@@ -183,17 +191,23 @@ function Test-Win32TpmIsReady {
     }
     else {
         Write-Warning 'TPM is not ready for attestation.'
-        $Global:TpmCloud.IsTpmReady = [bool]$false
-        $Global:TpmCloud.IsAutopilotReady = [bool]$false
-    }
-    if ($Global:TpmCloud.GetTpmIsReadyInformation.Information -eq '16777216') {
-        Write-Warning 'TPM has a Health Attestation related vulnerability.'
-        Write-Warning 'Autopilot will fail.'
+        Write-Host 'Win32_Tpm::IsReadyInformation method' -ForegroundColor DarkGray
+        Write-Host 'https://docs.microsoft.com/en-us/windows/win32/tpm/tpm-is-ready-information' -ForegroundColor DarkGray
         $Global:TpmCloud.IsTpmReady = [bool]$false
         $Global:TpmCloud.IsAutopilotReady = [bool]$false
     }
     if ($Global:TpmCloud.GetTpmIsReadyInformation.Information -eq '262144') {
-        Write-Warning 'TPM EK Certificate is missing or invalid.'
+        Write-Warning 'Information: 262144 (0x00040000)'
+        Write-Warning 'INFORMATION_EK_CERTIFICATE'
+        Write-Warning 'The EK Certificate was not read from the TPM NV Ram and stored in the registry.'
+        Write-Warning 'Autopilot will fail.'
+        $Global:TpmCloud.IsTpmReady = [bool]$false
+        $Global:TpmCloud.IsAutopilotReady = [bool]$false
+    }
+    if ($Global:TpmCloud.GetTpmIsReadyInformation.Information -eq '16777216') {
+        Write-Warning 'Information: 16777216 (0x01000000)'
+        Write-Warning 'INFORMATION_ATTESTATION_VULNERABILITY'
+        Write-Warning 'The TPM has a Health Attestation related vulnerability.'
         Write-Warning 'Autopilot will fail.'
         $Global:TpmCloud.IsTpmReady = [bool]$false
         $Global:TpmCloud.IsAutopilotReady = [bool]$false
