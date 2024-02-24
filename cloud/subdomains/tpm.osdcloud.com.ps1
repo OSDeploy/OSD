@@ -1,5 +1,5 @@
 <#PSScriptInfo
-.VERSION 24.2.23.1
+.VERSION 24.2.24.1
 .GUID 0bf5a9ca-9bc5-4c8a-8e58-b5759c99b33d
 .AUTHOR David Segura @SeguraOSD
 .COMPANYNAME osdcloud.com
@@ -24,7 +24,7 @@ powershell iex (irm tpm.osdcloud.com)
 .DESCRIPTION
     PowerShell Script which supports TPM (Trusted Platform Module)
 .NOTES
-    Version 24.2.23.1
+    Version 24.2.24.1
 .LINK
     https://raw.githubusercontent.com/OSDeploy/OSD/master/cloud/subdomains/tpm.osdcloud.com.ps1
 .EXAMPLE
@@ -33,7 +33,7 @@ powershell iex (irm tpm.osdcloud.com)
 [CmdletBinding()]
 param()
 $ScriptName = 'tpm.osdcloud.com'
-$ScriptVersion = '24.2.23.1'
+$ScriptVersion = '24.2.24.1'
 
 #region Initialize
 $Transcript = "$((Get-Date).ToString('yyyy-MM-dd-HHmmss'))-$ScriptName.log"
@@ -355,7 +355,24 @@ function Get-MDMDiagnosticsTool {
     MDMDiagnosticsTool.exe -area 'DeviceEnrollment;DeviceProvisioning;AutoPilot;TPM' -cab (Join-Path "$env:SystemRoot\Temp" $MDMDiagnosticsFile)
     explorer.exe "$env:SystemRoot\Temp\$MDMDiagnosticsFile"
 }
-
+function Get-EKCertificates {
+    Write-Host -ForegroundColor DarkGray '========================================================================='
+    Write-Host "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Get-TpmEndorsementKeyInfo - EK Certificates" -ForegroundColor Cyan
+    if (Get-Command -Name Get-TpmEndorsementKeyInfo -ErrorAction SilentlyContinue) {
+        $TpmEndorsementKeyInfo = Get-TpmEndorsementKeyInfo
+        if ($TpmEndorsementKeyInfo) {
+            $TpmEndorsementKeyInfo
+            Write-Host "Exporting TPM EK Certificate to $env:SystemRoot\Temp\TPMEK.der" -ForegroundColor DarkGray
+            $TpmEndorsementKeyInfo.ManufacturerCertificates | Export-Certificate -FilePath "$env:SystemRoot\Temp\TPMEK.der" -Force
+        }
+        else {
+            Write-Warning "Get-TpmEndorsementKeyInfo returned no data"
+        }
+    }
+    else {
+        Write-Warning "Get-TpmEndorsementKeyInfo PowerShell cmdlet is not present"
+    }
+}
 #region TpmCloud Tests
 function Test-MicrosoftConnection {
     try {
@@ -540,6 +557,7 @@ if ($WindowsPhase -eq 'OOBE') {
         Test-RegistrySetupDisplayedEula
         Test-AutopilotWindowsLicense
         Get-MDMDiagnosticsTool
+        Get-EKCertificates
     }
     Write-Host -ForegroundColor DarkGray '========================================================================='
     Write-Host -ForegroundColor Green '[+] tpm.osdcloud.com Complete'
@@ -563,6 +581,7 @@ if ($WindowsPhase -eq 'Windows') {
         Test-RegistrySetupDisplayedEula
         Test-AutopilotWindowsLicense
         Get-MDMDiagnosticsTool
+        Get-EKCertificates
     }
     Write-Host -ForegroundColor DarkGray '========================================================================='
     Write-Host -ForegroundColor Green "[+] tpm.osdcloud.com Complete"
