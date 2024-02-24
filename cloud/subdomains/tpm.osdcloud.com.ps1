@@ -353,7 +353,6 @@ function Get-MDMDiagnosticsTool {
     $MDMDiagnosticsFile = "$((Get-Date).ToString('yyyy-MM-dd-HHmmss'))-MDMDiagnosticsTool.cab"
     Write-Host "MDMDiagnosticsTool.exe -area 'DeviceEnrollment;DeviceProvisioning;AutoPilot;TPM' -cab $(Join-Path "$env:SystemRoot\Temp" $MDMDiagnosticsFile)" -ForegroundColor DarkGray
     MDMDiagnosticsTool.exe -area 'DeviceEnrollment;DeviceProvisioning;AutoPilot;TPM' -cab (Join-Path "$env:SystemRoot\Temp" $MDMDiagnosticsFile)
-    explorer.exe "$env:SystemRoot\Temp\$MDMDiagnosticsFile"
 }
 function Get-EKCertificates {
     Write-Host -ForegroundColor DarkGray '========================================================================='
@@ -362,8 +361,9 @@ function Get-EKCertificates {
         $TpmEndorsementKeyInfo = Get-TpmEndorsementKeyInfo
         if ($TpmEndorsementKeyInfo) {
             $TpmEndorsementKeyInfo
-            Write-Host "Exporting TPM EK Certificate to $env:SystemRoot\Temp\TPMEK.der" -ForegroundColor DarkGray
-            $TpmEndorsementKeyInfo.ManufacturerCertificates | Export-Certificate -FilePath "$env:SystemRoot\Temp\TPMEK.der" -Force
+            $EKCertificateFile = "$((Get-Date).ToString('yyyy-MM-dd-HHmmss'))-EKCertificate.der"
+            Write-Host "Exporting TPM EK Certificate to $env:SystemRoot\Temp\$EKCertificateFile" -ForegroundColor DarkGray
+            $TpmEndorsementKeyInfo.ManufacturerCertificates | Export-Certificate -FilePath "$env:SystemRoot\Temp\$EKCertificateFile" -Force
         }
         else {
             Write-Warning "Get-TpmEndorsementKeyInfo returned no data"
@@ -558,6 +558,7 @@ if ($WindowsPhase -eq 'OOBE') {
         Test-AutopilotWindowsLicense
         Get-MDMDiagnosticsTool
         Get-EKCertificates
+        explorer.exe "$env:SystemRoot\Temp"
     }
     Write-Host -ForegroundColor DarkGray '========================================================================='
     Write-Host -ForegroundColor Green '[+] tpm.osdcloud.com Complete'
@@ -582,6 +583,7 @@ if ($WindowsPhase -eq 'Windows') {
         Test-AutopilotWindowsLicense
         Get-MDMDiagnosticsTool
         Get-EKCertificates
+        explorer.exe "$env:SystemRoot\Temp"
     }
     Write-Host -ForegroundColor DarkGray '========================================================================='
     Write-Host -ForegroundColor Green "[+] tpm.osdcloud.com Complete"
