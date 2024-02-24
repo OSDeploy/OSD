@@ -361,9 +361,9 @@ function Get-EKCertificates {
         $TpmEndorsementKeyInfo = Get-TpmEndorsementKeyInfo
         if ($TpmEndorsementKeyInfo) {
             $TpmEndorsementKeyInfo
-            $EKCertificateFile = "$((Get-Date).ToString('yyyy-MM-dd-HHmmss'))-EKCertificate.der"
-            Write-Host "Exporting TPM EK Certificate to $env:SystemRoot\Temp\$EKCertificateFile" -ForegroundColor DarkGray
-            $TpmEndorsementKeyInfo.ManufacturerCertificates | Export-Certificate -FilePath "$env:SystemRoot\Temp\$EKCertificateFile" -Force
+            $TpmEKCertificateFile = "$((Get-Date).ToString('yyyy-MM-dd-HHmmss'))-TpmEKCertificate.der"
+            Write-Host "Exporting TPM EK Certificate to $env:SystemRoot\Temp\$TpmEKCertificateFile" -ForegroundColor DarkGray
+            $TpmEndorsementKeyInfo.ManufacturerCertificates | Export-Certificate -FilePath "$env:SystemRoot\Temp\$TpmEKCertificateFile" -Force
         }
         else {
             Write-Warning "Get-TpmEndorsementKeyInfo returned no data"
