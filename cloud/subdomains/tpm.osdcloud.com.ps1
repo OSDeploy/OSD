@@ -626,7 +626,7 @@ function Test-WindowsTimeService {
 }
 #endregion
 
-Export-TpmRegistry {
+function Export-TpmRegistry {
     Write-Host -ForegroundColor DarkGray '========================================================================='
     Write-Host "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Export TPM Registry" -ForegroundColor Cyan
     $TpmRegistryFile = "$((Get-Date).ToString('yyyy-MM-dd-HHmmss'))-TpmRegistry.reg"
@@ -693,12 +693,12 @@ if ($WindowsPhase -eq 'OOBE') {
         Get-EKCertificates
         Export-TpmRegistry
         Write-Host -ForegroundColor DarkGray '========================================================================='
-        Write-Host -ForegroundColor Cyan 'Additional Commands'
-        Write-Host -ForegroundColor Gray 'Start-WprLogging'
-        Write-Host -ForegroundColor Gray 'Get-WprLoggingStatus'
-        Write-Host -ForegroundColor Gray 'Stop-WprLogging'
-        Write-Host -ForegroundColor Gray 'Start-TPMTest'
-        Write-Host -ForegroundColor Gray 'Stop-TPMTest'
+        Write-Host -ForegroundColor Cyan 'Additional PowerShell Functions:'
+        Write-Host -ForegroundColor Gray '  Start-WprLogging'
+        Write-Host -ForegroundColor Gray '  Get-WprLoggingStatus'
+        Write-Host -ForegroundColor Gray '  Stop-WprLogging'
+        Write-Host -ForegroundColor Gray '  Start-TPMTest'
+        Write-Host -ForegroundColor Gray '  Stop-TPMTest'
         Start-Sleep -Seconds 3
         explorer.exe "$env:SystemRoot\Temp"
     }
