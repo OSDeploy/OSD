@@ -485,7 +485,7 @@ $wprp = @'
 
     $wprp | Out-File -FilePath "$env:SystemRoot\Temp\TraceLogs\TraceLog.wprp" -Force -Encoding utf8
 
-    wpr.exe -start $env:SystemRoot\Temp\TraceLogs\TraceLog.wprp
+    wpr.exe -start $env:SystemRoot\Temp\TraceLogs\TraceLog.wprp -filemode -recordtempto $env:SystemRoot\Temp\TraceLogs
     wpr.exe -status
 }
 #region TpmCloud Tests
