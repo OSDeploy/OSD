@@ -630,7 +630,7 @@ function Export-TpmRegistry {
     Write-Host "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Export TPM Registry" -ForegroundColor Cyan
     $TpmRegistryFile = "$((Get-Date).ToString('yyyy-MM-dd-HHmmss'))-TpmRegistry.reg"
     Write-Host "Exporting TPM Registry to $env:SystemRoot\Temp\$TpmRegistryFile" -ForegroundColor DarkGray
-    reg export 'HKLM\SYSTEM\CurrentControlSet\Services\TPM' "$env:SystemRoot\Temp\$TpmRegistryFile"
+    reg export "HKLM\SYSTEM\CurrentControlSet\Services\TPM" "$env:SystemRoot\Temp\$TpmRegistryFile"
 }
 function Start-TPMTest {
     #https://gerhart01.github.io/msdn.microsoft.com/en-us/library/windows/hardware/hh998628.html
