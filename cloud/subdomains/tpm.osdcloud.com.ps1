@@ -454,7 +454,7 @@ $wprp = @'
                <EventProvider Id="EventProvider_WindowsAttestation" Name="0a611b27-ba1a-4acf-9c91-ea1611e24c38" />
                <EventProvider Id="EventProvider_Microsoft-Windows-DeviceManagement-Enterprise-Diagnostics-Provider" Name="3DA494E4-0FE2-415C-B895-FB5265C5C83B" />
                <EventProvider Id="EventProvider_microsoft-windows-tpm-wmi" Name="7d5387b0-cbe0-11da-a94d-0800200c9a66" />
-               <EventProvider Id="EventProvider-Microsoft.Tpm.ProvisioningTask" Name="470baa67-2d7f-4c9c-8bf4-b1b3226f7b17"" />
+               <EventProvider Id="EventProvider-Microsoft.Tpm.ProvisioningTask" Name="470baa67-2d7f-4c9c-8bf4-b1b3226f7b17" />
                <EventProvider Id="EventProvider-Microsoft.Tpm.HealthAttestationCSP" Name="a935c211-645a-5f5a-4527-778da45bbba5" />
                <EventProvider Id="EventProvider-Microsoft.Tpm.DebugTracing" Name="3a8d6942-b034-48e2-b314-f69c2b4655a3" />
                <EventProvider 
