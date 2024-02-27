@@ -630,7 +630,7 @@ function Export-TpmRegistry {
     Write-Host "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Export TPM Registry" -ForegroundColor Cyan
     $TpmRegistryFile = "$((Get-Date).ToString('yyyy-MM-dd-HHmmss'))-TpmRegistry.reg"
     Write-Host "Exporting TPM Registry to $env:SystemRoot\Temp\$TpmRegistryFile" -ForegroundColor DarkGray
-    reg export 'HKLM\SYSTEM\CurrentControlSet\Services\TPM' "$env:SystemRoot\Temp\$TpmRegistryFile" -Force
+    reg export 'HKLM\SYSTEM\CurrentControlSet\Services\TPM' "$env:SystemRoot\Temp\$TpmRegistryFile"
 }
 function Start-TPMTest {
     #https://gerhart01.github.io/msdn.microsoft.com/en-us/library/windows/hardware/hh998628.html
@@ -693,11 +693,11 @@ if ($WindowsPhase -eq 'OOBE') {
         Export-TpmRegistry
         Write-Host -ForegroundColor DarkGray '========================================================================='
         Write-Host -ForegroundColor Cyan 'Additional PowerShell Functions:'
-        Write-Host -ForegroundColor Gray '  Start-WprLogging'
-        Write-Host -ForegroundColor Gray '  Get-WprLoggingStatus'
-        Write-Host -ForegroundColor Gray '  Stop-WprLogging'
-        Write-Host -ForegroundColor Gray '  Start-TPMTest'
-        Write-Host -ForegroundColor Gray '  Stop-TPMTest'
+        Write-Host -ForegroundColor Gray '     Start-WprLogging'
+        Write-Host -ForegroundColor Gray '     Get-WprLoggingStatus'
+        Write-Host -ForegroundColor Gray '     Stop-WprLogging'
+        Write-Host -ForegroundColor Gray '     Start-TPMTest'
+        Write-Host -ForegroundColor Gray '     Stop-TPMTest'
         Start-Sleep -Seconds 3
         explorer.exe "$env:SystemRoot\Temp"
     }
