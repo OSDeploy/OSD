@@ -625,7 +625,6 @@ function Test-WindowsTimeService {
     }
 }
 #endregion
-
 function Export-TpmRegistry {
     Write-Host -ForegroundColor DarkGray '========================================================================='
     Write-Host "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Export TPM Registry" -ForegroundColor Cyan
