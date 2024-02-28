@@ -247,7 +247,11 @@ function Test-TpmMaintenanceTaskComplete {
         $Global:TpmCloud.IsAutopilotReady = [bool]$false
     }
 }
-
+function Test-TpmCertReqEnrollAIK {
+    Write-Host -ForegroundColor DarkGray '========================================================================='
+    Write-Host "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) CertReq -EnrollAIK -Config `"`"" -ForegroundColor Cyan
+    CertReq -EnrollAIK -Config `"`"
+}
 function Test-RegistryEKCertificates {
     Write-Host -ForegroundColor DarkGray '========================================================================='
     $RegistryPath = $Global:TpmCloudConfig.EKCertificatesRegPath
@@ -310,7 +314,6 @@ function Test-RegistrySetupDisplayedEula {
     else {
         Write-Warning "Setup OOBE key was not found in the Registry"
     }
-    
 }
 function Test-AutopilotWindowsLicense {
     Write-Host -ForegroundColor DarkGray '========================================================================='
@@ -684,6 +687,7 @@ if ($WindowsPhase -eq 'OOBE') {
         Test-Win32TpmIsReady
         Test-TpmToolGetDeviceInformation
         Test-TpmMaintenanceTaskComplete
+        Test-TpmCertReqEnrollAIK
         Test-RegistryEKCertificates
         Test-RegistryWBCL
         Test-RegistrySetupDisplayedEula
@@ -718,6 +722,7 @@ if ($WindowsPhase -eq 'Windows') {
         Test-Win32TpmIsReady
         Test-TpmToolGetDeviceInformation
         Test-TpmMaintenanceTaskComplete
+        Test-TpmCertReqEnrollAIK
         Test-RegistryEKCertificates
         Test-RegistryWBCL
         Test-RegistrySetupDisplayedEula
