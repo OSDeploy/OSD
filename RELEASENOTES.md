@@ -10,7 +10,7 @@ Note, the changes I make won't go into effect until the next module release date
 
 ## Changes
 
-### 24.2.15 (not yet implemented)
+### 24.2.15 (implemented in OSD Module 24.2.20.1)
 - Modifications to Function Set-TimeZoneFromIP - Due to prevous method using an API that is no longer free, had to completely change process.  Doing best to make it work for everyone when I can only test 1 timezone. 
   - Bug fix thanks to @JHBDO [Issue 110](https://github.com/OSDeploy/OSD/issues/110)
 - Added Function: New-OSDCloudWorkSpaceSetupCompleteTemplate [Issue 107](https://github.com/OSDeploy/OSD/issues/107)
