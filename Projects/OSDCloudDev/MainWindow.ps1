@@ -748,7 +748,6 @@ $formMainWindowControlStartButton.add_Click({
     $OSLanguage = $formMainWindowControlOSLanguageCombobox.SelectedValue
     $OSImageIndex = $formMainWindowControlImageIndexTextbox.Text
 
-
     if ($formMainWindowControlOSNameCombobox.SelectedValue -like 'Windows 1*') {
         $OSName = $formMainWindowControlOSNameCombobox.SelectedValue
         
