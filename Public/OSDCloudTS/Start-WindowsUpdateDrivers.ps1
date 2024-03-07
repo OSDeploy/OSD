@@ -1,4 +1,4 @@
-﻿Function Get-WindowsUpdateDrivers{
+﻿Function Get-WindowsUpdateDriver{
 
     $WUDownloader=(New-Object -ComObject Microsoft.Update.Session).CreateUpdateDownloader()
     $WUInstaller=(New-Object -ComObject Microsoft.Update.Session).CreateUpdateInstaller()
