@@ -26,7 +26,7 @@ Function Start-WindowsUpdateDriver{
     HResult Lookup: https://docs.microsoft.com/en-us/windows/win32/wua_sdk/wua-success-and-error-codes-
     #>
 
-    $AvailableDriverUpdates = Get-WindowsUpdateDrivers
+    $AvailableDriverUpdates = Get-WindowsUpdateDriver
     if (($AvailableDriverUpdates).count -ge 1){
         Write-Output ""
         Write-Output $AvailableDriverUpdates
