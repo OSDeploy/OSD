@@ -100,6 +100,7 @@
         'Get-GithubRawUrl',
         'Get-HPDriverPack',
         'Get-HPWinPEDriverPack',
+        'Get-HPDeviceFamilyPlatformDetails',
         'Get-HyperVName',
         'Get-LenovoDriverPack',
         'Get-NativeMatchineImage',
