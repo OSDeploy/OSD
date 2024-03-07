@@ -1,4 +1,4 @@
-﻿function Get-WindowsUpdateDrivers{
+﻿Function Get-WindowsUpdateDrivers{
 
     $WUDownloader=(New-Object -ComObject Microsoft.Update.Session).CreateUpdateDownloader()
     $WUInstaller=(New-Object -ComObject Microsoft.Update.Session).CreateUpdateInstaller()
@@ -20,7 +20,7 @@
         #$InstallUpdateCount = $WUInstaller.Updates.count
     }
 }
-function Start-WindowsUpdateDriver{
+Function Start-WindowsUpdateDriver{
     <# Control Windows Update via PowerShell
     Installing Updates using this Method does NOT notify the user, and does NOT let the user know that updates need to be applied at the next reboot.  It's 100% hidden.
     HResult Lookup: https://docs.microsoft.com/en-us/windows/win32/wua_sdk/wua-success-and-error-codes-
