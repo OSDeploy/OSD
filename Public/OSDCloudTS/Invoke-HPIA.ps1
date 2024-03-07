@@ -290,7 +290,6 @@ Function Invoke-HPIA {
     catch {
         #Write-CMTraceLog -LogFile $CMTraceLog -Message "Exit $($Process.ExitCode) - Expecting 0" -Component "Update" -Type 3
         Write-Output "Exit $($Process.ExitCode) - Expecting 0" 
-        throw
     }
 
 }
