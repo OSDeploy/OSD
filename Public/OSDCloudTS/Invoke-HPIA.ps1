@@ -259,6 +259,10 @@ Function Invoke-HPIA {
             Write-CMTraceLog -LogFile $CMTraceLog -Message "Exit $($Process.ExitCode) - This platform is not supported!" -Component "Update" -Type 2
             Write-Host "Exit $($Process.ExitCode) - This platform is not supported!" -ForegroundColor Yellow
         }
+        elseif ($Process.ExitCode -eq 4104){
+            Write-CMTraceLog -LogFile $CMTraceLog -Message "Exit $($Process.ExitCode) - HPIA used a generic reference file to make the recommendation" -Component "Update" -Type 2
+            Write-Host "Exit $($Process.ExitCode) - HPIA used a generic reference file to make the recommendation" -ForegroundColor Yellow
+        }
         elseif ($Process.ExitCode -eq 16386){
             Write-CMTraceLog -LogFile $CMTraceLog -Message "Exit $($Process.ExitCode) - This platform is not supported!" -Component "Update" -Type 2
             Write-Output "Exit $($Process.ExitCode) - The reference file is not supported on platforms running this operating system!"
