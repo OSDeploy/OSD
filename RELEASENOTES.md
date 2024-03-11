@@ -10,10 +10,11 @@ Note, the changes I make won't go into effect until the next module release date
 
 ## Changes
 
-### 24.3.6 (not yet implemented)
+### 24.3.6 (implemented in OSD Module 24.3.10.1)
 - Promoted code from Start-OSDCloudGUIDev to Start-OSDCloudGUI
   - This will add the HP enhancements as well as the SetupComplete enchancements into the Menus of the GUI
   - See updates from 24.1.22 for more details.
+- Fix for downloading content from MS Update Catalog [Issue 122](https://github.com/OSDeploy/OSD/issues/122)
 
 ### 24.2.15 (implemented in OSD Module 24.2.20.1)
 - Modifications to Function Set-TimeZoneFromIP - Due to prevous method using an API that is no longer free, had to completely change process.  Doing best to make it work for everyone when I can only test 1 timezone. 
