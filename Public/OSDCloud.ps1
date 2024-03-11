@@ -1639,9 +1639,14 @@
                                 Write-Host -ForegroundColor DarkGray "Current Firmware: $(Get-HPBIOSVersion)"
                                 Write-Host -ForegroundColor DarkGray "Staging Update: $((Get-HPBIOSUpdates -Latest).ver) "
                                 #Details: https://developers.hp.com/hp-client-management/doc/Get-HPBiosUpdates
-                                Get-HPBIOSUpdates -Flash -Yes -Offline -BitLocker Ignore -ErrorAction SilentlyContinue
-                                $Global:OSDCloud.HPBIOSUpdate = $false
-                                $HPBIOSUpdateNotes = "Attempted in WinPE - Update to $((Get-HPBIOSUpdates -Latest).ver)"
+                                try {
+                                    Get-HPBIOSUpdates -Flash -Yes -Offline -BitLocker Ignore -ErrorAction SilentlyContinue
+                                    $Global:OSDCloud.HPBIOSUpdate = $false
+                                    $HPBIOSUpdateNotes = "Attempted in WinPE - Update to $((Get-HPBIOSUpdates -Latest).ver)"
+                                }
+                                catch {
+                                    Write-Host -ForegroundColor Yellow "Failed attempt to Update BIOS using CMSL"
+                                }
                             }
                         }
                     }
