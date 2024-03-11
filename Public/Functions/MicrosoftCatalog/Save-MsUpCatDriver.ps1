@@ -174,6 +174,7 @@ function Save-MsUpCatDriver {
         #=================================================
         if ($PSCmdlet.ParameterSetName -eq 'ByHardwareID') {
             foreach ($Item in $HardwareID) {
+                Write-Verbose "Save-MsUpCatDriver: ByHardwareID"
                 Write-Verbose $Item
 
                 $WindowsUpdateDriver = $null
@@ -186,21 +187,59 @@ function Save-MsUpCatDriver {
                 }
     
                 if ($FindHardwareID) {
-                    $SearchString = "$FindHardwareID".Replace('&',"`%26")
+                    $SearchString = "$FindHardwareID".Replace('&', "`%26")
 
-                    $WindowsUpdateDriver = Get-MsUpCat -Search "22H2+$SearchString" -Descending | Select-Object LastUpdated,Title,Version,Size,Guid -First 1 -ErrorAction Ignore
-
-                    if (-not ($WindowsUpdateDriver)) {
-                        $WindowsUpdateDriver = Get-MsUpCat -Search "21H2+$SearchString" -Descending | Select-Object LastUpdated,Title,Version,Size,Guid -First 1 -ErrorAction Ignore
+                    try {
+                        Write-Verbose "Save-MsUpCatDriver Search: 23H2 $SearchString"
+                        $WindowsUpdateDriver = Get-MsUpCat -Search "23H2+$SearchString" -Descending | Select-Object LastUpdated, Title, Version, Size, Guid -First 1 -ErrorAction Ignore
+                    }
+                    catch {
+                        <#Do this if a terminating exception happens#>
                     }
                     if (-not ($WindowsUpdateDriver)) {
-                        $WindowsUpdateDriver = Get-MsUpCat -Search "Vibranium+$SearchString" -Descending | Select-Object LastUpdated,Title,Version,Size,Guid -First 1 -ErrorAction Ignore
+                        try {
+                            Write-Verbose "Save-MsUpCatDriver Search: 22H2 $SearchString"
+                            $WindowsUpdateDriver = Get-MsUpCat -Search "22H2+$SearchString" -Descending | Select-Object LastUpdated, Title, Version, Size, Guid -First 1 -ErrorAction Ignore
+                        }
+                        catch {
+                            <#Do this if a terminating exception happens#>
+                        }
                     }
                     if (-not ($WindowsUpdateDriver)) {
-                        $WindowsUpdateDriver = Get-MsUpCat -Search "1903+$SearchString" -Descending | Select-Object LastUpdated,Title,Version,Size,Guid -First 1 -ErrorAction Ignore
+                        try {
+                            Write-Verbose "Save-MsUpCatDriver Search: 21H2+$SearchString"
+                            $WindowsUpdateDriver = Get-MsUpCat -Search "21H2+$SearchString" -Descending | Select-Object LastUpdated, Title, Version, Size, Guid -First 1 -ErrorAction Ignore
+                        }
+                        catch {
+                            <#Do this if a terminating exception happens#>
+                        }
                     }
                     if (-not ($WindowsUpdateDriver)) {
-                        $WindowsUpdateDriver = Get-MsUpCat -Search "1809+$SearchString" -Descending | Select-Object LastUpdated,Title,Version,Size,Guid -First 1 -ErrorAction Ignore
+                        try {
+                            Write-Verbose "Save-MsUpCatDriver Search: Vibranium+$SearchString"
+                            $WindowsUpdateDriver = Get-MsUpCat -Search "Vibranium+$SearchString" -Descending | Select-Object LastUpdated, Title, Version, Size, Guid -First 1 -ErrorAction Ignore
+                        }
+                        catch {
+                            <#Do this if a terminating exception happens#>
+                        }
+                    }
+                    if (-not ($WindowsUpdateDriver)) {
+                        try {
+                            Write-Verbose "Save-MsUpCatDriver Search: 1903+$SearchString"
+                            $WindowsUpdateDriver = Get-MsUpCat -Search "1903+$SearchString" -Descending | Select-Object LastUpdated, Title, Version, Size, Guid -First 1 -ErrorAction Ignore
+                        }
+                        catch {
+                            <#Do this if a terminating exception happens#>
+                        }
+                    }
+                    if (-not ($WindowsUpdateDriver)) {
+                        try {
+                            Write-Verbose "Save-MsUpCatDriver Search: 1809+$SearchString"
+                            $WindowsUpdateDriver = Get-MsUpCat -Search "1809+$SearchString" -Descending | Select-Object LastUpdated, Title, Version, Size, Guid -First 1 -ErrorAction Ignore
+                        }
+                        catch {
+                            <#Do this if a terminating exception happens#>
+                        }
                     }
 
                     if ($WindowsUpdateDriver.Guid) {
