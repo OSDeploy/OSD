@@ -456,7 +456,7 @@
         if ($Global:StartOSDCloud.OSEdition -eq 'Home') {
             $Global:StartOSDCloud.OSEditionId = 'Core'
             $Global:StartOSDCloud.OSActivation = 'Retail'
-            $Global:StartOSDCloud.OSImageIndex = 4
+            $Global:StartOSDCloud.OSImageIndex = 4 #Confirmed 24.3.12 - GWB
         }
         if ($Global:StartOSDCloud.OSEdition -eq 'Home N') {
             $Global:StartOSDCloud.OSEditionId = 'CoreN'
@@ -524,7 +524,7 @@
         if ($Global:StartOSDCloud.OSEdition -eq 'Education') {
             $Global:StartOSDCloud.OSEditionId = 'Education'
             if ($Global:StartOSDCloud.OSActivation -eq 'Retail') {$Global:StartOSDCloud.OSImageIndex = 7}
-            if ($Global:StartOSDCloud.OSActivation -eq 'Volume') {$Global:StartOSDCloud.OSImageIndex = 4}
+            if ($Global:StartOSDCloud.OSActivation -eq 'Volume') {$Global:StartOSDCloud.OSImageIndex = 4} #Confirmed 24.3.12 - GWB
         }
         if ($Global:StartOSDCloud.OSEdition -eq 'Education N') {
             $Global:StartOSDCloud.OSEditionId = 'EducationN'

@@ -128,6 +128,7 @@
         'Get-OSDCloudDriverPack',
         'Get-OSDCloudDriverPacks',
         'Get-OSDCloudOperatingSystems',
+        'Get-OSDCloudOperatingSystemsIndexes',
         'Get-OSDCloudTemplate',
         'Get-OSDCloudTemplateNames',
         'Get-OSDCloudWorkspace',
