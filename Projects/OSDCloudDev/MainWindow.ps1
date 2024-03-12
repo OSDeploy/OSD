@@ -384,6 +384,12 @@ else{
 #$formMainWindowControlManufacturerFunction.IsEnabled = $false
 #$formMainWindowControlWindowsDefenderUpdate.Visibility = 'Hidden'
 #$formMainWindowControlWindowsDefenderUpdate.IsEnabled = $false
+
+#================================================
+#   Get Index Info
+#================================================
+$IndexInfo = Get-OSDCloudOperatingSystemsIndexes
+
 #================================================
 #   Menu Options
 #================================================
@@ -547,11 +553,26 @@ else {
     $formMainWindowControlAutopilotOOBELabel.Visibility = "Collapsed"  
     $formMainWindowControlAutopilotOOBECombobox.Visibility = "Collapsed"  
 }
+#=======================================================================
+#   OS Language Combobox -> Update Editions based on Language Box Change
+#=======================================================================
+
+$formMainWindowControlOSLanguageCombobox.add_SelectionChanged({
+    $ImageIndexInfo = $IndexInfo      | Where-Object {$_.Name -match $formMainWindowControlOSLanguageCombobox.SelectedValue}
+    $ImageIndexInfo = $ImageIndexInfo | Where-Object {$_.Language -match $formMainWindowControlOSLanguageCombobox.SelectedValue}
+    $ImageIndexInfo = $ImageIndexInfo | Where-Object {$_.Activation -match $formMainWindowControlOSActivationCombobox.SelectedValue}
+    
+
+    $ImageIndexInfo.IndexNames | ForEach-Object {
+        $formMainWindowControlOSEditionCombobox.Items.Add($_) | Out-Null
+    }
+})
+
 #================================================
 #   OS Edition Combobox to ImageIndex
 #================================================
-$formMainWindowControlOSEditionCombobox.add_SelectionChanged({
 
+$formMainWindowControlOSEditionCombobox.add_SelectionChanged({
     if ($formMainWindowControlOSEditionCombobox.SelectedValue -eq 'Home') {
         #Retail edition only and disable Activation combobox
         $formMainWindowControlOSActivationCombobox.SelectedValue = 'Retail'
