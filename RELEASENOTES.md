@@ -10,6 +10,11 @@ Note, the changes I make won't go into effect until the next module release date
 
 ## Changes
 
+### 24.3.12 (not yet implemented)
+- Start-OSDCloudGUIDev Updates
+  - Dynamically pulling the OS Edition and Index Numbers based on the OS Name, Language and Activation chosen in the GUI.
+    - This is to improve experience on other language esd files [Issue 117](https://github.com/OSDeploy/OSD/issues/117)
+  
 ### 24.3.6 (implemented in OSD Module 24.3.10.1)
 - Promoted code from Start-OSDCloudGUIDev to Start-OSDCloudGUI
   - This will add the HP enhancements as well as the SetupComplete enchancements into the Menus of the GUI
