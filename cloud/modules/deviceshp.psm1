@@ -86,8 +86,8 @@ function osdcloud-HPTPMDetermine{
 function osdcloud-HPTPMDowngrade{
     [String]$TPMVer = (Get-CimInstance  -Namespace "root\cimv2\security\MicrosoftTPM" -ClassName win32_tpm).ManufacturerVersion
     if ($TPMVer -eq "7.85.4555.0"){$SPNumber = "SP94937"}
-    if ($TPMVer -eq "7.63.3353.0"){$SPNumber = "SP87753"}  Need to confirm test machine to determine 
-    if ($SPNumber -ne $null){
+    if ($TPMVer -eq "7.63.3353.0"){$SPNumber = "SP87753"}  #Need to confirm test machine to determine 
+    if ($SPNumber){
         if ((!($WorkingFolder))-or ($null -eq $WorkingFolder)){$WorkingFolder = "$env:TEMP\TPM"}
         if (!(Test-Path -Path $WorkingFolder)){New-Item -Path $WorkingFolder -ItemType Directory -Force |Out-Null}
         $UpdatePath = "$WorkingFolder\$SPNumber.exe"
