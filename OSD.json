@@ -19,6 +19,15 @@
             "Version": "Windows 11",
             "ImageIndex": "6"
         },
+        "DefaultARM64": {
+            "Activation": "Retail",
+            "Edition": "Pro",
+            "Language": "en-us",
+            "Name": "Windows 11 23H2 ARM64",
+            "ReleaseID": "23H2",
+            "Version": "Windows 11",
+            "ImageIndex": "9"
+        },
         "Values": {
             "Activation": [
                 "Retail",
@@ -84,6 +93,12 @@
                 "Windows 10 20H2 x64",
                 "Windows 10 1909 x64"
             ],
+            "NameARM64": [
+                "Windows 11 23H2 ARM64",
+		        "Windows 11 22H2 ARM64",
+                "Windows 11 21H2 ARM64",
+                "Windows 10 22H2 ARM64"
+            ],
             "ReleaseID": [
                 "23H2",
 		        "22H2",
@@ -116,7 +131,18 @@
         "updateDiskDrivers": true,
         "updateFirmware": false,
         "updateNetworkDrivers": true,
-        "updateSCSIDrivers": true
+        "updateSCSIDrivers": true,
+        "OEMActivation": true,
+        "WindowsUpdate": false,
+        "WindowsUpdateDrivers": false,
+        "WindowsDefenderUpdate": false,
+        "SyncMSUpCatDriverUSB": true,
+        "HPIAALL": false,
+        "HPIADrivers": false,
+        "HPIAFirmware": false,
+        "HPIASoftware": false,
+        "HPTPMUpdate": false,
+        "HPBIOSUpdate": false
 	},
     "StartOSDCloudGUIDev": {
         "BrandName": "OSDCloudDev",
@@ -125,12 +151,13 @@
 	"WinPEDriverPack": {
 		"Dell": {
 			"Info": "https://www.dell.com/support/kbdoc/en-us/000107478/dell-command-deploy-winpe-driver-packs",
-			"LastKnownGoodWin10": "https://downloads.dell.com/FOLDER09626256M/1/WinPE10.0-Drivers-A30-F8JYY.CAB",
-			"LastKnownGoodWin11": "https://downloads.dell.com/FOLDER09651035M/1/WinPE11.0-Drivers-A00-5DWN3.CAB"
+			"LastKnownGoodWin10": "https://downloads.dell.com/FOLDER10964270M/1/WinPE10.0-Drivers-A32-473P6.cab",
+			"LastKnownGoodWin11": "https://downloads.dell.com/FOLDER10964300M/1/WinPE11.0-Drivers-A01-28HG7.CAB"
 		},
 		"HP": {
 			"Info": "http://ftp.ext.hp.com/pub/caps-softpaq/cmit/softpaq/WinPE10.html",
-			"LastKnownGood": "https://ftp.hp.com/pub/softpaq/sp145001-145500/sp145240.exe"
+			"LastKnownGood": "https://ftp.hp.com/pub/softpaq/sp149501-150000/sp149670.exe"
 		}
 	}
 }
+

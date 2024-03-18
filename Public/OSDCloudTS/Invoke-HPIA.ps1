@@ -238,13 +238,13 @@ Function Invoke-HPIA {
             Write-CMTraceLog -LogFile $CMTraceLog -Message "Exit $($Process.ExitCode) - The analysis returned no recommendation." -Component "Update" -Type 2
             Write-Host "Exit $($Process.ExitCode) - The analysis returned no recommendation." -ForegroundColor Green
             Write-CMTraceLog -LogFile $CMTraceLog -Message "########################################" -Component "Complete"
-            Exit 0
+            #Exit 0
         }
         elseif ($Process.ExitCode -eq 257){
             Write-CMTraceLog -LogFile $CMTraceLog -Message "Exit $($Process.ExitCode) - There were no recommendations selected for the analysis." -Component "Update" -Type 2
             Write-Host "Exit $($Process.ExitCode) - There were no recommendations selected for the analysis." -ForegroundColor Green
             Write-CMTraceLog -LogFile $CMTraceLog -Message "########################################" -Component "Complete"
-            Exit 0
+            #Exit 0
         }
         elseif ($Process.ExitCode -eq 3010){
             Write-CMTraceLog -LogFile $CMTraceLog -Message "Exit $($Process.ExitCode) - HPIA Complete, requires Restart" -Component "Update" -Type 2
@@ -258,6 +258,10 @@ Function Invoke-HPIA {
         elseif ($Process.ExitCode -eq 4096){
             Write-CMTraceLog -LogFile $CMTraceLog -Message "Exit $($Process.ExitCode) - This platform is not supported!" -Component "Update" -Type 2
             Write-Host "Exit $($Process.ExitCode) - This platform is not supported!" -ForegroundColor Yellow
+        }
+        elseif ($Process.ExitCode -eq 4104){
+            Write-CMTraceLog -LogFile $CMTraceLog -Message "Exit $($Process.ExitCode) - HPIA used a generic reference file to make the recommendation" -Component "Update" -Type 2
+            Write-Host "Exit $($Process.ExitCode) - HPIA used a generic reference file to make the recommendation" -ForegroundColor Yellow
         }
         elseif ($Process.ExitCode -eq 16386){
             Write-CMTraceLog -LogFile $CMTraceLog -Message "Exit $($Process.ExitCode) - This platform is not supported!" -Component "Update" -Type 2
@@ -290,7 +294,6 @@ Function Invoke-HPIA {
     catch {
         #Write-CMTraceLog -LogFile $CMTraceLog -Message "Exit $($Process.ExitCode) - Expecting 0" -Component "Update" -Type 3
         Write-Output "Exit $($Process.ExitCode) - Expecting 0" 
-        throw
     }
 
 }

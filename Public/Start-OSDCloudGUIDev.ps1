@@ -18,12 +18,12 @@
         #The custom Brand for OSDCloudGUI
         [Alias('Brand')]
         [System.String]
-        $BrandName = $Global:OSDModuleResource.StartOSDCloudGUI.BrandName,
+        $BrandName = $Global:OSDModuleResource.StartOSDCloudGUIDev.BrandName,
         
         #Color for the OSDCloudGUI Brand
         [Alias('Color')]
         [System.String]
-        $BrandColor = $Global:OSDModuleResource.StartOSDCloudGUI.BrandColor,
+        $BrandColor = $Global:OSDModuleResource.StartOSDCloudGUIDev.BrandColor,
 
         #Temporary Parameter
         [System.String]
@@ -69,6 +69,7 @@
         OSEditionValues             = [array]$Global:OSDModuleResource.OSDCloud.Values.Edition
         OSLanguageValues            = [array]$Global:OSDModuleResource.OSDCloud.Values.Language
         OSNameValues                = [array]$Global:OSDModuleResource.OSDCloud.Values.Name
+        OSNameARM64Values           = [array]$Global:OSDModuleResource.OSDCloud.Values.NameARM64
         OSReleaseIDValues           = [array]$Global:OSDModuleResource.OSDCloud.Values.ReleaseID
         OSVersionValues             = [array]$Global:OSDModuleResource.OSDCloud.Values.Version
         
@@ -80,6 +81,19 @@
         updateNetworkDrivers        = [System.Boolean]$Global:OSDModuleResource.StartOSDCloudGUI.updateNetworkDrivers
         updateSCSIDrivers           = [System.Boolean]$Global:OSDModuleResource.StartOSDCloudGUI.updateSCSIDrivers
         
+        OEMActivation               = [System.Boolean]$Global:OSDModuleResource.StartOSDCloudGUI.OEMActivation
+        WindowsUpdate               = [System.Boolean]$Global:OSDModuleResource.StartOSDCloudGUI.WindowsUpdate
+        WindowsUpdateDrivers        = [System.Boolean]$Global:OSDModuleResource.StartOSDCloudGUI.WindowsUpdateDrivers
+        WindowsDefenderUpdate       = [System.Boolean]$Global:OSDModuleResource.StartOSDCloudGUI.WindowsDefenderUpdate
+        SyncMSUpCatDriverUSB        = [System.Boolean]$Global:OSDModuleResource.StartOSDCloudGUI.SyncMSUpCatDriverUSB
+
+        HPIAALL                     = [System.Boolean]$Global:OSDModuleResource.StartOSDCloudGUI.HPIAALL
+        HPIADrivers                 = [System.Boolean]$Global:OSDModuleResource.StartOSDCloudGUI.HPIADrivers
+        HPIAFirmware                = [System.Boolean]$Global:OSDModuleResource.StartOSDCloudGUI.HPIAFirmware
+        HPIASoftware                = [System.Boolean]$Global:OSDModuleResource.StartOSDCloudGUI.HPIASoftware
+        HPTPMUpdate                 = [System.Boolean]$Global:OSDModuleResource.StartOSDCloudGUI.HPTPMUpdate
+        HPBIOSUpdate                = [System.Boolean]$Global:OSDModuleResource.StartOSDCloudGUI.HPBIOSUpdate
+
         TimeStart                   = [datetime](Get-Date)
     }
     #================================================
@@ -168,7 +182,22 @@
     #================================================
     #   Launch GUI
     #================================================
-    & "$($MyInvocation.MyCommand.Module.ModuleBase)\Projects\OSDCloudDEV\MainWindow.ps1"
+    $Arch = (Get-NativeMatchineImage).NativeMachine
+    Write-Host -ForegroundColor Green "Running $Arch"
+    if ($Arch -eq "ARM64"){
+        $Global:OSDCloudGUI.OSActivation                = [System.String]$Global:OSDModuleResource.OSDCloud.DefaultARM64.Activation
+        $Global:OSDCloudGUI.OSEdition                   = [System.String]$Global:OSDModuleResource.OSDCloud.DefaultARM64.Edition
+        $Global:OSDCloudGUI.OSLanguage                  = [System.String]$Global:OSDModuleResource.OSDCloud.DefaultARM64.Language
+        $Global:OSDCloudGUI.OSImageIndex                = [System.Int32]$Global:OSDModuleResource.OSDCloud.DefaultARM64.ImageIndex
+        $Global:OSDCloudGUI.OSName                      = [System.String]$Global:OSDModuleResource.OSDCloud.DefaultARM64.Name
+        $Global:OSDCloudGUI.OSReleaseID                 = [System.String]$Global:OSDModuleResource.OSDCloud.DefaultARM64.ReleaseID
+        $Global:OSDCloudGUI.OSVersion                   = [System.String]$Global:OSDModuleResource.OSDCloud.DefaultARM64.Version
+        & "$($MyInvocation.MyCommand.Module.ModuleBase)\Projects\OSDCloudDEV\MainWindowARM64.ps1"
+    }
+    else{
+        & "$($MyInvocation.MyCommand.Module.ModuleBase)\Projects\OSDCloudDEV\MainWindow.ps1"
+    }
+    
     Start-Sleep -Seconds 2
     #================================================
 }

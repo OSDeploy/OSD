@@ -1,13 +1,6 @@
 Function Start-WindowsUpdate{
     <# Control Windows Update via PowerShell
-    Gary Blok - GARYTOWN.COM
-    NOTE: I'm using this in a RUN SCRIPT, so I hav the Parameters set to STRING, and in the RUN SCRIPT, I Create a list of options (TRUE & FALSE).
-    In a normal script, you wouldn't do this... so modify for your deployment method.
-
-    This was also intended to be used with ConfigMgr, if you're not, feel free to remove the $CMReboot & Corrisponding Function
-
     Installing Updates using this Method does NOT notify the user, and does NOT let the user know that updates need to be applied at the next reboot.  It's 100% hidden.
-
     HResult Lookup: https://docs.microsoft.com/en-us/windows/win32/wua_sdk/wua-success-and-error-codes-
     #>
 
@@ -42,7 +35,7 @@ Function Start-WindowsUpdate{
         }
         $InstallUpdateCount = $WUInstaller.Updates.count
         if ($InstallUpdateCount -ge 1){
-            Write-Output "Installing $InstallUpdateCount Updates"
+            Write-Output "Installing $InstallUpdateCount Updates | Time: $($(Get-Date).ToString("hh:mm:ss"))"
             $Install = $WUInstaller.Install()
             $ResultMeaning = ($Results | Where-Object {$_.ResultCode -eq $Install.ResultCode}).Meaning
             Write-Output $ResultMeaning

@@ -45,3 +45,27 @@ function Set-SetupCompleteOSDCloudUSB {
         }
     }
 }
+
+function Set-SetupCompleteOSDCloudCustom {
+    $OSDCloudSetupCompletePath = "C:\OSDCloud\Scripts\SetupComplete"
+    try {
+        [void][System.IO.Directory]::CreateDirectory("C:\OSDCloud\Scripts")
+        [void][System.IO.Directory]::CreateDirectory("$OSDCloudSetupCompletePath")
+    }
+    catch {throw}
+
+    $ScriptsPath = "C:\Windows\Setup\scripts"
+    $RunScript = @(@{ Script = "SetupComplete"; BatFile = 'SetupComplete.cmd'; ps1file = 'SetupComplete.ps1';Type = 'Setup'; Path = "$ScriptsPath"})
+    $PSFilePath = "$($RunScript.Path)\$($RunScript.ps1File)"
+
+    if (Test-Path -Path $PSFilePath){
+        Add-Content -Path $PSFilePath "Write-OutPut 'Running Scripts in Custom OSDCloud SetupComplete Folder'"
+        Add-Content -Path $PSFilePath '$SetupCompletePath = "C:\OSDCloud\Scripts\SetupComplete\SetupComplete.cmd"'
+        Add-Content -Path $PSFilePath 'if (Test-Path $SetupCompletePath){$SetupComplete = Get-ChildItem $SetupCompletePath -Filter SetupComplete.cmd}'
+        Add-Content -Path $PSFilePath 'if ($SetupComplete){cmd.exe /start /wait /c $SetupComplete.FullName}'
+        Add-Content -Path $PSFilePath "Write-Output '-------------------------------------------------------------'"
+    }
+    else {
+    Write-Output "$PSFilePath - Not Found"
+    }
+}

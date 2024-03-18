@@ -39,7 +39,7 @@ Aliases: Brand
 
 Required: False
 Position: 1
-Default value: $Global:OSDModuleResource.StartOSDCloudGUI.BrandName
+Default value: $Global:OSDModuleResource.StartOSDCloudGUIDev.BrandName
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
@@ -54,7 +54,7 @@ Aliases: Color
 
 Required: False
 Position: 2
-Default value: $Global:OSDModuleResource.StartOSDCloudGUI.BrandColor
+Default value: $Global:OSDModuleResource.StartOSDCloudGUIDev.BrandColor
 Accept pipeline input: False
 Accept wildcard characters: False
 ```

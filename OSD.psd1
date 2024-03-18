@@ -4,13 +4,13 @@
 
 @{
     RootModule              = 'OSD.psm1'
-    ModuleVersion           = '24.1.3.1'
+    ModuleVersion           = '24.3.10.1'
     CompatiblePSEditions    = @('Desktop')
     GUID                    = '9fe5b9b6-0224-4d87-9018-a8978529f6f5'
     Author                  = 'David Segura . Gary Blok . Jérôme Bezet-Torres . Damien Van Robaeys . Mike Marable . Akos Bakos'
     CompanyName             = 'OSD Community'
     Copyright               = '(c) 2024 OSDeploy'
-    Description             = 'January 2024 Update'
+    Description             = 'March 2024 MVP Summit Week'
     PowerShellVersion       = '5.1'
     FormatsToProcess        = @(
         '.\Format\MsUpCat.Format.ps1xml'
@@ -100,8 +100,10 @@
         'Get-GithubRawUrl',
         'Get-HPDriverPack',
         'Get-HPWinPEDriverPack',
+        'Get-HPDeviceFamilyPlatformDetails',
         'Get-HyperVName',
         'Get-LenovoDriverPack',
+        'Get-NativeMatchineImage',
         'Get-MicrosoftDriverPack',
         'Get-MsUpCat',
         'Get-MsUpCatUpdate',
@@ -126,6 +128,7 @@
         'Get-OSDCloudDriverPack',
         'Get-OSDCloudDriverPacks',
         'Get-OSDCloudOperatingSystems',
+        'Get-OSDCloudOperatingSystemsIndexes',
         'Get-OSDCloudTemplate',
         'Get-OSDCloudTemplateNames',
         'Get-OSDCloudWorkspace',
@@ -165,7 +168,9 @@
         'Get-WinREPartition',
         'Get-WinREWiFi',
         'Get-WindowsOEMProductKey',
+        'Get-WindowsUpdateDriver',
         'Get-HPTPMDetermine',
+        'Invoke-OSDCloudIPU',
         'Invoke-HPTPMDownload',
         'Invoke-HPTPMEXEDownload',
         'Invoke-HPTPMEXEInstall',
@@ -194,6 +199,8 @@
         'New-OSDCloudISO',
         'New-OSDCloudTemplate',
         'New-OSDCloudUSB',
+        'New-OSDCloudUSBSetupCompleteTemplate',
+        'New-OSDCloudWorkSpaceSetupCompleteTemplate',
         'New-OSDCloudWorkspace',
         'New-OSDisk',
         'Remove-AppxOnline',
@@ -226,8 +233,7 @@
         'Invoke-SelectLocalVolume',
         'Invoke-SelectOSDVolume',
         'Invoke-SelectUSBVolume',
-        'Start-WindowsUpdate',
-        'Start-WindowsUpdateDriver',
+
         'Set-AzClipboard',
         'Set-BitlockerRegValuesXTS256',
         'Set-BootmgrTimeout',
@@ -253,6 +259,7 @@
         'Set-SetupCompleteStartWindowsUpdate',
         'Set-SetupCompleteStartWindowsUpdateDriver',
         'Set-SetupCompleteOSDCloudUSB',
+        'Set-SetupCompleteOSDCloudCustom',
         'Set-SetupCompleteTimeZone',
         'Set-SetupCompleteSetWiFi',
         'Set-TimeZoneFromIP',
@@ -277,9 +284,12 @@
         'Start-OSDeployPad',
         'Start-ScreenPNGProcess',
         'Start-WinREWiFi',
+        'Start-WindowsUpdate',
+        'Start-WindowsUpdateDriver',
         'Stop-ScreenPNGProcess',
         'Start-DISMFromOSDCloudUSB',
         'Test-DISMFromOSDCloudUSB',
+        'Test-HPTPMFromOSDCloudUSB',
         'Test-DCUSupport',
         'Test-FolderToIso',
         'Test-HPIASupport',

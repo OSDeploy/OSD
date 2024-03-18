@@ -20,7 +20,7 @@ function New-AdkCopyPE {
         [string]$Path,
 
         [Parameter(ValueFromPipelineByPropertyName = $true)]
-        [ValidateSet('amd64','x86')]
+        [ValidateSet('amd64','x86','arm64')]
         [string]$WinPEArch = 'amd64'
     )
 

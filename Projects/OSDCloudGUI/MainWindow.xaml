@@ -134,10 +134,6 @@
                 <MenuItem Name="restartComputer"
                           Header="restart Computer after WinPE"
                           IsCheckable="True" />
-                <MenuItem Name="WindowsDefenderUpdate"
-                          Header="update Windows Defender"
-                          IsCheckable="True"
-                          IsChecked="True" />
             </MenuItem>
             <MenuItem Header="Microsoft Update Catalog">
                 <MenuItem Name="updateDiskDrivers"
@@ -152,6 +148,10 @@
                 <MenuItem Name="updateSCSIDrivers"
                           Header="update SCSIAdapter Drivers"
                           IsCheckable="True" />
+                <MenuItem Name="SyncMSUpCatDriverUSB"
+                          Header="Sync MS drivers to USB"
+                          IsCheckable="True"
+                          IsChecked="True" />
             </MenuItem>
             <MenuItem x:Name="ManufacturerFunction" Header="Manufacturer Functions">
                 <MenuItem x:Name="Option_Name_1"
@@ -176,6 +176,28 @@
                     IsChecked="False" />
                 <MenuItem x:Name="Option_Name_6"
                     Header="Option_Header_6"
+                    IsCheckable="True"
+                    IsChecked="False" />
+            </MenuItem>
+<MenuItem x:Name="SetupComplete" Header="SetupComplete Options">
+                <MenuItem x:Name="WindowsUpdates"
+                    Header="Windows Updates (No Drivers)"
+                    IsCheckable="True"
+                    IsChecked="False" />
+                <MenuItem x:Name="WindowsUpdateDrivers"
+                    Header="Windows Update (Only Drivers)"
+                    IsCheckable="True"
+                    IsChecked="False" />
+                <MenuItem x:Name="WindowsDefenderUpdate"
+                    Header="Windows Defender Update"
+                    IsCheckable="True"
+                    IsChecked="False" />
+                <MenuItem x:Name="OEMActivation"
+                    Header="Apply Key from UEFI"
+                    IsCheckable="True"
+                    IsChecked="False" />
+                <MenuItem x:Name="ShutdownSetupComplete"
+                    Header="Shutdown After SetupComplete"
                     IsCheckable="True"
                     IsChecked="False" />
             </MenuItem>

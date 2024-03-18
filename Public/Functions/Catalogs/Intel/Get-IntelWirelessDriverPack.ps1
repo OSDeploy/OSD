@@ -68,8 +68,11 @@ function Get-IntelWirelessDriverPack {
     if (-not(Test-Path $TempDSADataExpand)) {
         $null = New-Item -Path $TempDSADataExpand -ItemType Directory -Force
     }
-    #$ModuleCatalogFile = "$($MyInvocation.MyCommand.Module.ModuleBase)\Catalogs\$OfflineCatalogName"
-    $ModuleCatalogFile = "$GitHubFolder\OSD\Catalogs\$OfflineCatalogName"
+    $ModuleCatalogFile = "$($MyInvocation.MyCommand.Module.ModuleBase)\Catalogs\$OfflineCatalogName"
+    #Next two lines are specific to Gary when he is testing this function
+    #$GitHubFolder = 'C:\Users\GaryBlok\OneDrive - garytown\Documents\GitHub'
+    #$ModuleCatalogFile = "$GitHubFolder\OSD\Catalogs\$OfflineCatalogName" #GARY's Test Machine
+    
     $ModuleCatalogContent = Get-Content -Path $ModuleCatalogFile -Raw | ConvertFrom-Json
     #=================================================
     #   IsOnline
@@ -87,6 +90,45 @@ function Get-IntelWirelessDriverPack {
         $WiFi = $JSONData | Where-Object {$_.name -match "Wi-Fi"}
         $WiFiURL = $WiFi.Files.Url | Where-Object {$_ -match "Driver64"}
         $WiFiZipURL = $WiFiURL.replace(".exe",".zip")
+
+        # Retrieve the Catalog number from the Download URL
+        $WiFiZipURLCatalogNumber = ([int]($WiFiZipURL.Split('/') | Select-Object -Last 1 -Skip 1))
+
+        # Generate array of multiple URLs to try
+        # - Original $WiFiZipURL
+        # - Original $WiFiZipURL with the catalog number increased by 1
+        $WiFiZipURLs = @(
+            $WiFiZipURL,
+            ($WiFiZipURL -replace $WiFiZipURLCatalogNumber, ($WiFiZipURLCatalogNumber + 1)),
+            ($WiFiZipURL -replace $WiFiZipURLCatalogNumber, ($WiFiZipURLCatalogNumber + 2)),
+            ($WiFiZipURL -replace $WiFiZipURLCatalogNumber, ($WiFiZipURLCatalogNumber + 3))
+        )
+
+        # Test if one of the $WiFiZipURLs exists
+        $WiFiZipURLExists = $false
+        foreach ($WiFiZipURL in $WiFiZipURLs)
+        {
+            try
+            {
+                $WiFiZipURLWebRequest = Invoke-WebRequest -Uri $WiFiZipURL -Method Head -ErrorAction Stop
+                if($WiFiZipURLWebRequest.StatusCode -eq 200)
+                {
+                    $WiFiZipURLExists = $true
+                    break
+                }
+            }
+            catch
+            {
+                # Tested URL does not exist
+            }
+        }
+
+        if($WiFiZipURLExists -eq $false)
+        {
+            Write-Host "Please try again without using the Online switch" -ForegroundColor Yellow
+            Write-Error -Message ('Unable to retrieve a valid Intel Wireless Driver Pack Download URL')
+            Exit
+        }
 
         $ModuleCatalogContent = $ModuleCatalogContent | Select-Object -First 1
         #=================================================

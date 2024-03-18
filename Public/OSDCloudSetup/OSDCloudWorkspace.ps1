@@ -430,3 +430,40 @@ function Set-OSDCloudWorkspace {
     $WorkspacePath
     #endregion
 }
+
+function New-OSDCloudWorkSpaceSetupCompleteTemplate {
+
+    $OSDCloudWS = Get-OSDCloudWorkspace
+    $SetupCompletePath = "$OSDCloudWS\Config\Scripts\SetupComplete"
+    $ScriptsPath = $SetupCompletePath
+
+    if (!(Test-Path -Path $ScriptsPath)){New-Item -Path $ScriptsPath} 
+
+    $RunScript = @(@{ Script = "SetupComplete"; BatFile = 'SetupComplete.cmd'; ps1file = 'SetupComplete.ps1';Type = 'Setup'; Path = "$ScriptsPath"})
+
+
+    Write-Output "Creating $($RunScript.Script) Files"
+
+    $BatFilePath = "$($RunScript.Path)\$($RunScript.batFile)"
+    $PSFilePath = "$($RunScript.Path)\$($RunScript.ps1File)"
+            
+    #Create Batch File to Call PowerShell File
+    if (Test-Path -Path $PSFilePath){
+        copy-item $PSFilePath -Destination "$ScriptsPath\SetupComplete.ps1.bak"
+    }        
+    New-Item -Path $BatFilePath -ItemType File -Force
+    $CustomActionContent = New-Object system.text.stringbuilder
+    [void]$CustomActionContent.Append('%windir%\System32\WindowsPowerShell\v1.0\powershell.exe -ExecutionPolicy ByPass -File C:\OSDCloud\Scripts\SetupComplete\SetupComplete.ps1')
+    Add-Content -Path $BatFilePath -Value $CustomActionContent.ToString()
+
+    #Create PowerShell File to do actions
+
+    New-Item -Path $PSFilePath -ItemType File -Force
+    Add-Content -path $PSFilePath 'Write-Output "========================================================="'
+    Add-Content -path $PSFilePath 'Write-Output "Calling Custom Setup Complete File: $($PSCommandPath)"'
+    Add-Content -path $PSFilePath 'Write-Output ""'
+    Add-Content -path $PSFilePath 'Write-Output "CONFIRMED THIS RAN FROM FILE COPIED VIA FLASH DRIVE"'
+    Add-Content -path $PSFilePath 'Write-Output ""'
+    Add-Content -path $PSFilePath 'Write-Output "Completed Custom Setup Complete File: $($PSCommandPath)"'
+    Add-Content -path $PSFilePath 'Write-Output "========================================================="'
+}
