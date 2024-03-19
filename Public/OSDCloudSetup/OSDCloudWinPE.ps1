@@ -215,7 +215,9 @@
     #region CloudDriver
     if ($CloudDriver) {
         foreach ($Driver in $CloudDriver) {
+            Write-Verbose "Downloading $Driver Driver Pack"
             $AddWindowsDriverPath = Save-WinPECloudDriver -CloudDriver $Driver -Path (Join-Path $env:TEMP (Get-Random))
+            Write-Verbose "Adding $AddWindowsDriverPath to WinPE Drivers"
             Add-WindowsDriver -Path "$MountPath" -Driver "$AddWindowsDriverPath" -Recurse -ForceUnsigned -Verbose
         }
         $null = Save-WindowsImage -Path $MountPath
