@@ -235,6 +235,7 @@ function Save-WinPECloudDriver {
                 $DriverPackDownload = Save-WebFile -SourceUrl $HpCloudDriverPack
 
                 if (Test-Path $DriverPackDownload.FullName) {
+                    Write-Verbose "Downloaded $DriverPackDownload.FullName"
                     $DriverPackItem = Get-Item -Path $DriverPackDownload.FullName
                     $DriverPackExpand = Join-Path $Path (Join-Path $DriverPack $DriverPackItem.BaseName)
 

@@ -224,6 +224,7 @@
 
     #region DriverPath
     foreach ($AddWindowsDriverPath in $DriverPath) {
+        Write-Verbose "Adding $AddWindowsDriverPath to WinPE Drivers"
         Add-WindowsDriver -Path "$MountPath" -Driver "$AddWindowsDriverPath" -Recurse -ForceUnsigned -Verbose
     }
     #endregion
