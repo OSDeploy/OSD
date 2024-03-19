@@ -1635,18 +1635,44 @@
                                 $HPBIOSWinUpdate = $true
                             }
                             else{ #No Password & No Sure Recover and there must be an update, so lets try to update it.
-                                Write-Host -ForegroundColor Gray "Starting HP BIOS Update Process using HPCMSL [Get-HPBIOSUpdates -Flash -Yes -Offline -BitLocker Ignore]"
+                                Write-Host -ForegroundColor Gray "Starting HP BIOS Update Process Job using HPCMSL [Get-HPBIOSUpdates -Flash -Yes -Offline -BitLocker Ignore]"
                                 Write-Host -ForegroundColor DarkGray "Current Firmware: $(Get-HPBIOSVersion)"
                                 Write-Host -ForegroundColor DarkGray "Staging Update: $((Get-HPBIOSUpdates -Latest).ver) "
                                 #Details: https://developers.hp.com/hp-client-management/doc/Get-HPBiosUpdates
-                                try {
-                                    Get-HPBIOSUpdates -Flash -Yes -Offline -BitLocker Ignore -ErrorAction SilentlyContinue
-                                    $Global:OSDCloud.HPBIOSUpdate = $false
-                                    $HPBIOSUpdateNotes = "Attempted in WinPE - Update to $((Get-HPBIOSUpdates -Latest).ver)"
+                                $timeoutSeconds = 60 # 1 Minite Timeout for BIOS Update
+                                $code = {
+                                    Start-Transcript -Path "C:\OSDCloud\Logs\HPBIOSUpdateJob.log"
+                                    Get-HPBIOSUpdates -Flash -Yes -Offline -BitLocker Ignore -ErrorAction SilentlyContinue -Verbose
+                                    Stop-Transcript
                                 }
-                                catch {
-                                    Write-Host -ForegroundColor Yellow "Failed attempt to Update BIOS using CMSL"
+                                #Start the Job
+                                $HPBIOSUpdateNotes = "Attempted in WinPE - Update to $((Get-HPBIOSUpdates -Latest).ver)"
+                                $Installing = Start-Job -ScriptBlock $code
+                                # Report the job ID (for diagnostic purposes)
+                                write-host -ForegroundColor DarkGray "BIOS Update Job ID: $($Installing.Id)"
+                                Write-Host -ForegroundColor DarkGray "See Log: C:\OSDCloud\Logs\HPBIOSUpdateJob.log for Details"
+                                
+                                # Wait for the job to complete or time out
+                                Wait-Job $Installing -Timeout $timeoutSeconds | Out-Null
+                                #Receive-Job -Job $Installing
+                                # Check the job state
+                                if ($Installing.State -eq "Completed") {
+                                    # Job completed successfully
+                                    write-host -ForegroundColor DarkGray "Completed running Job to Update BIOS"
+                                } elseif ($Installing.State -eq "Running") {
+                                    # Job was interrupted due to timeout
+                                    write-host -ForegroundColor DarkGray "Job to Update BIOS was Interrupted"
+                                    "Interrupted"
+                                } else {
+                                    # Unexpected job state
+                                    write-host -ForegroundColor DarkGray "Job to Update BIOS went to an Unexpected State, see log"
                                 }
+                                # Clean up the job
+                                Remove-Job -Force $Installing
+                                if (Test-Path -Path "C:\OSDCloud\Logs\HPBIOSUpdateJob.log"){
+                                    Write-Host -ForegroundColor Cyan "$((Get-content -Path "C:\OSDCloud\Logs\HPBIOSUpdateJob.log" -ReadCount 1) | Select-Object -last 6 | Select-Object -First 1)"
+                                }
+                                
                             }
                         }
                     }
