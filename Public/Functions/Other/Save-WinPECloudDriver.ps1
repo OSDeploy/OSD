@@ -227,7 +227,10 @@ function Save-WinPECloudDriver {
         #=================================================
         if ($DriverPack -eq 'HP') {
             Write-Host -ForegroundColor Yellow "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) $HpCloudDriverText"
-
+            if ($null -eq $HpCloudDriverPack){
+                Write-Warning "Unable to determine HP Driver Pack URL"
+                Write-Warning "Check Get-HPWinPEDriverPack function"
+            }
             if (Test-WebConnection -Uri $HpCloudDriverPack)   {
               $DriverPackDownload = Save-WebFile -SourceUrl $HpCloudDriverPack
 
