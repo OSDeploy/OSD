@@ -202,9 +202,9 @@ function Save-WinPECloudDriver {
             Write-Host -ForegroundColor Yellow "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) $DellCloudDriverText"
 
             if (Test-WebConnection -Uri $DellCloudDriverPack) {
-               $DriverPackDownload = Save-WebFile -SourceUrl $DellCloudDriverPack
+                $DriverPackDownload = Save-WebFile -SourceUrl $DellCloudDriverPack
 
-             if (Test-Path $DriverPackDownload.FullName) {
+            if (Test-Path $DriverPackDownload.FullName) {
                     $DriverPackItem = Get-Item -Path $DriverPackDownload.FullName
                     $DriverPackExpand = Join-Path $Path (Join-Path $DriverPack $DriverPackItem.BaseName)
             
@@ -220,7 +220,7 @@ function Save-WinPECloudDriver {
             }
             else {
                 Write-Warning "Unable to connect to $DellCloudDriverPack"
-         }
+            }
         }
         #=================================================
         #   HP
@@ -232,7 +232,7 @@ function Save-WinPECloudDriver {
                 Write-Warning "Check Get-HPWinPEDriverPack function"
             }
             if (Test-WebConnection -Uri $HpCloudDriverPack)   {
-              $DriverPackDownload = Save-WebFile -SourceUrl $HpCloudDriverPack
+                $DriverPackDownload = Save-WebFile -SourceUrl $HpCloudDriverPack
 
                 if (Test-Path $DriverPackDownload.FullName) {
                     $DriverPackItem = Get-Item -Path $DriverPackDownload.FullName
