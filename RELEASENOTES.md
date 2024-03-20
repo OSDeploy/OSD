@@ -12,7 +12,7 @@ Note, the changes I make won't go into effect until the next module release date
 
 
 
-### 24.3.19
+### 24.3.19 (not yet implemented)
 - Bug Fixes
   - [Issue 126](https://github.com/OSDeploy/OSD/issues/126) - Unable to add HP drivers into the WinPE
     - Updated URL in Function to address it not downloading WinPE driver pack
