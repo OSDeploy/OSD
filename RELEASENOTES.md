@@ -11,6 +11,18 @@ Note, the changes I make won't go into effect until the next module release date
 ## Changes
 
 
+### 24.3.20 (not yet implemented)
+- Added changes for easier debugging
+ - Added checkbox in Start-OSDCloudGUIDev drop down menu to enable Debug Mode
+  - when debugmode = $true (Via GUI or setting variable in script)
+    - Creates addtional logs in c:\OSDCloud\Logs
+      - DiskPart Logs (Before & After Format Step)
+      - OSDCloudDebug
+        - OSDCloud Variables
+        - Windows 11 Readiness
+        - TPM Information
+        - MyComputerInfo
+
 
 ### 24.3.19 (implemented in OSD Module 24.3.20.1)
 - Bug Fixes
