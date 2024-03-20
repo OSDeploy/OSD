@@ -12,6 +12,14 @@ Note, the changes I make won't go into effect until the next module release date
 
 
 
+### 24.3.19
+- Bug Fixes
+  - [Issue 126](https://github.com/OSDeploy/OSD/issues/126) - Unable to add HP drivers into the WinPE
+    - Updated URL in Function to address it not downloading WinPE driver pack
+    - Added addtional Verbose Logging to help track the issue faster in the future if vendor modifies URL
+  - [Issue 125](https://github.com/OSDeploy/OSD/issues/125) - HP BIOS failing to Update using CMSL
+    - I've been unable to reproduce the issue, but I've modified the BIOS update to be a seperate JOB, so if the update fails, it shoudn't break OSDCloud's process.
+
 ### 24.3.12 (not yet implemented)
 - Start-OSDCloudGUIDev Updates
   - Dynamically pulling the OS Edition and Index Numbers based on the OS Name, Language and Activation chosen in the GUI.
