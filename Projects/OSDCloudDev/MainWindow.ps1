@@ -396,6 +396,7 @@ $IndexInfo = Get-OSDCloudOperatingSystemsIndexes
 $formMainWindowControlcaptureScreenshots.IsChecked = $Global:OSDCloudGUI.captureScreenshots
 $formMainWindowControlClearDiskConfirm.IsChecked = $Global:OSDCloudGUI.ClearDiskConfirm
 $formMainWindowControlrestartComputer.IsChecked = $Global:OSDCloudGUI.restartComputer
+$formMainWindowControldebugMode.IsChecked = $Global:OSDCloudGUI.debugMode
 $formMainWindowControlupdateDiskDrivers.IsChecked = $Global:OSDCloudGUI.updateDiskDrivers
 $formMainWindowControlupdateFirmware.IsChecked = $Global:OSDCloudGUI.updateFirmware
 $formMainWindowControlupdateNetworkDrivers.IsChecked = $Global:OSDCloudGUI.updateNetworkDrivers
@@ -901,6 +902,7 @@ $formMainWindowControlStartButton.add_Click({
         captureScreenshots          = [System.Boolean]$formMainWindowControlScreenshotCapture.IsChecked
         ClearDiskConfirm            = [System.Boolean]$formMainWindowControlClearDiskConfirm.IsChecked
         restartComputer             = [System.Boolean]$formMainWindowControlRestartComputer.IsChecked
+        debugMode                   = [System.Boolean]$formMainWindowControldebugMode.IsChecked
         updateDiskDrivers           = [System.Boolean]$formMainWindowControlupdateDiskDrivers.IsChecked
         updateFirmware              = [System.Boolean]$formMainWindowControlupdateFirmware.IsChecked
         updateNetworkDrivers        = [System.Boolean]$formMainWindowControlupdateNetworkDrivers.IsChecked
