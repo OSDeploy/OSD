@@ -22,6 +22,7 @@ Note, the changes I make won't go into effect until the next module release date
         - Windows 11 Readiness
         - TPM Information
         - MyComputerInfo
+- If you open issues for OSDCloud, I'll be asking for those logs.
 
 
 ### 24.3.19 (implemented in OSD Module 24.3.20.1)
