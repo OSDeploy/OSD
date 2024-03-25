@@ -265,18 +265,18 @@ if (Test-WebConnection -Uri "google.com") {
     $WebConnection = $True
 }
 if ($WebConnection -eq $true){
-function Test-HPIASupport {
-    $CabPath = "$env:TEMP\platformList.cab"
-    $XMLPath = "$env:TEMP\platformList.xml"
-    $PlatformListCabURL = "https://hpia.hpcloud.hp.com/ref/platformList.cab"
-    Invoke-WebRequest -Uri $PlatformListCabURL -OutFile $CabPath -UseBasicParsing
-    $Expand = expand $CabPath $XMLPath
-    [xml]$XML = Get-Content $XMLPath
-    $Platforms = $XML.ImagePal.Platform.SystemID
-    $MachinePlatform = (Get-CimInstance -Namespace root/cimv2 -ClassName Win32_BaseBoard).Product
-    if ($MachinePlatform -in $Platforms){$HPIASupport = $true}
-    else {$HPIASupport = $false}
-    return $HPIASupport
+    function Test-HPIASupport {
+        $CabPath = "$env:TEMP\platformList.cab"
+        $XMLPath = "$env:TEMP\platformList.xml"
+        $PlatformListCabURL = "https://hpia.hpcloud.hp.com/ref/platformList.cab"
+        Invoke-WebRequest -Uri $PlatformListCabURL -OutFile $CabPath -UseBasicParsing
+        $Expand = expand $CabPath $XMLPath
+        [xml]$XML = Get-Content $XMLPath
+        $Platforms = $XML.ImagePal.Platform.SystemID
+        $MachinePlatform = (Get-CimInstance -Namespace root/cimv2 -ClassName Win32_BaseBoard).Product
+        if ($MachinePlatform -in $Platforms){$HPIASupport = $true}
+        else {$HPIASupport = $false}
+        return $HPIASupport
     }
 }
 
@@ -284,7 +284,7 @@ $Manufacturer = (Get-CimInstance -Class:Win32_ComputerSystem).Manufacturer
 $Model = (Get-CimInstance -Class:Win32_ComputerSystem).Model
 if ($Manufacturer -match "HP" -or $Manufacturer -match "Hewlett-Packard"){
     $Manufacturer = "HP"
-    $HPEnterprise = Test-HPIASupport
+    if ($WebConnection -eq $true){$HPEnterprise = Test-HPIASupport}
     }
 if ($Manufacturer -match "Microsoft"){
     if ($Model -eq "Virtual Machine"){

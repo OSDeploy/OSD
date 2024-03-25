@@ -284,7 +284,7 @@ $Manufacturer = (Get-CimInstance -Class:Win32_ComputerSystem).Manufacturer
 $Model = (Get-CimInstance -Class:Win32_ComputerSystem).Model
 if ($Manufacturer -match "HP" -or $Manufacturer -match "Hewlett-Packard"){
     $Manufacturer = "HP"
-    $HPEnterprise = Test-HPIASupport
+    if ($WebConnection -eq $true){$HPEnterprise = Test-HPIASupport}
     } 
 if ($Manufacturer -match "Microsoft"){
     if ($Model -eq "Virtual Machine"){
