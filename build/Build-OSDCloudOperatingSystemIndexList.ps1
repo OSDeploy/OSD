@@ -11,7 +11,7 @@ $ImageIndexDB = @()
 $Counter = 0
 foreach ($ESD in $ESDFilesX64){
     $Counter ++
-    write-host -ForegroundColor Cyan "Starting $($ESD.Name) - $Counter of $($ESDFiles.Count)"
+    write-host -ForegroundColor Cyan "Starting $($ESD.Name) - $Counter of $($ESDFilesX64.Count)"
     Write-Host -ForegroundColor Green "Time: $(Get-Date -Format HH:mm:ss-yyyy-MM-dd)"
     $ImageFolderPath = "$ESDStorage\$($ESD.version) $($ESD.ReleaseId) $($ESD.Architecture)"
     if (!(Test-Path -Path $ImageFolderPath)){New-Item -Path $ImageFolderPath -ItemType Directory -Force | Out-Null}
@@ -94,7 +94,7 @@ $ImageIndexDB = @()
 $Counter = 0
 foreach ($ESD in $ESDFilesARM64){
     $Counter ++
-    write-host -ForegroundColor Cyan "Starting $($ESD.Name) - $Counter of $($ESDFiles.Count)"
+    write-host -ForegroundColor Cyan "Starting $($ESD.Name) - $Counter of $($ESDFilesARM64.Count)"
     Write-Host -ForegroundColor Green "Time: $(Get-Date -Format HH:mm:ss-yyyy-MM-dd)"
     $ImageFolderPath = "$ESDStorage\$($ESD.version) $($ESD.ReleaseId) $($ESD.Architecture)"
     if (!(Test-Path -Path $ImageFolderPath)){New-Item -Path $ImageFolderPath -ItemType Directory -Force | Out-Null}
