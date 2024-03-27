@@ -192,7 +192,7 @@
         $Global:OSDCloudGUI.OSName                      = [System.String]$Global:OSDModuleResource.OSDCloud.DefaultARM64.Name
         $Global:OSDCloudGUI.OSReleaseID                 = [System.String]$Global:OSDModuleResource.OSDCloud.DefaultARM64.ReleaseID
         $Global:OSDCloudGUI.OSVersion                   = [System.String]$Global:OSDModuleResource.OSDCloud.DefaultARM64.Version
-        & "$($MyInvocation.MyCommand.Module.ModuleBase)\Projects\OSDCloudDEV\MainWindowARM64.ps1"
+        & "$($MyInvocation.MyCommand.Module.ModuleBase)\Projects\OSDCloudDEV\MainWindow.ps1"
     }
     else{
         & "$($MyInvocation.MyCommand.Module.ModuleBase)\Projects\OSDCloudDEV\MainWindow.ps1"

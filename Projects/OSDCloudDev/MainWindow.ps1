@@ -258,28 +258,16 @@ function Show-PowershellWindow() {
     $null = $showWindowAsync::ShowWindowAsync((Get-Process -Id $pid).MainWindowHandle, 10)
 }
 #================================================
+#   Determine Archetecture
+#================================================
+$Arch = (Get-NativeMatchineImage).NativeMachine
+#================================================
 #   Manufacturer Enhacements
 #================================================
 #   DISABLING VENDOR FEATURES UNTIL OFFLINE SOLUTION CREATED - 22.07.01 - GARY
 if (Test-WebConnection -Uri "google.com") {
     $WebConnection = $True
 }
-if ($WebConnection -eq $true){
-    function Test-HPIASupport {
-        $CabPath = "$env:TEMP\platformList.cab"
-        $XMLPath = "$env:TEMP\platformList.xml"
-        $PlatformListCabURL = "https://hpia.hpcloud.hp.com/ref/platformList.cab"
-        Invoke-WebRequest -Uri $PlatformListCabURL -OutFile $CabPath -UseBasicParsing
-        $Expand = expand $CabPath $XMLPath
-        [xml]$XML = Get-Content $XMLPath
-        $Platforms = $XML.ImagePal.Platform.SystemID
-        $MachinePlatform = (Get-CimInstance -Namespace root/cimv2 -ClassName Win32_BaseBoard).Product
-        if ($MachinePlatform -in $Platforms){$HPIASupport = $true}
-        else {$HPIASupport = $false}
-        return $HPIASupport
-        }
-    }
-
 $Manufacturer = (Get-CimInstance -Class:Win32_ComputerSystem).Manufacturer
 $Model = (Get-CimInstance -Class:Win32_ComputerSystem).Model
 if ($Manufacturer -match "HP" -or $Manufacturer -match "Hewlett-Packard"){
@@ -291,92 +279,95 @@ if ($Manufacturer -match "Microsoft"){
         $HyperV = $true
     } 
 }    
-
-if ($HPEnterprise){
-    Install-ModuleHPCMSL
-    $TPM = get-HPTPMDetermine
-    $BIOS = Get-HPBIOSUpdates -Check
-    $formMainWindowControlManufacturerFunction.Header = "HP Functions"
-    $formMainWindowControlManufacturerFunction.Visibility = 'Visible'
-
-    $formMainWindowControlOption_Name_1.Header = "HPIA Drivers - Adds approx 20 minutes"
-    $formMainWindowControlOption_Name_1.IsChecked = $Global:OSDCloudGUI.HPIADrivers 
-    $formMainWindowControlOption_Name_2.Header = "HPIA Firmware - Adds approx 5 minutes"
-    $formMainWindowControlOption_Name_2.IsChecked = $Global:OSDCloudGUI.HPIAFirmware
-    $formMainWindowControlOption_Name_3.Header = "HPIA Software - Adds approx 10 minutes"
-    $formMainWindowControlOption_Name_3.IsChecked = $Global:OSDCloudGUI.HPIASoftware  
-    $formMainWindowControlOption_Name_4.Header = "HPIA All Options - Adds approx 25 minutes"
-    $formMainWindowControlOption_Name_4.IsChecked = $Global:OSDCloudGUI.HPIAALL 
-    if ($TPM -eq $false){
-        $formMainWindowControlOption_Name_5.Header = "HP TPM Firmware Already Current"
-        $formMainWindowControlOption_Name_5.IsEnabled = $false
-        }
-    else
-        {
-        $formMainWindowControlOption_Name_5.Visibility = 'Visible'
-        $formMainWindowControlOption_Name_5.Header = "HP Update TPM Firmware: $TPM"
-        $formMainWindowControlOption_Name_5.IsChecked = $Global:OSDCloudGUI.HPTPMUpdate 
-        }
-    if ($BIOS -eq $true){
-        $CurrentVer = Get-HPBIOSVersion
-        $formMainWindowControlOption_Name_6.Header = "HP System Firmware already Current: $CurrentVer"
-        $formMainWindowControlOption_Name_6.IsEnabled = $false
-        }
-    else
-        {
-        $LatestVer = (Get-HPBIOSUpdates -Latest).ver
-        $CurrentVer = Get-HPBIOSVersion
-        $formMainWindowControlOption_Name_6.Visibility = 'Visible'
-        $formMainWindowControlOption_Name_6.Header = "HP Update System Firmwware from $CurrentVer to $LatestVer"
-        $formMainWindowControlOption_Name_6.IsChecked = $Global:OSDCloudGUI.HPBIOSUpdate 
-        
-        }
-    # When HPIA All is selected, unselect Firmware & Software
-    
-    #If HPIA All is selected, deselect other options
-    $formMainWindowControlOption_Name_4.add_Checked({$formMainWindowControlOption_Name_1.IsChecked = $false})
-    $formMainWindowControlOption_Name_4.add_Checked({$formMainWindowControlOption_Name_2.IsChecked = $false})
-    $formMainWindowControlOption_Name_4.add_Checked({$formMainWindowControlOption_Name_3.IsChecked = $false})
-    #If other options are selected, make sure HPIAAll is NOT selected
-    $formMainWindowControlOption_Name_1.add_Checked({$formMainWindowControlOption_Name_4.IsChecked = $false})
-    $formMainWindowControlOption_Name_2.add_Checked({$formMainWindowControlOption_Name_4.IsChecked = $false})
-    $formMainWindowControlOption_Name_3.add_Checked({$formMainWindowControlOption_Name_4.IsChecked = $false})
-
-    }
-
-elseif ($HyperV){
-    $formMainWindowControlManufacturerFunction.Header = "HyperV Functions"
-    $formMainWindowControlManufacturerFunction.Visibility = 'Visible'    
-    $formMainWindowControlOption_Name_1.Header = "Set PC Name to HyperV VM Name"
-    $formMainWindowControlOption_Name_1.IsChecked = $false
-    $formMainWindowControlOption_Name_2.Header = "Eject CD ISO"
-    $formMainWindowControlOption_Name_2.IsChecked = $true
-    $formMainWindowControlOption_Name_3.Visibility = "Hidden"
-    $formMainWindowControlOption_Name_4.Visibility = "Hidden"
-    $formMainWindowControlOption_Name_5.Visibility = "Hidden"
-    $formMainWindowControlOption_Name_6.Visibility = "Hidden"
+if ($Arch -match 'ARM64'){
 }
-else{
-    $formMainWindowControlManufacturerFunction.Visibility = 'Hidden'
-    $formMainWindowControlManufacturerFunction.IsEnabled = $false
-    $formMainWindowControlOption_Name_1.IsChecked = $false
-    #$formMainWindowControlOption_Name_1.IsEnabled = $false 
-    #$formMainWindowControlOption_Name_1.Visibility = "Hidden"
-    $formMainWindowControlOption_Name_2.IsChecked = $false
-    #$formMainWindowControlOption_Name_2.IsEnabled = $false 
-    #$formMainWindowControlOption_Name_2.Visibility = "Hidden"
-    $formMainWindowControlOption_Name_3.IsChecked = $false
-    #$formMainWindowControlOption_Name_3.IsEnabled = $false 
-    #$formMainWindowControlOption_Name_3.Visibility = "Hidden"
-    $formMainWindowControlOption_Name_4.IsChecked = $false
-    #$formMainWindowControlOption_Name_4.IsEnabled = $false 
-    #$formMainWindowControlOption_Name_4.Visibility = "Hidden"
-    $formMainWindowControlOption_Name_5.IsChecked = $false
-    #$formMainWindowControlOption_Name_5.IsEnabled = $false 
-    #$formMainWindowControlOption_Name_5.Visibility = "Hidden"
-    $formMainWindowControlOption_Name_6.IsChecked = $false
-    #$formMainWindowControlOption_Name_6.IsEnabled = $false 
-    #$formMainWindowControlOption_Name_6.Visibility = "Hidden"
+else {
+    if ($HPEnterprise){
+        Install-ModuleHPCMSL
+        $TPM = get-HPTPMDetermine
+        $BIOS = Get-HPBIOSUpdates -Check
+        $formMainWindowControlManufacturerFunction.Header = "HP Functions"
+        $formMainWindowControlManufacturerFunction.Visibility = 'Visible'
+
+        $formMainWindowControlOption_Name_1.Header = "HPIA Drivers - Adds approx 20 minutes"
+        $formMainWindowControlOption_Name_1.IsChecked = $Global:OSDCloudGUI.HPIADrivers 
+        $formMainWindowControlOption_Name_2.Header = "HPIA Firmware - Adds approx 5 minutes"
+        $formMainWindowControlOption_Name_2.IsChecked = $Global:OSDCloudGUI.HPIAFirmware
+        $formMainWindowControlOption_Name_3.Header = "HPIA Software - Adds approx 10 minutes"
+        $formMainWindowControlOption_Name_3.IsChecked = $Global:OSDCloudGUI.HPIASoftware  
+        $formMainWindowControlOption_Name_4.Header = "HPIA All Options - Adds approx 25 minutes"
+        $formMainWindowControlOption_Name_4.IsChecked = $Global:OSDCloudGUI.HPIAALL 
+        if ($TPM -eq $false){
+            $formMainWindowControlOption_Name_5.Header = "HP TPM Firmware Already Current"
+            $formMainWindowControlOption_Name_5.IsEnabled = $false
+            }
+        else
+            {
+            $formMainWindowControlOption_Name_5.Visibility = 'Visible'
+            $formMainWindowControlOption_Name_5.Header = "HP Update TPM Firmware: $TPM"
+            $formMainWindowControlOption_Name_5.IsChecked = $Global:OSDCloudGUI.HPTPMUpdate 
+            }
+        if ($BIOS -eq $true){
+            $CurrentVer = Get-HPBIOSVersion
+            $formMainWindowControlOption_Name_6.Header = "HP System Firmware already Current: $CurrentVer"
+            $formMainWindowControlOption_Name_6.IsEnabled = $false
+            }
+        else
+            {
+            $LatestVer = (Get-HPBIOSUpdates -Latest).ver
+            $CurrentVer = Get-HPBIOSVersion
+            $formMainWindowControlOption_Name_6.Visibility = 'Visible'
+            $formMainWindowControlOption_Name_6.Header = "HP Update System Firmwware from $CurrentVer to $LatestVer"
+            $formMainWindowControlOption_Name_6.IsChecked = $Global:OSDCloudGUI.HPBIOSUpdate 
+            
+            }
+        # When HPIA All is selected, unselect Firmware & Software
+        
+        #If HPIA All is selected, deselect other options
+        $formMainWindowControlOption_Name_4.add_Checked({$formMainWindowControlOption_Name_1.IsChecked = $false})
+        $formMainWindowControlOption_Name_4.add_Checked({$formMainWindowControlOption_Name_2.IsChecked = $false})
+        $formMainWindowControlOption_Name_4.add_Checked({$formMainWindowControlOption_Name_3.IsChecked = $false})
+        #If other options are selected, make sure HPIAAll is NOT selected
+        $formMainWindowControlOption_Name_1.add_Checked({$formMainWindowControlOption_Name_4.IsChecked = $false})
+        $formMainWindowControlOption_Name_2.add_Checked({$formMainWindowControlOption_Name_4.IsChecked = $false})
+        $formMainWindowControlOption_Name_3.add_Checked({$formMainWindowControlOption_Name_4.IsChecked = $false})
+
+        }
+
+    elseif ($HyperV){
+        $formMainWindowControlManufacturerFunction.Header = "HyperV Functions"
+        $formMainWindowControlManufacturerFunction.Visibility = 'Visible'    
+        $formMainWindowControlOption_Name_1.Header = "Set PC Name to HyperV VM Name"
+        $formMainWindowControlOption_Name_1.IsChecked = $false
+        $formMainWindowControlOption_Name_2.Header = "Eject CD ISO"
+        $formMainWindowControlOption_Name_2.IsChecked = $true
+        $formMainWindowControlOption_Name_3.Visibility = "Hidden"
+        $formMainWindowControlOption_Name_4.Visibility = "Hidden"
+        $formMainWindowControlOption_Name_5.Visibility = "Hidden"
+        $formMainWindowControlOption_Name_6.Visibility = "Hidden"
+    }
+    else{
+        $formMainWindowControlManufacturerFunction.Visibility = 'Hidden'
+        $formMainWindowControlManufacturerFunction.IsEnabled = $false
+        $formMainWindowControlOption_Name_1.IsChecked = $false
+        #$formMainWindowControlOption_Name_1.IsEnabled = $false 
+        #$formMainWindowControlOption_Name_1.Visibility = "Hidden"
+        $formMainWindowControlOption_Name_2.IsChecked = $false
+        #$formMainWindowControlOption_Name_2.IsEnabled = $false 
+        #$formMainWindowControlOption_Name_2.Visibility = "Hidden"
+        $formMainWindowControlOption_Name_3.IsChecked = $false
+        #$formMainWindowControlOption_Name_3.IsEnabled = $false 
+        #$formMainWindowControlOption_Name_3.Visibility = "Hidden"
+        $formMainWindowControlOption_Name_4.IsChecked = $false
+        #$formMainWindowControlOption_Name_4.IsEnabled = $false 
+        #$formMainWindowControlOption_Name_4.Visibility = "Hidden"
+        $formMainWindowControlOption_Name_5.IsChecked = $false
+        #$formMainWindowControlOption_Name_5.IsEnabled = $false 
+        #$formMainWindowControlOption_Name_5.Visibility = "Hidden"
+        $formMainWindowControlOption_Name_6.IsChecked = $false
+        #$formMainWindowControlOption_Name_6.IsEnabled = $false 
+        #$formMainWindowControlOption_Name_6.Visibility = "Hidden"
+    }
 }
 #>
 #Disabling Vendor Features for now.
@@ -388,8 +379,12 @@ else{
 #================================================
 #   Get Index Info
 #================================================
-$IndexInfo = Get-OSDCloudOperatingSystemsIndexes
-
+if ($Arch -match 'ARM64'){
+    $IndexInfo = Get-OSDCloudOperatingSystemsIndexes -Arch ARM64
+}
+else {
+    $IndexInfo = Get-OSDCloudOperatingSystemsIndexes
+}
 #================================================
 #   Menu Options
 #================================================
@@ -410,9 +405,17 @@ $formMainWindowControlShutdownSetupComplete.IsChecked = $Global:OSDCloudGUI.Shut
 #================================================
 #   OS Name Combobox
 #================================================
-$Global:OSDCloudGUI.OSNameValues | ForEach-Object {
-    $formMainWindowControlOSNameCombobox.Items.Add($_) | Out-Null
+if ($Arch -match 'ARM64'){
+    $Global:OSDCloudGUI.OSNameARM64Values | ForEach-Object {
+        $formMainWindowControlOSNameCombobox.Items.Add($_) | Out-Null
+    }
 }
+else {
+    $Global:OSDCloudGUI.OSNameValues | ForEach-Object {
+        $formMainWindowControlOSNameCombobox.Items.Add($_) | Out-Null
+    }
+}
+
 $formMainWindowControlOSNameCombobox.SelectedValue = $Global:OSDCloudGUI.OSName
 #================================================
 #   OS Edition Combobox
@@ -509,7 +512,12 @@ $CustomImageChildItem = @()
 $CustomImageChildItem = $CustomImageChildItem | Sort-Object -Property Length -Unique | Sort-Object FullName | Where-Object {$_.Length -gt 2GB}
         
 if ($CustomImageChildItem) {
-    $OSDCloudOperatingSystem = Get-OSDCloudOperatingSystems
+    if ($Arch -match 'ARM64'){
+        $OSDCloudOperatingSystem = (Get-OSDCloudOperatingSystems -OSArch ARM64)
+    }
+    else {
+        $OSDCloudOperatingSystem = Get-OSDCloudOperatingSystems
+    }
     $CustomImageChildItem = $CustomImageChildItem | Where-Object {$_.Name -notin $OSDCloudOperatingSystem.FileName}
     $CustomImageChildItem | ForEach-Object {
         $formMainWindowControlOSNameCombobox.Items.Add($_) | Out-Null
@@ -830,7 +838,14 @@ $formMainWindowControlStartButton.add_Click({
     if ($formMainWindowControlOSNameCombobox.SelectedValue -like 'Windows 1*') {
         $OSName = $formMainWindowControlOSNameCombobox.SelectedValue
         
-        $OSDCloudOperatingSystem = Get-OSDCloudOperatingSystems | Where-Object {$_.Name -match $OSName} | Where-Object {$_.Activation -eq $OSActivation} | Where-Object {$_.Language -eq $OSLanguage}
+        if ($Arch -match 'ARM64'){
+            $OSDCloudOperatingSystem = (Get-OSDCloudOperatingSystems -OSArch ARM64) | Where-Object {$_.Name -match $OSName} | Where-Object {$_.Activation -eq $OSActivation} | Where-Object {$_.Language -eq $OSLanguage}
+        }
+        else {
+            $OSDCloudOperatingSystem = Get-OSDCloudOperatingSystems | Where-Object {$_.Name -match $OSName} | Where-Object {$_.Activation -eq $OSActivation} | Where-Object {$_.Language -eq $OSLanguage}
+        }
+       
+        
         $OSBuild = $OSDCloudOperatingSystem.Build
         $OSReleaseID = $OSDCloudOperatingSystem.ReleaseID
         $OSVersion = $OSDCloudOperatingSystem.Version

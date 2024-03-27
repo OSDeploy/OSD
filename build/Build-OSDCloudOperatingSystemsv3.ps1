@@ -135,6 +135,7 @@ $x64ESDInfo = $x64ESDInfo | Where-Object {$_.Edition -eq "Professional" -or $_.E
 
 $ARM64ESDInfo = $UniqueESDInfo | Where-Object {$_.Architecture -eq "ARM64"}
 $ARM64ESDInfo = $ARM64ESDInfo | Where-Object {$_.Edition -eq "Professional" -or $_.Edition -eq "Education" -or $_.Edition -eq "Enterprise" -or $_.Edition -eq "Professional" -or $_.Edition -eq "HomePremium"}
+$ARM64ESDInfo = $ARM64ESDInfo | Where-Object {$_.FileName -match '19045' -or $_.FileName -match '22631'}
 
 Import-Module -Name OSD -Force
 #=================================================
