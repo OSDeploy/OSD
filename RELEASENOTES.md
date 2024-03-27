@@ -10,14 +10,14 @@ Note, the changes I make won't go into effect until the next module release date
 
 ## Changes
 
-### 24.3.27 (not yet implemented)
+### 24.3.27 (implemented in OSD Module 24.3.27.1)
 - Quick fix for [Issue 132](https://github.com/OSDeploy/OSD/issues/132)
 - Minor updates to DEV for ARM64 testing
 
-### 24.3.22 (not yet implemented)
+### 24.3.22 (implemented in OSD Module 24.3.27.1)
 - Small change to Invoke-CatalogRequest [Issue 127](https://github.com/OSDeploy/OSD/issues/127)
 
-### 24.3.20 (not yet implemented)
+### 24.3.20 (implemented in OSD Module 24.3.27.1)
 - Added changes for easier debugging
  - Added checkbox in Start-OSDCloudGUIDev drop down menu to enable Debug Mode
   - when debugmode = $true (Via GUI or setting variable in script)
