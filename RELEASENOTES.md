@@ -10,7 +10,8 @@ Note, the changes I make won't go into effect until the next module release date
 
 ## Changes
 
-### 24.3.27
+### 24.3.27 (not yet implemented)
+- Quick fix for [Issue 132](https://github.com/OSDeploy/OSD/issues/132)
 - Minor updates to DEV for ARM64 testing
 
 ### 24.3.22 (not yet implemented)
