@@ -437,7 +437,7 @@ function New-OSDCloudWorkSpaceSetupCompleteTemplate {
     $SetupCompletePath = "$OSDCloudWS\Config\Scripts\SetupComplete"
     $ScriptsPath = $SetupCompletePath
 
-    if (!(Test-Path -Path $ScriptsPath)){New-Item -Path $ScriptsPath} 
+    if (!(Test-Path -Path $ScriptsPath)){New-Item -Path $ScriptsPath -ItemType Directory} 
 
     $RunScript = @(@{ Script = "SetupComplete"; BatFile = 'SetupComplete.cmd'; ps1file = 'SetupComplete.ps1';Type = 'Setup'; Path = "$ScriptsPath"})
 
