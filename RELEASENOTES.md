@@ -10,6 +10,9 @@ Note, the changes I make won't go into effect until the next module release date
 
 ## Changes
 
+### 24.3.27
+- Minor updates to DEV for ARM64 testing
+
 ### 24.3.22 (not yet implemented)
 - Small change to Invoke-CatalogRequest [Issue 127](https://github.com/OSDeploy/OSD/issues/127)
 
