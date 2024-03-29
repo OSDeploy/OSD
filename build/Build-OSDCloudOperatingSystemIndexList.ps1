@@ -77,10 +77,20 @@ foreach ($ESD in $ESDFilesX64){
         $Inventory | Add-Member -MemberType NoteProperty -Name "Win11" -Value "$($esd.Win11)" -Force
 
         $Inventory | Add-Member -MemberType NoteProperty -Name "TotalIndexes" -Value "$TotalIndexes" -Force
+        $IndexNameArray = @()
+        $Indexes = @{}
+
         foreach ($ImageIndex in $ImageInfo){
-            $Inventory | Add-Member -MemberType NoteProperty -Name "Index$($ImageIndex.imageindex)Name" -Value "$($ImageIndex.ImageName)" -Force
-            $Inventory | Add-Member -MemberType NoteProperty -Name "Index$($ImageIndex.imageindex)Desc" -Value "$($ImageIndex.ImageDescription)" -Force
+            
+            #$Inventory | Add-Member -MemberType NoteProperty -Name "Index$($ImageIndex.imageindex)Name" -Value "$($ImageIndex.ImageName)" -Force
+            #$Inventory | Add-Member -MemberType NoteProperty -Name "Index$($ImageIndex.imageindex)Desc" -Value "$($ImageIndex.ImageDescription)" -Force
+            if ($ImageIndex.ImageIndex -ge 4){
+                $IndexNameArray += $ImageIndex.ImageName
+                $Indexes.Add($ImageIndex.ImageName, $ImageIndex.imageindex)
+            }
         }
+        $Inventory | Add-Member -MemberType NoteProperty -Name "IndexNames" -Value $IndexNameArray -Force
+        $Inventory | Add-Member -MemberType NoteProperty -Name "Indexes" -Value $Indexes -Force
         $ImageIndexDB += $Inventory
     }
 }
@@ -160,10 +170,20 @@ foreach ($ESD in $ESDFilesARM64){
         $Inventory | Add-Member -MemberType NoteProperty -Name "Win11" -Value "$($esd.Win11)" -Force
 
         $Inventory | Add-Member -MemberType NoteProperty -Name "TotalIndexes" -Value "$TotalIndexes" -Force
+        $IndexNameArray = @()
+        $Indexes = @{}
+
         foreach ($ImageIndex in $ImageInfo){
-            $Inventory | Add-Member -MemberType NoteProperty -Name "Index$($ImageIndex.imageindex)Name" -Value "$($ImageIndex.ImageName)" -Force
-            $Inventory | Add-Member -MemberType NoteProperty -Name "Index$($ImageIndex.imageindex)Desc" -Value "$($ImageIndex.ImageDescription)" -Force
+            
+            #$Inventory | Add-Member -MemberType NoteProperty -Name "Index$($ImageIndex.imageindex)Name" -Value "$($ImageIndex.ImageName)" -Force
+            #$Inventory | Add-Member -MemberType NoteProperty -Name "Index$($ImageIndex.imageindex)Desc" -Value "$($ImageIndex.ImageDescription)" -Force
+            if ($ImageIndex.ImageIndex -ge 4){
+                $IndexNameArray += $ImageIndex.ImageName
+                $Indexes.Add($ImageIndex.ImageName, $ImageIndex.imageindex)
+            }
         }
+        $Inventory | Add-Member -MemberType NoteProperty -Name "IndexNames" -Value $IndexNameArray -Force
+        $Inventory | Add-Member -MemberType NoteProperty -Name "Indexes" -Value $Indexes -Force
         $ImageIndexDB += $Inventory
     }
 }
