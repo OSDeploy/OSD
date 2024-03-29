@@ -280,6 +280,8 @@ if ($Manufacturer -match "Microsoft"){
     } 
 }    
 if ($Arch -match 'ARM64'){
+    $formMainWindowControlManufacturerFunction.Visibility = 'Hidden'
+    $formMainWindowControlManufacturerFunction.IsEnabled = $false
 }
 else {
     if ($HPEnterprise){
