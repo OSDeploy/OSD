@@ -184,19 +184,23 @@
     #================================================
     $Arch = (Get-NativeMatchineImage).NativeMachine
     Write-Host -ForegroundColor Green "Running $Arch"
-    if ($Arch -eq "ARM64"){
-        $Global:OSDCloudGUI.OSActivation                = [System.String]$Global:OSDModuleResource.OSDCloud.DefaultARM64.Activation
-        $Global:OSDCloudGUI.OSEdition                   = [System.String]$Global:OSDModuleResource.OSDCloud.DefaultARM64.Edition
-        $Global:OSDCloudGUI.OSLanguage                  = [System.String]$Global:OSDModuleResource.OSDCloud.DefaultARM64.Language
-        $Global:OSDCloudGUI.OSImageIndex                = [System.Int32]$Global:OSDModuleResource.OSDCloud.DefaultARM64.ImageIndex
-        $Global:OSDCloudGUI.OSName                      = [System.String]$Global:OSDModuleResource.OSDCloud.DefaultARM64.Name
-        $Global:OSDCloudGUI.OSReleaseID                 = [System.String]$Global:OSDModuleResource.OSDCloud.DefaultARM64.ReleaseID
-        $Global:OSDCloudGUI.OSVersion                   = [System.String]$Global:OSDModuleResource.OSDCloud.DefaultARM64.Version
-        & "$($MyInvocation.MyCommand.Module.ModuleBase)\Projects\OSDCloudDEV\MainWindowARM64.ps1"
+    if ($Global:OSDCloudGUI.AutomateConfiguration){
+        #Use Automate Configuration
     }
     else{
-        & "$($MyInvocation.MyCommand.Module.ModuleBase)\Projects\OSDCloudDEV\MainWindow.ps1"
+        if ($Arch -eq "ARM64"){
+            $Global:OSDCloudGUI.OSActivation                = [System.String]$Global:OSDModuleResource.OSDCloud.DefaultARM64.Activation
+            $Global:OSDCloudGUI.OSEdition                   = [System.String]$Global:OSDModuleResource.OSDCloud.DefaultARM64.Edition
+            $Global:OSDCloudGUI.OSLanguage                  = [System.String]$Global:OSDModuleResource.OSDCloud.DefaultARM64.Language
+            $Global:OSDCloudGUI.OSImageIndex                = [System.Int32]$Global:OSDModuleResource.OSDCloud.DefaultARM64.ImageIndex
+            $Global:OSDCloudGUI.OSName                      = [System.String]$Global:OSDModuleResource.OSDCloud.DefaultARM64.Name
+            $Global:OSDCloudGUI.OSReleaseID                 = [System.String]$Global:OSDModuleResource.OSDCloud.DefaultARM64.ReleaseID
+            $Global:OSDCloudGUI.OSVersion                   = [System.String]$Global:OSDModuleResource.OSDCloud.DefaultARM64.Version
+        }
     }
+
+    & "$($MyInvocation.MyCommand.Module.ModuleBase)\Projects\OSDCloudDEV\MainWindow.ps1"
+
     
     Start-Sleep -Seconds 2
     #================================================

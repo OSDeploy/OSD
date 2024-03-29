@@ -54,7 +54,6 @@ function Invoke-CatalogRequest {
                 ErrorAction = "Stop"
             }
         }
-
         $Results = Invoke-WebRequest @Params
         $HtmlDoc = [HtmlAgilityPack.HtmlDocument]::new()
         $HtmlDoc.LoadHtml($Results.RawContent.ToString())
@@ -63,13 +62,23 @@ function Invoke-CatalogRequest {
             $ErrorText = $HtmlDoc.GetElementbyId("errorPageDisplayedError")
             if ($ErrorText) {
                 throw "The catalog.update.microsoft.com site has encountered an error. Please try again later."
-            } else {
-                [MsUpCatResponse]::new($HtmlDoc)
             }
-        } else {
+            else {
+                #Changed for Issue 127
+                if($null -eq $HtmlDoc.GetElementbyId("ctl00_catalogBody_updateMatches")){ 
+                    return $null 
+                }
+                else {
+                    $HtmlDoc | Out-File -FilePath "$env:TEMP\$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) OSDCloud Microsoft Catalog.html" -Encoding "UTF8"
+                    [MsUpCatResponse]::new($HtmlDoc)
+                }
+            }
+        } 
+        else {
             throw "$($NoResults.InnerText)$($Uri.Split("q=")[-1])"
         }
-    } catch {
+    }
+    catch {
         throw $_
     }
 }

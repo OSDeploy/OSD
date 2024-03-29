@@ -154,7 +154,7 @@ function New-OSDCloudTemplate {
         $WinRE,
 
         [System.Management.Automation.SwitchParameter]
-        #Uses Windows 10 WinRE.wim instead of the ADK Boot.wim
+        #Uses ARM64 instead of AMD64
         $ARM64
     )
 #=================================================
@@ -552,10 +552,14 @@ Windows Registry Editor Version 5.00
         'StorageWMI'
         'WDS-Tools'
     )
+    
     if ($PSBoundParameters.ContainsKey('ARM64')) {
         # Require specific order of install of packages or it fails.
-        $OCPackages =@('Dot3Svc','EnhancedStorage','MDAC','NetFx','PowerShell','Scripting','SecureBootCmdlets','WinPE-WMI','StorageWMI','PmemCmdlets','DismCmdlets','SecureStartup','x64-Support','PlatformId')
+        #$OCPackages =@('Dot3Svc','EnhancedStorage','MDAC','NetFx','PowerShell','Scripting','SecureBootCmdlets','WMI','StorageWMI','PmemCmdlets','DismCmdlets','SecureStartup','x64-Support','PlatformId')
+        $OCPackages += 'x64-Support'
+        $OCPackages += 'MDAC'
     }
+    
     #endregion
 
     #region Install Default en-us Language

@@ -4,13 +4,13 @@
 
 @{
     RootModule              = 'OSD.psm1'
-    ModuleVersion           = '24.2.20.1'
+    ModuleVersion           = '24.3.27.1'
     CompatiblePSEditions    = @('Desktop')
     GUID                    = '9fe5b9b6-0224-4d87-9018-a8978529f6f5'
     Author                  = 'David Segura . Gary Blok . Jérôme Bezet-Torres . Damien Van Robaeys . Mike Marable . Akos Bakos'
     CompanyName             = 'OSD Community'
     Copyright               = '(c) 2024 OSDeploy'
-    Description             = 'February 2024 Patch Tuesday'
+    Description             = 'March 2024 Gary Online Fix'
     PowerShellVersion       = '5.1'
     FormatsToProcess        = @(
         '.\Format\MsUpCat.Format.ps1xml'
@@ -100,6 +100,7 @@
         'Get-GithubRawUrl',
         'Get-HPDriverPack',
         'Get-HPWinPEDriverPack',
+        'Get-HPDeviceFamilyPlatformDetails',
         'Get-HyperVName',
         'Get-LenovoDriverPack',
         'Get-NativeMatchineImage',
@@ -127,6 +128,7 @@
         'Get-OSDCloudDriverPack',
         'Get-OSDCloudDriverPacks',
         'Get-OSDCloudOperatingSystems',
+        'Get-OSDCloudOperatingSystemsIndexes',
         'Get-OSDCloudTemplate',
         'Get-OSDCloudTemplateNames',
         'Get-OSDCloudWorkspace',
@@ -166,6 +168,7 @@
         'Get-WinREPartition',
         'Get-WinREWiFi',
         'Get-WindowsOEMProductKey',
+        'Get-WindowsUpdateDriver',
         'Get-HPTPMDetermine',
         'Invoke-OSDCloudIPU',
         'Invoke-HPTPMDownload',
@@ -230,8 +233,7 @@
         'Invoke-SelectLocalVolume',
         'Invoke-SelectOSDVolume',
         'Invoke-SelectUSBVolume',
-        'Start-WindowsUpdate',
-        'Start-WindowsUpdateDriver',
+
         'Set-AzClipboard',
         'Set-BitlockerRegValuesXTS256',
         'Set-BootmgrTimeout',
@@ -282,6 +284,8 @@
         'Start-OSDeployPad',
         'Start-ScreenPNGProcess',
         'Start-WinREWiFi',
+        'Start-WindowsUpdate',
+        'Start-WindowsUpdateDriver',
         'Stop-ScreenPNGProcess',
         'Start-DISMFromOSDCloudUSB',
         'Test-DISMFromOSDCloudUSB',

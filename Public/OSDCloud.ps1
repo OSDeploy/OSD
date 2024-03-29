@@ -628,6 +628,7 @@
         https://docs.microsoft.com/en-us/windows-hardware/manufacture/desktop/configure-uefigpt-based-hard-drive-partitions
         New Partitions will be created using Microsoft Standard Layout
         #>
+
         Write-SectionHeader "New-OSDisk"
 
         if ($Global:OSDCloud.SkipNewOSDisk -eq $true) {
@@ -635,6 +636,10 @@
         }
 
         if ($Global:OSDCloud.SkipNewOSDisk -eq $false) {
+            if ($Global:OSDCloud.DebugMode -eq $true){
+                Write-DarkGrayHost "Capturing Disk Information Pre Modifications"
+                $OSDISKPre = (Get-OSDGather -Full).DiskPartition
+            }
             if ($Global:OSDCloud.DiskPart -eq $true) {
                 Start-OSDDiskPart
                 Write-Host "=========================================================================" -ForegroundColor Cyan
@@ -667,6 +672,10 @@
                 Write-Warning "Press Ctrl+C to exit"
                 Start-Sleep -Seconds 86400
                 Exit
+            }
+            if ($Global:OSDCloud.DebugMode -eq $true){
+                Write-DarkGrayHost "Capturing Disk Information Post Modifications"
+                $OSDISKPost = (Get-OSDGather -Full).DiskPartition
             }
         }
         #endregion
@@ -713,6 +722,42 @@
     
     $Global:OSDCloud.Transcript = "$((Get-Date).ToString('yyyy-MM-dd-HHmmss'))-Deploy-OSDCloud.log"
     Start-Transcript -Path (Join-Path 'C:\OSDCloud\Logs' $Global:OSDCloud.Transcript) -ErrorAction Ignore
+    #endregion
+    
+    #region Global:OSDCloud.DebugMode
+    if ($Global:OSDCloud.DebugMode -eq $true){
+        Write-SectionHeader "DebugMode: Capture Data to Logs"
+        Write-DarkGrayHost "OSD Module: $((Get-Module -Name OSD -ListAvailable | Select-Object -First 1).Version)"
+        Write-DarkGrayHost "Manufacurer | Model | Product : $(Get-MyComputerManufacturer) | $(Get-MyComputerModel) | $(Get-MyComputerProduct)"
+        Write-DarkGrayHost "Writing Information to C:\OSDCloud\Logs\OSDCloudDebug.log"
+        
+        Write-DarkGrayHost " OSDCloud Variables"
+        "=========================================================================" | Out-File 'C:\OSDCloud\Logs\OSDCloudDebug.log'
+        "OSD Cloud Variables" | Out-File 'C:\OSDCloud\Logs\OSDCloudDebug.log' -Append
+        "=========================================================================" | Out-File 'C:\OSDCloud\Logs\OSDCloudDebug.log' -Append
+        $OSDCloud | Out-File 'C:\OSDCloud\Logs\OSDCloudDebug.log' -Append
+        
+        Write-DarkGrayHost " Windows 11 Readiness"
+        "=========================================================================" | Out-File 'C:\OSDCloud\Logs\OSDCloudDebug.log' -Append
+        "Windows 11 Readiness" | Out-File 'C:\OSDCloud\Logs\OSDCloudDebug.log' -Append
+        "=========================================================================" | Out-File 'C:\OSDCloud\Logs\OSDCloudDebug.log' -Append
+        Get-Win11Readiness | Out-File 'C:\OSDCloud\Logs\OSDCloudDebug.log' -Append
+        
+        Write-DarkGrayHost " TPM Information"
+        "=========================================================================" | Out-File 'C:\OSDCloud\Logs\OSDCloudDebug.log' -Append
+        "TPM Information" | Out-File 'C:\OSDCloud\Logs\OSDCloudDebug.log' -Append
+        "=========================================================================" | Out-File 'C:\OSDCloud\Logs\OSDCloudDebug.log' -Append
+        Get-CimInstance -Namespace root/CIMV2/Security/MicrosoftTpm -ClassName Win32_Tpm | Out-File 'C:\OSDCloud\Logs\OSDCloudDebug.log' -Append
+        
+        Write-DarkGrayHost " My Computer Info"
+        "=========================================================================" | Out-File 'C:\OSDCloud\Logs\OSDCloudDebug.log' -Append
+        "My Computer Info" | Out-File 'C:\OSDCloud\Logs\OSDCloudDebug.log' -Append
+        "=========================================================================" | Out-File 'C:\OSDCloud\Logs\OSDCloudDebug.log' -Append
+        Get-ComputerInfo | Out-File 'C:\OSDCloud\Logs\OSDCloudDebug.log' -Append
+        
+        $OSDISKPre | Out-File 'C:\OSDCloud\Logs\OSDCloudDiskPartPre.log'
+        $OSDISKPost | Out-File 'C:\OSDCloud\Logs\OSDCloudDiskPartPost.log'
+    }
     #endregion
     
     #region Powercfg High Performance
@@ -1617,7 +1662,13 @@
                     }
                 }
                 #Get Sure Admin State
-                $HPSureAdminState = Get-HPSureAdminState -ErrorAction SilentlyContinue
+                try {
+                    Write-Host -ForegroundColor DarkGray "Testing for HP Sure Admin State"
+                    $HPSureAdminState = Get-HPSureAdminState -ErrorAction SilentlyContinue
+                }
+                catch{
+                    Write-Host -ForegroundColor DarkGray "Unable to Test for HP Sure Admin State"
+                }
                 if ($HPSureAdminState) {$HPSureAdminMode = $HPSureAdminState.SureAdminMode}
                 if (($Global:OSDCloud.HPTPMUpdate -eq $true) -or ($Global:OSDCloud.HPBIOSUpdate -eq $true)){
                     if ($HPSureAdminMode -eq "On"){
@@ -1630,18 +1681,56 @@
                     }
                     else { #Sure Admin Mode is Off
                         if ($Global:OSDCloud.HPBIOSUpdate -eq $true){   
-                            if (Get-HPBIOSSetupPasswordIsSet){ #Test for BIOS Password
+                            try { #Test for BIOS Password
+                                Write-Host -ForegroundColor DarkGray "Testing for HP BIOS Password"
+                                $PasswordSet = Get-HPBIOSSetupPasswordIsSet -ErrorAction SilentlyContinue
+                            }
+                            catch {
+                                <#Do this if a terminating exception happens#>
+                            }
+                            if ($PasswordSet -eq $true){ 
                                 Write-Host -ForegroundColor Yellow "Device currently has BIOS Setup Password, Attempting to use Get-HPBIOSWindowsUpdate Later in Process"
                                 $HPBIOSWinUpdate = $true
                             }
                             else{ #No Password & No Sure Recover and there must be an update, so lets try to update it.
-                                Write-Host -ForegroundColor Gray "Starting HP BIOS Update Process using HPCMSL [Get-HPBIOSUpdates -Flash -Yes -Offline -BitLocker Ignore]"
-                                Write-Host -ForegroundColor DarkGray "Current Firmware: $(Get-HPBIOSVersion)"
-                                Write-Host -ForegroundColor DarkGray "Staging Update: $((Get-HPBIOSUpdates -Latest).ver) "
+                                Write-Host -ForegroundColor Gray "Starting HP BIOS Update Process Job using HPCMSL [Get-HPBIOSUpdates -Flash -Yes -Offline -BitLocker Ignore]"
+                                Write-Host -ForegroundColor DarkGray " Current Firmware: $(Get-HPBIOSVersion)"
+                                Write-Host -ForegroundColor DarkGray " Staging Update: $((Get-HPBIOSUpdates -Latest).ver) "
                                 #Details: https://developers.hp.com/hp-client-management/doc/Get-HPBiosUpdates
-                                Get-HPBIOSUpdates -Flash -Yes -Offline -BitLocker Ignore -ErrorAction SilentlyContinue
-                                $Global:OSDCloud.HPBIOSUpdate = $false
+                                $timeoutSeconds = 60 # 1 Minite Timeout for BIOS Update
+                                $code = {
+                                    Start-Transcript -Path "C:\OSDCloud\Logs\HPBIOSUpdateJob.log"
+                                    Get-HPBIOSUpdates -Flash -Yes -Offline -BitLocker Ignore -ErrorAction SilentlyContinue -Verbose
+                                    Stop-Transcript
+                                }
+                                #Start the Job
                                 $HPBIOSUpdateNotes = "Attempted in WinPE - Update to $((Get-HPBIOSUpdates -Latest).ver)"
+                                $Installing = Start-Job -ScriptBlock $code
+                                # Report the job ID (for diagnostic purposes)
+                                write-host -ForegroundColor DarkGray " BIOS Update Job ID: $($Installing.Id)"
+                                Write-Host -ForegroundColor DarkGray " See Log: C:\OSDCloud\Logs\HPBIOSUpdateJob.log for Details"
+                                
+                                # Wait for the job to complete or time out
+                                Wait-Job $Installing -Timeout $timeoutSeconds | Out-Null
+                                #Receive-Job -Job $Installing
+                                # Check the job state
+                                if ($Installing.State -eq "Completed") {
+                                    # Job completed successfully
+                                    write-host -ForegroundColor DarkGray " Completed running Job to Update BIOS"
+                                } elseif ($Installing.State -eq "Running") {
+                                    # Job was interrupted due to timeout
+                                    write-host -ForegroundColor DarkGray " Job to Update BIOS was Interrupted"
+                                    "Interrupted"
+                                } else {
+                                    # Unexpected job state
+                                    write-host -ForegroundColor DarkGray " Job to Update BIOS went to an Unexpected State, see log"
+                                }
+                                # Clean up the job
+                                Remove-Job -Force $Installing
+                                if (Test-Path -Path "C:\OSDCloud\Logs\HPBIOSUpdateJob.log"){
+                                    Write-Host -ForegroundColor Cyan " $((Get-content -Path "C:\OSDCloud\Logs\HPBIOSUpdateJob.log" -ReadCount 1) | Select-Object -last 6 | Select-Object -First 1)"
+                                }
+                                
                             }
                         }
                     }

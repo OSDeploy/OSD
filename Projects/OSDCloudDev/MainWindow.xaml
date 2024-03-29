@@ -134,6 +134,9 @@
                 <MenuItem Name="restartComputer"
                           Header="restart Computer after WinPE"
                           IsCheckable="True" />
+                <MenuItem Name="debugMode"
+                          Header="Run OSDCloud in Debug Mode"
+                          IsCheckable="True" />
             </MenuItem>
             <MenuItem Header="Microsoft Update Catalog">
                 <MenuItem Name="updateDiskDrivers"

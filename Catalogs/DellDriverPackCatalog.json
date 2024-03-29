@@ -1,6 +1,6 @@
 [
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "19.01.25",
@@ -36,7 +36,7 @@
         "HashMD5":  "BB69DA3724B2E4701C64A7C53071BFF1"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "19.01.25",
@@ -72,7 +72,7 @@
         "HashMD5":  "B138A0F5053CADD0D977265F662EE3B2"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "18.04.10",
@@ -108,7 +108,7 @@
         "HashMD5":  "EEA2E514D86471F6DDF733C414672D41"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "18.03.27",
@@ -144,7 +144,7 @@
         "HashMD5":  "3D562924F04226585297692DD98887CF"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "18.04.10",
@@ -180,7 +180,7 @@
         "HashMD5":  "A8D9BB422DC945A3EA7E28D75A7D4A6B"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "18.04.10",
@@ -216,7 +216,7 @@
         "HashMD5":  "1486481E18B0C1B8021C9FEA04FC165D"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "23.10.27",
@@ -252,7 +252,7 @@
         "HashMD5":  "0EC8634706783DF159B6F456CB74699C"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "23.10.27",
@@ -288,7 +288,7 @@
         "HashMD5":  "F5685D06C7DC56A1B254558A502793F2"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "23.12.08",
@@ -327,7 +327,7 @@
         "HashMD5":  "327FDC445F76A0F9F559418BC8EBDBB0"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "23.12.08",
@@ -366,7 +366,7 @@
         "HashMD5":  "A2EA4B4B0A76418265C19F9DC4E016FF"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "17.05.09",
@@ -402,7 +402,7 @@
         "HashMD5":  "15C33C277E48F0A08DEC3F05A308F3FC"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "17.05.09",
@@ -438,7 +438,7 @@
         "HashMD5":  "95D8031E9A63E38E59AFA9CAAF33A1B1"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "20.04.28",
@@ -474,7 +474,7 @@
         "HashMD5":  "18DF999B50C2F0E9E53EFDEF0C863E64"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "20.04.28",
@@ -510,7 +510,7 @@
         "HashMD5":  "6E3CDE60263BCB95B654DFE5F62716E9"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "21.06.17",
@@ -546,7 +546,7 @@
         "HashMD5":  "FACFF262935137A88BE078450ED78EBE"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "23.03.24",
@@ -582,7 +582,7 @@
         "HashMD5":  "87F4E84B595C9F8714F32CA5A45364DF"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "21.06.17",
@@ -618,7 +618,7 @@
         "HashMD5":  "6C6F41D5426B318BA57B4BBE76A2E3BD"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "23.03.24",
@@ -654,7 +654,7 @@
         "HashMD5":  "AE47367FD35371BE6C8A65878CA86D59"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "22.05.06",
@@ -690,7 +690,7 @@
         "HashMD5":  "20EFA7CAB072B4782B34369C8CB71BC5"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "22.06.13",
@@ -726,7 +726,7 @@
         "HashMD5":  "CCD4915E7ADF824AADCD84DBC566F37C"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "22.05.06",
@@ -762,7 +762,7 @@
         "HashMD5":  "537E7C13EEE23B507C107EC0A1F47EF6"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "23.06.01",
@@ -798,7 +798,7 @@
         "HashMD5":  "4F0E2C7C03FC55D0AEA827499913A7C8"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "23.06.01",
@@ -834,7 +834,7 @@
         "HashMD5":  "355E6304D0F1E7B16C443DC80DF315AA"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "23.09.06",
@@ -870,7 +870,7 @@
         "HashMD5":  "AE55E21ABF495C0DC29B8A366513A74B"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "23.09.06",
@@ -906,7 +906,7 @@
         "HashMD5":  "7629348B586FDC64A1B77E64089BD903"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "23.07.27",
@@ -942,7 +942,7 @@
         "HashMD5":  "888805BD98B839FF1138F89C2634363C"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "23.07.27",
@@ -978,7 +978,7 @@
         "HashMD5":  "E7E9FA71AC11100DB8ABC65F8C833D2B"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "16.11.07",
@@ -1020,7 +1020,7 @@
         "HashMD5":  "B381520135BE19D2A8FF69C055A13410"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "23.11.09",
@@ -1059,7 +1059,7 @@
         "HashMD5":  "206626B578AD5857987818636E0A4439"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "23.11.09",
@@ -1098,7 +1098,7 @@
         "HashMD5":  "1520C753F5D8FCDE382114F6D3AABB11"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "24.01.22",
@@ -1137,7 +1137,7 @@
         "HashMD5":  "86C153A4F0293CC16CFA352D8D0D2BBA"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "24.01.22",
@@ -1176,7 +1176,7 @@
         "HashMD5":  "B5CB45992ED4A7B2A005545AE9710458"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "19.01.07",
@@ -1212,7 +1212,7 @@
         "HashMD5":  "72051B3B4E32EA1BD0C56E22332248BC"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "19.01.07",
@@ -1248,7 +1248,7 @@
         "HashMD5":  "D7F4BC9A1EC3CA3C1025DF384978DF51"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "20.05.12",
@@ -1284,7 +1284,7 @@
         "HashMD5":  "34957B212E158DD93FE10822C4F55493"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "21.07.08",
@@ -1320,7 +1320,7 @@
         "HashMD5":  "1B0F08AABC5EB0C4B86671CABCED1CEC"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "22.02.03",
@@ -1359,7 +1359,7 @@
         "HashMD5":  "2DE2D652DD012C896B6CC632AA6276C9"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "22.05.06",
@@ -1398,7 +1398,7 @@
         "HashMD5":  "7B5F85731C93C2C1B3158C249675EABC"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "23.07.27",
@@ -1437,7 +1437,7 @@
         "HashMD5":  "BF6DFB0E5A390B5E2EC507A809FF439E"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "23.07.27",
@@ -1476,7 +1476,7 @@
         "HashMD5":  "F48C37974173B00FC33EF3F1580066A5"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "23.08.09",
@@ -1517,7 +1517,7 @@
         "HashMD5":  "03F7F0F42D1763AEC699C50E1E47D641"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "23.08.09",
@@ -1558,7 +1558,7 @@
         "HashMD5":  "72E6A80FCF5FDF2A2BFB91F4E8BE79C1"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "23.12.08",
@@ -1594,7 +1594,7 @@
         "HashMD5":  "AEC8F9035D4135184DFB59D5324D4D9F"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "23.12.08",
@@ -1630,7 +1630,7 @@
         "HashMD5":  "CEAB6810B31E6D3B9A4DBAEC13D32506"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "23.12.08",
@@ -1669,7 +1669,7 @@
         "HashMD5":  "E102B0917674A87A0D9B57C0AB84FE0B"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "23.12.08",
@@ -1708,7 +1708,7 @@
         "HashMD5":  "AE860F10DAD191DDB560CCABC788A679"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "18.03.27",
@@ -1750,7 +1750,7 @@
         "HashMD5":  "604D040879DB901AC6370FDBC741DE84"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "19.01.07",
@@ -1786,7 +1786,7 @@
         "HashMD5":  "5FEBBC668C3CC93565888A4806A51E9E"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "19.01.07",
@@ -1822,7 +1822,7 @@
         "HashMD5":  "57A8E17407412D8C62FF64175FBD8D07"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "20.04.28",
@@ -1858,7 +1858,7 @@
         "HashMD5":  "2FB8A82515743D94F35C1F2DA1DB3BCB"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "21.07.08",
@@ -1900,7 +1900,7 @@
         "HashMD5":  "E35FE31C512152565013494F2ABF3740"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "22.02.03",
@@ -1939,7 +1939,7 @@
         "HashMD5":  "D88DB9DF9644DE19C3A3A69BF6DF332C"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "22.05.06",
@@ -1978,7 +1978,7 @@
         "HashMD5":  "605E84199166AB3DF0914E44A8743D0A"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "22.10.10",
@@ -2017,7 +2017,7 @@
         "HashMD5":  "61B3FBB813ED1FADD0ADCF9F0B1DB9ED"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "22.07.22",
@@ -2056,7 +2056,7 @@
         "HashMD5":  "842C1DFCC112168CF3E3A8DD262AE2C6"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "23.10.10",
@@ -2096,7 +2096,7 @@
         "HashMD5":  "5622F42E7C3C4EE6CA34B4516E86045A"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "23.10.10",
@@ -2136,7 +2136,7 @@
         "HashMD5":  "FE0C2D86A8A59693D0D2482F479516FE"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "23.12.08",
@@ -2172,7 +2172,7 @@
         "HashMD5":  "F89ACC9AF3BAB1F318F99D9F102BECFB"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "23.12.08",
@@ -2208,7 +2208,7 @@
         "HashMD5":  "F2CF6CB419234D04397EB0AE4DAE63D6"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "23.11.24",
@@ -2247,7 +2247,7 @@
         "HashMD5":  "0BBA61F99C762BEC193EC03C2EAC8289"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "23.11.24",
@@ -2286,7 +2286,7 @@
         "HashMD5":  "E0F173B62D08C38BA7E0B1002C2EF273"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "18.03.27",
@@ -2328,7 +2328,7 @@
         "HashMD5":  "7C884B314C1E3B24AA37E510687973AC"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "19.01.07",
@@ -2364,7 +2364,7 @@
         "HashMD5":  "7101362B7BF247098A3FA5E09302E195"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "19.01.07",
@@ -2400,7 +2400,7 @@
         "HashMD5":  "888348805D10DB575AC314B0E87ACA77"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "20.04.28",
@@ -2436,7 +2436,7 @@
         "HashMD5":  "F2ECA9CDB4ADB1DABD04F5B5415D0E97"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "21.07.08",
@@ -2478,7 +2478,7 @@
         "HashMD5":  "60D8C153EC00B2D3E0C825E615622733"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "20.09.18",
@@ -2514,7 +2514,7 @@
         "HashMD5":  "D71A98509CE0D04B7337E331E6FCC1B7"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "19.02.12",
@@ -2550,7 +2550,7 @@
         "HashMD5":  "F1DDEFB5DB53DB8E66FC422E4507E11F"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "20.09.18",
@@ -2586,7 +2586,7 @@
         "HashMD5":  "B2D422E2FDB6117EA99EF657E44266EA"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "20.04.28",
@@ -2622,7 +2622,7 @@
         "HashMD5":  "A257E8C2021B9C4817AA919230D84F03"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "20.09.18",
@@ -2658,7 +2658,7 @@
         "HashMD5":  "B8B302D735145E0F6365107CA91A2414"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "21.07.08",
@@ -2694,7 +2694,7 @@
         "HashMD5":  "7E9C2D7D5FC8D7E9AF6052F8CD565E75"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "23.10.27",
@@ -2730,7 +2730,7 @@
         "HashMD5":  "E2B5DB2EFDDE1A99A4D7893FCA239507"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "22.06.27",
@@ -2766,7 +2766,7 @@
         "HashMD5":  "96B3D131C5A799295EEC6B81D8BA00CD"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "23.10.27",
@@ -2802,7 +2802,7 @@
         "HashMD5":  "CF20C9B6570FFE2C272C1C881BD23FEF"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "22.03.21",
@@ -2838,7 +2838,7 @@
         "HashMD5":  "509A09F21C77A1AB7AD111A5AFF99FA1"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "22.03.04",
@@ -2874,7 +2874,7 @@
         "HashMD5":  "EC93772C25324BD807FF806B72318222"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "22.06.27",
@@ -2910,7 +2910,7 @@
         "HashMD5":  "E0F94C1F680FBAD28BC29D7C36DA45BE"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "22.02.19",
@@ -2946,7 +2946,7 @@
         "HashMD5":  "CF81256562A2CC2B32652126666FF038"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "23.04.10",
@@ -2982,7 +2982,7 @@
         "HashMD5":  "841DBC267B35F69215D54D5985A32A80"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "23.04.10",
@@ -3018,7 +3018,7 @@
         "HashMD5":  "C49F4A5A4B88F79EB2DFB18497D111FC"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "23.04.10",
@@ -3054,7 +3054,7 @@
         "HashMD5":  "774EC6FE8330D8D59F81746FBDE4515D"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "23.04.10",
@@ -3090,7 +3090,7 @@
         "HashMD5":  "AFAF950EBC5BD842EDDBBAC485E07B29"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "24.02.08",
@@ -3129,7 +3129,7 @@
         "HashMD5":  "0DDCBE87E6FABC8DFAD376FC9983FA31"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "24.02.08",
@@ -3168,7 +3168,7 @@
         "HashMD5":  "312397DCE97EE5B16B88E881AF5D3D1D"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "24.02.08",
@@ -3207,7 +3207,7 @@
         "HashMD5":  "9398BA86CBA7DB944BA36555FA3DC732"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "24.02.08",
@@ -3246,7 +3246,7 @@
         "HashMD5":  "9D3D1E4DF0E0BFE5E1F0B44C5DA9CA12"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "24.01.22",
@@ -3285,7 +3285,7 @@
         "HashMD5":  "A15B860937D11321DABA0C940B8BB3BD"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "24.01.22",
@@ -3324,7 +3324,7 @@
         "HashMD5":  "7B50987DE685EC396A52FD04EE04E61A"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "22.03.04",
@@ -3363,7 +3363,7 @@
         "HashMD5":  "CDC8CB10D11470E82B6BC660A5A99052"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "22.10.27",
@@ -3402,7 +3402,7 @@
         "HashMD5":  "2064D44B2837B028DB74A66569EAB427"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "22.07.12",
@@ -3438,7 +3438,7 @@
         "HashMD5":  "6EA510DF9648B883831296DC185E6445"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "23.04.27",
@@ -3474,7 +3474,7 @@
         "HashMD5":  "527D1865FBBB91BDE09D23F12D52E8E0"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "23.04.11",
@@ -3513,7 +3513,7 @@
         "HashMD5":  "D1F102FBA91DE2031BF04AA9CD5E7589"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "23.04.11",
@@ -3552,7 +3552,7 @@
         "HashMD5":  "F4534146E1990B60CD17C079A6772B1A"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "23.04.10",
@@ -3588,7 +3588,7 @@
         "HashMD5":  "AB36EDFA9DB6521F443689477431FD62"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "23.04.10",
@@ -3624,7 +3624,7 @@
         "HashMD5":  "08E3032F1A43ED9E8584582F3C7AA7BA"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "19.03.26",
@@ -3660,7 +3660,7 @@
         "HashMD5":  "D2DE3E0CCF5745CF79A6A0655C5E96AB"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "21.08.05",
@@ -3696,7 +3696,7 @@
         "HashMD5":  "65746EF32FF2491B2431FA09C9F01870"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "23.04.27",
@@ -3732,7 +3732,7 @@
         "HashMD5":  "47AFFFD6E759A85FA8820C16003A3D6D"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "24.02.08",
@@ -3771,7 +3771,7 @@
         "HashMD5":  "1D1BA21F4F3E11B6318B97D63D26CB97"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "24.02.08",
@@ -3810,7 +3810,7 @@
         "HashMD5":  "5A42BE7E92ED5D5B09EC552A4E613958"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "23.10.10",
@@ -3846,7 +3846,7 @@
         "HashMD5":  "A60FF2CB90515FCC6A22257C9739BCD5"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "23.10.10",
@@ -3882,7 +3882,7 @@
         "HashMD5":  "D60E8723283897B2470732D9697B70FB"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "23.04.27",
@@ -3918,7 +3918,7 @@
         "HashMD5":  "3010F1F7D33087F04F301FAFCB763586"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "21.08.05",
@@ -3954,7 +3954,7 @@
         "HashMD5":  "97F6A87146E13470A76C82958E1015AF"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "23.12.08",
@@ -3990,7 +3990,7 @@
         "HashMD5":  "1DDFA8D882752E65FA360A0AB38F0AF8"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "23.12.08",
@@ -4026,7 +4026,7 @@
         "HashMD5":  "6855E9B5C6BEB3A9E5C16319C18DAF6C"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "24.01.05",
@@ -4065,7 +4065,7 @@
         "HashMD5":  "1842F4E4497AAD5AE94DADED3253904A"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "24.01.05",
@@ -4104,7 +4104,7 @@
         "HashMD5":  "FFE4552F27FC7F72E755D57E0C0F580B"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "24.02.08",
@@ -4140,7 +4140,7 @@
         "HashMD5":  "CC8648D615DE1CB31511B418BBD1DCBB"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "24.02.08",
@@ -4176,7 +4176,7 @@
         "HashMD5":  "FD5B1277AC7D028E28C765560CB0E6F1"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "23.11.24",
@@ -4215,7 +4215,7 @@
         "HashMD5":  "F9A749B17004A35BE98D274ED8A6A9FB"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "23.11.24",
@@ -4254,7 +4254,7 @@
         "HashMD5":  "E83E62943586C317657AE59ED54872B9"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "20.09.08",
@@ -4293,7 +4293,7 @@
         "HashMD5":  "41C7635AB09F3E5FBCCEA80A15F36C15"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "21.07.08",
@@ -4329,7 +4329,7 @@
         "HashMD5":  "BEBB9FE113D4FAF360BA32CDDECD17CD"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "23.05.31",
@@ -4365,7 +4365,7 @@
         "HashMD5":  "5264CF3834C57696B3B8F2AB17215E80"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "21.07.08",
@@ -4401,7 +4401,7 @@
         "HashMD5":  "5673AEC6CC3493A09FFB44B1B5B3325F"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "20.05.12",
@@ -4437,7 +4437,7 @@
         "HashMD5":  "8D025B27CA23F3454994A690776A5084"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "22.07.12",
@@ -4479,7 +4479,7 @@
         "HashMD5":  "E073CC4185E265BE0DEC652B55B6DFA0"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "23.10.27",
@@ -4518,7 +4518,7 @@
         "HashMD5":  "0DF0FCED2D9685C71FBC1384114BBA77"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "22.07.12",
@@ -4554,7 +4554,7 @@
         "HashMD5":  "A8C159D6D56D0440E2A735C5E16E7D15"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "23.04.27",
@@ -4590,7 +4590,7 @@
         "HashMD5":  "98AC43928022779BD169A8C49A75FDA5"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "23.04.11",
@@ -4626,7 +4626,7 @@
         "HashMD5":  "4994ADB66724A5BF42DCB0075C7FC7C1"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "23.04.10",
@@ -4662,7 +4662,7 @@
         "HashMD5":  "75763DF8CE1E4F6A9EBB103C31D2B751"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "23.04.10",
@@ -4698,7 +4698,7 @@
         "HashMD5":  "CB39AB0901B527DD55C0549FF99CB844"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "23.04.10",
@@ -4734,7 +4734,7 @@
         "HashMD5":  "A5AF049E8449DBADF493C5B7C5831623"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "24.02.08",
@@ -4773,7 +4773,7 @@
         "HashMD5":  "F809A875BAFE322C95F883FF3F156CD3"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "24.02.08",
@@ -4812,7 +4812,7 @@
         "HashMD5":  "4B8D467147F0F1314468548AF283313C"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "23.10.10",
@@ -4848,7 +4848,7 @@
         "HashMD5":  "ABD48F09B4213D332E4767B5C9D2F577"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "23.10.10",
@@ -4884,7 +4884,7 @@
         "HashMD5":  "6D938D1776C2CAFF93E90B1A7BB86C9C"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "24.02.08",
@@ -4923,7 +4923,7 @@
         "HashMD5":  "21FB67ED3B5C3B3AB37294DE950E367E"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "24.02.08",
@@ -4962,7 +4962,7 @@
         "HashMD5":  "15C4F2CB1BCDA76ABA378724482C73A6"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "24.02.08",
@@ -4998,7 +4998,7 @@
         "HashMD5":  "0014830E8F62971D24EB4991D1D9DC12"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "24.02.08",
@@ -5034,7 +5034,7 @@
         "HashMD5":  "349EDCC1F55606422EF2EC7F0EEEB311"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "24.02.08",
@@ -5070,7 +5070,7 @@
         "HashMD5":  "6774E31EB96FE88DEA527A1CBBE5D13B"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "24.02.08",
@@ -5106,7 +5106,7 @@
         "HashMD5":  "358F26664953479DAFA21E16FF2E5562"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "20.05.26",
@@ -5145,7 +5145,7 @@
         "HashMD5":  "D385C77D9312DA5E873CDEA778E5AA0F"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "22.06.27",
@@ -5181,7 +5181,7 @@
         "HashMD5":  "94EE5C10B1D4055CA1CB29D17BC49BDA"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "23.10.27",
@@ -5217,7 +5217,7 @@
         "HashMD5":  "0B6BBB17333DED33AE6076E6DD6C49AA"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "21.08.05",
@@ -5253,7 +5253,7 @@
         "HashMD5":  "D75AD7DC115ED1C58051C3290B297F48"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "16.04.14",
@@ -5295,7 +5295,7 @@
         "HashMD5":  "78D8BE8DEF9348252BA16400A06BE0BC"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "24.01.08",
@@ -5331,7 +5331,7 @@
         "HashMD5":  "3912CC9259AB789A46067E78CC878592"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "24.01.08",
@@ -5367,7 +5367,7 @@
         "HashMD5":  "BE1E5CAB32B4607447225AB117A61652"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "22.01.05",
@@ -5403,7 +5403,7 @@
         "HashMD5":  "EAB69003B6AE71EDF85FF30101B23B06"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "22.03.04",
@@ -5439,7 +5439,7 @@
         "HashMD5":  "C514660D2C8E8EA98807E05FDC9D0EC6"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "22.10.10",
@@ -5475,7 +5475,7 @@
         "HashMD5":  "241E49D737F5BED7E7F7D3C325709300"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "22.07.11",
@@ -5511,7 +5511,7 @@
         "HashMD5":  "F09F579F0A61FFD9E700649E00096D2B"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "20.04.14",
@@ -5547,7 +5547,7 @@
         "HashMD5":  "6E4EDF0CF2DD97BCC8609CA7390DF398"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "19.02.12",
@@ -5583,7 +5583,7 @@
         "HashMD5":  "8E627E70340A3A0F774F0600FB4727BA"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "23.11.09",
@@ -5619,7 +5619,7 @@
         "HashMD5":  "28D8334CF6578F7AE919CB40895CFB23"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "23.11.09",
@@ -5655,23 +5655,23 @@
         "HashMD5":  "96EB5D427AAFC4EA103E2A0AF6E5CCD5"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  "23.12.08",
+        "ReleaseDate":  "24.02.26",
         "Manufacturer":  "Dell",
-        "Name":  "Dell Latitude 7230 Win10 A04",
-        "DellVersion":  "A04",
-        "Url":  "http://downloads.dell.com/FOLDER10605919M/1/7230-N2K3R_Win10_1.0_A04.exe",
+        "Name":  "Dell Latitude 7230 Win10 A05",
+        "DellVersion":  "A05",
+        "Url":  "http://downloads.dell.com/FOLDER11027966M/1/7230-G9TPM_Win10_1.0_A05.exe",
         "VendorVersion":  "1.0",
-        "FileName":  "7230-N2K3R_Win10_1.0_A04.exe",
-        "SizeMB":  "1671.02",
-        "ReleaseID":  "N2K3R",
+        "FileName":  "7230-G9TPM_Win10_1.0_A05.exe",
+        "SizeMB":  "1664.42",
+        "ReleaseID":  "G9TPM",
         "Brand":  "Latitude",
         "Key":  "4",
         "Prefix":  "LAT",
         "Model":  "Latitude 7230",
-        "ModelID":  "7230",
+        "ModelID":  "Latitude 7230",
         "SystemID":  "0BB7",
         "RtsDate":  "2022-11-27T16:00:00",
         "Generation":  "XX",
@@ -5684,30 +5684,30 @@
         "minorVersion":  "0",
         "spMajorVersion":  "0",
         "spMinorVersion":  "0",
-        "ImportantInfoUrl":  "http://www.dell.com/support/home/us/en/04/Drivers/DriversDetails?driverId=N2K3R",
+        "ImportantInfoUrl":  "http://www.dell.com/support/home/us/en/04/Drivers/DriversDetails?driverId=G9TPM",
         "OSVersion":  "Windows 10 x64",
         "OSReleaseId":  null,
         "OSBuild":  null,
-        "HashMD5":  "40FD4C30980C2EA13C54372EA997DA1B"
+        "HashMD5":  "58724AFA9B62BB16CA2EBDAF8273B72E"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  "23.12.08",
+        "ReleaseDate":  "24.02.26",
         "Manufacturer":  "Dell",
-        "Name":  "Dell Latitude 7230 Win11 A05",
-        "DellVersion":  "A05",
-        "Url":  "http://downloads.dell.com/FOLDER10605910M/1/7230-3HT1N_Win11_1.0_A05.exe",
+        "Name":  "Dell Latitude 7230 Win11 A06",
+        "DellVersion":  "A06",
+        "Url":  "http://downloads.dell.com/FOLDER11027950M/1/7230-JM44C_Win11_1.0_A06.exe",
         "VendorVersion":  "1.0",
-        "FileName":  "7230-3HT1N_Win11_1.0_A05.exe",
-        "SizeMB":  "1302.80",
-        "ReleaseID":  "3HT1N",
+        "FileName":  "7230-JM44C_Win11_1.0_A06.exe",
+        "SizeMB":  "1285.90",
+        "ReleaseID":  "JM44C",
         "Brand":  "Latitude",
         "Key":  "4",
         "Prefix":  "LAT",
         "Model":  "Latitude 7230",
-        "ModelID":  "7230",
+        "ModelID":  "Latitude 7230",
         "SystemID":  "0BB7",
         "RtsDate":  "2022-11-27T16:00:00",
         "Generation":  "XX",
@@ -5720,14 +5720,14 @@
         "minorVersion":  "0",
         "spMajorVersion":  "0",
         "spMinorVersion":  "0",
-        "ImportantInfoUrl":  "http://www.dell.com/support/home/us/en/04/Drivers/DriversDetails?driverId=3HT1N",
+        "ImportantInfoUrl":  "http://www.dell.com/support/home/us/en/04/Drivers/DriversDetails?driverId=JM44C",
         "OSVersion":  "Windows 11 x64",
         "OSReleaseId":  null,
         "OSBuild":  null,
-        "HashMD5":  "63EC8ACBCD1D79D8181664C0CD2F757D"
+        "HashMD5":  "E3E7359A5E5145A6CD1108CB65163E1A"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "19.06.11",
@@ -5763,7 +5763,7 @@
         "HashMD5":  "D41F127FF6ED4C25C2A489DA18EE84C4"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "21.02.03",
@@ -5799,7 +5799,7 @@
         "HashMD5":  "A28AB82A1D74B2552A60E9EE1840EE85"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "20.04.28",
@@ -5835,7 +5835,7 @@
         "HashMD5":  "162AB61D0728AA3CE81132840CE92CB7"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "21.07.08",
@@ -5871,7 +5871,7 @@
         "HashMD5":  "8A70A01B62C05C60324BEB02CAA063A3"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "23.07.07",
@@ -5907,7 +5907,7 @@
         "HashMD5":  "B9D0F0B7CC14AA2E3C27FE45DC1BB8B5"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "23.07.07",
@@ -5943,7 +5943,7 @@
         "HashMD5":  "6CD3CE87C4415303DB6FFA63387A2927"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "23.04.11",
@@ -5982,7 +5982,7 @@
         "HashMD5":  "30486694C9A85DA5FC1A319EBC83F926"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "23.04.11",
@@ -6021,7 +6021,7 @@
         "HashMD5":  "25A8BAF82ED3FA1F92AC1CF587C32ACD"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "23.10.10",
@@ -6057,7 +6057,7 @@
         "HashMD5":  "F1280068F3ED5B54540041170A2A4C3C"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "23.10.10",
@@ -6093,7 +6093,7 @@
         "HashMD5":  "D30599AB22367DCD94A26BA01A99B0D4"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "24.02.08",
@@ -6132,7 +6132,7 @@
         "HashMD5":  "63D271FF5B628DC0E25307A115530774"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "24.02.08",
@@ -6171,7 +6171,7 @@
         "HashMD5":  "B8D1B47F5580B3C055B57D299B6A79D8"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "23.12.08",
@@ -6207,7 +6207,7 @@
         "HashMD5":  "FA984A6BC5F9932D6F451027BEBA6BFB"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "23.12.11",
@@ -6243,7 +6243,7 @@
         "HashMD5":  "C798817A92C61BCF3537B62D44661869"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "23.11.09",
@@ -6282,7 +6282,7 @@
         "HashMD5":  "4A4661948DD7B2B30DB46C33CED4391B"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "23.11.09",
@@ -6321,7 +6321,7 @@
         "HashMD5":  "64570458354D55C44D42EFD7CF80FD48"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "24.01.22",
@@ -6361,7 +6361,7 @@
         "HashMD5":  "D45B6CD293CF9D2E770D4328C4B09D37"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "24.01.22",
@@ -6401,7 +6401,7 @@
         "HashMD5":  "1F2293BBF33A3F1B83596C730973BEBF"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "18.03.27",
@@ -6437,7 +6437,7 @@
         "HashMD5":  "7EBE5532F1B125CD5BDC944AAA78141A"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "19.06.11",
@@ -6473,7 +6473,7 @@
         "HashMD5":  "22358B913FD0BBEDC08680DFD010B738"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "20.05.26",
@@ -6509,7 +6509,7 @@
         "HashMD5":  "08BAFEC3B99375254A17E79DD20E1DFA"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "20.05.26",
@@ -6545,7 +6545,7 @@
         "HashMD5":  "6446C1BFBAFE1AB7F8921FFA2B76E24D"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "24.01.22",
@@ -6581,7 +6581,7 @@
         "HashMD5":  "FCBA0B1FF0F8BBB0DDAC15E573BD9889"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "23.03.24",
@@ -6617,7 +6617,7 @@
         "HashMD5":  "8A14D955BDAA2E43DF3690AD4E95182B"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "24.01.24",
@@ -6653,7 +6653,7 @@
         "HashMD5":  "A652B7DD3AB369C9F96ED9412376A4C8"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "24.01.22",
@@ -6689,7 +6689,7 @@
         "HashMD5":  "7120BEA7D1857FA2E62A008296F2802A"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "24.01.22",
@@ -6725,7 +6725,7 @@
         "HashMD5":  "FC465052E71BA83050896150ED9472B9"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "24.01.22",
@@ -6761,7 +6761,7 @@
         "HashMD5":  "94243B9196CAD69ACF26E2FE3310D4C0"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "24.01.24",
@@ -6797,7 +6797,7 @@
         "HashMD5":  "807A22D89FEDC1718BD3E83100FFC72D"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "22.12.21",
@@ -6836,7 +6836,7 @@
         "HashMD5":  "92F20A5391DBFFA98A9D1BDC039F711F"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "23.05.08",
@@ -6875,7 +6875,7 @@
         "HashMD5":  "845C8D02F732F3478E971CC2F20AD917"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "19.02.12",
@@ -6911,7 +6911,7 @@
         "HashMD5":  "D9C52219082614208AF038388DA25523"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "24.02.08",
@@ -6950,7 +6950,7 @@
         "HashMD5":  "237CA04FBC20119FE1F78A80B5719CCD"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "24.02.08",
@@ -6989,7 +6989,7 @@
         "HashMD5":  "88B026A0402E57C3F5438B8D73EDD3B0"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "23.04.27",
@@ -7025,7 +7025,7 @@
         "HashMD5":  "051D7012F63F48ADA9380907C6613BF6"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "21.08.05",
@@ -7061,7 +7061,7 @@
         "HashMD5":  "E1394BA0B8A24D62A1C3C9A21783E202"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "24.01.22",
@@ -7100,7 +7100,7 @@
         "HashMD5":  "8D17401E80E49532287B82C565EAE440"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "24.01.22",
@@ -7139,7 +7139,7 @@
         "HashMD5":  "D729573F7458AE87012A531EDAD65DEB"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "24.02.08",
@@ -7179,7 +7179,7 @@
         "HashMD5":  "AB0F0580F8D9CE2C4EFFD283661CA685"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "24.02.08",
@@ -7219,7 +7219,7 @@
         "HashMD5":  "1F844499D111BB6489D4FACE6DEE040E"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "24.01.22",
@@ -7255,7 +7255,7 @@
         "HashMD5":  "03D9ADE0449153A9FAF65DE88D3EDDC4"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "24.01.22",
@@ -7291,7 +7291,7 @@
         "HashMD5":  "C29B207650DA5D90C084BF304EDC08CD"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "24.02.08",
@@ -7327,7 +7327,7 @@
         "HashMD5":  "FD78E6289C3CAC1DAB31AA8B8B687866"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "24.02.08",
@@ -7363,7 +7363,7 @@
         "HashMD5":  "EE53BE670ECA73D6CF808A4556568E21"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "24.02.08",
@@ -7399,7 +7399,7 @@
         "HashMD5":  "A8F06A2E8078C15417936E6ABDE58438"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "24.02.08",
@@ -7435,7 +7435,7 @@
         "HashMD5":  "8CC5FFD906F3BD8993F8F9FA5DEA640A"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "24.01.22",
@@ -7471,7 +7471,7 @@
         "HashMD5":  "4EA13FFCB06CB5048E52EBFE98B837BB"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "24.01.22",
@@ -7507,7 +7507,7 @@
         "HashMD5":  "572456ECD25E0A48DD7C5EDCCDC44D8A"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "24.01.22",
@@ -7543,7 +7543,7 @@
         "HashMD5":  "CED2337512DB994DF11B08425E9AA8E9"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "24.01.22",
@@ -7579,7 +7579,7 @@
         "HashMD5":  "E06835A4769F1F01AD21DDE18921B6A9"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "22.12.21",
@@ -7615,7 +7615,7 @@
         "HashMD5":  "70DB3E6476077C22105BCA8F5DE3CA2F"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "22.04.21",
@@ -7651,7 +7651,7 @@
         "HashMD5":  "30F1214BF1B2B62C340916B984566104"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "23.10.10",
@@ -7690,7 +7690,7 @@
         "HashMD5":  "F52F221348C093A084AC350A69D7B2C3"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "23.10.10",
@@ -7729,7 +7729,7 @@
         "HashMD5":  "0DE1599F1FA227BF17DA26B47442BD05"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "24.02.08",
@@ -7768,7 +7768,7 @@
         "HashMD5":  "5B3C9FD1AEB1A681B3144A0273D78A41"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "24.02.08",
@@ -7807,7 +7807,7 @@
         "HashMD5":  "F79579E785C6C66775640A9475CD85B5"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "23.12.08",
@@ -7846,7 +7846,7 @@
         "HashMD5":  "733FDFB2A88B0B63D2D6B42BDA834A95"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "23.12.08",
@@ -7885,7 +7885,7 @@
         "HashMD5":  "CA417268F1DCC43EFE344B99C7584B04"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "22.10.10",
@@ -7924,7 +7924,7 @@
         "HashMD5":  "D9C5E3A846DEFC297782F91823A702D8"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "22.07.22",
@@ -7963,7 +7963,7 @@
         "HashMD5":  "B9224960DEEE8975BDCA90C9A7041762"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "24.02.08",
@@ -8002,7 +8002,7 @@
         "HashMD5":  "16272154860FE5B94C9B0850F12B4BC1"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "24.02.08",
@@ -8041,7 +8041,7 @@
         "HashMD5":  "449CD771E4BAFBAA4D78BCB457555D6B"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "18.03.27",
@@ -8089,7 +8089,7 @@
         "HashMD5":  "69B395171DE4B8B476C1A8F2762A2700"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "20.09.18",
@@ -8125,7 +8125,7 @@
         "HashMD5":  "19932733264D943F2C072503AD5E3E6D"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "16.04.15",
@@ -8173,7 +8173,7 @@
         "HashMD5":  "839250BD6363A419AD8F7432E908467D"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "18.04.10",
@@ -8218,7 +8218,7 @@
         "HashMD5":  "BC0B1EAB20BD52D27C69F6FC6280AFA7"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "20.09.18",
@@ -8266,7 +8266,7 @@
         "HashMD5":  "A9EBF63D9F502045336ECDF3A1B7547E"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "20.09.18",
@@ -8302,7 +8302,7 @@
         "HashMD5":  "520380A94D1887966D0F64C33BCFCD24"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "16.04.15",
@@ -8350,7 +8350,7 @@
         "HashMD5":  "D525041D666D152C9B173D54B9FD6807"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "18.04.10",
@@ -8392,7 +8392,7 @@
         "HashMD5":  "AB4A75F1A3F18E7B0720A12D686A7B19"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "18.03.27",
@@ -8440,7 +8440,7 @@
         "HashMD5":  "22891E341EB0D47BF6A36942ACA13B73"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "20.06.23",
@@ -8476,7 +8476,7 @@
         "HashMD5":  "EB2FFD2DD7DAF6E9F78B07F2300A9387"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "16.04.15",
@@ -8518,7 +8518,7 @@
         "HashMD5":  "D2CB210657F6E936E318A01BCBED3CC2"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "16.04.15",
@@ -8560,7 +8560,7 @@
         "HashMD5":  "70E71905C78B2A3E1360E4FF002E974C"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "16.04.15",
@@ -8605,7 +8605,7 @@
         "HashMD5":  "1E3FDC7FDA0E37056ED49F135C49CFC9"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "16.04.16",
@@ -8647,7 +8647,7 @@
         "HashMD5":  "4CCDAAD07848C984BC2901E17C84D095"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "18.04.10",
@@ -8689,7 +8689,7 @@
         "HashMD5":  "4B1DCE57EDF290FD79DA497C96636B77"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "16.04.15",
@@ -8731,7 +8731,7 @@
         "HashMD5":  "683041C6855ACCF1D53106FAD3EC0CCA"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "18.04.10",
@@ -8773,7 +8773,7 @@
         "HashMD5":  "3E76140C0097B21C048C7AC9ACEB2479"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "18.04.10",
@@ -8815,7 +8815,7 @@
         "HashMD5":  "AFD1C68F0BC21117790C3C196505CBF0"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "18.08.28",
@@ -8863,7 +8863,7 @@
         "HashMD5":  "DC243434EFDA24980AA9F4F82E002907"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "19.06.11",
@@ -8899,7 +8899,7 @@
         "HashMD5":  "2078555D9958113CA1338EEAD219C477"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "18.04.10",
@@ -8941,7 +8941,7 @@
         "HashMD5":  "B9CFD485A7EBFED9F1103B02E519FABC"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "18.08.28",
@@ -8983,7 +8983,7 @@
         "HashMD5":  "188F3D9E21A8D5DAC619EA08D3E24A6D"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "20.07.14",
@@ -9019,7 +9019,7 @@
         "HashMD5":  "9254F3462486AE5F90C4432C7E3F2C77"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "15.07.28",
@@ -9061,7 +9061,7 @@
         "HashMD5":  "058A77F2D432D73DA2B1738C88C69FEC"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "22.06.13",
@@ -9097,18 +9097,18 @@
         "HashMD5":  "BE6CBB2BEBB9BC898E20F7A753105E31"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  "23.11.09",
+        "ReleaseDate":  "24.02.26",
         "Manufacturer":  "Dell",
-        "Name":  "Dell OptiPlex 3000 Win10 A10",
-        "DellVersion":  "A10",
-        "Url":  "http://downloads.dell.com/FOLDER10571473M/1/OptiPlex-3000-CY6V8_Win10_1.0_A10.exe",
+        "Name":  "Dell OptiPlex 3000 Win10 A11",
+        "DellVersion":  "A11",
+        "Url":  "http://downloads.dell.com/FOLDER10967398M/1/OptiPlex-3000-PPK8M_Win10_1.0_A11.exe",
         "VendorVersion":  "1.0",
-        "FileName":  "OptiPlex-3000-CY6V8_Win10_1.0_A10.exe",
-        "SizeMB":  "2139.37",
-        "ReleaseID":  "CY6V8",
+        "FileName":  "OptiPlex-3000-PPK8M_Win10_1.0_A11.exe",
+        "SizeMB":  "2131.69",
+        "ReleaseID":  "PPK8M",
         "Brand":  "Optiplex",
         "Key":  "1",
         "Prefix":  "OP",
@@ -9129,25 +9129,25 @@
         "minorVersion":  "0",
         "spMajorVersion":  "0",
         "spMinorVersion":  "0",
-        "ImportantInfoUrl":  "http://www.dell.com/support/home/us/en/04/Drivers/DriversDetails?driverId=CY6V8",
+        "ImportantInfoUrl":  "http://www.dell.com/support/home/us/en/04/Drivers/DriversDetails?driverId=PPK8M",
         "OSVersion":  "Windows 10 x64",
         "OSReleaseId":  null,
         "OSBuild":  null,
-        "HashMD5":  "16FC754A2EE047F9DAD0E9D2D2C4EC13"
+        "HashMD5":  "D4B50625CDBCB017D3AE679EC77CC7F9"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  "23.11.09",
+        "ReleaseDate":  "24.02.26",
         "Manufacturer":  "Dell",
-        "Name":  "Dell OptiPlex 3000 Win11 A09",
-        "DellVersion":  "A09",
-        "Url":  "http://downloads.dell.com/FOLDER10571483M/1/OptiPlex-3000-GJTP0_Win11_1.0_A09.exe",
+        "Name":  "Dell OptiPlex 3000 Win11 A10",
+        "DellVersion":  "A10",
+        "Url":  "http://downloads.dell.com/FOLDER10967431M/1/OptiPlex-3000-P7RTD_Win11_1.0_A10.exe",
         "VendorVersion":  "1.0",
-        "FileName":  "OptiPlex-3000-GJTP0_Win11_1.0_A09.exe",
-        "SizeMB":  "2122.19",
-        "ReleaseID":  "GJTP0",
+        "FileName":  "OptiPlex-3000-P7RTD_Win11_1.0_A10.exe",
+        "SizeMB":  "2114.52",
+        "ReleaseID":  "P7RTD",
         "Brand":  "Optiplex",
         "Key":  "1",
         "Prefix":  "OP",
@@ -9168,14 +9168,14 @@
         "minorVersion":  "0",
         "spMajorVersion":  "0",
         "spMinorVersion":  "0",
-        "ImportantInfoUrl":  "http://www.dell.com/support/home/us/en/04/Drivers/DriversDetails?driverId=GJTP0",
+        "ImportantInfoUrl":  "http://www.dell.com/support/home/us/en/04/Drivers/DriversDetails?driverId=P7RTD",
         "OSVersion":  "Windows 11 x64",
         "OSReleaseId":  null,
         "OSBuild":  null,
-        "HashMD5":  "A80EFA836917B815E847582ADF66B4D1"
+        "HashMD5":  "BE449885AB813FBEE38601EA633FF333"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "16.04.15",
@@ -9217,7 +9217,7 @@
         "HashMD5":  "0430AB014540C68684AD3B39726A0F4A"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "16.02.08",
@@ -9259,7 +9259,7 @@
         "HashMD5":  "113A45101636339D80E3E65A97F5CF95"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "18.04.10",
@@ -9301,7 +9301,7 @@
         "HashMD5":  "D7A9DD12AB199EF6AA196B75CCD98D39"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "18.04.10",
@@ -9343,7 +9343,7 @@
         "HashMD5":  "933CC7BDD4A80325242C8EEF101B3589"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "18.04.10",
@@ -9385,7 +9385,7 @@
         "HashMD5":  "1DEAFC86A179128F834EDD5479BFE628"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "20.09.18",
@@ -9421,7 +9421,7 @@
         "HashMD5":  "7ADD69ABEC813ED138EDD9D745B5FEAB"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "19.01.07",
@@ -9457,7 +9457,7 @@
         "HashMD5":  "6ECEB4321D63476ADF89F6340AA689A7"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "20.05.26",
@@ -9493,7 +9493,7 @@
         "HashMD5":  "B76A51F5929867C96BA00CF288BB2073"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "20.09.18",
@@ -9529,7 +9529,7 @@
         "HashMD5":  "53F2AC3EF9A40CB80303475350E43BE5"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "21.07.08",
@@ -9571,7 +9571,7 @@
         "HashMD5":  "CFEFCA97F0B89472B73A7427D3F81987"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "23.05.31",
@@ -9610,7 +9610,7 @@
         "HashMD5":  "BF3340FD24DA78C242E1E323F421BAC1"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "22.06.13",
@@ -9649,7 +9649,7 @@
         "HashMD5":  "5D40A49BA7D46CCBBABB57F89767D616"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "22.10.28",
@@ -9688,7 +9688,7 @@
         "HashMD5":  "B1841B239EA3912055300D8FD27EFD57"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "23.04.10",
@@ -9727,7 +9727,7 @@
         "HashMD5":  "6D46D21F816FED0A9918A654990E0CDE"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "23.04.10",
@@ -9766,7 +9766,7 @@
         "HashMD5":  "290236A327F3CE075E320D7D381AE2F2"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "23.10.10",
@@ -9805,7 +9805,7 @@
         "HashMD5":  "0A36E58A156F55BD7566516B2FD10305"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "23.10.10",
@@ -9844,7 +9844,7 @@
         "HashMD5":  "4E9ECEF4922E1EF62ECB7DBFE19A648A"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "23.10.10",
@@ -9883,7 +9883,7 @@
         "HashMD5":  "3BB22DB66D00197B5CEFF6CC51F88F44"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "23.10.10",
@@ -9922,7 +9922,7 @@
         "HashMD5":  "ED37FA5E4DD3BFE692F2D6609434CE76"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "19.01.25",
@@ -9958,7 +9958,7 @@
         "HashMD5":  "1D1EEFF80DE5E3DE1EE5F75CFF2BB810"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "23.10.27",
@@ -9997,7 +9997,7 @@
         "HashMD5":  "B30B94E3A675E02905464553B37FBF6D"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "23.10.27",
@@ -10036,7 +10036,7 @@
         "HashMD5":  "A2B79C0531EED3BD28FBB3A1AF7FD40E"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "23.12.08",
@@ -10075,7 +10075,7 @@
         "HashMD5":  "5A1C1AF33DA7129FCE3F2FB8F8135DAE"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "23.12.08",
@@ -10114,7 +10114,7 @@
         "HashMD5":  "DDEF1E0544AA8030C64621E9F75DF03C"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "19.01.07",
@@ -10150,7 +10150,7 @@
         "HashMD5":  "A0EF64F8680A41F932DCCC08045951E6"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "20.05.12",
@@ -10186,7 +10186,7 @@
         "HashMD5":  "C6D89F693E6798BB475EE02B41BA7953"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "20.06.09",
@@ -10222,7 +10222,7 @@
         "HashMD5":  "93406CBEFC6BAF34F26A5E470FC661AB"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "19.10.07",
@@ -10258,7 +10258,7 @@
         "HashMD5":  "EB2E5428CCCA584F9033D4D5E3EAA7C4"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "19.10.07",
@@ -10294,7 +10294,7 @@
         "HashMD5":  "21E4BED3267EA3DFCDC5AD446E20F8F6"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "21.07.08",
@@ -10336,7 +10336,7 @@
         "HashMD5":  "94B3C67D6302733EC0BF74B4384C5A39"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "23.03.24",
@@ -10375,7 +10375,7 @@
         "HashMD5":  "DC7E207D18FEC216A725F83B4E60A374"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "22.06.13",
@@ -10414,7 +10414,7 @@
         "HashMD5":  "C42A9A1B953D951B7F0AFDA92328E2D8"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "22.10.27",
@@ -10453,7 +10453,7 @@
         "HashMD5":  "4DFC5BFEF64CC76D5D2D1028349ECBF0"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "23.06.30",
@@ -10492,7 +10492,7 @@
         "HashMD5":  "12DC87D68FBE13B1377D6D5FF4717C86"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "23.06.30",
@@ -10531,23 +10531,23 @@
         "HashMD5":  "667E836AA5963B10D0C4858D5A54D99F"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  "23.08.10",
+        "ReleaseDate":  "24.02.26",
         "Manufacturer":  "Dell",
-        "Name":  "Dell OptiPlex 5090 Win10 A12",
-        "DellVersion":  "A12",
-        "Url":  "http://downloads.dell.com/FOLDER10410039M/1/5090-J0T3D_Win10_1.0_A12.exe",
+        "Name":  "Dell OptiPlex 5090 Win10 A13",
+        "DellVersion":  "A13",
+        "Url":  "http://downloads.dell.com/FOLDER11055464M/1/5090-DRD6W_Win10_1.0_A13.exe",
         "VendorVersion":  "1.0",
-        "FileName":  "5090-J0T3D_Win10_1.0_A12.exe",
-        "SizeMB":  "2914.98",
-        "ReleaseID":  "J0T3D",
+        "FileName":  "5090-DRD6W_Win10_1.0_A13.exe",
+        "SizeMB":  "3402.06",
+        "ReleaseID":  "DRD6W",
         "Brand":  "Optiplex",
         "Key":  "1",
         "Prefix":  "OP",
         "Model":  "OptiPlex 5090",
-        "ModelID":  "5090",
+        "ModelID":  "OptiPlex 5090",
         "SystemID":  [
                          "0A54",
                          "0A55"
@@ -10563,30 +10563,30 @@
         "minorVersion":  "0",
         "spMajorVersion":  "0",
         "spMinorVersion":  "0",
-        "ImportantInfoUrl":  "http://www.dell.com/support/home/us/en/04/Drivers/DriversDetails?driverId=J0T3D",
+        "ImportantInfoUrl":  "http://www.dell.com/support/home/us/en/04/Drivers/DriversDetails?driverId=DRD6W",
         "OSVersion":  "Windows 10 x64",
         "OSReleaseId":  null,
         "OSBuild":  null,
-        "HashMD5":  "DC800C688D3B19EA08473EEC4382FC2F"
+        "HashMD5":  "E7A7EE1EAB9C1D07AE138003B3BAD3E4"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  "23.08.10",
+        "ReleaseDate":  "24.02.26",
         "Manufacturer":  "Dell",
-        "Name":  "Dell OptiPlex 5090 Win11 A05",
-        "DellVersion":  "A05",
-        "Url":  "http://downloads.dell.com/FOLDER10410042M/1/5090-C91J4_Win11_1.0_A05.exe",
+        "Name":  "Dell OptiPlex 5090 Win11 A06",
+        "DellVersion":  "A06",
+        "Url":  "http://downloads.dell.com/FOLDER11010121M/1/5090-V7VRD_Win11_1.0_A06.exe",
         "VendorVersion":  "1.0",
-        "FileName":  "5090-C91J4_Win11_1.0_A05.exe",
-        "SizeMB":  "2914.99",
-        "ReleaseID":  "C91J4",
+        "FileName":  "5090-V7VRD_Win11_1.0_A06.exe",
+        "SizeMB":  "3353.05",
+        "ReleaseID":  "V7VRD",
         "Brand":  "Optiplex",
         "Key":  "1",
         "Prefix":  "OP",
         "Model":  "OptiPlex 5090",
-        "ModelID":  "5090",
+        "ModelID":  "OptiPlex 5090",
         "SystemID":  [
                          "0A54",
                          "0A55"
@@ -10602,14 +10602,14 @@
         "minorVersion":  "0",
         "spMajorVersion":  "0",
         "spMinorVersion":  "0",
-        "ImportantInfoUrl":  "http://www.dell.com/support/home/us/en/04/Drivers/DriversDetails?driverId=C91J4",
+        "ImportantInfoUrl":  "http://www.dell.com/support/home/us/en/04/Drivers/DriversDetails?driverId=V7VRD",
         "OSVersion":  "Windows 11 x64",
         "OSReleaseId":  null,
         "OSBuild":  null,
-        "HashMD5":  "3B19E2E1BD1805DA046F6DF3BA0C2140"
+        "HashMD5":  "E069CD731AB23620ABE431035C98DE6F"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "20.05.26",
@@ -10651,7 +10651,7 @@
         "HashMD5":  "F40B24931847CEBC84BD013B97C824AA"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "21.07.08",
@@ -10690,7 +10690,7 @@
         "HashMD5":  "217AC8C3176150AB4750C80B4D3680E3"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "23.03.24",
@@ -10729,7 +10729,7 @@
         "HashMD5":  "13A581B66872120B533CBD0344857107"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "22.08.09",
@@ -10768,7 +10768,7 @@
         "HashMD5":  "06151596A9952EA1734544DE0448D21C"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "22.03.04",
@@ -10807,7 +10807,7 @@
         "HashMD5":  "FB45C2AEE5C91454CA3DE6ABB16D859E"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "23.09.06",
@@ -10846,7 +10846,7 @@
         "HashMD5":  "8F7A288BECA6C6BB6D9CBEC51239EE1D"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "23.09.06",
@@ -10885,7 +10885,7 @@
         "HashMD5":  "EEC74A08F54581E0593E59C3E0DE0EF8"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "23.07.07",
@@ -10924,7 +10924,7 @@
         "HashMD5":  "D05E459BBEB4ABA3CB0BFC624CDA243B"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "23.07.07",
@@ -10963,7 +10963,7 @@
         "HashMD5":  "6093B70C31B1CBD888C5B72AF3ECAE3C"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "23.08.10",
@@ -11002,7 +11002,7 @@
         "HashMD5":  "ECA70667D26B11AC163291C7C65E4786"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "23.08.10",
@@ -11041,7 +11041,7 @@
         "HashMD5":  "1B556FBE0B0F172BF49B7814DD08F2BD"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "23.09.06",
@@ -11080,7 +11080,7 @@
         "HashMD5":  "EABD28A8AAB7BB17F4E2393F29BCBD86"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "23.09.06",
@@ -11119,7 +11119,7 @@
         "HashMD5":  "8FB797E1B0A97B1F087AFD74CDCA7078"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "24.01.05",
@@ -11160,7 +11160,7 @@
         "HashMD5":  "098FA7886F195BE55127B5012BA629E6"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "24.01.05",
@@ -11201,7 +11201,7 @@
         "HashMD5":  "5D3483A2B3B2AD7EB8A31FE1C4C4A01F"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "24.01.05",
@@ -11242,7 +11242,7 @@
         "HashMD5":  "50BF98F400F415BDDFF5C5EF60A3211D"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "24.01.05",
@@ -11283,7 +11283,7 @@
         "HashMD5":  "D5042F5AC31D7060BD11BB6B3A3CF07E"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "23.10.27",
@@ -11324,7 +11324,7 @@
         "HashMD5":  "713BF8B764175C2966337FBD63AB7901"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "23.10.27",
@@ -11365,7 +11365,7 @@
         "HashMD5":  "F5083575655A86EDC4C87C6354C96CDB"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "16.04.14",
@@ -11407,7 +11407,7 @@
         "HashMD5":  "492301221686E4A715E5504DAAE9B5A2"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "18.04.10",
@@ -11449,7 +11449,7 @@
         "HashMD5":  "9BF352CCBB776662BFBCAF9338E061E9"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "20.09.18",
@@ -11485,7 +11485,7 @@
         "HashMD5":  "9A64293EF8E1164BB0785F280107A305"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "20.09.18",
@@ -11521,7 +11521,7 @@
         "HashMD5":  "74A0BFB4F0182B1A96183D8C4EED7D65"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "23.08.01",
@@ -11560,7 +11560,7 @@
         "HashMD5":  "81138DE55838FB0D140955A7FBAC3999"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "23.08.02",
@@ -11599,7 +11599,7 @@
         "HashMD5":  "4A7B0097CE99D5771AB626D28BB29EF5"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "22.01.05",
@@ -11638,7 +11638,7 @@
         "HashMD5":  "244BA6AD8B8E82C800151F6633010407"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "22.05.06",
@@ -11677,7 +11677,7 @@
         "HashMD5":  "16707FAAB65DFE1627A7FC8E1D06DC52"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "22.06.13",
@@ -11716,7 +11716,7 @@
         "HashMD5":  "E017625E5ADDBC8C18AAF5BF4AED7A4F"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "23.03.24",
@@ -11755,7 +11755,7 @@
         "HashMD5":  "FA0A2C861AD331D6AE9668F780A1F084"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "22.01.05",
@@ -11794,7 +11794,7 @@
         "HashMD5":  "BC622C06995B93233A5F8281EDEFA02C"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "22.05.06",
@@ -11833,7 +11833,7 @@
         "HashMD5":  "25B4EE056EE8DB6BC186CBDBB43712EF"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "23.07.27",
@@ -11872,7 +11872,7 @@
         "HashMD5":  "A38A82B58EBCBAA46043FFDAA6AA65EF"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "23.07.27",
@@ -11911,7 +11911,7 @@
         "HashMD5":  "2782857A823B0E7734251EF2C46A80F1"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "24.02.08",
@@ -11950,7 +11950,7 @@
         "HashMD5":  "80976F159501633C7C48F475860ED3F8"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "24.02.08",
@@ -11989,7 +11989,7 @@
         "HashMD5":  "90C790C4762A07679A0807096436BAE4"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "23.10.10",
@@ -12028,7 +12028,7 @@
         "HashMD5":  "0B06F4EAC43951A2D84095977BB8F546"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "23.10.10",
@@ -12067,7 +12067,7 @@
         "HashMD5":  "769FF4BF9BC2A5C9939593CFE3C27DED"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "23.09.06",
@@ -12106,7 +12106,7 @@
         "HashMD5":  "B706C5A4D9712FF1CE30B3A8CC43540E"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "23.09.06",
@@ -12145,7 +12145,7 @@
         "HashMD5":  "42D17FE1E2F0D467779DD31A25B66466"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "19.01.07",
@@ -12181,7 +12181,7 @@
         "HashMD5":  "79871645E51800EF2C4C0013AEB056A7"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "20.05.26",
@@ -12217,7 +12217,7 @@
         "HashMD5":  "A8B8EACFAE1FAF80A17C6366A880785A"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "21.07.08",
@@ -12256,7 +12256,7 @@
         "HashMD5":  "A06D9E63DFFE099E67EC29F1352AA5BF"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "23.10.27",
@@ -12295,7 +12295,7 @@
         "HashMD5":  "3AB42CF202E7084811B5331DA4A84F66"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "22.08.09",
@@ -12334,7 +12334,7 @@
         "HashMD5":  "16DAD86091E56729EE2CDBBF6CDE0A5E"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "22.03.04",
@@ -12373,7 +12373,7 @@
         "HashMD5":  "EDCBEE4BEAB69D264038DAB31BD24181"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "23.06.30",
@@ -12412,7 +12412,7 @@
         "HashMD5":  "6793921ABF517C529D8824055B2A7696"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "23.06.30",
@@ -12451,7 +12451,7 @@
         "HashMD5":  "183382841E82782626AFBF7868CAE5FF"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "23.08.10",
@@ -12490,7 +12490,7 @@
         "HashMD5":  "157B97744606EB1989C0095BE7861635"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "23.08.10",
@@ -12529,7 +12529,7 @@
         "HashMD5":  "79C52FF215D1296CC6846C0DC426CE9B"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "21.07.08",
@@ -12568,7 +12568,7 @@
         "HashMD5":  "E452017CD80FEBFB77438A2B3C6DBB2E"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "22.08.09",
@@ -12607,7 +12607,7 @@
         "HashMD5":  "ED8DE9E67874343896B608C634CE4944"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "22.03.04",
@@ -12646,7 +12646,7 @@
         "HashMD5":  "5C3A3ADD88B26E45E4AC2098730F3A94"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "23.06.30",
@@ -12685,7 +12685,7 @@
         "HashMD5":  "40A03F2F7A9C839A28709531152A7C92"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "23.06.30",
@@ -12724,7 +12724,7 @@
         "HashMD5":  "5942F1818003793D734E75F021D1A1A1"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "16.04.14",
@@ -12766,7 +12766,7 @@
         "HashMD5":  "818DBA8C676331CA7A685FDB87577D06"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "16.04.14",
@@ -12808,7 +12808,7 @@
         "HashMD5":  "442D8AA1E49546D9189A8686E1C92CDD"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "18.04.10",
@@ -12850,7 +12850,7 @@
         "HashMD5":  "AE41A9276BDEAEEF693EE607C0532586"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "18.04.10",
@@ -12892,7 +12892,7 @@
         "HashMD5":  "EAC66569FA1934A1DBE380110FEA8908"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "18.04.10",
@@ -12934,7 +12934,7 @@
         "HashMD5":  "FD77978B1824EABBA74ECCD8059A6677"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "18.04.10",
@@ -12976,7 +12976,7 @@
         "HashMD5":  "14872B0B214E2DEBA5FB507C6483E6A6"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "24.01.05",
@@ -13017,7 +13017,7 @@
         "HashMD5":  "B024A2E5397CD6D11D56CDA31709AE20"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "24.01.05",
@@ -13058,7 +13058,7 @@
         "HashMD5":  "594D11337EF290EFAF1B9A6833405CBF"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "18.04.10",
@@ -13100,7 +13100,7 @@
         "HashMD5":  "A82A199A7A49ED767EE8765511587E3C"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "23.09.06",
@@ -13139,7 +13139,7 @@
         "HashMD5":  "3310D7F0AA9655BFAA0792D3004B4D52"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "23.09.06",
@@ -13178,7 +13178,7 @@
         "HashMD5":  "44576DC9E379703C4DCECF171E577D4D"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "24.01.08",
@@ -13217,7 +13217,7 @@
         "HashMD5":  "10A2A384BE88C0ADD9C8D28E6D5269A0"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "24.01.08",
@@ -13256,7 +13256,7 @@
         "HashMD5":  "3D7654C674B70B48C9249532326F49EE"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "23.10.27",
@@ -13292,7 +13292,7 @@
         "HashMD5":  "09DCF0B3A1EDD23107DC8F378FFC84BF"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "23.10.27",
@@ -13328,7 +13328,7 @@
         "HashMD5":  "F526F201C16ABE4C47225C0676530974"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "23.11.24",
@@ -13367,7 +13367,7 @@
         "HashMD5":  "A83D3DAA194DCF41C3B5AB0F8BC4C68F"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "23.11.24",
@@ -13406,7 +13406,7 @@
         "HashMD5":  "017EA0C2C4E9070605CA6872E9755050"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "21.05.05",
@@ -13448,7 +13448,7 @@
         "HashMD5":  "EFBDCA4859A77652E602FB4385EF847F"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "22.07.22",
@@ -13487,7 +13487,7 @@
         "HashMD5":  "AD8A9CF7C470118B3AE6B2231FAD3C4F"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "22.05.06",
@@ -13526,7 +13526,7 @@
         "HashMD5":  "DEFDA9D21CA801BEFC3A2BA9C3CD6ADB"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "23.06.30",
@@ -13565,7 +13565,7 @@
         "HashMD5":  "A476E66AC9BA098E2153A4CC6748A31C"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "23.06.30",
@@ -13604,7 +13604,7 @@
         "HashMD5":  "B955C35522C6B0A33F394D08893D8A5F"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "24.02.08",
@@ -13643,7 +13643,7 @@
         "HashMD5":  "412D03773FFF71F3FCD29CBD36723E62"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "24.02.08",
@@ -13682,7 +13682,7 @@
         "HashMD5":  "34A637AF513627F0049C6C995A7B29DD"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "24.02.08",
@@ -13721,7 +13721,7 @@
         "HashMD5":  "7FE053089DDF5636DCD9E5B8985B4B19"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "24.02.08",
@@ -13760,7 +13760,7 @@
         "HashMD5":  "576797EB8C30A83E67FA2276A17480CF"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "23.02.09",
@@ -13796,7 +13796,7 @@
         "HashMD5":  "04737E8EA9E3F037DA8C83CF15783D56"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "22.06.24",
@@ -13832,7 +13832,7 @@
         "HashMD5":  "99BBEDB2263B94BF629DCF246FF60683"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "24.01.05",
@@ -13868,7 +13868,7 @@
         "HashMD5":  "AE5958376A98661395F95F0AF9EEF4D1"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "24.01.05",
@@ -13904,7 +13904,7 @@
         "HashMD5":  "8431903F98F79691C4767AEDD0ACA053"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "19.02.12",
@@ -13940,7 +13940,7 @@
         "HashMD5":  "C168F795BA020B7C94DD57BFCBBA314E"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "20.05.26",
@@ -13976,7 +13976,7 @@
         "HashMD5":  "F00C2D8B0557E7D55BF6EF541354DA21"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "21.07.08",
@@ -14012,7 +14012,7 @@
         "HashMD5":  "F2FA888F4487650C0599D30BBE98F5EF"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "22.10.27",
@@ -14048,7 +14048,7 @@
         "HashMD5":  "8860A581407F471B48B719E6A621F4CF"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "22.03.04",
@@ -14084,7 +14084,7 @@
         "HashMD5":  "B20ECAEB6DD309AC7DE45F44F86F1C0A"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "22.10.21",
@@ -14120,7 +14120,7 @@
         "HashMD5":  "7B8F84FB5EE08F192FA2677EA0EC4FAD"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "22.05.06",
@@ -14156,7 +14156,7 @@
         "HashMD5":  "CA08FA874130A9C608E910372631DFB0"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "22.10.10",
@@ -14192,7 +14192,7 @@
         "HashMD5":  "CFDEA5192F9F9E193BDD0BEECAE3B802"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "22.04.21",
@@ -14228,7 +14228,7 @@
         "HashMD5":  "2C69A0A35234EE2AC25DA1CC6369A381"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "23.03.27",
@@ -14264,7 +14264,7 @@
         "HashMD5":  "2A4AD41ABB989721C60F89A94C39851B"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "23.03.27",
@@ -14300,7 +14300,7 @@
         "HashMD5":  "6C257E1B954FF966C02145B4725AF07E"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "24.02.08",
@@ -14336,7 +14336,7 @@
         "HashMD5":  "6E55ACDDF33E05CD35D4C557FE44099D"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "24.02.08",
@@ -14372,7 +14372,7 @@
         "HashMD5":  "307E769CDB7CB8592EAE38997707520F"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "23.10.10",
@@ -14408,7 +14408,7 @@
         "HashMD5":  "EB5469DA56771047FD2A5093C3021DAB"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "23.10.10",
@@ -14444,7 +14444,7 @@
         "HashMD5":  "FF34006F10FAC6028D11F5DE63450F01"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "24.02.08",
@@ -14480,7 +14480,7 @@
         "HashMD5":  "B31B7FD49BFA96A267E44B03559AD994"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "24.02.08",
@@ -14516,7 +14516,7 @@
         "HashMD5":  "CAFBBAAA22C4EA7C9653A6BC2CF07E37"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "24.02.08",
@@ -14552,7 +14552,7 @@
         "HashMD5":  "B289C59F7028344386FCD010C1706C20"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "24.02.08",
@@ -14588,7 +14588,7 @@
         "HashMD5":  "27BE3498B6B8F344B51E4B22F1A2DD2C"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "24.01.22",
@@ -14624,7 +14624,7 @@
         "HashMD5":  "AA0FAD7E4CD703A621AF93C4587B8ABE"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "24.01.22",
@@ -14660,7 +14660,7 @@
         "HashMD5":  "EF4F6397753206FC6FA940124C31555E"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "24.01.22",
@@ -14696,7 +14696,7 @@
         "HashMD5":  "422E8E09F85655CD32A57720D7386851"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "24.01.22",
@@ -14732,7 +14732,7 @@
         "HashMD5":  "CB63F8C264441B656EB56CA6E8CD35AF"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "22.01.05",
@@ -14771,7 +14771,7 @@
         "HashMD5":  "500B27E0E03A5980E95820D740BDCA4F"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "22.03.04",
@@ -14813,7 +14813,7 @@
         "HashMD5":  "EEF14BD77C5FDA182333943D2293972D"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "23.07.07",
@@ -14852,7 +14852,7 @@
         "HashMD5":  "7AF7C79F080EEFC30E7E482FD3A56D60"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "23.07.07",
@@ -14891,18 +14891,18 @@
         "HashMD5":  "2A9D708067B09366B307F6243514A87C"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  "23.11.09",
+        "ReleaseDate":  "24.02.26",
         "Manufacturer":  "Dell",
-        "Name":  "Dell Precision 3650 Tower Win10 A11",
-        "DellVersion":  "A11",
-        "Url":  "http://downloads.dell.com/FOLDER10791157M/1/Precision-3650-Tower-MRRMY_Win10_1.0_A11.exe",
+        "Name":  "Dell Precision 3650 Tower Win10 A12",
+        "DellVersion":  "A12",
+        "Url":  "http://downloads.dell.com/FOLDER10915059M/1/Precision-3650-Tower-DM4DM_Win10_1.0_A12.exe",
         "VendorVersion":  "1.0",
-        "FileName":  "Precision-3650-Tower-MRRMY_Win10_1.0_A11.exe",
-        "SizeMB":  "3569.78",
-        "ReleaseID":  "MRRMY",
+        "FileName":  "Precision-3650-Tower-DM4DM_Win10_1.0_A12.exe",
+        "SizeMB":  "3568.27",
+        "ReleaseID":  "DM4DM",
         "Brand":  "Precision",
         "Key":  "11",
         "Prefix":  "PRE",
@@ -14912,8 +14912,8 @@
                          "0A58",
                          "0A59"
                      ],
-        "RtsDate":  "2021-04-29T16:00:00",
-        "Generation":  "XX",
+        "RtsDate":  "2021-04-30T05:00:00",
+        "Generation":  "X12",
         "SupportedOS":  "Windows 10 x64",
         "osCode":  "Windows10",
         "osVendor":  "Microsoft",
@@ -14923,25 +14923,25 @@
         "minorVersion":  "0",
         "spMajorVersion":  "0",
         "spMinorVersion":  "0",
-        "ImportantInfoUrl":  "http://www.dell.com/support/home/us/en/04/Drivers/DriversDetails?driverId=MRRMY",
+        "ImportantInfoUrl":  "http://www.dell.com/support/home/us/en/04/Drivers/DriversDetails?driverId=DM4DM",
         "OSVersion":  "Windows 10 x64",
         "OSReleaseId":  null,
         "OSBuild":  null,
-        "HashMD5":  "34FF9A90BEB113EC2957B80644D1B5AE"
+        "HashMD5":  "99A004AA72B6901FE25FD983A77311A9"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  "23.11.09",
+        "ReleaseDate":  "24.02.26",
         "Manufacturer":  "Dell",
-        "Name":  "Dell Precision 3650 Tower Win11 A06",
-        "DellVersion":  "A06",
-        "Url":  "http://downloads.dell.com/FOLDER10791011M/1/Precision-3650-Tower-3DGCC_Win11_1.0_A06.exe",
+        "Name":  "Dell Precision 3650 Tower Win11 A07",
+        "DellVersion":  "A07",
+        "Url":  "http://downloads.dell.com/FOLDER10915099M/1/Precision-3650-Tower-MCTDM_Win11_1.0_A07.exe",
         "VendorVersion":  "1.0",
-        "FileName":  "Precision-3650-Tower-3DGCC_Win11_1.0_A06.exe",
-        "SizeMB":  "3569.80",
-        "ReleaseID":  "3DGCC",
+        "FileName":  "Precision-3650-Tower-MCTDM_Win11_1.0_A07.exe",
+        "SizeMB":  "3568.29",
+        "ReleaseID":  "MCTDM",
         "Brand":  "Precision",
         "Key":  "11",
         "Prefix":  "PRE",
@@ -14951,8 +14951,8 @@
                          "0A58",
                          "0A59"
                      ],
-        "RtsDate":  "2021-04-29T16:00:00",
-        "Generation":  "XX",
+        "RtsDate":  "2021-04-30T05:00:00",
+        "Generation":  "X12",
         "SupportedOS":  "Windows 11 x64",
         "osCode":  "Windows11",
         "osVendor":  "Microsoft",
@@ -14962,14 +14962,14 @@
         "minorVersion":  "0",
         "spMajorVersion":  "0",
         "spMinorVersion":  "0",
-        "ImportantInfoUrl":  "http://www.dell.com/support/home/us/en/04/Drivers/DriversDetails?driverId=3DGCC",
+        "ImportantInfoUrl":  "http://www.dell.com/support/home/us/en/04/Drivers/DriversDetails?driverId=MCTDM",
         "OSVersion":  "Windows 11 x64",
         "OSReleaseId":  null,
         "OSBuild":  null,
-        "HashMD5":  "EC06B72FAB2B8D3D6D9202441F9B5705"
+        "HashMD5":  "4BB79A9CA2F7C213E8CBF1E84781EAD8"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "24.01.08",
@@ -15008,7 +15008,7 @@
         "HashMD5":  "D199582241809C839089B3B0D9FC474A"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "24.01.08",
@@ -15047,7 +15047,7 @@
         "HashMD5":  "426E5938E86372930C2CF9C08B32234F"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "23.10.27",
@@ -15083,7 +15083,7 @@
         "HashMD5":  "25983DFAD53B2779369D65F99BBF4E24"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "23.10.27",
@@ -15119,7 +15119,7 @@
         "HashMD5":  "BCD1897E3725E30B42E6B82700924F23"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "24.01.22",
@@ -15155,7 +15155,7 @@
         "HashMD5":  "F8A3A1DB54BE704402449BCB949A22AA"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "24.01.22",
@@ -15191,7 +15191,7 @@
         "HashMD5":  "5DB4F8F1CF198A35C7936C426A849F65"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "23.10.27",
@@ -15227,7 +15227,7 @@
         "HashMD5":  "6A97A31FD240B95814BBB3FC23D5AA20"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "23.10.27",
@@ -15263,7 +15263,7 @@
         "HashMD5":  "F08C32DBA79484690F72C98F5B605322"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "20.04.28",
@@ -15299,7 +15299,7 @@
         "HashMD5":  "D7CFD5728356F240D63D8C2FE9147581"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "24.01.22",
@@ -15335,7 +15335,7 @@
         "HashMD5":  "38332F83B94B6C8AD1272AC635CD1250"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "22.03.04",
@@ -15371,7 +15371,7 @@
         "HashMD5":  "31A82A9BD09D2CFC9C4BC4F35CAE7F95"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "21.07.08",
@@ -15407,7 +15407,7 @@
         "HashMD5":  "E73EDEF1AA2F5B78970D09AD0193B700"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "23.03.24",
@@ -15443,7 +15443,7 @@
         "HashMD5":  "39BC8E634A3B8612A495CBDA4DC0CFCF"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "22.01.05",
@@ -15479,7 +15479,7 @@
         "HashMD5":  "2E420B2A2E530BC0CE6DA96B091B9A87"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "22.05.06",
@@ -15515,7 +15515,7 @@
         "HashMD5":  "B0C6A69312858D497BD01D693647654C"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "23.10.10",
@@ -15551,7 +15551,7 @@
         "HashMD5":  "4FFE3F4363C5E8EC998781A6EF4F6E58"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "23.10.10",
@@ -15587,7 +15587,7 @@
         "HashMD5":  "2463269357B8E930147706CE81D93738"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "23.07.06",
@@ -15623,7 +15623,7 @@
         "HashMD5":  "FAC146A994949275A5F7956CBE887FF2"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "23.07.06",
@@ -15659,7 +15659,7 @@
         "HashMD5":  "1A216E992D6567E61EF0743600FFB165"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "24.02.08",
@@ -15695,7 +15695,7 @@
         "HashMD5":  "8C64D82664979ABCA5924C4BF8D34E88"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "24.02.08",
@@ -15731,7 +15731,7 @@
         "HashMD5":  "5120337356C20412329240DD266AB6E3"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "23.07.27",
@@ -15770,7 +15770,7 @@
         "HashMD5":  "9D44A951BA1887D589D77D565A57E5E7"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "23.07.27",
@@ -15809,7 +15809,7 @@
         "HashMD5":  "18AD39EB03D63A9437D4708E2EA2CCB3"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "20.04.14",
@@ -15845,7 +15845,7 @@
         "HashMD5":  "265371DF0FE133257BD88F1EC33C9EE4"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "23.06.01",
@@ -15881,7 +15881,7 @@
         "HashMD5":  "6843B189232A3E1F515D970C9B79DDBB"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "23.06.01",
@@ -15917,7 +15917,7 @@
         "HashMD5":  "2B80AD31DC197B6325FBC6804FD68FE3"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "23.10.27",
@@ -15953,7 +15953,7 @@
         "HashMD5":  "BCDDE31925F0A1ECA4A8039964A006E0"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "23.10.27",
@@ -15989,7 +15989,7 @@
         "HashMD5":  "37F09C8A0A8ED661E44FFA8BD4CBE6B3"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "23.11.24",
@@ -16028,7 +16028,7 @@
         "HashMD5":  "A01B2894EB72133EF3319BA8E39E85A6"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "23.11.24",
@@ -16067,7 +16067,7 @@
         "HashMD5":  "080FB3773362ECA845E4E43BDD46B011"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "23.11.09",
@@ -16112,7 +16112,7 @@
         "HashMD5":  "3E9CA53FE763EAAA4B5F86AC58A84422"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "23.11.24",
@@ -16151,7 +16151,7 @@
         "HashMD5":  "38B526A259D1E3D7EDD37343C1786584"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "23.12.08",
@@ -16187,7 +16187,7 @@
         "HashMD5":  "A47377B17B1BB261DFC0EF4C933B136B"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "23.12.08",
@@ -16223,7 +16223,7 @@
         "HashMD5":  "C99E747104277C8A04808FD033BA612B"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "20.09.18",
@@ -16259,7 +16259,7 @@
         "HashMD5":  "75C0D8BCBF4BD13669ABA7F795B3566A"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "20.09.18",
@@ -16295,7 +16295,7 @@
         "HashMD5":  "EF24D513AD7FB35165D555F4A4F2C482"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "21.08.19",
@@ -16331,7 +16331,7 @@
         "HashMD5":  "060E8ED6AEC173D8525CC7DC818CE59C"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "23.07.07",
@@ -16367,7 +16367,7 @@
         "HashMD5":  "412A13F28F290542A5B8B749630BFC07"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "23.07.07",
@@ -16403,7 +16403,7 @@
         "HashMD5":  "12ADA599C6CE89444DBE78451AA150DF"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "23.07.18",
@@ -16439,7 +16439,7 @@
         "HashMD5":  "ED771162A4018528EB96F578C7D9970C"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "23.07.18",
@@ -16475,7 +16475,7 @@
         "HashMD5":  "6C5DAB1B800F256E3173D42BBDD650DC"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "23.10.10",
@@ -16511,7 +16511,7 @@
         "HashMD5":  "F19159C32D9175CDE59428DA32A04FB8"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "23.10.10",
@@ -16547,7 +16547,7 @@
         "HashMD5":  "69D47B4A05A152A510BF9DED21497F2F"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "24.02.08",
@@ -16583,7 +16583,7 @@
         "HashMD5":  "492B5CCFB43D97FEAB9959C922B3673E"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "24.02.08",
@@ -16619,7 +16619,7 @@
         "HashMD5":  "208B69DD49C528B9B194FA8908FB1405"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "24.01.22",
@@ -16655,7 +16655,7 @@
         "HashMD5":  "0C78EDDDBBD6FCE5A354D457A50E3B72"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "24.01.22",
@@ -16691,7 +16691,7 @@
         "HashMD5":  "7A6F5223A810FE5B737C7D5F81717B39"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "18.09.07",
@@ -16727,7 +16727,7 @@
         "HashMD5":  "AF7F2717762C2B7BBD7D5F789E1AE6AA"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "20.05.26",
@@ -16763,7 +16763,7 @@
         "HashMD5":  "2ED06413F7FD372EB018D20F3F796ADD"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "21.08.19",
@@ -16799,7 +16799,7 @@
         "HashMD5":  "E21A2630F9C829DC260040CBE3A08CA8"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "23.05.31",
@@ -16835,7 +16835,7 @@
         "HashMD5":  "1710AB9F07CE220F2131066C2000E3D7"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "22.03.04",
@@ -16871,7 +16871,7 @@
         "HashMD5":  "1F9423766AA08CEA040784E6841BC681"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "23.02.10",
@@ -16907,7 +16907,7 @@
         "HashMD5":  "14CCA0577909EA4658B730E069976FB0"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "22.12.07",
@@ -16943,7 +16943,7 @@
         "HashMD5":  "57B979567E53933ED262515D621A23E5"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "23.11.24",
@@ -16979,7 +16979,7 @@
         "HashMD5":  "65213315F587A54015E4A45C08D730B1"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "23.08.10",
@@ -17015,7 +17015,7 @@
         "HashMD5":  "741D7C6D95835BD38919609D2F94420A"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "23.08.10",
@@ -17051,7 +17051,7 @@
         "HashMD5":  "F58448CE395A58BD51638F04236DC816"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "24.02.08",
@@ -17087,7 +17087,7 @@
         "HashMD5":  "BAA9B7BB3DF571EA8AE6B1BB3D73D2CC"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "24.02.08",
@@ -17123,7 +17123,7 @@
         "HashMD5":  "1DF49F0533DA26115503055626326014"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "24.01.22",
@@ -17159,7 +17159,7 @@
         "HashMD5":  "E218931E9D5E5748CC7C1DCF67C940CE"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "24.02.08",
@@ -17195,7 +17195,7 @@
         "HashMD5":  "E1ABABA0951373208422E1A7B49291E1"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "23.10.27",
@@ -17231,7 +17231,7 @@
         "HashMD5":  "1FE3E88A828232A3224B5002CD768293"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "23.07.07",
@@ -17267,7 +17267,7 @@
         "HashMD5":  "BBCA2790EB37ED5A4D4BDE5AC4B29BEC"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "24.02.08",
@@ -17303,7 +17303,7 @@
         "HashMD5":  "CA68E86BA6B3C94A9F50BA7A784A59A0"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "24.02.08",
@@ -17339,7 +17339,7 @@
         "HashMD5":  "98D2FDDEDACB4D6E6054449DC76C93A9"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "23.11.28",
@@ -17375,7 +17375,7 @@
         "HashMD5":  "88836C460B015250FA0339A38909800E"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "23.11.28",
@@ -17411,7 +17411,7 @@
         "HashMD5":  "FCF555FD63178B8D3B56C2A71F9B48E3"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "22.07.22",
@@ -17447,7 +17447,7 @@
         "HashMD5":  "C61B43A45E448406E4504A78378EB099"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "22.05.06",
@@ -17483,7 +17483,7 @@
         "HashMD5":  "11C87EE9911DD739840498286814840E"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "23.10.27",
@@ -17519,7 +17519,7 @@
         "HashMD5":  "4F863FB7D7A1FA9B8AF6CBE5A9781D22"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "23.05.04",
@@ -17555,7 +17555,7 @@
         "HashMD5":  "26B2FEFA59C9CC0FC0A69CE209A2FCDF"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "24.02.08",
@@ -17591,7 +17591,7 @@
         "HashMD5":  "8DAD8C44642C843EC9A8961D506407AC"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "23.12.08",
@@ -17627,7 +17627,7 @@
         "HashMD5":  "9ABB6ECBF4A631166867B21DD667FBA3"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "23.04.19",
@@ -17663,7 +17663,7 @@
         "HashMD5":  "61C54B2C5B9F01EC485C6C8CA14AD1DD"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "17.01.10",
@@ -17705,7 +17705,7 @@
         "HashMD5":  "3A8AA5A944F6ADC9AC156B779ADA93E4"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "18.04.17",
@@ -17741,7 +17741,7 @@
         "HashMD5":  "180467DF950F8E9FEDD91C1D923D82E5"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "16.04.14",
@@ -17783,7 +17783,7 @@
         "HashMD5":  "160DCB2569C2CA1F017E0783003A59EE"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "16.11.22",
@@ -17825,7 +17825,7 @@
         "HashMD5":  "F7E329E2445AB66B4C649284A670B9E8"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "16.04.15",
@@ -17867,7 +17867,7 @@
         "HashMD5":  "0B744009FF68090C814FBC2D30AA1622"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "17.01.10",
@@ -17909,7 +17909,7 @@
         "HashMD5":  "5F5C4C884D5E8CB1A5164D361CFA94D9"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "16.03.07",
@@ -17951,7 +17951,7 @@
         "HashMD5":  "759D5B82239729991B4DD82E3926409A"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "18.04.10",
@@ -17993,7 +17993,7 @@
         "HashMD5":  "52F7236219D757897A85C2A0893D9BDA"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "17.10.10",
@@ -18035,7 +18035,7 @@
         "HashMD5":  "404B348E8AC877F0493D86144EEEA5DA"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "16.04.14",
@@ -18077,7 +18077,7 @@
         "HashMD5":  "64ABB19BB1773BE1D502D5CD3525C38B"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "18.04.10",
@@ -18119,7 +18119,7 @@
         "HashMD5":  "1D3BC185E6D5980CDAE1BA63379D2806"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "16.03.07",
@@ -18161,7 +18161,7 @@
         "HashMD5":  "30A90E7143C778BA0CF03685F580B48F"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "18.04.16",
@@ -18203,7 +18203,7 @@
         "HashMD5":  "FA6C80B960D7B977F3C6A8799899B5EB"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "16.03.07",
@@ -18245,7 +18245,7 @@
         "HashMD5":  "681A262DB455BB8EDD9FA8BE988E5DE5"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "18.04.16",
@@ -18287,7 +18287,7 @@
         "HashMD5":  "2FAE5F0A19D07527F7FBBDDE899D46F7"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "16.03.07",
@@ -18329,7 +18329,7 @@
         "HashMD5":  "B4931A7889F1E3B32FEAD8E9A4501B61"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "18.04.10",
@@ -18371,7 +18371,7 @@
         "HashMD5":  "B7E8489176FC30375395D3CFB9C1D4C4"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "19.03.12",
@@ -18407,7 +18407,7 @@
         "HashMD5":  "401768E4B0EB51378A98340B28C0CFF8"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "19.03.12",
@@ -18443,7 +18443,7 @@
         "HashMD5":  "8087788D1327B9E5CF82F2E70866E32E"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "18.03.27",
@@ -18485,7 +18485,7 @@
         "HashMD5":  "98756DECB338FF232B73D79BB566AD59"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "18.03.27",
@@ -18527,7 +18527,7 @@
         "HashMD5":  "2D217FE3DB07518971DE4CAE98BE505E"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "18.03.27",
@@ -18569,7 +18569,7 @@
         "HashMD5":  "81EE83D5F7A0B5D6A57B98D7161EA0B9"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "16.06.14",
@@ -18611,7 +18611,7 @@
         "HashMD5":  "605F45506E2AB28936FA8984A827E12C"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "19.02.12",
@@ -18647,7 +18647,7 @@
         "HashMD5":  "81EC7C81178513C8732EBAD43EB7F837"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "19.02.12",
@@ -18683,7 +18683,7 @@
         "HashMD5":  "83C27BDD6672D976992039AF6905064C"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "18.04.10",
@@ -18725,7 +18725,7 @@
         "HashMD5":  "6797DDD536976C47B63324D1B51AC11D"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "18.03.27",
@@ -18761,7 +18761,7 @@
         "HashMD5":  "329DF3D4F3B8562688504A534B4F1512"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "16.06.14",
@@ -18797,7 +18797,7 @@
         "HashMD5":  "3ED590B3B02301F88E448F30E79A69AA"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "19.02.12",
@@ -18833,7 +18833,7 @@
         "HashMD5":  "53CB3AF7792A9EA78719F18B2C709092"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "23.02.09",
@@ -18872,7 +18872,7 @@
         "HashMD5":  "FB58BB0F5632F24D78BCE3FFEE42B654"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "23.02.09",
@@ -18911,7 +18911,7 @@
         "HashMD5":  "0449F062E984528856D76123E6C79586"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "23.06.01",
@@ -18947,7 +18947,7 @@
         "HashMD5":  "72A97EDD507DED02D7F7C0BFEF07579D"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "22.12.07",
@@ -18983,7 +18983,7 @@
         "HashMD5":  "F2290C67EC23CDC63E85211501828D3B"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "23.06.01",
@@ -19019,7 +19019,7 @@
         "HashMD5":  "8762738707ED88E16C1F3C0717CD3123"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "23.06.01",
@@ -19055,7 +19055,7 @@
         "HashMD5":  "5345BFD8185F9E2467A8C2DA20A377AD"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "23.10.10",
@@ -19091,7 +19091,7 @@
         "HashMD5":  "3687327A1EDDC57F1FBDED53E23D691F"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "23.10.10",
@@ -19127,7 +19127,7 @@
         "HashMD5":  "51E76CA8D759038B7AD455739D951A31"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "23.08.09",
@@ -19167,7 +19167,7 @@
         "HashMD5":  "477411318039BA0144956F4D26D82F4D"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "23.08.09",
@@ -19207,7 +19207,7 @@
         "HashMD5":  "3EF328E4A2322DA1AE1DB225C16798C8"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "23.12.08",
@@ -19246,7 +19246,7 @@
         "HashMD5":  "AF81B8972037F5E1E805AC3291428B64"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "24.02.08",
@@ -19282,7 +19282,7 @@
         "HashMD5":  "83FFC0F9A28ED68A4D36A0C6136478AC"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "23.12.08",
@@ -19321,7 +19321,7 @@
         "HashMD5":  "118C9BF36C4FF42111F3D72E57ECD2DB"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "23.12.08",
@@ -19360,7 +19360,43 @@
         "HashMD5":  "EB5A86849BBBD757C0E0E5D6F9C2A210"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
+        "Status":  null,
+        "Component":  "DriverPack",
+        "ReleaseDate":  "24.02.26",
+        "Manufacturer":  "Dell",
+        "Name":  "Dell XPS 13 9340 Win11 A00",
+        "DellVersion":  "A00",
+        "Url":  "http://downloads.dell.com/FOLDER11048450M/1/XPS-13-9340-YP9H6_Win11_1.0_A00.exe",
+        "VendorVersion":  "1.0",
+        "FileName":  "XPS-13-9340-YP9H6_Win11_1.0_A00.exe",
+        "SizeMB":  "1511.42",
+        "ReleaseID":  "YP9H6",
+        "Brand":  "XPS Notebook",
+        "Key":  "72",
+        "Prefix":  "XPSNOTEBOOK",
+        "Model":  "XPS 13 9340",
+        "ModelID":  "XPS 13 9340",
+        "SystemID":  "0C87",
+        "RtsDate":  "2024-02-02T06:00:00",
+        "Generation":  "XX",
+        "SupportedOS":  "Windows 11 x64",
+        "osCode":  "Windows11",
+        "osVendor":  "Microsoft",
+        "osArch":  "x64",
+        "osType":  "client",
+        "majorVersion":  "10",
+        "minorVersion":  "0",
+        "spMajorVersion":  "0",
+        "spMinorVersion":  "0",
+        "ImportantInfoUrl":  "http://www.dell.com/support/home/us/en/04/Drivers/DriversDetails?driverId=YP9H6",
+        "OSVersion":  "Windows 11 x64",
+        "OSReleaseId":  null,
+        "OSBuild":  null,
+        "HashMD5":  "E88CDF4547846EA948788829A33189EC"
+    },
+    {
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "18.03.27",
@@ -19396,7 +19432,7 @@
         "HashMD5":  "86F90FEE38D017FC3041D5B6E7CAEA34"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "19.06.11",
@@ -19432,7 +19468,7 @@
         "HashMD5":  "2EC64324E559D8CCB303B0D33D3820B5"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "20.04.28",
@@ -19474,7 +19510,7 @@
         "HashMD5":  "BC73660A14F0E094BC659A9A7F6275D4"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "20.04.28",
@@ -19510,7 +19546,7 @@
         "HashMD5":  "6440CB2470D1E05CC5E5BED8391B05D4"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "20.04.28",
@@ -19546,7 +19582,7 @@
         "HashMD5":  "2E5493B8462B68EE0BFB1C354D032BDE"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "22.01.05",
@@ -19582,7 +19618,7 @@
         "HashMD5":  "7CADDC9684A23ECC19A72EB63D01C836"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "21.10.11",
@@ -19618,7 +19654,43 @@
         "HashMD5":  "1954B95B53F1B23B789E409B28E7971A"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
+        "Status":  null,
+        "Component":  "DriverPack",
+        "ReleaseDate":  "24.02.26",
+        "Manufacturer":  "Dell",
+        "Name":  "Dell XPS 14 9440 Win11 A00",
+        "DellVersion":  "A00",
+        "Url":  "http://downloads.dell.com/FOLDER11055661M/1/XPS-14-9440-9080K_Win11_1.0_A00.exe",
+        "VendorVersion":  "1.0",
+        "FileName":  "XPS-14-9440-9080K_Win11_1.0_A00.exe",
+        "SizeMB":  "2318.18",
+        "ReleaseID":  "9080K",
+        "Brand":  "XPS Notebook",
+        "Key":  "72",
+        "Prefix":  "XPSNOTEBOOK",
+        "Model":  "XPS 14 9440",
+        "ModelID":  "XPS 14 9440",
+        "SystemID":  "0C6B",
+        "RtsDate":  "2024-02-19T16:00:00",
+        "Generation":  "XX",
+        "SupportedOS":  "Windows 11 x64",
+        "osCode":  "Windows11",
+        "osVendor":  "Microsoft",
+        "osArch":  "x64",
+        "osType":  "client",
+        "majorVersion":  "10",
+        "minorVersion":  "0",
+        "spMajorVersion":  "0",
+        "spMinorVersion":  "0",
+        "ImportantInfoUrl":  "http://www.dell.com/support/home/us/en/04/Drivers/DriversDetails?driverId=9080K",
+        "OSVersion":  "Windows 11 x64",
+        "OSReleaseId":  null,
+        "OSBuild":  null,
+        "HashMD5":  "B05B7BBF7FB159EF59645E45C7951F9F"
+    },
+    {
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "22.01.05",
@@ -19654,7 +19726,7 @@
         "HashMD5":  "F647FFDBF8D5BB8D8F2268BBDED58C87"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "21.10.11",
@@ -19690,7 +19762,7 @@
         "HashMD5":  "A13655252950773B06B4F13A759D2577"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "23.04.10",
@@ -19726,7 +19798,7 @@
         "HashMD5":  "8683DF2EA3942C1DDA5D2CA695462850"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "23.04.10",
@@ -19762,7 +19834,7 @@
         "HashMD5":  "8459DAAD1265DE125F8E9373F5772214"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "23.10.10",
@@ -19798,7 +19870,7 @@
         "HashMD5":  "A9E46414BE9605EBEB33AE4BA34DEAD6"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "23.10.10",
@@ -19834,7 +19906,7 @@
         "HashMD5":  "78AB6D0CF690128F64052590EF2EA776"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "24.02.08",
@@ -19870,7 +19942,7 @@
         "HashMD5":  "B2520BE27AF9DC8959617DD9515DAC0D"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "23.12.08",
@@ -19906,7 +19978,7 @@
         "HashMD5":  "1EC2BF2666F94E7529FBF6AE9C195C86"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "19.02.12",
@@ -19942,7 +20014,7 @@
         "HashMD5":  "F0D7EB1BE2CF9BDCD183DE2B89CCED49"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "20.04.28",
@@ -19978,7 +20050,7 @@
         "HashMD5":  "628F5BD4C4F10F8A963F89A18970FA14"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "21.07.08",
@@ -20014,7 +20086,7 @@
         "HashMD5":  "DAB993A86A053E5AAA3C1AFEB18FC4CA"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "20.04.28",
@@ -20050,7 +20122,46 @@
         "HashMD5":  "0E73549E33C7EF0AEF2CBF926C72C7BE"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
+        "Status":  null,
+        "Component":  "DriverPack",
+        "ReleaseDate":  "24.02.26",
+        "Manufacturer":  "Dell",
+        "Name":  "Dell XPS 16 9640 Win11 A00",
+        "DellVersion":  "A00",
+        "Url":  "http://downloads.dell.com/FOLDER11075873M/1/XPS-16-9640-XKFFH_Win11_1.0_A00.exe",
+        "VendorVersion":  "1.0",
+        "FileName":  "XPS-16-9640-XKFFH_Win11_1.0_A00.exe",
+        "SizeMB":  "2399.51",
+        "ReleaseID":  "XKFFH",
+        "Brand":  "XPS Notebook",
+        "Key":  "72",
+        "Prefix":  "XPSNOTEBOOK",
+        "Model":  "XPS 16 9640",
+        "ModelID":  "XPS 16 9640",
+        "SystemID":  [
+                         "0C62",
+                         "0C63"
+                     ],
+        "RtsDate":  "2024-01-30T16:00:00",
+        "Generation":  "XX",
+        "SupportedOS":  "Windows 11 x64",
+        "osCode":  "Windows11",
+        "osVendor":  "Microsoft",
+        "osArch":  "x64",
+        "osType":  "client",
+        "majorVersion":  "10",
+        "minorVersion":  "0",
+        "spMajorVersion":  "0",
+        "spMinorVersion":  "0",
+        "ImportantInfoUrl":  "http://www.dell.com/support/home/us/en/04/Drivers/DriversDetails?driverId=XKFFH",
+        "OSVersion":  "Windows 11 x64",
+        "OSReleaseId":  null,
+        "OSBuild":  null,
+        "HashMD5":  "60978D93D15F65B499B7203C1031E3B7"
+    },
+    {
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "23.07.07",
@@ -20086,7 +20197,7 @@
         "HashMD5":  "47580BCE9D9EF668FF59C30D7870E6DA"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "23.07.07",
@@ -20122,7 +20233,7 @@
         "HashMD5":  "154042E892D99A01278FDF7046B74C5E"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "23.10.10",
@@ -20158,7 +20269,7 @@
         "HashMD5":  "8226C448640C61D476F63C46E713FD72"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "23.10.10",
@@ -20194,7 +20305,7 @@
         "HashMD5":  "09FFF5BB1154F540D340374F39E76F24"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "24.02.08",
@@ -20233,7 +20344,7 @@
         "HashMD5":  "4737E484C532CC84B0F8C49346918E59"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "24.01.05",
@@ -20272,7 +20383,7 @@
         "HashMD5":  "3AF42DB0301823D1182310EFC23A64B9"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "22.07.07",
@@ -20308,7 +20419,7 @@
         "HashMD5":  "7E68D28FD8D4C3CF32FD7322C6200849"
     },
     {
-        "CatalogVersion":  "24.02.02",
+        "CatalogVersion":  "24.02.04",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "21.10.11",

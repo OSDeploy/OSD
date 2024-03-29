@@ -10,7 +10,52 @@ Note, the changes I make won't go into effect until the next module release date
 
 ## Changes
 
-### 24.2.15 (not yet implemented)
+### 24.3.27 (implemented in OSD Module 24.3.27.1)
+- Quick fix for [Issue 132](https://github.com/OSDeploy/OSD/issues/132)
+- Minor updates to DEV for ARM64 testing
+
+### 24.3.22 (implemented in OSD Module 24.3.27.1)
+- Small change to Invoke-CatalogRequest [Issue 127](https://github.com/OSDeploy/OSD/issues/127)
+
+### 24.3.20 (implemented in OSD Module 24.3.27.1)
+- Added changes for easier debugging
+ - Added checkbox in Start-OSDCloudGUIDev drop down menu to enable Debug Mode
+  - when debugmode = $true (Via GUI or setting variable in script)
+    - Creates addtional logs in c:\OSDCloud\Logs
+      - DiskPart Logs (Before & After Format Step)
+      - OSDCloudDebug
+        - OSDCloud Variables
+        - Windows 11 Readiness
+        - TPM Information
+        - MyComputerInfo
+- If you open issues for OSDCloud, I'll be asking for those logs.
+
+
+### 24.3.19 (implemented in OSD Module 24.3.20.1)
+- Bug Fixes
+  - [Issue 126](https://github.com/OSDeploy/OSD/issues/126) - Unable to add HP drivers into the WinPE
+    - Updated URL in Function to address it not downloading WinPE driver pack
+    - Added addtional Verbose Logging to help track the issue faster in the future if vendor modifies URL
+  - [Issue 125](https://github.com/OSDeploy/OSD/issues/125) - HP BIOS failing to Update using CMSL
+    - I've been unable to reproduce the issue, but I've modified the BIOS update to be a seperate JOB, so if the update fails, it shoudn't break OSDCloud's process.
+
+### 24.3.12 (implemented in OSD Module 24.3.20.1)
+- Start-OSDCloudGUIDev Updates
+  - Dynamically pulling the OS Edition and Index Numbers based on the OS Name, Language and Activation chosen in the GUI.
+    - This is to improve experience on other language esd files [Issue 117](https://github.com/OSDeploy/OSD/issues/117)
+- Updated DISMFromOSDCloudUSB function to now search mapped network drives too
+  - If you have a network drive that follows the OSDCloud USB Drive folder structure, it will use that as a cache similar to the flash drive
+    - F:\OSDCloud\DriverPacks\DISM\HP\859C
+    - F:\OSDCloud\OS\
+    - etc
+  
+### 24.3.6 (implemented in OSD Module 24.3.10.1)
+- Promoted code from Start-OSDCloudGUIDev to Start-OSDCloudGUI
+  - This will add the HP enhancements as well as the SetupComplete enchancements into the Menus of the GUI
+  - See updates from 24.1.22 for more details.
+- Fix for downloading content from MS Update Catalog [Issue 122](https://github.com/OSDeploy/OSD/issues/122)
+
+### 24.2.15 (implemented in OSD Module 24.2.20.1)
 - Modifications to Function Set-TimeZoneFromIP - Due to prevous method using an API that is no longer free, had to completely change process.  Doing best to make it work for everyone when I can only test 1 timezone. 
   - Bug fix thanks to @JHBDO [Issue 110](https://github.com/OSDeploy/OSD/issues/110)
 - Added Function: New-OSDCloudWorkSpaceSetupCompleteTemplate [Issue 107](https://github.com/OSDeploy/OSD/issues/107)

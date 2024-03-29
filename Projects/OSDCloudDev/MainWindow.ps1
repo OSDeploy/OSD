@@ -258,125 +258,118 @@ function Show-PowershellWindow() {
     $null = $showWindowAsync::ShowWindowAsync((Get-Process -Id $pid).MainWindowHandle, 10)
 }
 #================================================
+#   Determine Archetecture
+#================================================
+$Arch = (Get-NativeMatchineImage).NativeMachine
+#================================================
 #   Manufacturer Enhacements
 #================================================
 #   DISABLING VENDOR FEATURES UNTIL OFFLINE SOLUTION CREATED - 22.07.01 - GARY
 if (Test-WebConnection -Uri "google.com") {
     $WebConnection = $True
 }
-if ($WebConnection -eq $true){
-    function Test-HPIASupport {
-        $CabPath = "$env:TEMP\platformList.cab"
-        $XMLPath = "$env:TEMP\platformList.xml"
-        $PlatformListCabURL = "https://hpia.hpcloud.hp.com/ref/platformList.cab"
-        Invoke-WebRequest -Uri $PlatformListCabURL -OutFile $CabPath -UseBasicParsing
-        $Expand = expand $CabPath $XMLPath
-        [xml]$XML = Get-Content $XMLPath
-        $Platforms = $XML.ImagePal.Platform.SystemID
-        $MachinePlatform = (Get-CimInstance -Namespace root/cimv2 -ClassName Win32_BaseBoard).Product
-        if ($MachinePlatform -in $Platforms){$HPIASupport = $true}
-        else {$HPIASupport = $false}
-        return $HPIASupport
-        }
-    }
-
 $Manufacturer = (Get-CimInstance -Class:Win32_ComputerSystem).Manufacturer
 $Model = (Get-CimInstance -Class:Win32_ComputerSystem).Model
 if ($Manufacturer -match "HP" -or $Manufacturer -match "Hewlett-Packard"){
     $Manufacturer = "HP"
-    $HPEnterprise = Test-HPIASupport
+    if ($WebConnection -eq $true){$HPEnterprise = Test-HPIASupport}
     } 
 if ($Manufacturer -match "Microsoft"){
     if ($Model -eq "Virtual Machine"){
         $HyperV = $true
     } 
 }    
-
-if ($HPEnterprise){
-    Install-ModuleHPCMSL
-    $TPM = get-HPTPMDetermine
-    $BIOS = Get-HPBIOSUpdates -Check
-    $formMainWindowControlManufacturerFunction.Header = "HP Functions"
-    $formMainWindowControlManufacturerFunction.Visibility = 'Visible'
-
-    $formMainWindowControlOption_Name_1.Header = "HPIA Drivers - Adds approx 20 minutes"
-    $formMainWindowControlOption_Name_1.IsChecked = $Global:OSDCloudGUI.HPIADrivers 
-    $formMainWindowControlOption_Name_2.Header = "HPIA Firmware - Adds approx 5 minutes"
-    $formMainWindowControlOption_Name_2.IsChecked = $Global:OSDCloudGUI.HPIAFirmware
-    $formMainWindowControlOption_Name_3.Header = "HPIA Software - Adds approx 10 minutes"
-    $formMainWindowControlOption_Name_3.IsChecked = $Global:OSDCloudGUI.HPIASoftware  
-    $formMainWindowControlOption_Name_4.Header = "HPIA All Options - Adds approx 25 minutes"
-    $formMainWindowControlOption_Name_4.IsChecked = $Global:OSDCloudGUI.HPIAALL 
-    if ($TPM -eq $false){
-        $formMainWindowControlOption_Name_5.Header = "HP TPM Firmware Already Current"
-        $formMainWindowControlOption_Name_5.IsEnabled = $false
-        }
-    else
-        {
-        $formMainWindowControlOption_Name_5.Visibility = 'Visible'
-        $formMainWindowControlOption_Name_5.Header = "HP Update TPM Firmware: $TPM"
-        $formMainWindowControlOption_Name_5.IsChecked = $Global:OSDCloudGUI.HPTPMUpdate 
-        }
-    if ($BIOS -eq $true){
-        $CurrentVer = Get-HPBIOSVersion
-        $formMainWindowControlOption_Name_6.Header = "HP System Firmware already Current: $CurrentVer"
-        $formMainWindowControlOption_Name_6.IsEnabled = $false
-        }
-    else
-        {
-        $LatestVer = (Get-HPBIOSUpdates -Latest).ver
-        $CurrentVer = Get-HPBIOSVersion
-        $formMainWindowControlOption_Name_6.Visibility = 'Visible'
-        $formMainWindowControlOption_Name_6.Header = "HP Update System Firmwware from $CurrentVer to $LatestVer"
-        $formMainWindowControlOption_Name_6.IsChecked = $Global:OSDCloudGUI.HPBIOSUpdate 
-        
-        }
-    # When HPIA All is selected, unselect Firmware & Software
-    
-    #If HPIA All is selected, deselect other options
-    $formMainWindowControlOption_Name_4.add_Checked({$formMainWindowControlOption_Name_1.IsChecked = $false})
-    $formMainWindowControlOption_Name_4.add_Checked({$formMainWindowControlOption_Name_2.IsChecked = $false})
-    $formMainWindowControlOption_Name_4.add_Checked({$formMainWindowControlOption_Name_3.IsChecked = $false})
-    #If other options are selected, make sure HPIAAll is NOT selected
-    $formMainWindowControlOption_Name_1.add_Checked({$formMainWindowControlOption_Name_4.IsChecked = $false})
-    $formMainWindowControlOption_Name_2.add_Checked({$formMainWindowControlOption_Name_4.IsChecked = $false})
-    $formMainWindowControlOption_Name_3.add_Checked({$formMainWindowControlOption_Name_4.IsChecked = $false})
-
-    }
-
-elseif ($HyperV){
-    $formMainWindowControlManufacturerFunction.Header = "HyperV Functions"
-    $formMainWindowControlManufacturerFunction.Visibility = 'Visible'    
-    $formMainWindowControlOption_Name_1.Header = "Set PC Name to HyperV VM Name"
-    $formMainWindowControlOption_Name_1.IsChecked = $false
-    $formMainWindowControlOption_Name_2.Header = "Eject CD ISO"
-    $formMainWindowControlOption_Name_2.IsChecked = $true
-    $formMainWindowControlOption_Name_3.Visibility = "Hidden"
-    $formMainWindowControlOption_Name_4.Visibility = "Hidden"
-    $formMainWindowControlOption_Name_5.Visibility = "Hidden"
-    $formMainWindowControlOption_Name_6.Visibility = "Hidden"
-}
-else{
+if ($Arch -match 'ARM64'){
     $formMainWindowControlManufacturerFunction.Visibility = 'Hidden'
     $formMainWindowControlManufacturerFunction.IsEnabled = $false
-    $formMainWindowControlOption_Name_1.IsChecked = $false
-    #$formMainWindowControlOption_Name_1.IsEnabled = $false 
-    #$formMainWindowControlOption_Name_1.Visibility = "Hidden"
-    $formMainWindowControlOption_Name_2.IsChecked = $false
-    #$formMainWindowControlOption_Name_2.IsEnabled = $false 
-    #$formMainWindowControlOption_Name_2.Visibility = "Hidden"
-    $formMainWindowControlOption_Name_3.IsChecked = $false
-    #$formMainWindowControlOption_Name_3.IsEnabled = $false 
-    #$formMainWindowControlOption_Name_3.Visibility = "Hidden"
-    $formMainWindowControlOption_Name_4.IsChecked = $false
-    #$formMainWindowControlOption_Name_4.IsEnabled = $false 
-    #$formMainWindowControlOption_Name_4.Visibility = "Hidden"
-    $formMainWindowControlOption_Name_5.IsChecked = $false
-    #$formMainWindowControlOption_Name_5.IsEnabled = $false 
-    #$formMainWindowControlOption_Name_5.Visibility = "Hidden"
-    $formMainWindowControlOption_Name_6.IsChecked = $false
-    #$formMainWindowControlOption_Name_6.IsEnabled = $false 
-    #$formMainWindowControlOption_Name_6.Visibility = "Hidden"
+}
+else {
+    if ($HPEnterprise){
+        Install-ModuleHPCMSL
+        $TPM = get-HPTPMDetermine
+        $BIOS = Get-HPBIOSUpdates -Check
+        $formMainWindowControlManufacturerFunction.Header = "HP Functions"
+        $formMainWindowControlManufacturerFunction.Visibility = 'Visible'
+
+        $formMainWindowControlOption_Name_1.Header = "HPIA Drivers - Adds approx 20 minutes"
+        $formMainWindowControlOption_Name_1.IsChecked = $Global:OSDCloudGUI.HPIADrivers 
+        $formMainWindowControlOption_Name_2.Header = "HPIA Firmware - Adds approx 5 minutes"
+        $formMainWindowControlOption_Name_2.IsChecked = $Global:OSDCloudGUI.HPIAFirmware
+        $formMainWindowControlOption_Name_3.Header = "HPIA Software - Adds approx 10 minutes"
+        $formMainWindowControlOption_Name_3.IsChecked = $Global:OSDCloudGUI.HPIASoftware  
+        $formMainWindowControlOption_Name_4.Header = "HPIA All Options - Adds approx 25 minutes"
+        $formMainWindowControlOption_Name_4.IsChecked = $Global:OSDCloudGUI.HPIAALL 
+        if ($TPM -eq $false){
+            $formMainWindowControlOption_Name_5.Header = "HP TPM Firmware Already Current"
+            $formMainWindowControlOption_Name_5.IsEnabled = $false
+            }
+        else
+            {
+            $formMainWindowControlOption_Name_5.Visibility = 'Visible'
+            $formMainWindowControlOption_Name_5.Header = "HP Update TPM Firmware: $TPM"
+            $formMainWindowControlOption_Name_5.IsChecked = $Global:OSDCloudGUI.HPTPMUpdate 
+            }
+        if ($BIOS -eq $true){
+            $CurrentVer = Get-HPBIOSVersion
+            $formMainWindowControlOption_Name_6.Header = "HP System Firmware already Current: $CurrentVer"
+            $formMainWindowControlOption_Name_6.IsEnabled = $false
+            }
+        else
+            {
+            $LatestVer = (Get-HPBIOSUpdates -Latest).ver
+            $CurrentVer = Get-HPBIOSVersion
+            $formMainWindowControlOption_Name_6.Visibility = 'Visible'
+            $formMainWindowControlOption_Name_6.Header = "HP Update System Firmwware from $CurrentVer to $LatestVer"
+            $formMainWindowControlOption_Name_6.IsChecked = $Global:OSDCloudGUI.HPBIOSUpdate 
+            
+            }
+        # When HPIA All is selected, unselect Firmware & Software
+        
+        #If HPIA All is selected, deselect other options
+        $formMainWindowControlOption_Name_4.add_Checked({$formMainWindowControlOption_Name_1.IsChecked = $false})
+        $formMainWindowControlOption_Name_4.add_Checked({$formMainWindowControlOption_Name_2.IsChecked = $false})
+        $formMainWindowControlOption_Name_4.add_Checked({$formMainWindowControlOption_Name_3.IsChecked = $false})
+        #If other options are selected, make sure HPIAAll is NOT selected
+        $formMainWindowControlOption_Name_1.add_Checked({$formMainWindowControlOption_Name_4.IsChecked = $false})
+        $formMainWindowControlOption_Name_2.add_Checked({$formMainWindowControlOption_Name_4.IsChecked = $false})
+        $formMainWindowControlOption_Name_3.add_Checked({$formMainWindowControlOption_Name_4.IsChecked = $false})
+
+        }
+
+    elseif ($HyperV){
+        $formMainWindowControlManufacturerFunction.Header = "HyperV Functions"
+        $formMainWindowControlManufacturerFunction.Visibility = 'Visible'    
+        $formMainWindowControlOption_Name_1.Header = "Set PC Name to HyperV VM Name"
+        $formMainWindowControlOption_Name_1.IsChecked = $false
+        $formMainWindowControlOption_Name_2.Header = "Eject CD ISO"
+        $formMainWindowControlOption_Name_2.IsChecked = $true
+        $formMainWindowControlOption_Name_3.Visibility = "Hidden"
+        $formMainWindowControlOption_Name_4.Visibility = "Hidden"
+        $formMainWindowControlOption_Name_5.Visibility = "Hidden"
+        $formMainWindowControlOption_Name_6.Visibility = "Hidden"
+    }
+    else{
+        $formMainWindowControlManufacturerFunction.Visibility = 'Hidden'
+        $formMainWindowControlManufacturerFunction.IsEnabled = $false
+        $formMainWindowControlOption_Name_1.IsChecked = $false
+        #$formMainWindowControlOption_Name_1.IsEnabled = $false 
+        #$formMainWindowControlOption_Name_1.Visibility = "Hidden"
+        $formMainWindowControlOption_Name_2.IsChecked = $false
+        #$formMainWindowControlOption_Name_2.IsEnabled = $false 
+        #$formMainWindowControlOption_Name_2.Visibility = "Hidden"
+        $formMainWindowControlOption_Name_3.IsChecked = $false
+        #$formMainWindowControlOption_Name_3.IsEnabled = $false 
+        #$formMainWindowControlOption_Name_3.Visibility = "Hidden"
+        $formMainWindowControlOption_Name_4.IsChecked = $false
+        #$formMainWindowControlOption_Name_4.IsEnabled = $false 
+        #$formMainWindowControlOption_Name_4.Visibility = "Hidden"
+        $formMainWindowControlOption_Name_5.IsChecked = $false
+        #$formMainWindowControlOption_Name_5.IsEnabled = $false 
+        #$formMainWindowControlOption_Name_5.Visibility = "Hidden"
+        $formMainWindowControlOption_Name_6.IsChecked = $false
+        #$formMainWindowControlOption_Name_6.IsEnabled = $false 
+        #$formMainWindowControlOption_Name_6.Visibility = "Hidden"
+    }
 }
 #>
 #Disabling Vendor Features for now.
@@ -384,12 +377,23 @@ else{
 #$formMainWindowControlManufacturerFunction.IsEnabled = $false
 #$formMainWindowControlWindowsDefenderUpdate.Visibility = 'Hidden'
 #$formMainWindowControlWindowsDefenderUpdate.IsEnabled = $false
+
+#================================================
+#   Get Index Info
+#================================================
+if ($Arch -match 'ARM64'){
+    $IndexInfo = Get-OSDCloudOperatingSystemsIndexes -OSArch ARM64
+}
+else {
+    $IndexInfo = Get-OSDCloudOperatingSystemsIndexes
+}
 #================================================
 #   Menu Options
 #================================================
 $formMainWindowControlcaptureScreenshots.IsChecked = $Global:OSDCloudGUI.captureScreenshots
 $formMainWindowControlClearDiskConfirm.IsChecked = $Global:OSDCloudGUI.ClearDiskConfirm
 $formMainWindowControlrestartComputer.IsChecked = $Global:OSDCloudGUI.restartComputer
+$formMainWindowControldebugMode.IsChecked = $Global:OSDCloudGUI.debugMode
 $formMainWindowControlupdateDiskDrivers.IsChecked = $Global:OSDCloudGUI.updateDiskDrivers
 $formMainWindowControlupdateFirmware.IsChecked = $Global:OSDCloudGUI.updateFirmware
 $formMainWindowControlupdateNetworkDrivers.IsChecked = $Global:OSDCloudGUI.updateNetworkDrivers
@@ -403,9 +407,17 @@ $formMainWindowControlShutdownSetupComplete.IsChecked = $Global:OSDCloudGUI.Shut
 #================================================
 #   OS Name Combobox
 #================================================
-$Global:OSDCloudGUI.OSNameValues | ForEach-Object {
-    $formMainWindowControlOSNameCombobox.Items.Add($_) | Out-Null
+if ($Arch -match 'ARM64'){
+    $Global:OSDCloudGUI.OSNameARM64Values | ForEach-Object {
+        $formMainWindowControlOSNameCombobox.Items.Add($_) | Out-Null
+    }
 }
+else {
+    $Global:OSDCloudGUI.OSNameValues | ForEach-Object {
+        $formMainWindowControlOSNameCombobox.Items.Add($_) | Out-Null
+    }
+}
+
 $formMainWindowControlOSNameCombobox.SelectedValue = $Global:OSDCloudGUI.OSName
 #================================================
 #   OS Edition Combobox
@@ -446,7 +458,7 @@ function Set-OSDCloudGUIDefaultOptions {
     $formMainWindowControlOSLanguageCombobox.Visibility = "Visible"
     $formMainWindowControlOSLanguageCombobox.SelectedValue = $Global:OSDCloudGUI.OSLanguage
 
-    $formMainWindowControlOSActivationCombobox.IsEnabled = $false
+    $formMainWindowControlOSActivationCombobox.IsEnabled = $true
     $formMainWindowControlOSActivationCombobox.Visibility = "Visible"
     $formMainWindowControlOSActivationCombobox.SelectedValue = $Global:OSDCloudGUI.OSActivation
 
@@ -460,6 +472,24 @@ function Set-OSDCloudGUIDefaultOptions {
     $formMainWindowControlAutopilotJsonCombobox.SelectedIndex = 1   #OOBE
 }
 Set-OSDCloudGUIDefaultOptions
+
+#================================================
+#   OS Edition Combobox - Update based on Defaults
+#================================================
+$ImageIndexInfo = $IndexInfo      | Where-Object {$_.Name -match $formMainWindowControlOSNameCombobox.SelectedValue}
+$ImageIndexInfo = $ImageIndexInfo | Where-Object {$_.Language -match $formMainWindowControlOSLanguageCombobox.SelectedValue}
+$ImageIndexInfo = $ImageIndexInfo | Where-Object {$_.Activation -match $formMainWindowControlOSActivationCombobox.SelectedValue}
+
+
+$formMainWindowControlOSEditionCombobox.Items.Clear()
+$ImageIndexInfo.IndexNames | ForEach-Object {
+    $formMainWindowControlOSEditionCombobox.Items.Add($_) | Out-Null
+}
+$DefaultImageIndex = $ImageIndexInfo.IndexNames | Where-Object {$_ -match $Global:OSDCloudGUI.OSEdition} | Select-Object -First 1
+$formMainWindowControlOSEditionCombobox.SelectedValue = $DefaultImageIndex
+$SelectedEdition = $formMainWindowControlOSEditionCombobox.SelectedValue
+$formMainWindowControlImageIndexTextbox.Text = $ImageIndexInfo.Indexes.$SelectedEdition
+
 #================================================
 #   CustomImage
 #================================================
@@ -485,7 +515,12 @@ $CustomImageChildItem = @()
 $CustomImageChildItem = $CustomImageChildItem | Sort-Object -Property Length -Unique | Sort-Object FullName | Where-Object {$_.Length -gt 2GB}
         
 if ($CustomImageChildItem) {
-    $OSDCloudOperatingSystem = Get-OSDCloudOperatingSystems
+    if ($Arch -match 'ARM64'){
+        $OSDCloudOperatingSystem = (Get-OSDCloudOperatingSystems -OSArch ARM64)
+    }
+    else {
+        $OSDCloudOperatingSystem = Get-OSDCloudOperatingSystems
+    }
     $CustomImageChildItem = $CustomImageChildItem | Where-Object {$_.Name -notin $OSDCloudOperatingSystem.FileName}
     $CustomImageChildItem | ForEach-Object {
         $formMainWindowControlOSNameCombobox.Items.Add($_) | Out-Null
@@ -547,111 +582,177 @@ else {
     $formMainWindowControlAutopilotOOBELabel.Visibility = "Collapsed"  
     $formMainWindowControlAutopilotOOBECombobox.Visibility = "Collapsed"  
 }
+#=======================================================================
+#   OS Language Combobox -> Update Editions based on Language Box Change
+#=======================================================================
+
+$formMainWindowControlOSLanguageCombobox.add_SelectionChanged({
+
+    $ImageIndexInfo = $IndexInfo      | Where-Object {$_.Name -match $formMainWindowControlOSNameCombobox.SelectedValue}
+    $ImageIndexInfo = $ImageIndexInfo | Where-Object {$_.Language -match $formMainWindowControlOSLanguageCombobox.SelectedValue}
+    $ImageIndexInfo = $ImageIndexInfo | Where-Object {$_.Activation -match $formMainWindowControlOSActivationCombobox.SelectedValue}
+    
+    
+    $formMainWindowControlOSEditionCombobox.Items.Clear()
+    $ImageIndexInfo.IndexNames | ForEach-Object {
+        $formMainWindowControlOSEditionCombobox.Items.Add($_) | Out-Null
+    }
+    $formMainWindowControlOSEditionCombobox.SelectedValue = $ImageIndexInfo.IndexNames[0]
+    $SelectedEdition = $formMainWindowControlOSEditionCombobox.SelectedValue
+    $formMainWindowControlImageIndexTextbox.Text = $ImageIndexInfo.Indexes.$SelectedEdition
+})
+
+#=======================================================================
+#   OS Activation Combobox -> Update Editions based on OS Activation Box Change
+#=======================================================================
+$formMainWindowControlOSActivationCombobox.add_SelectionChanged({
+
+    $ImageIndexInfo = $IndexInfo      | Where-Object {$_.Name -match $formMainWindowControlOSNameCombobox.SelectedValue}
+    $ImageIndexInfo = $ImageIndexInfo | Where-Object {$_.Language -match $formMainWindowControlOSLanguageCombobox.SelectedValue}
+    $ImageIndexInfo = $ImageIndexInfo | Where-Object {$_.Activation -match $formMainWindowControlOSActivationCombobox.SelectedValue}
+    
+    
+    $formMainWindowControlOSEditionCombobox.Items.Clear()
+    $ImageIndexInfo.IndexNames | ForEach-Object {
+        $formMainWindowControlOSEditionCombobox.Items.Add($_) | Out-Null
+    }
+    $formMainWindowControlOSEditionCombobox.SelectedValue = $ImageIndexInfo.IndexNames[0]
+    $SelectedEdition = $formMainWindowControlOSEditionCombobox.SelectedValue
+    $formMainWindowControlImageIndexTextbox.Text = $ImageIndexInfo.Indexes.$SelectedEdition
+})
+
 #================================================
 #   OS Edition Combobox to ImageIndex
 #================================================
+
 $formMainWindowControlOSEditionCombobox.add_SelectionChanged({
+    $ImageIndexInfo = $IndexInfo      | Where-Object {$_.Name -match $formMainWindowControlOSNameCombobox.SelectedValue}
+    $ImageIndexInfo = $ImageIndexInfo | Where-Object {$_.Language -match $formMainWindowControlOSLanguageCombobox.SelectedValue}
+    $ImageIndexInfo = $ImageIndexInfo | Where-Object {$_.Activation -match $formMainWindowControlOSActivationCombobox.SelectedValue}
+    $SelectedEdition = $formMainWindowControlOSEditionCombobox.SelectedValue
 
-    if ($formMainWindowControlOSEditionCombobox.SelectedValue -eq 'Home') {
-        #Retail edition only and disable Activation combobox
-        $formMainWindowControlOSActivationCombobox.SelectedValue = 'Retail'
-        $formMainWindowControlOSActivationCombobox.IsEnabled = $false
+    $formMainWindowControlImageIndexTextbox.Text = $ImageIndexInfo.Indexes.$SelectedEdition
+})  
 
-        $formMainWindowControlImageIndexLabel.IsEnabled = $false
+#================================================
+#   OS Edition Combobox to ImageIndex
+#================================================
+<#
+    $formMainWindowControlOSEditionCombobox.add_SelectionChanged({
+        if ($formMainWindowControlOSEditionCombobox.SelectedValue -eq 'Home') {
+            #Retail edition only and disable Activation combobox
+            $formMainWindowControlOSActivationCombobox.SelectedValue = 'Retail'
+            $formMainWindowControlOSActivationCombobox.IsEnabled = $false
 
-        $formMainWindowControlImageIndexTextbox.Text = 4
-        $formMainWindowControlImageIndexTextbox.IsEnabled = $false
-    }
-    elseif ($formMainWindowControlOSEditionCombobox.SelectedValue -eq 'Home N') {
-        #Retail edition only and disable Activation combobox
-        $formMainWindowControlOSActivationCombobox.SelectedValue = 'Retail'
-        $formMainWindowControlOSActivationCombobox.IsEnabled = $false
+            $formMainWindowControlImageIndexLabel.IsEnabled = $false
 
-        $formMainWindowControlImageIndexLabel.IsEnabled = $false
+            $formMainWindowControlImageIndexTextbox.Text = 4
+            $formMainWindowControlImageIndexTextbox.IsEnabled = $false
+        }
+        elseif ($formMainWindowControlOSEditionCombobox.SelectedValue -eq 'Home N') {
+            #Retail edition only and disable Activation combobox
+            $formMainWindowControlOSActivationCombobox.SelectedValue = 'Retail'
+            $formMainWindowControlOSActivationCombobox.IsEnabled = $false
 
-        $formMainWindowControlImageIndexTextbox.Text = 5
-        $formMainWindowControlImageIndexTextbox.IsEnabled = $false
-    }
-    elseif ($formMainWindowControlOSEditionCombobox.SelectedValue -eq 'Home Single Language') {
-        #Retail edition only and disable Activation combobox
-        $formMainWindowControlOSActivationCombobox.SelectedValue = 'Retail'
-        $formMainWindowControlOSActivationCombobox.IsEnabled = $false
+            $formMainWindowControlImageIndexLabel.IsEnabled = $false
 
-        $formMainWindowControlImageIndexLabel.IsEnabled = $false
+            $formMainWindowControlImageIndexTextbox.Text = 5
+            $formMainWindowControlImageIndexTextbox.IsEnabled = $false
+        }
+        elseif ($formMainWindowControlOSEditionCombobox.SelectedValue -eq 'Home Single Language') {
+            #Retail edition only and disable Activation combobox
+            $formMainWindowControlOSActivationCombobox.SelectedValue = 'Retail'
+            $formMainWindowControlOSActivationCombobox.IsEnabled = $false
 
-        $formMainWindowControlImageIndexTextbox.Text = 6
-        $formMainWindowControlImageIndexTextbox.IsEnabled = $false
-    }
-    elseif ($formMainWindowControlOSEditionCombobox.SelectedValue -eq 'Education') {
-        $formMainWindowControlOSActivationCombobox.IsEnabled = $true
-        if ($formMainWindowControlOSActivationCombobox.SelectedValue -eq 'Retail') {
+            $formMainWindowControlImageIndexLabel.IsEnabled = $false
+
+            $formMainWindowControlImageIndexTextbox.Text = 6
+            $formMainWindowControlImageIndexTextbox.IsEnabled = $false
+        }
+        elseif ($formMainWindowControlOSEditionCombobox.SelectedValue -eq 'Education') {
+            $formMainWindowControlOSActivationCombobox.IsEnabled = $true
+            if ($formMainWindowControlOSActivationCombobox.SelectedValue -eq 'Retail') {
+                $formMainWindowControlImageIndexTextbox.Text = 7
+            }
+            else {
+                $formMainWindowControlImageIndexTextbox.Text = 4
+            }
+        }
+        elseif ($formMainWindowControlOSEditionCombobox.SelectedValue -eq 'Education N') {
+            $formMainWindowControlOSActivationCombobox.IsEnabled = $true
+            if ($formMainWindowControlOSActivationCombobox.SelectedValue -eq 'Retail') {
+                $formMainWindowControlImageIndexTextbox.Text = 8
+            }
+            else {
+                $formMainWindowControlImageIndexTextbox.Text = 5
+            }
+        }
+        elseif ($formMainWindowControlOSEditionCombobox.SelectedValue -eq 'Enterprise') {
+            $formMainWindowControlOSActivationCombobox.SelectedValue = 'Volume'
+            $formMainWindowControlOSActivationCombobox.IsEnabled = $false
+            $formMainWindowControlImageIndexTextbox.Text = 6
+        }
+        elseif ($formMainWindowControlOSEditionCombobox.SelectedValue -eq 'Enterprise N') {
+            $formMainWindowControlOSActivationCombobox.SelectedValue = 'Volume'
+            $formMainWindowControlOSActivationCombobox.IsEnabled = $false
             $formMainWindowControlImageIndexTextbox.Text = 7
         }
-        else {
-            $formMainWindowControlImageIndexTextbox.Text = 4
+        elseif ($formMainWindowControlOSEditionCombobox.SelectedValue -eq 'Pro') {
+            $formMainWindowControlOSActivationCombobox.IsEnabled = $true
+            if ($formMainWindowControlOSActivationCombobox.SelectedValue -eq 'Retail') {
+                $formMainWindowControlImageIndexTextbox.Text = 9
+            }
+            else {
+                $formMainWindowControlImageIndexTextbox.Text = 8
+            }
         }
-    }
-    elseif ($formMainWindowControlOSEditionCombobox.SelectedValue -eq 'Education N') {
-        $formMainWindowControlOSActivationCombobox.IsEnabled = $true
-        if ($formMainWindowControlOSActivationCombobox.SelectedValue -eq 'Retail') {
-            $formMainWindowControlImageIndexTextbox.Text = 8
+        elseif ($formMainWindowControlOSEditionCombobox.SelectedValue -eq 'Pro N') {
+            $formMainWindowControlOSActivationCombobox.IsEnabled = $true
+            if ($formMainWindowControlOSActivationCombobox.SelectedValue -eq 'Retail') {
+                $formMainWindowControlImageIndexTextbox.Text = 10
+            }
+            else {
+                $formMainWindowControlImageIndexTextbox.Text = 9
+            }
         }
-        else {
-            $formMainWindowControlImageIndexTextbox.Text = 5
-        }
-    }
-    elseif ($formMainWindowControlOSEditionCombobox.SelectedValue -eq 'Enterprise') {
-        $formMainWindowControlOSActivationCombobox.SelectedValue = 'Volume'
-        $formMainWindowControlOSActivationCombobox.IsEnabled = $false
-        $formMainWindowControlImageIndexTextbox.Text = 6
-    }
-    elseif ($formMainWindowControlOSEditionCombobox.SelectedValue -eq 'Enterprise N') {
-        $formMainWindowControlOSActivationCombobox.SelectedValue = 'Volume'
-        $formMainWindowControlOSActivationCombobox.IsEnabled = $false
-        $formMainWindowControlImageIndexTextbox.Text = 7
-    }
-    elseif ($formMainWindowControlOSEditionCombobox.SelectedValue -eq 'Pro') {
-        $formMainWindowControlOSActivationCombobox.IsEnabled = $true
-        if ($formMainWindowControlOSActivationCombobox.SelectedValue -eq 'Retail') {
-            $formMainWindowControlImageIndexTextbox.Text = 9
-        }
-        else {
-            $formMainWindowControlImageIndexTextbox.Text = 8
-        }
-    }
-    elseif ($formMainWindowControlOSEditionCombobox.SelectedValue -eq 'Pro N') {
-        $formMainWindowControlOSActivationCombobox.IsEnabled = $true
-        if ($formMainWindowControlOSActivationCombobox.SelectedValue -eq 'Retail') {
-            $formMainWindowControlImageIndexTextbox.Text = 10
-        }
-        else {
-            $formMainWindowControlImageIndexTextbox.Text = 9
-        }
-    }
-})
+    })
+#>
 #================================================
 #   OS Activation Combobox
 #================================================
-$formMainWindowControlOSActivationCombobox.add_SelectionChanged({
-    if ($formMainWindowControlOSActivationCombobox.SelectedValue -eq 'Retail') {
-        if ($formMainWindowControlOSEditionCombobox.SelectedValue -eq 'Education') {$formMainWindowControlImageIndexTextbox.Text = 7}
-        if ($formMainWindowControlOSEditionCombobox.SelectedValue -eq 'Education N') {$formMainWindowControlImageIndexTextbox.Text = 8}
-        if ($formMainWindowControlOSEditionCombobox.SelectedValue -eq 'Pro') {$formMainWindowControlImageIndexTextbox.Text = 9}
-        if ($formMainWindowControlOSEditionCombobox.SelectedValue -eq 'Pro N') {$formMainWindowControlImageIndexTextbox.Text = 10}
-    }
-    if ($formMainWindowControlOSActivationCombobox.SelectedValue -eq 'Volume') {
-        if ($formMainWindowControlOSEditionCombobox.SelectedValue -eq 'Education') {$formMainWindowControlImageIndexTextbox.Text = 4}
-        if ($formMainWindowControlOSEditionCombobox.SelectedValue -eq 'Education N') {$formMainWindowControlImageIndexTextbox.Text = 5}
-        if ($formMainWindowControlOSEditionCombobox.SelectedValue -eq 'Pro') {$formMainWindowControlImageIndexTextbox.Text = 8}
-        if ($formMainWindowControlOSEditionCombobox.SelectedValue -eq 'Pro N') {$formMainWindowControlImageIndexTextbox.Text = 9}
-    }
-})
+<#
+    $formMainWindowControlOSActivationCombobox.add_SelectionChanged({
+        if ($formMainWindowControlOSActivationCombobox.SelectedValue -eq 'Retail') {
+            if ($formMainWindowControlOSEditionCombobox.SelectedValue -eq 'Education') {$formMainWindowControlImageIndexTextbox.Text = 7}
+            if ($formMainWindowControlOSEditionCombobox.SelectedValue -eq 'Education N') {$formMainWindowControlImageIndexTextbox.Text = 8}
+            if ($formMainWindowControlOSEditionCombobox.SelectedValue -eq 'Pro') {$formMainWindowControlImageIndexTextbox.Text = 9}
+            if ($formMainWindowControlOSEditionCombobox.SelectedValue -eq 'Pro N') {$formMainWindowControlImageIndexTextbox.Text = 10}
+        }
+        if ($formMainWindowControlOSActivationCombobox.SelectedValue -eq 'Volume') {
+            if ($formMainWindowControlOSEditionCombobox.SelectedValue -eq 'Education') {$formMainWindowControlImageIndexTextbox.Text = 4}
+            if ($formMainWindowControlOSEditionCombobox.SelectedValue -eq 'Education N') {$formMainWindowControlImageIndexTextbox.Text = 5}
+            if ($formMainWindowControlOSEditionCombobox.SelectedValue -eq 'Pro') {$formMainWindowControlImageIndexTextbox.Text = 8}
+            if ($formMainWindowControlOSEditionCombobox.SelectedValue -eq 'Pro N') {$formMainWindowControlImageIndexTextbox.Text = 9}
+        }
+    })
+#>
 #================================================
 #   OS Name Combobox
 #================================================
 $formMainWindowControlOSNameCombobox.add_SelectionChanged({
     if ($formMainWindowControlOSNameCombobox.SelectedValue -like 'Windows 1*') {
-        Set-OSDCloudGUIDefaultOptions
+        $ImageIndexInfo = $IndexInfo      | Where-Object {$_.Name -match $formMainWindowControlOSNameCombobox.SelectedValue}
+        $ImageIndexInfo = $ImageIndexInfo | Where-Object {$_.Language -match $formMainWindowControlOSLanguageCombobox.SelectedValue}
+        $ImageIndexInfo = $ImageIndexInfo | Where-Object {$_.Activation -match $formMainWindowControlOSActivationCombobox.SelectedValue}
+        
+        
+        $formMainWindowControlOSEditionCombobox.Items.Clear()
+        $ImageIndexInfo.IndexNames | ForEach-Object {
+            $formMainWindowControlOSEditionCombobox.Items.Add($_) | Out-Null
+        }
+        $formMainWindowControlOSEditionCombobox.SelectedValue = $ImageIndexInfo.IndexNames[0]
+        $SelectedEdition = $formMainWindowControlOSEditionCombobox.SelectedValue
+        $formMainWindowControlImageIndexTextbox.Text = $ImageIndexInfo.Indexes.$SelectedEdition
     }
     else {
         $formMainWindowControlOSEditionCombobox.Visibility = "Collapsed"
@@ -748,11 +849,17 @@ $formMainWindowControlStartButton.add_Click({
     $OSLanguage = $formMainWindowControlOSLanguageCombobox.SelectedValue
     $OSImageIndex = $formMainWindowControlImageIndexTextbox.Text
 
-
     if ($formMainWindowControlOSNameCombobox.SelectedValue -like 'Windows 1*') {
         $OSName = $formMainWindowControlOSNameCombobox.SelectedValue
         
-        $OSDCloudOperatingSystem = Get-OSDCloudOperatingSystems | Where-Object {$_.Name -match $OSName} | Where-Object {$_.Activation -eq $OSActivation} | Where-Object {$_.Language -eq $OSLanguage}
+        if ($Arch -match 'ARM64'){
+            $OSDCloudOperatingSystem = (Get-OSDCloudOperatingSystems -OSArch ARM64) | Where-Object {$_.Name -match $OSName} | Where-Object {$_.Activation -eq $OSActivation} | Where-Object {$_.Language -eq $OSLanguage}
+        }
+        else {
+            $OSDCloudOperatingSystem = Get-OSDCloudOperatingSystems | Where-Object {$_.Name -match $OSName} | Where-Object {$_.Activation -eq $OSActivation} | Where-Object {$_.Language -eq $OSLanguage}
+        }
+       
+        
         $OSBuild = $OSDCloudOperatingSystem.Build
         $OSReleaseID = $OSDCloudOperatingSystem.ReleaseID
         $OSVersion = $OSDCloudOperatingSystem.Version
@@ -824,6 +931,7 @@ $formMainWindowControlStartButton.add_Click({
         captureScreenshots          = [System.Boolean]$formMainWindowControlScreenshotCapture.IsChecked
         ClearDiskConfirm            = [System.Boolean]$formMainWindowControlClearDiskConfirm.IsChecked
         restartComputer             = [System.Boolean]$formMainWindowControlRestartComputer.IsChecked
+        debugMode                   = [System.Boolean]$formMainWindowControldebugMode.IsChecked
         updateDiskDrivers           = [System.Boolean]$formMainWindowControlupdateDiskDrivers.IsChecked
         updateFirmware              = [System.Boolean]$formMainWindowControlupdateFirmware.IsChecked
         updateNetworkDrivers        = [System.Boolean]$formMainWindowControlupdateNetworkDrivers.IsChecked
