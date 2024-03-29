@@ -380,7 +380,7 @@ else {
 #   Get Index Info
 #================================================
 if ($Arch -match 'ARM64'){
-    $IndexInfo = Get-OSDCloudOperatingSystemsIndexes -Arch ARM64
+    $IndexInfo = Get-OSDCloudOperatingSystemsIndexes -OSArch ARM64
 }
 else {
     $IndexInfo = Get-OSDCloudOperatingSystemsIndexes
@@ -483,7 +483,8 @@ $formMainWindowControlOSEditionCombobox.Items.Clear()
 $ImageIndexInfo.IndexNames | ForEach-Object {
     $formMainWindowControlOSEditionCombobox.Items.Add($_) | Out-Null
 }
-$formMainWindowControlOSEditionCombobox.SelectedValue = $ImageIndexInfo.IndexNames[0]
+$DefaultImageIndex = $ImageIndexInfo.IndexNames | Where-Object {$_ -match $Global:OSDCloudGUI.OSEdition} | Select-Object -First 1
+$formMainWindowControlOSEditionCombobox.SelectedValue = $DefaultImageIndex
 $SelectedEdition = $formMainWindowControlOSEditionCombobox.SelectedValue
 $formMainWindowControlImageIndexTextbox.Text = $ImageIndexInfo.Indexes.$SelectedEdition
 
@@ -738,7 +739,18 @@ $formMainWindowControlOSEditionCombobox.add_SelectionChanged({
 #================================================
 $formMainWindowControlOSNameCombobox.add_SelectionChanged({
     if ($formMainWindowControlOSNameCombobox.SelectedValue -like 'Windows 1*') {
-        Set-OSDCloudGUIDefaultOptions
+        $ImageIndexInfo = $IndexInfo      | Where-Object {$_.Name -match $formMainWindowControlOSNameCombobox.SelectedValue}
+        $ImageIndexInfo = $ImageIndexInfo | Where-Object {$_.Language -match $formMainWindowControlOSLanguageCombobox.SelectedValue}
+        $ImageIndexInfo = $ImageIndexInfo | Where-Object {$_.Activation -match $formMainWindowControlOSActivationCombobox.SelectedValue}
+        
+        
+        $formMainWindowControlOSEditionCombobox.Items.Clear()
+        $ImageIndexInfo.IndexNames | ForEach-Object {
+            $formMainWindowControlOSEditionCombobox.Items.Add($_) | Out-Null
+        }
+        $formMainWindowControlOSEditionCombobox.SelectedValue = $ImageIndexInfo.IndexNames[0]
+        $SelectedEdition = $formMainWindowControlOSEditionCombobox.SelectedValue
+        $formMainWindowControlImageIndexTextbox.Text = $ImageIndexInfo.Indexes.$SelectedEdition
     }
     else {
         $formMainWindowControlOSEditionCombobox.Visibility = "Collapsed"

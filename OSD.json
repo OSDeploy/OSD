@@ -95,8 +95,6 @@
             ],
             "NameARM64": [
                 "Windows 11 23H2 ARM64",
-		        "Windows 11 22H2 ARM64",
-                "Windows 11 21H2 ARM64",
                 "Windows 10 22H2 ARM64"
             ],
             "ReleaseID": [
