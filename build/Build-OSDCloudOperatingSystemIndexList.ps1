@@ -109,7 +109,9 @@ foreach ($ESD in $ESDFilesARM64){
     $ImageFolderPath = "$ESDStorage\$($ESD.version) $($ESD.ReleaseId) $($ESD.Architecture)"
     if (!(Test-Path -Path $ImageFolderPath)){New-Item -Path $ImageFolderPath -ItemType Directory -Force | Out-Null}
     $ImagePath = "$ImageFolderPath\$($ESD.FileName)"
+    
     $ImageDownloadRequired = $true
+    
     if (Test-path -path $ImagePath){
         Write-Host -ForegroundColor Gray "Found previously downloaded media, getting SHA1 Hash"
         $SHA1Hash = Get-FileHash $ImagePath -Algorithm SHA1
@@ -147,6 +149,7 @@ foreach ($ESD in $ESDFilesARM64){
             write-Host "BITS tranfer failed: $($BitsJob.ErrorDescription)"
         }
     }
+
     if (Test-Path -Path $ImagePath){
         $ImageInfo = Get-WindowsImage -ImagePath $ImagePath
         $TotalIndexes = $ImageInfo.Count
