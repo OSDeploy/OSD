@@ -1474,6 +1474,11 @@
                 }
             }
         }
+        if ((Test-DISMFromOSDCloudUSB) -eq $true){
+            Write-DarkGrayHost "Found expanded Driver Pack files on OSDCloudUSB, will DISM them into the Offline OS directly"
+            #Found Expanded Driver Package on OSDCloudUSB, will DISM Directly from that
+            Start-DISMFromOSDCloudUSB
+        }
     }
     #endregion
     
