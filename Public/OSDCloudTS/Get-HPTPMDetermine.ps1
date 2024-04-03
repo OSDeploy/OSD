@@ -165,7 +165,7 @@ function Invoke-HPTPMDowngrade {
         Start-Process -FilePath $UpdatePath -ArgumentList "/s /e /f $extractPath" -Wait
         if (!(Test-Path -Path $UpdatePath)){Throw "Failed to Extract TPM Update"}
         else {
-            Return $extractPath
+            Write-Host "TPM Downloaded to $extractPath"
             }
         }
     else {Write-Host "No TPM Softpaq to Download"}
