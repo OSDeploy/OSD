@@ -146,6 +146,38 @@ function Invoke-HPTPMDownload { #Used when you want to manually download and tes
         }
     else {Write-Host "No TPM Softpaq to Download"}
 }
+
+function Invoke-HPTPMDowngrade { 
+    [CmdletBinding()]
+    param ($WorkingFolder)
+    Install-ModuleHPCMSL
+    Import-Module -Name HPCMSL -Force
+    $TPMUpdate = 'SP94937'    
+    if (!(($TPMUpdate -eq $false) -or ($TPMUpdate -eq "False")))
+        {
+        if ((!($WorkingFolder))-or ($null -eq $WorkingFolder)){$WorkingFolder = "$env:TEMP\TPM"}
+        if (!(Test-Path -Path $WorkingFolder)){New-Item -Path $WorkingFolder -ItemType Directory -Force |Out-Null}
+        $UpdatePath = "$WorkingFolder\$TPMUpdate.exe"
+        $extractPath = "$WorkingFolder\$TPMUpdate"
+        Write-Host "Starting downlaod & Install of TPM Update $TPMUpdate"
+        Get-Softpaq -Number $TPMUpdate -SaveAs $UpdatePath -Overwrite yes
+        if (!(Test-Path -Path $UpdatePath)){Throw "Failed to Download TPM Update"}
+        Start-Process -FilePath $UpdatePath -ArgumentList "/s /e /f $extractPath" -Wait
+        if (!(Test-Path -Path $UpdatePath)){Throw "Failed to Extract TPM Update"}
+        else {
+            Return $extractPath
+            }
+        }
+    else {Write-Host "No TPM Softpaq to Download"}
+    if ($extractPath){
+        Set-HPBIOSSetting -SettingName 'Virtualization Technology (VTx)' -Value 'Disable'
+        $spec = '1.2'
+        $Process = "$extractPath\TPMConfig64.exe"
+        $TPMArg = "-s -a$spec -l$($LogFolder)\TPMConfig.log"
+        $TPMUpdate = Start-Process -FilePath $Process -ArgumentList $TPMArg -PassThru -Wait
+        write-output "Exit Code: $($TPMUpdate.exitcode)"
+    }
+}
 function Invoke-HPTPMEXEDownload { #This will download just the TPM Softpaq needed and place in C:\OSDCloud\HP\TPM
     Set-HPBIOSSetting -SettingName 'Virtualization Technology (VTx)' -Value 'Disable'
     $TPMUpdate = Get-HPTPMDetermine

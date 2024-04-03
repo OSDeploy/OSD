@@ -173,6 +173,7 @@
         'Invoke-OSDCloudIPU',
         'Invoke-HPTPMDownload',
         'Invoke-HPTPMEXEDownload',
+        'Invoke-HPTPMDowngrade',
         'Invoke-HPTPMEXEInstall',
         'Install-ModuleHPCMSL',
         'Initialize-OSDCloudStartnet',
