@@ -105,7 +105,11 @@
 
         [Switch]
         #Will leverage WirelessConnect.EXE instead of the Commandline Tools to connect to WiFi
-        $WirelessConnect
+        $WirelessConnect,
+
+        [System.String]
+        #WiFi Profile path to connect to
+        $wifiProfile
     )
     #=================================================
     #	Start the Clock
@@ -235,6 +239,9 @@
     $OSDVersion = (Get-Module -Name OSD -ListAvailable | Sort-Object Version -Descending | Select-Object -First 1).Version
     if ($WirelessConnect){
         $InitializeOSDCloudStartnetCommand = "Initialize-OSDCloudStartnet -WirelessConnect"
+    }
+    elseif ($wifiProfile) {
+        $InitializeOSDCloudStartnetCommand = "Initialize-OSDCloudStartnet -wifiprofile $wifiProfile"
     }
     else {
         $InitializeOSDCloudStartnetCommand = "Initialize-OSDCloudStartnet"
