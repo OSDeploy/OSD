@@ -30,9 +30,13 @@ if ($env:SystemDrive -eq 'X:') {
         Set-WinREWiFi @param
 
         # connect to network
-        $result = Netsh WLAN connect name="$SSID"
-        if ($result -ne "Connection request was completed successfully.") {
-            throw "Connection to WIFI wasn't successful. Error was $result"
+        $null = Netsh WLAN connect name="$SSID"
+
+        # wait 10 seconds for connection
+        if (Wait-WebConnection -Uri 'google.com') {
+            Write-Host -ForegroundColor Green "Connection to WIFI $SSID was successful"
+        } else {
+            throw "Connection to WIFI $SSID wasn't successful"
         }
     }
     function Connect-WinREWiFiByXMLProfile {
