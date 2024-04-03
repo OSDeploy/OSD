@@ -32,8 +32,11 @@ if ($env:SystemDrive -eq 'X:') {
         # connect to network
         $null = Netsh WLAN connect name="$SSID"
 
-        # wait 10 seconds for connection
-        if (Wait-WebConnection -Uri 'google.com') {
+        # connection to network can take a while
+        $i = 30
+        while (!(Test-WebConnection -Uri 'google.com') -and $i -gt 0) { --$i; "Waiting for Internet connection ($i)" ; Start-Sleep -Seconds 1 }
+                 
+        if (Test-WebConnection -Uri 'google.com') {
             Write-Host -ForegroundColor Green "Connection to WIFI $SSID was successful"
         } else {
             throw "Connection to WIFI $SSID wasn't successful"
@@ -71,8 +74,11 @@ if ($env:SystemDrive -eq 'X:') {
         # connect to network
         $null = Netsh WLAN connect name="$SSID"
 
-        # wait 10 seconds for connection
-        if (Wait-WebConnection -Uri 'google.com') {
+        # connection to network can take a while
+        $i = 30
+        while (!(Test-WebConnection -Uri 'google.com') -and $i -gt 0) { --$i; "Waiting for Internet connection ($i)" ; Start-Sleep -Seconds 1 }
+            
+        if (Test-WebConnection -Uri 'google.com') {
             Write-Host -ForegroundColor Green "Connection to WIFI $SSID was successful"
         } else {
             throw "Connection to WIFI $SSID wasn't successful"
