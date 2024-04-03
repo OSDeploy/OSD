@@ -23,7 +23,10 @@ function Initialize-OSDCloudStartnet {
     [CmdletBinding()]
     param (
         [System.Management.Automation.SwitchParameter]
-        $WirelessConnect
+        $WirelessConnect,
+
+        [System.String]
+        $wifiProfile
     )
 
     # Make sure we are in WinPE
@@ -102,6 +105,9 @@ function Initialize-OSDCloudStartnet {
             Write-Host -ForegroundColor DarkGray "$($TimeSpan.ToString("mm':'ss")) Initialize Wireless Networking"
             if ($WirelessConnect) {
                 Start-Process PowerShell -ArgumentList 'Start-WinREWiFi -WirelessConnect' -Wait
+            }
+            elseif ($wifiProfile) {
+                Start-Process PowerShell -ArgumentList 'Start-WinREWiFi -wifiProfile $wifiProfile' -Wait
             }
             else {
                 Start-Process PowerShell Start-WinREWiFi -Wait
