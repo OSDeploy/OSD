@@ -174,6 +174,7 @@ function Invoke-HPTPMDowngrade {
         $spec = '1.2'
         $Process = "$extractPath\TPMConfig64.exe"
         $TPMArg = "-s -a$spec -l$($LogFolder)\TPMConfig.log"
+        Write-Host -ForegroundColor Green "Running Command: Start-Process -FilePath $Process -ArgumentList $TPMArg -PassThru -Wait"
         $TPMUpdate = Start-Process -FilePath $Process -ArgumentList $TPMArg -PassThru -Wait
         write-output "Exit Code: $($TPMUpdate.exitcode)"
     }
