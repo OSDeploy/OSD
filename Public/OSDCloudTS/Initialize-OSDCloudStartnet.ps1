@@ -107,8 +107,6 @@ function Initialize-OSDCloudStartnet {
                 Start-Process PowerShell -ArgumentList 'Start-WinREWiFi -WirelessConnect' -Wait
             }
             elseif ($WifiProfile) {
-                # Initialize WiFi Profile  
-                # Looks for WiFiProfile.xml files in OSDCloud\Config, if found, it will run a splash screen.
                 $Global:WifiProfile = Get-PSDrive -PSProvider FileSystem | Where-Object { $_.Name -ne 'C' } | ForEach-Object {
                     Get-ChildItem "$($_.Root)OSDCloud\Config\Scripts" -Include "WiFiProfile.xml" -File -Recurse -Force -ErrorAction Ignore
                 }

@@ -298,7 +298,7 @@ if ($env:SystemDrive -eq 'X:') {
         #	WlanSvc
         #=================================================
         if ($StartWinREWiFi) {
-            Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Starting WlanSvc Service" -NoNewline
+            Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Starting WlanSvc Service " -NoNewline
             if (Get-Service -Name WlanSvc) {
                 if ((Get-Service -Name WlanSvc).Status -ne 'Running') {
                     Get-Service -Name WlanSvc | Start-Service
