@@ -252,7 +252,7 @@
     if ($WifiProfile) {
         Write-Host -ForegroundColor DarkGray "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Adding WiFi Profile $WifiProfile"
         Copy-Item -Path $WifiProfile -Destination "$env:TEMP\WiFiProfile.xml" -Force | Out-Null
-        robocopy "$env:TEMP" "$MountPath\OSDCloud\Config\Scripts" WiFiProfile.xml *.* /mir /ndl /njh /njs /b /np
+        robocopy "$env:TEMP" "$MountPath\OSDCloud\Config\Scripts" WiFiProfile.xml /ndl /njh /njs /b /np /r:0 /w:0
     }
     #endregion
 
