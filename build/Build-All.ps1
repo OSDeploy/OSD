@@ -9,9 +9,6 @@ Import-Module OSD -Force -ErrorAction Stop
 #Get-IntelRadeonDriverPack -UpdateModuleCatalog
 #Get-IntelWirelessDriverPack -UpdateModuleCatalog
 
-# Import OSD Module
-Import-Module OSD -Force -ErrorAction Stop
-
 # Cloud Catalogs
 Get-DellSystemCatalog -UpdateModuleCatalog
 Get-HPPlatformCatalog -UpdateModuleCatalog
