@@ -4,13 +4,13 @@
 
 @{
     RootModule              = 'OSD.psm1'
-    ModuleVersion           = '24.4.1.1'
+    ModuleVersion           = '24.4.9.1'
     CompatiblePSEditions    = @('Desktop')
     GUID                    = '9fe5b9b6-0224-4d87-9018-a8978529f6f5'
     Author                  = 'David Segura . Gary Blok . Jérôme Bezet-Torres . Damien Van Robaeys . Mike Marable . Akos Bakos'
     CompanyName             = 'OSD Community'
     Copyright               = '(c) 2024 OSDeploy'
-    Description             = '2024 April Fools Update'
+    Description             = '2024 April Patch Tuesday'
     PowerShellVersion       = '5.1'
     FormatsToProcess        = @(
         '.\Format\MsUpCat.Format.ps1xml'
