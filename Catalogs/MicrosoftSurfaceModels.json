@@ -240,6 +240,18 @@
         "PackageID": "104679"
     },
     {
+        "Name":  "Surface Laptop 6 for Business 13",
+        "Model":  "Surface Laptop 6",
+        "Product":  "Surface_Laptop_6_for_Business_2033",
+        "PackageID": "105946"
+    },
+    {
+        "Name":  "Surface Laptop 6 for Business 15",
+        "Model":  "Surface Laptop 6",
+        "Product":  "Surface_Laptop_6_for_Business_2035",
+        "PackageID": "105946"
+    },
+    {
         "Name":  "Surface Laptop Go",
         "Model":  "Surface Laptop Go",
         "Product":  "Surface_Laptop_Go_1943",
@@ -364,6 +376,12 @@
         "Model":  "Surface Pro 9",
         "Product":  "Surface_Pro_9_for_Business_2038",
         "PackageID": "104680"
+    },
+    {
+        "Name":  "Surface Pro 10 for Business",
+        "Model":  "Surface Pro 10",
+        "Product":  "Surface_Pro_10_for_Business_2079",
+        "PackageID": "105947"
     },
     {
         "Name":  "Surface Studio",
