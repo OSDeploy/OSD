@@ -23,7 +23,10 @@ function Initialize-OSDCloudStartnet {
     [CmdletBinding()]
     param (
         [System.Management.Automation.SwitchParameter]
-        $WirelessConnect
+        $WirelessConnect,
+
+        [System.Management.Automation.SwitchParameter]
+        $WifiProfile
     )
 
     # Make sure we are in WinPE
@@ -53,7 +56,7 @@ function Initialize-OSDCloudStartnet {
         When Edit-OSDCloudWinPE is executed then these files should be copied to the mounted WinPE
         In WinPE, the scripts will exist in X:\OSDCloud\Config\Scripts\*
         #>
-        $Global:ScriptStartNet = Get-PSDrive -PSProvider FileSystem | Where-Object {$_.Name -ne 'C'} | ForEach-Object {
+        $Global:ScriptStartNet = Get-PSDrive -PSProvider FileSystem | Where-Object { $_.Name -ne 'C' } | ForEach-Object {
             Get-ChildItem "$($_.Root)OSDCloud\Config\Scripts\StartNet\" -Include "*.ps1" -File -Recurse -Force -ErrorAction Ignore
         }
         if ($Global:ScriptStartNet) {
@@ -68,7 +71,7 @@ function Initialize-OSDCloudStartnet {
 
         # Initialize Splash Screen  
         # Looks for SPLASH.JSON files in OSDCloud\Config, if found, it will run a splash screen.
-        $Global:SplashScreen = Get-PSDrive -PSProvider FileSystem | Where-Object {$_.Name -ne 'C'} | ForEach-Object {
+        $Global:SplashScreen = Get-PSDrive -PSProvider FileSystem | Where-Object { $_.Name -ne 'C' } | ForEach-Object {
             Get-ChildItem "$($_.Root)OSDCloud\Config\" -Include "SPLASH.JSON" -File -Recurse -Force -ErrorAction Ignore
         }
 
@@ -102,6 +105,14 @@ function Initialize-OSDCloudStartnet {
             Write-Host -ForegroundColor DarkGray "$($TimeSpan.ToString("mm':'ss")) Initialize Wireless Networking"
             if ($WirelessConnect) {
                 Start-Process PowerShell -ArgumentList 'Start-WinREWiFi -WirelessConnect' -Wait
+            }
+            elseif ($WifiProfile) {
+                $Global:WifiProfile = Get-PSDrive -PSProvider FileSystem | Where-Object { $_.Name -ne 'C' } | ForEach-Object {
+                    Get-ChildItem "$($_.Root)OSDCloud\Config\Scripts" -Include "WiFiProfile.xml" -File -Recurse -Force -ErrorAction Ignore
+                }
+
+                Write-Host -ForegroundColor DarkGray "$($TimeSpan.ToString("mm':'ss")) Using the WiFi Profile: $($Global:WifiProfile)"
+                Start-Process PowerShell -ArgumentList "Start-WinREWiFi -WifiProfile `"$Global:WifiProfile`"" -Wait
             }
             else {
                 Start-Process PowerShell Start-WinREWiFi -Wait
