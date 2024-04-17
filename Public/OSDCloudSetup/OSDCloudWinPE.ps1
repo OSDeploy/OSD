@@ -105,7 +105,24 @@
 
         [Switch]
         #Will leverage WirelessConnect.EXE instead of the Commandline Tools to connect to WiFi
-        $WirelessConnect
+        $WirelessConnect,
+
+        [ValidateScript( {
+            if (Test-Path -Path $_) {
+                $true
+            } else {
+                throw "$_ doesn't exists"
+            }
+            if ($_ -notmatch "\.xml$") {
+                throw "$_ isn't xml file"
+            }
+            if (!(([xml](Get-Content $_ -Raw)).WLANProfile.Name) -or (([xml](Get-Content $_ -Raw)).WLANProfile.MSM.security.sharedKey.protected) -ne "false") {
+                throw "$_ isn't valid Wi-Fi XML profile (is the password correctly in plaintext?). Use command like this, to create it: netsh wlan export profile name=`"MyWifiSSID`" key=clear folder=C:\Wifi"
+            }
+        })]
+        [System.IO.FileInfo]
+        #Imports and uses a WiFi Profile to connect to WiFi
+        $WifiProfile
     )
     #=================================================
     #	Start the Clock
@@ -231,10 +248,21 @@
     }
     #endregion
 
+    #region WifiProfile
+    if ($WifiProfile) {
+        Write-Host -ForegroundColor DarkGray "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Adding WiFi Profile $WifiProfile"
+        Copy-Item -Path $WifiProfile -Destination "$env:TEMP\WiFiProfile.xml" -Force | Out-Null
+        robocopy "$env:TEMP" "$MountPath\OSDCloud\Config\Scripts" WiFiProfile.xml /ndl /njh /njs /b /np /r:0 /w:0
+    }
+    #endregion
+
     #region Default Startnet.cmd
     $OSDVersion = (Get-Module -Name OSD -ListAvailable | Sort-Object Version -Descending | Select-Object -First 1).Version
     if ($WirelessConnect){
         $InitializeOSDCloudStartnetCommand = "Initialize-OSDCloudStartnet -WirelessConnect"
+    }
+    elseif ($WifiProfile) {
+        $InitializeOSDCloudStartnetCommand = "Initialize-OSDCloudStartnet -WifiProfile"
     }
     else {
         $InitializeOSDCloudStartnetCommand = "Initialize-OSDCloudStartnet"
