@@ -114,7 +114,8 @@ function Get-HPTPMDetermine{
     $SP94937 = Get-CimInstance  -Namespace "root\cimv2\security\MicrosoftTPM" -query "select * from win32_tpm where IsEnabled_InitialValue = 'True' and ((ManufacturerVersion like '7.62%') or (ManufacturerVersion like '7.63%') or (ManufacturerVersion like '7.83%') or (ManufacturerVersion like '6.43%') )"
     if (!($SP87753)){
         $TPM = Get-CimInstance -Namespace "root\cimv2\security\MicrosoftTPM" -ClassName win32_tpm
-        if ($TPM.SpecVersion -match "1.2" -and $TPM.ManufacturerVersion -eq "6.43"){
+        #Testing change below, from -eq to -lt.  If you manually downgrade using 94937 from 2.0 to 1.2, it sets the version to 6.43.X
+        if ($TPM.SpecVersion -match "1.2" -and $TPM.ManufacturerVersion -lt "6.43"){
             $SP87753 = 'SP87753'
         }
     }
