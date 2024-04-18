@@ -479,7 +479,7 @@ if ($env:SystemDrive -eq 'X:') {
                 Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Waiting for a connection $text"
                 Start-Sleep -Seconds 15
             
-                $i = 30
+                $i = 120
                 while ((((Get-CimInstance -ClassName Win32_NetworkAdapter | Where-Object { ($_.NetConnectionID -eq 'Wi-Fi') -or ($_.NetConnectionID -eq 'WiFi') -or ($_.NetConnectionID -eq 'WLAN') }).NetEnabled) -eq $false) -and $i -gt 0) {
                     --$i
                     Write-Host -ForegroundColor DarkGray "Waiting for Wi-Fi Connection ($i)"
