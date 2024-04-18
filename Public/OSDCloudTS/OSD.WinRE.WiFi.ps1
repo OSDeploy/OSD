@@ -77,7 +77,7 @@ if ($env:SystemDrive -eq 'X:') {
         $null = Netsh WLAN connect name="$SSID"
 
         # connection to network can take a while
-        $i = 30
+        $i = 120
         while (!(Test-WebConnection -Uri 'google.com') -and $i -gt 0) { --$i; "Waiting for Internet connection ($i)" ; Start-Sleep -Seconds 1 }
             
         if (Test-WebConnection -Uri 'google.com') {
