@@ -114,7 +114,8 @@ function Get-HPTPMDetermine{
     $SP94937 = Get-CimInstance  -Namespace "root\cimv2\security\MicrosoftTPM" -query "select * from win32_tpm where IsEnabled_InitialValue = 'True' and ((ManufacturerVersion like '7.62%') or (ManufacturerVersion like '7.63%') or (ManufacturerVersion like '7.83%') or (ManufacturerVersion like '6.43%') )"
     if (!($SP87753)){
         $TPM = Get-CimInstance -Namespace "root\cimv2\security\MicrosoftTPM" -ClassName win32_tpm
-        if ($TPM.SpecVersion -match "1.2" -and $TPM.ManufacturerVersion -eq "6.43"){
+        #Testing change below, from -eq to -lt.  If you manually downgrade using 94937 from 2.0 to 1.2, it sets the version to 6.43.X
+        if ($TPM.SpecVersion -match "1.2" -and $TPM.ManufacturerVersion -lt "6.43"){
             $SP87753 = 'SP87753'
         }
     }
@@ -145,6 +146,39 @@ function Invoke-HPTPMDownload { #Used when you want to manually download and tes
             }
         }
     else {Write-Host "No TPM Softpaq to Download"}
+}
+
+function Invoke-HPTPMDowngrade { 
+    [CmdletBinding()]
+    param ($WorkingFolder)
+    Install-ModuleHPCMSL
+    Import-Module -Name HPCMSL -Force
+    $TPMUpdate = 'SP94937'    
+    if (!(($TPMUpdate -eq $false) -or ($TPMUpdate -eq "False")))
+        {
+        if ((!($WorkingFolder))-or ($null -eq $WorkingFolder)){$WorkingFolder = "$env:TEMP\TPM"}
+        if (!(Test-Path -Path $WorkingFolder)){New-Item -Path $WorkingFolder -ItemType Directory -Force |Out-Null}
+        $UpdatePath = "$WorkingFolder\$TPMUpdate.exe"
+        $extractPath = "$WorkingFolder\$TPMUpdate"
+        Write-Host "Starting downlaod & Install of TPM Update $TPMUpdate"
+        Get-Softpaq -Number $TPMUpdate -SaveAs $UpdatePath -Overwrite yes
+        if (!(Test-Path -Path $UpdatePath)){Throw "Failed to Download TPM Update"}
+        Start-Process -FilePath $UpdatePath -ArgumentList "/s /e /f $extractPath" -Wait
+        if (!(Test-Path -Path $UpdatePath)){Throw "Failed to Extract TPM Update"}
+        else {
+            Write-Host "TPM Downloaded to $extractPath"
+            }
+        }
+    else {Write-Host "No TPM Softpaq to Download"}
+    if ($extractPath){
+        Set-HPBIOSSetting -SettingName 'Virtualization Technology (VTx)' -Value 'Disable'
+        $spec = '1.2'
+        $Process = "$extractPath\TPMConfig64.exe"
+        $TPMArg = "-s -a$spec -l$($LogFolder)\TPMConfig.log"
+        Write-Host -ForegroundColor Green "Running Command: Start-Process -FilePath $Process -ArgumentList $TPMArg -PassThru -Wait"
+        $TPMUpdate = Start-Process -FilePath $Process -ArgumentList $TPMArg -PassThru -Wait
+        write-output "Exit Code: $($TPMUpdate.exitcode)"
+    }
 }
 function Invoke-HPTPMEXEDownload { #This will download just the TPM Softpaq needed and place in C:\OSDCloud\HP\TPM
     Set-HPBIOSSetting -SettingName 'Virtualization Technology (VTx)' -Value 'Disable'

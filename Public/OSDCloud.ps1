@@ -47,6 +47,7 @@
             AzStorageContext = $Global:AzStorageContext
             BuildName = 'OSDCloud'
             ClearDiskConfirm = [bool]$true
+            CheckSHA1 = $false
             Debug = $false
             DevMode = $false
             DownloadDirectory = $null
@@ -74,7 +75,9 @@
             ImageFileName = $null
             ImageFileSource = $null
             ImageFileDestination = $null
+            ImageFileDestinationSHA1 = $null
             ImageFileUrl = $null
+            ImageFileSHA1 = $null
             IsOnBattery = $(Get-OSDGather -Property IsOnBattery)
             IsTest = ($env:SystemDrive -ne 'X:')
             IsVirtualMachine = $(Test-IsVM)
@@ -987,7 +990,26 @@
             }
         }
         #endregion
-        
+        #region CheckSHA1
+        if ($Global.OSDCloud.CheckSHA1 -eq $true){
+            if (($Global:OSDCloud.ImageFileDestination) -and ($Global:OSDCloud.ImageFileDestination.FullName)){
+                $Global:OSDCloud.ImageFileDestinationSHA1 = (Get-FileHash -Path $Global:OSDCloud.ImageFileDestination.FullName -Algorithm SHA1).Hash
+                $Global:OSDCloud.ImageFileSHA1 = (Get-OSDCloudOperatingSystems | Where-Object {$_.FileName -eq $Global:OSDCloud.ImageFileName}).SHA1
+                if ($Global:OSDCloud.ImageFileDestinationSHA1 -ne $Global:OSDCloud.ImageFileSHA1){
+                    Write-Warning "SHA1 Mismatch"
+                    Write-Warning "Downloaded ESD SHA1: $($Global:OSDCloud.ImageFileDestinationSHA1)"
+                    Write-Warning "Catalog ESD SHA1: $($Global:OSDCloud.ImageFileSHA1)"
+                    Write-Warning "Press Ctrl+C to exit"
+                    Start-Sleep -Seconds 86400
+                }
+                else {
+                    Write-Host -ForegroundColor Green "SHA1 Match"
+                    Write-Host -ForegroundColor DarkGray " Catalog ESD SHA1:    $(($Global:OSDCloud.ImageFileSHA1).ToUpper())"
+                    Write-Host -ForegroundColor DarkGray " Downloaded ESD SHA1: $($Global:OSDCloud.ImageFileDestinationSHA1)"
+                }
+            }
+        }
+        #endregion
         #region Global:OSDCloud.ImageFileDestination
         if (-not ($Global:OSDCloud.ImageFileDestination)) {
             Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) OSDCloud Failed"
@@ -1473,6 +1495,11 @@
                     Save-MsUpCatDriver -DestinationDirectory $DestinationDirectory -PNPClass 'SCSIAdapter'
                 }
             }
+        }
+        if ((Test-DISMFromOSDCloudUSB) -eq $true){
+            Write-DarkGrayHost "Found expanded Driver Pack files on OSDCloudUSB, will DISM them into the Offline OS directly"
+            #Found Expanded Driver Package on OSDCloudUSB, will DISM Directly from that
+            Start-DISMFromOSDCloudUSB
         }
     }
     #endregion

@@ -126,7 +126,7 @@ Accept wildcard characters: False
 ```
 
 ### -ARM64
-Uses Windows 10 WinRE.wim instead of the ADK Boot.wim
+Uses ARM64 instead of AMD64
 
 ```yaml
 Type: SwitchParameter
