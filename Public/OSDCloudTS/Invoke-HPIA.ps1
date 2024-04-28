@@ -306,7 +306,8 @@ Grabs the output from a recent run of HPIA and parses the XML to find recommenda
         [ValidateSet("All", "BIOS", "Drivers", "Software", "Firmware", "Accessories","BIOS,Drivers")]
         $Category = "Drivers",
         [Parameter(Mandatory=$false)]
-        $ReportsFolder = "$env:systemdrive\ProgramData\HP\HPIA"
+        $ReportsFolder = "$env:systemdrive\ProgramData\HP\HPIA",
+	$CMTraceLog = "$env:systemdrive\ProgramData\HP\Logs\HPIACustomLog.log"
         )
     $LatestReportFolder = (Get-ChildItem -Path $ReportsFolder | Where-Object {$_.Attributes -match 'Directory'} | Select-Object -Last 1).FullName
     try {
@@ -414,8 +415,8 @@ Grabs the JSON output from a recent run of HPIA to see what was installed and Ex
 [CmdletBinding()]
     Param (
         [Parameter(Mandatory=$false)]
-        $ReportsFolder = "$env:systemdrive\ProgramData\HP\HPIA"
-
+        $ReportsFolder = "$env:systemdrive\ProgramData\HP\HPIA",
+	$CMTraceLog = "$env:systemdrive\ProgramData\HP\Logs\HPIACustomLog.log"
         )
     try 
     {
