@@ -314,7 +314,7 @@ Grabs the output from a recent run of HPIA and parses the XML to find recommenda
         If ($XMLFile){
             Write-Output "Report located at $($XMLFile.FullName)"
             try {
-                [xml]$XML = Get-Content -Path $XMLFile.FullName -ErrorAction Stop
+                [xml]$XML = Get-Content -Path "$($XMLFile.FullName)" -ErrorAction Stop
                 
                 if ($Category -eq "BIOS" -or $Category -eq "All" -or $Category -eq "BIOS,Drivers"){
                     Write-CMTraceLog -LogFile $CMTraceLog -Message "Checking BIOS Recommendations" -Component "Report"
