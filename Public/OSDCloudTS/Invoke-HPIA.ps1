@@ -448,7 +448,7 @@ Grabs the JSON output from a recent run of HPIA to see what was installed and Ex
             Write-CMTraceLog -LogFile $CMTraceLog -Message "JSON located at $($JSONFile.FullName)" -Component "Report"
             try 
             {
-            $JSON = Get-Content -Path $JSONFile.FullName  -ErrorAction Stop | ConvertFrom-Json
+            $JSON = Get-Content -Path "$($JSONFile.FullName)"  -ErrorAction Stop | ConvertFrom-Json
             Write-CMTraceLog -LogFile $CMTraceLog -Message "HPIAOpertaion: $($JSON.HPIA.HPIAOperation)" -Component "Report"
             Write-Host " HPIAOpertaion: $($JSON.HPIA.HPIAOperation)" -ForegroundColor Gray
             Write-CMTraceLog -LogFile $CMTraceLog -Message "ExitCode: $($JSON.HPIA.ExitCode)" -Component "Report"
