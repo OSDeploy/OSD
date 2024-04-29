@@ -408,27 +408,7 @@ Grabs the output from a recent run of HPIA and parses the XML to find recommenda
         Write-CMTraceLog -LogFile $CMTraceLog -Message "Failed to find an XML report: $($_.Exception.Message)" -Component "Report"
     }
 }
-Function Get-HPIAJSONResult {
-<#  
-Grabs the JSON output from a recent run of HPIA to see what was installed and Exit Codes per item
-#>
-[CmdletBinding()]
-    Param (
-        [Parameter(Mandatory=$false)]
-        $ReportsFolder = "$env:systemdrive\ProgramData\HP\HPIA",
-	$CMTraceLog = "$env:systemdrive\ProgramData\HP\Logs\HPIACustomLog.log"
-        )
-    try 
-    {
-    $LatestReportFolder = (Get-ChildItem -Path $ReportsFolder | Where-Object {$_.Attributes -match 'Directory'} | Select-Object -Last 1).FullName
-    $JSONFile = Get-ChildItem -Path $LatestReportFolder -Recurse -Include *.JSON -ErrorAction Stop
 
-    }
-    catch
-    {
-    Write-CMTraceLog -LogFile $CMTraceLog -Message "NO JSON report." -Component "Report" -Type 1
-    }
-}
 Function Get-HPIAJSONResult {
 <#  
 Grabs the JSON output from a recent run of HPIA to see what was installed and Exit Codes per item
