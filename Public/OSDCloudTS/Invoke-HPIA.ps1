@@ -306,7 +306,8 @@ Grabs the output from a recent run of HPIA and parses the XML to find recommenda
         [ValidateSet("All", "BIOS", "Drivers", "Software", "Firmware", "Accessories","BIOS,Drivers")]
         $Category = "Drivers",
         [Parameter(Mandatory=$false)]
-        $ReportsFolder = "$env:systemdrive\ProgramData\HP\HPIA"
+        $ReportsFolder = "$env:systemdrive\ProgramData\HP\HPIA",
+	$CMTraceLog = "$env:systemdrive\ProgramData\HP\Logs\HPIACustomLog.log"
         )
     $LatestReportFolder = (Get-ChildItem -Path $ReportsFolder | Where-Object {$_.Attributes -match 'Directory'} | Select-Object -Last 1).FullName
     try {
@@ -314,7 +315,7 @@ Grabs the output from a recent run of HPIA and parses the XML to find recommenda
         If ($XMLFile){
             Write-Output "Report located at $($XMLFile.FullName)"
             try {
-                [xml]$XML = Get-Content -Path $XMLFile.FullName -ErrorAction Stop
+                [xml]$XML = Get-Content -Path "$($XMLFile.FullName)" -ErrorAction Stop
                 
                 if ($Category -eq "BIOS" -or $Category -eq "All" -or $Category -eq "BIOS,Drivers"){
                     Write-CMTraceLog -LogFile $CMTraceLog -Message "Checking BIOS Recommendations" -Component "Report"
@@ -407,27 +408,7 @@ Grabs the output from a recent run of HPIA and parses the XML to find recommenda
         Write-CMTraceLog -LogFile $CMTraceLog -Message "Failed to find an XML report: $($_.Exception.Message)" -Component "Report"
     }
 }
-Function Get-HPIAJSONResult {
-<#  
-Grabs the JSON output from a recent run of HPIA to see what was installed and Exit Codes per item
-#>
-[CmdletBinding()]
-    Param (
-        [Parameter(Mandatory=$false)]
-        $ReportsFolder = "$env:systemdrive\ProgramData\HP\HPIA"
 
-        )
-    try 
-    {
-    $LatestReportFolder = (Get-ChildItem -Path $ReportsFolder | Where-Object {$_.Attributes -match 'Directory'} | Select-Object -Last 1).FullName
-    $JSONFile = Get-ChildItem -Path $LatestReportFolder -Recurse -Include *.JSON -ErrorAction Stop
-
-    }
-    catch
-    {
-    Write-CMTraceLog -LogFile $CMTraceLog -Message "NO JSON report." -Component "Report" -Type 1
-    }
-}
 Function Get-HPIAJSONResult {
 <#  
 Grabs the JSON output from a recent run of HPIA to see what was installed and Exit Codes per item
@@ -448,7 +429,7 @@ Grabs the JSON output from a recent run of HPIA to see what was installed and Ex
             Write-CMTraceLog -LogFile $CMTraceLog -Message "JSON located at $($JSONFile.FullName)" -Component "Report"
             try 
             {
-            $JSON = Get-Content -Path $JSONFile.FullName  -ErrorAction Stop | ConvertFrom-Json
+            $JSON = Get-Content -Path "$($JSONFile.FullName)"  -ErrorAction Stop | ConvertFrom-Json
             Write-CMTraceLog -LogFile $CMTraceLog -Message "HPIAOpertaion: $($JSON.HPIA.HPIAOperation)" -Component "Report"
             Write-Host " HPIAOpertaion: $($JSON.HPIA.HPIAOperation)" -ForegroundColor Gray
             Write-CMTraceLog -LogFile $CMTraceLog -Message "ExitCode: $($JSON.HPIA.ExitCode)" -Component "Report"
