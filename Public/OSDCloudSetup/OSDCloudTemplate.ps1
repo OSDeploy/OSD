@@ -578,6 +578,9 @@ Windows Registry Editor Version 5.00
             Try {Add-WindowsPackage -Path $MountPath -PackagePath $SourceFile -LogPath "$CurrentLog" | Out-Null}
             Catch {Write-Host -ForegroundColor Red $CurrentLog}
         }
+        else {
+            Write-Warning "Could not find $SourceFile"
+        }
     }
 
     $SourceFile = "$WinPEOCs\$Lang\lp.cab"
