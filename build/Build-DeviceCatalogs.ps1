@@ -4,17 +4,17 @@
 Import-Module OSD -Force -ErrorAction Stop
 
 # HP Device Catalogs
-#Get-HPPlatformCatalog -UpdateModuleCatalog
-#Get-HPSystemCatalog -UpdateModuleCatalog
-#Update-HPDriverPackCatalog -UpdateModuleCatalog -Verify
+Get-HPPlatformCatalog -UpdateModuleCatalog
+Get-HPSystemCatalog -UpdateModuleCatalog
+Update-HPDriverPackCatalog -UpdateModuleCatalog -Verify
 
 # Dell Device Catalogs
-#Get-DellSystemCatalog -UpdateModuleCatalog
-#Update-DellDriverPackCatalog -UpdateModuleCatalog -Verify
+Get-DellSystemCatalog -UpdateModuleCatalog
+Update-DellDriverPackCatalog -UpdateModuleCatalog -Verify
 
 # Lenovo Device Catalogs
-#Get-LenovoBiosCatalog -UpdateModuleCatalog
-#Update-LenovoDriverPackCatalog -UpdateModuleCatalog -Verify
+Get-LenovoBiosCatalog -UpdateModuleCatalog
+Update-LenovoDriverPackCatalog -UpdateModuleCatalog -Verify
 
 # Microsoft Surface Device Catalogs
 Update-MicrosoftDriverPackCatalog -UpdateModuleCatalog -Verify

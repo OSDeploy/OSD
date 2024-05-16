@@ -13,7 +13,7 @@ Initializes the OSDCloud startnet environment.
 ## SYNTAX
 
 ```
-Initialize-OSDCloudStartnet [-WirelessConnect] [<CommonParameters>]
+Initialize-OSDCloudStartnet [-WirelessConnect] [-WifiProfile] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -40,6 +40,21 @@ Initializes the OSDCloud startnet environment and attempts to connect to a wirel
 ### -WirelessConnect
 Specifies whether to connect to a wireless network.
 If this switch is specified, the function will attempt to connect to a wireless network using the Start-WinREWiFi function.
+
+```yaml
+Type: SwitchParameter
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: False
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -WifiProfile
+{{ Fill WifiProfile Description }}
 
 ```yaml
 Type: SwitchParameter

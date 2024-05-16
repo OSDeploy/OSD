@@ -13,7 +13,8 @@ schema: 2.0.0
 ## SYNTAX
 
 ```
-Get-HPIAXMLResult [[-Category] <Object>] [[-ReportsFolder] <Object>] [<CommonParameters>]
+Get-HPIAXMLResult [[-Category] <Object>] [[-ReportsFolder] <Object>] [-CMTraceLog <Object>]
+ [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -56,6 +57,21 @@ Aliases:
 
 Required: False
 Position: 1
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -CMTraceLog
+{{ Fill CMTraceLog Description }}
+
+```yaml
+Type: Object
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
