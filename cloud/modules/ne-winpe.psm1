@@ -85,7 +85,7 @@ function osdcloud-InstallWinGet {
         }
     }
 
-    if (Get-AppxPackage -Name 'Microsoft.DesktopAppInstaller' -ErrorAction SilentlyContinue | Where-Object { $_.Version -ge '1.21.2701.0' }) {
+    if (Get-AppxPackage -Name 'Microsoft.DesktopAppInstaller' -ErrorAction SilentlyContinue | Where-Object { $_.Version -ge '1.22.11261.0' }) {
         Write-Host -ForegroundColor Green '[+] WinGet is current'
     }
     else {
@@ -106,12 +106,12 @@ function osdcloud-InstallWinGet {
         Write-Host -ForegroundColor Yellow '[-] Downloading Microsoft.VCLibs.x64.14.00.Desktop.appx'
         Invoke-WebRequest -Uri https://aka.ms/Microsoft.VCLibs.x64.14.00.Desktop.appx -OutFile Microsoft.VCLibs.x64.14.00.Desktop.appx
     
-        Write-Host -ForegroundColor Yellow '[-] Downloading Microsoft.UI.Xaml.2.7.x64.appx'
-        Invoke-WebRequest -Uri https://github.com/microsoft/microsoft-ui-xaml/releases/download/v2.7.3/Microsoft.UI.Xaml.2.7.x64.appx -OutFile Microsoft.UI.Xaml.2.7.x64.appx
+        Write-Host -ForegroundColor Yellow '[-] Downloading Microsoft.UI.Xaml.2.8.x64.appx'
+        Invoke-WebRequest -Uri https://github.com/microsoft/microsoft-ui-xaml/releases/download/v2.7.3/Microsoft.UI.Xaml.2.8.x64.appx -OutFile Microsoft.UI.Xaml.2.8.x64.appx
 
         Write-Host -ForegroundColor Yellow '[-] Installing WinGet and its dependencies'
         Add-AppxPackage Microsoft.VCLibs.x64.14.00.Desktop.appx
-        Add-AppxPackage Microsoft.UI.Xaml.2.7.x64.appx
+        Add-AppxPackage Microsoft.UI.Xaml.2.8.x64.appx
         Add-AppxPackage Microsoft.DesktopAppInstaller_8wekyb3d8bbwe.msixbundle
     }
 }
