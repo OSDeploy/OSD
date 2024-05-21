@@ -8,11 +8,11 @@ function Install-LenovoSystemUpdater {
 
     # Wait for the BITS transfer job to complete
     while ($bitsJob.JobState -eq "Transferring") {
-        Start-Sleep -Seconds 1
+        Start-Sleep -Seconds 2
     }
 
     # Check if the transfer was successful
-    if ($bitsJob.JobState -eq "Transferred") {
+    if (Test-Path -Path $tempFilePath) {
         # Start the installation process
         Write-Host -ForegroundColor Green "Installation file downloaded successfully. Starting installation..."
         $ArgumentList = "/VERYSILENT /NORESTART"
