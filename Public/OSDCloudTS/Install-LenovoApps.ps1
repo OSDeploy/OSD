@@ -27,3 +27,21 @@ function Install-LenovoSystemUpdater {
     }
 }
 
+function Invoke-LenovoSystemUpdater
+{
+    # Check if Lenovo System Updater is already installed
+    if (Test-Path "C:\Program Files (x86)\Lenovo\System Update\TVSU.exe") {
+        Write-Host "Lenovo System Updater is already installed."
+    } else {
+        Write-Host "Lenovo System Updater is not installed. Installing..."
+        Install-LenovoSystemUpdater
+    }
+    $ArgList = '/CM -search A -action INSTALL -includerebootpackages 3 -nolicense -exporttowmi -noreboot -noicon'
+    $Updater = Start-Process -FilePath "C:\Program Files (x86)\Lenovo\System Update\TVSU.exe" -ArgumentList $ArgList  -Wait -PassThru
+
+    if ($Updater.ExitCode -eq 0) {
+        Write-Host -ForegroundColor Green "Lenovo System Updater completed successfully."
+    } else {
+        Write-Host -ForegroundColor Red "Lenovo System Updater failed with exit code $($Updater.ExitCode)."
+    }
+}
