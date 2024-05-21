@@ -295,7 +295,13 @@ if ($Manufacturer -match "Microsoft"){
 if ($HPEnterprise){
     Install-ModuleHPCMSL
     $TPM = get-HPTPMDetermine
-    $BIOS = Get-HPBIOSUpdates -Check
+    try {
+        $BIOS = Get-HPBIOSUpdates -Check -ErrorAction SilentlyContinue
+    }
+    catch {
+        $BIOS = 'Skip'
+    }
+    
     $formMainWindowControlManufacturerFunction.Header = "HP Functions"
     $formMainWindowControlManufacturerFunction.Visibility = 'Visible'
 
@@ -310,27 +316,32 @@ if ($HPEnterprise){
     if ($TPM -eq $false){
         $formMainWindowControlOption_Name_5.Header = "HP TPM Firmware Already Current"
         $formMainWindowControlOption_Name_5.IsEnabled = $false
-        }
-    else
-        {
+    }
+    else{
         $formMainWindowControlOption_Name_5.Visibility = 'Visible'
         $formMainWindowControlOption_Name_5.Header = "HP Update TPM Firmware: $TPM"
         $formMainWindowControlOption_Name_5.IsChecked = $Global:OSDCloudGUI.HPTPMUpdate 
-        }
+    }
     if ($BIOS -eq $true){
         $CurrentVer = Get-HPBIOSVersion
         $formMainWindowControlOption_Name_6.Header = "HP System Firmware already Current: $CurrentVer"
         $formMainWindowControlOption_Name_6.IsEnabled = $false
-        }
-    else
-        {
+    }
+    elseif ($BIOS -eq $false){
         $LatestVer = (Get-HPBIOSUpdates -Latest).ver
         $CurrentVer = Get-HPBIOSVersion
         $formMainWindowControlOption_Name_6.Visibility = 'Visible'
         $formMainWindowControlOption_Name_6.Header = "HP Update System Firmwware from $CurrentVer to $LatestVer"
         $formMainWindowControlOption_Name_6.IsChecked = $Global:OSDCloudGUI.HPBIOSUpdate 
-        
-        }
+    }
+    elseif ($BIOS -eq "Skip"){
+        $formMainWindowControlOption_Name_6.Header = "Unable to Determine HP BIOS Info, Skipping Firmware Update"
+        $formMainWindowControlOption_Name_6.IsEnabled = $false
+    }
+    else {
+        $formMainWindowControlOption_Name_6.Header = "Unable to Determine HP BIOS Info"
+        $formMainWindowControlOption_Name_6.IsEnabled = $false   
+    }
     # When HPIA All is selected, unselect Firmware & Software
     
     #If HPIA All is selected, deselect other options
