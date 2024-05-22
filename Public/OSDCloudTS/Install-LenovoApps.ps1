@@ -87,6 +87,7 @@ function Install-LenovoVantage {
     Invoke-Expression -command "$tempExtractPath\VantageService\Install-VantageService.ps1"
 
     #Lenovo Vantage Batch File
+    write-host -ForegroundColor Cyan " Installing Lenovo Vantage...batch file..."
     $ArgumentList = "/c $($tempExtractPath)\setup-commercial-vantage.bat"
     $InstallProcess = Start-Process -FilePath "cmd.exe" -ArgumentList $ArgumentList -Wait -PassThru
     if ($InstallProcess.ExitCode -eq 0) {
