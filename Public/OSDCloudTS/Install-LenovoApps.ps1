@@ -132,7 +132,7 @@ function Set-LenovoVantage {
     }
     
     # Set the registry values
-    if ($null -ne $AcceptEULAAutomatically) {
+    if ($AcceptEULAAutomatically) {
         if ($AcceptEULAAutomatically -eq $true){
             Write-Host "Setting AcceptEULAAutomatically to 1"
             New-ItemProperty -Path $RegistryPath -Name "AcceptEULAAutomatically" -Value 1 -PropertyType dword -Force | Out-Null
@@ -143,7 +143,7 @@ function Set-LenovoVantage {
         }
     }
 
-    if ($null -ne $WarrantyInfoHide) {
+    if ($WarrantyInfoHide) {
         if ($WarrantyInfoHide -eq $true){
             Write-Host "Setting WarrantyInfoHide to 1"
             New-ItemProperty -Path $RegistryPath -Name "feature.warranty" -Value 1 -PropertyType dword -Force | Out-Null
@@ -153,7 +153,7 @@ function Set-LenovoVantage {
             New-ItemProperty -Path $RegistryPath -Name "feature.warranty" -Value 0 -PropertyType dword -Force | Out-Null
         }
     }
-    if ($null -ne $WarrantyWriteWMI) {
+    if ($WarrantyWriteWMI) {
         if ($WarrantyWriteWMI -eq $true){
             Write-Host "Setting WarrantyWriteWMI to 1"
             New-ItemProperty -Path $RegistryPath -Name "wmi.warranty" -Value 1 -PropertyType dword -Force | Out-Null
@@ -164,7 +164,7 @@ function Set-LenovoVantage {
         }
     }
 
-    if ($null -ne $MyDevicePageHide) {
+    if ($MyDevicePageHide) {
         if ($MyDevicePageHide -eq $true){
             Write-Host "Setting MyDevicePageHide to 1"
             New-ItemProperty -Path $RegistryPath -Name "page.myDevice" -Value 1 -PropertyType dword -Force | Out-Null
@@ -175,7 +175,7 @@ function Set-LenovoVantage {
         }
     }
 
-    if ($null -ne $WiFiSecurityPageHide) {
+    if ($WiFiSecurityPageHide) {
         if ($WiFiSecurityPageHide -eq $true){
             Write-Host "Setting WiFiSecurityPageHide to 1"
             New-ItemProperty -Path $RegistryPath -Name "page.wifiSecurity" -Value 1 -PropertyType dword -Force | Out-Null
@@ -186,7 +186,7 @@ function Set-LenovoVantage {
         }
     }
 
-    if ($null -ne $HardwareScanPageHide) {
+    if ($HardwareScanPageHide) {
         if ($HardwareScanPageHide -eq $true){
             Write-Host "Setting HardwareScanPageHide to 1"
             New-ItemProperty -Path $RegistryPath -Name "page.hardwareScan" -Value 1 -PropertyType dword -Force | Out-Null
@@ -197,7 +197,7 @@ function Set-LenovoVantage {
         }
     }
 
-    if ($null -ne $GiveFeedbackPageHide) {
+    if ($GiveFeedbackPageHide) {
         if ($GiveFeedbackPageHide -eq $true){
             Write-Host "Setting GiveFeedbackPageHide to 1"
             New-ItemProperty -Path $RegistryPath -Name "feature.giveFeedback" -Value 1 -PropertyType dword -Force | Out-Null
