@@ -52,7 +52,7 @@ function Install-LenovoVantage {
     $tempFilePath = "C:\Windows\Temp\lenovo_vantage.zip"
     $tempExtractPath = "C:\Windows\Temp\LenovoVantage"
     # Create a new BITS transfer job
-    $bitsJob = Start-BitsTransfer -Source $url -Destination $tempFilePath
+    $bitsJob = Start-BitsTransfer -Source $url -Destination $tempFilePath -DisplayName "Downloading to $tempFilePath"
 
     # Wait for the BITS transfer job to complete
     while ($bitsJob.JobState -eq "Transferring") {
@@ -63,6 +63,7 @@ function Install-LenovoVantage {
     if (Test-Path -Path $tempFilePath) {
         # Start the installation process
         Write-Host -ForegroundColor Green "Installation file downloaded successfully. Starting installation..."
+        Write-Host -ForegroundColor Cyan " Extracting $tempFilePath to $tempExtractPath"
         Expand-Archive -Path $tempFilePath -Destination $tempExtractPath
 
     } else {
@@ -70,16 +71,18 @@ function Install-LenovoVantage {
     }
     #Lenovo System Interface Foundation (LSIF)
     if (Test-Path -Path "$tempExtractPath\System-Interface-Foundation-Update-64.exe"){
+        Write-Host -ForegroundColor Cyan " Installing Lenovo System Interface Foundation..."
         $ArgumentList = "/VERYSILENT /NORESTART"
         $InstallProcess = Start-Process -FilePath "$tempExtractPath\System-Interface-Foundation-Update-64.exe" -ArgumentList $ArgumentList -Wait -PassThru
         if ($InstallProcess.ExitCode -eq 0) {
-            Write-Host -ForegroundColor Green "Installation completed successfully."
+            Write-Host -ForegroundColor Cyan "  Installation completed successfully."
         } else {
-            Write-Host -ForegroundColor Red "Installation failed with exit code $($InstallProcess.ExitCode)."
+            Write-Host -ForegroundColor Red "  Installation failed with exit code $($InstallProcess.ExitCode)."
         }
     } else {
-        Write-Host "Failed to find $tempExtractPath\System-Interface-Foundation-Update-64.exe"
+        Write-Host -ForegroundColor red " Failed to find $tempExtractPath\System-Interface-Foundation-Update-64.exe"
     }
     #Lenovo Vantage Service
+    Write-Host -ForegroundColor Cyan " Installing Lenovo Vantage Service..."
     Invoke-Expression -command "$tempExtractPath\VantageService\Install-VantageService.ps1"
 }
