@@ -99,13 +99,20 @@ function Install-LenovoVantage {
 }
 function Set-LenovoVantage {
     param (
-        [bool]$AcceptEULAAutomatically = $true,
-        [bool]$WarrantyInfoHide,
-        [bool]$WarrantyWriteWMI,
-        [bool]$MyDevicePageHide,
-        [bool]$WiFiSecurityPageHide,
-        [bool]$HardwareScanPageHide,
-        [bool]$GiveFeedbackPageHide    
+        [ValidateSet('True','False')]
+        [string]$AcceptEULAAutomatically = 'True',
+        [ValidateSet('True','False')]
+        [string]$WarrantyInfoHide,
+        [ValidateSet('True','False')]
+        [string]$WarrantyWriteWMI,
+        [ValidateSet('True','False')]
+        [string]$MyDevicePageHide,
+        [ValidateSet('True','False')]
+        [string]$WiFiSecurityPageHide,
+        [ValidateSet('True','False')]
+        [string]$HardwareScanPageHide,
+        [ValidateSet('True','False')]
+        [string]$GiveFeedbackPageHide    
     )
 
     
