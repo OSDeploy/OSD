@@ -64,6 +64,7 @@ function Install-LenovoVantage {
         # Start the installation process
         Write-Host -ForegroundColor Green "Installation file downloaded successfully. Starting installation..."
         Write-Host -ForegroundColor Cyan " Extracting $tempFilePath to $tempExtractPath"
+        if (test-path -path $tempExtractPath) {Remove-Item -Path $tempExtractPath -Recurse -Force}
         Expand-Archive -Path $tempFilePath -Destination $tempExtractPath
 
     } else {
