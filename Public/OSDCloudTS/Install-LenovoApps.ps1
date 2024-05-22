@@ -49,7 +49,7 @@ function Invoke-LenovoSystemUpdater
 function Install-LenovoVantage {
     # Define the URL and temporary file path
     $url = "https://download.lenovo.com/pccbbs/thinkvantage_en/metroapps/Vantage/LenovoCommercialVantage_10.2401.29.0.zip"
-    $tempFilePath = "C:\Windows\Temp\lenovo_vantage.exe"
+    $tempFilePath = "C:\Windows\Temp\lenovo_vantage.zip"
     $tempExtractPath = "C:\Windows\Temp\LenovoVantage"
     # Create a new BITS transfer job
     $bitsJob = Start-BitsTransfer -Source $url -Destination $tempFilePath
