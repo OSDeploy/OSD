@@ -97,3 +97,94 @@ function Install-LenovoVantage {
         Write-Host -ForegroundColor Red "Lenovo Vantage failed with exit code $($InstallProcess.ExitCode)."
     }
 }
+function Set-LenovoVantage {
+    param (
+        [Parameter(Mandatory=$false)]
+        [switch]$AcceptEULAAutomatically,
+        [Parameter(Mandatory=$false)]
+        [switch]$WarrantyInfoHide,
+        [Parameter(Mandatory=$false)]
+        [switch]$WarrantyWriteWMI,
+        [Parameter(Mandatory=$false)]   
+        [switch]$MyDevicePageHide,
+        [Parameter(Mandatory=$false)]
+        [switch]$WiFiSecurityPageHide,
+        [Parameter(Mandatory=$false)]
+        [switch]$HardwareScanPageHide,
+        [Parameter(Mandatory=$false)]
+        [switch]$GiveFeedbackPageHide        
+    )
+
+    
+    $RegistryPath = "HKLM:\SOFTWARE\SOFTWARE\Policies\Lenovo\Commercial Vantage"
+    # Check if Lenovo Vantage is installed
+    if (Test-Path "C:\Program Files (x86)\Lenovo\VantageService") {
+        #Write-Host "Lenovo Vantage is already installed."
+    } else {
+        Write-Host "Lenovo Vantage is not installed. Installing..."
+        Install-LenovoVantage
+    }
+    if (Test-Path $RegistryPath) {
+        #Write-Host "Registry path already exists"
+    } else {
+        New-Item -Path $RegistryPath -Force | Out-Null
+    }
+    if ($AcceptEULAAutomatically) {
+        Write-Host "Setting AcceptEULAAutomatically to 1"
+        New-ItemProperty -Path $RegistryPath -Name "AcceptEULAAutomatically" -Value 1 -PropertyType dword -Force | Out-Null
+    }
+    else {
+        Write-Host "Setting AcceptEULAAutomatically to 0"
+        New-ItemProperty -Path $RegistryPath -Name "AcceptEULAAutomatically" -Value 0 -PropertyType dword -Force | Out-Null
+    }
+    if ($WarrantyInfoHide) {
+        Write-Host "Setting WarrantyInfoHide to 1"
+        New-ItemProperty -Path $RegistryPath -Name "feature.warranty" -Value 1 -PropertyType dword -Force | Out-Null
+    }
+    else {
+        Write-Host "Setting WarrantyInfoHide to 0"
+        New-ItemProperty -Path $RegistryPath -Name "feature.warranty" -Value 0 -PropertyType dword -Force | Out-Null
+    }
+    if ($WarrantyWriteWMI) {
+        Write-Host "Setting WarrantyWriteWMI to 1"
+        New-ItemProperty -Path $RegistryPath -Name "wmi.warranty" -Value 1 -PropertyType dword -Force | Out-Null
+    }
+    else {
+        Write-Host "Setting WarrantyWriteWMI to 0"
+        New-ItemProperty -Path $RegistryPath -Name "wmi.warranty" -Value 0 -PropertyType dword -Force | Out-Null
+    }
+    if ($MyDevicePageHide) {
+        Write-Host "Setting MyDevicePageHide to 1"
+        New-ItemProperty -Path $RegistryPath -Name "page.myDevice" -Value 1 -PropertyType dword -Force | Out-Null
+    }
+    else {
+        Write-Host "Setting MyDevicePageHide to 0"
+        New-ItemProperty -Path $RegistryPath -Name "page.myDevice" -Value 0 -PropertyType dword -Force | Out-Null
+    }
+    if ($WiFiSecurityPageHide) {
+        Write-Host "Setting WiFiSecurityPageHide to 1"
+        New-ItemProperty -Path $RegistryPath -Name "page.wifiSecurity" -Value 1 -PropertyType dword -Force | Out-Null
+    }
+    else {
+        Write-Host "Setting WiFiSecurityPageHide to 0"
+        New-ItemProperty -Path $RegistryPath -Name "page.wifiSecurity" -Value 0 -PropertyType dword -Force | Out-Null
+    }
+    if ($HardwareScanPageHide) {
+        Write-Host "Setting HardwareScanPageHide to 1"
+        New-ItemProperty -Path $RegistryPath -Name "page.hardwareScan" -Value 1 -PropertyType dword -Force | Out-Null
+    }
+    else {
+        Write-Host "Setting HardwareScanPageHide to 0"
+        New-ItemProperty -Path $RegistryPath -Name "page.hardwareScan" -Value 0 -PropertyType dword -Force | Out-Null
+    }
+    if ($GiveFeedbackPageHide) {
+        Write-Host "Setting GiveFeedbackPageHide to 1"
+        New-ItemProperty -Path $RegistryPath -Name "feature.giveFeedback" -Value 1 -PropertyType dword -Force | Out-Null
+    }
+    else {
+        Write-Host "Setting GiveFeedbackPageHide to 0"
+        New-ItemProperty -Path $RegistryPath -Name "feature.giveFeedback" -Value 0 -PropertyType dword -Force | Out-Null
+    }   
+
+
+}
