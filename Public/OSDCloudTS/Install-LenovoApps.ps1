@@ -99,20 +99,13 @@ function Install-LenovoVantage {
 }
 function Set-LenovoVantage {
     param (
-        [Parameter(Mandatory=$false)]
-        [switch]$AcceptEULAAutomatically,
-        [Parameter(Mandatory=$false)]
-        [switch]$WarrantyInfoHide,
-        [Parameter(Mandatory=$false)]
-        [switch]$WarrantyWriteWMI,
-        [Parameter(Mandatory=$false)]   
-        [switch]$MyDevicePageHide,
-        [Parameter(Mandatory=$false)]
-        [switch]$WiFiSecurityPageHide,
-        [Parameter(Mandatory=$false)]
-        [switch]$HardwareScanPageHide,
-        [Parameter(Mandatory=$false)]
-        [switch]$GiveFeedbackPageHide        
+        [bool]$AcceptEULAAutomatically = $true,
+        [bool]$WarrantyInfoHide,
+        [bool]$WarrantyWriteWMI,
+        [bool]$MyDevicePageHide,
+        [bool]$WiFiSecurityPageHide,
+        [bool]$HardwareScanPageHide,
+        [bool]$GiveFeedbackPageHide    
     )
 
     
@@ -124,67 +117,87 @@ function Set-LenovoVantage {
         Write-Host "Lenovo Vantage is not installed. Installing..."
         Install-LenovoVantage
     }
+    # Check if the registry path exists
     if (Test-Path $RegistryPath) {
         #Write-Host "Registry path already exists"
     } else {
         New-Item -Path $RegistryPath -Force | Out-Null
     }
+    
+    # Set the registry values
     if ($AcceptEULAAutomatically) {
-        Write-Host "Setting AcceptEULAAutomatically to 1"
-        New-ItemProperty -Path $RegistryPath -Name "AcceptEULAAutomatically" -Value 1 -PropertyType dword -Force | Out-Null
+        if ($AcceptEULAAutomatically -eq $true){
+            Write-Host "Setting AcceptEULAAutomatically to 1"
+            New-ItemProperty -Path $RegistryPath -Name "AcceptEULAAutomatically" -Value 1 -PropertyType dword -Force | Out-Null
+        }
+        else {
+            Write-Host "Setting AcceptEULAAutomatically to 0"
+            New-ItemProperty -Path $RegistryPath -Name "AcceptEULAAutomatically" -Value 0 -PropertyType dword -Force | Out-Null
+        }
     }
-    else {
-        Write-Host "Setting AcceptEULAAutomatically to 0"
-        New-ItemProperty -Path $RegistryPath -Name "AcceptEULAAutomatically" -Value 0 -PropertyType dword -Force | Out-Null
-    }
+
     if ($WarrantyInfoHide) {
-        Write-Host "Setting WarrantyInfoHide to 1"
-        New-ItemProperty -Path $RegistryPath -Name "feature.warranty" -Value 1 -PropertyType dword -Force | Out-Null
-    }
-    else {
-        Write-Host "Setting WarrantyInfoHide to 0"
-        New-ItemProperty -Path $RegistryPath -Name "feature.warranty" -Value 0 -PropertyType dword -Force | Out-Null
+        if ($WarrantyInfoHide -eq $true){
+            Write-Host "Setting WarrantyInfoHide to 1"
+            New-ItemProperty -Path $RegistryPath -Name "feature.warranty" -Value 1 -PropertyType dword -Force | Out-Null
+        }
+        else {
+            Write-Host "Setting WarrantyInfoHide to 0"
+            New-ItemProperty -Path $RegistryPath -Name "feature.warranty" -Value 0 -PropertyType dword -Force | Out-Null
+        }
     }
     if ($WarrantyWriteWMI) {
-        Write-Host "Setting WarrantyWriteWMI to 1"
-        New-ItemProperty -Path $RegistryPath -Name "wmi.warranty" -Value 1 -PropertyType dword -Force | Out-Null
+        if ($WarrantyWriteWMI -eq $true){
+            Write-Host "Setting WarrantyWriteWMI to 1"
+            New-ItemProperty -Path $RegistryPath -Name "wmi.warranty" -Value 1 -PropertyType dword -Force | Out-Null
+        }
+        else {
+            Write-Host "Setting WarrantyWriteWMI to 0"
+            New-ItemProperty -Path $RegistryPath -Name "wmi.warranty" -Value 0 -PropertyType dword -Force | Out-Null
+        }
     }
-    else {
-        Write-Host "Setting WarrantyWriteWMI to 0"
-        New-ItemProperty -Path $RegistryPath -Name "wmi.warranty" -Value 0 -PropertyType dword -Force | Out-Null
-    }
+
     if ($MyDevicePageHide) {
-        Write-Host "Setting MyDevicePageHide to 1"
-        New-ItemProperty -Path $RegistryPath -Name "page.myDevice" -Value 1 -PropertyType dword -Force | Out-Null
+        if ($MyDevicePageHide -eq $true){
+            Write-Host "Setting MyDevicePageHide to 1"
+            New-ItemProperty -Path $RegistryPath -Name "page.myDevice" -Value 1 -PropertyType dword -Force | Out-Null
+        }
+        else {
+            Write-Host "Setting MyDevicePageHide to 0"
+            New-ItemProperty -Path $RegistryPath -Name "page.myDevice" -Value 0 -PropertyType dword -Force | Out-Null
+        }
     }
-    else {
-        Write-Host "Setting MyDevicePageHide to 0"
-        New-ItemProperty -Path $RegistryPath -Name "page.myDevice" -Value 0 -PropertyType dword -Force | Out-Null
-    }
+
     if ($WiFiSecurityPageHide) {
-        Write-Host "Setting WiFiSecurityPageHide to 1"
-        New-ItemProperty -Path $RegistryPath -Name "page.wifiSecurity" -Value 1 -PropertyType dword -Force | Out-Null
+        if ($WiFiSecurityPageHide -eq $true){
+            Write-Host "Setting WiFiSecurityPageHide to 1"
+            New-ItemProperty -Path $RegistryPath -Name "page.wifiSecurity" -Value 1 -PropertyType dword -Force | Out-Null
+        }
+        else {
+            Write-Host "Setting WiFiSecurityPageHide to 0"
+            New-ItemProperty -Path $RegistryPath -Name "page.wifiSecurity" -Value 0 -PropertyType dword -Force | Out-Null
+        }
     }
-    else {
-        Write-Host "Setting WiFiSecurityPageHide to 0"
-        New-ItemProperty -Path $RegistryPath -Name "page.wifiSecurity" -Value 0 -PropertyType dword -Force | Out-Null
-    }
+
     if ($HardwareScanPageHide) {
-        Write-Host "Setting HardwareScanPageHide to 1"
-        New-ItemProperty -Path $RegistryPath -Name "page.hardwareScan" -Value 1 -PropertyType dword -Force | Out-Null
+        if ($HardwareScanPageHide -eq $true){
+            Write-Host "Setting HardwareScanPageHide to 1"
+            New-ItemProperty -Path $RegistryPath -Name "page.hardwareScan" -Value 1 -PropertyType dword -Force | Out-Null
+        }
+        else {
+            Write-Host "Setting HardwareScanPageHide to 0"
+            New-ItemProperty -Path $RegistryPath -Name "page.hardwareScan" -Value 0 -PropertyType dword -Force | Out-Null
+        }
     }
-    else {
-        Write-Host "Setting HardwareScanPageHide to 0"
-        New-ItemProperty -Path $RegistryPath -Name "page.hardwareScan" -Value 0 -PropertyType dword -Force | Out-Null
-    }
+
     if ($GiveFeedbackPageHide) {
-        Write-Host "Setting GiveFeedbackPageHide to 1"
-        New-ItemProperty -Path $RegistryPath -Name "feature.giveFeedback" -Value 1 -PropertyType dword -Force | Out-Null
+        if ($GiveFeedbackPageHide -eq $true){
+            Write-Host "Setting GiveFeedbackPageHide to 1"
+            New-ItemProperty -Path $RegistryPath -Name "feature.giveFeedback" -Value 1 -PropertyType dword -Force | Out-Null
+        }
+        else {
+            Write-Host "Setting GiveFeedbackPageHide to 0"
+            New-ItemProperty -Path $RegistryPath -Name "feature.giveFeedback" -Value 0 -PropertyType dword -Force | Out-Null
+        }
     }
-    else {
-        Write-Host "Setting GiveFeedbackPageHide to 0"
-        New-ItemProperty -Path $RegistryPath -Name "feature.giveFeedback" -Value 0 -PropertyType dword -Force | Out-Null
-    }   
-
-
 }
