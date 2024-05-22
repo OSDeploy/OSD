@@ -116,7 +116,7 @@ function Set-LenovoVantage {
     )
 
     
-    $RegistryPath = "HKLM:\SOFTWARE\SOFTWARE\Policies\Lenovo\Commercial Vantage"
+    $RegistryPath = "HKLM:\SOFTWARE\Policies\Lenovo\Commercial Vantage"
     # Check if Lenovo Vantage is installed
     if (Test-Path "C:\Program Files (x86)\Lenovo\VantageService") {
         #Write-Host "Lenovo Vantage is already installed."
