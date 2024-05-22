@@ -85,4 +85,13 @@ function Install-LenovoVantage {
     #Lenovo Vantage Service
     Write-Host -ForegroundColor Cyan " Installing Lenovo Vantage Service..."
     Invoke-Expression -command "$tempExtractPath\VantageService\Install-VantageService.ps1"
+
+    #Lenovo Vantage Batch File
+    $ArgumentList = "/c $($tempExtractPath)\setup-commercial-vantage.bat"
+    $InstallProcess = Start-Process -FilePath "cmd.exe" -ArgumentList $ArgumentList -Wait -PassThru
+    if ($InstallProcess.ExitCode -eq 0) {
+        Write-Host -ForegroundColor Green "Lenovo Vantage completed successfully."
+    } else {
+        Write-Host -ForegroundColor Red "Lenovo Vantage failed with exit code $($InstallProcess.ExitCode)."
+    }
 }
