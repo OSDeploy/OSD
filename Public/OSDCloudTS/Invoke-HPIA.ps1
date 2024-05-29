@@ -181,8 +181,8 @@ Function Invoke-HPIA {
             [ValidateSet("Analyze", "DownloadSoftPaqs")]
             $Operation = "Analyze",
             [Parameter(Mandatory=$false)]
-            [ValidateSet("All", "BIOS", "Drivers", "Software", "Firmware", "Accessories","BIOS,Drivers")]
-            $Category = "Drivers",
+            [ValidateSet("All", "BIOS", "Drivers", "Software", "Firmware", "Accessories")]
+            [String[]]$Category = @("Drivers"),
             [Parameter(Mandatory=$false)]
             [ValidateSet("All", "Critical", "Recommended", "Routine")]
             $Selection = "All",
@@ -196,12 +196,17 @@ Function Invoke-HPIA {
             [Parameter(Mandatory=$false)]
             $HPIAInstallPath = "$env:ProgramFiles\HP\HPIA\bin",
             [Parameter(Mandatory=$false)]
-            $ReferenceFile
+            $ReferenceFile,
+            [Parameter(Mandatory=$false)]
+            [switch]$SilentMode,
+            [Parameter(Mandatory=$false)]
+            [switch]$NoninteractiveMode
             )
     $DateTime = Get-Date -Format "yyyyMMdd-HHmm"
     $ReportsFolder = "$($ReportsFolder)\$($DateTime)"
     $CMTraceLog = "$ReportsFolder\HPIACustomLog.log"
     $script:TempWorkFolder = 'C:\windows\temp\HP\HPIA\TempWorkFolder'
+    [String]$Category = $($Category -join ",").ToString()
     try{
         [void][System.IO.Directory]::CreateDirectory($LogFolder)
         [void][System.IO.Directory]::CreateDirectory($TempWorkFolder)
@@ -212,6 +217,11 @@ Function Invoke-HPIA {
         throw
     }
     
+    if ($NoninteractiveMode -eq $true){$Noninteractive = "/Noninteractive"}
+    else {$Noninteractive = ""} 
+    if ($silentMode -eq $true){$Silent = "/Silent"; $Noninteractive = ""}
+    else {$Silent = ""}
+
     Install-HPIA -HPIAInstallPath $HPIAInstallPath
     if ($Action -eq "List"){$LogComp = "Scanning"}
     else {$LogComp = "Updating"}
@@ -219,14 +229,14 @@ Function Invoke-HPIA {
     try {
 
         if ($ReferenceFile){
-            Write-CMTraceLog -LogFile $CMTraceLog -Message "/Operation:$Operation /Category:$Category /Selection:$Selection /Action:$Action /Silent /Debug /ReportFolder:$ReportsFolder /ReferenceFile:$ReferenceFile" -Component $LogComp
-            Write-Host "Running HPIA With Args: /Operation:$Operation /Category:$Category /Selection:$Selection /Action:$Action /Silent /Debug /ReportFolder:$ReportsFolder /ReferenceFile:$ReferenceFile" -ForegroundColor Green
-            $Process = Start-Process -FilePath $HPIAInstallPath\HPImageAssistant.exe -WorkingDirectory $TempWorkFolder -ArgumentList "/Operation:$Operation /Category:$Category /Selection:$Selection /Action:$Action /Silent /Debug /ReportFolder:$ReportsFolder /ReferenceFile:$ReferenceFile" -NoNewWindow -PassThru -Wait -ErrorAction Stop
+            CMTraceLog -LogFile $CMTraceLog -Message "/Operation:$Operation /Category:$Category /Selection:$Selection /Action:$Action $Silent $Noninteractive /Debug /ReportFolder:$ReportsFolder /ReferenceFile:$ReferenceFile" -Component $LogComp
+            Write-Host "Running HPIA With Args: /Operation:$Operation /Category:$Category /Selection:$Selection /Action:$Action $Silent $Noninteractive /Debug /ReportFolder:$ReportsFolder /ReferenceFile:$ReferenceFile" -ForegroundColor Green
+            $Process = Start-Process -FilePath $HPIAInstallPath\HPImageAssistant.exe -WorkingDirectory $TempWorkFolder -ArgumentList "/Operation:$Operation /Category:$Category /Selection:$Selection /Action:$Action $Silent $Noninteractive /Debug /ReportFolder:$ReportsFolder /ReferenceFile:$ReferenceFile" -NoNewWindow -PassThru -Wait -ErrorAction Stop
         }
-        else{
-            Write-CMTraceLog -LogFile $CMTraceLog -Message "/Operation:$Operation /Category:$Category /Selection:$Selection /Action:$Action /Silent /Debug /ReportFolder:$ReportsFolder" -Component $LogComp
-            Write-Host "Running HPIA With Args: /Operation:$Operation /Category:$Category /Selection:$Selection /Action:$Action /Silent /Debug /ReportFolder:$ReportsFolder" -ForegroundColor Green
-            $Process = Start-Process -FilePath $HPIAInstallPath\HPImageAssistant.exe -WorkingDirectory $TempWorkFolder -ArgumentList "/Operation:$Operation /Category:$Category /Selection:$Selection /Action:$Action /Silent /Debug /ReportFolder:$ReportsFolder" -NoNewWindow -PassThru -Wait -ErrorAction Stop
+        else {
+            CMTraceLog -LogFile $CMTraceLog -Message "/Operation:$Operation /Category:$Category /Selection:$Selection /Action:$Action $Silent $Noninteractive /Debug /ReportFolder:$ReportsFolder" -Component $LogComp
+            Write-Host "Running HPIA With Args: /Operation:$Operation /Category:$Category /Selection:$Selection /Action:$Action $Silent $Noninteractive /Debug /ReportFolder:$ReportsFolder" -ForegroundColor Green
+            $Process = Start-Process -FilePath $HPIAInstallPath\HPImageAssistant.exe -WorkingDirectory $TempWorkFolder -ArgumentList "/Operation:$Operation /Category:$Category /Selection:$Selection /Action:$Action $Silent $Noninteractive /Debug /ReportFolder:$ReportsFolder" -NoNewWindow -PassThru -Wait -ErrorAction Stop
         }
 
         
