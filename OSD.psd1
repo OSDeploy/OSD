@@ -171,6 +171,7 @@
         'Get-WindowsUpdateDriver',
         'Get-HPTPMDetermine',
         'Invoke-OSDCloudIPU',
+        'New-OSDCloudOSWimFile',
         'Invoke-HPTPMDownload',
         'Invoke-HPTPMEXEDownload',
         'Invoke-HPTPMDowngrade',
