@@ -25,7 +25,7 @@ function New-OSDCloudOSWimFile {
         [ValidateSet('Home','Home N','Home Single Language','Education','Education N','Enterprise','Enterprise N','Pro','Pro N')]
         [Alias('Edition')]
         [System.String]
-        $OSEdition,
+        $OSEdition = 'Pro',
 
         #Operating System Language of the Windows installation
         #Alias = Culture, OSCulture
@@ -42,7 +42,7 @@ function New-OSDCloudOSWimFile {
         )]
         [Alias('Culture','OSCulture')]
         [System.String]
-        $OSLanguage,
+        $OSLanguage = 'en-us',
 
         #License of the Windows Operating System
         [Parameter(ParameterSetName = 'Default')]
@@ -50,7 +50,7 @@ function New-OSDCloudOSWimFile {
         [ValidateSet('Retail','Volume')]
         [Alias('License','OSLicense','Activation')]
         [System.String]
-        $OSActivation
+        $OSActivation = 'Retail'
     
     )
     #region Admin Elevation
@@ -106,7 +106,7 @@ function New-OSDCloudOSWimFile {
 
 
     Write-Host -ForegroundColor DarkGray "========================================================================="
-    Write-Host -ForegroundColor DarkCyan "These are set automatically based on your current OS"
+    Write-Host -ForegroundColor DarkCyan "These are set based on your input parameters"
     Write-Host -ForegroundColor Cyan "OSEditionId: " -NoNewline
     Write-Host -ForegroundColor Green $OSEdition
     Write-Host -ForegroundColor Cyan "OSImageIndex: " -NoNewline
@@ -127,7 +127,7 @@ function New-OSDCloudOSWimFile {
 
     $ScratchLocation = 'c:\OSDCloud\IPU'
     $OSMediaLocation = 'c:\OSDCloud\OS'
-    $MediaLocation = "$ScratchLocation\Media"
+    $MediaLocation = "$ScratchLocation\Media\$OSName"
     if (!(Test-Path -Path $OSMediaLocation)){New-Item -Path $OSMediaLocation -ItemType Directory -Force | Out-Null}
     if (!(Test-Path -Path $ScratchLocation)){New-Item -Path $ScratchLocation -ItemType Directory -Force | Out-Null}
     if (Test-Path -Path $MediaLocation){Remove-Item -Path $MediaLocation -Force -Recurse}
@@ -173,7 +173,8 @@ function New-OSDCloudOSWimFile {
     
     #Test for Media
     if (Test-path -path $ImagePath){
-        Write-Host -ForegroundColor Gray "Found previously downloaded media, getting SHA1 Hash"
+        Write-Host -ForegroundColor Gray "Found previously downloaded media: $ImagePath"
+        write-host -ForegroundColor Gray " ... Getting SHA1 Hash for validation"
         $SHA1Hash = Get-FileHash $ImagePath -Algorithm SHA1
         if ($SHA1Hash.Hash -eq $esd.SHA1){
             Write-Host -ForegroundColor Gray "SHA1 Match on $ImagePath, skipping Download"
@@ -262,62 +263,5 @@ function New-OSDCloudOSWimFile {
         Write-Host -ForegroundColor Red "install.wim not found, something went wrong"
         throw
     }
-
-
-    if (($DriverPack) -and (!($SkipDriverPack))){
-        Write-Host -ForegroundColor DarkGray "========================================================================="
-        Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Getting Driver Pack for IPU Integration"           
-        $DriverPackDownloadRequired = $true
-        if (!(Test-Path -Path "C:\Drivers")){New-Item -Path "C:\Drivers" -ItemType Directory -Force | Out-Null}
-        $DriverPackPath = "C:\Drivers\$($DriverPack.FileName)"
-        if (Test-path -path $DriverPackPath){
-            Write-Host -ForegroundColor Gray "Found previously downloaded DriverPack File, getting MD5 Hash"
-            $MD5Hash = Get-FileHash $DriverPackPath -Algorithm MD5
-            if ($MD5Hash.Hash -eq $DriverPack.HashMD5){
-                Write-Host -ForegroundColor Gray "MD5 Match on $DriverPackPath, skipping Download"
-                $DriverPackDownloadRequired = $false
-            }
-            else {
-                Write-Host -ForegroundColor Gray "MD5 Match Failed on $DriverPackPath, removing content"
-            }
-        }
-        
-        IF ($DriverPackDownloadRequired -eq $true){
-            Write-Host -ForegroundColor Gray "Starting Download to $DriverPackPath, this takes awhile"
-            <#
-            #Get DrivePack Size
-            $req = [System.Net.HttpWebRequest]::Create("$($DriverPack.Url)")
-            $res = $req.GetResponse()
-            (Invoke-WebRequest $ESD.Url -Method Head).Headers.'Content-Length'
-            $SizeMB = $([Math]::Round($res.ContentLength /1000000)) 
-            Write-Host "Total Size: $SizeMB MB"
-            #>
-
-            #Clear Out any Previous Attempts
-            $ExistingBitsJob = Get-BitsTransfer -Name "$($DriverPack.FileName)" -AllUsers -ErrorAction SilentlyContinue
-            If ($ExistingBitsJob) {
-                Remove-BitsTransfer -BitsJob $ExistingBitsJob
-            }
-    
-            #Start Download using BITS
-            $BitsJob = Start-BitsTransfer -Source $DriverPack.Url -Destination $DriverPackPath -DisplayName "$($DriverPack.FileName)" -Description "Driver Pack Download" -RetryInterval 60
-            If ($BitsJob.JobState -eq "Error"){
-                write-Host "BITS tranfer failed: $($BitsJob.ErrorDescription)"
-            }
-        }
-        #Expand Driver Pack
-        if (Test-path -path $DriverPackPath){
-            Write-Host -ForegroundColor DarkGray "========================================================================="
-            Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Expanding DriverPack for Upgrade Media"   
-            Expand-StagedDriverPack
-            $DriverPackFile = Get-ChildItem -Path $DriverPackPath -Filter $DriverPack.FileName
-            $DriverPackExpandPath = Join-Path $DriverPackFile.Directory $DriverPackFile.BaseName
-            if (Test-Path -Path $DriverPackExpandPath){
-
-            }
-        }
-    }
     Write-Host -ForegroundColor DarkGray "========================================================================="
-    Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Triggering Windows Upgrade Setup"   
-    
 }
