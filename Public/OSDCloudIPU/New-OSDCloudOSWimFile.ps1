@@ -182,7 +182,7 @@ function New-OSDCloudOSWimFile {
         write-host -ForegroundColor Gray " ... Getting SHA1 Hash for validation"
         $SHA1Hash = Get-FileHash $ImagePath -Algorithm SHA1
         if ($SHA1Hash.Hash -eq $esd.SHA1){
-            Write-Host -ForegroundColor Gray "SHA1 Match on $ImagePath, skipping Download"
+            Write-Host -ForegroundColor Gray "SHA1 Match $($SHA1Hash.Hash), skipping Download"
             $ImageDownloadRequired = $false
         }
         else {
@@ -325,5 +325,6 @@ function New-OSDCloudOSWimFile {
                 Write-Host -ForegroundColor Red "Failed to Create ISO File"
             }
         }
+        Write-Host -ForegroundColor DarkGray "========================================================================="
     }
 }
