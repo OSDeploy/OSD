@@ -227,6 +227,9 @@ function New-OSDCloudOSWimFile {
     #region Extract of ESD file to create Setup Content
     #============================================================================
 
+    #https://www.deploymentresearch.com/how-to-really-create-a-windows-10-build-10041-iso-no-3rd-party-tools-needed/
+    #Using info from Johan's process to export properly
+    #DISM commands are left for reference only.
 
     #Grab ESD File and create bootable ISO
     if ((!(Test-Path -Path $ImagePath)) -or (!(Test-Path -Path $MediaLocation))){
@@ -236,7 +239,7 @@ function New-OSDCloudOSWimFile {
         }
         if (!(Test-Path -Path $MediaLocation)){
             Write-Host -ForegroundColor Red "Missing $MediaLocation, double check folder exist"
-            throw "Faield to find $MediaLocation, double check folder exist"
+            throw "Failed to find $MediaLocation, double check folder exist"
         }
     }
     if ((Test-Path -Path $ImagePath) -and (Test-Path -Path $MediaLocation)){
@@ -245,12 +248,39 @@ function New-OSDCloudOSWimFile {
         $ApplyPath = $MediaLocation
         Write-Host -ForegroundColor Gray "Expanding $ImagePath Index 1 to $ApplyPath"
         $Expand = Expand-WindowsImage -ImagePath $ImagePath -Index 1 -ApplyPath $ApplyPath
-        ##Export-WindowsImage -SourceImagePath $ImagePath -SourceIndex 2 -DestinationImagePath "$ApplyPath\Sources\boot.wim" -CompressionType max -CheckIntegrity
-        ##Export-WindowsImage -SourceImagePath $ImagePath -SourceIndex 3 -DestinationImagePath "$ApplyPath\Sources\boot.wim" -CompressionType max -CheckIntegrity -Setbootable
+
+        # Create empty boot.wim file with compression type set to maximum
+        $EmptyFolder = "$($env:TEMP)\EmptyFolder"
+        New-Item -ItemType Directory -Path $EmptyFolder -Force | Out-Null
+        #dism.exe /Capture-Image /ImageFile:$ISOMediaFolder\sources\boot.wim /CaptureDir:$EmptyFolder /Name:EmptyIndex /Compress:max
+        New-WindowsImage -ImagePath $ApplyPath\Sources\boot.wim -CapturePath $EmptyFolder -Name EmptyIndex -Description "Empty Index" -CompressionType Max
+        
+        # Export base Windows PE to empty boot.wim file (creating a second index)
+        #dism.exe /Export-image /SourceImageFile:$ESDFile /SourceIndex:2 /DestinationImageFile:$ISOMediaFolder\sources\boot.wim /Compress:Recovery /Bootable
+        Export-WindowsImage -SourceImagePath $ImagePath -SourceIndex 2 -DestinationImagePath "$ApplyPath\Sources\boot.wim" -CompressionType Fast -CheckIntegrity -Setbootable
+        
+        # Delete the first empty index in boot.wim
+        #dism.exe /Delete-Image /ImageFile:$ISOMediaFolder\sources\boot.wim /Index:1
+        Remove-WindowsImage -ImagePath $ApplyPath\Sources\boot.wim -Index 1
+
+        # Export Windows PE with Setup to boot.wim file
+        #dism.exe /Export-image /SourceImageFile:$ESDFile /SourceIndex:3 /DestinationImageFile:$ISOMediaFolder\sources\boot.wim /Compress:Recovery /Bootable
+        Export-WindowsImage -SourceImagePath $ImagePath -SourceIndex 3 -DestinationImagePath "$ApplyPath\Sources\boot.wim" -CompressionType Fast -CheckIntegrity -Setbootable
+        
+        # Create empty install.wim file with MDT/ConfigMgr friendly compression type (maximum)
+        #dism.exe /Capture-Image /ImageFile:$ISOMediaFolder\sources\install.wim /CaptureDir:C:\EmptyFolder /Name:EmptyIndex /Compress:max
+        New-WindowsImage -ImagePath $ApplyPath\Sources\install.wim -CapturePath $EmptyFolder -Name EmptyIndex -Description "Empty Index" -CompressionType Max
+
+        #Export the OS Image to the install.wim file
         Write-Host -ForegroundColor Gray "Expanding $ImagePath Index $OSImageIndex to $ApplyPath\Sources\install.wim"
-        $Expand = Export-WindowsImage -SourceImagePath $ImagePath -SourceIndex $OSImageIndex -DestinationImagePath "$ApplyPath\Sources\install.wim" -CheckIntegrity
+        #dism.exe /Export-image /SourceImageFile:$ESDFile /SourceIndex:4 /DestinationImageFile:$ISOMediaFolder\sources\install.wim /Compress:Recovery
         ##Export-WindowsImage -SourceImagePath $ImagePath -SourceIndex 5 -DestinationImagePath "$ApplyPath\Sources\install.wim" -CompressionType max -CheckIntegrity
+        $Expand = Export-WindowsImage -SourceImagePath $ImagePath -SourceIndex $OSImageIndex -DestinationImagePath "$ApplyPath\Sources\install.wim" -CheckIntegrity -CompressionType Fast
         $null = $Expand
+
+        # Delete the first empty index in install.wim
+        #dism.exe /Delete-Image /ImageFile:$ISOMediaFolder\sources\install.wim /Index:1
+        Remove-WindowsImage -ImagePath $ApplyPath\Sources\install.wim -Index 1
     }
     
     #endregion Extract of ESD file to create Setup Content
