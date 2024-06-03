@@ -50,7 +50,12 @@ function New-OSDCloudOSWimFile {
         [ValidateSet('Retail','Volume')]
         [Alias('License','OSLicense','Activation')]
         [System.String]
-        $OSActivation = 'Retail'
+        $OSActivation = 'Retail',
+
+        #Create ISO File - Requries Windows ADK (oscdimg.exe)
+        [Parameter(ParameterSetName = 'Default')]
+        [Switch]
+        $CreateISO
     
     )
     #region Admin Elevation
@@ -253,7 +258,7 @@ function New-OSDCloudOSWimFile {
         $EmptyFolder = "$($env:TEMP)\EmptyFolder"
         New-Item -ItemType Directory -Path $EmptyFolder -Force | Out-Null
         #dism.exe /Capture-Image /ImageFile:$ISOMediaFolder\sources\boot.wim /CaptureDir:$EmptyFolder /Name:EmptyIndex /Compress:max
-        New-WindowsImage -ImagePath $ApplyPath\Sources\boot.wim -CapturePath $EmptyFolder -Name EmptyIndex -Description "Empty Index" -CompressionType Max
+        New-WindowsImage -ImagePath $ApplyPath\Sources\boot.wim -CapturePath $EmptyFolder -Name EmptyIndex -Description "Empty Index" -CompressionType Fast
         
         # Export base Windows PE to empty boot.wim file (creating a second index)
         #dism.exe /Export-image /SourceImageFile:$ESDFile /SourceIndex:2 /DestinationImageFile:$ISOMediaFolder\sources\boot.wim /Compress:Recovery /Bootable
@@ -269,7 +274,7 @@ function New-OSDCloudOSWimFile {
         
         # Create empty install.wim file with MDT/ConfigMgr friendly compression type (maximum)
         #dism.exe /Capture-Image /ImageFile:$ISOMediaFolder\sources\install.wim /CaptureDir:C:\EmptyFolder /Name:EmptyIndex /Compress:max
-        New-WindowsImage -ImagePath $ApplyPath\Sources\install.wim -CapturePath $EmptyFolder -Name EmptyIndex -Description "Empty Index" -CompressionType Max
+        New-WindowsImage -ImagePath $ApplyPath\Sources\install.wim -CapturePath $EmptyFolder -Name EmptyIndex -Description "Empty Index" -CompressionType Fast
 
         #Export the OS Image to the install.wim file
         Write-Host -ForegroundColor Gray "Expanding $ImagePath Index $OSImageIndex to $ApplyPath\Sources\install.wim"
@@ -294,4 +299,31 @@ function New-OSDCloudOSWimFile {
         throw
     }
     Write-Host -ForegroundColor DarkGray "========================================================================="
+    if ($CreateISO){
+        $PathToOscdimg = (Get-AdkPaths).oscdimgexe
+        if (!(Test-Path -Path $PathToOscdimg)){
+            Write-Host -ForegroundColor Red "oscdimg.exe not found, unable to create ISO File"
+            throw "oscdimg.exe not found, unable to create ISO File"
+        }
+        else {
+            Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Creating ISO File"
+            $BootData='2#p0,e,b"{0}"#pEF,e,b"{1}"' -f "$ApplyPath\boot\etfsboot.com","$ApplyPath\efi\Microsoft\boot\efisys.bin"
+
+            $ISOFile = "`"$ScratchLocation\$($ESD.Version) $($ESD.ReleaseId) $($ESD.Architecture).iso`""
+            $ISOFilePath = "$ScratchLocation\$($ESD.Version) $($ESD.ReleaseId) $($ESD.Architecture).iso"
+            if (Test-Path -Path $ISOFilePath){Remove-Item -Path $ISOFilePath -Force}
+            $ISOMedia = "`"$ApplyPath`""
+            $Proc = Start-Process -FilePath $PathToOscdimg -ArgumentList @("-bootdata:$BootData",'-u2','-udfver102',"$ISOMedia","$ISOFile") -PassThru -Wait -NoNewWindow
+            if($Proc.ExitCode -ne 0)
+            {
+                Throw "Failed to generate ISO with exitcode: $($Proc.ExitCode)"
+            }
+            if (Test-Path -Path $ISOFilePath){
+                Write-Host -ForegroundColor Green "ISO File Created: $ISOFile"
+            }
+            else {
+                Write-Host -ForegroundColor Red "Failed to Create ISO File"
+            }
+        }
+    }
 }
