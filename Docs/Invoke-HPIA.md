@@ -13,9 +13,9 @@ schema: 2.0.0
 ## SYNTAX
 
 ```
-Invoke-HPIA [[-Operation] <Object>] [[-Category] <Object>] [[-Selection] <Object>] [[-Action] <Object>]
+Invoke-HPIA [[-Operation] <Object>] [[-Category] <String[]>] [[-Selection] <Object>] [[-Action] <Object>]
  [[-LogFolder] <Object>] [[-ReportsFolder] <Object>] [[-HPIAInstallPath] <Object>] [[-ReferenceFile] <Object>]
- [<CommonParameters>]
+ [-SilentMode] [-NoninteractiveMode] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -52,7 +52,7 @@ Accept wildcard characters: False
 {{ Fill Category Description }}
 
 ```yaml
-Type: Object
+Type: String[]
 Parameter Sets: (All)
 Aliases:
 Accepted values: All, BIOS, Drivers, Software, Firmware, Accessories, BIOS, Drivers
@@ -151,6 +151,36 @@ Accepted values: All, Critical, Recommended, Routine
 
 Required: False
 Position: 2
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -NoninteractiveMode
+{{ Fill NoninteractiveMode Description }}
+
+```yaml
+Type: SwitchParameter
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -SilentMode
+{{ Fill SilentMode Description }}
+
+```yaml
+Type: SwitchParameter
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False

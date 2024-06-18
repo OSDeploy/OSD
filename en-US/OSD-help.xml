@@ -18384,9 +18384,9 @@ Original credit to Mike Robbins http://mikefrobbins.com/2018/01/18/use-powershel
             <command:parameterValue required="false" command:variableLength="false">BIOS</command:parameterValue>
             <command:parameterValue required="false" command:variableLength="false">Drivers</command:parameterValue>
           </command:parameterValueGroup>
-          <command:parameterValue required="true" variableLength="false">Object</command:parameterValue>
+          <command:parameterValue required="true" variableLength="false">String[]</command:parameterValue>
           <dev:type>
-            <maml:name>Object</maml:name>
+            <maml:name>String[]</maml:name>
             <maml:uri />
           </dev:type>
           <dev:defaultValue>None</dev:defaultValue>
@@ -18476,6 +18476,28 @@ Original credit to Mike Robbins http://mikefrobbins.com/2018/01/18/use-powershel
           </dev:type>
           <dev:defaultValue>None</dev:defaultValue>
         </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+          <maml:name>NoninteractiveMode</maml:name>
+          <maml:description>
+            <maml:para>{{ Fill NoninteractiveMode Description }}</maml:para>
+          </maml:description>
+          <dev:type>
+            <maml:name>SwitchParameter</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>False</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+          <maml:name>SilentMode</maml:name>
+          <maml:description>
+            <maml:para>{{ Fill SilentMode Description }}</maml:para>
+          </maml:description>
+          <dev:type>
+            <maml:name>SwitchParameter</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>False</dev:defaultValue>
+        </command:parameter>
       </command:syntaxItem>
     </command:syntax>
     <command:parameters>
@@ -18496,9 +18518,9 @@ Original credit to Mike Robbins http://mikefrobbins.com/2018/01/18/use-powershel
         <maml:description>
           <maml:para>{{ Fill Category Description }}</maml:para>
         </maml:description>
-        <command:parameterValue required="true" variableLength="false">Object</command:parameterValue>
+        <command:parameterValue required="true" variableLength="false">String[]</command:parameterValue>
         <dev:type>
-          <maml:name>Object</maml:name>
+          <maml:name>String[]</maml:name>
           <maml:uri />
         </dev:type>
         <dev:defaultValue>None</dev:defaultValue>
@@ -18574,6 +18596,30 @@ Original credit to Mike Robbins http://mikefrobbins.com/2018/01/18/use-powershel
           <maml:uri />
         </dev:type>
         <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+        <maml:name>NoninteractiveMode</maml:name>
+        <maml:description>
+          <maml:para>{{ Fill NoninteractiveMode Description }}</maml:para>
+        </maml:description>
+        <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
+        <dev:type>
+          <maml:name>SwitchParameter</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>False</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+        <maml:name>SilentMode</maml:name>
+        <maml:description>
+          <maml:para>{{ Fill SilentMode Description }}</maml:para>
+        </maml:description>
+        <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
+        <dev:type>
+          <maml:name>SwitchParameter</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>False</dev:defaultValue>
       </command:parameter>
     </command:parameters>
     <command:inputTypes>
@@ -21863,6 +21909,248 @@ Original credit to Mike Robbins http://mikefrobbins.com/2018/01/18/use-powershel
     <command:relatedLinks>
       <maml:navigationLink>
         <maml:linkText>https://www.osdcloud.com/setup/osdcloud-iso</maml:linkText>
+        <maml:uri>https://www.osdcloud.com/setup/osdcloud-iso</maml:uri>
+      </maml:navigationLink>
+    </command:relatedLinks>
+  </command:command>
+  <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
+    <command:details>
+      <command:name>New-OSDCloudOSWimFile</command:name>
+      <command:verb>New</command:verb>
+      <command:noun>OSDCloudOSWimFile</command:noun>
+      <maml:description>
+        <maml:para>{{ Fill in the Synopsis }}</maml:para>
+      </maml:description>
+    </command:details>
+    <maml:description>
+      <maml:para>{{ Fill in the Description }}</maml:para>
+    </maml:description>
+    <command:syntax>
+      <command:syntaxItem>
+        <maml:name>New-OSDCloudOSWimFile</maml:name>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+          <maml:name>CreateISO</maml:name>
+          <maml:description>
+            <maml:para>{{ Fill CreateISO Description }}</maml:para>
+          </maml:description>
+          <dev:type>
+            <maml:name>SwitchParameter</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>False</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="License, OSLicense, Activation">
+          <maml:name>OSActivation</maml:name>
+          <maml:description>
+            <maml:para>{{ Fill OSActivation Description }}</maml:para>
+          </maml:description>
+          <command:parameterValueGroup>
+            <command:parameterValue required="false" command:variableLength="false">Retail</command:parameterValue>
+            <command:parameterValue required="false" command:variableLength="false">Volume</command:parameterValue>
+          </command:parameterValueGroup>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="Edition">
+          <maml:name>OSEdition</maml:name>
+          <maml:description>
+            <maml:para>{{ Fill OSEdition Description }}</maml:para>
+          </maml:description>
+          <command:parameterValueGroup>
+            <command:parameterValue required="false" command:variableLength="false">Home</command:parameterValue>
+            <command:parameterValue required="false" command:variableLength="false">Home N</command:parameterValue>
+            <command:parameterValue required="false" command:variableLength="false">Home Single Language</command:parameterValue>
+            <command:parameterValue required="false" command:variableLength="false">Education</command:parameterValue>
+            <command:parameterValue required="false" command:variableLength="false">Education N</command:parameterValue>
+            <command:parameterValue required="false" command:variableLength="false">Enterprise</command:parameterValue>
+            <command:parameterValue required="false" command:variableLength="false">Enterprise N</command:parameterValue>
+            <command:parameterValue required="false" command:variableLength="false">Pro</command:parameterValue>
+            <command:parameterValue required="false" command:variableLength="false">Pro N</command:parameterValue>
+          </command:parameterValueGroup>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="Culture, OSCulture">
+          <maml:name>OSLanguage</maml:name>
+          <maml:description>
+            <maml:para>{{ Fill OSLanguage Description }}</maml:para>
+          </maml:description>
+          <command:parameterValueGroup>
+            <command:parameterValue required="false" command:variableLength="false">ar-sa</command:parameterValue>
+            <command:parameterValue required="false" command:variableLength="false">bg-bg</command:parameterValue>
+            <command:parameterValue required="false" command:variableLength="false">cs-cz</command:parameterValue>
+            <command:parameterValue required="false" command:variableLength="false">da-dk</command:parameterValue>
+            <command:parameterValue required="false" command:variableLength="false">de-de</command:parameterValue>
+            <command:parameterValue required="false" command:variableLength="false">el-gr</command:parameterValue>
+            <command:parameterValue required="false" command:variableLength="false">en-gb</command:parameterValue>
+            <command:parameterValue required="false" command:variableLength="false">en-us</command:parameterValue>
+            <command:parameterValue required="false" command:variableLength="false">es-es</command:parameterValue>
+            <command:parameterValue required="false" command:variableLength="false">es-mx</command:parameterValue>
+            <command:parameterValue required="false" command:variableLength="false">et-ee</command:parameterValue>
+            <command:parameterValue required="false" command:variableLength="false">fi-fi</command:parameterValue>
+            <command:parameterValue required="false" command:variableLength="false">fr-ca</command:parameterValue>
+            <command:parameterValue required="false" command:variableLength="false">fr-fr</command:parameterValue>
+            <command:parameterValue required="false" command:variableLength="false">he-il</command:parameterValue>
+            <command:parameterValue required="false" command:variableLength="false">hr-hr</command:parameterValue>
+            <command:parameterValue required="false" command:variableLength="false">hu-hu</command:parameterValue>
+            <command:parameterValue required="false" command:variableLength="false">it-it</command:parameterValue>
+            <command:parameterValue required="false" command:variableLength="false">ja-jp</command:parameterValue>
+            <command:parameterValue required="false" command:variableLength="false">ko-kr</command:parameterValue>
+            <command:parameterValue required="false" command:variableLength="false">lt-lt</command:parameterValue>
+            <command:parameterValue required="false" command:variableLength="false">lv-lv</command:parameterValue>
+            <command:parameterValue required="false" command:variableLength="false">nb-no</command:parameterValue>
+            <command:parameterValue required="false" command:variableLength="false">nl-nl</command:parameterValue>
+            <command:parameterValue required="false" command:variableLength="false">pl-pl</command:parameterValue>
+            <command:parameterValue required="false" command:variableLength="false">pt-br</command:parameterValue>
+            <command:parameterValue required="false" command:variableLength="false">pt-pt</command:parameterValue>
+            <command:parameterValue required="false" command:variableLength="false">ro-ro</command:parameterValue>
+            <command:parameterValue required="false" command:variableLength="false">ru-ru</command:parameterValue>
+            <command:parameterValue required="false" command:variableLength="false">sk-sk</command:parameterValue>
+            <command:parameterValue required="false" command:variableLength="false">sl-si</command:parameterValue>
+            <command:parameterValue required="false" command:variableLength="false">sr-latn-rs</command:parameterValue>
+            <command:parameterValue required="false" command:variableLength="false">sv-se</command:parameterValue>
+            <command:parameterValue required="false" command:variableLength="false">th-th</command:parameterValue>
+            <command:parameterValue required="false" command:variableLength="false">tr-tr</command:parameterValue>
+            <command:parameterValue required="false" command:variableLength="false">uk-ua</command:parameterValue>
+            <command:parameterValue required="false" command:variableLength="false">zh-cn</command:parameterValue>
+            <command:parameterValue required="false" command:variableLength="false">zh-tw</command:parameterValue>
+          </command:parameterValueGroup>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+          <maml:name>OSName</maml:name>
+          <maml:description>
+            <maml:para>{{ Fill OSName Description }}</maml:para>
+          </maml:description>
+          <command:parameterValueGroup>
+            <command:parameterValue required="false" command:variableLength="false">Windows 11 23H2 x64</command:parameterValue>
+            <command:parameterValue required="false" command:variableLength="false">Windows 11 23H2 ARM64</command:parameterValue>
+            <command:parameterValue required="false" command:variableLength="false">Windows 11 22H2 x64</command:parameterValue>
+            <command:parameterValue required="false" command:variableLength="false">Windows 11 21H2 x64</command:parameterValue>
+            <command:parameterValue required="false" command:variableLength="false">Windows 10 22H2 x64</command:parameterValue>
+            <command:parameterValue required="false" command:variableLength="false">Windows 10 22H2 ARM64</command:parameterValue>
+          </command:parameterValueGroup>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+      </command:syntaxItem>
+    </command:syntax>
+    <command:parameters>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+        <maml:name>CreateISO</maml:name>
+        <maml:description>
+          <maml:para>{{ Fill CreateISO Description }}</maml:para>
+        </maml:description>
+        <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
+        <dev:type>
+          <maml:name>SwitchParameter</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>False</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="License, OSLicense, Activation">
+        <maml:name>OSActivation</maml:name>
+        <maml:description>
+          <maml:para>{{ Fill OSActivation Description }}</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="Edition">
+        <maml:name>OSEdition</maml:name>
+        <maml:description>
+          <maml:para>{{ Fill OSEdition Description }}</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="Culture, OSCulture">
+        <maml:name>OSLanguage</maml:name>
+        <maml:description>
+          <maml:para>{{ Fill OSLanguage Description }}</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+        <maml:name>OSName</maml:name>
+        <maml:description>
+          <maml:para>{{ Fill OSName Description }}</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+    </command:parameters>
+    <command:inputTypes>
+      <command:inputType>
+        <dev:type>
+          <maml:name>None</maml:name>
+        </dev:type>
+        <maml:description>
+          <maml:para></maml:para>
+        </maml:description>
+      </command:inputType>
+    </command:inputTypes>
+    <command:returnValues>
+      <command:returnValue>
+        <dev:type>
+          <maml:name>System.Object</maml:name>
+        </dev:type>
+        <maml:description>
+          <maml:para></maml:para>
+        </maml:description>
+      </command:returnValue>
+    </command:returnValues>
+    <maml:alertSet>
+      <maml:alert>
+        <maml:para></maml:para>
+      </maml:alert>
+    </maml:alertSet>
+    <command:examples>
+      <command:example>
+        <maml:title>-------------------------- Example 1 --------------------------</maml:title>
+        <dev:code>PS C:\&gt; {{ Add example code here }}</dev:code>
+        <dev:remarks>
+          <maml:para>{{ Add example description here }}</maml:para>
+        </dev:remarks>
+      </command:example>
+    </command:examples>
+    <command:relatedLinks>
+      <maml:navigationLink>
+        <maml:linkText>Online Version:</maml:linkText>
         <maml:uri>https://www.osdcloud.com/setup/osdcloud-iso</maml:uri>
       </maml:navigationLink>
     </command:relatedLinks>
