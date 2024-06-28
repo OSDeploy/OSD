@@ -107,6 +107,7 @@
             OSBuild = $null
             OSBuildMenu = $null
             OSBuildNames = $null
+            OSDiskNumberDefault = $null
             OSEdition = $null
             OSEditionId = $null
             OSEditionMenu = $null

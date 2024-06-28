@@ -229,12 +229,12 @@ Function Invoke-HPIA {
     try {
 
         if ($ReferenceFile){
-            CMTraceLog -LogFile $CMTraceLog -Message "/Operation:$Operation /Category:$Category /Selection:$Selection /Action:$Action $Silent $Noninteractive /Debug /ReportFolder:$ReportsFolder /ReferenceFile:$ReferenceFile" -Component $LogComp
+            Write-CMTraceLog -LogFile $CMTraceLog -Message "/Operation:$Operation /Category:$Category /Selection:$Selection /Action:$Action $Silent $Noninteractive /Debug /ReportFolder:$ReportsFolder /ReferenceFile:$ReferenceFile" -Component $LogComp
             Write-Host "Running HPIA With Args: /Operation:$Operation /Category:$Category /Selection:$Selection /Action:$Action $Silent $Noninteractive /Debug /ReportFolder:$ReportsFolder /ReferenceFile:$ReferenceFile" -ForegroundColor Green
             $Process = Start-Process -FilePath $HPIAInstallPath\HPImageAssistant.exe -WorkingDirectory $TempWorkFolder -ArgumentList "/Operation:$Operation /Category:$Category /Selection:$Selection /Action:$Action $Silent $Noninteractive /Debug /ReportFolder:$ReportsFolder /ReferenceFile:$ReferenceFile" -NoNewWindow -PassThru -Wait -ErrorAction Stop
         }
         else {
-            CMTraceLog -LogFile $CMTraceLog -Message "/Operation:$Operation /Category:$Category /Selection:$Selection /Action:$Action $Silent $Noninteractive /Debug /ReportFolder:$ReportsFolder" -Component $LogComp
+            Write-CMTraceLog -LogFile $CMTraceLog -Message "/Operation:$Operation /Category:$Category /Selection:$Selection /Action:$Action $Silent $Noninteractive /Debug /ReportFolder:$ReportsFolder" -Component $LogComp
             Write-Host "Running HPIA With Args: /Operation:$Operation /Category:$Category /Selection:$Selection /Action:$Action $Silent $Noninteractive /Debug /ReportFolder:$ReportsFolder" -ForegroundColor Green
             $Process = Start-Process -FilePath $HPIAInstallPath\HPImageAssistant.exe -WorkingDirectory $TempWorkFolder -ArgumentList "/Operation:$Operation /Category:$Category /Selection:$Selection /Action:$Action $Silent $Noninteractive /Debug /ReportFolder:$ReportsFolder" -NoNewWindow -PassThru -Wait -ErrorAction Stop
         }
