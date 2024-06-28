@@ -1968,6 +1968,10 @@ exit
     This region has no dependencies with anything else in OSDCloud and can be removed if needed
     David Segura
     #>
+    #Grab Build from WinPE, as 24H2 has issues with some of these commands:
+    $CurrentOSInfo = Get-Item -Path 'HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion'
+    $CurrentOSBuild = $($CurrentOSInfo.GetValue('CurrentBuild'))
+
     if (Get-Command Get-AppxProvisionedPackage -ErrorAction Ignore) {
         Write-SectionHeader "Export Operating System Information"
 
@@ -1983,8 +1987,14 @@ exit
 
         if (Get-Command Get-WindowsCapability) {
             Write-DarkGrayHost 'Export Windows Capability to C:\OSDCloud\Logs\Get-WindowsCapability.txt'
-            $Report = Get-WindowsCapability -Path C:\ -ErrorAction Ignore | Select-Object * | Sort-Object Name
-            $Report | Select-Object Name, State | Out-File -FilePath 'C:\OSDCloud\Logs\Get-WindowsCapability.txt' -Force -Encoding ascii
+            if ($CurrentOSBuild -eq "26100"){
+                $ArgumentList = "/Image=C:\ /Get-Capabilities"
+                $null = Start-Process -FilePath 'dism.exe' -ArgumentList $ArgumentList -Wait -NoNewWindow -RedirectStandardOutput 'C:\OSDCloud\Logs\Get-WindowsCapability.txt'
+            }
+            else {
+                $Report = Get-WindowsCapability -Path C:\ -ErrorAction Ignore | Select-Object * | Sort-Object Name
+                $Report | Select-Object Name, State | Out-File -FilePath 'C:\OSDCloud\Logs\Get-WindowsCapability.txt' -Force -Encoding ascii
+            }
         }
 
         if (Get-Command Get-WindowsEdition) {
@@ -2001,8 +2011,14 @@ exit
 
         if (Get-Command Get-WindowsPackage) {
             Write-DarkGrayHost 'Export Windows Packages to C:\OSDCloud\Logs\Get-WindowsPackage.txt'
-            $Report = Get-WindowsPackage -Path C:\ -ErrorAction Ignore | Select-Object * | Sort-Object PackageName
-            $Report | Select-Object PackageName, PackageState, ReleaseType | Out-File -FilePath 'C:\OSDCloud\Logs\Get-WindowsPackage.txt' -Force -Encoding ascii
+            if ($CurrentOSBuild -eq "26100"){
+                $ArgumentList = "/Image=C:\ /Get-Packages"
+                $null = Start-Process -FilePath 'dism.exe' -ArgumentList $ArgumentList -Wait -NoNewWindow -RedirectStandardOutput 'C:\OSDCloud\Logs\Get-WindowsPackage.txt'
+            }
+            else {
+                $Report = Get-WindowsPackage -Path C:\ -ErrorAction Ignore | Select-Object * | Sort-Object PackageName
+                $Report | Select-Object PackageName, PackageState, ReleaseType | Out-File -FilePath 'C:\OSDCloud\Logs\Get-WindowsPackage.txt' -Force -Encoding ascii
+            }
         }
     }
     #endregion
