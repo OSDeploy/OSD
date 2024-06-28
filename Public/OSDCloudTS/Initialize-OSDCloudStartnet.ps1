@@ -119,10 +119,28 @@ function Initialize-OSDCloudStartnet {
             }
         }
 
-        # Initialize Network Connections
-        # $TimeSpan = New-TimeSpan -Start $Global:StartnetStart -End (Get-Date)
-        # Write-Host -ForegroundColor DarkGray "$($TimeSpan.ToString("mm':'ss")) Initialize Network Connections"
-        Start-Sleep -Seconds 5
+        # Wait for the network to initialize
+        $TimeSpan = New-TimeSpan -Start $Global:StartnetStart -End (Get-Date)
+        Write-Host -ForegroundColor DarkGray "$($TimeSpan.ToString("mm':'ss")) Initialize Network Connections"
+        $timeout = 0
+        while ($timeout -lt 20) {
+            Start-Sleep -Seconds $timeout
+            $timeout = $timeout + 5
+
+            $IP = Test-Connection -ComputerName $(HOSTNAME) -Count 1 | Select-Object -ExpandProperty IPV4Address
+            if ($null -eq $IP) {
+                Write-Host -ForegroundColor DarkGray "Network adapter error. This should not happen !"
+            }
+            elseif ($IP.IPAddressToString.StartsWith("169.254") -or $IP.IPAddressToString.Equals("127.0.0.1")) {
+                Write-Host -ForegroundColor DarkGray "IP address not yet assigned by DHCP. Trying to get a new DHCP lease.."
+                ipconfig /release | Out-Null
+                ipconfig /renew | Out-Null
+            }
+            else {
+                Write-Host -ForegroundColor DarkGray "Network configuration renewed with IP: $($IP.IPAddressToString)"
+                break
+            }
+        }
 
         # Check if the OSD Module in the PowerShell Gallery is newer than the installed version
         $TimeSpan = New-TimeSpan -Start $Global:StartnetStart -End (Get-Date)
