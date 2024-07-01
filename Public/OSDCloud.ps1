@@ -112,6 +112,7 @@
             OSEditionId = $null
             OSEditionMenu = $null
             OSEditionValues = $null
+            OSInstallDiskNumber = $null
             OSImageIndex = 1
             OSLanguage = $null
             OSLanguageMenu = $null
@@ -644,6 +645,7 @@
                 Write-DarkGrayHost "Capturing Disk Information Pre Modifications"
                 $OSDISKPre = (Get-OSDGather -Full).DiskPartition
             }
+           # Uses DiskPart instead of PS to create partitions, I think I'm going to depricate this soon.
             if ($Global:OSDCloud.DiskPart -eq $true) {
                 Start-OSDDiskPart
                 Write-Host "=========================================================================" -ForegroundColor Cyan
@@ -660,7 +662,11 @@
                     Write-Host "=========================================================================" -ForegroundColor Cyan
                 }
                 else {
-                    New-OSDisk -PartitionStyle GPT -Force -ErrorAction Stop
+                    if ($Null -ne $Global:OSDCloud.OSInstallDiskNumber){
+                        New-OSDisk -PartitionStyle GPT -DiskNumber $Global:OSDCloud.OSInstallDiskNumber -Force -ErrorAction Stop
+                    }
+                    else {New-OSDisk -PartitionStyle GPT -Force -ErrorAction Stop}
+                    
                     Write-Host "=========================================================================" -ForegroundColor Cyan
                     Write-Host "| SYSTEM | MSR |                    WINDOWS                  | RECOVERY |" -ForegroundColor Cyan
                     Write-Host "=========================================================================" -ForegroundColor Cyan
