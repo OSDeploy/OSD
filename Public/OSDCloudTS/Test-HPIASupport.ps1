@@ -11,6 +11,46 @@ function Test-HPIASupport {
     else {$HPIASupport = $false}
     return $HPIASupport
 }
+
+function Get-HPOSSupport {
+    [CmdletBinding()]
+    param(
+    [switch]$Latest,
+    [switch]$MaxOS,
+    [switch]$MaxOSVer
+    )
+    $CabPath = "$env:TEMP\platformList.cab"
+    $XMLPath = "$env:TEMP\platformList.xml"
+    $PlatformListCabURL = "https://hpia.hpcloud.hp.com/ref/platformList.cab"
+    Invoke-WebRequest -Uri $PlatformListCabURL -OutFile $CabPath -UseBasicParsing
+    $Expand = expand $CabPath $XMLPath
+    [xml]$XML = Get-Content $XMLPath
+    $MachinePlatform = (Get-CimInstance -Namespace root/cimv2 -ClassName Win32_BaseBoard).Product
+    $XMLPlatforms = $XML.ImagePal.Platform
+    $OSList = ($XMLPlatforms | Where-Object {$_.SystemID -match $MachinePlatform}).OS | Select-Object -Property OSVersion, OSReleaseIdDisplay, OSBuildId, OSDescription
+    
+    if ($Latest){
+        [String]$MaxOSSupported = ($OSList.OSDescription | Where-Object {$_ -notmatch "LTSB"}| Select-Object -Unique| Measure-Object -Maximum).Maximum
+        [String]$MaxOSVerion = (($OSList | Where-Object {$_.OSDescription -eq "$MaxOSSupported"}).OSReleaseIdDisplay | Measure-Object -Maximum).Maximum
+        return "$MaxOSSupported $MaxOSVerion"
+        break
+    }
+    if ($MaxOS){
+        [String]$MaxOSSupported = ($OSList.OSDescription | Where-Object {$_ -notmatch "LTSB"}| Select-Object -Unique| Measure-Object -Maximum).Maximum
+        if ($MaxOSSupported -Match "11"){[String]$MaxOSName = "Win11"}
+        else {[String]$MaxOSName = "Win10"}
+        return "$MaxOSName"
+        break
+    }
+    if ($MaxOSVer){
+        [String]$MaxOSSupported = ($OSList.OSDescription | Where-Object {$_ -notmatch "LTSB"}| Select-Object -Unique| Measure-Object -Maximum).Maximum
+        [String]$MaxOSVerion = (($OSList | Where-Object {$_.OSDescription -eq "$MaxOSSupported"}).OSReleaseIdDisplay | Measure-Object -Maximum).Maximum
+        return "$MaxOSVerion"
+        break
+    }
+    return $OSList
+    
+}
 function Invoke-HPIAOfflineSync {
     [CmdletBinding()]
     Param (
