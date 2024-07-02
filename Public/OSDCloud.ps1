@@ -70,6 +70,7 @@
             HPIASoftware = $null
             HPTPMUpdate = $null
             HPBIOSUpdate = $null
+            HPCMSLDriverPackLatest = $null
             ImageFileFullName = $null
             ImageFileItem = $null
             ImageFileName = $null
@@ -1295,6 +1296,10 @@
                 Write-DarkGrayHost "Found expanded Driver Pack files on OSDCloudUSB, will DISM them into the Offline OS directly"
                 #Found Expanded Driver Package on OSDCloudUSB, will DISM Directly from that
                 Start-DISMFromOSDCloudUSB
+            }
+            if ($Global:OSDCloud.HPCMSLDriverPackLatest -eq $true){
+                Write-DarkGrayHost "Attempting to use HPCMSL Functions to download Latest Driver Pack for Model"
+                Get-HPDriverPackLatest -download
             }
         }
         elseif ($Global:OSDCloud.DriverPackName -match 'Microsoft Update Catalog') {

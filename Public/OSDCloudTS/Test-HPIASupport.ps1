@@ -204,16 +204,16 @@ function Get-HPDriverPackLatest {
     }
     if ($DriverPack){
         Write-Verbose "Driver Pack Found: $($DriverPack.Name) for Platform: $Platform"
-        if ($Null -eq $download){
-            if ($null -eq $URL){
-                return $DriverPack
-            }
-            else {
-                return "https://$($DriverPack.URL)"
-            }
+        if($PSBoundParameters.ContainsKey('Download')){
+            Save-WebFile -SourceUrl "https://$($DriverPack.URL)" -DestinationName "$($DriverPack.id).exe" -DestinationDirectory "C:\Drivers"
         }
         else{
-            Save-WebFile -SourceUrl "https://$($DriverPack.URL)" -DestinationName "$($DriverPack.id).exe" -DestinationDirectory "C:\Drivers"
+        if($PSBoundParameters.ContainsKey('URL')){
+                return "https://$($DriverPack.URL)"
+            }
+            else {
+                return $DriverPack
+            }
         }
     }
     else {
