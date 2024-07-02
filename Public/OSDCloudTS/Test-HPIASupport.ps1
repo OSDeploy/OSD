@@ -217,7 +217,8 @@ function Get-HPDriverPackLatest {
         }
     }
     else {
-        Write-Host -ForegroundColor Red "No Driver Pack Found for Platform: $Platform"
+        Write-Verbose "No Driver Pack Found for Platform: $Platform"
+        return $false
     }
 }
 

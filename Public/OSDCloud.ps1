@@ -1293,13 +1293,23 @@
             Write-DarkGrayHost "DriverPack is set to None"
             $Global:OSDCloud.DriverPack = $null
             if ((Test-DISMFromOSDCloudUSB) -eq $true){
+                
                 Write-DarkGrayHost "Found expanded Driver Pack files on OSDCloudUSB, will DISM them into the Offline OS directly"
                 #Found Expanded Driver Package on OSDCloudUSB, will DISM Directly from that
                 Start-DISMFromOSDCloudUSB
             }
             if ($Global:OSDCloud.HPCMSLDriverPackLatest -eq $true){
                 Write-DarkGrayHost "Attempting to use HPCMSL Functions to download Latest Driver Pack for Model"
-                Get-HPDriverPackLatest -download
+                $HPDriverPack = Get-HPDriverPackLatest
+                if ($HPDriverPack -ne $false){
+                    Get-HPDriverPackLatest -download
+                    $Global:OSDCloud.DriverPackExpand = $true
+                    $Global:OSDCloud.DriverPack.Name = $HPDriverPack.Name
+                    $Global:OSDCloud.DriverPack.Product = Get-MyComputerProduct
+                    $Global:OSDCloud.DriverPack.FileName = ($HPDriverPack.url).Split('/')[-1]
+                    $Global:OSDCloud.DriverPack.Url = $HPDriverPack.Url
+                    
+                }
             }
         }
         elseif ($Global:OSDCloud.DriverPackName -match 'Microsoft Update Catalog') {
