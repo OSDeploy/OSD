@@ -153,7 +153,9 @@ function Get-HPDriverPackLatest {
     [CmdletBinding()]
     param(
     [Parameter(Position=0,mandatory=$false)]
-    [string]$Platform
+    [string]$Platform,
+    [switch]$URL,
+    [switch]$download
     )
     if ($Platform){$MachinePlatform = $platform}
     else {$MachinePlatform = (Get-CimInstance -Namespace root/cimv2 -ClassName Win32_BaseBoard).Product}
@@ -202,12 +204,23 @@ function Get-HPDriverPackLatest {
     }
     if ($DriverPack){
         Write-Verbose "Driver Pack Found: $($DriverPack.Name) for Platform: $Platform"
-        return $DriverPack
+        if ($Null -eq $download){
+            if ($null -eq $URL){
+                return $DriverPack
+            }
+            else {
+                return "https://$($DriverPack.URL)"
+            }
+        }
+        else{
+            Save-WebFile -SourceUrl "https://$($DriverPack.URL)" -DestinationName "$($DriverPack.id).exe" -DestinationDirectory "C:\OSDCloud\Drivers"
+        }
     }
     else {
         Write-Host -ForegroundColor Red "No Driver Pack Found for Platform: $Platform"
     }
 }
+
 function Invoke-HPIAOfflineSync {
     [CmdletBinding()]
     Param (

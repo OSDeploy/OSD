@@ -1423,6 +1423,19 @@
                     Continue
                 }
                 #=================================================
+                #   HP Softpaq
+                #=================================================
+                if (Test-Path -Path $env:windir\System32\7za.exe){
+                    if ($Item.Extension -eq '.exe' -and $Global:OSDCloud.Manufacturer -eq 'HP') {
+                        $DestinationPath = Join-Path $Item.Directory $Item.BaseName
+                        if (-NOT (Test-Path "$DestinationPath")) {
+                            Write-DarkGrayHost "HP Driver Pack is being expanded to $DestinationPath"
+                            Start-Process -FilePath $env:windir\System32\7za.exe -ArgumentList "-x $ExpandFile -o$DestinationPath -y" -Wait
+                        }
+                        Continue
+                    }
+                }
+                #=================================================
             }
         }
 
