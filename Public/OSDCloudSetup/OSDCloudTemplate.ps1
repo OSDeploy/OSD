@@ -159,7 +159,7 @@ function New-OSDCloudTemplate {
 
         [System.Management.Automation.SwitchParameter]
         #Adds 7Zip to Boot Image
-        $7zip
+        $Add7Zip
     )
 #=================================================
 #   WinREDriver
@@ -764,7 +764,7 @@ Windows Registry Editor Version 5.00
     #=================================================
     #	7zip x64 Portable
     #=================================================
-    if ($PSBoundParameters.ContainsKey('7zip')) {
+    if ($PSBoundParameters.ContainsKey('Add7Zip')) {
         
         Write-Host -ForegroundColor Yellow "7Zip for Extracting Driver Packs in WinPE"
         $Latest = Invoke-WebRequest -Uri https://github.com/ip7z/7zip/releases/latest -UseBasicParsing
