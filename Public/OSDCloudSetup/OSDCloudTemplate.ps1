@@ -155,7 +155,11 @@ function New-OSDCloudTemplate {
 
         [System.Management.Automation.SwitchParameter]
         #Uses ARM64 instead of AMD64
-        $ARM64
+        $ARM64,
+
+        [System.Management.Automation.SwitchParameter]
+        #Adds 7Zip to Boot Image
+        $7zip
     )
 #=================================================
 #   WinREDriver
@@ -757,6 +761,36 @@ Windows Registry Editor Version 5.00
     else {
         Write-Warning "Could not find $SourceFile"
     }
+    #=================================================
+    #	7zip x64 Portable
+    #=================================================
+    if ($PSBoundParameters.ContainsKey('7zip')) {
+        
+        Write-Host -ForegroundColor Yellow "7Zip for Extracting Driver Packs in WinPE"
+        $Latest = Invoke-WebRequest -Uri https://github.com/ip7z/7zip/releases/latest -UseBasicParsing
+        $NextLink = ($Latest.Links | Where-Object {$_.href -match "releases/tag"}).href
+        $Version = $NextLink.Split("/")[-1]
+        $VersionClean = ($Version).Replace(".","")
+        $FileName = "7z$VersionClean-extra.7z"
+        # Example: https://github.com/ip7z/7zip/releases/download/24.07/7z2407-extra.7z
+        $Download7zrURL = "https://github.com/ip7z/7zip/releases/download/$Version/7zr.exe"
+        $DownloadURL ="https://github.com/ip7z/7zip/releases/download/$Version/$fileName"
+
+        Write-Host -ForegroundColor DarkGray "Downloading $DownloadURL"
+        Invoke-WebRequest -Uri $Download7zrURL -OutFile "$env:TEMP\7zr.exe" -UseBasicParsing
+        Invoke-WebRequest -Uri $DownloadURL -OutFile "$env:TEMP\$FileName" -UseBasicParsing
+        if (Test-Path -Path $env:TEMP\$FileName){
+            Write-Host -ForegroundColor DarkGray "Extracting $env:TEMP\$FileName"
+            #$null = & "$env:temp\7zr.exe" x "$env:TEMP\$FileName" -o"$MountPath\Windows\System32" -y
+            $null = & "$env:temp\7zr.exe" x "$env:TEMP\$FileName" -o"$env:temp\7zip" -y
+            Copy-Item -Path "$env:temp\7zip\x64\*" -Destination "$MountPath\Windows\System32" -Recurse -Force
+        }
+        else {
+            Write-Warning "Could not find $env:TEMP\$FileName"
+        }
+    }    
+    
+
     #=================================================
     #   Adding Microsoft DartConfig from MDT
     #=================================================
