@@ -1426,11 +1426,13 @@
                 #   HP Softpaq
                 #=================================================
                 if (Test-Path -Path $env:windir\System32\7za.exe){
+                    Write-Host "Found 7zip, using to Expand HP Softpaq"
                     if ($Item.Extension -eq '.exe' -and $Global:OSDCloud.Manufacturer -eq 'HP') {
                         $DestinationPath = Join-Path $Item.Directory $Item.BaseName
+                        Write-Host
                         if (-NOT (Test-Path "$DestinationPath")) {
-                            Write-DarkGrayHost "HP Driver Pack is being expanded to $DestinationPath"
-                            Start-Process -FilePath $env:windir\System32\7za.exe -ArgumentList "-x $ExpandFile -o$DestinationPath -y" -Wait
+                            Write-Host "HP Driver Pack $ExpandFile is being expanded to $DestinationPath"
+                            Start-Process -FilePath $env:windir\System32\7za.exe -ArgumentList "x $ExpandFile -o$DestinationPath -y" -Wait -NoNewWindow -PassThru
                         }
                         Continue
                     }

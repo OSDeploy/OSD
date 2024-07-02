@@ -213,7 +213,7 @@ function Get-HPDriverPackLatest {
             }
         }
         else{
-            Save-WebFile -SourceUrl "https://$($DriverPack.URL)" -DestinationName "$($DriverPack.id).exe" -DestinationDirectory "C:\OSDCloud\Drivers"
+            Save-WebFile -SourceUrl "https://$($DriverPack.URL)" -DestinationName "$($DriverPack.id).exe" -DestinationDirectory "C:\Drivers"
         }
     }
     else {
