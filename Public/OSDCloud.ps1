@@ -1316,21 +1316,7 @@
                         }
                         $Global:OSDCloud.DriverPack = $HPDriverPackObject
                         $Global:OSDCloud.HPCMSLDriverPackLatestFound = $HPDriverPack
-                        #Write-DarkGrayHost "Driver Pack Downloading to c:\Drivers\$($HPDriverPackObject.FileName)"
-                        #Get-HPDriverPackLatest -download
-                        #$DriverPackFileName = ($HPDriverPack.url).Split('/')[-1]
-                        if (Test-Path -Path "c:\Drivers\$DriverPackFileName"){
-                        #    Write-DarkGrayHost -Message "Confirmed Downloaded to c:\Drivers\$DriverPackFileName"
-                            
-                        #   $Global:OSDCloud.DriverPackExpand = $true
-                            #$Global:OSDCloud.DriverPack.Name = $HPDriverPack.Name
-                            #$Global:OSDCloud.DriverPack.Product = Get-MyComputerProduct
-                            #$Global:OSDCloud.DriverPack.FileName = ($HPDriverPack.url).Split('/')[-1]
-                            #$Global:OSDCloud.DriverPack.Url = $HPDriverPack.Url
-                        }
-                        else {
-                        #    $Global:OSDCloud.HPCMSLDriverPackLatest = $false
-                        }
+                        Write-DarkGrayHost "Found HP Driver Pack via CMSL, Setting Variables"
                     }
                     else {
                         $Global:OSDCloud.HPCMSLDriverPackLatest = $false
@@ -1481,12 +1467,14 @@
                 #=================================================
                 if (Test-Path -Path $env:windir\System32\7za.exe){
                     Write-Host -ForegroundColor Cyan "Found 7zip, using to Expand HP Softpaq"
+                    Write-Host "SaveMyDriverPack: $SaveMyDriverPack"
+                    Write-Host "SaveMyDriverPack.FullName: $($SaveMyDriverPack.FullName)"
                     if ($Item.Extension -eq '.exe' -and $Global:OSDCloud.Manufacturer -eq 'HP') {
                         $DestinationPath = Join-Path $Item.Directory $Item.BaseName
-                        Write-Host
                         if (-NOT (Test-Path "$DestinationPath")) {
                             Write-Host "HP Driver Pack $ExpandFile is being expanded to $DestinationPath"
                             Start-Process -FilePath $env:windir\System32\7za.exe -ArgumentList "x $ExpandFile -o$DestinationPath -y" -Wait -NoNewWindow -PassThru
+                            Write-Host "7zip has expanded the HP Driver Pack to $DestinationPath"
                         }
                         Continue
                     }
@@ -1506,12 +1494,22 @@
                 #=================================================
                 $OSDCloudUSB = Get-USBVolume | Where-Object {($_.FileSystemLabel -match 'OSDCloud') -or ($_.FileSystemLabel -match 'BHIMAGE')} | Where-Object {$_.SizeGB -ge 8} | Where-Object {$_.SizeRemainingGB -ge 2} | Select-Object -First 1
                 if ($OSDCloudUSB) {
-                    $OSDCloudUSBDestination = "$($OSDCloudUSB.DriveLetter):\OSDCloud\DriverPacks\$($Global:OSDCloud.Manufacturer)"
-                    Write-Host -ForegroundColor Yellow "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Copying Driver Pack to OSDCloudUSB at $OSDCloudUSBDestination"
-                    If (! (Test-Path $OSDCloudUSBDestination)) {
-                        $null = New-Item -Path $OSDCloudUSBDestination -ItemType Directory -Force
+                    if (Test-Path -Path $SaveMyDriverPack){
+                        $DriverPackPath = $SaveMyDriverPack
                     }
-                    $null = Copy-Item -Path $SaveMyDriverPack.FullName -Destination $OSDCloudUSBDestination -Force -PassThru -ErrorAction Stop
+                    if ($null -ne $SaveMyDriverPack.FullName){
+                        if (Test-Path -Path $SaveMyDriverPack.FullName){
+                            $DriverPackPath = $SaveMyDriverPack.FullName
+                        }
+                    }
+                    if (Test-Path $DriverPackPath){
+                        $OSDCloudUSBDestination = "$($OSDCloudUSB.DriveLetter):\OSDCloud\DriverPacks\$($Global:OSDCloud.Manufacturer)"
+                        Write-Host -ForegroundColor Yellow "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Copying Driver Pack $DriverPackPath to OSDCloudUSB at $OSDCloudUSBDestination"
+                        If (!(Test-Path $OSDCloudUSBDestination)) {
+                            $null = New-Item -Path $OSDCloudUSBDestination -ItemType Directory -Force
+                        }
+                        $null = Copy-Item -Path $DriverPackPath -Destination $OSDCloudUSBDestination -Force -PassThru -ErrorAction Stop
+                    }
                 }
             }
         }
