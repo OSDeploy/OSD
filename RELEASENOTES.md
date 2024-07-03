@@ -10,6 +10,22 @@ Note, the changes I make won't go into effect until the next module release date
 
 ## Changes
 
+### 24.7.3 (not yet implemented)
+- Added several HP Functions into OSD Module that mirror HP CMSL but work in WinPE
+ - Get-HPDriverPackLatest - Will find the latest driver pack for a platform, with options for download or just URL
+ - Get-HPOSSUpport - Lists the supported Windows OS's supported by a platform
+ - Get-HPSoftpaqListLatest - Finds latest supported OS for Platform and provides list of softpaqs
+ - Get-HPSoftpaqItems - Provides list of Softpaqs for a Platform based on user input
+- Adding ability for OSDCloud to reach directly to HP's catalog realtime, find latest driver pack, download.
+ - New Variable: HPCMSLDriverPackLatest tell OSDCloud to use this new feature. (not available in GUI, maybe never will be?)
+- Adding 7zip (7za.exe) features to extract HP Softpaqs while in WinPE to DISM in while offline
+  - Requires you use the new -Add7Zip when using New-OSDCloudTemplate function
+  - Will add functionality into Edit-OSDCloudWinPE eventually, for now, just download the extra.7z 7zip download, grab the 3 files in the x64 folder and add them to your system32 folder on the boot wim.
+  - Issue open with 7zip GitHub to see if possible to add on the fly in WinPE: [Issue 24](https://github.com/ip7z/7zip/issues/24)
+  
+### Other
+- Several small updates to resolve issues, sorry I forgot to add info here, feel free to look at commits if you're really interested
+
 ### 24.3.27 (implemented in OSD Module 24.3.27.1)
 - Quick fix for [Issue 132](https://github.com/OSDeploy/OSD/issues/132)
 - Minor updates to DEV for ARM64 testing

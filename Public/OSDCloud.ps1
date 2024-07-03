@@ -71,6 +71,7 @@
             HPTPMUpdate = $null
             HPBIOSUpdate = $null
             HPCMSLDriverPackLatest = $null
+            HPCMSLDriverPackLatestFound = $null
             ImageFileFullName = $null
             ImageFileItem = $null
             ImageFileName = $null
@@ -1288,27 +1289,52 @@
     Write-SectionHeader 'OSDCloud DriverPack'
 
     #Check the Global Variables for a Driver Pack name
+    if ($Global:OSDCloud.HPCMSLDriverPackLatest -eq $true){
+        Write-DarkGrayHost "Request to use HP CMSL to download Driver Pack, setting DriverPackName to None"
+        $Global:OSDCloud.DriverPackName = 'None'
+    }
+    
     if ($Global:OSDCloud.DriverPackName) {
         if ($Global:OSDCloud.DriverPackName -match 'None') {
             Write-DarkGrayHost "DriverPack is set to None"
             $Global:OSDCloud.DriverPack = $null
             if ((Test-DISMFromOSDCloudUSB) -eq $true){
-                
                 Write-DarkGrayHost "Found expanded Driver Pack files on OSDCloudUSB, will DISM them into the Offline OS directly"
                 #Found Expanded Driver Package on OSDCloudUSB, will DISM Directly from that
                 Start-DISMFromOSDCloudUSB
             }
-            if ($Global:OSDCloud.HPCMSLDriverPackLatest -eq $true){
-                Write-DarkGrayHost "Attempting to use HPCMSL Functions to download Latest Driver Pack for Model"
-                $HPDriverPack = Get-HPDriverPackLatest
-                if ($HPDriverPack -ne $false){
-                    Get-HPDriverPackLatest -download
-                    $Global:OSDCloud.DriverPackExpand = $true
-                    $Global:OSDCloud.DriverPack.Name = $HPDriverPack.Name
-                    $Global:OSDCloud.DriverPack.Product = Get-MyComputerProduct
-                    $Global:OSDCloud.DriverPack.FileName = ($HPDriverPack.url).Split('/')[-1]
-                    $Global:OSDCloud.DriverPack.Url = $HPDriverPack.Url
-                    
+            else {
+                if ($Global:OSDCloud.HPCMSLDriverPackLatest -eq $true){
+                    Write-DarkGrayHost "Attempting to use HPCMSL Functions to download Latest Driver Pack for Model"
+                    $HPDriverPack = Get-HPDriverPackLatest
+                    if ($HPDriverPack -ne $false){
+                        $HPDriverPackObject = @{
+                            Name = $HPDriverPack.Name
+                            Product = Get-MyComputerProduct
+                            FileName = ($HPDriverPack.url).Split('/')[-1]
+                            Url = $HPDriverPack.Url
+                        }
+                        $Global:OSDCloud.DriverPack = $HPDriverPackObject
+                        $Global:OSDCloud.HPCMSLDriverPackLatestFound = $HPDriverPack
+                        #Write-DarkGrayHost "Driver Pack Downloading to c:\Drivers\$($HPDriverPackObject.FileName)"
+                        #Get-HPDriverPackLatest -download
+                        #$DriverPackFileName = ($HPDriverPack.url).Split('/')[-1]
+                        if (Test-Path -Path "c:\Drivers\$DriverPackFileName"){
+                        #    Write-DarkGrayHost -Message "Confirmed Downloaded to c:\Drivers\$DriverPackFileName"
+                            
+                        #   $Global:OSDCloud.DriverPackExpand = $true
+                            #$Global:OSDCloud.DriverPack.Name = $HPDriverPack.Name
+                            #$Global:OSDCloud.DriverPack.Product = Get-MyComputerProduct
+                            #$Global:OSDCloud.DriverPack.FileName = ($HPDriverPack.url).Split('/')[-1]
+                            #$Global:OSDCloud.DriverPack.Url = $HPDriverPack.Url
+                        }
+                        else {
+                        #    $Global:OSDCloud.HPCMSLDriverPackLatest = $false
+                        }
+                    }
+                    else {
+                        $Global:OSDCloud.HPCMSLDriverPackLatest = $false
+                    }
                 }
             }
         }
@@ -1379,6 +1405,19 @@
             #Use the Expanded Drivers on the OSDCloudUSB drive
             Start-DISMFromOSDCloudUSB -PackageID $Global:OSDCloud.DriverPack.PackageID
         }
+        elseif ($Global:OSDCloud.HPCMSLDriverPackLatestFound){
+            #Download HP Driver Pack from HP CMSL
+
+            Write-DarkGrayHost "Driver Pack Downloading to c:\Drivers\$($Global:OSDCloud.DriverPack.FileName)"
+            Get-HPDriverPackLatest -download
+            if (Test-Path -Path "c:\Drivers\$($Global:OSDCloud.DriverPack.FileName)"){
+                Write-DarkGrayHost -Message "Confirmed Downloaded to c:\Drivers\$($Global:OSDCloud.DriverPack.FileName)"
+                $Global:OSDCloud.DriverPackExpand = $true
+                $Global:OSDCloud.DriverPackName = 'None' #Skips adding MS Update Catalog drivers into Process
+                $Global:OSDCloud.OSDCloudUnattend = $true #Skips installing the PPKG File to load drivers in Specialize
+
+            }
+        }
         elseif ($Global:OSDCloud.AzOSDCloudDriverPack) {
             Write-DarkGrayHost "DriverPack is being downloaded from Azure Storage to C:\Drivers"
 
@@ -1441,7 +1480,7 @@
                 #   HP Softpaq
                 #=================================================
                 if (Test-Path -Path $env:windir\System32\7za.exe){
-                    Write-Host "Found 7zip, using to Expand HP Softpaq"
+                    Write-Host -ForegroundColor Cyan "Found 7zip, using to Expand HP Softpaq"
                     if ($Item.Extension -eq '.exe' -and $Global:OSDCloud.Manufacturer -eq 'HP') {
                         $DestinationPath = Join-Path $Item.Directory $Item.BaseName
                         Write-Host
@@ -1451,6 +1490,10 @@
                         }
                         Continue
                     }
+                }
+                else{
+                    Write-DarkGrayHost "7zip not found, unable to expand HP Softpaq"
+                    Write-DarkGrayHost "Please add 7zip your OSDCloud Boot Media to use this feature"
                 }
                 #=================================================
             }
