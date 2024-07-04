@@ -231,12 +231,12 @@ Function Invoke-HPIA {
         if ($ReferenceFile){
             Write-CMTraceLog -LogFile $CMTraceLog -Message "/Operation:$Operation /Category:$Category /Selection:$Selection /Action:$Action $Silent $Noninteractive /Debug /ReportFolder:$ReportsFolder /ReferenceFile:$ReferenceFile" -Component $LogComp
             Write-Host "Running HPIA With Args: /Operation:$Operation /Category:$Category /Selection:$Selection /Action:$Action $Silent $Noninteractive /Debug /ReportFolder:$ReportsFolder /ReferenceFile:$ReferenceFile" -ForegroundColor Green
-            $Process = Start-Process -FilePath $HPIAInstallPath\HPImageAssistant.exe -WorkingDirectory $TempWorkFolder -ArgumentList "/Operation:$Operation /Category:$Category /Selection:$Selection /Action:$Action $Silent $Noninteractive /Debug /ReportFolder:$ReportsFolder /ReferenceFile:$ReferenceFile" -NoNewWindow -PassThru -Wait -ErrorAction Stop
+            $Process = Start-Process -FilePath $HPIAInstallPath\HPImageAssistant.exe -WorkingDirectory $TempWorkFolder -ArgumentList "/Operation:$Operation /Category:$Category /Selection:$Selection /Action:$Action $Silent $Noninteractive /Debug /ReportFolder:$ReportsFolder /ReferenceFile:$ReferenceFile /IgnoreGenericOsError" -NoNewWindow -PassThru -Wait -ErrorAction Stop
         }
         else {
             Write-CMTraceLog -LogFile $CMTraceLog -Message "/Operation:$Operation /Category:$Category /Selection:$Selection /Action:$Action $Silent $Noninteractive /Debug /ReportFolder:$ReportsFolder" -Component $LogComp
             Write-Host "Running HPIA With Args: /Operation:$Operation /Category:$Category /Selection:$Selection /Action:$Action $Silent $Noninteractive /Debug /ReportFolder:$ReportsFolder" -ForegroundColor Green
-            $Process = Start-Process -FilePath $HPIAInstallPath\HPImageAssistant.exe -WorkingDirectory $TempWorkFolder -ArgumentList "/Operation:$Operation /Category:$Category /Selection:$Selection /Action:$Action $Silent $Noninteractive /Debug /ReportFolder:$ReportsFolder" -NoNewWindow -PassThru -Wait -ErrorAction Stop
+            $Process = Start-Process -FilePath $HPIAInstallPath\HPImageAssistant.exe -WorkingDirectory $TempWorkFolder -ArgumentList "/Operation:$Operation /Category:$Category /Selection:$Selection /Action:$Action $Silent $Noninteractive /Debug /ReportFolder:$ReportsFolder /IgnoreGenericOsError" -NoNewWindow -PassThru -Wait -ErrorAction Stop
         }
 
         
@@ -303,7 +303,7 @@ Function Invoke-HPIA {
     }
     catch {
         #Write-CMTraceLog -LogFile $CMTraceLog -Message "Exit $($Process.ExitCode) - Expecting 0" -Component "Update" -Type 3
-        Write-Output "Exit $($Process.ExitCode) - Expecting 0" 
+        Write-Output "Failed to run HPIA Commands in Try/Catch Block: $($_.Exception.Message)" 
     }
 
 }
