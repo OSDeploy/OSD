@@ -74,10 +74,11 @@ function Get-HPSoftpaqListLatest {
     if ($env:PROCESSOR_ARCHITECTURE -eq "AMD64"){
         $Arch = '64'
     }
-    $OSNum = Get-HPOSSupport -MaxOSNum
-    $ReleaseID = Get-HPOSSupport -MaxOSVer
+
     if ($Platform){$MachinePlatform = $platform}
     else {$MachinePlatform = (Get-CimInstance -Namespace root/cimv2 -ClassName Win32_BaseBoard).Product}
+    $OSNum = Get-HPOSSupport -MaxOSNum -Platform $MachinePlatform
+    $ReleaseID = Get-HPOSSupport -MaxOSVer -Platform $MachinePlatform
     $BaseURL = ("https://hpia.hpcloud.hp.com/ref/$($MachinePlatform)/$($MachinePlatform)_$($Arch)_$($OSNum).$($ReleaseID).cab").ToLower()
     #https://hpia.hpcloud.hp.com/ref/83b2/83b2_64_11.0.23h2.cab
     $CabPath = "$env:TEMP\HPIA.cab"
