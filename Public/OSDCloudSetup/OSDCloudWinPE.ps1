@@ -399,10 +399,11 @@ PowerShell -Nol -C Initialize-OSDCloudStartnetUpdate
 
     #region Add7Zip
     if ($PSBoundParameters.ContainsKey('Add7Zip')) {
+        Write-Host -ForegroundColor Yellow "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Adding 7zip (7z.exe) to WinPE"
         Add-7Zip2BootImage
     }   
     #endregion
-    
+
     #region OSD PowerShell Module
     Write-Host -ForegroundColor DarkGray "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Saving OSD Module to X:\Program Files\WindowsPowerShell\Modules"
     Save-Module -Name OSD -Path "$MountPath\Program Files\WindowsPowerShell\Modules" -Force
