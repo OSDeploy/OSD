@@ -122,7 +122,11 @@
         })]
         [System.IO.FileInfo]
         #Imports and uses a WiFi Profile to connect to WiFi
-        $WifiProfile
+        $WifiProfile,
+
+        [System.Management.Automation.SwitchParameter]
+        #Adds 7Zip to Boot Image
+        $Add7Zip
     )
     #=================================================
     #	Start the Clock
@@ -393,6 +397,12 @@ PowerShell -Nol -C Initialize-OSDCloudStartnetUpdate
     }
     #endregion
 
+    #region Add7Zip
+    if ($PSBoundParameters.ContainsKey('Add7Zip')) {
+        Add-7Zip2BootImage
+    }   
+    #endregion
+    
     #region OSD PowerShell Module
     Write-Host -ForegroundColor DarkGray "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Saving OSD Module to X:\Program Files\WindowsPowerShell\Modules"
     Save-Module -Name OSD -Path "$MountPath\Program Files\WindowsPowerShell\Modules" -Force

@@ -18,6 +18,7 @@
     FunctionsToExport       = @(
         'Add-OfflineServicingWindowsDriver',
         'Add-WindowsPackageSSU',
+        'Add-7Zip2BootImage',
         'Backup-DiskToFFU',
         'Backup-MyBitLockerKeys',
         'Block-AdminUser',

@@ -9,6 +9,9 @@ I know that OSDCloud has been around awhile, and has a ton of changes over the p
 Note, the changes I make won't go into effect until the next module release date, so if you see changes here, and the date is newer then the module date, then they haven't taken effect.
 
 ## Changes
+### 24.7.8 ()
+ - Created Function: Add-7Zip2BootImage
+   - Will be used in New-OSDCloudTemplate & Edit-OSDCloudWinPE to add 7zip into your boot images.
 
 ### 24.7.3 (not yet implemented)
 - Added several HP Functions into OSD Module that mirror HP CMSL but work in WinPE
