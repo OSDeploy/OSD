@@ -1302,6 +1302,7 @@
                 Write-DarkGrayHost "Found expanded Driver Pack files on OSDCloudUSB, will DISM them into the Offline OS directly"
                 #Found Expanded Driver Package on OSDCloudUSB, will DISM Directly from that
                 Start-DISMFromOSDCloudUSB
+                $DriverPPKGNeeded = $false
             }
             else {
                 if ($Global:OSDCloud.HPCMSLDriverPackLatest -eq $true){
@@ -1400,7 +1401,7 @@
                 Write-DarkGrayHost -Message "Confirmed Downloaded to c:\Drivers\$($Global:OSDCloud.DriverPack.FileName)"
                 $Global:OSDCloud.DriverPackExpand = $true
                 $Global:OSDCloud.DriverPackName = 'None' #Skips adding MS Update Catalog drivers into Process
-                $Global:OSDCloud.OSDCloudUnattend = $true #Skips installing the PPKG File to load drivers in Specialize
+                #$Global:OSDCloud.OSDCloudUnattend = $true #Skips installing the PPKG File to load drivers in Specialize
 
             }
         }
@@ -1475,6 +1476,8 @@
                             Write-Host "HP Driver Pack $ExpandFile is being expanded to $DestinationPath"
                             Start-Process -FilePath $env:windir\System32\7za.exe -ArgumentList "x $ExpandFile -o$DestinationPath -y" -Wait -NoNewWindow -PassThru
                             Write-Host "7zip has expanded the HP Driver Pack to $DestinationPath"
+                            #$Global:OSDCloud.OSDCloudUnattend = $true
+                            $DriverPPKGNeeded = $false
                         }
                         Continue
                     }
@@ -1578,6 +1581,7 @@
             Write-DarkGrayHost "Found expanded Driver Pack files on OSDCloudUSB, will DISM them into the Offline OS directly"
             #Found Expanded Driver Package on OSDCloudUSB, will DISM Directly from that
             Start-DISMFromOSDCloudUSB
+            $DriverPPKGNeeded = $false
         }
     }
     #endregion
@@ -1610,9 +1614,11 @@
         }
     }
     else {
-        Write-SectionHeader "OSDCloud DriverPack Provisioning Package"
-        Write-DarkGrayHost "This will enable the extraction and installation of HP, Dell, Lenovo, and Microsoft Surface Drivers"
-        Invoke-OSDCloudDriverPackPPKG
+        if ($DriverPPKGNeeded -ne $false){
+            Write-SectionHeader "OSDCloud DriverPack Provisioning Package"
+            Write-DarkGrayHost "This will enable the extraction and installation of HP, Dell, Lenovo, and Microsoft Surface Drivers"
+            Invoke-OSDCloudDriverPackPPKG
+        }
     }
     #endregion
    
@@ -1926,8 +1932,8 @@
     #Required for some HP & Dell Updates - Will get set to True in the Dell / HP sections if needed
     if ($EnableSpecialize -eq $true){
         if ($Global:OSDCloud.IsWinPE -eq $true) {
-            Write-DarkGrayHost  "Set-OSDCloudUnattendSpecializeDEV"
-            Set-OSDCloudUnattendSpecializeDev
+            Write-DarkGrayHost  "Set-OSDCloudUnattendSpecialize"
+            Set-OSDCloudUnattendSpecialize
         }
     }
     #Bitlocker Stuff

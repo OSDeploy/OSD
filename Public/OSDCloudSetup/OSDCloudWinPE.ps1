@@ -399,7 +399,7 @@ PowerShell -Nol -C Initialize-OSDCloudStartnetUpdate
 
     #region Add7Zip
     if ($PSBoundParameters.ContainsKey('Add7Zip')) {
-        Write-Host -ForegroundColor Yellow "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Adding 7zip (7z.exe) to WinPE"
+        Write-Host -ForegroundColor Yellow "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Adding 7zip (7za.exe) to WinPE"
         Add-7Zip2BootImage
     }   
     #endregion

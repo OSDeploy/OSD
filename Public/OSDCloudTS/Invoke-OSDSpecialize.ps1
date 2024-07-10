@@ -1,4 +1,4 @@
-function Invoke-OSDSpecializeDev {
+function Invoke-OSDSpecialize {
     [CmdletBinding()]
     param (
         [System.Management.Automation.SwitchParameter]$Apply
