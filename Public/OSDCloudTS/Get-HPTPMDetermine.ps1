@@ -110,18 +110,22 @@ Function Test-HPTPMFromOSDCloudUSB {
 
 
 function Get-HPTPMDetermine{
-    $SP87753 = Get-CimInstance  -Namespace "root\cimv2\security\MicrosoftTPM" -query "select * from win32_tpm where IsEnabled_InitialValue = 'True' and ((ManufacturerVersion like '7.%' and ManufacturerVersion < '7.63.3353') or (ManufacturerVersion like '5.1%') or (ManufacturerVersion like '5.60%') or (ManufacturerVersion like '5.61%') or (ManufacturerVersion like '4.4%') or (ManufacturerVersion like '6.40%') or (ManufacturerVersion like '6.41%') or (ManufacturerVersion like '6.43.243.0') or (ManufacturerVersion like '6.43.244.0'))"
-    $SP94937 = Get-CimInstance  -Namespace "root\cimv2\security\MicrosoftTPM" -query "select * from win32_tpm where IsEnabled_InitialValue = 'True' and ((ManufacturerVersion like '7.62%') or (ManufacturerVersion like '7.63%') or (ManufacturerVersion like '7.83%') or (ManufacturerVersion like '6.43%') )"
-    if (!($SP87753)){
-        $TPM = Get-CimInstance -Namespace "root\cimv2\security\MicrosoftTPM" -ClassName win32_tpm
-        #Testing change below, from -eq to -lt.  If you manually downgrade using 94937 from 2.0 to 1.2, it sets the version to 6.43.X
-        if ($TPM.SpecVersion -match "1.2" -and $TPM.ManufacturerVersion -lt "6.43"){
-            $SP87753 = 'SP87753'
+    $TPM = Get-CimInstance -Namespace "root\cimv2\security\MicrosoftTPM" -ClassName win32_tpm
+    if ($TPM.ManufacturerIdTxt -match "IFX"){
+        $SP87753 = Get-CimInstance  -Namespace "root\cimv2\security\MicrosoftTPM" -query "select * from win32_tpm where IsEnabled_InitialValue = 'True' and ((ManufacturerVersion like '7.%' and ManufacturerVersion < '7.63.3353') or (ManufacturerVersion like '5.1%') or (ManufacturerVersion like '5.60%') or (ManufacturerVersion like '5.61%') or (ManufacturerVersion like '4.4%') or (ManufacturerVersion like '6.40%') or (ManufacturerVersion like '6.41%') or (ManufacturerVersion like '6.43.243.0') or (ManufacturerVersion like '6.43.244.0'))"
+        $SP94937 = Get-CimInstance  -Namespace "root\cimv2\security\MicrosoftTPM" -query "select * from win32_tpm where IsEnabled_InitialValue = 'True' and ((ManufacturerVersion like '7.62%') or (ManufacturerVersion like '7.63%') or (ManufacturerVersion like '7.83%') or (ManufacturerVersion like '6.43%') )"
+        if (!($SP87753)){
+            $TPM = Get-CimInstance -Namespace "root\cimv2\security\MicrosoftTPM" -ClassName win32_tpm
+            #Testing change below, from -eq to -lt.  If you manually downgrade using 94937 from 2.0 to 1.2, it sets the version to 6.43.X
+            if ($TPM.SpecVersion -match "1.2" -and $TPM.ManufacturerVersion -lt "6.43"){
+                $SP87753 = 'SP87753'
+            }
         }
+        if ($SP87753){Return "SP87753"}
+        elseif ($SP94937){Return "SP94937"}
+        else{Return $false}
     }
-    if ($SP87753){Return "SP87753"}
-    elseif ($SP94937){Return "SP94937"}
-    else{Return $false}
+    else {Return $false}
 }
 
 function Invoke-HPTPMDownload { #Used when you want to manually download and test, as it will extract for you.
