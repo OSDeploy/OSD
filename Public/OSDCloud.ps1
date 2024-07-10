@@ -1291,7 +1291,13 @@
     #Check the Global Variables for a Driver Pack name
     if ($Global:OSDCloud.HPCMSLDriverPackLatest -eq $true){
         Write-DarkGrayHost "Request to use HP CMSL to download Driver Pack, setting DriverPackName to None"
-        $Global:OSDCloud.DriverPackName = 'None'
+        if (Test-WebConnection -Uri "google.com") {
+            $Global:OSDCloud.DriverPackName = 'None' #Set to None to prevent any other DriverPack from being used
+        }
+        else {
+            $Global:OSDCloud.HPCMSLDriverPackLatest = $false
+            Write-DarkGrayHost "Unable to reach internet, will not attempt to download HP Driver Pack via CMSL"
+        }
     }
     
     if ($Global:OSDCloud.DriverPackName) {
@@ -1306,6 +1312,7 @@
             }
             else {
                 if ($Global:OSDCloud.HPCMSLDriverPackLatest -eq $true){
+                    
                     Write-DarkGrayHost "Attempting to use HPCMSL Functions to download Latest Driver Pack for Model"
                     $HPDriverPack = Get-HPDriverPackLatest
                     if ($HPDriverPack -ne $false){
@@ -1466,25 +1473,28 @@
                 #=================================================
                 #   HP Softpaq
                 #=================================================
-                if (Test-Path -Path $env:windir\System32\7za.exe){
-                    Write-Host -ForegroundColor Cyan "Found 7zip, using to Expand HP Softpaq"
-                    Write-Host "SaveMyDriverPack: $SaveMyDriverPack"
-                    Write-Host "SaveMyDriverPack.FullName: $($SaveMyDriverPack.FullName)"
-                    if ($Item.Extension -eq '.exe' -and $Global:OSDCloud.Manufacturer -eq 'HP') {
-                        $DestinationPath = Join-Path $Item.Directory $Item.BaseName
-                        if (-NOT (Test-Path "$DestinationPath")) {
-                            Write-Host "HP Driver Pack $ExpandFile is being expanded to $DestinationPath"
-                            Start-Process -FilePath $env:windir\System32\7za.exe -ArgumentList "x $ExpandFile -o$DestinationPath -y" -Wait -NoNewWindow -PassThru
-                            Write-Host "7zip has expanded the HP Driver Pack to $DestinationPath"
-                            #$Global:OSDCloud.OSDCloudUnattend = $true
-                            $DriverPPKGNeeded = $false
+                if ($Global:OSDCloud.Manufacturer -eq 'HP'){ #If HP
+                    if ($Item.Extension -eq '.exe'){ #If found an EXE in c:\drivers
+                        if (Test-Path -Path $env:windir\System32\7za.exe){ #If 7zip is found
+                            Write-Host -ForegroundColor Cyan "Found 7zip, using to Expand HP Softpaq"
+                            Write-Host "SaveMyDriverPack: $SaveMyDriverPack"
+                            Write-Host "SaveMyDriverPack.FullName: $($SaveMyDriverPack.FullName)"
+                            $DestinationPath = Join-Path $Item.Directory $Item.BaseName
+                            if (-NOT (Test-Path "$DestinationPath")) { #If DestinationPath does not exist already
+                                Write-Host "HP Driver Pack $ExpandFile is being expanded to $DestinationPath"
+                                Start-Process -FilePath $env:windir\System32\7za.exe -ArgumentList "x $ExpandFile -o$DestinationPath -y" -Wait -NoNewWindow -PassThru
+                                Write-Host "7zip has expanded the HP Driver Pack to $DestinationPath"
+                                #$Global:OSDCloud.OSDCloudUnattend = $true
+                                $DriverPPKGNeeded = $false #Disable PPKG for HP Driver Pack during Specialize
+                                $Global:OSDCloud.DriverPackName = 'None' #Skips adding MS Update Catalog drivers into Process
+                            }
+                            Continue
                         }
-                        Continue
+                        else{
+                            Write-DarkGrayHost "7zip not found, unable to expand HP Softpaq"
+                            Write-DarkGrayHost "Please add 7zip your OSDCloud Boot Media to use this feature"
+                        }
                     }
-                }
-                else{
-                    Write-DarkGrayHost "7zip not found, unable to expand HP Softpaq"
-                    Write-DarkGrayHost "Please add 7zip your OSDCloud Boot Media to use this feature"
                 }
                 #=================================================
             }
