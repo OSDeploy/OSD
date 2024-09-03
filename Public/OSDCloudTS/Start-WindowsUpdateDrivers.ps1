@@ -102,7 +102,7 @@ Function Start-WindowsUpdateDriver{
         Remove-Job -Force $Installing
 
         #Start-sleep
-        Start-sleep 10
+        Start-sleep -seconds 10
         
     }
 }
