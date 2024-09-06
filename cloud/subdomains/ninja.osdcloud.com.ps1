@@ -207,6 +207,23 @@ function ninja-WinGetInstallADK23H2 {
         Write-Error -Message 'WinGet is not installed.'
     }
 }
+function ninja-WinGetInstallMDT {
+    [CmdletBinding()]
+    param ()
+    if (Get-Command 'WinGet' -ErrorAction SilentlyContinue) {
+        # Show package information
+        # winget show --id Microsoft.DeploymentToolkit
+        
+        # Show version information
+        # winget show --id Microsoft.DeploymentToolkit --versions
+        
+        # Install
+        winget install --id Microsoft.DeploymentToolkit --version 6.3.8456.1000 --exact --accept-source-agreements --accept-package-agreements
+    }
+    else {
+        Write-Error -Message 'WinGet is not installed.'
+    }
+}
 function ninja-WinGetInstallGit {
     [CmdletBinding()]
     param ()
@@ -224,20 +241,10 @@ function ninja-WinGetInstallGit {
         Write-Error -Message 'WinGet is not installed.'
     }
 }
-function ninja-WinGetInstallMDT {
-    [CmdletBinding()]
-    param ()
-    if (Get-Command 'WinGet' -ErrorAction SilentlyContinue) {
-        # Show package information
-        # winget show --id Microsoft.DeploymentToolkit
-        
-        # Show version information
-        # winget show --id Microsoft.DeploymentToolkit --versions
-        
-        # Install
-        winget install --id Microsoft.DeploymentToolkit --version 6.3.8456.1000 --exact --accept-source-agreements --accept-package-agreements
-    }
-    else {
-        Write-Error -Message 'WinGet is not installed.'
-    }
+function ninja-CloneMicrosoftDaRT {
+    git clone https://github.com/OSDeploy/MicrosoftDaRT.git "C:\Program Files\Microsoft DaRT\v10"
+}
+function ninja-BuildTemplates {
+    New-OSDCloudTemplate -Name VM
+    New-OSDCloudTemplate -Name Wireless -WinRE
 }
