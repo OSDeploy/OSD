@@ -120,3 +120,21 @@ function Prompt {
     $(if ($NestedPromptLevel -ge 1) { '>>' }) + '> '
 }
 #endregion
+
+function ninja-WinGetInstallMDT {
+    [CmdletBinding()]
+    param ()
+    if (Get-Command 'WinGet' -ErrorAction SilentlyContinue) {
+        # Show package information
+        # winget show --id Microsoft.DeploymentToolkit
+        
+        # Show version information
+        # winget show --id Microsoft.DeploymentToolkit --versions
+        
+        # Install
+        winget install --id Microsoft.DeploymentToolkit --version 6.3.8456.1000 --exact --accept-source-agreements --accept-package-agreements
+    }
+    else {
+        Write-Error -Message 'WinGet is not installed.'
+    }
+}
