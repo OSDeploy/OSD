@@ -31,7 +31,6 @@ powershell iex (irm ninja.osdcloud.com)
     powershell iex (irm ninja.osdcloud.com)
 #>
 [CmdletBinding()]
-param()
 $ScriptName = 'ninja.osdcloud.com'
 $ScriptVersion = '24.9.6.1'
 
