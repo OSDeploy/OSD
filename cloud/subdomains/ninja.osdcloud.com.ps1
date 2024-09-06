@@ -1,9 +1,9 @@
 ﻿<#PSScriptInfo
-.VERSION 23.6.10.1
-.GUID 9670c013-d1b1-4f5d-9bd0-0fa185b9f203
+.VERSION 24.9.6.1
+.GUID 3066fde0-75e9-4b35-9038-3e5781a34228
 .AUTHOR David Segura @SeguraOSD
 .COMPANYNAME osdcloud.com
-.COPYRIGHT (c) 2023 David Segura osdcloud.com. All rights reserved.
+.COPYRIGHT (c) 2024 David Segura osdcloud.com. All rights reserved.
 .TAGS OSDeploy OSDCloud WinPE OOBE Windows AutoPilot
 .LICENSEURI 
 .PROJECTURI https://github.com/OSDeploy/OSD
@@ -13,9 +13,9 @@
 .EXTERNALSCRIPTDEPENDENCIES 
 .RELEASENOTES
 Script should be executed in a Command Prompt using the following command
-powershell Invoke-Expression -Command (Invoke-RestMethod -Uri sandbox.osdcloud.com)
+powershell Invoke-Expression -Command (Invoke-RestMethod -Uri ninja.osdcloud.com)
 This is abbreviated as
-powershell iex (irm sandbox.osdcloud.com)
+powershell iex (irm ninja.osdcloud.com)
 #>
 #Requires -RunAsAdministrator
 <#
@@ -24,16 +24,16 @@ powershell iex (irm sandbox.osdcloud.com)
 .DESCRIPTION
     PowerShell Script which supports the OSDCloud environment
 .NOTES
-    Version 23.6.10.1
+    Version 24.9.6.1
 .LINK
-    https://raw.githubusercontent.com/OSDeploy/OSD/master/cloud/sandbox.osdcloud.com.ps1
+    https://raw.githubusercontent.com/OSDeploy/OSD/master/cloud/ninja.osdcloud.com.ps1
 .EXAMPLE
-    powershell iex (irm sandbox.osdcloud.com)
+    powershell iex (irm ninja.osdcloud.com)
 #>
 [CmdletBinding()]
 param()
-$ScriptName = 'sandbox.osdcloud.com'
-$ScriptVersion = '23.6.10.1'
+$ScriptName = 'ninja.osdcloud.com'
+$ScriptVersion = '24.9.6.1'
 
 #region Initialize
 $Transcript = "$((Get-Date).ToString('yyyy-MM-dd-HHmmss'))-$ScriptName.log"
@@ -51,7 +51,7 @@ else {
 }
 
 Write-Host -ForegroundColor Green "[+] $ScriptName $ScriptVersion ($WindowsPhase Phase)"
-Invoke-Expression -Command (Invoke-RestMethod -Uri functions.osdcloud.com)
+#Invoke-Expression -Command (Invoke-RestMethod -Uri functions.osdcloud.com)
 #endregion
 
 #region Admin Elevation
@@ -73,39 +73,51 @@ Write-Host -ForegroundColor Green "[+] Transport Layer Security (TLS) 1.2"
 
 #region WinPE
 if ($WindowsPhase -eq 'WinPE') {
-    #Process OSDCloud startup and load Azure KeyVault dependencies
-    osdcloud-StartWinPE -OSDCloud -KeyVault
-    Write-Host -ForegroundColor Cyan "To start a new PowerShell session, type 'start powershell' and press enter"
-    Write-Host -ForegroundColor Cyan "Start-OSDCloud, Start-OSDCloudGUI, or Start-OSDCloudAzure, can be run in the new PowerShell window"
-    
-    #Stop the startup Transcript.  OSDCloud will create its own
+
     $null = Stop-Transcript -ErrorAction Ignore
 }
 #endregion
 
 #region Specialize
 if ($WindowsPhase -eq 'Specialize') {
+
     $null = Stop-Transcript -ErrorAction Ignore
 }
 #endregion
 
 #region AuditMode
 if ($WindowsPhase -eq 'AuditMode') {
+
     $null = Stop-Transcript -ErrorAction Ignore
 }
 #endregion
 
 #region OOBE
 if ($WindowsPhase -eq 'OOBE') {
-    #Load everything needed to run AutoPilot and Azure KeyVault
-    osdcloud-StartOOBE -Display -Language -DateTime -Autopilot -KeyVault -InstallWinGet -WinGetUpgrade -WinGetPwsh
+
     $null = Stop-Transcript -ErrorAction Ignore
 }
 #endregion
 
 #region Windows
 if ($WindowsPhase -eq 'Windows') {
-    #Load OSD and Azure stuff
+
     $null = Stop-Transcript -ErrorAction Ignore
+}
+#endregion
+
+#region PowerShell Prompt
+<#
+Since these functions are temporarily loaded, the PowerShell Prompt is changed to make it visual if the functions are loaded or not
+[WPNinja]: PS C:\>
+
+You can read more about how to make the change here
+https://docs.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_prompts?view=powershell-5.1
+#>
+function Prompt {
+    $(if (Test-Path variable:/PSDebugContext) { '[DBG]: ' }
+    else { "[WPNinja]: " }
+    ) + 'PS ' + $(Get-Location) +
+    $(if ($NestedPromptLevel -ge 1) { '>>' }) + '> '
 }
 #endregion
