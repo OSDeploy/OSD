@@ -120,7 +120,110 @@ function Prompt {
     $(if ($NestedPromptLevel -ge 1) { '>>' }) + '> '
 }
 #endregion
-
+function ninja-WinGetInstallADK21H2 {
+    [CmdletBinding()]
+    param ()
+    if (Get-Command 'WinGet' -ErrorAction SilentlyContinue) {
+        # Show package information
+        # winget show --id Microsoft.WindowsADK
+        
+        # Show version information
+        # winget show --id Microsoft.WindowsADK --versions
+        
+        # Install
+        winget install --id Microsoft.WindowsADK --version 10.1.22000.1 --exact --accept-source-agreements --accept-package-agreements
+    
+        # Show package information
+        # winget show --id Microsoft.ADKPEAddon
+        
+        # Show version information
+        # winget show --id Microsoft.ADKPEAddon --versions
+        
+        # Install
+        winget install --id Microsoft.ADKPEAddon --version 10.1.22000.1 --exact --accept-source-agreements --accept-package-agreements
+        
+        # Resolves issue with MDT locking up without this directory present on WinPE x86 tab
+        New-Item -Path 'C:\Program Files (x86)\Windows Kits\10\Assessment and Deployment Kit\Windows Preinstallation Environment\x86\WinPE_OCs' -ItemType Directory -Force
+    }
+    else {
+        Write-Error -Message 'WinGet is not installed.'
+    }
+}
+function ninja-WinGetInstallADK22H2 {
+    [CmdletBinding()]
+    param ()
+    if (Get-Command 'WinGet' -ErrorAction SilentlyContinue) {
+        # Show package information
+        # winget show --id Microsoft.WindowsADK
+    
+        # Show version information
+        # winget show --id Microsoft.WindowsADK --versions
+    
+        # Install
+        winget install --id Microsoft.WindowsADK --version 10.1.22621.1 --exact --accept-source-agreements --accept-package-agreements
+        
+        # Show package information
+        # winget show --id Microsoft.ADKPEAddon
+        
+        # Show version information
+        # winget show --id Microsoft.ADKPEAddon --versions
+        
+        # Install
+        winget install --id Microsoft.ADKPEAddon --version 10.1.22621.1 --exact --accept-source-agreements --accept-package-agreements
+        
+        # Resolves issue with MDT locking up without this directory present on WinPE x86 tab
+        New-Item -Path 'C:\Program Files (x86)\Windows Kits\10\Assessment and Deployment Kit\Windows Preinstallation Environment\x86\WinPE_OCs' -ItemType Directory -Force
+    }
+    else {
+        Write-Error -Message 'WinGet is not installed.'
+    }
+}
+function ninja-WinGetInstallADK23H2 {
+    [CmdletBinding()]
+    param ()
+    if (Get-Command 'WinGet' -ErrorAction SilentlyContinue) {
+        # Show package information
+        # winget show --id Microsoft.WindowsADK
+        
+        # Show version information
+        # winget show --id Microsoft.WindowsADK --versions
+        
+        # Install
+        winget install --id Microsoft.WindowsADK --version 10.1.25398.1 --exact --accept-source-agreements --accept-package-agreements
+    
+        # Show package information
+        # winget show --id Microsoft.ADKPEAddon
+        
+        # Show version information
+        # winget show --id Microsoft.ADKPEAddon --versions
+        
+        # Install
+        winget install --id Microsoft.ADKPEAddon --version 10.1.25398.1 --exact --accept-source-agreements --accept-package-agreements
+        
+        # Resolves issue with MDT locking up without this directory present on WinPE x86 tab
+        New-Item -Path 'C:\Program Files (x86)\Windows Kits\10\Assessment and Deployment Kit\Windows Preinstallation Environment\x86\WinPE_OCs' -ItemType Directory -Force
+    }
+    else {
+        Write-Error -Message 'WinGet is not installed.'
+    }
+}
+function ninja-WinGetInstallGit {
+    [CmdletBinding()]
+    param ()
+    if (Get-Command 'WinGet' -ErrorAction SilentlyContinue) {
+        # Show package information
+        # winget show --id Git.Git
+        
+        # Show version information
+        # winget show --id Git.Git --versions
+        
+        # Install
+        winget install --id Git.Git --exact --accept-source-agreements --accept-package-agreements
+    }
+    else {
+        Write-Error -Message 'WinGet is not installed.'
+    }
+}
 function ninja-WinGetInstallMDT {
     [CmdletBinding()]
     param ()
