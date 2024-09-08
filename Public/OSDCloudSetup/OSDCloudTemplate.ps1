@@ -151,7 +151,15 @@ function New-OSDCloudTemplate {
 
         [System.Management.Automation.SwitchParameter]
         #Uses Windows 10 WinRE.wim instead of the ADK Boot.wim
-        $WinRE
+        $WinRE,
+
+        [System.Management.Automation.SwitchParameter]
+        #Uses ARM64 instead of AMD64
+        $ARM64,
+
+        [System.Management.Automation.SwitchParameter]
+        #Adds 7Zip to Boot Image
+        $Add7Zip
     )
 #=================================================
 #   WinREDriver
@@ -290,7 +298,12 @@ Windows Registry Editor Version 5.00
     #endregion
 
     #region Get Adk Paths
-    $AdkPaths = Get-AdkPaths
+    if ($PSBoundParameters.ContainsKey('ARM64')) {
+        $AdkPaths = Get-AdkPaths -Arch arm64
+    }
+    else {
+        $AdkPaths = Get-AdkPaths
+    }
 
     if ($null -eq $AdkPaths) {
         Write-Host -ForegroundColor DarkGray "========================================================================="
@@ -543,6 +556,14 @@ Windows Registry Editor Version 5.00
         'StorageWMI'
         'WDS-Tools'
     )
+    
+    if ($PSBoundParameters.ContainsKey('ARM64')) {
+        # Require specific order of install of packages or it fails.
+        #$OCPackages =@('Dot3Svc','EnhancedStorage','MDAC','NetFx','PowerShell','Scripting','SecureBootCmdlets','WMI','StorageWMI','PmemCmdlets','DismCmdlets','SecureStartup','x64-Support','PlatformId')
+        $OCPackages += 'x64-Support'
+        $OCPackages += 'MDAC'
+    }
+    
     #endregion
 
     #region Install Default en-us Language
@@ -560,6 +581,9 @@ Windows Registry Editor Version 5.00
             
             Try {Add-WindowsPackage -Path $MountPath -PackagePath $SourceFile -LogPath "$CurrentLog" | Out-Null}
             Catch {Write-Host -ForegroundColor Red $CurrentLog}
+        }
+        else {
+            Write-Warning "Could not find $SourceFile"
         }
     }
 
@@ -738,6 +762,14 @@ Windows Registry Editor Version 5.00
         Write-Warning "Could not find $SourceFile"
     }
     #=================================================
+    #	7zip x64 Portable
+    #=================================================
+    if ($PSBoundParameters.ContainsKey('Add7Zip')) {
+        Add-7Zip2BootImage
+    }    
+    
+
+    #=================================================
     #   Adding Microsoft DartConfig from MDT
     #=================================================
     Write-Host -ForegroundColor DarkGray "========================================================================="
@@ -833,7 +865,7 @@ Windows Registry Editor Version 5.00
 
         $Params = @{
             ErrorAction = 'Stop'
-            LogLevel = 'Debug'
+            LogLevel = 'WarningsInfo'
             LogPath = "$TemplateLogs\$((Get-Date).ToString('yyyy-MM-dd-HHmmss'))-CumulativeUpdate.log"
             PackagePath = $CumulativeUpdate
             Path = $MountPath
@@ -950,6 +982,7 @@ Windows Registry Editor Version 5.00
         'Config\AutopilotJSON',
         'Config\AutopilotOOBE',
         'Config\OOBEDeploy',
+        'Config\Scripts\SetupComplete',
         'Config\Scripts\Shutdown',
         'Config\Scripts\Startup',
         'Config\Scripts\StartNet'
@@ -984,7 +1017,7 @@ Windows Registry Editor Version 5.00
         BuildDate = (Get-Date).ToString('yyyy.MM.dd.HHmmss')
         Version = [Version](Get-Module -Name OSD -ListAvailable | Sort-Object Version -Descending | Select-Object -First 1).Version
     }
-    $WinPE | ConvertTo-Json | Out-File "$OSDCloudTemplate\winpe.json" -Encoding ascii -Width 2000 -Force
+    $WinPE | ConvertTo-Json | Out-File "$OSDCloudTemplate\Logs\winpe.json" -Encoding ascii -Width 2000 -Force
     Set-OSDCloudTemplate -Name $Name
     #endregion
 

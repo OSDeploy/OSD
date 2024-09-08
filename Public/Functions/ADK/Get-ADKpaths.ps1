@@ -16,7 +16,7 @@ function Get-AdkPaths {
     [CmdletBinding()]
     param (
         [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
-        [ValidateSet('amd64','x86')]
+        [ValidateSet('amd64','x86','arm64')]
         [string]$Arch = $Env:PROCESSOR_ARCHITECTURE
     )
     
@@ -70,7 +70,7 @@ function Get-AdkPaths {
         bcdbootexe          = Join-Path $PathDeploymentTools (Join-Path 'BCDBoot' 'bcdboot.exe')
         bcdeditexe          = Join-Path $PathDeploymentTools (Join-Path 'BCDBoot' 'bcdedit.exe')
         bootsectexe         = Join-Path $PathDeploymentTools (Join-Path 'BCDBoot' 'bootsect.exe')
-        dismexe             = Join-Path $PathDeploymentTools (Join-Path 'DISM' 'bootsect.exe')
+        dismexe             = Join-Path $PathDeploymentTools (Join-Path 'DISM' 'dism.exe')
         efisysbin           = Join-Path $PathDeploymentTools (Join-Path 'Oscdimg' 'efisys.bin')
         efisysnopromptbin   = Join-Path $PathDeploymentTools (Join-Path 'Oscdimg' 'efisys_noprompt.bin')
         etfsbootcom         = Join-Path $PathDeploymentTools (Join-Path 'Oscdimg' 'etfsboot.com')

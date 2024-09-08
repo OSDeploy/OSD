@@ -8,7 +8,7 @@ schema: 2.0.0
 # Get-OSDMetrics
 
 ## SYNOPSIS
-{{ Fill in the Synopsis }}
+Retrieves metrics for the OSD PowerShell module and OSDCloud deployment methods.
 
 ## SYNTAX
 
@@ -17,16 +17,18 @@ Get-OSDMetrics [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-{{ Fill in the Description }}
+The Get-OSDMetrics script retrieves metrics for the OSD PowerShell module and OSDCloud deployment methods.
+It displays the latest version of the OSD PowerShell module, the date it was published, and the number of times it has been installed or saved.
+It also displays metrics for OSDCloud CLI, OSDCloud GUI, and OSDCloud Azure deployment methods, including the number of devices deployed, the current usage rate, and the number of devices deployed per day, week, month, and year.
 
 ## EXAMPLES
 
-### Example 1
+### EXAMPLE 1
 ```
-PS C:\> {{ Add example code here }}
+Get-OSDMetrics
 ```
 
-{{ Add example description here }}
+This example retrieves metrics for the OSD PowerShell module and OSDCloud deployment methods.
 
 ## PARAMETERS
 
@@ -35,10 +37,9 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## INPUTS
 
-### None
 ## OUTPUTS
 
-### System.Object
 ## NOTES
+This script requires the OSD PowerShell module and the OSDCloudCLI, OSDCloudGUI, and OSDCloudAzure modules to be installed.
 
 ## RELATED LINKS

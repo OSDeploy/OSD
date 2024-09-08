@@ -3,7 +3,7 @@ Install-Module WindowsAutopilotIntune -Force
 #Install-Module Microsoft.Graph.Intune -Force
 
 Write-Verbose -Verbose 'Connect-MgGraph -Device -Scopes "DeviceManagementConfiguration.Read.All","DeviceManagementServiceConfig.Read.All"'
-Connect-MgGraph -Device -Scopes DeviceManagementConfiguration.Read.All,DeviceManagementServiceConfig.Read.All,DeviceManagementServiceConfiguration.Read.All
+Connect-MgGraph -Device -Scopes DeviceManagementConfiguration.Read.All,DeviceManagementServiceConfig.Read.All
 
 Write-Verbose -Verbose 'Select-MgProfile -Name beta'
 Select-MgProfile -Name beta

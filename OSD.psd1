@@ -1,16 +1,15 @@
-#
 # Module manifest for module 'OSD'
 #
 
 @{
     RootModule              = 'OSD.psm1'
-    ModuleVersion           = '23.5.23.1'
+    ModuleVersion           = '24.9.4.1'
     CompatiblePSEditions    = @('Desktop')
     GUID                    = '9fe5b9b6-0224-4d87-9018-a8978529f6f5'
-    Author                  = 'David Segura . Gary Blok . Jérôme Bezet-Torres . Damien Van Robaeys . Mike Marable . Akos Bakos'
+    Author                  = 'David Segura . Gary Blok . Akos Bakos'
     CompanyName             = 'OSD Community'
-    Copyright               = '(c) 2023 OSDeploy'
-    Description             = 'OSDCloud Automate Provisioning Edition'
+    Copyright               = '(c) 2024 OSDeploy'
+    Description             = '2024. July Patch Update. August Driver Update.'
     PowerShellVersion       = '5.1'
     FormatsToProcess        = @(
         '.\Format\MsUpCat.Format.ps1xml'
@@ -18,6 +17,7 @@
     FunctionsToExport       = @(
         'Add-OfflineServicingWindowsDriver',
         'Add-WindowsPackageSSU',
+        'Add-7Zip2BootImage',
         'Backup-DiskToFFU',
         'Backup-MyBitLockerKeys',
         'Block-AdminUser',
@@ -75,6 +75,10 @@
         'Get-HPFirmwareCatalog',
         'Get-HPOSDDriversCatalog',
         'Get-HPSoftwareCatalog',
+        'Get-HPOSSupport',
+        'Get-HPSoftpaqListLatest',
+        'Get-HPSoftPaqItems',
+        'Get-HPDriverPackLatest',
         'Get-CimVideoControllerResolution',
         'Get-CloudSecret',
         'Get-ComObjMicrosoftUpdateAutoUpdate',
@@ -100,8 +104,10 @@
         'Get-GithubRawUrl',
         'Get-HPDriverPack',
         'Get-HPWinPEDriverPack',
+        'Get-HPDeviceFamilyPlatformDetails',
         'Get-HyperVName',
         'Get-LenovoDriverPack',
+        'Get-NativeMatchineImage',
         'Get-MicrosoftDriverPack',
         'Get-MsUpCat',
         'Get-MsUpCatUpdate',
@@ -126,6 +132,7 @@
         'Get-OSDCloudDriverPack',
         'Get-OSDCloudDriverPacks',
         'Get-OSDCloudOperatingSystems',
+        'Get-OSDCloudOperatingSystemsIndexes',
         'Get-OSDCloudTemplate',
         'Get-OSDCloudTemplateNames',
         'Get-OSDCloudWorkspace',
@@ -141,6 +148,8 @@
         'Get-OSDWinEvent',
         'Get-OSDWinPE',
         'Get-PSCloudScript',
+        'Get-PowerSettingSleepAfter',
+        'Get-PowerSettingTurnMonitorOffAfter',
         'Get-LocalDiskPartition',
         'Get-OSDPartition',
         'Get-USBPartition',
@@ -148,6 +157,7 @@
         'Get-RegCurrentVersion',
         'Get-ScreenPNG',
         'Get-SessionsXml',
+        'Get-SetupCompleteOSDCloudUSB',
         'Get-SystemFirmwareDevice',
         'Get-SystemFirmwareResource',
         'Get-SystemFirmwareUpdate',
@@ -162,9 +172,20 @@
         'Get-WinREPartition',
         'Get-WinREWiFi',
         'Get-WindowsOEMProductKey',
+        'Get-WindowsUpdateDriver',
+        'Get-HPTPMDetermine',
+        'Invoke-OSDCloudIPU',
+        'New-OSDCloudOSWimFile',
+        'Invoke-HPTPMDownload',
+        'Invoke-HPTPMEXEDownload',
+        'Invoke-HPTPMDowngrade',
+        'Invoke-HPTPMEXEInstall',
+        'Install-ModuleHPCMSL',
         'Initialize-OSDCloudStartnet',
+        'Initialize-OSDCloudStartnetUpdate',
         'Install-AzOSDIacTools',
         'Install-SystemFirmwareUpdate',
+        'Install-BuildUpdatesFromOSCloudUSB',
         'Invoke-AzOSDAzureConfig',
         'Invoke-CloudSecret',
         'Invoke-Exe',
@@ -184,6 +205,8 @@
         'New-OSDCloudISO',
         'New-OSDCloudTemplate',
         'New-OSDCloudUSB',
+        'New-OSDCloudUSBSetupCompleteTemplate',
+        'New-OSDCloudWorkSpaceSetupCompleteTemplate',
         'New-OSDCloudWorkspace',
         'New-OSDisk',
         'Remove-AppxOnline',
@@ -216,22 +239,34 @@
         'Invoke-SelectLocalVolume',
         'Invoke-SelectOSDVolume',
         'Invoke-SelectUSBVolume',
+
         'Set-AzClipboard',
         'Set-BitlockerRegValuesXTS256',
         'Set-BootmgrTimeout',
         'Set-ClipboardScreenshot',
         'Set-CloudSecret',
         'Set-DisRes',
+        'Set-HPBIOSSetting',
+        'Set-HPTPMBIOSSettings',
         'Set-HyperVName',
+        'Set-LatestUpdatesASAPEnabled',
         'Set-OSDCloudTemplate',
         'Set-OSDCloudWorkspace',
+        'Set-PowerSettingSleepAfter',
+        'Set-PowerSettingTurnMonitorOffAfter',
         'Set-SetupCompleteBitlocker',
         'Set-SetupCompleteCreateFinish',
         'Set-SetupCompleteCreateStart',
         'Set-SetupCompleteDefenderUpdate',
         'Set-SetupCompleteHyperVName',
+        'Set-SetupCompleteHPAppend',
         'Set-SetupCompleteNetFX',
         'Set-SetupCompleteOEMActivation',
+        'Set-SetupCompleteStartWindowsUpdate',
+        'Set-SetupCompleteStartWindowsUpdateDriver',
+        'Set-SetupCompleteOSDCloudUSB',
+        'Set-SetupCompleteOSDCloudCustom',
+        'Set-SetupCompleteTimeZone',
         'Set-SetupCompleteSetWiFi',
         'Set-TimeZoneFromIP',
         'Set-WiFi',
@@ -255,7 +290,12 @@
         'Start-OSDeployPad',
         'Start-ScreenPNGProcess',
         'Start-WinREWiFi',
+        'Start-WindowsUpdate',
+        'Start-WindowsUpdateDriver',
         'Stop-ScreenPNGProcess',
+        'Start-DISMFromOSDCloudUSB',
+        'Test-DISMFromOSDCloudUSB',
+        'Test-HPTPMFromOSDCloudUSB',
         'Test-DCUSupport',
         'Test-FolderToIso',
         'Test-HPIASupport',
@@ -284,6 +324,15 @@
         'Import-MDTWinPECloudDriver',
         'Invoke-OSDSpecialize',
         'Invoke-OSDSpecializeDev',
+        'Invoke-HPDriverUpdate',
+        'Invoke-HPAnalyzer',
+        'Invoke-HPIAOfflineSync',
+        'Invoke-HPIA',
+        'Install-HPIA',
+        'Get-HPIAXMLResult',
+        'Get-HPIAJSONResult',
+        'Get-HPIALatestVersion',
+        'Write-CMTraceLog',
         'Save-ZTIDriverPack',
         'Set-OSDCloudUnattendAuditMode',
         'Set-OSDCloudUnattendAuditModeAutopilot',
@@ -304,7 +353,14 @@
         'Update-LenovoDriverPackCatalog',
         'Update-MicrosoftDriverPackCatalog',
         'Invoke-OSDInfo',
-        'Update-IntelDriversCatalog'
+        'Update-IntelDriversCatalog',
+        'Start-OSDCloudToolbox',
+        'Get-OSDCloudVMDefaults',
+        'Get-OSDCloudVMSettings',
+        'New-OSDCloudVM',
+        'Reset-OSDCloudVMSettings',
+        'Set-OSDCloudVMSettings',
+        'Start-OSDPadCategories'
     )
     CmdletsToExport = @()
     VariablesToExport = @()

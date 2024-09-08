@@ -8,30 +8,53 @@ schema: 2.0.0
 # Initialize-OSDCloudStartnet
 
 ## SYNOPSIS
-{{ Fill in the Synopsis }}
+Initializes the OSDCloud startnet environment.
 
 ## SYNTAX
 
 ```
-Initialize-OSDCloudStartnet [-WirelessConnect] [<CommonParameters>]
+Initialize-OSDCloudStartnet [-WirelessConnect] [-WifiProfile] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-{{ Fill in the Description }}
+This function initializes the OSDCloud startnet environment by performing the following tasks:
+- Creates a log path if it does not already exist.
+- Copies OSDCloud config startup scripts to the mounted WinPE.
+- Initializes a splash screen if a SPLASH.JSON file is found in OSDCloud\Config.
+- Initializes hardware devices.
+- Initializes wireless network (optional).
+- Initializes network connections.
+- Updates PowerShell modules.
 
 ## EXAMPLES
 
-### Example 1
+### EXAMPLE 1
 ```
-PS C:\> {{ Add example code here }}
+Initialize-OSDCloudStartnet -WirelessConnect
 ```
 
-{{ Add example description here }}
+Initializes the OSDCloud startnet environment and attempts to connect to a wireless network.
 
 ## PARAMETERS
 
 ### -WirelessConnect
-{{ Fill WirelessConnect Description }}
+Specifies whether to connect to a wireless network.
+If this switch is specified, the function will attempt to connect to a wireless network using the Start-WinREWiFi function.
+
+```yaml
+Type: SwitchParameter
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: False
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -WifiProfile
+{{ Fill WifiProfile Description }}
 
 ```yaml
 Type: SwitchParameter
@@ -50,10 +73,8 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## INPUTS
 
-### None
 ## OUTPUTS
 
-### System.Object
 ## NOTES
 
 ## RELATED LINKS

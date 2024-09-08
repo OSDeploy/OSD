@@ -26,20 +26,24 @@ Logs to $env:TEMP\Update-MyDellBios.log
 ### EXAMPLE 1
 ```
 Update-MyDellBios
-Downloads and launches the Dell BIOS Update.  Does not automatically install the BIOS Update
 ```
+
+Downloads and launches the Dell BIOS Update. 
+Does not automatically install the BIOS Update
 
 ### EXAMPLE 2
 ```
 Update-MyDellBios -Silent
-Yes, this will update your BIOS silently, and NOT reboot when its done
 ```
+
+Yes, this will update your BIOS silently, and NOT reboot when its done
 
 ### EXAMPLE 3
 ```
 Update-MyDellBios -Silent -Reboot
-Yes, this will update your BIOS silently, AND reboot when its done
 ```
+
+Yes, this will update your BIOS silently, AND reboot when its done
 
 ## PARAMETERS
 

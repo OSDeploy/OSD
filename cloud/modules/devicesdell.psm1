@@ -59,8 +59,31 @@ Function osdcloud-InstallDCU {
             $AppDCU = $DCUAppsAvailable | Where-Object {$_.path -match 'command-update' -and $_.SupportedOperatingSystems.OperatingSystem.osArch -match "x64" -and $_.Description.Display.'#cdata-section' -notmatch "UWP" -and $_.vendorVersion -eq $AppDCUVersion}
             if ($AppDCU){
                 $DellItem = $AppDCU
-                [Version]$DCUVersion = $DellItem.vendorVersion
-                $DCUReleaseDate = $(Get-Date $DellItem.releaseDate -Format 'yyyy-MM-dd')               
+
+            # Extracting DCU Version
+            $DCUVersion = $null
+            $versionRegex = [Regex]::Match($DellItem.vendorVersion, '\d+(\.\d+)+')
+            if ($versionRegex.Success) {
+                $DCUVersion = [Version]$versionRegex.Value
+                Write-Host "Parsed DCU Version: $($DCUVersion)" -ForegroundColor Cyan
+            } else {
+                Write-Host "Unable to parse DCU Version: $($DellItem.vendorVersion)" -ForegroundColor Red
+            }
+
+            # Extracting DCU Release Date
+            $DCUReleaseDate = $null
+            $dateRegex = [Regex]::Match($DellItem.releaseDate, '(\w+) (\d{1,2}), (\d{4})')
+            if ($dateRegex.Success) {
+                $month = $dateRegex.Groups[1].Value
+                $day = $dateRegex.Groups[2].Value
+                $year = $dateRegex.Groups[3].Value
+                $DCUReleaseDate = Get-Date "$year-$month-$day"
+                Write-Host "Parsed DCU Release Date: $($DCUReleaseDate.ToString('yyyy-MM-dd'))" -ForegroundColor Cyan
+            } else {
+                Write-Host "Unable to parse DCU Release Date: $($DellItem.releaseDate)" -ForegroundColor Red
+            }
+
+                #Create download link to DCU Universal version
                 $TargetLink = "http://downloads.dell.com/$($DellItem.path)"
                 $TargetFileName = ($DellItem.path).Split("/") | Select-Object -Last 1
 
@@ -77,6 +100,7 @@ Function osdcloud-InstallDCU {
 
                 #Build Required Info to Download and Update CM Package
                 $TargetFilePathName = "$($DellCabExtractPath)\$($TargetFileName)"
+                $TargetLink = $TargetLink.Substring(0, $TargetLink.IndexOf(".EXE") + 4)
                 Invoke-WebRequest -Uri $TargetLink -OutFile $TargetFilePathName -UseBasicParsing -Verbose -Proxy $ProxyServer
 
                 #Confirm Download
@@ -111,6 +135,7 @@ Function osdcloud-InstallDCU {
         }
 
  } 
+
 
 #Function to Run DCU to install drivers, BIOS and firmware updates.
 function osdcloud-RunDCU {
@@ -178,7 +203,7 @@ function osdcloud-DCUAutoUpdate {
     if (Test-path -Path 'C:\Program Files (x86)\Dell\CommandUpdate\dcu-cli.exe'){
         $ProcessPath = 'C:\Program Files (x86)\Dell\CommandUpdate\dcu-cli.exe'
     }
-    if (Test-path -Path 'C:\Program Files\Dell\CommandUpdate\dcu-cli.exe'){
+    elseif (Test-path -Path 'C:\Program Files\Dell\CommandUpdate\dcu-cli.exe'){
         $ProcessPath = 'C:\Program Files\Dell\CommandUpdate\dcu-cli.exe'
     }
     else {

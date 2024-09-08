@@ -1,4 +1,4 @@
-function Start-OSDCloudGUI {
+﻿function Start-OSDCloudGUI {
     <#
     .SYNOPSIS
     OSDCloud imaging using the command line
@@ -69,6 +69,7 @@ function Start-OSDCloudGUI {
         OSEditionValues             = [array]$Global:OSDModuleResource.OSDCloud.Values.Edition
         OSLanguageValues            = [array]$Global:OSDModuleResource.OSDCloud.Values.Language
         OSNameValues                = [array]$Global:OSDModuleResource.OSDCloud.Values.Name
+OSNameARM64Values           = [array]$Global:OSDModuleResource.OSDCloud.Values.NameARM64
         OSReleaseIDValues           = [array]$Global:OSDModuleResource.OSDCloud.Values.ReleaseID
         OSVersionValues             = [array]$Global:OSDModuleResource.OSDCloud.Values.Version
         
@@ -79,6 +80,19 @@ function Start-OSDCloudGUI {
         updateFirmware              = [System.Boolean]$Global:OSDModuleResource.StartOSDCloudGUI.updateFirmware
         updateNetworkDrivers        = [System.Boolean]$Global:OSDModuleResource.StartOSDCloudGUI.updateNetworkDrivers
         updateSCSIDrivers           = [System.Boolean]$Global:OSDModuleResource.StartOSDCloudGUI.updateSCSIDrivers
+
+        OEMActivation               = [System.Boolean]$Global:OSDModuleResource.StartOSDCloudGUI.OEMActivation
+        WindowsUpdate               = [System.Boolean]$Global:OSDModuleResource.StartOSDCloudGUI.WindowsUpdate
+        WindowsUpdateDrivers        = [System.Boolean]$Global:OSDModuleResource.StartOSDCloudGUI.WindowsUpdateDrivers
+        WindowsDefenderUpdate       = [System.Boolean]$Global:OSDModuleResource.StartOSDCloudGUI.WindowsDefenderUpdate
+        SyncMSUpCatDriverUSB        = [System.Boolean]$Global:OSDModuleResource.StartOSDCloudGUI.SyncMSUpCatDriverUSB
+
+        HPIAALL                     = [System.Boolean]$Global:OSDModuleResource.StartOSDCloudGUI.HPIAALL
+        HPIADrivers                 = [System.Boolean]$Global:OSDModuleResource.StartOSDCloudGUI.HPIADrivers
+        HPIAFirmware                = [System.Boolean]$Global:OSDModuleResource.StartOSDCloudGUI.HPIAFirmware
+        HPIASoftware                = [System.Boolean]$Global:OSDModuleResource.StartOSDCloudGUI.HPIASoftware
+        HPTPMUpdate                 = [System.Boolean]$Global:OSDModuleResource.StartOSDCloudGUI.HPTPMUpdate
+        HPBIOSUpdate                = [System.Boolean]$Global:OSDModuleResource.StartOSDCloudGUI.HPBIOSUpdate
         
         TimeStart                   = [datetime](Get-Date)
     }
@@ -89,7 +103,7 @@ function Start-OSDCloudGUI {
     $Global:OSDCloudGUI | ConvertTo-Json -Depth 10 | Out-File -FilePath "$env:TEMP\Start-OSDCloudGUI.json" -Force
     
     $Global:OSDCloudGUI.AutomateJsonFile = Get-PSDrive -PSProvider FileSystem | Where-Object {$_.Name -ne 'C'} | ForEach-Object {
-        Get-ChildItem "$($_.Root)OSDCloud\Automate\Default" -Include "Start-OSDCloudGUI.json" -File -Force -Recurse -ErrorAction Ignore
+        Get-ChildItem "$($_.Root)OSDCloud\Automate" -Include "Start-OSDCloudGUI.json" -File -Force -Recurse -ErrorAction Ignore
     }
     if ($Global:OSDCloudGUI.AutomateJsonFile) {
         foreach ($Item in $Global:OSDCloudGUI.AutomateJsonFile) {
@@ -168,6 +182,7 @@ function Start-OSDCloudGUI {
     #================================================
     #   Launch GUI
     #================================================
+
     & "$($MyInvocation.MyCommand.Module.ModuleBase)\Projects\OSDCloudGUI\MainWindow.ps1"
     Start-Sleep -Seconds 2
     #================================================

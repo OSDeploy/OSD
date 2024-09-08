@@ -24,11 +24,12 @@ Returns CimInstance information from common OSD Classes
 ### EXAMPLE 1
 ```
 OSDClass
+```
+
 Returns CimInstance Win32_ComputerSystem properties
 Option 1: Get-OSDClass
 Option 2: Get-OSDClass ComputerSystem
 Option 3: Get-OSDClass -Class ComputerSystem
-```
 
 ## PARAMETERS
 

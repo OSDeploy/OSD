@@ -14,7 +14,7 @@ Creates an OSDCloud Template in $env:ProgramData\OSDCloud
 
 ```
 New-OSDCloudTemplate [[-Name] <String>] [[-Language] <String[]>] [[-CumulativeUpdate] <FileInfo>]
- [[-SetAllIntl] <String>] [[-SetInputLocale] <String>] [-WinRE] [<CommonParameters>]
+ [[-SetAllIntl] <String>] [[-SetInputLocale] <String>] [-WinRE] [-ARM64] [-Add7Zip] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -112,6 +112,36 @@ Accept wildcard characters: False
 
 ### -WinRE
 Uses Windows 10 WinRE.wim instead of the ADK Boot.wim
+
+```yaml
+Type: SwitchParameter
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: False
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -ARM64
+Uses ARM64 instead of AMD64
+
+```yaml
+Type: SwitchParameter
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: False
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -Add7Zip
+Adds 7Zip to Boot Image
 
 ```yaml
 Type: SwitchParameter

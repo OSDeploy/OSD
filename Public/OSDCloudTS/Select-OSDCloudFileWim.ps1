@@ -13,9 +13,11 @@ function Select-OSDCloudFileWim {
     param ()
 
     $i = $null
-    $Results = Find-OSDCloudFile -Name '*.wim' -Path '\OSDCloud\OS\'
+    $Results = Find-OSDCloudFile -Name '*.wim' -Path '\OSDCloud\OS\' | Where-Object {$_.FullName -notmatch 'C:'}
+    $Results += Find-OSDCloudFile -Name '*.esd' -Path '\OSDCloud\OS\' | Where-Object {$_.FullName -notmatch 'C:'}
+    $Results += Find-OSDCloudFile -Name '*install.swm' -Path '\OSDCloud\OS\' | Where-Object {$_.FullName -notmatch 'C:'}
 
-    $Results = $Results | Sort-Object -Property Length -Unique | Sort-Object FullName | Where-Object {$_.Length -gt 3GB}
+    $Results = $Results | Sort-Object -Property Length -Unique | Sort-Object FullName | Where-Object {$_.Length -gt 2GB}
 
     if ($Results) {
         $Results = foreach ($Item in $Results) {

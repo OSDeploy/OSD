@@ -27,169 +27,9 @@ function Invoke-OSDSpecializeDev {
     #endregion
 
     #=================================================
-    #   Specialize DriverPacks
+    #   Specialize DriverPacks - REMOVED 23.10.04 - Using PPKG file or DISM in WinPE - Gary B
     #=================================================
-    Write-Verbose -Verbose "Variable Apply Status: $Apply"
-    if (Test-Path 'C:\Drivers') {
-        $DriverPacks = Get-ChildItem -Path 'C:\Drivers' -File
 
-        foreach ($Item in $DriverPacks) {
-            $ExpandFile = $Item.FullName
-            Write-Verbose -Verbose "DriverPack: $ExpandFile"
-            #=================================================
-            #   Cab
-            #=================================================
-            if ($Item.Extension -eq '.cab') {
-                $DestinationPath = Join-Path $Item.Directory $Item.BaseName
-    
-                if (-NOT (Test-Path "$DestinationPath")) {
-                    New-Item $DestinationPath -ItemType Directory -Force -ErrorAction Ignore | Out-Null
-
-                    Write-Verbose -Verbose "Expanding CAB Driver Pack to $DestinationPath"
-                    Expand -R "$ExpandFile" -F:* "$DestinationPath" | Out-Null
-
-                    if ($Apply) {
-                        New-Item -Path "HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\UnattendSettings\PnPUnattend\DriverPaths" -Name 1 -Force
-                        New-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\UnattendSettings\PnPUnattend\DriverPaths\1" -Name Path -Value $DestinationPath -Force
-                        pnpunattend.exe AuditSystem /L
-                        Remove-Item -Path "HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\UnattendSettings\PnPUnattend\DriverPaths\1" -Recurse -Force
-                    }
-                }
-                Continue
-            }
-            #=================================================
-            #   Dell
-            #=================================================
-            if ($Item.Extension -eq '.exe') {
-                if ($Item.VersionInfo.FileDescription -match 'Dell') {
-                    Write-Verbose -Verbose "FileDescription: $($Item.VersionInfo.FileDescription)"
-                    Write-Verbose -Verbose "ProductVersion: $($Item.VersionInfo.ProductVersion)"
-
-                    $DestinationPath = Join-Path $Item.Directory $Item.BaseName
-
-                    if (-NOT (Test-Path "$DestinationPath")) {
-                        Write-Verbose -Verbose "Expanding Dell Driver Pack to $DestinationPath"
-                        $null = New-Item -Path $DestinationPath -ItemType Directory -Force -ErrorAction Ignore | Out-Null
-                        Start-Process -FilePath $ExpandFile -ArgumentList "/s /e=`"$DestinationPath`"" -Wait
-
-                        if ($Apply) {
-                            New-Item -Path "HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\UnattendSettings\PnPUnattend\DriverPaths" -Name 1 -Force
-                            New-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\UnattendSettings\PnPUnattend\DriverPaths\1" -Name Path -Value $DestinationPath -Force
-                            pnpunattend.exe AuditSystem /L
-                            Remove-Item -Path "HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\UnattendSettings\PnPUnattend\DriverPaths\1" -Recurse -Force
-                        }
-                    }
-                    Continue
-                }
-            }
-            #=================================================
-            #   HP
-            #=================================================
-            if ($Item.Extension -eq '.exe') {
-                if (($Item.VersionInfo.InternalName -match 'hpsoftpaqwrapper') -or ($Item.VersionInfo.OriginalFilename -match 'hpsoftpaqwrapper.exe') -or ($Item.VersionInfo.FileDescription -like "HP *")) {
-                    Write-Verbose -Verbose "FileDescription: $($Item.VersionInfo.FileDescription)"
-                    Write-Verbose -Verbose "InternalName: $($Item.VersionInfo.InternalName)"
-                    Write-Verbose -Verbose "OriginalFilename: $($Item.VersionInfo.OriginalFilename)"
-                    Write-Verbose -Verbose "ProductVersion: $($Item.VersionInfo.ProductVersion)"
-                    
-                    $DestinationPath = Join-Path $Item.Directory $Item.BaseName
-
-                    if (-NOT (Test-Path "$DestinationPath")) {
-                        Write-Verbose -Verbose "Expanding HP Driver Pack to $DestinationPath"
-                        Start-Process -FilePath $ExpandFile -ArgumentList "/s /e /f `"$DestinationPath`"" -Wait
-
-                        if ($Apply) {
-                            New-Item -Path "HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\UnattendSettings\PnPUnattend\DriverPaths" -Name 1 -Force
-                            New-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\UnattendSettings\PnPUnattend\DriverPaths\1" -Name Path -Value $DestinationPath -Force
-                            pnpunattend.exe AuditSystem /L
-                            Remove-Item -Path "HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\UnattendSettings\PnPUnattend\DriverPaths\1" -Recurse -Force
-                        }
-                    }
-                    Continue
-                }
-            }
-            #=================================================
-            #   Lenovo
-            #=================================================
-            if ($Item.Extension -eq '.exe') {
-                if (($Item.VersionInfo.FileDescription -match 'Lenovo') -or ($Item.Name -match 'tc_') -or ($Item.Name -match 'tp_') -or ($Item.Name -match 'ts_') -or ($Item.Name -match '500w') -or ($Item.Name -match 'sccm_') -or ($Item.Name -match 'm710e') -or ($Item.Name -match 'tp10') -or ($Item.Name -match 'tp8') -or ($Item.Name -match 'yoga')) {
-                    Write-Verbose -Verbose "FileDescription: $($Item.VersionInfo.FileDescription)"
-                    Write-Verbose -Verbose "ProductVersion: $($Item.VersionInfo.ProductVersion)"
-
-                    $DestinationPath = Join-Path $Item.Directory 'SCCM'
-
-                    if (-NOT (Test-Path "$DestinationPath")) {
-                        Write-Verbose -Verbose "Expanding Lenovo Driver Pack to $DestinationPath"
-                        Start-Process -FilePath $ExpandFile -ArgumentList "/SILENT /SUPPRESSMSGBOXES" -Wait
-
-                        if ($Apply) {
-                            New-Item -Path "HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\UnattendSettings\PnPUnattend\DriverPaths" -Name 1 -Force
-                            New-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\UnattendSettings\PnPUnattend\DriverPaths\1" -Name Path -Value $DestinationPath -Force
-                            pnpunattend.exe AuditSystem /L
-                            Remove-Item -Path "HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\UnattendSettings\PnPUnattend\DriverPaths\1" -Recurse -Force
-                        }
-                    }
-                    Continue
-                }
-            }
-            #=================================================
-            #   MSI
-            #=================================================
-            if ($Item.Extension -eq '.msi') {
-                $DateStamp = Get-Date -Format yyyyMMddTHHmmss
-                $logFile = '{0}-{1}.log' -f $ExpandFile,$DateStamp
-                $MSIArguments = @(
-                    "/i"
-                    ('"{0}"' -f $ExpandFile)
-                    "/qb"
-                    "/norestart"
-                    "/L*v"
-                    $logFile
-                )
-                Start-Process "msiexec.exe" -ArgumentList $MSIArguments -Wait -NoNewWindow
-                Continue
-            }
-            #=================================================
-            #   Zip
-            #=================================================
-            if ($Item.Extension -eq '.zip') {
-                $DestinationPath = Join-Path $Item.Directory $Item.BaseName
-
-                if (-NOT (Test-Path "$DestinationPath")) {
-                    Write-Verbose -Verbose "Expanding ZIP Driver Pack to $DestinationPath"
-                    Expand-Archive -Path $ExpandFile -DestinationPath $DestinationPath -Force
-                
-                    if ($Apply) {
-                        New-Item -Path "HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\UnattendSettings\PnPUnattend\DriverPaths" -Name 1 -Force
-                        New-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\UnattendSettings\PnPUnattend\DriverPaths\1" -Name Path -Value $DestinationPath -Force
-                        pnpunattend.exe AuditSystem /L
-                        Remove-Item -Path "HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\UnattendSettings\PnPUnattend\DriverPaths\1" -Recurse -Force
-                    }
-                }
-                Continue
-            }
-            #=================================================
-            #   Json
-            #=================================================
-            if ($Item.Extension -eq '.json') {
-                #Do Nothing
-                Continue
-            }
-            #=================================================
-            #   TXT
-            #=================================================
-            if ($Item.Extension -eq '.txt') {
-                #Do Nothing
-                Continue
-            }
-            #=================================================
-            #   Everything Else
-            #=================================================
-            Write-Warning "File cannot be expanded $ExpandFile"
-            Write-Verbose -Verbose ""
-            #=================================================
-        }
-    }
     #=================================================
     #   Specialize Config HP & Dell JSON
     #=================================================
@@ -363,19 +203,31 @@ function Invoke-OSDSpecializeDev {
             write-host "Specialize Stage - HP Enterprise Devices" -ForegroundColor Green
             $WarningPreference = "SilentlyContinue"
             $VerbosePreference = "SilentlyContinue"
+            import-module -name "HPCMSL"
+            get-module -Name "HPCMSL"
             #Invoke-Expression (Invoke-RestMethod -Uri 'functions.osdcloud.com')
-            Invoke-Expression (Invoke-RestMethod -Uri 'https://raw.githubusercontent.com/OSDeploy/OSD/master/cloud/modules/deviceshp.psm1')
+            #Invoke-Expression (Invoke-RestMethod -Uri 'https://raw.githubusercontent.com/OSDeploy/OSD/master/cloud/modules/deviceshp.psm1')
             
             #osdcloud-SetExecutionPolicy -WarningAction SilentlyContinue
             #osdcloud-InstallPackageManagement -WarningAction SilentlyContinue
             #osdcloud-InstallModuleHPCMSL -WarningAction SilentlyContinue
             if ($HPJson.HPUpdates.HPTPMUpdate -eq $true){
-                Write-Host -ForegroundColor DarkGray "========================================================================="
-                Write-Host "Updating TPM" -ForegroundColor Cyan
-                osdcloud-HPTPMEXEInstall
-                start-sleep -Seconds 10
+                if (Get-HPTPMDetermine -ne "False"){
+                    Write-Host -ForegroundColor DarkGray "========================================================================="
+                    Write-Host -ForegroundColor DarkGray "HP TPM Update: $(Get-HPTPMDetermine)"
+                    Write-Host "Updating TPM" -ForegroundColor Cyan
+                    $TPMUpdate = Get-HPTPMDetermine
+                    $DownloadFolder = "C:\OSDCloud\HP\TPM"
+                    $UpdatePath = "$DownloadFolder\$TPMUpdate.exe"
+                    if (!(Test-Path $UpdatePath)){Invoke-HPTPMEXEDownload}
+                    Invoke-HPTPMEXEInstall -spec "2.0"
+                    start-sleep -Seconds 10
+                }
+                else{
+                    $HPJson.HPUpdates.HPTPMUpdate = $false
+                }
             }
-            if (($HPJson.HPUpdates.HPBIOSUpdate -eq $true) -and ($HPJson.HPUpdates.HPTPMUpdate -ne $true)){
+            if (($HPJson.HPUpdates.HPBIOSUpdate -eq $true) -and ($HPJson.HPUpdates.HPTPMUpdate -ne $true)){ #Don't Upgrade BIOS if TPM is updating
                 #Stage Firmware Update for Next Reboot
                 Import-Module HPCMSL -ErrorAction SilentlyContinue | out-null
                 Write-Host -ForegroundColor DarkGray "========================================================================="
@@ -389,12 +241,14 @@ function Invoke-OSDSpecializeDev {
                 }
                 start-sleep -Seconds 10
             }
-            <#
-            if ($HPJson.HPUpdates.HPIADrivers -eq $true){
+            if ($HPJson.HPUpdates.HPBIOSWinUpdate -eq $true){
+                Get-HPBIOSWindowsUpdate -Yes -Flash
+            }
+            <# Seems to choke on win32_PnpSignedDriver 
+            if (($HPJson.HPUpdates.HPIADrivers -eq $true) -or ($HPJson.HPUpdates.HPIAAll -eq $true)){
                 Write-Host -ForegroundColor DarkGray "========================================================================="
-                Write-Host "Running HPIA Drivers" -ForegroundColor Cyan
-                osdcloud-HPIAOfflineSync
-                osdcloud-HPIAExecute -OfflineMode $true
+                Write-Host "Running Invoke-HPDriverUpdate Function" -ForegroundColor Cyan
+                Invoke-HPDriverUpdate -OSVerOverride -Details
                 start-sleep -Seconds 10
             }
             #>
@@ -457,7 +311,6 @@ function Invoke-OSDSpecializeDev {
     #	Stop-Transcript
     #=================================================
     Stop-Transcript
-    
     #=================================================
     #=================================================
     #   Complete

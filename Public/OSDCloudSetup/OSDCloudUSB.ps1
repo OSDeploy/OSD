@@ -226,6 +226,41 @@ function New-OSDCloudUSB {
     Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) New-OSDCloudUSB is complete"
     #=================================================
 }
+function New-OSDCloudUSBSetupCompleteTemplate {
+    $OSDCloudUSB = Get-Volume.usb | Where-Object {($_.FileSystemLabel -match 'OSDCloud') -or ($_.FileSystemLabel -match 'BHIMAGE')} | Select-Object -First 1
+    $SetupCompletePath = "$($OSDCloudUSB.DriveLetter):\OSDCloud\Config\Scripts\SetupComplete"
+    $ScriptsPath = $SetupCompletePath
+
+    if (!(Test-Path -Path $ScriptsPath)){New-Item -Path $ScriptsPath} 
+
+    $RunScript = @(@{ Script = "SetupComplete"; BatFile = 'SetupComplete.cmd'; ps1file = 'SetupComplete.ps1';Type = 'Setup'; Path = "$ScriptsPath"})
+
+
+    Write-Output "Creating $($RunScript.Script) Files"
+
+    $BatFilePath = "$($RunScript.Path)\$($RunScript.batFile)"
+    $PSFilePath = "$($RunScript.Path)\$($RunScript.ps1File)"
+            
+    #Create Batch File to Call PowerShell File
+    if (Test-Path -Path $PSFilePath){
+        copy-item $PSFilePath -Destination "$ScriptsPath\SetupComplete.ps1.bak"
+    }        
+    New-Item -Path $BatFilePath -ItemType File -Force
+    $CustomActionContent = New-Object system.text.stringbuilder
+    [void]$CustomActionContent.Append('%windir%\System32\WindowsPowerShell\v1.0\powershell.exe -ExecutionPolicy ByPass -File C:\OSDCloud\Scripts\SetupComplete\SetupComplete.ps1')
+    Add-Content -Path $BatFilePath -Value $CustomActionContent.ToString()
+
+    #Create PowerShell File to do actions
+
+    New-Item -Path $PSFilePath -ItemType File -Force
+    Add-Content -path $PSFilePath 'Write-Output "========================================================="'
+    Add-Content -path $PSFilePath 'Write-Output "Calling Custom Setup Complete File: $($PSCommandPath)"'
+    Add-Content -path $PSFilePath 'Write-Output ""'
+    Add-Content -path $PSFilePath 'Write-Output "CONFIRMED THIS RAN FROM FILE COPIED VIA FLASH DRIVE"'
+    Add-Content -path $PSFilePath 'Write-Output ""'
+    Add-Content -path $PSFilePath 'Write-Output "Completed Custom Setup Complete File: $($PSCommandPath)"'
+    Add-Content -path $PSFilePath 'Write-Output "========================================================="'
+}
 function Update-OSDCloudUSB {
     <#
     .SYNOPSIS
@@ -241,7 +276,6 @@ function Update-OSDCloudUSB {
     [CmdletBinding()]
     param (
         #Optional. Select one or more of the following Driver Packs to download
-        #'*','ThisPC','Dell','HP','Lenovo','Microsoft'
         [ValidateSet('*','ThisPC','Dell','HP','Lenovo','Microsoft')]
         [System.String[]]$DriverPack,
 
@@ -251,8 +285,7 @@ function Update-OSDCloudUSB {
         #Optional. Allows the selection of an Operating System to add to the USB
         [System.Management.Automation.SwitchParameter]$OS,
 
-        #Optional. Allows the selection of Driver Packs to download
-        #If this parameter is not used, any language can be downloaded downloaded
+        #Optional. Allows the selection of Driver Packs to download.  If this parameter is not used, any language can be downloaded downloaded
         [ValidateSet (
             'ar-sa','bg-bg','cs-cz','da-dk','de-de','el-gr',
             'en-gb','en-us','es-es','es-mx','et-ee','fi-fi',
@@ -264,9 +297,7 @@ function Update-OSDCloudUSB {
         )]
         [System.String]$OSLanguage,
 
-        #Optional. Selects the proper OS License
-        #If this parameter is not used, Operating Systems with the specified License can be downloaded
-        #'Retail','Volume'
+        #Optional. Selects the proper OS License. If this parameter is not used, Operating Systems with the specified License can be downloaded
         [Alias('Activation','License','OSLicense')]
         [ValidateSet('Retail','Volume')]
         [System.String]$OSActivation,
@@ -275,7 +306,7 @@ function Update-OSDCloudUSB {
         #If this parameter is not used, any Operating Systems can be downloaded
         #'Windows 11 22H2','Windows 11 21H2','Windows 10 22H2','Windows 10 21H2','Windows 10 21H1','Windows 10 20H2','Windows 10 2004','Windows 10 1909','Windows 10 1903','Windows 10 1809'
         [ValidateSet(
-            'Windows 11 22H2','Windows 11 21H2',
+            'Windows 11 23H2','Windows 11 22H2','Windows 11 21H2',
             'Windows 10 22H2','Windows 10 21H2','Windows 10 21H1','Windows 10 20H2','Windows 10 2004',
             'Windows 10 1909H','Windows 10 1903',
             'Windows 10 1809'
@@ -518,47 +549,59 @@ function Update-OSDCloudUSB {
             if (Test-Path $OSDownloadPath) {
                 $OSDCloudSavedOS = Get-ChildItem -Path $OSDownloadPath *.esd -Recurse -File | Select-Object -ExpandProperty Name
             }
-            $OperatingSystems = Get-WSUSXML -Catalog FeatureUpdate -UpdateArch 'x64' -Silent
+            #$OperatingSystems = Get-WSUSXML -Catalog FeatureUpdate -UpdateArch 'x64' -Silent
+            $OperatingSystems = Get-OSDCloudOperatingSystems
         
             if ($OSName) {
-                $OperatingSystems = $OperatingSystems | Where-Object {$_.Catalog -cmatch $OSName}
+                #$OperatingSystems = $OperatingSystems | Where-Object {$_.Catalog -cmatch $OSName}
+                $OperatingSystems = $OperatingSystems | Where-Object {$_.Name -cmatch $OSName}
             }
             if ($OSActivation -eq 'Retail') {
-                $OperatingSystems = $OperatingSystems | Where-Object {$_.Title -match 'consumer'}
+                #$OperatingSystems = $OperatingSystems | Where-Object {$_.Title -match 'consumer'}
+                $OperatingSystems = $OperatingSystems | Where-Object {$_.Activation -match 'Retail'}
             }
             if ($OSActivation -eq 'Volume') {
-                $OperatingSystems = $OperatingSystems | Where-Object {$_.Title -match 'business'}
+                #$OperatingSystems = $OperatingSystems | Where-Object {$_.Title -match 'business'}
+                $OperatingSystems = $OperatingSystems | Where-Object {$_.Activation -match 'Volume'}
             }
             if ($OSLanguage){
-                $OperatingSystems = $OperatingSystems | Where-Object {$_.Title -match $OSLanguage}
+                #$OperatingSystems = $OperatingSystems | Where-Object {$_.Title -match $OSLanguage}
+                $OperatingSystems = $OperatingSystems | Where-Object {$_.Language -match $OSLanguage}
             }
         
             if ($OperatingSystems) {
                 $OperatingSystems = $OperatingSystems | Sort-Object Title
     
                 foreach ($Item in $OperatingSystems) {
-                    $Item.Catalog = $Item.Catalog -replace 'FeatureUpdate ',''
+                    #$Item.Catalog = $Item.Catalog -replace 'FeatureUpdate ',''
                     if ($OSDCloudSavedOS) {
                         if ($Item.FileName -in $OSDCloudSavedOS) {
-                            $Item.OSDStatus = 'Downloaded'
+                            $Item.Status = 'Downloaded'
                         }
                     }
                 }
     
-                $OperatingSystems = $OperatingSystems | Select-Object -Property OSDVersion,OSDStatus,@{Name='OperatingSystem';Expression={($_.Catalog)}},Title,CreationDate,FileUri,FileName
-        
+                #$OperatingSystems = $OperatingSystems | Select-Object -Property OSDVersion,OSDStatus,@{Name='OperatingSystem';Expression={($_.Catalog)}},Title,CreationDate,FileUri,FileName
+                $OperatingSystems = $OperatingSystems | Select-Object -Property Version,ReleaseID,Status,Name,ReleaseDate,Url,FileName
+
                 Write-Host -ForegroundColor Yellow "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Select one or more Operating Systems to download in PowerShell GridView"
-                $OperatingSystems = $OperatingSystems | Sort-Object -Property @{Expression='OSDStatus';Descending=$true}, OperatingSystem -Descending | Out-GridView -Title 'Select one or more Operating Systems to download and press OK' -PassThru
-        
+                #$OperatingSystems = $OperatingSystems | Sort-Object -Property @{Expression='OSDStatus';Descending=$true}, OperatingSystem -Descending | Out-GridView -Title 'Select one or more Operating Systems to download and press OK' -PassThru
+                $OperatingSystems = $OperatingSystems | Sort-Object -Property @{Expression='Status';Descending=$true}, Name -Descending | Out-GridView -Title 'Select one or more Operating Systems to download and press OK' -PassThru
+
+                
                 foreach ($OperatingSystem in $OperatingSystems) {
-                    if ($OperatingSystem.OSDStatus -eq 'Downloaded') {
+                    if ($OperatingSystem.Status -eq 'Downloaded') {
                         Get-ChildItem -Path $OSDownloadPath -Recurse -Include $OperatingSystem.FileName | Select-Object -ExpandProperty FullName
                     }
-                    elseif (Test-WebConnection -Uri "$($OperatingSystem.FileUri)") {
+                    elseif (Test-WebConnection -Uri "$($OperatingSystem.Url)") {
                         #$OSDownloadChildPath = Join-Path $OSDownloadPath (($OperatingSystem.Catalog) -replace 'FeatureUpdate ','')
-                        $OSDownloadChildPath = Join-Path $OSDownloadPath $($OperatingSystem.OperatingSystem)
+                        #$OSDownloadChildPath = Join-Path $OSDownloadPath $($OperatingSystem.OperatingSystem)
+                        $FolderName = "$($OperatingSystem.Version) $($OperatingSystem.ReleaseID)"
+                        $OSDownloadChildPath = Join-Path $OSDownloadPath $FolderName
                         Write-Host -ForegroundColor DarkGray "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Downloading OSDCloud Operating System to $OSDownloadChildPath"
-                        $SaveWebFile = Save-WebFile -SourceUrl $OperatingSystem.FileUri -DestinationDirectory "$OSDownloadChildPath" -DestinationName $OperatingSystem.FileName
+                        #$SaveWebFile = Save-WebFile -SourceUrl $OperatingSystem.FileUri -DestinationDirectory "$OSDownloadChildPath" -DestinationName $OperatingSystem.FileName
+                        $SaveWebFile = Save-WebFile -SourceUrl $OperatingSystem.Url -DestinationDirectory "$OSDownloadChildPath" -DestinationName $OperatingSystem.FileName
+
                         
                         if (Test-Path $SaveWebFile.FullName) {
                             Get-Item $SaveWebFile.FullName

@@ -1,3 +1,22 @@
+﻿<#
+.SYNOPSIS
+Retrieves metrics for the OSD PowerShell module and OSDCloud deployment methods.
+
+.DESCRIPTION
+The Get-OSDMetrics script retrieves metrics for the OSD PowerShell module and OSDCloud deployment methods.
+It displays the latest version of the OSD PowerShell module, the date it was published, and the number of times it has been installed or saved.
+It also displays metrics for OSDCloud CLI, OSDCloud GUI, and OSDCloud Azure deployment methods, including the number of devices deployed, the current usage rate, and the number of devices deployed per day, week, month, and year.
+
+.PARAMETER None
+This script does not accept any parameters.
+
+.EXAMPLE
+PS C:\> Get-OSDMetrics
+This example retrieves metrics for the OSD PowerShell module and OSDCloud deployment methods.
+
+.NOTES
+This script requires the OSD PowerShell module and the OSDCloudCLI, OSDCloudGUI, and OSDCloudAzure modules to be installed.
+#>
 function Get-OSDMetrics {
     [CmdletBinding()]
     param ()
@@ -51,6 +70,7 @@ function Get-OSDMetrics {
     Write-Host -ForegroundColor DarkGray "$DevicesPerDay per day / $DevicesPerWeek per week / $DevicesPerMonth per month / $DevicesPerYear per year"
     Write-Host
     
+    # OSDCloudAzure
     $OSDCloud = Find-Module OSDCloudAzure
     $OSDCloudDatePublished = $OSDCloud.PublishedDate
     $OSDCloudDownloadCount = ($OSDCloud.AdditionalMetadata).versionDownloadCount

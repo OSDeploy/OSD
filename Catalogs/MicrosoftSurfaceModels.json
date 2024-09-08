@@ -78,6 +78,12 @@
         "PackageID": "57601"
     },
     {
+        "Name":  "Surface Go LTE Consumer",
+        "Model":  "Surface Go",
+        "Product":  "Surface_Go_1825_Consumer",
+        "PackageID": "57601"
+    },
+    {
         "Name":  "Surface Go 2 Commercial",
         "Model":  "Surface Go 2",
         "Product":  "Surface_Go_2_1926",
@@ -114,6 +120,12 @@
         "PackageID": "103504"
     },
     {
+        "Name":  "Surface Go 4",
+        "Model":  "Surface Go 4",
+        "Product":  "Surface_Go_4_2067",
+        "PackageID": "105609"
+    },
+    {
         "Name":  "Surface Hub 2",
         "Model":  "Surface Hub 2",
         "Product":  "Surface_Hub_2",
@@ -129,6 +141,18 @@
         "Name":  "Surface Hub 2S 85",
         "Model":  "Surface Hub 2S",
         "Product":  "Surface Hub 2S 85",
+        "PackageID": "101974"
+    },
+    {
+        "Name":  "Surface Hub 3 50",
+        "Model":  "Surface Hub 3",
+        "Product":  "Surface Hub 3 50",
+        "PackageID": "101974"
+    },
+    {
+        "Name":  "Surface Hub 3 85",
+        "Model":  "Surface Hub 3",
+        "Product":  "Surface Hub 3 85",
         "PackageID": "101974"
     },
     {
@@ -216,6 +240,18 @@
         "PackageID": "104679"
     },
     {
+        "Name":  "Surface Laptop 6 for Business 13",
+        "Model":  "Surface Laptop 6",
+        "Product":  "Surface_Laptop_6_for_Business_2033",
+        "PackageID": "105946"
+    },
+    {
+        "Name":  "Surface Laptop 6 for Business 15",
+        "Model":  "Surface Laptop 6",
+        "Product":  "Surface_Laptop_6_for_Business_2035",
+        "PackageID": "105946"
+    },
+    {
         "Name":  "Surface Laptop Go",
         "Model":  "Surface Laptop Go",
         "Product":  "Surface_Laptop_Go_1943",
@@ -228,10 +264,22 @@
         "PackageID": "104251"
     },
     {
+        "Name":  "Surface Laptop Go 3",
+        "Model":  "Surface Laptop Go 3",
+        "Product":  "Surface_Laptop_Go_3_2013",
+        "PackageID": "105608"
+    },
+    {
         "Name":  "Surface Laptop Studio",
         "Model":  "Surface Laptop Studio",
         "Product":  "Surface_Laptop_Studio_1964",
         "PackageID": "103505"
+    },
+    {
+        "Name":  "Surface Laptop Studio 2",
+        "Model":  "Surface Laptop Studio 2",
+        "Product":  "Surface_Laptop_Studio_2_2029",
+        "PackageID": "105610"
     },
     {
         "Name":  "Surface Pro",
@@ -330,16 +378,10 @@
         "PackageID": "104680"
     },
     {
-        "Name":  "Surface Pro 9 5G US",
-        "Model":  "Surface Pro 9",
-        "Product":  "Surface_Pro_9_With_5G_1997",
-        "PackageID": "104680"
-    },
-    {
-        "Name":  "Surface Pro 9 5G ROW",
-        "Model":  "Surface Pro 9",
-        "Product":  "Surface_Pro_9_With_5G_1996",
-        "PackageID": "104680"
+        "Name":  "Surface Pro 10 for Business",
+        "Model":  "Surface Pro 10",
+        "Product":  "Surface_Pro_10_for_Business_2079",
+        "PackageID": "105947"
     },
     {
         "Name":  "Surface Studio",
@@ -351,6 +393,12 @@
         "Name":  "Surface Studio 2",
         "Model":  "Surface Studio 2",
         "Product":  "Surface_Studio_2_1707_Commercial",
+        "PackageID": "57593"
+    },
+    {
+        "Name":  "Surface Studio 2",
+        "Model":  "Surface Studio 2",
+        "Product":  "Surface_Studio_2_1707_Consumer",
         "PackageID": "57593"
     },
     {

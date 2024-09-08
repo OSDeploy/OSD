@@ -1,4 +1,4 @@
-function Start-OSDCloud {
+﻿function Start-OSDCloud {
     <#
     .SYNOPSIS
     Starts the OSDCloud Windows 10 or 11 Build Process from the OSD Module or a GitHub Repository
@@ -50,16 +50,10 @@ function Start-OSDCloud {
 
         [Parameter(ParameterSetName = 'Default')]
         [ValidateSet(
+            'Windows 11 23H2 x64',    
             'Windows 11 22H2 x64',
             'Windows 11 21H2 x64',
-            'Windows 10 22H2 x64',
-            'Windows 10 21H2 x64',
-            'Windows 10 21H1 x64',
-            'Windows 10 20H2 x64',
-            'Windows 10 2004 x64',
-            'Windows 10 1909 x64',
-            'Windows 10 1903 x64',
-            'Windows 10 1809 x64')]
+            'Windows 10 22H2 x64')]
         [System.String]
         $OSName,
 
@@ -72,7 +66,7 @@ function Start-OSDCloud {
         #Operating System Build of the Windows installation
         #Alias = Build
         [Parameter(ParameterSetName = 'Legacy')]
-        [ValidateSet('22H2','21H2','21H1','20H2','2004','1909','1903','1809')]
+        [ValidateSet('23H2','22H2','21H2')]
         [Alias('Build')]
         [System.String]
         $OSBuild,
@@ -177,7 +171,7 @@ function Start-OSDCloud {
         OSLanguageNames = $null
         OSName = $OSName
         OSNameMenu = $null
-        OSNames = @('Windows 11 22H2 x64','Windows 11 21H2 x64','Windows 10 22H2 x64','Windows 10 21H2 x64','Windows 10 21H1 x64','Windows 10 20H2 x64','Windows 10 2004 x64','Windows 10 1909 x64','Windows 10 1903 x64','Windows 10 1809 x64')
+        OSNames = @('Windows 11 23H2 x64','Windows 11 22H2 x64','Windows 11 21H2 x64','Windows 10 22H2 x64')
         OSVersion = $OSVersion
         OSVersionMenu = $null
         OSVersionNames = @('Windows 11','Windows 10')
@@ -398,7 +392,7 @@ function Start-OSDCloud {
         else {
             Write-Host -ForegroundColor DarkGray "========================================================================="
             Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Select a Build for $OSVersion x64"
-            $Global:StartOSDCloud.OSBuildNames = @('22H2','21H2','21H1','20H2','2004','1909','1903','1809')
+            $Global:StartOSDCloud.OSBuildNames = @('23H2','22H2','21H2')
             
             $i = $null
             $Global:StartOSDCloud.OSBuildMenu = foreach ($Item in $Global:StartOSDCloud.OSBuildNames) {
@@ -462,7 +456,7 @@ function Start-OSDCloud {
         if ($Global:StartOSDCloud.OSEdition -eq 'Home') {
             $Global:StartOSDCloud.OSEditionId = 'Core'
             $Global:StartOSDCloud.OSActivation = 'Retail'
-            $Global:StartOSDCloud.OSImageIndex = 4
+            $Global:StartOSDCloud.OSImageIndex = 4 #Confirmed 24.3.12 - GWB
         }
         if ($Global:StartOSDCloud.OSEdition -eq 'Home N') {
             $Global:StartOSDCloud.OSEditionId = 'CoreN'
@@ -530,7 +524,7 @@ function Start-OSDCloud {
         if ($Global:StartOSDCloud.OSEdition -eq 'Education') {
             $Global:StartOSDCloud.OSEditionId = 'Education'
             if ($Global:StartOSDCloud.OSActivation -eq 'Retail') {$Global:StartOSDCloud.OSImageIndex = 7}
-            if ($Global:StartOSDCloud.OSActivation -eq 'Volume') {$Global:StartOSDCloud.OSImageIndex = 4}
+            if ($Global:StartOSDCloud.OSActivation -eq 'Volume') {$Global:StartOSDCloud.OSImageIndex = 4} #Confirmed 24.3.12 - GWB
         }
         if ($Global:StartOSDCloud.OSEdition -eq 'Education N') {
             $Global:StartOSDCloud.OSEditionId = 'EducationN'
@@ -625,9 +619,12 @@ function Start-OSDCloud {
     #=================================================
     if ($PSCmdlet.ParameterSetName -ne 'CustomImage') {
         if ($Global:StartOSDCloud.GetFeatureUpdate) {
-            $Global:StartOSDCloud.GetFeatureUpdate = $Global:StartOSDCloud.GetFeatureUpdate | Select-Object -Property CreationDate,KBNumber,Title,UpdateOS,UpdateBuild,UpdateArch,FileName, @{Name='SizeMB';Expression={[int]($_.Size /1024/1024)}},FileUri,Hash,AdditionalHash
+            #$Global:StartOSDCloud.GetFeatureUpdate = $Global:StartOSDCloud.GetFeatureUpdate | Select-Object -Property CreationDate,KBNumber,Title,UpdateOS,UpdateBuild,UpdateArch,FileName, @{Name='SizeMB';Expression={[int]($_.Size /1024/1024)}},FileUri,Hash,AdditionalHash
+            #$Global:StartOSDCloud.ImageFileName = $Global:StartOSDCloud.GetFeatureUpdate.FileName
+            #$Global:StartOSDCloud.ImageFileUrl = $Global:StartOSDCloud.GetFeatureUpdate.FileUri
+            $Global:StartOSDCloud.GetFeatureUpdate = $Global:StartOSDCloud.GetFeatureUpdate | Select-Object -Property ReleaseDate,Name,Version,ReleaseID,Architecture,FileName,Url,SHA1,AdditionalHash
             $Global:StartOSDCloud.ImageFileName = $Global:StartOSDCloud.GetFeatureUpdate.FileName
-            $Global:StartOSDCloud.ImageFileUrl = $Global:StartOSDCloud.GetFeatureUpdate.FileUri
+            $Global:StartOSDCloud.ImageFileUrl = $Global:StartOSDCloud.GetFeatureUpdate.Url
         }
         else {
             Write-Warning "Unable to locate a Windows Feature Update"
@@ -640,17 +637,23 @@ function Start-OSDCloud {
 
         if ($Global:StartOSDCloud.ImageFileItem) {
             #Write-Host -ForegroundColor Green "OK"
-            Write-Host -ForegroundColor DarkGray $Global:StartOSDCloud.GetFeatureUpdate.Title
+            #Write-Host -ForegroundColor DarkGray $Global:StartOSDCloud.GetFeatureUpdate.Title
+            Write-Host -ForegroundColor DarkGray $Global:StartOSDCloud.GetFeatureUpdate.Name
             Write-Host -ForegroundColor DarkGray $Global:StartOSDCloud.ImageFileItem.FullName
         }
-        elseif (Test-WebConnection -Uri $Global:StartOSDCloud.GetFeatureUpdate.FileUri) {
+        #elseif (Test-WebConnection -Uri $Global:StartOSDCloud.GetFeatureUpdate.FileUri) {
+        elseif (Test-WebConnection -Uri $Global:StartOSDCloud.ImageFileUrl) {
             #Write-Host -ForegroundColor Yellow "Download"
-            Write-Host -ForegroundColor Yellow $Global:StartOSDCloud.GetFeatureUpdate.Title
-            Write-Host -ForegroundColor Yellow $Global:StartOSDCloud.GetFeatureUpdate.FileUri
+            #Write-Host -ForegroundColor Yellow $Global:StartOSDCloud.GetFeatureUpdate.Title
+            Write-Host -ForegroundColor Yellow $Global:StartOSDCloud.GetFeatureUpdate.Name
+            #Write-Host -ForegroundColor Yellow $Global:StartOSDCloud.GetFeatureUpdate.FileUri
+            Write-Host -ForegroundColor Yellow $Global:StartOSDCloud.ImageFileUrl
         }
         else {
-            Write-Warning $Global:StartOSDCloud.GetFeatureUpdate.Title
-            Write-Warning $Global:StartOSDCloud.GetFeatureUpdate.FileUri
+            #Write-Warning $Global:StartOSDCloud.GetFeatureUpdate.Title
+            #Write-Warning $Global:StartOSDCloud.GetFeatureUpdate.FileUri
+            Write-Warning $Global:StartOSDCloud.GetFeatureUpdate.Name
+            Write-Warning $Global:StartOSDCloud.ImageFileUrl
             Write-Warning "Could not verify an Internet connection for Windows Feature Update"
             Write-Warning "OSDCloud cannot continue"
             Break

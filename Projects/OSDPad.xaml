@@ -131,7 +131,7 @@
         <!-- ScriptSelectionControl -->
         <ComboBox Grid.Row="0"
                   Name="ScriptSelectionControl"
-                  FontSize="16"
+                  FontSize="14"
                   SelectedIndex="0" />
         <!-- ScriptTextControl -->
         <TextBox Grid.Row="1"
@@ -141,7 +141,7 @@
                  AcceptsTab="True"
                  Background="Gainsboro"
                  FontFamily="Consolas"
-                 FontSize="16"
+                 FontSize="14"
                  Foreground="Blue"
                  HorizontalAlignment="Stretch"
                  ScrollViewer.HorizontalScrollBarVisibility="Visible"

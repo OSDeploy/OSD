@@ -19,7 +19,7 @@ function Get-HpWinPEDriverPack {
     Write-Verbose $DriverPackInfoUrl
 
     Try {
-        (Invoke-WebRequest -Uri $DriverPackInfoUrl -UseBasicParsing -Method Get).Links | Where-Object {$_.href -like '*ftp.ext.hp.com/pub/softpaq/*/*.exe'} | Select-Object -ExpandProperty href
+        (Invoke-WebRequest -Uri $DriverPackInfoUrl -UseBasicParsing -Method Get).Links | Where-Object {$_.href -like '*.hp.com/pub/softpaq/*/*.exe'} | Select-Object -ExpandProperty href
     }
     Catch {
         Write-Output $LastKnownGood

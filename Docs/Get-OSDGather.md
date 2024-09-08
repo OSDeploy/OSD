@@ -24,17 +24,19 @@ Returns common OSD information as an ordered hash table
 ### EXAMPLE 1
 ```
 OSDGather
+```
+
 Get-OSDGather
 Returns the Gather Results
-```
 
 ### EXAMPLE 2
 ```
 $OSDGather = Get-OSDGather
+```
+
 $OSDGather.IsAdmin
 $OSDGather.ComputerInfo
 Returns the Gather Results saved in a Variable
-```
 
 ## PARAMETERS
 

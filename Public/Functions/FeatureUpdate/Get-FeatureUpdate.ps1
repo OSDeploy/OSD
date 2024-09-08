@@ -19,16 +19,17 @@ function Get-FeatureUpdate {
         #Default = Windows 11 22H2 x64
         [Parameter(ParameterSetName = 'ByOSName')]
         [ValidateSet(
+            'Windows 11 23H2 x64',
             'Windows 11 22H2 x64',
             'Windows 11 21H2 x64',
             'Windows 10 22H2 x64',
             'Windows 10 21H2 x64',
-            'Windows 10 21H1 x64',
             'Windows 10 20H2 x64',
             'Windows 10 2004 x64',
             'Windows 10 1909 x64',
-            'Windows 10 1903 x64',
-            'Windows 10 1809 x64')]
+            'Windows 11 23H2 ARM64',
+            'Windows 10 22H2 ARM64'
+            )]
         [Alias('Name')]
         [System.String]
         $OSName = 'Windows 11 22H2 x64',
@@ -44,14 +45,14 @@ function Get-FeatureUpdate {
         #Operating System ReleaseID
         #Default = 22H2
         [Parameter(ParameterSetName = 'v1')]
-        [ValidateSet('22H2','21H2','21H1','20H2','2004','1909','1903','1809')]
+        [ValidateSet('23H2','22H2','21H2','20H2','2004','1909')]
         [Alias('Build','OSBuild','ReleaseID')]
         [System.String]
         $OSReleaseID = '22H2',
 
         #Operating System Architecture
         #Default = x64
-        [ValidateSet('x64','x86')]
+        [ValidateSet('x64','x86', 'ARM64')]
         [Alias('Arch','OSArch','Architecture')]
         [System.String]
         $OSArchitecture = 'x64',
@@ -77,48 +78,64 @@ function Get-FeatureUpdate {
         [System.String]
         $OSLanguage = 'en-us'
     )
+    
     #=================================================
     #   Import Local FeatureUpdates
     #=================================================
-    $Results = Get-WSUSXML -Catalog FeatureUpdate -Silent
+    #$Results = Get-WSUSXML -Catalog FeatureUpdate -Silent
+
+    $Results = Get-OSDCloudOperatingSystems -OSArch $OSArchitecture
+    if ($OSName -match 'ARM64'){
+        $Results = Get-OSDCloudOperatingSystems -OSArch ARM64
+        $OSArchitecture = 'ARM64'
+    }
     #=================================================
     #   OSLanguage
     #=================================================
-    $Results = $Results | Where-Object {$_.Title -match $OSLanguage}
+    #$Results = $Results | Where-Object {$_.Title -match $OSLanguage}
+    $Results = $Results | Where-Object {$_.Language -match $OSLanguage}
     #=================================================
     #   OSActivation
     #=================================================
-    switch ($OSActivation) {
-        Retail  {$Results = $Results | Where-Object {$_.Title -match 'consumer'}}
-        Volume  {$Results = $Results | Where-Object {$_.Title -match 'business'}}
-    }
+    #switch ($OSActivation) {
+    #    Retail  {$Results = $Results | Where-Object {$_.Title -match 'consumer'}}
+    #    Volume  {$Results = $Results | Where-Object {$_.Title -match 'business'}}
+    #}
+    $Results = $Results | Where-Object {$_.Activation -match $OSActivation}
     #=================================================
     #   v1
     #=================================================
     if ($PSCmdlet.ParameterSetName -eq 'v1') {
         Write-Verbose -Message 'v1'
-        $Results = $Results | Where-Object {$_.UpdateArch -eq $OSArchitecture}
-        $Results = $Results | Where-Object {$_.UpdateOS -match $OSVersion}
-        $Results = $Results | Where-Object {$_.UpdateBuild -eq $OSReleaseID}
+        #$Results = $Results | Where-Object {$_.UpdateArch -eq $OSArchitecture}
+        $Results = $Results | Where-Object {$_.Architecture -eq $OSArchitecture}
+        #$Results = $Results | Where-Object {$_.UpdateOS -match $OSVersion}
+        $Results = $Results | Where-Object {$_.Version -match $OSVersion}
+        #$Results = $Results | Where-Object {$_.UpdateBuild -eq $OSReleaseID}
+        $Results = $Results | Where-Object {$_.ReleaseID -eq $OSReleaseID}
     }
     else {
-        $Results = $Results | Where-Object {$_.UpdateArch -eq $OSArchitecture}
+        $Results = $Results | Where-Object {$_.Architecture -eq $OSArchitecture}
     }
     #=================================================
     #   ByOSName
     #=================================================
     if ($PSCmdlet.ParameterSetName -eq 'ByOSName') {
         switch ($OSName) {
-            'Windows 11 22H2 x64'   {$Results = $Results | Where-Object {$_.UpdateOS -match 'Windows 11'} | Where-Object {$_.UpdateBuild -eq '22H2'}}
-            'Windows 11 21H2 x64'   {$Results = $Results | Where-Object {$_.UpdateOS -match 'Windows 11'} | Where-Object {$_.UpdateBuild -eq '21H2'}}
-            'Windows 10 22H2 x64'   {$Results = $Results | Where-Object {$_.UpdateOS -match 'Windows 10'} | Where-Object {$_.UpdateBuild -eq '22H2'}}
-            'Windows 10 21H2 x64'   {$Results = $Results | Where-Object {$_.UpdateOS -match 'Windows 10'} | Where-Object {$_.UpdateBuild -eq '21H2'}}
-            'Windows 10 21H1 x64'   {$Results = $Results | Where-Object {$_.UpdateOS -match 'Windows 10'} | Where-Object {$_.UpdateBuild -eq '21H1'}}
-            'Windows 10 20H2 x64'   {$Results = $Results | Where-Object {$_.UpdateOS -match 'Windows 10'} | Where-Object {$_.UpdateBuild -eq '20H2'}}
-            'Windows 10 2004 x64'   {$Results = $Results | Where-Object {$_.UpdateOS -match 'Windows 10'} | Where-Object {$_.UpdateBuild -eq '2004'}}
-            'Windows 10 1909 x64'   {$Results = $Results | Where-Object {$_.UpdateOS -match 'Windows 10'} | Where-Object {$_.UpdateBuild -eq '1909'}}
-            'Windows 10 1903 x64'   {$Results = $Results | Where-Object {$_.UpdateOS -match 'Windows 10'} | Where-Object {$_.UpdateBuild -eq '1903'}}
-            'Windows 10 1809 x64'   {$Results = $Results | Where-Object {$_.UpdateOS -match 'Windows 10'} | Where-Object {$_.UpdateBuild -eq '1809'}}
+            #'Windows 11 22H2 x64'   {$Results = $Results | Where-Object {$_.UpdateOS -match 'Windows 11'} | Where-Object {$_.UpdateBuild -eq '22H2'}}
+            #'Windows 11 22H2 x64'   {$Results = $Results | Where-Object {$_.UpdateOS -match 'Windows 11'} | Where-Object {$_.UpdateBuild -eq '22H2'}}
+            #'Windows 11 21H2 x64'   {$Results = $Results | Where-Object {$_.UpdateOS -match 'Windows 11'} | Where-Object {$_.UpdateBuild -eq '21H2'}}
+            #'Windows 10 22H2 x64'   {$Results = $Results | Where-Object {$_.UpdateOS -match 'Windows 10'} | Where-Object {$_.UpdateBuild -eq '22H2'}}
+            'Windows 11 23H2 x64'   {$Results = $Results | Where-Object {$_.Version -match 'Windows 11'} | Where-Object {$_.ReleaseID -eq '23H2'} | Where-Object {$_.Architecture -eq 'x64'}} 
+            'Windows 11 22H2 x64'   {$Results = $Results | Where-Object {$_.Version -match 'Windows 11'} | Where-Object {$_.ReleaseID -eq '22H2'} | Where-Object {$_.Architecture -eq 'x64'}}
+            'Windows 11 21H2 x64'   {$Results = $Results | Where-Object {$_.Version -match 'Windows 11'} | Where-Object {$_.ReleaseID -eq '21H2'} | Where-Object {$_.Architecture -eq 'x64'}}
+            'Windows 10 22H2 x64'   {$Results = $Results | Where-Object {$_.Version -match 'Windows 10'} | Where-Object {$_.ReleaseID -eq '22H2'} | Where-Object {$_.Architecture -eq 'x64'}}
+            'Windows 10 21H2 x64'   {$Results = $Results | Where-Object {$_.Version -match 'Windows 10'} | Where-Object {$_.ReleaseID -eq '21H2'} | Where-Object {$_.Architecture -eq 'x64'}}
+            'Windows 10 20H2 x64'   {$Results = $Results | Where-Object {$_.Version -match 'Windows 10'} | Where-Object {$_.ReleaseID -eq '20H2'} | Where-Object {$_.Architecture -eq 'x64'}}
+            'Windows 10 2004 x64'   {$Results = $Results | Where-Object {$_.Version -match 'Windows 10'} | Where-Object {$_.ReleaseID -eq '2004'} | Where-Object {$_.Architecture -eq 'x64'}}
+            'Windows 10 1909 x64'   {$Results = $Results | Where-Object {$_.Version -match 'Windows 10'} | Where-Object {$_.ReleaseID -eq '1909'} | Where-Object {$_.Architecture -eq 'x64'}}
+            'Windows 11 23H2 ARM64'   {$Results = $Results | Where-Object {$_.Version -match 'Windows 11'} | Where-Object {$_.ReleaseID -eq '23H2'} | Where-Object {$_.Architecture -eq 'ARM64'}} 
+            'Windows 10 22H2 ARM64'   {$Results = $Results | Where-Object {$_.Version -match 'Windows 10'} | Where-Object {$_.ReleaseID -eq '22H2'} | Where-Object {$_.Architecture -eq 'ARM64'}}
         }
     }
     #=================================================

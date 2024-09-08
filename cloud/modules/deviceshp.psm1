@@ -86,8 +86,8 @@ function osdcloud-HPTPMDetermine{
 function osdcloud-HPTPMDowngrade{
     [String]$TPMVer = (Get-CimInstance  -Namespace "root\cimv2\security\MicrosoftTPM" -ClassName win32_tpm).ManufacturerVersion
     if ($TPMVer -eq "7.85.4555.0"){$SPNumber = "SP94937"}
-    if ($TPMVer -eq "7.63.3353.0"){$SPNumber = "SP87753"}  Need to confirm test machine to determine 
-    if ($SPNumber -ne $null){
+    if ($TPMVer -eq "7.63.3353.0"){$SPNumber = "SP87753"}  #Need to confirm test machine to determine 
+    if ($SPNumber){
         if ((!($WorkingFolder))-or ($null -eq $WorkingFolder)){$WorkingFolder = "$env:TEMP\TPM"}
         if (!(Test-Path -Path $WorkingFolder)){New-Item -Path $WorkingFolder -ItemType Directory -Force |Out-Null}
         $UpdatePath = "$WorkingFolder\$SPNumber.exe"
@@ -107,7 +107,7 @@ function osdcloud-HPTPMDowngrade{
 function osdcloud-HPTPMBIOSSettings {
     osdcloud-HPBIOSSetSetting -SettingName 'TPM Device' -Value 'Available'
     osdcloud-HPBIOSSetSetting -SettingName 'TPM State' -Value 'Enable'
-    osdcloud-HPBIOSSetSetting -SettingName 'TPM Activation Policy' -Value 'No Prompts'
+    osdcloud-HPBIOSSetSetting -SettingName 'TPM Activation Policy' -Value 'No prompts'
 }
 function osdcloud-HPBIOSDetermine{
     [CmdletBinding()]
@@ -844,7 +844,7 @@ function osdcloud-HPSetupCompleteAppend {
 
     if (Test-Path -Path $PSFilePath){
         Add-Content -Path $PSFilePath "Invoke-Expression (Invoke-RestMethod -Uri 'https://raw.githubusercontent.com/OSDeploy/OSD/master/cloud/modules/deviceshp.psm1')"
-        Add-Content -Path $PSFilePath "Invoke-Expression (Invoke-RestMethod -Uri 'https://raw.githubusercontent.com/OSDeploy/OSD/master/cloud/modules/_winpe.psm1')"
+        Add-Content -Path $PSFilePath "Invoke-Expression (Invoke-RestMethod -Uri 'https://raw.githubusercontent.com/OSDeploy/OSD/master/cloud/modules/eq-winpe.psm1')"
         Add-Content -Path $PSFilePath "Invoke-Expression (Invoke-RestMethod -Uri 'functions.osdcloud.com' -ErrorAction SilentlyContinue)"
         Add-Content -Path $PSFilePath "osdcloud-WinpeSetEnvironmentVariables"
         Add-Content -Path $PSFilePath "osdcloud-InstallModuleHPCMSL -ErrorAction SilentlyContinue"

@@ -17,7 +17,7 @@ Edit-OSDCloudWinPE [-CloudDriver <String[]>] [-StartOSDCloudGUI] [-DriverHWID <S
  [-DriverPath <String[]>] [-PSModuleCopy <String[]>] [-PSModuleInstall <String[]>] [-Startnet <String>]
  [-StartOSDCloud <String>] [-StartOSDPad <String>] [-StartPSCommand <String>] [-StartURL <String>] [-UpdateUSB]
  [-Wallpaper <FileInfo>] [-UseDefaultWallpaper] [-Brand <String>] [-WorkspacePath <String>] [-WirelessConnect]
- [<CommonParameters>]
+ [-WifiProfile <FileInfo>] [-Add7Zip] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -286,6 +286,36 @@ Accept wildcard characters: False
 
 ### -WirelessConnect
 Will leverage WirelessConnect.EXE instead of the Commandline Tools to connect to WiFi
+
+```yaml
+Type: SwitchParameter
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: False
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -WifiProfile
+Imports and uses a WiFi Profile to connect to WiFi
+
+```yaml
+Type: FileInfo
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -Add7Zip
+Adds 7Zip to Boot Image
 
 ```yaml
 Type: SwitchParameter
