@@ -479,4 +479,3 @@ $XMLProfile = @"
         Start-Sleep -Seconds 5
     }
 }
-}
