@@ -42,6 +42,7 @@ function Initialize-OSDCloudStartnetUpdate {
     #Start-Process PowerShell -WindowStyle Minimized
     Start-Process PowerShell -WindowStyle Minimized -ArgumentList '-NoExit','-NoLogo',"ipconfig /all"
 
+    #Open PowerShell Window for Error Hardware that requires Drivers to function properly
     $Win32PnPEntityErrorName = $Win32PnPEntityError | Where-Object {$null -ne $_.Name}
     if ($Win32PnPEntityErrorName) {
         Write-Host -ForegroundColor Green "$($TimeSpan.ToString("mm':'ss")) Opening PowerShell window to detail Hardware with Driver errors (minimized)"
