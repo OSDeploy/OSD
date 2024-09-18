@@ -3,10 +3,6 @@
 Tests to see if a Uri by Invoke-WebRequest -Method Head
 .DESCRIPTION
 Tests to see if a Uri by Invoke-WebRequest -Method Head
-.PARAMETER Uri
-Uri to test
-.PARAMETER Headers
-Additional headers to pass through
 .LINK
 https://github.com/OSDeploy/OSD/tree/master/Docs
 #>
@@ -16,25 +12,15 @@ function Test-WebConnection
     param
     (
         [Parameter(ValueFromPipeline)]
+        # Uri to test
         [System.Uri]
-        $Uri = 'google.com',
-
-        [Parameter()]
-        [ValidateNotNullOrEmpty()]
-        [System.Collections.IDictionary]
-        $Headers
+        $Uri = 'google.com'
     )
     $Params = @{
         Method = 'Head'
         Uri = $Uri
         UseBasicParsing = $true
         Headers = @{'Cache-Control'='no-cache'}
-    }
-
-    if ($null -ne $Headers) {
-        foreach ($Header in $Headers.GetEnumerator()) {
-            $Params.Headers.Add($Header.Key,$Header.Value)
-        }
     }
 
     try {
