@@ -64,7 +64,7 @@
     }
     #endregion
 
-    #region AUTOMATION ----- OSDCloud Master Settings
+    #region ----- OSDCloud Master Settings
     Write-DarkGrayHost "[i] Initializing `$Global.OSDCloud"
     $Global:OSDCloud = $null
     $Global:OSDCloud = [ordered]@{
@@ -217,7 +217,7 @@
     }
     #endregion
 
-    #region AUTOMATION ----- Merge Variables
+    #region ----- Merge Variables
     <#  Overwrite the OSDCloud Master Settings by using custom variables
         MyOSDCloud is the last and final customization variable
     #>
@@ -360,13 +360,13 @@
 
     #endregion
 
-    #region AUTOMATION ----- OSDCloud Config Startup Scripts
+    #region ----- OSDCloud\Config\Scripts
     <#
     These scripts will be in the OSDCloud Workspace in Config\Scripts\Startup
     When Edit-OSDCloudWinPE is executed then these files should be copied to the mounted WinPE
     In WinPE, the scripts will exist in X:\OSDCloud\Config\Scripts\*
     #>
-    Write-SectionHeader '[i] OSDCloud Config Startup Scripts'
+    Write-SectionHeader '[i] OSDCloud\Config\Scripts Executing'
     $Global:OSDCloud.ScriptStartup = Get-PSDrive -PSProvider FileSystem | Where-Object {$_.Name -ne 'C'} | ForEach-Object {
         Write-DarkGrayHost "[i] Searching for scripts at $($_.Root)OSDCloud\Config\Scripts\Startup"
         Get-ChildItem "$($_.Root)OSDCloud\Config\Scripts\Startup\" -Include "*.ps1" -File -Recurse -Force -ErrorAction Ignore
@@ -380,8 +380,8 @@
     }
     #endregion
 
-    #region AUTOMATION ----- OSDCloud Automate Autopilot Configuration
-    Write-SectionHeader '[i] OSDCloud Automate Autopilot Configuration'
+    #region ----- OSDCloud\Automate Find AutopilotConfigurationFile.json
+    Write-SectionHeader '[i] OSDCloud\Automate Find AutopilotConfigurationFile.json'
     $Global:OSDCloud.AutomateAutopilot = Get-PSDrive -PSProvider FileSystem | Where-Object {$_.Name -ne 'C'} | ForEach-Object {
         Write-DarkGrayHost "[i] Searching for Autopilot configuration at $($_.Root)OSDCloud\Automate"
         Get-ChildItem "$($_.Root)OSDCloud\Automate" -Include "AutopilotConfigurationFile.json" -File -Recurse -Force -ErrorAction Ignore
@@ -394,8 +394,8 @@
     }
     #endregion
 
-    #region AUTOMATION ----- OSDCloud Automate Provisioning Packages
-    Write-SectionHeader '[i] OSDCloud Automate Provisioning Packages'
+    #region ----- OSDCloud\Automate\Provisioning
+    Write-SectionHeader '[i] OSDCloud\Automate\Provisioning'
     $Global:OSDCloud.AutomateProvisioning = Get-PSDrive -PSProvider FileSystem | Where-Object {$_.Name -ne 'C'} | ForEach-Object {
         Write-DarkGrayHost "[i] Searching for Provisioning Packages at $($_.Root)OSDCloud\Automate\Provisioning"
         Get-ChildItem "$($_.Root)OSDCloud\Automate\Provisioning" -Include "*.ppkg" -File -Recurse -Force -ErrorAction Ignore
@@ -408,8 +408,10 @@
     }
     #endregion
 
-     #region AUTOMATION ----- OSDCloud Automate Startup Scripts
-    Write-SectionHeader '[i] OSDCloud Automate Startup Scripts'
+     #region ----- OSDCloud\Automate\Startup
+     <# These scripts execute the start of Invoke OSDCloud
+     #>
+    Write-SectionHeader '[i] OSDCloud\Automate\Startup'
     $Global:OSDCloud.AutomateStartupScript = Get-PSDrive -PSProvider FileSystem | Where-Object {$_.Name -ne 'C'} | ForEach-Object {
         Write-DarkGrayHost "[i] Searching for scripts at $($_.Root)OSDCloud\Automate\Startup"
         Get-ChildItem "$($_.Root)OSDCloud\Automate\Startup" -Include "*.ps1" -File -Recurse -Force -ErrorAction Ignore
@@ -422,8 +424,8 @@
     }
     #endregion
 
-    #region AUTOMATION ----- OSDCloud Automate Shutdown Scripts
-    Write-SectionHeader '[i] OSDCloud Automate Shutdown Scripts'
+    #region ----- OSDCloud\Automate\Shutdown
+    Write-SectionHeader '[i] OSDCloud\Automate\Shutdown'
     $Global:OSDCloud.AutomateShutdownScript = Get-PSDrive -PSProvider FileSystem | Where-Object {$_.Name -ne 'C'} | ForEach-Object {
         Write-DarkGrayHost "[i] Searching for scripts at $($_.Root)OSDCloud\Automate\Shutdown"
         Get-ChildItem "$($_.Root)OSDCloud\Automate\Shutdown" -Include "*.ps1" -File -Recurse -Force -ErrorAction Ignore
@@ -1982,7 +1984,7 @@
         #endregion
     #endregion
 
-    #region AUTOMATION ----- OSDeploy.OOBEDeploy.json
+    #region ----- OSDeploy.OOBEDeploy.json
     if ($Global:OSDCloud.OOBEDeployJsonObject) {
         Write-SectionHeader "Applying OSDeploy.OOBEDeploy.json"
         Write-DarkGrayHost 'C:\ProgramData\OSDeploy\OSDeploy.OOBEDeploy.json'
@@ -2020,7 +2022,7 @@ exit
     }
     #endregion
 
-    #region AUTOMATION ----- OSDeploy.AutopilotOOBE.json
+    #region ----- OSDeploy.AutopilotOOBE.json
     if ($Global:OSDCloud.AutopilotOOBEJsonObject) {
         Write-SectionHeader "Applying OSDeploy.AutopilotOOBE.json"
         Write-DarkGrayHost 'C:\ProgramData\OSDeploy\OSDeploy.AutopilotOOBE.json'
@@ -2243,7 +2245,7 @@ exit
     Set-SetupCompleteCreateFinish
     #endregion
 
-    #region AUTOMATION ----- OSDCloud Config Shutdown Scripts
+    #region ----- OSDCloud\Config\Scripts\Shutdown
     <#
     David Segura
     22.11.11.1
@@ -2255,7 +2257,7 @@ exit
         Get-ChildItem "$($_.Root)OSDCloud\Config\Scripts\Shutdown" -Include "*.ps1" -File -Recurse -Force -ErrorAction Ignore
     }
     if ($Global:OSDCloud.ScriptShutdown) {
-        Write-SectionHeader '[i]OSDCloud Config Shutdown Scripts'
+        Write-SectionHeader '[i] Run OSDCloud\Config\Scripts\Shutdown'
         $Global:OSDCloud.ScriptShutdown = $Global:OSDCloud.ScriptShutdown | Sort-Object -Property FullName
         foreach ($Item in $Global:OSDCloud.ScriptShutdown) {
             Write-DarkGrayHost "$($Item.FullName)"
@@ -2264,7 +2266,7 @@ exit
     }
     #endregion
 
-    #region AUTOMATION ----- OSDCloud Automate Autopilot Configuration
+    #region ----- OSDCloud\Automate\AutopilotConfigurationFile.json
     $Global:OSDCloud.AutomateAutopilot = Get-PSDrive -PSProvider FileSystem | Where-Object {$_.Name -ne 'C'} | ForEach-Object {
         Get-ChildItem "$($_.Root)OSDCloud\Automate" -Include "AutopilotConfigurationFile.json" -File -Recurse -Force -ErrorAction Ignore
     }
@@ -2278,7 +2280,7 @@ exit
     }
     #endregion
 
-    #region AUTOMATION ----- OSDCloud Azure Autopilot Configuration File
+    #region ----- OSDCloud Azure Autopilot Configuration File
     if ($Global:OSDCloud.AzOSDCloudAutopilotFile) {
         Write-SectionHeader '[i] OSDCloud Azure Autopilot Configuration File'
         Write-DarkGrayHost 'Autopilot Configuration File will be downloaded to C:\Windows\Provisioning\Autopilot'
@@ -2302,7 +2304,7 @@ exit
     }
     #endregion
 
-    #region AUTOMATION ----- OSDCloud Automate Provisioning Packages
+    #region ----- OSDCloud Automate Provisioning Packages
     $Global:OSDCloud.AutomateProvisioning = Get-PSDrive -PSProvider FileSystem | Where-Object {$_.Name -ne 'C'} | ForEach-Object {
         Get-ChildItem "$($_.Root)OSDCloud\Automate\Provisioning" -Include "*.ppkg" -File -Recurse -Force -ErrorAction Ignore
     }
@@ -2317,7 +2319,7 @@ exit
     }
     #endregion
 
-    #region AUTOMATION ----- OSDCloud Azure Provisioning Packages
+    #region ----- OSDCloud Azure Provisioning Packages
     if ($Global:OSDCloud.AzOSDCloudPackage) {
         Write-SectionHeader '[i] OSDCloud Azure Provisioning Packages'
         Write-DarkGrayHost 'Provisioning Packages will be downloaded to C:\OSDCloud\Packages'
@@ -2351,7 +2353,7 @@ exit
     }
     #endregion
 
-    #region AUTOMATION ----- OSDCloud Automate Shutdown Scripts
+    #region ----- OSDCloud Automate Shutdown Scripts
     $Global:OSDCloud.AutomateShutdownScript = Get-PSDrive -PSProvider FileSystem | Where-Object {$_.Name -ne 'C'} | ForEach-Object {
         Get-ChildItem "$($_.Root)OSDCloud\Automate\Shutdown" -Include "*.ps1" -File -Recurse -Force -ErrorAction Ignore
     }
@@ -2365,7 +2367,7 @@ exit
     }
     #endregion
 
-    #region AUTOMATION ----- OSDCloud Automate Azure WinPE Shutdown Scripts
+    #region ----- OSDCloud Automate Azure WinPE Shutdown Scripts
     if ($Global:OSDCloud.AzOSDCloudScript) {
         Write-SectionHeader '[i] OSDCloud Automate Azure WinPE Shutdown Scripts'
         foreach ($Item in $Global:OSDCloud.AzOSDCloudScript) {
