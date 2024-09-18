@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<WindowsCustomizations>
+  <PackageConfig xmlns="urn:schemas-Microsoft-com:Windows-ICD-Package-Config.v1.0">
+    <ID>{7f59c8d6-f3ee-44b4-8491-9425e15fbcdd}</ID>
+    <Name>Invoke-OSDCloudDriverPack</Name>
+    <Version>1.1</Version>
+    <OwnerType>ITAdmin</OwnerType>
+    <Rank>0</Rank>
+    <Notes></Notes>
+  </PackageConfig>
+  <Settings xmlns="urn:schemas-microsoft-com:windows-provisioning">
+    <Customizations>
+      <Common>
+        <ProvisioningCommands>
+          <DeviceContext>
+            <CommandFiles>
+              <CommandFile Name="Invoke-OSDCloudDriverPack">D:\GitHub\MyModules\OSD\Provisioning\Invoke-OSDCloudDriverPack.ps1</CommandFile>
+            </CommandFiles>
+            <CommandLine>PowerShell.exe -ExecutionPolicy Unrestricted .\Invoke-OSDCloudDriverPack.ps1</CommandLine>
+          </DeviceContext>
+        </ProvisioningCommands>
+      </Common>
+    </Customizations>
+  </Settings>
+</WindowsCustomizations>

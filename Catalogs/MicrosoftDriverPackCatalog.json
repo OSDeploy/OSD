@@ -1,6 +1,6 @@
 [
     {
-        "CatalogVersion":  "24.09.13",
+        "CatalogVersion":  "24.09.18",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "21.05.06",
@@ -18,7 +18,7 @@
         "HashMD5":  ""
     },
     {
-        "CatalogVersion":  "24.09.13",
+        "CatalogVersion":  "24.09.18",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "21.05.06",
@@ -36,7 +36,7 @@
         "HashMD5":  ""
     },
     {
-        "CatalogVersion":  "24.09.13",
+        "CatalogVersion":  "24.09.18",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "21.05.06",
@@ -54,7 +54,7 @@
         "HashMD5":  ""
     },
     {
-        "CatalogVersion":  "24.09.13",
+        "CatalogVersion":  "24.09.18",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "21.05.06",
@@ -72,7 +72,7 @@
         "HashMD5":  ""
     },
     {
-        "CatalogVersion":  "24.09.13",
+        "CatalogVersion":  "24.09.18",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "21.05.06",
@@ -90,7 +90,7 @@
         "HashMD5":  ""
     },
     {
-        "CatalogVersion":  "24.09.13",
+        "CatalogVersion":  "24.09.18",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "21.07.29",
@@ -108,10 +108,10 @@
         "HashMD5":  ""
     },
     {
-        "CatalogVersion":  "24.09.13",
+        "CatalogVersion":  "24.09.18",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  "23.09.20",
+        "ReleaseDate":  "23.09.21",
         "Manufacturer":  "Microsoft",
         "Model":  "Surface Book 2",
         "Product":  "Surface_Book_1832",
@@ -126,10 +126,10 @@
         "HashMD5":  ""
     },
     {
-        "CatalogVersion":  "24.09.13",
+        "CatalogVersion":  "24.09.18",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  "23.09.20",
+        "ReleaseDate":  "23.09.21",
         "Manufacturer":  "Microsoft",
         "Model":  "Surface Book 2",
         "Product":  "Surface_Book_1832",
@@ -144,10 +144,10 @@
         "HashMD5":  ""
     },
     {
-        "CatalogVersion":  "24.09.13",
+        "CatalogVersion":  "24.09.18",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  "23.09.20",
+        "ReleaseDate":  "23.09.21",
         "Manufacturer":  "Microsoft",
         "Model":  "Surface Book 2",
         "Product":  "Surface_Book_1793",
@@ -162,10 +162,10 @@
         "HashMD5":  ""
     },
     {
-        "CatalogVersion":  "24.09.13",
+        "CatalogVersion":  "24.09.18",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  "23.09.20",
+        "ReleaseDate":  "23.09.21",
         "Manufacturer":  "Microsoft",
         "Model":  "Surface Book 2",
         "Product":  "Surface_Book_1793",
@@ -180,10 +180,10 @@
         "HashMD5":  ""
     },
     {
-        "CatalogVersion":  "24.09.13",
+        "CatalogVersion":  "24.09.18",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  "24.07.25",
+        "ReleaseDate":  "24.07.26",
         "Manufacturer":  "Microsoft",
         "Model":  "Surface Book 3",
         "Product":  "Surface_Book_3_1900",
@@ -198,10 +198,10 @@
         "HashMD5":  ""
     },
     {
-        "CatalogVersion":  "24.09.13",
+        "CatalogVersion":  "24.09.18",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  "24.07.25",
+        "ReleaseDate":  "24.07.26",
         "Manufacturer":  "Microsoft",
         "Model":  "Surface Book 3",
         "Product":  "Surface_Book_3_1900",
@@ -216,10 +216,10 @@
         "HashMD5":  ""
     },
     {
-        "CatalogVersion":  "24.09.13",
+        "CatalogVersion":  "24.09.18",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  "24.07.25",
+        "ReleaseDate":  "24.07.26",
         "Manufacturer":  "Microsoft",
         "Model":  "Surface Book 3",
         "Product":  "Surface_Book_3_1899",
@@ -234,10 +234,10 @@
         "HashMD5":  ""
     },
     {
-        "CatalogVersion":  "24.09.13",
+        "CatalogVersion":  "24.09.18",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  "24.07.25",
+        "ReleaseDate":  "24.07.26",
         "Manufacturer":  "Microsoft",
         "Model":  "Surface Book 3",
         "Product":  "Surface_Book_3_1899",
@@ -252,7 +252,7 @@
         "HashMD5":  ""
     },
     {
-        "CatalogVersion":  "24.09.13",
+        "CatalogVersion":  "24.09.18",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "22.11.10",
@@ -270,7 +270,7 @@
         "HashMD5":  ""
     },
     {
-        "CatalogVersion":  "24.09.13",
+        "CatalogVersion":  "24.09.18",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "22.11.10",
@@ -288,7 +288,7 @@
         "HashMD5":  ""
     },
     {
-        "CatalogVersion":  "24.09.13",
+        "CatalogVersion":  "24.09.18",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "22.11.10",
@@ -306,7 +306,7 @@
         "HashMD5":  ""
     },
     {
-        "CatalogVersion":  "24.09.13",
+        "CatalogVersion":  "24.09.18",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "22.11.10",
@@ -324,10 +324,10 @@
         "HashMD5":  ""
     },
     {
-        "CatalogVersion":  "24.09.13",
+        "CatalogVersion":  "24.09.18",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  "24.09.10",
+        "ReleaseDate":  "24.09.11",
         "Manufacturer":  "Microsoft",
         "Model":  "Surface Go 2",
         "Product":  "Surface_Go_2_1926",
@@ -342,10 +342,10 @@
         "HashMD5":  ""
     },
     {
-        "CatalogVersion":  "24.09.13",
+        "CatalogVersion":  "24.09.18",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  "24.09.10",
+        "ReleaseDate":  "24.09.11",
         "Manufacturer":  "Microsoft",
         "Model":  "Surface Go 2",
         "Product":  "Surface_Go_2_1901",
@@ -360,10 +360,10 @@
         "HashMD5":  ""
     },
     {
-        "CatalogVersion":  "24.09.13",
+        "CatalogVersion":  "24.09.18",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  "24.09.10",
+        "ReleaseDate":  "24.09.11",
         "Manufacturer":  "Microsoft",
         "Model":  "Surface Go 2",
         "Product":  "Surface_Go_2_1927",
@@ -378,10 +378,10 @@
         "HashMD5":  ""
     },
     {
-        "CatalogVersion":  "24.09.13",
+        "CatalogVersion":  "24.09.18",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  "24.07.15",
+        "ReleaseDate":  "24.07.16",
         "Manufacturer":  "Microsoft",
         "Model":  "Surface Go 3",
         "Product":  "Surface_Go_3_1926",
@@ -396,10 +396,10 @@
         "HashMD5":  ""
     },
     {
-        "CatalogVersion":  "24.09.13",
+        "CatalogVersion":  "24.09.18",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  "24.07.15",
+        "ReleaseDate":  "24.07.16",
         "Manufacturer":  "Microsoft",
         "Model":  "Surface Go 3",
         "Product":  "Surface_Go_3_1926",
@@ -414,10 +414,10 @@
         "HashMD5":  ""
     },
     {
-        "CatalogVersion":  "24.09.13",
+        "CatalogVersion":  "24.09.18",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  "24.07.15",
+        "ReleaseDate":  "24.07.16",
         "Manufacturer":  "Microsoft",
         "Model":  "Surface Go 3",
         "Product":  "Surface_Go_3_1901",
@@ -432,10 +432,10 @@
         "HashMD5":  ""
     },
     {
-        "CatalogVersion":  "24.09.13",
+        "CatalogVersion":  "24.09.18",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  "24.07.15",
+        "ReleaseDate":  "24.07.16",
         "Manufacturer":  "Microsoft",
         "Model":  "Surface Go 3",
         "Product":  "Surface_Go_3_1901",
@@ -450,10 +450,10 @@
         "HashMD5":  ""
     },
     {
-        "CatalogVersion":  "24.09.13",
+        "CatalogVersion":  "24.09.18",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  "24.07.15",
+        "ReleaseDate":  "24.07.16",
         "Manufacturer":  "Microsoft",
         "Model":  "Surface Go 3",
         "Product":  "Surface_Go_3_2022",
@@ -468,10 +468,10 @@
         "HashMD5":  ""
     },
     {
-        "CatalogVersion":  "24.09.13",
+        "CatalogVersion":  "24.09.18",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  "24.07.15",
+        "ReleaseDate":  "24.07.16",
         "Manufacturer":  "Microsoft",
         "Model":  "Surface Go 3",
         "Product":  "Surface_Go_3_2022",
@@ -486,10 +486,10 @@
         "HashMD5":  ""
     },
     {
-        "CatalogVersion":  "24.09.13",
+        "CatalogVersion":  "24.09.18",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  "24.07.12",
+        "ReleaseDate":  "24.07.13",
         "Manufacturer":  "Microsoft",
         "Model":  "Surface Go 4",
         "Product":  "Surface_Go_4_2067",
@@ -504,10 +504,10 @@
         "HashMD5":  ""
     },
     {
-        "CatalogVersion":  "24.09.13",
+        "CatalogVersion":  "24.09.18",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  "24.07.12",
+        "ReleaseDate":  "24.07.13",
         "Manufacturer":  "Microsoft",
         "Model":  "Surface Go 4",
         "Product":  "Surface_Go_4_2067",
@@ -522,10 +522,10 @@
         "HashMD5":  ""
     },
     {
-        "CatalogVersion":  "24.09.13",
+        "CatalogVersion":  "24.09.18",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  "24.06.20",
+        "ReleaseDate":  "24.06.21",
         "Manufacturer":  "Microsoft",
         "Model":  "Surface Hub 2",
         "Product":  "Surface_Hub_2",
@@ -540,10 +540,10 @@
         "HashMD5":  ""
     },
     {
-        "CatalogVersion":  "24.09.13",
+        "CatalogVersion":  "24.09.18",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  "24.06.20",
+        "ReleaseDate":  "24.06.21",
         "Manufacturer":  "Microsoft",
         "Model":  "Surface Hub 2",
         "Product":  "Surface_Hub_2",
@@ -558,10 +558,10 @@
         "HashMD5":  ""
     },
     {
-        "CatalogVersion":  "24.09.13",
+        "CatalogVersion":  "24.09.18",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  "24.06.20",
+        "ReleaseDate":  "24.06.21",
         "Manufacturer":  "Microsoft",
         "Model":  "Surface Hub 2S",
         "Product":  "Surface Hub 2S",
@@ -576,10 +576,10 @@
         "HashMD5":  ""
     },
     {
-        "CatalogVersion":  "24.09.13",
+        "CatalogVersion":  "24.09.18",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  "24.06.20",
+        "ReleaseDate":  "24.06.21",
         "Manufacturer":  "Microsoft",
         "Model":  "Surface Hub 2S",
         "Product":  "Surface Hub 2S",
@@ -594,10 +594,10 @@
         "HashMD5":  ""
     },
     {
-        "CatalogVersion":  "24.09.13",
+        "CatalogVersion":  "24.09.18",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  "24.06.20",
+        "ReleaseDate":  "24.06.21",
         "Manufacturer":  "Microsoft",
         "Model":  "Surface Hub 2S",
         "Product":  "Surface Hub 2S 85",
@@ -612,10 +612,10 @@
         "HashMD5":  ""
     },
     {
-        "CatalogVersion":  "24.09.13",
+        "CatalogVersion":  "24.09.18",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  "24.06.20",
+        "ReleaseDate":  "24.06.21",
         "Manufacturer":  "Microsoft",
         "Model":  "Surface Hub 2S",
         "Product":  "Surface Hub 2S 85",
@@ -630,10 +630,10 @@
         "HashMD5":  ""
     },
     {
-        "CatalogVersion":  "24.09.13",
+        "CatalogVersion":  "24.09.18",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  "24.06.20",
+        "ReleaseDate":  "24.06.21",
         "Manufacturer":  "Microsoft",
         "Model":  "Surface Hub 3",
         "Product":  "Surface Hub 3 50",
@@ -648,10 +648,10 @@
         "HashMD5":  ""
     },
     {
-        "CatalogVersion":  "24.09.13",
+        "CatalogVersion":  "24.09.18",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  "24.06.20",
+        "ReleaseDate":  "24.06.21",
         "Manufacturer":  "Microsoft",
         "Model":  "Surface Hub 3",
         "Product":  "Surface Hub 3 50",
@@ -666,10 +666,10 @@
         "HashMD5":  ""
     },
     {
-        "CatalogVersion":  "24.09.13",
+        "CatalogVersion":  "24.09.18",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  "24.06.20",
+        "ReleaseDate":  "24.06.21",
         "Manufacturer":  "Microsoft",
         "Model":  "Surface Hub 3",
         "Product":  "Surface Hub 3 85",
@@ -684,10 +684,10 @@
         "HashMD5":  ""
     },
     {
-        "CatalogVersion":  "24.09.13",
+        "CatalogVersion":  "24.09.18",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  "24.06.20",
+        "ReleaseDate":  "24.06.21",
         "Manufacturer":  "Microsoft",
         "Model":  "Surface Hub 3",
         "Product":  "Surface Hub 3 85",
@@ -702,7 +702,7 @@
         "HashMD5":  ""
     },
     {
-        "CatalogVersion":  "24.09.13",
+        "CatalogVersion":  "24.09.18",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "21.11.18",
@@ -720,10 +720,10 @@
         "HashMD5":  ""
     },
     {
-        "CatalogVersion":  "24.09.13",
+        "CatalogVersion":  "24.09.18",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  "22.08.25",
+        "ReleaseDate":  "22.08.26",
         "Manufacturer":  "Microsoft",
         "Model":  "Surface Laptop 2",
         "Product":  "Surface_Laptop_2_1769_Commercial",
@@ -738,10 +738,10 @@
         "HashMD5":  ""
     },
     {
-        "CatalogVersion":  "24.09.13",
+        "CatalogVersion":  "24.09.18",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  "22.08.25",
+        "ReleaseDate":  "22.08.26",
         "Manufacturer":  "Microsoft",
         "Model":  "Surface Laptop 2",
         "Product":  "Surface_Laptop_2_1769_Consumer",
@@ -756,10 +756,10 @@
         "HashMD5":  ""
     },
     {
-        "CatalogVersion":  "24.09.13",
+        "CatalogVersion":  "24.09.18",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  "24.08.14",
+        "ReleaseDate":  "24.08.15",
         "Manufacturer":  "Microsoft",
         "Model":  "Surface Laptop 3",
         "Product":  "Surface_Laptop_3_1867:1868",
@@ -774,10 +774,10 @@
         "HashMD5":  ""
     },
     {
-        "CatalogVersion":  "24.09.13",
+        "CatalogVersion":  "24.09.18",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  "24.08.14",
+        "ReleaseDate":  "24.08.15",
         "Manufacturer":  "Microsoft",
         "Model":  "Surface Laptop 3",
         "Product":  "Surface_Laptop_3_1867:1868",
@@ -792,10 +792,10 @@
         "HashMD5":  ""
     },
     {
-        "CatalogVersion":  "24.09.13",
+        "CatalogVersion":  "24.09.18",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  "24.01.30",
+        "ReleaseDate":  "24.01.31",
         "Manufacturer":  "Microsoft",
         "Model":  "Surface Laptop 3",
         "Product":  "Surface_Laptop_3_1873",
@@ -810,10 +810,10 @@
         "HashMD5":  ""
     },
     {
-        "CatalogVersion":  "24.09.13",
+        "CatalogVersion":  "24.09.18",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  "24.01.30",
+        "ReleaseDate":  "24.01.31",
         "Manufacturer":  "Microsoft",
         "Model":  "Surface Laptop 3",
         "Product":  "Surface_Laptop_3_1873",
@@ -828,10 +828,10 @@
         "HashMD5":  ""
     },
     {
-        "CatalogVersion":  "24.09.13",
+        "CatalogVersion":  "24.09.18",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  "24.08.14",
+        "ReleaseDate":  "24.08.15",
         "Manufacturer":  "Microsoft",
         "Model":  "Surface Laptop 3",
         "Product":  "Surface_Laptop_3_1872",
@@ -846,10 +846,10 @@
         "HashMD5":  ""
     },
     {
-        "CatalogVersion":  "24.09.13",
+        "CatalogVersion":  "24.09.18",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  "24.08.14",
+        "ReleaseDate":  "24.08.15",
         "Manufacturer":  "Microsoft",
         "Model":  "Surface Laptop 3",
         "Product":  "Surface_Laptop_3_1872",
@@ -864,10 +864,10 @@
         "HashMD5":  ""
     },
     {
-        "CatalogVersion":  "24.09.13",
+        "CatalogVersion":  "24.09.18",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  "24.09.12",
+        "ReleaseDate":  "24.09.13",
         "Manufacturer":  "Microsoft",
         "Model":  "Surface Laptop 4",
         "Product":  "Surface_Laptop_4_1958:1959",
@@ -882,10 +882,10 @@
         "HashMD5":  ""
     },
     {
-        "CatalogVersion":  "24.09.13",
+        "CatalogVersion":  "24.09.18",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  "24.09.12",
+        "ReleaseDate":  "24.09.13",
         "Manufacturer":  "Microsoft",
         "Model":  "Surface Laptop 4",
         "Product":  "Surface_Laptop_4_1958:1959",
@@ -900,7 +900,7 @@
         "HashMD5":  ""
     },
     {
-        "CatalogVersion":  "24.09.13",
+        "CatalogVersion":  "24.09.18",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "24.07.30",
@@ -918,7 +918,7 @@
         "HashMD5":  ""
     },
     {
-        "CatalogVersion":  "24.09.13",
+        "CatalogVersion":  "24.09.18",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "24.07.30",
@@ -936,10 +936,10 @@
         "HashMD5":  ""
     },
     {
-        "CatalogVersion":  "24.09.13",
+        "CatalogVersion":  "24.09.18",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  "24.09.12",
+        "ReleaseDate":  "24.09.13",
         "Manufacturer":  "Microsoft",
         "Model":  "Surface Laptop 4",
         "Product":  "Surface_Laptop_4_1952:1953",
@@ -954,10 +954,10 @@
         "HashMD5":  ""
     },
     {
-        "CatalogVersion":  "24.09.13",
+        "CatalogVersion":  "24.09.18",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  "24.09.12",
+        "ReleaseDate":  "24.09.13",
         "Manufacturer":  "Microsoft",
         "Model":  "Surface Laptop 4",
         "Product":  "Surface_Laptop_4_1952:1953",
@@ -972,7 +972,7 @@
         "HashMD5":  ""
     },
     {
-        "CatalogVersion":  "24.09.13",
+        "CatalogVersion":  "24.09.18",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "24.07.30",
@@ -990,7 +990,7 @@
         "HashMD5":  ""
     },
     {
-        "CatalogVersion":  "24.09.13",
+        "CatalogVersion":  "24.09.18",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "24.07.30",
@@ -1008,7 +1008,7 @@
         "HashMD5":  ""
     },
     {
-        "CatalogVersion":  "24.09.13",
+        "CatalogVersion":  "24.09.18",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "24.07.18",
@@ -1026,7 +1026,7 @@
         "HashMD5":  ""
     },
     {
-        "CatalogVersion":  "24.09.13",
+        "CatalogVersion":  "24.09.18",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "24.07.18",
@@ -1044,7 +1044,7 @@
         "HashMD5":  ""
     },
     {
-        "CatalogVersion":  "24.09.13",
+        "CatalogVersion":  "24.09.18",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "24.07.18",
@@ -1062,7 +1062,7 @@
         "HashMD5":  ""
     },
     {
-        "CatalogVersion":  "24.09.13",
+        "CatalogVersion":  "24.09.18",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "24.07.18",
@@ -1080,7 +1080,7 @@
         "HashMD5":  ""
     },
     {
-        "CatalogVersion":  "24.09.13",
+        "CatalogVersion":  "24.09.18",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "24.07.18",
@@ -1098,7 +1098,7 @@
         "HashMD5":  ""
     },
     {
-        "CatalogVersion":  "24.09.13",
+        "CatalogVersion":  "24.09.18",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "24.07.18",
@@ -1116,7 +1116,7 @@
         "HashMD5":  ""
     },
     {
-        "CatalogVersion":  "24.09.13",
+        "CatalogVersion":  "24.09.18",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "24.07.18",
@@ -1134,7 +1134,7 @@
         "HashMD5":  ""
     },
     {
-        "CatalogVersion":  "24.09.13",
+        "CatalogVersion":  "24.09.18",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "24.07.18",
@@ -1152,10 +1152,10 @@
         "HashMD5":  ""
     },
     {
-        "CatalogVersion":  "24.09.13",
+        "CatalogVersion":  "24.09.18",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  "24.09.12",
+        "ReleaseDate":  "24.09.13",
         "Manufacturer":  "Microsoft",
         "Model":  "Surface Laptop 6",
         "Product":  "Surface_Laptop_6_for_Business_2033",
@@ -1170,10 +1170,10 @@
         "HashMD5":  ""
     },
     {
-        "CatalogVersion":  "24.09.13",
+        "CatalogVersion":  "24.09.18",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  "24.09.12",
+        "ReleaseDate":  "24.09.13",
         "Manufacturer":  "Microsoft",
         "Model":  "Surface Laptop 6",
         "Product":  "Surface_Laptop_6_for_Business_2033",
@@ -1188,10 +1188,10 @@
         "HashMD5":  ""
     },
     {
-        "CatalogVersion":  "24.09.13",
+        "CatalogVersion":  "24.09.18",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  "24.09.12",
+        "ReleaseDate":  "24.09.13",
         "Manufacturer":  "Microsoft",
         "Model":  "Surface Laptop 6",
         "Product":  "Surface_Laptop_6_for_Business_2035",
@@ -1206,10 +1206,10 @@
         "HashMD5":  ""
     },
     {
-        "CatalogVersion":  "24.09.13",
+        "CatalogVersion":  "24.09.18",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  "24.09.12",
+        "ReleaseDate":  "24.09.13",
         "Manufacturer":  "Microsoft",
         "Model":  "Surface Laptop 6",
         "Product":  "Surface_Laptop_6_for_Business_2035",
@@ -1224,10 +1224,10 @@
         "HashMD5":  ""
     },
     {
-        "CatalogVersion":  "24.09.13",
+        "CatalogVersion":  "24.09.18",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  "24.05.28",
+        "ReleaseDate":  "24.05.29",
         "Manufacturer":  "Microsoft",
         "Model":  "Surface Laptop Go",
         "Product":  "Surface_Laptop_Go_1943",
@@ -1242,10 +1242,10 @@
         "HashMD5":  ""
     },
     {
-        "CatalogVersion":  "24.09.13",
+        "CatalogVersion":  "24.09.18",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  "24.05.28",
+        "ReleaseDate":  "24.05.29",
         "Manufacturer":  "Microsoft",
         "Model":  "Surface Laptop Go",
         "Product":  "Surface_Laptop_Go_1943",
@@ -1260,7 +1260,7 @@
         "HashMD5":  ""
     },
     {
-        "CatalogVersion":  "24.09.13",
+        "CatalogVersion":  "24.09.18",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "24.06.24",
@@ -1278,7 +1278,7 @@
         "HashMD5":  ""
     },
     {
-        "CatalogVersion":  "24.09.13",
+        "CatalogVersion":  "24.09.18",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "24.06.24",
@@ -1296,10 +1296,10 @@
         "HashMD5":  ""
     },
     {
-        "CatalogVersion":  "24.09.13",
+        "CatalogVersion":  "24.09.18",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  "24.07.29",
+        "ReleaseDate":  "24.07.30",
         "Manufacturer":  "Microsoft",
         "Model":  "Surface Laptop Go 3",
         "Product":  "Surface_Laptop_Go_3_2013",
@@ -1314,10 +1314,10 @@
         "HashMD5":  ""
     },
     {
-        "CatalogVersion":  "24.09.13",
+        "CatalogVersion":  "24.09.18",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  "24.07.29",
+        "ReleaseDate":  "24.07.30",
         "Manufacturer":  "Microsoft",
         "Model":  "Surface Laptop Go 3",
         "Product":  "Surface_Laptop_Go_3_2013",
@@ -1332,7 +1332,7 @@
         "HashMD5":  ""
     },
     {
-        "CatalogVersion":  "24.09.13",
+        "CatalogVersion":  "24.09.18",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "24.06.24",
@@ -1350,7 +1350,7 @@
         "HashMD5":  ""
     },
     {
-        "CatalogVersion":  "24.09.13",
+        "CatalogVersion":  "24.09.18",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "24.06.24",
@@ -1368,10 +1368,10 @@
         "HashMD5":  ""
     },
     {
-        "CatalogVersion":  "24.09.13",
+        "CatalogVersion":  "24.09.18",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  "24.07.25",
+        "ReleaseDate":  "24.07.26",
         "Manufacturer":  "Microsoft",
         "Model":  "Surface Laptop Studio 2",
         "Product":  "Surface_Laptop_Studio_2_2029",
@@ -1386,10 +1386,10 @@
         "HashMD5":  ""
     },
     {
-        "CatalogVersion":  "24.09.13",
+        "CatalogVersion":  "24.09.18",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  "24.07.25",
+        "ReleaseDate":  "24.07.26",
         "Manufacturer":  "Microsoft",
         "Model":  "Surface Laptop Studio 2",
         "Product":  "Surface_Laptop_Studio_2_2029",
@@ -1404,7 +1404,7 @@
         "HashMD5":  ""
     },
     {
-        "CatalogVersion":  "24.09.13",
+        "CatalogVersion":  "24.09.18",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "21.04.23",
@@ -1422,7 +1422,7 @@
         "HashMD5":  ""
     },
     {
-        "CatalogVersion":  "24.09.13",
+        "CatalogVersion":  "24.09.18",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "21.04.23",
@@ -1440,10 +1440,10 @@
         "HashMD5":  ""
     },
     {
-        "CatalogVersion":  "24.09.13",
+        "CatalogVersion":  "24.09.18",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  "21.05.06",
+        "ReleaseDate":  "21.05.07",
         "Manufacturer":  "Microsoft",
         "Model":  "Surface Pro 3",
         "Product":  "Surface_Pro_3",
@@ -1458,7 +1458,7 @@
         "HashMD5":  ""
     },
     {
-        "CatalogVersion":  "24.09.13",
+        "CatalogVersion":  "24.09.18",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "21.07.29",
@@ -1476,10 +1476,10 @@
         "HashMD5":  ""
     },
     {
-        "CatalogVersion":  "24.09.13",
+        "CatalogVersion":  "24.09.18",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  "24.01.12",
+        "ReleaseDate":  "24.01.13",
         "Manufacturer":  "Microsoft",
         "Model":  "Surface Pro",
         "Product":  "Surface_Pro_1796",
@@ -1494,10 +1494,10 @@
         "HashMD5":  ""
     },
     {
-        "CatalogVersion":  "24.09.13",
+        "CatalogVersion":  "24.09.18",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  "24.01.12",
+        "ReleaseDate":  "24.01.13",
         "Manufacturer":  "Microsoft",
         "Model":  "Surface Pro",
         "Product":  "Surface_Pro_1796",
@@ -1512,10 +1512,10 @@
         "HashMD5":  ""
     },
     {
-        "CatalogVersion":  "24.09.13",
+        "CatalogVersion":  "24.09.18",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  "24.01.12",
+        "ReleaseDate":  "24.01.13",
         "Manufacturer":  "Microsoft",
         "Model":  "Surface Pro",
         "Product":  "Surface_Pro_1807",
@@ -1530,10 +1530,10 @@
         "HashMD5":  ""
     },
     {
-        "CatalogVersion":  "24.09.13",
+        "CatalogVersion":  "24.09.18",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  "24.01.12",
+        "ReleaseDate":  "24.01.13",
         "Manufacturer":  "Microsoft",
         "Model":  "Surface Pro",
         "Product":  "Surface_Pro_1807",
@@ -1548,10 +1548,10 @@
         "HashMD5":  ""
     },
     {
-        "CatalogVersion":  "24.09.13",
+        "CatalogVersion":  "24.09.18",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  "23.09.28",
+        "ReleaseDate":  "23.09.29",
         "Manufacturer":  "Microsoft",
         "Model":  "Surface Pro 6",
         "Product":  "Surface_Pro_6_1796_Commercial",
@@ -1566,10 +1566,10 @@
         "HashMD5":  ""
     },
     {
-        "CatalogVersion":  "24.09.13",
+        "CatalogVersion":  "24.09.18",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  "23.09.28",
+        "ReleaseDate":  "23.09.29",
         "Manufacturer":  "Microsoft",
         "Model":  "Surface Pro 6",
         "Product":  "Surface_Pro_6_1796_Commercial",
@@ -1584,10 +1584,10 @@
         "HashMD5":  ""
     },
     {
-        "CatalogVersion":  "24.09.13",
+        "CatalogVersion":  "24.09.18",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  "23.09.28",
+        "ReleaseDate":  "23.09.29",
         "Manufacturer":  "Microsoft",
         "Model":  "Surface Pro 6",
         "Product":  "Surface_Pro_6_1796_Consumer",
@@ -1602,10 +1602,10 @@
         "HashMD5":  ""
     },
     {
-        "CatalogVersion":  "24.09.13",
+        "CatalogVersion":  "24.09.18",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  "23.09.28",
+        "ReleaseDate":  "23.09.29",
         "Manufacturer":  "Microsoft",
         "Model":  "Surface Pro 6",
         "Product":  "Surface_Pro_6_1796_Consumer",
@@ -1620,7 +1620,7 @@
         "HashMD5":  ""
     },
     {
-        "CatalogVersion":  "24.09.13",
+        "CatalogVersion":  "24.09.18",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "24.07.12",
@@ -1638,7 +1638,7 @@
         "HashMD5":  ""
     },
     {
-        "CatalogVersion":  "24.09.13",
+        "CatalogVersion":  "24.09.18",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "24.07.12",
@@ -1656,7 +1656,7 @@
         "HashMD5":  ""
     },
     {
-        "CatalogVersion":  "24.09.13",
+        "CatalogVersion":  "24.09.18",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "24.07.22",
@@ -1674,7 +1674,7 @@
         "HashMD5":  ""
     },
     {
-        "CatalogVersion":  "24.09.13",
+        "CatalogVersion":  "24.09.18",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "24.07.22",
@@ -1692,7 +1692,7 @@
         "HashMD5":  ""
     },
     {
-        "CatalogVersion":  "24.09.13",
+        "CatalogVersion":  "24.09.18",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "24.07.22",
@@ -1710,7 +1710,7 @@
         "HashMD5":  ""
     },
     {
-        "CatalogVersion":  "24.09.13",
+        "CatalogVersion":  "24.09.18",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "24.07.22",
@@ -1728,10 +1728,10 @@
         "HashMD5":  ""
     },
     {
-        "CatalogVersion":  "24.09.13",
+        "CatalogVersion":  "24.09.18",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  "24.09.12",
+        "ReleaseDate":  "24.09.13",
         "Manufacturer":  "Microsoft",
         "Model":  "Surface Pro 8",
         "Product":  "Surface_Pro_8_for_Business_1983",
@@ -1746,10 +1746,10 @@
         "HashMD5":  ""
     },
     {
-        "CatalogVersion":  "24.09.13",
+        "CatalogVersion":  "24.09.18",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  "24.09.12",
+        "ReleaseDate":  "24.09.13",
         "Manufacturer":  "Microsoft",
         "Model":  "Surface Pro 8",
         "Product":  "Surface_Pro_8_for_Business_1983",
@@ -1764,10 +1764,10 @@
         "HashMD5":  ""
     },
     {
-        "CatalogVersion":  "24.09.13",
+        "CatalogVersion":  "24.09.18",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  "24.09.12",
+        "ReleaseDate":  "24.09.13",
         "Manufacturer":  "Microsoft",
         "Model":  "Surface Pro 8",
         "Product":  "Surface_Pro_8_1983",
@@ -1782,10 +1782,10 @@
         "HashMD5":  ""
     },
     {
-        "CatalogVersion":  "24.09.13",
+        "CatalogVersion":  "24.09.18",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  "24.09.12",
+        "ReleaseDate":  "24.09.13",
         "Manufacturer":  "Microsoft",
         "Model":  "Surface Pro 8",
         "Product":  "Surface_Pro_8_1983",
@@ -1800,10 +1800,10 @@
         "HashMD5":  ""
     },
     {
-        "CatalogVersion":  "24.09.13",
+        "CatalogVersion":  "24.09.18",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  "24.09.12",
+        "ReleaseDate":  "24.09.13",
         "Manufacturer":  "Microsoft",
         "Model":  "Surface Pro 8",
         "Product":  "Surface_Pro_8_for_Business_with_LTE_Advanced_1982",
@@ -1818,10 +1818,10 @@
         "HashMD5":  ""
     },
     {
-        "CatalogVersion":  "24.09.13",
+        "CatalogVersion":  "24.09.18",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  "24.09.12",
+        "ReleaseDate":  "24.09.13",
         "Manufacturer":  "Microsoft",
         "Model":  "Surface Pro 8",
         "Product":  "Surface_Pro_8_for_Business_with_LTE_Advanced_1982",
@@ -1836,10 +1836,10 @@
         "HashMD5":  ""
     },
     {
-        "CatalogVersion":  "24.09.13",
+        "CatalogVersion":  "24.09.18",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  "24.07.16",
+        "ReleaseDate":  "24.07.17",
         "Manufacturer":  "Microsoft",
         "Model":  "Surface Pro 9",
         "Product":  "Surface_Pro_9_2038",
@@ -1854,10 +1854,10 @@
         "HashMD5":  ""
     },
     {
-        "CatalogVersion":  "24.09.13",
+        "CatalogVersion":  "24.09.18",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  "24.07.16",
+        "ReleaseDate":  "24.07.17",
         "Manufacturer":  "Microsoft",
         "Model":  "Surface Pro 9",
         "Product":  "Surface_Pro_9_2038",
@@ -1872,10 +1872,10 @@
         "HashMD5":  ""
     },
     {
-        "CatalogVersion":  "24.09.13",
+        "CatalogVersion":  "24.09.18",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  "24.07.16",
+        "ReleaseDate":  "24.07.17",
         "Manufacturer":  "Microsoft",
         "Model":  "Surface Pro 9",
         "Product":  "Surface_Pro_9_for_Business_2038",
@@ -1890,10 +1890,10 @@
         "HashMD5":  ""
     },
     {
-        "CatalogVersion":  "24.09.13",
+        "CatalogVersion":  "24.09.18",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  "24.07.16",
+        "ReleaseDate":  "24.07.17",
         "Manufacturer":  "Microsoft",
         "Model":  "Surface Pro 9",
         "Product":  "Surface_Pro_9_for_Business_2038",
@@ -1908,7 +1908,7 @@
         "HashMD5":  ""
     },
     {
-        "CatalogVersion":  "24.09.13",
+        "CatalogVersion":  "24.09.18",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "24.07.22",
@@ -1926,7 +1926,7 @@
         "HashMD5":  ""
     },
     {
-        "CatalogVersion":  "24.09.13",
+        "CatalogVersion":  "24.09.18",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "24.07.22",
@@ -1944,7 +1944,7 @@
         "HashMD5":  ""
     },
     {
-        "CatalogVersion":  "24.09.13",
+        "CatalogVersion":  "24.09.18",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "21.11.02",
@@ -1962,10 +1962,10 @@
         "HashMD5":  ""
     },
     {
-        "CatalogVersion":  "24.09.13",
+        "CatalogVersion":  "24.09.18",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  "24.09.03",
+        "ReleaseDate":  "24.09.04",
         "Manufacturer":  "Microsoft",
         "Model":  "Surface Studio 2",
         "Product":  "Surface_Studio_2_1707_Commercial",
@@ -1980,10 +1980,10 @@
         "HashMD5":  ""
     },
     {
-        "CatalogVersion":  "24.09.13",
+        "CatalogVersion":  "24.09.18",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  "24.09.03",
+        "ReleaseDate":  "24.09.04",
         "Manufacturer":  "Microsoft",
         "Model":  "Surface Studio 2",
         "Product":  "Surface_Studio_2_1707_Commercial",
@@ -1998,10 +1998,10 @@
         "HashMD5":  ""
     },
     {
-        "CatalogVersion":  "24.09.13",
+        "CatalogVersion":  "24.09.18",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  "24.09.03",
+        "ReleaseDate":  "24.09.04",
         "Manufacturer":  "Microsoft",
         "Model":  "Surface Studio 2",
         "Product":  "Surface_Studio_2_1707_Consumer",
@@ -2016,10 +2016,10 @@
         "HashMD5":  ""
     },
     {
-        "CatalogVersion":  "24.09.13",
+        "CatalogVersion":  "24.09.18",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  "24.09.03",
+        "ReleaseDate":  "24.09.04",
         "Manufacturer":  "Microsoft",
         "Model":  "Surface Studio 2",
         "Product":  "Surface_Studio_2_1707_Consumer",
@@ -2034,10 +2034,10 @@
         "HashMD5":  ""
     },
     {
-        "CatalogVersion":  "24.09.13",
+        "CatalogVersion":  "24.09.18",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  "24.09.03",
+        "ReleaseDate":  "24.09.04",
         "Manufacturer":  "Microsoft",
         "Model":  "Surface Studio 2+",
         "Product":  "Surface_Studio_2+_2028",

@@ -69,7 +69,7 @@
         OSEditionValues             = [array]$Global:OSDModuleResource.OSDCloud.Values.Edition
         OSLanguageValues            = [array]$Global:OSDModuleResource.OSDCloud.Values.Language
         OSNameValues                = [array]$Global:OSDModuleResource.OSDCloud.Values.Name
-OSNameARM64Values           = [array]$Global:OSDModuleResource.OSDCloud.Values.NameARM64
+        OSNameARM64Values           = [array]$Global:OSDModuleResource.OSDCloud.Values.NameARM64
         OSReleaseIDValues           = [array]$Global:OSDModuleResource.OSDCloud.Values.ReleaseID
         OSVersionValues             = [array]$Global:OSDModuleResource.OSDCloud.Values.Version
         
