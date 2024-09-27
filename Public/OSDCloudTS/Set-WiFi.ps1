@@ -2,7 +2,8 @@ Function Set-WiFi {
     #https://www.cyberdrain.com/automating-with-powershell-deploying-wifi-profiles/
     param(
         [string]$SSID,
-        [string]$PSK
+        [string]$PSK,
+        [string]$SaveProfilePath
     )
     $guid = New-Guid
     $HexArray = $ssid.ToCharArray() | foreach-object { [System.String]::Format("{0:X}", [System.Convert]::ToUInt32($_)) }
@@ -40,8 +41,12 @@ Function Set-WiFi {
 </WLANProfile>
 "@ | out-file "$($ENV:TEMP)\$guid.SSID"
     
-    netsh wlan add profile filename="$($ENV:TEMP)\$guid.SSID" user=all
     
-    remove-item "$($ENV:TEMP)\$guid.SSID" -Force
-    
+    if ($SaveProfilePath){
+        Copy-Item "$($ENV:TEMP)\$guid.SSID" -Destination $SaveProfilePath -Force
     }
+    else{
+        netsh wlan add profile filename="$($ENV:TEMP)\$guid.SSID" user=all
+    }
+    remove-item "$($ENV:TEMP)\$guid.SSID" -Force
+}
