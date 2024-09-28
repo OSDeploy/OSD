@@ -1667,8 +1667,9 @@
     }
     
     Write-SectionHeader "[i] Creating SetupComplete.cmd and SetupComplete.ps1"
-    #Creates the SetupComplete.cmd & SetupComplete.ps1 files in C:\Windows\Setup\scripts
+    #Creates the SetupComplete.cmd & SetupComplete.ps1 files in C:\Windows\Setup\Scripts
     #SetupComplete.cmd calls SetupComplete.ps1, which does all of the actual work
+    Set-SetupCompleteInitialize
     Set-SetupCompleteCreateStart
     
     Write-DarkGrayHost "[i] Enable Wireless from Global Variable `$Global:OSDCloud.SetWiFi is set to $($Global:OSDCloud.SetWiFi)"

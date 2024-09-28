@@ -1,28 +1,14 @@
 ﻿function Set-SetupCompleteCreateStart {
     
-    $ScriptsPath = "C:\Windows\Setup\scripts"
-
-    if (!(Test-Path -Path $ScriptsPath)){New-Item -Path $ScriptsPath} 
-
+    $ScriptsPath = "C:\Windows\Setup\Scripts"
     $RunScript = @(@{ Script = "SetupComplete"; BatFile = 'SetupComplete.cmd'; ps1file = 'SetupComplete.ps1';Type = 'Setup'; Path = "$ScriptsPath"})
-
-
-    Write-Output "Creating $($RunScript.Script) Files"
-
-    $BatFilePath = "$($RunScript.Path)\$($RunScript.batFile)"
     $PSFilePath = "$($RunScript.Path)\$($RunScript.ps1File)"
-            
-    #Create Batch File to Call PowerShell File
-            
-    New-Item -Path $BatFilePath -ItemType File -Force
-    $CustomActionContent = New-Object system.text.stringbuilder
-    [void]$CustomActionContent.Append('%windir%\System32\WindowsPowerShell\v1.0\powershell.exe -ExecutionPolicy ByPass -File')
-    [void]$CustomActionContent.Append(" $PSFilePath")
-    Add-Content -Path $BatFilePath -Value $CustomActionContent.ToString()
 
-    #Create PowerShell File to do actions
-            
-    New-Item -Path $PSFilePath -ItemType File -Force
+    if (!(Test-Path -Path $ScriptsPath)){
+        Set-SetupCompleteInitialize
+    }
+
+    Write-Output "Appending $($RunScript.Script) Files"
     Add-Content -path $PSFilePath "Write-Output 'Starting SetupComplete Script Process'"
     Add-Content -path $PSFilePath "Set-ExecutionPolicy RemoteSigned -Force -Scope CurrentUser"
     Add-Content -path $PSFilePath '$StartTime = Get-Date; Write-Host "Start Time: $($StartTime.ToString("hh:mm:ss"))"'
@@ -44,5 +30,4 @@
     Add-Content -Path $PSFilePath "Set-PowerSettingTurnMonitorOffAfter -PowerSource AC -Minutes 0"
     #Add-Content -Path $PSFilePath "Stop-Transcript"
     #Add-Content -Path $PSFilePath "Restart-Computer -Force"
-
 }

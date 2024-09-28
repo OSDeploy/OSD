@@ -260,6 +260,7 @@
         'Set-SetupCompleteDefenderUpdate',
         'Set-SetupCompleteHyperVName',
         'Set-SetupCompleteHPAppend',
+        'Set-SetupCompleteInitialize',
         'Set-SetupCompleteNetFX',
         'Set-SetupCompleteOEMActivation',
         'Set-SetupCompleteStartWindowsUpdate',
