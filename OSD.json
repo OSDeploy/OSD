@@ -113,7 +113,7 @@
     "NewOSDCloudVM": {
         "CheckpointVM": true,
         "Generation": 2,
-        "MemoryStartupGB": 4,
+        "MemoryStartupGB": 6,
         "NamePrefix": "OSDCloud",
         "ProcessorCount": 1,
         "StartVM": true,
