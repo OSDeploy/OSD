@@ -1717,21 +1717,21 @@
                     Write-DarkGrayHost "No Internet or Future WiFi Configured, disabling NetFX Install"
                 }
             }
+        }
             
-            Write-DarkGrayHost "[i] Enable Set TimeZone from Global Variable `$Global:OSDCloud.SetTimeZone is set to $($Global:OSDCloud.SetTimeZone)"
-            if ($Global:OSDCloud.SetTimeZone -eq $true) {
-                if ($WebConnection -eq $true) {
-                    Set-TimeZoneFromIP
-                }
-                else {
-                    Set-SetupCompleteTimeZone
-                }
+        Write-DarkGrayHost "[i] Enable Set TimeZone from Global Variable `$Global:OSDCloud.SetTimeZone is set to $($Global:OSDCloud.SetTimeZone)"
+        if ($Global:OSDCloud.SetTimeZone -eq $true) {
+            if ($WebConnection -eq $true) {
+                Set-TimeZoneFromIP
             }
+            else {
+                Set-SetupCompleteTimeZone
+            }
+        }
 
-            Write-DarkGrayHost "[i] Enable OEM Activation from Global Variable `$Global:OSDCloud.OEMActivation is set to $($Global:OSDCloud.OEMActivation)"
-            if ($Global:OSDCloud.OEMActivation -eq $true){
-                Set-SetupCompleteOEMActivation
-            }
+        Write-DarkGrayHost "[i] Enable OEM Activation from Global Variable `$Global:OSDCloud.OEMActivation is set to $($Global:OSDCloud.OEMActivation)"
+        if ($Global:OSDCloud.OEMActivation -eq $true){
+            Set-SetupCompleteOEMActivation
         }
     }
     #=================================================
