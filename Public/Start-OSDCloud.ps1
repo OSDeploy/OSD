@@ -50,6 +50,7 @@
 
         [Parameter(ParameterSetName = 'Default')]
         [ValidateSet(
+            'Windows 11 24H2 x64', 
             'Windows 11 23H2 x64',    
             'Windows 11 22H2 x64',
             'Windows 11 21H2 x64',
@@ -66,7 +67,7 @@
         #Operating System Build of the Windows installation
         #Alias = Build
         [Parameter(ParameterSetName = 'Legacy')]
-        [ValidateSet('23H2','22H2','21H2')]
+        [ValidateSet('24H2','23H2','22H2','21H2')]
         [Alias('Build')]
         [System.String]
         $OSBuild,
@@ -171,7 +172,7 @@
         OSLanguageNames = $null
         OSName = $OSName
         OSNameMenu = $null
-        OSNames = @('Windows 11 23H2 x64','Windows 11 22H2 x64','Windows 11 21H2 x64','Windows 10 22H2 x64')
+        OSNames = @('Windows 11 24H2 x64', 'Windows 11 23H2 x64', 'Windows 11 22H2 x64', 'Windows 11 21H2 x64', 'Windows 10 22H2 x64')
         OSVersion = $OSVersion
         OSVersionMenu = $null
         OSVersionNames = @('Windows 11','Windows 10')
@@ -387,12 +388,12 @@
         if ($Global:StartOSDCloud.OSBuild) {
         }
         elseif ($Global:StartOSDCloud.ZTI) {
-            $Global:StartOSDCloud.OSBuild = '22H2'
+            $Global:StartOSDCloud.OSBuild = '24H2'
         }
         else {
             Write-Host -ForegroundColor DarkGray "========================================================================="
             Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Select a Build for $OSVersion x64"
-            $Global:StartOSDCloud.OSBuildNames = @('23H2','22H2','21H2')
+            $Global:StartOSDCloud.OSBuildNames = @('24H2','23H2','22H2','21H2')
             
             $i = $null
             $Global:StartOSDCloud.OSBuildMenu = foreach ($Item in $Global:StartOSDCloud.OSBuildNames) {

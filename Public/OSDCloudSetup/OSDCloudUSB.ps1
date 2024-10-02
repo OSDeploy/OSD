@@ -306,11 +306,11 @@ function Update-OSDCloudUSB {
         #If this parameter is not used, any Operating Systems can be downloaded
         #'Windows 11 22H2','Windows 11 21H2','Windows 10 22H2','Windows 10 21H2','Windows 10 21H1','Windows 10 20H2','Windows 10 2004','Windows 10 1909','Windows 10 1903','Windows 10 1809'
         [ValidateSet(
-            'Windows 11 23H2','Windows 11 22H2','Windows 11 21H2',
+            'Windows 11 24H2','Windows 11 23H2','Windows 11 22H2','Windows 11 21H2',
             'Windows 10 22H2','Windows 10 21H2','Windows 10 21H1','Windows 10 20H2','Windows 10 2004',
             'Windows 10 1909H','Windows 10 1903',
             'Windows 10 1809'
-            )]
+        )]
         [System.String]$OSName
     )
     #=================================================
@@ -738,11 +738,11 @@ function Update-OSDCloudUSB {
     Write-Host -ForegroundColor DarkGray "========================================================================="
     Write-Host -ForegroundColor Yellow "Download an Operating System to OSDCloud USB:"
     Write-Host -ForegroundColor Gray "Update-OSDCloudUSB -OS"
-    Write-Host -ForegroundColor Gray "Update-OSDCloudUSB -OSName 'Windows 11 22H2'"
+    Write-Host -ForegroundColor Gray "Update-OSDCloudUSB -OSName 'Windows 11 24H2'"
     Write-Host -ForegroundColor Gray "Update-OSDCloudUSB -OSLanguage en-us"
     Write-Host -ForegroundColor Gray "Update-OSDCloudUSB -OSActivation Volume"
-    Write-Host -ForegroundColor Gray "Update-OSDCloudUSB -OSName 'Windows 10 21H2' -OSLanguage en-us"
-    Write-Host -ForegroundColor Gray "Update-OSDCloudUSB -OSName 'Windows 10 20H2' -OSLanguage de-de -OSActivation Volume"
+    Write-Host -ForegroundColor Gray "Update-OSDCloudUSB -OSName 'Windows 11 24H2' -OSLanguage en-us"
+    Write-Host -ForegroundColor Gray "Update-OSDCloudUSB -OSName 'Windows 11 24H2' -OSLanguage de-de -OSActivation Volume"
     Write-Host -ForegroundColor DarkGray "========================================================================="
     Write-Host -ForegroundColor Yellow "Update Offline PowerShell Modules and Scripts:"
     Write-Host -ForegroundColor Gray "Update-OSDCloudUSB -PSUpdate"
