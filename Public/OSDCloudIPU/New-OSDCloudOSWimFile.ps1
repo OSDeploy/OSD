@@ -9,6 +9,8 @@ function New-OSDCloudOSWimFile {
 
         [Parameter(ParameterSetName = 'Default')]
         [ValidateSet(
+            'Windows 11 24H2 x64',
+            'Windows 11 24H2 ARM64', 
             'Windows 11 23H2 x64',
             'Windows 11 23H2 ARM64',    
             'Windows 11 22H2 x64',
@@ -16,7 +18,7 @@ function New-OSDCloudOSWimFile {
             'Windows 10 22H2 x64',
             'Windows 10 22H2 ARM64')]
         [System.String]
-        $OSName = 'Windows 11 23H2 x64',
+        $OSName = 'Windows 11 24H2 x64',
 
         #Operating System Edition of the Windows installation
         #Alias = Edition

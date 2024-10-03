@@ -14,8 +14,8 @@
             "Activation": "Volume",
             "Edition": "Enterprise",
             "Language": "en-us",
-            "Name": "Windows 11 23H2 x64",
-            "ReleaseID": "23H2",
+            "Name": "Windows 11 24H2 x64",
+            "ReleaseID": "24H2",
             "Version": "Windows 11",
             "ImageIndex": "6"
         },
@@ -23,8 +23,8 @@
             "Activation": "Retail",
             "Edition": "Pro",
             "Language": "en-us",
-            "Name": "Windows 11 23H2 ARM64",
-            "ReleaseID": "23H2",
+            "Name": "Windows 11 24H2 ARM64",
+            "ReleaseID": "24H2",
             "Version": "Windows 11",
             "ImageIndex": "9"
         },

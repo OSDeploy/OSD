@@ -548,6 +548,7 @@ Windows Registry Editor Version 5.00
         'EnhancedStorage'
         'FMAPI'
         'GamingPeripherals'
+        'HSP-Driver'
         'PPPoE'
         'PlatformId'
         'PmemCmdlets'
