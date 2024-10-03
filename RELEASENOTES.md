@@ -17,6 +17,7 @@ Note, the changes I make won't go into effect until the next module release date
   - Still to do is create the index JSON file, this takes a long to to build, hopefully done by sometime tomorrow
     - This is to support Start-OSDCloudGUIDev (which is dynamic), which is also required for ARM64, I think?
   - Single test with Start-OSDCloudGUI with Win 11 24H2 was successful
+
 ### 24.7.8 (Released to Gallary)
  - Created Function: Add-7Zip2BootImage
    - Will be used in New-OSDCloudTemplate & Edit-OSDCloudWinPE to add 7zip into your boot images.
