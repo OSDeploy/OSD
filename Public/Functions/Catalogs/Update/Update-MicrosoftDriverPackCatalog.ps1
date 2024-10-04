@@ -202,6 +202,14 @@ function Update-MicrosoftDriverPackCatalog {
             $Item.OSReleaseId = '22H2'
             $Item.Name = $Item.Name -replace 'Win11 22621', 'Win11 22H2'
         }
+        if ($Item.Name -match 'Win11 22631') {
+            $Item.OSReleaseId = '23H2'
+            $Item.Name = $Item.Name -replace 'Win11 22631', 'Win11 23H2'
+        }
+        if ($Item.Name -match 'Win11 26100') {
+            $Item.OSReleaseId = '24H2'
+            $Item.Name = $Item.Name -replace 'Win11 26100', 'Win11 24H2'
+        }
     }
     #=================================================
     #   UpdateModule
