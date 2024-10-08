@@ -1,0 +1,29 @@
+﻿{
+    "Title":  "2024-05 Cumulative Update for .NET Framework 3.5 and 4.8.1 for Windows 11 for ARM64 (KB5037931)",
+    "Id":  "5037931",
+    "Architecture":  "ARM64",
+    "Language":  "",
+    "Hotfix":  null,
+    "Description":  "Install this update to resolve issues in Windows. For a complete listing of the issues that are included in this update, see the associated Microsoft Knowledge Base article for more information. After you install this item, you may have to restart your computer.",
+    "LastModified":  "2024-05-14",
+    "Size":  "82.7 MB",
+    "Classification":  "Updates",
+    "SupportedProducts":  "Windows 11",
+    "MSRCNumber":  null,
+    "MSRCSeverity":  "n/a",
+    "RebootBehavior":  "Can request restart",
+    "RequestsUserInput":  false,
+    "ExclusiveInstall":  "",
+    "NetworkRequired":  false,
+    "UninstallNotes":  "This software update can be removed by selecting View installed updates in the Programs and Features Control Panel.",
+    "UninstallSteps":  null,
+    "UpdateId":  "590b16b4-9eac-4281-b3e0-5a3f31e62a49",
+    "Supersedes":  {
+
+                   },
+    "SupersededBy":  {
+
+                     },
+    "Link":  "https://catalog.s.download.windowsupdate.com/d/msdownload/update/software/updt/2024/04/windows11.0-kb5037931-arm64-ndp481_2119af7b1138244a99994cd9c5b4b4798083028e.msu",
+    "InputObject":  "2024-05"
+}

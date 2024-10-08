@@ -1,0 +1,52 @@
+﻿{
+    "Title":  "2024-10 Setup Dynamic Update for Windows 11 Version 23H2 for arm64-based Systems (KB5045525)",
+    "Id":  "5045525",
+    "Architecture":  "ARM64",
+    "Language":  "",
+    "Hotfix":  null,
+    "Description":  "This update makes improvements to Windows setup binaries or any files that setup uses for feature updates in Windows.",
+    "LastModified":  "2024-10-08",
+    "Size":  "16.4 MB",
+    "Classification":  "Critical Updates",
+    "SupportedProducts":  "Windows 10 and later Dynamic Update",
+    "MSRCNumber":  null,
+    "MSRCSeverity":  "n/a",
+    "RebootBehavior":  "Can request restart",
+    "RequestsUserInput":  false,
+    "ExclusiveInstall":  "",
+    "NetworkRequired":  false,
+    "UninstallNotes":  null,
+    "UninstallSteps":  null,
+    "UpdateId":  "5f3e21a5-cca6-4f0e-9c9e-8efbd79b064a",
+    "Supersedes":  [
+                       {
+                           "KB":  "5034535",
+                           "Description":  "2024-01 Setup Dynamic Update for Windows 11 Version 23H2 for arm64-based Systems (KB5034535)"
+                       },
+                       {
+                           "KB":  "5033243",
+                           "Description":  "2023-11 Setup Dynamic Update for Windows 11 Version 23H2 for arm64-based Systems (KB5033243)"
+                       },
+                       {
+                           "KB":  "5033205",
+                           "Description":  "2023-11 Setup Dynamic Update for Windows 11 Version 23H2 for arm64-based Systems (KB5033205)"
+                       },
+                       {
+                           "KB":  "5031656",
+                           "Description":  "2023-10 Setup Dynamic Update for Windows 11 Version 23H2 for arm64-based Systems (KB5031656)"
+                       },
+                       {
+                           "KB":  "5037957",
+                           "Description":  "2024-05 Setup Dynamic Update for Windows 11 Version 23H2 for arm64-based Systems (KB5037957)"
+                       },
+                       {
+                           "KB":  "5030327",
+                           "Description":  "2023-10 Setup Dynamic Update for Windows 11 Version 23H2 for arm64-based Systems (KB5030327)"
+                       }
+                   ],
+    "SupersededBy":  {
+
+                     },
+    "Link":  "https://catalog.sf.dl.delivery.mp.microsoft.com/filestreamingservice/files/ae4f9cb2-f408-4915-8c4e-bc73aefadca4/public/windows11.0-kb5045525-arm64_d1248916c3902c8428c73ed4527fce8df1b09e6d.cab",
+    "InputObject":  "2024-10 Setup"
+}

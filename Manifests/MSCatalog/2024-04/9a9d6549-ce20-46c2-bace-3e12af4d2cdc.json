@@ -1,0 +1,32 @@
+﻿{
+    "Title":  "2024-04 Cumulative Update Preview for .NET Framework 3.5 and 4.8 for Windows 10 Version 22H2 for ARM64 (KB5037592)",
+    "Id":  "5037592",
+    "Architecture":  "ARM64",
+    "Language":  "",
+    "Hotfix":  null,
+    "Description":  "Install this update to resolve issues in Windows. For a complete listing of the issues that are included in this update, see the associated Microsoft Knowledge Base article for more information. After you install this item, you may have to restart your computer.",
+    "LastModified":  "2024-04-23",
+    "Size":  "45.3 MB",
+    "Classification":  "Updates",
+    "SupportedProducts":  [
+                              "Windows 10",
+                              "version 1903 and later"
+                          ],
+    "MSRCNumber":  null,
+    "MSRCSeverity":  "n/a",
+    "RebootBehavior":  "Can request restart",
+    "RequestsUserInput":  false,
+    "ExclusiveInstall":  "",
+    "NetworkRequired":  false,
+    "UninstallNotes":  "This software update can be removed by selecting View installed updates in the Programs and Features Control Panel.",
+    "UninstallSteps":  null,
+    "UpdateId":  "9a9d6549-ce20-46c2-bace-3e12af4d2cdc",
+    "Supersedes":  {
+
+                   },
+    "SupersededBy":  {
+
+                     },
+    "Link":  "https://catalog.s.download.windowsupdate.com/c/msdownload/update/software/updt/2024/04/windows10.0-kb5037592-arm64-ndp48_2948c3f8cff486a0707dd4c4fe223fc569d7e1ef.msu",
+    "InputObject":  "2024-04"
+}

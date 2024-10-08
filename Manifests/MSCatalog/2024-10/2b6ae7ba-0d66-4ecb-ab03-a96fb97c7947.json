@@ -1,0 +1,88 @@
+﻿{
+    "Title":  "2024-10 Dynamic Update for Windows 10 Version 1809 for x64-based Systems (KB5045522)",
+    "Id":  "5045522",
+    "Architecture":  "x64",
+    "Language":  "",
+    "Hotfix":  null,
+    "Description":  "SetupUpdate:",
+    "LastModified":  "2024-10-08",
+    "Size":  "15.9 MB",
+    "Classification":  "Critical Updates",
+    "SupportedProducts":  "Windows 10 and later Dynamic Update",
+    "MSRCNumber":  null,
+    "MSRCSeverity":  "n/a",
+    "RebootBehavior":  "Can request restart",
+    "RequestsUserInput":  false,
+    "ExclusiveInstall":  "",
+    "NetworkRequired":  false,
+    "UninstallNotes":  "Not Uninstallable",
+    "UninstallSteps":  null,
+    "UpdateId":  "2b6ae7ba-0d66-4ecb-ab03-a96fb97c7947",
+    "Supersedes":  [
+                       {
+                           "KB":  "4565348",
+                           "Description":  "2020-08 Dynamic Update for Windows 10 Version 1809 for x64-based Systems (KB4565348)"
+                       },
+                       {
+                           "KB":  "4538460",
+                           "Description":  "2020-03 Dynamic Update for Windows 10 Version 1809 for x64-based Systems (KB4538460)"
+                       },
+                       {
+                           "KB":  "5028310",
+                           "Description":  "2023-07 Dynamic Update for Windows 10 Version 1809 for x64-based Systems (KB5028310)"
+                       },
+                       {
+                           "KB":  "4505657",
+                           "Description":  "2019-07 Dynamic Update for Windows 10 Version 1809 for x64-based Systems (KB4505657)"
+                       },
+                       {
+                           "KB":  "4511552",
+                           "Description":  "2019-08 Dynamic Update for Windows 10 Version 1809 for x64-based Systems (KB4511552)"
+                       },
+                       {
+                           "KB":  "4582760",
+                           "Description":  "2020-10 Dynamic Update for Windows 10 Version 1809 for x64-based Systems (KB4582760)"
+                       },
+                       {
+                           "KB":  "4532690",
+                           "Description":  "2020-02 Dynamic Update for Windows 10 Version 1809 for x64-based Systems (KB4532690)"
+                       },
+                       {
+                           "KB":  "4601389",
+                           "Description":  "2021-02 Dynamic Update for Windows 10 Version 1809 for x64-based Systems (KB4601389)"
+                       },
+                       {
+                           "KB":  "4524761",
+                           "Description":  "2019-11 Dynamic Update for Windows 10 Version 1809 for x64-based Systems (KB4524761)"
+                       },
+                       {
+                           "KB":  "5003241",
+                           "Description":  "2021-05 Dynamic Update for Windows 10 Version 1809 for x64-based Systems (KB5003241)"
+                       },
+                       {
+                           "KB":  "5005545",
+                           "Description":  "2021-08 Dynamic Update for Windows 10 Version 1809 for x64-based Systems (KB5005545)"
+                       },
+                       {
+                           "KB":  "4586860",
+                           "Description":  "2020-11 Dynamic Update for Windows 10 Version 1809 for x64-based Systems (KB4586860)"
+                       },
+                       {
+                           "KB":  "5000864",
+                           "Description":  "2021-03 Dynamic Update for Windows 10 Version 1809 for x64-based Systems (KB5000864)"
+                       },
+                       {
+                           "KB":  "5003714",
+                           "Description":  "2021-06 Dynamic Update for Windows 10 Version 1809 for x64-based Systems (KB5003714)"
+                       },
+                       {
+                           "KB":  "4519337",
+                           "Description":  "2019-10 Dynamic Update for Windows 10 Version 1809 for x64-based Systems (KB4519337)"
+                       }
+                   ],
+    "SupersededBy":  {
+
+                     },
+    "Link":  "https://catalog.s.download.windowsupdate.com/c/msdownload/update/software/crup/2024/09/windows10.0-kb5045522-x64_6b22c51520796c44c2b6e9a1559640eaf2197441.cab",
+    "InputObject":  "2024-10"
+}

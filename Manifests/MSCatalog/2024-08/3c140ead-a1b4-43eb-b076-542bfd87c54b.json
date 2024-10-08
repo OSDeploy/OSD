@@ -1,0 +1,32 @@
+﻿{
+    "Title":  "2024-08 Cumulative Update for .NET Framework 3.5 and 4.7.2 for Windows 10 Version 1809 for x64 (KB5041913)",
+    "Id":  "5041913",
+    "Architecture":  "x64",
+    "Language":  "",
+    "Hotfix":  null,
+    "Description":  "Install this update to resolve issues in Windows. For a complete listing of the issues that are included in this update, see the associated Microsoft Knowledge Base article for more information. After you install this item, you may have to restart your computer.",
+    "LastModified":  "2024-08-13",
+    "Size":  "84.5 MB",
+    "Classification":  "Updates",
+    "SupportedProducts":  [
+                              "Windows 10",
+                              "Windows 10 LTSB"
+                          ],
+    "MSRCNumber":  null,
+    "MSRCSeverity":  "n/a",
+    "RebootBehavior":  "Can request restart",
+    "RequestsUserInput":  false,
+    "ExclusiveInstall":  "",
+    "NetworkRequired":  false,
+    "UninstallNotes":  "This software update can be removed by selecting View installed updates in the Programs and Features Control Panel.",
+    "UninstallSteps":  null,
+    "UpdateId":  "3c140ead-a1b4-43eb-b076-542bfd87c54b",
+    "Supersedes":  {
+
+                   },
+    "SupersededBy":  {
+
+                     },
+    "Link":  "https://catalog.s.download.windowsupdate.com/d/msdownload/update/software/updt/2024/07/windows10.0-kb5041913-x64_b00cd2de1915f11b56c21d7001962f67854afe07.msu",
+    "InputObject":  "2024-08"
+}

@@ -1,0 +1,32 @@
+﻿{
+    "Title":  "2024-02 Cumulative Update for .NET Framework 3.5 and 4.8 for Windows 10 Version 1809 for x64 (KB5034624)",
+    "Id":  "5034624",
+    "Architecture":  "x64",
+    "Language":  "",
+    "Hotfix":  null,
+    "Description":  "Install this update to resolve issues in Windows. For a complete listing of the issues that are included in this update, see the associated Microsoft Knowledge Base article for more information. After you install this item, you may have to restart your computer.",
+    "LastModified":  "2024-02-13",
+    "Size":  "80.3 MB",
+    "Classification":  "Updates",
+    "SupportedProducts":  [
+                              "Windows 10",
+                              "Windows 10 LTSB"
+                          ],
+    "MSRCNumber":  null,
+    "MSRCSeverity":  "n/a",
+    "RebootBehavior":  "Can request restart",
+    "RequestsUserInput":  false,
+    "ExclusiveInstall":  "",
+    "NetworkRequired":  false,
+    "UninstallNotes":  "This software update can be removed by selecting View installed updates in the Programs and Features Control Panel.",
+    "UninstallSteps":  null,
+    "UpdateId":  "5e79d817-2e56-4922-88f1-4bbfb63dfaa3",
+    "Supersedes":  {
+
+                   },
+    "SupersededBy":  {
+
+                     },
+    "Link":  "https://catalog.s.download.windowsupdate.com/c/msdownload/update/software/updt/2024/01/windows10.0-kb5034624-x64-ndp48_9aaf1ded061cdc7fd9107501a2a590835f33540d.msu",
+    "InputObject":  "2024-02"
+}

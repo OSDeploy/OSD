@@ -1,0 +1,29 @@
+﻿{
+    "Title":  "2024-08 Cumulative Update for .NET Framework 3.5 and 4.8.1 for Windows 11 for ARM64 (KB5041967)",
+    "Id":  "5041967",
+    "Architecture":  "ARM64",
+    "Language":  "",
+    "Hotfix":  null,
+    "Description":  "Install this update to resolve issues in Windows. For a complete listing of the issues that are included in this update, see the associated Microsoft Knowledge Base article for more information. After you install this item, you may have to restart your computer.",
+    "LastModified":  "2024-08-13",
+    "Size":  "88.9 MB",
+    "Classification":  "Updates",
+    "SupportedProducts":  "Windows 11",
+    "MSRCNumber":  null,
+    "MSRCSeverity":  "n/a",
+    "RebootBehavior":  "Can request restart",
+    "RequestsUserInput":  false,
+    "ExclusiveInstall":  "",
+    "NetworkRequired":  false,
+    "UninstallNotes":  "This software update can be removed by selecting View installed updates in the Programs and Features Control Panel.",
+    "UninstallSteps":  null,
+    "UpdateId":  "5158fc11-90d0-43df-ba48-6912b66a896f",
+    "Supersedes":  {
+
+                   },
+    "SupersededBy":  {
+
+                     },
+    "Link":  "https://catalog.s.download.windowsupdate.com/c/msdownload/update/software/updt/2024/07/windows11.0-kb5041967-arm64-ndp481_4254a6076d5f8d317a5717d4702a17b375c7300d.msu",
+    "InputObject":  "2024-08"
+}

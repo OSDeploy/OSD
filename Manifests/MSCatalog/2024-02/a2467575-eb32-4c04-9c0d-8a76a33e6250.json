@@ -1,0 +1,29 @@
+﻿{
+    "Title":  "2024-02 Cumulative Update for .NET Framework 3.5 and 4.8 for Windows 11 for ARM64 (KB5034625)",
+    "Id":  "5034625",
+    "Architecture":  "ARM64",
+    "Language":  "",
+    "Hotfix":  null,
+    "Description":  "Install this update to resolve issues in Windows. For a complete listing of the issues that are included in this update, see the associated Microsoft Knowledge Base article for more information. After you install this item, you may have to restart your computer.",
+    "LastModified":  "2024-02-13",
+    "Size":  "66.4 MB",
+    "Classification":  "Updates",
+    "SupportedProducts":  "Windows 11",
+    "MSRCNumber":  null,
+    "MSRCSeverity":  "n/a",
+    "RebootBehavior":  "Can request restart",
+    "RequestsUserInput":  false,
+    "ExclusiveInstall":  "",
+    "NetworkRequired":  false,
+    "UninstallNotes":  "This software update can be removed by selecting View installed updates in the Programs and Features Control Panel.",
+    "UninstallSteps":  null,
+    "UpdateId":  "a2467575-eb32-4c04-9c0d-8a76a33e6250",
+    "Supersedes":  {
+
+                   },
+    "SupersededBy":  {
+
+                     },
+    "Link":  "https://catalog.s.download.windowsupdate.com/c/msdownload/update/software/updt/2024/01/windows10.0-kb5034625-arm64-ndp48_a1ad95711334a459c890cef8b3958a5bcae2f1fb.msu",
+    "InputObject":  "2024-02"
+}

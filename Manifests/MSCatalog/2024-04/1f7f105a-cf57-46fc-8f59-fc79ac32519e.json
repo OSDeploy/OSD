@@ -1,0 +1,32 @@
+﻿{
+    "Title":  "2024-04 Cumulative Update Preview for .NET Framework 3.5 and 4.8.1 for Windows 10 Version 22H2 for x64 (KB5037587)",
+    "Id":  "5037587",
+    "Architecture":  "x64",
+    "Language":  "",
+    "Hotfix":  null,
+    "Description":  "Install this update to resolve issues in Windows. For a complete listing of the issues that are included in this update, see the associated Microsoft Knowledge Base article for more information. After you install this item, you may have to restart your computer.",
+    "LastModified":  "2024-04-23",
+    "Size":  "69.8 MB",
+    "Classification":  "Updates",
+    "SupportedProducts":  [
+                              "Windows 10",
+                              "version 1903 and later"
+                          ],
+    "MSRCNumber":  null,
+    "MSRCSeverity":  "n/a",
+    "RebootBehavior":  "Can request restart",
+    "RequestsUserInput":  false,
+    "ExclusiveInstall":  "",
+    "NetworkRequired":  false,
+    "UninstallNotes":  "This software update can be removed by selecting View installed updates in the Programs and Features Control Panel.",
+    "UninstallSteps":  null,
+    "UpdateId":  "1f7f105a-cf57-46fc-8f59-fc79ac32519e",
+    "Supersedes":  {
+
+                   },
+    "SupersededBy":  {
+
+                     },
+    "Link":  "https://catalog.s.download.windowsupdate.com/c/msdownload/update/software/updt/2024/04/windows10.0-kb5037587-x64-ndp481_115f29e1b79986792251107a7be02bfb0e7294e4.msu",
+    "InputObject":  "2024-04"
+}

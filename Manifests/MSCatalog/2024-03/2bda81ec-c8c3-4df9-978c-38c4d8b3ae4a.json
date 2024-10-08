@@ -1,0 +1,32 @@
+﻿{
+    "Title":  "2024-03 Cumulative Update Preview for .NET Framework 3.5 and 4.8 for Windows 10 Version 22H2 for x64 (KB5036036)",
+    "Id":  "5036036",
+    "Architecture":  "x64",
+    "Language":  "",
+    "Hotfix":  null,
+    "Description":  "Install this update to resolve issues in Windows. For a complete listing of the issues that are included in this update, see the associated Microsoft Knowledge Base article for more information. After you install this item, you may have to restart your computer.",
+    "LastModified":  "2024-03-26",
+    "Size":  "70.2 MB",
+    "Classification":  "Updates",
+    "SupportedProducts":  [
+                              "Windows 10",
+                              "version 1903 and later"
+                          ],
+    "MSRCNumber":  null,
+    "MSRCSeverity":  "n/a",
+    "RebootBehavior":  "Can request restart",
+    "RequestsUserInput":  false,
+    "ExclusiveInstall":  "",
+    "NetworkRequired":  false,
+    "UninstallNotes":  "This software update can be removed by selecting View installed updates in the Programs and Features Control Panel.",
+    "UninstallSteps":  null,
+    "UpdateId":  "2bda81ec-c8c3-4df9-978c-38c4d8b3ae4a",
+    "Supersedes":  {
+
+                   },
+    "SupersededBy":  {
+
+                     },
+    "Link":  "https://catalog.s.download.windowsupdate.com/c/msdownload/update/software/updt/2024/03/windows10.0-kb5036036-x64-ndp48_1eadea58a2343e48fab596793ad1caa2735de047.msu",
+    "InputObject":  "2024-03"
+}

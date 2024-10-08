@@ -1,0 +1,48 @@
+﻿{
+    "Title":  "2024-10 Setup Dynamic Update for Windows 11 Version 24H2 for arm64-based Systems (KB5045520)",
+    "Id":  "5045520",
+    "Architecture":  "ARM64",
+    "Language":  "",
+    "Hotfix":  null,
+    "Description":  "This update makes improvements to Windows setup binaries or any files that setup uses for feature updates in Windows.",
+    "LastModified":  "2024-10-08",
+    "Size":  "7.8 MB",
+    "Classification":  "Critical Updates",
+    "SupportedProducts":  "Windows 10 and later Dynamic Update",
+    "MSRCNumber":  null,
+    "MSRCSeverity":  "n/a",
+    "RebootBehavior":  "Can request restart",
+    "RequestsUserInput":  false,
+    "ExclusiveInstall":  "",
+    "NetworkRequired":  false,
+    "UninstallNotes":  null,
+    "UninstallSteps":  null,
+    "UpdateId":  "dd8a6bc2-a4b4-477e-8b8f-4a7f0c547fd1",
+    "Supersedes":  [
+                       {
+                           "KB":  "5043353",
+                           "Description":  "2024-09 Setup Dynamic Update for Windows 11 Version 24H2 for arm64-based Systems (KB5043353)"
+                       },
+                       {
+                           "KB":  "5039448",
+                           "Description":  "2024-06 Setup Dynamic Update for Windows 11 Version 24H2 for arm64-based Systems (KB5039448)"
+                       },
+                       {
+                           "KB":  "5042580",
+                           "Description":  "2024-08 Setup Dynamic Update for Windows 11 Version 24H2 for arm64-based Systems (KB5042580)"
+                       },
+                       {
+                           "KB":  "5041178",
+                           "Description":  "2024-07 Setup Dynamic Update for Windows 11 Version 24H2 for arm64-based Systems (KB5041178)"
+                       },
+                       {
+                           "KB":  "5044075",
+                           "Description":  "2024-09 Setup Dynamic Update for Windows 11 Version 24H2 for arm64-based Systems (KB5044075)"
+                       }
+                   ],
+    "SupersededBy":  {
+
+                     },
+    "Link":  "https://catalog.sf.dl.delivery.mp.microsoft.com/filestreamingservice/files/d843cf3c-51d5-4036-8865-9877f293f505/public/windows11.0-kb5045520-arm64_7504d6c0a66bc9382e37706f375373cb3404b654.cab",
+    "InputObject":  "2024-10 Setup"
+}

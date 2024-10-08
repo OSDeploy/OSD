@@ -15,7 +15,13 @@ function Get-WindowsUpdateManifests {
 
     $WindowsUpdateManifests = @()
     foreach ($Manifest in $ManifestFiles) {
-        $WindowsUpdateManifests += Get-Content $Manifest.FullName | ConvertFrom-Json
+        $WindowsUpdateManifest = @()
+        $WindowsUpdateManifest = Get-Content $Manifest.FullName | ConvertFrom-Json
+        if ($WindowsUpdateManifest.SupersededBy.KB) {
+            Continue
+        }
+
+        $WindowsUpdateManifests += $WindowsUpdateManifest
     }
 
     Return $WindowsUpdateManifests | Sort-Object -Property LastModified

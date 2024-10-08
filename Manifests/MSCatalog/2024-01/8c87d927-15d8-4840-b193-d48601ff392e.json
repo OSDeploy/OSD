@@ -1,0 +1,29 @@
+﻿{
+    "Title":  "2024-01 Cumulative Update for .NET Framework 3.5 and 4.8.1 for Windows 11 for x64 (KB5033919)",
+    "Id":  "5033919",
+    "Architecture":  "x64",
+    "Language":  "",
+    "Hotfix":  null,
+    "Description":  "A security issue has been identified in a Microsoft software product that could affect your system. You can help protect your system by installing this update from Microsoft. For a complete listing of the issues that are included in this update, see the associated Microsoft Knowledge Base article. After you install this update, you may have to restart your system.",
+    "LastModified":  "2024-01-09",
+    "Size":  "61.1 MB",
+    "Classification":  "Security Updates",
+    "SupportedProducts":  "Windows 11",
+    "MSRCNumber":  null,
+    "MSRCSeverity":  "Important",
+    "RebootBehavior":  "Can request restart",
+    "RequestsUserInput":  false,
+    "ExclusiveInstall":  "",
+    "NetworkRequired":  false,
+    "UninstallNotes":  "This software update can be removed by selecting View installed updates in the Programs and Features Control Panel.",
+    "UninstallSteps":  null,
+    "UpdateId":  "8c87d927-15d8-4840-b193-d48601ff392e",
+    "Supersedes":  {
+
+                   },
+    "SupersededBy":  {
+
+                     },
+    "Link":  "https://catalog.s.download.windowsupdate.com/d/msdownload/update/software/secu/2023/12/windows11.0-kb5033919-x64-ndp481_f636514a78c7d86686856fa1877d3fa00a0a630a.msu",
+    "InputObject":  "2024-01"
+}

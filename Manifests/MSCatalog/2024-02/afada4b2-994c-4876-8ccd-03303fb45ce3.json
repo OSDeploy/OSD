@@ -1,0 +1,33 @@
+﻿{
+    "Title":  "2024-02 Cumulative Update for .NET Framework 3.5 and 4.8 for Windows 10 Version 21H2 for ARM64 (KB5034468)",
+    "Id":  "5034468",
+    "Architecture":  "ARM64",
+    "Language":  "",
+    "Hotfix":  null,
+    "Description":  "Install this update to resolve issues in Windows. For a complete listing of the issues that are included in this update, see the associated Microsoft Knowledge Base article for more information. After you install this item, you may have to restart your computer.",
+    "LastModified":  "2024-02-13",
+    "Size":  "45.0 MB",
+    "Classification":  "Updates",
+    "SupportedProducts":  [
+                              "Windows 10 LTSB",
+                              "Windows 10",
+                              "version 1903 and later"
+                          ],
+    "MSRCNumber":  null,
+    "MSRCSeverity":  "n/a",
+    "RebootBehavior":  "Can request restart",
+    "RequestsUserInput":  false,
+    "ExclusiveInstall":  "",
+    "NetworkRequired":  false,
+    "UninstallNotes":  "This software update can be removed by selecting View installed updates in the Programs and Features Control Panel.",
+    "UninstallSteps":  null,
+    "UpdateId":  "afada4b2-994c-4876-8ccd-03303fb45ce3",
+    "Supersedes":  {
+
+                   },
+    "SupersededBy":  {
+
+                     },
+    "Link":  "https://catalog.s.download.windowsupdate.com/d/msdownload/update/software/updt/2023/12/windows10.0-kb5034468-arm64-ndp48_e3fc0b27c6542459081b2d99084f29d37e60d449.msu",
+    "InputObject":  "2024-02"
+}

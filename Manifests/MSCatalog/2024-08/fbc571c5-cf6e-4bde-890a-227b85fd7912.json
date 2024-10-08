@@ -1,0 +1,29 @@
+﻿{
+    "Title":  "2024-08 Cumulative Update for .NET Framework 3.5 and 4.8.1 for Windows 10 Version 21H2 for x64 (KB5042097)",
+    "Id":  "5042097",
+    "Architecture":  "x64",
+    "Language":  "",
+    "Hotfix":  null,
+    "Description":  "Install this update to resolve issues in Windows. For a complete listing of the issues that are included in this update, see the associated Microsoft Knowledge Base article for more information. After you install this item, you may have to restart your computer.",
+    "LastModified":  "2024-08-13",
+    "Size":  "75.2 MB",
+    "Classification":  "Updates",
+    "SupportedProducts":  "Windows 10 LTSB",
+    "MSRCNumber":  null,
+    "MSRCSeverity":  "n/a",
+    "RebootBehavior":  "Can request restart",
+    "RequestsUserInput":  false,
+    "ExclusiveInstall":  "",
+    "NetworkRequired":  false,
+    "UninstallNotes":  "This software update can be removed by selecting View installed updates in the Programs and Features Control Panel.",
+    "UninstallSteps":  null,
+    "UpdateId":  "fbc571c5-cf6e-4bde-890a-227b85fd7912",
+    "Supersedes":  {
+
+                   },
+    "SupersededBy":  {
+
+                     },
+    "Link":  "https://catalog.s.download.windowsupdate.com/c/msdownload/update/software/updt/2024/07/windows10.0-kb5042097-x64-ndp481_128df6c49bca1d0d7287649d35c9e3bb093329a3.msu",
+    "InputObject":  "2024-08"
+}
