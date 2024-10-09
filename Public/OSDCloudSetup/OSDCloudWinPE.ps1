@@ -126,7 +126,11 @@
 
         [System.Management.Automation.SwitchParameter]
         #Adds 7Zip to Boot Image
-        $Add7Zip
+        $Add7Zip,
+
+        [System.Management.Automation.SwitchParameter]
+        # Add PowerShell 7 to WinPE
+        $pwsh
     )
     #=================================================
     #	Start the Clock
@@ -217,6 +221,52 @@
         robocopy "$WorkspacePath\ODT" "$MountPath\OSDCloud\ODT" *.xml /mir /ndl /njh /njs /b /np
         robocopy "$WorkspacePath\ODT" "$MountPath\OSDCloud\ODT" setup.exe /mir /ndl /njh /njs /b /np
     }
+
+    #region PowerShell 7
+    if ($PSBoundParameters.ContainsKey('pwsh')) {
+        if (Test-Path "$MountPath\Program Files\PowerShell\7") {
+            Write-Host -ForegroundColor Yellow "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) WinPE is PowerShell 7 Ready"
+            $PwshReady = $true
+        }
+        else {
+            Write-Host -ForegroundColor Yellow "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Adding PowerShell 7 to WinPE"
+            $PwshReleases = Invoke-WebRequest -Uri https://github.com/PowerShell/PowerShell/releases/latest -UseBasicParsing
+            $PwshVersion = (($PwshReleases.Links | Where-Object { $_.href -match 'releases/tag' }).href).Split('/v')[-1]
+            $PwshFileName = "PowerShell-$PwshVersion-win-x64.zip"
+            $PwshUri = "https://github.com/PowerShell/PowerShell/releases/download/v$PwshVersion/$PwshFileName"
+
+            Write-Host -ForegroundColor DarkGray "Downloading $PwshUri"
+            # Invoke-WebRequest -Uri $PwshUri -OutFile "$env:TEMP\$PwshFileName" -UseBasicParsing
+            $PwshDownload = Save-WebFile -SourceUrl $PwshUri
+
+            if (Test-Path -Path $PwshDownload) {
+                Expand-Archive -Path $PwshDownload -DestinationPath "$MountPath\Program Files\PowerShell\7" -Force
+            }
+            else {
+                Write-Warning "Could not find $PwshDownload"
+            }
+
+            # Add PowerShell 7 PATH to WinPE ... Thanks Johan Arwidmark
+            Invoke-Exe reg load HKLM\Mount "$MountPath\Windows\System32\Config\SYSTEM"
+            Start-Sleep -Seconds 3
+            $RegistryKey = 'HKLM:\Mount\ControlSet001\Control\Session Manager\Environment'
+            $CurrentPath = (Get-Item -path $RegistryKey ).GetValue('Path', '', 'DoNotExpandEnvironmentNames')
+            $NewPath = $CurrentPath + ';%ProgramFiles%\PowerShell\7\'
+            $Result = New-ItemProperty -Path $RegistryKey -Name 'Path' -PropertyType ExpandString -Value $NewPath -Force 
+
+            $CurrentPSModulePath = (Get-Item -path $RegistryKey ).GetValue('PSModulePath', '', 'DoNotExpandEnvironmentNames')
+            $NewPSModulePath = $CurrentPSModulePath + ';%ProgramFiles%\PowerShell\;%ProgramFiles%\PowerShell\7\;%SystemRoot%\system32\config\systemprofile\Documents\PowerShell\Modules\'
+            $Result = New-ItemProperty -Path $RegistryKey -Name 'PSModulePath' -PropertyType ExpandString -Value $NewPSModulePath -Force
+
+            Get-Variable Result | Remove-Variable
+            Get-Variable RegistryKey | Remove-Variable
+            [gc]::collect()
+            Start-Sleep -Seconds 3
+            Invoke-Exe reg unload HKLM\Mount | Out-Null
+            $PwshReady = $true
+        }
+    }
+    #endregion
     
     #region DriverHWID
     if ($DriverHWID) {

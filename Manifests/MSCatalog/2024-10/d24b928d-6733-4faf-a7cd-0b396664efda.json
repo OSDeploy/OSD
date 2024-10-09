@@ -1,0 +1,61 @@
+{
+  "Title": "2024-10 Cumulative Update for Windows 11 Version 24H2 for x64-based Systems (KB5044284)",
+  "Id": "5044284",
+  "Architecture": "x64",
+  "Language": "",
+  "Hotfix": null,
+  "Description": "Install this update to resolve issues in Windows. For a complete listing of the issues that are included in this update, see the associated Microsoft Knowledge Base article for more information. After you install this item, you may have to restart your computer.",
+  "LastModified": "2024-10-08",
+  "Size": "836.6 MB",
+  "Classification": "Security Updates",
+  "SupportedProducts": "Windows 11",
+  "MSRCNumber": null,
+  "MSRCSeverity": "Critical",
+  "RebootBehavior": "Can request restart",
+  "RequestsUserInput": false,
+  "ExclusiveInstall": "",
+  "NetworkRequired": false,
+  "UninstallNotes": null,
+  "UninstallSteps": null,
+  "UpdateId": "d24b928d-6733-4faf-a7cd-0b396664efda",
+  "Supersedes": [
+    {
+      "KB": "5039304",
+      "Description": "2024-06 Cumulative Update for Windows 11 Version 24H2 for x64-based Systems (KB5039304)"
+    },
+    {
+      "KB": "5043080",
+      "Description": "2024-09 Cumulative Update for Windows 11 Version 24H2 for x64-based Systems (KB5043080)"
+    },
+    {
+      "KB": "5040529",
+      "Description": "2024-07 Cumulative Update for Windows 11 Version 24H2 for x64-based Systems (KB5040529)"
+    },
+    {
+      "KB": "5040435",
+      "Description": "2024-07 Cumulative Update for Windows 11 Version 24H2 for x64-based Systems (KB5040435)"
+    },
+    {
+      "KB": "5043178",
+      "Description": "2024-09 Cumulative Update for Windows 11 Version 24H2 for x64-based Systems (KB5043178)"
+    },
+    {
+      "KB": "5041865",
+      "Description": "2024-08 Cumulative Update for Windows 11 Version 24H2 for x64-based Systems (KB5041865)"
+    },
+    {
+      "KB": "5039239",
+      "Description": "2024-06 Cumulative Update for Windows 11 Version 24H2 for x64-based Systems (KB5039239)"
+    },
+    {
+      "KB": "5041571",
+      "Description": "2024-08 Cumulative Update for Windows 11 Version 24H2 for x64-based Systems (KB5041571)"
+    }
+  ],
+  "SupersededBy": null,
+  "Link": [
+    "https://catalog.sf.dl.delivery.mp.microsoft.com/filestreamingservice/files/72f34af9-6ab3-4bb0-9dfe-103e56a305fb/public/windows11.0-kb5044284-x64_d7eb7ceaa4798b92b988fd7dcc7c6bb39476ccf3.msu",
+    "https://catalog.sf.dl.delivery.mp.microsoft.com/filestreamingservice/files/d8b7f92b-bd35-4b4c-96e5-46ce984b31e0/public/windows11.0-kb5043080-x64_953449672073f8fb99badb4cc6d5d7849b9c83e8.msu"
+  ],
+  "InputObject": "2024-10 Cumulative"
+}

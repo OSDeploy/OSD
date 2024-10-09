@@ -1,0 +1,55 @@
+﻿{
+    "Title":  "2024-10 Dynamic Update for Windows 10 Version 1607 for x64-based Systems (KB5044613)",
+    "Id":  "5044613",
+    "Architecture":  "x64",
+    "Language":  "",
+    "Hotfix":  null,
+    "Description":  "ComponentUpdate:",
+    "LastModified":  "2024-10-08",
+    "Size":  "16.1 MB",
+    "Classification":  "Critical Updates",
+    "SupportedProducts":  [
+                              "Windows 10 and later Dynamic Update",
+                              "Windows Safe OS Dynamic Update"
+                          ],
+    "MSRCNumber":  null,
+    "MSRCSeverity":  "n/a",
+    "RebootBehavior":  "Can request restart",
+    "RequestsUserInput":  false,
+    "ExclusiveInstall":  "",
+    "NetworkRequired":  false,
+    "UninstallNotes":  "Not Uninstallable",
+    "UninstallSteps":  null,
+    "UpdateId":  "d8f6ad94-35aa-40f6-b9ba-496d0b2a45f4",
+    "Supersedes":  [
+                       {
+                           "KB":  "5027386",
+                           "Description":  "2023-06 Dynamic Update for Windows 10 Version 1607 for x64-based Systems (KB5027386)"
+                       },
+                       {
+                           "KB":  "5021039",
+                           "Description":  "2022-11 Dynamic Update for Windows 10 Version 1607 for x64-based Systems (KB5021039)"
+                       },
+                       {
+                           "KB":  "5031471",
+                           "Description":  "2023-10 Dynamic Update for Windows 10 Version 1607 for x64-based Systems (KB5031471)"
+                       },
+                       {
+                           "KB":  "5034230",
+                           "Description":  "2024-01 Dynamic Update for Windows 10 Version 1607 for x64-based Systems (KB5034230)"
+                       },
+                       {
+                           "KB":  "4013419",
+                           "Description":  "Dynamic Update for Windows 10 Version 1607 for x64-based Systems (KB4013419)"
+                       },
+                       {
+                           "KB":  "3194623",
+                           "Description":  "Dynamic Update for Windows 10 Version 1607 for x64-based Systems (KB3194623)"
+                       }
+                   ],
+    "SupersededBy":  {
+
+                     },
+    "Link":  "https://catalog.s.download.windowsupdate.com/d/msdownload/update/software/crup/2024/09/windows10.0-kb5044613-x64_b64a09c8f7ecff4d2db0b34981646576b8167d53.cab",
+    "InputObject":  "2024-10"
+}
