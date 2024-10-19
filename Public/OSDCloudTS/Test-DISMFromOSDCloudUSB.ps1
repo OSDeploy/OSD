@@ -21,8 +21,12 @@
     if ($OSDCloudDriveLetter){
         $ComputerProduct = (Get-MyComputerProduct)
         if (!($PackageID)){
-            $PackageID = $DriverPack.PackageID
             $DriverPack = Get-OSDCloudDriverPack -Product $ComputerProduct
+            $PackageID = $DriverPack.PackageID
+        }
+        #Secondary $null check
+        if (!($PackageID)){
+            $PackageID = "dummy_path"
         }
         $ComputerManufacturer = (Get-MyComputerManufacturer -Brief)
         if ($ComputerManufacturer -match "Samsung"){$ComputerManufacturer = "Samsung"}
