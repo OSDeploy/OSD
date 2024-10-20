@@ -21,6 +21,7 @@
         }
         if ($OSDCloudDriveLetter){
             $ComputerProduct = (Get-MyComputerProduct)
+            $ComputerModel = (Get-MyComputerModel)
             if (!($PackageID)){
                 $DriverPack = Get-OSDCloudDriverPack -Product $ComputerProduct
                 if ($DriverPack){
@@ -30,6 +31,7 @@
             $ComputerManufacturer = (Get-MyComputerManufacturer -Brief)
             if ($ComputerManufacturer -match "Samsung"){$ComputerManufacturer = "Samsung"}
             $DriverPathProduct = "$($OSDCloudDriveLetter):\OSDCloud\DriverPacks\DISM\$ComputerManufacturer\$ComputerProduct"
+            $DriverPathModel = "$($OSDCloudDriveLetter):\OSDCloud\DriverPacks\DISM\$ComputerManufacturer\$ComputerModel"
             if ($PackageID){
                 $DriverPathPackageID = "$($OSDCloudDriveLetter):\OSDCloud\DriverPacks\DISM\$ComputerManufacturer\$PackageID"
             }
@@ -39,6 +41,7 @@
                 if (Test-Path $DriverPathPackageID){$DriverPath = $DriverPathPackageID}
             }
             if (Test-Path $DriverPathProduct){$DriverPath = $DriverPathProduct}
+            if (Test-Path $DriverPathModel){$DriverPath = $DriverPathModel}
             if (Test-Path $DriverPath){
                 Write-Host "Found Drivers: $DriverPath" -ForegroundColor Green
                 Write-Host "Starting DISM of drivers while Offline" -ForegroundColor Green
