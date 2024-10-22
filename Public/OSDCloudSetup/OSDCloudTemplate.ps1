@@ -48,7 +48,6 @@ function Get-OSDCloudTemplate {
     if (Test-Path "$env:ProgramData\OSDCloud\template.json") {
         $TemplateSettings = Get-Content -Path "$env:ProgramData\OSDCloud\template.json" | ConvertFrom-Json
         $TemplatePath = $TemplateSettings.TemplatePath
-        
     }
     $TemplatePath
     #endregion
@@ -81,7 +80,17 @@ function Get-OSDCloudTemplateNames {
     #region Build Array
     $Results = @()
     [System.Array]$Results = 'default'
-    [System.Array]$Results += Get-ChildItem -Path "$env:ProgramData\OSDCloud\Templates" | Where-Object {$_.PsIsContainer -eq $true} | Select-Object -ExpandProperty Name
+    [System.Array]$Results += Get-ChildItem -Path "$env:ProgramData\OSDCloud\Templates" | Where-Object { $_.PsIsContainer -eq $true } | Select-Object -ExpandProperty Name
+
+    #region OpenOSD Compatibility
+    if (Test-Path "$env:ProgramData\OpenOSD\MyBootMedia") {
+        [System.Array]$Results += Get-ChildItem -Path "$env:ProgramData\OpenOSD\MyBootMedia" | Where-Object { $_.PsIsContainer -eq $true } | Select-Object -ExpandProperty Name
+    }
+    if (Test-Path "$env:ProgramData\OpenOSD\WinPEBootMedia") {
+        [System.Array]$Results += Get-ChildItem -Path "$env:ProgramData\OpenOSD\WinPEBootMedia" | Where-Object { $_.PsIsContainer -eq $true } | Select-Object -ExpandProperty Name
+    }
+    #endregion
+
     [System.Array]$Results
     #endregion
 }
@@ -1064,8 +1073,16 @@ function Set-OSDCloudTemplate {
 
     #region Set Template Path
     if ($Name -ne 'default') {
-        $OSDCloudTemplate = "$env:ProgramData\OSDCloud\Templates\$Name"
-
+        # OpenOSD Compatibility
+        if (Test-Path "$env:ProgramData\OpenOSD\MyBootMedia\$Name") {
+            $OSDCloudTemplate = "$env:ProgramData\OpenOSD\MyBootMedia\$Name"
+        }
+        elseif (Test-Path "$env:ProgramData\OpenOSD\WinPEBootMedia\$Name") {
+            $OSDCloudTemplate = "$env:ProgramData\OpenOSD\WinPEBootMedia\$Name"
+        }
+        else {
+            $OSDCloudTemplate = "$env:ProgramData\OSDCloud\Templates\$Name"
+        }
         if (-NOT (Test-Path "$OSDCloudTemplate\Media\sources\boot.wim")) {
             $Name = 'default'
         }
