@@ -56,33 +56,35 @@ function Initialize-OSDCloudStartnet {
         When Edit-OSDCloudWinPE is executed then these files should be copied to the mounted WinPE
         In WinPE, the scripts will exist in X:\OSDCloud\Config\Scripts\*
         #>
+        Write-Host -ForegroundColor Cyan '[i] Config StartNet Scripts'
         $Global:ScriptStartNet = Get-PSDrive -PSProvider FileSystem | Where-Object { $_.Name -ne 'C' } | ForEach-Object {
-            Write-Host -ForegroundColor DarkGray "[i] Searching for scripts at $($_.Root)OSDCloud\Config\Scripts\StartNet"
+            Write-Host -ForegroundColor DarkGray "$($_.Root)OSDCloud\Config\Scripts\StartNet\*.ps1"
             Get-ChildItem "$($_.Root)OSDCloud\Config\Scripts\StartNet\" -Include "*.ps1" -File -Recurse -Force -ErrorAction Ignore
         }
         if ($Global:ScriptStartNet) {
             $Global:ScriptStartNet = $Global:ScriptStartNet | Sort-Object -Property FullName
             foreach ($Item in $Global:ScriptStartNet) {
-                Write-Host -ForegroundColor DarkGray "[i] Executing script $($Item.FullName)"
+                Write-Host -ForegroundColor Gray "Execute $($Item.FullName)"
                 & "$($Item.FullName)"
             }
         }
 
         # Initialize Splash Screen  
         # Looks for SPLASH.JSON files in OSDCloud\Config, if found, it will run a splash screen.
+        Write-Host -ForegroundColor Cyan '[i] Splash Screen Configuration'
         $Global:SplashScreen = Get-PSDrive -PSProvider FileSystem | Where-Object { $_.Name -ne 'C' } | ForEach-Object {
-            Write-Host -ForegroundColor DarkGray "[i] Searching for Splash Screen configuration at $($_.Root)OSDCloud\Config"
+            Write-Host -ForegroundColor DarkGray "$($_.Root)OSDCloud\Config\SPLASH.JSON"
             Get-ChildItem "$($_.Root)OSDCloud\Config\" -Include "SPLASH.JSON" -File -Recurse -Force -ErrorAction Ignore
         }
 
         if ($Global:SplashScreen) {
             $Global:SplashScreen = $Global:SplashScreen | Sort-Object -Property FullName
             foreach ($Item in $Global:SplashScreen) {
-                Write-Host -ForegroundColor DarkGray "[i] Applying Splash Screen configuration $($Item.FullName)"
+                Write-Host -ForegroundColor Gray "Apply $($Item.FullName)"
             }
             if ($Global:SplashScreen.count -gt 1) {
                 $SplashJson = $Global:SplashScreen | Select-Object -Last 1
-                Write-Host -ForegroundColor DarkGray "[i] Multiple Splash Screen configurations, using $($Item.FullName)"
+                Write-Host -ForegroundColor DarkGray "Multiple Splash Screen configurations, using $($Item.FullName)"
             }
             if (Test-Path -Path "C:\OSDCloud\Logs") {
                 Remove-Item -Path "C:\OSDCloud\Logs" -Recurse -Force

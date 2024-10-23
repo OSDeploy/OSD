@@ -20,25 +20,25 @@
     }
     if ($OSDCloudDriveLetter){
         $ComputerProduct = (Get-MyComputerProduct)
+        $ComputerModel = (Get-MyComputerModel)
         if (!($PackageID)){
-            $PackageID = $DriverPack.PackageID
             $DriverPack = Get-OSDCloudDriverPack -Product $ComputerProduct
+            $PackageID = $DriverPack.PackageID
         }
         $ComputerManufacturer = (Get-MyComputerManufacturer -Brief)
         if ($ComputerManufacturer -match "Samsung"){$ComputerManufacturer = "Samsung"}
         $DriverPathProduct = "$($OSDCloudDriveLetter):\OSDCloud\DriverPacks\DISM\$ComputerManufacturer\$ComputerProduct"
-        $DriverPathPackageID = "$($OSDCloudDriveLetter):\OSDCloud\DriverPacks\DISM\$ComputerManufacturer\$PackageID"
-        if ($PackageID){  
-            Write-Host "Testing Paths:"
-            Write-Host "  $DriverPathProduct"
+        $DriverPathModel = "$($OSDCloudDriveLetter):\OSDCloud\DriverPacks\DISM\$ComputerManufacturer\$ComputerModel"
+        Write-Host "Testing Paths:"
+        Write-Host "  $DriverPathProduct"
+        Write-Host "  $DriverPathModel"
+        if ($PackageID){
+            $DriverPathPackageID = "$($OSDCloudDriveLetter):\OSDCloud\DriverPacks\DISM\$ComputerManufacturer\$PackageID"
             Write-Host "  $DriverPathPackageID"
-        }
-        else {
-            Write-Host "Testing Path:"
-            Write-Host "  $DriverPathProduct"
+            if (Test-Path $DriverPathPackageID){Return $true}
         }
         if (Test-Path $DriverPathProduct){Return $true}
-        elseif (Test-Path $DriverPathPackageID){Return $true}
+        elseif (Test-Path $DriverPathModel){Return $true}
         else { Return $false}
     }
     else{

@@ -9,6 +9,8 @@ Changes
  - Updated Win10 22H2 CAB URL for newer ESD files
  - Updated Win11 23H2 CAB URL for newer ESD files
  - Started making modifications to support Win 11 22H2 GA ESD Files (22621.382)
+24.10.1
+ - Updated Win11 24H2 CAB URL for newer ESD files
 
 #>
 
@@ -25,6 +27,8 @@ $WindowsTable = @(
 @{ Version = 'Win1121H2';LocalCab = "Win1121H2.Cab"; URL = "https://download.microsoft.com/download/1/b/4/1b4e06e2-767a-4c9a-9899-230fe94ba530/products_Win11_20211115.cab"}
 @{ Version = 'Win1122H2';LocalCab = "Win1122H2.Cab"; URL = "https://download.microsoft.com/download/b/1/9/b19bd7fd-78c4-4f88-8c40-3e52aee143c2/products_win11_20230510.cab.cab"}
 @{ Version = 'Win1123H2';LocalCab = "Win1123H2.Cab"; URL = "https://download.microsoft.com/download/6/2/b/62b47bc5-1b28-4bfa-9422-e7a098d326d4/products_win11_20231208.cab"}
+@{ Version = 'Win1124H2';LocalCab = "Win1124H2.Cab"; URL = "https://download.microsoft.com/download/6/2/b/62b47bc5-1b28-4bfa-9422-e7a098d326d4/products_Win11_20240916.cab"}
+
 )
 
 
@@ -135,7 +139,7 @@ $x64ESDInfo = $x64ESDInfo | Where-Object {$_.Edition -eq "Professional" -or $_.E
 
 $ARM64ESDInfo = $UniqueESDInfo | Where-Object {$_.Architecture -eq "ARM64"}
 $ARM64ESDInfo = $ARM64ESDInfo | Where-Object {$_.Edition -eq "Professional" -or $_.Edition -eq "Education" -or $_.Edition -eq "Enterprise" -or $_.Edition -eq "Professional" -or $_.Edition -eq "HomePremium"}
-$ARM64ESDInfo = $ARM64ESDInfo | Where-Object {$_.FileName -match '19045' -or $_.FileName -match '22631'}
+#$ARM64ESDInfo = $ARM64ESDInfo | Where-Object {$_.FileName -match '19045' -or $_.FileName -match '22631'}
 
 Import-Module -Name OSD -Force
 #=================================================
@@ -209,6 +213,7 @@ foreach ($Result in $Results) {
     if ($Result.Build -match "22000"){$Result.ReleaseID = "21H2"}
     if ($Result.Build -match "22621"){$Result.ReleaseID = "22H2"}
     if ($Result.Build -match "22631"){$Result.ReleaseID = "23H2"}
+    if ($Result.Build -match "26100"){$Result.ReleaseID = "24H2"}
     
     #$Result.ReleaseID = (($Result.FileName).Split(".")[3]).Split("_")[0] #worked on some, not others
 
@@ -397,7 +402,8 @@ foreach ($Result in $ARMResults) {
     if ($Result.Build -match "22000"){$Result.ReleaseID = "21H2"}
     if ($Result.Build -match "22621"){$Result.ReleaseID = "22H2"}
     if ($Result.Build -match "22631"){$Result.ReleaseID = "23H2"}
-    
+    if ($Result.Build -match "26100"){$Result.ReleaseID = "24H2"}
+
     #$Result.ReleaseID = (($Result.FileName).Split(".")[3]).Split("_")[0] #worked on some, not others
 
     #=================================================

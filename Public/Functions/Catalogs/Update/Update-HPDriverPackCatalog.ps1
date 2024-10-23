@@ -25,7 +25,8 @@ function Update-HPDriverPackCatalog {
     #   Custom Defaaults
     #=================================================
     $OnlineCatalogName = 'HPClientDriverPackCatalog.xml'
-    $OnlineCatalogUri = 'http://ftp.hp.com/pub/caps-softpaq/cmit/HPClientDriverPackCatalog.cab'
+    #$OnlineCatalogUri = 'http://ftp.hp.com/pub/caps-softpaq/cmit/HPClientDriverPackCatalog.cab'
+    $OnlineCatalogUri = 'https://hpia.hpcloud.hp.com/downloads/driverpackcatalog/HPClientDriverPackCatalog.cab'
 
     $OfflineCatalogName = 'HPDriverPackCatalog.xml'
 
@@ -158,7 +159,15 @@ function Update-HPDriverPackCatalog {
     }
 
     foreach ($Item in $Results) {
-        if ($Item.OSName -match '22H2') {
+        if ($Item.OSName -match '24H2') {
+                $Item.OSReleaseId = '24H2'
+                $Item.OSBuild = '26100'
+        }
+        elseif ($Item.OSName -match '23H2') {
+            $Item.OSReleaseId = '23H2'
+            $Item.OSBuild = '22631'
+        }
+        elseif ($Item.OSName -match '22H2') {
             if ($Item.OSName -match 'Windows 10') {
                 $Item.OSReleaseId = '22H2'
                 $Item.OSBuild = '19045'

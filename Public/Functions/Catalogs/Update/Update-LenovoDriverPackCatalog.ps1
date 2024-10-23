@@ -89,7 +89,13 @@ function Update-LenovoDriverPackCatalog {
             }
 
             $OSBuild = $null
-            if ($OSReleaseId -eq '22H2') {
+            if ($OSReleaseId -eq '24H2') {
+                $OSBuild = '26100'
+            }
+            elseif ($OSReleaseId -eq '23H2') {
+                $OSBuild = '22631'
+            }
+            elseif ($OSReleaseId -eq '22H2') {
                 if ($Item.os -eq 'win10') {
                     $OSBuild = '19045'
                 }

@@ -1,0 +1,52 @@
+﻿{
+    "Title":  "2024-10 Dynamic Update for Windows 10 Version 22H2 for ARM64-based Systems (KB5045523)",
+    "Id":  "5045523",
+    "Architecture":  "ARM64",
+    "Language":  "",
+    "Hotfix":  null,
+    "Description":  "SetupUpdate:",
+    "LastModified":  "2024-10-08",
+    "Size":  "19.1 MB",
+    "Classification":  "Critical Updates",
+    "SupportedProducts":  "Windows 10 and later Dynamic Update",
+    "MSRCNumber":  null,
+    "MSRCSeverity":  "n/a",
+    "RebootBehavior":  "Can request restart",
+    "RequestsUserInput":  false,
+    "ExclusiveInstall":  "",
+    "NetworkRequired":  false,
+    "UninstallNotes":  "Not Uninstallable",
+    "UninstallSteps":  null,
+    "UpdateId":  "ec5f19bd-3e2d-428d-9cd3-c17fd9e4e540",
+    "Supersedes":  [
+                       {
+                           "KB":  "5023847",
+                           "Description":  "2023-03 Dynamic Update for Windows 10 Version 22H2 for ARM64-based Systems (KB5023847)"
+                       },
+                       {
+                           "KB":  "5019420",
+                           "Description":  "2022-10 Dynamic Update for Windows 10 Version 22H2 for ARM64-based Systems (KB5019420)"
+                       },
+                       {
+                           "KB":  "5032906",
+                           "Description":  "2023-11 Dynamic Update for Windows 10 Version 22H2 for ARM64-based Systems (KB5032906)"
+                       },
+                       {
+                           "KB":  "5020377",
+                           "Description":  "2022-11 Dynamic Update for Windows 10 Version 22H2 for ARM64-based Systems (KB5020377)"
+                       },
+                       {
+                           "KB":  "5028311",
+                           "Description":  "2023-07 Dynamic Update for Windows 10 Version 22H2 for ARM64-based Systems (KB5028311)"
+                       },
+                       {
+                           "KB":  "5019422",
+                           "Description":  "2022-10 Dynamic Update for Windows 10 Version 22H2 for ARM64-based Systems (KB5019422)"
+                       }
+                   ],
+    "SupersededBy":  {
+
+                     },
+    "Link":  "https://catalog.s.download.windowsupdate.com/d/msdownload/update/software/crup/2024/10/windows10.0-kb5045523-arm64_04993226d165531659b9439cc9db2dacc07fca19.cab",
+    "InputObject":  "2024-10"
+}

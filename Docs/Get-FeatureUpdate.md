@@ -47,7 +47,7 @@ Aliases: Name
 
 Required: False
 Position: Named
-Default value: Windows 11 22H2 x64
+Default value: Windows 11 24H2 x64
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
@@ -79,7 +79,7 @@ Aliases: Build, OSBuild, ReleaseID
 
 Required: False
 Position: Named
-Default value: 22H2
+Default value: 24H2
 Accept pipeline input: False
 Accept wildcard characters: False
 ```

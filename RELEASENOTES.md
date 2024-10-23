@@ -9,11 +9,20 @@ I know that OSDCloud has been around awhile, and has a ton of changes over the p
 Note, the changes I make won't go into effect until the next module release date, so if you see changes here, and the date is newer then the module date, then they haven't taken effect.
 
 ## Changes
-### 24.7.8 ()
+
+### 24.10.1 (not yet implemented)
+ - Updates for Windows 11 24H2 x64 and ARM64
+  - Updated Catalog JSON & XML files
+  - Updated to OSD.json file to add options for 24H2
+  - Still to do is create the index JSON file, this takes a long to to build, hopefully done by sometime tomorrow
+    - This is to support Start-OSDCloudGUIDev (which is dynamic), which is also required for ARM64, I think?
+  - Single test with Start-OSDCloudGUI with Win 11 24H2 was successful
+
+### 24.7.8 (Released to Gallary)
  - Created Function: Add-7Zip2BootImage
    - Will be used in New-OSDCloudTemplate & Edit-OSDCloudWinPE to add 7zip into your boot images.
 
-### 24.7.3 (not yet implemented)
+### 24.7.3 (Released to Gallary)
 - Added several HP Functions into OSD Module that mirror HP CMSL but work in WinPE
  - Get-HPDriverPackLatest - Will find the latest driver pack for a platform, with options for download or just URL
  - Get-HPOSSUpport - Lists the supported Windows OS's supported by a platform

@@ -233,7 +233,7 @@ function Invoke-HPIAOfflineSync {
         $OS = "win11",
         [Parameter(Mandatory=$false)]
         $Release = "23H2"
-        )
+    )
     
     #Create HPIA Repo & Sync for this Platform (EXE / Online)
     $LogFolder = "C:\OSDCloud\Logs"

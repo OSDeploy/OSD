@@ -1,0 +1,47 @@
+﻿{
+    "Title":  "2024-10 Dynamic Update for Windows 10 Version 1507 for x64-based Systems (KB5044616)",
+    "Id":  "5044616",
+    "Architecture":  "x64",
+    "Language":  "",
+    "Hotfix":  null,
+    "Description":  "ComponentUpdate:",
+    "LastModified":  "2024-10-08",
+    "Size":  "18.1 MB",
+    "Classification":  "Critical Updates",
+    "SupportedProducts":  [
+                              "Windows 10 and later Dynamic Update",
+                              "Windows Safe OS Dynamic Update"
+                          ],
+    "MSRCNumber":  null,
+    "MSRCSeverity":  "n/a",
+    "RebootBehavior":  "Can request restart",
+    "RequestsUserInput":  false,
+    "ExclusiveInstall":  "",
+    "NetworkRequired":  false,
+    "UninstallNotes":  "Not Uninstallable",
+    "UninstallSteps":  null,
+    "UpdateId":  "6c2a4908-4ec0-4255-9675-576a1413185f",
+    "Supersedes":  [
+                       {
+                           "KB":  "5031470",
+                           "Description":  "2023-10 Dynamic Update for Windows 10 Version 1507 for x64-based Systems (KB5031470)"
+                       },
+                       {
+                           "KB":  "5034233",
+                           "Description":  "2024-01 Dynamic Update for Windows 10 Version 1507 for x64-based Systems (KB5034233)"
+                       },
+                       {
+                           "KB":  "5027385",
+                           "Description":  "2023-06 Dynamic Update for Windows 10 Version 1507 for x64-based Systems (KB5027385)"
+                       },
+                       {
+                           "KB":  "5023290",
+                           "Description":  "2023-01 Dynamic Update for Windows 10 Version 1507 for x64-based Systems (KB5023290)"
+                       }
+                   ],
+    "SupersededBy":  {
+
+                     },
+    "Link":  "https://catalog.s.download.windowsupdate.com/d/msdownload/update/software/crup/2024/09/windows10.0-kb5044616-x64_a4195b5d6c800b2879257b7dd46b9930b90bb24b.cab",
+    "InputObject":  "2024-10"
+}

@@ -1,0 +1,43 @@
+﻿{
+    "Title":  "2024-10 .NET 8.0.10 Security Update for ARM64 Client (KB5045993)",
+    "Id":  "5045993",
+    "Architecture":  "ARM64",
+    "Language":  "",
+    "Hotfix":  null,
+    "Description":  "2024-10 .NET 8.0.10 Security Update for ARM64 Client (KB5045993)",
+    "LastModified":  "2024-10-08",
+    "Size":  "733.2 MB",
+    "Classification":  "Security Updates",
+    "SupportedProducts":  ".NET 8.0",
+    "MSRCNumber":  null,
+    "MSRCSeverity":  "Important",
+    "RebootBehavior":  "Can request restart",
+    "RequestsUserInput":  false,
+    "ExclusiveInstall":  "",
+    "NetworkRequired":  false,
+    "UninstallNotes":  "This software update can be removed via Add or Remove Programs in Control Panel.",
+    "UninstallSteps":  null,
+    "UpdateId":  "0d0d7443-eee7-462a-a727-636c7ca5db8d",
+    "Supersedes":  [
+                       {
+                           "KB":  "5041081",
+                           "Description":  "2024-07 .NET 8.0.7 Security Update for ARM64 Client (KB5041081)"
+                       },
+                       {
+                           "KB":  "5042132",
+                           "Description":  "2024-08 .NET 8.0.8 Security Update for ARM64 Client (KB5042132)"
+                       }
+                   ],
+    "SupersededBy":  {
+
+                     },
+    "Link":  [
+                 "https://catalog.s.download.windowsupdate.com/d/msdownload/update/software/secu/2024/10/dotnet-hosting-8.0.10-win_131ce16da6e5ff3d0af7fc6ce56776381788a04f.exe",
+                 "https://catalog.s.download.windowsupdate.com/d/msdownload/update/software/secu/2024/10/dotnet-sdk-8.0.403-win-arm64_25030b51c8ca86336db41a2f72c539edc8019d9b.exe",
+                 "https://catalog.s.download.windowsupdate.com/d/msdownload/update/software/secu/2024/10/dotnet-runtime-8.0.10-win-arm64_242fcbd29d987e3c05f2fb069e979d86835c3f13.exe",
+                 "https://catalog.s.download.windowsupdate.com/d/msdownload/update/software/secu/2024/10/dotnet-sdk-8.0.110-win-arm64_dc542505946d40ef8414350b1ef4f8bee746c051.exe",
+                 "https://catalog.s.download.windowsupdate.com/d/msdownload/update/software/secu/2024/10/dotnet-sdk-8.0.306-win-arm64_0fdf4e150440129e2e205e16eb43ed0e5b2f446d.exe",
+                 "https://catalog.s.download.windowsupdate.com/d/msdownload/update/software/secu/2024/10/aspnetcore-runtime-8.0.10-win-arm64_fffa4d63c5cf41608cae03767c7ee60019942c0f.exe"
+             ],
+    "InputObject":  "2024-10"
+}

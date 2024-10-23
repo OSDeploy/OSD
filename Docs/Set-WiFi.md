@@ -13,7 +13,7 @@ schema: 2.0.0
 ## SYNTAX
 
 ```
-Set-WiFi [[-SSID] <String>] [[-PSK] <String>]
+Set-WiFi [[-SSID] <String>] [[-PSK] <String>] [-SaveProfilePath <String>]
 ```
 
 ## DESCRIPTION
@@ -55,6 +55,21 @@ Aliases:
 
 Required: False
 Position: 0
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -SaveProfilePath
+{{ Fill SaveProfilePath Description }}
+
+```yaml
+Type: String
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
