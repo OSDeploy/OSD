@@ -82,12 +82,12 @@ function Get-OSDCloudTemplateNames {
     [System.Array]$Results = 'default'
     [System.Array]$Results += Get-ChildItem -Path "$env:ProgramData\OSDCloud\Templates" | Where-Object { $_.PsIsContainer -eq $true } | Select-Object -ExpandProperty Name
 
-    #region OpenOSD Compatibility
-    if (Test-Path "$env:ProgramData\OpenOSD\MyBootMedia") {
-        [System.Array]$Results += Get-ChildItem -Path "$env:ProgramData\OpenOSD\MyBootMedia" | Where-Object { $_.PsIsContainer -eq $true } | Select-Object -ExpandProperty Name
+    #region OSDeploy Compatibility
+    if (Test-Path "$env:ProgramData\OSDeploy\MyBootMedia") {
+        [System.Array]$Results += Get-ChildItem -Path "$env:ProgramData\OSDeploy\MyBootMedia" | Where-Object { $_.PsIsContainer -eq $true } | Select-Object -ExpandProperty Name
     }
-    if (Test-Path "$env:ProgramData\OpenOSD\WinPEBootMedia") {
-        [System.Array]$Results += Get-ChildItem -Path "$env:ProgramData\OpenOSD\WinPEBootMedia" | Where-Object { $_.PsIsContainer -eq $true } | Select-Object -ExpandProperty Name
+    if (Test-Path "$env:ProgramData\OSDeploy\WinPEBootMedia") {
+        [System.Array]$Results += Get-ChildItem -Path "$env:ProgramData\OSDeploy\WinPEBootMedia" | Where-Object { $_.PsIsContainer -eq $true } | Select-Object -ExpandProperty Name
     }
     #endregion
 
@@ -1073,12 +1073,12 @@ function Set-OSDCloudTemplate {
 
     #region Set Template Path
     if ($Name -ne 'default') {
-        # OpenOSD Compatibility
-        if (Test-Path "$env:ProgramData\OpenOSD\MyBootMedia\$Name") {
-            $OSDCloudTemplate = "$env:ProgramData\OpenOSD\MyBootMedia\$Name"
+        # OSDeploy Compatibility
+        if (Test-Path "$env:ProgramData\OSDeploy\MyBootMedia\$Name") {
+            $OSDCloudTemplate = "$env:ProgramData\OSDeploy\MyBootMedia\$Name"
         }
-        elseif (Test-Path "$env:ProgramData\OpenOSD\WinPEBootMedia\$Name") {
-            $OSDCloudTemplate = "$env:ProgramData\OpenOSD\WinPEBootMedia\$Name"
+        elseif (Test-Path "$env:ProgramData\OSDeploy\WinPEBootMedia\$Name") {
+            $OSDCloudTemplate = "$env:ProgramData\OSDeploy\WinPEBootMedia\$Name"
         }
         else {
             $OSDCloudTemplate = "$env:ProgramData\OSDCloud\Templates\$Name"

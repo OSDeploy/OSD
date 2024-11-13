@@ -17,7 +17,7 @@ Edit-OSDCloudWinPE [-CloudDriver <String[]>] [-StartOSDCloudGUI] [-DriverHWID <S
  [-DriverPath <String[]>] [-PSModuleCopy <String[]>] [-PSModuleInstall <String[]>] [-Startnet <String>]
  [-StartOSDCloud <String>] [-StartOSDPad <String>] [-StartPSCommand <String>] [-StartURL <String>] [-UpdateUSB]
  [-Wallpaper <FileInfo>] [-UseDefaultWallpaper] [-Brand <String>] [-WorkspacePath <String>] [-WirelessConnect]
- [-WifiProfile <FileInfo>] [-Add7Zip] [-pwsh] [<CommonParameters>]
+ [-WifiProfile <FileInfo>] [-Add7Zip] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -316,21 +316,6 @@ Accept wildcard characters: False
 
 ### -Add7Zip
 Adds 7Zip to Boot Image
-
-```yaml
-Type: SwitchParameter
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: Named
-Default value: False
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -pwsh
-Add PowerShell 7 to WinPE
 
 ```yaml
 Type: SwitchParameter

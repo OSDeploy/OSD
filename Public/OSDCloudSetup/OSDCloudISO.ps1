@@ -60,10 +60,10 @@ function New-OSDCloudISO {
         Break
     }
 
-    #region OpenOSD Compatibility
-    if (Test-Path "$WorkspacePath\OpenOSD.iso") {
-        $isoFileName = 'OpenOSD.iso'
-        $isoLabel = 'OpenOSD'
+    #region OSDeploy Compatibility
+    if (Test-Path "$WorkspacePath\OSDeploy.iso") {
+        $isoFileName = 'OSDeploy.iso'
+        $isoLabel = 'OSDeploy'
     }
     #endregion
     #=================================================

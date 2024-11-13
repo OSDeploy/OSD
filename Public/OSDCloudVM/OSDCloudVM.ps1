@@ -97,9 +97,9 @@ function New-OSDCloudVM {
         # Set VM Name
         $VmName = "$($NewOSDCloudVM.NamePrefix)$((Get-Date).ToString('yyMMddHHmmss'))"
         
-        # OpenOSD Compatibility
-        if (Test-Path (Join-Path $(Get-OSDCloudWorkspace) 'OpenOSD_NoPrompt.iso')) {
-            $DvdDrivePath = Join-Path $(Get-OSDCloudWorkspace) 'OpenOSD_NoPrompt.iso'
+        # OSDeploy Compatibility
+        if (Test-Path (Join-Path $(Get-OSDCloudWorkspace) 'OSDeploy_NoPrompt.iso')) {
+            $DvdDrivePath = Join-Path $(Get-OSDCloudWorkspace) 'OSDeploy_NoPrompt.iso'
         }
         else {
             $DvdDrivePath = Join-Path $(Get-OSDCloudWorkspace) 'OSDCloud_NoPrompt.iso'
