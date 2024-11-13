@@ -1,0 +1,98 @@
+{
+  "Title": "2024-11 Setup Dynamic Update for Windows 11 Version 22H2 for arm64-based Systems (KB5046906)",
+  "Id": "5046906",
+  "Architecture": "ARM64",
+  "Language": "",
+  "Hotfix": null,
+  "Description": "This update makes improvements to Windows setup binaries or any files that setup uses for feature updates in Windows.",
+  "LastModified": "2024-11-12",
+  "Size": "16.5 MB",
+  "Classification": "Critical Updates",
+  "SupportedProducts": "Windows 10 and later Dynamic Update",
+  "MSRCNumber": null,
+  "MSRCSeverity": "n/a",
+  "RebootBehavior": "Can request restart",
+  "RequestsUserInput": false,
+  "ExclusiveInstall": "",
+  "NetworkRequired": false,
+  "UninstallNotes": null,
+  "UninstallSteps": null,
+  "UpdateId": "a936f8e8-d75e-4a2e-a590-e38db87635cd",
+  "Supersedes": [
+    {
+      "KB": "5033243",
+      "Description": "2023-11 Setup Dynamic Update for Windows 11 Version 22H2 for arm64-based Systems (KB5033243)"
+    },
+    {
+      "KB": "5033205",
+      "Description": "2023-11 Setup Dynamic Update for Windows 11 Version 22H2 for arm64-based Systems (KB5033205)"
+    },
+    {
+      "KB": "5023360",
+      "Description": "2023-02 Setup Dynamic Update for Windows 11 Version 22H2 for arm64-based Systems (KB5023360) UUP"
+    },
+    {
+      "KB": "5031656",
+      "Description": "2023-10 Setup Dynamic Update for Windows 11 Version 22H2 for arm64-based Systems (KB5031656)"
+    },
+    {
+      "KB": "5028554",
+      "Description": "2023-07 Setup Dynamic Update for Windows 11 Version 22H2 for arm64-based Systems (KB5028554)"
+    },
+    {
+      "KB": "5028314",
+      "Description": "2023-07 Setup Dynamic Update for Windows 11 Version 22H2 for arm64-based Systems (KB5028314)"
+    },
+    {
+      "KB": "5027318",
+      "Description": "2023-06 Setup Dynamic Update for Windows 11 Version 22H2 for arm64-based Systems (KB5027318)"
+    },
+    {
+      "KB": "5030327",
+      "Description": "2023-09 Setup Dynamic Update for Windows 11 Version 22H2 for arm64-based Systems (KB5030327)"
+    },
+    {
+      "KB": "5037957",
+      "Description": "2024-05 Setup Dynamic Update for Windows 11 Version 22H2 for arm64-based Systems (KB5037957)"
+    },
+    {
+      "KB": "5047137",
+      "Description": "2024-10 Setup Dynamic Update for Windows 11 Version 22H2 for arm64-based Systems (KB5047137)"
+    },
+    {
+      "KB": "5034535",
+      "Description": "2024-01 Setup Dynamic Update for Windows 11 Version 22H2 for arm64-based Systems (KB5034535)"
+    },
+    {
+      "KB": "5019103",
+      "Description": "2022-10 Dynamic Update for Windows 11 Version 22H2 for ARM64-based Systems (KB5019103)"
+    },
+    {
+      "KB": "5045525",
+      "Description": "2024-10 Setup Dynamic Update for Windows 11 Version 22H2 for arm64-based Systems (KB5045525)"
+    },
+    {
+      "KB": "5016877",
+      "Description": "2022-09 Dynamic Update for Windows 11 Version 22H2 for ARM64-based Systems (KB5016877)"
+    },
+    {
+      "KB": "5021310",
+      "Description": "2022-11 Dynamic Update for Windows 11 Version 22H2 for ARM64-based Systems (KB5021310)"
+    },
+    {
+      "KB": "5017590",
+      "Description": "2022-09 Dynamic Update for Windows 11 Version 22H2 for ARM64-based Systems (KB5017590)"
+    },
+    {
+      "KB": "5022371",
+      "Description": "2023-01 Dynamic Update for Windows 11 Version 22H2 for ARM64-based Systems (KB5022371)"
+    },
+    {
+      "KB": "5023360",
+      "Description": "2023-02 Dynamic Update for Windows 11 Version 22H2 for ARM64-based Systems (KB5023360)"
+    }
+  ],
+  "SupersededBy": null,
+  "Link": "https://catalog.sf.dl.delivery.mp.microsoft.com/filestreamingservice/files/5b4f7b4d-87a7-4716-9de8-9b830fb50f56/public/windows11.0-kb5046906-arm64_2410f93098a7a8460e514df47c98e8f9ccce89a3.cab",
+  "InputObject": "2024-11"
+}

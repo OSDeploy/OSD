@@ -1,0 +1,45 @@
+{
+  "Title": "2024-11 Safe OS Dynamic Update for Microsoft server operating system version 23H2 for x64-based Systems (KB5046909)",
+  "Id": "5046909",
+  "Architecture": "x64",
+  "Language": "",
+  "Hotfix": null,
+  "Description": "This update makes improvements to the Windows Recovery Environment (WinRE) for Microsoft server operating system version 23H2.",
+  "LastModified": "2024-11-12",
+  "Size": "699 KB",
+  "Classification": "Critical Updates",
+  "SupportedProducts": [
+    "Windows Safe OS Dynamic Update",
+    "Windows 10 and later Dynamic Update"
+  ],
+  "MSRCNumber": null,
+  "MSRCSeverity": "n/a",
+  "RebootBehavior": "Can request restart",
+  "RequestsUserInput": false,
+  "ExclusiveInstall": "",
+  "NetworkRequired": false,
+  "UninstallNotes": null,
+  "UninstallSteps": null,
+  "UpdateId": "507d5458-fd2c-490b-93cc-f7fc30546029",
+  "Supersedes": [
+    {
+      "KB": "5034229",
+      "Description": "2024-01 Safe OS Dynamic Update for Microsoft server operating system version 23H2 for x64-based Systems (KB5034229)"
+    },
+    {
+      "KB": "5037065",
+      "Description": "2024-04 Safe OS Dynamic Update for Microsoft server operating system version 23H2 for x64-based Systems (KB5037065)"
+    },
+    {
+      "KB": "5044402",
+      "Description": "2024-10 Safe OS Dynamic Update for Microsoft server operating system version 23H2 for x64-based Systems (KB5044402)"
+    },
+    {
+      "KB": "5041593",
+      "Description": "2024-08 Safe OS Dynamic Update for Microsoft server operating system version 23H2 for x64-based Systems (KB5041593)"
+    }
+  ],
+  "SupersededBy": null,
+  "Link": "https://catalog.sf.dl.delivery.mp.microsoft.com/filestreamingservice/files/1d5105f5-67ab-44d5-9815-d356d20fa5f8/public/windows11.0-kb5046909-x64_051f8c0140cac2af28901ff399428a16716f1074.cab",
+  "InputObject": "2024-11"
+}

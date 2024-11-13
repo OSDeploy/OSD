@@ -1,0 +1,41 @@
+{
+  "Title": "2024-11 .NET 8.0.11 Update for ARM64 Client (KB5047489)",
+  "Id": "5047489",
+  "Architecture": "ARM64",
+  "Language": "",
+  "Hotfix": null,
+  "Description": "2024-11 .NET 8.0.11 Update for ARM64 Client (KB5047489)",
+  "LastModified": "2024-11-12",
+  "Size": "730.8 MB",
+  "Classification": "Critical Updates",
+  "SupportedProducts": ".NET 8.0",
+  "MSRCNumber": null,
+  "MSRCSeverity": "n/a",
+  "RebootBehavior": "Can request restart",
+  "RequestsUserInput": false,
+  "ExclusiveInstall": "",
+  "NetworkRequired": false,
+  "UninstallNotes": "This software update can be removed via Add or Remove Programs in Control Panel.",
+  "UninstallSteps": null,
+  "UpdateId": "d561a406-6c6e-4606-ac56-c96fc12e4068",
+  "Supersedes": [
+    {
+      "KB": "5045993",
+      "Description": "2024-10 .NET 8.0.10 Security Update for ARM64 Client (KB5045993)"
+    },
+    {
+      "KB": "5042132",
+      "Description": "2024-08 .NET 8.0.8 Security Update for ARM64 Client (KB5042132)"
+    }
+  ],
+  "SupersededBy": null,
+  "Link": [
+    "https://catalog.s.download.windowsupdate.com/d/msdownload/update/software/crup/2024/11/dotnet-runtime-8.0.11-win-arm64_cb5bbc0cb57986f481002666e8a9b3c20ad1e9c9.exe",
+    "https://catalog.s.download.windowsupdate.com/d/msdownload/update/software/crup/2024/11/dotnet-sdk-8.0.111-win-arm64_e701bd2ca0bf9db1c40177afe38e2cf9fb31e04a.exe",
+    "https://catalog.s.download.windowsupdate.com/d/msdownload/update/software/crup/2024/11/dotnet-sdk-8.0.307-win-arm64_15f4df263b2770ec1d21b5d915ca396fe21c55e6.exe",
+    "https://catalog.s.download.windowsupdate.com/d/msdownload/update/software/crup/2024/11/dotnet-hosting-8.0.11-win_ef020b965a8d13416afbf2db2573060a2d429078.exe",
+    "https://catalog.s.download.windowsupdate.com/d/msdownload/update/software/crup/2024/11/aspnetcore-runtime-8.0.11-win-arm64_a5f7427c1851065f6d8456a9537d2d2c8903c761.exe",
+    "https://catalog.s.download.windowsupdate.com/d/msdownload/update/software/crup/2024/11/dotnet-sdk-8.0.404-win-arm64_a53e764992e12065775fe2c9cb7923b86c941098.exe"
+  ],
+  "InputObject": "2024-11"
+}

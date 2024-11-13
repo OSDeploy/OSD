@@ -1,0 +1,78 @@
+{
+  "Title": "2024-11 Cumulative Update for Microsoft server operating system version 23H2 for x64-based Systems (KB5046618)",
+  "Id": "5046618",
+  "Architecture": "x64",
+  "Language": "",
+  "Hotfix": null,
+  "Description": "Install this update to resolve issues in Microsoft server operating system, version 23H2. For a complete listing of the issues that are included in this update, see the associated Microsoft Knowledge Base article for more information. After you install this item, you may have to restart your computer.",
+  "LastModified": "2024-11-12",
+  "Size": "184.4 MB",
+  "Classification": "Security Updates",
+  "SupportedProducts": "Microsoft Server Operating System-23H2",
+  "MSRCNumber": null,
+  "MSRCSeverity": "Critical",
+  "RebootBehavior": "Can request restart",
+  "RequestsUserInput": false,
+  "ExclusiveInstall": "",
+  "NetworkRequired": false,
+  "UninstallNotes": null,
+  "UninstallSteps": null,
+  "UpdateId": "e6e9e1c0-b660-407f-8ab1-e135d85d0431",
+  "Supersedes": [
+    {
+      "KB": "5036910",
+      "Description": "2024-04 Cumulative Update for Microsoft server operating system version 23H2 for x64-based Systems (KB5036910)"
+    },
+    {
+      "KB": "5031373",
+      "Description": "2023-10 Cumulative Update for Microsoft server operating system version 23H2 for x64-based Systems (KB5031373)"
+    },
+    {
+      "KB": "5037781",
+      "Description": "2024-05 Cumulative Update for Microsoft server operating system version 23H2 for x64-based Systems (KB5037781)"
+    },
+    {
+      "KB": "5033383",
+      "Description": "2023-12 Cumulative Update for Microsoft server operating system version 23H2 for x64-based Systems (KB5033383)"
+    },
+    {
+      "KB": "5034769",
+      "Description": "2024-02 Cumulative Update for Microsoft server operating system version 23H2 for x64-based Systems (KB5034769)"
+    },
+    {
+      "KB": "5035856",
+      "Description": "2024-03 Cumulative Update for Microsoft server operating system version 23H2 for x64-based Systems (KB5035856)"
+    },
+    {
+      "KB": "5032202",
+      "Description": "2023-11 Cumulative Update for Microsoft server operating system version 23H2 for x64-based Systems (KB5032202)"
+    },
+    {
+      "KB": "5034130",
+      "Description": "2024-01 Cumulative Update for Microsoft server operating system version 23H2 for x64-based Systems (KB5034130)"
+    },
+    {
+      "KB": "5041573",
+      "Description": "2024-08 Cumulative Update for Microsoft server operating system version 23H2 for x64-based Systems (KB5041573)"
+    },
+    {
+      "KB": "5040438",
+      "Description": "2024-07 Cumulative Update for Microsoft server operating system version 23H2 for x64-based Systems (KB5040438)"
+    },
+    {
+      "KB": "5043055",
+      "Description": "2024-09 Cumulative Update for Microsoft server operating system version 23H2 for x64-based Systems (KB5043055)"
+    },
+    {
+      "KB": "5044288",
+      "Description": "2024-10 Cumulative Update for Microsoft server operating system version 23H2 for x64-based Systems (KB5044288)"
+    },
+    {
+      "KB": "5039236",
+      "Description": "2024-06 Cumulative Update for Microsoft server operating system version 23H2 for x64-based Systems (KB5039236)"
+    }
+  ],
+  "SupersededBy": null,
+  "Link": "https://catalog.sf.dl.delivery.mp.microsoft.com/filestreamingservice/files/bce774ce-b4c6-4b71-829d-ecdf97973810/public/windows11.0-kb5046618-x64_8fe8e9224413d44c56946c3a709d96f2cda8b640.msu",
+  "InputObject": "2024-11"
+}

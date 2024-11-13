@@ -1,0 +1,28 @@
+{
+  "Title": "2024-11 Cumulative Update for .NET Framework 3.5 and 4.8.1 for Windows 11, version 22H2 for ARM64 (KB5045935)",
+  "Id": "5045935",
+  "Architecture": "ARM64",
+  "Language": "",
+  "Hotfix": null,
+  "Description": "Install this update to resolve issues in Windows. For a complete listing of the issues that are included in this update, see the associated Microsoft Knowledge Base article for more information. After you install this item, you may have to restart your computer.",
+  "LastModified": "2024-11-12",
+  "Size": "88.8 MB",
+  "Classification": "Updates",
+  "SupportedProducts": "Windows 11",
+  "MSRCNumber": null,
+  "MSRCSeverity": "n/a",
+  "RebootBehavior": "Can request restart",
+  "RequestsUserInput": false,
+  "ExclusiveInstall": "",
+  "NetworkRequired": false,
+  "UninstallNotes": "This software update can be removed by selecting View installed updates in the Programs and Features Control Panel.",
+  "UninstallSteps": null,
+  "UpdateId": "419b3d22-4b56-41c8-b29b-a1ad52a05ba3",
+  "Supersedes": {
+    "KB": "5042099",
+    "Description": "2024-08 Cumulative Update for .NET Framework 3.5 and 4.8.1 for Windows 11, version 22H2 for ARM64 (KB5042099)"
+  },
+  "SupersededBy": null,
+  "Link": "https://catalog.s.download.windowsupdate.com/c/msdownload/update/software/updt/2024/09/windows11.0-kb5045935-arm64-ndp481_fe8812a4982b5c1aa5586f7d99a14de03e4deb75.msu",
+  "InputObject": "2024-11"
+}

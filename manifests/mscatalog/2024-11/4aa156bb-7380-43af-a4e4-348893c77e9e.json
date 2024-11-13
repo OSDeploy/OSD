@@ -1,0 +1,93 @@
+{
+  "Title": "2024-11 Safe OS Dynamic Update for Windows 11 Version 22H2 for x64-based Systems (KB5046915)",
+  "Id": "5046915",
+  "Architecture": "x64",
+  "Language": "",
+  "Hotfix": null,
+  "Description": "This update makes improvements to the Windows Recovery Environment (WinRE) for Windows.",
+  "LastModified": "2024-11-12",
+  "Size": "7.7 MB",
+  "Classification": "Critical Updates",
+  "SupportedProducts": [
+    "Windows Safe OS Dynamic Update",
+    "Windows 10 and later Dynamic Update"
+  ],
+  "MSRCNumber": null,
+  "MSRCSeverity": "n/a",
+  "RebootBehavior": "Can request restart",
+  "RequestsUserInput": false,
+  "ExclusiveInstall": "",
+  "NetworkRequired": false,
+  "UninstallNotes": null,
+  "UninstallSteps": null,
+  "UpdateId": "4aa156bb-7380-43af-a4e4-348893c77e9e",
+  "Supersedes": [
+    {
+      "KB": "5022609",
+      "Description": "2023-01 Safe OS Dynamic Update for Windows 11 Version 22H2 for x64-based Systems (KB5022609) UUP"
+    },
+    {
+      "KB": "5031476",
+      "Description": "2023-10 Safe OS Dynamic Update for Windows 11 Version 22H2 for x64-based Systems (KB5031476)"
+    },
+    {
+      "KB": "5034234",
+      "Description": "2024-01 Safe OS Dynamic Update for Windows 11 Version 22H2 for x64-based Systems (KB5034234)"
+    },
+    {
+      "KB": "5031894",
+      "Description": "2023-10 Safe OS Dynamic Update for Windows 11 Version 22H2 for x64-based Systems (KB5031894)"
+    },
+    {
+      "KB": "5027573",
+      "Description": "2023-06 Safe OS Dynamic Update for Windows 11 Version 22H2 for x64-based Systems (KB5027573)"
+    },
+    {
+      "KB": "5023527",
+      "Description": "2023-02 Safe OS Dynamic Update for Windows 11 Version 22H2 for x64-based Systems (KB5023527) UUP"
+    },
+    {
+      "KB": "5028495",
+      "Description": "2023-07 Safe OS Dynamic Update for Windows 11 Version 22H2 for x64-based Systems (KB5028495)"
+    },
+    {
+      "KB": "5029863",
+      "Description": "2023-08 Safe OS Dynamic Update for Windows 11 Version 22H2 for x64-based Systems (KB5029863)"
+    },
+    {
+      "KB": "5037739",
+      "Description": "2024-04 Safe OS Dynamic Update for Windows 11 Version 22H2 for x64-based Systems (KB5037739)"
+    },
+    {
+      "KB": "5036567",
+      "Description": "2024-03 Safe OS Dynamic Update for Windows 11 Version 22H2 for x64-based Systems (KB5036567)"
+    },
+    {
+      "KB": "5022609",
+      "Description": "2023-01 Dynamic Update for Windows 11 Version 22H2 for x64-based Systems (KB5022609)"
+    },
+    {
+      "KB": "5017160",
+      "Description": "2022-09 Dynamic Update for Windows 11 Version 22H2 for x64-based Systems (KB5017160)"
+    },
+    {
+      "KB": "5044617",
+      "Description": "2024-10 Safe OS Dynamic Update for Windows 11 Version 22H2 for x64-based Systems (KB5044617)"
+    },
+    {
+      "KB": "5023527",
+      "Description": "2023-02 Dynamic Update for Windows 11 Version 22H2 for x64-based Systems (KB5023527)"
+    },
+    {
+      "KB": "5021041",
+      "Description": "2022-11 Dynamic Update for Windows 11 Version 22H2 for x64-based Systems (KB5021041)"
+    },
+    {
+      "KB": "5018924",
+      "Description": "2022-10 Dynamic Update for Windows 11 Version 22H2 for x64-based Systems (KB5018924)"
+    }
+  ],
+  "SupersededBy": null,
+  "Link": "https://catalog.sf.dl.delivery.mp.microsoft.com/filestreamingservice/files/176d2b23-ce71-495c-aa68-68a288461cde/public/windows11.0-kb5046915-x64_bad425837da1e63557bf3a96c73fe2e793fc8b7a.cab",
+  "InputObject": "2024-11"
+}

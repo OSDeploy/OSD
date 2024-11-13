@@ -1,0 +1,53 @@
+{
+  "Title": "2024-11 Safe OS Dynamic Update for Windows 11 Version 23H2 for arm64-based Systems (KB5046915)",
+  "Id": "5046915",
+  "Architecture": "ARM64",
+  "Language": "",
+  "Hotfix": null,
+  "Description": "This update makes improvements to the Windows Recovery Environment (WinRE) for Windows.",
+  "LastModified": "2024-11-12",
+  "Size": "10.8 MB",
+  "Classification": "Critical Updates",
+  "SupportedProducts": [
+    "Windows Safe OS Dynamic Update",
+    "Windows 10 and later Dynamic Update"
+  ],
+  "MSRCNumber": null,
+  "MSRCSeverity": "n/a",
+  "RebootBehavior": "Can request restart",
+  "RequestsUserInput": false,
+  "ExclusiveInstall": "",
+  "NetworkRequired": false,
+  "UninstallNotes": null,
+  "UninstallSteps": null,
+  "UpdateId": "c5aea52d-30b8-47bd-bf83-6576a4d59520",
+  "Supersedes": [
+    {
+      "KB": "5031894",
+      "Description": "2023-10 Safe OS Dynamic Update for Windows 11 Version 23H2 for arm64-based Systems (KB5031894)"
+    },
+    {
+      "KB": "5031476",
+      "Description": "2023-10 Safe OS Dynamic Update for Windows 11 Version 23H2 for arm64-based Systems (KB5031476)"
+    },
+    {
+      "KB": "5034234",
+      "Description": "2024-01 Safe OS Dynamic Update for Windows 11 Version 23H2 for arm64-based Systems (KB5034234)"
+    },
+    {
+      "KB": "5036567",
+      "Description": "2024-03 Safe OS Dynamic Update for Windows 11 Version 23H2 for arm64-based Systems (KB5036567)"
+    },
+    {
+      "KB": "5037739",
+      "Description": "2024-04 Safe OS Dynamic Update for Windows 11 Version 23H2 for arm64-based Systems (KB5037739)"
+    },
+    {
+      "KB": "5044617",
+      "Description": "2024-10 Safe OS Dynamic Update for Windows 11 Version 23H2 for arm64-based Systems (KB5044617)"
+    }
+  ],
+  "SupersededBy": null,
+  "Link": "https://catalog.sf.dl.delivery.mp.microsoft.com/filestreamingservice/files/db1d6426-0d04-4e6a-a6d5-9c7f16c57de6/public/windows11.0-kb5046915-arm64_2bea47049f49211a1558e03039a4d1f0505150db.cab",
+  "InputObject": "2024-11"
+}

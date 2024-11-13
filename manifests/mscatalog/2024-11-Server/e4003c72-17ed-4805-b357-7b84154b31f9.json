@@ -1,0 +1,31 @@
+{
+  "Title": "2024-11 Cumulative Update for .NET Framework 3.5, 4.8 and 4.8.1 for Microsoft server operating system, version 22H2 for x64 (KB5046539)",
+  "Id": "5046539",
+  "Architecture": "x64",
+  "Language": "",
+  "Hotfix": null,
+  "Description": "Install this update to resolve issues in Windows. For a complete listing of the issues that are included in this update, see the associated Microsoft Knowledge Base article for more information. After you install this item, you may have to restart your computer.",
+  "LastModified": "2024-11-12",
+  "Size": "144.2 MB",
+  "Classification": "Updates",
+  "SupportedProducts": "Microsoft Server Operating System-22H2",
+  "MSRCNumber": null,
+  "MSRCSeverity": "n/a",
+  "RebootBehavior": "Can request restart",
+  "RequestsUserInput": false,
+  "ExclusiveInstall": "",
+  "NetworkRequired": false,
+  "UninstallNotes": "This software update can be removed by selecting View installed updates in the Programs and Features Control Panel.",
+  "UninstallSteps": null,
+  "UpdateId": "e4003c72-17ed-4805-b357-7b84154b31f9",
+  "Supersedes": {
+    "KB": "5042485",
+    "Description": "2024-08 Cumulative Update for .NET Framework 3.5, 4.8 and 4.8.1 for Microsoft server operating system, version 22H2 for x64 (KB5042485)"
+  },
+  "SupersededBy": null,
+  "Link": [
+    "https://catalog.s.download.windowsupdate.com/c/msdownload/update/software/updt/2024/10/windows10.0-kb5046265-x64-ndp48_cfcc472170dde9e73e2702f786f4f766864310e4.msu",
+    "https://catalog.s.download.windowsupdate.com/c/msdownload/update/software/updt/2024/10/windows10.0-kb5046264-x64-ndp481_1e80ccd86015f7fa036e2406579859e28beebdef.msu"
+  ],
+  "InputObject": "2024-11"
+}

@@ -1,0 +1,50 @@
+{
+  "Title": "2024-11 Dynamic Update for Microsoft server operating system, version 22H2 for x64-based Systems (KB5046907)",
+  "Id": "5046907",
+  "Architecture": "x64",
+  "Language": "",
+  "Hotfix": null,
+  "Description": "SetupUpdate:",
+  "LastModified": "2024-11-12",
+  "Size": "16.8 MB",
+  "Classification": "Critical Updates",
+  "SupportedProducts": "Windows 10 and later Dynamic Update",
+  "MSRCNumber": null,
+  "MSRCSeverity": "n/a",
+  "RebootBehavior": "Can request restart",
+  "RequestsUserInput": false,
+  "ExclusiveInstall": "",
+  "NetworkRequired": false,
+  "UninstallNotes": "Not Uninstallable",
+  "UninstallSteps": null,
+  "UpdateId": "5d2525a6-1411-4e5f-88ac-629888f557aa",
+  "Supersedes": [
+    {
+      "KB": "5019418",
+      "Description": "2022-10 Dynamic Update for Microsoft server operating system, version 22H2 for x64-based Systems (KB5019418)"
+    },
+    {
+      "KB": "5019421",
+      "Description": "2022-10 Dynamic Update for Microsoft server operating system, version 22H2 for x64-based Systems (KB5019421)"
+    },
+    {
+      "KB": "5020378",
+      "Description": "2022-11 Dynamic Update for Microsoft server operating system, version 22H2 for x64-based Systems (KB5020378)"
+    },
+    {
+      "KB": "5045526",
+      "Description": "2024-10 Dynamic Update for Microsoft server operating system, version 22H2 for x64-based Systems (KB5045526)"
+    },
+    {
+      "KB": "5037958",
+      "Description": "2024-05 Dynamic Update for Microsoft server operating system, version 22H2 for x64-based Systems (KB5037958)"
+    },
+    {
+      "KB": "5028263",
+      "Description": "2023-07 Dynamic Update for Microsoft server operating system, version 22H2 for x64-based Systems (KB5028263)"
+    }
+  ],
+  "SupersededBy": null,
+  "Link": "https://catalog.s.download.windowsupdate.com/c/msdownload/update/software/crup/2024/11/windows10.0-kb5046907-x64_af66ddfec0fe4acc218784a13a7377863092e6da.cab",
+  "InputObject": "2024-11"
+}

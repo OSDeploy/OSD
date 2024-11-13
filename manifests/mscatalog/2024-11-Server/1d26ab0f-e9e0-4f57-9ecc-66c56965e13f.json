@@ -1,0 +1,98 @@
+{
+  "Title": "2024-11 Dynamic Update for Microsoft server operating system for x64-based Systems (KB5046907)",
+  "Id": "5046907",
+  "Architecture": "x64",
+  "Language": "",
+  "Hotfix": null,
+  "Description": "SetupUpdate:",
+  "LastModified": "2024-11-12",
+  "Size": "16.8 MB",
+  "Classification": "Critical Updates",
+  "SupportedProducts": "Windows 10 and later Dynamic Update",
+  "MSRCNumber": null,
+  "MSRCSeverity": "n/a",
+  "RebootBehavior": "Can request restart",
+  "RequestsUserInput": false,
+  "ExclusiveInstall": "",
+  "NetworkRequired": false,
+  "UninstallNotes": "Not Uninstallable",
+  "UninstallSteps": null,
+  "UpdateId": "1d26ab0f-e9e0-4f57-9ecc-66c56965e13f",
+  "Supersedes": [
+    {
+      "KB": "5010454",
+      "Description": "2022-02 Dynamic Update for Microsoft server operating system for x64-based Systems (KB5010454)"
+    },
+    {
+      "KB": "5007943",
+      "Description": "2021-11 Dynamic Update for Microsoft server operating system for x64-based Systems (KB5007943)"
+    },
+    {
+      "KB": "5045526",
+      "Description": "2024-10 Dynamic Update for Microsoft server operating system for x64-based Systems (KB5045526)"
+    },
+    {
+      "KB": "5005696",
+      "Description": "2021-09 Dynamic Update for Microsoft server operating system for x64-based Systems (KB5005696)"
+    },
+    {
+      "KB": "5006874",
+      "Description": "2021-10 Dynamic Update for Microsoft server operating system for x64-based Systems (KB5006874)"
+    },
+    {
+      "KB": "5037958",
+      "Description": "2024-05 Dynamic Update for Microsoft server operating system for x64-based Systems (KB5037958)"
+    },
+    {
+      "KB": "5011653",
+      "Description": "2022-03 Dynamic Update for Microsoft server operating system for x64-based Systems (KB5011653)"
+    },
+    {
+      "KB": "5012799",
+      "Description": "2022-04 Dynamic Update for Microsoft server operating system for x64-based Systems (KB5012799)"
+    },
+    {
+      "KB": "5014038",
+      "Description": "2022-05 Dynamic Update for Microsoft server operating system for x64-based Systems (KB5014038)"
+    },
+    {
+      "KB": "5014674",
+      "Description": "2022-06 Dynamic Update for Microsoft server operating system for x64-based Systems (KB5014674)"
+    },
+    {
+      "KB": "5015900",
+      "Description": "2022-07 Dynamic Update for Microsoft server operating system for x64-based Systems (KB5015900)"
+    },
+    {
+      "KB": "5017432",
+      "Description": "2022-09 Dynamic Update for Microsoft server operating system for x64-based Systems (KB5017432)"
+    },
+    {
+      "KB": "5019418",
+      "Description": "2022-10 Dynamic Update for Microsoft server operating system for x64-based Systems (KB5019418)"
+    },
+    {
+      "KB": "5019421",
+      "Description": "2022-10 Dynamic Update for Microsoft server operating system for x64-based Systems (KB5019421)"
+    },
+    {
+      "KB": "5009340",
+      "Description": "2021-12 Dynamic Update for Microsoft server operating system for x64-based Systems (KB5009340)"
+    },
+    {
+      "KB": "5028263",
+      "Description": "2023-07 Dynamic Update for Microsoft server operating system for x64-based Systems (KB5028263)"
+    },
+    {
+      "KB": "5016774",
+      "Description": "2022-08 Dynamic Update for Microsoft server operating system for x64-based Systems (KB5016774)"
+    },
+    {
+      "KB": "5020378",
+      "Description": "2022-11 Dynamic Update for Microsoft server operating system for x64-based Systems (KB5020378)"
+    }
+  ],
+  "SupersededBy": null,
+  "Link": "https://catalog.s.download.windowsupdate.com/c/msdownload/update/software/crup/2024/11/windows10.0-kb5046907-x64_af66ddfec0fe4acc218784a13a7377863092e6da.cab",
+  "InputObject": "2024-11"
+}

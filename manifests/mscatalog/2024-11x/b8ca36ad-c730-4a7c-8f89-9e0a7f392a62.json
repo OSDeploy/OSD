@@ -1,0 +1,53 @@
+{
+  "Title": "2024-11 Dynamic Update for Windows 10 Version 22H2 for x64-based Systems (KB5046913)",
+  "Id": "5046913",
+  "Architecture": "x64",
+  "Language": "",
+  "Hotfix": null,
+  "Description": "ComponentUpdate:",
+  "LastModified": "2024-11-12",
+  "Size": "8.3 MB",
+  "Classification": "Critical Updates",
+  "SupportedProducts": [
+    "Windows 10 and later Dynamic Update",
+    "Windows Safe OS Dynamic Update"
+  ],
+  "MSRCNumber": null,
+  "MSRCSeverity": "n/a",
+  "RebootBehavior": "Can request restart",
+  "RequestsUserInput": false,
+  "ExclusiveInstall": "",
+  "NetworkRequired": false,
+  "UninstallNotes": "Not Uninstallable",
+  "UninstallSteps": null,
+  "UpdateId": "b8ca36ad-c730-4a7c-8f89-9e0a7f392a62",
+  "Supersedes": [
+    {
+      "KB": "5027389",
+      "Description": "2023-06 Dynamic Update for Windows 10 Version 22H2 for x64-based Systems (KB5027389)"
+    },
+    {
+      "KB": "5044615",
+      "Description": "2024-10 Dynamic Update for Windows 10 Version 22H2 for x64-based Systems (KB5044615)"
+    },
+    {
+      "KB": "5012419",
+      "Description": "2022-10 Dynamic Update for Windows 10 Version 22H2 for x64-based Systems (KB5012419)"
+    },
+    {
+      "KB": "5031474",
+      "Description": "2023-10 Dynamic Update for Windows 10 Version 22H2 for x64-based Systems (KB5031474)"
+    },
+    {
+      "KB": "5034232",
+      "Description": "2024-01 Dynamic Update for Windows 10 Version 22H2 for x64-based Systems (KB5034232)"
+    },
+    {
+      "KB": "5021043",
+      "Description": "2022-11 Dynamic Update for Windows 10 Version 22H2 for x64-based Systems (KB5021043)"
+    }
+  ],
+  "SupersededBy": null,
+  "Link": "https://catalog.s.download.windowsupdate.com/c/msdownload/update/software/crup/2024/11/windows10.0-kb5046913-x64_bfdc3bbb484ea921fb8eb68b18d81f1ab4c72340.cab",
+  "InputObject": "2024-11"
+}

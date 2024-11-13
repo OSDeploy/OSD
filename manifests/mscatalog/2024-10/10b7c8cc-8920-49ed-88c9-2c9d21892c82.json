@@ -1,0 +1,50 @@
+{
+  "Title": "2024-10 Setup Dynamic Update for Windows 11 Version 24H2 for arm64-based Systems (KB5046339)",
+  "Id": "5046339",
+  "Architecture": "ARM64",
+  "Language": "",
+  "Hotfix": null,
+  "Description": "This update makes improvements to Windows setup binaries or any files that setup uses for feature updates in Windows.",
+  "LastModified": "2024-10-24",
+  "Size": "7.8 MB",
+  "Classification": "Critical Updates",
+  "SupportedProducts": "Windows 10 and later Dynamic Update",
+  "MSRCNumber": null,
+  "MSRCSeverity": "n/a",
+  "RebootBehavior": "Can request restart",
+  "RequestsUserInput": false,
+  "ExclusiveInstall": "",
+  "NetworkRequired": false,
+  "UninstallNotes": null,
+  "UninstallSteps": null,
+  "UpdateId": "10b7c8cc-8920-49ed-88c9-2c9d21892c82",
+  "Supersedes": [
+    {
+      "KB": "5044075",
+      "Description": "2024-09 Setup Dynamic Update for Windows 11 Version 24H2 for arm64-based Systems (KB5044075)"
+    },
+    {
+      "KB": "5041178",
+      "Description": "2024-07 Setup Dynamic Update for Windows 11 Version 24H2 for arm64-based Systems (KB5041178)"
+    },
+    {
+      "KB": "5039448",
+      "Description": "2024-06 Setup Dynamic Update for Windows 11 Version 24H2 for arm64-based Systems (KB5039448)"
+    },
+    {
+      "KB": "5042580",
+      "Description": "2024-08 Setup Dynamic Update for Windows 11 Version 24H2 for arm64-based Systems (KB5042580)"
+    },
+    {
+      "KB": "5043353",
+      "Description": "2024-09 Setup Dynamic Update for Windows 11 Version 24H2 for arm64-based Systems (KB5043353)"
+    },
+    {
+      "KB": "5045520",
+      "Description": "2024-10 Setup Dynamic Update for Windows 11 Version 24H2 for arm64-based Systems (KB5045520)"
+    }
+  ],
+  "SupersededBy": null,
+  "Link": "https://catalog.sf.dl.delivery.mp.microsoft.com/filestreamingservice/files/387cf724-3c70-441a-b193-cd36edf5fb4f/public/windows11.0-kb5046339-arm64_9adf3947ad7f2601cd29f0cf36e656db214a24fd.cab",
+  "InputObject": "2024-10"
+}

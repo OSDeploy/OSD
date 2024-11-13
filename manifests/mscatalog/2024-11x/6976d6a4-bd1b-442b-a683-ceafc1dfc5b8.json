@@ -1,0 +1,28 @@
+{
+  "Title": "2024-11 Cumulative Update for .NET Framework 3.5 and 4.8 for Windows 10 Version 22H2 for x64 (KB5045936)",
+  "Id": "5045936",
+  "Architecture": "x64",
+  "Language": "",
+  "Hotfix": null,
+  "Description": "Install this update to resolve issues in Windows. For a complete listing of the issues that are included in this update, see the associated Microsoft Knowledge Base article for more information. After you install this item, you may have to restart your computer.",
+  "LastModified": "2024-11-12",
+  "Size": "76.2 MB",
+  "Classification": "Updates",
+  "SupportedProducts": [
+    "Windows 10",
+    "version 1903 and later"
+  ],
+  "MSRCNumber": null,
+  "MSRCSeverity": "n/a",
+  "RebootBehavior": "Can request restart",
+  "RequestsUserInput": false,
+  "ExclusiveInstall": "",
+  "NetworkRequired": false,
+  "UninstallNotes": "This software update can be removed by selecting View installed updates in the Programs and Features Control Panel.",
+  "UninstallSteps": null,
+  "UpdateId": "6976d6a4-bd1b-442b-a683-ceafc1dfc5b8",
+  "Supersedes": null,
+  "SupersededBy": null,
+  "Link": "https://catalog.s.download.windowsupdate.com/c/msdownload/update/software/updt/2024/09/windows10.0-kb5045936-x64-ndp48_0ab3fa5252793a95b6f31dea879f837569f751d6.msu",
+  "InputObject": "2024-11"
+}

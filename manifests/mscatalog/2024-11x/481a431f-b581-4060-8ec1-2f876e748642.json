@@ -1,0 +1,49 @@
+{
+  "Title": "2024-11 Dynamic Update for Windows 10 Version 1507 for x64-based Systems (KB5046914)",
+  "Id": "5046914",
+  "Architecture": "x64",
+  "Language": "",
+  "Hotfix": null,
+  "Description": "ComponentUpdate:",
+  "LastModified": "2024-11-12",
+  "Size": "15.6 MB",
+  "Classification": "Critical Updates",
+  "SupportedProducts": [
+    "Windows 10 and later Dynamic Update",
+    "Windows Safe OS Dynamic Update"
+  ],
+  "MSRCNumber": null,
+  "MSRCSeverity": "n/a",
+  "RebootBehavior": "Can request restart",
+  "RequestsUserInput": false,
+  "ExclusiveInstall": "",
+  "NetworkRequired": false,
+  "UninstallNotes": "Not Uninstallable",
+  "UninstallSteps": null,
+  "UpdateId": "481a431f-b581-4060-8ec1-2f876e748642",
+  "Supersedes": [
+    {
+      "KB": "5044616",
+      "Description": "2024-10 Dynamic Update for Windows 10 Version 1507 for x64-based Systems (KB5044616)"
+    },
+    {
+      "KB": "5023290",
+      "Description": "2023-01 Dynamic Update for Windows 10 Version 1507 for x64-based Systems (KB5023290)"
+    },
+    {
+      "KB": "5031470",
+      "Description": "2023-10 Dynamic Update for Windows 10 Version 1507 for x64-based Systems (KB5031470)"
+    },
+    {
+      "KB": "5027385",
+      "Description": "2023-06 Dynamic Update for Windows 10 Version 1507 for x64-based Systems (KB5027385)"
+    },
+    {
+      "KB": "5034233",
+      "Description": "2024-01 Dynamic Update for Windows 10 Version 1507 for x64-based Systems (KB5034233)"
+    }
+  ],
+  "SupersededBy": null,
+  "Link": "https://catalog.s.download.windowsupdate.com/d/msdownload/update/software/crup/2024/11/windows10.0-kb5046914-x64_5dc857c0f285f176a72f8140432b7553458b2900.cab",
+  "InputObject": "2024-11"
+}
