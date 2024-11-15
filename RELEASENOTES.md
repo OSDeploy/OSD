@@ -16,6 +16,9 @@ Note, the changes I make won't go into effect until the next module release date
   - As part of this, built a new Index Map JSON/XML files in the Catalog folders. Will eventually go back and cleanup the no longer used Index files 
   - Still considering just dropping the Index Field in the GUI, and have it dynamically figured out in the main OSDCLOUD function script
 
+### 24.11.14 (not yet implemented)
+ - Updated the 24H2 Catalog file with the latest release to public available from MS on 24.10.04
+
 ### 24.10.1 (Released to Gallary)
  - Updates for Windows 11 24H2 x64 and ARM64
   - Updated Catalog JSON & XML files
