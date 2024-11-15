@@ -14,6 +14,7 @@ Note, the changes I make won't go into effect until the next module release date
  - Several minor changes over the past month, including a bug fix - see issues closed over the past month
  - Completely revamped the index lookup in the DEV GUI - Modified to use a generic Index Map for all Build Versions.  This will greatly simplify the method no longer requiring me to build a new Index Map for each build.
   - As part of this, built a new Index Map JSON/XML files in the Catalog folders. Will eventually go back and cleanup the no longer used Index files 
+  - Still considering just dropping the Index Field in the GUI, and have it dynamically figured out in the main OSDCLOUD function script
 
 ### 24.10.1 (Released to Gallary)
  - Updates for Windows 11 24H2 x64 and ARM64
