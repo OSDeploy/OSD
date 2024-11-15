@@ -1,3 +1,12 @@
+<# Dev Version of GUI
+
+Change Log Start Date 24.11.15 - At this point, there is already a big diviation from the Production version of the GUI.
+
+Biggest change is that the Indexes are dynamically added to the GUI based on the Operating System Index Map. The other GUI assumes Indexes are static (which is wrong on some languages).
+
+24.11.15 - Modified to use a generic Index Map for all Build Versions.  This will greatly simplify the method no longer requiring me to build a new Index Map for each build.
+
+#>
 # PoSHPF - Version 1.2
 # Grab all resources (MahApps, etc), all XAML files, and any potential static resources
 $Global:resources = Get-ChildItem -Path "$PSScriptRoot\Resources\*.dll" -ErrorAction SilentlyContinue
@@ -393,9 +402,11 @@ else {
 #================================================
 if ($Arch -match 'ARM64'){
     $IndexInfo = Get-OSDCloudOperatingSystemsIndexes -OSArch ARM64
+    $IndexMap = Get-OSDCloudOperatingSystemsIndexMap -OSArch ARM64
 }
 else {
     $IndexInfo = Get-OSDCloudOperatingSystemsIndexes
+    $IndexMap = Get-OSDCloudOperatingSystemsIndexMap -OSArch x64
 }
 #================================================
 #   Menu Options
@@ -486,8 +497,11 @@ Set-OSDCloudGUIDefaultOptions
 #================================================
 #   OS Edition Combobox - Update based on Defaults
 #================================================
-$ImageIndexInfo = $IndexInfo      | Where-Object {$_.Name -match $formMainWindowControlOSNameCombobox.SelectedValue}
-$ImageIndexInfo = $ImageIndexInfo | Where-Object {$_.Language -match $formMainWindowControlOSLanguageCombobox.SelectedValue}
+#$ImageIndexInfo = $IndexInfo      | Where-Object {$_.Name -match $formMainWindowControlOSNameCombobox.SelectedValue}
+#$ImageIndexInfo = $ImageIndexInfo | Where-Object {$_.Language -match $formMainWindowControlOSLanguageCombobox.SelectedValue}
+#$ImageIndexInfo = $ImageIndexInfo | Where-Object {$_.Activation -match $formMainWindowControlOSActivationCombobox.SelectedValue}
+
+$ImageIndexInfo = $IndexMap | Where-Object {$_.Language -match $formMainWindowControlOSLanguageCombobox.SelectedValue}
 $ImageIndexInfo = $ImageIndexInfo | Where-Object {$_.Activation -match $formMainWindowControlOSActivationCombobox.SelectedValue}
 
 
@@ -598,10 +612,12 @@ else {
 
 $formMainWindowControlOSLanguageCombobox.add_SelectionChanged({
 
-    $ImageIndexInfo = $IndexInfo      | Where-Object {$_.Name -match $formMainWindowControlOSNameCombobox.SelectedValue}
-    $ImageIndexInfo = $ImageIndexInfo | Where-Object {$_.Language -match $formMainWindowControlOSLanguageCombobox.SelectedValue}
-    $ImageIndexInfo = $ImageIndexInfo | Where-Object {$_.Activation -match $formMainWindowControlOSActivationCombobox.SelectedValue}
+    #$ImageIndexInfo = $IndexInfo      | Where-Object {$_.Name -match $formMainWindowControlOSNameCombobox.SelectedValue}
+    #$ImageIndexInfo = $ImageIndexInfo | Where-Object {$_.Language -match $formMainWindowControlOSLanguageCombobox.SelectedValue}
+    #$ImageIndexInfo = $ImageIndexInfo | Where-Object {$_.Activation -match $formMainWindowControlOSActivationCombobox.SelectedValue}
     
+    $ImageIndexInfo = $IndexMap | Where-Object {$_.Language -match $formMainWindowControlOSLanguageCombobox.SelectedValue}
+    $ImageIndexInfo = $ImageIndexInfo | Where-Object {$_.Activation -match $formMainWindowControlOSActivationCombobox.SelectedValue}
     
     $formMainWindowControlOSEditionCombobox.Items.Clear()
     $ImageIndexInfo.IndexNames | ForEach-Object {
@@ -617,8 +633,11 @@ $formMainWindowControlOSLanguageCombobox.add_SelectionChanged({
 #=======================================================================
 $formMainWindowControlOSActivationCombobox.add_SelectionChanged({
 
-    $ImageIndexInfo = $IndexInfo      | Where-Object {$_.Name -match $formMainWindowControlOSNameCombobox.SelectedValue}
-    $ImageIndexInfo = $ImageIndexInfo | Where-Object {$_.Language -match $formMainWindowControlOSLanguageCombobox.SelectedValue}
+    #$ImageIndexInfo = $IndexInfo      | Where-Object {$_.Name -match $formMainWindowControlOSNameCombobox.SelectedValue}
+    #$ImageIndexInfo = $ImageIndexInfo | Where-Object {$_.Language -match $formMainWindowControlOSLanguageCombobox.SelectedValue}
+    #$ImageIndexInfo = $ImageIndexInfo | Where-Object {$_.Activation -match $formMainWindowControlOSActivationCombobox.SelectedValue}
+    
+    $ImageIndexInfo = $IndexMap | Where-Object {$_.Language -match $formMainWindowControlOSLanguageCombobox.SelectedValue}
     $ImageIndexInfo = $ImageIndexInfo | Where-Object {$_.Activation -match $formMainWindowControlOSActivationCombobox.SelectedValue}
     
     
@@ -636,9 +655,13 @@ $formMainWindowControlOSActivationCombobox.add_SelectionChanged({
 #================================================
 
 $formMainWindowControlOSEditionCombobox.add_SelectionChanged({
-    $ImageIndexInfo = $IndexInfo      | Where-Object {$_.Name -match $formMainWindowControlOSNameCombobox.SelectedValue}
-    $ImageIndexInfo = $ImageIndexInfo | Where-Object {$_.Language -match $formMainWindowControlOSLanguageCombobox.SelectedValue}
+    #$ImageIndexInfo = $IndexInfo      | Where-Object {$_.Name -match $formMainWindowControlOSNameCombobox.SelectedValue}
+    #$ImageIndexInfo = $ImageIndexInfo | Where-Object {$_.Language -match $formMainWindowControlOSLanguageCombobox.SelectedValue}
+    #$ImageIndexInfo = $ImageIndexInfo | Where-Object {$_.Activation -match $formMainWindowControlOSActivationCombobox.SelectedValue}
+    
+    $ImageIndexInfo = $IndexMap | Where-Object {$_.Language -match $formMainWindowControlOSLanguageCombobox.SelectedValue}
     $ImageIndexInfo = $ImageIndexInfo | Where-Object {$_.Activation -match $formMainWindowControlOSActivationCombobox.SelectedValue}
+
     $SelectedEdition = $formMainWindowControlOSEditionCombobox.SelectedValue
 
     $formMainWindowControlImageIndexTextbox.Text = $ImageIndexInfo.Indexes.$SelectedEdition
@@ -751,10 +774,13 @@ $formMainWindowControlOSEditionCombobox.add_SelectionChanged({
 #================================================
 $formMainWindowControlOSNameCombobox.add_SelectionChanged({
     if ($formMainWindowControlOSNameCombobox.SelectedValue -like 'Windows 1*') {
-        $ImageIndexInfo = $IndexInfo      | Where-Object {$_.Name -match $formMainWindowControlOSNameCombobox.SelectedValue}
-        $ImageIndexInfo = $ImageIndexInfo | Where-Object {$_.Language -match $formMainWindowControlOSLanguageCombobox.SelectedValue}
-        $ImageIndexInfo = $ImageIndexInfo | Where-Object {$_.Activation -match $formMainWindowControlOSActivationCombobox.SelectedValue}
+        #$ImageIndexInfo = $IndexInfo      | Where-Object {$_.Name -match $formMainWindowControlOSNameCombobox.SelectedValue}
+        #$ImageIndexInfo = $ImageIndexInfo | Where-Object {$_.Language -match $formMainWindowControlOSLanguageCombobox.SelectedValue}
+        #$ImageIndexInfo = $ImageIndexInfo | Where-Object {$_.Activation -match $formMainWindowControlOSActivationCombobox.SelectedValue}
         
+        $ImageIndexInfo = $IndexMap | Where-Object {$_.Language -match $formMainWindowControlOSLanguageCombobox.SelectedValue}
+        $ImageIndexInfo = $ImageIndexInfo | Where-Object {$_.Activation -match $formMainWindowControlOSActivationCombobox.SelectedValue}
+            
         
         $formMainWindowControlOSEditionCombobox.Items.Clear()
         $ImageIndexInfo.IndexNames | ForEach-Object {
