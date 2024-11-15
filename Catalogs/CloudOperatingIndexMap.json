@@ -1,0 +1,2562 @@
+[
+    {
+        "Architecture":  "x64",
+        "Language":  "ar-sa",
+        "Activation":  "Retail",
+        "Indexes":  {
+                        "Windows 11 Home Single Language":  5,
+                        "Windows 11 Education":  6,
+                        "Windows 11 Pro":  7,
+                        "Windows 11 Home":  4
+                    },
+        "IndexNames":  [
+                           "Windows 11 Home",
+                           "Windows 11 Home Single Language",
+                           "Windows 11 Education",
+                           "Windows 11 Pro"
+                       ],
+        "TotalIndexes":  "7"
+    },
+    {
+        "Architecture":  "x64",
+        "Language":  "ar-sa",
+        "Activation":  "Volume",
+        "Indexes":  {
+                        "Windows 11 Education":  4,
+                        "Windows 11 Enterprise":  5,
+                        "Windows 11 Pro":  6
+                    },
+        "IndexNames":  [
+                           "Windows 11 Education",
+                           "Windows 11 Enterprise",
+                           "Windows 11 Pro"
+                       ],
+        "TotalIndexes":  "6"
+    },
+    {
+        "Architecture":  "x64",
+        "Language":  "bg-bg",
+        "Activation":  "Retail",
+        "Indexes":  {
+                        "Windows 11 Home N":  5,
+                        "Windows 11 Pro":  8,
+                        "Windows 11 Education":  6,
+                        "Windows 11 Home":  4,
+                        "Windows 11 Education N":  7,
+                        "Windows 11 Pro N":  9
+                    },
+        "IndexNames":  [
+                           "Windows 11 Home",
+                           "Windows 11 Home N",
+                           "Windows 11 Education",
+                           "Windows 11 Education N",
+                           "Windows 11 Pro",
+                           "Windows 11 Pro N"
+                       ],
+        "TotalIndexes":  "9"
+    },
+    {
+        "Architecture":  "x64",
+        "Language":  "bg-bg",
+        "Activation":  "Volume",
+        "Indexes":  {
+                        "Windows 11 Enterprise N":  7,
+                        "Windows 11 Enterprise":  6,
+                        "Windows 11 Pro":  8,
+                        "Windows 11 Education":  4,
+                        "Windows 11 Education N":  5,
+                        "Windows 11 Pro N":  9
+                    },
+        "IndexNames":  [
+                           "Windows 11 Education",
+                           "Windows 11 Education N",
+                           "Windows 11 Enterprise",
+                           "Windows 11 Enterprise N",
+                           "Windows 11 Pro",
+                           "Windows 11 Pro N"
+                       ],
+        "TotalIndexes":  "9"
+    },
+    {
+        "Architecture":  "x64",
+        "Language":  "cs-cz",
+        "Activation":  "Retail",
+        "Indexes":  {
+                        "Windows 11 Home N":  5,
+                        "Windows 11 Pro":  8,
+                        "Windows 11 Education":  6,
+                        "Windows 11 Home":  4,
+                        "Windows 11 Education N":  7,
+                        "Windows 11 Pro N":  9
+                    },
+        "IndexNames":  [
+                           "Windows 11 Home",
+                           "Windows 11 Home N",
+                           "Windows 11 Education",
+                           "Windows 11 Education N",
+                           "Windows 11 Pro",
+                           "Windows 11 Pro N"
+                       ],
+        "TotalIndexes":  "9"
+    },
+    {
+        "Architecture":  "x64",
+        "Language":  "cs-cz",
+        "Activation":  "Volume",
+        "Indexes":  {
+                        "Windows 11 Enterprise N":  7,
+                        "Windows 11 Enterprise":  6,
+                        "Windows 11 Pro":  8,
+                        "Windows 11 Education":  4,
+                        "Windows 11 Education N":  5,
+                        "Windows 11 Pro N":  9
+                    },
+        "IndexNames":  [
+                           "Windows 11 Education",
+                           "Windows 11 Education N",
+                           "Windows 11 Enterprise",
+                           "Windows 11 Enterprise N",
+                           "Windows 11 Pro",
+                           "Windows 11 Pro N"
+                       ],
+        "TotalIndexes":  "9"
+    },
+    {
+        "Architecture":  "x64",
+        "Language":  "da-dk",
+        "Activation":  "Retail",
+        "Indexes":  {
+                        "Windows 11 Home N":  5,
+                        "Windows 11 Pro":  8,
+                        "Windows 11 Education":  6,
+                        "Windows 11 Home":  4,
+                        "Windows 11 Education N":  7,
+                        "Windows 11 Pro N":  9
+                    },
+        "IndexNames":  [
+                           "Windows 11 Home",
+                           "Windows 11 Home N",
+                           "Windows 11 Education",
+                           "Windows 11 Education N",
+                           "Windows 11 Pro",
+                           "Windows 11 Pro N"
+                       ],
+        "TotalIndexes":  "9"
+    },
+    {
+        "Architecture":  "x64",
+        "Language":  "da-dk",
+        "Activation":  "Volume",
+        "Indexes":  {
+                        "Windows 11 Enterprise N":  7,
+                        "Windows 11 Enterprise":  6,
+                        "Windows 11 Pro":  8,
+                        "Windows 11 Education":  4,
+                        "Windows 11 Education N":  5,
+                        "Windows 11 Pro N":  9
+                    },
+        "IndexNames":  [
+                           "Windows 11 Education",
+                           "Windows 11 Education N",
+                           "Windows 11 Enterprise",
+                           "Windows 11 Enterprise N",
+                           "Windows 11 Pro",
+                           "Windows 11 Pro N"
+                       ],
+        "TotalIndexes":  "9"
+    },
+    {
+        "Architecture":  "x64",
+        "Language":  "de-de",
+        "Activation":  "Retail",
+        "Indexes":  {
+                        "Windows 11 Home N":  5,
+                        "Windows 11 Pro":  8,
+                        "Windows 11 Education":  6,
+                        "Windows 11 Home":  4,
+                        "Windows 11 Education N":  7,
+                        "Windows 11 Pro N":  9
+                    },
+        "IndexNames":  [
+                           "Windows 11 Home",
+                           "Windows 11 Home N",
+                           "Windows 11 Education",
+                           "Windows 11 Education N",
+                           "Windows 11 Pro",
+                           "Windows 11 Pro N"
+                       ],
+        "TotalIndexes":  "9"
+    },
+    {
+        "Architecture":  "x64",
+        "Language":  "de-de",
+        "Activation":  "Volume",
+        "Indexes":  {
+                        "Windows 11 Enterprise N":  7,
+                        "Windows 11 Enterprise":  6,
+                        "Windows 11 Pro":  8,
+                        "Windows 11 Education":  4,
+                        "Windows 11 Education N":  5,
+                        "Windows 11 Pro N":  9
+                    },
+        "IndexNames":  [
+                           "Windows 11 Education",
+                           "Windows 11 Education N",
+                           "Windows 11 Enterprise",
+                           "Windows 11 Enterprise N",
+                           "Windows 11 Pro",
+                           "Windows 11 Pro N"
+                       ],
+        "TotalIndexes":  "9"
+    },
+    {
+        "Architecture":  "x64",
+        "Language":  "el-gr",
+        "Activation":  "Retail",
+        "Indexes":  {
+                        "Windows 11 Home N":  5,
+                        "Windows 11 Pro":  8,
+                        "Windows 11 Education":  6,
+                        "Windows 11 Home":  4,
+                        "Windows 11 Education N":  7,
+                        "Windows 11 Pro N":  9
+                    },
+        "IndexNames":  [
+                           "Windows 11 Home",
+                           "Windows 11 Home N",
+                           "Windows 11 Education",
+                           "Windows 11 Education N",
+                           "Windows 11 Pro",
+                           "Windows 11 Pro N"
+                       ],
+        "TotalIndexes":  "9"
+    },
+    {
+        "Architecture":  "x64",
+        "Language":  "el-gr",
+        "Activation":  "Volume",
+        "Indexes":  {
+                        "Windows 11 Enterprise N":  7,
+                        "Windows 11 Enterprise":  6,
+                        "Windows 11 Pro":  8,
+                        "Windows 11 Education":  4,
+                        "Windows 11 Education N":  5,
+                        "Windows 11 Pro N":  9
+                    },
+        "IndexNames":  [
+                           "Windows 11 Education",
+                           "Windows 11 Education N",
+                           "Windows 11 Enterprise",
+                           "Windows 11 Enterprise N",
+                           "Windows 11 Pro",
+                           "Windows 11 Pro N"
+                       ],
+        "TotalIndexes":  "9"
+    },
+    {
+        "Architecture":  "x64",
+        "Language":  "en-gb",
+        "Activation":  "Retail",
+        "Indexes":  {
+                        "Windows 11 Home N":  5,
+                        "Windows 11 Pro":  9,
+                        "Windows 11 Education":  7,
+                        "Windows 11 Home Single Language":  6,
+                        "Windows 11 Home":  4,
+                        "Windows 11 Education N":  8,
+                        "Windows 11 Pro N":  10
+                    },
+        "IndexNames":  [
+                           "Windows 11 Home",
+                           "Windows 11 Home N",
+                           "Windows 11 Home Single Language",
+                           "Windows 11 Education",
+                           "Windows 11 Education N",
+                           "Windows 11 Pro",
+                           "Windows 11 Pro N"
+                       ],
+        "TotalIndexes":  "10"
+    },
+    {
+        "Architecture":  "x64",
+        "Language":  "en-gb",
+        "Activation":  "Volume",
+        "Indexes":  {
+                        "Windows 11 Enterprise N":  7,
+                        "Windows 11 Enterprise":  6,
+                        "Windows 11 Pro":  8,
+                        "Windows 11 Education":  4,
+                        "Windows 11 Education N":  5,
+                        "Windows 11 Pro N":  9
+                    },
+        "IndexNames":  [
+                           "Windows 11 Education",
+                           "Windows 11 Education N",
+                           "Windows 11 Enterprise",
+                           "Windows 11 Enterprise N",
+                           "Windows 11 Pro",
+                           "Windows 11 Pro N"
+                       ],
+        "TotalIndexes":  "9"
+    },
+    {
+        "Architecture":  "x64",
+        "Language":  "en-us",
+        "Activation":  "Retail",
+        "Indexes":  {
+                        "Windows 11 Home N":  5,
+                        "Windows 11 Pro":  9,
+                        "Windows 11 Education":  7,
+                        "Windows 11 Home Single Language":  6,
+                        "Windows 11 Home":  4,
+                        "Windows 11 Education N":  8,
+                        "Windows 11 Pro N":  10
+                    },
+        "IndexNames":  [
+                           "Windows 11 Home",
+                           "Windows 11 Home N",
+                           "Windows 11 Home Single Language",
+                           "Windows 11 Education",
+                           "Windows 11 Education N",
+                           "Windows 11 Pro",
+                           "Windows 11 Pro N"
+                       ],
+        "TotalIndexes":  "10"
+    },
+    {
+        "Architecture":  "x64",
+        "Language":  "en-us",
+        "Activation":  "Volume",
+        "Indexes":  {
+                        "Windows 11 Enterprise N":  7,
+                        "Windows 11 Enterprise":  6,
+                        "Windows 11 Pro":  8,
+                        "Windows 11 Education":  4,
+                        "Windows 11 Education N":  5,
+                        "Windows 11 Pro N":  9
+                    },
+        "IndexNames":  [
+                           "Windows 11 Education",
+                           "Windows 11 Education N",
+                           "Windows 11 Enterprise",
+                           "Windows 11 Enterprise N",
+                           "Windows 11 Pro",
+                           "Windows 11 Pro N"
+                       ],
+        "TotalIndexes":  "9"
+    },
+    {
+        "Architecture":  "x64",
+        "Language":  "es-es",
+        "Activation":  "Retail",
+        "Indexes":  {
+                        "Windows 11 Home N":  5,
+                        "Windows 11 Pro":  9,
+                        "Windows 11 Education":  7,
+                        "Windows 11 Home Single Language":  6,
+                        "Windows 11 Home":  4,
+                        "Windows 11 Education N":  8,
+                        "Windows 11 Pro N":  10
+                    },
+        "IndexNames":  [
+                           "Windows 11 Home",
+                           "Windows 11 Home N",
+                           "Windows 11 Home Single Language",
+                           "Windows 11 Education",
+                           "Windows 11 Education N",
+                           "Windows 11 Pro",
+                           "Windows 11 Pro N"
+                       ],
+        "TotalIndexes":  "10"
+    },
+    {
+        "Architecture":  "x64",
+        "Language":  "es-es",
+        "Activation":  "Volume",
+        "Indexes":  {
+                        "Windows 11 Enterprise N":  7,
+                        "Windows 11 Enterprise":  6,
+                        "Windows 11 Pro":  8,
+                        "Windows 11 Education":  4,
+                        "Windows 11 Education N":  5,
+                        "Windows 11 Pro N":  9
+                    },
+        "IndexNames":  [
+                           "Windows 11 Education",
+                           "Windows 11 Education N",
+                           "Windows 11 Enterprise",
+                           "Windows 11 Enterprise N",
+                           "Windows 11 Pro",
+                           "Windows 11 Pro N"
+                       ],
+        "TotalIndexes":  "9"
+    },
+    {
+        "Architecture":  "x64",
+        "Language":  "es-mx",
+        "Activation":  "Retail",
+        "Indexes":  {
+                        "Windows 11 Home Single Language":  5,
+                        "Windows 11 Education":  6,
+                        "Windows 11 Pro":  7,
+                        "Windows 11 Home":  4
+                    },
+        "IndexNames":  [
+                           "Windows 11 Home",
+                           "Windows 11 Home Single Language",
+                           "Windows 11 Education",
+                           "Windows 11 Pro"
+                       ],
+        "TotalIndexes":  "7"
+    },
+    {
+        "Architecture":  "x64",
+        "Language":  "es-mx",
+        "Activation":  "Volume",
+        "Indexes":  {
+                        "Windows 11 Education":  4,
+                        "Windows 11 Enterprise":  5,
+                        "Windows 11 Pro":  6
+                    },
+        "IndexNames":  [
+                           "Windows 11 Education",
+                           "Windows 11 Enterprise",
+                           "Windows 11 Pro"
+                       ],
+        "TotalIndexes":  "6"
+    },
+    {
+        "Architecture":  "x64",
+        "Language":  "et-ee",
+        "Activation":  "Retail",
+        "Indexes":  {
+                        "Windows 11 Home N":  5,
+                        "Windows 11 Pro":  8,
+                        "Windows 11 Education":  6,
+                        "Windows 11 Home":  4,
+                        "Windows 11 Education N":  7,
+                        "Windows 11 Pro N":  9
+                    },
+        "IndexNames":  [
+                           "Windows 11 Home",
+                           "Windows 11 Home N",
+                           "Windows 11 Education",
+                           "Windows 11 Education N",
+                           "Windows 11 Pro",
+                           "Windows 11 Pro N"
+                       ],
+        "TotalIndexes":  "9"
+    },
+    {
+        "Architecture":  "x64",
+        "Language":  "et-ee",
+        "Activation":  "Volume",
+        "Indexes":  {
+                        "Windows 11 Enterprise N":  7,
+                        "Windows 11 Enterprise":  6,
+                        "Windows 11 Pro":  8,
+                        "Windows 11 Education":  4,
+                        "Windows 11 Education N":  5,
+                        "Windows 11 Pro N":  9
+                    },
+        "IndexNames":  [
+                           "Windows 11 Education",
+                           "Windows 11 Education N",
+                           "Windows 11 Enterprise",
+                           "Windows 11 Enterprise N",
+                           "Windows 11 Pro",
+                           "Windows 11 Pro N"
+                       ],
+        "TotalIndexes":  "9"
+    },
+    {
+        "Architecture":  "x64",
+        "Language":  "fi-fi",
+        "Activation":  "Retail",
+        "Indexes":  {
+                        "Windows 11 Home N":  5,
+                        "Windows 11 Pro":  8,
+                        "Windows 11 Education":  6,
+                        "Windows 11 Home":  4,
+                        "Windows 11 Education N":  7,
+                        "Windows 11 Pro N":  9
+                    },
+        "IndexNames":  [
+                           "Windows 11 Home",
+                           "Windows 11 Home N",
+                           "Windows 11 Education",
+                           "Windows 11 Education N",
+                           "Windows 11 Pro",
+                           "Windows 11 Pro N"
+                       ],
+        "TotalIndexes":  "9"
+    },
+    {
+        "Architecture":  "x64",
+        "Language":  "fi-fi",
+        "Activation":  "Volume",
+        "Indexes":  {
+                        "Windows 11 Enterprise N":  7,
+                        "Windows 11 Enterprise":  6,
+                        "Windows 11 Pro":  8,
+                        "Windows 11 Education":  4,
+                        "Windows 11 Education N":  5,
+                        "Windows 11 Pro N":  9
+                    },
+        "IndexNames":  [
+                           "Windows 11 Education",
+                           "Windows 11 Education N",
+                           "Windows 11 Enterprise",
+                           "Windows 11 Enterprise N",
+                           "Windows 11 Pro",
+                           "Windows 11 Pro N"
+                       ],
+        "TotalIndexes":  "9"
+    },
+    {
+        "Architecture":  "x64",
+        "Language":  "fr-ca",
+        "Activation":  "Retail",
+        "Indexes":  {
+                        "Windows 11 Famille":  4,
+                        "Windows 11 Professionnel":  6,
+                        "Windows?11 ?ducation":  5
+                    },
+        "IndexNames":  [
+                           "Windows 11 Famille",
+                           "Windows?11 ?ducation",
+                           "Windows 11 Professionnel"
+                       ],
+        "TotalIndexes":  "6"
+    },
+    {
+        "Architecture":  "x64",
+        "Language":  "fr-ca",
+        "Activation":  "Volume",
+        "Indexes":  {
+                        "Windows 11 Professionnel":  6,
+                        "Windows?11 ?ducation":  4,
+                        "Windows 11 Entreprise":  5
+                    },
+        "IndexNames":  [
+                           "Windows?11 ?ducation",
+                           "Windows 11 Entreprise",
+                           "Windows 11 Professionnel"
+                       ],
+        "TotalIndexes":  "6"
+    },
+    {
+        "Architecture":  "x64",
+        "Language":  "fr-fr",
+        "Activation":  "Retail",
+        "Indexes":  {
+                        "Windows 11 Famille":  4,
+                        "Windows 11 Professionnel":  9,
+                        "Windows 11 Famille Unilingue":  6,
+                        "Windows 11 ?ducation N":  8,
+                        "Windows?11 ?ducation":  7,
+                        "Windows 11 Professionnel N":  10,
+                        "Windows 11 Famille N":  5
+                    },
+        "IndexNames":  [
+                           "Windows 11 Famille",
+                           "Windows 11 Famille N",
+                           "Windows 11 Famille Unilingue",
+                           "Windows?11 ?ducation",
+                           "Windows 11 ?ducation N",
+                           "Windows 11 Professionnel",
+                           "Windows 11 Professionnel N"
+                       ],
+        "TotalIndexes":  "10"
+    },
+    {
+        "Architecture":  "x64",
+        "Language":  "fr-fr",
+        "Activation":  "Volume",
+        "Indexes":  {
+                        "Windows 11 Professionnel":  8,
+                        "Windows 11 ?ducation N":  5,
+                        "Windows?11 ?ducation":  4,
+                        "Windows 11 Entreprise":  6,
+                        "Windows 11 Professionnel N":  9,
+                        "Windows 11 Entreprise N":  7
+                    },
+        "IndexNames":  [
+                           "Windows?11 ?ducation",
+                           "Windows 11 ?ducation N",
+                           "Windows 11 Entreprise",
+                           "Windows 11 Entreprise N",
+                           "Windows 11 Professionnel",
+                           "Windows 11 Professionnel N"
+                       ],
+        "TotalIndexes":  "9"
+    },
+    {
+        "Architecture":  "x64",
+        "Language":  "he-il",
+        "Activation":  "Retail",
+        "Indexes":  {
+                        "Windows 11 Education":  5,
+                        "Windows 11 Pro":  6,
+                        "Windows 11 Home":  4
+                    },
+        "IndexNames":  [
+                           "Windows 11 Home",
+                           "Windows 11 Education",
+                           "Windows 11 Pro"
+                       ],
+        "TotalIndexes":  "6"
+    },
+    {
+        "Architecture":  "x64",
+        "Language":  "he-il",
+        "Activation":  "Volume",
+        "Indexes":  {
+                        "Windows 11 Education":  4,
+                        "Windows 11 Enterprise":  5,
+                        "Windows 11 Pro":  6
+                    },
+        "IndexNames":  [
+                           "Windows 11 Education",
+                           "Windows 11 Enterprise",
+                           "Windows 11 Pro"
+                       ],
+        "TotalIndexes":  "6"
+    },
+    {
+        "Architecture":  "x64",
+        "Language":  "hr-hr",
+        "Activation":  "Retail",
+        "Indexes":  {
+                        "Windows 11 Home N":  5,
+                        "Windows 11 Pro":  8,
+                        "Windows 11 Education":  6,
+                        "Windows 11 Home":  4,
+                        "Windows 11 Education N":  7,
+                        "Windows 11 Pro N":  9
+                    },
+        "IndexNames":  [
+                           "Windows 11 Home",
+                           "Windows 11 Home N",
+                           "Windows 11 Education",
+                           "Windows 11 Education N",
+                           "Windows 11 Pro",
+                           "Windows 11 Pro N"
+                       ],
+        "TotalIndexes":  "9"
+    },
+    {
+        "Architecture":  "x64",
+        "Language":  "hr-hr",
+        "Activation":  "Volume",
+        "Indexes":  {
+                        "Windows 11 Enterprise N":  7,
+                        "Windows 11 Enterprise":  6,
+                        "Windows 11 Pro":  8,
+                        "Windows 11 Education":  4,
+                        "Windows 11 Education N":  5,
+                        "Windows 11 Pro N":  9
+                    },
+        "IndexNames":  [
+                           "Windows 11 Education",
+                           "Windows 11 Education N",
+                           "Windows 11 Enterprise",
+                           "Windows 11 Enterprise N",
+                           "Windows 11 Pro",
+                           "Windows 11 Pro N"
+                       ],
+        "TotalIndexes":  "9"
+    },
+    {
+        "Architecture":  "x64",
+        "Language":  "hu-hu",
+        "Activation":  "Retail",
+        "Indexes":  {
+                        "Windows 11 Home N":  5,
+                        "Windows 11 Pro":  8,
+                        "Windows 11 Education":  6,
+                        "Windows 11 Home":  4,
+                        "Windows 11 Education N":  7,
+                        "Windows 11 Pro N":  9
+                    },
+        "IndexNames":  [
+                           "Windows 11 Home",
+                           "Windows 11 Home N",
+                           "Windows 11 Education",
+                           "Windows 11 Education N",
+                           "Windows 11 Pro",
+                           "Windows 11 Pro N"
+                       ],
+        "TotalIndexes":  "9"
+    },
+    {
+        "Architecture":  "x64",
+        "Language":  "hu-hu",
+        "Activation":  "Volume",
+        "Indexes":  {
+                        "Windows 11 Enterprise N":  7,
+                        "Windows 11 Enterprise":  6,
+                        "Windows 11 Pro":  8,
+                        "Windows 11 Education":  4,
+                        "Windows 11 Education N":  5,
+                        "Windows 11 Pro N":  9
+                    },
+        "IndexNames":  [
+                           "Windows 11 Education",
+                           "Windows 11 Education N",
+                           "Windows 11 Enterprise",
+                           "Windows 11 Enterprise N",
+                           "Windows 11 Pro",
+                           "Windows 11 Pro N"
+                       ],
+        "TotalIndexes":  "9"
+    },
+    {
+        "Architecture":  "x64",
+        "Language":  "it-it",
+        "Activation":  "Retail",
+        "Indexes":  {
+                        "Windows 11 Home N":  5,
+                        "Windows 11 Pro":  8,
+                        "Windows 11 Education":  6,
+                        "Windows 11 Home":  4,
+                        "Windows 11 Education N":  7,
+                        "Windows 11 Pro N":  9
+                    },
+        "IndexNames":  [
+                           "Windows 11 Home",
+                           "Windows 11 Home N",
+                           "Windows 11 Education",
+                           "Windows 11 Education N",
+                           "Windows 11 Pro",
+                           "Windows 11 Pro N"
+                       ],
+        "TotalIndexes":  "9"
+    },
+    {
+        "Architecture":  "x64",
+        "Language":  "it-it",
+        "Activation":  "Volume",
+        "Indexes":  {
+                        "Windows 11 Enterprise N":  7,
+                        "Windows 11 Enterprise":  6,
+                        "Windows 11 Pro":  8,
+                        "Windows 11 Education":  4,
+                        "Windows 11 Education N":  5,
+                        "Windows 11 Pro N":  9
+                    },
+        "IndexNames":  [
+                           "Windows 11 Education",
+                           "Windows 11 Education N",
+                           "Windows 11 Enterprise",
+                           "Windows 11 Enterprise N",
+                           "Windows 11 Pro",
+                           "Windows 11 Pro N"
+                       ],
+        "TotalIndexes":  "9"
+    },
+    {
+        "Architecture":  "x64",
+        "Language":  "ja-jp",
+        "Activation":  "Retail",
+        "Indexes":  {
+                        "Windows 11 Education":  5,
+                        "Windows 11 Pro":  6,
+                        "Windows 11 Home":  4
+                    },
+        "IndexNames":  [
+                           "Windows 11 Home",
+                           "Windows 11 Education",
+                           "Windows 11 Pro"
+                       ],
+        "TotalIndexes":  "6"
+    },
+    {
+        "Architecture":  "x64",
+        "Language":  "ja-jp",
+        "Activation":  "Volume",
+        "Indexes":  {
+                        "Windows 11 Education":  4,
+                        "Windows 11 Enterprise":  5,
+                        "Windows 11 Pro":  6
+                    },
+        "IndexNames":  [
+                           "Windows 11 Education",
+                           "Windows 11 Enterprise",
+                           "Windows 11 Pro"
+                       ],
+        "TotalIndexes":  "6"
+    },
+    {
+        "Architecture":  "x64",
+        "Language":  "ko-kr",
+        "Activation":  "Retail",
+        "Indexes":  {
+                        "Windows 11 Education":  5,
+                        "Windows 11 Pro":  6,
+                        "Windows 11 Home":  4
+                    },
+        "IndexNames":  [
+                           "Windows 11 Home",
+                           "Windows 11 Education",
+                           "Windows 11 Pro"
+                       ],
+        "TotalIndexes":  "6"
+    },
+    {
+        "Architecture":  "x64",
+        "Language":  "ko-kr",
+        "Activation":  "Volume",
+        "Indexes":  {
+                        "Windows 11 Education":  4,
+                        "Windows 11 Enterprise":  5,
+                        "Windows 11 Pro":  6
+                    },
+        "IndexNames":  [
+                           "Windows 11 Education",
+                           "Windows 11 Enterprise",
+                           "Windows 11 Pro"
+                       ],
+        "TotalIndexes":  "6"
+    },
+    {
+        "Architecture":  "x64",
+        "Language":  "lt-lt",
+        "Activation":  "Retail",
+        "Indexes":  {
+                        "Windows 11 Home N":  5,
+                        "Windows 11 Pro":  8,
+                        "Windows 11 Education":  6,
+                        "Windows 11 Home":  4,
+                        "Windows 11 Education N":  7,
+                        "Windows 11 Pro N":  9
+                    },
+        "IndexNames":  [
+                           "Windows 11 Home",
+                           "Windows 11 Home N",
+                           "Windows 11 Education",
+                           "Windows 11 Education N",
+                           "Windows 11 Pro",
+                           "Windows 11 Pro N"
+                       ],
+        "TotalIndexes":  "9"
+    },
+    {
+        "Architecture":  "x64",
+        "Language":  "lt-lt",
+        "Activation":  "Volume",
+        "Indexes":  {
+                        "Windows 11 Enterprise N":  7,
+                        "Windows 11 Enterprise":  6,
+                        "Windows 11 Pro":  8,
+                        "Windows 11 Education":  4,
+                        "Windows 11 Education N":  5,
+                        "Windows 11 Pro N":  9
+                    },
+        "IndexNames":  [
+                           "Windows 11 Education",
+                           "Windows 11 Education N",
+                           "Windows 11 Enterprise",
+                           "Windows 11 Enterprise N",
+                           "Windows 11 Pro",
+                           "Windows 11 Pro N"
+                       ],
+        "TotalIndexes":  "9"
+    },
+    {
+        "Architecture":  "x64",
+        "Language":  "lv-lv",
+        "Activation":  "Retail",
+        "Indexes":  {
+                        "Windows 11 Home N":  5,
+                        "Windows 11 Pro":  8,
+                        "Windows 11 Education":  6,
+                        "Windows 11 Home":  4,
+                        "Windows 11 Education N":  7,
+                        "Windows 11 Pro N":  9
+                    },
+        "IndexNames":  [
+                           "Windows 11 Home",
+                           "Windows 11 Home N",
+                           "Windows 11 Education",
+                           "Windows 11 Education N",
+                           "Windows 11 Pro",
+                           "Windows 11 Pro N"
+                       ],
+        "TotalIndexes":  "9"
+    },
+    {
+        "Architecture":  "x64",
+        "Language":  "lv-lv",
+        "Activation":  "Volume",
+        "Indexes":  {
+                        "Windows 11 Enterprise N":  7,
+                        "Windows 11 Enterprise":  6,
+                        "Windows 11 Pro":  8,
+                        "Windows 11 Education":  4,
+                        "Windows 11 Education N":  5,
+                        "Windows 11 Pro N":  9
+                    },
+        "IndexNames":  [
+                           "Windows 11 Education",
+                           "Windows 11 Education N",
+                           "Windows 11 Enterprise",
+                           "Windows 11 Enterprise N",
+                           "Windows 11 Pro",
+                           "Windows 11 Pro N"
+                       ],
+        "TotalIndexes":  "9"
+    },
+    {
+        "Architecture":  "x64",
+        "Language":  "nb-no",
+        "Activation":  "Retail",
+        "Indexes":  {
+                        "Windows 11 Home N":  5,
+                        "Windows 11 Pro":  8,
+                        "Windows 11 Education":  6,
+                        "Windows 11 Home":  4,
+                        "Windows 11 Education N":  7,
+                        "Windows 11 Pro N":  9
+                    },
+        "IndexNames":  [
+                           "Windows 11 Home",
+                           "Windows 11 Home N",
+                           "Windows 11 Education",
+                           "Windows 11 Education N",
+                           "Windows 11 Pro",
+                           "Windows 11 Pro N"
+                       ],
+        "TotalIndexes":  "9"
+    },
+    {
+        "Architecture":  "x64",
+        "Language":  "nb-no",
+        "Activation":  "Volume",
+        "Indexes":  {
+                        "Windows 11 Enterprise N":  7,
+                        "Windows 11 Enterprise":  6,
+                        "Windows 11 Pro":  8,
+                        "Windows 11 Education":  4,
+                        "Windows 11 Education N":  5,
+                        "Windows 11 Pro N":  9
+                    },
+        "IndexNames":  [
+                           "Windows 11 Education",
+                           "Windows 11 Education N",
+                           "Windows 11 Enterprise",
+                           "Windows 11 Enterprise N",
+                           "Windows 11 Pro",
+                           "Windows 11 Pro N"
+                       ],
+        "TotalIndexes":  "9"
+    },
+    {
+        "Architecture":  "x64",
+        "Language":  "nl-nl",
+        "Activation":  "Retail",
+        "Indexes":  {
+                        "Windows 11 Home N":  5,
+                        "Windows 11 Pro":  8,
+                        "Windows 11 Education":  6,
+                        "Windows 11 Home":  4,
+                        "Windows 11 Education N":  7,
+                        "Windows 11 Pro N":  9
+                    },
+        "IndexNames":  [
+                           "Windows 11 Home",
+                           "Windows 11 Home N",
+                           "Windows 11 Education",
+                           "Windows 11 Education N",
+                           "Windows 11 Pro",
+                           "Windows 11 Pro N"
+                       ],
+        "TotalIndexes":  "9"
+    },
+    {
+        "Architecture":  "x64",
+        "Language":  "nl-nl",
+        "Activation":  "Volume",
+        "Indexes":  {
+                        "Windows 11 Enterprise N":  7,
+                        "Windows 11 Enterprise":  6,
+                        "Windows 11 Pro":  8,
+                        "Windows 11 Education":  4,
+                        "Windows 11 Education N":  5,
+                        "Windows 11 Pro N":  9
+                    },
+        "IndexNames":  [
+                           "Windows 11 Education",
+                           "Windows 11 Education N",
+                           "Windows 11 Enterprise",
+                           "Windows 11 Enterprise N",
+                           "Windows 11 Pro",
+                           "Windows 11 Pro N"
+                       ],
+        "TotalIndexes":  "9"
+    },
+    {
+        "Architecture":  "x64",
+        "Language":  "pl-pl",
+        "Activation":  "Retail",
+        "Indexes":  {
+                        "Windows 11 Home N":  5,
+                        "Windows 11 Pro":  8,
+                        "Windows 11 Education":  6,
+                        "Windows 11 Home":  4,
+                        "Windows 11 Education N":  7,
+                        "Windows 11 Pro N":  9
+                    },
+        "IndexNames":  [
+                           "Windows 11 Home",
+                           "Windows 11 Home N",
+                           "Windows 11 Education",
+                           "Windows 11 Education N",
+                           "Windows 11 Pro",
+                           "Windows 11 Pro N"
+                       ],
+        "TotalIndexes":  "9"
+    },
+    {
+        "Architecture":  "x64",
+        "Language":  "pl-pl",
+        "Activation":  "Volume",
+        "Indexes":  {
+                        "Windows 11 Enterprise N":  7,
+                        "Windows 11 Enterprise":  6,
+                        "Windows 11 Pro":  8,
+                        "Windows 11 Education":  4,
+                        "Windows 11 Education N":  5,
+                        "Windows 11 Pro N":  9
+                    },
+        "IndexNames":  [
+                           "Windows 11 Education",
+                           "Windows 11 Education N",
+                           "Windows 11 Enterprise",
+                           "Windows 11 Enterprise N",
+                           "Windows 11 Pro",
+                           "Windows 11 Pro N"
+                       ],
+        "TotalIndexes":  "9"
+    },
+    {
+        "Architecture":  "x64",
+        "Language":  "pt-br",
+        "Activation":  "Retail",
+        "Indexes":  {
+                        "Windows 11 Home Single Language":  5,
+                        "Windows 11 Education":  6,
+                        "Windows 11 Pro":  7,
+                        "Windows 11 Home":  4
+                    },
+        "IndexNames":  [
+                           "Windows 11 Home",
+                           "Windows 11 Home Single Language",
+                           "Windows 11 Education",
+                           "Windows 11 Pro"
+                       ],
+        "TotalIndexes":  "7"
+    },
+    {
+        "Architecture":  "x64",
+        "Language":  "pt-br",
+        "Activation":  "Volume",
+        "Indexes":  {
+                        "Windows 11 Education":  4,
+                        "Windows 11 Enterprise":  5,
+                        "Windows 11 Pro":  6
+                    },
+        "IndexNames":  [
+                           "Windows 11 Education",
+                           "Windows 11 Enterprise",
+                           "Windows 11 Pro"
+                       ],
+        "TotalIndexes":  "6"
+    },
+    {
+        "Architecture":  "x64",
+        "Language":  "pt-pt",
+        "Activation":  "Retail",
+        "Indexes":  {
+                        "Windows 11 Home N":  5,
+                        "Windows 11 Pro":  9,
+                        "Windows 11 Education":  7,
+                        "Windows 11 Home Single Language":  6,
+                        "Windows 11 Home":  4,
+                        "Windows 11 Education N":  8,
+                        "Windows 11 Pro N":  10
+                    },
+        "IndexNames":  [
+                           "Windows 11 Home",
+                           "Windows 11 Home N",
+                           "Windows 11 Home Single Language",
+                           "Windows 11 Education",
+                           "Windows 11 Education N",
+                           "Windows 11 Pro",
+                           "Windows 11 Pro N"
+                       ],
+        "TotalIndexes":  "10"
+    },
+    {
+        "Architecture":  "x64",
+        "Language":  "pt-pt",
+        "Activation":  "Volume",
+        "Indexes":  {
+                        "Windows 11 Enterprise N":  7,
+                        "Windows 11 Enterprise":  6,
+                        "Windows 11 Pro":  8,
+                        "Windows 11 Education":  4,
+                        "Windows 11 Education N":  5,
+                        "Windows 11 Pro N":  9
+                    },
+        "IndexNames":  [
+                           "Windows 11 Education",
+                           "Windows 11 Education N",
+                           "Windows 11 Enterprise",
+                           "Windows 11 Enterprise N",
+                           "Windows 11 Pro",
+                           "Windows 11 Pro N"
+                       ],
+        "TotalIndexes":  "9"
+    },
+    {
+        "Architecture":  "x64",
+        "Language":  "ro-ro",
+        "Activation":  "Retail",
+        "Indexes":  {
+                        "Windows 11 Home N":  5,
+                        "Windows 11 Pro":  8,
+                        "Windows 11 Education":  6,
+                        "Windows 11 Home":  4,
+                        "Windows 11 Education N":  7,
+                        "Windows 11 Pro N":  9
+                    },
+        "IndexNames":  [
+                           "Windows 11 Home",
+                           "Windows 11 Home N",
+                           "Windows 11 Education",
+                           "Windows 11 Education N",
+                           "Windows 11 Pro",
+                           "Windows 11 Pro N"
+                       ],
+        "TotalIndexes":  "9"
+    },
+    {
+        "Architecture":  "x64",
+        "Language":  "ro-ro",
+        "Activation":  "Volume",
+        "Indexes":  {
+                        "Windows 11 Enterprise N":  7,
+                        "Windows 11 Enterprise":  6,
+                        "Windows 11 Pro":  8,
+                        "Windows 11 Education":  4,
+                        "Windows 11 Education N":  5,
+                        "Windows 11 Pro N":  9
+                    },
+        "IndexNames":  [
+                           "Windows 11 Education",
+                           "Windows 11 Education N",
+                           "Windows 11 Enterprise",
+                           "Windows 11 Enterprise N",
+                           "Windows 11 Pro",
+                           "Windows 11 Pro N"
+                       ],
+        "TotalIndexes":  "9"
+    },
+    {
+        "Architecture":  "x64",
+        "Language":  "sk-sk",
+        "Activation":  "Retail",
+        "Indexes":  {
+                        "Windows 11 Home N":  5,
+                        "Windows 11 Pro":  8,
+                        "Windows 11 Education":  6,
+                        "Windows 11 Home":  4,
+                        "Windows 11 Education N":  7,
+                        "Windows 11 Pro N":  9
+                    },
+        "IndexNames":  [
+                           "Windows 11 Home",
+                           "Windows 11 Home N",
+                           "Windows 11 Education",
+                           "Windows 11 Education N",
+                           "Windows 11 Pro",
+                           "Windows 11 Pro N"
+                       ],
+        "TotalIndexes":  "9"
+    },
+    {
+        "Architecture":  "x64",
+        "Language":  "sk-sk",
+        "Activation":  "Volume",
+        "Indexes":  {
+                        "Windows 11 Enterprise N":  7,
+                        "Windows 11 Enterprise":  6,
+                        "Windows 11 Pro":  8,
+                        "Windows 11 Education":  4,
+                        "Windows 11 Education N":  5,
+                        "Windows 11 Pro N":  9
+                    },
+        "IndexNames":  [
+                           "Windows 11 Education",
+                           "Windows 11 Education N",
+                           "Windows 11 Enterprise",
+                           "Windows 11 Enterprise N",
+                           "Windows 11 Pro",
+                           "Windows 11 Pro N"
+                       ],
+        "TotalIndexes":  "9"
+    },
+    {
+        "Architecture":  "x64",
+        "Language":  "sl-si",
+        "Activation":  "Retail",
+        "Indexes":  {
+                        "Windows 11 Home N":  5,
+                        "Windows 11 Pro":  8,
+                        "Windows 11 Education":  6,
+                        "Windows 11 Home":  4,
+                        "Windows 11 Education N":  7,
+                        "Windows 11 Pro N":  9
+                    },
+        "IndexNames":  [
+                           "Windows 11 Home",
+                           "Windows 11 Home N",
+                           "Windows 11 Education",
+                           "Windows 11 Education N",
+                           "Windows 11 Pro",
+                           "Windows 11 Pro N"
+                       ],
+        "TotalIndexes":  "9"
+    },
+    {
+        "Architecture":  "x64",
+        "Language":  "sl-si",
+        "Activation":  "Volume",
+        "Indexes":  {
+                        "Windows 11 Enterprise N":  7,
+                        "Windows 11 Enterprise":  6,
+                        "Windows 11 Pro":  8,
+                        "Windows 11 Education":  4,
+                        "Windows 11 Education N":  5,
+                        "Windows 11 Pro N":  9
+                    },
+        "IndexNames":  [
+                           "Windows 11 Education",
+                           "Windows 11 Education N",
+                           "Windows 11 Enterprise",
+                           "Windows 11 Enterprise N",
+                           "Windows 11 Pro",
+                           "Windows 11 Pro N"
+                       ],
+        "TotalIndexes":  "9"
+    },
+    {
+        "Architecture":  "x64",
+        "Language":  "sr-latn-rs",
+        "Activation":  "Retail",
+        "Indexes":  {
+                        "Windows 11 Home Single Language":  5,
+                        "Windows 11 Education":  6,
+                        "Windows 11 Pro":  7,
+                        "Windows 11 Home":  4
+                    },
+        "IndexNames":  [
+                           "Windows 11 Home",
+                           "Windows 11 Home Single Language",
+                           "Windows 11 Education",
+                           "Windows 11 Pro"
+                       ],
+        "TotalIndexes":  "7"
+    },
+    {
+        "Architecture":  "x64",
+        "Language":  "sr-latn-rs",
+        "Activation":  "Volume",
+        "Indexes":  {
+                        "Windows 11 Education":  4,
+                        "Windows 11 Enterprise":  5,
+                        "Windows 11 Pro":  6
+                    },
+        "IndexNames":  [
+                           "Windows 11 Education",
+                           "Windows 11 Enterprise",
+                           "Windows 11 Pro"
+                       ],
+        "TotalIndexes":  "6"
+    },
+    {
+        "Architecture":  "x64",
+        "Language":  "sv-se",
+        "Activation":  "Retail",
+        "Indexes":  {
+                        "Windows 11 Home N":  5,
+                        "Windows 11 Pro":  8,
+                        "Windows 11 Education":  6,
+                        "Windows 11 Home":  4,
+                        "Windows 11 Education N":  7,
+                        "Windows 11 Pro N":  9
+                    },
+        "IndexNames":  [
+                           "Windows 11 Home",
+                           "Windows 11 Home N",
+                           "Windows 11 Education",
+                           "Windows 11 Education N",
+                           "Windows 11 Pro",
+                           "Windows 11 Pro N"
+                       ],
+        "TotalIndexes":  "9"
+    },
+    {
+        "Architecture":  "x64",
+        "Language":  "sv-se",
+        "Activation":  "Volume",
+        "Indexes":  {
+                        "Windows 11 Enterprise N":  7,
+                        "Windows 11 Enterprise":  6,
+                        "Windows 11 Pro":  8,
+                        "Windows 11 Education":  4,
+                        "Windows 11 Education N":  5,
+                        "Windows 11 Pro N":  9
+                    },
+        "IndexNames":  [
+                           "Windows 11 Education",
+                           "Windows 11 Education N",
+                           "Windows 11 Enterprise",
+                           "Windows 11 Enterprise N",
+                           "Windows 11 Pro",
+                           "Windows 11 Pro N"
+                       ],
+        "TotalIndexes":  "9"
+    },
+    {
+        "Architecture":  "x64",
+        "Language":  "th-th",
+        "Activation":  "Retail",
+        "Indexes":  {
+                        "Windows 11 Home Single Language":  5,
+                        "Windows 11 Education":  6,
+                        "Windows 11 Pro":  7,
+                        "Windows 11 Home":  4
+                    },
+        "IndexNames":  [
+                           "Windows 11 Home",
+                           "Windows 11 Home Single Language",
+                           "Windows 11 Education",
+                           "Windows 11 Pro"
+                       ],
+        "TotalIndexes":  "7"
+    },
+    {
+        "Architecture":  "x64",
+        "Language":  "th-th",
+        "Activation":  "Volume",
+        "Indexes":  {
+                        "Windows 11 Education":  4,
+                        "Windows 11 Enterprise":  5,
+                        "Windows 11 Pro":  6
+                    },
+        "IndexNames":  [
+                           "Windows 11 Education",
+                           "Windows 11 Enterprise",
+                           "Windows 11 Pro"
+                       ],
+        "TotalIndexes":  "6"
+    },
+    {
+        "Architecture":  "x64",
+        "Language":  "tr-tr",
+        "Activation":  "Retail",
+        "Indexes":  {
+                        "Windows 11 Home Single Language":  5,
+                        "Windows 11 Education":  6,
+                        "Windows 11 Pro":  7,
+                        "Windows 11 Home":  4
+                    },
+        "IndexNames":  [
+                           "Windows 11 Home",
+                           "Windows 11 Home Single Language",
+                           "Windows 11 Education",
+                           "Windows 11 Pro"
+                       ],
+        "TotalIndexes":  "7"
+    },
+    {
+        "Architecture":  "x64",
+        "Language":  "tr-tr",
+        "Activation":  "Volume",
+        "Indexes":  {
+                        "Windows 11 Education":  4,
+                        "Windows 11 Enterprise":  5,
+                        "Windows 11 Pro":  6
+                    },
+        "IndexNames":  [
+                           "Windows 11 Education",
+                           "Windows 11 Enterprise",
+                           "Windows 11 Pro"
+                       ],
+        "TotalIndexes":  "6"
+    },
+    {
+        "Architecture":  "x64",
+        "Language":  "uk-ua",
+        "Activation":  "Retail",
+        "Indexes":  {
+                        "Windows 11 Home Single Language":  5,
+                        "Windows 11 Education":  6,
+                        "Windows 11 Pro":  7,
+                        "Windows 11 Home":  4
+                    },
+        "IndexNames":  [
+                           "Windows 11 Home",
+                           "Windows 11 Home Single Language",
+                           "Windows 11 Education",
+                           "Windows 11 Pro"
+                       ],
+        "TotalIndexes":  "7"
+    },
+    {
+        "Architecture":  "x64",
+        "Language":  "uk-ua",
+        "Activation":  "Volume",
+        "Indexes":  {
+                        "Windows 11 Education":  4,
+                        "Windows 11 Enterprise":  5,
+                        "Windows 11 Pro":  6
+                    },
+        "IndexNames":  [
+                           "Windows 11 Education",
+                           "Windows 11 Enterprise",
+                           "Windows 11 Pro"
+                       ],
+        "TotalIndexes":  "6"
+    },
+    {
+        "Architecture":  "x64",
+        "Language":  "zh-cn",
+        "Activation":  "Retail",
+        "Indexes":  {
+                        "Windows 11 ???":  6,
+                        "Windows 11 ???":  7,
+                        "Windows 11 ???":  4,
+                        "Windows 11 ??????":  5
+                    },
+        "IndexNames":  [
+                           "Windows 11 ???",
+                           "Windows 11 ??????",
+                           "Windows 11 ???",
+                           "Windows 11 ???"
+                       ],
+        "TotalIndexes":  "7"
+    },
+    {
+        "Architecture":  "x64",
+        "Language":  "zh-cn",
+        "Activation":  "Volume",
+        "Indexes":  {
+                        "Windows 11 ???":  4,
+                        "Windows 11 ???":  6,
+                        "Windows 11 ???":  5
+                    },
+        "IndexNames":  [
+                           "Windows 11 ???",
+                           "Windows 11 ???",
+                           "Windows 11 ???"
+                       ],
+        "TotalIndexes":  "6"
+    },
+    {
+        "Architecture":  "x64",
+        "Language":  "zh-tw",
+        "Activation":  "Retail",
+        "Indexes":  {
+                        "Windows 11 ???":  6,
+                        "Windows 11 ???":  5,
+                        "Windows 11 ???":  4
+                    },
+        "IndexNames":  [
+                           "Windows 11 ???",
+                           "Windows 11 ???",
+                           "Windows 11 ???"
+                       ],
+        "TotalIndexes":  "6"
+    },
+    {
+        "Architecture":  "x64",
+        "Language":  "zh-tw",
+        "Activation":  "Volume",
+        "Indexes":  {
+                        "Windows 11 ???":  6,
+                        "Windows 11 ???":  4,
+                        "Windows 11 ???":  5
+                    },
+        "IndexNames":  [
+                           "Windows 11 ???",
+                           "Windows 11 ???",
+                           "Windows 11 ???"
+                       ],
+        "TotalIndexes":  "6"
+    },
+    {
+        "Architecture":  "ARM64",
+        "Language":  "ar-sa",
+        "Activation":  "Retail",
+        "Indexes":  {
+                        "Windows 11 Home Single Language":  5,
+                        "Windows 11 Pro":  6,
+                        "Windows 11 Home":  4
+                    },
+        "IndexNames":  [
+                           "Windows 11 Home",
+                           "Windows 11 Home Single Language",
+                           "Windows 11 Pro"
+                       ],
+        "TotalIndexes":  "6"
+    },
+    {
+        "Architecture":  "ARM64",
+        "Language":  "ar-sa",
+        "Activation":  "Volume",
+        "Indexes":  {
+                        "Windows 11 Pro":  5,
+                        "Windows 11 Enterprise":  4
+                    },
+        "IndexNames":  [
+                           "Windows 11 Enterprise",
+                           "Windows 11 Pro"
+                       ],
+        "TotalIndexes":  "5"
+    },
+    {
+        "Architecture":  "ARM64",
+        "Language":  "bg-bg",
+        "Activation":  "Retail",
+        "Indexes":  {
+                        "Windows 11 Home":  4,
+                        "Windows 11 Pro":  5
+                    },
+        "IndexNames":  [
+                           "Windows 11 Home",
+                           "Windows 11 Pro"
+                       ],
+        "TotalIndexes":  "5"
+    },
+    {
+        "Architecture":  "ARM64",
+        "Language":  "bg-bg",
+        "Activation":  "Volume",
+        "Indexes":  {
+                        "Windows 11 Pro":  5,
+                        "Windows 11 Enterprise":  4
+                    },
+        "IndexNames":  [
+                           "Windows 11 Enterprise",
+                           "Windows 11 Pro"
+                       ],
+        "TotalIndexes":  "5"
+    },
+    {
+        "Architecture":  "ARM64",
+        "Language":  "cs-cz",
+        "Activation":  "Retail",
+        "Indexes":  {
+                        "Windows 11 Home":  4,
+                        "Windows 11 Pro":  5
+                    },
+        "IndexNames":  [
+                           "Windows 11 Home",
+                           "Windows 11 Pro"
+                       ],
+        "TotalIndexes":  "5"
+    },
+    {
+        "Architecture":  "ARM64",
+        "Language":  "cs-cz",
+        "Activation":  "Volume",
+        "Indexes":  {
+                        "Windows 11 Pro":  5,
+                        "Windows 11 Enterprise":  4
+                    },
+        "IndexNames":  [
+                           "Windows 11 Enterprise",
+                           "Windows 11 Pro"
+                       ],
+        "TotalIndexes":  "5"
+    },
+    {
+        "Architecture":  "ARM64",
+        "Language":  "da-dk",
+        "Activation":  "Retail",
+        "Indexes":  {
+                        "Windows 11 Home":  4,
+                        "Windows 11 Pro":  5
+                    },
+        "IndexNames":  [
+                           "Windows 11 Home",
+                           "Windows 11 Pro"
+                       ],
+        "TotalIndexes":  "5"
+    },
+    {
+        "Architecture":  "ARM64",
+        "Language":  "da-dk",
+        "Activation":  "Volume",
+        "Indexes":  {
+                        "Windows 11 Pro":  5,
+                        "Windows 11 Enterprise":  4
+                    },
+        "IndexNames":  [
+                           "Windows 11 Enterprise",
+                           "Windows 11 Pro"
+                       ],
+        "TotalIndexes":  "5"
+    },
+    {
+        "Architecture":  "ARM64",
+        "Language":  "de-de",
+        "Activation":  "Retail",
+        "Indexes":  {
+                        "Windows 11 Home":  4,
+                        "Windows 11 Pro":  5
+                    },
+        "IndexNames":  [
+                           "Windows 11 Home",
+                           "Windows 11 Pro"
+                       ],
+        "TotalIndexes":  "5"
+    },
+    {
+        "Architecture":  "ARM64",
+        "Language":  "de-de",
+        "Activation":  "Volume",
+        "Indexes":  {
+                        "Windows 11 Pro":  5,
+                        "Windows 11 Enterprise":  4
+                    },
+        "IndexNames":  [
+                           "Windows 11 Enterprise",
+                           "Windows 11 Pro"
+                       ],
+        "TotalIndexes":  "5"
+    },
+    {
+        "Architecture":  "ARM64",
+        "Language":  "el-gr",
+        "Activation":  "Retail",
+        "Indexes":  {
+                        "Windows 11 Home":  4,
+                        "Windows 11 Pro":  5
+                    },
+        "IndexNames":  [
+                           "Windows 11 Home",
+                           "Windows 11 Pro"
+                       ],
+        "TotalIndexes":  "5"
+    },
+    {
+        "Architecture":  "ARM64",
+        "Language":  "el-gr",
+        "Activation":  "Volume",
+        "Indexes":  {
+                        "Windows 11 Pro":  5,
+                        "Windows 11 Enterprise":  4
+                    },
+        "IndexNames":  [
+                           "Windows 11 Enterprise",
+                           "Windows 11 Pro"
+                       ],
+        "TotalIndexes":  "5"
+    },
+    {
+        "Architecture":  "ARM64",
+        "Language":  "en-gb",
+        "Activation":  "Retail",
+        "Indexes":  {
+                        "Windows 11 Home Single Language":  5,
+                        "Windows 11 Pro":  6,
+                        "Windows 11 Home":  4
+                    },
+        "IndexNames":  [
+                           "Windows 11 Home",
+                           "Windows 11 Home Single Language",
+                           "Windows 11 Pro"
+                       ],
+        "TotalIndexes":  "6"
+    },
+    {
+        "Architecture":  "ARM64",
+        "Language":  "en-gb",
+        "Activation":  "Volume",
+        "Indexes":  {
+                        "Windows 11 Pro":  5,
+                        "Windows 11 Enterprise":  4
+                    },
+        "IndexNames":  [
+                           "Windows 11 Enterprise",
+                           "Windows 11 Pro"
+                       ],
+        "TotalIndexes":  "5"
+    },
+    {
+        "Architecture":  "ARM64",
+        "Language":  "en-us",
+        "Activation":  "Retail",
+        "Indexes":  {
+                        "Windows 11 Home Single Language":  5,
+                        "Windows 11 Pro":  6,
+                        "Windows 11 Home":  4
+                    },
+        "IndexNames":  [
+                           "Windows 11 Home",
+                           "Windows 11 Home Single Language",
+                           "Windows 11 Pro"
+                       ],
+        "TotalIndexes":  "6"
+    },
+    {
+        "Architecture":  "ARM64",
+        "Language":  "en-us",
+        "Activation":  "Volume",
+        "Indexes":  {
+                        "Windows 11 Pro":  5,
+                        "Windows 11 Enterprise":  4
+                    },
+        "IndexNames":  [
+                           "Windows 11 Enterprise",
+                           "Windows 11 Pro"
+                       ],
+        "TotalIndexes":  "5"
+    },
+    {
+        "Architecture":  "ARM64",
+        "Language":  "es-es",
+        "Activation":  "Retail",
+        "Indexes":  {
+                        "Windows 11 Home Single Language":  5,
+                        "Windows 11 Pro":  6,
+                        "Windows 11 Home":  4
+                    },
+        "IndexNames":  [
+                           "Windows 11 Home",
+                           "Windows 11 Home Single Language",
+                           "Windows 11 Pro"
+                       ],
+        "TotalIndexes":  "6"
+    },
+    {
+        "Architecture":  "ARM64",
+        "Language":  "es-es",
+        "Activation":  "Volume",
+        "Indexes":  {
+                        "Windows 11 Pro":  5,
+                        "Windows 11 Enterprise":  4
+                    },
+        "IndexNames":  [
+                           "Windows 11 Enterprise",
+                           "Windows 11 Pro"
+                       ],
+        "TotalIndexes":  "5"
+    },
+    {
+        "Architecture":  "ARM64",
+        "Language":  "es-mx",
+        "Activation":  "Retail",
+        "Indexes":  {
+                        "Windows 11 Home Single Language":  5,
+                        "Windows 11 Pro":  6,
+                        "Windows 11 Home":  4
+                    },
+        "IndexNames":  [
+                           "Windows 11 Home",
+                           "Windows 11 Home Single Language",
+                           "Windows 11 Pro"
+                       ],
+        "TotalIndexes":  "6"
+    },
+    {
+        "Architecture":  "ARM64",
+        "Language":  "es-mx",
+        "Activation":  "Volume",
+        "Indexes":  {
+                        "Windows 11 Pro":  5,
+                        "Windows 11 Enterprise":  4
+                    },
+        "IndexNames":  [
+                           "Windows 11 Enterprise",
+                           "Windows 11 Pro"
+                       ],
+        "TotalIndexes":  "5"
+    },
+    {
+        "Architecture":  "ARM64",
+        "Language":  "et-ee",
+        "Activation":  "Retail",
+        "Indexes":  {
+                        "Windows 11 Home":  4,
+                        "Windows 11 Pro":  5
+                    },
+        "IndexNames":  [
+                           "Windows 11 Home",
+                           "Windows 11 Pro"
+                       ],
+        "TotalIndexes":  "5"
+    },
+    {
+        "Architecture":  "ARM64",
+        "Language":  "et-ee",
+        "Activation":  "Volume",
+        "Indexes":  {
+                        "Windows 11 Pro":  5,
+                        "Windows 11 Enterprise":  4
+                    },
+        "IndexNames":  [
+                           "Windows 11 Enterprise",
+                           "Windows 11 Pro"
+                       ],
+        "TotalIndexes":  "5"
+    },
+    {
+        "Architecture":  "ARM64",
+        "Language":  "fi-fi",
+        "Activation":  "Retail",
+        "Indexes":  {
+                        "Windows 11 Home":  4,
+                        "Windows 11 Pro":  5
+                    },
+        "IndexNames":  [
+                           "Windows 11 Home",
+                           "Windows 11 Pro"
+                       ],
+        "TotalIndexes":  "5"
+    },
+    {
+        "Architecture":  "ARM64",
+        "Language":  "fi-fi",
+        "Activation":  "Volume",
+        "Indexes":  {
+                        "Windows 11 Pro":  5,
+                        "Windows 11 Enterprise":  4
+                    },
+        "IndexNames":  [
+                           "Windows 11 Enterprise",
+                           "Windows 11 Pro"
+                       ],
+        "TotalIndexes":  "5"
+    },
+    {
+        "Architecture":  "ARM64",
+        "Language":  "fr-ca",
+        "Activation":  "Retail",
+        "Indexes":  {
+                        "Windows 11 Professionnel":  5,
+                        "Windows 11 Famille":  4
+                    },
+        "IndexNames":  [
+                           "Windows 11 Famille",
+                           "Windows 11 Professionnel"
+                       ],
+        "TotalIndexes":  "5"
+    },
+    {
+        "Architecture":  "ARM64",
+        "Language":  "fr-ca",
+        "Activation":  "Volume",
+        "Indexes":  {
+                        "Windows 11 Entreprise":  4,
+                        "Windows 11 Professionnel":  5
+                    },
+        "IndexNames":  [
+                           "Windows 11 Entreprise",
+                           "Windows 11 Professionnel"
+                       ],
+        "TotalIndexes":  "5"
+    },
+    {
+        "Architecture":  "ARM64",
+        "Language":  "fr-fr",
+        "Activation":  "Retail",
+        "Indexes":  {
+                        "Windows 11 Famille Unilingue":  5,
+                        "Windows 11 Famille":  4,
+                        "Windows 11 Professionnel":  6
+                    },
+        "IndexNames":  [
+                           "Windows 11 Famille",
+                           "Windows 11 Famille Unilingue",
+                           "Windows 11 Professionnel"
+                       ],
+        "TotalIndexes":  "6"
+    },
+    {
+        "Architecture":  "ARM64",
+        "Language":  "fr-fr",
+        "Activation":  "Volume",
+        "Indexes":  {
+                        "Windows 11 Entreprise":  4,
+                        "Windows 11 Professionnel":  5
+                    },
+        "IndexNames":  [
+                           "Windows 11 Entreprise",
+                           "Windows 11 Professionnel"
+                       ],
+        "TotalIndexes":  "5"
+    },
+    {
+        "Architecture":  "ARM64",
+        "Language":  "he-il",
+        "Activation":  "Retail",
+        "Indexes":  {
+                        "Windows 11 Home":  4,
+                        "Windows 11 Pro":  5
+                    },
+        "IndexNames":  [
+                           "Windows 11 Home",
+                           "Windows 11 Pro"
+                       ],
+        "TotalIndexes":  "5"
+    },
+    {
+        "Architecture":  "ARM64",
+        "Language":  "he-il",
+        "Activation":  "Volume",
+        "Indexes":  {
+                        "Windows 11 Pro":  5,
+                        "Windows 11 Enterprise":  4
+                    },
+        "IndexNames":  [
+                           "Windows 11 Enterprise",
+                           "Windows 11 Pro"
+                       ],
+        "TotalIndexes":  "5"
+    },
+    {
+        "Architecture":  "ARM64",
+        "Language":  "hr-hr",
+        "Activation":  "Retail",
+        "Indexes":  {
+                        "Windows 11 Home":  4,
+                        "Windows 11 Pro":  5
+                    },
+        "IndexNames":  [
+                           "Windows 11 Home",
+                           "Windows 11 Pro"
+                       ],
+        "TotalIndexes":  "5"
+    },
+    {
+        "Architecture":  "ARM64",
+        "Language":  "hr-hr",
+        "Activation":  "Volume",
+        "Indexes":  {
+                        "Windows 11 Pro":  5,
+                        "Windows 11 Enterprise":  4
+                    },
+        "IndexNames":  [
+                           "Windows 11 Enterprise",
+                           "Windows 11 Pro"
+                       ],
+        "TotalIndexes":  "5"
+    },
+    {
+        "Architecture":  "ARM64",
+        "Language":  "hu-hu",
+        "Activation":  "Retail",
+        "Indexes":  {
+                        "Windows 11 Home":  4,
+                        "Windows 11 Pro":  5
+                    },
+        "IndexNames":  [
+                           "Windows 11 Home",
+                           "Windows 11 Pro"
+                       ],
+        "TotalIndexes":  "5"
+    },
+    {
+        "Architecture":  "ARM64",
+        "Language":  "hu-hu",
+        "Activation":  "Volume",
+        "Indexes":  {
+                        "Windows 11 Pro":  5,
+                        "Windows 11 Enterprise":  4
+                    },
+        "IndexNames":  [
+                           "Windows 11 Enterprise",
+                           "Windows 11 Pro"
+                       ],
+        "TotalIndexes":  "5"
+    },
+    {
+        "Architecture":  "ARM64",
+        "Language":  "it-it",
+        "Activation":  "Retail",
+        "Indexes":  {
+                        "Windows 11 Home":  4,
+                        "Windows 11 Pro":  5
+                    },
+        "IndexNames":  [
+                           "Windows 11 Home",
+                           "Windows 11 Pro"
+                       ],
+        "TotalIndexes":  "5"
+    },
+    {
+        "Architecture":  "ARM64",
+        "Language":  "it-it",
+        "Activation":  "Volume",
+        "Indexes":  {
+                        "Windows 11 Pro":  5,
+                        "Windows 11 Enterprise":  4
+                    },
+        "IndexNames":  [
+                           "Windows 11 Enterprise",
+                           "Windows 11 Pro"
+                       ],
+        "TotalIndexes":  "5"
+    },
+    {
+        "Architecture":  "ARM64",
+        "Language":  "ja-jp",
+        "Activation":  "Retail",
+        "Indexes":  {
+                        "Windows 11 Home":  4,
+                        "Windows 11 Pro":  5
+                    },
+        "IndexNames":  [
+                           "Windows 11 Home",
+                           "Windows 11 Pro"
+                       ],
+        "TotalIndexes":  "5"
+    },
+    {
+        "Architecture":  "ARM64",
+        "Language":  "ja-jp",
+        "Activation":  "Volume",
+        "Indexes":  {
+                        "Windows 11 Pro":  5,
+                        "Windows 11 Enterprise":  4
+                    },
+        "IndexNames":  [
+                           "Windows 11 Enterprise",
+                           "Windows 11 Pro"
+                       ],
+        "TotalIndexes":  "5"
+    },
+    {
+        "Architecture":  "ARM64",
+        "Language":  "ko-kr",
+        "Activation":  "Retail",
+        "Indexes":  {
+                        "Windows 11 Home":  4,
+                        "Windows 11 Pro":  5
+                    },
+        "IndexNames":  [
+                           "Windows 11 Home",
+                           "Windows 11 Pro"
+                       ],
+        "TotalIndexes":  "5"
+    },
+    {
+        "Architecture":  "ARM64",
+        "Language":  "ko-kr",
+        "Activation":  "Volume",
+        "Indexes":  {
+                        "Windows 11 Pro":  5,
+                        "Windows 11 Enterprise":  4
+                    },
+        "IndexNames":  [
+                           "Windows 11 Enterprise",
+                           "Windows 11 Pro"
+                       ],
+        "TotalIndexes":  "5"
+    },
+    {
+        "Architecture":  "ARM64",
+        "Language":  "lt-lt",
+        "Activation":  "Retail",
+        "Indexes":  {
+                        "Windows 11 Home":  4,
+                        "Windows 11 Pro":  5
+                    },
+        "IndexNames":  [
+                           "Windows 11 Home",
+                           "Windows 11 Pro"
+                       ],
+        "TotalIndexes":  "5"
+    },
+    {
+        "Architecture":  "ARM64",
+        "Language":  "lt-lt",
+        "Activation":  "Volume",
+        "Indexes":  {
+                        "Windows 11 Pro":  5,
+                        "Windows 11 Enterprise":  4
+                    },
+        "IndexNames":  [
+                           "Windows 11 Enterprise",
+                           "Windows 11 Pro"
+                       ],
+        "TotalIndexes":  "5"
+    },
+    {
+        "Architecture":  "ARM64",
+        "Language":  "lv-lv",
+        "Activation":  "Retail",
+        "Indexes":  {
+                        "Windows 11 Home":  4,
+                        "Windows 11 Pro":  5
+                    },
+        "IndexNames":  [
+                           "Windows 11 Home",
+                           "Windows 11 Pro"
+                       ],
+        "TotalIndexes":  "5"
+    },
+    {
+        "Architecture":  "ARM64",
+        "Language":  "lv-lv",
+        "Activation":  "Volume",
+        "Indexes":  {
+                        "Windows 11 Pro":  5,
+                        "Windows 11 Enterprise":  4
+                    },
+        "IndexNames":  [
+                           "Windows 11 Enterprise",
+                           "Windows 11 Pro"
+                       ],
+        "TotalIndexes":  "5"
+    },
+    {
+        "Architecture":  "ARM64",
+        "Language":  "nb-no",
+        "Activation":  "Retail",
+        "Indexes":  {
+                        "Windows 11 Home":  4,
+                        "Windows 11 Pro":  5
+                    },
+        "IndexNames":  [
+                           "Windows 11 Home",
+                           "Windows 11 Pro"
+                       ],
+        "TotalIndexes":  "5"
+    },
+    {
+        "Architecture":  "ARM64",
+        "Language":  "nb-no",
+        "Activation":  "Volume",
+        "Indexes":  {
+                        "Windows 11 Pro":  5,
+                        "Windows 11 Enterprise":  4
+                    },
+        "IndexNames":  [
+                           "Windows 11 Enterprise",
+                           "Windows 11 Pro"
+                       ],
+        "TotalIndexes":  "5"
+    },
+    {
+        "Architecture":  "ARM64",
+        "Language":  "nl-nl",
+        "Activation":  "Retail",
+        "Indexes":  {
+                        "Windows 11 Home":  4,
+                        "Windows 11 Pro":  5
+                    },
+        "IndexNames":  [
+                           "Windows 11 Home",
+                           "Windows 11 Pro"
+                       ],
+        "TotalIndexes":  "5"
+    },
+    {
+        "Architecture":  "ARM64",
+        "Language":  "nl-nl",
+        "Activation":  "Volume",
+        "Indexes":  {
+                        "Windows 11 Pro":  5,
+                        "Windows 11 Enterprise":  4
+                    },
+        "IndexNames":  [
+                           "Windows 11 Enterprise",
+                           "Windows 11 Pro"
+                       ],
+        "TotalIndexes":  "5"
+    },
+    {
+        "Architecture":  "ARM64",
+        "Language":  "pl-pl",
+        "Activation":  "Retail",
+        "Indexes":  {
+                        "Windows 11 Home":  4,
+                        "Windows 11 Pro":  5
+                    },
+        "IndexNames":  [
+                           "Windows 11 Home",
+                           "Windows 11 Pro"
+                       ],
+        "TotalIndexes":  "5"
+    },
+    {
+        "Architecture":  "ARM64",
+        "Language":  "pl-pl",
+        "Activation":  "Volume",
+        "Indexes":  {
+                        "Windows 11 Pro":  5,
+                        "Windows 11 Enterprise":  4
+                    },
+        "IndexNames":  [
+                           "Windows 11 Enterprise",
+                           "Windows 11 Pro"
+                       ],
+        "TotalIndexes":  "5"
+    },
+    {
+        "Architecture":  "ARM64",
+        "Language":  "pt-br",
+        "Activation":  "Retail",
+        "Indexes":  {
+                        "Windows 11 Home Single Language":  5,
+                        "Windows 11 Pro":  6,
+                        "Windows 11 Home":  4
+                    },
+        "IndexNames":  [
+                           "Windows 11 Home",
+                           "Windows 11 Home Single Language",
+                           "Windows 11 Pro"
+                       ],
+        "TotalIndexes":  "6"
+    },
+    {
+        "Architecture":  "ARM64",
+        "Language":  "pt-br",
+        "Activation":  "Volume",
+        "Indexes":  {
+                        "Windows 11 Pro":  5,
+                        "Windows 11 Enterprise":  4
+                    },
+        "IndexNames":  [
+                           "Windows 11 Enterprise",
+                           "Windows 11 Pro"
+                       ],
+        "TotalIndexes":  "5"
+    },
+    {
+        "Architecture":  "ARM64",
+        "Language":  "pt-pt",
+        "Activation":  "Retail",
+        "Indexes":  {
+                        "Windows 11 Home Single Language":  5,
+                        "Windows 11 Pro":  6,
+                        "Windows 11 Home":  4
+                    },
+        "IndexNames":  [
+                           "Windows 11 Home",
+                           "Windows 11 Home Single Language",
+                           "Windows 11 Pro"
+                       ],
+        "TotalIndexes":  "6"
+    },
+    {
+        "Architecture":  "ARM64",
+        "Language":  "pt-pt",
+        "Activation":  "Volume",
+        "Indexes":  {
+                        "Windows 11 Pro":  5,
+                        "Windows 11 Enterprise":  4
+                    },
+        "IndexNames":  [
+                           "Windows 11 Enterprise",
+                           "Windows 11 Pro"
+                       ],
+        "TotalIndexes":  "5"
+    },
+    {
+        "Architecture":  "ARM64",
+        "Language":  "ro-ro",
+        "Activation":  "Retail",
+        "Indexes":  {
+                        "Windows 11 Home":  4,
+                        "Windows 11 Pro":  5
+                    },
+        "IndexNames":  [
+                           "Windows 11 Home",
+                           "Windows 11 Pro"
+                       ],
+        "TotalIndexes":  "5"
+    },
+    {
+        "Architecture":  "ARM64",
+        "Language":  "ro-ro",
+        "Activation":  "Volume",
+        "Indexes":  {
+                        "Windows 11 Pro":  5,
+                        "Windows 11 Enterprise":  4
+                    },
+        "IndexNames":  [
+                           "Windows 11 Enterprise",
+                           "Windows 11 Pro"
+                       ],
+        "TotalIndexes":  "5"
+    },
+    {
+        "Architecture":  "ARM64",
+        "Language":  "sk-sk",
+        "Activation":  "Retail",
+        "Indexes":  {
+                        "Windows 11 Home":  4,
+                        "Windows 11 Pro":  5
+                    },
+        "IndexNames":  [
+                           "Windows 11 Home",
+                           "Windows 11 Pro"
+                       ],
+        "TotalIndexes":  "5"
+    },
+    {
+        "Architecture":  "ARM64",
+        "Language":  "sk-sk",
+        "Activation":  "Volume",
+        "Indexes":  {
+                        "Windows 11 Pro":  5,
+                        "Windows 11 Enterprise":  4
+                    },
+        "IndexNames":  [
+                           "Windows 11 Enterprise",
+                           "Windows 11 Pro"
+                       ],
+        "TotalIndexes":  "5"
+    },
+    {
+        "Architecture":  "ARM64",
+        "Language":  "sl-si",
+        "Activation":  "Retail",
+        "Indexes":  {
+                        "Windows 11 Home":  4,
+                        "Windows 11 Pro":  5
+                    },
+        "IndexNames":  [
+                           "Windows 11 Home",
+                           "Windows 11 Pro"
+                       ],
+        "TotalIndexes":  "5"
+    },
+    {
+        "Architecture":  "ARM64",
+        "Language":  "sl-si",
+        "Activation":  "Volume",
+        "Indexes":  {
+                        "Windows 11 Pro":  5,
+                        "Windows 11 Enterprise":  4
+                    },
+        "IndexNames":  [
+                           "Windows 11 Enterprise",
+                           "Windows 11 Pro"
+                       ],
+        "TotalIndexes":  "5"
+    },
+    {
+        "Architecture":  "ARM64",
+        "Language":  "sr-latn-rs",
+        "Activation":  "Retail",
+        "Indexes":  {
+                        "Windows 11 Home Single Language":  5,
+                        "Windows 11 Pro":  6,
+                        "Windows 11 Home":  4
+                    },
+        "IndexNames":  [
+                           "Windows 11 Home",
+                           "Windows 11 Home Single Language",
+                           "Windows 11 Pro"
+                       ],
+        "TotalIndexes":  "6"
+    },
+    {
+        "Architecture":  "ARM64",
+        "Language":  "sr-latn-rs",
+        "Activation":  "Volume",
+        "Indexes":  {
+                        "Windows 11 Pro":  5,
+                        "Windows 11 Enterprise":  4
+                    },
+        "IndexNames":  [
+                           "Windows 11 Enterprise",
+                           "Windows 11 Pro"
+                       ],
+        "TotalIndexes":  "5"
+    },
+    {
+        "Architecture":  "ARM64",
+        "Language":  "sv-se",
+        "Activation":  "Retail",
+        "Indexes":  {
+                        "Windows 11 Home":  4,
+                        "Windows 11 Pro":  5
+                    },
+        "IndexNames":  [
+                           "Windows 11 Home",
+                           "Windows 11 Pro"
+                       ],
+        "TotalIndexes":  "5"
+    },
+    {
+        "Architecture":  "ARM64",
+        "Language":  "sv-se",
+        "Activation":  "Volume",
+        "Indexes":  {
+                        "Windows 11 Pro":  5,
+                        "Windows 11 Enterprise":  4
+                    },
+        "IndexNames":  [
+                           "Windows 11 Enterprise",
+                           "Windows 11 Pro"
+                       ],
+        "TotalIndexes":  "5"
+    },
+    {
+        "Architecture":  "ARM64",
+        "Language":  "th-th",
+        "Activation":  "Retail",
+        "Indexes":  {
+                        "Windows 11 Home Single Language":  5,
+                        "Windows 11 Pro":  6,
+                        "Windows 11 Home":  4
+                    },
+        "IndexNames":  [
+                           "Windows 11 Home",
+                           "Windows 11 Home Single Language",
+                           "Windows 11 Pro"
+                       ],
+        "TotalIndexes":  "6"
+    },
+    {
+        "Architecture":  "ARM64",
+        "Language":  "th-th",
+        "Activation":  "Volume",
+        "Indexes":  {
+                        "Windows 11 Pro":  5,
+                        "Windows 11 Enterprise":  4
+                    },
+        "IndexNames":  [
+                           "Windows 11 Enterprise",
+                           "Windows 11 Pro"
+                       ],
+        "TotalIndexes":  "5"
+    },
+    {
+        "Architecture":  "ARM64",
+        "Language":  "tr-tr",
+        "Activation":  "Retail",
+        "Indexes":  {
+                        "Windows 11 Home Single Language":  5,
+                        "Windows 11 Pro":  6,
+                        "Windows 11 Home":  4
+                    },
+        "IndexNames":  [
+                           "Windows 11 Home",
+                           "Windows 11 Home Single Language",
+                           "Windows 11 Pro"
+                       ],
+        "TotalIndexes":  "6"
+    },
+    {
+        "Architecture":  "ARM64",
+        "Language":  "tr-tr",
+        "Activation":  "Volume",
+        "Indexes":  {
+                        "Windows 11 Pro":  5,
+                        "Windows 11 Enterprise":  4
+                    },
+        "IndexNames":  [
+                           "Windows 11 Enterprise",
+                           "Windows 11 Pro"
+                       ],
+        "TotalIndexes":  "5"
+    },
+    {
+        "Architecture":  "ARM64",
+        "Language":  "uk-ua",
+        "Activation":  "Retail",
+        "Indexes":  {
+                        "Windows 11 Home Single Language":  5,
+                        "Windows 11 Pro":  6,
+                        "Windows 11 Home":  4
+                    },
+        "IndexNames":  [
+                           "Windows 11 Home",
+                           "Windows 11 Home Single Language",
+                           "Windows 11 Pro"
+                       ],
+        "TotalIndexes":  "6"
+    },
+    {
+        "Architecture":  "ARM64",
+        "Language":  "uk-ua",
+        "Activation":  "Volume",
+        "Indexes":  {
+                        "Windows 11 Pro":  5,
+                        "Windows 11 Enterprise":  4
+                    },
+        "IndexNames":  [
+                           "Windows 11 Enterprise",
+                           "Windows 11 Pro"
+                       ],
+        "TotalIndexes":  "5"
+    },
+    {
+        "Architecture":  "ARM64",
+        "Language":  "zh-cn",
+        "Activation":  "Retail",
+        "Indexes":  {
+                        "Windows 11 ???":  6,
+                        "Windows 11 ???":  4,
+                        "Windows 11 ??????":  5
+                    },
+        "IndexNames":  [
+                           "Windows 11 ???",
+                           "Windows 11 ??????",
+                           "Windows 11 ???"
+                       ],
+        "TotalIndexes":  "6"
+    },
+    {
+        "Architecture":  "ARM64",
+        "Language":  "zh-cn",
+        "Activation":  "Volume",
+        "Indexes":  {
+                        "Windows 11 ???":  5,
+                        "Windows 11 ???":  4
+                    },
+        "IndexNames":  [
+                           "Windows 11 ???",
+                           "Windows 11 ???"
+                       ],
+        "TotalIndexes":  "5"
+    },
+    {
+        "Architecture":  "ARM64",
+        "Language":  "zh-tw",
+        "Activation":  "Retail",
+        "Indexes":  {
+                        "Windows 11 ???":  5,
+                        "Windows 11 ???":  4
+                    },
+        "IndexNames":  [
+                           "Windows 11 ???",
+                           "Windows 11 ???"
+                       ],
+        "TotalIndexes":  "5"
+    },
+    {
+        "Architecture":  "ARM64",
+        "Language":  "zh-tw",
+        "Activation":  "Volume",
+        "Indexes":  {
+                        "Windows 11 ???":  5,
+                        "Windows 11 ???":  4
+                    },
+        "IndexNames":  [
+                           "Windows 11 ???",
+                           "Windows 11 ???"
+                       ],
+        "TotalIndexes":  "5"
+    }
+]

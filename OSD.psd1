@@ -137,6 +137,7 @@ FunctionsToExport       = @(
     'Get-OSDCloudDriverPacks',
     'Get-OSDCloudOperatingSystems',
     'Get-OSDCloudOperatingSystemsIndexes',
+    'Get-OSDCloudOperatingSystemsIndexMap',
     'Get-OSDCloudTemplate',
     'Get-OSDCloudTemplateNames',
     'Get-OSDCloudWorkspace',
