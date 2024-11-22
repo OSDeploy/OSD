@@ -33,7 +33,10 @@ function Invoke-OSDCloudIPU {
         $DownloadOnly,
 
         [switch]
-        $DiagnosticPrompt
+        $DiagnosticPrompt,
+
+        [switch]
+        $DynamicUpdate
     )
     #region Admin Elevation
     $whoiam = [system.security.principal.windowsidentity]::getcurrent().name
@@ -115,7 +118,7 @@ function Invoke-OSDCloudIPU {
     Write-Output "Architecture (Get-NativeMatchineImage): $((Get-NativeMatchineImage).NativeMachine)"
     Write-Output "Computer Model: $ComputerModel"
     Write-Output "Serial: $Serial"
-    if ($Manufacturer -like "H*"){Write-Output "Computer Product Code: $HPProdCode"}
+    if ($Manufacturer -like "HP" -or $Manufacturer -like "Hewlett"){Write-Output "Computer Product Code: $HPProdCode"}
     Write-Output $cpuDetails.Name
     Write-Output "Current BIOS Level: $($BIOSInfo.SMBIOSBIOSVersion) From Date: $CurrentBIOSDate"
     Get-TPMVer
@@ -455,9 +458,31 @@ function Invoke-OSDCloudIPU {
             Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Expanding DriverPack for Upgrade Media"   
             Expand-StagedDriverPack
             $DriverPackFile = Get-ChildItem -Path $DriverPackPath -Filter $DriverPack.FileName
-            $DriverPackExpandPath = Join-Path $DriverPackFile.Directory $DriverPackFile.BaseName
-            if (Test-Path -Path $DriverPackExpandPath){
 
+            if ($Manufacturer -like "LENOVO"){
+                $DriverPackExpandPath = "$($DriverPackFile.Directory)\SCCM\$($DriverPackFile.BaseName)"
+            }
+            else{
+                $DriverPackExpandPath = Join-Path $DriverPackFile.Directory $DriverPackFile.BaseName
+            }
+            if (Test-Path -Path $DriverPackExpandPath){
+                Write-Host -ForegroundColor Green "Confirmed Driver Pack Expanded to $DriverPackExpandPath"
+            }
+            else {
+                Write-Host -ForegroundColor Red "Driver Pack Failed to Expand to $DriverPackExpandPath"
+                if ($Silent){
+                    Write-Host -ForegroundColor Red "Continuing without Driver Pack integration"
+                }
+                else {
+                    $DriverContinueInput = Read-Host "Do you want to continue without Driver Pack? (Y/N)"
+                    if ($DriverContinueInput -eq 'Y' -or $DriverContinueInput -eq 'y') {
+                        Write-Host -ForegroundColor Red "Continuing without Driver Pack integration"
+                    } elseif ($DriverContinueInput -eq 'N' -or $DriverContinueInput -eq 'n') {
+                        throw "Driver Pack Failed to Expand to $DriverPackExpandPath"
+                    } else {
+                        Write-Output "Invalid input. Please enter Y or N."
+                    }
+                }
             }
         }
     }
