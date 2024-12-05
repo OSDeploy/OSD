@@ -1,4 +1,7 @@
 {
     "files.autoGuessEncoding": true,
-    "dotnet.defaultSolution": "disable"
+    "dotnet.defaultSolution": "disable",
+    "cSpell.words": [
+        "cimv"
+    ]
 }

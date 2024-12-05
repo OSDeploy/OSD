@@ -223,3 +223,4 @@ ModelManifest.xml
 
 #.vscode/
 .vscode/launch.json
+.vscode/settings.json

@@ -64,18 +64,18 @@ function Invoke-OSDCloudIPU {
             $verBuild    = [Convert]::ToInt32($versionInfo[4..6] -join '', 16)
             $verRevision = 0
             [version]$ver = "$verMaj`.$verMin`.$verBuild`.$verRevision"
-            Write-Output "TPM Verion: $ver | Spec: $((Get-CimInstance -Namespace "ROOT\cimv2\Security\MicrosoftTpm" -ClassName Win32_TPM).SpecVersion)"
+            Write-Output "TPM Version: $ver | Spec: $((Get-CimInstance -Namespace "ROOT\cimv2\Security\MicrosoftTpm" -ClassName Win32_TPM).SpecVersion)"
             }
-        else {Write-Output "TPM Verion: $((Get-CimInstance -Namespace "ROOT\cimv2\Security\MicrosoftTpm" -ClassName Win32_TPM).ManufacturerVersion) | Spec: $((Get-CimInstance -Namespace "ROOT\cimv2\Security\MicrosoftTpm" -ClassName Win32_TPM).SpecVersion)"}
+        else {Write-Output "TPM Version: $((Get-CimInstance -Namespace "ROOT\cimv2\Security\MicrosoftTpm" -ClassName Win32_TPM).ManufacturerVersion) | Spec: $((Get-CimInstance -Namespace "ROOT\cimv2\Security\MicrosoftTpm" -ClassName Win32_TPM).SpecVersion)"}
         }
 
     else
         {
         if ($((Get-CimInstance -Namespace "ROOT\cimv2\Security\MicrosoftTpm" -ClassName Win32_TPM).SpecVersion) -match "1.2")
             {
-            Write-Output "TPM Verion: $((Get-CimInstance -Namespace "ROOT\cimv2\Security\MicrosoftTpm" -ClassName Win32_TPM).ManufacturerVersion) | Spec: $((Get-CimInstance -Namespace "ROOT\cimv2\Security\MicrosoftTpm" -ClassName Win32_TPM).SpecVersion)"
+            Write-Output "TPM Version: $((Get-CimInstance -Namespace "ROOT\cimv2\Security\MicrosoftTpm" -ClassName Win32_TPM).ManufacturerVersion) | Spec: $((Get-CimInstance -Namespace "ROOT\cimv2\Security\MicrosoftTpm" -ClassName Win32_TPM).SpecVersion)"
             }
-        else {Write-Output "TPM Verion: $((Get-CimInstance -Namespace "ROOT\cimv2\Security\MicrosoftTpm" -ClassName Win32_TPM).ManufacturerVersion) | Spec: $((Get-CimInstance -Namespace "ROOT\cimv2\Security\MicrosoftTpm" -ClassName Win32_TPM).SpecVersion)"}
+        else {Write-Output "TPM Version: $((Get-CimInstance -Namespace "ROOT\cimv2\Security\MicrosoftTpm" -ClassName Win32_TPM).ManufacturerVersion) | Spec: $((Get-CimInstance -Namespace "ROOT\cimv2\Security\MicrosoftTpm" -ClassName Win32_TPM).SpecVersion)"}
         }
     }
 
@@ -131,7 +131,7 @@ function Invoke-OSDCloudIPU {
     if ($Locale -ne "en-US"){Write-Output "WinSystemLocale: $locale"}
     $FreeSpace = (Get-CimInstance win32_LogicalDisk -Filter "DeviceID='C:'").FreeSpace/1GB -as [int]
     $DiskSize = (Get-CimInstance win32_LogicalDisk -Filter "DeviceID='C:'").Size/1GB -as [int]
-    Write-Output "C:\ Drive Size: $DiskSize, Freespace: $FreeSpace"
+    Write-Output "C:\ Drive Size: $DiskSize, Free Space: $FreeSpace"
 
     if ($Build -le 19045){
         $Win11 = Get-Win11Readiness
@@ -145,7 +145,7 @@ function Invoke-OSDCloudIPU {
             }
             elseif ($Build -lt 19045){
                 write-host -ForegroundColor Green "But.. You can upgrade it to Windows 10 22H2"
-            }
+            } 
         }
     }
 
@@ -164,7 +164,7 @@ function Invoke-OSDCloudIPU {
     #endregion Device Info
 
     #============================================================================
-    #region Current Activiation
+    #region Current Activation
     #============================================================================
 
     if (!($OSEdition)){
@@ -181,7 +181,7 @@ function Invoke-OSDCloudIPU {
     }
     $OSArch = $env:PROCESSOR_ARCHITECTURE   
     if ($OSArch -eq "AMD64"){$OSArch = 'x64'}
-    #endregion Current Activiation
+    #endregion Current Activation
     
     if ($OSArch -eq "ARM64"){
         #=================================================
@@ -362,7 +362,7 @@ function Invoke-OSDCloudIPU {
         Write-Host -ForegroundColor DarkGray "Start-BitsTransfer -Source $ESD.Url -Destination $ImageFolderPath -DisplayName $($ESD.FileName) -Description 'Windows Media Download' -RetryInterval 60"
         $BitsJob = Start-BitsTransfer -Source $ESD.Url -Destination $ImageFolderPath -DisplayName "$($ESD.FileName)" -Description "Windows Media Download" -RetryInterval 60
         If ($BitsJob.JobState -eq "Error"){
-            write-Host "BITS tranfer failed: $($BitsJob.ErrorDescription)"
+            write-Host "BITS transfer failed: $($BitsJob.ErrorDescription)"
         }
 
     }
