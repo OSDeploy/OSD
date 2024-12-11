@@ -1,0 +1,31 @@
+{
+  "Title": "2024-11 Cumulative Update for .NET Framework 3.5, 4.7.2 and 4.8 for Windows Server 2019 for x64 (KB5046540)",
+  "Id": "5046540",
+  "Architecture": "x64",
+  "Language": "",
+  "Hotfix": null,
+  "Description": "Install this update to resolve issues in Windows. For a complete listing of the issues that are included in this update, see the associated Microsoft Knowledge Base article for more information. After you install this item, you may have to restart your computer.",
+  "LastModified": "2024-11-12",
+  "Size": "173.5 MB",
+  "Classification": "Updates",
+  "SupportedProducts": "Windows Server 2019",
+  "MSRCNumber": null,
+  "MSRCSeverity": "n/a",
+  "RebootBehavior": "Can request restart",
+  "RequestsUserInput": false,
+  "ExclusiveInstall": "",
+  "NetworkRequired": false,
+  "UninstallNotes": "This software update can be removed by selecting View installed updates in the Programs and Features Control Panel.",
+  "UninstallSteps": null,
+  "UpdateId": "b3521466-0956-4a14-b42a-53f70e9cd9a9",
+  "Supersedes": {
+    "KB": "5042350",
+    "Description": "2024-08 Cumulative Update for .NET Framework 3.5, 4.7.2 and 4.8 for Windows Server 2019 for x64 (KB5042350)"
+  },
+  "SupersededBy": null,
+  "Link": [
+    "https://catalog.s.download.windowsupdate.com/d/msdownload/update/software/updt/2024/10/windows10.0-kb5046268-x64_cd2f14649df2343f1b4692c50644f22b863ed408.msu",
+    "https://catalog.s.download.windowsupdate.com/d/msdownload/update/software/updt/2024/10/windows10.0-kb5046269-x64-ndp48_ffaedfbf319b1822620e751996e1d9ba0653b2f6.msu"
+  ],
+  "InputObject": "2024-11 Windows Server 2019"
+}
