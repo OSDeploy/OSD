@@ -24,7 +24,9 @@ function Get-MicrosoftDriverPack {
     #=================================================
     #   Import Catalog
     #=================================================
-    $Results = Import-Clixml -Path "$($MyInvocation.MyCommand.Module.ModuleBase)\Catalogs\MicrosoftDriverPackCatalog.xml" | `
+    $Results = Import-Clixml -Path "$($MyInvocation.MyCommand.Module.ModuleBase)\Catalogs\MicrosoftDriverPackCatalog.xml"
+    $Results += Import-Clixml -Path "$($MyInvocation.MyCommand.Module.ModuleBase)\Catalogs\MicrosoftDriverPackCatalogEOL.xml"
+    $Results = $Results | `
     Select-Object CatalogVersion, Status, ReleaseDate, Manufacturer, Model, Product, Name, PackageID, FileName, `
     @{Name='DriverPackUrl';Expression={($_.Url)}}, `
     @{Name='DriverPackOS';Expression={($_.OSVersion)}}, `

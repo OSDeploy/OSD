@@ -42,8 +42,9 @@ function Update-MicrosoftDriverPackCatalog {
     $OfflineCatalogName = 'MicrosoftDriverPackCatalog.json'
 
     $OnlineCatalogName = 'MicrosoftDriverPackCatalog.json'
-    $OnlineBaseUri = 'https://www.microsoft.com/en-us/download/details.aspx?id='
-    $OnlineDownloadUri = 'https://www.microsoft.com/en-us/download/confirmation.aspx?id='
+    $OnlineBaseUri = 'https://www.microsoft.com/download/details.aspx?id='
+    #    $OnlineDownloadUri = 'https://www.microsoft.com/download/confirmation.aspx?id='
+    $OnlineDownloadUri = 'https://www.microsoft.com/download/details.aspx?id='
     $OnlineCatalogUri = 'https://support.microsoft.com/en-us/surface/download-drivers-and-firmware-for-surface-09bb2e09-2a4b-cb69-0951-078a7739e120'
 
     $MicrosoftSurfaceModels = Get-Content -Path "$($MyInvocation.MyCommand.Module.ModuleBase)\Catalogs\MicrosoftSurfaceModels.json" -Raw
@@ -67,8 +68,8 @@ function Update-MicrosoftDriverPackCatalog {
     $MasterResults = @()
 
     $MasterResults = foreach ($Surface in $SurfaceModels) {
-        Write-Verbose -Verbose "Processing $($Surface.Name)"
         $DriverPage = $OnlineDownloadUri + $Surface.PackageID
+        Write-Verbose -Verbose "Processing $($Surface.Name) - $DriverPage"
         $Downloads = (Invoke-WebRequest -Uri $DriverPage).Links
         $Downloads = $Downloads | Where-Object {$_.href -match 'download.microsoft.com'}
         $Downloads = $Downloads | Where-Object {($_.href -match 'Win11') -or ($_.href -match 'Win10')}
