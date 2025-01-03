@@ -16,7 +16,7 @@ function Get-AdkPaths {
     [CmdletBinding()]
     param (
         [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
-        [ValidateSet('amd64','x86','arm64')]
+        [ValidateSet('amd64', 'x86', 'arm64')]
         [string]$Arch = $Env:PROCESSOR_ARCHITECTURE
     )
     
@@ -73,7 +73,13 @@ function Get-AdkPaths {
         dismexe             = Join-Path $PathDeploymentTools (Join-Path 'DISM' 'dism.exe')
         efisysbin           = Join-Path $PathDeploymentTools (Join-Path 'Oscdimg' 'efisys.bin')
         efisysnopromptbin   = Join-Path $PathDeploymentTools (Join-Path 'Oscdimg' 'efisys_noprompt.bin')
-        etfsbootcom         = Join-Path $PathDeploymentTools (Join-Path 'Oscdimg' 'etfsboot.com')
+        etfsbootcom         = if ($Arch -eq 'arm64') {
+            # ARM64 does not have a etfsboot.com | Redirect to amd64 folder
+            Join-Path (Join-Path $AdkRoot (Join-Path 'Deployment Tools' 'amd64')) (Join-Path 'Oscdimg' 'etfsboot.com')
+        }
+        else {
+            Join-Path $PathDeploymentTools (Join-Path 'Oscdimg' 'etfsboot.com')
+        }
         imagexexe           = Join-Path $PathDeploymentTools (Join-Path 'DISM' 'imagex.exe')
         oa3toolexe          = Join-Path $PathDeploymentTools (Join-Path 'Licensing\OA30' 'oa3tool.exe')
         oscdimgexe          = Join-Path $PathDeploymentTools (Join-Path 'Oscdimg' 'oscdimg.exe')
