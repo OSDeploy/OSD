@@ -1785,7 +1785,7 @@
         if ($WebConnection) {  #This all requires the device to be online to download updates
             if (Test-HPIASupport){
                 #Set Enable Specialize to be triggered later
-                $EnableSpecialize = $true
+                #$EnableSpecialize = $true #Disabling on 24.1.7, adding lower into the process only if TPM update is needed
 
 
                 Write-SectionHeader "HP Enterprise Options Setup"
@@ -1815,6 +1815,12 @@
                     Write-Host -ForegroundColor DarkGray "Unable to Test for HP Sure Admin State"
                 }
                 if ($HPSureAdminState) {$HPSureAdminMode = $HPSureAdminState.SureAdminMode}
+
+                if ($Global:OSDCloud.HPTPMUpdate -eq $true){
+                    if (Get-HPTPMDetermine -ne "True"){
+                        $Global:OSDCloud.HPTPMUpdate = $false
+                    }
+                }
                 if (($Global:OSDCloud.HPTPMUpdate -eq $true) -or ($Global:OSDCloud.HPBIOSUpdate -eq $true)){
                     if ($HPSureAdminMode -eq "On"){
                         Write-Host "HP Sure Admin Enabled, Unable to Modify HP BIOS Settings or Perform HP BIOS / TPM Updates" -ForegroundColor Yellow
@@ -1887,6 +1893,7 @@
                     if (Get-HPTPMDetermine -ne "False"){
                         Test-HPTPMFromOSDCloudUSB -TryToCopy
                         Invoke-HPTPMEXEDownload
+                        $EnableSpecialize = $true
                     }
                     else {
                         #$Global:OSDCloud.HPTPMUpdate = $false
