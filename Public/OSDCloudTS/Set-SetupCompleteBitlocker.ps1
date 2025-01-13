@@ -85,24 +85,24 @@ Stop-Transcript
     if (!(Test-Path -Path "C:\OSDCloud\configs")){New-Item -Path "C:\osdcloud\configs" -ItemType Directory -Force | Out-Null}
     $BitlockerFile | Out-File "C:\OSDCloud\configs\BackupToAAD.ps1" -Force -Verbose
     
-    $ScriptsPath = "C:\Windows\Setup\scripts"
+    $ScriptsPath = "C:\Windows\Setup\Scripts"
     $RunScript = @(@{ Script = "SetupComplete"; BatFile = 'SetupComplete.cmd'; ps1file = 'SetupComplete.ps1';Type = 'Setup'; Path = "$ScriptsPath"})
     $PSFilePath = "$($RunScript.Path)\$($RunScript.ps1File)"
 
-    if (Test-Path -Path $PSFilePath){
-        Add-Content -Path $PSFilePath "Write-OutPut 'Enabling Bitlocker'"
-        Add-Content -Path $PSFilePath "Enable-TpmAutoProvisioning"
-        Add-Content -Path $PSFilePath "Initialize-Tpm"
-        Add-Content -Path $PSFilePath 'Enable-BitLocker -MountPoint c:\ -EncryptionMethod XtsAes256 -RecoveryPasswordProtector -UsedSpaceOnly:$false'
-        #Create Scheduled Task
-        Add-Content -Path $PSFilePath '$action = New-ScheduledTaskAction -Execute "PowerShell.exe" -Argument  "-NoProfile -NoLogo -NonInteractive -ExecutionPolicy Bypass -File C:\OSDCloud\configs\BackupToAAD.ps1"'
-        Add-Content -Path $PSFilePath '$trigger = New-ScheduledTaskTrigger -AtLogon'
-        Add-Content -Path $PSFilePath '$principal = New-ScheduledTaskPrincipal -UserId "SYSTEM" -LogonType ServiceAccount'
-        Add-Content -Path $PSFilePath '$settings = New-ScheduledTaskSettingsSet'
-        Add-Content -Path $PSFilePath '$task = New-ScheduledTask -Action $action -Principal $principal -Trigger $trigger -Settings $settings'
-        Add-Content -Path $PSFilePath 'Register-ScheduledTask "Register Bitlocker in AAD" -InputObject $task'
+    if (!(Test-Path -Path $ScriptsPath)){
+        Set-SetupCompleteInitialize
     }
-    else {
-    Write-Output "$PSFilePath - Not Found"
-    }
+
+    Write-Output "Appending $($RunScript.Script) Files"
+    Add-Content -Path $PSFilePath "Write-OutPut 'Enabling Bitlocker'"
+    Add-Content -Path $PSFilePath "Enable-TpmAutoProvisioning"
+    Add-Content -Path $PSFilePath "Initialize-Tpm"
+    Add-Content -Path $PSFilePath 'Enable-BitLocker -MountPoint c:\ -EncryptionMethod XtsAes256 -RecoveryPasswordProtector -UsedSpaceOnly:$false'
+    #Create Scheduled Task
+    Add-Content -Path $PSFilePath '$action = New-ScheduledTaskAction -Execute "PowerShell.exe" -Argument  "-NoProfile -NoLogo -NonInteractive -ExecutionPolicy Bypass -File C:\OSDCloud\configs\BackupToAAD.ps1"'
+    Add-Content -Path $PSFilePath '$trigger = New-ScheduledTaskTrigger -AtLogon'
+    Add-Content -Path $PSFilePath '$principal = New-ScheduledTaskPrincipal -UserId "SYSTEM" -LogonType ServiceAccount'
+    Add-Content -Path $PSFilePath '$settings = New-ScheduledTaskSettingsSet'
+    Add-Content -Path $PSFilePath '$task = New-ScheduledTask -Action $action -Principal $principal -Trigger $trigger -Settings $settings'
+    Add-Content -Path $PSFilePath 'Register-ScheduledTask "Register Bitlocker in AAD" -InputObject $task'
 }

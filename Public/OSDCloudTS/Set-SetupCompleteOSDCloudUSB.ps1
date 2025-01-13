@@ -28,7 +28,7 @@ function Set-SetupCompleteOSDCloudUSB {
             Write-Host " Found SetupComplete Files on OSDCloudUSB, Copying Local and Setting up for SetupComplete Phase" -ForegroundColor Gray
             Copy-Item -Path $SetupCompletePath\* -Destination "C:\OSDCloud\Scripts\SetupComplete" -Recurse -Force
             
-            $ScriptsPath = "C:\Windows\Setup\scripts"
+            $ScriptsPath = "C:\Windows\Setup\Scripts"
             $RunScript = @(@{ Script = "SetupComplete"; BatFile = 'SetupComplete.cmd'; ps1file = 'SetupComplete.ps1';Type = 'Setup'; Path = "$ScriptsPath"})
             $PSFilePath = "$($RunScript.Path)\$($RunScript.ps1File)"
         
@@ -54,7 +54,7 @@ function Set-SetupCompleteOSDCloudCustom {
     }
     catch {throw}
 
-    $ScriptsPath = "C:\Windows\Setup\scripts"
+    $ScriptsPath = "C:\Windows\Setup\Scripts"
     $RunScript = @(@{ Script = "SetupComplete"; BatFile = 'SetupComplete.cmd'; ps1file = 'SetupComplete.ps1';Type = 'Setup'; Path = "$ScriptsPath"})
     $PSFilePath = "$($RunScript.Path)\$($RunScript.ps1File)"
 
