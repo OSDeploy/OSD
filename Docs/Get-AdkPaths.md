@@ -13,7 +13,7 @@ Gets many Windows ADK Paths into a hash to easily use in your code
 ## SYNTAX
 
 ```
-Get-AdkPaths [[-Arch] <String>] [<CommonParameters>]
+Get-AdkPaths [-AdkRoot <String>] [[-Arch] <String>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -29,6 +29,21 @@ PS C:\> {{ Add example code here }}
 {{ Add example description here }}
 
 ## PARAMETERS
+
+### -AdkRoot
+{{ Fill AdkRoot Description }}
+
+```yaml
+Type: String
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
 
 ### -Arch
 {{ Fill Arch Description }}
@@ -53,8 +68,6 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ## OUTPUTS
 
 ## NOTES
-21.3.15.2   Renamed to make it easier to understand what it does
-21.3.10     Initial Release
 
 ## RELATED LINKS
 

@@ -2,17 +2,16 @@
 
 @{
 RootModule              = 'OSD.psm1'
-ModuleVersion           = '24.12.10.1'
+ModuleVersion           = '25.1.14.1'
 CompatiblePSEditions    = @('Desktop')
 GUID                    = '9fe5b9b6-0224-4d87-9018-a8978529f6f5'
 Author                  = 'David Segura . Gary Blok . Akos Bakos'
 CompanyName             = 'OSD Community'
-Copyright               = '(c) 2024 OSDeploy'
+Copyright               = '(c) 2025 OSDeploy'
 Description             = @'
-2024 November Update
+2025 January Update
 https://osd.osdeploy.com
-
-Required for OSDCloud and OSDBuilder
+Required for OSDCloud and not OSDBuilder
 '@
 PowerShellVersion       = '5.1'
 FormatsToProcess        = @(

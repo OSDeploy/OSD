@@ -43,7 +43,7 @@ function Update-MicrosoftDriverPackCatalog {
 
     $OnlineCatalogName = 'MicrosoftDriverPackCatalog.json'
     $OnlineBaseUri = 'https://www.microsoft.com/download/details.aspx?id='
-    #    $OnlineDownloadUri = 'https://www.microsoft.com/download/confirmation.aspx?id='
+    #$OnlineDownloadUri = 'https://www.microsoft.com/download/confirmation.aspx?id='
     $OnlineDownloadUri = 'https://www.microsoft.com/download/details.aspx?id='
     $OnlineCatalogUri = 'https://support.microsoft.com/en-us/surface/download-drivers-and-firmware-for-surface-09bb2e09-2a4b-cb69-0951-078a7739e120'
 

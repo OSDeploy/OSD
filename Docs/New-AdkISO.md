@@ -14,8 +14,8 @@ ADK is required
 ## SYNTAX
 
 ```
-New-AdkISO [-MediaPath] <String> [-isoFileName] <String> [-isoLabel] <String> [-OpenExplorer]
- [<CommonParameters>]
+New-AdkISO [[-AdkRoot] <String>] [-MediaPath] <String> [-isoFileName] <String> [-isoLabel] <String>
+ [-OpenExplorer] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -33,6 +33,21 @@ PS C:\> {{ Add example code here }}
 
 ## PARAMETERS
 
+### -AdkRoot
+{{ Fill AdkRoot Description }}
+
+```yaml
+Type: String
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 1
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
 ### -MediaPath
 Directory containing the bootable media
 
@@ -42,7 +57,7 @@ Parameter Sets: (All)
 Aliases:
 
 Required: True
-Position: 1
+Position: 2
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -57,7 +72,7 @@ Parameter Sets: (All)
 Aliases:
 
 Required: True
-Position: 2
+Position: 3
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -73,7 +88,7 @@ Parameter Sets: (All)
 Aliases:
 
 Required: True
-Position: 3
+Position: 4
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False

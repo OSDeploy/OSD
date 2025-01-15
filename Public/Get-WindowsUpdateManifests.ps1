@@ -10,7 +10,8 @@ https://osd.osdeploy.com/
 #>
 function Get-WindowsUpdateManifests {
     [CmdletBinding()]
-    $ManifestPath = "$($MyInvocation.MyCommand.Module.ModuleBase)\Manifests\MSCatalog"
+    #$ManifestPath = "$($MyInvocation.MyCommand.Module.ModuleBase)\Manifests\MSCatalog"
+    $ManifestPath = "$($env:ProgramData)\OSDeploy\OSD-MicrosoftUpdate"
     $ManifestFiles = Get-ChildItem -Path "$ManifestPath\*" -Include '*.json' -Recurse | Select-Object -Property *
 
     $WindowsUpdateManifests = @()

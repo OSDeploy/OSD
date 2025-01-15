@@ -26,6 +26,9 @@ https://github.com/OSDeploy/OSD/tree/master/Docs
 function New-AdkISO {
     [CmdletBinding()]
     param (
+        [System.String]
+        $AdkRoot,
+
         [Parameter(Mandatory = $true)]
         [string]$MediaPath,
 
@@ -49,8 +52,11 @@ function New-AdkISO {
     #=================================================
     #   Get Adk Paths
     #=================================================
-    $AdkPaths = Get-AdkPaths
-
+    if ($AdkRoot) {
+        $AdkPaths = Get-AdkPaths -AdkRoot $AdkRoot
+    } else {
+        $AdkPaths = Get-AdkPaths
+    }
     if ($null -eq $AdkPaths) {
         Write-Warning "Could not get ADK going, sorry"
         Break
@@ -133,7 +139,7 @@ function New-AdkISO {
         Break
     }
     $PromptIso = Get-Item -Path $IsoFullName
-    Write-Host -ForegroundColor Yellow "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) ISO created at $PromptIso"
+    #Write-Host -ForegroundColor Yellow "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) ISO created at $PromptIso"
     #=================================================
     #   Create NoPrompt ISO
     #=================================================
@@ -148,7 +154,7 @@ function New-AdkISO {
         Break
     }
     $NoPromptIso = Get-Item -Path $IsoFullName
-    Write-Host -ForegroundColor Yellow "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) ISO created at $NoPromptIso"
+    #Write-Host -ForegroundColor Yellow "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) ISO created at $NoPromptIso"
     #=================================================
     #   OpenExplorer
     #=================================================

@@ -1077,8 +1077,11 @@ function Set-OSDCloudTemplate {
         if (Test-Path "$env:ProgramData\OSDeploy\MyBootMedia\$Name") {
             $OSDCloudTemplate = "$env:ProgramData\OSDeploy\MyBootMedia\$Name"
         }
-        elseif (Test-Path "$env:ProgramData\OSDeploy\WinPEBootMedia\$Name") {
-            $OSDCloudTemplate = "$env:ProgramData\OSDeploy\WinPEBootMedia\$Name"
+        elseif (Test-Path "$env:ProgramData\OSDK\BootMedia\$Name") {
+            $OSDCloudTemplate = "$env:ProgramData\OSDK\BootMedia\$Name"
+        }
+        elseif (Test-Path "C:\OSDKIT\BootMedia\$Name") {
+            $OSDCloudTemplate = "C:\OSDKIT\BootMedia\$Name"
         }
         else {
             $OSDCloudTemplate = "$env:ProgramData\OSDCloud\Templates\$Name"

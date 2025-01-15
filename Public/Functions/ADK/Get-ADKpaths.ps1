@@ -7,35 +7,50 @@ Gets many Windows ADK Paths into a hash to easily use in your code
 
 .LINK
 https://github.com/OSDeploy/OSD/tree/master/Docs
-
-.NOTES
-21.3.15.2   Renamed to make it easier to understand what it does
-21.3.10     Initial Release
 #>
 function Get-AdkPaths {
     [CmdletBinding()]
     param (
+        [System.String]
+        $AdkRoot,
+
         [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
         [ValidateSet('amd64', 'x86', 'arm64')]
         [string]$Arch = $Env:PROCESSOR_ARCHITECTURE
     )
-    
     #=================================================
     #   Get-AdkPaths AdkRoot
     #=================================================
-    $InstalledRoots32 = 'HKLM:\SOFTWARE\Microsoft\Windows Kits\Installed Roots'
-    $InstalledRoots64 = 'HKLM:\SOFTWARE\WOW6432Node\Microsoft\Windows Kits\Installed Roots'
-    if (Test-Path $InstalledRoots64) {
-        $KitsRoot10 = Get-ItemPropertyValue -Path $InstalledRoots64 -Name 'KitsRoot10'
-    }
-    elseif (Test-Path $InstalledRoots32) {
-        $KitsRoot10 = Get-ItemPropertyValue -Path $InstalledRoots64 -Name 'KitsRoot10'
+    if ($AdkRoot) {
+        # Do Nothing
     }
     else {
-        Write-Warning "Unable to determine ADK Path"
-        Break
+        $InstalledRoots32 = 'HKLM:\SOFTWARE\Microsoft\Windows Kits\Installed Roots'
+        $InstalledRoots64 = 'HKLM:\SOFTWARE\WOW6432Node\Microsoft\Windows Kits\Installed Roots'
+        $RegistryValue = 'KitsRoot10'
+        $KitsRoot10 = $null
+ 
+        if (Test-Path -Path $InstalledRoots32) {
+            $RegistryKey = Get-Item -Path $InstalledRoots32
+            if ($null -ne $RegistryKey.GetValue($RegistryValue)) {
+                $KitsRoot10 = Get-ItemPropertyValue -Path $InstalledRoots32 -Name $RegistryValue -ErrorAction SilentlyContinue
+            }
+        }
+        elseif (Test-Path -Path $InstalledRoots64) {
+            $RegistryKey = Get-Item -Path $InstalledRoots64
+            if ($null -ne $RegistryKey.GetValue($RegistryValue)) {
+                $KitsRoot10 = Get-ItemPropertyValue -Path $InstalledRoots64 -Name $RegistryValue -ErrorAction SilentlyContinue
+            }
+        }
+
+        if ($KitsRoot10) {
+            $AdkRoot = Join-Path $KitsRoot10 'Assessment and Deployment Kit'
+        }
+        else {
+            Write-Warning 'Unable to determine ADK Path'
+            Return $null
+        }
     }
-    $AdkRoot = Join-Path $KitsRoot10 'Assessment and Deployment Kit'
     #=================================================
     #   WinPERoot
     #=================================================

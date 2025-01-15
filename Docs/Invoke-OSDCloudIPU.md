@@ -14,7 +14,7 @@ schema: 2.0.0
 
 ```
 Invoke-OSDCloudIPU [-OSName <String>] [-Silent] [-SkipDriverPack] [-NoReboot] [-DownloadOnly]
- [-DiagnosticPrompt] [<CommonParameters>]
+ [-DiagnosticPrompt] [-DynamicUpdate] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -118,6 +118,21 @@ Aliases:
 Required: False
 Position: Named
 Default value: False
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -DynamicUpdate
+{{ Fill DynamicUpdate Description }}
+
+```yaml
+Type: SwitchParameter
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
