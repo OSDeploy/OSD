@@ -32,7 +32,7 @@ function Save-MsUpCatDriver {
     #   Catalog
     #=================================================
 <#     if (!(Get-Module -ListAvailable -Name MSCatalog)) {
-        Install-Module MSCatalog -Force -ErrorAction Ignore
+        Install-Module MSCatalog -Force -SkipPublisherCheck -ErrorAction Ignore
     } #>
     #=================================================
     #$HardwareIDPattern = 'VEN_([0-9a-f]){4}&DEV_([0-9a-f]){4}&SUBSYS_([0-9a-f]){8}'

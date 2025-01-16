@@ -16,6 +16,7 @@ function Get-AdkPaths {
 
         [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
         [ValidateSet('amd64', 'x86', 'arm64')]
+        [Alias('Architecture')]
         [string]$Arch = $Env:PROCESSOR_ARCHITECTURE
     )
     #=================================================
@@ -30,16 +31,19 @@ function Get-AdkPaths {
         $RegistryValue = 'KitsRoot10'
         $KitsRoot10 = $null
  
-        if (Test-Path -Path $InstalledRoots32) {
-            $RegistryKey = Get-Item -Path $InstalledRoots32
-            if ($null -ne $RegistryKey.GetValue($RegistryValue)) {
-                $KitsRoot10 = Get-ItemPropertyValue -Path $InstalledRoots32 -Name $RegistryValue -ErrorAction SilentlyContinue
-            }
-        }
-        elseif (Test-Path -Path $InstalledRoots64) {
+        if (Test-Path -Path $InstalledRoots64) {
             $RegistryKey = Get-Item -Path $InstalledRoots64
             if ($null -ne $RegistryKey.GetValue($RegistryValue)) {
                 $KitsRoot10 = Get-ItemPropertyValue -Path $InstalledRoots64 -Name $RegistryValue -ErrorAction SilentlyContinue
+            }
+        }
+
+        if (-NOT ($KitsRoot10)) {
+            if (Test-Path -Path $InstalledRoots32) {
+                $RegistryKey = Get-Item -Path $InstalledRoots32
+                if ($null -ne $RegistryKey.GetValue($RegistryValue)) {
+                    $KitsRoot10 = Get-ItemPropertyValue -Path $InstalledRoots32 -Name $RegistryValue -ErrorAction SilentlyContinue
+                }
             }
         }
 

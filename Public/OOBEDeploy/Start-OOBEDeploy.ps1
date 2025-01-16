@@ -170,7 +170,7 @@ function Start-OOBEDeploy {
             Write-Host -ForegroundColor DarkCyan "Install-Module AutopilotOOBE -Force"
             Write-Warning "AutopilotOOBE will open in a new PowerShell Window while OOBEDeploy continues in the background"
             if (($env:UserName -eq 'defaultuser0') -or (!(Get-Module AutopilotOOBE -ListAvailable -ErrorAction Ignore))) {
-                Install-Module AutopilotOOBE -Force
+                Install-Module AutopilotOOBE -Force -SkipPublisherCheck
             }
             if ($CustomProfile) {
                 Start-Process PowerShell.exe -ArgumentList "-Command Start-AutopilotOOBE -CustomProfile $CustomProfile"

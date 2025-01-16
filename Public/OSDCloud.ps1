@@ -2030,7 +2030,7 @@ set path=%path%;C:\Program Files\WindowsPowerShell\Scripts
 start PowerShell -NoL -W Mi
 
 :: Install the latest OSD Module
-start "Install-Module OSD" /wait PowerShell -NoL -C Install-Module OSD -Force -Verbose
+start "Install-Module OSD" /wait PowerShell -NoL -C Install-Module OSD -Force -SkipPublisherCheck -Verbose
 
 :: Start-OOBEDeploy
 :: The next line assumes that you have a configuration saved in C:\ProgramData\OSDeploy\OSDeploy.OOBEDeploy.json

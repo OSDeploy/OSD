@@ -178,7 +178,7 @@ if ($env:UserName -eq 'defaultuser0') {
         if ($env:UserName -eq 'defaultuser0') {
             if (!(Get-Module PSWindowsUpdate -ListAvailable -ErrorAction Ignore)) {
                 try {
-                    Install-Module PSWindowsUpdate -Force
+                    Install-Module PSWindowsUpdate -Force -SkipPublisherCheck
                     Import-Module PSWindowsUpdate -Force
                 }
                 catch {
@@ -233,7 +233,7 @@ if ($env:UserName -eq 'defaultuser0') {
         if ($env:UserName -eq 'defaultuser0') {
             if (!(Get-Module PSWindowsUpdate -ListAvailable)) {
                 try {
-                    Install-Module PSWindowsUpdate -Force
+                    Install-Module PSWindowsUpdate -Force -SkipPublisherCheck
                     Import-Module PSWindowsUpdate -Force
                 }
                 catch {
