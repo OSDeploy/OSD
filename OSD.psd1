@@ -2,7 +2,7 @@
 
 @{
 RootModule              = 'OSD.psm1'
-ModuleVersion           = '25.1.16.1'
+ModuleVersion           = '25.1.16.2'
 CompatiblePSEditions    = @('Desktop')
 GUID                    = '9fe5b9b6-0224-4d87-9018-a8978529f6f5'
 Author                  = 'David Segura . Gary Blok . Akos Bakos'
@@ -354,7 +354,6 @@ FunctionsToExport       = @(
     'Update-DellDriverPackCatalog',
     'Update-HPDriverPackCatalog',
     'Update-LenovoDriverPackCatalog',
-    'Update-MicrosoftDriverPackCatalog',
     'Invoke-OSDInfo',
     'Update-IntelDriversCatalog',
     'Start-OSDCloudToolbox',
