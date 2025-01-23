@@ -217,7 +217,6 @@
         robocopy "$WorkspacePath\ODT" "$MountPath\OSDCloud\ODT" *.xml /mir /ndl /njh /njs /b /np
         robocopy "$WorkspacePath\ODT" "$MountPath\OSDCloud\ODT" setup.exe /mir /ndl /njh /njs /b /np
     }
-    
     #region DriverHWID
     if ($DriverHWID) {
         $AddWindowsDriverPath = Join-Path $env:TEMP (Get-Random)
@@ -403,7 +402,15 @@ PowerShell -Nol -C Initialize-OSDCloudStartnetUpdate
         Add-7Zip2BootImage
     }   
     #endregion
-
+    
+    #region CMTrace
+    #Copy CMTrace from WorkSpace to WinPE - Gary Blok 25.1.22
+    if (Test-Path "$WorkspacePath\cmtrace.exe") {
+        Write-Host -ForegroundColor DarkGray "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Copy CMTrace from WorkSpace to WinPE"
+        Copy-Item -Path "$WorkspacePath\cmtrace.exe" -Destination "$env:TEMP\cmtrace.exe" -Force | Out-Null
+        robocopy "$env:TEMP" "$MountPath\Windows\System32" cmtrace.exe /ndl /njh /njs /b /np /r:0 /w:0
+    }
+    #endregion
     #region OSD PowerShell Module
     Write-Host -ForegroundColor DarkGray "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Saving OSD Module to X:\Program Files\WindowsPowerShell\Modules"
     Save-Module -Name OSD -Path "$MountPath\Program Files\WindowsPowerShell\Modules" -Force
