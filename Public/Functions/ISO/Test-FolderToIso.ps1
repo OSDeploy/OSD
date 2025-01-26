@@ -55,9 +55,9 @@ function Test-FolderToIso {
     #=================================================
     #   Get Adk Paths
     #=================================================
-    $AdkPaths = Get-AdkPaths
+    $WindowsAdkPaths = Get-WindowsAdkPaths
 
-    if ($null -eq $AdkPaths) {
+    if ($null -eq $WindowsAdkPaths) {
         Write-Warning "Test-FolderToIso: Could not locate the ADK to create the ISO"
         Return $false
     }

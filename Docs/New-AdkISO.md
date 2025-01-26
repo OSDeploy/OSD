@@ -14,7 +14,7 @@ ADK is required
 ## SYNTAX
 
 ```
-New-AdkISO [[-AdkRoot] <String>] [-MediaPath] <String> [-isoFileName] <String> [-isoLabel] <String>
+New-AdkISO [[-WindowsAdkRoot] <String>] [-MediaPath] <String> [-isoFileName] <String> [-isoLabel] <String>
  [-OpenExplorer] [<CommonParameters>]
 ```
 
@@ -33,13 +33,13 @@ PS C:\> {{ Add example code here }}
 
 ## PARAMETERS
 
-### -AdkRoot
-{{ Fill AdkRoot Description }}
+### -WindowsAdkRoot
+{{ Fill WindowsAdkRoot Description }}
 
 ```yaml
 Type: String
 Parameter Sets: (All)
-Aliases:
+Aliases: AdkRoot
 
 Required: False
 Position: 1

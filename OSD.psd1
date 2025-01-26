@@ -2,7 +2,7 @@
 
 @{
 RootModule              = 'OSD.psm1'
-ModuleVersion           = '25.1.26.2'
+ModuleVersion           = '25.1.26.3'
 CompatiblePSEditions    = @('Desktop')
 GUID                    = '9fe5b9b6-0224-4d87-9018-a8978529f6f5'
 Author                  = 'David Segura . Gary Blok . Akos Bakos'
@@ -63,7 +63,6 @@ FunctionsToExport       = @(
     'Find-OSDCloudOfflinePath',
     'Find-TextInFile',
     'Find-TextInModule',
-    'Get-AdkPaths',
     'Get-AzClipboard',
     'Get-AzOSDCloud',
     'Get-AzOSDTechId',
@@ -363,7 +362,11 @@ FunctionsToExport       = @(
     'Reset-OSDCloudVMSettings',
     'Set-OSDCloudVMSettings',
     'Start-OSDPadCategories',
-    'Get-WindowsUpdateManifests'
+    'Get-WindowsUpdateManifests',
+    'Get-WindowsAdkInstallPath',
+    'Get-WindowsAdkInstallVersion',
+    'Get-WindowsAdkPaths',
+    'Get-WindowsKitsInstallPath'
 )
     CmdletsToExport = @()
     VariablesToExport = @()

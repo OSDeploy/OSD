@@ -1,31 +1,46 @@
-<#
-.SYNOPSIS
-Gets many Windows ADK Paths into a hash to easily use in your code
+function Get-WindowsAdkPaths {
+    <#
+    .SYNOPSIS
+    Retrieves the command paths of the Windows Assessment and Deployment Kit (ADK).
 
-.DESCRIPTION
-Gets many Windows ADK Paths into a hash to easily use in your code
+    .DESCRIPTION
+    Retrieves the command paths of the Windows Assessment and Deployment Kit (ADK).
 
-.LINK
-https://github.com/OSDeploy/OSD/tree/master/Docs
-#>
-function Get-AdkPaths {
+    .NOTES
+    Author: David Segura
+    #>
     [CmdletBinding()]
     param (
-        [System.String]
-        $AdkRoot,
-
         [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
+        # Windows ADK architecture to get. Valid values are 'amd64', 'x86', and 'arm64'.
         [ValidateSet('amd64', 'x86', 'arm64')]
-        [Alias('Architecture')]
-        [string]$Arch = $Env:PROCESSOR_ARCHITECTURE
+        [Alias('Arch')]
+        [string]$Architecture = $Env:PROCESSOR_ARCHITECTURE,
+
+        [Parameter(Position = 1, ValueFromPipelineByPropertyName = $true)]
+        # Path to the Windows ADK root directory. Typically 'C:\Program Files (x86)\Windows Kits\10\Assessment and Deployment Kit'
+        [ValidateScript({
+            if (!($_ | Test-Path)) {
+                throw 'Path does not exist'
+            }
+            if (!($_ | Test-Path -PathType Container)) {
+                throw 'Path must be a directory'
+            }
+            if (!(Test-Path "$($_.FullName)\Deployment Tools")) {
+                throw 'Path does not contain a Deployment Tools directory'
+            }
+            if (!(Test-Path "$($_.FullName)\Windows Preinstallation Environment")) {
+                throw 'Path does not contain a Windows Preinstallation Environment directory'
+            }
+            return $true
+        })]
+        [System.IO.FileInfo]
+        [Alias('AdkRoot')]
+        $WindowsAdkRoot
     )
     #=================================================
-    #   Get-AdkPaths AdkRoot
-    #=================================================
-    if ($AdkRoot) {
-        # Do Nothing
-    }
-    else {
+    # region Get Windows ADK information from the Registry
+    if (-not $WindowsAdkRoot) {
         $InstalledRoots32 = 'HKLM:\SOFTWARE\Microsoft\Windows Kits\Installed Roots'
         $InstalledRoots64 = 'HKLM:\SOFTWARE\WOW6432Node\Microsoft\Windows Kits\Installed Roots'
         $RegistryValue = 'KitsRoot10'
@@ -48,41 +63,41 @@ function Get-AdkPaths {
         }
 
         if ($KitsRoot10) {
-            $AdkRoot = Join-Path $KitsRoot10 'Assessment and Deployment Kit'
+            $WindowsAdkRoot = Join-Path $KitsRoot10 'Assessment and Deployment Kit'
         }
         else {
-            Write-Warning "[$((Get-Date).ToString('yyyy-MM-dd HH:mm:ss'))] Unable to determine ADK Path"
+            Write-Warning "[$((Get-Date).ToString('HH:mm:ss'))] Unable to determine ADK Path"
             return
         }
     }
+    #endregion
     #=================================================
-    #   WinPERoot
-    #=================================================
-    $WinPERoot = Join-Path $AdkRoot 'Windows Preinstallation Environment'
+    # region Validate Windows ADK Path
+    $WinPERoot = Join-Path $WindowsAdkRoot 'Windows Preinstallation Environment'
     if (-NOT (Test-Path $WinPERoot -PathType Container)) {
-        Write-Warning "[$((Get-Date).ToString('yyyy-MM-dd HH:mm:ss'))] WinPERoot is not a valid path $WinPERoot"
+        Write-Warning "[$((Get-Date).ToString('HH:mm:ss'))] WinPERoot is not a valid path $WinPERoot"
         $WinPERoot = $null
         return
     }
+    #endregion
     #=================================================
-    #   PathDeploymentTools
+    # region Set ADK Paths
+    $PathDeploymentTools = Join-Path $WindowsAdkRoot (Join-Path 'Deployment Tools' $Architecture)
+    $PathWinPE = Join-Path $WinPERoot $Architecture
+    #endregion
     #=================================================
-    $PathDeploymentTools = Join-Path $AdkRoot (Join-Path 'Deployment Tools' $Arch)
-    $PathWinPE = Join-Path $WinPERoot $Arch
-    #=================================================
-    #   Create Object
-    #=================================================
+    # region Build Results
     $Results = [PSCustomObject] @{
         #KitsRoot           = $KitsRoot10
-        AdkRoot             = $AdkRoot
+        AdkRoot             = $WindowsAdkRoot
         PathBCDBoot         = Join-Path $PathDeploymentTools 'BCDBoot'
         PathDeploymentTools = $PathDeploymentTools
         PathDISM            = Join-Path $PathDeploymentTools 'DISM'
         PathOscdimg         = Join-Path $PathDeploymentTools 'Oscdimg'
-        PathUsmt            = Join-Path $AdkRoot (Join-Path 'User State Migration Tool' $Arch)
-        PathWinPE           = Join-Path $WinPERoot $Arch
+        PathUsmt            = Join-Path $WindowsAdkRoot (Join-Path 'User State Migration Tool' $Architecture)
+        PathWinPE           = Join-Path $WinPERoot $Architecture
         PathWinPEMedia      = Join-Path $PathWinPE 'Media'
-        PathWinSetup        = Join-Path $AdkRoot (Join-Path 'Windows Setup' $Arch)
+        PathWinSetup        = Join-Path $WindowsAdkRoot (Join-Path 'Windows Setup' $Architecture)
         WinPEOCs            = Join-Path $PathWinPE 'WinPE_OCs'
         WinPERoot           = $WinPERoot
         WimSourcePath       = Join-Path $PathWinPE 'en-us\winpe.wim'
@@ -93,9 +108,9 @@ function Get-AdkPaths {
         dismexe             = Join-Path $PathDeploymentTools (Join-Path 'DISM' 'dism.exe')
         efisysbin           = Join-Path $PathDeploymentTools (Join-Path 'Oscdimg' 'efisys.bin')
         efisysnopromptbin   = Join-Path $PathDeploymentTools (Join-Path 'Oscdimg' 'efisys_noprompt.bin')
-        etfsbootcom         = if ($Arch -eq 'arm64') {
+        etfsbootcom         = if ($Architecture -eq 'arm64') {
             # ARM64 does not have a etfsboot.com | Redirect to amd64 folder
-            Join-Path (Join-Path $AdkRoot (Join-Path 'Deployment Tools' 'amd64')) (Join-Path 'Oscdimg' 'etfsboot.com')
+            Join-Path (Join-Path $WindowsAdkRoot (Join-Path 'Deployment Tools' 'amd64')) (Join-Path 'Oscdimg' 'etfsboot.com')
         }
         else {
             Join-Path $PathDeploymentTools (Join-Path 'Oscdimg' 'etfsboot.com')
@@ -106,4 +121,6 @@ function Get-AdkPaths {
         pkgmgrexe           = Join-Path $PathDeploymentTools (Join-Path 'DISM' 'pkgmgr.exe')
     }
     Return $Results
+    #endregion
+    #=================================================
 }

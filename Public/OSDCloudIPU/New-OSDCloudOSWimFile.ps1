@@ -302,7 +302,7 @@ function New-OSDCloudOSWimFile {
     }
     Write-Host -ForegroundColor DarkGray "========================================================================="
     if ($CreateISO){
-        $PathToOscdimg = (Get-AdkPaths).oscdimgexe
+        $PathToOscdimg = (Get-WindowsAdkPaths).oscdimgexe
         if (!(Test-Path -Path $PathToOscdimg)){
             Write-Host -ForegroundColor Red "oscdimg.exe not found, unable to create ISO File"
             throw "oscdimg.exe not found, unable to create ISO File"

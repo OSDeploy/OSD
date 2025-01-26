@@ -34,16 +34,16 @@ function Edit-AdkWinPEWIM {
     #   Get ADK
     #=================================================
     $WinPEArch = 'amd64'
-    $AdkPaths = Get-AdkPaths -Arch $WinPEArch
+    $WindowsAdkPaths = Get-WindowsAdkPaths -Architecture $WinPEArch
 
-    if ($null -eq $AdkPaths) {
+    if ($null -eq $WindowsAdkPaths) {
         Write-Warning "Could not get ADK going, sorry"
         Break
     }
     #=================================================
     #   Get WinPE.wim
     #=================================================
-    $WimSourcePath = $AdkPaths.WimSourcePath
+    $WimSourcePath = $WindowsAdkPaths.WimSourcePath
     if (-NOT (Test-Path $WimSourcePath)) {
         Write-Warning "Could not find $WimSourcePath, sorry"
         Break
@@ -64,7 +64,7 @@ function Edit-AdkWinPEWIM {
     #   Add Packages
     #=================================================
     $ErrorActionPreference = 'Ignore'
-    $WinPEOCs = $AdkPaths.WinPEOCs
+    $WinPEOCs = $WindowsAdkPaths.WinPEOCs
 
     Add-WindowsPackage -Path $MountPath -PackagePath "$WinPEOCs\WinPE-WMI.cab"
     Add-WindowsPackage -Path $MountPath -PackagePath "$WinPEOCs\en-us\WinPE-WMI_en-us.cab"
