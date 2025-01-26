@@ -34,13 +34,13 @@ function New-AdkCopyPE {
     #=================================================
     #   Get Adk Paths
     #=================================================
-    $AdkPaths = Get-AdkPaths -Arch $WinPEArch
+    $WindowsAdkPaths = Get-WindowsAdkPaths -Architecture $WinPEArch
     #=================================================
     $Destination = $Path
 
-    $AdkWimSourcePath = $AdkPaths.WimSourcePath
-    $AdkPathOscdimg = $AdkPaths.PathOscdimg
-    $AdkPathWinPEMedia = $AdkPaths.PathWinPEMedia
+    $AdkWimSourcePath = $WindowsAdkPaths.WimSourcePath
+    $AdkPathOscdimg = $WindowsAdkPaths.PathOscdimg
+    $AdkPathWinPEMedia = $WindowsAdkPaths.PathWinPEMedia
 
     $DestinationMedia = Join-Path $Destination 'media'
     if (-NOT (Test-Path $DestinationMedia)) {

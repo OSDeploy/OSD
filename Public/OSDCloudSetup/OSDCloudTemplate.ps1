@@ -308,13 +308,13 @@ Windows Registry Editor Version 5.00
 
     #region Get Adk Paths
     if ($PSBoundParameters.ContainsKey('ARM64')) {
-        $AdkPaths = Get-AdkPaths -Arch arm64
+        $WindowsAdkPaths = Get-WindowsAdkPaths -Architecture 'arm64'
     }
     else {
-        $AdkPaths = Get-AdkPaths
+        $WindowsAdkPaths = Get-WindowsAdkPaths
     }
 
-    if ($null -eq $AdkPaths) {
+    if ($null -eq $WindowsAdkPaths) {
         Write-Host -ForegroundColor DarkGray "========================================================================="
         Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Could not get ADK going, sorry"
         Write-Host -ForegroundColor DarkGray "========================================================================="
@@ -342,7 +342,7 @@ Windows Registry Editor Version 5.00
     #endregion
 
     #region Test WimSourcePath
-    $WimSourcePath = $AdkPaths.WimSourcePath
+    $WimSourcePath = $WindowsAdkPaths.WimSourcePath
     if (-NOT (Test-Path $WimSourcePath)) {
         Write-Host -ForegroundColor DarkGray "========================================================================="
         Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Could not find the ADK WimSourcePath: $WimSourcePath"
@@ -386,7 +386,7 @@ Windows Registry Editor Version 5.00
     Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Mirroring ADK Media using Robocopy"
     Write-Host -ForegroundColor Yellow 'Mirroring will remove any previous WinPE and will force a full rebuild'
     
-    $PathWinPEMedia = $AdkPaths.PathWinPEMedia
+    $PathWinPEMedia = $WindowsAdkPaths.PathWinPEMedia
     Write-Host -ForegroundColor DarkGray "Source: $PathWinPEMedia"
 
     $DestinationMedia = Join-Path $OSDCloudTemplate 'Media'
@@ -543,7 +543,7 @@ Windows Registry Editor Version 5.00
 
     #region Set ADK Packages
     $ErrorActionPreference = 'Ignore'
-    $WinPEOCs = $AdkPaths.WinPEOCs
+    $WinPEOCs = $WindowsAdkPaths.WinPEOCs
 
     $OCPackages = @(
         'WMI'

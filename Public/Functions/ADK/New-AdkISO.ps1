@@ -26,8 +26,9 @@ https://github.com/OSDeploy/OSD/tree/master/Docs
 function New-AdkISO {
     [CmdletBinding()]
     param (
+        [Alias('AdkRoot')]
         [System.String]
-        $AdkRoot,
+        $WindowsAdkRoot,
 
         [Parameter(Mandatory = $true)]
         [string]$MediaPath,
@@ -52,10 +53,10 @@ function New-AdkISO {
     #=================================================
     #   Get Adk Paths
     #=================================================
-    if ($AdkRoot) {
-        $AdkPaths = Get-AdkPaths -AdkRoot $AdkRoot
+    if ($WindowsAdkRoot) {
+        $AdkPaths = Get-WindowsAdkPaths -WindowsAdkRoot $WindowsAdkRoot
     } else {
-        $AdkPaths = Get-AdkPaths
+        $AdkPaths = Get-WindowsAdkPaths
     }
     if ($null -eq $AdkPaths) {
         Write-Warning "Could not get ADK going, sorry"

@@ -62,7 +62,7 @@ function Convert-FolderToIso {
         #=================================================
         #   Get Adk Paths
         #=================================================
-        $AdkPaths = Get-AdkPaths
+        $WindowsAdkPaths = Get-WindowsAdkPaths
         #=================================================
         #   oscdimg.exe
         #=================================================
