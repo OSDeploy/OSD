@@ -51,7 +51,7 @@ Accept wildcard characters: False
 ```yaml
 Type: String
 Parameter Sets: (All)
-Aliases:
+Aliases: Architecture
 
 Required: False
 Position: 1
