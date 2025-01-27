@@ -10,8 +10,15 @@ https://osd.osdeploy.com/
 #>
 function Get-WindowsUpdateManifests {
     [CmdletBinding()]
+    param ()
+
+    Write-Warning "[$((Get-Date).ToString('HH:mm:ss'))] This functions is currently unavailable"
+    Start-Sleep -Seconds 10
+    return
+
+
     #$ManifestPath = "$($MyInvocation.MyCommand.Module.ModuleBase)\Manifests\MSCatalog"
-    $ManifestPath = "$($env:ProgramData)\OSDeploy\OSD-MicrosoftUpdate"
+    $ManifestPath = "$($env:ProgramData)\OSDeploy\OS-UpdateCatalog"
     $ManifestFiles = Get-ChildItem -Path "$ManifestPath\*" -Include '*.json' -Recurse | Select-Object -Property *
 
     $WindowsUpdateManifests = @()
