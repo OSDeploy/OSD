@@ -556,7 +556,7 @@ Windows Registry Editor Version 5.00
         'Dot3Svc'
         'EnhancedStorage'
         'FMAPI'
-        'GamingPeripherals'
+        #'GamingPeripherals'
         'HSP-Driver'
         'PPPoE'
         'PlatformId'
