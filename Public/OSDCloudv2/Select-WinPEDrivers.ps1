@@ -1,10 +1,10 @@
-function Get-WinPEDrivers {
+function Select-WinPEDrivers {
     <#
     .SYNOPSIS
-        Gets the WinPEDrivers in the OSDCache at $env:ProgramData\OSDCache.
+        Select WinPEDrivers in the OSDCache at $env:ProgramData\OSDCache.
 
     .DESCRIPTION
-        Gets the WinPEDrivers in the OSDCache at $env:ProgramData\OSDCache.
+        Select WinPEDrivers in the OSDCache at $env:ProgramData\OSDCache.
 
     .NOTES
         David Segura
@@ -51,9 +51,8 @@ function Get-WinPEDrivers {
         $WinPEDrivers = $WinPEDrivers | Where-Object { $_.Name -notmatch 'Wireless' }
     }
 
-    if ($GridView) {
-        $WinPEDrivers = $WinPEDrivers | Select-Object Name, FullName | Out-GridView -Title 'Select WinPE Drivers and press OK (Cancel to skip)' -PassThru
-    }
+
+    $WinPEDrivers = $WinPEDrivers | Select-Object Name, FullName | Out-GridView -Title 'Select WinPE Drivers and press OK (Cancel to skip)' -PassThru
     #endregion
     #=================================================
     return $WinPEDrivers

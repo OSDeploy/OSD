@@ -204,18 +204,19 @@
     #region WinPEDrivers
     if ($BetaWinPEDrivers) {
         Write-Host -ForegroundColor DarkCyan "[$((Get-Date).ToString('HH:mm:ss'))] OSDCloud v2 WinPEDrivers Private Beta"
+        
         # This is locked to amd64 for now
-
         $GetWinPEDrivers = @()
         $GetWinPEDrivers = Get-WinPEDrivers -Architecture amd64
 
+        $SelectWinPEDrivers = @()
         if ($GetWinPEDrivers) {
             Write-Host -ForegroundColor DarkGray "[$((Get-Date).ToString('HH:mm:ss'))] Select WinPEDrivers to add to this BootImage (Cancel to skip)"
-            $GetWinPEDrivers = Get-WinPEDrivers -Architecture amd64 -GridView
+            $SelectWinPEDrivers = Select-WinPEDrivers -Architecture amd64
         }
 
         if ($GetWinPEDrivers) {
-            $BetaWinPEDriversFullName = $GetWinPEDrivers | Select-Object -ExpandProperty FullName
+            $WinPEDriversFullName = $SelectWinPEDrivers | Select-Object -ExpandProperty FullName
         }
         else {
             Write-Host -ForegroundColor DarkGray "[$((Get-Date).ToString('HH:mm:ss'))] WinPEDrivers Drivers will not be added to this BootImage"
@@ -308,9 +309,9 @@
     }
     #=================================================
     #region OSDCloud v2 WinPEDrivers
-    if ($BetaWinPEDriversFullName) {
+    if ($WinPEDriversFullName) {
         Write-Host -ForegroundColor DarkCyan "[$((Get-Date).ToString('HH:mm:ss'))] OSDCloud v2 WinPEDrivers Private Beta"
-        foreach ($BetaWinPEDriversPath in $BetaWinPEDriversFullName) {
+        foreach ($BetaWinPEDriversPath in $WinPEDriversFullName) {
             # $ArchName = ( $Driver.FullName -split '\\' | Select-Object -last 3 ) -join '\'
             # Write-Host -ForegroundColor DarkGray $ArchName
             Write-Host -ForegroundColor DarkGray "[$((Get-Date).ToString('HH:mm:ss'))] Add WindowsDriver: $(Split-Path $BetaWinPEDriversPath -Leaf)"
