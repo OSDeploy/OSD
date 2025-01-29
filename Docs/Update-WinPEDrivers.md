@@ -1,23 +1,23 @@
 ---
 external help file: OSD-help.xml
 Module Name: OSD
-online version: https://osd.osdeploy.com/
+online version: https://github.com/OSDeploy/OSD/tree/master/Docs
 schema: 2.0.0
 ---
 
-# Get-WindowsUpdateManifests
+# Update-WinPEDrivers
 
 ## SYNOPSIS
-Returns an Array of Microsoft Updates from the Microsoft Update Catalog
+Updates the WinPEDrivers repository in the OSDCache at $env:ProgramData\OSDCache from the GitHub Origin.
 
 ## SYNTAX
 
 ```
-Get-WindowsUpdateManifests [<CommonParameters>]
+Update-WinPEDrivers [-Force] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-Returns an Array of Microsoft Updates from the Microsoft Update Catalog
+Updates the WinPEDrivers repository in the OSDCache at $env:ProgramData\OSDCache from the GitHub Origin.
 
 ## EXAMPLES
 
@@ -30,6 +30,21 @@ PS C:\> {{ Add example code here }}
 
 ## PARAMETERS
 
+### -Force
+Force the update of the Git Repository, overwriting all content.
+
+```yaml
+Type: SwitchParameter
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: False
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
 ### CommonParameters
 This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see [about_CommonParameters](http://go.microsoft.com/fwlink/?LinkID=113216).
 
@@ -38,8 +53,6 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ## OUTPUTS
 
 ## NOTES
+David Segura
 
 ## RELATED LINKS
-
-[https://osd.osdeploy.com/](https://osd.osdeploy.com/)
-

@@ -1,23 +1,23 @@
 ---
 external help file: OSD-help.xml
 Module Name: OSD
-online version: https://osd.osdeploy.com/
+online version:
 schema: 2.0.0
 ---
 
-# Get-WindowsUpdateManifests
+# Add-WinPEDrivers
 
 ## SYNOPSIS
-Returns an Array of Microsoft Updates from the Microsoft Update Catalog
+Adds the WinPEDrivers repository in the OSDCache at $env:ProgramData\OSDCache from the GitHub Origin.
 
 ## SYNTAX
 
 ```
-Get-WindowsUpdateManifests [<CommonParameters>]
+Add-WinPEDrivers [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-Returns an Array of Microsoft Updates from the Microsoft Update Catalog
+Adds the WinPEDrivers repository in the OSDCache at $env:ProgramData\OSDCache from the GitHub Origin.
 
 ## EXAMPLES
 
@@ -38,8 +38,6 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ## OUTPUTS
 
 ## NOTES
+David Segura
 
 ## RELATED LINKS
-
-[https://osd.osdeploy.com/](https://osd.osdeploy.com/)
-

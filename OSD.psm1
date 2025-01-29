@@ -54,6 +54,8 @@ if ($env:SystemDrive -eq 'X:') {
     }
 }
 #=================================================
+# 25.1.28
+New-Alias -Name Add-OSDCacheWinPEDrivers -Value Add-WinPEDrivers -Force -ErrorAction SilentlyContinue
 # 25.1.26
 New-Alias -Name Get-AdkPaths -Value Get-WindowsAdkPaths -Force -ErrorAction SilentlyContinue
 #Alias

@@ -1,25 +1,42 @@
 function Get-WinPEDrivers {
+    <#
+    .SYNOPSIS
+        Gets the WinPEDrivers in the OSDCache at $env:ProgramData\OSDCache.
+
+    .DESCRIPTION
+        Gets the WinPEDrivers in the OSDCache at $env:ProgramData\OSDCache.
+
+    .NOTES
+        David Segura
+    #>
     [CmdletBinding()]
     param (
+        [Parameter(Mandatory = $false, Position = 0)]
+        # Filters the drivers by architecture (amd64, arm64)
+        [ValidateSet('amd64', 'arm64')]
+        [System.String[]]
+        $Architecture,
+
+        [Parameter(Mandatory = $false)]
+        # Filters the drivers by boot image (ADK, WinPE, WinRE) by excluding Wireless drivers for ADK and WinPE
         [ValidateSet('ADK','WinPE','WinRE')]
         [System.String]
         $BootImage,
 
-        [ValidateSet('amd64','arm64')]
-        [System.String[]]
-        $Architecture,
-
+        [Parameter(Mandatory = $false)]
+        # Displays the drivers in a GridView for selection with PassThru
         [System.Management.Automation.SwitchParameter]
         $GridView
     )
+    #=================================================
     Write-Verbose "[$((Get-Date).ToString('HH:mm:ss'))] $($MyInvocation.MyCommand)"
     #=================================================
-    #region Get Paths
+    #region Get the WinPEDrivers Paths
     $DriverPathAMD64 = Join-Path -Path $(Get-OSDCachePath) -ChildPath 'WinPEDrivers-amd64'
     $DriverPathARM64 = Join-Path -Path $(Get-OSDCachePath) -ChildPath 'WinPEDrivers-arm64'
+    #endregion
     #=================================================
-    #region DriverPaths
-
+    #region Get the WinPEDrivers
     if ($Architecture -eq 'amd64') {
         $WinPEDrivers = @()
         $WinPEDrivers = Get-ChildItem -Path $DriverPathAMD64 -Directory -ErrorAction Ignore
@@ -32,7 +49,9 @@ function Get-WinPEDrivers {
         $WinPEDrivers = @()
         $WinPEDrivers = Get-ChildItem -Path ($DriverPathAMD64,$DriverPathARM64) -Directory -ErrorAction Ignore
     }
-
+    #endregion
+    #=================================================
+    #region Filter the WinPEDrivers
     if (($BootImage -eq 'ADK') -or ($BootImage -eq 'WinPE')) {
         $WinPEDrivers = $WinPEDrivers | Where-Object { $_.Name -notmatch 'Wireless' }
     }
@@ -40,6 +59,8 @@ function Get-WinPEDrivers {
     if ($GridView) {
         $WinPEDrivers = $WinPEDrivers | Select-Object Name, FullName | Out-GridView -Title 'Select WinPE Drivers and press OK (Cancel to skip)' -PassThru
     }
-
+    #endregion
+    #=================================================
     return $WinPEDrivers
+    #=================================================
 }
