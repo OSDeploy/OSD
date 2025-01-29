@@ -1,0 +1,36 @@
+[
+    {
+        "clone_url": "https://github.com/OSDeploy/WinPEDrivers-amd64.git",
+        "default_branch": "main",
+        "description": "Community Repository for WinPE Drivers amd64",
+        "full_name": "OSDeploy/WinPEDrivers-amd64",
+        "git_url": "git://github.com/OSDeploy/WinPEDrivers-amd64.git",
+        "html_url": "https://github.com/OSDeploy/WinPEDrivers-amd64",
+        "name": "WinPEDrivers-amd64",
+        "owner": {
+            "html_url": "https://github.com/OSDeploy",
+            "login": "OSDeploy",
+            "type": "User",
+            "url": "https://api.github.com/users/OSDeploy"
+        },
+        "svn_url": "https://github.com/OSDeploy/WinPEDrivers-amd64",
+        "url": "https://api.github.com/repos/OSDeploy/WinPEDrivers-amd64"
+    },
+    {
+        "clone_url": "https://github.com/OSDeploy/WinPEDrivers-arm64.git",
+        "default_branch": "main",
+        "description": "Community Repository for WinPE Drivers arm64",
+        "full_name": "OSDeploy/WinPEDrivers-arm64",
+        "git_url": "git://github.com/OSDeploy/WinPEDrivers-arm64.git",
+        "html_url": "https://github.com/OSDeploy/WinPEDrivers-arm64",
+        "name": "WinPEDrivers-arm64",
+        "owner": {
+            "html_url": "https://github.com/OSDeploy",
+            "login": "OSDeploy",
+            "type": "User",
+            "url": "https://api.github.com/users/OSDeploy"
+        },
+        "svn_url": "https://github.com/OSDeploy/WinPEDrivers-arm64",
+        "url": "https://api.github.com/repos/OSDeploy/WinPEDrivers-arm64"
+    }
+]

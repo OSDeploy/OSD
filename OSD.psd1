@@ -2,7 +2,7 @@
 
 @{
 RootModule              = 'OSD.psm1'
-ModuleVersion           = '25.1.28.1'
+ModuleVersion           = '25.1.28.2'
 CompatiblePSEditions    = @('Desktop')
 GUID                    = '9fe5b9b6-0224-4d87-9018-a8978529f6f5'
 Author                  = 'David Segura . Gary Blok . Akos Bakos . Michael Escamilla'
@@ -367,6 +367,9 @@ FunctionsToExport       = @(
     'Get-WindowsAdkInstallVersion',
     'Get-WindowsAdkPaths',
     'Get-WindowsKitsInstallPath'
+    # WinPEDrivers
+    'Add-OSDCacheWinPEDrivers',
+    'Get-WinPEDrivers'
 )
     CmdletsToExport = @()
     VariablesToExport = @()
