@@ -23,13 +23,16 @@
             Add-Content -Path $PSFilePath "Stop-Computer -Force"
         }
         else {
-            Add-Content -Path $PSFilePath "Stop-Transcript"
-            if (!($NoRestart)) {
+            if ($NoRestart) {
+                Add-Content -Path $PSFilePath "Write-Output 'SetupCompleteNoRestart enabled, Not Restarting Device'"
+                Add-Content -Path $PSFilePath "Stop-Transcript"
+            } else {
+                Add-Content -Path $PSFilePath "Stop-Transcript"
                 Add-Content -Path $PSFilePath "Restart-Computer -Force"
             }
         }
-        else {
-            Write-Output "$PSFilePath - Not Found"
-        }
+    }
+    else {
+        Write-Output "$PSFilePath - Not Found"
     }
 }
