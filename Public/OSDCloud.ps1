@@ -178,6 +178,7 @@
         ScriptStartup = $null
         ScriptShutdown = $null
         SectionPassed = $true
+        SetupCompleteNoRestart = [bool]$false
         SetWiFi = $null
         Shutdown = [bool]$false
         ShutdownSetupComplete = [bool]$false
@@ -2262,7 +2263,14 @@ exit
     }
 
     #This appends the two lines at the end of SetupComplete Script to Stop Transcription and to Restart Computer
-    Set-SetupCompleteCreateFinish
+    if ($Global:OSDCloud.SetupCompleteNoRestart -eq $true) {
+        Write-DarkGrayHost "[i] SetupCompleteNoRestart from Global Variable `$Global:OSDCloud.SetupComplete is set to $($Global:OSDCloud.SetupCompleteNoRestart)"
+        Set-SetupCompleteCreateFinish -NoRestart
+    }
+    else {
+        Set-SetupCompleteCreateFinish
+    }
+    
     #endregion
 
     #region ----- Config Shutdown Scripts
