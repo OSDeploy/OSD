@@ -1911,7 +1911,7 @@
                 if ($Null -eq $HPBIOSWinUpdate){$HPBIOSWinUpdate = $false}
 
                 Write-Host -ForegroundColor DarkGray "Adding HP Tasks into JSON Config File for Action during Specialize and Setup Complete"
-                Write-DarkGrayHost "HPIA Drivers = $($Global:OSDCloud.HPIADrivers) | HPIA Firmware = $($Global:OSDCloud.HPIAFirmware) | HPIA Software = $($Global:OSDCloud.HPIADrivers) | HPIA All = $($Global:OSDCloud.HPIAAll) "
+                Write-DarkGrayHost "HPIA Drivers = $($Global:OSDCloud.HPIADrivers) | HPIA Firmware = $($Global:OSDCloud.HPIAFirmware) | HPIA Software = $($Global:OSDCloud.HPIASoftware) | HPIA All = $($Global:OSDCloud.HPIAAll) "
                 Write-DarkGrayHost "HP TPM Update = $($Global:OSDCloud.HPTPMUpdate) | HP BIOS Update = $($Global:OSDCloud.HPBIOSUpdate) | HP BIOS WU Update = $HPBIOSWinUpdate" 
 
                 $HPHashTable = @{
