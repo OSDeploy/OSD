@@ -396,16 +396,22 @@ else{
 #$formMainWindowControlWindowsDefenderUpdate.Visibility = 'Hidden'
 #$formMainWindowControlWindowsDefenderUpdate.IsEnabled = $false
 #================================================
-#   Menu Options
+#   Menu Options - Deployment Options
 #================================================
 $formMainWindowControlcaptureScreenshots.IsChecked = $Global:OSDCloudGUI.captureScreenshots
 $formMainWindowControlClearDiskConfirm.IsChecked = $Global:OSDCloudGUI.ClearDiskConfirm
 $formMainWindowControlrestartComputer.IsChecked = $Global:OSDCloudGUI.restartComputer
+#================================================
+#   Menu Options - Microsoft Update Catalog
+#================================================
 $formMainWindowControlupdateDiskDrivers.IsChecked = $Global:OSDCloudGUI.updateDiskDrivers
 $formMainWindowControlupdateFirmware.IsChecked = $Global:OSDCloudGUI.updateFirmware
 $formMainWindowControlupdateNetworkDrivers.IsChecked = $Global:OSDCloudGUI.updateNetworkDrivers
 $formMainWindowControlupdateSCSIDrivers.IsChecked = $Global:OSDCloudGUI.updateSCSIDrivers
-
+$formMainWindowControlSyncMSUpCatDriverUSB.IsChecked = $Global:OSDCloudGUI.SyncMSUpCatDriverUSB
+#================================================
+#   Menu Options - SetupComplete Options
+#================================================
 $formMainWindowControlWindowsDefenderUpdate.IsChecked = $Global:OSDCloudGUI.WindowsDefenderUpdate
 $formMainWindowControlWindowsUpdates.IsChecked = $Global:OSDCloudGUI.WindowsUpdate
 $formMainWindowControlWindowsUpdateDrivers.IsChecked = $Global:OSDCloudGUI.WindowsUpdateDrivers
