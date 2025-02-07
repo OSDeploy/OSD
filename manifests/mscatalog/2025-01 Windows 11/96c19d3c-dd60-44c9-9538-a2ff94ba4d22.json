@@ -1,0 +1,60 @@
+﻿{
+    "Title":  "2025-01 Setup Dynamic Update for Windows 11 Version 24H2 for x64-based Systems (KB5050758)",
+    "Id":  "5050758",
+    "Architecture":  "x64",
+    "Language":  "",
+    "Hotfix":  null,
+    "Description":  "This update makes improvements to Windows setup binaries or any files that setup uses for feature updates in Windows.",
+    "LastModified":  "2025-01-28",
+    "Size":  "9.7 MB",
+    "Classification":  "Critical Updates",
+    "SupportedProducts":  "Windows 10 and later Dynamic Update",
+    "MSRCNumber":  null,
+    "MSRCSeverity":  "n/a",
+    "RebootBehavior":  "Can request restart",
+    "RequestsUserInput":  false,
+    "ExclusiveInstall":  "",
+    "NetworkRequired":  false,
+    "UninstallNotes":  null,
+    "UninstallSteps":  null,
+    "UpdateId":  "96c19d3c-dd60-44c9-9538-a2ff94ba4d22",
+    "Supersedes":  [
+                       {
+                           "KB":  "5045520",
+                           "Description":  "2024-10 Setup Dynamic Update for Windows 11 Version 24H2 for x64-based Systems (KB5045520)"
+                       },
+                       {
+                           "KB":  "5042580",
+                           "Description":  "2024-08 Setup Dynamic Update for Windows 11 Version 24H2 for x64-based Systems (KB5042580)"
+                       },
+                       {
+                           "KB":  "5046339",
+                           "Description":  "2024-10 Setup Dynamic Update for Windows 11 Version 24H2 for x64-based Systems (KB5046339)"
+                       },
+                       {
+                           "KB":  "5047134",
+                           "Description":  "2024-11 Setup Dynamic Update for Windows 11 Version 24H2 for x64-based Systems (KB5047134)"
+                       },
+                       {
+                           "KB":  "5043353",
+                           "Description":  "2024-09 Setup Dynamic Update for Windows 11 Version 24H2 for x64-based Systems (KB5043353)"
+                       },
+                       {
+                           "KB":  "5039448",
+                           "Description":  "2024-06 Setup Dynamic Update for Windows 11 Version 24H2 for x64-based Systems (KB5039448)"
+                       },
+                       {
+                           "KB":  "5041178",
+                           "Description":  "2024-07 Setup Dynamic Update for Windows 11 Version 24H2 for x64-based Systems (KB5041178)"
+                       },
+                       {
+                           "KB":  "5044075",
+                           "Description":  "2024-09 Setup Dynamic Update for Windows 11 Version 24H2 for x64-based Systems (KB5044075)"
+                       }
+                   ],
+    "SupersededBy":  {
+
+                     },
+    "Link":  "https://catalog.sf.dl.delivery.mp.microsoft.com/filestreamingservice/files/1b859623-4658-4a3a-934c-a001088ad261/public/windows11.0-kb5050758-x64_9c33ace3bfd87a4a086a147403fafde38291b89a.cab",
+    "InputObject":  "Windows 11 24H2 x64"
+}

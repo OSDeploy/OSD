@@ -12,13 +12,8 @@ function Get-WindowsUpdateManifests {
     [CmdletBinding()]
     param ()
 
-    Write-Warning "[$((Get-Date).ToString('HH:mm:ss'))] This functions is currently unavailable"
-    Start-Sleep -Seconds 10
-    return
-
-
-    #$ManifestPath = "$($MyInvocation.MyCommand.Module.ModuleBase)\Manifests\MSCatalog"
-    $ManifestPath = "$($env:ProgramData)\OSDeploy\OS-UpdateCatalog"
+    $ManifestPath = "$($MyInvocation.MyCommand.Module.ModuleBase)\Manifests\MSCatalog"
+    #$ManifestPath = "$($env:ProgramData)\OSDeploy\OS-UpdateCatalog"
     $ManifestFiles = Get-ChildItem -Path "$ManifestPath\*" -Include '*.json' -Recurse | Select-Object -Property *
 
     $WindowsUpdateManifests = @()
@@ -26,7 +21,7 @@ function Get-WindowsUpdateManifests {
         $WindowsUpdateManifest = @()
         $WindowsUpdateManifest = Get-Content $Manifest.FullName | ConvertFrom-Json
         if ($WindowsUpdateManifest.SupersededBy.KB) {
-            Continue
+            #Continue
         }
 
         $WindowsUpdateManifests += $WindowsUpdateManifest
