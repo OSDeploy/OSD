@@ -1,0 +1,128 @@
+﻿{
+    "Title":  "2025-01 Servicing Stack Update for Windows 10 Version 1507 for x64-based Systems (KB5050112)",
+    "Id":  "5050112",
+    "Architecture":  "x64",
+    "Language":  "",
+    "Hotfix":  null,
+    "Description":  "Install this update to resolve issues in Windows. For a complete listing of the issues that are included in this update, see the associated Microsoft Knowledge Base article for more information. After you install this item, you may have to restart your computer.",
+    "LastModified":  "2025-01-14",
+    "Size":  "12.0 MB",
+    "Classification":  "Security Updates",
+    "SupportedProducts":  "Windows 10 LTSB",
+    "MSRCNumber":  null,
+    "MSRCSeverity":  "Critical",
+    "RebootBehavior":  "Never restarts",
+    "RequestsUserInput":  false,
+    "ExclusiveInstall":  "",
+    "NetworkRequired":  false,
+    "UninstallNotes":  "Not Uninstallable",
+    "UninstallSteps":  null,
+    "UpdateId":  "46b0dde7-89e8-4c09-ae95-143fc402db29",
+    "Supersedes":  [
+                       {
+                           "KB":  "5035966",
+                           "Description":  "2024-03 Servicing Stack Update for Windows 10 Version 1507 for x64-based Systems (KB5035966)"
+                       },
+                       {
+                           "KB":  "5034864",
+                           "Description":  "2024-02 Servicing Stack Update for Windows 10 Version 1507 for x64-based Systems (KB5034864)"
+                       },
+                       {
+                           "KB":  "5039337",
+                           "Description":  "2024-06 Servicing Stack Update for Windows 10 Version 1507 for x64-based Systems (KB5039337)"
+                       },
+                       {
+                           "KB":  "5040566",
+                           "Description":  "2024-07 Servicing Stack Update for Windows 10 Version 1507 for x64-based Systems (KB5040566)"
+                       },
+                       {
+                           "KB":  "5043936",
+                           "Description":  "2024-09 Servicing Stack Update for Windows 10 Version 1507 for x64-based Systems (KB5043936)"
+                       },
+                       {
+                           "KB":  "5037019",
+                           "Description":  "2024-04 Servicing Stack Update for Windows 10 Version 1507 for x64-based Systems (KB5037019)"
+                       },
+                       {
+                           "KB":  "5032390",
+                           "Description":  "2023-11 Servicing Stack Update for Windows 10 Version 1507 for x64-based Systems (KB5032390)"
+                       },
+                       {
+                           "KB":  "5041583",
+                           "Description":  "2024-08 Servicing Stack Update for Windows 10 Version 1507 for x64-based Systems (KB5041583)"
+                       },
+                       {
+                           "KB":  "4093430",
+                           "Description":  "2018-04 Update for Windows 10 Version 1507 for x64-based Systems (KB4093430)"
+                       },
+                       {
+                           "KB":  "4498353",
+                           "Description":  "2019-05 Servicing Stack Update for Windows 10 Version 1507 for x64-based Systems (KB4498353)"
+                       },
+                       {
+                           "KB":  "4512573",
+                           "Description":  "2019-09 Servicing Stack Update for Windows 10 Version 1507 for x64-based Systems (KB4512573)"
+                       },
+                       {
+                           "KB":  "4509090",
+                           "Description":  "2019-07 Servicing Stack Update for Windows 10 Version 1507 for x64-based Systems (KB4509090)"
+                       },
+                       {
+                           "KB":  "4523200",
+                           "Description":  "2019-11 Servicing Stack Update for Windows 10 Version 1507 for x64-based Systems (KB4523200)"
+                       },
+                       {
+                           "KB":  "4540721",
+                           "Description":  "2020-03 Servicing Stack Update for Windows 10 Version 1507 for x64-based Systems (KB4540721)"
+                       },
+                       {
+                           "KB":  "4562249",
+                           "Description":  "2020-06 Servicing Stack Update for Windows 10 Version 1507 for x64-based Systems (KB4562249)"
+                       },
+                       {
+                           "KB":  "4565911",
+                           "Description":  "2020-07 Servicing Stack Update for Windows 10 Version 1507 for x64-based Systems (KB4565911)"
+                       },
+                       {
+                           "KB":  "5001079",
+                           "Description":  "2021-02 Servicing Stack Update for Windows 10 Version 1507 for x64-based Systems (KB5001079)"
+                       },
+                       {
+                           "KB":  "5011569",
+                           "Description":  "2022-03 Servicing Stack Update for Windows 10 Version 1507 for x64-based Systems (KB5011569)"
+                       },
+                       {
+                           "KB":  "5013269",
+                           "Description":  "2022-04 Servicing Stack Update for Windows 10 Version 1507 for x64-based Systems (KB5013269)"
+                       },
+                       {
+                           "KB":  "5014024",
+                           "Description":  "2022-05 Servicing Stack Update for Windows 10 Version 1507 for x64-based Systems (KB5014024)"
+                       },
+                       {
+                           "KB":  "5001399",
+                           "Description":  "2021-04 Servicing Stack Update for Windows 10 Version 1507 for x64-based Systems (KB5001399)"
+                       },
+                       {
+                           "KB":  "5023787",
+                           "Description":  "2023-03 Servicing Stack Update for Windows 10 Version 1507 for x64-based Systems (KB5023787)"
+                       },
+                       {
+                           "KB":  "5030503",
+                           "Description":  "2023-09 Servicing Stack Update for Windows 10 Version 1507 for x64-based Systems (KB5030503)"
+                       },
+                       {
+                           "KB":  "5031466",
+                           "Description":  "2023-10 Servicing Stack Update for Windows 10 Version 1507 for x64-based Systems (KB5031466)"
+                       },
+                       {
+                           "KB":  "4521856",
+                           "Description":  "2019-10 Servicing Stack Update for Windows 10 Version 1507 for x64-based Systems (KB4521856)"
+                       }
+                   ],
+    "SupersededBy":  {
+
+                     },
+    "Link":  "https://catalog.s.download.windowsupdate.com/c/msdownload/update/software/secu/2024/12/windows10.0-kb5050112-x64_30856a1c7487db70a3358296fd7196093fbd8709.msu",
+    "InputObject":  "2025-01 Windows 10 x64"
+}

@@ -2,16 +2,16 @@
 
 @{
 RootModule              = 'OSD.psm1'
-ModuleVersion           = '25.1.29.2'
+ModuleVersion           = '25.2.8.1'
 CompatiblePSEditions    = @('Desktop')
 GUID                    = '9fe5b9b6-0224-4d87-9018-a8978529f6f5'
-Author                  = 'David Segura . Gary Blok . Akos Bakos . Michael Escamilla'
+Author                  = 'David Segura . Gary Blok . Michael Escamilla'
 CompanyName             = 'OSD Community'
 Copyright               = '(c) 2025 OSDeploy'
 Description             = @'
 2025 January Update
 https://osd.osdeploy.com
-Required for OSDCloud and not OSDBuilder
+Required for OSDCloud
 '@
 PowerShellVersion       = '5.1'
 FormatsToProcess        = @(
@@ -367,13 +367,6 @@ FunctionsToExport       = @(
     'Get-WindowsAdkInstallVersion'
     'Get-WindowsAdkPaths'
     'Get-WindowsKitsInstallPath'
-    # OSDCloudv2
-    'Add-WinPEDrivers'
-    'Get-WinPEDrivers'
-    'Select-WinPEDrivers'
-    'Update-OSDCacheRepositories'
-    'Update-OSDCloudBootMedia'
-    'Update-WinPEDrivers'
 )
     CmdletsToExport = @()
     VariablesToExport = @()
