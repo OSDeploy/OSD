@@ -1,7 +1,7 @@
 ---
 external help file: OSD-help.xml
 Module Name: OSD
-online version: https://github.com/OSDeploy/OSD/tree/master/Docs
+online version: https://github.com/OSDeploy/OSD/tree/master/Docs/Set-OSDCloudWorkspace.md
 schema: 2.0.0
 ---
 
@@ -13,7 +13,7 @@ schema: 2.0.0
 ## SYNTAX
 
 ```
-Set-WiFi [[-SSID] <String>] [[-PSK] <String>] [-SaveProfilePath <String>]
+Set-WiFi [[-SSID] <String>] [[-PSK] <String>] [[-SaveProfilePath] <String>]
 ```
 
 ## DESCRIPTION
@@ -22,7 +22,7 @@ Set-WiFi [[-SSID] <String>] [[-PSK] <String>] [-SaveProfilePath <String>]
 ## EXAMPLES
 
 ### Example 1
-```
+```powershell
 PS C:\> {{ Add example code here }}
 ```
 
@@ -69,7 +69,7 @@ Parameter Sets: (All)
 Aliases:
 
 Required: False
-Position: Named
+Position: 2
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -78,6 +78,7 @@ Accept wildcard characters: False
 ## INPUTS
 
 ### None
+
 ## OUTPUTS
 
 ### System.Object

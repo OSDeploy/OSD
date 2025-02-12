@@ -1,0 +1,91 @@
+﻿{
+    "Title":  "2025-02 Cumulative Update for Windows 11 Version 24H2 for arm64-based Systems (KB5051987)",
+    "Id":  "5051987",
+    "Architecture":  "ARM64",
+    "Language":  "",
+    "Hotfix":  null,
+    "Description":  "Install this update to resolve issues in Windows. For a complete listing of the issues that are included in this update, see the associated Microsoft Knowledge Base article for more information. After you install this item, you may have to restart your computer.",
+    "LastModified":  "2025-02-11",
+    "Size":  "1311.4 MB",
+    "Classification":  "Security Updates",
+    "SupportedProducts":  "Windows 11",
+    "MSRCNumber":  null,
+    "MSRCSeverity":  "Critical",
+    "RebootBehavior":  "Can request restart",
+    "RequestsUserInput":  false,
+    "ExclusiveInstall":  "",
+    "NetworkRequired":  false,
+    "UninstallNotes":  null,
+    "UninstallSteps":  null,
+    "UpdateId":  "2d065106-ddb1-43d9-ba4a-8442866b13c3",
+    "Supersedes":  [
+                       {
+                           "KB":  "5040529",
+                           "Description":  "2024-07 Cumulative Update for Windows 11 Version 24H2 for arm64-based Systems (KB5040529)"
+                       },
+                       {
+                           "KB":  "5043178",
+                           "Description":  "2024-09 Cumulative Update for Windows 11 Version 24H2 for arm64-based Systems (KB5043178)"
+                       },
+                       {
+                           "KB":  "5039239",
+                           "Description":  "2024-06 Cumulative Update for Windows 11 Version 24H2 for arm64-based Systems (KB5039239)"
+                       },
+                       {
+                           "KB":  "5043080",
+                           "Description":  "2024-09 Cumulative Update for Windows 11 Version 24H2 for arm64-based Systems (KB5043080)"
+                       },
+                       {
+                           "KB":  "5040435",
+                           "Description":  "2024-07 Cumulative Update for Windows 11 Version 24H2 for arm64-based Systems (KB5040435)"
+                       },
+                       {
+                           "KB":  "5039304",
+                           "Description":  "2024-06 Cumulative Update for Windows 11 Version 24H2 for arm64-based Systems (KB5039304)"
+                       },
+                       {
+                           "KB":  "5041571",
+                           "Description":  "2024-08 Cumulative Update for Windows 11 Version 24H2 for arm64-based Systems (KB5041571)"
+                       },
+                       {
+                           "KB":  "5041865",
+                           "Description":  "2024-08 Cumulative Update for Windows 11 Version 24H2 for arm64-based Systems (KB5041865)"
+                       },
+                       {
+                           "KB":  "5048667",
+                           "Description":  "2024-12 Cumulative Update for Windows 11 Version 24H2 for arm64-based Systems (KB5048667)"
+                       },
+                       {
+                           "KB":  "5044384",
+                           "Description":  "2024-10 Cumulative Update Preview for Windows 11 Version 24H2 for arm64-based Systems (KB5044384)"
+                       },
+                       {
+                           "KB":  "5044284",
+                           "Description":  "2024-10 Cumulative Update for Windows 11 Version 24H2 for arm64-based Systems (KB5044284)"
+                       },
+                       {
+                           "KB":  "5046617",
+                           "Description":  "2024-11 Cumulative Update for Windows 11 Version 24H2 for arm64-based Systems (KB5046617)"
+                       },
+                       {
+                           "KB":  "5050094",
+                           "Description":  "2025-01 Cumulative Update Preview for Windows 11 Version 24H2 for arm64-based Systems (KB5050094)"
+                       },
+                       {
+                           "KB":  "5046740",
+                           "Description":  "2024-11 Cumulative Update Preview for Windows 11 Version 24H2 for arm64-based Systems (KB5046740)"
+                       },
+                       {
+                           "KB":  "5050009",
+                           "Description":  "2025-01 Cumulative Update for Windows 11 Version 24H2 for arm64-based Systems (KB5050009)"
+                       }
+                   ],
+    "SupersededBy":  {
+
+                     },
+    "Link":  [
+                 "https://catalog.sf.dl.delivery.mp.microsoft.com/filestreamingservice/files/4aa9bb0c-22b6-4cb4-8766-210d36af892f/public/windows11.0-kb5051987-arm64_f3d3fd9c4f73ab187e84f1c21bf778e9da06597a.msu",
+                 "https://catalog.sf.dl.delivery.mp.microsoft.com/filestreamingservice/files/f263aa64-f367-42f0-9cad-328f342b93f7/public/windows11.0-kb5043080-arm64_df540a05f9b118e339c5520f4090bb5d450f090b.msu"
+             ],
+    "InputObject":  "2025-02 Windows 11"
+}

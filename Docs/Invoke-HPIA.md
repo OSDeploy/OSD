@@ -24,7 +24,7 @@ Invoke-HPIA [[-Operation] <Object>] [[-Category] <String[]>] [[-Selection] <Obje
 ## EXAMPLES
 
 ### Example 1
-```
+```powershell
 PS C:\> {{ Add example code here }}
 ```
 
@@ -55,7 +55,7 @@ Accept wildcard characters: False
 Type: String[]
 Parameter Sets: (All)
 Aliases:
-Accepted values: All, BIOS, Drivers, Software, Firmware, Accessories, BIOS, Drivers
+Accepted values: All, BIOS, Drivers, Software, Firmware, Accessories
 
 Required: False
 Position: 1
@@ -89,6 +89,21 @@ Aliases:
 
 Required: False
 Position: 4
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -NoninteractiveMode
+{{ Fill NoninteractiveMode Description }}
+
+```yaml
+Type: SwitchParameter
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -156,21 +171,6 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -NoninteractiveMode
-{{ Fill NoninteractiveMode Description }}
-
-```yaml
-Type: SwitchParameter
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: Named
-Default value: False
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
 ### -SilentMode
 {{ Fill SilentMode Description }}
 
@@ -181,7 +181,7 @@ Aliases:
 
 Required: False
 Position: Named
-Default value: False
+Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
@@ -192,6 +192,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ## INPUTS
 
 ### None
+
 ## OUTPUTS
 
 ### System.Object
