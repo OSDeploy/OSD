@@ -28,10 +28,10 @@ function Update-HPDriverPackCatalog {
     #$OnlineCatalogUri = 'http://ftp.hp.com/pub/caps-softpaq/cmit/HPClientDriverPackCatalog.cab'
     $OnlineCatalogUri = 'https://hpia.hpcloud.hp.com/downloads/driverpackcatalog/HPClientDriverPackCatalog.cab'
 
-    $OfflineCatalogName = 'HPDriverPackCatalog.xml'
+    $OfflineCatalogName = 'Build-HPDriverPackCatalog.xml'
 
-    $ModuleCatalogXml = "$($MyInvocation.MyCommand.Module.ModuleBase)\Catalogs\HPDriverPackCatalog.xml"
-    $ModuleCatalogJson = "$($MyInvocation.MyCommand.Module.ModuleBase)\Catalogs\HPDriverPackCatalog.json"
+    $ModuleCatalogXml = "$($MyInvocation.MyCommand.Module.ModuleBase)\Catalogs\Build-HPDriverPackCatalog.xml"
+    $ModuleCatalogJson = "$($MyInvocation.MyCommand.Module.ModuleBase)\Catalogs\Build-HPDriverPackCatalog.json"
     #=================================================
     #   Additional Defaults
     #=================================================

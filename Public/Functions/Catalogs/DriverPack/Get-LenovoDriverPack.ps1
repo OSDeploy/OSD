@@ -24,7 +24,7 @@ function Get-LenovoDriverPack {
     #=================================================
     #   Import Catalog
     #=================================================
-    $Results = Import-Clixml -Path "$($MyInvocation.MyCommand.Module.ModuleBase)\Catalogs\LenovoDriverPackCatalog.xml" | `
+    $Results = Import-Clixml -Path "$($MyInvocation.MyCommand.Module.ModuleBase)\Catalogs\Build-LenovoDriverPackCatalog.xml" | `
     Select-Object CatalogVersion, Status, ReleaseDate, Manufacturer, Model, `
     @{Name='Product';Expression={([array]$_.Product)}}, `
     Name, PackageID, FileName, `

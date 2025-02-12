@@ -38,7 +38,7 @@ function Get-HPPlatformCatalog {
     #   Defaults
     #=================================================
     $UseCatalog = 'Offline'
-    $OfflineCatalogName = 'HPPlatformCatalog.xml'
+    $OfflineCatalogName = 'Build-HPPlatformCatalog.xml'
     $OnlineCatalogName = 'platformList.xml'
     $OnlineCatalogUri = 'https://ftp.hp.com/pub/caps-softpaq/cmit/imagepal/ref/platformList.cab'
     #=================================================

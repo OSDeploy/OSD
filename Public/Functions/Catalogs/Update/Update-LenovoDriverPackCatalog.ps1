@@ -27,10 +27,10 @@ function Update-LenovoDriverPackCatalog {
     $OnlineCatalogName = 'catalogv2.xml'
     $OnlineCatalogUri = 'https://download.lenovo.com/cdrt/td/catalogv2.xml'
 
-    $OfflineCatalogName = 'LenovoDriverPackCatalog.xml'
+    $OfflineCatalogName = 'Build-LenovoDriverPackCatalog.xml'
 
-    $ModuleCatalogXml      = "$($MyInvocation.MyCommand.Module.ModuleBase)\Catalogs\LenovoDriverPackCatalog.xml"
-    $ModuleCatalogJson      = "$($MyInvocation.MyCommand.Module.ModuleBase)\Catalogs\LenovoDriverPackCatalog.json"
+    $ModuleCatalogXml      = "$($MyInvocation.MyCommand.Module.ModuleBase)\Catalogs\Build-LenovoDriverPackCatalog.xml"
+    $ModuleCatalogJson      = "$($MyInvocation.MyCommand.Module.ModuleBase)\Catalogs\Build-LenovoDriverPackCatalog.json"
 
     $UTF8ByteOrderMark      = [System.Text.Encoding]::UTF8.GetString(@(195, 175, 194, 187, 194, 191))
     #=================================================

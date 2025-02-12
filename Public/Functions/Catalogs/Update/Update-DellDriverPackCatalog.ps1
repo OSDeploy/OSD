@@ -28,10 +28,10 @@ function Update-DellDriverPackCatalog {
     $OnlineBaseUri = 'http://downloads.dell.com/'
     $OnlineCatalogUri = 'https://downloads.dell.com/catalog/DriverPackCatalog.cab'
 
-    $OfflineCatalogName = 'DellDriverPackCatalog.xml'
+    $OfflineCatalogName = 'Build-DellDriverPackCatalog.xml'
 
-    $ModuleCatalogXml = "$($MyInvocation.MyCommand.Module.ModuleBase)\Catalogs\DellDriverPackCatalog.xml"
-    $ModuleCatalogJson = "$($MyInvocation.MyCommand.Module.ModuleBase)\Catalogs\DellDriverPackCatalog.json"
+    $ModuleCatalogXml = "$($MyInvocation.MyCommand.Module.ModuleBase)\Catalogs\Build-DellDriverPackCatalog.xml"
+    $ModuleCatalogJson = "$($MyInvocation.MyCommand.Module.ModuleBase)\Catalogs\Build-DellDriverPackCatalog.json"
     #=================================================
     #   Additional Defaults
     #=================================================

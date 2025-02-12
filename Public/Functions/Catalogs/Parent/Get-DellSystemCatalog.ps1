@@ -50,7 +50,7 @@ function Get-DellSystemCatalog {
     #   Defaults
     #=================================================
     $UseCatalog = 'Offline'
-    $OfflineCatalogName = 'DellSystemCatalog.xml'
+    $OfflineCatalogName = 'Build-DellSystemCatalog.xml'
     $OnlineCatalogName = 'CatalogPC.xml'
     $OnlineBaseUri = 'http://downloads.dell.com/'
     $OnlineCatalogUri = 'http://downloads.dell.com/catalog/CatalogPC.cab'

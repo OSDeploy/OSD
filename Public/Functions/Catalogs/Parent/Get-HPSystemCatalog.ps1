@@ -51,7 +51,7 @@ function Get-HPSystemCatalog {
     #   Defaults
     #=================================================
     $UseCatalog = 'Offline'
-    $OfflineCatalogName = 'HPSystemCatalog.xml'
+    $OfflineCatalogName = 'Build-HPSystemCatalog.xml'
     $OnlineCatalogName = 'HpCatalogForSms.xml'
     $OnlineCatalogUri = 'https://hpia.hpcloud.hp.com/downloads/sccmcatalog/HpCatalogForSms.latest.cab'
     #=================================================

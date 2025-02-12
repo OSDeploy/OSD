@@ -33,7 +33,7 @@ function Get-LenovoBiosCatalog {
     #   Defaults
     #=================================================
     $UseCatalog = 'Offline'
-    $OfflineCatalogName = 'LenovoBiosCatalog.xml'
+    $OfflineCatalogName = 'Build-LenovoBiosCatalog.xml'
     $OnlineCatalogUri = 'https://download.lenovo.com/cdrt/td/catalogv2.xml'
     $OnlineCatalogName = 'catalogv2.xml'
     #=================================================

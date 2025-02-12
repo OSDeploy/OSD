@@ -24,7 +24,7 @@ function Get-DellDriverPack {
     #=================================================
     #   Import Catalog
     #=================================================
-    $Results = Import-Clixml -Path "$($MyInvocation.MyCommand.Module.ModuleBase)\Catalogs\DellDriverPackCatalog.xml" | `
+    $Results = Import-Clixml -Path "$($MyInvocation.MyCommand.Module.ModuleBase)\Catalogs\Build-DellDriverPackCatalog.xml" | `
     Select-Object CatalogVersion, Status, ReleaseDate, Manufacturer, Model, `
     @{Name='Product';Expression={([array]$_.SystemID)}}, `
     Name, `
