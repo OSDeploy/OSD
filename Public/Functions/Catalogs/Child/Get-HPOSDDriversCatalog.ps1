@@ -14,7 +14,7 @@ function Get-HPOSDDriversCatalog {
     #=================================================
     #   DriverPackCatalog
     #=================================================
-    $DriverPackCatalog = Import-Clixml -Path "$($MyInvocation.MyCommand.Module.ModuleBase)\Catalogs\HPDriverPackCatalog.xml"
+    $DriverPackCatalog = Import-Clixml -Path "$($MyInvocation.MyCommand.Module.ModuleBase)\Catalogs\Build-HPDriverPackCatalog.xml"
     #=================================================
     #   ForEach
     #=================================================
