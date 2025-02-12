@@ -22,7 +22,7 @@ Get-MyBitLockerKeyProtectors [-ShowRecoveryPassword] [<CommonParameters>]
 ## EXAMPLES
 
 ### Example 1
-```
+```powershell
 PS C:\> {{ Add example code here }}
 ```
 
@@ -40,7 +40,7 @@ Aliases:
 
 Required: False
 Position: 0
-Default value: False
+Default value: None
 Accept pipeline input: True (ByPropertyName)
 Accept wildcard characters: False
 ```
@@ -51,6 +51,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ## INPUTS
 
 ### System.Management.Automation.SwitchParameter
+
 ## OUTPUTS
 
 ### System.Object

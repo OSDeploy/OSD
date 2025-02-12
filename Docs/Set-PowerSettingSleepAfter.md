@@ -1,7 +1,7 @@
 ---
 external help file: OSD-help.xml
 Module Name: OSD
-online version: https://github.com/OSDeploy/OSD/tree/master/Docs
+online version: https://github.com/OSDeploy/OSD/tree/master/Docs/Set-OSDCloudWorkspace.md
 schema: 2.0.0
 ---
 
@@ -22,7 +22,7 @@ Set-PowerSettingSleepAfter [-Minutes] <Int32> [-PowerSource] <String> [<CommonPa
 ## EXAMPLES
 
 ### Example 1
-```
+```powershell
 PS C:\> {{ Add example code here }}
 ```
 
@@ -67,6 +67,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ## INPUTS
 
 ### None
+
 ## OUTPUTS
 
 ### System.Object

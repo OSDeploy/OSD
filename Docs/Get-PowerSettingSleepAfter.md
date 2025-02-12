@@ -1,7 +1,7 @@
 ---
 external help file: OSD-help.xml
 Module Name: OSD
-online version: https://osd.osdeploy.com/module/functions/general/get-osdpower
+online version: https://github.com/OSDeploy/OSD/tree/master/Docs
 schema: 2.0.0
 ---
 
@@ -22,7 +22,7 @@ Get-PowerSettingSleepAfter
 ## EXAMPLES
 
 ### Example 1
-```
+```powershell
 PS C:\> {{ Add example code here }}
 ```
 
@@ -33,6 +33,7 @@ PS C:\> {{ Add example code here }}
 ## INPUTS
 
 ### None
+
 ## OUTPUTS
 
 ### System.Object
