@@ -162,13 +162,17 @@ function New-OSDCloudTemplate {
         #Uses Windows 10 WinRE.wim instead of the ADK Boot.wim
         $WinRE,
 
-        [System.Management.Automation.SwitchParameter]
+        #[System.Management.Automation.SwitchParameter]
         #Uses ARM64 instead of AMD64
-        $ARM64,
+        #$ARM64,
 
         [System.Management.Automation.SwitchParameter]
         #Adds 7Zip to Boot Image
-        $Add7Zip
+        $Add7Zip,
+
+        [ValidateSet('x64','ARM64')]
+        [System.String]
+        $OSArch = 'x64'
     )
 #=================================================
 #   WinREDriver
@@ -307,7 +311,15 @@ Windows Registry Editor Version 5.00
     #endregion
 
     #region Get Adk Paths
+    <# - Change 24.2.14
     if ($PSBoundParameters.ContainsKey('ARM64')) {
+        $WindowsAdkPaths = Get-WindowsAdkPaths -Architecture 'arm64'
+    }
+    else {
+        $WindowsAdkPaths = Get-WindowsAdkPaths
+    }
+    #>
+    if ($OSArch -eq 'ARM64') {
         $WindowsAdkPaths = Get-WindowsAdkPaths -Architecture 'arm64'
     }
     else {
@@ -567,12 +579,20 @@ Windows Registry Editor Version 5.00
         'WDS-Tools'
     )
     
+    if ($OSArch -eq 'ARM64') {
+        # Require specific order of install of packages or it fails.
+        #$OCPackages =@('Dot3Svc','EnhancedStorage','MDAC','NetFx','PowerShell','Scripting','SecureBootCmdlets','WMI','StorageWMI','PmemCmdlets','DismCmdlets','SecureStartup','x64-Support','PlatformId')
+        $OCPackages += 'x64-Support'
+        $OCPackages += 'MDAC'
+    }
+    <#
     if ($PSBoundParameters.ContainsKey('ARM64')) {
         # Require specific order of install of packages or it fails.
         #$OCPackages =@('Dot3Svc','EnhancedStorage','MDAC','NetFx','PowerShell','Scripting','SecureBootCmdlets','WMI','StorageWMI','PmemCmdlets','DismCmdlets','SecureStartup','x64-Support','PlatformId')
         $OCPackages += 'x64-Support'
         $OCPackages += 'MDAC'
     }
+    #>
     
     #endregion
 

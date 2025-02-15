@@ -80,12 +80,11 @@
         updateFirmware              = [System.Boolean]$Global:OSDModuleResource.StartOSDCloudGUI.updateFirmware
         updateNetworkDrivers        = [System.Boolean]$Global:OSDModuleResource.StartOSDCloudGUI.updateNetworkDrivers
         updateSCSIDrivers           = [System.Boolean]$Global:OSDModuleResource.StartOSDCloudGUI.updateSCSIDrivers
-        
+        SyncMSUpCatDriverUSB        = [System.Boolean]$Global:OSDModuleResource.StartOSDCloudGUI.SyncMSUpCatDriverUSB        
         OEMActivation               = [System.Boolean]$Global:OSDModuleResource.StartOSDCloudGUI.OEMActivation
         WindowsUpdate               = [System.Boolean]$Global:OSDModuleResource.StartOSDCloudGUI.WindowsUpdate
         WindowsUpdateDrivers        = [System.Boolean]$Global:OSDModuleResource.StartOSDCloudGUI.WindowsUpdateDrivers
         WindowsDefenderUpdate       = [System.Boolean]$Global:OSDModuleResource.StartOSDCloudGUI.WindowsDefenderUpdate
-        SyncMSUpCatDriverUSB        = [System.Boolean]$Global:OSDModuleResource.StartOSDCloudGUI.SyncMSUpCatDriverUSB
 
         HPIAALL                     = [System.Boolean]$Global:OSDModuleResource.StartOSDCloudGUI.HPIAALL
         HPIADrivers                 = [System.Boolean]$Global:OSDModuleResource.StartOSDCloudGUI.HPIADrivers
