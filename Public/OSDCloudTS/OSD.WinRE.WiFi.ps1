@@ -300,7 +300,7 @@ $XMLProfile = @"
         if ($StartWinREWiFi) {
             Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Testing Wi-Fi Network Adapter " -NoNewline
             # Use SmbClientNetworkInterface information to find the Wi-Fi adapter
-            $SmbClientNetworkInterface = Get-SmbClientNetworkInterface | Where-Object { ($_."FriendlyName" -eq "Wi-Fi") } | Select-Object -First 1
+            $SmbClientNetworkInterface = Get-SmbClientNetworkInterface | Where-Object { ($_."FriendlyName" -eq "Wi-Fi") -or ($_."FriendlyName" -eq "WiFi") -or ($_.FriendlyName -eq 'WLAN') } | Select-Object -First 1
             # Get the Wireless Network Adapter using the InterfaceIndex from SmbClientNetworkInterface
             $WirelessNetworkAdapter = Get-CimInstance -ClassName Win32_NetworkAdapter | Where-Object { $_.InterfaceIndex -eq $SmbClientNetworkInterface.InterfaceIndex }
             if ($WirelessNetworkAdapter) {
@@ -467,7 +467,7 @@ $XMLProfile = @"
                     Start-Sleep -Seconds 1
                 }
             }
-            Get-SmbClientNetworkInterface | Where-Object {($_.FriendlyName -eq 'Wi-Fi') -or ($_.FriendlyName -eq 'WiFi') -or ($_.FriendlyName -eq 'WLAN')} | Format-List
+            Get-SmbClientNetworkInterface | Where-Object {($_.FriendlyName -eq 'Wi-Fi') -or ($_.FriendlyName -eq 'WiFi') -or ($_.FriendlyName -eq 'WLAN') } | Format-List
         }
         $null = Stop-Transcript -ErrorAction Ignore
         Start-Sleep -Seconds 5
