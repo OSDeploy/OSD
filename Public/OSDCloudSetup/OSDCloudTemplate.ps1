@@ -161,18 +161,10 @@ function New-OSDCloudTemplate {
         [System.Management.Automation.SwitchParameter]
         #Uses Windows 10 WinRE.wim instead of the ADK Boot.wim
         $WinRE,
-
-        #[System.Management.Automation.SwitchParameter]
-        #Uses ARM64 instead of AMD64
-        #$ARM64,
-
+        
         [System.Management.Automation.SwitchParameter]
         #Adds 7Zip to Boot Image
-        $Add7Zip,
-
-        [ValidateSet('x64','ARM64')]
-        [System.String]
-        $OSArch = 'x64'
+        $Add7Zip
     )
 #=================================================
 #   WinREDriver
@@ -310,21 +302,26 @@ Windows Registry Editor Version 5.00
     Block-NoCurl
     #endregion
 
-    #region Get Adk Paths
-    <# - Change 24.2.14
-    if ($PSBoundParameters.ContainsKey('ARM64')) {
-        $WindowsAdkPaths = Get-WindowsAdkPaths -Architecture 'arm64'
-    }
-    else {
-        $WindowsAdkPaths = Get-WindowsAdkPaths
-    }
+    <#
+        Removing ARM64 Support for now
+        #region Get Adk Paths
+
+        if ($PSBoundParameters.ContainsKey('ARM64')) {
+            $WindowsAdkPaths = Get-WindowsAdkPaths -Architecture 'arm64'
+        }
+        else {
+            $WindowsAdkPaths = Get-WindowsAdkPaths
+        }
+
+        if ($OSArch -eq 'ARM64') {
+            $WindowsAdkPaths = Get-WindowsAdkPaths -Architecture 'arm64'
+        }
+        else {
+            $WindowsAdkPaths = Get-WindowsAdkPaths
+        }
     #>
-    if ($OSArch -eq 'ARM64') {
-        $WindowsAdkPaths = Get-WindowsAdkPaths -Architecture 'arm64'
-    }
-    else {
-        $WindowsAdkPaths = Get-WindowsAdkPaths
-    }
+
+    $WindowsAdkPaths = Get-WindowsAdkPaths
 
     if ($null -eq $WindowsAdkPaths) {
         Write-Host -ForegroundColor DarkGray "========================================================================="
