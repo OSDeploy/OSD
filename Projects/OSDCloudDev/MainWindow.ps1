@@ -401,11 +401,11 @@ else {
 #   Get Index Info
 #================================================
 if ($Arch -match 'ARM64'){
-    $IndexInfo = Get-OSDCloudOperatingSystemsIndexes -OSArch ARM64
+    #$OSInfo = Get-OSDCloudOperatingSystemsIndexes -OSArch ARM64
     $IndexMap = Get-OSDCloudOperatingSystemsIndexMap -OSArch ARM64
 }
 else {
-    $IndexInfo = Get-OSDCloudOperatingSystemsIndexes
+    #$OSInfo = Get-OSDCloudOperatingSystemsIndexes -OSArch x64
     $IndexMap = Get-OSDCloudOperatingSystemsIndexMap -OSArch x64
 }
 #================================================
@@ -892,7 +892,7 @@ $formMainWindowControlStartButton.add_Click({
             $OSDCloudOperatingSystem = (Get-OSDCloudOperatingSystems -OSArch ARM64) | Where-Object {$_.Name -match $OSName} | Where-Object {$_.Activation -eq $OSActivation} | Where-Object {$_.Language -eq $OSLanguage}
         }
         else {
-            $OSDCloudOperatingSystem = Get-OSDCloudOperatingSystems | Where-Object {$_.Name -match $OSName} | Where-Object {$_.Activation -eq $OSActivation} | Where-Object {$_.Language -eq $OSLanguage}
+            $OSDCloudOperatingSystem = (Get-OSDCloudOperatingSystems -OSArch x64) | Where-Object {$_.Name -match $OSName} | Where-Object {$_.Activation -eq $OSActivation} | Where-Object {$_.Language -eq $OSLanguage}
         }
        
         

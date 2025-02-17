@@ -1436,16 +1436,16 @@
         "Language":  "zh-cn",
         "Activation":  "Retail",
         "Indexes":  {
-                        "Windows 11 ???":  6,
-                        "Windows 11 ???":  7,
-                        "Windows 11 ???":  4,
-                        "Windows 11 ??????":  5
+                        "Windows 11 教育版":  6,
+                        "Windows 11 专业版":  7,
+                        "Windows 11 家庭版":  4,
+                        "Windows 11 家庭单语言版":  5
                     },
         "IndexNames":  [
-                           "Windows 11 ???",
-                           "Windows 11 ??????",
-                           "Windows 11 ???",
-                           "Windows 11 ???"
+                           "Windows 11 家庭版",
+                           "Windows 11 家庭单语言版",
+                           "Windows 11 教育版",
+                           "Windows 11 专业版"
                        ],
         "TotalIndexes":  "7"
     },
@@ -1454,14 +1454,14 @@
         "Language":  "zh-cn",
         "Activation":  "Volume",
         "Indexes":  {
-                        "Windows 11 ???":  4,
-                        "Windows 11 ???":  6,
-                        "Windows 11 ???":  5
+                        "Windows 11 教育版":  4,
+                        "Windows 11 专业版":  6,
+                        "Windows 11 企业版":  5
                     },
         "IndexNames":  [
-                           "Windows 11 ???",
-                           "Windows 11 ???",
-                           "Windows 11 ???"
+                           "Windows 11 教育版",
+                           "Windows 11 企业版",
+                           "Windows 11 专业版"
                        ],
         "TotalIndexes":  "6"
     },
@@ -1470,14 +1470,14 @@
         "Language":  "zh-tw",
         "Activation":  "Retail",
         "Indexes":  {
-                        "Windows 11 ???":  6,
-                        "Windows 11 ???":  5,
-                        "Windows 11 ???":  4
+                        "Windows 11 專業版":  6,
+                        "Windows 11 教育版":  5,
+                        "Windows 11 家用版":  4
                     },
         "IndexNames":  [
-                           "Windows 11 ???",
-                           "Windows 11 ???",
-                           "Windows 11 ???"
+                           "Windows 11 家用版",
+                           "Windows 11 教育版",
+                           "Windows 11 專業版"
                        ],
         "TotalIndexes":  "6"
     },
@@ -1486,14 +1486,14 @@
         "Language":  "zh-tw",
         "Activation":  "Volume",
         "Indexes":  {
-                        "Windows 11 ???":  6,
-                        "Windows 11 ???":  4,
-                        "Windows 11 ???":  5
+                        "Windows 11 專業版":  6,
+                        "Windows 11 教育版":  4,
+                        "Windows 11 企業版":  5
                     },
         "IndexNames":  [
-                           "Windows 11 ???",
-                           "Windows 11 ???",
-                           "Windows 11 ???"
+                           "Windows 11 教育版",
+                           "Windows 11 企業版",
+                           "Windows 11 專業版"
                        ],
         "TotalIndexes":  "6"
     },
@@ -2506,14 +2506,14 @@
         "Language":  "zh-cn",
         "Activation":  "Retail",
         "Indexes":  {
-                        "Windows 11 ???":  6,
-                        "Windows 11 ???":  4,
-                        "Windows 11 ??????":  5
+                        "Windows 11 专业版":  6,
+                        "Windows 11 家庭版":  4,
+                        "Windows 11 家庭单语言版":  5
                     },
         "IndexNames":  [
-                           "Windows 11 ???",
-                           "Windows 11 ??????",
-                           "Windows 11 ???"
+                           "Windows 11 家庭版",
+                           "Windows 11 家庭单语言版",
+                           "Windows 11 专业版"
                        ],
         "TotalIndexes":  "6"
     },
@@ -2522,12 +2522,12 @@
         "Language":  "zh-cn",
         "Activation":  "Volume",
         "Indexes":  {
-                        "Windows 11 ???":  5,
-                        "Windows 11 ???":  4
+                        "Windows 11 专业版":  5,
+                        "Windows 11 企业版":  4
                     },
         "IndexNames":  [
-                           "Windows 11 ???",
-                           "Windows 11 ???"
+                           "Windows 11 企业版",
+                           "Windows 11 专业版"
                        ],
         "TotalIndexes":  "5"
     },
@@ -2536,12 +2536,12 @@
         "Language":  "zh-tw",
         "Activation":  "Retail",
         "Indexes":  {
-                        "Windows 11 ???":  5,
-                        "Windows 11 ???":  4
+                        "Windows 11 專業版":  5,
+                        "Windows 11 家用版":  4
                     },
         "IndexNames":  [
-                           "Windows 11 ???",
-                           "Windows 11 ???"
+                           "Windows 11 家用版",
+                           "Windows 11 專業版"
                        ],
         "TotalIndexes":  "5"
     },
@@ -2550,12 +2550,12 @@
         "Language":  "zh-tw",
         "Activation":  "Volume",
         "Indexes":  {
-                        "Windows 11 ???":  5,
-                        "Windows 11 ???":  4
+                        "Windows 11 專業版":  5,
+                        "Windows 11 企業版":  4
                     },
         "IndexNames":  [
-                           "Windows 11 ???",
-                           "Windows 11 ???"
+                           "Windows 11 企業版",
+                           "Windows 11 專業版"
                        ],
         "TotalIndexes":  "5"
     }
