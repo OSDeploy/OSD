@@ -9,8 +9,8 @@
     .EXAMPLE
     Start-OSDCloudGUI
 
-    .LINK
-    https://github.com/OSDeploy/OSD/tree/master/Docs
+    .NOTES
+    25.1.17 Added a temporary parameter v2 to filter DriverPacks by Manufacturer
     #>
 
     [CmdletBinding()]
@@ -31,8 +31,20 @@
 
         #Temporary Parameter
         [System.String]
-        $ComputerProduct = (Get-MyComputerProduct)
+        $ComputerProduct = (Get-MyComputerProduct),
+
+        [System.Management.Automation.SwitchParameter]
+        $v2
     )
+    #================================================
+    #   Filter DriverPacks
+    #================================================
+    if ($v2) {
+        $DriverPacks = Get-OSDCloudDriverPacks | Where-Object { $_.Manufacturer -eq $ComputerManufacturer }
+    }
+    else {
+        $DriverPacks = Get-OSDCloudDriverPacks
+    }
     #================================================
     #   Pass Variables to OSDCloudGUI
     #================================================
@@ -52,7 +64,7 @@
         ComputerProduct             = [System.String]$ComputerProduct
         
         DriverPack                  = $null
-        DriverPacks                 = [array](Get-OSDCloudDriverPacks)
+        DriverPacks                 = [array]$DriverPacks
         DriverPackName              = $null
         
         IsOnBattery                 = [System.Boolean](Get-OSDGather -Property IsOnBattery)
