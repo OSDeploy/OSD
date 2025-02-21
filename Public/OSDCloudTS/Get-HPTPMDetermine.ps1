@@ -1,7 +1,9 @@
 function Install-ModuleHPCMSL {
     [CmdletBinding()]
     param ()
-    Set-ExecutionPolicy -ExecutionPolicy Bypass -Force
+    if ((Get-ExecutionPolicy) -ne 'Bypass'){
+        Set-ExecutionPolicy -ExecutionPolicy Bypass -Force -ErrorAction SilentlyContinue
+    }
     $InstallModule = $false
     $PSModuleName = 'HPCMSL'
     if (-not (Get-Module -Name PowerShellGet -ListAvailable | Where-Object {$_.Version -ge '2.2.5'})) {
@@ -10,8 +12,9 @@ function Install-ModuleHPCMSL {
 
         Write-Host -ForegroundColor DarkGray 'Import-Module PackageManagement,PowerShellGet [Global]'
         Import-Module PackageManagement,PowerShellGet -Force -Scope Global -WarningAction SilentlyContinue -ErrorAction SilentlyContinue
-        }
-    $InstalledModule = Get-InstalledModule $PSModuleName -ErrorAction Ignore | Select-Object -First 1
+    }
+    $InstalledModule = Get-InstalledModule $PSModuleName -ErrorAction Ignore
+    if ($InstalledModule.count -gt 1){$InstalledModule = $InstalledModule | Select-Object -First 1}
     $GalleryPSModule = Find-Module -Name $PSModuleName -ErrorAction Ignore
 
     if ($InstalledModule) {
@@ -35,6 +38,7 @@ function Install-ModuleHPCMSL {
             Install-Module $PSModuleName -SkipPublisherCheck -AcceptLicense -Scope AllUsers -Force -ErrorAction SilentlyContinue -WarningAction SilentlyContinue
         }
     }
+    
     Import-Module -Name $PSModuleName -Force -Global -ErrorAction SilentlyContinue -WarningAction SilentlyContinue
 }
 

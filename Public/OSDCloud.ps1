@@ -1685,6 +1685,7 @@
     #SetupComplete.cmd calls SetupComplete.ps1, which does all of the actual work
     Set-SetupCompleteCreateStart
     
+    if ($Null -eq $Global:OSDCloud.SetWiFi){$Global:OSDCloud.SetWiFi = $false} 
     Write-DarkGrayHost "[i] Enable Wireless from Global Variable `$Global:OSDCloud.SetWiFi is set to $($Global:OSDCloud.SetWiFi)"
     if ($Global:OSDCloud.SetWiFi -eq $true) {
         $SetWiFi = $true
@@ -1732,7 +1733,7 @@
                 }
             }
         }
-            
+        if ($Null -eq $Global:OSDCloud.SetTimeZone){$Global:OSDCloud.SetTimeZone = $false}    
         Write-DarkGrayHost "[i] Enable Set TimeZone from Global Variable `$Global:OSDCloud.SetTimeZone is set to $($Global:OSDCloud.SetTimeZone)"
         if ($Global:OSDCloud.SetTimeZone -eq $true) {
             if ($WebConnection -eq $true) {
@@ -1810,7 +1811,11 @@
                 #Get Sure Admin State
                 try {
                     Write-Host -ForegroundColor DarkGray "Testing for HP Sure Admin State"
-                    $HPSureAdminState = Get-HPSureAdminState -ErrorAction SilentlyContinue
+                    $namespace = "ROOT\HP\InstrumentedBIOS"
+                    $classname = "HP_BIOSEnumeration"
+                    if (Get-CimInstance -ClassName $classname -Namespace $namespace | Where-Object {$_.Name -match "Enhanced BIOS Authentication"}){
+                        $HPSureAdminState = Get-HPSureAdminState -ErrorAction SilentlyContinue
+                    }
                 }
                 catch{
                     Write-Host -ForegroundColor DarkGray "Unable to Test for HP Sure Admin State"
@@ -1978,7 +1983,7 @@
             Set-OSDCloudUnattendSpecialize
         }
     }
-
+    if ($Null -eq $Global:OSDCloud.Bitlocker){$Global:OSDCloud.Bitlocker = $false}
     Write-DarkGrayHost "[i] Enable Bitlocker from Global Variable `$Global:OSDCloud.Bitlocker is set to $($Global:OSDCloud.Bitlocker)"
     if ($Global:OSDCloud.Bitlocker -eq $true){
         Set-BitlockerRegValuesXTS256
