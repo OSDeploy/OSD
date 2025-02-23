@@ -159,8 +159,8 @@ $ProPlus2019Volume = @'
     #	Enable OSDCloud ODT
     #=================================================
     if (Test-WebConnection -Uri 'https://www.microsoft.com/en-us/download') {
-        $ODTPageLinks = (Invoke-WebRequest -Uri 'https://www.microsoft.com/en-us/download/confirmation.aspx?id=49117' -UseBasicParsing).Links
-        $ODTDownload = ($ODTPageLinks | Where-Object {$_.outerHTML -like "*click here to download manually*"}).href
+        $ODTPageLinks = (Invoke-WebRequest -Uri 'https://www.microsoft.com/en-us/download/details.aspx?id=49117' -UseBasicParsing).Links
+        $ODTDownload = ($ODTPageLinks | Where-Object {$_.href -match "officedeploymenttool"}).href
 
         Write-Verbose "Downloading $ODTDownload"
         $ODTFile = Save-WebFile -SourceUrl $ODTDownload -DestinationDirectory "$WorkspacePath\ODT" -Overwrite
