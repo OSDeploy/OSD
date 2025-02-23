@@ -67,25 +67,25 @@ function Save-MsUpCatDriver {
 
             if ($Devices) {
                 if ($PNPClass) {
-                    Write-Host -ForegroundColor DarkGray "Devices were found for PNPClass $PNPClass"
+                    Write-Verbose "Devices were found for PNPClass $PNPClass"
                 }
                 
                 foreach ($Item in $Devices) {
                     $FindHardwareID = $null
     
                     #See if DeviceID matches the pattern
-                    Write-Host -ForegroundColor DarkGray "DeviceID: $($Item.DeviceID)"
+                    # Write-Host -ForegroundColor DarkGray "DeviceID: $($Item.DeviceID)"
                     $FindHardwareID = $Item.DeviceID | Select-String -Pattern $HardwareIDPattern -AllMatches | Select-Object -ExpandProperty Matches | Select-Object -ExpandProperty Value
 
                     if (-not ($FindHardwareID)) {
                         if ($Item.HardwareID) {
-                            Write-Host -ForegroundColor DarkGray "HardwareID: $($Item.HardwareID[0])"
+                            Write-Verbose "HardwareID: $($Item.HardwareID[0])"
                             $FindHardwareID = $Item.HardwareID[0] | Select-String -Pattern $HardwareIDPattern -AllMatches | Select-Object -ExpandProperty Matches | Select-Object -ExpandProperty Value
                         }
                     }
 
                     if ($FindHardwareID) {
-                        Write-Host -ForegroundColor Gray "Searching: $FindHardwareID"
+                        # Write-Verbose "Searching: $FindHardwareID"
                         $SearchString = "$FindHardwareID".Replace('&',"`%26")
                         try {
                             $WindowsUpdateDriver = Get-MsUpCat -Search "22H2+$PNPClass+$SearchString" -Descending | Select-Object LastUpdated,Title,Version,Size,Guid -First 1 -ErrorAction Ignore
@@ -164,6 +164,7 @@ function Save-MsUpCatDriver {
                         }   
                     }
                     else {
+                        Write-Verbose "DeviceID: $($Item.DeviceID)"
                         #Write-Host -ForegroundColor Gray "No Results: $FindHardwareID"
                     }
                 }

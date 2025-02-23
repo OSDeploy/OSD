@@ -36,7 +36,7 @@ function Get-MyDellBios {
     #=================================================
     #$GetMyDellBios = Get-DellSystemCatalog -Component BIOS -Compatible | Sort-Object ReleaseDate -Descending | Select-Object -First 1
     $GetMyDellBIOS = Get-DellBiosCatalog | Sort-Object ReleaseDate -Descending
-    $GetMyDellBIOS | Add-Member -MemberType NoteProperty -Name 'Flash64W' -Value 'https://github.com/OSDeploy/OSDCloud/raw/main/BIOS/Flash64W_Ver3.3.8.cab'
+    $GetMyDellBIOS | Add-Member -MemberType NoteProperty -Name 'Flash64W' -Value 'https://github.com/OSDeploy/Archive-OSDCloud/raw/main/BIOS/Flash64W_Ver3.3.8.cab'
     #=================================================
     #   Filter Compatible
     #=================================================
