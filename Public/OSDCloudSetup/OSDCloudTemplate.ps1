@@ -443,25 +443,27 @@ Windows Registry Editor Version 5.00
 
     #region wgl4_boot.ttf
     #This is used to resolve issues with WinPE Resolutions in 2004/20H2
+    <#
     if ((Get-RegCurrentVersion).CurrentBuild -lt 20000) {
         Write-Host -ForegroundColor DarkGray "========================================================================="
         Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Replacing Boot Media font wgl4_boot.ttf"
         Write-Host -ForegroundColor Yellow "Replacing this file resolves an issue where WinPE does not boot to the proper display resolution"
     
-        $SourceUrl = 'https://github.com/OSDeploy/OSDCloud/raw/main/Media/boot/fonts/wgl4_boot.ttf'
+        $SourceUrl = 'https://github.com/OSDeploy/Archive-OSDCloud/raw/main/Media/boot/fonts/wgl4_boot.ttf'
         if (Test-WebConnection -Uri $SourceUrl) {
             Write-Host -ForegroundColor DarkGray "Source: $SourceUrl"
             Write-Host -ForegroundColor DarkGray "Destination: $DestinationMedia\boot\fonts\wgl4_boot.ttf"
             Save-WebFile -SourceUrl $SourceUrl -DestinationDirectory "$DestinationMedia\boot\fonts" -Overwrite | Out-Null
         }
     
-        $SourceUrl = 'https://github.com/OSDeploy/OSDCloud/raw/main/Media/efi/microsoft/boot/fonts/wgl4_boot.ttf'
+        $SourceUrl = 'https://github.com/OSDeploy/Archive-OSDCloud/raw/main/Media/efi/microsoft/boot/fonts/wgl4_boot.ttf'
         if (Test-WebConnection -Uri $SourceUrl) {
             Write-Host -ForegroundColor DarkGray "Source: $SourceUrl"
             Write-Host -ForegroundColor DarkGray "Destination: $DestinationMedia\efi\microsoft\boot\fonts\wgl4_boot.ttf"
             Save-WebFile -SourceUrl $SourceUrl -DestinationDirectory "$DestinationMedia\efi\microsoft\boot\fonts" -Overwrite | Out-Null
         }
     }
+    #>
     #endregion
 
     #region Mount-MyWindowsImage

@@ -2,15 +2,13 @@
 
 @{
 RootModule              = 'OSD.psm1'
-ModuleVersion           = '25.2.17.1'
+ModuleVersion           = '25.2.23.1'
 GUID                    = '9fe5b9b6-0224-4d87-9018-a8978529f6f5'
 Author                  = 'David Segura . Gary Blok . Michael Escamilla'
 CompanyName             = 'OSD Community'
 Copyright               = '(c) 2025 OSDeploy'
 Description          = @'
-February 17, 2025
-
-
+February 23, 2025
 '@
     CompatiblePSEditions    = @('Desktop')
     PowerShellVersion       = '5.1'
