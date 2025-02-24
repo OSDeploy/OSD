@@ -1,5 +1,19 @@
 function Invoke-OSDCloudIPU {
-    <#
+        <#
+    .SYNOPSIS
+    This function will download the selected Windows ESD and run an In-Place Upgrade (IPU) on the current device.
+
+    .DESCRIPTION
+    This function will download the selected Windows ESD and run an In-Place Upgrade (IPU) on the current device.
+    It will determine the current device details and select the proper ESD file for the upgrade.
+
+    .EXAMPLE
+    Invoke-OSDCloudIPU -OSName 'Windows 11 24H2 x64'
+
+    .EXAMPLE
+    Invoke-OSDCloudIPU -OSName 'Windows 11 24H2 x64' -Silent -NoReboot
+
+    .NOTES
     Log Files for IPU: https://learn.microsoft.com/en-us/windows/deployment/upgrade/log-files
     Setup Command Line: https://learn.microsoft.com/en-us/windows-hardware/manufacture/desktop/windows-setup-command-line-options?view=windows-11
     #>
@@ -18,26 +32,35 @@ function Invoke-OSDCloudIPU {
             'Windows 10 22H2 x64',
             'Windows 10 22H2 ARM64')]
         [System.String]
+        # Select the OS Version to In-Place Upgrade to
         $OSName = 'Windows 11 24H2 x64',
 
-        [switch]
+        [System.Management.Automation.SwitchParameter]
+        # Adds '/quiet' to the setup.exe - This will suppress any Windows Setup user experience including the rollback user experience.
         $Silent,
 
-        [switch]
+        [System.Management.Automation.SwitchParameter]
+        # Will NOT add '/InstallDrivers' to the setup.exe
         $SkipDriverPack,
 
-        [switch]
+        [Alias('PassThru')]
+        [System.Management.Automation.SwitchParameter]
+        # Adds '/noreboot' to the setup.exe - Instructs Windows Setup not to restart the computer after the down-level phase of Windows Setup completes.
         $NoReboot,
 
-        [switch]
+        [System.Management.Automation.SwitchParameter]
+        # Will only download the ESD file and not run the setup.exe
         $DownloadOnly,
 
-        [switch]
+        [System.Management.Automation.SwitchParameter]
+        # Adds '/diagnosticprompt enable' to the setup.exe - Specifies that the Command Prompt is available during Windows Setup.
         $DiagnosticPrompt,
 
-        [switch]
+        [System.Management.Automation.SwitchParameter]
+        # Adds '/DynamicUpdate Enable' to the setup.exe - Specifies whether Windows Setup will perform Dynamic Update operations (search, download, and install updates).
         $DynamicUpdate
     )
+
     #region Admin Elevation
     $whoiam = [system.security.principal.windowsidentity]::getcurrent().name
     $isElevated = ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] "Administrator")
@@ -552,6 +575,13 @@ function Invoke-OSDCloudIPU {
 
         #endregion Creating Arguments based on Parameters
 
-        Start-Process @ParamStartProcess
+        Write-Host -foregroundcolor DarkGray "========================================================================="
+        Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Windows Upgrade Setup Starting"
+        $UpgradeProcess = Start-Process @ParamStartProcess -Wait -PassThru
+        Write-Host -ForegroundColor DarkGray "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Windows Upgrade Setup Returned Code: [ " -NoNewline
+        Write-Host -ForegroundColor Yellow "$($UpgradeProcess.ExitCode)" -NoNewline
+        Write-Host -ForegroundColor DarkGray " ]"
+        Write-Host -ForegroundColor DarkGray "========================================================================="
     }
+    return $UpgradeProcess.ExitCode
 }
