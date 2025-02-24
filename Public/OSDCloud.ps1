@@ -1823,7 +1823,9 @@
                 if ($HPSureAdminState) {$HPSureAdminMode = $HPSureAdminState.SureAdminMode}
 
                 if ($Global:OSDCloud.HPTPMUpdate -eq $true){
-                    if (Get-HPTPMDetermine -ne "True"){
+                    $TPMResult = Get-HPTPMDetermine
+                    if (($TPMResult -ne "SP94937") -and ($TPMResult -ne "SP87753")){
+                        Write-Host -ForegroundColor DarkGray "Switching HP TPM off, as no TPM Update is available"
                         $Global:OSDCloud.HPTPMUpdate = $false
                     }
                 }
