@@ -200,7 +200,9 @@ function Invoke-OSDSpecialize {
         Write-Host -ForegroundColor Green "Internet Connection Confirmed"
         Write-Host -ForegroundColor Green "Enabling Vendor Addon Tools"
         if ($HPJson){
+            Write-Host -ForegroundColor DarkGray "========================================================================="
             write-host "Specialize Stage - HP Enterprise Devices" -ForegroundColor Green
+            Write-Host -ForegroundColor DarkGray "========================================================================="
             $WarningPreference = "SilentlyContinue"
             $VerbosePreference = "SilentlyContinue"
             import-module -name "HPCMSL"
@@ -212,11 +214,14 @@ function Invoke-OSDSpecialize {
             #osdcloud-InstallPackageManagement -WarningAction SilentlyContinue
             #osdcloud-InstallModuleHPCMSL -WarningAction SilentlyContinue
             if ($HPJson.HPUpdates.HPTPMUpdate -eq $true){
-                if (Get-HPTPMDetermine -ne "False"){
-                    Write-Host -ForegroundColor DarkGray "========================================================================="
-                    Write-Host -ForegroundColor DarkGray "HP TPM Update: $(Get-HPTPMDetermine)"
+                Write-Host -ForegroundColor DarkGray "========================================================================="
+                Write-Host -ForegroundColor DarkGray "Testing for TPM Update (Get-HPTPMDetermine)"
+                $Result = Get-HPTPMDetermine
+                if ($Result  -ne "False"){
+                    
+                    Write-Host -ForegroundColor DarkGray "HP TPM Update: $($Result)"
                     Write-Host "Updating TPM" -ForegroundColor Cyan
-                    $TPMUpdate = Get-HPTPMDetermine
+                    $TPMUpdate = $Result
                     $DownloadFolder = "C:\OSDCloud\HP\TPM"
                     $UpdatePath = "$DownloadFolder\$TPMUpdate.exe"
                     if (!(Test-Path $UpdatePath)){Invoke-HPTPMEXEDownload}
@@ -224,6 +229,7 @@ function Invoke-OSDSpecialize {
                     start-sleep -Seconds 10
                 }
                 else{
+                    Write-Host -ForegroundColor DarkGray "No TPM Update Found, Guessing we're all good."
                     $HPJson.HPUpdates.HPTPMUpdate = $false
                 }
             }
