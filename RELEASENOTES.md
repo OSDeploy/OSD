@@ -8,15 +8,28 @@ I know that OSDCloud has been around awhile, and has a ton of changes over the p
 
 Note, the changes I make won't go into effect until the next module release date, so if you see changes here, and the date is newer then the module date, then they haven't taken effect.
 
+If you really want to know what is going on, I suggest looking back over the merges and monitoring.  This is how I typically do it, as we have several contributors, and we typically don't communicate our changes to each other.  I have the repo synced in VSCode, and I look over the Source control Graph, which provides the notes with the commits, which generally gives me a good idea of the changes, and if I want to know more, I drill into look a the code changes. If you are serious in knowing all changes, I recommend you do something similar.
+
 ## Changes
 
-### 24.11.15 (not yet implemented)
+### 25.2.26 (Filling in the Blanks)
+ - Several updates have been released since my last note, sorry, just don't have much time... you get it.
+ - ARM support was removed from creating a template, this will be reworked and readded at a future date
+ - TPM Update Fixes [Note 24H2 breaks a lot of things in specialize that just work as expected on 23H2, no ETA or plans to fix from our side]
+ - Invoke-OSDCloudIPU has added a few parameters that can be passed to the Windows Setup Engine.
+ - I noticed some driver URLS have been updated
+ - I noticed changes for the ADK features
+ - Some WiFi Changes & Fixes
+ - SetupComplete Functions modified to look in additional locations for custom setup complete files to run.
+
+
+### 24.11.15 (Released to Gallary)
  - Several minor changes over the past month, including a bug fix - see issues closed over the past month
  - Completely revamped the index lookup in the DEV GUI - Modified to use a generic Index Map for all Build Versions.  This will greatly simplify the method no longer requiring me to build a new Index Map for each build.
   - As part of this, built a new Index Map JSON/XML files in the Catalog folders. Will eventually go back and cleanup the no longer used Index files 
   - Still considering just dropping the Index Field in the GUI, and have it dynamically figured out in the main OSDCLOUD function script
 
-### 24.11.14 (not yet implemented)
+### 24.11.14 (Released to Gallary)
  - Updated the 24H2 Catalog file with the latest release to public available from MS on 24.10.04
 
 ### 24.10.1 (Released to Gallary)
