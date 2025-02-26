@@ -39,6 +39,9 @@ function Get-WindowsAdkPaths {
         $WindowsAdkRoot
     )
     #=================================================
+    Write-Verbose "[$((Get-Date).ToString('HH:mm:ss'))][$($MyInvocation.MyCommand)] Start"
+    $Error.Clear()
+    #=================================================
     # region Get Windows ADK information from the Registry
     if (-not $WindowsAdkRoot) {
         $InstalledRoots32 = 'HKLM:\SOFTWARE\Microsoft\Windows Kits\Installed Roots'
@@ -122,5 +125,7 @@ function Get-WindowsAdkPaths {
     }
     Return $Results
     #endregion
+    #=================================================
+    Write-Verbose "[$((Get-Date).ToString('HH:mm:ss'))][$($MyInvocation.MyCommand)] End"
     #=================================================
 }
