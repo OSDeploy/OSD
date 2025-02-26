@@ -12,7 +12,11 @@ If you really want to know what is going on, I suggest looking back over the mer
 
 ## Changes
 
-### 25.2.26 (Filling in the Blanks)
+### 25.2.26 (Not yet in Module)
+ - Invoke-OSDCloudIPU - added SkipFinalize - Issue 247
+
+
+### 25.2.25 (Filling in the Blanks)
  - Several updates have been released since my last note, sorry, just don't have much time... you get it.
  - ARM support was removed from creating a template, this will be reworked and readded at a future date
  - TPM Update Fixes [Note 24H2 breaks a lot of things in specialize that just work as expected on 23H2, no ETA or plans to fix from our side]
