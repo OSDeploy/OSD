@@ -36,6 +36,10 @@ function Invoke-OSDCloudIPU {
         $DiagnosticPrompt,
 
         [switch]
+        $SkipFinalize,
+
+
+        [switch]
         $DynamicUpdate
     )
     #region Admin Elevation
@@ -531,7 +535,16 @@ function Invoke-OSDCloudIPU {
         else{
             $DiagnosticPromptArg  = ""
         }
-        #Diagnostic Prompt - Specifies that the Command Prompt is available during Windows Setup.
+        #Skip Finalize - Instructions setup to start update operations on the down-level OS without initiating a reboot to start the offline phase.
+        #https://learn.microsoft.com/en-us/windows-hardware/manufacture/desktop/windows-setup-command-line-options?view=windows-11#skipfinalize
+        if ($SkipFinalize){
+            $SkipFinalizeArg = "/SkipFinalize"
+        }
+        else{
+            $SkipFinalizeArg  = ""
+        }
+        #No Reboot - Instructs Windows Setup not to restart the computer after the down-level phase of Windows Setup completes.
+        #https://learn.microsoft.com/en-us/windows-hardware/manufacture/desktop/windows-setup-command-line-options?view=windows-11#noreboot
         if ($NoReboot){
             $NoRebootArg = "/noreboot"
         }
@@ -541,7 +554,7 @@ function Invoke-OSDCloudIPU {
         
         $ParamStartProcess = @{
             FilePath = "$MediaLocation\Setup.exe"
-            ArgumentList = "/Auto Upgrade $DynamicUpdateArg /EULA accept $DriverArg /Priority High $SilentArg $DiagnosticPromptArg $NoRebootArg"
+            ArgumentList = "/Auto Upgrade $DynamicUpdateArg /EULA accept $DriverArg /Priority High $SilentArg $DiagnosticPromptArg $NoRebootArg $SkipFinalizeArg"
         } 
 
         Write-Host -ForegroundColor Cyan "Setup Path: " -NoNewline
