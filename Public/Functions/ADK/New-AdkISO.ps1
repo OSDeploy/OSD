@@ -44,6 +44,8 @@ function New-AdkISO {
         #[System.Management.Automation.SwitchParameter]$Mount,
         [System.Management.Automation.SwitchParameter]$OpenExplorer
     )
+    Write-Warning "New-AdkISO has been replaced by New-WindowsAdkISO. Please update your scripts"
+    Start-Sleep -Seconds 10
 	#=================================================
 	#	Blocks
 	#=================================================

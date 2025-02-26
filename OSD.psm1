@@ -54,6 +54,8 @@ if ($env:SystemDrive -eq 'X:') {
     }
 }
 #=================================================
+# 25.2.26
+# New-Alias -Name New-AdkISO -Value New-WindowsAdkISO -Force -ErrorAction SilentlyContinue
 # 25.1.26
 New-Alias -Name Get-AdkPaths -Value Get-WindowsAdkPaths -Force -ErrorAction SilentlyContinue
 #Alias
@@ -65,7 +67,6 @@ New-Alias -Name Find-InOSDModule -Value Find-TextInModule -Force -ErrorAction Si
 New-Alias -Name Get-OSDSessions -Value Get-SessionsXml -Force -ErrorAction SilentlyContinue
 New-Alias -Name Mount-OSDWindowsImage -Value Mount-MyWindowsImage -Force -ErrorAction SilentlyContinue
 New-Alias -Name Mount-WindowsImageOSD -Value Mount-MyWindowsImage -Force -ErrorAction SilentlyContinue
-New-Alias -Name New-ADK.iso -Value New-AdkISO -Force -ErrorAction SilentlyContinue
 New-Alias -Name Update-OSDWindowsImage -Value Update-MyWindowsImage -Force -ErrorAction SilentlyContinue
 New-Alias -Name Update-WindowsImageOSD -Value Update-MyWindowsImage -Force -ErrorAction SilentlyContinue
 New-Alias -Name Clear-Disk.usb -Value Clear-USBDisk -Force -ErrorAction SilentlyContinue

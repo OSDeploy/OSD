@@ -1036,7 +1036,7 @@ Windows Registry Editor Version 5.00
     Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Create OSDCloud Template ISOs"
     $isoFileName = 'OSDCloud.iso'
     $isoLabel = 'OSDCloud'
-    $null = New-AdkISO -MediaPath "$OSDCloudTemplate\Media" -isoFileName $isoFileName -isoLabel $isoLabel
+    $null = New-WindowsAdkISO -MediaPath "$OSDCloudTemplate\Media" -isoFileName $isoFileName -isoLabel $isoLabel
     #endregion
 
     #region Set OSDCloud Template
