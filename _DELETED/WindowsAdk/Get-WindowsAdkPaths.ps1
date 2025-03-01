@@ -69,7 +69,7 @@ function Get-WindowsAdkPaths {
             $WindowsAdkRoot = Join-Path $KitsRoot10 'Assessment and Deployment Kit'
         }
         else {
-            Write-Warning "[$((Get-Date).ToString('HH:mm:ss'))] Unable to determine ADK Path"
+            Write-Warning "[$((Get-Date).ToString('HH:mm:ss'))][$($MyInvocation.MyCommand)] Unable to determine ADK Path"
             return
         }
     }
@@ -78,7 +78,7 @@ function Get-WindowsAdkPaths {
     # region Validate Windows ADK Path
     $WinPERoot = Join-Path $WindowsAdkRoot 'Windows Preinstallation Environment'
     if (-NOT (Test-Path $WinPERoot -PathType Container)) {
-        Write-Warning "[$((Get-Date).ToString('HH:mm:ss'))] WinPERoot is not a valid path $WinPERoot"
+        Write-Warning "[$((Get-Date).ToString('HH:mm:ss'))][$($MyInvocation.MyCommand)] WinPERoot is not a valid path $WinPERoot"
         $WinPERoot = $null
         return
     }

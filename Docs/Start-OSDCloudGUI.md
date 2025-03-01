@@ -14,7 +14,7 @@ OSDCloud imaging using the command line
 
 ```
 Start-OSDCloudGUI [[-BrandName] <String>] [[-BrandColor] <String>] [[-ComputerManufacturer] <String>]
- [[-ComputerProduct] <String>] [<CommonParameters>]
+ [[-ComputerProduct] <String>] [-v2] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -89,6 +89,21 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
+### -v2
+{{ Fill v2 Description }}
+
+```yaml
+Type: SwitchParameter
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: False
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
 ### CommonParameters
 This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see [about_CommonParameters](http://go.microsoft.com/fwlink/?LinkID=113216).
 
@@ -97,8 +112,6 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ## OUTPUTS
 
 ## NOTES
+25.1.17 Added a temporary parameter v2 to filter DriverPacks by Manufacturer
 
 ## RELATED LINKS
-
-[https://github.com/OSDeploy/OSD/tree/master/Docs](https://github.com/OSDeploy/OSD/tree/master/Docs)
-

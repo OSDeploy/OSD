@@ -88,7 +88,7 @@ function New-WindowsAdkISO {
     $etfsbootcom = $WindowsAdkPaths.etfsbootcom
     $Destinationetfsbootcom = Join-Path $DestinationBoot 'etfsboot.com'
     if (Test-Path $Destinationetfsbootcom) {
-        Write-Host -ForegroundColor DarkCyan "[$((Get-Date).ToString('HH:mm:ss'))][$($MyInvocation.MyCommand)] Using existing $Destinationetfsbootcom"
+        Write-Host -ForegroundColor DarkGray "[$((Get-Date).ToString('HH:mm:ss'))][$($MyInvocation.MyCommand)] Using existing $Destinationetfsbootcom"
     }
     else {
         Copy-Item -Path $etfsbootcom -Destination $DestinationBoot -Force -ErrorAction Stop
@@ -98,7 +98,7 @@ function New-WindowsAdkISO {
     $efisysbin = $WindowsAdkPaths.efisysbin
     $Destinationefisysbin = Join-Path $DestinationEfiBoot 'efisys.bin'
     if (Test-Path $Destinationefisysbin) {
-        Write-Host -ForegroundColor DarkCyan "[$((Get-Date).ToString('HH:mm:ss'))][$($MyInvocation.MyCommand)] Using existing $Destinationefisysbin"
+        Write-Host -ForegroundColor DarkGray "[$((Get-Date).ToString('HH:mm:ss'))][$($MyInvocation.MyCommand)] Using existing $Destinationefisysbin"
     }
     else {
         Copy-Item -Path $efisysbin -Destination $DestinationEfiBoot -Force -ErrorAction Stop
@@ -107,7 +107,7 @@ function New-WindowsAdkISO {
     $efisysnopromptbin = $WindowsAdkPaths.efisysnopromptbin
     $Destinationefisysnopromptbin = Join-Path $DestinationEfiBoot 'efisys_noprompt.bin'
     if (Test-Path $Destinationefisysnopromptbin) {
-        Write-Host -ForegroundColor DarkCyan "[$((Get-Date).ToString('HH:mm:ss'))][$($MyInvocation.MyCommand)] Using existing $Destinationefisysnopromptbin"
+        Write-Host -ForegroundColor DarkGray "[$((Get-Date).ToString('HH:mm:ss'))][$($MyInvocation.MyCommand)] Using existing $Destinationefisysnopromptbin"
     }
     else {
         Copy-Item -Path $efisysnopromptbin -Destination $DestinationEfiBoot -Force -ErrorAction Stop
@@ -141,7 +141,7 @@ function New-WindowsAdkISO {
     $BootDataString = '2#p0,e,b"{0}"#pEF,e,b"{1}"' -f "$Destinationetfsbootcom", "$Destinationefisysbin"
     Write-Verbose "[$((Get-Date).ToString('HH:mm:ss'))][$($MyInvocation.MyCommand)] BootDataString: $BootDataString"
 
-    $Process = Start-Process $oscdimgexe -args @("-m","-o","-u2","-bootdata:$BootDataString",'-u2','-udfver102',$isoLabelString,"`"$MediaPath`"", "`"$IsoFullName`"") -PassThru -Wait -NoNewWindow
+    $Process = Start-Process $oscdimgexe -args @("-m","-o","-u2","-bootdata:$BootDataString",'-u2','-udfver102',$isoLabelString,"`"$MediaPath`"", "`"$IsoFullName`"") -PassThru -Wait -NoNewWindow | Out-Null
 
     if (-NOT (Test-Path $IsoFullName)) {
         Write-Error "[$((Get-Date).ToString('HH:mm:ss'))][$($MyInvocation.MyCommand)] Something didn't work"
@@ -155,7 +155,7 @@ function New-WindowsAdkISO {
     $BootDataString = '2#p0,e,b"{0}"#pEF,e,b"{1}"' -f "$Destinationetfsbootcom", "$Destinationefisysnopromptbin"
     Write-Verbose "[$((Get-Date).ToString('HH:mm:ss'))][$($MyInvocation.MyCommand)] BootDataString: $BootDataString"
 
-    $Process = Start-Process $oscdimgexe -args @("-m","-o","-u2","-bootdata:$BootDataString",'-u2','-udfver102',$isoLabelString,"`"$MediaPath`"", "`"$IsoFullName`"") -PassThru -Wait -NoNewWindow
+    $Process = Start-Process $oscdimgexe -args @('-m', '-o', '-u2', "-bootdata:$BootDataString", '-u2', '-udfver102', $isoLabelString, "`"$MediaPath`"", "`"$IsoFullName`"") -PassThru -Wait -NoNewWindow | Out-Null
 
     if (-NOT (Test-Path $IsoFullName)) {
         Write-Error "[$((Get-Date).ToString('HH:mm:ss'))][$($MyInvocation.MyCommand)] Something didn't work"

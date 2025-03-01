@@ -13,7 +13,7 @@ Returns the Operating Systems used by OSDCloud
 ## SYNTAX
 
 ```
-Get-OSDCloudOperatingSystems [-OSArch <String>] [<CommonParameters>]
+Get-OSDCloudOperatingSystems [[-OSArch] <String>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -39,7 +39,7 @@ Parameter Sets: (All)
 Aliases:
 
 Required: False
-Position: Named
+Position: 1
 Default value: X64
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -53,8 +53,6 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ## OUTPUTS
 
 ## NOTES
+25.2.17 Removed unnecessary Default ParameterSet Name
 
 ## RELATED LINKS
-
-[https://github.com/OSDeploy/OSD/tree/master/Docs](https://github.com/OSDeploy/OSD/tree/master/Docs)
-

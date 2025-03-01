@@ -8,7 +8,7 @@ schema: 2.0.0
 # Get-SetupCompleteOSDCloudUSB
 
 ## SYNOPSIS
-{{ Fill in the Synopsis }}
+This function checks for the presence of an OSDCloud SetupComplete Folder on any drive other than 'C'.
 
 ## SYNTAX
 
@@ -17,7 +17,8 @@ Get-SetupCompleteOSDCloudUSB
 ```
 
 ## DESCRIPTION
-{{ Fill in the Description }}
+This function checks for the presence of an OSDCloud SetupComplete Folder on any drive other than 'C'.
+Sorts the drives in Descending order and returns $true if the SetupComplete Folder with files inside is found.
 
 ## EXAMPLES
 
@@ -32,11 +33,9 @@ PS C:\> {{ Add example code here }}
 
 ## INPUTS
 
-### None
-
 ## OUTPUTS
 
-### System.Object
 ## NOTES
+Sorting in descending order is done to try and have the USB Drive take precedence over any other drives.
 
 ## RELATED LINKS
