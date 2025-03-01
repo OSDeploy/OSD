@@ -2491,7 +2491,7 @@
     <command:syntax>
       <command:syntaxItem>
         <maml:name>Convert-FolderToIso</maml:name>
-        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="named" aliases="FullName">
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="0" aliases="FullName">
           <maml:name>folderFullName</maml:name>
           <maml:description>
             <maml:para>{{ Fill folderFullName Description }}</maml:para>
@@ -2499,6 +2499,18 @@
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
             <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+          <maml:name>WindowsAdkRoot</maml:name>
+          <maml:description>
+            <maml:para>{{ Fill WindowsAdkRoot Description }}</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">FileInfo</command:parameterValue>
+          <dev:type>
+            <maml:name>FileInfo</maml:name>
             <maml:uri />
           </dev:type>
           <dev:defaultValue>None</dev:defaultValue>
@@ -2541,7 +2553,19 @@
       </command:syntaxItem>
     </command:syntax>
     <command:parameters>
-      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="named" aliases="FullName">
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+        <maml:name>WindowsAdkRoot</maml:name>
+        <maml:description>
+          <maml:para>{{ Fill WindowsAdkRoot Description }}</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">FileInfo</command:parameterValue>
+        <dev:type>
+          <maml:name>FileInfo</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="0" aliases="FullName">
         <maml:name>folderFullName</maml:name>
         <maml:description>
           <maml:para>{{ Fill folderFullName Description }}</maml:para>
@@ -13470,7 +13494,7 @@ Original credit to Mike Robbins http://mikefrobbins.com/2018/01/18/use-powershel
     <command:syntax>
       <command:syntaxItem>
         <maml:name>Get-OSDCloudOperatingSystems</maml:name>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="none">
           <maml:name>OSArch</maml:name>
           <maml:description>
             <maml:para>{{ Fill OSArch Description }}</maml:para>
@@ -13485,7 +13509,7 @@ Original credit to Mike Robbins http://mikefrobbins.com/2018/01/18/use-powershel
       </command:syntaxItem>
     </command:syntax>
     <command:parameters>
-      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="none">
         <maml:name>OSArch</maml:name>
         <maml:description>
           <maml:para>{{ Fill OSArch Description }}</maml:para>
@@ -13502,7 +13526,7 @@ Original credit to Mike Robbins http://mikefrobbins.com/2018/01/18/use-powershel
     <command:returnValues />
     <maml:alertSet>
       <maml:alert>
-        <maml:para></maml:para>
+        <maml:para>25.2.17 Removed unnecessary Default ParameterSet Name</maml:para>
       </maml:alert>
     </maml:alertSet>
     <command:examples>
@@ -13516,7 +13540,7 @@ Original credit to Mike Robbins http://mikefrobbins.com/2018/01/18/use-powershel
     </command:examples>
     <command:relatedLinks>
       <maml:navigationLink>
-        <maml:linkText>https://github.com/OSDeploy/OSD/tree/master/Docs</maml:linkText>
+        <maml:linkText>Online Version:</maml:linkText>
         <maml:uri>https://github.com/OSDeploy/OSD/tree/master/Docs</maml:uri>
       </maml:navigationLink>
     </command:relatedLinks>
@@ -16374,11 +16398,11 @@ Original credit to Mike Robbins http://mikefrobbins.com/2018/01/18/use-powershel
       <command:verb>Get</command:verb>
       <command:noun>SetupCompleteOSDCloudUSB</command:noun>
       <maml:description>
-        <maml:para>{{ Fill in the Synopsis }}</maml:para>
+        <maml:para>This function checks for the presence of an OSDCloud SetupComplete Folder on any drive other than 'C'.</maml:para>
       </maml:description>
     </command:details>
     <maml:description>
-      <maml:para>{{ Fill in the Description }}</maml:para>
+      <maml:para>This function checks for the presence of an OSDCloud SetupComplete Folder on any drive other than 'C'. Sorts the drives in Descending order and returns $true if the SetupComplete Folder with files inside is found.</maml:para>
     </maml:description>
     <command:syntax>
       <command:syntaxItem>
@@ -16386,29 +16410,11 @@ Original credit to Mike Robbins http://mikefrobbins.com/2018/01/18/use-powershel
       </command:syntaxItem>
     </command:syntax>
     <command:parameters />
-    <command:inputTypes>
-      <command:inputType>
-        <dev:type>
-          <maml:name>None</maml:name>
-        </dev:type>
-        <maml:description>
-          <maml:para></maml:para>
-        </maml:description>
-      </command:inputType>
-    </command:inputTypes>
-    <command:returnValues>
-      <command:returnValue>
-        <dev:type>
-          <maml:name>System.Object</maml:name>
-        </dev:type>
-        <maml:description>
-          <maml:para></maml:para>
-        </maml:description>
-      </command:returnValue>
-    </command:returnValues>
+    <command:inputTypes />
+    <command:returnValues />
     <maml:alertSet>
       <maml:alert>
-        <maml:para></maml:para>
+        <maml:para>Sorting in descending order is done to try and have the USB Drive take precedence over any other drives.</maml:para>
       </maml:alert>
     </maml:alertSet>
     <command:examples>
@@ -23277,17 +23283,6 @@ Original credit to Mike Robbins http://mikefrobbins.com/2018/01/18/use-powershel
           <dev:defaultValue>False</dev:defaultValue>
         </command:parameter>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
-          <maml:name>ARM64</maml:name>
-          <maml:description>
-            <maml:para>Uses ARM64 instead of AMD64</maml:para>
-          </maml:description>
-          <dev:type>
-            <maml:name>SwitchParameter</maml:name>
-            <maml:uri />
-          </dev:type>
-          <dev:defaultValue>False</dev:defaultValue>
-        </command:parameter>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>Add7Zip</maml:name>
           <maml:description>
             <maml:para>Adds 7Zip to Boot Image</maml:para>
@@ -23365,18 +23360,6 @@ Original credit to Mike Robbins http://mikefrobbins.com/2018/01/18/use-powershel
         <maml:name>WinRE</maml:name>
         <maml:description>
           <maml:para>Uses Windows 10 WinRE.wim instead of the ADK Boot.wim</maml:para>
-        </maml:description>
-        <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
-        <dev:type>
-          <maml:name>SwitchParameter</maml:name>
-          <maml:uri />
-        </dev:type>
-        <dev:defaultValue>False</dev:defaultValue>
-      </command:parameter>
-      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
-        <maml:name>ARM64</maml:name>
-        <maml:description>
-          <maml:para>Uses ARM64 instead of AMD64</maml:para>
         </maml:description>
         <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
         <dev:type>
@@ -24511,6 +24494,167 @@ Original credit to Mike Robbins http://mikefrobbins.com/2018/01/18/use-powershel
     <command:relatedLinks>
       <maml:navigationLink>
         <maml:linkText>https://github.com/OSDeploy/OSD/tree/master/Docs</maml:linkText>
+        <maml:uri>https://github.com/OSDeploy/OSD/tree/master/Docs</maml:uri>
+      </maml:navigationLink>
+    </command:relatedLinks>
+  </command:command>
+  <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
+    <command:details>
+      <command:name>New-WindowsAdkISO</command:name>
+      <command:verb>New</command:verb>
+      <command:noun>WindowsAdkISO</command:noun>
+      <maml:description>
+        <maml:para>Creates an .iso file from a bootable media directory.  ADK is required</maml:para>
+      </maml:description>
+    </command:details>
+    <maml:description>
+      <maml:para>Creates a .iso file from a bootable media directory.  ADK is required</maml:para>
+    </maml:description>
+    <command:syntax>
+      <command:syntaxItem>
+        <maml:name>New-WindowsAdkISO</maml:name>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="none">
+          <maml:name>WindowsAdkRoot</maml:name>
+          <maml:description>
+            <maml:para>Path to the Windows ADK root directory. Typically 'C:\Program Files (x86)\Windows Kits\10\Assessment and Deployment Kit' if (-NOT (Test-Path "$($ .FullName)\Windows Preinstallation Environment")) { throw "Path does not contain a Windows Preinstallation Environment directory: $ "}</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">FileInfo</command:parameterValue>
+          <dev:type>
+            <maml:name>FileInfo</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="2" aliases="none">
+          <maml:name>MediaPath</maml:name>
+          <maml:description>
+            <maml:para>Directory containing the bootable media</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">FileInfo</command:parameterValue>
+          <dev:type>
+            <maml:name>FileInfo</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="3" aliases="none">
+          <maml:name>isoFileName</maml:name>
+          <maml:description>
+            <maml:para>File Name of the ISO</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="4" aliases="none">
+          <maml:name>isoLabel</maml:name>
+          <maml:description>
+            <maml:para>Label of the ISO.  Limited to 16 characters</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+          <maml:name>OpenExplorer</maml:name>
+          <maml:description>
+            <maml:para>Opens Windows Explorer to the parent directory of the ISO File</maml:para>
+          </maml:description>
+          <dev:type>
+            <maml:name>SwitchParameter</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>False</dev:defaultValue>
+        </command:parameter>
+      </command:syntaxItem>
+    </command:syntax>
+    <command:parameters>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="none">
+        <maml:name>WindowsAdkRoot</maml:name>
+        <maml:description>
+          <maml:para>Path to the Windows ADK root directory. Typically 'C:\Program Files (x86)\Windows Kits\10\Assessment and Deployment Kit' if (-NOT (Test-Path "$($ .FullName)\Windows Preinstallation Environment")) { throw "Path does not contain a Windows Preinstallation Environment directory: $ "}</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">FileInfo</command:parameterValue>
+        <dev:type>
+          <maml:name>FileInfo</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="2" aliases="none">
+        <maml:name>MediaPath</maml:name>
+        <maml:description>
+          <maml:para>Directory containing the bootable media</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">FileInfo</command:parameterValue>
+        <dev:type>
+          <maml:name>FileInfo</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="3" aliases="none">
+        <maml:name>isoFileName</maml:name>
+        <maml:description>
+          <maml:para>File Name of the ISO</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="4" aliases="none">
+        <maml:name>isoLabel</maml:name>
+        <maml:description>
+          <maml:para>Label of the ISO.  Limited to 16 characters</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+        <maml:name>OpenExplorer</maml:name>
+        <maml:description>
+          <maml:para>Opens Windows Explorer to the parent directory of the ISO File</maml:para>
+        </maml:description>
+        <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
+        <dev:type>
+          <maml:name>SwitchParameter</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>False</dev:defaultValue>
+      </command:parameter>
+    </command:parameters>
+    <command:inputTypes />
+    <command:returnValues />
+    <maml:alertSet>
+      <maml:alert>
+        <maml:para>David Segura 25.02.26     Initial Release replacing New-AdkISO 25.03.01     Updated to use Get-WindowsAdkPaths</maml:para>
+      </maml:alert>
+    </maml:alertSet>
+    <command:examples>
+      <command:example>
+        <maml:title>-------------------------- Example 1 --------------------------</maml:title>
+        <dev:code>PS C:\&gt; {{ Add example code here }}</dev:code>
+        <dev:remarks>
+          <maml:para>{{ Add example description here }}</maml:para>
+        </dev:remarks>
+      </command:example>
+    </command:examples>
+    <command:relatedLinks>
+      <maml:navigationLink>
+        <maml:linkText>Online Version:</maml:linkText>
         <maml:uri>https://github.com/OSDeploy/OSD/tree/master/Docs</maml:uri>
       </maml:navigationLink>
     </command:relatedLinks>
@@ -29333,11 +29477,11 @@ Original credit to Mike Robbins http://mikefrobbins.com/2018/01/18/use-powershel
       <command:verb>Set</command:verb>
       <command:noun>SetupCompleteOSDCloudUSB</command:noun>
       <maml:description>
-        <maml:para>{{ Fill in the Synopsis }}</maml:para>
+        <maml:para>This function copies SetupComplete Files to the Local OSDCloud SetupComplete Folder Then onfigures the System SetupComplete.ps1 File to run the Custom Scripts from the OSDCloud SetupComplete Folder.</maml:para>
       </maml:description>
     </command:details>
     <maml:description>
-      <maml:para>{{ Fill in the Description }}</maml:para>
+      <maml:para>This function checks for the presence of an OSDCLoud SetupComplete Folder on any drive other than 'C'. Sorts the drives in Descending order and returns $true if the SetupComplete Folder with files inside is found. Copies the SetupComplete Files to the Local OSDCloud SetupComplete Folder. Then onfigures the System SetupComplete.ps1 File to run the Custom Scripts from the OSDCloud SetupComplete Folder.</maml:para>
     </maml:description>
     <command:syntax>
       <command:syntaxItem>
@@ -29345,29 +29489,11 @@ Original credit to Mike Robbins http://mikefrobbins.com/2018/01/18/use-powershel
       </command:syntaxItem>
     </command:syntax>
     <command:parameters />
-    <command:inputTypes>
-      <command:inputType>
-        <dev:type>
-          <maml:name>None</maml:name>
-        </dev:type>
-        <maml:description>
-          <maml:para></maml:para>
-        </maml:description>
-      </command:inputType>
-    </command:inputTypes>
-    <command:returnValues>
-      <command:returnValue>
-        <dev:type>
-          <maml:name>System.Object</maml:name>
-        </dev:type>
-        <maml:description>
-          <maml:para></maml:para>
-        </maml:description>
-      </command:returnValue>
-    </command:returnValues>
+    <command:inputTypes />
+    <command:returnValues />
     <maml:alertSet>
       <maml:alert>
-        <maml:para></maml:para>
+        <maml:para>Sorting in descending order is done to try and have the USB Drive take precedence over any other drives.</maml:para>
       </maml:alert>
     </maml:alertSet>
     <command:examples>
@@ -32352,6 +32478,17 @@ Original credit to Mike Robbins http://mikefrobbins.com/2018/01/18/use-powershel
           </dev:type>
           <dev:defaultValue>(Get-MyComputerProduct)</dev:defaultValue>
         </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+          <maml:name>v2</maml:name>
+          <maml:description>
+            <maml:para>{{ Fill v2 Description }}</maml:para>
+          </maml:description>
+          <dev:type>
+            <maml:name>SwitchParameter</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>False</dev:defaultValue>
+        </command:parameter>
       </command:syntaxItem>
     </command:syntax>
     <command:parameters>
@@ -32403,12 +32540,24 @@ Original credit to Mike Robbins http://mikefrobbins.com/2018/01/18/use-powershel
         </dev:type>
         <dev:defaultValue>(Get-MyComputerProduct)</dev:defaultValue>
       </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+        <maml:name>v2</maml:name>
+        <maml:description>
+          <maml:para>{{ Fill v2 Description }}</maml:para>
+        </maml:description>
+        <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
+        <dev:type>
+          <maml:name>SwitchParameter</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>False</dev:defaultValue>
+      </command:parameter>
     </command:parameters>
     <command:inputTypes />
     <command:returnValues />
     <maml:alertSet>
       <maml:alert>
-        <maml:para></maml:para>
+        <maml:para>25.1.17 Added a temporary parameter v2 to filter DriverPacks by Manufacturer</maml:para>
       </maml:alert>
     </maml:alertSet>
     <command:examples>
@@ -32422,7 +32571,7 @@ Original credit to Mike Robbins http://mikefrobbins.com/2018/01/18/use-powershel
     </command:examples>
     <command:relatedLinks>
       <maml:navigationLink>
-        <maml:linkText>https://github.com/OSDeploy/OSD/tree/master/Docs</maml:linkText>
+        <maml:linkText>Online Version:</maml:linkText>
         <maml:uri>https://github.com/OSDeploy/OSD/tree/master/Docs</maml:uri>
       </maml:navigationLink>
     </command:relatedLinks>
@@ -33881,138 +34030,6 @@ Original credit to Mike Robbins http://mikefrobbins.com/2018/01/18/use-powershel
       <command:inputType>
         <dev:type>
           <maml:name>None</maml:name>
-        </dev:type>
-        <maml:description>
-          <maml:para></maml:para>
-        </maml:description>
-      </command:inputType>
-    </command:inputTypes>
-    <command:returnValues>
-      <command:returnValue>
-        <dev:type>
-          <maml:name>System.Object</maml:name>
-        </dev:type>
-        <maml:description>
-          <maml:para></maml:para>
-        </maml:description>
-      </command:returnValue>
-    </command:returnValues>
-    <maml:alertSet>
-      <maml:alert>
-        <maml:para></maml:para>
-      </maml:alert>
-    </maml:alertSet>
-    <command:examples>
-      <command:example>
-        <maml:title>-------------------------- Example 1 --------------------------</maml:title>
-        <dev:code>PS C:\&gt; {{ Add example code here }}</dev:code>
-        <dev:remarks>
-          <maml:para>{{ Add example description here }}</maml:para>
-        </dev:remarks>
-      </command:example>
-    </command:examples>
-    <command:relatedLinks>
-      <maml:navigationLink>
-        <maml:linkText>Online Version:</maml:linkText>
-        <maml:uri>https://github.com/OSDeploy/OSD/tree/master/Docs</maml:uri>
-      </maml:navigationLink>
-    </command:relatedLinks>
-  </command:command>
-  <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
-    <command:details>
-      <command:name>Test-FolderToIso</command:name>
-      <command:verb>Test</command:verb>
-      <command:noun>FolderToIso</command:noun>
-      <maml:description>
-        <maml:para>{{ Fill in the Synopsis }}</maml:para>
-      </maml:description>
-    </command:details>
-    <maml:description>
-      <maml:para>{{ Fill in the Description }}</maml:para>
-    </maml:description>
-    <command:syntax>
-      <command:syntaxItem>
-        <maml:name>Test-FolderToIso</maml:name>
-        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="named" aliases="FullName">
-          <maml:name>folderFullName</maml:name>
-          <maml:description>
-            <maml:para>{{ Fill folderFullName Description }}</maml:para>
-          </maml:description>
-          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
-          <dev:type>
-            <maml:name>String</maml:name>
-            <maml:uri />
-          </dev:type>
-          <dev:defaultValue>None</dev:defaultValue>
-        </command:parameter>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
-          <maml:name>isoFullName</maml:name>
-          <maml:description>
-            <maml:para>{{ Fill isoFullName Description }}</maml:para>
-          </maml:description>
-          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
-          <dev:type>
-            <maml:name>String</maml:name>
-            <maml:uri />
-          </dev:type>
-          <dev:defaultValue>None</dev:defaultValue>
-        </command:parameter>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
-          <maml:name>isoLabel</maml:name>
-          <maml:description>
-            <maml:para>{{ Fill isoLabel Description }}</maml:para>
-          </maml:description>
-          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
-          <dev:type>
-            <maml:name>String</maml:name>
-            <maml:uri />
-          </dev:type>
-          <dev:defaultValue>None</dev:defaultValue>
-        </command:parameter>
-      </command:syntaxItem>
-    </command:syntax>
-    <command:parameters>
-      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="named" aliases="FullName">
-        <maml:name>folderFullName</maml:name>
-        <maml:description>
-          <maml:para>{{ Fill folderFullName Description }}</maml:para>
-        </maml:description>
-        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
-        <dev:type>
-          <maml:name>String</maml:name>
-          <maml:uri />
-        </dev:type>
-        <dev:defaultValue>None</dev:defaultValue>
-      </command:parameter>
-      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
-        <maml:name>isoFullName</maml:name>
-        <maml:description>
-          <maml:para>{{ Fill isoFullName Description }}</maml:para>
-        </maml:description>
-        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
-        <dev:type>
-          <maml:name>String</maml:name>
-          <maml:uri />
-        </dev:type>
-        <dev:defaultValue>None</dev:defaultValue>
-      </command:parameter>
-      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
-        <maml:name>isoLabel</maml:name>
-        <maml:description>
-          <maml:para>{{ Fill isoLabel Description }}</maml:para>
-        </maml:description>
-        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
-        <dev:type>
-          <maml:name>String</maml:name>
-          <maml:uri />
-        </dev:type>
-        <dev:defaultValue>None</dev:defaultValue>
-      </command:parameter>
-    </command:parameters>
-    <command:inputTypes>
-      <command:inputType>
-        <dev:type>
-          <maml:name>System.String</maml:name>
         </dev:type>
         <maml:description>
           <maml:para></maml:para>

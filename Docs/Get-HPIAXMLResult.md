@@ -23,7 +23,7 @@ Get-HPIAXMLResult [[-Category] <Object>] [[-ReportsFolder] <Object>] [[-CMTraceL
 ## EXAMPLES
 
 ### Example 1
-```powershell
+```
 PS C:\> {{ Add example code here }}
 ```
 
@@ -53,7 +53,7 @@ Accept wildcard characters: False
 Type: Object
 Parameter Sets: (All)
 Aliases:
-Accepted values: All, BIOS, Drivers, Software, Firmware, Accessories, BIOS,Drivers
+Accepted values: All, BIOS, Drivers, Software, Firmware, Accessories, BIOS, Drivers
 
 Required: False
 Position: 0
@@ -83,7 +83,6 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ## INPUTS
 
 ### None
-
 ## OUTPUTS
 
 ### System.Object

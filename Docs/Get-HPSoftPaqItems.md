@@ -22,7 +22,7 @@ Get-HPSoftPaqItems [[-Platform] <String>] [-osver] <String> [-os] <String> [<Com
 ## EXAMPLES
 
 ### Example 1
-```powershell
+```
 PS C:\> {{ Add example code here }}
 ```
 
@@ -82,7 +82,6 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ## INPUTS
 
 ### None
-
 ## OUTPUTS
 
 ### System.Object
