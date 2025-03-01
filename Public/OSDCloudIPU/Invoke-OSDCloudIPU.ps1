@@ -38,6 +38,8 @@ function Invoke-OSDCloudIPU {
         [switch]
         $SkipFinalize,
 
+        [switch]
+        $Finalize,
 
         [switch]
         $DynamicUpdate
@@ -543,6 +545,15 @@ function Invoke-OSDCloudIPU {
         else{
             $SkipFinalizeArg  = ""
         }
+        #Finalize - Instructions Windows Setup to finish previously started update operations on the down-level OS, followed by an immediate reboot to start the offline phase.
+        #https://learn.microsoft.com/en-us/windows-hardware/manufacture/desktop/windows-setup-command-line-options?view=windows-11#finalize
+        if ($Finalize){
+            $FinalizeArg = "/Finalize"
+        }
+        else{
+            $FinalizeArg  = ""
+        }
+
         #No Reboot - Instructs Windows Setup not to restart the computer after the down-level phase of Windows Setup completes.
         #https://learn.microsoft.com/en-us/windows-hardware/manufacture/desktop/windows-setup-command-line-options?view=windows-11#noreboot
         if ($NoReboot){
@@ -554,7 +565,7 @@ function Invoke-OSDCloudIPU {
         
         $ParamStartProcess = @{
             FilePath = "$MediaLocation\Setup.exe"
-            ArgumentList = "/Auto Upgrade $DynamicUpdateArg /EULA accept $DriverArg /Priority High $SilentArg $DiagnosticPromptArg $NoRebootArg $SkipFinalizeArg"
+            ArgumentList = "/Auto Upgrade $DynamicUpdateArg /EULA accept $DriverArg /Priority High $SilentArg $DiagnosticPromptArg $NoRebootArg $SkipFinalizeArg $FinalizeArg"
         } 
 
         Write-Host -ForegroundColor Cyan "Setup Path: " -NoNewline
