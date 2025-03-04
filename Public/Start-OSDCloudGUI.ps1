@@ -149,7 +149,10 @@
         $Global:OSDCloudGUI.DriverPackName = $Global:OSDCloudGUI.DriverPack.Name
     }
     #=================================================
+    $global:OSDCloudHotfix = $false
     if ($Hotfix) {
+        $global:OSDCloudHotfix = $true
+
         $HotfixUrl = 'https://raw.githubusercontent.com/OSDeploy/OSD/master/cloud/hotfix/osdcloudgui.ps1'
 
         $Result = Invoke-WebRequest -Uri $HotfixUrl -UseBasicParsing -Method Head
