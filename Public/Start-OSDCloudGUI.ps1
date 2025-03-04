@@ -39,6 +39,22 @@
         [System.Management.Automation.SwitchParameter]
         $v2
     )
+    #=================================================
+    $global:OSDCloudHotfix = $false
+    if ($Hotfix) {
+        $global:OSDCloudHotfix = $true
+
+        $HotfixUrl = 'https://raw.githubusercontent.com/OSDeploy/OSD/master/cloud/hotfix/osdcloudgui.ps1'
+
+        $Result = Invoke-WebRequest -Uri $HotfixUrl -UseBasicParsing -Method Head
+        if ($Result.StatusCode -eq 200) {
+            Invoke-Expression (Invoke-WebRequest -Uri $HotfixUrl -UseBasicParsing)
+        }
+        else {
+            Write-Warning "[$((Get-Date).ToString('HH:mm:ss'))][$($MyInvocation.MyCommand.Name)] OSDCloud failed to reach the Hotfix URL"
+            Write-Warning $HotfixUrl
+        }
+    }
     #================================================
     #   Filter DriverPacks
     #================================================
@@ -147,26 +163,7 @@
     $Global:OSDCloudGUI.DriverPack = Get-OSDCloudDriverPack -Product $ComputerProduct -OSVersion $Global:OSDCloudGUI.OSVersion -OSReleaseID $Global:OSDCloudGUI.OSReleaseID
     if ($Global:OSDCloudGUI.DriverPack) {
         $Global:OSDCloudGUI.DriverPackName = $Global:OSDCloudGUI.DriverPack.Name
-    }
-    #=================================================
-    $global:OSDCloudHotfix = $false
-    if ($Hotfix) {
-        $global:OSDCloudHotfix = $true
-
-        $HotfixUrl = 'https://raw.githubusercontent.com/OSDeploy/OSD/master/cloud/hotfix/osdcloudgui.ps1'
-
-        $Result = Invoke-WebRequest -Uri $HotfixUrl -UseBasicParsing -Method Head
-        if ($Result.StatusCode -eq 200) {
-            Invoke-Expression (Invoke-WebRequest -Uri $HotfixUrl -UseBasicParsing)
-        }
-        else {
-            Write-Warning "[$((Get-Date).ToString('HH:mm:ss'))][$($MyInvocation.MyCommand.Name)] OSDCloud failed to reach the Hotfix URL"
-            Write-Warning $HotfixUrl
-        }
-    }
-    #=================================================
-    Write-Host -ForegroundColor DarkGray "========================================================================="
-    Write-Host -ForegroundColor Green "OSDCloudGUI Configuration"
+    }rite-Host -ForegroundColor Green "OSDCloudGUI Configuration"
     $Global:OSDCloudGUI | Out-Host
     #================================================
     #   Test TPM
@@ -216,6 +213,9 @@
     #================================================
 
     & "$($MyInvocation.MyCommand.Module.ModuleBase)\Projects\OSDCloudGUI\MainWindow.ps1"
+    Start-Sleep -Seconds 2
+    #================================================
+}
     Start-Sleep -Seconds 2
     #================================================
 }

@@ -43,6 +43,17 @@ $SurfaceDriverPack = @'
 '@
 
 if ($OSDCloudGui.ComputerProduct -match 'Surface_Laptop_7th_Edition_With_Intel_For_Business') {
+    Write-Host -ForegroundColor DarkCyan "[$((Get-Date).ToString('HH:mm:ss'))][$($MyInvocation.MyCommand)] Updating DriverPack Catalog in OSD Module at $GetModuleBase"
+    if ($env:SystemRoot -eq 'X:') {
+        $ModuleBase = Get-Module -Name OSD -ListAvailable | Select-Object -ExpandProperty ModuleBase -First 1
+        $FilePath = "$ModuleBase\Catalogs\CloudDriverPacks.json"
+        $FileContent = Get-Content -Path $FilePath -Raw
+        $FileContent.Replace('SurfaceLaptopforBusiness7thEditionwithIntel_Win11_26100_25.013.32214.0.msi', 'SurfaceLaptopforBusiness7thEditionwithIntel_Win11_26100_25.013.32214.0.cab') | Set-Content -Path $FilePath -Force
+        $FileContent.Replace('https://download.microsoft.com/download/1543bd80-9cae-498d-8b0f-9841e4d7b2a8', 'https://driverpack.blob.core.windows.net/public') | Set-Content -Path $FilePath -Force
+        $FileContent | Set-Content $FilePath
+    }
+}
+if ($OSDCloudGui.ComputerProduct -match 'XXXXXXXXXXXXXXXXXXXXXX') {
     <#
     Write-Host -ForegroundColor DarkCyan "[$((Get-Date).ToString('HH:mm:ss'))][$($MyInvocation.MyCommand)] Replacing OSDCloudGUI.DriverPack.Url"
     $Url = 'https://driverpack.blob.core.windows.net/public/SurfaceLaptopforBusiness7thEditionwithIntel_Win11_26100_25.013.32214.0.cab'
