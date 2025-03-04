@@ -34,9 +34,6 @@
         $ComputerProduct = (Get-MyComputerProduct),
 
         [System.Management.Automation.SwitchParameter]
-        $Hotfix,
-
-        [System.Management.Automation.SwitchParameter]
         $v2
     )
     #=================================================
