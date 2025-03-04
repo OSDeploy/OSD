@@ -45,7 +45,7 @@ $SurfaceDriverPack = @'
 if ($OSDCloudGui.ComputerProduct -match 'Surface_Laptop_7th_Edition_With_Intel_For_Business') {
     $ModuleBase = Get-Module -Name OSD -ListAvailable | Select-Object -ExpandProperty ModuleBase -First 1
     Write-Host -ForegroundColor DarkCyan "[$((Get-Date).ToString('HH:mm:ss'))][$($MyInvocation.MyCommand)] Updating DriverPack Catalog in OSD Module $ModuleBase"
-    if ($env:SystemRoot -eq 'X:') {
+    if ($env:SystemDrive -eq 'X:') {
         $FilePath = "$ModuleBase\Catalogs\CloudDriverPacks.json"
         $FileContent = Get-Content -Path $FilePath -Raw
         $FileContent.Replace('SurfaceLaptopforBusiness7thEditionwithIntel_Win11_26100_25.013.32214.0.msi', 'SurfaceLaptopforBusiness7thEditionwithIntel_Win11_26100_25.013.32214.0.cab')

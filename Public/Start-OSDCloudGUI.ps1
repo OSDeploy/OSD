@@ -41,6 +41,7 @@
     )
     #=================================================
     $global:OSDCloudHotfix = $false
+
     if ($Hotfix) {
         $global:OSDCloudHotfix = $true
 
@@ -48,7 +49,7 @@
 
         $Result = Invoke-WebRequest -Uri $HotfixUrl -UseBasicParsing -Method Head
         if ($Result.StatusCode -eq 200) {
-            Invoke-Expression (Invoke-WebRequest -Uri $HotfixUrl -UseBasicParsing)
+            Invoke-Expression (Invoke-RestMethod -Uri $HotfixUrl -UseBasicParsing)
         }
         else {
             Write-Warning "[$((Get-Date).ToString('HH:mm:ss'))][$($MyInvocation.MyCommand.Name)] OSDCloud failed to reach the Hotfix URL"
