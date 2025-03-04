@@ -656,17 +656,6 @@ function New-WindowsAdkISO {
     #>
     [CmdletBinding()]
     param (
-        # Path to the Windows ADK root directory. Typically 'C:\Program Files (x86)\Windows Kits\10\Assessment and Deployment Kit'
-        [ValidateScript({
-                if (-NOT ($_ | Test-Path)) { throw "Path does not exist: $_" }
-                if (-NOT ($_ | Test-Path -PathType Container)) { throw "Path must be a directory: $_" }
-                if (-NOT (Test-Path "$($_.FullName)\Deployment Tools")) { throw "Path does not contain a Deployment Tools subfolder: $_" }
-                # if (-NOT (Test-Path "$($_.FullName)\Windows Preinstallation Environment")) { throw "Path does not contain a Windows Preinstallation Environment directory: $_"}
-                return $true
-            })]
-        [System.IO.FileInfo]
-        $WindowsAdkRoot,
-
         # Directory containing the bootable media
         [Parameter(Mandatory = $true)]
         [ValidateScript({
@@ -688,6 +677,26 @@ function New-WindowsAdkISO {
         [System.String]
         $isoLabel,
 
+        [Parameter(Mandatory = $false)]
+        [ValidateScript({
+                if (-NOT ($_ | Test-Path)) { throw "Path does not exist: $_" }
+                if (-NOT ($_ | Test-Path -PathType Container)) { throw "Path must be a directory: $_" }
+                return $true
+            })]
+        [System.IO.FileInfo]
+        $IsoDirectory = $((Get-Item -Path $MediaPath -ErrorAction Stop).Parent.FullName),
+
+        # Path to the Windows ADK root directory. Typically 'C:\Program Files (x86)\Windows Kits\10\Assessment and Deployment Kit'
+        [ValidateScript({
+                if (-NOT ($_ | Test-Path)) { throw "Path does not exist: $_" }
+                if (-NOT ($_ | Test-Path -PathType Container)) { throw "Path must be a directory: $_" }
+                if (-NOT (Test-Path "$($_.FullName)\Deployment Tools")) { throw "Path does not contain a Deployment Tools subfolder: $_" }
+                # if (-NOT (Test-Path "$($_.FullName)\Windows Preinstallation Environment")) { throw "Path does not contain a Windows Preinstallation Environment directory: $_"}
+                return $true
+            })]
+        [System.IO.FileInfo]
+        $WindowsAdkRoot,
+
         #[System.Management.Automation.SwitchParameter]$NoPrompt,
         #[System.Management.Automation.SwitchParameter]$Mount,
 
@@ -696,11 +705,9 @@ function New-WindowsAdkISO {
         $OpenExplorer
     )
     #=================================================
-    # Start
     $Error.Clear()
     Write-Verbose "[$((Get-Date).ToString('HH:mm:ss'))][$($MyInvocation.MyCommand)] Start"
 	#=================================================
-	# Blocks
 	Block-WinPE
 	Block-StandardUser
     Block-PowerShellVersionLt5
@@ -715,12 +722,11 @@ function New-WindowsAdkISO {
         Write-Warning "[$((Get-Date).ToString('HH:mm:ss'))][$($MyInvocation.MyCommand)] Could not get ADK going, sorry"
         Break
     }
-    $WorkspacePath = (Get-Item -Path $MediaPath -ErrorAction Stop).Parent.FullName
-    $IsoFullName = Join-Path $WorkspacePath $isoFileName
+    $IsoFullName = Join-Path $IsoDirectory $isoFileName
     $PathOscdimg = $WindowsAdkPaths.PathOscdimg
     $oscdimgexe = $WindowsAdkPaths.oscdimgexe
 
-    Write-Verbose "[$((Get-Date).ToString('HH:mm:ss'))][$($MyInvocation.MyCommand)] WorkspacePath: $WorkspacePath"
+    Write-Verbose "[$((Get-Date).ToString('HH:mm:ss'))][$($MyInvocation.MyCommand)] IsoDirectory: $IsoDirectory"
     Write-Verbose "[$((Get-Date).ToString('HH:mm:ss'))][$($MyInvocation.MyCommand)] IsoFullName: $IsoFullName"
     Write-Verbose "[$((Get-Date).ToString('HH:mm:ss'))][$($MyInvocation.MyCommand)] PathOscdimg: $PathOscdimg"
     Write-Verbose "[$((Get-Date).ToString('HH:mm:ss'))][$($MyInvocation.MyCommand)] oscdimgexe: $oscdimgexe"
@@ -802,7 +808,7 @@ function New-WindowsAdkISO {
         Break
     }
     $PromptIso = Get-Item -Path $IsoFullName
-    Write-Host -ForegroundColor DarkCyan "[$((Get-Date).ToString('HH:mm:ss'))][$($MyInvocation.MyCommand)] ISO created at $PromptIso"
+    Write-Host -ForegroundColor DarkGray "[$((Get-Date).ToString('HH:mm:ss'))][$($MyInvocation.MyCommand)] ISO created at $PromptIso"
     #=================================================
     # Create NoPrompt ISO
     $IsoFullName = "$($PromptIso.Directory)\$($PromptIso.BaseName)_NoPrompt.iso"
@@ -816,11 +822,11 @@ function New-WindowsAdkISO {
         Break
     }
     $NoPromptIso = Get-Item -Path $IsoFullName
-    Write-Host -ForegroundColor DarkCyan "[$((Get-Date).ToString('HH:mm:ss'))][$($MyInvocation.MyCommand)] ISO created at $NoPromptIso"
+    Write-Host -ForegroundColor DarkGray "[$((Get-Date).ToString('HH:mm:ss'))][$($MyInvocation.MyCommand)] ISO created at $NoPromptIso"
     #=================================================
     # Open Windows Explorer
     if ($PSBoundParameters.ContainsKey('OpenExplorer')) {
-        explorer $WorkspacePath
+        explorer $IsoDirectory
     }
     #=================================================
     # Return Get-Item

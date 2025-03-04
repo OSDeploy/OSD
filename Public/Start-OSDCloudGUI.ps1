@@ -34,6 +34,9 @@
         $ComputerProduct = (Get-MyComputerProduct),
 
         [System.Management.Automation.SwitchParameter]
+        $Hotfix,
+
+        [System.Management.Automation.SwitchParameter]
         $v2
     )
     #================================================
@@ -144,6 +147,19 @@
     $Global:OSDCloudGUI.DriverPack = Get-OSDCloudDriverPack -Product $ComputerProduct -OSVersion $Global:OSDCloudGUI.OSVersion -OSReleaseID $Global:OSDCloudGUI.OSReleaseID
     if ($Global:OSDCloudGUI.DriverPack) {
         $Global:OSDCloudGUI.DriverPackName = $Global:OSDCloudGUI.DriverPack.Name
+    }
+    #=================================================
+    if ($Hotfix) {
+        $HotfixUrl = 'https://raw.githubusercontent.com/OSDeploy/OSD/master/cloud/hotfix/osdcloudgui.ps1'
+
+        $Result = Invoke-WebRequest -Uri $HotfixUrl -UseBasicParsing -Method Head
+        if ($Result.StatusCode -eq 200) {
+            Invoke-Expression (Invoke-WebRequest -Uri $HotfixUrl -UseBasicParsing)
+        }
+        else {
+            Write-Warning "[$((Get-Date).ToString('HH:mm:ss'))][$($MyInvocation.MyCommand.Name)] OSDCloud failed to reach the Hotfix URL"
+            Write-Warning $HotfixUrl
+        }
     }
     #=================================================
     Write-Host -ForegroundColor DarkGray "========================================================================="

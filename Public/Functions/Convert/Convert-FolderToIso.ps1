@@ -19,12 +19,12 @@ function Convert-FolderToIso {
 
         # Path to the Windows ADK root directory. Typically 'C:\Program Files (x86)\Windows Kits\10\Assessment and Deployment Kit'
         [ValidateScript({
-                if (-NOT ($_ | Test-Path)) { throw "Path does not exist: $_" }
-                if (-NOT ($_ | Test-Path -PathType Container)) { throw "Path must be a directory: $_" }
-                if (-NOT (Test-Path "$($_.FullName)\Deployment Tools")) { throw "Path does not contain a Deployment Tools subfolder: $_"}
-                # if (-NOT (Test-Path "$($_.FullName)\Windows Preinstallation Environment")) { throw "Path does not contain a Windows Preinstallation Environment directory: $_"}
-                return $true
-            })]
+            if (-NOT ($_ | Test-Path)) { throw "Path does not exist: $_" }
+            if (-NOT ($_ | Test-Path -PathType Container)) { throw "Path must be a directory: $_" }
+            if (-NOT (Test-Path "$($_.FullName)\Deployment Tools")) { throw "Path does not contain a Deployment Tools subfolder: $_"}
+            # if (-NOT (Test-Path "$($_.FullName)\Windows Preinstallation Environment")) { throw "Path does not contain a Windows Preinstallation Environment directory: $_"}
+            return $true
+        })]
         [System.IO.FileInfo]
         $WindowsAdkRoot
     )
