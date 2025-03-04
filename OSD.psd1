@@ -2,7 +2,7 @@
 
 @{
     RootModule           = 'OSD.psm1'
-    ModuleVersion        = '25.3.1.1'
+    ModuleVersion        = '25.3.4.1'
     Author               = 'David Segura . Gary Blok . Michael Escamilla'
     CompanyName          = 'OSD Community'
     Copyright            = '(c) 2025 OSDeploy'
