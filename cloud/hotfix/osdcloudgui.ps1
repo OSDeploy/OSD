@@ -44,6 +44,13 @@ $SurfaceDriverPack = @'
 
 if ($OSDCloudGui.ComputerProduct -match 'Surface_Laptop_7th_Edition_With_Intel_For_Business') {
     $ModuleBase = Get-Module -Name OSD -ListAvailable | Select-Object -ExpandProperty ModuleBase -First 1
+    
+    Write-Host -ForegroundColor DarkCyan "[$((Get-Date).ToString('HH:mm:ss'))][$($MyInvocation.MyCommand)] Replacing DriverPack Catalog in OSD Module at $ModuleBase"
+    if ($env:SystemDrive -eq 'X:') {
+        $SurfaceDriverPack | Out-File -FilePath "$ModuleBase\Catalogs\CloudDriverPacks.json" -Encoding utf8 -Force
+    }
+
+    <#
     Write-Host -ForegroundColor DarkCyan "[$((Get-Date).ToString('HH:mm:ss'))][$($MyInvocation.MyCommand)] Updating DriverPack Catalog in OSD Module $ModuleBase"
     if ($env:SystemDrive -eq 'X:') {
         $FilePath = "$ModuleBase\Catalogs\CloudDriverPacks.json"
@@ -52,8 +59,8 @@ if ($OSDCloudGui.ComputerProduct -match 'Surface_Laptop_7th_Edition_With_Intel_F
         $FileContent.Replace('https://download.microsoft.com/download/1543bd80-9cae-498d-8b0f-9841e4d7b2a8', 'https://driverpack.blob.core.windows.net/public')
         $FileContent | Set-Content $FilePath
     }
-}
-if ($OSDCloudGui.ComputerProduct -match 'XXXXXXXXXXXXXXXXXXXXXX') {
+    #>
+
     <#
     Write-Host -ForegroundColor DarkCyan "[$((Get-Date).ToString('HH:mm:ss'))][$($MyInvocation.MyCommand)] Replacing OSDCloudGUI.DriverPack.Url"
     $Url = 'https://driverpack.blob.core.windows.net/public/SurfaceLaptopforBusiness7thEditionwithIntel_Win11_26100_25.013.32214.0.cab'
@@ -61,12 +68,6 @@ if ($OSDCloudGui.ComputerProduct -match 'XXXXXXXXXXXXXXXXXXXXXX') {
     $OSDCloudGui.DriverPack.Url = $Url
     #>
 
-    $GetModuleBase = Get-Module -Name OSD | Select-Object -ExpandProperty ModuleBase -First 1
-
-    Write-Host -ForegroundColor DarkCyan "[$((Get-Date).ToString('HH:mm:ss'))][$($MyInvocation.MyCommand)] Replacing DriverPack Catalog in OSD Module at $GetModuleBase"
-    if ($env:SystemRoot -eq 'X:') {
-        $SurfaceDriverPack | Out-File -FilePath "$GetModuleBase\Catalogs\CloudDriverPacks.json" -Encoding utf8 -Force
-    }
 }
 #=================================================
 Write-Host -ForegroundColor DarkCyan "[$((Get-Date).ToString('HH:mm:ss'))][$($MyInvocation.MyCommand)] OSDCloud Hotfix End"
