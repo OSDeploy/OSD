@@ -163,7 +163,8 @@
     $Global:OSDCloudGUI.DriverPack = Get-OSDCloudDriverPack -Product $ComputerProduct -OSVersion $Global:OSDCloudGUI.OSVersion -OSReleaseID $Global:OSDCloudGUI.OSReleaseID
     if ($Global:OSDCloudGUI.DriverPack) {
         $Global:OSDCloudGUI.DriverPackName = $Global:OSDCloudGUI.DriverPack.Name
-    }rite-Host -ForegroundColor Green "OSDCloudGUI Configuration"
+    }
+    Write-Host -ForegroundColor Green "OSDCloudGUI Configuration"
     $Global:OSDCloudGUI | Out-Host
     #================================================
     #   Test TPM
@@ -213,9 +214,6 @@
     #================================================
 
     & "$($MyInvocation.MyCommand.Module.ModuleBase)\Projects\OSDCloudGUI\MainWindow.ps1"
-    Start-Sleep -Seconds 2
-    #================================================
-}
     Start-Sleep -Seconds 2
     #================================================
 }
