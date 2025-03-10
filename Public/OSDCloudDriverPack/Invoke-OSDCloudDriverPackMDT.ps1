@@ -104,7 +104,7 @@ function Invoke-OSDCloudDriverPackMDT {
         $DeployRootDriverPacks = Join-Path $DEPLOYROOT 'DriverPacks'
         
         $DeployRootDriverPack = @()
-        $DeployRootDriverPack = Get-ChildItem $DeployRootDriverPacks -File -Recurse -Force -ErrorAction Ignore | Where-Object {$_.Name -match $GetMyDriverPackBaseName} | Where-Object {$_.Extension -in ('.cab','.zip','.exe')} | Select-Object -First 1
+        $DeployRootDriverPack = Get-ChildItem $DeployRootDriverPacks -File -Recurse -Force -ErrorAction Ignore | Where-Object {$_.Name -match $GetMyDriverPackBaseName} | Where-Object {$_.Extension -in ('.cab','.zip','.exe','.msi')} | Select-Object -First 1
         if ($DeployRootDriverPack) {
             Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Copying existing DriverPack from the MDT DeploymentShare"
             Write-Host -ForegroundColor DarkGray "-Source $($DeployRootDriverPack.FullName)"
@@ -117,7 +117,7 @@ function Invoke-OSDCloudDriverPackMDT {
     #	Get the DriverPack
     #=================================================
     if ($GetMyDriverPack) {
-        $ReadyDriverPack = Get-ChildItem -Path $OSDiskDrivers -File -Force -ErrorAction Ignore | Where-Object {$_.Name -match $GetMyDriverPackBaseName} | Where-Object {$_.Extension -in ('.cab','.zip','.exe')}
+        $ReadyDriverPack = Get-ChildItem -Path $OSDiskDrivers -File -Force -ErrorAction Ignore | Where-Object {$_.Name -match $GetMyDriverPackBaseName} | Where-Object {$_.Extension -in ('.cab','.zip','.exe','.msi')}
 
         if (-Not ($ReadyDriverPack)) {
             if ((-NOT (Test-Path "$env:SystemRoot\System32\curl.exe")) -and (-NOT (Test-Path "$OSDISK\Windows\System32\curl.exe"))) {
@@ -136,7 +136,7 @@ function Invoke-OSDCloudDriverPackMDT {
             Save-WebFile -SourceUrl $GetMyDriverPack.Url -DestinationDirectory $OSDiskDrivers -DestinationName $GetMyDriverPack.FileName
         }
 
-        $ReadyDriverPack = Get-ChildItem -Path $OSDiskDrivers -File -Force -ErrorAction Ignore | Where-Object {$_.Name -match $GetMyDriverPackBaseName} | Where-Object {$_.Extension -in ('.cab','.zip','.exe')}
+        $ReadyDriverPack = Get-ChildItem -Path $OSDiskDrivers -File -Force -ErrorAction Ignore | Where-Object {$_.Name -match $GetMyDriverPackBaseName} | Where-Object {$_.Extension -in ('.cab','.zip','.exe','.msi')}
         if ($ReadyDriverPack) {
             Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) DriverPack has been copied to $OSDiskDrivers"
 
