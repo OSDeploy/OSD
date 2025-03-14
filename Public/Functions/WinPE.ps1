@@ -311,10 +311,10 @@ AddReg      = AddReg
 ;0x20000    REG_EXPAND_SZ
 ;0x10001    REG_DWORD
 ;0x20001    REG_NONE
-HKLM,"SYSTEM\ControlSet001\Control\Session Manager\Environment",APPDATA,0x00000,"X:\Windows\System32\Config\SystemProfile\AppData\Roaming"
+HKLM,"SYSTEM\ControlSet001\Control\Session Manager\Environment",APPDATA,0x00000,"%SystemRoot%\System32\Config\SystemProfile\AppData\Roaming"
 HKLM,"SYSTEM\ControlSet001\Control\Session Manager\Environment",HOMEDRIVE,0x00000,"X:"
 HKLM,"SYSTEM\ControlSet001\Control\Session Manager\Environment",HOMEPATH,0x00000,"Windows\System32\Config\SystemProfile"
-HKLM,"SYSTEM\ControlSet001\Control\Session Manager\Environment",LOCALAPPDATA,0x00000,"X:\Windows\System32\Config\SystemProfile\AppData\Local"
+HKLM,"SYSTEM\ControlSet001\Control\Session Manager\Environment",LOCALAPPDATA,0x00000,"%SystemRoot%\System32\Config\SystemProfile\AppData\Local"
 '@
             #=================================================
             #   Build Driver
