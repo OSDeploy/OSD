@@ -20,7 +20,7 @@ function Select-OSDCloudFileWim {
 
     $Results = $Results | Sort-Object -Property Length -Unique | Sort-Object FullName | Where-Object {$_.Length -gt 2GB}
 
-    if ($Results) {
+    If ($Results.Count -gt 1) {
         $Results = foreach ($Item in $Results) {
             $i++
 
@@ -46,5 +46,8 @@ function Select-OSDCloudFileWim {
         $Results = $Results | Where-Object {$_.Selection -eq $SelectReadHost}
 
         Return Get-Item (Join-Path $Results.Directory $Results.Name)
+    
+    } ElseIf ($Results -eq 1) {
+        Return $Results.FullName
     }
 }
