@@ -1,21 +1,19 @@
 # Module Manifest
 
 @{
-RootModule              = 'OSD.psm1'
-ModuleVersion           = '25.2.27.1'
-GUID                    = '9fe5b9b6-0224-4d87-9018-a8978529f6f5'
-Author                  = 'David Segura . Gary Blok . Michael Escamilla'
-CompanyName             = 'OSD Community'
-Copyright               = '(c) 2025 OSDeploy'
-Description          = @'
-February 27, 2025
-'@
-    CompatiblePSEditions    = @('Desktop')
-    PowerShellVersion       = '5.1'
-    FormatsToProcess        = @(
-        '.\Format\MsUpCat.Format.ps1xml'
-    )
-    FunctionsToExport       = @(
+    RootModule           = 'OSD.psm1'
+    ModuleVersion        = '25.3.14.1'
+    Author               = 'David Segura . Gary Blok . Michael Escamilla'
+    CompanyName          = 'OSD Community'
+    Copyright            = '(c) 2025 OSDeploy'
+    Description          = 'OSD PowerShell Module for Windows Deployment'
+    GUID                 = '9fe5b9b6-0224-4d87-9018-a8978529f6f5'
+    CompatiblePSEditions = @('Desktop')
+    PowerShellVersion    = '5.1'
+    FormatsToProcess     = @('.\Format\MsUpCat.Format.ps1xml')
+    AliasesToExport      = '*'
+    CmdletsToExport      = @()
+    FunctionsToExport    = @(
         'Add-7Zip2BootImage'
         'Add-OfflineServicingWindowsDriver'
         'Add-WindowsPackageSSU'
@@ -343,7 +341,6 @@ February 27, 2025
         'Test-DCUSupport'
         'Test-DISMFromOSDCloudUSB'
         'Test-DynamicValidateSet'
-        'Test-FolderToIso'
         'Test-HPIASupport'
         'Test-HPTPMFromOSDCloudUSB'
         'Test-IsVM'
@@ -367,9 +364,7 @@ February 27, 2025
         'Wait-WebConnection'
         'Write-CMTraceLog'
     )
-    CmdletsToExport = @()
-    VariablesToExport = @()
-    AliasesToExport = '*'
+    VariablesToExport    = @()
     PrivateData = @{
         PSData = @{
             Tags            = @('osd','osdeploy','osdcloud')
