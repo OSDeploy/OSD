@@ -1465,9 +1465,9 @@ Function Get-TimeZoneFromIP {
     if ($offset.Substring(1,1) -eq "0") {
         $offset = $offset.Substring(0,1) + $offset.Substring(2,1)
     }
-    $Matches = ($TimeZoneData | Where-Object {$_.utc -match $TimeZoneAPIInfo.timezone}).value
+    $Matches = $TimeZoneData | Where-Object { $_.utc -match $TimeZoneAPIInfo.timezone }
     if ($Matches.count -gt 1){
-    $Out = ($Matches | Where-Object {$_.utc -match $TimeZoneAPIInfo.timezone -and $_.offset -match $offset}).value
+    $Out = ($Matches | Where-Object { $_.utc -match $TimeZoneAPIInfo.timezone -and $_.offset -match $offset }).value
     }
     else {
     $Out = $Matches
