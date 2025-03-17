@@ -1465,12 +1465,13 @@ Function Get-TimeZoneFromIP {
     if ($offset.Substring(1,1) -eq "0") {
         $offset = $offset.Substring(0,1) + $offset.Substring(2,1)
     }
-    $TZMatch= ($TimeZoneData | Where-Object {$_.utc -match $TimeZoneAPIInfo.timezone})
+    $TZMatch = ($TimeZoneData | Where-Object {$_.utc -match $TimeZoneAPIInfo.timezone})
     if ($TZMatch.count -gt 1){
-    $Out = ($TZMatch | Where-Object {$_.utc -match $TimeZoneAPIInfo.timezone -and $_.offset -match $offset})
+        $Out = ($TZMatch | Where-Object {$_.utc -match $TimeZoneAPIInfo.timezone -and $_.offset -match $offset})
     }
     else {
-    $Out = $TZMatch.value
+    $Out = $TZMatch
     }
-    return $Out
+
+    return $Out.value
 }
