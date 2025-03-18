@@ -48,6 +48,6 @@ function Select-OSDCloudFileWim {
         Return Get-Item (Join-Path $Results.Directory $Results.Name)
     
     } ElseIf ($Results.Count -eq 1) {
-        Return $Results.FullName
+        Return $Results
     }
 }
