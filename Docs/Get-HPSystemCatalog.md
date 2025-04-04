@@ -13,8 +13,8 @@ Converts the HP Client Catalog for Microsoft System Center Product to a PowerShe
 ## SYNTAX
 
 ```
-Get-HPSystemCatalog [[-DownloadPath] <String>] [-Compatible] [[-Component] <String>] [-Online]
- [-UpdateModuleCatalog] [-ProgressAction <ActionPreference>] [<CommonParameters>]
+Get-HPSystemCatalog [[-DownloadPath] <String>] [-Compatible] [[-Component] <String>]
+ [-ProgressAction <ActionPreference>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -84,36 +84,6 @@ Aliases:
 Required: False
 Position: 2
 Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -Online
-Checks for the latest Online version
-
-```yaml
-Type: SwitchParameter
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: Named
-Default value: False
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -UpdateModuleCatalog
-Updates the OSD Module Offline Catalog
-
-```yaml
-Type: SwitchParameter
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: Named
-Default value: False
 Accept pipeline input: False
 Accept wildcard characters: False
 ```

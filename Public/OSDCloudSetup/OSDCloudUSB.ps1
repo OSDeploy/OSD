@@ -646,16 +646,16 @@ function Update-OSDCloudUSB {
             }
         
             if ($DriverPack -contains 'Dell') {
-                Get-DellDriverPack -DownloadPath "$DriverPackDownloadPath\Dell"
+                Get-DellDriverPackCatalog -DownloadPath "$DriverPackDownloadPath\Dell"
             }
             if ($DriverPack -contains 'HP') {
-                Get-HPDriverPack -DownloadPath "$DriverPackDownloadPath\HP"
+                Get-HPDriverPackCatalog -DownloadPath "$DriverPackDownloadPath\HP"
             }
             if ($DriverPack -contains 'Lenovo') {
                 Get-LenovoDriverPackCatalog -DownloadPath "$DriverPackDownloadPath\Lenovo"
             }
             if ($DriverPack -contains 'Microsoft') {
-                Get-MicrosoftDriverPack -DownloadPath "$DriverPackDownloadPath\Microsoft"
+                Get-SurfaceDriverPackCatalog -DownloadPath "$DriverPackDownloadPath\Microsoft"
             }
             Write-Host -ForegroundColor DarkGray "========================================================================="
         }

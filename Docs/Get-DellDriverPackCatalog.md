@@ -5,44 +5,61 @@ online version: https://github.com/OSDeploy/OSD/tree/master/Docs
 schema: 2.0.0
 ---
 
-# Get-HPPlatformCatalog
+# Get-DellDriverPackCatalog
 
 ## SYNOPSIS
-Converts the HP Platform list to a PowerShell Object.
-Useful to get the computer model name for System Ids
+Returns the Dell DriverPack Catalog
 
 ## SYNTAX
 
 ```
-Get-HPPlatformCatalog [-ProgressAction <ActionPreference>] [<CommonParameters>]
+Get-DellDriverPackCatalog [-Compatible] [[-DownloadPath] <String>] [-ProgressAction <ActionPreference>]
+ [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-Converts the HP Platform list to a PowerShell Object.
-Useful to get the computer model name for System Ids
-Requires Internet Access to download platformList.cab
+Returns the Dell DriverPack Catalog
 
 ## EXAMPLES
 
-### EXAMPLE 1
-```
-Get-HPPlatformCatalog
-Don't do this, you will get a big list.
-```
-
-### EXAMPLE 2
-```
-$Results = Get-HPPlatformCatalog
-Yes do this.  Save it in a Variable
+### Example 1
+```powershell
+PS C:\> {{ Add example code here }}
 ```
 
-### EXAMPLE 3
-```
-Get-HPPlatformCatalog | Out-GridView
-Displays all the HP System Ids with the applicable computer model names in GridView
-```
+{{ Add example description here }}
 
 ## PARAMETERS
+
+### -Compatible
+Limits the results to match the current system
+
+```yaml
+Type: SwitchParameter
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: False
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -DownloadPath
+Specifies a download path for matching results displayed in Out-GridView
+
+```yaml
+Type: String
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 1
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
 
 ### -ProgressAction
 {{ Fill ProgressAction Description }}

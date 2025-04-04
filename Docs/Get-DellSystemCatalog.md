@@ -13,8 +13,8 @@ Builds the Dell System Catalog
 ## SYNTAX
 
 ```
-Get-DellSystemCatalog [-Compatible] [[-Component] <String>] [[-DownloadPath] <String>] [-Online]
- [-UpdateModuleCatalog] [-ProgressAction <ActionPreference>] [<CommonParameters>]
+Get-DellSystemCatalog [-Compatible] [[-Component] <String>] [[-DownloadPath] <String>]
+ [-ProgressAction <ActionPreference>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -83,36 +83,6 @@ Aliases:
 Required: False
 Position: 2
 Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -Online
-Checks for the latest Online version
-
-```yaml
-Type: SwitchParameter
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: Named
-Default value: False
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -UpdateModuleCatalog
-Updates the OSD Module Offline Catalog
-
-```yaml
-Type: SwitchParameter
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: Named
-Default value: False
 Accept pipeline input: False
 Accept wildcard characters: False
 ```

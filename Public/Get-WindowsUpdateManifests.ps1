@@ -12,7 +12,7 @@ function Get-WindowsUpdateManifests {
     [CmdletBinding()]
     param ()
 
-    $ManifestPath = "$($MyInvocation.MyCommand.Module.ModuleBase)\Manifests\MSCatalog"
+    $ManifestPath = "$(Get-OSDCatalogsPath)\osd-manifests\MSCatalog"
     #$ManifestPath = "$($env:ProgramData)\OSDeploy\OS-UpdateCatalog"
     $ManifestFiles = Get-ChildItem -Path "$ManifestPath\*" -Include '*.json' -Recurse | Select-Object -Property *
 

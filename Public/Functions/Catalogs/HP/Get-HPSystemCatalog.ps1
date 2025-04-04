@@ -1,47 +1,48 @@
 <#
 .SYNOPSIS
-Builds the Dell System Catalog
+Converts the HP Client Catalog for Microsoft System Center Product to a PowerShell Object
 
 .DESCRIPTION
-Builds the Dell System Catalog
+Converts the HP Client Catalog for Microsoft System Center Product to a PowerShell Object
+Requires Internet Access to download HpCatalogForSms.latest.cab
 
 .EXAMPLE
-Get-DellSystemCatalog
+Get-HPSystemCatalog
 Don't do this, you will get an almost endless list
 
 .EXAMPLE
-$Result = Get-DellSystemCatalog
+$Results = Get-HPSystemCatalog
 Yes do this.  Save it in a Variable
 
 .EXAMPLE
-Get-DellSystemCatalog -Component BIOS | Out-GridView
-Displays all the Dell BIOS Updates in GridView
+Get-HPSystemCatalog -Component BIOS | Out-GridView
+Displays all the HP BIOS updates in GridView
 
 .LINK
 https://github.com/OSDeploy/OSD/tree/master/Docs
 
 .NOTES
 #>
-function Get-DellSystemCatalog {
+function Get-HPSystemCatalog {
     [CmdletBinding()]
     param (
+        #Specifies a download path for matching results displayed in Out-GridView
+        [System.String]
+        $DownloadPath,
+
         #Limits the results to match the current system
         [System.Management.Automation.SwitchParameter]
         $Compatible,
 
         #Limits the results to a specified component
-        [ValidateSet('Application','BIOS','Driver','Firmware')]
+        [ValidateSet('Software','Firmware','Driver','Accessories Firmware and Driver','BIOS')]
         [System.String]
-        $Component,
-
-        #Specifies a download path for matching results displayed in Out-GridView
-        [System.String]
-        $DownloadPath
+        $Component
     )
     #=================================================
     #   Import Catalog
     #=================================================
-    $CatalogFile = "$(Get-OSDCatalogsPath)\dell\build-system.xml"
+    $CatalogFile = "$(Get-OSDCatalogsPath)\hp\build-system.xml"
     Write-Verbose "Importing the Offline Catalog at $CatalogFile"
     $Results = Import-Clixml -Path $CatalogFile
     #=================================================
@@ -57,7 +58,17 @@ function Get-DellSystemCatalog {
     #=================================================
     if ($PSBoundParameters.ContainsKey('Component')) {
         Write-Verbose "Filtering Catalog for $Component"
-        $Results = $Results | Where-Object {$_.Component -eq $Component}
+        switch ($Component) {
+            'BIOS'{
+                $Results = $Results | Where-Object {$_.Component -eq 'BIOS'}
+            }
+            'Firmware'{
+                $Results = $Results | Where-Object{$_.Component -eq 'Firmware' -and $_.Description -notlike "*NOTE: THIS BIOS UPDATE*"}
+            }
+            default {
+                $Results = $Results | Where-Object {$_.Component -eq $Component}
+            }
+        }
     }
     #=================================================
     #   DownloadPath

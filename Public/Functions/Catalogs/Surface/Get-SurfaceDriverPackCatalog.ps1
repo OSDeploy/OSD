@@ -1,16 +1,16 @@
 <#
 .SYNOPSIS
-Returns the Lenovo DriverPack Catalog
+Returns the Microsoft Surface DriverPack Catalog
 
 .DESCRIPTION
-Returns the Lenovo DriverPack Catalog
+Returns the Microsoft Surface DriverPack Catalog
 
 .LINK
 https://github.com/OSDeploy/OSD/tree/master/Docs
 
 .NOTES
 #>
-function Get-LenovoDriverPackCatalog {
+function Get-SurfaceDriverPackCatalog {
     [CmdletBinding()]
     param (
         #Limits the results to match the current system
@@ -24,31 +24,15 @@ function Get-LenovoDriverPackCatalog {
     #=================================================
     #   Import Catalog
     #=================================================
-    $CatalogFile = "$(Get-OSDCatalogsPath)\lenovo\build-driverpack.xml"
-    Write-Verbose "Importing the Offline Catalog at $CatalogFile"
-    $Results = Import-Clixml -Path $CatalogFile
-    #=================================================
-    #   Filter Catalog
-    #=================================================
+    $Results = Import-Clixml -Path "$(Get-OSDCatalogsPath)\surface\build-driverpack.xml"
     $Results = $Results | `
-    Select-Object CatalogVersion, Status, ReleaseDate, Manufacturer, Model, `
-    @{Name='Product';Expression={([array]$_.Product)}}, `
-    Name, PackageID, FileName, `
+    Select-Object CatalogVersion, Status, ReleaseDate, Manufacturer, Model, Product, Name, Legacy, PackageID, FileName, `
     @{Name='DriverPackUrl';Expression={($_.Url)}}, `
-    @{Name='DriverPackOS';Expression={($null)}}, `
-    OSReleaseId,OSBuild,HashMD5
+    @{Name='DriverPackOS';Expression={($_.OSVersion)}}, `
+    OSReleaseId,OSBuild,OSArchitecture,HashMD5
     #=================================================
     #   Modify Results
     #=================================================
-    foreach ($Result in $Results) {
-        if ($Result.FileName -match 'w11') {
-            $Result.DriverPackOS = 'Windows 11 x64'
-        }
-        else {
-            $Result.DriverPackOS = 'Windows 10 x64'
-        }
-    }
-
     $Results = $Results | Sort-Object -Property Model
     #=================================================
     #   Filter Compatible
@@ -78,6 +62,6 @@ function Get-LenovoDriverPackCatalog {
         }
     }
     else {
-        $Results | Sort-Object Name
+        $Results
     }
 }

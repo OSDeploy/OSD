@@ -24,7 +24,7 @@ function Get-LenovoBiosCatalog {
     #=================================================
     #   Import Catalog
     #=================================================
-    $CatalogFile = "$(Get-OSDCatsPath)\lenovo\BiosCatalog.xml"
+    $CatalogFile = "$(Get-OSDCatalogsPath)\lenovo\build-bios.xml"
     Write-Verbose "Importing the Offline Catalog at $CatalogFile"
     $Results = Import-Clixml -Path $CatalogFile
     #=================================================
