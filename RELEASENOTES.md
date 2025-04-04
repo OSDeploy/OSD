@@ -144,7 +144,7 @@ If you really want to know what is going on, I suggest looking back over the mer
 
 ### 24.1.17 (implemented in OSD Module 24.2.4.1)
 - Fixed issue in Save-FeatureUpdate function [Issue 106](https://github.com/OSDeploy/OSD/issues/106)
-- Continue to deal with Intel's changing catalogs for WiFi drivers
+- Continue to deal with Intel's changing cats for WiFi drivers
   - Modifications to Get-IntelWirelessDriverPack to GUESS the correct URL
     - Thanks christiandekker for some ideas and code [Issue 101](https://github.com/OSDeploy/OSD/issues/101)
 - Update to OSDCloudGUI (Start-OSDCLoudGUI)
@@ -207,6 +207,5 @@ If you really want to know what is going on, I suggest looking back over the mer
     - For complete list of Functions run: Get-Command -Module "OSD" | Where-Object {$_.Name -match "-HP"}
 
 ### 23.12.1
-- Moved ESD file references in catalog form using WSUS data to using Microsoft Creation Tool catalogs
-- Catalog File: https://github.com/OSDeploy/OSD/blob/master/Catalogs/CloudOperatingSystems.json
+- Moved ESD file references in catalog form using WSUS data to using Microsoft Creation Tool cats
 - Process to create Catalog File: https://github.com/OSDeploy/OSD/blob/master/build/Build-OSDCloudOperatingSystemsv3.ps1

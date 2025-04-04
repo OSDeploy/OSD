@@ -652,7 +652,7 @@ function Update-OSDCloudUSB {
                 Get-HPDriverPack -DownloadPath "$DriverPackDownloadPath\HP"
             }
             if ($DriverPack -contains 'Lenovo') {
-                Get-LenovoDriverPack -DownloadPath "$DriverPackDownloadPath\Lenovo"
+                Get-LenovoDriverPackCatalog -DownloadPath "$DriverPackDownloadPath\Lenovo"
             }
             if ($DriverPack -contains 'Microsoft') {
                 Get-MicrosoftDriverPack -DownloadPath "$DriverPackDownloadPath\Microsoft"

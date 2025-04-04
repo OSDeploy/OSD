@@ -10,7 +10,7 @@ https://github.com/OSDeploy/OSD/tree/master/Docs
 
 .NOTES
 #>
-function Get-LenovoDriverPack {
+function Get-LenovoDriverPackCatalog {
     [CmdletBinding()]
     param (
         #Limits the results to match the current system
@@ -24,7 +24,11 @@ function Get-LenovoDriverPack {
     #=================================================
     #   Import Catalog
     #=================================================
-    $Results = Import-Clixml -Path "$($MyInvocation.MyCommand.Module.ModuleBase)\Catalogs\Build-LenovoDriverPackCatalog.xml" | `
+    $CatalogFile = "$(Get-OSDCatsPath)\lenovo\DriverPackCatalog.xml"
+    Write-Verbose "Importing the Offline Catalog at $CatalogFile"
+    $Results = Import-Clixml -Path $CatalogFile
+
+    $Results = $Results | `
     Select-Object CatalogVersion, Status, ReleaseDate, Manufacturer, Model, `
     @{Name='Product';Expression={([array]$_.Product)}}, `
     Name, PackageID, FileName, `

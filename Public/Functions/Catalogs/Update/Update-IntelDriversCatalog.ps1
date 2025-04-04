@@ -1,9 +1,9 @@
 <#
 .SYNOPSIS
-Updates the Intel Drivers Catalogs in the OSD Module
+Updates the Intel Drivers Cats in the OSD Module
 
 .DESCRIPTION
-Updates the Intel Drivers Catalogs in the OSD Module
+Updates the Intel Drivers Cats in the OSD Module
 
 .LINK
 https://github.com/OSDeploy/OSD/tree/master/Docs

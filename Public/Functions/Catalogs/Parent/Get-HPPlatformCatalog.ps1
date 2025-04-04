@@ -73,7 +73,7 @@ function Get-HPPlatformCatalog {
     $RawCatalogCabName  	= [string]($OnlineCatalogUri | Split-Path -Leaf)
     $RawCatalogCabPath 		= Join-Path $env:TEMP (Join-Path 'OSD' $RawCatalogCabName)
     $TempCatalogFile        = Join-Path $env:TEMP (Join-Path 'OSD' $OfflineCatalogName)
-    $ModuleCatalogFile      = "$($MyInvocation.MyCommand.Module.ModuleBase)\Catalogs\$OfflineCatalogName"
+    $ModuleCatalogFile      = "$(Get-OSDCatsPath)\osd-module\$OfflineCatalogName"
     #=================================================
     #   UseCatalog Cloud
     #=================================================

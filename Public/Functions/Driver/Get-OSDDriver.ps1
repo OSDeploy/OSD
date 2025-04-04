@@ -30,7 +30,7 @@ function Get-OSDDriver {
     #	Execute Private Function
     #=================================================
     if ($OSDGroup -eq 'AmdDisplay') {
-        Write-Verbose "Get-OSDDriver: $OSDGroup Drivers are generated from OSD Local Catalogs and may not always have the latest versions"
+        Write-Verbose "Get-OSDDriver: $OSDGroup Drivers are generated from OSD Local Cats and may not always have the latest versions"
         $global:GetOSDDriver = Get-OSDDriverAmdDisplay
     }
     if ($OSDGroup -eq 'DellFamily') {
@@ -38,11 +38,11 @@ function Get-OSDDriver {
         $global:GetOSDDriver = Get-OSDDriverDellFamily
     }
     if ($OSDGroup -eq 'DellModel') {
-        Write-Verbose "Get-OSDDriver: $OSDGroup Drivers are pulled in real time from the vendor's Catalogs and should always have the latest versions"
+        Write-Verbose "Get-OSDDriver: $OSDGroup Drivers are pulled in real time from the vendor's Cats and should always have the latest versions"
         $global:GetOSDDriver = Get-OSDDriverDellModel
     }
     if ($OSDGroup -eq 'HpModel') {
-        Write-Verbose "Get-OSDDriver: $OSDGroup Drivers are pulled in real time from the vendor's Catalogs and should always have the latest versions"
+        Write-Verbose "Get-OSDDriver: $OSDGroup Drivers are pulled in real time from the vendor's Cats and should always have the latest versions"
         $global:GetOSDDriver = Get-OSDDriverHpModel
     }
     if ($OSDGroup -eq 'IntelDisplay') {
@@ -58,7 +58,7 @@ function Get-OSDDriver {
         $global:GetOSDDriver = Get-IntelWirelessDriverPack
     }
     if ($OSDGroup -eq 'NvidiaDisplay') {
-        Write-Verbose "Get-OSDDriver: $OSDGroup Drivers are generated from OSD Local Catalogs and may not always have the latest versions"
+        Write-Verbose "Get-OSDDriver: $OSDGroup Drivers are generated from OSD Local Cats and may not always have the latest versions"
         $global:GetOSDDriver = Get-OSDDriverNvidiaDisplay
     }
     #=================================================

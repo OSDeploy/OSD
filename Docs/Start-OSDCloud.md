@@ -16,21 +16,22 @@ Starts the OSDCloud Windows 10 or 11 Build Process from the OSD Module or a GitH
 ```
 Start-OSDCloud [-Manufacturer <String>] [-Product <String>] [-Firmware] [-Restart] [-Shutdown] [-Screenshot]
  [-SkipAutopilot] [-SkipODT] [-ZTI] [-OSName <String>] [-OSEdition <String>] [-OSLanguage <String>]
- [-OSActivation <String>] [-Preview] [<CommonParameters>]
+ [-OSActivation <String>] [-Preview] [-ProgressAction <ActionPreference>] [<CommonParameters>]
 ```
 
 ### Legacy
 ```
 Start-OSDCloud [-Manufacturer <String>] [-Product <String>] [-Firmware] [-Restart] [-Shutdown] [-Screenshot]
  [-SkipAutopilot] [-SkipODT] [-ZTI] [-OSVersion <String>] [-OSBuild <String>] [-OSEdition <String>]
- [-OSLanguage <String>] [-OSActivation <String>] [-Preview] [<CommonParameters>]
+ [-OSLanguage <String>] [-OSActivation <String>] [-Preview] [-ProgressAction <ActionPreference>]
+ [<CommonParameters>]
 ```
 
 ### CustomImage
 ```
 Start-OSDCloud [-Manufacturer <String>] [-Product <String>] [-Firmware] [-Restart] [-Shutdown] [-Screenshot]
  [-SkipAutopilot] [-SkipODT] [-ZTI] [-FindImageFile] [-ImageFileUrl <String>] [-OSImageIndex <String>]
- [-Preview] [<CommonParameters>]
+ [-Preview] [-ProgressAction <ActionPreference>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -331,6 +332,21 @@ Aliases:
 Required: False
 Position: Named
 Default value: False
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -ProgressAction
+{{ Fill ProgressAction Description }}
+
+```yaml
+Type: ActionPreference
+Parameter Sets: (All)
+Aliases: proga
+
+Required: False
+Position: Named
+Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```

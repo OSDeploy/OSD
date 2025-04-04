@@ -14,7 +14,7 @@ Creates a Bootable FAT32 USB (32GB or smaller) and copies a Mounted ISO.
 
 ```
 Copy-IsoToUsb [-ISOFile] <String> [-MakeBootable] [-NTFS] [-SplitWim] [[-USBLabel] <String>]
- [<CommonParameters>]
+ [-ProgressAction <ActionPreference>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -25,9 +25,8 @@ Creates a Bootable FAT32 USB (32GB or smaller) and copies a Mounted ISO.
 ### EXAMPLE 1
 ```
 Copy-IsoToUsb -ISOFile "C:\Temp\SW_DVD5_Win_Pro_Ent_Edu_N_10_1709_64BIT_English_MLF_X21-50143.ISO" -MakeBootable -USBDriveLabel WIN10X64
-```
-
 You will be prompted to select a USB Drive in GridView
+```
 
 ## PARAMETERS
 
@@ -101,6 +100,21 @@ Aliases:
 
 Required: False
 Position: 2
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -ProgressAction
+{{ Fill ProgressAction Description }}
+
+```yaml
+Type: ActionPreference
+Parameter Sets: (All)
+Aliases: proga
+
+Required: False
+Position: Named
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False

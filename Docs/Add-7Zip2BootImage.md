@@ -13,7 +13,8 @@ This function adds 7-Zip to a boot image.
 ## SYNTAX
 
 ```
-Add-7Zip2BootImage [[-MountPath] <String>] [-Use7zr] [-TempTest] [<CommonParameters>]
+Add-7Zip2BootImage [[-MountPath] <String>] [-Use7zr] [-TempTest] [-ProgressAction <ActionPreference>]
+ [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -24,16 +25,14 @@ The function downloads the latest version of 7-Zip from the GitHub page and extr
 ### EXAMPLE 1
 ```
 Add-7Zip2BootImage -MountPath "C:\BootImage" -Use7zr
-```
-
 This example adds 7-Zip (7zr.exe) to the boot image located at "C:\BootImage"
+```
 
 ### EXAMPLE 2
 ```
 Add-7Zip2BootImage
-```
-
 This example adds 7-Zip (7z.exe + 2 dll files) to the boot image at the mounted WIM path it finds.
+```
 
 ## PARAMETERS
 
@@ -81,6 +80,21 @@ Aliases:
 Required: False
 Position: Named
 Default value: False
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -ProgressAction
+{{ Fill ProgressAction Description }}
+
+```yaml
+Type: ActionPreference
+Parameter Sets: (All)
+Aliases: proga
+
+Required: False
+Position: Named
+Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```

@@ -5,7 +5,7 @@ online version: https://github.com/OSDeploy/OSD/tree/master/Docs
 schema: 2.0.0
 ---
 
-# Get-LenovoDriverPack
+# Get-LenovoDriverPackCatalog
 
 ## SYNOPSIS
 Returns the Lenovo DriverPack Catalog
@@ -13,7 +13,8 @@ Returns the Lenovo DriverPack Catalog
 ## SYNTAX
 
 ```
-Get-LenovoDriverPack [-Compatible] [[-DownloadPath] <String>] [<CommonParameters>]
+Get-LenovoDriverPackCatalog [-Compatible] [[-DownloadPath] <String>] [-ProgressAction <ActionPreference>]
+ [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -55,6 +56,21 @@ Aliases:
 
 Required: False
 Position: 1
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -ProgressAction
+{{ Fill ProgressAction Description }}
+
+```yaml
+Type: ActionPreference
+Parameter Sets: (All)
+Aliases: proga
+
+Required: False
+Position: Named
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False

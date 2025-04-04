@@ -50,7 +50,7 @@ function Get-IntelGraphicsDriverPack {
     }
 
     $TempCatalogFile = Join-Path $env:TEMP (Join-Path 'OSD' $OfflineCatalogName)
-    $ModuleCatalogFile = "$($MyInvocation.MyCommand.Module.ModuleBase)\Catalogs\$OfflineCatalogName"
+    $ModuleCatalogFile = "$(Get-OSDCatsPath)\osd-module\$OfflineCatalogName"
     $ModuleCatalogContent = Get-Content -Path $ModuleCatalogFile -Raw | ConvertFrom-Json
     #=================================================
     #   Filter

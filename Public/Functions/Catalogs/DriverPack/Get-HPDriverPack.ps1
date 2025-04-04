@@ -24,7 +24,7 @@ function Get-HPDriverPack {
     #=================================================
     #   Import Catalog
     #=================================================
-    $Results = Import-Clixml -Path "$($MyInvocation.MyCommand.Module.ModuleBase)\Catalogs\Build-HPDriverPackCatalog.xml" | `
+    $Results = Import-Clixml -Path "$(Get-OSDCatsPath)\osd-module\Build-HPDriverPackCatalog.xml" | `
     Select-Object CatalogVersion, Status, ReleaseDate, Manufacturer, Model, `
     @{Name='Product';Expression={([array]$_.SystemId)}}, `
     @{Name='Name';Expression={($_.Name)}}, `

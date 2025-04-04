@@ -14,7 +14,7 @@ Builds the Dell System Catalog
 
 ```
 Get-DellSystemCatalog [-Compatible] [[-Component] <String>] [[-DownloadPath] <String>] [-Online]
- [-UpdateModuleCatalog] [<CommonParameters>]
+ [-UpdateModuleCatalog] [-ProgressAction <ActionPreference>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -25,24 +25,20 @@ Builds the Dell System Catalog
 ### EXAMPLE 1
 ```
 Get-DellSystemCatalog
-```
-
 Don't do this, you will get an almost endless list
+```
 
 ### EXAMPLE 2
 ```
 $Result = Get-DellSystemCatalog
+Yes do this.  Save it in a Variable
 ```
-
-Yes do this. 
-Save it in a Variable
 
 ### EXAMPLE 3
 ```
 Get-DellSystemCatalog -Component BIOS | Out-GridView
-```
-
 Displays all the Dell BIOS Updates in GridView
+```
 
 ## PARAMETERS
 
@@ -117,6 +113,21 @@ Aliases:
 Required: False
 Position: Named
 Default value: False
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -ProgressAction
+{{ Fill ProgressAction Description }}
+
+```yaml
+Type: ActionPreference
+Parameter Sets: (All)
+Aliases: proga
+
+Required: False
+Position: Named
+Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```

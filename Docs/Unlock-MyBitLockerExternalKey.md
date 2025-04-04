@@ -13,7 +13,8 @@ schema: 2.0.0
 ## SYNTAX
 
 ```
-Unlock-MyBitLockerExternalKey [[-Path] <String[]>] [-Recurse] [<CommonParameters>]
+Unlock-MyBitLockerExternalKey [[-Path] <String[]>] [-Recurse] [-ProgressAction <ActionPreference>]
+ [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -22,7 +23,7 @@ Unlock-MyBitLockerExternalKey [[-Path] <String[]>] [-Recurse] [<CommonParameters
 ## EXAMPLES
 
 ### Example 1
-```
+```powershell
 PS C:\> {{ Add example code here }}
 ```
 
@@ -55,8 +56,23 @@ Aliases:
 
 Required: False
 Position: 1
-Default value: False
+Default value: None
 Accept pipeline input: True (ByPropertyName)
+Accept wildcard characters: False
+```
+
+### -ProgressAction
+{{ Fill ProgressAction Description }}
+
+```yaml
+Type: ActionPreference
+Parameter Sets: (All)
+Aliases: proga
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
@@ -66,7 +82,9 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ## INPUTS
 
 ### System.String[]
+
 ### System.Management.Automation.SwitchParameter
+
 ## OUTPUTS
 
 ### System.Object

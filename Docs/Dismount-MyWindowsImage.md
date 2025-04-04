@@ -14,12 +14,14 @@ Dismounts a Windows image from the directory it is mapped to.
 
 ### DismountDiscard (Default)
 ```
-Dismount-MyWindowsImage [-Path <String[]>] [-Discard] [-WhatIf] [-Confirm] [<CommonParameters>]
+Dismount-MyWindowsImage [-Path <String[]>] [-Discard] [-ProgressAction <ActionPreference>] [-WhatIf] [-Confirm]
+ [<CommonParameters>]
 ```
 
 ### DismountSave
 ```
-Dismount-MyWindowsImage [-Path <String[]>] [-Save] [-WhatIf] [-Confirm] [<CommonParameters>]
+Dismount-MyWindowsImage [-Path <String[]>] [-Save] [-ProgressAction <ActionPreference>] [-WhatIf] [-Confirm]
+ [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -104,6 +106,21 @@ Prompts you for confirmation before running the cmdlet.
 Type: SwitchParameter
 Parameter Sets: (All)
 Aliases: cf
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -ProgressAction
+{{ Fill ProgressAction Description }}
+
+```yaml
+Type: ActionPreference
+Parameter Sets: (All)
+Aliases: proga
 
 Required: False
 Position: Named

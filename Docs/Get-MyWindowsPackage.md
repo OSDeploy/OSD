@@ -15,13 +15,15 @@ schema: 2.0.0
 ### Online (Default)
 ```
 Get-MyWindowsPackage [-PackageState <String>] [-ReleaseType <String>] [-Category <String>]
- [-Culture <String[]>] [-Like <String[]>] [-Match <String[]>] [-Detail] [<CommonParameters>]
+ [-Culture <String[]>] [-Like <String[]>] [-Match <String[]>] [-Detail] [-ProgressAction <ActionPreference>]
+ [<CommonParameters>]
 ```
 
 ### Offline
 ```
 Get-MyWindowsPackage -Path <String> [-PackageState <String>] [-ReleaseType <String>] [-Category <String>]
- [-Culture <String[]>] [-Like <String[]>] [-Match <String[]>] [-Detail] [<CommonParameters>]
+ [-Culture <String[]>] [-Like <String[]>] [-Match <String[]>] [-Detail] [-ProgressAction <ActionPreference>]
+ [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -30,7 +32,7 @@ Get-MyWindowsPackage -Path <String> [-PackageState <String>] [-ReleaseType <Stri
 ## EXAMPLES
 
 ### Example 1
-```
+```powershell
 PS C:\> {{ Add example code here }}
 ```
 
@@ -79,7 +81,7 @@ Aliases:
 
 Required: False
 Position: Named
-Default value: False
+Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
@@ -161,12 +163,28 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
+### -ProgressAction
+{{ Fill ProgressAction Description }}
+
+```yaml
+Type: ActionPreference
+Parameter Sets: (All)
+Aliases: proga
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
 ### CommonParameters
 This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see [about_CommonParameters](http://go.microsoft.com/fwlink/?LinkID=113216).
 
 ## INPUTS
 
 ### System.String
+
 ## OUTPUTS
 
 ### System.Object

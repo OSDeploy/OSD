@@ -13,7 +13,7 @@ Sets the Primary Display Screen Resolution
 ## SYNTAX
 
 ```
-Set-DisRes [[-Width] <String>] [[-Height] <String>] [<CommonParameters>]
+Set-DisRes [[-Width] <String>] [[-Height] <String>] [-ProgressAction <ActionPreference>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -55,6 +55,21 @@ Aliases: Vertical
 
 Required: False
 Position: 2
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -ProgressAction
+{{ Fill ProgressAction Description }}
+
+```yaml
+Type: ActionPreference
+Parameter Sets: (All)
+Aliases: proga
+
+Required: False
+Position: Named
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False

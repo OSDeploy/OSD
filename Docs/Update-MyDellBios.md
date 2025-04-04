@@ -13,7 +13,8 @@ Downloads and installed a compatible BIOS Update for your Dell system
 ## SYNTAX
 
 ```
-Update-MyDellBios [[-DownloadPath] <String>] [-Force] [-Reboot] [-Silent] [<CommonParameters>]
+Update-MyDellBios [[-DownloadPath] <String>] [-Force] [-Reboot] [-Silent] [-ProgressAction <ActionPreference>]
+ [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -26,24 +27,20 @@ Logs to $env:TEMP\Update-MyDellBios.log
 ### EXAMPLE 1
 ```
 Update-MyDellBios
+Downloads and launches the Dell BIOS Update.  Does not automatically install the BIOS Update
 ```
-
-Downloads and launches the Dell BIOS Update. 
-Does not automatically install the BIOS Update
 
 ### EXAMPLE 2
 ```
 Update-MyDellBios -Silent
-```
-
 Yes, this will update your BIOS silently, and NOT reboot when its done
+```
 
 ### EXAMPLE 3
 ```
 Update-MyDellBios -Silent -Reboot
-```
-
 Yes, this will update your BIOS silently, AND reboot when its done
+```
 
 ## PARAMETERS
 
@@ -103,6 +100,21 @@ Aliases:
 Required: False
 Position: Named
 Default value: False
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -ProgressAction
+{{ Fill ProgressAction Description }}
+
+```yaml
+Type: ActionPreference
+Parameter Sets: (All)
+Aliases: proga
+
+Required: False
+Position: Named
+Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```

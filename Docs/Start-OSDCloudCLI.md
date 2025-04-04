@@ -16,22 +16,23 @@ Starts the OSDCloud Windows 10 or 11 Build Process from the OSD Module or a GitH
 ```
 Start-OSDCloudCLI [-ComputerManufacturer <String>] [-ComputerProduct <String>] [-Firmware] [-Restart]
  [-Shutdown] [-Screenshot] [-SkipAutopilot] [-ZTI] [-OSName <String>] [-OSEdition <String>]
- [-OSLanguage <String>] [-OSActivation <String>] [-WhatIf] [-Confirm] [<CommonParameters>]
+ [-OSLanguage <String>] [-OSActivation <String>] [-ProgressAction <ActionPreference>] [-WhatIf] [-Confirm]
+ [<CommonParameters>]
 ```
 
 ### Legacy
 ```
 Start-OSDCloudCLI [-ComputerManufacturer <String>] [-ComputerProduct <String>] [-Firmware] [-Restart]
  [-Shutdown] [-Screenshot] [-SkipAutopilot] [-ZTI] [-OSVersion <String>] [-OSReleaseID <String>]
- [-OSEdition <String>] [-OSLanguage <String>] [-OSActivation <String>] [-WhatIf] [-Confirm]
- [<CommonParameters>]
+ [-OSEdition <String>] [-OSLanguage <String>] [-OSActivation <String>] [-ProgressAction <ActionPreference>]
+ [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 
 ### CustomImage
 ```
 Start-OSDCloudCLI [-ComputerManufacturer <String>] [-ComputerProduct <String>] [-Firmware] [-Restart]
  [-Shutdown] [-Screenshot] [-SkipAutopilot] [-ZTI] [-FindImageFile] [-ImageFileUrl <String>]
- [-OSImageIndex <String>] [-WhatIf] [-Confirm] [<CommonParameters>]
+ [-OSImageIndex <String>] [-ProgressAction <ActionPreference>] [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -329,6 +330,21 @@ Prompts you for confirmation before running the cmdlet.
 Type: SwitchParameter
 Parameter Sets: (All)
 Aliases: cf
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -ProgressAction
+{{ Fill ProgressAction Description }}
+
+```yaml
+Type: ActionPreference
+Parameter Sets: (All)
+Aliases: proga
 
 Required: False
 Position: Named

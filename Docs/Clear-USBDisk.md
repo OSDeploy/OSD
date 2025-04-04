@@ -14,7 +14,7 @@ schema: 2.0.0
 
 ```
 Clear-USBDisk [[-Input] <Object>] [[-DiskNumber] <UInt32>] [-Initialize] [[-PartitionStyle] <String>] [-Force]
- [-ShowWarning] [-WhatIf] [-Confirm] [<CommonParameters>]
+ [-ShowWarning] [-ProgressAction <ActionPreference>] [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -23,7 +23,7 @@ Clear-USBDisk [[-Input] <Object>] [[-DiskNumber] <UInt32>] [-Initialize] [[-Part
 ## EXAMPLES
 
 ### Example 1
-```
+```powershell
 PS C:\> {{ Add example code here }}
 ```
 
@@ -41,7 +41,7 @@ Aliases: cf
 
 Required: False
 Position: Named
-Default value: False
+Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
@@ -71,7 +71,7 @@ Aliases: F
 
 Required: False
 Position: Named
-Default value: False
+Default value: None
 Accept pipeline input: True (ByPropertyName)
 Accept wildcard characters: False
 ```
@@ -86,7 +86,7 @@ Aliases: I
 
 Required: False
 Position: Named
-Default value: False
+Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
@@ -132,7 +132,7 @@ Aliases: W, Warn, Warning
 
 Required: False
 Position: Named
-Default value: False
+Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
@@ -148,7 +148,22 @@ Aliases: wi
 
 Required: False
 Position: Named
-Default value: False
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -ProgressAction
+{{ Fill ProgressAction Description }}
+
+```yaml
+Type: ActionPreference
+Parameter Sets: (All)
+Aliases: proga
+
+Required: False
+Position: Named
+Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
@@ -159,7 +174,9 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ## INPUTS
 
 ### System.Object
+
 ### System.Management.Automation.SwitchParameter
+
 ## OUTPUTS
 
 ### System.Object

@@ -24,7 +24,7 @@ function Get-MicrosoftDriverPack {
     #=================================================
     #   Import Catalog
     #=================================================
-    $Results = Import-Clixml -Path "$($MyInvocation.MyCommand.Module.ModuleBase)\Catalogs\Build-SurfaceDriverPackCatalog.xml"
+    $Results = Import-Clixml -Path "$(Get-OSDCatsPath)\osd-module\Build-SurfaceDriverPackCatalog.xml"
     $Results = $Results | `
     Select-Object CatalogVersion, Status, ReleaseDate, Manufacturer, Model, Product, Name, Legacy, PackageID, FileName, `
     @{Name='DriverPackUrl';Expression={($_.Url)}}, `

@@ -14,8 +14,9 @@ ADK is required
 ## SYNTAX
 
 ```
-New-WindowsAdkISO [[-WindowsAdkRoot] <FileInfo>] [-MediaPath] <FileInfo> [-isoFileName] <String>
- [-isoLabel] <String> [-OpenExplorer] [<CommonParameters>]
+New-WindowsAdkISO [-MediaPath] <FileInfo> [-isoFileName] <String> [-isoLabel] <String>
+ [[-IsoDirectory] <FileInfo>] [[-WindowsAdkRoot] <FileInfo>] [-OpenExplorer]
+ [-ProgressAction <ActionPreference>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -33,23 +34,6 @@ PS C:\> {{ Add example code here }}
 
 ## PARAMETERS
 
-### -WindowsAdkRoot
-Path to the Windows ADK root directory.
-Typically 'C:\Program Files (x86)\Windows Kits\10\Assessment and Deployment Kit'
-if (-NOT (Test-Path "$($_.FullName)\Windows Preinstallation Environment")) { throw "Path does not contain a Windows Preinstallation Environment directory: $_"}
-
-```yaml
-Type: FileInfo
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 1
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
 ### -MediaPath
 Directory containing the bootable media
 
@@ -59,7 +43,7 @@ Parameter Sets: (All)
 Aliases:
 
 Required: True
-Position: 2
+Position: 1
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -74,7 +58,7 @@ Parameter Sets: (All)
 Aliases:
 
 Required: True
-Position: 3
+Position: 2
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -90,7 +74,39 @@ Parameter Sets: (All)
 Aliases:
 
 Required: True
+Position: 3
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -IsoDirectory
+{{ Fill IsoDirectory Description }}
+
+```yaml
+Type: FileInfo
+Parameter Sets: (All)
+Aliases:
+
+Required: False
 Position: 4
+Default value: $((Get-Item -Path $MediaPath -ErrorAction Stop).Parent.FullName)
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -WindowsAdkRoot
+Path to the Windows ADK root directory.
+Typically 'C:\Program Files (x86)\Windows Kits\10\Assessment and Deployment Kit'
+if (-NOT (Test-Path "$($_.FullName)\Windows Preinstallation Environment")) { throw "Path does not contain a Windows Preinstallation Environment directory: $_"}
+
+```yaml
+Type: FileInfo
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 5
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -107,6 +123,21 @@ Aliases:
 Required: False
 Position: Named
 Default value: False
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -ProgressAction
+{{ Fill ProgressAction Description }}
+
+```yaml
+Type: ActionPreference
+Parameter Sets: (All)
+Aliases: proga
+
+Required: False
+Position: Named
+Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```

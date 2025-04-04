@@ -13,7 +13,8 @@ Returns the Operating System Indexes used by OSDCloud
 ## SYNTAX
 
 ```
-Get-OSDCloudOperatingSystemsIndexMap [-OSArch <String>] [<CommonParameters>]
+Get-OSDCloudOperatingSystemsIndexMap [-OSArch <String>] [-ProgressAction <ActionPreference>]
+ [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -31,7 +32,8 @@ PS C:\> {{ Add example code here }}
 ## PARAMETERS
 
 ### -OSArch
-{{ Fill OSArch Description }}
+Specifies the OS architecture to filter results.
+Valid values are 'x64' and 'ARM64'.
 
 ```yaml
 Type: String
@@ -41,6 +43,21 @@ Aliases:
 Required: False
 Position: Named
 Default value: X64
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -ProgressAction
+{{ Fill ProgressAction Description }}
+
+```yaml
+Type: ActionPreference
+Parameter Sets: (All)
+Aliases: proga
+
+Required: False
+Position: Named
+Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```

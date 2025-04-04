@@ -13,7 +13,7 @@ Tests to see if a Uri by Invoke-WebRequest -Method Head
 ## SYNTAX
 
 ```
-Test-WebConnection [[-Uri] <Uri>] [<CommonParameters>]
+Test-WebConnection [[-Uri] <Uri>] [-ProgressAction <ActionPreference>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -42,6 +42,21 @@ Required: False
 Position: 1
 Default value: Google.com
 Accept pipeline input: True (ByValue)
+Accept wildcard characters: False
+```
+
+### -ProgressAction
+{{ Fill ProgressAction Description }}
+
+```yaml
+Type: ActionPreference
+Parameter Sets: (All)
+Aliases: proga
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
 Accept wildcard characters: False
 ```
 

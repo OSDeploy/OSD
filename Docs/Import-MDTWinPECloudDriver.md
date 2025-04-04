@@ -13,7 +13,8 @@ Imports OSDCloud CloudDrivers into an MDT Deployment Share
 ## SYNTAX
 
 ```
-Import-MDTWinPECloudDriver [[-CloudDriver] <String[]>] [[-DriverHWID] <String[]>] [<CommonParameters>]
+Import-MDTWinPECloudDriver [[-CloudDriver] <String[]>] [[-DriverHWID] <String[]>]
+ [-ProgressAction <ActionPreference>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -55,6 +56,21 @@ Aliases: HardwareID
 
 Required: False
 Position: 2
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -ProgressAction
+{{ Fill ProgressAction Description }}
+
+```yaml
+Type: ActionPreference
+Parameter Sets: (All)
+Aliases: proga
+
+Required: False
+Position: Named
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
