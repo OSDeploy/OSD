@@ -19,10 +19,10 @@ function Get-OSDCloudOperatingSystemsIndexes {
     )
 
     if ($OSArch -eq 'x64') {
-        $Results = Get-Content -Path "$(Get-OSDCatalogsPath)\osd-catalogs\CloudOperatingSystemsIndexes.json" | ConvertFrom-Json
+        $Results = Get-Content -Path "$(Get-OSDCatalogsPath)\archive\osd-catalogs\CloudOperatingSystemsIndexes.json" | ConvertFrom-Json
     }
     elseif ($OSArch -eq "ARM64") {
-        $Results = Get-Content -Path "$(Get-OSDCatalogsPath)\osd-catalogs\CloudOperatingSystemsARM64Indexes.json" | ConvertFrom-Json
+        $Results = Get-Content -Path "$(Get-OSDCatalogsPath)\archive\osd-catalogs\CloudOperatingSystemsARM64Indexes.json" | ConvertFrom-Json
     }
 
     return $Results

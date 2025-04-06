@@ -369,7 +369,9 @@
         'Update-OSDCloudUSB',
         'Use-WinPEContent',
         'Wait-WebConnection',
-        'Write-CMTraceLog'
+        'Write-CMTraceLog',
+        'Get-OSDCatalogDriverPacks'
+        'Get-OSDCatalogOperatingSystems'
     )
     
     # Private data for the module

@@ -67,7 +67,7 @@ function Get-OSDCloudDriverPacks {
     #>
     [CmdletBinding()]
     param ()
-    $Results = Import-Clixml -Path "$(Get-OSDCatalogsPath)\osdcloud\build-driverpack.xml"
+    $Results = Import-Clixml -Path "$(Get-OSDCatalogsPath)\main\build-driverpacks.xml"
     $Results
 }
 function Save-OSDCloudDriverPack {

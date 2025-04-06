@@ -21,7 +21,7 @@ function Get-OSDCloudOperatingSystemsIndexMap {
         $OSArch = 'x64'
     )
 
-    $indexMapPath = "$(Get-OSDCatalogsPath)\osd-catalogs\CloudOperatingIndexMap.json"
+    $indexMapPath = "$(Get-OSDCatalogsPath)\archive\osd-catalogs\CloudOperatingIndexMap.json"
     $Results = Get-Content -Path $indexMapPath | ConvertFrom-Json
     $Results = $Results | Where-Object { $_.Architecture -eq $OSArch }
     

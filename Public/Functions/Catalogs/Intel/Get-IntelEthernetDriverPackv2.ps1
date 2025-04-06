@@ -53,7 +53,7 @@ function Get-IntelEthernetDriverPack {
     }
 
     $TempCatalogFile = Join-Path $env:TEMP (Join-Path 'OSD' $OfflineCatalogName)
-    $ModuleCatalogFile = "$(Get-OSDCatalogsPath)\osd-catalogs\$OfflineCatalogName"
+    $ModuleCatalogFile = "$(Get-OSDCatalogsPath)\archive\osd-catalogs\$OfflineCatalogName"
     #Next two lines are specific to Gary when he is testing this function
     #$GitHubFolder = 'C:\Users\GaryBlok\OneDrive - garytown\Documents\GitHub'
     #$ModuleCatalogFile = "$GitHubFolder\OSD\Catalogs\$OfflineCatalogName" #GARY's Test Machine
