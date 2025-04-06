@@ -66,7 +66,7 @@ function Get-WSUSXML {
     #===================================================================================================
     #   Defaults
     #===================================================================================================
-    $WSUSXMLCatsPath = "$(Get-OSDCatalogsPath)\archive\osd-wsusxml"
+    $WSUSXMLCatsPath = "$($MyInvocation.MyCommand.Module.ModuleBase)\Catalogs\WSUSXML"
     $WSUSXMLVersion = $($MyInvocation.MyCommand.Module.Version)
     #===================================================================================================
     $WSUSXMLCats = Get-ChildItem -Path "$WSUSXMLCatsPath\*" -Include "*.xml" -Recurse | Select-Object -Property *

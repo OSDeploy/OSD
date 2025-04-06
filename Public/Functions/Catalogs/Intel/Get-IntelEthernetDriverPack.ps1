@@ -42,7 +42,7 @@ function Get-IntelEthernetDriverPack {
     }
 
     $TempCatalogFile = Join-Path $env:TEMP (Join-Path 'OSD' $OfflineCatalogName)
-    $ModuleCatalogFile = "$(Get-OSDCatalogsPath)\archive\osd-catalogs\$OfflineCatalogName"
+    $ModuleCatalogFile = "$($MyInvocation.MyCommand.Module.ModuleBase)\Catalogs\$OfflineCatalogName"
     $ModuleCatalogContent = Get-Content -Path $ModuleCatalogFile -Raw | ConvertFrom-Json
     #=================================================
     #   IsOnline
