@@ -1,0 +1,136 @@
+{
+  "UpdateId": "c93b3ce0-c637-47c6-9ba7-ca7725eb5a98",
+  "Title": "2021-08 Servicing Stack Update for Windows Server 2019 for x64-based Systems (KB5005112)",
+  "Id": 5005112,
+  "Architecture": "x64",
+  "Language": null,
+  "Hotfix": null,
+  "Description": "Install this update to resolve issues in Windows. For a complete listing of the issues that are included in this update, see the associated Microsoft Knowledge Base article for more information. After you install this item, you may have to restart your computer.",
+  "LastModified": "2021-08-09",
+  "Size": "13.8 MB",
+  "Classification": "Security Updates",
+  "SupportedProducts": "Windows Server 2019",
+  "MSRCNumber": null,
+  "MSRCSeverity": "Critical",
+  "RebootBehavior": "Never restarts",
+  "RequestsUserInput": false,
+  "ExclusiveInstall": true,
+  "NetworkRequired": false,
+  "UninstallNotes": "Not Uninstallable",
+  "UninstallSteps": null,
+  "DateAdded": "2022-05-21T13:18:01",
+  "SupersededBy": null,
+  "Supersedes": [
+    {
+      "KB": 4465477,
+      "Description": "2018-10 Update for Windows Server 2019 (1809) for x64-based Systems (KB4465477)"
+    },
+    {
+      "KB": 4465664,
+      "Description": "2018-11 Update for Windows Server 2019 for x64-based Systems (KB4465664)"
+    },
+    {
+      "KB": 4470788,
+      "Description": "2018-11 Update for Windows Server 2019 for x64-based Systems (KB4470788)"
+    },
+    {
+      "KB": 4493510,
+      "Description": "2019-03 Servicing Stack Update for Windows Server 2019 for x64-based Systems (KB4493510)"
+    },
+    {
+      "KB": 4499728,
+      "Description": "2019-05 Servicing Stack Update for Windows Server 2019 for x64-based Systems (KB4499728)"
+    },
+    {
+      "KB": 4504369,
+      "Description": "2019-06 Servicing Stack Update for Windows Server 2019 for x64-based Systems (KB4504369)"
+    },
+    {
+      "KB": 4509095,
+      "Description": "2019-07 Servicing Stack Update for Windows Server 2019 for x64-based Systems (KB4509095)"
+    },
+    {
+      "KB": 4512937,
+      "Description": "2019-07 Servicing Stack Update for Windows Server 2019 for x64-based Systems (KB4512937)"
+    },
+    {
+      "KB": 4512577,
+      "Description": "2019-09 Servicing Stack Update for Windows Server 2019 for x64-based Systems (KB4512577)"
+    },
+    {
+      "KB": 4521862,
+      "Description": "2019-10 Servicing Stack Update for Windows Server 2019 for x64-based Systems (KB4521862)"
+    },
+    {
+      "KB": 4523204,
+      "Description": "2019-11 Servicing Stack Update for Windows Server 2019 for x64-based Systems (KB4523204)"
+    },
+    {
+      "KB": 4539571,
+      "Description": "2020-03 Servicing Stack Update for Windows Server 2019 for x64-based Systems (KB4539571)"
+    },
+    {
+      "KB": 4549947,
+      "Description": "2020-04 Servicing Stack Update for Windows Server 2019 for x64-based Systems (KB4549947)"
+    },
+    {
+      "KB": 4562562,
+      "Description": "2020-06 Servicing Stack Update for Windows Server 2019 for x64-based Systems (KB4562562)"
+    },
+    {
+      "KB": 4558997,
+      "Description": "2020-07 Servicing Stack Update for Windows Server 2019 for x64-based Systems (KB4558997)"
+    },
+    {
+      "KB": 4566424,
+      "Description": "2020-08 Servicing Stack Update for Windows Server 2019 for x64-based Systems (KB4566424)"
+    },
+    {
+      "KB": 4570332,
+      "Description": "2020-09 Servicing Stack Update for Windows Server 2019 for x64-based Systems (KB4570332)"
+    },
+    {
+      "KB": 4577667,
+      "Description": "2020-10 Servicing Stack Update for Windows Server 2019 for x64-based Systems (KB4577667)"
+    },
+    {
+      "KB": 4587735,
+      "Description": "2020-11 Servicing Stack Update for Windows Server 2019 for x64-based Systems (KB4587735)"
+    },
+    {
+      "KB": 4598480,
+      "Description": "2021-01 Servicing Stack Update for Windows Server 2019 for x64-based Systems (KB4598480)"
+    },
+    {
+      "KB": 4601393,
+      "Description": "2021-02 Servicing Stack Update for Windows Server 2019 for x64-based Systems (KB4601393)"
+    },
+    {
+      "KB": 5000859,
+      "Description": "2021-03 Servicing Stack Update for Windows Server 2019 for x64-based Systems (KB5000859)"
+    },
+    {
+      "KB": 5001404,
+      "Description": "2021-04 Servicing Stack Update for Windows Server 2019 for x64-based Systems (KB5001404)"
+    },
+    {
+      "KB": 5001407,
+      "Description": "2021-04 Servicing Stack Update for Windows Server 2019 for x64-based Systems (KB5001407)"
+    },
+    {
+      "KB": 5003243,
+      "Description": "2021-05 Servicing Stack Update for Windows Server 2019 for x64-based Systems (KB5003243)"
+    },
+    {
+      "KB": 5003711,
+      "Description": "2021-06 Servicing Stack Update for Windows Server 2019 for x64-based Systems (KB5003711)"
+    },
+    {
+      "KB": 5004424,
+      "Description": "2021-07 Servicing Stack Update for Windows Server 2019 for x64-based Systems (KB5004424)"
+    }
+  ],
+  "Link": [
+    "https://catalog.s.download.windowsupdate.com/d/msdownload/update/software/secu/2021/08/windows10.0-kb5005112-x64_81d09dc6978520e1a6d44b3b15567667f83eba2c.msu"
+  ]
+}

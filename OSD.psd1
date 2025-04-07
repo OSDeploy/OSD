@@ -3,7 +3,7 @@
 @{
     # Basic module information
     RootModule           = 'OSD.psm1'
-    ModuleVersion        = '25.4.4.1'
+    ModuleVersion        = '25.4.6.1'
     GUID                 = '9fe5b9b6-0224-4d87-9018-a8978529f6f5'
     Author               = 'David Segura . Gary Blok . Michael Escamilla'
     CompanyName          = 'OSD Team'
@@ -18,7 +18,7 @@
     RequiredModules      = @(
         @{
             ModuleName    = 'OSD.Catalogs'
-            ModuleVersion = '0.0.1'
+            ModuleVersion = '0.0.0.1'
             Guid          = '3f39fb21-3c97-45fc-93fc-b3b4cd958aff'
         }
     )
@@ -370,7 +370,8 @@
         'Use-WinPEContent',
         'Wait-WebConnection',
         'Write-CMTraceLog',
-        'Get-OSDCatalogDriverPacks'
+        'Get-OSDCatalogDriverPack',
+        'Get-OSDCatalogDriverPacks',
         'Get-OSDCatalogOperatingSystems'
     )
     

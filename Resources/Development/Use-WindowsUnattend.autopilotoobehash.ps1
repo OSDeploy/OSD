@@ -66,9 +66,9 @@ $UnattendXml = @'
     #=================================================
     Write-Verbose -Verbose "Use-WindowsUnattend -Path 'C:\' -UnattendPath $UnattendPath"
     Use-WindowsUnattend -Path 'C:\' -UnattendPath $UnattendPath -Verbose
-    
-    Write-Verbose -Verbose "Copy-PSModuleToFolder -Name OSD to C:\Program Files\WindowsPowerShell\Modules"
+
     Copy-PSModuleToFolder -Name OSD -Destination 'C:\Program Files\WindowsPowerShell\Modules'
+    Copy-PSModuleToFolder -Name OSD.Catalogs -Destination 'C:\Program Files\WindowsPowerShell\Modules'
 
     reg load HKLM\OfflineSystem C:\Windows\System32\Config\SYSTEM
     reg add HKLM\OfflineSystem\Setup /v CmdLine /d "C:\Windows\Setup\Scripts\Specialize.cmd" /F
