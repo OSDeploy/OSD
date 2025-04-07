@@ -158,8 +158,8 @@
     #   New logic added to Get-OSDCloudDriverPack
     #   This should match the proper OS Version ReleaseID
     #================================================
-    $Global:OSDCloudGUI.DriverPack = Get-OSDCloudDriverPack -Product $ComputerProduct -OSVersion $Global:OSDCloudGUI.OSVersion -OSReleaseID $Global:OSDCloudGUI.OSReleaseID
-    if ($Global:OSDCloudGUI.DriverPack) {
+    $Global:OSDCloudGUI.DriverPack = Get-OSDCloudDriverPack -Product $Global:OSDCloudGUI.ComputerProduct -OSVersion $Global:OSDCloudGUI.OSVersion -OSReleaseID $Global:OSDCloudGUI.OSReleaseID
+    if ($Global:OSDCloudGUI.DriverPack -and $null -ne $Global:OSDCloudGUI.DriverPackName) {
         $Global:OSDCloudGUI.DriverPackName = $Global:OSDCloudGUI.DriverPack.Name
     }
     Write-Host -ForegroundColor Green "OSDCloudGUI Configuration"
