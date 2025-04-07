@@ -16,12 +16,12 @@ function Get-OSDCloudOperatingSystems {
         [System.String]
         $OSArch = 'x64'
     )
-    $FullResults = Get-Content -Path (Join-Path (Get-Module -Name OSD -ListAvailable | Sort-Object Version -Descending | Select-Object -First 1).ModuleBase "Catalogs\CloudOperatingSystems.json")  | ConvertFrom-Json
+    $FullResults = Get-Content -Path "$($MyInvocation.MyCommand.Module.ModuleBase)\Catalogs\CloudOperatingSystems.json" | ConvertFrom-Json
     if ($OSArch -eq 'x64'){
         $Results = $FullResults | Where-Object {$_.Architecture -eq "x64"}
     }
-    elseif ($OSArch -eq "ARM64"){
-        $Results = Get-Content -Path (Join-Path (Get-Module -Name OSD -ListAvailable | Sort-Object Version -Descending | Select-Object -First 1).ModuleBase "Catalogs\CloudOperatingSystemsARM64.json") | ConvertFrom-Json
+    elseif ($OSArch -eq "arm64"){
+        $Results = Get-Content -Path "$($MyInvocation.MyCommand.Module.ModuleBase)\Catalogs\CloudOperatingSystemsARM64.json" | ConvertFrom-Json
     }
     $Results
 }

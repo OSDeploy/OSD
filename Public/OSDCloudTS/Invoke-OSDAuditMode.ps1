@@ -35,10 +35,10 @@ function Invoke-OSDAuditMode {
     if (Test-Path $ConfigPath){
         $JSONConfigs = Get-ChildItem -path $ConfigPath -Filter "*.json"
         if ($JSONConfigs.name -contains "HP.JSON"){
-            $HPJson = Get-Content -Path "$ConfigPath\HP.JSON" |ConvertFrom-Json
+            $HPJson = Get-Content -Path "$ConfigPath\HP.JSON" | ConvertFrom-Json
         }
         if ($JSONConfigs.name -contains "Dell.JSON"){
-            $DellJSON = Get-Content -Path "$ConfigPath\DELL.JSON" |ConvertFrom-Json
+            $DellJSON = Get-Content -Path "$ConfigPath\DELL.JSON" | ConvertFrom-Json
         }
     }
         if ($HPJson){

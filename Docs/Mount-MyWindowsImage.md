@@ -13,7 +13,8 @@ Mounts a WIM file
 ## SYNTAX
 
 ```
-Mount-MyWindowsImage [-ImagePath] <String[]> [-Index <UInt32>] [-ReadOnly] [-Explorer] [<CommonParameters>]
+Mount-MyWindowsImage [-ImagePath] <String[]> [-Index <UInt32>] [-ReadOnly] [-Explorer]
+ [-ProgressAction <ActionPreference>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -87,6 +88,21 @@ Required: False
 Position: Named
 Default value: False
 Accept pipeline input: True (ByPropertyName)
+Accept wildcard characters: False
+```
+
+### -ProgressAction
+{{ Fill ProgressAction Description }}
+
+```yaml
+Type: ActionPreference
+Parameter Sets: (All)
+Aliases: proga
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
 Accept wildcard characters: False
 ```
 

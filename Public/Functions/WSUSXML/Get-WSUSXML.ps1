@@ -3,7 +3,7 @@
 Returns an Array of Microsoft Updates
 
 .DESCRIPTION
-Returns an Array of Microsoft Updates contained in the local WSUS Catalogs
+Returns an Array of Microsoft Updates contained in the local WSUS Cats
 
 .LINK
 https://osd.osdeploy.com/
@@ -66,50 +66,48 @@ function Get-WSUSXML {
     #===================================================================================================
     #   Defaults
     #===================================================================================================
-    $WSUSXMLCatalogPath = "$($MyInvocation.MyCommand.Module.ModuleBase)\Catalogs\WSUSXML"
+    $WSUSXMLCatsPath = "$($MyInvocation.MyCommand.Module.ModuleBase)\Catalogs\WSUSXML"
     $WSUSXMLVersion = $($MyInvocation.MyCommand.Module.Version)
     #===================================================================================================
-    #   Catalogs
-    #===================================================================================================
-    $WSUSXMLCatalogs = Get-ChildItem -Path "$WSUSXMLCatalogPath\*" -Include "*.xml" -Recurse | Select-Object -Property *
+    $WSUSXMLCats = Get-ChildItem -Path "$WSUSXMLCatsPath\*" -Include "*.xml" -Recurse | Select-Object -Property *
 
     switch ($Catalog) {
-        'Enablement'                    {$WSUSXMLCatalogs = $WSUSXMLCatalogs | Where-Object {$_.BaseName -match 'Enablement'}}
-        'FeatureUpdate'                 {$WSUSXMLCatalogs = $WSUSXMLCatalogs | Where-Object {$_.BaseName -match 'FeatureUpdate'}}
-        'Office'                        {$WSUSXMLCatalogs = $WSUSXMLCatalogs | Where-Object {$_.BaseName -match 'Office'}}
-        'Office 2010 32-Bit'            {$WSUSXMLCatalogs = $WSUSXMLCatalogs | Where-Object {$_.BaseName -match 'Office 2010'}}
-        'Office 2010 64-Bit'            {$WSUSXMLCatalogs = $WSUSXMLCatalogs | Where-Object {$_.BaseName -match 'Office 2010'}}
-        'Office 2013 32-Bit'            {$WSUSXMLCatalogs = $WSUSXMLCatalogs | Where-Object {$_.BaseName -match 'Office 2013'}}
-        'Office 2013 64-Bit'            {$WSUSXMLCatalogs = $WSUSXMLCatalogs | Where-Object {$_.BaseName -match 'Office 2013'}}
-        'Office 2016 32-Bit'            {$WSUSXMLCatalogs = $WSUSXMLCatalogs | Where-Object {$_.BaseName -match 'Office 2016'}}
-        'Office 2016 64-Bit'            {$WSUSXMLCatalogs = $WSUSXMLCatalogs | Where-Object {$_.BaseName -match 'Office 2016'}}
+        'Enablement'                    {$WSUSXMLCats = $WSUSXMLCats | Where-Object {$_.BaseName -match 'Enablement'}}
+        'FeatureUpdate'                 {$WSUSXMLCats = $WSUSXMLCats | Where-Object {$_.BaseName -match 'FeatureUpdate'}}
+        'Office'                        {$WSUSXMLCats = $WSUSXMLCats | Where-Object {$_.BaseName -match 'Office'}}
+        'Office 2010 32-Bit'            {$WSUSXMLCats = $WSUSXMLCats | Where-Object {$_.BaseName -match 'Office 2010'}}
+        'Office 2010 64-Bit'            {$WSUSXMLCats = $WSUSXMLCats | Where-Object {$_.BaseName -match 'Office 2010'}}
+        'Office 2013 32-Bit'            {$WSUSXMLCats = $WSUSXMLCats | Where-Object {$_.BaseName -match 'Office 2013'}}
+        'Office 2013 64-Bit'            {$WSUSXMLCats = $WSUSXMLCats | Where-Object {$_.BaseName -match 'Office 2013'}}
+        'Office 2016 32-Bit'            {$WSUSXMLCats = $WSUSXMLCats | Where-Object {$_.BaseName -match 'Office 2016'}}
+        'Office 2016 64-Bit'            {$WSUSXMLCats = $WSUSXMLCats | Where-Object {$_.BaseName -match 'Office 2016'}}
         'Windows' {
-            $WSUSXMLCatalogs = $WSUSXMLCatalogs | Where-Object {$_.BaseName -match 'Windows'}
-            $WSUSXMLCatalogs = $WSUSXMLCatalogs | Where-Object {$_.BaseName -notmatch 'Enablement'}
-            $WSUSXMLCatalogs = $WSUSXMLCatalogs | Where-Object {$_.BaseName -notmatch 'FeatureUpdate'}
+            $WSUSXMLCats = $WSUSXMLCats | Where-Object {$_.BaseName -match 'Windows'}
+            $WSUSXMLCats = $WSUSXMLCats | Where-Object {$_.BaseName -notmatch 'Enablement'}
+            $WSUSXMLCats = $WSUSXMLCats | Where-Object {$_.BaseName -notmatch 'FeatureUpdate'}
         }
         'Windows Client' {
-            $WSUSXMLCatalogs = $WSUSXMLCatalogs | Where-Object {$_.BaseName -match 'Windows'}
-            $WSUSXMLCatalogs = $WSUSXMLCatalogs | Where-Object {$_.BaseName -notmatch 'Dynamic Update'}
-            $WSUSXMLCatalogs = $WSUSXMLCatalogs | Where-Object {$_.BaseName -notmatch 'Enablement'}
-            $WSUSXMLCatalogs = $WSUSXMLCatalogs | Where-Object {$_.BaseName -notmatch 'FeatureUpdate'}
-            $WSUSXMLCatalogs = $WSUSXMLCatalogs | Where-Object {$_.BaseName -notmatch 'Server'}
+            $WSUSXMLCats = $WSUSXMLCats | Where-Object {$_.BaseName -match 'Windows'}
+            $WSUSXMLCats = $WSUSXMLCats | Where-Object {$_.BaseName -notmatch 'Dynamic Update'}
+            $WSUSXMLCats = $WSUSXMLCats | Where-Object {$_.BaseName -notmatch 'Enablement'}
+            $WSUSXMLCats = $WSUSXMLCats | Where-Object {$_.BaseName -notmatch 'FeatureUpdate'}
+            $WSUSXMLCats = $WSUSXMLCats | Where-Object {$_.BaseName -notmatch 'Server'}
         }
         'Windows 10' {
-            $WSUSXMLCatalogs = $WSUSXMLCatalogs | Where-Object {$_.BaseName -match 'Windows 10'}
-            $WSUSXMLCatalogs = $WSUSXMLCatalogs | Where-Object {$_.BaseName -notmatch 'Dynamic Update'}
-            $WSUSXMLCatalogs = $WSUSXMLCatalogs | Where-Object {$_.BaseName -notmatch 'Enablement'}
-            $WSUSXMLCatalogs = $WSUSXMLCatalogs | Where-Object {$_.BaseName -notmatch 'FeatureUpdate'}
+            $WSUSXMLCats = $WSUSXMLCats | Where-Object {$_.BaseName -match 'Windows 10'}
+            $WSUSXMLCats = $WSUSXMLCats | Where-Object {$_.BaseName -notmatch 'Dynamic Update'}
+            $WSUSXMLCats = $WSUSXMLCats | Where-Object {$_.BaseName -notmatch 'Enablement'}
+            $WSUSXMLCats = $WSUSXMLCats | Where-Object {$_.BaseName -notmatch 'FeatureUpdate'}
         }
         'Windows 11' {
-            $WSUSXMLCatalogs = $WSUSXMLCatalogs | Where-Object {$_.BaseName -match 'Windows 11'}
-            $WSUSXMLCatalogs = $WSUSXMLCatalogs | Where-Object {$_.BaseName -notmatch 'Dynamic Update'}
-            $WSUSXMLCatalogs = $WSUSXMLCatalogs | Where-Object {$_.BaseName -notmatch 'Enablement'}
-            $WSUSXMLCatalogs = $WSUSXMLCatalogs | Where-Object {$_.BaseName -notmatch 'FeatureUpdate'}
+            $WSUSXMLCats = $WSUSXMLCats | Where-Object {$_.BaseName -match 'Windows 11'}
+            $WSUSXMLCats = $WSUSXMLCats | Where-Object {$_.BaseName -notmatch 'Dynamic Update'}
+            $WSUSXMLCats = $WSUSXMLCats | Where-Object {$_.BaseName -notmatch 'Enablement'}
+            $WSUSXMLCats = $WSUSXMLCats | Where-Object {$_.BaseName -notmatch 'FeatureUpdate'}
         }
-        'Windows 10 Dynamic Update' {$WSUSXMLCatalogs = $WSUSXMLCatalogs | Where-Object {$_.BaseName -eq $Catalog}}
-        'Windows 11 Dynamic Update' {$WSUSXMLCatalogs = $WSUSXMLCatalogs | Where-Object {$_.BaseName -eq $Catalog}}
-        'Windows Server'            {$WSUSXMLCatalogs = $WSUSXMLCatalogs | Where-Object {$_.BaseName -match 'Windows Server'}}
+        'Windows 10 Dynamic Update' {$WSUSXMLCats = $WSUSXMLCats | Where-Object {$_.BaseName -eq $Catalog}}
+        'Windows 11 Dynamic Update' {$WSUSXMLCats = $WSUSXMLCats | Where-Object {$_.BaseName -eq $Catalog}}
+        'Windows Server'            {$WSUSXMLCats = $WSUSXMLCats | Where-Object {$_.BaseName -match 'Windows Server'}}
     }
     #===================================================================================================
     #   Update Information
@@ -124,7 +122,7 @@ function Get-WSUSXML {
     #===================================================================================================
     #   Import Catalog XML Files
     #===================================================================================================
-    foreach ($WSUSXMLCatalog in $WSUSXMLCatalogs) {
+    foreach ($WSUSXMLCatalog in $WSUSXMLCats) {
         $WSUSXML += Import-Clixml -Path "$($WSUSXMLCatalog.FullName)"
     }
     #===================================================================================================

@@ -15,13 +15,13 @@ Edits a mounted Windows Image
 ### Offline (Default)
 ```
 Edit-MyWindowsImage [-Path <String[]>] [-CleanupImage <String>] [-GridRemoveAppxPP] [-RemoveAppxPP <String[]>]
- [-DismountSave] [<CommonParameters>]
+ [-DismountSave] [-ProgressAction <ActionPreference>] [<CommonParameters>]
 ```
 
 ### Online
 ```
 Edit-MyWindowsImage [-Online] [-GridRemoveAppx] [-GridRemoveAppxPP] [-RemoveAppx <String[]>]
- [-RemoveAppxPP <String[]>] [-DismountSave] [<CommonParameters>]
+ [-RemoveAppxPP <String[]>] [-DismountSave] [-ProgressAction <ActionPreference>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -156,6 +156,21 @@ Aliases:
 Required: False
 Position: Named
 Default value: False
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -ProgressAction
+{{ Fill ProgressAction Description }}
+
+```yaml
+Type: ActionPreference
+Parameter Sets: (All)
+Aliases: proga
+
+Required: False
+Position: Named
+Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```

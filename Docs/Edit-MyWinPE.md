@@ -15,7 +15,7 @@ Mounts and edits a WinPE WIM file
 ```
 Edit-MyWinPE [-ImagePath <String[]>] [-Index <UInt32>] [-CloudDriver <String[]>] [-DriverHWID <String[]>]
  [-DriverPath <String[]>] [-ExecutionPolicy <String>] [-PSModuleInstall <String[]>] [-PSModuleCopy <String[]>]
- [-PSGallery] [-Wallpaper <String>] [-DismountSave] [<CommonParameters>]
+ [-PSGallery] [-Wallpaper <String>] [-DismountSave] [-ProgressAction <ActionPreference>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -197,6 +197,21 @@ Aliases:
 Required: False
 Position: Named
 Default value: False
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -ProgressAction
+{{ Fill ProgressAction Description }}
+
+```yaml
+Type: ActionPreference
+Parameter Sets: (All)
+Aliases: proga
+
+Required: False
+Position: Named
+Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```

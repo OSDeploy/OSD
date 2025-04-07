@@ -13,7 +13,8 @@ Sets the PowerShell Execution Policy of a mounted Windows Image
 ## SYNTAX
 
 ```
-Set-WindowsImageExecutionPolicy [-ExecutionPolicy] <String> [-Path <String[]>] [<CommonParameters>]
+Set-WindowsImageExecutionPolicy [-ExecutionPolicy] <String> [-Path <String[]>]
+ [-ProgressAction <ActionPreference>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -74,6 +75,21 @@ Required: False
 Position: Named
 Default value: None
 Accept pipeline input: True (ByPropertyName)
+Accept wildcard characters: False
+```
+
+### -ProgressAction
+{{ Fill ProgressAction Description }}
+
+```yaml
+Type: ActionPreference
+Parameter Sets: (All)
+Aliases: proga
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
 Accept wildcard characters: False
 ```
 

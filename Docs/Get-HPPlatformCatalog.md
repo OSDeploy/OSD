@@ -14,7 +14,7 @@ Useful to get the computer model name for System Ids
 ## SYNTAX
 
 ```
-Get-HPPlatformCatalog [-Online] [-UpdateModuleCatalog] [<CommonParameters>]
+Get-HPPlatformCatalog [-ProgressAction <ActionPreference>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -27,53 +27,34 @@ Requires Internet Access to download platformList.cab
 ### EXAMPLE 1
 ```
 Get-HPPlatformCatalog
-```
-
 Don't do this, you will get a big list.
+```
 
 ### EXAMPLE 2
 ```
 $Results = Get-HPPlatformCatalog
+Yes do this.  Save it in a Variable
 ```
-
-Yes do this. 
-Save it in a Variable
 
 ### EXAMPLE 3
 ```
 Get-HPPlatformCatalog | Out-GridView
-```
-
 Displays all the HP System Ids with the applicable computer model names in GridView
+```
 
 ## PARAMETERS
 
-### -Online
-Checks for the latest Online version
+### -ProgressAction
+{{ Fill ProgressAction Description }}
 
 ```yaml
-Type: SwitchParameter
+Type: ActionPreference
 Parameter Sets: (All)
-Aliases:
+Aliases: proga
 
 Required: False
 Position: Named
-Default value: False
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -UpdateModuleCatalog
-Updates the OSD Module Offline Catalog
-
-```yaml
-Type: SwitchParameter
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: Named
-Default value: False
+Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```

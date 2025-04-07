@@ -13,7 +13,7 @@ Displays registry entries from all RegistryXML files in the Source Directory
 ## SYNTAX
 
 ```
-Show-RegistryXML [-SourceDirectory] <String> [<CommonParameters>]
+Show-RegistryXML [-SourceDirectory] <String> [-ProgressAction <ActionPreference>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -24,9 +24,8 @@ Displays registry entries from all RegistryXML files in the Source Directory
 ### EXAMPLE 1
 ```
 Show-RegistryXML -SourceDirectory C:\DeploymentShare\OSDeploy\OSConfig\LocalPolicy\ImportGPO
-```
-
 Displays all RegistryXML entries found in Source Directory
+```
 
 ## PARAMETERS
 
@@ -40,6 +39,21 @@ Aliases:
 
 Required: True
 Position: 1
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -ProgressAction
+{{ Fill ProgressAction Description }}
+
+```yaml
+Type: ActionPreference
+Parameter Sets: (All)
+Aliases: proga
+
+Required: False
+Position: Named
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False

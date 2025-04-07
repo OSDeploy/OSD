@@ -13,7 +13,7 @@ Waits for an internet connection to the specified Uri
 ## SYNTAX
 
 ```
-Wait-WebConnection [[-Uri] <Uri>] [<CommonParameters>]
+Wait-WebConnection [[-Uri] <Uri>] [-ProgressAction <ActionPreference>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -42,6 +42,21 @@ Required: False
 Position: 1
 Default value: Powershellgallery.com
 Accept pipeline input: True (ByValue)
+Accept wildcard characters: False
+```
+
+### -ProgressAction
+{{ Fill ProgressAction Description }}
+
+```yaml
+Type: ActionPreference
+Parameter Sets: (All)
+Aliases: proga
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
 Accept wildcard characters: False
 ```
 

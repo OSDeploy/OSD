@@ -14,22 +14,26 @@ Converts a value to an Azure Key Vault Secret
 
 ### FromUriContent (Default)
 ```
-ConvertTo-PSKeyVaultSecret -VaultName <String> -Name <String> -Uri <Uri> [<CommonParameters>]
+ConvertTo-PSKeyVaultSecret -VaultName <String> -Name <String> -Uri <Uri> [-ProgressAction <ActionPreference>]
+ [<CommonParameters>]
 ```
 
 ### FromClipboard
 ```
-ConvertTo-PSKeyVaultSecret -VaultName <String> -Name <String> [-Clipboard] [<CommonParameters>]
+ConvertTo-PSKeyVaultSecret -VaultName <String> -Name <String> [-Clipboard] [-ProgressAction <ActionPreference>]
+ [<CommonParameters>]
 ```
 
 ### FromFile
 ```
-ConvertTo-PSKeyVaultSecret -VaultName <String> -Name <String> -File <FileInfo> [<CommonParameters>]
+ConvertTo-PSKeyVaultSecret -VaultName <String> -Name <String> -File <FileInfo>
+ [-ProgressAction <ActionPreference>] [<CommonParameters>]
 ```
 
 ### FromString
 ```
-ConvertTo-PSKeyVaultSecret -VaultName <String> -Name <String> -String <String> [<CommonParameters>]
+ConvertTo-PSKeyVaultSecret -VaultName <String> -Name <String> -String <String>
+ [-ProgressAction <ActionPreference>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -131,6 +135,21 @@ Parameter Sets: FromString
 Aliases:
 
 Required: True
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -ProgressAction
+{{ Fill ProgressAction Description }}
+
+```yaml
+Type: ActionPreference
+Parameter Sets: (All)
+Aliases: proga
+
+Required: False
 Position: Named
 Default value: None
 Accept pipeline input: False

@@ -14,22 +14,26 @@ Creates or updates an OSDCloud Workspace
 
 ### fromTemplate (Default)
 ```
-New-OSDCloudWorkspace [[-WorkspacePath] <String>] [-Public] [<CommonParameters>]
+New-OSDCloudWorkspace [[-WorkspacePath] <String>] [-Public] [-ProgressAction <ActionPreference>]
+ [<CommonParameters>]
 ```
 
 ### fromUsbDrive
 ```
-New-OSDCloudWorkspace [[-WorkspacePath] <String>] [-fromUsbDrive] [-Public] [<CommonParameters>]
+New-OSDCloudWorkspace [[-WorkspacePath] <String>] [-fromUsbDrive] [-Public]
+ [-ProgressAction <ActionPreference>] [<CommonParameters>]
 ```
 
 ### fromIsoUrl
 ```
-New-OSDCloudWorkspace [[-WorkspacePath] <String>] -fromIsoUrl <String> [-Public] [<CommonParameters>]
+New-OSDCloudWorkspace [[-WorkspacePath] <String>] -fromIsoUrl <String> [-Public]
+ [-ProgressAction <ActionPreference>] [<CommonParameters>]
 ```
 
 ### fromIsoFile
 ```
-New-OSDCloudWorkspace [[-WorkspacePath] <String>] -fromIsoFile <FileInfo> [-Public] [<CommonParameters>]
+New-OSDCloudWorkspace [[-WorkspacePath] <String>] -fromIsoFile <FileInfo> [-Public]
+ [-ProgressAction <ActionPreference>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -121,6 +125,21 @@ Aliases:
 Required: False
 Position: Named
 Default value: False
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -ProgressAction
+{{ Fill ProgressAction Description }}
+
+```yaml
+Type: ActionPreference
+Parameter Sets: (All)
+Aliases: proga
+
+Required: False
+Position: Named
+Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```

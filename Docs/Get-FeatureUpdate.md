@@ -15,13 +15,13 @@ Returns a Windows Client Feature Update
 ### ByOSName (Default)
 ```
 Get-FeatureUpdate [-OSName <String>] [-OSArchitecture <String>] [-OSActivation <String>] [-OSLanguage <String>]
- [<CommonParameters>]
+ [-ProgressAction <ActionPreference>] [<CommonParameters>]
 ```
 
 ### v1
 ```
 Get-FeatureUpdate [-OSVersion <String>] [-OSReleaseID <String>] [-OSArchitecture <String>]
- [-OSActivation <String>] [-OSLanguage <String>] [<CommonParameters>]
+ [-OSActivation <String>] [-OSLanguage <String>] [-ProgressAction <ActionPreference>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -128,6 +128,21 @@ Aliases: Culture, OSCulture, Language
 Required: False
 Position: Named
 Default value: En-us
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -ProgressAction
+{{ Fill ProgressAction Description }}
+
+```yaml
+Type: ActionPreference
+Parameter Sets: (All)
+Aliases: proga
+
+Required: False
+Position: Named
+Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```

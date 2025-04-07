@@ -55,12 +55,7 @@ pause
     #=================================================
     #	Use-WindowsUnattend
     #=================================================
-    Write-Verbose -Verbose "Use-WindowsUnattend -Path 'C:\' -UnattendPath $UnattendPath"
     Use-WindowsUnattend -Path 'C:\' -UnattendPath $UnattendPath -Verbose
-    
-    #Write-Verbose -Verbose "Copy-PSModuleToFolder -Name OSD to C:\Program Files\WindowsPowerShell\Modules"
-    #Copy-PSModuleToFolder -Name OSD -Destination 'C:\Program Files\WindowsPowerShell\Modules'
-
     Notepad 'C:\Windows\Setup\Scripts\Specialize.cmd'
     #=================================================
 }

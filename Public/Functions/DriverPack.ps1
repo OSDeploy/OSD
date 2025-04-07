@@ -600,8 +600,9 @@ function Save-ZTIDriverPack {
     #   The OSD Module needs to be available on the next boot for Specialize
     #   Drivers to work
     #=================================================
-    if ($env:SystemDrive -eq 'X:'){
+    if ($env:SystemDrive -eq 'X:') {
         Copy-PSModuleToFolder -Name OSD -Destination "$OSDISK\Program Files\WindowsPowerShell\Modules"
+        Copy-PSModuleToFolder -Name OSD.Catalogs -Destination "$OSDISK\Program Files\WindowsPowerShell\Modules"
     }
     #=================================================
     #	Get-MyDriverPack

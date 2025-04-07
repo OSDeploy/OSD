@@ -430,6 +430,14 @@ function Update-OSDCloudUSB {
             Write-Host -ForegroundColor DarkGray "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Updating OSDCloud Workspace PowerShell Modules and Scripts at $PowerShellPath"
         
             try {
+                Save-Module OSD.Catalogs -Path "$PowerShellPath\Offline\Modules" -ErrorAction Stop
+            }
+            catch {
+                Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) There were some issues updating the OSD.Catalogs PowerShell Module at $PowerShellPath\Offline\Modules"
+                Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Make sure you have an Internet connection and can access powershellgallery.com"
+            }
+
+            try {
                 Save-Module OSD -Path "$PowerShellPath\Offline\Modules" -ErrorAction Stop
             }
             catch {
@@ -646,16 +654,16 @@ function Update-OSDCloudUSB {
             }
         
             if ($DriverPack -contains 'Dell') {
-                Get-DellDriverPack -DownloadPath "$DriverPackDownloadPath\Dell"
+                Get-DellDriverPackCatalog -DownloadPath "$DriverPackDownloadPath\Dell"
             }
             if ($DriverPack -contains 'HP') {
-                Get-HPDriverPack -DownloadPath "$DriverPackDownloadPath\HP"
+                Get-HPDriverPackCatalog -DownloadPath "$DriverPackDownloadPath\HP"
             }
             if ($DriverPack -contains 'Lenovo') {
-                Get-LenovoDriverPack -DownloadPath "$DriverPackDownloadPath\Lenovo"
+                Get-LenovoDriverPackCatalog -DownloadPath "$DriverPackDownloadPath\Lenovo"
             }
             if ($DriverPack -contains 'Microsoft') {
-                Get-MicrosoftDriverPack -DownloadPath "$DriverPackDownloadPath\Microsoft"
+                Get-SurfaceDriverPackCatalog -DownloadPath "$DriverPackDownloadPath\Microsoft"
             }
             Write-Host -ForegroundColor DarkGray "========================================================================="
         }
@@ -697,6 +705,14 @@ function Update-OSDCloudUSB {
                 if (Test-Path "$($OSDCloudVolumes.DriveLetter):\OSDCloud") {
                     Write-Host -ForegroundColor DarkGray "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Updating OSD and WindowsAutoPilotIntune PowerShell Modules at $PowerShellPath"
         
+                    try {
+                        Save-Module OSD.Catalogs -Path "$PowerShellPath\Offline\Modules" -ErrorAction Stop
+                    }
+                    catch {
+                        Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) There were some issues updating the OSD.Catalogs PowerShell Module at $PowerShellPath\Offline\Modules"
+                        Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Make sure you have an Internet connection and can access powershellgallery.com"
+                    }
+
                     try {
                         Save-Module OSD -Path "$PowerShellPath\Offline\Modules" -ErrorAction Stop
                     }

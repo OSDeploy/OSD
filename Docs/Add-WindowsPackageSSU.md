@@ -14,12 +14,14 @@ Adds the SSU from a Cumulative Update .cab or .msu to a Windows Image
 
 ### Offline (Default)
 ```
-Add-WindowsPackageSSU -PackagePath <String> -Path <String> [-LogPath <String>] [<CommonParameters>]
+Add-WindowsPackageSSU -PackagePath <String> -Path <String> [-LogPath <String>]
+ [-ProgressAction <ActionPreference>] [<CommonParameters>]
 ```
 
 ### Online
 ```
-Add-WindowsPackageSSU -PackagePath <String> [-Online] [-LogPath <String>] [<CommonParameters>]
+Add-WindowsPackageSSU -PackagePath <String> [-Online] [-LogPath <String>] [-ProgressAction <ActionPreference>]
+ [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -98,6 +100,21 @@ Aliases:
 Required: False
 Position: Named
 Default value: "$env:windir\Logs\Dism\dism.log"
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -ProgressAction
+{{ Fill ProgressAction Description }}
+
+```yaml
+Type: ActionPreference
+Parameter Sets: (All)
+Aliases: proga
+
+Required: False
+Position: Named
+Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```

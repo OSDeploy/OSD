@@ -14,7 +14,7 @@ schema: 2.0.0
 
 ```
 Convert-FolderToIso [-folderFullName] <String> [-isoFullName <String>] [-isoLabel <String>] [-noPrompt]
- [-WindowsAdkRoot <FileInfo>] [<CommonParameters>]
+ [-WindowsAdkRoot <FileInfo>] [-ProgressAction <ActionPreference>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -23,7 +23,7 @@ Convert-FolderToIso [-folderFullName] <String> [-isoFullName <String>] [-isoLabe
 ## EXAMPLES
 
 ### Example 1
-```
+```powershell
 PS C:\> {{ Add example code here }}
 ```
 
@@ -101,7 +101,22 @@ Aliases:
 
 Required: False
 Position: Named
-Default value: False
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -ProgressAction
+{{ Fill ProgressAction Description }}
+
+```yaml
+Type: ActionPreference
+Parameter Sets: (All)
+Aliases: proga
+
+Required: False
+Position: Named
+Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
@@ -112,6 +127,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ## INPUTS
 
 ### System.String
+
 ## OUTPUTS
 
 ### System.Object

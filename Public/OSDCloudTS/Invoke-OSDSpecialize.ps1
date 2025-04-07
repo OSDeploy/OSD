@@ -38,17 +38,17 @@ function Invoke-OSDSpecialize {
     if (Test-Path $ConfigPath){
         $JSONConfigs = Get-ChildItem -path $ConfigPath -Filter "*.json"
         if ($JSONConfigs.name -contains "HP.JSON"){
-            $HPJson = Get-Content -Path "$ConfigPath\HP.JSON" |ConvertFrom-Json
+            $HPJson = Get-Content -Path "$ConfigPath\HP.JSON" | ConvertFrom-Json
         }
         if ($JSONConfigs.name -contains "Dell.JSON"){
-            $DellJSON = Get-Content -Path "$ConfigPath\DELL.JSON" |ConvertFrom-Json
+            $DellJSON = Get-Content -Path "$ConfigPath\DELL.JSON" | ConvertFrom-Json
         }
         if ($JSONConfigs.name -contains "Extras.JSON"){
-            $ExtrasJSON = Get-Content -Path "$ConfigPath\Extras.JSON" |ConvertFrom-Json
+            $ExtrasJSON = Get-Content -Path "$ConfigPath\Extras.JSON" | ConvertFrom-Json
         }
         if ($WirelessAdapters){
             if ($JSONConfigs.name -contains "WiFi.JSON"){
-                $WiFiJSON = Get-Content -Path "$ConfigPath\WiFi.JSON" |ConvertFrom-Json
+                $WiFiJSON = Get-Content -Path "$ConfigPath\WiFi.JSON" | ConvertFrom-Json
                 $SSID = $WiFiJSON.Addons.SSID
                 $PSK = $WiFiJSON.Addons.PSK
                 Write-Host "Setting WiFi Profile in Specialize"
