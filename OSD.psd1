@@ -51,13 +51,8 @@ PowerShellVersion = '5.1'
 # ProcessorArchitecture = ''
 
 # Modules that must be imported into the global environment prior to importing this module
-RequiredModules = @(
-    @{
-        ModuleName = 'OSD.Catalogs'
-        ModuleVersion = '0.0.0.1'
-        GUID = '3f39fb21-3c97-45fc-93fc-b3b4cd958aff'
-    }
-)
+RequiredModules = @(@{ModuleName = 'OSD.Catalogs'; GUID = '3f39fb21-3c97-45fc-93fc-b3b4cd958aff'; ModuleVersion = '0.0.0.1'; })
+
 # Assemblies that must be loaded prior to importing this module
 # RequiredAssemblies = @()
 
