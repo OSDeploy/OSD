@@ -1,10 +1,11 @@
-﻿##### Wednesday, April 16, 2025 6:39:47 PM UTC
+﻿# OSD.Build Catalog
 
-# build-systemsku
-
-Owner: David Segura
-Build: GitHub Actions
-PSFunction: Build-OSDCatalogSurfaceSystemSku
-PSModule: OSD.Build 25.4.16.7
-
-Files are used internally by OSD functions and are not intended for public use as the file format, location, availability, and content may change at any time.
+| | |
+|-|-|
+| Owner | David Segura |
+| Build Version | 25.4.16.8 |
+| PowerShell Module | OSD.Build |
+| PowerShell Function | Build-OSDCatalogSurfaceSystemSku |
+| Files | build-systemsku.* |
+| Build Workflow | GitHub Actions |
+| Last Update | Wednesday, April 16, 2025 8:56:36 PM UTC |
