@@ -29,7 +29,7 @@ function Get-HPPlatformCatalog {
     #=================================================
     #   Import Catalog
     #=================================================
-    $CatalogFile = "$(Get-OSDCatalogsPath)\hp\build-platform.xml"
+    $CatalogFile = "$(Get-OSDCachePath)\hp-catalogs\build-platform.xml"
     Write-Verbose "Importing the Offline Catalog at $CatalogFile"
     $Results = Import-Clixml -Path $CatalogFile
     #=================================================

@@ -46,7 +46,6 @@ $UnattendXml = @'
     Use-WindowsUnattend -Path 'C:\' -UnattendPath $UnattendPath -Verbose
     
     Copy-PSModuleToFolder -Name OSD -Destination 'C:\Program Files\WindowsPowerShell\Modules'
-    Copy-PSModuleToFolder -Name OSD.Catalogs -Destination 'C:\Program Files\WindowsPowerShell\Modules'
 
     Notepad $UnattendPath
     #=================================================

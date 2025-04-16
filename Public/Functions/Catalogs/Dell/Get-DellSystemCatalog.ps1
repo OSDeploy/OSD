@@ -41,7 +41,7 @@ function Get-DellSystemCatalog {
     #=================================================
     #   Import Catalog
     #=================================================
-    $CatalogFile = "$(Get-OSDCatalogsPath)\dell\build-system.xml"
+    $CatalogFile = "$(Get-OSDCachePath)\dell-catalogs\build-system.xml"
     Write-Verbose "Importing the Offline Catalog at $CatalogFile"
     $Results = Import-Clixml -Path $CatalogFile
     #=================================================

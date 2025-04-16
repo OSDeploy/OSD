@@ -24,7 +24,7 @@ function Get-HPDriverPackCatalog {
     #=================================================
     #   Import Catalog
     #=================================================
-    $CatalogFile = "$(Get-OSDCatalogsPath)\hp\build-driverpack.xml"
+    $CatalogFile = "$(Get-OSDCachePath)\hp-catalogs\build-driverpack.xml"
     Write-Verbose "Importing the Offline Catalog at $CatalogFile"
     $Results = Import-Clixml -Path $CatalogFile
     #=================================================

@@ -42,7 +42,7 @@ function Get-HPSystemCatalog {
     #=================================================
     #   Import Catalog
     #=================================================
-    $CatalogFile = "$(Get-OSDCatalogsPath)\hp\build-system.xml"
+    $CatalogFile = "$(Get-OSDCachePath)\hp-catalogs\build-system.xml"
     Write-Verbose "Importing the Offline Catalog at $CatalogFile"
     $Results = Import-Clixml -Path $CatalogFile
     #=================================================

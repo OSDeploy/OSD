@@ -24,7 +24,7 @@ function Get-LenovoDriverPackCatalog {
     #=================================================
     #   Import Catalog
     #=================================================
-    $CatalogFile = "$(Get-OSDCatalogsPath)\lenovo\build-driverpack.xml"
+    $CatalogFile = "$(Get-OSDCachePath)\lenovo-catalogs\build-driverpack.xml"
     Write-Verbose "Importing the Offline Catalog at $CatalogFile"
     $Results = Import-Clixml -Path $CatalogFile
     #=================================================

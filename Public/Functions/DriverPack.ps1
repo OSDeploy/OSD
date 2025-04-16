@@ -523,17 +523,6 @@ function Save-MyDriverPack {
                     }
                 }
                 #=================================================
-                #   Zip
-                #=================================================
-                if ($GetItemOutFile.Extension -eq '.zip') {
-                    $DestinationPath = Join-Path $GetItemOutFile.Directory $GetItemOutFile.BaseName
-    
-                    if (-NOT (Test-Path "$DestinationPath")) {
-                        Write-Verbose -Verbose "Expanding ZIP Driver Pack to $DestinationPath"
-                        Expand-Archive -Path $ExpandFile -DestinationPath $DestinationPath -Force
-                    }
-                }
-                #=================================================
                 #   Everything Else
                 #=================================================
                 #Write-Warning "Unable to expand $ExpandFile"
@@ -602,7 +591,6 @@ function Save-ZTIDriverPack {
     #=================================================
     if ($env:SystemDrive -eq 'X:') {
         Copy-PSModuleToFolder -Name OSD -Destination "$OSDISK\Program Files\WindowsPowerShell\Modules"
-        Copy-PSModuleToFolder -Name OSD.Catalogs -Destination "$OSDISK\Program Files\WindowsPowerShell\Modules"
     }
     #=================================================
     #	Get-MyDriverPack

@@ -1,16 +1,16 @@
 function Get-OSDCatalogOperatingSystems {
     <#
     .SYNOPSIS
-    Returns the OSDCatalog Operating Systems
+    Returns the OSD Operating Systems Catalog
 
     .DESCRIPTION
-    Returns the OSDCatalog Operating Systems
+    Returns the OSD Operating Systems Catalog
 
     .LINK
     https://github.com/OSDeploy/OSD/tree/master/Docs
     #>
     [CmdletBinding()]
     param ()
-    $Results = Import-Clixml -Path "$(Get-OSDCatalogsPath)\main\build-operatingsystems.xml"
+    $Results = Import-Clixml -Path "$(Get-OSDCachePath)\os-catalogs\build-operatingsystems.xml"
     $Results
 }

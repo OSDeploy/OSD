@@ -22,6 +22,10 @@ function Get-SystemFirmwareUpdate {
     #   This excellent work is a good way to gather information from MS
     #   Catalog
     #=================================================
+    if ($PSVersionTable.PSVersion.Major -ne 5) {
+        Write-Host -ForegroundColor DarkGray "[$(Get-Date -format G)][$($MyInvocation.MyCommand.Name)] PowerShell 5.1 is required to run this function"
+        return
+    }
     if (!(Get-Module -ListAvailable -Name MSCatalog)) {
         Install-Module MSCatalog -Force -SkipPublisherCheck -ErrorAction Ignore
     }
@@ -55,6 +59,11 @@ function Install-SystemFirmwareUpdate {
     #	Blocks
     #=================================================
     Block-StandardUser
+    
+    if ($PSVersionTable.PSVersion.Major -ne 5) {
+        Write-Host -ForegroundColor DarkGray "[$(Get-Date -format G)][$($MyInvocation.MyCommand.Name)] PowerShell 5.1 is required to run this function"
+        return
+    }
     #=================================================
     #	MSCatalog PowerShell Module
     #   Ryan-Jan
@@ -82,7 +91,7 @@ function Install-SystemFirmwareUpdate {
                 if ($SystemFirmwareUpdate) {
                     $SystemFirmwareUpdateFile = Save-UpdateCatalog -Guid $SystemFirmwareUpdate.Guid -DestinationDirectory $DestinationDirectory
                     if ($SystemFirmwareUpdateFile) {
-                        expand.exe "$($SystemFirmwareUpdateFile.FullName)" -F:* "$DestinationDirectory"
+                        expand.exe "$($SystemFirmwareUpdateFile.FullName)" -F:* "$DestinationDirectory" | Out-Null
                         Remove-Item $SystemFirmwareUpdateFile.FullName | Out-Null
                         if ($env:SystemDrive -eq 'X:') {
                             Add-WindowsDriver -Path 'C:\' -Driver "$DestinationDirectory"

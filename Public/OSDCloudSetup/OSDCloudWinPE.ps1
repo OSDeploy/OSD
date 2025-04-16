@@ -412,9 +412,6 @@ PowerShell -Nol -C Initialize-OSDCloudStartnetUpdate
     }
     #endregion
     #region OSD PowerShell Module
-    Write-Host -ForegroundColor DarkGray "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Saving OSD.Catalogs Module to X:\Program Files\WindowsPowerShell\Modules"
-    Save-Module -Name OSD.Catalogs -Path "$MountPath\Program Files\WindowsPowerShell\Modules" -Force
-
     Write-Host -ForegroundColor DarkGray "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Saving OSD Module to X:\Program Files\WindowsPowerShell\Modules"
     Save-Module -Name OSD -Path "$MountPath\Program Files\WindowsPowerShell\Modules" -Force
     #endregion

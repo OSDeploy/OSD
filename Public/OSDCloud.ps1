@@ -2176,14 +2176,6 @@ exit
             
             if (Test-WebConnection -Uri "https://www.powershellgallery.com") {
                 Copy-PSModuleToFolder -Name OSD -Destination "$PowerShellSavePath\Modules"
-                Copy-PSModuleToFolder -Name OSD.Catalogs -Destination "$PowerShellSavePath\Modules"
-
-                try {
-                    Save-Module -Name OSD.Catalogs -Path "$PowerShellSavePath\Modules" -Force -ErrorAction Stop
-                }
-                catch {
-                    Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Unable to Save-Module OSD to $PowerShellSavePath\Modules"
-                }
 
                 try {
                     Save-Module -Name OSD -Path "$PowerShellSavePath\Modules" -Force -ErrorAction Stop
@@ -2230,7 +2222,6 @@ exit
             }
             else {
                 Copy-PSModuleToFolder -Name OSD -Destination "$PowerShellSavePath\Modules"
-                Copy-PSModuleToFolder -Name OSD.Catalogs -Destination "$PowerShellSavePath\Modules"
                 Copy-PSModuleToFolder -Name PackageManagement -Destination "$PowerShellSavePath\Modules"
                 Copy-PSModuleToFolder -Name PowerShellGet -Destination "$PowerShellSavePath\Modules"
                 Copy-PSModuleToFolder -Name WindowsAutopilotIntune -Destination "$PowerShellSavePath\Modules"

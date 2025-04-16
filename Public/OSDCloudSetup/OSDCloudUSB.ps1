@@ -428,14 +428,6 @@ function Update-OSDCloudUSB {
     if ($RobocopyWorkspace) {
         if ($UpdateModules -or $PSUpdate) {
             Write-Host -ForegroundColor DarkGray "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Updating OSDCloud Workspace PowerShell Modules and Scripts at $PowerShellPath"
-        
-            try {
-                Save-Module OSD.Catalogs -Path "$PowerShellPath\Offline\Modules" -ErrorAction Stop
-            }
-            catch {
-                Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) There were some issues updating the OSD.Catalogs PowerShell Module at $PowerShellPath\Offline\Modules"
-                Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Make sure you have an Internet connection and can access powershellgallery.com"
-            }
 
             try {
                 Save-Module OSD -Path "$PowerShellPath\Offline\Modules" -ErrorAction Stop
@@ -704,14 +696,6 @@ function Update-OSDCloudUSB {
             if (($OSDCloudVolumes | Measure-Object).Count -eq 1) {
                 if (Test-Path "$($OSDCloudVolumes.DriveLetter):\OSDCloud") {
                     Write-Host -ForegroundColor DarkGray "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Updating OSD and WindowsAutoPilotIntune PowerShell Modules at $PowerShellPath"
-        
-                    try {
-                        Save-Module OSD.Catalogs -Path "$PowerShellPath\Offline\Modules" -ErrorAction Stop
-                    }
-                    catch {
-                        Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) There were some issues updating the OSD.Catalogs PowerShell Module at $PowerShellPath\Offline\Modules"
-                        Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Make sure you have an Internet connection and can access powershellgallery.com"
-                    }
 
                     try {
                         Save-Module OSD -Path "$PowerShellPath\Offline\Modules" -ErrorAction Stop

@@ -51,7 +51,7 @@ PowerShellVersion = '5.1'
 # ProcessorArchitecture = ''
 
 # Modules that must be imported into the global environment prior to importing this module
-RequiredModules = @(@{ModuleName = 'OSD.Catalogs'; GUID = '3f39fb21-3c97-45fc-93fc-b3b4cd958aff'; ModuleVersion = '0.0.0.1'; })
+# RequiredModules = @()
 
 # Assemblies that must be loaded prior to importing this module
 # RequiredAssemblies = @()
@@ -218,7 +218,7 @@ FunctionsToExport = 'Add-7Zip2BootImage', 'Add-OfflineServicingWindowsDriver',
                'Use-WinPEContent', 'Wait-WebConnection', 'Write-CMTraceLog', 
                'Get-OSDCatalogDriverPack', 'Get-OSDCatalogDriverPacks', 
                'Get-OSDCatalogOperatingSystems', 'Get-OSDModulePath', 
-               'Get-OSDModuleVersion'
+               'Get-OSDModuleVersion','Get-OSDCachePath'
 
 # Cmdlets to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no cmdlets to export.
 CmdletsToExport = @()
