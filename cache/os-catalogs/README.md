@@ -1,6 +1,6 @@
 ﻿# os-catalogs
 
-Last updated using Build-OSDCatalogOperatingSystems at 04/16/2025 17:12:34
+Last updated using Build-OSDCatalogOperatingSystems at 04/16/2025 17:35:53
 
 This folder is maintained by David Segura.
 
