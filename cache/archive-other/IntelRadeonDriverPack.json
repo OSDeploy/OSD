@@ -1,0 +1,29 @@
+{
+    "OSDVersion":  "23.6.25.1",
+    "LastUpdate":  "\/Date(1640671200000)\/",
+    "OSDStatus":  "",
+    "OSDType":  "Driver",
+    "OSDGroup":  "IntelRadeonDisplay",
+    "DriverName":  "Intel Radeon RX Vega M x64 30.0.13037.4001 10.0",
+    "DriverVersion":  "30.0.13037.4001",
+    "OsVersion":  [
+                      "10.0"
+                  ],
+    "OsArch":  [
+                   "x64"
+               ],
+    "MakeNotMatch":  [
+                         "Microsoft"
+                     ],
+    "ModelNotMatch":  [
+                          "Surface"
+                      ],
+    "DriverGrouping":  "Intel Radeon RX Vega M",
+    "DownloadFile":  "gfx_radeon_21.30.37.04.zip",
+    "DriverUrl":  "https://downloadmirror.intel.com/709947/gfx_radeon_21.30.37.04.zip",
+    "DriverInfo":  "https://intel.com/content/www/us/en/download/19282/radeon-rx-vega-m-graphics.html",
+    "DriverDescription":  "This download installs the Radeon? RX Vega M Graphics Driver for 8th generation.\n\nMicrosoft Version: 30.0.13037.4001\n\nAMD Version: 21.30.37.04",
+    "OSDGuid":  "931cf3fe-aa8b-4b93-8946-9811e4d2bacb",
+    "OSDPnpClass":  "Display",
+    "OSDPnpClassGuid":  "{4D36E968-E325-11CE-BFC1-08002BE10318}"
+}

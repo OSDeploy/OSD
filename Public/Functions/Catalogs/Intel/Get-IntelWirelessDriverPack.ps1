@@ -68,7 +68,7 @@ function Get-IntelWirelessDriverPack {
     if (-not(Test-Path $TempDSADataExpand)) {
         $null = New-Item -Path $TempDSADataExpand -ItemType Directory -Force
     }
-    $ModuleCatalogFile = "$($MyInvocation.MyCommand.Module.ModuleBase)\Catalogs\$OfflineCatalogName"
+    $ModuleCatalogFile = "$(Get-OSDModulePath)\cache\archive-other\$OfflineCatalogName"
     #Next two lines are specific to Gary when he is testing this function
     #$GitHubFolder = 'C:\Users\GaryBlok\OneDrive - garytown\Documents\GitHub'
     #$ModuleCatalogFile = "$GitHubFolder\OSD\Catalogs\$OfflineCatalogName" #GARY's Test Machine

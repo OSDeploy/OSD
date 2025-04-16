@@ -42,7 +42,7 @@ function Get-IntelRadeonDriverPack {
     }
 
     $TempCatalogFile = Join-Path $env:TEMP (Join-Path 'OSD' $OfflineCatalogName)
-    $ModuleCatalogFile = "$($MyInvocation.MyCommand.Module.ModuleBase)\Catalogs\$OfflineCatalogName"
+    $ModuleCatalogFile = "$(Get-OSDModulePath)\cache\archive-other\$OfflineCatalogName"
     $ModuleCatalogContent = Get-Content -Path $ModuleCatalogFile -Raw | ConvertFrom-Json
     #=================================================
     #   IsOnline
