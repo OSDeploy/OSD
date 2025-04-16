@@ -565,7 +565,7 @@ function Get-MyWindowsCapability {
         #=================================================
         #   Get Module Path
         #=================================================
-        $GetModuleBase = Get-Module -Name OSD | Select-Object -ExpandProperty ModuleBase -First 1
+        $GetModuleBase = Get-OSDModulePath
         #=================================================
     }
     process {
@@ -774,7 +774,7 @@ function Get-MyWindowsPackage {
     #=================================================
     #   Get Module Path
     #=================================================
-    $GetModuleBase = Get-Module -Name OSD | Select-Object -ExpandProperty ModuleBase -First 1
+    $GetModuleBase = Get-OSDModulePath
     #=================================================
     #   Get-WindowsPackage
     #=================================================
