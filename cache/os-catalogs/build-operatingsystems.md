@@ -8,4 +8,4 @@
 | PowerShell Function | Build-OSDCatalogOperatingSystems |
 | Files | build-operatingsystems.* |
 | Build Workflow | GitHub Actions |
-| Last Update | Thursday, April 17, 2025 9:21:20 PM UTC |
+| Last Update | Thursday, April 17, 2025 9:21:33 PM UTC |
