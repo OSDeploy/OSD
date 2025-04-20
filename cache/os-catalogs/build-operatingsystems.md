@@ -3,9 +3,9 @@
 | | |
 |-|-|
 | Owner | David Segura |
-| Build Version | 25.4.19.4 |
+| Build Version | 25.4.20.1 |
 | PowerShell Module | OSD.Build |
 | PowerShell Function | Build-OSDCatalogOperatingSystems |
 | Files | build-operatingsystems.* |
 | Build Workflow | GitHub Actions |
-| Last Update | Sunday, April 20, 2025 5:05:13 AM UTC |
+| Last Update | Sunday, April 20, 2025 11:04:51 AM UTC |
