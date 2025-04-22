@@ -120,6 +120,10 @@
         "DriverPage":  "https://www.microsoft.com/download/details.aspx?id=105947"
     },
     {
+        "Model":  "Surface Pro 10 with 5G",
+        "DriverPage":  "https://www.microsoft.com/en-us/download/details.aspx?id=106292"
+    },
+    {
         "Model":  "Surface Pro 11th Edition, Intel processor",
         "DriverPage":  "https://www.microsoft.com/download/details.aspx?id=108013\u0026amp;msockid=28a850520e226efc1ba245090f0f6f14"
     },
