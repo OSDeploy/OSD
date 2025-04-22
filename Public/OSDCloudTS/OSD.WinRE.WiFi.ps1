@@ -216,11 +216,11 @@ $XMLProfile = @"
         #=================================================
         #	Transcript
         #=================================================        
-        $TranscriptPath = "$env:SystemDrive\OSDCloud\Logs"
+        $TranscriptPath = "$env:Temp"
         if (!(Test-Path -path $TranscriptPath)){
             New-Item -Path $TranscriptPath -ItemType Directory -Force | Out-Null
         }
-        $null = Start-Transcript -Path "$TranscriptPath\WinREWiFi.txt" -ErrorAction Ignore
+        $null = Start-Transcript -Path "$TranscriptPath\transcript-winrewifi.txt" -ErrorAction Ignore
         #=================================================
         #	Test Internet Connection
         #=================================================
