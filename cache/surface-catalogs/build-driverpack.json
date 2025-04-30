@@ -1,0 +1,40 @@
+[
+    {
+        "CatalogVersion":  "25.04.30",
+        "Status":  null,
+        "Component":  "DriverPack",
+        "ReleaseDate":  "25.04.04",
+        "Manufacturer":  "Microsoft",
+        "Model":  "Surface Laptop Go 2",
+        "Product":  "Surface_Laptop_Go_2_2013",
+        "Name":  "Microsoft Surface Laptop Go 2 Win10 22H2",
+        "Legacy":  false,
+        "PackageID":  "104251",
+        "FileName":  "SurfaceLaptopGo2_Win10_19045_25.032.26311.0.msi",
+        "Url":  "https://download.microsoft.com/download/8ba2cbfd-02b1-42ba-b588-4aecd0e992aa/SurfaceLaptopGo2_Win10_19045_25.032.26311.0.msi",
+        "OSVersion":  "Windows 10 x64",
+        "OSReleaseId":  "22H2",
+        "OSBuild":  "19045",
+        "OSArchitecture":  "amd64",
+        "HashMD5":  ""
+    },
+    {
+        "CatalogVersion":  "25.04.30",
+        "Status":  null,
+        "Component":  "DriverPack",
+        "ReleaseDate":  "25.04.04",
+        "Manufacturer":  "Microsoft",
+        "Model":  "Surface Laptop Go 2",
+        "Product":  "Surface_Laptop_Go_2_2013",
+        "Name":  "Microsoft Surface Laptop Go 2 Win11 22H2",
+        "Legacy":  false,
+        "PackageID":  "104251",
+        "FileName":  "SurfaceLaptopGo2_Win11_22621_25.032.26309.0.msi",
+        "Url":  "https://download.microsoft.com/download/8ba2cbfd-02b1-42ba-b588-4aecd0e992aa/SurfaceLaptopGo2_Win11_22621_25.032.26309.0.msi",
+        "OSVersion":  "Windows 11 x64",
+        "OSReleaseId":  "22H2",
+        "OSBuild":  "22621",
+        "OSArchitecture":  "amd64",
+        "HashMD5":  ""
+    }
+]
