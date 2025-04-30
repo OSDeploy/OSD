@@ -15,7 +15,7 @@ function Get-OSDCloudREAzureResources {
         #Write-Host -ForegroundColor DarkGray    'Storage Accounts:          $Global:AzStorageAccounts'
         $Global:AzStorageAccounts = Get-AzStorageAccount
         if ($OSDCloudLogs) {
-            #Write-Host -ForegroundColor DarkGray "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) $OSDCloudLogs\AzStorageAccounts.json"
+            #Write-Host -ForegroundColor DarkGray "[$(Get-Date -format G)] $OSDCloudLogs\AzStorageAccounts.json"
             $Global:AzStorageAccounts | ConvertTo-Json | Out-File -FilePath "$OSDCloudLogs\AzStorageAccounts.json" -Encoding ascii -Width 2000 -Force
         }
     
@@ -24,7 +24,7 @@ function Get-OSDCloudREAzureResources {
         #$Global:AzOSDCloudStorageAccounts = Get-AzResource -ResourceType 'Microsoft.Storage/storageAccounts'
         #$Global:AzOSDCloudStorageAccounts = Get-AzResource -ResourceType 'Microsoft.Storage/storageAccounts' | Where-Object {$_.Tags.ContainsKey('OSDCloud')}
         if ($OSDCloudLogs) {
-            #Write-Host -ForegroundColor DarkGray "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) $OSDCloudLogs\AzOSDCloudStorageAccounts.json"
+            #Write-Host -ForegroundColor DarkGray "[$(Get-Date -format G)] $OSDCloudLogs\AzOSDCloudStorageAccounts.json"
             $Global:AzOSDCloudStorageAccounts | ConvertTo-Json | Out-File -FilePath "$OSDCloudLogs\AzOSDCloudStorageAccounts.json" -Encoding ascii -Width 2000 -Force
         }
     
@@ -45,7 +45,7 @@ function Get-OSDCloudREAzureResources {
         
                 $AzOSDCloudStorageContainers = Get-AzStorageContainer -Context $Global:AzCurrentStorageContext
                 if ($OSDCloudLogs) {
-                    #Write-Host -ForegroundColor DarkGray "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) $OSDCloudLogs\AzOSDCloudStorageContainers.json"
+                    #Write-Host -ForegroundColor DarkGray "[$(Get-Date -format G)] $OSDCloudLogs\AzOSDCloudStorageContainers.json"
                     $Global:AzOSDCloudStorageContainers | ConvertTo-Json | Out-File -FilePath "$OSDCloudLogs\AzOSDCloudStorageContainers.json" -Encoding ascii -Width 2000 -Force
                 }
             

@@ -157,7 +157,7 @@
     #	Set WorkspacePath
     #=================================================
     if ($PSBoundParameters.ContainsKey('WorkspacePath')) {
-        Write-Host -ForegroundColor DarkGray "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Setting Workspace Path"
+        Write-Host -ForegroundColor DarkGray "[$(Get-Date -format G)] Setting Workspace Path"
         Set-OSDCloudWorkspace -WorkspacePath $WorkspacePath -ErrorAction Stop | Out-Null
     }
     $WorkspacePath = Get-OSDCloudWorkspace
@@ -199,21 +199,21 @@
     #=================================================
     #   Mount-MyWindowsImage
     #=================================================
-    Write-Host -ForegroundColor DarkGray "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Mounting $WorkspacePath\Media\Sources\boot.wim"
+    Write-Host -ForegroundColor DarkGray "[$(Get-Date -format G)] Mounting $WorkspacePath\Media\Sources\boot.wim"
     $MountMyWindowsImage = Mount-MyWindowsImage -ImagePath "$WorkspacePath\Media\Sources\boot.wim"
     $MountPath = $MountMyWindowsImage.Path
     #=================================================
     #   Robocopy Config
     #=================================================
     if (Test-Path "$WorkspacePath\Config") {
-        Write-Host -ForegroundColor DarkGray "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Copying $WorkspacePath\Config to X:\OSDCloud\Config"
+        Write-Host -ForegroundColor DarkGray "[$(Get-Date -format G)] Copying $WorkspacePath\Config to X:\OSDCloud\Config"
         robocopy "$WorkspacePath\Config" "$MountPath\OSDCloud\Config" *.* /mir /ndl /njh /njs /b /np
     }
     #=================================================
     #   Robocopy ODT Config
     #=================================================
     if (Test-Path "$WorkspacePath\ODT") {
-        Write-Host -ForegroundColor DarkGray "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Copying $WorkspacePath\ODT to X:\OSDCloud\ODT"
+        Write-Host -ForegroundColor DarkGray "[$(Get-Date -format G)] Copying $WorkspacePath\ODT to X:\OSDCloud\ODT"
         robocopy "$WorkspacePath\ODT" "$MountPath\OSDCloud\ODT" *.xml /mir /ndl /njh /njs /b /np
         robocopy "$WorkspacePath\ODT" "$MountPath\OSDCloud\ODT" setup.exe /mir /ndl /njh /njs /b /np
     }
@@ -253,7 +253,7 @@
 
     #region WifiProfile
     if ($WifiProfile) {
-        Write-Host -ForegroundColor DarkGray "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Adding WiFi Profile $WifiProfile"
+        Write-Host -ForegroundColor DarkGray "[$(Get-Date -format G)] Adding WiFi Profile $WifiProfile"
         Copy-Item -Path $WifiProfile -Destination "$env:TEMP\WiFiProfile.xml" -Force | Out-Null
         robocopy "$env:TEMP" "$MountPath\OSDCloud\Config\Scripts" WiFiProfile.xml /ndl /njh /njs /b /np /r:0 /w:0
     }
@@ -279,7 +279,7 @@ title OSD $OSDVersion
 PowerShell -Nol -C $InitializeOSDCloudStartnetCommand
 PowerShell -Nol -C Initialize-OSDCloudStartnetUpdate
 "@
-    Write-Host -ForegroundColor DarkGray "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Startnet.cmd: Reset to defaults"
+    Write-Host -ForegroundColor DarkGray "[$(Get-Date -format G)] Startnet.cmd: Reset to defaults"
     $StartnetCMD
     $StartnetCMD | Out-File -FilePath "$MountPath\Windows\System32\Startnet.cmd" -Encoding ascii -Width 2000 -Force
     #endregion
@@ -289,14 +289,14 @@ PowerShell -Nol -C Initialize-OSDCloudStartnetUpdate
         Write-Warning "The StartPSCommand parameter is adding your Cloud PowerShell script to Startnet.cmd"
         Write-Warning "This must be set every time you run Edit-OSDCloudWinPE or it will revert back to defaults"
 
-        Write-Host -ForegroundColor DarkGray "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Startnet.cmd: start /wait PowerShell -NoL -C `"$StartPSCommand`""
+        Write-Host -ForegroundColor DarkGray "[$(Get-Date -format G)] Startnet.cmd: start /wait PowerShell -NoL -C `"$StartPSCommand`""
         Add-Content -Path "$MountPath\Windows\System32\Startnet.cmd" -Value "start /wait PowerShell -NoL -C `"$StartPSCommand`"" -Force
     }
     #endregion
     
     #region Startup Parameter: StartURL
     if ($StartURL) {
-        Write-Host -ForegroundColor DarkGray "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Startnet.cmd: Launch URL on WinPE Startup"
+        Write-Host -ForegroundColor DarkGray "[$(Get-Date -format G)] Startnet.cmd: Launch URL on WinPE Startup"
 
         Write-Host '@ECHO OFF'
         Add-Content -Path "$MountPath\Windows\System32\Startnet.cmd" -Value '@ECHO OFF' -Force
@@ -314,7 +314,7 @@ PowerShell -Nol -C Initialize-OSDCloudStartnetUpdate
 
     #region Startup Parameter: StartOSDCloud
     if ($StartOSDCloud) {
-        Write-Host -ForegroundColor DarkGray "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Startnet.cmd: Launch Start-OSDCloud on WinPE Startup"
+        Write-Host -ForegroundColor DarkGray "[$(Get-Date -format G)] Startnet.cmd: Launch Start-OSDCloud on WinPE Startup"
 
         Write-Host '@ECHO OFF'
         Add-Content -Path "$MountPath\Windows\System32\Startnet.cmd" -Value '@ECHO OFF' -Force
@@ -332,7 +332,7 @@ PowerShell -Nol -C Initialize-OSDCloudStartnetUpdate
 
     #region Startup Parameter: StartOSDCloudGUI
     if ($StartOSDCloudGUI) {
-        Write-Host -ForegroundColor DarkGray "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Startnet.cmd: Launch Start-OSDCloudGUI on WinPE Startup"
+        Write-Host -ForegroundColor DarkGray "[$(Get-Date -format G)] Startnet.cmd: Launch Start-OSDCloudGUI on WinPE Startup"
 
         Write-Host '@ECHO OFF'
         Add-Content -Path "$MountPath\Windows\System32\Startnet.cmd" -Value '@ECHO OFF' -Force
@@ -353,7 +353,7 @@ PowerShell -Nol -C Initialize-OSDCloudStartnetUpdate
         Write-Warning "The StartOSDPad parameter is adding OSDPad to Startnet.cmd"
         Write-Warning "This must be set every time you run Edit-OSDCloudWinPE or it will revert back to defaults"
         
-        Write-Host -ForegroundColor DarkGray "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Startnet.cmd: start /wait PowerShell -NoL -C OSDPad $StartOSDPad"
+        Write-Host -ForegroundColor DarkGray "[$(Get-Date -format G)] Startnet.cmd: start /wait PowerShell -NoL -C OSDPad $StartOSDPad"
         Add-Content -Path "$MountPath\Windows\System32\Startnet.cmd" -Value '@ECHO OFF' -Force
         Add-Content -Path "$MountPath\Windows\System32\Startnet.cmd" -Value 'ECHO OSDPad' -Force
         Add-Content -Path "$MountPath\Windows\System32\Startnet.cmd" -Value '@ECHO ON' -Force
@@ -375,7 +375,7 @@ PowerShell -Nol -C Initialize-OSDCloudStartnetUpdate
         #Do Nothing
     }
     else {
-        Write-Host -ForegroundColor DarkGray "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Startnet.cmd: Start PowerShell in new Window"
+        Write-Host -ForegroundColor DarkGray "[$(Get-Date -format G)] Startnet.cmd: Start PowerShell in new Window"
         Write-Host '@ECHO OFF'
         Add-Content -Path "$MountPath\Windows\System32\Startnet.cmd" -Value '@ECHO OFF' -Force
         Write-Host 'start PowerShell -NoL'
@@ -388,7 +388,7 @@ PowerShell -Nol -C Initialize-OSDCloudStartnetUpdate
         $Wallpaper = Join-Path (Get-Module -Name OSD -ListAvailable | Sort-Object Version -Descending | Select-Object -First 1).ModuleBase "Resources\Images\OSDCloud.jpg"
     }
     if ($Wallpaper) {
-        Write-Host -ForegroundColor DarkGray "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Adding Wallpaper $Wallpaper"
+        Write-Host -ForegroundColor DarkGray "[$(Get-Date -format G)] Adding Wallpaper $Wallpaper"
         Copy-Item -Path $Wallpaper -Destination "$env:TEMP\winpe.jpg" -Force | Out-Null
         Copy-Item -Path $Wallpaper -Destination "$env:TEMP\winre.jpg" -Force | Out-Null
         robocopy "$env:TEMP" "$MountPath\Windows\System32" winpe.jpg /ndl /njh /njs /b /np /r:0 /w:0
@@ -398,7 +398,7 @@ PowerShell -Nol -C Initialize-OSDCloudStartnetUpdate
 
     #region Add7Zip
     if ($PSBoundParameters.ContainsKey('Add7Zip')) {
-        Write-Host -ForegroundColor Yellow "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Adding 7zip (7za.exe) to WinPE"
+        Write-Host -ForegroundColor Yellow "[$(Get-Date -format G)] Adding 7zip (7za.exe) to WinPE"
         Add-7Zip2BootImage
     }   
     #endregion
@@ -406,22 +406,22 @@ PowerShell -Nol -C Initialize-OSDCloudStartnetUpdate
     #region CMTrace
     #Copy CMTrace from WorkSpace to WinPE - Gary Blok 25.1.22
     if (Test-Path "$WorkspacePath\cmtrace.exe") {
-        Write-Host -ForegroundColor DarkGray "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Copy CMTrace from WorkSpace to WinPE"
+        Write-Host -ForegroundColor DarkGray "[$(Get-Date -format G)] Copy CMTrace from WorkSpace to WinPE"
         Copy-Item -Path "$WorkspacePath\cmtrace.exe" -Destination "$env:TEMP\cmtrace.exe" -Force | Out-Null
         robocopy "$env:TEMP" "$MountPath\Windows\System32" cmtrace.exe /ndl /njh /njs /b /np /r:0 /w:0
     }
     #endregion
     #region OSD PowerShell Module
-    Write-Host -ForegroundColor DarkGray "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Saving OSD Module to X:\Program Files\WindowsPowerShell\Modules"
+    Write-Host -ForegroundColor DarkGray "[$(Get-Date -format G)] Saving OSD Module to X:\Program Files\WindowsPowerShell\Modules"
     Save-Module -Name OSD -Path "$MountPath\Program Files\WindowsPowerShell\Modules" -Force
     #endregion
 
     #region Azure PowerShell Modules
     if ($AddAzure.IsPresent) {
-        Write-Host -ForegroundColor DarkGray "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Saving Azure Modules to X:\Program Files\WindowsPowerShell\Modules"
+        Write-Host -ForegroundColor DarkGray "[$(Get-Date -format G)] Saving Azure Modules to X:\Program Files\WindowsPowerShell\Modules"
         Save-Module -Name Az.Accounts -Path "$MountPath\Program Files\WindowsPowerShell\Modules" -Force
         Save-Module -Name Az.Storage -Path "$MountPath\Program Files\WindowsPowerShell\Modules" -Force
-        Write-Host -ForegroundColor DarkGray "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Saving AzCopy to X:\Windows"
+        Write-Host -ForegroundColor DarkGray "[$(Get-Date -format G)] Saving AzCopy to X:\Windows"
         $AzCopy = Save-WebFile -SourceUrl (Invoke-WebRequest -UseBasicParsing 'https://aka.ms/downloadazcopy-v10-windows' -MaximumRedirection 0 -ErrorAction SilentlyContinue).headers.location
         if ($AzCopy) {
             Expand-Archive -Path $AzCopy.FullName -DestinationPath $env:windir\Temp\AzCopy -Force
@@ -432,7 +432,7 @@ PowerShell -Nol -C Initialize-OSDCloudStartnetUpdate
 
     #region AWS PowerShell Modules
     if ($AddAws.IsPresent) {
-        Write-Host -ForegroundColor DarkGray "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Saving AWS Modules to X:\Program Files\WindowsPowerShell\Modules"
+        Write-Host -ForegroundColor DarkGray "[$(Get-Date -format G)] Saving AWS Modules to X:\Program Files\WindowsPowerShell\Modules"
         Save-Module -Name AWS.Tools.Common "$MountPath\Program Files\WindowsPowerShell\Modules" -Force
         Save-Module -Name AWS.Tools.S3 -Path "$MountPath\Program Files\WindowsPowerShell\Modules" -Force
     }
@@ -442,20 +442,20 @@ PowerShell -Nol -C Initialize-OSDCloudStartnetUpdate
     foreach ($Module in $PSModuleInstall) {
         if ($Module -eq 'DellBiosProvider') {
             if (Test-Path "$env:SystemRoot\System32\msvcp140.dll") {
-                Write-Host -ForegroundColor DarkGray "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Copying $env:SystemRoot\System32\msvcp140.dll to WinPE"
+                Write-Host -ForegroundColor DarkGray "[$(Get-Date -format G)] Copying $env:SystemRoot\System32\msvcp140.dll to WinPE"
                 Copy-Item -Path "$env:SystemRoot\System32\msvcp140.dll" -Destination "$MountPath\Windows\System32\msvcp140.dll" -Force | Out-Null
             }
             if (Test-Path "$env:SystemRoot\System32\vcruntime140.dll") {
-                Write-Host -ForegroundColor DarkGray "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Copying $env:SystemRoot\System32\vcruntime140.dll to WinPE"
+                Write-Host -ForegroundColor DarkGray "[$(Get-Date -format G)] Copying $env:SystemRoot\System32\vcruntime140.dll to WinPE"
                 Copy-Item -Path "$env:SystemRoot\System32\vcruntime140.dll" -Destination "$MountPath\Windows\System32\vcruntime140.dll" -Force | Out-Null
             }
             if (Test-Path "$env:SystemRoot\System32\vcruntime140_1.dll") {
-                Write-Host -ForegroundColor DarkGray "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Copying $env:SystemRoot\System32\vcruntime140_1.dll to WinPE"
+                Write-Host -ForegroundColor DarkGray "[$(Get-Date -format G)] Copying $env:SystemRoot\System32\vcruntime140_1.dll to WinPE"
                 Copy-Item -Path "$env:SystemRoot\System32\vcruntime140_1.dll" -Destination "$MountPath\Windows\System32\vcruntime140_1.dll" -Force | Out-Null
             }
         }
         
-        Write-Host -ForegroundColor DarkGray "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Saving $Module to $MountPath\Program Files\WindowsPowerShell\Modules"
+        Write-Host -ForegroundColor DarkGray "[$(Get-Date -format G)] Saving $Module to $MountPath\Program Files\WindowsPowerShell\Modules"
         if ($Module -eq 'HPCMSL'){
             Save-Module -Name $Module -Path "$MountPath\Program Files\WindowsPowerShell\Modules" -Force -AcceptLicense
         }
@@ -467,7 +467,7 @@ PowerShell -Nol -C Initialize-OSDCloudStartnetUpdate
 
     #region PSModuleCopy
     foreach ($Module in $PSModuleCopy) {
-        Write-Host -ForegroundColor DarkGray "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Copy-PSModuleToWindowsImage -Name $Module -Path $MountPath"
+        Write-Host -ForegroundColor DarkGray "[$(Get-Date -format G)] Copy-PSModuleToWindowsImage -Name $Module -Path $MountPath"
         Copy-PSModuleToWindowsImage -Name $Module -Path $MountPath
     }
     #endregion
@@ -478,7 +478,7 @@ PowerShell -Nol -C Initialize-OSDCloudStartnetUpdate
 
     #region Create OSDCloud ISOs
     Write-Host -ForegroundColor DarkGray "========================================================================="
-    Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Create OSDCloud Workspace ISOs"
+    Write-Host -ForegroundColor Cyan "[$(Get-Date -format G)] Create OSDCloud Workspace ISOs"
     New-OSDCloudISO
     #endregion
 
@@ -488,7 +488,7 @@ PowerShell -Nol -C Initialize-OSDCloudStartnetUpdate
     
         if ($WinpeVolumes) {
             foreach ($WinpeVolume in $WinpeVolumes) {
-                Write-Host -ForegroundColor DarkGray "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Copying $WorkspacePath\Media to $($WinpeVolume):\"
+                Write-Host -ForegroundColor DarkGray "[$(Get-Date -format G)] Copying $WorkspacePath\Media to $($WinpeVolume):\"
                 robocopy "$WorkspacePath\Media" "$($WinpeVolume):\" *.* /e /ndl /np /njh /njs /b /r:0 /w:0 /zb /xd "$RECYCLE.BIN" "System Volume Information"
             }
         }
@@ -498,8 +498,8 @@ PowerShell -Nol -C Initialize-OSDCloudStartnetUpdate
     #region Complete
     $WinpeEndTime = Get-Date
     $WinpeTimeSpan = New-TimeSpan -Start $WinpeStartTime -End $WinpeEndTime
-    Write-Host -ForegroundColor DarkGray    "================================================"
-    Write-Host -ForegroundColor Yellow      "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) $($MyInvocation.MyCommand.Name) " -NoNewline
-    Write-Host -ForegroundColor Cyan        "Completed in $($WinpeTimeSpan.ToString("mm' minutes 'ss' seconds'"))"
+    Write-Host -ForegroundColor DarkGray "================================================"
+    Write-Host -ForegroundColor Yellow "[$(Get-Date -format G)] $($MyInvocation.MyCommand.Name) " -NoNewline
+    Write-Host -ForegroundColor Cyan "Completed in $($WinpeTimeSpan.ToString("mm' minutes 'ss' seconds'"))"
     #endregion
 }

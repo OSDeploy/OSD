@@ -30,7 +30,7 @@ function Get-OSDCloudWorkspace {
         $WorkspacePath
     }
     else {
-        Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Unable to locate $env:ProgramData\OSDCloud\workspace.json"
+        Write-Warning "[$(Get-Date -format G)] Unable to locate $env:ProgramData\OSDCloud\workspace.json"
     }
     #endregion
 }
@@ -103,25 +103,25 @@ function New-OSDCloudWorkspace {
         $OSDCloudTemplate = Get-OSDCloudTemplate -ErrorAction Stop
     
         if (-NOT ($OSDCloudTemplate)) {
-            Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Unable to find an OSDCloud Template at $OSDCloudTemplate"
+            Write-Warning "[$(Get-Date -format G)] Unable to find an OSDCloud Template at $OSDCloudTemplate"
             Break
         }
     
         if (-NOT (Test-Path $OSDCloudTemplate)) {
-            Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Unable to find an OSDCloud Template at $OSDCloudTemplate"
+            Write-Warning "[$(Get-Date -format G)] Unable to find an OSDCloud Template at $OSDCloudTemplate"
             Break
         }
         #=================================================
         #	Remove Old Autopilot Content
         #=================================================
         if (Test-Path "$(Get-OSDCloudTemplate)\Autopilot") {
-            Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Move all your Autopilot Profiles to $(Get-OSDCloudTemplate)\Config\AutopilotJSON"
-            Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) You will be unable to create or update an OSDCloud Workspace until $(Get-OSDCloudTemplate)\Autopilot is manually removed"
+            Write-Warning "[$(Get-Date -format G)] Move all your Autopilot Profiles to $(Get-OSDCloudTemplate)\Config\AutopilotJSON"
+            Write-Warning "[$(Get-Date -format G)] You will be unable to create or update an OSDCloud Workspace until $(Get-OSDCloudTemplate)\Autopilot is manually removed"
             Break
         }
         if (Test-Path "$WorkspacePath\Autopilot") {
-            Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Move all your Autopilot Profiles to $WorkspacePath\Config\AutopilotJSON"
-            Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) You will be unable to create or update an OSDCloud Workspace until $WorkspacePath\Autopilot is manually removed"
+            Write-Warning "[$(Get-Date -format G)] Move all your Autopilot Profiles to $WorkspacePath\Config\AutopilotJSON"
+            Write-Warning "[$(Get-Date -format G)] You will be unable to create or update an OSDCloud Workspace until $WorkspacePath\Autopilot is manually removed"
             Break
         }
     }
@@ -136,8 +136,8 @@ function New-OSDCloudWorkspace {
             #Do nothing
         }
         else {
-            Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Unable to get the properties of $fromIsoFile"
-            Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Something went very very wrong in this process"
+            Write-Warning "[$(Get-Date -format G)] Unable to get the properties of $fromIsoFile"
+            Write-Warning "[$(Get-Date -format G)] Something went very very wrong in this process"
             Break
         }
         #=================================================
@@ -145,7 +145,7 @@ function New-OSDCloudWorkspace {
         #=================================================
         $Volumes = (Get-Volume).Where({$_.DriveLetter}).DriveLetter
 
-        Write-Host -ForegroundColor DarkGray "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Mounting OSDCloudISO at $fromIsoFileFullName"
+        Write-Host -ForegroundColor DarkGray "[$(Get-Date -format G)] Mounting OSDCloudISO at $fromIsoFileFullName"
         $MountDiskImage = Mount-DiskImage -ImagePath $fromIsoFileFullName
         Start-Sleep -Seconds 3
         $MountDiskImageDriveLetter = (Compare-Object -ReferenceObject $Volumes -DifferenceObject (Get-Volume).Where({$_.DriveLetter}).DriveLetter).InputObject
@@ -154,8 +154,8 @@ function New-OSDCloudWorkspace {
             $WinpeSourcePath = "$($MountDiskImageDriveLetter):\"
         }
         else {
-            Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Unable to mount $MountDiskImage"
-            Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Something went very very wrong in this process"
+            Write-Warning "[$(Get-Date -format G)] Unable to mount $MountDiskImage"
+            Write-Warning "[$(Get-Date -format G)] Something went very very wrong in this process"
             Break
         }
     }
@@ -172,11 +172,11 @@ function New-OSDCloudWorkspace {
         $fromIsoFileFullName = $fromIsoFileGetItem.FullName
     
         if ($fromIsoFileGetItem -and $fromIsoFileGetItem.Extension -eq '.iso') {
-            Write-Host -ForegroundColor DarkGray "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) OSDCloudISO downloaded to $fromIsoFileFullName"
+            Write-Host -ForegroundColor DarkGray "[$(Get-Date -format G)] OSDCloudISO downloaded to $fromIsoFileFullName"
         }
         else {
-            Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Unable to download OSDCloudISO"
-            Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Something went very very wrong in this process"
+            Write-Warning "[$(Get-Date -format G)] Unable to download OSDCloudISO"
+            Write-Warning "[$(Get-Date -format G)] Something went very very wrong in this process"
             Break
         }
         #=================================================
@@ -184,7 +184,7 @@ function New-OSDCloudWorkspace {
         #=================================================
         $Volumes = (Get-Volume).Where({$_.DriveLetter}).DriveLetter
 
-        Write-Host -ForegroundColor DarkGray "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Mounting OSDCloudISO"
+        Write-Host -ForegroundColor DarkGray "[$(Get-Date -format G)] Mounting OSDCloudISO"
         $MountDiskImage = Mount-DiskImage -ImagePath $fromIsoFileFullName
         Start-Sleep -Seconds 3
         $MountDiskImageDriveLetter = (Compare-Object -ReferenceObject $Volumes -DifferenceObject (Get-Volume).Where({$_.DriveLetter}).DriveLetter).InputObject
@@ -193,8 +193,8 @@ function New-OSDCloudWorkspace {
             $WinpeSourcePath = "$($MountDiskImageDriveLetter):\"
         }
         else {
-            Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Unable to mount $MountDiskImage"
-            Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Something went very very wrong in this process"
+            Write-Warning "[$(Get-Date -format G)] Unable to mount $MountDiskImage"
+            Write-Warning "[$(Get-Date -format G)] Something went very very wrong in this process"
             Break
         }
     }
@@ -207,10 +207,10 @@ function New-OSDCloudWorkspace {
         #=================================================
         $UsbVolumes = Get-USBVolume
         if ($UsbVolumes) {
-            Write-Host -ForegroundColor DarkGray "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) USB volumes found"
+            Write-Host -ForegroundColor DarkGray "[$(Get-Date -format G)] USB volumes found"
         }
         else {
-            Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Unable to find any USB Volumes"
+            Write-Warning "[$(Get-Date -format G)] Unable to find any USB Volumes"
             Get-Help New-OSDCloudUSB -Examples
             Break
         }
@@ -219,18 +219,18 @@ function New-OSDCloudWorkspace {
 
     #region Validate
     if (Test-Path $WorkspacePath) {
-        Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) OSDCloud Workspace already exists at $WorkspacePath"
-        Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Content will be merged and overwritten"
-        Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Press Ctrl+C to cancel in the next 5 seconds"
+        Write-Warning "[$(Get-Date -format G)] OSDCloud Workspace already exists at $WorkspacePath"
+        Write-Warning "[$(Get-Date -format G)] Content will be merged and overwritten"
+        Write-Warning "[$(Get-Date -format G)] Press Ctrl+C to cancel in the next 5 seconds"
         Start-Sleep -Seconds 5
     }
     else {
-        Write-Host -ForegroundColor DarkGray "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) New-Item $WorkspacePath"
+        Write-Host -ForegroundColor DarkGray "[$(Get-Date -format G)] New-Item $WorkspacePath"
         try {
             $null = New-Item -Path $WorkspacePath -ItemType Directory -Force -ErrorAction Stop
         }
         catch {
-            Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Unable to create an OSDCloud Workspace at $WorkspacePath"
+            Write-Warning "[$(Get-Date -format G)] Unable to create an OSDCloud Workspace at $WorkspacePath"
             Break
         }
     }
@@ -238,7 +238,7 @@ function New-OSDCloudWorkspace {
 
     #region Logs and Transcript
     $WorkspaceLogs = "$WorkspacePath\Logs\Workspace"
-    Write-Verbose "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Creating OSDCloud Workspace Logs at $WorkspaceLogs"
+    Write-Verbose "[$(Get-Date -format G)] Creating OSDCloud Workspace Logs at $WorkspaceLogs"
 
     if (Test-Path $WorkspaceLogs) {
         $null = Remove-Item -Path "$WorkspaceLogs\*" -Recurse -Force -ErrorAction Ignore | Out-Null
@@ -256,19 +256,19 @@ function New-OSDCloudWorkspace {
         #=================================================
         #	Copy WorkspacePath
         #=================================================
-        Write-Host -ForegroundColor DarkGray "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Copying from OSDCloud Template at $OSDCloudTemplate"
-        Write-Verbose "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Source: $OSDCloudTemplate"
-        Write-Verbose "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Destination: $WorkspacePath"
+        Write-Host -ForegroundColor DarkGray "[$(Get-Date -format G)] Copying from OSDCloud Template at $OSDCloudTemplate"
+        Write-Verbose "[$(Get-Date -format G)] Source: $OSDCloudTemplate"
+        Write-Verbose "[$(Get-Date -format G)] Destination: $WorkspacePath"
     
         $null = robocopy "$OSDCloudTemplate" "$WorkspacePath" *.* /e /b /ndl /np /r:0 /w:0 /xj /xf workspace.json /LOG+:$WorkspaceLogs\Robocopy.log
         #=================================================
         #	Mirror Media
         #=================================================
-        Write-Verbose "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Mirroring OSDCloud Template Media using Robocopy"
-        Write-Verbose "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Mirroring will replace any previous WinPE with a new Template WinPE"
-        Write-Verbose "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Directories named OSDCloud are updated"
-        Write-Verbose "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Source: $OSDCloudTemplate\Media"
-        Write-Verbose "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Destination: $WorkspacePath\Media"
+        Write-Verbose "[$(Get-Date -format G)] Mirroring OSDCloud Template Media using Robocopy"
+        Write-Verbose "[$(Get-Date -format G)] Mirroring will replace any previous WinPE with a new Template WinPE"
+        Write-Verbose "[$(Get-Date -format G)] Directories named OSDCloud are updated"
+        Write-Verbose "[$(Get-Date -format G)] Source: $OSDCloudTemplate\Media"
+        Write-Verbose "[$(Get-Date -format G)] Destination: $WorkspacePath\Media"
 
         $null = robocopy "$OSDCloudTemplate\Media\OSDCloud" "$WorkspacePath\Media\OSDCloud" *.* /e /b /ndl /np /r:0 /w:0 /xj /LOG+:$WorkspaceLogs\Robocopy.log
         $null = robocopy "$OSDCloudTemplate\Media" "$WorkspacePath\Media" *.* /mir /b /ndl /np /r:0 /w:0 /xj /LOG+:$WorkspaceLogs\Robocopy.log /XD OSDCloud
@@ -282,13 +282,13 @@ function New-OSDCloudWorkspace {
         if ($WinpeVolumes) {
             foreach ($WinpeVolume in $WinpeVolumes) {
                 if (Test-Path -Path "$($WinPEVolume.DriveLetter):\") {
-                    Write-Host -ForegroundColor DarkGray "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Copying OSDCloud WinPE volume at $($WinPEVolume.DriveLetter):\ to $WorkspacePath\Media"
+                    Write-Host -ForegroundColor DarkGray "[$(Get-Date -format G)] Copying OSDCloud WinPE volume at $($WinPEVolume.DriveLetter):\ to $WorkspacePath\Media"
                     robocopy "$($WinPEVolume.DriveLetter):\" "$WorkspacePath\Media" *.* /e /ndl /njh /njs /np /r:0 /w:0 /xd "$RECYCLE.BIN" "System Volume Information"
                 }
             }
         }
         else {
-            Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Unable to find an OSDCloud USB WinPE volume"
+            Write-Warning "[$(Get-Date -format G)] Unable to find an OSDCloud USB WinPE volume"
             Break
         }
     
@@ -298,29 +298,29 @@ function New-OSDCloudWorkspace {
             foreach ($OSDCloudVolume in $OSDCloudVolumes) {
                 if (! $Public) {
                     if (Test-Path "$($OSDCloudVolume.DriveLetter):\OSDCloud\Config") {
-                        Write-Host -ForegroundColor DarkGray "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Copying $($OSDCloudVolume.DriveLetter):\OSDCloud\Config to OSDCloud Workspace $WorkspacePath\Config"
+                        Write-Host -ForegroundColor DarkGray "[$(Get-Date -format G)] Copying $($OSDCloudVolume.DriveLetter):\OSDCloud\Config to OSDCloud Workspace $WorkspacePath\Config"
                         robocopy "$($OSDCloudVolume.DriveLetter):\OSDCloud\Config" "$WorkspacePath\Config" *.* /e /mt /ndl /njh /njs /r:0 /w:0 /xd "$RECYCLE.BIN" "System Volume Information"
                     }
                 }
     
                 if (Test-Path "$($OSDCloudVolume.DriveLetter):\OSDCloud\DriverPacks") {
-                    Write-Host -ForegroundColor DarkGray "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Copying $($OSDCloudVolume.DriveLetter):\OSDCloud\DriverPacks to OSDCloud Workspace $WorkspacePath\DriverPacks"
+                    Write-Host -ForegroundColor DarkGray "[$(Get-Date -format G)] Copying $($OSDCloudVolume.DriveLetter):\OSDCloud\DriverPacks to OSDCloud Workspace $WorkspacePath\DriverPacks"
                     robocopy "$($OSDCloudVolume.DriveLetter):\OSDCloud\DriverPacks" "$WorkspacePath\DriverPacks" *.* /e /mt /ndl /njh /njs /r:0 /w:0 /xd "$RECYCLE.BIN" "System Volume Information"
                 }
     
                 if (Test-Path "$($OSDCloudVolume.DriveLetter):\OSDCloud\OS") {
-                    Write-Host -ForegroundColor DarkGray "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Copying $($OSDCloudVolume.DriveLetter):\OSDCloud\OS to OSDCloud Workspace $WorkspacePath\OS"
+                    Write-Host -ForegroundColor DarkGray "[$(Get-Date -format G)] Copying $($OSDCloudVolume.DriveLetter):\OSDCloud\OS to OSDCloud Workspace $WorkspacePath\OS"
                     robocopy "$($OSDCloudVolume.DriveLetter):\OSDCloud\OS" "$WorkspacePath\OS" *.* /e /mt /ndl /njh /njs /r:0 /w:0 /xd "$RECYCLE.BIN" "System Volume Information"
                 }
     
                 if (Test-Path "$($OSDCloudVolume.DriveLetter):\OSDCloud\PowerShell") {
-                    Write-Host -ForegroundColor DarkGray "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Copying $($OSDCloudVolume.DriveLetter):\OSDCloud\PowerShell to OSDCloud Workspace $WorkspacePath\PowerShell"
+                    Write-Host -ForegroundColor DarkGray "[$(Get-Date -format G)] Copying $($OSDCloudVolume.DriveLetter):\OSDCloud\PowerShell to OSDCloud Workspace $WorkspacePath\PowerShell"
                     robocopy "$($OSDCloudVolume.DriveLetter):\OSDCloud\PowerShell" "$WorkspacePath\PowerShell" *.* /e /mt /ndl /njh /njs /r:0 /w:0 /xd "$RECYCLE.BIN" "System Volume Information"
                 }
             }
         }
         else {
-            Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Unable to find an OSDCloud USB volume"
+            Write-Warning "[$(Get-Date -format G)] Unable to find an OSDCloud USB volume"
             Break
         }
     }
@@ -329,17 +329,17 @@ function New-OSDCloudWorkspace {
         #	Test WinpeSourcePath
         #=================================================
         if (-NOT ($WinpeSourcePath)) {
-            Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Unable to find an OSDCloud Media"
+            Write-Warning "[$(Get-Date -format G)] Unable to find an OSDCloud Media"
             Break
         }
     
         if (-NOT (Test-Path $WinpeSourcePath)) {
-            Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Unable to find an OSDCloud Media at $WinpeSourcePath"
+            Write-Warning "[$(Get-Date -format G)] Unable to find an OSDCloud Media at $WinpeSourcePath"
             Break
         }
     
         if (-NOT (Test-Path "$WinpeSourcePath\sources\boot.wim")) {
-            Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Unable to find an OSDCloud WinPE at $WinpeSourcePath\sources\boot.wim"
+            Write-Warning "[$(Get-Date -format G)] Unable to find an OSDCloud WinPE at $WinpeSourcePath\sources\boot.wim"
             Break
         }
         $WinpeDestinationPath = "$WorkspacePath\Media"
@@ -350,7 +350,7 @@ function New-OSDCloudWorkspace {
         #	Update WinPE Volume
         #=================================================
         if ((Test-Path -Path "$WinpeSourcePath") -and (Test-Path -Path "$WinpeDestinationPath")) {
-            Write-Host -ForegroundColor DarkGray "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Copying $WinpeSourcePath to $WinpeDestinationPath"
+            Write-Host -ForegroundColor DarkGray "[$(Get-Date -format G)] Copying $WinpeSourcePath to $WinpeDestinationPath"
             robocopy "$WinpeSourcePath" "$WinpeDestinationPath" *.* /e /ndl /njh /njs /np /r:0 /w:0 /b /zb
         }
     }
@@ -367,7 +367,7 @@ function New-OSDCloudWorkspace {
     #region Dismount OSDCloudISO
     if ($MountDiskImage) {
         Start-Sleep -Seconds 3
-        Write-Host -ForegroundColor DarkGray "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Dismounting $($MountDiskImage.ImagePath)"
+        Write-Host -ForegroundColor DarkGray "[$(Get-Date -format G)] Dismounting $($MountDiskImage.ImagePath)"
         $null = Dismount-DiskImage -ImagePath $MountDiskImage.ImagePath
     }
     #endregion
@@ -383,7 +383,7 @@ function New-OSDCloudWorkspace {
     Write-Host -ForegroundColor Yellow "Set a default OSDCloud Workspace:       " -NoNewline
     Write-Host -ForegroundColor Gray "Set-OSDCloudWorkspace C:\OSDCloud2"
     Write-Host -ForegroundColor DarkGray "========================================================================="
-    Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) New-OSDCloudWorkspace created at $WorkspacePath"
+    Write-Host -ForegroundColor Cyan "[$(Get-Date -format G)] New-OSDCloudWorkspace created at $WorkspacePath"
     $null = Stop-Transcript -ErrorAction Ignore
     #endregion
 }

@@ -123,7 +123,7 @@ $Global:TpmCloud = [ordered]@{
 
 function Get-Win32Tpm {
     Write-Host -ForegroundColor DarkGray '========================================================================='
-    Write-Host "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Get Win32_Tpm" -ForegroundColor Cyan
+    Write-Host "[$(Get-Date -format G)] Get Win32_Tpm" -ForegroundColor Cyan
     Write-Host "Get-CimInstance -Namespace $($Global:TpmCloudConfig.TpmNamespace) -ClassName $($Global:TpmCloudConfig.TpmClass)" -ForegroundColor DarkGray
 
     $Global:TpmCloud.Win32Tpm = Get-CimInstance -Namespace $($Global:TpmCloudConfig.TpmNamespace) -ClassName $($Global:TpmCloudConfig.TpmClass) -ErrorAction SilentlyContinue
@@ -142,7 +142,7 @@ function Get-Win32Tpm {
 }
 function Test-Win32Tpm {
     Write-Host -ForegroundColor DarkGray '========================================================================='
-    Write-Host "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Test Win32_Tpm" -ForegroundColor Cyan
+    Write-Host "[$(Get-Date -format G)] Test Win32_Tpm" -ForegroundColor Cyan
 
     if ($Global:TpmCloud.Win32Tpm.IsEnabled_InitialValue -ne $true) {
         Write-Warning "TPM is not enabled."
@@ -184,7 +184,7 @@ function Test-Win32Tpm {
 }
 function Test-Win32TpmIsReady {
     Write-Host -ForegroundColor DarkGray '========================================================================='
-    Write-Host "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Get Win32_Tpm IsReadyInformation" -ForegroundColor Cyan
+    Write-Host "[$(Get-Date -format G)] Get Win32_Tpm IsReadyInformation" -ForegroundColor Cyan
     $Global:TpmCloud.GetTpmIsReadyInformation = Get-CimInstance -Namespace $($Global:TpmCloudConfig.TpmNamespace) -ClassName $($Global:TpmCloudConfig.TpmClass) -ErrorAction SilentlyContinue | Invoke-CimMethod -MethodName 'IsReadyInformation'
     $Global:TpmCloud.GetTpmIsReadyInformation
     if ($Global:TpmCloud.GetTpmIsReadyInformation.Information -eq '0') {
@@ -217,7 +217,7 @@ function Test-Win32TpmIsReady {
 
 function Test-TpmToolGetDeviceInformation {
     Write-Host -ForegroundColor DarkGray '========================================================================='
-    Write-Host "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Test tpmtool.exe GetDeviceInformation" -ForegroundColor Cyan
+    Write-Host "[$(Get-Date -format G)] Test tpmtool.exe GetDeviceInformation" -ForegroundColor Cyan
     $Global:TpmCloud.TpmToolGetDeviceInformation = tpmtool.exe GetDeviceInformation
     if ($Global:TpmCloud.TpmToolGetDeviceInformation) {
         $Global:TpmCloud.TpmToolGetDeviceInformation
@@ -235,7 +235,7 @@ function Test-TpmToolGetDeviceInformation {
 }
 function Test-TpmMaintenanceTaskComplete {
     Write-Host -ForegroundColor DarkGray '========================================================================='
-    Write-Host "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Test TPM Maintenance Task Complete" -ForegroundColor Cyan
+    Write-Host "[$(Get-Date -format G)] Test TPM Maintenance Task Complete" -ForegroundColor Cyan
     if ($Global:TpmCloud.TpmMaintenanceTaskComplete) {
         Write-Host 'Maintenance Task Complete: True' -ForegroundColor DarkGray
     }
@@ -249,13 +249,13 @@ function Test-TpmMaintenanceTaskComplete {
 }
 function Test-TpmCertReqEnrollAIK {
     Write-Host -ForegroundColor DarkGray '========================================================================='
-    Write-Host "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) CertReq -EnrollAIK -Config `"`"" -ForegroundColor Cyan
+    Write-Host "[$(Get-Date -format G)] CertReq -EnrollAIK -Config `"`"" -ForegroundColor Cyan
     CertReq -EnrollAIK -Config `"`"
 }
 function Test-RegistryEKCertificates {
     Write-Host -ForegroundColor DarkGray '========================================================================='
     $RegistryPath = $Global:TpmCloudConfig.EKCertificatesRegPath
-    Write-Host "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Test EKCert in the Registry" -ForegroundColor Cyan
+    Write-Host "[$(Get-Date -format G)] Test EKCert in the Registry" -ForegroundColor Cyan
     Write-Host "$RegistryPath" -ForegroundColor DarkGray
 
     if (Test-Path -Path $RegistryPath) {
@@ -269,7 +269,7 @@ function Test-RegistryEKCertificates {
 function Test-RegistryWBCL {
     Write-Host -ForegroundColor DarkGray '========================================================================='
     $RegistryPath = 'HKLM:\SYSTEM\CurrentControlSet\Control\IntegrityServices'
-    Write-Host "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Test Windows Boot Configuration Log in the Registry" -ForegroundColor Cyan
+    Write-Host "[$(Get-Date -format G)] Test Windows Boot Configuration Log in the Registry" -ForegroundColor Cyan
     Write-Host "$RegistryPath" -ForegroundColor DarkGray
 
     if (Test-Path -Path $RegistryPath) {
@@ -293,7 +293,7 @@ function Test-RegistryWBCL {
 function Test-RegistrySetupDisplayedEula {
     Write-Host -ForegroundColor DarkGray '========================================================================='
     $RegistryPath = 'HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Setup\OOBE'
-    Write-Host "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Test Windows OOBE SetupDisplayedEula in the Registry" -ForegroundColor Cyan
+    Write-Host "[$(Get-Date -format G)] Test Windows OOBE SetupDisplayedEula in the Registry" -ForegroundColor Cyan
     Write-Host "$RegistryPath" -ForegroundColor DarkGray
 
     if (Test-Path -Path $RegistryPath) {
@@ -317,7 +317,7 @@ function Test-RegistrySetupDisplayedEula {
 }
 function Test-AutopilotWindowsLicense {
     Write-Host -ForegroundColor DarkGray '========================================================================='
-    Write-Host "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Test Windows License for Autopilot" -ForegroundColor Cyan
+    Write-Host "[$(Get-Date -format G)] Test Windows License for Autopilot" -ForegroundColor Cyan
 
     $WindowsProductKey = (Get-WmiObject -query 'select * from SoftwareLicensingService').OA3xOriginalProductKey
     $WindowsProductType = (Get-WmiObject -query 'select * from SoftwareLicensingService').OA3xOriginalProductKeyDescription
@@ -352,14 +352,14 @@ function Test-AutopilotWindowsLicense {
 }
 function Get-MDMDiagnosticsTool {
     Write-Host -ForegroundColor DarkGray '========================================================================='
-    Write-Host "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) MDMDiagnosticsTool CollectLog" -ForegroundColor Cyan
+    Write-Host "[$(Get-Date -format G)] MDMDiagnosticsTool CollectLog" -ForegroundColor Cyan
     $MDMDiagnosticsFile = "$((Get-Date).ToString('yyyy-MM-dd-HHmmss'))-MDMDiagnosticsTool.cab"
     Write-Host "MDMDiagnosticsTool.exe -area 'DeviceEnrollment;DeviceProvisioning;AutoPilot;TPM' -cab $(Join-Path "$env:SystemRoot\Temp" $MDMDiagnosticsFile)" -ForegroundColor DarkGray
     MDMDiagnosticsTool.exe -area 'DeviceEnrollment;DeviceProvisioning;AutoPilot;TPM' -cab (Join-Path "$env:SystemRoot\Temp" $MDMDiagnosticsFile)
 }
 function Get-EKCertificates {
     Write-Host -ForegroundColor DarkGray '========================================================================='
-    Write-Host "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Get-TpmEndorsementKeyInfo - EK Certificates" -ForegroundColor Cyan
+    Write-Host "[$(Get-Date -format G)] Get-TpmEndorsementKeyInfo - EK Certificates" -ForegroundColor Cyan
     if (Get-Command -Name Get-TpmEndorsementKeyInfo -ErrorAction SilentlyContinue) {
         $TpmEndorsementKeyInfo = Get-TpmEndorsementKeyInfo
         if ($TpmEndorsementKeyInfo) {
@@ -378,20 +378,20 @@ function Get-EKCertificates {
 }
 function Get-WprLoggingStatus {
     Write-Host -ForegroundColor DarkGray '========================================================================='
-    Write-Host "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Get-WprLoggingStatus" -ForegroundColor Cyan
+    Write-Host "[$(Get-Date -format G)] Get-WprLoggingStatus" -ForegroundColor Cyan
     Write-Host "wpr.exe -status" -ForegroundColor DarkGray
     wpr.exe -status
 }
 function Stop-WprLogging {
     Write-Host -ForegroundColor DarkGray '========================================================================='
-    Write-Host "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Stop-WprLogging" -ForegroundColor Cyan
+    Write-Host "[$(Get-Date -format G)] Stop-WprLogging" -ForegroundColor Cyan
     Write-Host "wpr.exe -stop $env:SystemRoot\Temp\TraceLogs\results.etl" -ForegroundColor DarkGray
     wpr.exe -stop $env:SystemRoot\Temp\TraceLogs\results.etl
     explorer $env:SystemRoot\Temp\TraceLogs
 }
 function Start-WprLogging {
     Write-Host -ForegroundColor DarkGray '========================================================================='
-    Write-Host "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Start-WprLogging" -ForegroundColor Cyan
+    Write-Host "[$(Get-Date -format G)] Start-WprLogging" -ForegroundColor Cyan
 
 $wprp = @'
 <?xml version="1.0" encoding="utf-8"?>
@@ -509,7 +509,7 @@ function Test-MicrosoftConnection {
 #region TPM and Autopilot
 function Test-AutopilotUrl {
     Write-Host -ForegroundColor DarkGray '========================================================================='
-    Write-Host "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Test Autopilot URLs" -ForegroundColor Cyan
+    Write-Host "[$(Get-Date -format G)] Test Autopilot URLs" -ForegroundColor Cyan
     $Server = 'ztd.dds.microsoft.com'
     $Port = 443
     $Message = "Test port $Port on $Server"
@@ -545,7 +545,7 @@ function Test-AutopilotUrl {
 }
 function Test-AzuretUrl {
     Write-Host -ForegroundColor DarkGray '========================================================================='
-    Write-Host "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Test Azure URLs" -ForegroundColor Cyan
+    Write-Host "[$(Get-Date -format G)] Test Azure URLs" -ForegroundColor Cyan
     $Server = 'azure.net'
     $Port = 443
     $Message = "Test port $Port on $Server"
@@ -574,7 +574,7 @@ function Test-AzuretUrl {
 }
 function Test-TpmUrl {
     Write-Host -ForegroundColor DarkGray '========================================================================='
-    Write-Host "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Test TPM URLs" -ForegroundColor Cyan
+    Write-Host "[$(Get-Date -format G)] Test TPM URLs" -ForegroundColor Cyan
     $Server = 'ekop.intel.com'
     $Port = 443
     $Message = "Test Intel port $Port on $Server"
@@ -610,7 +610,7 @@ function Test-TpmUrl {
 }
 function Test-WindowsTimeService {
     Write-Host -ForegroundColor DarkGray '========================================================================='
-    Write-Host "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Test Windows Time Service" -ForegroundColor Cyan
+    Write-Host "[$(Get-Date -format G)] Test Windows Time Service" -ForegroundColor Cyan
     Write-Host "Get-Service -Name W32time" -ForegroundColor DarkGray
     $W32Time = Get-Service -Name W32time
     if ($W32Time.Status -eq 'Running') {
@@ -630,7 +630,7 @@ function Test-WindowsTimeService {
 #endregion
 function Export-TpmRegistry {
     Write-Host -ForegroundColor DarkGray '========================================================================='
-    Write-Host "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Export TPM Registry" -ForegroundColor Cyan
+    Write-Host "[$(Get-Date -format G)] Export TPM Registry" -ForegroundColor Cyan
     $TpmRegistryFile = "$((Get-Date).ToString('yyyy-MM-dd-HHmmss'))-TpmRegistry.reg"
     Write-Host "Exporting TPM Registry to $env:SystemRoot\Temp\$TpmRegistryFile" -ForegroundColor DarkGray
     reg export "HKLM\SYSTEM\CurrentControlSet\Services\TPM" "$env:SystemRoot\Temp\$TpmRegistryFile"

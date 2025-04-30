@@ -30,7 +30,7 @@ function Convert-FolderToIso {
     )
     #=================================================
     $Error.Clear()
-    Write-Verbose "[$((Get-Date).ToString('HH:mm:ss'))][$($MyInvocation.MyCommand)] Start"
+    Write-Verbose "[$(Get-Date -format G)] [$($MyInvocation.MyCommand)] Start"
     #=================================================
     #	Blocks
     #=================================================
@@ -49,14 +49,14 @@ function Convert-FolderToIso {
     #=================================================
     #	Variables
     #=================================================
-    Write-Verbose "[$((Get-Date).ToString('HH:mm:ss'))][$($MyInvocation.MyCommand)] folderFullName: $folderFullName"
-    Write-Verbose "[$((Get-Date).ToString('HH:mm:ss'))][$($MyInvocation.MyCommand)] isoFullName: $isoFullName"
-    Write-Verbose "[$((Get-Date).ToString('HH:mm:ss'))][$($MyInvocation.MyCommand)] isoLabel: $isoLabel"
+    Write-Verbose "[$(Get-Date -format G)] [$($MyInvocation.MyCommand)] folderFullName: $folderFullName"
+    Write-Verbose "[$(Get-Date -format G)] [$($MyInvocation.MyCommand)] isoFullName: $isoFullName"
+    Write-Verbose "[$(Get-Date -format G)] [$($MyInvocation.MyCommand)] isoLabel: $isoLabel"
     #=================================================
     #   Test if existing file exists and writable
     #=================================================
     if (Test-Path $isoFullName) {
-        Write-Warning "[$((Get-Date).ToString('HH:mm:ss'))][$($MyInvocation.MyCommand)] Delete exiting file at $isoFullName"
+        Write-Warning "[$(Get-Date -format G)] [$($MyInvocation.MyCommand)] Delete exiting file at $isoFullName"
         return
     }
 
@@ -64,7 +64,7 @@ function Convert-FolderToIso {
         New-Item -Path $isoFullName -Force -ErrorAction Stop | Out-Null
     }
     catch {
-        Write-Warning "[$((Get-Date).ToString('HH:mm:ss'))][$($MyInvocation.MyCommand)] isoFullName is not writable at $isoFullName"
+        Write-Warning "[$(Get-Date -format G)] [$($MyInvocation.MyCommand)] isoFullName is not writable at $isoFullName"
         return
     }
     finally {
@@ -85,33 +85,33 @@ function Convert-FolderToIso {
     #   oscdimg.exe
     #=================================================
     $oscdimgexe = $WindowsAdkPaths.oscdimgexe
-    Write-Verbose -Verbose "[$((Get-Date).ToString('HH:mm:ss'))][$($MyInvocation.MyCommand)] oscdimgexe: $oscdimgexe"
+    Write-Verbose -Verbose "[$(Get-Date -format G)] [$($MyInvocation.MyCommand)] oscdimgexe: $oscdimgexe"
     #=================================================
     #   Bootable
     #=================================================
     $isBootable = $true
     $folderBoot = Join-Path $folderFullName 'boot'
     if (! (Test-Path $folderBoot)) {
-        Write-Warning "[$((Get-Date).ToString('HH:mm:ss'))][$($MyInvocation.MyCommand)] folderFullName does not contain a Boot directory at $folderBoot"
+        Write-Warning "[$(Get-Date -format G)] [$($MyInvocation.MyCommand)] folderFullName does not contain a Boot directory at $folderBoot"
         $isBootable = $false
     }
     $etfsbootcom = Join-Path $folderBoot 'etfsboot.com'
     if (! (Test-Path $etfsbootcom)) {
-        Write-Warning "[$((Get-Date).ToString('HH:mm:ss'))][$($MyInvocation.MyCommand)] folderFullName is missing $etfsbootcom"
+        Write-Warning "[$(Get-Date -format G)] [$($MyInvocation.MyCommand)] folderFullName is missing $etfsbootcom"
         $isBootable = $false
     }
     $folderEfiBoot = Join-Path $folderFullName 'efi\microsoft\boot'
     if (! (Test-Path $folderEfiBoot)) {
-        Write-Warning "[$((Get-Date).ToString('HH:mm:ss'))][$($MyInvocation.MyCommand)] folderFullName does not contain a Boot directory at $folderEfiBoot"
+        Write-Warning "[$(Get-Date -format G)] [$($MyInvocation.MyCommand)] folderFullName does not contain a Boot directory at $folderEfiBoot"
         $isBootable = $false
     }
     $efisysbin = Join-Path $folderEfiBoot 'efisys.bin'
     if (! (Test-Path $efisysbin)) {
-        Write-Warning "[$((Get-Date).ToString('HH:mm:ss'))][$($MyInvocation.MyCommand)] folderFullName is missing $efisysbin"
+        Write-Warning "[$(Get-Date -format G)] [$($MyInvocation.MyCommand)] folderFullName is missing $efisysbin"
     }
     $efisysnopromptbin = Join-Path $folderEfiBoot 'efisys_noprompt.bin'
     if (! (Test-Path $efisysnopromptbin)) {
-        Write-Warning "[$((Get-Date).ToString('HH:mm:ss'))][$($MyInvocation.MyCommand)] folderFullName is missing $efisysnopromptbin"
+        Write-Warning "[$(Get-Date -format G)] [$($MyInvocation.MyCommand)] folderFullName is missing $efisysnopromptbin"
     }
     if ((Test-Path $efisysbin) -or (Test-Path $efisysnopromptbin)) {
         $isBootable = $true
@@ -123,19 +123,19 @@ function Convert-FolderToIso {
     #   Strings
     #=================================================
     $isoLabelString = '-l"{0}"' -f "$isoLabel"
-    Write-Verbose -Verbose "[$((Get-Date).ToString('HH:mm:ss'))][$($MyInvocation.MyCommand)] isoLabelString: $isoLabelString"
+    Write-Verbose -Verbose "[$(Get-Date -format G)] [$($MyInvocation.MyCommand)] isoLabelString: $isoLabelString"
     #=================================================
     #   Create ISO
     #=================================================
     if ($isBootable) {
         if (($noPrompt) -and (Test-Path $efisysnopromptbin)) {
             $BootDataString = '2#p0,e,b"{0}"#pEF,e,b"{1}"' -f "$etfsbootcom", "$efisysnopromptbin"
-            Write-Verbose -Verbose "[$((Get-Date).ToString('HH:mm:ss'))][$($MyInvocation.MyCommand)] BootDataString: $BootDataString"
+            Write-Verbose -Verbose "[$(Get-Date -format G)] [$($MyInvocation.MyCommand)] BootDataString: $BootDataString"
             $Process = Start-Process $oscdimgexe -args @('-m', '-o', '-u2', "-bootdata:$BootDataString", '-u2', '-udfver102', $isoLabelString, "`"$folderFullName`"", "`"$isoFullName`"") -PassThru -Wait -WindowStyle Hidden
         }
         else {
             $BootDataString = '2#p0,e,b"{0}"#pEF,e,b"{1}"' -f "$etfsbootcom", "$efisysbin"
-            Write-Verbose -Verbose "[$((Get-Date).ToString('HH:mm:ss'))][$($MyInvocation.MyCommand)] BootDataString: $BootDataString"
+            Write-Verbose -Verbose "[$(Get-Date -format G)] [$($MyInvocation.MyCommand)] BootDataString: $BootDataString"
             $Process = Start-Process $oscdimgexe -args @('-m', '-o', '-u2', "-bootdata:$BootDataString", '-u2', '-udfver102', $isoLabelString, "`"$folderFullName`"", "`"$isoFullName`"") -PassThru -Wait -WindowStyle Hidden
         }
     }
@@ -147,9 +147,9 @@ function Convert-FolderToIso {
         Get-Item -Path $isoFullName
     }
     else {
-        Write-Error "[$((Get-Date).ToString('HH:mm:ss'))][$($MyInvocation.MyCommand)] Something didn't work"
+        Write-Error "[$(Get-Date -format G)] [$($MyInvocation.MyCommand)] Something didn't work"
     }
     #=================================================
-    Write-Verbose "[$((Get-Date).ToString('HH:mm:ss'))][$($MyInvocation.MyCommand)] End"
+    Write-Verbose "[$(Get-Date -format G)] [$($MyInvocation.MyCommand)] End"
     #=================================================
 }

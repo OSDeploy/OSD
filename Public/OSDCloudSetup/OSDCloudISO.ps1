@@ -46,17 +46,17 @@ function New-OSDCloudISO {
     $WorkspacePath = Get-OSDCloudWorkspace -ErrorAction Stop
 
     if (-NOT ($WorkspacePath)) {
-        Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Unable to find an OSDCloud Workspace at $WorkspacePath"
+        Write-Warning "[$(Get-Date -format G)] Unable to find an OSDCloud Workspace at $WorkspacePath"
         Break
     }
 
     if (-NOT (Test-Path $WorkspacePath)) {
-        Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Unable to find an OSDCloud Workspace at $WorkspacePath"
+        Write-Warning "[$(Get-Date -format G)] Unable to find an OSDCloud Workspace at $WorkspacePath"
         Break
     }
 
     if (-NOT (Test-Path "$WorkspacePath\Media\sources\boot.wim")) {
-        Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Unable to find an OSDCloud WinPE at $WorkspacePath\Media\sources\boot.wim"
+        Write-Warning "[$(Get-Date -format G)] Unable to find an OSDCloud WinPE at $WorkspacePath\Media\sources\boot.wim"
         Break
     }
 
@@ -73,6 +73,6 @@ function New-OSDCloudISO {
     #=================================================
     #   Complete
     #=================================================
-    #Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) New-OSDCloudISO is complete"
+    #Write-Host -ForegroundColor Cyan "[$(Get-Date -format G)] New-OSDCloudISO is complete"
     #=================================================
 }

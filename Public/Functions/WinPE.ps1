@@ -168,7 +168,7 @@ function Edit-MyWinPE {
             #   Wallpaper
             #=================================================
             if ($Wallpaper) {
-                Write-Host -ForegroundColor DarkGray "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Wallpaper: $Wallpaper"
+                Write-Host -ForegroundColor DarkGray "[$(Get-Date -format G)] Wallpaper: $Wallpaper"
                 Copy-Item -Path $Wallpaper -Destination "$env:TEMP\winpe.jpg" -Force | Out-Null
                 Copy-Item -Path $Wallpaper -Destination "$env:TEMP\winre.jpg" -Force | Out-Null
                 robocopy "$env:TEMP" "$MountPath\Windows\System32" winpe.jpg /ndl /njh /njs /b /np /r:0 /w:0
@@ -180,26 +180,26 @@ function Edit-MyWinPE {
             foreach ($Module in $PSModuleInstall) {
                 if ($Module -eq 'DellBiosProvider') {
                     if (Test-Path "$env:SystemRoot\System32\msvcp140.dll") {
-                        Write-Host -ForegroundColor DarkGray "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Copying $env:SystemRoot\System32\msvcp140.dll to WinPE"
+                        Write-Host -ForegroundColor DarkGray "[$(Get-Date -format G)] Copying $env:SystemRoot\System32\msvcp140.dll to WinPE"
                         Copy-Item -Path "$env:SystemRoot\System32\msvcp140.dll" -Destination "$MountPath\System32" -Force | Out-Null
                     }
                     if (Test-Path "$env:SystemRoot\System32\vcruntime140.dll") {
-                        Write-Host -ForegroundColor DarkGray "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Copying $env:SystemRoot\System32\vcruntime140.dll to WinPE"
+                        Write-Host -ForegroundColor DarkGray "[$(Get-Date -format G)] Copying $env:SystemRoot\System32\vcruntime140.dll to WinPE"
                         Copy-Item -Path "$env:SystemRoot\System32\vcruntime140.dll" -Destination "$MountPath\System32" -Force | Out-Null
                     }
                     if (Test-Path "$env:SystemRoot\System32\msvcp140.dll") {
-                        Write-Host -ForegroundColor DarkGray "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Copying $env:SystemRoot\System32\vcruntime140_1.dll to WinPE"
+                        Write-Host -ForegroundColor DarkGray "[$(Get-Date -format G)] Copying $env:SystemRoot\System32\vcruntime140_1.dll to WinPE"
                         Copy-Item -Path "$env:SystemRoot\System32\vcruntime140_1.dll" -Destination "$MountPath\System32" -Force | Out-Null
                     }
                 }
-                Write-Host -ForegroundColor DarkGray "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Saving $Module to $MountPath\Program Files\WindowsPowerShell\Modules"
+                Write-Host -ForegroundColor DarkGray "[$(Get-Date -format G)] Saving $Module to $MountPath\Program Files\WindowsPowerShell\Modules"
                 Save-Module -Name $Module -Path "$MountPath\Program Files\WindowsPowerShell\Modules" -Force
             }
             #=================================================
             #   PSModuleCopy
             #=================================================
             foreach ($Module in $PSModuleCopy) {
-                Write-Host -ForegroundColor DarkGray "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Copy-PSModuleToWindowsImage -Name $Module -Path $MountPath"
+                Write-Host -ForegroundColor DarkGray "[$(Get-Date -format G)] Copy-PSModuleToWindowsImage -Name $Module -Path $MountPath"
                 Copy-PSModuleToWindowsImage -Name $Module -Path $MountPath
             }
             #=================================================

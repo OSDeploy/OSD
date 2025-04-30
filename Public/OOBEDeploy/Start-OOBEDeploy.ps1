@@ -43,7 +43,7 @@ function Start-OOBEDeploy {
         #   Transcript
         #=================================================
         Write-Host -ForegroundColor DarkGray "========================================================================="
-        Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Start-Transcript"
+        Write-Host -ForegroundColor Cyan "[$(Get-Date -format G)] Start-Transcript"
         $Transcript = "$((Get-Date).ToString('yyyy-MM-dd-HHmmss'))-OOBEDeploy.log"
         Start-Transcript -Path (Join-Path "$env:SystemRoot\Temp" $Transcript) -ErrorAction Ignore
         #=================================================
@@ -69,7 +69,7 @@ function Start-OOBEDeploy {
     #=================================================
     if ($CustomProfile) {
         Write-Host -ForegroundColor DarkGray "========================================================================="
-        Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Loading OOBEDeploy Custom Profile $CustomProfile"
+        Write-Host -ForegroundColor Cyan "[$(Get-Date -format G)] Loading OOBEDeploy Custom Profile $CustomProfile"
 
         $CustomProfileJson = Get-ChildItem "$($MyInvocation.MyCommand.Module.ModuleBase)\Resources\CustomProfile\OOBEDeploy" *.json | Where-Object {$_.BaseName -eq $CustomProfile} | Select-Object -First 1
 
@@ -107,7 +107,7 @@ function Start-OOBEDeploy {
         $PSGalleryIP = (Get-PSRepository -Name PSGallery).InstallationPolicy
         if ($PSGalleryIP -eq 'Untrusted') {
             Write-Host -ForegroundColor DarkGray "========================================================================="
-            Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Set-PSRepository -Name PSGallery -InstallationPolicy Trusted"
+            Write-Host -ForegroundColor Cyan "[$(Get-Date -format G)] Set-PSRepository -Name PSGallery -InstallationPolicy Trusted"
             if ($env:UserName -eq 'defaultuser0') {
                 Set-PSRepository -Name PSGallery -InstallationPolicy Trusted
             }
@@ -151,7 +151,7 @@ function Start-OOBEDeploy {
         if ($SetEdition -eq 'Enterprise') {$ProductKey = 'NPPR9-FWDCX-D2C8J-H872K-2YT43'}
         if ($ProductKey) {
             Write-Host -ForegroundColor DarkGray "========================================================================="
-            Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Set-WindowsEdition (ChangePK)"
+            Write-Host -ForegroundColor Cyan "[$(Get-Date -format G)] Set-WindowsEdition (ChangePK)"
             if ($env:UserName -eq 'defaultuser0') {
                 Invoke-Exe changepk.exe /ProductKey $ProductKey
                 Get-WindowsEdition -Online
@@ -166,7 +166,7 @@ function Start-OOBEDeploy {
         #=================================================
         if ($Autopilot) {
             Write-Host -ForegroundColor DarkGray "========================================================================="
-            Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) AutopilotOOBE"
+            Write-Host -ForegroundColor Cyan "[$(Get-Date -format G)] AutopilotOOBE"
             Write-Host -ForegroundColor DarkCyan "Install-Module AutopilotOOBE -Force"
             Write-Warning "AutopilotOOBE will open in a new PowerShell Window while OOBEDeploy continues in the background"
             if (($env:UserName -eq 'defaultuser0') -or (!(Get-Module AutopilotOOBE -ListAvailable -ErrorAction Ignore))) {
@@ -184,7 +184,7 @@ function Start-OOBEDeploy {
         #=================================================
         if ($AddNetFX3) {
             Write-Host -ForegroundColor DarkGray "========================================================================="
-            Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Invoke-oobeAddNetFX3"
+            Write-Host -ForegroundColor Cyan "[$(Get-Date -format G)] Invoke-oobeAddNetFX3"
             Invoke-oobeAddNetFX3
             $host.ui.RawUI.WindowTitle = $Global:OOBEDeployWindowTitle
         }
@@ -193,7 +193,7 @@ function Start-OOBEDeploy {
         #=================================================
         if ($AddRSAT) {
             Write-Host -ForegroundColor DarkGray "========================================================================="
-            Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Invoke-oobeAddRSAT"
+            Write-Host -ForegroundColor Cyan "[$(Get-Date -format G)] Invoke-oobeAddRSAT"
             Invoke-oobeAddRSAT
             $host.ui.RawUI.WindowTitle = $Global:OOBEDeployWindowTitle
         }
@@ -202,7 +202,7 @@ function Start-OOBEDeploy {
         #=================================================
         if ($RemoveAppx) {
             Write-Host -ForegroundColor DarkGray "========================================================================="
-            Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Invoke-oobeRemoveAppx -RemoveAppx"
+            Write-Host -ForegroundColor Cyan "[$(Get-Date -format G)] Invoke-oobeRemoveAppx -RemoveAppx"
             Invoke-oobeRemoveAppx -RemoveAppx $RemoveAppx
             $host.ui.RawUI.WindowTitle = $Global:OOBEDeployWindowTitle
         }
@@ -211,7 +211,7 @@ function Start-OOBEDeploy {
         #=================================================
         if ($UpdateDrivers) {
             Write-Host -ForegroundColor DarkGray "========================================================================="
-            Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Invoke-oobeUpdateDrivers"
+            Write-Host -ForegroundColor Cyan "[$(Get-Date -format G)] Invoke-oobeUpdateDrivers"
             Write-Host -ForegroundColor DarkCyan 'Device Drivers are being updated in a minimized window'
             Write-Host -ForegroundColor DarkCyan 'Use Alt+Tab to switch Windows and view progress'
             #Invoke-oobeUpdateDrivers
@@ -222,7 +222,7 @@ function Start-OOBEDeploy {
         #=================================================
         if ($UpdateWindows) {
             Write-Host -ForegroundColor DarkGray "========================================================================="
-            Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Invoke-oobeUpdateWindows"
+            Write-Host -ForegroundColor Cyan "[$(Get-Date -format G)] Invoke-oobeUpdateWindows"
             Write-Host -ForegroundColor DarkCyan 'Windows Updates are being updated in a minimized window'
             Write-Host -ForegroundColor DarkCyan 'Use Alt+Tab to switch Windows and view progress'
             #Invoke-oobeUpdateWindows

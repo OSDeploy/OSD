@@ -23,7 +23,7 @@ function Get-SystemFirmwareUpdate {
     #   Catalog
     #=================================================
     if ($PSVersionTable.PSVersion.Major -ne 5) {
-        Write-Host -ForegroundColor DarkGray "[$(Get-Date -format G)][$($MyInvocation.MyCommand.Name)] PowerShell 5.1 is required to run this function"
+        Write-Host -ForegroundColor DarkGray "[$(Get-Date -format G)] [$($MyInvocation.MyCommand.Name)] PowerShell 5.1 is required to run this function"
         return
     }
     if (!(Get-Module -ListAvailable -Name MSCatalog)) {
@@ -61,7 +61,7 @@ function Install-SystemFirmwareUpdate {
     Block-StandardUser
     
     if ($PSVersionTable.PSVersion.Major -ne 5) {
-        Write-Host -ForegroundColor DarkGray "[$(Get-Date -format G)][$($MyInvocation.MyCommand.Name)] PowerShell 5.1 is required to run this function"
+        Write-Host -ForegroundColor DarkGray "[$(Get-Date -format G)] [$($MyInvocation.MyCommand.Name)] PowerShell 5.1 is required to run this function"
         return
     }
     #=================================================

@@ -91,7 +91,7 @@ function Invoke-OSDCloudIPU {
     #region Device Info
     #============================================================================
     Write-Host -ForegroundColor DarkGray "========================================================================="
-    Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Starting Invoke-OSDCloudIPU"
+    Write-Host -ForegroundColor Cyan "[$(Get-Date -format G)] Starting Invoke-OSDCloudIPU"
     Write-Host -ForegroundColor Gray "Looking of Details about this device...."
 
 
@@ -273,7 +273,7 @@ function Invoke-OSDCloudIPU {
     Write-Host -ForegroundColor Green $OSArch
 
     Write-Host -ForegroundColor DarkGray "========================================================================="
-    Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Starting Feature Update lookup and Download"
+    Write-Host -ForegroundColor Cyan "[$(Get-Date -format G)] Starting Feature Update lookup and Download"
 
     #============================================================================
     #region Detect & Download ESD File
@@ -305,7 +305,7 @@ function Invoke-OSDCloudIPU {
     Write-Host -ForegroundColor Cyan "Url: " -NoNewline
     Write-Host -ForegroundColor Green $ESD.Url   
     Write-Host -ForegroundColor DarkGray "========================================================================="
-    Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Getting Content for Upgrade Media"   
+    Write-Host -ForegroundColor Cyan "[$(Get-Date -format G)] Getting Content for Upgrade Media"   
 
     #Build Media Paths
     $SubFolderName = "$($ESD.Version) $($ESD.ReleaseId)"
@@ -393,7 +393,7 @@ function Invoke-OSDCloudIPU {
     }
     if ((Test-Path -Path $ImagePath) -and (Test-Path -Path $MediaLocation)){
         Write-Host -ForegroundColor DarkGray "========================================================================="
-        Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Starting Extract of ESD file to create Setup Content"
+        Write-Host -ForegroundColor Cyan "[$(Get-Date -format G)] Starting Extract of ESD file to create Setup Content"
         $ApplyPath = $MediaLocation
         Write-Host -ForegroundColor Gray "Expanding $ImagePath Index 1 to $ApplyPath"
         $Expand = Expand-WindowsImage -ImagePath $ImagePath -Index 1 -ApplyPath $ApplyPath
@@ -419,7 +419,7 @@ function Invoke-OSDCloudIPU {
 
     if (($DriverPack) -and (!($SkipDriverPack))){
         Write-Host -ForegroundColor DarkGray "========================================================================="
-        Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Getting Driver Pack for IPU Integration"           
+        Write-Host -ForegroundColor Cyan "[$(Get-Date -format G)] Getting Driver Pack for IPU Integration"           
         $DriverPackDownloadRequired = $true
         if (!(Test-Path -Path "C:\Drivers")){New-Item -Path "C:\Drivers" -ItemType Directory -Force | Out-Null}
         $DriverPackPath = "C:\Drivers\$($DriverPack.FileName)"
@@ -461,7 +461,7 @@ function Invoke-OSDCloudIPU {
         #Expand Driver Pack
         if (Test-path -path $DriverPackPath){
             Write-Host -ForegroundColor DarkGray "========================================================================="
-            Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Expanding DriverPack for Upgrade Media"   
+            Write-Host -ForegroundColor Cyan "[$(Get-Date -format G)] Expanding DriverPack for Upgrade Media"   
             Expand-StagedDriverPack
             $DriverPackFile = Get-ChildItem -Path $DriverPackPath -Filter $DriverPack.FileName
 
@@ -493,7 +493,7 @@ function Invoke-OSDCloudIPU {
         }
     }
     Write-Host -ForegroundColor DarkGray "========================================================================="
-    Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Triggering Windows Upgrade Setup"   
+    Write-Host -ForegroundColor Cyan "[$(Get-Date -format G)] Triggering Windows Upgrade Setup"   
     
     if ($DownloadOnly){
         Write-Host -ForegroundColor Yellow "Download Complete, exiting script before install based on 'DownloadOnly' switch"

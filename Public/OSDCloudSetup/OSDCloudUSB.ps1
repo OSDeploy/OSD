@@ -65,17 +65,17 @@ function New-OSDCloudUSB {
         $WorkspacePath = Get-OSDCloudWorkspace -ErrorAction Stop
     
         if (-NOT ($WorkspacePath)) {
-            Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Unable to find an OSDCloud Workspace"
+            Write-Warning "[$(Get-Date -format G)] Unable to find an OSDCloud Workspace"
             Break
         }
     
         if (-NOT (Test-Path $WorkspacePath)) {
-            Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Unable to find an OSDCloud Workspace at $WorkspacePath"
+            Write-Warning "[$(Get-Date -format G)] Unable to find an OSDCloud Workspace at $WorkspacePath"
             Break
         }
     
         if (-NOT (Test-Path "$WorkspacePath\Media\sources\boot.wim")) {
-            Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Unable to find an OSDCloud WinPE at $WorkspacePath\Media\sources\boot.wim"
+            Write-Warning "[$(Get-Date -format G)] Unable to find an OSDCloud WinPE at $WorkspacePath\Media\sources\boot.wim"
             Break
         }
         
@@ -92,8 +92,8 @@ function New-OSDCloudUSB {
             #Do nothing
         }
         else {
-            Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Unable to get the properties of $fromIsoFile"
-            Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Something went very very wrong in this process"
+            Write-Warning "[$(Get-Date -format G)] Unable to get the properties of $fromIsoFile"
+            Write-Warning "[$(Get-Date -format G)] Something went very very wrong in this process"
             Break
         }
         #=================================================
@@ -101,7 +101,7 @@ function New-OSDCloudUSB {
         #=================================================
         $Volumes = (Get-Volume).Where({$_.DriveLetter}).DriveLetter
 
-        Write-Host -ForegroundColor DarkGray "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Mounting OSDCloudISO at $fromIsoFileFullName"
+        Write-Host -ForegroundColor DarkGray "[$(Get-Date -format G)] Mounting OSDCloudISO at $fromIsoFileFullName"
         $MountDiskImage = Mount-DiskImage -ImagePath $fromIsoFileFullName
         Start-Sleep -Seconds 3
         $MountDiskImageDriveLetter = (Compare-Object -ReferenceObject $Volumes -DifferenceObject (Get-Volume).Where({$_.DriveLetter}).DriveLetter).InputObject
@@ -110,8 +110,8 @@ function New-OSDCloudUSB {
             $WinpeSourcePath = "$($MountDiskImageDriveLetter):\"
         }
         else {
-            Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Unable to mount $MountDiskImage"
-            Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Something went very very wrong in this process"
+            Write-Warning "[$(Get-Date -format G)] Unable to mount $MountDiskImage"
+            Write-Warning "[$(Get-Date -format G)] Something went very very wrong in this process"
             Break
         }
     }
@@ -128,11 +128,11 @@ function New-OSDCloudUSB {
         $fromIsoFileFullName = $fromIsoFileGetItem.FullName
     
         if ($fromIsoFileGetItem -and $fromIsoFileGetItem.Extension -eq '.iso') {
-            Write-Host -ForegroundColor DarkGray "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) OSDCloudISO downloaded to $fromIsoFileFullName"
+            Write-Host -ForegroundColor DarkGray "[$(Get-Date -format G)] OSDCloudISO downloaded to $fromIsoFileFullName"
         }
         else {
-            Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Unable to download OSDCloudISO"
-            Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Something went very very wrong in this process"
+            Write-Warning "[$(Get-Date -format G)] Unable to download OSDCloudISO"
+            Write-Warning "[$(Get-Date -format G)] Something went very very wrong in this process"
             Break
         }
         #=================================================
@@ -140,7 +140,7 @@ function New-OSDCloudUSB {
         #=================================================
         $Volumes = (Get-Volume).Where({$_.DriveLetter}).DriveLetter
 
-        Write-Host -ForegroundColor DarkGray "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Mounting OSDCloudISO"
+        Write-Host -ForegroundColor DarkGray "[$(Get-Date -format G)] Mounting OSDCloudISO"
         $MountDiskImage = Mount-DiskImage -ImagePath $fromIsoFileFullName
         Start-Sleep -Seconds 3
         $MountDiskImageDriveLetter = (Compare-Object -ReferenceObject $Volumes -DifferenceObject (Get-Volume).Where({$_.DriveLetter}).DriveLetter).InputObject
@@ -149,8 +149,8 @@ function New-OSDCloudUSB {
             $WinpeSourcePath = "$($MountDiskImageDriveLetter):\"
         }
         else {
-            Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Unable to mount $MountDiskImage"
-            Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Something went very very wrong in this process"
+            Write-Warning "[$(Get-Date -format G)] Unable to mount $MountDiskImage"
+            Write-Warning "[$(Get-Date -format G)] Something went very very wrong in this process"
             Break
         }
     }
@@ -158,17 +158,17 @@ function New-OSDCloudUSB {
     #	Test WinpeSourcePath
     #=================================================
     if (-NOT ($WinpeSourcePath)) {
-        Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Unable to find an OSDCloud Media"
+        Write-Warning "[$(Get-Date -format G)] Unable to find an OSDCloud Media"
         Break
     }
 
     if (-NOT (Test-Path $WinpeSourcePath)) {
-        Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Unable to find an OSDCloud Media at $WinpeSourcePath"
+        Write-Warning "[$(Get-Date -format G)] Unable to find an OSDCloud Media at $WinpeSourcePath"
         Break
     }
 
     if (-NOT (Test-Path "$WinpeSourcePath\sources\boot.wim")) {
-        Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Unable to find an OSDCloud WinPE at $WinpeSourcePath\sources\boot.wim"
+        Write-Warning "[$(Get-Date -format G)] Unable to find an OSDCloud WinPE at $WinpeSourcePath\sources\boot.wim"
         Break
     }
     #=================================================
@@ -181,14 +181,14 @@ function New-OSDCloudUSB {
     #=================================================
     $WinPEPartition = Get-USBPartition | Where-Object {($_.DiskNumber -eq $BootableUSBDrive.DiskNumber) -and ($_.PartitionNumber -eq 2)}
     if (-NOT ($WinPEPartition)) {
-        Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Unable to create OSDCloud WinPE Partition"
-        Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Something went very very wrong in this process"
+        Write-Warning "[$(Get-Date -format G)] Unable to create OSDCloud WinPE Partition"
+        Write-Warning "[$(Get-Date -format G)] Something went very very wrong in this process"
         Break
     }
     $OSDCloudPartition = Get-USBPartition | Where-Object {($_.DiskNumber -eq $BootableUSBDrive.DiskNumber) -and ($_.PartitionNumber -eq 1)}
     if (-NOT ($OSDCloudPartition)) {
-        Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Unable to create OSDCloud Data Partition"
-        Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Something went very very wrong in this process"
+        Write-Warning "[$(Get-Date -format G)] Unable to create OSDCloud Data Partition"
+        Write-Warning "[$(Get-Date -format G)] Something went very very wrong in this process"
         Break
     }
     #=================================================
@@ -196,14 +196,14 @@ function New-OSDCloudUSB {
     #=================================================
     $WinpeDestinationPath = "$($WinPEPartition.DriveLetter):\"
     if (-NOT ($WinpeDestinationPath)) {
-        Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Unable to find Destination Path at $WinpeDestinationPath"
+        Write-Warning "[$(Get-Date -format G)] Unable to find Destination Path at $WinpeDestinationPath"
         Break
     }
     #=================================================
     #	Update WinPE Volume
     #=================================================
     if ((Test-Path -Path "$WinpeSourcePath") -and (Test-Path -Path "$WinpeDestinationPath")) {
-        Write-Host -ForegroundColor DarkGray "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Copying $WinpeSourcePath to OSDCloud WinPE partition at $WinpeDestinationPath"
+        Write-Host -ForegroundColor DarkGray "[$(Get-Date -format G)] Copying $WinpeSourcePath to OSDCloud WinPE partition at $WinpeDestinationPath"
         robocopy "$WinpeSourcePath" "$WinpeDestinationPath" *.* /e /ndl /njh /njs /np /r:0 /w:0 /b /zb
     }
     #=================================================
@@ -217,13 +217,13 @@ function New-OSDCloudUSB {
     #=================================================
     if ($MountDiskImage) {
         Start-Sleep -Seconds 3
-        Write-Verbose "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Dismounting $($MountDiskImage.ImagePath)"
+        Write-Verbose "[$(Get-Date -format G)] Dismounting $($MountDiskImage.ImagePath)"
         $null = Dismount-DiskImage -ImagePath $MountDiskImage.ImagePath
     }
     #=================================================
     #   Complete
     #=================================================
-    Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) New-OSDCloudUSB is complete"
+    Write-Host -ForegroundColor Cyan "[$(Get-Date -format G)] New-OSDCloudUSB is complete"
     #=================================================
 }
 function New-OSDCloudUSBSetupCompleteTemplate {
@@ -331,12 +331,12 @@ function Update-OSDCloudUSB {
     #=================================================
     Write-Host -ForegroundColor DarkGray "========================================================================="
     if ($UsbVolumes) {
-        Write-Host -ForegroundColor DarkGray "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) USB volumes found"
+        Write-Host -ForegroundColor DarkGray "[$(Get-Date -format G)] USB volumes found"
         Write-Host -ForegroundColor DarkGray "========================================================================="
     }
     else {
-        Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Unable to find any USB volumes"
-        Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Plug in a USB drive first"
+        Write-Warning "[$(Get-Date -format G)] Unable to find any USB volumes"
+        Write-Warning "[$(Get-Date -format G)] Plug in a USB drive first"
         Write-Host -ForegroundColor DarkGray "========================================================================="
         Break
     }
@@ -345,20 +345,20 @@ function Update-OSDCloudUSB {
     #   Not a big deal, but can't robocopy against it
     #=================================================
     if (! $WorkspacePath) {
-        Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) OSDCloud Workspace is not present on this system"
-        Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) You will not be able to update the WinPE volume"
+        Write-Warning "[$(Get-Date -format G)] OSDCloud Workspace is not present on this system"
+        Write-Warning "[$(Get-Date -format G)] You will not be able to update the WinPE volume"
         Write-Host -ForegroundColor DarkGray "========================================================================="
         $RobocopyWorkspace = $false
     }
     elseif (! (Test-Path $WorkspacePath)) {
-        Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) OSDCloud Workspace is not at the path $WorkspacePath"
-        Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) You will not be able to update the WinPE volume"
+        Write-Warning "[$(Get-Date -format G)] OSDCloud Workspace is not at the path $WorkspacePath"
+        Write-Warning "[$(Get-Date -format G)] You will not be able to update the WinPE volume"
         Write-Host -ForegroundColor DarkGray "========================================================================="
         $RobocopyWorkspace = $false
     }
     elseif (! (Test-Path "$WorkspacePath\Media\sources\boot.wim")) {
-        Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) OSDCloud WinPE does not exist at $WorkspacePath\Media\sources\boot.wim"
-        Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) You will not be able to update the WinPE volume"
+        Write-Warning "[$(Get-Date -format G)] OSDCloud WinPE does not exist at $WorkspacePath\Media\sources\boot.wim"
+        Write-Warning "[$(Get-Date -format G)] You will not be able to update the WinPE volume"
         Write-Host -ForegroundColor DarkGray "========================================================================="
         $RobocopyWorkspace = $false
     }
@@ -371,14 +371,14 @@ function Update-OSDCloudUSB {
     $WinpeVolumes = Get-USBVolume | Where-Object {($_.FileSystemLabel -eq 'USBBOOT') -or ($_.FileSystemLabel -eq 'OSDBOOT') -or ($_.FileSystemLabel -eq 'USB BOOT')}
     if ($WinpeVolumes) {
         if ($IsAdmin) {
-            Write-Host -ForegroundColor DarkGray "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Setting OSDCloud USB WinPE volume labels to WinPE"
+            Write-Host -ForegroundColor DarkGray "[$(Get-Date -format G)] Setting OSDCloud USB WinPE volume labels to WinPE"
             foreach ($volume in $WinpeVolumes) {
                 Set-Volume -DriveLetter $volume.DriveLetter -NewFileSystemLabel 'WinPE' -ErrorAction Ignore
             }
         }
         else {
-            Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Unable to set OSDCloud USB WinPE volume label"
-            Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Run this function again elevated with Admin rights"
+            Write-Warning "[$(Get-Date -format G)] Unable to set OSDCloud USB WinPE volume label"
+            Write-Warning "[$(Get-Date -format G)] Run this function again elevated with Admin rights"
         }
     }
     #=================================================
@@ -388,7 +388,7 @@ function Update-OSDCloudUSB {
     if ($WinpeVolumes -and $RobocopyWorkspace) {
         foreach ($volume in $WinpeVolumes) {
             if (Test-Path -Path "$($volume.DriveLetter):\") {
-                Write-Host -ForegroundColor DarkGray "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) ROBOCOPY $WorkspacePath\Media $($volume.DriveLetter):\"
+                Write-Host -ForegroundColor DarkGray "[$(Get-Date -format G)] ROBOCOPY $WorkspacePath\Media $($volume.DriveLetter):\"
                 robocopy "$WorkspacePath\Media" "$($volume.DriveLetter):\" *.* /e /ndl /njh /njs /np /r:0 /w:0 /xd "$RECYCLE.BIN" "System Volume Information"
                 Write-Host -ForegroundColor DarkGray "========================================================================="
             }
@@ -402,7 +402,7 @@ function Update-OSDCloudUSB {
             $PowerShellPath = "$WorkspacePath\PowerShell"
         
             if (! (Test-Path "$PowerShellPath")) {
-                Write-Host -ForegroundColor DarkGray "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Creating OSDCloud Workspace PowerShell at $WorkspacePath\PowerShell"
+                Write-Host -ForegroundColor DarkGray "[$(Get-Date -format G)] Creating OSDCloud Workspace PowerShell at $WorkspacePath\PowerShell"
                 $null = New-Item -Path "$PowerShellPath" -ItemType Directory -Force -ErrorAction Ignore
                 $UpdateModules = $true
             }
@@ -427,30 +427,30 @@ function Update-OSDCloudUSB {
     #=================================================
     if ($RobocopyWorkspace) {
         if ($UpdateModules -or $PSUpdate) {
-            Write-Host -ForegroundColor DarkGray "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Updating OSDCloud Workspace PowerShell Modules and Scripts at $PowerShellPath"
+            Write-Host -ForegroundColor DarkGray "[$(Get-Date -format G)] Updating OSDCloud Workspace PowerShell Modules and Scripts at $PowerShellPath"
 
             try {
                 Save-Module OSD -Path "$PowerShellPath\Offline\Modules" -ErrorAction Stop
             }
             catch {
-                Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) There were some issues updating the OSD PowerShell Module at $PowerShellPath\Offline\Modules"
-                Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Make sure you have an Internet connection and can access powershellgallery.com"
+                Write-Warning "[$(Get-Date -format G)] There were some issues updating the OSD PowerShell Module at $PowerShellPath\Offline\Modules"
+                Write-Warning "[$(Get-Date -format G)] Make sure you have an Internet connection and can access powershellgallery.com"
             }
         
             try {
                 Save-Module WindowsAutoPilotIntune -Path "$PowerShellPath\Offline\Modules" -ErrorAction Stop
             }
             catch {
-                Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) There were some issues updating the WindowsAutoPilotIntune PowerShell Module at $PowerShellPath\Offline\Modules"
-                Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Make sure you have an Internet connection and can access powershellgallery.com"
+                Write-Warning "[$(Get-Date -format G)] There were some issues updating the WindowsAutoPilotIntune PowerShell Module at $PowerShellPath\Offline\Modules"
+                Write-Warning "[$(Get-Date -format G)] Make sure you have an Internet connection and can access powershellgallery.com"
             }
         
             try {
                 Save-Script -Name Get-WindowsAutopilotInfo -Path "$PowerShellPath\Offline\Scripts" -ErrorAction Stop
             }
             catch {
-                Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) There were some issues updating the Get-WindowsAutopilotInfo PowerShell Script at $PowerShellPath\Offline\Scripts"
-                Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Make sure you have an Internet connection and can access powershellgallery.com"
+                Write-Warning "[$(Get-Date -format G)] There were some issues updating the Get-WindowsAutopilotInfo PowerShell Script at $PowerShellPath\Offline\Scripts"
+                Write-Warning "[$(Get-Date -format G)] Make sure you have an Internet connection and can access powershellgallery.com"
             }
         }
     }
@@ -460,14 +460,14 @@ function Update-OSDCloudUSB {
     $OSDCloudVolumes = Get-USBVolume | Where-Object {$_.FileSystemLabel -eq 'OSDCloud'} | Where-Object {$_.SizeGB -ge 8} | Sort-Object DriveLetter -Descending
     if ($OSDCloudVolumes) {
         if ($IsAdmin) {
-            Write-Host -ForegroundColor DarkGray "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Setting OSDCloud USB volume labels to OSDCloudUSB"
+            Write-Host -ForegroundColor DarkGray "[$(Get-Date -format G)] Setting OSDCloud USB volume labels to OSDCloudUSB"
             foreach ($volume in $OSDCloudVolumes) {
                 Set-Volume -DriveLetter $volume.DriveLetter -NewFileSystemLabel 'OSDCloudUSB' -ErrorAction Ignore
             }
         }
         else {
-            Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Unable to set OSDCloud USB volume label"
-            Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Run this function again elevated with Admin rights"
+            Write-Warning "[$(Get-Date -format G)] Unable to set OSDCloud USB volume label"
+            Write-Warning "[$(Get-Date -format G)] Run this function again elevated with Admin rights"
         }
     }
     #=================================================
@@ -489,25 +489,25 @@ function Update-OSDCloudUSB {
         foreach ($volume in $OSDCloudVolumes) {
             if ($IsOfflineReady -or $UpdateModules -or $PSUpdate -or $DriverPack -or $OS -or $OSName -or $OSActivation -or $OSLanguage) {
                 if (Test-Path "$WorkspacePath\Config") {
-                    Write-Host -ForegroundColor DarkGray "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) ROBOCOPY $WorkspacePath\Config $($volume.DriveLetter):\OSDCloud\Config"
+                    Write-Host -ForegroundColor DarkGray "[$(Get-Date -format G)] ROBOCOPY $WorkspacePath\Config $($volume.DriveLetter):\OSDCloud\Config"
                     robocopy "$WorkspacePath\Config" "$($volume.DriveLetter):\OSDCloud\Config" *.* /e /mt /ndl /njh /njs /r:0 /w:0 /xd "$RECYCLE.BIN" "System Volume Information"
                     Write-Host -ForegroundColor DarkGray "========================================================================="
                 }
     
                 if (Test-Path "$WorkspacePath\DriverPacks") {
-                    Write-Host -ForegroundColor DarkGray "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) ROBOCOPY $WorkspacePath\DriverPacks $($volume.DriveLetter):\OSDCloud\DriverPacks"
+                    Write-Host -ForegroundColor DarkGray "[$(Get-Date -format G)] ROBOCOPY $WorkspacePath\DriverPacks $($volume.DriveLetter):\OSDCloud\DriverPacks"
                     robocopy "$WorkspacePath\DriverPacks" "$($volume.DriveLetter):\OSDCloud\DriverPacks" *.* /e /mt /ndl /njh /njs /r:0 /w:0 /xd "$RECYCLE.BIN" "System Volume Information"
                     Write-Host -ForegroundColor DarkGray "========================================================================="
                 }
     
                 if (Test-Path "$WorkspacePath\OS") {
-                    Write-Host -ForegroundColor DarkGray "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) ROBOCOPY $WorkspacePath\OS $($volume.DriveLetter):\OSDCloud\OS"
+                    Write-Host -ForegroundColor DarkGray "[$(Get-Date -format G)] ROBOCOPY $WorkspacePath\OS $($volume.DriveLetter):\OSDCloud\OS"
                     robocopy "$WorkspacePath\OS" "$($volume.DriveLetter):\OSDCloud\OS" *.* /e /mt /ndl /njh /njs /r:0 /w:0 /xd "$RECYCLE.BIN" "System Volume Information"
                     Write-Host -ForegroundColor DarkGray "========================================================================="
                 }
     
                 if (Test-Path "$WorkspacePath\PowerShell") {
-                    Write-Host -ForegroundColor DarkGray "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) ROBOCOPY $WorkspacePath\PowerShell $($volume.DriveLetter):\OSDCloud\PowerShell"
+                    Write-Host -ForegroundColor DarkGray "[$(Get-Date -format G)] ROBOCOPY $WorkspacePath\PowerShell $($volume.DriveLetter):\OSDCloud\PowerShell"
                     robocopy "$WorkspacePath\PowerShell" "$($volume.DriveLetter):\OSDCloud\PowerShell" *.* /e /mt /ndl /njh /njs /r:0 /w:0 /xd "$RECYCLE.BIN" "System Volume Information"
                     Write-Host -ForegroundColor DarkGray "========================================================================="
                 }
@@ -520,19 +520,19 @@ function Update-OSDCloudUSB {
     if ($OSDCloudVolumes) {
         if ($DriverPack -or $OS -or $OSName -or $OSActivation -or $OSLanguage) {
             if (! ($OSDCloudVolumes)) {
-                Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Unable to find an OSDCloud USB volume"
-                Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) The USB volume must be labeled OSDCloud and be at least 8GB in size"
+                Write-Warning "[$(Get-Date -format G)] Unable to find an OSDCloud USB volume"
+                Write-Warning "[$(Get-Date -format G)] The USB volume must be labeled OSDCloud and be at least 8GB in size"
                 Write-Host -ForegroundColor DarkGray "========================================================================="
                 Break
             }
         
             if (($OSDCloudVolumes | Measure-Object).Count -gt 1) {
-                Write-Host -ForegroundColor Yellow "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Select a single OSDCloud USB volume in PowerShell GridView and press OK"
+                Write-Host -ForegroundColor Yellow "[$(Get-Date -format G)] Select a single OSDCloud USB volume in PowerShell GridView and press OK"
                 $OSDCloudVolumes = $OSDCloudVolumes | Out-GridView -Title 'Select an OSDCloud USB volume and press OK' -OutputMode Single
             }
         
             if (! ($OSDCloudVolumes)) {
-                Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) You must select one OSDCloud USB volume"
+                Write-Warning "[$(Get-Date -format G)] You must select one OSDCloud USB volume"
                 Write-Host -ForegroundColor DarkGray "========================================================================="
                 Break
             }
@@ -584,7 +584,7 @@ function Update-OSDCloudUSB {
                 #$OperatingSystems = $OperatingSystems | Select-Object -Property OSDVersion,OSDStatus,@{Name='OperatingSystem';Expression={($_.Catalog)}},Title,CreationDate,FileUri,FileName
                 $OperatingSystems = $OperatingSystems | Select-Object -Property Version,ReleaseID,Status,Name,ReleaseDate,Url,FileName
 
-                Write-Host -ForegroundColor Yellow "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Select one or more Operating Systems to download in PowerShell GridView"
+                Write-Host -ForegroundColor Yellow "[$(Get-Date -format G)] Select one or more Operating Systems to download in PowerShell GridView"
                 #$OperatingSystems = $OperatingSystems | Sort-Object -Property @{Expression='OSDStatus';Descending=$true}, OperatingSystem -Descending | Out-GridView -Title 'Select one or more Operating Systems to download and press OK' -PassThru
                 $OperatingSystems = $OperatingSystems | Sort-Object -Property @{Expression='Status';Descending=$true}, Name -Descending | Out-GridView -Title 'Select one or more Operating Systems to download and press OK' -PassThru
 
@@ -598,7 +598,7 @@ function Update-OSDCloudUSB {
                         #$OSDownloadChildPath = Join-Path $OSDownloadPath $($OperatingSystem.OperatingSystem)
                         $FolderName = "$($OperatingSystem.Version) $($OperatingSystem.ReleaseID)"
                         $OSDownloadChildPath = Join-Path $OSDownloadPath $FolderName
-                        Write-Host -ForegroundColor DarkGray "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Downloading OSDCloud Operating System to $OSDownloadChildPath"
+                        Write-Host -ForegroundColor DarkGray "[$(Get-Date -format G)] Downloading OSDCloud Operating System to $OSDownloadChildPath"
                         #$SaveWebFile = Save-WebFile -SourceUrl $OperatingSystem.FileUri -DestinationDirectory "$OSDownloadChildPath" -DestinationName $OperatingSystem.FileName
                         $SaveWebFile = Save-WebFile -SourceUrl $OperatingSystem.Url -DestinationDirectory "$OSDownloadChildPath" -DestinationName $OperatingSystem.FileName
 
@@ -607,16 +607,16 @@ function Update-OSDCloudUSB {
                             Get-Item $SaveWebFile.FullName
                         }
                         else {
-                            Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Could not download the Operating System"
+                            Write-Warning "[$(Get-Date -format G)] Could not download the Operating System"
                         }
                     }
                     else {
-                        Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Could not verify an Internet connection for the Operating System"
+                        Write-Warning "[$(Get-Date -format G)] Could not verify an Internet connection for the Operating System"
                     }
                 }
             }
             else {
-                Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Unable to determine a suitable Operating System"
+                Write-Warning "[$(Get-Date -format G)] Unable to determine a suitable Operating System"
             }
             Write-Host -ForegroundColor DarkGray "========================================================================="
         }
@@ -628,7 +628,7 @@ function Update-OSDCloudUSB {
     #=================================================
     if (($OSDCloudVolumes | Measure-Object).Count -eq 1) {
         if ($DriverPack) {
-            Write-Host -ForegroundColor DarkGray "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) DriverPacks will require up to 2GB each"
+            Write-Host -ForegroundColor DarkGray "[$(Get-Date -format G)] DriverPacks will require up to 2GB each"
             $DriverPackDownloadPath = "$($OSDCloudVolumes.DriveLetter):\OSDCloud\DriverPacks"
     
             $OSDCloudSavedDriverPacks = $null
@@ -695,30 +695,30 @@ function Update-OSDCloudUSB {
         if ($UpdateModules -or $PSUpdate) {
             if (($OSDCloudVolumes | Measure-Object).Count -eq 1) {
                 if (Test-Path "$($OSDCloudVolumes.DriveLetter):\OSDCloud") {
-                    Write-Host -ForegroundColor DarkGray "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Updating OSD and WindowsAutoPilotIntune PowerShell Modules at $PowerShellPath"
+                    Write-Host -ForegroundColor DarkGray "[$(Get-Date -format G)] Updating OSD and WindowsAutoPilotIntune PowerShell Modules at $PowerShellPath"
 
                     try {
                         Save-Module OSD -Path "$PowerShellPath\Offline\Modules" -ErrorAction Stop
                     }
                     catch {
-                        Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) There were some issues updating the OSD PowerShell Module at $PowerShellPath\Offline\Modules"
-                        Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Make sure you have an Internet connection and can access powershellgallery.com"
+                        Write-Warning "[$(Get-Date -format G)] There were some issues updating the OSD PowerShell Module at $PowerShellPath\Offline\Modules"
+                        Write-Warning "[$(Get-Date -format G)] Make sure you have an Internet connection and can access powershellgallery.com"
                     }
         
                     try {
                         Save-Module WindowsAutoPilotIntune -Path "$PowerShellPath\Offline\Modules" -ErrorAction Stop
                     }
                     catch {
-                        Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) There were some issues updating the WindowsAutoPilotIntune PowerShell Module at $PowerShellPath\Offline\Modules"
-                        Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Make sure you have an Internet connection and can access powershellgallery.com"
+                        Write-Warning "[$(Get-Date -format G)] There were some issues updating the WindowsAutoPilotIntune PowerShell Module at $PowerShellPath\Offline\Modules"
+                        Write-Warning "[$(Get-Date -format G)] Make sure you have an Internet connection and can access powershellgallery.com"
                     }
         
                     try {
                         Save-Script -Name Get-WindowsAutopilotInfo -Path "$PowerShellPath\Offline\Scripts" -ErrorAction Stop
                     }
                     catch {
-                        Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) There were some issues updating the Get-WindowsAutopilotInfo PowerShell Script at $PowerShellPath\Offline\Scripts"
-                        Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Make sure you have an Internet connection and can access powershellgallery.com"
+                        Write-Warning "[$(Get-Date -format G)] There were some issues updating the Get-WindowsAutopilotInfo PowerShell Script at $PowerShellPath\Offline\Scripts"
+                        Write-Warning "[$(Get-Date -format G)] Make sure you have an Internet connection and can access powershellgallery.com"
                     }
                     Write-Host -ForegroundColor DarkGray "========================================================================="
                 }
@@ -747,6 +747,6 @@ function Update-OSDCloudUSB {
     Write-Host -ForegroundColor Yellow "Update Offline PowerShell Modules and Scripts:"
     Write-Host -ForegroundColor Gray "Update-OSDCloudUSB -PSUpdate"
     Write-Host -ForegroundColor DarkGray "========================================================================="
-    Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Update-OSDCloudUSB is complete"
+    Write-Host -ForegroundColor Cyan "[$(Get-Date -format G)] Update-OSDCloudUSB is complete"
     #=================================================
 }

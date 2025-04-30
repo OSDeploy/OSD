@@ -143,9 +143,9 @@ function Copy-OSDCloud.media {
     #=================================================
     $EndTime = Get-Date
     $TimeSpan = New-TimeSpan -Start $StartTime -End $EndTime
-    Write-Host -ForegroundColor DarkGray    "================================================"
-    Write-Host -ForegroundColor Yellow      "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) $($MyInvocation.MyCommand.Name) " -NoNewline
-    Write-Host -ForegroundColor Cyan        "Completed in $($TimeSpan.ToString("mm' minutes 'ss' seconds'"))"
+    Write-Host -ForegroundColor DarkGray "================================================"
+    Write-Host -ForegroundColor Yellow "[$(Get-Date -format G)] $($MyInvocation.MyCommand.Name) " -NoNewline
+    Write-Host -ForegroundColor Cyan "Completed in $($TimeSpan.ToString("mm' minutes 'ss' seconds'"))"
     #=================================================
     #	Return
     #=================================================

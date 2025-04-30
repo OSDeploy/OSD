@@ -59,7 +59,7 @@ function Invoke-OSDCloudDriverPackMDT {
     #	OSDisk Drivers
     #=================================================
     $OSDiskDrivers = Join-Path $OSDISK 'Drivers'
-    Write-Host -ForegroundColor DarkGray "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) DriverPacks will be downloaded to $OSDiskDrivers"
+    Write-Host -ForegroundColor DarkGray "[$(Get-Date -format G)] DriverPacks will be downloaded to $OSDiskDrivers"
 
     if (-NOT (Test-Path -Path $OSDiskDrivers)) {
         New-Item -Path $OSDiskDrivers -ItemType Directory -Force -ErrorAction Ignore | Out-Null
@@ -72,7 +72,7 @@ function Invoke-OSDCloudDriverPackMDT {
     #=================================================
     #	Get-MyDriverPack
     #=================================================
-    Write-Host -ForegroundColor DarkGray "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Processing function Get-MyDriverPack"
+    Write-Host -ForegroundColor DarkGray "[$(Get-Date -format G)] Processing function Get-MyDriverPack"
     Write-Host
     if ($Manufacturer -in ('Dell','HP','Lenovo','Microsoft')) {
         $GetMyDriverPack = Get-MyDriverPack -Manufacturer $Manufacturer -Product $Product
@@ -83,7 +83,7 @@ function Invoke-OSDCloudDriverPackMDT {
 
     if ($GetMyDriverPack) {     
         $GetMyDriverPackBaseName = ($GetMyDriverPack.FileName).Split('.')[0]
-        Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Matching DriverPack identified"
+        Write-Host -ForegroundColor Cyan "[$(Get-Date -format G)] Matching DriverPack identified"
         Write-Host -ForegroundColor DarkGray "-Name $($GetMyDriverPack.Name)"
         Write-Host -ForegroundColor DarkGray "-BaseName $GetMyDriverPackBaseName"
         Write-Host -ForegroundColor DarkGray "-Product $($GetMyDriverPack.Product)"
@@ -93,7 +93,7 @@ function Invoke-OSDCloudDriverPackMDT {
         $OSDiskDriversFile = Join-Path $OSDiskDrivers $GetMyDriverPack.FileName
     }
     else {
-        Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) There are no DriverPacks for this computer"
+        Write-Warning "[$(Get-Date -format G)] There are no DriverPacks for this computer"
         Start-Sleep -Seconds 5
         Continue
     }
@@ -106,7 +106,7 @@ function Invoke-OSDCloudDriverPackMDT {
         $DeployRootDriverPack = @()
         $DeployRootDriverPack = Get-ChildItem $DeployRootDriverPacks -File -Recurse -Force -ErrorAction Ignore | Where-Object {$_.Name -match $GetMyDriverPackBaseName} | Where-Object {$_.Extension -in ('.cab','.zip','.exe')} | Select-Object -First 1
         if ($DeployRootDriverPack) {
-            Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Copying existing DriverPack from the MDT DeploymentShare"
+            Write-Host -ForegroundColor Cyan "[$(Get-Date -format G)] Copying existing DriverPack from the MDT DeploymentShare"
             Write-Host -ForegroundColor DarkGray "-Source $($DeployRootDriverPack.FullName)"
             Write-Host -ForegroundColor DarkGray "-Destination $OSDiskDriversFile"
             Copy-Item -Path $($DeployRootDriverPack.FullName) -Destination $OSDiskDrivers -Force
@@ -121,7 +121,7 @@ function Invoke-OSDCloudDriverPackMDT {
 
         if (-Not ($ReadyDriverPack)) {
             if ((-NOT (Test-Path "$env:SystemRoot\System32\curl.exe")) -and (-NOT (Test-Path "$OSDISK\Windows\System32\curl.exe"))) {
-                Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Curl is required for this to function"
+                Write-Warning "[$(Get-Date -format G)] Curl is required for this to function"
                 Start-Sleep -Seconds 5
                 Continue
             }
@@ -129,7 +129,7 @@ function Invoke-OSDCloudDriverPackMDT {
                 Copy-Item -Path "$OSDISK\Windows\System32\curl.exe" -Destination "$env:SystemRoot\System32\curl.exe" -Force
             }
             if (-NOT (Test-Path "$env:SystemRoot\System32\curl.exe")) {
-                Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Curl is required for this to function"
+                Write-Warning "[$(Get-Date -format G)] Curl is required for this to function"
                 Start-Sleep -Seconds 5
                 Continue
             }
@@ -138,20 +138,20 @@ function Invoke-OSDCloudDriverPackMDT {
 
         $ReadyDriverPack = Get-ChildItem -Path $OSDiskDrivers -File -Force -ErrorAction Ignore | Where-Object {$_.Name -match $GetMyDriverPackBaseName} | Where-Object {$_.Extension -in ('.cab','.zip','.exe')}
         if ($ReadyDriverPack) {
-            Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) DriverPack has been copied to $OSDiskDrivers"
+            Write-Host -ForegroundColor Cyan "[$(Get-Date -format G)] DriverPack has been copied to $OSDiskDrivers"
 
             $OSDCloudDriverPackPPKG = Join-Path (Get-Module -Name OSD -ListAvailable | Sort-Object Version -Descending | Select-Object -First 1).ModuleBase "Provisioning\Invoke-OSDCloudDriverPack.ppkg"
         
             if (Test-Path $OSDCloudDriverPackPPKG) {
                 Write-Host
-                Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Applying first boot Specialize Provisioning Package"
+                Write-Host -ForegroundColor Cyan "[$(Get-Date -format G)] Applying first boot Specialize Provisioning Package"
                 Write-Host -ForegroundColor DarkGray "dism.exe /Image=$OSDISK\ /Add-ProvisioningPackage /PackagePath:`"$OSDCloudDriverPackPPKG`""
                 $ArgumentList = "/Image=$OSDISK\ /Add-ProvisioningPackage /PackagePath:`"$OSDCloudDriverPackPPKG`""
                 $null = Start-Process -FilePath 'dism.exe' -ArgumentList $ArgumentList -Wait -NoNewWindow
             }
         }
         else {
-            Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Could not download the DriverPack"
+            Write-Warning "[$(Get-Date -format G)] Could not download the DriverPack"
         }
         Stop-Transcript
         Start-Sleep -Seconds 5

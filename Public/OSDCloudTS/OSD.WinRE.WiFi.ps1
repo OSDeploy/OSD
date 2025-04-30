@@ -71,7 +71,7 @@ if ($env:SystemDrive -eq 'X:') {
         )
         
         $SSID = ([xml](Get-Content $wifiProfile)).WLANProfile.Name
-        Write-Host -ForegroundColor DarkGray "[$((Get-Date).ToString('yyyy-MM-dd-HHmmss'))][$($MyInvocation.MyCommand.Name)] Connecting to $SSID"
+        Write-Host -ForegroundColor DarkGray "[$(Get-Date -format G)] [$($MyInvocation.MyCommand.Name)] Connecting to $SSID"
 
         # just for sure
         $null = Netsh WLAN delete profile "$SSID"
@@ -212,7 +212,7 @@ $XMLProfile = @"
             $WirelessConnect
         )
         Block-PowerShellVersionLt5
-        Write-Host -ForegroundColor DarkGray "[$((Get-Date).ToString('yyyy-MM-dd-HHmmss'))][$($MyInvocation.MyCommand.Name)] Start"
+        Write-Host -ForegroundColor DarkGray "[$(Get-Date -format G)] [$($MyInvocation.MyCommand.Name)] Start"
         #=================================================
         #	Transcript
         #=================================================        
@@ -225,11 +225,11 @@ $XMLProfile = @"
         #	Test Internet Connection
         #=================================================
         if (Test-WebConnection -Uri 'google.com') {
-            Write-Host -ForegroundColor DarkGray "[$((Get-Date).ToString('yyyy-MM-dd-HHmmss'))][$($MyInvocation.MyCommand.Name)] Ping google.com success. Device is already connected to the Internet"
+            Write-Host -ForegroundColor DarkGray "[$(Get-Date -format G)] [$($MyInvocation.MyCommand.Name)] Ping google.com success. Device is already connected to the Internet"
             $StartWinREWiFi = $false
         }
         else {
-            Write-Host -ForegroundColor DarkGray "[$((Get-Date).ToString('yyyy-MM-dd-HHmmss'))][$($MyInvocation.MyCommand.Name)] Ping google.com failed. Will attempt to connect to a Wireless Network"
+            Write-Host -ForegroundColor DarkGray "[$(Get-Date -format G)] [$($MyInvocation.MyCommand.Name)] Ping google.com failed. Will attempt to connect to a Wireless Network"
             $StartWinREWiFi = $true
         }
         #=================================================
@@ -260,7 +260,7 @@ $XMLProfile = @"
             if ($StartWinREWiFi) {
             }
             else {
-                Write-Host -ForegroundColor DarkGray "[$((Get-Date).ToString('yyyy-MM-dd-HHmmss'))][$($MyInvocation.MyCommand.Name)] Unable to enable Wireless Network due to missing components"
+                Write-Host -ForegroundColor DarkGray "[$(Get-Date -format G)] [$($MyInvocation.MyCommand.Name)] Unable to enable Wireless Network due to missing components"
             }
         }
         #=================================================
@@ -270,7 +270,7 @@ $XMLProfile = @"
             if (Get-Service -Name WlanSvc) {
                 if ((Get-Service -Name WlanSvc).Status -ne 'Running') {
                     Get-Service -Name WlanSvc | Start-Service
-                    Write-Host -ForegroundColor DarkGray "[$((Get-Date).ToString('yyyy-MM-dd-HHmmss'))][$($MyInvocation.MyCommand.Name)] Waiting for WlanSvc service to start"
+                    Write-Host -ForegroundColor DarkGray "[$(Get-Date -format G)] [$($MyInvocation.MyCommand.Name)] Waiting for WlanSvc service to start"
                     (Get-Service WlanSvc).WaitForStatus('Running')
                 }
             }
@@ -292,16 +292,16 @@ $XMLProfile = @"
             else {
                 # Get Network Devices with Error Status
                 $PnPEntity = Get-WmiObject -ClassName Win32_PnPEntity | Where-Object { $_.Status -eq 'Error' } |  Where-Object { $_.Name -match 'Net' }
-                Write-Warning "[$((Get-Date).ToString('yyyy-MM-dd-HHmmss'))][$($MyInvocation.MyCommand.Name)] No Wireless Network Adapters were detected"
+                Write-Warning "[$(Get-Date -format G)] [$($MyInvocation.MyCommand.Name)] No Wireless Network Adapters were detected"
                 if ($PnPEntity) {
-                    Write-Warning "[$((Get-Date).ToString('yyyy-MM-dd-HHmmss'))][$($MyInvocation.MyCommand.Name)] Drivers may need to be added to WinPE for the following hardware"
+                    Write-Warning "[$(Get-Date -format G)] [$($MyInvocation.MyCommand.Name)] Drivers may need to be added to WinPE for the following hardware"
                     foreach ($Item in $PnPEntity) {
                         Write-Warning "$($Item.Name): $($Item.DeviceID)"
                     }
                     Start-Sleep -Seconds 10
                 }
                 else {
-                    Write-Warning "[$((Get-Date).ToString('yyyy-MM-dd-HHmmss'))][$($MyInvocation.MyCommand.Name)] Drivers may need to be added to WinPE before Wireless Networking is available"
+                    Write-Warning "[$(Get-Date -format G)] [$($MyInvocation.MyCommand.Name)] Drivers may need to be added to WinPE before Wireless Networking is available"
                 }
                 $StartWinREWiFi = $false
             }
@@ -314,7 +314,7 @@ $XMLProfile = @"
             if ($Module) {
                 $UEFIWiFiProfile = Get-UEFIVariable -Namespace "{43B9C282-A6F5-4C36-B8DE-C8738F979C65}" -VariableName PrebootWiFiProfile
                 if ($UEFIWiFiProfile) {
-                    Write-Host -ForegroundColor DarkGray "[$((Get-Date).ToString('yyyy-MM-dd-HHmmss'))][$($MyInvocation.MyCommand.Name)] Found WiFi Profile in HP UEFI"
+                    Write-Host -ForegroundColor DarkGray "[$(Get-Date -format G)] [$($MyInvocation.MyCommand.Name)] Found WiFi Profile in HP UEFI"
                     $UEFIWiFiProfile = $UEFIWiFiProfile -Replace "`0",""
 
                     $SSIDString = $UEFIWiFiProfile.Split(",") | Where-Object {$_ -match "SSID"}
@@ -323,10 +323,10 @@ $XMLProfile = @"
                     $KeyString = $UEFIWiFiProfile.Split(",") | Where-Object {$_ -match "Password"}
                     $Key = ($KeyString.Split(":") | Where-Object {$_ -notmatch "Password"}).Replace("`"","")
                     if ($SSID) {
-                        Write-Host -ForegroundColor DarkGray "[$((Get-Date).ToString('yyyy-MM-dd-HHmmss'))][$($MyInvocation.MyCommand.Name)] Found $SSID in UEFI, Attepting to Create Profile and Connect"
+                        Write-Host -ForegroundColor DarkGray "[$(Get-Date -format G)] [$($MyInvocation.MyCommand.Name)] Found $SSID in UEFI, Attepting to Create Profile and Connect"
                         Set-WinREWiFi -WLanName $SSID -Passwd $Key -outfile "$env:TEMP\UEFIWiFiProfile.XML"
                         if (!($wifiProfile)) {
-                            Write-Host -ForegroundColor DarkGray "[$((Get-Date).ToString('yyyy-MM-dd-HHmmss'))][$($MyInvocation.MyCommand.Name)] Setting wifiprofile var to $env:TEMP\UEFIWiFiProfile.XML"
+                            Write-Host -ForegroundColor DarkGray "[$(Get-Date -format G)] [$($MyInvocation.MyCommand.Name)] Setting wifiprofile var to $env:TEMP\UEFIWiFiProfile.XML"
                             $wifiProfile = "$env:TEMP\UEFIWiFiProfile.XML"
                         }
                     }
@@ -339,7 +339,7 @@ $XMLProfile = @"
         #TODO Test on ARM64
         if ($StartWinREWiFi) {
             if ($WirelessNetworkAdapter.NetEnabled -eq $true) {
-                Write-Host -ForegroundColor DarkGray "[$((Get-Date).ToString('yyyy-MM-dd-HHmmss'))][$($MyInvocation.MyCommand.Name)] Wireless is already connected ... Disconnecting"
+                Write-Host -ForegroundColor DarkGray "[$(Get-Date -format G)] [$($MyInvocation.MyCommand.Name)] Wireless is already connected ... Disconnecting"
                 (Get-WmiObject -ClassName Win32_NetworkAdapter | Where-Object { $_.InterfaceIndex -eq $WirelessNetworkAdapter.InterfaceIndex }).disable() | Out-Null
                 Start-Sleep -Seconds 5
                 (Get-WmiObject -ClassName Win32_NetworkAdapter | Where-Object { $_.InterfaceIndex -eq $WirelessNetworkAdapter.InterfaceIndex }).enable() | Out-Null
@@ -352,10 +352,10 @@ $XMLProfile = @"
         #=================================================
         if ($StartWinREWiFi) {
                 if ($wifiProfile -and (Test-Path $wifiProfile)) {
-                    Write-Host -ForegroundColor DarkGray "[$((Get-Date).ToString('yyyy-MM-dd-HHmmss'))][$($MyInvocation.MyCommand.Name)] Starting unattended Wi-Fi connection "
+                    Write-Host -ForegroundColor DarkGray "[$(Get-Date -format G)] [$($MyInvocation.MyCommand.Name)] Starting unattended Wi-Fi connection "
                 }
                 else {
-                    Write-Host -ForegroundColor DarkGray "[$((Get-Date).ToString('yyyy-MM-dd-HHmmss'))][$($MyInvocation.MyCommand.Name)] Starting Wi-Fi Network Menu "
+                    Write-Host -ForegroundColor DarkGray "[$(Get-Date -format G)] [$($MyInvocation.MyCommand.Name)] Starting Wi-Fi Network Menu "
                 }
 
                 # Use the Win32_NetworkAdapterConfiguration to check if the Wi-Fi adapter is IPEnabled
@@ -369,14 +369,14 @@ $XMLProfile = @"
                 if ($StartWinREWiFi) {
                     # use saved wi-fi profile to make the unattended connection
                     try {
-                        Write-Host -ForegroundColor DarkGray "[$((Get-Date).ToString('yyyy-MM-dd-HHmmss'))][$($MyInvocation.MyCommand.Name)] Establishing a connection using $wifiProfile"
+                        Write-Host -ForegroundColor DarkGray "[$(Get-Date -format G)] [$($MyInvocation.MyCommand.Name)] Establishing a connection using $wifiProfile"
                         Connect-WinREWiFiByXMLProfile $wifiProfile -ErrorAction Stop
                         Start-Sleep -Seconds 10
                     }
                     catch {
                         Write-Warning $_
                         # to avoid infinite loop of tries
-                        Write-Host -ForegroundColor DarkGray "[$((Get-Date).ToString('yyyy-MM-dd-HHmmss'))][$($MyInvocation.MyCommand.Name)] Removing invalid Wi-Fi profile '$wifiProfile'"
+                        Write-Host -ForegroundColor DarkGray "[$(Get-Date -format G)] [$($MyInvocation.MyCommand.Name)] Removing invalid Wi-Fi profile '$wifiProfile'"
                         Remove-Item $wifiProfile -Force
                         continue
                     }
@@ -401,7 +401,7 @@ $XMLProfile = @"
                             $SSID = $SSIDList | Where-Object { $_.index -eq $SSIDIndex } | Select-Object -exp SSID
                 
                             # connect to selected Wi-Fi
-                            Write-Host -ForegroundColor DarkGray "[$((Get-Date).ToString('yyyy-MM-dd-HHmmss'))][$($MyInvocation.MyCommand.Name)] Establishing a connection to SSID $SSID"
+                            Write-Host -ForegroundColor DarkGray "[$(Get-Date -format G)] [$($MyInvocation.MyCommand.Name)] Establishing a connection to SSID $SSID"
                             try {
                                 Connect-WinREWiFi $SSID -ErrorAction Stop
                             } catch {
@@ -409,7 +409,7 @@ $XMLProfile = @"
                                 continue
                             }
                         } else {
-                            Write-Warning "[$((Get-Date).ToString('yyyy-MM-dd-HHmmss'))][$($MyInvocation.MyCommand.Name)] No Wi-Fi network found. Move closer to AP or use ethernet cable instead."
+                            Write-Warning "[$(Get-Date -format G)] [$($MyInvocation.MyCommand.Name)] No Wi-Fi network found. Move closer to AP or use ethernet cable instead."
                         }
                     }
                 }
@@ -419,14 +419,14 @@ $XMLProfile = @"
                 } else {
                     $text = "to SSID $SSID"
                 }
-                Write-Host -ForegroundColor DarkGray "[$((Get-Date).ToString('yyyy-MM-dd-HHmmss'))][$($MyInvocation.MyCommand.Name)] Waiting for a connection $text"
+                Write-Host -ForegroundColor DarkGray "[$(Get-Date -format G)] [$($MyInvocation.MyCommand.Name)] Waiting for a connection $text"
                 Start-Sleep -Seconds 15
             
                 $i = 30
                 #TODO Resolve issue with WirelessNetworkAdapter
                 while (((Get-CimInstance -ClassName Win32_NetworkAdapterConfiguration | Where-Object { $_.Index -eq $($WirelessNetworkAdapter.DeviceID) }).IPEnabled -eq $false) -and $i -gt 0) {
                     --$i
-                    Write-Host -ForegroundColor DarkGray "[$((Get-Date).ToString('yyyy-MM-dd-HHmmss'))][$($MyInvocation.MyCommand.Name)] Waiting for Wi-Fi Connection ($i)"
+                    Write-Host -ForegroundColor DarkGray "[$(Get-Date -format G)] [$($MyInvocation.MyCommand.Name)] Waiting for Wi-Fi Connection ($i)"
                     Start-Sleep -Seconds 1
                 }
             }

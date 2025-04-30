@@ -33,7 +33,7 @@ $OSDCloudSpecializeScript = @'
 #=================================================
 #   Specialize DriverPacks
 #=================================================
-Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) OSDCloud Specialize Driver Pack Integration"
+Write-Host -ForegroundColor Cyan "[$(Get-Date -format G)] OSDCloud Specialize Driver Pack Integration"
 if (Test-Path 'C:\Drivers') {
     $DriverPacks = Get-ChildItem -Path 'C:\Drivers' -File
 

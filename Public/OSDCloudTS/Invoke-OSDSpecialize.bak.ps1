@@ -14,7 +14,7 @@ function Invoke-OSDSpecialize {
     #=================================================
     #region Transcript
     Write-Host -ForegroundColor DarkGray "========================================================================="
-    Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Saving PowerShell Transcript to C:\OSDCloud\Logs"
+    Write-Host -ForegroundColor Cyan "[$(Get-Date -format G)] Saving PowerShell Transcript to C:\OSDCloud\Logs"
     Write-Verbose -Message "https://docs.microsoft.com/en-us/powershell/module/microsoft.powershell.host/start-transcript"
 
     if (-NOT (Test-Path 'C:\OSDCloud\Logs')) {

@@ -223,7 +223,7 @@
     #	Computer Information
     #=================================================
     Write-Host -ForegroundColor DarkGray "========================================================================="
-    Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) $($Global:StartOSDCloud.Function) | Manufacturer: $Manufacturer | Product: $Product"
+    Write-Host -ForegroundColor Cyan "[$(Get-Date -format G)] $($Global:StartOSDCloud.Function) | Manufacturer: $Manufacturer | Product: $Product"
     #=================================================
     #	Battery
     #=================================================
@@ -262,7 +262,7 @@
     #	Test Web Connection
     #=================================================
     Write-Host -ForegroundColor DarkGray "========================================================================="
-    Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Test-WebConnection" -NoNewline
+    Write-Host -ForegroundColor Cyan "[$(Get-Date -format G)] Test-WebConnection" -NoNewline
     #Write-Host -ForegroundColor DarkGray "google.com"
 
     if (Test-WebConnection -Uri "google.com") {
@@ -323,7 +323,7 @@
         }
         else {
             Write-Host -ForegroundColor DarkGray "========================================================================="
-            Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Select an Operating System"
+            Write-Host -ForegroundColor Cyan "[$(Get-Date -format G)] Select an Operating System"
 
             $i = $null
             $Global:StartOSDCloud.OSNameMenu = foreach ($Item in $Global:StartOSDCloud.OSNames) {
@@ -358,7 +358,7 @@
         }
         else {
             Write-Host -ForegroundColor DarkGray "========================================================================="
-            Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Select an Operating System"
+            Write-Host -ForegroundColor Cyan "[$(Get-Date -format G)] Select an Operating System"
             $Global:StartOSDCloud.OSVersionNames = @('Windows 11','Windows 10')
 
             $i = $null
@@ -392,7 +392,7 @@
         }
         else {
             Write-Host -ForegroundColor DarkGray "========================================================================="
-            Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Select a Build for $OSVersion x64"
+            Write-Host -ForegroundColor Cyan "[$(Get-Date -format G)] Select a Build for $OSVersion x64"
             $Global:StartOSDCloud.OSBuildNames = @('24H2','23H2','22H2','21H2')
             
             $i = $null
@@ -428,7 +428,7 @@
         }
         else {
             Write-Host -ForegroundColor DarkGray "========================================================================="
-            Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Select an Operating System Edition"
+            Write-Host -ForegroundColor Cyan "[$(Get-Date -format G)] Select an Operating System Edition"
             $Global:StartOSDCloud.OSEditionNames = @('Home','Home N','Home Single Language','Education','Education N','Enterprise','Enterprise N','Pro','Pro N')
 
             $i = $null
@@ -490,7 +490,7 @@
         }
         else {
             Write-Host -ForegroundColor DarkGray "========================================================================="
-            Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Select an Operating System License"
+            Write-Host -ForegroundColor Cyan "[$(Get-Date -format G)] Select an Operating System License"
             $Global:StartOSDCloud.OSActivationNames = @('Retail Windows Consumer Editions','Volume Windows Business Editions')
             
             $i = $null
@@ -559,7 +559,7 @@
         }
         else {
             Write-Host -ForegroundColor DarkGray "========================================================================="
-            Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Select an Operating System Language"
+            Write-Host -ForegroundColor Cyan "[$(Get-Date -format G)] Select an Operating System Language"
             $Global:StartOSDCloud.OSLanguageNames = @('ar-sa','bg-bg','cs-cz','da-dk','de-de','el-gr','en-gb','en-us','es-es','es-mx','et-ee','fi-fi','fr-ca','fr-fr','he-il','hr-hr','hu-hu','it-it','ja-jp','ko-kr','lt-lt','lv-lv','nb-no','nl-nl','pl-pl','pt-br','pt-pt','ro-ro','ru-ru','sk-sk','sl-si','sr-latn-rs','sv-se','th-th','tr-tr','uk-ua','zh-cn','zh-tw')
             
             $i = $null

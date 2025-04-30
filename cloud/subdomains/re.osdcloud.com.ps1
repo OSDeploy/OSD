@@ -65,15 +65,15 @@ if ($WindowsPhase -eq 'Windows') {
     if ($fromIsoUrl) {
         #============================================
         #   Test Admin Rights
-        Write-Host -ForegroundColor DarkGray "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Test Admin Rights"
+        Write-Host -ForegroundColor DarkGray "[$(Get-Date -format G)] Test Admin Rights"
         $IsAdmin = ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] 'Administrator')
         if (! $IsAdmin) {
-            Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) OSDCloudRE requires elevated Admin Rights"
+            Write-Warning "[$(Get-Date -format G)] OSDCloudRE requires elevated Admin Rights"
             Break
         }
         #============================================
         #   Test PowerShell Execution Policy
-        Write-Host -ForegroundColor DarkGray "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Test PowerShell Execution Policy"
+        Write-Host -ForegroundColor DarkGray "[$(Get-Date -format G)] Test PowerShell Execution Policy"
         if ((Get-ExecutionPolicy) -ne 'RemoteSigned') {
             Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Force
         }
@@ -81,7 +81,7 @@ if ($WindowsPhase -eq 'Windows') {
         #	OSD Module
         $InstallModule = $false
         $PSModuleName = 'OSD'
-        Write-Host -ForegroundColor DarkGray "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Test $PSModuleName Module"
+        Write-Host -ForegroundColor DarkGray "[$(Get-Date -format G)] Test $PSModuleName Module"
         $InstalledModule = Get-InstalledModule $PSModuleName -ErrorAction Ignore | Select-Object -First 1
         $GalleryPSModule = Find-Module -Name $PSModuleName -ErrorAction Ignore
     
@@ -111,22 +111,22 @@ if ($WindowsPhase -eq 'Windows') {
             $fromIsoUrl = $ResolveUrl.Headers.Location
         }
         
-        Write-Host -ForegroundColor DarkGray "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Downloading $fromIsoUrl"
+        Write-Host -ForegroundColor DarkGray "[$(Get-Date -format G)] Downloading $fromIsoUrl"
         $fromIsoFileGetItem = Save-WebFile -SourceUrl $fromIsoUrl -DestinationDirectory (Join-Path $HOME 'Downloads')
         $fromIsoFileFullName = $fromIsoFileGetItem.FullName
         
         if ($fromIsoFileGetItem -and $fromIsoFileGetItem.Extension -eq '.iso') {
-            Write-Host -ForegroundColor DarkGray "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) OSDCloudISO downloaded to $fromIsoFileFullName"
+            Write-Host -ForegroundColor DarkGray "[$(Get-Date -format G)] OSDCloudISO downloaded to $fromIsoFileFullName"
         }
         else {
-            Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Unable to download OSDCloudISO"
+            Write-Warning "[$(Get-Date -format G)] Unable to download OSDCloudISO"
             Break
         }
         #============================================
         #	Download ISO
         $Volumes = (Get-Volume).Where({$_.DriveLetter}).DriveLetter
         
-        Write-Host -ForegroundColor DarkGray "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Mounting OSDCloudISO"
+        Write-Host -ForegroundColor DarkGray "[$(Get-Date -format G)] Mounting OSDCloudISO"
         $MountDiskImage = Mount-DiskImage -ImagePath $fromIsoFileFullName
         Start-Sleep -Seconds 3
         $MountDiskImageDriveLetter = (Compare-Object -ReferenceObject $Volumes -DifferenceObject (Get-Volume).Where({$_.DriveLetter}).DriveLetter).InputObject
@@ -135,7 +135,7 @@ if ($WindowsPhase -eq 'Windows') {
             $OSDCloudREMedia = "$($MountDiskImageDriveLetter):\"
         }
         else {
-            Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Unable to mount $MountDiskImage"
+            Write-Warning "[$(Get-Date -format G)] Unable to mount $MountDiskImage"
             Break
         }
         #============================================
@@ -147,51 +147,51 @@ if ($WindowsPhase -eq 'Windows') {
             $BitLockerVolumes | Suspend-BitLocker -RebootCount 1 -ErrorAction Ignore
         
             if (Get-BitLockerVolume -MountPoint $BitLockerVolumes | Where-Object ProtectionStatus -eq "On") {
-                Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Unable to suspend BitLocker for next boot"
+                Write-Warning "[$(Get-Date -format G)] Unable to suspend BitLocker for next boot"
             }
             else {
-                Write-Host -ForegroundColor DarkGray "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) BitLocker is suspended for the next boot"
+                Write-Host -ForegroundColor DarkGray "[$(Get-Date -format G)] BitLocker is suspended for the next boot"
             }
         }
         #============================================
         #   New-OSDCloudREVolume
         #============================================
-        Write-Host -ForegroundColor DarkGray "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Creating a new OSDCloudRE volume"
+        Write-Host -ForegroundColor DarkGray "[$(Get-Date -format G)] Creating a new OSDCloudRE volume"
         $OSDCloudREVolume = New-OSDCloudREVolume
         #============================================
         #   PSDrive
         #============================================
-        Write-Host -ForegroundColor DarkGray "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Test OSDCloudRE PSDrive"
+        Write-Host -ForegroundColor DarkGray "[$(Get-Date -format G)] Test OSDCloudRE PSDrive"
         $OSDCloudREPSDrive = Get-OSDCloudREPSDrive
         
         if (! $OSDCloudREPSDrive) {
-            Write-Error "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Unable to find OSDCloudRE PSDrive"
+           Write-Error "[$(Get-Date -format G)] Unable to find OSDCloudRE PSDrive"
             Break
         }
         #============================================
         #	OSDCloudRERoot
         #============================================
-        Write-Host -ForegroundColor DarkGray "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Test OSDCloudRE Root"
+        Write-Host -ForegroundColor DarkGray "[$(Get-Date -format G)] Test OSDCloudRE Root"
         $OSDCloudRERoot = ($OSDCloudREPSDrive).Root
         if (-NOT (Test-Path $OSDCloudRERoot)) {
-            Write-Error "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Unable to find OSDCloudRE Root at $OSDCloudRERoot"
+           Write-Error "[$(Get-Date -format G)] Unable to find OSDCloudRE Root at $OSDCloudRERoot"
             Break
         }
         #============================================
         #	Update WinPE Volume
         #============================================
         if ((Test-Path -Path "$OSDCloudREMedia") -and (Test-Path -Path "$OSDCloudRERoot")) {
-            Write-Host -ForegroundColor DarkGray "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Copying $OSDCloudREMedia to OSDCloud WinPE partition at $OSDCloudRERoot"
+            Write-Host -ForegroundColor DarkGray "[$(Get-Date -format G)] Copying $OSDCloudREMedia to OSDCloud WinPE partition at $OSDCloudRERoot"
             $null = robocopy "$OSDCloudREMedia" "$OSDCloudRERoot" *.* /e /ndl /njh /njs /np /r:0 /w:0 /b /zb
         }
         else {
-            Write-Error "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Unable to copy Media to OSDCloudRE"
+           Write-Error "[$(Get-Date -format G)] Unable to copy Media to OSDCloudRE"
             Break
         }
         #============================================
         #	Remove Read-Only Attribute
         #============================================
-        Write-Host -ForegroundColor DarkGray "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Removing Read Only attributes in $OSDCloudRERoot"
+        Write-Host -ForegroundColor DarkGray "[$(Get-Date -format G)] Removing Read Only attributes in $OSDCloudRERoot"
         Get-ChildItem -Path $OSDCloudRERoot -File -Recurse -Force | foreach {
             Set-ItemProperty -Path $_.FullName -Name IsReadOnly -Value $false -Force -ErrorAction Ignore
         }
@@ -200,29 +200,29 @@ if ($WindowsPhase -eq 'Windows') {
         #============================================
         if ($MountDiskImage) {
             Start-Sleep -Seconds 3
-            Write-Host -ForegroundColor DarkGray "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Dismounting ISO at $($MountDiskImage.ImagePath)"
+            Write-Host -ForegroundColor DarkGray "[$(Get-Date -format G)] Dismounting ISO at $($MountDiskImage.ImagePath)"
             $null = Dismount-DiskImage -ImagePath $MountDiskImage.ImagePath
         }
         #============================================
         #   Get-OSDCloudREVolume
         #============================================
-        Write-Host -ForegroundColor DarkGray "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Testing OSDCloudRE Volume"
+        Write-Host -ForegroundColor DarkGray "[$(Get-Date -format G)] Testing OSDCloudRE Volume"
         if (! (Get-OSDCloudREVolume)) {
-            Write-Warning "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Could not create OSDCloudRE"
+            Write-Warning "[$(Get-Date -format G)] Could not create OSDCloudRE"
             Break
         }
         #============================================
         #   Set-OSDCloudREBCD
         #============================================
-        Write-Host -ForegroundColor DarkGray "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Set OSDCloudRE Ramdisk: Set-OSDCloudREBootmgr -SetRamdisk"
+        Write-Host -ForegroundColor DarkGray "[$(Get-Date -format G)] Set OSDCloudRE Ramdisk: Set-OSDCloudREBootmgr -SetRamdisk"
         Set-OSDCloudREBootmgr -SetRamdisk
-        Write-Host -ForegroundColor DarkGray "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Set OSDCloudRE OSLoader: Set-OSDCloudREBootmgr -SetOSloader"
+        Write-Host -ForegroundColor DarkGray "[$(Get-Date -format G)] Set OSDCloudRE OSLoader: Set-OSDCloudREBootmgr -SetOSloader"
         Set-OSDCloudREBootmgr -SetOSloader
-        Write-Host -ForegroundColor DarkGray "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Hiding OSDCloudRE volume"
+        Write-Host -ForegroundColor DarkGray "[$(Get-Date -format G)] Hiding OSDCloudRE volume"
         Hide-OSDCloudREDrive
-        Write-Host -ForegroundColor DarkGray "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Set OSDCloudRE to restart on next boot: Set-OSDCloudREBootmgr -BootToOSDCloudRE"
+        Write-Host -ForegroundColor DarkGray "[$(Get-Date -format G)] Set OSDCloudRE to restart on next boot: Set-OSDCloudREBootmgr -BootToOSDCloudRE"
         Set-OSDCloudREBootmgr -BootToOSDCloudRE
-        Write-Host -ForegroundColor Cyan "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) OSDCloudRE setup is complete"
+        Write-Host -ForegroundColor Cyan "[$(Get-Date -format G)] OSDCloudRE setup is complete"
         #============================================
     }
 }

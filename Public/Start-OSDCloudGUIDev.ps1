@@ -98,7 +98,7 @@
     #================================================
     #   OSDCloud Automate
     #================================================
-    Write-Host -ForegroundColor DarkGray "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Exporting default configuration to $env:Temp\Start-OSDCloudGUI.json"
+    Write-Host -ForegroundColor DarkGray "[$(Get-Date -format G)] Exporting default configuration to $env:Temp\Start-OSDCloudGUI.json"
     $Global:OSDCloudGUI | ConvertTo-Json -Depth 10 | Out-File -FilePath "$env:TEMP\Start-OSDCloudGUI.json" -Force
     
     $Global:OSDCloudGUI.AutomateJsonFile = Get-PSDrive -PSProvider FileSystem | Where-Object {$_.Name -ne 'C'} | ForEach-Object {
@@ -106,7 +106,7 @@
     }
     if ($Global:OSDCloudGUI.AutomateJsonFile) {
         foreach ($Item in $Global:OSDCloudGUI.AutomateJsonFile) {
-            Write-Host -ForegroundColor DarkGray "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) $($Item.FullName)"
+            Write-Host -ForegroundColor DarkGray "[$(Get-Date -format G)] $($Item.FullName)"
             $Global:OSDCloudGUI.AutomateConfiguration = Get-Content -Path "$($Item.FullName)" -Raw | ConvertFrom-Json -ErrorAction "Stop" | ConvertTo-Hashtable
         }
     }
@@ -142,37 +142,37 @@
         $Win32Tpm = Get-CimInstance -Namespace "ROOT\cimv2\Security\MicrosoftTpm" -ClassName Win32_Tpm
 
         if ($null -eq $Win32Tpm) {
-            Write-Host -ForegroundColor Yellow "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) TPM: Not Supported"
-            Write-Host -ForegroundColor Yellow "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Autopilot: Not Supported"
+            Write-Host -ForegroundColor Yellow "[$(Get-Date -format G)] TPM: Not Supported"
+            Write-Host -ForegroundColor Yellow "[$(Get-Date -format G)] Autopilot: Not Supported"
             Start-Sleep -Seconds 5
         }
         elseif ($Win32Tpm.SpecVersion) {
             if ($null -eq $Win32Tpm.SpecVersion) {
-                Write-Host -ForegroundColor Yellow "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) TPM: Unable to detect the TPM Version"
-                Write-Host -ForegroundColor Yellow "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Autopilot: Not Supported"
+                Write-Host -ForegroundColor Yellow "[$(Get-Date -format G)] TPM: Unable to detect the TPM Version"
+                Write-Host -ForegroundColor Yellow "[$(Get-Date -format G)] Autopilot: Not Supported"
                 Start-Sleep -Seconds 5
             }
 
             $majorVersion = $Win32Tpm.SpecVersion.Split(",")[0] -as [int]
             if ($majorVersion -lt 2) {
-                Write-Host -ForegroundColor Yellow "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) TPM: Version is less than 2.0"
-                Write-Host -ForegroundColor Yellow "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Autopilot: Not Supported"
+                Write-Host -ForegroundColor Yellow "[$(Get-Date -format G)] TPM: Version is less than 2.0"
+                Write-Host -ForegroundColor Yellow "[$(Get-Date -format G)] Autopilot: Not Supported"
                 Start-Sleep -Seconds 5
             }
             else {
-                #Write-Host -ForegroundColor DarkGray "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) TPM IsActivated: $($Win32Tpm.IsActivated_InitialValue)"
-                #Write-Host -ForegroundColor DarkGray "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) TPM IsEnabled: $($Win32Tpm.IsEnabled_InitialValue)"
-                #Write-Host -ForegroundColor DarkGray "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) TPM IsOwned: $($Win32Tpm.IsOwned_InitialValue)"
-                #Write-Host -ForegroundColor DarkGray "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) TPM Manufacturer: $($Win32Tpm.ManufacturerIdTxt)"
-                #Write-Host -ForegroundColor DarkGray "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) TPM Manufacturer Version: $($Win32Tpm.ManufacturerVersion)"
-                #Write-Host -ForegroundColor DarkGray "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) TPM SpecVersion: $($Win32Tpm.SpecVersion)"
-                Write-Host -ForegroundColor Green "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) TPM 2.0: Supported"
-                Write-Host -ForegroundColor Green "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Autopilot: Supported"
+                #Write-Host -ForegroundColor DarkGray "[$(Get-Date -format G)] TPM IsActivated: $($Win32Tpm.IsActivated_InitialValue)"
+                #Write-Host -ForegroundColor DarkGray "[$(Get-Date -format G)] TPM IsEnabled: $($Win32Tpm.IsEnabled_InitialValue)"
+                #Write-Host -ForegroundColor DarkGray "[$(Get-Date -format G)] TPM IsOwned: $($Win32Tpm.IsOwned_InitialValue)"
+                #Write-Host -ForegroundColor DarkGray "[$(Get-Date -format G)] TPM Manufacturer: $($Win32Tpm.ManufacturerIdTxt)"
+                #Write-Host -ForegroundColor DarkGray "[$(Get-Date -format G)] TPM Manufacturer Version: $($Win32Tpm.ManufacturerVersion)"
+                #Write-Host -ForegroundColor DarkGray "[$(Get-Date -format G)] TPM SpecVersion: $($Win32Tpm.SpecVersion)"
+                Write-Host -ForegroundColor Green "[$(Get-Date -format G)] TPM 2.0: Supported"
+                Write-Host -ForegroundColor Green "[$(Get-Date -format G)] Autopilot: Supported"
             }
         }
         else {
-            Write-Host -ForegroundColor Yellow "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) TPM: Not Supported"
-            Write-Host -ForegroundColor Yellow "$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) Autopilot: Not Supported"
+            Write-Host -ForegroundColor Yellow "[$(Get-Date -format G)] TPM: Not Supported"
+            Write-Host -ForegroundColor Yellow "[$(Get-Date -format G)] Autopilot: Not Supported"
             Start-Sleep -Seconds 5
         }
     }
