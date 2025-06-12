@@ -19,10 +19,30 @@ function Get-OSDCloudOperatingSystemsIndexes {
     )
 
     if ($OSArch -eq 'x64') {
-        $Results = Get-Content -Path "$(Get-OSDModulePath)\cache\archive-cloudoperatingsystems\CloudOperatingSystemsIndexes.json" | ConvertFrom-Json
+        $OfflineCatalog = Get-PSDrive -PSProvider FileSystem | Where-Object {$_.Name -ne 'C'} | ForEach-Object {
+            Get-ChildItem "$($_.Root)OSDCloud\Catalogs" -Include "CloudOperatingSystemsIndexes.json" -File -Force -Recurse -ErrorAction Ignore
+        }
+        if ($OfflineCatalog) {
+            foreach ($Item in $OfflineCatalog) {
+                Write-Warning "$($Item.FullName) is imported instead of the cache under $(Get-OSDModulePath)."
+                $Results = Get-Content -Path "$($Item.FullName)" | ConvertFrom-Json -ErrorAction "Stop"
+            }
+        } else {
+            $Results = Get-Content -Path "$(Get-OSDCachePath)\archive-cloudoperatingsystems\CloudOperatingSystemsIndexes.json" | ConvertFrom-Json
+        }
     }
     elseif ($OSArch -eq "ARM64") {
-        $Results = Get-Content -Path "$(Get-OSDModulePath)\cache\archive-cloudoperatingsystems\CloudOperatingSystemsARM64Indexes.json" | ConvertFrom-Json
+        $OfflineCatalog = Get-PSDrive -PSProvider FileSystem | Where-Object {$_.Name -ne 'C'} | ForEach-Object {
+            Get-ChildItem "$($_.Root)OSDCloud\Catalogs" -Include "CloudOperatingSystemsARM64Indexes.json" -File -Force -Recurse -ErrorAction Ignore
+        }
+        if ($OfflineCatalog) {
+            foreach ($Item in $OfflineCatalog) {
+                Write-Warning "$($Item.FullName) is imported instead of the cache under $(Get-OSDModulePath)."
+                $Results = Get-Content -Path "$($Item.FullName)" | ConvertFrom-Json -ErrorAction "Stop"
+            }
+        } else {
+            $Results = Get-Content -Path "$(Get-OSDCachePath)\archive-cloudoperatingsystems\CloudOperatingSystemsARM64Indexes.json" | ConvertFrom-Json
+        }
     }
 
     return $Results

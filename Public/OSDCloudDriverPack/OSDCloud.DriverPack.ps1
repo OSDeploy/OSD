@@ -67,7 +67,17 @@ function Get-OSDCloudDriverPacks {
     #>
     [CmdletBinding()]
     param ()
-    $Results = Import-Clixml -Path "$(Get-OSDModulePath)\cache\driverpack-catalogs\build-driverpacks.xml"
+    $DriverCatalogXML = Get-PSDrive -PSProvider FileSystem | Where-Object {$_.Name -ne 'C'} | ForEach-Object {
+        Get-ChildItem "$($_.Root)OSDCloud\Catalogs" -Include "build-driverpacks.xml" -File -Force -Recurse -ErrorAction Ignore
+    }
+    if ($DriverCatalogXML) {
+        foreach ($Item in $DriverCatalogXML) {
+            Write-Warning "$($Item.FullName) is imported instead of the cache under $(Get-OSDModulePath)."
+            $Results = Import-Clixml -Path $Item.FullName
+        }
+    } else {
+        $Results = Import-Clixml -Path "$(Get-OSDModulePath)\cache\driverpack-catalogs\build-driverpacks.xml"
+    }
     $Results
 }
 function Save-OSDCloudDriverPack {
