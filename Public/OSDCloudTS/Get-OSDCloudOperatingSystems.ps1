@@ -16,12 +16,12 @@ function Get-OSDCloudOperatingSystems {
         [System.String]
         $OSArch = 'x64'
     )
-    $OSCatalogjson = Get-PSDrive -PSProvider FileSystem | Where-Object {$_.Name -ne 'C'} | ForEach-Object {
+    $OfflineCatalog = Get-PSDrive -PSProvider FileSystem | Where-Object {$_.Name -ne 'C'} | ForEach-Object {
         Get-ChildItem "$($_.Root)OSDCloud\Catalogs" -Include "CloudOperatingSystems.json" -File -Force -Recurse -ErrorAction Ignore
     }
-    if ($OSCatalogJson) {
-        foreach ($Item in $OSCatalogJson) {
-            Write-Warning "$($Item.FullName) is imported instead of the cache under $(Get-OSDModulePath)."
+    if ($OfflineCatalog) {
+        foreach ($Item in $OfflineCatalog) {
+            Write-Warning "$($Item.FullName) is imported instead of the cache under $(Get-OSDCachePath)."
             $FullResults = Get-Content -Path "$($Item.FullName)" | ConvertFrom-Json -ErrorAction "Stop"
         }
         $Results = $FullResults | Where-Object {$_.Architecture -eq $OSArch}
