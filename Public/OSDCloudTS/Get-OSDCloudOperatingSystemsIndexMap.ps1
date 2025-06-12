@@ -32,7 +32,7 @@ function Get-OSDCloudOperatingSystemsIndexMap {
     } else {
         $indexMapPath = "$(Get-OSDCachePath)\archive-cloudoperatingindexmap\CloudOperatingIndexMap.json"
     }
-    $Results = Get-Content -Path $indexMapPath | ConvertFrom-Json
+    $Results = Get-Content -Path $indexMapPath -Encoding UTF8 | ConvertFrom-Json # as of OSD 25.6.10.1 encoding of the json is UTF8
     $Results = $Results | Where-Object { $_.Architecture -eq $OSArch }
     
     return $Results
