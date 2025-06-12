@@ -16,12 +16,18 @@ function Get-OSDCloudOperatingSystems {
         [System.String]
         $OSArch = 'x64'
     )
-    $FullResults = Get-Content -Path "$(Get-OSDModulePath)\cache\archive-cloudoperatingsystems\CloudOperatingSystems.json" | ConvertFrom-Json
-    if ($OSArch -eq 'x64'){
-        $Results = $FullResults | Where-Object {$_.Architecture -eq "x64"}
+    $OfflineCatalog = Get-PSDrive -PSProvider FileSystem | Where-Object {$_.Name -ne 'C'} | ForEach-Object {
+        Get-ChildItem "$($_.Root)OSDCloud\Catalogs" -Include "CloudOperatingSystems.json" -File -Force -Recurse -ErrorAction Ignore
     }
-    elseif ($OSArch -eq "arm64"){
-        $Results = Get-Content -Path "$(Get-OSDModulePath)\cache\archive-cloudoperatingsystems\CloudOperatingSystemsARM64.json" | ConvertFrom-Json
+    if ($OfflineCatalog) {
+        foreach ($Item in $OfflineCatalog) {
+            Write-Warning "$($Item.FullName) is imported instead of the cache under $(Get-OSDModulePath)."
+            $FullResults = Get-Content -Path "$($Item.FullName)" | ConvertFrom-Json -ErrorAction "Stop"
+        }
+        $Results = $FullResults | Where-Object {$_.Architecture -eq $OSArch}
+    } else {
+        $FullResults = Get-Content -Path "$(Get-OSDModulePath)\cache\archive-cloudoperatingsystems\CloudOperatingSystems.json" | ConvertFrom-Json
+        $Results = $FullResults | Where-Object {$_.Architecture -eq $OSArch}
     }
     $Results
 }
