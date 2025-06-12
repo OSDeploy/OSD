@@ -21,7 +21,17 @@ function Get-OSDCloudOperatingSystemsIndexMap {
         $OSArch = 'x64'
     )
 
-    $indexMapPath = "$(Get-OSDModulePath)\cache\archive-cloudoperatingindexmap\CloudOperatingIndexMap.json"
+    $OfflineCatalog = Get-PSDrive -PSProvider FileSystem | Where-Object {$_.Name -ne 'C'} | ForEach-Object {
+        Get-ChildItem "$($_.Root)OSDCloud\Catalogs" -Include "CloudOperatingIndexMap.json" -File -Force -Recurse -ErrorAction Ignore
+    }
+    if ($OfflineCatalog) {
+        foreach ($Item in $OfflineCatalog) {
+            Write-Warning "$($Item.FullName) is imported instead of the cache under $(Get-OSDCachePath)."
+            $indexMapPath = Get-Content -Path "$($Item.FullName)" | ConvertFrom-Json -ErrorAction "Stop"
+        }
+    } else {
+        $indexMapPath = "$(Get-OSDCachePath)\archive-cloudoperatingindexmap\CloudOperatingIndexMap.json"
+    }
     $Results = Get-Content -Path $indexMapPath | ConvertFrom-Json
     $Results = $Results | Where-Object { $_.Architecture -eq $OSArch }
     
