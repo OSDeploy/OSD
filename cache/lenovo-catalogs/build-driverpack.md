@@ -8,4 +8,4 @@
 | PowerShell Function | Build-OSDCatalogLenovoDriverPack |
 | Files | build-driverpack.* |
 | Build Workflow | GitHub Actions |
-| Last Update | Thursday, June 19, 2025 10:15:44 PM UTC |
+| Last Update | Friday, June 20, 2025 5:12:43 AM UTC |
