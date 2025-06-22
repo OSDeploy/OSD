@@ -8,4 +8,4 @@
 | PowerShell Function | Build-OSDCatalogLenovoBios |
 | Files | build-bios.* |
 | Build Workflow | GitHub Actions |
-| Last Update | Sunday, June 22, 2025 11:08:49 AM UTC |
+| Last Update | Sunday, June 22, 2025 5:09:07 PM UTC |
