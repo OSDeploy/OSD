@@ -8,4 +8,4 @@
 | PowerShell Function | Build-OSDCatalogSurfaceSystemSku |
 | Files | build-systemsku.* |
 | Build Workflow | GitHub Actions |
-| Last Update | Monday, June 23, 2025 3:27:14 PM UTC |
+| Last Update | Monday, June 23, 2025 5:31:21 PM UTC |
