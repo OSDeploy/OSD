@@ -8,4 +8,4 @@
 | PowerShell Function | Build-OSDCatalogDellDriverPack |
 | Files | build-driverpack.* |
 | Build Workflow | GitHub Actions |
-| Last Update | Sunday, June 22, 2025 10:06:14 PM UTC |
+| Last Update | Monday, June 23, 2025 5:07:38 AM UTC |
