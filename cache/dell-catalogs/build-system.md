@@ -3,9 +3,9 @@
 | | |
 |-|-|
 | Owner | David Segura |
-| Build Version | 25.4.30.3 |
+| Build Version | 25.6.24.1 |
 | PowerShell Module | OSD.Build |
 | PowerShell Function | Build-OSDCatalogDellSystem |
 | Files | build-system.* |
 | Build Workflow | GitHub Actions |
-| Last Update | Friday, May 2, 2025 2:20:34 PM UTC |
+| Last Update | Tuesday, June 24, 2025 11:06:16 AM UTC |
