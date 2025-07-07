@@ -142,20 +142,53 @@ function Initialize-OSDCloudStartnet {
             }
         }
 
-        # Check if the OSD Module in the PowerShell Gallery is newer than the installed version
-        $TimeSpan = New-TimeSpan -Start $Global:StartnetStart -End (Get-Date)
-        Write-Host -ForegroundColor DarkGray "$($TimeSpan.ToString("mm':'ss")) Updating OSD PowerShell Module"
-        $PSModuleName = 'OSD'
-        $InstalledModule = Get-Module -Name $PSModuleName -ListAvailable -ErrorAction Ignore | Sort-Object Version -Descending | Select-Object -First 1
-        $GalleryPSModule = Find-Module -Name $PSModuleName -ErrorAction Ignore -WarningAction Ignore
-
-        # Install the OSD module if it is not installed or if the version is older than the gallery version
-        if ($GalleryPSModule) {
-            if (($GalleryPSModule.Version -as [version]) -gt ($InstalledModule.Version -as [version])) {
-                Write-Host -ForegroundColor DarkGray "$PSModuleName $($GalleryPSModule.Version) [AllUsers]"
-                Install-Module $PSModuleName -Scope AllUsers -Force -SkipPublisherCheck
-                Import-Module $PSModuleName -Force
+        Write-Host -ForegroundColor Cyan '[i] Config Post StartNet Scripts'
+        $Global:ScriptStartNet2 = Get-PSDrive -PSProvider FileSystem | Where-Object { $_.Name -ne 'C' } | ForEach-Object {
+            Write-Host -ForegroundColor DarkGray "$($_.Root)OSDCloud\Config\Scripts\StartNet2\*.ps1"
+            Get-ChildItem "$($_.Root)OSDCloud\Config\Scripts\StartNet2\" -Include "*.ps1" -File -Recurse -Force -ErrorAction Ignore
+        }
+        if ($Global:ScriptStartNet2) {
+            $Global:ScriptStartNet2 = $Global:ScriptStartNet2 | Sort-Object -Property FullName
+            foreach ($Item in $Global:ScriptStartNet2) {
+                Write-Host -ForegroundColor Gray "Execute $($Item.FullName)"
+                & "$($Item.FullName)"
             }
+            $TimeSpan = New-TimeSpan -Start $Global:StartnetStart -End (Get-Date)
+            Write-Host -ForegroundColor DarkGray "$($TimeSpan.ToString("mm':'ss")) Tried to execute Post StartNet Scripts" 
+        }
+
+        Write-Host -ForegroundColor Cyan '[i] OSD module update'
+        $Global:OSDModuleUpdate = $true # Default is trying to newer OSD module
+        $Global:OSDCloudStartnetJson = Get-PSDrive -PSProvider FileSystem | Where-Object {$_.Name -ne 'C'} | ForEach-Object {
+            Get-ChildItem "$($_.Root)OSDCloud\Config" -Include "Initialize-OSDCloudStartnet.json" -File -Force -Recurse -ErrorAction Ignore
+        }
+        if ($Global:OSDCloudStartnetJson ) {
+            foreach ($Item in $Global:OSDCloudStartnetJson) {
+                Write-Host -ForegroundColor DarkGray "$($Item.FullName)"
+                $Global:OSDModuleUpdate = (Get-Content -Path "$($Item.FullName)" | ConvertFrom-Json -ErrorAction "Stop").OSDAutoUpdate
+                Write-Host -ForegroundColor DarkGray "- OSDAutoUpdate: $($Global:OSDModuleUpdate)"
+            }
+        }
+        if ($Global:OSDModuleUpdate) {
+            # Check if the OSD Module in the PowerShell Gallery is newer than the installed version
+            $TimeSpan = New-TimeSpan -Start $Global:StartnetStart -End (Get-Date)
+            Write-Host -ForegroundColor DarkGray "$($TimeSpan.ToString("mm':'ss")) Updating OSD PowerShell Module"
+            $PSModuleName = 'OSD'
+            $InstalledModule = Get-Module -Name $PSModuleName -ListAvailable -ErrorAction Ignore | Sort-Object Version -Descending | Select-Object -First 1
+            $GalleryPSModule = Find-Module -Name $PSModuleName -ErrorAction Ignore -WarningAction Ignore
+
+            # Install the OSD module if it is not installed or if the version is older than the gallery version
+            if ($GalleryPSModule) {
+                if (($GalleryPSModule.Version -as [version]) -gt ($InstalledModule.Version -as [version])) {
+                    Write-Host -ForegroundColor DarkGray "$PSModuleName $($GalleryPSModule.Version) [AllUsers]"
+                    Install-Module $PSModuleName -Scope AllUsers -Force -SkipPublisherCheck
+                    Import-Module $PSModuleName -Force
+                }
+            }
+        } else {
+            # if json contains {"OSDAutoUpdate": false} then not trying to import newer OSD module
+            $TimeSpan = New-TimeSpan -Start $Global:StartnetStart -End (Get-Date)
+            Write-Host -ForegroundColor DarkGray "$($TimeSpan.ToString("mm':'ss")) Skip Updating OSD PowerShell Module"
         }
     }
 }
