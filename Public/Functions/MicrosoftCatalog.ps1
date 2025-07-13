@@ -347,22 +347,22 @@ function Save-MsUpCatDriver {
                                         else {
                                             Write-Host -ForegroundColor DarkGray "Downloading and expanding to $DestinationPath"
                                             try {
-                                                # Создаем временную папку для скачивания
+                                                # пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
                                                 $TempDownloadPath = Join-Path $env:TEMP "MSCatalogDownload"
                                                 if (!(Test-Path $TempDownloadPath)) {
                                                     New-Item -Path $TempDownloadPath -ItemType Directory -Force | Out-Null
                                                 }
                                                 
-                                                # Скачиваем файл
+                                                # пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ
                                                 $WindowsUpdateDriverFile = Save-MSCatalogUpdate -Guid $WindowsUpdateDriver.Guid -Destination $TempDownloadPath
                                                 Write-Verbose "Download result: $WindowsUpdateDriverFile"
                                                 
                                                 if ($WindowsUpdateDriverFile -and $WindowsUpdateDriverFile -ne "") {
-                                                    # Проверяем результат скачивания
+                                                    # пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
                                                     if ($WindowsUpdateDriverFile -and $WindowsUpdateDriverFile -ne "") {
                                                         Write-Verbose "Download successful, file: $WindowsUpdateDriverFile"
                                                         
-                                                        # Проверяем, что файл существует
+                                                        # пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
                                                         if (Test-Path $WindowsUpdateDriverFile) {
                                                             Write-Verbose "File exists, expanding to $DestinationPath"
                                                             expand.exe "$WindowsUpdateDriverFile" -F:* "$DestinationPath" | Out-Null
@@ -376,7 +376,7 @@ function Save-MsUpCatDriver {
                                                     else {
                                                         Write-Warning "Save-MSCatalogUpdate returned empty result"
                                                         
-                                                        # Альтернативный способ - ищем файл в временной папке
+                                                        # пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ - пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
                                                         Write-Verbose "Trying alternative method - searching for MSU file in $TempDownloadPath"
                                                         $MsuFile = Get-ChildItem -Path $TempDownloadPath -Filter "*.msu" -ErrorAction SilentlyContinue | Sort-Object LastWriteTime -Descending | Select-Object -First 1
                                                         
@@ -576,30 +576,30 @@ function Save-MsUpCatDriver {
                                 else {
                                     Write-Host -ForegroundColor DarkGray "Downloading and expanding to $DestinationPath"
                                     try {
-                                        # Создаем папку назначения
+                                        # пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
                                         if (!(Test-Path $DestinationPath)) {
                                             New-Item -Path $DestinationPath -ItemType Directory -Force | Out-Null
                                         }
                                         
-                                        # Создаем временную папку для скачивания
+                                        # пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
                                         $TempDownloadPath = Join-Path $env:TEMP "MSCatalogDownload"
                                         if (!(Test-Path $TempDownloadPath)) {
                                             New-Item -Path $TempDownloadPath -ItemType Directory -Force | Out-Null
                                         }
                                         
-                                        # Скачиваем файл с указанием папки назначения
+                                        # пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
                                         Write-Verbose "Attempting to download GUID: $($WindowsUpdateDriver.Guid) to $TempDownloadPath"
                                         $null = Save-MSCatalogUpdate -Guid $WindowsUpdateDriver.Guid -Destination $TempDownloadPath
                                         Write-Verbose "Download completed"
                                         
-                                        # Ищем скачанный файл в временной папке
+                                        # пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
                                         Write-Verbose "Searching for downloaded MSU file in $TempDownloadPath"
                                         $MsuFile = Get-ChildItem -Path $TempDownloadPath -Filter "*.msu" -ErrorAction SilentlyContinue | Sort-Object LastWriteTime -Descending | Select-Object -First 1
                                         
                                         if ($MsuFile) {
                                             Write-Verbose "Found MSU file: $($MsuFile.FullName)"
                                             
-                                            # Проверяем, что файл существует
+                                            # пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
                                             if (Test-Path $MsuFile.FullName) {
                                                 Write-Verbose "File exists, expanding to $DestinationPath"
                                                 expand.exe "$($MsuFile.FullName)" -F:* "$DestinationPath" | Out-Null
@@ -613,7 +613,7 @@ function Save-MsUpCatDriver {
                                         else {
                                             Write-Warning "Save-MsUpCatDriver: Could not find downloaded MSU file in $TempDownloadPath"
                                             
-                                            # Альтернативный способ - ищем в корне TEMP
+                                            # пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ - пїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅ TEMP
                                             Write-Verbose "Trying alternative method - searching for MSU file in $env:TEMP"
                                             $MsuFile = Get-ChildItem -Path $env:TEMP -Filter "*.msu" -ErrorAction SilentlyContinue | Sort-Object LastWriteTime -Descending | Select-Object -First 1
                                             
@@ -810,7 +810,7 @@ function Save-MsUpCatUpdate {
             #	Download
             #=================================================
             foreach ($Update in $CatalogUpdate) {
-                Save-MSCatalogUpdate -Guid $Update.Guid
+                Save-MSCatalogUpdate -Guid $Update.Guid -Destination $DestinationDirectory
             }
             #=================================================
         }
