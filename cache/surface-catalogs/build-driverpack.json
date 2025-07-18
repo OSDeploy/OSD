@@ -1,6 +1,6 @@
 [
     {
-        "CatalogVersion":  "25.07.17",
+        "CatalogVersion":  "25.07.18",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "25.02.17",
@@ -19,7 +19,7 @@
         "HashMD5":  ""
     },
     {
-        "CatalogVersion":  "25.07.17",
+        "CatalogVersion":  "25.07.18",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "25.02.17",
@@ -38,7 +38,7 @@
         "HashMD5":  ""
     },
     {
-        "CatalogVersion":  "25.07.17",
+        "CatalogVersion":  "25.07.18",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "25.03.13",
@@ -57,7 +57,7 @@
         "HashMD5":  ""
     },
     {
-        "CatalogVersion":  "25.07.17",
+        "CatalogVersion":  "25.07.18",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "25.02.17",
@@ -76,7 +76,7 @@
         "HashMD5":  ""
     },
     {
-        "CatalogVersion":  "25.07.17",
+        "CatalogVersion":  "25.07.18",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "25.03.13",
@@ -95,7 +95,7 @@
         "HashMD5":  ""
     },
     {
-        "CatalogVersion":  "25.07.17",
+        "CatalogVersion":  "25.07.18",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "25.02.17",
@@ -114,7 +114,7 @@
         "HashMD5":  ""
     },
     {
-        "CatalogVersion":  "25.07.17",
+        "CatalogVersion":  "25.07.18",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "25.02.17",
@@ -133,7 +133,7 @@
         "HashMD5":  ""
     },
     {
-        "CatalogVersion":  "25.07.17",
+        "CatalogVersion":  "25.07.18",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "25.02.17",
@@ -152,7 +152,7 @@
         "HashMD5":  ""
     },
     {
-        "CatalogVersion":  "25.07.17",
+        "CatalogVersion":  "25.07.18",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "25.02.17",
@@ -171,7 +171,7 @@
         "HashMD5":  ""
     },
     {
-        "CatalogVersion":  "25.07.17",
+        "CatalogVersion":  "25.07.18",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "25.02.17",
@@ -190,7 +190,7 @@
         "HashMD5":  ""
     },
     {
-        "CatalogVersion":  "25.07.17",
+        "CatalogVersion":  "25.07.18",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "25.03.22",
@@ -209,7 +209,7 @@
         "HashMD5":  ""
     },
     {
-        "CatalogVersion":  "25.07.17",
+        "CatalogVersion":  "25.07.18",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "25.03.22",
@@ -228,7 +228,7 @@
         "HashMD5":  ""
     },
     {
-        "CatalogVersion":  "25.07.17",
+        "CatalogVersion":  "25.07.18",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "25.03.22",
@@ -247,7 +247,7 @@
         "HashMD5":  ""
     },
     {
-        "CatalogVersion":  "25.07.17",
+        "CatalogVersion":  "25.07.18",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "25.03.22",
@@ -266,7 +266,7 @@
         "HashMD5":  ""
     },
     {
-        "CatalogVersion":  "25.07.17",
+        "CatalogVersion":  "25.07.18",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "25.02.17",
@@ -285,7 +285,7 @@
         "HashMD5":  ""
     },
     {
-        "CatalogVersion":  "25.07.17",
+        "CatalogVersion":  "25.07.18",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "25.02.17",
@@ -304,7 +304,7 @@
         "HashMD5":  ""
     },
     {
-        "CatalogVersion":  "25.07.17",
+        "CatalogVersion":  "25.07.18",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "25.02.17",
@@ -323,18 +323,18 @@
         "HashMD5":  ""
     },
     {
-        "CatalogVersion":  "25.07.17",
+        "CatalogVersion":  "25.07.18",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  "25.07.09",
+        "ReleaseDate":  "25.07.18",
         "Manufacturer":  "Microsoft",
         "Model":  "Surface Go 3",
         "Product":  "Surface_Go_3_1926",
         "Name":  "Microsoft Surface Go 3 Commercial Win11 22H2",
         "Legacy":  false,
         "PackageID":  "103504",
-        "FileName":  "SurfaceGo3_Win11_22621_25.052.18595.0.msi",
-        "Url":  "https://download.microsoft.com/download/100ded78-f124-4076-ab44-4be7375925fa/SurfaceGo3_Win11_22621_25.052.18595.0.msi",
+        "FileName":  "SurfaceGo3_Win11_22621_25.054.40854.0.msi",
+        "Url":  "https://download.microsoft.com/download/100ded78-f124-4076-ab44-4be7375925fa/SurfaceGo3_Win11_22621_25.054.40854.0.msi",
         "OSVersion":  "Windows 11 x64",
         "OSReleaseId":  "22H2",
         "OSBuild":  "22621",
@@ -342,10 +342,10 @@
         "HashMD5":  ""
     },
     {
-        "CatalogVersion":  "25.07.17",
+        "CatalogVersion":  "25.07.18",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  "25.07.09",
+        "ReleaseDate":  "25.07.18",
         "Manufacturer":  "Microsoft",
         "Model":  "Surface Go 3",
         "Product":  "Surface_Go_3_1926",
@@ -361,18 +361,18 @@
         "HashMD5":  ""
     },
     {
-        "CatalogVersion":  "25.07.17",
+        "CatalogVersion":  "25.07.18",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  "25.07.09",
+        "ReleaseDate":  "25.07.18",
         "Manufacturer":  "Microsoft",
         "Model":  "Surface Go 3",
         "Product":  "Surface_Go_3_1901",
         "Name":  "Microsoft Surface Go 3 Consumer Win11 22H2",
         "Legacy":  false,
         "PackageID":  "103504",
-        "FileName":  "SurfaceGo3_Win11_22621_25.052.18595.0.msi",
-        "Url":  "https://download.microsoft.com/download/100ded78-f124-4076-ab44-4be7375925fa/SurfaceGo3_Win11_22621_25.052.18595.0.msi",
+        "FileName":  "SurfaceGo3_Win11_22621_25.054.40854.0.msi",
+        "Url":  "https://download.microsoft.com/download/100ded78-f124-4076-ab44-4be7375925fa/SurfaceGo3_Win11_22621_25.054.40854.0.msi",
         "OSVersion":  "Windows 11 x64",
         "OSReleaseId":  "22H2",
         "OSBuild":  "22621",
@@ -380,10 +380,10 @@
         "HashMD5":  ""
     },
     {
-        "CatalogVersion":  "25.07.17",
+        "CatalogVersion":  "25.07.18",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  "25.07.09",
+        "ReleaseDate":  "25.07.18",
         "Manufacturer":  "Microsoft",
         "Model":  "Surface Go 3",
         "Product":  "Surface_Go_3_1901",
@@ -399,18 +399,18 @@
         "HashMD5":  ""
     },
     {
-        "CatalogVersion":  "25.07.17",
+        "CatalogVersion":  "25.07.18",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  "25.07.09",
+        "ReleaseDate":  "25.07.18",
         "Manufacturer":  "Microsoft",
         "Model":  "Surface Go 3",
         "Product":  "Surface_Go_3_2022",
         "Name":  "Microsoft Surface Go 3 LTE Win11 22H2",
         "Legacy":  false,
         "PackageID":  "103504",
-        "FileName":  "SurfaceGo3_Win11_22621_25.052.18595.0.msi",
-        "Url":  "https://download.microsoft.com/download/100ded78-f124-4076-ab44-4be7375925fa/SurfaceGo3_Win11_22621_25.052.18595.0.msi",
+        "FileName":  "SurfaceGo3_Win11_22621_25.054.40854.0.msi",
+        "Url":  "https://download.microsoft.com/download/100ded78-f124-4076-ab44-4be7375925fa/SurfaceGo3_Win11_22621_25.054.40854.0.msi",
         "OSVersion":  "Windows 11 x64",
         "OSReleaseId":  "22H2",
         "OSBuild":  "22621",
@@ -418,10 +418,10 @@
         "HashMD5":  ""
     },
     {
-        "CatalogVersion":  "25.07.17",
+        "CatalogVersion":  "25.07.18",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  "25.07.09",
+        "ReleaseDate":  "25.07.18",
         "Manufacturer":  "Microsoft",
         "Model":  "Surface Go 3",
         "Product":  "Surface_Go_3_2022",
@@ -437,7 +437,7 @@
         "HashMD5":  ""
     },
     {
-        "CatalogVersion":  "25.07.17",
+        "CatalogVersion":  "25.07.18",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "25.07.09",
@@ -456,7 +456,7 @@
         "HashMD5":  ""
     },
     {
-        "CatalogVersion":  "25.07.17",
+        "CatalogVersion":  "25.07.18",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "25.07.09",
@@ -475,7 +475,7 @@
         "HashMD5":  ""
     },
     {
-        "CatalogVersion":  "25.07.17",
+        "CatalogVersion":  "25.07.18",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "25.02.17",
@@ -494,7 +494,7 @@
         "HashMD5":  ""
     },
     {
-        "CatalogVersion":  "25.07.17",
+        "CatalogVersion":  "25.07.18",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "25.02.17",
@@ -513,7 +513,7 @@
         "HashMD5":  ""
     },
     {
-        "CatalogVersion":  "25.07.17",
+        "CatalogVersion":  "25.07.18",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "25.02.17",
@@ -532,7 +532,7 @@
         "HashMD5":  ""
     },
     {
-        "CatalogVersion":  "25.07.17",
+        "CatalogVersion":  "25.07.18",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "25.04.04",
@@ -551,7 +551,7 @@
         "HashMD5":  ""
     },
     {
-        "CatalogVersion":  "25.07.17",
+        "CatalogVersion":  "25.07.18",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "25.04.04",
@@ -570,7 +570,7 @@
         "HashMD5":  ""
     },
     {
-        "CatalogVersion":  "25.07.17",
+        "CatalogVersion":  "25.07.18",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "25.04.04",
@@ -589,7 +589,7 @@
         "HashMD5":  ""
     },
     {
-        "CatalogVersion":  "25.07.17",
+        "CatalogVersion":  "25.07.18",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "25.04.04",
@@ -608,7 +608,7 @@
         "HashMD5":  ""
     },
     {
-        "CatalogVersion":  "25.07.17",
+        "CatalogVersion":  "25.07.18",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "25.04.04",
@@ -627,7 +627,7 @@
         "HashMD5":  ""
     },
     {
-        "CatalogVersion":  "25.07.17",
+        "CatalogVersion":  "25.07.18",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "25.04.04",
@@ -646,7 +646,7 @@
         "HashMD5":  ""
     },
     {
-        "CatalogVersion":  "25.07.17",
+        "CatalogVersion":  "25.07.18",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "25.04.04",
@@ -665,7 +665,7 @@
         "HashMD5":  ""
     },
     {
-        "CatalogVersion":  "25.07.17",
+        "CatalogVersion":  "25.07.18",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "25.04.04",
@@ -684,7 +684,7 @@
         "HashMD5":  ""
     },
     {
-        "CatalogVersion":  "25.07.17",
+        "CatalogVersion":  "25.07.18",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "25.02.17",
@@ -703,7 +703,7 @@
         "HashMD5":  ""
     },
     {
-        "CatalogVersion":  "25.07.17",
+        "CatalogVersion":  "25.07.18",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "25.02.17",
@@ -722,7 +722,7 @@
         "HashMD5":  ""
     },
     {
-        "CatalogVersion":  "25.07.17",
+        "CatalogVersion":  "25.07.18",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "25.02.17",
@@ -741,7 +741,7 @@
         "HashMD5":  ""
     },
     {
-        "CatalogVersion":  "25.07.17",
+        "CatalogVersion":  "25.07.18",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "25.02.17",
@@ -760,7 +760,7 @@
         "HashMD5":  ""
     },
     {
-        "CatalogVersion":  "25.07.17",
+        "CatalogVersion":  "25.07.18",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "25.02.17",
@@ -779,7 +779,7 @@
         "HashMD5":  ""
     },
     {
-        "CatalogVersion":  "25.07.17",
+        "CatalogVersion":  "25.07.18",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "25.02.17",
@@ -798,7 +798,7 @@
         "HashMD5":  ""
     },
     {
-        "CatalogVersion":  "25.07.17",
+        "CatalogVersion":  "25.07.18",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "25.02.17",
@@ -817,7 +817,7 @@
         "HashMD5":  ""
     },
     {
-        "CatalogVersion":  "25.07.17",
+        "CatalogVersion":  "25.07.18",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "25.02.17",
@@ -836,7 +836,7 @@
         "HashMD5":  ""
     },
     {
-        "CatalogVersion":  "25.07.17",
+        "CatalogVersion":  "25.07.18",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "25.02.17",
@@ -855,18 +855,18 @@
         "HashMD5":  ""
     },
     {
-        "CatalogVersion":  "25.07.17",
+        "CatalogVersion":  "25.07.18",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  "25.07.09",
+        "ReleaseDate":  "25.07.18",
         "Manufacturer":  "Microsoft",
         "Model":  "Surface Laptop 4",
         "Product":  "Surface_Laptop_4_1958:1959",
         "Name":  "Microsoft Surface Laptop 4 13 AMD Win11 22H2",
         "Legacy":  false,
         "PackageID":  "102923",
-        "FileName":  "SurfaceLaptop4_AMD_Win11_22621_25.043.31529.0.msi",
-        "Url":  "https://download.microsoft.com/download/7ee743a7-aac6-4b0c-83bf-218070e93e39/SurfaceLaptop4_AMD_Win11_22621_25.043.31529.0.msi",
+        "FileName":  "SurfaceLaptop4_AMD_Win11_22621_25.053.30058.0.msi",
+        "Url":  "https://download.microsoft.com/download/7ee743a7-aac6-4b0c-83bf-218070e93e39/SurfaceLaptop4_AMD_Win11_22621_25.053.30058.0.msi",
         "OSVersion":  "Windows 11 x64",
         "OSReleaseId":  "22H2",
         "OSBuild":  "22621",
@@ -874,18 +874,18 @@
         "HashMD5":  ""
     },
     {
-        "CatalogVersion":  "25.07.17",
+        "CatalogVersion":  "25.07.18",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  "25.07.09",
+        "ReleaseDate":  "25.07.18",
         "Manufacturer":  "Microsoft",
         "Model":  "Surface Laptop 4",
         "Product":  "Surface_Laptop_4_1958:1959",
         "Name":  "Microsoft Surface Laptop 4 13 AMD Win10 22H2",
         "Legacy":  false,
         "PackageID":  "102923",
-        "FileName":  "SurfaceLaptop4_AMD_Win10_19045_25.043.31520.0.msi",
-        "Url":  "https://download.microsoft.com/download/7ee743a7-aac6-4b0c-83bf-218070e93e39/SurfaceLaptop4_AMD_Win10_19045_25.043.31520.0.msi",
+        "FileName":  "SurfaceLaptop4_AMD_Win10_19045_25.053.30059.0.msi",
+        "Url":  "https://download.microsoft.com/download/7ee743a7-aac6-4b0c-83bf-218070e93e39/SurfaceLaptop4_AMD_Win10_19045_25.053.30059.0.msi",
         "OSVersion":  "Windows 10 x64",
         "OSReleaseId":  "22H2",
         "OSBuild":  "19045",
@@ -893,7 +893,7 @@
         "HashMD5":  ""
     },
     {
-        "CatalogVersion":  "25.07.17",
+        "CatalogVersion":  "25.07.18",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "25.07.09",
@@ -912,7 +912,7 @@
         "HashMD5":  ""
     },
     {
-        "CatalogVersion":  "25.07.17",
+        "CatalogVersion":  "25.07.18",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "25.07.09",
@@ -931,18 +931,18 @@
         "HashMD5":  ""
     },
     {
-        "CatalogVersion":  "25.07.17",
+        "CatalogVersion":  "25.07.18",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  "25.07.09",
+        "ReleaseDate":  "25.07.18",
         "Manufacturer":  "Microsoft",
         "Model":  "Surface Laptop 4",
         "Product":  "Surface_Laptop_4_1952:1953",
         "Name":  "Microsoft Surface Laptop 4 15 AMD Win11 22H2",
         "Legacy":  false,
         "PackageID":  "102923",
-        "FileName":  "SurfaceLaptop4_AMD_Win11_22621_25.043.31529.0.msi",
-        "Url":  "https://download.microsoft.com/download/7ee743a7-aac6-4b0c-83bf-218070e93e39/SurfaceLaptop4_AMD_Win11_22621_25.043.31529.0.msi",
+        "FileName":  "SurfaceLaptop4_AMD_Win11_22621_25.053.30058.0.msi",
+        "Url":  "https://download.microsoft.com/download/7ee743a7-aac6-4b0c-83bf-218070e93e39/SurfaceLaptop4_AMD_Win11_22621_25.053.30058.0.msi",
         "OSVersion":  "Windows 11 x64",
         "OSReleaseId":  "22H2",
         "OSBuild":  "22621",
@@ -950,18 +950,18 @@
         "HashMD5":  ""
     },
     {
-        "CatalogVersion":  "25.07.17",
+        "CatalogVersion":  "25.07.18",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  "25.07.09",
+        "ReleaseDate":  "25.07.18",
         "Manufacturer":  "Microsoft",
         "Model":  "Surface Laptop 4",
         "Product":  "Surface_Laptop_4_1952:1953",
         "Name":  "Microsoft Surface Laptop 4 15 AMD Win10 22H2",
         "Legacy":  false,
         "PackageID":  "102923",
-        "FileName":  "SurfaceLaptop4_AMD_Win10_19045_25.043.31520.0.msi",
-        "Url":  "https://download.microsoft.com/download/7ee743a7-aac6-4b0c-83bf-218070e93e39/SurfaceLaptop4_AMD_Win10_19045_25.043.31520.0.msi",
+        "FileName":  "SurfaceLaptop4_AMD_Win10_19045_25.053.30059.0.msi",
+        "Url":  "https://download.microsoft.com/download/7ee743a7-aac6-4b0c-83bf-218070e93e39/SurfaceLaptop4_AMD_Win10_19045_25.053.30059.0.msi",
         "OSVersion":  "Windows 10 x64",
         "OSReleaseId":  "22H2",
         "OSBuild":  "19045",
@@ -969,7 +969,7 @@
         "HashMD5":  ""
     },
     {
-        "CatalogVersion":  "25.07.17",
+        "CatalogVersion":  "25.07.18",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "25.07.09",
@@ -988,7 +988,7 @@
         "HashMD5":  ""
     },
     {
-        "CatalogVersion":  "25.07.17",
+        "CatalogVersion":  "25.07.18",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "25.07.09",
@@ -1007,26 +1007,7 @@
         "HashMD5":  ""
     },
     {
-        "CatalogVersion":  "25.07.17",
-        "Status":  null,
-        "Component":  "DriverPack",
-        "ReleaseDate":  "25.07.17",
-        "Manufacturer":  "Microsoft",
-        "Model":  "Surface Laptop 5",
-        "Product":  "Surface_Laptop_5_for_Business_1950:1951",
-        "Name":  "Microsoft Surface Laptop 5 13 Commercial Win11 22H2",
-        "Legacy":  false,
-        "PackageID":  "104679",
-        "FileName":  "SurfaceLaptop5_Win11_22621_25.053.29964.0.msi",
-        "Url":  "https://download.microsoft.com/download/68992368-8d70-4231-a9e4-23dfaede832b/SurfaceLaptop5_Win11_22621_25.053.29964.0.msi",
-        "OSVersion":  "Windows 11 x64",
-        "OSReleaseId":  "22H2",
-        "OSBuild":  "22621",
-        "OSArchitecture":  "amd64",
-        "HashMD5":  ""
-    },
-    {
-        "CatalogVersion":  "25.07.17",
+        "CatalogVersion":  "25.07.18",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "25.07.17",
@@ -1045,14 +1026,14 @@
         "HashMD5":  ""
     },
     {
-        "CatalogVersion":  "25.07.17",
+        "CatalogVersion":  "25.07.18",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "25.07.17",
         "Manufacturer":  "Microsoft",
         "Model":  "Surface Laptop 5",
-        "Product":  "Surface_Laptop_5_1950:1951",
-        "Name":  "Microsoft Surface Laptop 5 13 Consumer Win11 22H2",
+        "Product":  "Surface_Laptop_5_for_Business_1950:1951",
+        "Name":  "Microsoft Surface Laptop 5 13 Commercial Win11 22H2",
         "Legacy":  false,
         "PackageID":  "104679",
         "FileName":  "SurfaceLaptop5_Win11_22621_25.053.29964.0.msi",
@@ -1064,7 +1045,7 @@
         "HashMD5":  ""
     },
     {
-        "CatalogVersion":  "25.07.17",
+        "CatalogVersion":  "25.07.18",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "25.07.17",
@@ -1083,14 +1064,14 @@
         "HashMD5":  ""
     },
     {
-        "CatalogVersion":  "25.07.17",
+        "CatalogVersion":  "25.07.18",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "25.07.17",
         "Manufacturer":  "Microsoft",
         "Model":  "Surface Laptop 5",
-        "Product":  "Surface_Laptop_5_for_Business_1979",
-        "Name":  "Microsoft Surface Laptop 5 15 Commercial Win11 22H2",
+        "Product":  "Surface_Laptop_5_1950:1951",
+        "Name":  "Microsoft Surface Laptop 5 13 Consumer Win11 22H2",
         "Legacy":  false,
         "PackageID":  "104679",
         "FileName":  "SurfaceLaptop5_Win11_22621_25.053.29964.0.msi",
@@ -1102,7 +1083,7 @@
         "HashMD5":  ""
     },
     {
-        "CatalogVersion":  "25.07.17",
+        "CatalogVersion":  "25.07.18",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "25.07.17",
@@ -1121,14 +1102,14 @@
         "HashMD5":  ""
     },
     {
-        "CatalogVersion":  "25.07.17",
+        "CatalogVersion":  "25.07.18",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "25.07.17",
         "Manufacturer":  "Microsoft",
         "Model":  "Surface Laptop 5",
-        "Product":  "Surface_Laptop_5_1979",
-        "Name":  "Microsoft Surface Laptop 5 15 Consumer Win11 22H2",
+        "Product":  "Surface_Laptop_5_for_Business_1979",
+        "Name":  "Microsoft Surface Laptop 5 15 Commercial Win11 22H2",
         "Legacy":  false,
         "PackageID":  "104679",
         "FileName":  "SurfaceLaptop5_Win11_22621_25.053.29964.0.msi",
@@ -1140,7 +1121,7 @@
         "HashMD5":  ""
     },
     {
-        "CatalogVersion":  "25.07.17",
+        "CatalogVersion":  "25.07.18",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "25.07.17",
@@ -1159,7 +1140,26 @@
         "HashMD5":  ""
     },
     {
-        "CatalogVersion":  "25.07.17",
+        "CatalogVersion":  "25.07.18",
+        "Status":  null,
+        "Component":  "DriverPack",
+        "ReleaseDate":  "25.07.17",
+        "Manufacturer":  "Microsoft",
+        "Model":  "Surface Laptop 5",
+        "Product":  "Surface_Laptop_5_1979",
+        "Name":  "Microsoft Surface Laptop 5 15 Consumer Win11 22H2",
+        "Legacy":  false,
+        "PackageID":  "104679",
+        "FileName":  "SurfaceLaptop5_Win11_22621_25.053.29964.0.msi",
+        "Url":  "https://download.microsoft.com/download/68992368-8d70-4231-a9e4-23dfaede832b/SurfaceLaptop5_Win11_22621_25.053.29964.0.msi",
+        "OSVersion":  "Windows 11 x64",
+        "OSReleaseId":  "22H2",
+        "OSBuild":  "22621",
+        "OSArchitecture":  "amd64",
+        "HashMD5":  ""
+    },
+    {
+        "CatalogVersion":  "25.07.18",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "25.05.20",
@@ -1178,7 +1178,7 @@
         "HashMD5":  ""
     },
     {
-        "CatalogVersion":  "25.07.17",
+        "CatalogVersion":  "25.07.18",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "25.05.20",
@@ -1197,7 +1197,7 @@
         "HashMD5":  ""
     },
     {
-        "CatalogVersion":  "25.07.17",
+        "CatalogVersion":  "25.07.18",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "25.05.20",
@@ -1216,7 +1216,7 @@
         "HashMD5":  ""
     },
     {
-        "CatalogVersion":  "25.07.17",
+        "CatalogVersion":  "25.07.18",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "25.05.20",
@@ -1235,18 +1235,18 @@
         "HashMD5":  ""
     },
     {
-        "CatalogVersion":  "25.07.17",
+        "CatalogVersion":  "25.07.18",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  "25.06.26",
+        "ReleaseDate":  "25.07.18",
         "Manufacturer":  "Microsoft",
         "Model":  "Surface Laptop 7",
         "Product":  "Surface_Laptop_7th_Edition_For_Business_2036",
         "Name":  "Microsoft Surface Laptop 7 13.8 Commercial Win11 24H2",
         "Legacy":  false,
         "PackageID":  "106120",
-        "FileName":  "SurfaceLaptop7_ARM_Win11_26100_25.052.28785.0.msi",
-        "Url":  "https://download.microsoft.com/download/b7ca2c3f-d320-4795-be0f-529a0117abb4/SurfaceLaptop7_ARM_Win11_26100_25.052.28785.0.msi",
+        "FileName":  "SurfaceLaptop7_ARM_Win11_26100_25.061.7304.0.msi",
+        "Url":  "https://download.microsoft.com/download/b7ca2c3f-d320-4795-be0f-529a0117abb4/SurfaceLaptop7_ARM_Win11_26100_25.061.7304.0.msi",
         "OSVersion":  "Windows 11 x64",
         "OSReleaseId":  "24H2",
         "OSBuild":  "26100",
@@ -1254,18 +1254,18 @@
         "HashMD5":  ""
     },
     {
-        "CatalogVersion":  "25.07.17",
+        "CatalogVersion":  "25.07.18",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  "25.06.26",
+        "ReleaseDate":  "25.07.18",
         "Manufacturer":  "Microsoft",
         "Model":  "Surface Laptop 7",
         "Product":  "Surface_Laptop_7th_Edition_2036",
         "Name":  "Microsoft Surface Laptop 7 13.8 Consumer Win11 24H2",
         "Legacy":  false,
         "PackageID":  "106120",
-        "FileName":  "SurfaceLaptop7_ARM_Win11_26100_25.052.28785.0.msi",
-        "Url":  "https://download.microsoft.com/download/b7ca2c3f-d320-4795-be0f-529a0117abb4/SurfaceLaptop7_ARM_Win11_26100_25.052.28785.0.msi",
+        "FileName":  "SurfaceLaptop7_ARM_Win11_26100_25.061.7304.0.msi",
+        "Url":  "https://download.microsoft.com/download/b7ca2c3f-d320-4795-be0f-529a0117abb4/SurfaceLaptop7_ARM_Win11_26100_25.061.7304.0.msi",
         "OSVersion":  "Windows 11 x64",
         "OSReleaseId":  "24H2",
         "OSBuild":  "26100",
@@ -1273,18 +1273,18 @@
         "HashMD5":  ""
     },
     {
-        "CatalogVersion":  "25.07.17",
+        "CatalogVersion":  "25.07.18",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  "25.06.26",
+        "ReleaseDate":  "25.07.18",
         "Manufacturer":  "Microsoft",
         "Model":  "Surface Laptop 7",
         "Product":  "Surface_Laptop_7th_Edition_For_Business_2037",
         "Name":  "Microsoft Surface Laptop 7 15 Commercial Win11 24H2",
         "Legacy":  false,
         "PackageID":  "106120",
-        "FileName":  "SurfaceLaptop7_ARM_Win11_26100_25.052.28785.0.msi",
-        "Url":  "https://download.microsoft.com/download/b7ca2c3f-d320-4795-be0f-529a0117abb4/SurfaceLaptop7_ARM_Win11_26100_25.052.28785.0.msi",
+        "FileName":  "SurfaceLaptop7_ARM_Win11_26100_25.061.7304.0.msi",
+        "Url":  "https://download.microsoft.com/download/b7ca2c3f-d320-4795-be0f-529a0117abb4/SurfaceLaptop7_ARM_Win11_26100_25.061.7304.0.msi",
         "OSVersion":  "Windows 11 x64",
         "OSReleaseId":  "24H2",
         "OSBuild":  "26100",
@@ -1292,18 +1292,18 @@
         "HashMD5":  ""
     },
     {
-        "CatalogVersion":  "25.07.17",
+        "CatalogVersion":  "25.07.18",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  "25.06.26",
+        "ReleaseDate":  "25.07.18",
         "Manufacturer":  "Microsoft",
         "Model":  "Surface Laptop 7",
         "Product":  "Surface_Laptop_7th_Edition_2037",
         "Name":  "Microsoft Surface Laptop 7 15 Consumer Win11 24H2",
         "Legacy":  false,
         "PackageID":  "106120",
-        "FileName":  "SurfaceLaptop7_ARM_Win11_26100_25.052.28785.0.msi",
-        "Url":  "https://download.microsoft.com/download/b7ca2c3f-d320-4795-be0f-529a0117abb4/SurfaceLaptop7_ARM_Win11_26100_25.052.28785.0.msi",
+        "FileName":  "SurfaceLaptop7_ARM_Win11_26100_25.061.7304.0.msi",
+        "Url":  "https://download.microsoft.com/download/b7ca2c3f-d320-4795-be0f-529a0117abb4/SurfaceLaptop7_ARM_Win11_26100_25.061.7304.0.msi",
         "OSVersion":  "Windows 11 x64",
         "OSReleaseId":  "24H2",
         "OSBuild":  "26100",
@@ -1311,7 +1311,7 @@
         "HashMD5":  ""
     },
     {
-        "CatalogVersion":  "25.07.17",
+        "CatalogVersion":  "25.07.18",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "25.04.03",
@@ -1330,7 +1330,7 @@
         "HashMD5":  ""
     },
     {
-        "CatalogVersion":  "25.07.17",
+        "CatalogVersion":  "25.07.18",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "25.04.21",
@@ -1349,7 +1349,7 @@
         "HashMD5":  ""
     },
     {
-        "CatalogVersion":  "25.07.17",
+        "CatalogVersion":  "25.07.18",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "25.04.03",
@@ -1368,7 +1368,7 @@
         "HashMD5":  ""
     },
     {
-        "CatalogVersion":  "25.07.17",
+        "CatalogVersion":  "25.07.18",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "25.04.21",
@@ -1387,7 +1387,7 @@
         "HashMD5":  ""
     },
     {
-        "CatalogVersion":  "25.07.17",
+        "CatalogVersion":  "25.07.18",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "25.02.17",
@@ -1406,7 +1406,7 @@
         "HashMD5":  ""
     },
     {
-        "CatalogVersion":  "25.07.17",
+        "CatalogVersion":  "25.07.18",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "25.02.17",
@@ -1425,18 +1425,18 @@
         "HashMD5":  ""
     },
     {
-        "CatalogVersion":  "25.07.17",
+        "CatalogVersion":  "25.07.18",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  "25.06.05",
+        "ReleaseDate":  "25.07.18",
         "Manufacturer":  "Microsoft",
         "Model":  "Surface Laptop Go 2",
         "Product":  "Surface_Laptop_Go_2_2013",
         "Name":  "Microsoft Surface Laptop Go 2 Win11 22H2",
         "Legacy":  false,
         "PackageID":  "104251",
-        "FileName":  "SurfaceLaptopGo2_Win11_22621_25.051.8026.0.msi",
-        "Url":  "https://download.microsoft.com/download/8ba2cbfd-02b1-42ba-b588-4aecd0e992aa/SurfaceLaptopGo2_Win11_22621_25.051.8026.0.msi",
+        "FileName":  "SurfaceLaptopGo2_Win11_22621_25.061.12357.0.msi",
+        "Url":  "https://download.microsoft.com/download/8ba2cbfd-02b1-42ba-b588-4aecd0e992aa/SurfaceLaptopGo2_Win11_22621_25.061.12357.0.msi",
         "OSVersion":  "Windows 11 x64",
         "OSReleaseId":  "22H2",
         "OSBuild":  "22621",
@@ -1444,18 +1444,18 @@
         "HashMD5":  ""
     },
     {
-        "CatalogVersion":  "25.07.17",
+        "CatalogVersion":  "25.07.18",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  "25.06.05",
+        "ReleaseDate":  "25.07.18",
         "Manufacturer":  "Microsoft",
         "Model":  "Surface Laptop Go 2",
         "Product":  "Surface_Laptop_Go_2_2013",
         "Name":  "Microsoft Surface Laptop Go 2 Win10 22H2",
         "Legacy":  false,
         "PackageID":  "104251",
-        "FileName":  "SurfaceLaptopGo2_Win10_19045_25.051.8016.0.msi",
-        "Url":  "https://download.microsoft.com/download/8ba2cbfd-02b1-42ba-b588-4aecd0e992aa/SurfaceLaptopGo2_Win10_19045_25.051.8016.0.msi",
+        "FileName":  "SurfaceLaptopGo2_Win10_19045_25.061.12352.0.msi",
+        "Url":  "https://download.microsoft.com/download/8ba2cbfd-02b1-42ba-b588-4aecd0e992aa/SurfaceLaptopGo2_Win10_19045_25.061.12352.0.msi",
         "OSVersion":  "Windows 10 x64",
         "OSReleaseId":  "22H2",
         "OSBuild":  "19045",
@@ -1463,7 +1463,7 @@
         "HashMD5":  ""
     },
     {
-        "CatalogVersion":  "25.07.17",
+        "CatalogVersion":  "25.07.18",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "25.05.20",
@@ -1482,7 +1482,7 @@
         "HashMD5":  ""
     },
     {
-        "CatalogVersion":  "25.07.17",
+        "CatalogVersion":  "25.07.18",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "25.05.20",
@@ -1501,7 +1501,7 @@
         "HashMD5":  ""
     },
     {
-        "CatalogVersion":  "25.07.17",
+        "CatalogVersion":  "25.07.18",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "25.07.09",
@@ -1520,7 +1520,7 @@
         "HashMD5":  ""
     },
     {
-        "CatalogVersion":  "25.07.17",
+        "CatalogVersion":  "25.07.18",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "25.07.09",
@@ -1539,18 +1539,18 @@
         "HashMD5":  ""
     },
     {
-        "CatalogVersion":  "25.07.17",
+        "CatalogVersion":  "25.07.18",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  "25.05.20",
+        "ReleaseDate":  "25.07.17",
         "Manufacturer":  "Microsoft",
         "Model":  "Surface Laptop Studio 2",
         "Product":  "Surface_Laptop_Studio_2_2029",
         "Name":  "Microsoft Surface Laptop Studio 2 Win10 22H2",
         "Legacy":  false,
         "PackageID":  "105610",
-        "FileName":  "SurfaceLaptopStudio2_Win10_19045_25.042.24482.0.msi",
-        "Url":  "https://download.microsoft.com/download/68949314-91cb-46dc-bcff-a50479d6ec4f/SurfaceLaptopStudio2_Win10_19045_25.042.24482.0.msi",
+        "FileName":  "SurfaceLaptopStudio2_Win10_19045_25.052.18653.0.msi",
+        "Url":  "https://download.microsoft.com/download/68949314-91cb-46dc-bcff-a50479d6ec4f/SurfaceLaptopStudio2_Win10_19045_25.052.18653.0.msi",
         "OSVersion":  "Windows 10 x64",
         "OSReleaseId":  "22H2",
         "OSBuild":  "19045",
@@ -1558,18 +1558,18 @@
         "HashMD5":  ""
     },
     {
-        "CatalogVersion":  "25.07.17",
+        "CatalogVersion":  "25.07.18",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  "25.05.20",
+        "ReleaseDate":  "25.07.17",
         "Manufacturer":  "Microsoft",
         "Model":  "Surface Laptop Studio 2",
         "Product":  "Surface_Laptop_Studio_2_2029",
         "Name":  "Microsoft Surface Laptop Studio 2 Win11 22H2",
         "Legacy":  false,
         "PackageID":  "105610",
-        "FileName":  "SurfaceLaptopStudio2_Win11_22621_25.042.24493.0.msi",
-        "Url":  "https://download.microsoft.com/download/68949314-91cb-46dc-bcff-a50479d6ec4f/SurfaceLaptopStudio2_Win11_22621_25.042.24493.0.msi",
+        "FileName":  "SurfaceLaptopStudio2_Win11_22621_25.052.18662.0.msi",
+        "Url":  "https://download.microsoft.com/download/68949314-91cb-46dc-bcff-a50479d6ec4f/SurfaceLaptopStudio2_Win11_22621_25.052.18662.0.msi",
         "OSVersion":  "Windows 11 x64",
         "OSReleaseId":  "22H2",
         "OSBuild":  "22621",
@@ -1577,7 +1577,7 @@
         "HashMD5":  ""
     },
     {
-        "CatalogVersion":  "25.07.17",
+        "CatalogVersion":  "25.07.18",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "25.02.17",
@@ -1596,7 +1596,7 @@
         "HashMD5":  ""
     },
     {
-        "CatalogVersion":  "25.07.17",
+        "CatalogVersion":  "25.07.18",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "25.02.17",
@@ -1615,7 +1615,7 @@
         "HashMD5":  ""
     },
     {
-        "CatalogVersion":  "25.07.17",
+        "CatalogVersion":  "25.07.18",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "25.02.17",
@@ -1634,7 +1634,7 @@
         "HashMD5":  ""
     },
     {
-        "CatalogVersion":  "25.07.17",
+        "CatalogVersion":  "25.07.18",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "25.02.17",
@@ -1653,7 +1653,7 @@
         "HashMD5":  ""
     },
     {
-        "CatalogVersion":  "25.07.17",
+        "CatalogVersion":  "25.07.18",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "25.02.17",
@@ -1672,7 +1672,7 @@
         "HashMD5":  ""
     },
     {
-        "CatalogVersion":  "25.07.17",
+        "CatalogVersion":  "25.07.18",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "25.02.17",
@@ -1691,7 +1691,7 @@
         "HashMD5":  ""
     },
     {
-        "CatalogVersion":  "25.07.17",
+        "CatalogVersion":  "25.07.18",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "25.02.17",
@@ -1710,7 +1710,7 @@
         "HashMD5":  ""
     },
     {
-        "CatalogVersion":  "25.07.17",
+        "CatalogVersion":  "25.07.18",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "25.02.17",
@@ -1729,7 +1729,7 @@
         "HashMD5":  ""
     },
     {
-        "CatalogVersion":  "25.07.17",
+        "CatalogVersion":  "25.07.18",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "25.02.17",
@@ -1748,7 +1748,7 @@
         "HashMD5":  ""
     },
     {
-        "CatalogVersion":  "25.07.17",
+        "CatalogVersion":  "25.07.18",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "25.02.17",
@@ -1767,7 +1767,7 @@
         "HashMD5":  ""
     },
     {
-        "CatalogVersion":  "25.07.17",
+        "CatalogVersion":  "25.07.18",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "25.02.17",
@@ -1786,7 +1786,7 @@
         "HashMD5":  ""
     },
     {
-        "CatalogVersion":  "25.07.17",
+        "CatalogVersion":  "25.07.18",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "25.02.17",
@@ -1805,7 +1805,7 @@
         "HashMD5":  ""
     },
     {
-        "CatalogVersion":  "25.07.17",
+        "CatalogVersion":  "25.07.18",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "25.05.06",
@@ -1824,7 +1824,7 @@
         "HashMD5":  ""
     },
     {
-        "CatalogVersion":  "25.07.17",
+        "CatalogVersion":  "25.07.18",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "25.05.06",
@@ -1843,7 +1843,7 @@
         "HashMD5":  ""
     },
     {
-        "CatalogVersion":  "25.07.17",
+        "CatalogVersion":  "25.07.18",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "25.07.09",
@@ -1862,7 +1862,7 @@
         "HashMD5":  ""
     },
     {
-        "CatalogVersion":  "25.07.17",
+        "CatalogVersion":  "25.07.18",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "25.07.09",
@@ -1881,7 +1881,7 @@
         "HashMD5":  ""
     },
     {
-        "CatalogVersion":  "25.07.17",
+        "CatalogVersion":  "25.07.18",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "25.07.09",
@@ -1900,7 +1900,7 @@
         "HashMD5":  ""
     },
     {
-        "CatalogVersion":  "25.07.17",
+        "CatalogVersion":  "25.07.18",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "25.07.09",
@@ -1919,7 +1919,7 @@
         "HashMD5":  ""
     },
     {
-        "CatalogVersion":  "25.07.17",
+        "CatalogVersion":  "25.07.18",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "25.06.05",
@@ -1938,7 +1938,7 @@
         "HashMD5":  ""
     },
     {
-        "CatalogVersion":  "25.07.17",
+        "CatalogVersion":  "25.07.18",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "25.07.09",
@@ -1957,7 +1957,7 @@
         "HashMD5":  ""
     },
     {
-        "CatalogVersion":  "25.07.17",
+        "CatalogVersion":  "25.07.18",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "25.06.05",
@@ -1976,7 +1976,7 @@
         "HashMD5":  ""
     },
     {
-        "CatalogVersion":  "25.07.17",
+        "CatalogVersion":  "25.07.18",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "25.07.09",
@@ -1995,7 +1995,7 @@
         "HashMD5":  ""
     },
     {
-        "CatalogVersion":  "25.07.17",
+        "CatalogVersion":  "25.07.18",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "25.06.05",
@@ -2014,7 +2014,7 @@
         "HashMD5":  ""
     },
     {
-        "CatalogVersion":  "25.07.17",
+        "CatalogVersion":  "25.07.18",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "25.07.09",
@@ -2033,7 +2033,7 @@
         "HashMD5":  ""
     },
     {
-        "CatalogVersion":  "25.07.17",
+        "CatalogVersion":  "25.07.18",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "25.06.05",
@@ -2052,7 +2052,7 @@
         "HashMD5":  ""
     },
     {
-        "CatalogVersion":  "25.07.17",
+        "CatalogVersion":  "25.07.18",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "25.06.05",
@@ -2071,37 +2071,18 @@
         "HashMD5":  ""
     },
     {
-        "CatalogVersion":  "25.07.17",
+        "CatalogVersion":  "25.07.18",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  "25.07.09",
-        "Manufacturer":  "Microsoft",
-        "Model":  "Surface Pro 9",
-        "Product":  "Surface_Pro_9_for_Business_2038",
-        "Name":  "Microsoft Surface Pro 9 Commercial Win11 22H2",
-        "Legacy":  false,
-        "PackageID":  "104680",
-        "FileName":  "SurfacePro9_Win11_22621_25.052.21398.0.msi",
-        "Url":  "https://download.microsoft.com/download/9a27d0e5-cbce-4933-8fc6-ec5fe5315c69/SurfacePro9_Win11_22621_25.052.21398.0.msi",
-        "OSVersion":  "Windows 11 x64",
-        "OSReleaseId":  "22H2",
-        "OSBuild":  "22621",
-        "OSArchitecture":  "amd64",
-        "HashMD5":  ""
-    },
-    {
-        "CatalogVersion":  "25.07.17",
-        "Status":  null,
-        "Component":  "DriverPack",
-        "ReleaseDate":  "25.07.09",
+        "ReleaseDate":  "25.07.18",
         "Manufacturer":  "Microsoft",
         "Model":  "Surface Pro 9",
         "Product":  "Surface_Pro_9_for_Business_2038",
         "Name":  "Microsoft Surface Pro 9 Commercial Win10 22H2",
         "Legacy":  false,
         "PackageID":  "104680",
-        "FileName":  "SurfacePro9_Win10_19045_25.052.21410.0.msi",
-        "Url":  "https://download.microsoft.com/download/9a27d0e5-cbce-4933-8fc6-ec5fe5315c69/SurfacePro9_Win10_19045_25.052.21410.0.msi",
+        "FileName":  "SurfacePro9_Win10_19045_25.053.32466.0.msi",
+        "Url":  "https://download.microsoft.com/download/9a27d0e5-cbce-4933-8fc6-ec5fe5315c69/SurfacePro9_Win10_19045_25.053.32466.0.msi",
         "OSVersion":  "Windows 10 x64",
         "OSReleaseId":  "22H2",
         "OSBuild":  "19045",
@@ -2109,18 +2090,18 @@
         "HashMD5":  ""
     },
     {
-        "CatalogVersion":  "25.07.17",
+        "CatalogVersion":  "25.07.18",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  "25.07.09",
+        "ReleaseDate":  "25.07.18",
         "Manufacturer":  "Microsoft",
         "Model":  "Surface Pro 9",
-        "Product":  "Surface_Pro_9_2038",
-        "Name":  "Microsoft Surface Pro 9 Consumer Win11 22H2",
+        "Product":  "Surface_Pro_9_for_Business_2038",
+        "Name":  "Microsoft Surface Pro 9 Commercial Win11 22H2",
         "Legacy":  false,
         "PackageID":  "104680",
-        "FileName":  "SurfacePro9_Win11_22621_25.052.21398.0.msi",
-        "Url":  "https://download.microsoft.com/download/9a27d0e5-cbce-4933-8fc6-ec5fe5315c69/SurfacePro9_Win11_22621_25.052.21398.0.msi",
+        "FileName":  "SurfacePro9_Win11_22621_25.053.32472.0.msi",
+        "Url":  "https://download.microsoft.com/download/9a27d0e5-cbce-4933-8fc6-ec5fe5315c69/SurfacePro9_Win11_22621_25.053.32472.0.msi",
         "OSVersion":  "Windows 11 x64",
         "OSReleaseId":  "22H2",
         "OSBuild":  "22621",
@@ -2128,18 +2109,18 @@
         "HashMD5":  ""
     },
     {
-        "CatalogVersion":  "25.07.17",
+        "CatalogVersion":  "25.07.18",
         "Status":  null,
         "Component":  "DriverPack",
-        "ReleaseDate":  "25.07.09",
+        "ReleaseDate":  "25.07.18",
         "Manufacturer":  "Microsoft",
         "Model":  "Surface Pro 9",
         "Product":  "Surface_Pro_9_2038",
         "Name":  "Microsoft Surface Pro 9 Consumer Win10 22H2",
         "Legacy":  false,
         "PackageID":  "104680",
-        "FileName":  "SurfacePro9_Win10_19045_25.052.21410.0.msi",
-        "Url":  "https://download.microsoft.com/download/9a27d0e5-cbce-4933-8fc6-ec5fe5315c69/SurfacePro9_Win10_19045_25.052.21410.0.msi",
+        "FileName":  "SurfacePro9_Win10_19045_25.053.32466.0.msi",
+        "Url":  "https://download.microsoft.com/download/9a27d0e5-cbce-4933-8fc6-ec5fe5315c69/SurfacePro9_Win10_19045_25.053.32466.0.msi",
         "OSVersion":  "Windows 10 x64",
         "OSReleaseId":  "22H2",
         "OSBuild":  "19045",
@@ -2147,7 +2128,26 @@
         "HashMD5":  ""
     },
     {
-        "CatalogVersion":  "25.07.17",
+        "CatalogVersion":  "25.07.18",
+        "Status":  null,
+        "Component":  "DriverPack",
+        "ReleaseDate":  "25.07.18",
+        "Manufacturer":  "Microsoft",
+        "Model":  "Surface Pro 9",
+        "Product":  "Surface_Pro_9_2038",
+        "Name":  "Microsoft Surface Pro 9 Consumer Win11 22H2",
+        "Legacy":  false,
+        "PackageID":  "104680",
+        "FileName":  "SurfacePro9_Win11_22621_25.053.32472.0.msi",
+        "Url":  "https://download.microsoft.com/download/9a27d0e5-cbce-4933-8fc6-ec5fe5315c69/SurfacePro9_Win11_22621_25.053.32472.0.msi",
+        "OSVersion":  "Windows 11 x64",
+        "OSReleaseId":  "22H2",
+        "OSBuild":  "22621",
+        "OSArchitecture":  "amd64",
+        "HashMD5":  ""
+    },
+    {
+        "CatalogVersion":  "25.07.18",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "25.05.06",
@@ -2166,7 +2166,7 @@
         "HashMD5":  ""
     },
     {
-        "CatalogVersion":  "25.07.17",
+        "CatalogVersion":  "25.07.18",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "25.05.06",
@@ -2185,7 +2185,7 @@
         "HashMD5":  ""
     },
     {
-        "CatalogVersion":  "25.07.17",
+        "CatalogVersion":  "25.07.18",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "25.05.06",
@@ -2204,7 +2204,7 @@
         "HashMD5":  ""
     },
     {
-        "CatalogVersion":  "25.07.17",
+        "CatalogVersion":  "25.07.18",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "25.05.06",
@@ -2223,7 +2223,7 @@
         "HashMD5":  ""
     },
     {
-        "CatalogVersion":  "25.07.17",
+        "CatalogVersion":  "25.07.18",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "25.05.06",
@@ -2242,7 +2242,7 @@
         "HashMD5":  ""
     },
     {
-        "CatalogVersion":  "25.07.17",
+        "CatalogVersion":  "25.07.18",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "25.05.06",
@@ -2261,7 +2261,7 @@
         "HashMD5":  ""
     },
     {
-        "CatalogVersion":  "25.07.17",
+        "CatalogVersion":  "25.07.18",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "25.05.06",
@@ -2280,7 +2280,7 @@
         "HashMD5":  ""
     },
     {
-        "CatalogVersion":  "25.07.17",
+        "CatalogVersion":  "25.07.18",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "25.05.06",
@@ -2299,7 +2299,7 @@
         "HashMD5":  ""
     },
     {
-        "CatalogVersion":  "25.07.17",
+        "CatalogVersion":  "25.07.18",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "25.04.03",
@@ -2318,7 +2318,7 @@
         "HashMD5":  ""
     },
     {
-        "CatalogVersion":  "25.07.17",
+        "CatalogVersion":  "25.07.18",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "25.04.21",
@@ -2337,7 +2337,7 @@
         "HashMD5":  ""
     },
     {
-        "CatalogVersion":  "25.07.17",
+        "CatalogVersion":  "25.07.18",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "25.07.09",
@@ -2356,7 +2356,7 @@
         "HashMD5":  ""
     },
     {
-        "CatalogVersion":  "25.07.17",
+        "CatalogVersion":  "25.07.18",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "25.07.09",
@@ -2375,7 +2375,7 @@
         "HashMD5":  ""
     },
     {
-        "CatalogVersion":  "25.07.17",
+        "CatalogVersion":  "25.07.18",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "25.07.09",
@@ -2394,7 +2394,7 @@
         "HashMD5":  ""
     },
     {
-        "CatalogVersion":  "25.07.17",
+        "CatalogVersion":  "25.07.18",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "25.07.09",
@@ -2413,7 +2413,7 @@
         "HashMD5":  ""
     },
     {
-        "CatalogVersion":  "25.07.17",
+        "CatalogVersion":  "25.07.18",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "25.07.09",
@@ -2432,7 +2432,7 @@
         "HashMD5":  ""
     },
     {
-        "CatalogVersion":  "25.07.17",
+        "CatalogVersion":  "25.07.18",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "25.07.09",
@@ -2451,7 +2451,7 @@
         "HashMD5":  ""
     },
     {
-        "CatalogVersion":  "25.07.17",
+        "CatalogVersion":  "25.07.18",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "25.02.17",
@@ -2470,7 +2470,7 @@
         "HashMD5":  ""
     },
     {
-        "CatalogVersion":  "25.07.17",
+        "CatalogVersion":  "25.07.18",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "25.02.17",
@@ -2489,7 +2489,7 @@
         "HashMD5":  ""
     },
     {
-        "CatalogVersion":  "25.07.17",
+        "CatalogVersion":  "25.07.18",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "25.02.17",
@@ -2508,7 +2508,7 @@
         "HashMD5":  ""
     },
     {
-        "CatalogVersion":  "25.07.17",
+        "CatalogVersion":  "25.07.18",
         "Status":  null,
         "Component":  "DriverPack",
         "ReleaseDate":  "25.07.16",
