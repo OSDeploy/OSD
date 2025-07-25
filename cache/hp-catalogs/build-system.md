@@ -3,9 +3,9 @@
 | | |
 |-|-|
 | Owner | David Segura |
-| Build Version | 25.7.24.4 |
+| Build Version | 25.7.25.1 |
 | PowerShell Module | OSD.Build |
 | PowerShell Function | Build-OSDCatalogHPSystem |
 | Files | build-system.* |
 | Build Workflow | GitHub Actions |
-| Last Update | Friday, July 25, 2025 5:10:43 AM UTC |
+| Last Update | Friday, July 25, 2025 11:05:10 AM UTC |
