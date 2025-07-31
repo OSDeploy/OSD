@@ -15,7 +15,7 @@ function Set-SetupCompleteSetWiFi {
             if (Test-Path -Path $PSFilePath){
                 Add-Content -Path $PSFilePath ' Write-Host "Creating WiFi Profile"'
                 Write-Host " Set-WiFi -SSID $SSID -PSK ***********"
-                Add-Content -Path $PSFilePath "Set-WiFi -SSID $SSID -PSK $PSK"
+                Add-Content -Path $PSFilePath "Set-WiFi -SSID $SSID -PSK '$PSK'"
                 Add-Content -Path $PSFilePath "Remove-Item -Path $ConfigPath\WiFi.JSON -Force -Verbose"
                 Add-Content -Path $PSFilePath "Write-Output '-------------------------------------------------------------'"
             }
