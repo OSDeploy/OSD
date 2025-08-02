@@ -225,6 +225,16 @@
         "Device":  "Surface Laptop 7th Edition, Intel processor 15\""
     },
     {
+        "SystemSku":  "Surface_Laptop_13in_1st_Ed_with_Snapdragon_2095",
+        "Model":  "Surface Laptop 13in 1st Ed with Snapdragon",
+        "Device":  "Surface Laptop 13-inch 1st Edition with Snapdragon Consumer"
+    },
+    {
+        "SystemSku":  "Surface_Laptop_for_Business_13in_1st_Ed_with_Snapdragon_2095",
+        "Model":  "Surface Laptop for Business 13in 1st Ed with Snapdragon",
+        "Device":  "Surface Laptop 13-inch 1st Edition with Snapdragon Commercial"
+    },
+    {
         "SystemSku":  "Surface_Laptop_Go_1943",
         "Model":  "Surface Laptop Go",
         "Device":  "Surface Laptop Go"
@@ -393,6 +403,16 @@
         "SystemSku":  "Surface_Pro_with_5G_11th_Edition_For_Business_2078",
         "Model":  "Microsoft Surface Pro with 5G, 11th Edition",
         "Device":  "Surface Pro with 5G, 11th Edition, Commercial (Japan)"
+    },
+    {
+        "SystemSku":  "Surface_Pro_12in_1st_Ed_with_Snapdragon_2110",
+        "Model":  "Surface Pro 12in 1st Ed with Snapdragon",
+        "Device":  "Surface Pro 12-inch 1st Edition with Snapdragon Consumer"
+    },
+    {
+        "SystemSku":  "Surface_Pro_for_Business_12in_1st_Ed_with_Snapdragon_2109",
+        "Model":  "Surface Pro for Business 12in 1st Ed with Snapdragon",
+        "Device":  "Surface Pro 12-inch 1st Edition with Snapdragon Commercial"
     },
     {
         "SystemSku":  "Surface_Studio",
