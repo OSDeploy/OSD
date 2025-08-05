@@ -3,9 +3,9 @@
 | | |
 |-|-|
 | Owner | David Segura |
-| Build Version | 25.7.30.3 |
+| Build Version | 25.8.5.2 |
 | PowerShell Module | OSD.Build |
 | PowerShell Function | Build-OSDCatalogLenovoDriverPack |
 | Files | build-driverpack.* |
 | Build Workflow | GitHub Actions |
-| Last Update | Wednesday, July 30, 2025 10:30:59 PM UTC |
+| Last Update | Tuesday, August 5, 2025 5:26:39 PM UTC |
