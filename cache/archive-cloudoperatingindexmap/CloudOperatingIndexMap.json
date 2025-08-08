@@ -518,14 +518,14 @@
         "Language":  "fr-ca",
         "Activation":  "Retail",
         "Indexes":  {
-                        "Windows 11 Famille":  4,
-                        "Windows 11 Professionnel":  6,
-                        "Windows?11 ?ducation":  5
+                        "Windows 11 Home":  4,
+                        "Windows 11 Pro":  6,
+                        "Windows 11 Education":  5
                     },
         "IndexNames":  [
-                           "Windows 11 Famille",
-                           "Windows?11 ?ducation",
-                           "Windows 11 Professionnel"
+                           "Windows 11 Home",
+                           "Windows 11 Education",
+                           "Windows 11 Pro"
                        ],
         "TotalIndexes":  "6"
     },
@@ -534,14 +534,14 @@
         "Language":  "fr-ca",
         "Activation":  "Volume",
         "Indexes":  {
-                        "Windows 11 Professionnel":  6,
-                        "Windows?11 ?ducation":  4,
-                        "Windows 11 Entreprise":  5
+                        "Windows 11 Pro":  6,
+                        "Windows 11 Education":  4,
+                        "Windows 11 Enterprise":  5
                     },
         "IndexNames":  [
-                           "Windows?11 ?ducation",
-                           "Windows 11 Entreprise",
-                           "Windows 11 Professionnel"
+                           "Windows 11 Education",
+                           "Windows 11 Enterprise",
+                           "Windows 11 Pro"
                        ],
         "TotalIndexes":  "6"
     },
@@ -550,22 +550,22 @@
         "Language":  "fr-fr",
         "Activation":  "Retail",
         "Indexes":  {
-                        "Windows 11 Famille":  4,
-                        "Windows 11 Professionnel":  9,
-                        "Windows 11 Famille Unilingue":  6,
-                        "Windows 11 ?ducation N":  8,
-                        "Windows?11 ?ducation":  7,
-                        "Windows 11 Professionnel N":  10,
-                        "Windows 11 Famille N":  5
+                        "Windows 11 Home":  4,
+                        "Windows 11 Pro":  9,
+                        "Windows 11 Home Single Language":  6,
+                        "Windows 11 Education N":  8,
+                        "Windows 11 Education":  7,
+                        "Windows 11 Pro N":  10,
+                        "Windows 11 Home N":  5
                     },
         "IndexNames":  [
-                           "Windows 11 Famille",
-                           "Windows 11 Famille N",
-                           "Windows 11 Famille Unilingue",
-                           "Windows?11 ?ducation",
-                           "Windows 11 ?ducation N",
-                           "Windows 11 Professionnel",
-                           "Windows 11 Professionnel N"
+                           "Windows 11 Home",
+                           "Windows 11 Home N",
+                           "Windows 11 Home Single Language",
+                           "Windows 11 Education",
+                           "Windows 11 Education N",
+                           "Windows 11 Pro",
+                           "Windows 11 Pro N"
                        ],
         "TotalIndexes":  "10"
     },
@@ -574,20 +574,20 @@
         "Language":  "fr-fr",
         "Activation":  "Volume",
         "Indexes":  {
-                        "Windows 11 Professionnel":  8,
-                        "Windows 11 ?ducation N":  5,
-                        "Windows?11 ?ducation":  4,
-                        "Windows 11 Entreprise":  6,
-                        "Windows 11 Professionnel N":  9,
-                        "Windows 11 Entreprise N":  7
+                        "Windows 11 Pro":  8,
+                        "Windows 11 Education N":  5,
+                        "Windows 11 Education":  4,
+                        "Windows 11 Enterprise":  6,
+                        "Windows 11 Pro N":  9,
+                        "Windows 11 Enterprise N":  7
                     },
         "IndexNames":  [
-                           "Windows?11 ?ducation",
-                           "Windows 11 ?ducation N",
-                           "Windows 11 Entreprise",
-                           "Windows 11 Entreprise N",
-                           "Windows 11 Professionnel",
-                           "Windows 11 Professionnel N"
+                           "Windows 11 Education",
+                           "Windows 11 Education N",
+                           "Windows 11 Enterprise",
+                           "Windows 11 Enterprise N",
+                           "Windows 11 Pro",
+                           "Windows 11 Pro N"
                        ],
         "TotalIndexes":  "9"
     },
@@ -1163,6 +1163,40 @@
                        ],
         "TotalIndexes":  "9"
     },
+{
+        "Architecture":  "x64",
+        "Language":  "ru-ru",
+        "Activation":  "Retail",
+        "Indexes":  {
+                        "Windows 11 Home Single Language":  5,
+                        "Windows 11 Education":  6,
+                        "Windows 11 Pro":  7,
+                        "Windows 11 Home":  4
+                    },
+        "IndexNames":  [
+                           "Windows 11 Home",
+                           "Windows 11 Home Single Language",
+                           "Windows 11 Education",
+                           "Windows 11 Pro"
+                       ],
+        "TotalIndexes":  "7"
+    },
+    {
+        "Architecture":  "x64",
+        "Language":  "ru-ru",
+        "Activation":  "Volume",
+        "Indexes":  {
+                        "Windows 11 Education":  4,
+                        "Windows 11 Enterprise":  5,
+                        "Windows 11 Pro":  6
+                    },
+        "IndexNames":  [
+                           "Windows 11 Education",
+                           "Windows 11 Enterprise",
+                           "Windows 11 Pro"
+                       ],
+        "TotalIndexes":  "6"
+    },
     {
         "Architecture":  "x64",
         "Language":  "sk-sk",
@@ -1436,16 +1470,16 @@
         "Language":  "zh-cn",
         "Activation":  "Retail",
         "Indexes":  {
-                        "Windows 11 教育版":  6,
-                        "Windows 11 专业版":  7,
-                        "Windows 11 家庭版":  4,
-                        "Windows 11 家庭单语言版":  5
+                        "Windows 11 Education":  6,
+                        "Windows 11 Pro":  7,
+                        "Windows 11 Home":  4,
+                        "Windows 11 Home Single Language":  5
                     },
         "IndexNames":  [
-                           "Windows 11 家庭版",
-                           "Windows 11 家庭单语言版",
-                           "Windows 11 教育版",
-                           "Windows 11 专业版"
+                           "Windows 11 Home",
+                           "Windows 11 Home Single Language",
+                           "Windows 11 Education",
+                           "Windows 11 Pro"
                        ],
         "TotalIndexes":  "7"
     },
@@ -1454,14 +1488,14 @@
         "Language":  "zh-cn",
         "Activation":  "Volume",
         "Indexes":  {
-                        "Windows 11 教育版":  4,
-                        "Windows 11 专业版":  6,
-                        "Windows 11 企业版":  5
+                        "Windows 11 Education":  4,
+                        "Windows 11 Pro":  6,
+                        "Windows 11 Enterprise":  5
                     },
         "IndexNames":  [
-                           "Windows 11 教育版",
-                           "Windows 11 企业版",
-                           "Windows 11 专业版"
+                           "Windows 11 Education",
+                           "Windows 11 Enterprise",
+                           "Windows 11 Pro"
                        ],
         "TotalIndexes":  "6"
     },
@@ -1470,14 +1504,14 @@
         "Language":  "zh-tw",
         "Activation":  "Retail",
         "Indexes":  {
-                        "Windows 11 專業版":  6,
-                        "Windows 11 教育版":  5,
-                        "Windows 11 家用版":  4
+                        "Windows 11 Pro":  6,
+                        "Windows 11 Education":  5,
+                        "Windows 11 Home":  4
                     },
         "IndexNames":  [
-                           "Windows 11 家用版",
-                           "Windows 11 教育版",
-                           "Windows 11 專業版"
+                           "Windows 11 Home",
+                           "Windows 11 Education",
+                           "Windows 11 Pro"
                        ],
         "TotalIndexes":  "6"
     },
@@ -1486,14 +1520,14 @@
         "Language":  "zh-tw",
         "Activation":  "Volume",
         "Indexes":  {
-                        "Windows 11 專業版":  6,
-                        "Windows 11 教育版":  4,
-                        "Windows 11 企業版":  5
+                        "Windows 11 Pro":  6,
+                        "Windows 11 Education":  4,
+                        "Windows 11 Enterprise":  5
                     },
         "IndexNames":  [
-                           "Windows 11 教育版",
-                           "Windows 11 企業版",
-                           "Windows 11 專業版"
+                           "Windows 11 Education",
+                           "Windows 11 Enterprise",
+                           "Windows 11 Pro"
                        ],
         "TotalIndexes":  "6"
     },
@@ -1848,12 +1882,12 @@
         "Language":  "fr-ca",
         "Activation":  "Retail",
         "Indexes":  {
-                        "Windows 11 Professionnel":  5,
-                        "Windows 11 Famille":  4
+                        "Windows 11 Pro":  5,
+                        "Windows 11 Home":  4
                     },
         "IndexNames":  [
-                           "Windows 11 Famille",
-                           "Windows 11 Professionnel"
+                           "Windows 11 Home",
+                           "Windows 11 Pro"
                        ],
         "TotalIndexes":  "5"
     },
@@ -1862,12 +1896,12 @@
         "Language":  "fr-ca",
         "Activation":  "Volume",
         "Indexes":  {
-                        "Windows 11 Entreprise":  4,
-                        "Windows 11 Professionnel":  5
+                        "Windows 11 Enterprise":  4,
+                        "Windows 11 Pro":  5
                     },
         "IndexNames":  [
-                           "Windows 11 Entreprise",
-                           "Windows 11 Professionnel"
+                           "Windows 11 Enterprise",
+                           "Windows 11 Pro"
                        ],
         "TotalIndexes":  "5"
     },
@@ -1876,14 +1910,14 @@
         "Language":  "fr-fr",
         "Activation":  "Retail",
         "Indexes":  {
-                        "Windows 11 Famille Unilingue":  5,
-                        "Windows 11 Famille":  4,
-                        "Windows 11 Professionnel":  6
+                        "Windows 11 Home Single Language":  5,
+                        "Windows 11 Home":  4,
+                        "Windows 11 Pro":  6
                     },
         "IndexNames":  [
-                           "Windows 11 Famille",
-                           "Windows 11 Famille Unilingue",
-                           "Windows 11 Professionnel"
+                           "Windows 11 Home",
+                           "Windows 11 Home Single Language",
+                           "Windows 11 Pro"
                        ],
         "TotalIndexes":  "6"
     },
@@ -1892,12 +1926,12 @@
         "Language":  "fr-fr",
         "Activation":  "Volume",
         "Indexes":  {
-                        "Windows 11 Entreprise":  4,
-                        "Windows 11 Professionnel":  5
+                        "Windows 11 Enterprise":  4,
+                        "Windows 11 Pro":  5
                     },
         "IndexNames":  [
-                           "Windows 11 Entreprise",
-                           "Windows 11 Professionnel"
+                           "Windows 11 Enterprise",
+                           "Windows 11 Pro"
                        ],
         "TotalIndexes":  "5"
     },
@@ -2299,6 +2333,36 @@
     },
     {
         "Architecture":  "ARM64",
+        "Language":  "ru-ru",
+        "Activation":  "Retail",
+        "Indexes":  {
+                        "Windows 11 Home Single Language":  5,
+                        "Windows 11 Pro":  6,
+                        "Windows 11 Home":  4
+                    },
+        "IndexNames":  [
+                           "Windows 11 Home",
+                           "Windows 11 Home Single Language",
+                           "Windows 11 Pro"
+                       ],
+        "TotalIndexes":  "6"
+    },
+    {
+        "Architecture":  "ARM64",
+        "Language":  "ru-ru",
+        "Activation":  "Volume",
+        "Indexes":  {
+                        "Windows 11 Pro":  5,
+                        "Windows 11 Enterprise":  4
+                    },
+        "IndexNames":  [
+                           "Windows 11 Enterprise",
+                           "Windows 11 Pro"
+                       ],
+        "TotalIndexes":  "5"
+    },
+    {
+        "Architecture":  "ARM64",
         "Language":  "sk-sk",
         "Activation":  "Retail",
         "Indexes":  {
@@ -2506,14 +2570,14 @@
         "Language":  "zh-cn",
         "Activation":  "Retail",
         "Indexes":  {
-                        "Windows 11 专业版":  6,
-                        "Windows 11 家庭版":  4,
-                        "Windows 11 家庭单语言版":  5
+                        "Windows 11 Pro":  6,
+                        "Windows 11 Home":  4,
+                        "Windows 11 Home Single Language":  5
                     },
         "IndexNames":  [
-                           "Windows 11 家庭版",
-                           "Windows 11 家庭单语言版",
-                           "Windows 11 专业版"
+                           "Windows 11 Home",
+                           "Windows 11 Home Single Language",
+                           "Windows 11 Pro"
                        ],
         "TotalIndexes":  "6"
     },
@@ -2522,12 +2586,12 @@
         "Language":  "zh-cn",
         "Activation":  "Volume",
         "Indexes":  {
-                        "Windows 11 专业版":  5,
-                        "Windows 11 企业版":  4
+                        "Windows 11 Pro":  5,
+                        "Windows 11 Enterprise":  4
                     },
         "IndexNames":  [
-                           "Windows 11 企业版",
-                           "Windows 11 专业版"
+                           "Windows 11 Enterprise",
+                           "Windows 11 Pro"
                        ],
         "TotalIndexes":  "5"
     },
@@ -2536,12 +2600,12 @@
         "Language":  "zh-tw",
         "Activation":  "Retail",
         "Indexes":  {
-                        "Windows 11 專業版":  5,
-                        "Windows 11 家用版":  4
+                        "Windows 11 Pro":  5,
+                        "Windows 11 Home":  4
                     },
         "IndexNames":  [
-                           "Windows 11 家用版",
-                           "Windows 11 專業版"
+                           "Windows 11 Home",
+                           "Windows 11 Pro"
                        ],
         "TotalIndexes":  "5"
     },
@@ -2550,12 +2614,12 @@
         "Language":  "zh-tw",
         "Activation":  "Volume",
         "Indexes":  {
-                        "Windows 11 專業版":  5,
-                        "Windows 11 企業版":  4
+                        "Windows 11 Pro":  5,
+                        "Windows 11 Enterprise":  4
                     },
         "IndexNames":  [
-                           "Windows 11 企業版",
-                           "Windows 11 專業版"
+                           "Windows 11 Enterprise",
+                           "Windows 11 Pro"
                        ],
         "TotalIndexes":  "5"
     }
