@@ -3,9 +3,9 @@
 | | |
 |-|-|
 | Owner | David Segura |
-| Build Version | 25.8.10.3 |
+| Build Version | 25.8.12.2 |
 | PowerShell Module | OSD.Build |
 | PowerShell Function | Build-OSDCatalogHPDriverPack |
 | Files | build-driverpack.* |
 | Build Workflow | GitHub Actions |
-| Last Update | Sunday, August 10, 2025 10:06:40 PM UTC |
+| Last Update | Tuesday, August 12, 2025 5:06:41 PM UTC |
