@@ -15,7 +15,10 @@ function Invoke-OSDCloudDriverPackCM {
     [CmdletBinding()]
     param (
         [string]$Manufacturer = (Get-MyComputerManufacturer -Brief),
-        [string]$Product = (Get-MyComputerProduct)
+        [string]$Product = (Get-MyComputerProduct),
+        [System.String]
+        [ValidateSet('Windows 11','Windows 10')]
+        $DriverOSVersion = 'Windows 11'
     )
     #=================================================
     #	Make sure we are running in a Task Sequence first
@@ -116,7 +119,7 @@ function Invoke-OSDCloudDriverPackCM {
     Write-Host -ForegroundColor DarkGray "[$(Get-Date -format G)] Processing function Get-MyDriverPack"
     Write-Host
     if ($Manufacturer -in ('Dell','HP','Lenovo','Microsoft')) {
-        $GetMyDriverPack = Get-MyDriverPack -Manufacturer $Manufacturer -Product $Product
+        $GetMyDriverPack = Get-OSDCloudDriverPack -OSVersion $DriverOSVersion -Product $Product
     }
     else {
         $GetMyDriverPack = Get-MyDriverPack -Product $Product
@@ -163,7 +166,7 @@ function Invoke-OSDCloudDriverPackCM {
             Save-WebFile -SourceUrl $GetMyDriverPack.Url -DestinationDirectory $OSDiskDrivers -DestinationName $GetMyDriverPack.FileName
         }
 
-        $ReadyDriverPack = Get-ChildItem -Path $OSDiskDrivers -File -Force -ErrorAction Ignore | Where-Object {$_.Name -match $GetMyDriverPackBaseName} | Where-Object {$_.Extension -in ('.cab','.zip','.exe')}
+        $ReadyDriverPack = Get-ChildItem -Path $OSDiskDrivers -File -Force -ErrorAction Ignore | Where-Object {$_.Name -match $GetMyDriverPackBaseName} | Where-Object {$_.Extension -in ('.cab','.zip','.exe','.msi')}
         if ($ReadyDriverPack) {
             $PPKGMethod = $true
             Write-Host -ForegroundColor Cyan "[$(Get-Date -format G)] DriverPack has been copied to $OSDiskDrivers"
