@@ -235,6 +235,11 @@
         "Device":  "Surface Laptop 13-inch 1st Edition with Snapdragon Commercial"
     },
     {
+        "SystemSku":  "Surface_Laptop_5G_7th_Edition_With_Intel_For_Business_2119",
+        "Model":  "Surface Laptop 5G for Business 7th Edition with Intel",
+        "Device":  "Surface Laptop 5G for Business"
+    },
+    {
         "SystemSku":  "Surface_Laptop_Go_1943",
         "Model":  "Surface Laptop Go",
         "Device":  "Surface Laptop Go"
