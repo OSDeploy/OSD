@@ -50,10 +50,9 @@
 
         [Parameter(ParameterSetName = 'Default')]
         [ValidateSet(
-            'Windows 11 24H2 x64', 
-            'Windows 11 23H2 x64',    
+            'Windows 11 24H2 x64',
+            'Windows 11 23H2 x64',
             'Windows 11 22H2 x64',
-            'Windows 11 21H2 x64',
             'Windows 10 22H2 x64')]
         [System.String]
         $OSName,
@@ -67,7 +66,7 @@
         #Operating System Build of the Windows installation
         #Alias = Build
         [Parameter(ParameterSetName = 'Legacy')]
-        [ValidateSet('24H2','23H2','22H2','21H2')]
+        [ValidateSet('24H2','23H2','22H2')]
         [Alias('Build')]
         [System.String]
         $OSBuild,
@@ -120,10 +119,7 @@
         [Parameter(ParameterSetName = 'CustomImage')]
         [Alias('ImageIndex')]
         [System.String]
-        $OSImageIndex = 'AUTO',
-
-        [System.Management.Automation.SwitchParameter]
-        $Preview
+        $OSImageIndex = 'AUTO'
     )
     #=================================================
     #	$Global:StartOSDCloud
@@ -172,7 +168,7 @@
         OSLanguageNames = $null
         OSName = $OSName
         OSNameMenu = $null
-        OSNames = @('Windows 11 24H2 x64', 'Windows 11 23H2 x64', 'Windows 11 22H2 x64', 'Windows 11 21H2 x64', 'Windows 10 22H2 x64')
+        OSNames = @('Windows 11 24H2 x64', 'Windows 11 23H2 x64', 'Windows 11 22H2 x64', 'Windows 10 22H2 x64')
         OSVersion = $OSVersion
         OSVersionMenu = $null
         OSVersionNames = @('Windows 11','Windows 10')
@@ -195,6 +191,12 @@
         $Global:StartOSDCloud.MSCatalogFirmware = $true
     }
     #=================================================
+    #	Block
+    #=================================================
+    Block-StandardUser
+    Block-PowerShellVersionLt5
+    Block-NoCurl
+    #=================================================
     #	$Global:StartOSDCloudGUI
     #=================================================
     if ($Global:StartOSDCloudGUI) {
@@ -206,12 +208,6 @@
     if ($Global:StartOSDCloud.OSLicense) {
         $Global:StartOSDCloud.OSActivation = $Global:StartOSDCloud.OSLicense
     }
-    #=================================================
-    #	Block
-    #=================================================
-    Block-StandardUser
-    Block-PowerShellVersionLt5
-    Block-NoCurl
     #=================================================
     #	-Screenshot
     #=================================================
@@ -319,7 +315,7 @@
         if ($Global:StartOSDCloud.OSName) {
         }
         elseif ($Global:StartOSDCloud.ZTI) {
-            $Global:StartOSDCloud.OSName = 'Windows 11 22H2 x64'
+            $Global:StartOSDCloud.OSName = 'Windows 11 24H2 x64'
         }
         else {
             Write-Host -ForegroundColor DarkGray "========================================================================="
@@ -393,7 +389,7 @@
         else {
             Write-Host -ForegroundColor DarkGray "========================================================================="
             Write-Host -ForegroundColor Cyan "[$(Get-Date -format G)] Select a Build for $OSVersion x64"
-            $Global:StartOSDCloud.OSBuildNames = @('24H2','23H2','22H2','21H2')
+            $Global:StartOSDCloud.OSBuildNames = @('24H2','23H2','22H2')
             
             $i = $null
             $Global:StartOSDCloud.OSBuildMenu = foreach ($Item in $Global:StartOSDCloud.OSBuildNames) {
@@ -457,27 +453,34 @@
         if ($Global:StartOSDCloud.OSEdition -eq 'Home') {
             $Global:StartOSDCloud.OSEditionId = 'Core'
             $Global:StartOSDCloud.OSActivation = 'Retail'
-            $Global:StartOSDCloud.OSImageIndex = 4 #Confirmed 24.3.12 - GWB
         }
         if ($Global:StartOSDCloud.OSEdition -eq 'Home N') {
             $Global:StartOSDCloud.OSEditionId = 'CoreN'
             $Global:StartOSDCloud.OSActivation = 'Retail'
-            $Global:StartOSDCloud.OSImageIndex = 5
         }
         if ($Global:StartOSDCloud.OSEdition -eq 'Home Single Language') {
             $Global:StartOSDCloud.OSEditionId = 'CoreSingleLanguage'
             $Global:StartOSDCloud.OSActivation = 'Retail'
-            $Global:StartOSDCloud.OSImageIndex = 6
+        }
+        if ($Global:StartOSDCloud.OSEdition -eq 'Education') {
+            $Global:StartOSDCloud.OSEditionId = 'Education'
+        }
+        if ($Global:StartOSDCloud.OSEdition -eq 'Education N') {
+            $Global:StartOSDCloud.OSEditionId = 'EducationN'
+        }
+        if ($Global:StartOSDCloud.OSEdition -eq 'Pro') {
+            $Global:StartOSDCloud.OSEditionId = 'Professional'
+        }
+        if ($Global:StartOSDCloud.OSEdition -eq 'Pro N') {
+            $Global:StartOSDCloud.OSEditionId = 'ProfessionalN'
         }
         if ($Global:StartOSDCloud.OSEdition -eq 'Enterprise') {
             $Global:StartOSDCloud.OSEditionId = 'Enterprise'
             $Global:StartOSDCloud.OSActivation = 'Volume'
-            $Global:StartOSDCloud.OSImageIndex = 6
         }
         if ($Global:StartOSDCloud.OSEdition -eq 'Enterprise N') {
             $Global:StartOSDCloud.OSEditionId = 'EnterpriseN'
             $Global:StartOSDCloud.OSActivation = 'Volume'
-            $Global:StartOSDCloud.OSImageIndex = 7
         }
         $OSEdition = $Global:StartOSDCloud.OSEdition
         #=================================================
@@ -519,28 +522,6 @@
             else {
                 $Global:StartOSDCloud.OSActivation = 'Volume'
             }
-            #Write-Host -ForegroundColor Cyan "OSActivation: " -NoNewline
-            #Write-Host -ForegroundColor Green $Global:StartOSDCloud.OSActivation
-        }
-        if ($Global:StartOSDCloud.OSEdition -eq 'Education') {
-            $Global:StartOSDCloud.OSEditionId = 'Education'
-            if ($Global:StartOSDCloud.OSActivation -eq 'Retail') {$Global:StartOSDCloud.OSImageIndex = 7}
-            if ($Global:StartOSDCloud.OSActivation -eq 'Volume') {$Global:StartOSDCloud.OSImageIndex = 4} #Confirmed 24.3.12 - GWB
-        }
-        if ($Global:StartOSDCloud.OSEdition -eq 'Education N') {
-            $Global:StartOSDCloud.OSEditionId = 'EducationN'
-            if ($Global:StartOSDCloud.OSActivation -eq 'Retail') {$Global:StartOSDCloud.OSImageIndex = 8}
-            if ($Global:StartOSDCloud.OSActivation -eq 'Volume') {$Global:StartOSDCloud.OSImageIndex = 5}
-        }
-        if ($Global:StartOSDCloud.OSEdition -eq 'Pro') {
-            $Global:StartOSDCloud.OSEditionId = 'Professional'
-            if ($Global:StartOSDCloud.OSActivation -eq 'Retail') {$Global:StartOSDCloud.OSImageIndex = 9}
-            if ($Global:StartOSDCloud.OSActivation -eq 'Volume') {$Global:StartOSDCloud.OSImageIndex = 8}
-        }
-        if ($Global:StartOSDCloud.OSEdition -eq 'Pro N') {
-            $Global:StartOSDCloud.OSEditionId = 'ProfessionalN'
-            if ($Global:StartOSDCloud.OSActivation -eq 'Retail') {$Global:StartOSDCloud.OSImageIndex = 10}
-            if ($Global:StartOSDCloud.OSActivation -eq 'Volume') {$Global:StartOSDCloud.OSImageIndex = 9}
         }
         $OSActivation = $Global:StartOSDCloud.OSActivation
         Write-Host -ForegroundColor Cyan "OSEditionId: " -NoNewline
@@ -661,12 +642,59 @@
         }
     }
     #=================================================
-    #   Invoke-OSDCloud.ps1
+    #   Invoke-OSDCloud
     #=================================================
     Write-Host -ForegroundColor DarkGray "========================================================================="
-    Write-Host -ForegroundColor Green "Invoke-OSDCloud ... Starting in 5 seconds..."
-    if ($Preview) {Break}
+    Write-Host -ForegroundColor Green "[$(Get-Date -format G)] Start-OSDCloud Configuration"
+    $Global:StartOSDCloudCLI | Out-Host
+    Write-Host -ForegroundColor DarkGray "========================================================================="
+    #================================================
+    #   Test TPM
+    #================================================
+    try {
+        $Win32Tpm = Get-CimInstance -Namespace "ROOT\cimv2\Security\MicrosoftTpm" -ClassName Win32_Tpm
+
+        if ($null -eq $Win32Tpm) {
+            Write-Host -ForegroundColor Yellow "[$(Get-Date -format G)] TPM: Not Supported"
+            Write-Host -ForegroundColor Yellow "[$(Get-Date -format G)] Autopilot: Not Supported"
+            Start-Sleep -Seconds 5
+        }
+        elseif ($Win32Tpm.SpecVersion) {
+            if ($null -eq $Win32Tpm.SpecVersion) {
+                Write-Host -ForegroundColor Yellow "[$(Get-Date -format G)] TPM: Unable to detect the TPM Version"
+                Write-Host -ForegroundColor Yellow "[$(Get-Date -format G)] Autopilot: Not Supported"
+                Start-Sleep -Seconds 5
+            }
+
+            $majorVersion = $Win32Tpm.SpecVersion.Split(",")[0] -as [int]
+            if ($majorVersion -lt 2) {
+                Write-Host -ForegroundColor Yellow "[$(Get-Date -format G)] TPM: Version is less than 2.0"
+                Write-Host -ForegroundColor Yellow "[$(Get-Date -format G)] Autopilot: Not Supported"
+                Start-Sleep -Seconds 5
+            }
+            else {
+                #Write-Host -ForegroundColor DarkGray "[$(Get-Date -format G)] TPM IsActivated: $($Win32Tpm.IsActivated_InitialValue)"
+                #Write-Host -ForegroundColor DarkGray "[$(Get-Date -format G)] TPM IsEnabled: $($Win32Tpm.IsEnabled_InitialValue)"
+                #Write-Host -ForegroundColor DarkGray "[$(Get-Date -format G)] TPM IsOwned: $($Win32Tpm.IsOwned_InitialValue)"
+                #Write-Host -ForegroundColor DarkGray "[$(Get-Date -format G)] TPM Manufacturer: $($Win32Tpm.ManufacturerIdTxt)"
+                #Write-Host -ForegroundColor DarkGray "[$(Get-Date -format G)] TPM Manufacturer Version: $($Win32Tpm.ManufacturerVersion)"
+                #Write-Host -ForegroundColor DarkGray "[$(Get-Date -format G)] TPM SpecVersion: $($Win32Tpm.SpecVersion)"
+                Write-Host -ForegroundColor Green "[$(Get-Date -format G)] TPM 2.0: Supported"
+                Write-Host -ForegroundColor Green "[$(Get-Date -format G)] Autopilot: Supported"
+            }
+        }
+        else {
+            Write-Host -ForegroundColor Yellow "[$(Get-Date -format G)] TPM: Not Supported"
+            Write-Host -ForegroundColor Yellow "[$(Get-Date -format G)] Autopilot: Not Supported"
+            Start-Sleep -Seconds 5
+        }
+    }
+    catch {
+    }
+    #================================================
+    #   Invoke-OSDCloud
+    #================================================
+    Write-Host -ForegroundColor Green "[$(Get-Date -format G)] Starting Invoke-OSDCloud in 5 seconds ..."
     Start-Sleep -Seconds 5
     Invoke-OSDCloud
-    #=================================================
 }

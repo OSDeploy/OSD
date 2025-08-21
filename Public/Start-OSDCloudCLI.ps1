@@ -10,10 +10,7 @@
     https://github.com/OSDeploy/OSD/tree/master/Docs
     #>
 
-    [CmdletBinding(
-        SupportsShouldProcess = $true,
-        DefaultParameterSetName = 'Default'
-    )]
+    [CmdletBinding(DefaultParameterSetName = 'Default')]
     param (
         #Automatically populated from Get-MyComputerManufacturer -Brief
         [Alias('Manufacturer')]
@@ -51,16 +48,10 @@
 
         [Parameter(ParameterSetName = 'Default')]
         [ValidateSet(
+            'Windows 11 24H2 x64',
+            'Windows 11 23H2 x64',
             'Windows 11 22H2 x64',
-            'Windows 11 21H2 x64',
-            'Windows 10 22H2 x64',
-            'Windows 10 21H2 x64',
-            'Windows 10 21H1 x64',
-            'Windows 10 20H2 x64',
-            'Windows 10 2004 x64',
-            'Windows 10 1909 x64',
-            'Windows 10 1903 x64',
-            'Windows 10 1809 x64')]
+            'Windows 10 22H2 x64')]
         [System.String]
         $OSName,
 
@@ -73,7 +64,7 @@
         #Operating System Build of the Windows installation
         #Alias = Build
         [Parameter(ParameterSetName = 'Legacy')]
-        [ValidateSet('22H2','21H2','21H1','20H2','2004','1909','1903','1809')]
+        [ValidateSet('24H2','23H2','22H2','21H2')]
         [Alias('Build','OSBuild')]
         [System.String]
         $OSReleaseID,
@@ -290,7 +281,7 @@
             #Do nothing
         }
         elseif ($Global:StartOSDCloudCLI.ZTI) {
-            $Global:StartOSDCloudCLI.OSName = 'Windows 11 22H2 x64'
+            $Global:StartOSDCloudCLI.OSName = 'Windows 11 24H2 x64'
         }
         else {
             Write-Host -ForegroundColor DarkGray "========================================================================="
@@ -326,6 +317,12 @@
         }
         $OSVersion = $Global:StartOSDCloudCLI.OSVersion
 
+        if ($OSName -match '23H2') {
+            $Global:StartOSDCloudCLI.OSReleaseID = '24H2'
+        }
+        if ($OSName -match '24H2') {
+            $Global:StartOSDCloudCLI.OSReleaseID = '23H2'
+        }
         if ($OSName -match '22H2') {
             $Global:StartOSDCloudCLI.OSReleaseID = '22H2'
         }
@@ -463,27 +460,34 @@
         if ($Global:StartOSDCloudCLI.OSEdition -eq 'Home') {
             $Global:StartOSDCloudCLI.OSEditionId = 'Core'
             $Global:StartOSDCloudCLI.OSActivation = 'Retail'
-            $Global:StartOSDCloudCLI.OSImageIndex = 4
         }
         if ($Global:StartOSDCloudCLI.OSEdition -eq 'Home N') {
             $Global:StartOSDCloudCLI.OSEditionId = 'CoreN'
             $Global:StartOSDCloudCLI.OSActivation = 'Retail'
-            $Global:StartOSDCloudCLI.OSImageIndex = 5
         }
         if ($Global:StartOSDCloudCLI.OSEdition -eq 'Home Single Language') {
             $Global:StartOSDCloudCLI.OSEditionId = 'CoreSingleLanguage'
             $Global:StartOSDCloudCLI.OSActivation = 'Retail'
-            $Global:StartOSDCloudCLI.OSImageIndex = 6
+        }
+        if ($Global:StartOSDCloudCLI.OSEdition -eq 'Education') {
+            $Global:StartOSDCloudCLI.OSEditionId = 'Education'
+        }
+        if ($Global:StartOSDCloudCLI.OSEdition -eq 'Education N') {
+            $Global:StartOSDCloudCLI.OSEditionId = 'EducationN'
+        }
+        if ($Global:StartOSDCloudCLI.OSEdition -eq 'Pro') {
+            $Global:StartOSDCloudCLI.OSEditionId = 'Professional'
+        }
+        if ($Global:StartOSDCloudCLI.OSEdition -eq 'Pro N') {
+            $Global:StartOSDCloudCLI.OSEditionId = 'ProfessionalN'
         }
         if ($Global:StartOSDCloudCLI.OSEdition -eq 'Enterprise') {
             $Global:StartOSDCloudCLI.OSEditionId = 'Enterprise'
             $Global:StartOSDCloudCLI.OSActivation = 'Volume'
-            $Global:StartOSDCloudCLI.OSImageIndex = 6
         }
         if ($Global:StartOSDCloudCLI.OSEdition -eq 'Enterprise N') {
             $Global:StartOSDCloudCLI.OSEditionId = 'EnterpriseN'
             $Global:StartOSDCloudCLI.OSActivation = 'Volume'
-            $Global:StartOSDCloudCLI.OSImageIndex = 7
         }
         $OSEdition = $Global:StartOSDCloudCLI.OSEdition
         #=================================================
@@ -525,28 +529,6 @@
             else {
                 $Global:StartOSDCloudCLI.OSActivation = 'Volume'
             }
-            #Write-Host -ForegroundColor Cyan "OSActivation: " -NoNewline
-            #Write-Host -ForegroundColor Green $Global:StartOSDCloudCLI.OSActivation
-        }
-        if ($Global:StartOSDCloudCLI.OSEdition -eq 'Education') {
-            $Global:StartOSDCloudCLI.OSEditionId = 'Education'
-            if ($Global:StartOSDCloudCLI.OSActivation -eq 'Retail') {$Global:StartOSDCloudCLI.OSImageIndex = 7}
-            if ($Global:StartOSDCloudCLI.OSActivation -eq 'Volume') {$Global:StartOSDCloudCLI.OSImageIndex = 4}
-        }
-        if ($Global:StartOSDCloudCLI.OSEdition -eq 'Education N') {
-            $Global:StartOSDCloudCLI.OSEditionId = 'EducationN'
-            if ($Global:StartOSDCloudCLI.OSActivation -eq 'Retail') {$Global:StartOSDCloudCLI.OSImageIndex = 8}
-            if ($Global:StartOSDCloudCLI.OSActivation -eq 'Volume') {$Global:StartOSDCloudCLI.OSImageIndex = 5}
-        }
-        if ($Global:StartOSDCloudCLI.OSEdition -eq 'Pro') {
-            $Global:StartOSDCloudCLI.OSEditionId = 'Professional'
-            if ($Global:StartOSDCloudCLI.OSActivation -eq 'Retail') {$Global:StartOSDCloudCLI.OSImageIndex = 9}
-            if ($Global:StartOSDCloudCLI.OSActivation -eq 'Volume') {$Global:StartOSDCloudCLI.OSImageIndex = 8}
-        }
-        if ($Global:StartOSDCloudCLI.OSEdition -eq 'Pro N') {
-            $Global:StartOSDCloudCLI.OSEditionId = 'ProfessionalN'
-            if ($Global:StartOSDCloudCLI.OSActivation -eq 'Retail') {$Global:StartOSDCloudCLI.OSImageIndex = 10}
-            if ($Global:StartOSDCloudCLI.OSActivation -eq 'Volume') {$Global:StartOSDCloudCLI.OSImageIndex = 9}
         }
         $OSActivation = $Global:StartOSDCloudCLI.OSActivation
         Write-Host -ForegroundColor Cyan "OSEditionId: " -NoNewline
@@ -656,7 +638,7 @@
         Write-Host -ForegroundColor Yellow $Global:StartOSDCloudCLI.DriverPack.Url
     }
     #=================================================
-    #   Invoke-OSDCloud.ps1
+    #   Invoke-OSDCloud
     #=================================================
     Write-Host -ForegroundColor DarkGray "========================================================================="
     Write-Host -ForegroundColor Green "[$(Get-Date -format G)] Start-OSDCloudCLI Configuration"
@@ -708,12 +690,7 @@
     #================================================
     #   Invoke-OSDCloud
     #================================================
-    if ($PSCmdlet.ShouldProcess) {
-        Write-Host -ForegroundColor Green "[$(Get-Date -format G)] Start-OSDCloudCLI is complete"
-    }
-    else {
-        Write-Host -ForegroundColor Green "[$(Get-Date -format G)] Starting Invoke-OSDCloud in 5 seconds ..."
-        Start-Sleep -Seconds 5
-        Invoke-OSDCloud
-    }
+    Write-Host -ForegroundColor Green "[$(Get-Date -format G)] Starting Invoke-OSDCloud in 5 seconds ..."
+    Start-Sleep -Seconds 5
+    Invoke-OSDCloud
 }
