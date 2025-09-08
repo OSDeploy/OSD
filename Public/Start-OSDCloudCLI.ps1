@@ -116,8 +116,8 @@
         #Images using the specified Image Index
         [Parameter(ParameterSetName = 'CustomImage')]
         [Alias('ImageIndex')]
-        [System.String]
-        $OSImageIndex = 'AUTO'
+        [System.Int32]
+        $OSImageIndex = 0
     )
     #=================================================
     #	$Global:StartOSDCloudCLI
@@ -265,7 +265,7 @@
             }
             else {
                 $Global:StartOSDCloudCLI.ImageFileItem = $null
-                $Global:StartOSDCloudCLI.OSImageIndex = 'AUTO'
+                $Global:StartOSDCloudCLI.OSImageIndex = 0
                 #$Global:OSDImageParent = $null
                 #$Global:OSDCloudWimFullName = $null
                 Write-Warning "Custom Windows Image on USB was not found"
@@ -455,7 +455,7 @@
             $Global:StartOSDCloudCLI.OSEdition = $Global:StartOSDCloudCLI.OSEditionMenu | Where-Object {$_.Selection -eq $SelectReadHost} | Select-Object -ExpandProperty Name
         }
         #=================================================
-        #	OSEditionId and OSActivation
+        #	OSEditionId OSEditionId OSActivation
         #=================================================
         if ($Global:StartOSDCloudCLI.OSEdition -eq 'Home') {
             $Global:StartOSDCloudCLI.OSEditionId = 'Core'

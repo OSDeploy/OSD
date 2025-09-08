@@ -17,7 +17,7 @@
             "Name": "Windows 11 24H2 x64",
             "ReleaseID": "24H2",
             "Version": "Windows 11",
-            "ImageIndex": "6"
+            "ImageIndex": 0
         },
         "DefaultARM64": {
             "Activation": "Retail",
@@ -26,7 +26,7 @@
             "Name": "Windows 11 24H2 ARM64",
             "ReleaseID": "24H2",
             "Version": "Windows 11",
-            "ImageIndex": "9"
+            "ImageIndex": 0
         },
         "Values": {
             "Activation": [

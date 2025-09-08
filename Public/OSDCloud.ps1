@@ -166,7 +166,7 @@
         OSEditionMenu = $null
         OSEditionValues = $null
         OSInstallDiskNumber = $null
-        OSImageIndex = 1
+        OSImageIndex = 0
         OSLanguage = $null
         OSLanguageMenu = $null
         OSLanguageNames = $null
@@ -890,7 +890,6 @@
                 $Global:OSDCloud.GetFeatureUpdate = $Global:OSDCloud.GetFeatureUpdate | Select-Object -Property CreationDate,KBNumber,Title,UpdateOS,UpdateBuild,UpdateArch,FileName, @{Name='SizeMB';Expression={[int]($_.Size /1024/1024)}},FileUri,Hash,AdditionalHash
                 $Global:OSDCloud.ImageFileName = $Global:OSDCloud.GetFeatureUpdate.FileName
                 $Global:OSDCloud.ImageFileUrl = $Global:OSDCloud.GetFeatureUpdate.FileUri
-                # $Global:OSDCloud.OSImageIndex = 6
             }
             else {
                 Write-Warning "[$(Get-Date -format G)] OSDCloud Failed"
@@ -1098,7 +1097,7 @@
             $Global:OSDCloud.WindowsImage = Get-WindowsImage -ImagePath $Global:OSDCloud.ImageFileDestination.FullName -ErrorAction Stop
             $Global:OSDCloud.WindowsImageCount = ($Global:OSDCloud.WindowsImage).Count
 
-            #Bad Image
+            # Image is corrupt
             if ($null -eq $Global:OSDCloud.WindowsImageCount) {
                 Write-Warning "[$(Get-Date -format G)] OSDCloud Failed"
                 Write-Warning "Could not read the Windows Image properly"
@@ -1106,44 +1105,10 @@
                 Stop-Computer -Force
                 Exit
             }
-            #=================================================
             # Is there only one ImageIndex?
             elseif ($Global:OSDCloud.WindowsImageCount -eq 1) {
                 $Global:OSDCloud.OSImageIndex = 1
             }
-
-            #AUTO ImageIndex
-            elseif ($Global:OSDCloud.OSImageIndex -match 'AUTO') {
-                $Global:OSDCloud.OSImageIndex = 'AUTO'
-            }
-            elseif (-not ($Global:OSDCloud.OSImageIndex)) {
-                $Global:OSDCloud.OSImageIndex = 'AUTO'
-            }
-            elseif ($null -eq $Global:OSDCloud.OSImageIndex) {
-                $Global:OSDCloud.OSImageIndex = 'AUTO'
-            }
-
-            <#
-            if ($Global:OSDCloud.OSImageIndex -ne 'AUTO') {
-                #Home Single Language Correction
-                if (($OSActivation -eq 'Retail') -and ($Global:OSDCloud.WindowsImageCount -eq 9)) {
-                    if ($OSEdition -eq 'Home Single Language') {
-                        Write-Warning "[$(Get-Date -format G)] OSDCloud Failed"
-                        Write-Warning "This ESD does not contain a Home Single Edition Index"
-                        Write-Warning "Restart OSDCloud and select a different Edition"
-                        Start-Sleep -Seconds 86400
-                        Stop-Computer -Force
-                        Exit
-                    }
-                    if ($OSEdition -notmatch 'Home') {
-                        Write-DarkGrayHost "This ESD does not contain a Home Single Edition Index"
-                        Write-DarkGrayHost "Adjusting selected ImageIndex by -1"
-                        $Global:OSDCloud.OSImageIndex = ($Global:OSDCloud.OSImageIndex - 1)
-                        Write-DarkGrayHost "ImageIndex: $($Global:OSDCloud.OSImageIndex)"
-                    }
-                }
-            }
-            #>
         }
         else {
             #=================================================
@@ -1156,19 +1121,55 @@
             Exit
         }
 
-        if ($Global:OSDCloud.OSImageIndex -eq 'AUTO') {
-            if ($Global:OSDCloud.OSEditionId) {
-                $MatchingWindowsImage = $Global:OSDCloud.WindowsImage | `
-                    ForEach-Object { Get-WindowsImage -ImagePath $Global:OSDCloud.ImageFileDestination.FullName -Index $_.ImageIndex } | `
-                    Where-Object { $_.EditionId -eq $Global:OSDCloud.OSEditionId }
-            }
-                
-            if ($MatchingWindowsImage -and $MatchingWindowsImage.Count -eq 1) {
-                $Global:OSDCloud.OSImageIndex = $MatchingWindowsImage.ImageIndex
+        # Align the OSEdition with the OSEditionId
+        if ($Global:OSDCloud.OSEdition -eq 'Home') {
+            $Global:OSDCloud.OSEditionId = 'Core'
+        }
+        if ($Global:OSDCloud.OSEdition -eq 'Home N') {
+            $Global:OSDCloud.OSEditionId = 'CoreN'
+        }
+        if ($Global:OSDCloud.OSEdition -eq 'Home Single Language') {
+            $Global:OSDCloud.OSEditionId = 'CoreSingleLanguage'
+        }
+        if ($Global:OSDCloud.OSEdition -eq 'Education') {
+            $Global:OSDCloud.OSEditionId = 'Education'
+        }
+        if ($Global:OSDCloud.OSEdition -eq 'Education N') {
+            $Global:OSDCloud.OSEditionId = 'EducationN'
+        }
+        if ($Global:OSDCloud.OSEdition -eq 'Pro') {
+            $Global:OSDCloud.OSEditionId = 'Professional'
+        }
+        if ($Global:OSDCloud.OSEdition -eq 'Pro N') {
+            $Global:OSDCloud.OSEditionId = 'ProfessionalN'
+        }
+        if ($Global:OSDCloud.OSEdition -eq 'Enterprise') {
+            $Global:OSDCloud.OSEditionId = 'Enterprise'
+        }
+        if ($Global:OSDCloud.OSEdition -eq 'Enterprise N') {
+            $Global:OSDCloud.OSEditionId = 'EnterpriseN'
+        }
+        Write-Host -ForegroundColor DarkGray "[$(Get-Date -format G)] OSEditionId is set to $($Global:OSDCloud.OSEditionId)"
+
+        # Match the OSEditionId to the OSImageIndex
+        if ($Global:OSDCloud.OSEditionId) {
+            $MatchingWindowsImage = $Global:OSDCloud.WindowsImage | `
+                ForEach-Object { Get-WindowsImage -ImagePath $Global:OSDCloud.ImageFileDestination.FullName -Index $_.ImageIndex } | `
+                Where-Object { $_.EditionId -eq $Global:OSDCloud.OSEditionId }
+            
+            if ($MatchingWindowsImage) {
+                if ($MatchingWindowsImage.Count -eq 1) {
+                    $Global:OSDCloud.OSImageIndex = $MatchingWindowsImage.ImageIndex
+                }
             }
         }
+        Write-Host -ForegroundColor DarkGray "[$(Get-Date -format G)] OSImageIndex is set to $($Global:OSDCloud.OSImageIndex)"
 
-        if ($Global:OSDCloud.OSImageIndex -eq 'AUTO') {
+        # Does the WindowsImage contain the ImageIndex?
+        if ($Global:OSDCloud.WindowsImage | Where-Object {$_.ImageIndex -eq $Global:OSDCloud.OSImageIndex}) {
+            Write-Host -ForegroundColor DarkGray "[$(Get-Date -format G)] WindowsImage contains the required ImageIndex"
+        }
+        else {
             Write-SectionHeader "Select the Windows Image to expand"
             $SelectedWindowsImage = $Global:OSDCloud.WindowsImage | Where-Object {$_.ImageSize -gt 3000000000}
 
@@ -1184,36 +1185,41 @@
                 $Global:OSDCloud.OSImageIndex = $SelectReadHost
             }
         }
-        else {
+
+        if ($Global:OSDCloud.OSImageIndex) {
             $Global:OSDCloud.WindowsImage | Where-Object {$_.ImageSize -gt 3000000000} | Select-Object -Property ImageIndex, ImageName | Format-Table | Out-Host
         }
-        #endregion
-
-        #region Expand-WindowsImage
-        Write-SectionHeader "Expand-WindowsImage"
-        Write-DarkGrayHost "ApplyPath: 'C:\'"
-        Write-DarkGrayHost "ImagePath: $($Global:OSDCloud.ImageFileDestination.FullName)"
-        Write-DarkGrayHost "Index: $($Global:OSDCloud.OSImageIndex)"
-        Write-DarkGrayHost "ScratchDirectory: 'C:\OSDCloud\Temp'"
-
-        $ParamNewItem = @{
-            Path = 'C:\OSDCloud\Temp'
-            ItemType = 'Directory'
-            Force = $true
-            ErrorAction = 'Stop'
+        else {
+            #=================================================
+            #	FAILED
+            #=================================================
+            Write-Warning "[$(Get-Date -format G)] OSDCloud Failed"
+            Write-Warning "Could not find a proper Windows Image for deployment"
+            Write-Warning "Press Ctrl+C to exit"
+            Start-Sleep -Seconds 86400
+            Exit
         }
-        if (-NOT (Test-Path 'C:\OSDCloud\Temp')) {
-            Write-DarkGrayHost -Message 'Creating ScratchDirectory C:\OSDCloud\Temp'
-            $null = New-Item @ParamNewItem
+        #=================================================
+        #   Create ScratchDirectory
+        $Params = @{
+            ErrorAction = 'SilentlyContinue'
+            Force       = $true
+            ItemType    = 'Directory'
+            Path        = 'C:\OSDCloud\Temp'
         }
-        if ($Global:OSDCloud.ImageFileDestination.FullName -match ".swm"){
+        if (-NOT (Test-Path $Params.Path -ErrorAction SilentlyContinue)) {
+            New-Item @Params | Out-Null
+        }
+        #=================================================
+        # Build the Params
+        if ($Global:OSDCloud.ImageFileDestination.FullName -match ".swm") {
             $ExpandWindowsImage = @{
-                Name = (Get-WindowsImage -ImagePath $Global:OSDCloud.ImageFileDestination.FullName).ImageName
                 ApplyPath = 'C:\'
-                ImagePath = $Global:OSDCloud.ImageFileDestination.FullName
-                SplitImageFilePattern = ($Global:OSDCloud.ImageFileDestination.FullName).replace("install.swm","install*.swm")
-                ScratchDirectory = 'C:\OSDCloud\Temp'
                 ErrorAction = 'Stop'
+                ImagePath = $Global:OSDCloud.ImageFileDestination.FullName
+                Name = (Get-WindowsImage -ImagePath $Global:OSDCloud.ImageFileDestination.FullName).ImageName
+                ScratchDirectory = 'C:\OSDCloud\Temp'
+                SplitImageFilePattern = ($Global:OSDCloud.ImageFileDestination.FullName).replace("install.swm","install*.swm")
             }
             Write-DarkGrayHost "SplitImageFilePattern: $(($Global:OSDCloud.ImageFileDestination.FullName).replace("install.swm","install*.swm"))"
             Write-DarkGrayHost "Name: $((Get-WindowsImage -ImagePath $Global:OSDCloud.ImageFileDestination.FullName).ImageName)"
@@ -1221,20 +1227,36 @@
         else {
             $ExpandWindowsImage = @{
                 ApplyPath = 'C:\'
+                ErrorAction = 'Stop'
                 ImagePath = $Global:OSDCloud.ImageFileDestination.FullName
                 Index = $Global:OSDCloud.OSImageIndex
                 ScratchDirectory = 'C:\OSDCloud\Temp'
-                ErrorAction = 'Stop'
             }
         }
+        #=================================================
+        #region Expand WindowsImage
+        Write-SectionHeader "Expand-WindowsImage"
+        Write-DarkGrayHost "ApplyPath: 'C:\'"
+        Write-DarkGrayHost "ImagePath: $($Global:OSDCloud.ImageFileDestination.FullName)"
+        Write-DarkGrayHost "Index: $($Global:OSDCloud.OSImageIndex)"
+        Write-DarkGrayHost "ScratchDirectory: 'C:\OSDCloud\Temp'"
 
         $Global:OSDCloud.ExpandWindowsImage = $ExpandWindowsImage
         if ($Global:OSDCloud.IsWinPE -eq $true) {
-            Write-DarkGrayHost -Message 'Expand-WindowsImage'
-            Expand-WindowsImage @ExpandWindowsImage
+            try {
+                Write-DarkGrayHost -Message 'Expand-WindowsImage'
+                Expand-WindowsImage @ExpandWindowsImage
+            }
+            catch {
+                Write-Warning "[$(Get-Date -format G)] Expand-WindowsImage failed."
+                Write-Warning "[$(Get-Date -format G)] $_"
+                Write-Warning 'Press Ctrl+C to cancel OSDCloud'
+                Start-Sleep -Seconds 86400
+                exit
+            }
         }
         #endregion
-
+        #=================================================
         #region Get-WindowsEdition
         if ($Global:OSDCloud.IsWinPE -eq $true) {
             Write-SectionHeader 'Get-WindowsEdition'
@@ -1242,13 +1264,15 @@
             $WindowsEdition | Write-Host
         }
         #endregion
-
+        #=================================================
         #region BCDBoot
         if ($Global:OSDCloud.IsWinPE -eq $true) {
-            Write-SectionHeader 'BCDBoot with Verbose Logging'
+            Write-SectionHeader 'BCDBoot with Log X:\Windows\Temp\bcdboot.log'
             #https://learn.microsoft.com/en-us/windows-hardware/manufacture/desktop/bcdboot-command-line-options-techref-di?view=windows-11
             #Updated configuration that should clear existing UEFI Boot entires and fix the Dell issue
-            Invoke-Exe C:\Windows\System32\bcdboot.exe C:\Windows /v /c
+            Write-Host -ForegroundColor DarkGray "[$(Get-Date -format G)] C:\Windows\System32\bcdboot.exe C:\Windows /c /v"
+            $BCDBootOutput = & C:\Windows\System32\bcdboot.exe C:\Windows /c /v
+            $BCDBootOutput | Out-File -FilePath "X:\Windows\Temp\bcdboot.log" -Force
         }
         #endregion
     #endregion WindowsImage

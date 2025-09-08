@@ -118,8 +118,8 @@
         #Images using the specified Image Index
         [Parameter(ParameterSetName = 'CustomImage')]
         [Alias('ImageIndex')]
-        [System.String]
-        $OSImageIndex = 'AUTO'
+        [System.Int32]
+        $OSImageIndex = 0
     )
     #=================================================
     #	$Global:StartOSDCloud
@@ -297,7 +297,7 @@
             }
             else {
                 $Global:StartOSDCloud.ImageFileItem = $null
-                $Global:StartOSDCloud.OSImageIndex = 'AUTO'
+                $Global:StartOSDCloud.OSImageIndex = 0
                 #$Global:OSDImageParent = $null
                 #$Global:OSDCloudWimFullName = $null
                 Write-Warning "Custom Windows Image on USB was not found"

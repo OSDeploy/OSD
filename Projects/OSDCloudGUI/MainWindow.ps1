@@ -470,8 +470,12 @@ function Set-OSDCloudGUIDefaultOptions {
     $formMainWindowControlImageNameCombobox.Items.Clear()
     $formMainWindowControlImageNameCombobox.Visibility = "Collapsed"
 
-    $formMainWindowControlImageIndexTextbox.Text = $Global:OSDCloudGUI.OSImageIndex
+    $formMainWindowControlImageIndexLabel.IsEnabled = $false
+    $formMainWindowControlImageIndexLabel.Visibility = "Collapsed"
+    #$formMainWindowControlImageIndexTextbox.Text = $Global:OSDCloudGUI.OSImageIndex
+    $formMainWindowControlImageIndexTextbox.Text = $null
     $formMainWindowControlImageIndexTextbox.IsEnabled = $false
+    $formMainWindowControlImageIndexTextbox.Visibility = "Collapsed"
 
     $formMainWindowControlAutopilotJsonCombobox.IsEnabled = $true
     $formMainWindowControlAutopilotJsonCombobox.SelectedIndex = 1   #OOBE
@@ -573,94 +577,36 @@ $formMainWindowControlOSEditionCombobox.add_SelectionChanged({
         #Retail edition only and disable Activation combobox
         $formMainWindowControlOSActivationCombobox.SelectedValue = 'Retail'
         $formMainWindowControlOSActivationCombobox.IsEnabled = $false
-
-        $formMainWindowControlImageIndexLabel.IsEnabled = $false
-
-        $formMainWindowControlImageIndexTextbox.Text = 4
-        $formMainWindowControlImageIndexTextbox.IsEnabled = $false
     }
     elseif ($formMainWindowControlOSEditionCombobox.SelectedValue -eq 'Home N') {
         #Retail edition only and disable Activation combobox
         $formMainWindowControlOSActivationCombobox.SelectedValue = 'Retail'
         $formMainWindowControlOSActivationCombobox.IsEnabled = $false
-
-        $formMainWindowControlImageIndexLabel.IsEnabled = $false
-
-        $formMainWindowControlImageIndexTextbox.Text = 5
-        $formMainWindowControlImageIndexTextbox.IsEnabled = $false
     }
     elseif ($formMainWindowControlOSEditionCombobox.SelectedValue -eq 'Home Single Language') {
         #Retail edition only and disable Activation combobox
         $formMainWindowControlOSActivationCombobox.SelectedValue = 'Retail'
         $formMainWindowControlOSActivationCombobox.IsEnabled = $false
-
-        $formMainWindowControlImageIndexLabel.IsEnabled = $false
-
-        $formMainWindowControlImageIndexTextbox.Text = 6
-        $formMainWindowControlImageIndexTextbox.IsEnabled = $false
     }
     elseif ($formMainWindowControlOSEditionCombobox.SelectedValue -eq 'Education') {
         $formMainWindowControlOSActivationCombobox.IsEnabled = $true
-        if ($formMainWindowControlOSActivationCombobox.SelectedValue -eq 'Retail') {
-            $formMainWindowControlImageIndexTextbox.Text = 7
-        }
-        else {
-            $formMainWindowControlImageIndexTextbox.Text = 4
-        }
     }
     elseif ($formMainWindowControlOSEditionCombobox.SelectedValue -eq 'Education N') {
         $formMainWindowControlOSActivationCombobox.IsEnabled = $true
-        if ($formMainWindowControlOSActivationCombobox.SelectedValue -eq 'Retail') {
-            $formMainWindowControlImageIndexTextbox.Text = 8
-        }
-        else {
-            $formMainWindowControlImageIndexTextbox.Text = 5
-        }
     }
     elseif ($formMainWindowControlOSEditionCombobox.SelectedValue -eq 'Enterprise') {
         $formMainWindowControlOSActivationCombobox.SelectedValue = 'Volume'
         $formMainWindowControlOSActivationCombobox.IsEnabled = $false
-        $formMainWindowControlImageIndexTextbox.Text = 6
     }
     elseif ($formMainWindowControlOSEditionCombobox.SelectedValue -eq 'Enterprise N') {
         $formMainWindowControlOSActivationCombobox.SelectedValue = 'Volume'
         $formMainWindowControlOSActivationCombobox.IsEnabled = $false
-        $formMainWindowControlImageIndexTextbox.Text = 7
     }
     elseif ($formMainWindowControlOSEditionCombobox.SelectedValue -eq 'Pro') {
         $formMainWindowControlOSActivationCombobox.IsEnabled = $true
-        if ($formMainWindowControlOSActivationCombobox.SelectedValue -eq 'Retail') {
-            $formMainWindowControlImageIndexTextbox.Text = 9
-        }
-        else {
-            $formMainWindowControlImageIndexTextbox.Text = 8
-        }
     }
     elseif ($formMainWindowControlOSEditionCombobox.SelectedValue -eq 'Pro N') {
         $formMainWindowControlOSActivationCombobox.IsEnabled = $true
-        if ($formMainWindowControlOSActivationCombobox.SelectedValue -eq 'Retail') {
-            $formMainWindowControlImageIndexTextbox.Text = 10
-        }
-        else {
-            $formMainWindowControlImageIndexTextbox.Text = 9
-        }
-    }
-})
-#================================================
-#   OS Activation Combobox
-#================================================
-$formMainWindowControlOSActivationCombobox.add_SelectionChanged({
-    if ($formMainWindowControlOSActivationCombobox.SelectedValue -eq 'Retail') {
-        if ($formMainWindowControlOSEditionCombobox.SelectedValue -eq 'Education') {$formMainWindowControlImageIndexTextbox.Text = 7}
-        if ($formMainWindowControlOSEditionCombobox.SelectedValue -eq 'Education N') {$formMainWindowControlImageIndexTextbox.Text = 8}
-        if ($formMainWindowControlOSEditionCombobox.SelectedValue -eq 'Pro') {$formMainWindowControlImageIndexTextbox.Text = 9}
-        if ($formMainWindowControlOSEditionCombobox.SelectedValue -eq 'Pro N') {$formMainWindowControlImageIndexTextbox.Text = 10}
-    }
-    if ($formMainWindowControlOSActivationCombobox.SelectedValue -eq 'Volume') {
-        if ($formMainWindowControlOSEditionCombobox.SelectedValue -eq 'Education') {$formMainWindowControlImageIndexTextbox.Text = 4}
-        if ($formMainWindowControlOSEditionCombobox.SelectedValue -eq 'Education N') {$formMainWindowControlImageIndexTextbox.Text = 5}
-        if ($formMainWindowControlOSEditionCombobox.SelectedValue -eq 'Pro') {$formMainWindowControlImageIndexTextbox.Text = 8}
-        if ($formMainWindowControlOSEditionCombobox.SelectedValue -eq 'Pro N') {$formMainWindowControlImageIndexTextbox.Text = 9}
     }
 })
 #================================================
@@ -674,6 +620,8 @@ $formMainWindowControlOSNameCombobox.add_SelectionChanged({
         $formMainWindowControlOSEditionCombobox.Visibility = "Collapsed"
         $formMainWindowControlOSLanguageCombobox.Visibility = "Collapsed"
         $formMainWindowControlOSActivationCombobox.Visibility = "Collapsed"
+        $formMainWindowControlImageIndexLabel.IsEnabled = $false
+        $formMainWindowControlImageIndexLabel.Visibility = "Visible"
         $formMainWindowControlImageIndexTextbox.IsEnabled = $false
         $formMainWindowControlImageIndexTextbox.Text = 1
 
@@ -826,7 +774,7 @@ $formMainWindowControlStartButton.add_Click({
         OSActivation                = [System.String]$OSActivation
         OSBuild                     = [System.String]$OSBuild
         OSEdition                   = [System.String]$OSEdition
-        OSImageIndex                = [System.Int32]$OSImageIndex
+        OSImageIndex                = $OSImageIndex
         OSLanguage                  = [System.String]$OSLanguage
         OSName                      = [System.String]$OSName
         OSReleaseID                 = [System.String]$OSReleaseID
@@ -872,8 +820,6 @@ $formMainWindowControlStartButton.add_Click({
         WindowsUpdateDrivers        = [System.Boolean]$formMainWindowControlWindowsUpdateDrivers.IsChecked
         OEMActivation               = [System.Boolean]$formMainWindowControlOEMActivation.IsChecked
         ShutdownSetupComplete       = [System.Boolean]$formMainWindowControlShutdownSetupComplete.IsChecked
-        
-
     }
     #-----------------------------------------
     # Manufacturer Enhancements - START
