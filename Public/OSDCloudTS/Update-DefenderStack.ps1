@@ -1,7 +1,8 @@
 function Update-DefenderStack {
     [CmdletBinding()]
     param ()
-    if (Test-WebConnection -Uri "google.com") {
+#    if (Test-WebConnection -Uri "google.com") {
+    if (Test-WindowsUpdateEnvironment) {
         # Source Addresses - Defender for Windows 10, 8.1 ################################
         $sourceAVx64 = "http://go.microsoft.com/fwlink/?LinkID=121721&arch=x64"
         $sourcePlatformx64 = "https://go.microsoft.com/fwlink/?LinkID=870379&clcid=0x409&arch=x64"
