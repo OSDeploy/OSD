@@ -4,7 +4,7 @@
 .DESCRIPTION
     OSDCloud Cloud Module for functions.osdcloud.com
 .NOTES
-    Version 23.6.4.1
+    Version 25.9.10.1
 .LINK
     https://raw.githubusercontent.com/OSDeploy/OSD/master/cloud/modules/eq-winpe.psm1
 .EXAMPLE
@@ -39,7 +39,8 @@ function osdcloud-WinpeInstallPowerShellGet {
     $InstalledModule = Import-Module PowerShellGet -PassThru -ErrorAction Ignore
     if (-not (Get-Module -Name PowerShellGet -ListAvailable | Where-Object {$_.Version -ge '2.2.5'})) {
         Write-Host -ForegroundColor Yellow "[-] Install PowerShellGet 2.2.5"
-        $PowerShellGetURL = "https://psg-prod-eastus.azureedge.net/packages/powershellget.2.2.5.nupkg"
+        #$PowerShellGetURL = "https://psg-prod-eastus.azureedge.net/packages/powershellget.2.2.5.nupkg"
+        $PowerShellGetURL = 'https://www.powershellgallery.com/api/v2/package/PowerShellGet/2.2.5/#manualdownload'
         Invoke-WebRequest -UseBasicParsing -Uri $PowerShellGetURL -OutFile "$env:TEMP\powershellget.2.2.5.zip"
         $null = New-Item -Path "$env:TEMP\2.2.5" -ItemType Directory -Force
         Expand-Archive -Path "$env:TEMP\powershellget.2.2.5.zip" -DestinationPath "$env:TEMP\2.2.5"
