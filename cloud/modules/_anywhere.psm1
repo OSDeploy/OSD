@@ -5,6 +5,7 @@
     OSDCloud Cloud Module for functions.osdcloud.com
 .NOTES
     This module can be loaded in all Windows phases
+    Version 25.9.10.1
 .LINK
     https://raw.githubusercontent.com/OSDeploy/OSD/master/cloud/modules/_anywhere.psm1
 .EXAMPLE
@@ -218,7 +219,8 @@ function osdcloud-InstallPackageManagement {
         $InstalledModule = Import-Module PackageManagement -PassThru -ErrorAction Ignore
         if (-not $InstalledModule) {
             Write-Host -ForegroundColor Yellow "[-] Install PackageManagement 1.4.8.1"
-            $PackageManagementURL = "https://psg-prod-eastus.azureedge.net/packages/packagemanagement.1.4.8.1.nupkg"
+            #$PackageManagementURL = "https://psg-prod-eastus.azureedge.net/packages/packagemanagement.1.4.8.1.nupkg"
+            $PackageManagementURL = 'https://www.powershellgallery.com/api/v2/package/PackageManagement/1.4.8.1/#manualdownload'
             Invoke-WebRequest -UseBasicParsing -Uri $PackageManagementURL -OutFile "$env:TEMP\packagemanagement.1.4.8.1.zip"
             $null = New-Item -Path "$env:TEMP\1.4.8.1" -ItemType Directory -Force
             Expand-Archive -Path "$env:TEMP\packagemanagement.1.4.8.1.zip" -DestinationPath "$env:TEMP\1.4.8.1"
