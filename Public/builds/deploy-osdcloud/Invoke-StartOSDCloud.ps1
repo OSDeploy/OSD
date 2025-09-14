@@ -1,4 +1,4 @@
-﻿function Invoke-OSDCloud {
+﻿function Invoke-StartOSDCloud {
     <#
     .SYNOPSIS
     This is the master OSDCloud Task Sequence

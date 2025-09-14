@@ -1,4 +1,4 @@
-﻿function Start-OSDCloudGUI {
+﻿function Deploy-OSDCloudGUI {
     <#
     .SYNOPSIS
     OSDCloud imaging using the command line
