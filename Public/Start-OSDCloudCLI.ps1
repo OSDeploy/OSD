@@ -317,10 +317,10 @@
         }
         $OSVersion = $Global:StartOSDCloudCLI.OSVersion
 
-        if ($OSName -match '23H2') {
+        if ($OSName -match '24H2') {
             $Global:StartOSDCloudCLI.OSReleaseID = '24H2'
         }
-        if ($OSName -match '24H2') {
+        if ($OSName -match '23H2') {
             $Global:StartOSDCloudCLI.OSReleaseID = '23H2'
         }
         if ($OSName -match '22H2') {
