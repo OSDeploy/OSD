@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<WindowsCustomizations>
+  <PackageConfig xmlns="urn:schemas-Microsoft-com:Windows-ICD-Package-Config.v1.0">
+    <ID>{97a4c0e8-fa6e-4120-8e48-53e2bf5a29ac}</ID>
+    <Name>setupspecialize</Name>
+    <Version>1.1</Version>
+    <OwnerType>OEM</OwnerType>
+    <Rank>0</Rank>
+    <Notes></Notes>
+  </PackageConfig>
+  <Settings xmlns="urn:schemas-microsoft-com:windows-provisioning">
+    <Customizations>
+      <Common>
+        <ProvisioningCommands>
+          <DeviceContext>
+            <CommandLine>C:\Windows\Temp\osdcloud\SetupSpecialize.cmd</CommandLine>
+          </DeviceContext>
+        </ProvisioningCommands>
+      </Common>
+    </Customizations>
+  </Settings>
+</WindowsCustomizations>
