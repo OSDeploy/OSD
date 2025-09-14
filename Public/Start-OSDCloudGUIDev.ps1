@@ -72,8 +72,7 @@
         OSNameARM64Values           = [array]$Global:OSDModuleResource.OSDCloud.Values.NameARM64
         OSReleaseIDValues           = [array]$Global:OSDModuleResource.OSDCloud.Values.ReleaseID
         OSVersionValues             = [array]$Global:OSDModuleResource.OSDCloud.Values.Version
-        
-        captureScreenshots          = [System.Boolean]$Global:OSDModuleResource.StartOSDCloudGUI.captureScreenshots
+
         ClearDiskConfirm            = [System.Boolean]$Global:OSDModuleResource.StartOSDCloudGUI.ClearDiskConfirm
         restartComputer             = [System.Boolean]$Global:OSDModuleResource.StartOSDCloudGUI.restartComputer
         updateDiskDrivers           = [System.Boolean]$Global:OSDModuleResource.StartOSDCloudGUI.updateDiskDrivers

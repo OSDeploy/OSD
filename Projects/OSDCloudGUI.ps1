@@ -469,16 +469,7 @@ $StartButtonControl.add_Click({
         SkipOOBEDeploy              = $SkipOOBEDeploy
         ZTI                         = $ZTICheckbox.IsChecked
     }
-    #$Global:StartOSDCloudGUI | Out-Host
-    if ($ScreenshotCheckbox.IsChecked) {
-        $Params = @{
-            Screenshot = $true
-        }
-        Start-OSDCloud @Params
-    }
-    else {
-        Start-OSDCloud 
-    }
+    Start-OSDCloud
 })
 #================================================
 #   Customizations

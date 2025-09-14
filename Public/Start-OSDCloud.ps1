@@ -32,10 +32,6 @@
         [System.Management.Automation.SwitchParameter]
         $Shutdown,
 
-        #Captures screenshots during OSDCloud WinPE
-        [System.Management.Automation.SwitchParameter]
-        $Screenshot,
-
         #Skips the Autopilot Task routine
         [System.Management.Automation.SwitchParameter]
         $SkipAutopilot,
@@ -119,7 +115,9 @@
         [Parameter(ParameterSetName = 'CustomImage')]
         [Alias('ImageIndex')]
         [System.Int32]
-        $OSImageIndex = 0
+        $OSImageIndex = 0,
+
+        $Architecture = $Env:PROCESSOR_ARCHITECTURE
     )
     #=================================================
     #	$Global:StartOSDCloud
@@ -174,8 +172,6 @@
         OSVersionNames = @('Windows 11','Windows 10')
         Product = $Product
         Restart = $Restart
-        ScreenshotCapture = $false
-        ScreenshotPath = "$env:TEMP\Screenshots"
         Shutdown = $Shutdown
         SkipAutopilot = $SkipAutopilot
         SkipAutopilotOOBE = $null
@@ -207,13 +203,6 @@
 
     if ($Global:StartOSDCloud.OSLicense) {
         $Global:StartOSDCloud.OSActivation = $Global:StartOSDCloud.OSLicense
-    }
-    #=================================================
-    #	-Screenshot
-    #=================================================
-    if ($PSBoundParameters.ContainsKey('Screenshot')) {
-        $Global:StartOSDCloud.ScreenshotCapture = $true
-        Start-ScreenPNGProcess -Directory $Global:StartOSDCloud.ScreenshotPath
     }
     #=================================================
     #	Computer Information
