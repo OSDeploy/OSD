@@ -39,6 +39,10 @@
         $PrestartURL
     )
     #=================================================
+    # Get module details
+    $ModuleVersion = $($MyInvocation.MyCommand.Module.Version)
+    $OSDModuleVersion = $((Get-OSDModuleVersion).ToString())
+    #=================================================
     if ($PrestartURL) {
         try {
             $Result = Invoke-WebRequest -Uri $PrestartURL -UseBasicParsing -Method Head
@@ -114,7 +118,7 @@
         ComputerProduct             = [System.String]$ComputerProduct
         DriverPack                  = $null
         DriverPacks                 = [array]$DriverPacks
-        DriverPackName              = 'None'
+        DriverPackName              = $null
         IsOnBattery                 = [System.Boolean](Get-OSDGather -Property IsOnBattery)
 
         OSActivation                = [System.String]$OSActivation
@@ -211,9 +215,6 @@
 
     if ($Results) {
         $Global:OSDCloudGUI.DriverPackName = $Results.Name
-    }
-    else {
-        $Global:OSDCloudGUI.DriverPackName = 'None'
     }
     Write-Host -ForegroundColor Green "OSDCloudGUI Configuration"
     $Global:OSDCloudGUI | Out-Host
