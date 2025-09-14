@@ -142,6 +142,7 @@ function Initialize-OSDCloudStartnet {
             }
         }
 
+        <#
         # Check if the OSD Module in the PowerShell Gallery is newer than the installed version
         $TimeSpan = New-TimeSpan -Start $Global:StartnetStart -End (Get-Date)
         Write-Host -ForegroundColor DarkGray "$($TimeSpan.ToString("mm':'ss")) Updating OSD PowerShell Module"
@@ -157,5 +158,6 @@ function Initialize-OSDCloudStartnet {
                 Import-Module $PSModuleName -Force
             }
         }
+        #>
     }
 }
