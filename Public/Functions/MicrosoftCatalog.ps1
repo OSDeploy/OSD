@@ -151,13 +151,13 @@ function Get-MsUpCat {
                 }
             }
         } else {
-            Write-Warning "No updates found matching the search term."
+            Write-Host -ForegroundColor DarkGray "No updates found matching the search term."
         }
         $ProgressPreference = $ProgPref
     } catch {
         $ProgressPreference = $ProgPref
         if ($_.Exception.Message -like "We did not find*") {
-            #Write-Warning $_.Exception.Message
+            #Write-Host -ForegroundColor DarkGray $_.Exception.Message
         } else {
             throw $_
         }
@@ -293,11 +293,11 @@ function Get-MsUpCatUpdate {
             #=================================================
         }
         else {
-            Write-Warning "Save-MsUpCatUpdate: Could not install required PowerShell Module MSCatalog"
+            Write-Host -ForegroundColor DarkGray "Save-MsUpCatUpdate: Could not install required PowerShell Module MSCatalog"
         }
     }
     else {
-        Write-Warning "Save-MsUpCatUpdate: Could not reach https://www.catalog.update.microsoft.com/"
+        Write-Host -ForegroundColor DarkGray "Save-MsUpCatUpdate: Could not reach https://www.catalog.update.microsoft.com/"
     }
     #=================================================
 }
@@ -323,7 +323,7 @@ function Save-MsUpCatDriver {
     )
     #=================================================
     if (!($DestinationDirectory)) {
-        Write-Warning 'Set the DestinationDirectory parameter to download the Drivers'
+        Write-Host -ForegroundColor DarkGray 'Set the DestinationDirectory parameter to download the Drivers'
     }
     else {
         if (!(Test-Path $DestinationDirectory)){
@@ -458,25 +458,25 @@ function Save-MsUpCatDriver {
                                             Remove-Item $WindowsUpdateDriverFile.FullName | Out-Null
                                         }
                                         else {
-                                            Write-Warning "Save-MsUpCatDriver: Could not find a Driver for this HardwareID"
+                                            Write-Host -ForegroundColor DarkGray "Save-MsUpCatDriver: Could not find a Driver for this HardwareID"
                                         }
                                     }
                                 }
                             }
                             else {
-                                Write-Host -ForegroundColor Gray "No Results: $($Item.Name) $FindHardwareID"
+                                Write-Host -ForegroundColor DarkGray "[$(Get-Date -format G)] [$($MyInvocation.MyCommand.Name)] No Results: $($Item.Name) $FindHardwareID"
                                 #Write-Host -ForegroundColor DarkGray "HardwareID: $FindHardwareID"
                                 #Write-Host -ForegroundColor DarkGray "SearchString: $SearchString"
-                                #Write-Warning "Save-MsUpCatDriver: Could not find a Windows Update GUID"
+                                #Write-Host -ForegroundColor DarkGray "Save-MsUpCatDriver: Could not find a Windows Update GUID"
                             }
                         }
                         catch{
-                            Write-Host -ForegroundColor Gray "Unable to get Driver for Hardware component"
+                            Write-Host -ForegroundColor DarkGray "[$(Get-Date -format G)] [$($MyInvocation.MyCommand.Name)] Unable to get Driver for Hardware component"
                         }   
                     }
                     else {
                         Write-Verbose "DeviceID: $($Item.DeviceID)"
-                        #Write-Host -ForegroundColor Gray "No Results: $FindHardwareID"
+                        #Write-Host -ForegroundColor DarkGray "[$(Get-Date -format G)] [$($MyInvocation.MyCommand.Name)] No Results: $FindHardwareID"
                     }
                 }
             }
@@ -587,17 +587,17 @@ function Save-MsUpCatDriver {
                                     Remove-Item $WindowsUpdateDriverFile.FullName | Out-Null
                                 }
                                 else {
-                                    Write-Warning "Save-MsUpCatDriver: Could not find a Driver for this HardwareID"
+                                    Write-Host -ForegroundColor DarkGray "Save-MsUpCatDriver: Could not find a Driver for this HardwareID"
                                 }
                             }
                         }
                     }
                     else {
-                        Write-Host -ForegroundColor Gray "No Results: $FindHardwareID"
+                        Write-Host -ForegroundColor DarkGray "[$(Get-Date -format G)] [$($MyInvocation.MyCommand.Name)] No Results: $FindHardwareID"
                     }
                 }
                 else {
-                    Write-Host -ForegroundColor Gray "No Results: $FindHardwareID"
+                    Write-Host -ForegroundColor DarkGray "[$(Get-Date -format G)] [$($MyInvocation.MyCommand.Name)] No Results: $FindHardwareID"
                 }
             }
         }
@@ -617,17 +617,17 @@ function Save-MsUpCatDriver {
                         $Destination = $MSUpCatDriversOSDCloudUSBPath #OSDCloud Flash Drive cache folder
 
                         Write-Host -ForegroundColor Cyan "Syncing MS Update Catalog Drivers to OSDCloud USB Cache"
-                        Write-Host -ForegroundColor Gray "Transfering $([Math]::Round($MsUpCatDriverCacheSizeGB,2)) GB of MS Update Drivers to $Destination"
+                        Write-Host -ForegroundColor DarkGray "[$(Get-Date -format G)] [$($MyInvocation.MyCommand.Name)] Transfering $([Math]::Round($MsUpCatDriverCacheSizeGB,2)) GB of MS Update Drivers to $Destination"
                         Invoke-Exe robocopy $Source $Destination *.* /s /ndl /nfl /njh /njs
                     }
                     else {
-                        Write-Host -ForegroundColor Gray "Not enough Free Space on OSDCloudUSB to sync drivers"
-                        Write-Host -ForegroundColor Gray "Requires $([Math]::Round(($MsUpCatDriverCacheSizeGB + 5),2)) GB, but only $($OSDCloudUSB.SizeRemainingGB) GB available"
+                        Write-Host -ForegroundColor DarkGray "[$(Get-Date -format G)] [$($MyInvocation.MyCommand.Name)] Not enough Free Space on OSDCloudUSB to sync drivers"
+                        Write-Host -ForegroundColor DarkGray "[$(Get-Date -format G)] [$($MyInvocation.MyCommand.Name)] Requires $([Math]::Round(($MsUpCatDriverCacheSizeGB + 5),2)) GB, but only $($OSDCloudUSB.SizeRemainingGB) GB available"
                     }
                 }
             }
             else {
-                Write-Host -ForegroundColor Gray "OSDCloudUSB not detected to sync drivers back to, skipping sync"
+                # Write-Host -ForegroundColor DarkGray "[$(Get-Date -format G)] [$($MyInvocation.MyCommand.Name)] OSDCloudUSB not detected to sync drivers back to, skipping sync"
             }
         }
     }
@@ -768,11 +768,11 @@ function Save-MsUpCatUpdate {
             #=================================================
         }
         else {
-            Write-Warning "Save-MsUpCatUpdate: Could not install required PowerShell Module MSCatalog"
+            Write-Host -ForegroundColor DarkGray "Save-MsUpCatUpdate: Could not install required PowerShell Module MSCatalog"
         }
     }
     else {
-        Write-Warning "Save-MsUpCatUpdate: Could not reach https://www.catalog.update.microsoft.com/"
+        Write-Host -ForegroundColor DarkGray "Save-MsUpCatUpdate: Could not reach https://www.catalog.update.microsoft.com/"
     }
     #=================================================
 }
