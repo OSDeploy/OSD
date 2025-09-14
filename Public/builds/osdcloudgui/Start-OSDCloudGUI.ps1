@@ -1,4 +1,4 @@
-﻿function Deploy-OSDCloudGUI {
+﻿function Start-OSDCloudGUI {
     <#
     .SYNOPSIS
     OSDCloud imaging using the command line
@@ -10,11 +10,13 @@
     Start-OSDCloudGUI
 
     .NOTES
-    25.1.17 Added a temporary parameter v2 to filter DriverPacks by Manufacturer
+    Added Architecture
     #>
 
     [CmdletBinding()]
     param (
+        $Architecture = $Env:PROCESSOR_ARCHITECTURE,
+
         #The custom Brand for OSDCloudGUI
         [Alias('Brand')]
         [System.String]
@@ -33,34 +35,72 @@
         [System.String]
         $ComputerProduct = (Get-MyComputerProduct),
 
-        [System.Management.Automation.SwitchParameter]
-        $v2
+        [System.String]
+        $PrestartURL
     )
     #=================================================
-    $global:OSDCloudHotfix = $false
-
-    if ($Hotfix) {
-        $global:OSDCloudHotfix = $true
-
-        $HotfixUrl = 'https://raw.githubusercontent.com/OSDeploy/OSD/master/cloud/hotfix/osdcloudgui.ps1'
-
-        $Result = Invoke-WebRequest -Uri $HotfixUrl -UseBasicParsing -Method Head
-        if ($Result.StatusCode -eq 200) {
-            Invoke-Expression (Invoke-RestMethod -Uri $HotfixUrl -UseBasicParsing)
+    # Get module details
+    $ModuleVersion = $($MyInvocation.MyCommand.Module.Version)
+    $OSDModuleVersion = $((Get-OSDModuleVersion).ToString())
+    #=================================================
+    if ($PrestartURL) {
+        try {
+            $Result = Invoke-WebRequest -Uri $PrestartURL -UseBasicParsing -Method Head
+            if ($Result.StatusCode -eq 200) {
+                Invoke-Expression (Invoke-RestMethod -Uri $PrestartURL -UseBasicParsing)
+            }
         }
-        else {
-            Write-Warning "[$(Get-Date -format G)] [$($MyInvocation.MyCommand.Name)] OSDCloud failed to reach the Hotfix URL"
-            Write-Warning $HotfixUrl
+        catch {
+            Write-Warning "[$(Get-Date -format G)] [$($MyInvocation.MyCommand.Name)] OSDCloud failed to reach the PrestartURL"
+            Write-Warning "[$(Get-Date -format G)] [$($MyInvocation.MyCommand.Name)] OSDCloud will continue in 20 seconds ... or press Ctrl+C to exit"
+            Start-Sleep -Seconds 20
         }
     }
     #================================================
-    #   Filter DriverPacks
+    #   Get-OSDCloudDriverPacks
     #================================================
-    if ($v2) {
-        $DriverPacks = Get-OSDCloudDriverPacks | Where-Object { $_.Manufacturer -eq $ComputerManufacturer }
+    $DriverPacks = Get-OSDCloudDriverPacks | Where-Object {$_.OSArchitecture -match $Architecture}
+
+    switch ($ComputerManufacturer) {
+        'Dell' {
+            $DriverPacks = $DriverPacks | Where-Object { $_.OSArchitecture -match $Architecture -and $_.Manufacturer -eq 'Dell' }
+        }
+        'HP' {
+            $DriverPacks = $DriverPacks | Where-Object { $_.OSArchitecture -match $Architecture -and $_.Manufacturer -eq 'HP' }
+        }
+        'Lenovo' {
+            $DriverPacks = $DriverPacks | Where-Object { $_.OSArchitecture -match $Architecture -and $_.Manufacturer -eq 'Lenovo' }
+        }
+        Default {
+            $DriverPacks = $DriverPacks | Where-Object { $_.OSArchitecture -match $Architecture }
+        }
+    }
+
+    if ($ComputerModel -match 'Surface') {
+        $DriverPacks = $DriverPacks | Where-Object { $_.OSArchitecture -match $Architecture -and $_.Manufacturer -eq 'Microsoft' }
+    }
+    #================================================
+    #   Architecture
+    #================================================
+    if ($Architecture -match 'ARM64') {
+        $OSActivation = [System.String]$Global:OSDModuleResource.OSDCloud.DefaultARM64.Activation
+        $OSEdition = [System.String]$Global:OSDModuleResource.OSDCloud.DefaultARM64.Edition
+        $OSName = [System.String]$Global:OSDModuleResource.OSDCloud.DefaultARM64.Name
+
+        $OSEditionValues = [array]$Global:OSDModuleResource.OSDCloud.ValuesARM64.Edition
+        $OSNameValues = [array]$Global:OSDModuleResource.OSDCloud.ValuesARM64.Name
+        $OSReleaseIDValues = [array]$Global:OSDModuleResource.OSDCloud.ValuesARM64.ReleaseID
+        $OSVersionValues = [array]$Global:OSDModuleResource.OSDCloud.ValuesARM64.Version
     }
     else {
-        $DriverPacks = Get-OSDCloudDriverPacks
+        $OSActivation = [System.String]$Global:OSDModuleResource.OSDCloud.Default.Activation
+        $OSEdition = [System.String]$Global:OSDModuleResource.OSDCloud.Default.Edition
+        $OSName = [System.String]$Global:OSDModuleResource.OSDCloud.Default.Name
+
+        $OSEditionValues = [array]$Global:OSDModuleResource.OSDCloud.Values.Edition
+        $OSNameValues = [array]$Global:OSDModuleResource.OSDCloud.Values.Name
+        $OSReleaseIDValues = [array]$Global:OSDModuleResource.OSDCloud.Values.ReleaseID
+        $OSVersionValues = [array]$Global:OSDModuleResource.OSDCloud.Values.Version
     }
     #================================================
     #   Pass Variables to OSDCloudGUI
@@ -69,43 +109,36 @@
     $Global:OSDCloudGUI = [ordered]@{
         Function                    = [System.String]'Start-OSDCloudGUI'
         LaunchMethod                = [System.String]'OSDCloudGUI'
-
         AutomateConfiguration       = $null
         AutomateJsonFile            = $null
-
         BrandName                   = [System.String]$BrandName
         BrandColor                  = [System.String]$BrandColor
-        
         ComputerManufacturer        = [System.String]$ComputerManufacturer
         ComputerModel               = [System.String](Get-MyComputerModel -Brief)
         ComputerProduct             = [System.String]$ComputerProduct
-        
         DriverPack                  = $null
         DriverPacks                 = [array]$DriverPacks
         DriverPackName              = $null
-        
         IsOnBattery                 = [System.Boolean](Get-OSDGather -Property IsOnBattery)
 
-        OSActivation                = [System.String]$Global:OSDModuleResource.OSDCloud.Default.Activation
-        OSEdition                   = [System.String]$Global:OSDModuleResource.OSDCloud.Default.Edition
+        OSArchitecture              = $Architecture
+        OSActivation                = [System.String]$OSActivation
+        OSEdition                   = [System.String]$OSEdition
         OSLanguage                  = [System.String]$Global:OSDModuleResource.OSDCloud.Default.Language
         OSImageIndex                = [System.Int32]$Global:OSDModuleResource.OSDCloud.Default.ImageIndex
-        OSName                      = [System.String]$Global:OSDModuleResource.OSDCloud.Default.Name
+        OSName                      = [System.String]$OSName
         OSReleaseID                 = [System.String]$Global:OSDModuleResource.OSDCloud.Default.ReleaseID
         OSVersion                   = [System.String]$Global:OSDModuleResource.OSDCloud.Default.Version
 
         OSActivationValues          = [array]$Global:OSDModuleResource.OSDCloud.Values.Activation
-        OSEditionValues             = [array]$Global:OSDModuleResource.OSDCloud.Values.Edition
+        OSEditionValues             = [array]$OSEditionValues
         OSLanguageValues            = [array]$Global:OSDModuleResource.OSDCloud.Values.Language
-        OSNameValues                = [array]$Global:OSDModuleResource.OSDCloud.Values.Name
-        OSNameARM64Values           = [array]$Global:OSDModuleResource.OSDCloud.Values.NameARM64
-        OSReleaseIDValues           = [array]$Global:OSDModuleResource.OSDCloud.Values.ReleaseID
-        OSVersionValues             = [array]$Global:OSDModuleResource.OSDCloud.Values.Version
-        
-        captureScreenshots          = [System.Boolean]$Global:OSDModuleResource.StartOSDCloudGUI.captureScreenshots
+        OSNameValues                = [array]$OSNameValues
+        OSReleaseIDValues           = [array]$OSReleaseIDValues
+        OSVersionValues             = [array]$OSVersionValues
+
         ClearDiskConfirm            = [System.Boolean]$Global:OSDModuleResource.StartOSDCloudGUI.ClearDiskConfirm
         restartComputer             = [System.Boolean]$Global:OSDModuleResource.StartOSDCloudGUI.restartComputer
-        
         updateDiskDrivers           = [System.Boolean]$Global:OSDModuleResource.StartOSDCloudGUI.updateDiskDrivers
         updateFirmware              = [System.Boolean]$Global:OSDModuleResource.StartOSDCloudGUI.updateFirmware
         updateNetworkDrivers        = [System.Boolean]$Global:OSDModuleResource.StartOSDCloudGUI.updateNetworkDrivers
@@ -129,7 +162,7 @@
     #================================================
     #   OSDCloud Automate
     #================================================
-    Write-Host -ForegroundColor DarkGray "[$(Get-Date -format G)] Exporting default configuration to $env:Temp\Start-OSDCloudGUI.json"
+    Write-Host -ForegroundColor DarkGray "[$(Get-Date -format G)] [$($MyInvocation.MyCommand.Name)] Exporting default configuration to $env:Temp\Start-OSDCloudGUI.json"
     $Global:OSDCloudGUI | ConvertTo-Json -Depth 10 | Out-File -FilePath "$env:TEMP\Start-OSDCloudGUI.json" -Force
     
     $Global:OSDCloudGUI.AutomateJsonFile = Get-PSDrive -PSProvider FileSystem | Where-Object {$_.Name -ne 'C'} | ForEach-Object {
@@ -137,7 +170,7 @@
     }
     if ($Global:OSDCloudGUI.AutomateJsonFile) {
         foreach ($Item in $Global:OSDCloudGUI.AutomateJsonFile) {
-            Write-Host -ForegroundColor DarkGray "[$(Get-Date -format G)] $($Item.FullName)"
+            Write-Host -ForegroundColor DarkGray "[$(Get-Date -format G)] [$($MyInvocation.MyCommand.Name)] $($Item.FullName)"
             $Global:OSDCloudGUI.AutomateConfiguration = Get-Content -Path "$($Item.FullName)" -Raw | ConvertFrom-Json -ErrorAction "Stop" | ConvertTo-Hashtable
         }
     }
@@ -154,13 +187,35 @@
         Color = $Global:OSDCloudGUI.BrandColor
     }
     #================================================
-    #   Set Driver Pack
-    #   New logic added to Get-OSDCloudDriverPack
-    #   This should match the proper OS Version ReleaseID
+    #   Set Default Driver Pack
     #================================================
-    $Global:OSDCloudGUI.DriverPack = Get-OSDCloudDriverPack -Product $ComputerProduct -OSVersion $Global:OSDCloudGUI.OSVersion -OSReleaseID $Global:OSDCloudGUI.OSReleaseID
-    if ($Global:OSDCloudGUI.DriverPack) {
-        $Global:OSDCloudGUI.DriverPackName = $Global:OSDCloudGUI.DriverPack.Name
+    $ProductDriverPacks = $DriverPacks | Where-Object {($_.Product -contains $ComputerProduct)}
+
+    if ($ProductDriverPacks) {
+        if ($Global:OSDCloudGUI.OSVersion) {
+            $OSVersionDriverPacks = $ProductDriverPacks | Where-Object { $_.OS -match $Global:OSDCloudGUI.OSVersion}
+            if (-NOT $OSVersionDriverPacks) {
+                $OSVersionDriverPacks = $ProductDriverPacks
+            }
+        }
+        else {
+            $OSVersionDriverPacks = $ProductDriverPacks
+        }
+
+        if ($Global:OSDCloudGUI.OSReleaseID) {
+            $OSReleaseIDDriverPacks = $OSVersionDriverPacks | Where-Object { $_.Name -match $Global:OSDCloudGUI.OSReleaseID}
+            if (-NOT $OSReleaseIDDriverPacks) {
+                $OSReleaseIDDriverPacks = $OSVersionDriverPacks
+            }
+        }
+        else {
+            $OSReleaseIDDriverPacks = $OSVersionDriverPacks
+        }
+        $Results = $OSReleaseIDDriverPacks | Sort-Object -Property Name -Descending | Select-Object -First 1
+    }
+
+    if ($Results) {
+        $Global:OSDCloudGUI.DriverPackName = $Results.Name
     }
     Write-Host -ForegroundColor Green "OSDCloudGUI Configuration"
     $Global:OSDCloudGUI | Out-Host
@@ -171,21 +226,21 @@
         $Win32Tpm = Get-CimInstance -Namespace "ROOT\cimv2\Security\MicrosoftTpm" -ClassName Win32_Tpm
 
         if ($null -eq $Win32Tpm) {
-            Write-Host -ForegroundColor Yellow "[$(Get-Date -format G)] TPM: Not Supported"
-            Write-Host -ForegroundColor Yellow "[$(Get-Date -format G)] Autopilot: Not Supported"
+            Write-Host -ForegroundColor Yellow "[$(Get-Date -format G)] [$($MyInvocation.MyCommand.Name)] TPM: Not Supported"
+            Write-Host -ForegroundColor Yellow "[$(Get-Date -format G)] [$($MyInvocation.MyCommand.Name)] Autopilot: Not Supported"
             Start-Sleep -Seconds 5
         }
         elseif ($Win32Tpm.SpecVersion) {
             if ($null -eq $Win32Tpm.SpecVersion) {
-                Write-Host -ForegroundColor Yellow "[$(Get-Date -format G)] TPM: Unable to detect the TPM Version"
-                Write-Host -ForegroundColor Yellow "[$(Get-Date -format G)] Autopilot: Not Supported"
+                Write-Host -ForegroundColor Yellow "[$(Get-Date -format G)] [$($MyInvocation.MyCommand.Name)] TPM: Unable to detect the TPM Version"
+                Write-Host -ForegroundColor Yellow "[$(Get-Date -format G)] [$($MyInvocation.MyCommand.Name)] Autopilot: Not Supported"
                 Start-Sleep -Seconds 5
             }
 
             $majorVersion = $Win32Tpm.SpecVersion.Split(",")[0] -as [int]
             if ($majorVersion -lt 2) {
-                Write-Host -ForegroundColor Yellow "[$(Get-Date -format G)] TPM: Version is less than 2.0"
-                Write-Host -ForegroundColor Yellow "[$(Get-Date -format G)] Autopilot: Not Supported"
+                Write-Host -ForegroundColor Yellow "[$(Get-Date -format G)] [$($MyInvocation.MyCommand.Name)] TPM: Version is less than 2.0"
+                Write-Host -ForegroundColor Yellow "[$(Get-Date -format G)] [$($MyInvocation.MyCommand.Name)] Autopilot: Not Supported"
                 Start-Sleep -Seconds 5
             }
             else {
@@ -195,13 +250,13 @@
                 #Write-Host -ForegroundColor DarkGray "[$(Get-Date -format G)] TPM Manufacturer: $($Win32Tpm.ManufacturerIdTxt)"
                 #Write-Host -ForegroundColor DarkGray "[$(Get-Date -format G)] TPM Manufacturer Version: $($Win32Tpm.ManufacturerVersion)"
                 #Write-Host -ForegroundColor DarkGray "[$(Get-Date -format G)] TPM SpecVersion: $($Win32Tpm.SpecVersion)"
-                Write-Host -ForegroundColor Green "[$(Get-Date -format G)] TPM 2.0: Supported"
-                Write-Host -ForegroundColor Green "[$(Get-Date -format G)] Autopilot: Supported"
+                Write-Host -ForegroundColor Green "[$(Get-Date -format G)] [$($MyInvocation.MyCommand.Name)] TPM 2.0: Supported"
+                Write-Host -ForegroundColor Green "[$(Get-Date -format G)] [$($MyInvocation.MyCommand.Name)] Autopilot: Supported"
             }
         }
         else {
-            Write-Host -ForegroundColor Yellow "[$(Get-Date -format G)] TPM: Not Supported"
-            Write-Host -ForegroundColor Yellow "[$(Get-Date -format G)] Autopilot: Not Supported"
+            Write-Host -ForegroundColor Yellow "[$(Get-Date -format G)] [$($MyInvocation.MyCommand.Name)] TPM: Not Supported"
+            Write-Host -ForegroundColor Yellow "[$(Get-Date -format G)] [$($MyInvocation.MyCommand.Name)] Autopilot: Not Supported"
             Start-Sleep -Seconds 5
         }
     }
@@ -210,7 +265,6 @@
     #================================================
     #   Launch GUI
     #================================================
-
     & "$($MyInvocation.MyCommand.Module.ModuleBase)\Projects\OSDCloudGUI\MainWindow.ps1"
     Start-Sleep -Seconds 2
     #================================================
