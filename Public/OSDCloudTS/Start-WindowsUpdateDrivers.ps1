@@ -21,6 +21,9 @@ Function Get-WindowsUpdateDriver{
     }
 }
 Function Start-WindowsUpdateDriver{
+    if (-not (Test-WindowsUpdateEnvironment)) {
+        return
+    }
     <# Control Windows Update via PowerShell
     Installing Updates using this Method does NOT notify the user, and does NOT let the user know that updates need to be applied at the next reboot.  It's 100% hidden.
     HResult Lookup: https://docs.microsoft.com/en-us/windows/win32/wua_sdk/wua-success-and-error-codes-
