@@ -903,7 +903,7 @@ $formMainWindowControlStartButton.add_Click({
 #================================================
 #   Customizations
 #================================================
-[string]$ModuleVersion = Get-Module -Name OSD | Sort-Object -Property Version | Select-Object -ExpandProperty Version -Last 1
+[System.String]$ModuleVersion = Get-OSDModuleVersion
 $formMainWindow.Title = "OSDCloudGUI $ModuleVersion on $($Global:OSDCloudGUI.ComputerManufacturer) $($Global:OSDCloudGUI.ComputerModel) product $($Global:OSDCloudGUI.ComputerProduct)"
 #================================================
 #   Branding

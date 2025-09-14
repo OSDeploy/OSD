@@ -212,7 +212,7 @@ $StartButtonControl.add_Click({
 #================================================
 #   Customizations
 #================================================
-[string]$ModuleVersion = Get-Module -Name OSD | Sort-Object -Property Version | Select-Object -ExpandProperty Version -Last 1
+[System.String]$ModuleVersion = Get-OSDModuleVersion
 $Global:XamlWindow.Title = "$ModuleVersion OSDPad"
 #================================================
 #   Branding

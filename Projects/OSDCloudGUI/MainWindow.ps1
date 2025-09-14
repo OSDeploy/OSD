@@ -505,8 +505,10 @@ $CustomImageChildItem = @()
 $CustomImageChildItem = $CustomImageChildItem | Sort-Object -Property Length -Unique | Sort-Object FullName | Where-Object {$_.Length -gt 2GB}
         
 if ($CustomImageChildItem) {
-    $OSDCloudOperatingSystem = Get-OSDCloudOperatingSystems
-    $CustomImageChildItem = $CustomImageChildItem | Where-Object {$_.Name -notin $OSDCloudOperatingSystem.FileName}
+    $OSCatalogAmd64 = Get-OSDCloudOperatingSystems
+    $OSCatalogArm64 = Get-OSDCloudOperatingSystems -OSArch ARM64
+    
+    $CustomImageChildItem = $CustomImageChildItem | Where-Object {(Split-Path $_.Name -Leaf) -notin $OSCatalogAmd64.FileName} | Where-Object {(Split-Path $_.Name -Leaf) -notin $OSCatalogArm64.FileName}
     $CustomImageChildItem | ForEach-Object {
         $formMainWindowControlOSNameCombobox.Items.Add($_) | Out-Null
     }
@@ -715,7 +717,13 @@ $formMainWindowControlStartButton.add_Click({
     if ($formMainWindowControlOSNameCombobox.SelectedValue -like 'Windows 1*') {
         $OSName = $formMainWindowControlOSNameCombobox.SelectedValue
         
-        $OSDCloudOperatingSystem = Get-OSDCloudOperatingSystems | Where-Object {$_.Name -match $OSName} | Where-Object {$_.Activation -eq $OSActivation} | Where-Object {$_.Language -eq $OSLanguage}
+        if ($Global:OSDCloudGUI.OSArchitecture -match 'arm64') {
+            $OSDCloudOperatingSystem = Get-OSDCloudOperatingSystems -OSArch ARM64 | Where-Object {$_.Name -match $OSName} | Where-Object {$_.Activation -eq $OSActivation} | Where-Object {$_.Language -eq $OSLanguage}
+        }
+        else {
+            $OSDCloudOperatingSystem = Get-OSDCloudOperatingSystems | Where-Object {$_.Name -match $OSName} | Where-Object {$_.Activation -eq $OSActivation} | Where-Object {$_.Language -eq $OSLanguage}
+        }
+        
         $OSBuild = $OSDCloudOperatingSystem.Build
         $OSReleaseID = $OSDCloudOperatingSystem.ReleaseID
         $OSVersion = $OSDCloudOperatingSystem.Version
@@ -866,7 +874,7 @@ $formMainWindowControlStartButton.add_Click({
 #================================================
 #   Customizations
 #================================================
-[string]$ModuleVersion = Get-Module -Name OSD | Sort-Object -Property Version | Select-Object -ExpandProperty Version -Last 1
+[System.String]$ModuleVersion = Get-OSDModuleVersion
 $formMainWindow.Title = "OSDCloudGUI $ModuleVersion on $($Global:OSDCloudGUI.ComputerManufacturer) $($Global:OSDCloudGUI.ComputerModel) product $($Global:OSDCloudGUI.ComputerProduct)"
 #================================================
 #   Branding

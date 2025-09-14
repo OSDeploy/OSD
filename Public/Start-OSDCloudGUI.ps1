@@ -82,7 +82,7 @@
     #================================================
     #   Architecture
     #================================================
-    if ($Architecture -eq 'ARM64') {
+    if ($Architecture -match 'ARM64') {
         $OSActivation = [System.String]$Global:OSDModuleResource.OSDCloud.DefaultARM64.Activation
         $OSEdition = [System.String]$Global:OSDModuleResource.OSDCloud.DefaultARM64.Edition
         $OSName = [System.String]$Global:OSDModuleResource.OSDCloud.DefaultARM64.Name
@@ -121,6 +121,7 @@
         DriverPackName              = $null
         IsOnBattery                 = [System.Boolean](Get-OSDGather -Property IsOnBattery)
 
+        OSArchitecture              = $Architecture
         OSActivation                = [System.String]$OSActivation
         OSEdition                   = [System.String]$OSEdition
         OSLanguage                  = [System.String]$Global:OSDModuleResource.OSDCloud.Default.Language

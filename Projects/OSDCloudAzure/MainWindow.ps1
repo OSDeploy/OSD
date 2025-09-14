@@ -409,7 +409,7 @@ $formMainWindowControlStartButton.add_Click({
 #================================================
 #   Customizations
 #================================================
-[string]$ModuleVersion = Get-Module -Name OSD | Sort-Object -Property Version | Select-Object -ExpandProperty Version -Last 1
+[System.String]$ModuleVersion = Get-OSDModuleVersion
 $formMainWindow.Title = "OSDCloudAzure $ModuleVersion on $(Get-MyComputerManufacturer -Brief) $(Get-MyComputerModel -Brief) $(Get-MyComputerProduct)"
 #================================================
 #   Branding
