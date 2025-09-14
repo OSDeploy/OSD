@@ -411,7 +411,6 @@ else {
 #================================================
 #   Menu Options
 #================================================
-$formMainWindowControlcaptureScreenshots.IsChecked = $Global:OSDCloudGUI.captureScreenshots
 $formMainWindowControlClearDiskConfirm.IsChecked = $Global:OSDCloudGUI.ClearDiskConfirm
 $formMainWindowControlrestartComputer.IsChecked = $Global:OSDCloudGUI.restartComputer
 $formMainWindowControldebugMode.IsChecked = $Global:OSDCloudGUI.debugMode
@@ -964,7 +963,6 @@ $formMainWindowControlStartButton.add_Click({
         OSNameValues                = [array]$Global:OSDCloudGUI.OSNameValues
         OSReleaseIDValues           = [array]$Global:OSDCloudGUI.OSReleaseIDValues
         OSVersionValues             = [array]$Global:OSDCloudGUI.OSVersionValues
-        captureScreenshots          = [System.Boolean]$formMainWindowControlScreenshotCapture.IsChecked
         ClearDiskConfirm            = [System.Boolean]$formMainWindowControlClearDiskConfirm.IsChecked
         restartComputer             = [System.Boolean]$formMainWindowControlRestartComputer.IsChecked
         debugMode                   = [System.Boolean]$formMainWindowControldebugMode.IsChecked
@@ -1035,18 +1033,6 @@ $formMainWindowControlStartButton.add_Click({
         #$Global:InvokeOSDCloud.ClearDiskConfirm = $false
     }
     #>
-    #-----------------------------------------
-    # Manufacturer Enhancements - END
-    #-----------------------------------------
-    if ($formMainWindowControlScreenshotCapture.IsChecked) {
-        $Params = @{
-            Screenshot = $true
-        }
-        #Start-OSDCloud @Params
-    }
-    else {
-        #Start-OSDCloud
-    }
     #=================================================
     #   Invoke-OSDCloud.ps1
     #=================================================

@@ -354,12 +354,6 @@ $formMainWindowControlContainerCombobox.add_SelectionChanged({
 #   StartButton
 #================================================
 $formMainWindowControlStartButton.add_Click({
-
-    if ($formMainWindowControlScreenshotCapture.IsChecked) {
-        Start-ScreenPNGProcess -Directory "$env:TEMP\Screenshots"
-        Start-Sleep -Seconds 3
-    }
-
     $formMainWindow.Close()
     Show-PowershellWindow
     #================================================
@@ -407,7 +401,6 @@ $formMainWindowControlStartButton.add_Click({
         MSCatalogFirmware           = $formMainWindowControlMSCatalogFirmware.IsChecked
         OSImageIndex                = $formMainWindowControlImageIndexCombobox.Text
         Restart                     = $formMainWindowControlRestart.IsChecked
-        ScreenshotCapture           = $formMainWindowControlScreenshotCapture.IsChecked
         ZTI                         = $formMainWindowControlZTI.IsChecked
     }
     $Global:StartOSDCloud | Out-Host

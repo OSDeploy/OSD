@@ -133,10 +133,6 @@
                           Header="Restart-Computer when complete"
                           IsCheckable="True"
                           IsChecked="True" />
-                <MenuItem Name="ScreenshotCapture"
-                          Header="Screenshot Capture"
-                          IsCheckable="True"
-                          IsChecked="False" />
             </MenuItem>
             <MenuItem Header="Microsoft Update Catalog">
                 <MenuItem Name="MSCatalogDiskDrivers"

@@ -386,7 +386,6 @@ $formMainWindowControlManufacturerFunction.IsEnabled = $false
 #================================================
 #   Menu Options
 #================================================
-$formMainWindowControlcaptureScreenshots.IsChecked = $Global:OSDCloudGUI.captureScreenshots
 $formMainWindowControlClearDiskConfirm.IsChecked = $Global:OSDCloudGUI.ClearDiskConfirm
 $formMainWindowControlrestartComputer.IsChecked = $Global:OSDCloudGUI.restartComputer
 $formMainWindowControlupdateDiskDrivers.IsChecked = $Global:OSDCloudGUI.updateDiskDrivers
@@ -820,7 +819,6 @@ $formMainWindowControlStartButton.add_Click({
         OSNameARM64Values           = [array]$Global:OSDCloudGUI.OSNameARM64Values
         OSReleaseIDValues           = [array]$Global:OSDCloudGUI.OSReleaseIDValues
         OSVersionValues             = [array]$Global:OSDCloudGUI.OSVersionValues
-        captureScreenshots          = [System.Boolean]$formMainWindowControlScreenshotCapture.IsChecked
         ClearDiskConfirm            = [System.Boolean]$formMainWindowControlClearDiskConfirm.IsChecked
         restartComputer             = [System.Boolean]$formMainWindowControlRestartComputer.IsChecked
         updateDiskDrivers           = [System.Boolean]$formMainWindowControlupdateDiskDrivers.IsChecked
@@ -890,18 +888,6 @@ $formMainWindowControlStartButton.add_Click({
         #$Global:InvokeOSDCloud.ClearDiskConfirm = $false
     }
     #>
-    #-----------------------------------------
-    # Manufacturer Enhancements - END
-    #-----------------------------------------
-    if ($formMainWindowControlScreenshotCapture.IsChecked) {
-        $Params = @{
-            Screenshot = $true
-        }
-        #Start-OSDCloud @Params
-    }
-    else {
-        #Start-OSDCloud
-    }
     #=================================================
     #   Invoke-OSDCloud.ps1
     #=================================================
