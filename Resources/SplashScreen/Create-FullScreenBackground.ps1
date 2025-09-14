@@ -10,7 +10,7 @@ GARY BLOK - Modified script from:
 
 Param($DeviceName)
 Start-Transcript x:\OSDCloud\Logs\Splash.log
-Function Get-LogLastHeading {
+function Get-LogLastHeading {
     if ($env:SystemDrive -eq 'X:') {
         if (Test-Path "C:\OSDCloud\Logs"){$LogsPath = "C:\OSDCloud\Logs"}
         else {$LogsPath = "X:\OSDCloud\Logs"}
