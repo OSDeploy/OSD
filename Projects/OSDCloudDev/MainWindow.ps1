@@ -411,7 +411,6 @@ else {
 #================================================
 #   Menu Options
 #================================================
-$formMainWindowControlcaptureScreenshots.IsChecked = $Global:OSDCloudGUI.captureScreenshots
 $formMainWindowControlClearDiskConfirm.IsChecked = $Global:OSDCloudGUI.ClearDiskConfirm
 $formMainWindowControlrestartComputer.IsChecked = $Global:OSDCloudGUI.restartComputer
 $formMainWindowControldebugMode.IsChecked = $Global:OSDCloudGUI.debugMode
@@ -964,7 +963,6 @@ $formMainWindowControlStartButton.add_Click({
         OSNameValues                = [array]$Global:OSDCloudGUI.OSNameValues
         OSReleaseIDValues           = [array]$Global:OSDCloudGUI.OSReleaseIDValues
         OSVersionValues             = [array]$Global:OSDCloudGUI.OSVersionValues
-        captureScreenshots          = [System.Boolean]$formMainWindowControlScreenshotCapture.IsChecked
         ClearDiskConfirm            = [System.Boolean]$formMainWindowControlClearDiskConfirm.IsChecked
         restartComputer             = [System.Boolean]$formMainWindowControlRestartComputer.IsChecked
         debugMode                   = [System.Boolean]$formMainWindowControldebugMode.IsChecked
@@ -1035,18 +1033,6 @@ $formMainWindowControlStartButton.add_Click({
         #$Global:InvokeOSDCloud.ClearDiskConfirm = $false
     }
     #>
-    #-----------------------------------------
-    # Manufacturer Enhancements - END
-    #-----------------------------------------
-    if ($formMainWindowControlScreenshotCapture.IsChecked) {
-        $Params = @{
-            Screenshot = $true
-        }
-        #Start-OSDCloud @Params
-    }
-    else {
-        #Start-OSDCloud
-    }
     #=================================================
     #   Invoke-OSDCloud.ps1
     #=================================================
@@ -1062,7 +1048,7 @@ $formMainWindowControlStartButton.add_Click({
 #================================================
 #   Customizations
 #================================================
-[string]$ModuleVersion = Get-Module -Name OSD | Sort-Object -Property Version | Select-Object -ExpandProperty Version -Last 1
+[System.String]$ModuleVersion = Get-OSDModuleVersion
 $formMainWindow.Title = "OSDCloudGUI $ModuleVersion on $($Global:OSDCloudGUI.ComputerManufacturer) $($Global:OSDCloudGUI.ComputerModel) product $($Global:OSDCloudGUI.ComputerProduct)"
 #================================================
 #   Branding

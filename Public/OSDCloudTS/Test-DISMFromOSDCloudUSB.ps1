@@ -44,7 +44,7 @@
         else { Return $false}
     }
     else{
-        Write-Host "NO OSDCloud USB Found"
+        # Write-Host "NO OSDCloud USB Found"
         return $false
     }
 }

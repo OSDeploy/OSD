@@ -8,6 +8,7 @@ function Step-OSDCloudWinpeCleanup {
     $Message = "[$(Get-Date -format G)] [$($MyInvocation.MyCommand.Name)] Start"
     Write-Debug -Message $Message; Write-Verbose -Message $Message
     #=================================================
+    Write-Host -ForegroundColor DarkCyan "[$(Get-Date -format G)] [$($MyInvocation.MyCommand.Name)]"
     # Are we in WinPE
     if ($env:SystemDrive -ne 'X:') {
         return
@@ -21,7 +22,7 @@ function Step-OSDCloudWinpeCleanup {
     foreach ($Item in $FolderCleanup) {
         try {
             Remove-Item -Path $Item -Recurse -Force -ErrorAction Stop
-            Write-Host -ForegroundColor DarkCyan "[$(Get-Date -format G)] [$($MyInvocation.MyCommand.Name)] Removing $Item"
+            # Write-Host -ForegroundColor DarkCyan "[$(Get-Date -format G)] [$($MyInvocation.MyCommand.Name)] Removing $Item"
         }
         catch {
             Write-Warning "[$(Get-Date -format G)] [$($MyInvocation.MyCommand.Name)] Unable to remove $Item"
@@ -40,7 +41,8 @@ function Step-OSDCloudWinpeCleanup {
         'C:\Windows\Temp\osdcloud\drivers-driverpack-download'
         'C:\Windows\Temp\osdcloud\drivers-net',
         'C:\Windows\Temp\osdcloud\drivers-recast',
-        'C:\Windows\Temp\osdcloud\drivers-scsi'
+        'C:\Windows\Temp\osdcloud\drivers-scsi',
+        'C:\Windows\Temp\osdcloud'
     )
     foreach ($Item in $EmptyFolderCleanup) {
         # Does the folder exist?
@@ -56,10 +58,10 @@ function Step-OSDCloudWinpeCleanup {
         # Cleanup folder
         try {
             Remove-Item -Path $Item -Recurse -Force -ErrorAction Stop
-            Write-Host -ForegroundColor DarkCyan "[$(Get-Date -format G)] [$($MyInvocation.MyCommand.Name)] Removing $Item"
+            # Write-Host -ForegroundColor DarkCyan "[$(Get-Date -format G)] [$($MyInvocation.MyCommand.Name)] Removing $Item"
         }
         catch {
-            Write-Warning "[$(Get-Date -format G)] [$($MyInvocation.MyCommand.Name)] Unable to remove $Item"
+            # Write-Warning "[$(Get-Date -format G)] [$($MyInvocation.MyCommand.Name)] Unable to remove $Item"
         }
     }
     #=================================================

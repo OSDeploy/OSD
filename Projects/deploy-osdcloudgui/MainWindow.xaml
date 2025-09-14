@@ -1,15 +1,15 @@
-﻿<Window x:Class="OSDCloudAzure.MainWindow"
+﻿<Window x:Class="OSDCloudGUI.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:OSDCloudAzure"
+        xmlns:local="clr-namespace:OSDCloudGUI"
         mc:Ignorable="d"
         BorderThickness="0"
         RenderTransformOrigin="0.5,0.5"
         ResizeMode="NoResize"
         WindowStartupLocation = "CenterScreen"
-        Title="OSDCloudAzure version on Manufacturer Model Product" Height="380" Width="920">
+        Title="OSDCloudGUI version on Manufacturer Model Product" Height="380" Width="820">
     <Window.Resources>
         <ResourceDictionary>
             <Style TargetType="{x:Type Button}">
@@ -125,32 +125,78 @@
     <DockPanel>
         <Menu DockPanel.Dock="Top">
             <MenuItem Header="Deployment Options">
-                <MenuItem Name="ZTI"
-                          Header="Clear-Disk skip confirmation"
-                          IsCheckable="True"
-                          IsChecked="False" />
-                <MenuItem Name="Restart"
-                          Header="Restart-Computer when complete"
+                <MenuItem Name="ClearDiskConfirm"
+                          Header="Clear-Disk Confirm Prompt"
+                          IsCheckable="True" />
+                <MenuItem Name="restartComputer"
+                          Header="restart Computer after WinPE"
+                          IsCheckable="True" />
+            </MenuItem>
+            <MenuItem Header="Microsoft Update Catalog">
+                <MenuItem Name="updateDiskDrivers"
+                          Header="update Disk Drivers"
+                          IsCheckable="True" />
+                <MenuItem Name="updateFirmware"
+                          Header="update System Firmware"
+                          IsCheckable="True" />
+                <MenuItem Name="updateNetworkDrivers"
+                          Header="update Network Drivers"
+                          IsCheckable="True" />
+                <MenuItem Name="updateSCSIDrivers"
+                          Header="update SCSIAdapter Drivers"
+                          IsCheckable="True" />
+                <MenuItem Name="SyncMSUpCatDriverUSB"
+                          Header="Sync MS drivers to USB"
                           IsCheckable="True"
                           IsChecked="True" />
             </MenuItem>
-            <MenuItem Header="Microsoft Update Catalog">
-                <MenuItem Name="MSCatalogDiskDrivers"
-                          Header="Disk Drivers"
-                          IsCheckable="True"
-                          IsChecked="True" />
-                <MenuItem Name="MSCatalogNetDrivers"
-                          Header="Network Drivers"
-                          IsCheckable="True"
-                          IsChecked="True" />
-                <MenuItem Name="MSCatalogScsiDrivers"
-                          Header="SCSIAdapter Drivers"
-                          IsCheckable="True"
-                          IsChecked="True" />
-                <MenuItem Name="MSCatalogFirmware"
-                          Header="System Firmware"
-                          IsCheckable="True"
-                          IsChecked="False" />
+            <MenuItem x:Name="ManufacturerFunction" Header="Manufacturer Functions">
+                <MenuItem x:Name="Option_Name_1"
+                    Header="Option_Header_1"
+                    IsCheckable="True"
+                    IsChecked="False" />
+                <MenuItem x:Name="Option_Name_2"
+                    Header="Option_Header_1"
+                    IsCheckable="True"
+                    IsChecked="False" />
+                <MenuItem x:Name="Option_Name_3"
+                    Header="Option_Header_3"
+                    IsCheckable="True"
+                    IsChecked="False" />
+                <MenuItem x:Name="Option_Name_4"
+                    Header="Option_Header_4"
+                    IsCheckable="True"
+                    IsChecked="False" />
+                <MenuItem x:Name="Option_Name_5"
+                    Header="Option_Header_5"
+                    IsCheckable="True"
+                    IsChecked="False" />
+                <MenuItem x:Name="Option_Name_6"
+                    Header="Option_Header_6"
+                    IsCheckable="True"
+                    IsChecked="False" />
+            </MenuItem>
+<MenuItem x:Name="SetupComplete" Header="SetupComplete Options">
+                <MenuItem x:Name="WindowsUpdates"
+                    Header="Windows Updates (No Drivers)"
+                    IsCheckable="True"
+                    IsChecked="False" />
+                <MenuItem x:Name="WindowsUpdateDrivers"
+                    Header="Windows Update (Only Drivers)"
+                    IsCheckable="True"
+                    IsChecked="False" />
+                <MenuItem x:Name="WindowsDefenderUpdate"
+                    Header="Windows Defender Update"
+                    IsCheckable="True"
+                    IsChecked="False" />
+                <MenuItem x:Name="OEMActivation"
+                    Header="Apply Key from UEFI"
+                    IsCheckable="True"
+                    IsChecked="False" />
+                <MenuItem x:Name="ShutdownSetupComplete"
+                    Header="Shutdown After SetupComplete"
+                    IsCheckable="True"
+                    IsChecked="False" />
             </MenuItem>
         </Menu>
     <Grid Margin="10,0,10,10">
@@ -167,11 +213,8 @@
         </Grid.RowDefinitions>
 
         <!-- Row 0 Title -->
-        <StackPanel Grid.Row="0"
-                    Orientation="Horizontal"
-                    HorizontalAlignment="Right"
-                    VerticalAlignment="Top">
-        <Label Name="BrandLabel"
+        <Label Grid.Row="0"
+               Name="BrandingTitleControl"
                Content="OSDCloud"
                FlowDirection="RightToLeft"
                FontSize="24"
@@ -179,16 +222,7 @@
                Foreground="#0096D6"
                HorizontalAlignment="Right"
                VerticalAlignment="Top" />
-        <Label Name="AzureBrandLabel"
-               Content="Azure"
-               FlowDirection="RightToLeft"
-               FontSize="24"
-               FontWeight="Bold"
-               Foreground="#39CCF4"
-               HorizontalAlignment="Right"
-               VerticalAlignment="Top" />
-        </StackPanel>
-        
+
         <!-- Row 1 Gridline -->
         <Line Grid.Row="1"
               X1="0"
@@ -198,98 +232,72 @@
               Stroke="Gainsboro"
               StrokeThickness="1"
               Stretch="Uniform"></Line>
-        
-        <!-- Row 2 Storage -->
+
+        <!-- Row 2 OperatingSystem -->
         <StackPanel Grid.Row="2"
                     HorizontalAlignment="Left"
                     VerticalAlignment="Top">
-            <!-- Storage Account -->
+            <!-- Operating System -->
             <StackPanel Orientation="Horizontal"
                         HorizontalAlignment="Left"
                         VerticalAlignment="Top">
-                <Label Name="StorageAccountLabel"
-                       Content="Storage Account"
+                <Label Name="OperatingSystemLabel"
+                       Content="Operating System"
                        FontSize="18"
                        FontWeight="Bold"
                        Foreground="#0096D6"
                        Margin="5"
                        Padding="2"
-                       Width="150"
+                       Width="155"
                        FlowDirection="RightToLeft" />
-                    <ComboBox Name="StorageAccountCombobox"
+                <ComboBox Name="OSNameCombobox"
                           FontSize="16"
                           Margin="5"
-                          Padding="2"
-                          SelectedIndex="0" >
-                        <ComboBoxItem Content="Get-AzStorageAccount"/>
-                    </ComboBox>
-                </StackPanel>
-
-            <!-- Container -->
-            <StackPanel Orientation="Horizontal"
-                    HorizontalAlignment="Left"
-                    VerticalAlignment="Top">
-                    <Label Name="ContainerLabel"
-                       Content="Container"
-                       FontSize="18"
-                       FontWeight="Bold"
-                       Foreground="#0096D6"
-                       Margin="5"
-                       Padding="2"
-                       Width="150"
-                       FlowDirection="RightToLeft" />
-                    <ComboBox Name="ContainerCombobox"
-                          FontSize="16"
-                          Margin="5"
-                          Padding="2"
-                          SelectedIndex="0" >
-                        <ComboBoxItem Content="Get-AzStorageContainer"/>
-                    </ComboBox>
-                </StackPanel>
-
-            <!-- Blob -->
-            <StackPanel Orientation="Horizontal"
-                        HorizontalAlignment="Left"
-                        VerticalAlignment="Top">
-                <Label Name="BlobLabel"
-                       Content="Blob"
-                       FontSize="18"
-                       FontWeight="Bold"
-                       Foreground="#0096D6"
-                       Margin="5"
-                       Padding="2"
-                       Width="150"
-                       FlowDirection="RightToLeft" />
-                <ComboBox Name="BlobCombobox"
-                          FontSize="16"
-                          Margin="5"
-                          Padding="2"
-                          SelectedIndex="0" >
-                    <ComboBoxItem Content="Get-AzStorageBlob"/>
+                          Padding="2" >
                 </ComboBox>
             </StackPanel>
-            
-            <!-- Index -->
             <StackPanel Orientation="Horizontal"
-                    HorizontalAlignment="Left"
-                    VerticalAlignment="Top">
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Top">
+                <Label Name="OperatingSystemDetailsLabel"
+                       Content=""
+                       FontSize="18"
+                       FontWeight="Bold"
+                       Foreground="#0096D6"
+                       Margin="5"
+                       Padding="2"
+                       Width="155" />
+                <ComboBox Name="OSEditionCombobox"
+                          FontSize="16"
+                          Margin="5"
+                          Padding="2" />
+                <ComboBox Name="OSLanguageCombobox"
+                          FontSize="16"
+                          Margin="5"
+                          Padding="2" />
+                <ComboBox Name="OSActivationCombobox"
+                          FontSize="16"
+                          Margin="5"
+                          Padding="2" />
+                <ComboBox Name="ImageNameCombobox"
+                          FontSize="16"
+                          Margin="5"
+                          Padding="2" />
                 <Label Name="ImageIndexLabel"
-                    Content="Index"
-                    FontSize="18"
-                    FontWeight="Bold"
-                    Foreground="#0096D6"
-                    Margin="5"
-                    Padding="2"
-                    Width="150"
-                    FlowDirection="RightToLeft" />
-                <ComboBox Name="ImageIndexCombobox"
-                        IsEditable="True"
-                        FontSize="16"
-                        Margin="5"
-                        Padding="2"
-                        SelectedIndex="0" >
-                    <ComboBoxItem Content="Auto"/>
-                </ComboBox>
+                       Content="Index"
+                       FontSize="18"
+                       FontWeight="Bold"
+                       Foreground="#0096D6"
+                       Margin="5"
+                       Padding="2" />
+                <TextBox Name="ImageIndexTextbox"
+                         FontSize="16"
+                         Margin="5"
+                         Padding="2"
+                         Text="Auto" />
+            </StackPanel>
+            <StackPanel HorizontalAlignment="Left"
+                        VerticalAlignment="Top">
             </StackPanel>
         </StackPanel>
 
@@ -309,31 +317,31 @@
                     HorizontalAlignment="Left"
                     VerticalAlignment="Top">
             <!-- Driver Pack -->
-                <StackPanel Orientation="Horizontal"
+            <StackPanel Orientation="Horizontal"
                         HorizontalAlignment="Left"
                         VerticalAlignment="Top">
-                    <Label Name="DriverPackLabel"
+                <Label Name="DriverPackLabel"
                        Content="Driver Pack"
                        FontSize="18"
                        FontWeight="Bold"
                        Foreground="#0096D6"
                        Margin="5"
                        Padding="2"
-                       Width="150"
+                       Width="155"
                        FlowDirection="RightToLeft" />
-                    <ComboBox Name="DriverPackCombobox"
+                <ComboBox Name="DriverPackCombobox"
                           FontSize="16"
                           Margin="5"
                           Padding="2"
-                          SelectedIndex="1" >
-                        <ComboBoxItem Content="None"/>
-                        <ComboBoxItem Content="Microsoft Update Catalog"/>
-                    </ComboBox>
-                </StackPanel>
+                          SelectedIndex="0" >
+                    <ComboBoxItem Content="None"/>
+                    <ComboBoxItem Content="Microsoft Update Catalog"/>
+                </ComboBox>
             </StackPanel>
-        
+        </StackPanel>
+
         <!-- Row 5 Gridline -->
-            <Line Grid.Row="5"
+        <Line Grid.Row="5"
               X1="0"
               Y1="0"
               X2="1"
@@ -341,10 +349,100 @@
               Stroke="Gainsboro"
               StrokeThickness="1"
               Stretch="Uniform">
-            </Line>
+        </Line>
 
-        <!-- Row 9 Start -->
-        <Button Grid.Row="9"
+        <!-- Row 6 Options -->
+        <StackPanel Grid.Row="6"
+                    Orientation="Horizontal"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Top">
+            <Label Name="DeploymentOptionsLabel"
+                   Content=""
+                   FontSize="18"
+                   FontWeight="Bold"
+                   Foreground="#0096D6"
+                   HorizontalAlignment="Left"
+                   Margin="5"
+                   Padding="2"
+                   Width="155"
+                   FlowDirection="RightToLeft" />
+        </StackPanel>
+        <StackPanel Grid.Row="6"
+                    Orientation="Vertical"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Top">
+            <!-- AutopilotJson -->
+            <StackPanel HorizontalAlignment="Left"
+                        VerticalAlignment="Center"
+                        Orientation="Horizontal"
+                        Margin="10,5,5,0">
+                <Label Name="AutopilotJsonLabel"
+                       Content="Autopilot JSON"
+                       FontSize="15"
+                       Foreground="Black"
+                       HorizontalAlignment="Right"
+                       Margin="5"
+                       Padding="2"
+                       VerticalAlignment="Center"
+                       Width="145"
+                       FlowDirection="RightToLeft" />
+                <ComboBox Name="AutopilotJsonCombobox"
+                          FontSize="14"
+                          Margin="5"
+                          Padding="2" />
+            </StackPanel>
+            <!-- OOBEDeployJson -->
+            <StackPanel HorizontalAlignment="Left"
+                        VerticalAlignment="Center"
+                        Orientation="Horizontal"
+                        Margin="10,5,5,0">
+                <Label Name="OOBEDeployLabel"
+                       Content="OOBEDeploy"
+                       FontSize="15"
+                       Foreground="Black"
+                       Margin="5"
+                       Padding="2"
+                       VerticalAlignment="Center"
+                       Width="145"
+                       FlowDirection="RightToLeft" />
+                <ComboBox Name="OOBEDeployCombobox"
+                          FontSize="14"
+                          Margin="5"
+                          Padding="2" />
+            </StackPanel>
+            <!-- AutopilotOOBEJson -->
+            <StackPanel HorizontalAlignment="Left"
+                        VerticalAlignment="Center"
+                        Orientation="Horizontal"
+                        Margin="10,5,5,0">
+                <Label Name="AutopilotOOBELabel"
+                       Content="AutopilotOOBE"
+                       FontSize="15"
+                       Foreground="Black"
+                       Margin="5"
+                       Padding="2"
+                       VerticalAlignment="Center"
+                       Width="145"
+                       FlowDirection="RightToLeft" />
+                <ComboBox Name="AutopilotOOBECombobox"
+                          FontSize="14"
+                          Margin="5"
+                          Padding="2" />
+            </StackPanel>
+        </StackPanel>
+
+        <!-- Row 7 Gridline -->
+        <Line Grid.Row="7"
+              X1="0"
+              Y1="0"
+              X2="1"
+              Y2="0"
+              Stroke="Gainsboro"
+              StrokeThickness="1"
+              Stretch="Uniform"></Line>
+        
+        <!-- Row 8 Start -->
+        <Button Grid.Row="8"
                 Name="StartButton"
                 Content="Start"
                 FontSize="18"

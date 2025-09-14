@@ -11,6 +11,6 @@ function Get-OSDCatalogDriverPacks {
     #>
     [CmdletBinding()]
     param ()
-    $Results = Import-Clixml -Path "$(Get-OSDCachePath)\driverpack-catalogs\build-driverpacks.xml"
+    $Results = Import-Clixml -Path "$(Get-OSDModulePath)\cache\driverpack-catalogs\build-driverpacks.xml"
     $Results
 }

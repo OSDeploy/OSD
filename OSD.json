@@ -111,6 +111,68 @@
                 "Windows 11",
                 "Windows 10"
             ]
+        },
+        "ValuesARM64": {
+            "Activation": [
+                "Retail",
+                "Volume"
+            ],
+            "Edition": [
+                "Home",
+                "Enterprise",
+                "Pro"
+            ],
+            "Language": [
+                "ar-sa",
+                "bg-bg",
+                "cs-cz",
+                "da-dk",
+                "de-de",
+                "el-gr",
+                "en-gb",
+                "en-us",
+                "es-es",
+                "es-mx",
+                "et-ee",
+                "fi-fi",
+                "fr-ca",
+                "fr-fr",
+                "he-il",
+                "hr-hr",
+                "hu-hu",
+                "it-it",
+                "ja-jp",
+                "ko-kr",
+                "lt-lt",
+                "lv-lv",
+                "nb-no",
+                "nl-nl",
+                "pl-pl",
+                "pt-br",
+                "pt-pt",
+                "ro-ro",
+                "ru-ru",
+                "sk-sk",
+                "sl-si",
+                "sr-latn-rs",
+                "sv-se",
+                "th-th",
+                "tr-tr",
+                "uk-ua",
+                "zh-cn",
+                "zh-tw"
+            ],
+            "Name": [
+                "Windows 11 24H2 ARM64",
+                "Windows 11 23H2 ARM64"
+            ],
+            "ReleaseID": [
+                "24H2",
+                "23H2"
+            ],
+            "Version": [
+                "Windows 11"
+            ]
         }
 	},
     "NewOSDCloudVM": {
@@ -127,7 +189,6 @@
 		"BrandName": "OSDCloud",
 		"BrandColor": "#0096D6",
         "ClearDiskConfirm": true,
-        "captureScreenshots": false,
         "restartComputer": true,
         "updateDiskDrivers": true,
         "updateFirmware": false,

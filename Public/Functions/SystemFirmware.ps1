@@ -42,11 +42,11 @@ function Get-SystemFirmwareUpdate {
             }
         }
         else {
-            Write-Warning "Get-SystemFirmwareUpdate: Could not reach https://www.catalog.update.microsoft.com/"
+            Write-Host -ForegroundColor DarkGray "Get-SystemFirmwareUpdate: Could not reach https://www.catalog.update.microsoft.com/"
         }
     }
     else {
-        Write-Warning "Get-SystemFirmwareUpdate: Could not install required PowerShell Module MSCatalog"
+        Write-Host -ForegroundColor DarkGray "Get-SystemFirmwareUpdate: Could not install required PowerShell Module MSCatalog"
     }
     #=================================================
 }
@@ -103,25 +103,25 @@ function Install-SystemFirmwareUpdate {
                         }
                     }
                     else {
-                        Write-Warning "Install-SystemFirmwareUpdate: Could not find a UEFI Firmware update for this HardwareID"
+                        Write-Host -ForegroundColor DarkGray "Install-SystemFirmwareUpdate: Could not find a UEFI Firmware update for this HardwareID"
                     }
                 }
                 else {
-                    Write-Warning "Install-SystemFirmwareUpdate: Could not find a UEFI Firmware HardwareID"
+                    Write-Host -ForegroundColor DarkGray "Install-SystemFirmwareUpdate: Could not find a UEFI Firmware HardwareID"
                 }
             }
             else {
-                Write-Warning "Install-SystemFirmwareUpdate: Could not install required PowerShell Module MSCatalog"
+                Write-Host -ForegroundColor DarkGray "Install-SystemFirmwareUpdate: Could not install required PowerShell Module MSCatalog"
             }
         }
         else {
-            Write-Warning "Install-SystemFirmwareUpdate: Could not reach https://www.catalog.update.microsoft.com/"
+            Write-Host -ForegroundColor DarkGray "Install-SystemFirmwareUpdate: Could not reach https://www.catalog.update.microsoft.com/"
         }
     }
     else {
-        Write-Warning "Install-SystemFirmwareUpdate: Could not locate C:\Windows"
+        Write-Host -ForegroundColor DarkGray "Install-SystemFirmwareUpdate: Could not locate C:\Windows"
         if ($env:SystemDrive -eq 'X:') {
-            Write-Warning "Make sure that Bitlocker encrypted drives are unlocked and suspended first"
+            Write-Host -ForegroundColor DarkGray "Make sure that Bitlocker encrypted drives are unlocked and suspended first"
         }
     }
     #=================================================
@@ -129,7 +129,7 @@ function Install-SystemFirmwareUpdate {
 function Save-SystemFirmwareUpdate {
     [CmdLetBinding()]
     param (
-        [String] $DestinationDirectory = "$env:TEMP\SystemFirmwareUpdate"
+        [String]$DestinationDirectory = "$env:TEMP\SystemFirmwareUpdate"
     )
     #=================================================
     #	MSCatalog PowerShell Module
@@ -171,19 +171,19 @@ function Save-SystemFirmwareUpdate {
                     }
                 }
                 else {
-                    Write-Warning "Save-SystemFirmwareUpdate: Could not find a UEFI Firmware update for this HardwareID"
+                    Write-Host -ForegroundColor DarkGray "Save-SystemFirmwareUpdate: Could not find a UEFI Firmware update for this HardwareID"
                 }
             }
             else {
-                Write-Warning "Save-SystemFirmwareUpdate: Could not find a UEFI Firmware HardwareID"
+                Write-Host -ForegroundColor DarkGray "Save-SystemFirmwareUpdate: Could not find a UEFI Firmware HardwareID"
             }
         }
         else {
-            Write-Warning "Save-SystemFirmwareUpdate: Could not install required PowerShell Module MSCatalog"
+            Write-Host -ForegroundColor DarkGray "Save-SystemFirmwareUpdate: Could not install required PowerShell Module MSCatalog"
         }
     }
     else {
-        Write-Warning "Save-SystemFirmwareUpdate: Could not reach https://www.catalog.update.microsoft.com/"
+        Write-Host -ForegroundColor DarkGray "Save-SystemFirmwareUpdate: Could not reach https://www.catalog.update.microsoft.com/"
     }
     #=================================================
 }

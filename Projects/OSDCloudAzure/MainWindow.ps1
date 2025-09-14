@@ -354,12 +354,6 @@ $formMainWindowControlContainerCombobox.add_SelectionChanged({
 #   StartButton
 #================================================
 $formMainWindowControlStartButton.add_Click({
-
-    if ($formMainWindowControlScreenshotCapture.IsChecked) {
-        Start-ScreenPNGProcess -Directory "$env:TEMP\Screenshots"
-        Start-Sleep -Seconds 3
-    }
-
     $formMainWindow.Close()
     Show-PowershellWindow
     #================================================
@@ -407,7 +401,6 @@ $formMainWindowControlStartButton.add_Click({
         MSCatalogFirmware           = $formMainWindowControlMSCatalogFirmware.IsChecked
         OSImageIndex                = $formMainWindowControlImageIndexCombobox.Text
         Restart                     = $formMainWindowControlRestart.IsChecked
-        ScreenshotCapture           = $formMainWindowControlScreenshotCapture.IsChecked
         ZTI                         = $formMainWindowControlZTI.IsChecked
     }
     $Global:StartOSDCloud | Out-Host
@@ -416,7 +409,7 @@ $formMainWindowControlStartButton.add_Click({
 #================================================
 #   Customizations
 #================================================
-[string]$ModuleVersion = Get-Module -Name OSD | Sort-Object -Property Version | Select-Object -ExpandProperty Version -Last 1
+[System.String]$ModuleVersion = Get-OSDModuleVersion
 $formMainWindow.Title = "OSDCloudAzure $ModuleVersion on $(Get-MyComputerManufacturer -Brief) $(Get-MyComputerModel -Brief) $(Get-MyComputerProduct)"
 #================================================
 #   Branding

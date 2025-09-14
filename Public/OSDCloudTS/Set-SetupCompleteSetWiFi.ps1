@@ -1,6 +1,5 @@
 function Set-SetupCompleteSetWiFi {
-
-    Write-Host -ForegroundColor Cyan "Running SetupComplete Set-WiFi"
+    Write-Host -ForegroundColor DarkGray "[$(Get-Date -format G)] [$($MyInvocation.MyCommand.Name)] SetupComplete - Adding WiFi Profile"
     $ScriptsPath = "C:\Windows\Setup\scripts"
     $RunScript = @(@{ Script = "SetupComplete"; BatFile = 'SetupComplete.cmd'; ps1file = 'SetupComplete.ps1';Type = 'Setup'; Path = "$ScriptsPath"})
     $PSFilePath = "$($RunScript.Path)\$($RunScript.ps1File)"
@@ -14,7 +13,7 @@ function Set-SetupCompleteSetWiFi {
             $PSK = $Json.Addons.PSK
             if (Test-Path -Path $PSFilePath){
                 Add-Content -Path $PSFilePath ' Write-Host "Creating WiFi Profile"'
-                Write-Host "Set-WiFi -SSID `"$SSID`" -PSK `"***********`""
+                Write-Host -ForegroundColor DarkGray "[$(Get-Date -format G)] [$($MyInvocation.MyCommand.Name)] Set-WiFi -SSID `"$SSID`" -PSK `"***********`""
                 Add-Content -Path $PSFilePath "Set-WiFi -SSID `"$SSID`" -PSK `"$PSK`""
                 Add-Content -Path $PSFilePath "Remove-Item -Path $ConfigPath\WiFi.JSON -Force -Verbose"
                 Add-Content -Path $PSFilePath "Write-Output '-------------------------------------------------------------'"

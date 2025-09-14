@@ -469,21 +469,12 @@ $StartButtonControl.add_Click({
         SkipOOBEDeploy              = $SkipOOBEDeploy
         ZTI                         = $ZTICheckbox.IsChecked
     }
-    #$Global:StartOSDCloudGUI | Out-Host
-    if ($ScreenshotCheckbox.IsChecked) {
-        $Params = @{
-            Screenshot = $true
-        }
-        Start-OSDCloud @Params
-    }
-    else {
-        Start-OSDCloud 
-    }
+    Start-OSDCloud
 })
 #================================================
 #   Customizations
 #================================================
-[string]$ModuleVersion = Get-Module -Name OSD | Sort-Object -Property Version | Select-Object -ExpandProperty Version -Last 1
+[System.String]$ModuleVersion = Get-OSDModuleVersion
 $Global:XamlWindow.Title = "$ModuleVersion OSDCloudGUI"
 #================================================
 #   Branding

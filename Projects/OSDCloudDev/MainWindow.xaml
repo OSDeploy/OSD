@@ -125,9 +125,6 @@
     <DockPanel>
         <Menu DockPanel.Dock="Top">
             <MenuItem Header="Deployment Options">
-                <MenuItem Name="captureScreenshots"
-                          Header="capture Screenshots"
-                          IsCheckable="True"/>
                 <MenuItem Name="ClearDiskConfirm"
                           Header="Clear-Disk Confirm Prompt"
                           IsCheckable="True" />

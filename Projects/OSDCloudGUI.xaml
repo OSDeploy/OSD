@@ -285,14 +285,6 @@
                       Padding="5,-2,5,10"
                       VerticalAlignment="Center"
                       Margin="170,0,0,0">Restart the computer after WinPE phase is complete</CheckBox>
-            <CheckBox Name="ScreenshotCheckbox"
-                      BorderBrush="Black"
-                      BorderThickness="2"
-                      FontSize="15"
-                      Foreground="Black"
-                      Padding="5,-2,5,10"
-                      VerticalAlignment="Center"
-                      Margin="170,0,0,0">Capture WinPE screenshots and save to C:\OSDCloud\Screenshots</CheckBox>
             <CheckBox Name="ZTICheckbox"
                       BorderBrush="Crimson"
                       BorderThickness="2"

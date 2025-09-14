@@ -11,6 +11,6 @@ function Get-OSDCatalogOperatingSystems {
     #>
     [CmdletBinding()]
     param ()
-    $Results = Import-Clixml -Path "$(Get-OSDCachePath)\os-catalogs\build-operatingsystems.xml"
+    $Results = Import-Clixml -Path "$(Get-OSDModulePath)\cache\os-catalogs\build-operatingsystems.xml"
     $Results
 }
