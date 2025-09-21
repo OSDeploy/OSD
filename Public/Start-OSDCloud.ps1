@@ -1,4 +1,4 @@
-﻿function Start-OSDCloud {
+function Start-OSDCloud {
     <#
     .SYNOPSIS
     Starts the OSDCloud Windows 10 or 11 Build Process from the OSD Module or a GitHub Repository
@@ -110,6 +110,11 @@
         [System.Management.Automation.SwitchParameter]
         $FindImageFile,
 
+        #Uses a specified WIM/ESD file
+        [Parameter(ParameterSetName = 'CustomImage')]
+        [System.String]
+        $ImageFileItem,
+
         #Downloads a WIM file specified by the URK
         [Parameter(ParameterSetName = 'CustomImage')]
         [System.String]
@@ -139,7 +144,7 @@
         GetDiskFixed = $null
         GetFeatureUpdate = $null
         ImageFileFullName = $null
-        ImageFileItem = $null
+        ImageFileItem = $ImageFileItem #changed
         ImageFileName = $null
         ImageFileSource = $null
         ImageFileDestination = $null
@@ -184,6 +189,7 @@
         TimeStart = Get-Date
         ZTI = $ZTI
     }
+
     #=================================================
     #	Update Defaults
     #=================================================
@@ -286,11 +292,42 @@
             Write-Host -ForegroundColor DarkGray "ImageFileUrl: $($Global:StartOSDCloud.ImageFileUrl)"
             Write-Host -ForegroundColor DarkGray "OSImageIndex: $($Global:StartOSDCloud.OSImageIndex)"
         }
-        if ($PSBoundParameters.ContainsKey('FindImageFile')) {
-            $Global:StartOSDCloud.ImageFileItem = Select-OSDCloudFileWim
+        if ($PSBoundParameters.ContainsKey('FindImageFile') -or $PSBoundParameters.ContainsKey('ImageFileItem')) {
+            
+            if ($Global:StartOSDCloud.ImageFileItem){
+
+                $OsdCloudFileWimCheck = Test-OSDCloudFileWim -ImageFileItem $Global:StartOSDCloud.ImageFileItem
+                
+                If ($OsdCloudFileWimCheck){
+                        
+                    $Global:StartOSDCloud.ImageFileItem = $OsdCloudFileWimCheck
+
+                }else {
+                    Write-Warning "ImageFileItem $($Global:StartOSDCloud.ImageFileItem) does not exists or is not a valid WIM, ESD or install.swm file, please select one from the list below.."
+                    $Global:StartOSDCloud.ImageFileItem = Select-OSDCloudFileWim
+                }
+
+            }else{
+                $Global:StartOSDCloud.ImageFileItem = Select-OSDCloudFileWim
+            }
 
             if ($Global:StartOSDCloud.ImageFileItem) {
-                $Global:StartOSDCloud.OSImageIndex = Select-OSDCloudImageIndex -ImagePath $Global:StartOSDCloud.ImageFileItem.FullName
+                if ($Global:StartOSDCloud.OSImageIndex){
+                    
+                    $OSImageIndexCheck = Test-OSDCloudImageIndex -ImagePath $Global:StartOSDCloud.ImageFileItem.FullName -Index $Global:StartOSDCloud.OSImageIndex
+
+                    If ($OSImageIndexCheck){
+                        
+                        $Global:StartOSDCloud.OSImageIndex = $OSImageIndexCheck
+
+                    }else {
+                        Write-Warning "OSImageIndex $($Global:StartOSDCloud.OSImageIndex) does not exists, please select one from the list below.."
+                        $Global:StartOSDCloud.OSImageIndex = Select-OSDCloudImageIndex -ImagePath $Global:StartOSDCloud.ImageFileItem.FullName
+                    }
+
+                }else{
+                    $Global:StartOSDCloud.OSImageIndex = Select-OSDCloudImageIndex -ImagePath $Global:StartOSDCloud.ImageFileItem.FullName
+                }
 
                 Write-Host -ForegroundColor DarkGray "ImageFileItem: $($Global:StartOSDCloud.ImageFileItem.FullName)"
                 Write-Host -ForegroundColor DarkGray "OSImageIndex: $($Global:StartOSDCloud.OSImageIndex)"
@@ -305,6 +342,7 @@
             }
         }
     }
+
     #=================================================
     #	ParameterSet Default
     #=================================================
