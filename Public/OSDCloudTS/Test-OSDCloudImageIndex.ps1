@@ -12,7 +12,10 @@ https://github.com/OSDeploy/OSD/tree/master/Docs
 function Test-OSDCloudImageIndex {
     [CmdletBinding()]
     param (
+        [Parameter(Mandatory = $true)]
         [string]$ImagePath,
+    
+        [Parameter(Mandatory = $true)]
         [int]$Index
     )
 
