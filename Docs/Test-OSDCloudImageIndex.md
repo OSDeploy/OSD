@@ -13,7 +13,7 @@ Tests if a specific Image Index exists within a provided image file.
 ## SYNTAX
 
 ```
-Test-OSDCloudImageIndex [[-ImagePath] <string>] [[-Index] <int>] [<CommonParameters>]
+Test-OSDCloudImageIndex [-ImagePath] <string> [-Index] <int> [<CommonParameters>]
 ```
 
 ## DESCRIPTION
