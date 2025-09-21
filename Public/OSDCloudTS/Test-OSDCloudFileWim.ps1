@@ -12,6 +12,7 @@ function Test-OSDCloudFileWim {
     [CmdletBinding()]
     param (
     
+        [Parameter(Mandatory = $true)]
         $ImageFileItem
     
     )
