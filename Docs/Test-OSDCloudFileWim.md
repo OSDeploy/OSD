@@ -13,7 +13,7 @@ Tests if a .wim, .esd, or .install.swm file exists in the specified directory.
 ## SYNTAX
 
 ```
-Test-OSDCloudImageIndex [[-ImagePath] <string>] [[-Index] <int>] [<CommonParameters>]
+Test-OSDCloudFileWim [-ImageFileItem] <string> [<CommonParameters>]
 ```
 
 ## DESCRIPTION
