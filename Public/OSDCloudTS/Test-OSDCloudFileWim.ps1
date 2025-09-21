@@ -13,7 +13,7 @@ function Test-OSDCloudFileWim {
     param (
     
         [Parameter(Mandatory = $true)]
-        $ImageFileItem
+        [string]$ImageFileItem
     
     )
 
