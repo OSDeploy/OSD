@@ -48,6 +48,7 @@
 
         [Parameter(ParameterSetName = 'Default')]
         [ValidateSet(
+            'Windows 11 25H2 x64',
             'Windows 11 24H2 x64',
             'Windows 11 23H2 x64',
             'Windows 11 22H2 x64',
@@ -64,7 +65,7 @@
         #Operating System Build of the Windows installation
         #Alias = Build
         [Parameter(ParameterSetName = 'Legacy')]
-        [ValidateSet('24H2','23H2','22H2','21H2')]
+        [ValidateSet('25H2','24H2','23H2','22H2','21H2')]
         [Alias('Build','OSBuild')]
         [System.String]
         $OSReleaseID,
@@ -281,7 +282,7 @@
             #Do nothing
         }
         elseif ($Global:StartOSDCloudCLI.ZTI) {
-            $Global:StartOSDCloudCLI.OSName = 'Windows 11 24H2 x64'
+            $Global:StartOSDCloudCLI.OSName = 'Windows 11 25H2 x64'
         }
         else {
             Write-Host -ForegroundColor DarkGray "========================================================================="
@@ -317,6 +318,9 @@
         }
         $OSVersion = $Global:StartOSDCloudCLI.OSVersion
 
+        if ($OSName -match '25H2') {
+            $Global:StartOSDCloudCLI.OSReleaseID = '25H2'
+        }
         if ($OSName -match '24H2') {
             $Global:StartOSDCloudCLI.OSReleaseID = '24H2'
         }
