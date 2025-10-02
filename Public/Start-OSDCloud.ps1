@@ -50,6 +50,7 @@
 
         [Parameter(ParameterSetName = 'Default')]
         [ValidateSet(
+            'Windows 11 25H2 x64',
             'Windows 11 24H2 x64',
             'Windows 11 23H2 x64',
             'Windows 11 22H2 x64',
@@ -66,7 +67,7 @@
         #Operating System Build of the Windows installation
         #Alias = Build
         [Parameter(ParameterSetName = 'Legacy')]
-        [ValidateSet('24H2','23H2','22H2')]
+        [ValidateSet('25H2','24H2','23H2','22H2')]
         [Alias('Build')]
         [System.String]
         $OSBuild,
@@ -168,7 +169,7 @@
         OSLanguageNames = $null
         OSName = $OSName
         OSNameMenu = $null
-        OSNames = @('Windows 11 24H2 x64', 'Windows 11 23H2 x64', 'Windows 11 22H2 x64', 'Windows 10 22H2 x64')
+        OSNames = @('Windows 11 25H2 x64', 'Windows 11 24H2 x64', 'Windows 11 23H2 x64', 'Windows 11 22H2 x64', 'Windows 10 22H2 x64')
         OSVersion = $OSVersion
         OSVersionMenu = $null
         OSVersionNames = @('Windows 11','Windows 10')
@@ -315,7 +316,7 @@
         if ($Global:StartOSDCloud.OSName) {
         }
         elseif ($Global:StartOSDCloud.ZTI) {
-            $Global:StartOSDCloud.OSName = 'Windows 11 24H2 x64'
+            $Global:StartOSDCloud.OSName = 'Windows 11 25H2 x64'
         }
         else {
             Write-Host -ForegroundColor DarkGray "========================================================================="
@@ -384,12 +385,12 @@
         if ($Global:StartOSDCloud.OSBuild) {
         }
         elseif ($Global:StartOSDCloud.ZTI) {
-            $Global:StartOSDCloud.OSBuild = '24H2'
+            $Global:StartOSDCloud.OSBuild = '25H2'
         }
         else {
             Write-Host -ForegroundColor DarkGray "========================================================================="
             Write-Host -ForegroundColor Cyan "[$(Get-Date -format G)] Select a Build for $OSVersion x64"
-            $Global:StartOSDCloud.OSBuildNames = @('24H2','23H2','22H2')
+            $Global:StartOSDCloud.OSBuildNames = @('25H2','24H2','23H2','22H2')
             
             $i = $null
             $Global:StartOSDCloud.OSBuildMenu = foreach ($Item in $Global:StartOSDCloud.OSBuildNames) {
