@@ -343,14 +343,20 @@
             $Global:StartOSDCloud.OSName = $Global:StartOSDCloud.OSNameMenu | Where-Object {$_.Selection -eq $SelectReadHost} | Select-Object -ExpandProperty Name
         }
         $OSName = $Global:StartOSDCloud.OSName
+        Write-Host -ForegroundColor DarkGray "[$(Get-Date -format G)] OSName is set to $($Global:StartOSDCloud.OSName)"
     }
     elseif ($PSCmdlet.ParameterSetName -eq 'Legacy') {
         #=================================================
         #	OSVersion
         #=================================================
         if ($Global:StartOSDCloud.OSVersion) {
+            # Do nothing if this case
         }
         elseif ($Global:StartOSDCloud.ZTI) {
+            $Global:StartOSDCloud.OSVersion = 'Windows 11'
+        }
+        elseif ($Global:StartOSDCloud.OSBuild -match "25H2|24H2|23H2") {
+            # We know the OSVersion already if using one of these
             $Global:StartOSDCloud.OSVersion = 'Windows 11'
         }
         else {
@@ -379,6 +385,7 @@
             $Global:StartOSDCloud.OSVersion = $Global:StartOSDCloud.OSVersionMenu | Where-Object {$_.Selection -eq $SelectReadHost} | Select-Object -ExpandProperty Name
         }
         $OSVersion = $Global:StartOSDCloud.OSVersion
+        Write-Host -ForegroundColor DarkGray "[$(Get-Date -format G)] OSVersion is set to $($Global:StartOSDCloud.OSVersion)"
         #=================================================
         #	OSBuild
         #=================================================
@@ -413,6 +420,7 @@
             $Global:StartOSDCloud.OSBuild = $Global:StartOSDCloud.OSBuildMenu | Where-Object {$_.Selection -eq $SelectReadHost} | Select-Object -ExpandProperty Name
         }
         $OSBuild = $Global:StartOSDCloud.OSBuild
+        Write-Host -ForegroundColor DarkGray "[$(Get-Date -format G)] OSBuild is set to $($Global:StartOSDCloud.OSBuild)"
     }
         #=================================================
         #	OSEdition
@@ -565,6 +573,7 @@
             $Global:StartOSDCloud.OSLanguage = $Global:StartOSDCloud.OSLanguageMenu | Where-Object {$_.Selection -eq $SelectReadHost} | Select-Object -ExpandProperty Name
         }
         $OSLanguage = $Global:StartOSDCloud.OSLanguage
+        Write-Host -ForegroundColor DarkGray "[$(Get-Date -format G)] OSLanguage is set to $($Global:StartOSDCloud.OSLanguage)"
     }
     #=================================================
     #	Default
