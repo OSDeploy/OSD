@@ -8363,4 +8363,1676 @@
       <B N="Win11">true</B>
     </MS>
   </Obj>
+  <Obj RefId="380">
+    <TNRef RefId="0" />
+    <MS>
+      <Nil N="Status" />
+      <S N="ReleaseDate">2025-09-15</S>
+      <S N="Name">Windows 11 25H2 ARM64 ar-sa Retail 26200.6584</S>
+      <S N="Version">Windows 11</S>
+      <S N="ReleaseID">25H2</S>
+      <S N="Architecture">ARM64</S>
+      <S N="Language">ar-sa</S>
+      <S N="Activation">Retail</S>
+      <S N="Build">26200.6584</S>
+      <S N="FileName">26200.6584.250915-1905.25h2_ge_release_svc_refresh_CLIENTCONSUMER_RET_A64FRE_ar-sa.esd</S>
+      <Nil N="ImageIndex" />
+      <Nil N="ImageName" />
+      <S N="Url">http://dl.delivery.mp.microsoft.com/filestreamingservice/files/69a01960-21ac-43ea-a64f-2b1b0dc1514d/26200.6584.250915-1905.25h2_ge_release_svc_refresh_CLIENTCONSUMER_RET_A64FRE_ar-sa.esd</S>
+      <Nil N="SHA1" />
+      <Nil N="UpdateID" />
+      <B N="Win10">false</B>
+      <B N="Win11">true</B>
+    </MS>
+  </Obj>
+  <Obj RefId="381">
+    <TNRef RefId="0" />
+    <MS>
+      <Nil N="Status" />
+      <S N="ReleaseDate">2025-09-15</S>
+      <S N="Name">Windows 11 25H2 ARM64 ar-sa Volume 26200.6584</S>
+      <S N="Version">Windows 11</S>
+      <S N="ReleaseID">25H2</S>
+      <S N="Architecture">ARM64</S>
+      <S N="Language">ar-sa</S>
+      <S N="Activation">Volume</S>
+      <S N="Build">26200.6584</S>
+      <S N="FileName">26200.6584.250915-1905.25h2_ge_release_svc_refresh_CLIENTBUSINESS_VOL_A64FRE_ar-sa.esd</S>
+      <Nil N="ImageIndex" />
+      <Nil N="ImageName" />
+      <S N="Url">http://dl.delivery.mp.microsoft.com/filestreamingservice/files/bfb359e3-431f-4255-aaba-97ce0ab4eb97/26200.6584.250915-1905.25h2_ge_release_svc_refresh_CLIENTBUSINESS_VOL_A64FRE_ar-sa.esd</S>
+      <Nil N="SHA1" />
+      <Nil N="UpdateID" />
+      <B N="Win10">false</B>
+      <B N="Win11">true</B>
+    </MS>
+  </Obj>
+  <Obj RefId="382">
+    <TNRef RefId="0" />
+    <MS>
+      <Nil N="Status" />
+      <S N="ReleaseDate">2025-09-15</S>
+      <S N="Name">Windows 11 25H2 ARM64 bg-bg Retail 26200.6584</S>
+      <S N="Version">Windows 11</S>
+      <S N="ReleaseID">25H2</S>
+      <S N="Architecture">ARM64</S>
+      <S N="Language">bg-bg</S>
+      <S N="Activation">Retail</S>
+      <S N="Build">26200.6584</S>
+      <S N="FileName">26200.6584.250915-1905.25h2_ge_release_svc_refresh_CLIENTCONSUMER_RET_A64FRE_bg-bg.esd</S>
+      <Nil N="ImageIndex" />
+      <Nil N="ImageName" />
+      <S N="Url">http://dl.delivery.mp.microsoft.com/filestreamingservice/files/a3a70f74-620c-48bf-9039-14a72224a298/26200.6584.250915-1905.25h2_ge_release_svc_refresh_CLIENTCONSUMER_RET_A64FRE_bg-bg.esd</S>
+      <Nil N="SHA1" />
+      <Nil N="UpdateID" />
+      <B N="Win10">false</B>
+      <B N="Win11">true</B>
+    </MS>
+  </Obj>
+  <Obj RefId="383">
+    <TNRef RefId="0" />
+    <MS>
+      <Nil N="Status" />
+      <S N="ReleaseDate">2025-09-15</S>
+      <S N="Name">Windows 11 25H2 ARM64 bg-bg Volume 26200.6584</S>
+      <S N="Version">Windows 11</S>
+      <S N="ReleaseID">25H2</S>
+      <S N="Architecture">ARM64</S>
+      <S N="Language">bg-bg</S>
+      <S N="Activation">Volume</S>
+      <S N="Build">26200.6584</S>
+      <S N="FileName">26200.6584.250915-1905.25h2_ge_release_svc_refresh_CLIENTBUSINESS_VOL_A64FRE_bg-bg.esd</S>
+      <Nil N="ImageIndex" />
+      <Nil N="ImageName" />
+      <S N="Url">http://dl.delivery.mp.microsoft.com/filestreamingservice/files/38f1b4b5-4b94-4a2f-808c-d1e1fe5f73f9/26200.6584.250915-1905.25h2_ge_release_svc_refresh_CLIENTBUSINESS_VOL_A64FRE_bg-bg.esd</S>
+      <Nil N="SHA1" />
+      <Nil N="UpdateID" />
+      <B N="Win10">false</B>
+      <B N="Win11">true</B>
+    </MS>
+  </Obj>
+  <Obj RefId="384">
+    <TNRef RefId="0" />
+    <MS>
+      <Nil N="Status" />
+      <S N="ReleaseDate">2025-09-15</S>
+      <S N="Name">Windows 11 25H2 ARM64 cs-cz Retail 26200.6584</S>
+      <S N="Version">Windows 11</S>
+      <S N="ReleaseID">25H2</S>
+      <S N="Architecture">ARM64</S>
+      <S N="Language">cs-cz</S>
+      <S N="Activation">Retail</S>
+      <S N="Build">26200.6584</S>
+      <S N="FileName">26200.6584.250915-1905.25h2_ge_release_svc_refresh_CLIENTCONSUMER_RET_A64FRE_cs-cz.esd</S>
+      <Nil N="ImageIndex" />
+      <Nil N="ImageName" />
+      <S N="Url">http://dl.delivery.mp.microsoft.com/filestreamingservice/files/43eac2b1-c6b5-4f39-b986-5685ea586f06/26200.6584.250915-1905.25h2_ge_release_svc_refresh_CLIENTCONSUMER_RET_A64FRE_cs-cz.esd</S>
+      <Nil N="SHA1" />
+      <Nil N="UpdateID" />
+      <B N="Win10">false</B>
+      <B N="Win11">true</B>
+    </MS>
+  </Obj>
+  <Obj RefId="385">
+    <TNRef RefId="0" />
+    <MS>
+      <Nil N="Status" />
+      <S N="ReleaseDate">2025-09-15</S>
+      <S N="Name">Windows 11 25H2 ARM64 cs-cz Volume 26200.6584</S>
+      <S N="Version">Windows 11</S>
+      <S N="ReleaseID">25H2</S>
+      <S N="Architecture">ARM64</S>
+      <S N="Language">cs-cz</S>
+      <S N="Activation">Volume</S>
+      <S N="Build">26200.6584</S>
+      <S N="FileName">26200.6584.250915-1905.25h2_ge_release_svc_refresh_CLIENTBUSINESS_VOL_A64FRE_cs-cz.esd</S>
+      <Nil N="ImageIndex" />
+      <Nil N="ImageName" />
+      <S N="Url">http://dl.delivery.mp.microsoft.com/filestreamingservice/files/c44fea6b-b254-41a1-a43b-455dddf2b180/26200.6584.250915-1905.25h2_ge_release_svc_refresh_CLIENTBUSINESS_VOL_A64FRE_cs-cz.esd</S>
+      <Nil N="SHA1" />
+      <Nil N="UpdateID" />
+      <B N="Win10">false</B>
+      <B N="Win11">true</B>
+    </MS>
+  </Obj>
+  <Obj RefId="386">
+    <TNRef RefId="0" />
+    <MS>
+      <Nil N="Status" />
+      <S N="ReleaseDate">2025-09-15</S>
+      <S N="Name">Windows 11 25H2 ARM64 da-dk Retail 26200.6584</S>
+      <S N="Version">Windows 11</S>
+      <S N="ReleaseID">25H2</S>
+      <S N="Architecture">ARM64</S>
+      <S N="Language">da-dk</S>
+      <S N="Activation">Retail</S>
+      <S N="Build">26200.6584</S>
+      <S N="FileName">26200.6584.250915-1905.25h2_ge_release_svc_refresh_CLIENTCONSUMER_RET_A64FRE_da-dk.esd</S>
+      <Nil N="ImageIndex" />
+      <Nil N="ImageName" />
+      <S N="Url">http://dl.delivery.mp.microsoft.com/filestreamingservice/files/0c1988df-2dea-4b3e-b3da-dff5328cbe27/26200.6584.250915-1905.25h2_ge_release_svc_refresh_CLIENTCONSUMER_RET_A64FRE_da-dk.esd</S>
+      <Nil N="SHA1" />
+      <Nil N="UpdateID" />
+      <B N="Win10">false</B>
+      <B N="Win11">true</B>
+    </MS>
+  </Obj>
+  <Obj RefId="387">
+    <TNRef RefId="0" />
+    <MS>
+      <Nil N="Status" />
+      <S N="ReleaseDate">2025-09-15</S>
+      <S N="Name">Windows 11 25H2 ARM64 da-dk Volume 26200.6584</S>
+      <S N="Version">Windows 11</S>
+      <S N="ReleaseID">25H2</S>
+      <S N="Architecture">ARM64</S>
+      <S N="Language">da-dk</S>
+      <S N="Activation">Volume</S>
+      <S N="Build">26200.6584</S>
+      <S N="FileName">26200.6584.250915-1905.25h2_ge_release_svc_refresh_CLIENTBUSINESS_VOL_A64FRE_da-dk.esd</S>
+      <Nil N="ImageIndex" />
+      <Nil N="ImageName" />
+      <S N="Url">http://dl.delivery.mp.microsoft.com/filestreamingservice/files/81ee416a-aba9-414b-8fe5-7241cf8902a4/26200.6584.250915-1905.25h2_ge_release_svc_refresh_CLIENTBUSINESS_VOL_A64FRE_da-dk.esd</S>
+      <Nil N="SHA1" />
+      <Nil N="UpdateID" />
+      <B N="Win10">false</B>
+      <B N="Win11">true</B>
+    </MS>
+  </Obj>
+  <Obj RefId="388">
+    <TNRef RefId="0" />
+    <MS>
+      <Nil N="Status" />
+      <S N="ReleaseDate">2025-09-15</S>
+      <S N="Name">Windows 11 25H2 ARM64 de-de Retail 26200.6584</S>
+      <S N="Version">Windows 11</S>
+      <S N="ReleaseID">25H2</S>
+      <S N="Architecture">ARM64</S>
+      <S N="Language">de-de</S>
+      <S N="Activation">Retail</S>
+      <S N="Build">26200.6584</S>
+      <S N="FileName">26200.6584.250915-1905.25h2_ge_release_svc_refresh_CLIENTCONSUMER_RET_A64FRE_de-de.esd</S>
+      <Nil N="ImageIndex" />
+      <Nil N="ImageName" />
+      <S N="Url">http://dl.delivery.mp.microsoft.com/filestreamingservice/files/ae425d6c-1956-4314-9ad1-cc146bc60fc4/26200.6584.250915-1905.25h2_ge_release_svc_refresh_CLIENTCONSUMER_RET_A64FRE_de-de.esd</S>
+      <Nil N="SHA1" />
+      <Nil N="UpdateID" />
+      <B N="Win10">false</B>
+      <B N="Win11">true</B>
+    </MS>
+  </Obj>
+  <Obj RefId="389">
+    <TNRef RefId="0" />
+    <MS>
+      <Nil N="Status" />
+      <S N="ReleaseDate">2025-09-15</S>
+      <S N="Name">Windows 11 25H2 ARM64 de-de Volume 26200.6584</S>
+      <S N="Version">Windows 11</S>
+      <S N="ReleaseID">25H2</S>
+      <S N="Architecture">ARM64</S>
+      <S N="Language">de-de</S>
+      <S N="Activation">Volume</S>
+      <S N="Build">26200.6584</S>
+      <S N="FileName">26200.6584.250915-1905.25h2_ge_release_svc_refresh_CLIENTBUSINESS_VOL_A64FRE_de-de.esd</S>
+      <Nil N="ImageIndex" />
+      <Nil N="ImageName" />
+      <S N="Url">http://dl.delivery.mp.microsoft.com/filestreamingservice/files/06540c30-04f4-44c5-95dc-6d96b06d2d9b/26200.6584.250915-1905.25h2_ge_release_svc_refresh_CLIENTBUSINESS_VOL_A64FRE_de-de.esd</S>
+      <Nil N="SHA1" />
+      <Nil N="UpdateID" />
+      <B N="Win10">false</B>
+      <B N="Win11">true</B>
+    </MS>
+  </Obj>
+  <Obj RefId="390">
+    <TNRef RefId="0" />
+    <MS>
+      <Nil N="Status" />
+      <S N="ReleaseDate">2025-09-15</S>
+      <S N="Name">Windows 11 25H2 ARM64 el-gr Retail 26200.6584</S>
+      <S N="Version">Windows 11</S>
+      <S N="ReleaseID">25H2</S>
+      <S N="Architecture">ARM64</S>
+      <S N="Language">el-gr</S>
+      <S N="Activation">Retail</S>
+      <S N="Build">26200.6584</S>
+      <S N="FileName">26200.6584.250915-1905.25h2_ge_release_svc_refresh_CLIENTCONSUMER_RET_A64FRE_el-gr.esd</S>
+      <Nil N="ImageIndex" />
+      <Nil N="ImageName" />
+      <S N="Url">http://dl.delivery.mp.microsoft.com/filestreamingservice/files/a7ac73c3-2b04-4001-8dd5-00239d8d64ae/26200.6584.250915-1905.25h2_ge_release_svc_refresh_CLIENTCONSUMER_RET_A64FRE_el-gr.esd</S>
+      <Nil N="SHA1" />
+      <Nil N="UpdateID" />
+      <B N="Win10">false</B>
+      <B N="Win11">true</B>
+    </MS>
+  </Obj>
+  <Obj RefId="391">
+    <TNRef RefId="0" />
+    <MS>
+      <Nil N="Status" />
+      <S N="ReleaseDate">2025-09-15</S>
+      <S N="Name">Windows 11 25H2 ARM64 el-gr Volume 26200.6584</S>
+      <S N="Version">Windows 11</S>
+      <S N="ReleaseID">25H2</S>
+      <S N="Architecture">ARM64</S>
+      <S N="Language">el-gr</S>
+      <S N="Activation">Volume</S>
+      <S N="Build">26200.6584</S>
+      <S N="FileName">26200.6584.250915-1905.25h2_ge_release_svc_refresh_CLIENTBUSINESS_VOL_A64FRE_el-gr.esd</S>
+      <Nil N="ImageIndex" />
+      <Nil N="ImageName" />
+      <S N="Url">http://dl.delivery.mp.microsoft.com/filestreamingservice/files/dcee35d0-4689-470e-bd33-b5e8b6fa49b7/26200.6584.250915-1905.25h2_ge_release_svc_refresh_CLIENTBUSINESS_VOL_A64FRE_el-gr.esd</S>
+      <Nil N="SHA1" />
+      <Nil N="UpdateID" />
+      <B N="Win10">false</B>
+      <B N="Win11">true</B>
+    </MS>
+  </Obj>
+  <Obj RefId="392">
+    <TNRef RefId="0" />
+    <MS>
+      <Nil N="Status" />
+      <S N="ReleaseDate">2025-09-15</S>
+      <S N="Name">Windows 11 25H2 ARM64 en-gb Retail 26200.6584</S>
+      <S N="Version">Windows 11</S>
+      <S N="ReleaseID">25H2</S>
+      <S N="Architecture">ARM64</S>
+      <S N="Language">en-gb</S>
+      <S N="Activation">Retail</S>
+      <S N="Build">26200.6584</S>
+      <S N="FileName">26200.6584.250915-1905.25h2_ge_release_svc_refresh_CLIENTCONSUMER_RET_A64FRE_en-gb.esd</S>
+      <Nil N="ImageIndex" />
+      <Nil N="ImageName" />
+      <S N="Url">http://dl.delivery.mp.microsoft.com/filestreamingservice/files/a9b0ed58-24cb-4163-bcc6-661e6ed80579/26200.6584.250915-1905.25h2_ge_release_svc_refresh_CLIENTCONSUMER_RET_A64FRE_en-gb.esd</S>
+      <Nil N="SHA1" />
+      <Nil N="UpdateID" />
+      <B N="Win10">false</B>
+      <B N="Win11">true</B>
+    </MS>
+  </Obj>
+  <Obj RefId="393">
+    <TNRef RefId="0" />
+    <MS>
+      <Nil N="Status" />
+      <S N="ReleaseDate">2025-09-15</S>
+      <S N="Name">Windows 11 25H2 ARM64 en-gb Volume 26200.6584</S>
+      <S N="Version">Windows 11</S>
+      <S N="ReleaseID">25H2</S>
+      <S N="Architecture">ARM64</S>
+      <S N="Language">en-gb</S>
+      <S N="Activation">Volume</S>
+      <S N="Build">26200.6584</S>
+      <S N="FileName">26200.6584.250915-1905.25h2_ge_release_svc_refresh_CLIENTBUSINESS_VOL_A64FRE_en-gb.esd</S>
+      <Nil N="ImageIndex" />
+      <Nil N="ImageName" />
+      <S N="Url">http://dl.delivery.mp.microsoft.com/filestreamingservice/files/debb1fbd-1e6b-470c-ae4e-b9341902f9d2/26200.6584.250915-1905.25h2_ge_release_svc_refresh_CLIENTBUSINESS_VOL_A64FRE_en-gb.esd</S>
+      <Nil N="SHA1" />
+      <Nil N="UpdateID" />
+      <B N="Win10">false</B>
+      <B N="Win11">true</B>
+    </MS>
+  </Obj>
+  <Obj RefId="394">
+    <TNRef RefId="0" />
+    <MS>
+      <Nil N="Status" />
+      <S N="ReleaseDate">2025-09-15</S>
+      <S N="Name">Windows 11 25H2 ARM64 en-us Retail 26200.6584</S>
+      <S N="Version">Windows 11</S>
+      <S N="ReleaseID">25H2</S>
+      <S N="Architecture">ARM64</S>
+      <S N="Language">en-us</S>
+      <S N="Activation">Retail</S>
+      <S N="Build">26200.6584</S>
+      <S N="FileName">26200.6584.250915-1905.25h2_ge_release_svc_refresh_CLIENTCONSUMER_RET_A64FRE_en-us.esd</S>
+      <Nil N="ImageIndex" />
+      <Nil N="ImageName" />
+      <S N="Url">http://dl.delivery.mp.microsoft.com/filestreamingservice/files/16d6894f-1811-4a50-be26-089dfc9fa5cf/26200.6584.250915-1905.25h2_ge_release_svc_refresh_CLIENTCONSUMER_RET_A64FRE_en-us.esd</S>
+      <Nil N="SHA1" />
+      <Nil N="UpdateID" />
+      <B N="Win10">false</B>
+      <B N="Win11">true</B>
+    </MS>
+  </Obj>
+  <Obj RefId="395">
+    <TNRef RefId="0" />
+    <MS>
+      <Nil N="Status" />
+      <S N="ReleaseDate">2025-09-15</S>
+      <S N="Name">Windows 11 25H2 ARM64 en-us Volume 26200.6584</S>
+      <S N="Version">Windows 11</S>
+      <S N="ReleaseID">25H2</S>
+      <S N="Architecture">ARM64</S>
+      <S N="Language">en-us</S>
+      <S N="Activation">Volume</S>
+      <S N="Build">26200.6584</S>
+      <S N="FileName">26200.6584.250915-1905.25h2_ge_release_svc_refresh_CLIENTBUSINESS_VOL_A64FRE_en-us.esd</S>
+      <Nil N="ImageIndex" />
+      <Nil N="ImageName" />
+      <S N="Url">http://dl.delivery.mp.microsoft.com/filestreamingservice/files/75ebe212-2d63-4da5-80d2-24b2561cd700/26200.6584.250915-1905.25h2_ge_release_svc_refresh_CLIENTBUSINESS_VOL_A64FRE_en-us.esd</S>
+      <Nil N="SHA1" />
+      <Nil N="UpdateID" />
+      <B N="Win10">false</B>
+      <B N="Win11">true</B>
+    </MS>
+  </Obj>
+  <Obj RefId="396">
+    <TNRef RefId="0" />
+    <MS>
+      <Nil N="Status" />
+      <S N="ReleaseDate">2025-09-15</S>
+      <S N="Name">Windows 11 25H2 ARM64 es-es Retail 26200.6584</S>
+      <S N="Version">Windows 11</S>
+      <S N="ReleaseID">25H2</S>
+      <S N="Architecture">ARM64</S>
+      <S N="Language">es-es</S>
+      <S N="Activation">Retail</S>
+      <S N="Build">26200.6584</S>
+      <S N="FileName">26200.6584.250915-1905.25h2_ge_release_svc_refresh_CLIENTCONSUMER_RET_A64FRE_es-es.esd</S>
+      <Nil N="ImageIndex" />
+      <Nil N="ImageName" />
+      <S N="Url">http://dl.delivery.mp.microsoft.com/filestreamingservice/files/a2349280-e7b3-4cd1-a381-ddbf018dad36/26200.6584.250915-1905.25h2_ge_release_svc_refresh_CLIENTCONSUMER_RET_A64FRE_es-es.esd</S>
+      <Nil N="SHA1" />
+      <Nil N="UpdateID" />
+      <B N="Win10">false</B>
+      <B N="Win11">true</B>
+    </MS>
+  </Obj>
+  <Obj RefId="397">
+    <TNRef RefId="0" />
+    <MS>
+      <Nil N="Status" />
+      <S N="ReleaseDate">2025-09-15</S>
+      <S N="Name">Windows 11 25H2 ARM64 es-es Volume 26200.6584</S>
+      <S N="Version">Windows 11</S>
+      <S N="ReleaseID">25H2</S>
+      <S N="Architecture">ARM64</S>
+      <S N="Language">es-es</S>
+      <S N="Activation">Volume</S>
+      <S N="Build">26200.6584</S>
+      <S N="FileName">26200.6584.250915-1905.25h2_ge_release_svc_refresh_CLIENTBUSINESS_VOL_A64FRE_es-es.esd</S>
+      <Nil N="ImageIndex" />
+      <Nil N="ImageName" />
+      <S N="Url">http://dl.delivery.mp.microsoft.com/filestreamingservice/files/d7f72768-7214-47cb-80b4-b4b362ea9fa2/26200.6584.250915-1905.25h2_ge_release_svc_refresh_CLIENTBUSINESS_VOL_A64FRE_es-es.esd</S>
+      <Nil N="SHA1" />
+      <Nil N="UpdateID" />
+      <B N="Win10">false</B>
+      <B N="Win11">true</B>
+    </MS>
+  </Obj>
+  <Obj RefId="398">
+    <TNRef RefId="0" />
+    <MS>
+      <Nil N="Status" />
+      <S N="ReleaseDate">2025-09-15</S>
+      <S N="Name">Windows 11 25H2 ARM64 es-mx Retail 26200.6584</S>
+      <S N="Version">Windows 11</S>
+      <S N="ReleaseID">25H2</S>
+      <S N="Architecture">ARM64</S>
+      <S N="Language">es-mx</S>
+      <S N="Activation">Retail</S>
+      <S N="Build">26200.6584</S>
+      <S N="FileName">26200.6584.250915-1905.25h2_ge_release_svc_refresh_CLIENTCONSUMER_RET_A64FRE_es-mx.esd</S>
+      <Nil N="ImageIndex" />
+      <Nil N="ImageName" />
+      <S N="Url">http://dl.delivery.mp.microsoft.com/filestreamingservice/files/2f39969f-3adb-4b1f-b14a-de67e5fd4d94/26200.6584.250915-1905.25h2_ge_release_svc_refresh_CLIENTCONSUMER_RET_A64FRE_es-mx.esd</S>
+      <Nil N="SHA1" />
+      <Nil N="UpdateID" />
+      <B N="Win10">false</B>
+      <B N="Win11">true</B>
+    </MS>
+  </Obj>
+  <Obj RefId="399">
+    <TNRef RefId="0" />
+    <MS>
+      <Nil N="Status" />
+      <S N="ReleaseDate">2025-09-15</S>
+      <S N="Name">Windows 11 25H2 ARM64 es-mx Volume 26200.6584</S>
+      <S N="Version">Windows 11</S>
+      <S N="ReleaseID">25H2</S>
+      <S N="Architecture">ARM64</S>
+      <S N="Language">es-mx</S>
+      <S N="Activation">Volume</S>
+      <S N="Build">26200.6584</S>
+      <S N="FileName">26200.6584.250915-1905.25h2_ge_release_svc_refresh_CLIENTBUSINESS_VOL_A64FRE_es-mx.esd</S>
+      <Nil N="ImageIndex" />
+      <Nil N="ImageName" />
+      <S N="Url">http://dl.delivery.mp.microsoft.com/filestreamingservice/files/a15c1e8a-9472-45e1-bb37-d023a766b14a/26200.6584.250915-1905.25h2_ge_release_svc_refresh_CLIENTBUSINESS_VOL_A64FRE_es-mx.esd</S>
+      <Nil N="SHA1" />
+      <Nil N="UpdateID" />
+      <B N="Win10">false</B>
+      <B N="Win11">true</B>
+    </MS>
+  </Obj>
+  <Obj RefId="400">
+    <TNRef RefId="0" />
+    <MS>
+      <Nil N="Status" />
+      <S N="ReleaseDate">2025-09-15</S>
+      <S N="Name">Windows 11 25H2 ARM64 et-ee Retail 26200.6584</S>
+      <S N="Version">Windows 11</S>
+      <S N="ReleaseID">25H2</S>
+      <S N="Architecture">ARM64</S>
+      <S N="Language">et-ee</S>
+      <S N="Activation">Retail</S>
+      <S N="Build">26200.6584</S>
+      <S N="FileName">26200.6584.250915-1905.25h2_ge_release_svc_refresh_CLIENTCONSUMER_RET_A64FRE_et-ee.esd</S>
+      <Nil N="ImageIndex" />
+      <Nil N="ImageName" />
+      <S N="Url">http://dl.delivery.mp.microsoft.com/filestreamingservice/files/830ccdac-d8ea-4117-923c-e7bd33985930/26200.6584.250915-1905.25h2_ge_release_svc_refresh_CLIENTCONSUMER_RET_A64FRE_et-ee.esd</S>
+      <Nil N="SHA1" />
+      <Nil N="UpdateID" />
+      <B N="Win10">false</B>
+      <B N="Win11">true</B>
+    </MS>
+  </Obj>
+  <Obj RefId="401">
+    <TNRef RefId="0" />
+    <MS>
+      <Nil N="Status" />
+      <S N="ReleaseDate">2025-09-15</S>
+      <S N="Name">Windows 11 25H2 ARM64 et-ee Volume 26200.6584</S>
+      <S N="Version">Windows 11</S>
+      <S N="ReleaseID">25H2</S>
+      <S N="Architecture">ARM64</S>
+      <S N="Language">et-ee</S>
+      <S N="Activation">Volume</S>
+      <S N="Build">26200.6584</S>
+      <S N="FileName">26200.6584.250915-1905.25h2_ge_release_svc_refresh_CLIENTBUSINESS_VOL_A64FRE_et-ee.esd</S>
+      <Nil N="ImageIndex" />
+      <Nil N="ImageName" />
+      <S N="Url">http://dl.delivery.mp.microsoft.com/filestreamingservice/files/655bd75d-6538-464c-b5c6-142f989c3258/26200.6584.250915-1905.25h2_ge_release_svc_refresh_CLIENTBUSINESS_VOL_A64FRE_et-ee.esd</S>
+      <Nil N="SHA1" />
+      <Nil N="UpdateID" />
+      <B N="Win10">false</B>
+      <B N="Win11">true</B>
+    </MS>
+  </Obj>
+  <Obj RefId="402">
+    <TNRef RefId="0" />
+    <MS>
+      <Nil N="Status" />
+      <S N="ReleaseDate">2025-09-15</S>
+      <S N="Name">Windows 11 25H2 ARM64 fi-fi Retail 26200.6584</S>
+      <S N="Version">Windows 11</S>
+      <S N="ReleaseID">25H2</S>
+      <S N="Architecture">ARM64</S>
+      <S N="Language">fi-fi</S>
+      <S N="Activation">Retail</S>
+      <S N="Build">26200.6584</S>
+      <S N="FileName">26200.6584.250915-1905.25h2_ge_release_svc_refresh_CLIENTCONSUMER_RET_A64FRE_fi-fi.esd</S>
+      <Nil N="ImageIndex" />
+      <Nil N="ImageName" />
+      <S N="Url">http://dl.delivery.mp.microsoft.com/filestreamingservice/files/d6cef1a8-2ff5-4b86-ab5f-a02ca79d26fa/26200.6584.250915-1905.25h2_ge_release_svc_refresh_CLIENTCONSUMER_RET_A64FRE_fi-fi.esd</S>
+      <Nil N="SHA1" />
+      <Nil N="UpdateID" />
+      <B N="Win10">false</B>
+      <B N="Win11">true</B>
+    </MS>
+  </Obj>
+  <Obj RefId="403">
+    <TNRef RefId="0" />
+    <MS>
+      <Nil N="Status" />
+      <S N="ReleaseDate">2025-09-15</S>
+      <S N="Name">Windows 11 25H2 ARM64 fi-fi Volume 26200.6584</S>
+      <S N="Version">Windows 11</S>
+      <S N="ReleaseID">25H2</S>
+      <S N="Architecture">ARM64</S>
+      <S N="Language">fi-fi</S>
+      <S N="Activation">Volume</S>
+      <S N="Build">26200.6584</S>
+      <S N="FileName">26200.6584.250915-1905.25h2_ge_release_svc_refresh_CLIENTBUSINESS_VOL_A64FRE_fi-fi.esd</S>
+      <Nil N="ImageIndex" />
+      <Nil N="ImageName" />
+      <S N="Url">http://dl.delivery.mp.microsoft.com/filestreamingservice/files/4cf0747d-e359-4c9b-b194-18161fae2290/26200.6584.250915-1905.25h2_ge_release_svc_refresh_CLIENTBUSINESS_VOL_A64FRE_fi-fi.esd</S>
+      <Nil N="SHA1" />
+      <Nil N="UpdateID" />
+      <B N="Win10">false</B>
+      <B N="Win11">true</B>
+    </MS>
+  </Obj>
+  <Obj RefId="404">
+    <TNRef RefId="0" />
+    <MS>
+      <Nil N="Status" />
+      <S N="ReleaseDate">2025-09-15</S>
+      <S N="Name">Windows 11 25H2 ARM64 fr-ca Retail 26200.6584</S>
+      <S N="Version">Windows 11</S>
+      <S N="ReleaseID">25H2</S>
+      <S N="Architecture">ARM64</S>
+      <S N="Language">fr-ca</S>
+      <S N="Activation">Retail</S>
+      <S N="Build">26200.6584</S>
+      <S N="FileName">26200.6584.250915-1905.25h2_ge_release_svc_refresh_CLIENTCONSUMER_RET_A64FRE_fr-ca.esd</S>
+      <Nil N="ImageIndex" />
+      <Nil N="ImageName" />
+      <S N="Url">http://dl.delivery.mp.microsoft.com/filestreamingservice/files/1ee230d9-1953-458e-8fae-ef99a3d37437/26200.6584.250915-1905.25h2_ge_release_svc_refresh_CLIENTCONSUMER_RET_A64FRE_fr-ca.esd</S>
+      <Nil N="SHA1" />
+      <Nil N="UpdateID" />
+      <B N="Win10">false</B>
+      <B N="Win11">true</B>
+    </MS>
+  </Obj>
+  <Obj RefId="405">
+    <TNRef RefId="0" />
+    <MS>
+      <Nil N="Status" />
+      <S N="ReleaseDate">2025-09-15</S>
+      <S N="Name">Windows 11 25H2 ARM64 fr-ca Volume 26200.6584</S>
+      <S N="Version">Windows 11</S>
+      <S N="ReleaseID">25H2</S>
+      <S N="Architecture">ARM64</S>
+      <S N="Language">fr-ca</S>
+      <S N="Activation">Volume</S>
+      <S N="Build">26200.6584</S>
+      <S N="FileName">26200.6584.250915-1905.25h2_ge_release_svc_refresh_CLIENTBUSINESS_VOL_A64FRE_fr-ca.esd</S>
+      <Nil N="ImageIndex" />
+      <Nil N="ImageName" />
+      <S N="Url">http://dl.delivery.mp.microsoft.com/filestreamingservice/files/6087c709-6e14-4dcd-a47c-43f0cce9598c/26200.6584.250915-1905.25h2_ge_release_svc_refresh_CLIENTBUSINESS_VOL_A64FRE_fr-ca.esd</S>
+      <Nil N="SHA1" />
+      <Nil N="UpdateID" />
+      <B N="Win10">false</B>
+      <B N="Win11">true</B>
+    </MS>
+  </Obj>
+  <Obj RefId="406">
+    <TNRef RefId="0" />
+    <MS>
+      <Nil N="Status" />
+      <S N="ReleaseDate">2025-09-15</S>
+      <S N="Name">Windows 11 25H2 ARM64 fr-fr Retail 26200.6584</S>
+      <S N="Version">Windows 11</S>
+      <S N="ReleaseID">25H2</S>
+      <S N="Architecture">ARM64</S>
+      <S N="Language">fr-fr</S>
+      <S N="Activation">Retail</S>
+      <S N="Build">26200.6584</S>
+      <S N="FileName">26200.6584.250915-1905.25h2_ge_release_svc_refresh_CLIENTCONSUMER_RET_A64FRE_fr-fr.esd</S>
+      <Nil N="ImageIndex" />
+      <Nil N="ImageName" />
+      <S N="Url">http://dl.delivery.mp.microsoft.com/filestreamingservice/files/151db3f7-3722-4651-b0e8-400d9567707f/26200.6584.250915-1905.25h2_ge_release_svc_refresh_CLIENTCONSUMER_RET_A64FRE_fr-fr.esd</S>
+      <Nil N="SHA1" />
+      <Nil N="UpdateID" />
+      <B N="Win10">false</B>
+      <B N="Win11">true</B>
+    </MS>
+  </Obj>
+  <Obj RefId="407">
+    <TNRef RefId="0" />
+    <MS>
+      <Nil N="Status" />
+      <S N="ReleaseDate">2025-09-15</S>
+      <S N="Name">Windows 11 25H2 ARM64 fr-fr Volume 26200.6584</S>
+      <S N="Version">Windows 11</S>
+      <S N="ReleaseID">25H2</S>
+      <S N="Architecture">ARM64</S>
+      <S N="Language">fr-fr</S>
+      <S N="Activation">Volume</S>
+      <S N="Build">26200.6584</S>
+      <S N="FileName">26200.6584.250915-1905.25h2_ge_release_svc_refresh_CLIENTBUSINESS_VOL_A64FRE_fr-fr.esd</S>
+      <Nil N="ImageIndex" />
+      <Nil N="ImageName" />
+      <S N="Url">http://dl.delivery.mp.microsoft.com/filestreamingservice/files/a65a717d-45ea-4ad3-a263-5096b7afb83a/26200.6584.250915-1905.25h2_ge_release_svc_refresh_CLIENTBUSINESS_VOL_A64FRE_fr-fr.esd</S>
+      <Nil N="SHA1" />
+      <Nil N="UpdateID" />
+      <B N="Win10">false</B>
+      <B N="Win11">true</B>
+    </MS>
+  </Obj>
+  <Obj RefId="408">
+    <TNRef RefId="0" />
+    <MS>
+      <Nil N="Status" />
+      <S N="ReleaseDate">2025-09-15</S>
+      <S N="Name">Windows 11 25H2 ARM64 he-il Retail 26200.6584</S>
+      <S N="Version">Windows 11</S>
+      <S N="ReleaseID">25H2</S>
+      <S N="Architecture">ARM64</S>
+      <S N="Language">he-il</S>
+      <S N="Activation">Retail</S>
+      <S N="Build">26200.6584</S>
+      <S N="FileName">26200.6584.250915-1905.25h2_ge_release_svc_refresh_CLIENTCONSUMER_RET_A64FRE_he-il.esd</S>
+      <Nil N="ImageIndex" />
+      <Nil N="ImageName" />
+      <S N="Url">http://dl.delivery.mp.microsoft.com/filestreamingservice/files/a9e850aa-cbfc-42e5-96f3-33f67d212541/26200.6584.250915-1905.25h2_ge_release_svc_refresh_CLIENTCONSUMER_RET_A64FRE_he-il.esd</S>
+      <Nil N="SHA1" />
+      <Nil N="UpdateID" />
+      <B N="Win10">false</B>
+      <B N="Win11">true</B>
+    </MS>
+  </Obj>
+  <Obj RefId="409">
+    <TNRef RefId="0" />
+    <MS>
+      <Nil N="Status" />
+      <S N="ReleaseDate">2025-09-15</S>
+      <S N="Name">Windows 11 25H2 ARM64 he-il Volume 26200.6584</S>
+      <S N="Version">Windows 11</S>
+      <S N="ReleaseID">25H2</S>
+      <S N="Architecture">ARM64</S>
+      <S N="Language">he-il</S>
+      <S N="Activation">Volume</S>
+      <S N="Build">26200.6584</S>
+      <S N="FileName">26200.6584.250915-1905.25h2_ge_release_svc_refresh_CLIENTBUSINESS_VOL_A64FRE_he-il.esd</S>
+      <Nil N="ImageIndex" />
+      <Nil N="ImageName" />
+      <S N="Url">http://dl.delivery.mp.microsoft.com/filestreamingservice/files/cff92bf8-02d3-4230-b710-42e7c464199a/26200.6584.250915-1905.25h2_ge_release_svc_refresh_CLIENTBUSINESS_VOL_A64FRE_he-il.esd</S>
+      <Nil N="SHA1" />
+      <Nil N="UpdateID" />
+      <B N="Win10">false</B>
+      <B N="Win11">true</B>
+    </MS>
+  </Obj>
+  <Obj RefId="410">
+    <TNRef RefId="0" />
+    <MS>
+      <Nil N="Status" />
+      <S N="ReleaseDate">2025-09-15</S>
+      <S N="Name">Windows 11 25H2 ARM64 hr-hr Retail 26200.6584</S>
+      <S N="Version">Windows 11</S>
+      <S N="ReleaseID">25H2</S>
+      <S N="Architecture">ARM64</S>
+      <S N="Language">hr-hr</S>
+      <S N="Activation">Retail</S>
+      <S N="Build">26200.6584</S>
+      <S N="FileName">26200.6584.250915-1905.25h2_ge_release_svc_refresh_CLIENTCONSUMER_RET_A64FRE_hr-hr.esd</S>
+      <Nil N="ImageIndex" />
+      <Nil N="ImageName" />
+      <S N="Url">http://dl.delivery.mp.microsoft.com/filestreamingservice/files/f89d0589-7187-403d-9995-0a5bf7107a8c/26200.6584.250915-1905.25h2_ge_release_svc_refresh_CLIENTCONSUMER_RET_A64FRE_hr-hr.esd</S>
+      <Nil N="SHA1" />
+      <Nil N="UpdateID" />
+      <B N="Win10">false</B>
+      <B N="Win11">true</B>
+    </MS>
+  </Obj>
+  <Obj RefId="411">
+    <TNRef RefId="0" />
+    <MS>
+      <Nil N="Status" />
+      <S N="ReleaseDate">2025-09-15</S>
+      <S N="Name">Windows 11 25H2 ARM64 hr-hr Volume 26200.6584</S>
+      <S N="Version">Windows 11</S>
+      <S N="ReleaseID">25H2</S>
+      <S N="Architecture">ARM64</S>
+      <S N="Language">hr-hr</S>
+      <S N="Activation">Volume</S>
+      <S N="Build">26200.6584</S>
+      <S N="FileName">26200.6584.250915-1905.25h2_ge_release_svc_refresh_CLIENTBUSINESS_VOL_A64FRE_hr-hr.esd</S>
+      <Nil N="ImageIndex" />
+      <Nil N="ImageName" />
+      <S N="Url">http://dl.delivery.mp.microsoft.com/filestreamingservice/files/dfe0e827-edc5-4fb7-89d6-4e40dde8ea2d/26200.6584.250915-1905.25h2_ge_release_svc_refresh_CLIENTBUSINESS_VOL_A64FRE_hr-hr.esd</S>
+      <Nil N="SHA1" />
+      <Nil N="UpdateID" />
+      <B N="Win10">false</B>
+      <B N="Win11">true</B>
+    </MS>
+  </Obj>
+  <Obj RefId="412">
+    <TNRef RefId="0" />
+    <MS>
+      <Nil N="Status" />
+      <S N="ReleaseDate">2025-09-15</S>
+      <S N="Name">Windows 11 25H2 ARM64 hu-hu Retail 26200.6584</S>
+      <S N="Version">Windows 11</S>
+      <S N="ReleaseID">25H2</S>
+      <S N="Architecture">ARM64</S>
+      <S N="Language">hu-hu</S>
+      <S N="Activation">Retail</S>
+      <S N="Build">26200.6584</S>
+      <S N="FileName">26200.6584.250915-1905.25h2_ge_release_svc_refresh_CLIENTCONSUMER_RET_A64FRE_hu-hu.esd</S>
+      <Nil N="ImageIndex" />
+      <Nil N="ImageName" />
+      <S N="Url">http://dl.delivery.mp.microsoft.com/filestreamingservice/files/1bd53f9f-6346-4830-8394-1f83011a59d0/26200.6584.250915-1905.25h2_ge_release_svc_refresh_CLIENTCONSUMER_RET_A64FRE_hu-hu.esd</S>
+      <Nil N="SHA1" />
+      <Nil N="UpdateID" />
+      <B N="Win10">false</B>
+      <B N="Win11">true</B>
+    </MS>
+  </Obj>
+  <Obj RefId="413">
+    <TNRef RefId="0" />
+    <MS>
+      <Nil N="Status" />
+      <S N="ReleaseDate">2025-09-15</S>
+      <S N="Name">Windows 11 25H2 ARM64 hu-hu Volume 26200.6584</S>
+      <S N="Version">Windows 11</S>
+      <S N="ReleaseID">25H2</S>
+      <S N="Architecture">ARM64</S>
+      <S N="Language">hu-hu</S>
+      <S N="Activation">Volume</S>
+      <S N="Build">26200.6584</S>
+      <S N="FileName">26200.6584.250915-1905.25h2_ge_release_svc_refresh_CLIENTBUSINESS_VOL_A64FRE_hu-hu.esd</S>
+      <Nil N="ImageIndex" />
+      <Nil N="ImageName" />
+      <S N="Url">http://dl.delivery.mp.microsoft.com/filestreamingservice/files/b416e8dd-04bb-41fa-853c-730a66c2e8f0/26200.6584.250915-1905.25h2_ge_release_svc_refresh_CLIENTBUSINESS_VOL_A64FRE_hu-hu.esd</S>
+      <Nil N="SHA1" />
+      <Nil N="UpdateID" />
+      <B N="Win10">false</B>
+      <B N="Win11">true</B>
+    </MS>
+  </Obj>
+  <Obj RefId="414">
+    <TNRef RefId="0" />
+    <MS>
+      <Nil N="Status" />
+      <S N="ReleaseDate">2025-09-15</S>
+      <S N="Name">Windows 11 25H2 ARM64 it-it Retail 26200.6584</S>
+      <S N="Version">Windows 11</S>
+      <S N="ReleaseID">25H2</S>
+      <S N="Architecture">ARM64</S>
+      <S N="Language">it-it</S>
+      <S N="Activation">Retail</S>
+      <S N="Build">26200.6584</S>
+      <S N="FileName">26200.6584.250915-1905.25h2_ge_release_svc_refresh_CLIENTCONSUMER_RET_A64FRE_it-it.esd</S>
+      <Nil N="ImageIndex" />
+      <Nil N="ImageName" />
+      <S N="Url">http://dl.delivery.mp.microsoft.com/filestreamingservice/files/2ce26149-b938-48f0-928d-810d37481b90/26200.6584.250915-1905.25h2_ge_release_svc_refresh_CLIENTCONSUMER_RET_A64FRE_it-it.esd</S>
+      <Nil N="SHA1" />
+      <Nil N="UpdateID" />
+      <B N="Win10">false</B>
+      <B N="Win11">true</B>
+    </MS>
+  </Obj>
+  <Obj RefId="415">
+    <TNRef RefId="0" />
+    <MS>
+      <Nil N="Status" />
+      <S N="ReleaseDate">2025-09-15</S>
+      <S N="Name">Windows 11 25H2 ARM64 it-it Volume 26200.6584</S>
+      <S N="Version">Windows 11</S>
+      <S N="ReleaseID">25H2</S>
+      <S N="Architecture">ARM64</S>
+      <S N="Language">it-it</S>
+      <S N="Activation">Volume</S>
+      <S N="Build">26200.6584</S>
+      <S N="FileName">26200.6584.250915-1905.25h2_ge_release_svc_refresh_CLIENTBUSINESS_VOL_A64FRE_it-it.esd</S>
+      <Nil N="ImageIndex" />
+      <Nil N="ImageName" />
+      <S N="Url">http://dl.delivery.mp.microsoft.com/filestreamingservice/files/2e518ab8-0b55-4d4b-8180-c8d79a203df2/26200.6584.250915-1905.25h2_ge_release_svc_refresh_CLIENTBUSINESS_VOL_A64FRE_it-it.esd</S>
+      <Nil N="SHA1" />
+      <Nil N="UpdateID" />
+      <B N="Win10">false</B>
+      <B N="Win11">true</B>
+    </MS>
+  </Obj>
+  <Obj RefId="416">
+    <TNRef RefId="0" />
+    <MS>
+      <Nil N="Status" />
+      <S N="ReleaseDate">2025-09-15</S>
+      <S N="Name">Windows 11 25H2 ARM64 ja-jp Retail 26200.6584</S>
+      <S N="Version">Windows 11</S>
+      <S N="ReleaseID">25H2</S>
+      <S N="Architecture">ARM64</S>
+      <S N="Language">ja-jp</S>
+      <S N="Activation">Retail</S>
+      <S N="Build">26200.6584</S>
+      <S N="FileName">26200.6584.250915-1905.25h2_ge_release_svc_refresh_CLIENTCONSUMER_RET_A64FRE_ja-jp.esd</S>
+      <Nil N="ImageIndex" />
+      <Nil N="ImageName" />
+      <S N="Url">http://dl.delivery.mp.microsoft.com/filestreamingservice/files/fc2a3a6c-2fec-40aa-9325-10ba110205fe/26200.6584.250915-1905.25h2_ge_release_svc_refresh_CLIENTCONSUMER_RET_A64FRE_ja-jp.esd</S>
+      <Nil N="SHA1" />
+      <Nil N="UpdateID" />
+      <B N="Win10">false</B>
+      <B N="Win11">true</B>
+    </MS>
+  </Obj>
+  <Obj RefId="417">
+    <TNRef RefId="0" />
+    <MS>
+      <Nil N="Status" />
+      <S N="ReleaseDate">2025-09-15</S>
+      <S N="Name">Windows 11 25H2 ARM64 ja-jp Volume 26200.6584</S>
+      <S N="Version">Windows 11</S>
+      <S N="ReleaseID">25H2</S>
+      <S N="Architecture">ARM64</S>
+      <S N="Language">ja-jp</S>
+      <S N="Activation">Volume</S>
+      <S N="Build">26200.6584</S>
+      <S N="FileName">26200.6584.250915-1905.25h2_ge_release_svc_refresh_CLIENTBUSINESS_VOL_A64FRE_ja-jp.esd</S>
+      <Nil N="ImageIndex" />
+      <Nil N="ImageName" />
+      <S N="Url">http://dl.delivery.mp.microsoft.com/filestreamingservice/files/922b198d-9133-42f4-8790-e065bac44d83/26200.6584.250915-1905.25h2_ge_release_svc_refresh_CLIENTBUSINESS_VOL_A64FRE_ja-jp.esd</S>
+      <Nil N="SHA1" />
+      <Nil N="UpdateID" />
+      <B N="Win10">false</B>
+      <B N="Win11">true</B>
+    </MS>
+  </Obj>
+  <Obj RefId="418">
+    <TNRef RefId="0" />
+    <MS>
+      <Nil N="Status" />
+      <S N="ReleaseDate">2025-09-15</S>
+      <S N="Name">Windows 11 25H2 ARM64 ko-kr Retail 26200.6584</S>
+      <S N="Version">Windows 11</S>
+      <S N="ReleaseID">25H2</S>
+      <S N="Architecture">ARM64</S>
+      <S N="Language">ko-kr</S>
+      <S N="Activation">Retail</S>
+      <S N="Build">26200.6584</S>
+      <S N="FileName">26200.6584.250915-1905.25h2_ge_release_svc_refresh_CLIENTCONSUMER_RET_A64FRE_ko-kr.esd</S>
+      <Nil N="ImageIndex" />
+      <Nil N="ImageName" />
+      <S N="Url">http://dl.delivery.mp.microsoft.com/filestreamingservice/files/17c91c5f-09a6-47e0-b638-2807545c8e50/26200.6584.250915-1905.25h2_ge_release_svc_refresh_CLIENTCONSUMER_RET_A64FRE_ko-kr.esd</S>
+      <Nil N="SHA1" />
+      <Nil N="UpdateID" />
+      <B N="Win10">false</B>
+      <B N="Win11">true</B>
+    </MS>
+  </Obj>
+  <Obj RefId="419">
+    <TNRef RefId="0" />
+    <MS>
+      <Nil N="Status" />
+      <S N="ReleaseDate">2025-09-15</S>
+      <S N="Name">Windows 11 25H2 ARM64 ko-kr Volume 26200.6584</S>
+      <S N="Version">Windows 11</S>
+      <S N="ReleaseID">25H2</S>
+      <S N="Architecture">ARM64</S>
+      <S N="Language">ko-kr</S>
+      <S N="Activation">Volume</S>
+      <S N="Build">26200.6584</S>
+      <S N="FileName">26200.6584.250915-1905.25h2_ge_release_svc_refresh_CLIENTBUSINESS_VOL_A64FRE_ko-kr.esd</S>
+      <Nil N="ImageIndex" />
+      <Nil N="ImageName" />
+      <S N="Url">http://dl.delivery.mp.microsoft.com/filestreamingservice/files/9677aa5f-2fe9-46fe-95ed-e675a524ae57/26200.6584.250915-1905.25h2_ge_release_svc_refresh_CLIENTBUSINESS_VOL_A64FRE_ko-kr.esd</S>
+      <Nil N="SHA1" />
+      <Nil N="UpdateID" />
+      <B N="Win10">false</B>
+      <B N="Win11">true</B>
+    </MS>
+  </Obj>
+  <Obj RefId="420">
+    <TNRef RefId="0" />
+    <MS>
+      <Nil N="Status" />
+      <S N="ReleaseDate">2025-09-15</S>
+      <S N="Name">Windows 11 25H2 ARM64 lt-lt Retail 26200.6584</S>
+      <S N="Version">Windows 11</S>
+      <S N="ReleaseID">25H2</S>
+      <S N="Architecture">ARM64</S>
+      <S N="Language">lt-lt</S>
+      <S N="Activation">Retail</S>
+      <S N="Build">26200.6584</S>
+      <S N="FileName">26200.6584.250915-1905.25h2_ge_release_svc_refresh_CLIENTCONSUMER_RET_A64FRE_lt-lt.esd</S>
+      <Nil N="ImageIndex" />
+      <Nil N="ImageName" />
+      <S N="Url">http://dl.delivery.mp.microsoft.com/filestreamingservice/files/538b17b5-5063-496d-a1c3-203d50f8df2c/26200.6584.250915-1905.25h2_ge_release_svc_refresh_CLIENTCONSUMER_RET_A64FRE_lt-lt.esd</S>
+      <Nil N="SHA1" />
+      <Nil N="UpdateID" />
+      <B N="Win10">false</B>
+      <B N="Win11">true</B>
+    </MS>
+  </Obj>
+  <Obj RefId="421">
+    <TNRef RefId="0" />
+    <MS>
+      <Nil N="Status" />
+      <S N="ReleaseDate">2025-09-15</S>
+      <S N="Name">Windows 11 25H2 ARM64 lt-lt Volume 26200.6584</S>
+      <S N="Version">Windows 11</S>
+      <S N="ReleaseID">25H2</S>
+      <S N="Architecture">ARM64</S>
+      <S N="Language">lt-lt</S>
+      <S N="Activation">Volume</S>
+      <S N="Build">26200.6584</S>
+      <S N="FileName">26200.6584.250915-1905.25h2_ge_release_svc_refresh_CLIENTBUSINESS_VOL_A64FRE_lt-lt.esd</S>
+      <Nil N="ImageIndex" />
+      <Nil N="ImageName" />
+      <S N="Url">http://dl.delivery.mp.microsoft.com/filestreamingservice/files/93ba4f34-a41d-4b94-8036-333070b7db76/26200.6584.250915-1905.25h2_ge_release_svc_refresh_CLIENTBUSINESS_VOL_A64FRE_lt-lt.esd</S>
+      <Nil N="SHA1" />
+      <Nil N="UpdateID" />
+      <B N="Win10">false</B>
+      <B N="Win11">true</B>
+    </MS>
+  </Obj>
+  <Obj RefId="422">
+    <TNRef RefId="0" />
+    <MS>
+      <Nil N="Status" />
+      <S N="ReleaseDate">2025-09-15</S>
+      <S N="Name">Windows 11 25H2 ARM64 lv-lv Retail 26200.6584</S>
+      <S N="Version">Windows 11</S>
+      <S N="ReleaseID">25H2</S>
+      <S N="Architecture">ARM64</S>
+      <S N="Language">lv-lv</S>
+      <S N="Activation">Retail</S>
+      <S N="Build">26200.6584</S>
+      <S N="FileName">26200.6584.250915-1905.25h2_ge_release_svc_refresh_CLIENTCONSUMER_RET_A64FRE_lv-lv.esd</S>
+      <Nil N="ImageIndex" />
+      <Nil N="ImageName" />
+      <S N="Url">http://dl.delivery.mp.microsoft.com/filestreamingservice/files/5bd46653-2977-46fa-b6cb-762ee9eacd0b/26200.6584.250915-1905.25h2_ge_release_svc_refresh_CLIENTCONSUMER_RET_A64FRE_lv-lv.esd</S>
+      <Nil N="SHA1" />
+      <Nil N="UpdateID" />
+      <B N="Win10">false</B>
+      <B N="Win11">true</B>
+    </MS>
+  </Obj>
+  <Obj RefId="423">
+    <TNRef RefId="0" />
+    <MS>
+      <Nil N="Status" />
+      <S N="ReleaseDate">2025-09-15</S>
+      <S N="Name">Windows 11 25H2 ARM64 lv-lv Volume 26200.6584</S>
+      <S N="Version">Windows 11</S>
+      <S N="ReleaseID">25H2</S>
+      <S N="Architecture">ARM64</S>
+      <S N="Language">lv-lv</S>
+      <S N="Activation">Volume</S>
+      <S N="Build">26200.6584</S>
+      <S N="FileName">26200.6584.250915-1905.25h2_ge_release_svc_refresh_CLIENTBUSINESS_VOL_A64FRE_lv-lv.esd</S>
+      <Nil N="ImageIndex" />
+      <Nil N="ImageName" />
+      <S N="Url">http://dl.delivery.mp.microsoft.com/filestreamingservice/files/31553692-69a7-4ff3-8538-a6857f57972e/26200.6584.250915-1905.25h2_ge_release_svc_refresh_CLIENTBUSINESS_VOL_A64FRE_lv-lv.esd</S>
+      <Nil N="SHA1" />
+      <Nil N="UpdateID" />
+      <B N="Win10">false</B>
+      <B N="Win11">true</B>
+    </MS>
+  </Obj>
+  <Obj RefId="424">
+    <TNRef RefId="0" />
+    <MS>
+      <Nil N="Status" />
+      <S N="ReleaseDate">2025-09-15</S>
+      <S N="Name">Windows 11 25H2 ARM64 nb-no Retail 26200.6584</S>
+      <S N="Version">Windows 11</S>
+      <S N="ReleaseID">25H2</S>
+      <S N="Architecture">ARM64</S>
+      <S N="Language">nb-no</S>
+      <S N="Activation">Retail</S>
+      <S N="Build">26200.6584</S>
+      <S N="FileName">26200.6584.250915-1905.25h2_ge_release_svc_refresh_CLIENTCONSUMER_RET_A64FRE_nb-no.esd</S>
+      <Nil N="ImageIndex" />
+      <Nil N="ImageName" />
+      <S N="Url">http://dl.delivery.mp.microsoft.com/filestreamingservice/files/9693c7e7-5014-47f3-9ea4-1c9ad70009b5/26200.6584.250915-1905.25h2_ge_release_svc_refresh_CLIENTCONSUMER_RET_A64FRE_nb-no.esd</S>
+      <Nil N="SHA1" />
+      <Nil N="UpdateID" />
+      <B N="Win10">false</B>
+      <B N="Win11">true</B>
+    </MS>
+  </Obj>
+  <Obj RefId="425">
+    <TNRef RefId="0" />
+    <MS>
+      <Nil N="Status" />
+      <S N="ReleaseDate">2025-09-15</S>
+      <S N="Name">Windows 11 25H2 ARM64 nb-no Volume 26200.6584</S>
+      <S N="Version">Windows 11</S>
+      <S N="ReleaseID">25H2</S>
+      <S N="Architecture">ARM64</S>
+      <S N="Language">nb-no</S>
+      <S N="Activation">Volume</S>
+      <S N="Build">26200.6584</S>
+      <S N="FileName">26200.6584.250915-1905.25h2_ge_release_svc_refresh_CLIENTBUSINESS_VOL_A64FRE_nb-no.esd</S>
+      <Nil N="ImageIndex" />
+      <Nil N="ImageName" />
+      <S N="Url">http://dl.delivery.mp.microsoft.com/filestreamingservice/files/d3e5e7c2-59a7-4aa2-ab77-1ac7cbd93ebc/26200.6584.250915-1905.25h2_ge_release_svc_refresh_CLIENTBUSINESS_VOL_A64FRE_nb-no.esd</S>
+      <Nil N="SHA1" />
+      <Nil N="UpdateID" />
+      <B N="Win10">false</B>
+      <B N="Win11">true</B>
+    </MS>
+  </Obj>
+  <Obj RefId="426">
+    <TNRef RefId="0" />
+    <MS>
+      <Nil N="Status" />
+      <S N="ReleaseDate">2025-09-15</S>
+      <S N="Name">Windows 11 25H2 ARM64 nl-nl Retail 26200.6584</S>
+      <S N="Version">Windows 11</S>
+      <S N="ReleaseID">25H2</S>
+      <S N="Architecture">ARM64</S>
+      <S N="Language">nl-nl</S>
+      <S N="Activation">Retail</S>
+      <S N="Build">26200.6584</S>
+      <S N="FileName">26200.6584.250915-1905.25h2_ge_release_svc_refresh_CLIENTCONSUMER_RET_A64FRE_nl-nl.esd</S>
+      <Nil N="ImageIndex" />
+      <Nil N="ImageName" />
+      <S N="Url">http://dl.delivery.mp.microsoft.com/filestreamingservice/files/1d7ebd4b-a1da-4686-b07c-a54f6f2272d3/26200.6584.250915-1905.25h2_ge_release_svc_refresh_CLIENTCONSUMER_RET_A64FRE_nl-nl.esd</S>
+      <Nil N="SHA1" />
+      <Nil N="UpdateID" />
+      <B N="Win10">false</B>
+      <B N="Win11">true</B>
+    </MS>
+  </Obj>
+  <Obj RefId="427">
+    <TNRef RefId="0" />
+    <MS>
+      <Nil N="Status" />
+      <S N="ReleaseDate">2025-09-15</S>
+      <S N="Name">Windows 11 25H2 ARM64 nl-nl Volume 26200.6584</S>
+      <S N="Version">Windows 11</S>
+      <S N="ReleaseID">25H2</S>
+      <S N="Architecture">ARM64</S>
+      <S N="Language">nl-nl</S>
+      <S N="Activation">Volume</S>
+      <S N="Build">26200.6584</S>
+      <S N="FileName">26200.6584.250915-1905.25h2_ge_release_svc_refresh_CLIENTBUSINESS_VOL_A64FRE_nl-nl.esd</S>
+      <Nil N="ImageIndex" />
+      <Nil N="ImageName" />
+      <S N="Url">http://dl.delivery.mp.microsoft.com/filestreamingservice/files/bf65a0cd-acb0-4169-a2d9-0cf4de895d11/26200.6584.250915-1905.25h2_ge_release_svc_refresh_CLIENTBUSINESS_VOL_A64FRE_nl-nl.esd</S>
+      <Nil N="SHA1" />
+      <Nil N="UpdateID" />
+      <B N="Win10">false</B>
+      <B N="Win11">true</B>
+    </MS>
+  </Obj>
+  <Obj RefId="428">
+    <TNRef RefId="0" />
+    <MS>
+      <Nil N="Status" />
+      <S N="ReleaseDate">2025-09-15</S>
+      <S N="Name">Windows 11 25H2 ARM64 pl-pl Retail 26200.6584</S>
+      <S N="Version">Windows 11</S>
+      <S N="ReleaseID">25H2</S>
+      <S N="Architecture">ARM64</S>
+      <S N="Language">pl-pl</S>
+      <S N="Activation">Retail</S>
+      <S N="Build">26200.6584</S>
+      <S N="FileName">26200.6584.250915-1905.25h2_ge_release_svc_refresh_CLIENTCONSUMER_RET_A64FRE_pl-pl.esd</S>
+      <Nil N="ImageIndex" />
+      <Nil N="ImageName" />
+      <S N="Url">http://dl.delivery.mp.microsoft.com/filestreamingservice/files/4867d1f9-5baa-4da0-ac7f-7408e57417e2/26200.6584.250915-1905.25h2_ge_release_svc_refresh_CLIENTCONSUMER_RET_A64FRE_pl-pl.esd</S>
+      <Nil N="SHA1" />
+      <Nil N="UpdateID" />
+      <B N="Win10">false</B>
+      <B N="Win11">true</B>
+    </MS>
+  </Obj>
+  <Obj RefId="429">
+    <TNRef RefId="0" />
+    <MS>
+      <Nil N="Status" />
+      <S N="ReleaseDate">2025-09-15</S>
+      <S N="Name">Windows 11 25H2 ARM64 pl-pl Volume 26200.6584</S>
+      <S N="Version">Windows 11</S>
+      <S N="ReleaseID">25H2</S>
+      <S N="Architecture">ARM64</S>
+      <S N="Language">pl-pl</S>
+      <S N="Activation">Volume</S>
+      <S N="Build">26200.6584</S>
+      <S N="FileName">26200.6584.250915-1905.25h2_ge_release_svc_refresh_CLIENTBUSINESS_VOL_A64FRE_pl-pl.esd</S>
+      <Nil N="ImageIndex" />
+      <Nil N="ImageName" />
+      <S N="Url">http://dl.delivery.mp.microsoft.com/filestreamingservice/files/c8d1f17e-7596-490e-894b-908dd5d9facc/26200.6584.250915-1905.25h2_ge_release_svc_refresh_CLIENTBUSINESS_VOL_A64FRE_pl-pl.esd</S>
+      <Nil N="SHA1" />
+      <Nil N="UpdateID" />
+      <B N="Win10">false</B>
+      <B N="Win11">true</B>
+    </MS>
+  </Obj>
+  <Obj RefId="430">
+    <TNRef RefId="0" />
+    <MS>
+      <Nil N="Status" />
+      <S N="ReleaseDate">2025-09-15</S>
+      <S N="Name">Windows 11 25H2 ARM64 pt-br Retail 26200.6584</S>
+      <S N="Version">Windows 11</S>
+      <S N="ReleaseID">25H2</S>
+      <S N="Architecture">ARM64</S>
+      <S N="Language">pt-br</S>
+      <S N="Activation">Retail</S>
+      <S N="Build">26200.6584</S>
+      <S N="FileName">26200.6584.250915-1905.25h2_ge_release_svc_refresh_CLIENTCONSUMER_RET_A64FRE_pt-br.esd</S>
+      <Nil N="ImageIndex" />
+      <Nil N="ImageName" />
+      <S N="Url">http://dl.delivery.mp.microsoft.com/filestreamingservice/files/3e7bc8e4-fe1a-4685-916f-eaae0abdc390/26200.6584.250915-1905.25h2_ge_release_svc_refresh_CLIENTCONSUMER_RET_A64FRE_pt-br.esd</S>
+      <Nil N="SHA1" />
+      <Nil N="UpdateID" />
+      <B N="Win10">false</B>
+      <B N="Win11">true</B>
+    </MS>
+  </Obj>
+  <Obj RefId="431">
+    <TNRef RefId="0" />
+    <MS>
+      <Nil N="Status" />
+      <S N="ReleaseDate">2025-09-15</S>
+      <S N="Name">Windows 11 25H2 ARM64 pt-br Volume 26200.6584</S>
+      <S N="Version">Windows 11</S>
+      <S N="ReleaseID">25H2</S>
+      <S N="Architecture">ARM64</S>
+      <S N="Language">pt-br</S>
+      <S N="Activation">Volume</S>
+      <S N="Build">26200.6584</S>
+      <S N="FileName">26200.6584.250915-1905.25h2_ge_release_svc_refresh_CLIENTBUSINESS_VOL_A64FRE_pt-br.esd</S>
+      <Nil N="ImageIndex" />
+      <Nil N="ImageName" />
+      <S N="Url">http://dl.delivery.mp.microsoft.com/filestreamingservice/files/991701af-03da-46c5-80d8-119149f0896d/26200.6584.250915-1905.25h2_ge_release_svc_refresh_CLIENTBUSINESS_VOL_A64FRE_pt-br.esd</S>
+      <Nil N="SHA1" />
+      <Nil N="UpdateID" />
+      <B N="Win10">false</B>
+      <B N="Win11">true</B>
+    </MS>
+  </Obj>
+  <Obj RefId="432">
+    <TNRef RefId="0" />
+    <MS>
+      <Nil N="Status" />
+      <S N="ReleaseDate">2025-09-15</S>
+      <S N="Name">Windows 11 25H2 ARM64 pt-pt Retail 26200.6584</S>
+      <S N="Version">Windows 11</S>
+      <S N="ReleaseID">25H2</S>
+      <S N="Architecture">ARM64</S>
+      <S N="Language">pt-pt</S>
+      <S N="Activation">Retail</S>
+      <S N="Build">26200.6584</S>
+      <S N="FileName">26200.6584.250915-1905.25h2_ge_release_svc_refresh_CLIENTCONSUMER_RET_A64FRE_pt-pt.esd</S>
+      <Nil N="ImageIndex" />
+      <Nil N="ImageName" />
+      <S N="Url">http://dl.delivery.mp.microsoft.com/filestreamingservice/files/2ff1891a-3f41-4a34-bb57-73e76eca8ae3/26200.6584.250915-1905.25h2_ge_release_svc_refresh_CLIENTCONSUMER_RET_A64FRE_pt-pt.esd</S>
+      <Nil N="SHA1" />
+      <Nil N="UpdateID" />
+      <B N="Win10">false</B>
+      <B N="Win11">true</B>
+    </MS>
+  </Obj>
+  <Obj RefId="433">
+    <TNRef RefId="0" />
+    <MS>
+      <Nil N="Status" />
+      <S N="ReleaseDate">2025-09-15</S>
+      <S N="Name">Windows 11 25H2 ARM64 pt-pt Volume 26200.6584</S>
+      <S N="Version">Windows 11</S>
+      <S N="ReleaseID">25H2</S>
+      <S N="Architecture">ARM64</S>
+      <S N="Language">pt-pt</S>
+      <S N="Activation">Volume</S>
+      <S N="Build">26200.6584</S>
+      <S N="FileName">26200.6584.250915-1905.25h2_ge_release_svc_refresh_CLIENTBUSINESS_VOL_A64FRE_pt-pt.esd</S>
+      <Nil N="ImageIndex" />
+      <Nil N="ImageName" />
+      <S N="Url">http://dl.delivery.mp.microsoft.com/filestreamingservice/files/24cf4c74-3a6c-4c34-bb82-2f9d4608345a/26200.6584.250915-1905.25h2_ge_release_svc_refresh_CLIENTBUSINESS_VOL_A64FRE_pt-pt.esd</S>
+      <Nil N="SHA1" />
+      <Nil N="UpdateID" />
+      <B N="Win10">false</B>
+      <B N="Win11">true</B>
+    </MS>
+  </Obj>
+  <Obj RefId="434">
+    <TNRef RefId="0" />
+    <MS>
+      <Nil N="Status" />
+      <S N="ReleaseDate">2025-09-15</S>
+      <S N="Name">Windows 11 25H2 ARM64 ro-ro Retail 26200.6584</S>
+      <S N="Version">Windows 11</S>
+      <S N="ReleaseID">25H2</S>
+      <S N="Architecture">ARM64</S>
+      <S N="Language">ro-ro</S>
+      <S N="Activation">Retail</S>
+      <S N="Build">26200.6584</S>
+      <S N="FileName">26200.6584.250915-1905.25h2_ge_release_svc_refresh_CLIENTCONSUMER_RET_A64FRE_ro-ro.esd</S>
+      <Nil N="ImageIndex" />
+      <Nil N="ImageName" />
+      <S N="Url">http://dl.delivery.mp.microsoft.com/filestreamingservice/files/d022461a-090a-43d5-99da-60dca5fa0bdd/26200.6584.250915-1905.25h2_ge_release_svc_refresh_CLIENTCONSUMER_RET_A64FRE_ro-ro.esd</S>
+      <Nil N="SHA1" />
+      <Nil N="UpdateID" />
+      <B N="Win10">false</B>
+      <B N="Win11">true</B>
+    </MS>
+  </Obj>
+  <Obj RefId="435">
+    <TNRef RefId="0" />
+    <MS>
+      <Nil N="Status" />
+      <S N="ReleaseDate">2025-09-15</S>
+      <S N="Name">Windows 11 25H2 ARM64 ro-ro Volume 26200.6584</S>
+      <S N="Version">Windows 11</S>
+      <S N="ReleaseID">25H2</S>
+      <S N="Architecture">ARM64</S>
+      <S N="Language">ro-ro</S>
+      <S N="Activation">Volume</S>
+      <S N="Build">26200.6584</S>
+      <S N="FileName">26200.6584.250915-1905.25h2_ge_release_svc_refresh_CLIENTBUSINESS_VOL_A64FRE_ro-ro.esd</S>
+      <Nil N="ImageIndex" />
+      <Nil N="ImageName" />
+      <S N="Url">http://dl.delivery.mp.microsoft.com/filestreamingservice/files/84949b7d-1c38-464b-b8d9-b67641d2cd09/26200.6584.250915-1905.25h2_ge_release_svc_refresh_CLIENTBUSINESS_VOL_A64FRE_ro-ro.esd</S>
+      <Nil N="SHA1" />
+      <Nil N="UpdateID" />
+      <B N="Win10">false</B>
+      <B N="Win11">true</B>
+    </MS>
+  </Obj>
+  <Obj RefId="436">
+    <TNRef RefId="0" />
+    <MS>
+      <Nil N="Status" />
+      <S N="ReleaseDate">2025-09-15</S>
+      <S N="Name">Windows 11 25H2 ARM64 ru-ru Retail 26200.6584</S>
+      <S N="Version">Windows 11</S>
+      <S N="ReleaseID">25H2</S>
+      <S N="Architecture">ARM64</S>
+      <S N="Language">ru-ru</S>
+      <S N="Activation">Retail</S>
+      <S N="Build">26200.6584</S>
+      <S N="FileName">26200.6584.250915-1905.25h2_ge_release_svc_refresh_CLIENTCONSUMER_RET_A64FRE_ru-ru.esd</S>
+      <Nil N="ImageIndex" />
+      <Nil N="ImageName" />
+      <S N="Url">http://dl.delivery.mp.microsoft.com/filestreamingservice/files/75dc54fa-9d7b-4cb6-b10d-4a7778855a94/26200.6584.250915-1905.25h2_ge_release_svc_refresh_CLIENTCONSUMER_RET_A64FRE_ru-ru.esd</S>
+      <Nil N="SHA1" />
+      <Nil N="UpdateID" />
+      <B N="Win10">false</B>
+      <B N="Win11">true</B>
+    </MS>
+  </Obj>
+  <Obj RefId="437">
+    <TNRef RefId="0" />
+    <MS>
+      <Nil N="Status" />
+      <S N="ReleaseDate">2025-09-15</S>
+      <S N="Name">Windows 11 25H2 ARM64 ru-ru Volume 26200.6584</S>
+      <S N="Version">Windows 11</S>
+      <S N="ReleaseID">25H2</S>
+      <S N="Architecture">ARM64</S>
+      <S N="Language">ru-ru</S>
+      <S N="Activation">Volume</S>
+      <S N="Build">26200.6584</S>
+      <S N="FileName">26200.6584.250915-1905.25h2_ge_release_svc_refresh_CLIENTBUSINESS_VOL_A64FRE_ru-ru.esd</S>
+      <Nil N="ImageIndex" />
+      <Nil N="ImageName" />
+      <S N="Url">http://dl.delivery.mp.microsoft.com/filestreamingservice/files/589d63eb-5ffe-4362-8fe5-d564c6c032b5/26200.6584.250915-1905.25h2_ge_release_svc_refresh_CLIENTBUSINESS_VOL_A64FRE_ru-ru.esd</S>
+      <Nil N="SHA1" />
+      <Nil N="UpdateID" />
+      <B N="Win10">false</B>
+      <B N="Win11">true</B>
+    </MS>
+  </Obj>
+  <Obj RefId="438">
+    <TNRef RefId="0" />
+    <MS>
+      <Nil N="Status" />
+      <S N="ReleaseDate">2025-09-15</S>
+      <S N="Name">Windows 11 25H2 ARM64 sk-sk Retail 26200.6584</S>
+      <S N="Version">Windows 11</S>
+      <S N="ReleaseID">25H2</S>
+      <S N="Architecture">ARM64</S>
+      <S N="Language">sk-sk</S>
+      <S N="Activation">Retail</S>
+      <S N="Build">26200.6584</S>
+      <S N="FileName">26200.6584.250915-1905.25h2_ge_release_svc_refresh_CLIENTCONSUMER_RET_A64FRE_sk-sk.esd</S>
+      <Nil N="ImageIndex" />
+      <Nil N="ImageName" />
+      <S N="Url">http://dl.delivery.mp.microsoft.com/filestreamingservice/files/3e376114-7072-41d6-97e5-a8bc83a5d1f3/26200.6584.250915-1905.25h2_ge_release_svc_refresh_CLIENTCONSUMER_RET_A64FRE_sk-sk.esd</S>
+      <Nil N="SHA1" />
+      <Nil N="UpdateID" />
+      <B N="Win10">false</B>
+      <B N="Win11">true</B>
+    </MS>
+  </Obj>
+  <Obj RefId="439">
+    <TNRef RefId="0" />
+    <MS>
+      <Nil N="Status" />
+      <S N="ReleaseDate">2025-09-15</S>
+      <S N="Name">Windows 11 25H2 ARM64 sk-sk Volume 26200.6584</S>
+      <S N="Version">Windows 11</S>
+      <S N="ReleaseID">25H2</S>
+      <S N="Architecture">ARM64</S>
+      <S N="Language">sk-sk</S>
+      <S N="Activation">Volume</S>
+      <S N="Build">26200.6584</S>
+      <S N="FileName">26200.6584.250915-1905.25h2_ge_release_svc_refresh_CLIENTBUSINESS_VOL_A64FRE_sk-sk.esd</S>
+      <Nil N="ImageIndex" />
+      <Nil N="ImageName" />
+      <S N="Url">http://dl.delivery.mp.microsoft.com/filestreamingservice/files/a2e8442d-dd6c-4f33-bacd-16942126c129/26200.6584.250915-1905.25h2_ge_release_svc_refresh_CLIENTBUSINESS_VOL_A64FRE_sk-sk.esd</S>
+      <Nil N="SHA1" />
+      <Nil N="UpdateID" />
+      <B N="Win10">false</B>
+      <B N="Win11">true</B>
+    </MS>
+  </Obj>
+  <Obj RefId="440">
+    <TNRef RefId="0" />
+    <MS>
+      <Nil N="Status" />
+      <S N="ReleaseDate">2025-09-15</S>
+      <S N="Name">Windows 11 25H2 ARM64 sl-si Retail 26200.6584</S>
+      <S N="Version">Windows 11</S>
+      <S N="ReleaseID">25H2</S>
+      <S N="Architecture">ARM64</S>
+      <S N="Language">sl-si</S>
+      <S N="Activation">Retail</S>
+      <S N="Build">26200.6584</S>
+      <S N="FileName">26200.6584.250915-1905.25h2_ge_release_svc_refresh_CLIENTCONSUMER_RET_A64FRE_sl-si.esd</S>
+      <Nil N="ImageIndex" />
+      <Nil N="ImageName" />
+      <S N="Url">http://dl.delivery.mp.microsoft.com/filestreamingservice/files/2d92381a-433a-4328-8fa6-198ec66503e6/26200.6584.250915-1905.25h2_ge_release_svc_refresh_CLIENTCONSUMER_RET_A64FRE_sl-si.esd</S>
+      <Nil N="SHA1" />
+      <Nil N="UpdateID" />
+      <B N="Win10">false</B>
+      <B N="Win11">true</B>
+    </MS>
+  </Obj>
+  <Obj RefId="441">
+    <TNRef RefId="0" />
+    <MS>
+      <Nil N="Status" />
+      <S N="ReleaseDate">2025-09-15</S>
+      <S N="Name">Windows 11 25H2 ARM64 sl-si Volume 26200.6584</S>
+      <S N="Version">Windows 11</S>
+      <S N="ReleaseID">25H2</S>
+      <S N="Architecture">ARM64</S>
+      <S N="Language">sl-si</S>
+      <S N="Activation">Volume</S>
+      <S N="Build">26200.6584</S>
+      <S N="FileName">26200.6584.250915-1905.25h2_ge_release_svc_refresh_CLIENTBUSINESS_VOL_A64FRE_sl-si.esd</S>
+      <Nil N="ImageIndex" />
+      <Nil N="ImageName" />
+      <S N="Url">http://dl.delivery.mp.microsoft.com/filestreamingservice/files/2c60a2ba-a1dd-42d7-b552-2b998e254d1c/26200.6584.250915-1905.25h2_ge_release_svc_refresh_CLIENTBUSINESS_VOL_A64FRE_sl-si.esd</S>
+      <Nil N="SHA1" />
+      <Nil N="UpdateID" />
+      <B N="Win10">false</B>
+      <B N="Win11">true</B>
+    </MS>
+  </Obj>
+  <Obj RefId="442">
+    <TNRef RefId="0" />
+    <MS>
+      <Nil N="Status" />
+      <S N="ReleaseDate">2025-09-15</S>
+      <S N="Name">Windows 11 25H2 ARM64 sr-latn-rs Retail 26200.6584</S>
+      <S N="Version">Windows 11</S>
+      <S N="ReleaseID">25H2</S>
+      <S N="Architecture">ARM64</S>
+      <S N="Language">sr-latn-rs</S>
+      <S N="Activation">Retail</S>
+      <S N="Build">26200.6584</S>
+      <S N="FileName">26200.6584.250915-1905.25h2_ge_release_svc_refresh_CLIENTCONSUMER_RET_A64FRE_sr-latn-rs.esd</S>
+      <Nil N="ImageIndex" />
+      <Nil N="ImageName" />
+      <S N="Url">http://dl.delivery.mp.microsoft.com/filestreamingservice/files/8b836c38-68d5-4f96-a324-9be4f5c5fa8a/26200.6584.250915-1905.25h2_ge_release_svc_refresh_CLIENTCONSUMER_RET_A64FRE_sr-latn-rs.esd</S>
+      <Nil N="SHA1" />
+      <Nil N="UpdateID" />
+      <B N="Win10">false</B>
+      <B N="Win11">true</B>
+    </MS>
+  </Obj>
+  <Obj RefId="443">
+    <TNRef RefId="0" />
+    <MS>
+      <Nil N="Status" />
+      <S N="ReleaseDate">2025-09-15</S>
+      <S N="Name">Windows 11 25H2 ARM64 sr-latn-rs Volume 26200.6584</S>
+      <S N="Version">Windows 11</S>
+      <S N="ReleaseID">25H2</S>
+      <S N="Architecture">ARM64</S>
+      <S N="Language">sr-latn-rs</S>
+      <S N="Activation">Volume</S>
+      <S N="Build">26200.6584</S>
+      <S N="FileName">26200.6584.250915-1905.25h2_ge_release_svc_refresh_CLIENTBUSINESS_VOL_A64FRE_sr-latn-rs.esd</S>
+      <Nil N="ImageIndex" />
+      <Nil N="ImageName" />
+      <S N="Url">http://dl.delivery.mp.microsoft.com/filestreamingservice/files/f7e11319-bf68-492b-8b4e-ae7c4ee93621/26200.6584.250915-1905.25h2_ge_release_svc_refresh_CLIENTBUSINESS_VOL_A64FRE_sr-latn-rs.esd</S>
+      <Nil N="SHA1" />
+      <Nil N="UpdateID" />
+      <B N="Win10">false</B>
+      <B N="Win11">true</B>
+    </MS>
+  </Obj>
+  <Obj RefId="444">
+    <TNRef RefId="0" />
+    <MS>
+      <Nil N="Status" />
+      <S N="ReleaseDate">2025-09-15</S>
+      <S N="Name">Windows 11 25H2 ARM64 sv-se Retail 26200.6584</S>
+      <S N="Version">Windows 11</S>
+      <S N="ReleaseID">25H2</S>
+      <S N="Architecture">ARM64</S>
+      <S N="Language">sv-se</S>
+      <S N="Activation">Retail</S>
+      <S N="Build">26200.6584</S>
+      <S N="FileName">26200.6584.250915-1905.25h2_ge_release_svc_refresh_CLIENTCONSUMER_RET_A64FRE_sv-se.esd</S>
+      <Nil N="ImageIndex" />
+      <Nil N="ImageName" />
+      <S N="Url">http://dl.delivery.mp.microsoft.com/filestreamingservice/files/51b0302a-ffa1-4fed-b616-04d3155c1e6c/26200.6584.250915-1905.25h2_ge_release_svc_refresh_CLIENTCONSUMER_RET_A64FRE_sv-se.esd</S>
+      <Nil N="SHA1" />
+      <Nil N="UpdateID" />
+      <B N="Win10">false</B>
+      <B N="Win11">true</B>
+    </MS>
+  </Obj>
+  <Obj RefId="445">
+    <TNRef RefId="0" />
+    <MS>
+      <Nil N="Status" />
+      <S N="ReleaseDate">2025-09-15</S>
+      <S N="Name">Windows 11 25H2 ARM64 sv-se Volume 26200.6584</S>
+      <S N="Version">Windows 11</S>
+      <S N="ReleaseID">25H2</S>
+      <S N="Architecture">ARM64</S>
+      <S N="Language">sv-se</S>
+      <S N="Activation">Volume</S>
+      <S N="Build">26200.6584</S>
+      <S N="FileName">26200.6584.250915-1905.25h2_ge_release_svc_refresh_CLIENTBUSINESS_VOL_A64FRE_sv-se.esd</S>
+      <Nil N="ImageIndex" />
+      <Nil N="ImageName" />
+      <S N="Url">http://dl.delivery.mp.microsoft.com/filestreamingservice/files/bed1dc9d-6dd1-4757-9fc3-39a84099d9e3/26200.6584.250915-1905.25h2_ge_release_svc_refresh_CLIENTBUSINESS_VOL_A64FRE_sv-se.esd</S>
+      <Nil N="SHA1" />
+      <Nil N="UpdateID" />
+      <B N="Win10">false</B>
+      <B N="Win11">true</B>
+    </MS>
+  </Obj>
+  <Obj RefId="446">
+    <TNRef RefId="0" />
+    <MS>
+      <Nil N="Status" />
+      <S N="ReleaseDate">2025-09-15</S>
+      <S N="Name">Windows 11 25H2 ARM64 th-th Retail 26200.6584</S>
+      <S N="Version">Windows 11</S>
+      <S N="ReleaseID">25H2</S>
+      <S N="Architecture">ARM64</S>
+      <S N="Language">th-th</S>
+      <S N="Activation">Retail</S>
+      <S N="Build">26200.6584</S>
+      <S N="FileName">26200.6584.250915-1905.25h2_ge_release_svc_refresh_CLIENTCONSUMER_RET_A64FRE_th-th.esd</S>
+      <Nil N="ImageIndex" />
+      <Nil N="ImageName" />
+      <S N="Url">http://dl.delivery.mp.microsoft.com/filestreamingservice/files/e142424c-fbfb-4aa0-a95c-d50969d22662/26200.6584.250915-1905.25h2_ge_release_svc_refresh_CLIENTCONSUMER_RET_A64FRE_th-th.esd</S>
+      <Nil N="SHA1" />
+      <Nil N="UpdateID" />
+      <B N="Win10">false</B>
+      <B N="Win11">true</B>
+    </MS>
+  </Obj>
+  <Obj RefId="447">
+    <TNRef RefId="0" />
+    <MS>
+      <Nil N="Status" />
+      <S N="ReleaseDate">2025-09-15</S>
+      <S N="Name">Windows 11 25H2 ARM64 th-th Volume 26200.6584</S>
+      <S N="Version">Windows 11</S>
+      <S N="ReleaseID">25H2</S>
+      <S N="Architecture">ARM64</S>
+      <S N="Language">th-th</S>
+      <S N="Activation">Volume</S>
+      <S N="Build">26200.6584</S>
+      <S N="FileName">26200.6584.250915-1905.25h2_ge_release_svc_refresh_CLIENTBUSINESS_VOL_A64FRE_th-th.esd</S>
+      <Nil N="ImageIndex" />
+      <Nil N="ImageName" />
+      <S N="Url">http://dl.delivery.mp.microsoft.com/filestreamingservice/files/79bbcbc1-8639-4278-8df2-a0ebc442c310/26200.6584.250915-1905.25h2_ge_release_svc_refresh_CLIENTBUSINESS_VOL_A64FRE_th-th.esd</S>
+      <Nil N="SHA1" />
+      <Nil N="UpdateID" />
+      <B N="Win10">false</B>
+      <B N="Win11">true</B>
+    </MS>
+  </Obj>
+  <Obj RefId="448">
+    <TNRef RefId="0" />
+    <MS>
+      <Nil N="Status" />
+      <S N="ReleaseDate">2025-09-15</S>
+      <S N="Name">Windows 11 25H2 ARM64 tr-tr Retail 26200.6584</S>
+      <S N="Version">Windows 11</S>
+      <S N="ReleaseID">25H2</S>
+      <S N="Architecture">ARM64</S>
+      <S N="Language">tr-tr</S>
+      <S N="Activation">Retail</S>
+      <S N="Build">26200.6584</S>
+      <S N="FileName">26200.6584.250915-1905.25h2_ge_release_svc_refresh_CLIENTCONSUMER_RET_A64FRE_tr-tr.esd</S>
+      <Nil N="ImageIndex" />
+      <Nil N="ImageName" />
+      <S N="Url">http://dl.delivery.mp.microsoft.com/filestreamingservice/files/b4c24f13-95dd-4527-92e5-8e0910e34189/26200.6584.250915-1905.25h2_ge_release_svc_refresh_CLIENTCONSUMER_RET_A64FRE_tr-tr.esd</S>
+      <Nil N="SHA1" />
+      <Nil N="UpdateID" />
+      <B N="Win10">false</B>
+      <B N="Win11">true</B>
+    </MS>
+  </Obj>
+  <Obj RefId="449">
+    <TNRef RefId="0" />
+    <MS>
+      <Nil N="Status" />
+      <S N="ReleaseDate">2025-09-15</S>
+      <S N="Name">Windows 11 25H2 ARM64 tr-tr Volume 26200.6584</S>
+      <S N="Version">Windows 11</S>
+      <S N="ReleaseID">25H2</S>
+      <S N="Architecture">ARM64</S>
+      <S N="Language">tr-tr</S>
+      <S N="Activation">Volume</S>
+      <S N="Build">26200.6584</S>
+      <S N="FileName">26200.6584.250915-1905.25h2_ge_release_svc_refresh_CLIENTBUSINESS_VOL_A64FRE_tr-tr.esd</S>
+      <Nil N="ImageIndex" />
+      <Nil N="ImageName" />
+      <S N="Url">http://dl.delivery.mp.microsoft.com/filestreamingservice/files/ecf4cf11-832c-472f-bfbd-7b1f3f4dbcd4/26200.6584.250915-1905.25h2_ge_release_svc_refresh_CLIENTBUSINESS_VOL_A64FRE_tr-tr.esd</S>
+      <Nil N="SHA1" />
+      <Nil N="UpdateID" />
+      <B N="Win10">false</B>
+      <B N="Win11">true</B>
+    </MS>
+  </Obj>
+  <Obj RefId="450">
+    <TNRef RefId="0" />
+    <MS>
+      <Nil N="Status" />
+      <S N="ReleaseDate">2025-09-15</S>
+      <S N="Name">Windows 11 25H2 ARM64 uk-ua Retail 26200.6584</S>
+      <S N="Version">Windows 11</S>
+      <S N="ReleaseID">25H2</S>
+      <S N="Architecture">ARM64</S>
+      <S N="Language">uk-ua</S>
+      <S N="Activation">Retail</S>
+      <S N="Build">26200.6584</S>
+      <S N="FileName">26200.6584.250915-1905.25h2_ge_release_svc_refresh_CLIENTCONSUMER_RET_A64FRE_uk-ua.esd</S>
+      <Nil N="ImageIndex" />
+      <Nil N="ImageName" />
+      <S N="Url">http://dl.delivery.mp.microsoft.com/filestreamingservice/files/4977bdfb-323d-4488-9934-f92bfac29b38/26200.6584.250915-1905.25h2_ge_release_svc_refresh_CLIENTCONSUMER_RET_A64FRE_uk-ua.esd</S>
+      <Nil N="SHA1" />
+      <Nil N="UpdateID" />
+      <B N="Win10">false</B>
+      <B N="Win11">true</B>
+    </MS>
+  </Obj>
+  <Obj RefId="451">
+    <TNRef RefId="0" />
+    <MS>
+      <Nil N="Status" />
+      <S N="ReleaseDate">2025-09-15</S>
+      <S N="Name">Windows 11 25H2 ARM64 uk-ua Volume 26200.6584</S>
+      <S N="Version">Windows 11</S>
+      <S N="ReleaseID">25H2</S>
+      <S N="Architecture">ARM64</S>
+      <S N="Language">uk-ua</S>
+      <S N="Activation">Volume</S>
+      <S N="Build">26200.6584</S>
+      <S N="FileName">26200.6584.250915-1905.25h2_ge_release_svc_refresh_CLIENTBUSINESS_VOL_A64FRE_uk-ua.esd</S>
+      <Nil N="ImageIndex" />
+      <Nil N="ImageName" />
+      <S N="Url">http://dl.delivery.mp.microsoft.com/filestreamingservice/files/a346be7f-53c6-4e05-8606-8f3a1cf767d2/26200.6584.250915-1905.25h2_ge_release_svc_refresh_CLIENTBUSINESS_VOL_A64FRE_uk-ua.esd</S>
+      <Nil N="SHA1" />
+      <Nil N="UpdateID" />
+      <B N="Win10">false</B>
+      <B N="Win11">true</B>
+    </MS>
+  </Obj>
+  <Obj RefId="452">
+    <TNRef RefId="0" />
+    <MS>
+      <Nil N="Status" />
+      <S N="ReleaseDate">2025-09-15</S>
+      <S N="Name">Windows 11 25H2 ARM64 zh-cn Retail 26200.6584</S>
+      <S N="Version">Windows 11</S>
+      <S N="ReleaseID">25H2</S>
+      <S N="Architecture">ARM64</S>
+      <S N="Language">zh-cn</S>
+      <S N="Activation">Retail</S>
+      <S N="Build">26200.6584</S>
+      <S N="FileName">26200.6584.250915-1905.25h2_ge_release_svc_refresh_CLIENTCONSUMER_RET_A64FRE_zh-cn.esd</S>
+      <Nil N="ImageIndex" />
+      <Nil N="ImageName" />
+      <S N="Url">http://dl.delivery.mp.microsoft.com/filestreamingservice/files/07c122b3-486a-42a3-a823-7fdb052b03ae/26200.6584.250915-1905.25h2_ge_release_svc_refresh_CLIENTCONSUMER_RET_A64FRE_zh-cn.esd</S>
+      <Nil N="SHA1" />
+      <Nil N="UpdateID" />
+      <B N="Win10">false</B>
+      <B N="Win11">true</B>
+    </MS>
+  </Obj>
+  <Obj RefId="453">
+    <TNRef RefId="0" />
+    <MS>
+      <Nil N="Status" />
+      <S N="ReleaseDate">2025-09-15</S>
+      <S N="Name">Windows 11 25H2 ARM64 zh-cn Volume 26200.6584</S>
+      <S N="Version">Windows 11</S>
+      <S N="ReleaseID">25H2</S>
+      <S N="Architecture">ARM64</S>
+      <S N="Language">zh-cn</S>
+      <S N="Activation">Volume</S>
+      <S N="Build">26200.6584</S>
+      <S N="FileName">26200.6584.250915-1905.25h2_ge_release_svc_refresh_CLIENTBUSINESS_VOL_A64FRE_zh-cn.esd</S>
+      <Nil N="ImageIndex" />
+      <Nil N="ImageName" />
+      <S N="Url">http://dl.delivery.mp.microsoft.com/filestreamingservice/files/efa1d2f8-0582-4ba5-85cb-fa7d8484eb2e/26200.6584.250915-1905.25h2_ge_release_svc_refresh_CLIENTBUSINESS_VOL_A64FRE_zh-cn.esd</S>
+      <Nil N="SHA1" />
+      <Nil N="UpdateID" />
+      <B N="Win10">false</B>
+      <B N="Win11">true</B>
+    </MS>
+  </Obj>
+  <Obj RefId="454">
+    <TNRef RefId="0" />
+    <MS>
+      <Nil N="Status" />
+      <S N="ReleaseDate">2025-09-15</S>
+      <S N="Name">Windows 11 25H2 ARM64 zh-tw Retail 26200.6584</S>
+      <S N="Version">Windows 11</S>
+      <S N="ReleaseID">25H2</S>
+      <S N="Architecture">ARM64</S>
+      <S N="Language">zh-tw</S>
+      <S N="Activation">Retail</S>
+      <S N="Build">26200.6584</S>
+      <S N="FileName">26200.6584.250915-1905.25h2_ge_release_svc_refresh_CLIENTCONSUMER_RET_A64FRE_zh-tw.esd</S>
+      <Nil N="ImageIndex" />
+      <Nil N="ImageName" />
+      <S N="Url">http://dl.delivery.mp.microsoft.com/filestreamingservice/files/d1d3df63-60c2-4fa4-aaa7-9d143c2d05cd/26200.6584.250915-1905.25h2_ge_release_svc_refresh_CLIENTCONSUMER_RET_A64FRE_zh-tw.esd</S>
+      <Nil N="SHA1" />
+      <Nil N="UpdateID" />
+      <B N="Win10">false</B>
+      <B N="Win11">true</B>
+    </MS>
+  </Obj>
+  <Obj RefId="455">
+    <TNRef RefId="0" />
+    <MS>
+      <Nil N="Status" />
+      <S N="ReleaseDate">2025-09-15</S>
+      <S N="Name">Windows 11 25H2 ARM64 zh-tw Volume 26200.6584</S>
+      <S N="Version">Windows 11</S>
+      <S N="ReleaseID">25H2</S>
+      <S N="Architecture">ARM64</S>
+      <S N="Language">zh-tw</S>
+      <S N="Activation">Volume</S>
+      <S N="Build">26200.6584</S>
+      <S N="FileName">26200.6584.250915-1905.25h2_ge_release_svc_refresh_CLIENTBUSINESS_VOL_A64FRE_zh-tw.esd</S>
+      <Nil N="ImageIndex" />
+      <Nil N="ImageName" />
+      <S N="Url">http://dl.delivery.mp.microsoft.com/filestreamingservice/files/98c4f1cd-ce41-4daa-9104-6e9a2987d105/26200.6584.250915-1905.25h2_ge_release_svc_refresh_CLIENTBUSINESS_VOL_A64FRE_zh-tw.esd</S>
+      <Nil N="SHA1" />
+      <Nil N="UpdateID" />
+      <B N="Win10">false</B>
+      <B N="Win11">true</B>
+    </MS>
+  </Obj>
 </Objs>
