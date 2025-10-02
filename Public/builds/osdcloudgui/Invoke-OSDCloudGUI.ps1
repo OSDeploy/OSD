@@ -1550,18 +1550,18 @@
                         Continue
                     }
                     #=================================================
+                    #   HP Softpaq
+                    #=================================================
+                    if (($Item.Extension -eq '.exe') -and ($Item.VersionInfo.InternalName -match 'hpsoftpaqwrapper')) {
+                        Step-OSDCloudWinpeDriverPackHp -FileInfo $Item
+                        Continue
+                    }
+                    #=================================================
                     #   Lenovo
                     #   SetupSpecialize.cmd
                     #=================================================
                     if (($Item.Extension -eq '.exe') -and ($Item.VersionInfo.FileDescription -match 'Lenovo')) {
                         Step-OSDCloudWinpeDriverPackLenovo -FileInfo $Item
-                        Continue
-                    }
-                    #=================================================
-                    #   HP Softpaq
-                    #=================================================
-                    if (($Item.Extension -eq '.exe') -and ($Item.VersionInfo.InternalName -match 'hpsoftpaqwrapper')) {
-                        Step-OSDCloudWinpeDriverPackHp -FileInfo $Item
                         Continue
                     }
                     #=================================================

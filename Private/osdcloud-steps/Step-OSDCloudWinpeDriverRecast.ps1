@@ -10,19 +10,11 @@ function Step-OSDCloudWinpeDriverRecast {
     if (-not (Test-Path "$ExpandPath")) {
         New-Item $ExpandPath -ItemType Directory -Force -ErrorAction Ignore | Out-Null
     }
-
-    $ScriptsPath = "C:\Windows\Setup\Scripts"
-    if (-not (Test-Path $ScriptsPath)) {
-        New-Item -Path $ScriptsPath -ItemType Directory -Force -ErrorAction Ignore | Out-Null
-    }
     
     $LogPath = "C:\Windows\Temp\osdcloud-logs"
     if (-not (Test-Path -Path $LogPath)) {
         New-Item -ItemType Directory -Path $LogPath -Force | Out-Null
     }
-    
-    $SetupCompleteCmd = "$ScriptsPath\SetupComplete.cmd"
-    $SetupSpecializeCmd = "C:\Windows\Temp\osdcloud\SetupSpecialize.cmd"
     #=================================================
     # Gather In-Use Drivers
     $PnputilXml = & pnputil.exe /enum-devices /format xml
