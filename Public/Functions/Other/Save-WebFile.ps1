@@ -11,7 +11,7 @@ function Save-WebFile {
     [OutputType([System.IO.FileInfo])]
     param
     (
-        [Parameter(Position=0, Mandatory, ValueFromPipelineByPropertyName)]
+        [Parameter(Position = 0, Mandatory, ValueFromPipelineByPropertyName)]
         [Alias('FileUri')]
         [System.String]
         $SourceUrl,
@@ -44,8 +44,7 @@ function Save-WebFile {
     #=================================================
     #	DestinationDirectory
     #=================================================
-    if (Test-Path "$DestinationDirectory")
-    {
+    if (Test-Path "$DestinationDirectory") {
         Write-Verbose "Directory already exists at $DestinationDirectory"
     }
     else {
@@ -62,8 +61,8 @@ function Save-WebFile {
         Remove-Item -Path $DestinationNewItem.FullName -Force | Out-Null
     }
     else {
-        Write-Warning "Unable to write to Destination Directory"
-        Break
+        Write-Warning 'Unable to write to Destination Directory'
+        break
     }
     #=================================================
     #	DestinationName
@@ -83,8 +82,8 @@ function Save-WebFile {
     #=================================================
     #	OverWrite
     #=================================================
-    if ((-NOT ($PSBoundParameters['Overwrite'])) -and (Test-Path $DestinationFullName)) {
-        Write-Verbose "DestinationFullName already exists"
+    if ((-not ($PSBoundParameters['Overwrite'])) -and (Test-Path $DestinationFullName)) {
+        Write-Verbose 'DestinationFullName already exists'
         Get-Item $DestinationFullName -Force
     }
     else {
@@ -116,13 +115,57 @@ function Save-WebFile {
         else {
             Write-Verbose "cURL Source: $SourceUrl"
             Write-Verbose "Destination: $DestinationFullName"
+
+            Write-Verbose 'Requesing HTTP HEAD to get Content-Length and Accept-Ranges header'
+            $remote = Invoke-WebRequest -UseBasicParsing -Method Head -Uri $SourceUrl
+            $remoteLength = $remote.Headers.'Content-Length'
+            $remoteAcceptsRanges = ($remote.Headers.'Accept-Ranges' | Select-Object -First 1) -eq 'bytes'
+
+            $curlCommandExpression = "& curl.exe --insecure --location --output `"$DestinationFullName`" --url `"$SourceUrl`""
     
-            if ($host.name -match 'ConsoleHost') {
-                Invoke-Expression "& curl.exe --insecure --location --output `"$DestinationFullName`" --url `"$SourceUrl`""
+            if ($host.name -match 'PowerShell ISE Host') {
+                #PowerShell ISE will display a NativeCommandError, so progress will not be displayed
+                $Quiet = Invoke-Expression ($curlCommandExpression + ' 2>&1')
             }
             else {
-                #PowerShell ISE will display a NativeCommandError, so progress will not be displayed
-                $Quiet = Invoke-Expression "& curl.exe --insecure --location --output `"$DestinationFullName`" --url `"$SourceUrl`" 2>&1"
+                Invoke-Expression $curlCommandExpression
+            }
+
+            #=================================================
+            #	Continue interrupted download
+            #=================================================
+            if (Test-Path $DestinationFullName) {
+                $localExists = $true
+            }
+
+            $RetryDelaySeconds = 1
+            $MaxRetryCount = 10
+            $RetryCount = 0
+            while (
+                $localExists `
+                    -and ((Get-Item $DestinationFullName).Length -lt $remoteLength) `
+                    -and $remoteAcceptsRanges `
+                    -and ($RetryCount -lt $MaxRetryCount)
+            ) {
+                Write-Verbose "Download is incomplete, remote server accepts ranges, will retry in $RetryDelaySeconds second(s)"
+                Start-Sleep -Seconds $RetryDelaySeconds
+                $RetryDelaySeconds *= 2 # retry with exponential backoff
+                $RetryCount += 1
+                $curlCommandExpression = "& curl.exe --insecure --location --continue-at - --output `"$DestinationFullName`" --url `"$SourceUrl`""
+                
+                if ($host.name -match 'PowerShell ISE Host') {
+                    #PowerShell ISE will display a NativeCommandError, so progress will not be displayed
+                    $Quiet = Invoke-Expression ($curlCommandExpression + ' 2>&1')
+                }
+                else {
+                    Invoke-Expression $curlCommandExpression
+                }
+            }
+
+            if ($localExists -and ((Get-Item $DestinationFullName).Length -lt $remoteLength)) {
+                Write-Verbose "Download is incomplete after $RetryCount retries."
+                Write-Warning "Could not download $DestinationFullName"
+                $null
             }
         }
         #=================================================
