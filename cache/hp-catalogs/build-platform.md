@@ -3,9 +3,9 @@
 | | |
 |-|-|
 | Owner | David Segura |
-| Build Version | 25.10.13.3 |
+| Build Version | 25.10.14.4 |
 | PowerShell Module | OSD.Build |
 | PowerShell Function | Build-OSDCatalogHPPlatform |
 | Files | build-platform.* |
 | Build Workflow | GitHub Actions |
-| Last Update | Monday, October 13, 2025 10:04:31 PM UTC |
+| Last Update | Wednesday, October 15, 2025 5:05:04 AM UTC |
