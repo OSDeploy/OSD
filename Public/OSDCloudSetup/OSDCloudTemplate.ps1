@@ -1014,7 +1014,8 @@ Windows Registry Editor Version 5.00
         'Config\Scripts\SetupComplete',
         'Config\Scripts\Shutdown',
         'Config\Scripts\Startup',
-        'Config\Scripts\StartNet'
+        'Config\Scripts\StartNet',
+        'Config\Scripts\StartNet2'
     )
     
     if ($Name -match 'public') {
