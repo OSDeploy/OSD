@@ -8,4 +8,4 @@
 | PowerShell Function | Build-OSDCatalogDriverPacks |
 | Files | build-driverpacks.* |
 | Build Workflow | GitHub Actions |
-| Last Update | Wednesday, October 29, 2025 5:51:52 PM UTC |
+| Last Update | Wednesday, October 29, 2025 10:10:06 PM UTC |
