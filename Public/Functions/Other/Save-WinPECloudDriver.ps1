@@ -49,7 +49,6 @@ function Save-WinPECloudDriver {
     $HpCloudDriverPack                  = Get-HpWinPEDriverPack
 
     $OSDCatalogIntelEthernetDriver      = Get-IntelEthernetDriverPack | `
-                                        Where-Object {($_.OSVersion -match '10.0')} | `
                                         Where-Object {($_.OSArch -match 'x64')} | `
                                         Select-Object -First 1
     $IntelEthernetCloudDriverUrl        = $OSDCatalogIntelEthernetDriver.DriverUrl
@@ -57,7 +56,6 @@ function Save-WinPECloudDriver {
     $IntelEthernetCloudDriverText       = "Intel Ethernet Driver Pack [$IntelEthernetCloudDriverVersion] $IntelEthernetCloudDriverUrl"
 
     $OSDCatalogIntelWirelessDriver      = Get-IntelWirelessDriverPack | `
-                                        Where-Object {($_.OSVersion -match '10.0')} | `
                                         Where-Object {($_.OSArch -match 'x64')} | `
                                         Select-Object -First 1
     $IntelWiFiCloudDriverUrl            = $OSDCatalogIntelWirelessDriver.DriverUrl
@@ -198,8 +196,9 @@ function Save-WinPECloudDriver {
         #=================================================
         #   Dell
         #=================================================
-        if ($DriverPack -eq 'Dell'){
-            Write-Host -ForegroundColor Yellow "[$(Get-Date -format G)] $DellCloudDriverText"
+        if ($DriverPack -eq 'Dell') {
+            Write-Host -ForegroundColor DarkGray "========================================================================="
+            Write-Host -ForegroundColor DarkGray "[$(Get-Date -format G)] $DellCloudDriverText"
 
             if (Test-WebConnection -Uri $DellCloudDriverPack) {
                 $DriverPackDownload = Save-WebFile -SourceUrl $DellCloudDriverPack
@@ -226,7 +225,8 @@ function Save-WinPECloudDriver {
         #   HP
         #=================================================
         if ($DriverPack -eq 'HP') {
-            Write-Host -ForegroundColor Yellow "[$(Get-Date -format G)] $HpCloudDriverText"
+            Write-Host -ForegroundColor DarkGray "========================================================================="
+            Write-Host -ForegroundColor DarkGray "[$(Get-Date -format G)] $HpCloudDriverText"
             if ($null -eq $HpCloudDriverPack){
                 Write-Warning "Unable to determine HP Driver Pack URL"
                 Write-Warning "Check Get-HPWinPEDriverPack function"
@@ -250,9 +250,13 @@ function Save-WinPECloudDriver {
         #   Intel Ethernet
         #=================================================
         if ($DriverPack -eq 'IntelNet') {
-            Write-Host -ForegroundColor Yellow "[$(Get-Date -format G)] $IntelEthernetCloudDriverText"
+            Write-Host -ForegroundColor DarkGray "========================================================================="
+            Write-Host -ForegroundColor DarkGray "[$(Get-Date -format G)] $IntelEthernetCloudDriverText"
 
-            if (Test-WebConnection -Uri $IntelEthernetCloudDriverUrl)   {
+            if ($null -eq $IntelEthernetCloudDriverUrl) {
+                Write-Warning "Unable to connect to get Intel Net URL"
+            }
+            elseif (Test-WebConnection -Uri $IntelEthernetCloudDriverUrl) {
                 $DriverPackDownload = Save-WebFile -SourceUrl $IntelEthernetCloudDriverUrl
                    if (Test-Path $DriverPackDownload.FullName) {
                     $DriverPackItem = Get-Item -Path $DriverPackDownload.FullName
@@ -281,7 +285,8 @@ function Save-WinPECloudDriver {
         #   Intel WiFi
         #=================================================
         if ($DriverPack -eq 'WiFi') {
-            Write-Host -ForegroundColor Yellow $IntelWiFiCloudDriverText
+            Write-Host -ForegroundColor DarkGray "========================================================================="
+            Write-Host -ForegroundColor DarkGray "[$(Get-Date -format G)] $IntelWiFiCloudDriverText"
             if (Test-WebConnection -Uri $IntelWiFiCloudDriverUrl) {
                 $DriverPackDownload = Save-WebFile -SourceUrl $IntelWiFiCloudDriverUrl
                 if (Test-Path $DriverPackDownload.FullName) {
@@ -298,7 +303,8 @@ function Save-WinPECloudDriver {
         #   LenovoDock
         #=================================================
         if ($DriverPack -eq 'LenovoDock') {
-            Write-Host -ForegroundColor Yellow "[$(Get-Date -format G)] $LenovoDockCloudDriverText"
+            Write-Host -ForegroundColor DarkGray "========================================================================="
+            Write-Host -ForegroundColor DarkGray "[$(Get-Date -format G)] $LenovoDockCloudDriverText"
 
             foreach ($OnlineDriver in $LenovoDockCloudDriverUrl) {
                 if (Test-WebConnection -Uri $OnlineDriver) {
@@ -321,28 +327,32 @@ function Save-WinPECloudDriver {
         #   Nutanix
         #=================================================
         if ($DriverPack -eq 'Nutanix') {
-            Write-Host -ForegroundColor Yellow "[$(Get-Date -format G)] $NutanixCloudDriverText"
+            Write-Host -ForegroundColor DarkGray "========================================================================="
+            Write-Host -ForegroundColor DarkGray "[$(Get-Date -format G)] $NutanixCloudDriverText"
             Save-MsUpCatDriver -HardwareID $NutanixCloudDriverHwids -DestinationDirectory (Join-Path $Path $DriverPack)
         }
         #=================================================
         #   Surface
         #=================================================
         if ($DriverPack -eq 'Surface') {
-            Write-Host -ForegroundColor Yellow "[$(Get-Date -format G)] $SurfaceCloudDriverText"
+            Write-Host -ForegroundColor DarkGray "========================================================================="
+            Write-Host -ForegroundColor DarkGray "[$(Get-Date -format G)] $SurfaceCloudDriverText"
             Save-MsUpCatDriver -HardwareID $SurfaceCloudDriverHwids -DestinationDirectory (Join-Path $Path $DriverPack)
         }
         #=================================================
         #   USB Dongles
         #=================================================
         if ($DriverPack -eq 'USB') {
-            Write-Host -ForegroundColor Yellow "[$(Get-Date -format G)] $UsbDongleHwidsText"
+            Write-Host -ForegroundColor DarkGray "========================================================================="
+            Write-Host -ForegroundColor DarkGray "[$(Get-Date -format G)] $UsbDongleHwidsText"
             Save-MsUpCatDriver -HardwareID $UsbDongleHwids -DestinationDirectory (Join-Path $Path $DriverPack)
         }
         #=================================================
         #   VMware
         #=================================================
         if ($DriverPack -eq 'VMware') {
-            Write-Host -ForegroundColor Yellow "[$(Get-Date -format G)] $VmwareCloudDriverText"
+            Write-Host -ForegroundColor DarkGray "========================================================================="
+            Write-Host -ForegroundColor DarkGray "[$(Get-Date -format G)] $VmwareCloudDriverText"
             Save-MsUpCatDriver -HardwareID $VmwareCloudDriverHwids -DestinationDirectory (Join-Path $Path $DriverPack)
         }
     }

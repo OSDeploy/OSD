@@ -1,14 +1,105 @@
-﻿function Start-OSDCloud {
-    <#
-    .SYNOPSIS
-    Starts the OSDCloud Windows 10 or 11 Build Process from the OSD Module or a GitHub Repository
+﻿<#
+.SYNOPSIS
+    Prepare and start an OSDCloud deployment session (selects image, language, edition and other options).
 
-    .DESCRIPTION
-    Starts the OSDCloud Windows 10 or 11 Build Process from the OSD Module or a GitHub Repository
+.DESCRIPTION
+    Start-OSDCloud gathers system information, validates prerequisites (PowerShell version, network, 
+    presence of required utilities), and prepares a global configuration used by the OSDCloud workflow.
+    It can select a Windows Feature Update image from local catalogs or an image URL, prompt the user
+    for OS version/build/edition/culture when needed, and then calls Invoke-OSDCloud to run the deployment.
 
-    .LINK
-    https://github.com/OSDeploy/OSD/tree/master/Docs
-    #>
+    The function supports three parameter sets:
+    - Default: Choose a Windows feature update by name (recommended for normal interactive use).
+    - Legacy: Older style parameters (OSVersion + OSBuild) for backward compatibility.
+    - CustomImage: Use a custom WIM/ESD image from disk or a provided URL.
+
+.PARAMETER Manufacturer
+    (Optional) Computer manufacturer string. Automatically populated from Get-MyComputerManufacturer -Brief.
+
+.PARAMETER Product
+    (Optional) Computer product string. Automatically populated from Get-MyComputerProduct.
+
+.PARAMETER Firmware
+    Switch. When set, instructs the module to include firmware (MSC) catalog scanning.
+
+.PARAMETER Restart
+    Switch. Restart the computer after the deployment finishes.
+
+.PARAMETER Shutdown
+    Switch. Shutdown the computer after the deployment finishes.
+
+.PARAMETER Screenshot
+    Switch. Capture screenshots during OSDCloud WinPE using Start-ScreenPNGProcess. Screenshots are saved
+    to $env:TEMP\Screenshots by default.
+
+.PARAMETER SkipAutopilot
+    Switch. Skip AutoPilot enrollment tasks during the workflow.
+
+.PARAMETER SkipODT
+    Switch. Skip running the Office Deployment Tool (ODT) tasks.
+
+.PARAMETER ZTI
+    Switch. Zero-touch install mode (ZTI). When set, disk wipes proceed automatically without prompting.
+
+.PARAMETER OSName
+    (Default parameter set) A validated OS selection string such as 'Windows 11 25H2 x64'. If omitted the
+    function prompts interactively (unless ZTI is used which selects sensible defaults).
+
+.PARAMETER OSVersion
+    (Legacy parameter set) Operating system family, e.g. 'Windows 11' or 'Windows 10'.
+
+.PARAMETER OSBuild
+    (Legacy parameter set) Operating system build (alias: Build) such as '25H2','24H2','23H2','22H2'.
+
+.PARAMETER OSEdition
+    Edition of Windows to install (e.g. 'Enterprise', 'Pro', 'Home'). Affects edition mapping and activation
+    type (Retail vs Volume).
+
+.PARAMETER OSLanguage
+    Language/culture tag to install (for example 'en-us', 'fr-fr', 'zh-cn').
+
+.PARAMETER OSActivation
+    License type for the installation. Valid values are 'Retail' or 'Volume'.
+
+.PARAMETER FindImageFile
+    (CustomImage parameter set) Switch to prompt for a WIM/ESD file on removable media.
+
+.PARAMETER ImageFileUrl
+    (CustomImage parameter set) URL to download a custom image if not available locally.
+
+.PARAMETER OSImageIndex
+    (CustomImage parameter set) Image index within a WIM/ESD. Default is 0.
+
+.INPUTS
+    None. The function does not accept pipeline input.
+
+.OUTPUTS
+    This function populates the global variable $Global:StartOSDCloud (an ordered hashtable) with the
+    selected configuration and then invokes Invoke-OSDCloud. It does not return structured objects to the
+    pipeline beyond writing progress and informational messages.
+
+.EXAMPLES
+    # Interactive: choose image and options via menus
+    Start-OSDCloud
+
+    # Non-interactive: specify OS selection and suppress autopilot
+    Start-OSDCloud -OSName 'Windows 11 25H2 x64' -OSEdition Enterprise -OSLanguage en-us -SkipAutopilot
+
+    # Use a custom image URL
+    Start-OSDCloud -FindImageFile -ImageFileUrl 'https://server.example.com/images/install.wim' -OSImageIndex 1
+
+.NOTES
+    - Requires the OSD module helper functions used by the workflow (Get-FeatureUpdate, Invoke-OSDCloud, 
+      Find-OSDCloudFile, Get-MyComputerManufacturer, Get-MyComputerProduct, Start-ScreenPNGProcess, etc.).
+    - This function changes global state: $Global:StartOSDCloud and may interact with $Global:StartOSDCloudGUI.
+    - Intended to be run in WinPE or full Windows with administrative privileges.
+
+.LINK
+    Invoke-OSDCloud
+    Get-FeatureUpdate
+    Find-OSDCloudFile
+#>
+function Start-OSDCloud {
 
     [CmdletBinding(DefaultParameterSetName = 'Default')]
     param (

@@ -1,0 +1,23 @@
+{
+    "OSDVersion": "25.11.13.1",
+    "LastUpdate": "2025-11-13T00:00:00Z",
+    "OSDStatus": "",
+    "OSDType": "Driver",
+    "OSDGroup": "IntelEthernet",
+    "DriverName": "Network Adapter Driver for Microsoft Windows 11",
+    "DriverVersion": "30.5",
+    "OsVersion": [
+      "11.0"
+    ],
+    "OsArch": [
+      "x64"
+    ],
+    "DriverGrouping": "Intel Ethernet",
+    "DownloadFile": "Wired_driver_30.5_x64.zip",
+    "DriverUrl": "https://downloadmirror.intel.com/868133/Wired_driver_30.5_x64.zip",
+    "DriverInfo": "https://www.intel.com/content/www/us/en/download/727998/868133/intel-network-adapter-driver-for-microsoft-windows-11.html",
+    "DriverDescription": "This download record installs drivers for Intel Network Adapters using Microsoft Windows 11",
+    "OSDGuid": "ed92ecae-1563-4391-9e48-d9ba142c09c7",
+    "OSDPnpClass": "Net",
+    "OSDPnpClassGuid": "{4D36E972-E325-11CE-BFC1-08002BE10318}"
+  }

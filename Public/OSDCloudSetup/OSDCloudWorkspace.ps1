@@ -238,7 +238,7 @@ function New-OSDCloudWorkspace {
 
     #region Logs and Transcript
     $WorkspaceLogs = "$WorkspacePath\Logs\Workspace"
-    Write-Verbose "[$(Get-Date -format G)] Creating OSDCloud Workspace Logs at $WorkspaceLogs"
+    Write-Host -ForegroundColor DarkGray "[$(Get-Date -format G)] Creating OSDCloud Workspace Logs at $WorkspaceLogs"
 
     if (Test-Path $WorkspaceLogs) {
         $null = Remove-Item -Path "$WorkspaceLogs\*" -Recurse -Force -ErrorAction Ignore | Out-Null
@@ -257,18 +257,18 @@ function New-OSDCloudWorkspace {
         #	Copy WorkspacePath
         #=================================================
         Write-Host -ForegroundColor DarkGray "[$(Get-Date -format G)] Copying from OSDCloud Template at $OSDCloudTemplate"
-        Write-Verbose "[$(Get-Date -format G)] Source: $OSDCloudTemplate"
-        Write-Verbose "[$(Get-Date -format G)] Destination: $WorkspacePath"
+        Write-Host -ForegroundColor DarkGray "[$(Get-Date -format G)] Source: $OSDCloudTemplate"
+        Write-Host -ForegroundColor DarkGray "[$(Get-Date -format G)] Destination: $WorkspacePath"
     
         $null = robocopy "$OSDCloudTemplate" "$WorkspacePath" *.* /e /b /ndl /np /r:0 /w:0 /xj /xf workspace.json /LOG+:$WorkspaceLogs\Robocopy.log
         #=================================================
         #	Mirror Media
         #=================================================
-        Write-Verbose "[$(Get-Date -format G)] Mirroring OSDCloud Template Media using Robocopy"
-        Write-Verbose "[$(Get-Date -format G)] Mirroring will replace any previous WinPE with a new Template WinPE"
-        Write-Verbose "[$(Get-Date -format G)] Directories named OSDCloud are updated"
-        Write-Verbose "[$(Get-Date -format G)] Source: $OSDCloudTemplate\Media"
-        Write-Verbose "[$(Get-Date -format G)] Destination: $WorkspacePath\Media"
+        Write-Host -ForegroundColor DarkGray "[$(Get-Date -format G)] Mirroring OSDCloud Template Media using Robocopy"
+        Write-Host -ForegroundColor DarkGray "[$(Get-Date -format G)] Mirroring will replace any previous WinPE with a new Template WinPE"
+        Write-Host -ForegroundColor DarkGray "[$(Get-Date -format G)] Directories named OSDCloud are updated"
+        Write-Host -ForegroundColor DarkGray "[$(Get-Date -format G)] Source: $OSDCloudTemplate\Media"
+        Write-Host -ForegroundColor DarkGray "[$(Get-Date -format G)] Destination: $WorkspacePath\Media"
 
         $null = robocopy "$OSDCloudTemplate\Media\OSDCloud" "$WorkspacePath\Media\OSDCloud" *.* /e /b /ndl /np /r:0 /w:0 /xj /LOG+:$WorkspaceLogs\Robocopy.log
         $null = robocopy "$OSDCloudTemplate\Media" "$WorkspacePath\Media" *.* /mir /b /ndl /np /r:0 /w:0 /xj /LOG+:$WorkspaceLogs\Robocopy.log /XD OSDCloud
