@@ -225,6 +225,7 @@ function Get-WindowsAdkPaths {
 
         [Parameter(Position = 1, ValueFromPipelineByPropertyName = $true)]
         # Path to the Windows ADK root directory. Typically 'C:\Program Files (x86)\Windows Kits\10\Assessment and Deployment Kit'
+        <#
         [ValidateScript({
             if (!($_ | Test-Path)) {
                 throw 'Path does not exist'
@@ -232,15 +233,15 @@ function Get-WindowsAdkPaths {
             if (!($_ | Test-Path -PathType Container)) {
                 throw 'Path must be a directory'
             }
-            if (!(Test-Path "$($_.FullName)\Deployment Tools")) {
+            if (!(Test-Path "$_\Deployment Tools")) {
                 throw 'Path does not contain a Deployment Tools directory'
             }
-            if (!(Test-Path "$($_.FullName)\Windows Preinstallation Environment")) {
+            if (!(Test-Path "$_\Windows Preinstallation Environment")) {
                 throw 'Path does not contain a Windows Preinstallation Environment directory'
             }
             return $true
         })]
-        [System.IO.FileInfo]
+        #>
         [Alias('AdkRoot')]
         $WindowsAdkRoot
     )
@@ -250,6 +251,7 @@ function Get-WindowsAdkPaths {
     #=================================================
     # region Get Windows ADK information from the Registry
     if (-not $WindowsAdkRoot) {
+        $DefaultPath = "${env:ProgramFiles(x86)}\Windows Kits\10"
         $InstalledRoots32 = 'HKLM:\SOFTWARE\Microsoft\Windows Kits\Installed Roots'
         $InstalledRoots64 = 'HKLM:\SOFTWARE\WOW6432Node\Microsoft\Windows Kits\Installed Roots'
         $RegistryValue = 'KitsRoot10'
@@ -259,6 +261,24 @@ function Get-WindowsAdkPaths {
             $RegistryKey = Get-Item -Path $InstalledRoots64
             if ($null -ne $RegistryKey.GetValue($RegistryValue)) {
                 $KitsRoot10 = Get-ItemPropertyValue -Path $InstalledRoots64 -Name $RegistryValue -ErrorAction SilentlyContinue
+
+                if (Test-Path -Path $KitsRoot10) {
+                    Write-Verbose "[$(Get-Date -format G)] [$($MyInvocation.MyCommand)] Found KitsRoot10 in $InstalledRoots64"
+                }
+                else {
+                    Write-Verbose "[$(Get-Date -format G)] [$($MyInvocation.MyCommand)] KitsRoot10 path from registry does not exist: $KitsRoot10"
+                    $KitsRoot10 = $null
+                }
+            }
+            else {
+                Write-Verbose "[$(Get-Date -format G)] [$($MyInvocation.MyCommand)] Registry value $RegistryValue not found in $InstalledRoots64"
+            }
+        }
+
+        if (-NOT ($KitsRoot10)) {
+            if (Test-Path -Path $DefaultPath) {
+                Write-Verbose "[$(Get-Date -format G)] [$($MyInvocation.MyCommand)] Found KitsRoot10 in $DefaultPath"
+                $KitsRoot10 = $DefaultPath
             }
         }
 
@@ -268,8 +288,13 @@ function Get-WindowsAdkPaths {
                 if ($null -ne $RegistryKey.GetValue($RegistryValue)) {
                     $KitsRoot10 = Get-ItemPropertyValue -Path $InstalledRoots32 -Name $RegistryValue -ErrorAction SilentlyContinue
                 }
+                else {
+                    Write-Verbose "[$(Get-Date -format G)] [$($MyInvocation.MyCommand)] Registry value $RegistryValue not found in $InstalledRoots32"
+                }
             }
         }
+
+        Write-Verbose "[$(Get-Date -format G)] [$($MyInvocation.MyCommand)] $KitsRoot10"
 
         if ($KitsRoot10) {
             $WindowsAdkRoot = Join-Path $KitsRoot10 'Assessment and Deployment Kit'
