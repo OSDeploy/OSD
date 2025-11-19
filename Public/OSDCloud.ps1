@@ -981,7 +981,7 @@
                     #=================================================
                     #	Cache to USB
                     #=================================================
-                    $OSDCloudUSB = Get-USBVolume | Where-Object {($_.FileSystemLabel -match 'OSDCloud') -or ($_.FileSystemLabel -match 'BHIMAGE')} | Where-Object {$_.SizeGB -ge 8} | Where-Object {$_.SizeRemainingGB -ge 5} | Select-Object -First 1
+                    $OSDCloudUSB = Get-USBVolume | Where-Object { $_.FileSystem -eq 'NTFS' } | Where-Object { $_.FileSystemLabel -match 'OSDCloud|BHIMAGE|USB-Data' } | Where-Object { $_.SizeGB -ge 8 } | Where-Object { $_.SizeRemainingGB -ge 5} | Select-Object -First 1
                     
                     if ($OSDCloudUSB -and $Global:OSDCloud.OSVersion -and $Global:OSDCloud.OSReleaseID) {
                         $OSDownloadChildPath = "$($OSDCloudUSB.DriveLetter):\OSDCloud\OS\$($Global:OSDCloud.OSVersion) $($Global:OSDCloud.OSReleaseID)"
