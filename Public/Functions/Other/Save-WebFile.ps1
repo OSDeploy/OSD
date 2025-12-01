@@ -117,7 +117,13 @@ function Save-WebFile {
             Write-Verbose "Destination: $DestinationFullName"
 
             Write-Verbose 'Requesing HTTP HEAD to get Content-Length and Accept-Ranges header'
-            $remote = Invoke-WebRequest -UseBasicParsing -Method Head -Uri $SourceUrl
+            try {
+                $remote = Invoke-WebRequest -UseBasicParsing -Method Head -Uri $SourceUrl
+            }
+            catch {
+                Write-Warning "$_" # Error Example: Response status code does not indicate success: 404 (Not Found).
+                Return $null
+            }
             $remoteLength = [Int64]($remote.Headers.'Content-Length' | Select-Object -First 1)
             $remoteAcceptsRanges = ($remote.Headers.'Accept-Ranges' | Select-Object -First 1) -eq 'bytes'
 
