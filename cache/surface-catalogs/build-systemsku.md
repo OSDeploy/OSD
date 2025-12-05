@@ -3,9 +3,9 @@
 | | |
 |-|-|
 | Owner | David Segura |
-| Build Version | 25.12.5.2 |
+| Build Version | 25.12.5.3 |
 | PowerShell Module | OSD.Build |
 | PowerShell Function | Build-OSDCatalogSurfaceSystemSku |
 | Files | build-systemsku.* |
 | Build Workflow | GitHub Actions |
-| Last Update | Friday, December 5, 2025 5:08:28 PM UTC |
+| Last Update | Friday, December 5, 2025 10:06:57 PM UTC |
