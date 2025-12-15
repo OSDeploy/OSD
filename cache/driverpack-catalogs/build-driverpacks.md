@@ -3,9 +3,9 @@
 | | |
 |-|-|
 | Owner | David Segura |
-| Build Version | 25.12.15.2 |
+| Build Version | 25.12.15.3 |
 | PowerShell Module | OSD.Build |
 | PowerShell Function | Build-OSDCatalogDriverPacks |
 | Files | build-driverpacks.* |
 | Build Workflow | GitHub Actions |
-| Last Update | Monday, December 15, 2025 5:10:56 PM UTC |
+| Last Update | Monday, December 15, 2025 10:07:46 PM UTC |
