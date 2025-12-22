@@ -1,10 +1,10 @@
 <#
 .SYNOPSIS
-    OSD Cloud initialization script for WinPE
+    OSDCloud initialization script for WinPE
     
 .DESCRIPTION
     This script validates the WinPE environment and configures required settings
-    for OSD Cloud operations. It verifies dependencies and configures:
+    for OSDCloud operations. It verifies dependencies and configures:
     - WinPE environment verification
     - TLS 1.2 security protocol
     - PowerShell execution policy
@@ -113,6 +113,61 @@ function Set-ExecutionPolicy {
     }
 }
 
+function Initialize-EnvironmentVariables {
+    <#
+    .SYNOPSIS
+        Initializes required environment variables for WinPE
+        
+    .DESCRIPTION
+        Sets and validates critical environment variables including APPDATA, 
+        HOMEDRIVE, HOMEPATH, and LOCALAPPDATA. Creates directories as needed.
+        
+    .RETURNS
+        $true if all environment variables are successfully initialized, $false otherwise
+    #>
+    
+    try {
+        # Determine the user profile path
+        if ([string]::IsNullOrEmpty($env:UserProfile)) {
+            $userProfile = "$env:SystemDrive\Users\Administrator"
+        }
+        else {
+            $userProfile = $env:UserProfile
+        }
+        
+        # Define the environment variables to set
+        $envVars = @{
+            'APPDATA' = "$userProfile\AppData\Roaming"
+            'HOMEDRIVE' = $env:SystemDrive
+            'HOMEPATH' = $userProfile
+            'LOCALAPPDATA' = "$userProfile\AppData\Local"
+        }
+        
+        # Set each environment variable and verify the path exists
+        foreach ($varName in $envVars.Keys) {
+            $varValue = $envVars[$varName]
+            
+            # Set the environment variable at process level
+            [System.Environment]::SetEnvironmentVariable($varName, $varValue, [System.EnvironmentVariableTarget]::Process)
+            
+            # Create the directory if it doesn't exist
+            if (-not (Test-Path -Path $varValue)) {
+                New-Item -ItemType Directory -Path $varValue -Force | Out-Null
+                Write-Host "[✓] Created directory and set $varName = $varValue" -ForegroundColor Green
+            }
+            else {
+                Write-Host "[✓] Verified $varName = $varValue" -ForegroundColor Green
+            }
+        }
+        
+        return $true
+    }
+    catch {
+        Write-Host "[✗] Error initializing environment variables: $_" -ForegroundColor Red
+        return $false
+    }
+}
+
 function Confirm-LocalAppDataVariable {
     <#
     .SYNOPSIS
@@ -168,6 +223,134 @@ function Confirm-LocalAppDataVariable {
     }
 }
 
+function Update-PowerShellProfile {
+    <#
+    .SYNOPSIS
+        Updates PowerShell profile with environment configurations
+        
+    .DESCRIPTION
+        Adds WinPE and OOBE-specific settings to the PowerShell profile.
+        Configures TLS 1.2 and environment variables for proper script execution.
+        
+    .RETURNS
+        $true if profile was successfully updated, $false otherwise
+    #>
+    
+    try {
+        # Define WinPE PowerShell Profile
+        $winpePowerShellProfile = @'
+[Net.ServicePointManager]::SecurityProtocol = [Net.ServicePointManager]::SecurityProtocol -bor [Net.SecurityProtocolType]::Tls12
+[System.Environment]::SetEnvironmentVariable('APPDATA',"$Env:UserProfile\AppData\Roaming",[System.EnvironmentVariableTarget]::Process)
+[System.Environment]::SetEnvironmentVariable('HOMEDRIVE',"$Env:SystemDrive",[System.EnvironmentVariableTarget]::Process)
+[System.Environment]::SetEnvironmentVariable('HOMEPATH',"$Env:UserProfile",[System.EnvironmentVariableTarget]::Process)
+[System.Environment]::SetEnvironmentVariable('LOCALAPPDATA',"$Env:UserProfile\AppData\Local",[System.EnvironmentVariableTarget]::Process)
+'@
+
+        # Define OOBE PowerShell Profile
+        $oobePowerShellProfile = @'
+[Net.ServicePointManager]::SecurityProtocol = [Net.ServicePointManager]::SecurityProtocol -bor [Net.SecurityProtocolType]::Tls12
+[System.Environment]::SetEnvironmentVariable('Path',$Env:Path + ";$Env:ProgramFiles\WindowsPowerShell\Scripts",'Process')
+'@
+
+        # Ensure PowerShell profile directory exists
+        $profileDir = Split-Path -Parent $PROFILE
+        if (-not (Test-Path -Path $profileDir)) {
+            New-Item -ItemType Directory -Path $profileDir -Force | Out-Null
+            Write-Host "[✓] Created PowerShell profile directory: $profileDir" -ForegroundColor Green
+        }
+
+        # Update the profile with WinPE configuration
+        if (Test-Path -Path "X:\") {
+            # WinPE environment
+            Add-Content -Path $PROFILE -Value $winpePowerShellProfile -Force
+            Write-Host "[✓] Updated PowerShell profile with WinPE settings" -ForegroundColor Green
+        }
+        else {
+            # OOBE or regular environment
+            Add-Content -Path $PROFILE -Value $oobePowerShellProfile -Force
+            Write-Host "[✓] Updated PowerShell profile with OOBE settings" -ForegroundColor Green
+        }
+
+        return $true
+    }
+    catch {
+        Write-Host "[!] Error updating PowerShell profile: $_" -ForegroundColor Yellow
+        return $false
+    }
+}
+
+function Update-PowerShellGetAndPackageManagement {
+    <#
+    .SYNOPSIS
+        Ensures NuGet provider, trusts PSGallery, and updates modules
+
+    .DESCRIPTION
+        Bootstraps NuGet, registers/trusts PSGallery, and installs/updates
+        PackageManagement and PowerShellGet to latest available versions.
+
+    .RETURNS
+        $true if updates succeeded, $false otherwise
+    #>
+
+    $ok = $true
+    try {
+        Write-Host "[*] Bootstrapping NuGet provider..." -ForegroundColor Cyan
+        $nuget = Get-PackageProvider -Name NuGet -ErrorAction SilentlyContinue
+        if (-not $nuget) {
+            Install-PackageProvider -Name NuGet -MinimumVersion 2.8.5.201 -Force -ErrorAction Stop | Out-Null
+        }
+        else {
+            Write-Host "[✓] NuGet provider present" -ForegroundColor Green
+        }
+    }
+    catch {
+        Write-Host "[✗] Failed to install NuGet provider: $_" -ForegroundColor Red
+        $ok = $false
+    }
+
+    try {
+        Write-Host "[*] Ensuring PSGallery repository is available and trusted..." -ForegroundColor Cyan
+        $psg = Get-PSRepository -Name 'PSGallery' -ErrorAction SilentlyContinue
+        if (-not $psg) {
+            try { Register-PSRepository -Default -ErrorAction Stop } catch { }
+            $psg = Get-PSRepository -Name 'PSGallery' -ErrorAction SilentlyContinue
+            if (-not $psg) {
+                Register-PSRepository -Name 'PSGallery' -SourceLocation 'https://www.powershellgallery.com/api/v2' -ScriptSourceLocation 'https://www.powershellgallery.com/api/v2' -InstallationPolicy Trusted -ErrorAction Stop
+            }
+        }
+        else {
+            Set-PSRepository -Name 'PSGallery' -InstallationPolicy Trusted -ErrorAction SilentlyContinue
+        }
+        Write-Host "[✓] PSGallery repository ready" -ForegroundColor Green
+    }
+    catch {
+        Write-Host "[✗] Failed to configure PSGallery: $_" -ForegroundColor Red
+        $ok = $false
+    }
+
+    try {
+        Write-Host "[*] Installing/Updating PackageManagement..." -ForegroundColor Cyan
+        Install-Module -Name PackageManagement -Repository PSGallery -Force -AllowClobber -Scope AllUsers -ErrorAction Stop
+        Write-Host "[✓] PackageManagement updated" -ForegroundColor Green
+    }
+    catch {
+        Write-Host "[✗] Failed to update PackageManagement: $_" -ForegroundColor Red
+        $ok = $false
+    }
+
+    try {
+        Write-Host "[*] Installing/Updating PowerShellGet..." -ForegroundColor Cyan
+        Install-Module -Name PowerShellGet -Repository PSGallery -Force -AllowClobber -Scope AllUsers -ErrorAction Stop
+        Write-Host "[✓] PowerShellGet updated" -ForegroundColor Green
+    }
+    catch {
+        Write-Host "[✗] Failed to update PowerShellGet: $_" -ForegroundColor Red
+        $ok = $false
+    }
+
+    return [bool]$ok
+}
+
 function Test-Dependencies {
     <#
     .SYNOPSIS
@@ -205,15 +388,16 @@ function Test-Dependencies {
 # ========================================
 
 Write-Host "================================" -ForegroundColor Cyan
-Write-Host "OSD Cloud WinPE Initialization" -ForegroundColor Cyan
+Write-Host "OSDCloud WinPE Initialization" -ForegroundColor Cyan
 Write-Host "================================`n" -ForegroundColor Cyan
 
 # Step 1: Verify WinPE Environment
 Write-Host "[1/4] Verifying WinPE environment..." -ForegroundColor Magenta
 $winpeValid = Test-WinPEEnvironment
 if (-not $winpeValid) {
-    Write-Host "`n[!] Warning: Script is optimized for WinPE. Some features may not work correctly." -ForegroundColor Yellow
-    # Continue execution for testing purposes
+    Write-Host "`n[✗] FATAL: This script must be executed in WinPE. Exiting in 10 seconds..." -ForegroundColor Red
+    Start-Sleep -Seconds 10
+    exit 1
 }
 
 # Step 2: Set TLS 1.2
@@ -221,28 +405,44 @@ Write-Host "`n[2/4] Configuring TLS 1.2..." -ForegroundColor Magenta
 Set-TLSVersion
 
 # Step 3: Set Execution Policy
-Write-Host "`n[3/4] Setting PowerShell execution policy..." -ForegroundColor Magenta
+Write-Host "`n[3/6] Setting PowerShell execution policy..." -ForegroundColor Magenta
 Set-ExecutionPolicy
 
-# Step 4: Verify LocalAppData
-Write-Host "`n[4/4] Verifying LocalAppData environment variable..." -ForegroundColor Magenta
+# Step 4: Initialize Environment Variables
+Write-Host "`n[4/6] Initializing environment variables..." -ForegroundColor Magenta
+$envVarsValid = Initialize-EnvironmentVariables
+
+# Step 5: Verify LocalAppData
+Write-Host "`n[5/6] Verifying LocalAppData environment variable..." -ForegroundColor Magenta
 $localAppDataValid = Confirm-LocalAppDataVariable
 
-# Step 5: Check Dependencies
+# Step 6: Update PowerShell Profile
+Write-Host "`n[6/7] Updating PowerShell profile..." -ForegroundColor Magenta
+$profileValid = Update-PowerShellProfile
+
+# Step 7: Update PowerShellGet and PackageManagement
+Write-Host "`n[7/7] Updating PowerShellGet and PackageManagement..." -ForegroundColor Magenta
+$pkgModUpdated = Update-PowerShellGetAndPackageManagement
+
+# Step 8: Check Dependencies
+Write-Host "`n[8/7] Checking dependencies..." -ForegroundColor Magenta
 Test-Dependencies
 
 # Summary
 Write-Host "`n================================" -ForegroundColor Cyan
 Write-Host "Initialization Summary" -ForegroundColor Cyan
 Write-Host "================================" -ForegroundColor Cyan
-Write-Host "WinPE Environment: $(if ($winpeValid) { 'Valid' } else { 'Warning' })" -ForegroundColor $(if ($winpeValid) { 'Green' } else { 'Yellow' })
+Write-Host "WinPE Environment: Valid" -ForegroundColor Green
 Write-Host "TLS 1.2: Configured" -ForegroundColor Green
 Write-Host "Execution Policy: Configured" -ForegroundColor Green
+Write-Host "Environment Variables: $(if ($envVarsValid) { 'Valid' } else { 'Invalid' })" -ForegroundColor $(if ($envVarsValid) { 'Green' } else { 'Red' })
 Write-Host "LocalAppData: $(if ($localAppDataValid) { 'Valid' } else { 'Invalid' })" -ForegroundColor $(if ($localAppDataValid) { 'Green' } else { 'Red' })
+Write-Host "PowerShell Profile: $(if ($profileValid) { 'Updated' } else { 'Warning' })" -ForegroundColor $(if ($profileValid) { 'Green' } else { 'Yellow' })
+Write-Host "PSGet/PackageManagement: $(if ($pkgModUpdated) { 'Updated' } else { 'Warning' })" -ForegroundColor $(if ($pkgModUpdated) { 'Green' } else { 'Yellow' })
 Write-Host "================================`n" -ForegroundColor Cyan
 
-if ($winpeValid -and $localAppDataValid) {
-    Write-Host "[✓] Initialization completed successfully. Ready for OSD Cloud operations." -ForegroundColor Green
+if ($envVarsValid -and $localAppDataValid) {
+    Write-Host "[✓] Initialization completed successfully. Ready for OSDCloud operations." -ForegroundColor Green
     exit 0
 }
 else {
