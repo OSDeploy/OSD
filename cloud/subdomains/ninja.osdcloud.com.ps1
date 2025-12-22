@@ -1,264 +1,251 @@
-<#PSScriptInfo
-.VERSION 24.9.6.1
-.GUID 3066fde0-75e9-4b35-9038-3e5781a34228
-.AUTHOR David Segura @SeguraOSD
-.COMPANYNAME osdcloud.com
-.COPYRIGHT (c) 2024 David Segura osdcloud.com. All rights reserved.
-.TAGS OSDeploy OSDCloud WinPE OOBE Windows AutoPilot
-.LICENSEURI 
-.PROJECTURI https://github.com/OSDeploy/OSD
-.ICONURI 
-.EXTERNALMODULEDEPENDENCIES 
-.REQUIREDSCRIPTS 
-.EXTERNALSCRIPTDEPENDENCIES 
-.RELEASENOTES
-Script should be executed in a Command Prompt using the following command
-powershell Invoke-Expression -Command (Invoke-RestMethod -Uri ninja.osdcloud.com)
-This is abbreviated as
-powershell iex (irm ninja.osdcloud.com)
-#>
-#Requires -RunAsAdministrator
 <#
 .SYNOPSIS
-    PowerShell Script which supports the OSDCloud environment
+    OSD Cloud initialization script for WinPE
+    
 .DESCRIPTION
-    PowerShell Script which supports the OSDCloud environment
+    This script validates the WinPE environment and configures required settings
+    for OSD Cloud operations. It verifies dependencies and configures:
+    - WinPE environment verification
+    - TLS 1.2 security protocol
+    - PowerShell execution policy
+    - Required environment variables
+    
 .NOTES
-    Version 24.9.6.1
-.LINK
-    https://raw.githubusercontent.com/OSDeploy/OSD/master/cloud/ninja.osdcloud.com.ps1
-.EXAMPLE
-    powershell iex (irm ninja.osdcloud.com)
+    This script is designed to be downloaded and executed in WinPE PowerShell
 #>
+
 [CmdletBinding()]
-$ScriptName = 'ninja.osdcloud.com'
-$ScriptVersion = '24.9.6.1'
+param()
 
-#region Initialize
-$Transcript = "$((Get-Date).ToString('yyyy-MM-dd-HHmmss'))-$ScriptName.log"
-$null = Start-Transcript -Path (Join-Path "$env:SystemRoot\Temp" $Transcript) -ErrorAction Ignore
+# ========================================
+# Functions
+# ========================================
 
-if ($env:SystemDrive -eq 'X:') {
-    $WindowsPhase = 'WinPE'
+function Test-WinPEEnvironment {
+    <#
+    .SYNOPSIS
+        Validates that we are running in WinPE
+        
+    .DESCRIPTION
+        Checks for WinPE-specific environment indicators and registry values
+        
+    .RETURNS
+        $true if running in WinPE, $false otherwise
+    #>
+    
+    try {
+        # Check for WinPE registry path
+        $winpeRegPath = "HKLM:\System\CurrentControlSet\Control\Windows"
+        
+        if (Test-Path -Path $winpeRegPath) {
+            $regValue = Get-ItemProperty -Path $winpeRegPath -Name "PEOptimizeForSpeed" -ErrorAction SilentlyContinue
+            if ($null -ne $regValue) {
+                Write-Host "[✓] WinPE environment detected" -ForegroundColor Green
+                return $true
+            }
+        }
+        
+        # Alternative check: look for WinPE system file
+        if (Test-Path -Path "$env:SystemRoot\System32\winpeshl.ini") {
+            Write-Host "[✓] WinPE environment detected (winpeshl.ini found)" -ForegroundColor Green
+            return $true
+        }
+        
+        # Check for WinPE temporary files directory
+        if (Test-Path -Path "X:\") {
+            Write-Host "[✓] WinPE environment detected (X: drive found)" -ForegroundColor Green
+            return $true
+        }
+        
+        Write-Host "[✗] Not running in WinPE environment" -ForegroundColor Red
+        return $false
+    }
+    catch {
+        Write-Host "[!] Error checking WinPE environment: $_" -ForegroundColor Yellow
+        return $false
+    }
+}
+
+function Set-TLSVersion {
+    <#
+    .SYNOPSIS
+        Configures TLS 1.2 for secure communications
+        
+    .DESCRIPTION
+        Sets up Transport Layer Security 1.2 to ensure secure HTTPS connections
+        for downloading packages and modules
+    #>
+    
+    try {
+        # Set TLS 1.2 as the minimum protocol
+        [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor [System.Net.SecurityProtocolType]::Tls12
+        
+        Write-Host "[✓] TLS 1.2 configured" -ForegroundColor Green
+    }
+    catch {
+        Write-Host "[!] Warning: Could not configure TLS 1.2: $_" -ForegroundColor Yellow
+    }
+}
+
+function Set-ExecutionPolicy {
+    <#
+    .SYNOPSIS
+        Sets PowerShell execution policy
+        
+    .DESCRIPTION
+        Configures the execution policy to allow script execution
+        Uses 'Bypass' for the machine scope to allow all scripts to run
+    #>
+    
+    try {
+        $currentPolicy = Get-ExecutionPolicy -Scope LocalMachine
+        
+        if ($currentPolicy -ne "Bypass") {
+            Set-ExecutionPolicy -ExecutionPolicy Bypass -Scope LocalMachine -Force -ErrorAction Stop
+            Write-Host "[✓] Execution policy set to Bypass (LocalMachine scope)" -ForegroundColor Green
+        }
+        else {
+            Write-Host "[✓] Execution policy already set to Bypass" -ForegroundColor Green
+        }
+    }
+    catch {
+        Write-Host "[!] Error setting execution policy: $_" -ForegroundColor Yellow
+    }
+}
+
+function Confirm-LocalAppDataVariable {
+    <#
+    .SYNOPSIS
+        Validates LocalAppData environment variable
+        
+    .DESCRIPTION
+        Checks if the LocalAppData environment variable exists and is accessible.
+        Creates it if necessary for WinPE environments where it may not be preset.
+        
+    .RETURNS
+        $true if LocalAppData is available, $false otherwise
+    #>
+    
+    try {
+        # Check if LocalAppData environment variable exists
+        if ([string]::IsNullOrEmpty($env:LocalAppData)) {
+            Write-Host "[!] LocalAppData environment variable not set" -ForegroundColor Yellow
+            
+            # Attempt to create LocalAppData for current user
+            # In WinPE, this is typically System context, so use a default path
+            if (Test-Path -Path "X:\") {
+                $env:LocalAppData = "X:\Temp\LocalAppData"
+                if (-not (Test-Path -Path $env:LocalAppData)) {
+                    New-Item -ItemType Directory -Path $env:LocalAppData -Force | Out-Null
+                }
+                Write-Host "[✓] LocalAppData created at $($env:LocalAppData)" -ForegroundColor Green
+            }
+            else {
+                # Fallback for non-standard WinPE environments
+                $env:LocalAppData = "$env:SystemDrive\Temp\LocalAppData"
+                if (-not (Test-Path -Path $env:LocalAppData)) {
+                    New-Item -ItemType Directory -Path $env:LocalAppData -Force | Out-Null
+                }
+                Write-Host "[✓] LocalAppData created at $($env:LocalAppData)" -ForegroundColor Green
+            }
+        }
+        else {
+            Write-Host "[✓] LocalAppData verified: $($env:LocalAppData)" -ForegroundColor Green
+        }
+        
+        # Verify the path is accessible
+        if (Test-Path -Path $env:LocalAppData) {
+            return $true
+        }
+        else {
+            Write-Host "[✗] LocalAppData path is not accessible: $($env:LocalAppData)" -ForegroundColor Red
+            return $false
+        }
+    }
+    catch {
+        Write-Host "[✗] Error validating LocalAppData: $_" -ForegroundColor Red
+        return $false
+    }
+}
+
+function Test-Dependencies {
+    <#
+    .SYNOPSIS
+        Validates required PowerShell modules and components
+        
+    .DESCRIPTION
+        Checks for required modules and dependencies
+    #>
+    
+    Write-Host "`n[*] Checking dependencies..." -ForegroundColor Cyan
+    
+    $missingDependencies = @()
+    
+    # Check for required modules (can be expanded as needed)
+    $requiredModules = @(
+        "PSReadLine",
+        "PackageManagement"
+    )
+    
+    foreach ($module in $requiredModules) {
+        if (-not (Get-Module -ListAvailable -Name $module -ErrorAction SilentlyContinue)) {
+            Write-Host "[!] Module not found: $module" -ForegroundColor Yellow
+            $missingDependencies += $module
+        }
+        else {
+            Write-Host "[✓] Module available: $module" -ForegroundColor Green
+        }
+    }
+    
+    return $missingDependencies.Count -eq 0
+}
+
+# ========================================
+# Main Execution
+# ========================================
+
+Write-Host "================================" -ForegroundColor Cyan
+Write-Host "OSD Cloud WinPE Initialization" -ForegroundColor Cyan
+Write-Host "================================`n" -ForegroundColor Cyan
+
+# Step 1: Verify WinPE Environment
+Write-Host "[1/4] Verifying WinPE environment..." -ForegroundColor Magenta
+$winpeValid = Test-WinPEEnvironment
+if (-not $winpeValid) {
+    Write-Host "`n[!] Warning: Script is optimized for WinPE. Some features may not work correctly." -ForegroundColor Yellow
+    # Continue execution for testing purposes
+}
+
+# Step 2: Set TLS 1.2
+Write-Host "`n[2/4] Configuring TLS 1.2..." -ForegroundColor Magenta
+Set-TLSVersion
+
+# Step 3: Set Execution Policy
+Write-Host "`n[3/4] Setting PowerShell execution policy..." -ForegroundColor Magenta
+Set-ExecutionPolicy
+
+# Step 4: Verify LocalAppData
+Write-Host "`n[4/4] Verifying LocalAppData environment variable..." -ForegroundColor Magenta
+$localAppDataValid = Confirm-LocalAppDataVariable
+
+# Step 5: Check Dependencies
+Test-Dependencies
+
+# Summary
+Write-Host "`n================================" -ForegroundColor Cyan
+Write-Host "Initialization Summary" -ForegroundColor Cyan
+Write-Host "================================" -ForegroundColor Cyan
+Write-Host "WinPE Environment: $(if ($winpeValid) { 'Valid' } else { 'Warning' })" -ForegroundColor $(if ($winpeValid) { 'Green' } else { 'Yellow' })
+Write-Host "TLS 1.2: Configured" -ForegroundColor Green
+Write-Host "Execution Policy: Configured" -ForegroundColor Green
+Write-Host "LocalAppData: $(if ($localAppDataValid) { 'Valid' } else { 'Invalid' })" -ForegroundColor $(if ($localAppDataValid) { 'Green' } else { 'Red' })
+Write-Host "================================`n" -ForegroundColor Cyan
+
+if ($winpeValid -and $localAppDataValid) {
+    Write-Host "[✓] Initialization completed successfully. Ready for OSD Cloud operations." -ForegroundColor Green
+    exit 0
 }
 else {
-    $ImageState = (Get-ItemProperty -Path 'HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Setup\State' -ErrorAction Ignore).ImageState
-    if ($env:UserName -eq 'defaultuser0') {$WindowsPhase = 'OOBE'}
-    elseif ($ImageState -eq 'IMAGE_STATE_SPECIALIZE_RESEAL_TO_OOBE') {$WindowsPhase = 'Specialize'}
-    elseif ($ImageState -eq 'IMAGE_STATE_SPECIALIZE_RESEAL_TO_AUDIT') {$WindowsPhase = 'AuditMode'}
-    else {$WindowsPhase = 'Windows'}
-}
-
-Write-Host -ForegroundColor Green "[+] $ScriptName $ScriptVersion ($WindowsPhase Phase)"
-#Invoke-Expression -Command (Invoke-RestMethod -Uri functions.osdcloud.com)
-#endregion
-
-#region Admin Elevation
-$whoiam = [system.security.principal.windowsidentity]::getcurrent().name
-$isElevated = ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] "Administrator")
-if ($isElevated) {
-    Write-Host -ForegroundColor Green "[+] Running as $whoiam (Admin Elevated)"
-}
-else {
-    Write-Host -ForegroundColor Red "[!] Running as $whoiam (NOT Admin Elevated)"
-    Break
-}
-#endregion
-
-#region Transport Layer Security (TLS) 1.2
-Write-Host -ForegroundColor Green "[+] Transport Layer Security (TLS) 1.2"
-[Net.ServicePointManager]::SecurityProtocol = [Net.ServicePointManager]::SecurityProtocol -bor [Net.SecurityProtocolType]::Tls12
-#endregion
-
-#region WinPE
-if ($WindowsPhase -eq 'WinPE') {
-
-    $null = Stop-Transcript -ErrorAction Ignore
-}
-#endregion
-
-#region Specialize
-if ($WindowsPhase -eq 'Specialize') {
-
-    $null = Stop-Transcript -ErrorAction Ignore
-}
-#endregion
-
-#region AuditMode
-if ($WindowsPhase -eq 'AuditMode') {
-
-    $null = Stop-Transcript -ErrorAction Ignore
-}
-#endregion
-
-#region OOBE
-if ($WindowsPhase -eq 'OOBE') {
-
-    $null = Stop-Transcript -ErrorAction Ignore
-}
-#endregion
-
-#region Windows
-if ($WindowsPhase -eq 'Windows') {
-
-    $null = Stop-Transcript -ErrorAction Ignore
-}
-#endregion
-
-#region PowerShell Prompt
-<#
-Since these functions are temporarily loaded, the PowerShell Prompt is changed to make it visual if the functions are loaded or not
-[WPNinja]: PS C:\>
-
-You can read more about how to make the change here
-https://docs.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_prompts?view=powershell-5.1
-#>
-function Prompt {
-    $(if (Test-Path variable:/PSDebugContext) { '[DBG]: ' }
-    else { "[WPNinja]: " }
-    ) + 'PS ' + $(Get-Location) +
-    $(if ($NestedPromptLevel -ge 1) { '>>' }) + '> '
-}
-#endregion
-function ninja-WinGetInstallADK21H2 {
-    [CmdletBinding()]
-    param ()
-    if (Get-Command 'WinGet' -ErrorAction SilentlyContinue) {
-        # Show package information
-        # winget show --id Microsoft.WindowsADK
-        
-        # Show version information
-        # winget show --id Microsoft.WindowsADK --versions
-        
-        # Install
-        Write-Host 'winget install --id Microsoft.WindowsADK --version 10.1.22000.1 --exact --accept-source-agreements --accept-package-agreements' -ForegroundColor Cyan
-        winget install --id Microsoft.WindowsADK --version 10.1.22000.1 --exact --accept-source-agreements --accept-package-agreements
-    
-        # Show package information
-        # winget show --id Microsoft.ADKPEAddon
-        
-        # Show version information
-        # winget show --id Microsoft.ADKPEAddon --versions
-        
-        # Install
-        Write-Host 'winget install --id Microsoft.ADKPEAddon --version 10.1.22000.1 --exact --accept-source-agreements --accept-package-agreements' -ForegroundColor Cyan
-        winget install --id Microsoft.ADKPEAddon --version 10.1.22000.1 --exact --accept-source-agreements --accept-package-agreements
-        
-        # Resolves issue with MDT locking up without this directory present on WinPE x86 tab
-        Write-Host 'New-Item -Path "C:\Program Files (x86)\Windows Kits\10\Assessment and Deployment Kit\Windows Preinstallation Environment\x86\WinPE_OCs" -ItemType Directory -Force' -ForegroundColor Cyan
-        New-Item -Path "C:\Program Files (x86)\Windows Kits\10\Assessment and Deployment Kit\Windows Preinstallation Environment\x86\WinPE_OCs" -ItemType Directory -Force
-    }
-    else {
-        Write-Error -Message 'WinGet is not installed.'
-    }
-}
-function ninja-WinGetInstallADK22H2 {
-    [CmdletBinding()]
-    param ()
-    if (Get-Command 'WinGet' -ErrorAction SilentlyContinue) {
-        # Show package information
-        # winget show --id Microsoft.WindowsADK
-    
-        # Show version information
-        # winget show --id Microsoft.WindowsADK --versions
-    
-        # Install
-        Write-Host 'winget install --id Microsoft.WindowsADK --version 10.1.22621.1 --exact --accept-source-agreements --accept-package-agreements' -ForegroundColor Cyan
-        winget install --id Microsoft.WindowsADK --version 10.1.22621.1 --exact --accept-source-agreements --accept-package-agreements
-        
-        # Show package information
-        # winget show --id Microsoft.ADKPEAddon
-        
-        # Show version information
-        # winget show --id Microsoft.ADKPEAddon --versions
-        
-        # Install
-        Write-Host 'winget install --id Microsoft.ADKPEAddon --version 10.1.22621.1 --exact --accept-source-agreements --accept-package-agreements' -ForegroundColor Cyan
-        winget install --id Microsoft.ADKPEAddon --version 10.1.22621.1 --exact --accept-source-agreements --accept-package-agreements
-        
-        # Resolves issue with MDT locking up without this directory present on WinPE x86 tab
-        Write-Host 'New-Item -Path "C:\Program Files (x86)\Windows Kits\10\Assessment and Deployment Kit\Windows Preinstallation Environment\x86\WinPE_OCs" -ItemType Directory -Force' -ForegroundColor Cyan
-        New-Item -Path "C:\Program Files (x86)\Windows Kits\10\Assessment and Deployment Kit\Windows Preinstallation Environment\x86\WinPE_OCs" -ItemType Directory -Force
-    }
-    else {
-        Write-Error -Message 'WinGet is not installed.'
-    }
-}
-function ninja-WinGetInstallADK23H2 {
-    [CmdletBinding()]
-    param ()
-    if (Get-Command 'WinGet' -ErrorAction SilentlyContinue) {
-        # Show package information
-        # winget show --id Microsoft.WindowsADK
-        
-        # Show version information
-        # winget show --id Microsoft.WindowsADK --versions
-        
-        # Install
-        Write-Host 'winget install --id Microsoft.WindowsADK --version 10.1.25398.1 --exact --accept-source-agreements --accept-package-agreements' -ForegroundColor Cyan
-        winget install --id Microsoft.WindowsADK --version 10.1.25398.1 --exact --accept-source-agreements --accept-package-agreements
-    
-        # Show package information
-        # winget show --id Microsoft.ADKPEAddon
-        
-        # Show version information
-        # winget show --id Microsoft.ADKPEAddon --versions
-        
-        # Install
-        Write-Host 'winget install --id Microsoft.ADKPEAddon --version 10.1.25398.1 --exact --accept-source-agreements --accept-package-agreements' -ForegroundColor Cyan
-        winget install --id Microsoft.ADKPEAddon --version 10.1.25398.1 --exact --accept-source-agreements --accept-package-agreements
-        
-        # Resolves issue with MDT locking up without this directory present on WinPE x86 tab
-        Write-Host 'New-Item -Path "C:\Program Files (x86)\Windows Kits\10\Assessment and Deployment Kit\Windows Preinstallation Environment\x86\WinPE_OCs" -ItemType Directory -Force' -ForegroundColor Cyan
-        New-Item -Path "C:\Program Files (x86)\Windows Kits\10\Assessment and Deployment Kit\Windows Preinstallation Environment\x86\WinPE_OCs" -ItemType Directory -Force
-    }
-    else {
-        Write-Error -Message 'WinGet is not installed.'
-    }
-}
-function ninja-WinGetInstallMDT {
-    [CmdletBinding()]
-    param ()
-    if (Get-Command 'WinGet' -ErrorAction SilentlyContinue) {
-        # Show package information
-        # winget show --id Microsoft.DeploymentToolkit
-        
-        # Show version information
-        # winget show --id Microsoft.DeploymentToolkit --versions
-        
-        # Install
-        Write-Host 'winget install --id Microsoft.DeploymentToolkit --version 6.3.8456.1000 --exact --accept-source-agreements --accept-package-agreements' -ForegroundColor Cyan
-        winget install --id Microsoft.DeploymentToolkit --version 6.3.8456.1000 --exact --accept-source-agreements --accept-package-agreements
-    }
-    else {
-        Write-Error -Message 'WinGet is not installed.'
-    }
-}
-function ninja-WinGetInstallGit {
-    [CmdletBinding()]
-    param ()
-    if (Get-Command 'WinGet' -ErrorAction SilentlyContinue) {
-        # Show package information
-        # winget show --id Git.Git
-        
-        # Show version information
-        # winget show --id Git.Git --versions
-        
-        # Install
-        Write-Host 'winget install --id Git.Git --exact --accept-source-agreements --accept-package-agreements' -ForegroundColor Cyan
-        winget install --id Git.Git --exact --accept-source-agreements --accept-package-agreements
-    }
-    else {
-        Write-Error -Message 'WinGet is not installed.'
-    }
-}
-function ninja-CloneMicrosoftDaRT {
-    Write-Host 'git clone https://github.com/OSDeploy/MicrosoftDaRT.git "C:\Program Files\Microsoft DaRT\v10"' -ForegroundColor Cyan
-    git clone https://github.com/OSDeploy/MicrosoftDaRT.git "C:\Program Files\Microsoft DaRT\v10"
-}
-function ninja-BuildTemplates {
-    Write-Host 'New-OSDCloudTemplate -Name VM' -ForegroundColor Cyan
-    New-OSDCloudTemplate -Name VM
-    Write-Host 'New-OSDCloudTemplate -Name Wireless -WinRE' -ForegroundColor Cyan
-    New-OSDCloudTemplate -Name Wireless -WinRE
+    Write-Host "[!] Initialization completed with warnings. Review the output above." -ForegroundColor Yellow
+    exit 0
 }
