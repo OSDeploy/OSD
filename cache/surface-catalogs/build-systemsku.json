@@ -1,258 +1,258 @@
 [
     {
-        "SystemSku":  "Surface_3",
+        "SystemSku":  "Surface 3 Wi-Fi",
         "Model":  "Surface 3",
-        "Device":  "Surface 3 Wi-Fi"
+        "Device":  "Surface_3"
     },
     {
-        "SystemSku":  "Surface_3_US1",
+        "SystemSku":  "Surface 3 LTE AT\u0026T",
         "Model":  "Surface 3",
-        "Device":  "Surface 3 LTE AT\u0026T"
+        "Device":  "Surface_3_US1"
     },
     {
-        "SystemSku":  "Surface_3_US2",
+        "SystemSku":  "Surface 3 LTE Verizon",
         "Model":  "Surface 3",
-        "Device":  "Surface 3 LTE Verizon"
+        "Device":  "Surface_3_US2"
     },
     {
-        "SystemSku":  "Surface_3_NAG",
+        "SystemSku":  "Surface 3 LTE North America",
         "Model":  "Surface 3",
-        "Device":  "Surface 3 LTE North America"
+        "Device":  "Surface_3_NAG"
     },
     {
-        "SystemSku":  "Surface_3_ROW",
+        "SystemSku":  "Surface 3 LTE outside of North America and Y!mobile in Japan",
         "Model":  "Surface 3",
-        "Device":  "Surface 3 LTE outside of North America and Y!mobile in Japan"
+        "Device":  "Surface_3_ROW"
     },
     {
-        "SystemSku":  "Surface_Book_1832",
+        "SystemSku":  "Surface Book 2 13\"",
         "Model":  "Surface Book 2",
-        "Device":  "Surface Book 2 13\""
+        "Device":  "Surface_Book_1832"
     },
     {
-        "SystemSku":  "Surface_Book_1793",
+        "SystemSku":  "Surface Book 2 15\"",
         "Model":  "Surface Book 2",
-        "Device":  "Surface Book 2 15\""
+        "Device":  "Surface_Book_1793"
     },
     {
-        "SystemSku":  "Surface_Book_3_1900",
+        "SystemSku":  "Surface Book 3 13\"",
         "Model":  "Surface Book 3",
-        "Device":  "Surface Book 3 13\""
+        "Device":  "Surface_Book_3_1900"
     },
     {
-        "SystemSku":  "Surface_Book_3_1899",
+        "SystemSku":  "Surface Book 3 15\"",
         "Model":  "Surface Book 3",
-        "Device":  "Surface Book 3 15\""
+        "Device":  "Surface_Book_3_1899"
     },
     {
-        "SystemSku":  "Surface_Go_1824_Commercial",
+        "SystemSku":  "Surface Go Commercial",
         "Model":  "Surface Go",
-        "Device":  "Surface Go Commercial"
+        "Device":  "Surface_Go_1824_Commercial"
     },
     {
-        "SystemSku":  "Surface_Go_1824_Consumer",
+        "SystemSku":  "Surface Go Consumer",
         "Model":  "Surface Go",
-        "Device":  "Surface Go Consumer"
+        "Device":  "Surface_Go_1824_Consumer"
     },
     {
-        "SystemSku":  "Surface_Go_1825_Commercial",
+        "SystemSku":  "Surface Go LTE Commercial",
         "Model":  "Surface Go",
-        "Device":  "Surface Go LTE Commercial"
+        "Device":  "Surface_Go_1825_Commercial"
     },
     {
-        "SystemSku":  "Surface_Go_2_1926",
+        "SystemSku":  "Surface Go 2 Commercial",
         "Model":  "Surface Go 2",
-        "Device":  "Surface Go 2 Commercial"
+        "Device":  "Surface_Go_2_1926"
     },
     {
-        "SystemSku":  "Surface_Go_2_1901",
+        "SystemSku":  "Surface Go 2 Consumer",
         "Model":  "Surface Go 2",
-        "Device":  "Surface Go 2 Consumer"
+        "Device":  "Surface_Go_2_1901"
     },
     {
-        "SystemSku":  "Surface_Go_2_1927",
+        "SystemSku":  "Surface Go 2 LTE",
         "Model":  "Surface Go 2",
-        "Device":  "Surface Go 2 LTE"
+        "Device":  "Surface_Go_2_1927"
     },
     {
-        "SystemSku":  "Surface_Go_3_1926",
+        "SystemSku":  "Surface Go 3 Commercial",
         "Model":  "Surface Go 3",
-        "Device":  "Surface Go 3 Commercial"
+        "Device":  "Surface_Go_3_1926"
     },
     {
-        "SystemSku":  "Surface_Go_3_1901",
+        "SystemSku":  "Surface Go 3 Consumer",
         "Model":  "Surface Go 3",
-        "Device":  "Surface Go 3 Consumer"
+        "Device":  "Surface_Go_3_1901"
     },
     {
-        "SystemSku":  "Surface_Go_3_2022",
+        "SystemSku":  "Surface Go 3 LTE",
         "Model":  "Surface Go 3",
-        "Device":  "Surface Go 3 LTE"
+        "Device":  "Surface_Go_3_2022"
     },
     {
-        "SystemSku":  "Surface_Go_4_2067",
+        "SystemSku":  "Surface Go 4",
         "Model":  "Surface Go 4",
-        "Device":  "Surface Go 4"
+        "Device":  "Surface_Go_4_2067"
     },
     {
-        "SystemSku":  "Surface Hub 2S",
+        "SystemSku":  "Surface Hub 2S 50\"",
         "Model":  "Surface Hub 2S",
-        "Device":  "Surface Hub 2S 50\""
+        "Device":  "Surface Hub 2S"
     },
     {
-        "SystemSku":  "Surface Hub 2S 85",
+        "SystemSku":  "Surface Hub 2S 85\"",
         "Model":  "Surface Hub 2S",
-        "Device":  "Surface Hub 2S 85\""
+        "Device":  "Surface Hub 2S 85"
     },
     {
-        "SystemSku":  "Surface Hub 3 50",
+        "SystemSku":  "Surface Hub 3 50\"",
         "Model":  "Surface Hub 3",
-        "Device":  "Surface Hub 3 50\""
+        "Device":  "Surface Hub 3 50"
     },
     {
-        "SystemSku":  "Surface Hub 3 85",
+        "SystemSku":  "Surface Hub 3 85\"",
         "Model":  "Surface Hub 3",
-        "Device":  "Surface Hub 3 85\""
+        "Device":  "Surface Hub 3 85"
     },
     {
-        "SystemSku":  "Surface_Laptop",
+        "SystemSku":  "Surface Laptop",
         "Model":  "Surface Laptop",
-        "Device":  "Surface Laptop"
+        "Device":  "Surface_Laptop"
     },
     {
-        "SystemSku":  "Surface_Laptop_2_1769_Commercial",
+        "SystemSku":  "Surface Laptop 2 Commercial",
         "Model":  "Surface Laptop 2",
-        "Device":  "Surface Laptop 2 Commercial"
+        "Device":  "Surface_Laptop_2_1769_Commercial"
     },
     {
-        "SystemSku":  "Surface_Laptop_2_1769_Consumer",
+        "SystemSku":  "Surface Laptop 2 Consumer",
         "Model":  "Surface Laptop 2",
-        "Device":  "Surface Laptop 2 Consumer"
+        "Device":  "Surface_Laptop_2_1769_Consumer"
     },
     {
-        "SystemSku":  "Surface_Laptop_3_1867:1868",
+        "SystemSku":  "Surface Laptop 3 13.5\" Intel",
         "Model":  "Surface Laptop 3",
-        "Device":  "Surface Laptop 3 13.5\" Intel"
+        "Device":  "Surface_Laptop_3_1867:1868"
     },
     {
-        "SystemSku":  "Surface_Laptop_3_1873",
+        "SystemSku":  "Surface Laptop 3 15\" AMD",
         "Model":  "Surface Laptop 3",
-        "Device":  "Surface Laptop 3 15\" AMD"
+        "Device":  "Surface_Laptop_3_1873"
     },
     {
-        "SystemSku":  "Surface_Laptop_3_1872",
+        "SystemSku":  "Surface Laptop 3 15\" Intel",
         "Model":  "Surface Laptop 3",
-        "Device":  "Surface Laptop 3 15\" Intel"
+        "Device":  "Surface_Laptop_3_1872"
     },
     {
-        "SystemSku":  "Surface_Laptop_4_1958:1959",
+        "SystemSku":  "Surface Laptop 4 13.5\" AMD",
         "Model":  "Surface Laptop 4",
-        "Device":  "Surface Laptop 4 13.5\" AMD"
+        "Device":  "Surface_Laptop_4_1958:1959"
     },
     {
-        "SystemSku":  "Surface_Laptop_4_1950:1951",
+        "SystemSku":  "Surface Laptop 4 13.5\" Intel",
         "Model":  "Surface Laptop 4",
-        "Device":  "Surface Laptop 4 13.5\" Intel"
+        "Device":  "Surface_Laptop_4_1950:1951"
     },
     {
-        "SystemSku":  "Surface_Laptop_4_1952:1953",
+        "SystemSku":  "Surface Laptop 4 15\" AMD",
         "Model":  "Surface Laptop 4",
-        "Device":  "Surface Laptop 4 15\" AMD"
+        "Device":  "Surface_Laptop_4_1952:1953"
     },
     {
-        "SystemSku":  "Surface_Laptop_4_1978:1979",
+        "SystemSku":  "Surface Laptop 4 15\" Intel",
         "Model":  "Surface Laptop 4",
-        "Device":  "Surface Laptop 4 15\" Intel"
+        "Device":  "Surface_Laptop_4_1978:1979"
     },
     {
-        "SystemSku":  "Surface_Laptop_5_1950:1951",
+        "SystemSku":  "Surface Laptop 5 13.5\" Consumer",
         "Model":  "Surface Laptop 5",
-        "Device":  "Surface Laptop 5 13.5\" Consumer"
+        "Device":  "Surface_Laptop_5_1950:1951"
     },
     {
-        "SystemSku":  "Surface_Laptop_5_for_Business_1950:1951",
+        "SystemSku":  "Surface Laptop 5 13.5\" Commercial",
         "Model":  "Surface Laptop 5",
-        "Device":  "Surface Laptop 5 13.5\" Commercial"
+        "Device":  "Surface_Laptop_5_for_Business_1950:1951"
     },
     {
-        "SystemSku":  "Surface_Laptop_5_1979",
+        "SystemSku":  "Surface Laptop 5 15\" Consumer",
         "Model":  "Surface Laptop 5",
-        "Device":  "Surface Laptop 5 15\" Consumer"
+        "Device":  "Surface_Laptop_5_1979"
     },
     {
-        "SystemSku":  "Surface_Laptop_5_for_Business_1979",
+        "SystemSku":  "Surface Laptop 5 15\" Commercial",
         "Model":  "Surface Laptop 5",
-        "Device":  "Surface Laptop 5 15\" Commercial"
+        "Device":  "Surface_Laptop_5_for_Business_1979"
     },
     {
-        "SystemSku":  "Surface_Laptop_6_for_Business_2033",
+        "SystemSku":  "Surface Laptop 6 for Business 13.5\"",
         "Model":  "Surface Laptop 6 for Business",
-        "Device":  "Surface Laptop 6 for Business 13.5\""
+        "Device":  "Surface_Laptop_6_for_Business_2033"
     },
     {
-        "SystemSku":  "Surface_Laptop_6_for_Business_2035",
+        "SystemSku":  "Surface Laptop 6 for Business 15\"",
         "Model":  "Surface Laptop 6 for Business",
-        "Device":  "Surface Laptop 6 for Business 15\""
+        "Device":  "Surface_Laptop_6_for_Business_2035"
     },
     {
-        "SystemSku":  "Surface_Laptop_7th_Edition_2036",
+        "SystemSku":  "Surface Laptop 7th Edition, Snapdragon processor Consumer 13.8\"",
         "Model":  "Microsoft Surface Laptop, 7th Edition",
-        "Device":  "Surface Laptop 7th Edition, Snapdragon processor Consumer 13.8\""
+        "Device":  "Surface_Laptop_7th_Edition_2036"
     },
     {
-        "SystemSku":  "Surface_Laptop_7th_Edition_2037",
+        "SystemSku":  "Surface Laptop 7th Edition, Snapdragon processor Consumer 15\"",
         "Model":  "Microsoft Surface Laptop, 7th Edition",
-        "Device":  "Surface Laptop 7th Edition, Snapdragon processor Consumer 15\""
+        "Device":  "Surface_Laptop_7th_Edition_2037"
     },
     {
-        "SystemSku":  "Surface_Laptop_7th_Edition_For_Business_2036",
+        "SystemSku":  "Surface Laptop 7th Edition, Snapdragon processor Commercial 13.8\"",
         "Model":  "Microsoft Surface Laptop, 7th Edition",
-        "Device":  "Surface Laptop 7th Edition, Snapdragon processor Commercial 13.8\""
+        "Device":  "Surface_Laptop_7th_Edition_For_Business_2036"
     },
     {
-        "SystemSku":  "Surface_Laptop_7th_Edition_For_Business_2037",
+        "SystemSku":  "Surface Laptop 7th Edition, Snapdragon processor Commercial 15\"",
         "Model":  "Microsoft Surface Laptop, 7th Edition",
-        "Device":  "Surface Laptop 7th Edition, Snapdragon processor Commercial 15\""
+        "Device":  "Surface_Laptop_7th_Edition_For_Business_2037"
     },
     {
-        "SystemSku":  "Surface_Laptop_7th_Edition_With_Intel_For_Business_2107",
+        "SystemSku":  "Surface Laptop 7th Edition, Intel processor 13.8\"",
         "Model":  "Surface Laptop for Business 7th Edition with Intel",
-        "Device":  "Surface Laptop 7th Edition, Intel processor 13.8\""
+        "Device":  "Surface_Laptop_7th_Edition_With_Intel_For_Business_2107"
     },
     {
-        "SystemSku":  "Surface_Laptop_7th_Edition_With_Intel_For_Business_2108",
+        "SystemSku":  "Surface Laptop 7th Edition, Intel processor 15\"",
         "Model":  "Surface Laptop for Business 7th Edition with Intel",
-        "Device":  "Surface Laptop 7th Edition, Intel processor 15\""
+        "Device":  "Surface_Laptop_7th_Edition_With_Intel_For_Business_2108"
     },
     {
-        "SystemSku":  "Surface_Laptop_13in_1st_Ed_with_Snapdragon_2095",
+        "SystemSku":  "Surface Laptop 13-inch 1st Edition with Snapdragon Consumer",
         "Model":  "Surface Laptop 13in 1st Ed with Snapdragon",
-        "Device":  "Surface Laptop 13-inch 1st Edition with Snapdragon Consumer"
+        "Device":  "Surface_Laptop_13in_1st_Ed_with_Snapdragon_2095"
     },
     {
-        "SystemSku":  "Surface_Laptop_for_Business_13in_1st_Ed_with_Snapdragon_2095",
+        "SystemSku":  "Surface Laptop 13-inch 1st Edition with Snapdragon Commercial",
         "Model":  "Surface Laptop for Business 13in 1st Ed with Snapdragon",
-        "Device":  "Surface Laptop 13-inch 1st Edition with Snapdragon Commercial"
+        "Device":  "Surface_Laptop_for_Business_13in_1st_Ed_with_Snapdragon_2095"
     },
     {
-        "SystemSku":  "Surface_Laptop_5G_7th_Edition_With_Intel_For_Business_2119",
+        "SystemSku":  "Surface Laptop 5G for Business",
         "Model":  "Surface Laptop 5G for Business 7th Edition with Intel",
-        "Device":  "Surface Laptop 5G for Business"
+        "Device":  "Surface_Laptop_5G_7th_Edition_With_Intel_For_Business_2119"
     },
     {
-        "SystemSku":  "Surface_Laptop_Go_1943",
+        "SystemSku":  "Surface Laptop Go",
         "Model":  "Surface Laptop Go",
-        "Device":  "Surface Laptop Go"
+        "Device":  "Surface_Laptop_Go_1943"
     },
     {
-        "SystemSku":  "Surface_Laptop_Go_2_2013",
+        "SystemSku":  "Surface Laptop Go 2",
         "Model":  "Surface Laptop Go 2",
-        "Device":  "Surface Laptop Go 2"
+        "Device":  "Surface_Laptop_Go_2_2013"
     },
     {
-        "SystemSku":  "Surface_Laptop_Go_3_2013",
+        "SystemSku":  "Surface Laptop Go 3",
         "Model":  "Surface Laptop Go 3",
-        "Device":  "Surface Laptop Go 3"
+        "Device":  "Surface_Laptop_Go_3_2013"
     },
     {
         "SystemSku":  "Surface Laptop SE",
@@ -260,178 +260,178 @@
         "Device":  "Surface Laptop SE"
     },
     {
-        "SystemSku":  "Surface_Laptop_Studio_1964",
+        "SystemSku":  "Surface Laptop Studio",
         "Model":  "Surface Laptop Studio",
-        "Device":  "Surface Laptop Studio"
+        "Device":  "Surface_Laptop_Studio_1964"
     },
     {
-        "SystemSku":  "Surface_Laptop_Studio_2_2029",
+        "SystemSku":  "Surface Laptop Studio 2",
         "Model":  "Surface Laptop Studio 2",
-        "Device":  "Surface Laptop Studio 2"
+        "Device":  "Surface_Laptop_Studio_2_2029"
     },
     {
-        "SystemSku":  "Surface_Pro_1796",
+        "SystemSku":  "Surface Pro (5th Gen)",
         "Model":  "Surface Pro",
-        "Device":  "Surface Pro (5th Gen)"
+        "Device":  "Surface_Pro_1796"
     },
     {
-        "SystemSku":  "Surface_Pro_1807",
+        "SystemSku":  "Surface Pro with LTE Advanced (5th Gen)",
         "Model":  "Surface Pro",
-        "Device":  "Surface Pro with LTE Advanced (5th Gen)"
+        "Device":  "Surface_Pro_1807"
     },
     {
-        "SystemSku":  "Surface_Pro_6_1796_Commercial",
+        "SystemSku":  "Surface Pro 6 Commercial",
         "Model":  "Surface Pro 6",
-        "Device":  "Surface Pro 6 Commercial"
+        "Device":  "Surface_Pro_6_1796_Commercial"
     },
     {
-        "SystemSku":  "Surface_Pro_6_1796_Consumer",
+        "SystemSku":  "Surface Pro 6 Consumer",
         "Model":  "Surface Pro 6",
-        "Device":  "Surface Pro 6 Consumer"
+        "Device":  "Surface_Pro_6_1796_Consumer"
     },
     {
-        "SystemSku":  "Surface_Pro_7_1866",
+        "SystemSku":  "Surface Pro 7",
         "Model":  "Surface Pro 7",
-        "Device":  "Surface Pro 7"
+        "Device":  "Surface_Pro_7_1866"
     },
     {
-        "SystemSku":  "Surface_Pro_7+_1960",
+        "SystemSku":  "Surface Pro 7+",
         "Model":  "Surface Pro 7+",
-        "Device":  "Surface Pro 7+"
+        "Device":  "Surface_Pro_7+_1960"
     },
     {
-        "SystemSku":  "Surface_Pro_7+_with_LTE_Advanced_1961",
+        "SystemSku":  "Surface Pro 7+ LTE",
         "Model":  "Surface Pro 7+",
-        "Device":  "Surface Pro 7+ LTE"
+        "Device":  "Surface_Pro_7+_with_LTE_Advanced_1961"
     },
     {
-        "SystemSku":  "Surface_Pro_8_for_Business_1983",
+        "SystemSku":  "Surface Pro 8",
         "Model":  "Surface Pro 8",
-        "Device":  "Surface Pro 8"
+        "Device":  "Surface_Pro_8_for_Business_1983"
     },
     {
-        "SystemSku":  "Surface_Pro_8_1983",
+        "SystemSku":  "Surface Pro 8 Consumer",
         "Model":  "Surface Pro 8",
-        "Device":  "Surface Pro 8 Consumer"
+        "Device":  "Surface_Pro_8_1983"
     },
     {
-        "SystemSku":  "Surface_Pro_8_for_Business_with_LTE_Advanced_1982",
+        "SystemSku":  "Surface Pro 8 LTE",
         "Model":  "Surface Pro 8",
-        "Device":  "Surface Pro 8 LTE"
+        "Device":  "Surface_Pro_8_for_Business_with_LTE_Advanced_1982"
     },
     {
-        "SystemSku":  "Surface_Pro_9_2038",
+        "SystemSku":  "Surface Pro 9 Consumer",
         "Model":  "Surface Pro 9",
-        "Device":  "Surface Pro 9 Consumer"
+        "Device":  "Surface_Pro_9_2038"
     },
     {
-        "SystemSku":  "Surface_Pro_9_for_Business_2038",
+        "SystemSku":  "Surface Pro 9 Commercial",
         "Model":  "Surface Pro 9",
-        "Device":  "Surface Pro 9 Commercial"
+        "Device":  "Surface_Pro_9_for_Business_2038"
     },
     {
-        "SystemSku":  "Surface_Pro_9_With_5G_1997",
+        "SystemSku":  "Surface Pro 9 with 5G (U.S.)",
         "Model":  "Surface Pro 9",
-        "Device":  "Surface Pro 9 with 5G (U.S.)"
+        "Device":  "Surface_Pro_9_With_5G_1997"
     },
     {
-        "SystemSku":  "Surface_Pro_9_With_5G_1996",
+        "SystemSku":  "Surface Pro 9 with 5G (outside of U.S.)",
         "Model":  "Surface Pro 9",
-        "Device":  "Surface Pro 9 with 5G (outside of U.S.)"
+        "Device":  "Surface_Pro_9_With_5G_1996"
     },
     {
-        "SystemSku":  "Surface_Pro_X_1876",
+        "SystemSku":  "Surface Pro X with SQ1 processor",
         "Model":  "Surface Pro X",
-        "Device":  "Surface Pro X with SQ1 processor"
+        "Device":  "Surface_Pro_X_1876"
     },
     {
-        "SystemSku":  "Surface_Pro_X_H_1876",
+        "SystemSku":  "Surface Pro X with SQ2 processor",
         "Model":  "Surface Pro X",
-        "Device":  "Surface Pro X with SQ2 processor"
+        "Device":  "Surface_Pro_X_H_1876"
     },
     {
-        "SystemSku":  "Surface_Pro_X_2010",
+        "SystemSku":  "Surface Pro X (Wi-Fi)",
         "Model":  "Surface Pro X",
-        "Device":  "Surface Pro X (Wi-Fi)"
+        "Device":  "Surface_Pro_X_2010"
     },
     {
-        "SystemSku":  "Surface_Pro_10_for_Business_2079",
+        "SystemSku":  "Surface Pro 10 for Business",
         "Model":  "Surface Pro 10 for Business",
-        "Device":  "Surface Pro 10 for Business"
+        "Device":  "Surface_Pro_10_for_Business_2079"
     },
     {
-        "SystemSku":  "Surface_Pro_10_with_5G_for_Business_2077",
+        "SystemSku":  "Surface Pro 10 with 5G for Business (outside of Japan and Korea)",
         "Model":  "Surface Pro 10 with 5G for Business",
-        "Device":  "Surface Pro 10 with 5G for Business (outside of Japan and Korea)"
+        "Device":  "Surface_Pro_10_with_5G_for_Business_2077"
     },
     {
-        "SystemSku":  "Surface_Pro_10_with_5G_for_Business_2078",
+        "SystemSku":  "Surface Pro 10 with 5G for Business (Japan)",
         "Model":  "Surface Pro 10 with 5G for Business",
-        "Device":  "Surface Pro 10 with 5G for Business (Japan)"
+        "Device":  "Surface_Pro_10_with_5G_for_Business_2078"
     },
     {
-        "SystemSku":  "Surface_Pro_10_with_5G_for_Business_2121",
+        "SystemSku":  "Surface Pro 10 with 5G for Business (Korea)",
         "Model":  "Surface Pro 10 with 5G for Business",
-        "Device":  "Surface Pro 10 with 5G for Business (Korea)"
+        "Device":  "Surface_Pro_10_with_5G_for_Business_2121"
     },
     {
-        "SystemSku":  "Surface_Pro_11th_Edition_2076",
+        "SystemSku":  "Surface Pro 11th Edition, Snapdragon processor Consumer",
         "Model":  "Microsoft Surface Pro, 11th Edition",
-        "Device":  "Surface Pro 11th Edition, Snapdragon processor Consumer"
+        "Device":  "Surface_Pro_11th_Edition_2076"
     },
     {
-        "SystemSku":  "Surface_Pro_11th_Edition_For_Business_2085",
+        "SystemSku":  "Surface Pro 11th Edition, Snapdragon processor Commercial",
         "Model":  "Microsoft Surface Pro, 11th Edition",
-        "Device":  "Surface Pro 11th Edition, Snapdragon processor Commercial"
+        "Device":  "Surface_Pro_11th_Edition_For_Business_2085"
     },
     {
-        "SystemSku":  "Surface_Pro_11th_Edition_With_Intel_For_Business_2103",
+        "SystemSku":  "Surface Pro 11th Edition, Intel processor",
         "Model":  "Surface Pro for Business 11th Edition with Intel",
-        "Device":  "Surface Pro 11th Edition, Intel processor"
+        "Device":  "Surface_Pro_11th_Edition_With_Intel_For_Business_2103"
     },
     {
-        "SystemSku":  "Surface_Pro_with_5G_11th_Edition_2077",
+        "SystemSku":  "Surface Pro with 5G, 11th Edition, Consumer (outside of Japan)",
         "Model":  "Microsoft Surface Pro with 5G, 11th Edition",
-        "Device":  "Surface Pro with 5G, 11th Edition, Consumer (outside of Japan)"
+        "Device":  "Surface_Pro_with_5G_11th_Edition_2077"
     },
     {
-        "SystemSku":  "Surface_Pro_with_5G_11th_Edition_2078",
+        "SystemSku":  "Surface Pro with 5G, 11th Edition, Consumer (Japan)",
         "Model":  "Microsoft Surface Pro with 5G, 11th Edition",
-        "Device":  "Surface Pro with 5G, 11th Edition, Consumer (Japan)"
+        "Device":  "Surface_Pro_with_5G_11th_Edition_2078"
     },
     {
-        "SystemSku":  "Surface_Pro_with_5G_11th_Edition_For_Business_2077",
+        "SystemSku":  "Surface Pro with 5G, 11th Edition, Commercial (outside of Japan)",
         "Model":  "Microsoft Surface Pro with 5G, 11th Edition",
-        "Device":  "Surface Pro with 5G, 11th Edition, Commercial (outside of Japan)"
+        "Device":  "Surface_Pro_with_5G_11th_Edition_For_Business_2077"
     },
     {
-        "SystemSku":  "Surface_Pro_with_5G_11th_Edition_For_Business_2078",
+        "SystemSku":  "Surface Pro with 5G, 11th Edition, Commercial (Japan)",
         "Model":  "Microsoft Surface Pro with 5G, 11th Edition",
-        "Device":  "Surface Pro with 5G, 11th Edition, Commercial (Japan)"
+        "Device":  "Surface_Pro_with_5G_11th_Edition_For_Business_2078"
     },
     {
-        "SystemSku":  "Surface_Pro_12in_1st_Ed_with_Snapdragon_2110",
+        "SystemSku":  "Surface Pro 12-inch 1st Edition with Snapdragon Consumer",
         "Model":  "Surface Pro 12in 1st Ed with Snapdragon",
-        "Device":  "Surface Pro 12-inch 1st Edition with Snapdragon Consumer"
+        "Device":  "Surface_Pro_12in_1st_Ed_with_Snapdragon_2110"
     },
     {
-        "SystemSku":  "Surface_Pro_for_Business_12in_1st_Ed_with_Snapdragon_2109",
+        "SystemSku":  "Surface Pro 12-inch 1st Edition with Snapdragon Commercial",
         "Model":  "Surface Pro for Business 12in 1st Ed with Snapdragon",
-        "Device":  "Surface Pro 12-inch 1st Edition with Snapdragon Commercial"
+        "Device":  "Surface_Pro_for_Business_12in_1st_Ed_with_Snapdragon_2109"
     },
     {
-        "SystemSku":  "Surface_Studio",
+        "SystemSku":  "Surface Studio",
         "Model":  "Surface Studio",
-        "Device":  "Surface Studio"
+        "Device":  "Surface_Studio"
     },
     {
-        "SystemSku":  "Surface_Studio_2_1707_Commercial",
+        "SystemSku":  "Surface Studio 2",
         "Model":  "Surface Studio 2",
-        "Device":  "Surface Studio 2"
+        "Device":  "Surface_Studio_2_1707_Commercial"
     },
     {
-        "SystemSku":  "Surface_Studio_2+_2028",
+        "SystemSku":  "Surface Studio 2+",
         "Model":  "Surface Studio 2+",
-        "Device":  "Surface Studio 2+"
+        "Device":  "Surface_Studio_2+_2028"
     }
 ]
